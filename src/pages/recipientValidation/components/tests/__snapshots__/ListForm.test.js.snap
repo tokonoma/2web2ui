@@ -189,26 +189,6 @@ exports[`ListForm should disable form elements on submit 1`] = `
 exports[`ListForm should submit csv 1`] = `
 Array [
   Array [
-    FormData {
-      Symbol(impl): FormDataImpl {
-        "_entries": Array [
-          Object {
-            "name": "myupload",
-            "value": "email,foo@address.com
-bar@address.com
-",
-          },
-        ],
-        Symbol(wrapper): [Circular],
-      },
-    },
-  ],
-]
-`;
-
-exports[`ListForm should submit csv 2`] = `
-Array [
-  Array [
     Object {
       "message": "Recipients Uploaded",
       "type": "success",
