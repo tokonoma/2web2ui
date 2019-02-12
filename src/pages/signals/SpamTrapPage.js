@@ -114,17 +114,18 @@ export class SpamTrapPage extends Component {
   }
 
   render() {
-    const { facet, facetId } = this.props;
+    const { facet, facetId, subaccountId } = this.props;
 
     return (
       <Page
         breadcrumbAction={{ content: 'Back to Overview', to: '/signals', component: Link }}
-        dimensionPrefix='Spam Trap Monitoring for'
+        dimensionPrefix='Spam Traps for'
         facet={facet}
         facetId={facetId}
+        subaccountId={subaccountId}
         primaryArea={<DateFilter />}>
         {this.renderContent()}
-        <OtherChartsHeader facet={facet} facetId={facetId} />
+        <OtherChartsHeader facet={facet} facetId={facetId} subaccountId={subaccountId} />
         <Grid>
           <Grid.Column xs={12} sm={6}>
             <EngagementRecencyPreview />
