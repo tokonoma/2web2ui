@@ -9,7 +9,8 @@ describe('Signals OtherChartsHeader Component', () => {
   beforeEach(() => {
     props = {
       facet: 'facet',
-      facetId: 'Foo1'
+      facetId: 'Foo1',
+      subaccountId: 22
     };
     wrapper = shallow(<OtherChartsHeader {...props}/>);
   });

@@ -125,7 +125,7 @@ export class SpamTrapPage extends Component {
         subaccountId={subaccountId}
         primaryArea={<DateFilter />}>
         {this.renderContent()}
-        <OtherChartsHeader facet={facet} facetId={facetId} />
+        <OtherChartsHeader facet={facet} facetId={facetId} subaccountId={subaccountId} />
         <Grid>
           <Grid.Column xs={12} sm={6}>
             <EngagementRecencyPreview />
