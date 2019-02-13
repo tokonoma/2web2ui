@@ -7,7 +7,6 @@ import withAlertsList from './containers/ListPage.container';
 
 export class ListPage extends Component {
   state = {
-    showCreateModal: false,
     showDeleteModal: false,
     alertToDelete: {}
   }
@@ -15,10 +14,6 @@ export class ListPage extends Component {
   componentDidMount() {
     this.props.listAlerts();
   }
-
-  toggleCreate = () => {
-    this.setState({ showCreateModal: !this.state.showCreateModal });
-  };
 
   toggleDelete = (id, subaccount_id) => {
     this.setState({
@@ -66,7 +61,7 @@ export class ListPage extends Component {
     return (
       <Page
         title='Alerts'
-        primaryAction={{ content: 'Create an Alert', onClick: this.toggleCreate }}
+        primaryAction={{ content: 'Create an Alert', to: '/alerts-new/create' }}
         empty={{
           show: !error && alerts.length === 0,
           image: Templates,
