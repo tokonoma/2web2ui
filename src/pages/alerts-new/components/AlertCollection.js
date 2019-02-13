@@ -1,21 +1,47 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
+import { setSubaccountQuery } from 'src/helpers/subaccounts';
+// import { Button, Popover, ActionList } from '@sparkpost/matchbox';
+import { TableCollection, PageLink } from 'src/components';
+// import { MoreHoriz } from '@sparkpost/matchbox-icons';
 
 class AlertCollection extends Component {
+  getDetailsLink = ({ id, subaccount_id }) => `/alerts/edit/${id}${setSubaccountQuery(subaccount_id)}`
+
   getColumns() {
     const columns = [
       { label: 'Name', sortKey: 'name' },
-      // { label: 'Status', sortKey: 'status' },
-      // { label: 'Template', sortKey: (i) => i.winning_template_id || i.default_template.template_id },
-      // { label: 'Last Modified', sortKey: 'updated_at' },
+      { label: 'Conditions' },
+      { label: 'Enabled', sortKey: 'enabled' },
       null
     ];
 
     return columns;
   }
 
+  getRowData = ({ enabled, id, name }) => [
+    <Fragment>
+      <PageLink>{name} - {id}</PageLink>
+    </Fragment>,
+    <Fragment>
+      {enabled ? 'enabled' : 'disabled'}
+    </Fragment>,
+    <div style={{ textAlign: 'right' }}>
+        actions
+    </div>
+  ]
+
   render() {
+    const { alerts } = this.props;
     return (
-      <div></div>
+      <TableCollection
+        columns={this.getColumns()}
+        rows={alerts}
+        getRowData={this.getRowData}
+        pagination={true}
+        // filterBox={filterBoxConfig}
+        defaultSortColumn='name'
+        defaultSortDirection='desc'
+      />
     );
   }
 }

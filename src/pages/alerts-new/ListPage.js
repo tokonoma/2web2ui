@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { Page } from '@sparkpost/matchbox';
-import { Loading, ApiErrorBanner, DeleteModal, ConfirmationModal } from 'src/components';
+import { Loading, ApiErrorBanner } from 'src/components';
+import { Templates } from 'src/components/images';
 import AlertCollection from './components/AlertCollection';
-import withAlertsList from './containers/ListPageContainer';
+import withAlertsList from './containers/ListPage.container';
 
-class ListPage extends Component {
+export class ListPage extends Component {
   state = {
     showCreateModal: false,
     showDeleteModal: false,
@@ -27,16 +27,19 @@ class ListPage extends Component {
     });
   };
 
-  handleDelete = () => this.props.deleteAlert({ id, subaccountId }).then(() => {
-    this.props.showAlert({ type: 'success', message: 'Alert deleted' });
-    this.toggleDelete();
-  })
+  handleDelete = () => {
+    const { id, subaccountId } = this.state.alertToDelete;
+
+    return this.props.deleteAlert({ id, subaccountId }).then(() => {
+      this.props.showAlert({ type: 'success', message: 'Alert deleted' });
+      this.toggleDelete();
+    });
+  }
 
   renderCollection() {
-    const { alerts } = this.props;
     return (
       <AlertCollection
-        alerts={alerts}
+        alerts={this.props.alerts}
         toggleDelete={this.toggleDelete}
       />
     );
@@ -46,7 +49,7 @@ class ListPage extends Component {
     const { error, listAlerts } = this.props;
     return (
       <ApiErrorBanner
-        message={'Sorry, we seem to have had some trouble loading your A/B tests.'}
+        message={'Sorry, we seem to have had some trouble loading your alerts.'}
         errorDetails={error.message}
         reload={listAlerts}
       />
@@ -54,7 +57,7 @@ class ListPage extends Component {
   }
 
   render() {
-    const { alerts, cancelPending, deletePending, error, loading } = this.props;
+    const { alerts, error, loading } = this.props;
 
     if (loading) {
       return <Loading />;
@@ -64,6 +67,12 @@ class ListPage extends Component {
       <Page
         title='Alerts'
         primaryAction={{ content: 'Create an Alert', onClick: this.toggleCreate }}
+        empty={{
+          show: !error && alerts.length === 0,
+          image: Templates,
+          title: 'Create an Alert',
+          content: <p>Manage notifications that alert you of performance problems.</p>
+        }}
       >
         {error ? this.renderError() : this.renderCollection()}
         {/* TODO: add delete modal */}

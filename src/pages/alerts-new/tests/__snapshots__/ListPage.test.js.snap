@@ -1,0 +1,58 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Page: Alerts List should render error when list fails to load 1`] = `
+<ApiErrorBanner
+  errorDetails="this failed"
+  message="Sorry, we seem to have had some trouble loading your alerts."
+  reload={
+    [MockFunction] {
+      "calls": Array [
+        Array [],
+      ],
+      "results": undefined,
+    }
+  }
+/>
+`;
+
+exports[`Page: Alerts List should render happy path 1`] = `
+<Page
+  empty={
+    Object {
+      "content": <p>
+        Manage notifications that alert you of performance problems.
+      </p>,
+      "image": [Function],
+      "show": false,
+      "title": "Create an Alert",
+    }
+  }
+  primaryAction={
+    Object {
+      "content": "Create an Alert",
+      "onClick": [Function],
+    }
+  }
+  title="Alerts"
+>
+  <AlertCollection
+    alerts={
+      Array [
+        Object {
+          "id": "id-1",
+          "name": "my alert 1",
+        },
+        Object {
+          "id": "id-2",
+          "name": "my alert 2",
+        },
+        Object {
+          "id": "id-3",
+          "name": "my alert 3",
+        },
+      ]
+    }
+    toggleDelete={[Function]}
+  />
+</Page>
+`;

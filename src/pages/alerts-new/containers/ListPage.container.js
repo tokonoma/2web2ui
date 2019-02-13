@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { deleteAlert, listAlerts } from 'src/actions/alerts';
+import { showAlert } from 'src/actions/globalAlert';
 
 function withAlertsList(WrappedComponent) {
-  const mapDispatchToProps = { deleteAlert, listAlerts };
+  const mapDispatchToProps = { deleteAlert, listAlerts, showAlert };
 
   const mapStateToProps = (state, props) => ({
-    list: state.alerts.list,
+    alerts: state.alerts.list,
     error: state.alerts.listError
   });
 

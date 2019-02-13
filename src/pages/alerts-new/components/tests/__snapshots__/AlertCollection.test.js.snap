@@ -1,0 +1,117 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TestCollection Component should render 1`] = `
+<TableCollection
+  columns={
+    Array [
+      Object {
+        "label": "Name",
+        "sortKey": "name",
+      },
+      Object {
+        "label": "Conditions",
+      },
+      Object {
+        "label": "Enabled",
+        "sortKey": "enabled",
+      },
+      null,
+    ]
+  }
+  defaultSortColumn="name"
+  defaultSortDirection="desc"
+  getRowData={[Function]}
+  pagination={true}
+  rows={
+    Array [
+      Object {
+        "enabled": true,
+        "id": "id-1",
+        "name": "my alert 1",
+      },
+      Object {
+        "enabled": false,
+        "id": "id-2",
+        "name": "my alert 2",
+      },
+      Object {
+        "enabled": true,
+        "id": "id-3",
+        "name": "my alert 3",
+      },
+    ]
+  }
+/>
+`;
+
+exports[`TestCollection Component should render row data properly 1`] = `
+Array [
+  <React.Fragment>
+    <PageLink>
+      my alert 1
+       - 
+      id-1
+    </PageLink>
+  </React.Fragment>,
+  <React.Fragment>
+    enabled
+  </React.Fragment>,
+  <div
+    style={
+      Object {
+        "textAlign": "right",
+      }
+    }
+  >
+    actions
+  </div>,
+]
+`;
+
+exports[`TestCollection Component should render row data properly 2`] = `
+Array [
+  <React.Fragment>
+    <PageLink>
+      my alert 2
+       - 
+      id-2
+    </PageLink>
+  </React.Fragment>,
+  <React.Fragment>
+    disabled
+  </React.Fragment>,
+  <div
+    style={
+      Object {
+        "textAlign": "right",
+      }
+    }
+  >
+    actions
+  </div>,
+]
+`;
+
+exports[`TestCollection Component should render row data properly 3`] = `
+Array [
+  <React.Fragment>
+    <PageLink>
+      my alert 3
+       - 
+      id-3
+    </PageLink>
+  </React.Fragment>,
+  <React.Fragment>
+    enabled
+  </React.Fragment>,
+  <div
+    style={
+      Object {
+        "textAlign": "right",
+      }
+    }
+  >
+    actions
+  </div>,
+]
+`;
