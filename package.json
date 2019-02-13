@@ -38,6 +38,11 @@
       "recharts"
     ]
   },
+  "greenkeeper": {
+    "ignore": [
+      "webpack"
+    ]
+  },
   "description": "SparkPost web app built in React",
   "main": "index.js",
   "repository": {
@@ -96,7 +101,6 @@
   },
   "devDependencies": {
     "@babel/core": "7.1.6",
-    "@mdx-js/mdx": "^0.15.0",
     "autoprefixer": "^9.0.0",
     "babel-eslint": "10.0.1",
     "babel-jest": "24.1.0",
@@ -140,8 +144,8 @@
     "jest-in-case": "^1.0.2",
     "jest-junit": "^6.2.1",
     "lint-staged": "^8.0.4",
-    "mdx-loader": "^1.1.0",
     "mdxc": "^1.1.1",
+    "mdx-loader": "^1.1.0",
     "mini-css-extract-plugin": "0.5.0",
     "moment-timezone": "^0.5.14",
     "node-sass": "^4.9.3",
