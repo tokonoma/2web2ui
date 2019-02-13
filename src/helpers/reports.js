@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import qs from 'query-string';
+import moment from 'moment';
 import { getRelativeDates } from 'src/helpers/date';
 import { stringifyTypeaheadfilter } from 'src/helpers/string';
 
@@ -47,16 +48,20 @@ export function parseSearch(search) {
     options.metrics = (typeof metrics === 'string') ? [metrics] : metrics;
   }
 
-  if (from) {
-    options.from = new Date(from);
+  const fromTime = moment(from, moment.ISO_8601, true);
+  const toTime = moment(to, moment.ISO_8601, true);
+
+  if (from && fromTime.isValid()) {
+    options.from = fromTime.toDate();
   }
 
-  if (to) {
-    options.to = new Date(to);
+  if (to && toTime.isValid()) {
+    options.to = toTime.toDate();
   }
 
   if (range) {
-    options = { ...options, ...getRelativeDates(range) };
+    const effectiveRange = options.from && options.to ? range : 'day';
+    options = { ...options, ...getRelativeDates(effectiveRange) };
   }
 
   // filters are used in pages to dispatch updates to Redux store

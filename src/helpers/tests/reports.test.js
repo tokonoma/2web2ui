@@ -1,5 +1,6 @@
 import * as reports from '../reports';
 import * as dateHelpers from 'src/helpers/date';
+import cases from 'jest-in-case';
 
 jest.mock('src/helpers/date');
 jest.mock('src/helpers/string', () => ({
@@ -54,9 +55,21 @@ describe('report helpers', () => {
       expect(reports.parseSearch(search)).toMatchSnapshot();
     });
 
-    it('Should parse search with no empty value', () => {
+    it('should parse search with no empty value', () => {
       expect(reports.parseSearch('')).toMatchSnapshot();
     });
+
+    cases('handle invalid datetimes with custom format', (opts) => {
+      expect(reports.parseSearch(opts.search).options).toEqual(opts.match);
+    }, [
+      { name: 'valid from', search: 'from=2017-11-03T14:43:00Z', match: { from: new Date('2017-11-03T14:43:00.000Z') }},
+      { name: 'invalid from', search: 'from=2017-11-03T14:43:00Zz', match: {}},
+      { name: 'invalid from with custom range', search: 'from=2017-11-03T14:43:00Zz&range=custom', match: {}},
+      { name: 'invalid from valid to with custom range', search: 'from=2017-11-03T14:43:00Zk&range=custom&to=2017-11-04T14:43:00Z', match: { to: new Date('2017-11-04T14:43:00Z') }},
+      { name: 'valid from invalid to with custom range', search: 'from=2017-11-03T14:43:00Z&range=custom&to=2017-11-04T14:43:00Zk', match: { from: new Date('2017-11-03T14:43:00Z') }},
+      { name: 'invalid from invalid to with custom range', search: 'from=2017-11-03T14:43:00Zk&range=custom&to=2017-11-04T14:43:00Zk', match: {}},
+      { name: 'invalid from invalid to with day range', search: 'from=2017-11-03T14:43:00Zk&range=day&to=2017-11-04T14:43:00Zk', match: {}}
+    ]);
   });
 
   describe('dedupeFilters', () => {
