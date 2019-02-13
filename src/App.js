@@ -18,7 +18,7 @@ import {
 } from 'react-router-dom';
 
 const App = () => (
-  <ErrorBoundary>
+  <ErrorBoundary onCtaClick={() => window.location.reload(true)} ctaLabel='Reload Page'>
     <Poll>
       <Router>
         <div>
