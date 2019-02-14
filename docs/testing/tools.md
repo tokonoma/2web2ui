@@ -22,9 +22,3 @@ Enzyme is a tool built by Airbnb that we use to mimic rendering and mounting for
 * [Shallow rendering](http://airbnb.io/enzyme/docs/api/shallow.html)
 * [Event simulation](http://airbnb.io/enzyme/docs/api/ShallowWrapper/simulate.html)
 * [Finding rendered sub-elements](http://airbnb.io/enzyme/docs/api/ShallowWrapper/find.html)
-
-## jest-in-case
-
-[placeholder]
-
-I have some thoughts and opinions on if/when we should use this lib. More to come.

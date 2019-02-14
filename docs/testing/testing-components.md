@@ -6,12 +6,12 @@ Components are the trickiest thing we have to test because they involve testing 
 
 #### Basic shallow render snapshot
 
-We use [enzyme]() to render React components for testing. In almost all cases, you'll want to use the `shallow` method provided by enzyme, which renders just one "layer" of components without trying to render and mount the entire tree of children as well.
+We use enzyme to render React components for testing. In almost all cases, you'll want to use the `shallow` method provided by enzyme, which renders just one "layer" of components without trying to render and mount the entire tree of children as well.
 
-We often test a component's "default state" by giving it the most basic props it accepts and snapshotting the output.
+We often test a component's "default state" by giving it the required props needed to snapshot the output.
 
 ```jsx
-it('should render correctly', () => {
+it('should render a house', () => {
   const props = {
     fetchData: jest.fn(),
     submit: jest.fn(),
@@ -24,7 +24,7 @@ it('should render correctly', () => {
 
 #### Change props + re-render
 
-In this set of tests, we've moved the shallow rendering into a `beforeEach` to limit repetition. We can use enzyme's `setProps` method to change the props inside the component after it's been shallow-rendered (this will also trigger `componentWillReceiveProps`, `componentWillUpdate`, and `componentDidUpdate` lifecycle hooks, but not `componentDidMount` again).
+In this set of tests, we've moved the shallow rendering into a `beforeEach` to limit repetition. We can use enzyme's `setProps` method to change the props inside the component after it's been shallow-rendered (this will also trigger lifecycle hooks, but not `componentDidMount` again).
 
 When we set this `visible` prop to false, we expect a totally different render, so we snapshot the output there as well.
 
@@ -85,40 +85,6 @@ it('should fetch data on mount', () => {
 });
 ```
 
-#### Testing `componentWillReceiveProps` and other prop/state syncing
-
-When you sync props to local state, it's often sufficient to just check that prop changes result in the appropriate state changes. If those state changes drastically affect the rendered output, you can also snapshot the wrapper.
-
-```jsx
-// ComponentOne.js
-componentWillReceiveProps({ submitted }) {
-  if (typeof submitted === 'boolean') {
-    this.setState({ submitted });
-  }
-}
-
-// ComponentOne.test.js
-it('should update state if submitted prop changes and is boolean', () => {
-  expect(wrapper.state('submitted')).toEqual(false);
-
-  // no change on other prop changes
-  wrapper.setProps({ random: 123, cool: 'story' });
-  expect(wrapper.state('submitted')).toEqual(false);
-
-  // no change if value isn't boolean
-  wrapper.setProps({ submitted: 'ok' });
-  expect(wrapper.state('submitted')).toEqual(false);
-
-  // change
-  wrapper.setProps({ submitted: true });
-  expect(wrapper.state('submitted')).toEqual(true);
-
-  // change
-  wrapper.setProps({ submitted: false });
-  expect(wrapper.state('submitted')).toEqual(false);
-});
-```
-
 #### Simulating events
 
 [Enzyme](http://airbnb.io/enzyme/docs/api/) lets us "simulate" an event, which means it will call the method assigned to any `onEvent` prop when you call `wrapper.simulate('event')`. It will also use your second argument to `simulate` as the mock event passed to the listener.
@@ -147,8 +113,8 @@ it('should change the message on click', () => {
 
   button.simulate('click', e);
 
-  expect(wrapper.state('message')).toEqual('A very new message');
   expect(e.preventDefault).toHaveBeenCalledTimes(1);
+  expect(wrapper.find('h2')).toHaveText('A very new message');
   expect(wrapper).toMatchSnapshot();
 });
 ```
@@ -169,9 +135,9 @@ handleSubmit = (values) => {
 it('should set the submitted flag', () => {
   const c2 = wrapper.find(ComponentTwo);
 
-  c2.simulate('submit');
+  c2.simulate('submit', 123);
 
-  expect(wrapper.state('submitted')).toEqual(true);
+  expect(props.submit).toHaveBeenCalledWith(123);
 });
 ```
 
@@ -179,7 +145,7 @@ For more on all the ways to `find` elements in components, see [the enzyme docs]
 
 #### Testing class and instance methods directly
 
-Simulating an event isn't always the best way to test a component method. Someimes, for instance, a method is given to a child event that will be called with custom values that aren't just a DOM event. 
+Simulating an event isn't always the best way to test a component method. Someimes, for instance, a method is given to a child event that will be called with custom values that aren't just a DOM event.
 
 ```jsx
 <ComponentTwo onSubmit={this.handleSubmit} />
@@ -195,7 +161,7 @@ it('should submit values', () => {
   instance.handleSubmit(values);
 
   expect(props.submit).toHaveBeenCalledWith(values);
-}); 
+});
 ```
 
 

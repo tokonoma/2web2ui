@@ -7,7 +7,7 @@ This document also includes a few words about [end-to-end browser tests](#end-to
 _*Snapshot disclaimer: To be perfectly honest (and less perfectly clear), snapshot testing is less of its own testing type and more of a testing tool that can be used within other tests, whenever you have a medium to large sized string you want to track changes in. This is why you'll see snapshot assertions show up alongside unit tests and in functional component tests._
 
 ## Unit Testing
-   
+
 When we just need to test logic, we write simple unit tests. A good unit test should provide a set of inputs and given those inputs, assert expectations about the outputs. At times they may also test side-effects such as "was this method called", etc.
 
 While most useful for testing simple JavaScript functions such as helpers and selectors, this technique is also used to test actions, some component class methods, etc.
@@ -23,11 +23,13 @@ it('should add numbers', () => {
 
 The biggest rule of unit testing is that you should test functions in as much _isolation_ as possible. This way if a test fails, you know exactly where the problem can be found.
 
-In practice, this usually means you should mock dependencies rather than running them in your test. With some big exceptions (we rarely mock lodash, for instance), you should always mock imported dependency functions in unit tests.
+In practice, this usually means you should mock dependencies rather than running them in your test. With some big exceptions (we rarely mock lodash, for instance), ___you should always mock imported dependency functions in unit tests___.
 
 For example, say you have a simple formatting function:
 
 ```js
+import formatColor from './formatColor';
+
 export function formatObject({ id, fname, lname, color }) {
   return {
     id: id.toUpperCase(),
@@ -40,9 +42,8 @@ export function formatObject({ id, fname, lname, color }) {
 In this example, `formatColor` is a different helper of ours which takes an HTML color string and produces an object with hex, RGBa, HSLa, etc. versions of the color. Rather than let that function operate on the test data, we would test that function separately. Here, we'd mock it and force it to always return the string 'formatted', which lets us know our mock was properly called.
 
 ```js
-beforeEach(() => {
-  mocks.formatColor = jest.fn(() => 'formatted');
-});
+import formatColor from '../formatColor';
+jest.mock('../formatColor');
 
 it('should format a simple object', () => {
   const simple = {
@@ -51,6 +52,7 @@ it('should format a simple object', () => {
     lname: 'Soho',
     color: 'DodgerBlue'
   };
+  formatColor.mockImplementation(() => 'formatted');
   expect(formatObject(simple)).toEqual({
     id: 'ABC',
     name: 'Jessie Soho',
@@ -63,8 +65,8 @@ it('should format a simple object', () => {
 
 If a function isn't exported from a file (a "private" function) or if it's exported from the same file as your test function is, there's no good way to mock that function with Jest. In that case, you have three options:
 
-1. Let the public function test the other function by proxy. If the function is really private (not exported), this may be the only way to go. 
-1. Move the other function to its own file where it can be tested on its own and mocked in this file. This is often a fine solution, although we don't really want to end up with one function per file.
+1. Move the other function to its own file where it can be tested on its own and mocked in this file.
+1. Let the public function test the other function by proxy. If the function is really private (not exported), this may be the only way to go.
 1. Use dependency injection. See next section.
 
 #### Dependency Injection "Trick"
@@ -95,29 +97,22 @@ it('should return the right string', () => {
 
 ## Functional Component Testing
 
-For React components, we use a tool called enzyme to render the component and test its behavior within the React context. This includes:
-
-* Did it mount/unmount etc. correctly?
-* Does event logic work correctly? (clicks, submits, etc)
+For React components, we use a tool called enzyme to render the component and test its behavior within the React context.
 
 ```jsx
-import { shallow, mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import MyComponent from '../MyComponent';
-import UpdateButton from '../UpdateButton';
 
-it('should retrieve data on mount', () => {
-  const getData = jest.fn();
-  const wrapper = mount(<MyComponent getData={getData} />);
-  expect(getData).toHaveBeenCalled();
+it('should render disabled button', () => {
+  const wrapper = shallow(<MyComponent disabled={true} />);
+  expect(wrapper.find('button')).toHaveProp('disabled', true);
 });
 
 it('should call update on click', () => {
   const update = jest.fn();
   const wrapper = shallow(<MyComponent update={update} />);
-  expect(wrapper.state('updated')).toEqual(false);
-  wrapper.find(UpdateButton).simulate('click');
+  wrapper.find('button').simulate('click');
   expect(update).toHaveBeenCalled();
-  expect(wrapper.state('updated')).toEqual(true);
 });
 ```
 
@@ -133,7 +128,7 @@ it('should render correctly', () => {
 });
 ```
 
-The important thing to point out here is that a snapshot test _always_ succeeds on its first run. The first run creates a `__snapshots__` folder adjacent to wherever the test lives, and then puts a `.snap` file that matches thet test file's name in that folder. Inside that `.snap` file will be a string that looks like this:
+The important thing to point out here is that a snapshot test _always_ succeeds on its first run. The first run creates a `__snapshots__` folder adjacent to wherever the test lives, and then puts a `.snap` file that matches the test file's name in that folder. Inside that `.snap` file will be a string that looks like this:
 
 ```
 // Jest Snapshot v1, https://goo.gl/fbAQLP
