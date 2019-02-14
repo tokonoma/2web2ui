@@ -54,7 +54,6 @@ exports[`Top should render correctly on desktop 1`] = `
         onClick={[Function]}
         size={22}
       />
-      }
     </Connect(AccessControl)>
     <Connect(AccountDropdown) />
   </div>

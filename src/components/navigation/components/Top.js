@@ -32,7 +32,7 @@ export class Top extends Component {
       <div className={styles.RightSideWrapper}>
         <NotificationCenter />
         <AccessControl condition={hasGrants('support/manage')}>
-          <HelpOutline className={styles.SupportIcon} onClick={this.openSupportPanel} size={22} />}
+          <HelpOutline className={styles.SupportIcon} onClick={this.openSupportPanel} size={22} />
         </AccessControl>
         <AccountDropdown />
       </div>
