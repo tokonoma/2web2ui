@@ -23,5 +23,3 @@ Mocking dependencies and stubbing out methods is pretty different in Jest, so th
 
 1. [**Code Coverage**](coverage.md)  
 A small note about how we run code coverage reports with testing.
-
-
