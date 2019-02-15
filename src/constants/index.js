@@ -117,3 +117,5 @@ export const ANALYTICS_WHITELISTED_FORMS = [
   FORMS.JOIN_PLAN,
   FORMS.JOIN_SENDING_DOMAIN
 ];
+
+export const SUBACCOUNT_REPORTING_USER_ROLE = 'subaccount_reporting';

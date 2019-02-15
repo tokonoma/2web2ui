@@ -46,15 +46,11 @@ exports[`Top should render correctly on desktop 1`] = `
     className="RightSideWrapper"
   >
     <Connect(NotificationCenter) />
-    <Connect(AccessControl)
-      condition={[Function]}
-    >
-      <HelpOutline
-        className="SupportIcon"
-        onClick={[Function]}
-        size={22}
-      />
-    </Connect(AccessControl)>
+    <HelpOutline
+      className="SupportIcon"
+      onClick={[Function]}
+      size={22}
+    />
     <Connect(AccountDropdown) />
   </div>
 </div>

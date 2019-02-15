@@ -2,7 +2,8 @@ import _ from 'lodash';
 import { hasOnlineSupport, hasStatus, hasStatusReasonCategory, isSuspendedForBilling, onPlanWithStatus } from 'src/helpers/conditions/account';
 import { isEmailVerified } from 'src/helpers/conditions/user';
 import { all, not, any } from 'src/helpers/conditions';
-import { isAdmin } from 'src/helpers/conditions/user';
+import { isAdmin, hasRole } from 'src/helpers/conditions/user';
+import { SUBACCOUNT_REPORTING_USER_ROLE } from 'src/constants';
 
 // types of support issues
 // @note These values must be configured in Desk before being used and they are case-sensitive
@@ -13,13 +14,7 @@ const LIMITS = 'DailyLimits';
 const SUPPORT = 'Support';
 
 const defaultMessageLabel = 'Tell us more about your issue';
-const defaultCondition = all(hasOnlineSupport, hasStatus('active'));
-const idConditionsMap = {
-  general_billing: all(isAdmin, any(isSuspendedForBilling, hasStatus('active'))),
-  account_suspension: all(hasStatus('suspended'), not(hasStatusReasonCategory('100.01'))),
-  account_cancellation: isAdmin
-};
-
+const defaultCondition = all(hasOnlineSupport, hasStatus('active'), not(hasRole(SUBACCOUNT_REPORTING_USER_ROLE)));
 
 /**
  * @example
@@ -87,26 +82,44 @@ const supportIssues = [
     id: 'general_billing',
     label: 'Billing problems',
     messageLabel: 'Tell us more about your billing issue',
-    type: BILLING
+    type: BILLING,
+    condition: all(
+      isAdmin,
+      any(isSuspendedForBilling, hasStatus('active')),
+      not(hasRole(SUBACCOUNT_REPORTING_USER_ROLE))
+    )
   },
   {
     id: 'account_suspension',
     label: 'Account suspension',
     messageLabel: 'Why do you think your account should be unsuspended?',
-    type: COMPLIANCE
+    type: COMPLIANCE,
+    condition: all(
+      hasStatus('suspended'),
+      not(hasStatusReasonCategory('100.01')),
+      not(hasRole(SUBACCOUNT_REPORTING_USER_ROLE))
+    )
   },
   {
     id: 'daily_limits',
     label: 'Daily sending limit increase',
     messageLabel: 'What limit do you need and why?',
     type: LIMITS,
-    condition: all(hasOnlineSupport, isAdmin, isEmailVerified, hasStatus('active'), not(onPlanWithStatus('deprecated')))
+    condition: all(
+      hasOnlineSupport,
+      isAdmin,
+      isEmailVerified,
+      hasStatus('active'),
+      not(onPlanWithStatus('deprecated')),
+      not(hasRole(SUBACCOUNT_REPORTING_USER_ROLE))
+    )
   },
   {
     id: 'account_cancellation',
     label: 'Account cancellation',
     messageLabel: 'Tell us why you are leaving',
-    type: BILLING
+    type: BILLING,
+    condition: all(isAdmin, not(hasRole(SUBACCOUNT_REPORTING_USER_ROLE)))
   },
   {
     id: 'general_issue',
@@ -121,7 +134,7 @@ const augmentIssuesList = function () {
   return _.map(supportIssues, (supportIssue) => ({
     ...supportIssue,
     messageLabel: supportIssue.messageLabel || defaultMessageLabel,
-    condition: supportIssue.condition || idConditionsMap[supportIssue.id] || defaultCondition
+    condition: supportIssue.condition || defaultCondition
   }));
 };
 
