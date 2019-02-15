@@ -4,6 +4,9 @@ import { Page, Tabs, Panel } from '@sparkpost/matchbox';
 import ListForm from './components/ListForm';
 import SingleAddressForm from './components/SingleAddressForm';
 import ListResults from './components/ListResults';
+import { hasUiOption } from 'src/helpers/conditions/account';
+import RVDisabledPage from './components/RVDisabledPage';
+import { connect } from 'react-redux';
 
 const tabs = [
   { content: 'Validate A List' },
@@ -20,6 +23,11 @@ export class RecipientValidationPage extends Component {
   }
 
   render() {
+
+    if (!this.props.hasRecipientValidation) {
+      return <RVDisabledPage/>;
+    }
+
     const { selectedTab } = this.state;
 
     return (
@@ -39,4 +47,9 @@ export class RecipientValidationPage extends Component {
   }
 }
 
-export default RecipientValidationPage;
+const mapStateToProps = (state) => ({
+  hasRecipientValidation: hasUiOption('recipient_validation')(state)
+});
+
+export default connect(mapStateToProps)(RecipientValidationPage);
+

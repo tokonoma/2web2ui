@@ -56,3 +56,5 @@ exports[`Page: Recipient Email Verification should render happy path 1`] = `
   <Connect(WithContext(ListResults)) />
 </Page>
 `;
+
+exports[`Page: Recipient Email Verification should render unhappy path 1`] = `<RVDisabledPage />`;

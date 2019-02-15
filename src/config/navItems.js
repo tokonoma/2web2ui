@@ -1,4 +1,4 @@
-import { Home, InsertChart, Code, MailOutline, Language, Settings, Compare, NotificationsActive, Signal } from '@sparkpost/matchbox-icons';
+import { Home, InsertChart, Code, MailOutline, Language, Settings, Compare, NotificationsActive, Signal, Beenhere } from '@sparkpost/matchbox-icons';
 
 export default [
   {
@@ -70,13 +70,14 @@ export default [
       {
         label: 'Suppressions',
         to: '/lists/suppressions'
-      },
-      {
-        label: 'Recipient Validation',
-        to: '/recipient-validation',
-        tag: 'beta'
       }
     ]
+  },
+  {
+    label: 'Recipient Validation',
+    to: '/recipient-validation',
+    icon: Beenhere,
+    tag: 'new'
   },
   {
     label: 'Webhooks',

@@ -5,13 +5,25 @@ import { RecipientValidationPage } from '../RecipientValidationPage';
 describe('Page: Recipient Email Verification', () => {
   let wrapper;
   let instance;
+  let props;
 
   beforeEach(() => {
-    wrapper = shallow(<RecipientValidationPage />);
+    props = {
+      hasRecipientValidation: true
+    };
+    wrapper = shallow(<RecipientValidationPage {...props}/>);
     instance = wrapper.instance();
   });
 
   it('should render happy path', () => {
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render unhappy path', () => {
+    props = {
+      hasRecipientValidation: false
+    };
+    wrapper = shallow(<RecipientValidationPage {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 

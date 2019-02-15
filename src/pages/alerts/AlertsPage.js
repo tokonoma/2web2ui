@@ -1,8 +1,8 @@
 import { Component } from 'react';
 import { EmptyState } from '@sparkpost/matchbox';
 import styles from './AlertsPage.module.scss';
-import ExternalLink from '../../components/externalLink/ExternalLink';
-import { Generic } from '../../components/images';
+import ExternalLink from 'src/components/externalLink/ExternalLink';
+import { Generic } from 'src/components/images';
 import { LINKS } from 'src/constants';
 import React from 'react';
 
