@@ -1,4 +1,4 @@
-import { Home, InsertChart, Code, MailOutline, Language, Settings, Compare, NotificationsActive, Signal, Beenhere } from '@sparkpost/matchbox-icons';
+import { Home, InsertChart, Code, MailOutline, Language, Settings, Compare, NotificationsActive, Signal, VerifiedUser } from '@sparkpost/matchbox-icons';
 
 export default [
   {
@@ -76,7 +76,7 @@ export default [
   {
     label: 'Recipient Validation',
     to: '/recipient-validation',
-    icon: Beenhere,
+    icon: VerifiedUser,
     tag: 'new'
   },
   {
