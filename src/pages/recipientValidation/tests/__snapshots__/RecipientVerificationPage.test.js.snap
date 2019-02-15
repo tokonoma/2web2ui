@@ -28,7 +28,9 @@ exports[`Page: Recipient Email Verification renders single email verification ta
 </Page>
 `;
 
-exports[`Page: Recipient Email Verification should render happy path 1`] = `
+exports[`Page: Recipient Email Verification should render empty page when RV is not enabled 1`] = `<RVDisabledPage />`;
+
+exports[`Page: Recipient Email Verification should render recipient validation page when enabled 1`] = `
 <Page
   empty={Object {}}
   title="Recipient Email Validation"
@@ -56,5 +58,3 @@ exports[`Page: Recipient Email Verification should render happy path 1`] = `
   <Connect(WithContext(ListResults)) />
 </Page>
 `;
-
-exports[`Page: Recipient Email Verification should render unhappy path 1`] = `<RVDisabledPage />`;

@@ -15,11 +15,11 @@ describe('Page: Recipient Email Verification', () => {
     instance = wrapper.instance();
   });
 
-  it('should render happy path', () => {
+  it('should render recipient validation page when enabled', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should render unhappy path', () => {
+  it('should render empty page when RV is not enabled', () => {
     props = {
       hasRecipientValidation: false
     };
