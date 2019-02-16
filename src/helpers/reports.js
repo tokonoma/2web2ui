@@ -1,6 +1,5 @@
 import _ from 'lodash';
 import qs from 'query-string';
-import moment from 'moment';
 import { getRelativeDates } from 'src/helpers/date';
 import { stringifyTypeaheadfilter } from 'src/helpers/string';
 
@@ -48,15 +47,15 @@ export function parseSearch(search) {
     options.metrics = (typeof metrics === 'string') ? [metrics] : metrics;
   }
 
-  const fromTime = moment(from, moment.ISO_8601, true);
-  const toTime = moment(to, moment.ISO_8601, true);
+  const fromTime = new Date(from);
+  const toTime = new Date(to);
 
-  if (from && fromTime.isValid()) {
-    options.from = fromTime.toDate();
+  if (from && !isNaN(fromTime)) {
+    options.from = fromTime;
   }
 
-  if (to && toTime.isValid()) {
-    options.to = toTime.toDate();
+  if (to && !isNaN(toTime)) {
+    options.to = toTime;
   }
 
   if (range) {

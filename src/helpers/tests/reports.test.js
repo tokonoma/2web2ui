@@ -10,56 +10,40 @@ jest.mock('src/helpers/string', () => ({
 describe('report helpers', () => {
 
   describe('parseSearch', () => {
+    const filters = 'filters=Domain:test.com&filters=Subaccount:test:123';
+    const metrics = 'metrics=count-something';
+
     beforeEach(() => {
       dateHelpers.getRelativeDates = jest.fn(() => ({}));
     });
 
-    it('should parse search with relative range', () => {
-      const filters = 'filters=Domain:test.com&filters=Subaccount:test:123';
-      const date = 'from=2017-11-03T14:43:00Z&to=2017-11-04T14:43:00Z';
-      const metrics = 'metrics=count-something';
-      const range = 'range=day';
-      const search = `?${filters}&${date}&${metrics}&${range}`;
-
-      dateHelpers.getRelativeDates = jest.fn(() => ({
-        from: 'relative-from',
-        to: 'relative-to',
-        relativeRange: 'relative-range'
-      }));
-
-      expect(reports.parseSearch(search)).toMatchSnapshot();
-      expect(dateHelpers.getRelativeDates).toHaveBeenCalledWith('day');
-    });
-
-    it('should parse search with custom range', () => {
-      const filters = 'filters=Domain:test.com&filters=Subaccount:test:123';
-      const date = 'from=2017-11-03T14:43:00Z&to=2017-11-04T14:43:00Z';
-      const metrics = 'metrics=count-something';
-      const range = 'range=custom';
-      const search = `?${filters}&${date}&${metrics}&${range}`;
-
-      dateHelpers.getRelativeDates = jest.fn(() => ({
-        relativeRange: 'custom'
-      }));
-
-      expect(reports.parseSearch(search)).toMatchSnapshot();
-      expect(dateHelpers.getRelativeDates).toHaveBeenCalledWith('custom');
-    });
-
     it('should parse search with missing range', () => {
-      const filters = 'filters=Domain:test.com&filters=Subaccount:test:123';
       const date = 'from=2017-11-03T14:43:00Z&to=2017-11-04T14:43:00Z';
-      const metrics = 'metrics=count-something';
       const search = `?${filters}&${date}&${metrics}`;
 
       expect(reports.parseSearch(search)).toMatchSnapshot();
     });
 
     it('should parse search with no empty value', () => {
-      expect(reports.parseSearch('')).toMatchSnapshot();
+      expect(reports.parseSearch('').options).toEqual({});
     });
 
-    cases('handle invalid datetimes with custom format', (opts) => {
+    it('uses to relative range with valid from & to', () => {
+      const search = `?${filters}&range=week&from=2019-02-09T02%3A00%3A00Z&to=2019-02-16T02%3A59%3A59Z&${metrics}`;
+      reports.parseSearch(search);
+      expect(dateHelpers.getRelativeDates).toHaveBeenCalledWith('week');
+    });
+
+    it('defaults to relative range for invalid custom from or to', () => {
+      reports.parseSearch(`?${filters}&range=week&from=aaa&to=2019-02-16T02%3A59%3A59Z&${metrics}`);
+      expect(dateHelpers.getRelativeDates).toHaveBeenCalledWith('day');
+
+      dateHelpers.getRelativeDates.mockClear();
+      reports.parseSearch(`?${filters}&range=week&from=2019-02-09T02%3A00%3A00Z&to=2019-02-16T02%3A59%3A59Zzzzzz&${metrics}`);
+      expect(dateHelpers.getRelativeDates).toHaveBeenCalledWith('day');
+    });
+
+    cases('handles invalid datetimes with custom format', (opts) => {
       expect(reports.parseSearch(opts.search).options).toEqual(opts.match);
     }, [
       { name: 'valid from', search: 'from=2017-11-03T14:43:00Z', match: { from: new Date('2017-11-03T14:43:00.000Z') }},
