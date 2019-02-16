@@ -3,6 +3,7 @@ import React from 'react';
 import { EmptyState } from '@sparkpost/matchbox';
 import ErrorBoundary from '../ErrorBoundary';
 import ErrorTracker from 'src/helpers/errorTracker';
+import { DEFAULT_REDIRECT_ROUTE } from '../../../constants';
 
 jest.mock('src/helpers/errorTracker');
 
@@ -40,14 +41,21 @@ describe('Component: ErrorBoundary', () => {
   it('renders custom cta label when passed', () => {
     wrapper.setProps({ ctaLabel: 'To Safety' });
     wrapper.setState({ hasError: true });
-    expect(wrapper).toMatchSnapshot();
+    expect(wrapper.find('EmptyState').prop('primaryAction').content).toEqual('To Safety');
   });
 
   it('uses custom action when passed', () => {
     const mockFn = jest.fn();
     wrapper.setProps({ ctaLabel: 'Reload Page', onCtaClick: mockFn });
     wrapper.setState({ hasError: true });
-    expect(wrapper).toMatchSnapshot();
     expect(wrapper.find(EmptyState).prop('primaryAction').onClick).toBe(mockFn);
+  });
+
+  describe('handleCtaClick', () => {
+    it('replaces current location with default landing page', () => {
+      window.location.replace = jest.fn();
+      wrapper.instance().handleCtaClick();
+      expect(window.location.replace).toHaveBeenCalledWith(DEFAULT_REDIRECT_ROUTE);
+    });
   });
 });
