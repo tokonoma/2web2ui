@@ -55,7 +55,7 @@
       window.addEventListener('load', handleAppLoad);
     </script>
 
-    <script type="text/javascript" src="%PUBLIC_URL%/static/tenant-config/%CONFIG_CACHE_ID%/production.js"></script>
+    <%= process.env.NODE_ENV === 'development' ? '<script type="text/javascript" src="%PUBLIC_URL%/static/tenant-config/%CONFIG_CACHE_ID%/production.js" />' : '' %>
 
     <script>
       (function(apiKey){
