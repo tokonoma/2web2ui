@@ -1,6 +1,6 @@
 /* eslint max-lines: ["error", 200] */
 import React, { Component } from 'react';
-import { Field } from 'redux-form';
+import { Field, reduxForm, Form } from 'redux-form';
 
 // Components
 import { Panel, Grid } from '@sparkpost/matchbox';
@@ -12,7 +12,7 @@ import { required } from 'src/helpers/validation';
 
 import styles from './AlertForm.module.scss';
 
-export default class Form extends Component {
+export class AlertForm extends Component {
 
   componentDidMount() {
   }
@@ -28,7 +28,7 @@ export default class Form extends Component {
     const { readOnly } = this.props;
 
     return (
-      <div>
+      <Form onSubmit={this.submit}>
         <Panel className={styles.FormPanel}>
           <Panel.Section>
             <Field
@@ -108,7 +108,9 @@ export default class Form extends Component {
             />
           </Panel.Section>
         </Panel>
-      </div>
+      </Form>
     );
   }
 }
+
+export default reduxForm({ form: 'alerts-form' })(AlertForm);
