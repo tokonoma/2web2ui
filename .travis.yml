@@ -8,5 +8,5 @@ cache:
 before_install: npm install -g greenkeeper-lockfile@1
 install: npm ci --loglevel http
 before_script: greenkeeper-lockfile-update
-script: npm run test-ci && npm run build || npm run coveralls
+script: npm run travis
 after_script: greenkeeper-lockfile-upload
