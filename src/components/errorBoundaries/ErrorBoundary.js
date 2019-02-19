@@ -24,7 +24,7 @@ export default class ErrorBoundary extends Component {
 
   render() {
     const primaryAction = {
-      content: this.props.ctaLabel || 'Go to Dashboard',
+      content: this.props.ctaLabel || 'Go Back',
       onClick: this.props.onCtaClick || this.handleCtaClick
     };
 
