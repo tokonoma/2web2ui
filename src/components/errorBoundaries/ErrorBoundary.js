@@ -35,8 +35,7 @@ export default class ErrorBoundary extends Component {
           image={Generic}
           primaryAction={primaryAction}
         >
-          <p>We're having some technical issues. Our engineers have been notified and are working on getting this
-            fixed.</p>
+          <p>We're having some technical issues. Our engineers have been notified and are working on getting this fixed.</p>
         </EmptyState>
       </div>;
     }

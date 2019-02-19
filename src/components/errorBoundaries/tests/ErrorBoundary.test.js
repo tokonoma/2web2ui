@@ -48,7 +48,15 @@ describe('Component: ErrorBoundary', () => {
     const mockFn = jest.fn();
     wrapper.setProps({ ctaLabel: 'Reload Page', onCtaClick: mockFn });
     wrapper.setState({ hasError: true });
+    expect(wrapper.find(EmptyState).prop('primaryAction').content).toEqual('Reload Page');
     expect(wrapper.find(EmptyState).prop('primaryAction').onClick).toBe(mockFn);
+  });
+
+  it('redirects to default landing page if custom action not passed', () => {
+    window.location.replace = jest.fn();
+    wrapper.setState({ hasError: true });
+    wrapper.find(EmptyState).prop('primaryAction').onClick();
+    expect(window.location.replace).toHaveBeenCalledWith(DEFAULT_REDIRECT_ROUTE);
   });
 
   describe('handleCtaClick', () => {
