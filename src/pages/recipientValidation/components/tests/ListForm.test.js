@@ -47,10 +47,7 @@ describe('ListForm', () => {
   it('should submit csv', async () => {
     wrapper.setProps(props);
     wrapper.find('form').simulate('submit', formValuesWithCsv);
-    const csvUpload = props.uploadList.mock.calls[0][0];
-    await expect(props.uploadList).toHaveBeenCalledTimes(1);
-    expect(csvUpload).toBeInstanceOf(FormData);
-    expect(csvUpload.get('myupload')).toEqual(formValuesWithCsv.csv);
+    await expect(props.uploadList.mock.calls).toMatchSnapshot();
     expect(props.reset).toHaveBeenCalledWith('recipientValidationListForm');
     expect(props.showAlert.mock.calls).toMatchSnapshot();
   });
