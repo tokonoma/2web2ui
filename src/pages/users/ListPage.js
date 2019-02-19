@@ -18,6 +18,7 @@ const COLUMNS = [
   { label: 'Role', sortKey: 'access' },
   { label: 'Two Factor Auth', sortKey: 'tfa_enabled' },
   { label: 'Last Login', sortKey: 'last_login' },
+  { label: 'Subaccount', sortKey: 'subaccount' },
   null
 ];
 
@@ -54,6 +55,7 @@ export class ListPage extends Component {
     user.access,
     user.tfa_enabled ? <Tag color={'blue'}>Enabled</Tag> : <Tag>Disabled</Tag>,
     user.last_login ? <TimeAgo date={user.last_login} live={false} /> : 'Never',
+    user.subaccount_id ? <p>{user.subaccount_id}</p> : <p>null</p>,
     <Actions username={user.username} deletable={!user.isCurrentUser} onDelete={this.handleDeleteRequest} />
   ];
 
