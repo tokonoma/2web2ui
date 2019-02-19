@@ -87,7 +87,7 @@ export class SpamTrapPage extends Component {
   renderContent = () => {
     const { data = [], loading, gap, empty, error } = this.props;
     const { calculation, selectedDate } = this.state;
-    const selectedData = _.find(data, ['date', selectedDate]) || {};
+    const selectedSpamTrapHits = _.find(data, ['date', selectedDate]) || {};
     let chartPanel;
 
     if (empty) {
@@ -136,7 +136,7 @@ export class SpamTrapPage extends Component {
         </Grid.Column>
         <Grid.Column sm={12} md={5} mdOffset={0}>
           <div className={styles.OffsetCol}>
-            {!chartPanel && <SpamTrapActions percent={selectedData.relative_trap_hits} date={selectedDate} />}
+            {!chartPanel && <SpamTrapActions percent={selectedSpamTrapHits.relative_trap_hits} date={selectedDate} />}
           </div>
         </Grid.Column>
       </Grid>

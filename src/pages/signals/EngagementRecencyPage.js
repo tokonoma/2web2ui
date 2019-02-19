@@ -84,7 +84,7 @@ export class EngagementRecencyPage extends Component {
   renderContent = () => {
     const { data = [], loading, gap, empty, error } = this.props;
     const { selectedDate } = this.state;
-    const selectedData = _.find(data, ['date', selectedDate]) || {};
+    const selectedCohorts = _.find(data, ['date', selectedDate]) || {};
     let chartPanel;
 
     if (empty) {
@@ -134,7 +134,7 @@ export class EngagementRecencyPage extends Component {
         </Grid.Column>
         <Grid.Column sm={12} md={5} mdOffset={0}>
           <div className={styles.OffsetCol}>
-            {!chartPanel && <EngagementRecencyActions cohorts={selectedData} date={selectedDate} />}
+            {!chartPanel && <EngagementRecencyActions cohorts={selectedCohorts} date={selectedDate} />}
           </div>
         </Grid.Column>
       </Grid>
