@@ -24,6 +24,7 @@ describe('Signals Health Score Details Container', () => {
       },
       getSpamHits: jest.fn(),
       getHealthScore: jest.fn(),
+      selected: '2015-01-01',
       subaccountId: '101'
     };
 
