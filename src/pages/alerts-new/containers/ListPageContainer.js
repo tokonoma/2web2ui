@@ -19,7 +19,7 @@ function withAlertsList(WrappedComponent) {
     <ListPageContainer {...props} component={WrappedComponent} />
   );
 
-  Wrapper.displayName = `withAlertsList(${WrappedComponent.displayName || WrappedComponent.name || 'Component'})`;
+  Wrapper.displayName = `withAlerts(${WrappedComponent.displayName || WrappedComponent.name || 'Component'})`;
 
   const mapStateToProps = (state, props) => ({
     list: state.alerts.list
