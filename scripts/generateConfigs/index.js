@@ -1,7 +1,6 @@
 const constructConfig = require("./constructConfig");
-const { constructContent, constructCombinedContent } = require("./constructContent");
+const constructContent = require("./constructContent");
 const tenants = require("./tenants");
-const writeContent = require("./writeContent");
 
 // Generate all static tenant configurations
 const generateConfigs = () => {
