@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
-import { Field, reduxForm } from 'redux-form';
+import { Field, reduxForm, formValueSelector } from 'redux-form';
 import { Page, Panel, Button } from '@sparkpost/matchbox';
-import { TextFieldWrapper } from 'src/components';
+import { TextFieldWrapper, SubaccountTypeaheadWrapper } from 'src/components';
 import { required, email } from 'src/helpers/validation';
 import { inviteUser } from 'src/actions/users';
 import { showAlert } from 'src/actions/globalAlert';
+import { hasSubaccounts } from 'src/selectors/subaccounts';
 import { trimWhitespaces } from 'src/helpers/string';
+import { FORMS, SUBACCOUNT_REPORTING_USER_ROLE } from 'src/constants';
 
 import RoleRadioGroup from './components/RoleRadioGroup';
 
-const formName = 'userForm';
 const breadcrumbAction = {
   content: 'Users',
   Component: Link,
@@ -25,7 +26,7 @@ export class CreatePage extends Component {
       showAlert,
       history
     } = this.props;
-    const { email, access } = values;
+    const { email, access/*, subaccount*/ } = values;
 
     return inviteUser(email, access)
       .then(() => {
@@ -41,8 +42,12 @@ export class CreatePage extends Component {
     const {
       submitting,
       pristine,
-      handleSubmit
+      handleSubmit,
+      hasSubaccounts,
+      selectedRole
     } = this.props;
+
+    const subaccountReportingRoleSelected = selectedRole === SUBACCOUNT_REPORTING_USER_ROLE;
 
     return (
       <Page title="Invite User" breadcrumbAction={breadcrumbAction}>
@@ -59,8 +64,10 @@ export class CreatePage extends Component {
               />
               <Field
                 name="access"
+                flags={{ hasSubaccounts }}
                 component={RoleRadioGroup}
               />
+              {subaccountReportingRoleSelected && <Field name='subaccount' component={SubaccountTypeaheadWrapper} validate={required} />}
               <Button submit primary disabled={submitting || pristine}>
                 {submitting ? 'Loading' : 'Add User'}
               </Button>
@@ -72,15 +79,17 @@ export class CreatePage extends Component {
   }
 }
 
-const mapStateToProps = () => ({
+const mapStateToProps = (state) => ({
   initialValues: {
     access: 'admin' // Sadly redux-form does not reflect a select's initial value
-  }
+  },
+  selectedRole: formValueSelector(FORMS.INVITE_USER)(state, 'access'),
+  hasSubaccounts: hasSubaccounts(state)
 });
 
 const mapDispatchToProps = { inviteUser, showAlert };
 
-const ReduxCreatePage = reduxForm({ form: formName })(CreatePage);
+const ReduxCreatePage = reduxForm({ form: FORMS.INVITE_USER })(CreatePage);
 
 export default withRouter(
   connect(mapStateToProps, mapDispatchToProps)(ReduxCreatePage)

@@ -23,7 +23,7 @@ export const EditForm = ({
         <Field
           name="access"
           disabled={user.isCurrentUser}
-          allowSuperUser={currentUser.access === 'superuser'}
+          flags={{ allowSuperUser: currentUser.access === 'superuser' }}
           component={RoleRadioGroup}
         />
       </Panel.Section>

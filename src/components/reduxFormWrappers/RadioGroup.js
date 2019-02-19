@@ -17,18 +17,19 @@ export default function RadioGroup({
     <Radio.Group label={label}>
       <Label>{title}{!bottomError && touched && error ? <Error error={error}/> : ''}</Label>
       <Grid>
-        {options.map((o) => (
-          <Grid.Column {...grid} key={`${input.name}-${o.value}`}>
+        {options.map((option) => (
+          <Grid.Column {...grid} key={`${input.name}-${option.value}`}>
             <div className={styles.RadioWrapper}>
               <Radio
                 {...input}
-                id={`${input.name}-${o.value}`}
-                label={o.label}
-                checked={o.value === input.value}
-                disabled={!!o.disabled}
-                value={o.value}
-                helpText={o.helpText}
+                id={`${input.name}-${option.value}`}
+                label={option.label}
+                checked={option.value === input.value}
+                disabled={!!option.disabled}
+                value={option.value}
+                helpText={option.helpText}
               />
+              {option.children}
             </div>
           </Grid.Column>
         ))}
