@@ -45,6 +45,7 @@ export class EngagementRecencyPage extends Component {
           key={key}
           color={cohorts[key].fill}
           label={cohorts[key].label}
+          description={cohorts[key].description}
           value={`${roundToPlaces(payload[key] * 100, 1)}%`}
         />
       ))}
@@ -85,6 +86,7 @@ export class EngagementRecencyPage extends Component {
                   gap={gap}
                   timeSeries={data}
                   tooltipContent={this.getTooltipContent}
+                  tooltipWidth='250px'
                   yKeys={_.keys(cohorts).map((key) => ({ key, ...cohorts[key] })).reverse()}
                   yAxisProps={this.getYAxisProps()}
                   xAxisProps={this.getXAxisProps()}
@@ -107,7 +109,7 @@ export class EngagementRecencyPage extends Component {
   }
 
   render() {
-    const { facet, facetId } = this.props;
+    const { facet, facetId, subaccountId } = this.props;
 
     return (
       <Page
@@ -115,9 +117,10 @@ export class EngagementRecencyPage extends Component {
         dimensionPrefix='Engagement Recency for'
         facet={facet}
         facetId={facetId}
+        subaccountId={subaccountId}
         primaryArea={<DateFilter />}>
         {this.renderContent()}
-        <OtherChartsHeader facet={facet} facetId={facetId} />
+        <OtherChartsHeader facet={facet} facetId={facetId} subaccountId={subaccountId} />
         <Grid>
           <Grid.Column xs={12} sm={6}>
             <SpamTrapsPreview />
