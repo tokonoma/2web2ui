@@ -17,7 +17,8 @@
     "test-examples": "node scripts/test.js --env=jsdom --config=./jest.config.js --testMatch='<rootDir>/docs/testing/**/?(*.)test.js'",
     "lint": "node node_modules/eslint/bin/eslint.js src",
     "lintfix": "npm run lint -- --fix",
-    "storybook": "start-storybook -p 9001 -c .storybook"
+    "storybook": "start-storybook -p 9001 -c .storybook",
+    "travis": "npm run test-ci && npm run build && (npm run coveralls || exit 0)"
   },
   "husky": {
     "hooks": {
