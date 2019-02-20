@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { getEngagementRecency } from 'src/actions/signals';
-import { selectEngagementRecencyDetails } from 'src/selectors/signals';
+import { selectEngagementRecencyDetails, getSelectedDateFromRouter } from 'src/selectors/signals';
 import { getDateTicks } from 'src/helpers/date';
 
 export class WithEngagementRecencyDetails extends Component {
@@ -39,6 +39,7 @@ export class WithEngagementRecencyDetails extends Component {
       facet,
       facetId,
       filters,
+      selected,
       subaccountId
     } = this.props;
 
@@ -46,7 +47,7 @@ export class WithEngagementRecencyDetails extends Component {
     const gap = details.data && details.data.length > 15 ? 0.2 : 1;
 
     return (
-      <WrappedComponent {...details} facet={facet} facetId={facetId} gap={gap} xTicks={getDateTicks(filters.relativeRange)} subaccountId={subaccountId} />
+      <WrappedComponent {...details} facet={facet} facetId={facetId} gap={gap} xTicks={getDateTicks(filters.relativeRange)} selected={selected} subaccountId={subaccountId} />
     );
   }
 }
@@ -65,7 +66,8 @@ function withEngagementRecencyDetails(WrappedComponent) {
 
   const mapStateToProps = (state, props) => ({
     ...selectEngagementRecencyDetails(state, props),
-    filters: state.signalOptions
+    filters: state.signalOptions,
+    selected: getSelectedDateFromRouter(state, props)
   });
 
   return withRouter(connect(mapStateToProps, { getEngagementRecency })(Wrapper));

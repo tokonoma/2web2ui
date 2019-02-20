@@ -23,6 +23,7 @@ describe('Signals Spam Trap Details Container', () => {
         relativeRange: '14days'
       },
       getSpamHits: jest.fn(),
+      selected: '2015-01-01',
       subaccountId: '101'
     };
 
