@@ -7,9 +7,11 @@ exports[`TestCollection Component should render 1`] = `
       Object {
         "label": "Name",
         "sortKey": "name",
+        "width": "25%",
       },
       Object {
-        "label": "Conditions",
+        "label": "Metric",
+        "sortKey": "alert_metric",
       },
       Object {
         "label": "Enabled",
@@ -20,21 +22,40 @@ exports[`TestCollection Component should render 1`] = `
   }
   defaultSortColumn="name"
   defaultSortDirection="desc"
+  filterBox={
+    Object {
+      "exampleModifiers": Array [
+        "enabled",
+        "alert_metric",
+      ],
+      "itemToStringKeys": Array [
+        "name",
+        "id",
+        "enabled",
+        "alert_metric",
+      ],
+      "show": true,
+    }
+  }
   getRowData={[Function]}
   pagination={true}
   rows={
     Array [
       Object {
+        "alert_metric": "monthly_sending_limit",
         "enabled": true,
         "id": "id-1",
         "name": "my alert 1",
+        "subaccount_id": 101,
       },
       Object {
+        "alert_metric": "monthly_sending_limit",
         "enabled": false,
         "id": "id-2",
         "name": "my alert 2",
       },
       Object {
+        "alert_metric": "another_metric",
         "enabled": true,
         "id": "id-3",
         "name": "my alert 3",
@@ -47,15 +68,20 @@ exports[`TestCollection Component should render 1`] = `
 exports[`TestCollection Component should render row data properly 1`] = `
 Array [
   <React.Fragment>
-    <PageLink>
+    <PageLink
+      to="/alerts-new/edit/id-1?subaccount=101"
+    >
       my alert 1
-       - 
-      id-1
     </PageLink>
   </React.Fragment>,
-  <React.Fragment>
-    enabled
-  </React.Fragment>,
+  <Tag>
+    Monthly Sending Limit
+  </Tag>,
+  <Tag
+    color="blue"
+  >
+    Enabled
+  </Tag>,
   <div
     style={
       Object {
@@ -63,7 +89,40 @@ Array [
       }
     }
   >
-    actions
+    <Popover
+      bottom={true}
+      left={true}
+      right={true}
+      trigger={
+        <Button
+          flat={true}
+          size="large"
+        >
+          <MoreHoriz
+            size={21}
+          />
+        </Button>
+      }
+    >
+      <ActionList
+        actions={
+          Array [
+            Object {
+              "component": [Function],
+              "content": "Edit Alert",
+              "section": 1,
+              "to": "/alerts-new/edit/id-1?subaccount=101",
+            },
+            Object {
+              "content": "Delete Alert",
+              "onClick": [Function],
+              "section": 2,
+            },
+          ]
+        }
+        groupByKey="section"
+      />
+    </Popover>
   </div>,
 ]
 `;
@@ -71,15 +130,20 @@ Array [
 exports[`TestCollection Component should render row data properly 2`] = `
 Array [
   <React.Fragment>
-    <PageLink>
+    <PageLink
+      to="/alerts-new/edit/id-2"
+    >
       my alert 2
-       - 
-      id-2
     </PageLink>
   </React.Fragment>,
-  <React.Fragment>
-    disabled
-  </React.Fragment>,
+  <Tag>
+    Monthly Sending Limit
+  </Tag>,
+  <Tag
+    color={null}
+  >
+    Disabled
+  </Tag>,
   <div
     style={
       Object {
@@ -87,7 +151,40 @@ Array [
       }
     }
   >
-    actions
+    <Popover
+      bottom={true}
+      left={true}
+      right={true}
+      trigger={
+        <Button
+          flat={true}
+          size="large"
+        >
+          <MoreHoriz
+            size={21}
+          />
+        </Button>
+      }
+    >
+      <ActionList
+        actions={
+          Array [
+            Object {
+              "component": [Function],
+              "content": "Edit Alert",
+              "section": 1,
+              "to": "/alerts-new/edit/id-2",
+            },
+            Object {
+              "content": "Delete Alert",
+              "onClick": [Function],
+              "section": 2,
+            },
+          ]
+        }
+        groupByKey="section"
+      />
+    </Popover>
   </div>,
 ]
 `;
@@ -95,15 +192,20 @@ Array [
 exports[`TestCollection Component should render row data properly 3`] = `
 Array [
   <React.Fragment>
-    <PageLink>
+    <PageLink
+      to="/alerts-new/edit/id-3"
+    >
       my alert 3
-       - 
-      id-3
     </PageLink>
   </React.Fragment>,
-  <React.Fragment>
-    enabled
-  </React.Fragment>,
+  <Tag>
+    another_metric
+  </Tag>,
+  <Tag
+    color="blue"
+  >
+    Enabled
+  </Tag>,
   <div
     style={
       Object {
@@ -111,7 +213,40 @@ Array [
       }
     }
   >
-    actions
+    <Popover
+      bottom={true}
+      left={true}
+      right={true}
+      trigger={
+        <Button
+          flat={true}
+          size="large"
+        >
+          <MoreHoriz
+            size={21}
+          />
+        </Button>
+      }
+    >
+      <ActionList
+        actions={
+          Array [
+            Object {
+              "component": [Function],
+              "content": "Edit Alert",
+              "section": 1,
+              "to": "/alerts-new/edit/id-3",
+            },
+            Object {
+              "content": "Delete Alert",
+              "onClick": [Function],
+              "section": 2,
+            },
+          ]
+        }
+        groupByKey="section"
+      />
+    </Popover>
   </div>,
 ]
 `;

@@ -45,20 +45,17 @@ describe('Page: Alerts List', () => {
     expect(wrapper.find('ApiErrorBanner')).toMatchSnapshot();
   });
 
-  // it('should render delete modal', () => {
-  //   wrapper.setState({ showDeleteModal: true });
-  // });
-
-  // it('should render create modal', () => {
-  //   wrapper.setState({ showCreateModal: true });
-  // });
+  it('should render delete modal', () => {
+    wrapper.setState({ showDeleteModal: true });
+    expect(wrapper.find('DeleteModal')).toMatchSnapshot();
+  });
 
   it('should toggle delete modal', () => {
     expect(wrapper).toHaveState('showDeleteModal', false);
     expect(wrapper).toHaveState('alertToDelete', {});
-    wrapper.instance().toggleDelete('test-id', 101);
+    wrapper.instance().toggleDelete({ id: 'test-id', subaccount_id: 101, name: 'mock name' });
     expect(wrapper).toHaveState('showDeleteModal', true);
-    expect(wrapper).toHaveState('alertToDelete', { id: 'test-id', subaccountId: 101 });
+    expect(wrapper).toHaveState('alertToDelete', { id: 'test-id', subaccountId: 101, name: 'mock name' });
   });
 
   it('should handle delete', async () => {

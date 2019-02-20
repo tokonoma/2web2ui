@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { Page } from '@sparkpost/matchbox';
-import { Loading, ApiErrorBanner } from 'src/components';
+import { ApiErrorBanner, DeleteModal, Loading } from 'src/components';
 import { Templates } from 'src/components/images';
 import AlertCollection from './components/AlertCollection';
 import withAlertsList from './containers/ListPage.container';
@@ -15,10 +16,10 @@ export class ListPage extends Component {
     this.props.listAlerts();
   }
 
-  toggleDelete = (id, subaccount_id) => {
+  toggleDelete = ({ id, name, subaccount_id } = {}) => {
     this.setState({
       showDeleteModal: !this.state.showDeleteModal,
-      alertToDelete: { id, subaccountId: subaccount_id }
+      alertToDelete: { id, name, subaccountId: subaccount_id }
     });
   };
 
@@ -52,7 +53,7 @@ export class ListPage extends Component {
   }
 
   render() {
-    const { alerts, error, loading } = this.props;
+    const { alerts, deletePending, error, loading } = this.props;
 
     if (loading) {
       return <Loading />;
@@ -61,7 +62,7 @@ export class ListPage extends Component {
     return (
       <Page
         title='Alerts'
-        primaryAction={{ content: 'Create an Alert', to: '/alerts-new/create' }}
+        primaryAction={{ content: 'Create an Alert', to: '/alerts-new/create', component: Link }}
         empty={{
           show: !error && alerts.length === 0,
           image: Templates,
@@ -70,7 +71,14 @@ export class ListPage extends Component {
         }}
       >
         {error ? this.renderError() : this.renderCollection()}
-        {/* TODO: add delete modal */}
+        <DeleteModal
+          open={this.state.showDeleteModal}
+          title='Are you sure you want to delete this alert?'
+          content={<p>The alert "<strong>{this.state.alertToDelete.name}</strong>" will be permanently removed. This cannot be undone.</p>}
+          onDelete={this.handleDelete}
+          onCancel={this.toggleDelete}
+          isPending={deletePending}
+        />
       </Page>
     );
   }

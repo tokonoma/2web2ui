@@ -9,7 +9,8 @@ function withAlertsList(WrappedComponent) {
   const mapStateToProps = (state, props) => ({
     alerts: state.alerts.list,
     error: state.alerts.listError,
-    loading: state.alerts.listPending
+    loading: state.alerts.listPending,
+    deletePending: state.alerts.deletePending
   });
 
   return withRouter(connect(mapStateToProps, mapDispatchToProps)(WrappedComponent));

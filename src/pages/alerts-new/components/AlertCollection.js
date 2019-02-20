@@ -37,7 +37,7 @@ class AlertCollection extends Component {
       },
       {
         content: 'Delete Alert',
-        onClick: () => this.props.toggleDelete(id, subaccount_id),
+        onClick: () => this.props.toggleDelete({ id, name, subaccount_id }),
         section: 2
       }
     ];
