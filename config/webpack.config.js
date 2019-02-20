@@ -643,7 +643,7 @@ module.exports = function(webpackEnv) {
         }),
         new webpack.DefinePlugin({
           SUPPORTED_BROWSERS: JSON.stringify(snapshotGenerator()), //Refer to docs/browser-support-sentry-issue.md for more info
-          TENANT_CONFIGS: JSON.stringify(generateConfigs())
+          TENANT_CONFIGS: generateConfigs()
         }),
       ].filter(Boolean),
     // Some libraries import Node modules but don't use them in the browser.
