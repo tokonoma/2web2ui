@@ -2,8 +2,8 @@ import _ from 'lodash';
 import { hasOnlineSupport, hasStatus, hasStatusReasonCategory, isSuspendedForBilling, onPlanWithStatus } from 'src/helpers/conditions/account';
 import { isEmailVerified } from 'src/helpers/conditions/user';
 import { all, not, any } from 'src/helpers/conditions';
-import { isAdmin, hasRole } from 'src/helpers/conditions/user';
-import { SUBACCOUNT_REPORTING_USER_ROLE } from 'src/constants';
+import { isAdmin } from 'src/helpers/conditions/user';
+import hasGrants from 'src/helpers/conditions/hasGrants';
 
 // types of support issues
 // @note These values must be configured in Desk before being used and they are case-sensitive
@@ -14,7 +14,7 @@ const LIMITS = 'DailyLimits';
 const SUPPORT = 'Support';
 
 const defaultMessageLabel = 'Tell us more about your issue';
-const defaultCondition = all(hasOnlineSupport, hasStatus('active'), not(hasRole(SUBACCOUNT_REPORTING_USER_ROLE)));
+const defaultCondition = all(hasOnlineSupport, hasStatus('active'), hasGrants('support/manage'));
 
 /**
  * @example
@@ -86,7 +86,7 @@ const supportIssues = [
     condition: all(
       isAdmin,
       any(isSuspendedForBilling, hasStatus('active')),
-      not(hasRole(SUBACCOUNT_REPORTING_USER_ROLE))
+      hasGrants('support/manage')
     )
   },
   {
@@ -97,7 +97,7 @@ const supportIssues = [
     condition: all(
       hasStatus('suspended'),
       not(hasStatusReasonCategory('100.01')),
-      not(hasRole(SUBACCOUNT_REPORTING_USER_ROLE))
+      hasGrants('support/manage')
     )
   },
   {
@@ -111,7 +111,7 @@ const supportIssues = [
       isEmailVerified,
       hasStatus('active'),
       not(onPlanWithStatus('deprecated')),
-      not(hasRole(SUBACCOUNT_REPORTING_USER_ROLE))
+      hasGrants('support/manage')
     )
   },
   {
@@ -119,7 +119,7 @@ const supportIssues = [
     label: 'Account cancellation',
     messageLabel: 'Tell us why you are leaving',
     type: BILLING,
-    condition: all(isAdmin, not(hasRole(SUBACCOUNT_REPORTING_USER_ROLE)))
+    condition: all(isAdmin, hasGrants('support/manage'))
   },
   {
     id: 'general_issue',
