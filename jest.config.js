@@ -60,7 +60,8 @@ module.exports = {
   clearMocks: true,
   restoreMocks: true,
   globals: {
-    'SUPPORTED_BROWSERS': {}
+    'SUPPORTED_BROWSERS': {},
+    'TENANT_CONFIGS': {}
   },
   watchPathIgnorePatterns: [
     '<rootDir>/build'
