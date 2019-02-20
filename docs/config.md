@@ -9,7 +9,8 @@ import config from 'src/config'
 The configuration module under `src/config/` merges variables from these locations in order:
 
  - `src/config/default.js`
- - `SP.productionConfig` from the current tenant's config file (see below)
+ - `SP.productionConfig` from the current tenant's config file for development (see below)
+ - Current tenant's config from all configs that are included in the bundle
  - `src/config/test-config.js` if NODE_ENV==='test'
 
 ## Default Configuration
@@ -26,7 +27,9 @@ Put test-time values in `src/config/test-config.js`.
 
 ## Tenant Configurations
 
-Our build generates a configuration script,  `build/public/static/tenant-config/<host>/production.js`, for each tenant.  The script is loaded by `build/public/static/index.html` for a request host (see `Ansible-Deployments/roles/ui_tier/templates/web_proxy.conf.j2` for more details).  The script sets a global variable, `window.SP.productionConfig`, that is merged in the `src/config` module.
+Our build process generates all tenant configs and includes in the bundle. At runtime, corresponding tenant config is used based on hostname.  
+
+For local development, a conditional script element is used in index.html. It loads config from public/static/tenant-config/production.js and exposes a global variable called SP.productionConfig. At runtime, if is used if exist. See `src/config/index.js` for implementation. 
 
 
 ## Configuration
