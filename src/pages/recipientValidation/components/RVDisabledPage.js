@@ -11,9 +11,10 @@ export class RVDisabledPage extends Component {
       <EmptyState
         title="Recipient Validation"
         image={Generic}
-        primaryAction={{ content: 'Request Access', to: LINKS.RECIPIENT_VALIDATION_ACCESS }}
+        primaryAction={{ content: 'Request Access', to: LINKS.RECIPIENT_VALIDATION_ACCESS, external: true }}
       >
-        <p>Remove email addresses that don't exist and understand your recipient quality through our new Recipient Validation API and bulk verify tool.</p>
+        <p>Protect your sender reputation by guarding against bounces, errors, and even fraud.
+          SparkPost Recipient Validation is an easy, efficient way to verify that addresses are valid before you send.</p>
       </EmptyState>
     );
   }

@@ -5,25 +5,13 @@ import { RecipientValidationPage } from '../RecipientValidationPage';
 describe('Page: Recipient Email Verification', () => {
   let wrapper;
   let instance;
-  let props;
 
   beforeEach(() => {
-    props = {
-      hasRecipientValidation: true
-    };
-    wrapper = shallow(<RecipientValidationPage {...props}/>);
+    wrapper = shallow(<RecipientValidationPage/>);
     instance = wrapper.instance();
   });
 
-  it('should render recipient validation page when enabled', () => {
-    expect(wrapper).toMatchSnapshot();
-  });
-
-  it('should render empty page when RV is not enabled', () => {
-    props = {
-      hasRecipientValidation: false
-    };
-    wrapper = shallow(<RecipientValidationPage {...props} />);
+  it('should render Recipient Validation page correctly', () => {
     expect(wrapper).toMatchSnapshot();
   });
 

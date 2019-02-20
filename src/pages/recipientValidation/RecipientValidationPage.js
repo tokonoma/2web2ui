@@ -6,7 +6,7 @@ import SingleAddressForm from './components/SingleAddressForm';
 import ListResults from './components/ListResults';
 import { hasUiOption } from 'src/helpers/conditions/account';
 import RVDisabledPage from './components/RVDisabledPage';
-import { connect } from 'react-redux';
+import ConditionSwitch, { Case, defaultCase } from 'src/components/auth/ConditionSwitch';
 
 const tabs = [
   { content: 'Validate A List' },
@@ -22,11 +22,7 @@ export class RecipientValidationPage extends Component {
     this.setState({ selectedTab: tabIdx });
   }
 
-  render() {
-
-    if (!this.props.hasRecipientValidation) {
-      return <RVDisabledPage/>;
-    }
+  renderRecipientValidation = () => {
 
     const { selectedTab } = this.state;
 
@@ -39,17 +35,26 @@ export class RecipientValidationPage extends Component {
           tabs={tabs.map(({ content }, idx) => ({ content, onClick: () => this.handleTabs(idx) }))}
         />
         <Panel>
-          {selectedTab === 1 ? <SingleAddressForm /> : <ListForm />}
+          {selectedTab === 1 ? <SingleAddressForm/> : <ListForm/>}
         </Panel>
-        {selectedTab === 0 && <ListResults />}
+        {selectedTab === 0 && <ListResults/>}
       </Page>
+    );
+  }
+  render() {
+
+    return (
+      <ConditionSwitch>
+        <Case condition={hasUiOption('recipient_validation')}>
+          {this.renderRecipientValidation()}
+        </Case>
+        <Case condition={defaultCase}>
+          <RVDisabledPage/>
+        </Case>
+      </ConditionSwitch>
     );
   }
 }
 
-const mapStateToProps = (state) => ({
-  hasRecipientValidation: hasUiOption('recipient_validation')(state)
-});
-
-export default connect(mapStateToProps)(RecipientValidationPage);
+export default RecipientValidationPage;
 
