@@ -10,11 +10,8 @@ export const EditForm = ({
   user,
   currentUser,
   isAccountSingleSignOnEnabled,
-  submitting,
-  subaccount
+  submitting
 }) => {
-
-  const isSubaccountReporting = user.access === 'subaccount_reporting';
 
   const ssoHelpText = isAccountSingleSignOnEnabled
     ? <span>Enabling single sign-on will delete this user's password. If they switch back to password-based authentication, they'll need to reset their password on login.</span>
@@ -22,18 +19,14 @@ export const EditForm = ({
 
   return <Panel>
     <form onSubmit={onSubmit}>
-      {!isSubaccountReporting && (<Panel.Section>
+      <Panel.Section>
         <Field
           name="access"
-          disabled={user.isCurrentUser}
+          disabled={user.isCurrentUser || user.access === 'subaccount_reporting'}
           allowSuperUser={currentUser.access === 'superuser'}
           component={RoleRadioGroup}
         />
-      </Panel.Section>)}
-      {isSubaccountReporting && (<Panel.Section>
-        Subaccount Name: {subaccount.name}
-        Subaccount ID: {subaccount.id}
-      </Panel.Section>)}
+      </Panel.Section>
       <Panel.Section>
         <Field
           component={CheckboxWrapper}

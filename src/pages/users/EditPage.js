@@ -6,6 +6,7 @@ import DeleteModal from 'src/components/modals/DeleteModal';
 import ConfirmationModal from 'src/components/modals/ConfirmationModal';
 import { Loading } from 'src/components/loading/Loading';
 import EditForm from './components/EditForm';
+import SubaccountPanel from './components/SubaccountPanel';
 
 const breadcrumbAction = {
   content: 'Users',
@@ -46,11 +47,6 @@ export class EditPage extends Component {
   };
 
   componentDidMount() {
-
-    if (this.props.user.access === 'subaccount_reporting') {
-      this.props.getSubaccount(this.props.user.subaccount_id);
-    }
-
     if (_.isEmpty(this.props.accountSingleSignOn)) {
       this.props.getAccountSingleSignOnDetails();
     }
@@ -61,11 +57,19 @@ export class EditPage extends Component {
     }
   }
 
+  componentDidUpdate() {
+    const { user, subaccount, getSubaccount } = this.props;
+    if (user && user.access === 'subaccount_reporting' && (!subaccount || subaccount.id !== user.subaccount_id)) {
+      getSubaccount(user.subaccount_id);
+    }
+  }
+
   render() {
     const {
       currentUser,
       handleSubmit,
       isAccountSingleSignOnEnabled,
+      loading,
       loadingError,
       subaccount,
       submitting,
@@ -73,6 +77,10 @@ export class EditPage extends Component {
       user,
       users
     } = this.props;
+
+    if (loading) {
+      return <Loading />;
+    }
 
     if (loadingError) {
       return <Redirect to="/account/users" />;
@@ -115,8 +123,9 @@ export class EditPage extends Component {
           currentUser={currentUser}
           isAccountSingleSignOnEnabled={isAccountSingleSignOnEnabled}
           submitting={submitting}
-          subaccount={subaccount}
         />
+
+        {user.access === 'subaccount_reporting' && <SubaccountPanel subaccount={subaccount} />}
 
         <DeleteModal
           onDelete={this.deleteUser}
