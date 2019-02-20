@@ -9,8 +9,9 @@ import PageLink from 'src/components/pageLink/PageLink';
 
 import * as usersActions from 'src/actions/users';
 import { selectUsers } from 'src/selectors/users';
+import { hasSubaccounts } from 'src/selectors/subaccounts';
 
-import { Loading, ApiErrorBanner, DeleteModal, TableCollection, ActionPopover } from 'src/components';
+import { SubaccountTag, Loading, ApiErrorBanner, DeleteModal, TableCollection, ActionPopover } from 'src/components';
 import User from './components/User';
 
 const COLUMNS = [
@@ -18,8 +19,17 @@ const COLUMNS = [
   { label: 'Role', sortKey: 'access' },
   { label: 'Two Factor Auth', sortKey: 'tfa_enabled' },
   { label: 'Last Login', sortKey: 'last_login' },
-  { label: 'Subaccount', sortKey: 'subaccount' },
   null
+];
+
+const COLUMN_SUBS = [
+  { label: 'User', sortKey: 'name' },
+  { label: 'Role', sortKey: 'access' },
+  { label: 'Two Factor Auth', sortKey: 'tfa_enabled' },
+  { label: 'Last Login', sortKey: 'last_login' },
+  { label: 'Subaccount', sortKey: 'subaccount_id' },
+  null
+
 ];
 
 export const Actions = ({ username, deletable, onDelete }) => {
@@ -55,7 +65,7 @@ export class ListPage extends Component {
     user.access,
     user.tfa_enabled ? <Tag color={'blue'}>Enabled</Tag> : <Tag>Disabled</Tag>,
     user.last_login ? <TimeAgo date={user.last_login} live={false} /> : 'Never',
-    user.subaccount_id ? <p>{user.subaccount_id}</p> : <p>null</p>,
+    user.subaccount_id ? <SubaccountTag id={user.subaccount_id} /> : <p>null</p>,
     <Actions username={user.username} deletable={!user.isCurrentUser} onDelete={this.handleDeleteRequest} />
   ];
 
@@ -107,7 +117,7 @@ export class ListPage extends Component {
     return (
       <div>
         <TableCollection
-          columns={COLUMNS}
+          columns={this.props.hasSubaccounts ? COLUMN_SUBS : COLUMNS}
           getRowData={this.getRowData}
           pagination={true}
           rows={this.props.users}
@@ -156,7 +166,8 @@ const mapStateToProps = (state) => ({
   currentUser: state.currentUser,
   error: state.users.error,
   loading: state.users.loading,
-  users: selectUsers(state)
+  users: selectUsers(state),
+  hasSubaccounts: hasSubaccounts(state)
 });
 
 export default connect(mapStateToProps, usersActions)(ListPage);
