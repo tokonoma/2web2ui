@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import _ from 'lodash';
 import { updateUser, listUsers, deleteUser } from 'src/actions/users';
+import { getSubaccount } from 'src/actions/subaccounts';
 import { getAccountSingleSignOnDetails } from 'src/actions/accountSingleSignOn';
 import { selectUserById } from 'src/selectors/users';
 import { FORMS } from 'src/constants';
@@ -16,6 +17,7 @@ const mapStateToProps = (state, props) => {
     currentUser: state.currentUser,
     isAccountSingleSignOnEnabled: state.accountSingleSignOn.enabled,
     loadingError: state.users.error,
+    subaccount: state.subaccounts.subaccount,
     user,
     users: state.users.entities,
     updatePending: state.users.updatePending,
@@ -27,7 +29,7 @@ const mapStateToProps = (state, props) => {
   };
 };
 
-const mapDispatchToProps = { updateUser, listUsers, deleteUser, getAccountSingleSignOnDetails };
+const mapDispatchToProps = { updateUser, listUsers, deleteUser, getAccountSingleSignOnDetails, getSubaccount };
 const formOptions = { form: FORMS.EDIT_USER, enableReinitialize: true };
 
 export default connect(

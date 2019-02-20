@@ -46,6 +46,11 @@ export class EditPage extends Component {
   };
 
   componentDidMount() {
+
+    if (this.props.user.access === 'subaccount_reporting') {
+      this.props.getSubaccount(this.props.user.subaccount_id);
+    }
+
     if (_.isEmpty(this.props.accountSingleSignOn)) {
       this.props.getAccountSingleSignOnDetails();
     }
@@ -62,6 +67,7 @@ export class EditPage extends Component {
       handleSubmit,
       isAccountSingleSignOnEnabled,
       loadingError,
+      subaccount,
       submitting,
       updatePending,
       user,
@@ -109,6 +115,7 @@ export class EditPage extends Component {
           currentUser={currentUser}
           isAccountSingleSignOnEnabled={isAccountSingleSignOnEnabled}
           submitting={submitting}
+          subaccount={subaccount}
         />
 
         <DeleteModal
