@@ -23,6 +23,7 @@ describe('Signals Engagement Recency Details Container', () => {
         relativeRange: '14days'
       },
       getEngagementRecency: jest.fn(),
+      selected: '2015-01-01',
       subaccountId: '101'
     };
 
