@@ -23,7 +23,7 @@ export const EditForm = ({
 
   const roleSection = subaccountReportingUser
     ? (<>
-        <p> This is a subaccount reporting user. Its role cannot be changed. </p>
+        <p> This user is assigned to a subaccount. Its role can’t be changed </p>
         <LabelledValue label="Subaccount name">
           <PageLink to={`/account/subaccounts/${subaccount.id}`}>{subaccount.name}</PageLink>
         </LabelledValue>
