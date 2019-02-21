@@ -457,7 +457,7 @@ exports[`PoolForm tests should render row properly 1`] = `
 Array [
   "ext-ip",
   "host",
-  <ForwardRef
+  <Field
     component={[Function]}
     disabled={false}
     name="1_1_1_1"
