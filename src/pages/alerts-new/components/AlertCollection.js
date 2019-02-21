@@ -9,9 +9,9 @@ import _ from 'lodash';
 
 const filterBoxConfig = {
   show: true,
-  itemToStringKeys: ['name', 'id', 'enabled', 'metric'],
   exampleModifiers: ['enabled', 'metric'],
-  keymap: { alert_metric: 'metric', status: 'enabled' }
+  itemToStringKeys: ['name', 'id', 'enabled', 'metric'],
+  keyMap: { metric: 'alert_metric', status: 'enabled' }
 };
 
 class AlertCollection extends Component {

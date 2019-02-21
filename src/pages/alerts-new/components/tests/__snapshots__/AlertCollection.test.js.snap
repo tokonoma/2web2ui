@@ -14,7 +14,7 @@ exports[`TestCollection Component should render 1`] = `
         "sortKey": "alert_metric",
       },
       Object {
-        "label": "Enabled",
+        "label": "Status",
         "sortKey": "enabled",
       },
       null,
@@ -26,14 +26,18 @@ exports[`TestCollection Component should render 1`] = `
     Object {
       "exampleModifiers": Array [
         "enabled",
-        "alert_metric",
+        "metric",
       ],
       "itemToStringKeys": Array [
         "name",
         "id",
         "enabled",
-        "alert_metric",
+        "metric",
       ],
+      "keyMap": Object {
+        "metric": "alert_metric",
+        "status": "enabled",
+      },
       "show": true,
     }
   }
