@@ -6,7 +6,6 @@ import DeleteModal from 'src/components/modals/DeleteModal';
 import ConfirmationModal from 'src/components/modals/ConfirmationModal';
 import { Loading } from 'src/components/loading/Loading';
 import EditForm from './components/EditForm';
-import SubaccountPanel from './components/SubaccountPanel';
 
 const breadcrumbAction = {
   content: 'Users',
@@ -123,10 +122,8 @@ export class EditPage extends Component {
           currentUser={currentUser}
           isAccountSingleSignOnEnabled={isAccountSingleSignOnEnabled}
           submitting={submitting}
+          subaccount={subaccount}
         />
-
-        {user.access === 'subaccount_reporting' && <SubaccountPanel subaccount={subaccount} />}
-
         <DeleteModal
           onDelete={this.deleteUser}
           onCancel={this.toggleDelete}

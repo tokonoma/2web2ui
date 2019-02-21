@@ -156,10 +156,6 @@ describe('Page: Users Edit', () => {
     expect(actions[0].content).not.toContain('Disable');
   });
 
-  it('should show the subaccount panel for a subaccount_reporting user', () => {
-    expect(shallow(<EditPage {...props} subaccount={'aSubaccount'} user={{ ...props.user, access: 'subaccount_reporting' }} />)).toMatchSnapshot();
-  });
-
   it('should show a loading screen loading if the page is loading', () => {
     expect(shallow(<EditPage {...props} loading={true} />)).toMatchSnapshot();
   });

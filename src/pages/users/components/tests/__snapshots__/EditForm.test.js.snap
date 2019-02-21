@@ -7,7 +7,6 @@ exports[`Component: EditForm should disable single sign-on checkbox and display 
       <Field
         allowSuperUser={false}
         component={[Function]}
-        disabled={false}
         name="access"
       />
     </Panel.Section>
@@ -44,14 +43,13 @@ exports[`Component: EditForm should disable single sign-on checkbox and display 
 </Panel>
 `;
 
-exports[`Component: EditForm should disable the role selector for subaccount_reporting users 1`] = `
+exports[`Component: EditForm should render 1`] = `
 <Panel>
   <form>
     <Panel.Section>
       <Field
         allowSuperUser={false}
         component={[Function]}
-        disabled={true}
         name="access"
       />
     </Panel.Section>
@@ -82,16 +80,27 @@ exports[`Component: EditForm should disable the role selector for subaccount_rep
 </Panel>
 `;
 
-exports[`Component: EditForm should render 1`] = `
+exports[`Component: EditForm should show subaccount info instead of the role selector for subaccount_reporting users 1`] = `
 <Panel>
   <form>
     <Panel.Section>
-      <Field
-        allowSuperUser={false}
-        component={[Function]}
-        disabled={false}
-        name="access"
-      />
+      <p>
+         This is a subaccount reporting user. Its role cannot be changed. 
+      </p>
+      <LabelledValue
+        label="Subaccount name"
+      >
+        <PageLink
+          to="/account/subaccounts/23"
+        >
+          aSubaccount
+        </PageLink>
+      </LabelledValue>
+      <LabelledValue
+        label="Subaccount ID"
+      >
+        23
+      </LabelledValue>
     </Panel.Section>
     <Panel.Section>
       <Field
