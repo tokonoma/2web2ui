@@ -9,8 +9,9 @@ import _ from 'lodash';
 
 const filterBoxConfig = {
   show: true,
-  itemToStringKeys: ['name', 'id', 'enabled', 'alert_metric'],
-  exampleModifiers: ['enabled', 'alert_metric']
+  itemToStringKeys: ['name', 'id', 'enabled', 'metric'],
+  exampleModifiers: ['enabled', 'metric'],
+  keymap: { alert_metric: 'metric', status: 'enabled' }
 };
 
 class AlertCollection extends Component {
@@ -20,7 +21,7 @@ class AlertCollection extends Component {
     const columns = [
       { label: 'Name', sortKey: 'name', width: '25%' },
       { label: 'Metric', sortKey: 'alert_metric' },
-      { label: 'Enabled', sortKey: 'enabled' },
+      { label: 'Status', sortKey: 'enabled' },
       null
     ];
 
@@ -46,7 +47,7 @@ class AlertCollection extends Component {
       <Fragment>
         <PageLink to={this.getDetailsLink({ id, subaccount_id })}>{name}</PageLink>
       </Fragment>,
-      <Tag>{_.get(METRICS, `${alert_metric}.label`, alert_metric)}</Tag>,
+      <Tag>{_.get(METRICS, alert_metric, alert_metric)}</Tag>,
       <Tag color={enabled ? 'blue' : null}>
         {enabled ? 'Enabled' : 'Disabled'}
       </Tag>,
