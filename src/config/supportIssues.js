@@ -3,7 +3,6 @@ import { hasOnlineSupport, hasStatus, hasStatusReasonCategory, isSuspendedForBil
 import { isEmailVerified } from 'src/helpers/conditions/user';
 import { all, not, any } from 'src/helpers/conditions';
 import { isAdmin } from 'src/helpers/conditions/user';
-import hasGrants from 'src/helpers/conditions/hasGrants';
 
 // types of support issues
 // @note These values must be configured in Desk before being used and they are case-sensitive
@@ -14,7 +13,7 @@ const LIMITS = 'DailyLimits';
 const SUPPORT = 'Support';
 
 const defaultMessageLabel = 'Tell us more about your issue';
-const defaultCondition = all(hasOnlineSupport, hasStatus('active'), hasGrants('support/manage'));
+const defaultCondition = all(hasOnlineSupport, hasStatus('active'));
 
 /**
  * @example
@@ -85,8 +84,7 @@ const supportIssues = [
     type: BILLING,
     condition: all(
       isAdmin,
-      any(isSuspendedForBilling, hasStatus('active')),
-      hasGrants('support/manage')
+      any(isSuspendedForBilling, hasStatus('active'))
     )
   },
   {
@@ -96,8 +94,7 @@ const supportIssues = [
     type: COMPLIANCE,
     condition: all(
       hasStatus('suspended'),
-      not(hasStatusReasonCategory('100.01')),
-      hasGrants('support/manage')
+      not(hasStatusReasonCategory('100.01'))
     )
   },
   {
@@ -110,8 +107,7 @@ const supportIssues = [
       isAdmin,
       isEmailVerified,
       hasStatus('active'),
-      not(onPlanWithStatus('deprecated')),
-      hasGrants('support/manage')
+      not(onPlanWithStatus('deprecated'))
     )
   },
   {
@@ -119,7 +115,7 @@ const supportIssues = [
     label: 'Account cancellation',
     messageLabel: 'Tell us why you are leaving',
     type: BILLING,
-    condition: all(isAdmin, hasGrants('support/manage'))
+    condition: isAdmin
   },
   {
     id: 'general_issue',
