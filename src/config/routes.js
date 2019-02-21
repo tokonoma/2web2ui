@@ -683,8 +683,7 @@ const routes = [
   {
     path: '/alerts-new', // TODO Replace with '/alerts'
     component: alerts.ListPage,
-    condition: hasUiOption('feature_alerts'),
-    // condition: all(hasGrants('alerts/manage'), hasUiOption('feature_alerts')),
+    condition: all(hasGrants('alerts/manage'), hasUiOption('feature_alerts')),
     layout: App,
     title: 'Alerts',
     supportDocsSearch: 'Alerts'
@@ -692,8 +691,7 @@ const routes = [
   {
     path: '/alerts-new/edit/:id', // TODO Replace with '/alerts'
     component: alerts.EditPage,
-    condition: hasUiOption('feature_alerts'),
-    // condition: all(hasGrants('alerts/manage'), hasUiOption('feature_alerts')),
+    condition: all(hasGrants('alerts/manage'), hasUiOption('feature_alerts')),
     layout: App,
     title: 'Alerts',
     supportDocsSearch: 'Alerts'
