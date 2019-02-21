@@ -85,21 +85,19 @@ exports[`Component: EditForm should show subaccount info instead of the role sel
   <form>
     <Panel.Section>
       <p>
-         This user is assigned to a subaccount. Its role can’t be changed 
+         This user has access to reporting features and read-only template access, limited to a single subaccount. Its role can’t be changed. 
       </p>
       <LabelledValue
-        label="Subaccount name"
+        label="Subaccount"
       >
         <PageLink
           to="/account/subaccounts/23"
         >
           aSubaccount
         </PageLink>
-      </LabelledValue>
-      <LabelledValue
-        label="Subaccount ID"
-      >
+         (
         23
+        )
       </LabelledValue>
     </Panel.Section>
     <Panel.Section>
