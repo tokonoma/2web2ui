@@ -16,7 +16,7 @@ describe('Page: Users List', () => {
       },
       loading: false,
       listUsers: jest.fn(),
-      hasSubaccounts: true,
+      hasSubaccounts: false,
       users: [
         { name: 'Test User 1', username: 'test-user-1', access: 'admin', email: 'user1@test.com', tfa_enabled: false },
         { name: 'Test User 2', username: 'test-user-2', access: 'admin', email: 'user2@test.com', tfa_enabled: true },
@@ -71,6 +71,14 @@ describe('Page: Users List', () => {
     const timeAgoProps = wrapper.find(TimeAgo).props();
     expect(timeAgoProps.date).toBeInstanceOf(Date);
     expect(timeAgoProps.live).toEqual(false);
+  });
+
+  // This assumes `hasSubaccounts=false` in the wrapper as a precondition
+  it('should render subaccount info when the account uses them', () => {
+    wrapper.setProps({ hasSubaccounts: true });
+    expect(wrapper.find('TableCollection').prop('columns')).toContainEqual(expect.objectContaining({
+      label: 'Subaccount'
+    }));
   });
 
   it('should render ActionPopover', () => {

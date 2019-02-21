@@ -64,10 +64,6 @@ exports[`Page: Users List should render correctly by default 1`] = `
             "label": "Last Login",
             "sortKey": "last_login",
           },
-          Object {
-            "label": "Subaccount",
-            "sortKey": "subaccount_id",
-          },
           null,
         ]
       }
@@ -230,10 +226,6 @@ exports[`Page: Users List should show a delete modal 1`] = `
             "label": "Last Login",
             "sortKey": "last_login",
           },
-          Object {
-            "label": "Subaccount",
-            "sortKey": "subaccount_id",
-          },
           null,
         ]
       }
@@ -319,9 +311,6 @@ Array [
     Disabled
   </Tag>,
   "Never",
-  <p>
-    null
-  </p>,
   <Actions
     deletable={true}
     onDelete={[Function]}

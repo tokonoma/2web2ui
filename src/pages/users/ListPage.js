@@ -6,6 +6,7 @@ import { Page, Tag } from '@sparkpost/matchbox';
 import TimeAgo from 'react-timeago';
 import { Users } from 'src/components/images';
 import PageLink from 'src/components/pageLink/PageLink';
+import { SUBACCOUNT_REPORTING_ROLE } from 'src/constants';
 
 import * as usersActions from 'src/actions/users';
 import { selectUsers } from 'src/selectors/users';
@@ -15,21 +16,11 @@ import { SubaccountTag, Loading, ApiErrorBanner, DeleteModal, TableCollection, A
 import User from './components/User';
 
 const COLUMNS = [
-  { label: 'User', sortKey: 'name' },
-  { label: 'Role', sortKey: 'access' },
-  { label: 'Two Factor Auth', sortKey: 'tfa_enabled' },
-  { label: 'Last Login', sortKey: 'last_login' },
+  { label: 'User', sortKey: 'name', width: '40%' },
+  { label: 'Role', sortKey: 'access', width: '11%' },
+  { label: 'Two Factor Auth', sortKey: 'tfa_enabled', width: '15%' },
+  { label: 'Last Login', sortKey: 'last_login', width: '8%' },
   null
-];
-
-const COLUMN_SUBS = [
-  { label: 'User', sortKey: 'name' },
-  { label: 'Role', sortKey: 'access' },
-  { label: 'Two Factor Auth', sortKey: 'tfa_enabled' },
-  { label: 'Last Login', sortKey: 'last_login' },
-  { label: 'Subaccount', sortKey: 'subaccount_id' },
-  null
-
 ];
 
 export const Actions = ({ username, deletable, onDelete }) => {
@@ -59,15 +50,27 @@ export class ListPage extends Component {
     this.props.listUsers();
   }
 
+  formatRole(role) {
+    if (role === SUBACCOUNT_REPORTING_ROLE) {
+      return 'reporting';
+    }
+    return role;
+  }
+
   // Do not allow current user to change their access/role or delete their account
-  getRowData = (user) => [
-    <User name={user.name} email={user.email} username={user.username} />,
-    user.access,
-    user.tfa_enabled ? <Tag color={'blue'}>Enabled</Tag> : <Tag>Disabled</Tag>,
-    user.last_login ? <TimeAgo date={user.last_login} live={false} /> : 'Never',
-    user.subaccount_id ? <SubaccountTag id={user.subaccount_id} /> : <p>null</p>,
-    <Actions username={user.username} deletable={!user.isCurrentUser} onDelete={this.handleDeleteRequest} />
-  ];
+  getRowData = (user) => {
+    const data = [
+      <User name={user.name} email={user.email} username={user.username} />,
+      this.formatRole(user.access),
+      user.tfa_enabled ? <Tag color={'blue'}>Enabled</Tag> : <Tag>Disabled</Tag>,
+      user.last_login ? <TimeAgo date={user.last_login} live={false} /> : 'Never',
+      <Actions username={user.username} deletable={!user.isCurrentUser} onDelete={this.handleDeleteRequest} />
+    ];
+    if (this.props.hasSubaccounts) {
+      data.splice(2, 0, user.subaccount_id ? <SubaccountTag id={user.subaccount_id} /> : null);
+    }
+    return data;
+  };
 
   handleCancel = () => { this.setState(DEFAULT_STATE); };
 
@@ -114,10 +117,11 @@ export class ListPage extends Component {
   }
 
   renderPage() {
+    if (this.props.hasSubaccounts) { COLUMNS.splice(2, 0, { label: 'Subaccount', sortKey: 'subaccount_id', width: '14%' }); }
     return (
       <div>
         <TableCollection
-          columns={this.props.hasSubaccounts ? COLUMN_SUBS : COLUMNS}
+          columns={COLUMNS}
           getRowData={this.getRowData}
           pagination={true}
           rows={this.props.users}
