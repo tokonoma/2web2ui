@@ -23,6 +23,8 @@ const COLUMNS = [
   null
 ];
 
+const SUB_COLUMN = { label: 'Subaccount', sortKey: 'subaccount_id', width: '14%' };
+
 export const Actions = ({ username, deletable, onDelete }) => {
   const actions = [ { content: 'Edit', to: `/account/users/edit/${username}`, component: Link } ];
   if (deletable) {
@@ -66,9 +68,7 @@ export class ListPage extends Component {
       user.last_login ? <TimeAgo date={user.last_login} live={false} /> : 'Never',
       <Actions username={user.username} deletable={!user.isCurrentUser} onDelete={this.handleDeleteRequest} />
     ];
-    if (this.props.hasSubaccounts) {
-      data.splice(2, 0, user.subaccount_id ? <SubaccountTag id={user.subaccount_id} /> : null);
-    }
+    if (this.props.hasSubaccounts) { data.splice(2, 0, user.subaccount_id ? <SubaccountTag id={user.subaccount_id} /> : null); }
     return data;
   };
 
@@ -117,7 +117,7 @@ export class ListPage extends Component {
   }
 
   renderPage() {
-    if (this.props.hasSubaccounts) { COLUMNS.splice(2, 0, { label: 'Subaccount', sortKey: 'subaccount_id', width: '14%' }); }
+    if (this.props.hasSubaccounts) { COLUMNS.splice(2, 0, SUB_COLUMN); }
     return (
       <div>
         <TableCollection
