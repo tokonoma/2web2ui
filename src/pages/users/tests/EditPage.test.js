@@ -15,6 +15,7 @@ describe('Page: Users Edit', () => {
       listUsers: jest.fn(),
       deleteUser: jest.fn(() => Promise.resolve()),
       getAccountSingleSignOnDetails: jest.fn(),
+      getSubaccount: jest.fn(),
       updateUser: jest.fn(() => Promise.resolve()),
       history: {
         push: jest.fn()
@@ -41,6 +42,12 @@ describe('Page: Users Edit', () => {
 
   it('should get account single sign-on details on mount', () => {
     expect(props.getAccountSingleSignOnDetails).toHaveBeenCalled();
+  });
+
+  it('should not get SSO details if they are already there', () => {
+    props.getAccountSingleSignOnDetails.mockClear();
+    shallow(<EditPage {...props} accountSingleSignOn={'ssoStuff'} />);
+    expect(props.getAccountSingleSignOnDetails).toHaveBeenCalledTimes(0);
   });
 
   it('should not get list of users on mount if already loaded', () => {
@@ -137,10 +144,34 @@ describe('Page: Users Edit', () => {
     expect(props.updateUser.mock.calls[0][1]).toMatchObject({ tfa_enabled: false });
   });
 
+  it('should say it is disabling tfa', () => {
+    wrapper.setProps({ updatePending: true });
+    expect(wrapper.find(ConfirmationModal).first().prop('confirmVerb')).toEqual('Disabling');
+  });
+
   it('should allow TFA disabling when mandatory', () => {
     wrapper.setProps({ tfaRequired: true });
     const actions = wrapper.find('Page').props().secondaryActions;
     expect(actions).toHaveLength(1);
     expect(actions[0].content).not.toContain('Disable');
   });
+
+  it('should show the subaccount panel for a subaccount_reporting user', () => {
+    expect(shallow(<EditPage {...props} subaccount={'aSubaccount'} user={{ ...props.user, access: 'subaccount_reporting' }} />)).toMatchSnapshot();
+  });
+
+  it('should show a loading screen loading if the page is loading', () => {
+    expect(shallow(<EditPage {...props} loading={true} />)).toMatchSnapshot();
+  });
+
+  it('should get a subaccount for a subaccount reporting user', () => {
+    wrapper.setProps({ user: { ...props.user, access: 'subaccount_reporting', subaccount_id: 17 }});
+    expect(props.getSubaccount).toHaveBeenCalledWith(17);
+  });
+
+  it('should get the right subaccount if the wrong subaccount is in the props', () => {
+    wrapper.setProps({ user: { ...props.user, access: 'subaccount_reporting', subaccount_id: 17 }, subaccount: { id: 19 }});
+    expect(props.getSubaccount).toHaveBeenCalledWith(17);
+  });
+
 });

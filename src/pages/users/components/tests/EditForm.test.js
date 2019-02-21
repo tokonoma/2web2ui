@@ -22,6 +22,10 @@ describe('Component: EditForm', () => {
     expect(subject({ isAccountSingleSignOnEnabled: false })).toMatchSnapshot();
   });
 
+  it('should disable the role selector for subaccount_reporting users', () => {
+    expect(subject({ user: { access: 'subaccount_reporting', email: 'test-user@test.com', name: 'test-user' }})).toMatchSnapshot();
+  });
+
   it('should call submit handler', () => {
     const onSubmit = jest.fn();
     subject({ onSubmit }).find('form').first().simulate('submit');
