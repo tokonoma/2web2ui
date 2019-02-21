@@ -1,17 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { deleteAlert, listAlerts } from 'src/actions/alerts';
+import { listAlerts, updateAlert } from 'src/actions/alerts';
 
-function withAlertsList(WrappedComponent) {
-  const mapDispatchToProps = { deleteAlert, listAlerts };
+function withEditPage(WrappedComponent) {
+  const mapDispatchToProps = { listAlerts, updateAlert };
 
   const mapStateToProps = (state, props) => ({
-    list: state.alerts.list,
-    error: state.alerts.listError
+    // alert: state.alerts.list
   });
 
   return withRouter(connect(mapStateToProps, mapDispatchToProps)(WrappedComponent));
 }
 
-export default withAlertsList;
+export default withEditPage;
