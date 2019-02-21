@@ -51,18 +51,22 @@ exports[`Page: Users List should render correctly by default 1`] = `
           Object {
             "label": "User",
             "sortKey": "name",
+            "width": "40%",
           },
           Object {
             "label": "Role",
             "sortKey": "access",
+            "width": "11%",
           },
           Object {
             "label": "Two Factor Auth",
             "sortKey": "tfa_enabled",
+            "width": "15%",
           },
           Object {
             "label": "Last Login",
             "sortKey": "last_login",
+            "width": "8%",
           },
           null,
         ]
@@ -213,18 +217,27 @@ exports[`Page: Users List should show a delete modal 1`] = `
           Object {
             "label": "User",
             "sortKey": "name",
+            "width": "40%",
           },
           Object {
             "label": "Role",
             "sortKey": "access",
+            "width": "11%",
+          },
+          Object {
+            "label": "Subaccount",
+            "sortKey": "subaccount_id",
+            "width": "14%",
           },
           Object {
             "label": "Two Factor Auth",
             "sortKey": "tfa_enabled",
+            "width": "15%",
           },
           Object {
             "label": "Last Login",
             "sortKey": "last_login",
+            "width": "8%",
           },
           null,
         ]
