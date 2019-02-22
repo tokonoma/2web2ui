@@ -1,17 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Component: SetupSending disables the verification button while submitting 1`] = `
-Array [
-  Object {
-    "color": "orange",
-    "content": "Verifying...",
-    "disabled": true,
-    "id": "verify-dkim",
-    "onClick": [Function],
-  },
-]
-`;
-
 exports[`Component: SetupSending renders correctly for unverified DKIM and invalid ownership with mailbox verification disabled 1`] = `
 <SendingDomainSection
   title="Set Up For Sending"
