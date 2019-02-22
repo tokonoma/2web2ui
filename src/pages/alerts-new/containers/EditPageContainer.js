@@ -1,29 +1,15 @@
-import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { updateAlert } from 'src/actions/alerts';
+import { getAlert, updateAlert } from 'src/actions/alerts';
 
-export class EditPageContainer extends Component {
-  render() {
-    const { component: Component } = this.props;
-
-    //this.props.updateAlert('123', {'foo': 'bar'});
-    return <Component />;
-  }
-}
-
-function withAlertsEdit(WrappedComponent) {
-  const Wrapper = (props) => (
-    <EditPageContainer {...props} component={WrappedComponent} />
-  );
-
-  Wrapper.displayName = `withAlertsEdit(${WrappedComponent.displayName || WrappedComponent.name || 'Component'})`;
+function withEditPage(WrappedComponent) {
+  const mapDispatchToProps = { getAlert, updateAlert };
 
   const mapStateToProps = (state, props) => ({
-    edit: state.alerts.edit
+    alert: state.alert.payload
   });
 
-  return withRouter(connect(mapStateToProps, { updateAlert })(Wrapper));
+  return withRouter(connect(mapStateToProps, mapDispatchToProps)(WrappedComponent));
 }
 
-export default withAlertsEdit;
+export default withEditPage;
