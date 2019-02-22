@@ -1,5 +1,4 @@
-window.SP = window.SP || {};
-window.SP.productionConfig = {
+export default {
   apiBase: 'http://api.sparkpost.test/api',
   authentication: {
     site: {
