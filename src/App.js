@@ -17,8 +17,12 @@ import {
   Switch
 } from 'react-router-dom';
 
+const reloadApp = () => {
+  window.location.reload(true);
+};
+
 const App = () => (
-  <ErrorBoundary>
+  <ErrorBoundary onCtaClick={reloadApp} ctaLabel='Reload Page'>
     <Poll>
       <Router>
         <div>

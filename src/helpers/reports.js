@@ -47,16 +47,20 @@ export function parseSearch(search) {
     options.metrics = (typeof metrics === 'string') ? [metrics] : metrics;
   }
 
-  if (from) {
-    options.from = new Date(from);
+  const fromTime = new Date(from);
+  const toTime = new Date(to);
+
+  if (from && !isNaN(fromTime)) {
+    options.from = fromTime;
   }
 
-  if (to) {
-    options.to = new Date(to);
+  if (to && !isNaN(toTime)) {
+    options.to = toTime;
   }
 
   if (range) {
-    options = { ...options, ...getRelativeDates(range) };
+    const effectiveRange = options.from && options.to ? range : 'day';
+    options = { ...options, ...getRelativeDates(effectiveRange) };
   }
 
   // filters are used in pages to dispatch updates to Redux store
