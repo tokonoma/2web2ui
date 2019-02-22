@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -16,14 +17,21 @@ import { SubaccountTag, Loading, ApiErrorBanner, DeleteModal, TableCollection, A
 import User from './components/User';
 
 const COLUMNS = [
+  { label: 'User', sortKey: 'name' },
+  { label: 'Role', sortKey: 'access' },
+  { label: 'Two Factor Auth', sortKey: 'tfa_enabled' },
+  { label: 'Last Login', sortKey: 'last_login' },
+  null
+];
+
+const SUB_COLUMN = [
   { label: 'User', sortKey: 'name', width: '40%' },
   { label: 'Role', sortKey: 'access', width: '11%' },
+  { label: 'Subaccount', sortKey: 'subaccount_id', width: '14%' },
   { label: 'Two Factor Auth', sortKey: 'tfa_enabled', width: '15%' },
   { label: 'Last Login', sortKey: 'last_login', width: '8%' },
   null
 ];
-
-const SUB_COLUMN = { label: 'Subaccount', sortKey: 'subaccount_id', width: '14%' };
 
 export const Actions = ({ username, deletable, onDelete }) => {
   const actions = [ { content: 'Edit', to: `/account/users/edit/${username}`, component: Link } ];
@@ -117,11 +125,10 @@ export class ListPage extends Component {
   }
 
   renderPage() {
-    if (this.props.hasSubaccounts) { COLUMNS.splice(2, 0, SUB_COLUMN); }
     return (
       <div>
         <TableCollection
-          columns={COLUMNS}
+          columns={this.props.hasSubaccounts ? SUB_COLUMN : COLUMNS}
           getRowData={this.getRowData}
           pagination={true}
           rows={this.props.users}
