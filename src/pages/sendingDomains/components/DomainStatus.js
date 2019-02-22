@@ -9,7 +9,7 @@ import StatusDescription from './StatusDescription';
 import ShareWithSubaccounts from './ShareWithSubaccounts';
 import { SendingDomainSection } from './SendingDomainSection';
 
-export const DomainStatus = ({ domain, onShareDomainChange }) => {
+export const DomainStatus = ({ domain, hasAutoVerifyEnabled, onShareDomainChange }) => {
   const status = resolveStatus(domain.status);
   const readyFor = resolveReadyFor(domain.status);
 
@@ -22,8 +22,10 @@ export const DomainStatus = ({ domain, onShareDomainChange }) => {
         <Panel>
           <StatusDescription
             domain={domain}
+            hasAutoVerifyEnabled={hasAutoVerifyEnabled}
             readyFor={readyFor}
-            status={status} />
+            status={status}
+          />
           <ShareWithSubaccounts
             domain={domain}
             onChange={onShareDomainChange} />

@@ -9,6 +9,6 @@ describe('DomainStatus component', () => {
   it('renders correctly', () => {
     const domain = Object.assign({}, domainRecord);
     const onChange = jest.fn();
-    expect(shallow(<DomainStatus domain={domain} onShareDomainChange={onChange} />)).toMatchSnapshot();
+    expect(shallow(<DomainStatus domain={domain} hasAutoVerifyEnabled={false} onShareDomainChange={onChange} />)).toMatchSnapshot();
   });
 });

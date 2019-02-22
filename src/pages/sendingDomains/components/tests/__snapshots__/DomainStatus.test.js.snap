@@ -36,6 +36,7 @@ exports[`DomainStatus component renders correctly 1`] = `
             "subaccount_id": 100,
           }
         }
+        hasAutoVerifyEnabled={false}
         readyFor={
           Object {
             "bounce": true,

@@ -6,7 +6,8 @@ exports[`StatusDescription component Shallow tests does not render subaccount de
     <LabelledValue
       label={<StatusTooltipHeader />}
     >
-      <DomainStatusTag
+      <StatusLabel
+        isAutoVerified={false}
         status="unverified"
       />
       <div>
@@ -28,7 +29,8 @@ exports[`StatusDescription component Shallow tests renders subaccount details 1`
     <LabelledValue
       label={<StatusTooltipHeader />}
     >
-      <DomainStatusTag
+      <StatusLabel
+        isAutoVerified={false}
         status="unverified"
       />
       <div>
@@ -64,7 +66,8 @@ exports[`StatusDescription component Shallow tests renders verification status c
     <LabelledValue
       label={<StatusTooltipHeader />}
     >
-      <DomainStatusTag
+      <StatusLabel
+        isAutoVerified={false}
         status="blocked"
       />
       <div>
@@ -86,7 +89,8 @@ exports[`StatusDescription component Shallow tests renders verification status c
     <LabelledValue
       label={<StatusTooltipHeader />}
     >
-      <DomainStatusTag
+      <StatusLabel
+        isAutoVerified={false}
         status="pending"
       />
       <div>
@@ -108,7 +112,8 @@ exports[`StatusDescription component Shallow tests renders verification status c
     <LabelledValue
       label={<StatusTooltipHeader />}
     >
-      <DomainStatusTag
+      <StatusLabel
+        isAutoVerified={false}
         status="unverified"
       />
       <div>
@@ -130,13 +135,10 @@ exports[`StatusDescription component Shallow tests renders verification status c
     <LabelledValue
       label={<StatusTooltipHeader />}
     >
-      <div>
-        <VerifiedIcon />
-         
-        <strong>
-          Verified
-        </strong>
-      </div>
+      <StatusLabel
+        isAutoVerified={false}
+        status="verified"
+      />
       <div>
         <ReadyFor
           bounce={false}
