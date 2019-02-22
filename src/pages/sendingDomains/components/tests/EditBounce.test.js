@@ -129,7 +129,7 @@ describe('Component: EditBounce', () => {
   describe('verifyDomain', () => {
     it('renders loading state correctly', async () => {
       wrapper.setProps({ verifyCnameLoading: true });
-      expect(wrapper.find('Panel').props().actions).toMatchSnapshot();
+      expect(wrapper.find('SetupInstructionPanel')).toHaveProp('isVerifying', true);
     });
 
     it('verifies domain and alerts when verification successful', async () => {
