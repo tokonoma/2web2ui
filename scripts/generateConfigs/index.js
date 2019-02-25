@@ -22,7 +22,7 @@ const generateConfigs = () => {
     });
   });
 
-  return JSON.stringify(allConfigs);
+  return allConfigs;
 };
 
 module.exports = generateConfigs;
