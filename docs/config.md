@@ -6,12 +6,14 @@
 import config from 'src/config'
 ```
 
-The configuration module under `src/config/` merges variables from these locations in order:
+The configuration module under `src/config/` merges variables from these locations:
 
  - `src/config/default.js`
- - `SP.productionConfig` from the current tenant's config file for development (see below)
- - Current tenant's config from all configs that are included in the bundle
- - `src/config/test-config.js` if NODE_ENV==='test'
+ - `src/config/env/dev-config.js`  
+ - `src/config/env/prod-config.js` - Current tenant's config from all configs that are included in the bundle
+ - `src/config/env/test-config.js`
+
+`src/config/index.js` merges current tenant configuration with default config on `production` model. For `test` or `development` mode, it uses `test-config` and `dev-config` respectively and merges with defaults.    
 
 ## Default Configuration
 
@@ -22,7 +24,7 @@ Any variables you'd like to use across all environments and tenants go in `src/c
 ### Test Environment
 Test config is active during `npm run test`
 
-Put test-time values in `src/config/test-config.js`.
+Put test-time values in `src/config/env/test-config.js`.
 
 
 ## Tenant Configurations
@@ -45,9 +47,9 @@ Please note that `constructContent.js` ignores (by deconstructing) some configur
 
 ### Local Development
 
-Since there is no build, there are no tenant configuration scripts.  Therefore, `public/static/tenant-config/production.js` is used.
+Since there is no build, there are no tenant configuration scripts. In `development` mode, configuration is loaded from `src/config/env/dev-config.js`. 
 
 
 ### Manual Test
 
-To manually test generated tenant configurations, run `npm run build` and confirm the tenant configuration, `build/public/static/tenant-config/<host>/production.js`, looks as you expect.
+To manually test generated tenant configurations, run `npm run build`. To verify if correct config is loaded, you can inspect logging in `sr/config/env/prod-config.js`. 
