@@ -4,22 +4,13 @@ import { Toggle } from '@sparkpost/matchbox';
 import { setEnabledStatus } from 'src/actions/alerts';
 import { showAlert } from 'src/actions/globalAlert';
 
-class AlertToggle extends Component {
+export class AlertToggle extends Component {
   state = {
     enabled: false
   }
 
   componentDidMount() {
     this.setState({ enabled: this.props.enabled });
-  }
-
-  componentDidUpdate({ enabled: prevEnabled }) {
-    const { enabled } = this.props;
-
-    // Update checkbox value when list updates (do i need this)
-    if (enabled !== prevEnabled) {
-      this.setState({ enabled });
-    }
   }
 
   handleToggle = () => {
@@ -31,8 +22,7 @@ class AlertToggle extends Component {
     return setEnabledStatus({ id, subaccountId, enabled: !enabled }).then(() => {
       showAlert({ type: 'success', message: 'Alert updated' });
     }).catch(() => {
-      // Revert to initial value
-      this.setState({ enabled: this.props.enabled });
+      this.setState({ enabled: this.props.enabled }); // Revert to initial value
     });
   }
 
@@ -57,12 +47,3 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, { setEnabledStatus, showAlert })(AlertToggle);
-
-/* <Toggle
-  id={`alert-${id}`}
-  defaultChecked={enabled}
-  // disabled={rowUpdatePending}
-  // value={enabled ? 'checked' : null}
-  compact
-  onChange={() => handleEnabledToggle({ id, enabled, subaccountId: subaccount_id })}
-/> */

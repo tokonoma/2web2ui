@@ -25,6 +25,11 @@ describe('Action Creator: Alerts', () => {
     expect(mockStore.getActions()).toMatchSnapshot();
   });
 
+  it('should dispatch a set enabled status action', () => {
+    mockStore.dispatch(alerts.setEnabledStatus({ id: 'alert-id', enabled: false }));
+    expect(mockStore.getActions()).toMatchSnapshot();
+  });
+
   it('should dispatch a delete action', () => {
     mockStore.dispatch(alerts.deleteAlert({ id: 'alert-id' }));
     expect(mockStore.getActions()).toMatchSnapshot();
