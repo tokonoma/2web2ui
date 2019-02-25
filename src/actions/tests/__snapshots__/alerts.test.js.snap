@@ -19,6 +19,7 @@ exports[`Action Creator: Alerts should dispatch a delete action 1`] = `
 Array [
   Object {
     "meta": Object {
+      "headers": Object {},
       "method": "DELETE",
       "url": "/labs/alerts/alert-id",
     },

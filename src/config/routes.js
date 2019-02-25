@@ -2,7 +2,7 @@
 import {
   abTesting,
   AlertsPage,
-  AlertsListPage,
+  alerts,
   apiKeys,
   AccountSettingsPage,
   AuthPage,
@@ -651,8 +651,16 @@ const routes = [
   },
   {
     path: '/alerts-new', // TODO Replace with '/alerts'
-    component: AlertsListPage,
-    condition: hasUiOption('feature_alerts'),
+    component: alerts.ListPage,
+    condition: all(hasGrants('alerts/manage'), hasUiOption('feature_alerts')),
+    layout: App,
+    title: 'Alerts',
+    supportDocsSearch: 'Alerts'
+  },
+  {
+    path: '/alerts-new/edit/:id', // TODO Replace with '/alerts'
+    component: alerts.EditPage,
+    condition: all(hasGrants('alerts/manage'), hasUiOption('feature_alerts')),
     layout: App,
     title: 'Alerts',
     supportDocsSearch: 'Alerts'

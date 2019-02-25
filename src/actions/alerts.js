@@ -1,4 +1,5 @@
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
+import setSubaccountHeader from './helpers/setSubaccountHeader';
 
 export function listAlerts() {
   return sparkpostApiRequest({
@@ -33,12 +34,13 @@ export function updateAlert({ id, data }) {
   });
 }
 
-export function deleteAlert({ id }) {
+export function deleteAlert({ id, subaccountId }) {
   return sparkpostApiRequest({
     type: 'DELETE_ALERT',
     meta: {
       method: 'DELETE',
-      url: `/labs/alerts/${id}`
+      url: `/labs/alerts/${id}`,
+      headers: setSubaccountHeader(subaccountId)
     }
   });
 }
