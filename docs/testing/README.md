@@ -4,13 +4,17 @@ This section of our docs is about how we test our code. We'll explain the types 
 
 ## Table of Contents
 
-1. [**Test Types**](types.md)  
+1. [**Test Types**](types.md)
 The types of testing we typically write for the project with basic instructions for each type of test. Includes unit tests, functional component tests (via enzyme), and various types of snapshot tests.
 
-1. [**Testing Tools**](tools.md)  
-Overview of the tools we are using for running our tests including jest and enzyme, along with links to documentation, etc.
+1. **Testing Tools**
+  The tools used to get the job done:
 
-1. **Test Patterns**  
+    * [Jest](https://jestjs.io/) - This is the primary testing tool we use. It serves as the test runner (e.g. mocha), assertion library (e.g. chai), stubbing/mocking library (e.g. sinon), and code coverage reporter (e.g. istanbul).
+    * [Enzyme](https://airbnb.io/enzyme/) - This is a utility used to mimic rendering, simulate events, and inspect our components.
+
+
+1. **Test Patterns**
    Best practices and common patterns for testing our basic file types:
 
    * [Action Creators](testing-actions.md)
@@ -18,8 +22,9 @@ Overview of the tools we are using for running our tests including jest and enzy
    * [Selectors](testing-selectors.md)
    * [Components](testing-components.md)
 
-1. [**Mocking with Jest**](mocking.md)  
+
+1. [**Mocking with Jest**](mocking.md)
 Mocking dependencies and stubbing out methods is pretty different in Jest, so this section goes over common mocking strategies and conventions.
 
-1. [**Code Coverage**](coverage.md)  
+1. [**Code Coverage**](coverage.md)
 A small note about how we run code coverage reports with testing.
