@@ -57,43 +57,7 @@ import LargeForm from 'src/components/layout/LargeForm';
 
 import { DEFAULT_REDIRECT_ROUTE, SIGN_UP_ROUTE, AUTH_ROUTE, TFA_ROUTE, SSO_AUTH_ROUTE, ENABLE_TFA_AUTH_ROUTE } from 'src/constants';
 
-/**
- *  Angular UI Grant List:
-    dashboard: ['api_keys/manage', 'templates/modify', 'sending_domains/manage'],
-    credentials: ['api_keys/manage'],
-    billing: ['account/manage'],
-    domains: ['sending_domains/manage'], // make domains
-    profile: ['users/self-manage'],
-    security: ['users/self-manage'],
-    sendingDomains: ['sending_domains/manage'],
-    subaccounts: ['subaccount/manage', 'api_keys/manage', 'sending_domains/manage'],
-    smtp: ['api_keys/manage'],
-    trackingDomains: ['tracking_domains/view'],
-    usage: ['account/manage'],
-    users: ['users/manage'],
-    webhooks: ['webhooks/view'],
-    templates: ['templates/modify'],
-    templatesView: ['templates/view'],
-    transmit: ['transmissions/modify'],
-    recipientLists: ['recipient_lists/manage'],
-    suppressions: ['suppression_lists/manage'],
-    ipPools: ['ip_pools/manage']
- */
-
-/**
-  * Reporting user grants:
-  * metrics/view
-  * message_events/view
-  * templates/view
-  * templates/preview
-  * sending_domains/view
-  * adaptive-delivery/view
-  * users/self-manage
-  * grants/view
-  * subaccount/view
-  * messaging-tools/manage
-  * support/manage
-  */
+// See @sparkpost/access for role to grant mappings
 
 const routes = [
   {
@@ -266,6 +230,7 @@ const routes = [
   {
     path: '/signals',
     component: signals.OverviewPage,
+    condition: hasGrants('signals/manage'),
     layout: App,
     title: 'Signals',
     supportDocSearch: 'signals'
@@ -273,6 +238,7 @@ const routes = [
   {
     path: '/signals/health-score/:facet/:facetId',
     component: signals.HealthScorePage,
+    condition: hasGrants('signals/manage'),
     layout: App,
     title: 'Signals',
     supportDocSearch: 'signals'
@@ -280,6 +246,7 @@ const routes = [
   {
     path: '/signals/spam-traps/:facet/:facetId',
     component: signals.SpamTrapPage,
+    condition: hasGrants('signals/manage'),
     layout: App,
     title: 'Signals',
     supportDocSearch: 'signals'
@@ -287,6 +254,7 @@ const routes = [
   {
     path: '/signals/engagement-recency/:facet/:facetId',
     component: signals.EngagementRecencyPage,
+    condition: hasGrants('signals/manage'),
     layout: App,
     title: 'Signals',
     supportDocSearch: 'signals'
@@ -676,6 +644,7 @@ const routes = [
   {
     path: '/alerts', // TODO Remove
     component: AlertsPage,
+    condition: hasGrants('alerts/manage'),
     layout: App,
     title: 'Alerts',
     supportDocsSearch: 'Alerts'
