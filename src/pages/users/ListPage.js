@@ -8,6 +8,7 @@ import TimeAgo from 'react-timeago';
 import { Users } from 'src/components/images';
 import PageLink from 'src/components/pageLink/PageLink';
 import { SUBACCOUNT_REPORTING_ROLE } from 'src/constants';
+import { hasUiOption } from 'src/helpers/conditions/account';
 
 import * as usersActions from 'src/actions/users';
 import { selectUsers } from 'src/selectors/users';
@@ -27,9 +28,9 @@ const COLUMNS = [
 const SUB_COLUMN = [
   { label: 'User', sortKey: 'name', width: '40%' },
   { label: 'Role', sortKey: 'access', width: '11%' },
-  { label: 'Subaccount', sortKey: 'subaccount_id', width: '14%' },
-  { label: 'Two Factor Auth', sortKey: 'tfa_enabled', width: '15%' },
-  { label: 'Last Login', sortKey: 'last_login', width: '8%' },
+  { label: 'Subaccount', sortKey: 'subaccount_id', width: '15%' },
+  { label: 'Two Factor Auth', sortKey: 'tfa_enabled', width: '8%' },
+  { label: 'Last Login', sortKey: 'last_login', width: '14%' },
   null
 ];
 
@@ -69,6 +70,7 @@ export class ListPage extends Component {
 
   // Do not allow current user to change their access/role or delete their account
   getRowData = (user) => {
+    const { hasSubaccounts, isSubAccountReportingLive } = this.props;
     const data = [
       <User name={user.name} email={user.email} username={user.username} />,
       this.formatRole(user.access),
@@ -76,7 +78,9 @@ export class ListPage extends Component {
       user.last_login ? <TimeAgo date={user.last_login} live={false} /> : 'Never',
       <Actions username={user.username} deletable={!user.isCurrentUser} onDelete={this.handleDeleteRequest} />
     ];
-    if (this.props.hasSubaccounts) { data.splice(2, 0, user.subaccount_id ? <SubaccountTag id={user.subaccount_id} /> : null); }
+    if (isSubAccountReportingLive && hasSubaccounts) {
+      data.splice(2, 0, user.subaccount_id ? <SubaccountTag id={user.subaccount_id} /> : null);
+    }
     return data;
   };
 
@@ -125,10 +129,12 @@ export class ListPage extends Component {
   }
 
   renderPage() {
+    const { hasSubaccounts, isSubAccountReportingLive } = this.props;
+    const columns = isSubAccountReportingLive && hasSubaccounts ? SUB_COLUMN : COLUMNS;
     return (
       <div>
         <TableCollection
-          columns={this.props.hasSubaccounts ? SUB_COLUMN : COLUMNS}
+          columns={columns}
           getRowData={this.getRowData}
           pagination={true}
           rows={this.props.users}
@@ -178,7 +184,8 @@ const mapStateToProps = (state) => ({
   error: state.users.error,
   loading: state.users.loading,
   users: selectUsers(state),
-  hasSubaccounts: hasSubaccounts(state)
+  hasSubaccounts: hasSubaccounts(state),
+  isSubAccountReportingLive: hasUiOption('subaccount_reporting')(state)
 });
 
 export default connect(mapStateToProps, usersActions)(ListPage);
