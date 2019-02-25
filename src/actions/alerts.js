@@ -1,5 +1,5 @@
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
-import setSubaccountHeader from './helpers/setSubaccountHeader';
+// import setSubaccountHeader from './helpers/setSubaccountHeader';
 
 export function listAlerts() {
   return sparkpostApiRequest({
@@ -34,13 +34,27 @@ export function updateAlert({ id, data }) {
   });
 }
 
+export function setEnabledStatus({ id, enabled, subaccountId }) {
+  return sparkpostApiRequest({
+    type: 'SET_ALERT_ENABLED_STATUS',
+    meta: {
+      method: 'PUT',
+      url: `/labs/alerts/${id}`,
+      data: { enabled }
+      // Enable when EO-604 has been addressed
+      // headers: setSubaccountHeader(subaccountId)
+    }
+  });
+}
+
 export function deleteAlert({ id, subaccountId }) {
   return sparkpostApiRequest({
     type: 'DELETE_ALERT',
     meta: {
       method: 'DELETE',
-      url: `/labs/alerts/${id}`,
-      headers: setSubaccountHeader(subaccountId)
+      url: `/labs/alerts/${id}`
+      // Enable when EO-604 has been addressed
+      // headers: setSubaccountHeader(subaccountId)
     }
   });
 }
