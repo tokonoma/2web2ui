@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`generateConfigs returns combined configs 1`] = `
+Object {
+  "tenant1.e.sparkpost.com": Object {
+    "apiBase": "http://tenant1.sparkpost.com/api",
+    "host": "tenant1.sparkpost.com",
+  },
+  "tenant2.e.sparkpost.com": Object {
+    "apiBase": "http://tenant2.sparkpost.com/api",
+    "host": "tenant2.sparkpost.com",
+  },
+  "tenant2.next.sparkpost.com": Object {
+    "apiBase": "http://tenant2.sparkpost.com/api",
+    "host": "tenant2.sparkpost.com",
+  },
+  "tenant3.e.sparkpost.com": Object {
+    "apiBase": "http://tenant3.sparkpost.com/api",
+    "host": "tenant3.sparkpost.com",
+  },
+  "tenant3.origin.sparkpost.com": Object {
+    "apiBase": "http://tenant3.sparkpost.com/api",
+    "host": "tenant3.sparkpost.com",
+  },
+  "tenantN.e.sparkpost.com": Object {
+    "apiBase": "http://tenantN.sparkpost.com/api",
+    "host": "tenantN.sparkpost.com",
+  },
+}
+`;

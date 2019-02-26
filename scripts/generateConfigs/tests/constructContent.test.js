@@ -1,9 +1,5 @@
 const constructContent = require('../constructContent');
 
-const EXPECTED_CONTENT = `window.SP = window.SP || {};
-window.SP.productionConfig = { apiBase: 'https://api.test.example/graphql' };
-`;
-
 describe('generateConfigs.constructContent', () => {
   it('returns configuration as a string of javascript', () => {
     const config = {
@@ -15,6 +11,6 @@ describe('generateConfigs.constructContent', () => {
       apiBase: 'https://api.test.example/graphql'
     };
 
-    expect(constructContent(config)).toEqual(EXPECTED_CONTENT);
+    expect(constructContent(config)).toEqual({apiBase: 'https://api.test.example/graphql'});
   });
 });
