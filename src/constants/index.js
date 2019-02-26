@@ -55,7 +55,8 @@ export const LINKS = {
   ALERTS_DOCS: 'https://developers.sparkpost.com/api/alerts/#alerts-post-create-an-alert',
   ALERTS_SURVEY: 'https://goo.gl/forms/rnIuTvdVF2xhpKCy2',
   SNIPPET_SUBSTITUTION_REFERENCE: 'https://developers.sparkpost.com/api/substitutions-reference/#header-snippets',
-  MANDATORY_TFA: 'https://www.sparkpost.com/docs/my-account-and-profile/enabling-two-factor-authentication/'
+  MANDATORY_TFA: 'https://www.sparkpost.com/docs/my-account-and-profile/enabling-two-factor-authentication/',
+  RECIPIENT_VALIDATION_ACCESS: 'https://www.sparkpost.com/rv-access'
 };
 
 export const ENTERPRISE_PLAN_CODES = ['ent1'];
