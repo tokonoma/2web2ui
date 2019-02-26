@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
-import { Field, reduxForm, formValueSelector } from 'redux-form';
+import { Field, reduxForm } from 'redux-form';
 import { Page, Panel, Button } from '@sparkpost/matchbox';
-import { TextFieldWrapper, SubaccountTypeaheadWrapper } from 'src/components';
+import { TextFieldWrapper } from 'src/components';
 import { required, email } from 'src/helpers/validation';
 import { inviteUser } from 'src/actions/users';
 import { showAlert } from 'src/actions/globalAlert';
-import { hasSubaccounts } from 'src/selectors/subaccounts';
 import { trimWhitespaces } from 'src/helpers/string';
-import { FORMS, SUBACCOUNT_REPORTING_USER_ROLE } from 'src/constants';
+import { FORMS, ROLES } from 'src/constants';
+import { hasUiOption } from 'src/helpers/conditions/account';
 
 import RoleRadioGroup from './components/RoleRadioGroup';
 
@@ -26,9 +26,11 @@ export class CreatePage extends Component {
       showAlert,
       history
     } = this.props;
-    const { email, access/*, subaccount*/ } = values;
+    const { email, access, useSubaccount, subaccount } = values;
 
-    return inviteUser(email, access)
+    const access_level = useSubaccount ? ROLES.SUBACCOUNT_REPORTING : access;
+
+    return inviteUser(email, access_level, subaccount)
       .then(() => {
         showAlert({
           type: 'success',
@@ -43,11 +45,8 @@ export class CreatePage extends Component {
       submitting,
       pristine,
       handleSubmit,
-      hasSubaccounts,
-      selectedRole
+      isSubaccountReportingLive
     } = this.props;
-
-    const subaccountReportingRoleSelected = selectedRole === SUBACCOUNT_REPORTING_USER_ROLE;
 
     return (
       <Page title="Invite User" breadcrumbAction={breadcrumbAction}>
@@ -64,10 +63,9 @@ export class CreatePage extends Component {
               />
               <Field
                 name="access"
-                flags={{ hasSubaccounts }}
                 component={RoleRadioGroup}
+                allowSubaccountAssignment={isSubaccountReportingLive}
               />
-              {subaccountReportingRoleSelected && <Field name='subaccount' component={SubaccountTypeaheadWrapper} validate={required} />}
               <Button submit primary disabled={submitting || pristine}>
                 {submitting ? 'Loading' : 'Add User'}
               </Button>
@@ -81,10 +79,9 @@ export class CreatePage extends Component {
 
 const mapStateToProps = (state) => ({
   initialValues: {
-    access: 'admin' // Sadly redux-form does not reflect a select's initial value
+    access: ROLES.ADMIN // Sadly redux-form does not reflect a select's initial value
   },
-  selectedRole: formValueSelector(FORMS.INVITE_USER)(state, 'access'),
-  hasSubaccounts: hasSubaccounts(state)
+  isSubaccountReportingLive: hasUiOption('subaccount_reporting')(state)
 });
 
 const mapDispatchToProps = { inviteUser, showAlert };

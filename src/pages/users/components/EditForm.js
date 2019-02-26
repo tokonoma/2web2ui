@@ -4,6 +4,7 @@ import { Panel, Button } from '@sparkpost/matchbox';
 import PageLink from 'src/components/pageLink/PageLink';
 import { CheckboxWrapper } from 'src/components/reduxFormWrappers';
 import RoleRadioGroup from './RoleRadioGroup';
+import { ROLES } from 'src/constants';
 
 export const EditForm = ({
   onSubmit,
@@ -23,7 +24,8 @@ export const EditForm = ({
         <Field
           name="access"
           disabled={user.isCurrentUser}
-          flags={{ allowSuperUser: currentUser.access === 'superuser' }}
+          allowSuperUser={currentUser.access === ROLES.SUPERUSER}
+          allowSubaccountAssignment={false}
           component={RoleRadioGroup}
         />
       </Panel.Section>
