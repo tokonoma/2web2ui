@@ -1,14 +1,16 @@
 import sparkpostApiRequest from './helpers/sparkpostApiRequest';
+import setSubaccountHeader from 'src/actions/helpers/setSubaccountHeader';
 import { showAlert } from './globalAlert';
 import ErrorTracker from 'src/helpers/errorTracker';
 
-export function inviteUser(email, access_level) {
+export function inviteUser(email, access_level, subaccount) {
   const action = {
     type: 'INVITE_USER',
     meta: {
       data: { email, access_level },
       method: 'POST',
-      url: '/v1/users/invite'
+      url: '/v1/users/invite',
+      headers: setSubaccountHeader(subaccount)
     }
   };
 

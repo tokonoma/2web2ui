@@ -121,5 +121,9 @@ export const ANALYTICS_WHITELISTED_FORMS = [
   FORMS.JOIN_SENDING_DOMAIN
 ];
 
-export const REPORTING_USER_ROLE = 'reporting';
-export const SUBACCOUNT_REPORTING_USER_ROLE = 'subaccount_reporting';
+export const ROLES = {
+  ADMIN: 'admin',
+  REPORTING: 'reporting',
+  SUBACCOUNT_REPORTING: 'subaccount_reporting',
+  SUPERUSER: 'superuser'
+};
