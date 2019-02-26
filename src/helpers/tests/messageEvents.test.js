@@ -6,6 +6,9 @@ jest.mock('src/constants', () => ({
   EVENTS_SEARCH_FILTERS: {
     filter1: {},
     filter2: {}
+  },
+  ADDITIONAL_EVENTS_FILTERS: {
+    additionalFilter: {}
   }
 }));
 
@@ -48,7 +51,7 @@ describe('messageEvents helpers', () => {
   });
 
   const testCases = {
-    'parses correctly when all param exists': { searchText: '?from=2018-03-23T03:02:32Z&range=hour&to=2018-03-23T04:02:32Z&filter1=foo&filter2=bar' },
+    'parses correctly when all param exists': { searchText: '?from=2018-03-23T03:02:32Z&range=hour&to=2018-03-23T04:02:32Z&filter1=foo&filter2=bar&additionalFilter=loren' },
     'parses correctly when from does not exist': { searchText: '?range=hour&to=2018-03-23T04:02:32Z&filter1=foo&filter2=bar' },
     'parses correctly when to does not exist': { searchText: '?from=2018-03-23T03:02:32Z&range=hour&filter1=foo&filter2=bar' },
     'parses correctly when range does not exist (does not override from, to)': { searchText: '?from=2018-03-23T03:02:32Z&to=2018-03-23T04:02:32Z&filter1=foo&filter2=bar' },

@@ -2,7 +2,7 @@
 import qs from 'query-string';
 import _ from 'lodash';
 import { getRelativeDates } from 'src/helpers/date';
-import {EVENTS_SEARCH_FILTERS} from 'src/constants';
+import {EVENTS_SEARCH_FILTERS, ADDITIONAL_EVENTS_FILTERS} from 'src/constants';
 
 /*
  * Translate the array of event definitions from /message-events/events/documentation
@@ -89,8 +89,12 @@ function transformParams(params) {
     message_ids: 'messages',
     friendly_froms: 'from_addresses'
   };
+  const validFilters = {
+    ...EVENTS_SEARCH_FILTERS,
+    ...ADDITIONAL_EVENTS_FILTERS,
+  }
   const transformedParams = _.reduce(params, (accumulator, value, key) => {
-    if (EVENTS_SEARCH_FILTERS.hasOwnProperty(key)) {
+    if (validFilters.hasOwnProperty(key)) {
       accumulator[key] = value;
       return accumulator;
     }

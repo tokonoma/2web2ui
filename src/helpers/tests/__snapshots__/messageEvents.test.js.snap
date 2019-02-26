@@ -29,6 +29,9 @@ Object {
 
 exports[`messageEvents helpers parseSearch parses correctly when all param exists 1`] = `
 Object {
+  "additionalFilter": Array [
+    "loren",
+  ],
   "dateOptions": Object {
     "from": "2018-02-23T03:02:32Z",
     "relativeRange": "hour",

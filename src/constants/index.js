@@ -103,6 +103,12 @@ export const EVENTS_SEARCH_FILTERS = {
   ab_tests: { placeholder: 'list of full words in ab test ids (e.g. newsletter, fire-sale)', label: 'AB Test IDs' },
   ab_test_versions: { placeholder: 'list of version numbers; requires AB Test ID filter(e.g. 4)', label: 'AB Test Versions' }
 };
+
+export const ADDITIONAL_EVENTS_FILTERS = {
+  recipients: { placeholder: 'Filter by recipient email address', label: 'Recipients' },
+  events: { label: 'Event' }
+};
+
 export const DEFAULT_PER_PAGE_BUTTONS = [10, 25, 50, 100];
 
 export const SUBACCOUNT_REPORTING_ROLE = 'subaccount_reporting';

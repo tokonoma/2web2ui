@@ -4,13 +4,12 @@ import { Panel, Tag } from '@sparkpost/matchbox';
 import { getMessageEvents, removeFilter, updateMessageEventsSearchOptions } from 'src/actions/messageEvents';
 import { removeEmptyFilters, getFiltersAsArray } from '../helpers/transformData.js';
 import { snakeToFriendly } from 'src/helpers/string';
-import { EVENTS_SEARCH_FILTERS } from 'src/constants';
+import { EVENTS_SEARCH_FILTERS, ADDITIONAL_EVENTS_FILTERS } from 'src/constants';
 import _ from 'lodash';
 import styles from './ActiveFilters.module.scss';
 
 const filterTypes = [
-  { value: 'events', label: 'Event', itemToString: snakeToFriendly },
-  { value: 'recipients', label: 'Recipient' },
+  ...getFiltersAsArray(ADDITIONAL_EVENTS_FILTERS),
   ...getFiltersAsArray(EVENTS_SEARCH_FILTERS)
 ];
 
@@ -23,7 +22,7 @@ export class ActiveFilters extends Component {
     const activeFilters = _.flatMap(nonEmptyFilterTypes,({ value, label, itemToString }, typeIndex) =>
       nonEmptyFilters[value].map((item, valueIndex) => (
         <Tag onRemove={() => this.handleRemove({ key: value, item })} key={`${typeIndex}-${valueIndex}`} className={styles.TagWrapper}>
-          {label}: {itemToString ? itemToString(item) : item}
+          {label}: {value === 'events' ? snakeToFriendly(item) : item}
         </Tag>
       ))
     );
