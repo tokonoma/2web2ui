@@ -23,9 +23,9 @@ export function createAlert({ data }) {
   });
 }
 
-export function updateAlert({ data, id, subaccountId, type = 'UPDATE_ALERT' }) {
+export function updateAlert({ data, id, subaccountId }) {
   return sparkpostApiRequest({
-    type,
+    type: 'UPDATE_ALERT',
     meta: {
       method: 'PUT',
       url: `/labs/alerts/${id}`,
@@ -36,8 +36,17 @@ export function updateAlert({ data, id, subaccountId, type = 'UPDATE_ALERT' }) {
   });
 }
 
-export function setEnabledStatus({ enabled, ...rest }) {
-  return updateAlert({ type: 'SET_ALERT_ENABLED_STATUS', data: { enabled }, ...rest });
+export function setEnabledStatus({ enabled, id, subaccountId }) {
+  return sparkpostApiRequest({
+    type: 'SET_ALERT_ENABLED_STATUS',
+    meta: {
+      method: 'PUT',
+      url: `/labs/alerts/${id}`,
+      data: { enabled }
+      // Enable when EO-604 has been addressed
+      // headers: setSubaccountHeader(subaccountId)
+    }
+  });
 }
 
 export function deleteAlert({ id, subaccountId }) {

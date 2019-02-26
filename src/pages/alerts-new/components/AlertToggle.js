@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Toggle } from '@sparkpost/matchbox';
 import { setEnabledStatus } from 'src/actions/alerts';
 import { showAlert } from 'src/actions/globalAlert';
+import styles from './AlertToggle.module.scss';
 
 export class AlertToggle extends Component {
   state = {
@@ -31,13 +32,15 @@ export class AlertToggle extends Component {
     const { id, pending } = this.props;
 
     return (
-      <Toggle
-        id={id}
-        compact
-        checked={enabled}
-        disabled={pending}
-        onChange={this.handleToggle}
-      />
+      <div className={styles.Wrapper}>
+        <Toggle
+          id={id}
+          compact
+          checked={enabled}
+          disabled={pending}
+          onChange={this.handleToggle}
+        />
+      </div>
     );
   }
 }

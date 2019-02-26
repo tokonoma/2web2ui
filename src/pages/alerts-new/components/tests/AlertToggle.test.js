@@ -20,6 +20,11 @@ describe('AlertToggle Component', () => {
     expect(wrapper.find('Toggle')).toBeChecked();
   });
 
+  it('should render pending state', () => {
+    const wrapper = subject({ pending: true });
+    expect(wrapper.find('Toggle')).toBeDisabled();
+  });
+
   it('should handle a successful toggle', async () => {
     const setEnabledStatus = jest.fn(() => Promise.resolve());
     const wrapper = subject({ setEnabledStatus });
