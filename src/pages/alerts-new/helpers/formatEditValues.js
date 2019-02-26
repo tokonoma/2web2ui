@@ -1,23 +1,17 @@
-export default function ({ id, name, target, active, auth_type, auth_credentials = {}, auth_request_details = {}}) {
-  const values = { id, name, target, active };
 
-  switch (auth_type) {
-    case 'basic':
-      values.auth = auth_type;
-      values.basicUser = auth_credentials.username;
-      values.basicPass = auth_credentials.password;
-      break;
+import getSubaccountFromId from './getSubaccountFromId';
+import getAssignTo from './getAssignTo';
 
-    case 'oauth2':
-      values.auth = auth_type;
-      values.clientId = auth_request_details.body.client_id;
-      values.clientSecret = auth_request_details.body.client_secret;
-      values.tokenURL = auth_request_details.url;
-      break;
-
-    default:
-      break;
-  }
+export default function (state, { id, name, alert_metric, description, alert_subaccount, email_addresses, threshold, enabled, target, active }) {
+  const criteria_comparator = threshold.error.comparator;
+  //console.log('criteria_comparator', criteria_comparator);
+  //console.log('alert_metric formatEditValues', alert_metric);
+  alert_subaccount = 246;
+  const criteria_value = threshold.error.target;
+  const assignTo = getAssignTo(alert_subaccount);
+  //console.log('assignTo', assignTo);
+  const subaccount = getSubaccountFromId(state, alert_subaccount);
+  const values = { id, name, alert_metric, assignTo, subaccount, description, alert_subaccount, email_addresses, criteria_comparator, criteria_value, enabled, target, active };
 
   return values;
 }

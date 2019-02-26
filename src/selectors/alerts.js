@@ -16,7 +16,7 @@ export const selectInitialSubaccountValue = createSelector(
       return 'Master account only';
     }
 
-    if (id === undefined) {
+    if (id === undefined || id === -1) {
       return 'Master and all subaccounts';
     }
 

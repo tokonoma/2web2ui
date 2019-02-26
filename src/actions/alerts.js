@@ -48,7 +48,8 @@ export function getAlert({ id }) {
     type: 'GET_ALERT',
     meta: {
       method: 'GET',
-      url: `/labs/alerts/${id}`
+      url: `/labs/alerts/${id}`,
+      showErrorAlert: false
     }
   });
 }

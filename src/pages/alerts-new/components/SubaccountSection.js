@@ -1,89 +1,92 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { formValueSelector, change } from 'redux-form';
-import PropTypes from 'prop-types';
-import { Field } from 'redux-form';
-import { RadioGroup, SubaccountTypeaheadWrapper, TextFieldWrapper } from 'src/components';
-import { required } from 'src/helpers/validation';
+// import React, { Component } from 'react';
+// import { connect } from 'react-redux';
+// import { formValueSelector, change } from 'redux-form';
+// import PropTypes from 'prop-types';
+// import { Field } from 'redux-form';
+// import { RadioGroup, SubaccountTypeaheadWrapper, TextFieldWrapper } from 'src/components';
+// import { required } from 'src/helpers/validation';
+// import { getSubaccount } from 'src/selectors/subaccounts';
 
-const createOptions = [
-  { label: 'Master and all subaccounts', value: 'all' },
-  { label: 'Master account only', value: 'master' },
-  { label: 'Single Subaccount', value: 'subaccount' }
-];
+// const createOptions = [
+//   { label: 'Master and all subaccounts', value: 'all' },
+//   { label: 'Master account only', value: 'master' },
+//   { label: 'Single Subaccount', value: 'subaccount' }
+// ];
 
-/**
- * Component produces the follow redux form fields
- * If newAlert
- * - assignTo 'master' | 'all' | 'subaccount'
- * - subaccount if assignTo === 'subaccount'
- *
- * If !newAlert
- * - subaccount TextField | typeahead (disabled)
- */
-export class SubaccountSection extends Component {
-  componentDidUpdate(prevProps) {
-    const { assignTo, formName, change } = this.props;
+// /**
+//  * Component produces the follow redux form fields
+//  * If newAlert
+//  * - assignTo 'master' | 'all' | 'subaccount'
+//  * - subaccount if assignTo === 'subaccount'
+//  *
+//  * If !newAlert
+//  * - subaccount TextField | typeahead (disabled)
+//  */
+// export class SubaccountSection extends Component {
+//   componentDidUpdate(prevProps) {
+//     const { assignTo, formName, change } = this.props;
 
-    // Clear subaccount value if switching away from subaccount
-    if (assignTo !== 'subaccount' && prevProps.assignTo === 'subaccount') {
-      change(formName, 'subaccount', null);
-    }
-  }
+//     // Clear subaccount value if switching away from subaccount
+//     if (assignTo !== 'subaccount' && prevProps.assignTo === 'subaccount') {
+//       change(formName, 'subaccount', null);
+//     }
+//   }
 
-  renderCreate() {
-    const { assignTo } = this.props;
+//   // renderEdit() {
+//   //   const { subaccount } = this.props;
+//   //   let component = SubaccountTypeaheadWrapper;
 
-    const typeahead = assignTo === 'subaccount'
-      ? <Field name='subaccount' component={SubaccountTypeaheadWrapper} validate={required} />
-      : null;
+//   //   // On 'master only' or 'master and all' alerts
+//   //   if (typeof subaccount === 'string') {
+//   //     component = TextFieldWrapper;
+//   //   }
 
-    return (
-      <div>
-        <Field
-          component={RadioGroup}
-          name='assignTo'
-          options={createOptions} />
-        {typeahead}
-      </div>
-    );
-  }
+//   //   return (
+//   //     <Field
+//   //       component={component}
+//   //       label='Account'
+//   //       name='subaccount'
+//   //       helpText='This assignment is permanent.'
+//   //       disabled />
+//   //   );
+//   // }
 
-  renderEdit() {
-    const { subaccount } = this.props;
-    let component = SubaccountTypeaheadWrapper;
+//   render() {
+//     const { assignTo, subaccount } = this.props;
 
-    // On 'master only' or 'master and all' alerts
-    if (typeof subaccount === 'string') {
-      component = TextFieldWrapper;
-    }
+//     // On 'master only' or 'master and all' alerts
+//     if (typeof subaccount === 'string') {
+//       component = TextFieldWrapper;
+//     }
 
-    return (
-      <Field
-        component={component}
-        name='subaccount'
-        helpText='This assignment is permanent.'
-        disabled />
-    );
-  }
+//     const typeahead = assignTo === 'subaccount'
+//       ? <Field name='alert_subaccount' component={SubaccountTypeaheadWrapper} validate={required} />
+//       : null;
 
-  render() {
-    return this.props.newAlert ? this.renderCreate() : this.renderEdit();
-  }
-}
+//     return (
+//       <div>
+//         <Field
+//           component={RadioGroup}
+//           label='Account'
+//           name='assignTo'
+//           options={createOptions} />
+//         {typeahead}
+//       </div>
+//     );
+//   }
+// }
 
-SubaccountSection.propTypes = {
-  newAlert: PropTypes.bool,
-  assignTo: PropTypes.oneOf(['master', 'all', 'subaccount']),
-  change: PropTypes.func
-};
+// SubaccountSection.propTypes = {
+//   assignTo: PropTypes.oneOf(['master', 'all', 'subaccount']),
+//   change: PropTypes.func
+// };
 
-const mapStateToProps = (state, props) => {
-  const selector = formValueSelector(props.formName);
-  return {
-    assignTo: selector(state, 'assignTo'),
-    subaccount: selector(state, 'subaccount')
-  };
-};
+// const mapStateToProps = (state, props) => {
+//   const selector = formValueSelector(props.formName);
+//   return {
+//     assignTo: selector(state, 'assignTo'),
+//     subaccount: getSubaccount(selector(state, 'alert_subaccount'))
+//   };
+// };
 
-export default connect(mapStateToProps, { change })(SubaccountSection);
+// export default connect(mapStateToProps, { change })(SubaccountSection);

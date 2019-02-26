@@ -1,15 +1,34 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Page } from '@sparkpost/matchbox';
-import withAlertsEdit from './containers/EditPageContainer';
+import withAlertsEdit from './containers/EditPage.container';
 import AlertForm from './components/AlertForm';
-import ApiErrorBanner from 'src/components/apiErrorBanner/ApiErrorBanner';
-import { Loading } from 'src/components';
+import { Loading, DeleteModal, ApiErrorBanner } from 'src/components';
 
 class EditPage extends Component {
+  state = {
+    showDeleteModal: false,
+    alertToDelete: {}
+  }
 
   componentDidMount() {
-    this.props.getAlert();
+    this.props.getAlert({ id: this.props.match.params.id });
+  }
+
+  toggleDelete = ({ id, name, subaccount_id } = {}) => {
+    this.setState({
+      showDeleteModal: !this.state.showDeleteModal,
+      alertToDelete: { id, name, subaccountId: subaccount_id }
+    });
+  };
+
+  handleDelete = () => {
+    const { id, subaccountId } = this.state.alertToDelete;
+
+    return this.props.deleteAlert({ id, subaccountId }).then(() => {
+      this.props.showAlert({ type: 'success', message: 'Alert deleted' });
+      this.toggleDelete();
+    });
   }
 
   /*
@@ -36,7 +55,8 @@ class EditPage extends Component {
   }
   renderForm() {
     return (
-      <AlertForm alert={this.props.alert} submitText = 'Update Alert' formName = 'EditAlertForm' newAlert = {false} onSubmit = {this.update}/>
+      <AlertForm alert={this.props.alert} submitText = 'Update Alert' formName = 'EditAlertForm' newAlert = {false}
+        toggleDelete={this.toggleDelete} onSubmit = {this.update}/>
     );
   }
 
@@ -52,7 +72,8 @@ class EditPage extends Component {
   }
 
   render() {
-    const { error, loading } = this.props;
+    const { error, loading, deletePending } = this.props;
+    //console.log(this.props);
 
     if (loading) {
       return <Loading />;
@@ -61,6 +82,14 @@ class EditPage extends Component {
     return (
       <Page title='Edit Alert' breadcrumbAction={{ content: 'Back to Alerts', to: '/alerts', component: Link }} >
         {error ? this.renderError() : this.renderForm()}
+        <DeleteModal
+          open={this.state.showDeleteModal}
+          title='Are you sure you want to delete this alert?'
+          content={<p>The alert "<strong>{this.state.alertToDelete.name}</strong>" will be permanently removed. This cannot be undone.</p>}
+          onDelete={this.handleDelete}
+          onCancel={this.toggleDelete}
+          isPending={deletePending}
+        />
       </Page>
     );
   }

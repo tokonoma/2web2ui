@@ -24,13 +24,13 @@ export default (state = initialState, { type, payload, meta }) => {
       /* GET */
 
     case 'GET_ALERT_PENDING':
-      return { ...state, getPending: true };
+      return { ...state, getPending: true, getError: null };
 
     case 'GET_ALERT_FAIL':
-      return { ...state, getPending: false };
+      return { ...state, getPending: false, getError: payload };
 
     case 'GET_ALERT_SUCCESS':
-      return { ...state, payload, getPending: false };
+      return { ...state, get: payload, getPending: false };
 
       /* CREATE */
 
