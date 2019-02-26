@@ -5,6 +5,7 @@ exports[`Component: EditForm should disable single sign-on checkbox and display 
   <form>
     <Panel.Section>
       <Field
+        allowSubaccountAssignment={false}
         allowSuperUser={false}
         component={[Function]}
         name="access"
@@ -48,6 +49,7 @@ exports[`Component: EditForm should render 1`] = `
   <form>
     <Panel.Section>
       <Field
+        allowSubaccountAssignment={false}
         allowSuperUser={false}
         component={[Function]}
         name="access"
