@@ -2,6 +2,7 @@ import React from 'react';
 import { Field } from 'redux-form';
 import { Panel, Button } from '@sparkpost/matchbox';
 import PageLink from 'src/components/pageLink/PageLink';
+import LabelledValue from 'src/components/labelledValue/LabelledValue';
 import { CheckboxWrapper } from 'src/components/reduxFormWrappers';
 import RoleRadioGroup from './RoleRadioGroup';
 
@@ -10,6 +11,7 @@ export const EditForm = ({
   user,
   currentUser,
   isAccountSingleSignOnEnabled,
+  subaccount,
   submitting
 }) => {
 
@@ -17,15 +19,26 @@ export const EditForm = ({
     ? <span>Enabling single sign-on will delete this user's password. If they switch back to password-based authentication, they'll need to reset their password on login.</span>
     : <span>Single sign-on has not been configured for your account. Enable in your <PageLink to="/account/settings">account's settings</PageLink>.</span>;
 
+  const subaccountReportingUser = user.access === 'subaccount_reporting';
+
+  const roleSection = subaccountReportingUser
+    ? (<>
+        <p> This user has access to reporting features and read-only template access, limited to a single subaccount. Its role can’t be changed. </p>
+        <LabelledValue label="Subaccount">
+          <PageLink to={`/account/subaccounts/${subaccount.id}`}>{subaccount.name}</PageLink> ({subaccount.id})
+        </LabelledValue>
+      </>)
+    : (<Field
+      name="access"
+      disabled={user.isCurrentUser}
+      allowSuperUser={currentUser.access === 'superuser'}
+      component={RoleRadioGroup}
+    />);
+
   return <Panel>
     <form onSubmit={onSubmit}>
       <Panel.Section>
-        <Field
-          name="access"
-          disabled={user.isCurrentUser}
-          allowSuperUser={currentUser.access === 'superuser'}
-          component={RoleRadioGroup}
-        />
+        {roleSection}
       </Panel.Section>
       <Panel.Section>
         <Field
