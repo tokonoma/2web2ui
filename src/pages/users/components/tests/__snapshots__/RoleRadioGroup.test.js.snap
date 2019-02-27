@@ -1,80 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Component: RoleRadioGroup should render disabled 1`] = `
-<RadioGroup
-  grid={
-    Object {
-      "md": 6,
-      "sm": 12,
-      "xs": 12,
-    }
-  }
-  options={
-    Array [
-      Object {
-        "disabled": true,
-        "helpText": "Has access to all functionality in the UI. Has the ability to add additional administrators and create / invite users with a role of Reporting.",
-        "label": <strong>
-          Admin
-        </strong>,
-        "value": "admin",
-      },
-      Object {
-        "disabled": true,
-        "helpText": "Has no access to functionality in the UI. Permissions include access to view all reports, and view all templates except being allowed to change them.",
-        "label": <strong>
-          Reporting
-        </strong>,
-        "value": "reporting",
-      },
-    ]
-  }
-  title="Role"
-/>
-`;
-
-exports[`Component: RoleRadioGroup should render super user 1`] = `
-<RadioGroup
-  grid={
-    Object {
-      "md": 6,
-      "sm": 12,
-      "xs": 12,
-    }
-  }
-  options={
-    Array [
-      Object {
-        "disabled": false,
-        "helpText": "Has access to all functionality in the UI. Has the ability to add additional administrators and create / invite users with a role of Reporting.",
-        "label": <strong>
-          Admin
-        </strong>,
-        "value": "admin",
-      },
-      Object {
-        "disabled": false,
-        "helpText": "Has no access to functionality in the UI. Permissions include access to view all reports, and view all templates except being allowed to change them.",
-        "label": <strong>
-          Reporting
-        </strong>,
-        "value": "reporting",
-      },
-      Object {
-        "disabled": false,
-        "label": <strong>
-          Super User
-        </strong>,
-        "value": "superuser",
-      },
-    ]
-  }
-  title="Role"
-/>
+exports[`Component: RoleRadioGroup should clear subaccount checkbox when selecting admin role 1`] = `
+Array [
+  "userInviteForm",
+  false,
+  false,
+  "useSubaccount",
+  "subaccount",
+]
 `;
 
 exports[`Component: RoleRadioGroup should render the RadioGroup 1`] = `
 <RadioGroup
+  allowSubaccountAssignment={false}
+  allowSuperUser={false}
+  clearFields={[MockFunction]}
   grid={
     Object {
       "md": 6,
@@ -82,19 +22,21 @@ exports[`Component: RoleRadioGroup should render the RadioGroup 1`] = `
       "xs": 12,
     }
   }
+  hasSubaccounts={false}
   options={
     Array [
       Object {
         "disabled": false,
-        "helpText": "Has access to all functionality in the UI. Has the ability to add additional administrators and create / invite users with a role of Reporting.",
+        "helpText": "Has access to all features, including the ability to invite additional users.",
         "label": <strong>
           Admin
         </strong>,
         "value": "admin",
       },
       Object {
+        "children": false,
         "disabled": false,
-        "helpText": "Has no access to functionality in the UI. Permissions include access to view all reports, and view all templates except being allowed to change them.",
+        "helpText": "Has access to reporting and read-only access to templates.",
         "label": <strong>
           Reporting
         </strong>,
@@ -102,6 +44,8 @@ exports[`Component: RoleRadioGroup should render the RadioGroup 1`] = `
       },
     ]
   }
+  selectedRole="admin"
   title="Role"
+  useSubaccountChecked={false}
 />
 `;

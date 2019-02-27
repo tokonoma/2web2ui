@@ -1,16 +1,15 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import cases from 'jest-in-case';
 import { CreatePage } from '../CreatePage';
+import { ROLES } from 'src/constants';
 
 describe('Page: User Create Page', () => {
-
-  let props;
-  let wrapper;
-  let instance;
+  let baseProps;
   let values;
 
   beforeEach(() => {
-    props = {
+    baseProps = {
       submitting: false,
       pristine: false,
       handleSubmit: jest.fn((fn) => fn),
@@ -18,36 +17,73 @@ describe('Page: User Create Page', () => {
       showAlert: jest.fn(),
       history: {
         push: jest.fn()
-      }
+      },
+      isSubaccountReportingLive: false
     };
-    props.inviteUser.mockName('inviteUserMock');
-    wrapper = shallow(<CreatePage {...props} />);
-    instance = wrapper.instance();
-    values = { email: 'email', access: 'access' };
+    values = { email: 'email', access: 'access', useSubaccount: false, subaccount: undefined };
   });
+
+  const subject = (props) => shallow(<CreatePage {...baseProps} {...props} />);
+
+  const submit = (wrapper, values) => wrapper.find('form').prop('onSubmit')(values);
 
   it('should render correctly by default', () => {
-    expect(wrapper).toMatchSnapshot();
+    expect(subject()).toMatchSnapshot();
   });
 
-  it('should render when submitting', () => {
-    wrapper.setProps({ submitting: true });
-    expect(wrapper).toMatchSnapshot();
+  it('should update submit button when submitting', () => {
+    expect(subject({ submitting: true }).find('Button')).toMatchSnapshot();
   });
 
-  it('should render when pristine', () => {
-    wrapper.setProps({ pristine: true });
-    expect(wrapper).toMatchSnapshot();
+  it('should disable submit when pristine', () => {
+    expect(subject({ pristine: true }).find('Button')).toMatchSnapshot();
   });
 
-  it('should invite a user on submit', async() => {
-    await instance.handleSubmit(values);
+  cases(
+    'should use feature flag to control subaccount assignment',
+    ({ isSubaccountReportingLive }) => {
+      expect(
+        subject({ isSubaccountReportingLive })
+          .find('Field[name="access"]')
+          .prop('allowSubaccountAssignment')
+      ).toBe(isSubaccountReportingLive);
+    },
+    {
+      enabled: { isSubaccountReportingLive: true },
+      disabled: { isSubaccountReportingLive: false }
+    }
+  );
 
-    expect(props.inviteUser).toHaveBeenCalledWith(values.email, values.access);
-    expect(props.showAlert).toHaveBeenCalledWith({
+  it('should invite a user on submit', async () => {
+    const wrapper = subject();
+    await submit(wrapper, values);
+
+    expect(baseProps.inviteUser).toHaveBeenCalledWith(
+      values.email,
+      values.access,
+      values.subaccount
+    );
+    expect(baseProps.showAlert).toHaveBeenCalledWith({
       type: 'success',
       message: `Invitation sent to ${values.email}`
     });
-    expect(props.history.push).toHaveBeenCalledWith('/account/users');
+    expect(baseProps.history.push).toHaveBeenCalledWith('/account/users');
+  });
+
+  it('should invite a subaccount user on submit', async () => {
+    const subaccountValues = {
+      email: values.email,
+      access: ROLES.REPORTING,
+      useSubaccount: true,
+      subaccount: 101
+    };
+    const wrapper = subject();
+    await submit(wrapper, subaccountValues);
+    expect(baseProps.inviteUser).toHaveBeenCalledWith(
+      subaccountValues.email,
+      ROLES.SUBACCOUNT_REPORTING,
+      subaccountValues.subaccount
+    );
+    expect(baseProps.history.push).toHaveBeenCalledWith('/account/users');
   });
 });

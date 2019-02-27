@@ -6,6 +6,7 @@ import DeleteModal from 'src/components/modals/DeleteModal';
 import ConfirmationModal from 'src/components/modals/ConfirmationModal';
 import { Loading } from 'src/components/loading/Loading';
 import EditForm from './components/EditForm';
+import { ROLES } from 'src/constants';
 
 const breadcrumbAction = {
   content: 'Users',
@@ -59,7 +60,7 @@ export class EditPage extends Component {
   componentDidUpdate() {
     const { user, subaccount, getSubaccount } = this.props;
     if (
-      user && user.access === 'subaccount_reporting' &&
+      user && user.access === ROLES.SUBACCOUNT_REPORTING &&
       (!subaccount || subaccount.id !== user.subaccount_id)
     ) {
       getSubaccount(user.subaccount_id);

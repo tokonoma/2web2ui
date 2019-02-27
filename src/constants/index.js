@@ -82,6 +82,7 @@ export const FORMS = {
   JOIN: 'joinForm',
   JOIN_PLAN: 'joinPlanForm',
   JOIN_SENDING_DOMAIN: 'joinSendingDomainForm',
+  INVITE_USER: 'userInviteForm',
   EDIT_USER: 'userEditForm',
   EVENTS_SEARCH: 'eventsSearchForm'
 };
@@ -120,3 +121,10 @@ export const ANALYTICS_WHITELISTED_FORMS = [
   FORMS.JOIN_PLAN,
   FORMS.JOIN_SENDING_DOMAIN
 ];
+
+export const ROLES = {
+  ADMIN: 'admin',
+  REPORTING: 'reporting',
+  SUBACCOUNT_REPORTING: 'subaccount_reporting',
+  SUPERUSER: 'superuser'
+};
