@@ -120,7 +120,7 @@ const uatTenants = {
       cnameValue: 'uat4.spgo.io'
     }
   },
-  s3: {
+  s3uat: {
     apiBase: 'https://api-uat.tst.sparkpost.com/api'
   }
 };
