@@ -1,7 +1,6 @@
 /* eslint-disable max-lines */
 import {
   abTesting,
-  AlertsPage,
   alerts,
   apiKeys,
   AccountSettingsPage,
@@ -704,25 +703,17 @@ const routes = [
     supportDocsSearch: 'A/B test'
   },
   {
-    path: '/alerts', // TODO Remove
-    component: AlertsPage,
+    path: '/alerts',
+    component: alerts.ListPage,
     condition: hasGrants('alerts/manage'),
     layout: App,
     title: 'Alerts',
     supportDocsSearch: 'Alerts'
   },
   {
-    path: '/alerts-new', // TODO Replace with '/alerts'
-    component: alerts.ListPage,
-    condition: all(hasGrants('alerts/manage'), hasUiOption('feature_alerts')),
-    layout: App,
-    title: 'Alerts',
-    supportDocsSearch: 'Alerts'
-  },
-  {
-    path: '/alerts-new/edit/:id', // TODO Replace with '/alerts'
+    path: '/alerts/edit/:id',
     component: alerts.EditPage,
-    condition: all(hasGrants('alerts/manage'), hasUiOption('feature_alerts')),
+    condition: hasGrants('alerts/manage'),
     layout: App,
     title: 'Edit Alert',
     supportDocsSearch: 'Alerts'

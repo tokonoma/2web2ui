@@ -62,7 +62,7 @@ export class ListPage extends Component {
     return (
       <Page
         title='Alerts'
-        primaryAction={{ content: 'Create an Alert', to: '/alerts-new/create', component: Link }}
+        primaryAction={{ content: 'Create an Alert', to: '/alerts/create', component: Link }}
         empty={{
           show: !error && alerts.length === 0,
           image: Templates,
