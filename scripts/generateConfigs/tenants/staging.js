@@ -109,6 +109,7 @@ const stagingTenants = {
     }
   },
   s3stg: {
+    host: 'd2dv797azemeaa.cloudfront.net',
     apiBase: 'https://api-staging.sparkpost.com/api'
   }
 };

@@ -121,7 +121,8 @@ const uatTenants = {
     }
   },
   s3uat: {
-    apiBase: 'https://api-uat.tst.sparkpost.com/api'
+    apiBase: 'https://api-uat.tst.sparkpost.com/api',
+    host: 'd2k9fpyquw416k.cloudfront.net'
   }
 };
 
