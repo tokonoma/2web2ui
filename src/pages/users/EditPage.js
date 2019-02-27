@@ -58,7 +58,10 @@ export class EditPage extends Component {
 
   componentDidUpdate() {
     const { user, subaccount, getSubaccount } = this.props;
-    if (user && user.access === 'subaccount_reporting' && (!subaccount || subaccount.id !== user.subaccount_id)) {
+    if (
+      user && user.access === 'subaccount_reporting' &&
+      (!subaccount || subaccount.id !== user.subaccount_id)
+    ) {
       getSubaccount(user.subaccount_id);
     }
   }
