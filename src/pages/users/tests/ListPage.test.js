@@ -16,10 +16,13 @@ describe('Page: Users List', () => {
       },
       loading: false,
       listUsers: jest.fn(),
+      hasSubaccounts: false,
       users: [
         { name: 'Test User 1', username: 'test-user-1', access: 'admin', email: 'user1@test.com', tfa_enabled: false },
-        { name: 'Test User 2', username: 'test-user-2', access: 'admin', email: 'user2@test.com', tfa_enabled: true }
-      ]
+        { name: 'Test User 2', username: 'test-user-2', access: 'admin', email: 'user2@test.com', tfa_enabled: true },
+        { name: 'Test User 3', username: 'test-user-3', access: 'admin', email: 'user3@test.com', tfa_enabled: true, subaccount_id: 125 }
+      ],
+      isSubAccountReportingLive: true
     };
     wrapper = shallow(<ListPage {...props} />);
     instance = wrapper.instance();
@@ -69,6 +72,21 @@ describe('Page: Users List', () => {
     const timeAgoProps = wrapper.find(TimeAgo).props();
     expect(timeAgoProps.date).toBeInstanceOf(Date);
     expect(timeAgoProps.live).toEqual(false);
+  });
+
+  // This assumes `hasSubaccounts=false` in the wrapper as a precondition
+  it('should render subaccount info when the account uses them', () => {
+    wrapper.setProps({ hasSubaccounts: true });
+    expect(wrapper.find('TableCollection').prop('columns')).toContainEqual(expect.objectContaining({
+      label: 'Subaccount'
+    }));
+  });
+
+  it('should not render subaccount info when the feature is disabled', () => {
+    wrapper.setProps({ hasSubaccounts: true, isSubAccountReportingLive: false });
+    expect(wrapper.find('TableCollection').prop('columns')).not.toContainEqual(expect.objectContaining({
+      label: 'Subaccount'
+    }));
   });
 
   it('should render ActionPopover', () => {

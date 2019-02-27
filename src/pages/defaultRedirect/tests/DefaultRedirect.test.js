@@ -1,5 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import cases from 'jest-in-case';
+
 import { DefaultRedirect } from '../DefaultRedirect';
 
 jest.mock('src/config', () => ({
@@ -59,10 +61,10 @@ describe('Component: DefaultRedirect', () => {
     expect(props.history.replace).not.toHaveBeenCalled();
   });
 
-  it('should redirect to summary report for reporting users', () => {
+  cases('should redirect to summary report for some users', ({ accessLevel }) => {
     wrapper.setProps({
       currentUser: {
-        access_level: 'reporting'
+        access_level: accessLevel
       },
       ready: true
     });
@@ -74,6 +76,9 @@ describe('Component: DefaultRedirect', () => {
       search: '?test=one',
       state: {}
     });
+  }, {
+    reporting: { accessLevel: 'reporting' },
+    'subaccount reporting': { accessLevel: 'subaccount_reporting' }
   });
 
   it('should redirect based on config', () => {

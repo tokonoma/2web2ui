@@ -6,6 +6,7 @@ exports[`Signals Spam Trap Details Container gets spam hits on mount correctly 1
   facet="sending_domain"
   facetId="test.com"
   gap={1}
+  selected="2015-01-01"
   subaccountId="101"
   xTicks={
     Array [

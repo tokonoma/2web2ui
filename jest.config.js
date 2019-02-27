@@ -32,7 +32,7 @@ module.exports = {
   setupFiles: [
     '<rootDir>/config/polyfills.js'
   ],
-  setupTestFrameworkScriptFile: '<rootDir>/config/jest/setup.js',
+  setupFilesAfterEnv: ['<rootDir>/config/jest/setup.js'],
   testMatch: [
     '<rootDir>/src/**/__tests__/**/*.js?(x)',
     '<rootDir>/(src|scripts)/**/*.test.js?(x)'
@@ -60,7 +60,8 @@ module.exports = {
   clearMocks: true,
   restoreMocks: true,
   globals: {
-    'SUPPORTED_BROWSERS': {}
+    'SUPPORTED_BROWSERS': {},
+    'TENANT_CONFIGS': {}
   },
   watchPathIgnorePatterns: [
     '<rootDir>/build'
