@@ -56,17 +56,33 @@ export class EditPage extends Component {
     }
   }
 
+  componentDidUpdate() {
+    const { user, subaccount, getSubaccount } = this.props;
+    if (
+      user && user.access === 'subaccount_reporting' &&
+      (!subaccount || subaccount.id !== user.subaccount_id)
+    ) {
+      getSubaccount(user.subaccount_id);
+    }
+  }
+
   render() {
     const {
       currentUser,
       handleSubmit,
       isAccountSingleSignOnEnabled,
+      loading,
       loadingError,
+      subaccount,
       submitting,
       updatePending,
       user,
       users
     } = this.props;
+
+    if (loading) {
+      return <Loading />;
+    }
 
     if (loadingError) {
       return <Redirect to="/account/users" />;
@@ -109,8 +125,8 @@ export class EditPage extends Component {
           currentUser={currentUser}
           isAccountSingleSignOnEnabled={isAccountSingleSignOnEnabled}
           submitting={submitting}
+          subaccount={subaccount}
         />
-
         <DeleteModal
           onDelete={this.deleteUser}
           onCancel={this.toggleDelete}
