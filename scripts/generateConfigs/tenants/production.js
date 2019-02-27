@@ -634,6 +634,12 @@ const productionTenants = {
     trackingDomains: {
       cnameValue: 'track.spe.zyngamail.com'
     }
+  },
+  s3: {
+    apiBase: 'https://api.sparkpost.com/api'
+  },
+  s3eu: {
+    apiBase: 'https://api.eu.sparkpost.com/api'
   }
 };
 

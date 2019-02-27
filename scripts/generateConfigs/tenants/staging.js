@@ -107,6 +107,9 @@ const stagingTenants = {
     trackingDomains: {
       cnameValue: 'click.spestaging42.msyscloud.com'
     }
+  },
+  s3: {
+    apiBase: 'https://api-staging.sparkpost.com/api'
   }
 };
 

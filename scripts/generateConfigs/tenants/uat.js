@@ -119,6 +119,9 @@ const uatTenants = {
     trackingDomains: {
       cnameValue: 'uat4.spgo.io'
     }
+  },
+  s3: {
+    apiBase: 'https://api-uat.tst.sparkpost.com/api'
   }
 };
 
