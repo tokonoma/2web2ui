@@ -20,7 +20,7 @@ export const EditForm = ({
     ? <span>Enabling single sign-on will delete this user's password. If they switch back to password-based authentication, they'll need to reset their password on login.</span>
     : <span>Single sign-on has not been configured for your account. Enable in your <PageLink to="/account/settings">account's settings</PageLink>.</span>;
 
-  const subaccountReportingUser = user.access === 'subaccount_reporting';
+  const subaccountReportingUser = user.access === ROLES.SUBACCOUNT_REPORTING;
 
   const roleSection = subaccountReportingUser
     ? (<>
@@ -31,6 +31,7 @@ export const EditForm = ({
       </>)
     : (<Field
       name="access"
+      allowSubaccountAssignment={false}
       disabled={user.isCurrentUser}
       allowSuperUser={currentUser.access === ROLES.SUPERUSER}
       component={RoleRadioGroup}
