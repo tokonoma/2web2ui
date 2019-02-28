@@ -259,6 +259,39 @@ const routes = [
     title: 'Signals',
     supportDocSearch: 'signals'
   },
+  // Signals
+  {
+    path: '/signals/engagement/cohorts/:facet/:facetId',
+    component: signals.EngagementRecencyPage,
+    condition: hasGrants('signals/manage'),
+    layout: App,
+    title: 'Signals',
+    supportDocSearch: 'signals'
+  },
+  {
+    path: '/signals/engagement/engagement-rate/:facet/:facetId',
+    component: signals.EngagementRecencyPage,
+    condition: hasGrants('signals/manage'),
+    layout: App,
+    title: 'Signals',
+    supportDocSearch: 'signals'
+  },
+  {
+    path: '/signals/engagement/unsubscribes/:facet/:facetId',
+    component: signals.EngagementRecencyPage,
+    condition: hasGrants('signals/manage'),
+    layout: App,
+    title: 'Signals',
+    supportDocSearch: 'signals'
+  },
+  {
+    path: '/signals/engagement/complaints/:facet/:facetId',
+    component: signals.EngagementRecencyPage,
+    condition: hasGrants('signals/manage'),
+    layout: App,
+    title: 'Signals',
+    supportDocSearch: 'signals'
+  },
   {
     path: '/account/security',
     redirect: '/account/profile'
