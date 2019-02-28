@@ -14,7 +14,6 @@ import { METRICS } from '../constants/metrics';
 import { FACETS } from '../constants/facets';
 import { COMPARATOR } from '../constants/comparator';
 import { CRITERIA } from '../constants/criteria';
-import _ from 'lodash';
 
 
 // Helpers & Validation
@@ -38,7 +37,7 @@ export class AlertForm extends Component {
       submitting,
       submitText,
       assignTo,
-      alert_metric,
+      alert_metric = '',
       facet_name,
       handleSubmit,
       enabled
@@ -181,10 +180,10 @@ const mapStateToProps = (state, props) => {
   return {
     disabled: props.pristine || props.submitting,
     submitText: props.submitting ? 'Submitting...' : (props.newAlert ? 'Create Alert' : 'Update Alert'),
-    alert_metric: selector(state, 'alert_metric') || _.get(alertValues, 'alert_metric', 'monthly_sending_limit'),
-    facet_name: selector(state, 'facet_name') || _.get(alertValues, 'facet_name', 'ALL'),
-    assignTo: selector(state, 'assignTo') || _.get(alertValues, 'assignTo', 'all'),
-    alert_subaccount: selector(state, 'alert_subaccount') || _.get(alertValues, 'alert_subaccount', -1),
+    alert_metric: selector(state, 'alert_metric'),
+    facet_name: selector(state, 'facet_name'),
+    assignTo: selector(state, 'assignTo'),
+    alert_subaccount: selector(state, 'alert_subaccount'),
     enabled: selector(state, 'enabled'),
     email_addresses: selector(state, 'email_addresses'),
     initialValues: alertValues
