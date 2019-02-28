@@ -637,11 +637,11 @@ const productionTenants = {
   },
   s3: {
     apiBase: 'https://api.sparkpost.com/api',
-    host: 'd1iefech7l5wkw.cloudfront.net',
+    host: 'd1wwnyhs80ogsb.cloudfront.net',
   },
   s3eu: {
     apiBase: 'https://api.eu.sparkpost.com/api',
-    host: 'd1ggohlq8osx21.cloudfront.net'
+    host: 'd2ud99kdrgp841.cloudfront.net'
   }
 };
 
