@@ -55,7 +55,7 @@ describe('Action Creator: MessageEvents', () => {
     beforeEach(() => {
       testState = { messageEvents: {
         cachedResultsByPage: [[]],
-        linkByPage: ['foo=bar1', 'for=bar2']
+        linkByPage: ['foo=bar1', 'for=bar2&cursor=foo==']
       }};
       dispatchMock = jest.fn((a) => a);
       getStateMock = jest.fn(() => testState);
@@ -71,7 +71,8 @@ describe('Action Creator: MessageEvents', () => {
           currentPageIndex: currentPage - 1,
           method: 'GET',
           params: {
-            for: 'bar2'
+            for: 'bar2',
+            cursor: 'foo=='
           },
           showErrorAlert: false,
           url: '/v1/events/message'
