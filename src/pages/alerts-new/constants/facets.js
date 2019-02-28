@@ -1,5 +1,5 @@
 export const FACETS = {
-  ALL: 'ALL',
+  ALL: 'NONE',
   sending_domain: 'Sending Domain',
   ip_pool: 'IP Pool',
   campaign_id: 'Campaign ID'

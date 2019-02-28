@@ -3,5 +3,6 @@ import _ from 'lodash';
 
 export default function (state, id) {
   const subaccounts = getSubaccounts(state);
-  return _.find(subaccounts, { id: Number(id) });
+  const subaccountFound = _.find(subaccounts, { id: Number(id) });
+  return subaccountFound;
 }

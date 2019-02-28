@@ -10,7 +10,6 @@ import ToggleBlock from 'src/components/toggleBlock/ToggleBlock';
 import { TextFieldWrapper, SelectWrapper, RadioGroup, SubaccountTypeaheadWrapper } from 'src/components';
 import formatEditValues from '../helpers/formatEditValues';
 import getOptions from '../helpers/getOptions';
-import getSubaccountFromId from '../helpers/getSubaccountFromId';
 import { METRICS } from '../constants/metrics';
 import { FACETS } from '../constants/facets';
 import { COMPARATOR } from '../constants/comparator';
@@ -36,40 +35,26 @@ export class AlertForm extends Component {
 
   render() {
     const {
-      canModify,
       submitting,
       submitText,
-      readOnly,
-      // newAlert,
-      // deletePending,
-      // error,
-      // enabled,
       assignTo,
       alert_metric,
-      facet_name
-      // subaccount,
-      // alert_subaccount,
-      // criteria_comparator,
-      // criteria_value,
-      // criteria_metric
+      facet_name,
+      handleSubmit,
+      enabled
     } = this.props;
-    //console.log('alert_metric', alert_metric);
 
-
-
-    const disabled = !canModify || submitting;
-    //const booleanValue = true;
     const isSignals = alert_metric.startsWith('signals_');
 
     return (
-      <Form onSubmit={this.submitAlert}>
+      <Form onSubmit={handleSubmit}>
         <Panel>
           <Panel.Section>
             <Field
               name='name'
               label='Name'
               component={TextFieldWrapper}
-              disabled={readOnly}
+              disabled={submitting}
               validate={required}
             />
             <Field
@@ -89,7 +74,7 @@ export class AlertForm extends Component {
             />}
             {isSignals && assignTo === 'subaccount' &&
             <Field
-              name='alert_subaccount'
+              name='subaccount'
               component={SubaccountTypeaheadWrapper}
               validate={required}
             />}
@@ -103,7 +88,7 @@ export class AlertForm extends Component {
                     name='facet_name'
                     component={SelectWrapper}
                     options={getOptions(FACETS)}
-                    disabled={readOnly}
+                    disabled={submitting}
                     validate={required}
                   />
                 </div>
@@ -114,7 +99,7 @@ export class AlertForm extends Component {
                   <Field
                     name='facet_value'
                     component={TextFieldWrapper}
-                    disabled={readOnly}
+                    disabled={submitting}
                     validate={required}
                   />
                 </div>
@@ -129,7 +114,7 @@ export class AlertForm extends Component {
                     name='criteria_comparator'
                     component={SelectWrapper}
                     options={getOptions(COMPARATOR)}
-                    disabled={readOnly}
+                    disabled={submitting}
                     validate={required}
                   />
                 </div>
@@ -139,7 +124,7 @@ export class AlertForm extends Component {
                   <Field
                     name='criteria_value'
                     component={TextFieldWrapper}
-                    disabled={readOnly}
+                    disabled={submitting}
                     validate={required}
                   />
                 </div>
@@ -150,7 +135,7 @@ export class AlertForm extends Component {
                     name='criteria_metric'
                     component={SelectWrapper}
                     options={getOptions(CRITERIA)}
-                    disabled={readOnly}
+                    disabled={submitting}
                     validate={required}
                   />
                 </div>
@@ -161,7 +146,7 @@ export class AlertForm extends Component {
               name='email_addresses'
               label='Notify'
               component={TextFieldWrapper}
-              disabled={readOnly}
+              disabled={submitting}
               validate={required}
               multiline
             />
@@ -173,15 +158,16 @@ export class AlertForm extends Component {
                 <div>
                   <Field
                     name='enabled'
+                    checked={enabled}
                     component={ToggleBlock}
                     parse={this.parseToggle}
-                    disabled={readOnly}
+                    disabled={submitting}
                   />
                 </div>
               </Grid.Column>
             </Grid>
             <br/>
-            <Button submit primary disabled={disabled}>{submitText}</Button>
+            <Button submit primary disabled={submitting}>{submitText}</Button>
           </Panel.Section>
         </Panel>
       </Form>
@@ -189,25 +175,17 @@ export class AlertForm extends Component {
   }
 }
 const mapStateToProps = (state, props) => {
-  //console.log('state', state.alerts.get);
-  //console.log('props.newAlert', props.newAlert);
   const alertValues = formatEditValues(state, state.alerts.get);
-  alertValues.criteria_metric = 'threshold';
-  alertValues.facet_name = 'sending_domain';
-  //console.log('alertValues', alertValues);
   const selector = formValueSelector(formName);
-  //console.log('enabled', selector(state, 'enabled'));
-  //console.log('assignTo', selector(state, 'assignTo'));
-  //console.log('subaccount', selector(state, 'subaccount'));
 
   return {
     disabled: props.pristine || props.submitting,
     submitText: props.submitting ? 'Submitting...' : (props.newAlert ? 'Create Alert' : 'Update Alert'),
     alert_metric: selector(state, 'alert_metric') || _.get(alertValues, 'alert_metric', 'monthly_sending_limit'),
     facet_name: selector(state, 'facet_name') || _.get(alertValues, 'facet_name', 'ALL'),
-    assignTo: selector(state, 'assignTo'),
-    alert_subaccount: selector(state, 'alert_subaccount'),
-    subaccount: getSubaccountFromId(state, selector(state, 'alert_subaccount')),
+    assignTo: selector(state, 'assignTo') || _.get(alertValues, 'assignTo', 'all'),
+    alert_subaccount: selector(state, 'alert_subaccount') || _.get(alertValues, 'alert_subaccount', -1),
+    enabled: selector(state, 'enabled'),
     initialValues: alertValues
   };
 };

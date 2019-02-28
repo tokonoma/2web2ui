@@ -1,17 +1,16 @@
 
 import getSubaccountFromId from './getSubaccountFromId';
 import getAssignTo from './getAssignTo';
+import _ from 'lodash';
 
-export default function (state, { id, name, alert_metric, description, alert_subaccount, email_addresses, threshold, enabled, target, active }) {
+export default function (state, { id, name, alert_metric, alert_subaccount, email_addresses, facet_name, facet_value, threshold, enabled, target, active }) {
   const criteria_comparator = threshold.error.comparator;
-  //console.log('criteria_comparator', criteria_comparator);
-  //console.log('alert_metric formatEditValues', alert_metric);
-  alert_subaccount = 246;
+  let criteria_metric = 'threshold';
+  criteria_metric = _.replace(alert_metric, 'signals_health_', '');
   const criteria_value = threshold.error.target;
   const assignTo = getAssignTo(alert_subaccount);
-  //console.log('assignTo', assignTo);
   const subaccount = getSubaccountFromId(state, alert_subaccount);
-  const values = { id, name, alert_metric, assignTo, subaccount, description, alert_subaccount, email_addresses, criteria_comparator, criteria_value, enabled, target, active };
+  const values = { id, name, alert_metric, assignTo, subaccount, alert_subaccount, email_addresses, facet_name, facet_value, criteria_comparator, criteria_value, criteria_metric, enabled };
 
   return values;
 }
