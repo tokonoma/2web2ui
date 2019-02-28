@@ -73,9 +73,9 @@ export class OnboardingPlanPage extends Component {
     if (selectedPlan.isFree) {
       return (
         <Panel.Section>
-          <p>Our full-featured, free account provides you:</p>
+          <p>Full featured test account that includes:</p>
           <ul>
-            <li>Up to 15,000 free messages for first 30 days, then 500/month forever.</li>
+            <li>Limited sending volume for testing.</li>
             <li>Access to all of our powerful API features.</li>
             <li>30 days of free technical support to get you up and running.</li>
           </ul>
