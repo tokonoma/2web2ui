@@ -135,7 +135,7 @@ export class AlertForm extends Component {
                     name='criteria_metric'
                     component={SelectWrapper}
                     options={getOptions(CRITERIA)}
-                    disabled={submitting}
+                    disabled={true}
                     validate={required}
                   />
                 </div>
@@ -186,6 +186,7 @@ const mapStateToProps = (state, props) => {
     assignTo: selector(state, 'assignTo') || _.get(alertValues, 'assignTo', 'all'),
     alert_subaccount: selector(state, 'alert_subaccount') || _.get(alertValues, 'alert_subaccount', -1),
     enabled: selector(state, 'enabled'),
+    email_addresses: selector(state, 'email_addresses'),
     initialValues: alertValues
   };
 };

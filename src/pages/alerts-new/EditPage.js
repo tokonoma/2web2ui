@@ -4,6 +4,7 @@ import { Page } from '@sparkpost/matchbox';
 import withAlertsEdit from './containers/EditPage.container';
 import AlertForm from './components/AlertForm';
 import { Loading, DeleteModal, ApiErrorBanner } from 'src/components';
+import _ from 'lodash';
 
 class EditPage extends Component {
   state = {
@@ -47,6 +48,9 @@ class EditPage extends Component {
       enabled
     } = values;
 
+    const addresses = _.split(email_addresses,',');
+    const addr_array = _.map(addresses, (address) => address.trim());
+
     await updateAlert({
       id,
       data: {
@@ -54,7 +58,7 @@ class EditPage extends Component {
         alert_metric,
         assignTo,
         alert_subaccount,
-        email_addresses,
+        email_addresses: addr_array,
         facet_name,
         facet_value,
         threshold: {
