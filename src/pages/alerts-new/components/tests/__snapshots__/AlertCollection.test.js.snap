@@ -14,7 +14,7 @@ exports[`TestCollection Component should render 1`] = `
         "sortKey": "alert_metric",
       },
       Object {
-        "label": "Status",
+        "label": "Enabled",
         "sortKey": "enabled",
       },
       null,
@@ -36,7 +36,6 @@ exports[`TestCollection Component should render 1`] = `
       ],
       "keyMap": Object {
         "metric": "alert_metric",
-        "status": "enabled",
       },
       "show": true,
     }
@@ -81,11 +80,11 @@ Array [
   <Tag>
     Monthly Sending Limit
   </Tag>,
-  <Tag
-    color="blue"
-  >
-    Enabled
-  </Tag>,
+  <Connect(AlertToggle)
+    enabled={true}
+    id="id-1"
+    subaccountId={101}
+  />,
   <div
     style={
       Object {
@@ -143,11 +142,10 @@ Array [
   <Tag>
     Monthly Sending Limit
   </Tag>,
-  <Tag
-    color={null}
-  >
-    Disabled
-  </Tag>,
+  <Connect(AlertToggle)
+    enabled={false}
+    id="id-2"
+  />,
   <div
     style={
       Object {
@@ -205,11 +203,10 @@ Array [
   <Tag>
     another_metric
   </Tag>,
-  <Tag
-    color="blue"
-  >
-    Enabled
-  </Tag>,
+  <Connect(AlertToggle)
+    enabled={true}
+    id="id-3"
+  />,
   <div
     style={
       Object {
