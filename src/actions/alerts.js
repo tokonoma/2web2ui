@@ -22,7 +22,7 @@ export function createAlert({ data }) {
   });
 }
 
-export function updateAlert({ id, data }) {
+export function updateAlert({ data, id }) {
   return sparkpostApiRequest({
     type: 'UPDATE_ALERT',
     meta: {
@@ -33,12 +33,24 @@ export function updateAlert({ id, data }) {
   });
 }
 
+export function setEnabledStatus({ enabled, id }) {
+  return sparkpostApiRequest({
+    type: 'SET_ALERT_ENABLED_STATUS',
+    meta: {
+      method: 'PUT',
+      url: `/labs/alerts/${id}`,
+      data: { enabled }
+    }
+  });
+}
+
 export function deleteAlert({ id }) {
   return sparkpostApiRequest({
     type: 'DELETE_ALERT',
     meta: {
       method: 'DELETE',
-      url: `/labs/alerts/${id}`
+      url: `/labs/alerts/${id}`,
+      id
     }
   });
 }

@@ -2,7 +2,7 @@ import moment from 'moment';
 import config from 'src/config';
 import _ from 'lodash';
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
-import qs from 'query-string';
+import qs from 'qs';
 
 const { apiDateFormat, messageEvents: { retentionPeriodDays }} = config;
 

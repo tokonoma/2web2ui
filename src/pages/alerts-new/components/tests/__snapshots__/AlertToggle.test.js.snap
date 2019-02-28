@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AlertToggle Component should render initial state 1`] = `
+<div
+  className="Wrapper"
+>
+  <Toggle
+    checked={true}
+    compact={true}
+    disabled={false}
+    id="mock-id"
+    onChange={[Function]}
+  />
+</div>
+`;

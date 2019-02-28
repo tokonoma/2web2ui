@@ -5,7 +5,8 @@ const initialState = {
   listError: null,
   createPending: false,
   updatePending: false,
-  deletePending: false
+  deletePending: false,
+  setEnabledStatusPending: false
 };
 
 export default (state = initialState, { type, payload, meta }) => {
@@ -50,12 +51,27 @@ export default (state = initialState, { type, payload, meta }) => {
     case 'UPDATE_ALERT_FAIL':
       return { ...state, updatePending: false };
 
+    // UPDATE single list row enabled status
+    case 'SET_ALERT_ENABLED_STATUS_PENDING':
+      return { ...state, setEnabledStatusPending: true };
+
+    case 'SET_ALERT_ENABLED_STATUS_SUCCESS':
+    case 'SET_ALERT_ENABLED_STATUS_FAIL':
+      return { ...state, setEnabledStatusPending: false };
+
       /* DELETE */
 
     case 'DELETE_ALERT_PENDING':
       return { ...state, deletePending: true };
 
     case 'DELETE_ALERT_SUCCESS':
+      return {
+        ...state,
+        deletePending: false,
+        // TODO will need to match subaccount id
+        list: state.list.filter((a) => a.id !== meta.id)
+      };
+
     case 'DELETE_ALERT_FAIL':
       return { ...state, deletePending: false };
 

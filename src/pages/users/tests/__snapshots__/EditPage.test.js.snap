@@ -359,3 +359,5 @@ exports[`Page: Users Edit should show a delete modal 1`] = `
   />
 </Page>
 `;
+
+exports[`Page: Users Edit should show a loading screen loading if the page is loading 1`] = `<Loading />`;

@@ -8,10 +8,11 @@ import { required, email } from 'src/helpers/validation';
 import { inviteUser } from 'src/actions/users';
 import { showAlert } from 'src/actions/globalAlert';
 import { trimWhitespaces } from 'src/helpers/string';
+import { FORMS, ROLES } from 'src/constants';
+import { hasUiOption } from 'src/helpers/conditions/account';
 
 import RoleRadioGroup from './components/RoleRadioGroup';
 
-const formName = 'userForm';
 const breadcrumbAction = {
   content: 'Users',
   Component: Link,
@@ -25,9 +26,11 @@ export class CreatePage extends Component {
       showAlert,
       history
     } = this.props;
-    const { email, access } = values;
+    const { email, access, useSubaccount, subaccount } = values;
 
-    return inviteUser(email, access)
+    const access_level = useSubaccount ? ROLES.SUBACCOUNT_REPORTING : access;
+
+    return inviteUser(email, access_level, subaccount)
       .then(() => {
         showAlert({
           type: 'success',
@@ -41,7 +44,8 @@ export class CreatePage extends Component {
     const {
       submitting,
       pristine,
-      handleSubmit
+      handleSubmit,
+      isSubaccountReportingLive
     } = this.props;
 
     return (
@@ -60,6 +64,7 @@ export class CreatePage extends Component {
               <Field
                 name="access"
                 component={RoleRadioGroup}
+                allowSubaccountAssignment={isSubaccountReportingLive}
               />
               <Button submit primary disabled={submitting || pristine}>
                 {submitting ? 'Loading' : 'Add User'}
@@ -72,15 +77,16 @@ export class CreatePage extends Component {
   }
 }
 
-const mapStateToProps = () => ({
+const mapStateToProps = (state) => ({
   initialValues: {
-    access: 'admin' // Sadly redux-form does not reflect a select's initial value
-  }
+    access: ROLES.ADMIN // Sadly redux-form does not reflect a select's initial value
+  },
+  isSubaccountReportingLive: hasUiOption('subaccount_reporting')(state)
 });
 
 const mapDispatchToProps = { inviteUser, showAlert };
 
-const ReduxCreatePage = reduxForm({ form: formName })(CreatePage);
+const ReduxCreatePage = reduxForm({ form: FORMS.INVITE_USER })(CreatePage);
 
 export default withRouter(
   connect(mapStateToProps, mapDispatchToProps)(ReduxCreatePage)

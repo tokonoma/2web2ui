@@ -55,7 +55,8 @@ export const LINKS = {
   ALERTS_DOCS: 'https://developers.sparkpost.com/api/alerts/#alerts-post-create-an-alert',
   ALERTS_SURVEY: 'https://goo.gl/forms/rnIuTvdVF2xhpKCy2',
   SNIPPET_SUBSTITUTION_REFERENCE: 'https://developers.sparkpost.com/api/substitutions-reference/#header-snippets',
-  MANDATORY_TFA: 'https://www.sparkpost.com/docs/my-account-and-profile/enabling-two-factor-authentication/'
+  MANDATORY_TFA: 'https://www.sparkpost.com/docs/my-account-and-profile/enabling-two-factor-authentication/',
+  RECIPIENT_VALIDATION_ACCESS: 'https://www.sparkpost.com/rv-access'
 };
 
 export const ENTERPRISE_PLAN_CODES = ['ent1'];
@@ -81,6 +82,7 @@ export const FORMS = {
   JOIN: 'joinForm',
   JOIN_PLAN: 'joinPlanForm',
   JOIN_SENDING_DOMAIN: 'joinSendingDomainForm',
+  INVITE_USER: 'userInviteForm',
   EDIT_USER: 'userEditForm',
   EVENTS_SEARCH: 'eventsSearchForm'
 };
@@ -104,6 +106,8 @@ export const EVENTS_SEARCH_FILTERS = {
 };
 export const DEFAULT_PER_PAGE_BUTTONS = [10, 25, 50, 100];
 
+export const SUBACCOUNT_REPORTING_ROLE = 'subaccount_reporting';
+
 export const ANALYTICS_CREATE_ACCOUNT = 'create account';
 export const ANALYTICS_ADDON_IP = 'dedicated_ips';
 export const ANALYTICS_PREMIUM_SUPPORT = 'premium-support';
@@ -117,3 +121,10 @@ export const ANALYTICS_WHITELISTED_FORMS = [
   FORMS.JOIN_PLAN,
   FORMS.JOIN_SENDING_DOMAIN
 ];
+
+export const ROLES = {
+  ADMIN: 'admin',
+  REPORTING: 'reporting',
+  SUBACCOUNT_REPORTING: 'subaccount_reporting',
+  SUPERUSER: 'superuser'
+};

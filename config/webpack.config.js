@@ -26,6 +26,7 @@ const typescriptFormatter = require('react-dev-utils/typescriptFormatter');
 const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const snapshotGenerator = require('../scripts/browsersSnapshotGen');
+const generateConfigs = require('../scripts/generateConfigs');
 
 
 // Source maps are resource heavy and can cause out of memory issue for large source files.
@@ -328,7 +329,7 @@ module.exports = function(webpackEnv) {
                 customize: require.resolve(
                   'babel-preset-react-app/webpack-overrides'
                 ),
-                
+
                 plugins: [
                   [
                     require.resolve('babel-plugin-named-asset-import'),
@@ -368,7 +369,7 @@ module.exports = function(webpackEnv) {
                 ],
                 cacheDirectory: true,
                 cacheCompression: isEnvProduction,
-                
+
                 // If an error happens in a package, it's possible to be
                 // because it was compiled. Thus, we don't want the browser
                 // debugger to show the original code. Instead, the code
@@ -641,7 +642,8 @@ module.exports = function(webpackEnv) {
           logLevel: 'info'
         }),
         new webpack.DefinePlugin({
-          SUPPORTED_BROWSERS: JSON.stringify(snapshotGenerator())
+          SUPPORTED_BROWSERS: JSON.stringify(snapshotGenerator()), //Refer to docs/browser-support-sentry-issue.md for more info
+          TENANT_CONFIGS: JSON.stringify(generateConfigs())
         }),
       ].filter(Boolean),
     // Some libraries import Node modules but don't use them in the browser.

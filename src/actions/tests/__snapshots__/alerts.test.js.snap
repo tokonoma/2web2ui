@@ -19,6 +19,7 @@ exports[`Action Creator: Alerts should dispatch a delete action 1`] = `
 Array [
   Object {
     "meta": Object {
+      "id": "alert-id",
       "method": "DELETE",
       "url": "/labs/alerts/alert-id",
     },
@@ -36,6 +37,21 @@ Array [
       "url": "/labs/alerts",
     },
     "type": "LIST_ALERTS",
+  },
+]
+`;
+
+exports[`Action Creator: Alerts should dispatch a set enabled status action 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "data": Object {
+        "enabled": false,
+      },
+      "method": "PUT",
+      "url": "/labs/alerts/alert-id",
+    },
+    "type": "SET_ALERT_ENABLED_STATUS",
   },
 ]
 `;

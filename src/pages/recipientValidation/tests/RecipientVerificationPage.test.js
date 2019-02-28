@@ -7,11 +7,11 @@ describe('Page: Recipient Email Verification', () => {
   let instance;
 
   beforeEach(() => {
-    wrapper = shallow(<RecipientValidationPage />);
+    wrapper = shallow(<RecipientValidationPage/>);
     instance = wrapper.instance();
   });
 
-  it('should render happy path', () => {
+  it('should render Recipient Validation page correctly', () => {
     expect(wrapper).toMatchSnapshot();
   });
 

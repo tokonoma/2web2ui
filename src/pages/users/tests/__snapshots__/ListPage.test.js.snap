@@ -105,6 +105,14 @@ exports[`Page: Users List should render correctly by default 1`] = `
             "tfa_enabled": true,
             "username": "test-user-2",
           },
+          Object {
+            "access": "admin",
+            "email": "user3@test.com",
+            "name": "Test User 3",
+            "subaccount_id": 125,
+            "tfa_enabled": true,
+            "username": "test-user-3",
+          },
         ]
       }
     />
@@ -258,6 +266,14 @@ exports[`Page: Users List should show a delete modal 1`] = `
             "name": "Test User 2",
             "tfa_enabled": true,
             "username": "test-user-2",
+          },
+          Object {
+            "access": "admin",
+            "email": "user3@test.com",
+            "name": "Test User 3",
+            "subaccount_id": 125,
+            "tfa_enabled": true,
+            "username": "test-user-3",
           },
         ]
       }
