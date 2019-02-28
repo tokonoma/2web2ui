@@ -8,13 +8,12 @@ import { Panel, Grid, Button } from '@sparkpost/matchbox';
 import { withRouter } from 'react-router-dom';
 import ToggleBlock from 'src/components/toggleBlock/ToggleBlock';
 import { TextFieldWrapper, SelectWrapper, RadioGroup, SubaccountTypeaheadWrapper } from 'src/components';
-import formatEditValues from '../helpers/formatEditValues';
+import { formatEditValues } from 'src/selectors/alerts';
 import getOptions from '../helpers/getOptions';
 import { METRICS } from '../constants/metrics';
 import { FACETS } from '../constants/facets';
 import { COMPARATOR } from '../constants/comparator';
 import { CRITERIA } from '../constants/criteria';
-
 
 // Helpers & Validation
 import { required } from 'src/helpers/validation';
@@ -35,14 +34,15 @@ export class AlertForm extends Component {
   render() {
     const {
       submitting,
-      submitText,
       assignTo,
       alert_metric = '',
       facet_name,
       handleSubmit,
-      enabled
+      enabled,
+      newAlert
     } = this.props;
 
+    const submitText = submitting ? 'Submitting...' : (newAlert ? 'Create Alert' : 'Update Alert');
     const isSignals = alert_metric.startsWith('signals_');
 
     return (
@@ -110,7 +110,7 @@ export class AlertForm extends Component {
               <Grid.Column xs={6} md={4}>
                 <div>
                   <Field
-                    name='criteria_comparator'
+                    name='threshold.error.comparator'
                     component={SelectWrapper}
                     options={getOptions(COMPARATOR)}
                     disabled={submitting}
@@ -121,7 +121,8 @@ export class AlertForm extends Component {
               <Grid.Column xs={6} md={4}>
                 <div>
                   <Field
-                    name='criteria_value'
+                    name='threshold.error.target'
+                    parse={Number}
                     component={TextFieldWrapper}
                     disabled={submitting}
                     validate={required}
@@ -174,19 +175,18 @@ export class AlertForm extends Component {
   }
 }
 const mapStateToProps = (state, props) => {
-  const alertValues = formatEditValues(state, state.alerts.get);
+  const alertValues = formatEditValues(state, state.alerts.alert);
   const selector = formValueSelector(formName);
 
   return {
     disabled: props.pristine || props.submitting,
-    submitText: props.submitting ? 'Submitting...' : (props.newAlert ? 'Create Alert' : 'Update Alert'),
     alert_metric: selector(state, 'alert_metric'),
     facet_name: selector(state, 'facet_name'),
     assignTo: selector(state, 'assignTo'),
     alert_subaccount: selector(state, 'alert_subaccount'),
     enabled: selector(state, 'enabled'),
     email_addresses: selector(state, 'email_addresses'),
-    initialValues: alertValues
+    initialValues: props.newAlert ? alertValues : null
   };
 };
 

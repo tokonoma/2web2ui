@@ -1,25 +1,14 @@
-import { getSubaccounts, selectSubaccountIdFromQuery } from 'src/selectors/subaccounts';
-import { createSelector } from 'reselect';
+import { selectSubaccountFromId } from './subaccounts';
+import getAssignTo from 'src/pages/alerts-new/helpers/getAssignTo';
 import _ from 'lodash';
 
 
-/*
- * Selects subaccount object from qp
- * Used to fill in initial values for the subaccount typeahead
- * A variation of the selectSubaccountFromQuery subaccount selector
- */
-export const selectInitialSubaccountValue = createSelector(
-  [getSubaccounts, selectSubaccountIdFromQuery],
-  (subaccounts, id) => {
+export function formatEditValues(state, { id, name, alert_metric, alert_subaccount, email_addresses, facet_name, facet_value, threshold, enabled }) {
+  let criteria_metric = 'threshold';
+  criteria_metric = _.replace(alert_metric, 'signals_health_', '');
+  const assignTo = getAssignTo(alert_subaccount);
+  const subaccount = selectSubaccountFromId(state, alert_subaccount);
+  const values = { id, name, alert_metric, assignTo, subaccount, alert_subaccount, email_addresses, facet_name, facet_value, threshold, criteria_metric, enabled };
 
-    if (Number(id) === 0) {
-      return 'Master account only';
-    }
-
-    if (id === undefined || id === -1) {
-      return 'Master and all subaccounts';
-    }
-
-    return _.find(subaccounts, { id: Number(id) });
-  }
-);
+  return values;
+}

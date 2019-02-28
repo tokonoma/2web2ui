@@ -7,7 +7,8 @@ function withAlertsEdit(WrappedComponent) {
   const mapDispatchToProps = { getAlert, updateAlert, deleteAlert, showAlert };
 
   const mapStateToProps = (state, props) => ({
-    alert: state.alerts.get,
+    id: props.match.params.id,
+    alert: state.alerts.alert,
     error: state.alerts.getError,
     loading: state.alerts.getPending,
     deletePending: state.alerts.deletePending

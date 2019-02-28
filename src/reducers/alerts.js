@@ -31,7 +31,7 @@ export default (state = initialState, { type, payload, meta }) => {
       return { ...state, getPending: false, getError: payload };
 
     case 'GET_ALERT_SUCCESS':
-      return { ...state, get: payload, getPending: false };
+      return { ...state, alert: payload, getPending: false };
 
       /* CREATE */
 

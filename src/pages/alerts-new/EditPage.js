@@ -8,12 +8,11 @@ import _ from 'lodash';
 
 class EditPage extends Component {
   state = {
-    showDeleteModal: false,
-    alertToDelete: {}
+    showDeleteModal: false
   }
 
   componentDidMount() {
-    this.props.getAlert({ id: this.props.match.params.id });
+    this.props.getAlert({ id: this.props.id });
   }
 
   toggleDelete = () => {
@@ -34,41 +33,12 @@ class EditPage extends Component {
   */
   update = async (values) => {
     const { getAlert, updateAlert, showAlert } = this.props;
-    const {
-      id,
-      name,
-      alert_metric,
-      assignTo,
-      alert_subaccount,
-      email_addresses,
-      facet_name,
-      facet_value,
-      criteria_comparator,
-      criteria_value,
-      enabled
-    } = values;
-
-    const addresses = _.split(email_addresses,',');
-    const addr_array = _.map(addresses, (address) => address.trim());
+    const splitAddresses = _.split(values.email_addresses,',');
+    values.email_addresses = _.map(splitAddresses, (splitAddress) => splitAddress.trim());
 
     await updateAlert({
-      id,
-      data: {
-        name,
-        alert_metric,
-        assignTo,
-        alert_subaccount,
-        email_addresses: addr_array,
-        facet_name,
-        facet_value,
-        threshold: {
-          error: {
-            comparator: criteria_comparator,
-            target: Number(criteria_value)
-          }
-        },
-        enabled
-      }
+      id: values.id,
+      data: _.omit(values, 'id', 'subaccount')
     });
 
     showAlert({ type: 'success', message: 'Update Successful' });
@@ -77,8 +47,7 @@ class EditPage extends Component {
 
   renderForm() {
     return (
-      <AlertForm alert={this.props.alert} submitText = 'Update Alert' formName = 'EditAlertForm' newAlert = {false}
-        toggleDelete={this.toggleDelete} onSubmit = {this.update}/>
+      <AlertForm newAlert = {false} onSubmit = {this.update}/>
     );
   }
 
