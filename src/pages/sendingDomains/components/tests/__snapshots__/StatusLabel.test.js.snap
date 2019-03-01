@@ -1,15 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`StatusLabel renders auto verified label 1`] = `
-<div>
-  <AutoVerifiedIcon />
-   
-  <strong>
-    Auto Verified
-  </strong>
-</div>
-`;
-
 exports[`StatusLabel renders status tag 1`] = `
 <DomainStatusTag
   status="unverified"
