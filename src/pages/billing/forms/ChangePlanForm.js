@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { reduxForm, formValueSelector } from 'redux-form';
 import { withRouter } from 'react-router-dom';
 import qs from 'query-string';
-import { fetch as fetchAccount, getPlans } from 'src/actions/account';
+import { fetch as fetchAccount, getPlans, getBillingInfo } from 'src/actions/account';
 import { updateSubscription, getBillingCountries, verifyPromoCode, clearPromoCode } from 'src/actions/billing';
 import billingCreate from 'src/actions/billingCreate';
 import billingUpdate from 'src/actions/billingUpdate';
@@ -39,7 +39,8 @@ export class ChangePlanForm extends Component {
   componentDidMount() {
     this.props.getPlans();
     this.props.getBillingCountries();
-    this.props.fetchAccount({ include: 'billing' });
+    this.props.fetchAccount();
+    this.props.getBillingInfo();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -180,7 +181,7 @@ const mapStateToProps = (state, props) => {
   const plans = selectVisiblePlans(state);
 
   return {
-    loading: (!state.account.created && state.account.loading) || (plans.length === 0 && state.billing.plansLoading),
+    loading: (!state.account.created && state.account.loading) || (plans.length === 0 && state.billing.plansLoading) || state.account.billingLoading,
     isAws: selectCondition(isAws)(state),
     account: state.account,
     billing: state.billing,
@@ -193,6 +194,6 @@ const mapStateToProps = (state, props) => {
   };
 };
 
-const mapDispatchtoProps = { billingCreate, billingUpdate, updateSubscription, showAlert, getPlans, getBillingCountries, fetchAccount, verifyPromoCode, clearPromoCode };
+const mapDispatchtoProps = { getBillingInfo, billingCreate, billingUpdate, updateSubscription, showAlert, getPlans, getBillingCountries, fetchAccount, verifyPromoCode, clearPromoCode };
 const formOptions = { form: FORMNAME, asyncValidate: promoCodeValidate(FORMNAME), asyncChangeFields: ['planpicker'], asyncBlurFields: ['promoCode']};
 export default withRouter(connect(mapStateToProps, mapDispatchtoProps)(reduxForm(formOptions)(ChangePlanForm)));

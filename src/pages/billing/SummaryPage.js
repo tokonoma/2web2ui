@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Page } from '@sparkpost/matchbox';
-import { fetch as fetchAccount, getPlans } from 'src/actions/account';
+import { fetch as fetchAccount, getPlans, getBillingInfo } from 'src/actions/account';
 import { list as getSendingIps } from 'src/actions/sendingIps';
 import { selectBillingInfo } from 'src/selectors/accountBillingInfo';
 import { selectAccountAgeInDays } from 'src/selectors/accountAge';
@@ -17,7 +17,8 @@ import { list as getInvoices } from 'src/actions/invoices';
 export class BillingSummaryPage extends Component {
 
   componentDidMount() {
-    this.props.fetchAccount({ include: 'billing' });
+    this.props.fetchAccount();
+    this.props.getBillingInfo();
     this.props.getPlans();
     this.props.getSendingIps();
     this.props.getInvoices();
@@ -51,4 +52,4 @@ const mapStateToProps = (state) => ({
   invoices: state.invoices.list
 });
 
-export default connect(mapStateToProps, { getInvoices, getSendingIps, getPlans, fetchAccount })(BillingSummaryPage);
+export default connect(mapStateToProps, { getInvoices, getSendingIps, getPlans, fetchAccount, getBillingInfo })(BillingSummaryPage);

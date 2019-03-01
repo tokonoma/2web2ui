@@ -48,6 +48,15 @@ export default (state = initialState, { type, meta, payload }) => {
     case 'CREATE_ACCOUNT_FAIL':
       return { ...state, createError: payload, createLoading: false };
 
+    case 'GET_BILLING_SUCCESS':
+      return { ...state, billing: payload, billingLoading: false };
+
+    case 'GET_BILLING_FAIL':
+      return { ...state, billingError: payload, billingLoading: false };
+
+    case 'GET_BILLING_PENDING':
+      return { ...state, loading: true };
+
     default:
       return state;
   }
