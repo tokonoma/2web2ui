@@ -10,14 +10,6 @@ exports[`StatusDescription component Shallow tests does not render subaccount de
         isAutoVerified={false}
         status="unverified"
       />
-      <div>
-        <ReadyFor
-          bounce={false}
-          bounceDefault={false}
-          dkim={false}
-          sending={false}
-        />
-      </div>
     </LabelledValue>
   </Panel.Section>
 </Fragment>
@@ -33,15 +25,6 @@ exports[`StatusDescription component Shallow tests renders subaccount details 1`
         isAutoVerified={false}
         status="unverified"
       />
-      <div>
-        <ReadyFor
-          bounce={false}
-          bounceDefault={false}
-          dkim={false}
-          sending={false}
-          subaccount={101}
-        />
-      </div>
     </LabelledValue>
   </Panel.Section>
   <Panel.Section>
@@ -70,14 +53,6 @@ exports[`StatusDescription component Shallow tests renders verification status c
         isAutoVerified={false}
         status="blocked"
       />
-      <div>
-        <ReadyFor
-          bounce={false}
-          bounceDefault={false}
-          dkim={false}
-          sending={false}
-        />
-      </div>
     </LabelledValue>
   </Panel.Section>
 </Fragment>
@@ -93,14 +68,6 @@ exports[`StatusDescription component Shallow tests renders verification status c
         isAutoVerified={false}
         status="pending"
       />
-      <div>
-        <ReadyFor
-          bounce={false}
-          bounceDefault={false}
-          dkim={false}
-          sending={false}
-        />
-      </div>
     </LabelledValue>
   </Panel.Section>
 </Fragment>
@@ -116,14 +83,6 @@ exports[`StatusDescription component Shallow tests renders verification status c
         isAutoVerified={false}
         status="unverified"
       />
-      <div>
-        <ReadyFor
-          bounce={false}
-          bounceDefault={false}
-          dkim={false}
-          sending={false}
-        />
-      </div>
     </LabelledValue>
   </Panel.Section>
 </Fragment>

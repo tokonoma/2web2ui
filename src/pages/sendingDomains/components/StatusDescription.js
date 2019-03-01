@@ -13,7 +13,15 @@ const StatusDescription = ({ domain, hasAutoVerifyEnabled, readyFor, status }) =
     <Panel.Section>
       <LabelledValue label={<StatusTooltipHeader />}>
         <StatusLabel isAutoVerified={hasAutoVerifyEnabled} status={status} />
-        <div><ReadyFor {...readyFor} bounceDefault={is_default_bounce_domain} subaccount={subaccount_id} /></div>
+        {status === 'verified' && (
+          <div>
+            <ReadyFor
+              {...readyFor}
+              bounceDefault={is_default_bounce_domain}
+              subaccount={subaccount_id}
+            />
+          </div>
+        )}
       </LabelledValue>
     </Panel.Section>
     {
