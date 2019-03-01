@@ -4,6 +4,7 @@ import raf from './tempPolyfills';
 import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import * as matchers from './matchers';
+import setupPortals from 'src/__testHelpers__/setupPortals';
 
 // Provides enzyme assertions.
 // See https://github.com/blainekasten/enzyme-matchers#assertions
@@ -29,6 +30,8 @@ jest.mock('src/components/notifications/staticMarkdownNotifications', () => [
     meta: { type: 'notice' }
   }
 ]);
+
+setupPortals();
 
 beforeEach(() => {
   // Verifies that at least one assertion is called during a test
