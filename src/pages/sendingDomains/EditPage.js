@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 
-import { hasAutoVerifyEnabledSelector } from 'src/selectors/account';
 import { selectDomain } from 'src/selectors/sendingDomains';
 import {
   get as getDomain,
@@ -80,7 +79,7 @@ export class EditPage extends Component {
   }
 
   render() {
-    const { domain, error, hasAutoVerifyEnabled, loading, match: { params: { id }}} = this.props;
+    const { domain, error, loading, match: { params: { id }}} = this.props;
 
     if (error) {
       return (
@@ -102,11 +101,7 @@ export class EditPage extends Component {
         breadcrumbAction={breadcrumbAction}
       >
         <div>
-          <DomainStatus
-            domain={domain}
-            hasAutoVerifyEnabled={hasAutoVerifyEnabled}
-            onShareDomainChange={this.shareDomainChange}
-          />
+          <DomainStatus domain={domain} onShareDomainChange={this.shareDomainChange} />
           <SetupSending domain={domain} />
           <EditBounce id={id} domain={domain} />
           <AssignTrackingDomain domain={domain} />
@@ -124,7 +119,6 @@ export class EditPage extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  hasAutoVerifyEnabled: hasAutoVerifyEnabledSelector(state),
   domain: selectDomain(state),
   error: state.sendingDomains.getError,
   loading: state.sendingDomains.getLoading

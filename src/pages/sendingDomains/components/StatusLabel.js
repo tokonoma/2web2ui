@@ -1,12 +1,8 @@
 import React from 'react';
 import { DomainStatusTag } from 'src/components/tags';
-import { AutoVerifiedIcon, VerifiedIcon } from './Icons';
+import { VerifiedIcon } from './Icons';
 
-const StatusLabel = ({ isAutoVerified = false, status }) => {
-  if (isAutoVerified) {
-    return <div><AutoVerifiedIcon/> <strong>Auto Verified</strong></div>;
-  }
-
+const StatusLabel = ({ status }) => {
   if (status === 'verified') {
     return <div><VerifiedIcon/> <strong>Verified</strong></div>;
   }

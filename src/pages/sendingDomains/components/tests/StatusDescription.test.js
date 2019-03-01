@@ -22,8 +22,7 @@ describe('StatusDescription component', () => {
         domain: {
           shared_with_subaccounts: false,
           is_default_bounce_domain: false
-        },
-        hasAutoVerifyEnabled: false
+        }
       };
       wrapper = shallow(<StatusDescription {...props} />);
     });

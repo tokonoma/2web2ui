@@ -11,10 +11,6 @@ describe('StatusLabel', () => {
     expect(subject()).toMatchSnapshot();
   });
 
-  it('renders auto verified label', () => {
-    expect(subject({ isAutoVerified: true })).toMatchSnapshot();
-  });
-
   it('renders verified label', () => {
     expect(subject({ status: 'verified' })).toMatchSnapshot();
   });
