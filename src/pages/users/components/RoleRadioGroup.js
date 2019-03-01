@@ -11,14 +11,28 @@ const ADMIN_ROLE = {
   label: <strong>Admin</strong>,
   value: ROLES.ADMIN,
   helpText:
-    'Has access to all features, including the ability to invite additional users.'
+    'All permission. The only user that can manage users, security, and billing settings.'
+};
+
+const DEVELOPER_ROLE = {
+  label: <strong>Developer</strong>,
+  value: ROLES.DEVELOPER,
+  helpText:
+    'Setup and development user. Full access to API Keys, and all other email related setup, sending, and reporting features.'
+};
+
+const EMAIL_ROLE = {
+  label: <strong>Email</strong>,
+  value: ROLES.EMAIL,
+  helpText:
+    'Content and deliverability management user. Has access to Templates, Recipients Lists, Suppressions, AB Testing, IP Pools, and all reporting features.'
 };
 
 const REPORTING_ROLE = {
   label: <strong>Reporting</strong>,
   value: ROLES.REPORTING,
   helpText:
-    'Has access to reporting and read-only access to templates.'
+    'Data analytics user. Has access to all reporting features. No access to any account or feature settings.'
 };
 
 const SUPERUSER_ROLE = {
@@ -49,6 +63,8 @@ export class RoleRadioGroup extends React.Component {
 
     return [
       ADMIN_ROLE,
+      DEVELOPER_ROLE,
+      EMAIL_ROLE,
       {
         ...REPORTING_ROLE,
         children: allowSubaccountAssignment &&
