@@ -18,6 +18,9 @@ export default () => ({
     },
     {
       key: 'users/token-manage'
+    },
+    {
+      key: 'ab-testing/manage'
     }
   ]
 });
