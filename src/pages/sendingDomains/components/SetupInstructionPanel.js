@@ -1,6 +1,6 @@
 import React from 'react';
 import { Panel } from '@sparkpost/matchbox';
-import { AutoVerifiedIcon, VerifiedIcon, ErrorIcon } from './Icons';
+import { VerifiedIcon, ErrorIcon } from './Icons';
 import styles from './SetupInstructionPanel.module.scss';
 
 const SetupInstructionPanel = ({
@@ -26,7 +26,7 @@ const SetupInstructionPanel = ({
     title={(
       <div>
         <span className={styles.TitleIcon}>
-          {(isAutoVerified && <AutoVerifiedIcon />) || (isVerified ? <VerifiedIcon /> : <ErrorIcon />)}
+          {isVerified ? <VerifiedIcon /> : <ErrorIcon />}
         </span>
         <span>DNS Settings</span>
       </div>

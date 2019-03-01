@@ -33,6 +33,11 @@ describe('SetupInstructionPanel', () => {
     expect(wrapper).toHaveProp('actions', [expect.objectContaining({ disabled: true })]);
   });
 
+  it('hides verify button when auto verify is enabled', () => {
+    const wrapper = subject({ isAutoVerified: true });
+    expect(wrapper).toHaveProp('actions', []);
+  });
+
   describe('when verified', () => {
     const wrapper = subject({ isVerified: true });
 
@@ -45,19 +50,6 @@ describe('SetupInstructionPanel', () => {
     it('renders a verified icon', () => {
       const titleWrapper = titleFactory(wrapper);
       expect(titleWrapper.find('VerifiedIcon')).toExist();
-    });
-  });
-
-  describe('when auto verify is enabled', () => {
-    const wrapper = subject({ isAutoVerified: true });
-
-    it('hides verify button', () => {
-      expect(wrapper).toHaveProp('actions', []);
-    });
-
-    it('renders a auto-verified icon', () => {
-      const titleWrapper = titleFactory(wrapper);
-      expect(titleWrapper.find('AutoVerifiedIcon')).toExist();
     });
   });
 });

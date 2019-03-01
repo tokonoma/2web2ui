@@ -1,12 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Sending Domains Icons renders auto verify icon 1`] = `
-<CheckDecagram
-  className="GreenStamp"
-  size={18}
-/>
-`;
-
 exports[`Sending Domains Icons renders error icon 1`] = `
 <Error
   className="RedError"
