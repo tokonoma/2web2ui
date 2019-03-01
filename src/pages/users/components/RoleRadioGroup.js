@@ -85,7 +85,7 @@ export class RoleRadioGroup extends React.Component {
     const roles = this.renderRoles();
     const options = roles.map((role) => ({ ...role, disabled }));
 
-    return <RadioGroup title="Role" grid={{ xs: 12, sm: 12, md: 6 }} options={options} {...rest} />;
+    return <RadioGroup title="Role" options={options} {...rest} />;
   }
 }
 
