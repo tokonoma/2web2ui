@@ -32,9 +32,18 @@ class EditPage extends Component {
     to the updateAlert action.
   */
   update = async (values) => {
+    const { email_addresses, alert_metric, threshold } = values;
     const { getAlert, updateAlert, showAlert } = this.props;
-    const splitAddresses = _.split(values.email_addresses,',');
-    values.email_addresses = _.map(splitAddresses, (splitAddress) => splitAddress.trim());
+    const splitAddresses = _.split(email_addresses,',');
+    values.email_addresses = _.map(splitAddresses, (splitAddress) => _.trim(splitAddress));
+
+    switch (alert_metric) {
+      case 'monthly_sending_limit':
+        threshold.error.target = parseInt(threshold.error.target);
+        break;
+      default:
+        threshold.error.target = parseFloat(threshold.error.target);
+    }
 
     await updateAlert({
       id: values.id,

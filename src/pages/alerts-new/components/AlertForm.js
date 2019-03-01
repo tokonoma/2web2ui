@@ -16,14 +16,15 @@ import { COMPARATOR } from '../constants/comparator';
 import { CRITERIA } from '../constants/criteria';
 
 // Helpers & Validation
-import { required } from 'src/helpers/validation';
+import { required, integer, minNumber, maxLength, numberBetween } from 'src/helpers/validation';
+import validateEmailList from '../helpers/validateEmailList';
 
 const formName = 'alertForm';
 
-const createOptions = [
-  { label: 'Master and all subaccounts', value: 'all' },
-  { label: 'Master account only', value: 'master' },
-  { label: 'Single Subaccount', value: 'subaccount' }
+const accountOptions = [
+  { label: 'Master and all subaccounts', value: 'all', disabled: true },
+  { label: 'Master account only', value: 'master', disabled: true },
+  { label: 'Single Subaccount', value: 'subaccount', disabled: true }
 ];
 
 export class AlertForm extends Component {
@@ -54,7 +55,7 @@ export class AlertForm extends Component {
               label='Name'
               component={TextFieldWrapper}
               disabled={submitting}
-              validate={required}
+              validate={[required, maxLength(24)]}
             />
             <Field
               name='alert_metric'
@@ -69,13 +70,13 @@ export class AlertForm extends Component {
               component={RadioGroup}
               label='Account'
               name='assignTo'
-              options={createOptions}
+              options={accountOptions}
             />}
             {isSignals && assignTo === 'subaccount' &&
             <Field
               name='subaccount'
               component={SubaccountTypeaheadWrapper}
-              validate={required}
+              disabled={true}
             />}
             {isSignals &&
             <label>Facet</label>}
@@ -109,35 +110,60 @@ export class AlertForm extends Component {
             <Grid>
               <Grid.Column xs={6} md={4}>
                 <div>
-                  <Field
+                  {(alert_metric === 'signals_health_dod' || alert_metric === 'signals_health_wow') && <Field
                     name='threshold.error.comparator'
                     component={SelectWrapper}
                     options={getOptions(COMPARATOR)}
                     disabled={submitting}
                     validate={required}
-                  />
+                  />}
+                  {(alert_metric === 'monthly_sending_limit' || alert_metric === 'signals_health_threshold') && <Field
+                    name='threshold.error.comparator'
+                    component={SelectWrapper}
+                    options={['Above']}
+                    disabled={true}
+                    validate={required}
+                  />}
                 </div>
               </Grid.Column>
               <Grid.Column xs={6} md={4}>
                 <div>
-                  <Field
+                  {alert_metric === 'signals_health_threshold' && <Field
                     name='threshold.error.target'
-                    parse={Number}
+                    component={TextFieldWrapper}
+                    disabled={submitting}
+                    validate={[required, numberBetween(0, 1)]}
+                  />}
+                  {(alert_metric === 'signals_health_dod' || alert_metric === 'signals_health_wow') && <Field
+                    name='threshold.error.target'
                     component={TextFieldWrapper}
                     disabled={submitting}
                     validate={required}
-                  />
+                  />}
+                  {alert_metric === 'monthly_sending_limit' && <Field
+                    name='threshold.error.target'
+                    component={TextFieldWrapper}
+                    disabled={submitting}
+                    validate={[required, integer, minNumber(0)]}
+                  />}
                 </div>
               </Grid.Column>
               <Grid.Column xs={6} md={4}>
                 <div>
-                  <Field
+                  {alert_metric === 'monthly_sending_limit' && <Field
+                    name='criteria_metric'
+                    component={SelectWrapper}
+                    options={['Threshold']}
+                    disabled={true}
+                    validate={required}
+                  />}
+                  {alert_metric !== 'monthly_sending_limit' && <Field
                     name='criteria_metric'
                     component={SelectWrapper}
                     options={getOptions(CRITERIA)}
-                    disabled={true}
+                    disabled={submitting}
                     validate={required}
-                  />
+                  />}
                 </div>
               </Grid.Column>
             </Grid>
@@ -147,7 +173,7 @@ export class AlertForm extends Component {
               label='Notify'
               component={TextFieldWrapper}
               disabled={submitting}
-              validate={required}
+              validate={[required, validateEmailList]}
               multiline
             />
             <Grid>
@@ -183,10 +209,9 @@ const mapStateToProps = (state, props) => {
     alert_metric: selector(state, 'alert_metric'),
     facet_name: selector(state, 'facet_name'),
     assignTo: selector(state, 'assignTo'),
-    alert_subaccount: selector(state, 'alert_subaccount'),
+    subaccount: selector(state, 'subaccount'),
     enabled: selector(state, 'enabled'),
-    email_addresses: selector(state, 'email_addresses'),
-    initialValues: props.newAlert ? alertValues : null
+    initialValues: props.newAlert ? null : alertValues
   };
 };
 
