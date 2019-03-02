@@ -120,7 +120,7 @@ export class AlertForm extends Component {
                   {(alert_metric === 'monthly_sending_limit' || alert_metric === 'signals_health_threshold') && <Field
                     name='threshold.error.comparator'
                     component={SelectWrapper}
-                    options={['Above']}
+                    options={getOptions(COMPARATOR)}
                     disabled={true}
                     validate={required}
                   />}
@@ -150,20 +150,13 @@ export class AlertForm extends Component {
               </Grid.Column>
               <Grid.Column xs={6} md={4}>
                 <div>
-                  {alert_metric === 'monthly_sending_limit' && <Field
-                    name='criteria_metric'
-                    component={SelectWrapper}
-                    options={['Threshold']}
-                    disabled={true}
-                    validate={required}
-                  />}
-                  {alert_metric !== 'monthly_sending_limit' && <Field
+                  <Field
                     name='criteria_metric'
                     component={SelectWrapper}
                     options={getOptions(CRITERIA)}
-                    disabled={submitting}
+                    disabled={true}
                     validate={required}
-                  />}
+                  />
                 </div>
               </Grid.Column>
             </Grid>
