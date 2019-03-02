@@ -45,6 +45,18 @@ export class AlertForm extends Component {
 
     const submitText = submitting ? 'Submitting...' : (newAlert ? 'Create Alert' : 'Update Alert');
     const isSignals = alert_metric.startsWith('signals_');
+    const isThreshold = (alert_metric === 'monthly_sending_limit' || alert_metric === 'signals_health_threshold');
+    const getTargetValidation = () => {
+      if (isThreshold) {
+        if (isSignals) {
+          return [required, numberBetween(0, 1)];
+        } else {
+          return [required, integer, minNumber(0)];
+        }
+      } else {
+        return required;
+      }
+    };
 
     return (
       <Form onSubmit={handleSubmit}>
@@ -110,42 +122,23 @@ export class AlertForm extends Component {
             <Grid>
               <Grid.Column xs={6} md={4}>
                 <div>
-                  {(alert_metric === 'signals_health_dod' || alert_metric === 'signals_health_wow') && <Field
+                  <Field
                     name='threshold.error.comparator'
                     component={SelectWrapper}
                     options={getOptions(COMPARATOR)}
-                    disabled={submitting}
+                    disabled={submitting || isThreshold}
                     validate={required}
-                  />}
-                  {(alert_metric === 'monthly_sending_limit' || alert_metric === 'signals_health_threshold') && <Field
-                    name='threshold.error.comparator'
-                    component={SelectWrapper}
-                    options={getOptions(COMPARATOR)}
-                    disabled={true}
-                    validate={required}
-                  />}
+                  />
                 </div>
               </Grid.Column>
               <Grid.Column xs={6} md={4}>
                 <div>
-                  {alert_metric === 'signals_health_threshold' && <Field
+                  <Field
                     name='threshold.error.target'
                     component={TextFieldWrapper}
                     disabled={submitting}
-                    validate={[required, numberBetween(0, 1)]}
-                  />}
-                  {(alert_metric === 'signals_health_dod' || alert_metric === 'signals_health_wow') && <Field
-                    name='threshold.error.target'
-                    component={TextFieldWrapper}
-                    disabled={submitting}
-                    validate={required}
-                  />}
-                  {alert_metric === 'monthly_sending_limit' && <Field
-                    name='threshold.error.target'
-                    component={TextFieldWrapper}
-                    disabled={submitting}
-                    validate={[required, integer, minNumber(0)]}
-                  />}
+                    validate={getTargetValidation()}
+                  />
                 </div>
               </Grid.Column>
               <Grid.Column xs={6} md={4}>
