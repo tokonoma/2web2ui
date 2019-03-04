@@ -1,7 +1,104 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Signals Reducer engagment rate by cohort fail 1`] = `
+Object {
+  "engagementRateByCohort": Object {
+    "data": Array [],
+    "error": [Error: Oh no!],
+    "loading": false,
+    "totalCount": 0,
+  },
+  "engagementRecency": Object {
+    "data": Array [],
+    "error": null,
+    "loading": false,
+    "totalCount": 0,
+  },
+  "healthScore": Object {
+    "data": Array [],
+    "error": null,
+    "loading": false,
+    "totalCount": 0,
+  },
+  "spamHits": Object {
+    "data": Array [],
+    "error": null,
+    "loading": false,
+    "totalCount": 0,
+  },
+}
+`;
+
+exports[`Signals Reducer engagment rate by cohort pending 1`] = `
+Object {
+  "engagementRateByCohort": Object {
+    "data": Array [],
+    "error": null,
+    "loading": true,
+    "totalCount": 0,
+  },
+  "engagementRecency": Object {
+    "data": Array [],
+    "error": null,
+    "loading": false,
+    "totalCount": 0,
+  },
+  "healthScore": Object {
+    "data": Array [],
+    "error": null,
+    "loading": false,
+    "totalCount": 0,
+  },
+  "spamHits": Object {
+    "data": Array [],
+    "error": null,
+    "loading": false,
+    "totalCount": 0,
+  },
+}
+`;
+
+exports[`Signals Reducer engagment rate by cohort success 1`] = `
+Object {
+  "engagementRateByCohort": Object {
+    "data": Array [
+      Object {
+        "sending-domain": "example.com",
+      },
+    ],
+    "error": null,
+    "loading": false,
+    "totalCount": 3,
+  },
+  "engagementRecency": Object {
+    "data": Array [],
+    "error": null,
+    "loading": false,
+    "totalCount": 0,
+  },
+  "healthScore": Object {
+    "data": Array [],
+    "error": null,
+    "loading": false,
+    "totalCount": 0,
+  },
+  "spamHits": Object {
+    "data": Array [],
+    "error": null,
+    "loading": false,
+    "totalCount": 0,
+  },
+}
+`;
+
 exports[`Signals Reducer engagment recency fail 1`] = `
 Object {
+  "engagementRateByCohort": Object {
+    "data": Array [],
+    "error": null,
+    "loading": false,
+    "totalCount": 0,
+  },
   "engagementRecency": Object {
     "data": Array [],
     "error": [Error: Oh no!],
@@ -25,6 +122,12 @@ Object {
 
 exports[`Signals Reducer engagment recency pending 1`] = `
 Object {
+  "engagementRateByCohort": Object {
+    "data": Array [],
+    "error": null,
+    "loading": false,
+    "totalCount": 0,
+  },
   "engagementRecency": Object {
     "data": Array [],
     "error": null,
@@ -48,6 +151,12 @@ Object {
 
 exports[`Signals Reducer engagment recency success 1`] = `
 Object {
+  "engagementRateByCohort": Object {
+    "data": Array [],
+    "error": null,
+    "loading": false,
+    "totalCount": 0,
+  },
   "engagementRecency": Object {
     "data": Array [
       Object {
@@ -75,6 +184,12 @@ Object {
 
 exports[`Signals Reducer health score fail 1`] = `
 Object {
+  "engagementRateByCohort": Object {
+    "data": Array [],
+    "error": null,
+    "loading": false,
+    "totalCount": 0,
+  },
   "engagementRecency": Object {
     "data": Array [],
     "error": null,
@@ -98,6 +213,12 @@ Object {
 
 exports[`Signals Reducer health score pending 1`] = `
 Object {
+  "engagementRateByCohort": Object {
+    "data": Array [],
+    "error": null,
+    "loading": false,
+    "totalCount": 0,
+  },
   "engagementRecency": Object {
     "data": Array [],
     "error": null,
@@ -121,6 +242,12 @@ Object {
 
 exports[`Signals Reducer health score success 1`] = `
 Object {
+  "engagementRateByCohort": Object {
+    "data": Array [],
+    "error": null,
+    "loading": false,
+    "totalCount": 0,
+  },
   "engagementRecency": Object {
     "data": Array [],
     "error": null,
@@ -148,6 +275,12 @@ Object {
 
 exports[`Signals Reducer init 1`] = `
 Object {
+  "engagementRateByCohort": Object {
+    "data": Array [],
+    "error": null,
+    "loading": false,
+    "totalCount": 0,
+  },
   "engagementRecency": Object {
     "data": Array [],
     "error": null,
@@ -171,6 +304,12 @@ Object {
 
 exports[`Signals Reducer spam hits fail 1`] = `
 Object {
+  "engagementRateByCohort": Object {
+    "data": Array [],
+    "error": null,
+    "loading": false,
+    "totalCount": 0,
+  },
   "engagementRecency": Object {
     "data": Array [],
     "error": null,
@@ -194,6 +333,12 @@ Object {
 
 exports[`Signals Reducer spam hits pending 1`] = `
 Object {
+  "engagementRateByCohort": Object {
+    "data": Array [],
+    "error": null,
+    "loading": false,
+    "totalCount": 0,
+  },
   "engagementRecency": Object {
     "data": Array [],
     "error": null,
@@ -217,6 +362,12 @@ Object {
 
 exports[`Signals Reducer spam hits success 1`] = `
 Object {
+  "engagementRateByCohort": Object {
+    "data": Array [],
+    "error": null,
+    "loading": false,
+    "totalCount": 0,
+  },
   "engagementRecency": Object {
     "data": Array [],
     "error": null,

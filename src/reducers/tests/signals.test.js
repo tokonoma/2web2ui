@@ -44,6 +44,24 @@ cases('Signals Reducer', ({ name, ...action }) => {
       total_count: 3
     }
   },
+  'engagment rate by cohort fail': {
+    type: 'GET_ENGAGEMENT_RATE_BY_COHORT_FAIL',
+    payload: {
+      error: new Error('Oh no!')
+    }
+  },
+  'engagment rate by cohort pending': {
+    type: 'GET_ENGAGEMENT_RATE_BY_COHORT_PENDING'
+  },
+  'engagment rate by cohort success': {
+    type: 'GET_ENGAGEMENT_RATE_BY_COHORT_SUCCESS',
+    payload: {
+      data: [
+        { 'sending-domain': 'example.com' }
+      ],
+      total_count: 3
+    }
+  },
   'health score fail': {
     type: 'GET_HEALTH_SCORE_FAIL',
     payload: {
