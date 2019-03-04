@@ -81,16 +81,25 @@ exports[`Signals Engagement Recency Page renders correctly 1`] = `
       md={7}
       sm={12}
     >
+      <Connect(AccessControl)
+        condition={[Function]}
+      >
+        <withRouter(Tabs) />
+      </Connect(AccessControl)>
       <Panel
         sectioned={true}
       >
-        <ChartHeader
-          title="Engagement Recency"
-          tooltipContent="
+        <Connect(AccessControl)
+          condition={[Function]}
+        >
+          <ChartHeader
+            title="Engagement Recency"
+            tooltipContent="
   The share over time of your email that has been sent to recipients who most recently
   opened messages or clicked links during several defined time periods.
 "
-        />
+          />
+        </Connect(AccessControl)>
         <div
           className="LiftTooltip"
         >
@@ -271,13 +280,17 @@ exports[`Signals Engagement Recency Page renders empty correctly 1`] = `
 <Panel
   sectioned={true}
 >
-  <ChartHeader
-    title="Engagement Recency"
-    tooltipContent="
+  <Connect(AccessControl)
+    condition={[Function]}
+  >
+    <ChartHeader
+      title="Engagement Recency"
+      tooltipContent="
   The share over time of your email that has been sent to recipients who most recently
   opened messages or clicked links during several defined time periods.
 "
-  />
+    />
+  </Connect(AccessControl)>
   <Callout
     title="No Data Available"
   >
@@ -305,16 +318,25 @@ exports[`Signals Engagement Recency Page renders error correctly 1`] = `
       md={7}
       sm={12}
     >
+      <Connect(AccessControl)
+        condition={[Function]}
+      >
+        <withRouter(Tabs) />
+      </Connect(AccessControl)>
       <Panel
         sectioned={true}
       >
-        <ChartHeader
-          title="Engagement Recency"
-          tooltipContent="
+        <Connect(AccessControl)
+          condition={[Function]}
+        >
+          <ChartHeader
+            title="Engagement Recency"
+            tooltipContent="
   The share over time of your email that has been sent to recipients who most recently
   opened messages or clicked links during several defined time periods.
 "
-        />
+          />
+        </Connect(AccessControl)>
         <Callout
           title="Unable to Load Data"
         >
@@ -357,13 +379,17 @@ exports[`Signals Engagement Recency Page renders loading correctly 1`] = `
 <Panel
   sectioned={true}
 >
-  <ChartHeader
-    title="Engagement Recency"
-    tooltipContent="
+  <Connect(AccessControl)
+    condition={[Function]}
+  >
+    <ChartHeader
+      title="Engagement Recency"
+      tooltipContent="
   The share over time of your email that has been sent to recipients who most recently
   opened messages or clicked links during several defined time periods.
 "
-  />
+    />
+  </Connect(AccessControl)>
   <div
     style={
       Object {

@@ -1,18 +1,23 @@
+/* eslint-disable max-lines */
 import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { Panel, Grid } from '@sparkpost/matchbox';
-import Page from './components/SignalsPage';
 import BarChart from './components/charts/barchart/BarChart';
-import EngagementRecencyActions from './components/actionContent/EngagementRecencyActions';
-import TooltipMetric from './components/charts/tooltip/TooltipMetric';
-import DateFilter from './components/filters/DateFilter';
-import { ENGAGEMENT_RECENCY_COHORTS, ENGAGEMENT_RECENCY_INFO } from './constants/info';
-import withEngagementRecencyDetails from './containers/EngagementRecencyDetailsContainer';
-import { Loading } from 'src/components';
 import Callout from 'src/components/callout';
-import OtherChartsHeader from './components/OtherChartsHeader';
 import ChartHeader from './components/ChartHeader';
+import DateFilter from './components/filters/DateFilter';
+import EngagementRecencyActions from './components/actionContent/EngagementRecencyActions';
 import Legend from './components/charts/legend/Legend';
+import OtherChartsHeader from './components/OtherChartsHeader';
+import Page from './components/SignalsPage';
+import Tabs from './components/engagement/Tabs';
+import TooltipMetric from './components/charts/tooltip/TooltipMetric';
+import withEngagementRecencyDetails from './containers/EngagementRecencyDetailsContainer';
+import { ENGAGEMENT_RECENCY_COHORTS, ENGAGEMENT_RECENCY_INFO } from './constants/info';
+import { AccessControl } from 'src/components/auth';
+import { Loading } from 'src/components';
+import { hasUiOption } from 'src/helpers/conditions/account';
+import { not } from 'src/helpers/conditions';
 import { roundToPlaces } from 'src/helpers/units';
 import moment from 'moment';
 import _ from 'lodash';
@@ -106,11 +111,16 @@ export class EngagementRecencyPage extends Component {
     return (
       <Grid>
         <Grid.Column sm={12} md={7}>
+          <AccessControl condition={hasUiOption('feature_signals_v2')}>
+            <Tabs />
+          </AccessControl>
           <Panel sectioned>
-            <ChartHeader
-              title='Engagement Recency'
-              tooltipContent={ENGAGEMENT_RECENCY_INFO}
-            />
+            <AccessControl condition={not(hasUiOption('feature_signals_v2'))}>
+              <ChartHeader
+                title='Engagement Recency'
+                tooltipContent={ENGAGEMENT_RECENCY_INFO}
+              />
+            </AccessControl>
             {chartPanel || (
               <div className='LiftTooltip'>
                 <BarChart
