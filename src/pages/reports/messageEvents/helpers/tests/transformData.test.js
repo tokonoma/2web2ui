@@ -1,9 +1,9 @@
 import * as transformData from 'src/pages/reports/messageEvents/helpers/transformData.js';
 import { getEmptyFilters } from 'src/helpers/messageEvents.js';
-import { EVENTS_SEARCH_FILTERS } from 'src/constants';
+import { SEARCH_QUERY_FILTERS } from 'src/constants';
 
 describe('Message Events page helpers`', () => {
-  const emptyFilters = getEmptyFilters(EVENTS_SEARCH_FILTERS);
+  const emptyFilters = getEmptyFilters(SEARCH_QUERY_FILTERS);
 
   describe('getFiltersFromSearchQueries', () => {
     it('returns correct filters object when given a new filter', () => {

@@ -1,7 +1,7 @@
 import { formatDocumentation, getEmptyFilters } from 'src/helpers/messageEvents';
 import { getRelativeDates } from 'src/helpers/date';
 import _ from 'lodash';
-import { EVENTS_SEARCH_FILTERS } from 'src/constants';
+import { ALL_EVENTS_FILTERS } from 'src/constants';
 import qs from 'query-string';
 
 const initialState = {
@@ -15,9 +15,7 @@ const initialState = {
     dateOptions: {
       relativeRange: 'hour'
     },
-    recipients: [],
-    events: [],
-    ...getEmptyFilters(EVENTS_SEARCH_FILTERS)
+    ...getEmptyFilters(ALL_EVENTS_FILTERS)
   },
   linkByPage: [],
   cachedResultsByPage: [],

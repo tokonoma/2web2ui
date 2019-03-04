@@ -15,7 +15,7 @@ import { parseSearch } from 'src/helpers/messageEvents';
 import { stringToArray } from 'src/helpers/string';
 import { onEnter } from 'src/helpers/keyEvents';
 import { RELATIVE_DATE_OPTIONS } from './searchConfig';
-import { FORMATS, ADDITIONAL_EVENTS_FILTERS } from 'src/constants';
+import { FORMATS, ALL_EVENTS_FILTERS } from 'src/constants';
 import config from 'src/config';
 
 export class MessageEventsSearch extends Component {
@@ -58,7 +58,7 @@ export class MessageEventsSearch extends Component {
   render() {
     const { search, refreshMessageEventsDateRange, loading, now = new Date(), searchOptions } = this.props;
     const { retentionPeriodDays } = config.messageEvents;
-    const { recipients } = ADDITIONAL_EVENTS_FILTERS;
+    const { recipients } = ALL_EVENTS_FILTERS;
 
     return (
       <Panel>
@@ -84,7 +84,6 @@ export class MessageEventsSearch extends Component {
             <Grid.Column xs={12} md={5}>
               <TextField
                 labelHidden
-                label={recipients.label}
                 placeholder={recipients.placeholder}
                 onBlur={this.handleRecipientsChange}
                 onKeyDown={onEnter(this.handleRecipientsChange)}

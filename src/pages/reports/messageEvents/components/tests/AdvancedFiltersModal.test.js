@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { AdvancedFiltersModal } from '../AdvancedFiltersModal';
 import { getEmptyFilters } from 'src/helpers/messageEvents';
-import { EVENTS_SEARCH_FILTERS } from 'src/constants';
+import { SEARCH_QUERY_FILTERS } from 'src/constants';
 
 
 describe('Component: AdvancedFiltersModal', () => {
@@ -30,7 +30,7 @@ describe('Component: AdvancedFiltersModal', () => {
     wrapper.setState({ modalOpen: true });
     wrapper.instance().handleApply({ searchQuery: [{ key: 'campaigns', value: 'foo' }], click: true, bounce: false });
     const params = {
-      ...getEmptyFilters(EVENTS_SEARCH_FILTERS),
+      ...getEmptyFilters(SEARCH_QUERY_FILTERS),
       'campaigns': ['foo'],
       'events': ['click']
     };

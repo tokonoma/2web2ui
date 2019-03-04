@@ -1,6 +1,6 @@
 import { stringToArray } from 'src/helpers/string';
 import _ from 'lodash';
-import { EVENTS_SEARCH_FILTERS } from 'src/constants';
+import { SEARCH_QUERY_FILTERS } from 'src/constants';
 import { getEmptyFilters } from 'src/helpers/messageEvents';
 
 /**
@@ -12,7 +12,7 @@ import { getEmptyFilters } from 'src/helpers/messageEvents';
 export function getFiltersFromSearchQueries(searchQueries = []) {
 
   // Build a single object containing a key for each filter, initialised to an empty array
-  const emptyFilters = getEmptyFilters(EVENTS_SEARCH_FILTERS);
+  const emptyFilters = getEmptyFilters(SEARCH_QUERY_FILTERS);
 
   // Collect queries into an array of objects of form {key: value}
   const queries = searchQueries.map(({ key, value }) => ({ [key]: stringToArray(value) }));

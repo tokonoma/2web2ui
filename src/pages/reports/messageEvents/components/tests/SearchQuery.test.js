@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 import SearchQuery from '../SearchQuery';
 
 jest.mock('src/constants', () => ({
-  EVENTS_SEARCH_FILTERS: {
+  SEARCH_QUERY_FILTERS: {
     recipient_domains: { placeholder: 'Insert recipient domains placeholder', label: 'Recipient Domains' },
     subjects: { placeholder: 'Insert subjects placeholder', label: 'Subjects' }
   }

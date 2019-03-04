@@ -86,7 +86,8 @@ export const FORMS = {
   EVENTS_SEARCH: 'eventsSearchForm'
 };
 
-export const EVENTS_SEARCH_FILTERS = {
+//These filters are the searchable filters in the 'more filters' modal
+export const SEARCH_QUERY_FILTERS = {
   recipient_domains: { placeholder: 'list of domain parts (e.g., gmail, yahoo.co, yahoo.co.jp, .fr)', label: 'Recipient Domains' },
   from_addresses: { placeholder: 'list of full from addresses (e.g., john@mycompany.com)', label: 'From Addresses' },
   sending_domains: { placeholder: 'list of domain parts (e.g., joespizza, marketing.joespizza)', label: 'Sending Domains' },
@@ -104,9 +105,10 @@ export const EVENTS_SEARCH_FILTERS = {
   ab_test_versions: { placeholder: 'list of version numbers; requires AB Test ID filter(e.g. 4)', label: 'AB Test Versions' }
 };
 
-export const ADDITIONAL_EVENTS_FILTERS = {
+export const ALL_EVENTS_FILTERS = {
   recipients: { placeholder: 'Filter by recipient email address', label: 'Recipients' },
-  events: { label: 'Event' }
+  events: { label: 'Event' },
+  ...SEARCH_QUERY_FILTERS
 };
 
 export const DEFAULT_PER_PAGE_BUTTONS = [10, 25, 50, 100];
