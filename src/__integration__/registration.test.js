@@ -1,5 +1,5 @@
 import React from 'react';
-import { setupForm } from './helpers';
+import mountForm from 'src/__testHelpers__/mountForm';
 import JoinPage from '../pages/join/JoinPage';
 
 jest.mock('react-recaptcha', () => {
@@ -29,7 +29,7 @@ jest.mock('react-recaptcha', () => {
 
 test('Join Form: Complete Registration', async () => {
 
-  const form = await setupForm(<JoinPage />, { authenticated: false });
+  const form = await mountForm(<JoinPage />, { authenticated: false });
 
   form.fill([
     { name: 'first_name', value: 'Firsty' },
@@ -48,7 +48,7 @@ test('Join Form: Complete Registration', async () => {
 
 test('Join Form: Complete Registration w/ email opt-in', async () => {
 
-  const form = await setupForm(<JoinPage />, { authenticated: false });
+  const form = await mountForm(<JoinPage />, { authenticated: false });
 
   form.fill([
     { name: 'first_name', value: 'Firsty' },

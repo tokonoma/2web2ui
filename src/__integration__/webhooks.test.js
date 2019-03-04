@@ -1,9 +1,9 @@
 import React from 'react';
-import { setupForm } from './helpers';
+import mountForm from 'src/__testHelpers__/mountForm';
 import WebhookCreatePage from 'src/pages/webhooks/CreatePage';
 
 test('Create Webhook: Defaults', async () => {
-  const form = await setupForm(<WebhookCreatePage />);
+  const form = await mountForm(<WebhookCreatePage />);
 
   form.fill([
     { name: 'name', value: 'Webhook Test Name' },
@@ -15,7 +15,7 @@ test('Create Webhook: Defaults', async () => {
 });
 
 test('Create Webhook: Selected Events', async () => {
-  const form = await setupForm(<WebhookCreatePage />);
+  const form = await mountForm(<WebhookCreatePage />);
 
   form.fill([
     { name: 'name', value: 'Webhook Test Name' },
@@ -30,7 +30,7 @@ test('Create Webhook: Selected Events', async () => {
 });
 
 test('Create Webhook: With Basic Auth', async () => {
-  const form = await setupForm(<WebhookCreatePage />);
+  const form = await mountForm(<WebhookCreatePage />);
 
   form.fill([
     { name: 'name', value: 'Webhook With Basic Auth' },
@@ -45,7 +45,7 @@ test('Create Webhook: With Basic Auth', async () => {
 });
 
 test('Create Webhook: With OAuth2', async () => {
-  const form = await setupForm(<WebhookCreatePage />);
+  const form = await mountForm(<WebhookCreatePage />);
 
   form.fill([
     { name: 'name', value: 'Webhook With OAuth2' },
@@ -61,7 +61,7 @@ test('Create Webhook: With OAuth2', async () => {
 });
 
 test('Create Webhook: Assigned to Master Account', async () => {
-  const form = await setupForm(<WebhookCreatePage />);
+  const form = await mountForm(<WebhookCreatePage />);
 
   // Turn on subaccounts to allow subaccount options to appear
   form.store.dispatch({
@@ -81,7 +81,7 @@ test('Create Webhook: Assigned to Master Account', async () => {
 });
 
 test('Create Webhook: Assigned to a Subaccount', async () => {
-  const form = await setupForm(<WebhookCreatePage />);
+  const form = await mountForm(<WebhookCreatePage />);
 
   // Turn on subaccounts to allow subaccount options to appear
   form.store.dispatch({
