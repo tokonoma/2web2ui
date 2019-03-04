@@ -263,7 +263,7 @@ const routes = [
   },
   {
     path: '/signals/engagement/engagement-rate/:facet/:facetId',
-    component: signals.EngagementRecencyPage,
+    component: signals.EngagementRateByCohortPage,
     condition: all(hasGrants('signals/manage'), hasUiOption('feature_signals_v2')),
     layout: App,
     title: 'Signals',
