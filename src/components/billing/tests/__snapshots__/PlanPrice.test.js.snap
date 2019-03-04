@@ -10,9 +10,7 @@ exports[`PlanPrice allows class name overriding 1`] = `
     <strong>
       50,000
     </strong>
-     
-     emails
-    /month
+     emails/month
     <span>
        at 
       <strong>
@@ -39,9 +37,7 @@ exports[`PlanPrice renders as 0 if flat discount is greater than price 1`] = `
     <strong>
       50,000
     </strong>
-     
-     emails
-    /month
+     emails/month
     <span>
        at 
       <s
@@ -74,9 +70,7 @@ exports[`PlanPrice renders correctly 1`] = `
     <strong>
       50,000
     </strong>
-     
-     emails
-    /month
+     emails/month
     <span>
        at 
       <strong>
@@ -103,7 +97,6 @@ exports[`PlanPrice renders correctly for 30 day free plan 1`] = `
     <strong>
       Test Account
     </strong>
-     
   </span>
   <span
     className="SupportLabel"
@@ -121,9 +114,7 @@ exports[`PlanPrice renders correctly for CSM inclusion 1`] = `
     <strong>
       50,000
     </strong>
-     
-     emails
-    /month
+     emails/month
     <span>
        at 
       <strong>
@@ -155,7 +146,6 @@ exports[`PlanPrice renders correctly for eternal free plan 1`] = `
     <strong>
       Test Account
     </strong>
-     
   </span>
   <span
     className="SupportLabel"
@@ -173,9 +163,7 @@ exports[`PlanPrice renders correctly with hourly plans 1`] = `
     <strong>
       50,000
     </strong>
-     
-     emails
-    /month
+     emails/month
     <span>
        at 
       <strong>
@@ -202,9 +190,7 @@ exports[`PlanPrice renders flat discount 1`] = `
     <strong>
       50,000
     </strong>
-     
-     emails
-    /month
+     emails/month
     <span>
        at 
       <s
@@ -237,9 +223,7 @@ exports[`PlanPrice renders free ip 1`] = `
     <strong>
       50,000
     </strong>
-     
-     emails
-    /month
+     emails/month
     <span>
        at 
       <strong>
@@ -268,9 +252,7 @@ exports[`PlanPrice renders free ip and overage correct 1`] = `
     <strong>
       50,000
     </strong>
-     
-     emails
-    /month
+     emails/month
     <span>
        at 
       <strong>
@@ -302,9 +284,7 @@ exports[`PlanPrice renders percent discount 1`] = `
     <strong>
       50,000
     </strong>
-     
-     emails
-    /month
+     emails/month
     <span>
        at 
       <s
@@ -337,9 +317,7 @@ exports[`PlanPrice renders with overage 1`] = `
     <strong>
       50,000
     </strong>
-     
-     emails
-    /month
+     emails/month
     <span>
        at 
       <strong>
