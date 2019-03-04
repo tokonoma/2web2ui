@@ -19,6 +19,7 @@ export const getOptions = (state, { now = moment().subtract(1, 'day'), ...option
 // Redux store
 export const getSpamHitsData = (state, props) => _.get(state, 'signals.spamHits', {});
 export const getEngagementRecencyData = (state, props) => _.get(state, 'signals.engagementRecency', {});
+export const getEngagementRateByCohortData = (state, props) => _.get(state, 'signals.engagementRateByCohort', {});
 export const getHealthScoreData = (state, props) => _.get(state, 'signals.healthScore', {});
 
 // Details
@@ -89,6 +90,42 @@ export const selectEngagementRecencyDetails = createSelector(
     });
 
     const isEmpty = filledHistory.every((values) => values.c_total === null);
+
+    return {
+      details: {
+        data: filledHistory,
+        empty: isEmpty && !loading,
+        error,
+        loading
+      },
+      facet,
+      facetId,
+      subaccountId
+    };
+  }
+);
+
+export const selectEngagementRateByCohortDetails = createSelector(
+  [getEngagementRateByCohortData, getFacetFromParams, getFacetIdFromParams, selectSubaccountIdFromQuery, getOptions],
+  ({ loading, error, data }, facet, facetId, subaccountId, { now, relativeRange }) => {
+    const match = data.find((item) => String(item[facet]) === facetId) || {};
+    const normalizedHistory = _.get(match, 'history', []).map(({ dt: date, ...values }) => ({ date, ...values }));
+
+    const filledHistory = fillByDate({
+      dataSet: normalizedHistory,
+      fill: {
+        c_new_engagment: null,
+        c_14d_engagment: null,
+        c_90d_engagment: null,
+        c_365d_engagment: null,
+        c_uneng_engagment: null,
+        c_total_engagment: null
+      },
+      now,
+      relativeRange
+    });
+
+    const isEmpty = filledHistory.every((values) => values.c_total_engagment === null);
 
     return {
       details: {

@@ -2,22 +2,17 @@
 import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { Panel, Grid } from '@sparkpost/matchbox';
-import BarChart from './components/charts/barchart/BarChart';
 import Callout from 'src/components/callout';
-import ChartHeader from './components/ChartHeader';
 import DateFilter from './components/filters/DateFilter';
 import EngagementRecencyActions from './components/actionContent/EngagementRecencyActions';
-import Legend from './components/charts/legend/Legend';
+// import Legend from './components/charts/legend/Legend';
 import OtherChartsHeader from './components/OtherChartsHeader';
 import Page from './components/SignalsPage';
 import Tabs from './components/engagement/Tabs';
 import TooltipMetric from './components/charts/tooltip/TooltipMetric';
-import withEngagementRecencyDetails from './containers/EngagementRecencyDetailsContainer';
-import { ENGAGEMENT_RECENCY_COHORTS, ENGAGEMENT_RECENCY_INFO } from './constants/info';
-import { AccessControl } from 'src/components/auth';
+import withEngagementRateByCohortDetails from './containers/EngagementRateByCohortDetailsContainer';
+// import { ENGAGEMENT_RECENCY_COHORTS, ENGAGEMENT_RECENCY_INFO } from './constants/info';
 import { Loading } from 'src/components';
-import { hasUiOption } from 'src/helpers/conditions/account';
-import { not } from 'src/helpers/conditions';
 import { roundToPlaces } from 'src/helpers/units';
 import moment from 'moment';
 import _ from 'lodash';
@@ -87,7 +82,7 @@ export class EngagementRateByCohortPage extends Component {
   )
 
   renderContent = () => {
-    const { data = [], facet, facetId, loading, gap, empty, error } = this.props;
+    const { data = [], facet, facetId, loading, empty, error } = this.props;
     const { selectedDate } = this.state;
     const selectedCohorts = _.find(data, ['date', selectedDate]) || {};
     let chartPanel;
@@ -111,19 +106,11 @@ export class EngagementRateByCohortPage extends Component {
     return (
       <Grid>
         <Grid.Column sm={12} md={7}>
-          <AccessControl condition={hasUiOption('feature_signals_v2')}>
-            <Tabs facet={facet} facetId={facetId}/>
-          </AccessControl>
+          <Tabs facet={facet} facetId={facetId}/>
           <Panel sectioned>
-            <AccessControl condition={not(hasUiOption('feature_signals_v2'))}>
-              <ChartHeader
-                title='Engagement Recency'
-                tooltipContent={ENGAGEMENT_RECENCY_INFO}
-              />
-            </AccessControl>
             {chartPanel || (
               <div className='LiftTooltip'>
-                <BarChart
+                {/* <BarChart
                   gap={gap}
                   onClick={this.handleDateSelect}
                   selected={selectedDate}
@@ -137,7 +124,7 @@ export class EngagementRateByCohortPage extends Component {
                 <Legend
                   items={_.values(cohorts)}
                   tooltipContent={(label) => ENGAGEMENT_RECENCY_COHORTS[label]}
-                />
+                /> */}
               </div>
             )}
           </Panel>
@@ -177,4 +164,4 @@ export class EngagementRateByCohortPage extends Component {
   }
 }
 
-export default withEngagementRecencyDetails(EngagementRateByCohortPage);
+export default withEngagementRateByCohortDetails(EngagementRateByCohortPage);
