@@ -32,10 +32,22 @@ class EditPage extends Component {
     to the updateAlert action.
   */
   update = async (values) => {
-    const { email_addresses, alert_metric, threshold } = values;
+    const { email_addresses, alert_metric, threshold, assignTo, subaccount = '' } = values;
     const { getAlert, updateAlert, showAlert } = this.props;
     const splitAddresses = _.split(email_addresses,',');
     values.email_addresses = _.map(splitAddresses, (splitAddress) => _.trim(splitAddress));
+    switch (assignTo) {
+      case 'master':
+        values.alert_subaccount = 0;
+        break;
+      case 'subaccount':
+        values.alert_subaccount = parseInt(subaccount.id);
+        break;
+      case 'all':
+      default:
+        values.alert_subaccount = -1;
+
+    }
 
     switch (alert_metric) {
       case 'monthly_sending_limit':
@@ -47,7 +59,7 @@ class EditPage extends Component {
 
     await updateAlert({
       id: values.id,
-      data: _.omit(values, 'id', 'subaccount')
+      data: _.omit(values, 'id', 'subaccount', 'assignTo')
     });
 
     showAlert({ type: 'success', message: 'Update Successful' });

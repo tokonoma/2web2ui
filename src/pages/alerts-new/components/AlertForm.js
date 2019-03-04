@@ -13,7 +13,6 @@ import getOptions from '../helpers/getOptions';
 import { METRICS } from '../constants/metrics';
 import { FACETS } from '../constants/facets';
 import { COMPARATOR } from '../constants/comparator';
-import { CRITERIA } from '../constants/criteria';
 
 // Helpers & Validation
 import { required, integer, minNumber, maxLength, numberBetween } from 'src/helpers/validation';
@@ -22,9 +21,9 @@ import validateEmailList from '../helpers/validateEmailList';
 const formName = 'alertForm';
 
 const accountOptions = [
-  { label: 'Master and all subaccounts', value: 'all', disabled: true },
-  { label: 'Master account only', value: 'master', disabled: true },
-  { label: 'Single Subaccount', value: 'subaccount', disabled: true }
+  { label: 'Master and all subaccounts', value: 'all', disabled: false },
+  { label: 'Master account only', value: 'master', disabled: false },
+  { label: 'Single Subaccount', value: 'subaccount', disabled: false }
 ];
 
 export class AlertForm extends Component {
@@ -49,12 +48,32 @@ export class AlertForm extends Component {
     const getTargetValidation = () => {
       if (isThreshold) {
         if (isSignals) {
-          return [required, numberBetween(0, 1)];
+          return [required, numberBetween(0, 100)];
         } else {
           return [required, integer, minNumber(0)];
         }
       } else {
         return required;
+      }
+    };
+
+    const checkFacet = () => {
+      if (facet_name === 'ALL') {
+        return true;
+      }
+      return false;
+    };
+
+    const validateFacet = () => {
+      if (facet_name === 'ALL') {
+        return false;
+      }
+      return required;
+    };
+
+    const removeFacetValue = () => {
+      if (facet_name === 'ALL') {
+        this.props.change('facet_value', '');
       }
     };
 
@@ -76,6 +95,7 @@ export class AlertForm extends Component {
               options={getOptions(METRICS)}
               disabled={true}
               validate={required}
+              helpText="This assignment is permanent."
             />
             {isSignals &&
             <Field
@@ -88,7 +108,7 @@ export class AlertForm extends Component {
             <Field
               name='subaccount'
               component={SubaccountTypeaheadWrapper}
-              disabled={true}
+              disabled={submitting}
             />}
             {isSignals &&
             <label>Facet</label>}
@@ -97,58 +117,49 @@ export class AlertForm extends Component {
               <Grid.Column xs={6} md={4}>
                 <div>
                   <Field
-                    name='facet_name'
-                    component={SelectWrapper}
-                    options={getOptions(FACETS)}
-                    disabled={submitting}
-                    validate={required}
+                    name='facet_value'
+                    connectLeft= {
+                      <Field
+                        name='facet_name'
+                        component={SelectWrapper}
+                        options={getOptions(FACETS)}
+                        disabled={submitting}
+                        validate={required}
+                      />
+                    }
+                    component={TextFieldWrapper}
+                    onChange={removeFacetValue()}
+                    disabled={submitting || checkFacet()}
+                    placeholder={facet_name === 'ALL' ? 'No facet selected' : ''}
+                    validate={validateFacet()}
                   />
                 </div>
               </Grid.Column>
-              {facet_name !== 'ALL' &&
-              <Grid.Column xs={6} md={4}>
-                <div>
-                  <Field
-                    name='facet_value'
-                    component={TextFieldWrapper}
-                    disabled={submitting}
-                    validate={required}
-                  />
-                </div>
-              </Grid.Column>}
             </Grid>}
             {isSignals && <br/>}
             <label>Criteria</label>
             <Grid>
-              <Grid.Column xs={6} md={4}>
-                <div>
-                  <Field
-                    name='threshold.error.comparator'
-                    component={SelectWrapper}
-                    options={getOptions(COMPARATOR)}
-                    disabled={submitting || isThreshold}
-                    validate={required}
-                  />
-                </div>
-              </Grid.Column>
-              <Grid.Column xs={6} md={4}>
+              <Grid.Column xs={5} md={3}>
                 <div>
                   <Field
                     name='threshold.error.target'
                     component={TextFieldWrapper}
+                    connectLeft={
+                      alert_metric === 'signals_health_threshold' && <Field
+                        name='threshold.error.comparator'
+                        component={SelectWrapper}
+                        options={getOptions(COMPARATOR)}
+                        disabled={submitting || !(isThreshold && isSignals)}
+                        validate={required}
+                      />
+                    }
                     disabled={submitting}
+                    prefix={alert_metric !== 'signals_health_threshold' ? 'Above' : ''}
+                    suffix={alert_metric !== 'signals_health_threshold' ? '%' : ''}
                     validate={getTargetValidation()}
-                  />
-                </div>
-              </Grid.Column>
-              <Grid.Column xs={6} md={4}>
-                <div>
-                  <Field
-                    name='criteria_metric'
-                    component={SelectWrapper}
-                    options={getOptions(CRITERIA)}
-                    disabled={true}
-                    validate={required}
+                    style={{
+                      textAlign: 'right'
+                    }}
                   />
                 </div>
               </Grid.Column>
@@ -194,6 +205,7 @@ const mapStateToProps = (state, props) => {
     disabled: props.pristine || props.submitting,
     alert_metric: selector(state, 'alert_metric'),
     facet_name: selector(state, 'facet_name'),
+    facet_value: selector(state, 'facet_value'),
     assignTo: selector(state, 'assignTo'),
     subaccount: selector(state, 'subaccount'),
     enabled: selector(state, 'enabled'),
