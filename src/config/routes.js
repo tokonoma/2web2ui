@@ -251,15 +251,8 @@ const routes = [
     title: 'Signals',
     supportDocSearch: 'signals'
   },
-  {
-    path: '/signals/engagement-recency/:facet/:facetId',
-    component: signals.EngagementRecencyPage,
-    condition: hasGrants('signals/manage'),
-    layout: App,
-    title: 'Signals',
-    supportDocSearch: 'signals'
-  },
-  // Signals
+  // Signals routes for 'feature_signals_v2'
+  // TODO: replace the above route with this one below
   {
     path: '/signals/engagement/cohorts/:facet/:facetId',
     component: signals.EngagementRecencyPage,
@@ -271,7 +264,7 @@ const routes = [
   {
     path: '/signals/engagement/engagement-rate/:facet/:facetId',
     component: signals.EngagementRecencyPage,
-    condition: hasGrants('signals/manage'),
+    condition: all(hasGrants('signals/manage'), hasUiOption('feature_signals_v2')),
     layout: App,
     title: 'Signals',
     supportDocSearch: 'signals'
@@ -279,7 +272,7 @@ const routes = [
   {
     path: '/signals/engagement/unsubscribes/:facet/:facetId',
     component: signals.EngagementRecencyPage,
-    condition: hasGrants('signals/manage'),
+    condition: all(hasGrants('signals/manage'), hasUiOption('feature_signals_v2')),
     layout: App,
     title: 'Signals',
     supportDocSearch: 'signals'
@@ -287,7 +280,7 @@ const routes = [
   {
     path: '/signals/engagement/complaints/:facet/:facetId',
     component: signals.EngagementRecencyPage,
-    condition: hasGrants('signals/manage'),
+    condition: all(hasGrants('signals/manage'), hasUiOption('feature_signals_v2')),
     layout: App,
     title: 'Signals',
     supportDocSearch: 'signals'
