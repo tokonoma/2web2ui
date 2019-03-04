@@ -51,7 +51,7 @@ export class EngagementRecencyPreview extends Component {
     }
 
     return (
-      <PageLink to={`/signals/engagement-recency/${facet}/${facetId}${setSubaccountQuery(subaccountId)}`}>
+      <PageLink to={`/signals/engagement/cohorts/${facet}/${facetId}${setSubaccountQuery(subaccountId)}`}>
         <Panel>
           <Panel.Section>
             <ChartHeader
