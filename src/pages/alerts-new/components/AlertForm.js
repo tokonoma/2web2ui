@@ -21,9 +21,9 @@ import validateEmailList from '../helpers/validateEmailList';
 const formName = 'alertForm';
 
 const accountOptions = [
-  { label: 'Master and all subaccounts', value: 'all', disabled: false },
-  { label: 'Master account only', value: 'master', disabled: false },
-  { label: 'Single Subaccount', value: 'subaccount', disabled: false }
+  { label: 'Master and all subaccounts', value: 'all' },
+  { label: 'Master account only', value: 'master' },
+  { label: 'Single Subaccount', value: 'subaccount' }
 ];
 
 export class AlertForm extends Component {
@@ -33,6 +33,7 @@ export class AlertForm extends Component {
 
   render() {
     const {
+      pristine,
       submitting,
       assignTo,
       alert_metric = '',
@@ -149,7 +150,7 @@ export class AlertForm extends Component {
                         name='threshold.error.comparator'
                         component={SelectWrapper}
                         options={getOptions(COMPARATOR)}
-                        disabled={submitting || !(isThreshold && isSignals)}
+                        disabled={submitting}
                         validate={required}
                       />
                     }
@@ -190,7 +191,7 @@ export class AlertForm extends Component {
               </Grid.Column>
             </Grid>
             <br/>
-            <Button submit primary disabled={submitting}>{submitText}</Button>
+            <Button submit primary disabled={pristine || submitting}>{submitText}</Button>
           </Panel.Section>
         </Panel>
       </Form>
@@ -202,7 +203,6 @@ const mapStateToProps = (state, props) => {
   const selector = formValueSelector(formName);
 
   return {
-    disabled: props.pristine || props.submitting,
     alert_metric: selector(state, 'alert_metric'),
     facet_name: selector(state, 'facet_name'),
     facet_value: selector(state, 'facet_value'),
