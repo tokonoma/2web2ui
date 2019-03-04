@@ -87,7 +87,7 @@ export class EngagementRecencyPage extends Component {
   )
 
   renderContent = () => {
-    const { data = [], loading, gap, empty, error } = this.props;
+    const { data = [], facet, facetId, loading, gap, empty, error } = this.props;
     const { selectedDate } = this.state;
     const selectedCohorts = _.find(data, ['date', selectedDate]) || {};
     let chartPanel;
@@ -112,7 +112,7 @@ export class EngagementRecencyPage extends Component {
       <Grid>
         <Grid.Column sm={12} md={7}>
           <AccessControl condition={hasUiOption('feature_signals_v2')}>
-            <Tabs />
+            <Tabs facet={facet} facetId={facetId}/>
           </AccessControl>
           <Panel sectioned>
             <AccessControl condition={not(hasUiOption('feature_signals_v2'))}>

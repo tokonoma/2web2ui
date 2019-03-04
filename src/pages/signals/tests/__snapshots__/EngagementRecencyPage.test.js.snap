@@ -84,7 +84,10 @@ exports[`Signals Engagement Recency Page renders correctly 1`] = `
       <Connect(AccessControl)
         condition={[Function]}
       >
-        <withRouter(Tabs) />
+        <withRouter(Tabs)
+          facet="sending-domain"
+          facetId="test.com"
+        />
       </Connect(AccessControl)>
       <Panel
         sectioned={true}
@@ -321,7 +324,10 @@ exports[`Signals Engagement Recency Page renders error correctly 1`] = `
       <Connect(AccessControl)
         condition={[Function]}
       >
-        <withRouter(Tabs) />
+        <withRouter(Tabs)
+          facet="sending-domain"
+          facetId="test.com"
+        />
       </Connect(AccessControl)>
       <Panel
         sectioned={true}
