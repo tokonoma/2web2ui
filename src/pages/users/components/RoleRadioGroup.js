@@ -5,6 +5,7 @@ import { formValueSelector, clearFields } from 'redux-form';
 import { RadioGroup } from 'src/components/reduxFormWrappers';
 import { hasSubaccounts } from 'src/selectors/subaccounts';
 import { FORMS, ROLES } from 'src/constants';
+import { hasUiOption } from 'src/helpers/conditions/account';
 import SubaccountAssignment from './SubaccountAssignment';
 
 const ADMIN_ROLE = {
@@ -57,14 +58,16 @@ export class RoleRadioGroup extends React.Component {
       selectedRole,
       hasSubaccounts,
       useSubaccountChecked,
+      isDeveloperVisible,
+      isEmailVisible,
       allowSuperUser,
       allowSubaccountAssignment
     } = this.props;
 
     return [
       ADMIN_ROLE,
-      DEVELOPER_ROLE,
-      EMAIL_ROLE,
+      DEVELOPER_ROLE && isDeveloperVisible,
+      EMAIL_ROLE && isEmailVisible,
       {
         ...REPORTING_ROLE,
         children: allowSubaccountAssignment &&
@@ -103,7 +106,9 @@ RoleRadioGroup.defaultProps = {
 const mapStateToProps = (state) => ({
   selectedRole: formValueSelector(FORMS.INVITE_USER)(state, 'access'),
   hasSubaccounts: hasSubaccounts(state),
-  useSubaccountChecked: formValueSelector(FORMS.INVITE_USER)(state, 'useSubaccount')
+  useSubaccountChecked: formValueSelector(FORMS.INVITE_USER)(state, 'useSubaccount'),
+  isDeveloperVisible: hasUiOption('developer')(state),
+  isEmailVisible: hasUiOption('email')(state)
 });
 
 const mapDispatchToProps = { clearFields };
