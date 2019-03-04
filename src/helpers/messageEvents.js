@@ -89,11 +89,9 @@ function transformParams(params) {
     message_ids: 'messages',
     friendly_froms: 'from_addresses'
   };
-  const validFilters = {
-    ...ALL_EVENTS_FILTERS,
-  }
+
   const transformedParams = _.reduce(params, (accumulator, value, key) => {
-    if (validFilters.hasOwnProperty(key)) {
+    if (ALL_EVENTS_FILTERS.hasOwnProperty(key)) {
       accumulator[key] = value;
       return accumulator;
     }

@@ -86,7 +86,7 @@ export const FORMS = {
   EVENTS_SEARCH: 'eventsSearchForm'
 };
 
-//These filters are the searchable filters in the 'more filters' modal
+//These filters are the searchable filters in the 'more filters' modal on the Events Search page
 export const SEARCH_QUERY_FILTERS = {
   recipient_domains: { placeholder: 'list of domain parts (e.g., gmail, yahoo.co, yahoo.co.jp, .fr)', label: 'Recipient Domains' },
   from_addresses: { placeholder: 'list of full from addresses (e.g., john@mycompany.com)', label: 'From Addresses' },

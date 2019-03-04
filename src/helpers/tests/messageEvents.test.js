@@ -57,7 +57,7 @@ describe('messageEvents helpers', () => {
   };
 
   const testCases = {
-    'parses correctly when all filter param exists':
+    'parses correctly when all filter parameters exists':
       {
         searchText: `?${defaultDateURL}&filter1=foo&filter2=bar`,
         expected: {
