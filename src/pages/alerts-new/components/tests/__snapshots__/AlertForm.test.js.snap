@@ -1,6 +1,5241 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Alert Form Component account/subaccount props should show subaccount typeahead when assignTo is set to subaccount 1`] = `
+<Form
+  onSubmit={[MockFunction]}
+>
+  <Panel>
+    <Panel.Section>
+      <Field
+        component={[Function]}
+        disabled={false}
+        label="Name"
+        name="name"
+        validate={
+          Array [
+            [Function],
+            [Function],
+          ]
+        }
+      />
+      <Field
+        component={[Function]}
+        disabled={true}
+        helpText="This assignment is permanent."
+        label="Alert Type"
+        name="alert_metric"
+        options={
+          Array [
+            Object {
+              "label": "Monthly Sending Limit",
+              "value": "monthly_sending_limit",
+            },
+            Object {
+              "label": "Health Score",
+              "value": "signals_health_threshold",
+            },
+            Object {
+              "label": "Health Score - Day over Day",
+              "value": "signals_health_dod",
+            },
+            Object {
+              "label": "Health Score - Week over Week",
+              "value": "signals_health_wow",
+            },
+          ]
+        }
+        validate={[Function]}
+      />
+      <Field
+        component={[Function]}
+        label="Account"
+        name="assignTo"
+        options={
+          Array [
+            Object {
+              "label": "Master and all subaccounts",
+              "value": "all",
+            },
+            Object {
+              "label": "Master account only",
+              "value": "master",
+            },
+            Object {
+              "label": "Single Subaccount",
+              "value": "subaccount",
+            },
+          ]
+        }
+      />
+      <Field
+        component={[Function]}
+        disabled={false}
+        name="subaccount"
+      />
+      <label>
+        Facet
+      </label>
+      <Grid>
+        <Grid.Column
+          md={4}
+          xs={6}
+        >
+          <div>
+            <Field
+              component={[Function]}
+              connectLeft={
+                <Field
+                  component={[Function]}
+                  disabled={false}
+                  name="facet_name"
+                  options={
+                    Array [
+                      Object {
+                        "label": "NONE",
+                        "value": "ALL",
+                      },
+                      Object {
+                        "label": "Sending Domain",
+                        "value": "sending_domain",
+                      },
+                      Object {
+                        "label": "IP Pool",
+                        "value": "ip_pool",
+                      },
+                      Object {
+                        "label": "Campaign ID",
+                        "value": "campaign_id",
+                      },
+                    ]
+                  }
+                  validate={[Function]}
+                />
+              }
+              disabled={false}
+              name="facet_value"
+              placeholder=""
+              validate={[Function]}
+            />
+          </div>
+        </Grid.Column>
+      </Grid>
+      <br />
+      <label>
+        Criteria
+      </label>
+      <Grid>
+        <Grid.Column
+          md={3}
+          xs={5}
+        >
+          <div>
+            <Field
+              component={[Function]}
+              connectLeft={
+                <Field
+                  component={[Function]}
+                  disabled={false}
+                  name="threshold.error.comparator"
+                  options={
+                    Array [
+                      Object {
+                        "label": "Below",
+                        "value": "lt",
+                      },
+                      Object {
+                        "label": "Above",
+                        "value": "gt",
+                      },
+                    ]
+                  }
+                  validate={[Function]}
+                />
+              }
+              disabled={false}
+              name="threshold.error.target"
+              prefix=""
+              style={
+                Object {
+                  "textAlign": "right",
+                }
+              }
+              suffix=""
+              validate={
+                Array [
+                  [Function],
+                  [Function],
+                ]
+              }
+            />
+          </div>
+        </Grid.Column>
+      </Grid>
+      <br />
+      <Field
+        component={[Function]}
+        disabled={false}
+        label="Notify"
+        multiline={true}
+        name="email_addresses"
+        validate={
+          Array [
+            [Function],
+            [Function],
+          ]
+        }
+      />
+      <Grid>
+        <Grid.Column
+          md={1}
+          xs={1}
+        >
+          <label>
+            Enabled
+          </label>
+        </Grid.Column>
+        <Grid.Column
+          md={1}
+          xs={1}
+        >
+          <div>
+            <Field
+              checked={true}
+              component={[Function]}
+              disabled={false}
+              name="enabled"
+              parse={[Function]}
+            />
+          </div>
+        </Grid.Column>
+      </Grid>
+      <br />
+      <Button
+        disabled={true}
+        primary={true}
+        size="default"
+        submit={true}
+      >
+        Update Alert
+      </Button>
+    </Panel.Section>
+  </Panel>
+</Form>
+`;
+
+exports[`Alert Form Component account/subaccount props should show subaccount typeahead when assignTo is set to subaccount 2`] = `
+<Form
+  onSubmit={[MockFunction]}
+>
+  <Panel>
+    <Panel.Section>
+      <Field
+        component={[Function]}
+        disabled={false}
+        label="Name"
+        name="name"
+        validate={
+          Array [
+            [Function],
+            [Function],
+          ]
+        }
+      />
+      <Field
+        component={[Function]}
+        disabled={true}
+        helpText="This assignment is permanent."
+        label="Alert Type"
+        name="alert_metric"
+        options={
+          Array [
+            Object {
+              "label": "Monthly Sending Limit",
+              "value": "monthly_sending_limit",
+            },
+            Object {
+              "label": "Health Score",
+              "value": "signals_health_threshold",
+            },
+            Object {
+              "label": "Health Score - Day over Day",
+              "value": "signals_health_dod",
+            },
+            Object {
+              "label": "Health Score - Week over Week",
+              "value": "signals_health_wow",
+            },
+          ]
+        }
+        validate={[Function]}
+      />
+      <Field
+        component={[Function]}
+        label="Account"
+        name="assignTo"
+        options={
+          Array [
+            Object {
+              "label": "Master and all subaccounts",
+              "value": "all",
+            },
+            Object {
+              "label": "Master account only",
+              "value": "master",
+            },
+            Object {
+              "label": "Single Subaccount",
+              "value": "subaccount",
+            },
+          ]
+        }
+      />
+      <label>
+        Facet
+      </label>
+      <Grid>
+        <Grid.Column
+          md={4}
+          xs={6}
+        >
+          <div>
+            <Field
+              component={[Function]}
+              connectLeft={
+                <Field
+                  component={[Function]}
+                  disabled={false}
+                  name="facet_name"
+                  options={
+                    Array [
+                      Object {
+                        "label": "NONE",
+                        "value": "ALL",
+                      },
+                      Object {
+                        "label": "Sending Domain",
+                        "value": "sending_domain",
+                      },
+                      Object {
+                        "label": "IP Pool",
+                        "value": "ip_pool",
+                      },
+                      Object {
+                        "label": "Campaign ID",
+                        "value": "campaign_id",
+                      },
+                    ]
+                  }
+                  validate={[Function]}
+                />
+              }
+              disabled={false}
+              name="facet_value"
+              placeholder=""
+              validate={[Function]}
+            />
+          </div>
+        </Grid.Column>
+      </Grid>
+      <br />
+      <label>
+        Criteria
+      </label>
+      <Grid>
+        <Grid.Column
+          md={3}
+          xs={5}
+        >
+          <div>
+            <Field
+              component={[Function]}
+              connectLeft={
+                <Field
+                  component={[Function]}
+                  disabled={false}
+                  name="threshold.error.comparator"
+                  options={
+                    Array [
+                      Object {
+                        "label": "Below",
+                        "value": "lt",
+                      },
+                      Object {
+                        "label": "Above",
+                        "value": "gt",
+                      },
+                    ]
+                  }
+                  validate={[Function]}
+                />
+              }
+              disabled={false}
+              name="threshold.error.target"
+              prefix=""
+              style={
+                Object {
+                  "textAlign": "right",
+                }
+              }
+              suffix=""
+              validate={
+                Array [
+                  [Function],
+                  [Function],
+                ]
+              }
+            />
+          </div>
+        </Grid.Column>
+      </Grid>
+      <br />
+      <Field
+        component={[Function]}
+        disabled={false}
+        label="Notify"
+        multiline={true}
+        name="email_addresses"
+        validate={
+          Array [
+            [Function],
+            [Function],
+          ]
+        }
+      />
+      <Grid>
+        <Grid.Column
+          md={1}
+          xs={1}
+        >
+          <label>
+            Enabled
+          </label>
+        </Grid.Column>
+        <Grid.Column
+          md={1}
+          xs={1}
+        >
+          <div>
+            <Field
+              checked={true}
+              component={[Function]}
+              disabled={false}
+              name="enabled"
+              parse={[Function]}
+            />
+          </div>
+        </Grid.Column>
+      </Grid>
+      <br />
+      <Button
+        disabled={true}
+        primary={true}
+        size="default"
+        submit={true}
+      >
+        Update Alert
+      </Button>
+    </Panel.Section>
+  </Panel>
+</Form>
+`;
+
+exports[`Alert Form Component criteria props should add prefix and suffix to target when alert_metric is NOT set to signals_health_threshold 1`] = `null`;
+
+exports[`Alert Form Component criteria props should add prefix and suffix to target when alert_metric is NOT set to signals_health_threshold 2`] = `
+<Form
+  onSubmit={[MockFunction]}
+>
+  <Panel>
+    <Panel.Section>
+      <Field
+        component={[Function]}
+        disabled={false}
+        label="Name"
+        name="name"
+        validate={
+          Array [
+            [Function],
+            [Function],
+          ]
+        }
+      />
+      <Field
+        component={[Function]}
+        disabled={true}
+        helpText="This assignment is permanent."
+        label="Alert Type"
+        name="alert_metric"
+        options={
+          Array [
+            Object {
+              "label": "Monthly Sending Limit",
+              "value": "monthly_sending_limit",
+            },
+            Object {
+              "label": "Health Score",
+              "value": "signals_health_threshold",
+            },
+            Object {
+              "label": "Health Score - Day over Day",
+              "value": "signals_health_dod",
+            },
+            Object {
+              "label": "Health Score - Week over Week",
+              "value": "signals_health_wow",
+            },
+          ]
+        }
+        validate={[Function]}
+      />
+      <label>
+        Criteria
+      </label>
+      <Grid>
+        <Grid.Column
+          md={3}
+          xs={5}
+        >
+          <div>
+            <Field
+              component={[Function]}
+              connectLeft={false}
+              disabled={false}
+              name="threshold.error.target"
+              prefix="Above"
+              style={
+                Object {
+                  "textAlign": "right",
+                }
+              }
+              suffix="%"
+              validate={
+                Array [
+                  [Function],
+                  [Function],
+                  [Function],
+                ]
+              }
+            />
+          </div>
+        </Grid.Column>
+      </Grid>
+      <br />
+      <Field
+        component={[Function]}
+        disabled={false}
+        label="Notify"
+        multiline={true}
+        name="email_addresses"
+        validate={
+          Array [
+            [Function],
+            [Function],
+          ]
+        }
+      />
+      <Grid>
+        <Grid.Column
+          md={1}
+          xs={1}
+        >
+          <label>
+            Enabled
+          </label>
+        </Grid.Column>
+        <Grid.Column
+          md={1}
+          xs={1}
+        >
+          <div>
+            <Field
+              checked={true}
+              component={[Function]}
+              disabled={false}
+              name="enabled"
+              parse={[Function]}
+            />
+          </div>
+        </Grid.Column>
+      </Grid>
+      <br />
+      <Button
+        disabled={true}
+        primary={true}
+        size="default"
+        submit={true}
+      >
+        Update Alert
+      </Button>
+    </Panel.Section>
+  </Panel>
+</Form>
+`;
+
+exports[`Alert Form Component criteria props should add prefix and suffix to target when alert_metric is NOT set to signals_health_threshold 3`] = `null`;
+
+exports[`Alert Form Component criteria props should add prefix and suffix to target when alert_metric is NOT set to signals_health_threshold 4`] = `
+<Form
+  onSubmit={[MockFunction]}
+>
+  <Panel>
+    <Panel.Section>
+      <Field
+        component={[Function]}
+        disabled={false}
+        label="Name"
+        name="name"
+        validate={
+          Array [
+            [Function],
+            [Function],
+          ]
+        }
+      />
+      <Field
+        component={[Function]}
+        disabled={true}
+        helpText="This assignment is permanent."
+        label="Alert Type"
+        name="alert_metric"
+        options={
+          Array [
+            Object {
+              "label": "Monthly Sending Limit",
+              "value": "monthly_sending_limit",
+            },
+            Object {
+              "label": "Health Score",
+              "value": "signals_health_threshold",
+            },
+            Object {
+              "label": "Health Score - Day over Day",
+              "value": "signals_health_dod",
+            },
+            Object {
+              "label": "Health Score - Week over Week",
+              "value": "signals_health_wow",
+            },
+          ]
+        }
+        validate={[Function]}
+      />
+      <Field
+        component={[Function]}
+        label="Account"
+        name="assignTo"
+        options={
+          Array [
+            Object {
+              "label": "Master and all subaccounts",
+              "value": "all",
+            },
+            Object {
+              "label": "Master account only",
+              "value": "master",
+            },
+            Object {
+              "label": "Single Subaccount",
+              "value": "subaccount",
+            },
+          ]
+        }
+      />
+      <label>
+        Facet
+      </label>
+      <Grid>
+        <Grid.Column
+          md={4}
+          xs={6}
+        >
+          <div>
+            <Field
+              component={[Function]}
+              connectLeft={
+                <Field
+                  component={[Function]}
+                  disabled={false}
+                  name="facet_name"
+                  options={
+                    Array [
+                      Object {
+                        "label": "NONE",
+                        "value": "ALL",
+                      },
+                      Object {
+                        "label": "Sending Domain",
+                        "value": "sending_domain",
+                      },
+                      Object {
+                        "label": "IP Pool",
+                        "value": "ip_pool",
+                      },
+                      Object {
+                        "label": "Campaign ID",
+                        "value": "campaign_id",
+                      },
+                    ]
+                  }
+                  validate={[Function]}
+                />
+              }
+              disabled={false}
+              name="facet_value"
+              placeholder=""
+              validate={[Function]}
+            />
+          </div>
+        </Grid.Column>
+      </Grid>
+      <br />
+      <label>
+        Criteria
+      </label>
+      <Grid>
+        <Grid.Column
+          md={3}
+          xs={5}
+        >
+          <div>
+            <Field
+              component={[Function]}
+              connectLeft={
+                <Field
+                  component={[Function]}
+                  disabled={false}
+                  name="threshold.error.comparator"
+                  options={
+                    Array [
+                      Object {
+                        "label": "Below",
+                        "value": "lt",
+                      },
+                      Object {
+                        "label": "Above",
+                        "value": "gt",
+                      },
+                    ]
+                  }
+                  validate={[Function]}
+                />
+              }
+              disabled={false}
+              name="threshold.error.target"
+              prefix=""
+              style={
+                Object {
+                  "textAlign": "right",
+                }
+              }
+              suffix=""
+              validate={
+                Array [
+                  [Function],
+                  [Function],
+                ]
+              }
+            />
+          </div>
+        </Grid.Column>
+      </Grid>
+      <br />
+      <Field
+        component={[Function]}
+        disabled={false}
+        label="Notify"
+        multiline={true}
+        name="email_addresses"
+        validate={
+          Array [
+            [Function],
+            [Function],
+          ]
+        }
+      />
+      <Grid>
+        <Grid.Column
+          md={1}
+          xs={1}
+        >
+          <label>
+            Enabled
+          </label>
+        </Grid.Column>
+        <Grid.Column
+          md={1}
+          xs={1}
+        >
+          <div>
+            <Field
+              checked={true}
+              component={[Function]}
+              disabled={false}
+              name="enabled"
+              parse={[Function]}
+            />
+          </div>
+        </Grid.Column>
+      </Grid>
+      <br />
+      <Button
+        disabled={true}
+        primary={true}
+        size="default"
+        submit={true}
+      >
+        Update Alert
+      </Button>
+    </Panel.Section>
+  </Panel>
+</Form>
+`;
+
+exports[`Alert Form Component criteria props should add prefix and suffix to target when alert_metric is NOT set to signals_health_threshold 5`] = `null`;
+
+exports[`Alert Form Component criteria props should add prefix and suffix to target when alert_metric is NOT set to signals_health_threshold 6`] = `
+<Form
+  onSubmit={[MockFunction]}
+>
+  <Panel>
+    <Panel.Section>
+      <Field
+        component={[Function]}
+        disabled={false}
+        label="Name"
+        name="name"
+        validate={
+          Array [
+            [Function],
+            [Function],
+          ]
+        }
+      />
+      <Field
+        component={[Function]}
+        disabled={true}
+        helpText="This assignment is permanent."
+        label="Alert Type"
+        name="alert_metric"
+        options={
+          Array [
+            Object {
+              "label": "Monthly Sending Limit",
+              "value": "monthly_sending_limit",
+            },
+            Object {
+              "label": "Health Score",
+              "value": "signals_health_threshold",
+            },
+            Object {
+              "label": "Health Score - Day over Day",
+              "value": "signals_health_dod",
+            },
+            Object {
+              "label": "Health Score - Week over Week",
+              "value": "signals_health_wow",
+            },
+          ]
+        }
+        validate={[Function]}
+      />
+      <Field
+        component={[Function]}
+        label="Account"
+        name="assignTo"
+        options={
+          Array [
+            Object {
+              "label": "Master and all subaccounts",
+              "value": "all",
+            },
+            Object {
+              "label": "Master account only",
+              "value": "master",
+            },
+            Object {
+              "label": "Single Subaccount",
+              "value": "subaccount",
+            },
+          ]
+        }
+      />
+      <label>
+        Facet
+      </label>
+      <Grid>
+        <Grid.Column
+          md={4}
+          xs={6}
+        >
+          <div>
+            <Field
+              component={[Function]}
+              connectLeft={
+                <Field
+                  component={[Function]}
+                  disabled={false}
+                  name="facet_name"
+                  options={
+                    Array [
+                      Object {
+                        "label": "NONE",
+                        "value": "ALL",
+                      },
+                      Object {
+                        "label": "Sending Domain",
+                        "value": "sending_domain",
+                      },
+                      Object {
+                        "label": "IP Pool",
+                        "value": "ip_pool",
+                      },
+                      Object {
+                        "label": "Campaign ID",
+                        "value": "campaign_id",
+                      },
+                    ]
+                  }
+                  validate={[Function]}
+                />
+              }
+              disabled={false}
+              name="facet_value"
+              placeholder=""
+              validate={[Function]}
+            />
+          </div>
+        </Grid.Column>
+      </Grid>
+      <br />
+      <label>
+        Criteria
+      </label>
+      <Grid>
+        <Grid.Column
+          md={3}
+          xs={5}
+        >
+          <div>
+            <Field
+              component={[Function]}
+              connectLeft={false}
+              disabled={false}
+              name="threshold.error.target"
+              prefix="Above"
+              style={
+                Object {
+                  "textAlign": "right",
+                }
+              }
+              suffix="%"
+              validate={[Function]}
+            />
+          </div>
+        </Grid.Column>
+      </Grid>
+      <br />
+      <Field
+        component={[Function]}
+        disabled={false}
+        label="Notify"
+        multiline={true}
+        name="email_addresses"
+        validate={
+          Array [
+            [Function],
+            [Function],
+          ]
+        }
+      />
+      <Grid>
+        <Grid.Column
+          md={1}
+          xs={1}
+        >
+          <label>
+            Enabled
+          </label>
+        </Grid.Column>
+        <Grid.Column
+          md={1}
+          xs={1}
+        >
+          <div>
+            <Field
+              checked={true}
+              component={[Function]}
+              disabled={false}
+              name="enabled"
+              parse={[Function]}
+            />
+          </div>
+        </Grid.Column>
+      </Grid>
+      <br />
+      <Button
+        disabled={true}
+        primary={true}
+        size="default"
+        submit={true}
+      >
+        Update Alert
+      </Button>
+    </Panel.Section>
+  </Panel>
+</Form>
+`;
+
+exports[`Alert Form Component criteria props should only show comparator select when alert_metric is set to signals_health_threshold 1`] = `null`;
+
+exports[`Alert Form Component criteria props should only show comparator select when alert_metric is set to signals_health_threshold 2`] = `
+<Form
+  onSubmit={[MockFunction]}
+>
+  <Panel>
+    <Panel.Section>
+      <Field
+        component={[Function]}
+        disabled={false}
+        label="Name"
+        name="name"
+        validate={
+          Array [
+            [Function],
+            [Function],
+          ]
+        }
+      />
+      <Field
+        component={[Function]}
+        disabled={true}
+        helpText="This assignment is permanent."
+        label="Alert Type"
+        name="alert_metric"
+        options={
+          Array [
+            Object {
+              "label": "Monthly Sending Limit",
+              "value": "monthly_sending_limit",
+            },
+            Object {
+              "label": "Health Score",
+              "value": "signals_health_threshold",
+            },
+            Object {
+              "label": "Health Score - Day over Day",
+              "value": "signals_health_dod",
+            },
+            Object {
+              "label": "Health Score - Week over Week",
+              "value": "signals_health_wow",
+            },
+          ]
+        }
+        validate={[Function]}
+      />
+      <label>
+        Criteria
+      </label>
+      <Grid>
+        <Grid.Column
+          md={3}
+          xs={5}
+        >
+          <div>
+            <Field
+              component={[Function]}
+              connectLeft={false}
+              disabled={false}
+              name="threshold.error.target"
+              prefix="Above"
+              style={
+                Object {
+                  "textAlign": "right",
+                }
+              }
+              suffix="%"
+              validate={
+                Array [
+                  [Function],
+                  [Function],
+                  [Function],
+                ]
+              }
+            />
+          </div>
+        </Grid.Column>
+      </Grid>
+      <br />
+      <Field
+        component={[Function]}
+        disabled={false}
+        label="Notify"
+        multiline={true}
+        name="email_addresses"
+        validate={
+          Array [
+            [Function],
+            [Function],
+          ]
+        }
+      />
+      <Grid>
+        <Grid.Column
+          md={1}
+          xs={1}
+        >
+          <label>
+            Enabled
+          </label>
+        </Grid.Column>
+        <Grid.Column
+          md={1}
+          xs={1}
+        >
+          <div>
+            <Field
+              checked={true}
+              component={[Function]}
+              disabled={false}
+              name="enabled"
+              parse={[Function]}
+            />
+          </div>
+        </Grid.Column>
+      </Grid>
+      <br />
+      <Button
+        disabled={true}
+        primary={true}
+        size="default"
+        submit={true}
+      >
+        Update Alert
+      </Button>
+    </Panel.Section>
+  </Panel>
+</Form>
+`;
+
+exports[`Alert Form Component criteria props should only show comparator select when alert_metric is set to signals_health_threshold 3`] = `null`;
+
+exports[`Alert Form Component criteria props should only show comparator select when alert_metric is set to signals_health_threshold 4`] = `
+<Form
+  onSubmit={[MockFunction]}
+>
+  <Panel>
+    <Panel.Section>
+      <Field
+        component={[Function]}
+        disabled={false}
+        label="Name"
+        name="name"
+        validate={
+          Array [
+            [Function],
+            [Function],
+          ]
+        }
+      />
+      <Field
+        component={[Function]}
+        disabled={true}
+        helpText="This assignment is permanent."
+        label="Alert Type"
+        name="alert_metric"
+        options={
+          Array [
+            Object {
+              "label": "Monthly Sending Limit",
+              "value": "monthly_sending_limit",
+            },
+            Object {
+              "label": "Health Score",
+              "value": "signals_health_threshold",
+            },
+            Object {
+              "label": "Health Score - Day over Day",
+              "value": "signals_health_dod",
+            },
+            Object {
+              "label": "Health Score - Week over Week",
+              "value": "signals_health_wow",
+            },
+          ]
+        }
+        validate={[Function]}
+      />
+      <Field
+        component={[Function]}
+        label="Account"
+        name="assignTo"
+        options={
+          Array [
+            Object {
+              "label": "Master and all subaccounts",
+              "value": "all",
+            },
+            Object {
+              "label": "Master account only",
+              "value": "master",
+            },
+            Object {
+              "label": "Single Subaccount",
+              "value": "subaccount",
+            },
+          ]
+        }
+      />
+      <label>
+        Facet
+      </label>
+      <Grid>
+        <Grid.Column
+          md={4}
+          xs={6}
+        >
+          <div>
+            <Field
+              component={[Function]}
+              connectLeft={
+                <Field
+                  component={[Function]}
+                  disabled={false}
+                  name="facet_name"
+                  options={
+                    Array [
+                      Object {
+                        "label": "NONE",
+                        "value": "ALL",
+                      },
+                      Object {
+                        "label": "Sending Domain",
+                        "value": "sending_domain",
+                      },
+                      Object {
+                        "label": "IP Pool",
+                        "value": "ip_pool",
+                      },
+                      Object {
+                        "label": "Campaign ID",
+                        "value": "campaign_id",
+                      },
+                    ]
+                  }
+                  validate={[Function]}
+                />
+              }
+              disabled={false}
+              name="facet_value"
+              placeholder=""
+              validate={[Function]}
+            />
+          </div>
+        </Grid.Column>
+      </Grid>
+      <br />
+      <label>
+        Criteria
+      </label>
+      <Grid>
+        <Grid.Column
+          md={3}
+          xs={5}
+        >
+          <div>
+            <Field
+              component={[Function]}
+              connectLeft={
+                <Field
+                  component={[Function]}
+                  disabled={false}
+                  name="threshold.error.comparator"
+                  options={
+                    Array [
+                      Object {
+                        "label": "Below",
+                        "value": "lt",
+                      },
+                      Object {
+                        "label": "Above",
+                        "value": "gt",
+                      },
+                    ]
+                  }
+                  validate={[Function]}
+                />
+              }
+              disabled={false}
+              name="threshold.error.target"
+              prefix=""
+              style={
+                Object {
+                  "textAlign": "right",
+                }
+              }
+              suffix=""
+              validate={
+                Array [
+                  [Function],
+                  [Function],
+                ]
+              }
+            />
+          </div>
+        </Grid.Column>
+      </Grid>
+      <br />
+      <Field
+        component={[Function]}
+        disabled={false}
+        label="Notify"
+        multiline={true}
+        name="email_addresses"
+        validate={
+          Array [
+            [Function],
+            [Function],
+          ]
+        }
+      />
+      <Grid>
+        <Grid.Column
+          md={1}
+          xs={1}
+        >
+          <label>
+            Enabled
+          </label>
+        </Grid.Column>
+        <Grid.Column
+          md={1}
+          xs={1}
+        >
+          <div>
+            <Field
+              checked={true}
+              component={[Function]}
+              disabled={false}
+              name="enabled"
+              parse={[Function]}
+            />
+          </div>
+        </Grid.Column>
+      </Grid>
+      <br />
+      <Button
+        disabled={true}
+        primary={true}
+        size="default"
+        submit={true}
+      >
+        Update Alert
+      </Button>
+    </Panel.Section>
+  </Panel>
+</Form>
+`;
+
+exports[`Alert Form Component criteria props should validate target when alert_metric is set to monthly_sending_limit 1`] = `null`;
+
+exports[`Alert Form Component criteria props should validate target when alert_metric is set to monthly_sending_limit 2`] = `
+<Form
+  onSubmit={[MockFunction]}
+>
+  <Panel>
+    <Panel.Section>
+      <Field
+        component={[Function]}
+        disabled={false}
+        label="Name"
+        name="name"
+        validate={
+          Array [
+            [Function],
+            [Function],
+          ]
+        }
+      />
+      <Field
+        component={[Function]}
+        disabled={true}
+        helpText="This assignment is permanent."
+        label="Alert Type"
+        name="alert_metric"
+        options={
+          Array [
+            Object {
+              "label": "Monthly Sending Limit",
+              "value": "monthly_sending_limit",
+            },
+            Object {
+              "label": "Health Score",
+              "value": "signals_health_threshold",
+            },
+            Object {
+              "label": "Health Score - Day over Day",
+              "value": "signals_health_dod",
+            },
+            Object {
+              "label": "Health Score - Week over Week",
+              "value": "signals_health_wow",
+            },
+          ]
+        }
+        validate={[Function]}
+      />
+      <label>
+        Criteria
+      </label>
+      <Grid>
+        <Grid.Column
+          md={3}
+          xs={5}
+        >
+          <div>
+            <Field
+              component={[Function]}
+              connectLeft={false}
+              disabled={false}
+              name="threshold.error.target"
+              prefix="Above"
+              style={
+                Object {
+                  "textAlign": "right",
+                }
+              }
+              suffix="%"
+              validate={
+                Array [
+                  [Function],
+                  [Function],
+                  [Function],
+                ]
+              }
+            />
+          </div>
+        </Grid.Column>
+      </Grid>
+      <br />
+      <Field
+        component={[Function]}
+        disabled={false}
+        label="Notify"
+        multiline={true}
+        name="email_addresses"
+        validate={
+          Array [
+            [Function],
+            [Function],
+          ]
+        }
+      />
+      <Grid>
+        <Grid.Column
+          md={1}
+          xs={1}
+        >
+          <label>
+            Enabled
+          </label>
+        </Grid.Column>
+        <Grid.Column
+          md={1}
+          xs={1}
+        >
+          <div>
+            <Field
+              checked={true}
+              component={[Function]}
+              disabled={false}
+              name="enabled"
+              parse={[Function]}
+            />
+          </div>
+        </Grid.Column>
+      </Grid>
+      <br />
+      <Button
+        disabled={true}
+        primary={true}
+        size="default"
+        submit={true}
+      >
+        Update Alert
+      </Button>
+    </Panel.Section>
+  </Panel>
+</Form>
+`;
+
+exports[`Alert Form Component criteria props should validate target when alert_metric is set to signals_health_day_over_day or signals_health_week_over_week 1`] = `null`;
+
+exports[`Alert Form Component criteria props should validate target when alert_metric is set to signals_health_day_over_day or signals_health_week_over_week 2`] = `
+<Form
+  onSubmit={[MockFunction]}
+>
+  <Panel>
+    <Panel.Section>
+      <Field
+        component={[Function]}
+        disabled={false}
+        label="Name"
+        name="name"
+        validate={
+          Array [
+            [Function],
+            [Function],
+          ]
+        }
+      />
+      <Field
+        component={[Function]}
+        disabled={true}
+        helpText="This assignment is permanent."
+        label="Alert Type"
+        name="alert_metric"
+        options={
+          Array [
+            Object {
+              "label": "Monthly Sending Limit",
+              "value": "monthly_sending_limit",
+            },
+            Object {
+              "label": "Health Score",
+              "value": "signals_health_threshold",
+            },
+            Object {
+              "label": "Health Score - Day over Day",
+              "value": "signals_health_dod",
+            },
+            Object {
+              "label": "Health Score - Week over Week",
+              "value": "signals_health_wow",
+            },
+          ]
+        }
+        validate={[Function]}
+      />
+      <Field
+        component={[Function]}
+        label="Account"
+        name="assignTo"
+        options={
+          Array [
+            Object {
+              "label": "Master and all subaccounts",
+              "value": "all",
+            },
+            Object {
+              "label": "Master account only",
+              "value": "master",
+            },
+            Object {
+              "label": "Single Subaccount",
+              "value": "subaccount",
+            },
+          ]
+        }
+      />
+      <label>
+        Facet
+      </label>
+      <Grid>
+        <Grid.Column
+          md={4}
+          xs={6}
+        >
+          <div>
+            <Field
+              component={[Function]}
+              connectLeft={
+                <Field
+                  component={[Function]}
+                  disabled={false}
+                  name="facet_name"
+                  options={
+                    Array [
+                      Object {
+                        "label": "NONE",
+                        "value": "ALL",
+                      },
+                      Object {
+                        "label": "Sending Domain",
+                        "value": "sending_domain",
+                      },
+                      Object {
+                        "label": "IP Pool",
+                        "value": "ip_pool",
+                      },
+                      Object {
+                        "label": "Campaign ID",
+                        "value": "campaign_id",
+                      },
+                    ]
+                  }
+                  validate={[Function]}
+                />
+              }
+              disabled={false}
+              name="facet_value"
+              placeholder=""
+              validate={[Function]}
+            />
+          </div>
+        </Grid.Column>
+      </Grid>
+      <br />
+      <label>
+        Criteria
+      </label>
+      <Grid>
+        <Grid.Column
+          md={3}
+          xs={5}
+        >
+          <div>
+            <Field
+              component={[Function]}
+              connectLeft={false}
+              disabled={false}
+              name="threshold.error.target"
+              prefix="Above"
+              style={
+                Object {
+                  "textAlign": "right",
+                }
+              }
+              suffix="%"
+              validate={[Function]}
+            />
+          </div>
+        </Grid.Column>
+      </Grid>
+      <br />
+      <Field
+        component={[Function]}
+        disabled={false}
+        label="Notify"
+        multiline={true}
+        name="email_addresses"
+        validate={
+          Array [
+            [Function],
+            [Function],
+          ]
+        }
+      />
+      <Grid>
+        <Grid.Column
+          md={1}
+          xs={1}
+        >
+          <label>
+            Enabled
+          </label>
+        </Grid.Column>
+        <Grid.Column
+          md={1}
+          xs={1}
+        >
+          <div>
+            <Field
+              checked={true}
+              component={[Function]}
+              disabled={false}
+              name="enabled"
+              parse={[Function]}
+            />
+          </div>
+        </Grid.Column>
+      </Grid>
+      <br />
+      <Button
+        disabled={true}
+        primary={true}
+        size="default"
+        submit={true}
+      >
+        Update Alert
+      </Button>
+    </Panel.Section>
+  </Panel>
+</Form>
+`;
+
+exports[`Alert Form Component criteria props should validate target when alert_metric is set to signals_health_day_over_day or signals_health_week_over_week 3`] = `null`;
+
+exports[`Alert Form Component criteria props should validate target when alert_metric is set to signals_health_day_over_day or signals_health_week_over_week 4`] = `
+<Form
+  onSubmit={[MockFunction]}
+>
+  <Panel>
+    <Panel.Section>
+      <Field
+        component={[Function]}
+        disabled={false}
+        label="Name"
+        name="name"
+        validate={
+          Array [
+            [Function],
+            [Function],
+          ]
+        }
+      />
+      <Field
+        component={[Function]}
+        disabled={true}
+        helpText="This assignment is permanent."
+        label="Alert Type"
+        name="alert_metric"
+        options={
+          Array [
+            Object {
+              "label": "Monthly Sending Limit",
+              "value": "monthly_sending_limit",
+            },
+            Object {
+              "label": "Health Score",
+              "value": "signals_health_threshold",
+            },
+            Object {
+              "label": "Health Score - Day over Day",
+              "value": "signals_health_dod",
+            },
+            Object {
+              "label": "Health Score - Week over Week",
+              "value": "signals_health_wow",
+            },
+          ]
+        }
+        validate={[Function]}
+      />
+      <Field
+        component={[Function]}
+        label="Account"
+        name="assignTo"
+        options={
+          Array [
+            Object {
+              "label": "Master and all subaccounts",
+              "value": "all",
+            },
+            Object {
+              "label": "Master account only",
+              "value": "master",
+            },
+            Object {
+              "label": "Single Subaccount",
+              "value": "subaccount",
+            },
+          ]
+        }
+      />
+      <label>
+        Facet
+      </label>
+      <Grid>
+        <Grid.Column
+          md={4}
+          xs={6}
+        >
+          <div>
+            <Field
+              component={[Function]}
+              connectLeft={
+                <Field
+                  component={[Function]}
+                  disabled={false}
+                  name="facet_name"
+                  options={
+                    Array [
+                      Object {
+                        "label": "NONE",
+                        "value": "ALL",
+                      },
+                      Object {
+                        "label": "Sending Domain",
+                        "value": "sending_domain",
+                      },
+                      Object {
+                        "label": "IP Pool",
+                        "value": "ip_pool",
+                      },
+                      Object {
+                        "label": "Campaign ID",
+                        "value": "campaign_id",
+                      },
+                    ]
+                  }
+                  validate={[Function]}
+                />
+              }
+              disabled={false}
+              name="facet_value"
+              placeholder=""
+              validate={[Function]}
+            />
+          </div>
+        </Grid.Column>
+      </Grid>
+      <br />
+      <label>
+        Criteria
+      </label>
+      <Grid>
+        <Grid.Column
+          md={3}
+          xs={5}
+        >
+          <div>
+            <Field
+              component={[Function]}
+              connectLeft={false}
+              disabled={false}
+              name="threshold.error.target"
+              prefix="Above"
+              style={
+                Object {
+                  "textAlign": "right",
+                }
+              }
+              suffix="%"
+              validate={[Function]}
+            />
+          </div>
+        </Grid.Column>
+      </Grid>
+      <br />
+      <Field
+        component={[Function]}
+        disabled={false}
+        label="Notify"
+        multiline={true}
+        name="email_addresses"
+        validate={
+          Array [
+            [Function],
+            [Function],
+          ]
+        }
+      />
+      <Grid>
+        <Grid.Column
+          md={1}
+          xs={1}
+        >
+          <label>
+            Enabled
+          </label>
+        </Grid.Column>
+        <Grid.Column
+          md={1}
+          xs={1}
+        >
+          <div>
+            <Field
+              checked={true}
+              component={[Function]}
+              disabled={false}
+              name="enabled"
+              parse={[Function]}
+            />
+          </div>
+        </Grid.Column>
+      </Grid>
+      <br />
+      <Button
+        disabled={true}
+        primary={true}
+        size="default"
+        submit={true}
+      >
+        Update Alert
+      </Button>
+    </Panel.Section>
+  </Panel>
+</Form>
+`;
+
+exports[`Alert Form Component criteria props should validate target when alert_metric is set to signals_health_threshold 1`] = `
+<Form
+  onSubmit={[MockFunction]}
+>
+  <Panel>
+    <Panel.Section>
+      <Field
+        component={[Function]}
+        disabled={false}
+        label="Name"
+        name="name"
+        validate={
+          Array [
+            [Function],
+            [Function],
+          ]
+        }
+      />
+      <Field
+        component={[Function]}
+        disabled={true}
+        helpText="This assignment is permanent."
+        label="Alert Type"
+        name="alert_metric"
+        options={
+          Array [
+            Object {
+              "label": "Monthly Sending Limit",
+              "value": "monthly_sending_limit",
+            },
+            Object {
+              "label": "Health Score",
+              "value": "signals_health_threshold",
+            },
+            Object {
+              "label": "Health Score - Day over Day",
+              "value": "signals_health_dod",
+            },
+            Object {
+              "label": "Health Score - Week over Week",
+              "value": "signals_health_wow",
+            },
+          ]
+        }
+        validate={[Function]}
+      />
+      <Field
+        component={[Function]}
+        label="Account"
+        name="assignTo"
+        options={
+          Array [
+            Object {
+              "label": "Master and all subaccounts",
+              "value": "all",
+            },
+            Object {
+              "label": "Master account only",
+              "value": "master",
+            },
+            Object {
+              "label": "Single Subaccount",
+              "value": "subaccount",
+            },
+          ]
+        }
+      />
+      <label>
+        Facet
+      </label>
+      <Grid>
+        <Grid.Column
+          md={4}
+          xs={6}
+        >
+          <div>
+            <Field
+              component={[Function]}
+              connectLeft={
+                <Field
+                  component={[Function]}
+                  disabled={false}
+                  name="facet_name"
+                  options={
+                    Array [
+                      Object {
+                        "label": "NONE",
+                        "value": "ALL",
+                      },
+                      Object {
+                        "label": "Sending Domain",
+                        "value": "sending_domain",
+                      },
+                      Object {
+                        "label": "IP Pool",
+                        "value": "ip_pool",
+                      },
+                      Object {
+                        "label": "Campaign ID",
+                        "value": "campaign_id",
+                      },
+                    ]
+                  }
+                  validate={[Function]}
+                />
+              }
+              disabled={false}
+              name="facet_value"
+              placeholder=""
+              validate={[Function]}
+            />
+          </div>
+        </Grid.Column>
+      </Grid>
+      <br />
+      <label>
+        Criteria
+      </label>
+      <Grid>
+        <Grid.Column
+          md={3}
+          xs={5}
+        >
+          <div>
+            <Field
+              component={[Function]}
+              connectLeft={
+                <Field
+                  component={[Function]}
+                  disabled={false}
+                  name="threshold.error.comparator"
+                  options={
+                    Array [
+                      Object {
+                        "label": "Below",
+                        "value": "lt",
+                      },
+                      Object {
+                        "label": "Above",
+                        "value": "gt",
+                      },
+                    ]
+                  }
+                  validate={[Function]}
+                />
+              }
+              disabled={false}
+              name="threshold.error.target"
+              prefix=""
+              style={
+                Object {
+                  "textAlign": "right",
+                }
+              }
+              suffix=""
+              validate={
+                Array [
+                  [Function],
+                  [Function],
+                ]
+              }
+            />
+          </div>
+        </Grid.Column>
+      </Grid>
+      <br />
+      <Field
+        component={[Function]}
+        disabled={false}
+        label="Notify"
+        multiline={true}
+        name="email_addresses"
+        validate={
+          Array [
+            [Function],
+            [Function],
+          ]
+        }
+      />
+      <Grid>
+        <Grid.Column
+          md={1}
+          xs={1}
+        >
+          <label>
+            Enabled
+          </label>
+        </Grid.Column>
+        <Grid.Column
+          md={1}
+          xs={1}
+        >
+          <div>
+            <Field
+              checked={true}
+              component={[Function]}
+              disabled={false}
+              name="enabled"
+              parse={[Function]}
+            />
+          </div>
+        </Grid.Column>
+      </Grid>
+      <br />
+      <Button
+        disabled={true}
+        primary={true}
+        size="default"
+        submit={true}
+      >
+        Update Alert
+      </Button>
+    </Panel.Section>
+  </Panel>
+</Form>
+`;
+
+exports[`Alert Form Component enabled props should only show comparator select when alert_metric is set to signals_health_threshold 1`] = `
+<Form
+  onSubmit={[MockFunction]}
+>
+  <Panel>
+    <Panel.Section>
+      <Field
+        component={[Function]}
+        disabled={false}
+        label="Name"
+        name="name"
+        validate={
+          Array [
+            [Function],
+            [Function],
+          ]
+        }
+      />
+      <Field
+        component={[Function]}
+        disabled={true}
+        helpText="This assignment is permanent."
+        label="Alert Type"
+        name="alert_metric"
+        options={
+          Array [
+            Object {
+              "label": "Monthly Sending Limit",
+              "value": "monthly_sending_limit",
+            },
+            Object {
+              "label": "Health Score",
+              "value": "signals_health_threshold",
+            },
+            Object {
+              "label": "Health Score - Day over Day",
+              "value": "signals_health_dod",
+            },
+            Object {
+              "label": "Health Score - Week over Week",
+              "value": "signals_health_wow",
+            },
+          ]
+        }
+        validate={[Function]}
+      />
+      <Field
+        component={[Function]}
+        label="Account"
+        name="assignTo"
+        options={
+          Array [
+            Object {
+              "label": "Master and all subaccounts",
+              "value": "all",
+            },
+            Object {
+              "label": "Master account only",
+              "value": "master",
+            },
+            Object {
+              "label": "Single Subaccount",
+              "value": "subaccount",
+            },
+          ]
+        }
+      />
+      <label>
+        Facet
+      </label>
+      <Grid>
+        <Grid.Column
+          md={4}
+          xs={6}
+        >
+          <div>
+            <Field
+              component={[Function]}
+              connectLeft={
+                <Field
+                  component={[Function]}
+                  disabled={false}
+                  name="facet_name"
+                  options={
+                    Array [
+                      Object {
+                        "label": "NONE",
+                        "value": "ALL",
+                      },
+                      Object {
+                        "label": "Sending Domain",
+                        "value": "sending_domain",
+                      },
+                      Object {
+                        "label": "IP Pool",
+                        "value": "ip_pool",
+                      },
+                      Object {
+                        "label": "Campaign ID",
+                        "value": "campaign_id",
+                      },
+                    ]
+                  }
+                  validate={[Function]}
+                />
+              }
+              disabled={false}
+              name="facet_value"
+              placeholder=""
+              validate={[Function]}
+            />
+          </div>
+        </Grid.Column>
+      </Grid>
+      <br />
+      <label>
+        Criteria
+      </label>
+      <Grid>
+        <Grid.Column
+          md={3}
+          xs={5}
+        >
+          <div>
+            <Field
+              component={[Function]}
+              connectLeft={
+                <Field
+                  component={[Function]}
+                  disabled={false}
+                  name="threshold.error.comparator"
+                  options={
+                    Array [
+                      Object {
+                        "label": "Below",
+                        "value": "lt",
+                      },
+                      Object {
+                        "label": "Above",
+                        "value": "gt",
+                      },
+                    ]
+                  }
+                  validate={[Function]}
+                />
+              }
+              disabled={false}
+              name="threshold.error.target"
+              prefix=""
+              style={
+                Object {
+                  "textAlign": "right",
+                }
+              }
+              suffix=""
+              validate={
+                Array [
+                  [Function],
+                  [Function],
+                ]
+              }
+            />
+          </div>
+        </Grid.Column>
+      </Grid>
+      <br />
+      <Field
+        component={[Function]}
+        disabled={false}
+        label="Notify"
+        multiline={true}
+        name="email_addresses"
+        validate={
+          Array [
+            [Function],
+            [Function],
+          ]
+        }
+      />
+      <Grid>
+        <Grid.Column
+          md={1}
+          xs={1}
+        >
+          <label>
+            Enabled
+          </label>
+        </Grid.Column>
+        <Grid.Column
+          md={1}
+          xs={1}
+        >
+          <div>
+            <Field
+              checked={false}
+              component={[Function]}
+              disabled={false}
+              name="enabled"
+              parse={[Function]}
+            />
+          </div>
+        </Grid.Column>
+      </Grid>
+      <br />
+      <Button
+        disabled={true}
+        primary={true}
+        size="default"
+        submit={true}
+      >
+        Update Alert
+      </Button>
+    </Panel.Section>
+  </Panel>
+</Form>
+`;
+
+exports[`Alert Form Component enabled props should only show comparator select when alert_metric is set to signals_health_threshold 2`] = `
+<Form
+  onSubmit={[MockFunction]}
+>
+  <Panel>
+    <Panel.Section>
+      <Field
+        component={[Function]}
+        disabled={false}
+        label="Name"
+        name="name"
+        validate={
+          Array [
+            [Function],
+            [Function],
+          ]
+        }
+      />
+      <Field
+        component={[Function]}
+        disabled={true}
+        helpText="This assignment is permanent."
+        label="Alert Type"
+        name="alert_metric"
+        options={
+          Array [
+            Object {
+              "label": "Monthly Sending Limit",
+              "value": "monthly_sending_limit",
+            },
+            Object {
+              "label": "Health Score",
+              "value": "signals_health_threshold",
+            },
+            Object {
+              "label": "Health Score - Day over Day",
+              "value": "signals_health_dod",
+            },
+            Object {
+              "label": "Health Score - Week over Week",
+              "value": "signals_health_wow",
+            },
+          ]
+        }
+        validate={[Function]}
+      />
+      <Field
+        component={[Function]}
+        label="Account"
+        name="assignTo"
+        options={
+          Array [
+            Object {
+              "label": "Master and all subaccounts",
+              "value": "all",
+            },
+            Object {
+              "label": "Master account only",
+              "value": "master",
+            },
+            Object {
+              "label": "Single Subaccount",
+              "value": "subaccount",
+            },
+          ]
+        }
+      />
+      <label>
+        Facet
+      </label>
+      <Grid>
+        <Grid.Column
+          md={4}
+          xs={6}
+        >
+          <div>
+            <Field
+              component={[Function]}
+              connectLeft={
+                <Field
+                  component={[Function]}
+                  disabled={false}
+                  name="facet_name"
+                  options={
+                    Array [
+                      Object {
+                        "label": "NONE",
+                        "value": "ALL",
+                      },
+                      Object {
+                        "label": "Sending Domain",
+                        "value": "sending_domain",
+                      },
+                      Object {
+                        "label": "IP Pool",
+                        "value": "ip_pool",
+                      },
+                      Object {
+                        "label": "Campaign ID",
+                        "value": "campaign_id",
+                      },
+                    ]
+                  }
+                  validate={[Function]}
+                />
+              }
+              disabled={false}
+              name="facet_value"
+              placeholder=""
+              validate={[Function]}
+            />
+          </div>
+        </Grid.Column>
+      </Grid>
+      <br />
+      <label>
+        Criteria
+      </label>
+      <Grid>
+        <Grid.Column
+          md={3}
+          xs={5}
+        >
+          <div>
+            <Field
+              component={[Function]}
+              connectLeft={
+                <Field
+                  component={[Function]}
+                  disabled={false}
+                  name="threshold.error.comparator"
+                  options={
+                    Array [
+                      Object {
+                        "label": "Below",
+                        "value": "lt",
+                      },
+                      Object {
+                        "label": "Above",
+                        "value": "gt",
+                      },
+                    ]
+                  }
+                  validate={[Function]}
+                />
+              }
+              disabled={false}
+              name="threshold.error.target"
+              prefix=""
+              style={
+                Object {
+                  "textAlign": "right",
+                }
+              }
+              suffix=""
+              validate={
+                Array [
+                  [Function],
+                  [Function],
+                ]
+              }
+            />
+          </div>
+        </Grid.Column>
+      </Grid>
+      <br />
+      <Field
+        component={[Function]}
+        disabled={false}
+        label="Notify"
+        multiline={true}
+        name="email_addresses"
+        validate={
+          Array [
+            [Function],
+            [Function],
+          ]
+        }
+      />
+      <Grid>
+        <Grid.Column
+          md={1}
+          xs={1}
+        >
+          <label>
+            Enabled
+          </label>
+        </Grid.Column>
+        <Grid.Column
+          md={1}
+          xs={1}
+        >
+          <div>
+            <Field
+              checked={true}
+              component={[Function]}
+              disabled={false}
+              name="enabled"
+              parse={[Function]}
+            />
+          </div>
+        </Grid.Column>
+      </Grid>
+      <br />
+      <Button
+        disabled={true}
+        primary={true}
+        size="default"
+        submit={true}
+      >
+        Update Alert
+      </Button>
+    </Panel.Section>
+  </Panel>
+</Form>
+`;
+
+exports[`Alert Form Component facet props should clear facet_value and validation when facet_name is set to ALL and signals threshold 1`] = `null`;
+
+exports[`Alert Form Component facet props should clear facet_value and validation when facet_name is set to ALL and signals threshold 2`] = `
+<Form
+  onSubmit={[MockFunction]}
+>
+  <Panel>
+    <Panel.Section>
+      <Field
+        component={[Function]}
+        disabled={false}
+        label="Name"
+        name="name"
+        validate={
+          Array [
+            [Function],
+            [Function],
+          ]
+        }
+      />
+      <Field
+        component={[Function]}
+        disabled={true}
+        helpText="This assignment is permanent."
+        label="Alert Type"
+        name="alert_metric"
+        options={
+          Array [
+            Object {
+              "label": "Monthly Sending Limit",
+              "value": "monthly_sending_limit",
+            },
+            Object {
+              "label": "Health Score",
+              "value": "signals_health_threshold",
+            },
+            Object {
+              "label": "Health Score - Day over Day",
+              "value": "signals_health_dod",
+            },
+            Object {
+              "label": "Health Score - Week over Week",
+              "value": "signals_health_wow",
+            },
+          ]
+        }
+        validate={[Function]}
+      />
+      <Field
+        component={[Function]}
+        label="Account"
+        name="assignTo"
+        options={
+          Array [
+            Object {
+              "label": "Master and all subaccounts",
+              "value": "all",
+            },
+            Object {
+              "label": "Master account only",
+              "value": "master",
+            },
+            Object {
+              "label": "Single Subaccount",
+              "value": "subaccount",
+            },
+          ]
+        }
+      />
+      <label>
+        Facet
+      </label>
+      <Grid>
+        <Grid.Column
+          md={4}
+          xs={6}
+        >
+          <div>
+            <Field
+              component={[Function]}
+              connectLeft={
+                <Field
+                  component={[Function]}
+                  disabled={false}
+                  name="facet_name"
+                  options={
+                    Array [
+                      Object {
+                        "label": "NONE",
+                        "value": "ALL",
+                      },
+                      Object {
+                        "label": "Sending Domain",
+                        "value": "sending_domain",
+                      },
+                      Object {
+                        "label": "IP Pool",
+                        "value": "ip_pool",
+                      },
+                      Object {
+                        "label": "Campaign ID",
+                        "value": "campaign_id",
+                      },
+                    ]
+                  }
+                  validate={[Function]}
+                />
+              }
+              disabled={true}
+              name="facet_value"
+              placeholder="No facet selected"
+            />
+          </div>
+        </Grid.Column>
+      </Grid>
+      <br />
+      <label>
+        Criteria
+      </label>
+      <Grid>
+        <Grid.Column
+          md={3}
+          xs={5}
+        >
+          <div>
+            <Field
+              component={[Function]}
+              connectLeft={
+                <Field
+                  component={[Function]}
+                  disabled={false}
+                  name="threshold.error.comparator"
+                  options={
+                    Array [
+                      Object {
+                        "label": "Below",
+                        "value": "lt",
+                      },
+                      Object {
+                        "label": "Above",
+                        "value": "gt",
+                      },
+                    ]
+                  }
+                  validate={[Function]}
+                />
+              }
+              disabled={false}
+              name="threshold.error.target"
+              prefix=""
+              style={
+                Object {
+                  "textAlign": "right",
+                }
+              }
+              suffix=""
+              validate={
+                Array [
+                  [Function],
+                  [Function],
+                ]
+              }
+            />
+          </div>
+        </Grid.Column>
+      </Grid>
+      <br />
+      <Field
+        component={[Function]}
+        disabled={false}
+        label="Notify"
+        multiline={true}
+        name="email_addresses"
+        validate={
+          Array [
+            [Function],
+            [Function],
+          ]
+        }
+      />
+      <Grid>
+        <Grid.Column
+          md={1}
+          xs={1}
+        >
+          <label>
+            Enabled
+          </label>
+        </Grid.Column>
+        <Grid.Column
+          md={1}
+          xs={1}
+        >
+          <div>
+            <Field
+              checked={true}
+              component={[Function]}
+              disabled={false}
+              name="enabled"
+              parse={[Function]}
+            />
+          </div>
+        </Grid.Column>
+      </Grid>
+      <br />
+      <Button
+        disabled={true}
+        primary={true}
+        size="default"
+        submit={true}
+      >
+        Update Alert
+      </Button>
+    </Panel.Section>
+  </Panel>
+</Form>
+`;
+
+exports[`Alert Form Component facet props should clear facet_value and validation when facet_name is set to ALL and signals threshold 3`] = `null`;
+
+exports[`Alert Form Component facet props should clear facet_value and validation when facet_name is set to ALL and signals threshold 4`] = `
+<Form
+  onSubmit={[MockFunction]}
+>
+  <Panel>
+    <Panel.Section>
+      <Field
+        component={[Function]}
+        disabled={false}
+        label="Name"
+        name="name"
+        validate={
+          Array [
+            [Function],
+            [Function],
+          ]
+        }
+      />
+      <Field
+        component={[Function]}
+        disabled={true}
+        helpText="This assignment is permanent."
+        label="Alert Type"
+        name="alert_metric"
+        options={
+          Array [
+            Object {
+              "label": "Monthly Sending Limit",
+              "value": "monthly_sending_limit",
+            },
+            Object {
+              "label": "Health Score",
+              "value": "signals_health_threshold",
+            },
+            Object {
+              "label": "Health Score - Day over Day",
+              "value": "signals_health_dod",
+            },
+            Object {
+              "label": "Health Score - Week over Week",
+              "value": "signals_health_wow",
+            },
+          ]
+        }
+        validate={[Function]}
+      />
+      <Field
+        component={[Function]}
+        label="Account"
+        name="assignTo"
+        options={
+          Array [
+            Object {
+              "label": "Master and all subaccounts",
+              "value": "all",
+            },
+            Object {
+              "label": "Master account only",
+              "value": "master",
+            },
+            Object {
+              "label": "Single Subaccount",
+              "value": "subaccount",
+            },
+          ]
+        }
+      />
+      <label>
+        Facet
+      </label>
+      <Grid>
+        <Grid.Column
+          md={4}
+          xs={6}
+        >
+          <div>
+            <Field
+              component={[Function]}
+              connectLeft={
+                <Field
+                  component={[Function]}
+                  disabled={false}
+                  name="facet_name"
+                  options={
+                    Array [
+                      Object {
+                        "label": "NONE",
+                        "value": "ALL",
+                      },
+                      Object {
+                        "label": "Sending Domain",
+                        "value": "sending_domain",
+                      },
+                      Object {
+                        "label": "IP Pool",
+                        "value": "ip_pool",
+                      },
+                      Object {
+                        "label": "Campaign ID",
+                        "value": "campaign_id",
+                      },
+                    ]
+                  }
+                  validate={[Function]}
+                />
+              }
+              disabled={false}
+              name="facet_value"
+              placeholder=""
+              validate={[Function]}
+            />
+          </div>
+        </Grid.Column>
+      </Grid>
+      <br />
+      <label>
+        Criteria
+      </label>
+      <Grid>
+        <Grid.Column
+          md={3}
+          xs={5}
+        >
+          <div>
+            <Field
+              component={[Function]}
+              connectLeft={false}
+              disabled={false}
+              name="threshold.error.target"
+              prefix="Above"
+              style={
+                Object {
+                  "textAlign": "right",
+                }
+              }
+              suffix="%"
+              validate={[Function]}
+            />
+          </div>
+        </Grid.Column>
+      </Grid>
+      <br />
+      <Field
+        component={[Function]}
+        disabled={false}
+        label="Notify"
+        multiline={true}
+        name="email_addresses"
+        validate={
+          Array [
+            [Function],
+            [Function],
+          ]
+        }
+      />
+      <Grid>
+        <Grid.Column
+          md={1}
+          xs={1}
+        >
+          <label>
+            Enabled
+          </label>
+        </Grid.Column>
+        <Grid.Column
+          md={1}
+          xs={1}
+        >
+          <div>
+            <Field
+              checked={true}
+              component={[Function]}
+              disabled={false}
+              name="enabled"
+              parse={[Function]}
+            />
+          </div>
+        </Grid.Column>
+      </Grid>
+      <br />
+      <Button
+        disabled={true}
+        primary={true}
+        size="default"
+        submit={true}
+      >
+        Update Alert
+      </Button>
+    </Panel.Section>
+  </Panel>
+</Form>
+`;
+
+exports[`Alert Form Component facet props should only show facets select when alert_metric is NOT set to monthly_sending_limit 1`] = `
+<Form
+  onSubmit={[MockFunction]}
+>
+  <Panel>
+    <Panel.Section>
+      <Field
+        component={[Function]}
+        disabled={false}
+        label="Name"
+        name="name"
+        validate={
+          Array [
+            [Function],
+            [Function],
+          ]
+        }
+      />
+      <Field
+        component={[Function]}
+        disabled={true}
+        helpText="This assignment is permanent."
+        label="Alert Type"
+        name="alert_metric"
+        options={
+          Array [
+            Object {
+              "label": "Monthly Sending Limit",
+              "value": "monthly_sending_limit",
+            },
+            Object {
+              "label": "Health Score",
+              "value": "signals_health_threshold",
+            },
+            Object {
+              "label": "Health Score - Day over Day",
+              "value": "signals_health_dod",
+            },
+            Object {
+              "label": "Health Score - Week over Week",
+              "value": "signals_health_wow",
+            },
+          ]
+        }
+        validate={[Function]}
+      />
+      <label>
+        Criteria
+      </label>
+      <Grid>
+        <Grid.Column
+          md={3}
+          xs={5}
+        >
+          <div>
+            <Field
+              component={[Function]}
+              connectLeft={false}
+              disabled={false}
+              name="threshold.error.target"
+              prefix="Above"
+              style={
+                Object {
+                  "textAlign": "right",
+                }
+              }
+              suffix="%"
+              validate={
+                Array [
+                  [Function],
+                  [Function],
+                  [Function],
+                ]
+              }
+            />
+          </div>
+        </Grid.Column>
+      </Grid>
+      <br />
+      <Field
+        component={[Function]}
+        disabled={false}
+        label="Notify"
+        multiline={true}
+        name="email_addresses"
+        validate={
+          Array [
+            [Function],
+            [Function],
+          ]
+        }
+      />
+      <Grid>
+        <Grid.Column
+          md={1}
+          xs={1}
+        >
+          <label>
+            Enabled
+          </label>
+        </Grid.Column>
+        <Grid.Column
+          md={1}
+          xs={1}
+        >
+          <div>
+            <Field
+              checked={true}
+              component={[Function]}
+              disabled={false}
+              name="enabled"
+              parse={[Function]}
+            />
+          </div>
+        </Grid.Column>
+      </Grid>
+      <br />
+      <Button
+        disabled={true}
+        primary={true}
+        size="default"
+        submit={true}
+      >
+        Update Alert
+      </Button>
+    </Panel.Section>
+  </Panel>
+</Form>
+`;
+
+exports[`Alert Form Component facet props should only show facets select when alert_metric is NOT set to monthly_sending_limit 2`] = `
+<Form
+  onSubmit={[MockFunction]}
+>
+  <Panel>
+    <Panel.Section>
+      <Field
+        component={[Function]}
+        disabled={false}
+        label="Name"
+        name="name"
+        validate={
+          Array [
+            [Function],
+            [Function],
+          ]
+        }
+      />
+      <Field
+        component={[Function]}
+        disabled={true}
+        helpText="This assignment is permanent."
+        label="Alert Type"
+        name="alert_metric"
+        options={
+          Array [
+            Object {
+              "label": "Monthly Sending Limit",
+              "value": "monthly_sending_limit",
+            },
+            Object {
+              "label": "Health Score",
+              "value": "signals_health_threshold",
+            },
+            Object {
+              "label": "Health Score - Day over Day",
+              "value": "signals_health_dod",
+            },
+            Object {
+              "label": "Health Score - Week over Week",
+              "value": "signals_health_wow",
+            },
+          ]
+        }
+        validate={[Function]}
+      />
+      <Field
+        component={[Function]}
+        label="Account"
+        name="assignTo"
+        options={
+          Array [
+            Object {
+              "label": "Master and all subaccounts",
+              "value": "all",
+            },
+            Object {
+              "label": "Master account only",
+              "value": "master",
+            },
+            Object {
+              "label": "Single Subaccount",
+              "value": "subaccount",
+            },
+          ]
+        }
+      />
+      <label>
+        Facet
+      </label>
+      <Grid>
+        <Grid.Column
+          md={4}
+          xs={6}
+        >
+          <div>
+            <Field
+              component={[Function]}
+              connectLeft={
+                <Field
+                  component={[Function]}
+                  disabled={false}
+                  name="facet_name"
+                  options={
+                    Array [
+                      Object {
+                        "label": "NONE",
+                        "value": "ALL",
+                      },
+                      Object {
+                        "label": "Sending Domain",
+                        "value": "sending_domain",
+                      },
+                      Object {
+                        "label": "IP Pool",
+                        "value": "ip_pool",
+                      },
+                      Object {
+                        "label": "Campaign ID",
+                        "value": "campaign_id",
+                      },
+                    ]
+                  }
+                  validate={[Function]}
+                />
+              }
+              disabled={false}
+              name="facet_value"
+              placeholder=""
+              validate={[Function]}
+            />
+          </div>
+        </Grid.Column>
+      </Grid>
+      <br />
+      <label>
+        Criteria
+      </label>
+      <Grid>
+        <Grid.Column
+          md={3}
+          xs={5}
+        >
+          <div>
+            <Field
+              component={[Function]}
+              connectLeft={
+                <Field
+                  component={[Function]}
+                  disabled={false}
+                  name="threshold.error.comparator"
+                  options={
+                    Array [
+                      Object {
+                        "label": "Below",
+                        "value": "lt",
+                      },
+                      Object {
+                        "label": "Above",
+                        "value": "gt",
+                      },
+                    ]
+                  }
+                  validate={[Function]}
+                />
+              }
+              disabled={false}
+              name="threshold.error.target"
+              prefix=""
+              style={
+                Object {
+                  "textAlign": "right",
+                }
+              }
+              suffix=""
+              validate={
+                Array [
+                  [Function],
+                  [Function],
+                ]
+              }
+            />
+          </div>
+        </Grid.Column>
+      </Grid>
+      <br />
+      <Field
+        component={[Function]}
+        disabled={false}
+        label="Notify"
+        multiline={true}
+        name="email_addresses"
+        validate={
+          Array [
+            [Function],
+            [Function],
+          ]
+        }
+      />
+      <Grid>
+        <Grid.Column
+          md={1}
+          xs={1}
+        >
+          <label>
+            Enabled
+          </label>
+        </Grid.Column>
+        <Grid.Column
+          md={1}
+          xs={1}
+        >
+          <div>
+            <Field
+              checked={true}
+              component={[Function]}
+              disabled={false}
+              name="enabled"
+              parse={[Function]}
+            />
+          </div>
+        </Grid.Column>
+      </Grid>
+      <br />
+      <Button
+        disabled={true}
+        primary={true}
+        size="default"
+        submit={true}
+      >
+        Update Alert
+      </Button>
+    </Panel.Section>
+  </Panel>
+</Form>
+`;
+
+exports[`Alert Form Component notify props should only show comparator select when alert_metric is set to signals_health_threshold 1`] = `null`;
+
+exports[`Alert Form Component notify props should only show comparator select when alert_metric is set to signals_health_threshold 2`] = `
+<Form
+  onSubmit={[MockFunction]}
+>
+  <Panel>
+    <Panel.Section>
+      <Field
+        component={[Function]}
+        disabled={false}
+        label="Name"
+        name="name"
+        validate={
+          Array [
+            [Function],
+            [Function],
+          ]
+        }
+      />
+      <Field
+        component={[Function]}
+        disabled={true}
+        helpText="This assignment is permanent."
+        label="Alert Type"
+        name="alert_metric"
+        options={
+          Array [
+            Object {
+              "label": "Monthly Sending Limit",
+              "value": "monthly_sending_limit",
+            },
+            Object {
+              "label": "Health Score",
+              "value": "signals_health_threshold",
+            },
+            Object {
+              "label": "Health Score - Day over Day",
+              "value": "signals_health_dod",
+            },
+            Object {
+              "label": "Health Score - Week over Week",
+              "value": "signals_health_wow",
+            },
+          ]
+        }
+        validate={[Function]}
+      />
+      <Field
+        component={[Function]}
+        label="Account"
+        name="assignTo"
+        options={
+          Array [
+            Object {
+              "label": "Master and all subaccounts",
+              "value": "all",
+            },
+            Object {
+              "label": "Master account only",
+              "value": "master",
+            },
+            Object {
+              "label": "Single Subaccount",
+              "value": "subaccount",
+            },
+          ]
+        }
+      />
+      <label>
+        Facet
+      </label>
+      <Grid>
+        <Grid.Column
+          md={4}
+          xs={6}
+        >
+          <div>
+            <Field
+              component={[Function]}
+              connectLeft={
+                <Field
+                  component={[Function]}
+                  disabled={false}
+                  name="facet_name"
+                  options={
+                    Array [
+                      Object {
+                        "label": "NONE",
+                        "value": "ALL",
+                      },
+                      Object {
+                        "label": "Sending Domain",
+                        "value": "sending_domain",
+                      },
+                      Object {
+                        "label": "IP Pool",
+                        "value": "ip_pool",
+                      },
+                      Object {
+                        "label": "Campaign ID",
+                        "value": "campaign_id",
+                      },
+                    ]
+                  }
+                  validate={[Function]}
+                />
+              }
+              disabled={false}
+              name="facet_value"
+              placeholder=""
+              validate={[Function]}
+            />
+          </div>
+        </Grid.Column>
+      </Grid>
+      <br />
+      <label>
+        Criteria
+      </label>
+      <Grid>
+        <Grid.Column
+          md={3}
+          xs={5}
+        >
+          <div>
+            <Field
+              component={[Function]}
+              connectLeft={
+                <Field
+                  component={[Function]}
+                  disabled={false}
+                  name="threshold.error.comparator"
+                  options={
+                    Array [
+                      Object {
+                        "label": "Below",
+                        "value": "lt",
+                      },
+                      Object {
+                        "label": "Above",
+                        "value": "gt",
+                      },
+                    ]
+                  }
+                  validate={[Function]}
+                />
+              }
+              disabled={false}
+              name="threshold.error.target"
+              prefix=""
+              style={
+                Object {
+                  "textAlign": "right",
+                }
+              }
+              suffix=""
+              validate={
+                Array [
+                  [Function],
+                  [Function],
+                ]
+              }
+            />
+          </div>
+        </Grid.Column>
+      </Grid>
+      <br />
+      <Field
+        component={[Function]}
+        disabled={false}
+        label="Notify"
+        multiline={true}
+        name="email_addresses"
+        validate={
+          Array [
+            [Function],
+            [Function],
+          ]
+        }
+      />
+      <Grid>
+        <Grid.Column
+          md={1}
+          xs={1}
+        >
+          <label>
+            Enabled
+          </label>
+        </Grid.Column>
+        <Grid.Column
+          md={1}
+          xs={1}
+        >
+          <div>
+            <Field
+              checked={true}
+              component={[Function]}
+              disabled={false}
+              name="enabled"
+              parse={[Function]}
+            />
+          </div>
+        </Grid.Column>
+      </Grid>
+      <br />
+      <Button
+        disabled={true}
+        primary={true}
+        size="default"
+        submit={true}
+      >
+        Update Alert
+      </Button>
+    </Panel.Section>
+  </Panel>
+</Form>
+`;
+
+exports[`Alert Form Component notify props should only show comparator select when alert_metric is set to signals_health_threshold 3`] = `null`;
+
+exports[`Alert Form Component notify props should only show comparator select when alert_metric is set to signals_health_threshold 4`] = `
+<Form
+  onSubmit={[MockFunction]}
+>
+  <Panel>
+    <Panel.Section>
+      <Field
+        component={[Function]}
+        disabled={false}
+        label="Name"
+        name="name"
+        validate={
+          Array [
+            [Function],
+            [Function],
+          ]
+        }
+      />
+      <Field
+        component={[Function]}
+        disabled={true}
+        helpText="This assignment is permanent."
+        label="Alert Type"
+        name="alert_metric"
+        options={
+          Array [
+            Object {
+              "label": "Monthly Sending Limit",
+              "value": "monthly_sending_limit",
+            },
+            Object {
+              "label": "Health Score",
+              "value": "signals_health_threshold",
+            },
+            Object {
+              "label": "Health Score - Day over Day",
+              "value": "signals_health_dod",
+            },
+            Object {
+              "label": "Health Score - Week over Week",
+              "value": "signals_health_wow",
+            },
+          ]
+        }
+        validate={[Function]}
+      />
+      <Field
+        component={[Function]}
+        label="Account"
+        name="assignTo"
+        options={
+          Array [
+            Object {
+              "label": "Master and all subaccounts",
+              "value": "all",
+            },
+            Object {
+              "label": "Master account only",
+              "value": "master",
+            },
+            Object {
+              "label": "Single Subaccount",
+              "value": "subaccount",
+            },
+          ]
+        }
+      />
+      <label>
+        Facet
+      </label>
+      <Grid>
+        <Grid.Column
+          md={4}
+          xs={6}
+        >
+          <div>
+            <Field
+              component={[Function]}
+              connectLeft={
+                <Field
+                  component={[Function]}
+                  disabled={false}
+                  name="facet_name"
+                  options={
+                    Array [
+                      Object {
+                        "label": "NONE",
+                        "value": "ALL",
+                      },
+                      Object {
+                        "label": "Sending Domain",
+                        "value": "sending_domain",
+                      },
+                      Object {
+                        "label": "IP Pool",
+                        "value": "ip_pool",
+                      },
+                      Object {
+                        "label": "Campaign ID",
+                        "value": "campaign_id",
+                      },
+                    ]
+                  }
+                  validate={[Function]}
+                />
+              }
+              disabled={false}
+              name="facet_value"
+              placeholder=""
+              validate={[Function]}
+            />
+          </div>
+        </Grid.Column>
+      </Grid>
+      <br />
+      <label>
+        Criteria
+      </label>
+      <Grid>
+        <Grid.Column
+          md={3}
+          xs={5}
+        >
+          <div>
+            <Field
+              component={[Function]}
+              connectLeft={
+                <Field
+                  component={[Function]}
+                  disabled={false}
+                  name="threshold.error.comparator"
+                  options={
+                    Array [
+                      Object {
+                        "label": "Below",
+                        "value": "lt",
+                      },
+                      Object {
+                        "label": "Above",
+                        "value": "gt",
+                      },
+                    ]
+                  }
+                  validate={[Function]}
+                />
+              }
+              disabled={false}
+              name="threshold.error.target"
+              prefix=""
+              style={
+                Object {
+                  "textAlign": "right",
+                }
+              }
+              suffix=""
+              validate={
+                Array [
+                  [Function],
+                  [Function],
+                ]
+              }
+            />
+          </div>
+        </Grid.Column>
+      </Grid>
+      <br />
+      <Field
+        component={[Function]}
+        disabled={false}
+        label="Notify"
+        multiline={true}
+        name="email_addresses"
+        validate={
+          Array [
+            [Function],
+            [Function],
+          ]
+        }
+      />
+      <Grid>
+        <Grid.Column
+          md={1}
+          xs={1}
+        >
+          <label>
+            Enabled
+          </label>
+        </Grid.Column>
+        <Grid.Column
+          md={1}
+          xs={1}
+        >
+          <div>
+            <Field
+              checked={true}
+              component={[Function]}
+              disabled={false}
+              name="enabled"
+              parse={[Function]}
+            />
+          </div>
+        </Grid.Column>
+      </Grid>
+      <br />
+      <Button
+        disabled={true}
+        primary={true}
+        size="default"
+        submit={true}
+      >
+        Update Alert
+      </Button>
+    </Panel.Section>
+  </Panel>
+</Form>
+`;
+
+exports[`Alert Form Component notify props should only show comparator select when alert_metric is set to signals_health_threshold 5`] = `null`;
+
+exports[`Alert Form Component notify props should only show comparator select when alert_metric is set to signals_health_threshold 6`] = `
+<Form
+  onSubmit={[MockFunction]}
+>
+  <Panel>
+    <Panel.Section>
+      <Field
+        component={[Function]}
+        disabled={false}
+        label="Name"
+        name="name"
+        validate={
+          Array [
+            [Function],
+            [Function],
+          ]
+        }
+      />
+      <Field
+        component={[Function]}
+        disabled={true}
+        helpText="This assignment is permanent."
+        label="Alert Type"
+        name="alert_metric"
+        options={
+          Array [
+            Object {
+              "label": "Monthly Sending Limit",
+              "value": "monthly_sending_limit",
+            },
+            Object {
+              "label": "Health Score",
+              "value": "signals_health_threshold",
+            },
+            Object {
+              "label": "Health Score - Day over Day",
+              "value": "signals_health_dod",
+            },
+            Object {
+              "label": "Health Score - Week over Week",
+              "value": "signals_health_wow",
+            },
+          ]
+        }
+        validate={[Function]}
+      />
+      <Field
+        component={[Function]}
+        label="Account"
+        name="assignTo"
+        options={
+          Array [
+            Object {
+              "label": "Master and all subaccounts",
+              "value": "all",
+            },
+            Object {
+              "label": "Master account only",
+              "value": "master",
+            },
+            Object {
+              "label": "Single Subaccount",
+              "value": "subaccount",
+            },
+          ]
+        }
+      />
+      <label>
+        Facet
+      </label>
+      <Grid>
+        <Grid.Column
+          md={4}
+          xs={6}
+        >
+          <div>
+            <Field
+              component={[Function]}
+              connectLeft={
+                <Field
+                  component={[Function]}
+                  disabled={false}
+                  name="facet_name"
+                  options={
+                    Array [
+                      Object {
+                        "label": "NONE",
+                        "value": "ALL",
+                      },
+                      Object {
+                        "label": "Sending Domain",
+                        "value": "sending_domain",
+                      },
+                      Object {
+                        "label": "IP Pool",
+                        "value": "ip_pool",
+                      },
+                      Object {
+                        "label": "Campaign ID",
+                        "value": "campaign_id",
+                      },
+                    ]
+                  }
+                  validate={[Function]}
+                />
+              }
+              disabled={false}
+              name="facet_value"
+              placeholder=""
+              validate={[Function]}
+            />
+          </div>
+        </Grid.Column>
+      </Grid>
+      <br />
+      <label>
+        Criteria
+      </label>
+      <Grid>
+        <Grid.Column
+          md={3}
+          xs={5}
+        >
+          <div>
+            <Field
+              component={[Function]}
+              connectLeft={
+                <Field
+                  component={[Function]}
+                  disabled={false}
+                  name="threshold.error.comparator"
+                  options={
+                    Array [
+                      Object {
+                        "label": "Below",
+                        "value": "lt",
+                      },
+                      Object {
+                        "label": "Above",
+                        "value": "gt",
+                      },
+                    ]
+                  }
+                  validate={[Function]}
+                />
+              }
+              disabled={false}
+              name="threshold.error.target"
+              prefix=""
+              style={
+                Object {
+                  "textAlign": "right",
+                }
+              }
+              suffix=""
+              validate={
+                Array [
+                  [Function],
+                  [Function],
+                ]
+              }
+            />
+          </div>
+        </Grid.Column>
+      </Grid>
+      <br />
+      <Field
+        component={[Function]}
+        disabled={false}
+        label="Notify"
+        multiline={true}
+        name="email_addresses"
+        validate={
+          Array [
+            [Function],
+            [Function],
+          ]
+        }
+      />
+      <Grid>
+        <Grid.Column
+          md={1}
+          xs={1}
+        >
+          <label>
+            Enabled
+          </label>
+        </Grid.Column>
+        <Grid.Column
+          md={1}
+          xs={1}
+        >
+          <div>
+            <Field
+              checked={true}
+              component={[Function]}
+              disabled={false}
+              name="enabled"
+              parse={[Function]}
+            />
+          </div>
+        </Grid.Column>
+      </Grid>
+      <br />
+      <Button
+        disabled={true}
+        primary={true}
+        size="default"
+        submit={true}
+      >
+        Update Alert
+      </Button>
+    </Panel.Section>
+  </Panel>
+</Form>
+`;
+
+exports[`Alert Form Component should handle submit 1`] = `
+<Form
+  onSubmit={
+    [MockFunction] {
+      "calls": Array [
+        Array [],
+      ],
+      "results": undefined,
+    }
+  }
+>
+  <Panel>
+    <Panel.Section>
+      <Field
+        component={[Function]}
+        disabled={false}
+        label="Name"
+        name="name"
+        validate={
+          Array [
+            [Function],
+            [Function],
+          ]
+        }
+      />
+      <Field
+        component={[Function]}
+        disabled={true}
+        helpText="This assignment is permanent."
+        label="Alert Type"
+        name="alert_metric"
+        options={
+          Array [
+            Object {
+              "label": "Monthly Sending Limit",
+              "value": "monthly_sending_limit",
+            },
+            Object {
+              "label": "Health Score",
+              "value": "signals_health_threshold",
+            },
+            Object {
+              "label": "Health Score - Day over Day",
+              "value": "signals_health_dod",
+            },
+            Object {
+              "label": "Health Score - Week over Week",
+              "value": "signals_health_wow",
+            },
+          ]
+        }
+        validate={[Function]}
+      />
+      <Field
+        component={[Function]}
+        label="Account"
+        name="assignTo"
+        options={
+          Array [
+            Object {
+              "label": "Master and all subaccounts",
+              "value": "all",
+            },
+            Object {
+              "label": "Master account only",
+              "value": "master",
+            },
+            Object {
+              "label": "Single Subaccount",
+              "value": "subaccount",
+            },
+          ]
+        }
+      />
+      <label>
+        Facet
+      </label>
+      <Grid>
+        <Grid.Column
+          md={4}
+          xs={6}
+        >
+          <div>
+            <Field
+              component={[Function]}
+              connectLeft={
+                <Field
+                  component={[Function]}
+                  disabled={false}
+                  name="facet_name"
+                  options={
+                    Array [
+                      Object {
+                        "label": "NONE",
+                        "value": "ALL",
+                      },
+                      Object {
+                        "label": "Sending Domain",
+                        "value": "sending_domain",
+                      },
+                      Object {
+                        "label": "IP Pool",
+                        "value": "ip_pool",
+                      },
+                      Object {
+                        "label": "Campaign ID",
+                        "value": "campaign_id",
+                      },
+                    ]
+                  }
+                  validate={[Function]}
+                />
+              }
+              disabled={false}
+              name="facet_value"
+              placeholder=""
+              validate={[Function]}
+            />
+          </div>
+        </Grid.Column>
+      </Grid>
+      <br />
+      <label>
+        Criteria
+      </label>
+      <Grid>
+        <Grid.Column
+          md={3}
+          xs={5}
+        >
+          <div>
+            <Field
+              component={[Function]}
+              connectLeft={
+                <Field
+                  component={[Function]}
+                  disabled={false}
+                  name="threshold.error.comparator"
+                  options={
+                    Array [
+                      Object {
+                        "label": "Below",
+                        "value": "lt",
+                      },
+                      Object {
+                        "label": "Above",
+                        "value": "gt",
+                      },
+                    ]
+                  }
+                  validate={[Function]}
+                />
+              }
+              disabled={false}
+              name="threshold.error.target"
+              prefix=""
+              style={
+                Object {
+                  "textAlign": "right",
+                }
+              }
+              suffix=""
+              validate={
+                Array [
+                  [Function],
+                  [Function],
+                ]
+              }
+            />
+          </div>
+        </Grid.Column>
+      </Grid>
+      <br />
+      <Field
+        component={[Function]}
+        disabled={false}
+        label="Notify"
+        multiline={true}
+        name="email_addresses"
+        validate={
+          Array [
+            [Function],
+            [Function],
+          ]
+        }
+      />
+      <Grid>
+        <Grid.Column
+          md={1}
+          xs={1}
+        >
+          <label>
+            Enabled
+          </label>
+        </Grid.Column>
+        <Grid.Column
+          md={1}
+          xs={1}
+        >
+          <div>
+            <Field
+              checked={true}
+              component={[Function]}
+              disabled={false}
+              name="enabled"
+              parse={[Function]}
+            />
+          </div>
+        </Grid.Column>
+      </Grid>
+      <br />
+      <Button
+        disabled={true}
+        primary={true}
+        size="default"
+        submit={true}
+      >
+        Update Alert
+      </Button>
+    </Panel.Section>
+  </Panel>
+</Form>
+`;
+
 exports[`Alert Form Component should render the alert form component correctly 1`] = `
+<Form
+  onSubmit={[MockFunction]}
+>
+  <Panel>
+    <Panel.Section>
+      <Field
+        component={[Function]}
+        disabled={false}
+        label="Name"
+        name="name"
+        validate={
+          Array [
+            [Function],
+            [Function],
+          ]
+        }
+      />
+      <Field
+        component={[Function]}
+        disabled={true}
+        helpText="This assignment is permanent."
+        label="Alert Type"
+        name="alert_metric"
+        options={
+          Array [
+            Object {
+              "label": "Monthly Sending Limit",
+              "value": "monthly_sending_limit",
+            },
+            Object {
+              "label": "Health Score",
+              "value": "signals_health_threshold",
+            },
+            Object {
+              "label": "Health Score - Day over Day",
+              "value": "signals_health_dod",
+            },
+            Object {
+              "label": "Health Score - Week over Week",
+              "value": "signals_health_wow",
+            },
+          ]
+        }
+        validate={[Function]}
+      />
+      <Field
+        component={[Function]}
+        label="Account"
+        name="assignTo"
+        options={
+          Array [
+            Object {
+              "label": "Master and all subaccounts",
+              "value": "all",
+            },
+            Object {
+              "label": "Master account only",
+              "value": "master",
+            },
+            Object {
+              "label": "Single Subaccount",
+              "value": "subaccount",
+            },
+          ]
+        }
+      />
+      <label>
+        Facet
+      </label>
+      <Grid>
+        <Grid.Column
+          md={4}
+          xs={6}
+        >
+          <div>
+            <Field
+              component={[Function]}
+              connectLeft={
+                <Field
+                  component={[Function]}
+                  disabled={false}
+                  name="facet_name"
+                  options={
+                    Array [
+                      Object {
+                        "label": "NONE",
+                        "value": "ALL",
+                      },
+                      Object {
+                        "label": "Sending Domain",
+                        "value": "sending_domain",
+                      },
+                      Object {
+                        "label": "IP Pool",
+                        "value": "ip_pool",
+                      },
+                      Object {
+                        "label": "Campaign ID",
+                        "value": "campaign_id",
+                      },
+                    ]
+                  }
+                  validate={[Function]}
+                />
+              }
+              disabled={false}
+              name="facet_value"
+              placeholder=""
+              validate={[Function]}
+            />
+          </div>
+        </Grid.Column>
+      </Grid>
+      <br />
+      <label>
+        Criteria
+      </label>
+      <Grid>
+        <Grid.Column
+          md={3}
+          xs={5}
+        >
+          <div>
+            <Field
+              component={[Function]}
+              connectLeft={
+                <Field
+                  component={[Function]}
+                  disabled={false}
+                  name="threshold.error.comparator"
+                  options={
+                    Array [
+                      Object {
+                        "label": "Below",
+                        "value": "lt",
+                      },
+                      Object {
+                        "label": "Above",
+                        "value": "gt",
+                      },
+                    ]
+                  }
+                  validate={[Function]}
+                />
+              }
+              disabled={false}
+              name="threshold.error.target"
+              prefix=""
+              style={
+                Object {
+                  "textAlign": "right",
+                }
+              }
+              suffix=""
+              validate={
+                Array [
+                  [Function],
+                  [Function],
+                ]
+              }
+            />
+          </div>
+        </Grid.Column>
+      </Grid>
+      <br />
+      <Field
+        component={[Function]}
+        disabled={false}
+        label="Notify"
+        multiline={true}
+        name="email_addresses"
+        validate={
+          Array [
+            [Function],
+            [Function],
+          ]
+        }
+      />
+      <Grid>
+        <Grid.Column
+          md={1}
+          xs={1}
+        >
+          <label>
+            Enabled
+          </label>
+        </Grid.Column>
+        <Grid.Column
+          md={1}
+          xs={1}
+        >
+          <div>
+            <Field
+              checked={true}
+              component={[Function]}
+              disabled={false}
+              name="enabled"
+              parse={[Function]}
+            />
+          </div>
+        </Grid.Column>
+      </Grid>
+      <br />
+      <Button
+        disabled={true}
+        primary={true}
+        size="default"
+        submit={true}
+      >
+        Update Alert
+      </Button>
+    </Panel.Section>
+  </Panel>
+</Form>
+`;
+
+exports[`Alert Form Component submit button props should disable submit button when pristine or submitting 1`] = `
+<Form
+  onSubmit={[MockFunction]}
+>
+  <Panel>
+    <Panel.Section>
+      <Field
+        component={[Function]}
+        disabled={false}
+        label="Name"
+        name="name"
+        validate={
+          Array [
+            [Function],
+            [Function],
+          ]
+        }
+      />
+      <Field
+        component={[Function]}
+        disabled={true}
+        helpText="This assignment is permanent."
+        label="Alert Type"
+        name="alert_metric"
+        options={
+          Array [
+            Object {
+              "label": "Monthly Sending Limit",
+              "value": "monthly_sending_limit",
+            },
+            Object {
+              "label": "Health Score",
+              "value": "signals_health_threshold",
+            },
+            Object {
+              "label": "Health Score - Day over Day",
+              "value": "signals_health_dod",
+            },
+            Object {
+              "label": "Health Score - Week over Week",
+              "value": "signals_health_wow",
+            },
+          ]
+        }
+        validate={[Function]}
+      />
+      <Field
+        component={[Function]}
+        label="Account"
+        name="assignTo"
+        options={
+          Array [
+            Object {
+              "label": "Master and all subaccounts",
+              "value": "all",
+            },
+            Object {
+              "label": "Master account only",
+              "value": "master",
+            },
+            Object {
+              "label": "Single Subaccount",
+              "value": "subaccount",
+            },
+          ]
+        }
+      />
+      <label>
+        Facet
+      </label>
+      <Grid>
+        <Grid.Column
+          md={4}
+          xs={6}
+        >
+          <div>
+            <Field
+              component={[Function]}
+              connectLeft={
+                <Field
+                  component={[Function]}
+                  disabled={false}
+                  name="facet_name"
+                  options={
+                    Array [
+                      Object {
+                        "label": "NONE",
+                        "value": "ALL",
+                      },
+                      Object {
+                        "label": "Sending Domain",
+                        "value": "sending_domain",
+                      },
+                      Object {
+                        "label": "IP Pool",
+                        "value": "ip_pool",
+                      },
+                      Object {
+                        "label": "Campaign ID",
+                        "value": "campaign_id",
+                      },
+                    ]
+                  }
+                  validate={[Function]}
+                />
+              }
+              disabled={false}
+              name="facet_value"
+              placeholder=""
+              validate={[Function]}
+            />
+          </div>
+        </Grid.Column>
+      </Grid>
+      <br />
+      <label>
+        Criteria
+      </label>
+      <Grid>
+        <Grid.Column
+          md={3}
+          xs={5}
+        >
+          <div>
+            <Field
+              component={[Function]}
+              connectLeft={
+                <Field
+                  component={[Function]}
+                  disabled={false}
+                  name="threshold.error.comparator"
+                  options={
+                    Array [
+                      Object {
+                        "label": "Below",
+                        "value": "lt",
+                      },
+                      Object {
+                        "label": "Above",
+                        "value": "gt",
+                      },
+                    ]
+                  }
+                  validate={[Function]}
+                />
+              }
+              disabled={false}
+              name="threshold.error.target"
+              prefix=""
+              style={
+                Object {
+                  "textAlign": "right",
+                }
+              }
+              suffix=""
+              validate={
+                Array [
+                  [Function],
+                  [Function],
+                ]
+              }
+            />
+          </div>
+        </Grid.Column>
+      </Grid>
+      <br />
+      <Field
+        component={[Function]}
+        disabled={false}
+        label="Notify"
+        multiline={true}
+        name="email_addresses"
+        validate={
+          Array [
+            [Function],
+            [Function],
+          ]
+        }
+      />
+      <Grid>
+        <Grid.Column
+          md={1}
+          xs={1}
+        >
+          <label>
+            Enabled
+          </label>
+        </Grid.Column>
+        <Grid.Column
+          md={1}
+          xs={1}
+        >
+          <div>
+            <Field
+              checked={true}
+              component={[Function]}
+              disabled={false}
+              name="enabled"
+              parse={[Function]}
+            />
+          </div>
+        </Grid.Column>
+      </Grid>
+      <br />
+      <Button
+        disabled={true}
+        primary={true}
+        size="default"
+        submit={true}
+      >
+        Update Alert
+      </Button>
+    </Panel.Section>
+  </Panel>
+</Form>
+`;
+
+exports[`Alert Form Component submit button props should disable submit button when pristine or submitting 2`] = `
+<Form
+  onSubmit={[MockFunction]}
+>
+  <Panel>
+    <Panel.Section>
+      <Field
+        component={[Function]}
+        disabled={false}
+        label="Name"
+        name="name"
+        validate={
+          Array [
+            [Function],
+            [Function],
+          ]
+        }
+      />
+      <Field
+        component={[Function]}
+        disabled={true}
+        helpText="This assignment is permanent."
+        label="Alert Type"
+        name="alert_metric"
+        options={
+          Array [
+            Object {
+              "label": "Monthly Sending Limit",
+              "value": "monthly_sending_limit",
+            },
+            Object {
+              "label": "Health Score",
+              "value": "signals_health_threshold",
+            },
+            Object {
+              "label": "Health Score - Day over Day",
+              "value": "signals_health_dod",
+            },
+            Object {
+              "label": "Health Score - Week over Week",
+              "value": "signals_health_wow",
+            },
+          ]
+        }
+        validate={[Function]}
+      />
+      <Field
+        component={[Function]}
+        label="Account"
+        name="assignTo"
+        options={
+          Array [
+            Object {
+              "label": "Master and all subaccounts",
+              "value": "all",
+            },
+            Object {
+              "label": "Master account only",
+              "value": "master",
+            },
+            Object {
+              "label": "Single Subaccount",
+              "value": "subaccount",
+            },
+          ]
+        }
+      />
+      <label>
+        Facet
+      </label>
+      <Grid>
+        <Grid.Column
+          md={4}
+          xs={6}
+        >
+          <div>
+            <Field
+              component={[Function]}
+              connectLeft={
+                <Field
+                  component={[Function]}
+                  disabled={false}
+                  name="facet_name"
+                  options={
+                    Array [
+                      Object {
+                        "label": "NONE",
+                        "value": "ALL",
+                      },
+                      Object {
+                        "label": "Sending Domain",
+                        "value": "sending_domain",
+                      },
+                      Object {
+                        "label": "IP Pool",
+                        "value": "ip_pool",
+                      },
+                      Object {
+                        "label": "Campaign ID",
+                        "value": "campaign_id",
+                      },
+                    ]
+                  }
+                  validate={[Function]}
+                />
+              }
+              disabled={false}
+              name="facet_value"
+              placeholder=""
+              validate={[Function]}
+            />
+          </div>
+        </Grid.Column>
+      </Grid>
+      <br />
+      <label>
+        Criteria
+      </label>
+      <Grid>
+        <Grid.Column
+          md={3}
+          xs={5}
+        >
+          <div>
+            <Field
+              component={[Function]}
+              connectLeft={
+                <Field
+                  component={[Function]}
+                  disabled={false}
+                  name="threshold.error.comparator"
+                  options={
+                    Array [
+                      Object {
+                        "label": "Below",
+                        "value": "lt",
+                      },
+                      Object {
+                        "label": "Above",
+                        "value": "gt",
+                      },
+                    ]
+                  }
+                  validate={[Function]}
+                />
+              }
+              disabled={false}
+              name="threshold.error.target"
+              prefix=""
+              style={
+                Object {
+                  "textAlign": "right",
+                }
+              }
+              suffix=""
+              validate={
+                Array [
+                  [Function],
+                  [Function],
+                ]
+              }
+            />
+          </div>
+        </Grid.Column>
+      </Grid>
+      <br />
+      <Field
+        component={[Function]}
+        disabled={false}
+        label="Notify"
+        multiline={true}
+        name="email_addresses"
+        validate={
+          Array [
+            [Function],
+            [Function],
+          ]
+        }
+      />
+      <Grid>
+        <Grid.Column
+          md={1}
+          xs={1}
+        >
+          <label>
+            Enabled
+          </label>
+        </Grid.Column>
+        <Grid.Column
+          md={1}
+          xs={1}
+        >
+          <div>
+            <Field
+              checked={true}
+              component={[Function]}
+              disabled={false}
+              name="enabled"
+              parse={[Function]}
+            />
+          </div>
+        </Grid.Column>
+      </Grid>
+      <br />
+      <Button
+        disabled={false}
+        primary={true}
+        size="default"
+        submit={true}
+      >
+        Update Alert
+      </Button>
+    </Panel.Section>
+  </Panel>
+</Form>
+`;
+
+exports[`Alert Form Component submit button props should disable submit button when pristine or submitting 3`] = `
+<Form
+  onSubmit={[MockFunction]}
+>
+  <Panel>
+    <Panel.Section>
+      <Field
+        component={[Function]}
+        disabled={true}
+        label="Name"
+        name="name"
+        validate={
+          Array [
+            [Function],
+            [Function],
+          ]
+        }
+      />
+      <Field
+        component={[Function]}
+        disabled={true}
+        helpText="This assignment is permanent."
+        label="Alert Type"
+        name="alert_metric"
+        options={
+          Array [
+            Object {
+              "label": "Monthly Sending Limit",
+              "value": "monthly_sending_limit",
+            },
+            Object {
+              "label": "Health Score",
+              "value": "signals_health_threshold",
+            },
+            Object {
+              "label": "Health Score - Day over Day",
+              "value": "signals_health_dod",
+            },
+            Object {
+              "label": "Health Score - Week over Week",
+              "value": "signals_health_wow",
+            },
+          ]
+        }
+        validate={[Function]}
+      />
+      <Field
+        component={[Function]}
+        label="Account"
+        name="assignTo"
+        options={
+          Array [
+            Object {
+              "label": "Master and all subaccounts",
+              "value": "all",
+            },
+            Object {
+              "label": "Master account only",
+              "value": "master",
+            },
+            Object {
+              "label": "Single Subaccount",
+              "value": "subaccount",
+            },
+          ]
+        }
+      />
+      <label>
+        Facet
+      </label>
+      <Grid>
+        <Grid.Column
+          md={4}
+          xs={6}
+        >
+          <div>
+            <Field
+              component={[Function]}
+              connectLeft={
+                <Field
+                  component={[Function]}
+                  disabled={true}
+                  name="facet_name"
+                  options={
+                    Array [
+                      Object {
+                        "label": "NONE",
+                        "value": "ALL",
+                      },
+                      Object {
+                        "label": "Sending Domain",
+                        "value": "sending_domain",
+                      },
+                      Object {
+                        "label": "IP Pool",
+                        "value": "ip_pool",
+                      },
+                      Object {
+                        "label": "Campaign ID",
+                        "value": "campaign_id",
+                      },
+                    ]
+                  }
+                  validate={[Function]}
+                />
+              }
+              disabled={true}
+              name="facet_value"
+              placeholder=""
+              validate={[Function]}
+            />
+          </div>
+        </Grid.Column>
+      </Grid>
+      <br />
+      <label>
+        Criteria
+      </label>
+      <Grid>
+        <Grid.Column
+          md={3}
+          xs={5}
+        >
+          <div>
+            <Field
+              component={[Function]}
+              connectLeft={
+                <Field
+                  component={[Function]}
+                  disabled={true}
+                  name="threshold.error.comparator"
+                  options={
+                    Array [
+                      Object {
+                        "label": "Below",
+                        "value": "lt",
+                      },
+                      Object {
+                        "label": "Above",
+                        "value": "gt",
+                      },
+                    ]
+                  }
+                  validate={[Function]}
+                />
+              }
+              disabled={true}
+              name="threshold.error.target"
+              prefix=""
+              style={
+                Object {
+                  "textAlign": "right",
+                }
+              }
+              suffix=""
+              validate={
+                Array [
+                  [Function],
+                  [Function],
+                ]
+              }
+            />
+          </div>
+        </Grid.Column>
+      </Grid>
+      <br />
+      <Field
+        component={[Function]}
+        disabled={true}
+        label="Notify"
+        multiline={true}
+        name="email_addresses"
+        validate={
+          Array [
+            [Function],
+            [Function],
+          ]
+        }
+      />
+      <Grid>
+        <Grid.Column
+          md={1}
+          xs={1}
+        >
+          <label>
+            Enabled
+          </label>
+        </Grid.Column>
+        <Grid.Column
+          md={1}
+          xs={1}
+        >
+          <div>
+            <Field
+              checked={true}
+              component={[Function]}
+              disabled={true}
+              name="enabled"
+              parse={[Function]}
+            />
+          </div>
+        </Grid.Column>
+      </Grid>
+      <br />
+      <Button
+        disabled={true}
+        primary={true}
+        size="default"
+        submit={true}
+      >
+        Submitting...
+      </Button>
+    </Panel.Section>
+  </Panel>
+</Form>
+`;
+
+exports[`Alert Form Component submit button props should render submit text 1`] = `
+<Form
+  onSubmit={[MockFunction]}
+>
+  <Panel>
+    <Panel.Section>
+      <Field
+        component={[Function]}
+        disabled={false}
+        label="Name"
+        name="name"
+        validate={
+          Array [
+            [Function],
+            [Function],
+          ]
+        }
+      />
+      <Field
+        component={[Function]}
+        disabled={true}
+        helpText="This assignment is permanent."
+        label="Alert Type"
+        name="alert_metric"
+        options={
+          Array [
+            Object {
+              "label": "Monthly Sending Limit",
+              "value": "monthly_sending_limit",
+            },
+            Object {
+              "label": "Health Score",
+              "value": "signals_health_threshold",
+            },
+            Object {
+              "label": "Health Score - Day over Day",
+              "value": "signals_health_dod",
+            },
+            Object {
+              "label": "Health Score - Week over Week",
+              "value": "signals_health_wow",
+            },
+          ]
+        }
+        validate={[Function]}
+      />
+      <Field
+        component={[Function]}
+        label="Account"
+        name="assignTo"
+        options={
+          Array [
+            Object {
+              "label": "Master and all subaccounts",
+              "value": "all",
+            },
+            Object {
+              "label": "Master account only",
+              "value": "master",
+            },
+            Object {
+              "label": "Single Subaccount",
+              "value": "subaccount",
+            },
+          ]
+        }
+      />
+      <label>
+        Facet
+      </label>
+      <Grid>
+        <Grid.Column
+          md={4}
+          xs={6}
+        >
+          <div>
+            <Field
+              component={[Function]}
+              connectLeft={
+                <Field
+                  component={[Function]}
+                  disabled={false}
+                  name="facet_name"
+                  options={
+                    Array [
+                      Object {
+                        "label": "NONE",
+                        "value": "ALL",
+                      },
+                      Object {
+                        "label": "Sending Domain",
+                        "value": "sending_domain",
+                      },
+                      Object {
+                        "label": "IP Pool",
+                        "value": "ip_pool",
+                      },
+                      Object {
+                        "label": "Campaign ID",
+                        "value": "campaign_id",
+                      },
+                    ]
+                  }
+                  validate={[Function]}
+                />
+              }
+              disabled={false}
+              name="facet_value"
+              placeholder=""
+              validate={[Function]}
+            />
+          </div>
+        </Grid.Column>
+      </Grid>
+      <br />
+      <label>
+        Criteria
+      </label>
+      <Grid>
+        <Grid.Column
+          md={3}
+          xs={5}
+        >
+          <div>
+            <Field
+              component={[Function]}
+              connectLeft={
+                <Field
+                  component={[Function]}
+                  disabled={false}
+                  name="threshold.error.comparator"
+                  options={
+                    Array [
+                      Object {
+                        "label": "Below",
+                        "value": "lt",
+                      },
+                      Object {
+                        "label": "Above",
+                        "value": "gt",
+                      },
+                    ]
+                  }
+                  validate={[Function]}
+                />
+              }
+              disabled={false}
+              name="threshold.error.target"
+              prefix=""
+              style={
+                Object {
+                  "textAlign": "right",
+                }
+              }
+              suffix=""
+              validate={
+                Array [
+                  [Function],
+                  [Function],
+                ]
+              }
+            />
+          </div>
+        </Grid.Column>
+      </Grid>
+      <br />
+      <Field
+        component={[Function]}
+        disabled={false}
+        label="Notify"
+        multiline={true}
+        name="email_addresses"
+        validate={
+          Array [
+            [Function],
+            [Function],
+          ]
+        }
+      />
+      <Grid>
+        <Grid.Column
+          md={1}
+          xs={1}
+        >
+          <label>
+            Enabled
+          </label>
+        </Grid.Column>
+        <Grid.Column
+          md={1}
+          xs={1}
+        >
+          <div>
+            <Field
+              checked={true}
+              component={[Function]}
+              disabled={false}
+              name="enabled"
+              parse={[Function]}
+            />
+          </div>
+        </Grid.Column>
+      </Grid>
+      <br />
+      <Button
+        disabled={true}
+        primary={true}
+        size="default"
+        submit={true}
+      >
+        Create Alert
+      </Button>
+    </Panel.Section>
+  </Panel>
+</Form>
+`;
+
+exports[`Alert Form Component submit button props should render submit text 2`] = `
 <Form
   onSubmit={[MockFunction]}
 >

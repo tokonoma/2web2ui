@@ -40,7 +40,8 @@ export class AlertForm extends Component {
       facet_name,
       handleSubmit,
       enabled,
-      newAlert
+      newAlert,
+      change
     } = this.props;
 
     const submitText = submitting ? 'Submitting...' : (newAlert ? 'Create Alert' : 'Update Alert');
@@ -67,14 +68,14 @@ export class AlertForm extends Component {
 
     const validateFacet = () => {
       if (facet_name === 'ALL') {
-        return false;
+        return undefined;
       }
       return required;
     };
 
     const removeFacetValue = () => {
       if (facet_name === 'ALL') {
-        this.props.change('facet_value', '');
+        change('facet_value', '');
       }
     };
 

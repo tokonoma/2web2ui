@@ -6,7 +6,7 @@ import AlertForm from './components/AlertForm';
 import { Loading, DeleteModal, ApiErrorBanner } from 'src/components';
 import _ from 'lodash';
 
-class EditPage extends Component {
+export class EditPage extends Component {
   state = {
     showDeleteModal: false
   }
@@ -21,17 +21,18 @@ class EditPage extends Component {
     });
   };
 
-  handleDelete = () => this.props.deleteAlert({ id: this.props.alert.id }).then(() => {
-    this.props.showAlert({ type: 'success', message: 'Alert deleted' });
-    this.toggleDelete();
-    this.props.history.push('/alerts-new');
-  })
+  handleDelete = () => this.props.deleteAlert({ id: this.props.alert.id })
+    .then(() => {
+      this.props.showAlert({ type: 'success', message: 'Alert deleted' });
+      this.toggleDelete();
+      this.props.history.push('/alerts-new');
+    })
 
   /*
     Passed as onSubmit to AlertForm. Figures out what updates need to be passed
     to the updateAlert action.
   */
-  update = async (values) => {
+  handleUpdate = async (values) => {
     const { email_addresses, alert_metric, threshold, assignTo, subaccount = '' } = values;
     const { getAlert, updateAlert, showAlert } = this.props;
     const splitAddresses = _.split(email_addresses,',');
@@ -46,7 +47,6 @@ class EditPage extends Component {
       case 'all':
       default:
         values.alert_subaccount = -1;
-
     }
 
     switch (alert_metric) {
@@ -68,7 +68,7 @@ class EditPage extends Component {
 
   renderForm() {
     return (
-      <AlertForm newAlert = {false} onSubmit = {this.update}/>
+      <AlertForm newAlert = {false} onSubmit = {this.handleUpdate}/>
     );
   }
 
@@ -92,7 +92,10 @@ class EditPage extends Component {
     }
 
     return (
-      <Page title='Edit Alert' breadcrumbAction={{ content: 'Back to Alerts', to: '/alerts', component: Link }} secondaryActions={[{ content: 'Delete Alert', onClick: this.toggleDelete }]}>
+      <Page
+        title='Edit Alert'
+        breadcrumbAction={{ content: 'Back to Alerts', to: '/alerts', component: Link }}
+        secondaryActions={[{ content: 'Delete Alert', onClick: this.toggleDelete }]}>
         {error ? this.renderError() : this.renderForm()}
         <DeleteModal
           open={this.state.showDeleteModal}

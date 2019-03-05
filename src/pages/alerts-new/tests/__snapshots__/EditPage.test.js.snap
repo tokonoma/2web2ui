@@ -1,0 +1,80 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Page: Alerts Edit should render delete modal 1`] = `
+<DeleteModal
+  content={
+    <p>
+      The alert "
+      <strong>
+        shortName
+      </strong>
+      " will be permanently removed. This cannot be undone.
+    </p>
+  }
+  onCancel={[Function]}
+  onDelete={[Function]}
+  open={true}
+  title="Are you sure you want to delete this alert?"
+/>
+`;
+
+exports[`Page: Alerts Edit should render error when list fails to load 1`] = `
+<ApiErrorBanner
+  errorDetails="this failed"
+  message="Sorry, we seem to have had some trouble loading your alerts."
+  reload={
+    [MockFunction] {
+      "calls": Array [
+        Array [
+          Object {
+            "id": "id-1",
+          },
+        ],
+      ],
+      "results": undefined,
+    }
+  }
+/>
+`;
+
+exports[`Page: Alerts Edit should render happy path 1`] = `
+<Page
+  breadcrumbAction={
+    Object {
+      "component": [Function],
+      "content": "Back to Alerts",
+      "to": "/alerts",
+    }
+  }
+  empty={Object {}}
+  secondaryActions={
+    Array [
+      Object {
+        "content": "Delete Alert",
+        "onClick": [Function],
+      },
+    ]
+  }
+  title="Edit Alert"
+>
+  <withRouter(Connect(ReduxForm))
+    newAlert={false}
+    onSubmit={[Function]}
+  />
+  <DeleteModal
+    content={
+      <p>
+        The alert "
+        <strong>
+          shortName
+        </strong>
+        " will be permanently removed. This cannot be undone.
+      </p>
+    }
+    onCancel={[Function]}
+    onDelete={[Function]}
+    open={false}
+    title="Are you sure you want to delete this alert?"
+  />
+</Page>
+`;
