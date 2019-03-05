@@ -5,7 +5,7 @@ import { formValueSelector, clearFields } from 'redux-form';
 import { RadioGroup } from 'src/components/reduxFormWrappers';
 import { hasSubaccounts } from 'src/selectors/subaccounts';
 import { FORMS, ROLES } from 'src/constants';
-import { hasUiOption } from 'src/helpers/conditions/account';
+import { isAccountUiOptionSet } from 'src/helpers/conditions/account';
 import SubaccountAssignment from './SubaccountAssignment';
 
 const ADMIN_ROLE = {
@@ -106,7 +106,7 @@ const mapStateToProps = (state) => ({
   selectedRole: formValueSelector(FORMS.INVITE_USER)(state, 'access'),
   hasSubaccounts: hasSubaccounts(state),
   useSubaccountChecked: formValueSelector(FORMS.INVITE_USER)(state, 'useSubaccount'),
-  showDeveloperRoles: hasUiOption('developer_and_email_roles')(state)
+  showDeveloperRoles: isAccountUiOptionSet('developer_and_email_roles', false)(state)
 });
 
 const mapDispatchToProps = { clearFields };
