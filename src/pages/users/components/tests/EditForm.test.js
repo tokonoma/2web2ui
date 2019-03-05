@@ -18,7 +18,7 @@ describe('Component: EditForm', () => {
     expect(subject()).toMatchSnapshot();
   });
 
-  it('should disable single sign-on checkbox and display instructions', () => {
+  it('should hide single sign-on checkbox if singlesignon is not configured', () => {
     expect(subject({ isAccountSingleSignOnEnabled: false })).toMatchSnapshot();
   });
 
