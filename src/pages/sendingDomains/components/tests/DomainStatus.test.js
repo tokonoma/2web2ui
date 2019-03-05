@@ -17,7 +17,8 @@ describe('DomainStatus', () => {
   });
 
   it('renders section with auto-verify banner', () => {
-    expect(subject({ hasAutoVerifyEnabled: true })).toMatchSnapshot();
+    const wrapper = subject({ hasAutoVerifyEnabled: true });
+    expect(wrapper.find('Banner')).toExist();
   });
 
   it('calls onShareDomainChange when access changes', () => {
