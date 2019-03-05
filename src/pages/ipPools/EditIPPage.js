@@ -20,12 +20,6 @@ import { SendingDomainTypeaheadWrapper, TextFieldWrapper } from '../../component
 import { configFlag } from '../../helpers/conditions/config';
 
 
-const breadcrumbAction = {
-  content: 'SD-632',
-  Component: Link,
-  to: '/account/ip-pools/edit/asdfafsdfas'
-};
-
 export class EditIPPage extends Component {
   state = {
     showDelete: false
@@ -107,23 +101,28 @@ export class EditIPPage extends Component {
   }
 
   render() {
-    const { loading, pool, currentIp, showPurchaseCTA } = this.props;
+    const { loading, currentPool, currentIp, showPurchaseCTA } = this.props;
 
     if (loading || !currentIp) {
       return <Loading />;
     }
 
+    const breadcrumbAction = {
+      content: currentPool.name,
+      Component: Link,
+      to: `/account/ip-pools/edit/${currentPool.id}`
+    };
 
     return (
       <Page
-        title={`IP: ${currentIp.external_ip}`}
+        title={`Sending IP: ${currentIp.external_ip}`}
         breadcrumbAction={breadcrumbAction}
       >
         {this.renderForm()}
 
         <DeleteModal
           open={this.state.showDelete}
-          title='Are you sure you want to delete this IP Pool?'
+          title='Are you sure you want to delete this Sending IP Pool?'
           content={<p>IPs in this pool will be re-assigned to your Default pool.</p>}
           onCancel={this.toggleDelete}
           onDelete={this.onDeletePool}
