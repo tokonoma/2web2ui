@@ -109,17 +109,24 @@ export const selectEngagementRateByCohortDetails = createSelector(
   [getEngagementRateByCohortData, getFacetFromParams, getFacetIdFromParams, selectSubaccountIdFromQuery, getOptions],
   ({ loading, error, data }, facet, facetId, subaccountId, { now, relativeRange }) => {
     const match = data.find((item) => String(item[facet]) === facetId) || {};
-    const normalizedHistory = _.get(match, 'history', []).map(({ dt: date, ...values }) => ({ date, ...values }));
+
+    // Rename keys to reference correct cohort constants within components
+    const normalizedHistory = _.get(match, 'history', []).map(({ dt: date, ...values }) => {
+      const reKeyed = _.keys(values).reduce((acc, key) => ({
+        ...acc, [key.replace(/_engagement$/, '')]: values[key]
+      }), {});
+      return { date, ...reKeyed }
+    });
 
     const filledHistory = fillByDate({
       dataSet: normalizedHistory,
       fill: {
-        c_new_engagment: null,
-        c_14d_engagment: null,
-        c_90d_engagment: null,
-        c_365d_engagment: null,
-        c_uneng_engagment: null,
-        c_total_engagment: null
+        c_new: null,
+        c_14d: null,
+        c_90d: null,
+        c_365d: null,
+        c_uneng: null,
+        c_total: null
       },
       now,
       relativeRange

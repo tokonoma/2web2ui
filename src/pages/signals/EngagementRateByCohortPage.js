@@ -2,6 +2,8 @@
 import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { Panel, Grid } from '@sparkpost/matchbox';
+import LineChart from './components/charts/linechart/LineChart';
+import Legend from './components/charts/legend/Legend';
 import Callout from 'src/components/callout';
 import DateFilter from './components/filters/DateFilter';
 import EngagementRecencyActions from './components/actionContent/EngagementRecencyActions';
@@ -11,7 +13,7 @@ import Page from './components/SignalsPage';
 import Tabs from './components/engagement/Tabs';
 import TooltipMetric from './components/charts/tooltip/TooltipMetric';
 import withEngagementRateByCohortDetails from './containers/EngagementRateByCohortDetailsContainer';
-// import { ENGAGEMENT_RECENCY_COHORTS, ENGAGEMENT_RECENCY_INFO } from './constants/info';
+import { ENGAGEMENT_RECENCY_COHORTS } from './constants/info';
 import { Loading } from 'src/components';
 import { roundToPlaces } from 'src/helpers/units';
 import moment from 'moment';
@@ -54,9 +56,7 @@ export class EngagementRateByCohortPage extends Component {
   }
 
   getYAxisProps = () => ({
-    tickFormatter: (tick) => `${roundToPlaces(tick * 100, 0)}%`,
-    domain: [0, 1],
-    ticks: [0, 0.25, 0.5, 0.75, 1.0]
+    tickFormatter: (tick) => `${roundToPlaces(tick, 0)}%`
   })
 
   getXAxisProps = () => {
@@ -75,7 +75,7 @@ export class EngagementRateByCohortPage extends Component {
           color={cohorts[key].fill}
           label={cohorts[key].label}
           description={cohorts[key].description}
-          value={`${roundToPlaces(payload[key] * 100, 1)}%`}
+          value={`${roundToPlaces(payload[key], 1)}%`}
         />
       ))}
     </Fragment>
@@ -110,13 +110,14 @@ export class EngagementRateByCohortPage extends Component {
           <Panel sectioned>
             {chartPanel || (
               <div className='LiftTooltip'>
-                {/* <BarChart
-                  gap={gap}
+                <LineChart
+                  height={300}
                   onClick={this.handleDateSelect}
                   selected={selectedDate}
-                  timeSeries={data}
-                  tooltipContent={this.getTooltipContent}
+                  lines={data}
+                  lineType='natural'
                   tooltipWidth='250px'
+                  tooltipContent={this.getTooltipContent}
                   yKeys={_.keys(cohorts).map((key) => ({ key, ...cohorts[key] })).reverse()}
                   yAxisProps={this.getYAxisProps()}
                   xAxisProps={this.getXAxisProps()}
@@ -124,7 +125,7 @@ export class EngagementRateByCohortPage extends Component {
                 <Legend
                   items={_.values(cohorts)}
                   tooltipContent={(label) => ENGAGEMENT_RECENCY_COHORTS[label]}
-                /> */}
+                />
               </div>
             )}
           </Panel>

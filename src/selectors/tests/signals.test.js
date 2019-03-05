@@ -103,6 +103,34 @@ describe('Selectors: signals', () => {
           loading: false,
           error: null
         },
+        engagementRateByCohort: {
+          total_count: 10,
+          data: [
+            {
+              sending_domain: 'test.com',
+              history: [
+                {
+                  c_total_engagement: 25,
+                  c_new_engagement: 5,
+                  c_uneng_engagement: 5,
+                  c_14d_engagement: 5,
+                  c_365d_engagement: 5,
+                  dt: '2018-01-01'
+                },
+                {
+                  c_total_engagement: 50,
+                  c_new_engagement: 10,
+                  c_uneng_engagement: 10,
+                  c_14d_engagement: 10,
+                  c_365d_engagement: 10,
+                  dt: '2018-01-03'
+                }
+              ]
+            }
+          ],
+          loading: false,
+          error: null
+        },
         healthScore: {
           total_count: 10,
           data: [
@@ -176,6 +204,22 @@ describe('Selectors: signals', () => {
     it('should not be empty when loading', () => {
       const stateWhenLoading = { ...state, signals: { engagementRecency: { data: [], loading: true }}};
       expect(selectors.selectEngagementRecencyDetails(stateWhenLoading, props).details.empty).toBe(false);
+    });
+  });
+
+  describe('engagement rate by cohort details', () => {
+    it('should select details', () => {
+      expect(selectors.selectEngagementRateByCohortDetails(state, props)).toMatchSnapshot();
+    });
+
+    it('should be empty with only fill data when not loading', () => {
+      const stateWhenEmpty = { ...state, signals: { engagementRateByCohort: { data: [], loading: false }}};
+      expect(selectors.selectEngagementRateByCohortDetails(stateWhenEmpty, props)).toMatchSnapshot();
+    });
+
+    it('should not be empty when loading', () => {
+      const stateWhenLoading = { ...state, signals: { engagementRateByCohort: { data: [], loading: true }}};
+      expect(selectors.selectEngagementRateByCohortDetails(stateWhenLoading, props).details.empty).toBe(false);
     });
   });
 
