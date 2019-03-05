@@ -1,4 +1,3 @@
-/* eslint-disable */
 import qs from 'query-string';
 import _ from 'lodash';
 import { getRelativeDates } from 'src/helpers/date';
@@ -50,15 +49,13 @@ export function parseSearch(search) {
 
   const transformedParams = transformParams(rest);
 
-  const options = _.mapValues(transformedParams, (filter, key) => {
-    return typeof filter === 'string' ? [filter] : filter
-  });
+  const options = _.mapValues(transformedParams, (filter) => typeof filter === 'string' ? [filter] : filter);
 
   return { dateOptions, ...options };
 }
 
 
-export function getDetailsPath(messageId, eventId){
+export function getDetailsPath(messageId, eventId) {
   return `/reports/message-events/details/${messageId ? `${messageId}/${eventId}` : `_noid_/${eventId}`}`;
 }
 
@@ -69,7 +66,7 @@ export function getDetailsPath(messageId, eventId){
  */
 export function getEmptyFilters(filters) {
   // Build an array of objects of form { value: [] }
-  const emptyFilters = _.map(filters,(value, key) => ({[key]: []}));
+  const emptyFilters = _.map(filters,(value, key) => ({ [key]: []}));
 
   return Object.assign({}, ...emptyFilters);
 }
@@ -95,7 +92,7 @@ function transformParams(params) {
       accumulator[key] = value;
       return accumulator;
     }
-    if(oldFiltersToNewFilters.hasOwnProperty(key)){
+    if (oldFiltersToNewFilters.hasOwnProperty(key)) {
       const newKey = oldFiltersToNewFilters[key];
       accumulator[newKey] = value;
       return accumulator;
