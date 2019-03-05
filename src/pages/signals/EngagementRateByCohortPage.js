@@ -7,7 +7,6 @@ import Legend from './components/charts/legend/Legend';
 import Callout from 'src/components/callout';
 import DateFilter from './components/filters/DateFilter';
 import EngagementRecencyActions from './components/actionContent/EngagementRecencyActions';
-// import Legend from './components/charts/legend/Legend';
 import OtherChartsHeader from './components/OtherChartsHeader';
 import Page from './components/SignalsPage';
 import Tabs from './components/engagement/Tabs';
