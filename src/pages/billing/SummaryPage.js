@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Page } from '@sparkpost/matchbox';
 import { fetch as fetchAccount, getPlans, getBillingInfo } from 'src/actions/account';
 import { list as getSendingIps } from 'src/actions/sendingIps';
-import { selectBillingInfo } from 'src/selectors/accountBillingInfo';
+import { selectBillingInfo, selectAccountBilling } from 'src/selectors/accountBillingInfo';
 import { selectAccountAgeInDays } from 'src/selectors/accountAge';
 import ConditionSwitch, { defaultCase } from 'src/components/auth/ConditionSwitch';
 import { not } from 'src/helpers/conditions';
@@ -43,13 +43,16 @@ export class BillingSummaryPage extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  loading: state.account.loading || state.billing.plansLoading || !state.account.subscription,
-  account: state.account,
-  accountAgeInDays: selectAccountAgeInDays(state),
-  billingInfo: selectBillingInfo(state),
-  sendingIps: state.sendingIps.list,
-  invoices: state.invoices.list
-});
+const mapStateToProps = (state) => {
+  const { account, loading } = selectAccountBilling(state);
+  return ({
+    loading: loading || state.billing.plansLoading || !state.account.subscription,
+    account,
+    accountAgeInDays: selectAccountAgeInDays(state),
+    billingInfo: selectBillingInfo(state),
+    sendingIps: state.sendingIps.list,
+    invoices: state.invoices.list
+  });
+};
 
 export default connect(mapStateToProps, { getInvoices, getSendingIps, getPlans, fetchAccount, getBillingInfo })(BillingSummaryPage);
