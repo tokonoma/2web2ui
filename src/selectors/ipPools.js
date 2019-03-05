@@ -1,20 +1,26 @@
-import { createSelector } from 'reselect';
-import _ from 'lodash';
-import { encodeIp } from 'src/helpers/ipNames';
-import { currentPlanCodeSelector } from 'src/selectors/accountBillingInfo';
-import { ENTERPRISE_PLAN_CODES } from 'src/constants';
+import { createSelector } from "reselect";
+import _ from "lodash";
+import { encodeIp } from "src/helpers/ipNames";
+import { currentPlanCodeSelector } from "src/selectors/accountBillingInfo";
+import { ENTERPRISE_PLAN_CODES } from "src/constants";
 import { isAdmin } from 'src/helpers/conditions/user';
-const DEFAULT = 'default';
+const DEFAULT = "default";
 
 export const getIpPools = (state) => state.ipPools.list;
-const selectCurrentPool = ({ ipPools = {}}) => ipPools.pool || {};
+const currentSendingIp = (state, props) => props.match.params.ip;
+const selectCurrentPool = ({ ipPools = {} }) => ipPools.pool || {};
 
 export const selectIpsForCurrentPool = createSelector(
   [selectCurrentPool],
-  ({ ips = []}) => ips.map((ip) => ({
+  ({ ips = [] }) => ips.map((ip) => ({
     ...ip,
     id: encodeIp(ip.external_ip)
   }))
+);
+
+export const selectIpForCurrentPool = createSelector(
+  [selectCurrentPool, currentSendingIp],
+  ({ ips = [] }, sendingIp) => _.find(ips, { external_ip: sendingIp })
 );
 
 export const getDefaultPool = createSelector(
@@ -33,7 +39,7 @@ export const getOrderedIpPools = createSelector(
     if (!defaultPool) {
       return initialList;
     }
-    return [ defaultPool, ...others ];
+    return [defaultPool, ...others];
   }
 );
 
@@ -77,5 +83,34 @@ export const shouldShowIpPurchaseCTA = createSelector(
 );
 
 export const selectFirstIpPoolId = createSelector(
-  [getIpPools], (ipPools) => _.get(ipPools, '[0].id')
+  [getIpPools], (ipPools) => _.get(ipPools, "[0].id")
 );
+
+
+export const getReAssignPoolsOptions = createSelector(
+  [getIpPools, selectCurrentPool], (pools, currentPool) => {
+    return pools.map((pool) => ({
+      value: pool.id,
+      label: (pool.id === currentPool.id) ? '-- Change Pool --' : `${pool.name} (${pool.id})`
+    }));
+  }
+);
+
+export const getOverflowPoolsOptions = createSelector(
+  [getIpPools, selectCurrentPool], (pools, currentPool) => {
+    return pools.map((pool) => ({
+      value: pool.id,
+      label: (pool.id === currentPool.id) ? '-- Select an Overflow Pool --' : `${pool.name} (${pool.id})` //todo verify if currentPool can be set as overflow pool. in that case, we need to return currentPool name as it is
+    }));
+  }
+);
+
+export const getStageOptions = createSelector(
+  [], () => {
+    return _.map(_.range(20), (i) => ({
+      value: `stage${i + 1}`,
+      label: `Stage ${i + 1} (${(i + 1) * 200})/day)`,
+      disabled: i > 10
+    }));
+  }
+)

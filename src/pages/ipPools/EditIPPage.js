@@ -11,7 +11,7 @@ import { Field, reduxForm } from 'redux-form';
 import { showAlert } from 'src/actions/globalAlert';
 import { listPools, getPool, updatePool, deletePool } from 'src/actions/ipPools';
 import { updateSendingIp } from 'src/actions/sendingIps';
-import { shouldShowIpPurchaseCTA } from 'src/selectors/ipPools';
+import { shouldShowIpPurchaseCTA, selectIpForCurrentPool } from 'src/selectors/ipPools';
 
 import { decodeIp } from 'src/helpers/ipNames';
 import isDefaultPool from './helpers/defaultPool';
@@ -98,24 +98,25 @@ export class EditIPPage extends Component {
   }
 
   renderForm() {
-    const { error } = this.props;
+    const { error, currentIp, currentPool, allPools } = this.props;
     if (error) {
       return this.renderError();
     }
 
-    return <IPForm onSubmit={this.onUpdatePool} isNew={false} />;
+    return <IPForm onSubmit={this.onUpdatePool} currentIp={currentIp} currentPool={currentPool} allPools={allPools} />;
   }
 
   render() {
-    const { loading, pool, showPurchaseCTA } = this.props;
+    const { loading, pool, currentIp, showPurchaseCTA } = this.props;
 
-    if (loading) {
+    if (loading || !currentIp) {
       return <Loading />;
     }
 
+
     return (
       <Page
-        title={'IP: 111.111.24.8'}
+        title={`IP: ${currentIp.external_ip}`}
         breadcrumbAction={breadcrumbAction}
       >
         {this.renderForm()}
@@ -132,16 +133,18 @@ export class EditIPPage extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  const { getLoading, getError, listLoading, listError, pool } = state.ipPools;
+const mapStateToProps = (state, props) => {
+  const { getLoading, getError, listLoading, listError, pool, list } = state.ipPools;
 
   return {
     loading: getLoading || listLoading,
     error: listError || getError,
-    pool,
+    currentPool: pool,
+    allPools: list,
     listError,
     getError,
-    showPurchaseCTA: shouldShowIpPurchaseCTA(state)
+    showPurchaseCTA: shouldShowIpPurchaseCTA(state),
+    currentIp: selectIpForCurrentPool(state, props)
   };
 };
 
