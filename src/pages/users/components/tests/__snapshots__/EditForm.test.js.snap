@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Component: EditForm should hide single sign-on checkbox if singlesignon is not configured 1`] = `
+exports[`Component: EditForm should hide single sign-on checkbox if single sign-on is not configured 1`] = `
 <Panel>
   <form>
     <Panel.Section>
