@@ -1,4 +1,4 @@
-# Testing Component Calling A Redux Action
+# Testing Component Calling A Prop Function
 
 ```js
 class MyComponent extends Component {
@@ -17,7 +17,7 @@ class MyComponent extends Component {
 ```js
 it('calls load on mount', () => {
   const load = jest.fn();
-  
+
   shallow(<MyComponent load={load} />);
 
   expect(load).toHaveBeenCalled();

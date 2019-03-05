@@ -37,7 +37,7 @@ These are general rules to follow.
 These are common patterns for testing our basic file types.
 
  * [Action Creators](patterns/action-creators.md)
- * [Component Call To Action](patterns/component-call-to-action.md)
+ * [Component Calls Prop Function](patterns/component-calls-prop-function.md)
  * [Component Events](pattern/component-events.md)
  * [Component Inspection](patterns/component-inspection.md)
  * [Component Looks Good](patterns/component-looks-good.md)
