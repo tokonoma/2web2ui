@@ -118,27 +118,12 @@ exports[`Component: EditBounce does not show root domain warning for 3rd level d
     </p>
   </Left>
   <Right>
-    <Panel
-      actions={
-        Array [
-          Object {
-            "color": "orange",
-            "content": "Verify CNAME Record",
-            "disabled": false,
-            "onClick": [Function],
-          },
-        ]
-      }
-      sectioned={true}
-      title={
-        <React.Fragment>
-          <ErrorIcon />
-           
-          <span>
-            DNS Settings
-          </span>
-        </React.Fragment>
-      }
+    <SetupInstructionPanel
+      isVerified={false}
+      isVerifying={false}
+      onVerify={[Function]}
+      recordType="CNAME"
+      verifyButtonIdentifier="verify-cname"
     >
       <LabelledValue
         label="Type"
@@ -161,7 +146,7 @@ exports[`Component: EditBounce does not show root domain warning for 3rd level d
           sparkpostmail.com
         </p>
       </LabelledValue>
-    </Panel>
+    </SetupInstructionPanel>
   </Right>
 </SendingDomainSection>
 `;
@@ -200,27 +185,12 @@ exports[`Component: EditBounce renders not ready correctly 1`] = `
         Create a new domain now.
       </Link>
     </Banner>
-    <Panel
-      actions={
-        Array [
-          Object {
-            "color": "orange",
-            "content": "Verify CNAME Record",
-            "disabled": false,
-            "onClick": [Function],
-          },
-        ]
-      }
-      sectioned={true}
-      title={
-        <React.Fragment>
-          <ErrorIcon />
-           
-          <span>
-            DNS Settings
-          </span>
-        </React.Fragment>
-      }
+    <SetupInstructionPanel
+      isVerified={false}
+      isVerifying={false}
+      onVerify={[Function]}
+      recordType="CNAME"
+      verifyButtonIdentifier="verify-cname"
     >
       <LabelledValue
         label="Type"
@@ -243,7 +213,7 @@ exports[`Component: EditBounce renders not ready correctly 1`] = `
           sparkpostmail.com
         </p>
       </LabelledValue>
-    </Panel>
+    </SetupInstructionPanel>
   </Right>
 </SendingDomainSection>
 `;
@@ -270,27 +240,12 @@ exports[`Component: EditBounce renders ready correctly 1`] = `
         Create a new domain now.
       </Link>
     </Banner>
-    <Panel
-      actions={
-        Array [
-          Object {
-            "color": "orange",
-            "content": "Re-verify CNAME Record",
-            "disabled": false,
-            "onClick": [Function],
-          },
-        ]
-      }
-      sectioned={true}
-      title={
-        <React.Fragment>
-          <VerifiedIcon />
-           
-          <span>
-            DNS Settings
-          </span>
-        </React.Fragment>
-      }
+    <SetupInstructionPanel
+      isVerified={true}
+      isVerifying={false}
+      onVerify={[Function]}
+      recordType="CNAME"
+      verifyButtonIdentifier="verify-cname"
     >
       <LabelledValue
         label="Type"
@@ -313,18 +268,7 @@ exports[`Component: EditBounce renders ready correctly 1`] = `
           sparkpostmail.com
         </p>
       </LabelledValue>
-    </Panel>
+    </SetupInstructionPanel>
   </Right>
 </SendingDomainSection>
-`;
-
-exports[`Component: EditBounce verifyDomain renders loading state correctly 1`] = `
-Array [
-  Object {
-    "color": "orange",
-    "content": "Verifying...",
-    "disabled": true,
-    "onClick": [Function],
-  },
-]
 `;

@@ -58,6 +58,7 @@ exports[`Sending Domains Edit Page should renders correctly 1`] = `
           "subaccount_id": 100,
         }
       }
+      hasAutoVerifyEnabled={false}
       onShareDomainChange={[Function]}
     />
     <withRouter(Connect(SetupSending))
@@ -202,6 +203,7 @@ exports[`Sending Domains Edit Page should show a delete modal 1`] = `
           "subaccount_id": 100,
         }
       }
+      hasAutoVerifyEnabled={false}
       onShareDomainChange={[Function]}
     />
     <withRouter(Connect(SetupSending))

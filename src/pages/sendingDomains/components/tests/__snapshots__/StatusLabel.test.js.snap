@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`StatusLabel renders status tag 1`] = `
+<DomainStatusTag
+  status="unverified"
+/>
+`;
+
+exports[`StatusLabel renders verified label 1`] = `
+<div>
+  <VerifiedIcon />
+   
+  <strong>
+    Verified
+  </strong>
+</div>
+`;
