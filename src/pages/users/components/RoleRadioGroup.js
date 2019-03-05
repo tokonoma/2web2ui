@@ -58,16 +58,15 @@ export class RoleRadioGroup extends React.Component {
       selectedRole,
       hasSubaccounts,
       useSubaccountChecked,
-      isDeveloperVisible,
-      isEmailVisible,
+      showDeveloperRoles,
       allowSuperUser,
       allowSubaccountAssignment
     } = this.props;
 
     return [
       ADMIN_ROLE,
-      DEVELOPER_ROLE && isDeveloperVisible,
-      EMAIL_ROLE && isEmailVisible,
+      showDeveloperRoles ? DEVELOPER_ROLE : null,
+      showDeveloperRoles ? EMAIL_ROLE : null,
       {
         ...REPORTING_ROLE,
         children: allowSubaccountAssignment &&
@@ -107,8 +106,7 @@ const mapStateToProps = (state) => ({
   selectedRole: formValueSelector(FORMS.INVITE_USER)(state, 'access'),
   hasSubaccounts: hasSubaccounts(state),
   useSubaccountChecked: formValueSelector(FORMS.INVITE_USER)(state, 'useSubaccount'),
-  isDeveloperVisible: hasUiOption('developer')(state),
-  isEmailVisible: hasUiOption('email')(state)
+  showDeveloperRoles: hasUiOption('developer_and_email_roles')(state)
 });
 
 const mapDispatchToProps = { clearFields };
