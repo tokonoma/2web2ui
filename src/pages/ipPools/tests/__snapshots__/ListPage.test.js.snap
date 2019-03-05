@@ -174,15 +174,7 @@ exports[`IP Pools List Page should render the list page correctly 1`] = `
       "to": "/account/ip-pools/create",
     }
   }
-  secondaryActions={
-    Array [
-      Object {
-        "Component": [Function],
-        "content": "Purchase IPs",
-        "to": "/account/billing",
-      },
-    ]
-  }
+  secondaryActions={null}
   title="IP Pools"
 >
   <IPWarmupReminderBanner />
@@ -255,15 +247,7 @@ exports[`IP Pools List Page should show alert upon error 1`] = `
       "to": "/account/ip-pools/create",
     }
   }
-  secondaryActions={
-    Array [
-      Object {
-        "Component": [Function],
-        "content": "Purchase IPs",
-        "to": "/account/billing",
-      },
-    ]
-  }
+  secondaryActions={null}
   title="IP Pools"
 >
   <IPWarmupReminderBanner />
