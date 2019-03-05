@@ -6,11 +6,11 @@ import { Field } from 'redux-form';
 import { getFiltersAsArray } from '../helpers/transformData.js';
 import { SelectWrapper, TextFieldWrapper } from 'src/components/reduxFormWrappers';
 import { required, eventsQuery } from 'src/helpers/validation';
-import { SEARCH_QUERY_FILTERS } from 'src/constants';
+import { EVENTS_SEARCH_FILTERS } from 'src/constants';
 import _ from 'lodash';
 
 const EVENTS_SELECTOR = [{ disabled: true, value: '', label: 'Select a Filter' },
-  ... getFiltersAsArray(SEARCH_QUERY_FILTERS)];
+  ... getFiltersAsArray(EVENTS_SEARCH_FILTERS)];
 
 const makeQueryValidator = _.memoize((filter) => () => eventsQuery(filter));
 
@@ -24,7 +24,7 @@ const getPlaceholderText = _.memoize((key) => {
   if (!key) {
     return 'Select Filter Type';
   }
-  return SEARCH_QUERY_FILTERS[key].placeholder;
+  return EVENTS_SEARCH_FILTERS[key].placeholder;
 });
 
 export default ({ fields }) => (

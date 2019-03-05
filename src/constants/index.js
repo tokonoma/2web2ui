@@ -87,7 +87,7 @@ export const FORMS = {
 };
 
 //These filters are the searchable filters in the 'more filters' modal on the Events Search page
-export const SEARCH_QUERY_FILTERS = {
+export const EVENTS_SEARCH_FILTERS = {
   recipient_domains: { placeholder: 'list of domain parts (e.g., gmail, yahoo.co, yahoo.co.jp, .fr)', label: 'Recipient Domains' },
   from_addresses: { placeholder: 'list of full from addresses (e.g., john@mycompany.com)', label: 'From Addresses' },
   sending_domains: { placeholder: 'list of domain parts (e.g., joespizza, marketing.joespizza)', label: 'Sending Domains' },
@@ -108,7 +108,7 @@ export const SEARCH_QUERY_FILTERS = {
 export const ALL_EVENTS_FILTERS = {
   recipients: { placeholder: 'Filter by recipient email address', label: 'Recipients' },
   events: { label: 'Event' },
-  ...SEARCH_QUERY_FILTERS
+  ...EVENTS_SEARCH_FILTERS
 };
 
 export const DEFAULT_PER_PAGE_BUTTONS = [10, 25, 50, 100];
