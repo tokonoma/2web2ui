@@ -1,12 +1,10 @@
 import React from 'react';
 import { ChangePlanForm } from '../ChangePlanForm';
 import { shallow } from 'enzyme';
-import * as accountConditions from 'src/selectors/accessConditionState';
 import * as conversions from 'src/helpers/conversionTracking';
 import * as billingHelpers from 'src/helpers/billing';
 
 jest.mock('src/helpers/billing');
-jest.mock('src/selectors/accessConditionState');
 jest.mock('src/helpers/conversionTracking');
 
 describe('Form Container: Change Plan', () => {
@@ -57,7 +55,6 @@ describe('Form Container: Change Plan', () => {
       updateSubscription: jest.fn(() => Promise.resolve()),
       isAws: false
     };
-    accountConditions.isAws = jest.fn(() => false);
     wrapper = shallow(<ChangePlanForm {...props} />);
     instance = wrapper.instance();
     submitSpy = jest.spyOn(instance.props, 'handleSubmit');
