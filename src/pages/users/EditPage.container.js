@@ -16,7 +16,7 @@ const mapStateToProps = (state, props) => {
     accountSingleSignOn: state.accountSingleSignOn,
     currentUser: state.currentUser,
     isAccountSingleSignOnEnabled: state.accountSingleSignOn.enabled,
-    loading: state.users.loading || state.subaccounts.getLoading || state.accontSingleSignOn.loading,
+    loading: state.users.loading || state.subaccounts.getLoading || state.accountSingleSignOn.loading,
     loadingError: state.users.error || state.accountSingleSignOn.error,
     subaccount: state.subaccounts.subaccount,
     user,
