@@ -14,7 +14,6 @@
     "test-coverage": "npm test -- --coverage",
     "test-ci": "CI=true npm test -- --coverage",
     "coveralls": "cat ./build-reports/lcov.info | coveralls",
-    "test-examples": "node scripts/test.js --env=jsdom --config=./jest.config.js --testMatch='<rootDir>/docs/testing/**/?(*.)test.js'",
     "lint": "node node_modules/eslint/bin/eslint.js src",
     "lintfix": "npm run lint -- --fix",
     "storybook": "start-storybook -p 9001 -c .storybook",
@@ -58,7 +57,7 @@
   "dependencies": {
     "@sparkpost/boomerang": "^1.0.6",
     "@sparkpost/matchbox": "^3.3.6",
-    "@sparkpost/matchbox-icons": "^1.1.5",
+    "@sparkpost/matchbox-icons": "^1.1.6",
     "axios": "^0.18.0",
     "bowser": "2.1.0",
     "classnames": "^2.2.5",

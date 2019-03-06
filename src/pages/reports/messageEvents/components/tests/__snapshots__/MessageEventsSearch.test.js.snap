@@ -55,7 +55,6 @@ exports[`Component: MessageEventsSearch renders correctly 1`] = `
         <TextField
           connectRight={<Connect(AdvancedFiltersModal) />}
           error={null}
-          label="Recipient Email(s)"
           labelHidden={true}
           onBlur={[Function]}
           onFocus={[Function]}

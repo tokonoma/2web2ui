@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { verifyCname, update } from 'src/actions/sendingDomains';
 
-import { VerifiedIcon, ErrorIcon } from './Icons';
 import { Panel, Banner, Tooltip } from '@sparkpost/matchbox';
 import { Help } from '@sparkpost/matchbox-icons';
 import ToggleBlock from 'src/components/toggleBlock/ToggleBlock';
@@ -12,7 +11,9 @@ import { LabelledValue } from 'src/components';
 import { showAlert } from 'src/actions/globalAlert';
 import { SendingDomainSection } from './SendingDomainSection';
 import { resolveReadyFor } from 'src/helpers/domains';
+import { hasAutoVerifyEnabledSelector } from 'src/selectors/account';
 import config from 'src/config';
+import SetupInstructionPanel from './SetupInstructionPanel';
 
 export class EditBounce extends Component {
 
@@ -59,33 +60,23 @@ export class EditBounce extends Component {
     );
   }
 
-  getVerifyAction() {
-    const { verifyCnameLoading, domain } = this.props;
-    const { bounce } = resolveReadyFor(domain.status);
-
-    const verifyText = bounce ? 'Re-verify CNAME Record' : 'Verify CNAME Record';
-    const buttonText = verifyCnameLoading ? 'Verifying...' : verifyText;
-
-    return {
-      content: buttonText,
-      onClick: this.verifyDomain,
-      disabled: verifyCnameLoading,
-      color: 'orange'
-    };
-  }
-
   renderDnsSettings() {
-    const { id, domain } = this.props;
-    const { bounce } = resolveReadyFor(domain.status);
-    const titleIcon = bounce ? <VerifiedIcon/> : <ErrorIcon/>;
+    const { id, domain, hasAutoVerifyEnabled, verifyCnameLoading } = this.props;
+    const readyFor = resolveReadyFor(domain.status);
 
     return (
-      <Panel title={<Fragment>{titleIcon} <span>DNS Settings</span></Fragment>} sectioned
-        actions={[this.getVerifyAction()]} >
+      <SetupInstructionPanel
+        isAutoVerified={hasAutoVerifyEnabled}
+        isVerified={readyFor.bounce}
+        isVerifying={verifyCnameLoading}
+        onVerify={this.verifyDomain}
+        recordType="CNAME"
+        verifyButtonIdentifier="verify-cname"
+      >
         <LabelledValue label='Type'><p>CNAME</p></LabelledValue>
         <LabelledValue label='Hostname'><p>{id}</p></LabelledValue>
         <LabelledValue label='Value'><p>{config.bounceDomains.cnameValue}</p></LabelledValue>
-      </Panel>
+      </SetupInstructionPanel>
     );
   }
 
@@ -164,9 +155,10 @@ const formOptions = {
   enableReinitialize: true // required to update initial values from redux state
 };
 
-const mapStateToProps = ({ sendingDomains }, { domain }) => ({
-  updateLoading: sendingDomains.updateLoading,
-  verifyCnameLoading: sendingDomains.verifyCnameLoading,
+const mapStateToProps = (state, { domain }) => ({
+  hasAutoVerifyEnabled: hasAutoVerifyEnabledSelector(state),
+  updateLoading: state.sendingDomains.updateLoading,
+  verifyCnameLoading: state.sendingDomains.verifyCnameLoading,
   initialValues: {
     ...domain
   }

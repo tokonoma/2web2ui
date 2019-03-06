@@ -1,15 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Sending Domains Icons render correctly 1`] = `
-<Check
-  className="GreenCheck"
+exports[`Sending Domains Icons renders error icon 1`] = `
+<Error
+  className="RedError"
   size={16}
 />
 `;
 
-exports[`Sending Domains Icons render correctly 2`] = `
-<Error
-  className="RedError"
+exports[`Sending Domains Icons renders verify icon 1`] = `
+<Check
+  className="GreenCheck"
   size={16}
 />
 `;
