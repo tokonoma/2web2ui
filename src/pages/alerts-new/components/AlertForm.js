@@ -59,6 +59,13 @@ export class AlertForm extends Component {
       }
     };
 
+    const validateSubaccount = () => {
+      if (assignTo === 'subaccount') {
+        return required;
+      }
+      return undefined;
+    };
+
     const checkFacet = () => {
       if (facet_name === 'ALL') {
         return true;
@@ -111,6 +118,7 @@ export class AlertForm extends Component {
               name='subaccount'
               component={SubaccountTypeaheadWrapper}
               disabled={submitting}
+              validate={validateSubaccount()}
             />}
             {isSignals &&
             <label>Facet</label>}

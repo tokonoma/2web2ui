@@ -62,7 +62,7 @@ export class EditPage extends Component {
       data: _.omit(values, 'id', 'subaccount', 'assignTo')
     });
 
-    showAlert({ type: 'success', message: 'Update Successful' });
+    showAlert({ type: 'success', message: 'Alert updated' });
     getAlert({ id: this.props.match.params.id });
   }
 
