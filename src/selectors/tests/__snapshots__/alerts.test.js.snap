@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Alerts Selectors gets formatEditValues 1`] = `
+exports[`Alerts Selectors should get formatEditValues 1`] = `
 Object {
   "alert_metric": "signals_health_threshold",
   "alert_subaccount": 123,
@@ -19,5 +19,22 @@ Object {
     "id": 123,
   },
   "threshold": 34,
+}
+`;
+
+exports[`Alerts Selectors should handle empty formatEditValues 1`] = `
+Object {
+  "alert_metric": undefined,
+  "alert_subaccount": undefined,
+  "assignTo": "subaccount",
+  "criteria_metric": "",
+  "email_addresses": undefined,
+  "enabled": undefined,
+  "facet_name": "ALL",
+  "facet_value": undefined,
+  "id": undefined,
+  "name": undefined,
+  "subaccount": undefined,
+  "threshold": undefined,
 }
 `;
