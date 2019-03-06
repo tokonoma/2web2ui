@@ -1,68 +1,33 @@
-// import { shallow } from 'enzyme';
-// import React from 'react';
-// import { CreatePage } from '../CreatePage';
+import { shallow } from 'enzyme';
+import React from 'react';
+import { CreatePage } from '../CreatePage';
 
-// describe('Page: Alerts Create', () => {
-//   const props = {
-//     getAlert: jest.fn(),
-//     updateAlert: jest.fn(),
-//     deleteAlert: jest.fn(() => Promise.resolve()),
-//     showAlert: jest.fn(),
-//     error: null,
-//     history: [],
-//     id: 'id-1',
-//     alert: {
-//       id: 'alert-id',
-//       name: 'shortName',
-//       email_addresses: 'foo@bar.com',
-//       alert_metric: 'signals_health_threshold',
-//       threshold: {
-//         error: {
-//           comparator: 'gt',
-//           target: 20
-//         }
-//       },
-//       assignTo: 'subaccount',
-//       subaccount: jest.fn()
-//     },
-//     loading: false
-//   };
+describe('Page: Alerts Create', () => {
+  const props = {
+    createAlert: jest.fn(),
+    showAlert: jest.fn(),
+    error: null,
+    history: [],
+    loading: false
+  };
 
-//   let wrapper;
+  let wrapper;
 
-//   beforeEach(() => {
-//     wrapper = shallow(<EditPage {...props} />);
-//   });
+  beforeEach(() => {
+    wrapper = shallow(<CreatePage {...props} />);
+  });
 
-//   it('should render happy path', () => {
-//     expect(wrapper).toMatchSnapshot();
-//   });
+  it('should render happy path', () => {
+    expect(wrapper).toMatchSnapshot();
+  });
 
-//   it('should render loading component when loading data', () => {
-//     wrapper.setProps({ loading: true });
-//     expect(wrapper.find('Loading')).toHaveLength(1);
-//   });
+  it('should render loading component when loading data', () => {
+    wrapper.setProps({ loading: true });
+    expect(wrapper.find('Loading')).toHaveLength(1);
+  });
 
-//   it('should render error when list fails to load', () => {
-//     wrapper.setProps({ error: { message: 'this failed' }});
-//     expect(wrapper.find('ApiErrorBanner')).toMatchSnapshot();
-//   });
-
-//   it('should render delete modal', () => {
-//     wrapper.setState({ showDeleteModal: true });
-//     expect(wrapper.find('DeleteModal')).toMatchSnapshot();
-//   });
-
-//   it('should toggle delete modal', () => {
-//     expect(wrapper).toHaveState('showDeleteModal', false);
-//     wrapper.instance().toggleDelete();
-//     expect(wrapper).toHaveState('showDeleteModal', true);
-//   });
-
-//   it('should handle delete', async () => {
-//     await wrapper.instance().handleDelete();
-//     expect(props.deleteAlert).toHaveBeenCalledWith({ id: 'alert-id' });
-//     expect(props.showAlert).toHaveBeenCalled();
-//     expect(props.history[0]).toEqual('/alerts-new');
-//   });
-// });
+  it('should render error when list fails to load', () => {
+    wrapper.setProps({ error: { message: 'this failed' }});
+    expect(wrapper.find('ApiErrorBanner')).toMatchSnapshot();
+  });
+});

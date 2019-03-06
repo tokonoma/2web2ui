@@ -13,6 +13,7 @@ import getOptions from '../helpers/getOptions';
 import { METRICS } from '../constants/metrics';
 import { FACETS } from '../constants/facets';
 import { COMPARATOR } from '../constants/comparator';
+import { defaultFormValues } from '../constants/defaultFormValues';
 
 // Helpers & Validation
 import { required, integer, minNumber, maxLength, numberBetween } from 'src/helpers/validation';
@@ -101,9 +102,9 @@ export class AlertForm extends Component {
               label='Alert Type'
               component={SelectWrapper}
               options={getOptions(METRICS)}
-              disabled={true}
+              disabled={!newAlert}
               validate={required}
-              helpText="This assignment is permanent."
+              helpText={!newAlert && 'This assignment is permanent.'}
             />
             {isSignals &&
             <Field
@@ -207,7 +208,6 @@ export class AlertForm extends Component {
   }
 }
 const mapStateToProps = (state, props) => {
-  const alertValues = formatEditValues(state, state.alerts.alert);
   const selector = formValueSelector(formName);
 
   return {
@@ -217,7 +217,7 @@ const mapStateToProps = (state, props) => {
     assignTo: selector(state, 'assignTo'),
     subaccount: selector(state, 'subaccount'),
     enabled: selector(state, 'enabled'),
-    initialValues: props.newAlert ? null : alertValues
+    initialValues: props.newAlert ? defaultFormValues : formatEditValues(state, state.alerts.alert)
   };
 };
 
