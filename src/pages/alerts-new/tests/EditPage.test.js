@@ -43,11 +43,6 @@ describe('Page: Alerts Edit', () => {
     expect(wrapper.find('Loading')).toHaveLength(1);
   });
 
-  it('should render error when list fails to load', () => {
-    wrapper.setProps({ error: { message: 'this failed' }});
-    expect(wrapper.find('ApiErrorBanner')).toMatchSnapshot();
-  });
-
   it('should render delete modal', () => {
     wrapper.setState({ showDeleteModal: true });
     expect(wrapper.find('DeleteModal')).toMatchSnapshot();
