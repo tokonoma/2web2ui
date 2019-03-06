@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Page } from '@sparkpost/matchbox';
 import withAlertsEdit from './containers/EditPage.container';
 import AlertForm from './components/AlertForm';
-import { Loading, DeleteModal, ApiErrorBanner } from 'src/components';
+import { Loading, DeleteModal } from 'src/components';
 import _ from 'lodash';
 import formatActionData from './helpers/formatActionData';
 
@@ -20,7 +20,7 @@ export class EditPage extends Component {
     const { error } = this.props;
     if (error) {
       this.props.history.push('/alerts-new');
-      this.props.showAlert({ type: 'error', message: `Alert ${this.props.id} does not exist` });
+      this.props.showAlert({ type: 'error', message: 'Unable to load alert' });
     }
   }
 
@@ -54,25 +54,8 @@ export class EditPage extends Component {
     getAlert({ id: this.props.match.params.id });
   }
 
-  renderForm() {
-    return (
-      <AlertForm newAlert = {false} onSubmit = {this.handleUpdate}/>
-    );
-  }
-
-  renderError() {
-    const { error, getAlert } = this.props;
-    return (
-      <ApiErrorBanner
-        message={'Sorry, we seem to have had some trouble loading your alerts.'}
-        errorDetails={error.message}
-        reload={getAlert}
-      />
-    );
-  }
-
   render() {
-    const { error, loading, deletePending } = this.props;
+    const { loading, deletePending } = this.props;
 
     if (loading) {
       return <Loading />;
@@ -83,7 +66,7 @@ export class EditPage extends Component {
         title='Edit Alert'
         breadcrumbAction={{ content: 'Back to Alerts', to: '/alerts', component: Link }}
         secondaryActions={[{ content: 'Delete Alert', onClick: this.toggleDelete }]}>
-        {error ? this.renderError() : this.renderForm()}
+        <AlertForm newAlert = {false} onSubmit = {this.handleUpdate}/>
         <DeleteModal
           open={this.state.showDeleteModal}
           title='Are you sure you want to delete this alert?'

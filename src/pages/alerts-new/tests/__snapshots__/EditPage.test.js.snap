@@ -14,25 +14,6 @@ exports[`Page: Alerts Edit should render delete modal 1`] = `
 />
 `;
 
-exports[`Page: Alerts Edit should render error when list fails to load 1`] = `
-<ApiErrorBanner
-  errorDetails="this failed"
-  message="Sorry, we seem to have had some trouble loading your alerts."
-  reload={
-    [MockFunction] {
-      "calls": Array [
-        Array [
-          Object {
-            "id": "id-1",
-          },
-        ],
-      ],
-      "results": undefined,
-    }
-  }
-/>
-`;
-
 exports[`Page: Alerts Edit should render happy path 1`] = `
 <Page
   breadcrumbAction={
