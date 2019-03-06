@@ -252,7 +252,6 @@ const routes = [
     supportDocSearch: 'signals'
   },
   // Signals routes for 'feature_signals_v2'
-  // TODO: replace the above route with this one below
   {
     path: '/signals/engagement/cohorts/:facet/:facetId',
     component: signals.EngagementRecencyPage,

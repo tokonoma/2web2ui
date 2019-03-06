@@ -81,7 +81,7 @@ export class EngagementRateByCohortPage extends Component {
   )
 
   renderContent = () => {
-    const { data = [], facet, facetId, loading, empty, error } = this.props;
+    const { data = [], facet, facetId, loading, empty, error, subaccountId } = this.props;
     const { selectedDate } = this.state;
     const selectedCohorts = _.find(data, ['date', selectedDate]) || {};
     let chartPanel;
@@ -105,7 +105,7 @@ export class EngagementRateByCohortPage extends Component {
     return (
       <Grid>
         <Grid.Column sm={12} md={7}>
-          <Tabs facet={facet} facetId={facetId}/>
+          <Tabs facet={facet} facetId={facetId} subaccountId={subaccountId} />
           <Panel sectioned>
             {chartPanel || (
               <div className='LiftTooltip'>
