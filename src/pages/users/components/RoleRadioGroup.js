@@ -6,13 +6,14 @@ import { RadioGroup } from 'src/components/reduxFormWrappers';
 import { hasSubaccounts } from 'src/selectors/subaccounts';
 import { FORMS, ROLES } from 'src/constants';
 import { isAccountUiOptionSet } from 'src/helpers/conditions/account';
+import { selectCondition } from 'src/selectors/accessConditionState';
 import SubaccountAssignment from './SubaccountAssignment';
 
 const ADMIN_ROLE = {
   label: <strong>Admin</strong>,
   value: ROLES.ADMIN,
   helpText:
-    'All permission. The only user that can manage users, security, and billing settings.'
+    'All permissions. The only user that can manage users, security, and billing settings.'
 };
 
 const DEVELOPER_ROLE = {
@@ -106,7 +107,7 @@ const mapStateToProps = (state) => ({
   selectedRole: formValueSelector(FORMS.INVITE_USER)(state, 'access'),
   hasSubaccounts: hasSubaccounts(state),
   useSubaccountChecked: formValueSelector(FORMS.INVITE_USER)(state, 'useSubaccount'),
-  showDeveloperRoles: isAccountUiOptionSet('developer_and_email_roles', false)(state)
+  showDeveloperRoles: selectCondition(isAccountUiOptionSet('developer_and_email_roles', false))(state)
 });
 
 const mapDispatchToProps = { clearFields };

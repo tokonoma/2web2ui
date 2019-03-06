@@ -33,17 +33,24 @@ describe('Component: RoleRadioGroup', () => {
     expect(options(subject({ disabled: true }))).toEqual(expect.arrayContaining([expect.objectContaining({ disabled: true })]));
   });
 
-  cases('it should render developer roles', ({ showDeveloperRoles }) => {
-    expect(subject({ showDeveloperRoles })
+  it('should render developer roles when the UI flag `developer_and_email_roles` is enabled', () => {
+    expect(subject({ showDeveloperRoles: true })
+      .find('RadioGroup[title="Role"]')
+      .prop('options'))
+      .toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({ value: ROLES.DEVELOPER }),
+          expect.objectContaining({ value: ROLES.EMAIL })
+        ])
+      );
+  });
+
+  it('should not render developer roles when the UI flag `developer_and_email_roles` is disabled', () => {
+    expect(subject({ showDeveloperRoles: false })
       .find('RadioGroup[title="Role"]')
       .prop('showDeveloperRoles'))
-      .toBe(showDeveloperRoles);
-  },
-  {
-    enabled: { showDeveloperRoles: true },
-    disabled: { showDeveloperRoles: false }
-  }
-  );
+      .toBe(false);
+  });
 
   it('should render super user', () => {
     expect(findOption(subject({ allowSuperUser: true }), ROLES.SUPERUSER)).not.toBeNull();

@@ -21,7 +21,7 @@ exports[`Component: RoleRadioGroup should render the RadioGroup 1`] = `
     Array [
       Object {
         "disabled": false,
-        "helpText": "All permission. The only user that can manage users, security, and billing settings.",
+        "helpText": "All permissions. The only user that can manage users, security, and billing settings.",
         "label": <strong>
           Admin
         </strong>,
