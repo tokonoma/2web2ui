@@ -24,13 +24,6 @@ exports[`Signals Spam Trap Page bar chart props renders tooltip content 1`] = `
 </Fragment>
 `;
 
-exports[`Signals Spam Trap Page local state handles date select 1`] = `
-<SpamTrapActions
-  date="2017-01-02"
-  percent={0.5}
-/>
-`;
-
 exports[`Signals Spam Trap Page renders correctly 1`] = `
 <SignalsPage
   breadcrumbAction={
@@ -78,7 +71,7 @@ exports[`Signals Spam Trap Page renders correctly 1`] = `
               "top": 12,
             }
           }
-          onClick={[Function]}
+          onClick={[MockFunction]}
           selected="2017-01-01"
           timeSeries={
             Array [

@@ -13,6 +13,7 @@ import Page from './components/SignalsPage';
 import Tabs from './components/engagement/Tabs';
 import TooltipMetric from './components/charts/tooltip/TooltipMetric';
 import withEngagementRecencyDetails from './containers/EngagementRecencyDetailsContainer';
+import withDateSelection from './containers/withDateSelection';
 import { ENGAGEMENT_RECENCY_COHORTS, ENGAGEMENT_RECENCY_INFO } from './constants/info';
 import { AccessControl } from 'src/components/auth';
 import { Loading } from 'src/components';
@@ -28,35 +29,6 @@ import cohorts from './constants/cohorts';
 import styles from './DetailsPages.module.scss';
 
 export class EngagementRecencyPage extends Component {
-  state = {
-    selectedDate: null
-  }
-
-  componentDidMount() {
-    const { selected } = this.props;
-
-    if (selected) {
-      this.setState({ selectedDate: selected });
-    }
-  }
-
-  componentDidUpdate(prevProps) {
-    const { data } = this.props;
-    const { selectedDate } = this.state;
-
-    const dataSetChanged = prevProps.data !== data;
-    let selectedDataByDay = _.find(data, ['date', selectedDate]);
-
-    // Select last date in time series
-    if (dataSetChanged && !selectedDataByDay) {
-      selectedDataByDay = _.last(data);
-      this.setState({ selectedDate: selectedDataByDay.date });
-    }
-  }
-
-  handleDateSelect = (node) => {
-    this.setState({ selectedDate: _.get(node, 'payload.date') });
-  }
 
   getYAxisProps = () => ({
     tickFormatter: (tick) => `${roundToPlaces(tick * 100, 0)}%`,
@@ -87,8 +59,7 @@ export class EngagementRecencyPage extends Component {
   )
 
   renderContent = () => {
-    const { data = [], facet, facetId, loading, gap, empty, error, subaccountId } = this.props;
-    const { selectedDate } = this.state;
+    const { data = [], empty, error, facet, facetId, gap, handleDateSelect, loading, selectedDate, subaccountId } = this.props;
     const selectedCohorts = _.find(data, ['date', selectedDate]) || {};
     let chartPanel;
 
@@ -125,7 +96,7 @@ export class EngagementRecencyPage extends Component {
               <div className='LiftTooltip'>
                 <BarChart
                   gap={gap}
-                  onClick={this.handleDateSelect}
+                  onClick={handleDateSelect}
                   selected={selectedDate}
                   timeSeries={data}
                   tooltipContent={this.getTooltipContent}
@@ -177,4 +148,4 @@ export class EngagementRecencyPage extends Component {
   }
 }
 
-export default withEngagementRecencyDetails(EngagementRecencyPage);
+export default withEngagementRecencyDetails(withDateSelection(EngagementRecencyPage));

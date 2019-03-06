@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { getEngagementRecency } from 'src/actions/signals';
 import { selectEngagementRecencyDetails, getSelectedDateFromRouter } from 'src/selectors/signals';
 import { getDateTicks } from 'src/helpers/date';
+import { getDisplayName } from 'src/helpers/hoc';
 
 export class WithEngagementRecencyDetails extends Component {
   componentDidMount() {
@@ -62,7 +63,7 @@ function withEngagementRecencyDetails(WrappedComponent) {
     <WithEngagementRecencyDetails {...props} component={WrappedComponent} />
   );
 
-  Wrapper.displayName = `withEngagementRecencyDetails(${WrappedComponent.displayName || WrappedComponent.name || 'Component'})`;
+  Wrapper.displayName = getDisplayName(WrappedComponent, 'withEngagementRecencyDetails');
 
   const mapStateToProps = (state, props) => ({
     ...selectEngagementRecencyDetails(state, props),

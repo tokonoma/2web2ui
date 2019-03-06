@@ -50,18 +50,6 @@ exports[`Signals Engagement Recency Page bar chart props renders tooltip content
 </Fragment>
 `;
 
-exports[`Signals Engagement Recency Page local state handles date select 1`] = `
-<EngagementRecencyActions
-  cohorts={
-    Object {
-      "c_total": 10,
-      "date": "2017-01-02",
-    }
-  }
-  date="2017-01-02"
-/>
-`;
-
 exports[`Signals Engagement Recency Page renders correctly 1`] = `
 <SignalsPage
   breadcrumbAction={
@@ -114,7 +102,7 @@ exports[`Signals Engagement Recency Page renders correctly 1`] = `
                 "top": 12,
               }
             }
-            onClick={[Function]}
+            onClick={[MockFunction]}
             selected="2017-01-02"
             stroke="#000"
             tooltipContent={[Function]}

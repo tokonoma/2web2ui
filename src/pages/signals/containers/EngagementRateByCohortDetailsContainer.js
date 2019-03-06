@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { getEngagementRateByCohort } from 'src/actions/signals.fake';
 import { selectEngagementRateByCohortDetails, getSelectedDateFromRouter } from 'src/selectors/signals';
 import { getDateTicks } from 'src/helpers/date';
+import { getDisplayName } from 'src/helpers/hoc';
 
 export class WithEngagementRateByCohortDetails extends Component {
   componentDidMount() {
@@ -59,7 +60,7 @@ function withEngagementRateByCohortDetails(WrappedComponent) {
     <WithEngagementRateByCohortDetails {...props} component={WrappedComponent} />
   );
 
-  Wrapper.displayName = `withEngagementRateByCohortDetails(${WrappedComponent.displayName || WrappedComponent.name || 'Component'})`;
+  Wrapper.displayName = getDisplayName(WrappedComponent, 'withEngagementRateByCohortDetails');
 
   const mapStateToProps = (state, props) => ({
     ...selectEngagementRateByCohortDetails(state, props),

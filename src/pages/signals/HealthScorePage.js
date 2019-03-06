@@ -10,6 +10,7 @@ import TooltipMetric from './components/charts/tooltip/TooltipMetric';
 import DateFilter from './components/filters/DateFilter';
 import { HEALTH_SCORE_INFO, HEALTH_SCORE_COMPONENT_INFO, INJECTIONS_INFO, HEALTH_SCORE_COMPONENTS } from './constants/info';
 import withHealthScoreDetails from './containers/HealthScoreDetailsContainer';
+import withDateSelection from './containers/withDateSelection';
 import { Loading } from 'src/components';
 import Callout from 'src/components/callout';
 import OtherChartsHeader from './components/OtherChartsHeader';
@@ -24,40 +25,20 @@ import styles from './DetailsPages.module.scss';
 
 export class HealthScorePage extends Component {
   state = {
-    selectedDate: null,
     selectedComponent: null
   }
 
-  componentDidMount() {
-    const { selected } = this.props;
-
-    if (selected) {
-      this.setState({ selectedDate: selected });
-    }
-  }
-
   componentDidUpdate(prevProps) {
-    const { data } = this.props;
-    const { selectedDate } = this.state;
+    const { data, selectedDate } = this.props;
 
     const dataSetChanged = prevProps.data !== data;
-    let selectedDataByDay = _.find(data, ['date', selectedDate]);
-
-    // Select last date in time series
-    if (dataSetChanged && !selectedDataByDay) {
-      selectedDataByDay = _.last(data);
-      this.setState({ selectedDate: selectedDataByDay.date });
-    }
+    const selectedDataByDay = _.find(data, ['date', selectedDate]);
 
     // Select first component weight type
     if (dataSetChanged) {
       const firstComponentType = _.get(selectedDataByDay, 'weights[0].weight_type');
       this.setState({ selectedComponent: firstComponentType });
     }
-  }
-
-  handleDateSelect = (node) => {
-    this.setState({ selectedDate: _.get(node, 'payload.date') });
   }
 
   handleComponentSelect = (node) => {
@@ -73,8 +54,8 @@ export class HealthScorePage extends Component {
   }
 
   renderContent = () => {
-    const { data = [], loading, gap, empty, error } = this.props;
-    const { selectedDate, selectedComponent } = this.state;
+    const { data = [], handleDateSelect, loading, gap, empty, error, selectedDate } = this.props;
+    const { selectedComponent } = this.state;
 
     const selectedWeights = _.get(_.find(data, ['date', selectedDate]), 'weights', []);
     const selectedWeightsAreEmpty = selectedWeights.every(({ weight }) => weight === null);
@@ -107,7 +88,7 @@ export class HealthScorePage extends Component {
               <Fragment>
                 <BarChart
                   gap={gap}
-                  onClick={this.handleDateSelect}
+                  onClick={handleDateSelect}
                   selected={selectedDate}
                   timeSeries={data}
                   tooltipContent={({ payload = {}}) => (
@@ -123,7 +104,7 @@ export class HealthScorePage extends Component {
                 <BarChart
                   gap={gap}
                   height={190}
-                  onClick={this.handleDateSelect}
+                  onClick={handleDateSelect}
                   selected={selectedDate}
                   timeSeries={data}
                   tooltipContent={({ payload = {}}) => (
@@ -141,7 +122,7 @@ export class HealthScorePage extends Component {
                     <BarChart
                       gap={gap}
                       height={190}
-                      onClick={this.handleDateSelect}
+                      onClick={handleDateSelect}
                       selected={selectedDate}
                       timeSeries={dataForSelectedWeight}
                       tooltipContent={({ payload = {}}) => (
@@ -215,4 +196,4 @@ export class HealthScorePage extends Component {
   }
 }
 
-export default withHealthScoreDetails(HealthScorePage);
+export default withHealthScoreDetails(withDateSelection(HealthScorePage));

@@ -37,26 +37,6 @@ exports[`Signals Health Score Page bar chart props renders tooltip content for s
 
 exports[`Signals Health Score Page bar chart props renders y label content for component weights 1`] = `"Engaged Recipients"`;
 
-exports[`Signals Health Score Page local state handles date select 1`] = `
-<HealthScoreActions
-  date="2017-01-02"
-  weights={
-    Array [
-      Object {
-        "weight": 0.8,
-        "weight_type": "List Quality",
-        "weight_value": 0.25,
-      },
-      Object {
-        "weight": -0.8,
-        "weight_type": "Other bounces",
-        "weight_value": 0.25,
-      },
-    ]
-  }
-/>
-`;
-
 exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
 <SignalsPage
   breadcrumbAction={
@@ -99,7 +79,7 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
               "top": 12,
             }
           }
-          onClick={[Function]}
+          onClick={[MockFunction]}
           selected="2017-01-01"
           timeSeries={
             Array [
@@ -175,7 +155,7 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
               "top": 12,
             }
           }
-          onClick={[Function]}
+          onClick={[MockFunction]}
           selected="2017-01-01"
           timeSeries={
             Array [
@@ -248,7 +228,7 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
               "top": 12,
             }
           }
-          onClick={[Function]}
+          onClick={[MockFunction]}
           selected="2017-01-01"
           timeSeries={
             Array [
@@ -440,7 +420,7 @@ exports[`Signals Health Score Page renders empty weights 1`] = `
               "top": 12,
             }
           }
-          onClick={[Function]}
+          onClick={[MockFunction]}
           selected="2017-01-01"
           timeSeries={
             Array [
@@ -489,7 +469,7 @@ exports[`Signals Health Score Page renders empty weights 1`] = `
               "top": 12,
             }
           }
-          onClick={[Function]}
+          onClick={[MockFunction]}
           selected="2017-01-01"
           timeSeries={
             Array [

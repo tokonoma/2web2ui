@@ -12,6 +12,7 @@ import Page from './components/SignalsPage';
 import Tabs from './components/engagement/Tabs';
 import TooltipMetric from './components/charts/tooltip/TooltipMetric';
 import withEngagementRateByCohortDetails from './containers/EngagementRateByCohortDetailsContainer';
+import withDateSelection from './containers/withDateSelection';
 import { ENGAGEMENT_RECENCY_COHORTS } from './constants/info';
 import { Loading } from 'src/components';
 import { roundToPlaces } from 'src/helpers/units';
@@ -24,35 +25,6 @@ import cohorts from './constants/cohorts';
 import styles from './DetailsPages.module.scss';
 
 export class EngagementRateByCohortPage extends Component {
-  state = {
-    selectedDate: null
-  }
-
-  componentDidMount() {
-    const { selected } = this.props;
-
-    if (selected) {
-      this.setState({ selectedDate: selected });
-    }
-  }
-
-  componentDidUpdate(prevProps) {
-    const { data } = this.props;
-    const { selectedDate } = this.state;
-
-    const dataSetChanged = prevProps.data !== data;
-    let selectedDataByDay = _.find(data, ['date', selectedDate]);
-
-    // Select last date in time series
-    if (dataSetChanged && !selectedDataByDay) {
-      selectedDataByDay = _.last(data);
-      this.setState({ selectedDate: selectedDataByDay.date });
-    }
-  }
-
-  handleDateSelect = (node) => {
-    this.setState({ selectedDate: _.get(node, 'payload.date') });
-  }
 
   getYAxisProps = () => ({
     tickFormatter: (tick) => `${roundToPlaces(tick, 0)}%`
@@ -81,8 +53,7 @@ export class EngagementRateByCohortPage extends Component {
   )
 
   renderContent = () => {
-    const { data = [], facet, facetId, loading, empty, error, subaccountId } = this.props;
-    const { selectedDate } = this.state;
+    const { data = [], facet, facetId, handleDateSelect, loading, empty, error, selectedDate, subaccountId } = this.props;
     const selectedCohorts = _.find(data, ['date', selectedDate]) || {};
     let chartPanel;
 
@@ -111,7 +82,7 @@ export class EngagementRateByCohortPage extends Component {
               <div className='LiftTooltip'>
                 <LineChart
                   height={300}
-                  onClick={this.handleDateSelect}
+                  onClick={handleDateSelect}
                   selected={selectedDate}
                   lines={data}
                   lineType='natural'
@@ -164,4 +135,4 @@ export class EngagementRateByCohortPage extends Component {
   }
 }
 
-export default withEngagementRateByCohortDetails(EngagementRateByCohortPage);
+export default withEngagementRateByCohortDetails(withDateSelection(EngagementRateByCohortPage));

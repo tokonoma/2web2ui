@@ -21,10 +21,12 @@ describe('Signals Engagement Recency Page', () => {
       facetId: 'test.com',
       facet: 'sending-domain',
       data: [{ c_total: 10 }],
+      handleDateSelect: jest.fn(),
       gap: 0.25,
       loading: false,
       empty: false,
-      xTicks: [1,2]
+      xTicks: [1,2],
+      selectedDate: '2017-01-02'
     };
     wrapper = shallow(<EngagementRateByCohortPage {...props}/>);
     wrapper.setProps({ data });
@@ -47,34 +49,6 @@ describe('Signals Engagement Recency Page', () => {
   it('renders error correctly', () => {
     wrapper.setProps({ error: { message: 'error message' }});
     expect(wrapper).toMatchSnapshot();
-  });
-
-  describe('local state', () => {
-    it('handles date select', () => {
-      wrapper.find('LineChart').simulate('click', { payload: { date: '2017-01-02' }});
-      expect(wrapper.find('LineChart').prop('selected')).toEqual('2017-01-02');
-      expect(wrapper.find('EngagementRecencyActions')).toMatchSnapshot();
-    });
-
-    it('sets selected date on mount if provided one', () => {
-      wrapper = shallow(<EngagementRateByCohortPage {...props} selected='initial-selected'/>);
-      expect(wrapper.find('LineChart').prop('selected')).toEqual('initial-selected');
-      expect(wrapper.find('EngagementRecencyActions').prop('date')).toEqual('initial-selected');
-    });
-
-    it('uses last selected date if selected date is not in data', () => {
-      wrapper = shallow(<EngagementRateByCohortPage {...props} loading={true} selected='initial-selected'/>);
-      wrapper.setProps({ data: [1, { date: 'last-date' }], loading: false });
-      expect(wrapper.find('LineChart').prop('selected')).toEqual('last-date');
-      expect(wrapper.find('EngagementRecencyActions').prop('date')).toEqual('last-date');
-    });
-
-    it('does not use last selected date if selected date is in data', () => {
-      wrapper = shallow(<EngagementRateByCohortPage {...props} selected='first-date'/>);
-      wrapper.setProps({ data: [{ date: 'first-date' }, { date: 'last-date' }]});
-      expect(wrapper.find('LineChart').prop('selected')).toEqual('first-date');
-      expect(wrapper.find('EngagementRecencyActions').prop('date')).toEqual('first-date');
-    });
   });
 
   describe('bar chart props', () => {
