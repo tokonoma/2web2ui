@@ -5,6 +5,7 @@ import withAlertsEdit from './containers/EditPage.container';
 import AlertForm from './components/AlertForm';
 import { Loading, DeleteModal, ApiErrorBanner } from 'src/components';
 import _ from 'lodash';
+import formatActionData from './helpers/formatActionData';
 
 export class EditPage extends Component {
   state = {
@@ -13,6 +14,14 @@ export class EditPage extends Component {
 
   componentDidMount() {
     this.props.getAlert({ id: this.props.id });
+  }
+
+  componentDidUpdate() {
+    const { error } = this.props;
+    if (error) {
+      this.props.history.push('/alerts-new');
+      this.props.showAlert({ type: 'error', message: `Alert ${this.props.id} does not exist` });
+    }
   }
 
   toggleDelete = () => {
@@ -33,36 +42,15 @@ export class EditPage extends Component {
     to the updateAlert action.
   */
   handleUpdate = async (values) => {
-    const { email_addresses, alert_metric, threshold, assignTo, subaccount = '' } = values;
     const { getAlert, updateAlert, showAlert } = this.props;
-    const splitAddresses = _.split(email_addresses,',');
-    values.email_addresses = _.map(splitAddresses, (splitAddress) => _.trim(splitAddress));
-    switch (assignTo) {
-      case 'master':
-        values.alert_subaccount = 0;
-        break;
-      case 'subaccount':
-        values.alert_subaccount = parseInt(subaccount.id);
-        break;
-      case 'all':
-      default:
-        values.alert_subaccount = -1;
-    }
-
-    switch (alert_metric) {
-      case 'monthly_sending_limit':
-        threshold.error.target = parseInt(threshold.error.target);
-        break;
-      default:
-        threshold.error.target = parseFloat(threshold.error.target);
-    }
+    const alertBody = formatActionData(values);
 
     await updateAlert({
-      id: values.id,
-      data: _.omit(values, 'id', 'subaccount', 'assignTo')
+      id: alertBody.id,
+      data: _.omit(alertBody, 'id', 'subaccount', 'assignTo')
     });
 
-    showAlert({ type: 'success', message: 'Update Successful' });
+    showAlert({ type: 'success', message: 'Alert updated' });
     getAlert({ id: this.props.match.params.id });
   }
 
@@ -85,7 +73,6 @@ export class EditPage extends Component {
 
   render() {
     const { error, loading, deletePending } = this.props;
-    //console.log(this.props);
 
     if (loading) {
       return <Loading />;
@@ -100,7 +87,7 @@ export class EditPage extends Component {
         <DeleteModal
           open={this.state.showDeleteModal}
           title='Are you sure you want to delete this alert?'
-          content={<p>The alert "<strong>{this.props.alert.name}</strong>" will be permanently removed. This cannot be undone.</p>}
+          content={<p>The alert will be permanently removed. This cannot be undone.</p>}
           onDelete={this.handleDelete}
           onCancel={this.toggleDelete}
           isPending={deletePending}
