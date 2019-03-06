@@ -39,7 +39,6 @@ export class AlertForm extends Component {
       alert_metric = '',
       facet_name,
       handleSubmit,
-      enabled,
       newAlert,
       change
     } = this.props;
@@ -149,7 +148,7 @@ export class AlertForm extends Component {
             {isSignals && <br/>}
             <label>Criteria</label>
             <Grid>
-              <Grid.Column xs={5} md={3}>
+              <Grid.Column xs={6} md={4}>
                 <div>
                   <Field
                     name='threshold.error.target'
@@ -165,7 +164,7 @@ export class AlertForm extends Component {
                     }
                     disabled={submitting}
                     prefix={alert_metric !== 'signals_health_threshold' ? 'Above' : ''}
-                    suffix={alert_metric !== 'signals_health_threshold' ? '%' : ''}
+                    suffix={!isThreshold ? '%' : ''}
                     validate={getTargetValidation()}
                     style={{
                       textAlign: 'right'
@@ -191,7 +190,7 @@ export class AlertForm extends Component {
                 <div>
                   <Field
                     name='enabled'
-                    checked={enabled}
+                    type='checkbox'
                     component={ToggleBlock}
                     parse={this.parseToggle}
                     disabled={submitting}
