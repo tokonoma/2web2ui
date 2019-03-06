@@ -1,23 +1,17 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { withRouter } from 'react-router-dom';
-import { Panel, Button, UnstyledLink } from '@sparkpost/matchbox';
-import { Page } from '@sparkpost/matchbox';
-import { Loading, DeleteModal, ApiErrorBanner } from 'src/components';
-import IPForm from './components/IPForm';
-import { Field, reduxForm } from 'redux-form';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { Link, withRouter } from "react-router-dom";
+import { Page } from "@sparkpost/matchbox";
 
-import { showAlert } from 'src/actions/globalAlert';
-import { listPools, getPool, updatePool, deletePool } from 'src/actions/ipPools';
-import { updateSendingIp } from 'src/actions/sendingIps';
-import { shouldShowIpPurchaseCTA, selectIpForCurrentPool } from 'src/selectors/ipPools';
+import { ApiErrorBanner, Loading } from "src/components";
+import IPForm from "./components/IPForm";
+import { showAlert } from "src/actions/globalAlert";
+import { getPool, listPools, updatePool } from "src/actions/ipPools";
+import { updateSendingIp } from "src/actions/sendingIps";
+import { selectCurrentPool, selectIpForCurrentPool } from "src/selectors/ipPools";
 
-import { decodeIp } from 'src/helpers/ipNames';
-import isDefaultPool from './helpers/defaultPool';
-import { required } from '../../helpers/validation';
-import { SendingDomainTypeaheadWrapper, TextFieldWrapper } from '../../components';
-import { configFlag } from '../../helpers/conditions/config';
+import { decodeIp } from "src/helpers/ipNames";
+import isDefaultPool from "./helpers/defaultPool";
 
 
 export class EditIPPage extends Component {
@@ -29,18 +23,22 @@ export class EditIPPage extends Component {
     this.setState({ showDelete: !this.state.showDelete });
   };
 
-  onUpdatePool = (values) => {
-    const { updateSendingIp, updatePool, showAlert, history, match: { params: { id }}} = this.props;
+  onUpdateIp = (values) => {
+    const { updateSendingIp, updatePool, showAlert, history, match: { params: { id } } } = this.props;
 
+    console.log(values);
+
+    debugger;
+    // return Promise.all([]);
     /**
      * Pick out the IPs whose pool assignment is not the current pool ergo
      * have been reassigned by the user.
      */
     const changedIpKeys = Object.keys(values).filter((key) =>
-      key !== 'name' && key !== 'signing_domain' && values[key] !== id);
+      key !== "name" && key !== "signing_domain" && values[key] !== id);
 
     // if signing_domain is not set, then we want to clear it out to empty string.
-    values.signing_domain = values.signing_domain || '';
+    values.signing_domain = values.signing_domain || "";
 
     // Update each changed sending IP
     return Promise.all(changedIpKeys.map((ipKey) =>
@@ -53,23 +51,11 @@ export class EditIPPage extends Component {
       })
       .then((res) => {
         showAlert({
-          type: 'success',
+          type: "success",
           message: `Updated IP pool ${id}.`
         });
-        history.push('/account/ip-pools');
+        history.push("/account/ip-pools");
       });
-  };
-
-  onDeletePool = () => {
-    const { deletePool, showAlert, history, match: { params: { id }}} = this.props;
-
-    return deletePool(id).then(() => {
-      showAlert({
-        type: 'success',
-        message: `Deleted IP pool ${id}.`
-      });
-      history.push('/account/ip-pools');
-    });
   };
 
   loadDependentData = () => {
@@ -92,19 +78,19 @@ export class EditIPPage extends Component {
   }
 
   renderForm() {
-    const { error, currentIp, currentPool, allPools } = this.props;
+    const { error, currentIp, currentPool } = this.props;
     if (error) {
       return this.renderError();
     }
 
-    return <IPForm onSubmit={this.onUpdatePool} currentIp={currentIp} currentPool={currentPool} allPools={allPools} />;
+    return <IPForm onSubmit={this.onUpdateIp}/>;
   }
 
   render() {
-    const { loading, currentPool, currentIp, showPurchaseCTA } = this.props;
+    const { loading, currentPool, currentIp } = this.props;
 
     if (loading || !currentIp) {
-      return <Loading />;
+      return <Loading/>;
     }
 
     const breadcrumbAction = {
@@ -119,37 +105,26 @@ export class EditIPPage extends Component {
         breadcrumbAction={breadcrumbAction}
       >
         {this.renderForm()}
-
-        <DeleteModal
-          open={this.state.showDelete}
-          title='Are you sure you want to delete this Sending IP Pool?'
-          content={<p>IPs in this pool will be re-assigned to your Default pool.</p>}
-          onCancel={this.toggleDelete}
-          onDelete={this.onDeletePool}
-        />
       </Page>
     );
   }
 }
 
 const mapStateToProps = (state, props) => {
-  const { getLoading, getError, listLoading, listError, pool, list } = state.ipPools;
+  const { getLoading, getError, listLoading, listError } = state.ipPools;
 
   return {
+    currentIp: selectIpForCurrentPool(state, props),
+    currentPool: selectCurrentPool(state),
     loading: getLoading || listLoading,
     error: listError || getError,
-    currentPool: pool,
-    allPools: list,
     listError,
-    getError,
-    showPurchaseCTA: shouldShowIpPurchaseCTA(state),
-    currentIp: selectIpForCurrentPool(state, props)
+    getError
   };
 };
 
 export default withRouter(connect(mapStateToProps, {
   updatePool,
-  deletePool,
   getPool,
   listPools,
   updateSendingIp,
