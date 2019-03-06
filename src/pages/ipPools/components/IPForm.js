@@ -34,14 +34,9 @@ export class PoolForm extends Component {
     ];
   };
 
-  handleModalCancel = () => {
+  revertAutoWarmupToggling = () => {
     const { change, ipAutoWarmupEnabled } = this.props;
-    //revert the last action
     ipAutoWarmupEnabled ? change("auto_warmup_enabled", false) : change("auto_warmup_enabled", true);
-    this.setState({ warningModal: false });
-  };
-
-  handleModalConfirm = () => {
     this.setState({ warningModal: false });
   };
 
@@ -121,8 +116,8 @@ export class PoolForm extends Component {
           open={this.state.warningModal}
           title={`Are you sure you want to ${ipAutoWarmupEnabled ? "enable" : "disable"} Auto IP Warmup?`}
           content={<p>{confirmationModalText}</p>}
-          onCancel={this.handleModalCancel}
-          onConfirm={this.handleModalConfirm}
+          onCancel={this.revertAutoWarmupToggling}
+          onConfirm={() => this.setState({ warningModal: false })}
           confirmVerb={ipAutoWarmupEnabled ? "Yes, I want to turn ON Auto IP Warmup" : "Yes, I want to turn OFF Auto IP Warmup"}
         />
       </Panel>
