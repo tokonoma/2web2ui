@@ -7,7 +7,7 @@ import GoogleTagManager from 'src/components/googleTagManager/GoogleTagManager';
 import Pendo from 'src/components/pendo/Pendo';
 import Layout from 'src/components/layout/Layout';
 import ErrorBoundary from 'src/components/errorBoundaries/ErrorBoundary';
-import AppRoutes from 'src/AppRoutes';
+import AppRoutes from 'src/components/appRoutes';
 
 import config from 'src/config';
 

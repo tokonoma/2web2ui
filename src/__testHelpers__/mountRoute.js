@@ -6,13 +6,23 @@ import { Provider } from 'react-redux';
 
 import configureStore from 'src/store';
 
-import AppRoutes from 'src/AppRoutes';
+import AppRoutes from 'src/components/appRoutes';
 import { authenticate } from 'src/actions/auth';
 import { initializeAccessControl } from 'src/actions/accessControl';
 
 import asyncFlush from 'src/__testHelpers__/asyncFlush';
 
-export default async function renderRoute(route, { authenticated = true } = {}) {
+async function forceUpdate(wrapper) {
+  await asyncFlush();
+  wrapper.update();
+}
+
+async function simulate(wrapper, selector, eventName) {
+  wrapper.find(selector).simulate(eventName);
+  await forceUpdate(wrapper);
+}
+
+export default async function mountRoute(route, { authenticated = true } = {}) {
   const store = configureStore();
   const axiosMock = axios.create();
 
@@ -21,7 +31,7 @@ export default async function renderRoute(route, { authenticated = true } = {}) 
     await store.dispatch(initializeAccessControl());
   }
 
-  const mounted = mount(
+  const wrapper = mount(
     <Provider store={store}>
       <MemoryRouter initialEntries={[route]}>
         <AppRoutes />
@@ -30,15 +40,13 @@ export default async function renderRoute(route, { authenticated = true } = {}) 
   );
 
   await asyncFlush();
-  mounted.update();
+  wrapper.update();
 
   return {
-    mounted,
-    forceUpdate: async () => {
-      await asyncFlush();
-      mounted.update();
-    },
-    store,
+    wrapper,
+    find: wrapper.find.bind(wrapper),
+    simulate: (...rest) => simulate(wrapper, ...rest),
+    forceUpdate: (...rest) => forceUpdate(wrapper, ...rest),
     axiosMock
   };
 }
