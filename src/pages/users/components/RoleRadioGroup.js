@@ -11,28 +11,14 @@ const ADMIN_ROLE = {
   label: <strong>Admin</strong>,
   value: ROLES.ADMIN,
   helpText:
-    'All permission. The only user that can manage users, security, and billing settings.'
-};
-
-const DEVELOPER_ROLE = {
-  label: <strong>Developer</strong>,
-  value: ROLES.DEVELOPER,
-  helpText:
-    'Setup and development user. Full access to API Keys, and all other email related setup, sending, and reporting features.'
-};
-
-const EMAIL_ROLE = {
-  label: <strong>Email</strong>,
-  value: ROLES.EMAIL,
-  helpText:
-    'Content and deliverability management user. Has access to Templates, Recipients Lists, Suppressions, AB Testing, IP Pools, and all reporting features.'
+    'Has access to all features, including the ability to invite additional users.'
 };
 
 const REPORTING_ROLE = {
   label: <strong>Reporting</strong>,
   value: ROLES.REPORTING,
   helpText:
-    'Data analytics user. Has access to all reporting features. No access to any account or feature settings.'
+    'Has access to reporting and read-only access to templates.'
 };
 
 const SUPERUSER_ROLE = {
@@ -63,8 +49,6 @@ export class RoleRadioGroup extends React.Component {
 
     return [
       ADMIN_ROLE,
-      DEVELOPER_ROLE,
-      EMAIL_ROLE,
       {
         ...REPORTING_ROLE,
         children: allowSubaccountAssignment &&
@@ -85,7 +69,7 @@ export class RoleRadioGroup extends React.Component {
     const roles = this.renderRoles();
     const options = roles.map((role) => ({ ...role, disabled }));
 
-    return <RadioGroup title="Role" options={options} {...rest} />;
+    return <RadioGroup title="Role" grid={{ xs: 12, sm: 12, md: 6 }} options={options} {...rest} />;
   }
 }
 
