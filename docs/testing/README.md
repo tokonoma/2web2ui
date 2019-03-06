@@ -9,7 +9,7 @@ These are the notable tools used to get the job done.
 
  * [Jest](https://jestjs.io/) - This is the test runner (e.g. mocha) that includes an assertion library (e.g. chai), a stubbing/mocking library (e.g. sinon), and test coverage reports (e.g. istanbul).
  * [Enzyme](https://airbnb.io/enzyme/) - This is a utility used to mimic rendering, simulate events, and inspect our components.
- * [jest-enzyme](https://github.com/FormidableLabs/enzyme-matchers/tree/master/packages/jest-enzyme#assertions) - This is an assertion library that provides enzyme specific matchers (e.g. `toHaveProp`).
+ * [jest-enzyme](https://github.com/FormidableLabs/enzyme-matchers/tree/master/packages/jest-enzyme#assertions) - This is an assertion library that provides enzyme specific matchers (e.g. `toExist`, `toHaveProp`, etc.).
  * [Coveralls](https://coveralls.io/) - This is a service used to provide [test coverage analysis](https://github.com/SparkPost/2web2ui/pull/834#issuecomment-466549343) in your pull requests.
 
 
@@ -28,8 +28,9 @@ These are general rules to follow.
  * Deterministic Test Suite
  * Unit Test First
  * [Sociable Isolation](https://martinfowler.com/articles/practical-test-pyramid.html#SociableAndSolitary) - mock imports in unit tests at your own discretion
- * Explicit, Not Implicit - avoid using [manual mocks](https://jestjs.io/docs/en/manual-mocks)
- * Assert Outputs Not Internals
+ * Explicit, Not Implicit - use `jest.mock` instead of [manual mocks](https://jestjs.io/docs/en/manual-mocks)
+ * Assert Outputs Not Internals - avoid testing private functions; inspect how component state is used in render instead of testing it directly
+ * Inspect More Than Snapshot - avoid using `toMatchSnapshot` for every test case, reviewing snapshots can be error prone and exhausting
 
 
 ## Patterns
