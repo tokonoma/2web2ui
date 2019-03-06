@@ -12,6 +12,14 @@ These are the notable tools used to get the job done.
  * [jest-enzyme](https://github.com/FormidableLabs/enzyme-matchers/tree/master/packages/jest-enzyme#assertions) - This is an assertion library that provides enzyme specific matchers (e.g. `toExist`, `toHaveProp`, etc.).
  * [Coveralls](https://coveralls.io/) - This is a service used to provide [test coverage analysis](https://github.com/SparkPost/2web2ui/pull/834#issuecomment-466549343) in your pull requests.
 
+### Running Jest
+
+To run our test suite, use one of our npm scripts:
+
+ * `test` - runs tests in watch mode, use the "Watch Usage" menu to run specific test(s) or specify with a pattern or filename as an argument (e.g. `npm test -- src/__integration__`)
+ * `test-ci` - runs all tests and reports coverage specifically for a continuous integration build, used for our pull request builds
+ * `test-coverage` - runs all tests and reports coverage
+
 
 ## Layers
 
@@ -19,6 +27,8 @@ As described in [The Test Pyramid](https://martinfowler.com/articles/practical-t
 
  * Unit
  * [Integration](../../src/__integration__/README.md)
+
+Unit tests live alongside source files in a `tests/` directory as `.test.js` files. For example, `src/page/auth/AuthPage.js` component has a `src/page/auth/tests/AuthPage.test.js` unit test file.  Integration tests live alone under `src/__integration__`.
 
 
 ## Principles
