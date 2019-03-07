@@ -1,11 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Page: Alerts Create should render error when list fails to load 1`] = `
-<ApiErrorBanner
-  errorDetails="this failed"
-  message="Sorry, we seem to have had some trouble loading the create alert page."
-/>
-`;
+exports[`Page: Alerts Create should render error when list fails to load 1`] = `null`;
 
 exports[`Page: Alerts Create should render happy path 1`] = `
 <Page
@@ -22,6 +17,7 @@ exports[`Page: Alerts Create should render happy path 1`] = `
   <withRouter(Connect(ReduxForm))
     newAlert={true}
     onSubmit={[Function]}
+    submitting={false}
   />
 </Page>
 `;

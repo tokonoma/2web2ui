@@ -21,11 +21,6 @@ describe('Page: Alerts Create', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should render loading component when loading data', () => {
-    wrapper.setProps({ loading: true });
-    expect(wrapper.find('Loading')).toHaveLength(1);
-  });
-
   it('should render error when list fails to load', () => {
     wrapper.setProps({ error: { message: 'this failed' }});
     expect(wrapper.find('ApiErrorBanner')).toMatchSnapshot();
