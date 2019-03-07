@@ -1,8 +1,9 @@
 @import '~@sparkpost/matchbox/src/styles/config.scss';
 
 .TooltipWrapper {
+  position: absolute;
   background: color(gray, 1);
-  box-shadow: shadow(deep);
+  box-shadow: shadow(deep), shadow(deeper);
   border-radius: border-radius(large);
   user-select: none;
 }

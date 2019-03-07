@@ -102,6 +102,7 @@ class BarChart extends Component {
               isAnimationActive={false}
               content={<TooltipWrapper children={tooltipContent} />}
               width={tooltipWidth}
+              position={{ x: 0, y: 0 }}
             />
           )}
           {this.renderBars()}

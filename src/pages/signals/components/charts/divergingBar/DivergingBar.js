@@ -89,6 +89,7 @@ class DivergingBar extends Component {
             cursor={false}
             isAnimationActive={false}
             content={<TooltipWrapper children={tooltipContent} />}
+            position={{ x: 0, y: 0 }}
           />
         </BarChart>
       </ResponsiveContainer>
