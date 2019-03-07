@@ -104,7 +104,7 @@ export class AlertForm extends Component {
               options={getOptions(METRICS)}
               disabled={!newAlert}
               validate={required}
-              helpText={!newAlert && 'This assignment is permanent.'}
+              helpText={'This assignment is permanent.'}
             />
             {isSignals &&
             <Field
@@ -124,7 +124,7 @@ export class AlertForm extends Component {
             <label>Facet</label>}
             {isSignals &&
             <Grid>
-              <Grid.Column xs={6} md={4}>
+              <Grid.Column sm={8} md={7} lg={5}>
                 <div>
                   <Field
                     name='facet_value'
