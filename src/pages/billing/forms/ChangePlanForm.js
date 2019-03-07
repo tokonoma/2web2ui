@@ -4,14 +4,14 @@ import { connect } from 'react-redux';
 import { reduxForm, formValueSelector } from 'redux-form';
 import { withRouter } from 'react-router-dom';
 import qs from 'query-string';
-import { fetch as fetchAccount, getPlans } from 'src/actions/account';
+import { fetch as fetchAccount, getPlans, getBillingInfo } from 'src/actions/account';
 import { updateSubscription, getBillingCountries, verifyPromoCode, clearPromoCode } from 'src/actions/billing';
 import billingCreate from 'src/actions/billingCreate';
 import billingUpdate from 'src/actions/billingUpdate';
 import { showAlert } from 'src/actions/globalAlert';
 import { changePlanInitialValues } from 'src/selectors/accountBillingForms';
 import {
-  currentPlanSelector, canUpdateBillingInfoSelector, selectVisiblePlans
+  currentPlanSelector, canUpdateBillingInfoSelector, selectVisiblePlans, selectAccountBilling
 } from 'src/selectors/accountBillingInfo';
 import { Panel, Grid } from '@sparkpost/matchbox';
 import { Loading, PlanPicker } from 'src/components';
@@ -39,7 +39,8 @@ export class ChangePlanForm extends Component {
   componentDidMount() {
     this.props.getPlans();
     this.props.getBillingCountries();
-    this.props.fetchAccount({ include: 'billing' });
+    this.props.fetchAccount();
+    this.props.getBillingInfo();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -176,13 +177,13 @@ export class ChangePlanForm extends Component {
 const mapStateToProps = (state, props) => {
   const selector = formValueSelector(FORMNAME);
   const { code: planCode } = qs.parse(props.location.search);
-
   const plans = selectVisiblePlans(state);
+  const { account, loading } = selectAccountBilling(state);
 
   return {
-    loading: (!state.account.created && state.account.loading) || (plans.length === 0 && state.billing.plansLoading),
+    loading: (!account.created && loading) || (plans.length === 0 && state.billing.plansLoading),
     isAws: selectCondition(isAws)(state),
-    account: state.account,
+    account,
     billing: state.billing,
     canUpdateBillingInfo: canUpdateBillingInfoSelector(state),
     isSelfServeBilling: selectCondition(isSelfServeBilling)(state),
@@ -193,6 +194,6 @@ const mapStateToProps = (state, props) => {
   };
 };
 
-const mapDispatchtoProps = { billingCreate, billingUpdate, updateSubscription, showAlert, getPlans, getBillingCountries, fetchAccount, verifyPromoCode, clearPromoCode };
+const mapDispatchtoProps = { getBillingInfo, billingCreate, billingUpdate, updateSubscription, showAlert, getPlans, getBillingCountries, fetchAccount, verifyPromoCode, clearPromoCode };
 const formOptions = { form: FORMNAME, asyncValidate: promoCodeValidate(FORMNAME), asyncChangeFields: ['planpicker'], asyncBlurFields: ['promoCode']};
 export default withRouter(connect(mapStateToProps, mapDispatchtoProps)(reduxForm(formOptions)(ChangePlanForm)));
