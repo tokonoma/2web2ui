@@ -1,4 +1,4 @@
-import getAssignTo from 'src/pages/alerts-new/helpers/getAssignTo';
+import getAssignTo from 'src/pages/alerts/helpers/getAssignTo';
 import { getDomains, isVerified } from 'src/selectors/sendingDomains';
 import { getIpPools } from 'src/selectors/ipPools';
 import { selectSubaccountFromId } from 'src/selectors/subaccounts';

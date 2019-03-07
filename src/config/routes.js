@@ -719,9 +719,9 @@ const routes = [
     supportDocsSearch: 'Alerts'
   },
   {
-    path: '/alerts-new/create', // TODO Replace with '/alerts'
+    path: '/alerts/create',
     component: alerts.CreatePage,
-    condition: all(hasGrants('alerts/manage'), hasUiOption('feature_alerts')),
+    condition: hasGrants('alerts/manage'),
     layout: App,
     title: 'Create Alert',
     supportDocsSearch: 'Alerts'

@@ -58,6 +58,6 @@ describe('Page: Alerts Edit', () => {
     await wrapper.instance().handleDelete();
     expect(props.deleteAlert).toHaveBeenCalledWith({ id: 'alert-id' });
     expect(props.showAlert).toHaveBeenCalled();
-    expect(props.history[0]).toEqual('/alerts-new');
+    expect(props.history[0]).toEqual('/alerts');
   });
 });
