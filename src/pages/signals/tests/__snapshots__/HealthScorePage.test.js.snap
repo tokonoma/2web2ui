@@ -67,208 +67,204 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
   including bounces, spam trap hits, and engagement across our entire network.
 "
         />
-        <div
-          className="LiftTooltip"
-        >
-          <BarChart
-            fill="#B157CE"
-            gap={0.25}
-            height={250}
-            margin={
+        <BarChart
+          fill="#B157CE"
+          gap={0.25}
+          height={250}
+          margin={
+            Object {
+              "bottom": 5,
+              "left": 18,
+              "right": 0,
+              "top": 12,
+            }
+          }
+          onClick={[Function]}
+          selected="2017-01-01"
+          timeSeries={
+            Array [
               Object {
-                "bottom": 5,
-                "left": 18,
-                "right": 0,
-                "top": 12,
-              }
-            }
-            onClick={[Function]}
-            selected="2017-01-01"
-            timeSeries={
-              Array [
-                Object {
-                  "date": "2017-01-01",
-                  "weights": Array [
-                    Object {
-                      "weight": 0.5,
-                      "weight_type": "Hard Bounces",
-                      "weight_value": 0.25,
-                    },
-                    Object {
-                      "weight": -0.5,
-                      "weight_type": "Complaints",
-                      "weight_value": 0.25,
-                    },
-                  ],
-                },
-                Object {
-                  "date": "2017-01-02",
-                  "weights": Array [
-                    Object {
-                      "weight": 0.8,
-                      "weight_type": "List Quality",
-                      "weight_value": 0.25,
-                    },
-                    Object {
-                      "weight": -0.8,
-                      "weight_type": "Other bounces",
-                      "weight_value": 0.25,
-                    },
-                  ],
-                },
-              ]
-            }
-            tooltipContent={[Function]}
-            width="99%"
-            xAxisProps={
+                "date": "2017-01-01",
+                "weights": Array [
+                  Object {
+                    "weight": 0.5,
+                    "weight_type": "Hard Bounces",
+                    "weight_value": 0.25,
+                  },
+                  Object {
+                    "weight": -0.5,
+                    "weight_type": "Complaints",
+                    "weight_value": 0.25,
+                  },
+                ],
+              },
               Object {
-                "tickFormatter": [Function],
-                "ticks": Array [],
-              }
+                "date": "2017-01-02",
+                "weights": Array [
+                  Object {
+                    "weight": 0.8,
+                    "weight_type": "List Quality",
+                    "weight_value": 0.25,
+                  },
+                  Object {
+                    "weight": -0.8,
+                    "weight_type": "Other bounces",
+                    "weight_value": 0.25,
+                  },
+                ],
+              },
+            ]
+          }
+          tooltipContent={[Function]}
+          width="99%"
+          xAxisProps={
+            Object {
+              "tickFormatter": [Function],
+              "ticks": Array [],
             }
-            xKey="date"
-            yAxisProps={
-              Object {
-                "tickFormatter": [Function],
-              }
+          }
+          xKey="date"
+          yAxisProps={
+            Object {
+              "tickFormatter": [Function],
             }
-            yKey="health_score"
-            yRange={
-              Array [
-                "auto",
-                "auto",
-              ]
-            }
-          />
-          <ChartHeader
-            title="Injections"
-            tooltipContent="
+          }
+          yKey="health_score"
+          yRange={
+            Array [
+              "auto",
+              "auto",
+            ]
+          }
+        />
+        <ChartHeader
+          title="Injections"
+          tooltipContent="
   Injections are defined as the total number of messages successfully generated or relayed to SparkPost for delivery.
 "
-          />
-          <BarChart
-            fill="#B157CE"
-            gap={0.25}
-            height={190}
-            margin={
+        />
+        <BarChart
+          fill="#B157CE"
+          gap={0.25}
+          height={190}
+          margin={
+            Object {
+              "bottom": 5,
+              "left": 18,
+              "right": 0,
+              "top": 12,
+            }
+          }
+          onClick={[Function]}
+          selected="2017-01-01"
+          timeSeries={
+            Array [
               Object {
-                "bottom": 5,
-                "left": 18,
-                "right": 0,
-                "top": 12,
-              }
-            }
-            onClick={[Function]}
-            selected="2017-01-01"
-            timeSeries={
-              Array [
-                Object {
-                  "date": "2017-01-01",
-                  "weights": Array [
-                    Object {
-                      "weight": 0.5,
-                      "weight_type": "Hard Bounces",
-                      "weight_value": 0.25,
-                    },
-                    Object {
-                      "weight": -0.5,
-                      "weight_type": "Complaints",
-                      "weight_value": 0.25,
-                    },
-                  ],
-                },
-                Object {
-                  "date": "2017-01-02",
-                  "weights": Array [
-                    Object {
-                      "weight": 0.8,
-                      "weight_type": "List Quality",
-                      "weight_value": 0.25,
-                    },
-                    Object {
-                      "weight": -0.8,
-                      "weight_type": "Other bounces",
-                      "weight_value": 0.25,
-                    },
-                  ],
-                },
-              ]
-            }
-            tooltipContent={[Function]}
-            width="99%"
-            xAxisProps={
+                "date": "2017-01-01",
+                "weights": Array [
+                  Object {
+                    "weight": 0.5,
+                    "weight_type": "Hard Bounces",
+                    "weight_value": 0.25,
+                  },
+                  Object {
+                    "weight": -0.5,
+                    "weight_type": "Complaints",
+                    "weight_value": 0.25,
+                  },
+                ],
+              },
               Object {
-                "tickFormatter": [Function],
-                "ticks": Array [],
-              }
+                "date": "2017-01-02",
+                "weights": Array [
+                  Object {
+                    "weight": 0.8,
+                    "weight_type": "List Quality",
+                    "weight_value": 0.25,
+                  },
+                  Object {
+                    "weight": -0.8,
+                    "weight_type": "Other bounces",
+                    "weight_value": 0.25,
+                  },
+                ],
+              },
+            ]
+          }
+          tooltipContent={[Function]}
+          width="99%"
+          xAxisProps={
+            Object {
+              "tickFormatter": [Function],
+              "ticks": Array [],
             }
-            xKey="date"
-            yAxisProps={
+          }
+          xKey="date"
+          yAxisProps={
+            Object {
+              "tickFormatter": [Function],
+            }
+          }
+          yKey="injections"
+          yRange={
+            Array [
+              "auto",
+              "auto",
+            ]
+          }
+        />
+        <ChartHeader
+          title="Hard Bounces Percent"
+        />
+        <BarChart
+          fill="#B157CE"
+          gap={0.25}
+          height={190}
+          margin={
+            Object {
+              "bottom": 5,
+              "left": 18,
+              "right": 0,
+              "top": 12,
+            }
+          }
+          onClick={[Function]}
+          selected="2017-01-01"
+          timeSeries={
+            Array [
               Object {
-                "tickFormatter": [Function],
-              }
-            }
-            yKey="injections"
-            yRange={
-              Array [
-                "auto",
-                "auto",
-              ]
-            }
-          />
-          <ChartHeader
-            title="Hard Bounces Percent"
-          />
-          <BarChart
-            fill="#B157CE"
-            gap={0.25}
-            height={190}
-            margin={
+                "date": "2017-01-01",
+                "weight": 0.5,
+                "weight_type": "Hard Bounces",
+                "weight_value": 0.25,
+              },
               Object {
-                "bottom": 5,
-                "left": 18,
-                "right": 0,
-                "top": 12,
-              }
+                "date": "2017-01-02",
+              },
+            ]
+          }
+          tooltipContent={[Function]}
+          width="99%"
+          xAxisProps={
+            Object {
+              "tickFormatter": [Function],
+              "ticks": Array [],
             }
-            onClick={[Function]}
-            selected="2017-01-01"
-            timeSeries={
-              Array [
-                Object {
-                  "date": "2017-01-01",
-                  "weight": 0.5,
-                  "weight_type": "Hard Bounces",
-                  "weight_value": 0.25,
-                },
-                Object {
-                  "date": "2017-01-02",
-                },
-              ]
+          }
+          xKey="date"
+          yAxisProps={
+            Object {
+              "tickFormatter": [Function],
             }
-            tooltipContent={[Function]}
-            width="99%"
-            xAxisProps={
-              Object {
-                "tickFormatter": [Function],
-                "ticks": Array [],
-              }
-            }
-            xKey="date"
-            yAxisProps={
-              Object {
-                "tickFormatter": [Function],
-              }
-            }
-            yKey="weight_value"
-            yRange={
-              Array [
-                "auto",
-                "auto",
-              ]
-            }
-          />
-        </div>
+          }
+          yKey="weight_value"
+          yRange={
+            Array [
+              "auto",
+              "auto",
+            ]
+          }
+        />
       </Panel>
     </Grid.Column>
     <Grid.Column
@@ -412,102 +408,98 @@ exports[`Signals Health Score Page renders empty weights 1`] = `
   including bounces, spam trap hits, and engagement across our entire network.
 "
         />
-        <div
-          className="LiftTooltip"
-        >
-          <BarChart
-            fill="#B157CE"
-            gap={0.25}
-            height={250}
-            margin={
+        <BarChart
+          fill="#B157CE"
+          gap={0.25}
+          height={250}
+          margin={
+            Object {
+              "bottom": 5,
+              "left": 18,
+              "right": 0,
+              "top": 12,
+            }
+          }
+          onClick={[Function]}
+          selected="2017-01-01"
+          timeSeries={
+            Array [
               Object {
-                "bottom": 5,
-                "left": 18,
-                "right": 0,
-                "top": 12,
-              }
+                "date": "2017-01-01",
+              },
+            ]
+          }
+          tooltipContent={[Function]}
+          width="99%"
+          xAxisProps={
+            Object {
+              "tickFormatter": [Function],
+              "ticks": Array [],
             }
-            onClick={[Function]}
-            selected="2017-01-01"
-            timeSeries={
-              Array [
-                Object {
-                  "date": "2017-01-01",
-                },
-              ]
+          }
+          xKey="date"
+          yAxisProps={
+            Object {
+              "tickFormatter": [Function],
             }
-            tooltipContent={[Function]}
-            width="99%"
-            xAxisProps={
-              Object {
-                "tickFormatter": [Function],
-                "ticks": Array [],
-              }
-            }
-            xKey="date"
-            yAxisProps={
-              Object {
-                "tickFormatter": [Function],
-              }
-            }
-            yKey="health_score"
-            yRange={
-              Array [
-                "auto",
-                "auto",
-              ]
-            }
-          />
-          <ChartHeader
-            title="Injections"
-            tooltipContent="
+          }
+          yKey="health_score"
+          yRange={
+            Array [
+              "auto",
+              "auto",
+            ]
+          }
+        />
+        <ChartHeader
+          title="Injections"
+          tooltipContent="
   Injections are defined as the total number of messages successfully generated or relayed to SparkPost for delivery.
 "
-          />
-          <BarChart
-            fill="#B157CE"
-            gap={0.25}
-            height={190}
-            margin={
+        />
+        <BarChart
+          fill="#B157CE"
+          gap={0.25}
+          height={190}
+          margin={
+            Object {
+              "bottom": 5,
+              "left": 18,
+              "right": 0,
+              "top": 12,
+            }
+          }
+          onClick={[Function]}
+          selected="2017-01-01"
+          timeSeries={
+            Array [
               Object {
-                "bottom": 5,
-                "left": 18,
-                "right": 0,
-                "top": 12,
-              }
+                "date": "2017-01-01",
+              },
+            ]
+          }
+          tooltipContent={[Function]}
+          width="99%"
+          xAxisProps={
+            Object {
+              "tickFormatter": [Function],
+              "ticks": Array [],
             }
-            onClick={[Function]}
-            selected="2017-01-01"
-            timeSeries={
-              Array [
-                Object {
-                  "date": "2017-01-01",
-                },
-              ]
+          }
+          xKey="date"
+          yAxisProps={
+            Object {
+              "tickFormatter": [Function],
             }
-            tooltipContent={[Function]}
-            width="99%"
-            xAxisProps={
-              Object {
-                "tickFormatter": [Function],
-                "ticks": Array [],
-              }
-            }
-            xKey="date"
-            yAxisProps={
-              Object {
-                "tickFormatter": [Function],
-              }
-            }
-            yKey="injections"
-            yRange={
-              Array [
-                "auto",
-                "auto",
-              ]
-            }
-          />
-        </div>
+          }
+          yKey="injections"
+          yRange={
+            Array [
+              "auto",
+              "auto",
+            ]
+          }
+        />
       </Panel>
     </Grid.Column>
     <Grid.Column
