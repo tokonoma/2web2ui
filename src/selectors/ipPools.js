@@ -3,6 +3,7 @@ import _ from 'lodash';
 import { encodeIp } from 'src/helpers/ipNames';
 import { currentPlanCodeSelector } from 'src/selectors/accountBillingInfo';
 import { ENTERPRISE_PLAN_CODES } from 'src/constants';
+import { isAdmin } from 'src/helpers/conditions/user';
 const DEFAULT = 'default';
 
 export const getIpPools = (state) => state.ipPools.list;
@@ -72,7 +73,7 @@ export const selectIpPoolFormInitialValues = createSelector(
  * @return bool
  */
 export const shouldShowIpPurchaseCTA = createSelector(
-  [currentPlanCodeSelector], (currentPlanCode) => !_.includes(ENTERPRISE_PLAN_CODES, currentPlanCode)
+  [currentPlanCodeSelector, isAdmin], (currentPlanCode, admin) => !_.includes(ENTERPRISE_PLAN_CODES, currentPlanCode) && admin
 );
 
 export const selectFirstIpPoolId = createSelector(

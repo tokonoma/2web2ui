@@ -78,7 +78,8 @@ describe('Component: DefaultRedirect', () => {
     });
   }, {
     reporting: { accessLevel: 'reporting' },
-    'subaccount reporting': { accessLevel: 'subaccount_reporting' }
+    'subaccount reporting': { accessLevel: 'subaccount_reporting' },
+    email: { accessLevel: 'email' }
   });
 
   it('should redirect based on config', () => {

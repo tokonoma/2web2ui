@@ -10,7 +10,15 @@ exports[`IP Pools List Page does not render purchase action if isAdmin is false 
       "to": "/account/ip-pools/create",
     }
   }
-  secondaryActions={null}
+  secondaryActions={
+    Array [
+      Object {
+        "Component": [Function],
+        "content": "Purchase IPs",
+        "to": "/account/billing",
+      },
+    ]
+  }
   title="IP Pools"
 >
   <IPWarmupReminderBanner />

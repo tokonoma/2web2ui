@@ -41,7 +41,8 @@ describe('Selector: ipPools', () => {
             { external_ip: '3.3.3.3' }
           ]
         }
-      }
+      },
+      currentUser: { access_level: 'admin' }
     };
   });
 
