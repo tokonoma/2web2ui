@@ -1,60 +1,26 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Link, withRouter } from "react-router-dom";
-import { Page } from "@sparkpost/matchbox";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Link, withRouter } from 'react-router-dom';
+import { Page } from '@sparkpost/matchbox';
 
-import { ApiErrorBanner, Loading } from "src/components";
-import IPForm from "./components/IPForm";
-import { showAlert } from "src/actions/globalAlert";
-import { getPool, listPools, updatePool } from "src/actions/ipPools";
-import { updateSendingIp } from "src/actions/sendingIps";
-import { selectCurrentPool, selectIpForCurrentPool } from "src/selectors/ipPools";
-
-import { decodeIp } from "src/helpers/ipNames";
-import isDefaultPool from "./helpers/defaultPool";
+import { ApiErrorBanner, Loading } from 'src/components';
+import IPForm from './components/IPForm';
+import { showAlert } from 'src/actions/globalAlert';
+import { getPool, listPools, updatePool } from 'src/actions/ipPools';
+import { updateSendingIp } from 'src/actions/sendingIps';
+import { selectCurrentPool, selectIpForCurrentPool } from 'src/selectors/ipPools';
 
 
 export class EditIPPage extends Component {
-  state = {
-    showDelete: false
-  };
-
-  toggleDelete = () => {
-    this.setState({ showDelete: !this.state.showDelete });
-  };
-
   onUpdateIp = (values) => {
-    const { updateSendingIp, updatePool, showAlert, history, match: { params: { id } } } = this.props;
+    const { updateSendingIp, currentIp, showAlert } = this.props;
 
-    console.log(values);
-
-    debugger;
-    // return Promise.all([]);
-    /**
-     * Pick out the IPs whose pool assignment is not the current pool ergo
-     * have been reassigned by the user.
-     */
-    const changedIpKeys = Object.keys(values).filter((key) =>
-      key !== "name" && key !== "signing_domain" && values[key] !== id);
-
-    // if signing_domain is not set, then we want to clear it out to empty string.
-    values.signing_domain = values.signing_domain || "";
-
-    // Update each changed sending IP
-    return Promise.all(changedIpKeys.map((ipKey) =>
-      updateSendingIp(decodeIp(ipKey), values[ipKey])))
-      .then(() => {
-        // Update the pool itself
-        if (!isDefaultPool(id)) {
-          return updatePool(id, values);
-        }
-      })
+    return updateSendingIp(currentIp.external_ip, values.ip_pool)
       .then((res) => {
         showAlert({
-          type: "success",
-          message: `Updated IP pool ${id}.`
+          type: 'success',
+          message: `Updated IP ${currentIp.external_ip}.`
         });
-        history.push("/account/ip-pools");
       });
   };
 

@@ -1,11 +1,11 @@
-import React, { Component, Fragment } from "react";
-import _ from "lodash";
-import { connect } from "react-redux";
-import { Field, formValueSelector, reduxForm } from "redux-form";
-import { Link, withRouter } from "react-router-dom";
-import { Button, Panel } from "@sparkpost/matchbox";
-import { SelectWrapper } from "src/components/reduxFormWrappers";
-import { ConfirmationModal, LabelledValue } from "src/components";
+import React, { Component, Fragment } from 'react';
+import _ from 'lodash';
+import { connect } from 'react-redux';
+import { Field, formValueSelector, reduxForm } from 'redux-form';
+import { Link, withRouter } from 'react-router-dom';
+import { Button, Panel } from '@sparkpost/matchbox';
+import { SelectWrapper } from 'src/components/reduxFormWrappers';
+import { ConfirmationModal, LabelledValue } from 'src/components';
 import {
   getIpInitialValues,
   getOverflowPoolsOptions,
@@ -13,18 +13,13 @@ import {
   getStageOptions,
   selectCurrentPool,
   selectIpForCurrentPool
-} from "src/selectors/ipPools";
-import { CheckboxWrapper } from "../../../components/reduxFormWrappers";
+} from 'src/selectors/ipPools';
+import { CheckboxWrapper } from '../../../components/reduxFormWrappers';
 
-
-const columns = ["Sending IP", "Hostname"];
-const formName = "ipForm";
+const columns = ['Sending IP', 'Hostname'];
+const formName = 'ipForm';
 
 export class PoolForm extends Component {
-  state = {
-    warningModal: false
-  };
-
   getRowData = (poolOptions, ip) => {
     const { submitting, currentPool } = this.props;
     const ipLink = <Link to={`/account/ip-pools/edit/${pool.id}/ip/${ip.external_ip}`}>{ip.external_ip}</Link>;
@@ -34,19 +29,8 @@ export class PoolForm extends Component {
     ];
   };
 
-  revertAutoWarmupToggling = () => {
-    const { change, ipAutoWarmupEnabled } = this.props;
-    ipAutoWarmupEnabled ? change("auto_warmup_enabled", false) : change("auto_warmup_enabled", true);
-    this.setState({ warningModal: false });
-  };
-
   render() {
-    const { currentIp, overflowPoolsOptions, reAssignPoolsOptions, stageOptions, handleSubmit, currentPool, ipAutoWarmupState, submitting, pristine, ipAutoWarmupEnabled } = this.props;
-
-    const confirmationModalText = ipAutoWarmupEnabled
-      ? "Enabling Auto IP Warmup will limit the amount of traffic that is able to be sent over this IP based on the warmup stage. Additional traffic will be distributed amongst other IPs in the same pool or the designated overflow pool."
-      : "Disabling Auto IP Warmup will remove the volume restrictions from this IP, if this IP is not properly warmed, this can have negative consequences on deliverability and sender reputation.";
-
+    const { currentIp, reAssignPoolsOptions, handleSubmit, currentPool, submitting, pristine } = this.props;
 
     return (
       <Panel>
@@ -66,60 +50,13 @@ export class PoolForm extends Component {
               />
             </LabelledValue>
           </Panel.Section>
-          <Panel.Section actions={[{ content: "What is Auto Warmup", onClick: _.noop, color: "orange" }]}>
-            <LabelledValue label='Auto IP Warmup'>
-              <Field
-                name="auto_warmup_enabled"
-                component={CheckboxWrapper}
-                onChange={() => {
-                  console.log("hi");
-                  this.setState({ warningModal: true });
-                }}
-                type="checkbox"
-                label="Enable"
-                disabled={submitting}
-              />
-            </LabelledValue>
-            {ipAutoWarmupEnabled &&
-            <Fragment>
-              <LabelledValue label='Warmup Stage'>
-                <Field
-                  name='auto_warmup_stage'
-                  component={SelectWrapper}
-                  options={stageOptions}
-                  helpText="You can select an previous stage but can not select an advanced stage."
-                  disabled={submitting}
-                />
-              </LabelledValue>
-              <LabelledValue label='Overflow Pool'>
-                <Field
-                  name='auto_warmup_overflow_pool'
-                  component={SelectWrapper}
-                  options={overflowPoolsOptions}
-                  disabled={submitting}
-                  helpText="Overflow pool will be used when stage threshold for this IP has been met. Learn more about Overflow Pool."
-                />
-              </LabelledValue>
-            </Fragment>
-            }
-          </Panel.Section>
-
 
           <Panel.Section>
             <Button submit primary disabled={submitting || pristine}>
-              {submitting ? "Saving" : "Update Sending IP"}
+              {submitting ? 'Saving' : 'Update Sending IP'}
             </Button>
           </Panel.Section>
         </form>
-
-        <ConfirmationModal
-          open={this.state.warningModal}
-          title={`Are you sure you want to ${ipAutoWarmupEnabled ? "enable" : "disable"} Auto IP Warmup?`}
-          content={<p>{confirmationModalText}</p>}
-          onCancel={this.revertAutoWarmupToggling}
-          onConfirm={() => this.setState({ warningModal: false })}
-          confirmVerb={ipAutoWarmupEnabled ? "Yes, I want to turn ON Auto IP Warmup" : "Yes, I want to turn OFF Auto IP Warmup"}
-        />
       </Panel>
     );
   }
@@ -133,9 +70,6 @@ const mapStateToProps = (state, props) => {
     currentPool: selectCurrentPool(state),
     currentIp: selectIpForCurrentPool(state, props),
     reAssignPoolsOptions: getReAssignPoolsOptions(state, props),
-    overflowPoolsOptions: getOverflowPoolsOptions(state, props),
-    stageOptions: getStageOptions(state, props),
-    ipAutoWarmupEnabled: valueSelector(state, "auto_warmup_enabled"),
     initialValues: getIpInitialValues(state, props)
   };
 };
