@@ -72,8 +72,9 @@ exports[`Alert Form Component facet props should clear facet_value and validatio
       </label>
       <Grid>
         <Grid.Column
-          md={4}
-          xs={6}
+          lg={5}
+          md={7}
+          sm={8}
         >
           <div>
             <Field
@@ -119,8 +120,9 @@ exports[`Alert Form Component facet props should clear facet_value and validatio
       </label>
       <Grid>
         <Grid.Column
-          md={4}
-          xs={6}
+          lg={5}
+          md={7}
+          sm={8}
         >
           <div>
             <Field
@@ -288,8 +290,9 @@ exports[`Alert Form Component facet props should clear facet_value and validatio
       </label>
       <Grid>
         <Grid.Column
-          md={4}
-          xs={6}
+          lg={5}
+          md={7}
+          sm={8}
         >
           <div>
             <Field
@@ -336,8 +339,9 @@ exports[`Alert Form Component facet props should clear facet_value and validatio
       </label>
       <Grid>
         <Grid.Column
-          md={4}
-          xs={6}
+          lg={5}
+          md={7}
+          sm={8}
         >
           <div>
             <Field
@@ -488,8 +492,9 @@ exports[`Alert Form Component should handle submit 1`] = `
       </label>
       <Grid>
         <Grid.Column
-          md={4}
-          xs={6}
+          lg={5}
+          md={7}
+          sm={8}
         >
           <div>
             <Field
@@ -536,8 +541,9 @@ exports[`Alert Form Component should handle submit 1`] = `
       </label>
       <Grid>
         <Grid.Column
-          md={4}
-          xs={6}
+          lg={5}
+          md={7}
+          sm={8}
         >
           <div>
             <Field
@@ -705,8 +711,9 @@ exports[`Alert Form Component should render the alert form component correctly 1
       </label>
       <Grid>
         <Grid.Column
-          md={4}
-          xs={6}
+          lg={5}
+          md={7}
+          sm={8}
         >
           <div>
             <Field
@@ -753,8 +760,9 @@ exports[`Alert Form Component should render the alert form component correctly 1
       </label>
       <Grid>
         <Grid.Column
-          md={4}
-          xs={6}
+          lg={5}
+          md={7}
+          sm={8}
         >
           <div>
             <Field

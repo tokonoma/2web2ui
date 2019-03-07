@@ -35,7 +35,11 @@ describe('Alerts Selectors', () => {
     };
   });
 
-  it('gets formatEditValues', () => {
+  it('should get formatEditValues', () => {
     expect(alerts.formatEditValues(store, props)).toMatchSnapshot();
+  });
+
+  it('should handle empty formatEditValues', () => {
+    expect(alerts.formatEditValues(store, {})).toMatchSnapshot();
   });
 });

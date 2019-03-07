@@ -662,7 +662,15 @@ const routes = [
     component: alerts.EditPage,
     condition: all(hasGrants('alerts/manage'), hasUiOption('feature_alerts')),
     layout: App,
-    title: 'Alerts',
+    title: 'Edit Alert',
+    supportDocsSearch: 'Alerts'
+  },
+  {
+    path: '/alerts-new/create', // TODO Replace with '/alerts'
+    component: alerts.CreatePage,
+    condition: all(hasGrants('alerts/manage'), hasUiOption('feature_alerts')),
+    layout: App,
+    title: 'Create Alert',
     supportDocsSearch: 'Alerts'
   },
   {
