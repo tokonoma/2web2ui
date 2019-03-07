@@ -65,8 +65,9 @@ Object {
 
 exports[`Billing reducer get billing pending 1`] = `
 Object {
+  "billingLoading": true,
   "createLoading": false,
-  "loading": true,
+  "loading": false,
   "subscription": Object {},
   "updateError": null,
   "updateLoading": false,

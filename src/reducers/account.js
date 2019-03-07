@@ -57,7 +57,7 @@ export default (state = initialState, { type, meta, payload }) => {
       return { ...state, billingError: payload, billingLoading: false };
 
     case 'GET_BILLING_PENDING':
-      return { ...state, loading: true };
+      return { ...state, billingLoading: true };
 
     default:
       return state;
