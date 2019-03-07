@@ -48,8 +48,13 @@ describe('Component: RoleRadioGroup', () => {
   it('should not render developer roles when the UI flag `developer_and_email_roles` is disabled', () => {
     expect(subject({ showDeveloperRoles: false })
       .find('RadioGroup[title="Role"]')
-      .prop('showDeveloperRoles'))
-      .toBe(false);
+      .prop('options'))
+      .not.toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({ value: ROLES.DEVELOPER }),
+          expect.objectContaining({ value: ROLES.EMAIL })
+        ])
+      );
   });
 
   it('should render super user', () => {
