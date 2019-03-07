@@ -149,7 +149,7 @@ export class AlertForm extends Component {
             {isSignals && <br/>}
             <label>Criteria</label>
             <Grid>
-              <Grid.Column xs={6} md={4}>
+              <Grid.Column sm={8} md={7} lg={5}>
                 <div>
                   <Field
                     name='threshold.error.target'
