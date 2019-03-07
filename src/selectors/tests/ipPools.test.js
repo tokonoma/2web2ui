@@ -107,6 +107,11 @@ describe('Selector: ipPools', () => {
       accountBillingInfoSelectors.currentPlanCodeSelector.mockReturnValue('ccfree1');
       expect(shouldShowIpPurchaseCTA(state)).toBe(true);
     });
+    it('returns false for non-admins', () => {
+      state.currentUser.access_level = 'developer';
+      expect(shouldShowIpPurchaseCTA(state)).toBe(false);
+    });
+
   });
 
   describe('selectFirstIpPoolId', () => {
