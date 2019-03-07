@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 export const initialState = {
   updateError: null,
   loading: false,
@@ -49,7 +51,7 @@ export default (state = initialState, { type, meta, payload }) => {
       return { ...state, createError: payload, createLoading: false };
 
     case 'GET_BILLING_SUCCESS':
-      return { ...state, billing: payload, billingLoading: false };
+      return { ...state, billing: _.isEmpty(payload) ? null : payload, billingLoading: false };
 
     case 'GET_BILLING_FAIL':
       return { ...state, billingError: payload, billingLoading: false };
