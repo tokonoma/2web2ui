@@ -31,7 +31,7 @@ export class PoolForm extends Component {
   };
 
   renderPoolIps = () => {
-    const { isNew, ips, pool, showPurchaseCTA } = this.props;
+    const { isNew, ips = [], pool, showPurchaseCTA } = this.props;
 
     if (isNew) {
       return null;
@@ -46,10 +46,11 @@ export class PoolForm extends Component {
     return (<Panel title='Sending IPs'>
       <Panel.Section>
         <p>
-          Add dedicated sending IPs to this pool by moving them from their current pool{purchaseCTA}.
+          {!ips.length && <span>No IP in this pool. </span>}
+          Add dedicated IPs to this pool by moving them from their current pool{purchaseCTA}.
           {!!ips.length && <span> Click on existing Sending IP to modify.</span>}
         </p>
-        <IPList ips={ips} pool={pool}/>
+        {!!ips.length && <IPList ips={ips} pool={pool}/>}
       </Panel.Section>
     </Panel>);
   };

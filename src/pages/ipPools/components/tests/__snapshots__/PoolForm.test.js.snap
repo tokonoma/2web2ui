@@ -1,406 +1,47 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`PoolForm tests should not disable button if form is not pristine or not submitting 1`] = `
-<Panel>
-  <form
-    onSubmit={[MockFunction]}
-  >
-    <Panel.Section>
-      <Field
-        component={[Function]}
-        disabled={false}
-        helpText=""
-        label="Pool Name"
-        name="name"
-        placeholder="My IP Pool"
-        validate={[Function]}
-      />
-      <Connect(AccessControl)
-        condition={[Function]}
-      >
-        <Field
-          component={[Function]}
-          disabled={false}
-          label="Default Signing Domain"
-          name="signing_domain"
-        />
-      </Connect(AccessControl)>
-    </Panel.Section>
-    <Panel.Section>
-      <p>
-        Add dedicated IPs to this pool by moving them from their current pool
-        , or by 
-        <UnstyledLink
-          component={[Function]}
-          to="/account/billing"
-        >
-          purchasing new IPs
-        </UnstyledLink>
-        .
-      </p>
-    </Panel.Section>
-    <TableCollection
-      columns={
-        Array [
-          "Sending IP",
-          "Hostname",
-          "IP Pool",
-        ]
-      }
-      defaultSortColumn={null}
-      defaultSortDirection="asc"
-      getRowData={[Function]}
-      pagination={false}
-      rows={
-        Array [
-          Object {
-            "external_ip": "external",
-            "hostname": "hostname",
-          },
-          Object {
-            "external_ip": "external-2",
-            "hostname": "hostname-2",
-          },
-        ]
-      }
-    />
-    <Panel.Section>
-      <Button
-        disabled={false}
-        primary={true}
-        size="default"
-        submit={true}
-      >
-        Update IP Pool
-      </Button>
-    </Panel.Section>
-  </form>
-</Panel>
-`;
-
-exports[`PoolForm tests should not render signing_domain if editing default pool 1`] = `
-<Panel>
-  <form
-    onSubmit={[MockFunction]}
-  >
-    <Panel.Section>
-      <Field
-        component={[Function]}
-        disabled={true}
-        helpText="You cannot change the default IP pool's name"
-        label="Pool Name"
-        name="name"
-        placeholder="My IP Pool"
-        validate={[Function]}
-      />
-    </Panel.Section>
-    <Panel.Section>
-      <p>
-        Add dedicated IPs to this pool by moving them from their current pool
-        , or by 
-        <UnstyledLink
-          component={[Function]}
-          to="/account/billing"
-        >
-          purchasing new IPs
-        </UnstyledLink>
-        .
-      </p>
-    </Panel.Section>
-    <TableCollection
-      columns={
-        Array [
-          "Sending IP",
-          "Hostname",
-          "IP Pool",
-        ]
-      }
-      defaultSortColumn={null}
-      defaultSortDirection="asc"
-      getRowData={[Function]}
-      pagination={false}
-      rows={
-        Array [
-          Object {
-            "external_ip": "external",
-            "hostname": "hostname",
-          },
-          Object {
-            "external_ip": "external-2",
-            "hostname": "hostname-2",
-          },
-        ]
-      }
-    />
-    <Panel.Section>
-      <Button
-        disabled={true}
-        primary={true}
-        size="default"
-        submit={true}
-      >
-        Update IP Pool
-      </Button>
-    </Panel.Section>
-  </form>
-</Panel>
-`;
-
-exports[`PoolForm tests should not render signing_domain if feature flag is disabled 1`] = `
-<Panel>
-  <form
-    onSubmit={[MockFunction]}
-  >
-    <Panel.Section>
-      <Field
-        component={[Function]}
-        disabled={false}
-        helpText=""
-        label="Pool Name"
-        name="name"
-        placeholder="My IP Pool"
-        validate={[Function]}
-      />
-      <Connect(AccessControl)
-        condition={[Function]}
-      >
-        <Field
-          component={[Function]}
-          disabled={false}
-          label="Default Signing Domain"
-          name="signing_domain"
-        />
-      </Connect(AccessControl)>
-    </Panel.Section>
-    <Panel.Section>
-      <p>
-        Add dedicated IPs to this pool by moving them from their current pool
-        , or by 
-        <UnstyledLink
-          component={[Function]}
-          to="/account/billing"
-        >
-          purchasing new IPs
-        </UnstyledLink>
-        .
-      </p>
-    </Panel.Section>
-    <TableCollection
-      columns={
-        Array [
-          "Sending IP",
-          "Hostname",
-          "IP Pool",
-        ]
-      }
-      defaultSortColumn={null}
-      defaultSortDirection="asc"
-      getRowData={[Function]}
-      pagination={false}
-      rows={
-        Array [
-          Object {
-            "external_ip": "external",
-            "hostname": "hostname",
-          },
-          Object {
-            "external_ip": "external-2",
-            "hostname": "hostname-2",
-          },
-        ]
-      }
-    />
-    <Panel.Section>
-      <Button
-        disabled={true}
-        primary={true}
-        size="default"
-        submit={true}
-      >
-        Update IP Pool
-      </Button>
-    </Panel.Section>
-  </form>
-</Panel>
-`;
-
-exports[`PoolForm tests should not render table if no ips exist 1`] = `
-<Panel>
-  <form
-    onSubmit={[MockFunction]}
-  >
-    <Panel.Section>
-      <Field
-        component={[Function]}
-        disabled={false}
-        helpText=""
-        label="Pool Name"
-        name="name"
-        placeholder="My IP Pool"
-        validate={[Function]}
-      />
-      <Connect(AccessControl)
-        condition={[Function]}
-      >
-        <Field
-          component={[Function]}
-          disabled={false}
-          label="Default Signing Domain"
-          name="signing_domain"
-        />
-      </Connect(AccessControl)>
-    </Panel.Section>
-    <Panel.Section>
-      <Button
-        disabled={true}
-        primary={true}
-        size="default"
-        submit={true}
-      >
-        Update IP Pool
-      </Button>
-    </Panel.Section>
-  </form>
-</Panel>
-`;
-
-exports[`PoolForm tests should not render table if pool is new 1`] = `
-<Panel>
-  <form
-    onSubmit={[MockFunction]}
-  >
-    <Panel.Section>
-      <Field
-        component={[Function]}
-        disabled={false}
-        helpText=""
-        label="Pool Name"
-        name="name"
-        placeholder="My IP Pool"
-        validate={[Function]}
-      />
-      <Connect(AccessControl)
-        condition={[Function]}
-      >
-        <Field
-          component={[Function]}
-          disabled={false}
-          label="Default Signing Domain"
-          name="signing_domain"
-        />
-      </Connect(AccessControl)>
-    </Panel.Section>
-    <Panel.Section>
-      <Button
-        disabled={true}
-        primary={true}
-        size="default"
-        submit={true}
-      >
-        Create IP Pool
-      </Button>
-    </Panel.Section>
-  </form>
-</Panel>
-`;
-
-exports[`PoolForm tests should not show purchase cta if showPurchaseCTA is false 1`] = `
-<Panel>
-  <form
-    onSubmit={[MockFunction]}
-  >
-    <Panel.Section>
-      <Field
-        component={[Function]}
-        disabled={false}
-        helpText=""
-        label="Pool Name"
-        name="name"
-        placeholder="My IP Pool"
-        validate={[Function]}
-      />
-      <Connect(AccessControl)
-        condition={[Function]}
-      >
-        <Field
-          component={[Function]}
-          disabled={false}
-          label="Default Signing Domain"
-          name="signing_domain"
-        />
-      </Connect(AccessControl)>
-    </Panel.Section>
-    <Panel.Section>
-      <p>
-        Add dedicated IPs to this pool by moving them from their current pool
-        .
-      </p>
-    </Panel.Section>
-    <TableCollection
-      columns={
-        Array [
-          "Sending IP",
-          "Hostname",
-          "IP Pool",
-        ]
-      }
-      defaultSortColumn={null}
-      defaultSortDirection="asc"
-      getRowData={[Function]}
-      pagination={false}
-      rows={
-        Array [
-          Object {
-            "external_ip": "external",
-            "hostname": "hostname",
-          },
-          Object {
-            "external_ip": "external-2",
-            "hostname": "hostname-2",
-          },
-        ]
-      }
-    />
-    <Panel.Section>
-      <Button
-        disabled={true}
-        primary={true}
-        size="default"
-        submit={true}
-      >
-        Update IP Pool
-      </Button>
-    </Panel.Section>
-  </form>
-</Panel>
-`;
-
 exports[`PoolForm tests should render form 1`] = `
-<Panel>
-  <form
-    onSubmit={[MockFunction]}
-  >
-    <Panel.Section>
-      <Field
-        component={[Function]}
-        disabled={false}
-        helpText=""
-        label="Pool Name"
-        name="name"
-        placeholder="My IP Pool"
-        validate={[Function]}
-      />
-      <Connect(AccessControl)
-        condition={[Function]}
-      >
+<Fragment>
+  <Panel>
+    <form
+      onSubmit={[MockFunction]}
+    >
+      <Panel.Section>
         <Field
           component={[Function]}
           disabled={false}
-          label="Default Signing Domain"
-          name="signing_domain"
+          helpText=""
+          label="Pool Name"
+          name="name"
+          placeholder="My IP Pool"
+          validate={[Function]}
         />
-      </Connect(AccessControl)>
-    </Panel.Section>
+        <Connect(AccessControl)
+          condition={[Function]}
+        >
+          <Field
+            component={[Function]}
+            disabled={false}
+            label="Default Signing Domain"
+            name="signing_domain"
+          />
+        </Connect(AccessControl)>
+      </Panel.Section>
+      <Panel.Section>
+        <Button
+          disabled={true}
+          primary={true}
+          size="default"
+          submit={true}
+        >
+          Update IP Pool
+        </Button>
+      </Panel.Section>
+    </form>
+  </Panel>
+  <Panel
+    title="Sending IPs"
+  >
     <Panel.Section>
       <p>
         Add dedicated IPs to this pool by moving them from their current pool
@@ -412,202 +53,43 @@ exports[`PoolForm tests should render form 1`] = `
           purchasing new IPs
         </UnstyledLink>
         .
+        <span>
+           Click on existing Sending IP to modify.
+        </span>
       </p>
-    </Panel.Section>
-    <TableCollection
-      columns={
-        Array [
-          "Sending IP",
-          "Hostname",
-          "IP Pool",
-        ]
-      }
-      defaultSortColumn={null}
-      defaultSortDirection="asc"
-      getRowData={[Function]}
-      pagination={false}
-      rows={
-        Array [
+      <IPList
+        ips={
+          Array [
+            Object {
+              "external_ip": "external",
+              "hostname": "hostname",
+            },
+            Object {
+              "external_ip": "external-2",
+              "hostname": "hostname-2",
+            },
+          ]
+        }
+        pool={
           Object {
-            "external_ip": "external",
-            "hostname": "hostname",
-          },
-          Object {
-            "external_ip": "external-2",
-            "hostname": "hostname-2",
-          },
-        ]
-      }
-    />
-    <Panel.Section>
-      <Button
-        disabled={true}
-        primary={true}
-        size="default"
-        submit={true}
-      >
-        Update IP Pool
-      </Button>
+            "id": "my-pool",
+            "name": "My Pool",
+          }
+        }
+      />
     </Panel.Section>
-  </form>
-</Panel>
+  </Panel>
+</Fragment>
 `;
 
 exports[`PoolForm tests should render row properly 1`] = `
 Array [
-  "ext-ip",
+  <Link
+    replace={false}
+    to="/account/ip-pools/edit/my-pool/ip/ext-ip"
+  >
+    ext-ip
+  </Link>,
   "host",
-  <Field
-    component={[Function]}
-    disabled={false}
-    name="1_1_1_1"
-    options="options"
-  />,
 ]
-`;
-
-exports[`PoolForm tests should show help text when editing default pool 1`] = `
-<Panel>
-  <form
-    onSubmit={[MockFunction]}
-  >
-    <Panel.Section>
-      <Field
-        component={[Function]}
-        disabled={true}
-        helpText="You cannot change the default IP pool's name"
-        label="Pool Name"
-        name="name"
-        placeholder="My IP Pool"
-        validate={[Function]}
-      />
-    </Panel.Section>
-    <Panel.Section>
-      <p>
-        Add dedicated IPs to this pool by moving them from their current pool
-        , or by 
-        <UnstyledLink
-          component={[Function]}
-          to="/account/billing"
-        >
-          purchasing new IPs
-        </UnstyledLink>
-        .
-      </p>
-    </Panel.Section>
-    <TableCollection
-      columns={
-        Array [
-          "Sending IP",
-          "Hostname",
-          "IP Pool",
-        ]
-      }
-      defaultSortColumn={null}
-      defaultSortDirection="asc"
-      getRowData={[Function]}
-      pagination={false}
-      rows={
-        Array [
-          Object {
-            "external_ip": "external",
-            "hostname": "hostname",
-          },
-          Object {
-            "external_ip": "external-2",
-            "hostname": "hostname-2",
-          },
-        ]
-      }
-    />
-    <Panel.Section>
-      <Button
-        disabled={true}
-        primary={true}
-        size="default"
-        submit={true}
-      >
-        Update IP Pool
-      </Button>
-    </Panel.Section>
-  </form>
-</Panel>
-`;
-
-exports[`PoolForm tests should update button text to Saving and disable button when submitting form 1`] = `
-<Panel>
-  <form
-    onSubmit={[MockFunction]}
-  >
-    <Panel.Section>
-      <Field
-        component={[Function]}
-        disabled={true}
-        helpText=""
-        label="Pool Name"
-        name="name"
-        placeholder="My IP Pool"
-        validate={[Function]}
-      />
-      <Connect(AccessControl)
-        condition={[Function]}
-      >
-        <Field
-          component={[Function]}
-          disabled={true}
-          label="Default Signing Domain"
-          name="signing_domain"
-        />
-      </Connect(AccessControl)>
-    </Panel.Section>
-    <Panel.Section>
-      <p>
-        Add dedicated IPs to this pool by moving them from their current pool
-        , or by 
-        <UnstyledLink
-          component={[Function]}
-          to="/account/billing"
-        >
-          purchasing new IPs
-        </UnstyledLink>
-        .
-      </p>
-    </Panel.Section>
-    <TableCollection
-      columns={
-        Array [
-          "Sending IP",
-          "Hostname",
-          "IP Pool",
-        ]
-      }
-      defaultSortColumn={null}
-      defaultSortDirection="asc"
-      getRowData={[Function]}
-      pagination={false}
-      rows={
-        Array [
-          Object {
-            "external_ip": "external",
-            "hostname": "hostname",
-          },
-          Object {
-            "external_ip": "external-2",
-            "hostname": "hostname-2",
-          },
-        ]
-      }
-    />
-    <Panel.Section>
-      <Button
-        disabled={true}
-        primary={true}
-        size="default"
-        submit={true}
-      >
-        Saving
-      </Button>
-    </Panel.Section>
-  </form>
-</Panel>
 `;

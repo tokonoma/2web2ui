@@ -1,20 +1,16 @@
-import React, { Component, Fragment } from 'react';
-import _ from 'lodash';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, formValueSelector, reduxForm } from 'redux-form';
 import { Link, withRouter } from 'react-router-dom';
 import { Button, Panel } from '@sparkpost/matchbox';
 import { SelectWrapper } from 'src/components/reduxFormWrappers';
-import { ConfirmationModal, LabelledValue } from 'src/components';
+import { LabelledValue } from 'src/components';
 import {
   getIpInitialValues,
-  getOverflowPoolsOptions,
   getReAssignPoolsOptions,
-  getStageOptions,
   selectCurrentPool,
   selectIpForCurrentPool
 } from 'src/selectors/ipPools';
-import { CheckboxWrapper } from '../../../components/reduxFormWrappers';
 
 const columns = ['Sending IP', 'Hostname'];
 const formName = 'ipForm';

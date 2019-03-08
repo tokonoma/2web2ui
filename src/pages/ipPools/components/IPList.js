@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { TableCollection } from 'src/components';
 
 
-const columns = ['Sending IP', 'Hostname'];
+const columns = ['IP', 'Hostname'];
 
 export class IPList extends Component {
   getRowData = (ip) => {
