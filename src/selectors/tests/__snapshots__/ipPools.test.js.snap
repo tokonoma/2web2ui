@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Selector: ipPools getReAssignPoolsOptions returns formatted pools list 1`] = `
+Array [
+  Object {
+    "label": "Big Pool (big)",
+    "value": "big",
+  },
+  Object {
+    "label": "None (none)",
+    "value": "none",
+  },
+  Object {
+    "label": "Default (default)",
+    "value": "default",
+  },
+  Object {
+    "label": "Small Pool (small)",
+    "value": "small",
+  },
+]
+`;
+
+exports[`Selector: ipPools getReAssignPoolsOptions returns formatted pools list and renames label of current selected pool 1`] = `
+Array [
+  Object {
+    "label": "Big Pool (big)",
+    "value": "big",
+  },
+  Object {
+    "label": "None (none)",
+    "value": "none",
+  },
+  Object {
+    "label": "Default (default)",
+    "value": "default",
+  },
+  Object {
+    "label": "-- Change Pool --",
+    "value": "small",
+  },
+]
+`;

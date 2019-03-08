@@ -94,22 +94,7 @@ export const getReAssignPoolsOptions = createSelector(
   }))
 );
 
-export const getOverflowPoolsOptions = createSelector(
-  [getIpPools, selectCurrentPool], (pools, currentPool) => pools.map((pool) => ({
-    value: pool.id,
-    label: (pool.id === currentPool.id) ? "-- Select an Overflow Pool --" : `${pool.name} (${pool.id})` //todo verify if currentPool can be set as overflow pool. in that case, we need to return currentPool name as it is
-  }))
-);
-
-export const getStageOptions = createSelector(
-  [selectIpForCurrentPool], (currentIp) => _.map(_.range(20), (i) => ({
-    value: i + 1,
-    label: `Stage ${i + 1}`,
-    disabled: i >= currentIp.auto_warmup_stage
-  }))
-);
-
-export const getIpInitialValues = createSelector(
+export const getIpFormInitialValues = createSelector(
   [selectIpForCurrentPool, selectCurrentPool], (currentIp, pool) => ({
     ...currentIp,
     ip_pool: pool.id
