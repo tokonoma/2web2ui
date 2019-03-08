@@ -6,9 +6,9 @@ export const defaultFormValues = {
   facet_value: undefined,
   threshold: {
     error: {
-      comparator: 'gt',
+      comparator: 'lt',
       target: null
     }
   },
-  enabled: false
+  enabled: true
 };

@@ -55,7 +55,7 @@ export class EditPage extends Component {
   }
 
   render() {
-    const { loading, deletePending } = this.props;
+    const { loading, deletePending, alert } = this.props;
 
     if (loading) {
       return <Loading />;
@@ -63,7 +63,7 @@ export class EditPage extends Component {
 
     return (
       <Page
-        title='Edit Alert'
+        title={`Edit ${_.get(alert, 'name', 'Alert')}`}
         breadcrumbAction={{ content: 'Back to Alerts', to: '/alerts', component: Link }}
         secondaryActions={[{ content: 'Delete Alert', onClick: this.toggleDelete }]}>
         <AlertForm newAlert = {false} onSubmit = {this.handleUpdate}/>
