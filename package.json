@@ -103,7 +103,7 @@
   },
   "devDependencies": {
     "@babel/core": "7.1.6",
-    "@storybook/addon-actions": "^4.1.11",
+    "@storybook/addon-actions": "^5.0.1",
     "@storybook/react": "^4.1.11",
     "autoprefixer": "^9.0.0",
     "babel-eslint": "^9.0.0",
