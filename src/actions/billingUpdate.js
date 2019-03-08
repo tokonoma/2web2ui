@@ -1,4 +1,4 @@
-import { fetch as fetchAccount, getBillingInfo } from './account';
+import { fetch as fetchAccount } from './account';
 import { formatUpdateData } from 'src/helpers/billing';
 import chainActions from 'src/actions/helpers/chainActions';
 import { collectPayments, cors, syncSubscription, updateCreditCard, updateSubscription } from './billing';
@@ -21,9 +21,8 @@ export default function billingUpdate(values) {
     const updateZuoraCC = ({ meta, results: { accountKey, token, signature }}) => (
       updateCreditCard({ data: formatUpdateData({ ...values, accountKey }), signature, token, meta })
     );
-    const fetchAccountDetails = ({ meta }) => fetchAccount({ include: 'usage', meta });
-    const fetchBillingInfo = () => getBillingInfo();
-    const actions = [corsUpdateBilling, updateZuoraCC, maybeUpdateSubscription, syncSubscription, collectPayments, fetchAccountDetails, fetchBillingInfo];
+    const fetchAccountDetails = () => fetchAccount({ include: 'usage,billing' });
+    const actions = [corsUpdateBilling, updateZuoraCC, maybeUpdateSubscription, syncSubscription, collectPayments, fetchAccountDetails];
 
     return dispatch(chainActions(...actions)());
   };

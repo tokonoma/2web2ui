@@ -23,17 +23,6 @@ export function getPlans({ meta = {}} = {}) {
   });
 }
 
-export function getBillingInfo({ meta = {}} = {}) {
-  return sparkpostApiRequest({
-    type: 'GET_BILLING',
-    meta: {
-      method: 'GET',
-      url: '/v1/account/billing',
-      ...meta
-    }
-  });
-}
-
 export function update(data) {
   return sparkpostApiRequest({
     type: 'UPDATE_ACCOUNT',

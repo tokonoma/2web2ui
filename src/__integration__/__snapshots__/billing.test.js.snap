@@ -172,22 +172,10 @@ Array [
       },
       "method": "get",
       "params": Object {
-        "include": "usage",
+        "include": "usage,billing",
       },
       "responseType": "json",
       "url": "/v1/account",
-    },
-  ],
-  Array [
-    Object {
-      "data": undefined,
-      "headers": Object {
-        "Authorization": "very-real-access-token",
-      },
-      "method": "get",
-      "params": undefined,
-      "responseType": "json",
-      "url": "/v1/account/billing",
     },
   ],
 ]
@@ -218,22 +206,10 @@ Array [
       },
       "method": "get",
       "params": Object {
-        "include": "usage",
+        "include": "usage,billing",
       },
       "responseType": "json",
       "url": "/v1/account",
-    },
-  ],
-  Array [
-    Object {
-      "data": undefined,
-      "headers": Object {
-        "Authorization": "very-real-access-token",
-      },
-      "method": "get",
-      "params": undefined,
-      "responseType": "json",
-      "url": "/v1/account/billing",
     },
   ],
 ]
@@ -339,22 +315,10 @@ Array [
       },
       "method": "get",
       "params": Object {
-        "include": "usage",
+        "include": "usage,billing",
       },
       "responseType": "json",
       "url": "/v1/account",
-    },
-  ],
-  Array [
-    Object {
-      "data": undefined,
-      "headers": Object {
-        "Authorization": "very-real-access-token",
-      },
-      "method": "get",
-      "params": undefined,
-      "responseType": "json",
-      "url": "/v1/account/billing",
     },
   ],
 ]
@@ -389,22 +353,10 @@ Array [
       },
       "method": "get",
       "params": Object {
-        "include": "usage",
+        "include": "usage,billing",
       },
       "responseType": "json",
       "url": "/v1/account",
-    },
-  ],
-  Array [
-    Object {
-      "data": undefined,
-      "headers": Object {
-        "Authorization": "very-real-access-token",
-      },
-      "method": "get",
-      "params": undefined,
-      "responseType": "json",
-      "url": "/v1/account/billing",
     },
   ],
 ]
@@ -488,22 +440,10 @@ Array [
       },
       "method": "get",
       "params": Object {
-        "include": "usage",
+        "include": "usage,billing",
       },
       "responseType": "json",
       "url": "/v1/account",
-    },
-  ],
-  Array [
-    Object {
-      "data": undefined,
-      "headers": Object {
-        "Authorization": "very-real-access-token",
-      },
-      "method": "get",
-      "params": undefined,
-      "responseType": "json",
-      "url": "/v1/account/billing",
     },
   ],
 ]

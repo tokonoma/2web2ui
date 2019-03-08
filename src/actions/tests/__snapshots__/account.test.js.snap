@@ -62,16 +62,6 @@ Object {
 }
 `;
 
-exports[`getBilling 1`] = `
-Object {
-  "meta": Object {
-    "method": "GET",
-    "url": "/v1/account/billing",
-  },
-  "type": "GET_BILLING",
-}
-`;
-
 exports[`getPlans 1`] = `
 Object {
   "meta": Object {

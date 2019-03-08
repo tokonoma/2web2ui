@@ -84,17 +84,6 @@ export const selectVisiblePlans = createSelector(
   )
 );
 
-export const selectAccount = (state) => state.account;
-
-export const selectAccountBilling = createSelector(
-  [selectAccount],
-  (account) => ({
-    account,
-    error: account.error || account.billingError,
-    loading: account.loading || account.billingLoading
-  })
-);
-
 export const selectBillingInfo = createSelector(
   [
     canUpdateBillingInfoSelector,

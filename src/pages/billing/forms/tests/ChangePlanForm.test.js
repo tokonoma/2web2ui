@@ -38,7 +38,6 @@ describe('Form Container: Change Plan', () => {
       getPlans: jest.fn(),
       getBillingCountries: jest.fn(),
       verifyPromoCode: jest.fn(() => Promise.resolve({ discount_id: 'test-discount' })),
-      getBillingInfo: jest.fn(),
       fetchAccount: jest.fn(),
       plans,
       currentPlan: {},
@@ -68,8 +67,9 @@ describe('Form Container: Change Plan', () => {
   });
 
   it('should get plans and countries on mount', () => {
-    expect(props.fetchAccount).toHaveBeenCalled();
-    expect(props.getBillingInfo).toHaveBeenCalled();
+    expect(props.fetchAccount).toHaveBeenCalledWith(expect.objectContaining({
+      include: expect.stringContaining('billing')
+    }));
     expect(props.getPlans).toHaveBeenCalled();
     expect(props.getBillingCountries).toHaveBeenCalled();
   });

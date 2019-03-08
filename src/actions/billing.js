@@ -1,6 +1,6 @@
 /* eslint max-lines: ["error", 215] */
 import { formatContactData } from 'src/helpers/billing';
-import { fetch as fetchAccount, getBillingInfo } from './account';
+import { fetch as fetchAccount } from './account';
 import { list as getSendingIps } from './sendingIps';
 import { isAws } from 'src/helpers/conditions/account';
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
@@ -23,8 +23,6 @@ export function syncSubscription({ meta = {}} = {}) {
  * @param {string} code
  */
 export function updateSubscription({ code, promoCode, meta = {}}) {
-  const getBillingAction = () => getBillingInfo();
-  const fetchAccountAction = () => fetchAccount({ include: 'usage', meta: { onSuccess: getBillingAction }});
   return (dispatch, getState) => dispatch(
     sparkpostApiRequest({
       type: 'UPDATE_SUBSCRIPTION',
@@ -36,7 +34,7 @@ export function updateSubscription({ code, promoCode, meta = {}}) {
           code
         },
         ...meta,
-        onSuccess: meta.onSuccess ? meta.onSuccess : fetchAccountAction
+        onSuccess: meta.onSuccess ? meta.onSuccess : () => fetchAccount({ include: 'usage,billing' })
       }
     })
   );
@@ -57,8 +55,7 @@ export function updateBillingContact(data) {
   });
 
   return (dispatch) => dispatch(action)
-    .then(() => dispatch(fetchAccount({ include: 'usage' })))
-    .then(() => dispatch(getBillingInfo()));
+    .then(() => dispatch(fetchAccount({ include: 'usage,billing' })));
 }
 
 export function verifyPromoCode({ promoCode, billingId, meta = {}}) {
