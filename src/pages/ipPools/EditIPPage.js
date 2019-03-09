@@ -34,10 +34,9 @@ export class EditIPPage extends Component {
   }
 
   renderError() {
-    const { listError, getError } = this.props;
-    const msg = listError ? listError.message : getError.message;
+    const { error } = this.props;
     return <ApiErrorBanner
-      errorDetails={msg}
+      errorDetails={error.message}
       message="Sorry, we seem to have had some trouble loading your IP pool."
       reload={this.loadDependantData}
     />;
@@ -83,9 +82,7 @@ const mapStateToProps = (state, props) => {
     currentIp: selectIpForCurrentPool(state, props),
     currentPool: selectCurrentPool(state),
     loading: getLoading || listLoading,
-    error: listError || getError,
-    listError,
-    getError
+    error: listError || getError
   };
 };
 
