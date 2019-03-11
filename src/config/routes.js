@@ -711,6 +711,7 @@ const routes = [
   {
     path: '/recipient-validation',
     component: RecipientValidationPage,
+    condition: hasGrants('recipient-validation/manage'),
     layout: App,
     title: 'Recipient Email Validation',
     supportDocsSearch: 'Recipient Validation'
