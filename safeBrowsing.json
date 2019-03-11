@@ -1,0 +1,29 @@
+{
+ "client": {
+     "clientId": "are-you-safe"
+   },
+   "threatInfo": {
+     "threatTypes": [
+       "THREAT_TYPE_UNSPECIFIED",
+       "MALWARE",
+       "SOCIAL_ENGINEERING",
+       "UNWANTED_SOFTWARE",
+       "POTENTIALLY_HARMFUL_APPLICATION"
+     ],
+     "platformTypes":    [
+       "PLATFORM_TYPE_UNSPECIFIED",
+       "WINDOWS",
+       "LINUX",
+       "ANDROID",
+       "OSX",
+       "IOS",
+       "ANY_PLATFORM",
+       "ALL_PLATFORMS",
+       "CHROME"
+     ],
+     "threatEntryTypes": ["URL"],
+     "threatEntries": [
+       { "url": "http://testsafebrowsing.appspot.com/apiv4/ANY_PLATFORM/MALWARE/URL/" }
+     ]
+   }
+ }
