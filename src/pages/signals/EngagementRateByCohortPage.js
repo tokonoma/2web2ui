@@ -1,5 +1,5 @@
 /* eslint-disable max-lines */
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Panel, Grid } from '@sparkpost/matchbox';
 import LineChart from './components/charts/linechart/LineChart';
@@ -38,19 +38,26 @@ export class EngagementRateByCohortPage extends Component {
     };
   }
 
-  getTooltipContent = ({ payload = {}}) => (
-    <Fragment>
-      {_.keys(cohorts).map((key) => (
-        <TooltipMetric
-          key={key}
-          color={cohorts[key].fill}
-          label={cohorts[key].label}
-          description={cohorts[key].description}
-          value={`${roundToPlaces(payload[key], 1)}%`}
-        />
-      ))}
-    </Fragment>
-  )
+  getTooltipContent = ({ payload = {}}) => {
+    const metrics = _.keys(cohorts).reduce((acc, key) => ([ ...acc, {
+      ...cohorts[key], key,
+      value: roundToPlaces(payload[key], 1)
+    }]), []);
+
+    return (
+      <>
+        {_.orderBy(metrics, 'value', 'desc').map((metric) => (
+          <TooltipMetric
+            key={metric.key}
+            color={metric.fill}
+            label={metric.label}
+            description={metric.description}
+            value={`${roundToPlaces(metric.value, 1)}%`}
+          />
+        ))}
+      </>
+    );
+  }
 
   renderContent = () => {
     const { data = [], facet, facetId, handleDateSelect, loading, empty, error, selectedDate, subaccountId } = this.props;
