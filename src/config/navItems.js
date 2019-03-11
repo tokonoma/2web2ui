@@ -43,10 +43,32 @@ export default [
     ]
   },
   {
+    // TODO Remove when signals v2 is released
     label: 'Signals',
     to: '/signals',
     icon: Signal,
     tag: 'new'
+  },
+  {
+    // Duplicated, but will not render without feature_signals_v2 UI option
+    label: 'Signals',
+    to: '/signals',
+    icon: Signal,
+    tag: 'new',
+    children: [
+      {
+        label: 'Health Score',
+        to: '/signals/health-score'
+      },
+      {
+        label: 'Spam Traps',
+        to: '/signals/spam-traps'
+      },
+      {
+        label: 'Engagement Recency',
+        to: '/signals/engagement'
+      }
+    ]
   },
   {
     label: 'Templates',
