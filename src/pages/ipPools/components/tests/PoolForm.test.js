@@ -87,9 +87,4 @@ describe('PoolForm tests', () => {
     expect(wrapper.find('Button').shallow().text()).toEqual('Update IP Pool');
     expect(wrapper.find('Button').prop('disabled')).toBe(false);
   });
-
-  it('should render row properly', () => {
-    const rows = wrapper.instance().getRowData('options', { id: '1_1_1_1', external_ip: 'ext-ip', hostname: 'host' });
-    expect(rows).toMatchSnapshot();
-  });
 });

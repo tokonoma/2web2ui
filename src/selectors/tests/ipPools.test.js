@@ -1,4 +1,4 @@
-import * as ipPoolSelectors from "../ipPools";
+import * as ipPoolSelectors from '../ipPools';
 import * as accountBillingInfoSelectors from 'src/selectors/accountBillingInfo';
 
 jest.mock('src/selectors/accountBillingInfo', () => ({
@@ -128,7 +128,7 @@ describe('Selector: ipPools', () => {
           ...state.ipPools,
           pool: {
             name: 'Small Pool',
-            id: 'small',
+            id: 'small'
           }
         }
       };
@@ -139,19 +139,19 @@ describe('Selector: ipPools', () => {
   describe('getIpFormInitialValues', () => {
     let props;
     beforeEach(() => {
-      ipPoolSelectors.selectIpForCurrentPool = jest.fn(()=>([{ external_ip: '1.1.1.1' }]));
-      ipPoolSelectors.selectCurrentPool = jest.fn(()=>({name: 'MY CURRENT POOL', id: 'my_current_pool'}));
+      ipPoolSelectors.selectIpForCurrentPool = jest.fn(() => ([{ external_ip: '1.1.1.1' }]));
+      ipPoolSelectors.selectCurrentPool = jest.fn(() => ({ name: 'MY CURRENT POOL', id: 'my_current_pool' }));
       props = {
         match: {
           params: {
             ip: '1.1.1.1'
           }
         }
-      }
+      };
     });
 
     it('returns inital values for ip form', () => {
-      expect(ipPoolSelectors.getIpFormInitialValues(state, props)).toEqual({external_ip: '1.1.1.1', ip_pool: "my_current_pool"});
-    })
+      expect(ipPoolSelectors.getIpFormInitialValues(state, props)).toEqual({ external_ip: '1.1.1.1', ip_pool: 'my_current_pool' });
+    });
   });
 });

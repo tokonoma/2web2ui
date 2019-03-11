@@ -37,13 +37,13 @@ export class EditIPPage extends Component {
     const { error } = this.props;
     return <ApiErrorBanner
       errorDetails={error.message}
-      message="Sorry, we seem to have had some trouble loading your IP pool."
+      message="Sorry, we seem to have had some trouble loading your IP data."
       reload={this.loadDependantData}
     />;
   }
 
   renderForm() {
-    const { error, currentIp, currentPool } = this.props;
+    const { error } = this.props;
     if (error) {
       return this.renderError();
     }
@@ -54,7 +54,7 @@ export class EditIPPage extends Component {
   render() {
     const { loading, currentPool, currentIp } = this.props;
 
-    if (loading || !currentIp) {
+    if (loading || !currentIp || !currentPool) {
       return <Loading/>;
     }
 

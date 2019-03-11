@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`IP List tests renders with ips 1`] = `
+<TableCollection
+  columns={
+    Array [
+      "IP",
+      "Hostname",
+    ]
+  }
+  defaultSortColumn={null}
+  defaultSortDirection="asc"
+  getRowData={[Function]}
+  pagination={false}
+  rows={
+    Array [
+      Object {
+        "external_ip": "1.1.1.1",
+        "hostname": "foo.com",
+      },
+      Object {
+        "external_ip": "1.1.2.2",
+        "hostname": "bar.com",
+      },
+      Object {
+        "external_ip": "1.1.2.3",
+      },
+    ]
+  }
+/>
+`;
+
+exports[`IP List tests should render row properly 1`] = `
+Array [
+  <Link
+    replace={false}
+    to="/account/ip-pools/edit/foopool/ip/1.1.1.1"
+  >
+    1.1.1.1
+  </Link>,
+  "foo.com",
+]
+`;

@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { Link } from 'react-router-dom';
 import { Button, Panel, UnstyledLink } from '@sparkpost/matchbox';
-import { SelectWrapper } from 'src/components/reduxFormWrappers';
 import { SendingDomainTypeaheadWrapper, TextFieldWrapper } from 'src/components';
 import AccessControl from 'src/components/auth/AccessControl';
 import { required } from 'src/helpers/validation';
@@ -13,23 +12,6 @@ import isDefaultPool from '../helpers/defaultPool';
 import IPList from './IPList';
 
 export class PoolForm extends Component {
-  poolSelect = (ip, poolOptions, submitting) => (<Field
-    name={ip.id}
-    component={SelectWrapper}
-    options={poolOptions}
-    disabled={submitting}/>
-  );
-
-  getRowData = (poolOptions, ip) => {
-    const { submitting, pool } = this.props;
-    const ipLink = <Link to={`/account/ip-pools/edit/${pool.id}/ip/${ip.external_ip}`}>{ip.external_ip}</Link>;
-
-    return [
-      ipLink,
-      ip.hostname
-    ];
-  };
-
   renderPoolIps = () => {
     const { isNew, ips = [], pool, showPurchaseCTA } = this.props;
 
@@ -56,7 +38,7 @@ export class PoolForm extends Component {
   };
 
   render() {
-    const { isNew, ips, pool, handleSubmit, submitting, pristine } = this.props;
+    const { isNew, pool, handleSubmit, submitting, pristine } = this.props;
     const submitText = isNew ? 'Create IP Pool' : 'Update IP Pool';
     const editingDefault = !isNew && isDefaultPool(pool.id);
     const helpText = editingDefault ? 'You cannot change the default IP pool\'s name' : '';

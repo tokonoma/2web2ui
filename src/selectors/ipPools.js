@@ -8,11 +8,11 @@ const DEFAULT = 'default';
 
 export const getIpPools = (state) => state.ipPools.list;
 const currentSendingIp = (state, props) => props.match.params.ip;
-export const selectCurrentPool = ({ ipPools = {} }) => ipPools.pool || {};
+export const selectCurrentPool = ({ ipPools = {}}) => ipPools.pool || {};
 
 export const selectIpsForCurrentPool = createSelector(
   [selectCurrentPool],
-  ({ ips = [] }) => ips.map((ip) => ({
+  ({ ips = []}) => ips.map((ip) => ({
     ...ip,
     id: encodeIp(ip.external_ip)
   }))
@@ -20,7 +20,7 @@ export const selectIpsForCurrentPool = createSelector(
 
 export const selectIpForCurrentPool = createSelector(
   [selectCurrentPool, currentSendingIp],
-  ({ ips = [] }, sendingIp) => _.find(ips, { external_ip: sendingIp })
+  ({ ips = []}, sendingIp) => _.find(ips, { external_ip: sendingIp })
 );
 
 export const getDefaultPool = createSelector(
@@ -83,14 +83,14 @@ export const shouldShowIpPurchaseCTA = createSelector(
 );
 
 export const selectFirstIpPoolId = createSelector(
-  [getIpPools], (ipPools) => _.get(ipPools, "[0].id")
+  [getIpPools], (ipPools) => _.get(ipPools, '[0].id')
 );
 
 
 export const getReAssignPoolsOptions = createSelector(
   [getIpPools, selectCurrentPool], (pools, currentPool) => pools.map((pool) => ({
     value: pool.id,
-    label: (pool.id === currentPool.id) ? "-- Change Pool --" : `${pool.name} (${pool.id})`
+    label: (pool.id === currentPool.id) ? '-- Change Pool --' : `${pool.name} (${pool.id})`
   }))
 );
 

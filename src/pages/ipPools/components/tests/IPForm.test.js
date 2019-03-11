@@ -1,22 +1,16 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 import { IPForm } from '../IPForm';
-import config from 'src/config';
-jest.mock('src/config');
 
 describe('IP Form tests', () => {
   let props;
   let wrapper;
-  let onSubmit;
   beforeEach(() => {
-    onSubmit = jest.fn();
-
     props = {
-      handleSubmit: jest.fn(() => onSubmit()),
+      handleSubmit: jest.fn(),
       currentIp: {
         hostname: 'abcd.com'
-      },
-      onSubmit: jest.fn()
+      }
     };
 
     wrapper = shallow(<IPForm {...props} />);

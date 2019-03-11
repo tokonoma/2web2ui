@@ -81,15 +81,3 @@ exports[`PoolForm tests should render form 1`] = `
   </Panel>
 </Fragment>
 `;
-
-exports[`PoolForm tests should render row properly 1`] = `
-Array [
-  <Link
-    replace={false}
-    to="/account/ip-pools/edit/my-pool/ip/ext-ip"
-  >
-    ext-ip
-  </Link>,
-  "host",
-]
-`;
