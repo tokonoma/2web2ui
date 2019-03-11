@@ -62,8 +62,8 @@ const parseRecipientListCsv = (file) => new Promise((resolve, reject) => {
     header: true,
     skipEmptyLines: true,
     complete: (result) => parseRawRecords(result, resolve, reject),
-    error: (err) => reject(err)
+    error: () => reject(['Unable to read your file'])
   });
 });
-export default parseRecipientListCsv;
 
+export default parseRecipientListCsv;

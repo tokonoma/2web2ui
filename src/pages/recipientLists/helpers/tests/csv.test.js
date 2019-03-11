@@ -1,12 +1,11 @@
 import cases from 'jest-in-case';
-
+import papaparse from 'papaparse';
 import parseRecipientListCsv from '../csv';
 
 // Note: these tests pass CSV strings into the function under test.
 // The production version passes a DOM File object.
 
 describe('Recipient list CSV parser', () => {
-
   it('accepts minimal CSV and produces JSON', () => {
     const csv = 'email\nscratch@example.com\n';
     return expect(parseRecipientListCsv(csv)).resolves.toMatchSnapshot();
@@ -42,5 +41,12 @@ describe('Recipient list CSV parser', () => {
     const csv = 'email,substitution_data,metadata,tags\nscratch@example.com\n,{"badjson:101}\nscratch2@example.com,,"{morebadjson"":""fre""}\n';
     return expect(parseRecipientListCsv(csv)).rejects.toMatchSnapshot();
   });
-});
 
+  it('rejects with error message when unable to read file', () => {
+    // force call error callback
+    jest.spyOn(papaparse, 'parse')
+      .mockImplementation((file, config) => config.error(new Error('Oh no!')));
+
+    return expect(parseRecipientListCsv('test')).rejects.toEqual(['Unable to read your file']);
+  });
+});
