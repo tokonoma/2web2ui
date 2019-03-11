@@ -15,7 +15,7 @@ import {
 const columns = ['Sending IP', 'Hostname'];
 const formName = 'ipForm';
 
-export class PoolForm extends Component {
+export class IPForm extends Component {
   getRowData = (poolOptions, ip) => {
     const { submitting, currentPool } = this.props;
     const ipLink = <Link to={`/account/ip-pools/edit/${pool.id}/ip/${ip.external_ip}`}>{ip.external_ip}</Link>;
@@ -30,7 +30,7 @@ export class PoolForm extends Component {
 
     return (
       <Panel>
-        <form onSubmit={handleSubmit(this.props.onSubmit)}>
+        <form onSubmit={handleSubmit}>
           <Panel.Section>
             <LabelledValue label='Hostname'>
               <p>{currentIp.hostname}</p>
@@ -75,5 +75,5 @@ const formOptions = {
   enableReinitialize: true
 };
 
-const PoolReduxForm = reduxForm(formOptions)(PoolForm);
-export default withRouter(connect(mapStateToProps, {})(PoolReduxForm));
+const IPReduxForm = reduxForm(formOptions)(IPForm);
+export default withRouter(connect(mapStateToProps, {})(IPReduxForm));

@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`IP Form tests should render form 1`] = `
+<Panel>
+  <form
+    onSubmit={[MockFunction]}
+  >
+    <Panel.Section>
+      <LabelledValue
+        label="Hostname"
+      >
+        <p>
+          abcd.com
+        </p>
+      </LabelledValue>
+    </Panel.Section>
+    <Panel.Section>
+      <LabelledValue
+        label="Reassign Pool"
+      >
+        <Field
+          component={[Function]}
+          name="ip_pool"
+        />
+      </LabelledValue>
+    </Panel.Section>
+    <Panel.Section>
+      <Button
+        primary={true}
+        size="default"
+        submit={true}
+      >
+        Update Sending IP
+      </Button>
+    </Panel.Section>
+  </form>
+</Panel>
+`;
