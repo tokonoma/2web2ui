@@ -16,7 +16,7 @@ describe('Alert Form Component', () => {
       assignTo: 'all',
       threshold: {
         error: {
-          comparator: 'gt',
+          comparator: 'lt',
           target: 50
         }
       },
@@ -101,6 +101,15 @@ describe('Alert Form Component', () => {
       expect(wrapper.find({ name: 'threshold.error.target' }).props().validate()).toEqual('Required');
       wrapper.setProps({ alert_metric: 'signals_health_day_over_day' });
       expect(wrapper.find({ name: 'threshold.error.target' }).props().validate()).toEqual('Required');
+    });
+  });
+
+  describe('enabled prop', () => {
+    it('should only show enabled toggle on edit page', () => {
+      wrapper.setProps({ alert_metric: 'signals_health_threshold', newAlert: true });
+      expect(wrapper).toMatchSnapshot();
+      wrapper.setProps({ newAlert: false });
+      expect(wrapper).toMatchSnapshot();
     });
   });
 

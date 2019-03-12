@@ -183,7 +183,7 @@ export class AlertForm extends Component {
               validate={[required, validateEmailList]}
               multiline
             />
-            <Grid>
+            {!newAlert && <Grid>
               <Grid.Column xs={1} md={1}>
                 <label>Enabled</label>
               </Grid.Column>
@@ -198,7 +198,7 @@ export class AlertForm extends Component {
                   />
                 </div>
               </Grid.Column>
-            </Grid>
+            </Grid>}
             <br/>
             <Button submit primary disabled={pristine || submitting}>{submitText}</Button>
           </Panel.Section>

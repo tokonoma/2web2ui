@@ -19,7 +19,7 @@ export class CreatePage extends Component {
     await createAlert({
       data: _.omit(alertBody, 'id', 'subaccount', 'assignTo')
     }).then((response) => {
-      showAlert({ type: 'success', message: 'Create Successful' });
+      showAlert({ type: 'success', message: 'Alert created' });
       this.props.history.push(`/alerts-new/edit/${response.id}`);
     });
   }
