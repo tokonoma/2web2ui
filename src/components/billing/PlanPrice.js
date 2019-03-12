@@ -34,8 +34,7 @@ const PlanPrice = ({ plan, showOverage = false, showIp = false, showCsm = false,
   return (
     <span className='notranslate'>
       <span className={styles.MainLabel} {...rest}>
-        <strong>{planTitle}</strong> {!currentFreePlan && 'emails'}
-        {!plan.isFree && '/month'}
+        <strong>{planTitle}</strong> {!currentFreePlan && 'emails/month'}
         {priceInfo.price > 0 && <span> at {discountAmount !== priceInfo.price && (<s className={styles.DiscountedLabel}>${priceInfo.price}</s>)}<strong>${discountAmount.toLocaleString()}</strong>/{priceInfo.intervalShort}</span>}
       </span>
       <span className={styles.SupportLabel}>
