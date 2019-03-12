@@ -16,8 +16,8 @@ const PlanPrice = ({ plan, showOverage = false, showIp = false, showCsm = false,
     ? 'First dedicated IP address is free'
     : null;
 
-  const currentFreePlan = plan.code && plan.code.includes('free500-1018');
-  const planTitle = currentFreePlan ? 'Test Account' : `${plan.volume.toLocaleString()} emails`;
+  const currentFreePlan = plan.code && ['free500-1018', 'free15K-1018'].includes(plan.code);
+  const planTitle = currentFreePlan ? 'Test Account' : `${plan.volume.toLocaleString()}`;
 
   const displayCsm = showCsm && plan.includesCsm;
 
@@ -34,7 +34,7 @@ const PlanPrice = ({ plan, showOverage = false, showIp = false, showCsm = false,
   return (
     <span className='notranslate'>
       <span className={styles.MainLabel} {...rest}>
-        <strong>{planTitle}</strong>
+        <strong>{planTitle}</strong> {!currentFreePlan && 'emails'}
         {!plan.isFree && '/month'}
         {priceInfo.price > 0 && <span> at {discountAmount !== priceInfo.price && (<s className={styles.DiscountedLabel}>${priceInfo.price}</s>)}<strong>${discountAmount.toLocaleString()}</strong>/{priceInfo.intervalShort}</span>}
       </span>
