@@ -56,10 +56,7 @@ export class IpPoolsList extends Component {
 
   render() {
     const { loading, error, showPurchaseCTA } = this.props;
-
-    if (loading) {
-      return <Loading />;
-    }
+    if (loading) { return <Loading />; }
 
     const createAction = { content: 'Create IP Pool', Component: Link, to: '/account/ip-pools/create' };
     const purchaseActions = showPurchaseCTA ? [{ content: 'Purchase IPs', Component: Link, to: '/account/billing' }] : null;
