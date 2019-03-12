@@ -16,13 +16,6 @@ exports[`Component: RoleRadioGroup should render the RadioGroup 1`] = `
   allowSuperUser={false}
   clearFields={[MockFunction]}
   developer_and_email_roles={false}
-  grid={
-    Object {
-      "md": 6,
-      "sm": 12,
-      "xs": 12,
-    }
-  }
   hasSubaccounts={false}
   options={
     Array [
@@ -37,7 +30,7 @@ exports[`Component: RoleRadioGroup should render the RadioGroup 1`] = `
       Object {
         "children": false,
         "disabled": false,
-        "helpText": "Has access to reporting and read-only access to templates.",
+        "helpText": "Data analytics user. Has access to all reporting features. No access to any account or feature settings.",
         "label": <strong>
           Reporting
         </strong>,
