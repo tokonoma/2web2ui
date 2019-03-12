@@ -14,10 +14,14 @@ import { METRICS } from '../constants/metrics';
 import { FACETS } from '../constants/facets';
 import { COMPARATOR } from '../constants/comparator';
 import { defaultFormValues } from '../constants/defaultFormValues';
+import { list as listDomains } from 'src/actions/sendingDomains';
+import { selectDomainsBySubaccount } from 'src/selectors/templates';
+import FromEmailWrapper from './FromEmailWrapper';
 
 // Helpers & Validation
 import { required, integer, minNumber, maxLength, numberBetween } from 'src/helpers/validation';
 import validateEmailList from '../helpers/validateEmailList';
+import _ from 'lodash';
 
 const formName = 'alertForm';
 
@@ -41,7 +45,8 @@ export class AlertForm extends Component {
       facet_name,
       handleSubmit,
       newAlert,
-      change
+      change,
+      domains
     } = this.props;
 
     const submitText = submitting ? 'Submitting...' : (newAlert ? 'Create Alert' : 'Update Alert');
@@ -137,7 +142,8 @@ export class AlertForm extends Component {
                         validate={required}
                       />
                     }
-                    component={TextFieldWrapper}
+                    component={FromEmailWrapper}
+                    domains={domains}
                     onChange={removeFacetValue()}
                     disabled={submitting || checkFacet()}
                     placeholder={facet_name === 'ALL' ? 'No facet selected' : ''}
@@ -211,6 +217,8 @@ const mapStateToProps = (state, props) => {
   const selector = formValueSelector(formName);
 
   return {
+    id: _.get(props.subaccount, 'id', -1),
+    domains: selectDomainsBySubaccount(state, props),
     alert_metric: selector(state, 'alert_metric'),
     facet_name: selector(state, 'facet_name'),
     facet_value: selector(state, 'facet_value'),
@@ -226,4 +234,4 @@ const formOptions = {
   enableReinitialize: true
 };
 
-export default withRouter(connect(mapStateToProps, {})(reduxForm(formOptions)(AlertForm)));
+export default withRouter(connect(mapStateToProps, { listDomains })(reduxForm(formOptions)(AlertForm)));
