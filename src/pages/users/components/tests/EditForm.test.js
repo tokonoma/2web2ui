@@ -18,12 +18,27 @@ describe('Component: EditForm', () => {
     expect(subject()).toMatchSnapshot();
   });
 
-  it('should disable single sign-on checkbox and display instructions', () => {
-    expect(subject({ isAccountSingleSignOnEnabled: false })).toMatchSnapshot();
+  it('should hide single sign-on checkbox if single sign-on is not configured', () => {
+    const wrapper = subject({ isAccountSingleSignOnEnabled: false });
+    expect(wrapper.find('Field[name="is_sso"]')).not.toExist();
+  });
+
+  it('should show single sign-on checkbox if single sign-on is enabled', () => {
+    const wrapper = subject();
+    expect(wrapper.find('Field[name="is_sso"]')).toExist();
+  });
+
+  it('should show role selector if not a subaccount_reporting user', () => {
+    const wrapper = subject();
+    expect(wrapper.find('Field[name="access"]')).toExist();
+    expect(wrapper.find('LabelledValue[name="subaccountInfo"]')).not.toExist();
   });
 
   it('should show subaccount info instead of the role selector for subaccount_reporting users', () => {
-    expect(subject({ user: { ...baseProps.user, access: 'subaccount_reporting' }, subaccount: { id: 23, name: 'aSubaccount' }})).toMatchSnapshot();
+    const wrapper = subject({ user: { ...baseProps.user, access: 'subaccount_reporting' }, subaccount: { id: 23, name: 'aSubaccount' }});
+    expect(wrapper.find('LabelledValue[name="subaccountInfo"]')).toExist();
+    expect(wrapper.find('Field[name="access"]')).not.toExist();
+
   });
 
   it('should call submit handler', () => {

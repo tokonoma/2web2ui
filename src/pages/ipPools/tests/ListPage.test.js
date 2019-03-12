@@ -15,7 +15,8 @@ describe('IP Pools List Page', () => {
         { name: 'Test Pool 2', id: 102, ips: []}
       ],
       listPools: jest.fn(() => []),
-      showPurchaseCTA: true
+      showPurchaseCTA: true,
+      isAdmin: true
     };
 
     wrapper = shallow(<IpPoolsList {...props} />);
@@ -52,6 +53,11 @@ describe('IP Pools List Page', () => {
 
   it('does not render purchase action if showPurchaseCTA is false2', () => {
     wrapper.setProps({ ipPools: [{ name: 'Default', ips: []}], showPurchaseCTA: false });
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('does not render purchase action if isAdmin is false', () => {
+    wrapper.setProps({ ipPools: [{ name: 'Default', ips: []}], isAdmin: false });
     expect(wrapper).toMatchSnapshot();
   });
 

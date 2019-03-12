@@ -54,3 +54,14 @@ export function deleteAlert({ id }) {
     }
   });
 }
+
+export function getAlert({ id }) {
+  return sparkpostApiRequest({
+    type: 'GET_ALERT',
+    meta: {
+      method: 'GET',
+      url: `/labs/alerts/${id}`,
+      showErrorAlert: false
+    }
+  });
+}

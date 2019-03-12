@@ -1,12 +1,10 @@
 import React from 'react';
 import { ChangePlanForm } from '../ChangePlanForm';
 import { shallow } from 'enzyme';
-import * as accountConditions from 'src/selectors/accessConditionState';
 import * as conversions from 'src/helpers/conversionTracking';
 import * as billingHelpers from 'src/helpers/billing';
 
 jest.mock('src/helpers/billing');
-jest.mock('src/selectors/accessConditionState');
 jest.mock('src/helpers/conversionTracking');
 
 describe('Form Container: Change Plan', () => {
@@ -40,6 +38,7 @@ describe('Form Container: Change Plan', () => {
       getPlans: jest.fn(),
       getBillingCountries: jest.fn(),
       verifyPromoCode: jest.fn(() => Promise.resolve({ discount_id: 'test-discount' })),
+      getBillingInfo: jest.fn(),
       fetchAccount: jest.fn(),
       plans,
       currentPlan: {},
@@ -57,7 +56,6 @@ describe('Form Container: Change Plan', () => {
       updateSubscription: jest.fn(() => Promise.resolve()),
       isAws: false
     };
-    accountConditions.isAws = jest.fn(() => false);
     wrapper = shallow(<ChangePlanForm {...props} />);
     instance = wrapper.instance();
     submitSpy = jest.spyOn(instance.props, 'handleSubmit');
@@ -70,9 +68,8 @@ describe('Form Container: Change Plan', () => {
   });
 
   it('should get plans and countries on mount', () => {
-    expect(props.fetchAccount).toHaveBeenCalledWith(expect.objectContaining({
-      include: expect.stringContaining('billing')
-    }));
+    expect(props.fetchAccount).toHaveBeenCalled();
+    expect(props.getBillingInfo).toHaveBeenCalled();
     expect(props.getPlans).toHaveBeenCalled();
     expect(props.getBillingCountries).toHaveBeenCalled();
   });

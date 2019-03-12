@@ -75,7 +75,8 @@ const supportIssues = [
   {
     id: 'account_upgrade/downgrade_issue',
     label: 'Account upgrade/downgrade issues',
-    type: SUPPORT
+    type: SUPPORT,
+    condition: isAdmin
   },
   {
     id: 'general_billing',
@@ -93,6 +94,7 @@ const supportIssues = [
     messageLabel: 'Why do you think your account should be unsuspended?',
     type: COMPLIANCE,
     condition: all(
+      isAdmin,
       hasStatus('suspended'),
       not(hasStatusReasonCategory('100.01'))
     )

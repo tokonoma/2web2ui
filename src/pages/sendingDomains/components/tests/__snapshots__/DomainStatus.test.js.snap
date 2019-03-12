@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`DomainStatus component renders correctly 1`] = `
+exports[`DomainStatus renders section 1`] = `
 <SendingDomainSection
   title="Status"
 >
@@ -70,7 +70,7 @@ exports[`DomainStatus component renders correctly 1`] = `
             "subaccount_id": 100,
           }
         }
-        onChange={[MockFunction]}
+        onChange={[Function]}
       />
     </Panel>
   </Right>

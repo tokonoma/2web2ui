@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Panel } from '@sparkpost/matchbox';
+import { Banner, Panel } from '@sparkpost/matchbox';
 
 import { resolveStatus, resolveReadyFor } from 'src/helpers/domains';
 
@@ -9,7 +9,7 @@ import StatusDescription from './StatusDescription';
 import ShareWithSubaccounts from './ShareWithSubaccounts';
 import { SendingDomainSection } from './SendingDomainSection';
 
-export const DomainStatus = ({ domain, onShareDomainChange }) => {
+export const DomainStatus = ({ domain, hasAutoVerifyEnabled, onShareDomainChange }) => {
   const status = resolveStatus(domain.status);
   const readyFor = resolveReadyFor(domain.status);
 
@@ -19,11 +19,17 @@ export const DomainStatus = ({ domain, onShareDomainChange }) => {
         <VerificationHelp status={status} />
       </SendingDomainSection.Left>
       <SendingDomainSection.Right>
+        {hasAutoVerifyEnabled && status === 'verified' && (
+          <Banner
+            title="Auto-Verify is Enabled"
+            status="info"
+          >
+            As a trusted partner, your domains are automatically verified and ready for immediate
+            use pending our compliance check and your domain setup.
+          </Banner>
+        )}
         <Panel>
-          <StatusDescription
-            domain={domain}
-            readyFor={readyFor}
-            status={status} />
+          <StatusDescription domain={domain} readyFor={readyFor} status={status} />
           <ShareWithSubaccounts
             domain={domain}
             onChange={onShareDomainChange} />

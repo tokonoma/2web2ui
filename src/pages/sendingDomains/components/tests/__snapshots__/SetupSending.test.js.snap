@@ -1,17 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Component: SetupSending disables the verification button while submitting 1`] = `
-Array [
-  Object {
-    "color": "orange",
-    "content": "Verifying...",
-    "disabled": true,
-    "id": "verify-dkim",
-    "onClick": [Function],
-  },
-]
-`;
-
 exports[`Component: SetupSending renders correctly for unverified DKIM and invalid ownership with mailbox verification disabled 1`] = `
 <SendingDomainSection
   title="Set Up For Sending"
@@ -25,28 +13,12 @@ exports[`Component: SetupSending renders correctly for unverified DKIM and inval
     </p>
   </Left>
   <Right>
-    <Panel
-      actions={
-        Array [
-          Object {
-            "color": "orange",
-            "content": "Verify TXT Record",
-            "disabled": false,
-            "id": "verify-dkim",
-            "onClick": [Function],
-          },
-        ]
-      }
-      sectioned={true}
-      title={
-        <React.Fragment>
-          <ErrorIcon />
-           
-          <span>
-            DNS Settings
-          </span>
-        </React.Fragment>
-      }
+    <SetupInstructionPanel
+      isVerified={false}
+      isVerifying={false}
+      onVerify={[Function]}
+      recordType="TXT"
+      verifyButtonIdentifier="verify-dkim"
     >
       <LabelledValue
         label="Type"
@@ -69,7 +41,7 @@ exports[`Component: SetupSending renders correctly for unverified DKIM and inval
           v=DKIM1; k=rsa; h=sha256; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC7J/mQAVP9pynvD79opV/GD495pJWTWmHaEMymBO55y52gu2D23/CHbLys0KXszTAPOVS9x3HdRByeE1jIx41sZkWwDzxcyZH2NP5Mw3zNQWO4CqSGqrVPuukjIy5N3jmZnJ/V3IOkKnC3A+j76iIG42cVOgzoekbM3ZXSfwag+wIDAQAB
         </p>
       </LabelledValue>
-    </Panel>
+    </SetupInstructionPanel>
   </Right>
 </SendingDomainSection>
 `;
@@ -96,28 +68,12 @@ exports[`Component: SetupSending renders correctly for unverified DKIM and inval
     </p>
   </Left>
   <Right>
-    <Panel
-      actions={
-        Array [
-          Object {
-            "color": "orange",
-            "content": "Verify TXT Record",
-            "disabled": false,
-            "id": "verify-dkim",
-            "onClick": [Function],
-          },
-        ]
-      }
-      sectioned={true}
-      title={
-        <React.Fragment>
-          <ErrorIcon />
-           
-          <span>
-            DNS Settings
-          </span>
-        </React.Fragment>
-      }
+    <SetupInstructionPanel
+      isVerified={false}
+      isVerifying={false}
+      onVerify={[Function]}
+      recordType="TXT"
+      verifyButtonIdentifier="verify-dkim"
     >
       <LabelledValue
         label="Type"
@@ -140,7 +96,7 @@ exports[`Component: SetupSending renders correctly for unverified DKIM and inval
           v=DKIM1; k=rsa; h=sha256; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC7J/mQAVP9pynvD79opV/GD495pJWTWmHaEMymBO55y52gu2D23/CHbLys0KXszTAPOVS9x3HdRByeE1jIx41sZkWwDzxcyZH2NP5Mw3zNQWO4CqSGqrVPuukjIy5N3jmZnJ/V3IOkKnC3A+j76iIG42cVOgzoekbM3ZXSfwag+wIDAQAB
         </p>
       </LabelledValue>
-    </Panel>
+    </SetupInstructionPanel>
   </Right>
 </SendingDomainSection>
 `;
@@ -151,28 +107,12 @@ exports[`Component: SetupSending renders correctly when ownership and DKIM are v
 >
   <Left />
   <Right>
-    <Panel
-      actions={
-        Array [
-          Object {
-            "color": "orange",
-            "content": "Re-verify TXT Record",
-            "disabled": false,
-            "id": "verify-dkim",
-            "onClick": [Function],
-          },
-        ]
-      }
-      sectioned={true}
-      title={
-        <React.Fragment>
-          <VerifiedIcon />
-           
-          <span>
-            DNS Settings
-          </span>
-        </React.Fragment>
-      }
+    <SetupInstructionPanel
+      isVerified={true}
+      isVerifying={false}
+      onVerify={[Function]}
+      recordType="TXT"
+      verifyButtonIdentifier="verify-dkim"
     >
       <LabelledValue
         label="Type"
@@ -195,7 +135,7 @@ exports[`Component: SetupSending renders correctly when ownership and DKIM are v
           v=DKIM1; k=rsa; h=sha256; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC7J/mQAVP9pynvD79opV/GD495pJWTWmHaEMymBO55y52gu2D23/CHbLys0KXszTAPOVS9x3HdRByeE1jIx41sZkWwDzxcyZH2NP5Mw3zNQWO4CqSGqrVPuukjIy5N3jmZnJ/V3IOkKnC3A+j76iIG42cVOgzoekbM3ZXSfwag+wIDAQAB
         </p>
       </LabelledValue>
-    </Panel>
+    </SetupInstructionPanel>
   </Right>
 </SendingDomainSection>
 `;
@@ -218,28 +158,12 @@ exports[`Component: SetupSending renders correctly when ownership is valid and D
     </p>
   </Left>
   <Right>
-    <Panel
-      actions={
-        Array [
-          Object {
-            "color": "orange",
-            "content": "Verify TXT Record",
-            "disabled": false,
-            "id": "verify-dkim",
-            "onClick": [Function],
-          },
-        ]
-      }
-      sectioned={true}
-      title={
-        <React.Fragment>
-          <ErrorIcon />
-           
-          <span>
-            DNS Settings
-          </span>
-        </React.Fragment>
-      }
+    <SetupInstructionPanel
+      isVerified={false}
+      isVerifying={false}
+      onVerify={[Function]}
+      recordType="TXT"
+      verifyButtonIdentifier="verify-dkim"
     >
       <LabelledValue
         label="Type"
@@ -262,7 +186,7 @@ exports[`Component: SetupSending renders correctly when ownership is valid and D
           v=DKIM1; k=rsa; h=sha256; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC7J/mQAVP9pynvD79opV/GD495pJWTWmHaEMymBO55y52gu2D23/CHbLys0KXszTAPOVS9x3HdRByeE1jIx41sZkWwDzxcyZH2NP5Mw3zNQWO4CqSGqrVPuukjIy5N3jmZnJ/V3IOkKnC3A+j76iIG42cVOgzoekbM3ZXSfwag+wIDAQAB
         </p>
       </LabelledValue>
-    </Panel>
+    </SetupInstructionPanel>
   </Right>
 </SendingDomainSection>
 `;
