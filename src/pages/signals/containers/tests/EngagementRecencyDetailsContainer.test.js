@@ -52,9 +52,8 @@ describe('Signals Engagement Recency Details Container', () => {
   });
 
   it('should not get engagement recency when range isnt updated', () => {
-    jest.clearAllMocks();
     wrapper.setProps({ another: 'prop' });
-    expect(props.getEngagementRecency).toHaveBeenCalledTimes(0);
+    expect(props.getEngagementRecency).toHaveBeenCalledTimes(1);
   });
 
   it('should shorten chart gap if data is long', () => {

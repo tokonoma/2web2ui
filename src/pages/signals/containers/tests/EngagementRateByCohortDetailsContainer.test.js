@@ -51,8 +51,7 @@ describe('Signals Engagement Rate by Cohort Details Container', () => {
   });
 
   it('should not get engagement recency when range isnt updated', () => {
-    jest.clearAllMocks();
     wrapper.setProps({ another: 'prop' });
-    expect(props.getEngagementRateByCohort,).toHaveBeenCalledTimes(0);
+    expect(props.getEngagementRateByCohort).toHaveBeenCalledTimes(1);
   });
 });
