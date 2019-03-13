@@ -20,6 +20,8 @@ describe('Alert Form Component', () => {
           target: 50
         }
       },
+      domains: [{ domain: 'someDomain.com' }, { domain: 'someOtherDomain.com' }],
+      ipPools: [{ id: 'someIpPool' }, { id: 'someOtherIpPool' }],
       alert_metric: 'signals_health_threshold',
       facet_name: 'sending_domain',
       enabled: true,
@@ -58,6 +60,26 @@ describe('Alert Form Component', () => {
       expect(wrapper.find({ name: 'facet_value' }).props().connectLeft.props.name).toEqual('facet_name');
     });
 
+    it('should show sending domain facets typeahead component with correct props when facet_name is set to sending_domain', () => {
+      wrapper.setProps({ alert_metric: 'signals_health_threshold', assignTo: 'all', facet_name: 'sending_domain', facet_value: 'blah' });
+      expect(wrapper.find({ name: 'facet_value' }).props()).toMatchSnapshot();
+    });
+
+    it('should show warning if no domains', () => {
+      wrapper.setProps({ alert_metric: 'signals_health_threshold', assignTo: 'all', facet_name: 'sending_domain', domains: []});
+      expect(wrapper.find({ name: 'facet_value' }).props()).toMatchSnapshot();
+    });
+
+    it('should show warning if no ip pools', () => {
+      wrapper.setProps({ alert_metric: 'signals_health_threshold', assignTo: 'all', facet_name: 'ip_pool', ipPools: []});
+      expect(wrapper.find({ name: 'facet_value' }).props()).toMatchSnapshot();
+    });
+
+    it('should show ip pool facets typeahead component with correct props when facet_name is set to ip_pool', () => {
+      wrapper.setProps({ alert_metric: 'signals_health_threshold', assignTo: 'all', facet_name: 'ip_pool', facet_value: 'blah' });
+      expect(wrapper.find({ name: 'facet_value' }).props()).toMatchSnapshot();
+    });
+
     it('should clear facet_value and validation when facet_name is set to ALL and signals threshold', () => {
       wrapper.setProps({ alert_metric: 'signals_health_threshold', facet_name: 'ALL', facet_value: 'something' });
       expect(wrapper).toMatchSnapshot();
@@ -77,7 +99,7 @@ describe('Alert Form Component', () => {
     it('should add prefix and suffix to target when alert_metric is NOT set to signals_health_threshold', () => {
       wrapper.setProps({ alert_metric: 'monthly_sending_limit' });
       expect(wrapper.find({ name: 'threshold.error.target' }).props().prefix).toEqual('Above');
-      expect(wrapper.find({ name: 'threshold.error.target' }).props().suffix).toEqual('');
+      expect(wrapper.find({ name: 'threshold.error.target' }).props().suffix).toEqual('%');
       wrapper.setProps({ alert_metric: 'signals_health_threshold' });
       expect(wrapper.find({ name: 'threshold.error.target' }).props().prefix).toEqual('');
       expect(wrapper.find({ name: 'threshold.error.target' }).props().suffix).toEqual('');

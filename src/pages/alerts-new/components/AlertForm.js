@@ -34,19 +34,9 @@ const accountOptions = [
 export class AlertForm extends Component {
 
   componentDidMount() {
-    const { domains = [], domainsLoading = false, ipPools = [], ipPoolsLoading = false } = this.props;
-
-    if (domains.length === 0 && !domainsLoading) {
-      this.props.listDomains();
-    }
-
-    if (ipPools.length === 0 && !ipPoolsLoading) {
-      this.props.listPools();
-    }
+    this.props.listDomains();
+    this.props.listPools();
   }
-
-  // Prevents unchecked value from equaling ""
-  parseToggle = (value) => !!value
 
   render() {
     const {
@@ -81,13 +71,6 @@ export class AlertForm extends Component {
       }
     };
 
-    const validateSubaccount = () => {
-      if (assignTo === 'subaccount') {
-        return required;
-      }
-      return undefined;
-    };
-
     const checkFacet = () => {
       if (facet_name === 'ALL') {
         return true;
@@ -120,14 +103,14 @@ export class AlertForm extends Component {
     };
 
     const multiFacetWarning = () => {
-      if (facet_name === 'sending_domain' && !domainsLoading && !domains.length && subaccount) {
-        return (assignTo === 'subaccount')
+      if (facet_name === 'sending_domain' && !domainsLoading && !domains.length) {
+        return (assignTo === 'subaccount' && subaccount)
           ? 'The selected subaccount does not have any verified sending domains.'
           : 'You do not have any verified sending domains to use.';
       }
 
-      if (facet_name === 'ip_pool' && !ipPoolsLoading && !ipPools.length && subaccount) {
-        return 'You do not have any verified sending domains to use.';
+      if (facet_name === 'ip_pool' && !ipPoolsLoading && !ipPools.length) {
+        return 'You do not have any ip pools to use.';
       }
 
       return null;
@@ -165,7 +148,7 @@ export class AlertForm extends Component {
               name='subaccount'
               component={SubaccountTypeaheadWrapper}
               disabled={submitting}
-              validate={validateSubaccount()}
+              validate={required}
             />}
             {isSignals &&
             <label>Facet</label>}
@@ -214,7 +197,7 @@ export class AlertForm extends Component {
                     }
                     disabled={submitting}
                     prefix={alert_metric !== 'signals_health_threshold' ? 'Above' : ''}
-                    suffix={!isThreshold ? '%' : ''}
+                    suffix={(isSignals && isThreshold) ? '' : '%'}
                     validate={getTargetValidation()}
                     style={{
                       textAlign: 'right'
