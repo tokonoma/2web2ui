@@ -108,8 +108,10 @@ exports[`Alert Form Component enabled prop should only show enabled toggle on ed
                 />
               }
               disabled={false}
+              helpText={null}
+              items={Array []}
               name="facet_value"
-              placeholder=""
+              placeholder="email.example.com"
               validate={[Function]}
             />
           </div>
@@ -303,8 +305,10 @@ exports[`Alert Form Component enabled prop should only show enabled toggle on ed
                 />
               }
               disabled={false}
+              helpText={null}
+              items={Array []}
               name="facet_value"
-              placeholder=""
+              placeholder="email.example.com"
               validate={[Function]}
             />
           </div>
@@ -522,6 +526,8 @@ exports[`Alert Form Component facet props should clear facet_value and validatio
                 />
               }
               disabled={true}
+              helpText={null}
+              items={Array []}
               name="facet_value"
               placeholder="No facet selected"
             />
@@ -740,6 +746,8 @@ exports[`Alert Form Component facet props should clear facet_value and validatio
                 />
               }
               disabled={false}
+              helpText={null}
+              items={Array []}
               name="facet_value"
               placeholder=""
               validate={[Function]}
@@ -942,8 +950,10 @@ exports[`Alert Form Component should handle submit 1`] = `
                 />
               }
               disabled={false}
+              helpText={null}
+              items={Array []}
               name="facet_value"
-              placeholder=""
+              placeholder="email.example.com"
               validate={[Function]}
             />
           </div>
@@ -1161,8 +1171,10 @@ exports[`Alert Form Component should render the alert form component correctly 1
                 />
               }
               disabled={false}
+              helpText={null}
+              items={Array []}
               name="facet_value"
-              placeholder=""
+              placeholder="email.example.com"
               validate={[Function]}
             />
           </div>

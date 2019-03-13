@@ -60,9 +60,9 @@ export class AlertForm extends Component {
       newAlert,
       change,
       subaccount,
-      domains,
+      domains = [],
       domainsLoading,
-      ipPools,
+      ipPools = [],
       ipPoolsLoading
     } = this.props;
 
@@ -127,9 +127,7 @@ export class AlertForm extends Component {
       }
 
       if (facet_name === 'ip_pool' && !ipPoolsLoading && !ipPools.length && subaccount) {
-        return (assignTo === 'subaccount')
-          ? 'The selected subaccount does not have any ip pools.'
-          : 'You do not have any verified sending domains to use.';
+        return 'You do not have any verified sending domains to use.';
       }
 
       return null;

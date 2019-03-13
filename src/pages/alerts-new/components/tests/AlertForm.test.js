@@ -23,6 +23,8 @@ describe('Alert Form Component', () => {
       alert_metric: 'signals_health_threshold',
       facet_name: 'sending_domain',
       enabled: true,
+      listDomains: jest.fn(),
+      listPools: jest.fn(),
       change: (a, b) => b
     };
 
