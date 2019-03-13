@@ -3,9 +3,10 @@ import debounce from 'lodash/debounce';
 import React, { Component } from 'react';
 import sortMatch from 'src/helpers/sortMatch';
 
-import FromEmailInput from './FromEmailInput';
-import FromEmailMenu from './FromEmailMenu';
-import styles from './FromEmail.module.scss';
+import MultiFacetInput from './MultiFacetInput';
+import MultiFacetMenu from './MultiFacetMenu';
+import styles from './MultiFacet.module.scss';
+import _ from 'lodash';
 
 /**
  * This component controls downshift's inputValue manually to prevent cursor jumping on change
@@ -13,7 +14,7 @@ import styles from './FromEmail.module.scss';
  * https://github.com/paypal/downshift#oninputvaluechange
  * https://github.com/paypal/downshift/issues/217
  */
-class FromEmail extends Component {
+class MultiFacet extends Component {
   state = {
     matches: []
   }
@@ -33,17 +34,17 @@ class FromEmail extends Component {
     }
   }
 
-  // note, depending on size of domains this calculation to find matches could be expensive
+  // note, depending on size of items this calculation to find matches could be expensive
   updateMatches = debounce((nextValue) => {
-    const { domains, maxNumberOfResults = 100 } = this.props;
-    const [inputLocalPart] = nextValue.split('@');
+    const { items, maxNumberOfResults = 100 } = this.props;
+    //const [inputLocalPart] = nextValue.split('@');
+    const itemsArray = items.map((item) => _.get(item, 'domain', _.get(item, 'id', undefined)));
+    //console.log('inputLocalPart', inputLocalPart);
 
-    if (!/@/.test(nextValue)) {
-      return this.setState({ matches: []});
-    }
+    this.setState({ matches: itemsArray });
 
     const matches = sortMatch(
-      domains.map(({ domain }) => `${inputLocalPart}@${domain}`),
+      itemsArray,
       nextValue
     );
     // note, exclude the first match if it is the current input value
@@ -55,7 +56,7 @@ class FromEmail extends Component {
   }, 300);
 
   render() {
-    const { domains, value, ...inputProps } = this.props;
+    const { items, value, ...inputProps } = this.props;
     const { matches } = this.state;
 
     return (
@@ -66,8 +67,8 @@ class FromEmail extends Component {
       >
         {(downshift) => (
           <div className={styles.Typeahead}>
-            <FromEmailInput {...inputProps} downshift={downshift} />
-            <FromEmailMenu downshift={downshift} items={matches}/>
+            <MultiFacetInput {...inputProps} downshift={downshift} />
+            <MultiFacetMenu downshift={downshift} items={matches}/>
           </div>
         )}
       </Downshift>
@@ -75,4 +76,4 @@ class FromEmail extends Component {
   }
 }
 
-export default FromEmail;
+export default MultiFacet;

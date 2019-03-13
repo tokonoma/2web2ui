@@ -1,11 +1,11 @@
 import React from 'react';
-import FromEmail from './FromEmail';
+import MultiFacet from './MultiFacet';
 
-const FromEmailWrapper = ({ input, meta, ...rest }) => {
+const MultiFacetWrapper = ({ input, meta, ...rest }) => {
   const { active, error, touched } = meta;
 
   return (
-    <FromEmail
+    <MultiFacet
       {...input}
       error={!active && touched && error ? error : undefined}
       {...rest}
@@ -13,4 +13,4 @@ const FromEmailWrapper = ({ input, meta, ...rest }) => {
   );
 };
 
-export default FromEmailWrapper;
+export default MultiFacetWrapper;

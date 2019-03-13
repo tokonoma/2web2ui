@@ -1,9 +1,9 @@
 import React from 'react';
 import cx from 'classnames';
 import { ActionList } from '@sparkpost/matchbox';
-import styles from './FromEmail.module.scss';
+import styles from './MultiFacet.module.scss';
 
-const FromEmailMenu = ({ downshift: { getItemProps, highlightedIndex, isOpen }, items = []}) => {
+const MultiFacetMenu = ({ downshift: { getItemProps, highlightedIndex, isOpen }, items = []}) => {
   const actions = items.map((item, index) => (
     getItemProps({
       content: item,
@@ -23,4 +23,4 @@ const FromEmailMenu = ({ downshift: { getItemProps, highlightedIndex, isOpen }, 
   );
 };
 
-export default FromEmailMenu;
+export default MultiFacetMenu;

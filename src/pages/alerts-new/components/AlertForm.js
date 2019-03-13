@@ -8,20 +8,20 @@ import { Panel, Grid, Button } from '@sparkpost/matchbox';
 import { withRouter } from 'react-router-dom';
 import ToggleBlock from 'src/components/toggleBlock/ToggleBlock';
 import { TextFieldWrapper, SelectWrapper, RadioGroup, SubaccountTypeaheadWrapper } from 'src/components';
-import { formatEditValues } from 'src/selectors/alerts';
+import { formatEditValues, selectDomainsBySubaccount, selectIpPoolsBySubaccount } from 'src/selectors/alerts';
 import getOptions from '../helpers/getOptions';
 import { METRICS } from '../constants/metrics';
 import { FACETS } from '../constants/facets';
 import { COMPARATOR } from '../constants/comparator';
 import { defaultFormValues } from '../constants/defaultFormValues';
 import { list as listDomains } from 'src/actions/sendingDomains';
-import { selectDomainsBySubaccount } from 'src/selectors/templates';
-import FromEmailWrapper from './FromEmailWrapper';
+import { listPools } from 'src/actions/ipPools';
+//import { selectDomainsBySubaccount } from 'src/selectors/alerts';
+import MultiFacetWrapper from './MultiFacetWrapper';
 
 // Helpers & Validation
 import { required, integer, minNumber, maxLength, numberBetween } from 'src/helpers/validation';
 import validateEmailList from '../helpers/validateEmailList';
-import _ from 'lodash';
 
 const formName = 'alertForm';
 
@@ -33,6 +33,18 @@ const accountOptions = [
 
 export class AlertForm extends Component {
 
+  componentDidMount() {
+    const { domains = [], domainsLoading = false, ipPools = [], ipPoolsLoading = false } = this.props;
+
+    if (domains.length === 0 && !domainsLoading) {
+      this.props.listDomains();
+    }
+
+    if (ipPools.length === 0 && !ipPoolsLoading) {
+      this.props.listPools();
+    }
+  }
+
   // Prevents unchecked value from equaling ""
   parseToggle = (value) => !!value
 
@@ -43,10 +55,15 @@ export class AlertForm extends Component {
       assignTo,
       alert_metric = '',
       facet_name,
+      facet_value,
       handleSubmit,
       newAlert,
       change,
-      domains
+      subaccount,
+      domains,
+      domainsLoading,
+      ipPools,
+      ipPoolsLoading
     } = this.props;
 
     const submitText = submitting ? 'Submitting...' : (newAlert ? 'Create Alert' : 'Update Alert');
@@ -82,6 +99,17 @@ export class AlertForm extends Component {
       if (facet_name === 'ALL') {
         return undefined;
       }
+
+      if (facet_name === 'sending_domain' && facet_value && facet_value !== '') {
+        const domainsArray = domains.map(({ domain }) => domain) || [];
+        return domainsArray.includes(facet_value) ? required : () => 'This is not a valid sending domain for this account';
+      }
+
+      if (facet_name === 'ip_pool' && facet_value && facet_value !== '') {
+        const ipPoolsArray = ipPools.map(({ id }) => id) || [];
+        return ipPoolsArray.includes(facet_value) ? required : () => 'This is not a valid ip pool for this account';
+      }
+
       return required;
     };
 
@@ -89,6 +117,22 @@ export class AlertForm extends Component {
       if (facet_name === 'ALL') {
         change('facet_value', '');
       }
+    };
+
+    const multiFacetWarning = () => {
+      if (facet_name === 'sending_domain' && !domainsLoading && !domains.length && subaccount) {
+        return (assignTo === 'subaccount')
+          ? 'The selected subaccount does not have any verified sending domains.'
+          : 'You do not have any verified sending domains to use.';
+      }
+
+      if (facet_name === 'ip_pool' && !ipPoolsLoading && !ipPools.length && subaccount) {
+        return (assignTo === 'subaccount')
+          ? 'The selected subaccount does not have any ip pools.'
+          : 'You do not have any verified sending domains to use.';
+      }
+
+      return null;
     };
 
     return (
@@ -142,12 +186,13 @@ export class AlertForm extends Component {
                         validate={required}
                       />
                     }
-                    component={FromEmailWrapper}
-                    domains={domains}
+                    component={(facet_name === 'sending_domain' || facet_name === 'ip_pool') ? MultiFacetWrapper : TextFieldWrapper}
+                    items={(facet_name === 'sending_domain') ? domains : ipPools}
                     onChange={removeFacetValue()}
                     disabled={submitting || checkFacet()}
-                    placeholder={facet_name === 'ALL' ? 'No facet selected' : ''}
+                    placeholder={facet_name === 'ALL' ? 'No facet selected' : facet_name === 'sending_domain' ? 'email.example.com' : ''}
                     validate={validateFacet()}
+                    helpText={multiFacetWarning()}
                   />
                 </div>
               </Grid.Column>
@@ -217,8 +262,10 @@ const mapStateToProps = (state, props) => {
   const selector = formValueSelector(formName);
 
   return {
-    id: _.get(props.subaccount, 'id', -1),
-    domains: selectDomainsBySubaccount(state, props),
+    domains: selectDomainsBySubaccount(state, formName),
+    domainsLoading: state.sendingDomains.listLoading,
+    ipPools: selectIpPoolsBySubaccount(state, formName),
+    ipPoolsLoading: state.ipPools.listLoading,
     alert_metric: selector(state, 'alert_metric'),
     facet_name: selector(state, 'facet_name'),
     facet_value: selector(state, 'facet_value'),
@@ -234,4 +281,4 @@ const formOptions = {
   enableReinitialize: true
 };
 
-export default withRouter(connect(mapStateToProps, { listDomains })(reduxForm(formOptions)(AlertForm)));
+export default withRouter(connect(mapStateToProps, { listDomains, listPools })(reduxForm(formOptions)(AlertForm)));
