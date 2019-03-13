@@ -12,7 +12,7 @@ import {
   selectIpForCurrentPool
 } from 'src/selectors/ipPools';
 
-export class IPForm extends Component {
+export class IpForm extends Component {
   render() {
     const { currentIp, reAssignPoolsOptions, handleSubmit, submitting, pristine } = this.props;
 
@@ -48,7 +48,7 @@ export class IPForm extends Component {
 
 const formName = 'ipForm';
 const mapStateToProps = (state, props) => ({
-  currentPool: selectCurrentPool(state),
+  currentPool: selectCurrentPool(state, props),
   currentIp: selectIpForCurrentPool(state, props),
   reAssignPoolsOptions: getReAssignPoolsOptions(state, props),
   initialValues: getIpFormInitialValues(state, props)
@@ -59,5 +59,5 @@ const formOptions = {
   enableReinitialize: true
 };
 
-const IPReduxForm = reduxForm(formOptions)(IPForm);
+const IPReduxForm = reduxForm(formOptions)(IpForm);
 export default withRouter(connect(mapStateToProps)(IPReduxForm));

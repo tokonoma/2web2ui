@@ -1,32 +1,31 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link, withRouter } from 'react-router-dom';
+import { Link, Redirect, withRouter } from 'react-router-dom';
 import { Page } from '@sparkpost/matchbox';
+import _ from 'lodash';
 
 import { ApiErrorBanner, Loading } from 'src/components';
-import IPForm from './components/IPForm';
+import IpForm from './components/IpForm';
 import { showAlert } from 'src/actions/globalAlert';
-import { getPool, listPools, updatePool } from 'src/actions/ipPools';
+import { listPools, updatePool } from 'src/actions/ipPools';
 import { updateSendingIp } from 'src/actions/sendingIps';
 import { selectCurrentPool, selectIpForCurrentPool } from 'src/selectors/ipPools';
 
-
-export class EditIPPage extends Component {
+export class EditIpPage extends Component {
   onUpdateIp = (values) => {
-    const { updateSendingIp, currentIp, showAlert } = this.props;
+    const { updateSendingIp, ip, showAlert } = this.props;
 
-    return updateSendingIp(currentIp.external_ip, values.ip_pool)
+    return updateSendingIp(ip.external_ip, values.ip_pool)
       .then((res) => {
         showAlert({
           type: 'success',
-          message: `Updated IP ${currentIp.external_ip}.`
+          message: `Updated IP ${ip.external_ip}.`
         });
       });
   };
 
   loadDependentData = () => {
     this.props.listPools();
-    this.props.getPool(this.props.match.params.id);
   };
 
   componentDidMount() {
@@ -48,25 +47,29 @@ export class EditIPPage extends Component {
       return this.renderError();
     }
 
-    return <IPForm onSubmit={this.onUpdateIp}/>;
+    return <IpForm onSubmit={this.onUpdateIp}/>;
   }
 
   render() {
-    const { loading, currentPool, currentIp } = this.props;
+    const { loading, pool, ip } = this.props;
 
-    if (loading || !currentIp || !currentPool) {
+    if (loading || _.isEmpty(pool)) {
       return <Loading/>;
     }
 
+    if (pool && _.isEmpty(ip)) {
+      return <Redirect to={`/account/ip-pools/edit/${pool.id}`} />;
+    }
+
     const breadcrumbAction = {
-      content: currentPool.name,
+      content: pool.name,
       Component: Link,
-      to: `/account/ip-pools/edit/${currentPool.id}`
+      to: `/account/ip-pools/edit/${pool.id}`
     };
 
     return (
       <Page
-        title={`Sending IP: ${currentIp.external_ip}`}
+        title={`Sending IP: ${ip.external_ip}`}
         breadcrumbAction={breadcrumbAction}
       >
         {this.renderForm()}
@@ -76,20 +79,19 @@ export class EditIPPage extends Component {
 }
 
 const mapStateToProps = (state, props) => {
-  const { getLoading, getError, listLoading, listError } = state.ipPools;
+  const { listLoading, listError } = state.ipPools;
 
   return {
-    currentIp: selectIpForCurrentPool(state, props),
-    currentPool: selectCurrentPool(state),
-    loading: getLoading || listLoading,
-    error: listError || getError
+    ip: selectIpForCurrentPool(state, props),
+    pool: selectCurrentPool(state, props),
+    loading: listLoading,
+    error: listError
   };
 };
 
 export default withRouter(connect(mapStateToProps, {
   updatePool,
-  getPool,
   listPools,
   updateSendingIp,
   showAlert
-})(EditIPPage));
+})(EditIpPage));

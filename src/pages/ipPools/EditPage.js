@@ -8,9 +8,9 @@ import { Loading, DeleteModal, ApiErrorBanner } from 'src/components';
 import PoolForm from './components/PoolForm';
 
 import { showAlert } from 'src/actions/globalAlert';
-import { listPools, getPool, updatePool, deletePool } from 'src/actions/ipPools';
+import { listPools, updatePool, deletePool } from 'src/actions/ipPools';
 import { updateSendingIp } from 'src/actions/sendingIps';
-import { shouldShowIpPurchaseCTA } from 'src/selectors/ipPools';
+import { shouldShowIpPurchaseCTA, selectCurrentPool } from 'src/selectors/ipPools';
 
 import { decodeIp } from 'src/helpers/ipNames';
 import isDefaultPool from './helpers/defaultPool';
@@ -32,7 +32,7 @@ export class EditPage extends Component {
   };
 
   onUpdatePool = (values) => {
-    const { updateSendingIp, updatePool, showAlert, history, match: { params: { id }}} = this.props;
+    const { updateSendingIp, updatePool, showAlert, history, pool: { id }} = this.props;
 
     /**
      * Pick out the IPs whose pool assignment is not the current pool ergo
@@ -58,12 +58,12 @@ export class EditPage extends Component {
           type: 'success',
           message: `Updated IP pool ${id}.`
         });
-        history.push('/account/ip-pools');
+        history.replace(`/account/ip-pools/edit/${id}`);
       });
   };
 
   onDeletePool = () => {
-    const { deletePool, showAlert, history, match: { params: { id }}} = this.props;
+    const { deletePool, showAlert, history, pool: { id }} = this.props;
 
     return deletePool(id).then(() => {
       showAlert({
@@ -76,7 +76,6 @@ export class EditPage extends Component {
 
   loadDependentData = () => {
     this.props.listPools();
-    this.props.getPool(this.props.match.params.id);
   };
 
   componentDidMount() {
@@ -84,10 +83,9 @@ export class EditPage extends Component {
   }
 
   renderError() {
-    const { listError, getError } = this.props;
-    const msg = listError ? listError.message : getError.message;
+    const { listError } = this.props;
     return <ApiErrorBanner
-      errorDetails={msg}
+      errorDetails={listError.message}
       message="Sorry, we seem to have had some trouble loading your IP pool."
       reload={this.loadDependantData}
     />;
@@ -118,7 +116,7 @@ export class EditPage extends Component {
           [{
             content: 'Delete',
             onClick: this.toggleDelete,
-            visible: !isDefaultPool(this.props.match.params.id)
+            visible: !isDefaultPool(pool.id)
           },
           { content: 'Purchase IPs',
             to: '/account/billing',
@@ -141,15 +139,14 @@ export class EditPage extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  const { getLoading, getError, listLoading, listError, pool } = state.ipPools;
+const mapStateToProps = (state, props) => {
+  const { listLoading, listError } = state.ipPools;
 
   return {
-    loading: getLoading || listLoading,
-    error: listError || getError,
-    pool,
+    loading: listLoading,
+    error: listError,
+    pool: selectCurrentPool(state, props),
     listError,
-    getError,
     showPurchaseCTA: shouldShowIpPurchaseCTA(state)
   };
 };
@@ -157,7 +154,6 @@ const mapStateToProps = (state) => {
 export default withRouter(connect(mapStateToProps, {
   updatePool,
   deletePool,
-  getPool,
   listPools,
   updateSendingIp,
   showAlert

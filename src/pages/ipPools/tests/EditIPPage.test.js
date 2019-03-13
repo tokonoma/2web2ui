@@ -1,6 +1,6 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import { EditIPPage } from '../EditIPPage';
+import { EditIpPage } from '../EditIPPage';
 
 describe('IP Edit Page', () => {
   let props;
@@ -22,7 +22,7 @@ describe('IP Edit Page', () => {
       }
     };
 
-    wrapper = shallow(<EditIPPage {...props} />);
+    wrapper = shallow(<EditIpPage {...props} />);
   });
 
   it('renders correctly', () => {

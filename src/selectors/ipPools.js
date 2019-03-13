@@ -7,8 +7,12 @@ import { isAdmin } from 'src/helpers/conditions/user';
 const DEFAULT = 'default';
 
 export const getIpPools = (state) => state.ipPools.list;
+const currentIpPoolId = (state, props) => props.match.params.poolId;
 const currentSendingIp = (state, props) => props.match.params.ip;
-export const selectCurrentPool = ({ ipPools = {}}) => ipPools.pool || {};
+
+export const selectCurrentPool = createSelector(
+  [getIpPools, currentIpPoolId], (allPools, poolId) => _.find(allPools, { id: poolId }) || {}
+);
 
 export const selectIpsForCurrentPool = createSelector(
   [selectCurrentPool],

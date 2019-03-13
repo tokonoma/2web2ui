@@ -4,10 +4,10 @@ import { TableCollection } from 'src/components';
 
 const columns = ['IP', 'Hostname'];
 
-export class IPList extends Component {
+export class IpList extends Component {
   getRowData = (ip) => {
     const { pool } = this.props;
-    const ipLink = <Link to={`/account/ip-pools/edit/${pool.id}/ip/${ip.external_ip}`}>{ip.external_ip}</Link>;
+    const ipLink = <Link to={`/account/ip-pools/edit/${pool.id}/${ip.external_ip}`}>{ip.external_ip}</Link>;
 
     return [
       ipLink,
@@ -33,4 +33,4 @@ export class IPList extends Component {
   }
 }
 
-export default IPList;
+export default IpList;

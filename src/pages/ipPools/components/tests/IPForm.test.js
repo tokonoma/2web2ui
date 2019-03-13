@@ -1,6 +1,6 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import { IPForm } from '../IPForm';
+import { IpForm } from '../IPForm';
 
 describe('IP Form tests', () => {
   let props;
@@ -13,7 +13,7 @@ describe('IP Form tests', () => {
       }
     };
 
-    wrapper = shallow(<IPForm {...props} />);
+    wrapper = shallow(<IpForm {...props} />);
   });
 
   it('should render form', () => {

@@ -1,19 +1,19 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { Button, Panel, UnstyledLink } from '@sparkpost/matchbox';
 import { SendingDomainTypeaheadWrapper, TextFieldWrapper } from 'src/components';
 import AccessControl from 'src/components/auth/AccessControl';
 import { required } from 'src/helpers/validation';
 import { configFlag } from 'src/helpers/conditions/config';
-import { selectIpPoolFormInitialValues, selectIpsForCurrentPool, shouldShowIpPurchaseCTA } from 'src/selectors/ipPools';
+import { selectIpPoolFormInitialValues, selectIpsForCurrentPool, shouldShowIpPurchaseCTA, selectCurrentPool } from 'src/selectors/ipPools';
 import isDefaultPool from '../helpers/defaultPool';
-import IPList from './IPList';
+import IpList from './IpList';
 
 export class PoolForm extends Component {
   renderPoolIps = () => {
-    const { isNew, ips = [], pool, showPurchaseCTA } = this.props;
+    const { isNew, ips, pool, showPurchaseCTA } = this.props;
 
     if (isNew) {
       return null;
@@ -28,11 +28,11 @@ export class PoolForm extends Component {
     return (<Panel title='Sending IPs'>
       <Panel.Section>
         <p>
-          {!ips.length && <span>No IP in this pool. </span>}
+          {!ips && <span>There are no IPs in this pool. </span>}
           Add dedicated IPs to this pool by moving them from their current pool{purchaseCTA}.
-          {!!ips.length && <span> Click on existing Sending IP to modify.</span>}
+          {ips && <span> Click on existing Sending IP to modify.</span>}
         </p>
-        {!!ips.length && <IPList ips={ips} pool={pool}/>}
+        {ips && <IpList ips={ips} pool={pool}/>}
       </Panel.Section>
     </Panel>);
   };
@@ -42,7 +42,6 @@ export class PoolForm extends Component {
     const submitText = isNew ? 'Create IP Pool' : 'Update IP Pool';
     const editingDefault = !isNew && isDefaultPool(pool.id);
     const helpText = editingDefault ? 'You cannot change the default IP pool\'s name' : '';
-
 
     return (
       <Fragment>
@@ -83,18 +82,17 @@ export class PoolForm extends Component {
   }
 }
 
-const mapStateToProps = (state, props) => {
-  const { ipPools } = state;
-  const { pool, list = []} = ipPools;
-
-  return {
-    list,
-    pool,
-    ips: selectIpsForCurrentPool(state),
-    initialValues: selectIpPoolFormInitialValues(state, props),
-    showPurchaseCTA: shouldShowIpPurchaseCTA(state)
-  };
+PoolForm.defaultProps = {
+  ips: [],
+  pool: {}
 };
+
+const mapStateToProps = (state, props) => ({
+  pool: selectCurrentPool(state, props),
+  ips: selectIpsForCurrentPool(state, props),
+  initialValues: selectIpPoolFormInitialValues(state, props),
+  showPurchaseCTA: shouldShowIpPurchaseCTA(state)
+});
 
 const formOptions = {
   form: 'poolForm',
@@ -102,4 +100,4 @@ const formOptions = {
 };
 
 const PoolReduxForm = reduxForm(formOptions)(PoolForm);
-export default connect(mapStateToProps, {})(PoolReduxForm);
+export default withRouter(connect(mapStateToProps, {})(PoolReduxForm));

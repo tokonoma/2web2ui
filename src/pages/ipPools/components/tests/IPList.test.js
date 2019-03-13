@@ -1,6 +1,6 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import { IPList } from '../IPList';
+import { IpList } from '../IPList';
 
 describe('IP List tests', () => {
   let props;
@@ -17,7 +17,7 @@ describe('IP List tests', () => {
       }
     };
 
-    wrapper = shallow(<IPList {...props} />);
+    wrapper = shallow(<IpList {...props} />);
   });
 
   it('renders with ips', () => {
