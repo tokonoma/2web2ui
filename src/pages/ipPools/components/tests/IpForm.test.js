@@ -1,10 +1,11 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import { IpForm } from '../IPForm';
+import { IpForm } from '../IpForm';
 
 describe('IP Form tests', () => {
   let props;
   let wrapper;
+
   beforeEach(() => {
     props = {
       handleSubmit: jest.fn(),

@@ -92,9 +92,8 @@ describe('Selector: ipPools', () => {
     });
     it('returns false for non-admins', () => {
       state.currentUser.access_level = 'developer';
-      expect(shouldShowIpPurchaseCTA(state)).toBe(false);
+      expect(ipPoolSelectors.shouldShowIpPurchaseCTA(state)).toBe(false);
     });
-
   });
 
   describe('selectFirstIpPoolId', () => {

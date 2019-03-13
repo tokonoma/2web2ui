@@ -1,10 +1,11 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import { IpList } from '../IPList';
+import { IpList } from '../IpList';
 
 describe('IP List tests', () => {
   let props;
   let wrapper;
+
   beforeEach(() => {
     props = {
       ips: [

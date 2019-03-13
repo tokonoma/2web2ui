@@ -1,6 +1,6 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import { EditIpPage } from '../EditIPPage';
+import { EditIpPage } from '../EditIpPage';
 
 describe('IP Edit Page', () => {
   let props;
@@ -59,6 +59,7 @@ describe('IP Edit Page', () => {
       expect(props.updateSendingIp).toHaveBeenCalledWith('1.1.1.1', 'foo');
       expect(props.showAlert).toHaveBeenCalledTimes(1);
     });
+
     it('throws on error', async () => {
       const err = new Error('API Failed');
       props.updateSendingIp.mockReturnValue(Promise.reject(err));
