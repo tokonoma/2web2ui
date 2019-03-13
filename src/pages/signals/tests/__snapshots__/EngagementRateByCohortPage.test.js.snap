@@ -17,35 +17,35 @@ exports[`Signals Engagement Recency Page bar chart props renders tooltip content
     description="Never engaged, first email in last 7 days"
     key="c_new"
     label="New"
-    value="50%"
-  />
-  <TooltipMetric
-    color="#50CFDA"
-    description="365+ days since last engagement"
-    key="c_uneng"
-    label="Never Engaged"
-    value="10%"
-  />
-  <TooltipMetric
-    color="#29B9C7"
-    description="90-365 days since last engagement"
-    key="c_365d"
-    label="Not Recently Engaged"
-    value="20%"
-  />
-  <TooltipMetric
-    color="#219EA8"
-    description="14-90 days since last engagement"
-    key="c_90d"
-    label="Semi Recently Engaged"
-    value="30%"
+    value="0.5%"
   />
   <TooltipMetric
     color="#1A838B"
     description="0-14 days since last engagement"
     key="c_14d"
     label="Recently Engaged"
-    value="40%"
+    value="0.4%"
+  />
+  <TooltipMetric
+    color="#219EA8"
+    description="14-90 days since last engagement"
+    key="c_90d"
+    label="Semi Recently Engaged"
+    value="0.3%"
+  />
+  <TooltipMetric
+    color="#29B9C7"
+    description="90-365 days since last engagement"
+    key="c_365d"
+    label="Not Recently Engaged"
+    value="0.2%"
+  />
+  <TooltipMetric
+    color="#50CFDA"
+    description="365+ days since last engagement"
+    key="c_uneng"
+    label="Never Engaged"
+    value="0.1%"
   />
 </Fragment>
 `;
@@ -59,7 +59,7 @@ exports[`Signals Engagement Recency Page renders correctly 1`] = `
       "to": "/signals",
     }
   }
-  dimensionPrefix="Engagement Recency for"
+  dimensionPrefix="Engagement Rate by Cohort for"
   facet="sending-domain"
   facetId="test.com"
   primaryArea={<Connect(DateFilter) />}
@@ -69,46 +69,20 @@ exports[`Signals Engagement Recency Page renders correctly 1`] = `
       md={7}
       sm={12}
     >
-      <Connect(AccessControl)
-        condition={[Function]}
-      >
-        <withRouter(Tabs)
-          facet="sending-domain"
-          facetId="test.com"
-        />
-      </Connect(AccessControl)>
+      <withRouter(Tabs)
+        facet="sending-domain"
+        facetId="test.com"
+      />
       <Panel
         sectioned={true}
       >
-        <Connect(AccessControl)
-          condition={[Function]}
-        >
-          <ChartHeader
-            title="Engagement Recency"
-            tooltipContent="
-  The share over time of your email that has been sent to recipients who most recently
-  opened messages or clicked links during several defined time periods.
-"
-          />
-        </Connect(AccessControl)>
         <div
           className="LiftTooltip"
         >
-          <BarChart
-            fill="#B157CE"
-            gap={0.25}
-            height={250}
-            margin={
-              Object {
-                "bottom": 5,
-                "left": 18,
-                "right": 0,
-                "top": 12,
-              }
-            }
-            onClick={[MockFunction]}
-            selected="2017-01-02"
-            timeSeries={
+          <LineChart
+            height={300}
+            lineType="natural"
+            lines={
               Array [
                 Object {
                   "c_total": 1,
@@ -120,6 +94,17 @@ exports[`Signals Engagement Recency Page renders correctly 1`] = `
                 },
               ]
             }
+            margin={
+              Object {
+                "bottom": 5,
+                "left": 18,
+                "right": 0,
+                "top": 12,
+              }
+            }
+            onClick={[MockFunction]}
+            selected="2017-01-02"
+            stroke="#000"
             tooltipContent={[Function]}
             tooltipWidth="250px"
             width="99%"
@@ -135,18 +120,7 @@ exports[`Signals Engagement Recency Page renders correctly 1`] = `
             xKey="date"
             yAxisProps={
               Object {
-                "domain": Array [
-                  0,
-                  1,
-                ],
                 "tickFormatter": [Function],
-                "ticks": Array [
-                  0,
-                  0.25,
-                  0.5,
-                  0.75,
-                  1,
-                ],
               }
             }
             yKey="value"
@@ -281,17 +255,6 @@ exports[`Signals Engagement Recency Page renders empty correctly 1`] = `
 <Panel
   sectioned={true}
 >
-  <Connect(AccessControl)
-    condition={[Function]}
-  >
-    <ChartHeader
-      title="Engagement Recency"
-      tooltipContent="
-  The share over time of your email that has been sent to recipients who most recently
-  opened messages or clicked links during several defined time periods.
-"
-    />
-  </Connect(AccessControl)>
   <Callout
     title="No Data Available"
   >
@@ -309,7 +272,7 @@ exports[`Signals Engagement Recency Page renders error correctly 1`] = `
       "to": "/signals",
     }
   }
-  dimensionPrefix="Engagement Recency for"
+  dimensionPrefix="Engagement Rate by Cohort for"
   facet="sending-domain"
   facetId="test.com"
   primaryArea={<Connect(DateFilter) />}
@@ -319,28 +282,13 @@ exports[`Signals Engagement Recency Page renders error correctly 1`] = `
       md={7}
       sm={12}
     >
-      <Connect(AccessControl)
-        condition={[Function]}
-      >
-        <withRouter(Tabs)
-          facet="sending-domain"
-          facetId="test.com"
-        />
-      </Connect(AccessControl)>
+      <withRouter(Tabs)
+        facet="sending-domain"
+        facetId="test.com"
+      />
       <Panel
         sectioned={true}
       >
-        <Connect(AccessControl)
-          condition={[Function]}
-        >
-          <ChartHeader
-            title="Engagement Recency"
-            tooltipContent="
-  The share over time of your email that has been sent to recipients who most recently
-  opened messages or clicked links during several defined time periods.
-"
-          />
-        </Connect(AccessControl)>
         <Callout
           title="Unable to Load Data"
         >
@@ -383,17 +331,6 @@ exports[`Signals Engagement Recency Page renders loading correctly 1`] = `
 <Panel
   sectioned={true}
 >
-  <Connect(AccessControl)
-    condition={[Function]}
-  >
-    <ChartHeader
-      title="Engagement Recency"
-      tooltipContent="
-  The share over time of your email that has been sent to recipients who most recently
-  opened messages or clicked links during several defined time periods.
-"
-    />
-  </Connect(AccessControl)>
   <div
     style={
       Object {

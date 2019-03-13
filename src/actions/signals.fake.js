@@ -179,3 +179,47 @@ export function getHealthScore({ facet, filter }) {
     }), 500);
   };
 }
+
+const engagementRateDetails = (count) => _.range(count).map((n) => {
+  const c_new_engagement = randInt(80, 68);
+  const c_14d_engagement = randInt(50, 30);
+  const c_90d_engagement = randInt(30, 15);
+  const c_365d_engagement = randInt(15, 9);
+  const c_uneng_engagement = randInt(5, 1);
+  const c_total_engagement = [c_new_engagement, c_14d_engagement, c_90d_engagement, c_365d_engagement, c_uneng_engagement].reduce((a, b) => a + b, 0);
+
+  return {
+    c_new_engagement, c_14d_engagement, c_90d_engagement, c_365d_engagement, c_uneng_engagement, c_total_engagement,
+    dt: moment().subtract(count - n, 'day').format('YYYY-MM-DD')
+  };
+});
+
+export function getEngagementRateByCohort({ facet, filter }) {
+  return (dispatch, getState) => {
+    const { relativeRange } = getState().signalOptions;
+    const count = Number(relativeRange.replace('days', ''));
+    const data = engagementRateDetails(count + 1);
+
+    dispatch({
+      type: 'GET_ENGAGEMENT_RATE_BY_COHORT_PENDING'
+    });
+
+    setTimeout(() => dispatch({
+      type: 'GET_ENGAGEMENT_RATE_BY_COHORT_SUCCESS',
+      payload: {
+        data: [
+          {
+            [facet]: filter,
+            history: data
+          },
+          {
+            // simulating multiple results to for facetid matching
+            [facet]: 'notthisone',
+            history: data
+          }
+        ],
+        total_count: 2
+      }
+    }), 500);
+  };
+}

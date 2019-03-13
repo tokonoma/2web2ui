@@ -1,12 +1,11 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import { WithEngagementRecencyDetails } from '../EngagementRecencyDetailsContainer';
+import { WithEngagementRateByCohortDetails } from '../EngagementRateByCohortDetailsContainer';
 import * as dateMock from 'src/helpers/date';
-import _ from 'lodash';
 
 jest.mock('src/helpers/date');
 
-describe('Signals Engagement Recency Details Container', () => {
+describe('Signals Engagement Rate by Cohort Details Container', () => {
   let wrapper;
   let props;
   const Component = () => <div>test</div>;
@@ -22,18 +21,18 @@ describe('Signals Engagement Recency Details Container', () => {
       filters: {
         relativeRange: '14days'
       },
-      getEngagementRecency: jest.fn(),
+      getEngagementRateByCohort: jest.fn(),
       selected: '2015-01-01',
       subaccountId: '101'
     };
 
     dateMock.getDateTicks.mockImplementation(() => [1,2]);
-    wrapper = shallow(<WithEngagementRecencyDetails {...props} />);
+    wrapper = shallow(<WithEngagementRateByCohortDetails {...props} />);
   });
 
-  it('gets engagement recency on mount correctly', () => {
+  it('gets engagement rate by cohort on mount correctly', () => {
     expect(wrapper).toMatchSnapshot();
-    expect(props.getEngagementRecency).toHaveBeenCalledWith({
+    expect(props.getEngagementRateByCohort,).toHaveBeenCalledWith({
       facet: 'sending_domain',
       filter: 'test.com',
       relativeRange: '14days',
@@ -41,9 +40,9 @@ describe('Signals Engagement Recency Details Container', () => {
     });
   });
 
-  it('gets engagement recency when range is updated', () => {
+  it('gets engagement rate by cohort when range is updated', () => {
     wrapper.setProps({ filters: { relativeRange: '30days' }});
-    expect(props.getEngagementRecency).toHaveBeenCalledWith({
+    expect(props.getEngagementRateByCohort,).toHaveBeenCalledWith({
       facet: 'sending_domain',
       filter: 'test.com',
       relativeRange: '30days',
@@ -53,11 +52,6 @@ describe('Signals Engagement Recency Details Container', () => {
 
   it('should not get engagement recency when range isnt updated', () => {
     wrapper.setProps({ another: 'prop' });
-    expect(props.getEngagementRecency).toHaveBeenCalledTimes(1);
-  });
-
-  it('should shorten chart gap if data is long', () => {
-    wrapper.setProps({ details: { data: _.range(16).map((n) => n) }});
-    expect(wrapper.prop('gap')).toEqual(0.2);
+    expect(props.getEngagementRateByCohort).toHaveBeenCalledTimes(1);
   });
 });

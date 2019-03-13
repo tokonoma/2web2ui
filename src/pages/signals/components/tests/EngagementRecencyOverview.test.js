@@ -211,7 +211,7 @@ describe('EngagementRecencyOverview', () => {
       wrapper.simulate('click', { date: '2018-01-13' });
 
       expect(historyPush).toHaveBeenCalledWith({
-        pathname: '/signals/engagement-recency/domain/example.com',
+        pathname: '/signals/engagement/cohorts/domain/example.com',
         search: '?subaccount=123',
         state: { date: '2018-01-13' }
       });
@@ -223,7 +223,7 @@ describe('EngagementRecencyOverview', () => {
       wrapper.simulate('click', { date: '2018-01-13' });
 
       expect(historyPush).toHaveBeenCalledWith({
-        pathname: '/signals/engagement-recency/domain/example.com',
+        pathname: '/signals/engagement/cohorts/domain/example.com',
         search: '?subaccount=123',
         state: { date: '2018-01-13' }
       });

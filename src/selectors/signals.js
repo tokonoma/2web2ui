@@ -19,6 +19,7 @@ export const getOptions = (state, { now = moment().subtract(1, 'day'), ...option
 // Redux store
 export const getSpamHitsData = (state, props) => _.get(state, 'signals.spamHits', {});
 export const getEngagementRecencyData = (state, props) => _.get(state, 'signals.engagementRecency', {});
+export const getEngagementRateByCohortData = (state, props) => _.get(state, 'signals.engagementRateByCohort', {});
 export const getHealthScoreData = (state, props) => _.get(state, 'signals.healthScore', {});
 
 // Details
@@ -89,6 +90,49 @@ export const selectEngagementRecencyDetails = createSelector(
     });
 
     const isEmpty = filledHistory.every((values) => values.c_total === null);
+
+    return {
+      details: {
+        data: filledHistory,
+        empty: isEmpty && !loading,
+        error,
+        loading
+      },
+      facet,
+      facetId,
+      subaccountId
+    };
+  }
+);
+
+export const selectEngagementRateByCohortDetails = createSelector(
+  [getEngagementRateByCohortData, getFacetFromParams, getFacetIdFromParams, selectSubaccountIdFromQuery, getOptions],
+  ({ loading, error, data }, facet, facetId, subaccountId, { now, relativeRange }) => {
+    const match = data.find((item) => String(item[facet]) === facetId) || {};
+
+    // Rename keys to reference correct cohort constants within components
+    const normalizedHistory = _.get(match, 'history', []).map(({ dt: date, ...values }) => {
+      const reKeyed = _.keys(values).reduce((acc, key) => ({
+        ...acc, [key.replace(/_engagement$/, '')]: values[key]
+      }), {});
+      return { date, ...reKeyed }
+    });
+
+    const filledHistory = fillByDate({
+      dataSet: normalizedHistory,
+      fill: {
+        c_new: null,
+        c_14d: null,
+        c_90d: null,
+        c_365d: null,
+        c_uneng: null,
+        c_total: null
+      },
+      now,
+      relativeRange
+    });
+
+    const isEmpty = filledHistory.every((values) => values.c_total_engagment === null);
 
     return {
       details: {

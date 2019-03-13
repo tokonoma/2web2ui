@@ -8,6 +8,7 @@ import TooltipMetric from './components/charts/tooltip/TooltipMetric';
 import DateFilter from './components/filters/DateFilter';
 import { SPAM_TRAP_INFO } from './constants/info';
 import withSpamTrapDetails from './containers/SpamTrapDetailsContainer';
+import withDateSelection from './containers/withDateSelection';
 import { Loading } from 'src/components';
 import Callout from 'src/components/callout';
 import OtherChartsHeader from './components/OtherChartsHeader';
@@ -23,38 +24,11 @@ import styles from './DetailsPages.module.scss';
 
 export class SpamTrapPage extends Component {
   state = {
-    selectedDate: null,
     calculation: 'relative'
-  }
-
-  componentDidMount() {
-    const { selected } = this.props;
-
-    if (selected) {
-      this.setState({ selectedDate: selected });
-    }
-  }
-
-  componentDidUpdate(prevProps) {
-    const { data } = this.props;
-    const { selectedDate } = this.state;
-
-    const dataSetChanged = prevProps.data !== data;
-    let selectedDataByDay = _.find(data, ['date', selectedDate]);
-
-    // Select last date in time series
-    if (dataSetChanged && !selectedDataByDay) {
-      selectedDataByDay = _.last(data);
-      this.setState({ selectedDate: selectedDataByDay.date });
-    }
   }
 
   handleCalculationToggle = (value) => {
     this.setState({ calculation: value });
-  }
-
-  handleDateSelect = (node) => {
-    this.setState({ selectedDate: _.get(node, 'payload.date') });
   }
 
   getYAxisProps = () => {
@@ -85,8 +59,8 @@ export class SpamTrapPage extends Component {
   )
 
   renderContent = () => {
-    const { data = [], loading, gap, empty, error } = this.props;
-    const { calculation, selectedDate } = this.state;
+    const { data = [], handleDateSelect, loading, gap, empty, error, selectedDate } = this.props;
+    const { calculation } = this.state;
     const selectedSpamTrapHits = _.find(data, ['date', selectedDate]) || {};
     let chartPanel;
 
@@ -123,7 +97,7 @@ export class SpamTrapPage extends Component {
             {chartPanel || (
               <BarChart
                 gap={gap}
-                onClick={this.handleDateSelect}
+                onClick={handleDateSelect}
                 selected={selectedDate}
                 timeSeries={data}
                 tooltipContent={this.getTooltipContent}
@@ -169,4 +143,4 @@ export class SpamTrapPage extends Component {
   }
 }
 
-export default withSpamTrapDetails(SpamTrapPage);
+export default withSpamTrapDetails(withDateSelection(SpamTrapPage));

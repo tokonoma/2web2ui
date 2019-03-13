@@ -277,10 +277,35 @@ const routes = [
     title: 'Signals',
     supportDocSearch: 'signals'
   },
+  // Signals routes for 'feature_signals_v2'
   {
-    path: '/signals/engagement-recency/:facet/:facetId',
+    path: '/signals/engagement/cohorts/:facet/:facetId',
     component: signals.EngagementRecencyPage,
     condition: hasGrants('signals/manage'),
+    layout: App,
+    title: 'Signals',
+    supportDocSearch: 'signals'
+  },
+  {
+    path: '/signals/engagement/engagement-rate/:facet/:facetId',
+    component: signals.EngagementRateByCohortPage,
+    condition: all(hasGrants('signals/manage'), hasUiOption('feature_signals_v2')),
+    layout: App,
+    title: 'Signals',
+    supportDocSearch: 'signals'
+  },
+  {
+    path: '/signals/engagement/unsubscribes/:facet/:facetId',
+    component: signals.EngagementRecencyPage,
+    condition: all(hasGrants('signals/manage'), hasUiOption('feature_signals_v2')),
+    layout: App,
+    title: 'Signals',
+    supportDocSearch: 'signals'
+  },
+  {
+    path: '/signals/engagement/complaints/:facet/:facetId',
+    component: signals.EngagementRecencyPage,
+    condition: all(hasGrants('signals/manage'), hasUiOption('feature_signals_v2')),
     layout: App,
     title: 'Signals',
     supportDocSearch: 'signals'

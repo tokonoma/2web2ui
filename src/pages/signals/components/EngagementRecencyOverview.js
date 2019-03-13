@@ -97,7 +97,7 @@ class EngagementRecencyOverview extends React.Component {
     }
 
     history.push({
-      pathname: `/signals/engagement-recency/${facet.key}/${facetId}`,
+      pathname: `/signals/engagement/cohorts/${facet.key}/${facetId}`,
       search,
       state: {
         date
@@ -147,7 +147,7 @@ class EngagementRecencyOverview extends React.Component {
 
               return (
                 <FacetDataCell
-                  dimension="engagement-recency"
+                  dimension="engagement/cohorts"
                   facet={facet.key}
                   id={id}
                   name={_.get(_.find(subaccounts, { id }), 'name')}

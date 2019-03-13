@@ -8,7 +8,8 @@ const initialDimensionState = {
 const initialState = {
   spamHits: initialDimensionState,
   healthScore: initialDimensionState,
-  engagementRecency: initialDimensionState
+  engagementRecency: initialDimensionState,
+  engagementRateByCohort: initialDimensionState
 };
 
 const signalsReducer = (state = initialState, { type, payload, meta }) => {
@@ -33,6 +34,17 @@ const signalsReducer = (state = initialState, { type, payload, meta }) => {
     case 'GET_ENGAGEMENT_RECENCY_SUCCESS': {
       const { data, total_count: totalCount } = payload;
       return { ...state, engagementRecency: { ...initialDimensionState, data, loading: false, totalCount }};
+    }
+
+    case 'GET_ENGAGEMENT_RATE_BY_COHORT_FAIL':
+      return { ...state, engagementRateByCohort: { ...initialDimensionState, error: payload.error, loading: false }};
+
+    case 'GET_ENGAGEMENT_RATE_BY_COHORT_PENDING':
+      return { ...state, engagementRateByCohort: { ...initialDimensionState, loading: true }};
+
+    case 'GET_ENGAGEMENT_RATE_BY_COHORT_SUCCESS': {
+      const { data, total_count: totalCount } = payload;
+      return { ...state, engagementRateByCohort: { ...initialDimensionState, data, loading: false, totalCount }};
     }
 
     case 'GET_HEALTH_SCORE_FAIL':

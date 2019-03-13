@@ -1,5 +1,5 @@
 import { snapshotActionCases } from 'src/__testHelpers__/snapshotActionHelpers';
-import { getEngagementRecency, getHealthScore, getSpamHits } from '../signals';
+import { getEngagementRecency, getEngagementRateByCohort, getHealthScore, getSpamHits } from '../signals';
 
 jest.mock('src/actions/helpers/sparkpostApiRequest');
 jest.mock('src/helpers/date', () => ({
@@ -51,6 +51,12 @@ describe('Signals Actions', () => {
   snapshotActionCases('.getEngagementRecency', {
     'by default': {
       action: () => getEngagementRecency({ ...requiredOptions })
+    }
+  });
+
+  snapshotActionCases('.getEngagementRateByCohort', {
+    'by default': {
+      action: () => getEngagementRateByCohort({ ...requiredOptions })
     }
   });
 

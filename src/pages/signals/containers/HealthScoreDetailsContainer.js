@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { getHealthScore, getSpamHits } from 'src/actions/signals';
 import { selectHealthScoreDetails, getSelectedDateFromRouter } from 'src/selectors/signals';
 import { getDateTicks } from 'src/helpers/date';
+import { getDisplayName } from 'src/helpers/hoc';
 
 export class WithHealthScoreDetails extends Component {
   componentDidMount() {
@@ -63,7 +64,7 @@ function withHealthScoreDetails(WrappedComponent) {
     <WithHealthScoreDetails {...props} component={WrappedComponent} />
   );
 
-  Wrapper.displayName = `WithHealthScoreDetails(${WrappedComponent.displayName || WrappedComponent.name || 'Component'})`;
+  Wrapper.displayName = getDisplayName(WrappedComponent, 'WithHealthScoreDetails');
 
   const mapStateToProps = (state, props) => ({
     ...selectHealthScoreDetails(state, props),
