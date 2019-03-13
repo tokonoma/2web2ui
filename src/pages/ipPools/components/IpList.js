@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import _ from 'lodash';
+
 import { TableCollection } from 'src/components';
 
 const columns = ['IP', 'Hostname'];
@@ -18,7 +20,7 @@ export class IpList extends Component {
   render() {
     const { ips } = this.props;
 
-    if (!ips.length) {
+    if (_.isEmpty(ips)) {
       return null;
     }
 

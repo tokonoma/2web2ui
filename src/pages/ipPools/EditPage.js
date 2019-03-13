@@ -1,16 +1,16 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
-import { Page } from '@sparkpost/matchbox';
-import { Loading, DeleteModal, ApiErrorBanner } from 'src/components';
+import { Page, Panel, UnstyledLink } from '@sparkpost/matchbox';
+import { ApiErrorBanner, DeleteModal, Loading } from 'src/components';
 import PoolForm from './components/PoolForm';
+import IpList from './components/IpList';
 
 import { showAlert } from 'src/actions/globalAlert';
-import { listPools, updatePool, deletePool } from 'src/actions/ipPools';
+import { deletePool, listPools, updatePool } from 'src/actions/ipPools';
 import { updateSendingIp } from 'src/actions/sendingIps';
-import { shouldShowIpPurchaseCTA, selectCurrentPool } from 'src/selectors/ipPools';
+import { selectCurrentPool, selectIpsForCurrentPool, shouldShowIpPurchaseCTA } from 'src/selectors/ipPools';
 
 import { decodeIp } from 'src/helpers/ipNames';
 import isDefaultPool from './helpers/defaultPool';
@@ -101,6 +101,30 @@ export class EditPage extends Component {
     return <PoolForm onSubmit={this.onUpdatePool} isNew={false} />;
   }
 
+  renderIps() {
+    const { isNew, ips, pool, showPurchaseCTA } = this.props;
+
+    if (isNew) {
+      return null;
+    }
+
+    const purchaseCTA = showPurchaseCTA
+      ? <Fragment>, or by <UnstyledLink to="/account/billing" component={Link}>purchasing new
+        IPs</UnstyledLink></Fragment>
+      : null;
+
+    return (<Panel title='Sending IPs'>
+      <Panel.Section>
+        <p>
+          {!ips && <span>There are no IPs in this pool. </span>}
+          Add dedicated IPs to this pool by moving them from their current pool{purchaseCTA}.
+          {ips && <span> Click on existing Sending IP to modify.</span>}
+        </p>
+      </Panel.Section>
+      {ips && <IpList ips={ips} pool={pool}/>}
+    </Panel>);
+  }
+
   render() {
     const { loading, pool, showPurchaseCTA } = this.props;
 
@@ -126,6 +150,7 @@ export class EditPage extends Component {
         }>
 
         {this.renderForm()}
+        {this.renderIps()}
 
         <DeleteModal
           open={this.state.showDelete}
@@ -146,6 +171,7 @@ const mapStateToProps = (state, props) => {
     loading: listLoading,
     error: listError,
     pool: selectCurrentPool(state, props),
+    ips: selectIpsForCurrentPool(state, props),
     listError,
     showPurchaseCTA: shouldShowIpPurchaseCTA(state)
   };
