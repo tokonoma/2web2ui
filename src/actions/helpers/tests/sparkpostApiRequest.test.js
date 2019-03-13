@@ -67,6 +67,34 @@ describe('Helper: SparkPost API Request', () => {
     }));
   });
 
+  it('should successfully call the API when the data response is null', async () => {
+
+    axiosMocks.sparkpost.mockImplementation(() => Promise.resolve({ data: null }));
+
+    await mockStore.dispatch(sparkpostApiRequest(action));
+
+    expect(mockStore.getActions()).toMatchSnapshot();
+    expect(axiosMocks.sparkpost).toHaveBeenCalledWith(expect.objectContaining({
+      method: 'get',
+      url: '/some/path',
+      headers: { Authorization: 'TEST-TOKEN' }
+    }));
+  });
+
+  it('should get the correct response when response object has links and total_count', async () => {
+
+    axiosMocks.sparkpost.mockImplementation(() => Promise.resolve({ data: { results: [], links: { next: '' }, total_count: 0 }}));
+
+    await mockStore.dispatch(sparkpostApiRequest(action));
+
+    expect(mockStore.getActions()).toMatchSnapshot();
+    expect(axiosMocks.sparkpost).toHaveBeenCalledWith(expect.objectContaining({
+      method: 'get',
+      url: '/some/path',
+      headers: { Authorization: 'TEST-TOKEN' }
+    }));
+  });
+
   describe('failure cases', () => {
 
     let apiErr;
@@ -143,7 +171,7 @@ describe('Helper: SparkPost API Request', () => {
         state.auth.refreshToken = 'REFRESH_1';
         mockStore = createMockStore(state);
         apiErr.response.status = 401;
-        refreshData = { access_token: 'NEW_TOKEN', refresh_token: 'REFRESH_2' };
+        refreshData = { access_token: 'NEW_TOKEN' };
         httpHelpersMock.useRefreshToken = jest.fn(() => Promise.resolve({ data: refreshData }));
         authMock.refresh = jest.fn(() => ({ type: 'REFRESH' }));
       });
@@ -156,7 +184,7 @@ describe('Helper: SparkPost API Request', () => {
         await mockStore.dispatch(sparkpostApiRequest(action));
         expect(httpHelpersMock.useRefreshToken).toHaveBeenCalledTimes(1);
         expect(httpHelpersMock.useRefreshToken).toHaveBeenCalledWith('REFRESH_1');
-        expect(authMock.refresh).toHaveBeenCalledWith('NEW_TOKEN', 'REFRESH_2');
+        expect(authMock.refresh).toHaveBeenCalledWith('NEW_TOKEN', 'REFRESH_1');
         expect(action.meta.retries).toEqual(1);
 
         expect(mockStore.getActions()).toMatchSnapshot();
@@ -177,7 +205,7 @@ describe('Helper: SparkPost API Request', () => {
 
         expect(httpHelpersMock.useRefreshToken).toHaveBeenCalledTimes(1);
         expect(httpHelpersMock.useRefreshToken).toHaveBeenCalledWith('REFRESH_1');
-        expect(authMock.refresh).toHaveBeenCalledWith('NEW_TOKEN', 'REFRESH_2');
+        expect(authMock.refresh).toHaveBeenCalledWith('NEW_TOKEN', 'REFRESH_1');
 
         // checking action counts instead of snapshotting them in order because these
         // are "kind of async" so they can sometimes get out of order and fail the snapshot
@@ -201,7 +229,7 @@ describe('Helper: SparkPost API Request', () => {
         } catch (err) {
           expect(httpHelpersMock.useRefreshToken).toHaveBeenCalledTimes(3);
           expect(httpHelpersMock.useRefreshToken).toHaveBeenCalledWith('REFRESH_1');
-          expect(authMock.refresh).toHaveBeenCalledWith('NEW_TOKEN', 'REFRESH_2');
+          expect(authMock.refresh).toHaveBeenCalledWith('NEW_TOKEN', 'REFRESH_1');
           expect(mockStore.getActions()).toMatchSnapshot();
         }
       });

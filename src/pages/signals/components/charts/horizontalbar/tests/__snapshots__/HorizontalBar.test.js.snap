@@ -26,8 +26,8 @@ exports[`HorizontalBar Component renders correctly 1`] = `
       margin={
         Object {
           "bottom": 0,
-          "left": 0,
-          "right": 0,
+          "left": 18,
+          "right": 18,
           "top": 0,
         }
       }
@@ -103,6 +103,7 @@ exports[`HorizontalBar Component renders correctly 1`] = `
         onAnimationEnd={[Function]}
         onAnimationStart={[Function]}
         onClick={[MockFunction]}
+        shape={[Function]}
         xAxisId={0}
         yAxisId={0}
       />
@@ -111,7 +112,9 @@ exports[`HorizontalBar Component renders correctly 1`] = `
         animationDuration={400}
         animationEasing="ease"
         content={
-          <Tooltip>
+          <Tooltip
+            width="200px"
+          >
             [MockFunction]
           </Tooltip>
         }

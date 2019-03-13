@@ -15,7 +15,7 @@ exports[`FacetFilter renders facet select and search input 1`] = `
           },
           Object {
             "label": "By Campaign",
-            "value": "campaign",
+            "value": "campaign_id",
           },
           Object {
             "label": "By IP Pool",
@@ -40,6 +40,7 @@ exports[`FacetFilter renders facet select and search input 1`] = `
       resize="both"
       suffix={<Search />}
       type="text"
+      value=""
     />
   </div>
 </Fragment>
@@ -60,7 +61,7 @@ exports[`FacetFilter renders only facet select 1`] = `
           },
           Object {
             "label": "By Campaign",
-            "value": "campaign",
+            "value": "campaign_id",
           },
           Object {
             "label": "By IP Pool",

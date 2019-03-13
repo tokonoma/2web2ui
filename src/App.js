@@ -4,6 +4,7 @@ import { CookieConsent, GlobalAlertWrapper, BoomerangBanner, SiftScience } from 
 import Poll from 'src/context/Poll';
 import Support from 'src/components/support/Support';
 import GoogleTagManager from 'src/components/googleTagManager/GoogleTagManager';
+import Pendo from 'src/components/pendo/Pendo';
 import Layout from 'src/components/layout/Layout';
 import ErrorBoundary from 'src/components/errorBoundaries/ErrorBoundary';
 import routes from 'src/config/routes';
@@ -16,14 +17,19 @@ import {
   Switch
 } from 'react-router-dom';
 
+const reloadApp = () => {
+  window.location.reload(true);
+};
+
 const App = () => (
-  <ErrorBoundary>
+  <ErrorBoundary onCtaClick={reloadApp} ctaLabel='Reload Page'>
     <Poll>
       <Router>
         <div>
           {config.siftScience && <SiftScience config={config.siftScience} />}
           <BoomerangBanner />
           {config.gtmId && <GoogleTagManager id={config.gtmId} />}
+          <Pendo />
           <AuthenticationGate />
           <SuspensionAlerts />
           <CookieConsent />

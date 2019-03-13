@@ -1,0 +1,28 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.Controls {
+  display: flex;
+  flex-grow: 1;
+  justify-content: flex-end;
+}
+
+.Header {
+  display: flex;
+  align-items: baseline;
+  padding: spacing();
+
+  h5 {
+    font-weight: 500;
+    margin-bottom: 0;
+  }
+}
+
+.Tooltip {
+  display: inline-block;
+  margin-left: spacing(small);
+}
+
+.TooltipIcon {
+  color: color(blue);
+  margin-top: -0.4em;
+}

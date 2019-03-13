@@ -1,9 +1,9 @@
 import React from 'react';
 import { Select, TextField } from '@sparkpost/matchbox';
 import { Search } from '@sparkpost/matchbox-icons';
-import facets from 'src/config/facets';
 import { onEnter } from 'src/helpers/keyEvents';
-import withSignalOptions from '../withSignalOptions';
+import facets from '../../constants/facets';
+import withSignalOptions from '../../containers/withSignalOptions';
 import styles from './FacetFilter.module.scss';
 
 const OPTIONS = [
@@ -13,18 +13,24 @@ const OPTIONS = [
 
 export class FacetFilter extends React.Component {
   state = {
+    prevFacetSearchTerm: '',
     searchTerm: ''
   }
 
-  static getDerivedStateFromProps(nextProps, nextState) {
+  // note, hydrate searchTerm from signalOptions
+  static getDerivedStateFromProps(props, state) {
+    const facetSearchTerm = props.signalOptions.facetSearchTerm || '';
+
     return {
-      searchTerm: nextProps.facetSearchTerm
+      prevFacetSearchTerm: facetSearchTerm,
+      searchTerm: state.prevFacetSearchTerm !== facetSearchTerm ? facetSearchTerm : state.searchTerm
     };
   }
 
   handleFacetChange = (event) => {
     const { changeSignalOptions } = this.props;
     changeSignalOptions({ facet: event.currentTarget.value, facetSearchTerm: '' });
+    this.setState({ searchTerm: '' });
   }
 
   handleFacetSearch = () => {
@@ -37,7 +43,7 @@ export class FacetFilter extends React.Component {
   }
 
   render() {
-    const { facet } = this.props;
+    const { signalOptions: { facet }} = this.props;
     const { searchTerm } = this.state;
 
     return (

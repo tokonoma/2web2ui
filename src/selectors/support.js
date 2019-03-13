@@ -2,6 +2,7 @@ import _ from 'lodash';
 import { createSelector } from 'reselect';
 import accessConditionState from './accessConditionState';
 import supportIssues from 'src/config/supportIssues';
+import hasGrants from 'src/helpers/conditions/hasGrants';
 
 const getAccountSupport = (state) => state.account.support;
 const getSupportIssueId = (state, id) => id;
@@ -26,8 +27,8 @@ export const selectSupportIssue = createSelector(
 );
 
 export const authorizedToSubmitSupportTickets = createSelector(
-  selectSupportIssues,
-  (issues) => issues.length > 0
+  [selectSupportIssues, accessConditionState],
+  (issues, state) => issues.length > 0 && hasGrants('support/manage')(state)
 );
 
 export const notAuthorizedToSubmitSupportTickets = createSelector(

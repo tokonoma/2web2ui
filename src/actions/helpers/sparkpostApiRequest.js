@@ -29,10 +29,13 @@ const sparkpostRequest = requestHelperFactory({
   },
   onSuccess: ({ response, dispatch, types, meta }) => {
     const results = _.get(response, 'data.results', response.data);
+    const links = _.get(response, 'data.links', {});
+    const total_count = _.get(response, 'data.total_count');
     dispatch({
       type: types.SUCCESS,
+      meta,
       payload: results,
-      meta
+      extra: { links, total_count }
     });
 
     return meta.onSuccess ? dispatch(meta.onSuccess({ results })) : results;
@@ -64,7 +67,7 @@ const sparkpostRequest = requestHelperFactory({
       return useRefreshToken(auth.refreshToken)
 
         // dispatch a refresh action to save new token results in cookie and store
-        .then(({ data } = {}) => dispatch(refresh(data.access_token, data.refresh_token)))
+        .then(({ data } = {}) => dispatch(refresh(data.access_token, auth.refreshToken)))
 
         // dispatch the original action again, now that we have a new token ...
         // if anything in this refresh flow blew up, log out

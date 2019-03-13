@@ -2,8 +2,8 @@
 
 exports[`Signals Spam Trap Page bar chart props gets x axis props 1`] = `
 Object {
-  "interval": -2,
   "tickFormatter": [Function],
+  "ticks": Array [],
 }
 `;
 
@@ -24,6 +24,13 @@ exports[`Signals Spam Trap Page bar chart props renders tooltip content 1`] = `
 </Fragment>
 `;
 
+exports[`Signals Spam Trap Page local state handles date select 1`] = `
+<SpamTrapActions
+  date="2017-01-02"
+  percent={0.5}
+/>
+`;
+
 exports[`Signals Spam Trap Page renders correctly 1`] = `
 <SignalsPage
   breadcrumbAction={
@@ -33,8 +40,10 @@ exports[`Signals Spam Trap Page renders correctly 1`] = `
       "to": "/signals",
     }
   }
+  dimensionPrefix="Spam Traps for"
+  facet="sending-domain"
+  facetId="test.com"
   primaryArea={<Connect(DateFilter) />}
-  subtitle="Spam Trap Monitoring for test.com"
 >
   <Grid>
     <Grid.Column
@@ -47,11 +56,15 @@ exports[`Signals Spam Trap Page renders correctly 1`] = `
         <ChartHeader
           primaryArea={
             <Calculation
-              initialSelected="absolute"
+              initialSelected="relative"
               onChange={[Function]}
             />
           }
           title="Spam Trap Monitoring"
+          tooltipContent="
+  The share over time of your total email that has been sent to known spam traps. An
+  excessive rate of spam trap hits is an indicator of poor list procurement and hygiene practices.
+"
         />
         <BarChart
           fill="#B157CE"
@@ -62,27 +75,42 @@ exports[`Signals Spam Trap Page renders correctly 1`] = `
               "bottom": 5,
               "left": 18,
               "right": 0,
-              "top": 5,
+              "top": 12,
             }
           }
           onClick={[Function]}
-          selected={null}
-          timeSeries={Array []}
+          selected="2017-01-01"
+          timeSeries={
+            Array [
+              Object {
+                "date": "2017-01-01",
+                "relative_trap_hits": 0.1,
+              },
+              Object {
+                "date": "2017-01-02",
+                "relative_trap_hits": 0.5,
+              },
+            ]
+          }
           tooltipContent={[Function]}
           width="99%"
           xAxisProps={
             Object {
-              "interval": -2,
+              "tickFormatter": [Function],
+              "ticks": Array [],
+            }
+          }
+          xKey="date"
+          yAxisProps={
+            Object {
+              "domain": Array [
+                "auto",
+                "auto",
+              ],
               "tickFormatter": [Function],
             }
           }
-          xKey="dt"
-          yAxisProps={
-            Object {
-              "tickFormatter": null,
-            }
-          }
-          yKey="trap_hits"
+          yKey="relative_trap_hits"
           yRange={
             Array [
               "auto",
@@ -97,31 +125,33 @@ exports[`Signals Spam Trap Page renders correctly 1`] = `
       mdOffset={0}
       sm={12}
     >
-      <Actions
-        actions={
-          Array [
-            Object {
-              "content": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.",
-              "link": "https://www.sparkpost.com",
-            },
-          ]
-        }
-        date={null}
-      />
+      <div
+        className="OffsetCol"
+      >
+        <SpamTrapActions
+          date="2017-01-01"
+          percent={0.1}
+        />
+      </div>
     </Grid.Column>
   </Grid>
   <OtherChartsHeader
+    facet="sending-domain"
     facetId="test.com"
   />
   <Grid>
     <Grid.Column
       sm={6}
       xs={12}
-    />
+    >
+      <withRouter(Connect(withEngagementRecencyDetails(EngagementRecencyPreview))) />
+    </Grid.Column>
     <Grid.Column
       sm={6}
       xs={12}
-    />
+    >
+      <withRouter(Connect(WithHealthScoreDetails(HealthScorePreview))) />
+    </Grid.Column>
   </Grid>
 </SignalsPage>
 `;
@@ -133,11 +163,15 @@ exports[`Signals Spam Trap Page renders empty correctly 1`] = `
   <ChartHeader
     primaryArea={
       <Calculation
-        initialSelected="absolute"
+        initialSelected="relative"
         onChange={[Function]}
       />
     }
     title="Spam Trap Monitoring"
+    tooltipContent="
+  The share over time of your total email that has been sent to known spam traps. An
+  excessive rate of spam trap hits is an indicator of poor list procurement and hygiene practices.
+"
   />
   <Callout
     title="No Data Available"
@@ -156,8 +190,10 @@ exports[`Signals Spam Trap Page renders error correctly 1`] = `
       "to": "/signals",
     }
   }
+  dimensionPrefix="Spam Traps for"
+  facet="sending-domain"
+  facetId="test.com"
   primaryArea={<Connect(DateFilter) />}
-  subtitle="Spam Trap Monitoring for test.com"
 >
   <Grid>
     <Grid.Column
@@ -170,11 +206,15 @@ exports[`Signals Spam Trap Page renders error correctly 1`] = `
         <ChartHeader
           primaryArea={
             <Calculation
-              initialSelected="absolute"
+              initialSelected="relative"
               onChange={[Function]}
             />
           }
           title="Spam Trap Monitoring"
+          tooltipContent="
+  The share over time of your total email that has been sent to known spam traps. An
+  excessive rate of spam trap hits is an indicator of poor list procurement and hygiene practices.
+"
         />
         <Callout
           title="Unable to Load Data"
@@ -188,31 +228,28 @@ exports[`Signals Spam Trap Page renders error correctly 1`] = `
       mdOffset={0}
       sm={12}
     >
-      <Actions
-        actions={
-          Array [
-            Object {
-              "content": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.",
-              "link": "https://www.sparkpost.com",
-            },
-          ]
-        }
-        date={null}
+      <div
+        className="OffsetCol"
       />
     </Grid.Column>
   </Grid>
   <OtherChartsHeader
+    facet="sending-domain"
     facetId="test.com"
   />
   <Grid>
     <Grid.Column
       sm={6}
       xs={12}
-    />
+    >
+      <withRouter(Connect(withEngagementRecencyDetails(EngagementRecencyPreview))) />
+    </Grid.Column>
     <Grid.Column
       sm={6}
       xs={12}
-    />
+    >
+      <withRouter(Connect(WithHealthScoreDetails(HealthScorePreview))) />
+    </Grid.Column>
   </Grid>
 </SignalsPage>
 `;
@@ -224,11 +261,15 @@ exports[`Signals Spam Trap Page renders loading correctly 1`] = `
   <ChartHeader
     primaryArea={
       <Calculation
-        initialSelected="absolute"
+        initialSelected="relative"
         onChange={[Function]}
       />
     }
     title="Spam Trap Monitoring"
+    tooltipContent="
+  The share over time of your total email that has been sent to known spam traps. An
+  excessive rate of spam trap hits is an indicator of poor list procurement and hygiene practices.
+"
   />
   <div
     style={

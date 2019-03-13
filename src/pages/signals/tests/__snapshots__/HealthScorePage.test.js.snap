@@ -1,3 +1,676 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Signals Health Score Page renders correctly 1`] = `<SignalsPage />`;
+exports[`Signals Health Score Page bar chart props gets x axis props 1`] = `
+Object {
+  "tickFormatter": [Function],
+  "ticks": Array [],
+}
+`;
+
+exports[`Signals Health Score Page bar chart props renders tooltip content for component weights 1`] = `
+"
+      Other Bounces are defined as the share of attempted email injections that bounce for a variety
+      of miscellaneous technical reasons.
+    "
+`;
+
+exports[`Signals Health Score Page bar chart props renders tooltip content for health score 1`] = `
+<TooltipMetric
+  label="Health Score"
+  value="12"
+/>
+`;
+
+exports[`Signals Health Score Page bar chart props renders tooltip content for injections 1`] = `
+<TooltipMetric
+  label="Injections"
+  value="1,000"
+/>
+`;
+
+exports[`Signals Health Score Page bar chart props renders tooltip content for selected component 1`] = `
+<TooltipMetric
+  label="Complaints"
+  value="0.1235%"
+/>
+`;
+
+exports[`Signals Health Score Page bar chart props renders y label content for component weights 1`] = `"Engaged Recipients"`;
+
+exports[`Signals Health Score Page local state handles date select 1`] = `
+<HealthScoreActions
+  date="2017-01-02"
+  weights={
+    Array [
+      Object {
+        "weight": 0.8,
+        "weight_type": "List Quality",
+        "weight_value": 0.25,
+      },
+      Object {
+        "weight": -0.8,
+        "weight_type": "Other bounces",
+        "weight_value": 0.25,
+      },
+    ]
+  }
+/>
+`;
+
+exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
+<SignalsPage
+  breadcrumbAction={
+    Object {
+      "component": [Function],
+      "content": "Back to Overview",
+      "to": "/signals",
+    }
+  }
+  dimensionPrefix="Health Score for"
+  facet="sending-domain"
+  facetId="test.com"
+  primaryArea={<Connect(DateFilter) />}
+>
+  <Grid>
+    <Grid.Column
+      md={7}
+      sm={12}
+    >
+      <Panel
+        sectioned={true}
+      >
+        <ChartHeader
+          title="Health Score"
+          tooltipContent="
+  This is a predictive score that monitors your email health to identify problems before
+  they negatively impact email delivery. This score is informed by message events,
+  including bounces, spam trap hits, and engagement across our entire network.
+"
+        />
+        <BarChart
+          fill="#B157CE"
+          gap={0.25}
+          height={250}
+          margin={
+            Object {
+              "bottom": 5,
+              "left": 18,
+              "right": 0,
+              "top": 12,
+            }
+          }
+          onClick={[Function]}
+          selected="2017-01-01"
+          timeSeries={
+            Array [
+              Object {
+                "date": "2017-01-01",
+                "weights": Array [
+                  Object {
+                    "weight": 0.5,
+                    "weight_type": "Hard Bounces",
+                    "weight_value": 0.25,
+                  },
+                  Object {
+                    "weight": -0.5,
+                    "weight_type": "Complaints",
+                    "weight_value": 0.25,
+                  },
+                ],
+              },
+              Object {
+                "date": "2017-01-02",
+                "weights": Array [
+                  Object {
+                    "weight": 0.8,
+                    "weight_type": "List Quality",
+                    "weight_value": 0.25,
+                  },
+                  Object {
+                    "weight": -0.8,
+                    "weight_type": "Other bounces",
+                    "weight_value": 0.25,
+                  },
+                ],
+              },
+            ]
+          }
+          tooltipContent={[Function]}
+          width="99%"
+          xAxisProps={
+            Object {
+              "tickFormatter": [Function],
+              "ticks": Array [],
+            }
+          }
+          xKey="date"
+          yAxisProps={
+            Object {
+              "tickFormatter": [Function],
+            }
+          }
+          yKey="health_score"
+          yRange={
+            Array [
+              "auto",
+              "auto",
+            ]
+          }
+        />
+        <ChartHeader
+          title="Injections"
+          tooltipContent="
+  Injections are defined as the total number of messages successfully generated or relayed to SparkPost for delivery.
+"
+        />
+        <BarChart
+          fill="#B157CE"
+          gap={0.25}
+          height={190}
+          margin={
+            Object {
+              "bottom": 5,
+              "left": 18,
+              "right": 0,
+              "top": 12,
+            }
+          }
+          onClick={[Function]}
+          selected="2017-01-01"
+          timeSeries={
+            Array [
+              Object {
+                "date": "2017-01-01",
+                "weights": Array [
+                  Object {
+                    "weight": 0.5,
+                    "weight_type": "Hard Bounces",
+                    "weight_value": 0.25,
+                  },
+                  Object {
+                    "weight": -0.5,
+                    "weight_type": "Complaints",
+                    "weight_value": 0.25,
+                  },
+                ],
+              },
+              Object {
+                "date": "2017-01-02",
+                "weights": Array [
+                  Object {
+                    "weight": 0.8,
+                    "weight_type": "List Quality",
+                    "weight_value": 0.25,
+                  },
+                  Object {
+                    "weight": -0.8,
+                    "weight_type": "Other bounces",
+                    "weight_value": 0.25,
+                  },
+                ],
+              },
+            ]
+          }
+          tooltipContent={[Function]}
+          width="99%"
+          xAxisProps={
+            Object {
+              "tickFormatter": [Function],
+              "ticks": Array [],
+            }
+          }
+          xKey="date"
+          yAxisProps={
+            Object {
+              "tickFormatter": [Function],
+            }
+          }
+          yKey="injections"
+          yRange={
+            Array [
+              "auto",
+              "auto",
+            ]
+          }
+        />
+        <ChartHeader
+          title="Hard Bounces Percent"
+        />
+        <BarChart
+          fill="#B157CE"
+          gap={0.25}
+          height={190}
+          margin={
+            Object {
+              "bottom": 5,
+              "left": 18,
+              "right": 0,
+              "top": 12,
+            }
+          }
+          onClick={[Function]}
+          selected="2017-01-01"
+          timeSeries={
+            Array [
+              Object {
+                "date": "2017-01-01",
+                "weight": 0.5,
+                "weight_type": "Hard Bounces",
+                "weight_value": 0.25,
+              },
+              Object {
+                "date": "2017-01-02",
+              },
+            ]
+          }
+          tooltipContent={[Function]}
+          width="99%"
+          xAxisProps={
+            Object {
+              "tickFormatter": [Function],
+              "ticks": Array [],
+            }
+          }
+          xKey="date"
+          yAxisProps={
+            Object {
+              "tickFormatter": [Function],
+            }
+          }
+          yKey="weight_value"
+          yRange={
+            Array [
+              "auto",
+              "auto",
+            ]
+          }
+        />
+      </Panel>
+    </Grid.Column>
+    <Grid.Column
+      md={5}
+      mdOffset={0}
+      sm={12}
+    >
+      <div
+        className="OffsetCol"
+      >
+        <ChartHeader
+          date="2017-01-01"
+          hideLine={true}
+          padding="1rem 0 1rem"
+          title="Health Score Components"
+          tooltipContent="
+  Your email Health Score is comprised of several signals, including bounces, spam trap hits, user
+  engagement, and others.
+"
+        />
+        <DivergingBar
+          barHeight={35}
+          data={
+            Array [
+              Object {
+                "weight": 0.5,
+                "weight_type": "Hard Bounces",
+                "weight_value": 0.25,
+              },
+              Object {
+                "weight": -0.5,
+                "weight_type": "Complaints",
+                "weight_value": 0.25,
+              },
+            ]
+          }
+          negativeFill="#DB2F2D"
+          onClick={[Function]}
+          positiveFill="#8CBE3C"
+          selected="Hard Bounces"
+          tooltipContent={[Function]}
+          width="99%"
+          xDomain={
+            Array [
+              "dataMin",
+              "dataMax",
+            ]
+          }
+          xKey="weight"
+          yKey="weight_type"
+          yLabel={[Function]}
+        />
+        <HealthScoreActions
+          date="2017-01-01"
+          weights={
+            Array [
+              Object {
+                "weight": 0.5,
+                "weight_type": "Hard Bounces",
+                "weight_value": 0.25,
+              },
+              Object {
+                "weight": -0.5,
+                "weight_type": "Complaints",
+                "weight_value": 0.25,
+              },
+            ]
+          }
+        />
+      </div>
+    </Grid.Column>
+  </Grid>
+  <OtherChartsHeader
+    facet="sending-domain"
+    facetId="test.com"
+  />
+  <Grid>
+    <Grid.Column
+      sm={6}
+      xs={12}
+    >
+      <withRouter(Connect(WithSpamTrapDetails(SpamTrapsPreview))) />
+    </Grid.Column>
+    <Grid.Column
+      sm={6}
+      xs={12}
+    >
+      <withRouter(Connect(withEngagementRecencyDetails(EngagementRecencyPreview))) />
+    </Grid.Column>
+  </Grid>
+</SignalsPage>
+`;
+
+exports[`Signals Health Score Page renders empty correctly 1`] = `
+<Panel
+  sectioned={true}
+>
+  <ChartHeader
+    title="Health Score"
+    tooltipContent="
+  This is a predictive score that monitors your email health to identify problems before
+  they negatively impact email delivery. This score is informed by message events,
+  including bounces, spam trap hits, and engagement across our entire network.
+"
+  />
+  <Callout
+    title="No Data Available"
+  >
+    Insufficient data to populate this chart
+  </Callout>
+</Panel>
+`;
+
+exports[`Signals Health Score Page renders empty weights 1`] = `
+<SignalsPage
+  breadcrumbAction={
+    Object {
+      "component": [Function],
+      "content": "Back to Overview",
+      "to": "/signals",
+    }
+  }
+  dimensionPrefix="Health Score for"
+  facet="sending-domain"
+  facetId="test.com"
+  primaryArea={<Connect(DateFilter) />}
+>
+  <Grid>
+    <Grid.Column
+      md={7}
+      sm={12}
+    >
+      <Panel
+        sectioned={true}
+      >
+        <ChartHeader
+          title="Health Score"
+          tooltipContent="
+  This is a predictive score that monitors your email health to identify problems before
+  they negatively impact email delivery. This score is informed by message events,
+  including bounces, spam trap hits, and engagement across our entire network.
+"
+        />
+        <BarChart
+          fill="#B157CE"
+          gap={0.25}
+          height={250}
+          margin={
+            Object {
+              "bottom": 5,
+              "left": 18,
+              "right": 0,
+              "top": 12,
+            }
+          }
+          onClick={[Function]}
+          selected="2017-01-01"
+          timeSeries={
+            Array [
+              Object {
+                "date": "2017-01-01",
+              },
+            ]
+          }
+          tooltipContent={[Function]}
+          width="99%"
+          xAxisProps={
+            Object {
+              "tickFormatter": [Function],
+              "ticks": Array [],
+            }
+          }
+          xKey="date"
+          yAxisProps={
+            Object {
+              "tickFormatter": [Function],
+            }
+          }
+          yKey="health_score"
+          yRange={
+            Array [
+              "auto",
+              "auto",
+            ]
+          }
+        />
+        <ChartHeader
+          title="Injections"
+          tooltipContent="
+  Injections are defined as the total number of messages successfully generated or relayed to SparkPost for delivery.
+"
+        />
+        <BarChart
+          fill="#B157CE"
+          gap={0.25}
+          height={190}
+          margin={
+            Object {
+              "bottom": 5,
+              "left": 18,
+              "right": 0,
+              "top": 12,
+            }
+          }
+          onClick={[Function]}
+          selected="2017-01-01"
+          timeSeries={
+            Array [
+              Object {
+                "date": "2017-01-01",
+              },
+            ]
+          }
+          tooltipContent={[Function]}
+          width="99%"
+          xAxisProps={
+            Object {
+              "tickFormatter": [Function],
+              "ticks": Array [],
+            }
+          }
+          xKey="date"
+          yAxisProps={
+            Object {
+              "tickFormatter": [Function],
+            }
+          }
+          yKey="injections"
+          yRange={
+            Array [
+              "auto",
+              "auto",
+            ]
+          }
+        />
+      </Panel>
+    </Grid.Column>
+    <Grid.Column
+      md={5}
+      mdOffset={0}
+      sm={12}
+    >
+      <div
+        className="OffsetCol"
+      >
+        <ChartHeader
+          date="2017-01-01"
+          hideLine={true}
+          padding="1rem 0 1rem"
+          title="Health Score Components"
+          tooltipContent="
+  Your email Health Score is comprised of several signals, including bounces, spam trap hits, user
+  engagement, and others.
+"
+        />
+        <Callout>
+          Insufficient data to populate this chart
+        </Callout>
+        <HealthScoreActions
+          date="2017-01-01"
+          weights={Array []}
+        />
+      </div>
+    </Grid.Column>
+  </Grid>
+  <OtherChartsHeader
+    facet="sending-domain"
+    facetId="test.com"
+  />
+  <Grid>
+    <Grid.Column
+      sm={6}
+      xs={12}
+    >
+      <withRouter(Connect(WithSpamTrapDetails(SpamTrapsPreview))) />
+    </Grid.Column>
+    <Grid.Column
+      sm={6}
+      xs={12}
+    >
+      <withRouter(Connect(withEngagementRecencyDetails(EngagementRecencyPreview))) />
+    </Grid.Column>
+  </Grid>
+</SignalsPage>
+`;
+
+exports[`Signals Health Score Page renders error correctly 1`] = `
+<SignalsPage
+  breadcrumbAction={
+    Object {
+      "component": [Function],
+      "content": "Back to Overview",
+      "to": "/signals",
+    }
+  }
+  dimensionPrefix="Health Score for"
+  facet="sending-domain"
+  facetId="test.com"
+  primaryArea={<Connect(DateFilter) />}
+>
+  <Grid>
+    <Grid.Column
+      md={7}
+      sm={12}
+    >
+      <Panel
+        sectioned={true}
+      >
+        <ChartHeader
+          title="Health Score"
+          tooltipContent="
+  This is a predictive score that monitors your email health to identify problems before
+  they negatively impact email delivery. This score is informed by message events,
+  including bounces, spam trap hits, and engagement across our entire network.
+"
+        />
+        <Callout
+          title="Unable to Load Data"
+        >
+          error message
+        </Callout>
+      </Panel>
+    </Grid.Column>
+    <Grid.Column
+      md={5}
+      mdOffset={0}
+      sm={12}
+    >
+      <div
+        className="OffsetCol"
+      >
+        <ChartHeader
+          date="2017-01-01"
+          hideLine={true}
+          padding="1rem 0 1rem"
+          title="Health Score Components"
+          tooltipContent="
+  Your email Health Score is comprised of several signals, including bounces, spam trap hits, user
+  engagement, and others.
+"
+        />
+      </div>
+    </Grid.Column>
+  </Grid>
+  <OtherChartsHeader
+    facet="sending-domain"
+    facetId="test.com"
+  />
+  <Grid>
+    <Grid.Column
+      sm={6}
+      xs={12}
+    >
+      <withRouter(Connect(WithSpamTrapDetails(SpamTrapsPreview))) />
+    </Grid.Column>
+    <Grid.Column
+      sm={6}
+      xs={12}
+    >
+      <withRouter(Connect(withEngagementRecencyDetails(EngagementRecencyPreview))) />
+    </Grid.Column>
+  </Grid>
+</SignalsPage>
+`;
+
+exports[`Signals Health Score Page renders loading correctly 1`] = `
+<Panel
+  sectioned={true}
+>
+  <ChartHeader
+    title="Health Score"
+    tooltipContent="
+  This is a predictive score that monitors your email health to identify problems before
+  they negatively impact email delivery. This score is informed by message events,
+  including bounces, spam trap hits, and engagement across our entire network.
+"
+  />
+  <div
+    style={
+      Object {
+        "height": "220px",
+        "position": "relative",
+      }
+    }
+  >
+    <Loading />
+  </div>
+</Panel>
+`;

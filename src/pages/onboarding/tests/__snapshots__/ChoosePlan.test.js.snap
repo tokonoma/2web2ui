@@ -8,13 +8,20 @@ exports[`ChoosePlan page tests should disable submit and plan picker when submit
       <Panel
         title="Select A Plan"
       >
-        <Component
+        <_default
           disabled={true}
+          onChange={[Function]}
           plans={Array []}
+          selectedPromo={Object {}}
         />
         <Connect(AccessControl)
           condition={[Function]}
         >
+          <Panel.Section>
+            <Connect(PromoCode)
+              selectedPromo={Object {}}
+            />
+          </Panel.Section>
           <Panel.Section>
             <Connect(PaymentForm)
               disabled={true}
@@ -55,13 +62,20 @@ exports[`ChoosePlan page tests should render correctly 1`] = `
       <Panel
         title="Select A Plan"
       >
-        <Component
+        <_default
           disabled={false}
+          onChange={[Function]}
           plans={Array []}
+          selectedPromo={Object {}}
         />
         <Connect(AccessControl)
           condition={[Function]}
         >
+          <Panel.Section>
+            <Connect(PromoCode)
+              selectedPromo={Object {}}
+            />
+          </Panel.Section>
           <Panel.Section>
             <Connect(PaymentForm)
               disabled={false}
@@ -104,20 +118,22 @@ exports[`ChoosePlan page tests should show free bullets when isFree is selected 
       <Panel
         title="Select A Plan"
       >
-        <Component
+        <_default
           disabled={false}
+          onChange={[Function]}
           plans={Array []}
+          selectedPromo={Object {}}
         />
         <Connect(AccessControl)
           condition={[Function]}
         >
           <Panel.Section>
             <p>
-              Our full-featured, free account provides you:
+              Full featured test account that includes:
             </p>
             <ul>
               <li>
-                Up to 15,000 free messages for first 30 days, then 500/month forever.
+                Limited sending volume for testing.
               </li>
               <li>
                 Access to all of our powerful API features.

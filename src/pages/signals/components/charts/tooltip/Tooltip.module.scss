@@ -4,13 +4,16 @@
   background: color(gray, 1);
   box-shadow: shadow(deep);
   border-radius: border-radius(large);
-  width: 150px;
   user-select: none;
 }
 
 .TooltipDate, .TooltipContent {
-  padding: spacing(small) spacing();
+  padding: rem(9) rem(13);
   color: color(gray, 10);
+}
+
+.TooltipContent {
+  font-size: rem(13);
 }
 
 .TooltipDate {

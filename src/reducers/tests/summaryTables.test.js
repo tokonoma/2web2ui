@@ -29,5 +29,22 @@ cases('Summary Tables Reducer', ({ name, ...action }) => {
       tableName: 'testTable',
       perPage: 25
     }
+  },
+  'when reset': {
+    type: 'RESET_SUMMARY_TABLE',
+    payload: {
+      tableName: 'testTable'
+    }
+  },
+  'when reset with custom defaults': {
+    type: 'RESET_SUMMARY_TABLE',
+    payload: {
+      tableName: 'testTable',
+      currentPage: 2,
+      order: {
+        ascending: true,
+        dataKey: 'subaccountId'
+      }
+    }
   }
 });

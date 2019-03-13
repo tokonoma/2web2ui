@@ -1,11 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Button, Popover, UnstyledLink } from '@sparkpost/matchbox';
+import { Button, Popover, UnstyledLink, WindowEvent } from '@sparkpost/matchbox';
 import { ArrowDropDown, ChevronLeft } from '@sparkpost/matchbox-icons';
 import SubaccountTypeahead from 'src/components/typeahead/SubaccountTypeahead';
 import { hasSubaccounts } from 'src/selectors/subaccounts';
-import withSignalOptions from '../withSignalOptions';
+import withSignalOptions from '../../containers/withSignalOptions';
 import SubaccountOption from './SubaccountOption';
+import { onEscape } from 'src/helpers/keyEvents';
+import classnames from 'classnames';
 import styles from './SubaccountFilter.module.scss';
 
 const OPTIONS = [
@@ -27,17 +29,17 @@ const OPTIONS = [
 ];
 
 export class SubaccountFilter extends React.Component {
-  static defaultProps = {
-    subaccount: OPTIONS[0]
-  }
-
   state = {
     isOpen: false,
     isSearchOpen: false
   }
 
-  handleChange = ({ id, name }) => {
+  close = () => {
     this.setState({ isOpen: false, isSearchOpen: false });
+  }
+
+  handleChange = ({ id, name }) => {
+    this.close();
     this.props.changeSignalOptions({ subaccount: { id, name }});
   }
 
@@ -49,16 +51,24 @@ export class SubaccountFilter extends React.Component {
     this.setState({ isOpen: !this.state.isOpen });
   }
 
+  containsTarget = (ref, e) => Boolean(ref && ref.contains(e.target))
+
+  handleWindowClick = (e) => {
+    if (!this.containsTarget(this.contentRef, e) && !this.containsTarget(this.triggerRef, e)) {
+      this.close();
+    }
+  }
+
   render() {
-    const { hasSubaccounts, subaccount } = this.props;
+    const { hasSubaccounts, signalOptions: { subaccount = OPTIONS[0] }} = this.props;
     const { isOpen, isSearchOpen } = this.state;
 
     if (!hasSubaccounts) {
       return null;
     }
 
-    return (
-      <div className={styles.SubaccountFilter}>
+    const trigger = (
+      <span ref={(node) => this.triggerRef = node}>
         <Button onClick={this.handleVisibilityToggle}>
           <span className={styles.ButtonLabel}>
             {subaccount.name}
@@ -66,9 +76,16 @@ export class SubaccountFilter extends React.Component {
           {subaccount.id > 0 && <span>({subaccount.id})</span>}
           <ArrowDropDown className={styles.ButtonIcon} />
         </Button>
-        <Popover className={styles.Popover} left open={isOpen}>
-          {isSearchOpen ? (
-            <React.Fragment>
+      </span>
+    );
+
+    return (
+      <div className={styles.SubaccountFilter}>
+        <WindowEvent handler={this.handleWindowClick} event='click' />
+        <WindowEvent handler={onEscape(this.close)} event='keydown' />
+        <Popover className={styles.Popover} left open={isOpen} trigger={trigger}>
+          <div ref={(node) => this.contentRef = node}>
+            <div className={classnames(styles.PopoverContent, isSearchOpen && styles.showSearch)}>
               <div className={styles.SubaccountSearchHeader}>
                 <UnstyledLink className={styles.BackButton} onClick={this.handleSearchToggle}>
                   <ChevronLeft size={20} />
@@ -82,9 +99,8 @@ export class SubaccountFilter extends React.Component {
                   placeholder="Search here"
                 />
               </div>
-            </React.Fragment>
-          ) : (
-            <React.Fragment>
+            </div>
+            <div className={classnames(styles.PopoverContent, !isSearchOpen && styles.showOptions)}>
               {OPTIONS.map(({ condition, id, name, nested }) => (
                 <SubaccountOption
                   key={name}
@@ -96,8 +112,9 @@ export class SubaccountFilter extends React.Component {
                   value={{ id, name }}
                 />
               ))}
-            </React.Fragment>
-          )}
+            </div>
+
+          </div>
         </Popover>
       </div>
     );

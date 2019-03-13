@@ -6,12 +6,13 @@ describe('SubaccountFilter Component', () => {
   const subject = (props = {}) => shallow(
     <SubaccountFilter
       hasSubaccounts={true}
+      signalOptions={{}}
       {...props}
     />
   );
 
   const openPopover = (wrapper) => {
-    wrapper.find('Button').simulate('click');
+    shallow(wrapper.find('Popover').prop('trigger')).find('Button').simulate('click');
   };
 
   const openSearch = (wrapper) => {
@@ -29,14 +30,19 @@ describe('SubaccountFilter Component', () => {
   });
 
   it('renders with subaccount', () => {
-    const wrapper = subject({ subaccount: { id: 123, name: 'Test Subaccount' }});
+    const props = {
+      signalOptions: {
+        subaccount: { id: 123, name: 'Test Subaccount' }
+      }
+    };
+    const wrapper = subject(props);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('renders open popover with options', () => {
     const wrapper = subject();
     openPopover(wrapper);
-    expect(wrapper).toMatchSnapshot();
+    expect(wrapper.find('Popover')).toMatchSnapshot();
   });
 
   it('renders open popover with subaccount search', () => {
@@ -45,7 +51,7 @@ describe('SubaccountFilter Component', () => {
     openPopover(wrapper);
     openSearch(wrapper);
 
-    expect(wrapper).toMatchSnapshot();
+    expect(wrapper.find('.PopoverContent').at(0).prop('className')).toMatchSnapshot();
   });
 
   it('renders open popover with options after back button is clicked', () => {
@@ -56,7 +62,7 @@ describe('SubaccountFilter Component', () => {
 
     wrapper.find('UnstyledLink').simulate('click');
 
-    expect(wrapper).toMatchSnapshot();
+    expect(wrapper.find('.PopoverContent').at(1).prop('className')).toMatchSnapshot();
   });
 
   it('calls changeSignalOptions when option is clicked', () => {
@@ -85,5 +91,39 @@ describe('SubaccountFilter Component', () => {
     wrapper.find('Connect(SubaccountTypeahead)').simulate('change', value);
 
     expect(changeSignalOptions).toHaveBeenCalledWith({ subaccount: value });
+  });
+
+  describe('events', () => {
+    let stateSpy;
+    let wrapper;
+    let windowEvent;
+
+    const ref = (node) => ({
+      contains: (str) => Boolean(str.includes(node))
+    });
+
+    beforeEach(() => {
+      wrapper = subject();
+      wrapper.instance().contentRef = ref('content');
+      wrapper.instance().triggerRef = ref('trigger');
+      stateSpy = jest.spyOn(wrapper.instance(), 'setState');
+      windowEvent = wrapper.find('WindowEvent');
+    });
+
+    it('handles click inside', () => {
+      windowEvent.at(0).prop('handler')({ target: 'content' });
+      windowEvent.at(0).prop('handler')({ target: 'trigger' });
+      expect(stateSpy).not.toHaveBeenCalled();
+    });
+
+    it('handles click outside', () => {
+      windowEvent.at(0).prop('handler')({ target: 'nope' });
+      expect(stateSpy).toHaveBeenCalledWith({ isOpen: false, isSearchOpen: false });
+    });
+
+    it('handles escape', () => {
+      windowEvent.at(1).prop('handler')({ key: 'Escape' });
+      expect(stateSpy).toHaveBeenCalledWith({ isOpen: false, isSearchOpen: false });
+    });
   });
 });

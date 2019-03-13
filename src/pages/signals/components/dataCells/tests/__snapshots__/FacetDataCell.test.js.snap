@@ -1,0 +1,94 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FacetDataCell adds a class to truncate its contents 1`] = `
+<div
+  className="PaddedCell OverflowCell"
+>
+  <PageLink
+    to={
+      Object {
+        "pathname": "/signals/example/domain/example.com",
+        "search": undefined,
+      }
+    }
+  >
+    example.com
+  </PageLink>
+</div>
+`;
+
+exports[`FacetDataCell renders label for all accounts 1`] = `
+<div
+  className="PaddedCell"
+>
+  Master & All Subaccounts
+</div>
+`;
+
+exports[`FacetDataCell renders page link 1`] = `
+<div
+  className="PaddedCell"
+>
+  <PageLink
+    to={
+      Object {
+        "pathname": "/signals/example/domain/example.com",
+        "search": undefined,
+      }
+    }
+  >
+    example.com
+  </PageLink>
+</div>
+`;
+
+exports[`FacetDataCell renders page link for master account 1`] = `
+<div
+  className="PaddedCell"
+>
+  <PageLink
+    to={
+      Object {
+        "pathname": "/signals/example/sid/0",
+        "search": undefined,
+      }
+    }
+  >
+    Master Account
+  </PageLink>
+</div>
+`;
+
+exports[`FacetDataCell renders page link with name and id 1`] = `
+<div
+  className="PaddedCell"
+>
+  <PageLink
+    to={
+      Object {
+        "pathname": "/signals/example/sid/123",
+        "search": undefined,
+      }
+    }
+  >
+    Test Subaccount (123)
+  </PageLink>
+</div>
+`;
+
+exports[`FacetDataCell renders page link with subaccount search 1`] = `
+<div
+  className="PaddedCell"
+>
+  <PageLink
+    to={
+      Object {
+        "pathname": "/signals/example/domain/example.com",
+        "search": "?subaccount=123",
+      }
+    }
+  >
+    example.com
+  </PageLink>
+</div>
+`;

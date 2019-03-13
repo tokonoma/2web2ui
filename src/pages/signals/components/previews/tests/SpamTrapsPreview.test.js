@@ -13,7 +13,8 @@ describe('Signals SpamTrapsPreview Component', () => {
       loading: false,
       gap: 0.5,
       empty: false,
-      data: [1,2,3]
+      data: [1,2,3],
+      subaccountId: 101
     };
     wrapper = shallow(<SpamTrapsPreview {...props}/>);
   });
@@ -35,5 +36,10 @@ describe('Signals SpamTrapsPreview Component', () => {
   it('renders error correctly', () => {
     wrapper.setProps({ error: { message: 'error message' }});
     expect(wrapper).toMatchSnapshot();
+  });
+
+  it('gets y axis props', () => {
+    const axisProps = wrapper.find('BarChart').prop('yAxisProps');
+    expect(axisProps.tickFormatter((2468))).toEqual('2.47K');
   });
 });

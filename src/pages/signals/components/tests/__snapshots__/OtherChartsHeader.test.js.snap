@@ -3,11 +3,12 @@
 exports[`Signals OtherChartsHeader Component renders correctly 1`] = `
 <Fragment>
   <h2
-    className="OtherChartsHeader"
+    className="Header"
   >
-    Other charts for 
-    Foo1
+    Other charts for Foo1 (Subaccount 22)
   </h2>
-  <hr />
+  <hr
+    className="Line"
+  />
 </Fragment>
 `;

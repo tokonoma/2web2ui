@@ -8,7 +8,8 @@ describe('Signals ChartHeader Component', () => {
 
   beforeEach(() => {
     props = {
-      title: 'Foo'
+      title: 'Foo',
+      date: '2018-02-15'
     };
     wrapper = shallow(<ChartHeader {...props}/>);
   });
@@ -19,6 +20,21 @@ describe('Signals ChartHeader Component', () => {
 
   it('renders primaryArea correctly', () => {
     wrapper.setProps({ primaryArea: <div>react</div> });
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('renders tooltip content correctly', () => {
+    wrapper.setProps({ tooltipContent: 'tooltip content' });
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('renders padding correctly', () => {
+    wrapper.setProps({ padding: '0 0 1rem 0' });
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('renders without date', () => {
+    wrapper.setProps({ date: null });
     expect(wrapper).toMatchSnapshot();
   });
 });

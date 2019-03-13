@@ -19,7 +19,7 @@ exports[`Component: ErrorBoundary renders correctly with error 1`] = `
     image={[Function]}
     primaryAction={
       Object {
-        "content": "Reload Page",
+        "content": "Go Back",
         "onClick": [Function],
       }
     }

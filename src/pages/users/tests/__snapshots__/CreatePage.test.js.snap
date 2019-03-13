@@ -1,5 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Page: User Create Page should disable submit when pristine 1`] = `
+<Button
+  disabled={true}
+  primary={true}
+  size="default"
+  submit={true}
+>
+  Add User
+</Button>
+`;
+
 exports[`Page: User Create Page should render correctly by default 1`] = `
 <Page
   breadcrumbAction={
@@ -33,6 +44,7 @@ exports[`Page: User Create Page should render correctly by default 1`] = `
           }
         />
         <Field
+          allowSubaccountAssignment={false}
           component={[Function]}
           name="access"
         />
@@ -50,102 +62,13 @@ exports[`Page: User Create Page should render correctly by default 1`] = `
 </Page>
 `;
 
-exports[`Page: User Create Page should render when pristine 1`] = `
-<Page
-  breadcrumbAction={
-    Object {
-      "Component": [Function],
-      "content": "Users",
-      "to": "/account/users",
-    }
-  }
-  empty={Object {}}
-  title="Invite User"
+exports[`Page: User Create Page should update submit button when submitting 1`] = `
+<Button
+  disabled={true}
+  primary={true}
+  size="default"
+  submit={true}
 >
-  <Panel>
-    <Panel.Section>
-      <form
-        onSubmit={[Function]}
-      >
-        <p>
-          An invitation will be sent to the email address you supply
-        </p>
-        <Field
-          component={[Function]}
-          label="Email address"
-          name="email"
-          normalize={[Function]}
-          validate={
-            Array [
-              [Function],
-              [Function],
-            ]
-          }
-        />
-        <Field
-          component={[Function]}
-          name="access"
-        />
-        <Button
-          disabled={true}
-          primary={true}
-          size="default"
-          submit={true}
-        >
-          Add User
-        </Button>
-      </form>
-    </Panel.Section>
-  </Panel>
-</Page>
-`;
-
-exports[`Page: User Create Page should render when submitting 1`] = `
-<Page
-  breadcrumbAction={
-    Object {
-      "Component": [Function],
-      "content": "Users",
-      "to": "/account/users",
-    }
-  }
-  empty={Object {}}
-  title="Invite User"
->
-  <Panel>
-    <Panel.Section>
-      <form
-        onSubmit={[Function]}
-      >
-        <p>
-          An invitation will be sent to the email address you supply
-        </p>
-        <Field
-          component={[Function]}
-          label="Email address"
-          name="email"
-          normalize={[Function]}
-          validate={
-            Array [
-              [Function],
-              [Function],
-            ]
-          }
-        />
-        <Field
-          component={[Function]}
-          name="access"
-        />
-        <Button
-          disabled={true}
-          primary={true}
-          size="default"
-          submit={true}
-        >
-          Loading
-        </Button>
-      </form>
-    </Panel.Section>
-  </Panel>
-</Page>
+  Loading
+</Button>
 `;

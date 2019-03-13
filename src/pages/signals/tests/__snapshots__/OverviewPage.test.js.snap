@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Signals Overview Page renders correctly 1`] = `
+exports[`Signals Overview Page renders page 1`] = `
 <SignalsPage
   primaryArea={
     <React.Fragment>
@@ -9,15 +9,11 @@ exports[`Signals Overview Page renders correctly 1`] = `
       <Connect(FacetFilter) />
     </React.Fragment>
   }
+  title="Signals Overview"
 >
-  <SummaryPanel
-    title="Health Score"
-  />
-  <SummaryPanel
-    title="Spam Traps"
-  />
-  <SummaryPanel
-    title="Engagement Cohort"
-  />
+  <OverviewHelpCopy />
+  <Connect(withRouter(Connect(HealthScoreOverview))) />
+  <Connect(withRouter(Connect(SpamTrapOverview))) />
+  <Connect(withRouter(Connect(EngagementRecencyOverview))) />
 </SignalsPage>
 `;

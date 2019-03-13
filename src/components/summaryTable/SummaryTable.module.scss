@@ -1,5 +1,11 @@
 @import '~@sparkpost/matchbox/src/styles/config.scss';
 
+.Billboard {
+  border-bottom: 1px solid color(grey, 8);
+  height: 220px;
+  position: relative;
+}
+
 .Cell {
   border: 1px solid color(grey, 8);
   border-left: none;
@@ -11,23 +17,21 @@
 }
 
 .DataCell {
-  padding: spacing(small);
+  padding: spacing(small) spacing();
 }
 
 .Header {
   background-color: #FAFAFA;
   border: 1px solid color(grey, 8);
   border-left: none;
-  padding: spacing(small);
+  font-weight: 500;
+  padding: spacing(small) spacing();
+  font-size: rem(13);
+  white-space: nowrap;
 
   &:last-child {
     border-right: none;
   }
-}
-
-.Loading {
-  height: 330px;
-  position: relative;
 }
 
 .PageButtons {
@@ -46,10 +50,8 @@
   display: flex;
   align-items: baseline;
   background: #FAFAFA;
-  border: 1px solid color(gray, 7);
   border-top: none;
-  border-bottom-left-radius: 2px;
-  border-bottom-right-radius: 2px;
+  border-radius: 0  0 border-radius(large) border-radius(large);
 }
 
 .Pagination {
@@ -59,17 +61,11 @@
   // Previous button
   & > button:first-child {
     border-left: none;
-    border-bottom-left-radius: 2px !important;
   }
 }
 
 .PerPageGroup {
   @include buttonOverrides;
-
-  // Last button
-  button:last-child {
-    border-bottom-right-radius: 2px !important;
-  }
 }
 
 .PerPageLabel {
@@ -89,5 +85,14 @@
 .SummaryTable {
   table {
     margin: 0; // override
+    table-layout: fixed;
   }
+}
+
+.CenterAlign {
+  text-align: center;
+}
+
+.RightAlign {
+  text-align: right;
 }

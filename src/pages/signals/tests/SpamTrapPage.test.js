@@ -5,17 +5,30 @@ import { SpamTrapPage } from '../SpamTrapPage';
 describe('Signals Spam Trap Page', () => {
   let wrapper;
   let props;
+  const data = [
+    {
+      date: '2017-01-01',
+      relative_trap_hits: 0.1
+    },
+    {
+      date: '2017-01-02',
+      relative_trap_hits: 0.5
+    }
+  ];
 
   beforeEach(() => {
     props = {
       facetId: 'test.com',
       facet: 'sending-domain',
-      data: [],
+      data: [{ relative_trap_hits: 0.1 }],
       gap: 0.25,
       loading: false,
-      empty: false
+      empty: false,
+      selected: '2017-01-01',
+      xTicks: []
     };
     wrapper = shallow(<SpamTrapPage {...props}/>);
+    wrapper.setProps({ data });
   });
 
   it('renders correctly', () => {
@@ -45,35 +58,29 @@ describe('Signals Spam Trap Page', () => {
     });
 
     it('handles date select', () => {
-      wrapper.find('BarChart').simulate('click', { payload: { dt: 'test' }});
-      expect(wrapper.find('BarChart').prop('selected')).toEqual('test');
-      expect(wrapper.find('Actions').prop('date')).toEqual('test');
+      wrapper.find('BarChart').simulate('click', { payload: { date: '2017-01-02' }});
+      expect(wrapper.find('BarChart').prop('selected')).toEqual('2017-01-02');
+      expect(wrapper.find('SpamTrapActions')).toMatchSnapshot();
     });
 
     it('sets selected date on mount if provided one', () => {
       wrapper = shallow(<SpamTrapPage {...props} selected='initial-selected'/>);
       expect(wrapper.find('BarChart').prop('selected')).toEqual('initial-selected');
-      expect(wrapper.find('Actions').prop('date')).toEqual('initial-selected');
-    });
-
-    it('uses last selected date when receiving data', () => {
-      wrapper.setProps({ data: [1, { dt: 'last-date' }]});
-      expect(wrapper.find('BarChart').prop('selected')).toEqual('last-date');
-      expect(wrapper.find('Actions').prop('date')).toEqual('last-date');
+      expect(wrapper.find('SpamTrapActions').prop('date')).toEqual('initial-selected');
     });
 
     it('uses last selected date if selected date is not in data', () => {
-      wrapper = shallow(<SpamTrapPage {...props} selected='initial-selected'/>);
-      wrapper.setProps({ data: [1, { dt: 'last-date' }]});
+      wrapper = shallow(<SpamTrapPage {...props} loading={true} selected='initial-selected'/>);
+      wrapper.setProps({ data: [1, { date: 'last-date' }], loading: false });
       expect(wrapper.find('BarChart').prop('selected')).toEqual('last-date');
-      expect(wrapper.find('Actions').prop('date')).toEqual('last-date');
+      expect(wrapper.find('SpamTrapActions').prop('date')).toEqual('last-date');
     });
 
     it('does not use last selected date if selected date is in data', () => {
       wrapper = shallow(<SpamTrapPage {...props} selected='first-date'/>);
-      wrapper.setProps({ data: [{ dt: 'first-date' }, { dt: 'last-date' }]});
+      wrapper.setProps({ data: [{ date: 'first-date' }, { date: 'last-date' }]});
       expect(wrapper.find('BarChart').prop('selected')).toEqual('first-date');
-      expect(wrapper.find('Actions').prop('date')).toEqual('first-date');
+      expect(wrapper.find('SpamTrapActions').prop('date')).toEqual('first-date');
     });
   });
 
@@ -102,7 +109,15 @@ describe('Signals Spam Trap Page', () => {
     it('gets y axis props with absolute calculation', () => {
       wrapper.setState({ calculation: 'absolute' });
       const axisProps = wrapper.find('BarChart').prop('yAxisProps');
-      expect(axisProps.tickFormatter).toEqual(null);
+      expect(axisProps.tickFormatter((2468))).toEqual('2.47K');
+      expect(axisProps.domain).toEqual(['auto', 'auto']);
+    });
+
+    it('gets y axis props with relative calculation and 0 values', () => {
+      wrapper.setState({ calculation: 'relative' });
+      wrapper.setProps({ data: [{ relative_trap_hits: 0 }, { relative_trap_hits: null }]});
+      const axisProps = wrapper.find('BarChart').prop('yAxisProps');
+      expect(axisProps.domain).toEqual([0, 1]);
     });
   });
 });

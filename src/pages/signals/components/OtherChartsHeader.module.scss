@@ -1,3 +1,10 @@
-.OtherChartsHeader {
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.Header {
   font-weight: 400;
+  margin-top: spacing();
+}
+
+.Line {
+  margin-bottom: rem(33)
 }

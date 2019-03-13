@@ -6,6 +6,7 @@ import DeleteModal from 'src/components/modals/DeleteModal';
 import ConfirmationModal from 'src/components/modals/ConfirmationModal';
 import { Loading } from 'src/components/loading/Loading';
 import EditForm from './components/EditForm';
+import { ROLES } from 'src/constants';
 
 const breadcrumbAction = {
   content: 'Users',
@@ -56,18 +57,33 @@ export class EditPage extends Component {
     }
   }
 
+  componentDidUpdate() {
+    const { user, subaccount, getSubaccount } = this.props;
+    if (
+      user && user.access === ROLES.SUBACCOUNT_REPORTING &&
+      (!subaccount || subaccount.id !== user.subaccount_id)
+    ) {
+      getSubaccount(user.subaccount_id);
+    }
+  }
+
   render() {
     const {
       currentUser,
       handleSubmit,
       isAccountSingleSignOnEnabled,
+      loading,
       loadingError,
+      subaccount,
       submitting,
       updatePending,
       user,
-      users,
-      tfaRequired
+      users
     } = this.props;
+
+    if (loading) {
+      return <Loading />;
+    }
 
     if (loadingError) {
       return <Redirect to="/account/users" />;
@@ -89,13 +105,13 @@ export class EditPage extends Component {
         content: 'Delete',
         onClick: this.toggleDelete
       });
+    }
 
-      if (user.tfa_enabled && !tfaRequired) {
-        secondaryActions.push({
-          content: 'Disable Two-Factor Authentication',
-          onClick: this.toggleTfaModal
-        });
-      }
+    if (user.tfa_enabled && !user.isCurrentUser) {
+      secondaryActions.push({
+        content: 'Disable Two-Factor Authentication',
+        onClick: this.toggleTfaModal
+      });
     }
 
     return (
@@ -110,8 +126,8 @@ export class EditPage extends Component {
           currentUser={currentUser}
           isAccountSingleSignOnEnabled={isAccountSingleSignOnEnabled}
           submitting={submitting}
+          subaccount={subaccount}
         />
-
         <DeleteModal
           onDelete={this.deleteUser}
           onCancel={this.toggleDelete}

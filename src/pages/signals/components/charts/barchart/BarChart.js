@@ -63,7 +63,7 @@ class BarChart extends Component {
   }
 
   render() {
-    const { gap, height, disableHover, margin, timeSeries, tooltipContent, width, xKey, xAxisProps, yDomain, yAxisProps } = this.props;
+    const { gap, height, disableHover, margin, timeSeries, tooltipContent, tooltipWidth, width, xKey, xAxisProps, yDomain, yAxisProps } = this.props;
 
     return (
       <ResponsiveContainer height={height} width={width} className='SignalsBarChart'>
@@ -81,7 +81,8 @@ class BarChart extends Component {
           <YAxis
             axisLine={false}
             tickLine={false}
-            width={25}
+            width={30}
+            minTickGap={2}
             domain={yDomain}
             {...yAxisProps}
           />
@@ -100,6 +101,7 @@ class BarChart extends Component {
               cursor={false}
               isAnimationActive={false}
               content={<TooltipWrapper children={tooltipContent} />}
+              width={tooltipWidth}
             />
           )}
           {this.renderBars()}
@@ -114,6 +116,7 @@ BarChart.propTypes = {
   gap: PropTypes.number,
   onClick: PropTypes.func,
   tooltipContent: PropTypes.func,
+  tooltipWidth: PropTypes.string,
   yKeys: PropTypes.arrayOf(PropTypes.object)
 };
 
@@ -122,7 +125,7 @@ BarChart.defaultProps = {
   gap: 1,
   height: 250,
   width: '99%',
-  margin: { top: 5, left: 18, right: 0, bottom: 5 },
+  margin: { top: 12, left: 18, right: 0, bottom: 5 },
   xKey: 'date',
   yKey: 'value',
   yRange: ['auto', 'auto']

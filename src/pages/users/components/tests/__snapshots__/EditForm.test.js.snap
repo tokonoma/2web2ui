@@ -5,6 +5,7 @@ exports[`Component: EditForm should disable single sign-on checkbox and display 
   <form>
     <Panel.Section>
       <Field
+        allowSubaccountAssignment={false}
         allowSuperUser={false}
         component={[Function]}
         name="access"
@@ -48,10 +49,58 @@ exports[`Component: EditForm should render 1`] = `
   <form>
     <Panel.Section>
       <Field
+        allowSubaccountAssignment={false}
         allowSuperUser={false}
         component={[Function]}
         name="access"
       />
+    </Panel.Section>
+    <Panel.Section>
+      <Field
+        component={[Function]}
+        disabled={false}
+        helpText={
+          <span>
+            Enabling single sign-on will delete this user's password. If they switch back to password-based authentication, they'll need to reset their password on login.
+          </span>
+        }
+        label="Enable single sign-on authentication for this user"
+        name="is_sso"
+        type="checkbox"
+      />
+    </Panel.Section>
+    <Panel.Section>
+      <Button
+        primary={true}
+        size="default"
+        submit={true}
+      >
+        Update user
+      </Button>
+    </Panel.Section>
+  </form>
+</Panel>
+`;
+
+exports[`Component: EditForm should show subaccount info instead of the role selector for subaccount_reporting users 1`] = `
+<Panel>
+  <form>
+    <Panel.Section>
+      <p>
+         This user has access to reporting features and read-only template access, limited to a single subaccount. Its role can’t be changed. 
+      </p>
+      <LabelledValue
+        label="Subaccount"
+      >
+        <PageLink
+          to="/account/subaccounts/23"
+        >
+          aSubaccount
+        </PageLink>
+         (
+        23
+        )
+      </LabelledValue>
     </Panel.Section>
     <Panel.Section>
       <Field

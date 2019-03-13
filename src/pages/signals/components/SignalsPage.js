@@ -1,14 +1,14 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Page } from '@sparkpost/matchbox';
-import { Signal } from '@sparkpost/matchbox-icons';
+import { getFriendlyTitle } from 'src/helpers/signals';
 
-import styles from './SignalsPage.module.scss';
-
-const SignalsPage = (props) => (
+const SignalsPage = ({ dimensionPrefix, facet, facetId, subaccountId, title = 'Signals', ...props }) => (
   <Page
     {...props}
-    title={<Fragment><Signal size={45} className={styles.Icon}/> Signals</Fragment>}
+    title={title}
+    subtitle={getFriendlyTitle({ prefix: dimensionPrefix, facet, facetId, subaccountId })}
   />
 );
+
 
 export default SignalsPage;
