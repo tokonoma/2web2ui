@@ -52,13 +52,13 @@ describe('PoolForm tests', () => {
 
   it('should not render signing_domain if editing default pool', () => {
     wrapper.setProps({ pool: { id: 'default', name: 'Default' }});
-    expect(wrapper.exists('Field[name="signing_domain"]')).toBe(false);
+    expect(wrapper.find('Field[name="signing_domain"]')).not.toExist();
   });
 
   it('should render signing_domain for non-default pool and feature flag is enabled', () => {
     config.featureFlags.allow_default_signing_domains_for_ip_pools = true;
     wrapper.setProps({ pool: { id: 'test-pool', name: 'Test Pool' }});
-    expect(wrapper.exists('Field[name="signing_domain"]')).toBe(true);
+    expect(wrapper.find('Field[name="signing_domain"]')).toExist();
   });
 
   it('should update button text to Saving and disable button when submitting form', () => {

@@ -1,9 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Selector: ipPools getReAssignPoolsOptions returns formatted pools list and renames label of current selected pool 1`] = `
+exports[`Selector: ipPools selectReAssignPoolsOptions returns formatted pools list and renames label of current selected pool 1`] = `
 Array [
   Object {
-    "label": "-- Change Pool --",
+    "label": "-- Select a new pool --",
     "value": "big",
   },
   Object {

@@ -6,8 +6,8 @@ import { Button, Panel } from '@sparkpost/matchbox';
 import { SelectWrapper } from 'src/components/reduxFormWrappers';
 import { LabelledValue } from 'src/components';
 import {
-  getIpFormInitialValues,
-  getReAssignPoolsOptions,
+  selectIpFormInitialValues,
+  selectReAssignPoolsOptions,
   selectCurrentPool,
   selectIpForCurrentPool
 } from 'src/selectors/ipPools';
@@ -50,8 +50,8 @@ const formName = 'ipForm';
 const mapStateToProps = (state, props) => ({
   currentPool: selectCurrentPool(state, props),
   currentIp: selectIpForCurrentPool(state, props),
-  reAssignPoolsOptions: getReAssignPoolsOptions(state, props),
-  initialValues: getIpFormInitialValues(state, props)
+  reAssignPoolsOptions: selectReAssignPoolsOptions(state, props),
+  initialValues: selectIpFormInitialValues(state, props)
 });
 
 const formOptions = {

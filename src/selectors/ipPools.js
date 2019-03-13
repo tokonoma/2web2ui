@@ -3,7 +3,7 @@ import _ from 'lodash';
 import { currentPlanCodeSelector } from 'src/selectors/accountBillingInfo';
 import { ENTERPRISE_PLAN_CODES } from 'src/constants';
 import { isAdmin } from 'src/helpers/conditions/user';
-const DEFAULT = 'default';
+const DEFAULT_POOL_ID = 'default';
 
 const currentIpPoolId = (state, props) => props.match.params.poolId;
 const currentSendingIp = (state, props) => props.match.params.ip;
@@ -26,12 +26,12 @@ export const selectIpForCurrentPool = createSelector(
 
 export const getDefaultPool = createSelector(
   [getIpPools],
-  (ipPools) => ipPools.find(({ id }) => id === DEFAULT)
+  (ipPools) => ipPools.find(({ id }) => id === DEFAULT_POOL_ID)
 );
 
 export const getNonDefaultIpPools = createSelector(
   [getIpPools],
-  (ipPools) => ipPools.filter(({ id }) => id !== DEFAULT)
+  (ipPools) => ipPools.filter(({ id }) => id !== DEFAULT_POOL_ID)
 );
 
 export const getOrderedIpPools = createSelector(
@@ -57,14 +57,14 @@ export const selectFirstIpPoolId = createSelector(
 );
 
 
-export const getReAssignPoolsOptions = createSelector(
+export const selectReAssignPoolsOptions = createSelector(
   [getIpPools, selectCurrentPool], (pools, currentPool) => pools.map((pool) => ({
     value: pool.id,
-    label: (pool.id === currentPool.id) ? '-- Change Pool --' : `${pool.name} (${pool.id})`
+    label: (pool.id === currentPool.id) ? '-- Select a new pool --' : `${pool.name} (${pool.id})`
   }))
 );
 
-export const getIpFormInitialValues = createSelector(
+export const selectIpFormInitialValues = createSelector(
   [selectIpForCurrentPool, selectCurrentPool], (currentIp, pool) => ({
     ...currentIp,
     ip_pool: pool.id

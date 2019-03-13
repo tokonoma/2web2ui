@@ -107,13 +107,13 @@ describe('Selector: ipPools', () => {
     });
   });
 
-  describe('getReAssignPoolsOptions', () => {
+  describe('selectReAssignPoolsOptions', () => {
     it('returns formatted pools list and renames label of current selected pool', () => {
-      expect(ipPoolSelectors.getReAssignPoolsOptions(state, props)).toMatchSnapshot();
+      expect(ipPoolSelectors.selectReAssignPoolsOptions(state, props)).toMatchSnapshot();
     });
   });
 
-  describe('getIpFormInitialValues', () => {
+  describe('selectIpFormInitialValues', () => {
     let props;
     beforeEach(() => {
       props = {
@@ -127,7 +127,7 @@ describe('Selector: ipPools', () => {
     });
 
     it('returns inital values for ip form', () => {
-      expect(ipPoolSelectors.getIpFormInitialValues(state, props)).toEqual({ external_ip: '1.1.1.1', ip_pool: 'small' });
+      expect(ipPoolSelectors.selectIpFormInitialValues(state, props)).toEqual({ external_ip: '1.1.1.1', ip_pool: 'small' });
     });
   });
 });
