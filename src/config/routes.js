@@ -159,7 +159,6 @@ const routes = [
     layout: App,
     title: 'Dashboard',
     condition: all(
-      hasGrants('api_keys/manage', 'templates/modify', 'sending_domains/manage'),
       configEquals('splashPage', '/dashboard') // want to hide if not a splash page https://jira.int.messagesystems.com/browse/FAD-6046
     ),
     // TODO: implement some kind of blockedRoutes check that runs on every route so we can

@@ -18,6 +18,8 @@ import { listApiKeys } from 'src/actions/api-keys';
 import { selectAccountAgeInWeeks , selectAccountAgeInDays } from 'src/selectors/accountAge';
 import { selectVerifiedDomains, selectNotBlockedDomains } from 'src/selectors/sendingDomains';
 import { selectApiKeysForSending } from 'src/selectors/api-keys';
+import { hasGrants } from 'src/helpers/conditions';
+
 export class DashboardPage extends Component {
   componentDidMount() {
     this.props.checkSuppression();
@@ -60,7 +62,8 @@ function mapStateToProps(state) {
     hasSendingDomains: notBlockedDomains.length > 0,
     hasVerifiedDomains: verifiedDomains.length > 0,
     hasApiKeysForSending: apiKeysForSending.length > 0,
-    hasSentThisMonth: _.get(state, 'account.usage.month.used', 0) > 0
+    hasSentThisMonth: _.get(state, 'account.usage.month.used', 0) > 0,
+    canViewTutorial: hasGrants('api_keys/manage', 'templates/modify', 'sending_domains/manage')
   };
 }
 
