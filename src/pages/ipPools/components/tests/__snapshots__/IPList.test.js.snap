@@ -34,7 +34,7 @@ exports[`IP List tests should render row properly 1`] = `
 Array [
   <Link
     replace={false}
-    to="/account/ip-pools/edit/foopool/ip/1.1.1.1"
+    to="/account/ip-pools/edit/foopool/1.1.1.1"
   >
     1.1.1.1
   </Link>,

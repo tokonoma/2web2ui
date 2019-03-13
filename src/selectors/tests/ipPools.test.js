@@ -12,43 +12,45 @@ jest.mock('src/constants', () => ({
 describe('Selector: ipPools', () => {
 
   let state;
+  let props;
+  let ips;
 
   beforeEach(() => {
+    ips = [
+      { external_ip: '1.1.1.1' },
+      { external_ip: '2.2.2.2' },
+      { external_ip: '3.3.3.3' }
+    ];
+
     state = {
       ipPools: {
         list: [
-          { id: 'big', name: 'Big Pool', ips: [1, 2, 3, 4, 5, 6]},
+          { id: 'big', name: 'Big Pool', signing_domain: 'sign.test', ips },
           { id: 'none', name: 'None', ips: []},
-          { id: 'default', name: 'Default', ips: [1, 2, 3]},
-          { id: 'small', name: 'Small Pool', ips: [1, 2]}
-        ],
-        pool: {
-          name: 'MY CURRENT POOL',
-          id: 'my_current_pool',
-          signing_domain: 'signing-domain.test',
-          ips: [
-            { external_ip: '1.1.1.1' },
-            { external_ip: '2.2.2.2' },
-            { external_ip: '3.3.3.3' }
-          ]
-        }
+          { id: 'default', name: 'Default', ips: ips.slice(0,2) },
+          { id: 'small', name: 'Small Pool', ips: ips.slice(0,1) }
+        ]
       },
       currentUser: { access_level: 'admin' }
+    };
+
+    props = {
+      match: { params: { poolId: 'big' }}
     };
   });
 
   describe('getDefaultPool', () => {
     it('should return the default pool', () => {
-      expect(ipPoolSelectors.getDefaultPool(state)).toEqual({ id: 'default', name: 'Default', ips: [1, 2, 3]});
+      expect(ipPoolSelectors.getDefaultPool(state)).toEqual({ id: 'default', name: 'Default', ips: ips.slice(0, 2) });
     });
   });
 
   describe('getNonDefaultIpPools', () => {
     it('should return a list of non default IP pools', () => {
       expect(ipPoolSelectors.getNonDefaultIpPools(state)).toEqual([
-        { id: 'big', name: 'Big Pool', ips: [1, 2, 3, 4, 5, 6]},
+        { id: 'big', name: 'Big Pool', signing_domain: 'sign.test', ips: ips },
         { id: 'none', name: 'None', ips: []},
-        { id: 'small', name: 'Small Pool', ips: [1, 2]}
+        { id: 'small', name: 'Small Pool', ips: ips.slice(0,1) }
       ]);
     });
   });
@@ -63,31 +65,21 @@ describe('Selector: ipPools', () => {
 
 
   describe('selectIpsForCurrentPool', () => {
+    let ips;
+
+    beforeEach(() => {
+      ips = [
+        { external_ip: '1.1.1.1' },
+        { external_ip: '2.2.2.2' },
+        { external_ip: '3.3.3.3' }
+      ];
+
+    });
     it('should select IPs for the current pool', () => {
-      expect(ipPoolSelectors.selectIpsForCurrentPool(state)).toEqual([
-        { external_ip: '1.1.1.1', id: '1_1_1_1' },
-        { external_ip: '2.2.2.2', id: '2_2_2_2' },
-        { external_ip: '3.3.3.3', id: '3_3_3_3' }
-      ]);
+      expect(ipPoolSelectors.selectIpsForCurrentPool(state, props)).toEqual(ips);
     });
   });
 
-
-  describe('selectIpPoolFormInitialValues', () => {
-    it('should return an object of ips assigned to their current pool, for initial values', () => {
-      expect(ipPoolSelectors.selectIpPoolFormInitialValues(state, { isNew: false })).toEqual({
-        name: 'MY CURRENT POOL',
-        signing_domain: 'signing-domain.test',
-        '1_1_1_1': 'my_current_pool',
-        '2_2_2_2': 'my_current_pool',
-        '3_3_3_3': 'my_current_pool'
-      });
-    });
-
-    it('should return empty init values in new mode', () => {
-      expect(ipPoolSelectors.selectIpPoolFormInitialValues(state, { isNew: true })).toEqual({});
-    });
-  });
 
   describe('shouldShowIpPurchaseCTA', () => {
     it('returns false for enterprise plans', () => {
@@ -117,33 +109,18 @@ describe('Selector: ipPools', () => {
   });
 
   describe('getReAssignPoolsOptions', () => {
-    it('returns formatted pools list', () => {
-      expect(ipPoolSelectors.getReAssignPoolsOptions(state)).toMatchSnapshot();
-    });
-
     it('returns formatted pools list and renames label of current selected pool', () => {
-      const newState = {
-        ...state,
-        ipPools: {
-          ...state.ipPools,
-          pool: {
-            name: 'Small Pool',
-            id: 'small'
-          }
-        }
-      };
-      expect(ipPoolSelectors.getReAssignPoolsOptions(newState)).toMatchSnapshot();
+      expect(ipPoolSelectors.getReAssignPoolsOptions(state, props)).toMatchSnapshot();
     });
   });
 
   describe('getIpFormInitialValues', () => {
     let props;
     beforeEach(() => {
-      ipPoolSelectors.selectIpForCurrentPool = jest.fn(() => ([{ external_ip: '1.1.1.1' }]));
-      ipPoolSelectors.selectCurrentPool = jest.fn(() => ({ name: 'MY CURRENT POOL', id: 'my_current_pool' }));
       props = {
         match: {
           params: {
+            poolId: 'small',
             ip: '1.1.1.1'
           }
         }
@@ -151,7 +128,7 @@ describe('Selector: ipPools', () => {
     });
 
     it('returns inital values for ip form', () => {
-      expect(ipPoolSelectors.getIpFormInitialValues(state, props)).toEqual({ external_ip: '1.1.1.1', ip_pool: 'my_current_pool' });
+      expect(ipPoolSelectors.getIpFormInitialValues(state, props)).toEqual({ external_ip: '1.1.1.1', ip_pool: 'small' });
     });
   });
 });

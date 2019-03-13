@@ -7,7 +7,7 @@ import { SendingDomainTypeaheadWrapper, TextFieldWrapper } from 'src/components'
 import AccessControl from 'src/components/auth/AccessControl';
 import { required } from 'src/helpers/validation';
 import { configFlag } from 'src/helpers/conditions/config';
-import { selectIpPoolFormInitialValues, selectIpsForCurrentPool, shouldShowIpPurchaseCTA, selectCurrentPool } from 'src/selectors/ipPools';
+import { selectCurrentPool, selectIpsForCurrentPool } from 'src/selectors/ipPools';
 import isDefaultPool from '../helpers/defaultPool';
 
 export class PoolForm extends Component {
@@ -58,12 +58,16 @@ PoolForm.defaultProps = {
   pool: {}
 };
 
-const mapStateToProps = (state, props) => ({
-  pool: selectCurrentPool(state, props),
-  ips: selectIpsForCurrentPool(state, props),
-  initialValues: selectIpPoolFormInitialValues(state, props),
-  showPurchaseCTA: shouldShowIpPurchaseCTA(state)
-});
+const mapStateToProps = (state, props) => {
+  const pool = selectCurrentPool(state, props);
+  return {
+    pool,
+    ips: selectIpsForCurrentPool(state, props),
+    initialValues: {
+      ...pool
+    }
+  };
+};
 
 const formOptions = {
   form: 'poolForm',

@@ -9,10 +9,7 @@ import IpList from './components/IpList';
 
 import { showAlert } from 'src/actions/globalAlert';
 import { deletePool, listPools, updatePool } from 'src/actions/ipPools';
-import { updateSendingIp } from 'src/actions/sendingIps';
 import { selectCurrentPool, selectIpsForCurrentPool, shouldShowIpPurchaseCTA } from 'src/selectors/ipPools';
-
-import { decodeIp } from 'src/helpers/ipNames';
 import isDefaultPool from './helpers/defaultPool';
 
 
@@ -32,27 +29,22 @@ export class EditPage extends Component {
   };
 
   onUpdatePool = (values) => {
-    const { updateSendingIp, updatePool, showAlert, history, pool: { id }} = this.props;
-
-    /**
-     * Pick out the IPs whose pool assignment is not the current pool ergo
-     * have been reassigned by the user.
-     */
-    const changedIpKeys = Object.keys(values).filter((key) =>
-      key !== 'name' && key !== 'signing_domain' && values[key] !== id);
+    const { updatePool, showAlert, history, pool: { id }} = this.props;
 
     // if signing_domain is not set, then we want to clear it out to empty string.
     values.signing_domain = values.signing_domain || '';
 
-    // Update each changed sending IP
-    return Promise.all(changedIpKeys.map((ipKey) =>
-      updateSendingIp(decodeIp(ipKey), values[ipKey])))
-      .then(() => {
-        // Update the pool itself
-        if (!isDefaultPool(id)) {
-          return updatePool(id, values);
-        }
-      })
+    if (isDefaultPool(id)) {
+      const message = 'You can not edit default pool.';
+      showAlert({
+        type: 'error',
+        message
+      });
+
+      return Promise.reject(new Error(message));
+    }
+
+    return updatePool(id, values)
       .then((res) => {
         showAlert({
           type: 'success',
@@ -181,6 +173,5 @@ export default withRouter(connect(mapStateToProps, {
   updatePool,
   deletePool,
   listPools,
-  updateSendingIp,
   showAlert
 })(EditPage));

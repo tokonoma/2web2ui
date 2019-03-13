@@ -9,10 +9,9 @@ describe('IP Edit Page', () => {
   beforeEach(() => {
     props = {
       listPools: jest.fn(),
-      getPool: jest.fn(),
-      currentPool: { name: 'My Pool', id: 'my-pool' },
+      pool: { name: 'My Pool', id: 'my-pool' },
       loading: false,
-      currentIp: { external_ip: '1.1.1.1' },
+      ip: { external_ip: '1.1.1.1' },
       updateSendingIp: jest.fn(() => Promise.resolve()),
       showAlert: jest.fn(),
       match: {
@@ -31,7 +30,6 @@ describe('IP Edit Page', () => {
 
   it('loads data after mount', () => {
     expect(props.listPools).toHaveBeenCalledTimes(1);
-    expect(props.getPool).toHaveBeenCalledTimes(1);
   });
 
   it('renders loader when loading is true', () => {
@@ -39,10 +37,13 @@ describe('IP Edit Page', () => {
     expect(wrapper.exists('Loading')).toBe(true);
     expect(wrapper.exists('Page')).toBe(false);
   });
-  it('renders loader when no ip', () => {
-    wrapper.setProps({ currentIp: null });
-    expect(wrapper.exists('Loading')).toBe(true);
-    expect(wrapper.exists('Page')).toBe(false);
+
+  it('redirects loader when no ip', () => {
+    wrapper.setProps({ ip: null });
+    expect(wrapper).toMatchSnapshot();
+
+    expect(wrapper.find('Redirect')).toExist();
+    expect(wrapper.find('Redirect').prop('to')).toEqual('/account/ip-pools/edit/my-pool');
   });
 
   it('renders errors', () => {

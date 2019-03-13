@@ -1,83 +1,41 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`PoolForm tests should render form 1`] = `
-<Fragment>
-  <Panel>
-    <form
-      onSubmit={[MockFunction]}
-    >
-      <Panel.Section>
+<Panel>
+  <form
+    onSubmit={[MockFunction]}
+  >
+    <Panel.Section>
+      <Field
+        component={[Function]}
+        disabled={false}
+        helpText=""
+        label="Pool Name"
+        name="name"
+        placeholder="My IP Pool"
+        validate={[Function]}
+      />
+      <Connect(AccessControl)
+        condition={[Function]}
+      >
         <Field
           component={[Function]}
           disabled={false}
-          helpText=""
-          label="Pool Name"
-          name="name"
-          placeholder="My IP Pool"
-          validate={[Function]}
+          label="Default Signing Domain"
+          name="signing_domain"
         />
-        <Connect(AccessControl)
-          condition={[Function]}
-        >
-          <Field
-            component={[Function]}
-            disabled={false}
-            label="Default Signing Domain"
-            name="signing_domain"
-          />
-        </Connect(AccessControl)>
-      </Panel.Section>
-      <Panel.Section>
-        <Button
-          disabled={true}
-          primary={true}
-          size="default"
-          submit={true}
-        >
-          Update IP Pool
-        </Button>
-      </Panel.Section>
-    </form>
-  </Panel>
-  <Panel
-    title="Sending IPs"
-  >
-    <Panel.Section>
-      <p>
-        Add dedicated IPs to this pool by moving them from their current pool
-        , or by 
-        <UnstyledLink
-          component={[Function]}
-          to="/account/billing"
-        >
-          purchasing new IPs
-        </UnstyledLink>
-        .
-        <span>
-           Click on existing Sending IP to modify.
-        </span>
-      </p>
-      <IPList
-        ips={
-          Array [
-            Object {
-              "external_ip": "external",
-              "hostname": "hostname",
-            },
-            Object {
-              "external_ip": "external-2",
-              "hostname": "hostname-2",
-            },
-          ]
-        }
-        pool={
-          Object {
-            "id": "my-pool",
-            "name": "My Pool",
-          }
-        }
-      />
+      </Connect(AccessControl)>
     </Panel.Section>
-  </Panel>
-</Fragment>
+    <Panel.Section>
+      <Button
+        disabled={true}
+        primary={true}
+        size="default"
+        submit={true}
+      >
+        Update IP Pool
+      </Button>
+    </Panel.Section>
+  </form>
+</Panel>
 `;

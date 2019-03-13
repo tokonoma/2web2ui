@@ -61,22 +61,6 @@ describe('PoolForm tests', () => {
     expect(wrapper.exists('Field[name="signing_domain"]')).toBe(true);
   });
 
-  it('should not render table if pool is new', () => {
-    wrapper.setProps({ isNew: true });
-    expect(wrapper.exists('Panel[title="Sending IPs"]')).toBe(false);
-  });
-
-  it('should not render table if no ips exist', () => {
-    wrapper.setProps({ ips: []});
-    expect(wrapper.exists('Panel[title="Sending IPs"]')).toBe(true);
-    expect(wrapper.exists('IPList')).toBe(false);
-  });
-
-  it('should not show purchase cta if showPurchaseCTA is false', () => {
-    wrapper.setProps({ showPurchaseCTA: false });
-    expect(wrapper.find('Panel[title="Sending IPs"]').find('UnstyledLink').exists()).toBe(false);
-  });
-
   it('should update button text to Saving and disable button when submitting form', () => {
     wrapper.setProps({ submitting: true });
     expect(wrapper.find('Button').shallow().text()).toEqual('Saving');

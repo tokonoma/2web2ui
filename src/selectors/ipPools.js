@@ -1,14 +1,14 @@
 import { createSelector } from 'reselect';
 import _ from 'lodash';
-import { encodeIp } from 'src/helpers/ipNames';
 import { currentPlanCodeSelector } from 'src/selectors/accountBillingInfo';
 import { ENTERPRISE_PLAN_CODES } from 'src/constants';
 import { isAdmin } from 'src/helpers/conditions/user';
 const DEFAULT = 'default';
 
-export const getIpPools = (state) => state.ipPools.list;
 const currentIpPoolId = (state, props) => props.match.params.poolId;
 const currentSendingIp = (state, props) => props.match.params.ip;
+
+export const getIpPools = (state) => state.ipPools.list;
 
 export const selectCurrentPool = createSelector(
   [getIpPools, currentIpPoolId], (allPools, poolId) => _.find(allPools, { id: poolId }) || {}
@@ -16,10 +16,7 @@ export const selectCurrentPool = createSelector(
 
 export const selectIpsForCurrentPool = createSelector(
   [selectCurrentPool],
-  ({ ips = []}) => ips.map((ip) => ({
-    ...ip,
-    id: encodeIp(ip.external_ip)
-  }))
+  ({ ips = []}) => ips
 );
 
 export const selectIpForCurrentPool = createSelector(
@@ -45,37 +42,6 @@ export const getOrderedIpPools = createSelector(
     }
     return [defaultPool, ...others];
   }
-);
-
-/**
- * Grab all IPs for the current pool and return
- * an object where each key is one converted IP
- * whose value is the id of the current Pool
- *
- * This is used to set initial values on a form where the
- * converted IPs are the name of each field and the initial
- * value is the pool that IP is currently assigned to.
- *
- * Note: IPs are converted to make them safe to use as
- * React props, with _ instead of .
- */
-const selectCurrentPoolInitialValues = createSelector(
-  [selectCurrentPool, selectIpsForCurrentPool],
-  (currentPool, ips) => ({
-    name: currentPool.name,
-    signing_domain: currentPool.signing_domain,
-    ...ips.reduce((result, ip) => {
-      result[ip.id] = currentPool.id;
-      return result;
-    }, {})
-  })
-);
-
-const isFormInNewMode = (state, { isNew }) => isNew;
-
-export const selectIpPoolFormInitialValues = createSelector(
-  [selectCurrentPoolInitialValues, isFormInNewMode],
-  (initialValues, isNew) => isNew ? {} : initialValues
 );
 
 /**

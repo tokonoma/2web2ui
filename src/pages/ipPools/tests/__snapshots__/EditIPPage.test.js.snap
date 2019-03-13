@@ -1,5 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`IP Edit Page redirects loader when no ip 1`] = `
+<Redirect
+  push={false}
+  to="/account/ip-pools/edit/my-pool"
+/>
+`;
+
 exports[`IP Edit Page renders correctly 1`] = `
 <Page
   breadcrumbAction={
