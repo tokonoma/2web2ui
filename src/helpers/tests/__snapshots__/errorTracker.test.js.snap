@@ -23,10 +23,14 @@ Object {
 exports[`.getEnricherOrDieTryin with api error 1`] = `
 Object {
   "exception": Object {
-    "type": "SparkpostApiError",
+    "values": Array [
+      Object {
+        "type": "SparkpostApiError",
+      },
+    ],
   },
   "extra": Object {
-    "isApiError": false,
+    "isApiError": true,
     "isChunkFailure": false,
     "isSupportedBrowser": true,
   },
