@@ -68,7 +68,16 @@ describe('PoolForm tests', () => {
 
   it('should not disable button if form is not pristine or not submitting', () => {
     wrapper.setProps({ submitting: false, pristine: false });
-    expect(wrapper.find('Button').shallow().text()).toEqual('Update IP Pool');
     expect(wrapper.find('Button').prop('disabled')).toBe(false);
+  });
+
+  it('renders correct button text when creating new pool', () => {
+    wrapper.setProps({ isNew: true });
+    expect(wrapper.find('Button').shallow().text()).toEqual('Create IP Pool');
+  });
+
+  it('renders correct button text when editing a pool', () => {
+    wrapper.setProps({ isNew: false });
+    expect(wrapper.find('Button').shallow().text()).toEqual('Update IP Pool');
   });
 });
