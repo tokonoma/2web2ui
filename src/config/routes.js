@@ -235,6 +235,32 @@ const routes = [
     title: 'Signals',
     supportDocSearch: 'signals'
   },
+  // Signals V2 Dashboards
+  {
+    path: '/signals/health-score',
+    component: signals.HealthScoreDashboard,
+    condition: all(hasGrants('signals/manage'), hasUiOption('feature_signals_v2')),
+    layout: App,
+    title: 'Signals',
+    supportDocSearch: 'signals'
+  },
+  {
+    path: '/signals/spam-traps',
+    component: signals.SpamTrapDashboard,
+    condition: all(hasGrants('signals/manage'), hasUiOption('feature_signals_v2')),
+    layout: App,
+    title: 'Signals',
+    supportDocSearch: 'signals'
+  },
+  {
+    path: '/signals/engagement',
+    component: signals.EngagementRecencyDashboard,
+    condition: all(hasGrants('signals/manage'), hasUiOption('feature_signals_v2')),
+    layout: App,
+    title: 'Signals',
+    supportDocSearch: 'signals'
+  },
+  // Details Pages
   {
     path: '/signals/health-score/:facet/:facetId',
     component: signals.HealthScorePage,

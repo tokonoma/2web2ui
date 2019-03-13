@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Signals Engagement Recency Dashboard renders page 1`] = `
+<SignalsPage
+  primaryArea={
+    <React.Fragment>
+      <Connect(Connect(SubaccountFilter)) />
+      <Connect(DateFilter) />
+      <Connect(FacetFilter) />
+    </React.Fragment>
+  }
+  title="Engagement Recency"
+>
+  <Connect(withRouter(Connect(EngagementRecencyOverview))) />
+</SignalsPage>
+`;
