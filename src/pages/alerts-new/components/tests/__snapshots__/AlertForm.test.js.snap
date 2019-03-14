@@ -120,7 +120,7 @@ exports[`Alert Form Component enabled prop should only show enabled toggle on ed
                 ]
               }
               name="facet_value"
-              placeholder="email.example.com"
+              placeholder="mail.example.com"
               validate={[Function]}
             />
           </div>
@@ -326,7 +326,7 @@ exports[`Alert Form Component enabled prop should only show enabled toggle on ed
                 ]
               }
               name="facet_value"
-              placeholder="email.example.com"
+              placeholder="mail.example.com"
               validate={[Function]}
             />
           </div>
@@ -908,7 +908,6 @@ Object {
     },
   ],
   "name": "facet_value",
-  "onChange": undefined,
   "placeholder": "",
   "validate": [Function],
 }
@@ -954,8 +953,7 @@ Object {
     },
   ],
   "name": "facet_value",
-  "onChange": undefined,
-  "placeholder": "email.example.com",
+  "placeholder": "mail.example.com",
   "validate": [Function],
 }
 `;
@@ -993,8 +991,7 @@ Object {
   "helpText": "You do not have any verified sending domains to use.",
   "items": Array [],
   "name": "facet_value",
-  "onChange": undefined,
-  "placeholder": "email.example.com",
+  "placeholder": "mail.example.com",
   "validate": [Function],
 }
 `;
@@ -1032,7 +1029,6 @@ Object {
   "helpText": "You do not have any ip pools to use.",
   "items": Array [],
   "name": "facet_value",
-  "onChange": undefined,
   "placeholder": "",
   "validate": [Function],
 }
@@ -1165,7 +1161,7 @@ exports[`Alert Form Component should handle submit 1`] = `
                 ]
               }
               name="facet_value"
-              placeholder="email.example.com"
+              placeholder="mail.example.com"
               validate={[Function]}
             />
           </div>
@@ -1394,7 +1390,7 @@ exports[`Alert Form Component should render the alert form component correctly 1
                 ]
               }
               name="facet_value"
-              placeholder="email.example.com"
+              placeholder="mail.example.com"
               validate={[Function]}
             />
           </div>

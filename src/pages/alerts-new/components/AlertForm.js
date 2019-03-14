@@ -16,7 +16,6 @@ import { COMPARATOR } from '../constants/comparator';
 import { defaultFormValues } from '../constants/defaultFormValues';
 import { list as listDomains } from 'src/actions/sendingDomains';
 import { listPools } from 'src/actions/ipPools';
-//import { selectDomainsBySubaccount } from 'src/selectors/alerts';
 import MultiFacetWrapper from './MultiFacetWrapper';
 
 // Helpers & Validation
@@ -38,6 +37,14 @@ export class AlertForm extends Component {
     this.props.listPools();
   }
 
+  componentDidUpdate(prevProps) {
+    const { facet_name, change } = this.props;
+
+    if (prevProps.facet_name !== 'ALL' && facet_name === 'ALL') {
+      change('facet_value', '');
+    }
+  }
+
   render() {
     const {
       pristine,
@@ -48,7 +55,6 @@ export class AlertForm extends Component {
       facet_value,
       handleSubmit,
       newAlert,
-      change,
       subaccount,
       domains = [],
       domainsLoading,
@@ -94,12 +100,6 @@ export class AlertForm extends Component {
       }
 
       return required;
-    };
-
-    const removeFacetValue = () => {
-      if (facet_name === 'ALL') {
-        change('facet_value', '');
-      }
     };
 
     const multiFacetWarning = () => {
@@ -169,9 +169,8 @@ export class AlertForm extends Component {
                     }
                     component={(facet_name === 'sending_domain' || facet_name === 'ip_pool') ? MultiFacetWrapper : TextFieldWrapper}
                     items={(facet_name === 'sending_domain') ? domains : ipPools}
-                    onChange={removeFacetValue()}
                     disabled={submitting || checkFacet()}
-                    placeholder={facet_name === 'ALL' ? 'No facet selected' : facet_name === 'sending_domain' ? 'email.example.com' : ''}
+                    placeholder={facet_name === 'ALL' ? 'No facet selected' : facet_name === 'sending_domain' ? 'mail.example.com' : ''}
                     validate={validateFacet()}
                     helpText={multiFacetWarning()}
                   />
