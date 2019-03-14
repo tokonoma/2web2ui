@@ -63,7 +63,7 @@ export class AlertForm extends Component {
       return ipPoolsArray.includes(value) ? undefined : 'This is not a valid ip pool for this account';
     }
 
-    return required;
+    return required(value);
   };
 
   render() {
