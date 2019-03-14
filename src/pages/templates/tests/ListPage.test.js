@@ -2,6 +2,7 @@ import { shallow } from 'enzyme';
 import React from 'react';
 import dateMock from 'date-fns';
 import ListPage from '../ListPage';
+import { ROLES } from 'src/constants';
 
 jest.mock('date-fns');
 
@@ -45,6 +46,11 @@ it('renders without primary action for read-only users', () => {
 
 it('renders columns correctly with subaccounts', () => {
   wrapper.setProps({ hasSubaccounts: true });
+  expect(wrapper.find('TableCollection').props().columns).toMatchSnapshot();
+});
+
+it('renders columns correctly for subaccount reporting users', () => {
+  wrapper.setProps({ hasSubaccounts: true, userAccessLevel: ROLES.SUBACCOUNT_REPORTING });
   expect(wrapper.find('TableCollection').props().columns).toMatchSnapshot();
 });
 

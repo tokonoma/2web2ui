@@ -29,7 +29,7 @@ export default class SnippetCollection extends Component {
           subaccount_id || shared_with_subaccounts
         )
       },
-      visible: () => this.props.hasSubaccounts
+      visible: () => this.props.hasSubaccounts && this.props.canViewSubaccounts
     },
     {
       component: UpdatedAtTableData,
