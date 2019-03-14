@@ -17,15 +17,15 @@ function Tooltip(props) {
 
   // Calculates Tooltip position
   useLayoutEffect(() => {
-    const { left, width, height } = getBoundingClientRect(wrapper);
+    const rect = getBoundingClientRect(wrapper);
 
     // Find a consistent point to evaluate against window width
-    const xTarget = positionedOnRight ? left - offset : left + width + offset;
-    const newPositionedOnRight = xTarget + width + offset < window.innerWidth;
+    const xTarget = positionedOnRight ? rect.left - offset : rect.left + rect.width + offset;
+    const newPositionedOnRight = xTarget + rect.width + offset < window.innerWidth;
 
     const coords = {
-      top: coordinate.y - (height / 2),
-      left: newPositionedOnRight ? coordinate.x + offset : (coordinate.x - offset) - width
+      top: coordinate.y - (rect.height / 2),
+      left: newPositionedOnRight ? coordinate.x + offset : (coordinate.x - offset) - rect.width
     };
 
     setPosition(coords);
@@ -36,7 +36,7 @@ function Tooltip(props) {
     <div
       className={styles.TooltipWrapper}
       ref={wrapper}
-      style={{ width, left: position.left, top: position.top }}
+      style={{ width, ...position }}
     >
       {date && (
         <div className={styles.TooltipDate}>
