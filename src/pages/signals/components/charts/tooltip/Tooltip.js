@@ -1,68 +1,53 @@
-import React, { Component, createRef } from 'react';
+import React, { useLayoutEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { formatDate } from 'src/helpers/date';
+import { getBoundingClientRect } from 'src/helpers/geometry';
 import styles from './Tooltip.module.scss';
 import _ from 'lodash';
 import './Tooltip.scss';
 
-// HOOKS PLEASE
-class Tooltip extends Component {
-  state = { left: 0, top: 0, isRight: true }
+function Tooltip(props) {
+  const { coordinate, children, offset, width } = props;
+  const content = _.get(props, 'payload[0]', {});
+  const date = _.get(content, 'payload.date');
+  const wrapper = useRef(null);
 
-  constructor(props) {
-    super(props);
-    this.wrapper = createRef();
-  }
+  const [positionedOnRight, setPositionedOnRight] = useState(true);
+  const [position, setPosition] = useState({ left: 0, top: 0 });
 
-  setPosition() {
-    const { coordinate, offset } = this.props;
-    const { left, width, height } = this.wrapper.current.getBoundingClientRect();
-    const { isRight } = this.state;
+  // Calculates Tooltip position
+  useLayoutEffect(() => {
+    const { left, width, height } = getBoundingClientRect(wrapper);
 
     // Find a consistent point to evaluate against window width
-    const xTarget = isRight ? left - offset : left + width + offset;
-    const newIsRight = xTarget + width + offset < window.innerWidth;
+    const xTarget = positionedOnRight ? left - offset : left + width + offset;
+    const newPositionedOnRight = xTarget + width + offset < window.innerWidth;
 
     const coords = {
       top: coordinate.y - (height / 2),
-      left: newIsRight ? coordinate.x + offset : (coordinate.x - offset) - width,
-      isRight: newIsRight
+      left: newPositionedOnRight ? coordinate.x + offset : (coordinate.x - offset) - width
     };
 
-    this.setState(coords);
-  }
+    setPosition(coords);
+    setPositionedOnRight(newPositionedOnRight);
+  }, [coordinate.x, coordinate.y, offset, positionedOnRight, wrapper]);
 
-  componentDidUpdate({ coordinate: prevCoords }) {
-    const { coordinate } = this.props;
-
-    if (coordinate.x !== prevCoords.x || coordinate.y !== prevCoords.y) {
-      this.setPosition();
-    }
-  }
-
-  render() {
-    const { children, width } = this.props;
-    const { left, top } = this.state;
-    const content = _.get(this.props, 'payload[0]', {});
-    const date = _.get(content, 'payload.date');
-
-    return (
-      <div
-        className={styles.TooltipWrapper}
-        ref={this.wrapper}
-        style={{ width, left, top }}
-      >
-        {date && (
-          <div className={styles.TooltipDate}>
-            {formatDate(date)}
-          </div>
-        )}
-        <div className={styles.TooltipContent}>
-          {children(content)}
+  return (
+    <div
+      className={styles.TooltipWrapper}
+      ref={wrapper}
+      style={{ width, left: position.left, top: position.top }}
+    >
+      {date && (
+        <div className={styles.TooltipDate}>
+          {formatDate(date)}
         </div>
+      )}
+      <div className={styles.TooltipContent}>
+        {children(content)}
       </div>
-    );
-  }
+    </div>
+  );
 }
 
 

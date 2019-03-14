@@ -1,6 +1,9 @@
 import { mount } from 'enzyme';
 import React from 'react';
 import Tooltip from '../Tooltip';
+import * as geometry from 'src/helpers/geometry';
+
+jest.mock('src/helpers/geometry');
 
 describe('Signals Tooltip Component', () => {
   let wrapper;
@@ -17,6 +20,7 @@ describe('Signals Tooltip Component', () => {
         }
       }]
     };
+    geometry.getBoundingClientRect.mockImplementation(() => ({ left: 0, width: 0, height: 0 }));
     wrapper = mount(<Tooltip {...props}/>);
   });
 
@@ -41,8 +45,11 @@ describe('Signals Tooltip Component', () => {
 
   describe('positioning', () => {
     let setRect;
+
     beforeEach(() => {
-      setRect = (options) => wrapper.instance().wrapper.current.getBoundingClientRect = jest.fn(() => options);
+      setRect = (options) => {
+        geometry.getBoundingClientRect.mockImplementation(() => options);
+      };
       global.innerWidth = 1000;
     });
 

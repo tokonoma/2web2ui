@@ -26,7 +26,7 @@ exports[`Signals Tooltip Component renders children correctly 1`] = `
     className="TooltipWrapper"
     style={
       Object {
-        "left": 0,
+        "left": 25,
         "top": 0,
         "width": "200px",
       }
@@ -72,7 +72,7 @@ exports[`Signals Tooltip Component renders correctly with default children 1`] =
     className="TooltipWrapper"
     style={
       Object {
-        "left": 0,
+        "left": 25,
         "top": 0,
         "width": "200px",
       }
@@ -116,7 +116,7 @@ exports[`Signals Tooltip Component renders correctly without date 1`] = `
     className="TooltipWrapper"
     style={
       Object {
-        "left": 0,
+        "left": 25,
         "top": 0,
         "width": "200px",
       }
@@ -155,7 +155,7 @@ exports[`Signals Tooltip Component renders with a custom width correctly 1`] = `
     className="TooltipWrapper"
     style={
       Object {
-        "left": 0,
+        "left": 25,
         "top": 0,
         "width": "1200px",
       }
