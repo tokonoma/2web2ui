@@ -79,7 +79,7 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
               "top": 12,
             }
           }
-          onClick={[Function]}
+          onClick={[MockFunction]}
           selected="2017-01-01"
           timeSeries={
             Array [
@@ -155,7 +155,7 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
               "top": 12,
             }
           }
-          onClick={[Function]}
+          onClick={[MockFunction]}
           selected="2017-01-01"
           timeSeries={
             Array [
@@ -228,7 +228,7 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
               "top": 12,
             }
           }
-          onClick={[Function]}
+          onClick={[MockFunction]}
           selected="2017-01-01"
           timeSeries={
             Array [
@@ -420,7 +420,7 @@ exports[`Signals Health Score Page renders empty weights 1`] = `
               "top": 12,
             }
           }
-          onClick={[Function]}
+          onClick={[MockFunction]}
           selected="2017-01-01"
           timeSeries={
             Array [
@@ -469,7 +469,7 @@ exports[`Signals Health Score Page renders empty weights 1`] = `
               "top": 12,
             }
           }
-          onClick={[Function]}
+          onClick={[MockFunction]}
           selected="2017-01-01"
           timeSeries={
             Array [

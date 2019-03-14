@@ -88,7 +88,7 @@ export class HealthScorePage extends Component {
               <Fragment>
                 <BarChart
                   gap={gap}
-                  onClick={this.handleDateSelect}
+                  onClick={handleDateSelect}
                   selected={selectedDate}
                   timeSeries={data}
                   tooltipContent={({ payload = {}}) => (
@@ -104,7 +104,7 @@ export class HealthScorePage extends Component {
                 <BarChart
                   gap={gap}
                   height={190}
-                  onClick={this.handleDateSelect}
+                  onClick={handleDateSelect}
                   selected={selectedDate}
                   timeSeries={data}
                   tooltipContent={({ payload = {}}) => (
@@ -122,7 +122,7 @@ export class HealthScorePage extends Component {
                     <BarChart
                       gap={gap}
                       height={190}
-                      onClick={this.handleDateSelect}
+                      onClick={handleDateSelect}
                       selected={selectedDate}
                       timeSeries={dataForSelectedWeight}
                       tooltipContent={({ payload = {}}) => (
