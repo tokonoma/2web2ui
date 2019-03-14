@@ -8,7 +8,7 @@ import { Panel, Grid, Button } from '@sparkpost/matchbox';
 import { withRouter } from 'react-router-dom';
 import ToggleBlock from 'src/components/toggleBlock/ToggleBlock';
 import { TextFieldWrapper, SelectWrapper, RadioGroup, SubaccountTypeaheadWrapper } from 'src/components';
-import { formatEditValues, selectDomainsBySubaccount, selectIpPoolsBySubaccount } from 'src/selectors/alerts';
+import { formatEditValues, selectDomainsBySubaccount, selectIpPools } from 'src/selectors/alerts';
 import getOptions from '../helpers/getOptions';
 import { METRICS } from '../constants/metrics';
 import { FACETS } from '../constants/facets';
@@ -244,7 +244,7 @@ const mapStateToProps = (state, props) => {
   return {
     domains: selectDomainsBySubaccount(state, formName),
     domainsLoading: state.sendingDomains.listLoading,
-    ipPools: selectIpPoolsBySubaccount(state, formName),
+    ipPools: selectIpPools(state, formName),
     ipPoolsLoading: state.ipPools.listLoading,
     alert_metric: selector(state, 'alert_metric'),
     facet_name: selector(state, 'facet_name'),

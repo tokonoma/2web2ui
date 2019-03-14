@@ -49,7 +49,7 @@ export const selectDomainsBySubaccount = createSelector(
 );
 
 // Selects ip pools for Multi Facet typeahead
-export const selectIpPoolsBySubaccount = createSelector(
+export const selectIpPools = createSelector(
   [getIpPools],
   (ipPools) => ipPools
 );

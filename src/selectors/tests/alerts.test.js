@@ -78,7 +78,7 @@ describe('Alerts Selectors', () => {
     expect(isVerified).toHaveBeenCalledWith({ 'domain': 'dom1.com' });
   });
 
-  it('should use selectIpPoolsBySubaccount to get ip pools', () => {
-    expect(alerts.selectIpPoolsBySubaccount(state, 'redux-form-value')).toMatchSnapshot();
+  it('should use selectIpPools to get ip pools', () => {
+    expect(alerts.selectIpPools(state, 'redux-form-value')).toMatchSnapshot();
   });
 });

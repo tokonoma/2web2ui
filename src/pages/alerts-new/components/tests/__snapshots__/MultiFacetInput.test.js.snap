@@ -2,6 +2,7 @@
 
 exports[`MultiFacetInput renders text field 1`] = `
 <TextField
+  name="renders text field"
   resize="both"
   type="text"
 />
@@ -10,6 +11,7 @@ exports[`MultiFacetInput renders text field 1`] = `
 exports[`MultiFacetInput renders text field with an error when not open 1`] = `
 <TextField
   error="Oh no!"
+  name="renders text field with an error when not open"
   resize="both"
   type="text"
 />
@@ -17,6 +19,7 @@ exports[`MultiFacetInput renders text field with an error when not open 1`] = `
 
 exports[`MultiFacetInput renders text field without an error when open 1`] = `
 <TextField
+  name="renders text field without an error when open"
   resize="both"
   type="text"
 />
