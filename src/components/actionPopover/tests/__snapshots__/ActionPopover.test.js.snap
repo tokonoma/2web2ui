@@ -1,57 +1,73 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ActionPopover Component should render with actions 1`] = `
-<Popover
-  bottom={true}
-  left={true}
-  right={true}
-  trigger={
-    <Button
-      flat={true}
-      size="default"
-    >
-      <MoreHoriz
-        size={20}
-      />
-    </Button>
+<div
+  style={
+    Object {
+      "textAlign": "right",
+    }
   }
 >
-  <ActionList
-    actions={
-      Array [
-        Object {
-          "content": "Edit",
-          "to": "/some/link",
-        },
-        Object {
-          "content": "Delete",
-          "onClick": [MockFunction],
-        },
-      ]
+  <Popover
+    bottom={true}
+    left={true}
+    right={true}
+    trigger={
+      <Button
+        flat={true}
+        size="default"
+      >
+        <MoreHoriz
+          size={20}
+        />
+      </Button>
     }
-    groupByKey="section"
-  />
-</Popover>
+  >
+    <ActionList
+      actions={
+        Array [
+          Object {
+            "content": "Edit",
+            "to": "/some/link",
+          },
+          Object {
+            "content": "Delete",
+            "onClick": [MockFunction],
+          },
+        ]
+      }
+      groupByKey="section"
+    />
+  </Popover>
+</div>
 `;
 
 exports[`ActionPopover Component should render with no props 1`] = `
-<Popover
-  bottom={true}
-  left={true}
-  right={true}
-  trigger={
-    <Button
-      flat={true}
-      size="default"
-    >
-      <MoreHoriz
-        size={20}
-      />
-    </Button>
+<div
+  style={
+    Object {
+      "textAlign": "right",
+    }
   }
 >
-  <ActionList
-    groupByKey="section"
-  />
-</Popover>
+  <Popover
+    bottom={true}
+    left={true}
+    right={true}
+    trigger={
+      <Button
+        flat={true}
+        size="default"
+      >
+        <MoreHoriz
+          size={20}
+        />
+      </Button>
+    }
+  >
+    <ActionList
+      groupByKey="section"
+    />
+  </Popover>
+</div>
 `;
