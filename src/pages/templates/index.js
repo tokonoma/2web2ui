@@ -5,6 +5,7 @@ import PreviewDraftPage from './containers/PreviewDraftPage.container';
 import PreviewPublishedPage from './containers/PreviewPublishedPage.container';
 import PublishedPage from './containers/PublishedPage.container';
 import EditWithBeePage from './EditWithBeePage';
+import EditWithReactEmailEditorPage from './EditWithReactEmailEditorPage';
 
 export default {
   CreatePage,
@@ -13,5 +14,6 @@ export default {
   PreviewDraftPage,
   PreviewPublishedPage,
   PublishedPage,
-  EditWithBeePage
+  EditWithBeePage,
+  EditWithReactEmailEditorPage
 };

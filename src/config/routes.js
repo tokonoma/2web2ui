@@ -426,6 +426,14 @@ const routes = [
     supportDocSearch: 'template'
   },
   {
+    path: '/templates/edit/:id/ree',
+    component: templates.EditWithReactEmailEditorPage,
+    condition: hasGrants('templates/view'),
+    layout: App,
+    title: 'Edit Template',
+    supportDocSearch: 'template'
+  },
+  {
     path: '/templates/edit/:id/published',
     component: templates.PublishedPage,
     condition: hasGrants('templates/view'),
