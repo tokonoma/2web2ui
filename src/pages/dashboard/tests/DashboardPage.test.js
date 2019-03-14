@@ -23,7 +23,8 @@ describe('Page: Dashboard tests', () => {
     hasSuppressions: true,
     accountAgeInWeeks: 0,
     verifyingEmail: false,
-    accountAgeInDays: 15
+    accountAgeInDays: 15,
+    canViewTutorialAndSuppressions: true
   };
 
   let wrapper;
@@ -34,6 +35,11 @@ describe('Page: Dashboard tests', () => {
   });
 
   it('should render page correctly with defaults', () => {
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render if cannot view Tutorial and supressions', () => {
+    wrapper.setProps({ canViewTutorialAndSuppressions: false });
     expect(wrapper).toMatchSnapshot();
   });
 
