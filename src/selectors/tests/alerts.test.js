@@ -72,10 +72,8 @@ describe('Alerts Selectors', () => {
     state.sendingDomains.list = [{ domain: 'dom1.com', subaccount_id: '123' }, { domain: 'dom2.com', shared_with_subaccounts: true }, { domain: 'dom3.com' }];
     expect(alerts.selectDomainsBySubaccount(state, 'redux-form-value')).toMatchSnapshot();
     state.assignTo = 'master';
-    state.sendingDomains.list = [{ domain: 'dom1.com', subaccount_id: '123' }, { domain: 'dom2.com', shared_with_subaccounts: true }, { domain: 'dom3.com' }];
     expect(alerts.selectDomainsBySubaccount(state, 'redux-form-value')).toMatchSnapshot();
     state.assignTo = 'all';
-    state.sendingDomains.list = [{ domain: 'dom1.com', subaccount_id: '123' }, { domain: 'dom2.com', shared_with_subaccounts: true }, { domain: 'dom3.com' }];
     expect(alerts.selectDomainsBySubaccount(state, 'redux-form-value')).toMatchSnapshot();
     expect(isVerified).toHaveBeenCalledWith({ 'domain': 'dom1.com' });
   });

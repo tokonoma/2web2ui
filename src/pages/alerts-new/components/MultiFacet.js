@@ -37,9 +37,7 @@ class MultiFacet extends Component {
   // note, depending on size of items this calculation to find matches could be expensive
   updateMatches = debounce((nextValue) => {
     const { items, maxNumberOfResults = 100 } = this.props;
-    //const [inputLocalPart] = nextValue.split('@');
     const itemsArray = items.map((item) => _.get(item, 'domain', _.get(item, 'id', undefined)));
-    //console.log('inputLocalPart', inputLocalPart);
 
     this.setState({ matches: itemsArray });
 
