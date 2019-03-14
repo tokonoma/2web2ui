@@ -5,7 +5,6 @@ Object {
   "alert_metric": "signals_health_threshold",
   "alert_subaccount": 123,
   "assignTo": "subaccount",
-  "criteria_metric": "threshold",
   "email_addresses": Array [
     "test@test1.com",
     "test@test2.com",
@@ -27,7 +26,6 @@ Object {
   "alert_metric": undefined,
   "alert_subaccount": undefined,
   "assignTo": "subaccount",
-  "criteria_metric": "",
   "email_addresses": undefined,
   "enabled": undefined,
   "facet_name": "ALL",
@@ -37,4 +35,48 @@ Object {
   "subaccount": undefined,
   "threshold": undefined,
 }
+`;
+
+exports[`Alerts Selectors should use selectDomainsBySubaccount to get domains 1`] = `
+Array [
+  Object {
+    "domain": "dom1.com",
+  },
+  Object {
+    "domain": "dom2.com",
+  },
+]
+`;
+
+exports[`Alerts Selectors should use selectDomainsBySubaccount to get domains 2`] = `
+Array [
+  Object {
+    "domain": "dom1.com",
+  },
+  Object {
+    "domain": "dom2.com",
+  },
+]
+`;
+
+exports[`Alerts Selectors should use selectDomainsBySubaccount to get domains 3`] = `
+Array [
+  Object {
+    "domain": "dom1.com",
+  },
+  Object {
+    "domain": "dom2.com",
+  },
+]
+`;
+
+exports[`Alerts Selectors should use selectIpPools to get ip pools 1`] = `
+Array [
+  Object {
+    "id": "foo",
+  },
+  Object {
+    "id": "bar",
+  },
+]
 `;

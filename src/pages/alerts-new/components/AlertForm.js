@@ -8,12 +8,15 @@ import { Panel, Grid, Button } from '@sparkpost/matchbox';
 import { withRouter } from 'react-router-dom';
 import ToggleBlock from 'src/components/toggleBlock/ToggleBlock';
 import { TextFieldWrapper, SelectWrapper, RadioGroup, SubaccountTypeaheadWrapper } from 'src/components';
-import { formatEditValues } from 'src/selectors/alerts';
+import { formatEditValues, selectDomainsBySubaccount, selectIpPools } from 'src/selectors/alerts';
 import getOptions from '../helpers/getOptions';
 import { METRICS } from '../constants/metrics';
 import { FACETS } from '../constants/facets';
 import { COMPARATOR } from '../constants/comparator';
 import { defaultFormValues } from '../constants/defaultFormValues';
+import { list as listDomains } from 'src/actions/sendingDomains';
+import { listPools } from 'src/actions/ipPools';
+import MultiFacetWrapper from './MultiFacetWrapper';
 
 // Helpers & Validation
 import { required, integer, minNumber, maxLength, numberBetween } from 'src/helpers/validation';
@@ -29,8 +32,18 @@ const accountOptions = [
 
 export class AlertForm extends Component {
 
-  // Prevents unchecked value from equaling ""
-  parseToggle = (value) => !!value
+  componentDidMount() {
+    this.props.listDomains();
+    this.props.listPools();
+  }
+
+  componentDidUpdate(prevProps) {
+    const { facet_name, change } = this.props;
+
+    if (prevProps.facet_name !== 'ALL' && facet_name === 'ALL') {
+      change('facet_value', '');
+    }
+  }
 
   render() {
     const {
@@ -39,9 +52,14 @@ export class AlertForm extends Component {
       assignTo,
       alert_metric = '',
       facet_name,
+      facet_value,
       handleSubmit,
       newAlert,
-      change
+      subaccount,
+      domains = [],
+      domainsLoading,
+      ipPools = [],
+      ipPoolsLoading
     } = this.props;
 
     const submitText = submitting ? 'Submitting...' : (newAlert ? 'Create Alert' : 'Update Alert');
@@ -59,13 +77,6 @@ export class AlertForm extends Component {
       }
     };
 
-    const validateSubaccount = () => {
-      if (assignTo === 'subaccount') {
-        return required;
-      }
-      return undefined;
-    };
-
     const checkFacet = () => {
       if (facet_name === 'ALL') {
         return true;
@@ -77,13 +88,32 @@ export class AlertForm extends Component {
       if (facet_name === 'ALL') {
         return undefined;
       }
+
+      if (facet_name === 'sending_domain' && facet_value && facet_value !== '') {
+        const domainsArray = domains.map(({ domain }) => domain) || [];
+        return domainsArray.includes(facet_value) ? required : () => 'This is not a valid sending domain for this account';
+      }
+
+      if (facet_name === 'ip_pool' && facet_value && facet_value !== '') {
+        const ipPoolsArray = ipPools.map(({ id }) => id) || [];
+        return ipPoolsArray.includes(facet_value) ? required : () => 'This is not a valid ip pool for this account';
+      }
+
       return required;
     };
 
-    const removeFacetValue = () => {
-      if (facet_name === 'ALL') {
-        change('facet_value', '');
+    const multiFacetWarning = () => {
+      if (facet_name === 'sending_domain' && !domainsLoading && !domains.length) {
+        return (assignTo === 'subaccount' && subaccount)
+          ? 'The selected subaccount does not have any verified sending domains.'
+          : 'You do not have any verified sending domains to use.';
       }
+
+      if (facet_name === 'ip_pool' && !ipPoolsLoading && !ipPools.length) {
+        return 'You do not have any ip pools to use.';
+      }
+
+      return null;
     };
 
     return (
@@ -118,7 +148,7 @@ export class AlertForm extends Component {
               name='subaccount'
               component={SubaccountTypeaheadWrapper}
               disabled={submitting}
-              validate={validateSubaccount()}
+              validate={required}
             />}
             {isSignals &&
             <label>Facet</label>}
@@ -137,11 +167,12 @@ export class AlertForm extends Component {
                         validate={required}
                       />
                     }
-                    component={TextFieldWrapper}
-                    onChange={removeFacetValue()}
+                    component={(facet_name === 'sending_domain' || facet_name === 'ip_pool') ? MultiFacetWrapper : TextFieldWrapper}
+                    items={(facet_name === 'sending_domain') ? domains : ipPools}
                     disabled={submitting || checkFacet()}
-                    placeholder={facet_name === 'ALL' ? 'No facet selected' : ''}
+                    placeholder={facet_name === 'ALL' ? 'No facet selected' : facet_name === 'sending_domain' ? 'mail.example.com' : ''}
                     validate={validateFacet()}
+                    helpText={multiFacetWarning()}
                   />
                 </div>
               </Grid.Column>
@@ -165,7 +196,7 @@ export class AlertForm extends Component {
                     }
                     disabled={submitting}
                     prefix={alert_metric !== 'signals_health_threshold' ? 'Above' : ''}
-                    suffix={!isThreshold ? '%' : ''}
+                    suffix={(isSignals && isThreshold) ? '' : '%'}
                     validate={getTargetValidation()}
                     style={{
                       textAlign: 'right'
@@ -211,6 +242,10 @@ const mapStateToProps = (state, props) => {
   const selector = formValueSelector(formName);
 
   return {
+    domains: selectDomainsBySubaccount(state, formName),
+    domainsLoading: state.sendingDomains.listLoading,
+    ipPools: selectIpPools(state, formName),
+    ipPoolsLoading: state.ipPools.listLoading,
     alert_metric: selector(state, 'alert_metric'),
     facet_name: selector(state, 'facet_name'),
     facet_value: selector(state, 'facet_value'),
@@ -226,4 +261,4 @@ const formOptions = {
   enableReinitialize: true
 };
 
-export default withRouter(connect(mapStateToProps, {})(reduxForm(formOptions)(AlertForm)));
+export default withRouter(connect(mapStateToProps, { listDomains, listPools })(reduxForm(formOptions)(AlertForm)));

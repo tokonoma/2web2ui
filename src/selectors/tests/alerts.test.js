@@ -1,16 +1,40 @@
 import * as alerts from '../alerts';
+import { isVerified } from 'src/selectors/sendingDomains';
+
+jest.mock('redux-form', () => ({
+  formValueSelector: () => () => 'redux-form-value'
+}));
+
+jest.mock('src/selectors/sendingDomains', () => ({
+  isVerified: jest.fn(() => true),
+  getDomains: jest.fn(() => [{ domain: 'dom1.com' }, { domain: 'dom2.com' }])
+}));
+
+jest.mock('src/selectors/ipPools', () => ({
+  getIpPools: jest.fn(() => [{ id: 'foo' }, { id: 'bar' }])
+}));
 
 describe('Alerts Selectors', () => {
   let props;
-  let store;
+  let state;
 
 
   beforeEach(() => {
-    store = {
+    state = {
+      subaccount: {
+        id: '123'
+      },
+      assignTo: 'master',
       subaccounts: {
         list: [
           { id: 123 }
         ]
+      },
+      sendingDomains: {
+        list: []
+      },
+      ipPools: {
+        list: []
       }
     };
 
@@ -36,10 +60,25 @@ describe('Alerts Selectors', () => {
   });
 
   it('should get formatEditValues', () => {
-    expect(alerts.formatEditValues(store, props)).toMatchSnapshot();
+    expect(alerts.formatEditValues(state, props)).toMatchSnapshot();
   });
 
   it('should handle empty formatEditValues', () => {
-    expect(alerts.formatEditValues(store, {})).toMatchSnapshot();
+    expect(alerts.formatEditValues(state, {})).toMatchSnapshot();
+  });
+
+  it('should use selectDomainsBySubaccount to get domains', () => {
+    state.assignTo = 'subaccount';
+    state.sendingDomains.list = [{ domain: 'dom1.com', subaccount_id: '123' }, { domain: 'dom2.com', shared_with_subaccounts: true }, { domain: 'dom3.com' }];
+    expect(alerts.selectDomainsBySubaccount(state, 'redux-form-value')).toMatchSnapshot();
+    state.assignTo = 'master';
+    expect(alerts.selectDomainsBySubaccount(state, 'redux-form-value')).toMatchSnapshot();
+    state.assignTo = 'all';
+    expect(alerts.selectDomainsBySubaccount(state, 'redux-form-value')).toMatchSnapshot();
+    expect(isVerified).toHaveBeenCalledWith({ 'domain': 'dom1.com' });
+  });
+
+  it('should use selectIpPools to get ip pools', () => {
+    expect(alerts.selectIpPools(state, 'redux-form-value')).toMatchSnapshot();
   });
 });
