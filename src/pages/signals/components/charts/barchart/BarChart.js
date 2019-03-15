@@ -20,6 +20,7 @@ import './BarChart.scss';
  */
 class BarChart extends Component {
   renderBar = ({ key, fill }) => (
+
     <Bar
       cursor='pointer'
       stackId='stack'
@@ -30,6 +31,7 @@ class BarChart extends Component {
       isAnimationActive={false}
       minPointSize={1}
     />
+
   )
 
   renderBars = () => {

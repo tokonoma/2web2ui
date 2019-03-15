@@ -18,3 +18,27 @@ export function safeDivide(numerator, denominator) {
 export function safeRate(numerator, denominator) {
   return safeDivide(numerator, denominator) * 100;
 }
+
+/**
+ * Linearly interpolates and clamps between two values
+ * @param  {number} min
+ * @param  {number} max
+ * @param  {number} n
+ * @return {number}
+ * @example
+ *   lerp(10, 20, 0.5)
+ *   > 15
+ */
+export function lerp(min, max, n) {
+  const value = (max - min) * n + min;
+
+  if (value < min) {
+    return min;
+  }
+
+  if (value > max) {
+    return max;
+  }
+
+  return value;
+}

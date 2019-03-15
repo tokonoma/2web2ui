@@ -1210,6 +1210,7 @@ Object {
     Object {
       "WoW": -7,
       "average_health_score": 86.2,
+      "current_DoD": -0,
       "current_health_score": 98,
       "current_weights": Array [],
       "history": Array [
@@ -1285,6 +1286,7 @@ Array [
   Object {
     "WoW": -7,
     "average_health_score": 86.2,
+    "current_DoD": -0,
     "current_health_score": 98,
     "current_weights": Array [],
     "history": Array [

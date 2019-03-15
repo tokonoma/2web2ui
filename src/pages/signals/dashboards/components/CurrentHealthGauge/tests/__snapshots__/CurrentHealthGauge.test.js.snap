@@ -1,0 +1,115 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Signals Health Score Gauge Container renders error correctly 1`] = `
+<Callout
+  height="auto"
+  title="Unable to Load Data"
+>
+  mock error
+</Callout>
+`;
+
+exports[`Signals Health Score Gauge Container renders happy path correctly 1`] = `
+<Panel
+  sectioned={true}
+>
+  <div
+    className="Content"
+  >
+    <h2
+      className="Header"
+    >
+      Current Health Score – Overall
+       
+      <Tooltip
+        bottom={true}
+        content="
+  This is a predictive score that monitors your email health to identify problems before
+  they negatively impact email delivery. This score is informed by message events,
+  including bounces, spam trap hits, and engagement across our entire network.
+"
+        dark={true}
+        forcePosition={false}
+        horizontalOffset="-1rem"
+        preferredDirection={
+          Object {
+            "bottom": true,
+            "left": false,
+            "right": true,
+            "top": false,
+          }
+        }
+        right={true}
+      >
+        <InfoOutline
+          className="TooltipIcon"
+          size={18}
+        />
+      </Tooltip>
+    </h2>
+    <Gauge
+      score={88}
+      threshold={
+        Object {
+          "color": "#2CC995",
+          "condition": [Function],
+          "description": <React.Fragment>
+            A Health score above 80 is considered to be 
+            <strong>
+              very good
+            </strong>
+            .
+          </React.Fragment>,
+          "icon": [Function],
+        }
+      }
+    />
+    <div
+      className="Description"
+    >
+      <CheckCircleOutline
+        className="DescriptionIcon"
+        size={25}
+        style={
+          Object {
+            "fill": "#2CC995",
+          }
+        }
+      />
+      <p
+        className="DescriptionContent"
+      >
+        A Health score above 80 is considered to be 
+        <strong>
+          very good
+        </strong>
+        .
+      </p>
+    </div>
+    <div
+      className="Metrics"
+    >
+      <MetricDisplay
+        color="#FF594D"
+        direction="down"
+        label="WoW Change"
+        value="-5%"
+      />
+      <MetricDisplay
+        color="#2CC995"
+        direction="up"
+        label="DoD Change"
+        value="5%"
+      />
+    </div>
+  </div>
+</Panel>
+`;
+
+exports[`Signals Health Score Gauge Container renders no current score correctly 1`] = `
+<Callout
+  height="auto"
+>
+  Current Health Score Not Available
+</Callout>
+`;

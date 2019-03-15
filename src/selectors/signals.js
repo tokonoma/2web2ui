@@ -2,6 +2,7 @@
 import { createSelector } from 'reselect';
 import { fillByDate } from 'src/helpers/date';
 import { roundToPlaces } from 'src/helpers/units';
+import { getDoD } from 'src/helpers/signals';
 import { selectSubaccountIdFromQuery } from 'src/selectors/subaccounts';
 import _ from 'lodash';
 import moment from 'moment';
@@ -115,7 +116,7 @@ export const selectEngagementRateByCohortDetails = createSelector(
       const reKeyed = _.keys(values).reduce((acc, key) => ({
         ...acc, [key.replace(/_engagement$/, '')]: values[key]
       }), {});
-      return { date, ...reKeyed }
+      return { date, ...reKeyed };
     });
 
     const filledHistory = fillByDate({
@@ -308,7 +309,8 @@ export const selectHealthScoreOverviewData = createSelector(
         normalizedHistory.reduce((total, { health_score }) => total + health_score, 0) / normalizedHistory.length,
         1
       ),
-      WoW: _.isNil(WoW) ? null : roundToPlaces(WoW * 100, 0)
+      WoW: _.isNil(WoW) ? null : roundToPlaces(WoW * 100, 0),
+      current_DoD: getDoD(_.last(filledHistory).health_score, filledHistory[filledHistory.length - 1].health_score)
     };
   })
 );
