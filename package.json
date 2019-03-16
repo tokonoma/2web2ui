@@ -66,7 +66,7 @@
     "date-fns": "^1.28.5",
     "downshift": "^3.1.4",
     "email-addresses": "^3.0.1",
-    "history": "^4.6.1",
+    "history": "4.7.2",
     "js-cookie": "^2.1.4",
     "localforage": "^1.5.3",
     "lodash": "^4.17.11",
