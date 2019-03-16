@@ -129,5 +129,6 @@ exports[`IP Pools Edit Page renderForm tests should show list error msg on error
 <ApiErrorBanner
   errorDetails="failed listing pools"
   message="Sorry, we seem to have had some trouble loading your IP pool."
+  reload={[Function]}
 />
 `;

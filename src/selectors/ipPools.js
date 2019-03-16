@@ -56,14 +56,6 @@ export const selectFirstIpPoolId = createSelector(
   [getIpPools], (ipPools) => _.get(ipPools, '[0].id')
 );
 
-
-export const selectReAssignPoolsOptions = createSelector(
-  [getIpPools, selectCurrentPool], (pools, currentPool) => pools.map((pool) => ({
-    value: pool.id,
-    label: (pool.id === currentPool.id) ? '-- Select a new pool --' : `${pool.name} (${pool.id})`
-  }))
-);
-
 export const selectIpFormInitialValues = createSelector(
   [selectIpForCurrentPool, selectCurrentPool], (currentIp, pool) => ({
     ...currentIp,

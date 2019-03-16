@@ -7,21 +7,25 @@ import { SelectWrapper } from 'src/components/reduxFormWrappers';
 import { LabelledValue } from 'src/components';
 import {
   selectIpFormInitialValues,
-  selectReAssignPoolsOptions,
+  getIpPools,
   selectCurrentPool,
   selectIpForCurrentPool
 } from 'src/selectors/ipPools';
 
 export class IpForm extends Component {
   render() {
-    const { currentIp, reAssignPoolsOptions, handleSubmit, submitting, pristine } = this.props;
+    const { ip, pool, pools, handleSubmit, submitting, pristine } = this.props;
+    const reAssignPoolsOptions = pools.map((currentPool) => ({
+      value: currentPool.id,
+      label: (currentPool.id === pool.id) ? '-- Select a new pool --' : `${currentPool.name} (${currentPool.id})`
+    }));
 
     return (
       <Panel>
         <form onSubmit={handleSubmit}>
           <Panel.Section>
             <LabelledValue label='Hostname'>
-              <p>{currentIp.hostname}</p>
+              <p>{ip.hostname}</p>
             </LabelledValue>
           </Panel.Section>
           <Panel.Section>
@@ -46,11 +50,17 @@ export class IpForm extends Component {
   }
 }
 
+IpForm.defaultProps = {
+  pools: [],
+  pool: {},
+  ip: {}
+};
+
 const formName = 'ipForm';
 const mapStateToProps = (state, props) => ({
-  currentPool: selectCurrentPool(state, props),
-  currentIp: selectIpForCurrentPool(state, props),
-  reAssignPoolsOptions: selectReAssignPoolsOptions(state, props),
+  pool: selectCurrentPool(state, props),
+  ip: selectIpForCurrentPool(state, props),
+  pools: getIpPools(state, props),
   initialValues: selectIpFormInitialValues(state, props)
 });
 
@@ -59,5 +69,6 @@ const formOptions = {
   enableReinitialize: true
 };
 
-const IPReduxForm = reduxForm(formOptions)(IpForm);
-export default withRouter(connect(mapStateToProps)(IPReduxForm));
+const connectedForm = withRouter(connect(mapStateToProps)(reduxForm(formOptions)(IpForm)));
+connectedForm.displayName = 'IpForm';
+export default connectedForm;

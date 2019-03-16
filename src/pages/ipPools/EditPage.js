@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { Link, withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { Page, Panel, UnstyledLink } from '@sparkpost/matchbox';
 import { ApiErrorBanner, DeleteModal, Loading } from 'src/components';
@@ -79,7 +79,7 @@ export class EditPage extends Component {
     return <ApiErrorBanner
       errorDetails={listError.message}
       message="Sorry, we seem to have had some trouble loading your IP pool."
-      reload={this.loadDependantData}
+      reload={this.loadDependentData}
     />;
   }
 
@@ -169,9 +169,9 @@ const mapStateToProps = (state, props) => {
   };
 };
 
-export default withRouter(connect(mapStateToProps, {
+export default connect(mapStateToProps, {
   updatePool,
   deletePool,
   listPools,
   showAlert
-})(EditPage));
+})(EditPage);

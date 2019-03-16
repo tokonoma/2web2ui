@@ -9,9 +9,12 @@ describe('IP Form tests', () => {
   beforeEach(() => {
     props = {
       handleSubmit: jest.fn(),
-      currentIp: {
+      submitting: false,
+      ip: {
         hostname: 'abcd.com'
-      }
+      },
+      pools: [],
+      pool: null
     };
 
     wrapper = shallow(<IpForm {...props} />);

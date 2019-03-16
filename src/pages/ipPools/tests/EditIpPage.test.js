@@ -46,11 +46,23 @@ describe('IP Edit Page', () => {
     expect(wrapper.find('Redirect').prop('to')).toEqual('/account/ip-pools/edit/my-pool');
   });
 
-  it('renders errors', () => {
+  it('invokes updateSendingIp function upon submitting the ip form', () => {
+    wrapper.find('IpForm').simulate('submit', {});
+    expect(props.updateSendingIp).toHaveBeenCalled();
+  });
+
+  it('renders error banner', () => {
     const err = new Error('API Failed');
     wrapper.setProps({ error: err });
     expect(wrapper.exists('ApiErrorBanner')).toBe(true);
     expect(wrapper.find('ApiErrorBanner')).toMatchSnapshot();
+  });
+
+  it('reloads data on upon clicking on reload button on error banner', () => {
+    const err = new Error('API Failed');
+    wrapper.setProps({ error: err });
+    wrapper.find('ApiErrorBanner').prop('reload')();
+    expect(props.listPools).toHaveBeenCalled();
   });
 
   describe('onUpdateIp', () => {

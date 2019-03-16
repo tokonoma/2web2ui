@@ -107,12 +107,6 @@ describe('Selector: ipPools', () => {
     });
   });
 
-  describe('selectReAssignPoolsOptions', () => {
-    it('returns formatted pools list and renames label of current selected pool', () => {
-      expect(ipPoolSelectors.selectReAssignPoolsOptions(state, props)).toMatchSnapshot();
-    });
-  });
-
   describe('selectIpFormInitialValues', () => {
     let props;
     beforeEach(() => {

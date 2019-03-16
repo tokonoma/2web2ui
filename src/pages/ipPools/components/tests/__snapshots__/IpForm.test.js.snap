@@ -20,7 +20,9 @@ exports[`IP Form tests should render form 1`] = `
       >
         <Field
           component={[Function]}
+          disabled={false}
           name="ip_pool"
+          options={Array []}
         />
       </LabelledValue>
     </Panel.Section>

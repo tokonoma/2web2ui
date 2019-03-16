@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link, Redirect, withRouter } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { Page } from '@sparkpost/matchbox';
 import _ from 'lodash';
 
@@ -37,7 +37,7 @@ export class EditIpPage extends Component {
     return <ApiErrorBanner
       errorDetails={error.message}
       message="Sorry, we seem to have had some trouble loading your IP data."
-      reload={this.loadDependantData}
+      reload={this.loadDependentData}
     />;
   }
 
@@ -89,9 +89,9 @@ const mapStateToProps = (state, props) => {
   };
 };
 
-export default withRouter(connect(mapStateToProps, {
+export default connect(mapStateToProps, {
   updatePool,
   listPools,
   updateSendingIp,
   showAlert
-})(EditIpPage));
+})(EditIpPage);

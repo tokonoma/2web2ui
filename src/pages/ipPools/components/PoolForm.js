@@ -7,7 +7,7 @@ import { SendingDomainTypeaheadWrapper, TextFieldWrapper } from 'src/components'
 import AccessControl from 'src/components/auth/AccessControl';
 import { required } from 'src/helpers/validation';
 import { configFlag } from 'src/helpers/conditions/config';
-import { selectCurrentPool, selectIpsForCurrentPool } from 'src/selectors/ipPools';
+import { selectCurrentPool } from 'src/selectors/ipPools';
 import isDefaultPool from '../helpers/defaultPool';
 
 export class PoolForm extends Component {
@@ -54,7 +54,6 @@ export class PoolForm extends Component {
 }
 
 PoolForm.defaultProps = {
-  ips: [],
   pool: {}
 };
 
@@ -62,7 +61,6 @@ const mapStateToProps = (state, props) => {
   const pool = selectCurrentPool(state, props);
   return {
     pool,
-    ips: selectIpsForCurrentPool(state, props),
     initialValues: {
       ...pool
     }
