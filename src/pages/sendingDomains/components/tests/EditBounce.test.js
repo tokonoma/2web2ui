@@ -1,188 +1,183 @@
-import { shallow } from 'enzyme';
 import React from 'react';
+import { shallow } from 'enzyme';
+import getConfig from 'src/helpers/getConfig';
 import { EditBounce } from '../EditBounce';
-import config from 'src/config';
 
-// Snapshot note - Fragments that are not directly rendered will show 'UNDEFINED'
-// Will be fixed in a future jest update (https://github.com/facebook/jest/pull/5816)
-
-jest.mock('src/config', () => ({
-  zuora: {}, //axiosInstance throws without this
-  brightback: {}, //axiosInstance throws without this
-  authentication: { //authCookie throws without this,
-    app: {
-      cookie: {}
-    },
-    site: {
-      cookie: {}
-    }
-  },
-  heroku: {
-    cookieName: 'my-cookie'
-  },
-  website: {
-    domain: ''
-  },
-  support: { algolia: {}},
-  cookieConsent: { cookie: {}},
-  bounceDomains: {
-    allowDefault: false,
-    cnameValue: 'sparkpostmail.com'
-  }
-}));
-
-let instance;
+jest.mock('src/helpers/getConfig');
 
 describe('Component: EditBounce', () => {
-  let wrapper;
-  let props;
-  let status;
-  beforeEach(() => {
-    status = {
-      ownership_verified: null,
-      cname_status: null,
-      dkim_status: null,
-      mx_status: null
-    };
-    props = {
-      id: 'xyz.com',
-      domain: {
-        status,
+  const subject = (props = {}) => shallow(
+    <EditBounce
+      id="xyz.com"
+      domain={{
+        status: {
+          ownership_verified: null,
+          cname_status: null,
+          dkim_status: null,
+          mx_status: null
+        },
         is_default_bounce_domain: false,
         subaccount_id: 100
-      },
-      verifyCname: jest.fn(() => Promise.resolve()),
-      update: jest.fn(() => Promise.resolve()),
-      showAlert: jest.fn(),
-      reset: jest.fn(),
-      verifyCnameLoading: false
-    };
+      }}
+      verifyCname={() => {}}
+      update={() => {}}
+      showAlert={() => {}}
+      reset={() => {}}
+      verifyCnameLoading={false}
+      {...props}
+    />
+  );
 
-    wrapper = shallow(<EditBounce {...props}/>);
-
-    instance = wrapper.instance();
+  beforeEach(() => {
+    getConfig.mockImplementation((path) => ({
+      allowDefault: true,
+      allowSubaccountDefault: true,
+      cnameValue: 'sparkpostmail.com'
+    }));
   });
 
   it('renders ready correctly', () => {
-    wrapper.setProps({ domain: { status: { ...status, cname_status: 'valid' }}});
+    const wrapper = subject({ domain: { status: { cname_status: 'valid' }}});
     expect(wrapper).toMatchSnapshot();
   });
 
   it('renders not ready correctly', () => {
-    expect(wrapper).toMatchSnapshot();
+    expect(subject()).toMatchSnapshot();
   });
 
   it('does not show root domain warning for 3rd level domain', () => {
-    wrapper.setProps({ id: 'c.b.a.com' });
+    const wrapper = subject({ id: 'c.b.a.com' });
     expect(wrapper).toMatchSnapshot();
   });
 
   describe('default bounce toggle', () => {
     it('renders correctly toggle when all conditions are true', () => {
-      config.bounceDomains.allowDefault = true;
-      config.bounceDomains.allowSubaccountDefault = true;
-      wrapper.setProps({ domain: { status: { ...status, ownership_verified: true, cname_status: 'valid' }}});
+      getConfig.mockImplementation((path) => ({ allowDefault: true, allowSubaccountDefault: true }));
+      const wrapper = subject({ domain: { status: { ownership_verified: true, cname_status: 'valid' }}});
+
       expect(wrapper.find('Field')).toMatchSnapshot();
     });
 
     it('renders correctly toggle when all conditions are true except allowSubaccount', () => {
-      config.bounceDomains.allowDefault = true;
-      config.bounceDomains.allowSubaccountDefault = false;
-      wrapper.setProps({ domain: { status: { ...status, ownership_verified: true, cname_status: 'valid' }}});
+      getConfig.mockImplementation((path) => ({ allowDefault: true, allowSubaccountDefault: false }));
+      const wrapper = subject({ domain: { status: { ownership_verified: true, cname_status: 'valid' }}});
+
       expect(wrapper.find('Field')).toMatchSnapshot();
     });
 
     it('does not render if config is false', () => {
-      config.bounceDomains.allowDefault = false;
-      wrapper.setProps({ domain: { status: { ...status, ownership_verified: true, cname_status: 'valid' }}});
+      getConfig.mockImplementation((path) => ({ allowDefault: false }));
+      const wrapper = subject({ domain: { status: { ownership_verified: true, cname_status: 'valid' }}});
+
       expect(wrapper.find('Field')).toHaveLength(0);
     });
 
     it('does not render if not ownership verified', () => {
-      config.bounceDomains.allowDefault = true;
-      wrapper.setProps({ domain: { status: { ...status, ownership_verified: false, cname_status: 'valid' }}});
+      getConfig.mockImplementation((path) => ({ allowDefault: false }));
+      const wrapper = subject({ domain: { status: { ownership_verified: false, cname_status: 'valid' }}});
+
       expect(wrapper.find('Field')).toHaveLength(0);
     });
 
     it('renders correctly if assigned to subaccount and feature flag is true', () => {
-      config.bounceDomains.allowDefault = true;
-      config.bounceDomains.allowSubaccountDefault = true;
-      wrapper.setProps({ domain: { subaccount_id: 101, status: { ...status, ownership_verified: true, cname_status: 'valid' }}});
+      getConfig.mockImplementation((path) => ({ allowDefault: true, allowSubaccountDefault: true }));
+      const wrapper = subject({ domain: { subaccount_id: 101, status: { ownership_verified: true, cname_status: 'valid' }}});
+
       expect(wrapper.find('Field')).toMatchSnapshot();
     });
 
     it('does not render if assigned to subaccount and feature flag is false', () => {
-      config.bounceDomains.allowDefault = true;
-      config.bounceDomains.allowSubaccountDefault = false;
-      wrapper.setProps({ domain: { subaccount_id: 101, status: { ...status, ownership_verified: true, cname_status: 'valid' }}});
+      getConfig.mockImplementation((path) => ({ allowDefault: true, allowSubaccountDefault: false }));
+      const wrapper = subject({ domain: { subaccount_id: 101, status: { ownership_verified: true, cname_status: 'valid' }}});
+
       expect(wrapper.find('Field')).toHaveLength(0);
     });
 
     it('does not render if not ready for bounce', () => {
-      config.bounceDomains.allowDefault = true;
-      wrapper.setProps({ domain: { status: { ...status, ownership_verified: true, cname_status: 'invalid' }}});
+      getConfig.mockImplementation((path) => ({ allowDefault: true }));
+      const wrapper = subject({ domain: { status: { ownership_verified: true, cname_status: 'invalid' }}});
+
       expect(wrapper.find('Field')).toHaveLength(0);
     });
   });
 
-
   describe('verifyDomain', () => {
     it('renders loading state correctly', async () => {
-      wrapper.setProps({ verifyCnameLoading: true });
+      const wrapper = subject({ verifyCnameLoading: true });
       expect(wrapper.find('SetupInstructionPanel')).toHaveProp('isVerifying', true);
     });
 
     it('verifies domain and alerts when verification successful', async () => {
-      props.verifyCname.mockReturnValue(Promise.resolve({ cname_status: 'valid' }));
-      await instance.verifyDomain();
-      expect(props.verifyCname).toHaveBeenCalledTimes(1);
-      expect(props.verifyCname).toHaveBeenCalledWith({ id: 'xyz.com', subaccount: 100 });
-      const arg = props.showAlert.mock.calls[0][0];
-      expect(props.showAlert).toHaveBeenCalledTimes(1);
-      expect(arg.type).toEqual('success');
-      expect(arg.message).toMatch(/successfully verified/);
+      const showAlert = jest.fn();
+      const verifyCname = jest.fn(() => Promise.resolve({ cname_status: 'valid' }));
+      const wrapper = subject({ showAlert, verifyCname });
+
+      await wrapper.find('SetupInstructionPanel').simulate('verify');
+
+      expect(verifyCname).toHaveBeenCalledWith({ id: 'xyz.com', subaccount: 100 });
+      expect(showAlert).toHaveBeenCalledWith(expect.objectContaining({ type: 'success' }));
     });
 
     it('alerts error when verification req is successful but verification is failed', async () => {
-      const result = {
+      const showAlert = jest.fn();
+      const verifyCname = jest.fn(() => Promise.resolve({
         cname_status: 'invalid',
-        dns: {
-          cname_error: 'Something horrible just happened!'
-        }
-      };
+        dns: { cname_error: 'Oh no!' }
+      }));
+      const wrapper = subject({ showAlert, verifyCname });
 
-      props.verifyCname.mockReturnValue(Promise.resolve(result));
-      await instance.verifyDomain();
+      await wrapper.find('SetupInstructionPanel').simulate('verify');
 
-      expect(props.verifyCname).toHaveBeenCalledWith({ id: 'xyz.com', subaccount: 100 });
-      expect(props.showAlert).toHaveBeenCalledWith({
-        type: 'error',
-        message: expect.stringContaining(result.dns.cname_error)
-      });
+      expect(verifyCname).toHaveBeenCalledWith({ id: 'xyz.com', subaccount: 100 });
+      expect(showAlert).toHaveBeenCalledWith({ type: 'error', message: expect.stringContaining('Oh no!') });
     });
   });
 
   describe('toggleDefaultBounce', () => {
-    it('calls update with toggled value', async () => {
-      await instance.toggleDefaultBounce();
-      expect(props.update).toHaveBeenCalledWith({ id: props.id, subaccount: 100, is_default_bounce_domain: true });
+    it('calls update to set domain as default', async () => {
+      const update = jest.fn(() => Promise.resolve());
+      const wrapper = subject({
+        domain: { subaccount_id: 123, status: { cname_status: 'valid', ownership_verified: true }},
+        update
+      });
 
-      props.domain.is_default_bounce_domain = true;
-      await instance.toggleDefaultBounce();
-      expect(props.update).toHaveBeenCalledWith({ id: props.id, subaccount: 100, is_default_bounce_domain: false });
+      wrapper.find('Field[name="is_default_bounce_domain"]').simulate('change');
+
+      expect(update).toHaveBeenCalledWith({ id: 'xyz.com', subaccount: 123, is_default_bounce_domain: true });
+    });
+
+    it('calls update to unset domain as default', () => {
+      const update = jest.fn(() => Promise.resolve());
+      const wrapper = subject({
+        domain: {
+          is_default_bounce_domain: true,
+          subaccount_id: 234,
+          status: { cname_status: 'valid', ownership_verified: true }
+        },
+        update
+      });
+
+      wrapper.find('Field[name="is_default_bounce_domain"]').simulate('change');
+
+      expect(update).toHaveBeenCalledWith({ id: 'xyz.com', subaccount: 234, is_default_bounce_domain: false });
     });
 
     it('on error reset form and rethrow the error', async () => {
-      const err = new Error('Request failed!');
-      props.update.mockReturnValue(Promise.reject(err));
-
-      await expect(instance.toggleDefaultBounce()).rejects.toThrow(err);
-      expect(props.update).toHaveBeenCalledWith({
-        id: props.id,
-        subaccount: 100,
-        is_default_bounce_domain: true
+      const reset = jest.fn();
+      const update = jest.fn(() => Promise.reject(new Error('Oh no!')));
+      const wrapper = subject({
+        domain: {
+          is_default_bounce_domain: true,
+          subaccount_id: 234,
+          status: { cname_status: 'valid', ownership_verified: true }
+        },
+        reset,
+        update
       });
-      expect(props.reset).toHaveBeenCalled();
+
+      // no easy way to catch rethrown error with simulate
+      await expect(wrapper.instance().toggleDefaultBounce()).rejects.toThrow('Oh no!');
+      expect(reset).toHaveBeenCalled();
     });
   });
 });

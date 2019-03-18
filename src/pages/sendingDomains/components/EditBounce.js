@@ -11,8 +11,8 @@ import { LabelledValue } from 'src/components';
 import { showAlert } from 'src/actions/globalAlert';
 import { SendingDomainSection } from './SendingDomainSection';
 import { resolveReadyFor } from 'src/helpers/domains';
+import getConfig from 'src/helpers/getConfig';
 import { hasAutoVerifyEnabledSelector } from 'src/selectors/account';
-import config from 'src/config';
 import SetupInstructionPanel from './SetupInstructionPanel';
 
 export class EditBounce extends Component {
@@ -63,6 +63,7 @@ export class EditBounce extends Component {
   renderDnsSettings() {
     const { id, domain, hasAutoVerifyEnabled, verifyCnameLoading } = this.props;
     const readyFor = resolveReadyFor(domain.status);
+    const bounceDomainsConfig = getConfig('bounceDomains');
 
     return (
       <SetupInstructionPanel
@@ -75,7 +76,7 @@ export class EditBounce extends Component {
       >
         <LabelledValue label='Type'><p>CNAME</p></LabelledValue>
         <LabelledValue label='Hostname'><p>{id}</p></LabelledValue>
-        <LabelledValue label='Value'><p>{config.bounceDomains.cnameValue}</p></LabelledValue>
+        <LabelledValue label='Value'><p>{bounceDomainsConfig.cnameValue}</p></LabelledValue>
       </SetupInstructionPanel>
     );
   }
@@ -98,14 +99,15 @@ export class EditBounce extends Component {
   renderReady() {
     const { updateLoading, id, domain } = this.props;
     const readyFor = resolveReadyFor(domain.status);
+    const bounceDomainsConfig = getConfig('bounceDomains');
 
     // Allow default bounce toggle if:
     // Config flag is true
     // Domain is verified
     // Domain is ready for bounce
     // Bounce domain by subaccount config flag is true
-    const showDefaultBounceSubaccount = (!domain.subaccount_id || domain.subaccount_id && config.bounceDomains.allowSubaccountDefault);
-    const showDefaultBounceToggle = config.bounceDomains.allowDefault && readyFor.sending && readyFor.bounce && showDefaultBounceSubaccount;
+    const showDefaultBounceSubaccount = (!domain.subaccount_id || domain.subaccount_id && bounceDomainsConfig.allowSubaccountDefault);
+    const showDefaultBounceToggle = bounceDomainsConfig.allowDefault && readyFor.sending && readyFor.bounce && showDefaultBounceSubaccount;
 
     const tooltip = (
       <Tooltip dark content={`When this is set to "ON", all future transmissions ${domain.subaccount_id ? 'for this subaccount ' : ''}will use ${id} as their bounce domain (unless otherwise specified).`}>
