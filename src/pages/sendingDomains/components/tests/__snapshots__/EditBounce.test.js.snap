@@ -106,15 +106,7 @@ exports[`Component: EditBounce does not show root domain warning for 3rd level d
 >
   <Left>
     <p>
-      <strong>
-        To use this domain for bounces
-      </strong>
-      , add this CNAME record to your DNS settings.
-    </p>
-    <p>
-      <em>
-        Note: Bounce domains must be verified via DNS.
-      </em>
+      To use this domain for bounces, connect your domain by setting the required DNS record(s) and verifying the connection.
     </p>
   </Left>
   <Right>
@@ -157,15 +149,7 @@ exports[`Component: EditBounce renders not ready correctly 1`] = `
 >
   <Left>
     <p>
-      <strong>
-        To use this domain for bounces
-      </strong>
-      , add this CNAME record to your DNS settings.
-    </p>
-    <p>
-      <em>
-        Note: Bounce domains must be verified via DNS.
-      </em>
+      To use this domain for bounces, connect your domain by setting the required DNS record(s) and verifying the connection.
     </p>
   </Left>
   <Right>

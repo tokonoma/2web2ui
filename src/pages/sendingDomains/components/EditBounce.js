@@ -85,8 +85,10 @@ export class EditBounce extends Component {
     return (
       <Fragment>
         <SendingDomainSection.Left>
-          <p><strong>To use this domain for bounces</strong>, add this CNAME record to your DNS settings.</p>
-          <p><em>Note: Bounce domains must be verified via DNS.</em></p>
+          <p>
+            To use this domain for bounces, connect your domain by setting the required DNS record(s)
+            and verifying the connection.
+          </p>
         </SendingDomainSection.Left>
         <SendingDomainSection.Right>
           {this.renderRootDomainWarning()}
