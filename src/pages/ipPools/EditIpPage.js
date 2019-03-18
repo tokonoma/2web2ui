@@ -15,7 +15,13 @@ export class EditIpPage extends Component {
   onUpdateIp = (values) => {
     const { updateSendingIp, ip, showAlert } = this.props;
 
-    return updateSendingIp(ip.external_ip, values.ip_pool)
+    const data = _.pick(values, ['ip_pool', 'auto_warmup_enabled', 'auto_warmup_stage']);
+
+    if (!data.auto_warmup_enabled) {
+      delete data['auto_warmup_stage'];
+    }
+
+    return updateSendingIp(ip.external_ip, data)
       .then((res) => {
         showAlert({
           type: 'success',

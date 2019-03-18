@@ -58,7 +58,9 @@ export const selectFirstIpPoolId = createSelector(
 
 export const selectIpFormInitialValues = createSelector(
   [selectIpForCurrentPool, selectCurrentPool], (currentIp, pool) => ({
+    auto_warmup_stage: 1,
     ...currentIp,
     ip_pool: pool.id
+
   })
 );
