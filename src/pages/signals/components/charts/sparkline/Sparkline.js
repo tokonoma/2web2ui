@@ -30,6 +30,7 @@ const Sparkline = ({ timeSeries, height, width, yKey, dot, yRange, activeDot, st
           isAnimationActive={false}
           cursor={false}
           content={<TooltipWrapper children={tooltipContent} />}
+          position={{ x: 0, y: 0 }}
         />
       </LineChart>
     </ResponsiveContainer>

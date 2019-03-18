@@ -66,47 +66,50 @@ class BarChart extends Component {
     const { gap, height, disableHover, margin, timeSeries, tooltipContent, tooltipWidth, width, xKey, xAxisProps, yDomain, yAxisProps } = this.props;
 
     return (
-      <ResponsiveContainer height={height} width={width} className='SignalsBarChart'>
-        <RechartsBarchart
-          barCategoryGap={gap}
-          data={timeSeries}
-          margin={margin}
-        >
-          {this.renderBackgrounds()}
-          <CartesianGrid
-            vertical={false}
-            stroke='#e1e1e6'
-            shapeRendering='crispEdges'
-          />
-          <YAxis
-            axisLine={false}
-            tickLine={false}
-            width={30}
-            minTickGap={2}
-            domain={yDomain}
-            {...yAxisProps}
-          />
-          <XAxis
-            axisLine={false}
-            tickLine={false}
-            dataKey={xKey}
-            type='category'
-            padding={{ left: 12, right: 12 }}
-            shapeRendering='crispEdges'
-            {...xAxisProps}
-          />
-          {!disableHover && (
-            <Tooltip
-              offset={25}
-              cursor={false}
-              isAnimationActive={false}
-              content={<TooltipWrapper children={tooltipContent} />}
-              width={tooltipWidth}
+      <div className='LiftTooltip'>
+        <ResponsiveContainer height={height} width={width} className='SignalsBarChart'>
+          <RechartsBarchart
+            barCategoryGap={gap}
+            data={timeSeries}
+            margin={margin}
+          >
+            {this.renderBackgrounds()}
+            <CartesianGrid
+              vertical={false}
+              stroke='#e1e1e6'
+              shapeRendering='crispEdges'
             />
-          )}
-          {this.renderBars()}
-        </RechartsBarchart>
-      </ResponsiveContainer>
+            <YAxis
+              axisLine={false}
+              tickLine={false}
+              width={30}
+              minTickGap={2}
+              domain={yDomain}
+              {...yAxisProps}
+            />
+            <XAxis
+              axisLine={false}
+              tickLine={false}
+              dataKey={xKey}
+              type='category'
+              padding={{ left: 12, right: 12 }}
+              shapeRendering='crispEdges'
+              {...xAxisProps}
+            />
+            {!disableHover && (
+              <Tooltip
+                offset={25}
+                cursor={false}
+                isAnimationActive={false}
+                content={<TooltipWrapper children={tooltipContent} />}
+                width={tooltipWidth}
+                position={{ x: 0, y: 0 }}
+              />
+            )}
+            {this.renderBars()}
+          </RechartsBarchart>
+        </ResponsiveContainer>
+      </div>
     );
   }
 }

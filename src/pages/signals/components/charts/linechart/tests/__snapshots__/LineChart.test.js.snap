@@ -140,6 +140,7 @@ exports[`LineChart Component renders a line chart with a single line correctly 1
       animationEasing="ease"
       content={
         <Tooltip
+          offset={25}
           width="200px"
         >
           [MockFunction]
@@ -160,6 +161,12 @@ exports[`LineChart Component renders a line chart with a single line correctly 1
       itemStyle={Object {}}
       labelStyle={Object {}}
       offset={25}
+      position={
+        Object {
+          "x": 0,
+          "y": 0,
+        }
+      }
       separator=" : "
       useTranslate3d={false}
       viewBox={
