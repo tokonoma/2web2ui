@@ -49,7 +49,7 @@ import {
   isSelfServeBilling,
   hasUiOption
 } from 'src/helpers/conditions/account';
-import { isHeroku, isAzure } from 'src/helpers/conditions/user';
+import { isHeroku, isAzure, isSubaccountUser } from 'src/helpers/conditions/user';
 import { configFlag, configEquals } from 'src/helpers/conditions/config';
 
 import App from 'src/components/layout/App';
@@ -159,6 +159,7 @@ const routes = [
     layout: App,
     title: 'Dashboard',
     condition: all(
+      not(isSubaccountUser),
       configEquals('splashPage', '/dashboard') // want to hide if not a splash page https://jira.int.messagesystems.com/browse/FAD-6046
     ),
     // TODO: implement some kind of blockedRoutes check that runs on every route so we can

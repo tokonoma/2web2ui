@@ -114,8 +114,6 @@ export const ALL_EVENTS_FILTERS = {
 
 export const DEFAULT_PER_PAGE_BUTTONS = [10, 25, 50, 100];
 
-export const SUBACCOUNT_REPORTING_ROLE = 'subaccount_reporting';
-
 export const ANALYTICS_CREATE_ACCOUNT = 'create account';
 export const ANALYTICS_ADDON_IP = 'dedicated_ips';
 export const ANALYTICS_PREMIUM_SUPPORT = 'premium-support';
@@ -138,3 +136,5 @@ export const ROLES = {
   SUBACCOUNT_REPORTING: 'subaccount_reporting',
   SUPERUSER: 'superuser'
 };
+
+export const SUBACCOUNT_ROLES = [ROLES.SUBACCOUNT_REPORTING];
