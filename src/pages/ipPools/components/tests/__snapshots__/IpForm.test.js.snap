@@ -1,5 +1,65 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`IP Form tests auto_warmup_enabled shows reconfirmation modal when ip warmup is going to disabled 1`] = `
+<ConfirmationModal
+  confirmVerb="Yes, I want to turn OFF Auto IP Warmup"
+  content={
+    <p>
+      Disabling Auto IP Warmup will remove the volume restrictions from this IP, if this IP is not properly warmed, this can have negative consequences on deliverability and sender reputation.
+    </p>
+  }
+  onCancel={[Function]}
+  onConfirm={[Function]}
+  open={true}
+  title="Are you sure you want to disable Auto IP Warmup?"
+/>
+`;
+
+exports[`IP Form tests auto_warmup_enabled shows reconfirmation modal when ip warmup is going to enabled 1`] = `
+<ConfirmationModal
+  confirmVerb="Yes, I want to turn ON Auto IP Warmup"
+  content={
+    <p>
+      Enabling Auto IP Warmup will limit the amount of traffic that is able to be sent over this IP based on the warmup stage. Additional traffic will be distributed amongst other IPs in the same pool or the designated overflow pool.
+    </p>
+  }
+  onCancel={[Function]}
+  onConfirm={[Function]}
+  open={true}
+  title="Are you sure you want to enable Auto IP Warmup?"
+/>
+`;
+
+exports[`IP Form tests auto_warmup_stage disables stages beyond current stage 1`] = `
+Array [
+  Object {
+    "disabled": false,
+    "label": "Stage 1",
+    "value": 1,
+  },
+  Object {
+    "disabled": false,
+    "label": "Stage 2",
+    "value": 2,
+  },
+  Object {
+    "disabled": true,
+    "label": "Stage 3",
+    "value": 3,
+  },
+  Object {
+    "disabled": true,
+    "label": "Stage 4",
+    "value": 4,
+  },
+  Object {
+    "disabled": true,
+    "label": "Stage 5",
+    "value": 5,
+  },
+]
+`;
+
 exports[`IP Form tests should render form 1`] = `
 <Panel>
   <form
@@ -26,6 +86,35 @@ exports[`IP Form tests should render form 1`] = `
         />
       </LabelledValue>
     </Panel.Section>
+    <Panel.Section
+      actions={
+        Array [
+          Object {
+            "color": "orange",
+            "content": <UnstyledLink
+              external={true}
+              to="https://www.sparkpost.com/docs/deliverability/ip-warm-up-overview/"
+            >
+              What is Auto Warmup?
+            </UnstyledLink>,
+            "onClick": [Function],
+          },
+        ]
+      }
+    >
+      <LabelledValue
+        label="Auto IP Warmup"
+      >
+        <Field
+          component={[Function]}
+          disabled={false}
+          label="Enable"
+          name="auto_warmup_enabled"
+          onChange={[Function]}
+          type="checkbox"
+        />
+      </LabelledValue>
+    </Panel.Section>
     <Panel.Section>
       <Button
         primary={true}
@@ -36,5 +125,17 @@ exports[`IP Form tests should render form 1`] = `
       </Button>
     </Panel.Section>
   </form>
+  <ConfirmationModal
+    confirmVerb="Yes, I want to turn OFF Auto IP Warmup"
+    content={
+      <p>
+        Disabling Auto IP Warmup will remove the volume restrictions from this IP, if this IP is not properly warmed, this can have negative consequences on deliverability and sender reputation.
+      </p>
+    }
+    onCancel={[Function]}
+    onConfirm={[Function]}
+    open={false}
+    title="Are you sure you want to disable Auto IP Warmup?"
+  />
 </Panel>
 `;

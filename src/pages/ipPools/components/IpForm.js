@@ -24,7 +24,7 @@ export class IpForm extends Component {
   };
 
   render() {
-    const { ip, pool, pools, ipAutoWarmupEnabled, handleSubmit, submitting, pristine } = this.props;
+    const { ip, pool, pools, ipAutoWarmupEnabled, handleSubmit, maxStages, submitting, pristine } = this.props;
     const reAssignPoolsOptions = pools.map((currentPool) => ({
       value: currentPool.id,
       label: (currentPool.id === pool.id) ? '-- Select a new pool --' : `${currentPool.name} (${currentPool.id})`
@@ -34,7 +34,7 @@ export class IpForm extends Component {
       ? 'Enabling Auto IP Warmup will limit the amount of traffic that is able to be sent over this IP based on the warmup stage. Additional traffic will be distributed amongst other IPs in the same pool or the designated overflow pool.'
       : 'Disabling Auto IP Warmup will remove the volume restrictions from this IP, if this IP is not properly warmed, this can have negative consequences on deliverability and sender reputation.';
 
-    const stageOptions = _.map(_.range(20), (i) => ({
+    const stageOptions = _.map(_.range(maxStages), (i) => ({
       value: i + 1,
       label: `Stage ${i + 1}`,
       disabled: i >= (ip.auto_warmup_stage || 1)
@@ -111,7 +111,8 @@ export class IpForm extends Component {
 IpForm.defaultProps = {
   pools: [],
   pool: {},
-  ip: {}
+  ip: {},
+  maxStages: 20
 };
 
 const formName = 'ipForm';

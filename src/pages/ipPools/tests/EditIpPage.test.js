@@ -1,5 +1,6 @@
 import { shallow } from 'enzyme';
 import React from 'react';
+import _ from 'lodash';
 import { EditIpPage } from '../EditIpPage';
 
 describe('IP Edit Page', () => {
@@ -66,17 +67,30 @@ describe('IP Edit Page', () => {
   });
 
   describe('onUpdateIp', () => {
+    let ipData;
+    beforeEach(() => {
+      ipData = { ip_pool: 'foo', auto_warmup_enabled: true, auto_warmup_stage: 2 };
+    });
+
     it('updates ip with ip pool data', async () => {
-      await wrapper.instance().onUpdateIp({ ip_pool: 'foo' });
-      expect(props.updateSendingIp).toHaveBeenCalledWith('1.1.1.1', 'foo');
+      await wrapper.instance().onUpdateIp(ipData);
+      expect(props.updateSendingIp).toHaveBeenCalledWith('1.1.1.1', ipData);
+      expect(props.showAlert).toHaveBeenCalledTimes(1);
+    });
+
+
+    it('removes auto_warmup_stage if ip warmup is not enabled', async () => {
+      ipData.auto_warmup_enabled = false;
+      await wrapper.instance().onUpdateIp(ipData);
+      expect(props.updateSendingIp).toHaveBeenCalledWith('1.1.1.1', _.omit(ipData, 'auto_warmup_stage'));
       expect(props.showAlert).toHaveBeenCalledTimes(1);
     });
 
     it('throws on error', async () => {
       const err = new Error('API Failed');
       props.updateSendingIp.mockReturnValue(Promise.reject(err));
-      await expect(wrapper.instance().onUpdateIp({ ip_pool: 'bar' })).rejects.toThrow(err);
-      expect(props.updateSendingIp).toHaveBeenCalledWith('1.1.1.1', 'bar');
+      await expect(wrapper.instance().onUpdateIp(ipData)).rejects.toThrow(err);
+      expect(props.updateSendingIp).toHaveBeenCalledWith('1.1.1.1', ipData);
       expect(props.showAlert).toHaveBeenCalledTimes(0);
     });
   });
