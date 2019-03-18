@@ -47,6 +47,17 @@ describe('Action Creator: MessageEvents', () => {
     });
   });
 
+  describe('getMessageEventsCSV', () => {
+    it('should dispatch get action with from/to', () => {
+      const dateOptions = {
+        from: '2018-02-15T12:00:00',
+        to: '2018-02-16T12:00:00'
+      };
+
+      expect(messageEvents.getMessageEventsCSV({ dateOptions })).toMatchSnapshot();
+    });
+  });
+
   describe('changePage', () => {
     let getStateMock;
     let dispatchMock;

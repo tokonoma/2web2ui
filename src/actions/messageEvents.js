@@ -7,6 +7,34 @@ import qs from 'qs';
 const { apiDateFormat, messageEvents: { retentionPeriodDays }} = config;
 
 export function getMessageEvents(options = {}) {
+  const params = getParams(options);
+
+  return sparkpostApiRequest({
+    type: 'GET_MESSAGE_EVENTS',
+    meta: {
+      method: 'GET',
+      url: '/v1/events/message',
+      params,
+      showErrorAlert: false
+    }
+  });
+}
+
+export function getMessageEventsCSV(options = {}) {
+  const params = getParams({ ...options, perPage: 1000 });
+
+  return sparkpostApiRequest({
+    type: 'GET_MESSAGE_EVENTS_CSV',
+    meta: {
+      method: 'GET',
+      url: '/v1/events/message',
+      params,
+      showErrorAlert: false
+    }
+  });
+}
+
+function getParams(options) {
   const { dateOptions, perPage, ...rest } = options;
   const { from, to } = dateOptions;
   const params = {};
@@ -27,15 +55,7 @@ export function getMessageEvents(options = {}) {
 
   params.per_page = perPage ? perPage : 25;
 
-  return sparkpostApiRequest({
-    type: 'GET_MESSAGE_EVENTS',
-    meta: {
-      method: 'GET',
-      url: '/v1/events/message',
-      params,
-      showErrorAlert: false
-    }
-  });
+  return params;
 }
 
 export function changePage(currentPage) {
