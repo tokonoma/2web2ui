@@ -21,8 +21,8 @@
   top: 100%;
   transform: scale(0.96);
   transition: 0.06s ease-out;
-  z-index: 1;
-
+  z-index: z-index(overlay);
+  
   &.open {
     opacity: 1;
     pointer-events: auto;

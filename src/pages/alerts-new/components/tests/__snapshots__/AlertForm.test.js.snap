@@ -556,6 +556,7 @@ exports[`Alert Form Component facet props should clear facet_value and validatio
               }
               name="facet_value"
               placeholder="No facet selected"
+              validate={[Function]}
             />
           </div>
         </Grid.Column>

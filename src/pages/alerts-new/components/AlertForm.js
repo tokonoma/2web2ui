@@ -45,6 +45,27 @@ export class AlertForm extends Component {
     }
   }
 
+  validateFacet = (value, allValues) => {
+    const { facet_name } = allValues;
+    const { domains, ipPools } = this.props;
+
+    if (facet_name === 'ALL') {
+      return undefined;
+    }
+
+    if (facet_name === 'sending_domain' && value && value !== '') {
+      const domainsArray = domains.map(({ domain }) => domain) || [];
+      return domainsArray.includes(value) ? undefined : 'This is not a valid sending domain for this account';
+    }
+
+    if (facet_name === 'ip_pool' && value && value !== '') {
+      const ipPoolsArray = ipPools.map(({ id }) => id) || [];
+      return ipPoolsArray.includes(value) ? undefined : 'This is not a valid ip pool for this account';
+    }
+
+    return required(value);
+  };
+
   render() {
     const {
       pristine,
@@ -52,7 +73,6 @@ export class AlertForm extends Component {
       assignTo,
       alert_metric = '',
       facet_name,
-      facet_value,
       handleSubmit,
       newAlert,
       subaccount,
@@ -82,24 +102,6 @@ export class AlertForm extends Component {
         return true;
       }
       return false;
-    };
-
-    const validateFacet = () => {
-      if (facet_name === 'ALL') {
-        return undefined;
-      }
-
-      if (facet_name === 'sending_domain' && facet_value && facet_value !== '') {
-        const domainsArray = domains.map(({ domain }) => domain) || [];
-        return domainsArray.includes(facet_value) ? required : () => 'This is not a valid sending domain for this account';
-      }
-
-      if (facet_name === 'ip_pool' && facet_value && facet_value !== '') {
-        const ipPoolsArray = ipPools.map(({ id }) => id) || [];
-        return ipPoolsArray.includes(facet_value) ? required : () => 'This is not a valid ip pool for this account';
-      }
-
-      return required;
     };
 
     const multiFacetWarning = () => {
@@ -171,7 +173,7 @@ export class AlertForm extends Component {
                     items={(facet_name === 'sending_domain') ? domains : ipPools}
                     disabled={submitting || checkFacet()}
                     placeholder={facet_name === 'ALL' ? 'No facet selected' : facet_name === 'sending_domain' ? 'mail.example.com' : ''}
-                    validate={validateFacet()}
+                    validate={this.validateFacet}
                     helpText={multiFacetWarning()}
                   />
                 </div>
