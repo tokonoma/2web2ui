@@ -46,7 +46,9 @@ export default (state = initialState, { type, payload, meta, extra }) => {
     case 'GET_MESSAGE_EVENTS_FAIL':
       return { ...state, loading: false, error: payload };
 
-    //Save as CSV
+
+      // Save as CSV
+
     case 'GET_MESSAGE_EVENTS_CSV_PENDING':
       //need to set eventsCSV to empty array so that clicking the save as csv button multiple times opens multiple save windows
       return { ...state, eventsCSVLoading: true, eventsCSV: [], error: null };

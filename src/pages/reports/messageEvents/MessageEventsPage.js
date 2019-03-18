@@ -19,7 +19,7 @@ import styles from './MessageEventsPage.module.scss';
 
 const errorMsg = 'Sorry, we seem to have had some trouble loading your message events.';
 const emptyMessage = 'There are no message events for your current query';
-const csvTooltip = 'Save the first 1000 events as csv file';
+const csvTooltip = 'Save the first 1000 events as a CSV file';
 
 const columns = [
   { label: 'Time' },
@@ -55,7 +55,6 @@ export class MessageEventsPage extends Component {
     const now = Math.floor(Date.now() / 1000);
     download({ name: `sparkpost-csv-${now}.csv`, url });
   };
-
 
   handlePageChange = (currentPage) => {
     this.setState({ currentPage });
@@ -153,7 +152,7 @@ export class MessageEventsPage extends Component {
             />
             <Button onClick={this.getCSV} disabled = {eventsCSVLoading}>
               {(eventsCSVLoading) ? 'Saving CSV...' : 'Save as CSV'}
-              <Tooltip content={csvTooltip}>
+              <Tooltip content={csvTooltip} horizontalOffset={'-20px'}>
                 <Info className = {styles.Icon} size={16}></Info>
               </Tooltip>
             </Button>

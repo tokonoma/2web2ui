@@ -48,7 +48,7 @@ export class InvoiceHistory extends Component {
     const { invoice, showAlert, invoices, invoiceId } = this.props;
     const invoiceNumber = _.find(invoices, { id: invoiceId }).invoice_number;
 
-    download({ name: `sparkpost-invoice-${invoiceNumber}.pdf`, url: invoice, revokeURL: true });
+    download({ name: `sparkpost-invoice-${invoiceNumber}.pdf`, url: invoice });
 
     showAlert({ type: 'success', message: `Downloaded invoice: ${invoiceNumber}` });
   };
