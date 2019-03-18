@@ -3,6 +3,7 @@ import { shallow } from 'enzyme';
 import cases from 'jest-in-case';
 
 import { DefaultRedirect } from '../DefaultRedirect';
+import { ROLES } from 'src/constants';
 
 jest.mock('src/config', () => ({
   splashPage: '/config/splash'
@@ -77,9 +78,8 @@ describe('Component: DefaultRedirect', () => {
       state: {}
     });
   }, {
-    reporting: { accessLevel: 'reporting' },
-    'subaccount reporting': { accessLevel: 'subaccount_reporting' },
-    email: { accessLevel: 'email' }
+    reporting: { accessLevel: ROLES.REPORTING },
+    'subaccount reporting': { accessLevel: ROLES.SUBACCOUNT_REPORTING }
   });
 
   it('should redirect based on config', () => {
