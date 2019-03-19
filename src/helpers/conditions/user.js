@@ -10,6 +10,8 @@ export const isSubaccountUser = ({ currentUser }) => SUBACCOUNT_ROLES.includes(c
 
 export const hasRole = (role) => ({ currentUser }) => currentUser.access_level === role;
 
+export const isSubaccountUser = ({ currentUser }) => SUBACCOUNT_ROLES.includes(currentUser.access_level);
+
 export const isAdmin = any(hasRole('admin'), hasRole('superuser'));
 
 export const isSso = ({ currentUser }) => currentUser.is_sso;

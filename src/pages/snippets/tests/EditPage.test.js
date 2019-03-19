@@ -1,6 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import EditPage from '../EditPage';
+import SubaccountSection from 'src/components/subaccountSection';
 
 describe('EditPage', () => {
   const subject = (props = {}) => shallow(
@@ -9,6 +10,7 @@ describe('EditPage', () => {
       getSnippet={() => {}}
       handleSubmit={(fn) => fn}
       hasSubaccounts={true}
+      canViewSubaccount={true}
       id="test-snippet"
       {...props}
     />
@@ -30,7 +32,12 @@ describe('EditPage', () => {
 
   it('renders without subaccount section when account has no subaccounts', () => {
     const wrapper = subject({ hasSubaccounts: false });
-    expect(wrapper).toMatchSnapshot();
+    expect(wrapper.find(SubaccountSection)).not.toExist();
+  });
+
+  it('renders without subaccount section when user is a subaccount user', () => {
+    const wrapper = subject({ canViewSubaccount: false });
+    expect(wrapper.find(SubaccountSection)).not.toExist();
   });
 
   it('renders disabled form when submitting', () => {
