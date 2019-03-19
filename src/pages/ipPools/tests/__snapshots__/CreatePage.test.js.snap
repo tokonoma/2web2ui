@@ -12,7 +12,7 @@ exports[`IP Pools Create Page should render the list page correctly 1`] = `
   empty={Object {}}
   title="Create IP Pool"
 >
-  <Connect(ReduxForm)
+  <withRouter(Connect(ReduxForm))
     isNew={true}
     onSubmit={[Function]}
   />

@@ -28,7 +28,7 @@ describe('IP Pools Create Page', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should show an alert on successful pool creation', async() => {
+  it('should show an alert on successful pool creation', async () => {
     await wrapper.instance().createPool({ name: 'my-pool' });
     expect(wrapper.instance().props.showAlert).toHaveBeenCalledWith({
       type: 'success',

@@ -661,11 +661,19 @@ const routes = [
     supportDocSearch: 'ip pool'
   },
   {
-    path: '/account/ip-pools/edit/:id',
+    path: '/account/ip-pools/edit/:poolId',
     component: ipPools.EditPage,
     condition: hasGrants('ip_pools/manage'),
     layout: App,
     title: 'Edit IP Pool',
+    supportDocSearch: 'ip pool'
+  },
+  {
+    path: '/account/ip-pools/edit/:poolId/:ip',
+    component: ipPools.EditIpPage,
+    condition: hasGrants('ip_pools/manage'),
+    layout: App,
+    title: 'Edit IP',
     supportDocSearch: 'ip pool'
   },
   {

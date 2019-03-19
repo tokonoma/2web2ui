@@ -1,13 +1,4 @@
-import {
-  getNonDefaultIpPools,
-  getDefaultPool,
-  getOrderedIpPools,
-  selectFirstIpPoolId,
-  selectIpsForCurrentPool,
-  selectIpPoolFormInitialValues,
-  shouldShowIpPurchaseCTA
-} from '../ipPools';
-
+import * as ipPoolSelectors from '../ipPools';
 import * as accountBillingInfoSelectors from 'src/selectors/accountBillingInfo';
 
 jest.mock('src/selectors/accountBillingInfo', () => ({
@@ -21,50 +12,52 @@ jest.mock('src/constants', () => ({
 describe('Selector: ipPools', () => {
 
   let state;
+  let props;
+  let ips;
 
   beforeEach(() => {
+    ips = [
+      { external_ip: '1.1.1.1' },
+      { external_ip: '2.2.2.2' },
+      { external_ip: '3.3.3.3' }
+    ];
+
     state = {
       ipPools: {
         list: [
-          { id: 'big', ips: [1, 2, 3, 4, 5, 6]},
-          { id: 'none', ips: []},
-          { id: 'default', ips: [1, 2, 3]},
-          { id: 'small', ips: [1, 2]}
-        ],
-        pool: {
-          name: 'MY CURRENT POOL',
-          id: 'my_current_pool',
-          signing_domain: 'signing-domain.test',
-          ips: [
-            { external_ip: '1.1.1.1' },
-            { external_ip: '2.2.2.2' },
-            { external_ip: '3.3.3.3' }
-          ]
-        }
+          { id: 'big', name: 'Big Pool', signing_domain: 'sign.test', ips },
+          { id: 'none', name: 'None', ips: []},
+          { id: 'default', name: 'Default', ips: ips.slice(0,2) },
+          { id: 'small', name: 'Small Pool', ips: ips.slice(0,1) }
+        ]
       },
       currentUser: { access_level: 'admin' }
+    };
+
+    props = {
+      match: { params: { poolId: 'big' }}
     };
   });
 
   describe('getDefaultPool', () => {
     it('should return the default pool', () => {
-      expect(getDefaultPool(state)).toEqual({ id: 'default', ips: [1, 2, 3]});
+      expect(ipPoolSelectors.getDefaultPool(state)).toEqual({ id: 'default', name: 'Default', ips: ips.slice(0, 2) });
     });
   });
 
   describe('getNonDefaultIpPools', () => {
     it('should return a list of non default IP pools', () => {
-      expect(getNonDefaultIpPools(state)).toEqual([
-        { id: 'big', ips: [1, 2, 3, 4, 5, 6]},
-        { id: 'none', ips: []},
-        { id: 'small', ips: [1, 2]}
+      expect(ipPoolSelectors.getNonDefaultIpPools(state)).toEqual([
+        { id: 'big', name: 'Big Pool', signing_domain: 'sign.test', ips: ips },
+        { id: 'none', name: 'None', ips: []},
+        { id: 'small', name: 'Small Pool', ips: ips.slice(0,1) }
       ]);
     });
   });
 
   describe('getOrderedIpPools', () => {
     it('should return a list pools (default first, then ordered by id ascending)', () => {
-      expect(getOrderedIpPools(state).map((pool) => pool.id)).toEqual([
+      expect(ipPoolSelectors.getOrderedIpPools(state).map((pool) => pool.id)).toEqual([
         'default', 'big', 'none', 'small'
       ]);
     });
@@ -72,56 +65,63 @@ describe('Selector: ipPools', () => {
 
 
   describe('selectIpsForCurrentPool', () => {
+    let ips;
+
+    beforeEach(() => {
+      ips = [
+        { external_ip: '1.1.1.1' },
+        { external_ip: '2.2.2.2' },
+        { external_ip: '3.3.3.3' }
+      ];
+
+    });
     it('should select IPs for the current pool', () => {
-      expect(selectIpsForCurrentPool(state)).toEqual([
-        { external_ip: '1.1.1.1', id: '1_1_1_1' },
-        { external_ip: '2.2.2.2', id: '2_2_2_2' },
-        { external_ip: '3.3.3.3', id: '3_3_3_3' }
-      ]);
+      expect(ipPoolSelectors.selectIpsForCurrentPool(state, props)).toEqual(ips);
     });
   });
 
-
-  describe('selectIpPoolFormInitialValues', () => {
-    it('should return an object of ips assigned to their current pool, for initial values', () => {
-      expect(selectIpPoolFormInitialValues(state, { isNew: false })).toEqual({
-        name: 'MY CURRENT POOL',
-        signing_domain: 'signing-domain.test',
-        '1_1_1_1': 'my_current_pool',
-        '2_2_2_2': 'my_current_pool',
-        '3_3_3_3': 'my_current_pool'
-      });
-    });
-
-    it('should return empty init values in new mode', () => {
-      expect(selectIpPoolFormInitialValues(state, { isNew: true })).toEqual({});
-    });
-  });
 
   describe('shouldShowIpPurchaseCTA', () => {
     it('returns false for enterprise plans', () => {
-      expect(shouldShowIpPurchaseCTA(state)).toBe(false);
+      expect(ipPoolSelectors.shouldShowIpPurchaseCTA(state)).toBe(false);
     });
 
     it('returns true for non-enterprise plans', () => {
       accountBillingInfoSelectors.currentPlanCodeSelector.mockReturnValue('ccfree1');
-      expect(shouldShowIpPurchaseCTA(state)).toBe(true);
+      expect(ipPoolSelectors.shouldShowIpPurchaseCTA(state)).toBe(true);
     });
     it('returns false for non-admins', () => {
       state.currentUser.access_level = 'developer';
-      expect(shouldShowIpPurchaseCTA(state)).toBe(false);
+      expect(ipPoolSelectors.shouldShowIpPurchaseCTA(state)).toBe(false);
     });
-
   });
 
   describe('selectFirstIpPoolId', () => {
     it('returns id of first ip pool', () => {
-      expect(selectFirstIpPoolId(state)).toEqual('big');
+      expect(ipPoolSelectors.selectFirstIpPoolId(state)).toEqual('big');
     });
 
     it('returns undefined', () => {
       state.ipPools.list = [];
-      expect(selectFirstIpPoolId(state)).toBeUndefined();
+      expect(ipPoolSelectors.selectFirstIpPoolId(state)).toBeUndefined();
+    });
+  });
+
+  describe('selectIpFormInitialValues', () => {
+    let props;
+    beforeEach(() => {
+      props = {
+        match: {
+          params: {
+            poolId: 'small',
+            ip: '1.1.1.1'
+          }
+        }
+      };
+    });
+
+    it('returns inital values for ip form', () => {
+      expect(ipPoolSelectors.selectIpFormInitialValues(state, props)).toEqual({ external_ip: '1.1.1.1', ip_pool: 'small' });
     });
   });
 });

@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`IP Edit Page redirects loader when no ip 1`] = `
+<Redirect
+  push={false}
+  to="/account/ip-pools/edit/my-pool"
+/>
+`;
+
+exports[`IP Edit Page renders correctly 1`] = `
+<Page
+  breadcrumbAction={
+    Object {
+      "Component": [Function],
+      "content": "My Pool",
+      "to": "/account/ip-pools/edit/my-pool",
+    }
+  }
+  empty={Object {}}
+  title="Sending IP: 1.1.1.1"
+>
+  <IpForm
+    onSubmit={[Function]}
+  />
+</Page>
+`;
+
+exports[`IP Edit Page renders error banner 1`] = `
+<ApiErrorBanner
+  errorDetails="API Failed"
+  message="Sorry, we seem to have had some trouble loading your IP data."
+  reload={[Function]}
+/>
+`;
