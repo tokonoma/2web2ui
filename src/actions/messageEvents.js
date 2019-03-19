@@ -21,7 +21,7 @@ export function getMessageEvents(options = {}) {
 }
 
 export function getMessageEventsCSV(options = {}) {
-  const params = getParams({ ...options, perPage: 1000 });
+  const params = getParams({ ...options, perPage: 5000 });
 
   return sparkpostApiRequest({
     type: 'GET_MESSAGE_EVENTS_CSV',

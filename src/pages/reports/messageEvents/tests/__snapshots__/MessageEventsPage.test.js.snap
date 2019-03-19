@@ -140,7 +140,7 @@ exports[`Page: Message Events tests should render page correctly 1`] = `
         Save as CSV
         <Tooltip
           bottom={true}
-          content="Save the first 1000 events as a CSV file"
+          content="Save the first 5000 events as a CSV file"
           forcePosition={false}
           horizontalOffset="-20px"
           preferredDirection={

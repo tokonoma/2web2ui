@@ -19,7 +19,7 @@ import styles from './MessageEventsPage.module.scss';
 
 const errorMsg = 'Sorry, we seem to have had some trouble loading your message events.';
 const emptyMessage = 'There are no message events for your current query';
-const csvTooltip = 'Save the first 1000 events as a CSV file';
+const csvTooltip = 'Save the first 5000 events as a CSV file';
 
 const columns = [
   { label: 'Time' },
