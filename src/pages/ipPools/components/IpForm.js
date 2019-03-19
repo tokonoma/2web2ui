@@ -3,15 +3,18 @@ import _ from 'lodash';
 import { connect } from 'react-redux';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
 import { withRouter } from 'react-router-dom';
-import { Button, Panel, UnstyledLink } from '@sparkpost/matchbox';
+import { Button, Panel } from '@sparkpost/matchbox';
 import { SelectWrapper, CheckboxWrapper } from 'src/components/reduxFormWrappers';
 import { LabelledValue, ConfirmationModal } from 'src/components';
+import AccessControl from 'src/components/auth/AccessControl';
+import { IP_WARMUP_STAGES } from '../constants';
 import {
   selectIpFormInitialValues,
   getIpPools,
   selectCurrentPool,
   selectIpForCurrentPool
 } from 'src/selectors/ipPools';
+import { configFlag } from '../../../helpers/conditions/config';
 
 export class IpForm extends Component {
   state = {
@@ -24,7 +27,7 @@ export class IpForm extends Component {
   };
 
   render() {
-    const { ip, pool, pools, ipAutoWarmupEnabled, handleSubmit, maxStages, submitting, pristine } = this.props;
+    const { ip, pool, pools, ipAutoWarmupEnabled, handleSubmit, submitting, pristine } = this.props;
     const reAssignPoolsOptions = pools.map((currentPool) => ({
       value: currentPool.id,
       label: (currentPool.id === pool.id) ? '-- Select a new pool --' : `${currentPool.name} (${currentPool.id})`
@@ -34,10 +37,10 @@ export class IpForm extends Component {
       ? 'Enabling Auto IP Warmup will limit the amount of traffic that is able to be sent over this IP based on the warmup stage. Additional traffic will be distributed amongst other IPs in the same pool or the designated overflow pool.'
       : 'Disabling Auto IP Warmup will remove the volume restrictions from this IP, if this IP is not properly warmed, this can have negative consequences on deliverability and sender reputation.';
 
-    const stageOptions = _.map(_.range(maxStages), (i) => ({
-      value: i + 1,
-      label: `Stage ${i + 1}`,
-      disabled: i >= (ip.auto_warmup_stage || 1)
+    const stageOptions = IP_WARMUP_STAGES.map((stage) => ({
+      label: `${stage.name} (${stage.volume}/day)`,
+      value: stage.id,
+      disabled: stage.id > (ip.auto_warmup_stage || 1)
     }));
 
     return (
@@ -58,36 +61,36 @@ export class IpForm extends Component {
               />
             </LabelledValue>
           </Panel.Section>
-
-          <Panel.Section actions={[{ content: <UnstyledLink to="https://www.sparkpost.com/docs/deliverability/ip-warm-up-overview/" external>What is Auto Warmup?</UnstyledLink>, onClick: _.noop, color: 'orange' }]}>
-            <LabelledValue label='Auto IP Warmup'>
-              <Field
-                name="auto_warmup_enabled"
-                component={CheckboxWrapper}
-                onChange={() => {
-                  this.setState({ warningModal: true });
-                }}
-                type="checkbox"
-                label="Enable"
-                disabled={submitting}
-              />
-            </LabelledValue>
-            {ipAutoWarmupEnabled &&
-            <Fragment>
-              <LabelledValue label='Warmup Stage'>
+          <AccessControl condition={configFlag('featureFlags.ip_warmup')}>
+            <Panel.Section actions={[{ content: 'What is Auto Warmup?', to: 'https://www.sparkpost.com/docs/deliverability/ip-warm-up-overview/', external: true, color: 'orange' }]}>
+              <LabelledValue label='Auto IP Warmup'>
                 <Field
-                  name='auto_warmup_stage'
-                  component={SelectWrapper}
-                  options={stageOptions}
-                  parse={(value) => _.toInteger(value)}
-                  helpText="You can select an previous stage but can not select an advanced stage."
+                  name="auto_warmup_enabled"
+                  component={CheckboxWrapper}
+                  onChange={() => {
+                    this.setState({ warningModal: true });
+                  }}
+                  type="checkbox"
+                  label="Enable"
                   disabled={submitting}
                 />
               </LabelledValue>
-            </Fragment>
-            }
-          </Panel.Section>
-
+              {ipAutoWarmupEnabled &&
+              <Fragment>
+                <LabelledValue label='Warmup Stage'>
+                  <Field
+                    name='auto_warmup_stage'
+                    component={SelectWrapper}
+                    options={stageOptions}
+                    parse={(value) => _.toInteger(value)}
+                    helpText="You can select an previous stage but can not select an advanced stage."
+                    disabled={submitting}
+                  />
+                </LabelledValue>
+              </Fragment>
+              }
+            </Panel.Section>
+          </AccessControl>
           <Panel.Section>
             <Button submit primary disabled={submitting || pristine}>
               {submitting ? 'Saving' : 'Update Sending IP'}
@@ -111,8 +114,7 @@ export class IpForm extends Component {
 IpForm.defaultProps = {
   pools: [],
   pool: {},
-  ip: {},
-  maxStages: 20
+  ip: {}
 };
 
 const formName = 'ipForm';

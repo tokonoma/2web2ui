@@ -1,0 +1,22 @@
+export const IP_WARMUP_STAGES = [
+  { name: 'Stage 1', id: 1, volume: 200 },
+  { name: 'Stage 2', id: 2, volume: 500 },
+  { name: 'Stage 3', id: 3, volume: 1000 },
+  { name: 'Stage 4', id: 4, volume: 2000 },
+  { name: 'Stage 5', id: 5, volume: 5000 },
+  { name: 'Stage 6', id: 6, volume: 10000 },
+  { name: 'Stage 3', id: 7, volume: 20000 },
+  { name: 'Stage 3', id: 8, volume: 40000 },
+  { name: 'Stage 3', id: 9, volume: 100000 },
+  { name: 'Stage 10', id: 10, volume: 250000 },
+  { name: 'Stage 11', id: 11, volume: 500000 },
+  { name: 'Stage 12', id: 12, volume: 1000000 },
+  { name: 'Stage 13', id: 13, volume: 2000000 },
+  { name: 'Stage 14', id: 14, volume: 5000000 },
+  { name: 'Stage 15', id: 15, volume: 10000000 },
+  { name: 'Stage 16', id: 16, volume: 20000000 },
+  { name: 'Stage 17', id: 17, volume: 40000000 },
+  { name: 'Stage 18', id: 18, volume: 80000000 },
+  { name: 'Stage 19', id: 19, volume: 160000000 },
+  { name: 'Stage 20', id: 20, volume: 320000000 }
+];
