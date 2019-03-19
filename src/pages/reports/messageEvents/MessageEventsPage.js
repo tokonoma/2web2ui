@@ -2,8 +2,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { snakeToFriendly } from 'src/helpers/string';
-import { Button, Page, Tooltip } from '@sparkpost/matchbox';
-import { Info } from '@sparkpost/matchbox-icons';
+import { Button, Page } from '@sparkpost/matchbox';
 import { PanelLoading, TableCollection, ApiErrorBanner, Empty } from 'src/components';
 import DisplayDate from './components/DisplayDate';
 import MessageEventsSearch from './components/MessageEventsSearch';
@@ -19,7 +18,6 @@ import styles from './MessageEventsPage.module.scss';
 
 const errorMsg = 'Sorry, we seem to have had some trouble loading your message events.';
 const emptyMessage = 'There are no message events for your current query';
-const csvTooltip = 'Save the first 5000 events as a CSV file';
 
 const columns = [
   { label: 'Time' },
@@ -150,11 +148,8 @@ export class MessageEventsPage extends Component {
               perPage={perPage}
               saveCsv={true}
             />
-            <Button onClick={this.getCSV} disabled = {eventsCSVLoading}>
+            <Button onClick={this.getCSV} disabled={eventsCSVLoading}>
               {(eventsCSVLoading) ? 'Saving CSV...' : 'Save as CSV'}
-              <Tooltip content={csvTooltip} horizontalOffset={'-20px'}>
-                <Info className = {styles.Icon} size={16}></Info>
-              </Tooltip>
             </Button>
           </div>
         </div>

@@ -138,26 +138,6 @@ exports[`Page: Message Events tests should render page correctly 1`] = `
         size="default"
       >
         Save as CSV
-        <Tooltip
-          bottom={true}
-          content="Save the first 5000 events as a CSV file"
-          forcePosition={false}
-          horizontalOffset="-20px"
-          preferredDirection={
-            Object {
-              "bottom": true,
-              "left": false,
-              "right": true,
-              "top": false,
-            }
-          }
-          right={true}
-        >
-          <Info
-            className="Icon"
-            size={16}
-          />
-        </Tooltip>
       </Button>
     </div>
   </div>
