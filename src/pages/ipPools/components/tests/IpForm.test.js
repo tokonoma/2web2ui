@@ -10,6 +10,7 @@ describe('IP Form tests', () => {
   beforeEach(() => {
     props = {
       handleSubmit: jest.fn(),
+      onSubmit: jest.fn(),
       submitting: false,
       ip: {
         hostname: 'abcd.com'
@@ -65,14 +66,14 @@ describe('IP Form tests', () => {
       expect(wrapper.find('ConfirmationModal')).toMatchSnapshot();
     });
 
-    it('gets re-enabled if not disabling was not confirmed from modal', () => {
+    it('gets re-enabled if disabling was not confirmed from modal', () => {
       wrapper.setProps({ ipAutoWarmupEnabled: true });
       wrapper.find('ConfirmationModal').prop('onCancel')();
       expect(wrapper.state('warningModal')).toBe(false);
       expect(props.change).toHaveBeenCalledWith('auto_warmup_enabled', false);
     });
 
-    it('gets re-disabled if not enabling was not confirmed from modal', () => {
+    it('gets re-disabled if enabling was not confirmed from modal', () => {
       wrapper.setProps({ ipAutoWarmupEnabled: false });
       wrapper.find('ConfirmationModal').prop('onCancel')();
       expect(wrapper.state('warningModal')).toBe(false);
@@ -85,6 +86,12 @@ describe('IP Form tests', () => {
     beforeEach(() => {
       componentSelector = 'Field[name="auto_warmup_stage"]';
     });
+
+    it('renders auto_warmup_stage when ip warmup is enabled', () => {
+      wrapper.setProps({ ipAutoWarmupEnabled: true });
+      expect(wrapper.find(componentSelector)).toExist();
+    });
+
     it('is not rendered when ip warmup is not enabled', () => {
       wrapper.find('Field[name="auto_warmup_enabled"]').simulate('change');
       expect(wrapper.find(componentSelector)).not.toExist();
@@ -95,10 +102,15 @@ describe('IP Form tests', () => {
       expect(wrapper.find(componentSelector).prop('options')).toMatchSnapshot();
     });
 
-    it('enables only stage 1 after enabling', () => {
+    it('makes only stage 1 selectable from options', () => {
       wrapper.setProps({ ipAutoWarmupEnabled: true, maxStages: 3 });
       const options = wrapper.find(componentSelector).prop('options');
       expect(_.map(options, (option) => option.disabled)).toEqual([false, true, true]);
+    });
+
+    it('casts stage to integer', () => {
+      wrapper.setProps({ ipAutoWarmupEnabled: true, maxStages: 3 });
+      expect(wrapper.find(componentSelector).prop('parse')('1')).toEqual(1);
     });
   });
 
