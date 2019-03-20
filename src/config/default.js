@@ -49,7 +49,7 @@ const config = {
     allow_mailbox_verification: true,
     allow_anyone_at_verification: false,
     has_signup: false,
-    ip_warmup: true
+    ip_auto_warmup: true
   },
   heroku: {
     cookieName: 'heroku-nav-data'

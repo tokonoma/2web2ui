@@ -22,7 +22,8 @@ const stagingTenants = {
   stagingmtas: {
     apiBase: 'https://api-staging-mtas.sparkpost.com/api',
     featureFlags: {
-      allow_anyone_at_verification: true
+      allow_anyone_at_verification: true,
+      ip_auto_warmup: true
     },
     host: 'app-staging-mtas.sparkpost.com',
     smtpAuth: {
@@ -59,7 +60,8 @@ const stagingTenants = {
     featureFlags: {
       allow_anyone_at_verification: true,
       allow_default_signing_domains_for_ip_pools: true,
-      has_signup: true
+      has_signup: true,
+      ip_auto_warmup: true
     },
     host: 'app-staging.sparkpost.com',
     nextHost: 'phoenix-next-stg.sparkpost.com',

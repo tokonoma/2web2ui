@@ -16,16 +16,17 @@ export class EditIpPage extends Component {
     const { updateSendingIp, ip, showAlert } = this.props;
 
     if (!values.auto_warmup_enabled) {
-      delete values['auto_warmup_stage'];
+      delete values.auto_warmup_stage;
     }
 
     return updateSendingIp(ip.external_ip, values)
-      .then((res) => {
+      .then(() => {
         showAlert({
           type: 'success',
           message: `Updated IP ${ip.external_ip}.`
         });
-      });
+      })
+      .then((res) => this.loadDependentData());
   };
 
   loadDependentData = () => {
