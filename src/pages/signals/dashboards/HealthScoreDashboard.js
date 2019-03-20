@@ -12,6 +12,7 @@ import CurrentHealthGauge from './components/CurrentHealthGauge/CurrentHealthGau
 export class HealthScoreDashboard extends Component {
   componentDidMount() {
     this.props.getSubaccounts();
+    // TODO Lift the GET health score request to this component
   }
 
   render() {

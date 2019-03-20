@@ -998,50 +998,9 @@ Object {
       },
       Object {
         "date": "2018-01-02",
-        "health_score": null,
+        "health_score": 0.8,
         "injections": null,
-        "weights": Array [
-          Object {
-            "weight": null,
-            "weight_type": "Hard Bounces",
-            "weight_value": null,
-          },
-          Object {
-            "weight": null,
-            "weight_type": "Complaints",
-            "weight_value": null,
-          },
-          Object {
-            "weight": null,
-            "weight_type": "Other bounces",
-            "weight_value": null,
-          },
-          Object {
-            "weight": null,
-            "weight_type": "Transient Failures",
-            "weight_value": null,
-          },
-          Object {
-            "weight": null,
-            "weight_type": "Block Bounces",
-            "weight_value": null,
-          },
-          Object {
-            "weight": null,
-            "weight_type": "List Quality",
-            "weight_value": null,
-          },
-          Object {
-            "weight": null,
-            "weight_type": "eng cohorts: new, 14-day",
-            "weight_value": null,
-          },
-          Object {
-            "weight": null,
-            "weight_type": "eng cohorts: unengaged",
-            "weight_value": null,
-          },
-        ],
+        "weights": Array [],
       },
       Object {
         "WoW": null,
@@ -1209,8 +1168,8 @@ Object {
   "data": Array [
     Object {
       "WoW": -7,
-      "average_health_score": 86.2,
-      "current_DoD": -0,
+      "average_health_score": 84.1,
+      "current_DoD": 22.5,
       "current_health_score": 98,
       "current_weights": Array [],
       "history": Array [
@@ -1263,8 +1222,8 @@ Object {
         },
         Object {
           "date": "2018-01-02",
-          "health_score": null,
-          "ranking": null,
+          "health_score": 80,
+          "ranking": "good",
         },
         Object {
           "WoW": null,
@@ -1285,8 +1244,8 @@ exports[`Selectors: signals selectHealthScoreOverviewData returns data 1`] = `
 Array [
   Object {
     "WoW": -7,
-    "average_health_score": 86.2,
-    "current_DoD": -0,
+    "average_health_score": 84.1,
+    "current_DoD": 22.5,
     "current_health_score": 98,
     "current_weights": Array [],
     "history": Array [
@@ -1339,8 +1298,8 @@ Array [
       },
       Object {
         "date": "2018-01-02",
-        "health_score": null,
-        "ranking": null,
+        "health_score": 80,
+        "ranking": "good",
       },
       Object {
         "WoW": null,

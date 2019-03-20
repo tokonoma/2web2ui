@@ -310,7 +310,7 @@ export const selectHealthScoreOverviewData = createSelector(
         1
       ),
       WoW: _.isNil(WoW) ? null : roundToPlaces(WoW * 100, 0),
-      current_DoD: getDoD(_.last(filledHistory).health_score, filledHistory[filledHistory.length - 1].health_score)
+      current_DoD: getDoD(_.last(filledHistory).health_score, filledHistory[filledHistory.length - 2].health_score)
     };
   })
 );

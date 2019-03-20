@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { getCaretProps } from 'src/helpers/signals';
-import { selectHealthScoreOverviewData, getHealthScoreData } from 'src/selectors/signals';
+import { selectHealthScoreOverview } from 'src/selectors/signals';
 import { Panel, Tooltip } from '@sparkpost/matchbox';
 import { InfoOutline } from '@sparkpost/matchbox-icons';
 import { PanelLoading } from 'src/components';
@@ -83,8 +83,7 @@ export function CurrentHealthGauge({ data, loading, error }) {
 }
 
 const mapStateToProps = (state) => ({
-  ...getHealthScoreData(state),
-  data: selectHealthScoreOverviewData(state)
+  ...selectHealthScoreOverview(state)
 });
 
 export default connect(mapStateToProps, {})(CurrentHealthGauge);
