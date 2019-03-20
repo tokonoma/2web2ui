@@ -13,14 +13,14 @@ export class CreatePage extends Component {
     to the createAlert action.
   */
   handleCreate = async (values) => {
-    const { createAlert, showAlert } = this.props;
+    const { createAlert, showAlert, history } = this.props;
     const alertBody = formatActionData(values);
 
     await createAlert({
       data: _.omit(alertBody, 'id', 'subaccount', 'assignTo')
     }).then((response) => {
       showAlert({ type: 'success', message: 'Alert created' });
-      this.props.history.push(`/alerts-new/edit/${response.id}`);
+      history.push(`/alerts/edit/${response.id}`);
     });
   }
 
@@ -29,7 +29,7 @@ export class CreatePage extends Component {
       <Page
         title='Create Alert'
         breadcrumbAction={{ content: 'Back to Alerts', to: '/alerts', component: Link }}>
-        <AlertForm newAlert = {true} submitting={this.props.loading} onSubmit = {this.handleCreate}/>
+        <AlertForm newAlert={true} submitting={this.props.loading} onSubmit={this.handleCreate}/>
       </Page>
     );
   }
