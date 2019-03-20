@@ -19,25 +19,20 @@ import { configFlag } from '../../../helpers/conditions/config';
 
 export class IpForm extends Component {
   state = {
-    warningModal: false
+    confirmationModal: false
   }
 
   submitForm = () => {
-    const { formValues: values, submit } = this.props;
-
-    if (!values.auto_warmup_enabled) {
-      delete values['auto_warmup_stage'];
-    }
-
+    const { submit } = this.props;
     return submit(formName);
   };
 
-  validateForm = () => {
+  confirmAndSubmit = () => {
     const { isAutoWarmupEnabled, ip } = this.props;
     const isEnabling = isAutoWarmupEnabled && !ip.auto_warmup_enabled;
     const isDisabling = !isAutoWarmupEnabled && ip.auto_warmup_enabled;
     if (isEnabling || isDisabling) {
-      this.setState({ warningModal: true });
+      this.setState({ confirmationModal: true });
       return false;
     } else {
       return this.submitForm();
@@ -52,8 +47,8 @@ export class IpForm extends Component {
     }));
 
     const confirmationModalText = isAutoWarmupEnabled
-      ? 'Enabling Auto IP Warmup will limit the amount of traffic that is able to be sent over this IP based on the warmup stage. Additional traffic will be distributed amongst other IPs in the same pool or the designated overflow pool.'
-      : 'Disabling Auto IP Warmup will remove the volume restrictions from this IP, if this IP is not properly warmed, this can have negative consequences on deliverability and sender reputation.';
+      ? 'Enabling Auto IP Warmup will limit the amount of traffic that you can send over this IP based on the warmup stage. Remaining traffic will be distributed amongst other IPs in the same pool or the designated overflow pool.'
+      : 'Disabling Auto IP Warmup will remove the volume restrictions from this IP. If this IP is not properly warmed, this can have negative consequences on your deliverability and sender reputation.';
 
     const stageOptions = IP_WARMUP_STAGES.map((stage) => ({
       label: `${stage.name} (Volume: ${stage.volume})`,
@@ -107,18 +102,18 @@ export class IpForm extends Component {
             </Panel.Section>
           </AccessControl>
           <Panel.Section>
-            <Button primary disabled={submitting || pristine} onClick={this.validateForm}>
+            <Button primary disabled={submitting || pristine} onClick={this.confirmAndSubmit}>
               {submitting ? 'Saving' : 'Update Sending IP'}
             </Button>
           </Panel.Section>
         </form>
 
         <ConfirmationModal
-          open={this.state.warningModal}
+          open={this.state.confirmationModal}
           title={`Are you sure you want to ${isAutoWarmupEnabled ? 'enable' : 'disable'} Auto IP Warmup?`}
           content={<p>{confirmationModalText}</p>}
-          onCancel={() => this.setState({ warningModal: false })}
-          onConfirm={() => this.setState({ warningModal: false }, this.submitForm)}
+          onCancel={() => this.setState({ confirmationModal: false })}
+          onConfirm={() => this.setState({ confirmationModal: false }, this.submitForm)}
           confirmVerb={isAutoWarmupEnabled ? 'Yes, I want to turn ON Auto IP Warmup' : 'Yes, I want to turn OFF Auto IP Warmup'}
         />
       </Panel>

@@ -1,11 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`IP Form tests auto_warmup_enabled shows reconfirmation modal when ip warmup is going to disabled 1`] = `
+exports[`IP Form tests auto_warmup_enabled shows confirmation modal on submit to disable ip auto warmup 1`] = `
 <ConfirmationModal
   confirmVerb="Yes, I want to turn OFF Auto IP Warmup"
   content={
     <p>
-      Disabling Auto IP Warmup will remove the volume restrictions from this IP, if this IP is not properly warmed, this can have negative consequences on deliverability and sender reputation.
+      Disabling Auto IP Warmup will remove the volume restrictions from this IP. If this IP is not properly warmed, this can have negative consequences on your deliverability and sender reputation.
     </p>
   }
   onCancel={[Function]}
@@ -15,12 +15,12 @@ exports[`IP Form tests auto_warmup_enabled shows reconfirmation modal when ip wa
 />
 `;
 
-exports[`IP Form tests auto_warmup_enabled shows reconfirmation modal when ip warmup is going to enabled 1`] = `
+exports[`IP Form tests auto_warmup_enabled shows confirmation modal on submit to enable ip auto warmup 1`] = `
 <ConfirmationModal
   confirmVerb="Yes, I want to turn ON Auto IP Warmup"
   content={
     <p>
-      Enabling Auto IP Warmup will limit the amount of traffic that is able to be sent over this IP based on the warmup stage. Additional traffic will be distributed amongst other IPs in the same pool or the designated overflow pool.
+      Enabling Auto IP Warmup will limit the amount of traffic that you can send over this IP based on the warmup stage. Remaining traffic will be distributed amongst other IPs in the same pool or the designated overflow pool.
     </p>
   }
   onCancel={[Function]}
@@ -34,17 +34,17 @@ exports[`IP Form tests auto_warmup_stage disables stages beyond current stage 1`
 Array [
   Object {
     "disabled": false,
-    "label": "Stage 1 (200/day)",
+    "label": "Stage 1 (Volume: 200)",
     "value": 1,
   },
   Object {
     "disabled": false,
-    "label": "Stage 2 (500/day)",
+    "label": "Stage 2 (Volume: 500)",
     "value": 2,
   },
   Object {
     "disabled": true,
-    "label": "Stage 3 (1000/day)",
+    "label": "Stage 3 (Volume: 1000)",
     "value": 3,
   },
 ]
@@ -99,7 +99,6 @@ exports[`IP Form tests should render form 1`] = `
             disabled={false}
             label="Enable"
             name="auto_warmup_enabled"
-            onChange={[Function]}
             type="checkbox"
           />
         </LabelledValue>
@@ -115,17 +114,17 @@ exports[`IP Form tests should render form 1`] = `
               Array [
                 Object {
                   "disabled": false,
-                  "label": "Stage 1 (200/day)",
+                  "label": "Stage 1 (Volume: 200)",
                   "value": 1,
                 },
                 Object {
                   "disabled": true,
-                  "label": "Stage 2 (500/day)",
+                  "label": "Stage 2 (Volume: 500)",
                   "value": 2,
                 },
                 Object {
                   "disabled": true,
-                  "label": "Stage 3 (1000/day)",
+                  "label": "Stage 3 (Volume: 1000)",
                   "value": 3,
                 },
               ]
@@ -137,9 +136,9 @@ exports[`IP Form tests should render form 1`] = `
     </Connect(AccessControl)>
     <Panel.Section>
       <Button
+        onClick={[Function]}
         primary={true}
         size="default"
-        submit={true}
       >
         Update Sending IP
       </Button>
@@ -149,7 +148,7 @@ exports[`IP Form tests should render form 1`] = `
     confirmVerb="Yes, I want to turn ON Auto IP Warmup"
     content={
       <p>
-        Enabling Auto IP Warmup will limit the amount of traffic that is able to be sent over this IP based on the warmup stage. Additional traffic will be distributed amongst other IPs in the same pool or the designated overflow pool.
+        Enabling Auto IP Warmup will limit the amount of traffic that you can send over this IP based on the warmup stage. Remaining traffic will be distributed amongst other IPs in the same pool or the designated overflow pool.
       </p>
     }
     onCancel={[Function]}
