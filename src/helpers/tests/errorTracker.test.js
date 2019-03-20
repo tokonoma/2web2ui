@@ -72,16 +72,18 @@ cases('.getEnricherOrDieTryin', ({ currentWindow = {}, data = {}, state = {}}) =
   'with api error': {
     data: {
       exception: {
-        type: 'SparkpostApiError'
+        values: [
+          { type: 'SparkpostApiError' }
+        ]
       }
     }
   },
   'with chunk loading error': {
     data: {
       exception: {
-        values: [{
-          value: 'Loading chunk 4 failed.'
-        }]
+        values: [
+          { value: 'Loading chunk 4 failed.' }
+        ]
       }
     }
   },

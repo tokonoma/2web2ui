@@ -2,6 +2,11 @@
 
 exports[`.getEnricherOrDieTryin by default 1`] = `
 Object {
+  "extra": Object {
+    "isApiError": false,
+    "isChunkFailure": false,
+    "isSupportedBrowser": true,
+  },
   "level": "warning",
   "logger": "test",
   "request": undefined,
@@ -18,7 +23,16 @@ Object {
 exports[`.getEnricherOrDieTryin with api error 1`] = `
 Object {
   "exception": Object {
-    "type": "SparkpostApiError",
+    "values": Array [
+      Object {
+        "type": "SparkpostApiError",
+      },
+    ],
+  },
+  "extra": Object {
+    "isApiError": true,
+    "isChunkFailure": false,
+    "isSupportedBrowser": true,
   },
   "level": "warning",
   "logger": "test",
@@ -42,6 +56,11 @@ Object {
       },
     ],
   },
+  "extra": Object {
+    "isApiError": false,
+    "isChunkFailure": true,
+    "isSupportedBrowser": true,
+  },
   "level": "warning",
   "logger": "test",
   "request": undefined,
@@ -57,6 +76,11 @@ Object {
 
 exports[`.getEnricherOrDieTryin with current user 1`] = `
 Object {
+  "extra": Object {
+    "isApiError": false,
+    "isChunkFailure": false,
+    "isSupportedBrowser": true,
+  },
   "level": "warning",
   "logger": "test",
   "request": undefined,
@@ -76,6 +100,11 @@ Object {
 
 exports[`.getEnricherOrDieTryin with document language 1`] = `
 Object {
+  "extra": Object {
+    "isApiError": false,
+    "isChunkFailure": false,
+    "isSupportedBrowser": true,
+  },
   "level": "warning",
   "logger": "test",
   "request": undefined,
@@ -91,6 +120,11 @@ Object {
 
 exports[`.getEnricherOrDieTryin with email verification token 1`] = `
 Object {
+  "extra": Object {
+    "isApiError": false,
+    "isChunkFailure": false,
+    "isSupportedBrowser": true,
+  },
   "level": "warning",
   "logger": "test",
   "request": Object {
@@ -123,6 +157,11 @@ Object {
       },
     ],
   },
+  "extra": Object {
+    "isApiError": false,
+    "isChunkFailure": false,
+    "isSupportedBrowser": true,
+  },
   "level": "error",
   "logger": "test",
   "request": undefined,
@@ -138,6 +177,11 @@ Object {
 
 exports[`.getEnricherOrDieTryin with navigator language 1`] = `
 Object {
+  "extra": Object {
+    "isApiError": false,
+    "isChunkFailure": false,
+    "isSupportedBrowser": true,
+  },
   "level": "warning",
   "logger": "test",
   "request": undefined,
@@ -153,6 +197,11 @@ Object {
 
 exports[`.getEnricherOrDieTryin with other request fields 1`] = `
 Object {
+  "extra": Object {
+    "isApiError": false,
+    "isChunkFailure": false,
+    "isSupportedBrowser": true,
+  },
   "level": "warning",
   "logger": "test",
   "request": Object {
@@ -174,6 +223,11 @@ Object {
 
 exports[`.getEnricherOrDieTryin with password reset token 1`] = `
 Object {
+  "extra": Object {
+    "isApiError": false,
+    "isChunkFailure": false,
+    "isSupportedBrowser": true,
+  },
   "level": "warning",
   "logger": "test",
   "request": Object {
@@ -192,6 +246,11 @@ Object {
 
 exports[`.getEnricherOrDieTryin with referer header 1`] = `
 Object {
+  "extra": Object {
+    "isApiError": false,
+    "isChunkFailure": false,
+    "isSupportedBrowser": true,
+  },
   "level": "warning",
   "logger": "test",
   "request": Object {
@@ -213,6 +272,11 @@ Object {
 
 exports[`.getEnricherOrDieTryin with tags 1`] = `
 Object {
+  "extra": Object {
+    "isApiError": false,
+    "isChunkFailure": false,
+    "isSupportedBrowser": true,
+  },
   "level": "warning",
   "logger": "test",
   "request": undefined,
@@ -229,6 +293,11 @@ Object {
 
 exports[`.getEnricherOrDieTryin without headers 1`] = `
 Object {
+  "extra": Object {
+    "isApiError": false,
+    "isChunkFailure": false,
+    "isSupportedBrowser": true,
+  },
   "level": "warning",
   "logger": "test",
   "request": Object {
@@ -247,6 +316,11 @@ Object {
 
 exports[`.getEnricherOrDieTryin without request object 1`] = `
 Object {
+  "extra": Object {
+    "isApiError": false,
+    "isChunkFailure": false,
+    "isSupportedBrowser": true,
+  },
   "level": "warning",
   "logger": "test",
   "otherField": "blue",

@@ -108,6 +108,12 @@ export function getEnricherOrDieTryin(store, currentWindow) {
 
     return {
       ...data,
+      extra: { // extra data that doesn't need to be searchable
+        ...data.extra,
+        isApiError: apiError,
+        isChunkFailure: chunkFailure,
+        isSupportedBrowser
+      },
       request,
       level: !fromOurBundle || apiError || chunkFailure || !isSupportedBrowser ? 'warning' : 'error',
       tags: { // all tags can be easily searched and sent in Slack notifications
