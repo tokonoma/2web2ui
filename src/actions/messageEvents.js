@@ -34,6 +34,10 @@ export function getMessageEventsCSV(options = {}) {
   });
 }
 
+export function clearCSV() {
+  return (dispatch) => dispatch({ type: 'RESET_MESSAGE_EVENTS_CSV' });
+}
+
 function getParams(options) {
   const { dateOptions, perPage, ...rest } = options;
   const { from, to } = dateOptions;

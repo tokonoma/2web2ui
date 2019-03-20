@@ -40,7 +40,7 @@ export default (state = initialState, { type, payload, meta, extra }) => {
       const hasMorePagesAvailable = Boolean(next);
       const linkByPage = [currentUrlParams, nextUrlParams ];
       const cachedResultsByPage = [ payload ];
-      return { ...state, eventsCSV: [], linkByPage, totalCount, cachedResultsByPage, loading: false, events: payload, hasMorePagesAvailable };
+      return { ...state, linkByPage, totalCount, cachedResultsByPage, loading: false, events: payload, hasMorePagesAvailable };
     }
 
     case 'GET_MESSAGE_EVENTS_FAIL':
@@ -50,14 +50,16 @@ export default (state = initialState, { type, payload, meta, extra }) => {
       // Save as CSV
 
     case 'GET_MESSAGE_EVENTS_CSV_PENDING':
-      //need to set eventsCSV to empty array so that clicking the save as csv button multiple times opens multiple save windows
-      return { ...state, eventsCSVLoading: true, eventsCSV: [], error: null };
+      return { ...state, eventsCSVLoading: true, error: null };
 
     case 'GET_MESSAGE_EVENTS_CSV_SUCCESS':
       return { ...state, eventsCSVLoading: false, eventsCSV: payload };
 
     case 'GET_MESSAGE_EVENTS_CSV_FAIL':
-      return { ...state, loading: false, error: payload };
+      return { ...state, eventsCSVLoading: false, error: payload };
+
+    case 'RESET_MESSAGE_EVENTS_CSV':
+      return { ...state, eventsCSV: []};
 
 
       // Changing Page

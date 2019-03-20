@@ -100,7 +100,7 @@ exports[`Page: Message Events tests should render page correctly 1`] = `
       totalCount={100}
     />
     <div
-      className="PerPageButtons"
+      className="RightAlignedButtons"
     >
       <PerPageButtons
         data={

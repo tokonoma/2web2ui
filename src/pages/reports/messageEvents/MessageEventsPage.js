@@ -7,7 +7,7 @@ import { PanelLoading, TableCollection, ApiErrorBanner, Empty } from 'src/compon
 import DisplayDate from './components/DisplayDate';
 import MessageEventsSearch from './components/MessageEventsSearch';
 import ViewDetailsButton from './components/ViewDetailsButton';
-import { getMessageEvents, changePage, getMessageEventsCSV } from 'src/actions/messageEvents';
+import { getMessageEvents, changePage, getMessageEventsCSV, clearCSV } from 'src/actions/messageEvents';
 import { selectMessageEvents } from 'src/selectors/messageEvents';
 import { formatToCsv, download } from 'src/helpers/downloading.js';
 import { DEFAULT_PER_PAGE_BUTTONS } from 'src/constants';
@@ -48,10 +48,11 @@ export class MessageEventsPage extends Component {
   }
 
   downloadCSV = () => {
-    const { eventsCSV } = this.props;
+    const { eventsCSV, clearCSV } = this.props;
     const url = formatToCsv({ data: eventsCSV, returnBlob: true });
     const now = Math.floor(Date.now() / 1000);
     download({ name: `sparkpost-csv-${now}.csv`, url });
+    clearCSV();
   };
 
   handlePageChange = (currentPage) => {
@@ -139,7 +140,7 @@ export class MessageEventsPage extends Component {
             perPage={perPage}
             totalCount={totalCount}
           />
-          <div className={styles.PerPageButtons}>
+          <div className={styles.RightAlignedButtons}>
             <PerPageButtons
               totalCount={totalCount}
               data={events}
@@ -188,4 +189,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { getMessageEvents, getMessageEventsCSV, changePage })(MessageEventsPage);
+export default connect(mapStateToProps, { getMessageEvents, getMessageEventsCSV, changePage, clearCSV })(MessageEventsPage);

@@ -16,6 +16,7 @@ describe('Page: Message Events tests', () => {
     getMessageEvents: jest.fn(() => []),
     getMessageEventsCSV: jest.fn(() => []),
     changePage: jest.fn(() => []),
+    clearCSV: jest.fn(),
     refreshReportOptions: jest.fn(),
     events: [
       {
