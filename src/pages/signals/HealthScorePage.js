@@ -29,6 +29,7 @@ export class HealthScorePage extends Component {
   }
 
   componentDidUpdate(prevProps) {
+    //console.log('this.props healthscorepage', this.props);
     const { data, selectedDate } = this.props;
 
     const dataSetChanged = prevProps.data !== data;
@@ -55,8 +56,8 @@ export class HealthScorePage extends Component {
 
   renderContent = () => {
     const { data = [], handleDateSelect, loading, gap, empty, error, selectedDate } = this.props;
+    //console.log('props', this.props);
     const { selectedComponent } = this.state;
-
     const selectedWeights = _.get(_.find(data, ['date', selectedDate]), 'weights', []);
     const selectedWeightsAreEmpty = selectedWeights.every(({ weight }) => weight === null);
     const dataForSelectedWeight = data.map(({ date, weights }) => ({ date, ..._.find(weights, ['weight_type', selectedComponent]) }));
@@ -83,17 +84,22 @@ export class HealthScorePage extends Component {
       <Grid>
         <Grid.Column sm={12} md={7}>
           <Panel sectioned>
-            <ChartHeader title='Health Score' tooltipContent={HEALTH_SCORE_INFO} />
+            <ChartHeader title='Health Score - 90 Days' tooltipContent={HEALTH_SCORE_INFO} />
             {panelContent || (
               <Fragment>
                 <BarChart
                   gap={gap}
                   onClick={handleDateSelect}
+                  disableHover={false}
                   selected={selectedDate}
                   timeSeries={data}
                   tooltipContent={({ payload = {}}) => (
                     <TooltipMetric label='Health Score' value={`${roundToPlaces(payload.health_score * 100, 1)}`} />
                   )}
+                  yAxisRefLines={[
+                    { y: 0.80, stroke: 'green', strokeWidth: 2 },
+                    { y: 0.55, stroke: 'red', strokeWidth: 2 }
+                  ]}
                   yKey='health_score'
                   yAxisProps={{
                     tickFormatter: (tick) => tick * 100

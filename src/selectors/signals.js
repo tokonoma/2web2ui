@@ -115,7 +115,7 @@ export const selectEngagementRateByCohortDetails = createSelector(
       const reKeyed = _.keys(values).reduce((acc, key) => ({
         ...acc, [key.replace(/_engagement$/, '')]: values[key]
       }), {});
-      return { date, ...reKeyed }
+      return { date, ...reKeyed };
     });
 
     const filledHistory = fillByDate({
@@ -151,6 +151,7 @@ export const selectEngagementRateByCohortDetails = createSelector(
 export const selectHealthScoreDetails = createSelector(
   [getHealthScoreData, selectSpamHitsDetails, getFacetFromParams, getFacetIdFromParams, selectSubaccountIdFromQuery, getOptions],
   ({ loading, error, data }, { details: spamDetails }, facet, facetId, subaccountId, { now, relativeRange }) => {
+    //console.log('selectHealthScoreDetails data', data);
     const match = data.find((item) => String(item[facet]) === facetId) || {};
 
     const history = _.get(match, 'history', []);
@@ -179,10 +180,10 @@ export const selectHealthScoreDetails = createSelector(
       relativeRange
     });
 
-    // Merge in injections
+    // Merge in injections and rankings
     const mergedHistory = _.map(filledHistory, (healthData) => {
       const spamData = _.find(spamDetails.data, ['date', healthData.date]);
-      return { injections: spamData.injections, ...healthData };
+      return { injections: spamData.injections, ranking: rankHealthScore(roundToPlaces(healthData.health_score * 100, 1)), ...healthData };
     });
 
     const isEmpty = mergedHistory.every((values) => values.health_score === null);
@@ -276,6 +277,27 @@ export const selectEngagementRecencyOverview = createSelector(
   })
 );
 
+function rankHealthScore(value) {
+  let rank = '';
+
+  switch (true) {
+    case (value < 55):
+      rank = 'danger';
+      break;
+    case (value < 80):
+      rank = 'warning';
+      break;
+    case (value >= 80):
+      rank = 'good';
+      break;
+    default:
+      rank = '';
+      break;
+  }
+
+  return rank;
+}
+
 export const selectHealthScoreOverviewData = createSelector(
   getHealthScoreData, getOptions,
   ({ data }, { now, relativeRange }) => data.map(({ current_health_score, WoW, ...rowOfData }) => {
@@ -287,7 +309,7 @@ export const selectHealthScoreOverviewData = createSelector(
         ...values,
         date,
         health_score: roundedHealthScore,
-        ranking: roundedHealthScore < 75 ? 'bad' : 'good'
+        ranking: rankHealthScore(roundedHealthScore)
       };
     });
     const filledHistory = fillByDate({

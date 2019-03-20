@@ -1,0 +1,155 @@
+import React, { Component, Fragment } from 'react';
+import { connect } from 'react-redux';
+import { list as getSubaccounts } from 'src/actions/subaccounts';
+import { Grid, Panel } from '@sparkpost/matchbox';
+import Page from '../components/SignalsPage';
+import HealthScoreOverview from '../containers/HealthScoreOverviewContainer';
+import FacetFilter from '../components/filters/FacetFilter';
+import DateFilter from '../components/filters/DateFilter';
+import SubaccountFilter from '../components/filters/SubaccountFilter';
+import CurrentHealthGauge from './components/CurrentHealthGauge';
+
+export class HealthScoreDashboard extends Component {
+  componentDidMount() {
+    this.props.getSubaccounts();
+  }
+
+  render() {
+    const { subaccounts } = this.props;
+
+    return (
+      <Page
+        title='Health Score'
+        primaryArea={<DateFilter />}
+      >
+        <Grid>
+          <Grid.Column xs={4}>
+            <CurrentHealthGauge />
+          </Grid.Column>
+          <Grid.Column xs={8}>
+            <Panel sectioned></Panel>
+          </Grid.Column>
+        </Grid>
+        <div style={{ marginBottom: '1rem', marginTop: '1.5rem', textAlign: 'right' }}>
+          <SubaccountFilter />
+          <FacetFilter />
+        </div>
+        <HealthScoreOverview subaccounts={subaccounts} />
+      </Page>
+    );
+  }
+}
+
+const mapStateToProps = (state, props) => ({
+  subaccounts: state.subaccounts.list
+});
+
+const mapDispatchToProps = {
+  getSubaccounts
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(HealthScoreDashboard);```
+`/dashboards/components/index.js`
+```export { default as EngagementRecencyDashboard } from './EngagementRecencyDashboard';
+export { default as HealthScoreDashboard } from './HealthScoreDashboard';
+export { default as SpamTrapDashboard } from './SpamTrapDashboard';```
+`signals/index.js`
+```import EngagementRateByCohortPage from './EngagementRateByCohortPage';
+import EngagementRecencyPage from './EngagementRecencyPage';
+import HealthScorePage from './HealthScorePage';
+import OverviewPage from './OverviewPage';
+import SpamTrapPage from './SpamTrapPage';
+import * as dashboards from './dashboards';
+
+export default {
+  EngagementRateByCohortPage,
+  EngagementRecencyPage,
+  HealthScorePage,
+  OverviewPage,
+  SpamTrapPage,
+  ...dashboards
+};```
+`CurrentHealthGuage.module.scss`
+```@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.Content {
+  width: 100%;
+  height: 380px;
+}
+
+.Header {
+  font-weight: 500;
+  font-size: rem(17);
+}
+
+.GaugeSvgContainer {
+  position: relative;
+}
+
+.Red { fill: #FF594D; }
+.Yellow { fill: #FFDA00; }
+.Green { fill: #2CC995; }
+
+.NeedleContainer {
+  position: absolute;
+  left: 50%;
+  right: 0;
+  transform: translate(-50%, 0);
+}
+
+.NeedleSvg {
+  position: relative;
+}
+
+.Needle {
+  fill: color(gray, 2);
+  transform-origin: 50px 64px;
+  transition: 0.8s cubic-bezier(0.1,0,.2,1.15);
+}
+
+.Text {
+  font-size: 5px;
+  font-weight: 400;
+  fill: color(gray, 4)
+}
+
+.Tick {
+  stroke: color(gray, 6);
+  stroke-dasharray: 3 4;
+  stroke-width: 2px;
+}
+
+.Score {
+  margin-top: rem(-65);
+  margin-right: -3px; // Nit pick
+  font-size: rem(45);
+  font-weight: 400;
+  text-align: center;
+}
+
+//
+.Description {
+  display: flex;
+  width: 90%;
+  margin: 0 auto;
+  align-items: center;
+  justify-content: center;
+}
+
+.DescriptionIcon {
+  flex: 0 0 0;
+  min-width: 48px;
+}
+
+.DescriptionContent {
+  flex: 1 0 0;
+  margin: 0;
+  max-width: 180px;
+  font-size: rem(13);
+  line-height: 1.4em;
+}
+
+.TooltipIcon {
+  color: color(blue);
+  margin-top: -0.1em;
+}

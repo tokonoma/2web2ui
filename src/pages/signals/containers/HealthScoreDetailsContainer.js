@@ -8,6 +8,7 @@ import { getDisplayName } from 'src/helpers/hoc';
 
 export class WithHealthScoreDetails extends Component {
   componentDidMount() {
+    //console.log('triggered');
     this.getData();
   }
 

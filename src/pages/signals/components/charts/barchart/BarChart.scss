@@ -2,7 +2,10 @@
   .recharts-bar-rectangle path {
     transition: 0.15s;
   }
-
+  
+  .recharts-layer.recharts-bar-rectangle .recharts-rectangle:hover {
+    fill: orange
+  }
   .recharts-text.recharts-cartesian-axis-tick-value {
     font-size: 11px;
   }

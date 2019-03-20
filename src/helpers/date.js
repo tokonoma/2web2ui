@@ -156,7 +156,9 @@ export const parseTime = (str) => moment(str, FORMATS.INPUT_TIMES, true);
 export const parseDatetime = (...args) => moment(args.join(' '), FORMATS.INPUT_DATETIMES, true);
 
 export const fillByDate = ({ dataSet, fill = {}, now, relativeRange } = {}) => {
+  //console.log('now', now);
   const { from, to } = getRelativeDates(relativeRange, { now });
+  //console.log('dataSet', dataSet);
   const orderedData = dataSet.sort((a, b) => new Date(a.date) - new Date(b.date));
   let filledDataSet = [];
 

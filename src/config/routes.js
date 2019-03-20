@@ -239,7 +239,6 @@ const routes = [
   {
     path: '/signals/health-score',
     component: signals.HealthScoreDashboard,
-    condition: all(hasGrants('signals/manage'), hasUiOption('feature_signals_v2')),
     layout: App,
     title: 'Signals',
     supportDocSearch: 'signals'

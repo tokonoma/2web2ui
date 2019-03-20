@@ -39,6 +39,7 @@ const SparklineDataCell = ({ data, dataKey, label, onClick = () => {}, relative 
         if (value === null) {
           return null;
         }
+        //console.log('payload', payload);
 
         return (
           <TooltipMetric
