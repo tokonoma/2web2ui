@@ -148,6 +148,7 @@ Object {
     },
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
+      "ip_auto_warmup": true,
     },
     "sentry": Object {
       "projectId": 237612,
@@ -219,6 +220,7 @@ Object {
       "allow_anyone_at_verification": true,
       "allow_default_signing_domains_for_ip_pools": true,
       "has_signup": true,
+      "ip_auto_warmup": true,
     },
     "gtmId": "GTM-5BCG3R",
     "sentry": Object {
@@ -1821,6 +1823,7 @@ Object {
       "allow_anyone_at_verification": true,
       "allow_default_signing_domains_for_ip_pools": true,
       "has_signup": true,
+      "ip_auto_warmup": true,
     },
     "gtmId": "GTM-5BCG3R",
     "sentry": Object {
@@ -1949,6 +1952,7 @@ Object {
       "allow_anyone_at_verification": true,
       "allow_default_signing_domains_for_ip_pools": true,
       "has_signup": true,
+      "ip_auto_warmup": true,
     },
     "gtmId": "GTM-5BCG3R",
     "sentry": Object {
