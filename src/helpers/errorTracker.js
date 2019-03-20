@@ -104,7 +104,7 @@ export function getEnricherOrDieTryin(store, currentWindow) {
     const request = filterRequest(data.request);
 
     /*global SUPPORTED_BROWSERS*/
-    const isSupportedBrowser = browser.satisfies(SUPPORTED_BROWSERS); //Refer to docs/browser-support-sentry-issue.md for more info
+    const isSupportedBrowser = Boolean(browser.satisfies(SUPPORTED_BROWSERS)); //Refer to docs/browser-support-sentry-issue.md for more info
 
     return {
       ...data,
