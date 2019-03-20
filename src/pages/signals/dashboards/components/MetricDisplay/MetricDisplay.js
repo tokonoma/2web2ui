@@ -1,5 +1,5 @@
 import React from 'react';
-// import Proptypes from 'prop-types'; TODO
+import PropTypes from 'prop-types';
 import { ArrowDropDown, ArrowDropUp } from '@sparkpost/matchbox-icons';
 import styles from './MetricDisplay.module.scss';
 
@@ -25,5 +25,12 @@ function MetricDisplay(props) {
     </div>
   );
 }
+
+MetricDisplay.propTypes = {
+  label: PropTypes.node.isRequired,
+  value: PropTypes.node.isRequired,
+  direction: PropTypes.oneOf(['up', 'down']),
+  color: PropTypes.string
+};
 
 export default MetricDisplay;
