@@ -1,7 +1,7 @@
 /*eslint-disable */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { ResponsiveContainer, ComposedChart, ReferenceLine, Bar, Tooltip, XAxis, YAxis, CartesianGrid, Cell } from 'recharts';
+import { ResponsiveContainer, ComposedChart, ReferenceLine, Bar, Tooltip, XAxis, YAxis, CartesianGrid, Cell, Rectangle } from 'recharts';
 import TooltipWrapper from '../tooltip/Tooltip';
 import './BarChart.scss';
 import _ from 'lodash';
@@ -23,33 +23,21 @@ import healthScoreThresholds from '../../../constants/healthScoreThresholds';
  */
 class BarChart extends Component {
   renderBar = ({ yKey, selected, xKey, fill, timeSeries }) => {
-    console.log('timeSeries', timeSeries);
+    //console.log('timeSeries', timeSeries);
     return <Bar
-      cursor='pointer'
+      cursor={healthScoreThresholds['warning'].color}
       stackId='stack'
       key={yKey}
       dataKey={yKey}
       onClick={this.props.onClick}
+      onMouseOver={(props) => <Rectangle {...props}
+        style={{fill: healthScoreThresholds[props.ranking].color}}
+      />}
       fill={fill}
       isAnimationActive={false}
       minPointSize={1}
+      shape={(props) => <Rectangle {...props} fill={(props.ranking && props.date === selected) ? healthScoreThresholds[props.ranking].color: fill} />}
     >
-      {timeSeries.map((entry) => {
-        let dynamicHover; let dynamicSelected;
-        if (entry[yKey]) {
-          dynamicHover = healthScoreThresholds[entry.ranking].color;
-          dynamicSelected = (entry[xKey] === selected) ? healthScoreThresholds[entry.ranking].color : fill;
-          console.log('entry', entry);
-          console.log('healthScoreThresholds[entry.ranking]', healthScoreThresholds[entry.ranking]);
-          console.log('dynamicSelected', dynamicSelected);
-          console.log('dynamicHover', dynamicHover);
-        }
-        return (
-          <Cell
-            cursor={dynamicHover}
-            fill={dynamicSelected}
-          />);
-      })}
     </Bar>;
   }
 
