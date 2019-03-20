@@ -34,7 +34,7 @@ describe('Template Form', () => {
     expect(wrapper.find(SubaccountSection)).toExist();
   });
 
-  it('should not render subaccount fields if has subaccounts', () => {
+  it('should not render subaccount fields if account has no subaccounts', () => {
     wrapper.setProps({ hasSubaccounts: false });
     expect(wrapper.find(SubaccountSection)).not.toExist();
   });

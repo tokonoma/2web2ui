@@ -30,6 +30,10 @@ describe('EditPage', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  it('renders subaccount section if account has subaccounts and can view subaccount', () => {
+    expect(subject().find(SubaccountSection)).toExist();
+  });
+
   it('renders without subaccount section when account has no subaccounts', () => {
     const wrapper = subject({ hasSubaccounts: false });
     expect(wrapper.find(SubaccountSection)).not.toExist();
