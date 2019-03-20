@@ -7,7 +7,7 @@ import { get as getInvoice } from 'src/actions/invoices';
 import { showAlert } from 'src/actions/globalAlert';
 import _ from 'lodash';
 import { formatCurrency } from 'src/helpers/units';
-import { download } from 'src/helpers/downloading.js';
+import { download } from 'src/helpers/downloading';
 
 
 const columns = [

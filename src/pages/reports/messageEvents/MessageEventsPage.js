@@ -9,7 +9,7 @@ import MessageEventsSearch from './components/MessageEventsSearch';
 import ViewDetailsButton from './components/ViewDetailsButton';
 import { getMessageEvents, changePage, getMessageEventsCSV, clearCSV } from 'src/actions/messageEvents';
 import { selectMessageEvents } from 'src/selectors/messageEvents';
-import { formatToCsv, download } from 'src/helpers/downloading.js';
+import { formatToCsv, download } from 'src/helpers/downloading';
 import { DEFAULT_PER_PAGE_BUTTONS } from 'src/constants';
 import CursorPaging from './components/CursorPaging';
 import _ from 'lodash';

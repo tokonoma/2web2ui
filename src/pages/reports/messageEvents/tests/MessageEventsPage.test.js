@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { MessageEventsPage } from '../MessageEventsPage';
 import { CursorPaging } from '../components/CursorPaging';
-import * as downloading from 'src/helpers/downloading.js';
+import * as downloading from 'src/helpers/downloading';
 
 
 let wrapper;

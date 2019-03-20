@@ -1,6 +1,6 @@
 import { Button } from '@sparkpost/matchbox';
 import React from 'react';
-import { formatToCsv } from 'src/helpers/downloading.js';
+import { formatToCsv } from 'src/helpers/downloading';
 
 const SaveCSVButton = ({ data, saveCsv }) => {
   const now = Math.floor(Date.now() / 1000);
