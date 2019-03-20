@@ -34,28 +34,18 @@ exports[`IP Form tests auto_warmup_stage disables stages beyond current stage 1`
 Array [
   Object {
     "disabled": false,
-    "label": "Stage 1",
+    "label": "Stage 1 (200/day)",
     "value": 1,
   },
   Object {
     "disabled": false,
-    "label": "Stage 2",
+    "label": "Stage 2 (500/day)",
     "value": 2,
   },
   Object {
     "disabled": true,
-    "label": "Stage 3",
+    "label": "Stage 3 (1000/day)",
     "value": 3,
-  },
-  Object {
-    "disabled": true,
-    "label": "Stage 4",
-    "value": 4,
-  },
-  Object {
-    "disabled": true,
-    "label": "Stage 5",
-    "value": 5,
   },
 ]
 `;
@@ -86,35 +76,65 @@ exports[`IP Form tests should render form 1`] = `
         />
       </LabelledValue>
     </Panel.Section>
-    <Panel.Section
-      actions={
-        Array [
-          Object {
-            "color": "orange",
-            "content": <UnstyledLink
-              external={true}
-              to="https://www.sparkpost.com/docs/deliverability/ip-warm-up-overview/"
-            >
-              What is Auto Warmup?
-            </UnstyledLink>,
-            "onClick": [Function],
-          },
-        ]
-      }
+    <Connect(AccessControl)
+      condition={[Function]}
     >
-      <LabelledValue
-        label="Auto IP Warmup"
+      <Panel.Section
+        actions={
+          Array [
+            Object {
+              "color": "orange",
+              "content": "What is Auto Warmup?",
+              "external": true,
+              "to": "https://www.sparkpost.com/docs/deliverability/ip-warm-up-overview/",
+            },
+          ]
+        }
       >
-        <Field
-          component={[Function]}
-          disabled={false}
-          label="Enable"
-          name="auto_warmup_enabled"
-          onChange={[Function]}
-          type="checkbox"
-        />
-      </LabelledValue>
-    </Panel.Section>
+        <LabelledValue
+          label="Auto IP Warmup"
+        >
+          <Field
+            component={[Function]}
+            disabled={false}
+            label="Enable"
+            name="auto_warmup_enabled"
+            onChange={[Function]}
+            type="checkbox"
+          />
+        </LabelledValue>
+        <LabelledValue
+          label="Warmup Stage"
+        >
+          <Field
+            component={[Function]}
+            disabled={false}
+            helpText="You can select an previous stage but can not select an advanced stage."
+            name="auto_warmup_stage"
+            options={
+              Array [
+                Object {
+                  "disabled": false,
+                  "label": "Stage 1 (200/day)",
+                  "value": 1,
+                },
+                Object {
+                  "disabled": true,
+                  "label": "Stage 2 (500/day)",
+                  "value": 2,
+                },
+                Object {
+                  "disabled": true,
+                  "label": "Stage 3 (1000/day)",
+                  "value": 3,
+                },
+              ]
+            }
+            parse={[Function]}
+          />
+        </LabelledValue>
+      </Panel.Section>
+    </Connect(AccessControl)>
     <Panel.Section>
       <Button
         primary={true}
@@ -126,16 +146,16 @@ exports[`IP Form tests should render form 1`] = `
     </Panel.Section>
   </form>
   <ConfirmationModal
-    confirmVerb="Yes, I want to turn OFF Auto IP Warmup"
+    confirmVerb="Yes, I want to turn ON Auto IP Warmup"
     content={
       <p>
-        Disabling Auto IP Warmup will remove the volume restrictions from this IP, if this IP is not properly warmed, this can have negative consequences on deliverability and sender reputation.
+        Enabling Auto IP Warmup will limit the amount of traffic that is able to be sent over this IP based on the warmup stage. Additional traffic will be distributed amongst other IPs in the same pool or the designated overflow pool.
       </p>
     }
     onCancel={[Function]}
     onConfirm={[Function]}
     open={false}
-    title="Are you sure you want to disable Auto IP Warmup?"
+    title="Are you sure you want to enable Auto IP Warmup?"
   />
 </Panel>
 `;

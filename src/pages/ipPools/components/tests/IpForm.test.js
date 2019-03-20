@@ -2,12 +2,19 @@ import { shallow } from 'enzyme';
 import React from 'react';
 import _ from 'lodash';
 import { IpForm } from '../IpForm';
+import * as constants from '../../constants';
 
 describe('IP Form tests', () => {
   let props;
   let wrapper;
 
   beforeEach(() => {
+    constants.IP_WARMUP_STAGES = [
+      { name: 'Stage 1', id: 1, volume: 200 },
+      { name: 'Stage 2', id: 2, volume: 500 },
+      { name: 'Stage 3', id: 3, volume: 1000 }
+    ];
+
     props = {
       handleSubmit: jest.fn(),
       onSubmit: jest.fn(),
@@ -17,7 +24,8 @@ describe('IP Form tests', () => {
       },
       pools: [],
       pool: null,
-      change: jest.fn()
+      change: jest.fn(),
+      ipAutoWarmupEnabled: true
     };
 
     wrapper = shallow(<IpForm {...props} />);
@@ -92,24 +100,24 @@ describe('IP Form tests', () => {
       expect(wrapper.find(componentSelector)).toExist();
     });
 
-    it('is not rendered when ip warmup is not enabled', () => {
-      wrapper.find('Field[name="auto_warmup_enabled"]').simulate('change');
+    it('does not render when ip warmup is not enabled', () => {
+      wrapper.setProps({ ipAutoWarmupEnabled: false });
       expect(wrapper.find(componentSelector)).not.toExist();
     });
 
     it('disables stages beyond current stage', () => {
-      wrapper.setProps({ ipAutoWarmupEnabled: true, ip: { auto_warmup_stage: 2 }, maxStages: 5 });
+      wrapper.setProps({ ipAutoWarmupEnabled: true, ip: { auto_warmup_stage: 2 }});
       expect(wrapper.find(componentSelector).prop('options')).toMatchSnapshot();
     });
 
     it('makes only stage 1 selectable from options', () => {
-      wrapper.setProps({ ipAutoWarmupEnabled: true, maxStages: 3 });
+      wrapper.setProps({ ipAutoWarmupEnabled: true });
       const options = wrapper.find(componentSelector).prop('options');
       expect(_.map(options, (option) => option.disabled)).toEqual([false, true, true]);
     });
 
     it('casts stage to integer', () => {
-      wrapper.setProps({ ipAutoWarmupEnabled: true, maxStages: 3 });
+      wrapper.setProps({ ipAutoWarmupEnabled: true });
       expect(wrapper.find(componentSelector).prop('parse')('1')).toEqual(1);
     });
   });
