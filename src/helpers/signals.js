@@ -35,21 +35,21 @@ export const getDoD = (current, before) => {
     return null;
   }
 
-  return -((current - before) / current * 100);
+  return ((current - before) / before * 100);
 };
 
-export const getCaretProps = (value) => {
+export const getCaretProps = (value, reverse) => {
   let direction;
   let color;
 
   if (value > 0) {
     direction = 'up';
-    color = thresholds.good.color;
+    color = !reverse ? thresholds.good.color : thresholds.danger.color;
   }
 
   if (value < 0) {
     direction = 'down';
-    color = thresholds.danger.color;
+    color = !reverse ? thresholds.danger.color : thresholds.good.color;
   }
 
   return { direction, color };
