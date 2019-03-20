@@ -36,7 +36,7 @@ class BarChart extends Component {
       fill={fill}
       isAnimationActive={false}
       minPointSize={1}
-      shape={(props) => <Rectangle {...props} fill={(props.ranking && props.date === selected) ? healthScoreThresholds[props.ranking].color: fill} />}
+      shape={(props) => props.ranking && (<Rectangle {...props} fill={(props.date === selected) ? healthScoreThresholds[props.ranking].color: fill} />)}
     >
     </Bar>;
   }
