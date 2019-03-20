@@ -89,11 +89,16 @@ export class HealthScorePage extends Component {
                 <BarChart
                   gap={gap}
                   onClick={handleDateSelect}
+                  disableHover={false}
                   selected={selectedDate}
                   timeSeries={data}
                   tooltipContent={({ payload = {}}) => (
                     <TooltipMetric label='Health Score' value={`${roundToPlaces(payload.health_score * 100, 1)}`} />
                   )}
+                  yAxisRefLines={[
+                    { y: 0.80, stroke: 'green', strokeWidth: 2 },
+                    { y: 0.55, stroke: 'red', strokeWidth: 2 }
+                  ]}
                   yKey='health_score'
                   yAxisProps={{
                     tickFormatter: (tick) => tick * 100
