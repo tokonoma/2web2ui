@@ -1,5 +1,25 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`renders columns correctly for subaccount reporting users 1`] = `
+Array [
+  Object {
+    "label": "Name",
+    "sortKey": "name",
+    "width": "28%",
+  },
+  Object {
+    "label": "Status",
+    "sortKey": [Function],
+    "width": "18%",
+  },
+  Object {
+    "label": "Last Updated",
+    "sortKey": "last_update_time",
+  },
+  null,
+]
+`;
+
 exports[`renders columns correctly with subaccounts 1`] = `
 Array [
   Object {

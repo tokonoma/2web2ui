@@ -15,6 +15,7 @@ function mapStateToProps(state) {
     count: templates.length,
     templates,
     hasSubaccounts: hasSubaccounts(state),
+    userAccessLevel: state.currentUser.access_level,
     loading: state.templates.listLoading,
     error: state.templates.listError,
     canModify

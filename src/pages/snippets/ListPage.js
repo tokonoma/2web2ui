@@ -5,7 +5,7 @@ import { Templates } from 'src/components/images';
 import Loading from 'src/components/loading';
 import PageLink from 'src/components/pageLink';
 import SnippetCollection from './components/SnippetCollection';
-
+import { ROLES } from 'src/constants';
 export default class ListPage extends React.Component {
   componentDidMount() {
     this.props.getSnippets();
@@ -23,11 +23,12 @@ export default class ListPage extends React.Component {
   }
 
   renderCollection() {
-    const { snippets, hasSubaccounts, canCreate } = this.props;
+    const { snippets, hasSubaccounts, canCreate, userAccessLevel } = this.props;
     return (
       <SnippetCollection
         canCreate={canCreate}
         hasSubaccounts={hasSubaccounts}
+        canViewSubaccounts={userAccessLevel !== ROLES.SUBACCOUNT_REPORTING}
         snippets={snippets}
       />
     );
