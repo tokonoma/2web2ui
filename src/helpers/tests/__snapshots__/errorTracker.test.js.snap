@@ -291,6 +291,26 @@ Object {
 }
 `;
 
+exports[`.getEnricherOrDieTryin with unsupported browser 1`] = `
+Object {
+  "extra": Object {
+    "isApiError": false,
+    "isChunkFailure": false,
+    "isSupportedBrowser": false,
+  },
+  "level": "warning",
+  "logger": "test",
+  "request": undefined,
+  "tags": Object {
+    "customer": undefined,
+    "documentLanguage": "unknown",
+    "navigatorLanguage": "unknown",
+    "source": "unknown",
+  },
+  "user": Object {},
+}
+`;
+
 exports[`.getEnricherOrDieTryin without headers 1`] = `
 Object {
   "extra": Object {

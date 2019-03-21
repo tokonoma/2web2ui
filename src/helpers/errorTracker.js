@@ -3,8 +3,6 @@ import Raven from 'raven-js';
 import createRavenMiddleware from 'raven-for-redux';
 import bowser from 'bowser';
 
-const browser = bowser.getParser(window.navigator.userAgent);
-
 /**
  * List of breadcrumbs to ignore to reduce noise
  * @note Sentry has a 100 breadcrumb per event/error maximum
@@ -102,9 +100,11 @@ export function getEnricherOrDieTryin(store, currentWindow) {
     const apiError = isApiError(data);
     const chunkFailure = isChunkFailure(data);
     const request = filterRequest(data.request);
+    const userAgent = _.get(currentWindow, 'navigator.userAgent');
 
     /*global SUPPORTED_BROWSERS*/
-    const isSupportedBrowser = Boolean(browser.satisfies(SUPPORTED_BROWSERS)); //Refer to docs/browser-support-sentry-issue.md for more info
+    // refer to docs/browser-support-sentry-issue.md for more info
+    const isSupportedBrowser = Boolean(bowser.getParser(userAgent).satisfies(SUPPORTED_BROWSERS));
 
     return {
       ...data,

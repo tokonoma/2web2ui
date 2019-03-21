@@ -2,14 +2,11 @@ import cases from 'jest-in-case';
 import ErrorTracker, {
   breadcrumbCallback, getEnricherOrDieTryin, isApiError, isErrorFromOurBundle, isChunkFailure
 } from '../errorTracker';
+import mockBowser from 'bowser';
 import * as mockRaven from 'raven-js';
 
 jest.mock('raven-js');
-jest.mock('bowser', () => ({
-  getParser: jest.fn(() => ({
-    satisfies: jest.fn(() => true)
-  }))
-}));
+jest.mock('bowser');
 
 describe('.breadcrumbCallback', () => {
   it('returns false with blacklisted breadcrumb', () => {
@@ -23,6 +20,15 @@ describe('.breadcrumbCallback', () => {
 });
 
 cases('.getEnricherOrDieTryin', ({ currentWindow = {}, data = {}, state = {}}) => {
+  mockBowser.getParser = jest.fn((userAgent) => ({
+    satisfies: jest.fn(() => {
+      // return undefined like bowser when browser is unsupported
+      // see, https://github.com/lancedikson/bowser/blob/700732f7b3f490cb61f9f4d34142d0a9ea5a38d3/index.d.ts#L177
+      if (userAgent === 'unsupported') { return; }
+      return true;
+    })
+  }));
+
   const getState = jest.fn(() => state);
   const enrich = getEnricherOrDieTryin({ getState }, currentWindow);
 
@@ -85,6 +91,11 @@ cases('.getEnricherOrDieTryin', ({ currentWindow = {}, data = {}, state = {}}) =
           { value: 'Loading chunk 4 failed.' }
         ]
       }
+    }
+  },
+  'with unsupported browser': {
+    currentWindow: {
+      navigator: { userAgent: 'unsupported' }
     }
   },
   'with password reset token': {
