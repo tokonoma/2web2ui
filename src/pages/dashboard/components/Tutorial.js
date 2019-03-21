@@ -4,7 +4,7 @@ import { Panel } from '@sparkpost/matchbox';
 import { OpenInNew } from '@sparkpost/matchbox-icons';
 import TutorialItem from './TutorialItem';
 import { LINKS } from 'src/constants';
-import { AccessControl } from 'src/components/auth';
+import SuppressionBanner from './SuppressionBanner';
 
 export class Tutorial extends Component {
   render() {
@@ -14,11 +14,13 @@ export class Tutorial extends Component {
       hasVerifiedDomains,
       hasApiKeysForSending,
       hasSentThisMonth,
-      canViewTutorial
+      accountAgeInWeeks,
+      hasSuppressions
     } = this.props;
 
     return (
-      <AccessControl condition={canViewTutorial}>
+      <>
+        <SuppressionBanner accountAgeInWeeks={accountAgeInWeeks} hasSuppressions={hasSuppressions} />
         <Panel title='Getting Started Checklist' actions={[{
           content: <span>Need help? Check out our Getting Started guide <OpenInNew size={13}/></span>,
           color: 'orange',
@@ -59,7 +61,7 @@ export class Tutorial extends Component {
             <p>Get sending!</p>
           </TutorialItem>
         </Panel>
-      </AccessControl>
+      </>
     );
   }
 }

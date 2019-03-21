@@ -38,11 +38,6 @@ describe('Page: Dashboard tests', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should render if cannot view Tutorial and supressions', () => {
-    wrapper.setProps({ canViewTutorialAndSuppressions: false });
-    expect(wrapper).toMatchSnapshot();
-  });
-
   it('should correctly render page when user is not verified', () => {
     wrapper.setProps({ currentUser: { email_verfied: false }});
     expect(wrapper).toMatchSnapshot();

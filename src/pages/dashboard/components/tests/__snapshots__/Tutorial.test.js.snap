@@ -1,7 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Component: Tutorial should render correctly by default 1`] = `
-<Connect(AccessControl)>
+<Fragment>
+  <SuppressionBanner
+    accountAgeInWeeks={4}
+    hasSuppressions={false}
+  />
   <Panel
     actions={
       Array [
@@ -91,5 +95,5 @@ exports[`Component: Tutorial should render correctly by default 1`] = `
       </p>
     </TutorialItem>
   </Panel>
-</Connect(AccessControl)>
+</Fragment>
 `;

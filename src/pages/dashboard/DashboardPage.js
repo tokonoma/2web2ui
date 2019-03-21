@@ -4,8 +4,9 @@ import { Page } from '@sparkpost/matchbox';
 import { UsageReport } from 'src/components';
 import Tutorial from './components/Tutorial';
 import VerifyEmailBanner from 'src/components/verifyEmailBanner/VerifyEmailBanner';
-import SuppressionBanner from './components/SuppressionBanner';
 import { FreePlanWarningBanner } from 'src/pages/billing/components/Banners';
+import { hasGrants } from 'src/helpers/conditions';
+import { AccessControl } from 'src/components/auth';
 export class DashboardPage extends Component {
   componentDidMount() {
     if (this.props.canViewTutorialAndSuppressions) {
@@ -16,7 +17,7 @@ export class DashboardPage extends Component {
   }
 
   render() {
-    const { accountAgeInWeeks, accountAgeInDays, currentUser, hasSuppressions, account, canViewTutorialAndSuppressions } = this.props;
+    const { accountAgeInDays, currentUser, account } = this.props;
 
     //Shows banner if within 14 days of plan to downgrade
 
@@ -27,12 +28,9 @@ export class DashboardPage extends Component {
         )}
         <FreePlanWarningBanner account={account} accountAgeInDays={accountAgeInDays} ageRangeStart={16}/>
         <UsageReport/>
-        {canViewTutorialAndSuppressions && (
-          <>
-            <SuppressionBanner accountAgeInWeeks={accountAgeInWeeks} hasSuppressions={hasSuppressions} />
-            <Tutorial {...this.props} />
-          </>
-        )}
+        <AccessControl condition={hasGrants('api_keys/manage', 'templates/modify', 'sending_domains/manage')}>
+          <Tutorial {...this.props} />
+        </AccessControl>
       </Page>
     );
   }

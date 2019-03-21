@@ -11,7 +11,9 @@ describe('Component: Tutorial', () => {
     hasSendingDomains: false,
     hasVerifiedDomains: true,
     hasApiKeysForSending: false,
-    hasBounceDomains: true
+    hasBounceDomains: true,
+    accountAgeInWeeks: 4,
+    hasSuppressions: false
   };
 
   let wrapper;
