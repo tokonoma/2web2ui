@@ -1,6 +1,5 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import _ from 'lodash';
 import { IpForm } from '../IpForm';
 import * as constants from '../../constants';
 
@@ -63,13 +62,13 @@ describe('IP Form tests', () => {
   });
 
   describe('auto_warmup_enabled', () => {
-    it('shows confirmation modal on submit to enable ip auto warmup', async () => {
+    it('shows confirmation modal on submit to enable ip auto warmup', () => {
       wrapper.setProps({ isAutoWarmupEnabled: true });
       wrapper.find('Button').simulate('click');
       expect(wrapper.find('ConfirmationModal')).toMatchSnapshot();
     });
 
-    it('shows confirmation modal on submit to disable ip auto warmup', async () => {
+    it('shows confirmation modal on submit to disable ip auto warmup', () => {
       wrapper.setProps({ ip: { auto_warmup_enabled: true }, isAutoWarmupEnabled: false });
       wrapper.find('Button').simulate('click');
       expect(wrapper.find('ConfirmationModal')).toMatchSnapshot();
@@ -121,7 +120,7 @@ describe('IP Form tests', () => {
     it('makes only stage 1 selectable from options upon enabling', () => {
       wrapper.setProps({ isAutoWarmupEnabled: true });
       const options = wrapper.find(componentSelector).prop('options');
-      expect(_.map(options, (option) => option.disabled)).toEqual([false, true, true]);
+      expect(options.map((option) => option.disabled)).toEqual([false, true, true]);
     });
 
     it('casts stage to integer', () => {

@@ -14,7 +14,7 @@ import {
   selectIpForCurrentPool,
   selectIpFormInitialValues
 } from 'src/selectors/ipPools';
-import { configFlag } from '../../../helpers/conditions/config';
+import { configFlag } from 'src/helpers/conditions/config';
 
 
 export class IpForm extends Component {
@@ -92,7 +92,7 @@ export class IpForm extends Component {
                     name='auto_warmup_stage'
                     component={SelectWrapper}
                     options={stageOptions}
-                    parse={(value) => _.toInteger(value)}
+                    parse={_.toInteger}
                     helpText="You can select an previous stage but can not select an advanced stage."
                     disabled={submitting}
                   />

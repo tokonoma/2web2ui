@@ -26,7 +26,7 @@ export class EditIpPage extends Component {
           message: `Updated IP ${ip.external_ip}.`
         });
       })
-      .then((res) => this.loadDependentData());
+      .then(this.loadDependentData);
   };
 
   loadDependentData = () => {

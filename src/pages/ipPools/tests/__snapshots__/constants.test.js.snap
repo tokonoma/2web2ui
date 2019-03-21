@@ -1,0 +1,106 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`IP Pool Constants IP_WARMUP_STAGES returns stages with formatted volumes 1`] = `
+Array [
+  Object {
+    "id": 1,
+    "name": "Stage 1",
+    "volume": "200",
+  },
+  Object {
+    "id": 2,
+    "name": "Stage 2",
+    "volume": "500",
+  },
+  Object {
+    "id": 3,
+    "name": "Stage 3",
+    "volume": "1,000",
+  },
+  Object {
+    "id": 4,
+    "name": "Stage 4",
+    "volume": "2,000",
+  },
+  Object {
+    "id": 5,
+    "name": "Stage 5",
+    "volume": "5,000",
+  },
+  Object {
+    "id": 6,
+    "name": "Stage 6",
+    "volume": "10,000",
+  },
+  Object {
+    "id": 7,
+    "name": "Stage 7",
+    "volume": "20,000",
+  },
+  Object {
+    "id": 8,
+    "name": "Stage 8",
+    "volume": "40,000",
+  },
+  Object {
+    "id": 9,
+    "name": "Stage 9",
+    "volume": "100,000",
+  },
+  Object {
+    "id": 10,
+    "name": "Stage 10",
+    "volume": "250,000",
+  },
+  Object {
+    "id": 11,
+    "name": "Stage 11",
+    "volume": "500,000",
+  },
+  Object {
+    "id": 12,
+    "name": "Stage 12",
+    "volume": "1,000,000",
+  },
+  Object {
+    "id": 13,
+    "name": "Stage 13",
+    "volume": "2,000,000",
+  },
+  Object {
+    "id": 14,
+    "name": "Stage 14",
+    "volume": "5,000,000",
+  },
+  Object {
+    "id": 15,
+    "name": "Stage 15",
+    "volume": "10,000,000",
+  },
+  Object {
+    "id": 16,
+    "name": "Stage 16",
+    "volume": "20,000,000",
+  },
+  Object {
+    "id": 17,
+    "name": "Stage 17",
+    "volume": "40,000,000",
+  },
+  Object {
+    "id": 18,
+    "name": "Stage 18",
+    "volume": "80,000,000",
+  },
+  Object {
+    "id": 19,
+    "name": "Stage 19",
+    "volume": "160,000,000",
+  },
+  Object {
+    "id": 20,
+    "name": "Stage 20",
+    "volume": "320,000,000",
+  },
+]
+`;
