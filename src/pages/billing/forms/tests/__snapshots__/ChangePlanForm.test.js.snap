@@ -7,7 +7,7 @@ exports[`Form Container: Change Plan should not show plans 1`] = `
       <Panel
         title="Select A Plan"
       />
-      <Connect(AccessControl)
+      <AccessControl
         condition={[Function]}
       >
         <Panel
@@ -26,7 +26,7 @@ exports[`Form Container: Change Plan should not show plans 1`] = `
             />
           </Panel.Section>
         </Panel>
-      </Connect(AccessControl)>
+      </AccessControl>
     </Grid.Column>
     <Grid.Column
       md={5}
@@ -70,7 +70,7 @@ exports[`Form Container: Change Plan should render 1`] = `
           }
         />
       </Panel>
-      <Connect(AccessControl)
+      <AccessControl
         condition={[Function]}
       >
         <Panel
@@ -89,7 +89,7 @@ exports[`Form Container: Change Plan should render 1`] = `
             />
           </Panel.Section>
         </Panel>
-      </Connect(AccessControl)>
+      </AccessControl>
     </Grid.Column>
     <Grid.Column
       md={5}
@@ -133,7 +133,7 @@ exports[`Form Container: Change Plan should show saved card 1`] = `
           }
         />
       </Panel>
-      <Connect(AccessControl)
+      <AccessControl
         condition={[Function]}
       >
         <Panel
@@ -154,7 +154,7 @@ exports[`Form Container: Change Plan should show saved card 1`] = `
             />
           </Panel.Section>
         </Panel>
-      </Connect(AccessControl)>
+      </AccessControl>
     </Grid.Column>
     <Grid.Column
       md={5}

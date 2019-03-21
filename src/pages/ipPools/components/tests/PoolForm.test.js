@@ -12,30 +12,27 @@ describe('PoolForm tests', () => {
     props = {
       submitting: false,
       isNew: false,
-      ips: [
-        {
-          external_ip: 'external',
-          hostname: 'hostname'
-        },
-        {
-          external_ip: 'external-2',
-          hostname: 'hostname-2'
-        }
-      ],
-      list: [
+      pools: [
         {
           id: 'my-pool',
-          name: 'My Pool'
+          name: 'My Pool',
+          ips: []
         },
         {
           id: 'pool-2',
-          name: 'Another Pool'
+          name: 'Another Pool',
+          ips: [{
+            external_ip: 'external',
+            hostname: 'hostname'
+          }, {
+            external_ip: 'external-2',
+            hostname: 'hostname-2'
+          }]
         }
       ],
       pool: { id: 'my-pool', name: 'My Pool' },
       handleSubmit: jest.fn(),
-      pristine: true,
-      showPurchaseCTA: true
+      pristine: true
     };
 
     wrapper = shallow(<PoolForm {...props} />);
@@ -47,7 +44,7 @@ describe('PoolForm tests', () => {
 
   it('should show help text when editing default pool', () => {
     wrapper.setProps({ pool: { id: 'default', name: 'Default' }});
-    expect(wrapper.find('Field').prop('helpText')).toMatch('You cannot change the default IP pool\'s name');
+    expect(wrapper.find('Field[name="name"]').prop('helpText')).toMatch('You cannot change the default IP pool\'s name');
   });
 
   it('should not render signing_domain if editing default pool', () => {
@@ -79,5 +76,27 @@ describe('PoolForm tests', () => {
   it('renders correct button text when editing a pool', () => {
     wrapper.setProps({ isNew: false });
     expect(wrapper.find('Button').shallow().text()).toEqual('Update IP Pool');
+  });
+
+  describe('overflow pool', () => {
+    it('renders with access control condition to be true', () => {
+      config.featureFlags.ip_auto_warmup = true;
+      expect(wrapper.find('AccessControl').at(1).prop('condition')()).toBe(true);
+    });
+
+    it('renders with access control condition to be false', () => {
+      config.featureFlags.ip_auto_warmup = false;
+      expect(wrapper.find('AccessControl').at(1).prop('condition')()).toBe(false);
+    });
+
+    it('renders pools with ip only', () => {
+      expect(wrapper.find('Field[name="auto_warmup_overflow_pool"]').prop('options')).toEqual([{ label: 'Another Pool (pool-2)', value: 'pool-2' }]);
+    });
+
+    it('renders community pool if no pool with ip available on spc', () => {
+      config.tenant = 'spc';
+      wrapper.setProps({ pools: props.pools.slice(0, 1) });
+      expect(wrapper.find('Field[name="auto_warmup_overflow_pool"]').prop('options')).toEqual([{ label: 'Community Pool', value: 'sp_shared' }]);
+    });
   });
 });

@@ -1,12 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`SendMoreCTA Component renders correctly 1`] = `
-<Connect(AccessControl)
+<AccessControl
   condition={[Function]}
 >
   <p>
     Need to send more?
-     
+
     <Connect(ConditionSwitch)>
       <Case
         condition={[Function]}
@@ -46,7 +46,7 @@ exports[`SendMoreCTA Component renders correctly 1`] = `
          to increase your daily sending limit.
       </Case>
     </Connect(ConditionSwitch)>
-     
+
     <UnstyledLink
       external={true}
       to="https://support.sparkpost.com/customer/portal/articles/2030894"
@@ -54,5 +54,5 @@ exports[`SendMoreCTA Component renders correctly 1`] = `
       Learn more about these limits.
     </UnstyledLink>
   </p>
-</Connect(AccessControl)>
+</AccessControl>
 `;

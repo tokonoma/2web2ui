@@ -14,7 +14,7 @@ exports[`ChoosePlan page tests should disable submit and plan picker when submit
           plans={Array []}
           selectedPromo={Object {}}
         />
-        <Connect(AccessControl)
+        <AccessControl
           condition={[Function]}
         >
           <Panel.Section>
@@ -35,7 +35,7 @@ exports[`ChoosePlan page tests should disable submit and plan picker when submit
               formName="joinPlanForm"
             />
           </Panel.Section>
-        </Connect(AccessControl)>
+        </AccessControl>
         <Panel.Section>
           <Button
             disabled={true}
@@ -68,7 +68,7 @@ exports[`ChoosePlan page tests should render correctly 1`] = `
           plans={Array []}
           selectedPromo={Object {}}
         />
-        <Connect(AccessControl)
+        <AccessControl
           condition={[Function]}
         >
           <Panel.Section>
@@ -89,7 +89,7 @@ exports[`ChoosePlan page tests should render correctly 1`] = `
               formName="joinPlanForm"
             />
           </Panel.Section>
-        </Connect(AccessControl)>
+        </AccessControl>
         <Panel.Section>
           <Button
             disabled={false}
@@ -124,7 +124,7 @@ exports[`ChoosePlan page tests should show free bullets when isFree is selected 
           plans={Array []}
           selectedPromo={Object {}}
         />
-        <Connect(AccessControl)
+        <AccessControl
           condition={[Function]}
         >
           <Panel.Section>
@@ -143,7 +143,7 @@ exports[`ChoosePlan page tests should show free bullets when isFree is selected 
               </li>
             </ul>
           </Panel.Section>
-        </Connect(AccessControl)>
+        </AccessControl>
         <Panel.Section>
           <Button
             disabled={false}
