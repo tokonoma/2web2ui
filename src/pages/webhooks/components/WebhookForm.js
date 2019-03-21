@@ -49,14 +49,16 @@ export class WebhookForm extends Component {
   render() {
     const {
       handleSubmit,
-      submitText,
       auth,
       eventListing,
       showEvents,
-      disabled,
       newWebhook,
-      hasSubaccounts
+      hasSubaccounts,
+      pristine,
+      submitting
     } = this.props;
+    const disabled = pristine || submitting;
+    const submitText = submitting ? 'Submitting...' : (newWebhook ? 'Create Webhook' : 'Update Webhook');
 
     return (
       <form onSubmit={handleSubmit}>
@@ -93,8 +95,6 @@ const mapStateToProps = (state, props) => {
 
   return {
     showEvents: eventsRadio === 'select',
-    disabled: props.pristine || props.submitting,
-    submitText: props.submitting ? 'Submitting...' : (props.newWebhook ? 'Create Webhook' : 'Update Webhook'),
     auth,
     hasSubaccounts: hasSubaccounts(state),
     eventListing: selectWebhookEventListing(state),
