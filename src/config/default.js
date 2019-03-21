@@ -48,7 +48,8 @@ const config = {
     allow_default_signing_domains_for_ip_pools: false,
     allow_mailbox_verification: true,
     allow_anyone_at_verification: false,
-    has_signup: false
+    has_signup: false,
+    ip_auto_warmup: true
   },
   heroku: {
     cookieName: 'heroku-nav-data'
