@@ -22,27 +22,23 @@ it('renders HTML by default', () => {
 it('renders text on tab click', () => {
   const wrapper = shallow(<PreviewPanel {...props} />);
 
-  // @todo should be able to .find() the Text tab then .simulate('click')
-  wrapper.instance().onChange({
-    currentTarget: {
-      text: 'Text'
-    }
-  });
-  wrapper.update();
+  wrapper
+    .find('Tabs')
+    .prop('tabs')
+    .find(({ content }) => content === 'Text')
+    .onClick({ currentTarget: { text: 'Text' }});
 
   expect(wrapper).toMatchSnapshot();
 });
 
 it('renders AMP HTML on tab click', () => {
-  const wrapper = shallow(<PreviewPanel {...props} isAmpLive={true} />);
+  const wrapper = shallow(<PreviewPanel {...props} />);
 
-  // @todo should be able to .find() the AMP HTML tab then .simulate('click')
-  wrapper.instance().onChange({
-    currentTarget: {
-      text: 'AMP HTML'
-    }
-  });
-  wrapper.update();
+  wrapper
+    .find('Tabs')
+    .prop('tabs')
+    .find(({ content }) => content === 'AMP HTML')
+    .onClick({ currentTarget: { text: 'AMP HTML' }});
 
   expect(wrapper).toMatchSnapshot();
 });

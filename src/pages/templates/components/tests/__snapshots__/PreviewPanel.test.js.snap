@@ -54,6 +54,10 @@ exports[`renders HTML by default 1`] = `
           "content": "Text",
           "onClick": [Function],
         },
+        Object {
+          "content": "AMP HTML",
+          "onClick": [Function],
+        },
       ]
     }
   />
@@ -86,6 +90,10 @@ exports[`renders blank panel 1`] = `
           "content": "Text",
           "onClick": [Function],
         },
+        Object {
+          "content": "AMP HTML",
+          "onClick": [Function],
+        },
       ]
     }
   />
@@ -116,6 +124,10 @@ exports[`renders text on tab click 1`] = `
         },
         Object {
           "content": "Text",
+          "onClick": [Function],
+        },
+        Object {
+          "content": "AMP HTML",
           "onClick": [Function],
         },
       ]

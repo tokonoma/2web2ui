@@ -54,7 +54,7 @@ export default class EditPage extends React.Component {
   }) => {
     // must handle when subaccount is set to null by SubaccountSection
     const subaccountId = subaccount ? subaccount.id : undefined;
-    const { updateSnippet, showAlert, isAmpLive } = this.props;
+    const { updateSnippet, showAlert } = this.props;
 
     return updateSnippet({
       html,
@@ -63,7 +63,7 @@ export default class EditPage extends React.Component {
       sharedWithSubaccounts,
       subaccountId,
       text,
-      amp_html: isAmpLive ? amp_html : undefined
+      amp_html
     }).then(() => showAlert({ type: 'success', message: 'Snippet saved' }));
   }
 
@@ -75,8 +75,7 @@ export default class EditPage extends React.Component {
       hasSubaccounts,
       id,
       loading,
-      submitting,
-      isAmpLive
+      submitting
     } = this.props;
     const disabled = !canModify || submitting;
 
@@ -140,7 +139,7 @@ export default class EditPage extends React.Component {
               </Panel>
             </Grid.Column>
             <Grid.Column xs={12} lg={8}>
-              <ContentEditor contentOnly={true} readOnly={disabled} isAmpLive={isAmpLive} />
+              <ContentEditor contentOnly={true} readOnly={disabled} />
             </Grid.Column>
           </Grid>
         </Form>

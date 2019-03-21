@@ -28,15 +28,11 @@ export default class PreviewPanel extends Component {
   }
 
   render() {
-    const { isAmpLive } = this.props;
     const tabs = [
       { content: 'HTML', onClick: this.onChange },
-      { content: 'Text', onClick: this.onChange }
+      { content: 'Text', onClick: this.onChange },
+      { content: 'AMP HTML', onClick: this.onChange }
     ];
-
-    if (isAmpLive) {
-      tabs.push({ content: 'AMP HTML', onClick: this.onChange });
-    }
 
     const selectedTabIndex = tabs.findIndex(({ content }) => content === this.state.contentType);
     const contentType = this.state.contentType.toLowerCase().replace(' ', '_');

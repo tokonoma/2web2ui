@@ -41,11 +41,6 @@ it('renders preview page with template', async () => {
   expect(wrapper).toMatchSnapshot();
 });
 
-it('renders preview page with template and AMP enabled', async () => {
-  const wrapper = await loadPreviewPage({ isAmpLive: true });
-  expect(wrapper).toMatchSnapshot();
-});
-
 it('renders preview page with read-only template', async () => {
   const wrapper = await loadPreviewPage({ canSendEmail: false });
   expect(wrapper).toMatchSnapshot();
