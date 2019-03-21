@@ -26,7 +26,7 @@ export class DashboardPage extends Component {
           <VerifyEmailBanner verifying={currentUser.verifyingEmail} />
         )}
         <FreePlanWarningBanner account={account} accountAgeInDays={accountAgeInDays} ageRangeStart={16}/>
-        <UsageReport accountAgeInWeeks={accountAgeInWeeks} />
+        <UsageReport/>
         {canViewTutorialAndSuppressions && (
           <>
             <SuppressionBanner accountAgeInWeeks={accountAgeInWeeks} hasSuppressions={hasSuppressions} />

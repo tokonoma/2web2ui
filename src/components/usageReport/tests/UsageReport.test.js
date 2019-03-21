@@ -27,8 +27,7 @@ describe('UsageReport Component', () => {
           start: '2017-08-30T00:00:00.000Z'
         }
       },
-      getAccount,
-      accountAgeInWeeks: 4
+      getAccount
     };
   });
 
