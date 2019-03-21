@@ -35,40 +35,15 @@ exports[`Page: Dashboard tests should correctly render page when user is not ver
       accountAgeInDays={15}
       accountAgeInWeeks={0}
       canViewTutorialAndSuppressions={true}
-      checkSuppression={
-        [MockFunction] {
-          "calls": Array [
-            Array [],
-          ],
-          "results": undefined,
-        }
-      }
+      checkSuppression={[MockFunction]}
       currentUser={
         Object {
           "email_verfied": false,
         }
       }
       hasSuppressions={true}
-      listApiKeys={
-        [MockFunction] {
-          "calls": Array [
-            Array [
-              Object {
-                "id": 0,
-              },
-            ],
-          ],
-          "results": undefined,
-        }
-      }
-      listSendingDomains={
-        [MockFunction] {
-          "calls": Array [
-            Array [],
-          ],
-          "results": undefined,
-        }
-      }
+      listApiKeys={[MockFunction]}
+      listSendingDomains={[MockFunction]}
       verifyingEmail={false}
     />
   </Connect(AccessControl)>
@@ -108,40 +83,15 @@ exports[`Page: Dashboard tests should display upgrade CTA when account is free a
       accountAgeInDays={15}
       accountAgeInWeeks={0}
       canViewTutorialAndSuppressions={true}
-      checkSuppression={
-        [MockFunction] {
-          "calls": Array [
-            Array [],
-          ],
-          "results": undefined,
-        }
-      }
+      checkSuppression={[MockFunction]}
       currentUser={
         Object {
           "email_verified": true,
         }
       }
       hasSuppressions={true}
-      listApiKeys={
-        [MockFunction] {
-          "calls": Array [
-            Array [
-              Object {
-                "id": 0,
-              },
-            ],
-          ],
-          "results": undefined,
-        }
-      }
-      listSendingDomains={
-        [MockFunction] {
-          "calls": Array [
-            Array [],
-          ],
-          "results": undefined,
-        }
-      }
+      listApiKeys={[MockFunction]}
+      listSendingDomains={[MockFunction]}
       verifyingEmail={false}
     />
   </Connect(AccessControl)>
@@ -183,40 +133,15 @@ exports[`Page: Dashboard tests should render import suppression list when 0 supp
       accountAgeInDays={15}
       accountAgeInWeeks={40}
       canViewTutorialAndSuppressions={true}
-      checkSuppression={
-        [MockFunction] {
-          "calls": Array [
-            Array [],
-          ],
-          "results": undefined,
-        }
-      }
+      checkSuppression={[MockFunction]}
       currentUser={
         Object {
           "email_verified": true,
         }
       }
       hasSuppressions={false}
-      listApiKeys={
-        [MockFunction] {
-          "calls": Array [
-            Array [
-              Object {
-                "id": 0,
-              },
-            ],
-          ],
-          "results": undefined,
-        }
-      }
-      listSendingDomains={
-        [MockFunction] {
-          "calls": Array [
-            Array [],
-          ],
-          "results": undefined,
-        }
-      }
+      listApiKeys={[MockFunction]}
+      listSendingDomains={[MockFunction]}
       verifyingEmail={false}
     />
   </Connect(AccessControl)>
@@ -258,40 +183,15 @@ exports[`Page: Dashboard tests should render page correctly with defaults 1`] = 
       accountAgeInDays={15}
       accountAgeInWeeks={0}
       canViewTutorialAndSuppressions={true}
-      checkSuppression={
-        [MockFunction] {
-          "calls": Array [
-            Array [],
-          ],
-          "results": undefined,
-        }
-      }
+      checkSuppression={[MockFunction]}
       currentUser={
         Object {
           "email_verified": true,
         }
       }
       hasSuppressions={true}
-      listApiKeys={
-        [MockFunction] {
-          "calls": Array [
-            Array [
-              Object {
-                "id": 0,
-              },
-            ],
-          ],
-          "results": undefined,
-        }
-      }
-      listSendingDomains={
-        [MockFunction] {
-          "calls": Array [
-            Array [],
-          ],
-          "results": undefined,
-        }
-      }
+      listApiKeys={[MockFunction]}
+      listSendingDomains={[MockFunction]}
       verifyingEmail={false}
     />
   </Connect(AccessControl)>

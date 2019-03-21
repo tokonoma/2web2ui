@@ -8,13 +8,6 @@ import { FreePlanWarningBanner } from 'src/pages/billing/components/Banners';
 import { hasGrants } from 'src/helpers/conditions';
 import { AccessControl } from 'src/components/auth';
 export class DashboardPage extends Component {
-  componentDidMount() {
-    if (this.props.canViewTutorialAndSuppressions) {
-      this.props.checkSuppression();
-      this.props.listSendingDomains();
-      this.props.listApiKeys({ id: 0 });
-    }
-  }
 
   render() {
     const { accountAgeInDays, currentUser, account } = this.props;

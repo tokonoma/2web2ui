@@ -7,6 +7,13 @@ import { LINKS } from 'src/constants';
 import SuppressionBanner from './SuppressionBanner';
 
 export class Tutorial extends Component {
+
+  componentDidMount() {
+    this.props.checkSuppression();
+    this.props.listSendingDomains();
+    this.props.listApiKeys({ id: 0 });
+  }
+
   render() {
     const {
       currentUser,
