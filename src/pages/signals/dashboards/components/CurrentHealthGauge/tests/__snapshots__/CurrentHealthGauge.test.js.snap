@@ -1,5 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Signals Health Score Gauge Container renders bad threshold color 1`] = `"#FF594D"`;
+
 exports[`Signals Health Score Gauge Container renders error correctly 1`] = `
 <Callout
   height="auto"
@@ -113,3 +115,5 @@ exports[`Signals Health Score Gauge Container renders no current score correctly
   Current Health Score Not Available
 </Callout>
 `;
+
+exports[`Signals Health Score Gauge Container renders warning threshold color 1`] = `"#e6b400"`;

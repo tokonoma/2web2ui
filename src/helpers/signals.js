@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import { roundToPlaces } from 'src/helpers/units';
 import thresholds from 'src/pages/signals/constants/healthScoreThresholds';
 
 const translateSubaccount = (id) => {
@@ -35,7 +36,7 @@ export const getDoD = (current, before) => {
     return null;
   }
 
-  return ((current - before) / before * 100);
+  return roundToPlaces(((current - before) / before * 100), 1);
 };
 
 export const getCaretProps = (value, reverse) => {

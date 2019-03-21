@@ -24,10 +24,10 @@ export class HealthScoreDashboard extends Component {
         primaryArea={<DateFilter />}
       >
         <Grid>
-          <Grid.Column xs={4}>
+          <Grid.Column xs={12} lg={5} xl={4}>
             <CurrentHealthGauge />
           </Grid.Column>
-          <Grid.Column xs={8}>
+          <Grid.Column xs={12} lg={7} xl={8}>
             <Panel sectioned></Panel>
           </Grid.Column>
         </Grid>

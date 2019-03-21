@@ -56,6 +56,7 @@ describe('.getFriendlyTitle', () => {
 describe('.getDoD', () => {
   it('returns correct day over day change', () => {
     expect(getDoD(20, 10)).toEqual(100);
+    expect(getDoD(20, 12)).toEqual(66.7);
     expect(getDoD(0, 1)).toEqual(-100);
     expect(getDoD(1, 0)).toEqual(Infinity);
   });

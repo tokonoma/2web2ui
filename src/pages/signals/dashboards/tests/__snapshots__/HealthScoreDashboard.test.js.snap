@@ -7,12 +7,16 @@ exports[`Signals Health Score Dashboard renders page 1`] = `
 >
   <Grid>
     <Grid.Column
-      xs={4}
+      lg={5}
+      xl={4}
+      xs={12}
     >
       <Connect(CurrentHealthGauge) />
     </Grid.Column>
     <Grid.Column
-      xs={8}
+      lg={7}
+      xl={8}
+      xs={12}
     >
       <Panel
         sectioned={true}

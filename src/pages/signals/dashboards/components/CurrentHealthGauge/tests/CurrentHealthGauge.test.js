@@ -15,7 +15,7 @@ describe('Signals Health Score Gauge Container', () => {
 
   it('renders happy path correctly', () => {
     expect(subject({ data: [{
-      sid: -1, current_health_score: 88, WoW: -5, DoD: 5
+      sid: -1, current_health_score: 88, WoW: -5, current_DoD: 5
     }]})).toMatchSnapshot();
   });
 
@@ -31,13 +31,24 @@ describe('Signals Health Score Gauge Container', () => {
 
   it('renders no current score correctly', () => {
     const wrapper = subject({ data: [{
-      sid: -1, WoW: -5, DoD: 5
+      sid: -1, WoW: -5, current_DoD: 5
     }]});
     expect(wrapper.find('Callout')).toMatchSnapshot();
   });
 
-  it('renders no WoW', () => {
+  it('renders no WoW, or Dod', () => {
     const wrapper = subject({ data: [{ sid: -1 }]});
     expect(wrapper.find({ label: 'WoW Change' }).prop('value')).toEqual('n/a');
+    expect(wrapper.find({ label: 'DoD Change' }).prop('value')).toEqual('n/a');
+  });
+
+  it('renders warning threshold color', () => {
+    const wrapper = subject({ data: [{ sid: -1, current_health_score: 60 }]});
+    expect(wrapper.find({ className: 'DescriptionIcon' }).prop('style').fill).toMatchSnapshot();
+  });
+
+  it('renders bad threshold color', () => {
+    const wrapper = subject({ data: [{ sid: -1, current_health_score: 40 }]});
+    expect(wrapper.find({ className: 'DescriptionIcon' }).prop('style').fill).toMatchSnapshot();
   });
 });
