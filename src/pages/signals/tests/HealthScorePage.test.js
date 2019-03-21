@@ -10,7 +10,7 @@ describe('Signals Health Score Page', () => {
       date: '2017-01-01',
       weights: [
         { weight_type: 'Hard Bounces', weight: 0.5, weight_value: 0.25 },
-        { weight_type: 'Complaints', weight: -0.5, weight_value: 0.25 }
+        { weight_type: 'eng cohorts: new, 14-day', weight: -0.5, weight_value: 0.25 }
       ]
     },
     {
@@ -64,8 +64,8 @@ describe('Signals Health Score Page', () => {
 
   describe('local state', () => {
     it('handles component select', () => {
-      wrapper.find('DivergingBar').at(0).simulate('click', { payload: { weight_type: 'Complaints' }});
-      expect(wrapper.find('DivergingBar').at(0).prop('selected')).toEqual('Complaints');
+      wrapper.find('DivergingBar').at(0).simulate('click', { payload: { weight_type: 'eng cohorts: new, 14-day' }});
+      expect(wrapper.find('DivergingBar').at(0).prop('selected')).toEqual('eng cohorts: new, 14-day');
     });
 
     it('uses first component weight with an existing date and new data', () => {
@@ -90,7 +90,7 @@ describe('Signals Health Score Page', () => {
     });
 
     it('renders tooltip content for selected component', () => {
-      wrapper.find('DivergingBar').at(0).simulate('click', { payload: { weight_type: 'Complaints' }});
+      wrapper.find('DivergingBar').at(0).simulate('click', { payload: { weight_type: 'eng cohorts: new, 14-day' }});
       const Tooltip = wrapper.find('BarChart').at(2).prop('tooltipContent');
       expect(shallow(<Tooltip payload={{ weight_value: 0.0012345 }} />)).toMatchSnapshot();
     });

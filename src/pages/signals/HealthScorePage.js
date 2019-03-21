@@ -126,7 +126,10 @@ export class HealthScorePage extends Component {
                       selected={selectedDate}
                       timeSeries={dataForSelectedWeight}
                       tooltipContent={({ payload = {}}) => (
-                        <TooltipMetric label={selectedComponent} value={`${roundToPlaces(payload.weight_value * 100, 4)}%`} />
+                        <TooltipMetric
+                          label={HEALTH_SCORE_COMPONENTS[selectedComponent].label}
+                          value={`${roundToPlaces(payload.weight_value * 100, 4)}%`}
+                        />
                       )}
                       yKey='weight_value'
                       yAxisProps={{
