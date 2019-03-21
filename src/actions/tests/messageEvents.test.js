@@ -1,6 +1,5 @@
 import * as messageEvents from '../messageEvents';
 import { fn as mockMoment } from 'moment';
-import { mockStore } from 'src/__testHelpers__';
 
 jest.mock('../helpers/sparkpostApiRequest', () => jest.fn((a) => a));
 
@@ -61,8 +60,7 @@ describe('Action Creator: MessageEvents', () => {
     });
 
     it('should dispatch an action to clear csv data', () => {
-      mockStore.dispatch(messageEvents.clearCSV());
-      expect(mockStore.getActions()).toEqual([{ type: 'RESET_MESSAGE_EVENTS_CSV' }]);
+      expect(messageEvents.clearCSV()).toEqual({ type: 'RESET_MESSAGE_EVENTS_CSV' });
     });
   });
 

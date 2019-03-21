@@ -35,7 +35,7 @@ export function getMessageEventsCSV(options = {}) {
 }
 
 export function clearCSV() {
-  return (dispatch) => dispatch({ type: 'RESET_MESSAGE_EVENTS_CSV' });
+  return { type: 'RESET_MESSAGE_EVENTS_CSV' };
 }
 
 function getParams(options) {
