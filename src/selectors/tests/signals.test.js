@@ -162,6 +162,10 @@ describe('Selectors: signals', () => {
                   ]
                 },
                 {
+                  dt: '2018-01-02',
+                  health_score: 0.8
+                },
+                {
                   dt: '2018-01-03',
                   health_score: 0.98, // good
                   weights: [],
