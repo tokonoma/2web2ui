@@ -6,6 +6,20 @@ import TooltipWrapper from '../tooltip/Tooltip';
 import './BarChart.scss';
 import _ from 'lodash';
 import healthScoreThresholds from '../../../constants/healthScoreThresholds';
+import styles from './BarChart.module.scss';
+
+const EventsBar = (props) => {
+  console.log('props', props);
+  console.log('fill', fill);
+  // const {
+  //   fill, x, y, width, height,
+  // } = props;
+  if (props.ranking && (props.date === props.hovered) || (props.date === props.selected)) {
+    props.fill = healthScoreThresholds[props.ranking].color
+  }
+
+  return <Rectangle {...props} fill={props.fill} />
+};
 
 /**
  * @example
@@ -22,33 +36,30 @@ import healthScoreThresholds from '../../../constants/healthScoreThresholds';
  * />
  */
 class BarChart extends Component {
-  renderBar = ({ yKey, selected, xKey, fill, timeSeries }) => {
+  renderBar = ({ yKey, selected, hovered, xKey, fill, timeSeries }) => {
     //console.log('timeSeries', timeSeries);
     return <Bar
-      cursor={healthScoreThresholds['warning'].color}
       stackId='stack'
       key={yKey}
       dataKey={yKey}
       onClick={this.props.onClick}
-      onMouseOver={(props) => <Rectangle {...props}
-        style={{fill: healthScoreThresholds[props.ranking].color}}
-      />}
+      onMouseOver={this.props.onMouseOver}
       fill={fill}
       isAnimationActive={false}
       minPointSize={1}
-      shape={(props) => props.ranking && (<Rectangle {...props} fill={(props.date === selected) ? healthScoreThresholds[props.ranking].color: fill} />)}
+      shape={<EventsBar />}
     >
     </Bar>;
   }
 
   renderBars = () => {
-    const { yKeys, yKey, xKey, selected, fill, timeSeries } = this.props;
+    const { yKeys, yKey, xKey, selected, hovered, fill, timeSeries } = this.props;
 
     if (yKeys) {
       return yKeys.map(this.renderBar);
     }
 
-    return this.renderBar({ yKey, xKey, selected, fill, timeSeries });
+    return this.renderBar({ yKey, xKey, selected, hovered, fill, timeSeries });
   }
 
   render() {

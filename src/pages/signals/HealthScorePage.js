@@ -54,7 +54,7 @@ export class HealthScorePage extends Component {
   }
 
   renderContent = () => {
-    const { data = [], handleDateSelect, loading, gap, empty, error, selectedDate } = this.props;
+    const { data = [], handleDateSelect, handleDateHover, loading, gap, empty, error, selectedDate, hoveredDate } = this.props;
     const { selectedComponent } = this.state;
 
     const selectedWeights = _.get(_.find(data, ['date', selectedDate]), 'weights', []);
@@ -89,8 +89,10 @@ export class HealthScorePage extends Component {
                 <BarChart
                   gap={gap}
                   onClick={handleDateSelect}
+                  onMouseOver={handleDateHover}
                   disableHover={false}
                   selected={selectedDate}
+                  hovered={hoveredDate}
                   timeSeries={data}
                   tooltipContent={({ payload = {}}) => (
                     <TooltipMetric label='Health Score' value={`${roundToPlaces(payload.health_score * 100, 1)}`} />
