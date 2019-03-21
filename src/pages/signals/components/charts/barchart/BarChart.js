@@ -7,19 +7,23 @@ import './BarChart.scss';
 import _ from 'lodash';
 import healthScoreThresholds from '../../../constants/healthScoreThresholds';
 import styles from './BarChart.module.scss';
+import classnames from 'classnames';
 
-const EventsBar = (props) => {
-  console.log('props', props);
-  console.log('fill', fill);
-  // const {
-  //   fill, x, y, width, height,
-  // } = props;
-  if (props.ranking && (props.date === props.hovered) || (props.date === props.selected)) {
-    props.fill = healthScoreThresholds[props.ranking].color
-  }
+// const EventsBar = (props) => {
+//   //console.log('props', props);
+//   // console.log('origFill', origFill);
+//   // console.log('selected', selected);
+//   // console.log('hovered', hovered);
+//   // const {
+//   //   fill, x, y, width, height,
+//   // } = props;
+//   let myFill = props.fill;
+//   if (props.ranking && ((props.date === props.hovered) || (props.date === props.selected))) {
+//     myFill = healthScoreThresholds[props.ranking].color
+//   }
 
-  return <Rectangle {...props} fill={props.fill} />
-};
+//   return <Rectangle {...props} fill={myFill} />
+// };
 
 /**
  * @example
@@ -36,9 +40,8 @@ const EventsBar = (props) => {
  * />
  */
 class BarChart extends Component {
-  renderBar = ({ yKey, selected, hovered, xKey, fill, timeSeries }) => {
-    //console.log('timeSeries', timeSeries);
-    return <Bar
+  renderBar = ({ yKey, selected, fill }) => (
+    <Bar
       stackId='stack'
       key={yKey}
       dataKey={yKey}
@@ -47,10 +50,18 @@ class BarChart extends Component {
       fill={fill}
       isAnimationActive={false}
       minPointSize={1}
-      shape={<EventsBar />}
-    >
-    </Bar>;
-  }
+      shape={(props) => (
+        <Rectangle className={classnames(
+          (props.date === selected) && styles.Selected,
+          !props.ranking && styles.Default, 
+          props.ranking === 'good' && styles.Good,
+          props.ranking === 'warning' && styles.Warning, 
+          props.ranking === 'danger' && styles.Danger )}
+          {...props} 
+        />
+      )}
+    />
+  )
 
   renderBars = () => {
     const { yKeys, yKey, xKey, selected, hovered, fill, timeSeries } = this.props;

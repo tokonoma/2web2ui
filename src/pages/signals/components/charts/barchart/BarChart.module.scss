@@ -1,5 +1,39 @@
 
-
 .Good {
-  &:hover { fill: green }
+  &:hover { 
+    fill: #2CC995;
+    transition: 0s; 
+  }
+
+  &.Selected {
+    fill: #2CC995
+  }
+  
+  fill: #B3ECEF;
+}
+
+.Warning {
+  &:hover { 
+    fill: #e6b400;
+    transition: 0s;  
+  }
+
+  &.Selected {
+    fill: #e6b400;
+  }
+  
+  fill: #B3ECEF;
+}
+
+.Danger {
+  &:hover { 
+    fill: #FF594D;
+    transition: 0s;  
+  }
+
+  &.Selected {
+    fill: #FF594D;
+  }
+  
+  fill: #B3ECEF;
 }
