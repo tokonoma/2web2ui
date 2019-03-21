@@ -34,7 +34,6 @@ exports[`Page: Dashboard tests should correctly render page when user is not ver
       }
       accountAgeInDays={15}
       accountAgeInWeeks={0}
-      canViewTutorialAndSuppressions={true}
       checkSuppression={[MockFunction]}
       currentUser={
         Object {
@@ -82,7 +81,6 @@ exports[`Page: Dashboard tests should display upgrade CTA when account is free a
       }
       accountAgeInDays={15}
       accountAgeInWeeks={0}
-      canViewTutorialAndSuppressions={true}
       checkSuppression={[MockFunction]}
       currentUser={
         Object {
@@ -132,7 +130,6 @@ exports[`Page: Dashboard tests should render import suppression list when 0 supp
       }
       accountAgeInDays={15}
       accountAgeInWeeks={40}
-      canViewTutorialAndSuppressions={true}
       checkSuppression={[MockFunction]}
       currentUser={
         Object {
@@ -182,7 +179,6 @@ exports[`Page: Dashboard tests should render page correctly with defaults 1`] = 
       }
       accountAgeInDays={15}
       accountAgeInWeeks={0}
-      canViewTutorialAndSuppressions={true}
       checkSuppression={[MockFunction]}
       currentUser={
         Object {

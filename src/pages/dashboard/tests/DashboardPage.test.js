@@ -23,8 +23,7 @@ describe('Page: Dashboard tests', () => {
     hasSuppressions: true,
     accountAgeInWeeks: 0,
     verifyingEmail: false,
-    accountAgeInDays: 15,
-    canViewTutorialAndSuppressions: true
+    accountAgeInDays: 15
   };
 
   let wrapper;
