@@ -104,7 +104,7 @@ describe('Component: EditBounce', () => {
   describe('verifyDomain', () => {
     it('renders loading state correctly', async () => {
       const wrapper = subject({ verifyCnameLoading: true });
-      expect(wrapper.find('SetupInstructionPanel')).toHaveProp('isVerifying', true);
+      expect(wrapper.find('BounceSetupInstructionPanel')).toHaveProp('verifyCnameLoading', true);
     });
 
     it('verifies domain and alerts when verification successful', async () => {
@@ -112,7 +112,7 @@ describe('Component: EditBounce', () => {
       const verifyCname = jest.fn(() => Promise.resolve({ cname_status: 'valid' }));
       const wrapper = subject({ showAlert, verifyCname });
 
-      await wrapper.find('SetupInstructionPanel').simulate('verify');
+      await wrapper.find('BounceSetupInstructionPanel').simulate('verify');
 
       expect(verifyCname).toHaveBeenCalledWith({ id: 'xyz.com', subaccount: 100 });
       expect(showAlert).toHaveBeenCalledWith(expect.objectContaining({ type: 'success' }));
@@ -126,7 +126,7 @@ describe('Component: EditBounce', () => {
       }));
       const wrapper = subject({ showAlert, verifyCname });
 
-      await wrapper.find('SetupInstructionPanel').simulate('verify');
+      await wrapper.find('BounceSetupInstructionPanel').simulate('verify');
 
       expect(verifyCname).toHaveBeenCalledWith({ id: 'xyz.com', subaccount: 100 });
       expect(showAlert).toHaveBeenCalledWith({ type: 'error', message: expect.stringContaining('Oh no!') });

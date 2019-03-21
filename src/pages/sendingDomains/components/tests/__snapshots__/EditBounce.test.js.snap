@@ -110,35 +110,23 @@ exports[`Component: EditBounce does not show root domain warning for 3rd level d
     </p>
   </Left>
   <Right>
-    <SetupInstructionPanel
-      isVerified={false}
-      isVerifying={false}
+    <BounceSetupInstructionPanel
+      domain={
+        Object {
+          "is_default_bounce_domain": false,
+          "status": Object {
+            "cname_status": null,
+            "dkim_status": null,
+            "mx_status": null,
+            "ownership_verified": null,
+          },
+          "subaccount_id": 100,
+        }
+      }
+      id="c.b.a.com"
       onVerify={[Function]}
-      recordType="CNAME"
-      verifyButtonIdentifier="verify-cname"
-    >
-      <LabelledValue
-        label="Type"
-      >
-        <p>
-          CNAME
-        </p>
-      </LabelledValue>
-      <LabelledValue
-        label="Hostname"
-      >
-        <p>
-          c.b.a.com
-        </p>
-      </LabelledValue>
-      <LabelledValue
-        label="Value"
-      >
-        <p>
-          sparkpostmail.com
-        </p>
-      </LabelledValue>
-    </SetupInstructionPanel>
+      verifyCnameLoading={false}
+    />
   </Right>
 </SendingDomainSection>
 `;
@@ -169,35 +157,23 @@ exports[`Component: EditBounce renders not ready correctly 1`] = `
         Create a new domain now.
       </Link>
     </Banner>
-    <SetupInstructionPanel
-      isVerified={false}
-      isVerifying={false}
+    <BounceSetupInstructionPanel
+      domain={
+        Object {
+          "is_default_bounce_domain": false,
+          "status": Object {
+            "cname_status": null,
+            "dkim_status": null,
+            "mx_status": null,
+            "ownership_verified": null,
+          },
+          "subaccount_id": 100,
+        }
+      }
+      id="xyz.com"
       onVerify={[Function]}
-      recordType="CNAME"
-      verifyButtonIdentifier="verify-cname"
-    >
-      <LabelledValue
-        label="Type"
-      >
-        <p>
-          CNAME
-        </p>
-      </LabelledValue>
-      <LabelledValue
-        label="Hostname"
-      >
-        <p>
-          xyz.com
-        </p>
-      </LabelledValue>
-      <LabelledValue
-        label="Value"
-      >
-        <p>
-          sparkpostmail.com
-        </p>
-      </LabelledValue>
-    </SetupInstructionPanel>
+      verifyCnameLoading={false}
+    />
   </Right>
 </SendingDomainSection>
 `;
@@ -224,35 +200,18 @@ exports[`Component: EditBounce renders ready correctly 1`] = `
         Create a new domain now.
       </Link>
     </Banner>
-    <SetupInstructionPanel
-      isVerified={true}
-      isVerifying={false}
+    <BounceSetupInstructionPanel
+      domain={
+        Object {
+          "status": Object {
+            "cname_status": "valid",
+          },
+        }
+      }
+      id="xyz.com"
       onVerify={[Function]}
-      recordType="CNAME"
-      verifyButtonIdentifier="verify-cname"
-    >
-      <LabelledValue
-        label="Type"
-      >
-        <p>
-          CNAME
-        </p>
-      </LabelledValue>
-      <LabelledValue
-        label="Hostname"
-      >
-        <p>
-          xyz.com
-        </p>
-      </LabelledValue>
-      <LabelledValue
-        label="Value"
-      >
-        <p>
-          sparkpostmail.com
-        </p>
-      </LabelledValue>
-    </SetupInstructionPanel>
+      verifyCnameLoading={false}
+    />
   </Right>
 </SendingDomainSection>
 `;

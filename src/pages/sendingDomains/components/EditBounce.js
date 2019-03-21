@@ -7,13 +7,12 @@ import { verifyCname, update } from 'src/actions/sendingDomains';
 import { Panel, Banner, Tooltip } from '@sparkpost/matchbox';
 import { Help } from '@sparkpost/matchbox-icons';
 import ToggleBlock from 'src/components/toggleBlock/ToggleBlock';
-import { LabelledValue } from 'src/components';
 import { showAlert } from 'src/actions/globalAlert';
 import { SendingDomainSection } from './SendingDomainSection';
 import { resolveReadyFor } from 'src/helpers/domains';
 import getConfig from 'src/helpers/getConfig';
 import { hasAutoVerifyEnabledSelector } from 'src/selectors/account';
-import SetupInstructionPanel from './SetupInstructionPanel';
+import BounceSetupInstructionPanel from './BounceSetupInstructionPanel';
 
 export class EditBounce extends Component {
 
@@ -60,28 +59,9 @@ export class EditBounce extends Component {
     );
   }
 
-  renderDnsSettings() {
-    const { id, domain, hasAutoVerifyEnabled, verifyCnameLoading } = this.props;
-    const readyFor = resolveReadyFor(domain.status);
-    const bounceDomainsConfig = getConfig('bounceDomains');
-
-    return (
-      <SetupInstructionPanel
-        isAutoVerified={hasAutoVerifyEnabled}
-        isVerified={readyFor.bounce}
-        isVerifying={verifyCnameLoading}
-        onVerify={this.verifyDomain}
-        recordType="CNAME"
-        verifyButtonIdentifier="verify-cname"
-      >
-        <LabelledValue label='Type'><p>CNAME</p></LabelledValue>
-        <LabelledValue label='Hostname'><p>{id}</p></LabelledValue>
-        <LabelledValue label='Value'><p>{bounceDomainsConfig.cnameValue}</p></LabelledValue>
-      </SetupInstructionPanel>
-    );
-  }
-
   renderNotReady() {
+    const { domain, hasAutoVerifyEnabled, id, verifyCnameLoading } = this.props;
+
     return (
       <Fragment>
         <SendingDomainSection.Left>
@@ -92,14 +72,20 @@ export class EditBounce extends Component {
         </SendingDomainSection.Left>
         <SendingDomainSection.Right>
           {this.renderRootDomainWarning()}
-          {this.renderDnsSettings()}
+          <BounceSetupInstructionPanel
+            domain={domain}
+            hasAutoVerifyEnabled={hasAutoVerifyEnabled}
+            id={id}
+            onVerify={this.verifyDomain}
+            verifyCnameLoading={verifyCnameLoading}
+          />
         </SendingDomainSection.Right>
       </Fragment>
     );
   }
 
   renderReady() {
-    const { updateLoading, id, domain } = this.props;
+    const { domain, hasAutoVerifyEnabled, id, updateLoading, verifyCnameLoading } = this.props;
     const readyFor = resolveReadyFor(domain.status);
     const bounceDomainsConfig = getConfig('bounceDomains');
 
@@ -123,7 +109,13 @@ export class EditBounce extends Component {
         <SendingDomainSection.Left/>
         <SendingDomainSection.Right>
           {this.renderRootDomainWarning()}
-          {this.renderDnsSettings()}
+          <BounceSetupInstructionPanel
+            domain={domain}
+            hasAutoVerifyEnabled={hasAutoVerifyEnabled}
+            id={id}
+            onVerify={this.verifyDomain}
+            verifyCnameLoading={verifyCnameLoading}
+          />
           {showDefaultBounceToggle &&
               <Panel sectioned>
                 <Field
