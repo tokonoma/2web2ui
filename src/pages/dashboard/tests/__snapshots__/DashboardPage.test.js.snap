@@ -18,61 +18,34 @@ exports[`Page: Dashboard tests should correctly render page when user is not ver
     accountAgeInDays={15}
     ageRangeStart={16}
   />
-  <Connect(UsageReport)
-    accountAgeInWeeks={0}
-  />
-  <SuppressionBanner
-    accountAgeInWeeks={0}
-    hasSuppressions={true}
-  />
-  <Tutorial
-    account={
-      Object {
-        "created": 2018-05-15T12:00:00.000Z,
-        "status": "active",
-        "subscription": Object {
-          "code": "paid",
-        },
+  <Connect(UsageReport) />
+  <Connect(AccessControl)
+    condition={[Function]}
+  >
+    <Tutorial
+      account={
+        Object {
+          "created": 2018-05-15T12:00:00.000Z,
+          "status": "active",
+          "subscription": Object {
+            "code": "paid",
+          },
+        }
       }
-    }
-    accountAgeInDays={15}
-    accountAgeInWeeks={0}
-    checkSuppression={
-      [MockFunction] {
-        "calls": Array [
-          Array [],
-        ],
-        "results": undefined,
+      accountAgeInDays={15}
+      accountAgeInWeeks={0}
+      checkSuppression={[MockFunction]}
+      currentUser={
+        Object {
+          "email_verfied": false,
+        }
       }
-    }
-    currentUser={
-      Object {
-        "email_verfied": false,
-      }
-    }
-    hasSuppressions={true}
-    listApiKeys={
-      [MockFunction] {
-        "calls": Array [
-          Array [
-            Object {
-              "id": 0,
-            },
-          ],
-        ],
-        "results": undefined,
-      }
-    }
-    listSendingDomains={
-      [MockFunction] {
-        "calls": Array [
-          Array [],
-        ],
-        "results": undefined,
-      }
-    }
-    verifyingEmail={false}
-  />
+      hasSuppressions={true}
+      listApiKeys={[MockFunction]}
+      listSendingDomains={[MockFunction]}
+      verifyingEmail={false}
+    />
+  </Connect(AccessControl)>
 </Page>
 `;
 
@@ -93,60 +66,33 @@ exports[`Page: Dashboard tests should display upgrade CTA when account is free a
     accountAgeInDays={15}
     ageRangeStart={16}
   />
-  <Connect(UsageReport)
-    accountAgeInWeeks={0}
-  />
-  <SuppressionBanner
-    accountAgeInWeeks={0}
-    hasSuppressions={true}
-  />
-  <Tutorial
-    account={
-      Object {
-        "status": "active",
-        "subscription": Object {
-          "code": "free",
-        },
+  <Connect(UsageReport) />
+  <Connect(AccessControl)
+    condition={[Function]}
+  >
+    <Tutorial
+      account={
+        Object {
+          "status": "active",
+          "subscription": Object {
+            "code": "free",
+          },
+        }
       }
-    }
-    accountAgeInDays={15}
-    accountAgeInWeeks={0}
-    checkSuppression={
-      [MockFunction] {
-        "calls": Array [
-          Array [],
-        ],
-        "results": undefined,
+      accountAgeInDays={15}
+      accountAgeInWeeks={0}
+      checkSuppression={[MockFunction]}
+      currentUser={
+        Object {
+          "email_verified": true,
+        }
       }
-    }
-    currentUser={
-      Object {
-        "email_verified": true,
-      }
-    }
-    hasSuppressions={true}
-    listApiKeys={
-      [MockFunction] {
-        "calls": Array [
-          Array [
-            Object {
-              "id": 0,
-            },
-          ],
-        ],
-        "results": undefined,
-      }
-    }
-    listSendingDomains={
-      [MockFunction] {
-        "calls": Array [
-          Array [],
-        ],
-        "results": undefined,
-      }
-    }
-    verifyingEmail={false}
-  />
+      hasSuppressions={true}
+      listApiKeys={[MockFunction]}
+      listSendingDomains={[MockFunction]}
+      verifyingEmail={false}
+    />
+  </Connect(AccessControl)>
 </Page>
 `;
 
@@ -168,61 +114,34 @@ exports[`Page: Dashboard tests should render import suppression list when 0 supp
     accountAgeInDays={15}
     ageRangeStart={16}
   />
-  <Connect(UsageReport)
-    accountAgeInWeeks={40}
-  />
-  <SuppressionBanner
-    accountAgeInWeeks={40}
-    hasSuppressions={false}
-  />
-  <Tutorial
-    account={
-      Object {
-        "created": 2018-05-15T12:00:00.000Z,
-        "status": "active",
-        "subscription": Object {
-          "code": "paid",
-        },
+  <Connect(UsageReport) />
+  <Connect(AccessControl)
+    condition={[Function]}
+  >
+    <Tutorial
+      account={
+        Object {
+          "created": 2018-05-15T12:00:00.000Z,
+          "status": "active",
+          "subscription": Object {
+            "code": "paid",
+          },
+        }
       }
-    }
-    accountAgeInDays={15}
-    accountAgeInWeeks={40}
-    checkSuppression={
-      [MockFunction] {
-        "calls": Array [
-          Array [],
-        ],
-        "results": undefined,
+      accountAgeInDays={15}
+      accountAgeInWeeks={40}
+      checkSuppression={[MockFunction]}
+      currentUser={
+        Object {
+          "email_verified": true,
+        }
       }
-    }
-    currentUser={
-      Object {
-        "email_verified": true,
-      }
-    }
-    hasSuppressions={false}
-    listApiKeys={
-      [MockFunction] {
-        "calls": Array [
-          Array [
-            Object {
-              "id": 0,
-            },
-          ],
-        ],
-        "results": undefined,
-      }
-    }
-    listSendingDomains={
-      [MockFunction] {
-        "calls": Array [
-          Array [],
-        ],
-        "results": undefined,
-      }
-    }
-    verifyingEmail={false}
-  />
+      hasSuppressions={false}
+      listApiKeys={[MockFunction]}
+      listSendingDomains={[MockFunction]}
+      verifyingEmail={false}
+    />
+  </Connect(AccessControl)>
 </Page>
 `;
 
@@ -244,60 +163,33 @@ exports[`Page: Dashboard tests should render page correctly with defaults 1`] = 
     accountAgeInDays={15}
     ageRangeStart={16}
   />
-  <Connect(UsageReport)
-    accountAgeInWeeks={0}
-  />
-  <SuppressionBanner
-    accountAgeInWeeks={0}
-    hasSuppressions={true}
-  />
-  <Tutorial
-    account={
-      Object {
-        "created": 2018-05-15T12:00:00.000Z,
-        "status": "active",
-        "subscription": Object {
-          "code": "paid",
-        },
+  <Connect(UsageReport) />
+  <Connect(AccessControl)
+    condition={[Function]}
+  >
+    <Tutorial
+      account={
+        Object {
+          "created": 2018-05-15T12:00:00.000Z,
+          "status": "active",
+          "subscription": Object {
+            "code": "paid",
+          },
+        }
       }
-    }
-    accountAgeInDays={15}
-    accountAgeInWeeks={0}
-    checkSuppression={
-      [MockFunction] {
-        "calls": Array [
-          Array [],
-        ],
-        "results": undefined,
+      accountAgeInDays={15}
+      accountAgeInWeeks={0}
+      checkSuppression={[MockFunction]}
+      currentUser={
+        Object {
+          "email_verified": true,
+        }
       }
-    }
-    currentUser={
-      Object {
-        "email_verified": true,
-      }
-    }
-    hasSuppressions={true}
-    listApiKeys={
-      [MockFunction] {
-        "calls": Array [
-          Array [
-            Object {
-              "id": 0,
-            },
-          ],
-        ],
-        "results": undefined,
-      }
-    }
-    listSendingDomains={
-      [MockFunction] {
-        "calls": Array [
-          Array [],
-        ],
-        "results": undefined,
-      }
-    }
-    verifyingEmail={false}
-  />
+      hasSuppressions={true}
+      listApiKeys={[MockFunction]}
+      listSendingDomains={[MockFunction]}
+      verifyingEmail={false}
+    />
+  </Connect(AccessControl)>
 </Page>
 `;
