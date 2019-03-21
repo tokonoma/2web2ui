@@ -12,7 +12,7 @@ exports[`Signals Health Score Gauge SVG renders correct color 1`] = `
     className="GaugeSvgContainer"
   >
     <svg
-      height={220}
+      height={210}
       viewBox="0 0 100 100"
       width="100%"
     >

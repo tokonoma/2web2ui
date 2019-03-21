@@ -16,7 +16,7 @@ function Gauge({ score = 0, threshold = {}}) {
 
   return (
     <div className={styles.GaugeSvgContainer}>
-      <svg width='100%' height={220} viewBox='0 0 100 100'>
+      <svg width='100%' height={210} viewBox='0 0 100 100'>
         <path className={styles.Red} fill={thresholds.danger.color} d='M14.4 82.9c-1.1 0-2.1-.6-2.7-1.6-3.3-6.3-5-13.4-5-20.6 0-24.3 19.7-44 44-44 2.6 0 5.3.2 7.8.7-.3 1.7-.2 1.2-.5 2.8-.3 1.6-.4 2.2-.6 3.1-2.2-.4-4.5-.6-6.7-.6-21 0-38 17-38 38 0 6.2 1.5 12.4 4.4 17.8.8 1.5.2 3.3-1.2 4.1-.5.2-1 .3-1.5.3z'/>
         <path className={styles.Yellow} fill={thresholds.warning.color} d='M58.3 17.3c16.2 2.8 29.2 14 34.2 29.7-.3.1-2 .8-2.8 1.1l-2.8 1.1c-4.3-13.6-15.7-23.6-29.7-26.1l1.1-5.8z'/>
         <path className={styles.Green} fill={thresholds.good.color} d='M92.5 47.1c1.4 4.3 2.1 9.1 2.1 13.6 0 7.2-1.8 14.3-5.1 20.6-.5 1-1.6 1.6-2.7 1.6-.5 0-1-.1-1.4-.3-1.5-.8-2-2.6-1.2-4.1 2.9-5.4 4.4-11.6 4.4-17.7 0-3.9-.6-7.8-1.8-11.5l5.7-2.2z'/>

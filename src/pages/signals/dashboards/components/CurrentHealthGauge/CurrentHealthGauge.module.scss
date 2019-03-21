@@ -19,6 +19,7 @@
 .Header {
   font-weight: 500;
   font-size: rem(17);
+  margin: 0;
 }
 
 .GaugeSvgContainer {
@@ -69,7 +70,7 @@
 .Description {
   display: flex;
   width: 90%;
-  margin: 0 auto spacing(larger);
+  margin: 0 auto spacing();
   align-items: center;
   justify-content: center;
 }
