@@ -65,16 +65,18 @@ export class PoolForm extends Component {
                 />
               </AccessControl>
             }
-            <AccessControl condition={configFlag('featureFlags.ip_auto_warmup')}>
-              <Field
-                name='auto_warmup_overflow_pool'
-                label='Overflow Pool'
-                component={SelectWrapper}
-                options={overflowPools}
-                helpText='If you are using the automated IP warmup feature, the overflow pool will be used when volume threshold for this pool has been reached.'
-                disabled={submitting}
-              />
-            </AccessControl>
+            {!editingDefault &&
+              <AccessControl condition={configFlag('featureFlags.ip_auto_warmup')}>
+                <Field
+                  name='auto_warmup_overflow_pool'
+                  label='Overflow Pool'
+                  component={SelectWrapper}
+                  options={overflowPools}
+                  helpText='If you are using the automated IP warmup feature, the overflow pool will be used when volume threshold for this pool has been reached.'
+                  disabled={submitting}
+                />
+              </AccessControl>
+            }
           </Panel.Section>
           <Panel.Section>
             <Button submit primary disabled={submitting || pristine}>

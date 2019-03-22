@@ -89,6 +89,11 @@ describe('PoolForm tests', () => {
       expect(wrapper.find('AccessControl').at(1).prop('condition')()).toBe(false);
     });
 
+    it('does not render if editing default pool', () => {
+      wrapper.setProps({ pool: { id: 'default', name: 'Default' }});
+      expect(wrapper.find('Field[name="auto_warmup_overflow_pool"]')).not.toExist();
+    });
+
     it('renders pools with ip only', () => {
       expect(wrapper.find('Field[name="auto_warmup_overflow_pool"]').prop('options')).toEqual([{ label: 'Another Pool (pool-2)', value: 'pool-2' }]);
     });
