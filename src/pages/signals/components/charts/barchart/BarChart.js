@@ -1,29 +1,11 @@
 /*eslint-disable */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { ResponsiveContainer, ComposedChart, ReferenceLine, Bar, Tooltip, XAxis, YAxis, CartesianGrid, Cell, Rectangle } from 'recharts';
+import { ResponsiveContainer, ComposedChart, ReferenceLine, Bar, Tooltip, XAxis, YAxis, CartesianGrid, Rectangle } from 'recharts';
 import TooltipWrapper from '../tooltip/Tooltip';
 import './BarChart.scss';
 import _ from 'lodash';
 import healthScoreThresholds from '../../../constants/healthScoreThresholds';
-import styles from './BarChart.module.scss';
-import classnames from 'classnames';
-
-// const EventsBar = (props) => {
-//   //console.log('props', props);
-//   // console.log('origFill', origFill);
-//   // console.log('selected', selected);
-//   // console.log('hovered', hovered);
-//   // const {
-//   //   fill, x, y, width, height,
-//   // } = props;
-//   let myFill = props.fill;
-//   if (props.ranking && ((props.date === props.hovered) || (props.date === props.selected))) {
-//     myFill = healthScoreThresholds[props.ranking].color
-//   }
-
-//   return <Rectangle {...props} fill={myFill} />
-// };
 
 /**
  * @example
@@ -40,7 +22,7 @@ import classnames from 'classnames';
  * />
  */
 class BarChart extends Component {
-  renderBar = ({ yKey, selected, fill }) => (
+  renderBar = ({ yKey, selected, hovered, fill }) => (
     <Bar
       stackId='stack'
       key={yKey}
@@ -50,16 +32,22 @@ class BarChart extends Component {
       fill={fill}
       isAnimationActive={false}
       minPointSize={1}
-      shape={(props) => (
-        <Rectangle className={classnames(
-          (props.date === selected) && styles.Selected,
-          !props.ranking && styles.Default, 
-          props.ranking === 'good' && styles.Good,
-          props.ranking === 'warning' && styles.Warning, 
-          props.ranking === 'danger' && styles.Danger )}
-          {...props} 
-        />
-      )}
+      shape={(props) => {
+        console.log('yKey', yKey);
+        let myFill = props.fill;
+
+        if (yKey === 'health_score') {
+          if ((props.date === hovered) || (props.date === selected)) {
+            myFill = healthScoreThresholds[props.ranking].color
+          }
+        } else {
+          if ((props.date === hovered) || (props.date === selected)) {
+            myFill = '#22838A';
+          }
+        }
+
+        return <Rectangle {...props} fill={myFill} />
+      }}
     />
   )
 
