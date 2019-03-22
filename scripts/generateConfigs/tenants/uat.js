@@ -59,7 +59,9 @@ const uatTenants = {
     featureFlags: {
       allow_anyone_at_verification: true,
       allow_default_signing_domains_for_ip_pools: true,
-      has_signup: true
+      has_signup: true,
+      ip_auto_warmup: true,
+      ip_auto_warmup_shared_pool_access: true
     },
     gtmId: 'GTM-P87NNJ4',
     host: 'app-uat.tst.sparkpost.com',

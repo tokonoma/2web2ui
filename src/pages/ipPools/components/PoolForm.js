@@ -11,13 +11,13 @@ import { configFlag } from 'src/helpers/conditions/config';
 import { selectCurrentPool } from 'src/selectors/ipPools';
 import isDefaultPool from '../helpers/defaultPool';
 import { SelectWrapper } from '../../../components/reduxFormWrappers';
-import { inSPC } from '../../../config/tenant';
 import { getIpPools } from '../../../selectors/ipPools';
 
 export class PoolForm extends Component {
   getOverflowPoolOptions = () => {
     const { pools, pool } = this.props;
-    const defaultOverflowPools = inSPC() ? [{ label: 'Community Pool', value: 'sp_shared' }] : [];
+
+    const defaultOverflowPools = configFlag('featureFlags.ip_auto_warmup_shared_pool_access')() ? [{ label: 'Community Pool', value: 'sp_shared' }] : [];
 
     const nonEmptyPools = _.compact(pools.map((currentPool) => {
       if (!currentPool.ips.length || currentPool.id === pool.id) {

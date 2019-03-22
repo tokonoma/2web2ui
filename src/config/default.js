@@ -49,7 +49,8 @@ const config = {
     allow_mailbox_verification: true,
     allow_anyone_at_verification: false,
     has_signup: false,
-    ip_auto_warmup: true
+    ip_auto_warmup: false,
+    ip_auto_warmup_shared_pool_access: false
   },
   heroku: {
     cookieName: 'heroku-nav-data'

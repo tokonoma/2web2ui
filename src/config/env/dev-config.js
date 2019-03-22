@@ -20,7 +20,9 @@ export default {
     allow_default_signing_domains_for_ip_pools: false,
     allow_mailbox_verification: true,
     allow_anyone_at_verification: true,
-    has_signup: true
+    has_signup: true,
+    ip_auto_warmup: true,
+    ip_auto_warmup_shared_pool_access: true
   },
   gaTag: 'UA-111136819-2',
   gtmId: 'GTM-P87NNJ4',
