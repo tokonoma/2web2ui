@@ -94,7 +94,7 @@ describe('PoolForm tests', () => {
     });
 
     it('renders community pool if no pool with ip available on spc', () => {
-      config.tenant = 'spc';
+      config.featureFlags.ip_auto_warmup_shared_pool_access = true;
       wrapper.setProps({ pools: props.pools.slice(0, 1) });
       expect(wrapper.find('Field[name="auto_warmup_overflow_pool"]').prop('options')).toEqual([{ label: 'Community Pool', value: 'sp_shared' }]);
     });
