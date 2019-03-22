@@ -6,7 +6,7 @@ exports[`SendMoreCTA Component renders correctly 1`] = `
 >
   <p>
     Need to send more?
-
+     
     <Connect(ConditionSwitch)>
       <Case
         condition={[Function]}
@@ -46,7 +46,7 @@ exports[`SendMoreCTA Component renders correctly 1`] = `
          to increase your daily sending limit.
       </Case>
     </Connect(ConditionSwitch)>
-
+     
     <UnstyledLink
       external={true}
       to="https://support.sparkpost.com/customer/portal/articles/2030894"
