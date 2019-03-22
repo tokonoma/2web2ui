@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Pagination } from '@sparkpost/matchbox';
 import styles from './Pagination.module.scss';
-import CollectionControls from './CollectionControls';
 import { DEFAULT_PER_PAGE_BUTTONS } from 'src/constants';
+import PerPageButtons from './PerPageButtons';
+import SaveCSVButton from './SaveCSVButton';
 
 
 class CollectionPagination extends Component {
@@ -33,13 +34,16 @@ class CollectionPagination extends Component {
         <div className={styles.PageButtons}>
           {this.renderPageButtons()}
         </div>
-        <CollectionControls
-          data = {data}
-          perPage= {perPage}
-          perPageButtons={perPageButtons}
-          onPerPageChange={onPerPageChange}
-          saveCsv = {saveCsv}
-        />
+        <div className={styles.PerPageButtons}>
+          <PerPageButtons
+            totalCount={data.length}
+            data = {data}
+            perPage= {perPage}
+            perPageButtons={perPageButtons}
+            onPerPageChange={onPerPageChange}
+          />
+          <SaveCSVButton data = {data} saveCsv = {saveCsv}/>
+        </div>
       </div>
     );
   }

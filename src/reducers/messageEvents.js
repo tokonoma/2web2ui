@@ -20,7 +20,9 @@ const initialState = {
   linkByPage: [],
   cachedResultsByPage: [],
   totalCount: 0,
-  hasMorePagesAvailable: false
+  hasMorePagesAvailable: false,
+  eventsCSV: [],
+  eventsCSVLoading: false
 };
 
 export default (state = initialState, { type, payload, meta, extra }) => {
@@ -43,6 +45,21 @@ export default (state = initialState, { type, payload, meta, extra }) => {
 
     case 'GET_MESSAGE_EVENTS_FAIL':
       return { ...state, loading: false, error: payload };
+
+
+      // Save as CSV
+
+    case 'GET_MESSAGE_EVENTS_CSV_PENDING':
+      return { ...state, eventsCSVLoading: true, error: null };
+
+    case 'GET_MESSAGE_EVENTS_CSV_SUCCESS':
+      return { ...state, eventsCSVLoading: false, eventsCSV: payload };
+
+    case 'GET_MESSAGE_EVENTS_CSV_FAIL':
+      return { ...state, eventsCSVLoading: false, error: payload };
+
+    case 'RESET_MESSAGE_EVENTS_CSV':
+      return { ...state, eventsCSV: []};
 
 
       // Changing Page

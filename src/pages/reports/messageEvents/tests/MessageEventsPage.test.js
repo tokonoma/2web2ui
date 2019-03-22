@@ -2,6 +2,8 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { MessageEventsPage } from '../MessageEventsPage';
 import { CursorPaging } from '../components/CursorPaging';
+import * as downloading from 'src/helpers/downloading';
+
 
 let wrapper;
 let instance;
@@ -12,7 +14,9 @@ describe('Page: Message Events tests', () => {
     error: null,
     loading: false,
     getMessageEvents: jest.fn(() => []),
+    getMessageEventsCSV: jest.fn(() => []),
     changePage: jest.fn(() => []),
+    clearCSV: jest.fn(),
     refreshReportOptions: jest.fn(),
     events: [
       {
@@ -38,7 +42,9 @@ describe('Page: Message Events tests', () => {
     linkByPage: ['cursor=foo', 'cursor=bar', 'cursor=foobar', null],
     cachedResultsByPage: [[]],
     hasMorePagesAvailable: true,
-    totalCount: 100
+    totalCount: 100,
+    eventsCSV: [],
+    eventsCSVLoading: false
   };
 
   beforeEach(() => {
@@ -48,6 +54,8 @@ describe('Page: Message Events tests', () => {
       currentPage: 2,
       perPage: 25
     });
+    downloading.download = jest.fn();
+    downloading.formatToCsv = jest.fn();
   });
 
   it('should render page correctly', () => {
@@ -60,6 +68,13 @@ describe('Page: Message Events tests', () => {
     expect(props.getMessageEvents).toHaveBeenCalledWith({ ...search, perPage: wrapper.state().perPage });
   });
 
+  it('starts downloading events as CSV', () => {
+    const eventsCSV = ['foo'];
+    wrapper.setProps({ eventsCSV });
+    expect(downloading.formatToCsv).toHaveBeenCalled();
+    expect(downloading.download).toHaveBeenCalled();
+  });
+
   it('does not refresh if search has not changed', () => {
     wrapper.setProps({ search: props.search, changed: 'something else' });
     expect(props.getMessageEvents).not.toHaveBeenCalled();
@@ -70,6 +85,14 @@ describe('Page: Message Events tests', () => {
     expect(wrapper).toMatchSnapshot();
     wrapper.find('ApiErrorBanner').props().reload();
     expect(wrapper.instance().props.getMessageEvents).toHaveBeenCalledWith({
+      dateOptions: {},
+      recipients: []
+    });
+  });
+
+  it('should start retrieving CSV data when clicking Save as CSV', () => {
+    wrapper.find('Button').last().simulate('click');
+    expect(wrapper.instance().props.getMessageEventsCSV).toHaveBeenCalledWith({
       dateOptions: {},
       recipients: []
     });

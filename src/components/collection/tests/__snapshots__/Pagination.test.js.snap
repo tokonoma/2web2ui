@@ -5,37 +5,63 @@ exports[`Collection Pagination Component should hide pagination if data is less 
   <div
     className="PageButtons"
   />
-  <CollectionControls
-    data={
-      Array [
-        Object {
-          "key": 1,
-        },
-        Object {
-          "key": 2,
-        },
-        Object {
-          "key": 3,
-        },
-        Object {
-          "key": 4,
-        },
-        Object {
-          "key": 5,
-        },
-      ]
-    }
-    perPage={10}
-    perPageButtons={
-      Array [
-        10,
-        25,
-        50,
-        100,
-      ]
-    }
-    saveCsv={true}
-  />
+  <div
+    className="PerPageButtons"
+  >
+    <PerPageButtons
+      data={
+        Array [
+          Object {
+            "key": 1,
+          },
+          Object {
+            "key": 2,
+          },
+          Object {
+            "key": 3,
+          },
+          Object {
+            "key": 4,
+          },
+          Object {
+            "key": 5,
+          },
+        ]
+      }
+      perPage={10}
+      perPageButtons={
+        Array [
+          10,
+          25,
+          50,
+          100,
+        ]
+      }
+      totalCount={5}
+    />
+    <SaveCSVButton
+      data={
+        Array [
+          Object {
+            "key": 1,
+          },
+          Object {
+            "key": 2,
+          },
+          Object {
+            "key": 3,
+          },
+          Object {
+            "key": 4,
+          },
+          Object {
+            "key": 5,
+          },
+        ]
+      }
+      saveCsv={true}
+    />
+  </div>
 </div>
 `;
 

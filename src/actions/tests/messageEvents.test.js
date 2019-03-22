@@ -47,6 +47,32 @@ describe('Action Creator: MessageEvents', () => {
     });
   });
 
+  describe('getMessageEventsCSV', () => {
+    it('should dispatch get action with from/to', () => {
+      const dateOptions = {
+        from: '2018-02-15T12:00:00',
+        to: '2018-02-16T12:00:00'
+      };
+
+      expect(messageEvents.getMessageEventsCSV({ dateOptions })).toMatchSnapshot();
+    });
+
+    it('should dispatch get action with a limit of 5000 results', () => {
+      const dateOptions = {
+        from: '2018-02-15T12:00:00',
+        to: '2018-02-16T12:00:00'
+      };
+
+      expect(messageEvents.getMessageEventsCSV({ dateOptions }).meta.params.per_page).toEqual(5000);
+    });
+  });
+
+  describe('clearCSV', () => {
+    it('should dispatch an action to clear csv data', () => {
+      expect(messageEvents.clearCSV()).toEqual({ type: 'RESET_MESSAGE_EVENTS_CSV' });
+    });
+  });
+
   describe('changePage', () => {
     let getStateMock;
     let dispatchMock;
