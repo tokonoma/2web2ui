@@ -94,8 +94,13 @@ describe('PoolForm tests', () => {
       expect(wrapper.find('Field[name="auto_warmup_overflow_pool"]')).not.toExist();
     });
 
-    it('renders pools with ip only', () => {
+    it('renders overflow pools with ip only pools', () => {
       expect(wrapper.find('Field[name="auto_warmup_overflow_pool"]').prop('options')).toEqual([{ label: 'Another Pool (pool-2)', value: 'pool-2' }]);
+    });
+
+    it('shows default pool in overflow pool list', () => {
+      wrapper.setProps({ pools: [{ name: 'Default', id: 'default', ips: [{ external_ip: '1.1.1.1' }]}, { name: 'My Pool', id: 'my-pool', ips: []}]});
+      expect(wrapper.find('Field[name="auto_warmup_overflow_pool"]').prop('options')).toEqual([{ label: 'Default (default)', value: 'default' }]);
     });
 
     it('hides overflow pool if no pools with ip exist', () => {
