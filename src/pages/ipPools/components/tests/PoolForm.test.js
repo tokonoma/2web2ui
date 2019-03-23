@@ -98,10 +98,14 @@ describe('PoolForm tests', () => {
       expect(wrapper.find('Field[name="auto_warmup_overflow_pool"]').prop('options')).toEqual([{ label: 'Another Pool (pool-2)', value: 'pool-2' }]);
     });
 
-    it('renders community pool if no pool with ip available on spc', () => {
-      config.featureFlags.ip_auto_warmup_shared_pool_access = true;
+    it('hides overflow pool if no pools with ip exist', () => {
       wrapper.setProps({ pools: props.pools.slice(0, 1) });
-      expect(wrapper.find('Field[name="auto_warmup_overflow_pool"]').prop('options')).toEqual([{ label: 'Community Pool', value: 'sp_shared' }]);
+      expect(wrapper.find('Field[name="auto_warmup_overflow_pool"]')).not.toExist();
+    });
+
+    it('hides overflow pool if no pools exist', () => {
+      wrapper.setProps({ pools: []});
+      expect(wrapper.find('Field[name="auto_warmup_overflow_pool"]')).not.toExist();
     });
   });
 });

@@ -17,9 +17,7 @@ export class PoolForm extends Component {
   getOverflowPoolOptions = () => {
     const { pools, pool } = this.props;
 
-    const defaultOverflowPools = configFlag('featureFlags.ip_auto_warmup_shared_pool_access')() ? [{ label: 'Community Pool', value: 'sp_shared' }] : [];
-
-    const nonEmptyPools = _.compact(pools.map((currentPool) => {
+    return _.compact(pools.map((currentPool) => {
       if (!currentPool.ips.length || currentPool.id === pool.id) {
         return null;
       }
@@ -30,7 +28,6 @@ export class PoolForm extends Component {
       };
     }));
 
-    return nonEmptyPools.length ? nonEmptyPools : defaultOverflowPools;
   }
 
   render() {
@@ -65,7 +62,7 @@ export class PoolForm extends Component {
                 />
               </AccessControl>
             }
-            {!editingDefault &&
+            {!editingDefault && Boolean(overflowPools.length) &&
               <AccessControl condition={configFlag('featureFlags.ip_auto_warmup')}>
                 <Field
                   name='auto_warmup_overflow_pool'

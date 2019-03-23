@@ -21,8 +21,7 @@ export default {
     allow_mailbox_verification: true,
     allow_anyone_at_verification: true,
     has_signup: true,
-    ip_auto_warmup: true,
-    ip_auto_warmup_shared_pool_access: true
+    ip_auto_warmup: true
   },
   gaTag: 'UA-111136819-2',
   gtmId: 'GTM-P87NNJ4',
