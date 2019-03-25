@@ -121,7 +121,7 @@ describe('Selector: ipPools', () => {
     });
 
     it('returns inital values for ip form', () => {
-      expect(ipPoolSelectors.selectIpFormInitialValues(state, props)).toEqual({ external_ip: '1.1.1.1', ip_pool: 'small' });
+      expect(ipPoolSelectors.selectIpFormInitialValues(state, props)).toEqual({ external_ip: '1.1.1.1', ip_pool: 'small', 'auto_warmup_stage': 1 });
     });
   });
 });

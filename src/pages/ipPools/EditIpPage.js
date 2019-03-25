@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Page } from '@sparkpost/matchbox';
 import _ from 'lodash';
 
@@ -13,15 +13,25 @@ import { selectCurrentPool, selectIpForCurrentPool } from 'src/selectors/ipPools
 
 export class EditIpPage extends Component {
   onUpdateIp = (values) => {
-    const { updateSendingIp, ip, showAlert } = this.props;
+    const { updateSendingIp, ip, showAlert, history } = this.props;
 
-    return updateSendingIp(ip.external_ip, values.ip_pool)
-      .then((res) => {
+    if (!values.auto_warmup_enabled) {
+      delete values.auto_warmup_stage;
+    }
+
+    const reAssignedPool = ip.ip_pool !== values.ip_pool;
+
+    return updateSendingIp(ip.external_ip, values)
+      .then(() => {
+        if (reAssignedPool) {
+          history.replace(`/account/ip-pools/edit/${values.ip_pool}/${ip.external_ip}`);
+        }
         showAlert({
           type: 'success',
           message: `Updated IP ${ip.external_ip}.`
         });
-      });
+      })
+      .then(this.loadDependentData);
   };
 
   loadDependentData = () => {
@@ -53,12 +63,8 @@ export class EditIpPage extends Component {
   render() {
     const { loading, pool, ip } = this.props;
 
-    if (loading || _.isEmpty(pool)) {
+    if (loading || _.isEmpty(pool) || _.isEmpty(ip)) {
       return <Loading/>;
-    }
-
-    if (pool && _.isEmpty(ip)) {
-      return <Redirect to={`/account/ip-pools/edit/${pool.id}`} />;
     }
 
     const breadcrumbAction = {

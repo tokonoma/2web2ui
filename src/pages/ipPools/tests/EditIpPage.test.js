@@ -1,5 +1,6 @@
 import { shallow } from 'enzyme';
 import React from 'react';
+import _ from 'lodash';
 import { EditIpPage } from '../EditIpPage';
 
 describe('IP Edit Page', () => {
@@ -11,13 +12,16 @@ describe('IP Edit Page', () => {
       listPools: jest.fn(),
       pool: { name: 'My Pool', id: 'my-pool' },
       loading: false,
-      ip: { external_ip: '1.1.1.1' },
+      ip: { external_ip: '1.1.1.1', ip_pool: 'foo' },
       updateSendingIp: jest.fn(() => Promise.resolve()),
       showAlert: jest.fn(),
       match: {
         params: {
           id: 'my-pool'
         }
+      },
+      history: {
+        replace: jest.fn()
       }
     };
 
@@ -38,12 +42,16 @@ describe('IP Edit Page', () => {
     expect(wrapper.exists('Page')).toBe(false);
   });
 
-  it('redirects loader when no ip', () => {
-    wrapper.setProps({ ip: null });
-    expect(wrapper).toMatchSnapshot();
+  it('renders loader when no pool', () => {
+    wrapper.setProps({ pool: null });
+    expect(wrapper.exists('Loading')).toBe(true);
+    expect(wrapper.exists('Page')).toBe(false);
+  });
 
-    expect(wrapper.find('Redirect')).toExist();
-    expect(wrapper.find('Redirect').prop('to')).toEqual('/account/ip-pools/edit/my-pool');
+  it('renders loader when no ip', () => {
+    wrapper.setProps({ ip: null });
+    expect(wrapper.exists('Loading')).toBe(true);
+    expect(wrapper.exists('Page')).toBe(false);
   });
 
   it('invokes updateSendingIp function upon submitting the ip form', () => {
@@ -66,18 +74,38 @@ describe('IP Edit Page', () => {
   });
 
   describe('onUpdateIp', () => {
+    let ipData;
+    beforeEach(() => {
+      ipData = { ip_pool: 'foo', auto_warmup_enabled: true, auto_warmup_stage: 2 };
+    });
+
     it('updates ip with ip pool data', async () => {
-      await wrapper.instance().onUpdateIp({ ip_pool: 'foo' });
-      expect(props.updateSendingIp).toHaveBeenCalledWith('1.1.1.1', 'foo');
+      await wrapper.instance().onUpdateIp(ipData);
+      expect(props.updateSendingIp).toHaveBeenCalledWith('1.1.1.1', ipData);
+      expect(props.showAlert).toHaveBeenCalledTimes(1);
+      expect(props.history.replace).not.toHaveBeenCalled();
+    });
+
+    it('removes auto_warmup_stage if ip warmup is not enabled', async () => {
+      ipData.auto_warmup_enabled = false;
+      await wrapper.instance().onUpdateIp(ipData);
+      expect(props.updateSendingIp).toHaveBeenCalledWith('1.1.1.1', _.omit(ipData, 'auto_warmup_stage'));
       expect(props.showAlert).toHaveBeenCalledTimes(1);
     });
 
     it('throws on error', async () => {
       const err = new Error('API Failed');
       props.updateSendingIp.mockReturnValue(Promise.reject(err));
-      await expect(wrapper.instance().onUpdateIp({ ip_pool: 'bar' })).rejects.toThrow(err);
-      expect(props.updateSendingIp).toHaveBeenCalledWith('1.1.1.1', 'bar');
+      await expect(wrapper.instance().onUpdateIp(ipData)).rejects.toThrow(err);
+      expect(props.updateSendingIp).toHaveBeenCalledWith('1.1.1.1', ipData);
       expect(props.showAlert).toHaveBeenCalledTimes(0);
+    });
+
+    it('redirects to new pool if ip reassigned', async () => {
+      const updatedIpData = { ...ipData, ip_pool: 'bar' };
+      await wrapper.instance().onUpdateIp(updatedIpData);
+      expect(props.updateSendingIp).toHaveBeenCalledWith('1.1.1.1', updatedIpData);
+      expect(props.history.replace).toHaveBeenCalledWith('/account/ip-pools/edit/bar/1.1.1.1');
     });
   });
 });
