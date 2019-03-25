@@ -1,8 +1,8 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import { EngagementRateByCohortPage } from '../EngagementRateByCohortPage';
+import { UnsubscribeRateByCohortPage } from '../UnsubscribeRateByCohortPage';
 
-describe('Signals Engagement Rate By Cohort Page', () => {
+describe('Signals Unsubscribe Rate Page', () => {
   let wrapper;
   let props;
   const data = [
@@ -28,7 +28,7 @@ describe('Signals Engagement Rate By Cohort Page', () => {
       xTicks: [1,2],
       selectedDate: '2017-01-02'
     };
-    wrapper = shallow(<EngagementRateByCohortPage {...props}/>);
+    wrapper = shallow(<UnsubscribeRateByCohortPage {...props}/>);
     wrapper.setProps({ data });
   });
 
@@ -67,7 +67,7 @@ describe('Signals Engagement Rate By Cohort Page', () => {
 
     it('gets x axis props', () => {
       const axisProps = wrapper.find('LineChart').prop('xAxisProps');
-      expect(axisProps).toMatchSnapshot();
+      expect(axisProps.ticks).toEqual([1,2]);
       expect(axisProps.tickFormatter('2018-12-05')).toEqual('12/5');
     });
 

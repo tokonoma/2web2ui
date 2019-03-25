@@ -26,6 +26,12 @@ Object {
     "loading": false,
     "totalCount": 0,
   },
+  "unsubscribeRateByCohort": Object {
+    "data": Array [],
+    "error": null,
+    "loading": false,
+    "totalCount": 0,
+  },
 }
 `;
 
@@ -50,6 +56,12 @@ Object {
     "totalCount": 0,
   },
   "spamHits": Object {
+    "data": Array [],
+    "error": null,
+    "loading": false,
+    "totalCount": 0,
+  },
+  "unsubscribeRateByCohort": Object {
     "data": Array [],
     "error": null,
     "loading": false,
@@ -88,6 +100,12 @@ Object {
     "loading": false,
     "totalCount": 0,
   },
+  "unsubscribeRateByCohort": Object {
+    "data": Array [],
+    "error": null,
+    "loading": false,
+    "totalCount": 0,
+  },
 }
 `;
 
@@ -117,6 +135,12 @@ Object {
     "loading": false,
     "totalCount": 0,
   },
+  "unsubscribeRateByCohort": Object {
+    "data": Array [],
+    "error": null,
+    "loading": false,
+    "totalCount": 0,
+  },
 }
 `;
 
@@ -141,6 +165,12 @@ Object {
     "totalCount": 0,
   },
   "spamHits": Object {
+    "data": Array [],
+    "error": null,
+    "loading": false,
+    "totalCount": 0,
+  },
+  "unsubscribeRateByCohort": Object {
     "data": Array [],
     "error": null,
     "loading": false,
@@ -179,6 +209,12 @@ Object {
     "loading": false,
     "totalCount": 0,
   },
+  "unsubscribeRateByCohort": Object {
+    "data": Array [],
+    "error": null,
+    "loading": false,
+    "totalCount": 0,
+  },
 }
 `;
 
@@ -208,6 +244,12 @@ Object {
     "loading": false,
     "totalCount": 0,
   },
+  "unsubscribeRateByCohort": Object {
+    "data": Array [],
+    "error": null,
+    "loading": false,
+    "totalCount": 0,
+  },
 }
 `;
 
@@ -232,6 +274,12 @@ Object {
     "totalCount": 0,
   },
   "spamHits": Object {
+    "data": Array [],
+    "error": null,
+    "loading": false,
+    "totalCount": 0,
+  },
+  "unsubscribeRateByCohort": Object {
     "data": Array [],
     "error": null,
     "loading": false,
@@ -270,6 +318,12 @@ Object {
     "loading": false,
     "totalCount": 0,
   },
+  "unsubscribeRateByCohort": Object {
+    "data": Array [],
+    "error": null,
+    "loading": false,
+    "totalCount": 0,
+  },
 }
 `;
 
@@ -294,6 +348,12 @@ Object {
     "totalCount": 0,
   },
   "spamHits": Object {
+    "data": Array [],
+    "error": null,
+    "loading": false,
+    "totalCount": 0,
+  },
+  "unsubscribeRateByCohort": Object {
     "data": Array [],
     "error": null,
     "loading": false,
@@ -328,6 +388,12 @@ Object {
     "loading": false,
     "totalCount": 0,
   },
+  "unsubscribeRateByCohort": Object {
+    "data": Array [],
+    "error": null,
+    "loading": false,
+    "totalCount": 0,
+  },
 }
 `;
 
@@ -355,6 +421,12 @@ Object {
     "data": Array [],
     "error": null,
     "loading": true,
+    "totalCount": 0,
+  },
+  "unsubscribeRateByCohort": Object {
+    "data": Array [],
+    "error": null,
+    "loading": false,
     "totalCount": 0,
   },
 }
@@ -389,6 +461,12 @@ Object {
     "error": null,
     "loading": false,
     "totalCount": 3,
+  },
+  "unsubscribeRateByCohort": Object {
+    "data": Array [],
+    "error": null,
+    "loading": false,
+    "totalCount": 0,
   },
 }
 `;

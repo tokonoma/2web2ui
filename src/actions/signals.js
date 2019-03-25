@@ -66,6 +66,11 @@ export const getEngagementRateByCohort = signalsActionCreator({
   type: 'GET_ENGAGEMENT_RATE_BY_COHORT'
 });
 
+export const getUnsubscribeRateByCohort = signalsActionCreator({
+  dimension: 'unsubscribe_by_cohort', // TODO update when api is ready
+  type: 'GET_UNSUBSCRIBE_RATE_BY_COHORT'
+});
+
 export const getHealthScore = signalsActionCreator({
   dimension: 'health-score',
   type: 'GET_HEALTH_SCORE'

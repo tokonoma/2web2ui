@@ -223,3 +223,34 @@ export function getEngagementRateByCohort({ facet, filter }) {
     }), 500);
   };
 }
+
+
+export function getUnsubscribeRateByCohort({ facet, filter }) {
+  return (dispatch, getState) => {
+    const { relativeRange } = getState().signalOptions;
+    const count = Number(relativeRange.replace('days', ''));
+    const data = engagementRateDetails(count + 1);
+
+    dispatch({
+      type: 'GET_UNSUBSCRIBE_RATE_BY_COHORT_PENDING'
+    });
+
+    setTimeout(() => dispatch({
+      type: 'GET_UNSUBSCRIBE_RATE_BY_COHORT_SUCCESS',
+      payload: {
+        data: [
+          {
+            [facet]: filter,
+            history: data
+          },
+          {
+            // simulating multiple results to for facetid matching
+            [facet]: 'notthisone',
+            history: data
+          }
+        ],
+        total_count: 2
+      }
+    }), 500);
+  };
+}

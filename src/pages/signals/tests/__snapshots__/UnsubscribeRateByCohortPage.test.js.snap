@@ -1,16 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Signals Engagement Rate By Cohort Page bar chart props gets x axis props 1`] = `
-Object {
-  "tickFormatter": [Function],
-  "ticks": Array [
-    1,
-    2,
-  ],
-}
-`;
-
-exports[`Signals Engagement Rate By Cohort Page bar chart props renders tooltip content 1`] = `
+exports[`Signals Unsubscribe Rate Page bar chart props renders tooltip content 1`] = `
 <Fragment>
   <TooltipMetric
     color="#88E2E7"
@@ -50,7 +40,7 @@ exports[`Signals Engagement Rate By Cohort Page bar chart props renders tooltip 
 </Fragment>
 `;
 
-exports[`Signals Engagement Rate By Cohort Page renders correctly 1`] = `
+exports[`Signals Unsubscribe Rate Page renders correctly 1`] = `
 <SignalsPage
   breadcrumbAction={
     Object {
@@ -59,7 +49,7 @@ exports[`Signals Engagement Rate By Cohort Page renders correctly 1`] = `
       "to": "/signals",
     }
   }
-  dimensionPrefix="Engagement Rate by Cohort for"
+  dimensionPrefix="Unsubscribe Rate by Cohort for"
   facet="sending-domain"
   facetId="test.com"
   primaryArea={<Connect(DateFilter) />}
@@ -251,7 +241,7 @@ exports[`Signals Engagement Rate By Cohort Page renders correctly 1`] = `
 </SignalsPage>
 `;
 
-exports[`Signals Engagement Rate By Cohort Page renders empty correctly 1`] = `
+exports[`Signals Unsubscribe Rate Page renders empty correctly 1`] = `
 <Panel
   sectioned={true}
 >
@@ -263,7 +253,7 @@ exports[`Signals Engagement Rate By Cohort Page renders empty correctly 1`] = `
 </Panel>
 `;
 
-exports[`Signals Engagement Rate By Cohort Page renders error correctly 1`] = `
+exports[`Signals Unsubscribe Rate Page renders error correctly 1`] = `
 <SignalsPage
   breadcrumbAction={
     Object {
@@ -272,7 +262,7 @@ exports[`Signals Engagement Rate By Cohort Page renders error correctly 1`] = `
       "to": "/signals",
     }
   }
-  dimensionPrefix="Engagement Rate by Cohort for"
+  dimensionPrefix="Unsubscribe Rate by Cohort for"
   facet="sending-domain"
   facetId="test.com"
   primaryArea={<Connect(DateFilter) />}
@@ -327,7 +317,7 @@ exports[`Signals Engagement Rate By Cohort Page renders error correctly 1`] = `
 </SignalsPage>
 `;
 
-exports[`Signals Engagement Rate By Cohort Page renders loading correctly 1`] = `
+exports[`Signals Unsubscribe Rate Page renders loading correctly 1`] = `
 <Panel
   sectioned={true}
 >

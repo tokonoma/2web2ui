@@ -131,6 +131,34 @@ describe('Selectors: signals', () => {
           loading: false,
           error: null
         },
+        unsubscribeRateByCohort: {
+          total_count: 10,
+          data: [
+            {
+              sending_domain: 'test.com',
+              history: [
+                {
+                  c_total_unsubscribes: 25,
+                  c_new_unsubscribes: 5,
+                  c_uneng_unsubscribes: 5,
+                  c_14d_unsubscribes: 5,
+                  c_365d_unsubscribes: 5,
+                  dt: '2018-01-01'
+                },
+                {
+                  c_total_unsubscribes: 50,
+                  c_new_unsubscribes: 10,
+                  c_uneng_unsubscribes: 10,
+                  c_14d_unsubscribes: 10,
+                  c_365d_unsubscribes: 10,
+                  dt: '2018-01-03'
+                }
+              ]
+            }
+          ],
+          loading: false,
+          error: null
+        },
         healthScore: {
           total_count: 10,
           data: [
@@ -218,12 +246,28 @@ describe('Selectors: signals', () => {
 
     it('should be empty with only fill data when not loading', () => {
       const stateWhenEmpty = { ...state, signals: { engagementRateByCohort: { data: [], loading: false }}};
-      expect(selectors.selectEngagementRateByCohortDetails(stateWhenEmpty, props)).toMatchSnapshot();
+      expect(selectors.selectEngagementRateByCohortDetails(stateWhenEmpty, props).details.empty).toBe(true);
     });
 
     it('should not be empty when loading', () => {
       const stateWhenLoading = { ...state, signals: { engagementRateByCohort: { data: [], loading: true }}};
       expect(selectors.selectEngagementRateByCohortDetails(stateWhenLoading, props).details.empty).toBe(false);
+    });
+  });
+
+  describe('unsubscrite rate by cohort details', () => {
+    it('should select details', () => {
+      expect(selectors.selectUnsubscribeRateByCohortDetails(state, props)).toMatchSnapshot();
+    });
+
+    it('should be empty with only fill data when not loading', () => {
+      const stateWhenEmpty = { ...state, signals: { unsubscribeRateByCohort: { data: [], loading: false }}};
+      expect(selectors.selectUnsubscribeRateByCohortDetails(stateWhenEmpty, props).details.empty).toBe(true);
+    });
+
+    it('should not be empty when loading', () => {
+      const stateWhenLoading = { ...state, signals: { unsubscribeRateByCohort: { data: [], loading: true }}};
+      expect(selectors.selectUnsubscribeRateByCohortDetails(stateWhenLoading, props).details.empty).toBe(false);
     });
   });
 
