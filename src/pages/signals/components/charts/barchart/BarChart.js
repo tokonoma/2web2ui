@@ -22,7 +22,7 @@ import healthScoreThresholds from '../../../constants/healthScoreThresholds';
  * />
  */
 class BarChart extends Component {
-  renderBar = ({ yKey, selected, hovered, fill }) => (
+  renderBar = ({ yKey, selected, hovered }) => (
     <Bar
       stackId='stack'
       key={yKey}
@@ -51,13 +51,13 @@ class BarChart extends Component {
   )
 
   renderBars = () => {
-    const { yKeys, yKey, xKey, selected, hovered, fill, timeSeries } = this.props;
+    const { yKeys, yKey, selected, hovered } = this.props;
 
     if (yKeys) {
       return yKeys.map(this.renderBar);
     }
 
-    return this.renderBar({ yKey, xKey, selected, hovered, fill, timeSeries });
+    return this.renderBar({ yKey, selected, hovered });
   }
 
   render() {
