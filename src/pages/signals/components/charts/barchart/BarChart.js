@@ -29,11 +29,10 @@ class BarChart extends Component {
       dataKey={yKey}
       onClick={this.props.onClick}
       onMouseOver={this.props.onMouseOver}
-      fill={fill}
+      fill={'#B3ECEF'}
       isAnimationActive={false}
       minPointSize={1}
       shape={(props) => {
-        console.log('yKey', yKey);
         let myFill = props.fill;
 
         if (yKey === 'health_score') {
