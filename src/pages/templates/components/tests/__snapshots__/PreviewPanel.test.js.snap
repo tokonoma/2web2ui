@@ -1,41 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders AMP HTML on tab click 1`] = `
-<div
-  className="PreviewPanel notranslate"
->
-  <Tabs
-    color="orange"
-    connectBelow={true}
-    selected={2}
-    tabs={
-      Array [
-        Object {
-          "content": "HTML",
-          "onClick": [Function],
-        },
-        Object {
-          "content": "Text",
-          "onClick": [Function],
-        },
-        Object {
-          "content": "AMP HTML",
-          "onClick": [Function],
-        },
-      ]
-    }
-  />
-  <div
-    className="PreviewPanelWrapper"
-  >
-    <PreviewFrame
-      content="<h2>Test Template</h2>"
-      key="amp_html"
-    />
-  </div>
-</div>
-`;
-
 exports[`renders HTML by default 1`] = `
 <div
   className="PreviewPanel notranslate"
@@ -52,10 +16,6 @@ exports[`renders HTML by default 1`] = `
         },
         Object {
           "content": "Text",
-          "onClick": [Function],
-        },
-        Object {
-          "content": "AMP HTML",
           "onClick": [Function],
         },
       ]
@@ -90,10 +50,6 @@ exports[`renders blank panel 1`] = `
           "content": "Text",
           "onClick": [Function],
         },
-        Object {
-          "content": "AMP HTML",
-          "onClick": [Function],
-        },
       ]
     }
   />
@@ -124,10 +80,6 @@ exports[`renders text on tab click 1`] = `
         },
         Object {
           "content": "Text",
-          "onClick": [Function],
-        },
-        Object {
-          "content": "AMP HTML",
           "onClick": [Function],
         },
       ]

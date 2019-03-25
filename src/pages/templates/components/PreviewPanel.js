@@ -9,14 +9,12 @@ import styles from './PreviewPanel.module.scss';
 export default class PreviewPanel extends Component {
   static defaultProps = {
     html: '',
-    text: '',
-    amp_html: ''
+    text: ''
   }
 
   static propTypes = {
     html: PropTypes.string,
-    text: PropTypes.string,
-    amp_html: PropTypes.string
+    text: PropTypes.string
   }
 
   state = {
@@ -30,8 +28,7 @@ export default class PreviewPanel extends Component {
   render() {
     const tabs = [
       { content: 'HTML', onClick: this.onChange },
-      { content: 'Text', onClick: this.onChange },
-      { content: 'AMP HTML', onClick: this.onChange }
+      { content: 'Text', onClick: this.onChange }
     ];
 
     const selectedTabIndex = tabs.findIndex(({ content }) => content === this.state.contentType);

@@ -117,7 +117,7 @@ export default class PreviewPage extends Component {
           }
           <TextField disabled label="From" value={name ? `${name} <${email}>` : email} />
           <TextField disabled label="Subject" value={preview.subject} />
-          <PreviewPanel html={preview.html} text={preview.text} amp_html={preview.amp_html} />
+          <PreviewPanel html={preview.html} text={preview.text} />
         </Panel>
       </Page>
     );
