@@ -1,8 +1,11 @@
+/*eslint-disable */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { ResponsiveContainer, BarChart as RechartsBarchart, Bar, Tooltip, XAxis, YAxis, CartesianGrid, Rectangle } from 'recharts';
+import { ResponsiveContainer, ComposedChart, ReferenceLine, Bar, Tooltip, XAxis, YAxis, CartesianGrid, Rectangle } from 'recharts';
 import TooltipWrapper from '../tooltip/Tooltip';
 import './BarChart.scss';
+import _ from 'lodash';
+import healthScoreThresholds from '../../../constants/healthScoreThresholds';
 
 /**
  * @example
@@ -19,63 +22,56 @@ import './BarChart.scss';
  * />
  */
 class BarChart extends Component {
-  renderBar = ({ key, fill }) => (
-
+  renderBar = ({ yKey, selected, hovered, fill }) => (
     <Bar
-      cursor='pointer'
       stackId='stack'
-      key={key}
-      dataKey={key}
+      key={yKey}
+      dataKey={yKey}
       onClick={this.props.onClick}
+      onMouseOver={this.props.onMouseOver}
       fill={fill}
       isAnimationActive={false}
       minPointSize={1}
+      shape={(props) => {
+        let eventFill = props.fill;
+
+        if (yKey === 'health_score') {
+          if ((props.date === hovered) || (props.date === selected)) {
+            eventFill = healthScoreThresholds[props.ranking].color
+          }
+        } else {
+          if ((props.date === hovered) || (props.date === selected)) {
+            eventFill = '#22838A';
+          }
+        }
+
+        return <Rectangle {...props} fill={eventFill} />
+      }}
     />
 
   )
 
   renderBars = () => {
-    const { yKeys, yKey, fill } = this.props;
+    const { yKeys, yKey, selected, hovered, fill } = this.props;
 
     if (yKeys) {
       return yKeys.map(this.renderBar);
     }
 
-    return this.renderBar({ key: yKey, fill });
-  }
-
-  renderBackgrounds = () => {
-    const { xKey, selected, onClick } = this.props;
-
-    return (
-      <Bar
-        cursor='pointer'
-        dataKey='noKey'
-        stackId='stack'
-        fill='#5DCFF5'
-        isAnimationActive={false}
-        onClick={onClick}
-        shape={
-          ({ payload, background, ...rest }) => (
-            <Rectangle {...rest} {...background} opacity={payload[xKey] === selected ? 0.4 : 0} />
-          )
-        }
-      />
-    );
+    return this.renderBar({ yKey, selected, hovered, fill });
   }
 
   render() {
-    const { gap, height, disableHover, margin, timeSeries, tooltipContent, tooltipWidth, width, xKey, xAxisProps, yDomain, yAxisProps } = this.props;
+    const { gap, height, disableHover, margin, timeSeries, tooltipContent, tooltipWidth, width, xAxisRefLines, yAxisRefLines, xKey, xAxisProps, yDomain, yAxisProps } = this.props;
 
     return (
       <div className='LiftTooltip'>
         <ResponsiveContainer height={height} width={width} className='SignalsBarChart'>
-          <RechartsBarchart
+          <ComposedChart
             barCategoryGap={gap}
             data={timeSeries}
             margin={margin}
           >
-            {this.renderBackgrounds()}
             <CartesianGrid
               vertical={false}
               stroke='#e1e1e6'
@@ -101,7 +97,7 @@ class BarChart extends Component {
             {!disableHover && (
               <Tooltip
                 offset={25}
-                cursor={false}
+                cursor={{ stroke: 'none', fill: '#FFFFFF', fillOpacity: '0' }}
                 isAnimationActive={false}
                 content={<TooltipWrapper children={tooltipContent} />}
                 width={tooltipWidth}
@@ -109,7 +105,27 @@ class BarChart extends Component {
               />
             )}
             {this.renderBars()}
-          </RechartsBarchart>
+            {xAxisRefLines && xAxisRefLines.length && (
+              _.map(xAxisRefLines, (xAxisRefLine) =>
+                <ReferenceLine
+                  style={{ pointerEvents: 'none' }}
+                  x={xAxisRefLine.x}
+                  stroke={xAxisRefLine.stroke}
+                  strokeWidth={xAxisRefLine.strokeWidth}
+                />
+              )
+            )}
+            {yAxisRefLines && yAxisRefLines.length && (
+              _.map(yAxisRefLines, (yAxisRefLine) =>
+                <ReferenceLine
+                  style={{ pointerEvents: 'none' }}
+                  y={yAxisRefLine.y}
+                  stroke={yAxisRefLine.stroke}
+                  strokeWidth={yAxisRefLine.strokeWidth}
+                />
+              )
+            )}
+          </ComposedChart>
         </ResponsiveContainer>
       </div>
     );
@@ -126,11 +142,13 @@ BarChart.propTypes = {
 };
 
 BarChart.defaultProps = {
-  fill: '#B157CE',
+  fill: '#B3ECEF',
   gap: 1,
   height: 250,
   width: '99%',
   margin: { top: 12, left: 18, right: 0, bottom: 5 },
+  xAxisRefLines: [],
+  yAxisRefLines: [],
   xKey: 'date',
   yKey: 'value',
   yRange: ['auto', 'auto']

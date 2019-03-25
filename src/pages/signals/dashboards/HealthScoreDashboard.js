@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { list as getSubaccounts } from 'src/actions/subaccounts';
-import { Grid, Panel } from '@sparkpost/matchbox';
+import { Grid } from '@sparkpost/matchbox';
 import Page from '../components/SignalsPage';
 import HealthScoreOverview from '../containers/HealthScoreOverviewContainer';
 import FacetFilter from '../components/filters/FacetFilter';
 import DateFilter from '../components/filters/DateFilter';
 import SubaccountFilter from '../components/filters/SubaccountFilter';
 import CurrentHealthGauge from './components/CurrentHealthGauge/CurrentHealthGauge';
+import HealthScoreChart from './components/HealthScoreChart/HealthScoreChart';
 
 export class HealthScoreDashboard extends Component {
   componentDidMount() {
@@ -28,7 +29,7 @@ export class HealthScoreDashboard extends Component {
             <CurrentHealthGauge />
           </Grid.Column>
           <Grid.Column xs={12} lg={7} xl={8}>
-            <Panel sectioned></Panel>
+            <HealthScoreChart />
           </Grid.Column>
         </Grid>
         <div style={{ marginBottom: '1rem', marginTop: '1.5rem', textAlign: 'right' }}>
@@ -41,7 +42,7 @@ export class HealthScoreDashboard extends Component {
   }
 }
 
-const mapStateToProps = (state, props) => ({
+const mapStateToProps = (state) => ({
   subaccounts: state.subaccounts.list
 });
 

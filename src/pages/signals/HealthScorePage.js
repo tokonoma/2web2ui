@@ -54,7 +54,7 @@ export class HealthScorePage extends Component {
   }
 
   renderContent = () => {
-    const { data = [], handleDateSelect, loading, gap, empty, error, selectedDate } = this.props;
+    const { data = [], handleDateSelect, handleDateHover, loading, gap, empty, error, selectedDate, hoveredDate } = this.props;
     const { selectedComponent } = this.state;
 
     const selectedWeights = _.get(_.find(data, ['date', selectedDate]), 'weights', []);
@@ -83,17 +83,24 @@ export class HealthScorePage extends Component {
       <Grid>
         <Grid.Column sm={12} md={7}>
           <Panel sectioned>
-            <ChartHeader title='Health Score' tooltipContent={HEALTH_SCORE_INFO} />
+            <ChartHeader title='Health Score - 90 Days' tooltipContent={HEALTH_SCORE_INFO} />
             {panelContent || (
               <Fragment>
                 <BarChart
                   gap={gap}
                   onClick={handleDateSelect}
+                  onMouseOver={handleDateHover}
+                  disableHover={false}
                   selected={selectedDate}
+                  hovered={hoveredDate}
                   timeSeries={data}
                   tooltipContent={({ payload = {}}) => (
                     <TooltipMetric label='Health Score' value={`${roundToPlaces(payload.health_score * 100, 1)}`} />
                   )}
+                  yAxisRefLines={[
+                    { y: 0.80, stroke: 'green', strokeWidth: 2 },
+                    { y: 0.55, stroke: 'red', strokeWidth: 2 }
+                  ]}
                   yKey='health_score'
                   yAxisProps={{
                     tickFormatter: (tick) => tick * 100
