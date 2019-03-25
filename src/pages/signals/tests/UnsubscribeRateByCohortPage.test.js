@@ -48,7 +48,8 @@ describe('Signals Unsubscribe Rate Page', () => {
 
   it('renders error correctly', () => {
     wrapper.setProps({ error: { message: 'error message' }});
-    expect(wrapper).toMatchSnapshot();
+    expect(wrapper.find('Callout').prop('children')).toEqual('error message');
+    expect(wrapper.find('Callout').prop('title')).toEqual('Unable to Load Data');
   });
 
   describe('bar chart props', () => {
