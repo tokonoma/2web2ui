@@ -75,9 +75,24 @@ describe('Webhooks Form Component', () => {
   });
 
   describe('submit button props', () => {
-    it('should render submit text', () => {
-      wrapper.setProps({ submitText: 'Update Webhook' });
+    it('should render correct submit text when updating an existing webhook', () => {
       expect(wrapper.find('Button').props().children).toEqual('Update Webhook');
+    });
+    it('should render correct submit text when creating a new webhook', () => {
+      wrapper.setProps({ newWebhook: true });
+      expect(wrapper.find('Button').props().children).toEqual('Create Webhook');
+    });
+    it('should render correct submit text and be disabled when submitting', () => {
+      wrapper.setProps({ submitting: true });
+      expect(wrapper.find('Button').props().disabled).toEqual(true);
+      expect(wrapper.find('Button').props().children).toEqual('Submitting...');
+    });
+    it('should disable submit button when pristine', () => {
+      expect(wrapper.find('Button').props().disabled).toEqual(true);
+    });
+    it('should enable submit button when not pristine and not submitting', () => {
+      wrapper.setProps({ pristine: false });
+      expect(wrapper.find('Button').props().disabled).toEqual(false);
     });
   });
 

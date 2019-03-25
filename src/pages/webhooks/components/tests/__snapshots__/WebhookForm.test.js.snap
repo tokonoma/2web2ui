@@ -80,10 +80,13 @@ exports[`Webhooks Form Component should render correctly 1`] = `
   </Panel.Section>
   <Panel.Section>
     <Button
+      disabled={true}
       primary={true}
       size="default"
       submit={true}
-    />
+    >
+      Update Webhook
+    </Button>
   </Panel.Section>
 </form>
 `;
