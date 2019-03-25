@@ -14,7 +14,7 @@ import {
   selectIpForCurrentPool,
   selectIpFormInitialValues
 } from 'src/selectors/ipPools';
-import { configFlag } from 'src/helpers/conditions/config';
+import { isAccountUiOptionSet } from 'src/helpers/conditions/account';
 
 
 export class IpForm extends Component {
@@ -74,7 +74,7 @@ export class IpForm extends Component {
               />
             </LabelledValue>
           </Panel.Section>
-          <AccessControl condition={configFlag('featureFlags.ip_auto_warmup')}>
+          <AccessControl condition={isAccountUiOptionSet('ip_auto_warmup', false)}>
             <Panel.Section actions={[{ content: 'What is Auto Warmup?', to: 'https://www.sparkpost.com/docs/deliverability/ip-warm-up-overview/', external: true, color: 'orange' }]}>
               <LabelledValue label='Auto IP Warmup'>
                 <Field
