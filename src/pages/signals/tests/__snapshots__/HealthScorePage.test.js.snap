@@ -60,7 +60,7 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
         sectioned={true}
       >
         <ChartHeader
-          title="Health Score"
+          title="Health Score - 90 Days"
           tooltipContent="
   This is a predictive score that monitors your email health to identify problems before
   they negatively impact email delivery. This score is informed by message events,
@@ -68,7 +68,8 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
 "
         />
         <BarChart
-          fill="#B157CE"
+          disableHover={false}
+          fill="#B3ECEF"
           gap={0.25}
           height={250}
           margin={
@@ -123,11 +124,26 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
               "ticks": Array [],
             }
           }
+          xAxisRefLines={Array []}
           xKey="date"
           yAxisProps={
             Object {
               "tickFormatter": [Function],
             }
+          }
+          yAxisRefLines={
+            Array [
+              Object {
+                "stroke": "green",
+                "strokeWidth": 2,
+                "y": 0.8,
+              },
+              Object {
+                "stroke": "red",
+                "strokeWidth": 2,
+                "y": 0.55,
+              },
+            ]
           }
           yKey="health_score"
           yRange={
@@ -144,7 +160,7 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
 "
         />
         <BarChart
-          fill="#B157CE"
+          fill="#B3ECEF"
           gap={0.25}
           height={190}
           margin={
@@ -199,12 +215,14 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
               "ticks": Array [],
             }
           }
+          xAxisRefLines={Array []}
           xKey="date"
           yAxisProps={
             Object {
               "tickFormatter": [Function],
             }
           }
+          yAxisRefLines={Array []}
           yKey="injections"
           yRange={
             Array [
@@ -217,7 +235,7 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
           title="Hard Bounces Percent"
         />
         <BarChart
-          fill="#B157CE"
+          fill="#B3ECEF"
           gap={0.25}
           height={190}
           margin={
@@ -251,12 +269,14 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
               "ticks": Array [],
             }
           }
+          xAxisRefLines={Array []}
           xKey="date"
           yAxisProps={
             Object {
               "tickFormatter": [Function],
             }
           }
+          yAxisRefLines={Array []}
           yKey="weight_value"
           yRange={
             Array [
@@ -363,7 +383,7 @@ exports[`Signals Health Score Page renders empty correctly 1`] = `
   sectioned={true}
 >
   <ChartHeader
-    title="Health Score"
+    title="Health Score - 90 Days"
     tooltipContent="
   This is a predictive score that monitors your email health to identify problems before
   they negatively impact email delivery. This score is informed by message events,
@@ -401,7 +421,7 @@ exports[`Signals Health Score Page renders empty weights 1`] = `
         sectioned={true}
       >
         <ChartHeader
-          title="Health Score"
+          title="Health Score - 90 Days"
           tooltipContent="
   This is a predictive score that monitors your email health to identify problems before
   they negatively impact email delivery. This score is informed by message events,
@@ -409,7 +429,8 @@ exports[`Signals Health Score Page renders empty weights 1`] = `
 "
         />
         <BarChart
-          fill="#B157CE"
+          disableHover={false}
+          fill="#B3ECEF"
           gap={0.25}
           height={250}
           margin={
@@ -437,11 +458,26 @@ exports[`Signals Health Score Page renders empty weights 1`] = `
               "ticks": Array [],
             }
           }
+          xAxisRefLines={Array []}
           xKey="date"
           yAxisProps={
             Object {
               "tickFormatter": [Function],
             }
+          }
+          yAxisRefLines={
+            Array [
+              Object {
+                "stroke": "green",
+                "strokeWidth": 2,
+                "y": 0.8,
+              },
+              Object {
+                "stroke": "red",
+                "strokeWidth": 2,
+                "y": 0.55,
+              },
+            ]
           }
           yKey="health_score"
           yRange={
@@ -458,7 +494,7 @@ exports[`Signals Health Score Page renders empty weights 1`] = `
 "
         />
         <BarChart
-          fill="#B157CE"
+          fill="#B3ECEF"
           gap={0.25}
           height={190}
           margin={
@@ -486,12 +522,14 @@ exports[`Signals Health Score Page renders empty weights 1`] = `
               "ticks": Array [],
             }
           }
+          xAxisRefLines={Array []}
           xKey="date"
           yAxisProps={
             Object {
               "tickFormatter": [Function],
             }
           }
+          yAxisRefLines={Array []}
           yKey="injections"
           yRange={
             Array [
@@ -574,7 +612,7 @@ exports[`Signals Health Score Page renders error correctly 1`] = `
         sectioned={true}
       >
         <ChartHeader
-          title="Health Score"
+          title="Health Score - 90 Days"
           tooltipContent="
   This is a predictive score that monitors your email health to identify problems before
   they negatively impact email delivery. This score is informed by message events,
@@ -635,7 +673,7 @@ exports[`Signals Health Score Page renders loading correctly 1`] = `
   sectioned={true}
 >
   <ChartHeader
-    title="Health Score"
+    title="Health Score - 90 Days"
     tooltipContent="
   This is a predictive score that monitors your email health to identify problems before
   they negatively impact email delivery. This score is informed by message events,

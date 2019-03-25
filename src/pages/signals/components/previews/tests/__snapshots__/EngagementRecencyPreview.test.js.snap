@@ -18,7 +18,7 @@ exports[`Signals EngagementRecencyPreview Component renders correctly 1`] = `
     <Panel.Section>
       <BarChart
         disableHover={true}
-        fill="#B157CE"
+        fill="#B3ECEF"
         gap={0.5}
         height={170}
         margin={
@@ -42,6 +42,7 @@ exports[`Signals EngagementRecencyPreview Component renders correctly 1`] = `
             "hide": true,
           }
         }
+        xAxisRefLines={Array []}
         xKey="date"
         yAxisProps={
           Object {
@@ -59,6 +60,7 @@ exports[`Signals EngagementRecencyPreview Component renders correctly 1`] = `
             ],
           }
         }
+        yAxisRefLines={Array []}
         yKey="value"
         yKeys={
           Array [

@@ -22,11 +22,11 @@ import healthScoreThresholds from '../../../constants/healthScoreThresholds';
  * />
  */
 class BarChart extends Component {
-  renderBar = ({ yKey, selected, hovered, fill }) => (
+  renderBar = ({ key, selected, hovered, fill }) => (
     <Bar
       stackId='stack'
-      key={yKey}
-      dataKey={yKey}
+      key={key}
+      dataKey={key}
       onClick={this.props.onClick}
       onMouseOver={this.props.onMouseOver}
       fill={fill}
@@ -35,7 +35,7 @@ class BarChart extends Component {
       shape={(props) => {
         let eventFill = props.fill;
 
-        if (yKey === 'health_score') {
+        if (key === 'health_score') {
           if ((props.date === hovered) || (props.date === selected)) {
             eventFill = healthScoreThresholds[props.ranking].color
           }
@@ -58,7 +58,7 @@ class BarChart extends Component {
       return yKeys.map(this.renderBar);
     }
 
-    return this.renderBar({ yKey, selected, hovered, fill });
+    return this.renderBar({ key: yKey, selected, hovered, fill });
   }
 
   render() {
@@ -106,8 +106,9 @@ class BarChart extends Component {
             )}
             {this.renderBars()}
             {xAxisRefLines && xAxisRefLines.length && (
-              _.map(xAxisRefLines, (xAxisRefLine) =>
+              _.map(xAxisRefLines, (xAxisRefLine, index) =>
                 <ReferenceLine
+                  key={index}
                   style={{ pointerEvents: 'none' }}
                   x={xAxisRefLine.x}
                   stroke={xAxisRefLine.stroke}
@@ -116,8 +117,9 @@ class BarChart extends Component {
               )
             )}
             {yAxisRefLines && yAxisRefLines.length && (
-              _.map(yAxisRefLines, (yAxisRefLine) =>
+              _.map(yAxisRefLines, (yAxisRefLine, index) =>
                 <ReferenceLine
+                  key={index}
                   style={{ pointerEvents: 'none' }}
                   y={yAxisRefLine.y}
                   stroke={yAxisRefLine.stroke}

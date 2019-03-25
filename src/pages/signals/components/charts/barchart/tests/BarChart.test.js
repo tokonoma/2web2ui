@@ -53,6 +53,6 @@ describe('BarChart Component', () => {
   it('should handle click on all bars', () => {
     wrapper.setProps({ timeSeries: stacked, yKeys });
     wrapper.find('Bar').forEach((n) => n.simulate('click'));
-    expect(props.onClick).toHaveBeenCalledTimes(3);
+    expect(props.onClick).toHaveBeenCalledTimes(2);
   });
 });

@@ -90,11 +90,10 @@ export function HealthScoreChart(props) {
           </Fragment>
         )}
         <div className={styles.Metrics}>
-          <MetricDisplay label='Injections' {...getMetricProps('injections')} />
           <MetricDisplay label='DoD Change' {...getMetricProps('current_DoD')} />
           <div className={styles.Divider} />
-          <MetricDisplay label='High' value={_.max(getHealthScores(accountData))} />
-          <MetricDisplay label='Low' value={_.min(getHealthScores(accountData))} />
+          <MetricDisplay label='High' value={_.max(getHealthScores(accountData)) || '--'} />
+          <MetricDisplay label='Low' value={_.min(getHealthScores(accountData)) || '--'} />
         </div>
       </div>
     </Panel>

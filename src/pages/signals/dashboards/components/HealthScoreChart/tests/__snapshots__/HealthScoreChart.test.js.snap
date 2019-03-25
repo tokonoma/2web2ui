@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Signals Health Score Chart renders error correctly 1`] = `
+<Callout
+  height="auto"
+  title="Unable to Load Data"
+>
+  mock error
+</Callout>
+`;

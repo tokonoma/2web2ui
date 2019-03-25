@@ -60,7 +60,7 @@ exports[`Signals Spam Trap Page renders correctly 1`] = `
 "
         />
         <BarChart
-          fill="#B157CE"
+          fill="#B3ECEF"
           gap={0.25}
           height={250}
           margin={
@@ -93,6 +93,7 @@ exports[`Signals Spam Trap Page renders correctly 1`] = `
               "ticks": Array [],
             }
           }
+          xAxisRefLines={Array []}
           xKey="date"
           yAxisProps={
             Object {
@@ -103,6 +104,7 @@ exports[`Signals Spam Trap Page renders correctly 1`] = `
               "tickFormatter": [Function],
             }
           }
+          yAxisRefLines={Array []}
           yKey="relative_trap_hits"
           yRange={
             Array [

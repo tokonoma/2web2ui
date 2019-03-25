@@ -95,7 +95,7 @@ exports[`Signals Engagement Recency Page renders correctly 1`] = `
           className="LiftTooltip"
         >
           <BarChart
-            fill="#B157CE"
+            fill="#B3ECEF"
             gap={0.25}
             height={250}
             margin={
@@ -132,6 +132,7 @@ exports[`Signals Engagement Recency Page renders correctly 1`] = `
                 ],
               }
             }
+            xAxisRefLines={Array []}
             xKey="date"
             yAxisProps={
               Object {
@@ -149,6 +150,7 @@ exports[`Signals Engagement Recency Page renders correctly 1`] = `
                 ],
               }
             }
+            yAxisRefLines={Array []}
             yKey="value"
             yKeys={
               Array [
