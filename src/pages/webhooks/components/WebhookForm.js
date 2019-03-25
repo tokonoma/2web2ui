@@ -84,10 +84,6 @@ export class WebhookForm extends Component {
   }
 }
 
-WebhookForm.defaultProps = {
-  newWebhook: false
-};
-
 const mapStateToProps = (state, props) => {
   const selector = formValueSelector(formName);
   const { eventsRadio, auth } = selector(state, 'eventsRadio', 'auth');
