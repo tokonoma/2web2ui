@@ -31,7 +31,7 @@ exports[`PoolForm tests should render form 1`] = `
         <Field
           component={[Function]}
           disabled={false}
-          helpText="If you are using the automated IP warmup feature, the overflow pool will be used when volume threshold for this pool has been reached."
+          helpText="With automatic IP Warmup enabled, selected pool will be used when volume threshold for this pool has been reached."
           label="Overflow Pool"
           name="auto_warmup_overflow_pool"
           options={

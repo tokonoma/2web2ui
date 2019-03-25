@@ -76,7 +76,7 @@ exports[`IP Form tests should render form 1`] = `
         />
       </LabelledValue>
     </Panel.Section>
-    <Connect(AccessControl)
+    <AccessControl
       condition={[Function]}
     >
       <Panel.Section
@@ -133,7 +133,7 @@ exports[`IP Form tests should render form 1`] = `
           />
         </LabelledValue>
       </Panel.Section>
-    </Connect(AccessControl)>
+    </AccessControl>
     <Panel.Section>
       <Button
         onClick={[Function]}
