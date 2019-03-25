@@ -108,7 +108,7 @@ exports[`IP Form tests should render form 1`] = `
           <Field
             component={[Function]}
             disabled={false}
-            helpText="You can select an previous stage but can not select an advanced stage."
+            helpText="You can select a previous stage but can not select an advanced stage."
             name="auto_warmup_stage"
             options={
               Array [
