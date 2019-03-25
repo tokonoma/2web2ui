@@ -79,14 +79,12 @@ describe('PoolForm tests', () => {
   });
 
   describe('overflow pool', () => {
-    it('renders with access control condition to be true', () => {
-      config.featureFlags.ip_auto_warmup = true;
-      expect(wrapper.find('AccessControl').at(1).prop('condition')()).toBe(true);
+    it('return true for access control condition if ip auto warmup is enabled', () => {
+      expect(wrapper.find('AccessControl').at(1).prop('condition')({ account: { options: { ui: { ip_auto_warmup: true }}}})).toBe(true);
     });
 
-    it('renders with access control condition to be false', () => {
-      config.featureFlags.ip_auto_warmup = false;
-      expect(wrapper.find('AccessControl').at(1).prop('condition')()).toBe(false);
+    it('return false for access control condition if ip auto warmup is not enabled', () => {
+      expect(wrapper.find('AccessControl').at(1).prop('condition')({ account: { options: { ui: { ip_auto_warmup: false }}}})).toBe(false);
     });
 
     it('does not render if editing default pool', () => {

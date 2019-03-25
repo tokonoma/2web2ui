@@ -8,6 +8,7 @@ import { SendingDomainTypeaheadWrapper, TextFieldWrapper } from 'src/components'
 import AccessControl from 'src/components/auth/AccessControl';
 import { required } from 'src/helpers/validation';
 import { configFlag } from 'src/helpers/conditions/config';
+import { isAccountUiOptionSet } from 'src/helpers/conditions/account';
 import { selectCurrentPool } from 'src/selectors/ipPools';
 import isDefaultPool from '../helpers/defaultPool';
 import { SelectWrapper } from '../../../components/reduxFormWrappers';
@@ -62,8 +63,9 @@ export class PoolForm extends Component {
                 />
               </AccessControl>
             }
+
             {!editingDefault && Boolean(overflowPools.length) &&
-              <AccessControl condition={configFlag('featureFlags.ip_auto_warmup')}>
+              <AccessControl condition={isAccountUiOptionSet('ip_auto_warmup', false)}>
                 <Field
                   name='auto_warmup_overflow_pool'
                   label='Overflow Pool'
