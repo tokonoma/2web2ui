@@ -33,19 +33,19 @@ class BarChart extends Component {
       isAnimationActive={false}
       minPointSize={1}
       shape={(props) => {
-        let myFill = props.fill;
+        let eventFill = props.fill;
 
         if (yKey === 'health_score') {
           if ((props.date === hovered) || (props.date === selected)) {
-            myFill = healthScoreThresholds[props.ranking].color
+            eventFill = healthScoreThresholds[props.ranking].color
           }
         } else {
           if ((props.date === hovered) || (props.date === selected)) {
-            myFill = '#22838A';
+            eventFill = '#22838A';
           }
         }
 
-        return <Rectangle {...props} fill={myFill} />
+        return <Rectangle {...props} fill={eventFill} />
       }}
     />
   )
