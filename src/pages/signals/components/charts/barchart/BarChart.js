@@ -37,7 +37,8 @@ class BarChart extends Component {
 
         if (key === 'health_score') {
           if ((props.date === hovered) || (props.date === selected)) {
-            eventFill = healthScoreThresholds[props.ranking].color
+            const ranking = props.ranking || 'danger';
+            eventFill = healthScoreThresholds[ranking].color
           }
         } else {
           if ((props.date === hovered) || (props.date === selected)) {
