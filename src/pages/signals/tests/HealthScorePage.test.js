@@ -29,6 +29,8 @@ describe('Signals Health Score Page', () => {
       data: [],
       handleDateSelect: jest.fn(),
       selectedDate: '2017-01-01',
+      handleDateHover: jest.fn(),
+      hoveredDate: '2017-01-05',
       gap: 0.25,
       loading: false,
       empty: false,
@@ -95,6 +97,12 @@ describe('Signals Health Score Page', () => {
       expect(shallow(<Tooltip payload={{ weight_value: 0.0012345 }} />)).toMatchSnapshot();
     });
 
+    it('renders tooltip content for hovered component', () => {
+      wrapper.find('BarChart').at(0).simulate('onMouseOver', { payload: { health_score: 0.75, ranking: 'warning', date: '2017-01-02' }});
+      const Tooltip = wrapper.find('BarChart').at(0).prop('tooltipContent');
+      expect(shallow(<Tooltip payload={{ health_score: 0.75 }} />)).toMatchSnapshot();
+    });
+
     it('renders tooltip content for component weights', () => {
       const Tooltip = wrapper.find('DivergingBar').prop('tooltipContent');
       expect(shallow(<Tooltip payload={{ weight_type: 'Other bounces' }} />)).toMatchSnapshot();
@@ -123,6 +131,7 @@ describe('Signals Health Score Page', () => {
 
     it('renders component y ticks', () => {
       const axisProps = wrapper.find('BarChart').at(2).prop('yAxisProps');
+      axisProps.tickFormatter(0.003);
       expect(axisProps.tickFormatter(0.003)).toEqual('0.3%');
     });
   });

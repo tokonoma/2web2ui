@@ -252,7 +252,224 @@ exports[`BarChart Component renders background bars with opacity if selected 1`]
 />
 `;
 
-exports[`BarChart Component should display reference lines 1`] = `
+exports[`BarChart Component should display x reference lines 1`] = `
+<div
+  className="LiftTooltip"
+>
+  <ResponsiveContainer
+    className="SignalsBarChart"
+    debounce={0}
+    height={50}
+    width={100}
+  >
+    <ComposedChart
+      barCategoryGap={1}
+      barGap={4}
+      data={
+        Array [
+          Object {
+            "date": "2011-01-01",
+            "value": 2,
+          },
+        ]
+      }
+      layout="horizontal"
+      margin={
+        Object {
+          "bottom": 5,
+          "left": 18,
+          "right": 0,
+          "top": 12,
+        }
+      }
+      reverseStackOrder={false}
+      stackOffset="none"
+    >
+      <CartesianGrid
+        fill="none"
+        horizontal={true}
+        horizontalFill={Array []}
+        horizontalPoints={Array []}
+        shapeRendering="crispEdges"
+        stroke="#e1e1e6"
+        vertical={false}
+        verticalFill={Array []}
+        verticalPoints={Array []}
+      />
+      <YAxis
+        allowDataOverflow={false}
+        allowDecimals={true}
+        allowDuplicatedCategory={true}
+        axisLine={false}
+        domain={
+          Array [
+            0,
+            "auto",
+          ]
+        }
+        height={0}
+        hide={false}
+        minTickGap={2}
+        mirror={false}
+        orientation="left"
+        padding={
+          Object {
+            "bottom": 0,
+            "top": 0,
+          }
+        }
+        reversed={false}
+        scale="auto"
+        tickCount={5}
+        tickLine={false}
+        type="number"
+        width={30}
+        yAxisId={0}
+      />
+      <XAxis
+        allowDataOverflow={false}
+        allowDecimals={true}
+        allowDuplicatedCategory={true}
+        axisLine={false}
+        dataKey="date"
+        domain={
+          Array [
+            0,
+            "auto",
+          ]
+        }
+        height={30}
+        hide={false}
+        mirror={false}
+        orientation="bottom"
+        padding={
+          Object {
+            "left": 12,
+            "right": 12,
+          }
+        }
+        reversed={false}
+        scale="auto"
+        shapeRendering="crispEdges"
+        tickCount={5}
+        tickLine={false}
+        type="category"
+        width={0}
+        xAxisId={0}
+      />
+      <Tooltip
+        active={false}
+        animationDuration={400}
+        animationEasing="ease"
+        content={
+          <Tooltip
+            offset={25}
+            width="200px"
+          >
+            [MockFunction]
+          </Tooltip>
+        }
+        contentStyle={Object {}}
+        coordinate={
+          Object {
+            "x": 0,
+            "y": 0,
+          }
+        }
+        cursor={
+          Object {
+            "fill": "#FFFFFF",
+            "fillOpacity": "0",
+            "stroke": "none",
+          }
+        }
+        cursorStyle={Object {}}
+        filterNull={true}
+        isAnimationActive={false}
+        itemSorter={[Function]}
+        itemStyle={Object {}}
+        labelStyle={Object {}}
+        offset={25}
+        position={
+          Object {
+            "x": 0,
+            "y": 0,
+          }
+        }
+        separator=" : "
+        useTranslate3d={false}
+        viewBox={
+          Object {
+            "x1": 0,
+            "x2": 0,
+            "y1": 0,
+            "y2": 0,
+          }
+        }
+        wrapperStyle={Object {}}
+      />
+      <Bar
+        animationBegin={0}
+        animationDuration={400}
+        animationEasing="ease"
+        data={Array []}
+        dataKey="value"
+        fill="#fill"
+        hide={false}
+        isAnimationActive={false}
+        key="value"
+        layout="vertical"
+        legendType="rect"
+        minPointSize={1}
+        onAnimationEnd={[Function]}
+        onAnimationStart={[Function]}
+        onClick={[MockFunction]}
+        shape={[Function]}
+        stackId="stack"
+        xAxisId={0}
+        yAxisId={0}
+      />
+      <ReferenceLine
+        fill="none"
+        fillOpacity={1}
+        ifOverflow="discard"
+        isFront={false}
+        key="0"
+        stroke="green"
+        strokeWidth={2}
+        style={
+          Object {
+            "pointerEvents": "none",
+          }
+        }
+        x="2011-01-01"
+        xAxisId={0}
+        yAxisId={0}
+      />
+      <ReferenceLine
+        fill="none"
+        fillOpacity={1}
+        ifOverflow="discard"
+        isFront={false}
+        key="1"
+        stroke="red"
+        strokeWidth={2}
+        style={
+          Object {
+            "pointerEvents": "none",
+          }
+        }
+        x="2011-01-03"
+        xAxisId={0}
+        yAxisId={0}
+      />
+      0
+    </ComposedChart>
+  </ResponsiveContainer>
+</div>
+`;
+
+exports[`BarChart Component should display y reference lines 1`] = `
 <div
   className="LiftTooltip"
 >

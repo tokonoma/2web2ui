@@ -21,6 +21,13 @@ exports[`Signals Health Score Page bar chart props renders tooltip content for h
 />
 `;
 
+exports[`Signals Health Score Page bar chart props renders tooltip content for hovered component 1`] = `
+<TooltipMetric
+  label="Health Score"
+  value="75"
+/>
+`;
+
 exports[`Signals Health Score Page bar chart props renders tooltip content for injections 1`] = `
 <TooltipMetric
   label="Injections"
@@ -72,6 +79,7 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
           fill="#B3ECEF"
           gap={0.25}
           height={250}
+          hovered="2017-01-05"
           margin={
             Object {
               "bottom": 5,
@@ -81,6 +89,7 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
             }
           }
           onClick={[MockFunction]}
+          onMouseOver={[MockFunction]}
           selected="2017-01-01"
           timeSeries={
             Array [
@@ -433,6 +442,7 @@ exports[`Signals Health Score Page renders empty weights 1`] = `
           fill="#B3ECEF"
           gap={0.25}
           height={250}
+          hovered="2017-01-05"
           margin={
             Object {
               "bottom": 5,
@@ -442,6 +452,7 @@ exports[`Signals Health Score Page renders empty weights 1`] = `
             }
           }
           onClick={[MockFunction]}
+          onMouseOver={[MockFunction]}
           selected="2017-01-01"
           timeSeries={
             Array [

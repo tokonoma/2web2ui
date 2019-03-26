@@ -21,7 +21,8 @@ export function HealthScoreChart(props) {
   const { data, loading, error } = props;
   const accountData = _.find(data, ['sid', -1]) || {};
   const noData = (accountData.history) ? !_.some(getHealthScores(accountData)) : true;
-  const selectedDate = (accountData.history) ? _.last(accountData.history).date : moment().subtract(1, 'day').format('YYYY-MM-DD');
+  const lastItem = _.last(accountData.history) || {};
+  const selectedDate = _.get(lastItem, 'date', '');
 
   if (loading) {
     return <PanelLoading minHeight='407px' />;

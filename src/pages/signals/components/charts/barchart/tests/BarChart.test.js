@@ -80,7 +80,12 @@ describe('BarChart Component', () => {
     expect(props.onClick).toHaveBeenCalledTimes(2);
   });
 
-  it('should display reference lines', () => {
+  it('should display x reference lines', () => {
+    wrapper.setProps({ xAxisRefLines: [{ x: '2011-01-01', stroke: 'green', strokeWidth: 2 }, { x: '2011-01-03', stroke: 'red', strokeWidth: 2 }]});
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should display y reference lines', () => {
     wrapper.setProps({ yAxisRefLines: [{ y: 80, stroke: 'green', strokeWidth: 2 }, { y: 55, stroke: 'red', strokeWidth: 2 }]});
     expect(wrapper).toMatchSnapshot();
   });

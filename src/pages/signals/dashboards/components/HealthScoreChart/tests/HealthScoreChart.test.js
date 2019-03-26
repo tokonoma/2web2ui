@@ -3,21 +3,47 @@ import React from 'react';
 import { HealthScoreChart } from '../HealthScoreChart';
 
 describe('Signals Health Score Chart', () => {
-  const props = {
-    loading: false,
-    error: null,
-    data: []
-  };
+  let props; let subject;
 
-  const subject = (options = {}) => shallow(
-    <HealthScoreChart {...props} {...options} />
-  );
+  beforeEach(() => {
+    props = {
+      loading: false,
+      error: null,
+      data: [{
+        sid: -1,
+        current_health_score: 88,
+        WoW: -5, current_DoD: 5,
+        history: [{
+          date: '2019-03-24',
+          health_score: 75,
+          ranking: 'warning'
+        },{
+          date: '2019-03-25',
+          health_score: 96,
+          ranking: 'good'
+        },{
+          date: '2019-03-26',
+          health_score: 23,
+          ranking: 'danger'
+        },{
+          date: '2019-03-25',
+          health_score: null,
+          ranking: null
+        }]
+      }],
+      filters: {
+        relativeRange: '90days'
+      }
+    };
 
-  // it('renders happy path correctly', () => {
-  //   expect(subject({ data: [{
-  //     sid: -1, current_health_score: 88, WoW: -5, current_DoD: 5
-  //   }]})).toMatchSnapshot();
-  // });
+    subject = (options = {}) => shallow(
+      <HealthScoreChart {...props} {...options} />
+    );
+  });
+
+  it('renders happy path correctly', () => {
+    expect(subject(props)).toMatchSnapshot();
+  });
 
   it('renders loading correctly', () => {
     const wrapper = subject({ loading: true });
@@ -29,26 +55,14 @@ describe('Signals Health Score Chart', () => {
     expect(wrapper.find('Callout')).toMatchSnapshot();
   });
 
-  // it('renders no current score correctly', () => {
-  //   const wrapper = subject({ data: [{
-  //     sid: -1, WoW: -5, current_DoD: 5
-  //   }]});
-  //   expect(wrapper.find('Callout')).toMatchSnapshot();
-  // });
+  it('renders no account level data callout correctly', () => {
+    props.data = [];
+    const wrapper = subject(props);
+    expect(wrapper.find('Callout')).toMatchSnapshot();
+  });
 
-  // it('renders no WoW, or Dod', () => {
-  //   const wrapper = subject({ data: [{ sid: -1 }]});
-  //   expect(wrapper.find({ label: 'WoW Change' }).prop('value')).toEqual('n/a');
-  //   expect(wrapper.find({ label: 'DoD Change' }).prop('value')).toEqual('n/a');
-  // });
-
-  // it('renders warning threshold color', () => {
-  //   const wrapper = subject({ data: [{ sid: -1, current_health_score: 60 }]});
-  //   expect(wrapper.find({ className: 'DescriptionIcon' }).prop('style').fill).toMatchSnapshot();
-  // });
-
-  // it('renders bad threshold color', () => {
-  //   const wrapper = subject({ data: [{ sid: -1, current_health_score: 40 }]});
-  //   expect(wrapper.find({ className: 'DescriptionIcon' }).prop('style').fill).toMatchSnapshot();
-  // });
+  it('renders yesterday as selected date if one is missing', () => {
+    props.data[0].history = [];
+    expect(subject(props)).toMatchSnapshot();
+  });
 });
