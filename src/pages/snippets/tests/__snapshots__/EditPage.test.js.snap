@@ -293,5 +293,3 @@ exports[`EditPage renders edit form 1`] = `
   </Form>
 </Page>
 `;
-
-exports[`EditPage renders loading 1`] = `<Loading />`;

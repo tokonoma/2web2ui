@@ -27,7 +27,8 @@ describe('EditPage', () => {
 
   it('renders loading', () => {
     const wrapper = subject({ loading: true });
-    expect(wrapper).toMatchSnapshot();
+    expect(wrapper.find('Loading')).toExist();
+    expect(wrapper.find('Page')).not.toExist();
   });
 
   it('renders subaccount section if account has subaccounts and can view subaccount', () => {
