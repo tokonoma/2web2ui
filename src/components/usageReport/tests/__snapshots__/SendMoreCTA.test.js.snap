@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`SendMoreCTA Component renders correctly 1`] = `
-<Connect(AccessControl)
+<AccessControl
   condition={[Function]}
 >
   <p>
@@ -54,5 +54,5 @@ exports[`SendMoreCTA Component renders correctly 1`] = `
       Learn more about these limits.
     </UnstyledLink>
   </p>
-</Connect(AccessControl)>
+</AccessControl>
 `;

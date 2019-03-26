@@ -12,30 +12,27 @@ describe('PoolForm tests', () => {
     props = {
       submitting: false,
       isNew: false,
-      ips: [
-        {
-          external_ip: 'external',
-          hostname: 'hostname'
-        },
-        {
-          external_ip: 'external-2',
-          hostname: 'hostname-2'
-        }
-      ],
-      list: [
+      pools: [
         {
           id: 'my-pool',
-          name: 'My Pool'
+          name: 'My Pool',
+          ips: []
         },
         {
           id: 'pool-2',
-          name: 'Another Pool'
+          name: 'Another Pool',
+          ips: [{
+            external_ip: 'external',
+            hostname: 'hostname'
+          }, {
+            external_ip: 'external-2',
+            hostname: 'hostname-2'
+          }]
         }
       ],
       pool: { id: 'my-pool', name: 'My Pool' },
       handleSubmit: jest.fn(),
-      pristine: true,
-      showPurchaseCTA: true
+      pristine: true
     };
 
     wrapper = shallow(<PoolForm {...props} />);
@@ -47,7 +44,7 @@ describe('PoolForm tests', () => {
 
   it('should show help text when editing default pool', () => {
     wrapper.setProps({ pool: { id: 'default', name: 'Default' }});
-    expect(wrapper.find('Field').prop('helpText')).toMatch('You cannot change the default IP pool\'s name');
+    expect(wrapper.find('Field[name="name"]').prop('helpText')).toMatch('You cannot change the default IP pool\'s name');
   });
 
   it('should not render signing_domain if editing default pool', () => {
@@ -79,5 +76,39 @@ describe('PoolForm tests', () => {
   it('renders correct button text when editing a pool', () => {
     wrapper.setProps({ isNew: false });
     expect(wrapper.find('Button').shallow().text()).toEqual('Update IP Pool');
+  });
+
+  describe('overflow pool', () => {
+    it('return true for access control condition if ip auto warmup is enabled', () => {
+      expect(wrapper.find('AccessControl').at(1).prop('condition')({ account: { options: { ui: { ip_auto_warmup: true }}}})).toBe(true);
+    });
+
+    it('return false for access control condition if ip auto warmup is not enabled', () => {
+      expect(wrapper.find('AccessControl').at(1).prop('condition')({ account: { options: { ui: { ip_auto_warmup: false }}}})).toBe(false);
+    });
+
+    it('does not render if editing default pool', () => {
+      wrapper.setProps({ pool: { id: 'default', name: 'Default' }});
+      expect(wrapper.find('Field[name="auto_warmup_overflow_pool"]')).not.toExist();
+    });
+
+    it('renders overflow pools with ip only pools', () => {
+      expect(wrapper.find('Field[name="auto_warmup_overflow_pool"]').prop('options')).toEqual([{ label: 'Another Pool (pool-2)', value: 'pool-2' }]);
+    });
+
+    it('shows default pool in overflow pool list', () => {
+      wrapper.setProps({ pools: [{ name: 'Default', id: 'default', ips: [{ external_ip: '1.1.1.1' }]}, { name: 'My Pool', id: 'my-pool', ips: []}]});
+      expect(wrapper.find('Field[name="auto_warmup_overflow_pool"]').prop('options')).toEqual([{ label: 'Default (default)', value: 'default' }]);
+    });
+
+    it('hides overflow pool if no pools with ip exist', () => {
+      wrapper.setProps({ pools: props.pools.slice(0, 1) });
+      expect(wrapper.find('Field[name="auto_warmup_overflow_pool"]')).not.toExist();
+    });
+
+    it('hides overflow pool if no pools exist', () => {
+      wrapper.setProps({ pools: []});
+      expect(wrapper.find('Field[name="auto_warmup_overflow_pool"]')).not.toExist();
+    });
   });
 });

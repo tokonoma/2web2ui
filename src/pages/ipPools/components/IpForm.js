@@ -93,7 +93,7 @@ export class IpForm extends Component {
                     component={SelectWrapper}
                     options={stageOptions}
                     parse={_.toInteger}
-                    helpText="You can select an previous stage but can not select an advanced stage."
+                    helpText="You can select a previous stage but can not select an advanced stage."
                     disabled={submitting}
                   />
                 </LabelledValue>

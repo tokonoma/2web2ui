@@ -19,7 +19,7 @@ exports[`Page: Dashboard tests should correctly render page when user is not ver
     ageRangeStart={16}
   />
   <Connect(UsageReport) />
-  <Connect(AccessControl)
+  <AccessControl
     condition={[Function]}
   >
     <Tutorial
@@ -45,7 +45,7 @@ exports[`Page: Dashboard tests should correctly render page when user is not ver
       listSendingDomains={[MockFunction]}
       verifyingEmail={false}
     />
-  </Connect(AccessControl)>
+  </AccessControl>
 </Page>
 `;
 
@@ -67,7 +67,7 @@ exports[`Page: Dashboard tests should display upgrade CTA when account is free a
     ageRangeStart={16}
   />
   <Connect(UsageReport) />
-  <Connect(AccessControl)
+  <AccessControl
     condition={[Function]}
   >
     <Tutorial
@@ -92,7 +92,7 @@ exports[`Page: Dashboard tests should display upgrade CTA when account is free a
       listSendingDomains={[MockFunction]}
       verifyingEmail={false}
     />
-  </Connect(AccessControl)>
+  </AccessControl>
 </Page>
 `;
 
@@ -115,7 +115,7 @@ exports[`Page: Dashboard tests should render import suppression list when 0 supp
     ageRangeStart={16}
   />
   <Connect(UsageReport) />
-  <Connect(AccessControl)
+  <AccessControl
     condition={[Function]}
   >
     <Tutorial
@@ -141,7 +141,7 @@ exports[`Page: Dashboard tests should render import suppression list when 0 supp
       listSendingDomains={[MockFunction]}
       verifyingEmail={false}
     />
-  </Connect(AccessControl)>
+  </AccessControl>
 </Page>
 `;
 
@@ -164,7 +164,7 @@ exports[`Page: Dashboard tests should render page correctly with defaults 1`] = 
     ageRangeStart={16}
   />
   <Connect(UsageReport) />
-  <Connect(AccessControl)
+  <AccessControl
     condition={[Function]}
   >
     <Tutorial
@@ -190,6 +190,6 @@ exports[`Page: Dashboard tests should render page correctly with defaults 1`] = 
       listSendingDomains={[MockFunction]}
       verifyingEmail={false}
     />
-  </Connect(AccessControl)>
+  </AccessControl>
 </Page>
 `;

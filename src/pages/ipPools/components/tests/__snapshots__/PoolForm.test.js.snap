@@ -15,7 +15,7 @@ exports[`PoolForm tests should render form 1`] = `
         placeholder="My IP Pool"
         validate={[Function]}
       />
-      <Connect(AccessControl)
+      <AccessControl
         condition={[Function]}
       >
         <Field
@@ -24,7 +24,26 @@ exports[`PoolForm tests should render form 1`] = `
           label="Default Signing Domain"
           name="signing_domain"
         />
-      </Connect(AccessControl)>
+      </AccessControl>
+      <AccessControl
+        condition={[Function]}
+      >
+        <Field
+          component={[Function]}
+          disabled={false}
+          helpText="With automatic IP Warmup enabled, selected pool will be used when volume threshold for this pool has been reached."
+          label="Overflow Pool"
+          name="auto_warmup_overflow_pool"
+          options={
+            Array [
+              Object {
+                "label": "Another Pool (pool-2)",
+                "value": "pool-2",
+              },
+            ]
+          }
+        />
+      </AccessControl>
     </Panel.Section>
     <Panel.Section>
       <Button
