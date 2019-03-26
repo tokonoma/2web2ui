@@ -19,7 +19,7 @@ describe('BarChart Component', () => {
     props = {
       timeSeries: normal,
       xKey: 'date',
-      yRange: [0,5],
+      yRange: [0,100],
       height: 50,
       width: 100,
       onClick: jest.fn(),
@@ -31,6 +31,30 @@ describe('BarChart Component', () => {
 
   it('renders a normal bar chart correctly', () => {
     expect(wrapper).toMatchSnapshot();
+  });
+
+  it('renders a normal bar chart with correct fill for selected/hovered threshold events', () => {
+    wrapper.setProps({ selected: '2011-01-01', yKey: 'health_score', timeSeries: [{ health_score: 75, ranking: 'warning', date: '2011-01-01' }]});
+    const payload = { fill: '#fill', health_score: 75, ranking: 'warning', date: '2011-01-01' };
+    expect(wrapper.find('Bar').at(0).props().shape(payload).props.fill).toEqual('#e6b400');
+  });
+
+  it('renders a normal bar chart with correct fill for non-selected/hovered threshold events', () => {
+    wrapper.setProps({ selected: undefined, yKey: 'health_score', timeSeries: [{ health_score: 75, ranking: 'warning', date: '2011-01-01' }]});
+    const payload = { fill: '#fill', health_score: 75, ranking: 'warning', date: '2011-01-01' };
+    expect(wrapper.find('Bar').at(0).props().shape(payload).props.fill).toEqual('#fill');
+  });
+
+  it('renders a normal bar chart with correct fill for selected/hovered non-threshold events', () => {
+    wrapper.setProps({ selected: '2011-01-01', yKey: 'injections', timeSeries: [{ injections: 75, date: '2011-01-01' }]});
+    const payload = { fill: '#fill', injections: 75, ranking: 'warning', date: '2011-01-01' };
+    expect(wrapper.find('Bar').at(0).props().shape(payload).props.fill).toEqual('#22838A');
+  });
+
+  it('renders a normal bar chart with correct fill for non-selected/hovered non-threshold events', () => {
+    wrapper.setProps({ selected: undefined, yKey: 'injections', timeSeries: [{ injections: 75, date: '2011-01-01' }]});
+    const payload = { fill: '#fill', injections: 75, ranking: 'warning', date: '2011-01-01' };
+    expect(wrapper.find('Bar').at(0).props().shape(payload).props.fill).toEqual('#fill');
   });
 
   it('renders a stacked bar chart correctly', () => {
@@ -54,5 +78,10 @@ describe('BarChart Component', () => {
     wrapper.setProps({ timeSeries: stacked, yKeys });
     wrapper.find('Bar').forEach((n) => n.simulate('click'));
     expect(props.onClick).toHaveBeenCalledTimes(2);
+  });
+
+  it('should display reference lines', () => {
+    wrapper.setProps({ yAxisRefLines: [{ y: 80, stroke: 'green', strokeWidth: 2 }, { y: 55, stroke: 'red', strokeWidth: 2 }]});
+    expect(wrapper).toMatchSnapshot();
   });
 });
