@@ -30,7 +30,7 @@ exports[`Signals Health Score Page bar chart props renders tooltip content for i
 
 exports[`Signals Health Score Page bar chart props renders tooltip content for selected component 1`] = `
 <TooltipMetric
-  label="Complaints"
+  label="Engaged Recipients"
   value="0.1235%"
 />
 `;
@@ -93,7 +93,7 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
                   },
                   Object {
                     "weight": -0.5,
-                    "weight_type": "Complaints",
+                    "weight_type": "eng cohorts: new, 14-day",
                     "weight_value": 0.25,
                   },
                 ],
@@ -169,7 +169,7 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
                   },
                   Object {
                     "weight": -0.5,
-                    "weight_type": "Complaints",
+                    "weight_type": "eng cohorts: new, 14-day",
                     "weight_value": 0.25,
                   },
                 ],
@@ -296,7 +296,7 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
               },
               Object {
                 "weight": -0.5,
-                "weight_type": "Complaints",
+                "weight_type": "eng cohorts: new, 14-day",
                 "weight_value": 0.25,
               },
             ]
@@ -328,7 +328,7 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
               },
               Object {
                 "weight": -0.5,
-                "weight_type": "Complaints",
+                "weight_type": "eng cohorts: new, 14-day",
                 "weight_value": 0.25,
               },
             ]
