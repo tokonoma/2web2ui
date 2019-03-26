@@ -7,7 +7,11 @@ describe('Selectors: brightback', () => {
   const state = {
     account: {
       created: '2017-11-15T10:00:00.000Z',
-      customer_id: 101
+      customer_id: 101,
+      company_name: 'Company, Inc.',
+      subscription: {
+        recurring_charge: 15
+      }
     },
     currentUser: {
       email: 'forkyphig@example.com'
