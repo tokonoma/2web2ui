@@ -23,7 +23,7 @@ exports[`Template Form should disable fields for read-only users 1`] = `
         validate={null}
       />
     </Panel.Section>
-    <Component
+    <SubaccountSection
       disabled={true}
       newTemplate={false}
     />
@@ -149,7 +149,7 @@ exports[`Template Form should render 1`] = `
         validate={null}
       />
     </Panel.Section>
-    <Component
+    <SubaccountSection
       disabled={false}
       newTemplate={false}
     />
