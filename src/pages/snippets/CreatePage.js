@@ -37,7 +37,7 @@ export default class CreatePage extends React.Component {
   }) => {
     // must handle when subaccount is set to null by SubaccountSection
     const subaccountId = subaccount ? subaccount.id : undefined;
-    const { createSnippet, history, isAmpLive } = this.props;
+    const { createSnippet, history } = this.props;
 
     return createSnippet({
       html,
@@ -46,14 +46,14 @@ export default class CreatePage extends React.Component {
       sharedWithSubaccounts: assignTo === 'shared',
       subaccountId,
       text,
-      amp_html: isAmpLive ? amp_html : undefined
+      amp_html
     }).then(() => {
       history.push(`/snippets/edit/${id}${setSubaccountQuery(subaccountId)}`);
     });
   }
 
   render() {
-    const { snippetToDuplicate, handleSubmit, hasSubaccounts, loading, submitting, isAmpLive } = this.props;
+    const { snippetToDuplicate, handleSubmit, hasSubaccounts, loading, submitting } = this.props;
 
     if (loading) {
       return <Loading />;
@@ -95,7 +95,7 @@ export default class CreatePage extends React.Component {
               </Panel>
             </Grid.Column>
             <Grid.Column xs={12} lg={8}>
-              <ContentEditor contentOnly={true} isAmpLive={isAmpLive} />
+              <ContentEditor contentOnly={true} />
             </Grid.Column>
           </Grid>
         </Form>

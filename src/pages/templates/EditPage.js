@@ -118,7 +118,7 @@ export default class EditPage extends Component {
   }
 
   render() {
-    const { canModify, loading, formName, subaccountId, template, isAmpLive } = this.props;
+    const { canModify, loading, formName, subaccountId, template } = this.props;
 
     if (loading || _.isEmpty(template)) {
       return <Loading />;
@@ -131,7 +131,7 @@ export default class EditPage extends Component {
             <Form name={formName} subaccountId={subaccountId} readOnly={!canModify} />
           </Grid.Column>
           <Grid.Column xs={12} lg={8}>
-            <ContentEditor readOnly={!canModify} action={canModify && <ImportSnippetLink />} isAmpLive={isAmpLive} />
+            <ContentEditor readOnly={!canModify} action={canModify && <ImportSnippetLink />} />
           </Grid.Column>
         </Grid>
         <DeleteModal
