@@ -1,6 +1,6 @@
-import React, { Fragment } from 'react';
+import React, { useState, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { getCaretProps } from 'src/helpers/signals';
+import { getCaretProps, getDoD } from 'src/helpers/signals';
 import { selectHealthScoreOverview } from 'src/selectors/signals';
 import { Panel, Tooltip } from '@sparkpost/matchbox';
 import { InfoOutline } from '@sparkpost/matchbox-icons';
@@ -14,11 +14,16 @@ import { roundToPlaces } from 'src/helpers/units';
 import { getDateTicks } from 'src/helpers/date';
 import moment from 'moment';
 import _ from 'lodash';
-
 import styles from './HealthScoreChart.module.scss';
 
 export function HealthScoreChart(props) {
-  const { data, loading, error } = props;
+  const [hoveredDate, setHovered] = useState();
+
+  function handleDateHover(props) {
+    setHovered(props.date);
+  }
+
+  const { data, loading, error, filters } = props;
   const accountData = _.find(data, ['sid', -1]) || {};
   const noData = (accountData.history) ? !_.some(getHealthScores(accountData)) : true;
   const lastItem = _.last(accountData.history) || {};
@@ -46,23 +51,42 @@ export function HealthScoreChart(props) {
   }
 
   function getXAxisProps() {
-    const xTicks = getDateTicks(props.filters.relativeRange);
+    const xTicks = getDateTicks(filters.relativeRange);
     return {
       ticks: xTicks,
       tickFormatter: (tick) => moment(tick).format('M/D')
     };
   }
 
-  function getMetricProps(key) {
-    const value = accountData[key];
+  function getHoverDoDProps() {
+    const previousDay = moment(hoveredDate).subtract(1, 'day').format('YYYY-MM-DD');
+    const currentEntry = _.find(accountData.history, ['date', hoveredDate]);
+    const prevEntry = _.find(accountData.history, ['date', previousDay]);
+    const currentScore = (currentEntry) ? currentEntry.health_score : null;
+    const prevScore = (prevEntry) ? prevEntry.health_score : null;
+    const value = getDoD(currentScore, prevScore);
     return { value: _.isNil(value) ? 'n/a' : `${value}%`, ...getCaretProps(value) };
+  }
+
+  function getGap() {
+    return accountData.history.length > 15 ? 0.2 : 1;
+  }
+
+  function getMin() {
+    const min = _.min(getHealthScores(accountData));
+    return { value: _.isNil(min) ? 'n/a' : min };
+  }
+
+  function getMax() {
+    const max = _.max(getHealthScores(accountData));
+    return { value: _.isNil(max) ? 'n/a' : max };
   }
 
   return (
     <Panel sectioned>
       <div className={styles.Content}>
         <h2 className={styles.Header}>
-          Health Score – {props.filters.relativeRange.replace('days', ' days')}
+          Health Score – {filters.relativeRange.replace('days', ' days')}
           {' '}
           <Tooltip
             children={<InfoOutline className={styles.TooltipIcon} size={18} />}
@@ -76,7 +100,10 @@ export function HealthScoreChart(props) {
         {!noData && (
           <Fragment>
             <BarChart
+              gap={getGap()}
+              onMouseOver={handleDateHover}
               selected={selectedDate}
+              hovered={hoveredDate}
               timeSeries={accountData.history}
               tooltipContent={({ payload = {}}) => (
                 <TooltipMetric label='Health Score' value={`${roundToPlaces(payload.health_score, 1)}`} />
@@ -87,14 +114,15 @@ export function HealthScoreChart(props) {
               ]}
               yKey='health_score'
               xAxisProps={getXAxisProps()}
+              yAxisProps={{ ticks: [0,20,40,55,80,100]}}
             />
           </Fragment>
         )}
         <div className={styles.Metrics}>
-          <MetricDisplay label='DoD Change' {...getMetricProps('current_DoD')} />
+          <MetricDisplay label='DoD Change' {...getHoverDoDProps()} />
           <div className={styles.Divider} />
-          <MetricDisplay label='High' value={_.max(getHealthScores(accountData)) || '--'} />
-          <MetricDisplay label='Low' value={_.min(getHealthScores(accountData)) || '--'} />
+          <MetricDisplay label='High' {...getMax()} />
+          <MetricDisplay label='Low' {...getMin()} />
         </div>
       </div>
     </Panel>

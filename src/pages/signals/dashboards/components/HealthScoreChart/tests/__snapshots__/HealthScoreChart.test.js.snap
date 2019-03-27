@@ -49,6 +49,7 @@ exports[`Signals Health Score Chart renders happy path correctly 1`] = `
       </Tooltip>
     </h2>
     <BarChart
+      activeFill="#22838A"
       fill="#B3ECEF"
       gap={1}
       height={250}
@@ -60,6 +61,7 @@ exports[`Signals Health Score Chart renders happy path correctly 1`] = `
           "top": 12,
         }
       }
+      onMouseOver={[Function]}
       selected="2019-03-25"
       timeSeries={
         Array [
@@ -91,14 +93,26 @@ exports[`Signals Health Score Chart renders happy path correctly 1`] = `
         Object {
           "tickFormatter": [Function],
           "ticks": Array [
-            "2018-12-25",
-            "2019-02-08",
-            "2019-03-25",
+            "2018-12-26",
+            "2019-02-09",
+            "2019-03-26",
           ],
         }
       }
       xAxisRefLines={Array []}
       xKey="date"
+      yAxisProps={
+        Object {
+          "ticks": Array [
+            0,
+            20,
+            40,
+            55,
+            80,
+            100,
+          ],
+        }
+      }
       yAxisRefLines={
         Array [
           Object {
@@ -125,10 +139,8 @@ exports[`Signals Health Score Chart renders happy path correctly 1`] = `
       className="Metrics"
     >
       <MetricDisplay
-        color="#2CC995"
-        direction="up"
         label="DoD Change"
-        value="5%"
+        value="n/a"
       />
       <div
         className="Divider"
@@ -204,21 +216,19 @@ exports[`Signals Health Score Chart renders yesterday as selected date if one is
       className="Metrics"
     >
       <MetricDisplay
-        color="#2CC995"
-        direction="up"
         label="DoD Change"
-        value="5%"
+        value="n/a"
       />
       <div
         className="Divider"
       />
       <MetricDisplay
         label="High"
-        value="--"
+        value="n/a"
       />
       <MetricDisplay
         label="Low"
-        value="--"
+        value="n/a"
       />
     </div>
   </div>

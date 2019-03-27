@@ -33,6 +33,26 @@ exports[`BarChart Component renders a normal bar chart correctly 1`] = `
       reverseStackOrder={false}
       stackOffset="none"
     >
+      <Bar
+        animationBegin={0}
+        animationDuration={400}
+        animationEasing="ease"
+        cursor="pointer"
+        data={Array []}
+        dataKey="noKey"
+        hide={false}
+        isAnimationActive={false}
+        layout="vertical"
+        legendType="rect"
+        minPointSize={0}
+        onAnimationEnd={[Function]}
+        onAnimationStart={[Function]}
+        onClick={[MockFunction]}
+        shape={[Function]}
+        stackId="stack"
+        xAxisId={0}
+        yAxisId={0}
+      />
       <CartesianGrid
         fill="none"
         horizontal={true}
@@ -124,13 +144,7 @@ exports[`BarChart Component renders a normal bar chart correctly 1`] = `
             "y": 0,
           }
         }
-        cursor={
-          Object {
-            "fill": "#FFFFFF",
-            "fillOpacity": "0",
-            "stroke": "none",
-          }
-        }
+        cursor={false}
         cursorStyle={Object {}}
         filterNull={true}
         isAnimationActive={false}
@@ -157,6 +171,7 @@ exports[`BarChart Component renders a normal bar chart correctly 1`] = `
         wrapperStyle={Object {}}
       />
       <Bar
+        activeFill="#activeFill"
         animationBegin={0}
         animationDuration={400}
         animationEasing="ease"
@@ -184,28 +199,111 @@ exports[`BarChart Component renders a normal bar chart correctly 1`] = `
 </div>
 `;
 
+exports[`BarChart Component renders a normal bar chart with correct fill for non-selected/hovered threshold events 1`] = `
+Object {
+  "animationBegin": 0,
+  "animationDuration": 1500,
+  "animationEasing": "ease",
+  "date": "2011-01-01",
+  "fill": "#fill",
+  "health_score": 75,
+  "height": 0,
+  "isAnimationActive": false,
+  "isUpdateAnimationActive": false,
+  "opacity": 0,
+  "radius": 0,
+  "ranking": "warning",
+  "width": 0,
+  "x": 0,
+  "y": 0,
+}
+`;
+
+exports[`BarChart Component renders a normal bar chart with correct fill for selected/hovered non-threshold events 1`] = `
+Object {
+  "animationBegin": 0,
+  "animationDuration": 1500,
+  "animationEasing": "ease",
+  "date": "2011-01-01",
+  "fill": "#fill",
+  "height": 0,
+  "injections": 75,
+  "isAnimationActive": false,
+  "isUpdateAnimationActive": false,
+  "opacity": 0,
+  "radius": 0,
+  "ranking": "warning",
+  "width": 0,
+  "x": 0,
+  "y": 0,
+}
+`;
+
+exports[`BarChart Component renders a normal bar chart with correct fill for selected/hovered threshold events 1`] = `
+Object {
+  "animationBegin": 0,
+  "animationDuration": 1500,
+  "animationEasing": "ease",
+  "date": "2011-01-01",
+  "fill": "#fill",
+  "health_score": 75,
+  "height": 0,
+  "isAnimationActive": false,
+  "isUpdateAnimationActive": false,
+  "opacity": 0,
+  "radius": 0,
+  "ranking": "warning",
+  "width": 0,
+  "x": 0,
+  "y": 0,
+}
+`;
+
 exports[`BarChart Component renders a stacked bar chart correctly 1`] = `
-<Bar
-  animationBegin={0}
-  animationDuration={400}
-  animationEasing="ease"
-  data={Array []}
-  dataKey="cd"
-  fill="red"
-  hide={false}
-  isAnimationActive={false}
-  key="cd"
-  layout="vertical"
-  legendType="rect"
-  minPointSize={1}
-  onAnimationEnd={[Function]}
-  onAnimationStart={[Function]}
-  onClick={[MockFunction]}
-  shape={[Function]}
-  stackId="stack"
-  xAxisId={0}
-  yAxisId={0}
-/>
+Array [
+  <Bar
+    animationBegin={0}
+    animationDuration={400}
+    animationEasing="ease"
+    data={Array []}
+    dataKey="ab"
+    fill="blue"
+    hide={false}
+    isAnimationActive={false}
+    key="ab"
+    layout="vertical"
+    legendType="rect"
+    minPointSize={1}
+    onAnimationEnd={[Function]}
+    onAnimationStart={[Function]}
+    onClick={[MockFunction]}
+    shape={[Function]}
+    stackId="stack"
+    xAxisId={0}
+    yAxisId={0}
+  />,
+  <Bar
+    animationBegin={0}
+    animationDuration={400}
+    animationEasing="ease"
+    data={Array []}
+    dataKey="cd"
+    fill="red"
+    hide={false}
+    isAnimationActive={false}
+    key="cd"
+    layout="vertical"
+    legendType="rect"
+    minPointSize={1}
+    onAnimationEnd={[Function]}
+    onAnimationStart={[Function]}
+    onClick={[MockFunction]}
+    shape={[Function]}
+    stackId="stack"
+    xAxisId={0}
+    yAxisId={0}
+  />,
+]
 `;
 
 exports[`BarChart Component renders background bars with no opacity if unselected 1`] = `
@@ -213,15 +311,10 @@ exports[`BarChart Component renders background bars with no opacity if unselecte
   animationBegin={0}
   animationDuration={1500}
   animationEasing="ease"
-  fill="#22838A"
   height={0}
   isAnimationActive={false}
   isUpdateAnimationActive={false}
-  payload={
-    Object {
-      "date": "2011-01-01",
-    }
-  }
+  opacity={0}
   radius={0}
   test="test"
   width={0}
@@ -235,15 +328,10 @@ exports[`BarChart Component renders background bars with opacity if selected 1`]
   animationBegin={0}
   animationDuration={1500}
   animationEasing="ease"
-  fill="#22838A"
   height={0}
   isAnimationActive={false}
   isUpdateAnimationActive={false}
-  payload={
-    Object {
-      "date": "2011-01-01",
-    }
-  }
+  opacity={0}
   radius={0}
   test="test"
   width={0}
@@ -285,6 +373,26 @@ exports[`BarChart Component should display x reference lines 1`] = `
       reverseStackOrder={false}
       stackOffset="none"
     >
+      <Bar
+        animationBegin={0}
+        animationDuration={400}
+        animationEasing="ease"
+        cursor="pointer"
+        data={Array []}
+        dataKey="noKey"
+        hide={false}
+        isAnimationActive={false}
+        layout="vertical"
+        legendType="rect"
+        minPointSize={0}
+        onAnimationEnd={[Function]}
+        onAnimationStart={[Function]}
+        onClick={[MockFunction]}
+        shape={[Function]}
+        stackId="stack"
+        xAxisId={0}
+        yAxisId={0}
+      />
       <CartesianGrid
         fill="none"
         horizontal={true}
@@ -376,13 +484,7 @@ exports[`BarChart Component should display x reference lines 1`] = `
             "y": 0,
           }
         }
-        cursor={
-          Object {
-            "fill": "#FFFFFF",
-            "fillOpacity": "0",
-            "stroke": "none",
-          }
-        }
+        cursor={false}
         cursorStyle={Object {}}
         filterNull={true}
         isAnimationActive={false}
@@ -409,6 +511,7 @@ exports[`BarChart Component should display x reference lines 1`] = `
         wrapperStyle={Object {}}
       />
       <Bar
+        activeFill="#activeFill"
         animationBegin={0}
         animationDuration={400}
         animationEasing="ease"
@@ -435,6 +538,7 @@ exports[`BarChart Component should display x reference lines 1`] = `
         ifOverflow="discard"
         isFront={false}
         key="0"
+        shapeRendering="crispEdges"
         stroke="green"
         strokeWidth={2}
         style={
@@ -452,6 +556,7 @@ exports[`BarChart Component should display x reference lines 1`] = `
         ifOverflow="discard"
         isFront={false}
         key="1"
+        shapeRendering="crispEdges"
         stroke="red"
         strokeWidth={2}
         style={
@@ -502,6 +607,26 @@ exports[`BarChart Component should display y reference lines 1`] = `
       reverseStackOrder={false}
       stackOffset="none"
     >
+      <Bar
+        animationBegin={0}
+        animationDuration={400}
+        animationEasing="ease"
+        cursor="pointer"
+        data={Array []}
+        dataKey="noKey"
+        hide={false}
+        isAnimationActive={false}
+        layout="vertical"
+        legendType="rect"
+        minPointSize={0}
+        onAnimationEnd={[Function]}
+        onAnimationStart={[Function]}
+        onClick={[MockFunction]}
+        shape={[Function]}
+        stackId="stack"
+        xAxisId={0}
+        yAxisId={0}
+      />
       <CartesianGrid
         fill="none"
         horizontal={true}
@@ -593,13 +718,7 @@ exports[`BarChart Component should display y reference lines 1`] = `
             "y": 0,
           }
         }
-        cursor={
-          Object {
-            "fill": "#FFFFFF",
-            "fillOpacity": "0",
-            "stroke": "none",
-          }
-        }
+        cursor={false}
         cursorStyle={Object {}}
         filterNull={true}
         isAnimationActive={false}
@@ -626,6 +745,7 @@ exports[`BarChart Component should display y reference lines 1`] = `
         wrapperStyle={Object {}}
       />
       <Bar
+        activeFill="#activeFill"
         animationBegin={0}
         animationDuration={400}
         animationEasing="ease"
@@ -653,6 +773,7 @@ exports[`BarChart Component should display y reference lines 1`] = `
         ifOverflow="discard"
         isFront={false}
         key="0"
+        shapeRendering="crispEdges"
         stroke="green"
         strokeWidth={2}
         style={
@@ -670,6 +791,7 @@ exports[`BarChart Component should display y reference lines 1`] = `
         ifOverflow="discard"
         isFront={false}
         key="1"
+        shapeRendering="crispEdges"
         stroke="red"
         strokeWidth={2}
         style={

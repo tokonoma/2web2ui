@@ -22,7 +22,7 @@ import healthScoreThresholds from '../../../constants/healthScoreThresholds';
  * />
  */
 class BarChart extends Component {
-  renderBar = ({ key, selected, hovered, fill }) => (
+  renderBar = ({ key, selected, hovered, fill, activeFill }) => (
     <Bar
       stackId='stack'
       key={key}
@@ -32,6 +32,7 @@ class BarChart extends Component {
       fill={fill}
       isAnimationActive={false}
       minPointSize={1}
+      activeFill={activeFill}
       shape={(props) => {
         let eventFill = props.fill;
 
@@ -42,37 +43,58 @@ class BarChart extends Component {
           }
         } else {
           if ((props.date === hovered) || (props.date === selected)) {
-            eventFill = '#22838A';
+            eventFill = activeFill;
           }
         }
 
-        return <Rectangle {...props} fill={eventFill} />
+        return <Rectangle {...props} fill={eventFill} style={{ transition: '0s' }}/>
       }}
     />
 
   )
 
   renderBars = () => {
-    const { yKeys, yKey, selected, hovered, fill } = this.props;
+    const { yKeys, yKey, selected, hovered, fill, activeFill } = this.props;
 
     if (yKeys) {
       return yKeys.map(this.renderBar);
     }
 
-    return this.renderBar({ key: yKey, selected, hovered, fill });
+    return this.renderBar({ key: yKey, selected, hovered, fill, activeFill });
+  }
+
+  renderBackgrounds = () => {
+    const { onClick, onMouseOver, ykey } = this.props;
+
+    return (
+      <Bar
+        cursor='pointer'
+        dataKey='noKey'
+        stackId='stack'
+        isAnimationActive={false}
+        onClick={onClick}
+        onMouseOver={onMouseOver}
+        shape={
+          ({ payload, background, ...rest }) => (
+            <Rectangle {...rest} {...background} opacity={0} />
+          )
+        }
+      />
+    );
   }
 
   render() {
     const { gap, height, disableHover, margin, timeSeries, tooltipContent, tooltipWidth, width, xAxisRefLines, yAxisRefLines, xKey, xAxisProps, yDomain, yAxisProps } = this.props;
 
     return (
-      <div className='LiftTooltip'>
+      <div className='LiftTooltip' onMouseOut={this.props.onMouseOut}>
         <ResponsiveContainer height={height} width={width} className='SignalsBarChart'>
           <ComposedChart
             barCategoryGap={gap}
             data={timeSeries}
             margin={margin}
           >
+            {this.renderBackgrounds()} 
             <CartesianGrid
               vertical={false}
               stroke='#e1e1e6'
@@ -98,7 +120,7 @@ class BarChart extends Component {
             {!disableHover && (
               <Tooltip
                 offset={25}
-                cursor={{ stroke: 'none', fill: '#FFFFFF', fillOpacity: '0' }}
+                cursor={false}
                 isAnimationActive={false}
                 content={<TooltipWrapper children={tooltipContent} />}
                 width={tooltipWidth}
@@ -106,23 +128,25 @@ class BarChart extends Component {
               />
             )}
             {this.renderBars()}
-            {xAxisRefLines && xAxisRefLines.length && (
+            {xAxisRefLines.length && (
               _.map(xAxisRefLines, (xAxisRefLine, index) =>
                 <ReferenceLine
                   key={index}
                   style={{ pointerEvents: 'none' }}
                   x={xAxisRefLine.x}
+                  shapeRendering='crispEdges'
                   stroke={xAxisRefLine.stroke}
                   strokeWidth={xAxisRefLine.strokeWidth}
                 />
               )
             )}
-            {yAxisRefLines && yAxisRefLines.length && (
+            {yAxisRefLines.length && (
               _.map(yAxisRefLines, (yAxisRefLine, index) =>
                 <ReferenceLine
                   key={index}
                   style={{ pointerEvents: 'none' }}
                   y={yAxisRefLine.y}
+                  shapeRendering='crispEdges'
                   stroke={yAxisRefLine.stroke}
                   strokeWidth={yAxisRefLine.strokeWidth}
                 />
@@ -137,6 +161,7 @@ class BarChart extends Component {
 
 BarChart.propTypes = {
   fill: PropTypes.string,
+  activeFill: PropTypes.string,
   gap: PropTypes.number,
   onClick: PropTypes.func,
   tooltipContent: PropTypes.func,
@@ -146,6 +171,7 @@ BarChart.propTypes = {
 
 BarChart.defaultProps = {
   fill: '#B3ECEF',
+  activeFill: '#22838A',
   gap: 1,
   height: 250,
   width: '99%',

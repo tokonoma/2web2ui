@@ -67,7 +67,7 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
         sectioned={true}
       >
         <ChartHeader
-          title="Health Score - 90 Days"
+          title="Health Score"
           tooltipContent="
   This is a predictive score that monitors your email health to identify problems before
   they negatively impact email delivery. This score is informed by message events,
@@ -75,6 +75,7 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
 "
         />
         <BarChart
+          activeFill="#22838A"
           disableHover={false}
           fill="#B3ECEF"
           gap={0.25}
@@ -138,18 +139,26 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
           yAxisProps={
             Object {
               "tickFormatter": [Function],
+              "ticks": Array [
+                0,
+                0.2,
+                0.4,
+                0.55,
+                0.8,
+                1,
+              ],
             }
           }
           yAxisRefLines={
             Array [
               Object {
-                "stroke": "green",
-                "strokeWidth": 2,
+                "stroke": "#2CC995",
+                "strokeWidth": 1,
                 "y": 0.8,
               },
               Object {
-                "stroke": "red",
-                "strokeWidth": 2,
+                "stroke": "#FF594D",
+                "strokeWidth": 1,
                 "y": 0.55,
               },
             ]
@@ -169,9 +178,11 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
 "
         />
         <BarChart
+          activeFill="#22838A"
           fill="#B3ECEF"
           gap={0.25}
           height={190}
+          hovered="2017-01-05"
           margin={
             Object {
               "bottom": 5,
@@ -181,6 +192,7 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
             }
           }
           onClick={[MockFunction]}
+          onMouseOver={[MockFunction]}
           selected="2017-01-01"
           timeSeries={
             Array [
@@ -244,9 +256,11 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
           title="Hard Bounces Percent"
         />
         <BarChart
+          activeFill="#22838A"
           fill="#B3ECEF"
           gap={0.25}
           height={190}
+          hovered="2017-01-05"
           margin={
             Object {
               "bottom": 5,
@@ -256,6 +270,7 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
             }
           }
           onClick={[MockFunction]}
+          onMouseOver={[MockFunction]}
           selected="2017-01-01"
           timeSeries={
             Array [
@@ -392,7 +407,7 @@ exports[`Signals Health Score Page renders empty correctly 1`] = `
   sectioned={true}
 >
   <ChartHeader
-    title="Health Score - 90 Days"
+    title="Health Score"
     tooltipContent="
   This is a predictive score that monitors your email health to identify problems before
   they negatively impact email delivery. This score is informed by message events,
@@ -430,7 +445,7 @@ exports[`Signals Health Score Page renders empty weights 1`] = `
         sectioned={true}
       >
         <ChartHeader
-          title="Health Score - 90 Days"
+          title="Health Score"
           tooltipContent="
   This is a predictive score that monitors your email health to identify problems before
   they negatively impact email delivery. This score is informed by message events,
@@ -438,6 +453,7 @@ exports[`Signals Health Score Page renders empty weights 1`] = `
 "
         />
         <BarChart
+          activeFill="#22838A"
           disableHover={false}
           fill="#B3ECEF"
           gap={0.25}
@@ -474,18 +490,26 @@ exports[`Signals Health Score Page renders empty weights 1`] = `
           yAxisProps={
             Object {
               "tickFormatter": [Function],
+              "ticks": Array [
+                0,
+                0.2,
+                0.4,
+                0.55,
+                0.8,
+                1,
+              ],
             }
           }
           yAxisRefLines={
             Array [
               Object {
-                "stroke": "green",
-                "strokeWidth": 2,
+                "stroke": "#2CC995",
+                "strokeWidth": 1,
                 "y": 0.8,
               },
               Object {
-                "stroke": "red",
-                "strokeWidth": 2,
+                "stroke": "#FF594D",
+                "strokeWidth": 1,
                 "y": 0.55,
               },
             ]
@@ -505,9 +529,11 @@ exports[`Signals Health Score Page renders empty weights 1`] = `
 "
         />
         <BarChart
+          activeFill="#22838A"
           fill="#B3ECEF"
           gap={0.25}
           height={190}
+          hovered="2017-01-05"
           margin={
             Object {
               "bottom": 5,
@@ -517,6 +543,7 @@ exports[`Signals Health Score Page renders empty weights 1`] = `
             }
           }
           onClick={[MockFunction]}
+          onMouseOver={[MockFunction]}
           selected="2017-01-01"
           timeSeries={
             Array [
@@ -623,7 +650,7 @@ exports[`Signals Health Score Page renders error correctly 1`] = `
         sectioned={true}
       >
         <ChartHeader
-          title="Health Score - 90 Days"
+          title="Health Score"
           tooltipContent="
   This is a predictive score that monitors your email health to identify problems before
   they negatively impact email delivery. This score is informed by message events,
@@ -684,7 +711,7 @@ exports[`Signals Health Score Page renders loading correctly 1`] = `
   sectioned={true}
 >
   <ChartHeader
-    title="Health Score - 90 Days"
+    title="Health Score"
     tooltipContent="
   This is a predictive score that monitors your email health to identify problems before
   they negatively impact email delivery. This score is informed by message events,

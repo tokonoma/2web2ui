@@ -24,7 +24,8 @@ describe('BarChart Component', () => {
       width: 100,
       onClick: jest.fn(),
       tooltipContent: jest.fn(),
-      fill: '#fill'
+      fill: '#fill',
+      activeFill: '#activeFill'
     };
     wrapper = shallow(<BarChart {...props}/>);
   });
@@ -36,19 +37,19 @@ describe('BarChart Component', () => {
   it('renders a normal bar chart with correct fill for selected/hovered threshold events', () => {
     wrapper.setProps({ selected: '2011-01-01', yKey: 'health_score', timeSeries: [{ health_score: 75, ranking: 'warning', date: '2011-01-01' }]});
     const payload = { fill: '#fill', health_score: 75, ranking: 'warning', date: '2011-01-01' };
-    expect(wrapper.find('Bar').at(0).props().shape(payload).props.fill).toEqual('#e6b400');
+    expect(wrapper.find('Bar').at(0).props().shape(payload).props).toMatchSnapshot();
   });
 
   it('renders a normal bar chart with correct fill for non-selected/hovered threshold events', () => {
     wrapper.setProps({ selected: undefined, yKey: 'health_score', timeSeries: [{ health_score: 75, ranking: 'warning', date: '2011-01-01' }]});
     const payload = { fill: '#fill', health_score: 75, ranking: 'warning', date: '2011-01-01' };
-    expect(wrapper.find('Bar').at(0).props().shape(payload).props.fill).toEqual('#fill');
+    expect(wrapper.find('Bar').at(0).props().shape(payload).props).toMatchSnapshot();
   });
 
   it('renders a normal bar chart with correct fill for selected/hovered non-threshold events', () => {
     wrapper.setProps({ selected: '2011-01-01', yKey: 'injections', timeSeries: [{ injections: 75, date: '2011-01-01' }]});
     const payload = { fill: '#fill', injections: 75, ranking: 'warning', date: '2011-01-01' };
-    expect(wrapper.find('Bar').at(0).props().shape(payload).props.fill).toEqual('#22838A');
+    expect(wrapper.find('Bar').at(0).props().shape(payload).props).toMatchSnapshot();
   });
 
   it('renders a normal bar chart with correct fill for non-selected/hovered non-threshold events', () => {
@@ -77,7 +78,7 @@ describe('BarChart Component', () => {
   it('should handle click on all bars', () => {
     wrapper.setProps({ timeSeries: stacked, yKeys });
     wrapper.find('Bar').forEach((n) => n.simulate('click'));
-    expect(props.onClick).toHaveBeenCalledTimes(2);
+    expect(props.onClick).toHaveBeenCalledTimes(3);
   });
 
   it('should display x reference lines', () => {

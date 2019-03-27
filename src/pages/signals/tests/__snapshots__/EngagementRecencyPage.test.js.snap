@@ -95,6 +95,7 @@ exports[`Signals Engagement Recency Page renders correctly 1`] = `
           className="LiftTooltip"
         >
           <BarChart
+            activeFill="#22838A"
             fill="#B3ECEF"
             gap={0.25}
             height={250}

@@ -17,6 +17,7 @@ exports[`Signals EngagementRecencyPreview Component renders correctly 1`] = `
     </Panel.Section>
     <Panel.Section>
       <BarChart
+        activeFill="#22838A"
         disableHover={true}
         fill="#B3ECEF"
         gap={0.5}

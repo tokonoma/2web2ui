@@ -60,6 +60,7 @@ exports[`Signals Spam Trap Page renders correctly 1`] = `
 "
         />
         <BarChart
+          activeFill="#22838A"
           fill="#B3ECEF"
           gap={0.25}
           height={250}
