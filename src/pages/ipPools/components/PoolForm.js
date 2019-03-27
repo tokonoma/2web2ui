@@ -18,7 +18,7 @@ export class PoolForm extends Component {
   getOverflowPoolOptions = () => {
     const { pools, pool } = this.props;
 
-    return _.compact(pools.map((currentPool) => {
+    const overflowPools = _.compact(pools.map((currentPool) => {
       if (!currentPool.ips.length || currentPool.id === pool.id) {
         return null;
       }
@@ -29,6 +29,8 @@ export class PoolForm extends Component {
       };
     }));
 
+    overflowPools.unshift({ label: 'Select an Overflow Pool', value: '' });
+    return overflowPools;
   }
 
   render() {
@@ -64,7 +66,7 @@ export class PoolForm extends Component {
               </AccessControl>
             }
 
-            {!editingDefault && Boolean(overflowPools.length) &&
+            {!editingDefault && overflowPools.length > 1 &&
               <AccessControl condition={isAccountUiOptionSet('ip_auto_warmup', false)}>
                 <Field
                   name='auto_warmup_overflow_pool'
