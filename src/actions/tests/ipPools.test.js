@@ -22,11 +22,6 @@ describe('Action Creator: IP Pools', () => {
       await mockStore.dispatch(ipPools.createPool({ name: 'pool 1', signing_domain: '', auto_warmup_overflow_pool: 'overflow' }));
       expect(mockStore.getActions()).toMatchSnapshot();
     });
-
-    it('dispatches create action with whitelisted keys', async () => {
-      await mockStore.dispatch(ipPools.createPool({ name: 'pool 1', signing_domain: '', auto_warmup_overflow_pool: 'overflow', foo: 'bar' }));
-      expect(Object.keys(mockStore.getActions()[0].meta.data)).toEqual(['name', 'signing_domain', 'auto_warmup_overflow_pool']);
-    });
   });
 
 });
