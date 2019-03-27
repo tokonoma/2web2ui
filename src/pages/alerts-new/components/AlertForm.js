@@ -238,7 +238,6 @@ const mapStateToProps = (state, props) => {
     facet_name: selector(state, 'facet_name'),
     facet_value: selector(state, 'facet_value'),
     assignTo: selector(state, 'assignTo'),
-    subaccount: selector(state, 'subaccount'),
     enabled: selector(state, 'enabled'),
     initialValues: props.newAlert ? defaultFormValues : formatEditValues(state, state.alerts.alert)
   };
