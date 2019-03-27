@@ -71,40 +71,51 @@ describe('Webhooks Form Component', () => {
     wrapper.setProps({ eventsRadio: 'select' });
     // Ghetto sibling selector
     // 'Grid' below radio group is the checkbox group
-    expect(wrapper.find('EventsRadioGroup').parent().props().children).toMatchSnapshot();
+    expect(wrapper.find('EventsRadioGroup').parent().prop('children')).toMatchSnapshot();
+  });
+
+  it('should disable input when submitting', () => {
+    wrapper.setProps({ submitting: true, hasSubaccounts: true });
+    expect(wrapper.find('Button').prop('disabled')).toBe(true);
+    expect(wrapper.find('NameField').prop('disabled')).toBe(true);
+    expect(wrapper.find('TargetField').prop('disabled')).toBe(true);
+    expect(wrapper.find('Connect(SubaccountSection)').prop('disabled')).toBe(true);
+    expect(wrapper.find('EventsRadioGroup').prop('disabled')).toBe(true);
+    expect(wrapper.find('AuthDropDown').prop('disabled')).toBe(true);
+    expect(wrapper.find('ActiveField').prop('disabled')).toBe(true);
   });
 
   describe('submit button props', () => {
     it('should render correct submit text when updating an existing webhook', () => {
-      expect(wrapper.find('Button').props().children).toEqual('Update Webhook');
+      expect(wrapper.find('Button').prop('children')).toEqual('Update Webhook');
     });
     it('should render correct submit text when creating a new webhook', () => {
       wrapper.setProps({ newWebhook: true });
-      expect(wrapper.find('Button').props().children).toEqual('Create Webhook');
+      expect(wrapper.find('Button').prop('children')).toEqual('Create Webhook');
     });
     it('should render correct submit text and be disabled when submitting', () => {
       wrapper.setProps({ submitting: true });
-      expect(wrapper.find('Button').props().disabled).toEqual(true);
-      expect(wrapper.find('Button').props().children).toEqual('Submitting...');
+      expect(wrapper.find('Button').prop('disabled')).toBe(true);
+      expect(wrapper.find('Button').prop('children')).toEqual('Submitting...');
     });
     it('should disable submit button when pristine', () => {
-      expect(wrapper.find('Button').props().disabled).toEqual(true);
+      expect(wrapper.find('Button').prop('disabled')).toBe(true);
     });
     it('should enable submit button when not pristine and not submitting', () => {
       wrapper.setProps({ pristine: false });
-      expect(wrapper.find('Button').props().disabled).toEqual(false);
+      expect(wrapper.find('Button').prop('disabled')).toBe(false);
     });
   });
 
   describe('auth', () => {
     it('should render basic auth fields', () => {
       wrapper.setProps({ auth: 'basic' });
-      expect(wrapper.find('AuthDropDown').parent().props().children).toMatchSnapshot();
+      expect(wrapper.find('AuthDropDown').parent().prop('children')).toMatchSnapshot();
     });
 
     it('should render basic oauth2 fields', () => {
       wrapper.setProps({ auth: 'oauth2' });
-      expect(wrapper.find('AuthDropDown').parent().props().children).toMatchSnapshot();
+      expect(wrapper.find('AuthDropDown').parent().prop('children')).toMatchSnapshot();
     });
   });
 });

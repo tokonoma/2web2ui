@@ -3,6 +3,7 @@
 exports[`should render ActiveField 1`] = `
 <Field
   component={[Function]}
+  disabled={false}
   helpText="An inactive webhook will not transmit any data."
   label="Active"
   name="active"
@@ -12,6 +13,7 @@ exports[`should render ActiveField 1`] = `
 exports[`should render AuthDropDown 1`] = `
 <Field
   component={[Function]}
+  disabled={false}
   helpText={
     <span>
       Select "None" if your target URL has no authentication scheme. 
@@ -73,10 +75,12 @@ exports[`should render EventsRadioGroup 1`] = `
   options={
     Array [
       Object {
+        "disabled": false,
         "label": "All events",
         "value": "all",
       },
       Object {
+        "disabled": false,
         "label": "Select individual events",
         "value": "select",
       },
@@ -89,6 +93,7 @@ exports[`should render EventsRadioGroup 1`] = `
 exports[`should render NameField 1`] = `
 <Field
   component={[Function]}
+  disabled={false}
   helpText="A friendly label for your webhook, only used for display"
   label="Webhook Name"
   name="name"
@@ -132,6 +137,7 @@ exports[`should render OAuth2Fields 1`] = `
 exports[`should render TargetField 1`] = `
 <Field
   component={[Function]}
+  disabled={false}
   helpText="This is the URL we'll send data to. We recommend the use of https."
   label="Target"
   name="target"

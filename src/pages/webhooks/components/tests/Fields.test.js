@@ -11,25 +11,25 @@ import {
 } from '../Fields.js';
 
 it('should render NameField', () => {
-  const wrapper = shallow(<NameField />);
+  const wrapper = shallow(<NameField disabled={false}/>);
 
   expect(wrapper).toMatchSnapshot();
 });
 
 it('should render TargetField', () => {
-  const wrapper = shallow(<TargetField />);
+  const wrapper = shallow(<TargetField disabled={false}/>);
 
   expect(wrapper).toMatchSnapshot();
 });
 
 it('should render EventsRadioGroup', () => {
-  const wrapper = shallow(<EventsRadioGroup />);
+  const wrapper = shallow(<EventsRadioGroup disabled={false}/>);
 
   expect(wrapper).toMatchSnapshot();
 });
 
 it('should render AuthDropDown', () => {
-  const wrapper = shallow(<AuthDropDown />);
+  const wrapper = shallow(<AuthDropDown disabled={false}/>);
 
   expect(wrapper).toMatchSnapshot();
 });
@@ -47,6 +47,6 @@ it('should render OAuth2Fields', () => {
 });
 
 it('should render ActiveField', () => {
-  const wrapper = shallow(<ActiveField />);
+  const wrapper = shallow(<ActiveField disabled={false}/>);
   expect(wrapper).toMatchSnapshot();
 });

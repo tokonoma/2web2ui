@@ -21,7 +21,7 @@ const OAuth2Fields = () => (
   </div>
 );
 
-const NameField = () => (
+const NameField = ({ disabled }) => (
   <Field
     name='name'
     component={TextFieldWrapper}
@@ -29,10 +29,11 @@ const NameField = () => (
     label='Webhook Name'
     placeholder='e.g. My Opens and Clicks Webhook'
     helpText='A friendly label for your webhook, only used for display'
+    disabled={disabled}
   />
 );
 
-const TargetField = () => (
+const TargetField = ({ disabled }) => (
   <Field
     name='target'
     component={TextFieldWrapper}
@@ -41,32 +42,34 @@ const TargetField = () => (
     label='Target'
     placeholder='https://example.com/webhook-target'
     helpText="This is the URL we'll send data to. We recommend the use of https."
+    disabled={disabled}
   />
 );
 
-const EventsRadioGroup = () => (
+const EventsRadioGroup = ({ disabled }) => (
   <Field
     name='eventsRadio'
     component={RadioGroup}
     title='Events:'
     options={[
-      { value: 'all', label: 'All events' },
-      { value: 'select', label: 'Select individual events' }
+      { value: 'all', label: 'All events', disabled },
+      { value: 'select', label: 'Select individual events', disabled }
     ]}
   />
 );
 
-const AuthDropDown = () => (
+const AuthDropDown = ({ disabled }) => (
   <Field
     name='auth'
     label='Authentication'
     component={SelectWrapper}
     options={[{ value: '', label: 'None' }, { value: 'basic', label: 'Basic Auth' }, { value: 'oauth2', label: 'OAuth 2.0' }]}
     helpText={<span>Select "None" if your target URL has no authentication scheme. <UnstyledLink external to='https://support.sparkpost.com/customer/portal/articles/2112385'>More information</UnstyledLink>.</span>}
+    disabled={disabled}
   />
 );
 
-const ActiveField = () => {
+const ActiveField = ({ disabled }) => {
   // Artificially set a checked prop so the underlying input displays properly.
   const CheckableCheckbox = ({ input, ...rest }) => <CheckboxWrapper input={input} {...rest} checked={Boolean(input.value)} />;
   return <Field
@@ -74,6 +77,7 @@ const ActiveField = () => {
     label='Active'
     component={CheckableCheckbox}
     helpText='An inactive webhook will not transmit any data.'
+    disabled={disabled}
   />;
 };
 

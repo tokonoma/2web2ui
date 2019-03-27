@@ -57,27 +57,26 @@ export class WebhookForm extends Component {
       pristine,
       submitting
     } = this.props;
-    const disabled = pristine || submitting;
     const submitText = submitting ? 'Submitting...' : (newWebhook ? 'Create Webhook' : 'Update Webhook');
 
     return (
       <form onSubmit={handleSubmit}>
         <Panel.Section>
-          <NameField />
-          <TargetField />
+          <NameField disabled={submitting} />
+          <TargetField disabled={submitting} />
         </Panel.Section>
-        {hasSubaccounts ? <Panel.Section><SubaccountSection newWebhook={newWebhook} formName={formName} /></Panel.Section> : null}
+        {hasSubaccounts ? <Panel.Section><SubaccountSection newWebhook={newWebhook} formName={formName} disabled={submitting}/></Panel.Section> : null}
         <Panel.Section>
-          <EventsRadioGroup />
+          <EventsRadioGroup disabled={submitting} />
           <EventCheckBoxes show={showEvents} events={eventListing} />
         </Panel.Section>
         <Panel.Section>
-          <AuthDropDown />
+          <AuthDropDown disabled={submitting} />
           <AuthFields authType={auth} />
         </Panel.Section>
-        {newWebhook ? null : <Panel.Section><ActiveField /></Panel.Section>}
+        {newWebhook ? null : <Panel.Section><ActiveField disabled={submitting} /></Panel.Section>}
         <Panel.Section>
-          <Button submit primary disabled={disabled}>{submitText}</Button>
+          <Button submit primary disabled={pristine || submitting}>{submitText}</Button>
         </Panel.Section>
       </form>
     );

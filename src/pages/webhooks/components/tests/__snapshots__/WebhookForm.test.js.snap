@@ -41,7 +41,9 @@ exports[`EventCheckboxes component should return null if show is false 1`] = `""
 
 exports[`Webhooks Form Component auth should render basic auth fields 1`] = `
 Array [
-  <AuthDropDown />,
+  <AuthDropDown
+    disabled={false}
+  />,
   <AuthFields
     authType="basic"
   />,
@@ -50,7 +52,9 @@ Array [
 
 exports[`Webhooks Form Component auth should render basic oauth2 fields 1`] = `
 Array [
-  <AuthDropDown />,
+  <AuthDropDown
+    disabled={false}
+  />,
   <AuthFields
     authType="oauth2"
   />,
@@ -62,21 +66,31 @@ exports[`Webhooks Form Component should render correctly 1`] = `
   onSubmit={[MockFunction]}
 >
   <Panel.Section>
-    <NameField />
-    <TargetField />
+    <NameField
+      disabled={false}
+    />
+    <TargetField
+      disabled={false}
+    />
   </Panel.Section>
   <Panel.Section>
-    <EventsRadioGroup />
+    <EventsRadioGroup
+      disabled={false}
+    />
     <EventCheckBoxes />
   </Panel.Section>
   <Panel.Section>
-    <AuthDropDown />
+    <AuthDropDown
+      disabled={false}
+    />
     <AuthFields
       authType={null}
     />
   </Panel.Section>
   <Panel.Section>
-    <ActiveField />
+    <ActiveField
+      disabled={false}
+    />
   </Panel.Section>
   <Panel.Section>
     <Button
@@ -93,13 +107,16 @@ exports[`Webhooks Form Component should render correctly 1`] = `
 
 exports[`Webhooks Form Component should show events checkboxes 1`] = `
 Array [
-  <EventsRadioGroup />,
+  <EventsRadioGroup
+    disabled={false}
+  />,
   <EventCheckBoxes />,
 ]
 `;
 
 exports[`Webhooks Form Component should subaccount section if subaccounts exist 1`] = `
 <Connect(SubaccountSection)
+  disabled={false}
   formName="webhookForm"
   newWebhook={false}
 />
