@@ -121,7 +121,7 @@ describe('Signals Health Score Page', () => {
 
     it('renders health score y ticks', () => {
       const axisProps = wrapper.find('BarChart').at(0).prop('yAxisProps');
-      expect(axisProps.tickFormatter(0.2468)).toEqual(24.68);
+      expect(axisProps.tickFormatter(0.2468)).toEqual(24);
     });
 
     it('renders injections y ticks', () => {
