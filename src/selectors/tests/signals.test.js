@@ -138,19 +138,19 @@ describe('Selectors: signals', () => {
               sending_domain: 'test.com',
               history: [
                 {
-                  c_total_unsubscribes: 25,
-                  c_new_unsubscribes: 5,
-                  c_uneng_unsubscribes: 5,
-                  c_14d_unsubscribes: 5,
-                  c_365d_unsubscribes: 5,
+                  p_total_unsub: 25,
+                  p_new_unsub: 5,
+                  p_uneng_unsub: 5,
+                  p_14d_unsub: 5,
+                  p_365d_unsub: 5,
                   dt: '2018-01-01'
                 },
                 {
-                  c_total_unsubscribes: 50,
-                  c_new_unsubscribes: 10,
-                  c_uneng_unsubscribes: 10,
-                  c_14d_unsubscribes: 10,
-                  c_365d_unsubscribes: 10,
+                  p_total_unsub: 50,
+                  p_new_unsub: 10,
+                  p_uneng_unsub: 10,
+                  p_14d_unsub: 10,
+                  p_365d_unsub: 10,
                   dt: '2018-01-03'
                 }
               ]

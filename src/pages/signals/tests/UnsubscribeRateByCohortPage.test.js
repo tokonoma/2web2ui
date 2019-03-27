@@ -56,13 +56,13 @@ describe('Signals Unsubscribe Rate Page', () => {
     it('renders tooltip content', () => {
       const Tooltip = wrapper.find('LineChart').prop('tooltipContent');
       expect(shallow(<Tooltip payload={{
-        c_uneng: 0.1,
-        c_365d: 0.2,
-        c_90d: 0.3,
-        c_14d: 0.4,
-        c_new: 0.5,
+        p_uneng_unsub: 0.1,
+        p_365d_unsub: 0.2,
+        p_90d_unsub: 0.3,
+        p_14d_unsub: 0.4,
+        p_new_unsub: 0.5,
         date: '2018-01-01',
-        c_total: 10
+        p_total_unsub: 10
       }} />)).toMatchSnapshot();
     });
 
@@ -74,7 +74,7 @@ describe('Signals Unsubscribe Rate Page', () => {
 
     it('gets y axis props', () => {
       const axisProps = wrapper.find('LineChart').prop('yAxisProps');
-      expect(axisProps.tickFormatter(25.123)).toEqual('25%');
+      expect(axisProps.tickFormatter(.2523)).toEqual('25%');
     });
   });
 });

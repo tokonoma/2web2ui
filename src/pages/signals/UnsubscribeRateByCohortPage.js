@@ -27,7 +27,7 @@ import styles from './DetailsPages.module.scss';
 export class UnsubscribeRateByCohortPage extends Component {
 
   getYAxisProps = () => ({
-    tickFormatter: (tick) => `${roundToPlaces(tick, 0)}%`
+    tickFormatter: (tick) => `${roundToPlaces(tick * 100, 0)}%`
   })
 
   getXAxisProps = () => {
@@ -41,7 +41,7 @@ export class UnsubscribeRateByCohortPage extends Component {
   getTooltipContent = ({ payload = {}}) => {
     const metrics = _.keys(cohorts).reduce((acc, key) => ([ ...acc, {
       ...cohorts[key], key,
-      value: roundToPlaces(payload[key], 1)
+      value: roundToPlaces(payload[`p_${key}_unsub`], 1)
     }]), []);
 
     return (
@@ -52,7 +52,7 @@ export class UnsubscribeRateByCohortPage extends Component {
             color={metric.fill}
             label={metric.label}
             description={metric.description}
-            value={`${roundToPlaces(metric.value, 1)}%`}
+            value={`${roundToPlaces(metric.value * 100, 1)}%`}
           />
         ))}
       </>
@@ -95,7 +95,7 @@ export class UnsubscribeRateByCohortPage extends Component {
                   lineType='natural'
                   tooltipWidth='250px'
                   tooltipContent={this.getTooltipContent}
-                  yKeys={_.keys(cohorts).map((key) => ({ key, ...cohorts[key] })).reverse()}
+                  yKeys={_.keys(cohorts).map((key) => ({ key: `p_${key}_unsub`, ...cohorts[key] })).reverse()}
                   yAxisProps={this.getYAxisProps()}
                   xAxisProps={this.getXAxisProps()}
                 />

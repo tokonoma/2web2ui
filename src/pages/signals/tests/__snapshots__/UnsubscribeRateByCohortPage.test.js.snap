@@ -5,37 +5,37 @@ exports[`Signals Unsubscribe Rate Page bar chart props renders tooltip content 1
   <TooltipMetric
     color="#88E2E7"
     description="Never engaged, first email in last 7 days"
-    key="c_new"
+    key="new"
     label="New"
-    value="0.5%"
+    value="50%"
   />
   <TooltipMetric
     color="#1A838B"
     description="0-14 days since last engagement"
-    key="c_14d"
+    key="14d"
     label="Recently Engaged"
-    value="0.4%"
+    value="40%"
   />
   <TooltipMetric
     color="#219EA8"
     description="14-90 days since last engagement"
-    key="c_90d"
+    key="90d"
     label="Semi Recently Engaged"
-    value="0.3%"
+    value="30%"
   />
   <TooltipMetric
     color="#29B9C7"
     description="90-365 days since last engagement"
-    key="c_365d"
+    key="365d"
     label="Not Recently Engaged"
-    value="0.2%"
+    value="20%"
   />
   <TooltipMetric
     color="#50CFDA"
     description="365+ days since last engagement"
-    key="c_uneng"
+    key="uneng"
     label="Never Engaged"
-    value="0.1%"
+    value="10%"
   />
 </Fragment>
 `;
@@ -119,35 +119,35 @@ exports[`Signals Unsubscribe Rate Page renders correctly 1`] = `
                 Object {
                   "description": "0-14 days since last engagement",
                   "fill": "#1A838B",
-                  "key": "c_14d",
+                  "key": "p_14d_unsub",
                   "label": "Recently Engaged",
                   "stroke": "#1A838B",
                 },
                 Object {
                   "description": "14-90 days since last engagement",
                   "fill": "#219EA8",
-                  "key": "c_90d",
+                  "key": "p_90d_unsub",
                   "label": "Semi Recently Engaged",
                   "stroke": "#219EA8",
                 },
                 Object {
                   "description": "90-365 days since last engagement",
                   "fill": "#29B9C7",
-                  "key": "c_365d",
+                  "key": "p_365d_unsub",
                   "label": "Not Recently Engaged",
                   "stroke": "#29B9C7",
                 },
                 Object {
                   "description": "365+ days since last engagement",
                   "fill": "#50CFDA",
-                  "key": "c_uneng",
+                  "key": "p_uneng_unsub",
                   "label": "Never Engaged",
                   "stroke": "#50CFDA",
                 },
                 Object {
                   "description": "Never engaged, first email in last 7 days",
                   "fill": "#88E2E7",
-                  "key": "c_new",
+                  "key": "p_new_unsub",
                   "label": "New",
                   "stroke": "#88E2E7",
                 },
