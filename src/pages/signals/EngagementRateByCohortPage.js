@@ -41,7 +41,7 @@ export class EngagementRateByCohortPage extends Component {
   getTooltipContent = ({ payload = {}}) => {
     const metrics = _.keys(cohorts).reduce((acc, key) => ([ ...acc, {
       ...cohorts[key], key,
-      value: roundToPlaces(payload[`p_${key}_eng`], 1)
+      value: payload[`p_${key}_eng`]
     }]), []);
 
     return (
