@@ -19,7 +19,7 @@ export class PoolForm extends Component {
     const { pools, pool } = this.props;
 
     const overflowPools = _.compact(pools.map((currentPool) => {
-      if (!currentPool.ips.length || currentPool.id === pool.id) {
+      if (currentPool.auto_warmup_overflow_pool || currentPool.id === pool.id) {
         return null;
       }
 
@@ -38,8 +38,6 @@ export class PoolForm extends Component {
     const submitText = isNew ? 'Create IP Pool' : 'Update IP Pool';
     const editingDefault = !isNew && isDefaultPool(pool.id);
     const helpText = editingDefault ? 'You cannot change the default IP pool\'s name' : '';
-
-    const overflowPools = this.getOverflowPoolOptions();
 
     return (
       <Panel>
@@ -66,13 +64,13 @@ export class PoolForm extends Component {
               </AccessControl>
             }
 
-            {!editingDefault && overflowPools.length > 1 &&
+            {!editingDefault &&
               <AccessControl condition={isAccountUiOptionSet('ip_auto_warmup', false)}>
                 <Field
                   name='auto_warmup_overflow_pool'
                   label='Overflow Pool'
                   component={SelectWrapper}
-                  options={overflowPools}
+                  options={this.getOverflowPoolOptions()}
                   helpText='With automatic IP Warmup enabled, selected pool will be used when volume threshold for this pool has been reached.'
                   disabled={submitting}
                 />
