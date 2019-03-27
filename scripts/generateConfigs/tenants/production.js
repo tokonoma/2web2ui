@@ -136,6 +136,9 @@ const productionTenants = {
     alias: 'ca',
     bounceDomains: {
       allowSubaccountDefault: false
+    },
+    featureFlags: {
+      allow_default_signing_domains_for_ip_pools: false
     }
   },
   capone: {

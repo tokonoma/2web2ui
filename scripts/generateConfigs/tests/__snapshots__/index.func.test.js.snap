@@ -697,7 +697,9 @@ Object {
       "allowSubaccountDefault": false,
       "cnameValue": "ca.mail.e.sparkpost.com",
     },
-    "featureFlags": Object {},
+    "featureFlags": Object {
+      "allow_default_signing_domains_for_ip_pools": false,
+    },
     "sentry": Object {
       "projectId": 237613,
       "publicKey": "014f9707c27b4e7ea90aff051a82e561",

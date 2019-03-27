@@ -17,7 +17,7 @@ export default {
     }
   },
   featureFlags: {
-    allow_default_signing_domains_for_ip_pools: false,
+    allow_default_signing_domains_for_ip_pools: true,
     allow_mailbox_verification: true,
     allow_anyone_at_verification: true,
     has_signup: true
