@@ -92,7 +92,6 @@ export class UnsubscribeRateByCohortPage extends Component {
                   onClick={handleDateSelect}
                   selected={selectedDate}
                   lines={data}
-                  lineType='natural'
                   tooltipWidth='250px'
                   tooltipContent={this.getTooltipContent}
                   yKeys={_.keys(cohorts).map((key) => ({ key: `p_${key}_unsub`, ...cohorts[key] })).reverse()}
