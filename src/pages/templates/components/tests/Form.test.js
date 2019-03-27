@@ -17,7 +17,8 @@ describe('Template Form', () => {
       change: jest.fn(),
       newTemplate: false,
       readOnly: false,
-      hasSubaccounts: false
+      hasSubaccounts: true,
+      canViewSubaccount: true
     };
 
     wrapper = shallow(<Form {...props} />);
@@ -30,13 +31,17 @@ describe('Template Form', () => {
   it('should render', () => {
     expect(wrapper).toMatchSnapshot();
     expect(wrapper.instance().props.listDomains).toHaveBeenCalled();
-    expect(wrapper.find(SubaccountSection)).toHaveLength(0);
+    expect(wrapper.find(SubaccountSection)).toExist();
   });
 
-  it('should render subaccount fields if has subaccounts', () => {
-    wrapper.setProps({ hasSubaccounts: true });
-    wrapper.update();
-    expect(wrapper.find(SubaccountSection)).toMatchSnapshot();
+  it('should not render subaccount fields if account has no subaccounts', () => {
+    wrapper.setProps({ hasSubaccounts: false });
+    expect(wrapper.find(SubaccountSection)).not.toExist();
+  });
+
+  it('should not render subaccount fields if subaccount user', () => {
+    wrapper.setProps({ canViewSubaccount: false });
+    expect(wrapper.find(SubaccountSection)).not.toExist();
   });
 
   it('should disable fields for read-only users', () => {

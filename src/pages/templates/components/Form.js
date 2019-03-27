@@ -47,8 +47,8 @@ export default class Form extends Component {
   }
 
   render() {
-    const { newTemplate, readOnly, domains, hasSubaccounts } = this.props;
-
+    const { newTemplate, readOnly, domains, hasSubaccounts, canViewSubaccount } = this.props;
+    const canViewSubaccountSection = hasSubaccounts && canViewSubaccount;
     return (
       <div>
         <Panel className={styles.FormPanel}>
@@ -71,7 +71,7 @@ export default class Form extends Component {
               validate={newTemplate ? [required, slug] : null}
             />
           </Panel.Section>
-          {hasSubaccounts && <SubaccountSection newTemplate={newTemplate} disabled={readOnly} />}
+          {canViewSubaccountSection && <SubaccountSection newTemplate={newTemplate} disabled={readOnly} />}
         </Panel>
         <Panel>
           <Panel.Section>

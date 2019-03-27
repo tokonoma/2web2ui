@@ -73,12 +73,13 @@ export default class EditPage extends React.Component {
       loadingError,
       handleSubmit,
       hasSubaccounts,
+      canViewSubaccount,
       id,
       loading,
       submitting
     } = this.props;
     const disabled = !canModify || submitting;
-
+    const canViewSubaccountSection = hasSubaccounts && canViewSubaccount;
     if (loadingError) {
       return (
         <RedirectAndAlert
@@ -126,7 +127,7 @@ export default class EditPage extends React.Component {
                     label="Snippet ID"
                   />
                 </Panel.Section>
-                {hasSubaccounts && (
+                {canViewSubaccountSection && (
                   <SubaccountSection newTemplate={false} disabled={disabled} />
                 )}
               </Panel>

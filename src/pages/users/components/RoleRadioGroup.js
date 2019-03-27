@@ -34,7 +34,7 @@ const REPORTING_ROLE = {
   label: <strong>Reporting</strong>,
   value: ROLES.REPORTING,
   helpText:
-    'Data analytics user. Has access to all reporting features. No access to any account or feature settings.'
+    'Data analytics user. Has access to all reporting features and can view templates. No access to any account or feature settings.'
 };
 
 const SUPERUSER_ROLE = {

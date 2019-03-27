@@ -30,7 +30,7 @@ exports[`Component: RoleRadioGroup should render the RadioGroup 1`] = `
       Object {
         "children": false,
         "disabled": false,
-        "helpText": "Data analytics user. Has access to all reporting features. No access to any account or feature settings.",
+        "helpText": "Data analytics user. Has access to all reporting features and can view templates. No access to any account or feature settings.",
         "label": <strong>
           Reporting
         </strong>,

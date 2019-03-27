@@ -12,4 +12,6 @@ const mapStateToProps = (state, props) => {
   };
 };
 
-export default withFormName(connect(mapStateToProps, { change })(SubaccountSection));
+const connectedComponent = withFormName(connect(mapStateToProps, { change })(SubaccountSection));
+connectedComponent.displayName = 'SubaccountSection';
+export default connectedComponent;
