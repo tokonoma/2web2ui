@@ -62,12 +62,12 @@ export const getEngagementRecency = signalsActionCreator({
 });
 
 export const getEngagementRateByCohort = signalsActionCreator({
-  dimension: 'engagement_by_cohort', // TODO update when api is ready
+  dimension: 'eng-cohort',
   type: 'GET_ENGAGEMENT_RATE_BY_COHORT'
 });
 
 export const getUnsubscribeRateByCohort = signalsActionCreator({
-  dimension: 'unsubscribe_by_cohort', // TODO update when api is ready
+  dimension: 'unsub-cohort',
   type: 'GET_UNSUBSCRIBE_RATE_BY_COHORT'
 });
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { getUnsubscribeRateByCohort } from 'src/actions/signals.fake';
+import { getUnsubscribeRateByCohort } from 'src/actions/signals';
 import { selectUnsubscribeRateByCohortDetails, getSelectedDateFromRouter } from 'src/selectors/signals';
 import { getDateTicks } from 'src/helpers/date';
 import { getDisplayName } from 'src/helpers/hoc';

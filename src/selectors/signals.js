@@ -113,28 +113,18 @@ export const selectEngagementRateByCohortDetails = createSelector(
     const match = data.find((item) => String(item[facet]) === facetId) || {};
 
     // Rename keys to reference correct cohort constants within components
-    const normalizedHistory = _.get(match, 'history', []).map(({ dt: date, ...values }) => {
-      const reKeyed = _.keys(values).reduce((acc, key) => ({
-        ...acc, [key.replace(/_engagement$/, '')]: values[key]
-      }), {});
-      return { date, ...reKeyed };
-    });
+    const normalizedHistory = _.get(match, 'history', []).map(({ dt: date, ...values }) => ({ date, ...values }));
 
     const filledHistory = fillByDate({
       dataSet: normalizedHistory,
       fill: {
-        c_new: null,
-        c_14d: null,
-        c_90d: null,
-        c_365d: null,
-        c_uneng: null,
-        c_total: null
+        p_new_eng: null, p_14d_eng: null, p_90d_eng: null, p_365d_eng: null, p_uneng_eng: null, p_total_eng: null
       },
       now,
       relativeRange
     });
 
-    const isEmpty = filledHistory.every((values) => _.isNil(values.c_total));
+    const isEmpty = filledHistory.every((values) => _.isNil(values.p_total_eng));
 
     return {
       details: {

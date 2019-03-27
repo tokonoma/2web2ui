@@ -15,35 +15,35 @@ exports[`Signals Engagement Recency Page bar chart props renders tooltip content
   <TooltipMetric
     color="#88E2E7"
     description="Never engaged, first email in last 7 days"
-    key="c_new"
+    key="new"
     label="New"
     value="50%"
   />
   <TooltipMetric
     color="#50CFDA"
     description="365+ days since last engagement"
-    key="c_uneng"
+    key="uneng"
     label="Never Engaged"
     value="10%"
   />
   <TooltipMetric
     color="#29B9C7"
     description="90-365 days since last engagement"
-    key="c_365d"
+    key="365d"
     label="Not Recently Engaged"
     value="20%"
   />
   <TooltipMetric
     color="#219EA8"
     description="14-90 days since last engagement"
-    key="c_90d"
+    key="90d"
     label="Semi Recently Engaged"
     value="30%"
   />
   <TooltipMetric
     color="#1A838B"
     description="0-14 days since last engagement"
-    key="c_14d"
+    key="14d"
     label="Recently Engaged"
     value="40%"
   />

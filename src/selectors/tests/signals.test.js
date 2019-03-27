@@ -110,19 +110,19 @@ describe('Selectors: signals', () => {
               sending_domain: 'test.com',
               history: [
                 {
-                  c_total_engagement: 25,
-                  c_new_engagement: 5,
-                  c_uneng_engagement: 5,
-                  c_14d_engagement: 5,
-                  c_365d_engagement: 5,
+                  p_total_eng: 25,
+                  p_new_eng: 5,
+                  p_uneng_eng: 5,
+                  p_14d_eng: 5,
+                  p_365d_eng: 5,
                   dt: '2018-01-01'
                 },
                 {
-                  c_total_engagement: 50,
-                  c_new_engagement: 10,
-                  c_uneng_engagement: 10,
-                  c_14d_engagement: 10,
-                  c_365d_engagement: 10,
+                  p_total_eng: 50,
+                  p_new_eng: 10,
+                  p_uneng_eng: 10,
+                  p_14d_eng: 10,
+                  p_365d_eng: 10,
                   dt: '2018-01-03'
                 }
               ]

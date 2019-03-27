@@ -52,7 +52,7 @@ export class EngagementRecencyPage extends Component {
           color={cohorts[key].fill}
           label={cohorts[key].label}
           description={cohorts[key].description}
-          value={`${roundToPlaces(payload[key] * 100, 1)}%`}
+          value={`${roundToPlaces(payload[`c_${key}`] * 100, 1)}%`}
         />
       ))}
     </Fragment>
@@ -101,7 +101,7 @@ export class EngagementRecencyPage extends Component {
                   timeSeries={data}
                   tooltipContent={this.getTooltipContent}
                   tooltipWidth='250px'
-                  yKeys={_.keys(cohorts).map((key) => ({ key, ...cohorts[key] })).reverse()}
+                  yKeys={_.keys(cohorts).map((key) => ({ key: `c_${key}`, ...cohorts[key] })).reverse()}
                   yAxisProps={this.getYAxisProps()}
                   xAxisProps={this.getXAxisProps()}
                 />

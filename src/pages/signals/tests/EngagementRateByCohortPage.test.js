@@ -55,13 +55,13 @@ describe('Signals Engagement Rate By Cohort Page', () => {
     it('renders tooltip content', () => {
       const Tooltip = wrapper.find('LineChart').prop('tooltipContent');
       expect(shallow(<Tooltip payload={{
-        c_uneng: 0.1,
-        c_365d: 0.2,
-        c_90d: 0.3,
-        c_14d: 0.4,
-        c_new: 0.5,
+        p_uneng_eng: 0.1,
+        p_365d_eng: 0.2,
+        p_90d_eng: 0.3,
+        p_14d_eng: 0.4,
+        p_new_eng: 0.5,
         date: '2018-01-01',
-        c_total: 10
+        p_total_eng: 10
       }} />)).toMatchSnapshot();
     });
 
@@ -73,7 +73,7 @@ describe('Signals Engagement Rate By Cohort Page', () => {
 
     it('gets y axis props', () => {
       const axisProps = wrapper.find('LineChart').prop('yAxisProps');
-      expect(axisProps.tickFormatter(25.123)).toEqual('25%');
+      expect(axisProps.tickFormatter(.253)).toEqual('25%');
     });
   });
 });
