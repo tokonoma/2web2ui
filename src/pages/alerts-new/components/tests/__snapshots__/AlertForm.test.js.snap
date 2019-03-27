@@ -109,16 +109,7 @@ exports[`Alert Form Component enabled prop should only show enabled toggle on ed
               }
               disabled={false}
               helpText={null}
-              items={
-                Array [
-                  Object {
-                    "domain": "someDomain.com",
-                  },
-                  Object {
-                    "domain": "someOtherDomain.com",
-                  },
-                ]
-              }
+              items={null}
               name="facet_value"
               placeholder="mail.example.com"
               validate={[Function]}
@@ -315,16 +306,7 @@ exports[`Alert Form Component enabled prop should only show enabled toggle on ed
               }
               disabled={false}
               helpText={null}
-              items={
-                Array [
-                  Object {
-                    "domain": "someDomain.com",
-                  },
-                  Object {
-                    "domain": "someOtherDomain.com",
-                  },
-                ]
-              }
+              items={null}
               name="facet_value"
               placeholder="mail.example.com"
               validate={[Function]}
@@ -544,16 +526,7 @@ exports[`Alert Form Component facet props should clear facet_value and validatio
               }
               disabled={true}
               helpText={null}
-              items={
-                Array [
-                  Object {
-                    "id": "someIpPool",
-                  },
-                  Object {
-                    "id": "someOtherIpPool",
-                  },
-                ]
-              }
+              items={null}
               name="facet_value"
               placeholder="No facet selected"
               validate={[Function]}
@@ -914,89 +887,6 @@ Object {
 }
 `;
 
-exports[`Alert Form Component facet props should show sending domain facets typeahead component with correct props when facet_name is set to sending_domain 1`] = `
-Object {
-  "component": [Function],
-  "connectLeft": <Field
-    component={[Function]}
-    disabled={false}
-    name="facet_name"
-    options={
-      Array [
-        Object {
-          "label": "None",
-          "value": "ALL",
-        },
-        Object {
-          "label": "Sending Domain",
-          "value": "sending_domain",
-        },
-        Object {
-          "label": "IP Pool",
-          "value": "ip_pool",
-        },
-        Object {
-          "label": "Campaign ID",
-          "value": "campaign_id",
-        },
-      ]
-    }
-    validate={[Function]}
-  />,
-  "disabled": false,
-  "helpText": null,
-  "items": Array [
-    Object {
-      "domain": "someDomain.com",
-    },
-    Object {
-      "domain": "someOtherDomain.com",
-    },
-  ],
-  "name": "facet_value",
-  "placeholder": "mail.example.com",
-  "validate": [Function],
-}
-`;
-
-exports[`Alert Form Component facet props should show warning if no domains 1`] = `
-Object {
-  "component": [Function],
-  "connectLeft": <Field
-    component={[Function]}
-    disabled={false}
-    name="facet_name"
-    options={
-      Array [
-        Object {
-          "label": "None",
-          "value": "ALL",
-        },
-        Object {
-          "label": "Sending Domain",
-          "value": "sending_domain",
-        },
-        Object {
-          "label": "IP Pool",
-          "value": "ip_pool",
-        },
-        Object {
-          "label": "Campaign ID",
-          "value": "campaign_id",
-        },
-      ]
-    }
-    validate={[Function]}
-  />,
-  "disabled": false,
-  "helpText": "You do not have any verified sending domains to use.",
-  "items": Array [],
-  "name": "facet_value",
-  "placeholder": "mail.example.com",
-  "validate": [Function],
-}
-`;
-
 exports[`Alert Form Component facet props should show warning if no ip pools 1`] = `
 Object {
   "component": [Function],
@@ -1151,16 +1041,7 @@ exports[`Alert Form Component should handle submit 1`] = `
               }
               disabled={false}
               helpText={null}
-              items={
-                Array [
-                  Object {
-                    "domain": "someDomain.com",
-                  },
-                  Object {
-                    "domain": "someOtherDomain.com",
-                  },
-                ]
-              }
+              items={null}
               name="facet_value"
               placeholder="mail.example.com"
               validate={[Function]}
@@ -1380,16 +1261,7 @@ exports[`Alert Form Component should render the alert form component correctly 1
               }
               disabled={false}
               helpText={null}
-              items={
-                Array [
-                  Object {
-                    "domain": "someDomain.com",
-                  },
-                  Object {
-                    "domain": "someOtherDomain.com",
-                  },
-                ]
-              }
+              items={null}
               name="facet_value"
               placeholder="mail.example.com"
               validate={[Function]}

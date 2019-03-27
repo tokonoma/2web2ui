@@ -8,18 +8,17 @@ import { Panel, Grid, Button } from '@sparkpost/matchbox';
 import { withRouter } from 'react-router-dom';
 import ToggleBlock from 'src/components/toggleBlock/ToggleBlock';
 import { TextFieldWrapper, SelectWrapper, RadioGroup, SubaccountTypeaheadWrapper } from 'src/components';
-import { formatEditValues, selectDomainsBySubaccount, selectIpPools } from 'src/selectors/alerts';
+import { formatEditValues, selectIpPools } from 'src/selectors/alerts';
 import getOptions from '../helpers/getOptions';
 import { METRICS } from '../constants/metrics';
 import { FACETS } from '../constants/facets';
 import { COMPARATOR } from '../constants/comparator';
 import { defaultFormValues } from '../constants/defaultFormValues';
-import { list as listDomains } from 'src/actions/sendingDomains';
 import { listPools } from 'src/actions/ipPools';
 import MultiFacetWrapper from './MultiFacetWrapper';
 
 // Helpers & Validation
-import { required, integer, minNumber, maxLength, numberBetween } from 'src/helpers/validation';
+import { domain, required, integer, minNumber, maxLength, numberBetween } from 'src/helpers/validation';
 import validateEmailList from '../helpers/validateEmailList';
 
 const formName = 'alertForm';
@@ -33,7 +32,6 @@ const accountOptions = [
 export class AlertForm extends Component {
 
   componentDidMount() {
-    this.props.listDomains();
     this.props.listPools();
   }
 
@@ -47,15 +45,14 @@ export class AlertForm extends Component {
 
   validateFacet = (value, allValues) => {
     const { facet_name } = allValues;
-    const { domains, ipPools } = this.props;
+    const { ipPools } = this.props;
 
     if (facet_name === 'ALL') {
       return undefined;
     }
 
     if (facet_name === 'sending_domain' && value && value !== '') {
-      const domainsArray = domains.map(({ domain }) => domain) || [];
-      return domainsArray.includes(value) ? undefined : 'This is not a valid sending domain for this account';
+      return domain(value);
     }
 
     if (facet_name === 'ip_pool' && value && value !== '') {
@@ -75,9 +72,6 @@ export class AlertForm extends Component {
       facet_name,
       handleSubmit,
       newAlert,
-      subaccount,
-      domains = [],
-      domainsLoading,
       ipPools = [],
       ipPoolsLoading
     } = this.props;
@@ -105,12 +99,6 @@ export class AlertForm extends Component {
     };
 
     const multiFacetWarning = () => {
-      if (facet_name === 'sending_domain' && !domainsLoading && !domains.length) {
-        return (assignTo === 'subaccount' && subaccount)
-          ? 'The selected subaccount does not have any verified sending domains.'
-          : 'You do not have any verified sending domains to use.';
-      }
-
       if (facet_name === 'ip_pool' && !ipPoolsLoading && !ipPools.length) {
         return 'You do not have any ip pools to use.';
       }
@@ -169,8 +157,8 @@ export class AlertForm extends Component {
                         validate={required}
                       />
                     }
-                    component={(facet_name === 'sending_domain' || facet_name === 'ip_pool') ? MultiFacetWrapper : TextFieldWrapper}
-                    items={(facet_name === 'sending_domain') ? domains : ipPools}
+                    component={facet_name === 'ip_pool' ? MultiFacetWrapper : TextFieldWrapper}
+                    items={(facet_name === 'ip_pool') ? ipPools : null}
                     disabled={submitting || checkFacet()}
                     placeholder={facet_name === 'ALL' ? 'No facet selected' : facet_name === 'sending_domain' ? 'mail.example.com' : ''}
                     validate={this.validateFacet}
@@ -244,15 +232,12 @@ const mapStateToProps = (state, props) => {
   const selector = formValueSelector(formName);
 
   return {
-    domains: selectDomainsBySubaccount(state, formName),
-    domainsLoading: state.sendingDomains.listLoading,
     ipPools: selectIpPools(state, formName),
     ipPoolsLoading: state.ipPools.listLoading,
     alert_metric: selector(state, 'alert_metric'),
     facet_name: selector(state, 'facet_name'),
     facet_value: selector(state, 'facet_value'),
     assignTo: selector(state, 'assignTo'),
-    subaccount: selector(state, 'subaccount'),
     enabled: selector(state, 'enabled'),
     initialValues: props.newAlert ? defaultFormValues : formatEditValues(state, state.alerts.alert)
   };
@@ -263,4 +248,4 @@ const formOptions = {
   enableReinitialize: true
 };
 
-export default withRouter(connect(mapStateToProps, { listDomains, listPools })(reduxForm(formOptions)(AlertForm)));
+export default withRouter(connect(mapStateToProps, { listPools })(reduxForm(formOptions)(AlertForm)));
