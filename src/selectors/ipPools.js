@@ -64,3 +64,10 @@ export const selectIpFormInitialValues = createSelector(
 
   })
 );
+
+/**
+ * Returns whether overflow pool field is editable or not. If the current pool is a overflow pool for any other pool, overflow pool for current pool is not editable
+ * @return bool
+ */
+export const canEditOverflowPool = createSelector(
+  [getIpPools, selectCurrentPool], (pools, currentPool) => _.every(pools, (pool) => pool.auto_warmup_overflow_pool !== currentPool.id));

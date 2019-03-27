@@ -32,9 +32,10 @@ describe('PoolForm tests', () => {
           }]
         }
       ],
-      pool: { id: 'my-pool', name: 'My Pool' },
+      pool: { id: 'my-pool', name: 'My Pool', auto_warmup_overflow_pool: 'pool-2' },
       handleSubmit: jest.fn(),
-      pristine: true
+      pristine: true,
+      canEditOverflowPool: true
     };
 
     wrapper = shallow(<PoolForm {...props} />);
@@ -101,7 +102,7 @@ describe('PoolForm tests', () => {
 
     it('shows placeholder pool in overflow pool list ', () => {
       wrapper.setProps({ pools: [{ name: 'Default', id: 'default', ips: [{ external_ip: '1.1.1.1' }]}, { name: 'My Pool', id: 'my-pool', ips: []}]});
-      expect(wrapper.find('Field[name="auto_warmup_overflow_pool"]').prop('options')[0]).toEqual({ label: 'Select an Overflow Pool', value: '' });
+      expect(wrapper.find('Field[name="auto_warmup_overflow_pool"]').prop('options')[0]).toEqual({ label: 'None', value: '' });
     });
   });
 });

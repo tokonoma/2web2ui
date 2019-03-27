@@ -37,7 +37,7 @@ exports[`PoolForm tests should render form 1`] = `
           options={
             Array [
               Object {
-                "label": "Select an Overflow Pool",
+                "label": "None",
                 "value": "",
               },
               Object {
