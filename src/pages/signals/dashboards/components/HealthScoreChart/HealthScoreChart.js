@@ -102,6 +102,7 @@ export function HealthScoreChart(props) {
             <BarChart
               gap={getGap()}
               onMouseOver={handleDateHover}
+              onMouseOut={() => setHovered({})}
               selected={selectedDate}
               hovered={hoveredDate}
               timeSeries={accountData.history}
@@ -109,8 +110,8 @@ export function HealthScoreChart(props) {
                 <TooltipMetric label='Health Score' value={`${roundToPlaces(payload.health_score, 1)}`} />
               )}
               yAxisRefLines={[
-                { y: 80, stroke: 'green', strokeWidth: 2 },
-                { y: 55, stroke: 'red', strokeWidth: 2 }
+                { y: 80, stroke: 'green', strokeWidth: 1 },
+                { y: 55, stroke: 'red', strokeWidth: 1 }
               ]}
               yKey='health_score'
               xAxisProps={getXAxisProps()}
@@ -119,7 +120,9 @@ export function HealthScoreChart(props) {
           </Fragment>
         )}
         <div className={styles.Metrics}>
-          <MetricDisplay label='DoD Change' {...getHoverDoDProps()} />
+          <div className={styleMedia.DoDChange}>
+            <MetricDisplay label='DoD Change' {...getHoverDoDProps()} />
+          </div>
           <div className={styles.Divider} />
           <MetricDisplay label='High' {...getMax()} />
           <MetricDisplay label='Low' {...getMin()} />

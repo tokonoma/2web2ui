@@ -33,6 +33,7 @@ class BarChart extends Component {
       isAnimationActive={false}
       minPointSize={1}
       activeFill={activeFill}
+      cursor='pointer'
       shape={(props) => {
         let eventFill = props.fill;
 

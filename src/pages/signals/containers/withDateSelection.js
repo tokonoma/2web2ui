@@ -42,12 +42,16 @@ export class WithDateSelection extends Component {
     this.setState({ hoveredDate: _.get(node, 'payload.date') });
   }
 
+  resetDateHover = () => {
+    this.setState({ hoveredDate: '' });
+  }
+
   render() {
     const { component: WrappedComponent, selected, hovered, ...rest } = this.props;
     const { selectedDate, hoveredDate } = this.state;
 
     return (
-      <WrappedComponent {...rest} selectedDate={selectedDate} hoveredDate={hoveredDate} handleDateSelect={this.handleDateSelect} handleDateHover={this.handleDateHover} />
+      <WrappedComponent {...rest} selectedDate={selectedDate} hoveredDate={hoveredDate} handleDateSelect={this.handleDateSelect} handleDateHover={this.handleDateHover} resetDateHover={this.resetDateHover} />
     );
   }
 }

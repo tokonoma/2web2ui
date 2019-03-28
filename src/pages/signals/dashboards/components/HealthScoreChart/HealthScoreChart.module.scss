@@ -31,11 +31,16 @@
   text-align: center;
   display: flex;
   justify-content: left;
+}
 
-  .Divider {
-    border:1px solid color(gray, 6);
-    margin-top: rem(10);
-    height: 60%;
-    margin-right: spacing();
-  }
+.DoDChange {
+  width: rem(140);
+  text-align: left;
+}
+
+.Divider {
+  border:1px solid color(gray, 6);
+  margin-top: rem(10);
+  height: 60%;
+  margin-right: spacing();
 }
