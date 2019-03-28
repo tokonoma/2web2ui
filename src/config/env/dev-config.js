@@ -36,6 +36,9 @@ export default {
     host: 'smtp.sparkmail.com',
     alternativePort: 2525
   },
+  brightback: {
+    enabled: false
+  },
   support: {
     algolia: {
       appID: 'SFXAWCYDV8',

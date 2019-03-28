@@ -1,6 +1,5 @@
 import { selectBrightbackData } from '../brightback';
 import * as dateMock from 'src/helpers/date';
-
 jest.mock('src/helpers/date');
 
 describe('Selectors: brightback', () => {
