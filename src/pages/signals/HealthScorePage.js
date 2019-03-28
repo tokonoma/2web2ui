@@ -55,7 +55,7 @@ export class HealthScorePage extends Component {
   }
 
   renderContent = () => {
-    const { data = [], handleDateSelect, handleDateHover, loading, gap, empty, error, selectedDate, hoveredDate, resetHoverDate } = this.props;
+    const { data = [], handleDateSelect, handleDateHover, loading, gap, empty, error, selectedDate, hoveredDate, resetDateHover } = this.props;
     const { selectedComponent } = this.state;
 
     const selectedWeights = _.get(_.find(data, ['date', selectedDate]), 'weights', []);
@@ -91,7 +91,7 @@ export class HealthScorePage extends Component {
                   gap={gap}
                   onClick={handleDateSelect}
                   onMouseOver={handleDateHover}
-                  onMouseOut={resetHoverDate}
+                  onMouseOut={resetDateHover}
                   disableHover={false}
                   selected={selectedDate}
                   hovered={hoveredDate}
@@ -118,7 +118,7 @@ export class HealthScorePage extends Component {
                   onMouseOver={handleDateHover}
                   selected={selectedDate}
                   hovered={hoveredDate}
-                  onMouseOut={resetHoverDate}
+                  onMouseOut={resetDateHover}
                   timeSeries={data}
                   tooltipContent={({ payload = {}}) => (
                     <TooltipMetric label='Injections' value={formatFullNumber(payload.injections)} />
@@ -137,7 +137,7 @@ export class HealthScorePage extends Component {
                       height={190}
                       onClick={handleDateSelect}
                       onMouseOver={handleDateHover}
-                      onMouseOut={resetHoverDate}
+                      onMouseOut={resetDateHover}
                       hovered={hoveredDate}
                       selected={selectedDate}
                       timeSeries={dataForSelectedWeight}
