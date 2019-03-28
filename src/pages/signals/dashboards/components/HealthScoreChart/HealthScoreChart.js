@@ -120,7 +120,7 @@ export function HealthScoreChart(props) {
           </Fragment>
         )}
         <div className={styles.Metrics}>
-          <div className={styleMedia.DoDChange}>
+          <div className={styles.DoDChange}>
             <MetricDisplay label='DoD Change' {...getHoverDoDProps()} />
           </div>
           <div className={styles.Divider} />
