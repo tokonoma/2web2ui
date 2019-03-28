@@ -69,8 +69,9 @@ describe('IP Edit Page', () => {
   it('reloads data on upon clicking on reload button on error banner', () => {
     const err = new Error('API Failed');
     wrapper.setProps({ error: err });
+    props.listPools.mockClear();
     wrapper.find('ApiErrorBanner').prop('reload')();
-    expect(props.listPools).toHaveBeenCalled();
+    expect(props.listPools).toHaveBeenCalledTimes(1);
   });
 
   describe('onUpdateIp', () => {
