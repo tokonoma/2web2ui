@@ -6,6 +6,7 @@ exports[`Signals Spam Trap Details Container should set date if provided one 1`]
   handleDateHover={[Function]}
   handleDateSelect={[Function]}
   hoveredDate={null}
+  resetDateHover={[Function]}
   selectedDate="2015-01-01"
 />
 `;

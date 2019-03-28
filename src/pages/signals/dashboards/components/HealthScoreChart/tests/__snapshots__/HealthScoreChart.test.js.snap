@@ -61,8 +61,9 @@ exports[`Signals Health Score Chart renders happy path correctly 1`] = `
           "top": 12,
         }
       }
+      onMouseOut={[Function]}
       onMouseOver={[Function]}
-      selected="2019-03-25"
+      selected="2019-03-27"
       timeSeries={
         Array [
           Object {
@@ -81,7 +82,7 @@ exports[`Signals Health Score Chart renders happy path correctly 1`] = `
             "ranking": "danger",
           },
           Object {
-            "date": "2019-03-25",
+            "date": "2019-03-27",
             "health_score": null,
             "ranking": null,
           },
@@ -93,9 +94,9 @@ exports[`Signals Health Score Chart renders happy path correctly 1`] = `
         Object {
           "tickFormatter": [Function],
           "ticks": Array [
-            "2018-12-26",
-            "2019-02-09",
-            "2019-03-26",
+            "2018-12-27",
+            "2019-02-10",
+            "2019-03-27",
           ],
         }
       }
@@ -117,12 +118,12 @@ exports[`Signals Health Score Chart renders happy path correctly 1`] = `
         Array [
           Object {
             "stroke": "green",
-            "strokeWidth": 2,
+            "strokeWidth": 1,
             "y": 80,
           },
           Object {
             "stroke": "red",
-            "strokeWidth": 2,
+            "strokeWidth": 1,
             "y": 55,
           },
         ]
@@ -138,10 +139,23 @@ exports[`Signals Health Score Chart renders happy path correctly 1`] = `
     <div
       className="Metrics"
     >
-      <MetricDisplay
-        label="DoD Change"
-        value="n/a"
-      />
+      <div
+        className="Injections"
+      >
+        <MetricDisplay
+          label="Injections"
+          value="n/a"
+        />
+      </div>
+      <div
+        className="DoDChange"
+      >
+        <MetricDisplay
+          label="DoD Change"
+          value="n/a"
+        />
+      </div>
+                
       <div
         className="Divider"
       />
@@ -164,73 +178,4 @@ exports[`Signals Health Score Chart renders no account level data callout correc
 >
   Health Scores Not Available
 </Callout>
-`;
-
-exports[`Signals Health Score Chart renders yesterday as selected date if one is missing 1`] = `
-<Panel
-  sectioned={true}
->
-  <div
-    className="Content"
-  >
-    <h2
-      className="Header"
-    >
-      Health Score – 
-      90 days
-       
-      <Tooltip
-        bottom={true}
-        content="
-  This is a predictive score that monitors your email health to identify problems before
-  they negatively impact email delivery. This score is informed by message events,
-  including bounces, spam trap hits, and engagement across our entire network.
-"
-        dark={true}
-        forcePosition={false}
-        horizontalOffset="-1rem"
-        preferredDirection={
-          Object {
-            "bottom": true,
-            "left": false,
-            "right": true,
-            "top": false,
-          }
-        }
-        right={true}
-      >
-        <InfoOutline
-          className="TooltipIcon"
-          size={18}
-        />
-      </Tooltip>
-    </h2>
-    <div>
-      <Callout
-        height="auto"
-      >
-        Health Scores Not Available
-      </Callout>
-    </div>
-    <div
-      className="Metrics"
-    >
-      <MetricDisplay
-        label="DoD Change"
-        value="n/a"
-      />
-      <div
-        className="Divider"
-      />
-      <MetricDisplay
-        label="High"
-        value="n/a"
-      />
-      <MetricDisplay
-        label="Low"
-        value="n/a"
-      />
-    </div>
-  </div>
-</Panel>
 `;

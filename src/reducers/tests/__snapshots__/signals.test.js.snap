@@ -20,6 +20,12 @@ Object {
     "loading": false,
     "totalCount": 0,
   },
+  "injections": Object {
+    "data": Array [],
+    "error": null,
+    "loading": false,
+    "totalCount": 0,
+  },
   "spamHits": Object {
     "data": Array [],
     "error": null,
@@ -44,6 +50,12 @@ Object {
     "totalCount": 0,
   },
   "healthScore": Object {
+    "data": Array [],
+    "error": null,
+    "loading": false,
+    "totalCount": 0,
+  },
+  "injections": Object {
     "data": Array [],
     "error": null,
     "loading": false,
@@ -82,6 +94,12 @@ Object {
     "loading": false,
     "totalCount": 0,
   },
+  "injections": Object {
+    "data": Array [],
+    "error": null,
+    "loading": false,
+    "totalCount": 0,
+  },
   "spamHits": Object {
     "data": Array [],
     "error": null,
@@ -111,6 +129,12 @@ Object {
     "loading": false,
     "totalCount": 0,
   },
+  "injections": Object {
+    "data": Array [],
+    "error": null,
+    "loading": false,
+    "totalCount": 0,
+  },
   "spamHits": Object {
     "data": Array [],
     "error": null,
@@ -135,6 +159,12 @@ Object {
     "totalCount": 0,
   },
   "healthScore": Object {
+    "data": Array [],
+    "error": null,
+    "loading": false,
+    "totalCount": 0,
+  },
+  "injections": Object {
     "data": Array [],
     "error": null,
     "loading": false,
@@ -173,6 +203,12 @@ Object {
     "loading": false,
     "totalCount": 0,
   },
+  "injections": Object {
+    "data": Array [],
+    "error": null,
+    "loading": false,
+    "totalCount": 0,
+  },
   "spamHits": Object {
     "data": Array [],
     "error": null,
@@ -199,6 +235,12 @@ Object {
   "healthScore": Object {
     "data": Array [],
     "error": [Error: Oh no!],
+    "loading": false,
+    "totalCount": 0,
+  },
+  "injections": Object {
+    "data": Array [],
+    "error": null,
     "loading": false,
     "totalCount": 0,
   },
@@ -229,6 +271,12 @@ Object {
     "data": Array [],
     "error": null,
     "loading": true,
+    "totalCount": 0,
+  },
+  "injections": Object {
+    "data": Array [],
+    "error": null,
+    "loading": false,
     "totalCount": 0,
   },
   "spamHits": Object {
@@ -264,6 +312,12 @@ Object {
     "loading": false,
     "totalCount": 3,
   },
+  "injections": Object {
+    "data": Array [],
+    "error": null,
+    "loading": false,
+    "totalCount": 0,
+  },
   "spamHits": Object {
     "data": Array [],
     "error": null,
@@ -293,6 +347,133 @@ Object {
     "loading": false,
     "totalCount": 0,
   },
+  "injections": Object {
+    "data": Array [],
+    "error": null,
+    "loading": false,
+    "totalCount": 0,
+  },
+  "spamHits": Object {
+    "data": Array [],
+    "error": null,
+    "loading": false,
+    "totalCount": 0,
+  },
+}
+`;
+
+exports[`Signals Reducer injections fail 1`] = `
+Object {
+  "engagementRateByCohort": Object {
+    "data": Array [],
+    "error": null,
+    "loading": false,
+    "totalCount": 0,
+  },
+  "engagementRecency": Object {
+    "data": Array [],
+    "error": null,
+    "loading": false,
+    "totalCount": 0,
+  },
+  "healthScore": Object {
+    "data": Array [],
+    "error": null,
+    "loading": false,
+    "totalCount": 0,
+  },
+  "injections": Object {
+    "data": Array [],
+    "error": [Error: Oh no!],
+    "loading": false,
+    "totalCount": 0,
+  },
+  "spamHits": Object {
+    "data": Array [],
+    "error": null,
+    "loading": false,
+    "totalCount": 0,
+  },
+}
+`;
+
+exports[`Signals Reducer injections pending 1`] = `
+Object {
+  "engagementRateByCohort": Object {
+    "data": Array [],
+    "error": null,
+    "loading": false,
+    "totalCount": 0,
+  },
+  "engagementRecency": Object {
+    "data": Array [],
+    "error": null,
+    "loading": false,
+    "totalCount": 0,
+  },
+  "healthScore": Object {
+    "data": Array [],
+    "error": null,
+    "loading": false,
+    "totalCount": 0,
+  },
+  "injections": Object {
+    "data": Array [],
+    "error": null,
+    "loading": true,
+    "totalCount": 0,
+  },
+  "spamHits": Object {
+    "data": Array [],
+    "error": null,
+    "loading": false,
+    "totalCount": 0,
+  },
+}
+`;
+
+exports[`Signals Reducer injections success 1`] = `
+Object {
+  "engagementRateByCohort": Object {
+    "data": Array [],
+    "error": null,
+    "loading": false,
+    "totalCount": 0,
+  },
+  "engagementRecency": Object {
+    "data": Array [],
+    "error": null,
+    "loading": false,
+    "totalCount": 0,
+  },
+  "healthScore": Object {
+    "data": Array [],
+    "error": null,
+    "loading": false,
+    "totalCount": 0,
+  },
+  "injections": Object {
+    "data": Array [
+      Object {
+        "date": "2019-03-24",
+        "injections": 75000000000,
+        "spam_hits": 1,
+      },
+      Object {
+        "date": "2019-03-25",
+        "injections": 75000000000,
+        "spam_hits": 1,
+      },
+      Object {
+        "date": "2019-03-26",
+        "injections": 75000000000,
+        "spam_hits": 1,
+      },
+    ],
+    "error": null,
+    "loading": false,
+    "totalCount": 3,
+  },
   "spamHits": Object {
     "data": Array [],
     "error": null,
@@ -317,6 +498,12 @@ Object {
     "totalCount": 0,
   },
   "healthScore": Object {
+    "data": Array [],
+    "error": null,
+    "loading": false,
+    "totalCount": 0,
+  },
+  "injections": Object {
     "data": Array [],
     "error": null,
     "loading": false,
@@ -351,6 +538,12 @@ Object {
     "loading": false,
     "totalCount": 0,
   },
+  "injections": Object {
+    "data": Array [],
+    "error": null,
+    "loading": false,
+    "totalCount": 0,
+  },
   "spamHits": Object {
     "data": Array [],
     "error": null,
@@ -375,6 +568,12 @@ Object {
     "totalCount": 0,
   },
   "healthScore": Object {
+    "data": Array [],
+    "error": null,
+    "loading": false,
+    "totalCount": 0,
+  },
+  "injections": Object {
     "data": Array [],
     "error": null,
     "loading": false,
