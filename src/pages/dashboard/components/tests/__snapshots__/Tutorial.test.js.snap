@@ -1,93 +1,99 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Component: Tutorial should render correctly by default 1`] = `
-<Panel
-  actions={
-    Array [
-      Object {
-        "color": "orange",
-        "content": <span>
-          Need help? Check out our Getting Started guide 
-          <OpenInNew
-            size={13}
-          />
-        </span>,
-        "external": true,
-        "to": "https://www.sparkpost.com/docs/getting-started/getting-started-sparkpost",
-      },
-    ]
-  }
-  title="Getting Started Checklist"
->
-  <TutorialItem
-    completed={true}
-    label="Verify your email address"
-  >
-    <p>
-      So we know you're legitimate, check your email to verify your email address. This also unlocks higher daily sending limits.
-    </p>
-  </TutorialItem>
-  <TutorialItem
+<Fragment>
+  <SuppressionBanner
+    accountAgeInWeeks={4}
+    hasSuppressions={false}
+  />
+  <Panel
     actions={
       Array [
         Object {
           "color": "orange",
-          "component": [Function],
-          "content": "Add Sending Domain",
-          "to": "/account/sending-domains/create",
+          "content": <span>
+            Need help? Check out our Getting Started guide 
+            <OpenInNew
+              size={13}
+            />
+          </span>,
+          "external": true,
+          "to": "https://www.sparkpost.com/docs/getting-started/getting-started-sparkpost",
         },
       ]
     }
-    completed={false}
-    label="Add a sending domain"
+    title="Getting Started Checklist"
   >
-    <p>
-      Adding a sending domain will allow you to send email from your own domain.
-    </p>
-  </TutorialItem>
-  <TutorialItem
-    actions={
-      Array [
-        Object {
-          "color": "orange",
-          "component": [Function],
-          "content": "View Sending Domains",
-          "to": "/account/sending-domains",
-        },
-      ]
-    }
-    completed={true}
-    label="Verify your sending domain"
-  >
-    <p>
-      You'll need to verify your domain before you can use it.
-    </p>
-  </TutorialItem>
-  <TutorialItem
-    actions={
-      Array [
-        Object {
-          "color": "orange",
-          "component": [Function],
-          "content": "Create an API Key",
-          "to": "/account/api-keys/create",
-        },
-      ]
-    }
-    completed={false}
-    label="Get an API key for sending email"
-    labelLink="account/api-keys"
-  >
-    <p>
-      You'll need to create an API key with the correct permissions to send email.
-    </p>
-  </TutorialItem>
-  <TutorialItem
-    label="Send an email"
-  >
-    <p>
-      Get sending!
-    </p>
-  </TutorialItem>
-</Panel>
+    <TutorialItem
+      completed={true}
+      label="Verify your email address"
+    >
+      <p>
+        So we know you're legitimate, check your email to verify your email address.
+      </p>
+    </TutorialItem>
+    <TutorialItem
+      actions={
+        Array [
+          Object {
+            "color": "orange",
+            "component": [Function],
+            "content": "Add Sending Domain",
+            "to": "/account/sending-domains/create",
+          },
+        ]
+      }
+      completed={false}
+      label="Add a sending domain"
+    >
+      <p>
+        Adding a sending domain will allow you to send email from your own domain.
+      </p>
+    </TutorialItem>
+    <TutorialItem
+      actions={
+        Array [
+          Object {
+            "color": "orange",
+            "component": [Function],
+            "content": "View Sending Domains",
+            "to": "/account/sending-domains",
+          },
+        ]
+      }
+      completed={true}
+      label="Verify your sending domain"
+    >
+      <p>
+        You'll need to verify your domain before you can use it.
+      </p>
+    </TutorialItem>
+    <TutorialItem
+      actions={
+        Array [
+          Object {
+            "color": "orange",
+            "component": [Function],
+            "content": "Create an API Key",
+            "to": "/account/api-keys/create",
+          },
+        ]
+      }
+      completed={false}
+      label="Get an API key for sending email"
+      labelLink="account/api-keys"
+    >
+      <p>
+        You'll need to create an API key with the correct permissions to send email.
+      </p>
+    </TutorialItem>
+    <TutorialItem
+      label="Send an email"
+    >
+      <p>
+        Get sending!
+      </p>
+    </TutorialItem>
+  </Panel>
+</Fragment>
 `;

@@ -26,9 +26,9 @@ describe('Selector: ipPools', () => {
       ipPools: {
         list: [
           { id: 'big', name: 'Big Pool', signing_domain: 'sign.test', ips },
-          { id: 'none', name: 'None', ips: []},
+          { id: 'none', name: 'None', ips: [], auto_warmup_overflow_pool: '' },
           { id: 'default', name: 'Default', ips: ips.slice(0,2) },
-          { id: 'small', name: 'Small Pool', ips: ips.slice(0,1) }
+          { id: 'small', name: 'Small Pool', ips: ips.slice(0,1), auto_warmup_overflow_pool: '' }
         ]
       },
       currentUser: { access_level: 'admin' }
@@ -47,11 +47,9 @@ describe('Selector: ipPools', () => {
 
   describe('getNonDefaultIpPools', () => {
     it('should return a list of non default IP pools', () => {
-      expect(ipPoolSelectors.getNonDefaultIpPools(state)).toEqual([
-        { id: 'big', name: 'Big Pool', signing_domain: 'sign.test', ips: ips },
-        { id: 'none', name: 'None', ips: []},
-        { id: 'small', name: 'Small Pool', ips: ips.slice(0,1) }
-      ]);
+      const ipPools = state.ipPools.list;
+      ipPools.splice(2, 1);
+      expect(ipPoolSelectors.getNonDefaultIpPools(state)).toEqual(ipPools);
     });
   });
 
@@ -65,16 +63,6 @@ describe('Selector: ipPools', () => {
 
 
   describe('selectIpsForCurrentPool', () => {
-    let ips;
-
-    beforeEach(() => {
-      ips = [
-        { external_ip: '1.1.1.1' },
-        { external_ip: '2.2.2.2' },
-        { external_ip: '3.3.3.3' }
-      ];
-
-    });
     it('should select IPs for the current pool', () => {
       expect(ipPoolSelectors.selectIpsForCurrentPool(state, props)).toEqual(ips);
     });
@@ -121,7 +109,18 @@ describe('Selector: ipPools', () => {
     });
 
     it('returns inital values for ip form', () => {
-      expect(ipPoolSelectors.selectIpFormInitialValues(state, props)).toEqual({ external_ip: '1.1.1.1', ip_pool: 'small' });
+      expect(ipPoolSelectors.selectIpFormInitialValues(state, props)).toEqual({ external_ip: '1.1.1.1', ip_pool: 'small', 'auto_warmup_stage': 1 });
+    });
+  });
+
+  describe('canEditOverflowPool', () => {
+    it('returns false if current pool is an overflow pool for another pool', () => {
+      state.ipPools.list[0].auto_warmup_overflow_pool = 'big';
+      expect(ipPoolSelectors.canEditOverflowPool(state, props)).toBe(false);
+    });
+
+    it('returns true if current pool is not an overflow pool for any other pool', () => {
+      expect(ipPoolSelectors.canEditOverflowPool(state, props)).toBe(true);
     });
   });
 });

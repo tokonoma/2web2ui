@@ -5,6 +5,7 @@ import { Templates } from 'src/components/images';
 import { Page } from '@sparkpost/matchbox';
 import { Name, Status, Actions, LastUpdated } from './components/ListComponents';
 import { resolveTemplateStatus } from 'src/helpers/templates';
+import { ROLES } from 'src/constants';
 
 const primaryAction = {
   content: 'Create Template',
@@ -29,8 +30,9 @@ export default class ListPage extends Component {
   }
 
   getRowData = ({ shared_with_subaccounts, ...rowData }) => {
-    const { hasSubaccounts } = this.props;
+    const { hasSubaccounts, userAccessLevel } = this.props;
     const { subaccount_id } = rowData;
+    const canViewSubaccounts = userAccessLevel !== ROLES.SUBACCOUNT_REPORTING;
 
     const subaccountCell = subaccount_id || shared_with_subaccounts
       ? <SubaccountTag all={shared_with_subaccounts} id={subaccount_id} />
@@ -39,19 +41,19 @@ export default class ListPage extends Component {
     return [
       <Name {...rowData} />,
       <Status {...rowData} />,
-      ...(hasSubaccounts ? [subaccountCell] : []),
+      ...(hasSubaccounts && canViewSubaccounts ? [subaccountCell] : []),
       <LastUpdated {...rowData}/>,
       <Actions {...rowData} />
     ];
   }
 
   getColumns() {
-    const { hasSubaccounts } = this.props;
-
+    const { hasSubaccounts, userAccessLevel } = this.props;
+    const canViewSubaccounts = userAccessLevel !== ROLES.SUBACCOUNT_REPORTING;
     return [
       { label: 'Name', width: '28%', sortKey: 'name' },
       { label: 'Status', width: '18%', sortKey: (template) => [resolveTemplateStatus(template).publishedWithChanges, template.published]},
-      ...(hasSubaccounts ? [{
+      ...(hasSubaccounts && canViewSubaccounts ? [{
         label: 'Subaccount', width: '18%', sortKey: (template) => [template.subaccount_id, template.shared_with_subaccounts]
       }] : []),
       { label: 'Last Updated', sortKey: 'last_update_time' },

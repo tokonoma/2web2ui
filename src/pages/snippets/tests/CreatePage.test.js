@@ -62,7 +62,7 @@ describe('CreatePage', () => {
     cases('succeeds', ({ name, ...values }) => {
       const createSnippet = jest.fn(() => Promise.resolve());
       const historyPush = jest.fn();
-      const wrapper = subject({ createSnippet, history: { push: historyPush }, isAmpLive: !!values.content.amp_html });
+      const wrapper = subject({ createSnippet, history: { push: historyPush }});
 
       wrapper.prop('primaryAction').onClick({
         ...values,

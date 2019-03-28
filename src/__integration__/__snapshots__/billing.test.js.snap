@@ -6,7 +6,6 @@ Array [
     Object {
       "data": Object {
         "name": "newPool",
-        "signing_domain": undefined,
       },
       "headers": Object {
         "Authorization": "very-real-access-token",

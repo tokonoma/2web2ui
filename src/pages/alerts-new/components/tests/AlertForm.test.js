@@ -20,12 +20,10 @@ describe('Alert Form Component', () => {
           target: 50
         }
       },
-      domains: [{ domain: 'someDomain.com' }, { domain: 'someOtherDomain.com' }],
       ipPools: [{ id: 'someIpPool' }, { id: 'someOtherIpPool' }],
       alert_metric: 'signals_health_threshold',
       facet_name: 'sending_domain',
       enabled: true,
-      listDomains: jest.fn(),
       listPools: jest.fn(),
       change: (a, b) => b
     };
@@ -60,14 +58,19 @@ describe('Alert Form Component', () => {
       expect(wrapper.find({ name: 'facet_value' }).props().connectLeft.props.name).toEqual('facet_name');
     });
 
-    it('should show sending domain facets typeahead component with correct props when facet_name is set to sending_domain', () => {
+    it('should show sending domain facets textfield component with correct props when facet_name is set to sending_domain', () => {
       wrapper.setProps({ alert_metric: 'signals_health_threshold', assignTo: 'all', facet_name: 'sending_domain', facet_value: 'blah' });
-      expect(wrapper.find({ name: 'facet_value' }).props()).toMatchSnapshot();
+      const field = wrapper.find({ name: 'facet_value' });
+      expect(field.prop('component').name).toEqual('TextFieldWrapper');
+      expect(field.prop('items')).toEqual(null);
+      expect(field.prop('placeholder')).toEqual('mail.example.com');
     });
 
-    it('should show warning if no domains', () => {
-      wrapper.setProps({ alert_metric: 'signals_health_threshold', assignTo: 'all', facet_name: 'sending_domain', domains: []});
-      expect(wrapper.find({ name: 'facet_value' }).props()).toMatchSnapshot();
+    it('should validate domain', () => {
+      wrapper.setProps({ alert_metric: 'signals_health_threshold', assignTo: 'all', facet_name: 'sending_domain', facet_value: 'blah' });
+      const validate = wrapper.find({ name: 'facet_value' }).prop('validate');
+      expect(validate('foo', { facet_name: 'sending_domain' })).toEqual('Invalid Domain');
+      expect(validate('foo.co', { facet_name: 'sending_domain' })).toBe(undefined);
     });
 
     it('should show warning if no ip pools', () => {
@@ -77,6 +80,7 @@ describe('Alert Form Component', () => {
 
     it('should show ip pool facets typeahead component with correct props when facet_name is set to ip_pool', () => {
       wrapper.setProps({ alert_metric: 'signals_health_threshold', assignTo: 'all', facet_name: 'ip_pool', facet_value: 'blah' });
+      expect(wrapper.find({ name: 'facet_value' }).prop('component').name).toEqual('MultiFacetWrapper');
       expect(wrapper.find({ name: 'facet_value' }).props()).toMatchSnapshot();
     });
 

@@ -27,7 +27,7 @@ const fields = [
     name: 'content.amp_html',
     mode: 'html',
     syntaxValidation: false,
-    show: ({ isAmpLive }) => isAmpLive
+    show: () => true
   },
   {
     alwaysEditable: true,
@@ -58,16 +58,8 @@ class ContentEditor extends React.Component {
   }
 
   // note, must handle null template parts
-  requiredHtmlOrText = (value, { content: { html, text } = {}}) => {
-    // return validation error if both parts are falsy or empty
-    if (!this.normalize(html) && !this.normalize(text)) {
-      return 'HTML or Text is required';
-    }
-  }
-
-  // note, must handle null template parts
   requiredHtmlTextOrAmp = (value, { content: { html, text, amp_html } = {}}) => {
-    // return validation error if both parts are falsy or empty
+    // return validation error if all parts are falsy or empty
     if (!this.normalize(html) && !this.normalize(text) && !this.normalize(amp_html)) {
       return 'HTML, AMP HTML, or Text is required';
     }
@@ -80,13 +72,10 @@ class ContentEditor extends React.Component {
   }
 
   render() {
-    const { readOnly, isAmpLive, contentOnly } = this.props;
+    const { readOnly } = this.props;
     const { selectedTab } = this.state;
     const visibleFields = fields.filter((field) => field.show(this.props));
     const tabs = visibleFields.map(({ content }, index) => ({ content, onClick: () => this.handleTab(index) }));
-
-    // Templates require HTML or Text. Snippets require HTML, AMP HTML, or Text.
-    const requiredContentValidator = isAmpLive && contentOnly ? this.requiredHtmlTextOrAmp : this.requiredHtmlOrText;
 
     return (
       <div className={styles.EditorSection}>
@@ -102,7 +91,7 @@ class ContentEditor extends React.Component {
             normalize={this.normalize}
             readOnly={readOnly && !visibleFields[selectedTab].alwaysEditable}
             syntaxValidation={visibleFields[selectedTab].syntaxValidation}
-            validate={[requiredContentValidator, this.validTestDataJson]}
+            validate={[this.requiredHtmlTextOrAmp, this.validTestDataJson]}
           />
         </Panel>
       </div>

@@ -7,7 +7,6 @@ import { selectPublishedTemplate, selectPublishedTemplatePreview } from 'src/sel
 import { selectSubaccountIdFromQuery } from 'src/selectors/subaccounts';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
 import { hasGrants } from 'src/helpers/conditions';
-import { hasUiOption } from 'src/helpers/conditions/account';
 import PreviewPage from '../PreviewPage';
 
 export const mapStateToProps = (state, props) => {
@@ -19,8 +18,7 @@ export const mapStateToProps = (state, props) => {
     returnPath: `/templates/edit/${props.match.params.id}/published${setSubaccountQuery(subaccountId)}`,
     preview: selectPublishedTemplatePreview(state, props.match.params.id),
     template: selectPublishedTemplate(state, props.match.params.id),
-    subaccountId,
-    isAmpLive: hasUiOption('amp_html')(state)
+    subaccountId
   };
 };
 

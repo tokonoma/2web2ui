@@ -15,8 +15,7 @@ const loadPreviewPage = async (overrides = {}) => {
       from: { email: 'test@example.com' },
       subject: 'Test Template',
       html: '<h1>Test Template</h1>',
-      text: 'Test Template',
-      amp_html: '<h2>Test Template</h2>'
+      text: 'Test Template'
     },
     returnPath: '/path/to/return',
     template: {
@@ -38,11 +37,6 @@ const loadPreviewPage = async (overrides = {}) => {
 
 it('renders preview page with template', async () => {
   const wrapper = await loadPreviewPage();
-  expect(wrapper).toMatchSnapshot();
-});
-
-it('renders preview page with template and AMP enabled', async () => {
-  const wrapper = await loadPreviewPage({ isAmpLive: true });
   expect(wrapper).toMatchSnapshot();
 });
 

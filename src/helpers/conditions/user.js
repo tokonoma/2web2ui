@@ -1,9 +1,12 @@
 import { any } from 'src/helpers/conditions';
 import _ from 'lodash';
+import { SUBACCOUNT_ROLES } from 'src/constants';
 
 export const isHeroku = ({ currentUser }) => currentUser.access_level === 'heroku';
 
 export const isAzure = ({ currentUser }) => currentUser.access_level === 'azure';
+
+export const isSubaccountUser = ({ currentUser }) => SUBACCOUNT_ROLES.includes(currentUser.access_level);
 
 export const hasRole = (role) => ({ currentUser }) => currentUser.access_level === role;
 

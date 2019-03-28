@@ -7,7 +7,7 @@ import { Page, Tag } from '@sparkpost/matchbox';
 import TimeAgo from 'react-timeago';
 import { Users } from 'src/components/images';
 import PageLink from 'src/components/pageLink/PageLink';
-import { SUBACCOUNT_REPORTING_ROLE } from 'src/constants';
+import { ROLES } from 'src/constants';
 import { hasUiOption } from 'src/helpers/conditions/account';
 
 import * as usersActions from 'src/actions/users';
@@ -62,7 +62,7 @@ export class ListPage extends Component {
   }
 
   formatRole(role) {
-    if (role === SUBACCOUNT_REPORTING_ROLE) {
+    if (role === ROLES.SUBACCOUNT_REPORTING) {
       return 'reporting';
     }
     return role;

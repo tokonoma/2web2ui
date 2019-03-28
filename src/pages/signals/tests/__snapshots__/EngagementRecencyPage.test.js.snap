@@ -69,18 +69,18 @@ exports[`Signals Engagement Recency Page renders correctly 1`] = `
       md={7}
       sm={12}
     >
-      <Connect(AccessControl)
+      <AccessControl
         condition={[Function]}
       >
         <withRouter(Tabs)
           facet="sending-domain"
           facetId="test.com"
         />
-      </Connect(AccessControl)>
+      </AccessControl>
       <Panel
         sectioned={true}
       >
-        <Connect(AccessControl)
+        <AccessControl
           condition={[Function]}
         >
           <ChartHeader
@@ -90,7 +90,7 @@ exports[`Signals Engagement Recency Page renders correctly 1`] = `
   opened messages or clicked links during several defined time periods.
 "
           />
-        </Connect(AccessControl)>
+        </AccessControl>
         <div
           className="LiftTooltip"
         >
@@ -284,7 +284,7 @@ exports[`Signals Engagement Recency Page renders empty correctly 1`] = `
 <Panel
   sectioned={true}
 >
-  <Connect(AccessControl)
+  <AccessControl
     condition={[Function]}
   >
     <ChartHeader
@@ -294,7 +294,7 @@ exports[`Signals Engagement Recency Page renders empty correctly 1`] = `
   opened messages or clicked links during several defined time periods.
 "
     />
-  </Connect(AccessControl)>
+  </AccessControl>
   <Callout
     title="No Data Available"
   >
@@ -322,18 +322,18 @@ exports[`Signals Engagement Recency Page renders error correctly 1`] = `
       md={7}
       sm={12}
     >
-      <Connect(AccessControl)
+      <AccessControl
         condition={[Function]}
       >
         <withRouter(Tabs)
           facet="sending-domain"
           facetId="test.com"
         />
-      </Connect(AccessControl)>
+      </AccessControl>
       <Panel
         sectioned={true}
       >
-        <Connect(AccessControl)
+        <AccessControl
           condition={[Function]}
         >
           <ChartHeader
@@ -343,7 +343,7 @@ exports[`Signals Engagement Recency Page renders error correctly 1`] = `
   opened messages or clicked links during several defined time periods.
 "
           />
-        </Connect(AccessControl)>
+        </AccessControl>
         <Callout
           title="Unable to Load Data"
         >
@@ -386,7 +386,7 @@ exports[`Signals Engagement Recency Page renders loading correctly 1`] = `
 <Panel
   sectioned={true}
 >
-  <Connect(AccessControl)
+  <AccessControl
     condition={[Function]}
   >
     <ChartHeader
@@ -396,7 +396,7 @@ exports[`Signals Engagement Recency Page renders loading correctly 1`] = `
   opened messages or clicked links during several defined time periods.
 "
     />
-  </Connect(AccessControl)>
+  </AccessControl>
   <div
     style={
       Object {

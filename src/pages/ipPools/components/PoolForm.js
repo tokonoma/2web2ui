@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import _ from 'lodash';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { withRouter } from 'react-router-dom';
@@ -7,12 +8,33 @@ import { SendingDomainTypeaheadWrapper, TextFieldWrapper } from 'src/components'
 import AccessControl from 'src/components/auth/AccessControl';
 import { required } from 'src/helpers/validation';
 import { configFlag } from 'src/helpers/conditions/config';
+import { isAccountUiOptionSet } from 'src/helpers/conditions/account';
 import { selectCurrentPool } from 'src/selectors/ipPools';
 import isDefaultPool from '../helpers/defaultPool';
+import { SelectWrapper } from '../../../components/reduxFormWrappers';
+import { getIpPools, canEditOverflowPool } from '../../../selectors/ipPools';
 
 export class PoolForm extends Component {
+  getOverflowPoolOptions = () => {
+    const { pools, pool } = this.props;
+
+    const overflowPools = _.compact(pools.map((currentPool) => {
+      if (currentPool.auto_warmup_overflow_pool || currentPool.id === pool.id) {
+        return null;
+      }
+
+      return {
+        label: `${currentPool.name} (${currentPool.id})`,
+        value: currentPool.id
+      };
+    }));
+
+    overflowPools.unshift({ label: 'None', value: '' });
+    return overflowPools;
+  }
+
   render() {
-    const { isNew, pool, handleSubmit, submitting, pristine } = this.props;
+    const { isNew, pool, handleSubmit, canEditOverflowPool, submitting, pristine } = this.props;
     const submitText = isNew ? 'Create IP Pool' : 'Update IP Pool';
     const editingDefault = !isNew && isDefaultPool(pool.id);
     const helpText = editingDefault ? 'You cannot change the default IP pool\'s name' : '';
@@ -41,6 +63,19 @@ export class PoolForm extends Component {
                 />
               </AccessControl>
             }
+
+            {!editingDefault &&
+              <AccessControl condition={isAccountUiOptionSet('ip_auto_warmup', false)}>
+                <Field
+                  name='auto_warmup_overflow_pool'
+                  label='Overflow Pool'
+                  component={SelectWrapper}
+                  options={this.getOverflowPoolOptions()}
+                  helpText='With automatic IP Warmup enabled, selected pool will be used when volume threshold for this pool has been reached.'
+                  disabled={submitting || !canEditOverflowPool}
+                />
+              </AccessControl>
+            }
           </Panel.Section>
           <Panel.Section>
             <Button submit primary disabled={submitting || pristine}>
@@ -54,13 +89,16 @@ export class PoolForm extends Component {
 }
 
 PoolForm.defaultProps = {
-  pool: {}
+  pool: {},
+  pools: []
 };
 
 const mapStateToProps = (state, props) => {
   const pool = selectCurrentPool(state, props);
   return {
     pool,
+    pools: getIpPools(state, props),
+    canEditOverflowPool: canEditOverflowPool(state, props),
     initialValues: {
       ...pool
     }

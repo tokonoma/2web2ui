@@ -6,6 +6,7 @@ import ListPage from './ListPage';
 
 const mapStateToProps = (state, props) => ({
   canCreate: hasGrants('templates/modify')(state), // snippet grants are inherited from templates
+  userAccessLevel: state.currentUser.access_level,
   error: state.snippets.error,
   hasSubaccounts: hasSubaccounts(state),
   loading: state.snippets.loading,

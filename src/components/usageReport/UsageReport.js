@@ -41,15 +41,12 @@ export class UsageReport extends Component {
   }
 
   render() {
-    const { subscription, usage, accountAgeInWeeks } = this.props;
+    const { subscription, usage } = this.props;
 
     if (!subscription || !usage) {
       return <PanelLoading />;
     }
 
-    if (usage.month.used === 0 && accountAgeInWeeks < 4) {
-      return null;
-    }
 
     const remaining = subscription.plan_volume - usage.month.used;
     const overage = remaining < 0 ? Math.abs(remaining) : 0;

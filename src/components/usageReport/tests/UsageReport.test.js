@@ -27,8 +27,7 @@ describe('UsageReport Component', () => {
           start: '2017-08-30T00:00:00.000Z'
         }
       },
-      getAccount,
-      accountAgeInWeeks: 4
+      getAccount
     };
   });
 
@@ -55,12 +54,5 @@ describe('UsageReport Component', () => {
     const wrapper = shallow(<UsageReport {...props} />);
 
     expect(wrapper).toMatchSnapshot();
-  });
-
-  it('should not render with no usage on a new account', () => {
-    props.usage.month.used = 0;
-    props.accountAgeInWeeks = 1;
-    const wrapper = shallow(<UsageReport {...props} />);
-    expect(wrapper.html()).toBe(null);
   });
 });
