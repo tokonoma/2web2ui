@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { Page } from '@sparkpost/matchbox';
-import { Loading } from 'src/components';
+import { ApiErrorBanner, Loading } from 'src/components';
 import PoolForm from './components/PoolForm';
 
 import { showAlert } from 'src/actions/globalAlert';
-import { createPool } from 'src/actions/ipPools';
+import { createPool, listPools } from 'src/actions/ipPools';
 
 
 const breadcrumbAction = {
@@ -17,6 +17,14 @@ const breadcrumbAction = {
 };
 
 export class CreatePage extends Component {
+  loadDependentData = () => {
+    this.props.listPools();
+  };
+
+  componentDidMount() {
+    this.loadDependentData();
+  }
+
   createPool = (values) => {
     const { createPool, showAlert, history } = this.props;
 
@@ -29,9 +37,24 @@ export class CreatePage extends Component {
     });
   };
 
+  renderError() {
+    const { listError } = this.props;
+    return <ApiErrorBanner
+      errorDetails={listError.message}
+      message="Sorry, we seem to have had some trouble loading your IP pool."
+      reload={this.loadDependentData}
+    />;
+  }
+
   render() {
-    if (this.props.loading) {
+    const { loading, listError } = this.props;
+
+    if (loading) {
       return <Loading />;
+    }
+
+    if (listError) {
+      return this.renderError();
     }
 
     return (
@@ -42,9 +65,13 @@ export class CreatePage extends Component {
   }
 }
 
-const mapStateToProps = (state, props) => ({});
+const mapStateToProps = (state, props) => ({
+  listError: state.ipPools.listError,
+  loading: state.ipPools.listLoading
+});
 
 export default connect(mapStateToProps, {
   createPool,
+  listPools,
   showAlert
 })(CreatePage);
