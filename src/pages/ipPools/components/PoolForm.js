@@ -72,7 +72,7 @@ export class PoolForm extends Component {
                   component={SelectWrapper}
                   options={this.getOverflowPoolOptions()}
                   helpText='With automatic IP Warmup enabled, selected pool will be used when volume threshold for this pool has been reached.'
-                  disabled={submitting || !canEditOverflowPool}
+                  disabled={submitting || (!isNew && !canEditOverflowPool)}
                 />
               </AccessControl>
             }
