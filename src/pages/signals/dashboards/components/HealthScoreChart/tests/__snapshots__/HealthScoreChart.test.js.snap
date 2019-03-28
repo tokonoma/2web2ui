@@ -61,6 +61,7 @@ exports[`Signals Health Score Chart renders happy path correctly 1`] = `
           "top": 12,
         }
       }
+      onMouseOut={[Function]}
       onMouseOver={[Function]}
       selected="2019-03-25"
       timeSeries={
@@ -93,9 +94,9 @@ exports[`Signals Health Score Chart renders happy path correctly 1`] = `
         Object {
           "tickFormatter": [Function],
           "ticks": Array [
-            "2018-12-26",
-            "2019-02-09",
-            "2019-03-26",
+            "2018-12-27",
+            "2019-02-10",
+            "2019-03-27",
           ],
         }
       }
@@ -117,12 +118,12 @@ exports[`Signals Health Score Chart renders happy path correctly 1`] = `
         Array [
           Object {
             "stroke": "green",
-            "strokeWidth": 2,
+            "strokeWidth": 1,
             "y": 80,
           },
           Object {
             "stroke": "red",
-            "strokeWidth": 2,
+            "strokeWidth": 1,
             "y": 55,
           },
         ]
@@ -138,10 +139,14 @@ exports[`Signals Health Score Chart renders happy path correctly 1`] = `
     <div
       className="Metrics"
     >
-      <MetricDisplay
-        label="DoD Change"
-        value="n/a"
-      />
+      <div
+        className="DoDChange"
+      >
+        <MetricDisplay
+          label="DoD Change"
+          value="n/a"
+        />
+      </div>
       <div
         className="Divider"
       />
@@ -215,10 +220,14 @@ exports[`Signals Health Score Chart renders yesterday as selected date if one is
     <div
       className="Metrics"
     >
-      <MetricDisplay
-        label="DoD Change"
-        value="n/a"
-      />
+      <div
+        className="DoDChange"
+      >
+        <MetricDisplay
+          label="DoD Change"
+          value="n/a"
+        />
+      </div>
       <div
         className="Divider"
       />
