@@ -83,11 +83,15 @@ describe('BarChart Component', () => {
 
   it('should display x reference lines', () => {
     wrapper.setProps({ xAxisRefLines: [{ x: '2011-01-01', stroke: 'green', strokeWidth: 2 }, { x: '2011-01-03', stroke: 'red', strokeWidth: 2 }]});
-    expect(wrapper).toMatchSnapshot();
+    wrapper.find('ReferenceLine').forEach((line) => {
+      expect(line).toMatchSnapshot();
+    });
   });
 
   it('should display y reference lines', () => {
     wrapper.setProps({ yAxisRefLines: [{ y: 80, stroke: 'green', strokeWidth: 2 }, { y: 55, stroke: 'red', strokeWidth: 2 }]});
-    expect(wrapper).toMatchSnapshot();
+    wrapper.find('ReferenceLine').forEach((line) => {
+      expect(line).toMatchSnapshot();
+    });
   });
 });

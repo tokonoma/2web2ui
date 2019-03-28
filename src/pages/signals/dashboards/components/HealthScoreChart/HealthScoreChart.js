@@ -135,10 +135,10 @@ export function HealthScoreChart(props) {
           </Fragment>
         )}
         <div className={styles.Metrics}>
-          <div className={styleMedia.Injections}>
+          <div className={styles.Injections}>
             <MetricDisplay label='Injections' {...getHoverInjectionProps()} />
           </div>
-          <div className={styleMedia.DoDChange}>
+          <div className={styles.DoDChange}>
             <MetricDisplay label='DoD Change' {...getHoverDoDProps()} />
           </div>          <div className={styles.Divider} />
           <MetricDisplay label='High' {...getMax()} />
