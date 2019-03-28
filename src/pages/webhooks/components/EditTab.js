@@ -56,6 +56,7 @@ export class EditTab extends Component {
         <WebhookForm
           allChecked={webhook.events.length === eventListing.length}
           onSubmit={(values) => this.update(values, webhook)}
+          newWebhook={false}
         />
       </Panel>
     );

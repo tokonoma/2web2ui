@@ -82,6 +82,8 @@ describe('PoolForm tests', () => {
   });
 
   describe('overflow pool', () => {
+    const component = 'Field[name="auto_warmup_overflow_pool"]';
+
     it('return true for access control condition if ip auto warmup is enabled', () => {
       expect(wrapper.find('AccessControl').at(1).prop('condition')({ account: { options: { ui: { ip_auto_warmup: true }}}})).toBe(true);
     });
@@ -92,17 +94,37 @@ describe('PoolForm tests', () => {
 
     it('does not render if editing default pool', () => {
       wrapper.setProps({ pool: { id: 'default', name: 'Default' }});
-      expect(wrapper.find('Field[name="auto_warmup_overflow_pool"]')).not.toExist();
+      expect(wrapper.find(component)).not.toExist();
     });
 
     it('shows default pool in overflow pool list', () => {
       wrapper.setProps({ pools: [{ name: 'Default', id: 'default', ips: [{ external_ip: '1.1.1.1' }]}, { name: 'My Pool', id: 'my-pool', ips: []}]});
-      expect(wrapper.find('Field[name="auto_warmup_overflow_pool"]').prop('options')[1]).toEqual({ label: 'Default (default)', value: 'default' });
+      expect(wrapper.find(component).prop('options')[1]).toEqual({ label: 'Default (default)', value: 'default' });
     });
 
     it('shows placeholder pool in overflow pool list ', () => {
       wrapper.setProps({ pools: [{ name: 'Default', id: 'default', ips: [{ external_ip: '1.1.1.1' }]}, { name: 'My Pool', id: 'my-pool', ips: []}]});
-      expect(wrapper.find('Field[name="auto_warmup_overflow_pool"]').prop('options')[0]).toEqual({ label: 'None', value: '' });
+      expect(wrapper.find(component).prop('options')[0]).toEqual({ label: 'None', value: '' });
+    });
+
+    it('renders field disabled when submitting', () => {
+      wrapper.setProps({ submitting: true });
+      expect(wrapper.find(component).prop('disabled')).toBe(true);
+    });
+
+    it('renders field disabled when canEditOverflowPool is false', () => {
+      wrapper.setProps({ canEditOverflowPool: false });
+      expect(wrapper.find(component).prop('disabled')).toBe(true);
+    });
+
+    it('does not disable field when form is new', () => {
+      wrapper.setProps({ isNew: true });
+      expect(wrapper.find(component).prop('disabled')).toBe(false);
+    });
+
+    it('does not disable field when canEditOverflowPool is true', () => {
+      wrapper.setProps({ canEditOverflowPool: true });
+      expect(wrapper.find(component).prop('disabled')).toBe(false);
     });
   });
 });

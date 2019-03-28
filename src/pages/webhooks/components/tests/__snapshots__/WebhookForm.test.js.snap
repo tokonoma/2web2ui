@@ -12,6 +12,7 @@ exports[`EventCheckboxes component should render with events 1`] = `
 >
   <Field
     component={[Function]}
+    disabled={false}
     helpText="A longer description for test event A"
     key="testKeyA"
     label="Test Display Name A"
@@ -20,6 +21,7 @@ exports[`EventCheckboxes component should render with events 1`] = `
   />
   <Field
     component={[Function]}
+    disabled={false}
     helpText="A longer description for test event B"
     key="testKeyB"
     label="Test Display Name B"
@@ -28,6 +30,7 @@ exports[`EventCheckboxes component should render with events 1`] = `
   />
   <Field
     component={[Function]}
+    disabled={false}
     helpText="A longer description for test event C"
     key="testKeyC"
     label="Test Display Name C"
@@ -41,18 +44,24 @@ exports[`EventCheckboxes component should return null if show is false 1`] = `""
 
 exports[`Webhooks Form Component auth should render basic auth fields 1`] = `
 Array [
-  <AuthDropDown />,
+  <AuthDropDown
+    disabled={false}
+  />,
   <AuthFields
     authType="basic"
+    disabled={false}
   />,
 ]
 `;
 
 exports[`Webhooks Form Component auth should render basic oauth2 fields 1`] = `
 Array [
-  <AuthDropDown />,
+  <AuthDropDown
+    disabled={false}
+  />,
   <AuthFields
     authType="oauth2"
+    disabled={false}
   />,
 ]
 `;
@@ -62,41 +71,62 @@ exports[`Webhooks Form Component should render correctly 1`] = `
   onSubmit={[MockFunction]}
 >
   <Panel.Section>
-    <NameField />
-    <TargetField />
-  </Panel.Section>
-  <Panel.Section>
-    <EventsRadioGroup />
-    <EventCheckBoxes />
-  </Panel.Section>
-  <Panel.Section>
-    <AuthDropDown />
-    <AuthFields
-      authType={null}
+    <NameField
+      disabled={false}
+    />
+    <TargetField
+      disabled={false}
     />
   </Panel.Section>
   <Panel.Section>
-    <ActiveField />
+    <EventsRadioGroup
+      disabled={false}
+    />
+    <EventCheckBoxes
+      disabled={false}
+    />
+  </Panel.Section>
+  <Panel.Section>
+    <AuthDropDown
+      disabled={false}
+    />
+    <AuthFields
+      authType={null}
+      disabled={false}
+    />
+  </Panel.Section>
+  <Panel.Section>
+    <ActiveField
+      disabled={false}
+    />
   </Panel.Section>
   <Panel.Section>
     <Button
+      disabled={true}
       primary={true}
       size="default"
       submit={true}
-    />
+    >
+      Update Webhook
+    </Button>
   </Panel.Section>
 </form>
 `;
 
 exports[`Webhooks Form Component should show events checkboxes 1`] = `
 Array [
-  <EventsRadioGroup />,
-  <EventCheckBoxes />,
+  <EventsRadioGroup
+    disabled={false}
+  />,
+  <EventCheckBoxes
+    disabled={false}
+  />,
 ]
 `;
 
 exports[`Webhooks Form Component should subaccount section if subaccounts exist 1`] = `
 <Connect(SubaccountSection)
+  disabled={false}
   formName="webhookForm"
   newWebhook={false}
 />
