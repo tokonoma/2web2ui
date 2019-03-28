@@ -152,6 +152,7 @@ exports[`Alert Form Component enabled prop should only show enabled toggle on ed
               }
               disabled={false}
               name="threshold.error.target"
+              normalize={[Function]}
               prefix=""
               style={
                 Object {
@@ -349,6 +350,7 @@ exports[`Alert Form Component enabled prop should only show enabled toggle on ed
               }
               disabled={false}
               name="threshold.error.target"
+              normalize={[Function]}
               prefix=""
               style={
                 Object {
@@ -569,6 +571,7 @@ exports[`Alert Form Component facet props should clear facet_value and validatio
               }
               disabled={false}
               name="threshold.error.target"
+              normalize={[Function]}
               prefix=""
               style={
                 Object {
@@ -779,7 +782,7 @@ exports[`Alert Form Component facet props should clear facet_value and validatio
               connectLeft={false}
               disabled={false}
               name="threshold.error.target"
-              prefix="Above"
+              normalize={[Function]}
               style={
                 Object {
                   "textAlign": "right",
@@ -1084,6 +1087,7 @@ exports[`Alert Form Component should handle submit 1`] = `
               }
               disabled={false}
               name="threshold.error.target"
+              normalize={[Function]}
               prefix=""
               style={
                 Object {
@@ -1304,6 +1308,7 @@ exports[`Alert Form Component should render the alert form component correctly 1
               }
               disabled={false}
               name="threshold.error.target"
+              normalize={[Function]}
               prefix=""
               style={
                 Object {

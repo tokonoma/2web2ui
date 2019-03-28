@@ -108,7 +108,7 @@ describe('Alert Form Component', () => {
       expect(wrapper.find({ name: 'threshold.error.target' }).props().prefix).toEqual('');
       expect(wrapper.find({ name: 'threshold.error.target' }).props().suffix).toEqual('');
       wrapper.setProps({ alert_metric: 'signals_health_week_over_week' });
-      expect(wrapper.find({ name: 'threshold.error.target' }).props().prefix).toEqual('Above');
+      expect(wrapper.find({ name: 'threshold.error.target' }).props().prefix).toEqual('Drops Below');
       expect(wrapper.find({ name: 'threshold.error.target' }).props().suffix).toEqual('%');
     });
 
