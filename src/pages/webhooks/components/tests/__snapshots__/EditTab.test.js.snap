@@ -4,6 +4,7 @@ exports[`Webhooks EditTab should not render as loading if we already have an eve
 <Panel>
   <withRouter(Connect(ReduxForm))
     allChecked={false}
+    newWebhook={false}
     onSubmit={[Function]}
   />
 </Panel>
@@ -13,6 +14,7 @@ exports[`Webhooks EditTab should render correctly 1`] = `
 <Panel>
   <withRouter(Connect(ReduxForm))
     allChecked={false}
+    newWebhook={false}
     onSubmit={[Function]}
   />
 </Panel>
