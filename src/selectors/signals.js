@@ -21,6 +21,7 @@ export const getOptions = (state, { now = moment().subtract(1, 'day'), ...option
 export const getSpamHitsData = (state, props) => _.get(state, 'signals.spamHits', {});
 export const getEngagementRecencyData = (state, props) => _.get(state, 'signals.engagementRecency', {});
 export const getEngagementRateByCohortData = (state, props) => _.get(state, 'signals.engagementRateByCohort', {});
+export const getUnsubscribeRateByCohortData = (state, props) => _.get(state, 'signals.unsubscribeRateByCohort', {});
 export const getHealthScoreData = (state, props) => _.get(state, 'signals.healthScore', {});
 
 // Details
@@ -111,29 +112,57 @@ export const selectEngagementRateByCohortDetails = createSelector(
   ({ loading, error, data }, facet, facetId, subaccountId, { now, relativeRange }) => {
     const match = data.find((item) => String(item[facet]) === facetId) || {};
 
-    // Rename keys to reference correct cohort constants within components
-    const normalizedHistory = _.get(match, 'history', []).map(({ dt: date, ...values }) => {
-      const reKeyed = _.keys(values).reduce((acc, key) => ({
-        ...acc, [key.replace(/_engagement$/, '')]: values[key]
-      }), {});
-      return { date, ...reKeyed };
-    });
+    // Rename date key
+    const normalizedHistory = _.get(match, 'history', []).map(({ dt: date, ...values }) => ({ date, ...values }));
 
     const filledHistory = fillByDate({
       dataSet: normalizedHistory,
       fill: {
-        c_new: null,
-        c_14d: null,
-        c_90d: null,
-        c_365d: null,
-        c_uneng: null,
-        c_total: null
+        p_new_eng: null, p_14d_eng: null, p_90d_eng: null, p_365d_eng: null, p_uneng_eng: null, p_total_eng: null
       },
       now,
       relativeRange
     });
 
-    const isEmpty = filledHistory.every((values) => values.c_total_engagment === null);
+    const isEmpty = filledHistory.every((values) => _.isNil(values.p_total_eng));
+
+    return {
+      details: {
+        data: filledHistory,
+        empty: isEmpty && !loading,
+        error,
+        loading
+      },
+      facet,
+      facetId,
+      subaccountId
+    };
+  }
+);
+
+export const selectUnsubscribeRateByCohortDetails = createSelector(
+  [getUnsubscribeRateByCohortData, getFacetFromParams, getFacetIdFromParams, selectSubaccountIdFromQuery, getOptions],
+  ({ loading, error, data }, facet, facetId, subaccountId, { now, relativeRange }) => {
+    const match = data.find((item) => String(item[facet]) === facetId) || {};
+
+    // Rename date key
+    const normalizedHistory = _.get(match, 'history', []).map(({ dt: date, ...values }) => ({ date, ...values }));
+
+    const filledHistory = fillByDate({
+      dataSet: normalizedHistory,
+      fill: {
+        p_new_unsub: null,
+        p_14d_unsub: null,
+        p_90d_unsub: null,
+        p_365d_unsub: null,
+        p_uneng_unsub: null,
+        p_total_unsub: null
+      },
+      now,
+      relativeRange
+    });
+
+    const isEmpty = filledHistory.every((values) => _.isNil(values.p_total_unsub));
 
     return {
       details: {

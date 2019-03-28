@@ -1,16 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Signals Engagement Rate By Cohort Page bar chart props gets x axis props 1`] = `
-Object {
-  "tickFormatter": [Function],
-  "ticks": Array [
-    1,
-    2,
-  ],
-}
-`;
-
-exports[`Signals Engagement Rate By Cohort Page bar chart props renders tooltip content 1`] = `
+exports[`Signals Unsubscribe Rate Page bar chart props renders tooltip content 1`] = `
 <Fragment>
   <TooltipMetric
     color="#88E2E7"
@@ -50,7 +40,7 @@ exports[`Signals Engagement Rate By Cohort Page bar chart props renders tooltip 
 </Fragment>
 `;
 
-exports[`Signals Engagement Rate By Cohort Page renders correctly 1`] = `
+exports[`Signals Unsubscribe Rate Page renders correctly 1`] = `
 <SignalsPage
   breadcrumbAction={
     Object {
@@ -59,7 +49,7 @@ exports[`Signals Engagement Rate By Cohort Page renders correctly 1`] = `
       "to": "/signals",
     }
   }
-  dimensionPrefix="Engagement Rate by Cohort for"
+  dimensionPrefix="Unsubscribe Rate by Cohort for"
   facet="sending-domain"
   facetId="test.com"
   primaryArea={<Connect(DateFilter) />}
@@ -127,39 +117,39 @@ exports[`Signals Engagement Rate By Cohort Page renders correctly 1`] = `
             yKeys={
               Array [
                 Object {
-                  "description": "Never engaged, first email in last 7 days",
-                  "fill": "#88E2E7",
-                  "key": "p_new_eng",
-                  "label": "New",
-                  "stroke": "#88E2E7",
-                },
-                Object {
-                  "description": "365+ days since last engagement",
-                  "fill": "#50CFDA",
-                  "key": "p_uneng_eng",
-                  "label": "Never Engaged",
-                  "stroke": "#50CFDA",
-                },
-                Object {
-                  "description": "90-365 days since last engagement",
-                  "fill": "#29B9C7",
-                  "key": "p_365d_eng",
-                  "label": "Not Recently Engaged",
-                  "stroke": "#29B9C7",
+                  "description": "0-14 days since last engagement",
+                  "fill": "#1A838B",
+                  "key": "p_14d_unsub",
+                  "label": "Recently Engaged",
+                  "stroke": "#1A838B",
                 },
                 Object {
                   "description": "14-90 days since last engagement",
                   "fill": "#219EA8",
-                  "key": "p_90d_eng",
+                  "key": "p_90d_unsub",
                   "label": "Semi Recently Engaged",
                   "stroke": "#219EA8",
                 },
                 Object {
-                  "description": "0-14 days since last engagement",
-                  "fill": "#1A838B",
-                  "key": "p_14d_eng",
-                  "label": "Recently Engaged",
-                  "stroke": "#1A838B",
+                  "description": "90-365 days since last engagement",
+                  "fill": "#29B9C7",
+                  "key": "p_365d_unsub",
+                  "label": "Not Recently Engaged",
+                  "stroke": "#29B9C7",
+                },
+                Object {
+                  "description": "365+ days since last engagement",
+                  "fill": "#50CFDA",
+                  "key": "p_uneng_unsub",
+                  "label": "Never Engaged",
+                  "stroke": "#50CFDA",
+                },
+                Object {
+                  "description": "Never engaged, first email in last 7 days",
+                  "fill": "#88E2E7",
+                  "key": "p_new_unsub",
+                  "label": "New",
+                  "stroke": "#88E2E7",
                 },
               ]
             }
@@ -251,7 +241,7 @@ exports[`Signals Engagement Rate By Cohort Page renders correctly 1`] = `
 </SignalsPage>
 `;
 
-exports[`Signals Engagement Rate By Cohort Page renders empty correctly 1`] = `
+exports[`Signals Unsubscribe Rate Page renders empty correctly 1`] = `
 <Panel
   sectioned={true}
 >
@@ -263,71 +253,7 @@ exports[`Signals Engagement Rate By Cohort Page renders empty correctly 1`] = `
 </Panel>
 `;
 
-exports[`Signals Engagement Rate By Cohort Page renders error correctly 1`] = `
-<SignalsPage
-  breadcrumbAction={
-    Object {
-      "component": [Function],
-      "content": "Back to Overview",
-      "to": "/signals",
-    }
-  }
-  dimensionPrefix="Engagement Rate by Cohort for"
-  facet="sending-domain"
-  facetId="test.com"
-  primaryArea={<Connect(DateFilter) />}
->
-  <Grid>
-    <Grid.Column
-      md={7}
-      sm={12}
-    >
-      <withRouter(Tabs)
-        facet="sending-domain"
-        facetId="test.com"
-      />
-      <Panel
-        sectioned={true}
-      >
-        <Callout
-          title="Unable to Load Data"
-        >
-          error message
-        </Callout>
-      </Panel>
-    </Grid.Column>
-    <Grid.Column
-      md={5}
-      mdOffset={0}
-      sm={12}
-    >
-      <div
-        className="OffsetCol"
-      />
-    </Grid.Column>
-  </Grid>
-  <OtherChartsHeader
-    facet="sending-domain"
-    facetId="test.com"
-  />
-  <Grid>
-    <Grid.Column
-      sm={6}
-      xs={12}
-    >
-      <withRouter(Connect(WithSpamTrapDetails(SpamTrapsPreview))) />
-    </Grid.Column>
-    <Grid.Column
-      sm={6}
-      xs={12}
-    >
-      <withRouter(Connect(WithHealthScoreDetails(HealthScorePreview))) />
-    </Grid.Column>
-  </Grid>
-</SignalsPage>
-`;
-
-exports[`Signals Engagement Rate By Cohort Page renders loading correctly 1`] = `
+exports[`Signals Unsubscribe Rate Page renders loading correctly 1`] = `
 <Panel
   sectioned={true}
 >

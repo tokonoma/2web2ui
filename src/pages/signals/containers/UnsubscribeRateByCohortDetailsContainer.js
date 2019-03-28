@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { getEngagementRateByCohort } from 'src/actions/signals';
-import { selectEngagementRateByCohortDetails, getSelectedDateFromRouter } from 'src/selectors/signals';
+import { getUnsubscribeRateByCohort } from 'src/actions/signals';
+import { selectUnsubscribeRateByCohortDetails, getSelectedDateFromRouter } from 'src/selectors/signals';
 import { getDateTicks } from 'src/helpers/date';
 import { getDisplayName } from 'src/helpers/hoc';
 
-export class WithEngagementRateByCohortDetails extends Component {
+export class WithUnsubscribeRateByCohortDetails extends Component {
   componentDidMount() {
-    const { getEngagementRateByCohort, facet, facetId, filters, subaccountId } = this.props;
-    getEngagementRateByCohort({
+    const { getUnsubscribeRateByCohort, facet, facetId, filters, subaccountId } = this.props;
+    getUnsubscribeRateByCohort({
       facet,
       filter: facetId,
       relativeRange: filters.relativeRange,
@@ -18,13 +18,13 @@ export class WithEngagementRateByCohortDetails extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { getEngagementRateByCohort, facet, facetId, filters, subaccountId } = this.props;
+    const { getUnsubscribeRateByCohort, facet, facetId, filters, subaccountId } = this.props;
     const prevRange = prevProps.filters.relativeRange;
     const nextRange = filters.relativeRange;
 
     // Refresh when date range changes
     if (prevRange !== nextRange) {
-      getEngagementRateByCohort({
+      getUnsubscribeRateByCohort({
         facet,
         filter: facetId,
         relativeRange: nextRange,
@@ -51,24 +51,24 @@ export class WithEngagementRateByCohortDetails extends Component {
 }
 
 /**
- * Provides engagement rate by engagement cohort details to the provided component
+ * Provides unsubscribe rate by engagement cohort details to the provided component
  * @example
- *   export default withEngagementRateByCohortDetails(MyComponent);
+ *   export default withUnsubscribeRateByCohortDetails(MyComponent);
  */
-function withEngagementRateByCohortDetails(WrappedComponent) {
+function withUnsubscribeRateByCohortDetails(WrappedComponent) {
   const Wrapper = (props) => (
-    <WithEngagementRateByCohortDetails {...props} component={WrappedComponent} />
+    <WithUnsubscribeRateByCohortDetails {...props} component={WrappedComponent} />
   );
 
-  Wrapper.displayName = getDisplayName(WrappedComponent, 'withEngagementRateByCohortDetails');
+  Wrapper.displayName = getDisplayName(WrappedComponent, 'withUnsubscribeRateByCohortDetails');
 
   const mapStateToProps = (state, props) => ({
-    ...selectEngagementRateByCohortDetails(state, props),
+    ...selectUnsubscribeRateByCohortDetails(state, props),
     filters: state.signalOptions,
     selected: getSelectedDateFromRouter(state, props)
   });
 
-  return withRouter(connect(mapStateToProps, { getEngagementRateByCohort })(Wrapper));
+  return withRouter(connect(mapStateToProps, { getUnsubscribeRateByCohort })(Wrapper));
 }
 
-export default withEngagementRateByCohortDetails;
+export default withUnsubscribeRateByCohortDetails;

@@ -16,7 +16,7 @@ Array [
         "to": "2018-01-13",
       },
       "showErrorAlert": false,
-      "url": "/v1/signals/engagement_by_cohort/",
+      "url": "/v1/signals/eng-cohort/",
     },
     "type": "GET_ENGAGEMENT_RATE_BY_COHORT",
   },
@@ -299,6 +299,29 @@ Array [
       "url": "/v1/signals/spam-hits/",
     },
     "type": "GET_SPAM_HITS",
+  },
+]
+`;
+
+exports[`Signals Actions .getUnsubscribeRateByCohort by default 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "headers": Object {},
+      "method": "GET",
+      "params": Object {
+        "filter": undefined,
+        "from": "2018-01-12",
+        "limit": undefined,
+        "offset": undefined,
+        "order": undefined,
+        "order_by": undefined,
+        "to": "2018-01-13",
+      },
+      "showErrorAlert": false,
+      "url": "/v1/signals/unsub-cohort/",
+    },
+    "type": "GET_UNSUBSCRIBE_RATE_BY_COHORT",
   },
 ]
 `;

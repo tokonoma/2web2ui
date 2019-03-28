@@ -1,8 +1,8 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import { EngagementRateByCohortPage } from '../EngagementRateByCohortPage';
+import { UnsubscribeRateByCohortPage } from '../UnsubscribeRateByCohortPage';
 
-describe('Signals Engagement Rate By Cohort Page', () => {
+describe('Signals Unsubscribe Rate Page', () => {
   let wrapper;
   let props;
   const data = [
@@ -28,7 +28,7 @@ describe('Signals Engagement Rate By Cohort Page', () => {
       xTicks: [1,2],
       selectedDate: '2017-01-02'
     };
-    wrapper = shallow(<EngagementRateByCohortPage {...props}/>);
+    wrapper = shallow(<UnsubscribeRateByCohortPage {...props}/>);
     wrapper.setProps({ data });
   });
 
@@ -48,32 +48,33 @@ describe('Signals Engagement Rate By Cohort Page', () => {
 
   it('renders error correctly', () => {
     wrapper.setProps({ error: { message: 'error message' }});
-    expect(wrapper).toMatchSnapshot();
+    expect(wrapper.find('Callout').prop('children')).toEqual('error message');
+    expect(wrapper.find('Callout').prop('title')).toEqual('Unable to Load Data');
   });
 
   describe('bar chart props', () => {
     it('renders tooltip content', () => {
       const Tooltip = wrapper.find('LineChart').prop('tooltipContent');
       expect(shallow(<Tooltip payload={{
-        p_uneng_eng: 0.1,
-        p_365d_eng: 0.2,
-        p_90d_eng: 0.3,
-        p_14d_eng: 0.4,
-        p_new_eng: 0.5,
+        p_uneng_unsub: 0.1,
+        p_365d_unsub: 0.2,
+        p_90d_unsub: 0.3,
+        p_14d_unsub: 0.4,
+        p_new_unsub: 0.5,
         date: '2018-01-01',
-        p_total_eng: 10
+        p_total_unsub: 10
       }} />)).toMatchSnapshot();
     });
 
     it('gets x axis props', () => {
       const axisProps = wrapper.find('LineChart').prop('xAxisProps');
-      expect(axisProps).toMatchSnapshot();
+      expect(axisProps.ticks).toEqual([1,2]);
       expect(axisProps.tickFormatter('2018-12-05')).toEqual('12/5');
     });
 
     it('gets y axis props', () => {
       const axisProps = wrapper.find('LineChart').prop('yAxisProps');
-      expect(axisProps.tickFormatter(.253)).toEqual('25%');
+      expect(axisProps.tickFormatter(.2523)).toEqual('25%');
     });
   });
 });

@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Signals Unsubscribe Rate by Cohort Details Container gets engagement rate by cohort on mount correctly 1`] = `
+<Component
+  data={Array []}
+  facet="sending_domain"
+  facetId="test.com"
+  selected="2015-01-01"
+  subaccountId="101"
+  xTicks={
+    Array [
+      1,
+      2,
+    ]
+  }
+/>
+`;
