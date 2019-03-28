@@ -12,14 +12,14 @@ import { isAccountUiOptionSet } from 'src/helpers/conditions/account';
 import { selectCurrentPool } from 'src/selectors/ipPools';
 import isDefaultPool from '../helpers/defaultPool';
 import { SelectWrapper } from '../../../components/reduxFormWrappers';
-import { getIpPools } from '../../../selectors/ipPools';
+import { getIpPools, canEditOverflowPool } from '../../../selectors/ipPools';
 
 export class PoolForm extends Component {
   getOverflowPoolOptions = () => {
     const { pools, pool } = this.props;
 
-    return _.compact(pools.map((currentPool) => {
-      if (!currentPool.ips.length || currentPool.id === pool.id) {
+    const overflowPools = _.compact(pools.map((currentPool) => {
+      if (currentPool.auto_warmup_overflow_pool || currentPool.id === pool.id) {
         return null;
       }
 
@@ -29,15 +29,15 @@ export class PoolForm extends Component {
       };
     }));
 
+    overflowPools.unshift({ label: 'None', value: '' });
+    return overflowPools;
   }
 
   render() {
-    const { isNew, pool, handleSubmit, submitting, pristine } = this.props;
+    const { isNew, pool, handleSubmit, canEditOverflowPool, submitting, pristine } = this.props;
     const submitText = isNew ? 'Create IP Pool' : 'Update IP Pool';
     const editingDefault = !isNew && isDefaultPool(pool.id);
     const helpText = editingDefault ? 'You cannot change the default IP pool\'s name' : '';
-
-    const overflowPools = this.getOverflowPoolOptions();
 
     return (
       <Panel>
@@ -64,15 +64,15 @@ export class PoolForm extends Component {
               </AccessControl>
             }
 
-            {!editingDefault && Boolean(overflowPools.length) &&
+            {!editingDefault &&
               <AccessControl condition={isAccountUiOptionSet('ip_auto_warmup', false)}>
                 <Field
                   name='auto_warmup_overflow_pool'
                   label='Overflow Pool'
                   component={SelectWrapper}
-                  options={overflowPools}
+                  options={this.getOverflowPoolOptions()}
                   helpText='With automatic IP Warmup enabled, selected pool will be used when volume threshold for this pool has been reached.'
-                  disabled={submitting}
+                  disabled={submitting || !canEditOverflowPool}
                 />
               </AccessControl>
             }
@@ -98,6 +98,7 @@ const mapStateToProps = (state, props) => {
   return {
     pool,
     pools: getIpPools(state, props),
+    canEditOverflowPool: canEditOverflowPool(state, props),
     initialValues: {
       ...pool
     }

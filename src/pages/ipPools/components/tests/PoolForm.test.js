@@ -16,11 +16,13 @@ describe('PoolForm tests', () => {
         {
           id: 'my-pool',
           name: 'My Pool',
+          auto_warmup_overflow_pool: 'pool-2',
           ips: []
         },
         {
           id: 'pool-2',
           name: 'Another Pool',
+          auto_warmup_overflow_pool: '',
           ips: [{
             external_ip: 'external',
             hostname: 'hostname'
@@ -30,9 +32,10 @@ describe('PoolForm tests', () => {
           }]
         }
       ],
-      pool: { id: 'my-pool', name: 'My Pool' },
+      pool: { id: 'my-pool', name: 'My Pool', auto_warmup_overflow_pool: 'pool-2' },
       handleSubmit: jest.fn(),
-      pristine: true
+      pristine: true,
+      canEditOverflowPool: true
     };
 
     wrapper = shallow(<PoolForm {...props} />);
@@ -92,23 +95,14 @@ describe('PoolForm tests', () => {
       expect(wrapper.find('Field[name="auto_warmup_overflow_pool"]')).not.toExist();
     });
 
-    it('renders overflow pools with ip only pools', () => {
-      expect(wrapper.find('Field[name="auto_warmup_overflow_pool"]').prop('options')).toEqual([{ label: 'Another Pool (pool-2)', value: 'pool-2' }]);
-    });
-
     it('shows default pool in overflow pool list', () => {
       wrapper.setProps({ pools: [{ name: 'Default', id: 'default', ips: [{ external_ip: '1.1.1.1' }]}, { name: 'My Pool', id: 'my-pool', ips: []}]});
-      expect(wrapper.find('Field[name="auto_warmup_overflow_pool"]').prop('options')).toEqual([{ label: 'Default (default)', value: 'default' }]);
+      expect(wrapper.find('Field[name="auto_warmup_overflow_pool"]').prop('options')[1]).toEqual({ label: 'Default (default)', value: 'default' });
     });
 
-    it('hides overflow pool if no pools with ip exist', () => {
-      wrapper.setProps({ pools: props.pools.slice(0, 1) });
-      expect(wrapper.find('Field[name="auto_warmup_overflow_pool"]')).not.toExist();
-    });
-
-    it('hides overflow pool if no pools exist', () => {
-      wrapper.setProps({ pools: []});
-      expect(wrapper.find('Field[name="auto_warmup_overflow_pool"]')).not.toExist();
+    it('shows placeholder pool in overflow pool list ', () => {
+      wrapper.setProps({ pools: [{ name: 'Default', id: 'default', ips: [{ external_ip: '1.1.1.1' }]}, { name: 'My Pool', id: 'my-pool', ips: []}]});
+      expect(wrapper.find('Field[name="auto_warmup_overflow_pool"]').prop('options')[0]).toEqual({ label: 'None', value: '' });
     });
   });
 });
