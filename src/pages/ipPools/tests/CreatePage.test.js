@@ -9,6 +9,7 @@ describe('IP Pools Create Page', () => {
   beforeEach(() => {
     props = {
       createPool: jest.fn(() => Promise.resolve()),
+      listPools: jest.fn(() => Promise.resolve()),
       showAlert: jest.fn(),
       history: {
         push: jest.fn()
@@ -35,6 +36,9 @@ describe('IP Pools Create Page', () => {
       message: 'Created IP pool my-pool.'
     });
     expect(wrapper.instance().props.history.push).toHaveBeenCalled();
+  });
 
+  it('should list pools and get pool on mount', () => {
+    expect(props.listPools).toHaveBeenCalledTimes(1);
   });
 });
