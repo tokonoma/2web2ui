@@ -106,6 +106,15 @@ export class AlertForm extends Component {
       return null;
     };
 
+    const getPrefix = () => {
+      switch (alert_metric) {
+        case 'signals_health_threshold': return '';
+        case 'monthly_sending_limit': return 'Above';
+        case 'signals_health_dod': return 'Drops';
+        case 'signals_health_wow': return 'Drops';
+      }
+    };
+
     return (
       <Form onSubmit={handleSubmit}>
         <Panel>
@@ -185,7 +194,7 @@ export class AlertForm extends Component {
                       />
                     }
                     disabled={submitting}
-                    prefix={alert_metric !== 'signals_health_threshold' ? 'Above' : ''}
+                    prefix={getPrefix()}
                     suffix={(isSignals && isThreshold) ? '' : '%'}
                     validate={getTargetValidation()}
                     style={{
