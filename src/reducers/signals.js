@@ -6,6 +6,7 @@ const initialDimensionState = {
 };
 
 const initialState = {
+  injections: initialDimensionState,
   spamHits: initialDimensionState,
   healthScore: initialDimensionState,
   engagementRecency: initialDimensionState,
@@ -14,6 +15,17 @@ const initialState = {
 
 const signalsReducer = (state = initialState, { type, payload, meta }) => {
   switch (type) {
+    case 'GET_INJECTIONS_FAIL':
+      return { ...state, injections: { ...initialDimensionState, error: payload.error, loading: false }};
+
+    case 'GET_INJECTIONS_PENDING':
+      return { ...state, injections: { ...initialDimensionState, loading: true }};
+
+    case 'GET_INJECTIONS_SUCCESS': {
+      const { data, total_count: totalCount } = payload;
+      return { ...state, injections: { ...initialDimensionState, data, loading: false, totalCount }};
+    }
+
     case 'GET_SPAM_HITS_FAIL':
       return { ...state, spamHits: { ...initialDimensionState, error: payload.error, loading: false }};
 

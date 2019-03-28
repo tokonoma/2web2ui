@@ -23,7 +23,7 @@ export function HealthScoreChart(props) {
     setHovered(props.date);
   }
 
-  const { data, loading, error, filters } = props;
+  const { data, loading, error, filters, injections } = props;
   const accountData = _.find(data, ['sid', -1]) || {};
   const noData = (accountData.history) ? !_.some(getHealthScores(accountData)) : true;
   const lastItem = _.last(accountData.history) || {};
@@ -56,6 +56,21 @@ export function HealthScoreChart(props) {
       ticks: xTicks,
       tickFormatter: (tick) => moment(tick).format('M/D')
     };
+  }
+
+  function getHoverInjectionProps() {
+    const currentEntry = _.find(injections.data, ['dt', hoveredDate]);
+    const value = (currentEntry) ? currentEntry.injections : null;
+    return { value: _.isNil(value) ? 'n/a' : bFormatter(value) };
+  }
+
+  function bFormatter(num) {
+    switch (true) {
+      case (num > 999999999): return `${(num / 1000000000).toFixed(1)}B`;
+      case (num > 999999): return `${(num / 1000000).toFixed(1)}M`;
+      case (num > 999): return `${(num / 1000).toFixed(1)}K`;
+      default: return num;
+    }
   }
 
   function getHoverDoDProps() {
@@ -119,6 +134,7 @@ export function HealthScoreChart(props) {
           </Fragment>
         )}
         <div className={styles.Metrics}>
+          <MetricDisplay label='Injections' {...getHoverInjectionProps()} />
           <MetricDisplay label='DoD Change' {...getHoverDoDProps()} />
           <div className={styles.Divider} />
           <MetricDisplay label='High' {...getMax()} />
