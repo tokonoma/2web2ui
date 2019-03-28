@@ -110,8 +110,14 @@ export class AlertForm extends Component {
       switch (alert_metric) {
         case 'signals_health_threshold': return '';
         case 'monthly_sending_limit': return 'Above';
-        case 'signals_health_dod': return 'Drops';
-        case 'signals_health_wow': return 'Drops';
+        case 'signals_health_dod': return 'Drops Below';
+        case 'signals_health_wow': return 'Drops Below';
+      }
+    };
+
+    const negPercentNormalizer = (value, previousValue, values) => {
+      if ((values.alert_metric === 'signals_health_dod') || ('signals_health_wow')) {
+        return (value > 0) ? value * (-1) : value;
       }
     };
 
@@ -195,6 +201,7 @@ export class AlertForm extends Component {
                     }
                     disabled={submitting}
                     prefix={getPrefix()}
+                    normalize={negPercentNormalizer}
                     suffix={(isSignals && isThreshold) ? '' : '%'}
                     validate={getTargetValidation()}
                     style={{
