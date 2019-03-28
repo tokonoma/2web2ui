@@ -155,7 +155,6 @@ exports[`Signals Health Score Chart renders happy path correctly 1`] = `
           value="n/a"
         />
       </div>
-                
       <div
         className="Divider"
       />
