@@ -140,7 +140,8 @@ export function HealthScoreChart(props) {
           </div>
           <div className={styles.DoDChange}>
             <MetricDisplay label='DoD Change' {...getHoverDoDProps()} />
-          </div>          <div className={styles.Divider} />
+          </div>
+          <div className={styles.Divider} />
           <MetricDisplay label='High' {...getMax()} />
           <MetricDisplay label='Low' {...getMin()} />
         </div>

@@ -21,7 +21,7 @@ describe('Signals Metrics Display', () => {
       value: '10%',
       direction: 'up',
       color: '#mock'
-    }).find('span')).toMatchSnapshot();
+    }).find({ className: 'Icon' })).toMatchSnapshot();
   });
 
   it('renders caret direction down with color', () => {
@@ -30,6 +30,6 @@ describe('Signals Metrics Display', () => {
       value: '10%',
       direction: 'down',
       color: '#mock'
-    }).find('span')).toMatchSnapshot();
+    }).find({ className: 'Icon' })).toMatchSnapshot();
   });
 });
