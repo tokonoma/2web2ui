@@ -20,7 +20,7 @@ function MetricDisplay(props) {
       <h4 className={styles.Label}>{label}</h4>
       <h5 className={styles.Value}>
         {value}
-        {Icon && <span style={{ color }}><Icon className={styles.Icon} size={35}/></span>}
+        {Icon && <Icon className={styles.Icon} size={35} style={{ color }}/>}
       </h5>
     </div>
   );

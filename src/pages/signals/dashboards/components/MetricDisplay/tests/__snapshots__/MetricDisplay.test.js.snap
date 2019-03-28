@@ -1,33 +1,27 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Signals Metrics Display renders caret direction down with color 1`] = `
-<span
+<ArrowDropDown
+  className="Icon"
+  size={35}
   style={
     Object {
       "color": "#mock",
     }
   }
->
-  <ArrowDropDown
-    className="Icon"
-    size={35}
-  />
-</span>
+/>
 `;
 
 exports[`Signals Metrics Display renders caret direction up with color 1`] = `
-<span
+<ArrowDropUp
+  className="Icon"
+  size={35}
   style={
     Object {
       "color": "#mock",
     }
   }
->
-  <ArrowDropUp
-    className="Icon"
-    size={35}
-  />
-</span>
+/>
 `;
 
 exports[`Signals Metrics Display renders label and value with no caret 1`] = `
