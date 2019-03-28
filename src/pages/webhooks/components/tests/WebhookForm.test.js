@@ -83,6 +83,7 @@ describe('Webhooks Form Component', () => {
     expect(wrapper.find('EventsRadioGroup').prop('disabled')).toBe(true);
     expect(wrapper.find('EventCheckBoxes').prop('disabled')).toBe(true);
     expect(wrapper.find('AuthDropDown').prop('disabled')).toBe(true);
+    expect(wrapper.find('AuthFields').prop('disabled')).toBe(true);
     expect(wrapper.find('ActiveField').prop('disabled')).toBe(true);
   });
 
@@ -110,12 +111,12 @@ describe('Webhooks Form Component', () => {
 
   describe('auth', () => {
     it('should render basic auth fields', () => {
-      wrapper.setProps({ auth: 'basic' });
+      wrapper.setProps({ auth: 'basic', disabled: false });
       expect(wrapper.find('AuthDropDown').parent().prop('children')).toMatchSnapshot();
     });
 
     it('should render basic oauth2 fields', () => {
-      wrapper.setProps({ auth: 'oauth2' });
+      wrapper.setProps({ auth: 'oauth2', disabled: false });
       expect(wrapper.find('AuthDropDown').parent().prop('children')).toMatchSnapshot();
     });
   });

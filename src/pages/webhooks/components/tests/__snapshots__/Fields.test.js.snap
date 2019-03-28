@@ -52,6 +52,7 @@ exports[`should render BasicAuthFields 1`] = `
   Basic Auth
   <Field
     component={[Function]}
+    disabled={false}
     label="Username"
     name="basicUser"
     placeholder="username"
@@ -59,6 +60,7 @@ exports[`should render BasicAuthFields 1`] = `
   />
   <Field
     component={[Function]}
+    disabled={false}
     label="Password"
     name="basicPass"
     placeholder="password"
@@ -112,6 +114,7 @@ exports[`should render OAuth2Fields 1`] = `
   OAuth 2.0
   <Field
     component={[Function]}
+    disabled={false}
     label="Client ID"
     name="clientId"
     placeholder="clientID"
@@ -119,6 +122,7 @@ exports[`should render OAuth2Fields 1`] = `
   />
   <Field
     component={[Function]}
+    disabled={false}
     label="Client Secret"
     name="clientSecret"
     placeholder="clientSecret"
@@ -126,6 +130,7 @@ exports[`should render OAuth2Fields 1`] = `
   />
   <Field
     component={[Function]}
+    disabled={false}
     label="Token URL"
     name="tokenURL"
     placeholder="https://www.example.com/tokens/"

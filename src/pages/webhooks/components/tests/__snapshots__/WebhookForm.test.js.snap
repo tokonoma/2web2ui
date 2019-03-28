@@ -49,6 +49,7 @@ Array [
   />,
   <AuthFields
     authType="basic"
+    disabled={false}
   />,
 ]
 `;
@@ -60,6 +61,7 @@ Array [
   />,
   <AuthFields
     authType="oauth2"
+    disabled={false}
   />,
 ]
 `;
@@ -90,6 +92,7 @@ exports[`Webhooks Form Component should render correctly 1`] = `
     />
     <AuthFields
       authType={null}
+      disabled={false}
     />
   </Panel.Section>
   <Panel.Section>

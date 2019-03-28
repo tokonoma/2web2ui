@@ -35,12 +35,12 @@ export function EventCheckBoxes({ show, events, disabled }) {
   );
 }
 
-export function AuthFields({ authType }) {
+export function AuthFields({ authType, disabled }) {
   if (authType === 'basic') {
-    return <BasicAuthFields />;
+    return <BasicAuthFields disabled={disabled} />;
   }
   if (authType === 'oauth2') {
-    return <OAuth2Fields />;
+    return <OAuth2Fields disabled={disabled} />;
   }
   return null;
 }
@@ -73,7 +73,7 @@ export class WebhookForm extends Component {
         </Panel.Section>
         <Panel.Section>
           <AuthDropDown disabled={submitting} />
-          <AuthFields authType={auth} />
+          <AuthFields authType={auth} disabled={submitting} />
         </Panel.Section>
         {newWebhook ? null : <Panel.Section><ActiveField disabled={submitting} /></Panel.Section>}
         <Panel.Section>

@@ -4,20 +4,20 @@ import { required, maxLength, url } from 'src/helpers/validation';
 import { TextFieldWrapper, SelectWrapper, RadioGroup, CheckboxWrapper } from 'src/components';
 import { UnstyledLink } from '@sparkpost/matchbox';
 
-const BasicAuthFields = () => (
+const BasicAuthFields = ({ disabled }) => (
   <div>
   Basic Auth
-    <Field name='basicUser' label='Username' placeholder='username' component={TextFieldWrapper} validate={required}/>
-    <Field name='basicPass' label='Password' placeholder='password' component={TextFieldWrapper} validate={required} type='password'/>
+    <Field name='basicUser' label='Username' placeholder='username' component={TextFieldWrapper} validate={required} disabled={disabled}/>
+    <Field name='basicPass' label='Password' placeholder='password' component={TextFieldWrapper} validate={required} type='password' disabled={disabled}/>
   </div>
 );
 
-const OAuth2Fields = () => (
+const OAuth2Fields = ({ disabled }) => (
   <div>
   OAuth 2.0
-    <Field name='clientId' label='Client ID' placeholder='clientID' component={TextFieldWrapper} validate={required}/>
-    <Field name='clientSecret' label='Client Secret' placeholder='clientSecret' component={TextFieldWrapper} validate={required}/>
-    <Field name='tokenURL' label='Token URL' placeholder='https://www.example.com/tokens/' component={TextFieldWrapper} validate={required}/>
+    <Field name='clientId' label='Client ID' placeholder='clientID' component={TextFieldWrapper} validate={required} disabled={disabled}/>
+    <Field name='clientSecret' label='Client Secret' placeholder='clientSecret' component={TextFieldWrapper} validate={required} disabled={disabled}/>
+    <Field name='tokenURL' label='Token URL' placeholder='https://www.example.com/tokens/' component={TextFieldWrapper} validate={required} disabled={disabled}/>
   </div>
 );
 

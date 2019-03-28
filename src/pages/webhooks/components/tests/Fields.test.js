@@ -35,13 +35,13 @@ it('should render AuthDropDown', () => {
 });
 
 it('should render BasicAuthFields', () => {
-  const wrapper = shallow(<BasicAuthFields />);
+  const wrapper = shallow(<BasicAuthFields disabled={false}/>);
 
   expect(wrapper).toMatchSnapshot();
 });
 
 it('should render OAuth2Fields', () => {
-  const wrapper = shallow(<OAuth2Fields />);
+  const wrapper = shallow(<OAuth2Fields disabled={false}/>);
 
   expect(wrapper).toMatchSnapshot();
 });
