@@ -14,7 +14,7 @@ import styles from './WebhookForm.module.scss';
 
 const formName = 'webhookForm';
 
-export function EventCheckBoxes({ show, events }) {
+export function EventCheckBoxes({ show, events, disabled }) {
   if (!show) {
     return null;
   }
@@ -28,6 +28,7 @@ export function EventCheckBoxes({ show, events }) {
           name={name}
           helpText={description}
           component={CheckboxWrapper}
+          disabled={disabled}
         />
       ))}
     </div>
@@ -68,7 +69,7 @@ export class WebhookForm extends Component {
         {hasSubaccounts ? <Panel.Section><SubaccountSection newWebhook={newWebhook} formName={formName} disabled={submitting}/></Panel.Section> : null}
         <Panel.Section>
           <EventsRadioGroup disabled={submitting} />
-          <EventCheckBoxes show={showEvents} events={eventListing} />
+          <EventCheckBoxes show={showEvents} events={eventListing} disabled={submitting} />
         </Panel.Section>
         <Panel.Section>
           <AuthDropDown disabled={submitting} />

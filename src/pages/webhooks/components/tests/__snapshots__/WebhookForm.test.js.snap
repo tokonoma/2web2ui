@@ -12,6 +12,7 @@ exports[`EventCheckboxes component should render with events 1`] = `
 >
   <Field
     component={[Function]}
+    disabled={false}
     helpText="A longer description for test event A"
     key="testKeyA"
     label="Test Display Name A"
@@ -20,6 +21,7 @@ exports[`EventCheckboxes component should render with events 1`] = `
   />
   <Field
     component={[Function]}
+    disabled={false}
     helpText="A longer description for test event B"
     key="testKeyB"
     label="Test Display Name B"
@@ -28,6 +30,7 @@ exports[`EventCheckboxes component should render with events 1`] = `
   />
   <Field
     component={[Function]}
+    disabled={false}
     helpText="A longer description for test event C"
     key="testKeyC"
     label="Test Display Name C"
@@ -77,7 +80,9 @@ exports[`Webhooks Form Component should render correctly 1`] = `
     <EventsRadioGroup
       disabled={false}
     />
-    <EventCheckBoxes />
+    <EventCheckBoxes
+      disabled={false}
+    />
   </Panel.Section>
   <Panel.Section>
     <AuthDropDown
@@ -110,7 +115,9 @@ Array [
   <EventsRadioGroup
     disabled={false}
   />,
-  <EventCheckBoxes />,
+  <EventCheckBoxes
+    disabled={false}
+  />,
 ]
 `;
 

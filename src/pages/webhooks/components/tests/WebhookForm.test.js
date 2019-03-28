@@ -6,7 +6,7 @@ import SubaccountSection from '../SubaccountSection';
 describe('EventCheckboxes component', () => {
 
   it('should return null if show is false', () => {
-    expect(shallow(<EventCheckBoxes show={false} />)).toMatchSnapshot();
+    expect(shallow(<EventCheckBoxes show={false} disabled={false}/>)).toMatchSnapshot();
   });
 
   it('should render with events', () => {
@@ -15,7 +15,7 @@ describe('EventCheckboxes component', () => {
       { key: 'testKeyB', display_name: 'Test Display Name B', description: 'A longer description for test event B' },
       { key: 'testKeyC', display_name: 'Test Display Name C', description: 'A longer description for test event C' }
     ];
-    expect(shallow(<EventCheckBoxes show={true} events={events} />)).toMatchSnapshot();
+    expect(shallow(<EventCheckBoxes show={true} events={events} disabled={false}/>)).toMatchSnapshot();
   });
 
 });
@@ -81,6 +81,7 @@ describe('Webhooks Form Component', () => {
     expect(wrapper.find('TargetField').prop('disabled')).toBe(true);
     expect(wrapper.find('Connect(SubaccountSection)').prop('disabled')).toBe(true);
     expect(wrapper.find('EventsRadioGroup').prop('disabled')).toBe(true);
+    expect(wrapper.find('EventCheckBoxes').prop('disabled')).toBe(true);
     expect(wrapper.find('AuthDropDown').prop('disabled')).toBe(true);
     expect(wrapper.find('ActiveField').prop('disabled')).toBe(true);
   });
