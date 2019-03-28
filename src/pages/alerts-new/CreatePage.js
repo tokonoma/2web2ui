@@ -16,6 +16,12 @@ export class CreatePage extends Component {
     const { createAlert, showAlert } = this.props;
     const alertBody = formatActionData(values);
 
+    if ((alertBody.alert_metric === 'signals_health_dod') || ('signals_health_wow')) {
+      const dropsValue = alertBody.threshold.error.target;
+      const negDropsValue = (dropsValue > 0) ? dropsValue * (-1) : dropsValue;
+      alertBody.threshold.error.target = negDropsValue;
+    }
+
     await createAlert({
       data: _.omit(alertBody, 'id', 'subaccount', 'assignTo')
     }).then((response) => {
