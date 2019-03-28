@@ -17,8 +17,9 @@ exports[`Signals SpamTrapsPreview Component renders correctly 1`] = `
     </Panel.Section>
     <Panel.Section>
       <BarChart
+        activeFill="#22838A"
         disableHover={true}
-        fill="#B157CE"
+        fill="#B3ECEF"
         gap={0.5}
         height={170}
         margin={
@@ -42,6 +43,7 @@ exports[`Signals SpamTrapsPreview Component renders correctly 1`] = `
             "hide": true,
           }
         }
+        xAxisRefLines={Array []}
         xKey="date"
         yAxisProps={
           Object {
@@ -52,6 +54,7 @@ exports[`Signals SpamTrapsPreview Component renders correctly 1`] = `
             "tickFormatter": [Function],
           }
         }
+        yAxisRefLines={Array []}
         yKey="trap_hits"
         yRange={
           Array [

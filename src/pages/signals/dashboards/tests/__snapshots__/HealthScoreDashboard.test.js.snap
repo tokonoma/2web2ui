@@ -2,15 +2,37 @@
 
 exports[`Signals Health Score Dashboard renders page 1`] = `
 <SignalsPage
-  primaryArea={
-    <React.Fragment>
-      <Connect(Connect(SubaccountFilter)) />
-      <Connect(DateFilter) />
-      <Connect(FacetFilter) />
-    </React.Fragment>
-  }
+  primaryArea={<Connect(DateFilter) />}
   title="Health Score"
 >
+  <Grid>
+    <Grid.Column
+      lg={5}
+      xl={4}
+      xs={12}
+    >
+      <Connect(CurrentHealthGauge) />
+    </Grid.Column>
+    <Grid.Column
+      lg={7}
+      xl={8}
+      xs={12}
+    >
+      <Connect(HealthScoreChart) />
+    </Grid.Column>
+  </Grid>
+  <div
+    style={
+      Object {
+        "marginBottom": "1rem",
+        "marginTop": "1.5rem",
+        "textAlign": "right",
+      }
+    }
+  >
+    <Connect(Connect(SubaccountFilter)) />
+    <Connect(FacetFilter) />
+  </div>
   <Connect(withRouter(Connect(HealthScoreOverview))) />
 </SignalsPage>
 `;

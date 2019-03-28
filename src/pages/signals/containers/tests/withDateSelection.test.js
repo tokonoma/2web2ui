@@ -40,4 +40,10 @@ describe('Signals Spam Trap Details Container', () => {
     wrapper.prop('handleDateSelect')({ payload: { date: '2015-01-01' }});
     expect(wrapper).toHaveProp('selectedDate', '2015-01-01');
   });
+
+  it('handles date hover', () => {
+    const wrapper = subject({ data: [{ date: '2015-01-02' }, { date: '2999-99-99' }]});
+    wrapper.prop('handleDateHover')({ payload: { date: '2015-01-02' }});
+    expect(wrapper).toHaveProp('hoveredDate', '2015-01-02');
+  });
 });
