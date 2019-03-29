@@ -40,7 +40,8 @@ const productionTenants = {
   spceu: {
     apiBase: 'https://api.eu.sparkpost.com/api',
     bounceDomains: {
-      cnameValue: 'eu.sparkpostmail.com'
+      cnameValue: 'eu.sparkpostmail.com',
+      mxValue: 'smtp.eu.sparkpostmail.com'
     },
     brightback: {
       freePlan: 'free500-SPCEU-1018'
@@ -73,7 +74,8 @@ const productionTenants = {
   spc: {
     apiBase: 'https://api.sparkpost.com/api',
     bounceDomains: {
-      cnameValue: 'sparkpostmail.com'
+      cnameValue: 'sparkpostmail.com',
+      mxValue: 'smtp.sparkpostmail.com'
     },
     crossLinkTenant: 'spceu',
     featureFlags: {

@@ -7,7 +7,8 @@ const defaultTemplate = (tenant) => {
     bounceDomains: {
       allowDefault: true,
       allowSubaccountDefault: true,
-      cnameValue: `${identifier}.mail.e.sparkpost.com`
+      cnameValue: `${identifier}.mail.e.sparkpost.com`,
+      mxValue: `${identifier}.mx.e.sparkpost.com`
     },
     featureFlags: {},
     host: `${identifier}.e.sparkpost.com`,

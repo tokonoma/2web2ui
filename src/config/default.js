@@ -115,7 +115,8 @@ const config = {
   bounceDomains: {
     allowDefault: true,
     allowSubaccountDefault: false,
-    cnameValue: 'sparkpostmail.com'
+    cnameValue: 'uat-public.mail.e.tst.sparkpost.com',
+    mxValue: 'uat-public.mx.e.tst.sparkpost.com'
   },
   trackingDomains: {
     cnameValue: 'spgo.io'

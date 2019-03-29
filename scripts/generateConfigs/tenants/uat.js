@@ -21,6 +21,10 @@
 const uatTenants = {
   mtaspc: {
     apiBase: 'https://api-mtaspc.tst.sparkpost.com/api',
+    bounceDomains: {
+      cnameValue: 'mtaspc.mail.e.tst.sparkpost.com',
+      mxValue: 'mtaspc.mx.e.tst.sparkpost.com'
+    },
     featureFlags: {
       allow_anyone_at_verification: true,
       allow_default_signing_domains_for_ip_pools: true,
@@ -42,6 +46,10 @@ const uatTenants = {
   },
   speuat: {
     apiBase: 'https://api-speuat.tst.sparkpost.com/api',
+    bounceDomains: {
+      cnameValue: 'speuat.mail.e.tst.sparkpost.com',
+      mxValue: 'speuat.mx.e.tst.sparkpost.com'
+    },
     host: 'app-speuat.tst.sparkpost.com',
     smtpAuth: {
       host: 'speuat.smtp.tst.sparkpost.com'
@@ -53,7 +61,8 @@ const uatTenants = {
   uat: {
     apiBase: 'https://api-uat.tst.sparkpost.com/api',
     bounceDomains: {
-      cnameValue: 'uat-public.mail.e.sparkpost.com'
+      cnameValue: 'uat-public.mail.e.tst.sparkpost.com',
+      mxValue: 'uat-public.mx.e.tst.sparkpost.com'
     },
     crossLinkTenant: 'spceu',
     featureFlags: {
@@ -80,7 +89,8 @@ const uatTenants = {
   uat2: {
     apiBase: 'https://api-uat2.tst.sparkpost.com/api',
     bounceDomains: {
-      cnameValue: 'uat2public.mail.e.sparkpost.com'
+      cnameValue: 'uat2public.mail.e.tst.sparkpost.com',
+      mxValue: 'uat2public.mx.e.tst.sparkpost.com'
     },
     featureFlags: {
       allow_anyone_at_verification: true
@@ -96,6 +106,10 @@ const uatTenants = {
   },
   uat3: {
     apiBase: 'https://api-uat3.tst.sparkpost.com/api',
+    bounceDomains: {
+      cnameValue: 'uat3.mail.e.tst.sparkpost.com',
+      mxValue: 'uat3.mx.e.tst.sparkpost.com'
+    },
     featureFlags: {
       allow_anyone_at_verification: true
     },
@@ -109,6 +123,10 @@ const uatTenants = {
   },
   uat4: {
     apiBase: 'https://api-uat4.tst.sparkpost.com/api',
+    bounceDomains: {
+      cnameValue: 'uat4.mail.e.tst.sparkpost.com',
+      mxValue: 'uat4.mx.e.tst.sparkpost.com'
+    },
     featureFlags: {
       allow_anyone_at_verification: true
     },
