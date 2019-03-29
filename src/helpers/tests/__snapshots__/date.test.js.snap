@@ -36,11 +36,3 @@ Array [
   },
 ]
 `;
-
-exports[`Date helpers getDateTicks returns an array of start, end and middle days 1`] = `
-Array [
-  "2018-01-18",
-  "2018-01-25",
-  "2018-02-01",
-]
-`;

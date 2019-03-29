@@ -316,8 +316,12 @@ describe('Date helpers', () => {
 
   describe('getDateTicks', () => {
     it('returns an array of start, end and middle days', () => {
-      const now = moment('2018-02-02');
-      expect(getDateTicks('14days', now)).toMatchSnapshot();
+      jest.spyOn(Date, 'now').mockImplementation(() => '2018-02-02T04:20:00-04:00');
+      expect(getDateTicks('14days')).toEqual([
+        '2018-01-18',
+        '2018-01-25',
+        '2018-02-01'
+      ]);
     });
   });
 });
