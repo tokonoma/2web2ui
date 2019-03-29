@@ -50,7 +50,7 @@ describe('Signals Engagement Rate by Cohort Details Container', () => {
     });
   });
 
-  it('should not get engagement recency when range isnt updated', () => {
+  it('should not get engagement rate when range isnt updated', () => {
     wrapper.setProps({ another: 'prop' });
     expect(props.getEngagementRateByCohort).toHaveBeenCalledTimes(1);
   });

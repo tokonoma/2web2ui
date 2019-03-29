@@ -304,7 +304,7 @@ const routes = [
   },
   {
     path: '/signals/engagement/complaints/:facet/:facetId',
-    component: signals.EngagementRecencyPage,
+    component: signals.ComplaintsByCohortPage,
     condition: all(hasGrants('signals/manage'), hasUiOption('feature_signals_v2')),
     layout: App,
     title: 'Signals',

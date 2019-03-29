@@ -1,5 +1,28 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Signals Actions .getComplaintsByCohort by default 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "headers": Object {},
+      "method": "GET",
+      "params": Object {
+        "filter": undefined,
+        "from": "2018-01-12",
+        "limit": undefined,
+        "offset": undefined,
+        "order": undefined,
+        "order_by": undefined,
+        "to": "2018-01-13",
+      },
+      "showErrorAlert": false,
+      "url": "/v1/signals/fbl-cohort/",
+    },
+    "type": "GET_COMPLAINTS_BY_COHORT",
+  },
+]
+`;
+
 exports[`Signals Actions .getEngagementRateByCohort by default 1`] = `
 Array [
   Object {

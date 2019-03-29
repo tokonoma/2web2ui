@@ -1,5 +1,90 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Selectors: signals complaints by cohort details should select details 1`] = `
+Object {
+  "details": Object {
+    "data": Array [
+      Object {
+        "date": "2017-12-27",
+        "p_14d_fbl": null,
+        "p_365d_fbl": null,
+        "p_90d_fbl": null,
+        "p_new_fbl": null,
+        "p_total_fbl": null,
+        "p_uneng_fbl": null,
+      },
+      Object {
+        "date": "2017-12-28",
+        "p_14d_fbl": null,
+        "p_365d_fbl": null,
+        "p_90d_fbl": null,
+        "p_new_fbl": null,
+        "p_total_fbl": null,
+        "p_uneng_fbl": null,
+      },
+      Object {
+        "date": "2017-12-29",
+        "p_14d_fbl": null,
+        "p_365d_fbl": null,
+        "p_90d_fbl": null,
+        "p_new_fbl": null,
+        "p_total_fbl": null,
+        "p_uneng_fbl": null,
+      },
+      Object {
+        "date": "2017-12-30",
+        "p_14d_fbl": null,
+        "p_365d_fbl": null,
+        "p_90d_fbl": null,
+        "p_new_fbl": null,
+        "p_total_fbl": null,
+        "p_uneng_fbl": null,
+      },
+      Object {
+        "date": "2017-12-31",
+        "p_14d_fbl": null,
+        "p_365d_fbl": null,
+        "p_90d_fbl": null,
+        "p_new_fbl": null,
+        "p_total_fbl": null,
+        "p_uneng_fbl": null,
+      },
+      Object {
+        "date": "2018-01-01",
+        "p_14d_fbl": 0.5,
+        "p_365d_fbl": 0.5,
+        "p_new_fbl": 0.5,
+        "p_total_fbl": 0.25,
+        "p_uneng_fbl": 0.5,
+      },
+      Object {
+        "date": "2018-01-02",
+        "p_14d_fbl": null,
+        "p_365d_fbl": null,
+        "p_90d_fbl": null,
+        "p_new_fbl": null,
+        "p_total_fbl": null,
+        "p_uneng_fbl": null,
+      },
+      Object {
+        "date": "2018-01-03",
+        "p_14d_fbl": 0.1,
+        "p_365d_fbl": 0.1,
+        "p_new_fbl": 0.1,
+        "p_total_fbl": 0.5,
+        "p_uneng_fbl": 0.1,
+      },
+    ],
+    "empty": false,
+    "error": null,
+    "loading": false,
+  },
+  "facet": "sending_domain",
+  "facetId": "test.com",
+  "subaccountId": "101",
+}
+`;
+
 exports[`Selectors: signals engagement rate by cohort details should select details 1`] = `
 Object {
   "details": Object {
@@ -1652,7 +1737,7 @@ Object {
 }
 `;
 
-exports[`Selectors: signals unsubscrite rate by cohort details should select details 1`] = `
+exports[`Selectors: signals unsubscribe rate by cohort details should select details 1`] = `
 Object {
   "details": Object {
     "data": Array [

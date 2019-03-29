@@ -9,7 +9,7 @@ import OtherChartsHeader from './components/OtherChartsHeader';
 import Page from './components/SignalsPage';
 import Tabs from './components/engagement/Tabs';
 import TooltipMetric from './components/charts/tooltip/TooltipMetric';
-import withUnsubscribeRateByCohortDetails from './containers/UnsubscribeRateByCohortDetailsContainer';
+import withComplaintsByCohortDetails from './containers/ComplaintsByCohortDetailsContainer';
 import withDateSelection from './containers/withDateSelection';
 import { ENGAGEMENT_RECENCY_COHORTS } from './constants/info';
 import { Loading } from 'src/components';
@@ -21,11 +21,14 @@ import SpamTrapsPreview from './components/previews/SpamTrapsPreview';
 import HealthScorePreview from './components/previews/HealthScorePreview';
 import cohorts from './constants/cohorts';
 
-export class UnsubscribeRateByCohortPage extends Component {
-
-  getYAxisProps = () => ({
-    tickFormatter: (tick) => `${roundToPlaces(tick * 100, 0)}%`
-  })
+export class ComplaintsByCohortPage extends Component {
+  getYAxisProps = () => {
+    const { data } = this.props;
+    return {
+      domain: data.every(({ p_total_fbl }) => !p_total_fbl) ? [0, 1] : ['auto', 'auto'],
+      tickFormatter: (tick) => `${roundToPlaces(tick * 100, 0)}%`
+    };
+  }
 
   getXAxisProps = () => {
     const { xTicks } = this.props;
@@ -38,7 +41,7 @@ export class UnsubscribeRateByCohortPage extends Component {
   getTooltipContent = ({ payload = {}}) => {
     const metrics = _.keys(cohorts).reduce((acc, key) => ([ ...acc, {
       ...cohorts[key], key,
-      value: payload[`p_${key}_unsub`]
+      value: payload[`p_${key}_fbl`]
     }]), []);
 
     return (
@@ -90,7 +93,7 @@ export class UnsubscribeRateByCohortPage extends Component {
                   lines={data}
                   tooltipWidth='250px'
                   tooltipContent={this.getTooltipContent}
-                  yKeys={_.keys(cohorts).map((key) => ({ key: `p_${key}_unsub`, ...cohorts[key] })).reverse()}
+                  yKeys={_.keys(cohorts).map((key) => ({ key: `p_${key}_fbl`, ...cohorts[key] }))}
                   yAxisProps={this.getYAxisProps()}
                   xAxisProps={this.getXAxisProps()}
                 />
@@ -113,7 +116,7 @@ export class UnsubscribeRateByCohortPage extends Component {
     return (
       <Page
         breadcrumbAction={{ content: 'Back to Overview', to: '/signals', component: Link }}
-        dimensionPrefix='Unsubscribe Rate by Cohort for'
+        dimensionPrefix='Complaints by Cohort for'
         facet={facet}
         facetId={facetId}
         subaccountId={subaccountId}
@@ -133,4 +136,4 @@ export class UnsubscribeRateByCohortPage extends Component {
   }
 }
 
-export default withUnsubscribeRateByCohortDetails(withDateSelection(UnsubscribeRateByCohortPage));
+export default withComplaintsByCohortDetails(withDateSelection(ComplaintsByCohortPage));

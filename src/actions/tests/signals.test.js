@@ -65,6 +65,12 @@ describe('Signals Actions', () => {
     }
   });
 
+  snapshotActionCases('.getComplaintsByCohort', {
+    'by default': {
+      action: () => actions.getComplaintsByCohort({ ...requiredOptions })
+    }
+  });
+
   snapshotActionCases('.getHealthScore', {
     'by default': {
       action: () => actions.getHealthScore({ ...requiredOptions })

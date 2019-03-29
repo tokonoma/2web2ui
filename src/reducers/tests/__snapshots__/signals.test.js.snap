@@ -95,6 +95,12 @@ Object {
 
 exports[`Signals Reducer init 1`] = `
 Object {
+  "complaintsByCohort": Object {
+    "data": Array [],
+    "error": null,
+    "loading": false,
+    "totalCount": 0,
+  },
   "engagementRateByCohort": Object {
     "data": Array [],
     "error": null,

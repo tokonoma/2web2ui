@@ -11,7 +11,8 @@ const initialState = {
   healthScore: initialDimensionState,
   engagementRecency: initialDimensionState,
   engagementRateByCohort: initialDimensionState,
-  unsubscribeRateByCohort: initialDimensionState
+  unsubscribeRateByCohort: initialDimensionState,
+  complaintsByCohort: initialDimensionState
 };
 
 const signalsReducer = (state = initialState, { type, payload, meta }) => {
@@ -69,6 +70,17 @@ const signalsReducer = (state = initialState, { type, payload, meta }) => {
     case 'GET_UNSUBSCRIBE_RATE_BY_COHORT_SUCCESS': {
       const { data, total_count: totalCount } = payload;
       return { ...state, unsubscribeRateByCohort: { ...initialDimensionState, data, loading: false, totalCount }};
+    }
+
+    case 'GET_COMPLAINTS_BY_COHORT_FAIL':
+      return { ...state, complaintsByCohort: { ...initialDimensionState, error: payload.error, loading: false }};
+
+    case 'GET_COMPLAINTS_BY_COHORT_PENDING':
+      return { ...state, complaintsByCohort: { ...initialDimensionState, loading: true }};
+
+    case 'GET_COMPLAINTS_BY_COHORT_SUCCESS': {
+      const { data, total_count: totalCount } = payload;
+      return { ...state, complaintsByCohort: { ...initialDimensionState, data, loading: false, totalCount }};
     }
 
     case 'GET_HEALTH_SCORE_FAIL':

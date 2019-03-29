@@ -22,6 +22,7 @@ export const getSpamHitsData = (state, props) => _.get(state, 'signals.spamHits'
 export const getEngagementRecencyData = (state, props) => _.get(state, 'signals.engagementRecency', {});
 export const getEngagementRateByCohortData = (state, props) => _.get(state, 'signals.engagementRateByCohort', {});
 export const getUnsubscribeRateByCohortData = (state, props) => _.get(state, 'signals.unsubscribeRateByCohort', {});
+export const getComplaintsByCohortData = (state, props) => _.get(state, 'signals.complaintsByCohort', {});
 export const getHealthScoreData = (state, props) => _.get(state, 'signals.healthScore', {});
 
 // Details
@@ -178,6 +179,43 @@ export const selectUnsubscribeRateByCohortDetails = createSelector(
   }
 );
 
+export const selectComplaintsByCohortDetails = createSelector(
+  [getComplaintsByCohortData, getFacetFromParams, getFacetIdFromParams, selectSubaccountIdFromQuery, getOptions],
+  ({ loading, error, data }, facet, facetId, subaccountId, { now, relativeRange }) => {
+    const match = data.find((item) => String(item[facet]) === facetId) || {};
+
+    // Rename date key
+    const normalizedHistory = _.get(match, 'history', []).map(({ dt: date, ...values }) => ({ date, ...values }));
+
+    const filledHistory = fillByDate({
+      dataSet: normalizedHistory,
+      fill: {
+        p_new_fbl: null,
+        p_14d_fbl: null,
+        p_90d_fbl: null,
+        p_365d_fbl: null,
+        p_uneng_fbl: null,
+        p_total_fbl: null
+      },
+      now,
+      relativeRange
+    });
+
+    const isEmpty = filledHistory.every((values) => _.isNil(values.p_total_fbl));
+
+    return {
+      details: {
+        data: filledHistory,
+        empty: isEmpty && !loading,
+        error,
+        loading
+      },
+      facet,
+      facetId,
+      subaccountId
+    };
+  }
+);
 
 function rankHealthScore(value) {
   let rank = '';

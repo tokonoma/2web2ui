@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Signals Unsubscribe Rate Page bar chart props renders tooltip content 1`] = `
+exports[`Signals Complaints Page bar chart props renders tooltip content 1`] = `
 <Fragment>
   <TooltipMetric
     color="#88E2E7"
@@ -40,7 +40,7 @@ exports[`Signals Unsubscribe Rate Page bar chart props renders tooltip content 1
 </Fragment>
 `;
 
-exports[`Signals Unsubscribe Rate Page renders correctly 1`] = `
+exports[`Signals Complaints Page renders correctly 1`] = `
 <SignalsPage
   breadcrumbAction={
     Object {
@@ -49,7 +49,7 @@ exports[`Signals Unsubscribe Rate Page renders correctly 1`] = `
       "to": "/signals",
     }
   }
-  dimensionPrefix="Unsubscribe Rate by Cohort for"
+  dimensionPrefix="Complaints by Cohort for"
   facet="sending-domain"
   facetId="test.com"
   primaryArea={<Connect(DateFilter) />}
@@ -75,12 +75,12 @@ exports[`Signals Unsubscribe Rate Page renders correctly 1`] = `
             lines={
               Array [
                 Object {
-                  "c_total": 1,
                   "date": "2017-01-01",
+                  "p_total_fbl": 1,
                 },
                 Object {
-                  "c_total": 10,
                   "date": "2017-01-02",
+                  "p_total_fbl": 10,
                 },
               ]
             }
@@ -110,6 +110,10 @@ exports[`Signals Unsubscribe Rate Page renders correctly 1`] = `
             xKey="date"
             yAxisProps={
               Object {
+                "domain": Array [
+                  "auto",
+                  "auto",
+                ],
                 "tickFormatter": [Function],
               }
             }
@@ -117,39 +121,39 @@ exports[`Signals Unsubscribe Rate Page renders correctly 1`] = `
             yKeys={
               Array [
                 Object {
-                  "description": "0-14 days since last engagement",
-                  "fill": "#1A838B",
-                  "key": "p_14d_unsub",
-                  "label": "Recently Engaged",
-                  "stroke": "#1A838B",
-                },
-                Object {
-                  "description": "14-90 days since last engagement",
-                  "fill": "#219EA8",
-                  "key": "p_90d_unsub",
-                  "label": "Semi Recently Engaged",
-                  "stroke": "#219EA8",
-                },
-                Object {
-                  "description": "90-365 days since last engagement",
-                  "fill": "#29B9C7",
-                  "key": "p_365d_unsub",
-                  "label": "Not Recently Engaged",
-                  "stroke": "#29B9C7",
+                  "description": "Never engaged, first email in last 7 days",
+                  "fill": "#88E2E7",
+                  "key": "p_new_fbl",
+                  "label": "New",
+                  "stroke": "#88E2E7",
                 },
                 Object {
                   "description": "365+ days since last engagement",
                   "fill": "#50CFDA",
-                  "key": "p_uneng_unsub",
+                  "key": "p_uneng_fbl",
                   "label": "Never Engaged",
                   "stroke": "#50CFDA",
                 },
                 Object {
-                  "description": "Never engaged, first email in last 7 days",
-                  "fill": "#88E2E7",
-                  "key": "p_new_unsub",
-                  "label": "New",
-                  "stroke": "#88E2E7",
+                  "description": "90-365 days since last engagement",
+                  "fill": "#29B9C7",
+                  "key": "p_365d_fbl",
+                  "label": "Not Recently Engaged",
+                  "stroke": "#29B9C7",
+                },
+                Object {
+                  "description": "14-90 days since last engagement",
+                  "fill": "#219EA8",
+                  "key": "p_90d_fbl",
+                  "label": "Semi Recently Engaged",
+                  "stroke": "#219EA8",
+                },
+                Object {
+                  "description": "0-14 days since last engagement",
+                  "fill": "#1A838B",
+                  "key": "p_14d_fbl",
+                  "label": "Recently Engaged",
+                  "stroke": "#1A838B",
                 },
               ]
             }
@@ -227,7 +231,7 @@ exports[`Signals Unsubscribe Rate Page renders correctly 1`] = `
 </SignalsPage>
 `;
 
-exports[`Signals Unsubscribe Rate Page renders empty correctly 1`] = `
+exports[`Signals Complaints Page renders empty correctly 1`] = `
 <Panel
   sectioned={true}
 >
@@ -239,7 +243,7 @@ exports[`Signals Unsubscribe Rate Page renders empty correctly 1`] = `
 </Panel>
 `;
 
-exports[`Signals Unsubscribe Rate Page renders loading correctly 1`] = `
+exports[`Signals Complaints Page renders loading correctly 1`] = `
 <Panel
   sectioned={true}
 >
