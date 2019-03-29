@@ -18,7 +18,7 @@ import { listPools } from 'src/actions/ipPools';
 import MultiFacetWrapper from './MultiFacetWrapper';
 
 // Helpers & Validation
-import { domain, required, integer, minNumber, maxLength, numberBetween } from 'src/helpers/validation';
+import { domain, required, integer, minNumber, maxNumber, maxLength, numberBetween } from 'src/helpers/validation';
 import validateEmailList from '../helpers/validateEmailList';
 
 const formName = 'alertForm';
@@ -87,7 +87,7 @@ export class AlertForm extends Component {
           return [required, integer, minNumber(0)];
         }
       } else {
-        return required;
+        return [required, integer, maxNumber(0)];
       }
     };
 
@@ -104,6 +104,21 @@ export class AlertForm extends Component {
       }
 
       return null;
+    };
+
+    const getPrefix = () => {
+      switch (alert_metric) {
+        case 'signals_health_threshold': return '';
+        case 'monthly_sending_limit': return 'Above';
+        case 'signals_health_dod':
+        case 'signals_health_wow': return 'Drops Below';
+      }
+    };
+
+    const negPercentNormalizer = (value, previousValue, values) => {
+      if ((values.alert_metric === 'signals_health_dod') || ('signals_health_wow')) {
+        return (value > 0) ? value * (-1) : value;
+      }
     };
 
     return (
@@ -185,7 +200,8 @@ export class AlertForm extends Component {
                       />
                     }
                     disabled={submitting}
-                    prefix={alert_metric !== 'signals_health_threshold' ? 'Above' : ''}
+                    prefix={getPrefix()}
+                    normalize={negPercentNormalizer}
                     suffix={(isSignals && isThreshold) ? '' : '%'}
                     validate={getTargetValidation()}
                     style={{

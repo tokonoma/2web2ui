@@ -87,7 +87,7 @@ describe('Alert Form Component', () => {
     it('should clear facet_value and validation when facet_name is set to ALL and signals threshold', () => {
       wrapper.setProps({ alert_metric: 'signals_health_threshold', facet_name: 'ALL', facet_value: 'something' });
       expect(wrapper).toMatchSnapshot();
-      wrapper.setProps({ alert_metric: 'signals_health_day_over_day', facet_name: 'ip_pool', facet_value: 'something' });
+      wrapper.setProps({ alert_metric: 'signals_health_dod', facet_name: 'ip_pool', facet_value: 'something' });
       expect(wrapper).toMatchSnapshot();
     });
   });
@@ -102,14 +102,11 @@ describe('Alert Form Component', () => {
 
     it('should add prefix and suffix to target when alert_metric is NOT set to signals_health_threshold', () => {
       wrapper.setProps({ alert_metric: 'monthly_sending_limit' });
-      expect(wrapper.find({ name: 'threshold.error.target' }).props().prefix).toEqual('Above');
-      expect(wrapper.find({ name: 'threshold.error.target' }).props().suffix).toEqual('%');
+      expect(wrapper.find({ name: 'threshold.error.target' }).props()).toMatchSnapshot();
       wrapper.setProps({ alert_metric: 'signals_health_threshold' });
-      expect(wrapper.find({ name: 'threshold.error.target' }).props().prefix).toEqual('');
-      expect(wrapper.find({ name: 'threshold.error.target' }).props().suffix).toEqual('');
-      wrapper.setProps({ alert_metric: 'signals_health_week_over_week' });
-      expect(wrapper.find({ name: 'threshold.error.target' }).props().prefix).toEqual('Above');
-      expect(wrapper.find({ name: 'threshold.error.target' }).props().suffix).toEqual('%');
+      expect(wrapper.find({ name: 'threshold.error.target' }).props()).toMatchSnapshot();
+      wrapper.setProps({ alert_metric: 'signals_health_wow' });
+      expect(wrapper.find({ name: 'threshold.error.target' }).props()).toMatchSnapshot();
     });
 
     it('should validate target when alert_metric is set to signals_health_threshold', () => {
@@ -124,11 +121,11 @@ describe('Alert Form Component', () => {
       expect(wrapper.find({ name: 'threshold.error.target' }).props().validate[1]()).toEqual('Integers only please');
     });
 
-    it('should validate target when alert_metric is set to signals_health_day_over_day or signals_health_week_over_week', () => {
-      wrapper.setProps({ alert_metric: 'signals_health_week_over_week' });
-      expect(wrapper.find({ name: 'threshold.error.target' }).props().validate()).toEqual('Required');
-      wrapper.setProps({ alert_metric: 'signals_health_day_over_day' });
-      expect(wrapper.find({ name: 'threshold.error.target' }).props().validate()).toEqual('Required');
+    it('should validate target when alert_metric is set to signals_health_dod or signals_health_wow', () => {
+      wrapper.setProps({ alert_metric: 'signals_health_wow' });
+      expect(wrapper.find({ name: 'threshold.error.target' }).props().validate[1]()).toEqual('Integers only please');
+      wrapper.setProps({ alert_metric: 'signals_health_dod' });
+      expect(wrapper.find({ name: 'threshold.error.target' }).props().validate[1]()).toEqual('Integers only please');
     });
   });
 

@@ -1,5 +1,81 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Alert Form Component criteria props should add prefix and suffix to target when alert_metric is NOT set to signals_health_threshold 1`] = `
+Object {
+  "component": [Function],
+  "connectLeft": false,
+  "disabled": false,
+  "name": "threshold.error.target",
+  "normalize": [Function],
+  "prefix": "Above",
+  "style": Object {
+    "textAlign": "right",
+  },
+  "suffix": "%",
+  "validate": Array [
+    [Function],
+    [Function],
+    [Function],
+  ],
+}
+`;
+
+exports[`Alert Form Component criteria props should add prefix and suffix to target when alert_metric is NOT set to signals_health_threshold 2`] = `
+Object {
+  "component": [Function],
+  "connectLeft": <Field
+    component={[Function]}
+    disabled={false}
+    name="threshold.error.comparator"
+    options={
+      Array [
+        Object {
+          "label": "Below",
+          "value": "lt",
+        },
+        Object {
+          "label": "Above",
+          "value": "gt",
+        },
+      ]
+    }
+    validate={[Function]}
+  />,
+  "disabled": false,
+  "name": "threshold.error.target",
+  "normalize": [Function],
+  "prefix": "",
+  "style": Object {
+    "textAlign": "right",
+  },
+  "suffix": "",
+  "validate": Array [
+    [Function],
+    [Function],
+  ],
+}
+`;
+
+exports[`Alert Form Component criteria props should add prefix and suffix to target when alert_metric is NOT set to signals_health_threshold 3`] = `
+Object {
+  "component": [Function],
+  "connectLeft": false,
+  "disabled": false,
+  "name": "threshold.error.target",
+  "normalize": [Function],
+  "prefix": "Drops Below",
+  "style": Object {
+    "textAlign": "right",
+  },
+  "suffix": "%",
+  "validate": Array [
+    [Function],
+    [Function],
+    [Function],
+  ],
+}
+`;
+
 exports[`Alert Form Component enabled prop should only show enabled toggle on edit page 1`] = `
 <Form
   onSubmit={[MockFunction]}
@@ -152,6 +228,7 @@ exports[`Alert Form Component enabled prop should only show enabled toggle on ed
               }
               disabled={false}
               name="threshold.error.target"
+              normalize={[Function]}
               prefix=""
               style={
                 Object {
@@ -349,6 +426,7 @@ exports[`Alert Form Component enabled prop should only show enabled toggle on ed
               }
               disabled={false}
               name="threshold.error.target"
+              normalize={[Function]}
               prefix=""
               style={
                 Object {
@@ -569,6 +647,7 @@ exports[`Alert Form Component facet props should clear facet_value and validatio
               }
               disabled={false}
               name="threshold.error.target"
+              normalize={[Function]}
               prefix=""
               style={
                 Object {
@@ -779,14 +858,21 @@ exports[`Alert Form Component facet props should clear facet_value and validatio
               connectLeft={false}
               disabled={false}
               name="threshold.error.target"
-              prefix="Above"
+              normalize={[Function]}
+              prefix="Drops Below"
               style={
                 Object {
                   "textAlign": "right",
                 }
               }
               suffix="%"
-              validate={[Function]}
+              validate={
+                Array [
+                  [Function],
+                  [Function],
+                  [Function],
+                ]
+              }
             />
           </div>
         </Grid.Column>
@@ -1084,6 +1170,7 @@ exports[`Alert Form Component should handle submit 1`] = `
               }
               disabled={false}
               name="threshold.error.target"
+              normalize={[Function]}
               prefix=""
               style={
                 Object {
@@ -1304,6 +1391,7 @@ exports[`Alert Form Component should render the alert form component correctly 1
               }
               disabled={false}
               name="threshold.error.target"
+              normalize={[Function]}
               prefix=""
               style={
                 Object {
