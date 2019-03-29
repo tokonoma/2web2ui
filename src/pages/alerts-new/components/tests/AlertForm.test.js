@@ -87,7 +87,7 @@ describe('Alert Form Component', () => {
     it('should clear facet_value and validation when facet_name is set to ALL and signals threshold', () => {
       wrapper.setProps({ alert_metric: 'signals_health_threshold', facet_name: 'ALL', facet_value: 'something' });
       expect(wrapper).toMatchSnapshot();
-      wrapper.setProps({ alert_metric: 'signals_health_day_over_day', facet_name: 'ip_pool', facet_value: 'something' });
+      wrapper.setProps({ alert_metric: 'signals_health_dod', facet_name: 'ip_pool', facet_value: 'something' });
       expect(wrapper).toMatchSnapshot();
     });
   });
@@ -105,7 +105,7 @@ describe('Alert Form Component', () => {
       expect(wrapper.find({ name: 'threshold.error.target' }).props()).toMatchSnapshot();
       wrapper.setProps({ alert_metric: 'signals_health_threshold' });
       expect(wrapper.find({ name: 'threshold.error.target' }).props()).toMatchSnapshot();
-      wrapper.setProps({ alert_metric: 'signals_health_week_over_week' });
+      wrapper.setProps({ alert_metric: 'signals_health_wow' });
       expect(wrapper.find({ name: 'threshold.error.target' }).props()).toMatchSnapshot();
     });
 
@@ -121,10 +121,10 @@ describe('Alert Form Component', () => {
       expect(wrapper.find({ name: 'threshold.error.target' }).props().validate[1]()).toEqual('Integers only please');
     });
 
-    it('should validate target when alert_metric is set to signals_health_day_over_day or signals_health_week_over_week', () => {
-      wrapper.setProps({ alert_metric: 'signals_health_week_over_week' });
+    it('should validate target when alert_metric is set to signals_health_dod or signals_health_wow', () => {
+      wrapper.setProps({ alert_metric: 'signals_health_wow' });
       expect(wrapper.find({ name: 'threshold.error.target' }).props().validate()).toEqual('Required');
-      wrapper.setProps({ alert_metric: 'signals_health_day_over_day' });
+      wrapper.setProps({ alert_metric: 'signals_health_dod' });
       expect(wrapper.find({ name: 'threshold.error.target' }).props().validate()).toEqual('Required');
     });
   });

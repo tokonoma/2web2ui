@@ -18,7 +18,7 @@ import { listPools } from 'src/actions/ipPools';
 import MultiFacetWrapper from './MultiFacetWrapper';
 
 // Helpers & Validation
-import { domain, required, integer, minNumber, maxLength, numberBetween } from 'src/helpers/validation';
+import { domain, required, integer, minNumber, maxNumber, maxLength, numberBetween } from 'src/helpers/validation';
 import validateEmailList from '../helpers/validateEmailList';
 
 const formName = 'alertForm';
@@ -87,7 +87,7 @@ export class AlertForm extends Component {
           return [required, integer, minNumber(0)];
         }
       } else {
-        return required;
+        return [required, integer, maxNumber(0)];
       }
     };
 
@@ -110,8 +110,8 @@ export class AlertForm extends Component {
       switch (alert_metric) {
         case 'signals_health_threshold': return '';
         case 'monthly_sending_limit': return 'Above';
-        case 'signals_health_day_over_day':
-        case 'signals_health_week_over_week': return 'Drops Below';
+        case 'signals_health_dod':
+        case 'signals_health_wow': return 'Drops Below';
       }
     };
 

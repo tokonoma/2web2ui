@@ -68,7 +68,11 @@ Object {
     "textAlign": "right",
   },
   "suffix": "%",
-  "validate": [Function],
+  "validate": Array [
+    [Function],
+    [Function],
+    [Function],
+  ],
 }
 `;
 
@@ -862,7 +866,13 @@ exports[`Alert Form Component facet props should clear facet_value and validatio
                 }
               }
               suffix="%"
-              validate={[Function]}
+              validate={
+                Array [
+                  [Function],
+                  [Function],
+                  [Function],
+                ]
+              }
             />
           </div>
         </Grid.Column>
