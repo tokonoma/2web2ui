@@ -1,6 +1,5 @@
 import { snapshotActionCases } from 'src/__testHelpers__/snapshotActionHelpers';
-import { getEngagementRecency, getEngagementRateByCohort, getHealthScore, getSpamHits } from '../signals';
-
+import * as actions from '../signals';
 jest.mock('src/actions/helpers/sparkpostApiRequest');
 jest.mock('src/helpers/date', () => ({
   formatInputDate: (d) => d,
@@ -17,52 +16,64 @@ describe('Signals Actions', () => {
 
   snapshotActionCases('.getSpamHits', {
     'by default': {
-      action: () => getSpamHits({ ...requiredOptions })
+      action: () => actions.getSpamHits({ ...requiredOptions })
     },
     'with a facet': {
-      action: () => getSpamHits({ ...requiredOptions, facet: 'sending-domain' })
+      action: () => actions.getSpamHits({ ...requiredOptions, facet: 'sending-domain' })
     },
     'with a subaccount facet': {
-      action: () => getSpamHits({ ...requiredOptions, facet: 'sid', filter: 123 })
+      action: () => actions.getSpamHits({ ...requiredOptions, facet: 'sid', filter: 123 })
     },
     'with a filter': {
-      action: () => getSpamHits({ ...requiredOptions, filter: 'examp' })
+      action: () => actions.getSpamHits({ ...requiredOptions, filter: 'examp' })
     },
     'with a limit': {
-      action: () => getSpamHits({ ...requiredOptions, limit: 100 })
+      action: () => actions.getSpamHits({ ...requiredOptions, limit: 100 })
     },
     'with a offset': {
-      action: () => getSpamHits({ ...requiredOptions, offset: 9 })
+      action: () => actions.getSpamHits({ ...requiredOptions, offset: 9 })
     },
     'with an order': {
-      action: () => getSpamHits({ ...requiredOptions, order: 'asc', orderBy: 'example_field' })
+      action: () => actions.getSpamHits({ ...requiredOptions, order: 'asc', orderBy: 'example_field' })
     },
     'with a order by subaccount': {
-      action: () => getSpamHits({ ...requiredOptions, order: 'asc', orderBy: 'sid' })
+      action: () => actions.getSpamHits({ ...requiredOptions, order: 'asc', orderBy: 'sid' })
     },
     'with a order field that needs to be mapped': {
-      action: () => getSpamHits({ ...requiredOptions, order: 'asc', orderBy: 'current_trap_hits' })
+      action: () => actions.getSpamHits({ ...requiredOptions, order: 'asc', orderBy: 'current_trap_hits' })
     },
     'with a subaccount': {
-      action: () => getSpamHits({ ...requiredOptions, subaccount: { id: 123 }})
+      action: () => actions.getSpamHits({ ...requiredOptions, subaccount: { id: 123 }})
     }
   });
 
   snapshotActionCases('.getEngagementRecency', {
     'by default': {
-      action: () => getEngagementRecency({ ...requiredOptions })
+      action: () => actions.getEngagementRecency({ ...requiredOptions })
     }
   });
 
   snapshotActionCases('.getEngagementRateByCohort', {
     'by default': {
-      action: () => getEngagementRateByCohort({ ...requiredOptions })
+      action: () => actions.getEngagementRateByCohort({ ...requiredOptions })
+    }
+  });
+
+  snapshotActionCases('.getUnsubscribeRateByCohort', {
+    'by default': {
+      action: () => actions.getUnsubscribeRateByCohort({ ...requiredOptions })
     }
   });
 
   snapshotActionCases('.getHealthScore', {
     'by default': {
-      action: () => getHealthScore({ ...requiredOptions })
+      action: () => actions.getHealthScore({ ...requiredOptions })
+    }
+  });
+
+  snapshotActionCases('.getInjections', {
+    'by default': {
+      action: () => actions.getInjections({ ...requiredOptions })
     }
   });
 });

@@ -10,7 +10,7 @@ exports[`BarChart Component renders a normal bar chart correctly 1`] = `
     height={50}
     width={100}
   >
-    <BarChart
+    <ComposedChart
       barCategoryGap={1}
       barGap={4}
       data={
@@ -40,7 +40,6 @@ exports[`BarChart Component renders a normal bar chart correctly 1`] = `
         cursor="pointer"
         data={Array []}
         dataKey="noKey"
-        fill="#5DCFF5"
         hide={false}
         isAnimationActive={false}
         layout="vertical"
@@ -172,6 +171,7 @@ exports[`BarChart Component renders a normal bar chart correctly 1`] = `
         wrapperStyle={Object {}}
       />
       <Bar
+        activeFill="#activeFill"
         animationBegin={0}
         animationDuration={400}
         animationEasing="ease"
@@ -188,13 +188,76 @@ exports[`BarChart Component renders a normal bar chart correctly 1`] = `
         onAnimationEnd={[Function]}
         onAnimationStart={[Function]}
         onClick={[MockFunction]}
+        shape={[Function]}
         stackId="stack"
         xAxisId={0}
         yAxisId={0}
       />
-    </BarChart>
+      0
+      0
+    </ComposedChart>
   </ResponsiveContainer>
 </div>
+`;
+
+exports[`BarChart Component renders a normal bar chart with correct fill for non-selected/hovered threshold events 1`] = `
+Object {
+  "animationBegin": 0,
+  "animationDuration": 1500,
+  "animationEasing": "ease",
+  "date": "2011-01-01",
+  "fill": "#fill",
+  "health_score": 75,
+  "height": 0,
+  "isAnimationActive": false,
+  "isUpdateAnimationActive": false,
+  "opacity": 0,
+  "radius": 0,
+  "ranking": "warning",
+  "width": 0,
+  "x": 0,
+  "y": 0,
+}
+`;
+
+exports[`BarChart Component renders a normal bar chart with correct fill for selected/hovered non-threshold events 1`] = `
+Object {
+  "animationBegin": 0,
+  "animationDuration": 1500,
+  "animationEasing": "ease",
+  "date": "2011-01-01",
+  "fill": "#fill",
+  "height": 0,
+  "injections": 75,
+  "isAnimationActive": false,
+  "isUpdateAnimationActive": false,
+  "opacity": 0,
+  "radius": 0,
+  "ranking": "warning",
+  "width": 0,
+  "x": 0,
+  "y": 0,
+}
+`;
+
+exports[`BarChart Component renders a normal bar chart with correct fill for selected/hovered threshold events 1`] = `
+Object {
+  "animationBegin": 0,
+  "animationDuration": 1500,
+  "animationEasing": "ease",
+  "date": "2011-01-01",
+  "fill": "#fill",
+  "health_score": 75,
+  "height": 0,
+  "isAnimationActive": false,
+  "isUpdateAnimationActive": false,
+  "opacity": 0,
+  "radius": 0,
+  "ranking": "warning",
+  "width": 0,
+  "x": 0,
+  "y": 0,
+}
 `;
 
 exports[`BarChart Component renders a stacked bar chart correctly 1`] = `
@@ -216,6 +279,7 @@ Array [
     onAnimationEnd={[Function]}
     onAnimationStart={[Function]}
     onClick={[MockFunction]}
+    shape={[Function]}
     stackId="stack"
     xAxisId={0}
     yAxisId={0}
@@ -237,6 +301,7 @@ Array [
     onAnimationEnd={[Function]}
     onAnimationStart={[Function]}
     onClick={[MockFunction]}
+    shape={[Function]}
     stackId="stack"
     xAxisId={0}
     yAxisId={0}
@@ -269,11 +334,95 @@ exports[`BarChart Component renders background bars with opacity if selected 1`]
   height={0}
   isAnimationActive={false}
   isUpdateAnimationActive={false}
-  opacity={0.4}
+  opacity={0}
   radius={0}
   test="test"
   width={0}
   x={0}
   y={0}
+/>
+`;
+
+exports[`BarChart Component should display x reference lines 1`] = `
+<ReferenceLine
+  fill="none"
+  fillOpacity={1}
+  ifOverflow="discard"
+  isFront={false}
+  key="0"
+  shapeRendering="crispEdges"
+  stroke="green"
+  strokeWidth={2}
+  style={
+    Object {
+      "pointerEvents": "none",
+    }
+  }
+  x="2011-01-01"
+  xAxisId={0}
+  yAxisId={0}
+/>
+`;
+
+exports[`BarChart Component should display x reference lines 2`] = `
+<ReferenceLine
+  fill="none"
+  fillOpacity={1}
+  ifOverflow="discard"
+  isFront={false}
+  key="1"
+  shapeRendering="crispEdges"
+  stroke="red"
+  strokeWidth={2}
+  style={
+    Object {
+      "pointerEvents": "none",
+    }
+  }
+  x="2011-01-03"
+  xAxisId={0}
+  yAxisId={0}
+/>
+`;
+
+exports[`BarChart Component should display y reference lines 1`] = `
+<ReferenceLine
+  fill="none"
+  fillOpacity={1}
+  ifOverflow="discard"
+  isFront={false}
+  key="0"
+  shapeRendering="crispEdges"
+  stroke="green"
+  strokeWidth={2}
+  style={
+    Object {
+      "pointerEvents": "none",
+    }
+  }
+  xAxisId={0}
+  y={80}
+  yAxisId={0}
+/>
+`;
+
+exports[`BarChart Component should display y reference lines 2`] = `
+<ReferenceLine
+  fill="none"
+  fillOpacity={1}
+  ifOverflow="discard"
+  isFront={false}
+  key="1"
+  shapeRendering="crispEdges"
+  stroke="red"
+  strokeWidth={2}
+  style={
+    Object {
+      "pointerEvents": "none",
+    }
+  }
+  xAxisId={0}
+  y={55}
+  yAxisId={0}
 />
 `;

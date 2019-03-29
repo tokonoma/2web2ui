@@ -296,7 +296,7 @@ const routes = [
   },
   {
     path: '/signals/engagement/unsubscribes/:facet/:facetId',
-    component: signals.EngagementRecencyPage,
+    component: signals.UnsubscribeRateByCohortPage,
     condition: all(hasGrants('signals/manage'), hasUiOption('feature_signals_v2')),
     layout: App,
     title: 'Signals',

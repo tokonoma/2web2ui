@@ -21,6 +21,13 @@ exports[`Signals Health Score Page bar chart props renders tooltip content for h
 />
 `;
 
+exports[`Signals Health Score Page bar chart props renders tooltip content for hovered component 1`] = `
+<TooltipMetric
+  label="Health Score"
+  value="75"
+/>
+`;
+
 exports[`Signals Health Score Page bar chart props renders tooltip content for injections 1`] = `
 <TooltipMetric
   label="Injections"
@@ -68,9 +75,12 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
 "
         />
         <BarChart
-          fill="#B157CE"
+          activeFill="#22838A"
+          disableHover={false}
+          fill="#B3ECEF"
           gap={0.25}
           height={250}
+          hovered="2017-01-05"
           margin={
             Object {
               "bottom": 5,
@@ -80,6 +90,7 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
             }
           }
           onClick={[MockFunction]}
+          onMouseOver={[MockFunction]}
           selected="2017-01-01"
           timeSeries={
             Array [
@@ -123,11 +134,34 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
               "ticks": Array [],
             }
           }
+          xAxisRefLines={Array []}
           xKey="date"
           yAxisProps={
             Object {
               "tickFormatter": [Function],
+              "ticks": Array [
+                0,
+                0.2,
+                0.4,
+                0.55,
+                0.8,
+                1,
+              ],
             }
+          }
+          yAxisRefLines={
+            Array [
+              Object {
+                "stroke": "#2CC995",
+                "strokeWidth": 1,
+                "y": 0.8,
+              },
+              Object {
+                "stroke": "#FF594D",
+                "strokeWidth": 1,
+                "y": 0.55,
+              },
+            ]
           }
           yKey="health_score"
           yRange={
@@ -144,9 +178,11 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
 "
         />
         <BarChart
-          fill="#B157CE"
+          activeFill="#22838A"
+          fill="#B3ECEF"
           gap={0.25}
           height={190}
+          hovered="2017-01-05"
           margin={
             Object {
               "bottom": 5,
@@ -156,6 +192,7 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
             }
           }
           onClick={[MockFunction]}
+          onMouseOver={[MockFunction]}
           selected="2017-01-01"
           timeSeries={
             Array [
@@ -199,12 +236,14 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
               "ticks": Array [],
             }
           }
+          xAxisRefLines={Array []}
           xKey="date"
           yAxisProps={
             Object {
               "tickFormatter": [Function],
             }
           }
+          yAxisRefLines={Array []}
           yKey="injections"
           yRange={
             Array [
@@ -217,9 +256,11 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
           title="Hard Bounces Percent"
         />
         <BarChart
-          fill="#B157CE"
+          activeFill="#22838A"
+          fill="#B3ECEF"
           gap={0.25}
           height={190}
+          hovered="2017-01-05"
           margin={
             Object {
               "bottom": 5,
@@ -229,6 +270,7 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
             }
           }
           onClick={[MockFunction]}
+          onMouseOver={[MockFunction]}
           selected="2017-01-01"
           timeSeries={
             Array [
@@ -251,12 +293,14 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
               "ticks": Array [],
             }
           }
+          xAxisRefLines={Array []}
           xKey="date"
           yAxisProps={
             Object {
               "tickFormatter": [Function],
             }
           }
+          yAxisRefLines={Array []}
           yKey="weight_value"
           yRange={
             Array [
@@ -409,9 +453,12 @@ exports[`Signals Health Score Page renders empty weights 1`] = `
 "
         />
         <BarChart
-          fill="#B157CE"
+          activeFill="#22838A"
+          disableHover={false}
+          fill="#B3ECEF"
           gap={0.25}
           height={250}
+          hovered="2017-01-05"
           margin={
             Object {
               "bottom": 5,
@@ -421,6 +468,7 @@ exports[`Signals Health Score Page renders empty weights 1`] = `
             }
           }
           onClick={[MockFunction]}
+          onMouseOver={[MockFunction]}
           selected="2017-01-01"
           timeSeries={
             Array [
@@ -437,11 +485,34 @@ exports[`Signals Health Score Page renders empty weights 1`] = `
               "ticks": Array [],
             }
           }
+          xAxisRefLines={Array []}
           xKey="date"
           yAxisProps={
             Object {
               "tickFormatter": [Function],
+              "ticks": Array [
+                0,
+                0.2,
+                0.4,
+                0.55,
+                0.8,
+                1,
+              ],
             }
+          }
+          yAxisRefLines={
+            Array [
+              Object {
+                "stroke": "#2CC995",
+                "strokeWidth": 1,
+                "y": 0.8,
+              },
+              Object {
+                "stroke": "#FF594D",
+                "strokeWidth": 1,
+                "y": 0.55,
+              },
+            ]
           }
           yKey="health_score"
           yRange={
@@ -458,9 +529,11 @@ exports[`Signals Health Score Page renders empty weights 1`] = `
 "
         />
         <BarChart
-          fill="#B157CE"
+          activeFill="#22838A"
+          fill="#B3ECEF"
           gap={0.25}
           height={190}
+          hovered="2017-01-05"
           margin={
             Object {
               "bottom": 5,
@@ -470,6 +543,7 @@ exports[`Signals Health Score Page renders empty weights 1`] = `
             }
           }
           onClick={[MockFunction]}
+          onMouseOver={[MockFunction]}
           selected="2017-01-01"
           timeSeries={
             Array [
@@ -486,12 +560,14 @@ exports[`Signals Health Score Page renders empty weights 1`] = `
               "ticks": Array [],
             }
           }
+          xAxisRefLines={Array []}
           xKey="date"
           yAxisProps={
             Object {
               "tickFormatter": [Function],
             }
           }
+          yAxisRefLines={Array []}
           yKey="injections"
           yRange={
             Array [

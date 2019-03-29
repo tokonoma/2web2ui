@@ -19,18 +19,43 @@ describe('BarChart Component', () => {
     props = {
       timeSeries: normal,
       xKey: 'date',
-      yRange: [0,5],
+      yRange: [0,100],
       height: 50,
       width: 100,
       onClick: jest.fn(),
       tooltipContent: jest.fn(),
-      fill: '#fill'
+      fill: '#fill',
+      activeFill: '#activeFill'
     };
     wrapper = shallow(<BarChart {...props}/>);
   });
 
   it('renders a normal bar chart correctly', () => {
     expect(wrapper).toMatchSnapshot();
+  });
+
+  it('renders a normal bar chart with correct fill for selected/hovered threshold events', () => {
+    wrapper.setProps({ selected: '2011-01-01', yKey: 'health_score', timeSeries: [{ health_score: 75, ranking: 'warning', date: '2011-01-01' }]});
+    const payload = { fill: '#fill', health_score: 75, ranking: 'warning', date: '2011-01-01' };
+    expect(wrapper.find('Bar').at(0).props().shape(payload).props).toMatchSnapshot();
+  });
+
+  it('renders a normal bar chart with correct fill for non-selected/hovered threshold events', () => {
+    wrapper.setProps({ selected: undefined, yKey: 'health_score', timeSeries: [{ health_score: 75, ranking: 'warning', date: '2011-01-01' }]});
+    const payload = { fill: '#fill', health_score: 75, ranking: 'warning', date: '2011-01-01' };
+    expect(wrapper.find('Bar').at(0).props().shape(payload).props).toMatchSnapshot();
+  });
+
+  it('renders a normal bar chart with correct fill for selected/hovered non-threshold events', () => {
+    wrapper.setProps({ selected: '2011-01-01', yKey: 'injections', timeSeries: [{ injections: 75, date: '2011-01-01' }]});
+    const payload = { fill: '#fill', injections: 75, ranking: 'warning', date: '2011-01-01' };
+    expect(wrapper.find('Bar').at(0).props().shape(payload).props).toMatchSnapshot();
+  });
+
+  it('renders a normal bar chart with correct fill for non-selected/hovered non-threshold events', () => {
+    wrapper.setProps({ selected: undefined, yKey: 'injections', timeSeries: [{ injections: 75, date: '2011-01-01' }]});
+    const payload = { fill: '#fill', injections: 75, ranking: 'warning', date: '2011-01-01' };
+    expect(wrapper.find('Bar').at(0).props().shape(payload).props.fill).toEqual('#fill');
   });
 
   it('renders a stacked bar chart correctly', () => {
@@ -54,5 +79,19 @@ describe('BarChart Component', () => {
     wrapper.setProps({ timeSeries: stacked, yKeys });
     wrapper.find('Bar').forEach((n) => n.simulate('click'));
     expect(props.onClick).toHaveBeenCalledTimes(3);
+  });
+
+  it('should display x reference lines', () => {
+    wrapper.setProps({ xAxisRefLines: [{ x: '2011-01-01', stroke: 'green', strokeWidth: 2 }, { x: '2011-01-03', stroke: 'red', strokeWidth: 2 }]});
+    wrapper.find('ReferenceLine').forEach((line) => {
+      expect(line).toMatchSnapshot();
+    });
+  });
+
+  it('should display y reference lines', () => {
+    wrapper.setProps({ yAxisRefLines: [{ y: 80, stroke: 'green', strokeWidth: 2 }, { y: 55, stroke: 'red', strokeWidth: 2 }]});
+    wrapper.find('ReferenceLine').forEach((line) => {
+      expect(line).toMatchSnapshot();
+    });
   });
 });

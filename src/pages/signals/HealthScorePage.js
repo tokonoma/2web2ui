@@ -22,6 +22,7 @@ import _ from 'lodash';
 import SpamTrapsPreview from './components/previews/SpamTrapsPreview';
 import EngagementRecencyPreview from './components/previews/EngagementRecencyPreview';
 import styles from './DetailsPages.module.scss';
+import thresholds from './constants/healthScoreThresholds';
 
 export class HealthScorePage extends Component {
   state = {
@@ -54,7 +55,7 @@ export class HealthScorePage extends Component {
   }
 
   renderContent = () => {
-    const { data = [], handleDateSelect, loading, gap, empty, error, selectedDate } = this.props;
+    const { data = [], handleDateSelect, handleDateHover, loading, gap, empty, error, selectedDate, hoveredDate, resetDateHover } = this.props;
     const { selectedComponent } = this.state;
 
     const selectedWeights = _.get(_.find(data, ['date', selectedDate]), 'weights', []);
@@ -89,14 +90,23 @@ export class HealthScorePage extends Component {
                 <BarChart
                   gap={gap}
                   onClick={handleDateSelect}
+                  onMouseOver={handleDateHover}
+                  onMouseOut={resetDateHover}
+                  disableHover={false}
                   selected={selectedDate}
+                  hovered={hoveredDate}
                   timeSeries={data}
                   tooltipContent={({ payload = {}}) => (
                     <TooltipMetric label='Health Score' value={`${roundToPlaces(payload.health_score * 100, 1)}`} />
                   )}
+                  yAxisRefLines={[
+                    { y: 0.80, stroke: thresholds.good.color, strokeWidth: 1 },
+                    { y: 0.55, stroke: thresholds.danger.color, strokeWidth: 1 }
+                  ]}
                   yKey='health_score'
                   yAxisProps={{
-                    tickFormatter: (tick) => tick * 100
+                    ticks: [0,0.2,0.4,0.55,0.8,1],
+                    tickFormatter: (tick) => parseInt(tick * 100)
                   }}
                   xAxisProps={this.getXAxisProps()}
                 />
@@ -105,7 +115,10 @@ export class HealthScorePage extends Component {
                   gap={gap}
                   height={190}
                   onClick={handleDateSelect}
+                  onMouseOver={handleDateHover}
                   selected={selectedDate}
+                  hovered={hoveredDate}
+                  onMouseOut={resetDateHover}
                   timeSeries={data}
                   tooltipContent={({ payload = {}}) => (
                     <TooltipMetric label='Injections' value={formatFullNumber(payload.injections)} />
@@ -123,6 +136,9 @@ export class HealthScorePage extends Component {
                       gap={gap}
                       height={190}
                       onClick={handleDateSelect}
+                      onMouseOver={handleDateHover}
+                      onMouseOut={resetDateHover}
+                      hovered={hoveredDate}
                       selected={selectedDate}
                       timeSeries={dataForSelectedWeight}
                       tooltipContent={({ payload = {}}) => (

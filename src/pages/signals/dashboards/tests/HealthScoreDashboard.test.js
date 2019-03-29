@@ -4,7 +4,7 @@ import { HealthScoreDashboard } from '../HealthScoreDashboard';
 
 describe('Signals Health Score Dashboard', () => {
   const subject = (props = {}) => shallow(
-    <HealthScoreDashboard getSubaccounts={() => {}} {...props} />
+    <HealthScoreDashboard getSubaccounts={() => {}} filters={{ relativeRange: '90days' }} getInjections={() => {}} {...props} />
   );
 
   it('renders page', () => {
@@ -15,5 +15,11 @@ describe('Signals Health Score Dashboard', () => {
     const getSubaccounts = jest.fn();
     subject({ getSubaccounts });
     expect(getSubaccounts).toHaveBeenCalled();
+  });
+
+  it('calls getInjections on mount', () => {
+    const getInjections = jest.fn();
+    subject({ getInjections });
+    expect(getInjections).toHaveBeenCalled();
   });
 });

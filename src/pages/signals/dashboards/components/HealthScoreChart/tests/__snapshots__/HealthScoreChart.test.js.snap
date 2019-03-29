@@ -1,0 +1,196 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Signals Health Score Chart renders error correctly 1`] = `
+<Callout
+  height="auto"
+  title="Unable to Load Data"
+>
+  mock error
+</Callout>
+`;
+
+exports[`Signals Health Score Chart renders happy path correctly 1`] = `
+<Panel
+  sectioned={true}
+>
+  <div
+    className="Content"
+  >
+    <h2
+      className="Header"
+    >
+      Health Score – 
+      90 days
+       
+      <Tooltip
+        bottom={true}
+        content="
+  This is a predictive score that monitors your email health to identify problems before
+  they negatively impact email delivery. This score is informed by message events,
+  including bounces, spam trap hits, and engagement across our entire network.
+"
+        dark={true}
+        forcePosition={false}
+        horizontalOffset="-1rem"
+        preferredDirection={
+          Object {
+            "bottom": true,
+            "left": false,
+            "right": true,
+            "top": false,
+          }
+        }
+        right={true}
+      >
+        <InfoOutline
+          className="TooltipIcon"
+          size={18}
+        />
+      </Tooltip>
+    </h2>
+    <BarChart
+      activeFill="#22838A"
+      fill="#B3ECEF"
+      gap={1}
+      height={250}
+      margin={
+        Object {
+          "bottom": 5,
+          "left": 18,
+          "right": 0,
+          "top": 12,
+        }
+      }
+      onMouseOut={[Function]}
+      onMouseOver={[Function]}
+      selected="2019-03-27"
+      timeSeries={
+        Array [
+          Object {
+            "date": "2019-03-24",
+            "health_score": 75,
+            "ranking": "warning",
+          },
+          Object {
+            "date": "2019-03-25",
+            "health_score": 96,
+            "ranking": "good",
+          },
+          Object {
+            "date": "2019-03-26",
+            "health_score": 23,
+            "ranking": "danger",
+          },
+          Object {
+            "date": "2019-03-27",
+            "health_score": null,
+            "ranking": null,
+          },
+        ]
+      }
+      tooltipContent={[Function]}
+      width="99%"
+      xAxisProps={
+        Object {
+          "tickFormatter": [Function],
+          "ticks": Array [
+            "2018-12-26",
+            "2019-02-09",
+            "2019-03-26",
+          ],
+        }
+      }
+      xAxisRefLines={Array []}
+      xKey="date"
+      yAxisProps={
+        Object {
+          "ticks": Array [
+            0,
+            20,
+            40,
+            55,
+            80,
+            100,
+          ],
+        }
+      }
+      yAxisRefLines={
+        Array [
+          Object {
+            "stroke": "green",
+            "strokeWidth": 1,
+            "y": 80,
+          },
+          Object {
+            "stroke": "red",
+            "strokeWidth": 1,
+            "y": 55,
+          },
+        ]
+      }
+      yKey="health_score"
+      yRange={
+        Array [
+          "auto",
+          "auto",
+        ]
+      }
+    />
+    <div
+      className="Metrics"
+    >
+      <div
+        className="Injections"
+      >
+        <MetricDisplay
+          label="Injections"
+          value="n/a"
+        />
+      </div>
+      <div
+        className="DoDChange"
+      >
+        <MetricDisplay
+          label="DoD Change"
+          value="n/a"
+        />
+      </div>
+      <div
+        className="Divider"
+      />
+      <MetricDisplay
+        label="High"
+        value={96}
+      />
+      <MetricDisplay
+        label="Low"
+        value={23}
+      />
+    </div>
+  </div>
+</Panel>
+`;
+
+exports[`Signals Health Score Chart renders metric displays 1`] = `
+<MetricDisplay
+  label="Injections"
+  value="75B"
+/>
+`;
+
+exports[`Signals Health Score Chart renders metric displays 2`] = `
+<MetricDisplay
+  color="#FF594D"
+  direction="down"
+  label="DoD Change"
+  value="-76%"
+/>
+`;
+
+exports[`Signals Health Score Chart renders no account level data callout correctly 1`] = `
+<Callout
+  height="auto"
+>
+  Health Scores Not Available
+</Callout>
+`;

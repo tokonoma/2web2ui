@@ -1,165 +1,78 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Selectors: signals engagement rate by cohort details should be empty with only fill data when not loading 1`] = `
-Object {
-  "details": Object {
-    "data": Array [
-      Object {
-        "c_14d": null,
-        "c_365d": null,
-        "c_90d": null,
-        "c_new": null,
-        "c_total": null,
-        "c_uneng": null,
-        "date": "2017-12-27",
-      },
-      Object {
-        "c_14d": null,
-        "c_365d": null,
-        "c_90d": null,
-        "c_new": null,
-        "c_total": null,
-        "c_uneng": null,
-        "date": "2017-12-28",
-      },
-      Object {
-        "c_14d": null,
-        "c_365d": null,
-        "c_90d": null,
-        "c_new": null,
-        "c_total": null,
-        "c_uneng": null,
-        "date": "2017-12-29",
-      },
-      Object {
-        "c_14d": null,
-        "c_365d": null,
-        "c_90d": null,
-        "c_new": null,
-        "c_total": null,
-        "c_uneng": null,
-        "date": "2017-12-30",
-      },
-      Object {
-        "c_14d": null,
-        "c_365d": null,
-        "c_90d": null,
-        "c_new": null,
-        "c_total": null,
-        "c_uneng": null,
-        "date": "2017-12-31",
-      },
-      Object {
-        "c_14d": null,
-        "c_365d": null,
-        "c_90d": null,
-        "c_new": null,
-        "c_total": null,
-        "c_uneng": null,
-        "date": "2018-01-01",
-      },
-      Object {
-        "c_14d": null,
-        "c_365d": null,
-        "c_90d": null,
-        "c_new": null,
-        "c_total": null,
-        "c_uneng": null,
-        "date": "2018-01-02",
-      },
-      Object {
-        "c_14d": null,
-        "c_365d": null,
-        "c_90d": null,
-        "c_new": null,
-        "c_total": null,
-        "c_uneng": null,
-        "date": "2018-01-03",
-      },
-    ],
-    "empty": false,
-    "error": undefined,
-    "loading": false,
-  },
-  "facet": "sending_domain",
-  "facetId": "test.com",
-  "subaccountId": "101",
-}
-`;
-
 exports[`Selectors: signals engagement rate by cohort details should select details 1`] = `
 Object {
   "details": Object {
     "data": Array [
       Object {
-        "c_14d": null,
-        "c_365d": null,
-        "c_90d": null,
-        "c_new": null,
-        "c_total": null,
-        "c_uneng": null,
         "date": "2017-12-27",
+        "p_14d_eng": null,
+        "p_365d_eng": null,
+        "p_90d_eng": null,
+        "p_new_eng": null,
+        "p_total_eng": null,
+        "p_uneng_eng": null,
       },
       Object {
-        "c_14d": null,
-        "c_365d": null,
-        "c_90d": null,
-        "c_new": null,
-        "c_total": null,
-        "c_uneng": null,
         "date": "2017-12-28",
+        "p_14d_eng": null,
+        "p_365d_eng": null,
+        "p_90d_eng": null,
+        "p_new_eng": null,
+        "p_total_eng": null,
+        "p_uneng_eng": null,
       },
       Object {
-        "c_14d": null,
-        "c_365d": null,
-        "c_90d": null,
-        "c_new": null,
-        "c_total": null,
-        "c_uneng": null,
         "date": "2017-12-29",
+        "p_14d_eng": null,
+        "p_365d_eng": null,
+        "p_90d_eng": null,
+        "p_new_eng": null,
+        "p_total_eng": null,
+        "p_uneng_eng": null,
       },
       Object {
-        "c_14d": null,
-        "c_365d": null,
-        "c_90d": null,
-        "c_new": null,
-        "c_total": null,
-        "c_uneng": null,
         "date": "2017-12-30",
+        "p_14d_eng": null,
+        "p_365d_eng": null,
+        "p_90d_eng": null,
+        "p_new_eng": null,
+        "p_total_eng": null,
+        "p_uneng_eng": null,
       },
       Object {
-        "c_14d": null,
-        "c_365d": null,
-        "c_90d": null,
-        "c_new": null,
-        "c_total": null,
-        "c_uneng": null,
         "date": "2017-12-31",
+        "p_14d_eng": null,
+        "p_365d_eng": null,
+        "p_90d_eng": null,
+        "p_new_eng": null,
+        "p_total_eng": null,
+        "p_uneng_eng": null,
       },
       Object {
-        "c_14d": 5,
-        "c_365d": 5,
-        "c_new": 5,
-        "c_total": 25,
-        "c_uneng": 5,
         "date": "2018-01-01",
+        "p_14d_eng": 5,
+        "p_365d_eng": 5,
+        "p_new_eng": 5,
+        "p_total_eng": 25,
+        "p_uneng_eng": 5,
       },
       Object {
-        "c_14d": null,
-        "c_365d": null,
-        "c_90d": null,
-        "c_new": null,
-        "c_total": null,
-        "c_uneng": null,
         "date": "2018-01-02",
+        "p_14d_eng": null,
+        "p_365d_eng": null,
+        "p_90d_eng": null,
+        "p_new_eng": null,
+        "p_total_eng": null,
+        "p_uneng_eng": null,
       },
       Object {
-        "c_14d": 10,
-        "c_365d": 10,
-        "c_new": 10,
-        "c_total": 50,
-        "c_uneng": 10,
         "date": "2018-01-03",
+        "p_14d_eng": 10,
+        "p_365d_eng": 10,
+        "p_new_eng": 10,
+        "p_total_eng": 50,
+        "p_uneng_eng": 10,
       },
     ],
     "empty": false,
@@ -352,6 +265,7 @@ Object {
         "date": "2017-12-27",
         "health_score": null,
         "injections": null,
+        "ranking": "danger",
         "weights": Array [
           Object {
             "weight": null,
@@ -399,6 +313,7 @@ Object {
         "date": "2017-12-28",
         "health_score": null,
         "injections": null,
+        "ranking": "danger",
         "weights": Array [
           Object {
             "weight": null,
@@ -446,6 +361,7 @@ Object {
         "date": "2017-12-29",
         "health_score": null,
         "injections": null,
+        "ranking": "danger",
         "weights": Array [
           Object {
             "weight": null,
@@ -493,6 +409,7 @@ Object {
         "date": "2017-12-30",
         "health_score": null,
         "injections": null,
+        "ranking": "danger",
         "weights": Array [
           Object {
             "weight": null,
@@ -540,6 +457,7 @@ Object {
         "date": "2017-12-31",
         "health_score": null,
         "injections": null,
+        "ranking": "danger",
         "weights": Array [
           Object {
             "weight": null,
@@ -587,6 +505,7 @@ Object {
         "date": "2018-01-01",
         "health_score": null,
         "injections": null,
+        "ranking": "danger",
         "weights": Array [
           Object {
             "weight": null,
@@ -634,6 +553,7 @@ Object {
         "date": "2018-01-02",
         "health_score": null,
         "injections": null,
+        "ranking": "danger",
         "weights": Array [
           Object {
             "weight": null,
@@ -681,6 +601,7 @@ Object {
         "date": "2018-01-03",
         "health_score": null,
         "injections": null,
+        "ranking": "danger",
         "weights": Array [
           Object {
             "weight": null,
@@ -743,6 +664,7 @@ Object {
         "date": "2017-12-27",
         "health_score": null,
         "injections": null,
+        "ranking": "danger",
         "weights": Array [
           Object {
             "weight": null,
@@ -790,6 +712,7 @@ Object {
         "date": "2017-12-28",
         "health_score": null,
         "injections": null,
+        "ranking": "danger",
         "weights": Array [
           Object {
             "weight": null,
@@ -837,6 +760,7 @@ Object {
         "date": "2017-12-29",
         "health_score": null,
         "injections": null,
+        "ranking": "danger",
         "weights": Array [
           Object {
             "weight": null,
@@ -884,6 +808,7 @@ Object {
         "date": "2017-12-30",
         "health_score": null,
         "injections": null,
+        "ranking": "danger",
         "weights": Array [
           Object {
             "weight": null,
@@ -931,6 +856,7 @@ Object {
         "date": "2017-12-31",
         "health_score": null,
         "injections": null,
+        "ranking": "danger",
         "weights": Array [
           Object {
             "weight": null,
@@ -978,6 +904,7 @@ Object {
         "date": "2018-01-01",
         "health_score": 0.74321,
         "injections": 182400,
+        "ranking": "warning",
         "weights": Array [
           Object {
             "weight": -0.1,
@@ -998,56 +925,17 @@ Object {
       },
       Object {
         "date": "2018-01-02",
-        "health_score": null,
+        "health_score": 0.8,
         "injections": null,
-        "weights": Array [
-          Object {
-            "weight": null,
-            "weight_type": "Hard Bounces",
-            "weight_value": null,
-          },
-          Object {
-            "weight": null,
-            "weight_type": "Complaints",
-            "weight_value": null,
-          },
-          Object {
-            "weight": null,
-            "weight_type": "Other bounces",
-            "weight_value": null,
-          },
-          Object {
-            "weight": null,
-            "weight_type": "Transient Failures",
-            "weight_value": null,
-          },
-          Object {
-            "weight": null,
-            "weight_type": "Block Bounces",
-            "weight_value": null,
-          },
-          Object {
-            "weight": null,
-            "weight_type": "List Quality",
-            "weight_value": null,
-          },
-          Object {
-            "weight": null,
-            "weight_type": "eng cohorts: new, 14-day",
-            "weight_value": null,
-          },
-          Object {
-            "weight": null,
-            "weight_type": "eng cohorts: unengaged",
-            "weight_value": null,
-          },
-        ],
+        "ranking": "good",
+        "weights": Array [],
       },
       Object {
         "WoW": null,
         "date": "2018-01-03",
         "health_score": 0.98,
         "injections": 35000,
+        "ranking": "good",
         "weights": Array [],
       },
     ],
@@ -1209,7 +1097,8 @@ Object {
   "data": Array [
     Object {
       "WoW": -7,
-      "average_health_score": 86.2,
+      "average_health_score": 84.1,
+      "current_DoD": 22.5,
       "current_health_score": 98,
       "current_weights": Array [],
       "history": Array [
@@ -1241,7 +1130,7 @@ Object {
         Object {
           "date": "2018-01-01",
           "health_score": 74.3,
-          "ranking": "bad",
+          "ranking": "warning",
           "weights": Array [
             Object {
               "weight": 0.5,
@@ -1262,8 +1151,8 @@ Object {
         },
         Object {
           "date": "2018-01-02",
-          "health_score": null,
-          "ranking": null,
+          "health_score": 80,
+          "ranking": "good",
         },
         Object {
           "WoW": null,
@@ -1284,7 +1173,8 @@ exports[`Selectors: signals selectHealthScoreOverviewData returns data 1`] = `
 Array [
   Object {
     "WoW": -7,
-    "average_health_score": 86.2,
+    "average_health_score": 84.1,
+    "current_DoD": 22.5,
     "current_health_score": 98,
     "current_weights": Array [],
     "history": Array [
@@ -1316,7 +1206,7 @@ Array [
       Object {
         "date": "2018-01-01",
         "health_score": 74.3,
-        "ranking": "bad",
+        "ranking": "warning",
         "weights": Array [
           Object {
             "weight": 0.5,
@@ -1337,8 +1227,8 @@ Array [
       },
       Object {
         "date": "2018-01-02",
-        "health_score": null,
-        "ranking": null,
+        "health_score": 80,
+        "ranking": "good",
       },
       Object {
         "WoW": null,
@@ -1750,6 +1640,91 @@ Object {
         "injections": 35000,
         "relative_trap_hits": 0.001,
         "trap_hits": 35,
+      },
+    ],
+    "empty": false,
+    "error": null,
+    "loading": false,
+  },
+  "facet": "sending_domain",
+  "facetId": "test.com",
+  "subaccountId": "101",
+}
+`;
+
+exports[`Selectors: signals unsubscrite rate by cohort details should select details 1`] = `
+Object {
+  "details": Object {
+    "data": Array [
+      Object {
+        "date": "2017-12-27",
+        "p_14d_unsub": null,
+        "p_365d_unsub": null,
+        "p_90d_unsub": null,
+        "p_new_unsub": null,
+        "p_total_unsub": null,
+        "p_uneng_unsub": null,
+      },
+      Object {
+        "date": "2017-12-28",
+        "p_14d_unsub": null,
+        "p_365d_unsub": null,
+        "p_90d_unsub": null,
+        "p_new_unsub": null,
+        "p_total_unsub": null,
+        "p_uneng_unsub": null,
+      },
+      Object {
+        "date": "2017-12-29",
+        "p_14d_unsub": null,
+        "p_365d_unsub": null,
+        "p_90d_unsub": null,
+        "p_new_unsub": null,
+        "p_total_unsub": null,
+        "p_uneng_unsub": null,
+      },
+      Object {
+        "date": "2017-12-30",
+        "p_14d_unsub": null,
+        "p_365d_unsub": null,
+        "p_90d_unsub": null,
+        "p_new_unsub": null,
+        "p_total_unsub": null,
+        "p_uneng_unsub": null,
+      },
+      Object {
+        "date": "2017-12-31",
+        "p_14d_unsub": null,
+        "p_365d_unsub": null,
+        "p_90d_unsub": null,
+        "p_new_unsub": null,
+        "p_total_unsub": null,
+        "p_uneng_unsub": null,
+      },
+      Object {
+        "date": "2018-01-01",
+        "p_14d_unsub": 5,
+        "p_365d_unsub": 5,
+        "p_new_unsub": 5,
+        "p_total_unsub": 25,
+        "p_uneng_unsub": 5,
+      },
+      Object {
+        "date": "2018-01-02",
+        "p_14d_unsub": null,
+        "p_365d_unsub": null,
+        "p_90d_unsub": null,
+        "p_new_unsub": null,
+        "p_total_unsub": null,
+        "p_uneng_unsub": null,
+      },
+      Object {
+        "date": "2018-01-03",
+        "p_14d_unsub": 10,
+        "p_365d_unsub": 10,
+        "p_new_unsub": 10,
+        "p_total_unsub": 50,
+        "p_uneng_unsub": 10,
       },
     ],
     "empty": false,

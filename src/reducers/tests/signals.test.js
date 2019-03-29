@@ -1,23 +1,27 @@
 import cases from 'jest-in-case';
 import signalsReducer from '../signals';
 
-cases('Signals Reducer', ({ name, ...action }) => {
+cases('Signals Reducer', ({ name, key, ...action }) => {
   const nextState = signalsReducer(undefined, action);
-  expect(nextState).toMatchSnapshot();
+  const state = key ? nextState[key] : nextState;
+  expect(state).toMatchSnapshot();
 }, {
   'init': {
     type: '@@INIT'
   },
   'spam hits fail': {
+    key: 'spamHits',
     type: 'GET_SPAM_HITS_FAIL',
     payload: {
       error: new Error('Oh no!')
     }
   },
   'spam hits pending': {
+    key: 'spamHits',
     type: 'GET_SPAM_HITS_PENDING'
   },
   'spam hits success': {
+    key: 'spamHits',
     type: 'GET_SPAM_HITS_SUCCESS',
     payload: {
       data: [
@@ -27,15 +31,18 @@ cases('Signals Reducer', ({ name, ...action }) => {
     }
   },
   'engagment recency fail': {
+    key: 'engagementRecency',
     type: 'GET_ENGAGEMENT_RECENCY_FAIL',
     payload: {
       error: new Error('Oh no!')
     }
   },
   'engagment recency pending': {
+    key: 'engagementRecency',
     type: 'GET_ENGAGEMENT_RECENCY_PENDING'
   },
   'engagment recency success': {
+    key: 'engagementRecency',
     type: 'GET_ENGAGEMENT_RECENCY_SUCCESS',
     payload: {
       data: [
@@ -45,15 +52,18 @@ cases('Signals Reducer', ({ name, ...action }) => {
     }
   },
   'engagment rate by cohort fail': {
+    key: 'engagementRateByCohort',
     type: 'GET_ENGAGEMENT_RATE_BY_COHORT_FAIL',
     payload: {
       error: new Error('Oh no!')
     }
   },
   'engagment rate by cohort pending': {
+    key: 'engagementRateByCohort',
     type: 'GET_ENGAGEMENT_RATE_BY_COHORT_PENDING'
   },
   'engagment rate by cohort success': {
+    key: 'engagementRateByCohort',
     type: 'GET_ENGAGEMENT_RATE_BY_COHORT_SUCCESS',
     payload: {
       data: [
@@ -63,20 +73,54 @@ cases('Signals Reducer', ({ name, ...action }) => {
     }
   },
   'health score fail': {
+    key: 'healthScore',
     type: 'GET_HEALTH_SCORE_FAIL',
     payload: {
       error: new Error('Oh no!')
     }
   },
   'health score pending': {
+    key: 'healthScore',
     type: 'GET_HEALTH_SCORE_PENDING'
   },
   'health score success': {
+    key: 'healthScore',
     type: 'GET_HEALTH_SCORE_SUCCESS',
     payload: {
       data: [
         { 'sending-domain': 'example.com' }
       ],
+      total_count: 3
+    }
+  },
+  'injections fail': {
+    key: 'injections',
+    type: 'GET_INJECTIONS_FAIL',
+    payload: {
+      error: new Error('Oh no!')
+    }
+  },
+  'injections pending': {
+    key: 'injections',
+    type: 'GET_INJECTIONS_PENDING'
+  },
+  'injections success': {
+    key: 'injections',
+    type: 'GET_INJECTIONS_SUCCESS',
+    payload: {
+      data: [{
+        date: '2019-03-24',
+        injections: 75000000000,
+        spam_hits: 1
+      },{
+        date: '2019-03-25',
+        injections: 75000000000,
+        spam_hits: 1
+      },{
+        date: '2019-03-26',
+        injections: 75000000000,
+        spam_hits: 1
+      }],
       total_count: 3
     }
   }

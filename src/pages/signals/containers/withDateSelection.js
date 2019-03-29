@@ -4,14 +4,19 @@ import _ from 'lodash';
 
 export class WithDateSelection extends Component {
   state = {
-    selectedDate: null
+    selectedDate: null,
+    hoveredDate: null
   }
 
   componentDidMount() {
-    const { selected } = this.props;
+    const { selected, hovered } = this.props;
 
     if (selected) {
       this.setState({ selectedDate: selected });
+    }
+
+    if (hovered) {
+      this.setState({ hoveredDate: hovered });
     }
   }
 
@@ -33,12 +38,20 @@ export class WithDateSelection extends Component {
     this.setState({ selectedDate: _.get(node, 'payload.date') });
   }
 
+  handleDateHover = (node) => {
+    this.setState({ hoveredDate: _.get(node, 'payload.date') });
+  }
+
+  resetDateHover = () => {
+    this.setState({ hoveredDate: '' });
+  }
+
   render() {
-    const { component: WrappedComponent, selected, ...rest } = this.props;
-    const { selectedDate } = this.state;
+    const { component: WrappedComponent, selected, hovered, ...rest } = this.props;
+    const { selectedDate, hoveredDate } = this.state;
 
     return (
-      <WrappedComponent {...rest} selectedDate={selectedDate} handleDateSelect={this.handleDateSelect} />
+      <WrappedComponent {...rest} selectedDate={selectedDate} hoveredDate={hoveredDate} handleDateSelect={this.handleDateSelect} handleDateHover={this.handleDateHover} resetDateHover={this.resetDateHover}/>
     );
   }
 }

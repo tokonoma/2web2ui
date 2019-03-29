@@ -6,14 +6,27 @@ const initialDimensionState = {
 };
 
 const initialState = {
+  injections: initialDimensionState,
   spamHits: initialDimensionState,
   healthScore: initialDimensionState,
   engagementRecency: initialDimensionState,
-  engagementRateByCohort: initialDimensionState
+  engagementRateByCohort: initialDimensionState,
+  unsubscribeRateByCohort: initialDimensionState
 };
 
 const signalsReducer = (state = initialState, { type, payload, meta }) => {
   switch (type) {
+    case 'GET_INJECTIONS_FAIL':
+      return { ...state, injections: { ...initialDimensionState, error: payload.error, loading: false }};
+
+    case 'GET_INJECTIONS_PENDING':
+      return { ...state, injections: { ...initialDimensionState, loading: true }};
+
+    case 'GET_INJECTIONS_SUCCESS': {
+      const { data, total_count: totalCount } = payload;
+      return { ...state, injections: { ...initialDimensionState, data, loading: false, totalCount }};
+    }
+
     case 'GET_SPAM_HITS_FAIL':
       return { ...state, spamHits: { ...initialDimensionState, error: payload.error, loading: false }};
 
@@ -45,6 +58,17 @@ const signalsReducer = (state = initialState, { type, payload, meta }) => {
     case 'GET_ENGAGEMENT_RATE_BY_COHORT_SUCCESS': {
       const { data, total_count: totalCount } = payload;
       return { ...state, engagementRateByCohort: { ...initialDimensionState, data, loading: false, totalCount }};
+    }
+
+    case 'GET_UNSUBSCRIBE_RATE_BY_COHORT_FAIL':
+      return { ...state, unsubscribeRateByCohort: { ...initialDimensionState, error: payload.error, loading: false }};
+
+    case 'GET_UNSUBSCRIBE_RATE_BY_COHORT_PENDING':
+      return { ...state, unsubscribeRateByCohort: { ...initialDimensionState, loading: true }};
+
+    case 'GET_UNSUBSCRIBE_RATE_BY_COHORT_SUCCESS': {
+      const { data, total_count: totalCount } = payload;
+      return { ...state, unsubscribeRateByCohort: { ...initialDimensionState, data, loading: false, totalCount }};
     }
 
     case 'GET_HEALTH_SCORE_FAIL':
