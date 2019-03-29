@@ -24,7 +24,7 @@ exports[`Signals Health Score Gauge SVG renders correct color 1`] = `
       <path
         className="Yellow"
         d="M58.3 17.3c16.2 2.8 29.2 14 34.2 29.7-.3.1-2 .8-2.8 1.1l-2.8 1.1c-4.3-13.6-15.7-23.6-29.7-26.1l1.1-5.8z"
-        fill="#e6b400"
+        fill="#E6B400"
       />
       <path
         className="Green"

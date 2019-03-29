@@ -106,8 +106,6 @@ exports[`Signals Health Score Chart renders happy path correctly 1`] = `
         Object {
           "ticks": Array [
             0,
-            20,
-            40,
             55,
             80,
             100,
@@ -117,12 +115,12 @@ exports[`Signals Health Score Chart renders happy path correctly 1`] = `
       yAxisRefLines={
         Array [
           Object {
-            "stroke": "green",
+            "stroke": "#2CC995",
             "strokeWidth": 1,
             "y": 80,
           },
           Object {
-            "stroke": "red",
+            "stroke": "#FF594D",
             "strokeWidth": 1,
             "y": 55,
           },
@@ -139,24 +137,9 @@ exports[`Signals Health Score Chart renders happy path correctly 1`] = `
     <div
       className="Metrics"
     >
-      <div
-        className="Injections"
-      >
-        <MetricDisplay
-          label="Injections"
-          value="n/a"
-        />
-      </div>
-      <div
-        className="DoDChange"
-      >
-        <MetricDisplay
-          label="DoD Change"
-          value="n/a"
-        />
-      </div>
-      <div
-        className="Divider"
+      <MetricDisplay
+        label="Total Injections"
+        value="225B"
       />
       <MetricDisplay
         label="High"
@@ -173,17 +156,15 @@ exports[`Signals Health Score Chart renders happy path correctly 1`] = `
 
 exports[`Signals Health Score Chart renders metric displays 1`] = `
 <MetricDisplay
-  label="Injections"
-  value="75B"
+  label="Total Injections"
+  value="225B"
 />
 `;
 
 exports[`Signals Health Score Chart renders metric displays 2`] = `
 <MetricDisplay
-  color="#FF594D"
-  direction="down"
-  label="DoD Change"
-  value="-76%"
+  label="High"
+  value={96}
 />
 `;
 

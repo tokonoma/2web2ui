@@ -121,7 +121,7 @@ export class EngagementRateByCohortPage extends Component {
     return (
       <Page
         breadcrumbAction={{ content: 'Back to Overview', to: '/signals', component: Link }}
-        dimensionPrefix='Engagement Rate by Cohort for'
+        dimensionPrefix='Engagement Rate by Cohort'
         facet={facet}
         facetId={facetId}
         subaccountId={subaccountId}

@@ -9,7 +9,8 @@ const OtherChartsHeader = ({ facet, facetId, subaccountId }) => (
         prefix: 'Other charts for',
         facet,
         facetId,
-        subaccountId
+        subaccountId,
+        dimension: false
       })}
     </h2>
     <hr className={styles.Line} />

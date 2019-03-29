@@ -121,7 +121,7 @@ export class UnsubscribeRateByCohortPage extends Component {
     return (
       <Page
         breadcrumbAction={{ content: 'Back to Overview', to: '/signals', component: Link }}
-        dimensionPrefix='Unsubscribe Rate by Cohort for'
+        dimensionPrefix='Unsubscribe Rate by Cohort'
         facet={facet}
         facetId={facetId}
         subaccountId={subaccountId}

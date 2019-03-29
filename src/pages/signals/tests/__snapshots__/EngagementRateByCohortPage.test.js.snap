@@ -59,7 +59,7 @@ exports[`Signals Engagement Rate By Cohort Page renders correctly 1`] = `
       "to": "/signals",
     }
   }
-  dimensionPrefix="Engagement Rate by Cohort for"
+  dimensionPrefix="Engagement Rate by Cohort"
   facet="sending-domain"
   facetId="test.com"
   primaryArea={<Connect(DateFilter) />}
@@ -272,7 +272,7 @@ exports[`Signals Engagement Rate By Cohort Page renders error correctly 1`] = `
       "to": "/signals",
     }
   }
-  dimensionPrefix="Engagement Rate by Cohort for"
+  dimensionPrefix="Engagement Rate by Cohort"
   facet="sending-domain"
   facetId="test.com"
   primaryArea={<Connect(DateFilter) />}
