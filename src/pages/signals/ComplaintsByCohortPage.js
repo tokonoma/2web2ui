@@ -93,7 +93,7 @@ export class ComplaintsByCohortPage extends Component {
                   lines={data}
                   tooltipWidth='250px'
                   tooltipContent={this.getTooltipContent}
-                  yKeys={_.keys(cohorts).map((key) => ({ key: `p_${key}_fbl`, ...cohorts[key] })).reverse()}
+                  yKeys={_.keys(cohorts).map((key) => ({ key: `p_${key}_fbl`, ...cohorts[key] }))}
                   yAxisProps={this.getYAxisProps()}
                   xAxisProps={this.getXAxisProps()}
                 />

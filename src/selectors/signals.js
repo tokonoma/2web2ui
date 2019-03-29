@@ -200,7 +200,7 @@ export const selectComplaintsByCohortDetails = createSelector(
       now,
       relativeRange
     });
-    console.log(data)
+
     const isEmpty = filledHistory.every((values) => _.isNil(values.p_total_fbl));
 
     return {
