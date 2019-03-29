@@ -1,24 +1,20 @@
 /* eslint-disable max-lines */
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Panel, Grid } from '@sparkpost/matchbox';
-import BarChart from './components/charts/barchart/BarChart';
+import LineChart from './components/charts/linechart/LineChart';
+import Legend from './components/charts/legend/Legend';
 import Callout from 'src/components/callout';
-import ChartHeader from './components/ChartHeader';
 import DateFilter from './components/filters/DateFilter';
 import EngagementRecencyActions from './components/actionContent/EngagementRecencyActions';
-import Legend from './components/charts/legend/Legend';
 import OtherChartsHeader from './components/OtherChartsHeader';
 import Page from './components/SignalsPage';
 import Tabs from './components/engagement/Tabs';
 import TooltipMetric from './components/charts/tooltip/TooltipMetric';
-import withEngagementRecencyDetails from './containers/EngagementRecencyDetailsContainer';
+import withUnsubscribeRateByCohortDetails from './containers/UnsubscribeRateByCohortDetailsContainer';
 import withDateSelection from './containers/withDateSelection';
-import { ENGAGEMENT_RECENCY_COHORTS, ENGAGEMENT_RECENCY_INFO } from './constants/info';
-import { AccessControl } from 'src/components/auth';
+import { ENGAGEMENT_RECENCY_COHORTS } from './constants/info';
 import { Loading } from 'src/components';
-import { hasUiOption } from 'src/helpers/conditions/account';
-import { not } from 'src/helpers/conditions';
 import { roundToPlaces } from 'src/helpers/units';
 import moment from 'moment';
 import _ from 'lodash';
@@ -28,12 +24,10 @@ import HealthScorePreview from './components/previews/HealthScorePreview';
 import cohorts from './constants/cohorts';
 import styles from './DetailsPages.module.scss';
 
-export class EngagementRecencyPage extends Component {
+export class UnsubscribeRateByCohortPage extends Component {
 
   getYAxisProps = () => ({
-    tickFormatter: (tick) => `${roundToPlaces(tick * 100, 0)}%`,
-    domain: [0, 1],
-    ticks: [0, 0.25, 0.5, 0.75, 1.0]
+    tickFormatter: (tick) => `${roundToPlaces(tick * 100, 0)}%`
   })
 
   getXAxisProps = () => {
@@ -44,22 +38,29 @@ export class EngagementRecencyPage extends Component {
     };
   }
 
-  getTooltipContent = ({ payload = {}}) => (
-    <Fragment>
-      {_.keys(cohorts).map((key) => (
-        <TooltipMetric
-          key={key}
-          color={cohorts[key].fill}
-          label={cohorts[key].label}
-          description={cohorts[key].description}
-          value={`${roundToPlaces(payload[`c_${key}`] * 100, 1)}%`}
-        />
-      ))}
-    </Fragment>
-  )
+  getTooltipContent = ({ payload = {}}) => {
+    const metrics = _.keys(cohorts).reduce((acc, key) => ([ ...acc, {
+      ...cohorts[key], key,
+      value: payload[`p_${key}_unsub`]
+    }]), []);
+
+    return (
+      <>
+        {_.orderBy(metrics, 'value', 'desc').map((metric) => (
+          <TooltipMetric
+            key={metric.key}
+            color={metric.fill}
+            label={metric.label}
+            description={metric.description}
+            value={`${roundToPlaces(metric.value * 100, 1)}%`}
+          />
+        ))}
+      </>
+    );
+  }
 
   renderContent = () => {
-    const { data = [], empty, error, facet, facetId, gap, handleDateSelect, loading, selectedDate, subaccountId } = this.props;
+    const { data = [], facet, facetId, handleDateSelect, loading, empty, error, selectedDate, subaccountId } = this.props;
     const selectedCohorts = _.find(data, ['date', selectedDate]) || {};
     let chartPanel;
 
@@ -82,26 +83,18 @@ export class EngagementRecencyPage extends Component {
     return (
       <Grid>
         <Grid.Column sm={12} md={7}>
-          <AccessControl condition={hasUiOption('feature_signals_v2')}>
-            <Tabs facet={facet} facetId={facetId} subaccountId={subaccountId} />
-          </AccessControl>
+          <Tabs facet={facet} facetId={facetId} subaccountId={subaccountId} />
           <Panel sectioned>
-            <AccessControl condition={not(hasUiOption('feature_signals_v2'))}>
-              <ChartHeader
-                title='Engagement Recency'
-                tooltipContent={ENGAGEMENT_RECENCY_INFO}
-              />
-            </AccessControl>
             {chartPanel || (
               <div className='LiftTooltip'>
-                <BarChart
-                  gap={gap}
+                <LineChart
+                  height={300}
                   onClick={handleDateSelect}
                   selected={selectedDate}
-                  timeSeries={data}
-                  tooltipContent={this.getTooltipContent}
+                  lines={data}
                   tooltipWidth='250px'
-                  yKeys={_.keys(cohorts).map((key) => ({ key: `c_${key}`, ...cohorts[key] })).reverse()}
+                  tooltipContent={this.getTooltipContent}
+                  yKeys={_.keys(cohorts).map((key) => ({ key: `p_${key}_unsub`, ...cohorts[key] })).reverse()}
                   yAxisProps={this.getYAxisProps()}
                   xAxisProps={this.getXAxisProps()}
                 />
@@ -128,7 +121,7 @@ export class EngagementRecencyPage extends Component {
     return (
       <Page
         breadcrumbAction={{ content: 'Back to Overview', to: '/signals', component: Link }}
-        dimensionPrefix='Engagement Recency for'
+        dimensionPrefix='Unsubscribe Rate by Cohort for'
         facet={facet}
         facetId={facetId}
         subaccountId={subaccountId}
@@ -148,4 +141,4 @@ export class EngagementRecencyPage extends Component {
   }
 }
 
-export default withEngagementRecencyDetails(withDateSelection(EngagementRecencyPage));
+export default withUnsubscribeRateByCohortDetails(withDateSelection(UnsubscribeRateByCohortPage));
