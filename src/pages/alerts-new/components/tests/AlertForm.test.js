@@ -123,9 +123,9 @@ describe('Alert Form Component', () => {
 
     it('should validate target when alert_metric is set to signals_health_dod or signals_health_wow', () => {
       wrapper.setProps({ alert_metric: 'signals_health_wow' });
-      expect(wrapper.find({ name: 'threshold.error.target' }).props().validate()).toEqual('Required');
+      expect(wrapper.find({ name: 'threshold.error.target' }).props().validate[1]()).toEqual('Integers only please');
       wrapper.setProps({ alert_metric: 'signals_health_dod' });
-      expect(wrapper.find({ name: 'threshold.error.target' }).props().validate()).toEqual('Required');
+      expect(wrapper.find({ name: 'threshold.error.target' }).props().validate[1]()).toEqual('Integers only please');
     });
   });
 
