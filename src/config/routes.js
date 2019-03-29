@@ -289,7 +289,7 @@ const routes = [
   {
     path: '/signals/engagement/engagement-rate/:facet/:facetId',
     component: signals.EngagementRateByCohortPage,
-    condition: all(hasGrants('signals/manage'), hasUiOption('feature_signals_v2')),
+    condition: all(hasGrants('signals/manage')),
     layout: App,
     title: 'Signals',
     supportDocSearch: 'signals'
@@ -297,15 +297,15 @@ const routes = [
   {
     path: '/signals/engagement/unsubscribes/:facet/:facetId',
     component: signals.UnsubscribeRateByCohortPage,
-    condition: all(hasGrants('signals/manage'), hasUiOption('feature_signals_v2')),
+    condition: all(hasGrants('signals/manage')),
     layout: App,
     title: 'Signals',
     supportDocSearch: 'signals'
   },
   {
     path: '/signals/engagement/complaints/:facet/:facetId',
-    component: signals.EngagementRecencyPage,
-    condition: all(hasGrants('signals/manage'), hasUiOption('feature_signals_v2')),
+    component: signals.ComplaintsByCohortPage,
+    condition: all(hasGrants('signals/manage')),
     layout: App,
     title: 'Signals',
     supportDocSearch: 'signals'

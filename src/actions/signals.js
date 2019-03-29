@@ -71,6 +71,11 @@ export const getUnsubscribeRateByCohort = signalsActionCreator({
   type: 'GET_UNSUBSCRIBE_RATE_BY_COHORT'
 });
 
+export const getComplaintsByCohort = signalsActionCreator({
+  dimension: 'fbl-cohort',
+  type: 'GET_COMPLAINTS_BY_COHORT'
+});
+
 export const getHealthScore = signalsActionCreator({
   dimension: 'health-score',
   type: 'GET_HEALTH_SCORE'

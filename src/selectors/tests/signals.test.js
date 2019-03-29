@@ -159,6 +159,34 @@ describe('Selectors: signals', () => {
           loading: false,
           error: null
         },
+        complaintsByCohort: {
+          total_count: 10,
+          data: [
+            {
+              sending_domain: 'test.com',
+              history: [
+                {
+                  p_total_fbl: .25,
+                  p_new_fbl: .5,
+                  p_uneng_fbl: .5,
+                  p_14d_fbl: .5,
+                  p_365d_fbl: .5,
+                  dt: '2018-01-01'
+                },
+                {
+                  p_total_fbl: .5,
+                  p_new_fbl: .1,
+                  p_uneng_fbl: .1,
+                  p_14d_fbl: .1,
+                  p_365d_fbl: .1,
+                  dt: '2018-01-03'
+                }
+              ]
+            }
+          ],
+          loading: false,
+          error: null
+        },
         healthScore: {
           total_count: 10,
           data: [
@@ -255,7 +283,7 @@ describe('Selectors: signals', () => {
     });
   });
 
-  describe('unsubscrite rate by cohort details', () => {
+  describe('unsubscribe rate by cohort details', () => {
     it('should select details', () => {
       expect(selectors.selectUnsubscribeRateByCohortDetails(state, props)).toMatchSnapshot();
     });
@@ -268,6 +296,22 @@ describe('Selectors: signals', () => {
     it('should not be empty when loading', () => {
       const stateWhenLoading = { ...state, signals: { unsubscribeRateByCohort: { data: [], loading: true }}};
       expect(selectors.selectUnsubscribeRateByCohortDetails(stateWhenLoading, props).details.empty).toBe(false);
+    });
+  });
+
+  describe('complaints by cohort details', () => {
+    it('should select details', () => {
+      expect(selectors.selectComplaintsByCohortDetails(state, props)).toMatchSnapshot();
+    });
+
+    it('should be empty with only fill data when not loading', () => {
+      const stateWhenEmpty = { ...state, signals: { complaintsByCohort: { data: [], loading: false }}};
+      expect(selectors.selectComplaintsByCohortDetails(stateWhenEmpty, props).details.empty).toBe(true);
+    });
+
+    it('should not be empty when loading', () => {
+      const stateWhenLoading = { ...state, signals: { complaintsByCohort: { data: [], loading: true }}};
+      expect(selectors.selectComplaintsByCohortDetails(stateWhenLoading, props).details.empty).toBe(false);
     });
   });
 
