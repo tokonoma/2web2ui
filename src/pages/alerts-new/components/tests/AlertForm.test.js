@@ -127,6 +127,13 @@ describe('Alert Form Component', () => {
       wrapper.setProps({ alert_metric: 'signals_health_dod' });
       expect(wrapper.find({ name: 'threshold.error.target' }).props().validate[1]()).toEqual('Integers only please');
     });
+
+    it('should normalize target', () => {
+      const normalize = wrapper.find({ name: 'threshold.error.target' }).props().normalize;
+      expect(normalize(1, null, { alert_metric: 'signals_health_wow' })).toEqual(-1);
+      expect(normalize(-1, null, { alert_metric: 'signals_health_wow' })).toEqual(-1);
+      expect(normalize(1, null, { alert_metric: 'monthly_sending_limit' })).toEqual(1);
+    });
   });
 
   describe('enabled prop', () => {
