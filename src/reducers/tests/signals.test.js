@@ -94,15 +94,18 @@ cases('Signals Reducer', ({ name, key, ...action }) => {
     }
   },
   'injections fail': {
+    key: 'injections',
     type: 'GET_INJECTIONS_FAIL',
     payload: {
       error: new Error('Oh no!')
     }
   },
   'injections pending': {
+    key: 'injections',
     type: 'GET_INJECTIONS_PENDING'
   },
   'injections success': {
+    key: 'injections',
     type: 'GET_INJECTIONS_SUCCESS',
     payload: {
       data: [{
