@@ -116,8 +116,10 @@ export class AlertForm extends Component {
     };
 
     const negPercentNormalizer = (value, previousValue, values) => {
-      if ((values.alert_metric === 'signals_health_dod') || ('signals_health_wow')) {
+      if ((values.alert_metric === 'signals_health_dod') || (values.alert_metric === 'signals_health_wow')) {
         return (value > 0) ? value * (-1) : value;
+      } else {
+        return value;
       }
     };
 
