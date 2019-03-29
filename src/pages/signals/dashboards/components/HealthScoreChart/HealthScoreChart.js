@@ -10,20 +10,20 @@ import { PanelLoading } from 'src/components';
 import Callout from 'src/components/callout';
 import MetricDisplay from '../MetricDisplay/MetricDisplay';
 import { HEALTH_SCORE_INFO } from '../../../constants/info';
-import { roundToPlaces } from 'src/helpers/units';
+import { formatNumber, roundToPlaces } from 'src/helpers/units';
 import { getDateTicks } from 'src/helpers/date';
 import moment from 'moment';
 import _ from 'lodash';
 import styles from './HealthScoreChart.module.scss';
 
 export function HealthScoreChart(props) {
-  const [hoveredDate, setHovered] = useState();
+  const [hoveredDate, setHovered] = useState(props.defaultHovered);
 
   function handleDateHover(props) {
     setHovered(props.date);
   }
 
-  const { data, loading, error, filters } = props;
+  const { data, loading, error, filters, injections } = props;
   const accountData = _.find(data, ['sid', -1]) || {};
   const noData = (accountData.history) ? !_.some(getHealthScores(accountData)) : true;
   const lastItem = _.last(accountData.history) || {};
@@ -56,6 +56,12 @@ export function HealthScoreChart(props) {
       ticks: xTicks,
       tickFormatter: (tick) => moment(tick).format('M/D')
     };
+  }
+
+  function getHoverInjectionProps() {
+    const currentEntry = _.find(injections.data, ['dt', hoveredDate]);
+    const value = (currentEntry) ? currentEntry.injections : null;
+    return { value: _.isNil(value) ? 'n/a' : formatNumber(value) };
   }
 
   function getHoverDoDProps() {
@@ -120,6 +126,9 @@ export function HealthScoreChart(props) {
           </Fragment>
         )}
         <div className={styles.Metrics}>
+          <div className={styles.Injections}>
+            <MetricDisplay label='Injections' {...getHoverInjectionProps()} />
+          </div>
           <div className={styles.DoDChange}>
             <MetricDisplay label='DoD Change' {...getHoverDoDProps()} />
           </div>

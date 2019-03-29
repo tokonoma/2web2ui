@@ -1,14 +1,31 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 import { HealthScoreChart } from '../HealthScoreChart';
+Date.now = jest.fn(() => 1553699129000);
 
 describe('Signals Health Score Chart', () => {
-  let props; let subject;
+  let props;
+  let subject;
 
   beforeEach(() => {
     props = {
       loading: false,
       error: null,
+      injections: {
+        data: [{
+          dt: '2019-03-24',
+          injections: 75000000000,
+          spam_hits: 1
+        },{
+          dt: '2019-03-25',
+          injections: 75000000000,
+          spam_hits: 1
+        },{
+          dt: '2019-03-26',
+          injections: 75000000000,
+          spam_hits: 1
+        }]
+      },
       data: [{
         sid: -1,
         current_health_score: 88,
@@ -26,7 +43,7 @@ describe('Signals Health Score Chart', () => {
           health_score: 23,
           ranking: 'danger'
         },{
-          date: '2019-03-25',
+          date: '2019-03-27',
           health_score: null,
           ranking: null
         }]
@@ -61,8 +78,9 @@ describe('Signals Health Score Chart', () => {
     expect(wrapper.find('Callout')).toMatchSnapshot();
   });
 
-  it('renders yesterday as selected date if one is missing', () => {
-    props.data[0].history = [];
-    expect(subject(props)).toMatchSnapshot();
+  it('renders metric displays', () => {
+    const wrapper = subject({ defaultHovered: '2019-03-26' });
+    expect(wrapper.find('MetricDisplay').at(0)).toMatchSnapshot();
+    expect(wrapper.find('MetricDisplay').at(1)).toMatchSnapshot();
   });
 });

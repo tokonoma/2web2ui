@@ -92,5 +92,36 @@ cases('Signals Reducer', ({ name, key, ...action }) => {
       ],
       total_count: 3
     }
+  },
+  'injections fail': {
+    key: 'injections',
+    type: 'GET_INJECTIONS_FAIL',
+    payload: {
+      error: new Error('Oh no!')
+    }
+  },
+  'injections pending': {
+    key: 'injections',
+    type: 'GET_INJECTIONS_PENDING'
+  },
+  'injections success': {
+    key: 'injections',
+    type: 'GET_INJECTIONS_SUCCESS',
+    payload: {
+      data: [{
+        date: '2019-03-24',
+        injections: 75000000000,
+        spam_hits: 1
+      },{
+        date: '2019-03-25',
+        injections: 75000000000,
+        spam_hits: 1
+      },{
+        date: '2019-03-26',
+        injections: 75000000000,
+        spam_hits: 1
+      }],
+      total_count: 3
+    }
   }
 });

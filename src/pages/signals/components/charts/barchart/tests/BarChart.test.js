@@ -90,6 +90,8 @@ describe('BarChart Component', () => {
 
   it('should display y reference lines', () => {
     wrapper.setProps({ yAxisRefLines: [{ y: 80, stroke: 'green', strokeWidth: 2 }, { y: 55, stroke: 'red', strokeWidth: 2 }]});
-    expect(wrapper).toMatchSnapshot();
+    wrapper.find('ReferenceLine').forEach((line) => {
+      expect(line).toMatchSnapshot();
+    });
   });
 });

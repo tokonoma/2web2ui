@@ -1,6 +1,5 @@
 import { snapshotActionCases } from 'src/__testHelpers__/snapshotActionHelpers';
 import * as actions from '../signals';
-
 jest.mock('src/actions/helpers/sparkpostApiRequest');
 jest.mock('src/helpers/date', () => ({
   formatInputDate: (d) => d,
@@ -69,6 +68,12 @@ describe('Signals Actions', () => {
   snapshotActionCases('.getHealthScore', {
     'by default': {
       action: () => actions.getHealthScore({ ...requiredOptions })
+    }
+  });
+
+  snapshotActionCases('.getInjections', {
+    'by default': {
+      action: () => actions.getInjections({ ...requiredOptions })
     }
   });
 });
