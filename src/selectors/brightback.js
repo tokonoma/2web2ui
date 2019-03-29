@@ -24,9 +24,9 @@ export const selectBrightbackData = (state, { urls = {}}) => {
     account: {
       created_at: new Date(created).getTime(),
       internal_id: customer_id,
-      recurring_charge,
       company_name
     },
+    value: recurring_charge,
     email
   };
 };
