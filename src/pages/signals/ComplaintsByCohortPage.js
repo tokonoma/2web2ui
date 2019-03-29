@@ -1,4 +1,3 @@
-/* eslint-disable max-lines */
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Panel, Grid } from '@sparkpost/matchbox';
@@ -6,7 +5,6 @@ import LineChart from './components/charts/linechart/LineChart';
 import Legend from './components/charts/legend/Legend';
 import Callout from 'src/components/callout';
 import DateFilter from './components/filters/DateFilter';
-import EngagementRecencyActions from './components/actionContent/EngagementRecencyActions';
 import OtherChartsHeader from './components/OtherChartsHeader';
 import Page from './components/SignalsPage';
 import Tabs from './components/engagement/Tabs';
@@ -22,7 +20,6 @@ import _ from 'lodash';
 import SpamTrapsPreview from './components/previews/SpamTrapsPreview';
 import HealthScorePreview from './components/previews/HealthScorePreview';
 import cohorts from './constants/cohorts';
-import styles from './DetailsPages.module.scss';
 
 export class ComplaintsByCohortPage extends Component {
   getYAxisProps = () => {
@@ -30,7 +27,7 @@ export class ComplaintsByCohortPage extends Component {
     return {
       domain: data.every(({ p_total_fbl }) => !p_total_fbl) ? [0, 1] : ['auto', 'auto'],
       tickFormatter: (tick) => `${roundToPlaces(tick * 100, 0)}%`
-    }
+    };
   }
 
   getXAxisProps = () => {
@@ -64,7 +61,6 @@ export class ComplaintsByCohortPage extends Component {
 
   renderContent = () => {
     const { data = [], facet, facetId, handleDateSelect, loading, empty, error, selectedDate, subaccountId } = this.props;
-    const selectedCohorts = _.find(data, ['date', selectedDate]) || {};
     let chartPanel;
 
     if (empty) {

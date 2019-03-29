@@ -214,21 +214,7 @@ exports[`Signals Engagement Rate By Cohort Page renders correctly 1`] = `
       md={5}
       mdOffset={0}
       sm={12}
-    >
-      <div
-        className="OffsetCol"
-      >
-        <EngagementRecencyActions
-          cohorts={
-            Object {
-              "c_total": 10,
-              "date": "2017-01-02",
-            }
-          }
-          date="2017-01-02"
-        />
-      </div>
-    </Grid.Column>
+    />
   </Grid>
   <OtherChartsHeader
     facet="sending-domain"
@@ -300,11 +286,7 @@ exports[`Signals Engagement Rate By Cohort Page renders error correctly 1`] = `
       md={5}
       mdOffset={0}
       sm={12}
-    >
-      <div
-        className="OffsetCol"
-      />
-    </Grid.Column>
+    />
   </Grid>
   <OtherChartsHeader
     facet="sending-domain"
