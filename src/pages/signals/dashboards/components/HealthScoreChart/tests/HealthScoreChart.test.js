@@ -1,9 +1,11 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 import { HealthScoreChart } from '../HealthScoreChart';
+Date.now = jest.fn(() => 1487076708000);
 
 describe('Signals Health Score Chart', () => {
-  let props; let subject;
+  let props;
+  let subject;
 
   beforeEach(() => {
     props = {

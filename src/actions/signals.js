@@ -76,17 +76,17 @@ export const getSpamHits = signalsActionCreator({
   type: 'GET_SPAM_HITS'
 });
 
-const signalsInjectionsActionCreator = ({ dimension, type }) => ({
+export const getInjections = ({
   relativeRange
 }) => {
   const { from , to } = getRelativeDates(relativeRange, { now: moment().subtract(1, 'day') });
 
   return sparkpostApiRequest({
-    type,
+    type: 'GET_INJECTIONS',
     meta: {
       method: 'GET',
       headers: {},
-      url: `/v1/signals/${dimension}`,
+      url: '/v1/signals/injections',
       showErrorAlert: false,
       params: {
         from: formatInputDate(from),
@@ -95,8 +95,3 @@ const signalsInjectionsActionCreator = ({ dimension, type }) => ({
     }
   });
 };
-
-export const getInjections = signalsInjectionsActionCreator({
-  dimension: 'injections',
-  type: 'GET_INJECTIONS'
-});
