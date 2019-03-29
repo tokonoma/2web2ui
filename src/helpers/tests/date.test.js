@@ -316,7 +316,8 @@ describe('Date helpers', () => {
 
   describe('getDateTicks', () => {
     it('returns an array of start, end and middle days', () => {
-      expect(getDateTicks('14days')).toMatchSnapshot();
+      const now = moment('2018-02-02');
+      expect(getDateTicks('14days', now)).toMatchSnapshot();
     });
   });
 });

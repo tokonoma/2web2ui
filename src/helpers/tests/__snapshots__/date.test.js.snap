@@ -39,8 +39,8 @@ Array [
 
 exports[`Date helpers getDateTicks returns an array of start, end and middle days 1`] = `
 Array [
-  "2017-12-02",
-  "2017-12-09",
-  "2017-12-16",
+  "2018-01-18",
+  "2018-01-25",
+  "2018-02-01",
 ]
 `;
