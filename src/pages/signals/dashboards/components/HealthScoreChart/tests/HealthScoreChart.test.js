@@ -11,19 +11,21 @@ describe('Signals Health Score Chart', () => {
     props = {
       loading: false,
       error: null,
-      injections: [{
-        date: '2019-03-24',
-        injections: 75000000000,
-        spam_hits: 1
-      },{
-        date: '2019-03-25',
-        injections: 75000000000,
-        spam_hits: 1
-      },{
-        date: '2019-03-26',
-        injections: 75000000000,
-        spam_hits: 1
-      }],
+      injections: {
+        data: [{
+          dt: '2019-03-24',
+          injections: 75000000000,
+          spam_hits: 1
+        },{
+          dt: '2019-03-25',
+          injections: 75000000000,
+          spam_hits: 1
+        },{
+          dt: '2019-03-26',
+          injections: 75000000000,
+          spam_hits: 1
+        }]
+      },
       data: [{
         sid: -1,
         current_health_score: 88,
@@ -74,5 +76,11 @@ describe('Signals Health Score Chart', () => {
     props.data = [];
     const wrapper = subject(props);
     expect(wrapper.find('Callout')).toMatchSnapshot();
+  });
+
+  it('renders metric displays', () => {
+    const wrapper = subject({ defaultHovered: '2019-03-26' });
+    expect(wrapper.find('MetricDisplay').at(0)).toMatchSnapshot();
+    expect(wrapper.find('MetricDisplay').at(1)).toMatchSnapshot();
   });
 });

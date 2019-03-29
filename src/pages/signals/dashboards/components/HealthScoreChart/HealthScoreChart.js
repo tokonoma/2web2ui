@@ -10,14 +10,14 @@ import { PanelLoading } from 'src/components';
 import Callout from 'src/components/callout';
 import MetricDisplay from '../MetricDisplay/MetricDisplay';
 import { HEALTH_SCORE_INFO } from '../../../constants/info';
-import { roundToPlaces } from 'src/helpers/units';
+import { formatNumber, roundToPlaces } from 'src/helpers/units';
 import { getDateTicks } from 'src/helpers/date';
 import moment from 'moment';
 import _ from 'lodash';
 import styles from './HealthScoreChart.module.scss';
 
 export function HealthScoreChart(props) {
-  const [hoveredDate, setHovered] = useState();
+  const [hoveredDate, setHovered] = useState(props.defaultHovered);
 
   function handleDateHover(props) {
     setHovered(props.date);
@@ -61,16 +61,7 @@ export function HealthScoreChart(props) {
   function getHoverInjectionProps() {
     const currentEntry = _.find(injections.data, ['dt', hoveredDate]);
     const value = (currentEntry) ? currentEntry.injections : null;
-    return { value: _.isNil(value) ? 'n/a' : bFormatter(value) };
-  }
-
-  function bFormatter(num) {
-    switch (true) {
-      case (num > 999999999): return `${(num / 1000000000).toFixed(1)}B`;
-      case (num > 999999): return `${(num / 1000000).toFixed(1)}M`;
-      case (num > 999): return `${(num / 1000).toFixed(1)}K`;
-      default: return num;
-    }
+    return { value: _.isNil(value) ? 'n/a' : formatNumber(value) };
   }
 
   function getHoverDoDProps() {

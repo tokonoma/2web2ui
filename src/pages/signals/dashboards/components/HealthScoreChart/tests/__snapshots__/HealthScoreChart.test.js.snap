@@ -171,6 +171,22 @@ exports[`Signals Health Score Chart renders happy path correctly 1`] = `
 </Panel>
 `;
 
+exports[`Signals Health Score Chart renders metric displays 1`] = `
+<MetricDisplay
+  label="Injections"
+  value="75B"
+/>
+`;
+
+exports[`Signals Health Score Chart renders metric displays 2`] = `
+<MetricDisplay
+  color="#FF594D"
+  direction="down"
+  label="DoD Change"
+  value="-76%"
+/>
+`;
+
 exports[`Signals Health Score Chart renders no account level data callout correctly 1`] = `
 <Callout
   height="auto"
