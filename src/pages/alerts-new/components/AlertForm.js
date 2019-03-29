@@ -110,8 +110,8 @@ export class AlertForm extends Component {
       switch (alert_metric) {
         case 'signals_health_threshold': return '';
         case 'monthly_sending_limit': return 'Above';
-        case 'signals_health_dod': return 'Drops Below';
-        case 'signals_health_wow': return 'Drops Below';
+        case 'signals_health_day_over_day':
+        case 'signals_health_week_over_week': return 'Drops Below';
       }
     };
 
