@@ -2,7 +2,10 @@ import { mount, shallow } from 'enzyme';
 import React from 'react';
 import { HealthScoreDashboard } from '../HealthScoreDashboard';
 
-// Going to great lengths to use hooks
+// Child components are mocked because
+// 1. useEffect requires enzyme mount to test
+// 2. child components are connected to redux
+// This avoids setting up a mock store
 jest.mock('../../containers/HealthScoreOverviewContainer');
 jest.mock('../components/CurrentHealthGauge/CurrentHealthGauge');
 jest.mock('../components/HealthScoreChart/HealthScoreChart');

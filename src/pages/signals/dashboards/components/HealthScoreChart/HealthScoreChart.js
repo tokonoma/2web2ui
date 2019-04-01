@@ -157,7 +157,8 @@ export function HealthScoreChart(props) {
 
 const mapStateToProps = (state) => ({
   filters: state.signalOptions,
-  ...selectCurrentHealthScoreDashboard(state)
+  ...selectCurrentHealthScoreDashboard(state),
+  injections: _.get(state, 'signals.injections', {})
 });
 
 export default connect(mapStateToProps, {})(HealthScoreChart);
