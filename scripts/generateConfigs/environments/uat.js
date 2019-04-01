@@ -7,6 +7,9 @@ const uatEnvironment = {
     algolia: {
       index: 'development_site_posts_support_article'
     }
+  },
+  brightback: {
+    enabled: false
   }
 };
 

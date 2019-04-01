@@ -77,6 +77,9 @@ Object {
       "cnameValue": "mtaspc.mail.e.tst.sparkpost.com",
       "mxValue": "mtaspc.mx.e.tst.sparkpost.com",
     },
+    "brightback": Object {
+      "enabled": false,
+    },
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
       "allow_default_signing_domains_for_ip_pools": true,
@@ -119,6 +122,9 @@ Object {
       "cnameValue": "speuat.mail.e.tst.sparkpost.com",
       "mxValue": "speuat.mx.e.tst.sparkpost.com",
     },
+    "brightback": Object {
+      "enabled": false,
+    },
     "featureFlags": Object {},
     "sentry": Object {
       "projectId": 237611,
@@ -150,6 +156,9 @@ Object {
       "allowSubaccountDefault": true,
       "cnameValue": "stagingmtas.mail.e.sparkpost.com",
       "mxValue": "stagingmtas.mx.e.sparkpost.com",
+    },
+    "brightback": Object {
+      "enabled": false,
     },
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
@@ -186,6 +195,9 @@ Object {
       "cnameValue": "staging-mtas2.mail.e.sparkpost.com",
       "mxValue": "staging-mtas2.mx.e.sparkpost.com",
     },
+    "brightback": Object {
+      "enabled": false,
+    },
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
     },
@@ -220,6 +232,9 @@ Object {
       "allowSubaccountDefault": true,
       "cnameValue": "staging.mail.e.sparkpost.com",
       "mxValue": "staging.mx.e.sparkpost.com",
+    },
+    "brightback": Object {
+      "enabled": false,
     },
     "crossLinkTenant": "spc",
     "featureFlags": Object {
@@ -264,6 +279,9 @@ Object {
       "cnameValue": "stagingmtaspc.mail.e.sparkpost.com",
       "mxValue": "stagingmtaspc.mx.e.sparkpost.com",
     },
+    "brightback": Object {
+      "enabled": false,
+    },
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
       "allow_default_signing_domains_for_ip_pools": true,
@@ -305,6 +323,9 @@ Object {
       "allowSubaccountDefault": true,
       "cnameValue": "uat-public.mail.e.tst.sparkpost.com",
       "mxValue": "uat-public.mx.e.tst.sparkpost.com",
+    },
+    "brightback": Object {
+      "enabled": false,
     },
     "crossLinkTenant": "spceu",
     "featureFlags": Object {
@@ -348,6 +369,9 @@ Object {
       "cnameValue": "uat2public.mail.e.tst.sparkpost.com",
       "mxValue": "uat2public.mx.e.tst.sparkpost.com",
     },
+    "brightback": Object {
+      "enabled": false,
+    },
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
     },
@@ -382,6 +406,9 @@ Object {
       "cnameValue": "uat3.mail.e.tst.sparkpost.com",
       "mxValue": "uat3.mx.e.tst.sparkpost.com",
     },
+    "brightback": Object {
+      "enabled": false,
+    },
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
     },
@@ -415,6 +442,9 @@ Object {
       "allowSubaccountDefault": true,
       "cnameValue": "uat4.mail.e.tst.sparkpost.com",
       "mxValue": "uat4.mx.e.tst.sparkpost.com",
+    },
+    "brightback": Object {
+      "enabled": false,
     },
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
@@ -615,6 +645,9 @@ Object {
       "allowSubaccountDefault": true,
       "cnameValue": "balutest.mail.e.sparkpost.com",
       "mxValue": "balutest.mx.e.sparkpost.com",
+    },
+    "brightback": Object {
+      "enabled": false,
     },
     "featureFlags": Object {},
     "sentry": Object {
@@ -1871,6 +1904,9 @@ Object {
       "cnameValue": "staging.mail.e.sparkpost.com",
       "mxValue": "staging.mx.e.sparkpost.com",
     },
+    "brightback": Object {
+      "enabled": false,
+    },
     "crossLinkTenant": "spc",
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
@@ -1913,6 +1949,9 @@ Object {
       "allowSubaccountDefault": true,
       "cnameValue": "uat-public.mail.e.tst.sparkpost.com",
       "mxValue": "uat-public.mx.e.tst.sparkpost.com",
+    },
+    "brightback": Object {
+      "enabled": false,
     },
     "crossLinkTenant": "spceu",
     "featureFlags": Object {
@@ -2002,6 +2041,9 @@ Object {
       "cnameValue": "staging.mail.e.sparkpost.com",
       "mxValue": "staging.mx.e.sparkpost.com",
     },
+    "brightback": Object {
+      "enabled": false,
+    },
     "crossLinkTenant": "spc",
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
@@ -2044,6 +2086,9 @@ Object {
       "allowSubaccountDefault": true,
       "cnameValue": "uat-public.mail.e.tst.sparkpost.com",
       "mxValue": "uat-public.mx.e.tst.sparkpost.com",
+    },
+    "brightback": Object {
+      "enabled": false,
     },
     "crossLinkTenant": "spceu",
     "featureFlags": Object {
@@ -2396,6 +2441,9 @@ Object {
       "allowSubaccountDefault": true,
       "cnameValue": "spestaging.mail.e.sparkpost.com",
       "mxValue": "spestaging.mx.e.sparkpost.com",
+    },
+    "brightback": Object {
+      "enabled": false,
     },
     "featureFlags": Object {},
     "sentry": Object {
