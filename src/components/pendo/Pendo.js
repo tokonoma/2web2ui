@@ -11,7 +11,7 @@ export class Pendo extends React.Component {
     const { initialised } = this.state;
     const { accessControlReady, accountId, accountSvcLevel, accountPlanCode, username, userAccessLevel } = this.props;
     const pendo = window.pendo;
-    const { tenant } = config;
+    const { tenant, release } = config;
 
     // One time only
     if (initialised) {
@@ -37,7 +37,8 @@ export class Pendo extends React.Component {
       },
       visitor: {
         id: `${tenant}_${accountId}_${username}`,
-        accessLevel: userAccessLevel
+        accessLevel: userAccessLevel,
+        release
       }
     });
 
