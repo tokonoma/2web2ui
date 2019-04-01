@@ -23,6 +23,29 @@ Array [
 ]
 `;
 
+exports[`Signals Actions .getCurrentHealthScore by default 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "headers": Object {},
+      "method": "GET",
+      "params": Object {
+        "filter": undefined,
+        "from": "2018-01-12",
+        "limit": undefined,
+        "offset": undefined,
+        "order": undefined,
+        "order_by": undefined,
+        "to": "2018-01-13",
+      },
+      "showErrorAlert": false,
+      "url": "/v1/signals/health-score/",
+    },
+    "type": "GET_CURRENT_HEALTH_SCORE",
+  },
+]
+`;
+
 exports[`Signals Actions .getEngagementRateByCohort by default 1`] = `
 Array [
   Object {

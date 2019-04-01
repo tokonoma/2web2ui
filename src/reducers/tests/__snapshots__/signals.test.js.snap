@@ -101,6 +101,12 @@ Object {
     "loading": false,
     "totalCount": 0,
   },
+  "currentHealthScore": Object {
+    "data": Array [],
+    "error": null,
+    "loading": false,
+    "totalCount": 0,
+  },
   "engagementRateByCohort": Object {
     "data": Array [],
     "error": null,
