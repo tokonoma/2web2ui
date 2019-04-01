@@ -85,12 +85,12 @@ export function HealthScoreChart(props) {
   }
 
   function getMin() {
-    const min = _.min(getHealthScores(history));
+    const min = _.min(getHealthScores());
     return { value: _.isNil(min) ? 'n/a' : min };
   }
 
   function getMax() {
-    const max = _.max(getHealthScores(history));
+    const max = _.max(getHealthScores());
     return { value: _.isNil(max) ? 'n/a' : max };
   }
 
