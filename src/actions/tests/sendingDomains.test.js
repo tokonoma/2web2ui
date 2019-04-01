@@ -14,7 +14,10 @@ snapshotActionCases('Action Creator: Sending Domains', {
     action: () => sendingDomains.create({ domain: 'domain.com', assignTo: 'shared' })
   },
   'Verify should dispatch verify cname action': {
-    action: () => sendingDomains.verifyCname({ id: 'domain.com' })
+    action: () => sendingDomains.verify({ id: 'domain.com', type: 'cname' })
+  },
+  'Verify should dispatch verify mx action': {
+    action: () => sendingDomains.verify({ id: 'domain.com', type: 'mx' })
   },
   'Verify should dispatch verify dkim action': {
     action: () => sendingDomains.verifyDkim({ id: 'sub.com', subaccount: 101 })

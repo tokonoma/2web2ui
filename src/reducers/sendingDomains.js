@@ -39,14 +39,17 @@ export default (state = initialState, { type, payload, meta }) => {
       return { ...state, ...initialDomainState };
 
     case 'VERIFY_SENDING_DOMAIN_CNAME_PENDING':
-      return { ...state, verifyCnameLoading: true, verifyCnameError: null };
+    case 'VERIFY_SENDING_DOMAIN_MX_PENDING':
+      return { ...state, verifyBounceLoading: true, verifyBounceError: null };
 
     case 'VERIFY_SENDING_DOMAIN_CNAME_SUCCESS':
+    case 'VERIFY_SENDING_DOMAIN_MX_SUCCESS':
       // augment current domain's status property
-      return { ...state, verifyCnameLoading: false, domain: { ...state.domain, status: payload }};
+      return { ...state, verifyBounceLoading: false, domain: { ...state.domain, status: payload }};
 
     case 'VERIFY_SENDING_DOMAIN_CNAME_FAIL':
-      return { ...state, verifyCnameLoading: false, verifyCnameError: payload };
+    case 'VERIFY_SENDING_DOMAIN_MX_FAIL':
+      return { ...state, verifyBounceLoading: false, verifyBounceError: payload };
 
     case 'VERIFY_SENDING_DOMAIN_DKIM_PENDING':
       return { ...state, verifyDkimLoading: true, verifyDkimError: null };

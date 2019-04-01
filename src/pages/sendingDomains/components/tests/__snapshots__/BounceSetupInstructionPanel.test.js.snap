@@ -1,47 +1,27 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`BounceSetupInstructionPanel renders cname setup instructions 1`] = `
-<Connect(ConditionSwitch)>
-  <Case
-    condition={[Function]}
-  >
-    <p>
-      placeholder for new instructions
-    </p>
-  </Case>
-  <Case
-    condition={[Function]}
-  >
-    <SetupInstructionPanel
-      isAutoVerified={false}
-      isVerified={false}
-      isVerifying={false}
-      onVerify={[Function]}
-      recordType="CNAME"
-      verifyButtonIdentifier="verify-cname"
-    >
-      <LabelledValue
-        label="Type"
-      >
-        <p>
-          CNAME
-        </p>
-      </LabelledValue>
-      <LabelledValue
-        label="Hostname"
-      >
-        <p>
-          example.com
-        </p>
-      </LabelledValue>
-      <LabelledValue
-        label="Value"
-      >
-        <p>
-          spark.mail
-        </p>
-      </LabelledValue>
-    </SetupInstructionPanel>
-  </Case>
-</Connect(ConditionSwitch)>
+<SetupInstructionPanel
+  isAutoVerified={false}
+  isVerified={false}
+  isVerifying={false}
+  onVerify={[Function]}
+  recordType="CNAME"
+  verifyButtonIdentifier="verify-cname"
+>
+  <LabelledValue
+    label="Type"
+    value="CNAME"
+  />
+  <LabelledValue
+    bold={false}
+    label="Hostname"
+    value="example.com"
+  />
+  <LabelledValue
+    bold={false}
+    label="Value"
+    value="spark.mail"
+  />
+</SetupInstructionPanel>
 `;

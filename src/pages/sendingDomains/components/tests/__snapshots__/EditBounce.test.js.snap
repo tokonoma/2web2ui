@@ -110,7 +110,7 @@ exports[`Component: EditBounce does not show root domain warning for 3rd level d
     </p>
   </Left>
   <Right>
-    <BounceSetupInstructionPanel
+    <Connect(BounceSetupInstructionPanel)
       domain={
         Object {
           "is_default_bounce_domain": false,
@@ -123,9 +123,6 @@ exports[`Component: EditBounce does not show root domain warning for 3rd level d
           "subaccount_id": 100,
         }
       }
-      id="c.b.a.com"
-      onVerify={[Function]}
-      verifyCnameLoading={false}
     />
   </Right>
 </SendingDomainSection>
@@ -157,7 +154,7 @@ exports[`Component: EditBounce renders not ready correctly 1`] = `
         Create a new domain now.
       </Link>
     </Banner>
-    <BounceSetupInstructionPanel
+    <Connect(BounceSetupInstructionPanel)
       domain={
         Object {
           "is_default_bounce_domain": false,
@@ -170,9 +167,6 @@ exports[`Component: EditBounce renders not ready correctly 1`] = `
           "subaccount_id": 100,
         }
       }
-      id="xyz.com"
-      onVerify={[Function]}
-      verifyCnameLoading={false}
     />
   </Right>
 </SendingDomainSection>
@@ -200,7 +194,7 @@ exports[`Component: EditBounce renders ready correctly 1`] = `
         Create a new domain now.
       </Link>
     </Banner>
-    <BounceSetupInstructionPanel
+    <Connect(BounceSetupInstructionPanel)
       domain={
         Object {
           "status": Object {
@@ -208,9 +202,6 @@ exports[`Component: EditBounce renders ready correctly 1`] = `
           },
         }
       }
-      id="xyz.com"
-      onVerify={[Function]}
-      verifyCnameLoading={false}
     />
   </Right>
 </SendingDomainSection>

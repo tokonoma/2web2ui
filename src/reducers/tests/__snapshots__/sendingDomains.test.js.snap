@@ -70,7 +70,7 @@ Object {
       "ownership_verified": 1,
     },
   },
-  "verifyCnameLoading": false,
+  "verifyBounceLoading": false,
 }
 `;
 
@@ -84,14 +84,14 @@ Object {
       "ownership_verified": 1,
     },
   },
-  "verifyCnameError": Object {
+  "verifyBounceError": Object {
     "errors": Array [
       Object {
         "message": "Some error occurred",
       },
     ],
   },
-  "verifyCnameLoading": false,
+  "verifyBounceLoading": false,
 }
 `;
 
@@ -105,8 +105,8 @@ Object {
       "ownership_verified": 1,
     },
   },
-  "verifyCnameError": null,
-  "verifyCnameLoading": true,
+  "verifyBounceError": null,
+  "verifyBounceLoading": true,
 }
 `;
 
@@ -156,6 +156,55 @@ Object {
   },
   "verifyDkimError": null,
   "verifyDkimLoading": true,
+}
+`;
+
+exports[`Sending Domain reducer verify mx 1`] = `
+Object {
+  "domain": Object {
+    "is_default_bounce_domain": false,
+    "status": Object {
+      "mx_status": "valid",
+      "ownership_verified": 1,
+    },
+  },
+  "verifyBounceLoading": false,
+}
+`;
+
+exports[`Sending Domain reducer verify mx fail 1`] = `
+Object {
+  "domain": Object {
+    "is_default_bounce_domain": false,
+    "status": Object {
+      "cname_status": null,
+      "mx_status": null,
+      "ownership_verified": 1,
+    },
+  },
+  "verifyBounceError": Object {
+    "errors": Array [
+      Object {
+        "message": "Some error occurred",
+      },
+    ],
+  },
+  "verifyBounceLoading": false,
+}
+`;
+
+exports[`Sending Domain reducer verify mx pending 1`] = `
+Object {
+  "domain": Object {
+    "is_default_bounce_domain": false,
+    "status": Object {
+      "cname_status": null,
+      "mx_status": null,
+      "ownership_verified": 1,
+    },
+  },
+  "verifyBounceError": null,
+  "verifyBounceLoading": true,
 }
 `;
 

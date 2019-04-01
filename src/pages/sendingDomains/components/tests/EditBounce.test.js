@@ -19,11 +19,8 @@ describe('Component: EditBounce', () => {
         is_default_bounce_domain: false,
         subaccount_id: 100
       }}
-      verifyCname={() => {}}
       update={() => {}}
-      showAlert={() => {}}
       reset={() => {}}
-      verifyCnameLoading={false}
       {...props}
     />
   );
@@ -98,38 +95,6 @@ describe('Component: EditBounce', () => {
       const wrapper = subject({ domain: { status: { ownership_verified: true, cname_status: 'invalid' }}});
 
       expect(wrapper.find('Field')).toHaveLength(0);
-    });
-  });
-
-  describe('verifyDomain', () => {
-    it('renders loading state correctly', async () => {
-      const wrapper = subject({ verifyCnameLoading: true });
-      expect(wrapper.find('BounceSetupInstructionPanel')).toHaveProp('verifyCnameLoading', true);
-    });
-
-    it('verifies domain and alerts when verification successful', async () => {
-      const showAlert = jest.fn();
-      const verifyCname = jest.fn(() => Promise.resolve({ cname_status: 'valid' }));
-      const wrapper = subject({ showAlert, verifyCname });
-
-      await wrapper.find('BounceSetupInstructionPanel').simulate('verify');
-
-      expect(verifyCname).toHaveBeenCalledWith({ id: 'xyz.com', subaccount: 100 });
-      expect(showAlert).toHaveBeenCalledWith(expect.objectContaining({ type: 'success' }));
-    });
-
-    it('alerts error when verification req is successful but verification is failed', async () => {
-      const showAlert = jest.fn();
-      const verifyCname = jest.fn(() => Promise.resolve({
-        cname_status: 'invalid',
-        dns: { cname_error: 'Oh no!' }
-      }));
-      const wrapper = subject({ showAlert, verifyCname });
-
-      await wrapper.find('BounceSetupInstructionPanel').simulate('verify');
-
-      expect(verifyCname).toHaveBeenCalledWith({ id: 'xyz.com', subaccount: 100 });
-      expect(showAlert).toHaveBeenCalledWith({ type: 'error', message: expect.stringContaining('Oh no!') });
     });
   });
 

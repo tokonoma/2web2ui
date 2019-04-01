@@ -62,7 +62,7 @@ export function remove({ id, subaccount }) {
   });
 }
 
-function verify({ id, subaccount, type, ...rest }) {
+export function verify({ id, subaccount, type, ...rest }) {
   return sparkpostApiRequest({
     type: `VERIFY_SENDING_DOMAIN_${type.toUpperCase()}`,
     meta: {
@@ -75,10 +75,6 @@ function verify({ id, subaccount, type, ...rest }) {
       }
     }
   });
-}
-
-export function verifyCname({ id, subaccount }) {
-  return verify({ id, subaccount, type: 'cname' });
 }
 
 export function verifyDkim({ id, subaccount }) {

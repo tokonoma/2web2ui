@@ -2,34 +2,17 @@ import React, { Component, Fragment } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { verifyCname, update } from 'src/actions/sendingDomains';
+import { update } from 'src/actions/sendingDomains';
 
 import { Panel, Banner, Tooltip } from '@sparkpost/matchbox';
 import { Help } from '@sparkpost/matchbox-icons';
 import ToggleBlock from 'src/components/toggleBlock/ToggleBlock';
-import { showAlert } from 'src/actions/globalAlert';
 import { SendingDomainSection } from './SendingDomainSection';
 import { resolveReadyFor } from 'src/helpers/domains';
 import getConfig from 'src/helpers/getConfig';
-import { hasAutoVerifyEnabledSelector } from 'src/selectors/account';
-import BounceSetupInstructionPanel from './BounceSetupInstructionPanel';
+import BounceSetupInstructionContainer from './BounceSetupInstruction.container';
 
 export class EditBounce extends Component {
-
-  verifyDomain = () => {
-    const { id, verifyCname, showAlert, domain: { subaccount_id: subaccount }} = this.props;
-
-    return verifyCname({ id, subaccount })
-      .then((results) => {
-        const readyFor = resolveReadyFor(results);
-        if (readyFor.bounce) {
-          showAlert({ type: 'success', message: `You have successfully verified CNAME record of ${id}` });
-        } else {
-          showAlert({ type: 'error', message: `Unable to verify CNAME record of ${id}. ${results.dns.cname_error}` });
-        }
-      });
-  }
-
   toggleDefaultBounce = () => {
     const { id, update, domain, reset } = this.props;
 
@@ -60,7 +43,7 @@ export class EditBounce extends Component {
   }
 
   renderNotReady() {
-    const { domain, hasAutoVerifyEnabled, id, verifyCnameLoading } = this.props;
+    const { domain } = this.props;
 
     return (
       <Fragment>
@@ -72,20 +55,14 @@ export class EditBounce extends Component {
         </SendingDomainSection.Left>
         <SendingDomainSection.Right>
           {this.renderRootDomainWarning()}
-          <BounceSetupInstructionPanel
-            domain={domain}
-            hasAutoVerifyEnabled={hasAutoVerifyEnabled}
-            id={id}
-            onVerify={this.verifyDomain}
-            verifyCnameLoading={verifyCnameLoading}
-          />
+          <BounceSetupInstructionContainer domain={domain} />
         </SendingDomainSection.Right>
       </Fragment>
     );
   }
 
   renderReady() {
-    const { domain, hasAutoVerifyEnabled, id, updateLoading, verifyCnameLoading } = this.props;
+    const { domain, id, updateLoading } = this.props;
     const readyFor = resolveReadyFor(domain.status);
     const bounceDomainsConfig = getConfig('bounceDomains');
 
@@ -109,13 +86,7 @@ export class EditBounce extends Component {
         <SendingDomainSection.Left/>
         <SendingDomainSection.Right>
           {this.renderRootDomainWarning()}
-          <BounceSetupInstructionPanel
-            domain={domain}
-            hasAutoVerifyEnabled={hasAutoVerifyEnabled}
-            id={id}
-            onVerify={this.verifyDomain}
-            verifyCnameLoading={verifyCnameLoading}
-          />
+          <BounceSetupInstructionContainer domain={domain} />
           {showDefaultBounceToggle &&
               <Panel sectioned>
                 <Field
@@ -152,12 +123,10 @@ const formOptions = {
 };
 
 const mapStateToProps = (state, { domain }) => ({
-  hasAutoVerifyEnabled: hasAutoVerifyEnabledSelector(state),
   updateLoading: state.sendingDomains.updateLoading,
-  verifyCnameLoading: state.sendingDomains.verifyCnameLoading,
   initialValues: {
     ...domain
   }
 });
 
-export default connect(mapStateToProps, { verifyCname, update, showAlert })(reduxForm(formOptions)(EditBounce));
+export default connect(mapStateToProps, { update })(reduxForm(formOptions)(EditBounce));

@@ -246,6 +246,22 @@ Array [
 ]
 `;
 
+exports[`Action Creator: Sending Domains Verify should dispatch verify mx action 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "data": Object {
+        "mx_verify": true,
+      },
+      "headers": Object {},
+      "method": "POST",
+      "url": "/v1/sending-domains/domain.com/verify",
+    },
+    "type": "VERIFY_SENDING_DOMAIN_MX",
+  },
+]
+`;
+
 exports[`Action Creator: Sending Domains Verify should dispatch verify postmaster action 1`] = `
 Array [
   Object {
