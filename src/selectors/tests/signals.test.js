@@ -235,6 +235,7 @@ describe('Selectors: signals', () => {
           total_count: 10,
           data: [
             {
+              sid: -1,
               current_weights: [],
               current_health_score: 0.98,
               sending_domain: 'test.com',
@@ -257,6 +258,13 @@ describe('Selectors: signals', () => {
                 }
               ]
             }
+          ]
+        },
+        injections: {
+          data: [
+            { injections: 100, spam_hits: 1, dt: '2018-01-01' },
+            { injections: 100, spam_hits: 1, dt: '2018-01-02' },
+            { injections: 100, spam_hits: 1, dt: '2018-01-03' }
           ]
         }
       }

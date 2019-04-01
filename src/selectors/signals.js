@@ -25,6 +25,7 @@ export const getUnsubscribeRateByCohortData = (state, props) => _.get(state, 'si
 export const getComplaintsByCohortData = (state, props) => _.get(state, 'signals.complaintsByCohort', {});
 export const getHealthScoreData = (state, props) => _.get(state, 'signals.healthScore', {});
 export const getCurrentHealthScoreData = (state, props) => _.get(state, 'signals.currentHealthScore', {});
+export const getInjections = (state, props) => _.get(state, 'signals.injections', {});
 
 // Details
 export const selectSpamHitsDetails = createSelector(
@@ -406,19 +407,21 @@ export const selectHealthScoreOverviewData = createSelector(
 );
 
 export const selectCurrentHealthScoreDashboard = createSelector(
-  [getCurrentHealthScoreData, getOptions],
-  ({ data, loading, error }, { now, relativeRange }) => {
+  [getCurrentHealthScoreData, getOptions, getInjections],
+  ({ data, loading, error }, { now, relativeRange }, injections) => {
     const accountData = _.find(data, ['sid', -1]) || {};
     const history = accountData.history || [];
 
     const normalizedHistory = history.map(({ dt: date, health_score, ...values }) => {
       const roundedHealthScore = roundToPlaces(health_score * 100, 1);
+      const injectionData = _.find(injections.data, ['dt', date]) || {};
 
       return {
         ...values,
         date,
         health_score: roundedHealthScore,
-        ranking: rankHealthScore(roundedHealthScore)
+        ranking: rankHealthScore(roundedHealthScore),
+        injections: injectionData.injections
       };
     });
 
@@ -426,7 +429,8 @@ export const selectCurrentHealthScoreDashboard = createSelector(
       dataSet: normalizedHistory,
       fill: {
         health_score: null,
-        ranking: null
+        ranking: null,
+        injections: null
       },
       now,
       relativeRange

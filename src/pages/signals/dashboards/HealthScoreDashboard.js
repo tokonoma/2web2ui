@@ -23,7 +23,7 @@ export function HealthScoreDashboard(props) {
   useEffect(() => {
     getCurrentHealthScore({ relativeRange });
     getInjections({ relativeRange });
-  }, [relativeRange, getCurrentHealthScore, getInjections]);
+  }, [getCurrentHealthScore, getInjections, relativeRange]);
 
   return (
     <Page title='Health Score' primaryArea={<DateFilter />}>

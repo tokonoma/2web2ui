@@ -24,7 +24,7 @@ export function HealthScoreChart(props) {
     setHovered(props.date);
   }
 
-  const { history = [], loading, error, filters, injections } = props;
+  const { history = [], loading, error, filters } = props;
   const noData = (history) ? !_.some(getHealthScores()) : true;
   const lastItem = _.last(history) || {};
   const selectedDate = _.get(lastItem, 'date', '');
@@ -65,7 +65,7 @@ export function HealthScoreChart(props) {
   }
 
   function getHoverInjectionProps() {
-    const currentEntry = _.find(injections.data, ['dt', hoveredDate]);
+    const currentEntry = _.find(history, ['date', hoveredDate]);
     const value = (currentEntry) ? currentEntry.injections : null;
     return { value: _.isNil(value) ? 'n/a' : formatNumber(value) };
   }
@@ -157,8 +157,7 @@ export function HealthScoreChart(props) {
 
 const mapStateToProps = (state) => ({
   filters: state.signalOptions,
-  ...selectCurrentHealthScoreDashboard(state),
-  injections: _.get(state, 'signals.injections', {})
+  ...selectCurrentHealthScoreDashboard(state)
 });
 
 export default connect(mapStateToProps, {})(HealthScoreChart);
