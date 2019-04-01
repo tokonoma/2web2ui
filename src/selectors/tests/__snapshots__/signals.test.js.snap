@@ -1034,6 +1034,58 @@ Object {
 }
 `;
 
+exports[`Selectors: signals selectCurrentHealthScoreDashboard returns data 1`] = `
+Object {
+  "WoW": null,
+  "current_DoD": null,
+  "current_health_score": null,
+  "error": undefined,
+  "history": Array [
+    Object {
+      "date": "2017-12-27",
+      "health_score": null,
+      "ranking": null,
+    },
+    Object {
+      "date": "2017-12-28",
+      "health_score": null,
+      "ranking": null,
+    },
+    Object {
+      "date": "2017-12-29",
+      "health_score": null,
+      "ranking": null,
+    },
+    Object {
+      "date": "2017-12-30",
+      "health_score": null,
+      "ranking": null,
+    },
+    Object {
+      "date": "2017-12-31",
+      "health_score": null,
+      "ranking": null,
+    },
+    Object {
+      "date": "2018-01-01",
+      "health_score": null,
+      "ranking": null,
+    },
+    Object {
+      "date": "2018-01-02",
+      "health_score": null,
+      "ranking": null,
+    },
+    Object {
+      "date": "2018-01-03",
+      "health_score": null,
+      "ranking": null,
+    },
+  ],
+  "loading": undefined,
+}
+`;
+
 exports[`Selectors: signals selectEngagementRecencyOverview returns all overview data 1`] = `
 Object {
   "data": Array [

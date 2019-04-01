@@ -24,6 +24,7 @@ export const getEngagementRateByCohortData = (state, props) => _.get(state, 'sig
 export const getUnsubscribeRateByCohortData = (state, props) => _.get(state, 'signals.unsubscribeRateByCohort', {});
 export const getComplaintsByCohortData = (state, props) => _.get(state, 'signals.complaintsByCohort', {});
 export const getHealthScoreData = (state, props) => _.get(state, 'signals.healthScore', {});
+export const getCurrentHealthScoreData = (state, props) => _.get(state, 'signals.currentHealthScore', {});
 
 // Details
 export const selectSpamHitsDetails = createSelector(
@@ -402,6 +403,44 @@ export const selectHealthScoreOverviewData = createSelector(
       current_DoD: getDoD(_.last(filledHistory).health_score, filledHistory[filledHistory.length - 2].health_score)
     };
   })
+);
+
+export const selectCurrentHealthScoreDashboard = createSelector(
+  [getCurrentHealthScoreData, getOptions],
+  ({ data, loading, error }, { now, relativeRange }) => {
+    const accountData = _.find(data, ['sid', -1]) || {};
+    const history = accountData.history || [];
+
+    const normalizedHistory = history.map(({ dt: date, health_score, ...values }) => {
+      const roundedHealthScore = roundToPlaces(health_score * 100, 1);
+
+      return {
+        ...values,
+        date,
+        health_score: roundedHealthScore,
+        ranking: rankHealthScore(roundedHealthScore)
+      };
+    });
+
+    const filledHistory = fillByDate({
+      dataSet: normalizedHistory,
+      fill: {
+        health_score: null,
+        ranking: null
+      },
+      now,
+      relativeRange
+    });
+
+    return {
+      ...accountData,
+      loading, error,
+      current_health_score: _.last(filledHistory).health_score,
+      history: filledHistory,
+      WoW: _.isNil(accountData.WoW) ? null : roundToPlaces(accountData.WoW * 100, 0),
+      current_DoD: getDoD(_.last(filledHistory).health_score, filledHistory[filledHistory.length - 2].health_score)
+    };
+  }
 );
 
 export const selectHealthScoreOverview = createSelector(
