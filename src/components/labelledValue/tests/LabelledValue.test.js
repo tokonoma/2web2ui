@@ -3,24 +3,27 @@ import { shallow } from 'enzyme';
 import LabelledValue from '../LabelledValue';
 
 describe('LabelledValue Component', () => {
+  const subject = (props = {}) => shallow(<LabelledValue {...props} />);
 
   it('should render - no props', () => {
-    const wrapper = shallow(<LabelledValue />);
-    expect(wrapper).toMatchSnapshot();
+    expect(subject()).toMatchSnapshot();
   });
 
   it('should render with label and value', () => {
-    const wrapper = shallow(<LabelledValue label='Label' value='a value'/>);
-    expect(wrapper).toMatchSnapshot();
+    expect(subject({ label: 'Label', value: 'a value' })).toMatchSnapshot();
   });
 
   it('should render children', () => {
-    const wrapper = shallow(<LabelledValue label='Label'><h5>child</h5></LabelledValue>);
+    const wrapper = subject({ label: 'Label', children: <h5>child</h5> });
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should render with label and value when value is boolean', () => {
-    const wrapper = shallow(<LabelledValue label='Label' value={false} />);
-    expect(wrapper).toMatchSnapshot();
+    expect(subject({ label: 'Label', value: false })).toMatchSnapshot();
+  });
+
+  it('should render with unbolded value', () => {
+    const wrapper = subject({ bold: false, value: 'example' });
+    expect(wrapper.find('p')).toHaveProp('children', 'example');
   });
 });
