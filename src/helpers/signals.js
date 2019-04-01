@@ -28,7 +28,7 @@ export const getFriendlyTitle = ({ prefix, facet, facetId, subaccountId, dimensi
     suffix = `for ${translateSubaccount(subaccountId)}`;
   }
 
-  return `${subtitle} ${suffix}`;
+  return `${subtitle} ${suffix}`.trim();
 };
 
 export const getDoD = (current, before) => {
