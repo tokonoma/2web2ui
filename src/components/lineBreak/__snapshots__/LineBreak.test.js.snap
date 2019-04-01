@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LineBreak renders line break with centered text 1`] = `
+<div
+  className="center"
+>
+  <div>
+    <hr />
+  </div>
+  <span>
+    Testing
+  </span>
+  <div>
+    <hr />
+  </div>
+</div>
+`;

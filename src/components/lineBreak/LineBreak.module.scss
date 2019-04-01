@@ -1,0 +1,45 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+%LineBreakDefaults {
+  display: flex;
+  align-items: center;
+
+  div {
+    flex-grow: 1;
+    min-width: 5%;
+    padding: spacing() 0;
+  }
+
+  hr {
+    margin: 0;
+  }
+
+  span {
+    font-size: .75rem;
+    padding: spacing();
+  }
+}
+
+.center {
+  @extend %LineBreakDefaults;
+}
+
+.left {
+  @extend %LineBreakDefaults;
+
+  div:first-child {
+    flex-grow: 0;
+  }
+}
+
+.right {
+  @extend %LineBreakDefaults;
+
+  div:last-child {
+    flex-grow: 0;
+  }
+}
+
+hr.textless {
+  margin: spacing() 0;
+}
