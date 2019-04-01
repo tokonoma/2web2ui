@@ -12,12 +12,12 @@ import CurrentHealthGauge from './components/CurrentHealthGauge/CurrentHealthGau
 import HealthScoreChart from './components/HealthScoreChart/HealthScoreChart';
 
 export function HealthScoreDashboard(props) {
-  const { getCurrentHealthScore, getInjections, relativeRange } = props;
+  const { getCurrentHealthScore, getInjections, getSubaccounts, relativeRange } = props;
 
   // Gets subaccount info on mount
   useEffect(() => {
-    props.getSubaccounts();
-  }, [props]);
+    getSubaccounts();
+  }, [getSubaccounts]);
 
   // Gets injections and current score for gauge and timeseries only when dates change
   useEffect(() => {
