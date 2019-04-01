@@ -14,7 +14,13 @@ exports[`Signals Health Score Page bar chart props renders tooltip content for c
     "
 `;
 
-exports[`Signals Health Score Page bar chart props renders tooltip content for health score 1`] = `""`;
+exports[`Signals Health Score Page bar chart props renders tooltip content for health score 1`] = `
+<TooltipMetric
+  color="#FF594D"
+  label="Health Score"
+  value="12"
+/>
+`;
 
 exports[`Signals Health Score Page bar chart props renders tooltip content for hovered component 1`] = `""`;
 
