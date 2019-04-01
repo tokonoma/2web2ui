@@ -21,7 +21,7 @@ const thresholds = {
     barColor: '#2CC995',
     icon: CheckCircleOutline,
     condition: (n) => n >= 80,
-    description: <>A Health score above 80 is considered to be <strong>very good</strong>.</>
+    description: <>A Health score above 80 is considered to be <strong>good</strong>.</>
   }
 };
 

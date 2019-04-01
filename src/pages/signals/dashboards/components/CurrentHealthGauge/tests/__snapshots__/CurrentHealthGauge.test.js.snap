@@ -59,7 +59,7 @@ exports[`Signals Health Score Gauge Container renders happy path correctly 1`] =
           "description": <React.Fragment>
             A Health score above 80 is considered to be 
             <strong>
-              very good
+              good
             </strong>
             .
           </React.Fragment>,
@@ -84,7 +84,7 @@ exports[`Signals Health Score Gauge Container renders happy path correctly 1`] =
       >
         A Health score above 80 is considered to be 
         <strong>
-          very good
+          good
         </strong>
         .
       </p>

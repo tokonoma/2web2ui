@@ -120,10 +120,13 @@ export function HealthScoreChart(props) {
               selected={selectedDate}
               hovered={hoveredDate}
               timeSeries={accountData.history}
-              tooltipContent={({ payload = {}}) => {
-                const fillColor = (payload.ranking) ? thresholds[payload.ranking].color : '#63666A';
-                return <TooltipMetric label='Health Score' color={fillColor} value={`${roundToPlaces(payload.health_score, 1)}`} />;
-              }}
+              tooltipContent={({ payload = {}}) => (payload.ranking) &&
+                (<TooltipMetric
+                  label='Health Score'
+                  color={thresholds[payload.ranking].color}
+                  value={`${roundToPlaces(payload.health_score, 1)}`}
+                />)
+              }
               yAxisRefLines={[
                 { y: 80, stroke: thresholds.good.color, strokeWidth: 1 },
                 { y: 55, stroke: thresholds.danger.color, strokeWidth: 1 }
