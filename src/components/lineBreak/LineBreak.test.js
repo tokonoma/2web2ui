@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import LineBreak from '../LineBreak';
+import LineBreak from './LineBreak';
 
 describe('LineBreak', () => {
   const subject = (props = {}) => shallow(
