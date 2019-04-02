@@ -541,7 +541,7 @@ const routes = [
   {
     path: '/account/tracking-domains',
     component: trackingDomains.ListPage,
-    condition: hasGrants('tracking_domains/view'),
+    condition: hasGrants('tracking_domains/manage'),
     layout: App,
     title: 'Tracking Domains',
     supportDocSearch: 'tracking domain'
