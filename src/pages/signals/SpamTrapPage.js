@@ -36,7 +36,7 @@ export class SpamTrapPage extends Component {
     const { calculation } = this.state;
 
     return {
-      tickFormatter: calculation === 'relative' ? (tick) => `${roundToPlaces(tick * 100, 2)}%` : (tick) => formatNumber(tick),
+      tickFormatter: calculation === 'relative' ? (tick) => `${roundToPlaces(tick * 100, 3)}%` : (tick) => formatNumber(tick),
       domain: data.every(({ relative_trap_hits }) => !relative_trap_hits) && calculation === 'relative'
         ? [0, 1] : ['auto', 'auto']
     };

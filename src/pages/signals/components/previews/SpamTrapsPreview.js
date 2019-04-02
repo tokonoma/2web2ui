@@ -7,7 +7,7 @@ import withSpamTrapDetails from '../../containers/SpamTrapDetailsContainer';
 import BarChart from '../charts/barchart/BarChart';
 import ChartHeader from '../ChartHeader';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
-import { formatNumber } from 'src/helpers/units';
+import { roundToPlaces } from 'src/helpers/units';
 
 export class SpamTrapsPreview extends Component {
   renderContent = () => {
@@ -28,10 +28,10 @@ export class SpamTrapsPreview extends Component {
         margin={{ top: 12, left: 12, right: 0, bottom: 12 }}
         gap={gap}
         timeSeries={data}
-        yKey='trap_hits'
+        yKey='relative_trap_hits'
         yAxisProps={{
-          tickFormatter: (tick) => formatNumber(tick),
-          domain: ['auto', 'auto']
+          tickFormatter: (tick) => `${roundToPlaces(tick * 100, 2)}%`,
+          domain: data.every(({ relative_trap_hits }) => !relative_trap_hits) ? [0, 1] : ['auto', 'auto']
         }}
         xAxisProps={{ hide: true }}
 
