@@ -24,6 +24,7 @@ import cohorts from './constants/cohorts';
 export class EngagementRateByCohortPage extends Component {
 
   getYAxisProps = () => ({
+    domain: this.props.data.every(({ p_total_eng }) => !p_total_eng) ? [0, 1] : ['auto', 'auto'],
     tickFormatter: (tick) => `${roundToPlaces(tick * 100, 0)}%`
   })
 

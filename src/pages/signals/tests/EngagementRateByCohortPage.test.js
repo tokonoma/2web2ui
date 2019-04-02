@@ -72,8 +72,16 @@ describe('Signals Engagement Rate By Cohort Page', () => {
     });
 
     it('gets y axis props', () => {
+      wrapper.setProps({ data: [{ p_total_eng: 0 }, { p_total_eng: null }]});
       const axisProps = wrapper.find('LineChart').prop('yAxisProps');
       expect(axisProps.tickFormatter(.253)).toEqual('25%');
+      expect(axisProps.domain).toEqual([0,1]);
+    });
+
+    it('gets y axis props with domain', () => {
+      wrapper.setProps({ data: [{ p_total_eng: 0.5 }, { p_total_eng: 0.6 }]});
+      const axisProps = wrapper.find('LineChart').prop('yAxisProps');
+      expect(axisProps.domain).toEqual(['auto', 'auto']);
     });
   });
 });

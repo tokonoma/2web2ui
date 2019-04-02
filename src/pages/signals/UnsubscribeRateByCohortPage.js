@@ -24,6 +24,7 @@ import cohorts from './constants/cohorts';
 export class UnsubscribeRateByCohortPage extends Component {
 
   getYAxisProps = () => ({
+    domain: this.props.data.every(({ p_total_unsub }) => !p_total_unsub) ? [0, 1] : ['auto', 'auto'],
     tickFormatter: (tick) => `${roundToPlaces(tick * 100, 0)}%`
   })
 
