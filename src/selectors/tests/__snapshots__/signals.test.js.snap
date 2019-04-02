@@ -1034,6 +1034,72 @@ Object {
 }
 `;
 
+exports[`Selectors: signals selectCurrentHealthScoreDashboard returns data 1`] = `
+Object {
+  "WoW": -7,
+  "current_DoD": 22.5,
+  "current_health_score": 98,
+  "current_weights": Array [],
+  "error": undefined,
+  "history": Array [
+    Object {
+      "date": "2017-12-27",
+      "health_score": null,
+      "injections": null,
+      "ranking": null,
+    },
+    Object {
+      "date": "2017-12-28",
+      "health_score": null,
+      "injections": null,
+      "ranking": null,
+    },
+    Object {
+      "date": "2017-12-29",
+      "health_score": null,
+      "injections": null,
+      "ranking": null,
+    },
+    Object {
+      "date": "2017-12-30",
+      "health_score": null,
+      "injections": null,
+      "ranking": null,
+    },
+    Object {
+      "date": "2017-12-31",
+      "health_score": null,
+      "injections": null,
+      "ranking": null,
+    },
+    Object {
+      "date": "2018-01-01",
+      "health_score": 74.3,
+      "injections": 100,
+      "ranking": "warning",
+      "weights": Array [],
+    },
+    Object {
+      "date": "2018-01-02",
+      "health_score": 80,
+      "injections": 100,
+      "ranking": "good",
+    },
+    Object {
+      "WoW": null,
+      "date": "2018-01-03",
+      "health_score": 98,
+      "injections": 100,
+      "ranking": "good",
+      "weights": Array [],
+    },
+  ],
+  "loading": undefined,
+  "sending_domain": "test.com",
+  "sid": -1,
+}
+`;
+
 exports[`Selectors: signals selectEngagementRecencyOverview returns all overview data 1`] = `
 Object {
   "data": Array [

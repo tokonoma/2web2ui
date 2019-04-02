@@ -69,16 +69,19 @@ exports[`Signals Health Score Chart renders happy path correctly 1`] = `
           Object {
             "date": "2019-03-24",
             "health_score": 75,
+            "injections": 75000000000,
             "ranking": "warning",
           },
           Object {
             "date": "2019-03-25",
             "health_score": 96,
+            "injections": 75000000000,
             "ranking": "good",
           },
           Object {
             "date": "2019-03-26",
             "health_score": 23,
+            "injections": 75000000000,
             "ranking": "danger",
           },
           Object {

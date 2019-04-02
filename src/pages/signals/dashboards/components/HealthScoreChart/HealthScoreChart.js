@@ -1,7 +1,7 @@
 import React, { useState, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { getCaretProps, getDoD } from 'src/helpers/signals';
-import { selectHealthScoreOverview } from 'src/selectors/signals';
+import { selectCurrentHealthScoreDashboard } from 'src/selectors/signals';
 import { Panel, Tooltip } from '@sparkpost/matchbox';
 import { InfoOutline } from '@sparkpost/matchbox-icons';
 import BarChart from '../../../components/charts/barchart/BarChart';
@@ -24,10 +24,9 @@ export function HealthScoreChart(props) {
     setHovered(props.date);
   }
 
-  const { data, loading, error, filters, injections } = props;
-  const accountData = _.find(data, ['sid', -1]) || {};
-  const noData = (accountData.history) ? !_.some(getHealthScores(accountData)) : true;
-  const lastItem = _.last(accountData.history) || {};
+  const { history = [], loading, error, filters } = props;
+  const noData = (history) ? !_.some(getHealthScores()) : true;
+  const lastItem = _.last(history) || {};
   const selectedDate = _.get(lastItem, 'date', '');
 
   if (loading) {
@@ -46,9 +45,8 @@ export function HealthScoreChart(props) {
     );
   }
 
-  function getHealthScores(accountData) {
-    const accountHistory = _.get(accountData, 'history', []);
-    return _.map(accountHistory, (entry) => entry.health_score);
+  function getHealthScores() {
+    return _.map(history, (entry) => entry.health_score);
   }
 
   function getXAxisProps() {
@@ -60,22 +58,22 @@ export function HealthScoreChart(props) {
   }
 
   function getTotalInjectionProps() {
-    const injectionEntries = _.filter(injections.data, (entry) => entry.injections);
+    const injectionEntries = _.filter(history, (entry) => entry.injections);
     const injectionTotals = _.map(injectionEntries, (entry) => entry.injections);
     const sumInjectionTotals = _.sum(injectionTotals);
     return { value: _.isNil(sumInjectionTotals) ? 'n/a' : formatNumber(sumInjectionTotals) };
   }
 
   function getHoverInjectionProps() {
-    const currentEntry = _.find(injections.data, ['dt', hoveredDate]);
+    const currentEntry = _.find(history, ['date', hoveredDate]);
     const value = (currentEntry) ? currentEntry.injections : null;
     return { value: _.isNil(value) ? 'n/a' : formatNumber(value) };
   }
 
   function getHoverDoDProps() {
     const previousDay = moment(hoveredDate).subtract(1, 'day').format('YYYY-MM-DD');
-    const currentEntry = _.find(accountData.history, ['date', hoveredDate]);
-    const prevEntry = _.find(accountData.history, ['date', previousDay]);
+    const currentEntry = _.find(history, ['date', hoveredDate]);
+    const prevEntry = _.find(history, ['date', previousDay]);
     const currentScore = (currentEntry) ? currentEntry.health_score : null;
     const prevScore = (prevEntry) ? prevEntry.health_score : null;
     const value = getDoD(currentScore, prevScore);
@@ -83,16 +81,16 @@ export function HealthScoreChart(props) {
   }
 
   function getGap() {
-    return accountData.history.length > 15 ? 0.2 : 1;
+    return history.length > 15 ? 0.2 : 1;
   }
 
   function getMin() {
-    const min = _.min(getHealthScores(accountData));
+    const min = _.min(getHealthScores());
     return { value: _.isNil(min) ? 'n/a' : min };
   }
 
   function getMax() {
-    const max = _.max(getHealthScores(accountData));
+    const max = _.max(getHealthScores());
     return { value: _.isNil(max) ? 'n/a' : max };
   }
 
@@ -119,7 +117,7 @@ export function HealthScoreChart(props) {
               onMouseOut={() => setHovered({})}
               selected={selectedDate}
               hovered={hoveredDate}
-              timeSeries={accountData.history}
+              timeSeries={history}
               tooltipContent={({ payload = {}}) => (payload.ranking) &&
                 (<TooltipMetric
                   label='Health Score'
@@ -159,7 +157,7 @@ export function HealthScoreChart(props) {
 
 const mapStateToProps = (state) => ({
   filters: state.signalOptions,
-  ...selectHealthScoreOverview(state)
+  ...selectCurrentHealthScoreDashboard(state)
 });
 
 export default connect(mapStateToProps, {})(HealthScoreChart);

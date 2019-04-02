@@ -230,6 +230,42 @@ describe('Selectors: signals', () => {
               ]
             }
           ]
+        },
+        currentHealthScore: {
+          total_count: 10,
+          data: [
+            {
+              sid: -1,
+              current_weights: [],
+              current_health_score: 0.98,
+              sending_domain: 'test.com',
+              WoW: -0.07,
+              history: [
+                {
+                  dt: '2018-01-01',
+                  health_score: 0.74321, // bad
+                  weights: []
+                },
+                {
+                  dt: '2018-01-02',
+                  health_score: 0.8
+                },
+                {
+                  dt: '2018-01-03',
+                  health_score: 0.98, // good
+                  weights: [],
+                  WoW: null
+                }
+              ]
+            }
+          ]
+        },
+        injections: {
+          data: [
+            { injections: 100, spam_hits: 1, dt: '2018-01-01' },
+            { injections: 100, spam_hits: 1, dt: '2018-01-02' },
+            { injections: 100, spam_hits: 1, dt: '2018-01-03' }
+          ]
         }
       }
     };
@@ -427,6 +463,12 @@ describe('Selectors: signals', () => {
   describe('selectHealthScoreOverview', () => {
     it('returns all overview data', () => {
       expect(selectors.selectHealthScoreOverview(state, props)).toMatchSnapshot();
+    });
+  });
+
+  describe('selectCurrentHealthScoreDashboard', () => {
+    it('returns data', () => {
+      expect(selectors.selectCurrentHealthScoreDashboard(state, props)).toMatchSnapshot();
     });
   });
 });

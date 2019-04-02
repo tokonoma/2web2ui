@@ -6,6 +6,7 @@ const initialDimensionState = {
 };
 
 const initialState = {
+  currentHealthScore: initialDimensionState,
   injections: initialDimensionState,
   spamHits: initialDimensionState,
   healthScore: initialDimensionState,
@@ -92,6 +93,17 @@ const signalsReducer = (state = initialState, { type, payload, meta }) => {
     case 'GET_HEALTH_SCORE_SUCCESS': {
       const { data, total_count: totalCount } = payload;
       return { ...state, healthScore: { ...initialDimensionState, data, loading: false, totalCount }};
+    }
+
+    case 'GET_CURRENT_HEALTH_SCORE_FAIL':
+      return { ...state, currentHealthScore: { ...initialDimensionState, error: payload.error, loading: false }};
+
+    case 'GET_CURRENT_HEALTH_SCORE_PENDING':
+      return { ...state, currentHealthScore: { ...initialDimensionState, loading: true }};
+
+    case 'GET_CURRENT_HEALTH_SCORE_SUCCESS': {
+      const { data, total_count: totalCount } = payload;
+      return { ...state, currentHealthScore: { ...initialDimensionState, data, loading: false, totalCount }};
     }
 
     default:

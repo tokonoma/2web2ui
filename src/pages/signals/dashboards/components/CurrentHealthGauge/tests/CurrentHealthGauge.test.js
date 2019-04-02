@@ -6,7 +6,7 @@ describe('Signals Health Score Gauge Container', () => {
   const props = {
     loading: false,
     error: null,
-    data: []
+    current_health_score: null
   };
 
   const subject = (options = {}) => shallow(
@@ -14,9 +14,9 @@ describe('Signals Health Score Gauge Container', () => {
   );
 
   it('renders happy path correctly', () => {
-    expect(subject({ data: [{
-      sid: -1, current_health_score: 88, WoW: -5, current_DoD: 5
-    }]})).toMatchSnapshot();
+    expect(subject({
+      current_health_score: 88, WoW: -5, current_DoD: 5
+    })).toMatchSnapshot();
   });
 
   it('renders loading correctly', () => {
@@ -30,25 +30,25 @@ describe('Signals Health Score Gauge Container', () => {
   });
 
   it('renders no current score correctly', () => {
-    const wrapper = subject({ data: [{
-      sid: -1, WoW: -5, current_DoD: 5
-    }]});
+    const wrapper = subject({
+      WoW: -5, current_DoD: 5
+    });
     expect(wrapper.find('Callout')).toMatchSnapshot();
   });
 
   it('renders no WoW, or Dod', () => {
-    const wrapper = subject({ data: [{ sid: -1 }]});
+    const wrapper = subject({ });
     expect(wrapper.find({ label: 'WoW Change' }).prop('value')).toEqual('n/a');
     expect(wrapper.find({ label: 'DoD Change' }).prop('value')).toEqual('n/a');
   });
 
   it('renders warning threshold color', () => {
-    const wrapper = subject({ data: [{ sid: -1, current_health_score: 60 }]});
+    const wrapper = subject({ current_health_score: 60 });
     expect(wrapper.find({ className: 'DescriptionIcon' }).prop('style').fill).toMatchSnapshot();
   });
 
   it('renders bad threshold color', () => {
-    const wrapper = subject({ data: [{ sid: -1, current_health_score: 40 }]});
+    const wrapper = subject({ current_health_score: 40 });
     expect(wrapper.find({ className: 'DescriptionIcon' }).prop('style').fill).toMatchSnapshot();
   });
 });

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { getCaretProps } from 'src/helpers/signals';
-import { selectHealthScoreOverview } from 'src/selectors/signals';
+import { selectCurrentHealthScoreDashboard } from 'src/selectors/signals';
 import { Panel, Tooltip } from '@sparkpost/matchbox';
 import { InfoOutline } from '@sparkpost/matchbox-icons';
 import { PanelLoading } from 'src/components';
@@ -14,20 +14,19 @@ import _ from 'lodash';
 
 import styles from './CurrentHealthGauge.module.scss';
 
-export function CurrentHealthGauge({ data, loading, error }) {
-  const accountData = _.find(data, ['sid', -1]) || {};
-  const noData = _.isNil(accountData.current_health_score);
+export function CurrentHealthGauge(props) {
+  const noData = _.isNil(props.current_health_score);
 
-  if (loading) {
+  if (props.loading) {
     return <PanelLoading minHeight='407px' />;
   }
 
-  if (error) {
+  if (props.error) {
     return (
       <Panel sectioned>
         <div className={styles.Content}>
           <div className={styles.ErrorMessage}>
-            <Callout title='Unable to Load Data' height='auto' children={error.message} />
+            <Callout title='Unable to Load Data' height='auto' children={_.get(props, 'error.message')} />
           </div>
         </div>
       </Panel>
@@ -37,7 +36,7 @@ export function CurrentHealthGauge({ data, loading, error }) {
   let threshold = {};
 
   for (const key in thresholds) {
-    if (thresholds[key].condition(accountData.current_health_score)) {
+    if (thresholds[key].condition(props.current_health_score)) {
       threshold = thresholds[key];
     }
   }
@@ -45,7 +44,7 @@ export function CurrentHealthGauge({ data, loading, error }) {
   const DescriptionIcon = threshold.icon;
 
   function getMetricProps(key) {
-    const value = accountData[key];
+    const value = props[key];
     return { value: _.isNil(value) ? 'n/a' : `${value}%`, ...getCaretProps(value) };
   }
 
@@ -66,7 +65,7 @@ export function CurrentHealthGauge({ data, loading, error }) {
         {noData && <div><Callout height='auto'>Current Health Score Not Available</Callout></div>}
         {!noData && (
           <>
-            <Gauge score={accountData.current_health_score} threshold={threshold} />
+            <Gauge score={props.current_health_score} threshold={threshold} />
             <div className={styles.Description}>
               <DescriptionIcon className={styles.DescriptionIcon} size={25} style={{ fill: threshold.color }} />
               <p className={styles.DescriptionContent}>{threshold.description}</p>
@@ -83,7 +82,7 @@ export function CurrentHealthGauge({ data, loading, error }) {
 }
 
 const mapStateToProps = (state) => ({
-  ...selectHealthScoreOverview(state)
+  ...selectCurrentHealthScoreDashboard(state)
 });
 
 export default connect(mapStateToProps, {})(CurrentHealthGauge);

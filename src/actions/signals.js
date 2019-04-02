@@ -81,6 +81,11 @@ export const getHealthScore = signalsActionCreator({
   type: 'GET_HEALTH_SCORE'
 });
 
+export const getCurrentHealthScore = signalsActionCreator({
+  dimension: 'health-score',
+  type: 'GET_CURRENT_HEALTH_SCORE'
+});
+
 export const getSpamHits = signalsActionCreator({
   dimension: 'spam-hits',
   type: 'GET_SPAM_HITS'
