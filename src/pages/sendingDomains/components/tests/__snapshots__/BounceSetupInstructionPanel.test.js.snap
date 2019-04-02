@@ -10,6 +10,7 @@ exports[`BounceSetupInstructionPanel renders cname setup instructions 1`] = `
   verifyButtonIdentifier="verify-cname"
 >
   <LabelledValue
+    bold={false}
     label="Type"
     value="CNAME"
   />

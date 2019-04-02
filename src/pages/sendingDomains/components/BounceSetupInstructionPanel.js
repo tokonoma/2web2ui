@@ -52,7 +52,7 @@ const BounceSetupInstructionPanel = ({
           />
         </LabelledValue>
       ) : (
-        <LabelledValue label="Type" value={verificationType} />
+        <LabelledValue bold={false} label="Type" value={verificationType} />
       )}
       {verificationType === 'MX' ? (
         <>
