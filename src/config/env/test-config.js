@@ -40,7 +40,8 @@ const testConfig = {
         path: '/'
       }
     }
-  }
+  },
+  tenantId: 'local'
 };
 
 export default testConfig;

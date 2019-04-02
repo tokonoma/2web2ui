@@ -1,6 +1,5 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import getConfig from 'src/helpers/getConfig';
 import { EditBounce } from '../EditBounce';
 
 jest.mock('src/helpers/getConfig');
@@ -21,23 +20,17 @@ describe('Component: EditBounce', () => {
       }}
       update={() => {}}
       reset={() => {}}
+      allowDefault={true}
+      allowSubaccountDefault={false}
       {...props}
     />
   );
 
-  beforeEach(() => {
-    getConfig.mockImplementation((path) => ({
-      allowDefault: true,
-      allowSubaccountDefault: true,
-      cnameValue: 'sparkpostmail.com'
-    }));
-  });
 
   it('renders ready correctly', () => {
     const wrapper = subject({ domain: { status: { cname_status: 'valid' }}});
     expect(wrapper).toMatchSnapshot();
   });
-
   it('renders not ready correctly', () => {
     expect(subject()).toMatchSnapshot();
   });
@@ -49,51 +42,37 @@ describe('Component: EditBounce', () => {
 
   describe('default bounce toggle', () => {
     it('renders correctly toggle when all conditions are true', () => {
-      getConfig.mockImplementation((path) => ({ allowDefault: true, allowSubaccountDefault: true }));
-      const wrapper = subject({ domain: { status: { ownership_verified: true, cname_status: 'valid' }}});
-
+      const wrapper = subject({ domain: { status: { ownership_verified: true, cname_status: 'valid' }}, allowDefault: true, allowSubaccountDefault: true });
       expect(wrapper.find('Field')).toMatchSnapshot();
     });
 
     it('renders correctly toggle when all conditions are true except allowSubaccount', () => {
-      getConfig.mockImplementation((path) => ({ allowDefault: true, allowSubaccountDefault: false }));
-      const wrapper = subject({ domain: { status: { ownership_verified: true, cname_status: 'valid' }}});
-
+      const wrapper = subject({ domain: { status: { ownership_verified: true, cname_status: 'valid' }}, allowDefault: true, allowSubaccountDefault: false });
       expect(wrapper.find('Field')).toMatchSnapshot();
     });
 
     it('does not render if config is false', () => {
-      getConfig.mockImplementation((path) => ({ allowDefault: false }));
-      const wrapper = subject({ domain: { status: { ownership_verified: true, cname_status: 'valid' }}});
-
+      const wrapper = subject({ domain: { status: { ownership_verified: true, cname_status: 'valid' }}, allowDefault: false });
       expect(wrapper.find('Field')).toHaveLength(0);
     });
 
     it('does not render if not ownership verified', () => {
-      getConfig.mockImplementation((path) => ({ allowDefault: false }));
-      const wrapper = subject({ domain: { status: { ownership_verified: false, cname_status: 'valid' }}});
-
+      const wrapper = subject({ domain: { status: { ownership_verified: false, cname_status: 'valid' }}, allowDefault: false });
       expect(wrapper.find('Field')).toHaveLength(0);
     });
 
     it('renders correctly if assigned to subaccount and feature flag is true', () => {
-      getConfig.mockImplementation((path) => ({ allowDefault: true, allowSubaccountDefault: true }));
-      const wrapper = subject({ domain: { subaccount_id: 101, status: { ownership_verified: true, cname_status: 'valid' }}});
-
+      const wrapper = subject({ domain: { subaccount_id: 101, status: { ownership_verified: true, cname_status: 'valid' }}, allowDefault: true, allowSubaccountDefault: true });
       expect(wrapper.find('Field')).toMatchSnapshot();
     });
 
     it('does not render if assigned to subaccount and feature flag is false', () => {
-      getConfig.mockImplementation((path) => ({ allowDefault: true, allowSubaccountDefault: false }));
-      const wrapper = subject({ domain: { subaccount_id: 101, status: { ownership_verified: true, cname_status: 'valid' }}});
-
+      const wrapper = subject({ domain: { subaccount_id: 101, status: { ownership_verified: true, cname_status: 'valid' }}, allowDefault: true, allowSubaccountDefault: false });
       expect(wrapper.find('Field')).toHaveLength(0);
     });
 
     it('does not render if not ready for bounce', () => {
-      getConfig.mockImplementation((path) => ({ allowDefault: true }));
-      const wrapper = subject({ domain: { status: { ownership_verified: true, cname_status: 'invalid' }}});
-
+      const wrapper = subject({ domain: { status: { ownership_verified: true, cname_status: 'invalid' }}, allowDefault: true });
       expect(wrapper.find('Field')).toHaveLength(0);
     });
   });
@@ -103,7 +82,8 @@ describe('Component: EditBounce', () => {
       const update = jest.fn(() => Promise.resolve());
       const wrapper = subject({
         domain: { subaccount_id: 123, status: { cname_status: 'valid', ownership_verified: true }},
-        update
+        update,
+        allowSubaccountDefault: true
       });
 
       wrapper.find('Field[name="is_default_bounce_domain"]').simulate('change');
@@ -119,7 +99,8 @@ describe('Component: EditBounce', () => {
           subaccount_id: 234,
           status: { cname_status: 'valid', ownership_verified: true }
         },
-        update
+        update,
+        allowSubaccountDefault: true
       });
 
       wrapper.find('Field[name="is_default_bounce_domain"]').simulate('change');

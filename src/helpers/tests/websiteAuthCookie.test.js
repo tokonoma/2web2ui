@@ -11,7 +11,7 @@ describe('Helper: website auth cookie', () => {
     websiteAuthCookie.save({ name: 'fredo' });
     expect(cookieMock.set).toHaveBeenCalledWith(authCookieName, {
       name: 'fredo',
-      tenant: config.tenant
+      tenant: config.tenantId
     }, authCookieOptions);
   });
 
