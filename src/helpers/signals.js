@@ -12,23 +12,23 @@ const translateSubaccount = (id) => {
   return `Subaccount ${id}`;
 };
 
-export const getFriendlyTitle = ({ prefix, facet, facetId, subaccountId }) => {
+export const getFriendlyTitle = ({ prefix, facet, facetId, subaccountId, dimension = true }) => {
   if (!prefix) {
     return null;
   }
 
-  let subtitle = `${prefix} ${facetId}`;
+  let subtitle = (dimension) ? `${facetId}` : `${prefix} ${facetId}`;
   let suffix = '';
 
   if (facet === 'sid') {
-    subtitle = `${prefix} ${translateSubaccount(facetId)}`;
+    subtitle = (dimension) ? `${translateSubaccount(facetId)}` : `${prefix} ${translateSubaccount(facetId)}`;
   }
 
   if (!_.isNil(subaccountId)) {
-    suffix = ` (${translateSubaccount(subaccountId)})`;
+    suffix = `for ${translateSubaccount(subaccountId)}`;
   }
 
-  return `${subtitle}${suffix}`;
+  return `${subtitle} ${suffix}`.trim();
 };
 
 export const getDoD = (current, before) => {

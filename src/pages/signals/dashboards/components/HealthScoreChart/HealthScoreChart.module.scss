@@ -44,8 +44,9 @@
 }
 
 .Divider {
-  border:1px solid color(gray, 6);
   margin-top: rem(10);
   height: 60%;
   margin-right: spacing();
+  width: 1px;
+  background: color(gray, 6);
 }

@@ -83,18 +83,18 @@ describe('Signals Health Score Page', () => {
   describe('bar chart props', () => {
     it('renders tooltip content for health score', () => {
       const Tooltip = wrapper.find('BarChart').at(0).prop('tooltipContent');
-      expect(shallow(<Tooltip payload={{ health_score: 0.12 }} />)).toMatchSnapshot();
+      expect(shallow(<Tooltip payload={{ health_score: 0.12, ranking: 'danger' }} />)).toMatchSnapshot();
     });
 
     it('renders tooltip content for injections', () => {
       const Tooltip = wrapper.find('BarChart').at(1).prop('tooltipContent');
-      expect(shallow(<Tooltip payload={{ injections: 1000 }} />)).toMatchSnapshot();
+      expect(shallow(<Tooltip payload={{ injections: 1000, ranking: 'good' }} />)).toMatchSnapshot();
     });
 
     it('renders tooltip content for selected component', () => {
       wrapper.find('DivergingBar').at(0).simulate('click', { payload: { weight_type: 'eng cohorts: new, 14-day' }});
       const Tooltip = wrapper.find('BarChart').at(2).prop('tooltipContent');
-      expect(shallow(<Tooltip payload={{ weight_value: 0.0012345 }} />)).toMatchSnapshot();
+      expect(shallow(<Tooltip payload={{ weight_value: 0.0012345, ranking: 'danger' }} />)).toMatchSnapshot();
     });
 
     it('renders tooltip content for hovered component', () => {
@@ -105,7 +105,7 @@ describe('Signals Health Score Page', () => {
 
     it('renders tooltip content for component weights', () => {
       const Tooltip = wrapper.find('DivergingBar').prop('tooltipContent');
-      expect(shallow(<Tooltip payload={{ weight_type: 'Other bounces' }} />)).toMatchSnapshot();
+      expect(shallow(<Tooltip payload={{ weight_type: 'Other bounces', ranking: 'warning' }} />)).toMatchSnapshot();
     });
 
     it('renders y label content for component weights', () => {

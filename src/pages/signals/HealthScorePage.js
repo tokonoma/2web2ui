@@ -96,16 +96,20 @@ export class HealthScorePage extends Component {
                   selected={selectedDate}
                   hovered={hoveredDate}
                   timeSeries={data}
-                  tooltipContent={({ payload = {}}) => (
-                    <TooltipMetric label='Health Score' value={`${roundToPlaces(payload.health_score * 100, 1)}`} />
-                  )}
+                  tooltipContent={({ payload = {}}) => (payload.ranking) &&
+                    (<TooltipMetric
+                      label='Health Score'
+                      color={thresholds[payload.ranking].color}
+                      value={`${roundToPlaces(payload.health_score * 100, 1)}`}
+                    />)
+                  }
                   yAxisRefLines={[
                     { y: 0.80, stroke: thresholds.good.color, strokeWidth: 1 },
                     { y: 0.55, stroke: thresholds.danger.color, strokeWidth: 1 }
                   ]}
                   yKey='health_score'
                   yAxisProps={{
-                    ticks: [0,0.2,0.4,0.55,0.8,1],
+                    ticks: [0,0.55,0.8,1],
                     tickFormatter: (tick) => parseInt(tick * 100)
                   }}
                   xAxisProps={this.getXAxisProps()}
@@ -195,7 +199,7 @@ export class HealthScorePage extends Component {
     return (
       <Page
         breadcrumbAction={{ content: 'Back to Overview', to: '/signals', component: Link }}
-        dimensionPrefix='Health Score for'
+        dimensionPrefix='Health Score'
         facet={facet}
         facetId={facetId}
         subaccountId={subaccountId}

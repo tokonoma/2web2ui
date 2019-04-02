@@ -5,7 +5,7 @@ exports[`Signals OtherChartsHeader Component renders correctly 1`] = `
   <h2
     className="Header"
   >
-    Other charts for Foo1 (Subaccount 22)
+    Other charts for Foo1 for Subaccount 22
   </h2>
   <hr
     className="Line"

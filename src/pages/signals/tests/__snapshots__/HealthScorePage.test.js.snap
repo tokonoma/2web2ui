@@ -16,17 +16,13 @@ exports[`Signals Health Score Page bar chart props renders tooltip content for c
 
 exports[`Signals Health Score Page bar chart props renders tooltip content for health score 1`] = `
 <TooltipMetric
+  color="#FF594D"
   label="Health Score"
   value="12"
 />
 `;
 
-exports[`Signals Health Score Page bar chart props renders tooltip content for hovered component 1`] = `
-<TooltipMetric
-  label="Health Score"
-  value="75"
-/>
-`;
+exports[`Signals Health Score Page bar chart props renders tooltip content for hovered component 1`] = `""`;
 
 exports[`Signals Health Score Page bar chart props renders tooltip content for injections 1`] = `
 <TooltipMetric
@@ -53,7 +49,7 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
       "to": "/signals",
     }
   }
-  dimensionPrefix="Health Score for"
+  dimensionPrefix="Health Score"
   facet="sending-domain"
   facetId="test.com"
   primaryArea={<Connect(DateFilter) />}
@@ -141,8 +137,6 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
               "tickFormatter": [Function],
               "ticks": Array [
                 0,
-                0.2,
-                0.4,
                 0.55,
                 0.8,
                 1,
@@ -431,7 +425,7 @@ exports[`Signals Health Score Page renders empty weights 1`] = `
       "to": "/signals",
     }
   }
-  dimensionPrefix="Health Score for"
+  dimensionPrefix="Health Score"
   facet="sending-domain"
   facetId="test.com"
   primaryArea={<Connect(DateFilter) />}
@@ -492,8 +486,6 @@ exports[`Signals Health Score Page renders empty weights 1`] = `
               "tickFormatter": [Function],
               "ticks": Array [
                 0,
-                0.2,
-                0.4,
                 0.55,
                 0.8,
                 1,
@@ -636,7 +628,7 @@ exports[`Signals Health Score Page renders error correctly 1`] = `
       "to": "/signals",
     }
   }
-  dimensionPrefix="Health Score for"
+  dimensionPrefix="Health Score"
   facet="sending-domain"
   facetId="test.com"
   primaryArea={<Connect(DateFilter) />}

@@ -10,46 +10,98 @@ describe('.getFriendlyTitle', () => {
     })).toEqual(null);
   });
 
-  it('returns prefix with facet id if facet is not a subaccount', () => {
+  it('returns prefix with facet id if facet is not a subaccount and dimension', () => {
     expect(getFriendlyTitle({
       prefix: 'title for',
       facet: 'facet',
-      facetId: 'facetId'
+      facetId: 'facetId',
+      dimension: true
+    })).toEqual('facetId');
+  });
+
+  it('returns prefix with facet id if facet is not a subaccount and not dimension', () => {
+    expect(getFriendlyTitle({
+      prefix: 'title for',
+      facet: 'facet',
+      facetId: 'facetId',
+      dimension: false
     })).toEqual('title for facetId');
   });
 
-  it('returns title with subaccount id if facet is subaccount but not master', () => {
+  it('returns title with subaccount id if facet is subaccount but not master and dimension', () => {
     expect(getFriendlyTitle({
       prefix: 'title for',
       facet: 'sid',
-      facetId: 'facetId'
+      facetId: 'facetId',
+      dimension: true
+    })).toEqual('Subaccount facetId');
+  });
+
+  it('returns title with subaccount id if facet is subaccount but not master and not dimension', () => {
+    expect(getFriendlyTitle({
+      prefix: 'title for',
+      facet: 'sid',
+      facetId: 'facetId',
+      dimension: false
     })).toEqual('title for Subaccount facetId');
   });
 
-  it('returns title with master account if facet is subaccount and id is 0', () => {
+  it('returns title with master account if facet is subaccount and id is 0 and dimension', () => {
     expect(getFriendlyTitle({
       prefix: 'title for',
       facet: 'sid',
-      facetId: 0
+      facetId: 0,
+      dimension: true
+    })).toEqual('Master Account');
+  });
+
+  it('returns title with master account if facet is subaccount and id is 0 and not dimension', () => {
+    expect(getFriendlyTitle({
+      prefix: 'title for',
+      facet: 'sid',
+      facetId: 0,
+      dimension: false
     })).toEqual('title for Master Account');
   });
 
-  it('returns correct suffix with a facet and non-master subaccount', () => {
+  it('returns correct suffix with a facet and non-master subaccount and dimension', () => {
     expect(getFriendlyTitle({
       prefix: 'title for',
       facet: 'facet',
       facetId: 'facetId',
-      subaccountId: 23
-    })).toEqual('title for facetId (Subaccount 23)');
+      subaccountId: 23,
+      dimension: true
+    })).toEqual('facetId for Subaccount 23');
   });
 
-  it('returns correct suffix with a facet and master subaccount', () => {
+  it('returns correct suffix with a facet and non-master subaccount and not dimension', () => {
     expect(getFriendlyTitle({
       prefix: 'title for',
       facet: 'facet',
       facetId: 'facetId',
-      subaccountId: 0
-    })).toEqual('title for facetId (Master Account)');
+      subaccountId: 23,
+      dimension: false
+    })).toEqual('title for facetId for Subaccount 23');
+  });
+
+  it('returns correct suffix with a facet and master subaccount and dimension', () => {
+    expect(getFriendlyTitle({
+      prefix: 'title for',
+      facet: 'facet',
+      facetId: 'facetId',
+      subaccountId: 0,
+      dimension: true
+    })).toEqual('facetId for Master Account');
+  });
+
+  it('returns correct suffix with a facet and master subaccount and not dimension', () => {
+    expect(getFriendlyTitle({
+      prefix: 'title for',
+      facet: 'facet',
+      facetId: 'facetId',
+      subaccountId: 0,
+      dimension: false
+    })).toEqual('title for facetId for Master Account');
   });
 });
 

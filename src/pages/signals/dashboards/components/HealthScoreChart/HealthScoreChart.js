@@ -11,6 +11,7 @@ import Callout from 'src/components/callout';
 import MetricDisplay from '../MetricDisplay/MetricDisplay';
 import { HEALTH_SCORE_INFO } from '../../../constants/info';
 import { formatNumber, roundToPlaces } from 'src/helpers/units';
+import thresholds from '../../../constants/healthScoreThresholds';
 import { getDateTicks } from 'src/helpers/date';
 import moment from 'moment';
 import _ from 'lodash';
@@ -56,6 +57,13 @@ export function HealthScoreChart(props) {
       ticks: xTicks,
       tickFormatter: (tick) => moment(tick).format('M/D')
     };
+  }
+
+  function getTotalInjectionProps() {
+    const injectionEntries = _.filter(injections.data, (entry) => entry.injections);
+    const injectionTotals = _.map(injectionEntries, (entry) => entry.injections);
+    const sumInjectionTotals = _.sum(injectionTotals);
+    return { value: _.isNil(sumInjectionTotals) ? 'n/a' : formatNumber(sumInjectionTotals) };
   }
 
   function getHoverInjectionProps() {
@@ -112,29 +120,37 @@ export function HealthScoreChart(props) {
               selected={selectedDate}
               hovered={hoveredDate}
               timeSeries={accountData.history}
-              tooltipContent={({ payload = {}}) => (
-                <TooltipMetric label='Health Score' value={`${roundToPlaces(payload.health_score, 1)}`} />
-              )}
+              tooltipContent={({ payload = {}}) => (payload.ranking) &&
+                (<TooltipMetric
+                  label='Health Score'
+                  color={thresholds[payload.ranking].color}
+                  value={`${roundToPlaces(payload.health_score, 1)}`}
+                />)
+              }
               yAxisRefLines={[
-                { y: 80, stroke: 'green', strokeWidth: 1 },
-                { y: 55, stroke: 'red', strokeWidth: 1 }
+                { y: 80, stroke: thresholds.good.color, strokeWidth: 1 },
+                { y: 55, stroke: thresholds.danger.color, strokeWidth: 1 }
               ]}
               yKey='health_score'
               xAxisProps={getXAxisProps()}
-              yAxisProps={{ ticks: [0,20,40,55,80,100]}}
+              yAxisProps={{ ticks: [0,55,80,100]}}
             />
           </Fragment>
         )}
         <div className={styles.Metrics}>
-          <div className={styles.Injections}>
-            <MetricDisplay label='Injections' {...getHoverInjectionProps()} />
-          </div>
-          <div className={styles.DoDChange}>
-            <MetricDisplay label='DoD Change' {...getHoverDoDProps()} />
-          </div>
-          <div className={styles.Divider} />
+          <MetricDisplay label='Total Injections' {...getTotalInjectionProps()} />
           <MetricDisplay label='High' {...getMax()} />
           <MetricDisplay label='Low' {...getMin()} />
+          {(typeof hoveredDate === 'string') && (<Fragment>
+            <div className={styles.Divider} />
+            <div className={styles.Injections}>
+              <MetricDisplay label='Injections' {...getHoverInjectionProps()} />
+            </div>
+            <div className={styles.DoDChange}>
+              <MetricDisplay label='DoD Change' {...getHoverDoDProps()} />
+            </div>
+          </Fragment>
+          )}
         </div>
       </div>
     </Panel>

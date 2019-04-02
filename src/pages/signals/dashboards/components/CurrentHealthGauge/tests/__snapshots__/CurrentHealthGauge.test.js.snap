@@ -53,12 +53,13 @@ exports[`Signals Health Score Gauge Container renders happy path correctly 1`] =
       score={88}
       threshold={
         Object {
+          "barColor": "#2CC995",
           "color": "#2CC995",
           "condition": [Function],
           "description": <React.Fragment>
             A Health score above 80 is considered to be 
             <strong>
-              very good
+              good
             </strong>
             .
           </React.Fragment>,
@@ -83,7 +84,7 @@ exports[`Signals Health Score Gauge Container renders happy path correctly 1`] =
       >
         A Health score above 80 is considered to be 
         <strong>
-          very good
+          good
         </strong>
         .
       </p>
@@ -116,4 +117,4 @@ exports[`Signals Health Score Gauge Container renders no current score correctly
 </Callout>
 `;
 
-exports[`Signals Health Score Gauge Container renders warning threshold color 1`] = `"#e6b400"`;
+exports[`Signals Health Score Gauge Container renders warning threshold color 1`] = `"#E6B400"`;

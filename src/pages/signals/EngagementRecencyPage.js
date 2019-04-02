@@ -128,7 +128,7 @@ export class EngagementRecencyPage extends Component {
     return (
       <Page
         breadcrumbAction={{ content: 'Back to Overview', to: '/signals', component: Link }}
-        dimensionPrefix='Engagement Recency for'
+        dimensionPrefix='Engagement Recency'
         facet={facet}
         facetId={facetId}
         subaccountId={subaccountId}

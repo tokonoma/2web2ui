@@ -59,7 +59,7 @@ exports[`Signals Engagement Recency Page renders correctly 1`] = `
       "to": "/signals",
     }
   }
-  dimensionPrefix="Engagement Recency for"
+  dimensionPrefix="Engagement Recency"
   facet="sending-domain"
   facetId="test.com"
   primaryArea={<Connect(DateFilter) />}
@@ -312,7 +312,7 @@ exports[`Signals Engagement Recency Page renders error correctly 1`] = `
       "to": "/signals",
     }
   }
-  dimensionPrefix="Engagement Recency for"
+  dimensionPrefix="Engagement Recency"
   facet="sending-domain"
   facetId="test.com"
   primaryArea={<Connect(DateFilter) />}
