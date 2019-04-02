@@ -9,8 +9,13 @@ import { Help } from '@sparkpost/matchbox-icons';
 import ToggleBlock from 'src/components/toggleBlock/ToggleBlock';
 import { SendingDomainSection } from './SendingDomainSection';
 import { resolveReadyFor } from 'src/helpers/domains';
-import getConfig from 'src/helpers/getConfig';
 import BounceSetupInstructionContainer from './BounceSetupInstruction.container';
+
+import {
+  hasAutoVerifyEnabledSelector,
+  selectAllowDefaultBounceDomains,
+  selectAllSubaccountDefaultBounceDomains
+} from 'src/selectors/account';
 
 export class EditBounce extends Component {
   toggleDefaultBounce = () => {
@@ -62,17 +67,16 @@ export class EditBounce extends Component {
   }
 
   renderReady() {
-    const { domain, id, updateLoading } = this.props;
+    const { domain, id, updateLoading, allowDefault, allowSubaccountDefault } = this.props;
     const readyFor = resolveReadyFor(domain.status);
-    const bounceDomainsConfig = getConfig('bounceDomains');
 
     // Allow default bounce toggle if:
     // Config flag is true
     // Domain is verified
     // Domain is ready for bounce
     // Bounce domain by subaccount config flag is true
-    const showDefaultBounceSubaccount = (!domain.subaccount_id || domain.subaccount_id && bounceDomainsConfig.allowSubaccountDefault);
-    const showDefaultBounceToggle = bounceDomainsConfig.allowDefault && readyFor.sending && readyFor.bounce && showDefaultBounceSubaccount;
+    const showDefaultBounceSubaccount = (!domain.subaccount_id || domain.subaccount_id && allowSubaccountDefault);
+    const showDefaultBounceToggle = allowDefault && readyFor.sending && readyFor.bounce && showDefaultBounceSubaccount;
 
     const tooltip = (
       <Tooltip dark content={`When this is set to "ON", all future transmissions ${domain.subaccount_id ? 'for this subaccount ' : ''}will use ${id} as their bounce domain (unless otherwise specified).`}>
@@ -123,6 +127,9 @@ const formOptions = {
 };
 
 const mapStateToProps = (state, { domain }) => ({
+  hasAutoVerifyEnabled: hasAutoVerifyEnabledSelector(state),
+  allowDefault: selectAllowDefaultBounceDomains(state),
+  allowSubaccountDefault: selectAllSubaccountDefaultBounceDomains(state),
   updateLoading: state.sendingDomains.updateLoading,
   initialValues: {
     ...domain
