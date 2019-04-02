@@ -13,7 +13,9 @@ describe('BounceSetupInstructionPanel', () => {
         subaccount: {
           id: 'sub-example'
         },
-        status: {}
+        status: {
+          cname_status: 'unverified'
+        }
       }}
       hasAutoVerifyEnabled={false}
       isByoipAccount={false}
@@ -32,6 +34,11 @@ describe('BounceSetupInstructionPanel', () => {
     expect(subject()).toMatchSnapshot();
   });
 
+  it('renders cname setup instructions as verified', () => {
+    const wrapper = subject({ domain: { status: { cname_status: 'valid' }}});
+    expect(wrapper).toHaveProp('isVerified', true);
+  });
+
   it('renders mx setup instructions when type is selected', () => {
     const wrapper = subject({ isByoipAccount: true });
 
@@ -43,7 +50,7 @@ describe('BounceSetupInstructionPanel', () => {
   });
 
   it('renders mx setup instructions for previously setup BYOIP customer', () => {
-    const wrapper = subject({ domain: { id: 'mx.com', mx_status: 'valid' }, isByoipAccount: true });
+    const wrapper = subject({ domain: { id: 'mx.com', status: { mx_status: 'valid' }}, isByoipAccount: true });
 
     expect(wrapper).toHaveProp('isVerified', true);
     expect(wrapper).toHaveProp('recordType', 'MX');
@@ -70,7 +77,7 @@ describe('BounceSetupInstructionPanel', () => {
   it('calls onVerify handler and shows error alert', async () => {
     const showAlert = jest.fn();
     const verify = jest.fn(() => Promise.resolve({
-      cname_status: 'invalid',
+      cname_status: 'unverified',
       dns: { cname_error: 'Oh no!' }
     }));
     const wrapper = subject({ showAlert, verify });

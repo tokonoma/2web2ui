@@ -6,14 +6,13 @@ import getConfig from 'src/helpers/getConfig';
 import SetupInstructionPanel from './SetupInstructionPanel';
 
 const BounceSetupInstructionPanel = ({
-  domain, hasAutoVerifyEnabled, isByoipAccount, loading, showAlert, verify
+  domain: { id, status, subaccount }, hasAutoVerifyEnabled, isByoipAccount, loading, showAlert, verify
 }) => {
-  const initVerificationType = isByoipAccount && domain.mx_status === 'valid' ? 'MX' : 'CNAME';
+  const initVerificationType = isByoipAccount && status.mx_status === 'valid' ? 'MX' : 'CNAME';
   const [verificationType, setVerificationType] = useState(initVerificationType);
   const bounceDomainsConfig = getConfig('bounceDomains');
 
   const handleVerification = () => {
-    const { id, subaccount } = domain;
     const type = verificationType.toLowerCase();
 
     return (
@@ -37,7 +36,7 @@ const BounceSetupInstructionPanel = ({
   return (
     <SetupInstructionPanel
       isAutoVerified={hasAutoVerifyEnabled}
-      isVerified={domain.cname_status === 'valid' || domain.mx_status === 'valid'}
+      isVerified={status.cname_status === 'valid' || status.mx_status === 'valid'}
       isVerifying={loading}
       onVerify={handleVerification}
       recordType={verificationType}
@@ -57,11 +56,11 @@ const BounceSetupInstructionPanel = ({
       )}
       {verificationType === 'MX' ? (
         <>
-          <LabelledValue bold={false} label="Hostname" value={domain.id} />
+          <LabelledValue bold={false} label="Hostname" value={id} />
           <LabelledValue bold={false} label="Value" value={bounceDomainsConfig.mxValue} />
           <LineBreak text="AND" />
           <LabelledValue bold={false} label="Type" value="TXT" />
-          <LabelledValue bold={false} label="Hostname" value={domain.id} />
+          <LabelledValue bold={false} label="Hostname" value={id} />
           <LabelledValue
             bold={false}
             label="Value"
@@ -74,7 +73,7 @@ const BounceSetupInstructionPanel = ({
         </>
       ) : (
         <>
-          <LabelledValue bold={false} label="Hostname" value={domain.id} />
+          <LabelledValue bold={false} label="Hostname" value={id} />
           <LabelledValue bold={false} label="Value" value={bounceDomainsConfig.cnameValue} />
         </>
       )}
