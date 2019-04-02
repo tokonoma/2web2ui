@@ -7,7 +7,6 @@ import withHealthScoreDetails from '../../containers/HealthScoreDetailsContainer
 import BarChart from '../charts/barchart/BarChart';
 import ChartHeader from '../ChartHeader';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
-import { roundToPlaces } from 'src/helpers/units';
 
 export class HealthScorePreview extends Component {
   renderContent = () => {
@@ -30,7 +29,8 @@ export class HealthScorePreview extends Component {
         timeSeries={data}
         yKey='health_score'
         yAxisProps={{
-          tickFormatter: (tick) => `${roundToPlaces(tick * 100, 3)}%`
+          tickFormatter: (tick) => parseInt(tick * 100),
+          domain: [0,1]
         }}
         xAxisProps={{ hide: true }}
       />
