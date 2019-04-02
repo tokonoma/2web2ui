@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import styles from './LabelledValue.module.scss';
 
-const LabelledValue = ({ label, value, children }) => {
+const LabelledValue = ({ label, value, children, bold = true }) => {
   /*
    * Before we evaluate `value`, we first must check to see if it's a boolean or not.
    * If it is a boolean, we translate it into the string equivalent, otherwise the ternary
@@ -14,9 +14,8 @@ const LabelledValue = ({ label, value, children }) => {
   }
 
   const childrenMarkup = value
-    ? <h6>{value}</h6>
+    ? (!bold ? <p>{value}</p> : <h6>{value}</h6>)
     : children;
-
 
   const labelMarkup = label
     ? <div className={styles.LabelContainer}><small className={styles.Label}>{label}</small></div>

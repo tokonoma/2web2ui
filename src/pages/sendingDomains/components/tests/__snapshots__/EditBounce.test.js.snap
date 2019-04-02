@@ -106,47 +106,24 @@ exports[`Component: EditBounce does not show root domain warning for 3rd level d
 >
   <Left>
     <p>
-      <strong>
-        To use this domain for bounces
-      </strong>
-      , add this CNAME record to your DNS settings.
-    </p>
-    <p>
-      <em>
-        Note: Bounce domains must be verified via DNS.
-      </em>
+      To use this domain for bounces, connect your domain by setting the required DNS record(s) and verifying the connection.
     </p>
   </Left>
   <Right>
-    <SetupInstructionPanel
-      isVerified={false}
-      isVerifying={false}
-      onVerify={[Function]}
-      recordType="CNAME"
-      verifyButtonIdentifier="verify-cname"
-    >
-      <LabelledValue
-        label="Type"
-      >
-        <p>
-          CNAME
-        </p>
-      </LabelledValue>
-      <LabelledValue
-        label="Hostname"
-      >
-        <p>
-          c.b.a.com
-        </p>
-      </LabelledValue>
-      <LabelledValue
-        label="Value"
-      >
-        <p>
-          sparkpostmail.com
-        </p>
-      </LabelledValue>
-    </SetupInstructionPanel>
+    <Connect(BounceSetupInstructionPanel)
+      domain={
+        Object {
+          "is_default_bounce_domain": false,
+          "status": Object {
+            "cname_status": null,
+            "dkim_status": null,
+            "mx_status": null,
+            "ownership_verified": null,
+          },
+          "subaccount_id": 100,
+        }
+      }
+    />
   </Right>
 </SendingDomainSection>
 `;
@@ -157,15 +134,7 @@ exports[`Component: EditBounce renders not ready correctly 1`] = `
 >
   <Left>
     <p>
-      <strong>
-        To use this domain for bounces
-      </strong>
-      , add this CNAME record to your DNS settings.
-    </p>
-    <p>
-      <em>
-        Note: Bounce domains must be verified via DNS.
-      </em>
+      To use this domain for bounces, connect your domain by setting the required DNS record(s) and verifying the connection.
     </p>
   </Left>
   <Right>
@@ -185,35 +154,20 @@ exports[`Component: EditBounce renders not ready correctly 1`] = `
         Create a new domain now.
       </Link>
     </Banner>
-    <SetupInstructionPanel
-      isVerified={false}
-      isVerifying={false}
-      onVerify={[Function]}
-      recordType="CNAME"
-      verifyButtonIdentifier="verify-cname"
-    >
-      <LabelledValue
-        label="Type"
-      >
-        <p>
-          CNAME
-        </p>
-      </LabelledValue>
-      <LabelledValue
-        label="Hostname"
-      >
-        <p>
-          xyz.com
-        </p>
-      </LabelledValue>
-      <LabelledValue
-        label="Value"
-      >
-        <p>
-          sparkpostmail.com
-        </p>
-      </LabelledValue>
-    </SetupInstructionPanel>
+    <Connect(BounceSetupInstructionPanel)
+      domain={
+        Object {
+          "is_default_bounce_domain": false,
+          "status": Object {
+            "cname_status": null,
+            "dkim_status": null,
+            "mx_status": null,
+            "ownership_verified": null,
+          },
+          "subaccount_id": 100,
+        }
+      }
+    />
   </Right>
 </SendingDomainSection>
 `;
@@ -240,35 +194,15 @@ exports[`Component: EditBounce renders ready correctly 1`] = `
         Create a new domain now.
       </Link>
     </Banner>
-    <SetupInstructionPanel
-      isVerified={true}
-      isVerifying={false}
-      onVerify={[Function]}
-      recordType="CNAME"
-      verifyButtonIdentifier="verify-cname"
-    >
-      <LabelledValue
-        label="Type"
-      >
-        <p>
-          CNAME
-        </p>
-      </LabelledValue>
-      <LabelledValue
-        label="Hostname"
-      >
-        <p>
-          xyz.com
-        </p>
-      </LabelledValue>
-      <LabelledValue
-        label="Value"
-      >
-        <p>
-          sparkpostmail.com
-        </p>
-      </LabelledValue>
-    </SetupInstructionPanel>
+    <Connect(BounceSetupInstructionPanel)
+      domain={
+        Object {
+          "status": Object {
+            "cname_status": "valid",
+          },
+        }
+      }
+    />
   </Right>
 </SendingDomainSection>
 `;
