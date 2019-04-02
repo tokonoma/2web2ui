@@ -1,5 +1,7 @@
-const config = {
-  apiBase: 'no-default-set',
+const tenantIdFromHostname = (hostname) => hostname.split('.')[0];
+
+const config = (identifier) => ({
+  apiBase: `https://${identifier}.api.e.sparkpost.com/api`,
   apiDateFormat: 'YYYY-MM-DDTHH:mm',
   apiRequestTimeout: 60000,
   apiRequestHeaders: {
@@ -89,7 +91,7 @@ const config = {
       options: {}
     }
   },
-  tenant: 'local',
+  tenantId: identifier,
   website: {
     domain: 'sparkpost.com'
   },
@@ -109,18 +111,18 @@ const config = {
     enabled: false
   },
   smtpAuth: {
-    host: 'no-default-set',
+    host: `${identifier}.smtp.e.sparkpost.com`,
     port: 587,
     username: 'SMTP_Injection'
   },
   bounceDomains: {
     allowDefault: true,
     allowSubaccountDefault: false,
-    cnameValue: 'uat-public.mail.e.tst.sparkpost.com',
-    mxValue: 'uat-public.mx.e.tst.sparkpost.com'
+    cnameValue: `${identifier}.mail.e.sparkpost.com`,
+    mxValue: `${identifier}.mx.e.sparkpost.com`
   },
   trackingDomains: {
-    cnameValue: 'spgo.io'
+    cnameValue: `${identifier}.et.e.sparkpost.com`
   },
   dateFormat: 'MMM D YYYY',
   timeFormat: 'h:mma',
@@ -137,6 +139,6 @@ const config = {
     cookieDomain: '.sparkpost.com'
   },
   salesforceDataParams: ['src', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term']
-};
+});
 
-export default config;
+export default config(tenantIdFromHostname(window.location.hostname));

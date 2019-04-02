@@ -170,7 +170,7 @@ class ErrorTracker {
    * @param {object}
    */
   install(config, store) {
-    const { release, sentry, tenant } = config;
+    const { release, sentry, tenantId } = config;
 
     // Silently ignore installation if Sentry configuration is not provided
     if (!sentry) { return; }
@@ -180,7 +180,7 @@ class ErrorTracker {
       breadcrumbCallback,
       dataCallback: getEnricherOrDieTryin(store, window),
       release,
-      tags: { tenant }
+      tags: { tenant: tenantId }
     };
 
     Raven.config(dsn, options).install();

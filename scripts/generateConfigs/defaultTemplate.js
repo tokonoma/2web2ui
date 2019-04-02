@@ -3,18 +3,10 @@ const defaultTemplate = (tenant) => {
   const identifier = tenant.alias || tenant.tenantId;
 
   return {
-    apiBase: `https://${identifier}.api.e.sparkpost.com/api`,
-    bounceDomains: {
-      allowDefault: true,
-      allowSubaccountDefault: true,
-      cnameValue: `${identifier}.mail.e.sparkpost.com`,
-      mxValue: `${identifier}.mx.e.sparkpost.com`
-    },
     featureFlags: {},
     host: `${identifier}.e.sparkpost.com`,
     smtpAuth: {
       enabled: true,
-      host: `${identifier}.smtp.e.sparkpost.com`,
       port: 587,
       username: identifier
     },
@@ -25,10 +17,7 @@ const defaultTemplate = (tenant) => {
       },
       enabled: true
     },
-    tenant: tenant.tenantId,
-    trackingDomains: {
-      cnameValue: `${identifier}.et.e.sparkpost.com`
-    }
+    tenant: tenant.tenantId
   };
 };
 
