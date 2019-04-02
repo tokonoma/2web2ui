@@ -12,6 +12,7 @@ Array [
     "visitor": Object {
       "accessLevel": "admin",
       "id": "local_999999_fredo-mcgurk",
+      "release": "test-release",
     },
   },
 ]
