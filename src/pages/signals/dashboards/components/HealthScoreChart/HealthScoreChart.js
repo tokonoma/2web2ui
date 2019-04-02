@@ -58,7 +58,7 @@ export function HealthScoreChart(props) {
   }
 
   function getTotalInjectionProps() {
-    const injectionEntries = _.filter(injections.data, (entry) => entry.injections);
+    const injectionEntries = _.filter(history, (entry) => entry.injections);
     const injectionTotals = _.map(injectionEntries, (entry) => entry.injections);
     const sumInjectionTotals = _.sum(injectionTotals);
     return { value: _.isNil(sumInjectionTotals) ? 'n/a' : formatNumber(sumInjectionTotals) };
