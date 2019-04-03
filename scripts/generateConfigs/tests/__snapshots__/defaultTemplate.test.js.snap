@@ -16,7 +16,6 @@ Object {
     },
     "enabled": true,
   },
-  "tenant": "testTenant",
 }
 `;
 
@@ -36,6 +35,5 @@ Object {
     },
     "enabled": true,
   },
-  "tenant": "testTenant",
 }
 `;

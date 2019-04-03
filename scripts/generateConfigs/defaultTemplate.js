@@ -16,8 +16,7 @@ const defaultTemplate = (tenant) => {
         appID: 'SFXAWCYDV8'
       },
       enabled: true
-    },
-    tenant: tenant.tenantId
+    }
   };
 };
 
