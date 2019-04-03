@@ -1,4 +1,4 @@
-const constructContent = ({ alias, host, nextHost, originHost, tenantId, ...config }) => {
+const constructContent = ({ alias, host, nextHost, originHost, ...config }) => {
   return config;
 }
 

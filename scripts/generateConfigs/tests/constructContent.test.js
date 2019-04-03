@@ -11,6 +11,9 @@ describe('generateConfigs.constructContent', () => {
       apiBase: 'https://api.test.example/graphql'
     };
 
-    expect(constructContent(config)).toEqual({apiBase: 'https://api.test.example/graphql'});
+    expect(constructContent(config)).toEqual({
+      apiBase: 'https://api.test.example/graphql',
+      tenantId: 'testTenant'
+    });
   });
 });
