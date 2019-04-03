@@ -41,7 +41,7 @@ const testConfig = {
       }
     }
   },
-  tenantId: 'local'
+  tenantId: 'test'
 };
 
 export default testConfig;

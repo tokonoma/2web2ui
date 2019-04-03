@@ -4,14 +4,14 @@ exports[`Component: Pendo should initialise Pendo 1`] = `
 Array [
   Object {
     "account": Object {
-      "id": "local_999999",
+      "id": "test_999999",
       "plan": "1meellion",
       "serviceLevel": "enterprise",
-      "tenant": "local",
+      "tenant": "test",
     },
     "visitor": Object {
       "accessLevel": "admin",
-      "id": "local_999999_fredo-mcgurk",
+      "id": "test_999999_fredo-mcgurk",
       "release": "test-release",
     },
   },
