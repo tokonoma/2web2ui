@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect';
 import { hasAccountOptionEnabled } from 'src/helpers/conditions/account';
 import { getCurrentAccountPlan, selectCondition } from 'src/selectors/accessConditionState';
-import config from 'src/config';
+import getConfig from 'src/helpers/getConfig';
 
 export const hasAutoVerifyEnabledSelector = createSelector(
   getCurrentAccountPlan,
@@ -9,19 +9,9 @@ export const hasAutoVerifyEnabledSelector = createSelector(
   (currentPlan, hasAutoVerifyEnabled) => !currentPlan.isFree && hasAutoVerifyEnabled
 );
 
-export const selectHasAnyoneAtDomainVerificationEnabled = createSelector(
-  selectCondition(hasAccountOptionEnabled('allow_anyone_at_domain_verification')),
-  (hasAnyoneAtEnabled) => hasAnyoneAtEnabled || config.featureFlags.allow_anyone_at_verification
-);
+const accountOptionWithFallback = (option, configKey) => ({ account }) => option in account.options ? account.options[option] : getConfig(configKey);
 
-export const selectTrackingDomainCname = createSelector(
-  ({ account }) => account.options['tracking_domain_cname'] || config.trackingDomains.cnameValue
-);
-
-export const selectAllowDefaultBounceDomains = createSelector(
-  ({ account }) => 'allow_default_bounce_domain' in account.options ? account.options['allow_default_bounce_domain'] : config.bounceDomains.allowDefault
-);
-
-export const selectAllSubaccountDefaultBounceDomains = createSelector(
-  ({ account }) => 'allow_subaccount_default_bounce_domain' in account.options ? account.options['allow_subaccount_default_bounce_domain'] : config.bounceDomains.allowSubaccountDefault
-);
+export const selectHasAnyoneAtDomainVerificationEnabled = accountOptionWithFallback('allow_anyone_at_domain_verification', 'featureFlags.allow_anyone_at_verification');
+export const selectTrackingDomainCname = accountOptionWithFallback('tracking_domain_cname', 'trackingDomains.cnameValue');
+export const selectAllowDefaultBounceDomains = accountOptionWithFallback('allow_default_bounce_domain', 'bounceDomains.allowDefault');
+export const selectAllSubaccountDefaultBounceDomains = accountOptionWithFallback('allow_subaccount_default_bounce_domain', 'bounceDomains.allowSubaccountDefault');
