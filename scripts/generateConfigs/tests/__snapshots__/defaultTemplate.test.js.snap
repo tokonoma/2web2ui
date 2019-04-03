@@ -1,25 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`generateConfigs.defaultTemplate with alias 1`] = `
-Object {
-  "featureFlags": Object {},
-  "host": "aTestTenant.e.sparkpost.com",
-  "smtpAuth": Object {
-    "enabled": true,
-    "port": 587,
-    "username": "aTestTenant",
-  },
-  "support": Object {
-    "algolia": Object {
-      "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
-      "appID": "SFXAWCYDV8",
-    },
-    "enabled": true,
-  },
-}
-`;
-
-exports[`generateConfigs.defaultTemplate with only tenantId 1`] = `
+exports[`generateConfigs.defaultTemplate 1`] = `
 Object {
   "featureFlags": Object {},
   "host": "testTenant.e.sparkpost.com",

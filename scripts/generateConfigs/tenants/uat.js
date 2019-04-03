@@ -5,9 +5,6 @@
  *     // the unique tenant id
  *     myTenant: {
  *
- *       // an alternative identifier for tenantId
- *       alias: 'meTenant',
- *
  *       // host to "next" deployment
  *       nextHost: 'next.tst.sparkpost.com'
  *

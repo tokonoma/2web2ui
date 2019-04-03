@@ -5,9 +5,6 @@
  *     // the unique tenant id
  *     myTenant: {
  *
- *       // an alternative identifier for tenantId
- *       alias: 'meTenant',
- *
  *       // host to "next" deployment
  *       nextHost: 'next.tst.sparkpost.com'
  *
@@ -17,6 +14,8 @@
  *       // all other values are overrides for the default template
  *     }
  *   }
+ *
+ * @note DO NOT ADD ENTERPRISE
  */
 const productionTenants = {
   spceu: {
