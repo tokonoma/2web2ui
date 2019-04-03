@@ -2,19 +2,11 @@
 
 exports[`generateConfigs.constructConfig with environment 1`] = `
 Object {
-  "apiBase": "https://testTenant.api.e.sparkpost.com/api",
-  "bounceDomains": Object {
-    "allowDefault": true,
-    "allowSubaccountDefault": true,
-    "cnameValue": "testTenant.mail.e.sparkpost.com",
-    "mxValue": "testTenant.mx.e.sparkpost.com",
-  },
   "environment": "uat",
   "featureFlags": Object {},
   "host": "testTenant.e.sparkpost.com",
   "smtpAuth": Object {
     "enabled": true,
-    "host": "testTenant.smtp.e.sparkpost.com",
     "port": 587,
     "username": "testTenant",
   },
@@ -27,26 +19,15 @@ Object {
   },
   "tenant": "testTenant",
   "tenantId": "testTenant",
-  "trackingDomains": Object {
-    "cnameValue": "testTenant.et.e.sparkpost.com",
-  },
 }
 `;
 
 exports[`generateConfigs.constructConfig with unknown environment 1`] = `
 Object {
-  "apiBase": "https://testTenant.api.e.sparkpost.com/api",
-  "bounceDomains": Object {
-    "allowDefault": true,
-    "allowSubaccountDefault": true,
-    "cnameValue": "testTenant.mail.e.sparkpost.com",
-    "mxValue": "testTenant.mx.e.sparkpost.com",
-  },
   "featureFlags": Object {},
   "host": "testTenant.e.sparkpost.com",
   "smtpAuth": Object {
     "enabled": true,
-    "host": "testTenant.smtp.e.sparkpost.com",
     "port": 587,
     "username": "testTenant",
   },
@@ -59,8 +40,5 @@ Object {
   },
   "tenant": "testTenant",
   "tenantId": "testTenant",
-  "trackingDomains": Object {
-    "cnameValue": "testTenant.et.e.sparkpost.com",
-  },
 }
 `;

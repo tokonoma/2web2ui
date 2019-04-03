@@ -78,7 +78,7 @@ describe('Component: EditBounce', () => {
   });
 
   describe('toggleDefaultBounce', () => {
-    it('calls update to set domain as default', async () => {
+    it('calls update to set domain as default', () => {
       const update = jest.fn(() => Promise.resolve());
       const wrapper = subject({
         domain: { subaccount_id: 123, status: { cname_status: 'valid', ownership_verified: true }},
