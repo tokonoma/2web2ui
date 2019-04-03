@@ -106,7 +106,7 @@ const config = {
       billing_url: '/account/billing/plan' // Billing URL to direct end-users to enter coupon code or other billing changes
     },
     freePlan: 'free500-1018',
-    enabled: true
+    enabled: false
   },
   smtpAuth: {
     host: 'no-default-set',

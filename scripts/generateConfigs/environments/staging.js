@@ -7,9 +7,6 @@ const stagingEnvironment = {
     algolia: {
       index: 'staging_site_posts_support_article'
     }
-  },
-  brightback: {
-    enabled: false
   }
 };
 

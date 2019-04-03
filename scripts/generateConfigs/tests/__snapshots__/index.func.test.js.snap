@@ -10,6 +10,9 @@ Object {
       "cnameValue": "247sports.mail.e.sparkpost.com",
       "mxValue": "247sports.mx.e.sparkpost.com",
     },
+    "brightback": Object {
+      "enabled": true,
+    },
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
       "allow_default_signing_domains_for_ip_pools": true,
@@ -45,6 +48,9 @@ Object {
       "cnameValue": "amexgbt.mail.e.sparkpost.com",
       "mxValue": "amexgbt.mx.e.sparkpost.com",
     },
+    "brightback": Object {
+      "enabled": true,
+    },
     "featureFlags": Object {},
     "sentry": Object {
       "projectId": 237613,
@@ -76,9 +82,6 @@ Object {
       "allowSubaccountDefault": true,
       "cnameValue": "mtaspc.mail.e.tst.sparkpost.com",
       "mxValue": "mtaspc.mx.e.tst.sparkpost.com",
-    },
-    "brightback": Object {
-      "enabled": false,
     },
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
@@ -122,9 +125,6 @@ Object {
       "cnameValue": "speuat.mail.e.tst.sparkpost.com",
       "mxValue": "speuat.mx.e.tst.sparkpost.com",
     },
-    "brightback": Object {
-      "enabled": false,
-    },
     "featureFlags": Object {},
     "sentry": Object {
       "projectId": 237611,
@@ -156,9 +156,6 @@ Object {
       "allowSubaccountDefault": true,
       "cnameValue": "stagingmtas.mail.e.sparkpost.com",
       "mxValue": "stagingmtas.mx.e.sparkpost.com",
-    },
-    "brightback": Object {
-      "enabled": false,
     },
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
@@ -195,9 +192,6 @@ Object {
       "cnameValue": "staging-mtas2.mail.e.sparkpost.com",
       "mxValue": "staging-mtas2.mx.e.sparkpost.com",
     },
-    "brightback": Object {
-      "enabled": false,
-    },
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
     },
@@ -232,9 +226,6 @@ Object {
       "allowSubaccountDefault": true,
       "cnameValue": "staging.mail.e.sparkpost.com",
       "mxValue": "staging.mx.e.sparkpost.com",
-    },
-    "brightback": Object {
-      "enabled": false,
     },
     "crossLinkTenant": "spc",
     "featureFlags": Object {
@@ -279,9 +270,6 @@ Object {
       "cnameValue": "stagingmtaspc.mail.e.sparkpost.com",
       "mxValue": "stagingmtaspc.mx.e.sparkpost.com",
     },
-    "brightback": Object {
-      "enabled": false,
-    },
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
       "allow_default_signing_domains_for_ip_pools": true,
@@ -323,9 +311,6 @@ Object {
       "allowSubaccountDefault": true,
       "cnameValue": "uat-public.mail.e.tst.sparkpost.com",
       "mxValue": "uat-public.mx.e.tst.sparkpost.com",
-    },
-    "brightback": Object {
-      "enabled": false,
     },
     "crossLinkTenant": "spceu",
     "featureFlags": Object {
@@ -369,9 +354,6 @@ Object {
       "cnameValue": "uat2public.mail.e.tst.sparkpost.com",
       "mxValue": "uat2public.mx.e.tst.sparkpost.com",
     },
-    "brightback": Object {
-      "enabled": false,
-    },
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
     },
@@ -406,9 +388,6 @@ Object {
       "cnameValue": "uat3.mail.e.tst.sparkpost.com",
       "mxValue": "uat3.mx.e.tst.sparkpost.com",
     },
-    "brightback": Object {
-      "enabled": false,
-    },
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
     },
@@ -442,9 +421,6 @@ Object {
       "allowSubaccountDefault": true,
       "cnameValue": "uat4.mail.e.tst.sparkpost.com",
       "mxValue": "uat4.mx.e.tst.sparkpost.com",
-    },
-    "brightback": Object {
-      "enabled": false,
     },
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
@@ -481,6 +457,7 @@ Object {
       "mxValue": "smtp.eu.sparkpostmail.com",
     },
     "brightback": Object {
+      "enabled": true,
       "freePlan": "free500-SPCEU-1018",
     },
     "crossLinkTenant": "spc",
@@ -530,6 +507,9 @@ Object {
       "cnameValue": "sparkpostmail.com",
       "mxValue": "smtp.sparkpostmail.com",
     },
+    "brightback": Object {
+      "enabled": true,
+    },
     "crossLinkTenant": "spceu",
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
@@ -576,6 +556,9 @@ Object {
       "cnameValue": "atlassian-eu.mail.e.sparkpost.com",
       "mxValue": "atlassian-eu.mx.e.sparkpost.com",
     },
+    "brightback": Object {
+      "enabled": true,
+    },
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
       "allow_default_signing_domains_for_ip_pools": true,
@@ -610,6 +593,9 @@ Object {
       "allowSubaccountDefault": true,
       "cnameValue": "atlassian.mail.e.sparkpost.com",
       "mxValue": "atlassian.mx.e.sparkpost.com",
+    },
+    "brightback": Object {
+      "enabled": true,
     },
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
@@ -646,9 +632,6 @@ Object {
       "cnameValue": "balutest.mail.e.sparkpost.com",
       "mxValue": "balutest.mx.e.sparkpost.com",
     },
-    "brightback": Object {
-      "enabled": false,
-    },
     "featureFlags": Object {},
     "sentry": Object {
       "projectId": 237612,
@@ -680,6 +663,9 @@ Object {
       "allowSubaccountDefault": true,
       "cnameValue": "becordial.mail.e.sparkpost.com",
       "mxValue": "becordial.mx.e.sparkpost.com",
+    },
+    "brightback": Object {
+      "enabled": true,
     },
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
@@ -716,6 +702,9 @@ Object {
       "cnameValue": "booking.mail.e.sparkpost.com",
       "mxValue": "booking.mx.e.sparkpost.com",
     },
+    "brightback": Object {
+      "enabled": true,
+    },
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
     },
@@ -749,6 +738,9 @@ Object {
       "allowSubaccountDefault": false,
       "cnameValue": "ca.mail.e.sparkpost.com",
       "mxValue": "ca.mx.e.sparkpost.com",
+    },
+    "brightback": Object {
+      "enabled": true,
     },
     "featureFlags": Object {
       "allow_default_signing_domains_for_ip_pools": false,
@@ -784,6 +776,9 @@ Object {
       "cnameValue": "capitalone.mail.e.sparkpost.com",
       "mxValue": "capitalone.mx.e.sparkpost.com",
     },
+    "brightback": Object {
+      "enabled": true,
+    },
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
     },
@@ -818,6 +813,9 @@ Object {
       "cnameValue": "careerbuilder.mail.e.sparkpost.com",
       "mxValue": "careerbuilder.mx.e.sparkpost.com",
     },
+    "brightback": Object {
+      "enabled": true,
+    },
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
     },
@@ -851,6 +849,9 @@ Object {
       "allowSubaccountDefault": true,
       "cnameValue": "cerner.mail.e.sparkpost.com",
       "mxValue": "cerner.mx.e.sparkpost.com",
+    },
+    "brightback": Object {
+      "enabled": true,
     },
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
@@ -887,6 +888,9 @@ Object {
       "cnameValue": "clipper.mail.e.sparkpost.com",
       "mxValue": "clipper.mx.e.sparkpost.com",
     },
+    "brightback": Object {
+      "enabled": true,
+    },
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
       "allow_default_signing_domains_for_ip_pools": true,
@@ -922,6 +926,9 @@ Object {
       "cnameValue": "coep.mail.e.sparkpost.com",
       "mxValue": "coep.mx.e.sparkpost.com",
     },
+    "brightback": Object {
+      "enabled": true,
+    },
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
     },
@@ -955,6 +962,9 @@ Object {
       "allowSubaccountDefault": true,
       "cnameValue": "cordial.mail.e.sparkpost.com",
       "mxValue": "cordial.mx.e.sparkpost.com",
+    },
+    "brightback": Object {
+      "enabled": true,
     },
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
@@ -991,6 +1001,9 @@ Object {
       "cnameValue": "coursera.mail.e.sparkpost.com",
       "mxValue": "coursera.mx.e.sparkpost.com",
     },
+    "brightback": Object {
+      "enabled": true,
+    },
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
       "allow_default_signing_domains_for_ip_pools": true,
@@ -1026,6 +1039,9 @@ Object {
       "cnameValue": "creator.mail.e.sparkpost.com",
       "mxValue": "creator.mx.e.sparkpost.com",
     },
+    "brightback": Object {
+      "enabled": true,
+    },
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
     },
@@ -1060,6 +1076,9 @@ Object {
       "cnameValue": "dalenys.mail.e.sparkpost.com",
       "mxValue": "dalenys.mx.e.sparkpost.com",
     },
+    "brightback": Object {
+      "enabled": true,
+    },
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
     },
@@ -1093,6 +1112,9 @@ Object {
       "allowSubaccountDefault": true,
       "cnameValue": "demo.mail.e.sparkpost.com",
       "mxValue": "demo.mx.e.sparkpost.com",
+    },
+    "brightback": Object {
+      "enabled": true,
     },
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
@@ -1129,6 +1151,9 @@ Object {
       "cnameValue": "dhi.mail.e.sparkpost.com",
       "mxValue": "dhi.mx.e.sparkpost.com",
     },
+    "brightback": Object {
+      "enabled": true,
+    },
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
       "allow_default_signing_domains_for_ip_pools": true,
@@ -1163,6 +1188,9 @@ Object {
       "allowSubaccountDefault": true,
       "cnameValue": "disney.mail.e.sparkpost.com",
       "mxValue": "disney.mx.e.sparkpost.com",
+    },
+    "brightback": Object {
+      "enabled": true,
     },
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
@@ -1199,6 +1227,9 @@ Object {
       "cnameValue": "ebates.mail.e.sparkpost.com",
       "mxValue": "ebates.mx.e.sparkpost.com",
     },
+    "brightback": Object {
+      "enabled": true,
+    },
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
       "allow_default_signing_domains_for_ip_pools": true,
@@ -1233,6 +1264,9 @@ Object {
       "allowSubaccountDefault": true,
       "cnameValue": "eonian.mail.e.sparkpost.com",
       "mxValue": "eonian.mx.e.sparkpost.com",
+    },
+    "brightback": Object {
+      "enabled": true,
     },
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
@@ -1269,6 +1303,9 @@ Object {
       "cnameValue": "ft.mail.e.sparkpost.com",
       "mxValue": "ft.mx.e.sparkpost.com",
     },
+    "brightback": Object {
+      "enabled": true,
+    },
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
       "allow_default_signing_domains_for_ip_pools": true,
@@ -1303,6 +1340,9 @@ Object {
       "allowSubaccountDefault": true,
       "cnameValue": "gilt.mail.e.sparkpost.com",
       "mxValue": "gilt.mx.e.sparkpost.com",
+    },
+    "brightback": Object {
+      "enabled": true,
     },
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
@@ -1339,6 +1379,9 @@ Object {
       "cnameValue": "gmc.mail.e.sparkpost.com",
       "mxValue": "gmc.mx.e.sparkpost.com",
     },
+    "brightback": Object {
+      "enabled": true,
+    },
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
       "allow_default_signing_domains_for_ip_pools": true,
@@ -1374,6 +1417,9 @@ Object {
       "cnameValue": "guardian.mail.e.sparkpost.com",
       "mxValue": "guardian.mx.e.sparkpost.com",
     },
+    "brightback": Object {
+      "enabled": true,
+    },
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
     },
@@ -1407,6 +1453,9 @@ Object {
       "allowSubaccountDefault": true,
       "cnameValue": "hubspot.mail.e.sparkpost.com",
       "mxValue": "hubspot.mx.e.sparkpost.com",
+    },
+    "brightback": Object {
+      "enabled": true,
     },
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
@@ -1443,6 +1492,9 @@ Object {
       "cnameValue": "hubspoteast.mail.e.sparkpost.com",
       "mxValue": "hubspoteast.mx.e.sparkpost.com",
     },
+    "brightback": Object {
+      "enabled": true,
+    },
     "featureFlags": Object {},
     "sentry": Object {
       "projectId": 237613,
@@ -1474,6 +1526,9 @@ Object {
       "allowSubaccountDefault": false,
       "cnameValue": "icims.mail.e.sparkpost.com",
       "mxValue": "icims.mx.e.sparkpost.com",
+    },
+    "brightback": Object {
+      "enabled": true,
     },
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
@@ -1508,6 +1563,9 @@ Object {
       "allowSubaccountDefault": true,
       "cnameValue": "imshealth.mail.e.sparkpost.com",
       "mxValue": "imshealth.mx.e.sparkpost.com",
+    },
+    "brightback": Object {
+      "enabled": true,
     },
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
@@ -1544,6 +1602,9 @@ Object {
       "cnameValue": "intercom.mail.e.sparkpost.com",
       "mxValue": "intercom.mx.e.sparkpost.com",
     },
+    "brightback": Object {
+      "enabled": true,
+    },
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
     },
@@ -1577,6 +1638,9 @@ Object {
       "allowSubaccountDefault": true,
       "cnameValue": "jane.mail.e.sparkpost.com",
       "mxValue": "jane.mx.e.sparkpost.com",
+    },
+    "brightback": Object {
+      "enabled": true,
     },
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
@@ -1613,6 +1677,9 @@ Object {
       "cnameValue": "kayak.mail.e.sparkpost.com",
       "mxValue": "kayak.mx.e.sparkpost.com",
     },
+    "brightback": Object {
+      "enabled": true,
+    },
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
       "allow_default_signing_domains_for_ip_pools": true,
@@ -1647,6 +1714,9 @@ Object {
       "allowSubaccountDefault": true,
       "cnameValue": "linkedin.mail.e.sparkpost.com",
       "mxValue": "linkedin.mx.e.sparkpost.com",
+    },
+    "brightback": Object {
+      "enabled": true,
     },
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
@@ -1683,6 +1753,9 @@ Object {
       "cnameValue": "massdrop.mail.e.sparkpost.com",
       "mxValue": "massdrop.mx.e.sparkpost.com",
     },
+    "brightback": Object {
+      "enabled": true,
+    },
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
       "allow_default_signing_domains_for_ip_pools": true,
@@ -1717,6 +1790,9 @@ Object {
       "allowSubaccountDefault": true,
       "cnameValue": "mtas4tenant.mail.e.sparkpost.com",
       "mxValue": "mtas4tenant.mx.e.sparkpost.com",
+    },
+    "brightback": Object {
+      "enabled": true,
     },
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
@@ -1754,6 +1830,9 @@ Object {
       "cnameValue": "nyl.mail.e.sparkpost.com",
       "mxValue": "nyl.mx.e.sparkpost.com",
     },
+    "brightback": Object {
+      "enabled": true,
+    },
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
       "allow_default_signing_domains_for_ip_pools": true,
@@ -1788,6 +1867,9 @@ Object {
       "allowSubaccountDefault": true,
       "cnameValue": "nyt.mail.e.sparkpost.com",
       "mxValue": "nyt.mx.e.sparkpost.com",
+    },
+    "brightback": Object {
+      "enabled": true,
     },
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
@@ -1824,6 +1906,9 @@ Object {
       "cnameValue": "ometria.mail.e.sparkpost.com",
       "mxValue": "ometria.mx.e.sparkpost.com",
     },
+    "brightback": Object {
+      "enabled": true,
+    },
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
     },
@@ -1857,6 +1942,9 @@ Object {
       "allowSubaccountDefault": true,
       "cnameValue": "sparkpostmail.com",
       "mxValue": "smtp.sparkpostmail.com",
+    },
+    "brightback": Object {
+      "enabled": true,
     },
     "crossLinkTenant": "spceu",
     "featureFlags": Object {
@@ -1904,9 +1992,6 @@ Object {
       "cnameValue": "staging.mail.e.sparkpost.com",
       "mxValue": "staging.mx.e.sparkpost.com",
     },
-    "brightback": Object {
-      "enabled": false,
-    },
     "crossLinkTenant": "spc",
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
@@ -1950,9 +2035,6 @@ Object {
       "cnameValue": "uat-public.mail.e.tst.sparkpost.com",
       "mxValue": "uat-public.mx.e.tst.sparkpost.com",
     },
-    "brightback": Object {
-      "enabled": false,
-    },
     "crossLinkTenant": "spceu",
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
@@ -1994,6 +2076,9 @@ Object {
       "allowSubaccountDefault": true,
       "cnameValue": "sparkpostmail.com",
       "mxValue": "smtp.sparkpostmail.com",
+    },
+    "brightback": Object {
+      "enabled": true,
     },
     "crossLinkTenant": "spceu",
     "featureFlags": Object {
@@ -2041,9 +2126,6 @@ Object {
       "cnameValue": "staging.mail.e.sparkpost.com",
       "mxValue": "staging.mx.e.sparkpost.com",
     },
-    "brightback": Object {
-      "enabled": false,
-    },
     "crossLinkTenant": "spc",
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
@@ -2087,9 +2169,6 @@ Object {
       "cnameValue": "uat-public.mail.e.tst.sparkpost.com",
       "mxValue": "uat-public.mx.e.tst.sparkpost.com",
     },
-    "brightback": Object {
-      "enabled": false,
-    },
     "crossLinkTenant": "spceu",
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
@@ -2132,6 +2211,9 @@ Object {
       "cnameValue": "pinterest.mail.e.sparkpost.com",
       "mxValue": "pinterest.mx.e.sparkpost.com",
     },
+    "brightback": Object {
+      "enabled": true,
+    },
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
     },
@@ -2165,6 +2247,9 @@ Object {
       "allowSubaccountDefault": true,
       "cnameValue": "productionmtas.mail.e.sparkpost.com",
       "mxValue": "productionmtas.mx.e.sparkpost.com",
+    },
+    "brightback": Object {
+      "enabled": true,
     },
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
@@ -2202,6 +2287,9 @@ Object {
       "cnameValue": "productionmtas2.mail.e.sparkpost.com",
       "mxValue": "productionmtas2.mx.e.sparkpost.com",
     },
+    "brightback": Object {
+      "enabled": true,
+    },
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
       "allow_default_signing_domains_for_ip_pools": true,
@@ -2238,6 +2326,9 @@ Object {
       "cnameValue": "sas.mail.e.sparkpost.com",
       "mxValue": "sas.mx.e.sparkpost.com",
     },
+    "brightback": Object {
+      "enabled": true,
+    },
     "featureFlags": Object {},
     "sentry": Object {
       "projectId": 237613,
@@ -2269,6 +2360,9 @@ Object {
       "allowSubaccountDefault": true,
       "cnameValue": "schoolm.mail.e.sparkpost.com",
       "mxValue": "schoolm.mx.e.sparkpost.com",
+    },
+    "brightback": Object {
+      "enabled": true,
     },
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
@@ -2303,6 +2397,9 @@ Object {
       "allowSubaccountDefault": true,
       "cnameValue": "selective.mail.e.sparkpost.com",
       "mxValue": "selective.mx.e.sparkpost.com",
+    },
+    "brightback": Object {
+      "enabled": true,
     },
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
@@ -2339,6 +2436,9 @@ Object {
       "cnameValue": "sitecore-eu.mail.e.sparkpost.com",
       "mxValue": "sitecore-eu.mx.e.sparkpost.com",
     },
+    "brightback": Object {
+      "enabled": true,
+    },
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
     },
@@ -2373,6 +2473,9 @@ Object {
       "cnameValue": "sitecore.mail.e.sparkpost.com",
       "mxValue": "sitecore.mx.e.sparkpost.com",
     },
+    "brightback": Object {
+      "enabled": true,
+    },
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
     },
@@ -2406,6 +2509,9 @@ Object {
       "allowSubaccountDefault": true,
       "cnameValue": "snagajob.mail.e.sparkpost.com",
       "mxValue": "snagajob.mx.e.sparkpost.com",
+    },
+    "brightback": Object {
+      "enabled": true,
     },
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
@@ -2442,9 +2548,6 @@ Object {
       "cnameValue": "spestaging.mail.e.sparkpost.com",
       "mxValue": "spestaging.mx.e.sparkpost.com",
     },
-    "brightback": Object {
-      "enabled": false,
-    },
     "featureFlags": Object {},
     "sentry": Object {
       "projectId": 237612,
@@ -2476,6 +2579,9 @@ Object {
       "allowSubaccountDefault": true,
       "cnameValue": "streetauthority.mail.e.sparkpost.com",
       "mxValue": "streetauthority.mx.e.sparkpost.com",
+    },
+    "brightback": Object {
+      "enabled": true,
     },
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
@@ -2512,6 +2618,9 @@ Object {
       "cnameValue": "surveymonkey.mail.e.sparkpost.com",
       "mxValue": "surveymonkey.mx.e.sparkpost.com",
     },
+    "brightback": Object {
+      "enabled": true,
+    },
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
       "allow_default_signing_domains_for_ip_pools": true,
@@ -2547,6 +2656,9 @@ Object {
       "cnameValue": "talktalk.mail.e.sparkpost.com",
       "mxValue": "talktalk.mx.e.sparkpost.com",
     },
+    "brightback": Object {
+      "enabled": true,
+    },
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
     },
@@ -2580,6 +2692,9 @@ Object {
       "allowSubaccountDefault": true,
       "cnameValue": "tobi.mail.e.sparkpost.com",
       "mxValue": "tobi.mx.e.sparkpost.com",
+    },
+    "brightback": Object {
+      "enabled": true,
     },
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
@@ -2616,6 +2731,9 @@ Object {
       "cnameValue": "trulia.mail.e.sparkpost.com",
       "mxValue": "trulia.mx.e.sparkpost.com",
     },
+    "brightback": Object {
+      "enabled": true,
+    },
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
       "allow_default_signing_domains_for_ip_pools": true,
@@ -2651,6 +2769,9 @@ Object {
       "cnameValue": "uber.mail.e.sparkpost.com",
       "mxValue": "uber.mx.e.sparkpost.com",
     },
+    "brightback": Object {
+      "enabled": true,
+    },
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
     },
@@ -2684,6 +2805,9 @@ Object {
       "allowSubaccountDefault": true,
       "cnameValue": "unear.mail.e.sparkpost.com",
       "mxValue": "unear.mx.e.sparkpost.com",
+    },
+    "brightback": Object {
+      "enabled": true,
     },
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
@@ -2719,6 +2843,9 @@ Object {
       "cnameValue": "utilitywhouse.mail.e.sparkpost.com",
       "mxValue": "utilitywhouse.mx.e.sparkpost.com",
     },
+    "brightback": Object {
+      "enabled": true,
+    },
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
     },
@@ -2752,6 +2879,9 @@ Object {
       "allowSubaccountDefault": true,
       "cnameValue": "vente-exclusive.mail.e.sparkpost.com",
       "mxValue": "vente-exclusive.mx.e.sparkpost.com",
+    },
+    "brightback": Object {
+      "enabled": true,
     },
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
@@ -2788,6 +2918,9 @@ Object {
       "cnameValue": "vivastreet.mail.e.sparkpost.com",
       "mxValue": "vivastreet.mx.e.sparkpost.com",
     },
+    "brightback": Object {
+      "enabled": true,
+    },
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
       "allow_default_signing_domains_for_ip_pools": true,
@@ -2823,6 +2956,9 @@ Object {
       "cnameValue": "vivmail.mail.e.sparkpost.com",
       "mxValue": "vivmail.mx.e.sparkpost.com",
     },
+    "brightback": Object {
+      "enabled": true,
+    },
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
     },
@@ -2856,6 +2992,9 @@ Object {
       "allowSubaccountDefault": true,
       "cnameValue": "wawd.mail.e.sparkpost.com",
       "mxValue": "wawd.mx.e.sparkpost.com",
+    },
+    "brightback": Object {
+      "enabled": true,
     },
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
@@ -2891,6 +3030,9 @@ Object {
       "cnameValue": "wcare.mail.e.sparkpost.com",
       "mxValue": "wcare.mx.e.sparkpost.com",
     },
+    "brightback": Object {
+      "enabled": true,
+    },
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
     },
@@ -2924,6 +3066,9 @@ Object {
       "allowSubaccountDefault": true,
       "cnameValue": "workday.mail.e.sparkpost.com",
       "mxValue": "workday.mx.e.sparkpost.com",
+    },
+    "brightback": Object {
+      "enabled": true,
     },
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
@@ -2960,6 +3105,9 @@ Object {
       "cnameValue": "zillow.mail.e.sparkpost.com",
       "mxValue": "zillow.mx.e.sparkpost.com",
     },
+    "brightback": Object {
+      "enabled": true,
+    },
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
       "allow_default_signing_domains_for_ip_pools": true,
@@ -2994,6 +3142,9 @@ Object {
       "allowSubaccountDefault": true,
       "cnameValue": "ziprealty.mail.e.sparkpost.com",
       "mxValue": "ziprealty.mx.e.sparkpost.com",
+    },
+    "brightback": Object {
+      "enabled": true,
     },
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
@@ -3030,6 +3181,9 @@ Object {
       "cnameValue": "ziprecruiter.mail.e.sparkpost.com",
       "mxValue": "ziprecruiter.mx.e.sparkpost.com",
     },
+    "brightback": Object {
+      "enabled": true,
+    },
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
     },
@@ -3063,6 +3217,9 @@ Object {
       "allowSubaccountDefault": true,
       "cnameValue": "zynga.mail.e.sparkpost.com",
       "mxValue": "zynga.mx.e.sparkpost.com",
+    },
+    "brightback": Object {
+      "enabled": true,
     },
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
