@@ -9,12 +9,5 @@ Object {
     "port": 587,
     "username": "testTenant",
   },
-  "support": Object {
-    "algolia": Object {
-      "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
-      "appID": "SFXAWCYDV8",
-    },
-    "enabled": true,
-  },
 }
 `;

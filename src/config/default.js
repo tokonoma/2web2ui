@@ -141,4 +141,4 @@ const config = (identifier) => ({
   salesforceDataParams: ['src', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term']
 });
 
-export default config(tenantIdFromHostname(window.location.hostname));
+export default (hostname) => config(tenantIdFromHostname(hostname));
