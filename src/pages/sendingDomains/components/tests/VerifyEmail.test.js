@@ -7,9 +7,9 @@ describe('VerifyEmail component', () => {
   const subject = (props) => {
     const baseProps = {
       id: 'xyz.com',
-      verifyAbuse: jest.fn(() => Promise.resolve()),
-      verifyMailbox: jest.fn(() => Promise.resolve()),
-      verifyPostmaster: jest.fn(() => Promise.resolve()),
+      verifyAbuse: () => Promise.resolve(),
+      verifyMailbox: () => Promise.resolve(),
+      verifyPostmaster: () => Promise.resolve(),
       showAlert: jest.fn(),
       verifyEmailLoading: false,
       subaccount: 'submarine',
@@ -40,37 +40,43 @@ describe('VerifyEmail component', () => {
   });
 
   it('should send abuse-at email', () => {
-    const wrapper = subject();
+    const verifyAbuse = jest.fn().mockResolvedValue({});
+    const wrapper = subject({ verifyAbuse });
     wrapper.find('Button').at(1).simulate('click');
-    expect(wrapper.instance().props.verifyAbuse).toHaveBeenCalledTimes(1);
+    expect(verifyAbuse).toHaveBeenCalledTimes(1);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should send postmaster-at email', () => {
-    const wrapper = subject();
+    const verifyPostmaster = jest.fn().mockResolvedValue({});
+    const wrapper = subject({ verifyPostmaster });
     wrapper.find('Button').at(0).simulate('click');
-    expect(wrapper.instance().props.verifyPostmaster).toHaveBeenCalledTimes(1);
+    expect(verifyPostmaster).toHaveBeenCalledTimes(1);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should send custom mailbox email', () => {
-    const wrapper = subject({ hasAnyoneAtEnabled: true });
+    const id = 'xyz.com';
+    const subaccount = 'with-everything';
+    const verifyMailbox = jest.fn().mockResolvedValue({});
+    const wrapper = subject({ id, subaccount, hasAnyoneAtEnabled: true, verifyMailbox });
     wrapper.setState({ localPart: 'krombopulos.michael' });
 
     wrapper.find('Button').at(0).simulate('click');
-    expect(wrapper.instance().props.verifyMailbox).toHaveBeenCalledTimes(1);
-    expect(wrapper.instance().props.verifyMailbox).toHaveBeenCalledWith({
-      id: wrapper.instance().props.id,
+    expect(verifyMailbox).toHaveBeenCalledTimes(1);
+    expect(verifyMailbox).toHaveBeenCalledWith({
+      id,
       mailbox: 'krombopulos.michael',
-      subaccount: wrapper.instance().props.subaccount
+      subaccount
     });
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should error if custom mailbox field is invalid', () => {
-    const wrapper = subject({ hasAnyoneAtEnabled: true });
+    const verifyMailbox = jest.fn().mockResolvedValue({});
+    const wrapper = subject({ hasAnyoneAtEnabled: true, verifyMailbox });
     wrapper.find('Button').at(0).simulate('click');
-    expect(wrapper.instance().props.verifyMailbox).not.toHaveBeenCalled();
+    expect(verifyMailbox).not.toHaveBeenCalled();
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -80,11 +86,13 @@ describe('VerifyEmail component', () => {
   });
 
   it('should render success message', async () => {
-    const wrapper = subject();
+    const verifyPostmaster = jest.fn().mockResolvedValue({});
+    const showAlert = jest.fn().mockResolvedValue({});
+    const wrapper = subject({ verifyPostmaster, showAlert });
     await wrapper.instance().verifyWithPostmaster();
 
-    expect(wrapper.instance().props.verifyPostmaster).toHaveBeenCalledTimes(1);
-    expect(wrapper.instance().props.showAlert).toHaveBeenCalledWith({ type: 'success', message: `Email sent to postmaster@${wrapper.instance().props.id}` });
+    expect(verifyPostmaster).toHaveBeenCalledTimes(1);
+    expect(showAlert).toHaveBeenCalledWith({ type: 'success', message: `Email sent to postmaster@${wrapper.instance().props.id}` });
     expect(wrapper).toMatchSnapshot();
   });
 });
