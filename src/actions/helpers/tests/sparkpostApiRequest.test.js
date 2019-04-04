@@ -103,7 +103,6 @@ describe('Helper: SparkPost API Request', () => {
       const error = new Error('API call failed');
       error.response = { status: 400, data: { results }};
       apiErr = new SparkpostApiError(error);
-
       axiosMocks.sparkpost.mockImplementation(() => Promise.reject(apiErr));
       refreshTokensUsed.clear();
       globalAlertMock.showAlert = jest.fn((a) => a);
@@ -135,14 +134,12 @@ describe('Helper: SparkPost API Request', () => {
 
     it('should dispatch a special 5xx error action', async () => {
       apiErr.response.status = 500;
+      try {
+        await mockStore.dispatch(sparkpostApiRequest(action));
+      } catch (err) {
+        expect(mockStore.getActions()).toMatchSnapshot();
+      }
 
-      await expect(mockStore.dispatch(sparkpostApiRequest(action))).rejects.toThrow(apiErr);
-      expect(globalAlertMock.showAlert).toHaveBeenCalledWith({
-        type: 'error',
-        message: 'Something went wrong.',
-        details: apiErr.message
-      });
-      expect(mockStore.getActions()).toMatchSnapshot();
     });
 
     it('should fetch account on a 403', async () => {

@@ -64,7 +64,7 @@ const sparkpostRequest = requestHelperFactory({
       refreshTokensUsed.add(auth.refreshToken);
 
       // call API for a new token
-      return useRefreshToken(auth.refreshToken)
+      return useRefreshToken(auth.refreshToken)// eslint-disable-line react-hooks/rules-of-hooks
 
         // dispatch a refresh action to save new token results in cookie and store
         .then(({ data } = {}) => dispatch(refresh(data.access_token, auth.refreshToken)))
@@ -86,13 +86,19 @@ const sparkpostRequest = requestHelperFactory({
         );
     }
 
+    if (response.status === 401) {
+      dispatch(logout());
+    }
+
     // Re-fetch the account to see if suspended or terminated (handled in AuthenticationGate)
     if (response.status === 403) {
       dispatch(fetchAccount());
     }
 
-    if (response.status === 401) {
-      dispatch(logout());
+    // 5xx errors will retry action a certain number of times
+    if (/^5\d\d/.test(String(response.status)) && retries < maxRefreshRetries) {
+      action.meta.retries = retries + 1;
+      return dispatch(sparkpostRequest(action));
     }
 
     // any other API error should automatically fail, to be handled in the reducers/components

@@ -81,8 +81,9 @@ export const EnterpriseBanner = () => (
 );
 
 export const FreePlanWarningBanner = ({ account = {}, accountAgeInDays = 0, ageRangeStart = 0, ageRangeEnd = 30 }) => {
-  const { subscription = {}, pending_subscription } = account;
-  if (pending_subscription || !subscription.code.includes('free15K')) {
+  const { subscription, pending_subscription } = account;
+  const { code = '' } = subscription;
+  if (pending_subscription || !code.includes('free15K')) {
     return null;
   }
 
