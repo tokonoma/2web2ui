@@ -247,4 +247,34 @@ describe('HealthScoreOverview', () => {
       expect(columnWrapper).toMatchSnapshot();
     });
   });
+
+
+  it('filters out master and all subaccounts row', () => {
+    const data = [
+      {
+        current_health_score: 98,
+        domain: 'example.com',
+        history: [
+          { date: '2018-01-13', health_score: 98 }
+        ],
+        average_health_score: 98,
+        WoW: 0.1,
+        sid: 123
+      },
+      {
+        current_health_score: 50,
+        domain: 'master-and-all.com',
+        history: [
+          { date: '2018-01-13', health_score: 50 }
+        ],
+        average_health_score: 50,
+        WoW: 0.5,
+        sid: -1
+      }
+    ];
+    const wrapper = subject({ data });
+    expect(wrapper.find(SummaryTable).prop('data')).toHaveLength(1);
+    expect(wrapper.find(SummaryTable).prop('data')[0]).toEqual(data[0]);
+  });
+
 });

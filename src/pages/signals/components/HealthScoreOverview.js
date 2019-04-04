@@ -112,6 +112,10 @@ class HealthScoreOverview extends React.Component {
     const noFacetSelected = facet.key === 'sid';
     const noSubaccountFilter = subaccountFilter === undefined;
 
+    // Filter out account aggregate, there is no way to do it via api
+    // This is done here to preserve pagination functionality
+    const filteredData = _.filter(data, ({ sid }) => sid !== -1);
+
     return (
       <Panel>
         <div className={styles.Header}>
@@ -130,8 +134,8 @@ class HealthScoreOverview extends React.Component {
           </div>
         </div>
         <SummaryTable
-          data={data}
-          empty={data.length === 0}
+          data={filteredData}
+          empty={filteredData.length === 0}
           error={error && error.message}
           loading={loading}
           tableName={tableName}
@@ -175,8 +179,8 @@ class HealthScoreOverview extends React.Component {
             dataKey="history"
             label="Daily Health Score"
             width='30%'
-            component={({ history, ...data }) => {
-              const id = data[facet.key];
+            component={({ history, ...filteredData }) => {
+              const id = filteredData[facet.key];
 
               if (chartType === 'bar') {
                 return (
@@ -184,7 +188,7 @@ class HealthScoreOverview extends React.Component {
                     data={_.last(history)}
                     dataKey="health_score"
                     label="Health Score"
-                    onClick={this.handleClick(id, data.sid)}
+                    onClick={this.handleClick(id, filteredData.sid)}
                     relative={false}
                   />
                 );
@@ -195,7 +199,7 @@ class HealthScoreOverview extends React.Component {
                   data={history}
                   dataKey="health_score"
                   label="Health Score"
-                  onClick={this.handleClick(id, data.sid)}
+                  onClick={this.handleClick(id, filteredData.sid)}
                   relative={false}
                 />
               );
