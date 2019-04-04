@@ -37,6 +37,6 @@ const mapStateToProps = (state, props) => ({
   valid: state.brightback.valid,
   url: state.brightback.url,
   data: selectBrightbackData(state, props),
-  enabled: configFlag('brightback.enabled')(state)
+  enabled: configFlag('brightback.enabled')()
 });
 export default withRouter(connect(mapStateToProps, { prepBrightback })(Brightback));
