@@ -7,6 +7,9 @@ const productionEnvironment = {
     algolia: {
       index: 'production_site_posts_support_article'
     }
+  },
+  brightback: {
+    enabled: true
   }
 };
 

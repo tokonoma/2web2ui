@@ -34,4 +34,9 @@ describe('Brightback Component', () => {
     expect(wrapper).toMatchSnapshot();
     expect(props.prepBrightback).toHaveBeenCalledWith(props.data);
   });
+
+  it('should not run prep brightback if it is disabled', () => {
+    shallow(<Brightback {...props} enabled={false}/>);
+    expect(props.prepBrightback).not.toHaveBeenCalled();
+  });
 });
