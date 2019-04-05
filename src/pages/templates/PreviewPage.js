@@ -110,6 +110,7 @@ export default class PreviewPage extends Component {
                 disabled={!!loadingError}
                 error={validationError}
                 label="To"
+                name="test-send-to"
                 placeholder="Send to recipient email addresses"
                 onChange={this.onTextChange}
                 value={to}

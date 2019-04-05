@@ -40,6 +40,7 @@ exports[`renders loading error 1`] = `
     <TextField
       disabled={true}
       label="To"
+      name="test-send-to"
       onChange={[Function]}
       placeholder="Send to recipient email addresses"
       resize="both"
@@ -132,6 +133,7 @@ exports[`renders preview page with template 1`] = `
     <TextField
       disabled={false}
       label="To"
+      name="test-send-to"
       onChange={[Function]}
       placeholder="Send to recipient email addresses"
       resize="both"
@@ -185,6 +187,7 @@ exports[`resets error message when user starts typing again 1`] = `
     <TextField
       disabled={false}
       label="To"
+      name="test-send-to"
       onChange={[Function]}
       placeholder="Send to recipient email addresses"
       resize="both"
