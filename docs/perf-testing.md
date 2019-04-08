@@ -36,21 +36,9 @@ These steps will build the app, serve it and run Lighthouse on it locally, to re
 
 ## Steps
  1. Build the app: `npm run build`
- 1. Install serve: `npm i -g serve`
- 1. Configure serve by saving this to `serve.json`:
-    ```json
-    {
-      "rewrites": [
-        {
-          "source": "/static/tenant-config/**/production.js", "destination": "/static/tenant-config/production.js"
-        }
-      ]
-    }
-    ```
  1. Serve your build:
     ```sh
-    cd build
-    serve -c ../serve.json
+    npx serve -l 5000 build
     ```
  1. Run Lighthouse on your build:
     ```sh

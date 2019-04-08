@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Modal } from 'src/components';
 import { Panel, Button, TextField, Grid } from '@sparkpost/matchbox';
-import config from 'src/config';
+import { selectHasAnyoneAtDomainVerificationEnabled } from 'src/selectors/account';
+
 import styles from './VerifyEmail.module.scss';
 import { required } from 'src/helpers/validation';
 
@@ -65,7 +66,7 @@ export class VerifyEmail extends Component {
             </div>
           </Grid.Column>
           <Grid.Column xs={6}>
-            <div className={styles.ButtonColumn}>{ this.renderVerifyButton(this.verifyWithCustom) }</div>
+            <div className={styles.ButtonColumn}>{this.renderVerifyButton(this.verifyWithCustom)}</div>
           </Grid.Column>
         </Grid>
       </Panel.Section>
@@ -93,7 +94,7 @@ export class VerifyEmail extends Component {
             <p><strong>{`postmaster@${id}`}</strong></p>
           </Grid.Column>
           <Grid.Column xs={6}>
-            <div className={styles.ButtonColumn}> {this.renderVerifyButton(this.verifyWithPostmaster) } </div>
+            <div className={styles.ButtonColumn}> {this.renderVerifyButton(this.verifyWithPostmaster)} </div>
           </Grid.Column>
         </Grid>
         <Grid>
@@ -124,8 +125,8 @@ export class VerifyEmail extends Component {
   }
 
   render() {
-    const { open, onCancel } = this.props;
-    const renderVerification = config.featureFlags.allow_anyone_at_verification
+    const { open, onCancel, hasAnyoneAtEnabled } = this.props;
+    const renderVerification = hasAnyoneAtEnabled
       ? this.renderAllowAnyoneAt()
       : this.renderAllowMailboxVerification();
 
@@ -140,7 +141,8 @@ export class VerifyEmail extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  submitting: state.sendingDomains.verifyEmailLoading
+  submitting: state.sendingDomains.verifyEmailLoading,
+  hasAnyoneAtEnabled: selectHasAnyoneAtDomainVerificationEnabled(state)
 });
 
 export default connect(mapStateToProps, { ...sendingDomainsActions, showAlert })(VerifyEmail);

@@ -8,7 +8,8 @@ import { SendingDomainTypeaheadWrapper, TextFieldWrapper } from 'src/components'
 import AccessControl from 'src/components/auth/AccessControl';
 import { required } from 'src/helpers/validation';
 import { configFlag } from 'src/helpers/conditions/config';
-import { isAccountUiOptionSet } from 'src/helpers/conditions/account';
+import { isAccountUiOptionSet, hasAccountOptionEnabled } from 'src/helpers/conditions/account';
+import { any } from 'src/helpers/conditions';
 import { selectCurrentPool } from 'src/selectors/ipPools';
 import isDefaultPool from '../helpers/defaultPool';
 import { SelectWrapper } from '../../../components/reduxFormWrappers';
@@ -54,7 +55,7 @@ export class PoolForm extends Component {
             />
 
             {!editingDefault &&
-              <AccessControl condition={configFlag('featureFlags.allow_default_signing_domains_for_ip_pools')}>
+              <AccessControl condition={any(hasAccountOptionEnabled('allow_default_signing_domains_for_ip_pools'), configFlag('featureFlags.allow_default_signing_domains_for_ip_pools'))}>
                 <Field
                   name="signing_domain"
                   component={SendingDomainTypeaheadWrapper}

@@ -7,7 +7,7 @@ const generateConfigs = () => {
   const allConfigs = {};
   Object.keys(tenants).forEach((environment) => {
     Object.keys(tenants[environment]).forEach((tenantId) => {
-      const config = constructConfig({ ...tenants[environment][tenantId], tenantId }, environment);
+      const config = constructConfig({ ...tenants[environment][tenantId], environment, tenantId }, environment);
       const content = constructContent(config);
 
       if (config.nextHost) {

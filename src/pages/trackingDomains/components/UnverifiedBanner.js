@@ -1,10 +1,8 @@
 import React from 'react';
 import { Banner, Button } from '@sparkpost/matchbox';
-import config from 'src/config';
 import { LINKS } from 'src/constants';
-const cname = config.trackingDomains.cnameValue;
 
-const UnverifiedBanner = ({ unverifiedDomains }) => {
+const UnverifiedBanner = ({ unverifiedDomains, cname }) => {
   const count = unverifiedDomains.length;
 
   if (!count) {

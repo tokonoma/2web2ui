@@ -11,6 +11,7 @@ import {
   selectUnverifiedTrackingDomains,
   selectTrackingDomainsAreLoaded
 } from 'src/selectors/trackingDomains';
+import { selectTrackingDomainCname } from 'src/selectors/account';
 import UnverifiedBanner from './components/UnverifiedBanner';
 import TrackingDomainRow from './components/TrackingDomainRow';
 
@@ -40,10 +41,10 @@ export class ListPage extends Component {
   }
 
   renderCollection() {
-    const { trackingDomains, unverified, verifying } = this.props;
+    const { trackingDomains, unverified, verifying, trackingDomainCname } = this.props;
     return (
       <div>
-        <UnverifiedBanner unverifiedDomains={unverified} />
+        <UnverifiedBanner unverifiedDomains={unverified} cname={trackingDomainCname} />
         <Collection
           rows={trackingDomains || []}
           rowComponent={(props) => <TrackingDomainRow {...props} verifying={verifying} />}
@@ -88,6 +89,7 @@ const mapStateToProps = (state) => {
     error: trackingDomains.error,
     loading: trackingDomains.listLoading,
     trackingDomains: selectTrackingDomainsList(state),
+    trackingDomainCname: selectTrackingDomainCname(state),
     trackingDomainsLoaded: selectTrackingDomainsAreLoaded(state),
     unverified: selectUnverifiedTrackingDomains(state),
     verifying: trackingDomains.verifying
