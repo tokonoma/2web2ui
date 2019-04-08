@@ -72,9 +72,17 @@ describe('Signals Unsubscribe Rate Page', () => {
       expect(axisProps.tickFormatter('2018-12-05')).toEqual('12/5');
     });
 
-    it('gets y axis props', () => {
+    it('gets y axis props with default domain', () => {
+      wrapper.setProps({ data: [{ p_total_unsub: 0 }, { p_total_unsub: null }]});
       const axisProps = wrapper.find('LineChart').prop('yAxisProps');
       expect(axisProps.tickFormatter(.2523)).toEqual('25%');
+      expect(axisProps.domain).toEqual([0,1]);
+    });
+
+    it('gets y axis props with domain', () => {
+      wrapper.setProps({ data: [{ p_total_unsub: 0.5 }, { p_total_unsub: 0.6 }]});
+      const axisProps = wrapper.find('LineChart').prop('yAxisProps');
+      expect(axisProps.domain).toEqual(['auto', 'auto']);
     });
   });
 });

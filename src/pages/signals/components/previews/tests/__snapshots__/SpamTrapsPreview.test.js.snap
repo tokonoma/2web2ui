@@ -48,14 +48,14 @@ exports[`Signals SpamTrapsPreview Component renders correctly 1`] = `
         yAxisProps={
           Object {
             "domain": Array [
-              "auto",
-              "auto",
+              0,
+              1,
             ],
             "tickFormatter": [Function],
           }
         }
         yAxisRefLines={Array []}
-        yKey="trap_hits"
+        yKey="relative_trap_hits"
         yRange={
           Array [
             "auto",

@@ -23,7 +23,15 @@ import cohorts from './constants/cohorts';
 
 export class EngagementRateByCohortPage extends Component {
 
+  isEmpty = () => {
+    const { data } = this.props;
+
+    // Returns true with 0 total engagement
+    return data.every(({ p_total_eng }) => !p_total_eng);
+  }
+
   getYAxisProps = () => ({
+    domain: this.isEmpty() ? [0, 1] : ['auto', 'auto'],
     tickFormatter: (tick) => `${roundToPlaces(tick * 100, 0)}%`
   })
 

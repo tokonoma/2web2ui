@@ -38,8 +38,17 @@ describe('Signals SpamTrapsPreview Component', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('gets y axis props', () => {
+  it('gets y axis props with default domain', () => {
+    wrapper.setProps({ data: [{ relative_trap_hits: null }]});
     const axisProps = wrapper.find('BarChart').prop('yAxisProps');
-    expect(axisProps.tickFormatter((2468))).toEqual('2.47K');
+    expect(axisProps.tickFormatter((0.2468))).toEqual('24.68%');
+    expect(axisProps.domain).toEqual([0,1]);
+  });
+
+  it('gets y axis with domain', () => {
+    wrapper.setProps({ data: [{ relative_trap_hits: 0.1 }]});
+    const axisProps = wrapper.find('BarChart').prop('yAxisProps');
+    expect(axisProps.tickFormatter((0.2468))).toEqual('24.68%');
+    expect(axisProps.domain).toEqual(['auto', 'auto']);
   });
 });

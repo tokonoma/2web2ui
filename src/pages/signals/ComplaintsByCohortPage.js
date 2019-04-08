@@ -22,13 +22,17 @@ import HealthScorePreview from './components/previews/HealthScorePreview';
 import cohorts from './constants/cohorts';
 
 export class ComplaintsByCohortPage extends Component {
-  getYAxisProps = () => {
+  isEmpty = () => {
     const { data } = this.props;
-    return {
-      domain: data.every(({ p_total_fbl }) => !p_total_fbl) ? [0, 1] : ['auto', 'auto'],
-      tickFormatter: (tick) => `${roundToPlaces(tick * 100, 0)}%`
-    };
+
+    // Returns true with 0 total complaints
+    return data.every(({ p_total_fbl }) => !p_total_fbl);
   }
+
+  getYAxisProps = () => ({
+    domain: this.isEmpty() ? [0, 1] : ['auto', 'auto'],
+    tickFormatter: (tick) => `${roundToPlaces(tick * 100, 0)}%`
+  })
 
   getXAxisProps = () => {
     const { xTicks } = this.props;

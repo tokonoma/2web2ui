@@ -48,6 +48,10 @@ exports[`Signals HealthScorePreview Component renders correctly 1`] = `
         xKey="date"
         yAxisProps={
           Object {
+            "domain": Array [
+              0,
+              1,
+            ],
             "tickFormatter": [Function],
           }
         }
