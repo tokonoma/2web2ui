@@ -89,8 +89,8 @@ export class ChangePlanForm extends Component {
   };
 
   renderCCSection = () => {
-    const { account, selectedPlan } = this.props;
-
+    const { account, selectedPlan, billing, submitting } = this.props;
+    const { countries } = billing;
     if (selectedPlan.isFree) {
       return null; // CC not required on free plans
     }
@@ -112,13 +112,13 @@ export class ChangePlanForm extends Component {
         <Panel.Section>
           <PaymentForm
             formName={FORMNAME}
-            disabled={this.props.submitting} />
+            disabled={submitting} />
         </Panel.Section>
         <Panel.Section>
           <BillingAddressForm
             formName={FORMNAME}
-            disabled={this.props.submitting}
-            countries={this.props.billing.countries} />
+            disabled={submitting}
+            countries={countries} />
         </Panel.Section>
       </Panel>
     );
@@ -195,5 +195,5 @@ const mapStateToProps = (state, props) => {
 };
 
 const mapDispatchtoProps = { getBillingInfo, billingCreate, billingUpdate, updateSubscription, showAlert, getPlans, getBillingCountries, fetchAccount, verifyPromoCode, clearPromoCode };
-const formOptions = { form: FORMNAME, asyncValidate: promoCodeValidate(FORMNAME), asyncChangeFields: ['planpicker'], asyncBlurFields: ['promoCode']};
+const formOptions = { form: FORMNAME, enableReinitialize: true, asyncValidate: promoCodeValidate(FORMNAME), asyncChangeFields: ['planpicker'], asyncBlurFields: ['promoCode']};
 export default withRouter(connect(mapStateToProps, mapDispatchtoProps)(reduxForm(formOptions)(ChangePlanForm)));
