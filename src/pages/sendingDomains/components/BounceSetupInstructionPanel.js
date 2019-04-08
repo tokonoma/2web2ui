@@ -6,7 +6,7 @@ import getConfig from 'src/helpers/getConfig';
 import SetupInstructionPanel from './SetupInstructionPanel';
 
 const BounceSetupInstructionPanel = ({
-  domain: { id, status, subaccount }, hasAutoVerifyEnabled, isByoipAccount, loading, showAlert, verify
+  domain: { id, status, subaccount_id }, hasAutoVerifyEnabled, isByoipAccount, loading, showAlert, verify
 }) => {
   const initVerificationType = isByoipAccount && status.mx_status === 'valid' ? 'MX' : 'CNAME';
   const [verificationType, setVerificationType] = useState(initVerificationType);
@@ -16,7 +16,7 @@ const BounceSetupInstructionPanel = ({
     const type = verificationType.toLowerCase();
 
     return (
-      verify({ id, subaccount, type }).then((result) => {
+      verify({ id, subaccount: subaccount_id, type }).then((result) => {
         if (result[`${type}_status`] === 'valid') {
           showAlert({
             type: 'success',
