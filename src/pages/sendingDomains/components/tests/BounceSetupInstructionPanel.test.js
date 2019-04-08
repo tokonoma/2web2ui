@@ -10,9 +10,7 @@ describe('BounceSetupInstructionPanel', () => {
     <BounceSetupInstructionPanel
       domain={{
         id: 'example.com',
-        subaccount: {
-          id: 'sub-example'
-        },
+        subaccount_id: 'sub-example',
         status: {
           cname_status: 'unverified'
         }
@@ -65,7 +63,7 @@ describe('BounceSetupInstructionPanel', () => {
 
     expect(verify).toHaveBeenCalledWith({
       id: 'example.com',
-      subaccount: { id: 'sub-example' },
+      subaccount: 'sub-example',
       type: 'cname'
     });
     expect(showAlert).toHaveBeenCalledWith({
@@ -86,7 +84,7 @@ describe('BounceSetupInstructionPanel', () => {
 
     expect(verify).toHaveBeenCalledWith({
       id: 'example.com',
-      subaccount: { id: 'sub-example' },
+      subaccount: 'sub-example',
       type: 'cname'
     });
     expect(showAlert).toHaveBeenCalledWith({
