@@ -3,7 +3,8 @@ import {
   isEmailLocalPart,
   isRecipientEmailAddress,
   parseRecipientEmailAddress,
-  parseRecipientEmailAddresses
+  parseRecipientEmailAddresses,
+  getDomainFromEmail
 } from '../email';
 
 describe('Email Helper', () => {
@@ -140,5 +141,27 @@ describe('Email Helper', () => {
       const addresses = '"Mark Wahlberg" <marká@example.com>, marká@example.com';
       expect(parseRecipientEmailAddresses(addresses)).toMatchSnapshot();
     });
+  });
+});
+
+describe('getDomainFromEmail', () => {
+  it('returns domain', () => {
+    expect(getDomainFromEmail('testEmail@domain.com')).toEqual('domain.com');
+  });
+
+  it('returns undefined if not a valid email', () => {
+    expect(getDomainFromEmail('testemail')).toEqual(undefined);
+  });
+
+  it('returns undefined if empty string', () => {
+    expect(getDomainFromEmail('testemail')).toEqual(undefined);
+  });
+
+  it('returns undefined if no domain', () => {
+    expect(getDomainFromEmail('testemail@')).toEqual(undefined);
+  });
+
+  it('returns domain including subdomain', () => {
+    expect(getDomainFromEmail('testEmail@sub.domain.com')).toEqual('sub.domain.com');
   });
 });

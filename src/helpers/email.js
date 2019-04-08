@@ -4,6 +4,7 @@ import emailAddresses from 'email-addresses';
 
 const EMAIL_ADDRESS_REGEX = /^[a-z0-9!#$%&'*+/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i;
 const EMAIL_LOCAL_PART_REGEX = /^[a-z0-9!#$%&'*+/=?^_`{|}~.-]+$/i;
+const EMAIL_DOMAIN_REGEX = /@([a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*)/m;
 
 // standardize the record structure
 const parts = ({ address, domain, local, name }) => ({ address, domain, local, name });
@@ -46,4 +47,13 @@ export const parseRecipientEmailAddresses = (input) => {
   }
 
   return result.map(parts);
+};
+
+export const getDomainFromEmail = (email) => {
+  if (!isEmailAddress(email)) {
+    return undefined;
+  }
+
+  const ret = EMAIL_DOMAIN_REGEX.exec(email);
+  return ret[1];
 };

@@ -1,5 +1,6 @@
 import config from 'src/config';
 import { getLocalTimezone } from 'src/helpers/date';
+import { getDomainFromEmail } from 'src/helpers/email';
 
 export const selectBrightbackData = (state, { urls = {}}) => {
   const { customer_id, created, company_name, subscription } = state.account;
@@ -24,9 +25,10 @@ export const selectBrightbackData = (state, { urls = {}}) => {
     account: {
       created_at: new Date(created).getTime(),
       internal_id: customer_id,
-      company_name
+      company_name,
+      value: period === 'month' ? recurring_charge : undefined,
+      company_domain: getDomainFromEmail(email)
     },
-    value: period === 'month' ? recurring_charge : undefined,
     email
   };
 };

@@ -43,7 +43,9 @@ describe('Selectors: brightback', () => {
   it('should not include value if period is not month', () => {
     state.account.subscription.period = 'year';
     expect(selectBrightbackData(state, props)).toEqual(
-      expect.objectContaining({ value: undefined })
+      expect.objectContaining({
+        account: expect.objectContaining({ value: undefined })
+      })
     );
   });
 });
