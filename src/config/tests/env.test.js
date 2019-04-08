@@ -25,4 +25,8 @@ describe('Runtime Environment Configuration', () => {
   it('returns production configurations', () => {
     expect(env('production', 'production')).toEqual(productionConfig);
   });
+
+  it('returns production configurations when environment not set', () => {
+    expect(env('production')).toEqual(productionConfig);
+  });
 });
