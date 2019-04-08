@@ -2,95 +2,17 @@
 
 exports[`generateConfigs returns combined configs 1`] = `
 Object {
-  "247sports.e.sparkpost.com": Object {
-    "apiBase": "https://247sports.api.e.sparkpost.com/api",
-    "bounceDomains": Object {
-      "allowDefault": true,
-      "allowSubaccountDefault": true,
-      "cnameValue": "247sports.mail.e.sparkpost.com",
-      "mxValue": "247sports.mx.e.sparkpost.com",
-    },
-    "brightback": Object {
-      "enabled": true,
-    },
-    "featureFlags": Object {
-      "allow_anyone_at_verification": true,
-      "allow_default_signing_domains_for_ip_pools": true,
-    },
-    "sentry": Object {
-      "projectId": 237613,
-      "publicKey": "014f9707c27b4e7ea90aff051a82e561",
-    },
-    "smtpAuth": Object {
-      "enabled": true,
-      "host": "247sports.smtp.e.sparkpost.com",
-      "port": 587,
-      "username": "247sports",
-    },
-    "support": Object {
-      "algolia": Object {
-        "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
-        "appID": "SFXAWCYDV8",
-        "index": "production_site_posts_support_article",
-      },
-      "enabled": true,
-    },
-    "tenant": "247sports",
-    "trackingDomains": Object {
-      "cnameValue": "track.247sports-m.msyscloud.com",
-    },
-  },
-  "amexgbt.e.sparkpost.com": Object {
-    "apiBase": "https://amexgbt.api.e.sparkpost.com/api",
-    "bounceDomains": Object {
-      "allowDefault": false,
-      "allowSubaccountDefault": true,
-      "cnameValue": "amexgbt.mail.e.sparkpost.com",
-      "mxValue": "amexgbt.mx.e.sparkpost.com",
-    },
-    "brightback": Object {
-      "enabled": true,
-    },
-    "featureFlags": Object {},
-    "sentry": Object {
-      "projectId": 237613,
-      "publicKey": "014f9707c27b4e7ea90aff051a82e561",
-    },
-    "smtpAuth": Object {
-      "enabled": true,
-      "host": "amexgbt.smtp.e.sparkpost.com",
-      "port": 587,
-      "username": "amexgbt",
-    },
-    "support": Object {
-      "algolia": Object {
-        "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
-        "appID": "SFXAWCYDV8",
-        "index": "production_site_posts_support_article",
-      },
-      "enabled": true,
-    },
-    "tenant": "amex",
-    "trackingDomains": Object {
-      "cnameValue": "track.amexgbt-m.sparkpostelite.com",
-    },
-  },
   "app-mtaspc.tst.sparkpost.com": Object {
     "apiBase": "https://api-mtaspc.tst.sparkpost.com/api",
     "bounceDomains": Object {
-      "allowDefault": true,
-      "allowSubaccountDefault": true,
       "cnameValue": "mtaspc.mail.e.tst.sparkpost.com",
       "mxValue": "mtaspc.mx.e.tst.sparkpost.com",
     },
+    "environment": "uat",
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
       "allow_default_signing_domains_for_ip_pools": true,
       "has_signup": true,
-    },
-    "sentry": Object {
-      "projectId": 237611,
-      "publicKey": "b63907577f9c4091895c49cc963fa8e4",
     },
     "siftScience": Object {
       "accountPrefix": "mtaspc-",
@@ -104,15 +26,7 @@ Object {
       "username": "mtaspc",
     },
     "splashPage": "/dashboard",
-    "support": Object {
-      "algolia": Object {
-        "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
-        "appID": "SFXAWCYDV8",
-        "index": "development_site_posts_support_article",
-      },
-      "enabled": true,
-    },
-    "tenant": "mtaspc",
+    "tenantId": "mtaspc",
     "trackingDomains": Object {
       "cnameValue": "mtaspc.et.e.tst.sparkpost.com",
     },
@@ -120,49 +34,27 @@ Object {
   "app-speuat.tst.sparkpost.com": Object {
     "apiBase": "https://api-speuat.tst.sparkpost.com/api",
     "bounceDomains": Object {
-      "allowDefault": true,
-      "allowSubaccountDefault": true,
       "cnameValue": "speuat.mail.e.tst.sparkpost.com",
       "mxValue": "speuat.mx.e.tst.sparkpost.com",
     },
+    "environment": "uat",
     "featureFlags": Object {},
-    "sentry": Object {
-      "projectId": 237611,
-      "publicKey": "b63907577f9c4091895c49cc963fa8e4",
-    },
     "smtpAuth": Object {
       "enabled": true,
       "host": "speuat.smtp.tst.sparkpost.com",
       "port": 587,
       "username": "speuat",
     },
-    "support": Object {
-      "algolia": Object {
-        "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
-        "appID": "SFXAWCYDV8",
-        "index": "development_site_posts_support_article",
-      },
-      "enabled": true,
-    },
-    "tenant": "speuat",
+    "tenantId": "speuat",
     "trackingDomains": Object {
       "cnameValue": "speuat.et.tst.sparkpost.com",
     },
   },
   "app-staging-mtas.sparkpost.com": Object {
     "apiBase": "https://api-staging-mtas.sparkpost.com/api",
-    "bounceDomains": Object {
-      "allowDefault": true,
-      "allowSubaccountDefault": true,
-      "cnameValue": "stagingmtas.mail.e.sparkpost.com",
-      "mxValue": "stagingmtas.mx.e.sparkpost.com",
-    },
+    "environment": "staging",
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
-    },
-    "sentry": Object {
-      "projectId": 237612,
-      "publicKey": "cb27762b225f4884b5e035580f1cc289",
     },
     "smtpAuth": Object {
       "alternativePort": 2525,
@@ -171,15 +63,7 @@ Object {
       "port": 587,
       "username": "stagingmtas",
     },
-    "support": Object {
-      "algolia": Object {
-        "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
-        "appID": "SFXAWCYDV8",
-        "index": "staging_site_posts_support_article",
-      },
-      "enabled": true,
-    },
-    "tenant": "stagingmtas",
+    "tenantId": "stagingmtas",
     "trackingDomains": Object {
       "cnameValue": "stage-mtas.spgo.io",
     },
@@ -187,17 +71,12 @@ Object {
   "app-staging-mtas2.sparkpost.com": Object {
     "apiBase": "https://api-staging-mtas2.sparkpost.com/api",
     "bounceDomains": Object {
-      "allowDefault": true,
-      "allowSubaccountDefault": true,
       "cnameValue": "staging-mtas2.mail.e.sparkpost.com",
       "mxValue": "staging-mtas2.mx.e.sparkpost.com",
     },
+    "environment": "staging",
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
-    },
-    "sentry": Object {
-      "projectId": 237612,
-      "publicKey": "cb27762b225f4884b5e035580f1cc289",
     },
     "smtpAuth": Object {
       "alternativePort": 2525,
@@ -206,38 +85,21 @@ Object {
       "port": 587,
       "username": "staging-mtas2",
     },
-    "support": Object {
-      "algolia": Object {
-        "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
-        "appID": "SFXAWCYDV8",
-        "index": "staging_site_posts_support_article",
-      },
-      "enabled": true,
-    },
-    "tenant": "stagingmtas2",
+    "tenantId": "stagingmtas2",
     "trackingDomains": Object {
       "cnameValue": "staging-mtas2.spgo.io",
     },
   },
   "app-staging.sparkpost.com": Object {
     "apiBase": "https://api-staging.sparkpost.com/api",
-    "bounceDomains": Object {
-      "allowDefault": true,
-      "allowSubaccountDefault": true,
-      "cnameValue": "staging.mail.e.sparkpost.com",
-      "mxValue": "staging.mx.e.sparkpost.com",
-    },
     "crossLinkTenant": "spc",
+    "environment": "staging",
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
       "allow_default_signing_domains_for_ip_pools": true,
       "has_signup": true,
     },
     "gtmId": "GTM-5BCG3R",
-    "sentry": Object {
-      "projectId": 237612,
-      "publicKey": "cb27762b225f4884b5e035580f1cc289",
-    },
     "siftScience": Object {
       "id": "88affa8e11",
     },
@@ -249,35 +111,18 @@ Object {
       "username": "SMTP_Injection",
     },
     "splashPage": "/dashboard",
-    "support": Object {
-      "algolia": Object {
-        "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
-        "appID": "SFXAWCYDV8",
-        "index": "staging_site_posts_support_article",
-      },
-      "enabled": true,
-    },
-    "tenant": "staging",
+    "tenantId": "staging",
     "trackingDomains": Object {
       "cnameValue": "stage.spgo.io",
     },
   },
   "app-stagingmtaspc.sparkpost.com": Object {
     "apiBase": "https://api-stagingmtaspc.sparkpost.com/api",
-    "bounceDomains": Object {
-      "allowDefault": true,
-      "allowSubaccountDefault": true,
-      "cnameValue": "stagingmtaspc.mail.e.sparkpost.com",
-      "mxValue": "stagingmtaspc.mx.e.sparkpost.com",
-    },
+    "environment": "staging",
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
       "allow_default_signing_domains_for_ip_pools": true,
       "has_signup": true,
-    },
-    "sentry": Object {
-      "projectId": 237612,
-      "publicKey": "cb27762b225f4884b5e035580f1cc289",
     },
     "siftScience": Object {
       "accountPrefix": "stagingmtaspc-",
@@ -286,43 +131,26 @@ Object {
     "smtpAuth": Object {
       "alternativePort": 2525,
       "enabled": true,
-      "host": "stagingmtaspc.smtp.e.sparkpost.com",
       "port": 587,
       "username": "stagingmtaspc",
     },
     "splashPage": "/dashboard",
-    "support": Object {
-      "algolia": Object {
-        "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
-        "appID": "SFXAWCYDV8",
-        "index": "staging_site_posts_support_article",
-      },
-      "enabled": true,
-    },
-    "tenant": "stagingmtaspc",
-    "trackingDomains": Object {
-      "cnameValue": "stagingmtaspc.et.e.sparkpost.com",
-    },
+    "tenantId": "stagingmtaspc",
   },
   "app-uat.tst.sparkpost.com": Object {
     "apiBase": "https://api-uat.tst.sparkpost.com/api",
     "bounceDomains": Object {
-      "allowDefault": true,
-      "allowSubaccountDefault": true,
       "cnameValue": "uat-public.mail.e.tst.sparkpost.com",
       "mxValue": "uat-public.mx.e.tst.sparkpost.com",
     },
     "crossLinkTenant": "spceu",
+    "environment": "uat",
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
       "allow_default_signing_domains_for_ip_pools": true,
       "has_signup": true,
     },
     "gtmId": "GTM-P87NNJ4",
-    "sentry": Object {
-      "projectId": 237611,
-      "publicKey": "b63907577f9c4091895c49cc963fa8e4",
-    },
     "siftScience": Object {
       "id": "88affa8e11",
     },
@@ -333,15 +161,7 @@ Object {
       "username": "SMTP_Injection",
     },
     "splashPage": "/dashboard",
-    "support": Object {
-      "algolia": Object {
-        "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
-        "appID": "SFXAWCYDV8",
-        "index": "development_site_posts_support_article",
-      },
-      "enabled": true,
-    },
-    "tenant": "uat",
+    "tenantId": "uat",
     "trackingDomains": Object {
       "cnameValue": "spcuat.et.e.tst.sparkpost.com",
     },
@@ -349,17 +169,12 @@ Object {
   "app-uat2.tst.sparkpost.com": Object {
     "apiBase": "https://api-uat2.tst.sparkpost.com/api",
     "bounceDomains": Object {
-      "allowDefault": true,
-      "allowSubaccountDefault": true,
       "cnameValue": "uat2public.mail.e.tst.sparkpost.com",
       "mxValue": "uat2public.mx.e.tst.sparkpost.com",
     },
+    "environment": "uat",
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
-    },
-    "sentry": Object {
-      "projectId": 237611,
-      "publicKey": "b63907577f9c4091895c49cc963fa8e4",
     },
     "smtpAuth": Object {
       "enabled": true,
@@ -367,15 +182,7 @@ Object {
       "port": 587,
       "username": "uat2public",
     },
-    "support": Object {
-      "algolia": Object {
-        "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
-        "appID": "SFXAWCYDV8",
-        "index": "development_site_posts_support_article",
-      },
-      "enabled": true,
-    },
-    "tenant": "uat2",
+    "tenantId": "uat2",
     "trackingDomains": Object {
       "cnameValue": "uat2.spgo.io",
     },
@@ -383,17 +190,12 @@ Object {
   "app-uat3.tst.sparkpost.com": Object {
     "apiBase": "https://api-uat3.tst.sparkpost.com/api",
     "bounceDomains": Object {
-      "allowDefault": true,
-      "allowSubaccountDefault": true,
       "cnameValue": "uat3.mail.e.tst.sparkpost.com",
       "mxValue": "uat3.mx.e.tst.sparkpost.com",
     },
+    "environment": "uat",
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
-    },
-    "sentry": Object {
-      "projectId": 237611,
-      "publicKey": "b63907577f9c4091895c49cc963fa8e4",
     },
     "smtpAuth": Object {
       "enabled": true,
@@ -401,15 +203,7 @@ Object {
       "port": 587,
       "username": "uat3",
     },
-    "support": Object {
-      "algolia": Object {
-        "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
-        "appID": "SFXAWCYDV8",
-        "index": "development_site_posts_support_article",
-      },
-      "enabled": true,
-    },
-    "tenant": "uat3",
+    "tenantId": "uat3",
     "trackingDomains": Object {
       "cnameValue": "uat3.spgo.io",
     },
@@ -417,17 +211,12 @@ Object {
   "app-uat4.tst.sparkpost.com": Object {
     "apiBase": "https://api-uat4.tst.sparkpost.com/api",
     "bounceDomains": Object {
-      "allowDefault": true,
-      "allowSubaccountDefault": true,
       "cnameValue": "uat4.mail.e.tst.sparkpost.com",
       "mxValue": "uat4.mx.e.tst.sparkpost.com",
     },
+    "environment": "uat",
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
-    },
-    "sentry": Object {
-      "projectId": 237611,
-      "publicKey": "b63907577f9c4091895c49cc963fa8e4",
     },
     "smtpAuth": Object {
       "enabled": true,
@@ -435,15 +224,7 @@ Object {
       "port": 587,
       "username": "uat4",
     },
-    "support": Object {
-      "algolia": Object {
-        "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
-        "appID": "SFXAWCYDV8",
-        "index": "development_site_posts_support_article",
-      },
-      "enabled": true,
-    },
-    "tenant": "uat4",
+    "tenantId": "uat4",
     "trackingDomains": Object {
       "cnameValue": "uat4.spgo.io",
     },
@@ -451,26 +232,20 @@ Object {
   "app.eu.sparkpost.com": Object {
     "apiBase": "https://api.eu.sparkpost.com/api",
     "bounceDomains": Object {
-      "allowDefault": true,
-      "allowSubaccountDefault": true,
       "cnameValue": "eu.sparkpostmail.com",
       "mxValue": "smtp.eu.sparkpostmail.com",
     },
     "brightback": Object {
-      "enabled": true,
       "freePlan": "free500-SPCEU-1018",
     },
     "crossLinkTenant": "spc",
+    "environment": "production",
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
       "allow_default_signing_domains_for_ip_pools": true,
       "has_signup": true,
     },
     "gtmId": "GTM-WN7C84",
-    "sentry": Object {
-      "projectId": 237613,
-      "publicKey": "014f9707c27b4e7ea90aff051a82e561",
-    },
     "siftScience": Object {
       "accountPrefix": "spceu-",
       "id": "7c5f68d795",
@@ -483,15 +258,7 @@ Object {
       "username": "SMTP_Injection",
     },
     "splashPage": "/dashboard",
-    "support": Object {
-      "algolia": Object {
-        "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
-        "appID": "SFXAWCYDV8",
-        "index": "production_site_posts_support_article",
-      },
-      "enabled": true,
-    },
-    "tenant": "spceu",
+    "tenantId": "spceu",
     "trackingDomains": Object {
       "cnameValue": "eu.spgo.io",
     },
@@ -502,25 +269,17 @@ Object {
   "app.sparkpost.com": Object {
     "apiBase": "https://api.sparkpost.com/api",
     "bounceDomains": Object {
-      "allowDefault": true,
-      "allowSubaccountDefault": true,
       "cnameValue": "sparkpostmail.com",
       "mxValue": "smtp.sparkpostmail.com",
     },
-    "brightback": Object {
-      "enabled": true,
-    },
     "crossLinkTenant": "spceu",
+    "environment": "production",
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
       "allow_default_signing_domains_for_ip_pools": true,
       "has_signup": true,
     },
     "gtmId": "GTM-WN7C84",
-    "sentry": Object {
-      "projectId": 237613,
-      "publicKey": "014f9707c27b4e7ea90aff051a82e561",
-    },
     "siftScience": Object {
       "id": "7c5f68d795",
     },
@@ -532,15 +291,7 @@ Object {
       "username": "SMTP_Injection",
     },
     "splashPage": "/dashboard",
-    "support": Object {
-      "algolia": Object {
-        "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
-        "appID": "SFXAWCYDV8",
-        "index": "production_site_posts_support_article",
-      },
-      "enabled": true,
-    },
-    "tenant": "spc",
+    "tenantId": "spc",
     "trackingDomains": Object {
       "cnameValue": "spgo.io",
     },
@@ -548,1415 +299,63 @@ Object {
       "baseUrl": "https://api.zuora.com/rest/v1",
     },
   },
-  "atlassian-eu.e.sparkpost.com": Object {
-    "apiBase": "https://atlassian-eu.api.e.sparkpost.com/api",
-    "bounceDomains": Object {
-      "allowDefault": true,
-      "allowSubaccountDefault": false,
-      "cnameValue": "atlassian-eu.mail.e.sparkpost.com",
-      "mxValue": "atlassian-eu.mx.e.sparkpost.com",
-    },
-    "brightback": Object {
-      "enabled": true,
-    },
-    "featureFlags": Object {
-      "allow_anyone_at_verification": true,
-      "allow_default_signing_domains_for_ip_pools": true,
-    },
-    "sentry": Object {
-      "projectId": 237613,
-      "publicKey": "014f9707c27b4e7ea90aff051a82e561",
-    },
-    "smtpAuth": Object {
-      "enabled": true,
-      "host": "atlassian-eu.smtp.e.sparkpost.com",
-      "port": 587,
-      "username": "atlassian-eu",
-    },
-    "support": Object {
-      "algolia": Object {
-        "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
-        "appID": "SFXAWCYDV8",
-        "index": "production_site_posts_support_article",
-      },
-      "enabled": true,
-    },
-    "tenant": "atlassianeu",
-    "trackingDomains": Object {
-      "cnameValue": "atlassian-eu.et.e.sparkpost.com",
-    },
-  },
-  "atlassian.e.sparkpost.com": Object {
-    "apiBase": "https://atlassian.api.e.sparkpost.com/api",
-    "bounceDomains": Object {
-      "allowDefault": true,
-      "allowSubaccountDefault": true,
-      "cnameValue": "atlassian.mail.e.sparkpost.com",
-      "mxValue": "atlassian.mx.e.sparkpost.com",
-    },
-    "brightback": Object {
-      "enabled": true,
-    },
-    "featureFlags": Object {
-      "allow_anyone_at_verification": true,
-      "allow_default_signing_domains_for_ip_pools": true,
-    },
-    "sentry": Object {
-      "projectId": 237613,
-      "publicKey": "014f9707c27b4e7ea90aff051a82e561",
-    },
-    "smtpAuth": Object {
-      "enabled": true,
-      "host": "atlassian.smtp.e.sparkpost.com",
-      "port": 587,
-      "username": "atlassian",
-    },
-    "support": Object {
-      "algolia": Object {
-        "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
-        "appID": "SFXAWCYDV8",
-        "index": "production_site_posts_support_article",
-      },
-      "enabled": true,
-    },
-    "tenant": "atlassianus",
-    "trackingDomains": Object {
-      "cnameValue": "atlassian.et.e.sparkpost.com",
-    },
-  },
   "balutest.e.sparkpost.com": Object {
-    "apiBase": "https://balutest.api.e.sparkpost.com/api",
     "bounceDomains": Object {
       "allowDefault": false,
-      "allowSubaccountDefault": true,
-      "cnameValue": "balutest.mail.e.sparkpost.com",
-      "mxValue": "balutest.mx.e.sparkpost.com",
     },
+    "environment": "staging",
     "featureFlags": Object {},
-    "sentry": Object {
-      "projectId": 237612,
-      "publicKey": "cb27762b225f4884b5e035580f1cc289",
-    },
     "smtpAuth": Object {
       "enabled": true,
-      "host": "balutest.smtp.e.sparkpost.com",
       "port": 587,
       "username": "balutest",
     },
-    "support": Object {
-      "algolia": Object {
-        "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
-        "appID": "SFXAWCYDV8",
-        "index": "staging_site_posts_support_article",
-      },
-      "enabled": true,
-    },
-    "tenant": "balutest",
-    "trackingDomains": Object {
-      "cnameValue": "balutest.et.e.sparkpost.com",
-    },
-  },
-  "becordial.e.sparkpost.com": Object {
-    "apiBase": "https://becordial.api.e.sparkpost.com/api",
-    "bounceDomains": Object {
-      "allowDefault": true,
-      "allowSubaccountDefault": true,
-      "cnameValue": "becordial.mail.e.sparkpost.com",
-      "mxValue": "becordial.mx.e.sparkpost.com",
-    },
-    "brightback": Object {
-      "enabled": true,
-    },
-    "featureFlags": Object {
-      "allow_anyone_at_verification": true,
-      "allow_default_signing_domains_for_ip_pools": true,
-    },
-    "sentry": Object {
-      "projectId": 237613,
-      "publicKey": "014f9707c27b4e7ea90aff051a82e561",
-    },
-    "smtpAuth": Object {
-      "enabled": true,
-      "host": "becordial.smtp.e.sparkpost.com",
-      "port": 587,
-      "username": "becordial",
-    },
-    "support": Object {
-      "algolia": Object {
-        "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
-        "appID": "SFXAWCYDV8",
-        "index": "production_site_posts_support_article",
-      },
-      "enabled": true,
-    },
-    "tenant": "becordial",
-    "trackingDomains": Object {
-      "cnameValue": "becordial.et.e.sparkpost.com",
-    },
-  },
-  "booking.e.sparkpost.com": Object {
-    "apiBase": "https://booking.api.e.sparkpost.com/api",
-    "bounceDomains": Object {
-      "allowDefault": true,
-      "allowSubaccountDefault": false,
-      "cnameValue": "booking.mail.e.sparkpost.com",
-      "mxValue": "booking.mx.e.sparkpost.com",
-    },
-    "brightback": Object {
-      "enabled": true,
-    },
-    "featureFlags": Object {
-      "allow_anyone_at_verification": true,
-    },
-    "sentry": Object {
-      "projectId": 237613,
-      "publicKey": "014f9707c27b4e7ea90aff051a82e561",
-    },
-    "smtpAuth": Object {
-      "enabled": true,
-      "host": "booking.smtp.e.sparkpost.com",
-      "port": 587,
-      "username": "booking",
-    },
-    "support": Object {
-      "algolia": Object {
-        "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
-        "appID": "SFXAWCYDV8",
-        "index": "production_site_posts_support_article",
-      },
-      "enabled": true,
-    },
-    "tenant": "booking",
-    "trackingDomains": Object {
-      "cnameValue": "booking.et.e.sparkpost.com",
-    },
-  },
-  "ca.e.sparkpost.com": Object {
-    "apiBase": "https://ca.api.e.sparkpost.com/api",
-    "bounceDomains": Object {
-      "allowDefault": true,
-      "allowSubaccountDefault": false,
-      "cnameValue": "ca.mail.e.sparkpost.com",
-      "mxValue": "ca.mx.e.sparkpost.com",
-    },
-    "brightback": Object {
-      "enabled": true,
-    },
-    "featureFlags": Object {
-      "allow_default_signing_domains_for_ip_pools": false,
-    },
-    "sentry": Object {
-      "projectId": 237613,
-      "publicKey": "014f9707c27b4e7ea90aff051a82e561",
-    },
-    "smtpAuth": Object {
-      "enabled": true,
-      "host": "ca.smtp.e.sparkpost.com",
-      "port": 587,
-      "username": "ca",
-    },
-    "support": Object {
-      "algolia": Object {
-        "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
-        "appID": "SFXAWCYDV8",
-        "index": "production_site_posts_support_article",
-      },
-      "enabled": true,
-    },
-    "tenant": "creditag",
-    "trackingDomains": Object {
-      "cnameValue": "ca.et.e.sparkpost.com",
-    },
-  },
-  "capitalone.e.sparkpost.com": Object {
-    "apiBase": "https://capitalone.api.e.sparkpost.com/api",
-    "bounceDomains": Object {
-      "allowDefault": true,
-      "allowSubaccountDefault": true,
-      "cnameValue": "capitalone.mail.e.sparkpost.com",
-      "mxValue": "capitalone.mx.e.sparkpost.com",
-    },
-    "brightback": Object {
-      "enabled": true,
-    },
-    "featureFlags": Object {
-      "allow_anyone_at_verification": true,
-    },
-    "sentry": Object {
-      "projectId": 237613,
-      "publicKey": "014f9707c27b4e7ea90aff051a82e561",
-    },
-    "smtpAuth": Object {
-      "enabled": true,
-      "host": "capitalone.smtp.e.sparkpost.com",
-      "port": 587,
-      "username": "capitalone",
-    },
-    "support": Object {
-      "algolia": Object {
-        "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
-        "appID": "SFXAWCYDV8",
-        "index": "production_site_posts_support_article",
-      },
-      "enabled": true,
-    },
-    "tenant": "capone",
-    "trackingDomains": Object {
-      "cnameValue": "click.c1-t.msyscloud.com",
-    },
-  },
-  "careerbuilder.e.sparkpost.com": Object {
-    "apiBase": "https://careerbuilder.api.e.sparkpost.com/api",
-    "bounceDomains": Object {
-      "allowDefault": true,
-      "allowSubaccountDefault": true,
-      "cnameValue": "careerbuilder.mail.e.sparkpost.com",
-      "mxValue": "careerbuilder.mx.e.sparkpost.com",
-    },
-    "brightback": Object {
-      "enabled": true,
-    },
-    "featureFlags": Object {
-      "allow_anyone_at_verification": true,
-    },
-    "sentry": Object {
-      "projectId": 237613,
-      "publicKey": "014f9707c27b4e7ea90aff051a82e561",
-    },
-    "smtpAuth": Object {
-      "enabled": true,
-      "host": "careerbuilder.smtp.e.sparkpost.com",
-      "port": 587,
-      "username": "careerbuilder",
-    },
-    "support": Object {
-      "algolia": Object {
-        "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
-        "appID": "SFXAWCYDV8",
-        "index": "production_site_posts_support_article",
-      },
-      "enabled": true,
-    },
-    "tenant": "careerb",
-    "trackingDomains": Object {
-      "cnameValue": "click.sites.careerbuilder.com",
-    },
-  },
-  "cerner.e.sparkpost.com": Object {
-    "apiBase": "https://cerner.api.e.sparkpost.com/api",
-    "bounceDomains": Object {
-      "allowDefault": true,
-      "allowSubaccountDefault": true,
-      "cnameValue": "cerner.mail.e.sparkpost.com",
-      "mxValue": "cerner.mx.e.sparkpost.com",
-    },
-    "brightback": Object {
-      "enabled": true,
-    },
-    "featureFlags": Object {
-      "allow_anyone_at_verification": true,
-      "allow_default_signing_domains_for_ip_pools": true,
-    },
-    "sentry": Object {
-      "projectId": 237613,
-      "publicKey": "014f9707c27b4e7ea90aff051a82e561",
-    },
-    "smtpAuth": Object {
-      "enabled": true,
-      "host": "cerner.smtp.e.sparkpost.com",
-      "port": 587,
-      "username": "cerner",
-    },
-    "support": Object {
-      "algolia": Object {
-        "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
-        "appID": "SFXAWCYDV8",
-        "index": "production_site_posts_support_article",
-      },
-      "enabled": true,
-    },
-    "tenant": "cerner",
-    "trackingDomains": Object {
-      "cnameValue": "click.mail.cerner.com",
-    },
-  },
-  "clipper.e.sparkpost.com": Object {
-    "apiBase": "https://clipper.api.e.sparkpost.com/api",
-    "bounceDomains": Object {
-      "allowDefault": true,
-      "allowSubaccountDefault": true,
-      "cnameValue": "clipper.mail.e.sparkpost.com",
-      "mxValue": "clipper.mx.e.sparkpost.com",
-    },
-    "brightback": Object {
-      "enabled": true,
-    },
-    "featureFlags": Object {
-      "allow_anyone_at_verification": true,
-      "allow_default_signing_domains_for_ip_pools": true,
-    },
-    "sentry": Object {
-      "projectId": 237613,
-      "publicKey": "014f9707c27b4e7ea90aff051a82e561",
-    },
-    "smtpAuth": Object {
-      "enabled": true,
-      "host": "clipper.smtp.e.sparkpost.com",
-      "port": 587,
-      "username": "clipper",
-    },
-    "support": Object {
-      "algolia": Object {
-        "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
-        "appID": "SFXAWCYDV8",
-        "index": "production_site_posts_support_article",
-      },
-      "enabled": true,
-    },
-    "tenant": "clipper",
-    "trackingDomains": Object {
-      "cnameValue": "track.clipper.sparkpostelite.com",
-    },
-  },
-  "coep.e.sparkpost.com": Object {
-    "apiBase": "https://coep.api.e.sparkpost.com/api",
-    "bounceDomains": Object {
-      "allowDefault": true,
-      "allowSubaccountDefault": false,
-      "cnameValue": "coep.mail.e.sparkpost.com",
-      "mxValue": "coep.mx.e.sparkpost.com",
-    },
-    "brightback": Object {
-      "enabled": true,
-    },
-    "featureFlags": Object {
-      "allow_anyone_at_verification": true,
-    },
-    "sentry": Object {
-      "projectId": 237613,
-      "publicKey": "014f9707c27b4e7ea90aff051a82e561",
-    },
-    "smtpAuth": Object {
-      "enabled": true,
-      "host": "coep.smtp.e.sparkpost.com",
-      "port": 587,
-      "username": "coep",
-    },
-    "support": Object {
-      "algolia": Object {
-        "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
-        "appID": "SFXAWCYDV8",
-        "index": "production_site_posts_support_article",
-      },
-      "enabled": true,
-    },
-    "tenant": "caponeuk",
-    "trackingDomains": Object {
-      "cnameValue": "click.notification.capitalone.co.uk",
-    },
-  },
-  "cordial.e.sparkpost.com": Object {
-    "apiBase": "https://cordial.api.e.sparkpost.com/api",
-    "bounceDomains": Object {
-      "allowDefault": true,
-      "allowSubaccountDefault": true,
-      "cnameValue": "cordial.mail.e.sparkpost.com",
-      "mxValue": "cordial.mx.e.sparkpost.com",
-    },
-    "brightback": Object {
-      "enabled": true,
-    },
-    "featureFlags": Object {
-      "allow_anyone_at_verification": true,
-      "allow_default_signing_domains_for_ip_pools": true,
-    },
-    "sentry": Object {
-      "projectId": 237613,
-      "publicKey": "014f9707c27b4e7ea90aff051a82e561",
-    },
-    "smtpAuth": Object {
-      "enabled": true,
-      "host": "cordial.smtp.e.sparkpost.com",
-      "port": 587,
-      "username": "cordial",
-    },
-    "support": Object {
-      "algolia": Object {
-        "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
-        "appID": "SFXAWCYDV8",
-        "index": "production_site_posts_support_article",
-      },
-      "enabled": true,
-    },
-    "tenant": "cordial",
-    "trackingDomains": Object {
-      "cnameValue": "track.sp.crdl.io",
-    },
-  },
-  "coursera.e.sparkpost.com": Object {
-    "apiBase": "https://coursera.api.e.sparkpost.com/api",
-    "bounceDomains": Object {
-      "allowDefault": true,
-      "allowSubaccountDefault": true,
-      "cnameValue": "coursera.mail.e.sparkpost.com",
-      "mxValue": "coursera.mx.e.sparkpost.com",
-    },
-    "brightback": Object {
-      "enabled": true,
-    },
-    "featureFlags": Object {
-      "allow_anyone_at_verification": true,
-      "allow_default_signing_domains_for_ip_pools": true,
-    },
-    "sentry": Object {
-      "projectId": 237613,
-      "publicKey": "014f9707c27b4e7ea90aff051a82e561",
-    },
-    "smtpAuth": Object {
-      "enabled": true,
-      "host": "coursera.smtp.e.sparkpost.com",
-      "port": 587,
-      "username": "coursera",
-    },
-    "support": Object {
-      "algolia": Object {
-        "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
-        "appID": "SFXAWCYDV8",
-        "index": "production_site_posts_support_article",
-      },
-      "enabled": true,
-    },
-    "tenant": "coursera",
-    "trackingDomains": Object {
-      "cnameValue": "click.mail.coursera.org",
-    },
-  },
-  "creator.e.sparkpost.com": Object {
-    "apiBase": "https://creator.api.e.sparkpost.com/api",
-    "bounceDomains": Object {
-      "allowDefault": true,
-      "allowSubaccountDefault": false,
-      "cnameValue": "creator.mail.e.sparkpost.com",
-      "mxValue": "creator.mx.e.sparkpost.com",
-    },
-    "brightback": Object {
-      "enabled": true,
-    },
-    "featureFlags": Object {
-      "allow_anyone_at_verification": true,
-    },
-    "sentry": Object {
-      "projectId": 237613,
-      "publicKey": "014f9707c27b4e7ea90aff051a82e561",
-    },
-    "smtpAuth": Object {
-      "enabled": true,
-      "host": "creator.smtp.e.sparkpost.com",
-      "port": 587,
-      "username": "creator",
-    },
-    "support": Object {
-      "algolia": Object {
-        "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
-        "appID": "SFXAWCYDV8",
-        "index": "production_site_posts_support_article",
-      },
-      "enabled": true,
-    },
-    "tenant": "creator",
-    "trackingDomains": Object {
-      "cnameValue": "creator.et.e.sparkpost.com",
-    },
-  },
-  "dalenys.e.sparkpost.com": Object {
-    "apiBase": "https://dalenys.api.e.sparkpost.com/api",
-    "bounceDomains": Object {
-      "allowDefault": true,
-      "allowSubaccountDefault": false,
-      "cnameValue": "dalenys.mail.e.sparkpost.com",
-      "mxValue": "dalenys.mx.e.sparkpost.com",
-    },
-    "brightback": Object {
-      "enabled": true,
-    },
-    "featureFlags": Object {
-      "allow_anyone_at_verification": true,
-    },
-    "sentry": Object {
-      "projectId": 237613,
-      "publicKey": "014f9707c27b4e7ea90aff051a82e561",
-    },
-    "smtpAuth": Object {
-      "enabled": true,
-      "host": "dalenys.smtp.e.sparkpost.com",
-      "port": 587,
-      "username": "dalenys",
-    },
-    "support": Object {
-      "algolia": Object {
-        "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
-        "appID": "SFXAWCYDV8",
-        "index": "production_site_posts_support_article",
-      },
-      "enabled": true,
-    },
-    "tenant": "dalenys",
-    "trackingDomains": Object {
-      "cnameValue": "dalenys.et.e.sparkpost.com",
-    },
+    "tenantId": "balutest",
   },
   "demo.e.sparkpost.com": Object {
-    "apiBase": "https://demo.api.e.sparkpost.com/api",
-    "bounceDomains": Object {
-      "allowDefault": true,
-      "allowSubaccountDefault": true,
-      "cnameValue": "demo.mail.e.sparkpost.com",
-      "mxValue": "demo.mx.e.sparkpost.com",
-    },
-    "brightback": Object {
-      "enabled": true,
-    },
+    "environment": "production",
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
       "allow_default_signing_domains_for_ip_pools": true,
     },
-    "sentry": Object {
-      "projectId": 237613,
-      "publicKey": "014f9707c27b4e7ea90aff051a82e561",
-    },
     "smtpAuth": Object {
       "enabled": true,
-      "host": "demo.smtp.e.sparkpost.com",
       "port": 587,
       "username": "demo",
     },
-    "support": Object {
-      "algolia": Object {
-        "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
-        "appID": "SFXAWCYDV8",
-        "index": "production_site_posts_support_article",
-      },
-      "enabled": true,
-    },
-    "tenant": "demo",
+    "tenantId": "demo",
     "trackingDomains": Object {
       "cnameValue": "track.demo-t.sparkpostelite.com",
     },
   },
-  "dhi.e.sparkpost.com": Object {
-    "apiBase": "https://dhi.api.e.sparkpost.com/api",
-    "bounceDomains": Object {
-      "allowDefault": true,
-      "allowSubaccountDefault": true,
-      "cnameValue": "dhi.mail.e.sparkpost.com",
-      "mxValue": "dhi.mx.e.sparkpost.com",
-    },
-    "brightback": Object {
-      "enabled": true,
-    },
-    "featureFlags": Object {
-      "allow_anyone_at_verification": true,
-      "allow_default_signing_domains_for_ip_pools": true,
-    },
-    "sentry": Object {
-      "projectId": 237613,
-      "publicKey": "014f9707c27b4e7ea90aff051a82e561",
-    },
-    "smtpAuth": Object {
-      "enabled": true,
-      "host": "dhi.smtp.e.sparkpost.com",
-      "port": 587,
-      "username": "dhi",
-    },
-    "support": Object {
-      "algolia": Object {
-        "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
-        "appID": "SFXAWCYDV8",
-        "index": "production_site_posts_support_article",
-      },
-      "enabled": true,
-    },
-    "tenant": "dhi",
-    "trackingDomains": Object {
-      "cnameValue": "dhi.et.e.sparkpost.com",
-    },
-  },
-  "disney.e.sparkpost.com": Object {
-    "apiBase": "https://disney.api.e.sparkpost.com/api",
-    "bounceDomains": Object {
-      "allowDefault": true,
-      "allowSubaccountDefault": true,
-      "cnameValue": "disney.mail.e.sparkpost.com",
-      "mxValue": "disney.mx.e.sparkpost.com",
-    },
-    "brightback": Object {
-      "enabled": true,
-    },
-    "featureFlags": Object {
-      "allow_anyone_at_verification": true,
-      "allow_default_signing_domains_for_ip_pools": true,
-    },
-    "sentry": Object {
-      "projectId": 237613,
-      "publicKey": "014f9707c27b4e7ea90aff051a82e561",
-    },
-    "smtpAuth": Object {
-      "enabled": true,
-      "host": "disney.smtp.e.sparkpost.com",
-      "port": 587,
-      "username": "disney",
-    },
-    "support": Object {
-      "algolia": Object {
-        "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
-        "appID": "SFXAWCYDV8",
-        "index": "production_site_posts_support_article",
-      },
-      "enabled": true,
-    },
-    "tenant": "disney",
-    "trackingDomains": Object {
-      "cnameValue": "disney.et.e.sparkpost.com",
-    },
-  },
-  "ebates.e.sparkpost.com": Object {
-    "apiBase": "https://ebates.api.e.sparkpost.com/api",
-    "bounceDomains": Object {
-      "allowDefault": true,
-      "allowSubaccountDefault": true,
-      "cnameValue": "ebates.mail.e.sparkpost.com",
-      "mxValue": "ebates.mx.e.sparkpost.com",
-    },
-    "brightback": Object {
-      "enabled": true,
-    },
-    "featureFlags": Object {
-      "allow_anyone_at_verification": true,
-      "allow_default_signing_domains_for_ip_pools": true,
-    },
-    "sentry": Object {
-      "projectId": 237613,
-      "publicKey": "014f9707c27b4e7ea90aff051a82e561",
-    },
-    "smtpAuth": Object {
-      "enabled": true,
-      "host": "ebates.smtp.e.sparkpost.com",
-      "port": 587,
-      "username": "ebates",
-    },
-    "support": Object {
-      "algolia": Object {
-        "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
-        "appID": "SFXAWCYDV8",
-        "index": "production_site_posts_support_article",
-      },
-      "enabled": true,
-    },
-    "tenant": "ebates",
-    "trackingDomains": Object {
-      "cnameValue": "link.ebates.com",
-    },
-  },
-  "eonian.e.sparkpost.com": Object {
-    "apiBase": "https://eonian.api.e.sparkpost.com/api",
-    "bounceDomains": Object {
-      "allowDefault": true,
-      "allowSubaccountDefault": true,
-      "cnameValue": "eonian.mail.e.sparkpost.com",
-      "mxValue": "eonian.mx.e.sparkpost.com",
-    },
-    "brightback": Object {
-      "enabled": true,
-    },
-    "featureFlags": Object {
-      "allow_anyone_at_verification": true,
-      "allow_default_signing_domains_for_ip_pools": true,
-    },
-    "sentry": Object {
-      "projectId": 237613,
-      "publicKey": "014f9707c27b4e7ea90aff051a82e561",
-    },
-    "smtpAuth": Object {
-      "enabled": true,
-      "host": "eonian.smtp.e.sparkpost.com",
-      "port": 587,
-      "username": "eonian",
-    },
-    "support": Object {
-      "algolia": Object {
-        "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
-        "appID": "SFXAWCYDV8",
-        "index": "production_site_posts_support_article",
-      },
-      "enabled": true,
-    },
-    "tenant": "eonian",
-    "trackingDomains": Object {
-      "cnameValue": "eonian.et.e.sparkpost.com",
-    },
-  },
-  "ft.e.sparkpost.com": Object {
-    "apiBase": "https://ft.api.e.sparkpost.com/api",
-    "bounceDomains": Object {
-      "allowDefault": true,
-      "allowSubaccountDefault": true,
-      "cnameValue": "ft.mail.e.sparkpost.com",
-      "mxValue": "ft.mx.e.sparkpost.com",
-    },
-    "brightback": Object {
-      "enabled": true,
-    },
-    "featureFlags": Object {
-      "allow_anyone_at_verification": true,
-      "allow_default_signing_domains_for_ip_pools": true,
-    },
-    "sentry": Object {
-      "projectId": 237613,
-      "publicKey": "014f9707c27b4e7ea90aff051a82e561",
-    },
-    "smtpAuth": Object {
-      "enabled": true,
-      "host": "ft.smtp.e.sparkpost.com",
-      "port": 587,
-      "username": "ft",
-    },
-    "support": Object {
-      "algolia": Object {
-        "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
-        "appID": "SFXAWCYDV8",
-        "index": "production_site_posts_support_article",
-      },
-      "enabled": true,
-    },
-    "tenant": "fintimes",
-    "trackingDomains": Object {
-      "cnameValue": "track-ft.sparkpostelite.com",
-    },
-  },
-  "gilt.e.sparkpost.com": Object {
-    "apiBase": "https://gilt.api.e.sparkpost.com/api",
-    "bounceDomains": Object {
-      "allowDefault": true,
-      "allowSubaccountDefault": true,
-      "cnameValue": "gilt.mail.e.sparkpost.com",
-      "mxValue": "gilt.mx.e.sparkpost.com",
-    },
-    "brightback": Object {
-      "enabled": true,
-    },
-    "featureFlags": Object {
-      "allow_anyone_at_verification": true,
-      "allow_default_signing_domains_for_ip_pools": true,
-    },
-    "sentry": Object {
-      "projectId": 237613,
-      "publicKey": "014f9707c27b4e7ea90aff051a82e561",
-    },
-    "smtpAuth": Object {
-      "enabled": true,
-      "host": "gilt.smtp.e.sparkpost.com",
-      "port": 587,
-      "username": "gilt",
-    },
-    "support": Object {
-      "algolia": Object {
-        "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
-        "appID": "SFXAWCYDV8",
-        "index": "production_site_posts_support_article",
-      },
-      "enabled": true,
-    },
-    "tenant": "gilt",
-    "trackingDomains": Object {
-      "cnameValue": "track.p.gilt.com",
-    },
-  },
-  "gmc.e.sparkpost.com": Object {
-    "apiBase": "https://gmc.api.e.sparkpost.com/api",
-    "bounceDomains": Object {
-      "allowDefault": true,
-      "allowSubaccountDefault": true,
-      "cnameValue": "gmc.mail.e.sparkpost.com",
-      "mxValue": "gmc.mx.e.sparkpost.com",
-    },
-    "brightback": Object {
-      "enabled": true,
-    },
-    "featureFlags": Object {
-      "allow_anyone_at_verification": true,
-      "allow_default_signing_domains_for_ip_pools": true,
-    },
-    "sentry": Object {
-      "projectId": 237613,
-      "publicKey": "014f9707c27b4e7ea90aff051a82e561",
-    },
-    "smtpAuth": Object {
-      "enabled": true,
-      "host": "gmc.smtp.e.sparkpost.com",
-      "port": 587,
-      "username": "gmc",
-    },
-    "support": Object {
-      "algolia": Object {
-        "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
-        "appID": "SFXAWCYDV8",
-        "index": "production_site_posts_support_article",
-      },
-      "enabled": true,
-    },
-    "tenant": "gmc",
-    "trackingDomains": Object {
-      "cnameValue": "click.gmc.sparkpostelite.com",
-    },
-  },
-  "guardian.e.sparkpost.com": Object {
-    "apiBase": "https://guardian.api.e.sparkpost.com/api",
-    "bounceDomains": Object {
-      "allowDefault": true,
-      "allowSubaccountDefault": true,
-      "cnameValue": "guardian.mail.e.sparkpost.com",
-      "mxValue": "guardian.mx.e.sparkpost.com",
-    },
-    "brightback": Object {
-      "enabled": true,
-    },
-    "featureFlags": Object {
-      "allow_anyone_at_verification": true,
-    },
-    "sentry": Object {
-      "projectId": 237613,
-      "publicKey": "014f9707c27b4e7ea90aff051a82e561",
-    },
-    "smtpAuth": Object {
-      "enabled": true,
-      "host": "guardian.smtp.e.sparkpost.com",
-      "port": 587,
-      "username": "guardian",
-    },
-    "support": Object {
-      "algolia": Object {
-        "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
-        "appID": "SFXAWCYDV8",
-        "index": "production_site_posts_support_article",
-      },
-      "enabled": true,
-    },
-    "tenant": "guardian",
-    "trackingDomains": Object {
-      "cnameValue": "click.notifications.glic.com",
-    },
-  },
-  "hubspot.e.sparkpost.com": Object {
-    "apiBase": "https://hubspot.api.e.sparkpost.com/api",
-    "bounceDomains": Object {
-      "allowDefault": true,
-      "allowSubaccountDefault": true,
-      "cnameValue": "hubspot.mail.e.sparkpost.com",
-      "mxValue": "hubspot.mx.e.sparkpost.com",
-    },
-    "brightback": Object {
-      "enabled": true,
-    },
-    "featureFlags": Object {
-      "allow_anyone_at_verification": true,
-      "allow_default_signing_domains_for_ip_pools": true,
-    },
-    "sentry": Object {
-      "projectId": 237613,
-      "publicKey": "014f9707c27b4e7ea90aff051a82e561",
-    },
-    "smtpAuth": Object {
-      "enabled": true,
-      "host": "hubspot.smtp.e.sparkpost.com",
-      "port": 587,
-      "username": "hubspot",
-    },
-    "support": Object {
-      "algolia": Object {
-        "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
-        "appID": "SFXAWCYDV8",
-        "index": "production_site_posts_support_article",
-      },
-      "enabled": true,
-    },
-    "tenant": "hubspot",
-    "trackingDomains": Object {
-      "cnameValue": "hubspot.et.e.sparkpost.com",
-    },
-  },
-  "hubspoteast.e.sparkpost.com": Object {
-    "apiBase": "https://hubspoteast.api.e.sparkpost.com/api",
-    "bounceDomains": Object {
-      "allowDefault": true,
-      "allowSubaccountDefault": true,
-      "cnameValue": "hubspoteast.mail.e.sparkpost.com",
-      "mxValue": "hubspoteast.mx.e.sparkpost.com",
-    },
-    "brightback": Object {
-      "enabled": true,
-    },
-    "featureFlags": Object {},
-    "sentry": Object {
-      "projectId": 237613,
-      "publicKey": "014f9707c27b4e7ea90aff051a82e561",
-    },
-    "smtpAuth": Object {
-      "enabled": true,
-      "host": "hubspoteast.smtp.e.sparkpost.com",
-      "port": 587,
-      "username": "hubspoteast",
-    },
-    "support": Object {
-      "algolia": Object {
-        "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
-        "appID": "SFXAWCYDV8",
-        "index": "production_site_posts_support_article",
-      },
-      "enabled": true,
-    },
-    "tenant": "hubspoteast",
-    "trackingDomains": Object {
-      "cnameValue": "track.hubspoteast.sparkpostelite.com",
-    },
-  },
-  "icims.e.sparkpost.com": Object {
-    "apiBase": "https://icims.api.e.sparkpost.com/api",
-    "bounceDomains": Object {
-      "allowDefault": true,
-      "allowSubaccountDefault": false,
-      "cnameValue": "icims.mail.e.sparkpost.com",
-      "mxValue": "icims.mx.e.sparkpost.com",
-    },
-    "brightback": Object {
-      "enabled": true,
-    },
-    "featureFlags": Object {
-      "allow_anyone_at_verification": true,
-    },
-    "sentry": Object {
-      "projectId": 237613,
-      "publicKey": "014f9707c27b4e7ea90aff051a82e561",
-    },
-    "smtpAuth": Object {
-      "enabled": true,
-      "host": "icims.smtp.e.sparkpost.com",
-      "port": 587,
-      "username": "icims",
-    },
-    "support": Object {
-      "algolia": Object {
-        "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
-        "appID": "SFXAWCYDV8",
-        "index": "production_site_posts_support_article",
-      },
-      "enabled": true,
-    },
-    "tenant": "icims",
-    "trackingDomains": Object {
-      "cnameValue": "icims.et.e.sparkpost.com",
-    },
-  },
-  "imshealth.e.sparkpost.com": Object {
-    "apiBase": "https://imshealth.api.e.sparkpost.com/api",
-    "bounceDomains": Object {
-      "allowDefault": true,
-      "allowSubaccountDefault": true,
-      "cnameValue": "imshealth.mail.e.sparkpost.com",
-      "mxValue": "imshealth.mx.e.sparkpost.com",
-    },
-    "brightback": Object {
-      "enabled": true,
-    },
-    "featureFlags": Object {
-      "allow_anyone_at_verification": true,
-      "allow_default_signing_domains_for_ip_pools": true,
-    },
-    "sentry": Object {
-      "projectId": 237613,
-      "publicKey": "014f9707c27b4e7ea90aff051a82e561",
-    },
-    "smtpAuth": Object {
-      "enabled": true,
-      "host": "imshealth.smtp.e.sparkpost.com",
-      "port": 587,
-      "username": "imshealth",
-    },
-    "support": Object {
-      "algolia": Object {
-        "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
-        "appID": "SFXAWCYDV8",
-        "index": "production_site_posts_support_article",
-      },
-      "enabled": true,
-    },
-    "tenant": "ims",
-    "trackingDomains": Object {
-      "cnameValue": "click.sp.appature.com",
-    },
-  },
-  "intercom.e.sparkpost.com": Object {
-    "apiBase": "https://intercom.api.e.sparkpost.com/api",
-    "bounceDomains": Object {
-      "allowDefault": true,
-      "allowSubaccountDefault": true,
-      "cnameValue": "intercom.mail.e.sparkpost.com",
-      "mxValue": "intercom.mx.e.sparkpost.com",
-    },
-    "brightback": Object {
-      "enabled": true,
-    },
-    "featureFlags": Object {
-      "allow_anyone_at_verification": true,
-    },
-    "sentry": Object {
-      "projectId": 237613,
-      "publicKey": "014f9707c27b4e7ea90aff051a82e561",
-    },
-    "smtpAuth": Object {
-      "enabled": true,
-      "host": "intercom.smtp.e.sparkpost.com",
-      "port": 587,
-      "username": "intercom",
-    },
-    "support": Object {
-      "algolia": Object {
-        "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
-        "appID": "SFXAWCYDV8",
-        "index": "production_site_posts_support_article",
-      },
-      "enabled": true,
-    },
-    "tenant": "intercom",
-    "trackingDomains": Object {
-      "cnameValue": "track.intercom-t.sparkpostelite.com",
-    },
-  },
-  "jane.e.sparkpost.com": Object {
-    "apiBase": "https://jane.api.e.sparkpost.com/api",
-    "bounceDomains": Object {
-      "allowDefault": true,
-      "allowSubaccountDefault": true,
-      "cnameValue": "jane.mail.e.sparkpost.com",
-      "mxValue": "jane.mx.e.sparkpost.com",
-    },
-    "brightback": Object {
-      "enabled": true,
-    },
-    "featureFlags": Object {
-      "allow_anyone_at_verification": true,
-      "allow_default_signing_domains_for_ip_pools": true,
-    },
-    "sentry": Object {
-      "projectId": 237613,
-      "publicKey": "014f9707c27b4e7ea90aff051a82e561",
-    },
-    "smtpAuth": Object {
-      "enabled": true,
-      "host": "jane.smtp.e.sparkpost.com",
-      "port": 587,
-      "username": "jane",
-    },
-    "support": Object {
-      "algolia": Object {
-        "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
-        "appID": "SFXAWCYDV8",
-        "index": "production_site_posts_support_article",
-      },
-      "enabled": true,
-    },
-    "tenant": "jane",
-    "trackingDomains": Object {
-      "cnameValue": "click.m.jane.com",
-    },
-  },
-  "kayak.e.sparkpost.com": Object {
-    "apiBase": "https://kayak.api.e.sparkpost.com/api",
-    "bounceDomains": Object {
-      "allowDefault": true,
-      "allowSubaccountDefault": true,
-      "cnameValue": "kayak.mail.e.sparkpost.com",
-      "mxValue": "kayak.mx.e.sparkpost.com",
-    },
-    "brightback": Object {
-      "enabled": true,
-    },
-    "featureFlags": Object {
-      "allow_anyone_at_verification": true,
-      "allow_default_signing_domains_for_ip_pools": true,
-    },
-    "sentry": Object {
-      "projectId": 237613,
-      "publicKey": "014f9707c27b4e7ea90aff051a82e561",
-    },
-    "smtpAuth": Object {
-      "enabled": true,
-      "host": "kayak.smtp.e.sparkpost.com",
-      "port": 587,
-      "username": "kayak",
-    },
-    "support": Object {
-      "algolia": Object {
-        "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
-        "appID": "SFXAWCYDV8",
-        "index": "production_site_posts_support_article",
-      },
-      "enabled": true,
-    },
-    "tenant": "kayak",
-    "trackingDomains": Object {
-      "cnameValue": "track-kayak.sparkpostelite.com",
-    },
-  },
-  "linkedin.e.sparkpost.com": Object {
-    "apiBase": "https://linkedin.api.e.sparkpost.com/api",
-    "bounceDomains": Object {
-      "allowDefault": true,
-      "allowSubaccountDefault": true,
-      "cnameValue": "linkedin.mail.e.sparkpost.com",
-      "mxValue": "linkedin.mx.e.sparkpost.com",
-    },
-    "brightback": Object {
-      "enabled": true,
-    },
-    "featureFlags": Object {
-      "allow_anyone_at_verification": true,
-      "allow_default_signing_domains_for_ip_pools": true,
-    },
-    "sentry": Object {
-      "projectId": 237613,
-      "publicKey": "014f9707c27b4e7ea90aff051a82e561",
-    },
-    "smtpAuth": Object {
-      "enabled": true,
-      "host": "linkedin.smtp.e.sparkpost.com",
-      "port": 587,
-      "username": "linkedin",
-    },
-    "support": Object {
-      "algolia": Object {
-        "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
-        "appID": "SFXAWCYDV8",
-        "index": "production_site_posts_support_article",
-      },
-      "enabled": true,
-    },
-    "tenant": "linkedin",
-    "trackingDomains": Object {
-      "cnameValue": "track.linkedin.sparkpostelite.com",
-    },
-  },
-  "massdrop.e.sparkpost.com": Object {
-    "apiBase": "https://massdrop.api.e.sparkpost.com/api",
-    "bounceDomains": Object {
-      "allowDefault": true,
-      "allowSubaccountDefault": true,
-      "cnameValue": "massdrop.mail.e.sparkpost.com",
-      "mxValue": "massdrop.mx.e.sparkpost.com",
-    },
-    "brightback": Object {
-      "enabled": true,
-    },
-    "featureFlags": Object {
-      "allow_anyone_at_verification": true,
-      "allow_default_signing_domains_for_ip_pools": true,
-    },
-    "sentry": Object {
-      "projectId": 237613,
-      "publicKey": "014f9707c27b4e7ea90aff051a82e561",
-    },
-    "smtpAuth": Object {
-      "enabled": true,
-      "host": "massdrop.smtp.e.sparkpost.com",
-      "port": 587,
-      "username": "massdrop",
-    },
-    "support": Object {
-      "algolia": Object {
-        "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
-        "appID": "SFXAWCYDV8",
-        "index": "production_site_posts_support_article",
-      },
-      "enabled": true,
-    },
-    "tenant": "massdrop",
-    "trackingDomains": Object {
-      "cnameValue": "t.massdrop.com",
-    },
-  },
   "mtas4tenant.e.sparkpost.com": Object {
-    "apiBase": "https://mtas4tenant.api.e.sparkpost.com/api",
-    "bounceDomains": Object {
-      "allowDefault": true,
-      "allowSubaccountDefault": true,
-      "cnameValue": "mtas4tenant.mail.e.sparkpost.com",
-      "mxValue": "mtas4tenant.mx.e.sparkpost.com",
-    },
-    "brightback": Object {
-      "enabled": true,
-    },
+    "environment": "production",
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
       "allow_default_signing_domains_for_ip_pools": true,
-    },
-    "sentry": Object {
-      "projectId": 237613,
-      "publicKey": "014f9707c27b4e7ea90aff051a82e561",
     },
     "smtpAuth": Object {
       "alternativePort": 2525,
       "enabled": true,
-      "host": "mtas4tenant.smtp.e.sparkpost.com",
       "port": 587,
       "username": "mtas4tenant",
     },
-    "support": Object {
-      "algolia": Object {
-        "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
-        "appID": "SFXAWCYDV8",
-        "index": "production_site_posts_support_article",
-      },
-      "enabled": true,
-    },
-    "tenant": "mtas4tenant",
-    "trackingDomains": Object {
-      "cnameValue": "mtas4tenant.et.e.sparkpost.com",
-    },
-  },
-  "nyl.e.sparkpost.com": Object {
-    "apiBase": "https://nyl.api.e.sparkpost.com/api",
-    "bounceDomains": Object {
-      "allowDefault": true,
-      "allowSubaccountDefault": true,
-      "cnameValue": "nyl.mail.e.sparkpost.com",
-      "mxValue": "nyl.mx.e.sparkpost.com",
-    },
-    "brightback": Object {
-      "enabled": true,
-    },
-    "featureFlags": Object {
-      "allow_anyone_at_verification": true,
-      "allow_default_signing_domains_for_ip_pools": true,
-    },
-    "sentry": Object {
-      "projectId": 237613,
-      "publicKey": "014f9707c27b4e7ea90aff051a82e561",
-    },
-    "smtpAuth": Object {
-      "enabled": true,
-      "host": "nyl.smtp.e.sparkpost.com",
-      "port": 587,
-      "username": "nyl",
-    },
-    "support": Object {
-      "algolia": Object {
-        "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
-        "appID": "SFXAWCYDV8",
-        "index": "production_site_posts_support_article",
-      },
-      "enabled": true,
-    },
-    "tenant": "nyl",
-    "trackingDomains": Object {
-      "cnameValue": "nyl.et.e.sparkpost.com",
-    },
-  },
-  "nyt.e.sparkpost.com": Object {
-    "apiBase": "https://nyt.api.e.sparkpost.com/api",
-    "bounceDomains": Object {
-      "allowDefault": true,
-      "allowSubaccountDefault": true,
-      "cnameValue": "nyt.mail.e.sparkpost.com",
-      "mxValue": "nyt.mx.e.sparkpost.com",
-    },
-    "brightback": Object {
-      "enabled": true,
-    },
-    "featureFlags": Object {
-      "allow_anyone_at_verification": true,
-      "allow_default_signing_domains_for_ip_pools": true,
-    },
-    "sentry": Object {
-      "projectId": 237613,
-      "publicKey": "014f9707c27b4e7ea90aff051a82e561",
-    },
-    "smtpAuth": Object {
-      "enabled": true,
-      "host": "nyt.smtp.e.sparkpost.com",
-      "port": 587,
-      "username": "nyt",
-    },
-    "support": Object {
-      "algolia": Object {
-        "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
-        "appID": "SFXAWCYDV8",
-        "index": "production_site_posts_support_article",
-      },
-      "enabled": true,
-    },
-    "tenant": "nyt",
-    "trackingDomains": Object {
-      "cnameValue": "nyt.et.e.sparkpost.com",
-    },
-  },
-  "ometria.e.sparkpost.com": Object {
-    "apiBase": "https://ometria.api.e.sparkpost.com/api",
-    "bounceDomains": Object {
-      "allowDefault": true,
-      "allowSubaccountDefault": false,
-      "cnameValue": "ometria.mail.e.sparkpost.com",
-      "mxValue": "ometria.mx.e.sparkpost.com",
-    },
-    "brightback": Object {
-      "enabled": true,
-    },
-    "featureFlags": Object {
-      "allow_anyone_at_verification": true,
-    },
-    "sentry": Object {
-      "projectId": 237613,
-      "publicKey": "014f9707c27b4e7ea90aff051a82e561",
-    },
-    "smtpAuth": Object {
-      "enabled": true,
-      "host": "ometria.smtp.e.sparkpost.com",
-      "port": 587,
-      "username": "ometria",
-    },
-    "support": Object {
-      "algolia": Object {
-        "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
-        "appID": "SFXAWCYDV8",
-        "index": "production_site_posts_support_article",
-      },
-      "enabled": true,
-    },
-    "tenant": "ometria",
-    "trackingDomains": Object {
-      "cnameValue": "click.spe.ometria.email",
-    },
+    "tenantId": "mtas4tenant",
   },
   "phoenix-next-prd.sparkpost.com": Object {
     "apiBase": "https://api.sparkpost.com/api",
     "bounceDomains": Object {
-      "allowDefault": true,
-      "allowSubaccountDefault": true,
       "cnameValue": "sparkpostmail.com",
       "mxValue": "smtp.sparkpostmail.com",
     },
-    "brightback": Object {
-      "enabled": true,
-    },
     "crossLinkTenant": "spceu",
+    "environment": "production",
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
       "allow_default_signing_domains_for_ip_pools": true,
       "has_signup": true,
     },
     "gtmId": "GTM-WN7C84",
-    "sentry": Object {
-      "projectId": 237613,
-      "publicKey": "014f9707c27b4e7ea90aff051a82e561",
-    },
     "siftScience": Object {
       "id": "7c5f68d795",
     },
@@ -1968,15 +367,7 @@ Object {
       "username": "SMTP_Injection",
     },
     "splashPage": "/dashboard",
-    "support": Object {
-      "algolia": Object {
-        "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
-        "appID": "SFXAWCYDV8",
-        "index": "production_site_posts_support_article",
-      },
-      "enabled": true,
-    },
-    "tenant": "spc",
+    "tenantId": "spc",
     "trackingDomains": Object {
       "cnameValue": "spgo.io",
     },
@@ -1986,23 +377,14 @@ Object {
   },
   "phoenix-next-stg.sparkpost.com": Object {
     "apiBase": "https://api-staging.sparkpost.com/api",
-    "bounceDomains": Object {
-      "allowDefault": true,
-      "allowSubaccountDefault": true,
-      "cnameValue": "staging.mail.e.sparkpost.com",
-      "mxValue": "staging.mx.e.sparkpost.com",
-    },
     "crossLinkTenant": "spc",
+    "environment": "staging",
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
       "allow_default_signing_domains_for_ip_pools": true,
       "has_signup": true,
     },
     "gtmId": "GTM-5BCG3R",
-    "sentry": Object {
-      "projectId": 237612,
-      "publicKey": "cb27762b225f4884b5e035580f1cc289",
-    },
     "siftScience": Object {
       "id": "88affa8e11",
     },
@@ -2014,15 +396,7 @@ Object {
       "username": "SMTP_Injection",
     },
     "splashPage": "/dashboard",
-    "support": Object {
-      "algolia": Object {
-        "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
-        "appID": "SFXAWCYDV8",
-        "index": "staging_site_posts_support_article",
-      },
-      "enabled": true,
-    },
-    "tenant": "staging",
+    "tenantId": "staging",
     "trackingDomains": Object {
       "cnameValue": "stage.spgo.io",
     },
@@ -2030,22 +404,17 @@ Object {
   "phoenix-next.tst.sparkpost.com": Object {
     "apiBase": "https://api-uat.tst.sparkpost.com/api",
     "bounceDomains": Object {
-      "allowDefault": true,
-      "allowSubaccountDefault": true,
       "cnameValue": "uat-public.mail.e.tst.sparkpost.com",
       "mxValue": "uat-public.mx.e.tst.sparkpost.com",
     },
     "crossLinkTenant": "spceu",
+    "environment": "uat",
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
       "allow_default_signing_domains_for_ip_pools": true,
       "has_signup": true,
     },
     "gtmId": "GTM-P87NNJ4",
-    "sentry": Object {
-      "projectId": 237611,
-      "publicKey": "b63907577f9c4091895c49cc963fa8e4",
-    },
     "siftScience": Object {
       "id": "88affa8e11",
     },
@@ -2056,15 +425,7 @@ Object {
       "username": "SMTP_Injection",
     },
     "splashPage": "/dashboard",
-    "support": Object {
-      "algolia": Object {
-        "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
-        "appID": "SFXAWCYDV8",
-        "index": "development_site_posts_support_article",
-      },
-      "enabled": true,
-    },
-    "tenant": "uat",
+    "tenantId": "uat",
     "trackingDomains": Object {
       "cnameValue": "spcuat.et.e.tst.sparkpost.com",
     },
@@ -2072,25 +433,17 @@ Object {
   "phoenix-origin-prd.sparkpost.com": Object {
     "apiBase": "https://api.sparkpost.com/api",
     "bounceDomains": Object {
-      "allowDefault": true,
-      "allowSubaccountDefault": true,
       "cnameValue": "sparkpostmail.com",
       "mxValue": "smtp.sparkpostmail.com",
     },
-    "brightback": Object {
-      "enabled": true,
-    },
     "crossLinkTenant": "spceu",
+    "environment": "production",
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
       "allow_default_signing_domains_for_ip_pools": true,
       "has_signup": true,
     },
     "gtmId": "GTM-WN7C84",
-    "sentry": Object {
-      "projectId": 237613,
-      "publicKey": "014f9707c27b4e7ea90aff051a82e561",
-    },
     "siftScience": Object {
       "id": "7c5f68d795",
     },
@@ -2102,15 +455,7 @@ Object {
       "username": "SMTP_Injection",
     },
     "splashPage": "/dashboard",
-    "support": Object {
-      "algolia": Object {
-        "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
-        "appID": "SFXAWCYDV8",
-        "index": "production_site_posts_support_article",
-      },
-      "enabled": true,
-    },
-    "tenant": "spc",
+    "tenantId": "spc",
     "trackingDomains": Object {
       "cnameValue": "spgo.io",
     },
@@ -2120,23 +465,14 @@ Object {
   },
   "phoenix-origin-stg.sparkpost.com": Object {
     "apiBase": "https://api-staging.sparkpost.com/api",
-    "bounceDomains": Object {
-      "allowDefault": true,
-      "allowSubaccountDefault": true,
-      "cnameValue": "staging.mail.e.sparkpost.com",
-      "mxValue": "staging.mx.e.sparkpost.com",
-    },
     "crossLinkTenant": "spc",
+    "environment": "staging",
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
       "allow_default_signing_domains_for_ip_pools": true,
       "has_signup": true,
     },
     "gtmId": "GTM-5BCG3R",
-    "sentry": Object {
-      "projectId": 237612,
-      "publicKey": "cb27762b225f4884b5e035580f1cc289",
-    },
     "siftScience": Object {
       "id": "88affa8e11",
     },
@@ -2148,15 +484,7 @@ Object {
       "username": "SMTP_Injection",
     },
     "splashPage": "/dashboard",
-    "support": Object {
-      "algolia": Object {
-        "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
-        "appID": "SFXAWCYDV8",
-        "index": "staging_site_posts_support_article",
-      },
-      "enabled": true,
-    },
-    "tenant": "staging",
+    "tenantId": "staging",
     "trackingDomains": Object {
       "cnameValue": "stage.spgo.io",
     },
@@ -2164,22 +492,17 @@ Object {
   "phoenix-origin.tst.sparkpost.com": Object {
     "apiBase": "https://api-uat.tst.sparkpost.com/api",
     "bounceDomains": Object {
-      "allowDefault": true,
-      "allowSubaccountDefault": true,
       "cnameValue": "uat-public.mail.e.tst.sparkpost.com",
       "mxValue": "uat-public.mx.e.tst.sparkpost.com",
     },
     "crossLinkTenant": "spceu",
+    "environment": "uat",
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
       "allow_default_signing_domains_for_ip_pools": true,
       "has_signup": true,
     },
     "gtmId": "GTM-P87NNJ4",
-    "sentry": Object {
-      "projectId": 237611,
-      "publicKey": "b63907577f9c4091895c49cc963fa8e4",
-    },
     "siftScience": Object {
       "id": "88affa8e11",
     },
@@ -2190,1062 +513,51 @@ Object {
       "username": "SMTP_Injection",
     },
     "splashPage": "/dashboard",
-    "support": Object {
-      "algolia": Object {
-        "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
-        "appID": "SFXAWCYDV8",
-        "index": "development_site_posts_support_article",
-      },
-      "enabled": true,
-    },
-    "tenant": "uat",
+    "tenantId": "uat",
     "trackingDomains": Object {
       "cnameValue": "spcuat.et.e.tst.sparkpost.com",
     },
   },
-  "pinterest.e.sparkpost.com": Object {
-    "apiBase": "https://pinterest.api.e.sparkpost.com/api",
-    "bounceDomains": Object {
-      "allowDefault": true,
-      "allowSubaccountDefault": true,
-      "cnameValue": "pinterest.mail.e.sparkpost.com",
-      "mxValue": "pinterest.mx.e.sparkpost.com",
-    },
-    "brightback": Object {
-      "enabled": true,
-    },
-    "featureFlags": Object {
-      "allow_anyone_at_verification": true,
-    },
-    "sentry": Object {
-      "projectId": 237613,
-      "publicKey": "014f9707c27b4e7ea90aff051a82e561",
-    },
-    "smtpAuth": Object {
-      "enabled": true,
-      "host": "pinterest.smtp.e.sparkpost.com",
-      "port": 587,
-      "username": "pinterest",
-    },
-    "support": Object {
-      "algolia": Object {
-        "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
-        "appID": "SFXAWCYDV8",
-        "index": "production_site_posts_support_article",
-      },
-      "enabled": true,
-    },
-    "tenant": "pinterest",
-    "trackingDomains": Object {
-      "cnameValue": "post.pinterest.com",
-    },
-  },
   "productionmtas.e.sparkpost.com": Object {
-    "apiBase": "https://productionmtas.api.e.sparkpost.com/api",
-    "bounceDomains": Object {
-      "allowDefault": true,
-      "allowSubaccountDefault": true,
-      "cnameValue": "productionmtas.mail.e.sparkpost.com",
-      "mxValue": "productionmtas.mx.e.sparkpost.com",
-    },
-    "brightback": Object {
-      "enabled": true,
-    },
+    "environment": "production",
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
       "allow_default_signing_domains_for_ip_pools": true,
     },
-    "sentry": Object {
-      "projectId": 237613,
-      "publicKey": "014f9707c27b4e7ea90aff051a82e561",
-    },
     "smtpAuth": Object {
       "alternativePort": 2525,
       "enabled": true,
-      "host": "productionmtas.smtp.e.sparkpost.com",
       "port": 587,
       "username": "productionmtas",
     },
-    "support": Object {
-      "algolia": Object {
-        "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
-        "appID": "SFXAWCYDV8",
-        "index": "production_site_posts_support_article",
-      },
-      "enabled": true,
-    },
-    "tenant": "productionmtas",
-    "trackingDomains": Object {
-      "cnameValue": "productionmtas.et.e.sparkpost.com",
-    },
+    "tenantId": "productionmtas",
   },
   "productionmtas2.e.sparkpost.com": Object {
-    "apiBase": "https://productionmtas2.api.e.sparkpost.com/api",
-    "bounceDomains": Object {
-      "allowDefault": true,
-      "allowSubaccountDefault": true,
-      "cnameValue": "productionmtas2.mail.e.sparkpost.com",
-      "mxValue": "productionmtas2.mx.e.sparkpost.com",
-    },
-    "brightback": Object {
-      "enabled": true,
-    },
+    "environment": "production",
     "featureFlags": Object {
       "allow_anyone_at_verification": true,
       "allow_default_signing_domains_for_ip_pools": true,
-    },
-    "sentry": Object {
-      "projectId": 237613,
-      "publicKey": "014f9707c27b4e7ea90aff051a82e561",
     },
     "smtpAuth": Object {
       "alternativePort": 2525,
       "enabled": true,
-      "host": "productionmtas2.smtp.e.sparkpost.com",
       "port": 587,
       "username": "productionmtas2",
     },
-    "support": Object {
-      "algolia": Object {
-        "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
-        "appID": "SFXAWCYDV8",
-        "index": "production_site_posts_support_article",
-      },
-      "enabled": true,
-    },
-    "tenant": "productionmtas2",
-    "trackingDomains": Object {
-      "cnameValue": "productionmtas2.et.e.sparkpost.com",
-    },
-  },
-  "sas.e.sparkpost.com": Object {
-    "apiBase": "https://sas.api.e.sparkpost.com/api",
-    "bounceDomains": Object {
-      "allowDefault": false,
-      "allowSubaccountDefault": false,
-      "cnameValue": "sas.mail.e.sparkpost.com",
-      "mxValue": "sas.mx.e.sparkpost.com",
-    },
-    "brightback": Object {
-      "enabled": true,
-    },
-    "featureFlags": Object {},
-    "sentry": Object {
-      "projectId": 237613,
-      "publicKey": "014f9707c27b4e7ea90aff051a82e561",
-    },
-    "smtpAuth": Object {
-      "enabled": true,
-      "host": "sas.smtp.e.sparkpost.com",
-      "port": 587,
-      "username": "sas",
-    },
-    "support": Object {
-      "algolia": Object {
-        "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
-        "appID": "SFXAWCYDV8",
-        "index": "production_site_posts_support_article",
-      },
-      "enabled": true,
-    },
-    "tenant": "sas",
-    "trackingDomains": Object {
-      "cnameValue": "track.sp.ci360.sas.com",
-    },
-  },
-  "schoolm.e.sparkpost.com": Object {
-    "apiBase": "https://schoolm.api.e.sparkpost.com/api",
-    "bounceDomains": Object {
-      "allowDefault": true,
-      "allowSubaccountDefault": true,
-      "cnameValue": "schoolm.mail.e.sparkpost.com",
-      "mxValue": "schoolm.mx.e.sparkpost.com",
-    },
-    "brightback": Object {
-      "enabled": true,
-    },
-    "featureFlags": Object {
-      "allow_anyone_at_verification": true,
-    },
-    "sentry": Object {
-      "projectId": 237613,
-      "publicKey": "014f9707c27b4e7ea90aff051a82e561",
-    },
-    "smtpAuth": Object {
-      "enabled": true,
-      "host": "schoolm.smtp.e.sparkpost.com",
-      "port": 587,
-      "username": "schoolm",
-    },
-    "support": Object {
-      "algolia": Object {
-        "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
-        "appID": "SFXAWCYDV8",
-        "index": "production_site_posts_support_article",
-      },
-      "enabled": true,
-    },
-    "tenant": "schoolm",
-    "trackingDomains": Object {
-      "cnameValue": "track.spe.schoolmessenger.com",
-    },
-  },
-  "selective.e.sparkpost.com": Object {
-    "apiBase": "https://selective.api.e.sparkpost.com/api",
-    "bounceDomains": Object {
-      "allowDefault": true,
-      "allowSubaccountDefault": true,
-      "cnameValue": "selective.mail.e.sparkpost.com",
-      "mxValue": "selective.mx.e.sparkpost.com",
-    },
-    "brightback": Object {
-      "enabled": true,
-    },
-    "featureFlags": Object {
-      "allow_anyone_at_verification": true,
-      "allow_default_signing_domains_for_ip_pools": true,
-    },
-    "sentry": Object {
-      "projectId": 237613,
-      "publicKey": "014f9707c27b4e7ea90aff051a82e561",
-    },
-    "smtpAuth": Object {
-      "enabled": true,
-      "host": "selective.smtp.e.sparkpost.com",
-      "port": 587,
-      "username": "selective",
-    },
-    "support": Object {
-      "algolia": Object {
-        "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
-        "appID": "SFXAWCYDV8",
-        "index": "production_site_posts_support_article",
-      },
-      "enabled": true,
-    },
-    "tenant": "selective",
-    "trackingDomains": Object {
-      "cnameValue": "selective.et.e.sparkpost.com",
-    },
-  },
-  "sitecore-eu.e.sparkpost.com": Object {
-    "apiBase": "https://sitecore-eu.api.e.sparkpost.com/api",
-    "bounceDomains": Object {
-      "allowDefault": true,
-      "allowSubaccountDefault": false,
-      "cnameValue": "sitecore-eu.mail.e.sparkpost.com",
-      "mxValue": "sitecore-eu.mx.e.sparkpost.com",
-    },
-    "brightback": Object {
-      "enabled": true,
-    },
-    "featureFlags": Object {
-      "allow_anyone_at_verification": true,
-    },
-    "sentry": Object {
-      "projectId": 237613,
-      "publicKey": "014f9707c27b4e7ea90aff051a82e561",
-    },
-    "smtpAuth": Object {
-      "enabled": true,
-      "host": "sitecore-eu.smtp.e.sparkpost.com",
-      "port": 587,
-      "username": "sitecore-eu",
-    },
-    "support": Object {
-      "algolia": Object {
-        "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
-        "appID": "SFXAWCYDV8",
-        "index": "production_site_posts_support_article",
-      },
-      "enabled": true,
-    },
-    "tenant": "sitecoreeu",
-    "trackingDomains": Object {
-      "cnameValue": "sitecore-eu.et.e.sparkpost.com",
-    },
-  },
-  "sitecore.e.sparkpost.com": Object {
-    "apiBase": "https://sitecore.api.e.sparkpost.com/api",
-    "bounceDomains": Object {
-      "allowDefault": true,
-      "allowSubaccountDefault": true,
-      "cnameValue": "sitecore.mail.e.sparkpost.com",
-      "mxValue": "sitecore.mx.e.sparkpost.com",
-    },
-    "brightback": Object {
-      "enabled": true,
-    },
-    "featureFlags": Object {
-      "allow_anyone_at_verification": true,
-    },
-    "sentry": Object {
-      "projectId": 237613,
-      "publicKey": "014f9707c27b4e7ea90aff051a82e561",
-    },
-    "smtpAuth": Object {
-      "enabled": true,
-      "host": "sitecore.smtp.e.sparkpost.com",
-      "port": 587,
-      "username": "sitecore",
-    },
-    "support": Object {
-      "algolia": Object {
-        "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
-        "appID": "SFXAWCYDV8",
-        "index": "production_site_posts_support_article",
-      },
-      "enabled": true,
-    },
-    "tenant": "sitecore",
-    "trackingDomains": Object {
-      "cnameValue": "click.sitecoremail.com",
-    },
-  },
-  "snagajob.e.sparkpost.com": Object {
-    "apiBase": "https://snagajob.api.e.sparkpost.com/api",
-    "bounceDomains": Object {
-      "allowDefault": true,
-      "allowSubaccountDefault": true,
-      "cnameValue": "snagajob.mail.e.sparkpost.com",
-      "mxValue": "snagajob.mx.e.sparkpost.com",
-    },
-    "brightback": Object {
-      "enabled": true,
-    },
-    "featureFlags": Object {
-      "allow_anyone_at_verification": true,
-      "allow_default_signing_domains_for_ip_pools": true,
-    },
-    "sentry": Object {
-      "projectId": 237613,
-      "publicKey": "014f9707c27b4e7ea90aff051a82e561",
-    },
-    "smtpAuth": Object {
-      "enabled": true,
-      "host": "snagajob.smtp.e.sparkpost.com",
-      "port": 587,
-      "username": "snagajob",
-    },
-    "support": Object {
-      "algolia": Object {
-        "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
-        "appID": "SFXAWCYDV8",
-        "index": "production_site_posts_support_article",
-      },
-      "enabled": true,
-    },
-    "tenant": "snagajob",
-    "trackingDomains": Object {
-      "cnameValue": "click.email.snagajob.com",
-    },
+    "tenantId": "productionmtas2",
   },
   "spestaging.e.sparkpost.com": Object {
-    "apiBase": "https://spestaging.api.e.sparkpost.com/api",
-    "bounceDomains": Object {
-      "allowDefault": true,
-      "allowSubaccountDefault": true,
-      "cnameValue": "spestaging.mail.e.sparkpost.com",
-      "mxValue": "spestaging.mx.e.sparkpost.com",
-    },
+    "environment": "staging",
     "featureFlags": Object {},
-    "sentry": Object {
-      "projectId": 237612,
-      "publicKey": "cb27762b225f4884b5e035580f1cc289",
-    },
     "smtpAuth": Object {
       "enabled": true,
       "host": "smtp-spestaging42.msyscloud.com",
       "port": 587,
       "username": "spestaging",
     },
-    "support": Object {
-      "algolia": Object {
-        "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
-        "appID": "SFXAWCYDV8",
-        "index": "staging_site_posts_support_article",
-      },
-      "enabled": true,
-    },
-    "tenant": "spestaging",
+    "tenantId": "spestaging",
     "trackingDomains": Object {
       "cnameValue": "click.spestaging42.msyscloud.com",
-    },
-  },
-  "streetauthority.e.sparkpost.com": Object {
-    "apiBase": "https://streetauthority.api.e.sparkpost.com/api",
-    "bounceDomains": Object {
-      "allowDefault": true,
-      "allowSubaccountDefault": true,
-      "cnameValue": "streetauthority.mail.e.sparkpost.com",
-      "mxValue": "streetauthority.mx.e.sparkpost.com",
-    },
-    "brightback": Object {
-      "enabled": true,
-    },
-    "featureFlags": Object {
-      "allow_anyone_at_verification": true,
-      "allow_default_signing_domains_for_ip_pools": true,
-    },
-    "sentry": Object {
-      "projectId": 237613,
-      "publicKey": "014f9707c27b4e7ea90aff051a82e561",
-    },
-    "smtpAuth": Object {
-      "enabled": true,
-      "host": "streetauthority.smtp.e.sparkpost.com",
-      "port": 587,
-      "username": "streetauthority",
-    },
-    "support": Object {
-      "algolia": Object {
-        "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
-        "appID": "SFXAWCYDV8",
-        "index": "production_site_posts_support_article",
-      },
-      "enabled": true,
-    },
-    "tenant": "streetauth",
-    "trackingDomains": Object {
-      "cnameValue": "click.mail1.researchsend.com",
-    },
-  },
-  "surveymonkey.e.sparkpost.com": Object {
-    "apiBase": "https://surveymonkey.api.e.sparkpost.com/api",
-    "bounceDomains": Object {
-      "allowDefault": true,
-      "allowSubaccountDefault": true,
-      "cnameValue": "surveymonkey.mail.e.sparkpost.com",
-      "mxValue": "surveymonkey.mx.e.sparkpost.com",
-    },
-    "brightback": Object {
-      "enabled": true,
-    },
-    "featureFlags": Object {
-      "allow_anyone_at_verification": true,
-      "allow_default_signing_domains_for_ip_pools": true,
-    },
-    "sentry": Object {
-      "projectId": 237613,
-      "publicKey": "014f9707c27b4e7ea90aff051a82e561",
-    },
-    "smtpAuth": Object {
-      "enabled": true,
-      "host": "surveymonkey.smtp.e.sparkpost.com",
-      "port": 587,
-      "username": "surveymonkey",
-    },
-    "support": Object {
-      "algolia": Object {
-        "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
-        "appID": "SFXAWCYDV8",
-        "index": "production_site_posts_support_article",
-      },
-      "enabled": true,
-    },
-    "tenant": "surveymonkey",
-    "trackingDomains": Object {
-      "cnameValue": "click.outbound.surveymonkey.com",
-    },
-  },
-  "talktalk.e.sparkpost.com": Object {
-    "apiBase": "https://talktalk.api.e.sparkpost.com/api",
-    "bounceDomains": Object {
-      "allowDefault": true,
-      "allowSubaccountDefault": false,
-      "cnameValue": "talktalk.mail.e.sparkpost.com",
-      "mxValue": "talktalk.mx.e.sparkpost.com",
-    },
-    "brightback": Object {
-      "enabled": true,
-    },
-    "featureFlags": Object {
-      "allow_anyone_at_verification": true,
-    },
-    "sentry": Object {
-      "projectId": 237613,
-      "publicKey": "014f9707c27b4e7ea90aff051a82e561",
-    },
-    "smtpAuth": Object {
-      "enabled": true,
-      "host": "talktalk.smtp.e.sparkpost.com",
-      "port": 587,
-      "username": "talktalk",
-    },
-    "support": Object {
-      "algolia": Object {
-        "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
-        "appID": "SFXAWCYDV8",
-        "index": "production_site_posts_support_article",
-      },
-      "enabled": true,
-    },
-    "tenant": "talktalk",
-    "trackingDomains": Object {
-      "cnameValue": "click.talktalk.co.uk",
-    },
-  },
-  "tobi.e.sparkpost.com": Object {
-    "apiBase": "https://tobi.api.e.sparkpost.com/api",
-    "bounceDomains": Object {
-      "allowDefault": true,
-      "allowSubaccountDefault": true,
-      "cnameValue": "tobi.mail.e.sparkpost.com",
-      "mxValue": "tobi.mx.e.sparkpost.com",
-    },
-    "brightback": Object {
-      "enabled": true,
-    },
-    "featureFlags": Object {
-      "allow_anyone_at_verification": true,
-      "allow_default_signing_domains_for_ip_pools": true,
-    },
-    "sentry": Object {
-      "projectId": 237613,
-      "publicKey": "014f9707c27b4e7ea90aff051a82e561",
-    },
-    "smtpAuth": Object {
-      "enabled": true,
-      "host": "tobi.smtp.e.sparkpost.com",
-      "port": 587,
-      "username": "tobi",
-    },
-    "support": Object {
-      "algolia": Object {
-        "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
-        "appID": "SFXAWCYDV8",
-        "index": "production_site_posts_support_article",
-      },
-      "enabled": true,
-    },
-    "tenant": "tobi",
-    "trackingDomains": Object {
-      "cnameValue": "tracking.mail.tobi.com",
-    },
-  },
-  "trulia.e.sparkpost.com": Object {
-    "apiBase": "https://trulia.api.e.sparkpost.com/api",
-    "bounceDomains": Object {
-      "allowDefault": true,
-      "allowSubaccountDefault": true,
-      "cnameValue": "trulia.mail.e.sparkpost.com",
-      "mxValue": "trulia.mx.e.sparkpost.com",
-    },
-    "brightback": Object {
-      "enabled": true,
-    },
-    "featureFlags": Object {
-      "allow_anyone_at_verification": true,
-      "allow_default_signing_domains_for_ip_pools": true,
-    },
-    "sentry": Object {
-      "projectId": 237613,
-      "publicKey": "014f9707c27b4e7ea90aff051a82e561",
-    },
-    "smtpAuth": Object {
-      "enabled": true,
-      "host": "trulia.smtp.e.sparkpost.com",
-      "port": 587,
-      "username": "trulia",
-    },
-    "support": Object {
-      "algolia": Object {
-        "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
-        "appID": "SFXAWCYDV8",
-        "index": "production_site_posts_support_article",
-      },
-      "enabled": true,
-    },
-    "tenant": "trulia",
-    "trackingDomains": Object {
-      "cnameValue": "click.prop.trulia.com",
-    },
-  },
-  "uber.e.sparkpost.com": Object {
-    "apiBase": "https://uber.api.e.sparkpost.com/api",
-    "bounceDomains": Object {
-      "allowDefault": true,
-      "allowSubaccountDefault": true,
-      "cnameValue": "uber.mail.e.sparkpost.com",
-      "mxValue": "uber.mx.e.sparkpost.com",
-    },
-    "brightback": Object {
-      "enabled": true,
-    },
-    "featureFlags": Object {
-      "allow_anyone_at_verification": true,
-    },
-    "sentry": Object {
-      "projectId": 237613,
-      "publicKey": "014f9707c27b4e7ea90aff051a82e561",
-    },
-    "smtpAuth": Object {
-      "enabled": true,
-      "host": "uber.smtp.e.sparkpost.com",
-      "port": 587,
-      "username": "uber",
-    },
-    "support": Object {
-      "algolia": Object {
-        "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
-        "appID": "SFXAWCYDV8",
-        "index": "production_site_posts_support_article",
-      },
-      "enabled": true,
-    },
-    "tenant": "uber",
-    "trackingDomains": Object {
-      "cnameValue": "click.uber.com",
-    },
-  },
-  "unear.e.sparkpost.com": Object {
-    "apiBase": "https://unear.api.e.sparkpost.com/api",
-    "bounceDomains": Object {
-      "allowDefault": true,
-      "allowSubaccountDefault": true,
-      "cnameValue": "unear.mail.e.sparkpost.com",
-      "mxValue": "unear.mx.e.sparkpost.com",
-    },
-    "brightback": Object {
-      "enabled": true,
-    },
-    "featureFlags": Object {
-      "allow_anyone_at_verification": true,
-    },
-    "sentry": Object {
-      "projectId": 237613,
-      "publicKey": "014f9707c27b4e7ea90aff051a82e561",
-    },
-    "smtpAuth": Object {
-      "enabled": true,
-      "host": "unear.smtp.e.sparkpost.com",
-      "port": 587,
-      "username": "unear",
-    },
-    "support": Object {
-      "algolia": Object {
-        "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
-        "appID": "SFXAWCYDV8",
-        "index": "production_site_posts_support_article",
-      },
-      "enabled": true,
-    },
-    "tenant": "unear",
-    "trackingDomains": Object {
-      "cnameValue": "track.unear.sparkpostelite.com",
-    },
-  },
-  "utilitywhouse.e.sparkpost.com": Object {
-    "apiBase": "https://utilitywhouse.api.e.sparkpost.com/api",
-    "bounceDomains": Object {
-      "allowDefault": true,
-      "allowSubaccountDefault": false,
-      "cnameValue": "utilitywhouse.mail.e.sparkpost.com",
-      "mxValue": "utilitywhouse.mx.e.sparkpost.com",
-    },
-    "brightback": Object {
-      "enabled": true,
-    },
-    "featureFlags": Object {
-      "allow_anyone_at_verification": true,
-    },
-    "sentry": Object {
-      "projectId": 237613,
-      "publicKey": "014f9707c27b4e7ea90aff051a82e561",
-    },
-    "smtpAuth": Object {
-      "enabled": true,
-      "host": "utilitywhouse.smtp.e.sparkpost.com",
-      "port": 587,
-      "username": "utilitywhouse",
-    },
-    "support": Object {
-      "algolia": Object {
-        "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
-        "appID": "SFXAWCYDV8",
-        "index": "production_site_posts_support_article",
-      },
-      "enabled": true,
-    },
-    "tenant": "utilitywhouse",
-    "trackingDomains": Object {
-      "cnameValue": "click.utilitywarehouse.co.uk",
-    },
-  },
-  "vente-exclusive.e.sparkpost.com": Object {
-    "apiBase": "https://vente-exclusive.api.e.sparkpost.com/api",
-    "bounceDomains": Object {
-      "allowDefault": true,
-      "allowSubaccountDefault": true,
-      "cnameValue": "vente-exclusive.mail.e.sparkpost.com",
-      "mxValue": "vente-exclusive.mx.e.sparkpost.com",
-    },
-    "brightback": Object {
-      "enabled": true,
-    },
-    "featureFlags": Object {
-      "allow_anyone_at_verification": true,
-      "allow_default_signing_domains_for_ip_pools": true,
-    },
-    "sentry": Object {
-      "projectId": 237613,
-      "publicKey": "014f9707c27b4e7ea90aff051a82e561",
-    },
-    "smtpAuth": Object {
-      "enabled": true,
-      "host": "vente-exclusive.smtp.e.sparkpost.com",
-      "port": 587,
-      "username": "vente-exclusive",
-    },
-    "support": Object {
-      "algolia": Object {
-        "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
-        "appID": "SFXAWCYDV8",
-        "index": "production_site_posts_support_article",
-      },
-      "enabled": true,
-    },
-    "tenant": "vente",
-    "trackingDomains": Object {
-      "cnameValue": "click1.mail1.vente-exclusive.com",
-    },
-  },
-  "vivastreet.e.sparkpost.com": Object {
-    "apiBase": "https://vivastreet.api.e.sparkpost.com/api",
-    "bounceDomains": Object {
-      "allowDefault": true,
-      "allowSubaccountDefault": true,
-      "cnameValue": "vivastreet.mail.e.sparkpost.com",
-      "mxValue": "vivastreet.mx.e.sparkpost.com",
-    },
-    "brightback": Object {
-      "enabled": true,
-    },
-    "featureFlags": Object {
-      "allow_anyone_at_verification": true,
-      "allow_default_signing_domains_for_ip_pools": true,
-    },
-    "sentry": Object {
-      "projectId": 237613,
-      "publicKey": "014f9707c27b4e7ea90aff051a82e561",
-    },
-    "smtpAuth": Object {
-      "enabled": true,
-      "host": "vivastreet.smtp.e.sparkpost.com",
-      "port": 587,
-      "username": "vivastreet",
-    },
-    "support": Object {
-      "algolia": Object {
-        "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
-        "appID": "SFXAWCYDV8",
-        "index": "production_site_posts_support_article",
-      },
-      "enabled": true,
-    },
-    "tenant": "vivastreet",
-    "trackingDomains": Object {
-      "cnameValue": "click.sitemail.vivastreet.com",
-    },
-  },
-  "vivmail.e.sparkpost.com": Object {
-    "apiBase": "https://vivmail.api.e.sparkpost.com/api",
-    "bounceDomains": Object {
-      "allowDefault": true,
-      "allowSubaccountDefault": false,
-      "cnameValue": "vivmail.mail.e.sparkpost.com",
-      "mxValue": "vivmail.mx.e.sparkpost.com",
-    },
-    "brightback": Object {
-      "enabled": true,
-    },
-    "featureFlags": Object {
-      "allow_anyone_at_verification": true,
-    },
-    "sentry": Object {
-      "projectId": 237613,
-      "publicKey": "014f9707c27b4e7ea90aff051a82e561",
-    },
-    "smtpAuth": Object {
-      "enabled": true,
-      "host": "vivmail.smtp.e.sparkpost.com",
-      "port": 587,
-      "username": "vivmail",
-    },
-    "support": Object {
-      "algolia": Object {
-        "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
-        "appID": "SFXAWCYDV8",
-        "index": "production_site_posts_support_article",
-      },
-      "enabled": true,
-    },
-    "tenant": "vivmail",
-    "trackingDomains": Object {
-      "cnameValue": "vivmail.et.e.sparkpost.com",
-    },
-  },
-  "wawd.e.sparkpost.com": Object {
-    "apiBase": "https://wawd.api.e.sparkpost.com/api",
-    "bounceDomains": Object {
-      "allowDefault": true,
-      "allowSubaccountDefault": true,
-      "cnameValue": "wawd.mail.e.sparkpost.com",
-      "mxValue": "wawd.mx.e.sparkpost.com",
-    },
-    "brightback": Object {
-      "enabled": true,
-    },
-    "featureFlags": Object {
-      "allow_anyone_at_verification": true,
-    },
-    "sentry": Object {
-      "projectId": 237613,
-      "publicKey": "014f9707c27b4e7ea90aff051a82e561",
-    },
-    "smtpAuth": Object {
-      "enabled": true,
-      "host": "wawd.smtp.e.sparkpost.com",
-      "port": 587,
-      "username": "wawd",
-    },
-    "support": Object {
-      "algolia": Object {
-        "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
-        "appID": "SFXAWCYDV8",
-        "index": "production_site_posts_support_article",
-      },
-      "enabled": true,
-    },
-    "tenant": "wawd",
-    "trackingDomains": Object {
-      "cnameValue": "track.sp.actionkit.com",
-    },
-  },
-  "wcare.e.sparkpost.com": Object {
-    "apiBase": "https://wcare.api.e.sparkpost.com/api",
-    "bounceDomains": Object {
-      "allowDefault": true,
-      "allowSubaccountDefault": true,
-      "cnameValue": "wcare.mail.e.sparkpost.com",
-      "mxValue": "wcare.mx.e.sparkpost.com",
-    },
-    "brightback": Object {
-      "enabled": true,
-    },
-    "featureFlags": Object {
-      "allow_anyone_at_verification": true,
-    },
-    "sentry": Object {
-      "projectId": 237613,
-      "publicKey": "014f9707c27b4e7ea90aff051a82e561",
-    },
-    "smtpAuth": Object {
-      "enabled": true,
-      "host": "wcare.smtp.e.sparkpost.com",
-      "port": 587,
-      "username": "wcare",
-    },
-    "support": Object {
-      "algolia": Object {
-        "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
-        "appID": "SFXAWCYDV8",
-        "index": "production_site_posts_support_article",
-      },
-      "enabled": true,
-    },
-    "tenant": "wcare",
-    "trackingDomains": Object {
-      "cnameValue": "track.wcare-m.sparkpostelite.com",
-    },
-  },
-  "workday.e.sparkpost.com": Object {
-    "apiBase": "https://workday.api.e.sparkpost.com/api",
-    "bounceDomains": Object {
-      "allowDefault": true,
-      "allowSubaccountDefault": true,
-      "cnameValue": "workday.mail.e.sparkpost.com",
-      "mxValue": "workday.mx.e.sparkpost.com",
-    },
-    "brightback": Object {
-      "enabled": true,
-    },
-    "featureFlags": Object {
-      "allow_anyone_at_verification": true,
-      "allow_default_signing_domains_for_ip_pools": true,
-    },
-    "sentry": Object {
-      "projectId": 237613,
-      "publicKey": "014f9707c27b4e7ea90aff051a82e561",
-    },
-    "smtpAuth": Object {
-      "enabled": true,
-      "host": "workday.smtp.e.sparkpost.com",
-      "port": 587,
-      "username": "workday",
-    },
-    "support": Object {
-      "algolia": Object {
-        "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
-        "appID": "SFXAWCYDV8",
-        "index": "production_site_posts_support_article",
-      },
-      "enabled": true,
-    },
-    "tenant": "workday",
-    "trackingDomains": Object {
-      "cnameValue": "track.workdayconnect.com",
-    },
-  },
-  "zillow.e.sparkpost.com": Object {
-    "apiBase": "https://zillow.api.e.sparkpost.com/api",
-    "bounceDomains": Object {
-      "allowDefault": true,
-      "allowSubaccountDefault": true,
-      "cnameValue": "zillow.mail.e.sparkpost.com",
-      "mxValue": "zillow.mx.e.sparkpost.com",
-    },
-    "brightback": Object {
-      "enabled": true,
-    },
-    "featureFlags": Object {
-      "allow_anyone_at_verification": true,
-      "allow_default_signing_domains_for_ip_pools": true,
-    },
-    "sentry": Object {
-      "projectId": 237613,
-      "publicKey": "014f9707c27b4e7ea90aff051a82e561",
-    },
-    "smtpAuth": Object {
-      "enabled": true,
-      "host": "zillow.smtp.e.sparkpost.com",
-      "port": 587,
-      "username": "zillow",
-    },
-    "support": Object {
-      "algolia": Object {
-        "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
-        "appID": "SFXAWCYDV8",
-        "index": "production_site_posts_support_article",
-      },
-      "enabled": true,
-    },
-    "tenant": "zillow",
-    "trackingDomains": Object {
-      "cnameValue": "click.mail.zillow.com",
-    },
-  },
-  "ziprealty.e.sparkpost.com": Object {
-    "apiBase": "https://ziprealty.api.e.sparkpost.com/api",
-    "bounceDomains": Object {
-      "allowDefault": true,
-      "allowSubaccountDefault": true,
-      "cnameValue": "ziprealty.mail.e.sparkpost.com",
-      "mxValue": "ziprealty.mx.e.sparkpost.com",
-    },
-    "brightback": Object {
-      "enabled": true,
-    },
-    "featureFlags": Object {
-      "allow_anyone_at_verification": true,
-      "allow_default_signing_domains_for_ip_pools": true,
-    },
-    "sentry": Object {
-      "projectId": 237613,
-      "publicKey": "014f9707c27b4e7ea90aff051a82e561",
-    },
-    "smtpAuth": Object {
-      "enabled": true,
-      "host": "ziprealty.smtp.e.sparkpost.com",
-      "port": 587,
-      "username": "ziprealty",
-    },
-    "support": Object {
-      "algolia": Object {
-        "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
-        "appID": "SFXAWCYDV8",
-        "index": "production_site_posts_support_article",
-      },
-      "enabled": true,
-    },
-    "tenant": "ziprealty",
-    "trackingDomains": Object {
-      "cnameValue": "ziprealty.et.e.sparkpost.com",
-    },
-  },
-  "ziprecruiter.e.sparkpost.com": Object {
-    "apiBase": "https://ziprecruiter.api.e.sparkpost.com/api",
-    "bounceDomains": Object {
-      "allowDefault": true,
-      "allowSubaccountDefault": true,
-      "cnameValue": "ziprecruiter.mail.e.sparkpost.com",
-      "mxValue": "ziprecruiter.mx.e.sparkpost.com",
-    },
-    "brightback": Object {
-      "enabled": true,
-    },
-    "featureFlags": Object {
-      "allow_anyone_at_verification": true,
-    },
-    "sentry": Object {
-      "projectId": 237613,
-      "publicKey": "014f9707c27b4e7ea90aff051a82e561",
-    },
-    "smtpAuth": Object {
-      "enabled": true,
-      "host": "ziprecruiter.smtp.e.sparkpost.com",
-      "port": 587,
-      "username": "ziprecruiter",
-    },
-    "support": Object {
-      "algolia": Object {
-        "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
-        "appID": "SFXAWCYDV8",
-        "index": "production_site_posts_support_article",
-      },
-      "enabled": true,
-    },
-    "tenant": "zip",
-    "trackingDomains": Object {
-      "cnameValue": "track.sparkpost.ziprecruiter.com",
-    },
-  },
-  "zynga.e.sparkpost.com": Object {
-    "apiBase": "https://zynga.api.e.sparkpost.com/api",
-    "bounceDomains": Object {
-      "allowDefault": true,
-      "allowSubaccountDefault": true,
-      "cnameValue": "zynga.mail.e.sparkpost.com",
-      "mxValue": "zynga.mx.e.sparkpost.com",
-    },
-    "brightback": Object {
-      "enabled": true,
-    },
-    "featureFlags": Object {
-      "allow_anyone_at_verification": true,
-      "allow_default_signing_domains_for_ip_pools": true,
-    },
-    "sentry": Object {
-      "projectId": 237613,
-      "publicKey": "014f9707c27b4e7ea90aff051a82e561",
-    },
-    "smtpAuth": Object {
-      "enabled": true,
-      "host": "zynga.smtp.e.sparkpost.com",
-      "port": 587,
-      "username": "zynga",
-    },
-    "support": Object {
-      "algolia": Object {
-        "apiKey": "9ba87280f36f539fcc0a318c2d4fcfe6",
-        "appID": "SFXAWCYDV8",
-        "index": "production_site_posts_support_article",
-      },
-      "enabled": true,
-    },
-    "tenant": "zynga",
-    "trackingDomains": Object {
-      "cnameValue": "track.spe.zyngamail.com",
     },
   },
 }
