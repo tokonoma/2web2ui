@@ -117,7 +117,7 @@ const config = (identifier) => ({
   },
   bounceDomains: {
     allowDefault: true,
-    allowSubaccountDefault: false,
+    allowSubaccountDefault: true,
     cnameValue: `${identifier}.mail.e.sparkpost.com`,
     mxValue: `${identifier}.mx.e.sparkpost.com`
   },
