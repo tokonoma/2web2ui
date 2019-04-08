@@ -98,7 +98,7 @@ const sparkpostRequest = requestHelperFactory({
     // 5xx errors will retry action a certain number of times
     if (/^5\d\d/.test(String(response.status)) && retries < maxRefreshRetries) {
       action.meta.retries = retries + 1;
-      return dispatch(sparkpostRequest(action));
+      return setTimeout(() => dispatch(sparkpostRequest(action)), 100);
     }
 
     // any other API error should automatically fail, to be handled in the reducers/components

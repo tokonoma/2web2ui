@@ -14,6 +14,8 @@ jest.mock('src/actions/globalAlert');
 jest.mock('src/actions/account');
 jest.mock('src/helpers/http');
 
+const windowSetTimeout = window.setTimeout;
+
 describe('Helper: SparkPost API Request', () => {
 
   let meta;
@@ -106,6 +108,7 @@ describe('Helper: SparkPost API Request', () => {
       axiosMocks.sparkpost.mockImplementation(() => Promise.reject(apiErr));
       refreshTokensUsed.clear();
       globalAlertMock.showAlert = jest.fn((a) => a);
+      window.setTimeout = windowSetTimeout;
     });
 
     it('should handle a failed API call', async () => {
@@ -134,12 +137,12 @@ describe('Helper: SparkPost API Request', () => {
 
     it('should dispatch a special 5xx error action', async () => {
       apiErr.response.status = 500;
+      window.setTimeout = jest.fn((fn) => fn());
       try {
         await mockStore.dispatch(sparkpostApiRequest(action));
       } catch (err) {
         expect(mockStore.getActions()).toMatchSnapshot();
       }
-
     });
 
     it('should fetch account on a 403', async () => {
