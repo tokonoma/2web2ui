@@ -33,7 +33,7 @@ export default class ConfirmationModal extends Component {
         <Button
           className={styles.Confirm}
           disabled={confirming}
-          name={`confirm-${confirmVerb.toLowerCase()}-button`}
+          name="confirmation-modal-confirm-button"
           onClick={onConfirm}
           primary
         >
