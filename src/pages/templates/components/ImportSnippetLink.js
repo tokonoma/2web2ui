@@ -18,7 +18,14 @@ export default class ImportSnippetLink extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <Button color="orange" flat={true} onClick={this.handleOpen}>Import Snippets</Button>
+        <Button
+          color="orange"
+          flat={true}
+          name="import-snippets-button"
+          onClick={this.handleOpen}
+        >
+          Import Snippets
+        </Button>
         <Modal open={this.state.isOpen} onClose={this.handleClose}>
           <ImportSnippetPanel onClose={this.handleClose} />
         </Modal>

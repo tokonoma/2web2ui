@@ -30,7 +30,13 @@ export default class ConfirmationModal extends Component {
     return (
       <div>
         {content}
-        <Button onClick={onConfirm} primary className={styles.Confirm} disabled={confirming}>
+        <Button
+          className={styles.Confirm}
+          disabled={confirming}
+          name="confirmation-modal-confirm-button"
+          onClick={onConfirm}
+          primary
+        >
           {confirmVerb}
         </Button>
         <Button onClick={onCancel} className={styles.Cancel}>Cancel</Button>

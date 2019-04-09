@@ -9,6 +9,7 @@ export default function CollectionFilterBox(props) {
   return (
     <Panel sectioned>
       <TextField
+        name="collection-filter-box"
         prefix={<Search />}
         placeholder={placeholder}
         onChange={(e) => props.onChange(e.target.value)}

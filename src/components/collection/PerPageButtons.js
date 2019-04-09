@@ -17,6 +17,7 @@ const PerPageButtons = ({ data, perPage, perPageButtons = DEFAULT_PER_PAGE_BUTTO
         <Button
           className={classnames(perPage === buttonAmount && styles.Selected)}
           key={buttonAmount}
+          name="collection-per-page-button"
           onClick={() => onPerPageChange(buttonAmount)}
         >{buttonAmount}</Button>
       ))}
