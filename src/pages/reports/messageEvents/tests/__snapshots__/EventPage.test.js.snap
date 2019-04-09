@@ -62,6 +62,7 @@ exports[`Page: Event tests should render page correctly 1`] = `
             },
           ]
         }
+        selectedId="eventId"
       />
     </Grid.Column>
   </Grid>

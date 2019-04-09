@@ -6,6 +6,7 @@ describe('Page: Event tests', () => {
   const props = {
     getMessageHistory: jest.fn(),
     getDocumentation: jest.fn(),
+    getSelectedEvent: jest.fn(),
     history: {
       replace: jest.fn(),
       push: jest.fn()
@@ -18,7 +19,8 @@ describe('Page: Event tests', () => {
     isOrphanEvent: false,
     match: {
       params: {}
-    }
+    },
+    selectedEventId: 'eventId'
   };
 
   let wrapper;
@@ -73,10 +75,10 @@ describe('Page: Event tests', () => {
       expect(props.getMessageHistory).toHaveBeenCalledWith({ messageId: 'id' });
     });
 
-    it('does not invoke getMessageHistory if it is an orphan event', () => {
+    it('invokes getSpecificEvent if it is an orphan event', () => {
       wrapper.setProps({ isOrphanEvent: true });
       instance.handleRefresh();
-      expect(props.getMessageHistory).toHaveBeenCalledTimes(0);
+      expect(props.getSelectedEvent).toHaveBeenCalledWith({ eventId: 'eventId' });
     });
   });
 });

@@ -77,16 +77,14 @@ Object {
   "loading": false,
   "messageHistory": Array [],
   "messageId": "_noid_",
-  "selectedEvent": undefined,
+  "selectedEvent": Array [
+    Object {
+      "event_id": "default_id",
+      "foo": "bar",
+      "timestamp": "2017-11-09T00:00",
+    },
+  ],
   "selectedEventId": "default_id",
-}
-`;
-
-exports[`MessageEvents Selectors getSelectedEventFromEventsList returns correct event from events list 1`] = `
-Object {
-  "event_id": "default_id",
-  "foo": "bar",
-  "timestamp": "2017-11-09T00:00",
 }
 `;
 

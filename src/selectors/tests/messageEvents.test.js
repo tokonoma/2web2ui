@@ -5,6 +5,7 @@ describe('MessageEvents Selectors', () => {
   let props;
   let messageEvents;
   let messageHistory;
+  let selectedEvent;
 
   beforeEach(() => {
     props = {
@@ -31,7 +32,13 @@ describe('MessageEvents Selectors', () => {
 
     messageEvents = { events: events };
     messageHistory = { history: { message_id: events }};
-
+    selectedEvent = [
+      {
+        event_id: 'default_id',
+        foo: 'bar',
+        timestamp: '2017-11-09T00:00'
+      }
+    ];
   });
 
 
@@ -129,17 +136,6 @@ describe('MessageEvents Selectors', () => {
     });
   });
 
-  describe('getSelectedEventFromEventsList', () => {
-    it('returns correct event from events list', () => {
-      props.match.params.eventId = 'default_id';
-      expect(selectors.getSelectedEventFromEventsList({ messageEvents }, props)).toMatchSnapshot();
-    });
-
-    it('returns undefined if event does not exist in messageHistory', () => {
-      expect(selectors.getSelectedEventFromEventsList({ messageEvents }, props)).toBe(undefined);
-    });
-  });
-
   describe('getMessageIdParam', () => {
     it('returns correct messageId value from path', () => {
       expect(selectors.getMessageIdParam({}, { match: { params: { messageId: 'xyz' }}})).toEqual('xyz');
@@ -154,7 +150,7 @@ describe('MessageEvents Selectors', () => {
     let store;
     let props;
     beforeEach(() => {
-      store = { messageEvents: { ...messageHistory, documentation: {}}};
+      store = { messageEvents: { ...messageHistory, selectedEvent, documentation: {}}};
       props = { match: { params: { messageId: 'message_id', eventId: 'default_id' }}};
     });
 
