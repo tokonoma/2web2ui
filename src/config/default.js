@@ -113,7 +113,8 @@ const config = (identifier) => ({
   smtpAuth: {
     host: `${identifier}.smtp.e.sparkpost.com`,
     port: 587,
-    username: 'SMTP_Injection'
+    username: identifier,
+    enabled: true
   },
   bounceDomains: {
     allowDefault: true,
