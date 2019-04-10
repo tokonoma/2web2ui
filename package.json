@@ -56,7 +56,7 @@
   },
   "dependencies": {
     "@sparkpost/boomerang": "^1.0.6",
-    "@sparkpost/matchbox": "^3.3.10",
+    "@sparkpost/matchbox": "^3.3.11",
     "@sparkpost/matchbox-icons": "^1.1.6",
     "axios": "^0.18.0",
     "bowser": "2.1.2",
