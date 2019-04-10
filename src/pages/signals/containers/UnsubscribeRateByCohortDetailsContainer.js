@@ -5,6 +5,7 @@ import { getUnsubscribeRateByCohort } from 'src/actions/signals';
 import { selectUnsubscribeRateByCohortDetails, getSelectedDateFromRouter } from 'src/selectors/signals';
 import { getDateTicks } from 'src/helpers/date';
 import { getDisplayName } from 'src/helpers/hoc';
+import _ from 'lodash';
 
 export class WithUnsubscribeRateByCohortDetails extends Component {
   componentDidMount() {
@@ -12,23 +13,25 @@ export class WithUnsubscribeRateByCohortDetails extends Component {
     getUnsubscribeRateByCohort({
       facet,
       filter: facetId,
+      from: filters.from,
       relativeRange: filters.relativeRange,
-      subaccount: subaccountId
+      subaccount: subaccountId,
+      to: filters.to
     });
   }
 
   componentDidUpdate(prevProps) {
     const { getUnsubscribeRateByCohort, facet, facetId, filters, subaccountId } = this.props;
-    const prevRange = prevProps.filters.relativeRange;
-    const nextRange = filters.relativeRange;
 
-    // Refresh when date range changes
-    if (prevRange !== nextRange) {
+    // Refresh when filters change
+    if (!_.isEqual(prevProps.filters, filters)) {
       getUnsubscribeRateByCohort({
         facet,
         filter: facetId,
-        relativeRange: nextRange,
-        subaccount: subaccountId
+        from: filters.from,
+        relativeRange: filters.relativeRange,
+        subaccount: subaccountId,
+        to: filters.to
       });
     }
   }
