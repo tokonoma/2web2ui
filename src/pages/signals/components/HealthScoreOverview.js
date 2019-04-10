@@ -7,19 +7,14 @@ import SummaryTable, { Column } from 'src/components/summaryTable';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
 import { HEALTH_SCORE_INFO } from '../constants/info';
 import { DEFAULT_VIEW } from '../constants/summaryTables';
-import BarChartDataCell from './dataCells/BarChartDataCell';
 import FacetDataCell from './dataCells/FacetDataCell';
 import NumericDataCell from './dataCells/NumericDataCell';
 import SparklineDataCell from './dataCells/SparklineDataCell';
 import WoWDataCell from './dataCells/WoWDataCell';
 import WoWHeaderCell from './dataCells/WoWHeaderCell';
-import ChartType from './viewControls/ChartType';
 import styles from './SpamTrapOverview.module.scss';
 
 class HealthScoreOverview extends React.Component {
-  state = {
-    chartType: 'line'
-  }
 
   componentDidMount() {
     this.resetTable();
@@ -68,17 +63,15 @@ class HealthScoreOverview extends React.Component {
     getHealthScore({
       facet: signalOptions.facet,
       filter: signalOptions.facetSearchTerm,
+      from: signalOptions.from,
       limit: summaryTable.perPage,
       offset: (summaryTable.currentPage - 1) * summaryTable.perPage,
       order,
       orderBy,
       relativeRange: signalOptions.relativeRange,
-      subaccount
+      subaccount,
+      to: signalOptions.to
     });
-  }
-
-  handleChartTypeChange = (chartType) => {
-    this.setState({ chartType });
   }
 
   handleClick = (facetId, subaccountId) => ({ date }) => {
@@ -104,10 +97,11 @@ class HealthScoreOverview extends React.Component {
 
   render() {
     const {
-      data, error, facet, loading, signalOptions, subaccounts, tableName, totalCount
+      data, error, facet, loading, signalOptions, subaccounts, tableName, totalCount, hideTitle, header
     } = this.props;
-    const { chartType } = this.state;
+
     const subaccountFilter = _.get(signalOptions, 'subaccount.id');
+    const isCustomRange = signalOptions.relativeRange === 'custom';
 
     const noFacetSelected = facet.key === 'sid';
     const noSubaccountFilter = subaccountFilter === undefined;
@@ -118,21 +112,21 @@ class HealthScoreOverview extends React.Component {
 
     return (
       <Panel>
-        <div className={styles.Header}>
-          <h5>Health Score Summary</h5>
-          <div className={styles.Tooltip}>
-            <Tooltip
-              children={<InfoOutline className={styles.TooltipIcon} size={18} />}
-              content={HEALTH_SCORE_INFO}
-              dark
-              horizontalOffset="-1rem"
-              right
-            />
+        {!hideTitle && (
+          <div className={styles.Header}>
+            <h5>Health Score Summary</h5>
+            <div className={styles.Tooltip}>
+              <Tooltip
+                children={<InfoOutline className={styles.TooltipIcon} size={18} />}
+                content={HEALTH_SCORE_INFO}
+                dark
+                horizontalOffset="-1rem"
+                right
+              />
+            </div>
           </div>
-          <div className={styles.Controls}>
-            <ChartType initialSelected={chartType} onChange={this.handleChartTypeChange} />
-          </div>
-        </div>
+        )}
+        {header && <Panel.Section>{header}</Panel.Section>}
         <SummaryTable
           data={filteredData}
           empty={filteredData.length === 0}
@@ -182,18 +176,6 @@ class HealthScoreOverview extends React.Component {
             component={({ history, ...filteredData }) => {
               const id = filteredData[facet.key];
 
-              if (chartType === 'bar') {
-                return (
-                  <BarChartDataCell
-                    data={_.last(history)}
-                    dataKey="health_score"
-                    label="Health Score"
-                    onClick={this.handleClick(id, filteredData.sid)}
-                    relative={false}
-                  />
-                );
-              }
-
               return (
                 <SparklineDataCell
                   data={history}
@@ -208,7 +190,7 @@ class HealthScoreOverview extends React.Component {
           <Column
             align="right"
             dataKey="current_health_score"
-            label="Current Score"
+            label={isCustomRange ? 'Score' : 'Current Score'}
             sortable
             width="12.5%"
             component={({ current_health_score }) => (
