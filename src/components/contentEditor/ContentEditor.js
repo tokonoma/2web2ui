@@ -44,6 +44,31 @@ class ContentEditor extends React.Component {
     selectedTab: 0
   }
 
+  // see, https://playground.amp.dev/?referrer=ampbyexample.com&runtime=amp4email&mode=Responsive
+  // see, https://github.com/ampproject/amp-by-example/blob/master/playground/src/validator/validator.js
+  componentDidMount() {
+    const script = document.createElement('script');
+    script.src = 'https://cdn.ampproject.org/v0/validator.js';
+    script.addEventListener('load', () => {
+      // const result = window.amp.validator.validateString(this.props.template.content.amp_html, 'AMP4EMAIL');
+      //
+      // if (result.errors.length) {
+      //   console.log(
+      //     window.amp.validator.renderErrorMessage(result.errors[0]), // message
+      //     window.amp.validator.categorizeError(result.errors[0]), // category
+      //     result.errors[0].severity.toLowerCase(), // icon
+      //     result.errors[0].severity === 'ERROR', // isError
+      //     result.errors[0].severity === 'WARNING' // isWarning
+      //   );
+      // }
+    });
+    script.addEventListener('error', (error) => {
+      // console.log('Error', error);
+    });
+
+    document.head.appendChild(script);
+  }
+
   handleTab = (index) => {
     this.setState({ selectedTab: index });
   }

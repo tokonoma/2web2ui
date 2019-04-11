@@ -131,7 +131,11 @@ export default class EditPage extends Component {
             <Form name={formName} subaccountId={subaccountId} readOnly={!canModify} />
           </Grid.Column>
           <Grid.Column xs={12} lg={8}>
-            <ContentEditor readOnly={!canModify} action={canModify && <ImportSnippetLink />} />
+            <ContentEditor
+              readOnly={!canModify}
+              action={canModify && <ImportSnippetLink />}
+              template={this.props.template}
+            />
           </Grid.Column>
         </Grid>
         <DeleteModal
