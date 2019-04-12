@@ -157,8 +157,10 @@ export const json = (value) => {
 // Date validator for the DatePicker component
 export const minDays = _.memoize(function minDays(min) {
   return function (dates) {
-    return Math.abs(moment(dates.from).diff(moment(dates.to), 'days')) < min
-      ? 'Select a range of at least 7 days'
+    // This checks if the dates meet the minimum, and does not factor in the time of those dates
+    // Min is subtracted by 1 to account for up to one 24 hour period excluded from the calculation
+    return Math.abs(moment(dates.from).diff(moment(dates.to), 'days')) < min - 1
+      ? `Select a range of at least ${min} days`
       : undefined;
   };
 });
