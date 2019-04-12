@@ -86,19 +86,13 @@ const sparkpostRequest = requestHelperFactory({
         );
     }
 
-    if (response.status === 401) {
-      dispatch(logout());
-    }
-
     // Re-fetch the account to see if suspended or terminated (handled in AuthenticationGate)
     if (response.status === 403) {
       dispatch(fetchAccount());
     }
 
-    // 5xx errors will retry action a certain number of times
-    if (/^5\d\d/.test(String(response.status)) && retries < maxRefreshRetries) {
-      action.meta.retries = retries + 1;
-      return setTimeout(() => dispatch(sparkpostRequest(action)), 100);
+    if (response.status === 401) {
+      dispatch(logout());
     }
 
     // any other API error should automatically fail, to be handled in the reducers/components
