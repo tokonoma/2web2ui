@@ -68,7 +68,9 @@ const getSelectedEvent = createSelector(
 export const eventPageMSTP = (state, props) => createStructuredSelector({
   isMessageHistoryEmpty: isMessageHistoryEmpty,
   isOrphanEvent: isOrphanEvent,
-  loading: (state) => !!(state.messageEvents.historyLoading || state.messageEvents.documentationLoading),
+  loading: (state) => !!(state.messageEvents.historyLoading ||
+    state.messageEvents.documentationLoading ||
+    state.messageEvents.selectedEventLoading),
   messageHistory: selectMessageHistory,
   messageId: getMessageIdParam,
   documentation: (state) => state.messageEvents.documentation,

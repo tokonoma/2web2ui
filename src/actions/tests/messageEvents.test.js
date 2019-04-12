@@ -127,7 +127,7 @@ describe('Action Creator: MessageEvents', () => {
 
   describe('getSelectedEvent', () => {
     it('makes api call with defaults', () => {
-      expect(messageEvents.getSelectedEvent({ eventId: 'abcd,efgh' })).toMatchSnapshot();
+      expect(messageEvents.getSelectedEvent({ eventId: 'abc123' })).toMatchSnapshot();
     });
   });
 

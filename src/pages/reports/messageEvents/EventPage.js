@@ -33,10 +33,10 @@ export class EventPage extends Component {
 
   handleRefresh = () => {
     const { messageId, getMessageHistory, isOrphanEvent, selectedEventId, getSelectedEvent } = this.props;
-    if (!isOrphanEvent) {
-      getMessageHistory({ messageId });
-    } else {
+    if (isOrphanEvent) {
       getSelectedEvent({ eventId: selectedEventId });
+    } else {
+      getMessageHistory({ messageId });
     }
   }
 

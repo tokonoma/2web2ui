@@ -75,7 +75,7 @@ describe('Page: Event tests', () => {
       expect(props.getMessageHistory).toHaveBeenCalledWith({ messageId: 'id' });
     });
 
-    it('invokes getSpecificEvent if it is an orphan event', () => {
+    it('invokes getSelectedEvent if it is an orphan event', () => {
       wrapper.setProps({ isOrphanEvent: true });
       instance.handleRefresh();
       expect(props.getSelectedEvent).toHaveBeenCalledWith({ eventId: 'eventId' });

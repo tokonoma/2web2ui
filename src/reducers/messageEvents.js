@@ -8,6 +8,7 @@ const initialState = {
   loading: false,
   historyLoading: false,
   documentationLoading: false,
+  selectedEventLoading: false,
   error: null,
   events: [],
   history: {},
@@ -107,17 +108,17 @@ export default (state = initialState, { type, payload, meta, extra }) => {
       // Selected Event
 
     case 'GET_SELECTED_EVENT_PENDING':
-      return { ...state, historyLoading: true, error: null };
+      return { ...state, selectedEventLoading: true, error: null };
 
     case 'GET_SELECTED_EVENT_SUCCESS':
       return {
         ...state,
-        historyLoading: false,
+        selectedEventLoading: false,
         selectedEvent: payload[0]
       };
 
     case 'GET_SELECTED_EVENT_FAIL':
-      return { ...state, historyLoading: false, error: payload };
+      return { ...state, selectedEventLoading: false, error: payload };
 
       // Documentation
 
