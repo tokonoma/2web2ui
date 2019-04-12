@@ -21,7 +21,9 @@ export function HealthScoreDashboard(props) {
 
   // Gets injections and current score for gauge and timeseries only when dates change
   useEffect(() => {
-    getCurrentHealthScore({ relativeRange });
+    // Ordered by ascending sid to guarantee account rollup (-1) is returned
+    // order_by: 'sid' is the default behavior
+    getCurrentHealthScore({ relativeRange, order: 'asc', limit: 1 });
     getInjections({ relativeRange });
   }, [getCurrentHealthScore, getInjections, relativeRange]);
 
