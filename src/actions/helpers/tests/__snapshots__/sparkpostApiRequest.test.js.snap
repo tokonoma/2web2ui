@@ -42,7 +42,6 @@ Array [
   Object {
     "meta": Object {
       "method": "GET",
-      "retries": 3,
       "url": "/some/path",
     },
     "type": "TEST_PENDING",
@@ -50,31 +49,6 @@ Array [
   Object {
     "meta": Object {
       "method": "GET",
-      "retries": 3,
-      "url": "/some/path",
-    },
-    "type": "TEST_PENDING",
-  },
-  Object {
-    "meta": Object {
-      "method": "GET",
-      "retries": 3,
-      "url": "/some/path",
-    },
-    "type": "TEST_PENDING",
-  },
-  Object {
-    "meta": Object {
-      "method": "GET",
-      "retries": 3,
-      "url": "/some/path",
-    },
-    "type": "TEST_PENDING",
-  },
-  Object {
-    "meta": Object {
-      "method": "GET",
-      "retries": 3,
       "url": "/some/path",
     },
     "payload": Object {
