@@ -13,7 +13,6 @@ export class WithSpamTrapDetails extends Component {
       facet,
       filter: facetId,
       from: filters.from,
-      relativeRange: filters.relativeRange,
       subaccount: subaccountId,
       to: filters.to
     });
@@ -28,7 +27,6 @@ export class WithSpamTrapDetails extends Component {
         facet,
         filter: facetId,
         from: filters.from,
-        relativeRange: filters.relativeRange,
         subaccount: subaccountId,
         to: filters.to
       });

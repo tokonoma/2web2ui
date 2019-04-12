@@ -20,7 +20,6 @@ describe('Signals Complaints by Cohort Details Container', () => {
       facetId: 'test.com',
       filters: {
         from: '2015-01-01',
-        relativeRange: '14days',
         to: '2015-01-05'
       },
       getComplaintsByCohort: jest.fn(),
@@ -38,19 +37,8 @@ describe('Signals Complaints by Cohort Details Container', () => {
       facet: 'sending_domain',
       filter: 'test.com',
       from: '2015-01-01',
-      relativeRange: '14days',
       subaccount: '101',
       to: '2015-01-05'
-    });
-  });
-
-  it('gets complaints by cohort when range is updated', () => {
-    wrapper.setProps({ filters: { relativeRange: '30days' }});
-    expect(props.getComplaintsByCohort).toHaveBeenCalledWith({
-      facet: 'sending_domain',
-      filter: 'test.com',
-      relativeRange: '30days',
-      subaccount: '101'
     });
   });
 
@@ -60,7 +48,6 @@ describe('Signals Complaints by Cohort Details Container', () => {
       facet: 'sending_domain',
       filter: 'test.com',
       from: '2016-01-01',
-      relativeRange: 'custom',
       subaccount: '101',
       to: '2016-01-02'
     });

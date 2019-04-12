@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { FORMATS } from 'src/constants';
-import { getRelativeDates, getStartOfDay } from 'src/helpers/date';
+import { getRelativeDates } from 'src/helpers/date';
 import DatePicker from 'src/components/datePicker/DatePicker';
 import withSignalOptions from '../../containers/withSignalOptions';
 import { minDays } from 'src/helpers/validation';
@@ -14,32 +14,35 @@ const OPTIONS = [
   'custom'
 ];
 
+const DEFAULT_RANGE = '90days';
+
 export function DateFilter({ signalOptions, changeSignalOptions, left, now = new Date() }) {
-  // Start of day is used to prevent unwanted side effects when now changes
-  const relativeNow = getStartOfDay(moment(now).subtract(1, 'day')).toString();
-  const [dates, setDates] = useState({ to: null, from: null });
-  const { relativeRange, from, to } = signalOptions;
 
-  // Creates dates for the datepicker from signal options
-  useEffect(() => {
-    let updates = { from, to };
+  // Constructs dates from relative range or custom dates
+  // Handling this here removes this logic elsewhere in the app
+  function handleChange(updates) {
+    let options = updates;
 
-    if (relativeRange !== 'custom') {
-      updates = getRelativeDates(relativeRange, { now: new Date(relativeNow) });
+    if (updates.relativeRange !== 'custom') {
+      options = {
+        ...getRelativeDates(updates.relativeRange, { now: moment(now).subtract(1, 'day') }),
+        relativeRange: updates.relativeRange
+      };
     }
 
-    setDates(updates);
-  }, [relativeRange, from, to, relativeNow]);
-
-  function handleChange(updates) {
-    changeSignalOptions(updates);
+    changeSignalOptions(options);
   }
+
+  // On mount, sets dates from a 90 day default
+  useEffect(() => {
+    handleChange({ relativeRange: DEFAULT_RANGE });
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <DatePicker
       now={moment(now).subtract(1, 'day').toDate()}
-      from={dates.from}
-      to={dates.to}
+      from={signalOptions.from}
+      to={signalOptions.to}
       relativeDateOptions={OPTIONS}
       relativeRange={signalOptions.relativeRange}
       onChange={handleChange}

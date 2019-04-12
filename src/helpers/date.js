@@ -156,17 +156,11 @@ export const parseDate = (str) => moment(str, FORMATS.INPUT_DATES, true);
 export const parseTime = (str) => moment(str, FORMATS.INPUT_TIMES, true);
 export const parseDatetime = (...args) => moment(args.join(' '), FORMATS.INPUT_DATETIMES, true);
 
-export const fillByDate = ({ dataSet, fill = {}, from, now, relativeRange, to } = {}) => {
-  let dates = { from, to };
-
-  if (relativeRange && relativeRange !== 'custom') {
-    dates = getRelativeDates(relativeRange, { now });
-  }
-
+export const fillByDate = ({ dataSet, fill = {}, from, to } = {}) => {
   const orderedData = dataSet.sort((a, b) => new Date(a.date) - new Date(b.date));
   let filledDataSet = [];
 
-  for (let time = moment(dates.from), index = 0; time.isBefore(moment(dates.to)); time.add(1, 'day')) {
+  for (let time = moment(from), index = 0; time.isBefore(moment(to)); time.add(1, 'day')) {
     const data = orderedData[index];
     const fillData = { ...fill, date: formatInputDate(time) };
 
@@ -185,19 +179,13 @@ export const fillByDate = ({ dataSet, fill = {}, from, now, relativeRange, to } 
  * Generates 3 dates based off relative range
  * Returns first date, middle date, and 1 day before to
  */
-export function getDateTicks({ relativeRange, to, from }) {
-  let dates = { to, from };
-
-  if (relativeRange !== 'custom') {
-    dates = getRelativeDates(relativeRange, { now: moment().subtract(1, 'day') });
-  }
-
-  const diff = moment(dates.to).diff(dates.from, 'days');
-  const middle = moment(dates.from).add(diff / 2, 'days');
+export function getDateTicks({ to, from }) {
+  const diff = moment(to).diff(from, 'days');
+  const middle = moment(from).add(diff / 2, 'days');
 
   return [
-    formatInputDate(dates.from),
+    formatInputDate(from),
     formatInputDate(middle),
-    formatInputDate(dates.to)
+    formatInputDate(to)
   ];
 }

@@ -21,7 +21,6 @@ describe('Signals Health Score Details Container', () => {
       facetId: 'test.com',
       filters: {
         from: '2015-01-01',
-        relativeRange: '14days',
         to: '2015-01-05'
       },
       getSpamHits: jest.fn(),
@@ -40,22 +39,9 @@ describe('Signals Health Score Details Container', () => {
       facet: 'sending_domain',
       filter: 'test.com',
       from: '2015-01-01',
-      relativeRange: '14days',
       subaccount: '101',
       to: '2015-01-05'
     };
-    expect(props.getSpamHits).toHaveBeenCalledWith(options);
-    expect(props.getHealthScore).toHaveBeenCalledWith(options);
-  });
-
-  it('gets health score and spam hits when range is updated', () => {
-    const options = {
-      facet: 'sending_domain',
-      filter: 'test.com',
-      relativeRange: '30days',
-      subaccount: '101'
-    };
-    wrapper.setProps({ filters: { relativeRange: '30days' }});
     expect(props.getSpamHits).toHaveBeenCalledWith(options);
     expect(props.getHealthScore).toHaveBeenCalledWith(options);
   });
@@ -66,7 +52,6 @@ describe('Signals Health Score Details Container', () => {
       facet: 'sending_domain',
       filter: 'test.com',
       from: '2016-01-01',
-      relativeRange: 'custom',
       subaccount: '101',
       to: '2016-01-02'
     };

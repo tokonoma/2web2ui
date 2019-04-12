@@ -2,16 +2,13 @@ import { snapshotActionCases } from 'src/__testHelpers__/snapshotActionHelpers';
 import * as actions from '../signals';
 jest.mock('src/actions/helpers/sparkpostApiRequest');
 jest.mock('src/helpers/date', () => ({
-  formatInputDate: (d) => d,
-  getRelativeDates: () => ({
-    from: '2018-01-12',
-    to: '2018-01-13'
-  })
+  formatInputDate: (d) => d
 }));
 
 describe('Signals Actions', () => {
   const requiredOptions = {
-    relativeRange: '14days'
+    from: '2018-01-12',
+    to: '2018-01-13'
   };
 
   snapshotActionCases('.getSpamHits', {
@@ -44,9 +41,6 @@ describe('Signals Actions', () => {
     },
     'with a subaccount': {
       action: () => actions.getSpamHits({ ...requiredOptions, subaccount: { id: 123 }})
-    },
-    'with a custom date range': {
-      action: () => actions.getSpamHits({ ...requiredOptions, to: '2018-01-07', from: '2018-01-01', relativeRange: 'custom' })
     }
   });
 

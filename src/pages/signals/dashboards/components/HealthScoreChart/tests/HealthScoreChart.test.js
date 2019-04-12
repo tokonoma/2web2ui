@@ -34,7 +34,6 @@ describe('Signals Health Score Chart', () => {
         ranking: null
       }],
       filters: {
-        relativeRange: '90days',
         from: '2014-12-01',
         to: '2015-02-01'
       }

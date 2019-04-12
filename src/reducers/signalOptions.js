@@ -1,9 +1,4 @@
-const initialState = {
-  // facet: 'sending_domain',
-  // facetSearchTerm: '',
-  relativeRange: '90days'
-  // subaccount
-};
+const initialState = {};
 
 const signalOptionsReducer = (state = initialState, action) => {
   switch (action.type) {

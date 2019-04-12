@@ -300,43 +300,21 @@ describe('Date helpers', () => {
   });
 
   describe('fillByDate', () => {
-    const now = moment('2018-02-02');
-    const relativeRange = '7days';
-
     it('returns sorted and filled dataset', () => {
+      const dates = { to: '2018-02-03T04:20:00-04:00', from: '2018-01-26T04:20:00-04:00' };
       const dataSet = [
         { date: '2018-02-02', value: 234 },
         { date: '2018-01-30', value: 123 }
       ];
       const fill = { value: null };
 
-      expect(fillByDate({ dataSet, fill, now, relativeRange })).toMatchSnapshot();
-    });
-
-    it('returns sorted and filled dataset with custom date', () => {
-      const dataSet = [
-        { date: '2018-02-02', value: 234 },
-        { date: '2018-01-30', value: 123 }
-      ];
-      const fill = { value: null };
-
-      expect(fillByDate({ dataSet, fill, now, relativeRange: 'custom', to: '2018-02-03', from: '2018-02-01' })).toMatchSnapshot();
+      expect(fillByDate({ dataSet, fill, ...dates })).toMatchSnapshot();
     });
   });
 
   describe('getDateTicks', () => {
     it('returns an array of start, end and middle days', () => {
-      jest.spyOn(Date, 'now').mockImplementation(() => '2018-02-02T04:20:00-04:00');
-      expect(getDateTicks({ relativeRange: '14days' })).toEqual([
-        '2018-01-18',
-        '2018-01-25',
-        '2018-02-01'
-      ]);
-    });
-
-    it('returns an array of start, end and middle days with a custom range', () => {
-      jest.spyOn(Date, 'now').mockImplementation(() => '2018-02-02T04:20:00-04:00');
-      expect(getDateTicks({ relativeRange: 'custom', to: '2018-05-25T04:20:00-04:00', from: '2018-05-01T04:20:00-04:00' })).toEqual([
+      expect(getDateTicks({ to: '2018-05-25T04:20:00-04:00', from: '2018-05-01T04:20:00-04:00' })).toEqual([
         '2018-05-01',
         '2018-05-13',
         '2018-05-25'

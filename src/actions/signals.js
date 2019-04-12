@@ -1,7 +1,6 @@
-import { formatInputDate, getRelativeDates } from 'src/helpers/date';
+import { formatInputDate } from 'src/helpers/date';
 import setSubaccountHeader from './helpers/setSubaccountHeader';
 import sparkpostApiRequest from './helpers/sparkpostApiRequest';
-import moment from 'moment';
 
 // order_by param values do not match field names, so we have to translate here
 const ORDER_BY_MAPPING = {
@@ -20,16 +19,9 @@ const signalsActionCreator = ({ dimension, type }) => ({
   offset,
   order,
   orderBy,
-  relativeRange,
   subaccount,
   to
 }) => {
-  let dates = { from, to };
-
-  if (relativeRange !== 'custom') {
-    dates = getRelativeDates(relativeRange, { now: moment().subtract(1, 'day') });
-  }
-
   let order_by;
 
   // note, to order by subaccount, only pass order direction and do not set order_by
@@ -52,12 +44,12 @@ const signalsActionCreator = ({ dimension, type }) => ({
       showErrorAlert: false,
       params: {
         filter,
-        from: formatInputDate(dates.from),
+        from: formatInputDate(from),
         limit,
         offset,
         order,
         order_by,
-        to: formatInputDate(dates.to)
+        to: formatInputDate(to)
       }
     }
   });
@@ -100,27 +92,17 @@ export const getSpamHits = signalsActionCreator({
 
 export const getInjections = ({
   from,
-  relativeRange,
   to
-}) => {
-
-  let dates = { from, to };
-
-  if (relativeRange !== 'custom') {
-    dates = getRelativeDates(relativeRange, { now: moment().subtract(1, 'day') });
-  }
-
-  return sparkpostApiRequest({
-    type: 'GET_INJECTIONS',
-    meta: {
-      method: 'GET',
-      headers: {},
-      url: '/v1/signals/injections',
-      showErrorAlert: false,
-      params: {
-        from: formatInputDate(dates.from),
-        to: formatInputDate(dates.to)
-      }
+}) => sparkpostApiRequest({
+  type: 'GET_INJECTIONS',
+  meta: {
+    method: 'GET',
+    headers: {},
+    url: '/v1/signals/injections',
+    showErrorAlert: false,
+    params: {
+      from: formatInputDate(from),
+      to: formatInputDate(to)
     }
-  });
-};
+  }
+});

@@ -22,7 +22,8 @@ describe('Selectors: signals', () => {
   beforeEach(() => {
     state = {
       signalOptions: {
-        relativeRange: '7days'
+        to: '2018-01-04',
+        from: '2017-12-27'
       },
       signals: {
         spamHits: {
@@ -276,15 +277,6 @@ describe('Selectors: signals', () => {
       expect(selectors.selectSpamHitsDetails(state, props)).toMatchSnapshot();
     });
 
-    it('should select spam hits details with custom range', () => {
-      const stateWithDates = { ...state, signalOptions: { relativeRange: 'custom', to: '2018-01-03', from: '2018-01-01' }};
-      const data = selectors.selectSpamHitsDetails(stateWithDates, props).details.data;
-      expect(data).toEqual([
-        expect.objectContaining({ date: '2018-01-01' }),
-        expect.objectContaining({ date: '2018-01-02' })
-      ]);
-    });
-
     it('should be empty with only fill data when not loading', () => {
       const stateWhenEmpty = { ...state, signals: { spamHits: { data: [], loading: false }}};
       expect(selectors.selectSpamHitsDetails(stateWhenEmpty, props)).toMatchSnapshot();
@@ -299,15 +291,6 @@ describe('Selectors: signals', () => {
   describe('engagement recency details', () => {
     it('should select details', () => {
       expect(selectors.selectEngagementRecencyDetails(state, props)).toMatchSnapshot();
-    });
-
-    it('should select details with custom range', () => {
-      const stateWithDates = { ...state, signalOptions: { relativeRange: 'custom', to: '2018-01-03', from: '2018-01-01' }};
-      const data = selectors.selectEngagementRecencyDetails(stateWithDates, props).details.data;
-      expect(data).toEqual([
-        expect.objectContaining({ date: '2018-01-01' }),
-        expect.objectContaining({ date: '2018-01-02' })
-      ]);
     });
 
     it('should be empty with only fill data when not loading', () => {
@@ -326,15 +309,6 @@ describe('Selectors: signals', () => {
       expect(selectors.selectEngagementRateByCohortDetails(state, props)).toMatchSnapshot();
     });
 
-    it('should select details with custom range', () => {
-      const stateWithDates = { ...state, signalOptions: { relativeRange: 'custom', to: '2018-01-03', from: '2018-01-01' }};
-      const data = selectors.selectEngagementRateByCohortDetails(stateWithDates, props).details.data;
-      expect(data).toEqual([
-        expect.objectContaining({ date: '2018-01-01' }),
-        expect.objectContaining({ date: '2018-01-02' })
-      ]);
-    });
-
     it('should be empty with only fill data when not loading', () => {
       const stateWhenEmpty = { ...state, signals: { engagementRateByCohort: { data: [], loading: false }}};
       expect(selectors.selectEngagementRateByCohortDetails(stateWhenEmpty, props).details.empty).toBe(true);
@@ -349,15 +323,6 @@ describe('Selectors: signals', () => {
   describe('unsubscribe rate by cohort details', () => {
     it('should select details', () => {
       expect(selectors.selectUnsubscribeRateByCohortDetails(state, props)).toMatchSnapshot();
-    });
-
-    it('should select details with custom range', () => {
-      const stateWithDates = { ...state, signalOptions: { relativeRange: 'custom', to: '2018-01-03', from: '2018-01-01' }};
-      const data = selectors.selectUnsubscribeRateByCohortDetails(stateWithDates, props).details.data;
-      expect(data).toEqual([
-        expect.objectContaining({ date: '2018-01-01' }),
-        expect.objectContaining({ date: '2018-01-02' })
-      ]);
     });
 
     it('should be empty with only fill data when not loading', () => {
@@ -376,15 +341,6 @@ describe('Selectors: signals', () => {
       expect(selectors.selectComplaintsByCohortDetails(state, props)).toMatchSnapshot();
     });
 
-    it('should select details with custom range', () => {
-      const stateWithDates = { ...state, signalOptions: { relativeRange: 'custom', to: '2018-01-03', from: '2018-01-01' }};
-      const data = selectors.selectComplaintsByCohortDetails(stateWithDates, props).details.data;
-      expect(data).toEqual([
-        expect.objectContaining({ date: '2018-01-01' }),
-        expect.objectContaining({ date: '2018-01-02' })
-      ]);
-    });
-
     it('should be empty with only fill data when not loading', () => {
       const stateWhenEmpty = { ...state, signals: { complaintsByCohort: { data: [], loading: false }}};
       expect(selectors.selectComplaintsByCohortDetails(stateWhenEmpty, props).details.empty).toBe(true);
@@ -399,15 +355,6 @@ describe('Selectors: signals', () => {
   describe('health score details', () => {
     it('should select details', () => {
       expect(selectors.selectHealthScoreDetails(state, props)).toMatchSnapshot();
-    });
-
-    it('should select details with custom range', () => {
-      const stateWithDates = { ...state, signalOptions: { relativeRange: 'custom', to: '2018-01-03', from: '2018-01-01' }};
-      const data = selectors.selectHealthScoreDetails(stateWithDates, props).details.data;
-      expect(data).toEqual([
-        expect.objectContaining({ date: '2018-01-01' }),
-        expect.objectContaining({ date: '2018-01-02' })
-      ]);
     });
 
     it('should be empty with only fill data when not loading', () => {
@@ -430,15 +377,6 @@ describe('Selectors: signals', () => {
   describe('selectEngagementRecencyOverviewData', () => {
     it('returns data', () => {
       expect(selectors.selectEngagementRecencyOverviewData(state, props)).toMatchSnapshot();
-    });
-
-    it('returns data with custom range', () => {
-      const stateWithDates = { ...state, signalOptions: { relativeRange: 'custom', to: '2018-01-03', from: '2018-01-01' }};
-      const data = selectors.selectEngagementRecencyOverviewData(stateWithDates, props);
-      expect(data[0].history).toEqual([
-        expect.objectContaining({ date: '2018-01-01' }),
-        expect.objectContaining({ date: '2018-01-02' })
-      ]);
     });
 
     it('returns empty array', () => {
@@ -479,15 +417,6 @@ describe('Selectors: signals', () => {
       expect(selectors.selectSpamHitsOverviewData(state, props)).toMatchSnapshot();
     });
 
-    it('returns data with custom range', () => {
-      const stateWithDates = { ...state, signalOptions: { relativeRange: 'custom', to: '2018-01-03', from: '2018-01-01' }};
-      const data = selectors.selectSpamHitsOverviewData(stateWithDates, props);
-      expect(data[0].history).toEqual([
-        expect.objectContaining({ date: '2018-01-01' }),
-        expect.objectContaining({ date: '2018-01-02' })
-      ]);
-    });
-
     it('returns empty array', () => {
       const stateWhenEmpty = { ...state, signals: { spamHits: { data: []}}};
       expect(selectors.selectSpamHitsOverviewData(stateWhenEmpty, props)).toEqual([]);
@@ -524,15 +453,6 @@ describe('Selectors: signals', () => {
   describe('selectHealthScoreOverviewData', () => {
     it('returns data', () => {
       expect(selectors.selectHealthScoreOverviewData(state, props)).toMatchSnapshot();
-    });
-
-    it('returns data with custom range', () => {
-      const stateWithDates = { ...state, signalOptions: { relativeRange: 'custom', to: '2018-01-03', from: '2018-01-01' }};
-      const data = selectors.selectHealthScoreOverviewData(stateWithDates, props);
-      expect(data[0].history).toEqual([
-        expect.objectContaining({ date: '2018-01-01' }),
-        expect.objectContaining({ date: '2018-01-02' })
-      ]);
     });
 
     it('returns empty array', () => {
