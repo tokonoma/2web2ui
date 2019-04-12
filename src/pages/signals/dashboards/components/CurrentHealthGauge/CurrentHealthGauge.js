@@ -60,7 +60,6 @@ export function CurrentHealthGauge(props) {
       <div className={styles.Content}>
         <h2 className={styles.Header}>
           {title}
-          {' '}
           <Tooltip
             children={<InfoOutline className={styles.TooltipIcon} size={18} />}
             content={HEALTH_SCORE_INFO}
