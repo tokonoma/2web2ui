@@ -35,8 +35,11 @@ export class FacetFilter extends React.Component {
   }
 
   handleFacetSearch = () => {
-    const { changeSignalOptions } = this.props;
-    changeSignalOptions({ facetSearchTerm: this.state.searchTerm });
+    const { changeSignalOptions, signalOptions } = this.props;
+
+    if (signalOptions.facetSearchTerm !== this.state.searchTerm) {
+      changeSignalOptions({ facetSearchTerm: this.state.searchTerm });
+    }
   }
 
   handleSearchChange = (event) => {
