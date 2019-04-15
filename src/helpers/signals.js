@@ -1,6 +1,8 @@
 import _ from 'lodash';
 import { roundToPlaces } from 'src/helpers/units';
+import { getRelativeDates } from 'src/helpers/date';
 import thresholds from 'src/pages/signals/constants/healthScoreThresholds';
+import moment from 'moment';
 
 const translateSubaccount = (id) => {
   // Note: Subaccount -1 (aggregate of all subaccounts) does not have a details Page
@@ -54,4 +56,18 @@ export const getCaretProps = (value, reverse) => {
   }
 
   return { direction, color };
+};
+
+
+export const getDates = ({ from, relativeRange, to, now = new Date() } = {}) => {
+  let options = { from, to, relativeRange };
+
+  if (relativeRange !== 'custom') {
+    options = {
+      ...getRelativeDates(relativeRange, { now: moment(now).subtract(1, 'day') }),
+      relativeRange: relativeRange
+    };
+  }
+
+  return options;
 };

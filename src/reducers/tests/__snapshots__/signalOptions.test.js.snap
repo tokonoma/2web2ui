@@ -1,6 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Signal Options Reducer when init 1`] = `Object {}`;
+exports[`Signal Options Reducer when init 1`] = `
+Object {
+  "relativeRange": "90days",
+}
+`;
 
 exports[`Signal Options Reducer when relativeRange changes 1`] = `
 Object {

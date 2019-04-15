@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { FORMATS } from 'src/constants';
-import { getRelativeDates } from 'src/helpers/date';
+import { getDates } from 'src/helpers/signals';
 import DatePicker from 'src/components/datePicker/DatePicker';
 import withSignalOptions from '../../containers/withSignalOptions';
 import { minDays } from 'src/helpers/validation';
@@ -14,29 +14,12 @@ const OPTIONS = [
   'custom'
 ];
 
-const DEFAULT_RANGE = '90days';
-
 export function DateFilter({ signalOptions, changeSignalOptions, left, now = new Date() }) {
 
   // Constructs dates from relative range or custom dates
-  // Handling this here removes this logic elsewhere in the app
   function handleChange(updates) {
-    let options = updates;
-
-    if (updates.relativeRange !== 'custom') {
-      options = {
-        ...getRelativeDates(updates.relativeRange, { now: moment(now).subtract(1, 'day') }),
-        relativeRange: updates.relativeRange
-      };
-    }
-
-    changeSignalOptions(options);
+    changeSignalOptions(getDates({ ...updates, now }));
   }
-
-  // On mount, sets dates from a 90 day default
-  useEffect(() => {
-    handleChange({ relativeRange: DEFAULT_RANGE });
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <DatePicker

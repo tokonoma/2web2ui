@@ -386,7 +386,7 @@ export const selectHealthScoreOverviewData = createSelector(
 
     return {
       ...rowOfData,
-      current_health_score: _.get(_.last(filledHistory), 'health_score'),
+      current_health_score: _.last(filledHistory).health_score,
       history: filledHistory,
       average_health_score: roundToPlaces(
         normalizedHistory.reduce((total, { health_score }) => total + health_score, 0) / normalizedHistory.length,

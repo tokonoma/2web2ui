@@ -1,4 +1,4 @@
-import { getFriendlyTitle, getDoD, getCaretProps } from '../signals';
+import { getFriendlyTitle, getDoD, getCaretProps, getDates } from '../signals';
 import thresholds from 'src/pages/signals/constants/healthScoreThresholds';
 
 describe('.getFriendlyTitle', () => {
@@ -148,6 +148,32 @@ describe('.getCaretProps', () => {
     expect(getCaretProps(-10, true)).toEqual({
       direction: 'down',
       color: thresholds.good.color
+    });
+  });
+});
+
+describe('.getDates', () => {
+  it('sets relative range', () => {
+    expect(getDates({
+      relativeRange: '90days',
+      now: '2018-01-01T05:00:00Z'
+    })).toEqual({
+      relativeRange: '90days',
+      from: new Date('2017-10-02T04:00:00.000Z'),
+      to: new Date('2017-12-31T05:59:59.999Z')
+    });
+  });
+
+  it('sets custom dates', () => {
+    expect(getDates({
+      relativeRange: 'custom',
+      from: new Date('2015-01-04T05:00:00Z'),
+      to: new Date('2015-01-09T05:00:00Z'),
+      now: '2018-01-01T05:00:00Z'
+    })).toEqual({
+      relativeRange: 'custom',
+      from: new Date('2015-01-04T05:00:00Z'),
+      to: new Date('2015-01-09T05:00:00Z')
     });
   });
 });

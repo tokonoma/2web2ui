@@ -1,4 +1,7 @@
-const initialState = {};
+import { getDates } from 'src/helpers/signals';
+
+const DEFAULT_RANGE = '90days';
+const initialState = getDates({ relativeRange: DEFAULT_RANGE });
 
 const signalOptionsReducer = (state = initialState, action) => {
   switch (action.type) {

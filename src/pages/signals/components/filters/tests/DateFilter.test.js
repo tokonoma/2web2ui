@@ -19,10 +19,13 @@ describe('DateFilter', () => {
     expect(subject().find('AppDatePicker').props()).toMatchSnapshot();
   });
 
-  it('sets default dates on mount', () => {
-    subject();
+  it('sets a relative range', () => {
+    const wrapper = subject();
+    const options = { relativeRange: '90days' };
+
+    wrapper.find('AppDatePicker').prop('onChange')(options);
     expect(props.changeSignalOptions).toHaveBeenCalledWith({
-      relativeRange: '90days',
+      ...options,
       from: new Date('2017-10-02T04:00:00.000Z'),
       to: new Date('2017-12-31T05:59:59.999Z')
     });
