@@ -36,7 +36,11 @@ exports[`Signals Spam Trap Page renders correctly 1`] = `
   dimensionPrefix="Spam Traps"
   facet="sending-domain"
   facetId="test.com"
-  primaryArea={<Connect(DateFilter) />}
+  primaryArea={
+    <Connect(DateFilter)
+      left={true}
+    />
+  }
 >
   <Grid>
     <Grid.Column
@@ -140,13 +144,13 @@ exports[`Signals Spam Trap Page renders correctly 1`] = `
       sm={6}
       xs={12}
     >
-      <withRouter(Connect(withEngagementRecencyDetails(EngagementRecencyPreview))) />
+      <withRouter(Connect(WithDetails(EngagementRecencyPreview))) />
     </Grid.Column>
     <Grid.Column
       sm={6}
       xs={12}
     >
-      <withRouter(Connect(WithHealthScoreDetails(HealthScorePreview))) />
+      <withRouter(Connect(WithDetails(HealthScorePreview))) />
     </Grid.Column>
   </Grid>
 </SignalsPage>
@@ -189,7 +193,11 @@ exports[`Signals Spam Trap Page renders error correctly 1`] = `
   dimensionPrefix="Spam Traps"
   facet="sending-domain"
   facetId="test.com"
-  primaryArea={<Connect(DateFilter) />}
+  primaryArea={
+    <Connect(DateFilter)
+      left={true}
+    />
+  }
 >
   <Grid>
     <Grid.Column
@@ -238,13 +246,13 @@ exports[`Signals Spam Trap Page renders error correctly 1`] = `
       sm={6}
       xs={12}
     >
-      <withRouter(Connect(withEngagementRecencyDetails(EngagementRecencyPreview))) />
+      <withRouter(Connect(WithDetails(EngagementRecencyPreview))) />
     </Grid.Column>
     <Grid.Column
       sm={6}
       xs={12}
     >
-      <withRouter(Connect(WithHealthScoreDetails(HealthScorePreview))) />
+      <withRouter(Connect(WithDetails(HealthScorePreview))) />
     </Grid.Column>
   </Grid>
 </SignalsPage>

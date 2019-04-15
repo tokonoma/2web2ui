@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { getHealthScore, getSpamHits } from 'src/actions/signals';
-import { selectHealthScoreDetails, getSelectedDateFromRouter } from 'src/selectors/signals';
+import { getSelectedDateFromRouter } from 'src/selectors/signals';
 import { getDateTicks } from 'src/helpers/date';
 import { getDisplayName } from 'src/helpers/hoc';
 import _ from 'lodash';
 
-export class WithHealthScoreDetails extends Component {
+export class WithDetails extends Component {
   componentDidMount() {
     this.getData();
   }
@@ -22,16 +21,15 @@ export class WithHealthScoreDetails extends Component {
   }
 
   getData = () => {
-    const { getHealthScore, getSpamHits, facet, facetId, filters, subaccountId } = this.props;
-    const options = {
+    const { fetch, facet, facetId, filters, subaccountId } = this.props;
+
+    fetch({
       facet,
       filter: facetId,
       from: filters.from,
       subaccount: subaccountId,
       to: filters.to
-    };
-    getHealthScore(options);
-    getSpamHits(options);
+    });
   }
 
   render() {
@@ -55,24 +53,32 @@ export class WithHealthScoreDetails extends Component {
 }
 
 /**
- * Provides Spam Trap details to the provided component
+ * Provides Signals details to the provided component
  * @example
- *   export default withHealthScoreDetails(MyComponent);
+ *    export default withDetails(MyComponent, { getThisData, getThatData }, selectMyData);
  */
-function withHealthScoreDetails(WrappedComponent) {
+function withDetails(WrappedComponent, fetchData = {}, selectData) {
   const Wrapper = (props) => (
-    <WithHealthScoreDetails {...props} component={WrappedComponent} />
+    <WithDetails {...props} component={WrappedComponent} />
   );
 
-  Wrapper.displayName = getDisplayName(WrappedComponent, 'WithHealthScoreDetails');
+  Wrapper.displayName = getDisplayName(WrappedComponent, 'WithDetails');
 
   const mapStateToProps = (state, props) => ({
-    ...selectHealthScoreDetails(state, props),
+    ...selectData(state, props),
     filters: state.signalOptions,
     selected: getSelectedDateFromRouter(state, props)
   });
 
-  return withRouter(connect(mapStateToProps, { getHealthScore, getSpamHits })(Wrapper));
+  const mapDispatchToProps = (dispatch) => ({
+    fetch: (options) => {
+      _.each(fetchData, (get) => {
+        dispatch(get(options));
+      });
+    }
+  });
+
+  return withRouter(connect(mapStateToProps, mapDispatchToProps)(Wrapper));
 }
 
-export default withHealthScoreDetails;
+export default withDetails;

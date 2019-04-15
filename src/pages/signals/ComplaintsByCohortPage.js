@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { getComplaintsByCohort } from 'src/actions/signals';
+import { selectComplaintsByCohortDetails } from 'src/selectors/signals';
 import { Panel, Grid } from '@sparkpost/matchbox';
 import LineChart from './components/charts/linechart/LineChart';
 import Legend from './components/charts/legend/Legend';
@@ -9,7 +11,7 @@ import OtherChartsHeader from './components/OtherChartsHeader';
 import Page from './components/SignalsPage';
 import Tabs from './components/engagement/Tabs';
 import TooltipMetric from './components/charts/tooltip/TooltipMetric';
-import withComplaintsByCohortDetails from './containers/ComplaintsByCohortDetailsContainer';
+import withDetails from './containers/withDetails';
 import withDateSelection from './containers/withDateSelection';
 import { ENGAGEMENT_RECENCY_COHORTS } from './constants/info';
 import { Loading } from 'src/components';
@@ -120,11 +122,11 @@ export class ComplaintsByCohortPage extends Component {
     return (
       <Page
         breadcrumbAction={{ content: 'Back to Overview', to: '/signals', component: Link }}
-        dimensionPrefix='Complaints by Cohort for'
+        dimensionPrefix='Complaints by Cohort'
         facet={facet}
         facetId={facetId}
         subaccountId={subaccountId}
-        primaryArea={<DateFilter />}>
+        primaryArea={<DateFilter left />}>
         {this.renderContent()}
         <OtherChartsHeader facet={facet} facetId={facetId} subaccountId={subaccountId} />
         <Grid>
@@ -140,4 +142,8 @@ export class ComplaintsByCohortPage extends Component {
   }
 }
 
-export default withComplaintsByCohortDetails(withDateSelection(ComplaintsByCohortPage));
+export default withDetails(
+  withDateSelection(ComplaintsByCohortPage),
+  { getComplaintsByCohort },
+  selectComplaintsByCohortDetails
+);

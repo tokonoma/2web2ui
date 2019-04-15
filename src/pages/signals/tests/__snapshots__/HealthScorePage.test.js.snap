@@ -52,7 +52,11 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
   dimensionPrefix="Health Score"
   facet="sending-domain"
   facetId="test.com"
-  primaryArea={<Connect(DateFilter) />}
+  primaryArea={
+    <Connect(DateFilter)
+      left={true}
+    />
+  }
 >
   <Grid>
     <Grid.Column
@@ -384,13 +388,13 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
       sm={6}
       xs={12}
     >
-      <withRouter(Connect(WithSpamTrapDetails(SpamTrapsPreview))) />
+      <withRouter(Connect(WithDetails(SpamTrapsPreview))) />
     </Grid.Column>
     <Grid.Column
       sm={6}
       xs={12}
     >
-      <withRouter(Connect(withEngagementRecencyDetails(EngagementRecencyPreview))) />
+      <withRouter(Connect(WithDetails(EngagementRecencyPreview))) />
     </Grid.Column>
   </Grid>
 </SignalsPage>
@@ -428,7 +432,11 @@ exports[`Signals Health Score Page renders empty weights 1`] = `
   dimensionPrefix="Health Score"
   facet="sending-domain"
   facetId="test.com"
-  primaryArea={<Connect(DateFilter) />}
+  primaryArea={
+    <Connect(DateFilter)
+      left={true}
+    />
+  }
 >
   <Grid>
     <Grid.Column
@@ -607,13 +615,13 @@ exports[`Signals Health Score Page renders empty weights 1`] = `
       sm={6}
       xs={12}
     >
-      <withRouter(Connect(WithSpamTrapDetails(SpamTrapsPreview))) />
+      <withRouter(Connect(WithDetails(SpamTrapsPreview))) />
     </Grid.Column>
     <Grid.Column
       sm={6}
       xs={12}
     >
-      <withRouter(Connect(withEngagementRecencyDetails(EngagementRecencyPreview))) />
+      <withRouter(Connect(WithDetails(EngagementRecencyPreview))) />
     </Grid.Column>
   </Grid>
 </SignalsPage>
@@ -631,7 +639,11 @@ exports[`Signals Health Score Page renders error correctly 1`] = `
   dimensionPrefix="Health Score"
   facet="sending-domain"
   facetId="test.com"
-  primaryArea={<Connect(DateFilter) />}
+  primaryArea={
+    <Connect(DateFilter)
+      left={true}
+    />
+  }
 >
   <Grid>
     <Grid.Column
@@ -686,13 +698,13 @@ exports[`Signals Health Score Page renders error correctly 1`] = `
       sm={6}
       xs={12}
     >
-      <withRouter(Connect(WithSpamTrapDetails(SpamTrapsPreview))) />
+      <withRouter(Connect(WithDetails(SpamTrapsPreview))) />
     </Grid.Column>
     <Grid.Column
       sm={6}
       xs={12}
     >
-      <withRouter(Connect(withEngagementRecencyDetails(EngagementRecencyPreview))) />
+      <withRouter(Connect(WithDetails(EngagementRecencyPreview))) />
     </Grid.Column>
   </Grid>
 </SignalsPage>

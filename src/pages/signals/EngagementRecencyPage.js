@@ -1,6 +1,8 @@
 /* eslint-disable max-lines */
 import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
+import { getEngagementRecency } from 'src/actions/signals';
+import { selectEngagementRecencyDetails } from 'src/selectors/signals';
 import { Panel, Grid } from '@sparkpost/matchbox';
 import BarChart from './components/charts/barchart/BarChart';
 import Callout from 'src/components/callout';
@@ -12,7 +14,7 @@ import OtherChartsHeader from './components/OtherChartsHeader';
 import Page from './components/SignalsPage';
 import Tabs from './components/engagement/Tabs';
 import TooltipMetric from './components/charts/tooltip/TooltipMetric';
-import withEngagementRecencyDetails from './containers/EngagementRecencyDetailsContainer';
+import withDetails from './containers/withDetails';
 import withDateSelection from './containers/withDateSelection';
 import { ENGAGEMENT_RECENCY_COHORTS, ENGAGEMENT_RECENCY_INFO } from './constants/info';
 import { AccessControl } from 'src/components/auth';
@@ -132,7 +134,7 @@ export class EngagementRecencyPage extends Component {
         facet={facet}
         facetId={facetId}
         subaccountId={subaccountId}
-        primaryArea={<DateFilter />}>
+        primaryArea={<DateFilter left />}>
         {this.renderContent()}
         <OtherChartsHeader facet={facet} facetId={facetId} subaccountId={subaccountId} />
         <Grid>
@@ -148,4 +150,8 @@ export class EngagementRecencyPage extends Component {
   }
 }
 
-export default withEngagementRecencyDetails(withDateSelection(EngagementRecencyPage));
+export default withDetails(
+  withDateSelection(EngagementRecencyPage),
+  { getEngagementRecency },
+  selectEngagementRecencyDetails
+);
