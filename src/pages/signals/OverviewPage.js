@@ -8,6 +8,7 @@ import SpamTrapOverview from './containers/SpamTrapOverviewContainer';
 import FacetFilter from './components/filters/FacetFilter';
 import DateFilter from './components/filters/DateFilter';
 import SubaccountFilter from './components/filters/SubaccountFilter';
+import OverviewHelpCopy from './components/OverviewHelpCopy';
 import { Grid, Panel } from '@sparkpost/matchbox';
 
 export class OverviewPage extends Component {
@@ -20,6 +21,7 @@ export class OverviewPage extends Component {
 
     return (
       <Page title='Signals Overview'>
+        <OverviewHelpCopy />
         <Panel sectioned>
           <Grid>
             <Grid.Column xs={4}>

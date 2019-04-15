@@ -4,6 +4,7 @@ exports[`Signals Overview Page renders page 1`] = `
 <SignalsPage
   title="Signals Overview"
 >
+  <OverviewHelpCopy />
   <Panel
     sectioned={true}
   >
