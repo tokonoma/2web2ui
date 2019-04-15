@@ -176,8 +176,8 @@ export const fillByDate = ({ dataSet, fill = {}, from, to } = {}) => {
 };
 
 /**
- * Generates 3 dates based off relative range
- * Returns first date, middle date, and 1 day before to
+ * Generates 3 dates based off provided dates
+ * Returns first date, middle date, and end
  */
 export function getDateTicks({ to, from }) {
   const diff = moment(to).diff(from, 'days');
