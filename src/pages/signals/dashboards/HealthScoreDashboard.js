@@ -42,8 +42,8 @@ export function HealthScoreDashboard(props) {
         hideTitle
         header={
           <Grid>
-            <FacetFilter />
             <SubaccountFilter />
+            <FacetFilter />
           </Grid>
         }
       />

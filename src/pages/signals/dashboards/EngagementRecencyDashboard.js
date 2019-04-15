@@ -23,8 +23,8 @@ export class EngagementRecencyDashboard extends Component {
             <Grid.Column lg={4}>
               <DateFilter />
             </Grid.Column>
-            <FacetFilter />
             <SubaccountFilter />
+            <FacetFilter />
           </Grid>
         </Panel>
         <EngagementRecencyOverview subaccounts={subaccounts} hideTitle />

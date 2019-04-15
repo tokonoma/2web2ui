@@ -13,8 +13,8 @@ exports[`Signals Engagement Recency Dashboard renders page 1`] = `
       >
         <Connect(DateFilter) />
       </Grid.Column>
-      <Connect(FacetFilter) />
       <Connect(Connect(SubaccountFilter)) />
+      <Connect(FacetFilter) />
     </Grid>
   </Panel>
   <Connect(withRouter(Connect(EngagementRecencyOverview)))

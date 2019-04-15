@@ -28,8 +28,8 @@ exports[`Signals Health Score Dashboard renders page 1`] = `
   <Connect(withRouter(Connect(HealthScoreOverview)))
     header={
       <Grid>
-        <Connect(FacetFilter) />
         <Connect(Connect(SubaccountFilter)) />
+        <Connect(FacetFilter) />
       </Grid>
     }
     hideTitle={true}

@@ -27,8 +27,8 @@ export class OverviewPage extends Component {
             <Grid.Column xs={4}>
               <DateFilter />
             </Grid.Column>
-            <FacetFilter />
             <SubaccountFilter />
+            <FacetFilter />
           </Grid>
         </Panel>
         <HealthScoreOverview subaccounts={subaccounts} />
