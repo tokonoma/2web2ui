@@ -2,6 +2,8 @@
 import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { Panel, Grid } from '@sparkpost/matchbox';
+import { selectHealthScoreDetails } from 'src/selectors/signals';
+import { getHealthScore, getSpamHits } from 'src/actions/signals';
 import Page from './components/SignalsPage';
 import BarChart from './components/charts/barchart/BarChart';
 import DivergingBar from './components/charts/divergingBar/DivergingBar';
@@ -9,7 +11,7 @@ import HealthScoreActions from './components/actionContent/HealthScoreActions';
 import TooltipMetric from './components/charts/tooltip/TooltipMetric';
 import DateFilter from './components/filters/DateFilter';
 import { HEALTH_SCORE_INFO, HEALTH_SCORE_COMPONENT_INFO, INJECTIONS_INFO, HEALTH_SCORE_COMPONENTS } from './constants/info';
-import withHealthScoreDetails from './containers/HealthScoreDetailsContainer';
+import withDetails from './containers/withDetails';
 import withDateSelection from './containers/withDateSelection';
 import { Loading } from 'src/components';
 import Callout from 'src/components/callout';
@@ -203,7 +205,7 @@ export class HealthScorePage extends Component {
         facet={facet}
         facetId={facetId}
         subaccountId={subaccountId}
-        primaryArea={<DateFilter />}>
+        primaryArea={<DateFilter left />}>
         {this.renderContent()}
         <OtherChartsHeader facet={facet} facetId={facetId} subaccountId={subaccountId} />
         <Grid>
@@ -219,4 +221,8 @@ export class HealthScorePage extends Component {
   }
 }
 
-export default withHealthScoreDetails(withDateSelection(HealthScorePage));
+export default withDetails(
+  withDateSelection(HealthScorePage),
+  { getHealthScore, getSpamHits },
+  selectHealthScoreDetails
+);

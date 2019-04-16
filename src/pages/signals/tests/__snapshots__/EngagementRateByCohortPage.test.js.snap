@@ -62,7 +62,11 @@ exports[`Signals Engagement Rate By Cohort Page renders correctly 1`] = `
   dimensionPrefix="Engagement Rate by Cohort"
   facet="sending-domain"
   facetId="test.com"
-  primaryArea={<Connect(DateFilter) />}
+  primaryArea={
+    <Connect(DateFilter)
+      left={true}
+    />
+  }
 >
   <Grid>
     <Grid.Column
@@ -229,13 +233,13 @@ exports[`Signals Engagement Rate By Cohort Page renders correctly 1`] = `
       sm={6}
       xs={12}
     >
-      <withRouter(Connect(WithSpamTrapDetails(SpamTrapsPreview))) />
+      <withRouter(Connect(WithDetails(SpamTrapsPreview))) />
     </Grid.Column>
     <Grid.Column
       sm={6}
       xs={12}
     >
-      <withRouter(Connect(WithHealthScoreDetails(HealthScorePreview))) />
+      <withRouter(Connect(WithDetails(HealthScorePreview))) />
     </Grid.Column>
   </Grid>
 </SignalsPage>
@@ -265,7 +269,11 @@ exports[`Signals Engagement Rate By Cohort Page renders error correctly 1`] = `
   dimensionPrefix="Engagement Rate by Cohort"
   facet="sending-domain"
   facetId="test.com"
-  primaryArea={<Connect(DateFilter) />}
+  primaryArea={
+    <Connect(DateFilter)
+      left={true}
+    />
+  }
 >
   <Grid>
     <Grid.Column
@@ -301,13 +309,13 @@ exports[`Signals Engagement Rate By Cohort Page renders error correctly 1`] = `
       sm={6}
       xs={12}
     >
-      <withRouter(Connect(WithSpamTrapDetails(SpamTrapsPreview))) />
+      <withRouter(Connect(WithDetails(SpamTrapsPreview))) />
     </Grid.Column>
     <Grid.Column
       sm={6}
       xs={12}
     >
-      <withRouter(Connect(WithHealthScoreDetails(HealthScorePreview))) />
+      <withRouter(Connect(WithDetails(HealthScorePreview))) />
     </Grid.Column>
   </Grid>
 </SignalsPage>

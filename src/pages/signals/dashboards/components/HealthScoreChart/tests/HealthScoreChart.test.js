@@ -1,7 +1,6 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 import { HealthScoreChart } from '../HealthScoreChart';
-Date.now = jest.fn(() => 1553699129000);
 
 describe('Signals Health Score Chart', () => {
   let props;
@@ -34,7 +33,8 @@ describe('Signals Health Score Chart', () => {
         ranking: null
       }],
       filters: {
-        relativeRange: '90days'
+        from: '2014-12-01',
+        to: '2015-02-01'
       }
     };
 

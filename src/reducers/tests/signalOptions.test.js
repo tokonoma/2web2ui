@@ -1,6 +1,10 @@
 import cases from 'jest-in-case';
 import signalOptionsReducer from '../signalOptions';
 
+jest.mock('src/helpers/signals', () => ({
+  getDates: jest.fn((a) => a)
+}));
+
 cases('Signal Options Reducer', ({ name, ...action }) => {
   const nextState = signalOptionsReducer(undefined, action);
   expect(nextState).toMatchSnapshot();

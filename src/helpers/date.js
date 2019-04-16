@@ -8,6 +8,7 @@ export const relativeDateOptions = [
   { value: 'day', label: 'Last 24 Hours' },
   { value: '7days', label: 'Last 7 Days' },
   { value: '10days', label: 'Last 10 Days' },
+  { value: '14days', label: 'Last 14 Days' },
   { value: '30days', label: 'Last 30 Days' },
   { value: '90days', label: 'Last 90 Days' },
   { value: 'custom', label: 'Custom' }
@@ -155,8 +156,7 @@ export const parseDate = (str) => moment(str, FORMATS.INPUT_DATES, true);
 export const parseTime = (str) => moment(str, FORMATS.INPUT_TIMES, true);
 export const parseDatetime = (...args) => moment(args.join(' '), FORMATS.INPUT_DATETIMES, true);
 
-export const fillByDate = ({ dataSet, fill = {}, now, relativeRange } = {}) => {
-  const { from, to } = getRelativeDates(relativeRange, { now });
+export const fillByDate = ({ dataSet, fill = {}, from, to } = {}) => {
   const orderedData = dataSet.sort((a, b) => new Date(a.date) - new Date(b.date));
   let filledDataSet = [];
 
@@ -176,11 +176,10 @@ export const fillByDate = ({ dataSet, fill = {}, now, relativeRange } = {}) => {
 };
 
 /**
- * Generates 3 dates based off relative range
- * Returns first date, middle date, and 1 day before to
+ * Generates 3 dates based off provided dates
+ * Returns first date, middle date, and end
  */
-export function getDateTicks(relativeRange) {
-  const { from, to } = getRelativeDates(relativeRange, { now: moment().subtract(1, 'day') });
+export function getDateTicks({ to, from }) {
   const diff = moment(to).diff(from, 'days');
   const middle = moment(from).add(diff / 2, 'days');
 

@@ -21,8 +21,7 @@ exports[`Signals Health Score Gauge Container renders happy path correctly 1`] =
     <h2
       className="Header"
     >
-      Current Health Score – Overall
-       
+      Current Health Score
       <Tooltip
         bottom={true}
         content="
@@ -116,5 +115,7 @@ exports[`Signals Health Score Gauge Container renders no current score correctly
   Current Health Score Not Available
 </Callout>
 `;
+
+exports[`Signals Health Score Gauge Container renders title with a custom date 1`] = `"Health Score for Jan 1st"`;
 
 exports[`Signals Health Score Gauge Container renders warning threshold color 1`] = `"#E6B400"`;

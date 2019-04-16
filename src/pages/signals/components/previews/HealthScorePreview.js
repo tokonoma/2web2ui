@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import { selectHealthScoreDetails } from 'src/selectors/signals';
+import { getHealthScore, getSpamHits } from 'src/actions/signals';
 import { Panel } from '@sparkpost/matchbox';
 import { PanelLoading, PageLink } from 'src/components';
 import Callout from 'src/components/callout';
 import { HEALTH_SCORE_INFO } from '../../constants/info';
-import withHealthScoreDetails from '../../containers/HealthScoreDetailsContainer';
+import withDetails from '../../containers/withDetails';
 import BarChart from '../charts/barchart/BarChart';
 import ChartHeader from '../ChartHeader';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
@@ -63,4 +65,8 @@ export class HealthScorePreview extends Component {
   }
 }
 
-export default withHealthScoreDetails(HealthScorePreview);
+export default withDetails(
+  HealthScorePreview,
+  { getHealthScore, getSpamHits },
+  selectHealthScoreDetails
+);

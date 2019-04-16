@@ -1,20 +1,45 @@
-import { shallow } from 'enzyme';
+import { mount } from 'enzyme';
 import React from 'react';
 import { DateFilter } from '../DateFilter';
 
 describe('DateFilter', () => {
-  const subject = (props = {}) => shallow(<DateFilter signalOptions={{}} {...props} />);
+  let props;
 
-  it('renders a select', () => {
-    expect(subject()).toMatchSnapshot();
+  beforeEach(() => {
+    props = {
+      changeSignalOptions: jest.fn(),
+      signalOptions: {},
+      now: '2018-01-01T05:00:00Z'
+    };
   });
 
-  it('calls changeSignalOptions when select changes', () => {
-    const changeSignalOptions = jest.fn();
-    const wrapper = subject({ changeSignalOptions });
+  const subject = (options = {}) => mount(<DateFilter left {...props} {...options} />);
 
-    wrapper.find('Select').simulate('change', { currentTarget: { value: '14days' }});
+  it('renders datepicker', () => {
+    expect(subject().find('AppDatePicker').props()).toMatchSnapshot();
+  });
 
-    expect(changeSignalOptions).toHaveBeenCalledWith({ relativeRange: '14days' });
+  it('sets a relative range', () => {
+    const wrapper = subject();
+    const options = { relativeRange: '90days' };
+
+    wrapper.find('AppDatePicker').prop('onChange')(options);
+    expect(props.changeSignalOptions).toHaveBeenCalledWith({
+      ...options,
+      from: new Date('2017-10-02T04:00:00.000Z'),
+      to: new Date('2017-12-31T05:59:59.999Z')
+    });
+  });
+
+  it('sets custom dates', () => {
+    const wrapper = subject();
+    const options = {
+      relativeRange: 'custom',
+      from: new Date('2015-01-04T05:00:00Z'),
+      to: new Date('2015-01-09T05:00:00Z')
+    };
+
+    wrapper.find('AppDatePicker').prop('onChange')(options);
+    expect(props.changeSignalOptions).toHaveBeenCalledWith(options);
   });
 });

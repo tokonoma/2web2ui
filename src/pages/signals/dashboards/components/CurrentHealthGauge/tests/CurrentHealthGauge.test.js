@@ -51,4 +51,9 @@ describe('Signals Health Score Gauge Container', () => {
     const wrapper = subject({ current_health_score: 40 });
     expect(wrapper.find({ className: 'DescriptionIcon' }).prop('style').fill).toMatchSnapshot();
   });
+
+  it('renders title with a custom date', () => {
+    const wrapper = subject({ current_health_score: 40, filters: { relativeRange: 'custom', to: '2015-01-01' }});
+    expect(wrapper.find({ className: 'Header' }).children().at(0)).toMatchSnapshot();
+  });
 });

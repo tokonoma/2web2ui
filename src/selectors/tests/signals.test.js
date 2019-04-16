@@ -22,7 +22,8 @@ describe('Selectors: signals', () => {
   beforeEach(() => {
     state = {
       signalOptions: {
-        relativeRange: '7days'
+        to: '2018-01-04',
+        from: '2017-12-27'
       },
       signals: {
         spamHits: {

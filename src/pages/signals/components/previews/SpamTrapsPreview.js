@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import { getSpamHits } from 'src/actions/signals';
+import { selectSpamHitsDetails } from 'src/selectors/signals';
 import { Panel } from '@sparkpost/matchbox';
 import { PanelLoading, PageLink } from 'src/components';
 import Callout from 'src/components/callout';
 import { SPAM_TRAP_INFO } from '../../constants/info';
-import withSpamTrapDetails from '../../containers/SpamTrapDetailsContainer';
+import withDetails from '../../containers/withDetails';
 import BarChart from '../charts/barchart/BarChart';
 import ChartHeader from '../ChartHeader';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
@@ -65,4 +67,8 @@ export class SpamTrapsPreview extends Component {
   }
 }
 
-export default withSpamTrapDetails(SpamTrapsPreview);
+export default withDetails(
+  SpamTrapsPreview,
+  { getSpamHits },
+  selectSpamHitsDetails,
+);

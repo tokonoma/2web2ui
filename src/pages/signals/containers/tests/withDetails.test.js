@@ -1,12 +1,12 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import { WithEngagementRecencyDetails } from '../EngagementRecencyDetailsContainer';
+import { WithDetails } from '../withDetails';
 import * as dateMock from 'src/helpers/date';
 import _ from 'lodash';
 
 jest.mock('src/helpers/date');
 
-describe('Signals Engagement Recency Details Container', () => {
+describe('Signals Details Container', () => {
   let wrapper;
   let props;
   const Component = () => <div>test</div>;
@@ -20,40 +20,46 @@ describe('Signals Engagement Recency Details Container', () => {
       facet: 'sending_domain',
       facetId: 'test.com',
       filters: {
-        relativeRange: '14days'
+        from: '2015-01-01',
+        to: '2015-01-05'
       },
-      getEngagementRecency: jest.fn(),
+      fetch: jest.fn(),
       selected: '2015-01-01',
       subaccountId: '101'
     };
 
     dateMock.getDateTicks.mockImplementation(() => [1,2]);
-    wrapper = shallow(<WithEngagementRecencyDetails {...props} />);
+    wrapper = shallow(<WithDetails {...props} />);
   });
 
-  it('gets engagement recency on mount correctly', () => {
+  it('fetches data on mount correctly', () => {
     expect(wrapper).toMatchSnapshot();
-    expect(props.getEngagementRecency).toHaveBeenCalledWith({
+    const options = {
       facet: 'sending_domain',
       filter: 'test.com',
-      relativeRange: '14days',
-      subaccount: '101'
-    });
+      from: '2015-01-01',
+      subaccount: '101',
+      to: '2015-01-05'
+    };
+    expect(props.fetch).toHaveBeenCalledWith(options);
   });
 
-  it('gets engagement recency when range is updated', () => {
-    wrapper.setProps({ filters: { relativeRange: '30days' }});
-    expect(props.getEngagementRecency).toHaveBeenCalledWith({
+  it('fetches data when dates are updated', () => {
+    wrapper.setProps({ filters: { relativeRange: 'custom', to: '2016-01-02', from: '2016-01-01' }});
+    const options = {
       facet: 'sending_domain',
       filter: 'test.com',
-      relativeRange: '30days',
-      subaccount: '101'
-    });
+      from: '2016-01-01',
+      subaccount: '101',
+      to: '2016-01-02'
+    };
+    expect(props.fetch).toHaveBeenCalledWith(options);
   });
 
-  it('should not get engagement recency when range isnt updated', () => {
+  it('should not fetch when range isnt updated', () => {
+    jest.clearAllMocks();
     wrapper.setProps({ another: 'prop' });
-    expect(props.getEngagementRecency).toHaveBeenCalledTimes(1);
+    expect(props.fetch).toHaveBeenCalledTimes(0);
   });
 
   it('should shorten chart gap if data is long', () => {

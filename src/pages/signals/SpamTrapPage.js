@@ -1,5 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
+import { getSpamHits } from 'src/actions/signals';
+import { selectSpamHitsDetails } from 'src/selectors/signals';
 import { Panel, Grid } from '@sparkpost/matchbox';
 import Page from './components/SignalsPage';
 import BarChart from './components/charts/barchart/BarChart';
@@ -7,7 +9,7 @@ import SpamTrapActions from './components/actionContent/SpamTrapActions';
 import TooltipMetric from './components/charts/tooltip/TooltipMetric';
 import DateFilter from './components/filters/DateFilter';
 import { SPAM_TRAP_INFO } from './constants/info';
-import withSpamTrapDetails from './containers/SpamTrapDetailsContainer';
+import withDetails from './containers/withDetails';
 import withDateSelection from './containers/withDateSelection';
 import { Loading } from 'src/components';
 import Callout from 'src/components/callout';
@@ -130,7 +132,7 @@ export class SpamTrapPage extends Component {
         facet={facet}
         facetId={facetId}
         subaccountId={subaccountId}
-        primaryArea={<DateFilter />}>
+        primaryArea={<DateFilter left />}>
         {this.renderContent()}
         <OtherChartsHeader facet={facet} facetId={facetId} subaccountId={subaccountId} />
         <Grid>
@@ -146,4 +148,8 @@ export class SpamTrapPage extends Component {
   }
 }
 
-export default withSpamTrapDetails(withDateSelection(SpamTrapPage));
+export default withDetails(
+  withDateSelection(SpamTrapPage),
+  { getSpamHits },
+  selectSpamHitsDetails,
+);

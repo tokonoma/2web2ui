@@ -49,4 +49,14 @@ describe('FacetFilter', () => {
 
     expect(changeSignalOptions).toHaveBeenCalledWith({ facetSearchTerm: 'example' });
   });
+
+  it('does not call changeSignalOptions when search term is the same', () => {
+    const changeSignalOptions = jest.fn();
+    const wrapper = subject({ changeSignalOptions, signalOptions: { facet: 'campaign', facetSearchTerm: 'example' }});
+
+    wrapper.find('TextField').simulate('change', { currentTarget: { value: 'example' }});
+    wrapper.find('TextField').simulate('keypress');
+
+    expect(changeSignalOptions).not.toHaveBeenCalled();
+  });
 });

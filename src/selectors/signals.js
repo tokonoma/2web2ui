@@ -30,7 +30,7 @@ export const getInjections = (state, props) => _.get(state, 'signals.injections'
 // Details
 export const selectSpamHitsDetails = createSelector(
   [getSpamHitsData, getFacetFromParams, getFacetIdFromParams, selectSubaccountIdFromQuery, getOptions],
-  ({ loading, error, data }, facet, facetId, subaccountId, { now, relativeRange }) => {
+  ({ loading, error, data }, facet, facetId, subaccountId, { from, to }) => {
     const match = data.find((item) => String(item[facet]) === facetId) || {};
     const history = match.history || [];
     const normalizedHistory = history.map(({ dt: date, ...values }) => ({ date, ...values }));
@@ -42,8 +42,7 @@ export const selectSpamHitsDetails = createSelector(
         relative_trap_hits: null,
         trap_hits: null
       },
-      now,
-      relativeRange
+      from, to
     });
 
     const isEmpty = filledHistory.every((values) => values.trap_hits === null);
@@ -64,7 +63,7 @@ export const selectSpamHitsDetails = createSelector(
 
 export const selectEngagementRecencyDetails = createSelector(
   [getEngagementRecencyData, getFacetFromParams, getFacetIdFromParams, selectSubaccountIdFromQuery, getOptions],
-  ({ loading, error, data }, facet, facetId, subaccountId, { now, relativeRange }) => {
+  ({ loading, error, data }, facet, facetId, subaccountId, { from, to }) => {
     const match = data.find((item) => String(item[facet]) === facetId) || {};
 
     const calculatePercentages = (data) => data.map(({ c_total, dt, ...absolutes }) => {
@@ -90,8 +89,7 @@ export const selectEngagementRecencyDetails = createSelector(
         c_uneng: null,
         c_total: null
       },
-      now,
-      relativeRange
+      from, to
     });
 
     const isEmpty = filledHistory.every((values) => values.c_total === null);
@@ -112,7 +110,7 @@ export const selectEngagementRecencyDetails = createSelector(
 
 export const selectEngagementRateByCohortDetails = createSelector(
   [getEngagementRateByCohortData, getFacetFromParams, getFacetIdFromParams, selectSubaccountIdFromQuery, getOptions],
-  ({ loading, error, data }, facet, facetId, subaccountId, { now, relativeRange }) => {
+  ({ loading, error, data }, facet, facetId, subaccountId, { from, to }) => {
     const match = data.find((item) => String(item[facet]) === facetId) || {};
 
     // Rename date key
@@ -123,8 +121,7 @@ export const selectEngagementRateByCohortDetails = createSelector(
       fill: {
         p_new_eng: null, p_14d_eng: null, p_90d_eng: null, p_365d_eng: null, p_uneng_eng: null, p_total_eng: null
       },
-      now,
-      relativeRange
+      from, to
     });
 
     const isEmpty = filledHistory.every((values) => _.isNil(values.p_total_eng));
@@ -145,7 +142,7 @@ export const selectEngagementRateByCohortDetails = createSelector(
 
 export const selectUnsubscribeRateByCohortDetails = createSelector(
   [getUnsubscribeRateByCohortData, getFacetFromParams, getFacetIdFromParams, selectSubaccountIdFromQuery, getOptions],
-  ({ loading, error, data }, facet, facetId, subaccountId, { now, relativeRange }) => {
+  ({ loading, error, data }, facet, facetId, subaccountId, { from, to }) => {
     const match = data.find((item) => String(item[facet]) === facetId) || {};
 
     // Rename date key
@@ -161,8 +158,7 @@ export const selectUnsubscribeRateByCohortDetails = createSelector(
         p_uneng_unsub: null,
         p_total_unsub: null
       },
-      now,
-      relativeRange
+      from, to
     });
 
     const isEmpty = filledHistory.every((values) => _.isNil(values.p_total_unsub));
@@ -183,7 +179,7 @@ export const selectUnsubscribeRateByCohortDetails = createSelector(
 
 export const selectComplaintsByCohortDetails = createSelector(
   [getComplaintsByCohortData, getFacetFromParams, getFacetIdFromParams, selectSubaccountIdFromQuery, getOptions],
-  ({ loading, error, data }, facet, facetId, subaccountId, { now, relativeRange }) => {
+  ({ loading, error, data }, facet, facetId, subaccountId, { from, to }) => {
     const match = data.find((item) => String(item[facet]) === facetId) || {};
 
     // Rename date key
@@ -199,8 +195,7 @@ export const selectComplaintsByCohortDetails = createSelector(
         p_uneng_fbl: null,
         p_total_fbl: null
       },
-      now,
-      relativeRange
+      from, to
     });
 
     const isEmpty = filledHistory.every((values) => _.isNil(values.p_total_fbl));
@@ -242,7 +237,7 @@ function rankHealthScore(value) {
 
 export const selectHealthScoreDetails = createSelector(
   [getHealthScoreData, selectSpamHitsDetails, getFacetFromParams, getFacetIdFromParams, selectSubaccountIdFromQuery, getOptions],
-  ({ loading, error, data }, { details: spamDetails }, facet, facetId, subaccountId, { now, relativeRange }) => {
+  ({ loading, error, data }, { details: spamDetails }, facet, facetId, subaccountId, { from, to }) => {
     const match = data.find((item) => String(item[facet]) === facetId) || {};
 
     const history = _.get(match, 'history', []);
@@ -267,8 +262,7 @@ export const selectHealthScoreDetails = createSelector(
         ],
         health_score: null
       },
-      now,
-      relativeRange
+      from, to
     });
 
     // Merge in injections and rankings
@@ -295,7 +289,7 @@ export const selectHealthScoreDetails = createSelector(
 
 export const selectEngagementRecencyOverviewData = createSelector(
   getEngagementRecencyData, getOptions,
-  ({ data }, { now, relativeRange }) => data.map(({ WoW, ...rowOfData }) => {
+  ({ data }, { from, to }) => data.map(({ WoW, ...rowOfData }) => {
     const history = rowOfData.history || [];
     const normalizedHistory = history.map(({ dt: date, ...values }) => {
       const relative_engaged_recipients = (values.c_14d / values.c_total) * 100;
@@ -313,8 +307,7 @@ export const selectEngagementRecencyOverviewData = createSelector(
         engaged_recipients: null,
         relative_engaged_recipients: null
       },
-      now,
-      relativeRange
+      from, to
     });
 
     return {
@@ -370,7 +363,7 @@ export const selectEngagementRecencyOverview = createSelector(
 
 export const selectHealthScoreOverviewData = createSelector(
   getHealthScoreData, getOptions,
-  ({ data }, { now, relativeRange }) => data.map(({ current_health_score, WoW, ...rowOfData }) => {
+  ({ data }, { from, to }) => data.map(({ current_health_score, WoW, ...rowOfData }) => {
     const history = rowOfData.history || [];
     const normalizedHistory = history.map(({ dt: date, health_score, ...values }) => {
       const roundedHealthScore = roundToPlaces(health_score * 100, 1);
@@ -388,8 +381,7 @@ export const selectHealthScoreOverviewData = createSelector(
         health_score: null,
         ranking: null
       },
-      now,
-      relativeRange
+      from, to
     });
 
     return {
@@ -408,7 +400,7 @@ export const selectHealthScoreOverviewData = createSelector(
 
 export const selectCurrentHealthScoreDashboard = createSelector(
   [getCurrentHealthScoreData, getOptions, getInjections],
-  ({ data, loading, error }, { now, relativeRange }, injections) => {
+  ({ data, loading, error }, { from, to }, injections) => {
     const accountData = _.find(data, ['sid', -1]) || {};
     const history = accountData.history || [];
 
@@ -432,17 +424,18 @@ export const selectCurrentHealthScoreDashboard = createSelector(
         ranking: null,
         injections: null
       },
-      now,
-      relativeRange
+      from, to
     });
+
+    const latestHealthScore = _.get(_.last(filledHistory), 'health_score');
 
     return {
       ...accountData,
       loading, error,
-      current_health_score: _.last(filledHistory).health_score,
+      current_health_score: latestHealthScore,
       history: filledHistory,
       WoW: _.isNil(accountData.WoW) ? null : roundToPlaces(accountData.WoW * 100, 0),
-      current_DoD: getDoD(_.last(filledHistory).health_score, filledHistory[filledHistory.length - 2].health_score)
+      current_DoD: getDoD(latestHealthScore, _.get(filledHistory, `[${filledHistory.length - 2}].health_score`))
     };
   }
 );
@@ -458,7 +451,7 @@ export const selectHealthScoreOverview = createSelector(
 
 export const selectSpamHitsOverviewData = createSelector(
   getSpamHitsData, getOptions,
-  ({ data }, { now, relativeRange }) => data.map(({ WoW, ...rowOfData }) => {
+  ({ data }, { from, to }) => data.map(({ WoW, ...rowOfData }) => {
     const history = rowOfData.history || [];
     const normalizedHistory = history.map(({ dt: date, relative_trap_hits, ...values }) => ({
       ...values,
@@ -475,8 +468,7 @@ export const selectSpamHitsOverviewData = createSelector(
         relative_trap_hits: null,
         trap_hits: null
       },
-      now,
-      relativeRange
+      from, to
     });
 
     return {

@@ -2,16 +2,13 @@ import { snapshotActionCases } from 'src/__testHelpers__/snapshotActionHelpers';
 import * as actions from '../signals';
 jest.mock('src/actions/helpers/sparkpostApiRequest');
 jest.mock('src/helpers/date', () => ({
-  formatInputDate: (d) => d,
-  getRelativeDates: () => ({
-    from: '2018-01-12',
-    to: '2018-01-13'
-  })
+  formatInputDate: (d) => d
 }));
 
 describe('Signals Actions', () => {
   const requiredOptions = {
-    relativeRange: '14days'
+    from: '2018-01-12',
+    to: '2018-01-13'
   };
 
   snapshotActionCases('.getSpamHits', {

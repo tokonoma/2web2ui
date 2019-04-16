@@ -112,6 +112,10 @@ const memoizedCases = {
     // The null case below is for the redux-form validation that sometimes occurs before underlying fields are available
     good: [[1024, { size: 1000 }], [1, null]],
     bad: [[1024, { size: 1025 }]]
+  },
+  minDays: {
+    good: [[7, { from: '2018-01-07T05:00:00.000Z', to: '2017-01-01T01:00:00.000Z' }], [7, { from: '2018-01-01T05:00:00.000Z', to: '2018-01-07T24:00:00.000Z' }]],
+    bad: [[7, { from: '2018-01-01', to: '2017-12-31' }]]
   }
 };
 
