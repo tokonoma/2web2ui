@@ -320,6 +320,24 @@ exports[`PlanPrice renders percent discount 1`] = `
 </span>
 `;
 
+exports[`PlanPrice renders test account with current free plan 1`] = `
+<span
+  className="notranslate"
+>
+  <span
+    className="MainLabel"
+  >
+    <strong>
+      Test Account
+    </strong>
+     
+  </span>
+  <span
+    className="SupportLabel"
+  />
+</span>
+`;
+
 exports[`PlanPrice renders with overage 1`] = `
 <span
   className="notranslate"
