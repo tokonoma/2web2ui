@@ -42,6 +42,7 @@ export function fetchMetricsIpPools(params = {}) {
   const path = 'ip-pools';
   return fetch({ type, path, params });
 }
+
 export function fetchMetricsTemplates(params = {}) {
   const type = 'FETCH_METRICS_TEMPLATES';
   const path = 'templates';
