@@ -56,7 +56,7 @@ describe('Signals Unsubscribe Rate Page', () => {
     it('renders tooltip content', () => {
       const Tooltip = wrapper.find('LineChart').prop('tooltipContent');
       expect(shallow(<Tooltip payload={{
-        p_uneng_unsub: 0.1,
+        p_uneng_unsub: 0.11111,
         p_365d_unsub: 0.2,
         p_90d_unsub: 0.3,
         p_14d_unsub: 0.4,
@@ -75,7 +75,7 @@ describe('Signals Unsubscribe Rate Page', () => {
     it('gets y axis props with default domain', () => {
       wrapper.setProps({ data: [{ p_total_unsub: 0 }, { p_total_unsub: null }]});
       const axisProps = wrapper.find('LineChart').prop('yAxisProps');
-      expect(axisProps.tickFormatter(.2523)).toEqual('25%');
+      expect(axisProps.tickFormatter(.252344)).toEqual('25.234%');
       expect(axisProps.domain).toEqual([0,1]);
     });
 

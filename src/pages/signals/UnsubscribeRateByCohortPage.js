@@ -33,7 +33,7 @@ export class UnsubscribeRateByCohortPage extends Component {
 
   getYAxisProps = () => ({
     domain: this.isEmpty() ? [0, 1] : ['auto', 'auto'],
-    tickFormatter: (tick) => `${roundToPlaces(tick * 100, 0)}%`
+    tickFormatter: (tick) => `${roundToPlaces(tick * 100, 3)}%`
   })
 
   getXAxisProps = () => {
@@ -58,7 +58,7 @@ export class UnsubscribeRateByCohortPage extends Component {
             color={metric.fill}
             label={metric.label}
             description={metric.description}
-            value={`${roundToPlaces(metric.value * 100, 1)}%`}
+            value={`${roundToPlaces(metric.value * 100, 3)}%`}
           />
         ))}
       </>

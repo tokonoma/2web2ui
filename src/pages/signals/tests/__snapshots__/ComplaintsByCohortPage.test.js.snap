@@ -35,7 +35,7 @@ exports[`Signals Complaints Page bar chart props renders tooltip content 1`] = `
     description="365+ days since last engagement"
     key="uneng"
     label="Never Engaged"
-    value="10%"
+    value="11.111%"
   />
 </Fragment>
 `;

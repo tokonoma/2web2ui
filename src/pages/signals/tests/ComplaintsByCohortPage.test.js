@@ -56,7 +56,7 @@ describe('Signals Complaints Page', () => {
     it('renders tooltip content', () => {
       const Tooltip = wrapper.find('LineChart').prop('tooltipContent');
       expect(shallow(<Tooltip payload={{
-        p_uneng_fbl: 0.1,
+        p_uneng_fbl: 0.11111,
         p_365d_fbl: 0.2,
         p_90d_fbl: 0.3,
         p_14d_fbl: 0.4,
@@ -75,7 +75,7 @@ describe('Signals Complaints Page', () => {
     it('gets y axis props with default domain', () => {
       wrapper.setProps({ data: [{ p_total_fbl: 0 }, { p_total_fbl: null }]});
       const axisProps = wrapper.find('LineChart').prop('yAxisProps');
-      expect(axisProps.tickFormatter(.2523)).toEqual('25%');
+      expect(axisProps.tickFormatter(.252344)).toEqual('25.234%');
       expect(axisProps.domain).toEqual([0,1]);
     });
 
