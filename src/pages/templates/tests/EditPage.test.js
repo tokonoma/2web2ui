@@ -26,7 +26,8 @@ describe('Template EditPage', () => {
       },
       subaccountId: 101,
       formName: 'templateEdit',
-      canModify: true
+      canModify: true,
+      canSend: true
     };
 
     wrapper = shallow(<EditPage {...props} />);
@@ -45,6 +46,14 @@ describe('Template EditPage', () => {
   it('should render correctly for read-only users', () => {
     wrapper.setProps({ canModify: false });
     expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render correctly for users who cannot send', () => {
+    wrapper.setProps({ canSend: false });
+    expect(wrapper.find('Page').props().secondaryActions).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({ content: 'Preview' })
+      ]));
   });
 
   it('should handle errors when getting template', () => {
