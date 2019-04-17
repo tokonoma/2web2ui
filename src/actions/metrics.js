@@ -43,6 +43,12 @@ export function fetchMetricsIpPools(params = {}) {
   return fetch({ type, path, params });
 }
 
+export function fetchMetricsTemplates(params = {}) {
+  const type = 'FETCH_METRICS_TEMPLATES';
+  const path = 'templates';
+  return fetch({ type, path, params });
+}
+
 export function fetchDeliverability({ params, type }) {
   const path = 'deliverability';
   return fetch({ path, params, type });

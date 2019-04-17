@@ -5,7 +5,8 @@ const initialState = {
   domains: [],
   campaigns: [],
   sendingIps: [],
-  ipPools: []
+  ipPools: [],
+  templates: []
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -31,9 +32,12 @@ export default (state = initialState, { type, payload }) => {
     case 'FETCH_METRICS_IP_POOLS_SUCCESS':
       return { ...state, ipPools: payload['ip-pools'].sort() };
 
+    case 'FETCH_METRICS_TEMPLATES_SUCCESS':
+      return { ...state, templates: payload.templates.sort() };
+
     case 'UPDATE_METRICS_FROM_CACHE': {
-      const { domains, campaigns, 'sending-ips': sendingIps, 'ip-pools': ipPools } = payload;
-      return { ...state, domains, campaigns, sendingIps, ipPools };
+      const { domains, campaigns, 'sending-ips': sendingIps, 'ip-pools': ipPools, templates } = payload;
+      return { ...state, domains, campaigns, sendingIps, ipPools, templates };
     }
 
     default:
