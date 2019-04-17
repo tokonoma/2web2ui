@@ -27,7 +27,7 @@ const EMAIL_ROLE = {
   label: <strong>Email</strong>,
   value: ROLES.EMAIL,
   helpText:
-    'Content and deliverability management user. Has access to Templates, Recipients Lists, Suppressions, AB Testing, IP Pools, and all reporting features.'
+    'Content and deliverability management user. Has access to Templates, Recipients Lists, Suppressions, AB Testing, and all reporting features.'
 };
 
 const REPORTING_ROLE = {
