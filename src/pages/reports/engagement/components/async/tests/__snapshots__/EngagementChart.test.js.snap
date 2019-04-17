@@ -11,7 +11,7 @@ exports[`EngagementChart renders engagement chart 1`] = `
   sectioned={true}
 >
   <div
-    className="EngagementChart"
+    className="sp-engagement-chart"
   >
     <ResponsiveContainer
       debounce={0}
