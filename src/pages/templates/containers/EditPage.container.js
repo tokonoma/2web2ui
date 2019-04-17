@@ -15,6 +15,7 @@ const FORM_NAME = 'templateEdit';
 const mapStateToProps = (state, props) => {
   const template = selectTemplateById(state, props).draft;
   const canModify = hasGrants('templates/modify')(state);
+  const canSend = hasGrants('transmissions/modify')(state);
 
   return {
     loading: state.templates.getDraftLoading,
@@ -23,6 +24,7 @@ const mapStateToProps = (state, props) => {
     subaccountId: selectSubaccountIdFromQuery(state, props),
     hasSubaccounts: hasSubaccounts(state),
     canModify,
+    canSend,
 
     // Redux Form
     formName: FORM_NAME,

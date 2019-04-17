@@ -67,7 +67,7 @@ export default class EditPage extends Component {
   }
 
   getPageProps() {
-    const { canModify, handleSubmit, template, match, submitting, subaccountId } = this.props;
+    const { canSend, canModify, handleSubmit, template, match, submitting, subaccountId } = this.props;
     const published = template.has_published;
 
     const primaryAction = {
@@ -97,7 +97,7 @@ export default class EditPage extends Component {
         visible: canModify
       },
       {
-        content: canModify ? 'Preview & Send' : 'Preview',
+        content: canSend ? 'Preview & Send' : 'Preview',
         onClick: handleSubmit(this.handlePreview),
         visible: true
       }
