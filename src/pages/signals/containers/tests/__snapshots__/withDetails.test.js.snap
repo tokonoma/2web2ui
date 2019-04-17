@@ -2,7 +2,16 @@
 
 exports[`Signals Details Container fetches data on mount correctly 1`] = `
 <Component
-  data={Array []}
+  data={
+    Array [
+      Object {
+        "date": "2015-01-01",
+      },
+      Object {
+        "date": "2015-01-05",
+      },
+    ]
+  }
   facet="sending_domain"
   facetId="test.com"
   gap={1}
