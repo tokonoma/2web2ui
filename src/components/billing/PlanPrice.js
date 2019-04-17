@@ -16,7 +16,7 @@ const PlanPrice = ({ plan, showOverage = false, showIp = false, showCsm = false,
     ? 'First dedicated IP address is free'
     : null;
 
-  const currentFreePlan = plan.code && ['free500-1018', 'free15K-1018'].includes(plan.code);
+  const currentFreePlan = plan.code && ['free500-1018', 'free15K-1018', 'free500-0419', 'free500-SPCEU-0419'].includes(plan.code);
   const planTitle = currentFreePlan ? 'Test Account' : `${plan.volume.toLocaleString()}`;
 
   const displayCsm = showCsm && plan.includesCsm;
