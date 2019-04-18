@@ -4,7 +4,7 @@ export function formatRole(role) {
   switch (role) {
     case ROLES.SUBACCOUNT_REPORTING:
       return 'reporting';
-    case ROLES.TEMPALTES:
+    case ROLES.TEMPLATES:
       return 'templates';
     default:
       return role;
