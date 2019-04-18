@@ -69,6 +69,15 @@ export default class PreviewFrame extends Component {
     const { contentDocument } = this.iframe;
 
     contentDocument.open();
+
+    // If you see a "[Violation] Avoid using document.write()" warning in your console, please
+    // ignore it.  Chrome's block will not apply because this component writes to an iframe.
+    // Here is the condition.
+    //
+    //   The document .write() is in a top level document. The intervention does not apply to
+    //   document.written scripts within iframes as they don't block the rendering of the main page.
+    //
+    // @see, https://developers.google.com/web/updates/2016/08/removing-document-write
     contentDocument.write(this.props.content);
     contentDocument.close();
   }
