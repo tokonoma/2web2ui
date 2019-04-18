@@ -1,31 +1,38 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { act } from 'react-dom/test-utils';
+import { mount, shallow } from 'enzyme';
 
 import PreviewPanel from '../PreviewPanel';
 
-const props = {
-  html: '<h1>Test Template</h1>',
-  text: 'Test Template'
-};
+describe('PreviewPanel', () => {
+  it('renders blank panel', () => {
+    const wrapper = shallow(<PreviewPanel />);
+    expect(wrapper).toMatchSnapshot();
+  });
 
-it('renders blank panel', () => {
-  const wrapper = shallow(<PreviewPanel />);
-  expect(wrapper).toMatchSnapshot();
-});
+  it('renders HTML content by default', () => {
+    const html = '<!DOCTYPE html>';
+    const wrapper = shallow(<PreviewPanel html={html} />);
 
-it('renders HTML by default', () => {
-  const wrapper = shallow(<PreviewPanel {...props} />);
-  expect(wrapper).toMatchSnapshot();
-});
+    expect(wrapper.find('PreviewFrame')).toHaveProp('content', html);
+  });
 
-it('renders text on tab click', () => {
-  const wrapper = shallow(<PreviewPanel {...props} />);
+  it('renders AMP HTML content when tab is clicked', () => {
+    const ampHtml = '<html ⚡>';
+    const TestPreviewFrame = () => null; // stub frame for a safe mount
+    const wrapper = mount(<PreviewPanel ampHtml={ampHtml} Frame={TestPreviewFrame} />);
 
-  wrapper
-    .find('Tabs')
-    .prop('tabs')
-    .find(({ content }) => content === 'Text')
-    .onClick({ currentTarget: { text: 'Text' }});
+    act(() => {
+      wrapper
+        .find('Tabs')
+        .prop('tabs')
+        .find(({ key }) => key === 'ampHtml')
+        .onClick();
+    });
 
-  expect(wrapper).toMatchSnapshot();
+    wrapper.update();
+
+    expect(wrapper.find('TestPreviewFrame')).toHaveProp('content', ampHtml);
+    expect(wrapper.find('TestPreviewFrame')).toHaveProp('strict', false);
+  });
 });

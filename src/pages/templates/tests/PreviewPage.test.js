@@ -15,7 +15,8 @@ const loadPreviewPage = async (overrides = {}) => {
       from: { email: 'test@example.com' },
       subject: 'Test Template',
       html: '<h1>Test Template</h1>',
-      text: 'Test Template'
+      text: 'Test Template',
+      amp_html: '<html ⚡><h1>Test Template</h1>'
     },
     returnPath: '/path/to/return',
     template: {
