@@ -8,9 +8,11 @@ const initialState = {
   loading: false,
   historyLoading: false,
   documentationLoading: false,
+  selectedEventLoading: false,
   error: null,
   events: [],
   history: {},
+  selectedEvent: {},
   search: {
     dateOptions: {
       relativeRange: 'hour'
@@ -103,6 +105,20 @@ export default (state = initialState, { type, payload, meta, extra }) => {
     case 'GET_MESSAGE_HISTORY_FAIL':
       return { ...state, historyLoading: false, error: payload };
 
+      // Selected Event
+
+    case 'GET_SELECTED_EVENT_PENDING':
+      return { ...state, selectedEventLoading: true, error: null };
+
+    case 'GET_SELECTED_EVENT_SUCCESS':
+      return {
+        ...state,
+        selectedEventLoading: false,
+        selectedEvent: payload[0]
+      };
+
+    case 'GET_SELECTED_EVENT_FAIL':
+      return { ...state, selectedEventLoading: false, error: payload };
 
       // Documentation
 

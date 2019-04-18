@@ -125,6 +125,12 @@ describe('Action Creator: MessageEvents', () => {
     });
   });
 
+  describe('getSelectedEvent', () => {
+    it('makes api call with defaults', () => {
+      expect(messageEvents.getSelectedEvent({ eventId: 'abc123' })).toMatchSnapshot();
+    });
+  });
+
   describe('updateMessageEventsSearchOptions', () => {
     it('dedupes filters', () => {
       expect(messageEvents.updateMessageEventsSearchOptions({

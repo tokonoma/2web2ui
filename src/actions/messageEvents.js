@@ -152,6 +152,21 @@ export function getMessageHistory({ messageId }) {
   });
 }
 
+export function getSelectedEvent({ eventId }) {
+  return sparkpostApiRequest({
+    type: 'GET_SELECTED_EVENT',
+    meta: {
+      method: 'GET',
+      url: '/v1/events/message',
+      params: {
+        event_ids: eventId,
+        to: moment.utc().format(apiDateFormat),
+        from: moment.utc().subtract(retentionPeriodDays, 'days').startOf('day').format(apiDateFormat)
+      }
+    }
+  });
+}
+
 export function getDocumentation() {
   return sparkpostApiRequest({
     type: 'GET_MESSAGE_EVENTS_DOCUMENTATION',

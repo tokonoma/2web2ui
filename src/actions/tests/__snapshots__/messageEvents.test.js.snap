@@ -93,6 +93,21 @@ Object {
 }
 `;
 
+exports[`Action Creator: MessageEvents getSelectedEvent makes api call with defaults 1`] = `
+Object {
+  "meta": Object {
+    "method": "GET",
+    "params": Object {
+      "event_ids": "abc123",
+      "from": "2018-02-01T10:10",
+      "to": "2018-02-01T10:10",
+    },
+    "url": "/v1/events/message",
+  },
+  "type": "GET_SELECTED_EVENT",
+}
+`;
+
 exports[`Action Creator: MessageEvents updateMessageEventsSearchOptions dedupes filters 1`] = `
 Object {
   "payload": Object {
