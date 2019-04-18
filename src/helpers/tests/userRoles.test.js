@@ -6,7 +6,7 @@ describe('formatRole', () => {
   cases('it changes the value of role to the intended visible role', ({ name, result }) => {
     expect(formatRole(name)).toEqual(result);
   }, [
-    { name: ROLES.EMAIL, result: 'templates' },
+    { name: ROLES.TEMPLATES, result: 'templates' },
     { name: ROLES.SUBACCOUNT_REPORTING, result: 'reporting' },
     { name: 'other-role', result: 'other-role' }
   ]);

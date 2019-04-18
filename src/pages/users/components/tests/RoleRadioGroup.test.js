@@ -40,7 +40,7 @@ describe('Component: RoleRadioGroup', () => {
       .toEqual(
         expect.arrayContaining([
           expect.objectContaining({ value: ROLES.DEVELOPER }),
-          expect.objectContaining({ value: ROLES.EMAIL })
+          expect.objectContaining({ value: ROLES.TEMPLATES })
         ])
       );
   });
@@ -52,7 +52,7 @@ describe('Component: RoleRadioGroup', () => {
       .not.toEqual(
         expect.arrayContaining([
           expect.objectContaining({ value: ROLES.DEVELOPER }),
-          expect.objectContaining({ value: ROLES.EMAIL })
+          expect.objectContaining({ value: ROLES.TEMPLATES })
         ])
       );
   });
