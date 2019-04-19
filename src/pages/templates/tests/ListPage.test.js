@@ -105,7 +105,7 @@ it('renders rows correctly with NO subaccounts', () => {
 
 it('renders empty state', () => {
   wrapper.setProps({ count: 0 });
-  expect(wrapper.dive('Page')).toMatchSnapshot();
+  expect(wrapper).toHaveProp('empty', expect.objectContaining({ show: true }));
 });
 
 it('renders Loading', () => {
@@ -114,6 +114,6 @@ it('renders Loading', () => {
 });
 
 it('renders errors when present', () => {
-  wrapper.setProps({ error: { message: 'Uh oh! It broke. ' }});
+  wrapper.setProps({ count: 0, error: { message: 'Uh oh! It broke. ' }});
   expect(wrapper.find('ApiErrorBanner')).toMatchSnapshot();
 });

@@ -83,7 +83,7 @@ export default class ListPage extends Component {
         )}
         title='Templates'
         empty={{
-          show: count === 0,
+          show: !error && count === 0,
           image: Templates,
           title: 'Manage your email templates',
           content: <p>Build, test, preview and send your transmissions.</p>
