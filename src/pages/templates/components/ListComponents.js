@@ -29,7 +29,13 @@ const Status = (rowData) => {
   }
 
   if (publishedWithChanges) {
-    return <Tooltip dark content='Contains unpublished changes'><Tag color='blue'>Published &bull;</Tag></Tooltip>;
+    return (
+      <Tooltip dark content='Contains unpublished changes'>
+        <Tag className={styles.PublishedWithChanges} color='blue'>
+          &bull; Published
+        </Tag>
+      </Tooltip>
+    );
   }
 
   return <Tag>Draft</Tag>;
