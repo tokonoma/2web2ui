@@ -5,18 +5,21 @@ Array [
   Object {
     "label": "Name",
     "sortKey": "name",
-    "width": "28%",
   },
   Object {
     "label": "Status",
     "sortKey": [Function],
-    "width": "18%",
+    "width": "150px",
   },
   Object {
     "label": "Last Updated",
     "sortKey": "last_update_time",
+    "width": "175px",
   },
-  null,
+  Object {
+    "content": null,
+    "width": "20px",
+  },
 ]
 `;
 
@@ -25,23 +28,26 @@ Array [
   Object {
     "label": "Name",
     "sortKey": "name",
-    "width": "28%",
   },
   Object {
     "label": "Status",
     "sortKey": [Function],
-    "width": "18%",
+    "width": "150px",
   },
   Object {
     "label": "Subaccount",
     "sortKey": [Function],
-    "width": "18%",
+    "width": "175px",
   },
   Object {
     "label": "Last Updated",
     "sortKey": "last_update_time",
+    "width": "175px",
   },
-  null,
+  Object {
+    "content": null,
+    "width": "20px",
+  },
 ]
 `;
 
@@ -72,18 +78,21 @@ exports[`renders correctly 1`] = `
         Object {
           "label": "Name",
           "sortKey": "name",
-          "width": "28%",
         },
         Object {
           "label": "Status",
           "sortKey": [Function],
-          "width": "18%",
+          "width": "150px",
         },
         Object {
           "label": "Last Updated",
           "sortKey": "last_update_time",
+          "width": "175px",
         },
-        null,
+        Object {
+          "content": null,
+          "width": "20px",
+        },
       ]
     }
     defaultSortColumn="last_update_time"
@@ -300,18 +309,21 @@ exports[`renders without primary action for read-only users 1`] = `
         Object {
           "label": "Name",
           "sortKey": "name",
-          "width": "28%",
         },
         Object {
           "label": "Status",
           "sortKey": [Function],
-          "width": "18%",
+          "width": "150px",
         },
         Object {
           "label": "Last Updated",
           "sortKey": "last_update_time",
+          "width": "175px",
         },
-        null,
+        Object {
+          "content": null,
+          "width": "20px",
+        },
       ]
     }
     defaultSortColumn="last_update_time"

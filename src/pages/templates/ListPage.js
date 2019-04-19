@@ -17,7 +17,6 @@ export default class ListPage extends Component {
       component: Name,
       header: {
         label: 'Name',
-        width: '28%',
         sortKey: 'name'
       }
     },
@@ -25,7 +24,7 @@ export default class ListPage extends Component {
       component: Status,
       header: {
         label: 'Status',
-        width: '18%',
+        width: '150px',
         sortKey: (template) => [
           resolveTemplateStatus(template).publishedWithChanges,
           template.published
@@ -40,7 +39,7 @@ export default class ListPage extends Component {
       ),
       header: {
         label: 'Subaccount',
-        width: '18%',
+        width: '175px',
         sortKey: ({ subaccount_id, shared_with_subaccounts }) => (
           subaccount_id || shared_with_subaccounts
         )
@@ -53,12 +52,16 @@ export default class ListPage extends Component {
       component: LastUpdated,
       header: {
         label: 'Last Updated',
-        sortKey: 'last_update_time'
+        sortKey: 'last_update_time',
+        width: '175px'
       }
     },
     {
       component: Actions,
-      header: null
+      header: {
+        content: null,
+        width: '20px'
+      }
     }
   ]
 
