@@ -19,16 +19,6 @@ export default class ListPage extends Component {
     this.props.listTemplates();
   }
 
-  renderError() {
-    return (
-      <ApiErrorBanner
-        message={'Sorry, we seem to have had some trouble loading your templates.'}
-        errorDetails={this.props.error.message}
-        reload={this.props.listTemplates}
-      />
-    );
-  }
-
   getRowData = ({ shared_with_subaccounts, ...rowData }) => {
     const { hasSubaccounts, userAccessLevel } = this.props;
     const { subaccount_id } = rowData;
@@ -61,25 +51,8 @@ export default class ListPage extends Component {
     ];
   }
 
-  renderCollection() {
-    return (
-      <TableCollection
-        columns={this.getColumns()}
-        rows={this.props.templates}
-        getRowData={this.getRowData}
-        pagination
-        filterBox={{
-          show: true,
-          exampleModifiers: ['id', 'name'],
-          itemToStringKeys: ['name', 'id', 'subaccount_id']
-        }}
-        defaultSortColumn='name'
-      />
-    );
-  }
-
   render() {
-    const { canModify, count, loading, error } = this.props;
+    const { canModify, count, error, listTemplates, loading, templates } = this.props;
 
     if (loading) {
       return <Loading />;
@@ -94,8 +67,29 @@ export default class ListPage extends Component {
           image: Templates,
           title: 'Manage your email templates',
           content: <p>Build, test, preview and send your transmissions.</p>
-        }} >
-        {error ? this.renderError() : this.renderCollection()}
+        }}
+      >
+        {error ? (
+          <ApiErrorBanner
+            message={'Sorry, we seem to have had some trouble loading your templates.'}
+            errorDetails={error.message}
+            reload={listTemplates}
+          />
+        ) : (
+          <TableCollection
+            columns={this.getColumns()}
+            rows={templates}
+            getRowData={this.getRowData}
+            pagination
+            filterBox={{
+              show: true,
+              exampleModifiers: ['id', 'name'],
+              itemToStringKeys: ['name', 'id', 'subaccount_id']
+            }}
+            defaultSortColumn="last_update_time"
+            defaultSortDirection="desc"
+          />
+        )}
       </Page>
     );
   }

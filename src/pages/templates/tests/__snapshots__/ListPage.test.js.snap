@@ -86,8 +86,8 @@ exports[`renders correctly 1`] = `
         null,
       ]
     }
-    defaultSortColumn="name"
-    defaultSortDirection="asc"
+    defaultSortColumn="last_update_time"
+    defaultSortDirection="desc"
     filterBox={
       Object {
         "exampleModifiers": Array [
@@ -318,8 +318,8 @@ exports[`renders without primary action for read-only users 1`] = `
         null,
       ]
     }
-    defaultSortColumn="name"
-    defaultSortDirection="asc"
+    defaultSortColumn="last_update_time"
+    defaultSortDirection="desc"
     filterBox={
       Object {
         "exampleModifiers": Array [
