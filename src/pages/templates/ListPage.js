@@ -1,58 +1,74 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Page } from '@sparkpost/matchbox';
 import { SubaccountTag, TableCollection, ApiErrorBanner, Loading } from 'src/components';
 import { Templates } from 'src/components/images';
-import { Page } from '@sparkpost/matchbox';
-import { Name, Status, Actions, LastUpdated } from './components/ListComponents';
-import { resolveTemplateStatus } from 'src/helpers/templates';
+import PageLink from 'src/components/pageLink';
 import { ROLES } from 'src/constants';
-
-const primaryAction = {
-  content: 'Create Template',
-  to: '/templates/create',
-  Component: Link
-};
+import { resolveTemplateStatus } from 'src/helpers/templates';
+import { Name, Status, Actions, LastUpdated } from './components/ListComponents';
 
 export default class ListPage extends Component {
-
   componentDidMount() {
     this.props.listTemplates();
   }
 
-  getRowData = ({ shared_with_subaccounts, ...rowData }) => {
-    const { hasSubaccounts, userAccessLevel } = this.props;
-    const { subaccount_id } = rowData;
-    const canViewSubaccounts = userAccessLevel !== ROLES.SUBACCOUNT_REPORTING;
+  columns = [
+    {
+      component: Name,
+      header: {
+        label: 'Name',
+        width: '28%',
+        sortKey: 'name'
+      }
+    },
+    {
+      component: Status,
+      header: {
+        label: 'Status',
+        width: '18%',
+        sortKey: (template) => [
+          resolveTemplateStatus(template).publishedWithChanges,
+          template.published
+        ]
+      }
+    },
+    {
+      component: ({ shared_with_subaccounts, subaccount_id }) => (
+        subaccount_id || shared_with_subaccounts
+          ? <SubaccountTag all={shared_with_subaccounts} id={subaccount_id} />
+          : null
+      ),
+      header: {
+        label: 'Subaccount',
+        width: '18%',
+        sortKey: ({ subaccount_id, shared_with_subaccounts }) => (
+          subaccount_id || shared_with_subaccounts
+        )
+      },
+      visible: ({ hasSubaccounts, userAccessLevel }) => (
+        hasSubaccounts && userAccessLevel !== ROLES.SUBACCOUNT_REPORTING
+      )
+    },
+    {
+      component: LastUpdated,
+      header: {
+        label: 'Last Updated',
+        sortKey: 'last_update_time'
+      }
+    },
+    {
+      component: Actions,
+      header: null
+    }
+  ]
 
-    const subaccountCell = subaccount_id || shared_with_subaccounts
-      ? <SubaccountTag all={shared_with_subaccounts} id={subaccount_id} />
-      : null;
-
-    return [
-      <Name {...rowData} />,
-      <Status {...rowData} />,
-      ...(hasSubaccounts && canViewSubaccounts ? [subaccountCell] : []),
-      <LastUpdated {...rowData}/>,
-      <Actions {...rowData} />
-    ];
-  }
-
-  getColumns() {
-    const { hasSubaccounts, userAccessLevel } = this.props;
-    const canViewSubaccounts = userAccessLevel !== ROLES.SUBACCOUNT_REPORTING;
-    return [
-      { label: 'Name', width: '28%', sortKey: 'name' },
-      { label: 'Status', width: '18%', sortKey: (template) => [resolveTemplateStatus(template).publishedWithChanges, template.published]},
-      ...(hasSubaccounts && canViewSubaccounts ? [{
-        label: 'Subaccount', width: '18%', sortKey: (template) => [template.subaccount_id, template.shared_with_subaccounts]
-      }] : []),
-      { label: 'Last Updated', sortKey: 'last_update_time' },
-      null
-    ];
-  }
+  renderRow = (columns) => (props) => (
+    columns.map(({ component: Component }) => <Component {...props} />)
+  )
 
   render() {
     const { canModify, count, error, listTemplates, loading, templates } = this.props;
+    const visibleColumns = this.columns.filter(({ visible = () => true }) => visible(this.props));
 
     if (loading) {
       return <Loading />;
@@ -60,7 +76,11 @@ export default class ListPage extends Component {
 
     return (
       <Page
-        primaryAction={canModify ? primaryAction : undefined}
+        primaryAction={(
+          canModify
+            ? { Component: PageLink, content: 'Create Template', to: '/templates/create' }
+            : undefined
+        )}
         title='Templates'
         empty={{
           show: count === 0,
@@ -77,9 +97,9 @@ export default class ListPage extends Component {
           />
         ) : (
           <TableCollection
-            columns={this.getColumns()}
+            columns={visibleColumns.map(({ header }) => header)}
             rows={templates}
-            getRowData={this.getRowData}
+            getRowData={this.renderRow(visibleColumns)}
             pagination
             filterBox={{
               show: true,

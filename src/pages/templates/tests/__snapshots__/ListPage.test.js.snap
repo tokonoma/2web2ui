@@ -190,6 +190,7 @@ Array [
       last_update_time="2017-08-10T14:15:16+00:00"
       name="subaccount template"
       published={true}
+      shared_with_subaccounts={false}
       subaccount_id={101}
     />,
     <Status
@@ -197,20 +198,23 @@ Array [
       last_update_time="2017-08-10T14:15:16+00:00"
       name="subaccount template"
       published={true}
+      shared_with_subaccounts={false}
       subaccount_id={101}
     />,
-    <SubaccountTag
-      all={false}
-      id={101}
-      isDefault={false}
-      master={false}
-      receiveAll={false}
+    <component
+      id="id1"
+      last_update_time="2017-08-10T14:15:16+00:00"
+      name="subaccount template"
+      published={true}
+      shared_with_subaccounts={false}
+      subaccount_id={101}
     />,
     <LastUpdated
       id="id1"
       last_update_time="2017-08-10T14:15:16+00:00"
       name="subaccount template"
       published={true}
+      shared_with_subaccounts={false}
       subaccount_id={101}
     />,
     <Actions
@@ -218,6 +222,7 @@ Array [
       last_update_time="2017-08-10T14:15:16+00:00"
       name="subaccount template"
       published={true}
+      shared_with_subaccounts={false}
       subaccount_id={101}
     />,
   ],
@@ -227,31 +232,35 @@ Array [
       last_update_time="2017-08-10T14:15:16+00:00"
       name="shared template"
       published={false}
+      shared_with_subaccounts={true}
     />,
     <Status
       id="id2"
       last_update_time="2017-08-10T14:15:16+00:00"
       name="shared template"
       published={false}
+      shared_with_subaccounts={true}
     />,
-    <SubaccountTag
-      all={true}
-      id={null}
-      isDefault={false}
-      master={false}
-      receiveAll={false}
+    <component
+      id="id2"
+      last_update_time="2017-08-10T14:15:16+00:00"
+      name="shared template"
+      published={false}
+      shared_with_subaccounts={true}
     />,
     <LastUpdated
       id="id2"
       last_update_time="2017-08-10T14:15:16+00:00"
       name="shared template"
       published={false}
+      shared_with_subaccounts={true}
     />,
     <Actions
       id="id2"
       last_update_time="2017-08-10T14:15:16+00:00"
       name="shared template"
       published={false}
+      shared_with_subaccounts={true}
     />,
   ],
   Array [
@@ -267,7 +276,12 @@ Array [
       name="master template"
       published={false}
     />,
-    null,
+    <component
+      id="id3"
+      last_update_time="2017-08-10T14:15:16+00:00"
+      name="master template"
+      published={false}
+    />,
     <LastUpdated
       id="id3"
       last_update_time="2017-08-10T14:15:16+00:00"

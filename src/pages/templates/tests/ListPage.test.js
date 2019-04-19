@@ -25,6 +25,11 @@ const props = {
 
 let wrapper;
 
+const renderRows = (wrapper, rows) => {
+  const getRowData = wrapper.find('TableCollection').prop('getRowData');
+  return rows.map(getRowData);
+};
+
 beforeEach(() => {
   dateMock.format = jest.fn((a) => a);
   wrapper = shallow(<ListPage {...props} />);
@@ -80,8 +85,8 @@ it('renders rows correctly with subaccounts', () => {
   ];
 
   wrapper.setProps({ hasSubaccounts: true });
-  const rowData = rows.map(wrapper.instance().getRowData);
-  expect(rowData).toMatchSnapshot();
+  const result = renderRows(wrapper, rows);
+  expect(result).toMatchSnapshot();
 });
 
 it('renders rows correctly with NO subaccounts', () => {
@@ -94,8 +99,8 @@ it('renders rows correctly with NO subaccounts', () => {
     }
   ];
 
-  const rowData = rows.map(wrapper.instance().getRowData);
-  expect(rowData).toMatchSnapshot();
+  const result = renderRows(wrapper, rows);
+  expect(result).toMatchSnapshot();
 });
 
 it('renders empty state', () => {
