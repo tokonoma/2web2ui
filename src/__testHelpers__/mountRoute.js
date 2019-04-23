@@ -6,24 +6,28 @@ import { Provider } from 'react-redux';
 
 import configureStore from 'src/store';
 
-import AppRoutes from 'src/components/appRoutes';
+import App from 'src/App';
 import { authenticate } from 'src/actions/auth';
 import { initializeAccessControl } from 'src/actions/accessControl';
 
 import asyncFlush from 'src/__testHelpers__/asyncFlush';
 
-async function forceUpdate(wrapper) {
+const forceUpdate = async (wrapper) => {
   await asyncFlush();
   wrapper.update();
-}
+};
 
-async function simulate(wrapper, selector, eventName) {
+const simulate = async (wrapper, selector, eventName) => {
   wrapper.find(selector).simulate(eventName);
   await forceUpdate(wrapper);
-}
+};
+
+const currentRoute = (wrapper) => wrapper.find('MemoryRouter Router').prop('history').location.pathname;
 
 export default async function mountRoute(route, { authenticated = true } = {}) {
   const store = configureStore();
+
+  // Note: axios#create() is mocked and now returns the same object on every call
   const axiosMock = axios.create();
 
   if (authenticated) {
@@ -31,11 +35,11 @@ export default async function mountRoute(route, { authenticated = true } = {}) {
     await store.dispatch(initializeAccessControl());
   }
 
+  const Router = ({ children }) => <MemoryRouter initialEntries={[route]}>{children}</MemoryRouter>;
+
   const wrapper = mount(
     <Provider store={store}>
-      <MemoryRouter initialEntries={[route]}>
-        <AppRoutes />
-      </MemoryRouter>
+      <App RouterComponent={Router} />
     </Provider>
   );
 
@@ -44,6 +48,7 @@ export default async function mountRoute(route, { authenticated = true } = {}) {
 
   return {
     wrapper,
+    currentRoute: () => currentRoute(wrapper),
     find: wrapper.find.bind(wrapper),
     simulate: (...rest) => simulate(wrapper, ...rest),
     forceUpdate: (...rest) => forceUpdate(wrapper, ...rest),

@@ -11,16 +11,16 @@ import AppRoutes from 'src/components/appRoutes';
 
 import config from 'src/config';
 
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 
 const reloadApp = () => {
   window.location.reload(true);
 };
 
-const App = () => (
+const App = ({ RouterComponent = BrowserRouter }) => (
   <ErrorBoundary onCtaClick={reloadApp} ctaLabel='Reload Page'>
     <Poll>
-      <Router>
+      <RouterComponent>
         <div>
           {config.siftScience && <SiftScience config={config.siftScience} />}
           <BoomerangBanner />
@@ -35,7 +35,7 @@ const App = () => (
           <Support />
           <GlobalAlertWrapper />
         </div>
-      </Router>
+      </RouterComponent>
     </Poll>
   </ErrorBoundary>
 );
