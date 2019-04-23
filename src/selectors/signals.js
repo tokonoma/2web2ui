@@ -108,6 +108,12 @@ export const selectEngagementRecencyDetails = createSelector(
   }
 );
 
+// Engagement behavior charts do not contain data within the last 3 days (including today)
+const excludeLastNDays = (date, n) =>
+  moment().diff(date, 'days') < n ? moment().subtract(3, 'days') : date;
+
+const engagementBehaviorDataLagDays = 3;
+
 export const selectEngagementRateByCohortDetails = createSelector(
   [getEngagementRateByCohortData, getFacetFromParams, getFacetIdFromParams, selectSubaccountIdFromQuery, getOptions],
   ({ loading, error, data }, facet, facetId, subaccountId, { from, to }) => {
@@ -116,16 +122,13 @@ export const selectEngagementRateByCohortDetails = createSelector(
     // Rename date key
     const normalizedHistory = _.get(match, 'history', []).map(({ dt: date, ...values }) => ({ date, ...values }));
 
-    // Engagement behavior charts do not contain data within the last 3 days (including today)
-    const shouldTrimTo = moment().diff(to, 'days') < 3;
-
     const filledHistory = fillByDate({
       dataSet: normalizedHistory,
       fill: {
         p_new_eng: null, p_14d_eng: null, p_90d_eng: null, p_365d_eng: null, p_uneng_eng: null, p_total_eng: null
       },
       from,
-      to: shouldTrimTo ? moment().subtract(3, 'days') : to
+      to: excludeLastNDays(to, engagementBehaviorDataLagDays)
     });
 
     const isEmpty = filledHistory.every((values) => _.isNil(values.p_total_eng));
@@ -153,8 +156,6 @@ export const selectUnsubscribeRateByCohortDetails = createSelector(
     // Rename date key
     const normalizedHistory = _.get(match, 'history', []).map(({ dt: date, ...values }) => ({ date, ...values }));
 
-    // Engagement behavior charts do not contain data within the last 3 days (including today)
-    const shouldTrimTo = moment().diff(to, 'days') < 3;
 
     const filledHistory = fillByDate({
       dataSet: normalizedHistory,
@@ -167,7 +168,7 @@ export const selectUnsubscribeRateByCohortDetails = createSelector(
         p_total_unsub: null
       },
       from,
-      to: shouldTrimTo ? moment().subtract(3, 'days') : to
+      to: excludeLastNDays(to, engagementBehaviorDataLagDays)
     });
 
     const isEmpty = filledHistory.every((values) => _.isNil(values.p_total_unsub));
@@ -194,8 +195,6 @@ export const selectComplaintsByCohortDetails = createSelector(
     // Rename date key
     const normalizedHistory = _.get(match, 'history', []).map(({ dt: date, ...values }) => ({ date, ...values }));
 
-    // Engagement behavior charts do not contain data within the last 3 days (including today)
-    const shouldTrimTo = moment().diff(to, 'days') < 3;
 
     const filledHistory = fillByDate({
       dataSet: normalizedHistory,
@@ -208,7 +207,7 @@ export const selectComplaintsByCohortDetails = createSelector(
         p_total_fbl: null
       },
       from,
-      to: shouldTrimTo ? moment().subtract(3, 'days') : to
+      to: excludeLastNDays(to, engagementBehaviorDataLagDays)
     });
 
     const isEmpty = filledHistory.every((values) => _.isNil(values.p_total_fbl));
