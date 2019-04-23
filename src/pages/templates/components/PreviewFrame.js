@@ -5,9 +5,28 @@ import styles from './PreviewFrame.module.scss';
 // Manually pad to avoid scrollbars
 const PADDING = 5;
 
+const FLEXIBLE_POLICY = [
+  'allow-forms',
+  'allow-popups',
+  'allow-popups-to-escape-sandbox',
+  'allow-presentation',
+  'allow-same-origin',
+  'allow-scripts',
+  'allow-top-navigation'
+];
+
+const STRICT_POLICY = [
+  'allow-same-origin',
+  'allow-top-navigation'
+];
+
 // @note This is a port of the previous fd.templates.preview.directive
 // @see https://github.com/SparkPost/webui/blob/master/src/app/templates/preview-directive.js
 export default class PreviewFrame extends Component {
+  static defaultProps = {
+    strict: true
+  }
+
   static propTypes = {
     content: PropTypes.string.isRequired
   }
@@ -50,6 +69,15 @@ export default class PreviewFrame extends Component {
     const { contentDocument } = this.iframe;
 
     contentDocument.open();
+
+    // If you see a "[Violation] Avoid using document.write()" warning in your console, please
+    // ignore it.  Chrome's block will not apply because this component writes to an iframe.
+    // Here is the condition.
+    //
+    //   The document .write() is in a top level document. The intervention does not apply to
+    //   document.written scripts within iframes as they don't block the rendering of the main page.
+    //
+    // @see, https://developers.google.com/web/updates/2016/08/removing-document-write
     contentDocument.write(this.props.content);
     contentDocument.close();
   }
@@ -66,13 +94,16 @@ export default class PreviewFrame extends Component {
   // @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe#attr-sandbox
   // @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe#attr-srcdoc
   render() {
+    const { strict } = this.props;
+    const allowances = strict ? STRICT_POLICY : FLEXIBLE_POLICY;
+
     return (
       <iframe
         className={styles.PreviewFrame}
         height={this.state.height}
         ref={this.setRef}
         onLoad={this.onLoad}
-        sandbox="allow-same-origin allow-top-navigation"
+        sandbox={allowances.join(' ')}
         title="preview email template frame"
       />
     );

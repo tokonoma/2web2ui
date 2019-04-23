@@ -1,8 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders an iframe 1`] = `
+exports[`PreviewFrame renders an iframe 1`] = `
 <PreviewFrame
   content="<h1>Hello, World!</h1>"
+  strict={true}
 >
   <iframe
     className="PreviewFrame"
@@ -13,9 +14,24 @@ exports[`renders an iframe 1`] = `
 </PreviewFrame>
 `;
 
-exports[`sets iframe height after it loads 1`] = `
+exports[`PreviewFrame renders an iframe with flexible policies 1`] = `
 <PreviewFrame
   content="<h1>Hello, World!</h1>"
+  strict={false}
+>
+  <iframe
+    className="PreviewFrame"
+    onLoad={[Function]}
+    sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-presentation allow-same-origin allow-scripts allow-top-navigation"
+    title="preview email template frame"
+  />
+</PreviewFrame>
+`;
+
+exports[`PreviewFrame sets iframe height after it loads 1`] = `
+<PreviewFrame
+  content="<h1>Hello, World!</h1>"
+  strict={true}
 >
   <iframe
     className="PreviewFrame"

@@ -62,6 +62,8 @@ exports[`renders loading error 1`] = `
       value="Test Template"
     />
     <PreviewPanel
+      Frame={[Function]}
+      ampHtml="<html ⚡><h1>Test Template</h1>"
       html="<h1>Test Template</h1>"
       text="Test Template"
     />
@@ -101,6 +103,8 @@ exports[`renders preview page with read-only template 1`] = `
       value="Test Template"
     />
     <PreviewPanel
+      Frame={[Function]}
+      ampHtml="<html ⚡><h1>Test Template</h1>"
       html="<h1>Test Template</h1>"
       text="Test Template"
     />
@@ -155,6 +159,8 @@ exports[`renders preview page with template 1`] = `
       value="Test Template"
     />
     <PreviewPanel
+      Frame={[Function]}
+      ampHtml="<html ⚡><h1>Test Template</h1>"
       html="<h1>Test Template</h1>"
       text="Test Template"
     />
@@ -209,6 +215,8 @@ exports[`resets error message when user starts typing again 1`] = `
       value="Test Template"
     />
     <PreviewPanel
+      Frame={[Function]}
+      ampHtml="<html ⚡><h1>Test Template</h1>"
       html="<h1>Test Template</h1>"
       text="Test Template"
     />

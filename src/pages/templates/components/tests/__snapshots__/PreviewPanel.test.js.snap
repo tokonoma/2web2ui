@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders HTML by default 1`] = `
+exports[`PreviewPanel renders blank panel 1`] = `
 <div
   className="PreviewPanel notranslate"
 >
@@ -12,43 +12,15 @@ exports[`renders HTML by default 1`] = `
       Array [
         Object {
           "content": "HTML",
-          "onClick": [Function],
+          "key": "html",
         },
         Object {
           "content": "Text",
-          "onClick": [Function],
-        },
-      ]
-    }
-  />
-  <div
-    className="PreviewPanelWrapper"
-  >
-    <PreviewFrame
-      content="<h1>Test Template</h1>"
-      key="html"
-    />
-  </div>
-</div>
-`;
-
-exports[`renders blank panel 1`] = `
-<div
-  className="PreviewPanel notranslate"
->
-  <Tabs
-    color="orange"
-    connectBelow={true}
-    selected={0}
-    tabs={
-      Array [
-        Object {
-          "content": "HTML",
-          "onClick": [Function],
+          "key": "text",
         },
         Object {
-          "content": "Text",
-          "onClick": [Function],
+          "content": "AMP HTML",
+          "key": "ampHtml",
         },
       ]
     }
@@ -59,38 +31,7 @@ exports[`renders blank panel 1`] = `
     <PreviewFrame
       content=""
       key="html"
-    />
-  </div>
-</div>
-`;
-
-exports[`renders text on tab click 1`] = `
-<div
-  className="PreviewPanel notranslate"
->
-  <Tabs
-    color="orange"
-    connectBelow={true}
-    selected={1}
-    tabs={
-      Array [
-        Object {
-          "content": "HTML",
-          "onClick": [Function],
-        },
-        Object {
-          "content": "Text",
-          "onClick": [Function],
-        },
-      ]
-    }
-  />
-  <div
-    className="PreviewPanelWrapper"
-  >
-    <PreviewFrame
-      content="<p style=\\"white-space: pre-wrap\\">Test Template</p>"
-      key="text"
+      strict={true}
     />
   </div>
 </div>
