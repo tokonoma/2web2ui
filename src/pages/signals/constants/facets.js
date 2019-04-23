@@ -8,6 +8,10 @@ const facets = [
     label: 'IP Pool'
   },
   {
+    key: 'mb_provider',
+    label: 'Mailbox Provider'
+  },
+  {
     key: 'sending_domain',
     label: 'Sending Domain'
   }
