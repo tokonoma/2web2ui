@@ -1,6 +1,6 @@
 @import '~@sparkpost/matchbox/src/styles/config.scss';
 
-.sp-engagement-chart {
+.EngagementChart {
   position: relative; // for the completion rate
 
   // hide the top grid line
@@ -9,27 +9,21 @@
   }
 
   // similar to match summary line  chart
-  .recharts-text.recharts-cartesian-axis-tick-value {
+  :global .recharts-text.recharts-cartesian-axis-tick-value {
     fill: color(gray, 5);
     font-size: rem(13);
     font-weight: 500;
   }
 
-  .recharts-cartesian-axis-line {
+  :global .recharts-cartesian-axis-line {
     stroke: color(gray, 7);
   }
 
-  .recharts-text.recharts-cartesian-axis-tick-value {
-    fill: color(gray, 5);
-    font-size: 12px;
-    font-weight: 500;
-  }
-
-  .xAxis .recharts-text.recharts-cartesian-axis-tick-value {
+  :global .xAxis .recharts-text.recharts-cartesian-axis-tick-value {
     transform: translate(0, 6px);
   }
 
-  .recharts-cartesian-grid-horizontal line {
+  :global .recharts-cartesian-grid-horizontal line {
     stroke: color(gray, 8);
   }
 }

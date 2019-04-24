@@ -6,7 +6,7 @@ import { Empty, PanelLoading } from 'src/components';
 import { formatNumber, formatPercent } from 'src/helpers/units';
 import { safeRate } from 'src/helpers/math';
 import PercentLabel from '../PercentLabel';
-import './EngagementChart.scss';
+import styles from './EngagementChart.module.scss';
 
 // Width must be less than 100% to get ResponsiveContainer to be responsive
 const DIMENSIONS = { height: 350, width: '99%' };
@@ -36,7 +36,7 @@ export default function EngagementChart({ accepted = 0, clicks = 0, loading, ope
 
   return (
     <Panel sectioned>
-      <div className='sp-engagement-chart'>
+      <div className={styles.EngagementChart}>
         <ResponsiveContainer {...DIMENSIONS}>
           <BarChart barCategoryGap="35%" data={data} margin={MARGINS}>
             <CartesianGrid strokeDasharray="4 1" vertical={false} />
