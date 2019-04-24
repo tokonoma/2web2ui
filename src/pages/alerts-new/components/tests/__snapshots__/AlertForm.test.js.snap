@@ -167,16 +167,20 @@ exports[`Alert Form Component enabled prop should only show enabled toggle on ed
                         "value": "ALL",
                       },
                       Object {
-                        "label": "Sending Domain",
-                        "value": "sending_domain",
+                        "label": "Campaign ID",
+                        "value": "campaign_id",
                       },
                       Object {
                         "label": "IP Pool",
                         "value": "ip_pool",
                       },
                       Object {
-                        "label": "Campaign ID",
-                        "value": "campaign_id",
+                        "label": "Mailbox Provider",
+                        "value": "mb_provider",
+                      },
+                      Object {
+                        "label": "Sending Domain",
+                        "value": "sending_domain",
                       },
                     ]
                   }
@@ -365,16 +369,20 @@ exports[`Alert Form Component enabled prop should only show enabled toggle on ed
                         "value": "ALL",
                       },
                       Object {
-                        "label": "Sending Domain",
-                        "value": "sending_domain",
+                        "label": "Campaign ID",
+                        "value": "campaign_id",
                       },
                       Object {
                         "label": "IP Pool",
                         "value": "ip_pool",
                       },
                       Object {
-                        "label": "Campaign ID",
-                        "value": "campaign_id",
+                        "label": "Mailbox Provider",
+                        "value": "mb_provider",
+                      },
+                      Object {
+                        "label": "Sending Domain",
+                        "value": "sending_domain",
                       },
                     ]
                   }
@@ -586,16 +594,20 @@ exports[`Alert Form Component facet props should clear facet_value and validatio
                         "value": "ALL",
                       },
                       Object {
-                        "label": "Sending Domain",
-                        "value": "sending_domain",
+                        "label": "Campaign ID",
+                        "value": "campaign_id",
                       },
                       Object {
                         "label": "IP Pool",
                         "value": "ip_pool",
                       },
                       Object {
-                        "label": "Campaign ID",
-                        "value": "campaign_id",
+                        "label": "Mailbox Provider",
+                        "value": "mb_provider",
+                      },
+                      Object {
+                        "label": "Sending Domain",
+                        "value": "sending_domain",
                       },
                     ]
                   }
@@ -807,16 +819,20 @@ exports[`Alert Form Component facet props should clear facet_value and validatio
                         "value": "ALL",
                       },
                       Object {
-                        "label": "Sending Domain",
-                        "value": "sending_domain",
+                        "label": "Campaign ID",
+                        "value": "campaign_id",
                       },
                       Object {
                         "label": "IP Pool",
                         "value": "ip_pool",
                       },
                       Object {
-                        "label": "Campaign ID",
-                        "value": "campaign_id",
+                        "label": "Mailbox Provider",
+                        "value": "mb_provider",
+                      },
+                      Object {
+                        "label": "Sending Domain",
+                        "value": "sending_domain",
                       },
                     ]
                   }
@@ -942,16 +958,20 @@ Object {
           "value": "ALL",
         },
         Object {
-          "label": "Sending Domain",
-          "value": "sending_domain",
+          "label": "Campaign ID",
+          "value": "campaign_id",
         },
         Object {
           "label": "IP Pool",
           "value": "ip_pool",
         },
         Object {
-          "label": "Campaign ID",
-          "value": "campaign_id",
+          "label": "Mailbox Provider",
+          "value": "mb_provider",
+        },
+        Object {
+          "label": "Sending Domain",
+          "value": "sending_domain",
         },
       ]
     }
@@ -987,16 +1007,20 @@ Object {
           "value": "ALL",
         },
         Object {
-          "label": "Sending Domain",
-          "value": "sending_domain",
+          "label": "Campaign ID",
+          "value": "campaign_id",
         },
         Object {
           "label": "IP Pool",
           "value": "ip_pool",
         },
         Object {
-          "label": "Campaign ID",
-          "value": "campaign_id",
+          "label": "Mailbox Provider",
+          "value": "mb_provider",
+        },
+        Object {
+          "label": "Sending Domain",
+          "value": "sending_domain",
         },
       ]
     }
@@ -1109,16 +1133,20 @@ exports[`Alert Form Component should handle submit 1`] = `
                         "value": "ALL",
                       },
                       Object {
-                        "label": "Sending Domain",
-                        "value": "sending_domain",
+                        "label": "Campaign ID",
+                        "value": "campaign_id",
                       },
                       Object {
                         "label": "IP Pool",
                         "value": "ip_pool",
                       },
                       Object {
-                        "label": "Campaign ID",
-                        "value": "campaign_id",
+                        "label": "Mailbox Provider",
+                        "value": "mb_provider",
+                      },
+                      Object {
+                        "label": "Sending Domain",
+                        "value": "sending_domain",
                       },
                     ]
                   }
@@ -1330,16 +1358,20 @@ exports[`Alert Form Component should render the alert form component correctly 1
                         "value": "ALL",
                       },
                       Object {
-                        "label": "Sending Domain",
-                        "value": "sending_domain",
+                        "label": "Campaign ID",
+                        "value": "campaign_id",
                       },
                       Object {
                         "label": "IP Pool",
                         "value": "ip_pool",
                       },
                       Object {
-                        "label": "Campaign ID",
-                        "value": "campaign_id",
+                        "label": "Mailbox Provider",
+                        "value": "mb_provider",
+                      },
+                      Object {
+                        "label": "Sending Domain",
+                        "value": "sending_domain",
                       },
                     ]
                   }
