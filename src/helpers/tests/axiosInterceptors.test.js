@@ -26,17 +26,30 @@ describe('Sparkpost Axios error interceptor', () => {
       }
     };
   });
+
   describe('5XX errors', () => {
-    cases('should retry if it is a 5XX error', async ({ retries = 0 }) => {
+    cases('should retry if it is a 5XX error and under 3 retries', async ({ retries }) => {
       err.response.status = 500;
       err.config.retries = retries;
+      const expected = retries ? retries + 1 : 1;
       await sparkpostErrorHandler(err);
-      expect(sparkpostAxios).toHaveBeenCalledWith({ ...requestConfig, retries: retries + 1 });
+      expect(sparkpostAxios).toHaveBeenCalledWith({ ...requestConfig, retries: expected });
     }, [
-      { },
-      { retries: 0 },
-      { retries: 1 },
-      { retries: 2 }
+      { name: 'empty' },
+      { retries: 0, name: '0 retries' },
+      { retries: 1, name: '1 retry' },
+      { retries: 2, name: '2 retries' }
+    ]);
+
+    cases('should retry with different 5XX errors', async ({ status }) => {
+      err.response.status = status;
+      await sparkpostErrorHandler(err);
+      expect(sparkpostAxios).toHaveBeenCalledWith({ ...requestConfig, retries: 1 });
+    }, [
+      { status: 500, name: '500' },
+      { status: 502, name: '502' },
+      { status: 503, name: '503' },
+      { status: 504, name: '504' }
     ]);
 
     it('should not retry 5XX if it is at max retries', () => {
