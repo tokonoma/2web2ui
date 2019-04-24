@@ -9,16 +9,13 @@ Array [
   Object {
     "label": "Status",
     "sortKey": [Function],
-    "width": "150px",
   },
   Object {
     "label": "Last Updated",
     "sortKey": "last_update_time",
-    "width": "175px",
   },
   Object {
     "content": null,
-    "width": "20px",
   },
 ]
 `;
@@ -32,21 +29,17 @@ Array [
   Object {
     "label": "Status",
     "sortKey": [Function],
-    "width": "150px",
   },
   Object {
     "label": "Subaccount",
     "sortKey": [Function],
-    "width": "175px",
   },
   Object {
     "label": "Last Updated",
     "sortKey": "last_update_time",
-    "width": "175px",
   },
   Object {
     "content": null,
-    "width": "20px",
   },
 ]
 `;
@@ -82,16 +75,13 @@ exports[`renders correctly 1`] = `
         Object {
           "label": "Status",
           "sortKey": [Function],
-          "width": "150px",
         },
         Object {
           "label": "Last Updated",
           "sortKey": "last_update_time",
-          "width": "175px",
         },
         Object {
           "content": null,
-          "width": "20px",
         },
       ]
     }
@@ -313,16 +303,13 @@ exports[`renders without primary action for read-only users 1`] = `
         Object {
           "label": "Status",
           "sortKey": [Function],
-          "width": "150px",
         },
         Object {
           "label": "Last Updated",
           "sortKey": "last_update_time",
-          "width": "175px",
         },
         Object {
           "content": null,
-          "width": "20px",
         },
       ]
     }
