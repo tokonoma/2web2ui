@@ -18,7 +18,8 @@ export default class ListPage extends Component {
       header: {
         label: 'Name',
         sortKey: 'name'
-      }
+      },
+      visible: () => true
     },
     {
       component: Status,
@@ -28,7 +29,8 @@ export default class ListPage extends Component {
           resolveTemplateStatus(template).publishedWithChanges,
           template.published
         ]
-      }
+      },
+      visible: () => true
     },
     {
       component: ({ shared_with_subaccounts, subaccount_id }) => (
@@ -51,13 +53,15 @@ export default class ListPage extends Component {
       header: {
         label: 'Last Updated',
         sortKey: 'last_update_time'
-      }
+      },
+      visible: () => true
     },
     {
       component: Actions,
       header: {
         content: null
-      }
+      },
+      visible: () => true
     }
   ]
 
@@ -67,7 +71,7 @@ export default class ListPage extends Component {
 
   render() {
     const { canModify, count, error, listTemplates, loading, templates } = this.props;
-    const visibleColumns = this.columns.filter(({ visible = () => true }) => visible(this.props));
+    const visibleColumns = this.columns.filter(({ visible }) => visible(this.props));
 
     if (loading) {
       return <Loading />;
