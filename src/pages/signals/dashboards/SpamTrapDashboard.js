@@ -7,6 +7,8 @@ import SpamTrapOverview from '../containers/SpamTrapOverviewContainer';
 import FacetFilter from '../components/filters/FacetFilter';
 import DateFilter from '../components/filters/DateFilter';
 import SubaccountFilter from '../components/filters/SubaccountFilter';
+import facets from '../constants/facets';
+import _ from 'lodash';
 
 export class SpamTrapDashboard extends Component {
   componentDidMount() {
@@ -24,10 +26,10 @@ export class SpamTrapDashboard extends Component {
               <DateFilter />
             </Grid.Column>
             <SubaccountFilter />
-            <FacetFilter />
+            <FacetFilter facets={_.reject(facets, (facet) => facet.key === 'mb_provider')}/>
           </Grid>
         </Panel>
-        <SpamTrapOverview subaccounts={subaccounts} hideTitle />
+        <SpamTrapOverview subaccounts={subaccounts} hideTitle facets={_.reject(facets, (facet) => facet.key === 'mb_provider')}/>
       </Page>
     );
   }

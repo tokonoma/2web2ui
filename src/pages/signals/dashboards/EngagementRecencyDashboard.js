@@ -7,6 +7,7 @@ import EngagementRecencyOverview from '../containers/EngagementRecencyOverviewCo
 import FacetFilter from '../components/filters/FacetFilter';
 import DateFilter from '../components/filters/DateFilter';
 import SubaccountFilter from '../components/filters/SubaccountFilter';
+import facets from '../constants/facets';
 
 export class EngagementRecencyDashboard extends Component {
   componentDidMount() {
@@ -24,7 +25,7 @@ export class EngagementRecencyDashboard extends Component {
               <DateFilter />
             </Grid.Column>
             <SubaccountFilter />
-            <FacetFilter />
+            <FacetFilter facets={facets}/>
           </Grid>
         </Panel>
         <EngagementRecencyOverview subaccounts={subaccounts} hideTitle />

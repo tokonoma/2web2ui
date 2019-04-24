@@ -14,10 +14,43 @@ exports[`Signals Spam Trap Dashboard Dashboard renders page 1`] = `
         <Connect(DateFilter) />
       </Grid.Column>
       <Connect(Connect(SubaccountFilter)) />
-      <Connect(FacetFilter) />
+      <Connect(FacetFilter)
+        facets={
+          Array [
+            Object {
+              "key": "campaign_id",
+              "label": "Campaign",
+            },
+            Object {
+              "key": "ip_pool",
+              "label": "IP Pool",
+            },
+            Object {
+              "key": "sending_domain",
+              "label": "Sending Domain",
+            },
+          ]
+        }
+      />
     </Grid>
   </Panel>
   <Connect(withRouter(Connect(SpamTrapOverview)))
+    facets={
+      Array [
+        Object {
+          "key": "campaign_id",
+          "label": "Campaign",
+        },
+        Object {
+          "key": "ip_pool",
+          "label": "IP Pool",
+        },
+        Object {
+          "key": "sending_domain",
+          "label": "Sending Domain",
+        },
+      ]
+    }
     hideTitle={true}
   />
 </SignalsPage>

@@ -3,14 +3,10 @@ import classnames from 'classnames';
 import { Grid, Select, TextField } from '@sparkpost/matchbox';
 import { Search } from '@sparkpost/matchbox-icons';
 import { onEnter } from 'src/helpers/keyEvents';
-import facets from '../../constants/facets';
 import withSignalOptions from '../../containers/withSignalOptions';
 import styles from './FacetFilter.module.scss';
-
-const OPTIONS = [
-  { label: 'No Breakdown', value: '' },
-  ...facets.map(({ key, label }) => ({ label: `By ${label}`, value: key }))
-];
+import facets from '../../constants/facets';
+const initialFacets = facets;
 
 export class FacetFilter extends React.Component {
   state = {
@@ -47,8 +43,13 @@ export class FacetFilter extends React.Component {
   }
 
   render() {
-    const { signalOptions: { facet }} = this.props;
+    const { signalOptions: { facet }, facets = initialFacets } = this.props;
     const { searchTerm } = this.state;
+
+    const OPTIONS = [
+      { label: 'No Breakdown', value: '' },
+      ...facets.map(({ key, label }) => ({ label: `By ${label}`, value: key }))
+    ];
 
     return (
       <Grid.Column lg={facet ? 4 : 3} xl={facet ? 5 : 3}>
