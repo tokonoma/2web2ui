@@ -113,6 +113,11 @@ describe('Form Container: Change Plan', () => {
     expect(submitSpy).toHaveBeenCalled();
   });
 
+  it('should render error', () => {
+    wrapper.setProps({ error: { message: 'Oh no! It broke.' }});
+    expect(wrapper).toMatchSnapshot();
+  });
+
   describe('onSubmit tests', () => {
     let values;
 

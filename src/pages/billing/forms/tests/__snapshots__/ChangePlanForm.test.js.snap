@@ -108,6 +108,15 @@ exports[`Form Container: Change Plan should render 1`] = `
 </form>
 `;
 
+exports[`Form Container: Change Plan should render error 1`] = `
+<ApiErrorBanner
+  errorDetails="Oh no! It broke."
+  message="We couldn't render the page. Reload to try again."
+  reload={[Function]}
+  status="danger"
+/>
+`;
+
 exports[`Form Container: Change Plan should show saved card 1`] = `
 <form>
   <Grid>

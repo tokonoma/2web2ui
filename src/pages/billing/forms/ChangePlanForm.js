@@ -1,4 +1,4 @@
-/* eslint max-lines: ["error", 200] */
+/* eslint max-lines: ["error", 220] */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { reduxForm, formValueSelector } from 'redux-form';
@@ -14,7 +14,7 @@ import {
   currentPlanSelector, canUpdateBillingInfoSelector, selectVisiblePlans, selectAccountBilling
 } from 'src/selectors/accountBillingInfo';
 import { Panel, Grid } from '@sparkpost/matchbox';
-import { Loading, PlanPicker } from 'src/components';
+import { Loading, PlanPicker, ApiErrorBanner } from 'src/components';
 import PaymentForm from './fields/PaymentForm';
 import BillingAddressForm from './fields/BillingAddressForm';
 import Confirmation from '../components/Confirmation';
@@ -132,7 +132,19 @@ export class ChangePlanForm extends Component {
   }
 
   render() {
-    const { loading, submitting, currentPlan, selectedPlan, plans, isSelfServeBilling, billing, verifyPromoCode } = this.props;
+    const { loading, submitting, currentPlan, selectedPlan, plans, isSelfServeBilling, billing, verifyPromoCode, error } = this.props;
+
+    if (error) {
+      return (
+        <ApiErrorBanner
+          status='danger'
+          message="We couldn't render the page. Reload to try again."
+          reload={() => location.reload()}
+          errorDetails={error.message}
+        />
+      );
+    }
+
     if (loading) {
       return <Loading />;
     }
@@ -181,9 +193,10 @@ const mapStateToProps = (state, props) => {
   const { account, loading } = selectAccountBilling(state);
 
   return {
-    loading: (!account.created && loading) || (plans.length === 0 && state.billing.plansLoading),
+    loading: (!account.created && loading) || (plans.length === 0 && state.billing.plansLoading) || state.billing.countriesLoading,
     isAws: selectCondition(isAws)(state),
     account,
+    error: account.error || state.billing.error || state.billing.countriesError,
     billing: state.billing,
     canUpdateBillingInfo: canUpdateBillingInfoSelector(state),
     isSelfServeBilling: selectCondition(isSelfServeBilling)(state),
@@ -195,5 +208,5 @@ const mapStateToProps = (state, props) => {
 };
 
 const mapDispatchtoProps = { getBillingInfo, billingCreate, billingUpdate, updateSubscription, showAlert, getPlans, getBillingCountries, fetchAccount, verifyPromoCode, clearPromoCode };
-const formOptions = { form: FORMNAME, enableReinitialize: true, asyncValidate: promoCodeValidate(FORMNAME), asyncChangeFields: ['planpicker'], asyncBlurFields: ['promoCode']};
+const formOptions = { form: FORMNAME, asyncValidate: promoCodeValidate(FORMNAME), asyncChangeFields: ['planpicker'], asyncBlurFields: ['promoCode']};
 export default withRouter(connect(mapStateToProps, mapDispatchtoProps)(reduxForm(formOptions)(ChangePlanForm)));
