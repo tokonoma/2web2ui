@@ -1,26 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders columns correctly for subaccount reporting users 1`] = `
-Array [
-  Object {
-    "label": "Name",
-    "sortKey": "name",
-  },
-  Object {
-    "label": "Status",
-    "sortKey": [Function],
-  },
-  Object {
-    "label": "Last Updated",
-    "sortKey": "last_update_time",
-  },
-  Object {
-    "content": null,
-  },
-]
-`;
-
-exports[`renders columns correctly with subaccounts 1`] = `
+exports[`ListPage renders columns with all columns 1`] = `
 Array [
   Object {
     "label": "Name",
@@ -44,7 +24,7 @@ Array [
 ]
 `;
 
-exports[`renders correctly 1`] = `
+exports[`ListPage renders correctly 1`] = `
 <Page
   empty={
     Object {
@@ -106,10 +86,25 @@ exports[`renders correctly 1`] = `
     rows={
       Array [
         Object {
-          "name": "Temp 1",
+          "id": "id1",
+          "last_update_time": "2017-08-10T14:15:16+00:00",
+          "name": "subaccount template",
+          "published": true,
+          "shared_with_subaccounts": false,
+          "subaccount_id": 101,
         },
         Object {
-          "name": "Temp 2",
+          "id": "id2",
+          "last_update_time": "2017-08-10T14:15:16+00:00",
+          "name": "shared template",
+          "published": false,
+          "shared_with_subaccounts": true,
+        },
+        Object {
+          "id": "id3",
+          "last_update_time": "2017-08-10T14:15:16+00:00",
+          "name": "master template",
+          "published": false,
         },
       ]
     }
@@ -117,53 +112,7 @@ exports[`renders correctly 1`] = `
 </Page>
 `;
 
-exports[`renders errors when present 1`] = `
-<ApiErrorBanner
-  errorDetails="Uh oh! It broke. "
-  message="Sorry, we seem to have had some trouble loading your templates."
-  reload={
-    [MockFunction] {
-      "calls": Array [
-        Array [],
-      ],
-      "results": undefined,
-    }
-  }
-/>
-`;
-
-exports[`renders rows correctly with NO subaccounts 1`] = `
-Array [
-  Array [
-    <Name
-      id="id3"
-      last_update_time="2017-08-10T14:15:16+00:00"
-      name="no subs template"
-      published={true}
-    />,
-    <Status
-      id="id3"
-      last_update_time="2017-08-10T14:15:16+00:00"
-      name="no subs template"
-      published={true}
-    />,
-    <LastUpdated
-      id="id3"
-      last_update_time="2017-08-10T14:15:16+00:00"
-      name="no subs template"
-      published={true}
-    />,
-    <Actions
-      id="id3"
-      last_update_time="2017-08-10T14:15:16+00:00"
-      name="no subs template"
-      published={true}
-    />,
-  ],
-]
-`;
-
-exports[`renders rows correctly with subaccounts 1`] = `
+exports[`ListPage renders rows with all columns 1`] = `
 Array [
   Array [
     <Name
@@ -277,70 +226,4 @@ Array [
     />,
   ],
 ]
-`;
-
-exports[`renders without primary action for read-only users 1`] = `
-<Page
-  empty={
-    Object {
-      "content": <p>
-        Build, test, preview and send your transmissions.
-      </p>,
-      "image": [Function],
-      "show": false,
-      "title": "Manage your email templates",
-    }
-  }
-  title="Templates"
->
-  <TableCollection
-    columns={
-      Array [
-        Object {
-          "label": "Name",
-          "sortKey": "name",
-        },
-        Object {
-          "label": "Status",
-          "sortKey": [Function],
-        },
-        Object {
-          "label": "Last Updated",
-          "sortKey": "last_update_time",
-        },
-        Object {
-          "content": null,
-        },
-      ]
-    }
-    defaultSortColumn="last_update_time"
-    defaultSortDirection="desc"
-    filterBox={
-      Object {
-        "exampleModifiers": Array [
-          "id",
-          "name",
-        ],
-        "itemToStringKeys": Array [
-          "name",
-          "id",
-          "subaccount_id",
-        ],
-        "show": true,
-      }
-    }
-    getRowData={[Function]}
-    pagination={true}
-    rows={
-      Array [
-        Object {
-          "name": "Temp 1",
-        },
-        Object {
-          "name": "Temp 2",
-        },
-      ]
-    }
-  />
-</Page>
 `;

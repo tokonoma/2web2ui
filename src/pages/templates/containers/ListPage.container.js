@@ -12,7 +12,6 @@ function mapStateToProps(state) {
   const canModify = hasGrants('templates/modify')(state);
 
   return {
-    count: templates.length,
     templates,
     hasSubaccounts: hasSubaccounts(state),
     userAccessLevel: state.currentUser.access_level,

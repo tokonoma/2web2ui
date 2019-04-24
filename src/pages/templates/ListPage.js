@@ -34,9 +34,7 @@ export default class ListPage extends Component {
     },
     {
       component: ({ shared_with_subaccounts, subaccount_id }) => (
-        subaccount_id || shared_with_subaccounts
-          ? <SubaccountTag all={shared_with_subaccounts} id={subaccount_id} />
-          : null
+        <SubaccountTag all={shared_with_subaccounts} id={subaccount_id} />
       ),
       header: {
         label: 'Subaccount',
@@ -70,7 +68,7 @@ export default class ListPage extends Component {
   )
 
   render() {
-    const { canModify, count, error, listTemplates, loading, templates } = this.props;
+    const { canModify, error, listTemplates, loading, templates } = this.props;
     const visibleColumns = this.columns.filter(({ visible }) => visible(this.props));
 
     if (loading) {
@@ -86,7 +84,7 @@ export default class ListPage extends Component {
         )}
         title='Templates'
         empty={{
-          show: !error && count === 0,
+          show: !error && templates.length === 0,
           image: Templates,
           title: 'Manage your email templates',
           content: <p>Build, test, preview and send your transmissions.</p>

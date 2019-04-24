@@ -1,119 +1,129 @@
-import { shallow } from 'enzyme';
 import React from 'react';
-import dateMock from 'date-fns';
-import ListPage from '../ListPage';
+import { shallow } from 'enzyme';
 import { ROLES } from 'src/constants';
 
-jest.mock('date-fns');
+import ListPage from '../ListPage';
 
-const props = {
-  loading: false,
-  error: null,
-  count: 30,
-  listTemplates: jest.fn(),
-  hasSubaccounts: false,
-  templates: [
-    {
-      name: 'Temp 1'
-    },
-    {
-      name: 'Temp 2'
-    }
-  ],
-  canModify: true
-};
+describe('ListPage', () => {
+  const subject = (props = {}) => shallow(
+    <ListPage
+      canModify={true}
+      hasSubaccounts={false}
+      listTemplates={() => {}}
+      loading={false}
+      templates={[
+        {
+          published: true,
+          id: 'id1',
+          name: 'subaccount template',
+          last_update_time: '2017-08-10T14:15:16+00:00',
+          subaccount_id: 101,
+          shared_with_subaccounts: false
+        },
+        {
+          published: false,
+          id: 'id2',
+          name: 'shared template',
+          last_update_time: '2017-08-10T14:15:16+00:00',
+          shared_with_subaccounts: true
+        },
+        {
+          published: false,
+          id: 'id3',
+          name: 'master template',
+          last_update_time: '2017-08-10T14:15:16+00:00'
+        }
+      ]}
+      {...props}
+    />
+  );
 
-let wrapper;
+  it('renders correctly', () => {
+    expect(subject()).toMatchSnapshot();
+  });
 
-const renderRows = (wrapper, rows) => {
-  const getRowData = wrapper.find('TableCollection').prop('getRowData');
-  return rows.map(getRowData);
-};
+  it('loads templates on load', () => {
+    const listTemplates = jest.fn();
+    subject({ listTemplates });
+    expect(listTemplates).toHaveBeenCalled();
+  });
 
-beforeEach(() => {
-  dateMock.format = jest.fn((a) => a);
-  wrapper = shallow(<ListPage {...props} />);
-});
+  it('renders without primary action for read-only users', () => {
+    const wrapper = subject({ canModify: false });
+    expect(wrapper).toHaveProp('primaryAction', undefined);
+  });
 
-afterEach(() => {
-  jest.resetAllMocks();
-});
+  it('renders empty state', () => {
+    const wrapper = subject({ templates: []});
+    expect(wrapper).toHaveProp('empty', expect.objectContaining({ show: true }));
+  });
 
-it('renders correctly', () => {
-  expect(wrapper).toMatchSnapshot();
-  expect(props.listTemplates).toHaveBeenCalled();
-});
+  it('renders Loading', () => {
+    const wrapper = subject({ loading: true });
+    expect(wrapper.find('Loading')).toExist();
+  });
 
-it('renders without primary action for read-only users', () => {
-  wrapper.setProps({ canModify: false });
-  expect(wrapper).toMatchSnapshot();
-});
+  describe('renders columns', () => {
+    it('with all columns', () => {
+      const wrapper = subject({ hasSubaccounts: true });
+      expect(wrapper.find('TableCollection').prop('columns')).toMatchSnapshot();
+    });
 
-it('renders columns correctly with subaccounts', () => {
-  wrapper.setProps({ hasSubaccounts: true });
-  expect(wrapper.find('TableCollection').props().columns).toMatchSnapshot();
-});
+    it('without subaccount column for reporting users', () => {
+      const wrapper = subject({ hasSubaccounts: true, userAccessLevel: ROLES.SUBACCOUNT_REPORTING });
+      const columns = wrapper.find('TableCollection').prop('columns');
 
-it('renders columns correctly for subaccount reporting users', () => {
-  wrapper.setProps({ hasSubaccounts: true, userAccessLevel: ROLES.SUBACCOUNT_REPORTING });
-  expect(wrapper.find('TableCollection').props().columns).toMatchSnapshot();
-});
+      expect(columns.find((column) => column.label === 'Subaccount')).toBeUndefined();
+    });
 
-it('renders rows correctly with subaccounts', () => {
-  const rows = [
-    {
-      published: true,
-      id: 'id1',
-      name: 'subaccount template',
-      last_update_time: '2017-08-10T14:15:16+00:00',
-      subaccount_id: 101,
-      shared_with_subaccounts: false
-    },
-    {
-      published: false,
-      id: 'id2',
-      name: 'shared template',
-      last_update_time: '2017-08-10T14:15:16+00:00',
-      shared_with_subaccounts: true
-    },
-    {
-      published: false,
-      id: 'id3',
-      name: 'master template',
-      last_update_time: '2017-08-10T14:15:16+00:00'
-    }
-  ];
+    it('without subaccount column for account without subaccounts', () => {
+      const wrapper = subject({ hasSubaccounts: false });
+      const columns = wrapper.find('TableCollection').prop('columns');
 
-  wrapper.setProps({ hasSubaccounts: true });
-  const result = renderRows(wrapper, rows);
-  expect(result).toMatchSnapshot();
-});
+      expect(columns.find((column) => column.label === 'Subaccount')).toBeUndefined();
+    });
+  });
 
-it('renders rows correctly with NO subaccounts', () => {
-  const rows = [
-    {
-      published: true,
-      id: 'id3',
-      name: 'no subs template',
-      last_update_time: '2017-08-10T14:15:16+00:00'
-    }
-  ];
+  describe('renders error banner', () => {
+    it('with error details', () => {
+      const wrapper = subject({ error: new Error('Oh no!'), templates: []});
+      expect(wrapper.find('ApiErrorBanner')).toHaveProp('errorDetails', 'Oh no!');
+    });
 
-  const result = renderRows(wrapper, rows);
-  expect(result).toMatchSnapshot();
-});
+    it('with reload button', () => {
+      const listTemplates = jest.fn();
+      const wrapper = subject({
+        error: new Error('Oh no!'),
+        listTemplates,
+        templates: []
+      });
 
-it('renders empty state', () => {
-  wrapper.setProps({ count: 0 });
-  expect(wrapper).toHaveProp('empty', expect.objectContaining({ show: true }));
-});
+      expect(wrapper.find('ApiErrorBanner')).toHaveProp('reload', listTemplates);
+    });
+  });
 
-it('renders Loading', () => {
-  wrapper.setProps({ loading: true });
-  expect(wrapper.find('Loading')).toHaveLength(1);
-});
+  describe('renders rows', () => {
+    const renderRows = (props = {}) => {
+      const wrapper = subject(props);
+      const getRowData = wrapper.find('TableCollection').prop('getRowData');
+      const rows = wrapper.find('TableCollection').prop('rows');
 
-it('renders errors when present', () => {
-  wrapper.setProps({ count: 0, error: { message: 'Uh oh! It broke. ' }});
-  expect(wrapper.find('ApiErrorBanner')).toMatchSnapshot();
+      return rows.map(getRowData);
+    };
+
+    it('with all columns', () => {
+      const rows = renderRows({ hasSubaccounts: true });
+      expect(rows).toMatchSnapshot();
+    });
+
+    it('without subaccount column for reporting users', () => {
+      const rows = renderRows({ hasSubaccounts: true, userAccessLevel: ROLES.SUBACCOUNT_REPORTING });
+      expect(rows[0]).toHaveLength(4);
+    });
+
+    it('without subaccount column for account without subaccounts', () => {
+      const rows = renderRows({ hasSubaccounts: false });
+      expect(rows[0]).toHaveLength(4);
+    });
+  });
 });
