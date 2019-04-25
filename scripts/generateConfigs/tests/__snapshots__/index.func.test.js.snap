@@ -236,7 +236,7 @@ Object {
       "mxValue": "smtp.eu.sparkpostmail.com",
     },
     "brightback": Object {
-      "freePlan": "free500-SPCEU-1018",
+      "freePlan": "free500-SPCEU-0419",
     },
     "crossLinkTenant": "spc",
     "environment": "production",
