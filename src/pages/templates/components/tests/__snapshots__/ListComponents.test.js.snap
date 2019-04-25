@@ -225,3 +225,13 @@ exports[`Template List Components Status should render unpublished changes 1`] =
   </Tag>
 </Tooltip>
 `;
+
+exports[`Template List Components Subaccount should render 1`] = `
+<SubaccountTag
+  all={false}
+  id={123}
+  isDefault={false}
+  master={false}
+  receiveAll={false}
+/>
+`;

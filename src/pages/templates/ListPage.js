@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { Page } from '@sparkpost/matchbox';
-import { SubaccountTag, TableCollection, ApiErrorBanner, Loading } from 'src/components';
+import { TableCollection, ApiErrorBanner, Loading } from 'src/components';
 import { Templates } from 'src/components/images';
 import PageLink from 'src/components/pageLink';
 import { ROLES } from 'src/constants';
 import { resolveTemplateStatus } from 'src/helpers/templates';
-import { Name, Status, Actions, LastUpdated } from './components/ListComponents';
+import { Actions, LastUpdated, Name, Status, Subaccount } from './components/ListComponents';
 
 export default class ListPage extends Component {
   componentDidMount() {
@@ -33,9 +33,7 @@ export default class ListPage extends Component {
       visible: () => true
     },
     {
-      component: ({ shared_with_subaccounts, subaccount_id }) => (
-        <SubaccountTag all={shared_with_subaccounts} id={subaccount_id} />
-      ),
+      component: Subaccount,
       header: {
         label: 'Subaccount',
         sortKey: ({ subaccount_id, shared_with_subaccounts }) => (

@@ -1,13 +1,14 @@
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
-import { setSubaccountQuery } from 'src/helpers/subaccounts';
 import { Popover, Button, ActionList, Tag, Tooltip } from '@sparkpost/matchbox';
 import { MoreHoriz } from '@sparkpost/matchbox-icons';
+import { SubaccountTag } from 'src/components/tags';
 import { formatDateTime } from 'src/helpers/date';
+import { setSubaccountQuery } from 'src/helpers/subaccounts';
 import { resolveTemplateStatus } from 'src/helpers/templates';
 import styles from './ListComponents.module.scss';
 
-const Name = ({ name, id, subaccount_id, ...rowData }) => {
+export const Name = ({ name, id, subaccount_id, ...rowData }) => {
   const { published } = resolveTemplateStatus(rowData);
   return (
     <Fragment>
@@ -21,7 +22,7 @@ const Name = ({ name, id, subaccount_id, ...rowData }) => {
   );
 };
 
-const Status = (rowData) => {
+export const Status = (rowData) => {
   const { published, publishedWithChanges } = resolveTemplateStatus(rowData);
 
   if (published) {
@@ -41,7 +42,7 @@ const Status = (rowData) => {
   return <Tag>Draft</Tag>;
 };
 
-const Actions = ({ id, subaccount_id, ...rowData }) => {
+export const Actions = ({ id, subaccount_id, ...rowData }) => {
   const { published, publishedWithChanges, draft } = resolveTemplateStatus(rowData);
 
   const actions = [
@@ -75,11 +76,8 @@ const Actions = ({ id, subaccount_id, ...rowData }) => {
   );
 };
 
-const LastUpdated = ({ last_update_time }) => <p className={styles.LastUpdated}>{formatDateTime(last_update_time)}</p>;
+export const LastUpdated = ({ last_update_time }) => <p className={styles.LastUpdated}>{formatDateTime(last_update_time)}</p>;
 
-export {
-  Name,
-  Status,
-  Actions,
-  LastUpdated
-};
+export const Subaccount = ({ shared_with_subaccounts, subaccount_id }) => (
+  <SubaccountTag all={shared_with_subaccounts} id={subaccount_id} />
+);

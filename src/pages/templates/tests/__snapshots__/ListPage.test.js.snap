@@ -131,7 +131,7 @@ Array [
       shared_with_subaccounts={false}
       subaccount_id={101}
     />,
-    <component
+    <Subaccount
       id="id1"
       last_update_time="2017-08-10T14:15:16+00:00"
       name="subaccount template"
@@ -171,7 +171,7 @@ Array [
       published={false}
       shared_with_subaccounts={true}
     />,
-    <component
+    <Subaccount
       id="id2"
       last_update_time="2017-08-10T14:15:16+00:00"
       name="shared template"
@@ -206,7 +206,7 @@ Array [
       name="master template"
       published={false}
     />,
-    <component
+    <Subaccount
       id="id3"
       last_update_time="2017-08-10T14:15:16+00:00"
       name="master template"
