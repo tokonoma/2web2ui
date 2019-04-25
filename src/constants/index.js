@@ -131,7 +131,7 @@ export const ANALYTICS_WHITELISTED_FORMS = [
 export const ROLES = {
   ADMIN: 'admin',
   DEVELOPER: 'developer',
-  TEMPLATES: 'email',
+  TEMPLATES: 'templates',
   REPORTING: 'reporting',
   SUBACCOUNT_REPORTING: 'subaccount_reporting',
   SUPERUSER: 'superuser'

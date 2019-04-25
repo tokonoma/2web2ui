@@ -1,13 +1,14 @@
 import sparkpostApiRequest from './helpers/sparkpostApiRequest';
 import setSubaccountHeader from 'src/actions/helpers/setSubaccountHeader';
 import { showAlert } from './globalAlert';
+import { unformatRole } from 'src/helpers/userRoles';
 import ErrorTracker from 'src/helpers/errorTracker';
 
 export function inviteUser(email, access_level, subaccount) {
   const action = {
     type: 'INVITE_USER',
     meta: {
-      data: { email, access_level },
+      data: { email, access_level: unformatRole(access_level) },
       method: 'POST',
       url: '/v1/users/invite',
       headers: setSubaccountHeader(subaccount)
@@ -46,6 +47,9 @@ export function listUsers() {
 }
 
 export function updateUser(username, data) {
+  if (data.access_level) {
+    data.access_level = unformatRole(data.access_level);
+  }
   const action = {
     type: 'UPDATE_USER',
     meta: {

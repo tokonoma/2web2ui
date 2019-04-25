@@ -1,3 +1,4 @@
+import { formatRole } from 'src/helpers/userRoles';
 const initialState = {
   grants: [],
   verifyingEmail: null,
@@ -12,7 +13,8 @@ const initialState = {
 export default (state = initialState, { type, payload, meta }) => {
   switch (type) {
     case 'GET_CURRENT_USER_SUCCESS':
-      return { ...state, ...payload, cookie_consent: !!payload.cookie_consent };
+
+      return { ...state, ...payload, access_level: formatRole(payload.access_level), cookie_consent: !!payload.cookie_consent };
 
     case 'GET_GRANTS_SUCCESS':
       return { ...state, grants: payload };
