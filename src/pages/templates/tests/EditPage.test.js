@@ -91,8 +91,6 @@ describe('Template EditPage', () => {
     it('should handle success', async () => {
       wrapper.setProps({ update: jest.fn(() => Promise.resolve()) });
       await wrapper.instance().handleSave('values');
-      expect(props.getDraft).toHaveBeenCalledWith('id', 101);
-      expect(props.getTestData).toHaveBeenCalledWith({ id: 'id', mode: 'draft' });
       expect(props.showAlert).toHaveBeenCalledWith({ type: 'success', message: 'Template saved' });
     });
   });
