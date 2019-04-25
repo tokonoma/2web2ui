@@ -4,7 +4,7 @@
   position: relative; // for the completion rate
 
   // hide the top grid line
-  .recharts-wrapper .recharts-cartesian-grid-horizontal line:last-child {
+  :global .recharts-wrapper .recharts-cartesian-grid-horizontal line:last-child {
     stroke-opacity: 0;
   }
 
