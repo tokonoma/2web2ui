@@ -1,6 +1,6 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import { Name, Actions, Status, LastUpdated } from '../ListComponents';
+import { Name, Actions, Status, LastUpdated, Subaccount } from '../ListComponents';
 
 describe('Template List Components', () => {
   let wrapper;
@@ -52,6 +52,13 @@ describe('Template List Components', () => {
   describe('LastUpdated', () => {
     it('should render', () => {
       expect(shallow(<LastUpdated last_update_time='2017-08-10T14:15:16+00:00' />)).toMatchSnapshot();
+    });
+  });
+
+  describe('Subaccount', () => {
+    it('should render', () => {
+      const wrapper = shallow(<Subaccount shared_with_subaccounts={false} subaccount_id={123} />);
+      expect(wrapper).toMatchSnapshot();
     });
   });
 });
