@@ -52,6 +52,7 @@ export default async function mountRoute(route, { authenticated = true } = {}) {
     find: wrapper.find.bind(wrapper),
     simulate: (...rest) => simulate(wrapper, ...rest),
     forceUpdate: (...rest) => forceUpdate(wrapper, ...rest),
+    mockApiCalls: axiosMock.mock.calls,
     axiosMock
   };
 }
