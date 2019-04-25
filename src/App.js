@@ -1,5 +1,5 @@
 import React from 'react';
-import { PublicRoute, ProtectedRoute, AuthenticationGate, SuspensionAlerts } from 'src/components/auth';
+import { AuthenticationGate, SuspensionAlerts } from 'src/components/auth';
 import { CookieConsent, GlobalAlertWrapper, BoomerangBanner, SiftScience } from 'src/components';
 import Poll from 'src/context/Poll';
 import Support from 'src/components/support/Support';
@@ -7,24 +7,20 @@ import GoogleTagManager from 'src/components/googleTagManager/GoogleTagManager';
 import Pendo from 'src/components/pendo/Pendo';
 import Layout from 'src/components/layout/Layout';
 import ErrorBoundary from 'src/components/errorBoundaries/ErrorBoundary';
-import routes from 'src/config/routes';
+import AppRoutes from 'src/components/appRoutes';
+
 import config from 'src/config';
 
-import {
-  BrowserRouter as Router,
-  Redirect,
-  Route,
-  Switch
-} from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 
 const reloadApp = () => {
   window.location.reload(true);
 };
 
-const App = () => (
+const App = ({ RouterComponent = BrowserRouter }) => (
   <ErrorBoundary onCtaClick={reloadApp} ctaLabel='Reload Page'>
     <Poll>
-      <Router>
+      <RouterComponent>
         <div>
           {config.siftScience && <SiftScience config={config.siftScience} />}
           <BoomerangBanner />
@@ -34,30 +30,12 @@ const App = () => (
           <SuspensionAlerts />
           <CookieConsent />
           <Layout>
-            <Switch>
-              {
-                routes.map((route) => {
-                  const MyRoute = route.public ? PublicRoute : ProtectedRoute;
-
-                  route.exact = !(route.exact === false); // this makes exact default to true
-
-                  if (route.redirect) {
-                    return (
-                      <Route key={route.path} exact path={route.path} render={({ location }) => (
-                        <Redirect to={{ ...location, pathname: route.redirect }} />
-                      )} />
-                    );
-                  }
-
-                  return <MyRoute key={route.path} {...route} />;
-                })
-              }
-            </Switch>
+            <AppRoutes />
           </Layout>
           <Support />
           <GlobalAlertWrapper />
         </div>
-      </Router>
+      </RouterComponent>
     </Poll>
   </ErrorBoundary>
 );

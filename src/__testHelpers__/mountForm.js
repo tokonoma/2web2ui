@@ -5,12 +5,12 @@ import configureStore from 'src/store';
 import { Provider } from 'react-redux';
 import _ from 'lodash';
 import axios from 'axios';
-import getFiller from './fill';
+import getFiller from 'src/__testHelpers__/fill';
+import asyncFlush from 'src/__testHelpers__/asyncFlush';
 
 // prevent problems with trying to load google analytics stuff
 jest.mock('src/helpers/analytics');
 
-export const asyncFlush = () => new Promise((resolve) => setImmediate(resolve));
 
 export const login = (store) => store.dispatch({
   type: 'LOGIN_SUCCESS',
@@ -23,7 +23,7 @@ export const setReady = (store) => store.dispatch({
   type: 'ACCESS_CONTROL_READY'
 });
 
-export async function setupForm(tree, { authenticated = true } = { }) {
+async function mountForm(tree, { authenticated = true } = { }) {
   const store = configureStore();
   const axiosMock = axios.create();
 
@@ -60,3 +60,5 @@ export async function setupForm(tree, { authenticated = true } = { }) {
     debug: (path = 'form') => console.log(JSON.stringify(_.get(store.getState(), path), null, 2))
   };
 }
+
+export default mountForm;
