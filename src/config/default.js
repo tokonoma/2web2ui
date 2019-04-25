@@ -108,7 +108,7 @@ const config = (identifier) => ({
       billing_url: '/account/billing/plan' // Billing URL to direct end-users to enter coupon code or other billing changes
     },
     freePlan: 'free500-0419',
-    enabled: true
+    enabled: false
   },
   smtpAuth: {
     host: `${identifier}.smtp.e.sparkpost.com`,
