@@ -1,7 +1,7 @@
 import React from 'react';
 import { act } from 'react-dom/test-utils';
 import { mount } from 'enzyme';
-import useTabs from './useTabs';
+import useTabs from '../useTabs';
 
 describe('useTabs', () => {
   const HoodedComponent = (props) => {
