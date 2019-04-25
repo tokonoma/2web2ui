@@ -18,9 +18,7 @@ Array [
     "label": "Last Updated",
     "sortKey": "last_update_time",
   },
-  Object {
-    "content": null,
-  },
+  null,
 ]
 `;
 
@@ -60,9 +58,7 @@ exports[`ListPage renders correctly 1`] = `
           "label": "Last Updated",
           "sortKey": "last_update_time",
         },
-        Object {
-          "content": null,
-        },
+        null,
       ]
     }
     defaultSortColumn="last_update_time"

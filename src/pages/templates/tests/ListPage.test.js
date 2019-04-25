@@ -73,14 +73,14 @@ describe('ListPage', () => {
       const wrapper = subject({ hasSubaccounts: true, userAccessLevel: ROLES.SUBACCOUNT_REPORTING });
       const columns = wrapper.find('TableCollection').prop('columns');
 
-      expect(columns.find((column) => column.label === 'Subaccount')).toBeUndefined();
+      expect(columns.find((column) => column && column.label === 'Subaccount')).toBeUndefined();
     });
 
     it('without subaccount column for account without subaccounts', () => {
       const wrapper = subject({ hasSubaccounts: false });
       const columns = wrapper.find('TableCollection').prop('columns');
 
-      expect(columns.find((column) => column.label === 'Subaccount')).toBeUndefined();
+      expect(columns.find((column) => column && column.label === 'Subaccount')).toBeUndefined();
     });
   });
 

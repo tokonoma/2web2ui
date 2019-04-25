@@ -54,9 +54,7 @@ export default class ListPage extends Component {
     },
     {
       component: Actions,
-      header: {
-        content: null
-      },
+      header: null,
       visible: () => true
     }
   ]
