@@ -17,6 +17,8 @@ They are also slow to execute so we must balance our func and unit test suites a
 
 ### How To Write Functional Tests
 
+**Important**: Put each functional test in a separate file to avoid sharing DOM/React state between tests. Jest maintains a separate JSDOM instance for each file but not each test, and [there is no straightforward way to reset JSDOM between tests](https://github.com/facebook/jest/issues/1224).
+
 Here's a worked example:
 
 ```js
