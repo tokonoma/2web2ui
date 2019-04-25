@@ -111,4 +111,33 @@ describe('Template EditPage', () => {
       expect(props.history.push).toHaveBeenCalledWith('/templates/preview/id?subaccount=101');
     });
   });
+
+  describe('when submitting', () => {
+    const findSecondaryAction = (content) => (
+      wrapper.prop('secondaryActions').find((action) => action.content === content)
+    );
+
+    beforeEach(() => {
+      wrapper.setProps({ submitting: true });
+    });
+
+    it('disables primary action button', () => {
+      expect(wrapper).toHaveProp('primaryAction', expect.objectContaining({ disabled: true }));
+    });
+
+    it('disables save action button', () => {
+      const action = findSecondaryAction('Save as Draft');
+      expect(action).toHaveProperty('disabled', true);
+    });
+
+    it('disables delete action button', () => {
+      const action = findSecondaryAction('Delete');
+      expect(action).toHaveProperty('disabled', true);
+    });
+
+    it('disables duplicate action button', () => {
+      const action = findSecondaryAction('Duplicate');
+      expect(action).toHaveProperty('disabled', true);
+    });
+  });
 });

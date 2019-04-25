@@ -85,14 +85,20 @@ export default class EditPage extends Component {
       },
       {
         content: 'Save as Draft',
-        onClick: handleSubmit(this.handleSave),
         disabled: submitting,
+        onClick: handleSubmit(this.handleSave),
         visible: canModify
       },
-      { content: 'Delete', onClick: this.handleDeleteModalToggle, visible: canModify },
+      {
+        content: 'Delete',
+        disabled: submitting,
+        onClick: this.handleDeleteModalToggle,
+        visible: canModify
+      },
       {
         content: 'Duplicate',
         component: Link,
+        disabled: submitting,
         to: `/templates/create/${match.params.id}`,
         visible: canModify
       },
