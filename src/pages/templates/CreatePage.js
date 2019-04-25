@@ -47,14 +47,14 @@ export default class CreatePage extends Component {
       <Page
         primaryAction={primaryAction}
         breadcrumbAction={backAction}
-        title={cloneId ? 'Duplicate Template' : 'New Template'}>
-
+        title={cloneId ? 'Duplicate Template' : 'New Template'}
+      >
         <Grid>
           <Grid.Column xs={12} lg={4}>
             <Form newTemplate name={formName} subaccountId={subaccountId}/>
           </Grid.Column>
           <Grid.Column xs={12} lg={8}>
-            <ContentEditor action={<ImportSnippetLink />} />
+            <ContentEditor action={<ImportSnippetLink />} contentOnly={true} />
           </Grid.Column>
         </Grid>
       </Page>
