@@ -9,9 +9,6 @@ const productionConfig = {
       appID: 'SFXAWCYDV8',
       index: 'production_site_posts_support_article'
     }
-  },
-  brightback: {
-    enabled: true
   }
 };
 
