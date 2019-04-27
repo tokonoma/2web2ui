@@ -1,5 +1,5 @@
 import cases from 'jest-in-case';
-import templatesReducer from '../templates';
+import templatesReducer, { initialState } from '../templates';
 
 const TEST_CASES = {
   'stores draft': {
@@ -45,9 +45,39 @@ const TEST_CASES = {
       from: { name: 'unnamed', email: 'me@domain.com' }
     },
     type: 'GET_TEMPLATE_PREVIEW_SUCCESS'
+  },
+  'stores updated draft': {
+    type: 'UPDATE_TEMPLATE_SUCCESS',
+    meta: {
+      context: {
+        id: 'test-template'
+      },
+      data: {
+        content: {
+          subject: 'Test Template',
+          html: '<h1>Updated Test Template</h1>',
+          from: {
+            name: '',
+            email: 'test@example.com'
+          }
+        }
+      }
+    },
+    state: {
+      ...initialState,
+      byId: {
+        'test-template': {
+          draft: {
+            content: {
+              html: '<h1>Test Template</h1>'
+            }
+          }
+        }
+      }
+    }
   }
 };
 
-cases('Template reducer', (action) => {
-  expect(templatesReducer(undefined, action)).toMatchSnapshot();
+cases('Template reducer', ({ state, ...action }) => {
+  expect(templatesReducer(state, action)).toMatchSnapshot();
 }, TEST_CASES);

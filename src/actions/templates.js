@@ -117,7 +117,10 @@ export function update(data, subaccountId, params = {}) {
           content: shapeContent(content)
         },
         params,
-        headers: setSubaccountHeader(subaccountId)
+        headers: setSubaccountHeader(subaccountId),
+        context: {
+          id
+        }
       }
     }));
   };

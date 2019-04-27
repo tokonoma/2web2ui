@@ -223,6 +223,9 @@ Array [
   [Function],
   Object {
     "meta": Object {
+      "context": Object {
+        "id": "id",
+      },
       "data": Object {
         "content": Object {},
         "form": "data",
