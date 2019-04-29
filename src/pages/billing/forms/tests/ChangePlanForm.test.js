@@ -86,15 +86,6 @@ describe('Form Container: Change Plan', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should handle toggle', () => {
-    wrapper.setProps({ canUpdateBillingInfo: true });
-    expect(wrapper.find('CardSummary')).toExist();
-    expect(wrapper.find('Connect(PaymentForm)')).not.toExist();
-    wrapper.setState({ useSavedCC: false });
-    expect(wrapper.find('CardSummary')).not.toExist();
-    expect(wrapper.find('Connect(PaymentForm)')).toExist();
-  });
-
   it('should not render payment form if selecting free', () => {
     wrapper.setProps({ selectedPlan: { isFree: true }});
     expect(wrapper.find('CardSummary')).not.toExist();
