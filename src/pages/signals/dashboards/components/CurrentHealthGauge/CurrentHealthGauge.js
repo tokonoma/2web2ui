@@ -2,15 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { getCaretProps } from 'src/helpers/signals';
 import { selectCurrentHealthScoreDashboard } from 'src/selectors/signals';
-import { Panel, Tooltip } from '@sparkpost/matchbox';
-import { InfoOutline } from '@sparkpost/matchbox-icons';
+import { Panel } from '@sparkpost/matchbox';
 import { PanelLoading } from 'src/components';
 import Callout from 'src/components/callout';
 import { formatDate } from 'src/helpers/date';
 import { FORMATS } from 'src/constants';
 import Gauge from './Gauge';
 import MetricDisplay from '../MetricDisplay/MetricDisplay';
-import { HEALTH_SCORE_INFO } from '../../../constants/info';
 import thresholds from '../../../constants/healthScoreThresholds';
 
 import _ from 'lodash';
@@ -58,16 +56,7 @@ export function CurrentHealthGauge(props) {
   return (
     <Panel sectioned>
       <div className={styles.Content}>
-        <h2 className={styles.Header}>
-          {title}
-          <Tooltip
-            children={<InfoOutline className={styles.TooltipIcon} size={18} />}
-            content={HEALTH_SCORE_INFO}
-            dark
-            horizontalOffset='-1rem'
-            right
-          />
-        </h2>
+        <h2 className={styles.Header}>{title}</h2>
         {noData && <div><Callout height='auto'>Current Health Score Not Available</Callout></div>}
         {!noData && (
           <>

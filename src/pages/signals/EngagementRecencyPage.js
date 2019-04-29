@@ -9,6 +9,7 @@ import Callout from 'src/components/callout';
 import ChartHeader from './components/ChartHeader';
 import DateFilter from './components/filters/DateFilter';
 import EngagementRecencyActions from './components/actionContent/EngagementRecencyActions';
+import InfoTooltip from './components/InfoTooltip';
 import Legend from './components/charts/legend/Legend';
 import OtherChartsHeader from './components/OtherChartsHeader';
 import Page from './components/SignalsPage';
@@ -130,7 +131,12 @@ export class EngagementRecencyPage extends Component {
     return (
       <Page
         breadcrumbAction={{ content: 'Back to Overview', to: '/signals', component: Link }}
-        dimensionPrefix='Engagement Recency'
+        dimensionPrefix={
+          <>
+            Engagement Recency
+            <InfoTooltip content={ENGAGEMENT_RECENCY_INFO} />
+          </>
+        }
         facet={facet}
         facetId={facetId}
         subaccountId={subaccountId}
