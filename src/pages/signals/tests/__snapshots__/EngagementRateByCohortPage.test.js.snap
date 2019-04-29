@@ -45,7 +45,7 @@ exports[`Signals Engagement Rate By Cohort Page bar chart props renders tooltip 
     description="365+ days since last engagement"
     key="uneng"
     label="Never Engaged"
-    value="10%"
+    value="11.1%"
   />
 </Fragment>
 `;
