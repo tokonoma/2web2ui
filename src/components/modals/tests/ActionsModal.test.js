@@ -54,8 +54,8 @@ describe('ActionsModal', () => {
     expect(onClick).toHaveBeenCalled();
   });
 
-  it('renders disabled buttons when confirming', () => {
-    const wrapper = subject({ isConfirming: true });
+  it('renders disabled buttons when pending', () => {
+    const wrapper = subject({ isPending: true });
     expect(wrapper.find('Button[disabled=true]')).toHaveLength(1);
   });
 });

@@ -8,9 +8,9 @@ import styles from './ActionsModal.module.scss';
 const ActionsModal = ({
   actions,
   content,
-  isConfirming,
   isLoading,
   isOpen,
+  isPending,
   onCancel,
   title
 }) => (
@@ -31,7 +31,7 @@ const ActionsModal = ({
                 {actions.map((action, index) => (
                   <Button
                     className={styles.ActionButton}
-                    disabled={isConfirming}
+                    disabled={isPending}
                     key={index}
                     name="action-modal-button"
                     onClick={action.onClick}
@@ -43,7 +43,7 @@ const ActionsModal = ({
               </div>
               {onCancel && (
                 <Button
-                  disabled={isConfirming}
+                  disabled={isPending}
                   name="action-cancel-modal-button"
                   onClick={onCancel}
                 >
@@ -66,9 +66,9 @@ ActionsModal.propTypes = {
     })
   ).isRequired,
   content: PropTypes.node.isRequired,
-  isConfirming: PropTypes.bool,
   isLoading: PropTypes.bool,
   isOpen: PropTypes.bool,
+  isPending: PropTypes.bool,
   onCancel: PropTypes.func,
   title: PropTypes.string
 };
