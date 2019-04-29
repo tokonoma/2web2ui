@@ -5,7 +5,7 @@ import ActionsModal from '../ActionsModal';
 describe('ActionsModal', () => {
   const subject = (props = {}) => shallow(
     <ActionsModal
-      actions={[{ content: 'Do It', onClick: () => {} }]}
+      actions={[{ content: 'Do It', onClick: () => {}, primary: true }]}
       content="Modal Content"
       title="Modal Title"
       {...props}
@@ -47,7 +47,7 @@ describe('ActionsModal', () => {
 
   it('calls onClick when action is clicked', () => {
     const onClick = jest.fn();
-    const wrapper = subject({ actions: [{ content: 'Example', onClick }]});
+    const wrapper = subject({ actions: [{ content: 'Example', onClick, primary: true }]});
 
     wrapper.find('Button[primary=true]').simulate('click');
 
@@ -57,5 +57,10 @@ describe('ActionsModal', () => {
   it('renders disabled buttons when pending', () => {
     const wrapper = subject({ isPending: true });
     expect(wrapper.find('Button[disabled=true]')).toHaveLength(1);
+  });
+
+  it('renders destructive button', () => {
+    const wrapper = subject({ actions: [{ content: 'Delete', destructive: true, onClick: () => {} }]});
+    expect(wrapper.find('Button[destructive=true]')).toHaveLength(1);
   });
 });

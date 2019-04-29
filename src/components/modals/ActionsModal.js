@@ -28,16 +28,15 @@ const ActionsModal = ({
           <Panel.Section>
             <div className={styles.Buttons}>
               <div>
-                {actions.map((action, index) => (
+                {actions.map(({ content, ...action }, index) => (
                   <Button
+                    {...action}
                     className={styles.ActionButton}
                     disabled={isPending}
                     key={index}
                     name="action-modal-button"
-                    onClick={action.onClick}
-                    primary={true}
                   >
-                    {action.content}
+                    {content}
                   </Button>
                 ))}
               </div>
