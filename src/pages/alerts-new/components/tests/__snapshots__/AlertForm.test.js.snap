@@ -843,12 +843,8 @@ exports[`Alert Form Component facet props should clear facet_value and validatio
               helpText={null}
               items={
                 Array [
-                  Object {
-                    "id": "someIpPool",
-                  },
-                  Object {
-                    "id": "someOtherIpPool",
-                  },
+                  "someIpPool",
+                  "someOtherIpPool",
                 ]
               }
               name="facet_value"
@@ -980,12 +976,8 @@ Object {
   "disabled": false,
   "helpText": null,
   "items": Array [
-    Object {
-      "id": "someIpPool",
-    },
-    Object {
-      "id": "someOtherIpPool",
-    },
+    "someIpPool",
+    "someOtherIpPool",
   ],
   "name": "facet_value",
   "placeholder": "",

@@ -8,14 +8,8 @@ jest.mock('lodash/debounce', () => jest.fn((fn) => {
 }));
 
 describe('MultiFacet', () => {
-  const subject = (props = {}) => shallow(
+  const subject = (props = { items: ['apples','apricot','aubergine','bananas']}) => shallow(
     <MultiFacet
-      items={[
-        { domain: 'apples.com' },
-        { domain: 'apricot.com' },
-        { domain: 'aubergine.com' },
-        { domain: 'bananas.com' }
-      ]}
       onChange={jest.fn()}
       value="app"
       {...props}
@@ -50,38 +44,31 @@ describe('MultiFacet', () => {
 
   it.each([
     ['matches on value change', {
-      inputValue: 'app',
+      changes: { inputValue: 'app' },
       matched: [
-        'apples.com'
+        'apples'
       ]
     }],
     ['excludes an exact match', {
-      inputValue: 'bananas.com',
+      changes: { inputValue: 'bananas' },
       matched: []
     }],
-    ['reset matches when value is missing an at sign', {
-      initialMatches: ['bananas.com'],
-      inputValue: '',
-      matched: []
+    ['reset matches when value is empty', {
+      changes: { inputValue: '' },
+      matched: ['apples','apricot','aubergine','bananas']
     }]
-  ])('%s', (testName, { initialMatches, inputValue, matched }) => {
+  ])('%s', (testName, { initialMatches, changes, matched }) => {
+    const setHighlightedIndex = jest.fn();
     const wrapper = subject();
+    const downshift = { setHighlightedIndex };
 
     if (initialMatches) {
       wrapper.setState({ matches: initialMatches });
     }
 
-    wrapper.simulate('inputValueChange', inputValue);
+    wrapper.simulate('stateChange', changes, downshift);
 
     expect(wrapper.shallow().find('MultiFacetMenu')).toHaveProp('items', matched);
-  });
-
-  it('truncates matches to top 100', () => {
-    const items = Array.from(Array(110)).map((_, index) => ({ domain: `example${index}.com` }));
-    const wrapper = subject({ items });
-    wrapper.simulate('inputValueChange', 'exa');
-
-    expect(wrapper.state('matches')).toHaveLength(100);
   });
 
   it('cancels debounced updates when unmounted', () => {

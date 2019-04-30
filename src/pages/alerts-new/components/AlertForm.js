@@ -16,6 +16,8 @@ import { COMPARATOR } from '../constants/comparator';
 import { defaultFormValues } from '../constants/defaultFormValues';
 import { listPools } from 'src/actions/ipPools';
 import MultiFacetWrapper from './MultiFacetWrapper';
+import { MB_PROVIDERS } from '../constants/mbProviders';
+import _ from 'lodash';
 
 // Helpers & Validation
 import { domain, required, integer, minNumber, maxNumber, maxLength, numberBetween } from 'src/helpers/validation';
@@ -174,8 +176,8 @@ export class AlertForm extends Component {
                         validate={required}
                       />
                     }
-                    component={facet_name === 'ip_pool' ? MultiFacetWrapper : TextFieldWrapper}
-                    items={(facet_name === 'ip_pool') ? ipPools : null}
+                    component={(facet_name === 'ip_pool' || facet_name === 'mb_provider') ? MultiFacetWrapper : TextFieldWrapper}
+                    items={facet_name === 'ip_pool' ? _.map(ipPools, 'id') : facet_name === 'mb_provider' ? _.keys(MB_PROVIDERS) : null}
                     disabled={submitting || checkFacet()}
                     placeholder={facet_name === 'ALL' ? 'No facet selected' : facet_name === 'sending_domain' ? 'mail.example.com' : ''}
                     validate={this.validateFacet}
