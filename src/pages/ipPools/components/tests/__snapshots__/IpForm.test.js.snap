@@ -76,64 +76,60 @@ exports[`IP Form tests should render form 1`] = `
         />
       </LabelledValue>
     </Panel.Section>
-    <AccessControl
-      condition={[Function]}
+    <Panel.Section
+      actions={
+        Array [
+          Object {
+            "color": "orange",
+            "component": [Function],
+            "content": "What is Auto Warmup?",
+            "to": "https://www.sparkpost.com/docs/user-guide/automated-ip-warmup/",
+          },
+        ]
+      }
     >
-      <Panel.Section
-        actions={
-          Array [
-            Object {
-              "color": "orange",
-              "component": [Function],
-              "content": "What is Auto Warmup?",
-              "to": "https://www.sparkpost.com/docs/user-guide/automated-ip-warmup/",
-            },
-          ]
-        }
+      <LabelledValue
+        label="Auto IP Warmup"
       >
-        <LabelledValue
-          label="Auto IP Warmup"
-        >
-          <Field
-            component={[Function]}
-            disabled={false}
-            label="Enable"
-            name="auto_warmup_enabled"
-            type="checkbox"
-          />
-        </LabelledValue>
-        <LabelledValue
-          label="Warmup Stage"
-        >
-          <Field
-            component={[Function]}
-            disabled={false}
-            helpText="You can select a previous stage but can not select an advanced stage."
-            name="auto_warmup_stage"
-            options={
-              Array [
-                Object {
-                  "disabled": false,
-                  "label": "Stage 1 (Volume: 200)",
-                  "value": 1,
-                },
-                Object {
-                  "disabled": true,
-                  "label": "Stage 2 (Volume: 500)",
-                  "value": 2,
-                },
-                Object {
-                  "disabled": true,
-                  "label": "Stage 3 (Volume: 1000)",
-                  "value": 3,
-                },
-              ]
-            }
-            parse={[Function]}
-          />
-        </LabelledValue>
-      </Panel.Section>
-    </AccessControl>
+        <Field
+          component={[Function]}
+          disabled={false}
+          label="Enable"
+          name="auto_warmup_enabled"
+          type="checkbox"
+        />
+      </LabelledValue>
+      <LabelledValue
+        label="Warmup Stage"
+      >
+        <Field
+          component={[Function]}
+          disabled={false}
+          helpText="You can select a previous stage but can not select an advanced stage."
+          name="auto_warmup_stage"
+          options={
+            Array [
+              Object {
+                "disabled": false,
+                "label": "Stage 1 (Volume: 200)",
+                "value": 1,
+              },
+              Object {
+                "disabled": true,
+                "label": "Stage 2 (Volume: 500)",
+                "value": 2,
+              },
+              Object {
+                "disabled": true,
+                "label": "Stage 3 (Volume: 1000)",
+                "value": 3,
+              },
+            ]
+          }
+          parse={[Function]}
+        />
+      </LabelledValue>
+    </Panel.Section>
     <Panel.Section>
       <Button
         onClick={[Function]}

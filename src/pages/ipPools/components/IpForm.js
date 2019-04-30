@@ -7,7 +7,6 @@ import { Button, Panel } from '@sparkpost/matchbox';
 import { CheckboxWrapper, SelectWrapper } from 'src/components/reduxFormWrappers';
 import { ConfirmationModal, LabelledValue } from 'src/components';
 import ExternalLink from 'src/components/externalLink';
-import AccessControl from 'src/components/auth/AccessControl';
 import { LINKS } from 'src/constants';
 import { IP_WARMUP_STAGES } from '../constants';
 import {
@@ -16,7 +15,6 @@ import {
   selectIpForCurrentPool,
   selectIpFormInitialValues
 } from 'src/selectors/ipPools';
-import { isAccountUiOptionSet } from 'src/helpers/conditions/account';
 
 
 export class IpForm extends Component {
@@ -76,40 +74,38 @@ export class IpForm extends Component {
               />
             </LabelledValue>
           </Panel.Section>
-          <AccessControl condition={isAccountUiOptionSet('ip_auto_warmup', false)}>
-            <Panel.Section
-              actions={[{
-                color: 'orange',
-                component: ExternalLink,
-                content: 'What is Auto Warmup?',
-                to: LINKS.AUTO_IP_WARMUP_SETUP
-              }]}
-            >
-              <LabelledValue label='Auto IP Warmup'>
+          <Panel.Section
+            actions={[{
+              color: 'orange',
+              component: ExternalLink,
+              content: 'What is Auto Warmup?',
+              to: LINKS.AUTO_IP_WARMUP_SETUP
+            }]}
+          >
+            <LabelledValue label='Auto IP Warmup'>
+              <Field
+                name="auto_warmup_enabled"
+                component={CheckboxWrapper}
+                type="checkbox"
+                label="Enable"
+                disabled={submitting}
+              />
+            </LabelledValue>
+            {isAutoWarmupEnabled &&
+            <Fragment>
+              <LabelledValue label='Warmup Stage'>
                 <Field
-                  name="auto_warmup_enabled"
-                  component={CheckboxWrapper}
-                  type="checkbox"
-                  label="Enable"
+                  name='auto_warmup_stage'
+                  component={SelectWrapper}
+                  options={stageOptions}
+                  parse={_.toInteger}
+                  helpText="You can select a previous stage but can not select an advanced stage."
                   disabled={submitting}
                 />
               </LabelledValue>
-              {isAutoWarmupEnabled &&
-              <Fragment>
-                <LabelledValue label='Warmup Stage'>
-                  <Field
-                    name='auto_warmup_stage'
-                    component={SelectWrapper}
-                    options={stageOptions}
-                    parse={_.toInteger}
-                    helpText="You can select a previous stage but can not select an advanced stage."
-                    disabled={submitting}
-                  />
-                </LabelledValue>
-              </Fragment>
-              }
-            </Panel.Section>
-          </AccessControl>
+            </Fragment>
+            }
+          </Panel.Section>
           <Panel.Section>
             <Button primary disabled={submitting || pristine} onClick={this.confirmAndSubmit}>
               {submitting ? 'Saving' : 'Update Sending IP'}
