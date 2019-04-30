@@ -64,7 +64,6 @@ describe('Formatting helpers', () => {
       expect(formatting.formatBytes(999)).toMatch(/B$/);
       expect(formatting.formatBytes(kb)).toMatch(/KB$/);
       expect(formatting.formatBytes(kb * kb)).toMatch(/MB$/);
-      expect(formatting.formatBytes(kb * kb)).toMatch(/MB$/);
       expect(formatting.formatBytes(kb * kb * kb)).toMatch(/GB$/);
       expect(formatting.formatBytes(kb * kb * kb * kb)).toMatch(/TB$/);
       expect(formatting.formatBytes(kb * kb * kb * kb * kb)).toMatch(/PB$/);
