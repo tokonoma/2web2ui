@@ -8,7 +8,7 @@ import { SendingDomainTypeaheadWrapper, TextFieldWrapper } from 'src/components'
 import AccessControl from 'src/components/auth/AccessControl';
 import { required } from 'src/helpers/validation';
 import { configFlag } from 'src/helpers/conditions/config';
-import { isAccountUiOptionSet, hasAccountOptionEnabled } from 'src/helpers/conditions/account';
+import { hasAccountOptionEnabled } from 'src/helpers/conditions/account';
 import { any } from 'src/helpers/conditions';
 import { selectCurrentPool } from 'src/selectors/ipPools';
 import isDefaultPool from '../helpers/defaultPool';
@@ -66,16 +66,14 @@ export class PoolForm extends Component {
             }
 
             {!editingDefault &&
-              <AccessControl condition={isAccountUiOptionSet('ip_auto_warmup', false)}>
-                <Field
-                  name='auto_warmup_overflow_pool'
-                  label='Overflow Pool'
-                  component={SelectWrapper}
-                  options={this.getOverflowPoolOptions()}
-                  helpText='With automatic IP Warmup enabled, selected pool will be used when volume threshold for this pool has been reached.'
-                  disabled={submitting || (!isNew && !canEditOverflowPool)}
-                />
-              </AccessControl>
+              <Field
+                name='auto_warmup_overflow_pool'
+                label='Overflow Pool'
+                component={SelectWrapper}
+                options={this.getOverflowPoolOptions()}
+                helpText='With automatic IP Warmup enabled, selected pool will be used when volume threshold for this pool has been reached.'
+                disabled={submitting || (!isNew && !canEditOverflowPool)}
+              />
             }
           </Panel.Section>
           <Panel.Section>
