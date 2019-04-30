@@ -84,9 +84,9 @@ exports[`IP Form tests should render form 1`] = `
           Array [
             Object {
               "color": "orange",
+              "component": [Function],
               "content": "What is Auto Warmup?",
-              "external": true,
-              "to": "https://www.sparkpost.com/docs/deliverability/ip-warm-up-overview/",
+              "to": "https://www.sparkpost.com/docs/user-guide/automated-ip-warmup/",
             },
           ]
         }

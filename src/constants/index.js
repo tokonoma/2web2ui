@@ -56,7 +56,8 @@ export const LINKS = {
   ALERTS_SURVEY: 'https://goo.gl/forms/rnIuTvdVF2xhpKCy2',
   SNIPPET_SUBSTITUTION_REFERENCE: 'https://developers.sparkpost.com/api/substitutions-reference/#header-snippets',
   MANDATORY_TFA: 'https://www.sparkpost.com/docs/my-account-and-profile/enabling-two-factor-authentication/',
-  RECIPIENT_VALIDATION_ACCESS: 'https://www.sparkpost.com/rv-access'
+  RECIPIENT_VALIDATION_ACCESS: 'https://www.sparkpost.com/rv-access',
+  AUTO_IP_WARMUP_SETUP: 'https://www.sparkpost.com/docs/user-guide/automated-ip-warmup/'
 };
 
 export const ENTERPRISE_PLAN_CODES = ['ent1'];

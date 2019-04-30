@@ -6,7 +6,9 @@ import { withRouter } from 'react-router-dom';
 import { Button, Panel } from '@sparkpost/matchbox';
 import { CheckboxWrapper, SelectWrapper } from 'src/components/reduxFormWrappers';
 import { ConfirmationModal, LabelledValue } from 'src/components';
+import ExternalLink from 'src/components/externalLink';
 import AccessControl from 'src/components/auth/AccessControl';
+import { LINKS } from 'src/constants';
 import { IP_WARMUP_STAGES } from '../constants';
 import {
   getIpPools,
@@ -75,7 +77,14 @@ export class IpForm extends Component {
             </LabelledValue>
           </Panel.Section>
           <AccessControl condition={isAccountUiOptionSet('ip_auto_warmup', false)}>
-            <Panel.Section actions={[{ content: 'What is Auto Warmup?', to: 'https://www.sparkpost.com/docs/deliverability/ip-warm-up-overview/', external: true, color: 'orange' }]}>
+            <Panel.Section
+              actions={[{
+                color: 'orange',
+                component: ExternalLink,
+                content: 'What is Auto Warmup?',
+                to: LINKS.AUTO_IP_WARMUP_SETUP
+              }]}
+            >
               <LabelledValue label='Auto IP Warmup'>
                 <Field
                   name="auto_warmup_enabled"
