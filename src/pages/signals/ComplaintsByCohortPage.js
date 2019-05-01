@@ -130,9 +130,11 @@ export class ComplaintsByCohortPage extends Component {
         {this.renderContent()}
         <OtherChartsHeader facet={facet} facetId={facetId} subaccountId={subaccountId} />
         <Grid>
-          <Grid.Column xs={12} sm={6}>
-            <SpamTrapsPreview />
-          </Grid.Column>
+          {facet !== 'mb_provider' && (
+            <Grid.Column xs={12} sm={6}>
+              <SpamTrapsPreview />
+            </Grid.Column>
+          )}
           <Grid.Column xs={12} sm={6}>
             <HealthScorePreview />
           </Grid.Column>

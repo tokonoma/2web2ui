@@ -10,6 +10,7 @@ import DateFilter from '../components/filters/DateFilter';
 import SubaccountFilter from '../components/filters/SubaccountFilter';
 import CurrentHealthGauge from './components/CurrentHealthGauge/CurrentHealthGauge';
 import HealthScoreChart from './components/HealthScoreChart/HealthScoreChart';
+import facets from '../constants/facets';
 import InfoTooltip from '../components/InfoTooltip';
 import { HEALTH_SCORE_INFO } from '../constants/info';
 
@@ -53,7 +54,7 @@ export function HealthScoreDashboard(props) {
         header={
           <Grid>
             <SubaccountFilter />
-            <FacetFilter />
+            <FacetFilter facets={facets}/>
           </Grid>
         }
       />

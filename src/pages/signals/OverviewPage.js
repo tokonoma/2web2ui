@@ -10,7 +10,8 @@ import DateFilter from './components/filters/DateFilter';
 import SubaccountFilter from './components/filters/SubaccountFilter';
 import OverviewHelpCopy from './components/OverviewHelpCopy';
 import { Grid, Panel } from '@sparkpost/matchbox';
-
+import facets from './constants/facets';
+import _ from 'lodash';
 export class OverviewPage extends Component {
   componentDidMount() {
     this.props.getSubaccounts();
@@ -28,7 +29,7 @@ export class OverviewPage extends Component {
               <DateFilter />
             </Grid.Column>
             <SubaccountFilter />
-            <FacetFilter />
+            <FacetFilter facets={_.reject(facets, (facet) => facet.key === 'mb_provider')}/>
           </Grid>
         </Panel>
         <HealthScoreOverview subaccounts={subaccounts} />

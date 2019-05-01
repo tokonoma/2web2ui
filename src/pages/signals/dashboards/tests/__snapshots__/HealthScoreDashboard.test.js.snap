@@ -40,7 +40,28 @@ exports[`Signals Health Score Dashboard renders page 1`] = `
     header={
       <Grid>
         <Connect(Connect(SubaccountFilter)) />
-        <Connect(FacetFilter) />
+        <Connect(FacetFilter)
+          facets={
+            Array [
+              Object {
+                "key": "campaign_id",
+                "label": "Campaign",
+              },
+              Object {
+                "key": "ip_pool",
+                "label": "IP Pool",
+              },
+              Object {
+                "key": "mb_provider",
+                "label": "Mailbox Provider",
+              },
+              Object {
+                "key": "sending_domain",
+                "label": "Sending Domain",
+              },
+            ]
+          }
+        />
       </Grid>
     }
     hideTitle={true}
