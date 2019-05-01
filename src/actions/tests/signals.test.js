@@ -71,6 +71,9 @@ describe('Signals Actions', () => {
   snapshotActionCases('.getHealthScore', {
     'by default': {
       action: () => actions.getHealthScore({ ...requiredOptions })
+    },
+    'with an order by subaccount': {
+      action: () => actions.getHealthScore({ ...requiredOptions, order: 'asc', orderBy: 'sid' })
     }
   });
 

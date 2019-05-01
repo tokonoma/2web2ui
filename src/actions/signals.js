@@ -24,9 +24,14 @@ const signalsActionCreator = ({ dimension, type }) => ({
 }) => {
   let order_by;
 
-  // note, to order by subaccount, only pass order direction and do not set order_by
-  if (orderBy && orderBy !== 'sid') {
+  if (orderBy) {
     order_by = ORDER_BY_MAPPING[orderBy] || orderBy;
+  }
+
+  // To order by subaccount, only pass order direction and do not set order_by
+  // does not apply to health score, and health score should set order_by: 'sid'
+  if (orderBy === 'sid' && dimension !== 'health-score') {
+    order_by = undefined;
   }
 
   if (facet === 'sid') {
