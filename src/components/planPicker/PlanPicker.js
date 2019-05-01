@@ -73,7 +73,6 @@ export class PlanPicker extends Component {
     const planPriceProps = {
       selectedPromo
     };
-
     return (
       <div className={styles.PlanPicker}>
         <div className={listClasses}>{items}</div>

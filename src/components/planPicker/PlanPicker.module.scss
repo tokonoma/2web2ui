@@ -26,7 +26,7 @@
 
   .MainLabel {
     color: color(orange);
-    font-size: rem(25);
+    font-size: rem(16);
   }
 
   &.disabled {
@@ -40,11 +40,12 @@
   padding: spacing();
   background: color(gray, 10);
   border-top: 1px solid color(gray, 9);
+  font-weight: 600;
 }
 
 .DropdownPlan {
   display: block;
-  padding: spacing() spacing(large); 
+  padding: spacing() spacing(larger); 
   background: color(gray, 10);
   transition: 0.15s;
 
@@ -80,7 +81,7 @@
   left: 0;
   right: 0;
 
-  max-height: rem(280);
+  max-height: rem(300);
   overflow: auto;
 
   box-shadow: shadow(deep);

@@ -171,11 +171,13 @@ describe('plan selector', () => {
       billing: {
         plans: [
           { code: 'pub', status: 'public' },
-          { code: 'pub-free', status: 'public', isFree: true },
+          { code: 'pub-free', status: 'public', tier: 'test', isFree: true },
           { code: 'pub-aws', status: 'public', awsMarketplace: true },
           { code: 'pub-aws-free', status: 'public', awsMarketplace: true, isFree: true },
           { code: 'sec', status: 'secret' },
-          { code: 'sec-aws', status: 'secret', awsMarketplace: true }
+          { code: 'sec-aws', status: 'secret', awsMarketplace: true },
+          { code: 'starter', status: 'public', tier: 'starter' },
+          { code: 'premier', status: 'public', tier: 'premier' }
         ]
       }
     };
@@ -211,17 +213,11 @@ describe('plan selector', () => {
       state.account.subscription.type = 'aws';
       expect(billingInfo.selectVisiblePlans(state)).toMatchSnapshot();
     });
+  });
 
-    it('should not return new free plans if customer on free1 plan', () => {
-      state.account.subscription.code = 'free1';
-      state.billing.plans.push({ code: 'free1' });
-      expect(billingInfo.selectVisiblePlans(state)).toMatchSnapshot();
-    });
-
-    it('should show current plan regardless of status', () => {
-      state.account.subscription.code = 'prv';
-      state.billing.plans.push({ code: 'prv', status: 'private' });
-      expect(billingInfo.selectVisiblePlans(state)).toMatchSnapshot();
+  describe('selectedTieredVisiblePlans', () => {
+    it('should separate plans into tiers', () => {
+      expect(billingInfo.selectTieredVisiblePlans(state)).toMatchSnapshot();
     });
   });
 });
