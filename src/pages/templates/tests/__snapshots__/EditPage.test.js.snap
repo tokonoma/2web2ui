@@ -33,12 +33,14 @@ exports[`Template EditPage should render correctly 1`] = `
       },
       Object {
         "content": "Delete",
+        "disabled": undefined,
         "onClick": [Function],
         "visible": true,
       },
       Object {
         "component": [Function],
         "content": "Duplicate",
+        "disabled": undefined,
         "to": "/templates/create/id",
         "visible": true,
       },
@@ -112,12 +114,14 @@ exports[`Template EditPage should render correctly for read-only users 1`] = `
       },
       Object {
         "content": "Delete",
+        "disabled": undefined,
         "onClick": [Function],
         "visible": false,
       },
       Object {
         "component": [Function],
         "content": "Duplicate",
+        "disabled": undefined,
         "to": "/templates/create/id",
         "visible": false,
       },
