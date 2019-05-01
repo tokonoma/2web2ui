@@ -50,6 +50,7 @@ class MultiFacet extends Component {
     const stateType = _.get(stateChange, 'type', '');
 
     if (stateType === '__autocomplete_change_input__' || stateType === '__autocomplete_unknown__') {
+      this.updateMatches.cancel();
       this.setState({
         matches: this.props.items
       });
