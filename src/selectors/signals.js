@@ -110,7 +110,7 @@ export const selectEngagementRecencyDetails = createSelector(
 
 // Engagement behavior charts do not contain data within the last 3 days (including today)
 const excludeLastNDays = (date, n) =>
-  moment().diff(date, 'days') < n ? moment().subtract(3, 'days') : date;
+  moment().diff(date, 'days') < n ? moment().subtract(n, 'days') : date;
 
 const engagementBehaviorDataLagDays = 3;
 
