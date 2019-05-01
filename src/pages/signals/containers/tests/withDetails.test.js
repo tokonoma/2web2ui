@@ -15,7 +15,7 @@ describe('Signals Details Container', () => {
     props = {
       component: Component,
       details: {
-        data: []
+        data: [{ date: '2015-01-01' }, { date: '2015-01-05' }]
       },
       facet: 'sending_domain',
       facetId: 'test.com',

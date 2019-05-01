@@ -38,7 +38,6 @@ export class WithDetails extends Component {
       details,
       facet,
       facetId,
-      filters,
       selected,
       subaccountId
     } = this.props;
@@ -46,8 +45,15 @@ export class WithDetails extends Component {
     // Calculate gap here to share with preview and details
     const gap = details.data && details.data.length > 15 ? 0.2 : 1;
 
+    // The data's dates are used instead of dates in filters because
+    // the engagement behavior selectors trim displayed dates
+    const xTicks = getDateTicks({
+      from: _.first(details.data).date,
+      to: _.last(details.data).date
+    });
+
     return (
-      <WrappedComponent {...details} facet={facet} facetId={facetId} gap={gap} selected={selected} xTicks={getDateTicks(filters)} subaccountId={subaccountId} />
+      <WrappedComponent {...details} facet={facet} facetId={facetId} gap={gap} selected={selected} xTicks={xTicks} subaccountId={subaccountId} />
     );
   }
 }

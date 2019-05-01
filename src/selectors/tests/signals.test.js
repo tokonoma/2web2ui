@@ -318,6 +318,13 @@ describe('Selectors: signals', () => {
       const stateWhenLoading = { ...state, signals: { engagementRateByCohort: { data: [], loading: true }}};
       expect(selectors.selectEngagementRateByCohortDetails(stateWhenLoading, props).details.empty).toBe(false);
     });
+
+    it('should cutoff to date if to is within 3 days of today', () => {
+      const mockNow = new Date('2018-01-05');
+      jest.spyOn(Date, 'now').mockImplementation(() => mockNow);
+      const data = selectors.selectEngagementRateByCohortDetails(state, props).details.data;
+      expect(data[data.length - 1].date).toEqual('2018-01-01');
+    });
   });
 
   describe('unsubscribe rate by cohort details', () => {
@@ -334,6 +341,13 @@ describe('Selectors: signals', () => {
       const stateWhenLoading = { ...state, signals: { unsubscribeRateByCohort: { data: [], loading: true }}};
       expect(selectors.selectUnsubscribeRateByCohortDetails(stateWhenLoading, props).details.empty).toBe(false);
     });
+
+    it('should cutoff to date if to is within 3 days of today', () => {
+      const mockNow = new Date('2018-01-05');
+      jest.spyOn(Date, 'now').mockImplementation(() => mockNow);
+      const data = selectors.selectUnsubscribeRateByCohortDetails(state, props).details.data;
+      expect(data[data.length - 1].date).toEqual('2018-01-01');
+    });
   });
 
   describe('complaints by cohort details', () => {
@@ -349,6 +363,13 @@ describe('Selectors: signals', () => {
     it('should not be empty when loading', () => {
       const stateWhenLoading = { ...state, signals: { complaintsByCohort: { data: [], loading: true }}};
       expect(selectors.selectComplaintsByCohortDetails(stateWhenLoading, props).details.empty).toBe(false);
+    });
+
+    it('should cutoff to date if to is within 3 days of today', () => {
+      const mockNow = new Date('2018-01-05');
+      jest.spyOn(Date, 'now').mockImplementation(() => mockNow);
+      const data = selectors.selectComplaintsByCohortDetails(state, props).details.data;
+      expect(data[data.length - 1].date).toEqual('2018-01-01');
     });
   });
 

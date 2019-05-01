@@ -108,6 +108,12 @@ export const selectEngagementRecencyDetails = createSelector(
   }
 );
 
+// Engagement behavior charts do not contain data within the last 3 days (including today)
+const excludeLastNDays = (date, n) =>
+  moment().diff(date, 'days') < n ? moment().subtract(n, 'days') : date;
+
+const engagementBehaviorDataLagDays = 3;
+
 export const selectEngagementRateByCohortDetails = createSelector(
   [getEngagementRateByCohortData, getFacetFromParams, getFacetIdFromParams, selectSubaccountIdFromQuery, getOptions],
   ({ loading, error, data }, facet, facetId, subaccountId, { from, to }) => {
@@ -121,10 +127,12 @@ export const selectEngagementRateByCohortDetails = createSelector(
       fill: {
         p_new_eng: null, p_14d_eng: null, p_90d_eng: null, p_365d_eng: null, p_uneng_eng: null, p_total_eng: null
       },
-      from, to
+      from,
+      to: excludeLastNDays(to, engagementBehaviorDataLagDays)
     });
 
     const isEmpty = filledHistory.every((values) => _.isNil(values.p_total_eng));
+
 
     return {
       details: {
@@ -148,6 +156,7 @@ export const selectUnsubscribeRateByCohortDetails = createSelector(
     // Rename date key
     const normalizedHistory = _.get(match, 'history', []).map(({ dt: date, ...values }) => ({ date, ...values }));
 
+
     const filledHistory = fillByDate({
       dataSet: normalizedHistory,
       fill: {
@@ -158,7 +167,8 @@ export const selectUnsubscribeRateByCohortDetails = createSelector(
         p_uneng_unsub: null,
         p_total_unsub: null
       },
-      from, to
+      from,
+      to: excludeLastNDays(to, engagementBehaviorDataLagDays)
     });
 
     const isEmpty = filledHistory.every((values) => _.isNil(values.p_total_unsub));
@@ -185,6 +195,7 @@ export const selectComplaintsByCohortDetails = createSelector(
     // Rename date key
     const normalizedHistory = _.get(match, 'history', []).map(({ dt: date, ...values }) => ({ date, ...values }));
 
+
     const filledHistory = fillByDate({
       dataSet: normalizedHistory,
       fill: {
@@ -195,7 +206,8 @@ export const selectComplaintsByCohortDetails = createSelector(
         p_uneng_fbl: null,
         p_total_fbl: null
       },
-      from, to
+      from,
+      to: excludeLastNDays(to, engagementBehaviorDataLagDays)
     });
 
     const isEmpty = filledHistory.every((values) => _.isNil(values.p_total_fbl));
