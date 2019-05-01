@@ -104,7 +104,7 @@ exports[`EditPage renders disabled form when submitting 1`] = `
         lg={8}
         xs={12}
       >
-        <LoadableComponent
+        <ContentEditor
           contentOnly={true}
           readOnly={true}
         />
@@ -185,7 +185,7 @@ exports[`EditPage renders disabled form when user does not have authorization to
         lg={8}
         xs={12}
       >
-        <LoadableComponent
+        <ContentEditor
           contentOnly={true}
           readOnly={true}
         />
@@ -285,7 +285,7 @@ exports[`EditPage renders edit form 1`] = `
         lg={8}
         xs={12}
       >
-        <LoadableComponent
+        <ContentEditor
           contentOnly={true}
         />
       </Grid.Column>

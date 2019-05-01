@@ -39,7 +39,7 @@ exports[`Template PublishedPage should render correctly 1`] = `
       lg={8}
       xs={12}
     >
-      <LoadableComponent
+      <ContentEditor
         readOnly={true}
       />
     </Grid.Column>
@@ -86,7 +86,7 @@ exports[`Template PublishedPage should render read-only correctly 1`] = `
       lg={8}
       xs={12}
     >
-      <LoadableComponent
+      <ContentEditor
         readOnly={true}
       />
     </Grid.Column>
