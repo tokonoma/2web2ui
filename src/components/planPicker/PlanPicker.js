@@ -2,10 +2,18 @@ import React, { Component } from 'react';
 import Downshift from 'downshift';
 import { Field } from 'redux-form';
 import cx from 'classnames';
+import _ from 'lodash';
 
 import { ExpandMore } from '@sparkpost/matchbox-icons';
 import Plan from './Plan';
 import styles from './PlanPicker.module.scss';
+
+const TIERS = [
+  { key: 'default' },
+  { key: 'test', label: 'Test Account' },
+  { key: 'starter', label: 'Starter' },
+  { key: 'premier', label: 'Premier' }
+];
 
 /**
  * This component will register the a redux-form field named 'planpicker'
@@ -26,18 +34,30 @@ export class PlanPicker extends Component {
   }) => {
     const { plans, input, disabled, selectedPromo } = this.props;
 
-    if (!selectedItem || !plans) {
+    if (!selectedItem || _.isEmpty(plans)) {
       return null;
     }
 
-    const items = plans.map((item, index) => {
-      const classes = cx(
-        styles.DropdownPlan,
-        selectedItem.code === item.code && styles.selected,
-        highlightedIndex === index && styles.highlighted
-      );
+    let index = 0;
+    const items = [];
 
-      return <Plan key={index} className={classes} {...getItemProps({ item, index, plan: item })} />;
+    TIERS.forEach((tier) => {
+      const tierPlans = plans[tier.key];
+      if (tierPlans) {
+        if (tier.label) {
+          items.push(<div key={`label_${tier.key}`} className={cx(styles.DropdownLabel)}>{tier.label}:</div>);
+        }
+
+        plans[tier.key].forEach((item) => {
+          const classes = cx(
+            styles.DropdownPlan,
+            selectedItem.code === item.code && styles.selected,
+            highlightedIndex === index && styles.highlighted
+          );
+          items.push(<Plan key={index} className={classes} {...getItemProps({ item, index, plan: item })} />);
+          index++;
+        });
+      }
     });
 
     const listClasses = cx(styles.List, isOpen && styles.open);

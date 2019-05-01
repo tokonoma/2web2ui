@@ -35,10 +35,16 @@
   }
 }
 
+.DropdownLabel {
+  display: block;
+  padding: spacing();
+  background: color(gray, 10);
+  border-top: 1px solid color(gray, 9);
+}
+
 .DropdownPlan {
   display: block;
-  padding: spacing() spacing(large);
-  border-bottom: 1px solid color(gray, 9);
+  padding: spacing() spacing(large); 
   background: color(gray, 10);
   transition: 0.15s;
 

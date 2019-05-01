@@ -11,7 +11,7 @@ import billingUpdate from 'src/actions/billingUpdate';
 import { showAlert } from 'src/actions/globalAlert';
 import { changePlanInitialValues } from 'src/selectors/accountBillingForms';
 import {
-  currentPlanSelector, canUpdateBillingInfoSelector, selectVisiblePlans, selectAccountBilling
+  currentPlanSelector, canUpdateBillingInfoSelector, selectTieredVisiblePlans, selectAccountBilling
 } from 'src/selectors/accountBillingInfo';
 import { Panel, Grid } from '@sparkpost/matchbox';
 import { Loading, PlanPicker, ApiErrorBanner } from 'src/components';
@@ -124,7 +124,7 @@ export class ChangePlanForm extends Component {
         <Grid>
           <Grid.Column>
             <Panel title='Select A Plan'>
-              {plans.length
+              {!_.isEmpty(plans)
                 ? <PlanPicker disabled={submitting} plans={plans} onChange={this.onPlanSelect}/>
                 : null
               }
@@ -159,11 +159,11 @@ export class ChangePlanForm extends Component {
 const mapStateToProps = (state, props) => {
   const selector = formValueSelector(FORMNAME);
   const { code: planCode } = qs.parse(props.location.search);
-  const plans = selectVisiblePlans(state);
+  const plans = selectTieredVisiblePlans(state);
   const { account, loading } = selectAccountBilling(state);
 
   return {
-    loading: (!account.created && loading) || (plans.length === 0 && state.billing.plansLoading),
+    loading: (!account.created && loading) || (!_.isEmpty(plans) && state.billing.plansLoading),
     isAws: selectCondition(isAws)(state),
     account,
     billing: state.billing,

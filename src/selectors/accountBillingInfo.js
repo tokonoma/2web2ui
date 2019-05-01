@@ -13,6 +13,7 @@ const selectIsSelfServeBilling = selectCondition(isSelfServeBilling);
 const selectIsCcFree1 = selectCondition(onPlan('ccfree1'));
 const selectIsFree1 = selectCondition(onPlan('free1'));
 const selectOnZuoraPlan = selectCondition(onZuoraPlan);
+const currentFreePlans = ['free500-1018', 'free15K-1018', 'free500-0419', 'free500-SPCEU-0419'];
 
 export const currentSubscriptionSelector = (state) => state.account.subscription;
 
@@ -84,6 +85,18 @@ export const selectVisiblePlans = createSelector(
   )
 );
 
+export const selectTieredVisiblePlans = createSelector(
+  [selectVisiblePlans],
+  (plans) => {
+    const result = {};
+    plans.forEach((plan) => {
+      const tier = plan.tier || (currentFreePlans.includes(plan.code) ? 'test' : 'default');
+      result[tier] = result[tier] || [];
+      result[tier].push(plan);
+    });
+    return result;
+  }
+);
 export const selectAccount = (state) => state.account;
 
 export const selectAccountBilling = createSelector(
