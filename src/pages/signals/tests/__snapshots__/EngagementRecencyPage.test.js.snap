@@ -59,7 +59,17 @@ exports[`Signals Engagement Recency Page renders correctly 1`] = `
       "to": "/signals",
     }
   }
-  dimensionPrefix="Engagement Recency"
+  dimensionPrefix={
+    <React.Fragment>
+      Engagement Recency
+      <InfoTooltip
+        content="
+  The share over time of your email that has been sent to recipients who most recently
+  opened messages or clicked links during several defined time periods.
+"
+      />
+    </React.Fragment>
+  }
   facet="sending-domain"
   facetId="test.com"
   primaryArea={
@@ -316,7 +326,17 @@ exports[`Signals Engagement Recency Page renders error correctly 1`] = `
       "to": "/signals",
     }
   }
-  dimensionPrefix="Engagement Recency"
+  dimensionPrefix={
+    <React.Fragment>
+      Engagement Recency
+      <InfoTooltip
+        content="
+  The share over time of your email that has been sent to recipients who most recently
+  opened messages or clicked links during several defined time periods.
+"
+      />
+    </React.Fragment>
+  }
   facet="sending-domain"
   facetId="test.com"
   primaryArea={

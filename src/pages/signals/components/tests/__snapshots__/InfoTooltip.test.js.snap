@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Signals InfoTooltip Component renders correctly 1`] = `
+<Tooltip
+  bottom={true}
+  content="Foo"
+  dark={true}
+  forcePosition={false}
+  horizontalOffset="-0.15rem"
+  preferredDirection={
+    Object {
+      "bottom": true,
+      "left": false,
+      "right": true,
+      "top": false,
+    }
+  }
+  right={true}
+>
+  <InfoOutline
+    className="TooltipIcon"
+    size={24}
+  />
+</Tooltip>
+`;

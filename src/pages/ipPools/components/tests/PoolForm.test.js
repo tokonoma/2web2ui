@@ -84,14 +84,6 @@ describe('PoolForm tests', () => {
   describe('overflow pool', () => {
     const component = 'Field[name="auto_warmup_overflow_pool"]';
 
-    it('return true for access control condition if ip auto warmup is enabled', () => {
-      expect(wrapper.find('AccessControl').at(1).prop('condition')({ account: { options: { ui: { ip_auto_warmup: true }}}})).toBe(true);
-    });
-
-    it('return false for access control condition if ip auto warmup is not enabled', () => {
-      expect(wrapper.find('AccessControl').at(1).prop('condition')({ account: { options: { ui: { ip_auto_warmup: false }}}})).toBe(false);
-    });
-
     it('does not render if editing default pool', () => {
       wrapper.setProps({ pool: { id: 'default', name: 'Default' }});
       expect(wrapper.find(component)).not.toExist();

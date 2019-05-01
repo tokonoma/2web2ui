@@ -25,7 +25,7 @@ const productionTenants = {
       mxValue: 'smtp.eu.sparkpostmail.com'
     },
     brightback: {
-      freePlan: 'free500-SPCEU-1018'
+      freePlan: 'free500-SPCEU-0419'
     },
     crossLinkTenant: 'spc',
     featureFlags: {

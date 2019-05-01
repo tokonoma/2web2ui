@@ -33,7 +33,7 @@ describe('ListPage', () => {
   });
 
   it('renders page with error banner', () => {
-    expect(subject({ error: new Error('Oh no!') })).toMatchSnapshot();
+    expect(subject({ error: new Error('Oh no!'), snippets: []})).toMatchSnapshot();
   });
 
   it('renders page without subaccount column', () => {

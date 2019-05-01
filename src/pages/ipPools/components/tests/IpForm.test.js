@@ -1,7 +1,5 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-
-import AccessControl from 'src/components/auth/AccessControl';
 import { IpForm } from '../IpForm';
 import * as constants from '../../constants';
 
@@ -61,14 +59,6 @@ describe('IP Form tests', () => {
   it('changes submit button text when saving', () => {
     wrapper.setProps({ submitting: true });
     expect(wrapper.find('Button').shallow().text()).toEqual('Saving');
-  });
-
-  it('returns true for access control condition if ip auto warmup is enabled', () => {
-    expect(wrapper.find(AccessControl).prop('condition')({ account: { options: { ui: { ip_auto_warmup: true }}}})).toBe(true);
-  });
-
-  it('returns false for access control condition if ip auto warmup is not enabled', () => {
-    expect(wrapper.find(AccessControl).prop('condition')({ account: { options: { ui: { ip_auto_warmup: false }}}})).toBe(false);
   });
 
   describe('auto_warmup_enabled', () => {

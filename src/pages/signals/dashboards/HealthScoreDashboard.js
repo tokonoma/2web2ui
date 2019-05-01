@@ -11,6 +11,8 @@ import SubaccountFilter from '../components/filters/SubaccountFilter';
 import CurrentHealthGauge from './components/CurrentHealthGauge/CurrentHealthGauge';
 import HealthScoreChart from './components/HealthScoreChart/HealthScoreChart';
 import facets from '../constants/facets';
+import InfoTooltip from '../components/InfoTooltip';
+import { HEALTH_SCORE_INFO } from '../constants/info';
 
 export function HealthScoreDashboard(props) {
   const { from, getCurrentHealthScore, getInjections, getSubaccounts, relativeRange, subaccounts, to } = props;
@@ -29,7 +31,15 @@ export function HealthScoreDashboard(props) {
   }, [getCurrentHealthScore, getInjections, relativeRange, from, to]);
 
   return (
-    <Page title='Health Score' primaryArea={<DateFilter left />}>
+    <Page
+      title={
+        <>
+          Health Score
+          <InfoTooltip content={HEALTH_SCORE_INFO} />
+        </>
+      }
+      primaryArea={<DateFilter left />}
+    >
       <Grid>
         <Grid.Column xs={12} lg={5} xl={4}>
           <CurrentHealthGauge />

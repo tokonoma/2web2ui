@@ -61,7 +61,7 @@ describe('Signals Engagement Rate By Cohort Page', () => {
     it('renders tooltip content', () => {
       const Tooltip = wrapper.find('LineChart').prop('tooltipContent');
       expect(shallow(<Tooltip payload={{
-        p_uneng_eng: 0.1,
+        p_uneng_eng: 0.111,
         p_365d_eng: 0.2,
         p_90d_eng: 0.3,
         p_14d_eng: 0.4,
@@ -80,7 +80,7 @@ describe('Signals Engagement Rate By Cohort Page', () => {
     it('gets y axis props', () => {
       wrapper.setProps({ data: [{ p_total_eng: 0 }, { p_total_eng: null }]});
       const axisProps = wrapper.find('LineChart').prop('yAxisProps');
-      expect(axisProps.tickFormatter(.253)).toEqual('25%');
+      expect(axisProps.tickFormatter(.253)).toEqual('25.3%');
       expect(axisProps.domain).toEqual([0,1]);
     });
 

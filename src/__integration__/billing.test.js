@@ -1,12 +1,12 @@
 import React from 'react';
-import { setupForm } from './helpers';
+import mountForm from 'src/__testHelpers__/mountForm';
 import UpdatePaymentForm from 'src/pages/billing/forms/UpdatePaymentForm';
 import UpdateContactForm from 'src/pages/billing/forms/UpdateContactForm';
 import ChangePlanForm from 'src/pages/billing/forms/ChangePlanForm';
 import AddIps from 'src/pages/billing/forms/AddIps';
 
 test('Update Payment Form', async () => {
-  const form = await setupForm(<UpdatePaymentForm />);
+  const form = await mountForm(<UpdatePaymentForm />);
 
   form.fill([
     { name: 'card.number', value: '4111111111111111' },
@@ -26,7 +26,7 @@ test('Update Payment Form', async () => {
 });
 
 test('Update Contact Form', async () => {
-  const form = await setupForm(<UpdateContactForm onCancel={jest.fn()} />);
+  const form = await mountForm(<UpdateContactForm onCancel={jest.fn()} />);
 
   form.fill([
     { name: 'billingContact.firstName', value: 'Firsty' },
@@ -42,7 +42,7 @@ test('Update Contact Form', async () => {
 });
 
 test('Change Plan Form: Update My Credit Card and Plan', async () => {
-  const form = await setupForm(<ChangePlanForm />);
+  const form = await mountForm(<ChangePlanForm />);
   const newPlan = form.store.getState().billing.plans[2];
 
   // Click the button to use a different credit card
@@ -71,7 +71,7 @@ test('Change Plan Form: Update My Credit Card and Plan', async () => {
 });
 
 test('Change Plan Form: Update Plan Only', async () => {
-  const form = await setupForm(<ChangePlanForm />);
+  const form = await mountForm(<ChangePlanForm />);
 
   // update the plan picker input (Downshift-specific)
   const newPlan = form.store.getState().billing.plans[2];
@@ -83,7 +83,7 @@ test('Change Plan Form: Update Plan Only', async () => {
 });
 
 test('Change Plan Form: Upgrade for the First Time', async () => {
-  const form = await setupForm(<ChangePlanForm />);
+  const form = await mountForm(<ChangePlanForm />);
   const state = form.store.getState();
   const newPlan = state.billing.plans[1];
 
@@ -124,7 +124,7 @@ test('Change Plan Form: Upgrade for the First Time', async () => {
 
 test('Add IPs Form: add a dedicated IP to a new pool', async () => {
   const onClose = jest.fn();
-  const form = await setupForm(<AddIps onClose={onClose} />);
+  const form = await mountForm(<AddIps onClose={onClose} />);
 
   form.fill([
     { name: 'quantity', value: '1' },
@@ -138,7 +138,7 @@ test('Add IPs Form: add a dedicated IP to a new pool', async () => {
 
 test('Add IPs Form: add a dedicated IP to an existing pool', async () => {
   const onClose = jest.fn();
-  const form = await setupForm(<AddIps onClose={onClose} />);
+  const form = await mountForm(<AddIps onClose={onClose} />);
 
   form.fill([
     { name: 'quantity', value: '1' },

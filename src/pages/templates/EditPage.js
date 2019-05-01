@@ -38,13 +38,13 @@ export default class EditPage extends Component {
     });
   }
 
-  handleSave = (values) => {
-    const { update, match, getDraft, showAlert, getTestData, subaccountId } = this.props;
-    return update(_.omit(values, 'published'), subaccountId).then(() => {
-      getDraft(match.params.id, subaccountId);
-      getTestData({ id: match.params.id, mode: 'draft' });
-      showAlert({ type: 'success', message: 'Template saved' });
-    });
+  handleSave = ({ published, ...values }) => { // must omit published value
+    const { showAlert, subaccountId, update } = this.props;
+
+    return (
+      update(values, subaccountId)
+        .then(() => showAlert({ type: 'success', message: 'Template saved' }))
+    );
   }
 
   handleDelete = () => {
@@ -85,14 +85,20 @@ export default class EditPage extends Component {
       },
       {
         content: 'Save as Draft',
-        onClick: handleSubmit(this.handleSave),
         disabled: submitting,
+        onClick: handleSubmit(this.handleSave),
         visible: canModify
       },
-      { content: 'Delete', onClick: this.handleDeleteModalToggle, visible: canModify },
+      {
+        content: 'Delete',
+        disabled: submitting,
+        onClick: this.handleDeleteModalToggle,
+        visible: canModify
+      },
       {
         content: 'Duplicate',
         component: Link,
+        disabled: submitting,
         to: `/templates/create/${match.params.id}`,
         visible: canModify
       },

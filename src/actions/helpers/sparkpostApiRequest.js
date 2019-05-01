@@ -64,7 +64,7 @@ const sparkpostRequest = requestHelperFactory({
       refreshTokensUsed.add(auth.refreshToken);
 
       // call API for a new token
-      return useRefreshToken(auth.refreshToken)
+      return useRefreshToken(auth.refreshToken)// eslint-disable-line react-hooks/rules-of-hooks
 
         // dispatch a refresh action to save new token results in cookie and store
         .then(({ data } = {}) => dispatch(refresh(data.access_token, auth.refreshToken)))

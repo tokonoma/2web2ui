@@ -2,7 +2,17 @@
 
 exports[`Signals Engagement Recency Dashboard renders page 1`] = `
 <SignalsPage
-  title="Engagement Recency"
+  title={
+    <React.Fragment>
+      Engagement Recency
+      <InfoTooltip
+        content="
+  The share over time of your email that has been sent to recipients who most recently
+  opened messages or clicked links during several defined time periods.
+"
+      />
+    </React.Fragment>
+  }
 >
   <Panel
     sectioned={true}

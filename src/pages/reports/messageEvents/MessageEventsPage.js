@@ -8,7 +8,7 @@ import DisplayDate from './components/DisplayDate';
 import MessageEventsSearch from './components/MessageEventsSearch';
 import ViewDetailsButton from './components/ViewDetailsButton';
 import { getMessageEvents, changePage, getMessageEventsCSV, clearCSV } from 'src/actions/messageEvents';
-import { selectMessageEvents } from 'src/selectors/messageEvents';
+import { selectMessageEvents, selectMessageEventsCSV } from 'src/selectors/messageEvents';
 import { formatToCsv, download } from 'src/helpers/downloading';
 import { DEFAULT_PER_PAGE_BUTTONS } from 'src/constants';
 import CursorPaging from './components/CursorPaging';
@@ -174,8 +174,9 @@ export class MessageEventsPage extends Component {
 
 const mapStateToProps = (state) => {
   const events = selectMessageEvents(state);
+  const eventsCSV = selectMessageEventsCSV(state);
   const { messageEvents } = state;
-  const { loading, error, search, totalCount, hasMorePagesAvailable, eventsCSV, eventsCSVLoading } = messageEvents;
+  const { loading, error, search, totalCount, hasMorePagesAvailable, eventsCSVLoading } = messageEvents;
   return {
     events: events,
     loading,

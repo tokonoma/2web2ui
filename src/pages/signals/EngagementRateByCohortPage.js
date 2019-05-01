@@ -34,7 +34,7 @@ export class EngagementRateByCohortPage extends Component {
 
   getYAxisProps = () => ({
     domain: this.isEmpty() ? [0, 1] : ['auto', 'auto'],
-    tickFormatter: (tick) => `${roundToPlaces(tick * 100, 0)}%`
+    tickFormatter: (tick) => `${roundToPlaces(tick * 100, 1)}%`
   })
 
   getXAxisProps = () => {
@@ -59,7 +59,7 @@ export class EngagementRateByCohortPage extends Component {
             color={metric.fill}
             label={metric.label}
             description={metric.description}
-            value={`${roundToPlaces(metric.value, 1) * 100}%`}
+            value={`${roundToPlaces(metric.value * 100, 1)}%`}
           />
         ))}
       </>

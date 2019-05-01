@@ -4,25 +4,30 @@ import moment from 'moment';
 import { createSelector, createStructuredSelector } from 'reselect';
 
 const getMessageEvents = (state) => state.messageEvents.events;
+const getMessageEventsCSV = (state) => state.messageEvents.eventsCSV;
 const getMessageHistory = (state) => state.messageEvents.history;
 const getSingleSelectedEvent = (state) => state.messageEvents.selectedEvent;
 export const getMessageIdParam = (state, props) => props.match.params.messageId;
 const getEventIdParam = (state, props) => props.match.params.eventId;
 
+const appendFormattedDate = (event) => ({
+  ...event,
+  formattedDate: formatDateTime(event.timestamp)
+});
+
 export const selectMessageEvents = createSelector(
   [ getMessageEvents ],
-  (events) => _.map(events, (event) => ({
-    ...event,
-    formattedDate: formatDateTime(event.timestamp)
-  }))
+  (events) => _.map(events, appendFormattedDate)
+);
+
+export const selectMessageEventsCSV = createSelector(
+  [ getMessageEventsCSV ],
+  (events) => _.map(events, appendFormattedDate)
 );
 
 export const selectMessageHistory = createSelector(
   [getMessageHistory, getMessageIdParam],
-  (history, id) => _.map(history[id], (event) => ({
-    ...event,
-    formattedDate: formatDateTime(event.timestamp)
-  }))
+  (history, id) => _.map(history[id], appendFormattedDate)
 );
 
 export const selectInitialEventId = createSelector(
