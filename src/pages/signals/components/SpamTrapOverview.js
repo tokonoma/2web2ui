@@ -54,6 +54,7 @@ class SpamTrapOverview extends React.Component {
     const { getSpamHits, signalOptions, summaryTable } = this.props;
     if (signalOptions.facet === 'mb_provider') {
       signalOptions.facet = '';
+      signalOptions.facetSearchTerm = '';
     }
     let { subaccount } = signalOptions;
     let order;

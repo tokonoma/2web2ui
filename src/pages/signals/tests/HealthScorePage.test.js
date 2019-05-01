@@ -54,6 +54,12 @@ describe('Signals Health Score Page', () => {
     expect(wrapper.find('Panel')).toMatchSnapshot();
   });
 
+  it('does not render SpamTrapsPreview when facet is mb_provider', () => {
+    wrapper.setProps({ facet: 'mb_provider' });
+    wrapper.update();
+    expect(wrapper.find('withRouter(Connect(WithDetails(SpamTrapsPreview)))')).not.toContainMatchingElement();
+  });
+
   it('renders error correctly', () => {
     wrapper.setProps({ error: { message: 'error message' }});
     expect(wrapper).toMatchSnapshot();
