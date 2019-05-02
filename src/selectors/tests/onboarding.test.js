@@ -10,7 +10,8 @@ jest.mock('src/selectors/accountBillingForms', () => ({
 }));
 
 jest.mock('src/selectors/accountBillingInfo', () => ({
-  selectVisiblePlans: jest.fn(() => ['visible plans'])
+  selectVisiblePlans: jest.fn(() => ['visible plans']),
+  selectTieredVisiblePlans: jest.fn(() => ({ 'default': []}))
 }));
 
 describe('choosePlanMSTP', () => {
