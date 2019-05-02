@@ -26,7 +26,7 @@ import validateEmailList from '../helpers/validateEmailList';
 const formName = 'alertForm';
 
 const accountOptions = [
-  { label: 'Master and all subaccounts', value: 'all' },
+  { label: 'Master and all subaccounts', value: 'ALL' },
   { label: 'Master account only', value: 'master' },
   { label: 'Single Subaccount', value: 'subaccount' }
 ];
@@ -40,7 +40,7 @@ export class AlertForm extends Component {
   componentDidUpdate(prevProps) {
     const { facet_name, change } = this.props;
 
-    if (prevProps.facet_name !== 'ALL' && facet_name === 'ALL') {
+    if (prevProps.facet_name !== facet_name) {
       change('facet_value', '');
     }
   }
@@ -159,9 +159,9 @@ export class AlertForm extends Component {
               disabled={submitting}
               validate={required}
             />}
-            {isSignals &&
+            {isSignals && assignTo !== 'ALL' &&
             <label>Facet</label>}
-            {isSignals &&
+            {isSignals && assignTo !== 'ALL' &&
             <Grid>
               <Grid.Column sm={8} md={7} lg={5}>
                 <div>
@@ -186,7 +186,7 @@ export class AlertForm extends Component {
                 </div>
               </Grid.Column>
             </Grid>}
-            {isSignals && <br/>}
+            {isSignals && assignTo !== 'ALL' && <br/>}
             <label>Criteria</label>
             <Grid>
               <Grid.Column sm={8} md={7} lg={5}>
