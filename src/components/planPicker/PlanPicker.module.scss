@@ -14,11 +14,22 @@
   }
 }
 
+.TriggerHeader {
+  display: block;
+  z-index: 2000;
+  padding: spacing(large);
+  font-size: rem(16);
+  font-weight: 600;
+  color: color(gray, 2);
+  cursor: pointer;
+  border-bottom: 1px solid color(gray, 9);
+}
+
 .TriggerPlan {
-  position: float;
+  position: relative;
   z-index: 1;
   display: block;
-  padding: spacing(large);
+  padding: spacing() spacing(large);
 
   &.triggerOpen {
     box-shadow: shadow(deep);
@@ -33,15 +44,6 @@
     opacity: 0.5;
     pointer-events: none;
   }
-}
-
-.TriggerHeader {
-  display: block;
-  z-index: 2000;
-  padding: spacing(large);
-  font-size: rem(16);
-  color: color(gray, 2);
-  cursor: pointer;
 }
 
 .DropdownLabel {
@@ -77,6 +79,10 @@
   }
 }
 
+.PlanContainer {
+  position: relative;
+}
+
 .SupportLabel {
   display: block;
   color: color(gray, 4);
@@ -86,7 +92,7 @@
 .List {
   position: absolute;
   z-index: 100;
-  top: 100%;
+  top: 0;
   left: 0;
   right: 0;
 
