@@ -7,7 +7,6 @@ describe('formatRole', () => {
     expect(formatRole(name)).toEqual(result);
   }, [
     { name: 'email', result: 'templates' },
-    { name: ROLES.SUBACCOUNT_REPORTING, result: 'reporting' },
     { name: 'other-role', result: 'other-role' }
   ]);
 });
