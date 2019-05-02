@@ -95,8 +95,7 @@ describe('EditPage', () => {
     const content = { html: '<h1>Test Template</h1>' };
     const wrapper = subject({
       history: { push: historyPush },
-      initialValues: { content },
-      template: { has_published: true }
+      template: { content, has_published: true }
     });
 
     wrapper
@@ -174,7 +173,7 @@ describe('EditPage', () => {
     const wrapper = subject({
       canModify: true,
       history: { push: historyPush },
-      initialValues: { content }
+      template: { content }
     });
 
     wrapper
@@ -192,7 +191,7 @@ describe('EditPage', () => {
     const testData = {};
     const wrapper = subject({
       history: { push: historyPush },
-      initialValues: { content },
+      template: { content },
       setTestData
     });
 
@@ -220,7 +219,7 @@ describe('EditPage', () => {
   it('opens unsaved changes action modal and displays list of dirty fields', () => {
     const wrapper = subject({
       canModify: true,
-      initialValues: {
+      template: {
         content: {
           html: '<h1>Test Template</h1>'
         }
@@ -245,7 +244,7 @@ describe('EditPage', () => {
   it('closes unsaved changes action modal', () => {
     const wrapper = subject({
       canModify: true,
-      initialValues: {
+      template: {
         content: {
           html: '<h1>Test Template</h1>'
         }
@@ -270,7 +269,7 @@ describe('EditPage', () => {
     const wrapper = subject({
       canModify: true,
       history: { push: historyPush },
-      initialValues: {
+      template: {
         content: {
           html: '<h1>Test Template</h1>'
         }
@@ -308,7 +307,7 @@ describe('EditPage', () => {
     const wrapper = subject({
       canModify: true,
       history: { push: historyPush },
-      initialValues: {
+      template: {
         content: {
           html: '<h1>Test Template</h1>'
         }

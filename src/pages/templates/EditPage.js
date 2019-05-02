@@ -76,10 +76,10 @@ export default class EditPage extends Component {
   }
 
   checkForUnsavedChanges = (callback) => (values) => {
-    const { initialValues } = this.props;
+    const { template } = this.props;
     const fieldPaths = Object.keys(CONTENT_FIELDS);
     const dirtyFields = fieldPaths.filter((path) => (
-      !_.isEqual(_.get(initialValues.content, path), _.get(values.content, path))
+      !_.isEqual(_.get(template.content, path), _.get(values.content, path))
     ));
 
     if (dirtyFields.length) {
