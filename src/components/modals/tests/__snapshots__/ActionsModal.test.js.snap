@@ -3,7 +3,6 @@
 exports[`ActionsModal renders hidden modal 1`] = `
 <Modal>
   <Panel
-    accent={true}
     title="Modal Title"
   >
     <Panel.Section>

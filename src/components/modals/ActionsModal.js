@@ -15,7 +15,7 @@ const ActionsModal = ({
   title
 }) => (
   <Modal open={isOpen} onClose={onCancel}>
-    <Panel title={title} accent>
+    <Panel title={title}>
       {isLoading ? (
         <Panel.Section className={styles.Loading}>
           <Loading />
