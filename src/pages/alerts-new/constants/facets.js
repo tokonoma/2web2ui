@@ -1,6 +1,7 @@
 export const FACETS = {
   ALL: 'None',
-  sending_domain: 'Sending Domain',
+  campaign_id: 'Campaign ID',
   ip_pool: 'IP Pool',
-  campaign_id: 'Campaign ID'
+  mb_provider: 'Mailbox Provider',
+  sending_domain: 'Sending Domain'
 };

@@ -16,6 +16,8 @@ import { COMPARATOR } from '../constants/comparator';
 import { defaultFormValues } from '../constants/defaultFormValues';
 import { listPools } from 'src/actions/ipPools';
 import MultiFacetWrapper from './MultiFacetWrapper';
+import { MB_PROVIDERS } from '../constants/mbProviders';
+import _ from 'lodash';
 
 // Helpers & Validation
 import { domain, required, integer, minNumber, maxNumber, maxLength, numberBetween } from 'src/helpers/validation';
@@ -24,7 +26,7 @@ import validateEmailList from '../helpers/validateEmailList';
 const formName = 'alertForm';
 
 const accountOptions = [
-  { label: 'Master and all subaccounts', value: 'all' },
+  { label: 'Master and all subaccounts', value: 'ALL' },
   { label: 'Master account only', value: 'master' },
   { label: 'Single Subaccount', value: 'subaccount' }
 ];
@@ -38,7 +40,7 @@ export class AlertForm extends Component {
   componentDidUpdate(prevProps) {
     const { facet_name, change } = this.props;
 
-    if (prevProps.facet_name !== 'ALL' && facet_name === 'ALL') {
+    if (prevProps.facet_name !== facet_name) {
       change('facet_value', '');
     }
   }
@@ -157,9 +159,9 @@ export class AlertForm extends Component {
               disabled={submitting}
               validate={required}
             />}
-            {isSignals &&
+            {isSignals && assignTo !== 'ALL' &&
             <label>Facet</label>}
-            {isSignals &&
+            {isSignals && assignTo !== 'ALL' &&
             <Grid>
               <Grid.Column sm={8} md={7} lg={5}>
                 <div>
@@ -174,8 +176,8 @@ export class AlertForm extends Component {
                         validate={required}
                       />
                     }
-                    component={facet_name === 'ip_pool' ? MultiFacetWrapper : TextFieldWrapper}
-                    items={(facet_name === 'ip_pool') ? ipPools : null}
+                    component={(facet_name === 'ip_pool' || facet_name === 'mb_provider') ? MultiFacetWrapper : TextFieldWrapper}
+                    items={facet_name === 'ip_pool' ? _.map(ipPools, 'id') : facet_name === 'mb_provider' ? _.keys(MB_PROVIDERS) : null}
                     disabled={submitting || checkFacet()}
                     placeholder={facet_name === 'ALL' ? 'No facet selected' : facet_name === 'sending_domain' ? 'mail.example.com' : ''}
                     validate={this.validateFacet}
@@ -184,7 +186,7 @@ export class AlertForm extends Component {
                 </div>
               </Grid.Column>
             </Grid>}
-            {isSignals && <br/>}
+            {isSignals && assignTo !== 'ALL' && <br/>}
             <label>Criteria</label>
             <Grid>
               <Grid.Column sm={8} md={7} lg={5}>

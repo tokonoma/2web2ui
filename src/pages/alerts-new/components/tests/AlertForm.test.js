@@ -13,7 +13,7 @@ describe('Alert Form Component', () => {
       name: 'shortname',
       pristine: true,
       newAlert: false,
-      assignTo: 'all',
+      assignTo: 'master',
       threshold: {
         error: {
           comparator: 'lt',
@@ -25,7 +25,7 @@ describe('Alert Form Component', () => {
       facet_name: 'sending_domain',
       enabled: true,
       listPools: jest.fn(),
-      change: (a, b) => b
+      change: jest.fn()
     };
 
     wrapper = shallow(<AlertForm {...props} />);
@@ -58,8 +58,15 @@ describe('Alert Form Component', () => {
       expect(wrapper.find({ name: 'facet_value' }).props().connectLeft.props.name).toEqual('facet_name');
     });
 
+    it('should only show facets select when assignTo is NOT set to ALL', () => {
+      wrapper.setProps({ assignTo: 'ALL' });
+      expect(wrapper.find({ name: 'facet_value' })).not.toExist();
+      wrapper.setProps({ assignTo: 'master' });
+      expect(wrapper.find({ name: 'facet_value' }).props().connectLeft.props.name).toEqual('facet_name');
+    });
+
     it('should show sending domain facets textfield component with correct props when facet_name is set to sending_domain', () => {
-      wrapper.setProps({ alert_metric: 'signals_health_threshold', assignTo: 'all', facet_name: 'sending_domain', facet_value: 'blah' });
+      wrapper.setProps({ facet_value: 'blah' });
       const field = wrapper.find({ name: 'facet_value' });
       expect(field.prop('component').name).toEqual('TextFieldWrapper');
       expect(field.prop('items')).toEqual(null);
@@ -67,28 +74,26 @@ describe('Alert Form Component', () => {
     });
 
     it('should validate domain', () => {
-      wrapper.setProps({ alert_metric: 'signals_health_threshold', assignTo: 'all', facet_name: 'sending_domain', facet_value: 'blah' });
+      wrapper.setProps({ facet_value: 'blah' });
       const validate = wrapper.find({ name: 'facet_value' }).prop('validate');
       expect(validate('foo', { facet_name: 'sending_domain' })).toEqual('Invalid Domain');
       expect(validate('foo.co', { facet_name: 'sending_domain' })).toBe(undefined);
     });
 
     it('should show warning if no ip pools', () => {
-      wrapper.setProps({ alert_metric: 'signals_health_threshold', assignTo: 'all', facet_name: 'ip_pool', ipPools: []});
+      wrapper.setProps({ facet_name: 'ip_pool', ipPools: []});
       expect(wrapper.find({ name: 'facet_value' }).props()).toMatchSnapshot();
     });
 
     it('should show ip pool facets typeahead component with correct props when facet_name is set to ip_pool', () => {
-      wrapper.setProps({ alert_metric: 'signals_health_threshold', assignTo: 'all', facet_name: 'ip_pool', facet_value: 'blah' });
+      wrapper.setProps({ facet_name: 'ip_pool', facet_value: 'blah' });
       expect(wrapper.find({ name: 'facet_value' }).prop('component').name).toEqual('MultiFacetWrapper');
       expect(wrapper.find({ name: 'facet_value' }).props()).toMatchSnapshot();
     });
 
-    it('should clear facet_value and validation when facet_name is set to ALL and signals threshold', () => {
-      wrapper.setProps({ alert_metric: 'signals_health_threshold', facet_name: 'ALL', facet_value: 'something' });
-      expect(wrapper).toMatchSnapshot();
-      wrapper.setProps({ alert_metric: 'signals_health_dod', facet_name: 'ip_pool', facet_value: 'something' });
-      expect(wrapper).toMatchSnapshot();
+    it('should clear facet_value and validation when facet_name is set to ip pool and signals threshold', () => {
+      wrapper.setProps({ facet_name: 'ip_pool' });
+      expect(props.change).toHaveBeenCalled();
     });
   });
 
@@ -110,7 +115,7 @@ describe('Alert Form Component', () => {
     });
 
     it('should validate target when alert_metric is set to signals_health_threshold', () => {
-      wrapper.setProps({ alert_metric: 'signals_health_threshold', threshold: { error: { target: 500 }}});
+      wrapper.setProps({ threshold: { error: { target: 500 }}});
       expect(wrapper.find({ name: 'threshold.error.target' }).props().validate[0]()).toEqual('Required');
       expect(wrapper.find({ name: 'threshold.error.target' }).props().validate[1]()).toEqual('Must be between 0 and 100');
     });

@@ -16,19 +16,16 @@ import _ from 'lodash';
  */
 class MultiFacet extends Component {
   state = {
-    matches: []
+    matches: this.props.items
   }
 
   componentWillUnmount() {
     this.updateMatches.cancel();
   }
 
-  handleInputValueChange = (value) => {
-    this.updateMatches(value);
-  }
-
   handleStateChange = (changes, downshift) => {
-    // Highlights first item in list by default
+    const input = _.get(changes, 'inputValue', '');
+    (input) ? this.updateMatches(input) : this.handleFocus(changes);
     if (!downshift.highlightedIndex) {
       downshift.setHighlightedIndex(0);
     }
@@ -36,22 +33,29 @@ class MultiFacet extends Component {
 
   // note, depending on size of items this calculation to find matches could be expensive
   updateMatches = debounce((nextValue) => {
-    const { items, maxNumberOfResults = 100 } = this.props;
-    const itemsArray = items.map((item) => _.get(item, 'domain', _.get(item, 'id', undefined)));
-
-    this.setState({ matches: itemsArray });
-
-    const matches = sortMatch(
-      itemsArray,
+    const updateMatches = sortMatch(
+      this.props.items,
       nextValue
     );
+
     // note, exclude the first match if it is the current input value
-    const begin = matches[0] === nextValue ? 1 : 0;
+    const filterMatch = (updateMatches[0] === nextValue) ? _.filter(updateMatches, nextValue) : updateMatches;
 
     this.setState({
-      matches: matches.slice(begin, maxNumberOfResults + begin)
+      matches: filterMatch
     });
   }, 300);
+
+  handleFocus = (stateChange) => {
+    const stateType = _.get(stateChange, 'type', '');
+
+    if (stateType === '__autocomplete_change_input__' || stateType === '__autocomplete_unknown__') {
+      this.updateMatches.cancel();
+      this.setState({
+        matches: this.props.items
+      });
+    }
+  };
 
   render() {
     const { items, value, ...inputProps } = this.props;
@@ -59,16 +63,16 @@ class MultiFacet extends Component {
 
     return (
       <Downshift
-        onInputValueChange={this.handleInputValueChange}
         onStateChange={this.handleStateChange}
         selectedItem={value}
       >
-        {(downshift) => (
-          <div className={styles.Typeahead}>
+        {(downshift) => {
+          inputProps.onFocus = downshift.openMenu;
+          return <div className={styles.Typeahead}>
             <MultiFacetInput {...inputProps} downshift={downshift} />
             <MultiFacetMenu downshift={downshift} items={matches}/>
-          </div>
-        )}
+          </div>;
+        }}
       </Downshift>
     );
   }
