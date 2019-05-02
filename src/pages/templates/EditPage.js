@@ -11,13 +11,13 @@ import Form from './components/containers/Form.container';
 import ImportSnippetLink from './components/ImportSnippetLink';
 
 const CONTENT_FIELDS = {
-  amp_html: 'AMP HTML',
+  amp_html: 'AMP HTML Content',
   'from.email': 'From Email',
   'from.name': 'From Name',
-  html: 'HTML',
+  html: 'HTML Content',
   reply_to: 'Reply To',
   subject: 'Subject',
-  text: 'Text'
+  text: 'Text Content'
 };
 
 const DEFAULT_DIRTY_CONTENT_MODAL_STATE = {

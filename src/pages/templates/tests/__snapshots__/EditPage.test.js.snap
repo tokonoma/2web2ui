@@ -7,10 +7,10 @@ exports[`EditPage opens unsaved changes action modal and displays list of dirty 
   </p>
   <ul>
     <li>
-      HTML
+      HTML Content
     </li>
     <li>
-      Text
+      Text Content
     </li>
   </ul>
 </div>
