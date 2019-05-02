@@ -1,8 +1,12 @@
 @import '~@sparkpost/matchbox/src/styles/config.scss';
 
 .Typeahead {
-  margin: 0 0 spacing();
+  margin: 0;
   position: relative;
+
+  fieldset {
+    margin: 0;
+  }
 }
 
 .List {
@@ -22,7 +26,7 @@
   transform: scale(0.96);
   transition: 0.06s ease-out;
   z-index: z-index(overlay);
-  
+
   &.open {
     opacity: 1;
     pointer-events: auto;

@@ -44,17 +44,17 @@ describe('MultiFacet', () => {
 
   it.each([
     ['matches on value change', {
-      changes: { inputValue: 'app' },
+      changes: 'app',
       matched: [
         'apples'
       ]
     }],
     ['excludes an exact match', {
-      changes: { inputValue: 'bananas' },
+      changes: 'bananas',
       matched: []
     }],
     ['reset matches when value is empty', {
-      changes: { inputValue: '' },
+      changes: '',
       matched: ['apples','apricot','aubergine','bananas']
     }]
   ])('%s', (testName, { initialMatches, changes, matched }) => {
@@ -66,7 +66,7 @@ describe('MultiFacet', () => {
       wrapper.setState({ matches: initialMatches });
     }
 
-    wrapper.simulate('stateChange', changes, downshift);
+    wrapper.simulate('inputValueChange', changes, downshift);
 
     expect(wrapper.shallow().find('MultiFacetMenu')).toHaveProp('items', matched);
   });
