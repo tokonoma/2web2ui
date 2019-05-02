@@ -25,7 +25,7 @@ describe('Alert Form Component', () => {
       facet_name: 'sending_domain',
       enabled: true,
       listPools: jest.fn(),
-      change: (a, b) => b
+      change: jest.fn()
     };
 
     wrapper = shallow(<AlertForm {...props} />);
@@ -91,11 +91,9 @@ describe('Alert Form Component', () => {
       expect(wrapper.find({ name: 'facet_value' }).props()).toMatchSnapshot();
     });
 
-    it('should clear facet_value and validation when facet_name is set to master and signals threshold', () => {
-      wrapper.setProps({ facet_value: 'something' });
-      expect(wrapper).toMatchSnapshot();
-      wrapper.setProps({ alert_metric: 'signals_health_dod', facet_name: 'ip_pool', facet_value: 'something' });
-      expect(wrapper).toMatchSnapshot();
+    it('should clear facet_value and validation when facet_name is set to ip pool and signals threshold', () => {
+      wrapper.setProps({ facet_name: 'ip_pool' });
+      expect(props.change).toHaveBeenCalled();
     });
   });
 
