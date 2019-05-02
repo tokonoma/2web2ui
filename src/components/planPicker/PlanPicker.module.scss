@@ -15,7 +15,7 @@
 }
 
 .TriggerPlan {
-  position: relative;
+  position: float;
   z-index: 1;
   display: block;
   padding: spacing(large);
@@ -35,9 +35,18 @@
   }
 }
 
+.TriggerHeader {
+  display: block;
+  z-index: 2000;
+  padding: spacing(large);
+  font-size: rem(16);
+  color: color(gray, 2);
+  cursor: pointer;
+}
+
 .DropdownLabel {
   display: block;
-  padding: spacing();
+  padding: spacing() spacing() spacing(smaller);
   background: color(gray, 10);
   border-top: 1px solid color(gray, 9);
   font-weight: 600;
@@ -102,8 +111,6 @@
 .Chevron {
   position: absolute;
   right: spacing(large);
-  top: 50%;
-  transform: translate(0, -50%);
   pointer-events: none;
   fill: color(orange);
 }

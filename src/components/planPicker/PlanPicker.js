@@ -7,12 +7,13 @@ import _ from 'lodash';
 import { ExpandMore } from '@sparkpost/matchbox-icons';
 import Plan from './Plan';
 import styles from './PlanPicker.module.scss';
+import { PLAN_TIERS } from 'src/constants';
 
 const TIERS = [
   { key: 'default' },
-  { key: 'test', label: 'Test Account' },
-  { key: 'starter', label: 'Starter' },
-  { key: 'premier', label: 'Premier' }
+  { key: 'test', label: PLAN_TIERS.test },
+  { key: 'starter', label: PLAN_TIERS.starter },
+  { key: 'premier', label: PLAN_TIERS.premier }
 ];
 
 /**
@@ -73,12 +74,23 @@ export class PlanPicker extends Component {
     const planPriceProps = {
       selectedPromo
     };
+
+    const selectedPlan = (<>
+        {PLAN_TIERS[selectedItem.tier] && <div className={cx(styles.DropdownLabel)}>{PLAN_TIERS[selectedItem.tier]}</div>}
+        <Plan plan={selectedItem} className={triggerClasses} planPriceProps={planPriceProps}/>
+    </>);
+
     return (
       <div className={styles.PlanPicker}>
-        <div className={listClasses}>{items}</div>
-        <ExpandMore size={24} className={styles.Chevron} />
+        <div {...triggerProps}>
+          <div className={cx(styles.TriggerHeader)}>
+            Select A Plan
+            <ExpandMore size={24} className={styles.Chevron} />
+          </div>
+          {selectedPlan}
+        </div>
         <input {...getInputProps()} ref={(input) => this.input = input} className={styles.Input} />
-        <Plan {...triggerProps} className={triggerClasses} planPriceProps={planPriceProps}/>
+        <div className={listClasses}>{items}</div>
       </div>
     );
   };

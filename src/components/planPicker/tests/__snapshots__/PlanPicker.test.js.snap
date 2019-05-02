@@ -10,32 +10,38 @@ exports[`Plan Picker:  renders correctly 1`] = `
   }
   name="planpicker"
   plans={
-    Array [
-      Object {
-        "code": "1",
-        "includesIp": true,
-        "monthly": 100,
-        "name": "One",
-        "overage": 0.1,
-        "volume": 1,
-      },
-      Object {
-        "code": "2",
-        "includesIp": false,
-        "isFree": true,
-        "monthly": 0,
-        "name": "Two",
-        "overage": 0.2,
-        "volume": 2,
-      },
-      Object {
-        "code": "3",
-        "monthly": 300,
-        "name": "Three",
-        "overage": 0.3,
-        "volume": 3,
-      },
-    ]
+    Object {
+      "default": Array [
+        Object {
+          "code": "1",
+          "includesIp": true,
+          "monthly": 100,
+          "name": "One",
+          "overage": 0.1,
+          "volume": 1,
+        },
+      ],
+      "starter": Array [
+        Object {
+          "code": "3",
+          "monthly": 300,
+          "name": "Three",
+          "overage": 0.3,
+          "volume": 3,
+        },
+      ],
+      "test": Array [
+        Object {
+          "code": "2",
+          "includesIp": false,
+          "isFree": true,
+          "monthly": 0,
+          "name": "Two",
+          "overage": 0.2,
+          "volume": 2,
+        },
+      ],
+    }
   }
 />
 `;
@@ -57,32 +63,38 @@ exports[`Plan Picker:  renders correctly with an initial value 1`] = `
   }
   name="planpicker"
   plans={
-    Array [
-      Object {
-        "code": "1",
-        "includesIp": true,
-        "monthly": 100,
-        "name": "One",
-        "overage": 0.1,
-        "volume": 1,
-      },
-      Object {
-        "code": "2",
-        "includesIp": false,
-        "isFree": true,
-        "monthly": 0,
-        "name": "Two",
-        "overage": 0.2,
-        "volume": 2,
-      },
-      Object {
-        "code": "3",
-        "monthly": 300,
-        "name": "Three",
-        "overage": 0.3,
-        "volume": 3,
-      },
-    ]
+    Object {
+      "default": Array [
+        Object {
+          "code": "1",
+          "includesIp": true,
+          "monthly": 100,
+          "name": "One",
+          "overage": 0.1,
+          "volume": 1,
+        },
+      ],
+      "starter": Array [
+        Object {
+          "code": "3",
+          "monthly": 300,
+          "name": "Three",
+          "overage": 0.3,
+          "volume": 3,
+        },
+      ],
+      "test": Array [
+        Object {
+          "code": "2",
+          "includesIp": false,
+          "isFree": true,
+          "monthly": 0,
+          "name": "Two",
+          "overage": 0.2,
+          "volume": 2,
+        },
+      ],
+    }
   }
 />
 `;

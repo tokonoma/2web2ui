@@ -123,7 +123,7 @@ export class ChangePlanForm extends Component {
       <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
         <Grid>
           <Grid.Column>
-            <Panel title='Select A Plan'>
+            <Panel>
               {!_.isEmpty(plans)
                 ? <PlanPicker disabled={submitting} plans={plans} onChange={this.onPlanSelect}/>
                 : null

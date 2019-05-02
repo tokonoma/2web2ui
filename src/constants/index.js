@@ -159,3 +159,9 @@ export const MAILBOX_PROVIDERS = {
   other_european_providers: 'Other European Providers',
   other: 'Other Providers'
 };
+
+export const PLAN_TIERS = {
+  test: 'Test Account',
+  starter: 'Starter',
+  premier: 'Premier'
+};
