@@ -178,6 +178,7 @@ export class AlertForm extends Component {
                     }
                     component={(facet_name === 'ip_pool' || facet_name === 'mb_provider') ? MultiFacetWrapper : TextFieldWrapper}
                     items={facet_name === 'ip_pool' ? _.map(ipPools, 'id') : facet_name === 'mb_provider' ? _.keys(MB_PROVIDERS) : null}
+                    facetname={facet_name}
                     disabled={submitting || checkFacet()}
                     placeholder={facet_name === 'ALL' ? 'No facet selected' : facet_name === 'sending_domain' ? 'mail.example.com' : ''}
                     validate={this.validateFacet}
