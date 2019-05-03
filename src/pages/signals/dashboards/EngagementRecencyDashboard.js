@@ -35,7 +35,7 @@ export class EngagementRecencyDashboard extends Component {
             <FacetFilter facets={facets}/>
           </Grid>
         </Panel>
-        <EngagementRecencyOverview subaccounts={subaccounts} hideTitle />
+        <EngagementRecencyOverview defaults={{ perPage: 25 }} subaccounts={subaccounts} hideTitle />
       </Page>
     );
   }

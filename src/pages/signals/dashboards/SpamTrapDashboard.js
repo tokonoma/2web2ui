@@ -36,7 +36,7 @@ export class SpamTrapDashboard extends Component {
             <FacetFilter facets={_.reject(facets, (facet) => facet.key === 'mb_provider')}/>
           </Grid>
         </Panel>
-        <SpamTrapOverview subaccounts={subaccounts} hideTitle />
+        <SpamTrapOverview defaults={{ perPage: 25 }} subaccounts={subaccounts} hideTitle />
       </Page>
     );
   }

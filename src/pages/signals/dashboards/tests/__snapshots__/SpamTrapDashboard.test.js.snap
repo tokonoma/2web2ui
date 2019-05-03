@@ -45,6 +45,11 @@ exports[`Signals Spam Trap Dashboard Dashboard renders page 1`] = `
     </Grid>
   </Panel>
   <Connect(withRouter(Connect(SpamTrapOverview)))
+    defaults={
+      Object {
+        "perPage": 25,
+      }
+    }
     hideTitle={true}
   />
 </SignalsPage>

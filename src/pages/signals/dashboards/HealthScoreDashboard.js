@@ -49,6 +49,7 @@ export function HealthScoreDashboard(props) {
         </Grid.Column>
       </Grid>
       <HealthScoreOverview
+        defaults={{ perPage: 25 }}
         subaccounts={subaccounts}
         hideTitle
         header={
