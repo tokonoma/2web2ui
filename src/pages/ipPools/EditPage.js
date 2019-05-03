@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
@@ -11,6 +11,10 @@ import { showAlert } from 'src/actions/globalAlert';
 import { deletePool, listPools, updatePool } from 'src/actions/ipPools';
 import { selectCurrentPool, selectIpsForCurrentPool, shouldShowIpPurchaseCTA } from 'src/selectors/ipPools';
 import isDefaultPool from './helpers/defaultPool';
+import { not } from 'src/helpers/conditions';
+import { selectCondition } from 'src/selectors/accessConditionState';
+import { isSelfServeBilling } from 'src/helpers/conditions/account';
+import SupportTicketLink from 'src/components/supportTicketLink/SupportTicketLink';
 
 
 const breadcrumbAction = {
@@ -94,16 +98,19 @@ export class EditPage extends Component {
   }
 
   renderIps() {
-    const { isNew, ips, pool, showPurchaseCTA } = this.props;
+    const { isNew, ips, pool, showPurchaseCTA, isManuallyBilled } = this.props;
 
     if (isNew) {
       return null;
     }
 
     const purchaseCTA = showPurchaseCTA
-      ? <Fragment>, or by <UnstyledLink to="/account/billing" component={Link}>purchasing new
-        IPs</UnstyledLink></Fragment>
-      : null;
+      ? (isManuallyBilled
+        ? <>, or by purchasing new IPs. Please <SupportTicketLink issueId='request_new_ip'>reach out to
+        the support team</SupportTicketLink> for assistance adding a new IP</>
+        : <>, or by <UnstyledLink to="/account/billing" component={Link}>purchasing new
+        IPs</UnstyledLink></>
+      ) : null;
 
     return (<Panel title='Sending IPs'>
       <Panel.Section>
@@ -165,13 +172,9 @@ const mapStateToProps = (state, props) => {
     pool: selectCurrentPool(state, props),
     ips: selectIpsForCurrentPool(state, props),
     listError,
+    isManuallyBilled: selectCondition(not(isSelfServeBilling))(state),
     showPurchaseCTA: shouldShowIpPurchaseCTA(state)
   };
 };
 
-export default connect(mapStateToProps, {
-  updatePool,
-  deletePool,
-  listPools,
-  showAlert
-})(EditPage);
+export default connect(mapStateToProps, { updatePool, deletePool, listPools, showAlert })(EditPage);

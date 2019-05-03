@@ -29,7 +29,8 @@ describe('IP Pools Edit Page', () => {
       loading: false,
       listPools: jest.fn(),
       listError: null,
-      showPurchaseCTA: true
+      showPurchaseCTA: true,
+      isManuallyBilled: false
     };
 
     wrapper = shallow(<EditPage {...props} />);
@@ -48,6 +49,11 @@ describe('IP Pools Edit Page', () => {
     it('should not show purchase action if showPurchaseCTA is false', () => {
       wrapper.setProps({ showPurchaseCTA: false });
       expect(wrapper).toMatchSnapshot();
+    });
+
+    it('should show support ticket link if manually billed', () => {
+      wrapper.setProps({ isManuallyBilled: true });
+      expect(wrapper.find('Connect(SupportTicketLink)')).toExist();
     });
 
     it('should list pools and get pool when calling loadDependentData', () => {
