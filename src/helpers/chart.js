@@ -42,8 +42,7 @@ function getLineChartFormatters(precision) {
   return formatters;
 }
 
-const formatYAxisPercent = _.memoize((v) => `${roundToPlaces(v, v < 1 ? 3 : 1)}%`
-);
+const formatYAxisPercent = _.memoize((v) => `${roundToPlaces(v, v < 1 ? 3 : 1)}%`);
 
 export {
   getDayLines,

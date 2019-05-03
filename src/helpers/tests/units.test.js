@@ -61,7 +61,7 @@ describe('Formatting helpers', () => {
       expect(formatting.formatBytes(iceCream)).toBe(iceCream);
     });
     it('should include suffixes where appropriate', () => {
-      expect(formatting.formatBytes(999)).toMatch(/B$/);
+      expect(formatting.formatBytes(1023)).toMatch(/B$/);
       expect(formatting.formatBytes(kb)).toMatch(/KB$/);
       expect(formatting.formatBytes(kb * kb)).toMatch(/MB$/);
       expect(formatting.formatBytes(kb * kb * kb)).toMatch(/GB$/);
