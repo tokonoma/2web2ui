@@ -41,6 +41,8 @@ import { default as emailVerification } from 'src/components/emailVerification/E
 import { emailVerificationRedirect, emailRedirects } from './emailRoutes';
 import SecretBillingPlanOrBillingSummaryPage from './SecretBillingPlanOrBillingSummaryPage';
 
+import PrototypeSignalsDetails from 'src/prototypes/signals/DetailsPage';
+
 import { hasGrants, all, not } from 'src/helpers/conditions';
 import {
   isAws,
@@ -787,6 +789,12 @@ const routes = [
     path: '/logout',
     component: LogoutPage,
     title: 'Logging out...'
+  },
+  {
+    path: '/prototype/signals/a',
+    component: PrototypeSignalsDetails,
+    title: 'Prototype Signals',
+    layout: App,
   }
 ];
 
