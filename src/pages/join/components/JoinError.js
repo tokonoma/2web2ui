@@ -30,7 +30,7 @@ export default function JoinError({ errors, data }) {
     return 'It looks like you\'ve already created a SparkPost account through the AWS Marketplace. There may be a brief delay for your AWS account info to synchronize. Please wait a few minutes and then sign in.';
   } else if (status === 409 && message.match(/\bemail\b/i)) {
     return <span>It looks like you already have a SparkPost account using {data.email}.&nbsp;
-    <UnstyledLink to="/auth">Sign in</UnstyledLink>
+      <UnstyledLink to="/auth">Sign in</UnstyledLink>
     </span>;
   } else if (status === 403 && message.match(/^Sign up blocked/i)) {
     return <span>Your account requires manual review. To proceed with sign up, please <UnstyledLink

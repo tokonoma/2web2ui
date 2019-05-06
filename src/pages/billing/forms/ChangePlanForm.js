@@ -14,11 +14,9 @@ import {
   currentPlanSelector, canUpdateBillingInfoSelector, selectVisiblePlans, selectAccountBilling
 } from 'src/selectors/accountBillingInfo';
 import { Panel, Grid } from '@sparkpost/matchbox';
-import { Loading, PlanPicker } from 'src/components';
-import PaymentForm from './fields/PaymentForm';
-import BillingAddressForm from './fields/BillingAddressForm';
+import { Loading, PlanPicker, ApiErrorBanner } from 'src/components';
 import Confirmation from '../components/Confirmation';
-import CardSummary from '../components/CardSummary';
+import CardSection from '../components/CardSection';
 import promoCodeValidate from '../helpers/promoCodeValidate';
 import { isAws, isSelfServeBilling } from 'src/helpers/conditions/account';
 import { selectCondition } from 'src/selectors/accessConditionState';
@@ -88,42 +86,6 @@ export class ChangePlanForm extends Component {
       });
   };
 
-  renderCCSection = () => {
-    const { account, selectedPlan } = this.props;
-
-    if (selectedPlan.isFree) {
-      return null; // CC not required on free plans
-    }
-
-    if (account.billing && this.state.useSavedCC) {
-      return (
-        <Panel title='Pay With Saved Payment Method' actions={[{ content: 'Use Another Credit Card', onClick: this.handleCardToggle, color: 'orange' }]}>
-          <Panel.Section><CardSummary billing={account.billing} /></Panel.Section>
-        </Panel>
-      );
-    }
-
-    const savedPaymentAction = this.props.canUpdateBillingInfo
-      ? [{ content: 'Use Saved Payment Method', onClick: this.handleCardToggle, color: 'orange' }]
-      : null;
-
-    return (
-      <Panel title='Add a Credit Card' actions={savedPaymentAction}>
-        <Panel.Section>
-          <PaymentForm
-            formName={FORMNAME}
-            disabled={this.props.submitting} />
-        </Panel.Section>
-        <Panel.Section>
-          <BillingAddressForm
-            formName={FORMNAME}
-            disabled={this.props.submitting}
-            countries={this.props.billing.countries} />
-        </Panel.Section>
-      </Panel>
-    );
-  }
-
   onPlanSelect = (e) => {
     const { currentPlan, clearPromoCode } = this.props;
     if (currentPlan.code !== e.code) {
@@ -132,7 +94,19 @@ export class ChangePlanForm extends Component {
   }
 
   render() {
-    const { loading, submitting, currentPlan, selectedPlan, plans, isSelfServeBilling, billing, verifyPromoCode } = this.props;
+    const { loading, canUpdateBillingInfo, submitting, currentPlan, selectedPlan, plans, isSelfServeBilling, billing, verifyPromoCode, error, account } = this.props;
+    const { countries } = billing;
+    if (error) {
+      return (
+        <ApiErrorBanner
+          status='danger'
+          message="We couldn't render the page. Reload to try again."
+          reload={() => location.reload()}
+          errorDetails={error.message}
+        />
+      );
+    }
+
     if (loading) {
       return <Loading />;
     }
@@ -156,7 +130,15 @@ export class ChangePlanForm extends Component {
               }
             </Panel>
             <AccessControl condition={not(isAws)}>
-              {this.renderCCSection()}
+              <CardSection
+                account={account}
+                countries={countries}
+                selectedPlan={selectedPlan}
+                submitting={submitting}
+                canUpdateBillingInfo={canUpdateBillingInfo}
+                useSavedCC={this.state.useSavedCC}
+                handleCardToggle={this.handleCardToggle}
+              />
             </AccessControl>
           </Grid.Column>
           <Grid.Column xs={12} md={5}>
@@ -195,5 +177,5 @@ const mapStateToProps = (state, props) => {
 };
 
 const mapDispatchtoProps = { getBillingInfo, billingCreate, billingUpdate, updateSubscription, showAlert, getPlans, getBillingCountries, fetchAccount, verifyPromoCode, clearPromoCode };
-const formOptions = { form: FORMNAME, asyncValidate: promoCodeValidate(FORMNAME), asyncChangeFields: ['planpicker'], asyncBlurFields: ['promoCode']};
+const formOptions = { form: FORMNAME, enableReinitialize: true, asyncValidate: promoCodeValidate(FORMNAME), asyncChangeFields: ['planpicker'], asyncBlurFields: ['promoCode']};
 export default withRouter(connect(mapStateToProps, mapDispatchtoProps)(reduxForm(formOptions)(ChangePlanForm)));
