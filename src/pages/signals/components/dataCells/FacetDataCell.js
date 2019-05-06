@@ -1,11 +1,12 @@
 import React from 'react';
 import PageLink from 'src/components/pageLink';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
+import { MB_PROVIDERS } from 'src/constants';
 import styles from './DataCell.module.scss';
 import classnames from 'classnames';
 
 const FacetDataCell = ({ dimension, facet, id, name, subaccountId, truncate }) => {
-  let label = id;
+  let label = friendlyLabel(facet, id);
   let search;
 
   if (facet === 'sid' && id === 0) {
@@ -39,6 +40,15 @@ const FacetDataCell = ({ dimension, facet, id, name, subaccountId, truncate }) =
       />
     </div>
   );
+};
+
+const friendlyLabel = (facet, id) => {
+  switch (facet) {
+    case 'mb_provider':
+      return MB_PROVIDERS[id];
+    default:
+      return id;
+  }
 };
 
 export default FacetDataCell;

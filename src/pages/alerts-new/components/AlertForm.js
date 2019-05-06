@@ -16,7 +16,7 @@ import { COMPARATOR } from '../constants/comparator';
 import { defaultFormValues } from '../constants/defaultFormValues';
 import { listPools } from 'src/actions/ipPools';
 import MultiFacetWrapper from './MultiFacetWrapper';
-import { MB_PROVIDERS } from '../constants/mbProviders';
+import { MB_PROVIDERS } from 'src/constants';
 import _ from 'lodash';
 
 // Helpers & Validation
