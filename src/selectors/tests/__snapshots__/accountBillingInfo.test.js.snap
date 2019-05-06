@@ -146,6 +146,7 @@ Object {
     Object {
       "code": "pub",
       "status": "public",
+      "tier": "default",
     },
   ],
   "premier": Array [

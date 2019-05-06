@@ -33,9 +33,9 @@ export class PlanPicker extends Component {
     selectedItem,
     highlightedIndex
   }) => {
-    const { plans, input, disabled, selectedPromo } = this.props;
+    const { plansByTier, input, disabled, selectedPromo } = this.props;
 
-    if (!selectedItem || _.isEmpty(plans)) {
+    if (!selectedItem || _.isEmpty(plansByTier)) {
       return null;
     }
 
@@ -43,13 +43,13 @@ export class PlanPicker extends Component {
     const items = [];
 
     TIERS.forEach((tier) => {
-      const tierPlans = plans[tier.key];
+      const tierPlans = plansByTier[tier.key];
       if (tierPlans) {
         if (tier.label) {
           items.push(<div key={`label_${tier.key}`} className={cx(styles.DropdownLabel)}>{tier.label}:</div>);
         }
 
-        plans[tier.key].forEach((item) => {
+        plansByTier[tier.key].forEach((item) => {
           const classes = cx(
             styles.DropdownPlan,
             selectedItem.code === item.code && styles.selected,
@@ -97,18 +97,18 @@ export class PlanPicker extends Component {
 
 
   render() {
-    const { plans, input } = this.props;
+    const { plansByTier, input } = this.props;
     const { onChange, value } = input;
 
     return (
       <Downshift
         onChange={onChange}
         itemToString={(item) => (item ? item.code : '')} // prevents the downshift console warning
-        initialSelectedItem={(value && value.code) ? value : plans[0]} >
+        initialSelectedItem={(value && value.code) ? value : plansByTier.default[0]} >
         {this.planFn}
       </Downshift>
     );
   }
 }
 
-export default ({ plans = [], ...rest }) => <Field component={PlanPicker} name='planpicker' plans={plans} {...rest} />;
+export default ({ plans = {}, ...rest }) => <Field component={PlanPicker} name='planpicker' plansByTier={plans} {...rest} />;

@@ -87,13 +87,12 @@ export const selectVisiblePlans = createSelector(
 export const selectTieredVisiblePlans = createSelector(
   [selectVisiblePlans],
   (plans) => {
-    const result = {};
-    plans.forEach((plan) => {
-      const tier = plan.tier || (currentFreePlans.includes(plan.code) ? 'test' : 'default');
-      result[tier] = result[tier] || [];
-      result[tier].push(plan);
-    });
-    return result;
+    const normalizedPlans = plans.map((plan) => ({
+      ...plan,
+      tier: plan.tier || (currentFreePlans.includes(plan.code) ? 'test' : 'default')
+    }));
+
+    return _.groupBy(normalizedPlans, 'tier');
   }
 );
 export const selectAccount = (state) => state.account;

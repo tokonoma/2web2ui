@@ -9,7 +9,7 @@ exports[`Plan Picker:  renders correctly 1`] = `
     }
   }
   name="planpicker"
-  plans={
+  plansByTier={
     Object {
       "default": Array [
         Object {
@@ -62,7 +62,7 @@ exports[`Plan Picker:  renders correctly with an initial value 1`] = `
     }
   }
   name="planpicker"
-  plans={
+  plansByTier={
     Object {
       "default": Array [
         Object {
