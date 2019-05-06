@@ -2,7 +2,12 @@
 
 exports[`JoinError it returns generic error on all other cases 1`] = `
 <span>
-  Something went wrong. Please try again in a few minutes.
+  Something went wrong. Please try again in a few minutes or 
+  <UnstyledLink
+    to="https://support.sparkpost.com/customer/portal/emails/new"
+  >
+    contact support
+  </UnstyledLink>
 </span>
 `;
 
@@ -41,7 +46,12 @@ exports[`JoinError render:  manual review required (siftscience) 1`] = `
 
 exports[`JoinError render:  no status 1`] = `
 <span>
-  Something went wrong. Please try again in a few minutes.
+  Something went wrong. Please try again in a few minutes or 
+  <UnstyledLink
+    to="https://support.sparkpost.com/customer/portal/emails/new"
+  >
+    contact support
+  </UnstyledLink>
 </span>
 `;
 

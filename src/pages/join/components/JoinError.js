@@ -11,7 +11,8 @@ export default function JoinError({ errors, data }) {
   let status;
   let message;
 
-  const genericError = <span>Something went wrong. Please try again in a few minutes.</span>;
+  const genericError = <span>Something went wrong. Please try again in a few minutes or <UnstyledLink to={LINKS.SUBMIT_SUPPORT_TICKET}>contact
+      support</UnstyledLink></span>;
 
   try {
     message = errors.response.data.errors[0].message;
