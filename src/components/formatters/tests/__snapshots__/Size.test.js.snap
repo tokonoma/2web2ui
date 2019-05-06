@@ -4,7 +4,7 @@ exports[`Size should render size in GB 1`] = `
 <Size
   value={1074000000}
 >
-  1.07GB
+  1GB
 </Size>
 `;
 
@@ -12,7 +12,7 @@ exports[`Size should render size in KB 1`] = `
 <Size
   value={1025}
 >
-  1.02KB
+  1KB
 </Size>
 `;
 
@@ -20,7 +20,7 @@ exports[`Size should render size in MB 1`] = `
 <Size
   value={1049000}
 >
-  1.05MB
+  1MB
 </Size>
 `;
 
@@ -28,7 +28,7 @@ exports[`Size should render size in PB 1`] = `
 <Size
   value={1126000000000000}
 >
-  1.13PB
+  1PB
 </Size>
 `;
 
@@ -36,7 +36,7 @@ exports[`Size should render size in TB 1`] = `
 <Size
   value={1100000000000}
 >
-  1.1TB
+  1TB
 </Size>
 `;
 

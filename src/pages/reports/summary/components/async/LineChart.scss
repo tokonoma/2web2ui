@@ -3,6 +3,7 @@
 .sp-linechart-wrapper {
   position: relative;
   margin-bottom: rem(30);
+  transform: translate(10px, 0);
 
   &:last-child {
     margin-bottom: 0;
@@ -11,7 +12,7 @@
   // Tick label
   .recharts-text.recharts-cartesian-axis-tick-value {
     fill: color(gray, 5);
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 500;
   }
 
@@ -30,7 +31,7 @@
   .sp-linechart-yLabel {
     position: absolute;
     top: 50%;
-    transform: rotate(-90deg);
+    transform: rotate(-90deg) translate(0, -3px);
     transform-origin: 0;
 
     color: color(gray, 4);
@@ -86,7 +87,7 @@
 
           .recharts-tooltip-item-name {}
           .recharts-tooltip-item-separator {
-            padding-right: rem(50);
+            padding-right: rem(55);
           }
           .recharts-tooltip-item-value {
             font-weight: 600;

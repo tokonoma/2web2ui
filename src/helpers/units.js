@@ -1,10 +1,5 @@
 import _ from 'lodash';
 
-const MILLION = Math.pow(10, 6);
-const BILLION = Math.pow(10, 9);
-const TRILLION = Math.pow(10, 12);
-const QUARDRILLION = Math.pow(10, 15);
-
 export const isNumber = (value) => isNaN(parseFloat(value)) === false || isFinite(value) === true;
 
 export function roundToPlaces(number, places) {
@@ -13,7 +8,7 @@ export function roundToPlaces(number, places) {
 }
 
 // Formats bytes into a readable size value
-export const formatBytes = (value) => {
+export const formatBytes = _.memoize((value) => {
   if (!isNumber(value)) {
     return value;
   }
@@ -23,11 +18,11 @@ export const formatBytes = (value) => {
   let suffix = 'B';
 
   const formatters = {
-    'PB': QUARDRILLION,
-    'TB': TRILLION,
-    'GB': BILLION,
-    'MB': MILLION,
-    'KB': 1000
+    'PB': Math.pow(2, 50),
+    'TB': Math.pow(2, 40),
+    'GB': Math.pow(2, 30),
+    'MB': Math.pow(2, 20),
+    'KB': Math.pow(2, 10)
   };
 
   _.forEach(formatters, (unit, key) => {
@@ -38,11 +33,11 @@ export const formatBytes = (value) => {
     }
   });
 
-  return `${roundToPlaces(formatted, 2).toLocaleString()}${suffix}`;
-};
+  return `${roundToPlaces(formatted, 2).toLocaleString(undefined, { maximumSignificantDigits: 4 })}${suffix}`;
+});
 
 // Formats milliseconds into a readable duration value
-export const formatMilliseconds = (value) => {
+export const formatMilliseconds = _.memoize((value) => {
   if (!isNumber(value)) {
     return value;
   }
@@ -66,10 +61,10 @@ export const formatMilliseconds = (value) => {
   });
 
   return `${roundToPlaces(formatted, 2).toLocaleString()}${suffix}`;
-};
+});
 
 // Formats number count into a abbreviated count
-export const formatNumber = (value) => {
+export const formatNumber = _.memoize((value) => {
   if (!isNumber(value)) {
     return value;
   }
@@ -79,8 +74,8 @@ export const formatNumber = (value) => {
   let suffix = '';
 
   const formatters = {
-    'B': BILLION,
-    'M': MILLION,
+    'B': Math.pow(10, 9),
+    'M': Math.pow(10, 6),
     'K': 1000
   };
 
@@ -93,7 +88,7 @@ export const formatNumber = (value) => {
   });
 
   return `${roundToPlaces(formatted, 2).toLocaleString()}${suffix}`;
-};
+});
 
 // Formats number count to sting with commas
 export const formatFullNumber = (value) => {
