@@ -4,24 +4,28 @@ import EditPage from '../EditPage';
 import ImportSnippetLink from '../components/ImportSnippetLink';
 
 describe('EditPage', () => {
-  const subject = (props = {}) => shallow(
-    <EditPage
-      getDraft={() => {}}
-      getTestData={() => {}}
-      handleSubmit={(fn) => fn}
-      loading={false}
-      match={{
-        params: {
-          id: 'test-template'
-        }
-      }}
-      subaccountId={123}
-      template={{
-        id: 'test-template'
-      }}
-      {...props}
-    />
-  );
+  const subject = (props = {}) => {
+    // formValues and template must be same on mount
+    const template = props.template || { id: 'test-template' };
+
+    return shallow(
+      <EditPage
+        getDraft={() => {}}
+        getTestData={() => {}}
+        formValues={template}
+        handleSubmit={(fn) => fn}
+        loading={false}
+        match={{
+          params: {
+            id: 'test-template'
+          }
+        }}
+        subaccountId={123}
+        template={template}
+        {...props}
+      />
+    );
+  };
 
   it('renders a page', () => {
     expect(subject()).toMatchSnapshot();
@@ -92,16 +96,21 @@ describe('EditPage', () => {
 
   it('redirects to published version', () => {
     const historyPush = jest.fn();
-    const content = { html: '<h1>Test Template</h1>' };
     const wrapper = subject({
       history: { push: historyPush },
-      template: { content, has_published: true }
+      template: {
+        content: {
+          html: '<h1>Test Template</h1>'
+        },
+        has_published: true,
+        id: 'test-template'
+      }
     });
 
     wrapper
       .prop('secondaryActions')
       .find((action) => action.content === 'View Published')
-      .onClick({ id: 'test-template', content });
+      .onClick();
 
     expect(historyPush).toHaveBeenCalledWith('/templates/edit/test-template/published?subaccount=123');
   });
@@ -169,36 +178,45 @@ describe('EditPage', () => {
 
   it('redirects to duplicate page', () => {
     const historyPush = jest.fn();
-    const content = { html: '<h1>Test Template</h1>' };
     const wrapper = subject({
       canModify: true,
       history: { push: historyPush },
-      template: { content }
+      template: {
+        content: {
+          html: '<h1>Test Template</h1>'
+        },
+        id: 'test-template'
+      }
     });
 
     wrapper
       .prop('secondaryActions')
       .find((action) => action.content === 'Duplicate')
-      .onClick({ id: 'test-template', content });
+      .onClick();
 
     expect(historyPush).toHaveBeenCalledWith('/templates/create/test-template');
   });
 
   it('redirects to preview page', async () => {
     const historyPush = jest.fn();
-    const content = { html: '<h1>Test Template</h1>' };
     const setTestData = jest.fn(() => Promise.resolve());
     const testData = {};
     const wrapper = subject({
       history: { push: historyPush },
-      template: { content },
+      template: {
+        content: {
+          html: '<h1>Test Template</h1>'
+        },
+        id: 'test-template',
+        testData: {}
+      },
       setTestData
     });
 
     await wrapper
       .prop('secondaryActions')
       .find((action) => action.content === 'Preview')
-      .onClick({ id: 'test-template', content, testData });
+      .onClick();
 
     expect(setTestData).toHaveBeenCalledWith({ id: 'test-template', mode: 'draft', data: testData });
     expect(historyPush).toHaveBeenCalledWith('/templates/preview/test-template?subaccount=123');
@@ -217,11 +235,21 @@ describe('EditPage', () => {
   });
 
   it('opens unsaved changes action modal and displays list of dirty fields', () => {
-    const wrapper = subject({
-      canModify: true,
-      template: {
+    const template = {
+      content: {
+        html: '<h1>Test Template</h1>'
+      },
+      id: 'test-template'
+    };
+    const wrapper = subject({ canModify: true, template });
+
+    // update content
+    wrapper.setProps({
+      formValues: {
+        ...template,
         content: {
-          html: '<h1>Test Template</h1>'
+          html: '<h1>Updated Test Template</h1>',
+          text: 'Updated Test Template'
         }
       }
     });
@@ -229,24 +257,27 @@ describe('EditPage', () => {
     wrapper
       .prop('secondaryActions')
       .find((action) => action.content === 'Duplicate')
-      .onClick({
-        id: 'test-template',
-        content: {
-          html: '<h1>Updated Test Template</h1>',
-          text: 'Updated Test Template'
-        }
-      });
+      .onClick();
 
     expect(wrapper.find('ActionsModal')).toHaveProp('isOpen', true);
     expect(wrapper.find('ActionsModal').prop('content')).toMatchSnapshot();
   });
 
   it('closes unsaved changes action modal', () => {
-    const wrapper = subject({
-      canModify: true,
-      template: {
+    const template = {
+      content: {
+        html: '<h1>Test Template</h1>'
+      },
+      id: 'test-template'
+    };
+    const wrapper = subject({ canModify: true, template });
+
+    // update content
+    wrapper.setProps({
+      formValues: {
+        ...template,
         content: {
-          html: '<h1>Test Template</h1>'
+          html: '<h1>Updated Test Template</h1>'
         }
       }
     });
@@ -254,7 +285,7 @@ describe('EditPage', () => {
     wrapper
       .prop('secondaryActions')
       .find((action) => action.content === 'Duplicate')
-      .onClick({ id: 'test-template', content: { html: '<h1>Updated Test Template</h1>' }});
+      .onClick();
 
     wrapper
       .find('ActionsModal')
@@ -266,27 +297,27 @@ describe('EditPage', () => {
   it('continues to duplicate page without saving changes', () => {
     const historyPush = jest.fn();
     const update = jest.fn();
-    const wrapper = subject({
-      canModify: true,
-      history: { push: historyPush },
-      template: {
-        content: {
-          html: '<h1>Test Template</h1>'
-        }
-      },
-      update
-    });
-    const updatedValues = {
-      id: 'test-template',
+    const template = {
       content: {
-        html: '<h1>Updated Test Template</h1>'
-      }
+        html: '<h1>Test Template</h1>'
+      },
+      id: 'test-template'
     };
+    const wrapper = subject({ canModify: true, history: { push: historyPush }, template, update });
+
+    wrapper.setProps({
+      formValues: {
+        ...template,
+        content: {
+          html: '<h1>Updated Test Template</h1>'
+        }
+      }
+    });
 
     wrapper
       .prop('secondaryActions')
       .find((action) => action.content === 'Duplicate')
-      .onClick(updatedValues);
+      .onClick();
 
     expect(wrapper.find('ActionsModal')).toHaveProp('isOpen', true);
 
@@ -294,7 +325,7 @@ describe('EditPage', () => {
       .find('ActionsModal')
       .prop('actions')
       .find((action) => action.content === 'Continue Without Saving')
-      .onClick(updatedValues);
+      .onClick();
 
     expect(update).not.toHaveBeenCalled();
     expect(historyPush).toHaveBeenCalledWith('/templates/create/test-template');
@@ -304,28 +335,33 @@ describe('EditPage', () => {
     const historyPush = jest.fn();
     const showAlert = jest.fn();
     const update = jest.fn(() => Promise.resolve());
+    const template = {
+      content: {
+        html: '<h1>Test Template</h1>'
+      },
+      id: 'test-template'
+    };
     const wrapper = subject({
       canModify: true,
       history: { push: historyPush },
-      template: {
-        content: {
-          html: '<h1>Test Template</h1>'
-        }
-      },
+      template,
       showAlert,
       update
     });
-    const updatedValues = {
-      id: 'test-template',
-      content: {
-        html: '<h1>Updated Test Template</h1>'
+
+    wrapper.setProps({
+      formValues: {
+        ...template,
+        content: {
+          html: '<h1>Updated Test Template</h1>'
+        }
       }
-    };
+    });
 
     wrapper
       .prop('secondaryActions')
       .find((action) => action.content === 'Duplicate')
-      .onClick(updatedValues);
+      .onClick();
 
     expect(wrapper.find('ActionsModal')).toHaveProp('isOpen', true);
 
@@ -333,7 +369,7 @@ describe('EditPage', () => {
       .find('ActionsModal')
       .prop('actions')
       .find((action) => action.content === 'Save as Draft and Continue')
-      .onClick(updatedValues);
+      .onClick();
 
     expect(update).toHaveBeenCalled();
     expect(showAlert).toHaveBeenCalled();

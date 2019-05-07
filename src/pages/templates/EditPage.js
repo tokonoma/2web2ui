@@ -75,11 +75,11 @@ export default class EditPage extends Component {
     );
   }
 
-  checkForUnsavedChanges = (callback) => (values) => {
-    const { template } = this.props;
+  checkForUnsavedChanges = (callback) => () => {
+    const { formValues, template } = this.props;
     const fieldPaths = Object.keys(CONTENT_FIELDS);
     const dirtyFields = fieldPaths.filter((path) => (
-      !_.isEqual(_.get(template.content, path), _.get(values.content, path))
+      !_.isEqual(_.get(template.content, path), _.get(formValues.content, path))
     ));
 
     if (dirtyFields.length) {
@@ -87,31 +87,35 @@ export default class EditPage extends Component {
       return;
     }
 
-    callback(values);
+    callback();
   };
 
   hideDirtyContentModal = () => {
     this.setState({ dirtyContentModal: DEFAULT_DIRTY_CONTENT_MODAL_STATE });
   }
 
-  redirectToCreateDuplicate = ({ id }) => {
-    const { history } = this.props;
-    history.push(`/templates/create/${id}`);
+  redirectToCreateDuplicate = () => {
+    const { history, template } = this.props;
+    history.push(`/templates/create/${template.id}`);
   }
 
-  redirectToPublished = ({ id }) => {
-    const { history, subaccountId } = this.props;
-    history.push(`/templates/edit/${id}/published${setSubaccountQuery(subaccountId)}`);
+  redirectToPublished = () => {
+    const { history, subaccountId, template } = this.props;
+    history.push(`/templates/edit/${template.id}/published${setSubaccountQuery(subaccountId)}`);
   }
 
-  saveAndRedirect = (callback) => (values) => this.handleSave(values).then(() => callback(values));
+  saveAndRedirect = (callback) => () => (
+    this.handleSave(this.props.formValues).then(() => callback())
+  )
 
-  saveTestDataAndRedirectToPreview = ({ id, testData }) => {
-    const { history, setTestData, subaccountId } = this.props;
+  saveTestDataAndRedirectToPreview = () => {
+    const { formValues, history, setTestData, subaccountId, template } = this.props;
 
     return (
-      setTestData({ id, data: testData, mode: 'draft' }) // always save test data first
-        .then(() => history.push(`/templates/preview/${id}${setSubaccountQuery(subaccountId)}`))
+      setTestData({ id: template.id, data: formValues.testData, mode: 'draft' }) // always save test data first
+        .then(() => {
+          history.push(`/templates/preview/${template.id}${setSubaccountQuery(subaccountId)}`);
+        })
     );
   }
 
@@ -123,9 +127,9 @@ export default class EditPage extends Component {
     const {
       canModify,
       canSend,
+      formName,
       handleSubmit,
       loading,
-      formName,
       match: {
         params: {
           id
@@ -153,7 +157,7 @@ export default class EditPage extends Component {
           {
             content: 'View Published',
             disabled: submitting,
-            onClick: handleSubmit(this.checkForUnsavedChanges(this.redirectToPublished)),
+            onClick: this.checkForUnsavedChanges(this.redirectToPublished),
             visible: template.has_published
           },
           {
@@ -171,13 +175,13 @@ export default class EditPage extends Component {
           {
             content: 'Duplicate',
             disabled: submitting,
-            onClick: handleSubmit(this.checkForUnsavedChanges(this.redirectToCreateDuplicate)),
+            onClick: this.checkForUnsavedChanges(this.redirectToCreateDuplicate),
             visible: canModify
           },
           {
             content: canSend ? 'Preview & Send' : 'Preview',
             disabled: submitting,
-            onClick: handleSubmit(this.checkForUnsavedChanges(this.saveTestDataAndRedirectToPreview)),
+            onClick: this.checkForUnsavedChanges(this.saveTestDataAndRedirectToPreview),
             visible: true
           }
         ]}
@@ -202,13 +206,13 @@ export default class EditPage extends Component {
           actions={[
             {
               content: 'Save as Draft and Continue',
-              onClick: handleSubmit(this.saveAndRedirect(dirtyContentModal.callback)),
+              onClick: this.saveAndRedirect(dirtyContentModal.callback),
               primary: true
             },
             {
               content: 'Continue Without Saving',
               destructive: true,
-              onClick: handleSubmit(dirtyContentModal.callback)
+              onClick: dirtyContentModal.callback
             }
           ]}
           content={
