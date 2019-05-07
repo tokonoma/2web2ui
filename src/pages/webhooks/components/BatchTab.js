@@ -10,7 +10,7 @@ import { TableCollection, Empty } from 'src/components';
 import { selectWebhookBatches } from 'src/selectors/webhooks';
 
 const columns = [
-  { label: 'Delivery Time', sortKey: 'formatted_time' },
+  { label: 'Delivery Time', sortKey: 'ts' }, //This is timestamp
   { label: 'Batch ID', sortKey: 'batch_id' },
   { label: 'Status', sortKey: 'status' },
   { label: 'Attempt #', sortKey: 'attempts' },
@@ -48,7 +48,7 @@ export class BatchTab extends Component {
         rows={batches}
         getRowData={getRowData}
         pagination={true}
-        defaultSortColumn='formatted_time'
+        defaultSortColumn='ts'
         defaultSortDirection='desc'
       />
     );
@@ -63,7 +63,7 @@ export class BatchTab extends Component {
         <Panel.Section >
           <Button primary size='small' disabled={batchesLoading} onClick={this.refreshBatches}>{buttonText}</Button>
         </Panel.Section>
-        { this.renderBatches() }
+        {this.renderBatches()}
       </Panel>
     );
   }
