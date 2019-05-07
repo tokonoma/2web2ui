@@ -28,7 +28,8 @@
   position: relative;
   z-index: 1;
   display: block;
-  padding: spacing() spacing(large);
+  padding: spacing() rem(40);
+ 
 
   &.triggerOpen {
     box-shadow: shadow(deep);
@@ -50,12 +51,14 @@
   padding: spacing() spacing() spacing(smaller);
   background: color(gray, 10);
   border-top: 1px solid color(gray, 9);
-  font-weight: 600;
+  font-weight: 500;
+  color: color(gray, 1);
 }
 
 .DropdownPlan {
   display: block;
   padding: spacing() spacing(larger); 
+  padding-left: rem(40);
   background: color(gray, 10);
   transition: 0.15s;
 

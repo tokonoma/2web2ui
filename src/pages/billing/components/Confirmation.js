@@ -7,7 +7,7 @@ import PromoCode from 'src/components/billing/PromoCode';
 import SupportTicketLink from 'src/components/supportTicketLink/SupportTicketLink';
 import Brightback from 'src/components/brightback/Brightback';
 import styles from './Confirmation.module.scss';
-
+import { PLAN_TIERS } from 'src/constants';
 export class Confirmation extends React.Component {
 
   renderSelectedPlanMarkup() {
@@ -16,7 +16,10 @@ export class Confirmation extends React.Component {
       ? <p>Select a plan on the left to update your subscription</p>
       : <div>
         <small>New Plan</small>
-        <h5><PlanPrice className={styles.MainLabel} plan={selected} selectedPromo={selectedPromo}/></h5>
+        <h5 className={styles.MainLabel}>
+          {PLAN_TIERS[selected.tier] && <span>{PLAN_TIERS[selected.tier].toUpperCase()}:</span>}
+          <PlanPrice plan={selected} selectedPromo={selectedPromo}/>
+        </h5>
       </div>;
   }
 

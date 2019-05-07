@@ -89,18 +89,6 @@ describe('PlanPrice', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('renders test account with current free plan', () => {
-    const currentFreePlan = {
-      ...plan,
-      monthly: 0,
-      isFree: true,
-      code: 'free500-0419'
-    };
-
-    wrapper.setProps({ plan: currentFreePlan });
-    expect(wrapper).toMatchSnapshot();
-  });
-
   it('renders flat discount', () => {
     wrapper.setProps({ selectedPromo: { discount_amount: 5 }});
     expect(wrapper).toMatchSnapshot();
