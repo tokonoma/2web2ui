@@ -107,7 +107,7 @@ exports[`PlanPrice renders correctly for 30 day free plan 1`] = `
        emails/month 
     </span>
     <span>
-       Free 
+       FREE 
     </span>
   </span>
   <span
@@ -163,9 +163,9 @@ exports[`PlanPrice renders correctly for eternal free plan 1`] = `
     <span>
        emails/month 
     </span>
-    <strong>
-       Free 
-    </strong>
+    <span>
+       FREE 
+    </span>
   </span>
   <span
     className="SupportLabel"
