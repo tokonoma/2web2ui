@@ -14,6 +14,7 @@ describe('EditPage', () => {
         getTestData={() => {}}
         formValues={template}
         handleSubmit={(fn) => fn}
+        isFormValid={true}
         loading={false}
         match={{
           params: {
@@ -374,5 +375,51 @@ describe('EditPage', () => {
     expect(update).toHaveBeenCalled();
     expect(showAlert).toHaveBeenCalled();
     expect(historyPush).toHaveBeenCalledWith('/templates/create/test-template');
+  });
+
+  it('hides cancel button in unsaved changes action modal when form is invalid', () => {
+    const wrapper = subject({
+      isFormValid: false
+    });
+
+    expect(wrapper.find('ActionsModal')).toHaveProp('onCancel', undefined);
+  });
+
+  it('displays custom instructions in unsaved changes modal when form is invalid', () => {
+    const wrapper = subject({
+      isFormValid: false
+    });
+
+    expect(wrapper.find('ActionsModal').prop('content')).toMatchSnapshot();
+  });
+
+  it('closes unsaved changes action modal when keep editing button is clicked', async () => {
+    const template = {
+      content: {
+        html: '<h1>Test Template</h1>'
+      },
+      id: 'test-template'
+    };
+    const wrapper = subject({ template });
+
+    wrapper.setProps({
+      formValues: { ...template, content: { html: '' }},
+      isFormValid: false
+    });
+
+    wrapper
+      .prop('secondaryActions')
+      .find((action) => action.content === 'View Published')
+      .onClick();
+
+    expect(wrapper.find('ActionsModal')).toHaveProp('isOpen', true);
+
+    await wrapper
+      .find('ActionsModal')
+      .prop('actions')
+      .find((action) => action.content === 'Keep Editing')
+      .onClick();
+
+    expect(wrapper.find('ActionsModal')).toHaveProp('isOpen', false);
   });
 });

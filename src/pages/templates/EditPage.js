@@ -129,6 +129,7 @@ export default class EditPage extends Component {
       canSend,
       formName,
       handleSubmit,
+      isFormValid,
       loading,
       match: {
         params: {
@@ -207,19 +208,33 @@ export default class EditPage extends Component {
             {
               content: 'Save as Draft and Continue',
               onClick: this.saveAndRedirect(dirtyContentModal.callback),
-              primary: true
+              primary: true,
+              visible: isFormValid // can't save if there are validation errors
+            },
+            {
+              content: 'Keep Editing',
+              onClick: this.hideDirtyContentModal,
+              primary: true,
+              visible: !isFormValid
             },
             {
               content: 'Continue Without Saving',
               destructive: true,
-              onClick: dirtyContentModal.callback
+              onClick: dirtyContentModal.callback,
+              visible: true
             }
-          ]}
+          ].filter(({ visible }) => visible)}
           content={
             <div>
               <p>
-                Your changes to the following field(s) will be lost if you do not save them.  How
-                would you like to proceed?
+                {!isFormValid ? (
+                  `The following fields have unsaved changes or errors.  Return to the previous
+                  screen to keep editing or all changes will be lost. How would you like to
+                  proceed?"`
+                ) : (
+                  `Your changes to the following field(s) will be lost if you do not save them.
+                  How would you like to proceed?`
+                )}
               </p>
               <ul>
                 {dirtyContentModal.fields.map((field) => (
@@ -230,8 +245,8 @@ export default class EditPage extends Component {
           }
           isOpen={dirtyContentModal.isOpen}
           isPending={submitting}
-          onCancel={this.hideDirtyContentModal}
-          title="You have unsaved changes"
+          onCancel={isFormValid ? this.hideDirtyContentModal : undefined}
+          title="Are you sure you want to leave the page?"
         />
       </Page>
     );

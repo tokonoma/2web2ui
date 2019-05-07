@@ -1,6 +1,6 @@
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getFormValues, reduxForm } from 'redux-form';
+import { getFormValues, isValid, reduxForm } from 'redux-form';
 
 import { getDraft, update, deleteTemplate, publish, getTestData, setTestData } from 'src/actions/templates';
 import { showAlert } from 'src/actions/globalAlert';
@@ -26,6 +26,7 @@ const mapStateToProps = (state, props) => {
     canModify,
     canSend,
     formValues: getFormValues(FORM_NAME)(state),
+    isFormValid: isValid(FORM_NAME)(state),
 
     // Redux Form
     formName: FORM_NAME,

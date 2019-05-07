@@ -1,9 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`EditPage displays custom instructions in unsaved changes modal when form is invalid 1`] = `
+<div>
+  <p>
+    The following fields have unsaved changes or errors.  Return to the previous
+                  screen to keep editing or all changes will be lost. How would you like to
+                  proceed?"
+  </p>
+  <ul />
+</div>
+`;
+
 exports[`EditPage opens unsaved changes action modal and displays list of dirty fields 1`] = `
 <div>
   <p>
-    Your changes to the following field(s) will be lost if you do not save them.  How would you like to proceed?
+    Your changes to the following field(s) will be lost if you do not save them.
+                  How would you like to proceed?
   </p>
   <ul>
     <li>
@@ -99,25 +111,28 @@ exports[`EditPage renders a page 1`] = `
           "content": "Save as Draft and Continue",
           "onClick": [Function],
           "primary": true,
+          "visible": true,
         },
         Object {
           "content": "Continue Without Saving",
           "destructive": true,
           "onClick": [Function],
+          "visible": true,
         },
       ]
     }
     content={
       <div>
         <p>
-          Your changes to the following field(s) will be lost if you do not save them.  How would you like to proceed?
+          Your changes to the following field(s) will be lost if you do not save them.
+                  How would you like to proceed?
         </p>
         <ul />
       </div>
     }
     isOpen={false}
     onCancel={[Function]}
-    title="You have unsaved changes"
+    title="Are you sure you want to leave the page?"
   />
 </Page>
 `;
