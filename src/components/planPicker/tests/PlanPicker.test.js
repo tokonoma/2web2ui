@@ -88,9 +88,24 @@ describe('Plan Picker: ', () => {
       };
 
       const wrapper = subject();
+      expect(renderFn(wrapper, { selectedItem: selected })).toMatchSnapshot();
+    });
 
-      const thing = renderFn(wrapper, { selectedItem: selected });
-      expect(thing).toMatchSnapshot();
+    it('renders null if no initial selectedPlan', () => {
+      const wrapper = subject();
+      expect(renderFn(wrapper)).toBeEmptyRender();
+    });
+
+    it('renders null if no plans', () => {
+      const selected = {
+        code: '4',
+        monthly: 400,
+        name: 'Four',
+        overage: 0.4,
+        volume: 4
+      };
+      const wrapper = subject({ plansByTier: {}});
+      expect(renderFn(wrapper, { selectedItem: selected })).toBeEmptyRender();
     });
   });
 
