@@ -32,9 +32,8 @@ exports[`EditPage renders a page 1`] = `
 <Page
   breadcrumbAction={
     Object {
-      "component": [Function],
       "content": "Templates",
-      "to": "/templates",
+      "onClick": [Function],
     }
   }
   empty={Object {}}

@@ -6,7 +6,6 @@ import { setSubaccountQuery } from 'src/helpers/subaccounts';
 import ContentEditor from 'src/components/contentEditor';
 import Loading from 'src/components/loading';
 import { ActionsModal, DeleteModal } from 'src/components/modals';
-import PageLink from 'src/components/pageLink';
 import Form from './components/containers/Form.container';
 import ImportSnippetLink from './components/ImportSnippetLink';
 
@@ -99,6 +98,8 @@ export default class EditPage extends Component {
     history.push(`/templates/create/${template.id}`);
   }
 
+  redirectToList = () => { this.props.history.push('/templates'); }
+
   redirectToPublished = () => {
     const { history, subaccountId, template } = this.props;
     history.push(`/templates/edit/${template.id}/published${setSubaccountQuery(subaccountId)}`);
@@ -148,7 +149,10 @@ export default class EditPage extends Component {
 
     return (
       <Page
-        breadcrumbAction={{ content: 'Templates', component: PageLink, to: '/templates' }}
+        breadcrumbAction={{
+          content: 'Templates',
+          onClick: this.checkForUnsavedChanges(this.redirectToList)
+        }}
         primaryAction={(
           canModify
             ? { content: 'Publish Template', onClick: handleSubmit(this.handlePublish), disabled: submitting }

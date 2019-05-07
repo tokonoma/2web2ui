@@ -95,6 +95,25 @@ describe('EditPage', () => {
     expect(actions.every((action) => action.disabled)).toEqual(true);
   });
 
+  it('redirects to list page', () => {
+    const historyPush = jest.fn();
+    const wrapper = subject({
+      history: { push: historyPush },
+      template: {
+        content: {
+          html: '<h1>Test Template</h1>'
+        },
+        id: 'test-template'
+      }
+    });
+
+    wrapper
+      .prop('breadcrumbAction')
+      .onClick();
+
+    expect(historyPush).toHaveBeenCalledWith('/templates');
+  });
+
   it('redirects to published version', () => {
     const historyPush = jest.fn();
     const wrapper = subject({
