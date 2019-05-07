@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import FacetDataCell from '../FacetDataCell';
-import { MB_PROVIDERS } from 'src/constants';
+import { MAILBOX_PROVIDERS } from 'src/constants';
 
 describe('FacetDataCell', () => {
   const subject = (props = {}) => shallow(
@@ -35,12 +35,9 @@ describe('FacetDataCell', () => {
       id: 123,
       name: 'Test Subaccount'
     };
-
-    expect(subject(props)).toMatchSnapshot();
-  });
-
-  it('adds a class to truncate its contents', () => {
-    expect(subject({ truncate: true })).toMatchSnapshot();
+    const wrapper = subject(props);
+    expect(wrapper.find('PageLink').prop('children')).toEqual('Test Subaccount (123)');
+    expect(wrapper).toMatchSnapshot();
   });
 
   it('formats mailbox provider label to friendly value', () => {
@@ -49,11 +46,11 @@ describe('FacetDataCell', () => {
       id: 'other'
     };
     const wrapper = subject(props);
-    expect(wrapper.find('PageLink').prop('children')).toEqual(MB_PROVIDERS.other);
+    expect(wrapper.find('PageLink').prop('children')).toEqual(MAILBOX_PROVIDERS.other);
+    expect(wrapper).toMatchSnapshot();
   });
 
-  it('formats default label to id value', () => {
-    const wrapper = subject();
-    expect(wrapper.find('PageLink').prop('children')).toEqual('example.com');
+  it('adds a class to truncate its contents', () => {
+    expect(subject({ truncate: true })).toMatchSnapshot();
   });
 });

@@ -140,7 +140,7 @@ export const ROLES = {
 
 export const SUBACCOUNT_ROLES = [ROLES.SUBACCOUNT_REPORTING];
 
-export const MB_PROVIDERS = {
+export const MAILBOX_PROVIDERS = {
   apple: 'Apple',
   gmail: 'Gmail',
   google_apps: 'Google Apps',
