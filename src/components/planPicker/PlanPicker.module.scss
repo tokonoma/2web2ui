@@ -16,11 +16,10 @@
 
 .TriggerHeader {
   display: block;
-  z-index: 2000;
   padding: spacing(large);
   font-size: rem(16);
   font-weight: 600;
-  color: color(gray, 2);
+  color: color(gray, 1);
   cursor: pointer;
   border-bottom: 1px solid color(gray, 9);
 }

@@ -1,14 +1,14 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import PlanPicker from '../PlanPicker';
+import PlanPicker, { PlanPicker as PlanPickerComponent } from '../PlanPicker';
 
 describe('Plan Picker: ', () => {
   let wrapper;
   let props;
 
   beforeEach(() => {
-    const plans = {
+    const plansByTier = {
       'default': [{
         code: '1',
         includesIp: true,
@@ -37,7 +37,7 @@ describe('Plan Picker: ', () => {
 
     props = {
       input: { onChange: jest.fn() },
-      plans
+      plansByTier
     };
 
     wrapper = shallow(<PlanPicker {...props} />);
@@ -59,5 +59,40 @@ describe('Plan Picker: ', () => {
     const wrapper = shallow(<PlanPicker {...selectedProps} />);
     expect(wrapper).toMatchSnapshot();
   });
+
+
+  describe('Render Function', () => {
+
+    const subject = (subProps) => shallow(<PlanPickerComponent {...props} {...subProps}/>);
+
+    const renderFn = (wrapper, props = {}) => {
+      const Component = wrapper.prop('children');
+
+      return shallow(
+        <Component
+          getInputProps={jest.fn((props) => props)}
+          getItemProps={jest.fn((props) => props)}
+          getToggleButtonProps={jest.fn((props) => props)}
+          {...props}
+        />
+      );
+    };
+
+    it('renders', () => {
+      const selected = {
+        code: '4',
+        monthly: 400,
+        name: 'Four',
+        overage: 0.4,
+        volume: 4
+      };
+
+      const wrapper = subject();
+
+      const thing = renderFn(wrapper, { selectedItem: selected });
+      expect(thing).toMatchSnapshot();
+    });
+  });
+
 
 });

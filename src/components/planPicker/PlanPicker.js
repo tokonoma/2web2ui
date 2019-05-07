@@ -75,11 +75,6 @@ export class PlanPicker extends Component {
       selectedPromo
     };
 
-    const selectedPlan = (<>
-        {PLAN_TIERS[selectedItem.tier] && <div className={cx(styles.DropdownLabel)}>{PLAN_TIERS[selectedItem.tier]}</div>}
-        <Plan {...triggerProps} className={triggerClasses} planPriceProps={planPriceProps}/>
-    </>);
-
     return (
       <div className={styles.PlanPicker}>
         <div {...triggerProps} className={cx(styles.TriggerHeader)}>
@@ -87,7 +82,8 @@ export class PlanPicker extends Component {
           <ExpandMore size={24} className={styles.Chevron} />
         </div>
         <div className={cx(styles.PlanContainer)}>
-          {selectedPlan}
+          {PLAN_TIERS[selectedItem.tier] && <div className={cx(styles.DropdownLabel)}>{PLAN_TIERS[selectedItem.tier]}</div>}
+          <Plan {...triggerProps} className={triggerClasses} planPriceProps={planPriceProps}/>
           <input {...getInputProps()} ref={(input) => this.input = input} className={styles.Input} />
           <div className={listClasses}>{items}</div>
         </div>
