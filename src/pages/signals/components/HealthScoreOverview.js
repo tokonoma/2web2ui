@@ -35,14 +35,14 @@ class HealthScoreOverview extends React.Component {
   }
 
   resetTable = () => {
-    const { facet, resetSummaryTable, tableName } = this.props;
+    const { defaults = {}, facet, resetSummaryTable, tableName } = this.props;
     let options;
 
     if (facet.key === 'sid') {
       options = DEFAULT_VIEW;
     }
 
-    resetSummaryTable(tableName, options);
+    resetSummaryTable(tableName, { ...options, ...defaults });
   }
 
   getData = () => {

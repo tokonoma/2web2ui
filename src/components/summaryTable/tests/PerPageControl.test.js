@@ -23,15 +23,6 @@ describe('PerPageControl', () => {
     expect(wrapper.html()).toBeNull();
   });
 
-  it('renders only size buttons less than or equal to totalCount', () => {
-    const wrapper = subject({
-      perPage: 10,
-      totalCount: 50
-    });
-
-    expect(wrapper).toMatchSnapshot();
-  });
-
   it('calls onChange callback when button is clicked', () => {
     const onChange = jest.fn();
     const wrapper = subject({ onChange, totalCount: 100 });

@@ -101,7 +101,13 @@ describe('SpamTrapOverview', () => {
   it('requests reset on mount', () => {
     const resetSummaryTable = jest.fn();
     subject({ resetSummaryTable });
-    expect(resetSummaryTable).toHaveBeenCalledWith('Test', undefined);
+    expect(resetSummaryTable).toHaveBeenCalledWith('Test', {});
+  });
+
+  it('requests reset on mount with default options', () => {
+    const resetSummaryTable = jest.fn();
+    subject({ resetSummaryTable, defaults: { perPage: 25 }});
+    expect(resetSummaryTable).toHaveBeenCalledWith('Test', { perPage: 25 });
   });
 
   it('requests reset to default view for subaccount view on mount', () => {
@@ -115,7 +121,7 @@ describe('SpamTrapOverview', () => {
     const wrapper = subject();
     wrapper.setProps({ resetSummaryTable, signalOptions: {}});
 
-    expect(resetSummaryTable).toHaveBeenCalledWith('Test', undefined);
+    expect(resetSummaryTable).toHaveBeenCalledWith('Test', {});
   });
 
   it('requests data on summary table update', () => {

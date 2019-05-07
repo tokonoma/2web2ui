@@ -37,6 +37,11 @@ exports[`Signals Health Score Dashboard renders page 1`] = `
     </Grid.Column>
   </Grid>
   <Connect(withRouter(Connect(HealthScoreOverview)))
+    defaults={
+      Object {
+        "perPage": 25,
+      }
+    }
     header={
       <Grid>
         <Connect(Connect(SubaccountFilter)) />

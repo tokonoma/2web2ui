@@ -49,6 +49,11 @@ exports[`Signals Engagement Recency Dashboard renders page 1`] = `
     </Grid>
   </Panel>
   <Connect(withRouter(Connect(EngagementRecencyOverview)))
+    defaults={
+      Object {
+        "perPage": 25,
+      }
+    }
     hideTitle={true}
   />
 </SignalsPage>
