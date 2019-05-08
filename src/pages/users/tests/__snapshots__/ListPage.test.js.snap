@@ -54,7 +54,7 @@ exports[`Page: Users List should render correctly by default 1`] = `
           },
           Object {
             "label": "Role",
-            "sortKey": "access",
+            "sortKey": "roleLabel",
           },
           Object {
             "label": "Two Factor Auth",
@@ -82,7 +82,7 @@ exports[`Page: Users List should render correctly by default 1`] = `
             "email",
           ],
           "keyMap": Object {
-            "role": "access",
+            "role": "roleLabel",
           },
           "show": true,
         }
@@ -216,7 +216,7 @@ exports[`Page: Users List should show a delete modal 1`] = `
           },
           Object {
             "label": "Role",
-            "sortKey": "access",
+            "sortKey": "roleLabel",
           },
           Object {
             "label": "Two Factor Auth",
@@ -244,7 +244,7 @@ exports[`Page: Users List should show a delete modal 1`] = `
             "email",
           ],
           "keyMap": Object {
-            "role": "access",
+            "role": "roleLabel",
           },
           "show": true,
         }
@@ -306,7 +306,7 @@ Array [
     name="test-name"
     username="test-username"
   />,
-  "admin",
+  undefined,
   <Tag>
     Disabled
   </Tag>,
