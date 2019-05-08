@@ -62,18 +62,18 @@ const content = {
 };
 
 export function Recommendations(props) {
-  const { weights = [] } = props;
+  const { weights = []} = props;
 
   const actions = weights.reduce((acc, { weight, weight_type, ...rest }) => {
     const parsedWeight = parseFloat(weight);
 
-      acc.push({
-        value: rest.weight_value,
-        title: HEALTH_SCORE_COMPONENTS[weight_type].label,
-        weight: parsedWeight,
-        type: parsedWeight < 0 && content[weight_type] ? 'bad' : 'good',
-        ...content[weight_type]
-      });
+    acc.push({
+      value: rest.weight_value,
+      title: HEALTH_SCORE_COMPONENTS[weight_type].label,
+      weight: parsedWeight,
+      type: parsedWeight < 0 && content[weight_type] ? 'bad' : 'good',
+      ...content[weight_type]
+    });
 
     return acc;
   }, []);
@@ -82,7 +82,7 @@ export function Recommendations(props) {
   return (
     <Grid className={styles.Grid}>
       {_.map(sorted, (rec) => (
-        <Grid.Column md={6} lg={4} key={rec.Col}>
+        <Grid.Column xs={12} md={6} lg={4} xl={3} key={rec.title}>
           <Recommendation {...rec}/>
         </Grid.Column>
       ))}
@@ -100,12 +100,12 @@ export function Recommendation(props) {
       <h6 className={styles.Title}>{title}</h6>
       <div className={styles.Content}>
         <div className={styles.Value}>{roundToPlaces(value * 100, 3)}%</div>
-        <p className={styles.Desc}>{type === 'bad' ? bad : good }</p>
+        <p className={styles.Desc}>{type === 'bad' ? bad : good}</p>
       </div>
       <div className={styles.ActionSection}>
         {type === 'bad' ? (
           <a onClick={() => setOpen(true)}>Fix Now</a>
-        ): (
+        ) : (
           <span>Looking Good</span>
         )}
       </div>
@@ -116,11 +116,11 @@ export function Recommendation(props) {
         </div>
       </div>
     </Panel>
-  )
+  );
 }
 
 export function SectionTitle({ date }) {
   return (
     <h2 className={styles.SectionTitle}>Recommendations <span>{formatDate(date)}</span></h2>
-  )
+  );
 }
