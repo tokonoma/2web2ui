@@ -26,19 +26,19 @@ const content = {
     good: 'Block bounces are not affecting your health score.',
     bad: 'Block bounces are negatively affecting your health score.',
     fix: 'Bounces are the result of a low reputation. You may need to contact the postmaster to request mitigation once you make changes to improve your reputation.',
-    fixLabel: 'Learn About Improving Reputation'
+    fixLabel: 'Improve Your Reputation'
   },
   'Complaints': {
     good: 'Your email is not being marked as spam.',
     bad: 'Your email has an unusually high rate of spam complaints.',
     fix: 'Complaints have a strong negative impact on your deliverability. You should take steps to improve your list hygiene and email content.',
-    fixLabel: 'Learn About Content Refreshing'
+    fixLabel: 'Refresh Your Content'
   },
   'Transient Failures': {
     good: 'Transient failures are not affecting your health score.',
     bad: 'Temporary bounces could be affecting your health score.',
     fix: 'These delays in email delivery have varied causes, but may be a sign of low reputation at mailbox providers.',
-    fixLabel: 'Learn About Improving Reputation'
+    fixLabel: 'Improve Your Reputation'
   },
   'Other bounces': {
     good: 'Other bounces are not affecting your health score.',
@@ -51,7 +51,7 @@ const content = {
     bad: 'Not enough of your recipients have recently engaged with your email.',
     link: 'https://www.sparkpost.com/docs/signals/engagement/',
     fix: 'Low engagement may be hurting your email deliverability. Make sure to only send relevant and desired messages.',
-    fixLabel: 'Learn About Email Best Practices'
+    fixLabel: 'Improve Your Practices'
   },
   'eng cohorts: unengaged': {
     good: 'You are not sending to many unengaged recipients.',
