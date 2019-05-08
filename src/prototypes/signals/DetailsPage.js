@@ -114,6 +114,7 @@ function DetailsPage(props) {
                     hovered={props.hoveredDate}
                     selected={props.selectedDate}
                     onMouseOut={props.resetDateHover}
+                    onClick={props.handleDateSelect}
                     cartesianGridProps={{
                       horizontal: false
                     }}
