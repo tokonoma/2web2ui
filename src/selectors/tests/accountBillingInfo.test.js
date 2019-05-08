@@ -177,7 +177,8 @@ describe('plan selector', () => {
           { code: 'sec', status: 'secret' },
           { code: 'sec-aws', status: 'secret', awsMarketplace: true },
           { code: 'starter', status: 'public', tier: 'starter' },
-          { code: 'premier', status: 'public', tier: 'premier' }
+          { code: 'premier', status: 'public', tier: 'premier' },
+          { code: 'free500-0419', status: 'public', isFree: true }
         ]
       }
     };

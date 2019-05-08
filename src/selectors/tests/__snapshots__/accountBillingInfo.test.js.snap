@@ -77,6 +77,11 @@ Array [
     "status": "public",
     "tier": "premier",
   },
+  Object {
+    "code": "free500-0419",
+    "isFree": true,
+    "status": "public",
+  },
 ]
 `;
 
@@ -137,6 +142,11 @@ Array [
     "status": "public",
     "tier": "premier",
   },
+  Object {
+    "code": "free500-0419",
+    "isFree": true,
+    "status": "public",
+  },
 ]
 `;
 
@@ -166,6 +176,12 @@ Object {
   "test": Array [
     Object {
       "code": "pub-free",
+      "isFree": true,
+      "status": "public",
+      "tier": "test",
+    },
+    Object {
+      "code": "free500-0419",
       "isFree": true,
       "status": "public",
       "tier": "test",
