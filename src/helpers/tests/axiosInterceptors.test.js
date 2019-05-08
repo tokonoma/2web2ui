@@ -63,4 +63,9 @@ describe('Sparkpost Axios error interceptor', () => {
     expect(sparkpostErrorHandler(err)).rejects.toMatchObject(err);
   });
 
+  it('should reject promise if response is undefined', () => {
+    const error = { config: err.config };
+    expect(sparkpostErrorHandler(error)).rejects.toMatchObject(error);
+  });
+
 });
