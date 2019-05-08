@@ -5,9 +5,7 @@ exports[`ChoosePlan page tests should disable submit and plan picker when submit
   <CenteredLogo />
   <Grid>
     <Grid.Column>
-      <Panel
-        title="Select A Plan"
-      >
+      <Panel>
         <_default
           disabled={true}
           onChange={[Function]}
@@ -59,9 +57,7 @@ exports[`ChoosePlan page tests should render correctly 1`] = `
   <CenteredLogo />
   <Grid>
     <Grid.Column>
-      <Panel
-        title="Select A Plan"
-      >
+      <Panel>
         <_default
           disabled={false}
           onChange={[Function]}
@@ -115,9 +111,7 @@ exports[`ChoosePlan page tests should show free bullets when isFree is selected 
   <CenteredLogo />
   <Grid>
     <Grid.Column>
-      <Panel
-        title="Select A Plan"
-      >
+      <Panel>
         <_default
           disabled={false}
           onChange={[Function]}

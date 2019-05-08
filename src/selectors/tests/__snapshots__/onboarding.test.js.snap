@@ -6,9 +6,9 @@ Object {
   "hasError": false,
   "initialValues": "change-plan-initial-values",
   "loading": false,
-  "plans": Array [
-    "visible plans",
-  ],
+  "plans": Object {
+    "default": Array [],
+  },
   "selectedPlan": "selected-plan-redux-form-value",
 }
 `;

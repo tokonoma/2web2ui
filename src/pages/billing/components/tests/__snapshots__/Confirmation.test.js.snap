@@ -73,9 +73,10 @@ exports[`Confirmation:  should render correctly for an upgrade effectively immed
       <small>
         New Plan
       </small>
-      <h5>
+      <h5
+        className="MainLabel"
+      >
         <PlanPrice
-          className="MainLabel"
           plan={
             Object {
               "code": "twohundred",
@@ -146,9 +147,10 @@ exports[`Confirmation:  should render correctly with a downgrade 1`] = `
       <small>
         New Plan
       </small>
-      <h5>
+      <h5
+        className="MainLabel"
+      >
         <PlanPrice
-          className="MainLabel"
           plan={
             Object {
               "code": "fifty",
@@ -239,9 +241,10 @@ exports[`Confirmation:  should render correctly with a downgrade to free 1`] = `
       <small>
         New Plan
       </small>
-      <h5>
+      <h5
+        className="MainLabel"
+      >
         <PlanPrice
-          className="MainLabel"
           plan={
             Object {
               "code": "zero",
@@ -321,9 +324,10 @@ exports[`Confirmation:  should render correctly with an upgrade 1`] = `
       <small>
         New Plan
       </small>
-      <h5>
+      <h5
+        className="MainLabel"
+      >
         <PlanPrice
-          className="MainLabel"
           plan={
             Object {
               "code": "twohundred",
@@ -399,9 +403,10 @@ exports[`Confirmation:  should render correctly with an upgrade with IP 1`] = `
       <small>
         New Plan
       </small>
-      <h5>
+      <h5
+        className="MainLabel"
+      >
         <PlanPrice
-          className="MainLabel"
           plan={
             Object {
               "code": "twohundred",

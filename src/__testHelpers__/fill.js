@@ -74,6 +74,7 @@ export default function getFiller(mounted) {
         case 'typeahead': {
           control.props().onChange(args.value);
           updated = true;
+          break;
         }
 
         // eslint-disable-next-line no-fallthrough

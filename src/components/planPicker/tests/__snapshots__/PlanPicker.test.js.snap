@@ -1,5 +1,151 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Plan Picker:  Render Function renders 1`] = `
+<div
+  className="PlanPicker"
+>
+  <div
+    className="TriggerHeader"
+    onClick={[Function]}
+    plan={
+      Object {
+        "code": "4",
+        "monthly": 400,
+        "name": "Four",
+        "overage": 0.4,
+        "volume": 4,
+      }
+    }
+  >
+    <span>
+      Select A Plan
+    </span>
+    <ExpandMore
+      className="Chevron"
+      size={24}
+    />
+  </div>
+  <div
+    className="PlanContainer"
+  >
+    <Plan
+      className="TriggerPlan"
+      onClick={[Function]}
+      plan={
+        Object {
+          "code": "4",
+          "monthly": 400,
+          "name": "Four",
+          "overage": 0.4,
+          "volume": 4,
+        }
+      }
+      planPriceProps={
+        Object {
+          "selectedPromo": undefined,
+        }
+      }
+    />
+    <input
+      className="Input"
+    />
+    <div
+      className="List"
+    >
+      <Plan
+        className="DropdownPlan"
+        index={0}
+        item={
+          Object {
+            "code": "1",
+            "includesIp": true,
+            "monthly": 100,
+            "name": "One",
+            "overage": 0.1,
+            "volume": 1,
+          }
+        }
+        key="0"
+        plan={
+          Object {
+            "code": "1",
+            "includesIp": true,
+            "monthly": 100,
+            "name": "One",
+            "overage": 0.1,
+            "volume": 1,
+          }
+        }
+      />
+      <div
+        className="DropdownLabel"
+        key="label_test"
+      >
+        Test Account
+        :
+      </div>
+      <Plan
+        className="DropdownPlan"
+        index={1}
+        item={
+          Object {
+            "code": "2",
+            "includesIp": false,
+            "isFree": true,
+            "monthly": 0,
+            "name": "Two",
+            "overage": 0.2,
+            "volume": 2,
+          }
+        }
+        key="1"
+        plan={
+          Object {
+            "code": "2",
+            "includesIp": false,
+            "isFree": true,
+            "monthly": 0,
+            "name": "Two",
+            "overage": 0.2,
+            "volume": 2,
+          }
+        }
+      />
+      <div
+        className="DropdownLabel"
+        key="label_starter"
+      >
+        Starter
+        :
+      </div>
+      <Plan
+        className="DropdownPlan"
+        index={2}
+        item={
+          Object {
+            "code": "3",
+            "monthly": 300,
+            "name": "Three",
+            "overage": 0.3,
+            "volume": 3,
+          }
+        }
+        key="2"
+        plan={
+          Object {
+            "code": "3",
+            "monthly": 300,
+            "name": "Three",
+            "overage": 0.3,
+            "volume": 3,
+          }
+        }
+      />
+    </div>
+  </div>
+</div>
+`;
+
 exports[`Plan Picker:  renders correctly 1`] = `
 <Field
   component={[Function]}
@@ -9,33 +155,39 @@ exports[`Plan Picker:  renders correctly 1`] = `
     }
   }
   name="planpicker"
-  plans={
-    Array [
-      Object {
-        "code": "1",
-        "includesIp": true,
-        "monthly": 100,
-        "name": "One",
-        "overage": 0.1,
-        "volume": 1,
-      },
-      Object {
-        "code": "2",
-        "includesIp": false,
-        "isFree": true,
-        "monthly": 0,
-        "name": "Two",
-        "overage": 0.2,
-        "volume": 2,
-      },
-      Object {
-        "code": "3",
-        "monthly": 300,
-        "name": "Three",
-        "overage": 0.3,
-        "volume": 3,
-      },
-    ]
+  plansByTier={
+    Object {
+      "default": Array [
+        Object {
+          "code": "1",
+          "includesIp": true,
+          "monthly": 100,
+          "name": "One",
+          "overage": 0.1,
+          "volume": 1,
+        },
+      ],
+      "starter": Array [
+        Object {
+          "code": "3",
+          "monthly": 300,
+          "name": "Three",
+          "overage": 0.3,
+          "volume": 3,
+        },
+      ],
+      "test": Array [
+        Object {
+          "code": "2",
+          "includesIp": false,
+          "isFree": true,
+          "monthly": 0,
+          "name": "Two",
+          "overage": 0.2,
+          "volume": 2,
+        },
+      ],
+    }
   }
 />
 `;
@@ -56,33 +208,39 @@ exports[`Plan Picker:  renders correctly with an initial value 1`] = `
     }
   }
   name="planpicker"
-  plans={
-    Array [
-      Object {
-        "code": "1",
-        "includesIp": true,
-        "monthly": 100,
-        "name": "One",
-        "overage": 0.1,
-        "volume": 1,
-      },
-      Object {
-        "code": "2",
-        "includesIp": false,
-        "isFree": true,
-        "monthly": 0,
-        "name": "Two",
-        "overage": 0.2,
-        "volume": 2,
-      },
-      Object {
-        "code": "3",
-        "monthly": 300,
-        "name": "Three",
-        "overage": 0.3,
-        "volume": 3,
-      },
-    ]
+  plansByTier={
+    Object {
+      "default": Array [
+        Object {
+          "code": "1",
+          "includesIp": true,
+          "monthly": 100,
+          "name": "One",
+          "overage": 0.1,
+          "volume": 1,
+        },
+      ],
+      "starter": Array [
+        Object {
+          "code": "3",
+          "monthly": 300,
+          "name": "Three",
+          "overage": 0.3,
+          "volume": 3,
+        },
+      ],
+      "test": Array [
+        Object {
+          "code": "2",
+          "includesIp": false,
+          "isFree": true,
+          "monthly": 0,
+          "name": "Two",
+          "overage": 0.2,
+          "volume": 2,
+        },
+      ],
+    }
   }
 />
 `;
