@@ -4,41 +4,41 @@ import { connect } from 'react-redux';
 import { formValueSelector, clearFields } from 'redux-form';
 import { RadioGroup } from 'src/components/reduxFormWrappers';
 import { hasSubaccounts } from 'src/selectors/subaccounts';
-import { FORMS, ROLES } from 'src/constants';
+import { FORMS, ROLES, ROLE_LABELS } from 'src/constants';
 import { isAccountUiOptionSet } from 'src/helpers/conditions/account';
 import { selectCondition } from 'src/selectors/accessConditionState';
 import SubaccountAssignment from './SubaccountAssignment';
 
 const ADMIN_ROLE = {
-  label: <strong>Admin</strong>,
+  label: <strong>{ROLE_LABELS[ROLES.ADMIN]}</strong>,
   value: ROLES.ADMIN,
   helpText:
     'All permissions. The only user that can manage users, security, and billing settings.'
 };
 
 const DEVELOPER_ROLE = {
-  label: <strong>Developer</strong>,
+  label: <strong>{ROLE_LABELS[ROLES.DEVELOPER]}</strong>,
   value: ROLES.DEVELOPER,
   helpText:
     'Setup and development user. Full access to API Keys, and all other email related setup, sending, and reporting features.'
 };
 
 const EMAIL_ROLE = {
-  label: <strong>Email</strong>,
-  value: ROLES.EMAIL,
+  label: <strong>{ROLE_LABELS[ROLES.TEMPLATES]}</strong>,
+  value: ROLES.TEMPLATES,
   helpText:
     'Content and deliverability management user. Has access to Templates, Recipients Lists, Suppressions, AB Testing, and all reporting features.'
 };
 
 const REPORTING_ROLE = {
-  label: <strong>Reporting</strong>,
+  label: <strong>{ROLE_LABELS[ROLES.REPORTING]}</strong>,
   value: ROLES.REPORTING,
   helpText:
     'Data analytics user. Has access to all reporting features and can view templates. No access to any account or feature settings.'
 };
 
 const SUPERUSER_ROLE = {
-  label: <strong>Super User</strong>,
+  label: <strong>{ROLE_LABELS[ROLES.SUPERUSER]}</strong>,
   value: ROLES.SUPERUSER
 };
 

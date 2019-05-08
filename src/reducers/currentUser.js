@@ -12,6 +12,7 @@ const initialState = {
 export default (state = initialState, { type, payload, meta }) => {
   switch (type) {
     case 'GET_CURRENT_USER_SUCCESS':
+
       return { ...state, ...payload, cookie_consent: !!payload.cookie_consent };
 
     case 'GET_GRANTS_SUCCESS':
