@@ -65,7 +65,7 @@ export class ListPage extends Component {
     const { hasSubaccounts, isSubAccountReportingLive } = this.props;
     const data = [
       <User name={user.name} email={user.email} username={user.username} />,
-      user.roleLabel || user.access,
+      user.roleLabel,
       user.tfa_enabled ? <Tag color={'blue'}>Enabled</Tag> : <Tag>Disabled</Tag>,
       user.last_login ? <TimeAgo date={user.last_login} live={false} /> : 'Never',
       <Actions username={user.username} deletable={!user.isCurrentUser} onDelete={this.handleDeleteRequest} />
