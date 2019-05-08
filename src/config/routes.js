@@ -41,13 +41,16 @@ import { default as emailVerification } from 'src/components/emailVerification/E
 import { emailVerificationRedirect, emailRedirects } from './emailRoutes';
 import SecretBillingPlanOrBillingSummaryPage from './SecretBillingPlanOrBillingSummaryPage';
 
+import PrototypeSignalsDetails from 'src/prototypes/signals';
+
 import { hasGrants, all, not } from 'src/helpers/conditions';
 import {
   isAws,
   isCustomBilling,
   isEnterprise,
   isSelfServeBilling,
-  hasUiOption
+  hasUiOption,
+  isAccountUiOptionSet
 } from 'src/helpers/conditions/account';
 import { isHeroku, isAzure, isSubaccountUser } from 'src/helpers/conditions/user';
 import { configFlag, configEquals } from 'src/helpers/conditions/config';
@@ -787,6 +790,13 @@ const routes = [
     path: '/logout',
     component: LogoutPage,
     title: 'Logging out...'
+  },
+  {
+    path: '/prototype/signals-details',
+    component: PrototypeSignalsDetails,
+    condition: isAccountUiOptionSet('prototype_signals_details', false),
+    title: 'Prototype Signals',
+    layout: App
   }
 ];
 

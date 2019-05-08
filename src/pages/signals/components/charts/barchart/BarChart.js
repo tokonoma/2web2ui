@@ -85,7 +85,7 @@ class BarChart extends Component {
   }
 
   render() {
-    const { gap, height, disableHover, margin, timeSeries, tooltipContent, tooltipWidth, width, xAxisRefLines, yAxisRefLines, xKey, xAxisProps, yDomain, yAxisProps } = this.props;
+    const { cartesianGridProps, gap, height, disableHover, margin, timeSeries, tooltipContent, tooltipWidth, width, xAxisRefLines, yAxisRefLines, xKey, xAxisProps, yDomain, yAxisProps } = this.props;
 
     return (
       <div className='LiftTooltip' onMouseOut={this.props.onMouseOut}>
@@ -95,11 +95,12 @@ class BarChart extends Component {
             data={timeSeries}
             margin={margin}
           >
-            {this.renderBackgrounds()} 
+            {this.renderBackgrounds()}
             <CartesianGrid
               vertical={false}
               stroke='#e1e1e6'
               shapeRendering='crispEdges'
+              {...cartesianGridProps}
             />
             <YAxis
               axisLine={false}
