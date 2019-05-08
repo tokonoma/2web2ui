@@ -8,7 +8,7 @@ export const initialState = {
   invite: {}
 };
 
-const reduceUsers = fp.reduce((result, user) => ({ ...result, [user.username]: { ...user }}), {});
+const reduceUsers = fp.reduce((result, user) => ({ ...result, [user.username]: user }), {});
 
 export default (state = initialState, action) => {
   switch (action.type) {

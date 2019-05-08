@@ -306,7 +306,7 @@ Array [
     name="test-name"
     username="test-username"
   />,
-  undefined,
+  "admin",
   <Tag>
     Disabled
   </Tag>,

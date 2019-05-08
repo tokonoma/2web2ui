@@ -7,7 +7,6 @@ import { Page, Tag } from '@sparkpost/matchbox';
 import TimeAgo from 'react-timeago';
 import { Users } from 'src/components/images';
 import PageLink from 'src/components/pageLink/PageLink';
-import { ROLES } from 'src/constants';
 import { hasUiOption } from 'src/helpers/conditions/account';
 
 import * as usersActions from 'src/actions/users';
@@ -61,19 +60,12 @@ export class ListPage extends Component {
     this.props.listUsers();
   }
 
-  formatRole(role) {
-    if (role === ROLES.SUBACCOUNT_REPORTING) {
-      return 'reporting';
-    }
-    return role;
-  }
-
   // Do not allow current user to change their access/role or delete their account
   getRowData = (user) => {
     const { hasSubaccounts, isSubAccountReportingLive } = this.props;
     const data = [
       <User name={user.name} email={user.email} username={user.username} />,
-      user.roleLabel,
+      user.roleLabel || user.access,
       user.tfa_enabled ? <Tag color={'blue'}>Enabled</Tag> : <Tag>Disabled</Tag>,
       user.last_login ? <TimeAgo date={user.last_login} live={false} /> : 'Never',
       <Actions username={user.username} deletable={!user.isCurrentUser} onDelete={this.handleDeleteRequest} />
