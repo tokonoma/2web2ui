@@ -43,9 +43,7 @@ export class WithDateSelection extends Component {
   }
 
   resetDateHover = () => {
-    if (this.state.hoveredDate) {
-      this.setState({ hoveredDate: null });
-    }
+    this.setState({ hoveredDate: '' });
   }
 
   render() {
