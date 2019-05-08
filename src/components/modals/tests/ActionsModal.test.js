@@ -20,6 +20,11 @@ describe('ActionsModal', () => {
     expect(subject({ isOpen: true })).toHaveProp('open', true);
   });
 
+  it('renders modal without cancel button', () => {
+    const wrapper = subject({ hideCancelButton: true });
+    expect(wrapper.find('Button[name="action-cancel-modal-button"]')).not.toExist();
+  });
+
   it('calls onCancel when closed', () => {
     const onCancel = jest.fn();
     const wrapper = subject({ onCancel });
@@ -56,7 +61,7 @@ describe('ActionsModal', () => {
 
   it('renders disabled buttons when pending', () => {
     const wrapper = subject({ isPending: true });
-    expect(wrapper.find('Button[disabled=true]')).toHaveLength(1);
+    expect(wrapper.find('Button[disabled=true]')).toHaveLength(2);
   });
 
   it('renders destructive button', () => {

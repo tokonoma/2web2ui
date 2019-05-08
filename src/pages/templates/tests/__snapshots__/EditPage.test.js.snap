@@ -129,6 +129,7 @@ exports[`EditPage renders a page 1`] = `
         <ul />
       </div>
     }
+    hideCancelButton={false}
     isOpen={false}
     onCancel={[Function]}
     title="Are you sure you want to leave the page?"

@@ -8,6 +8,7 @@ import styles from './ActionsModal.module.scss';
 const ActionsModal = ({
   actions,
   content,
+  hideCancelButton,
   isLoading,
   isOpen,
   isPending,
@@ -40,7 +41,7 @@ const ActionsModal = ({
                   </Button>
                 ))}
               </div>
-              {onCancel && (
+              {!hideCancelButton && (
                 <Button
                   disabled={isPending}
                   name="action-cancel-modal-button"
@@ -65,6 +66,7 @@ ActionsModal.propTypes = {
     })
   ).isRequired,
   content: PropTypes.node.isRequired,
+  hideCancelButton: PropTypes.bool,
   isLoading: PropTypes.bool,
   isOpen: PropTypes.bool,
   isPending: PropTypes.bool,

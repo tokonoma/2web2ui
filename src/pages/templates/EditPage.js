@@ -247,9 +247,10 @@ export default class EditPage extends Component {
               </ul>
             </div>
           }
+          hideCancelButton={!isFormValid}
           isOpen={dirtyContentModal.isOpen}
           isPending={submitting}
-          onCancel={isFormValid ? this.hideDirtyContentModal : undefined}
+          onCancel={this.hideDirtyContentModal}
           title="Are you sure you want to leave the page?"
         />
       </Page>

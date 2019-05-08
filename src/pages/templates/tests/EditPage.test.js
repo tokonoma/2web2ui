@@ -401,7 +401,7 @@ describe('EditPage', () => {
       isFormValid: false
     });
 
-    expect(wrapper.find('ActionsModal')).toHaveProp('onCancel', undefined);
+    expect(wrapper.find('ActionsModal')).toHaveProp('hideCancelButton', true);
   });
 
   it('displays custom instructions in unsaved changes modal when form is invalid', () => {
