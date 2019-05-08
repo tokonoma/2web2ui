@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import { createSelector } from 'reselect';
+import { ROLE_LABELS } from 'src/constants';
 
 const getUsers = (state) => state.users.entities;
 const getUserId = (state, id) => id;
@@ -12,6 +13,7 @@ export const selectUsers = createSelector(
     const userList = Object.values(users);
     const enrichedUserList = userList.map((user) => ({
       ...user,
+      roleLabel: ROLE_LABELS[user.access] || user.access,
       isCurrentUser: isCurrentUser(user)
     }));
 

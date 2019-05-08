@@ -1,5 +1,4 @@
 import fp from 'lodash/fp';
-import { formatRole } from 'src/helpers/userRoles';
 
 export const initialState = {
   entities: {},
@@ -9,7 +8,7 @@ export const initialState = {
   invite: {}
 };
 
-const reduceUsers = fp.reduce((result, user) => ({ ...result, [user.username]: { ...user, access: formatRole(user.access) }}), {});
+const reduceUsers = fp.reduce((result, user) => ({ ...result, [user.username]: { ...user }}), {});
 
 export default (state = initialState, action) => {
   switch (action.type) {
@@ -42,7 +41,7 @@ export default (state = initialState, action) => {
 
       return fp.set(['entities', username], {
         ...state.entities[username],
-        access: formatRole(access_level),
+        access: access_level,
         is_sso,
         tfa_enabled
       })({ ...state, updatePending: false });

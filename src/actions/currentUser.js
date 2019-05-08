@@ -1,6 +1,5 @@
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
 import authCookie from 'src/helpers/authCookie';
-import { unformatRole } from 'src/helpers/userRoles';
 
 export function get({ meta = {}} = {}) {
   return (dispatch, getState) => {
@@ -30,7 +29,7 @@ export function getGrants({ beta = false, role, meta = {}} = {}) {
     type: 'GET_GRANTS',
     meta: {
       url: '/v1/authenticate/grants',
-      params: { beta, role: unformatRole(role) },
+      params: { beta, role },
       ...meta
     }
   }))
