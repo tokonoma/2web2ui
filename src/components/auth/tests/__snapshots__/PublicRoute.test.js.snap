@@ -6,9 +6,11 @@ exports[`Component: PublicRoute renders component 1`] = `
   redirect="/auth"
   wait={false}
 >
-  <TestComponent
-    path="/join"
-    public={true}
-  />
+  <withRouter(ProviderComponent)>
+    <TestComponent
+      path="/join"
+      public={true}
+    />
+  </withRouter(ProviderComponent)>
 </AccessControl>
 `;

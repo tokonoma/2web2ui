@@ -4,9 +4,10 @@ import { logout } from 'src/actions/auth';
 import { Route } from 'react-router-dom';
 import AccessControl from './AccessControl';
 import { AUTH_ROUTE } from 'src/constants';
+import { RouteContextProvider } from 'src/context/RouteContext';
 
 export class PublicRoute extends Component {
-  componentDidMount () {
+  componentDidMount() {
     const { forceLogout, logout } = this.props;
 
     if (forceLogout) {
@@ -14,7 +15,7 @@ export class PublicRoute extends Component {
     }
   }
 
-  render () {
+  render() {
     const { component: Component, condition, forceLogout, loggedIn, logout, ...routeProps } = this.props;
 
     if (forceLogout && loggedIn) {
@@ -24,7 +25,9 @@ export class PublicRoute extends Component {
     return (
       <Route {...routeProps} render={(reactRouterProps) => (
         <AccessControl condition={condition} redirect={AUTH_ROUTE} wait={false}>
-          <Component {...routeProps} {...reactRouterProps} />
+          <RouteContextProvider>
+            <Component {...routeProps} {...reactRouterProps} />
+          </RouteContextProvider>
         </AccessControl>
       )} />
     );
