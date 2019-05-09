@@ -137,7 +137,7 @@ exports[`CreatePage renders form 1`] = `
         lg={8}
         xs={12}
       >
-        <LoadableComponent
+        <ContentEditor
           contentOnly={true}
         />
       </Grid.Column>

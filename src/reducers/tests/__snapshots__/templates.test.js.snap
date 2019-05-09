@@ -149,3 +149,28 @@ Object {
   "listError": null,
 }
 `;
+
+exports[`Template reducer stores updated draft 1`] = `
+Object {
+  "byId": Object {
+    "test-template": Object {
+      "draft": Object {
+        "content": Object {
+          "from": Object {
+            "email": "test@example.com",
+            "name": "",
+          },
+          "html": "<h1>Updated Test Template</h1>",
+          "subject": "Test Template",
+        },
+      },
+    },
+  },
+  "contentPreview": Object {
+    "draft": Object {},
+    "published": Object {},
+  },
+  "list": Array [],
+  "listError": null,
+}
+`;

@@ -1,6 +1,6 @@
 import { normalizeFromAddress, normalizeTemplateFromAddress } from 'src/helpers/templates';
 
-const initialState = {
+export const initialState = {
   list: [],
   listError: null,
   byId: {},
@@ -73,6 +73,27 @@ export default (state = initialState, action) => {
           }
         }
       };
+
+    // note, need to keep template up to date, so editor can compare vs form state to determine
+    //   if form state is dirty
+    // note, don't need normalizeTemplateFromAddress because draft should already be normalized
+    case 'UPDATE_TEMPLATE_SUCCESS': {
+      const { id } = action.meta.context;
+
+      return {
+        ...state,
+        byId: {
+          ...state.byId,
+          [id]: {
+            ...state.byId[id],
+            draft: {
+              ...state.byId[id].draft,
+              ...action.meta.data
+            }
+          }
+        }
+      };
+    }
 
     default:
       return state;
