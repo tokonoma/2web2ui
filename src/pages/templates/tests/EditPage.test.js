@@ -37,6 +37,11 @@ describe('EditPage', () => {
     expect(wrapper.find('Loading')).toExist();
   });
 
+  it('renders loading when template has not present', () => {
+    const wrapper = subject({ template: undefined });
+    expect(wrapper.find('Loading')).toExist();
+  });
+
   it('calls getDraft on mount', () => {
     const getDraft = jest.fn();
     subject({ getDraft });

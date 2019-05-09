@@ -143,7 +143,7 @@ export default class EditPage extends Component {
     } = this.props;
     const { deleteOpen, dirtyContentModal } = this.state;
 
-    if (loading) {
+    if (loading || _.isEmpty(template)) {
       return <Loading />;
     }
 
