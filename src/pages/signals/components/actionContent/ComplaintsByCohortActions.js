@@ -2,12 +2,12 @@ import React from 'react';
 import Actions from '../Actions';
 import content from '../../constants/ComplaintsByCohortContent';
 
-const ComplaintsByCohortActions = ({ cohorts, cohortsRecency, date }) => {
+const ComplaintsByCohortActions = ({ complaintsByCohort, recencyByCohort, date }) => {
   let actions = [];
 
   content.forEach(({ condition, actionFn }) => {
-    if (condition({ ...cohorts, ...cohortsRecency })) {
-      actions.push(actionFn(cohorts));
+    if (condition({ ...complaintsByCohort, ...recencyByCohort })) {
+      actions.push(actionFn(complaintsByCohort));
     }
   });
   actions = actions.slice(0, 3);
@@ -23,7 +23,7 @@ const ComplaintsByCohortActions = ({ cohorts, cohortsRecency, date }) => {
       type: 'good' }
     );
   }
-  return <Actions actions={actions} date={date} empty={cohorts.p_total_fbl === null}/>;
+  return <Actions actions={actions} date={date} empty={complaintsByCohort.p_total_fbl === null}/>;
 };
 
 export default ComplaintsByCohortActions;

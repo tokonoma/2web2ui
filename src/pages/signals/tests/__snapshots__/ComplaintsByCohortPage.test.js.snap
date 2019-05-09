@@ -217,19 +217,19 @@ exports[`Signals Complaints Page renders correctly 1`] = `
         className="OffsetCol"
       >
         <ComplaintsByCohortActions
-          cohorts={
+          complaintsByCohort={
             Object {
               "date": "2017-01-02",
               "p_total_fbl": 10,
             }
           }
-          cohortsRecency={
+          date="2017-01-02"
+          recencyByCohort={
             Object {
               "c_uneng": 0.5,
               "date": "2017-01-02",
             }
           }
-          date="2017-01-02"
         />
       </div>
     </Grid.Column>

@@ -12,79 +12,83 @@ describe('Signals complaints by cohort actions component', () => {
     c_365d: 1,
     c_uneng: 1
   };
-  cases('render cases', (cohorts) => {
-    const wrapper = shallow(<ComplaintsByCohortActions cohorts={cohorts} />);
+  cases('should', (complaintsByCohort) => {
+    const wrapper = shallow(<ComplaintsByCohortActions complaintsByCohort={complaintsByCohort} />);
     expect(wrapper.prop('actions')).toMatchSnapshot();
   }, {
-    'should render unengaged bad value': {
+    'render unengaged bad value': {
       ...fullEngagementRecency,
       p_uneng_fbl: 0.0051
     },
-    'should render unengaged warning value': {
+    'render unengaged warning value': {
       ...fullEngagementRecency,
       p_uneng_fbl: 0.0011
     },
-    'should render new bad value': {
+    'render new bad value': {
       ...fullEngagementRecency,
       p_new_fbl: 0.0025
     },
-    'should render new warning value': {
+    'render new warning value': {
       ...fullEngagementRecency,
       p_new_fbl: 0.0011
     },
-    'should render Not Recently Engaged bad value': {
+    'render Not Recently Engaged bad value': {
       ...fullEngagementRecency,
       p_365d_fbl: 0.0051
     },
-    'should render Not Recently Engaged warning value': {
+    'render Not Recently Engaged warning value': {
       ...fullEngagementRecency,
       p_365d_fbl: 0.0011
     },
-    'should render Semi Recently Engaged bad value': {
+    'render Semi Recently Engaged bad value': {
       ...fullEngagementRecency,
       p_90d_fbl: 0.0051
     },
-    'should render Semi Recently Engaged warning value': {
+    'render Semi Recently Engaged warning value': {
       ...fullEngagementRecency,
       p_90d_fbl: 0.0011
     },
-    'should render Recently Engaged bad value': {
+    'render Recently Engaged bad value': {
       ...fullEngagementRecency,
       p_14d_fbl: 0.0051
     },
-    'should render Recently Engaged warning value': {
+    'render Recently Engaged warning value': {
       ...fullEngagementRecency,
       p_14d_fbl: 0.0011
     },
-    'should render all 3 Recently engaged bad values': {
+    'render all 3 Recently engaged bad values': {
       ...fullEngagementRecency,
       p_365d_fbl: 0.0051,
       p_90d_fbl: 0.0051,
       p_14d_fbl: 0.0051
     },
-    'should render all 3 Recently engaged warning values': {
+    'render all 3 Recently engaged warning values': {
       ...fullEngagementRecency,
       p_365d_fbl: 0.0011,
       p_90d_fbl: 0.0011,
       p_14d_fbl: 0.0011
     },
-    'should render all 2 Recently engaged bad values amd 1 warning value': {
+    'render all 2 Recently engaged bad values and 1 warning value': {
       ...fullEngagementRecency,
       p_365d_fbl: 0.0051,
       p_90d_fbl: 0.0051,
       p_14d_fbl: 0.0011
     },
-    'should render all 2 Recently engaged warning values amd 1 bad value': {
+    'render all 2 Recently engaged warning values and 1 bad value': {
       ...fullEngagementRecency,
       p_365d_fbl: 0.0011,
       p_90d_fbl: 0.0011,
       p_14d_fbl: 0.0051
     },
-    'should render total complaint rate bad value': {
+    'render total complaint rate bad value': {
       ...fullEngagementRecency,
       p_total_fbl: 0.0051
     },
-    'should render only 3 items': {
+    'not render bad value if under 5% recent engagement by cohort': {
+      c_new: 0.001,
+      p_new_fbl: 0.005
+    },
+    'render only 3 items': {
       ...fullEngagementRecency,
       p_14d_fbl: 1,
       p_new_fbl: 1,
@@ -94,7 +98,7 @@ describe('Signals complaints by cohort actions component', () => {
   });
 
   it('renders empty', () => {
-    wrapper = shallow(<ComplaintsByCohortActions cohorts={{ p_total_fbl: null }} />);
+    wrapper = shallow(<ComplaintsByCohortActions complaintsByCohort={{ p_total_fbl: null }} />);
     expect(wrapper.prop('empty')).toBe(true);
   });
 });

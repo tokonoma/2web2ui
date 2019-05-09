@@ -1,6 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Signals complaints by cohort actions component render cases should render Not Recently Engaged bad value 1`] = `
+exports[`Signals complaints by cohort actions component should not render bad value if under 5% recent engagement by cohort 1`] = `
+Array [
+  Object {
+    "content": <React.Fragment>
+      Your complaint rates are low across the board. Great job!
+    </React.Fragment>,
+    "type": "good",
+  },
+]
+`;
+
+exports[`Signals complaints by cohort actions component should render Not Recently Engaged bad value 1`] = `
 Array [
   Object {
     "content": <React.Fragment>
@@ -16,7 +27,7 @@ Array [
 ]
 `;
 
-exports[`Signals complaints by cohort actions component render cases should render Not Recently Engaged warning value 1`] = `
+exports[`Signals complaints by cohort actions component should render Not Recently Engaged warning value 1`] = `
 Array [
   Object {
     "content": <React.Fragment>
@@ -32,7 +43,7 @@ Array [
 ]
 `;
 
-exports[`Signals complaints by cohort actions component render cases should render Recently Engaged bad value 1`] = `
+exports[`Signals complaints by cohort actions component should render Recently Engaged bad value 1`] = `
 Array [
   Object {
     "content": <React.Fragment>
@@ -48,7 +59,7 @@ Array [
 ]
 `;
 
-exports[`Signals complaints by cohort actions component render cases should render Recently Engaged warning value 1`] = `
+exports[`Signals complaints by cohort actions component should render Recently Engaged warning value 1`] = `
 Array [
   Object {
     "content": <React.Fragment>
@@ -64,7 +75,7 @@ Array [
 ]
 `;
 
-exports[`Signals complaints by cohort actions component render cases should render Semi Recently Engaged bad value 1`] = `
+exports[`Signals complaints by cohort actions component should render Semi Recently Engaged bad value 1`] = `
 Array [
   Object {
     "content": <React.Fragment>
@@ -80,7 +91,7 @@ Array [
 ]
 `;
 
-exports[`Signals complaints by cohort actions component render cases should render Semi Recently Engaged warning value 1`] = `
+exports[`Signals complaints by cohort actions component should render Semi Recently Engaged warning value 1`] = `
 Array [
   Object {
     "content": <React.Fragment>
@@ -96,7 +107,7 @@ Array [
 ]
 `;
 
-exports[`Signals complaints by cohort actions component render cases should render all 2 Recently engaged bad values amd 1 warning value 1`] = `
+exports[`Signals complaints by cohort actions component should render all 2 Recently engaged bad values and 1 warning value 1`] = `
 Array [
   Object {
     "content": <React.Fragment>
@@ -123,7 +134,7 @@ Array [
 ]
 `;
 
-exports[`Signals complaints by cohort actions component render cases should render all 2 Recently engaged warning values amd 1 bad value 1`] = `
+exports[`Signals complaints by cohort actions component should render all 2 Recently engaged warning values and 1 bad value 1`] = `
 Array [
   Object {
     "content": <React.Fragment>
@@ -150,7 +161,7 @@ Array [
 ]
 `;
 
-exports[`Signals complaints by cohort actions component render cases should render all 3 Recently engaged bad values 1`] = `
+exports[`Signals complaints by cohort actions component should render all 3 Recently engaged bad values 1`] = `
 Array [
   Object {
     "content": <React.Fragment>
@@ -166,7 +177,7 @@ Array [
 ]
 `;
 
-exports[`Signals complaints by cohort actions component render cases should render all 3 Recently engaged warning values 1`] = `
+exports[`Signals complaints by cohort actions component should render all 3 Recently engaged warning values 1`] = `
 Array [
   Object {
     "content": <React.Fragment>
@@ -182,7 +193,7 @@ Array [
 ]
 `;
 
-exports[`Signals complaints by cohort actions component render cases should render new bad value 1`] = `
+exports[`Signals complaints by cohort actions component should render new bad value 1`] = `
 Array [
   Object {
     "content": <React.Fragment>
@@ -194,7 +205,7 @@ Array [
 ]
 `;
 
-exports[`Signals complaints by cohort actions component render cases should render new warning value 1`] = `
+exports[`Signals complaints by cohort actions component should render new warning value 1`] = `
 Array [
   Object {
     "content": <React.Fragment>
@@ -206,7 +217,7 @@ Array [
 ]
 `;
 
-exports[`Signals complaints by cohort actions component render cases should render only 3 items 1`] = `
+exports[`Signals complaints by cohort actions component should render only 3 items 1`] = `
 Array [
   Object {
     "content": <React.Fragment>
@@ -236,7 +247,7 @@ Array [
 ]
 `;
 
-exports[`Signals complaints by cohort actions component render cases should render total complaint rate bad value 1`] = `
+exports[`Signals complaints by cohort actions component should render total complaint rate bad value 1`] = `
 Array [
   Object {
     "content": <React.Fragment>
@@ -248,7 +259,7 @@ Array [
 ]
 `;
 
-exports[`Signals complaints by cohort actions component render cases should render unengaged bad value 1`] = `
+exports[`Signals complaints by cohort actions component should render unengaged bad value 1`] = `
 Array [
   Object {
     "content": <React.Fragment>
@@ -260,7 +271,7 @@ Array [
 ]
 `;
 
-exports[`Signals complaints by cohort actions component render cases should render unengaged warning value 1`] = `
+exports[`Signals complaints by cohort actions component should render unengaged warning value 1`] = `
 Array [
   Object {
     "content": <React.Fragment>

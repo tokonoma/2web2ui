@@ -69,8 +69,8 @@ export class ComplaintsByCohortPage extends Component {
 
   renderContent = () => {
     const { data = [], dataEngRecency = [], facet, facetId, handleDateSelect, loading, empty, error, selectedDate, subaccountId } = this.props;
-    const selectedCohorts = _.find(data, ['date', selectedDate]) || {};
-    const selectedCohortsRecency = _.find(dataEngRecency, ['date', selectedDate]) || {};
+    const selectedComplaints = _.find(data, ['date', selectedDate]) || {};
+    const selectedEngagementRecency = _.find(dataEngRecency, ['date', selectedDate]) || {};
     let chartPanel;
 
     if (empty) {
@@ -117,7 +117,7 @@ export class ComplaintsByCohortPage extends Component {
         </Grid.Column>
         <Grid.Column sm={12} md={5} mdOffset={0}>
           <div className={styles.OffsetCol}>
-            {!chartPanel && <ComplaintsByCohortActions cohorts={selectedCohorts} cohortsRecency = {selectedCohortsRecency} date={selectedDate} />}
+            {!chartPanel && <ComplaintsByCohortActions complaintsByCohort={selectedComplaints} recencyByCohort={selectedEngagementRecency} date={selectedDate} />}
           </div>
         </Grid.Column>
       </Grid>
