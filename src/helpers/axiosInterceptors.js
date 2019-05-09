@@ -10,7 +10,7 @@ export const sparkpostErrorHandler = (err) => {
 
 
   // Retries for any 5XX Error
-  if (/^5\d\d/.test(String(response.status)) && retries < MAX_RETRIES) {
+  if (response && /^5\d\d/.test(String(response.status)) && retries < MAX_RETRIES) {
     return new Promise((resolve) => setTimeout(() => resolve(sparkpostAxios({ ...config, retries: retries + 1 })), TIMEOUT));
   }
   return Promise.reject(err);
