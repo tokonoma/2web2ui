@@ -156,7 +156,7 @@ Array [
     "content": <React.Fragment>
       Many of your 
       <strong>
-        Recently Engaged, Semi-Recently Engaged and Not Recently Engaged
+        Recently Engaged, Semi-Recently Engaged, and Not Recently Engaged
       </strong>
        recipients are marking your emails as spam. If this continues, you risk hurting your performance. Refreshing your content and segmenting your recipients can provide a better customer experience and lead to less spam complaints.
     </React.Fragment>,
@@ -172,7 +172,7 @@ Array [
     "content": <React.Fragment>
       Some of your 
       <strong>
-        Recently Engaged, Semi-Recently Engaged and Not Recently Engaged
+        Recently Engaged, Semi-Recently Engaged, and Not Recently Engaged
       </strong>
        recipients are marking your emails as spam. Refreshing your content and segmenting your recipients can improve your relationships and lead to less spam complaints.
     </React.Fragment>,

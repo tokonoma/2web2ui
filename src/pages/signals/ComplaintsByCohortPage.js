@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { getComplaintsByCohort } from 'src/actions/signals';
+import { getComplaintsByCohort, getEngagementRecency } from 'src/actions/signals';
 import { selectComplaintsByCohortDetails } from 'src/selectors/signals';
 import { Panel, Grid } from '@sparkpost/matchbox';
 import LineChart from './components/charts/linechart/LineChart';
@@ -68,8 +68,9 @@ export class ComplaintsByCohortPage extends Component {
   }
 
   renderContent = () => {
-    const { data = [], facet, facetId, handleDateSelect, loading, empty, error, selectedDate, subaccountId } = this.props;
+    const { data = [], dataEngRecency = [], facet, facetId, handleDateSelect, loading, empty, error, selectedDate, subaccountId } = this.props;
     const selectedCohorts = _.find(data, ['date', selectedDate]) || {};
+    const selectedCohortsRecency = _.find(dataEngRecency, ['date', selectedDate]) || {};
     let chartPanel;
 
     if (empty) {
@@ -116,7 +117,7 @@ export class ComplaintsByCohortPage extends Component {
         </Grid.Column>
         <Grid.Column sm={12} md={5} mdOffset={0}>
           <div className={styles.OffsetCol}>
-            {!chartPanel && <ComplaintsByCohortActions cohorts={selectedCohorts} date={selectedDate} />}
+            {!chartPanel && <ComplaintsByCohortActions cohorts={selectedCohorts} cohortsRecency = {selectedCohortsRecency} date={selectedDate} />}
           </div>
         </Grid.Column>
       </Grid>
@@ -153,6 +154,6 @@ export class ComplaintsByCohortPage extends Component {
 
 export default withDetails(
   withDateSelection(ComplaintsByCohortPage),
-  { getComplaintsByCohort },
+  { getComplaintsByCohort, getEngagementRecency },
   selectComplaintsByCohortDetails
 );

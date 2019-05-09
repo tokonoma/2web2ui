@@ -1,12 +1,12 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import Actions from '../Actions';
 import content from '../../constants/ComplaintsByCohortContent';
 
-const ComplaintsByCohortActions = ({ cohorts, date }) => {
+const ComplaintsByCohortActions = ({ cohorts, cohortsRecency, date }) => {
   let actions = [];
 
   content.forEach(({ condition, actionFn }) => {
-    if (condition(cohorts)) {
+    if (condition({ ...cohorts, ...cohortsRecency })) {
       actions.push(actionFn(cohorts));
     }
   });
@@ -16,9 +16,9 @@ const ComplaintsByCohortActions = ({ cohorts, date }) => {
   if (actions.length === 0) {
     actions.push(
       { content: (
-        <Fragment>
+        <>
           Your complaint rates are low across the board. Great job!
-        </Fragment>
+        </>
       ),
       type: 'good' }
     );

@@ -188,10 +188,9 @@ export const selectUnsubscribeRateByCohortDetails = createSelector(
 );
 
 export const selectComplaintsByCohortDetails = createSelector(
-  [getComplaintsByCohortData, getFacetFromParams, getFacetIdFromParams, selectSubaccountIdFromQuery, getOptions],
-  ({ loading, error, data }, facet, facetId, subaccountId, { from, to }) => {
+  [selectEngagementRecencyDetails, getComplaintsByCohortData, getFacetFromParams, getFacetIdFromParams, selectSubaccountIdFromQuery, getOptions],
+  ({ details: { loading: loadingEngRecency, error: errorEngRecency, data: dataEngRecency }}, { loading, error, data }, facet, facetId, subaccountId, { from, to }) => {
     const match = data.find((item) => String(item[facet]) === facetId) || {};
-
     // Rename date key
     const normalizedHistory = _.get(match, 'history', []).map(({ dt: date, ...values }) => ({ date, ...values }));
 
@@ -215,9 +214,10 @@ export const selectComplaintsByCohortDetails = createSelector(
     return {
       details: {
         data: filledHistory,
+        dataEngRecency,
         empty: isEmpty && !loading,
-        error,
-        loading
+        error: error || errorEngRecency,
+        loading: loading || loadingEngRecency
       },
       facet,
       facetId,
