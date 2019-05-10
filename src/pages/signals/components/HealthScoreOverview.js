@@ -1,18 +1,15 @@
 /* eslint-disable max-lines */
 import _ from 'lodash';
 import React from 'react';
-import { Panel, Tooltip } from '@sparkpost/matchbox';
-import { InfoOutline } from '@sparkpost/matchbox-icons';
+import { Panel } from '@sparkpost/matchbox';
 import SummaryTable, { Column } from 'src/components/summaryTable';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
-import { HEALTH_SCORE_INFO } from '../constants/info';
 import { DEFAULT_VIEW } from '../constants/summaryTables';
 import FacetDataCell from './dataCells/FacetDataCell';
 import NumericDataCell from './dataCells/NumericDataCell';
 import SparklineDataCell from './dataCells/SparklineDataCell';
 import WoWDataCell from './dataCells/WoWDataCell';
 import WoWHeaderCell from './dataCells/WoWHeaderCell';
-import styles from './SpamTrapOverview.module.scss';
 
 class HealthScoreOverview extends React.Component {
 
@@ -97,7 +94,7 @@ class HealthScoreOverview extends React.Component {
 
   render() {
     const {
-      data, error, facet, loading, signalOptions, subaccounts, tableName, totalCount, hideTitle, header
+      data, error, facet, loading, signalOptions, subaccounts, tableName, totalCount, header
     } = this.props;
 
     const subaccountFilter = _.get(signalOptions, 'subaccount.id');
@@ -112,20 +109,6 @@ class HealthScoreOverview extends React.Component {
 
     return (
       <Panel>
-        {!hideTitle && (
-          <div className={styles.Header}>
-            <h5>Health Score Summary</h5>
-            <div className={styles.Tooltip}>
-              <Tooltip
-                children={<InfoOutline className={styles.TooltipIcon} size={18} />}
-                content={HEALTH_SCORE_INFO}
-                dark
-                horizontalOffset="-1rem"
-                right
-              />
-            </div>
-          </div>
-        )}
         {header && <Panel.Section>{header}</Panel.Section>}
         <SummaryTable
           data={filteredData}

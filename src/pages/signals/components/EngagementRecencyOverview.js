@@ -1,11 +1,9 @@
 /* eslint-disable max-lines */
 import _ from 'lodash';
 import React from 'react';
-import { Panel, Tooltip } from '@sparkpost/matchbox';
-import { InfoOutline } from '@sparkpost/matchbox-icons';
+import { Panel } from '@sparkpost/matchbox';
 import SummaryTable, { Column } from 'src/components/summaryTable';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
-import { ENGAGEMENT_RECENCY_INFO } from '../constants/info';
 import { DEFAULT_VIEW } from '../constants/summaryTables';
 import FacetDataCell from './dataCells/FacetDataCell';
 import NumericDataCell from './dataCells/NumericDataCell';
@@ -102,7 +100,7 @@ class EngagementRecencyOverview extends React.Component {
 
   render() {
     const {
-      data, error, facet, loading, signalOptions, subaccounts, tableName, totalCount, hideTitle
+      data, error, facet, loading, signalOptions, subaccounts, tableName, totalCount
     } = this.props;
     const { calculation } = this.state;
     const isCustomRange = signalOptions.relativeRange === 'custom';
@@ -110,24 +108,6 @@ class EngagementRecencyOverview extends React.Component {
     return (
       <Panel>
         <div className={styles.Header}>
-          {/*
-            This prop is only because v1 requires this title, but v2 does not.
-            Should be removed once v2 is released.
-          */}
-          {!hideTitle && (
-            <>
-              <h5>Engagement Recency Summary</h5>
-              <div className={styles.Tooltip}>
-                <Tooltip
-                  children={<InfoOutline className={styles.TooltipIcon} size={18} />}
-                  content={ENGAGEMENT_RECENCY_INFO}
-                  dark
-                  horizontalOffset="-1rem"
-                  right
-                />
-              </div>
-            </>
-          )}
           <div className={styles.Controls}>
             <Calculation initialSelected={calculation} onChange={this.handleCalculationChange} />
           </div>
