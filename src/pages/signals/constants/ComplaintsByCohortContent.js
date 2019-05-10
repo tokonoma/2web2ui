@@ -84,7 +84,7 @@ const content = [
     actionFn: () => ({
       content: (
         <>
-          Many recipients who have never engaged are reporting your emails as spam. Remove these recipients to lower your complaint rate. A high complaint rate will lead to deliverability issues.
+          Many recipients who have never engaged are reporting your emails as spam. Remove these recipients to lower your complaint rate and have a more successful email program.
         </>
       ),
       type: 'bad',
