@@ -16,6 +16,16 @@ describe('Signals Engagement Rate By Cohort Page', () => {
     }
   ];
 
+  const dataEngRecency = [
+    {
+      date: '2017-01-01',
+      c_uneng: .25
+    },
+    {
+      date: '2017-01-02',
+      c_uneng: .5
+    }];
+
   beforeEach(() => {
     props = {
       facetId: 'test.com',
@@ -26,10 +36,11 @@ describe('Signals Engagement Rate By Cohort Page', () => {
       loading: false,
       empty: false,
       xTicks: [1,2],
-      selectedDate: '2017-01-02'
+      selectedDate: '2017-01-02',
+      subaccountId: 0
     };
     wrapper = shallow(<EngagementRateByCohortPage {...props}/>);
-    wrapper.setProps({ data });
+    wrapper.setProps({ data, dataEngRecency });
   });
 
   it('renders correctly', () => {
