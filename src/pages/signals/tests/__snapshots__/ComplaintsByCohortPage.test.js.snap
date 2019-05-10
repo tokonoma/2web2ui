@@ -212,7 +212,27 @@ exports[`Signals Complaints Page renders correctly 1`] = `
       md={5}
       mdOffset={0}
       sm={12}
-    />
+    >
+      <div
+        className="OffsetCol"
+      >
+        <ComplaintsByCohortActions
+          complaintsByCohort={
+            Object {
+              "date": "2017-01-02",
+              "p_total_fbl": 10,
+            }
+          }
+          date="2017-01-02"
+          recencyByCohort={
+            Object {
+              "c_uneng": 0.5,
+              "date": "2017-01-02",
+            }
+          }
+        />
+      </div>
+    </Grid.Column>
   </Grid>
   <OtherChartsHeader
     facet="sending-domain"

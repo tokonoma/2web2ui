@@ -15,6 +15,15 @@ describe('Signals Complaints Page', () => {
       p_total_fbl: 10
     }
   ];
+  const dataEngRecency = [
+    {
+      date: '2017-01-01',
+      c_uneng: .25
+    },
+    {
+      date: '2017-01-02',
+      c_uneng: .5
+    }];
 
   beforeEach(() => {
     props = {
@@ -29,7 +38,7 @@ describe('Signals Complaints Page', () => {
       selectedDate: '2017-01-02'
     };
     wrapper = shallow(<ComplaintsByCohortPage {...props}/>);
-    wrapper.setProps({ data });
+    wrapper.setProps({ data, dataEngRecency });
   });
 
   it('renders correctly', () => {

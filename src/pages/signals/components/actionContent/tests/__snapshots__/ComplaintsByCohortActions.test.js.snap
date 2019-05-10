@@ -1,0 +1,284 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Signals complaints by cohort actions component should not render bad value if under 5% recent engagement by cohort 1`] = `
+Array [
+  Object {
+    "content": <React.Fragment>
+      Your complaint rates are low across the board. Great job!
+    </React.Fragment>,
+    "type": "good",
+  },
+]
+`;
+
+exports[`Signals complaints by cohort actions component should render Not Recently Engaged bad value 1`] = `
+Array [
+  Object {
+    "content": <React.Fragment>
+      Many of your 
+      <strong>
+        Not Recently Engaged
+      </strong>
+       recipients are marking your emails as spam. If this continues, you risk hurting your performance. Refreshing your content and segmenting your recipients can provide a better customer experience and lead to less spam complaints.
+    </React.Fragment>,
+    "link": "https://www.sparkpost.com/docs/signals/content-refresh/",
+    "type": "bad",
+  },
+]
+`;
+
+exports[`Signals complaints by cohort actions component should render Not Recently Engaged warning value 1`] = `
+Array [
+  Object {
+    "content": <React.Fragment>
+      Some of your 
+      <strong>
+        Not Recently Engaged
+      </strong>
+       recipients are marking your emails as spam. Refreshing your content and segmenting your recipients can improve your relationships and lead to less spam complaints.
+    </React.Fragment>,
+    "link": "https://www.sparkpost.com/docs/signals/content-refresh/",
+    "type": "warning",
+  },
+]
+`;
+
+exports[`Signals complaints by cohort actions component should render Recently Engaged bad value 1`] = `
+Array [
+  Object {
+    "content": <React.Fragment>
+      Many of your 
+      <strong>
+        Recently Engaged
+      </strong>
+       recipients are marking your emails as spam. If this continues, you risk hurting your performance. Refreshing your content and segmenting your recipients can provide a better customer experience and lead to less spam complaints.
+    </React.Fragment>,
+    "link": "https://www.sparkpost.com/docs/signals/content-refresh/",
+    "type": "bad",
+  },
+]
+`;
+
+exports[`Signals complaints by cohort actions component should render Recently Engaged warning value 1`] = `
+Array [
+  Object {
+    "content": <React.Fragment>
+      Some of your 
+      <strong>
+        Recently Engaged
+      </strong>
+       recipients are marking your emails as spam. Refreshing your content and segmenting your recipients can improve your relationships and lead to less spam complaints.
+    </React.Fragment>,
+    "link": "https://www.sparkpost.com/docs/signals/content-refresh/",
+    "type": "warning",
+  },
+]
+`;
+
+exports[`Signals complaints by cohort actions component should render Semi Recently Engaged bad value 1`] = `
+Array [
+  Object {
+    "content": <React.Fragment>
+      Many of your 
+      <strong>
+        Semi-Recently Engaged
+      </strong>
+       recipients are marking your emails as spam. If this continues, you risk hurting your performance. Refreshing your content and segmenting your recipients can provide a better customer experience and lead to less spam complaints.
+    </React.Fragment>,
+    "link": "https://www.sparkpost.com/docs/signals/content-refresh/",
+    "type": "bad",
+  },
+]
+`;
+
+exports[`Signals complaints by cohort actions component should render Semi Recently Engaged warning value 1`] = `
+Array [
+  Object {
+    "content": <React.Fragment>
+      Some of your 
+      <strong>
+        Semi-Recently Engaged
+      </strong>
+       recipients are marking your emails as spam. Refreshing your content and segmenting your recipients can improve your relationships and lead to less spam complaints.
+    </React.Fragment>,
+    "link": "https://www.sparkpost.com/docs/signals/content-refresh/",
+    "type": "warning",
+  },
+]
+`;
+
+exports[`Signals complaints by cohort actions component should render all 2 Recently engaged bad values and 1 warning value 1`] = `
+Array [
+  Object {
+    "content": <React.Fragment>
+      Many of your 
+      <strong>
+        Semi-Recently Engaged and Not Recently Engaged
+      </strong>
+       recipients are marking your emails as spam. If this continues, you risk hurting your performance. Refreshing your content and segmenting your recipients can provide a better customer experience and lead to less spam complaints.
+    </React.Fragment>,
+    "link": "https://www.sparkpost.com/docs/signals/content-refresh/",
+    "type": "bad",
+  },
+  Object {
+    "content": <React.Fragment>
+      Some of your 
+      <strong>
+        Recently Engaged
+      </strong>
+       recipients are marking your emails as spam. Refreshing your content and segmenting your recipients can improve your relationships and lead to less spam complaints.
+    </React.Fragment>,
+    "link": "https://www.sparkpost.com/docs/signals/content-refresh/",
+    "type": "warning",
+  },
+]
+`;
+
+exports[`Signals complaints by cohort actions component should render all 2 Recently engaged warning values and 1 bad value 1`] = `
+Array [
+  Object {
+    "content": <React.Fragment>
+      Many of your 
+      <strong>
+        Recently Engaged
+      </strong>
+       recipients are marking your emails as spam. If this continues, you risk hurting your performance. Refreshing your content and segmenting your recipients can provide a better customer experience and lead to less spam complaints.
+    </React.Fragment>,
+    "link": "https://www.sparkpost.com/docs/signals/content-refresh/",
+    "type": "bad",
+  },
+  Object {
+    "content": <React.Fragment>
+      Some of your 
+      <strong>
+        Semi-Recently Engaged and Not Recently Engaged
+      </strong>
+       recipients are marking your emails as spam. Refreshing your content and segmenting your recipients can improve your relationships and lead to less spam complaints.
+    </React.Fragment>,
+    "link": "https://www.sparkpost.com/docs/signals/content-refresh/",
+    "type": "warning",
+  },
+]
+`;
+
+exports[`Signals complaints by cohort actions component should render all 3 Recently engaged bad values 1`] = `
+Array [
+  Object {
+    "content": <React.Fragment>
+      Many of your 
+      <strong>
+        Recently Engaged, Semi-Recently Engaged, and Not Recently Engaged
+      </strong>
+       recipients are marking your emails as spam. If this continues, you risk hurting your performance. Refreshing your content and segmenting your recipients can provide a better customer experience and lead to less spam complaints.
+    </React.Fragment>,
+    "link": "https://www.sparkpost.com/docs/signals/content-refresh/",
+    "type": "bad",
+  },
+]
+`;
+
+exports[`Signals complaints by cohort actions component should render all 3 Recently engaged warning values 1`] = `
+Array [
+  Object {
+    "content": <React.Fragment>
+      Some of your 
+      <strong>
+        Recently Engaged, Semi-Recently Engaged, and Not Recently Engaged
+      </strong>
+       recipients are marking your emails as spam. Refreshing your content and segmenting your recipients can improve your relationships and lead to less spam complaints.
+    </React.Fragment>,
+    "link": "https://www.sparkpost.com/docs/signals/content-refresh/",
+    "type": "warning",
+  },
+]
+`;
+
+exports[`Signals complaints by cohort actions component should render new bad value 1`] = `
+Array [
+  Object {
+    "content": <React.Fragment>
+      Some of your new recipients marked your emails as spam. This is a sign you may need to set better expectations when subscribers first sign up.
+    </React.Fragment>,
+    "link": "https://www.sparkpost.com/docs/signals/subscriber-acquisition/",
+    "type": "warning",
+  },
+]
+`;
+
+exports[`Signals complaints by cohort actions component should render new warning value 1`] = `
+Array [
+  Object {
+    "content": <React.Fragment>
+      Some of your new recipients marked your emails as spam. This is a sign you may need to set better expectations when subscribers first sign up.
+    </React.Fragment>,
+    "link": "https://www.sparkpost.com/docs/signals/subscriber-acquisition/",
+    "type": "warning",
+  },
+]
+`;
+
+exports[`Signals complaints by cohort actions component should render only 3 items 1`] = `
+Array [
+  Object {
+    "content": <React.Fragment>
+      Many of your 
+      <strong>
+        Recently Engaged
+      </strong>
+       recipients are marking your emails as spam. If this continues, you risk hurting your performance. Refreshing your content and segmenting your recipients can provide a better customer experience and lead to less spam complaints.
+    </React.Fragment>,
+    "link": "https://www.sparkpost.com/docs/signals/content-refresh/",
+    "type": "bad",
+  },
+  Object {
+    "content": <React.Fragment>
+      Many recipients who have never engaged are reporting your emails as spam. Remove these recipients to lower your complaint rate and have a more successful email program.
+    </React.Fragment>,
+    "link": "https://www.sparkpost.com/docs/signals/list-hygiene/",
+    "type": "bad",
+  },
+  Object {
+    "content": <React.Fragment>
+      New recipients are marking your emails as spam. Consider improving your list acquisition practices to lower your complaint rate and provider a better experience.
+    </React.Fragment>,
+    "link": "https://www.sparkpost.com/docs/signals/subscriber-acquisition/",
+    "type": "bad",
+  },
+]
+`;
+
+exports[`Signals complaints by cohort actions component should render total complaint rate bad value 1`] = `
+Array [
+  Object {
+    "content": <React.Fragment>
+      Your complaint rate is unusually high. A consistently high complaint rate leads to deliverability issues. Work on improving your list hygiene and consider refreshing your content.
+    </React.Fragment>,
+    "link": "https://www.sparkpost.com/docs/signals/",
+    "type": "bad",
+  },
+]
+`;
+
+exports[`Signals complaints by cohort actions component should render unengaged bad value 1`] = `
+Array [
+  Object {
+    "content": <React.Fragment>
+      Many recipients who have never engaged are reporting your emails as spam. Remove these recipients to lower your complaint rate and have a more successful email program.
+    </React.Fragment>,
+    "link": "https://www.sparkpost.com/docs/signals/list-hygiene/",
+    "type": "bad",
+  },
+]
+`;
+
+exports[`Signals complaints by cohort actions component should render unengaged warning value 1`] = `
+Array [
+  Object {
+    "content": <React.Fragment>
+      Some recipients who have never engaged are reporting your emails as spam. Consider removing these recipients to lower your complaint rate.
+    </React.Fragment>,
+    "link": "https://www.sparkpost.com/docs/signals/list-hygiene/",
+    "type": "warning",
+  },
+]
+`;
