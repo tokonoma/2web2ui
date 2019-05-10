@@ -232,7 +232,7 @@ Array [
   },
   Object {
     "content": <React.Fragment>
-      Many recipients who have never engaged are reporting your emails as spam. Remove these recipients to lower your complaint rate. A high complaint rate will lead to deliverability issues.
+      Many recipients who have never engaged are reporting your emails as spam. Remove these recipients to lower your complaint rate and have a more successful email program.
     </React.Fragment>,
     "link": "https://www.sparkpost.com/docs/signals/list-hygiene/",
     "type": "bad",
@@ -263,7 +263,7 @@ exports[`Signals complaints by cohort actions component should render unengaged 
 Array [
   Object {
     "content": <React.Fragment>
-      Many recipients who have never engaged are reporting your emails as spam. Remove these recipients to lower your complaint rate. A high complaint rate will lead to deliverability issues.
+      Many recipients who have never engaged are reporting your emails as spam. Remove these recipients to lower your complaint rate and have a more successful email program.
     </React.Fragment>,
     "link": "https://www.sparkpost.com/docs/signals/list-hygiene/",
     "type": "bad",
