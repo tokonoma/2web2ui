@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`RouteContext ProviderComponent renders a context provider 1`] = `
+exports[`RouterContext ProviderComponent renders a context provider 1`] = `
 <ContextProvider
   value={
     Object {
@@ -17,7 +17,7 @@ exports[`RouteContext ProviderComponent renders a context provider 1`] = `
         "path": "/example/:id",
         "url": "/example/123",
       },
-      "params": Object {
+      "requestParams": Object {
         "id": "123",
       },
     }

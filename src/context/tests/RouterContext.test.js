@@ -1,8 +1,8 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { ProviderComponent } from '../RouteContext';
+import { ProviderComponent } from '../RouterContext';
 
-describe('RouteContext', () => {
+describe('RouterContext', () => {
   describe('ProviderComponent', () => {
     const sampleProps = {
       location: {
@@ -39,7 +39,7 @@ describe('RouteContext', () => {
         }
       });
 
-      expect(wrapper.prop('value')).toHaveProperty('params', { id: '123', query: 'abc' });
+      expect(wrapper.prop('value')).toHaveProperty('requestParams', { id: '123', query: 'abc' });
     });
   });
 });

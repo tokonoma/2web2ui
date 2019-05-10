@@ -5,7 +5,7 @@ import { AccessControl } from 'src/components/auth';
 import ErrorBoundary from 'src/components/errorBoundaries/ErrorBoundary';
 import _ from 'lodash';
 import { AUTH_ROUTE } from 'src/constants';
-import { RouteContextProvider } from 'src/context/RouteContext';
+import { RouterContextProvider } from 'src/context/RouterContext';
 
 export class ProtectedRoute extends Component {
 
@@ -14,9 +14,9 @@ export class ProtectedRoute extends Component {
 
     return (
       <AccessControl condition={condition} redirect='/404'>
-        <RouteContextProvider>
+        <RouterContextProvider>
           <Component {...reactRouterProps} />
-        </RouteContextProvider>
+        </RouterContextProvider>
       </AccessControl>
     );
   }

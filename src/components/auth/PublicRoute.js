@@ -4,7 +4,7 @@ import { logout } from 'src/actions/auth';
 import { Route } from 'react-router-dom';
 import AccessControl from './AccessControl';
 import { AUTH_ROUTE } from 'src/constants';
-import { RouteContextProvider } from 'src/context/RouteContext';
+import { RouterContextProvider } from 'src/context/RouterContext';
 
 export class PublicRoute extends Component {
   componentDidMount() {
@@ -25,9 +25,9 @@ export class PublicRoute extends Component {
     return (
       <Route {...routeProps} render={(reactRouterProps) => (
         <AccessControl condition={condition} redirect={AUTH_ROUTE} wait={false}>
-          <RouteContextProvider>
+          <RouterContextProvider>
             <Component {...routeProps} {...reactRouterProps} />
-          </RouteContextProvider>
+          </RouterContextProvider>
         </AccessControl>
       )} />
     );
