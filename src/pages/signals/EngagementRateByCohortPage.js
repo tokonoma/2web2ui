@@ -69,7 +69,9 @@ export class EngagementRateByCohortPage extends Component {
   }
 
   renderContent = () => {
-    const { data = [], dataEngRecency, facet, facetId, handleDateSelect, loading, empty, error, selectedDate, subaccountId } = this.props;
+    const {
+      data = [], dataEngRecency = [], facet, facetId, handleDateSelect, loading, empty, error, selectedDate, subaccountId
+    } = this.props;
     const selectedEngagementRate = _.find(data, ['date', selectedDate]) || {};
     const selectedEngagementRecency = _.find(dataEngRecency, ['date', selectedDate]) || {};
 
