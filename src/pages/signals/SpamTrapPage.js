@@ -127,7 +127,7 @@ export class SpamTrapPage extends Component {
 
     return (
       <Page
-        breadcrumbAction={{ content: 'Back to Overview', to: '/signals', component: Link }}
+        breadcrumbAction={{ content: 'Back to Spam Trap Overview', to: '/signals/spam-traps', component: Link }}
         dimensionPrefix='Spam Traps'
         facet={facet}
         facetId={facetId}

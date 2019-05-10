@@ -55,8 +55,8 @@ exports[`Signals Engagement Recency Page renders correctly 1`] = `
   breadcrumbAction={
     Object {
       "component": [Function],
-      "content": "Back to Overview",
-      "to": "/signals",
+      "content": "Back to Engagement Recency Overview",
+      "to": "/signals/engagement",
     }
   }
   dimensionPrefix={
@@ -83,28 +83,13 @@ exports[`Signals Engagement Recency Page renders correctly 1`] = `
       md={7}
       sm={12}
     >
-      <AccessControl
-        condition={[Function]}
-      >
-        <withRouter(Tabs)
-          facet="sending-domain"
-          facetId="test.com"
-        />
-      </AccessControl>
+      <withRouter(Tabs)
+        facet="sending-domain"
+        facetId="test.com"
+      />
       <Panel
         sectioned={true}
       >
-        <AccessControl
-          condition={[Function]}
-        >
-          <ChartHeader
-            title="Engagement Recency"
-            tooltipContent="
-  The share over time of your email that has been sent to recipients who most recently
-  opened messages or clicked links during several defined time periods.
-"
-          />
-        </AccessControl>
         <div
           className="LiftTooltip"
         >
@@ -298,17 +283,6 @@ exports[`Signals Engagement Recency Page renders empty correctly 1`] = `
 <Panel
   sectioned={true}
 >
-  <AccessControl
-    condition={[Function]}
-  >
-    <ChartHeader
-      title="Engagement Recency"
-      tooltipContent="
-  The share over time of your email that has been sent to recipients who most recently
-  opened messages or clicked links during several defined time periods.
-"
-    />
-  </AccessControl>
   <Callout
     title="No Data Available"
   >
@@ -322,8 +296,8 @@ exports[`Signals Engagement Recency Page renders error correctly 1`] = `
   breadcrumbAction={
     Object {
       "component": [Function],
-      "content": "Back to Overview",
-      "to": "/signals",
+      "content": "Back to Engagement Recency Overview",
+      "to": "/signals/engagement",
     }
   }
   dimensionPrefix={
@@ -350,28 +324,13 @@ exports[`Signals Engagement Recency Page renders error correctly 1`] = `
       md={7}
       sm={12}
     >
-      <AccessControl
-        condition={[Function]}
-      >
-        <withRouter(Tabs)
-          facet="sending-domain"
-          facetId="test.com"
-        />
-      </AccessControl>
+      <withRouter(Tabs)
+        facet="sending-domain"
+        facetId="test.com"
+      />
       <Panel
         sectioned={true}
       >
-        <AccessControl
-          condition={[Function]}
-        >
-          <ChartHeader
-            title="Engagement Recency"
-            tooltipContent="
-  The share over time of your email that has been sent to recipients who most recently
-  opened messages or clicked links during several defined time periods.
-"
-          />
-        </AccessControl>
         <Callout
           title="Unable to Load Data"
         >
@@ -414,17 +373,6 @@ exports[`Signals Engagement Recency Page renders loading correctly 1`] = `
 <Panel
   sectioned={true}
 >
-  <AccessControl
-    condition={[Function]}
-  >
-    <ChartHeader
-      title="Engagement Recency"
-      tooltipContent="
-  The share over time of your email that has been sent to recipients who most recently
-  opened messages or clicked links during several defined time periods.
-"
-    />
-  </AccessControl>
   <div
     style={
       Object {

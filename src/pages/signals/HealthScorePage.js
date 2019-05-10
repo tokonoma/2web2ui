@@ -200,7 +200,7 @@ export class HealthScorePage extends Component {
 
     return (
       <Page
-        breadcrumbAction={{ content: 'Back to Overview', to: '/signals', component: Link }}
+        breadcrumbAction={{ content: 'Back to Health Score Overview', to: '/signals/health-score', component: Link }}
         dimensionPrefix='Health Score'
         facet={facet}
         facetId={facetId}

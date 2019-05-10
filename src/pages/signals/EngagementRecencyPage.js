@@ -6,7 +6,6 @@ import { selectEngagementRecencyDetails } from 'src/selectors/signals';
 import { Panel, Grid } from '@sparkpost/matchbox';
 import BarChart from './components/charts/barchart/BarChart';
 import Callout from 'src/components/callout';
-import ChartHeader from './components/ChartHeader';
 import DateFilter from './components/filters/DateFilter';
 import EngagementRecencyActions from './components/actionContent/EngagementRecencyActions';
 import InfoTooltip from './components/InfoTooltip';
@@ -18,10 +17,7 @@ import TooltipMetric from './components/charts/tooltip/TooltipMetric';
 import withDetails from './containers/withDetails';
 import withDateSelection from './containers/withDateSelection';
 import { ENGAGEMENT_RECENCY_COHORTS, ENGAGEMENT_RECENCY_INFO } from './constants/info';
-import { AccessControl } from 'src/components/auth';
 import { Loading } from 'src/components';
-import { hasUiOption } from 'src/helpers/conditions/account';
-import { not } from 'src/helpers/conditions';
 import { roundToPlaces } from 'src/helpers/units';
 import moment from 'moment';
 import _ from 'lodash';
@@ -85,16 +81,8 @@ export class EngagementRecencyPage extends Component {
     return (
       <Grid>
         <Grid.Column sm={12} md={7}>
-          <AccessControl condition={hasUiOption('feature_signals_v2')}>
-            <Tabs facet={facet} facetId={facetId} subaccountId={subaccountId} />
-          </AccessControl>
+          <Tabs facet={facet} facetId={facetId} subaccountId={subaccountId} />
           <Panel sectioned>
-            <AccessControl condition={not(hasUiOption('feature_signals_v2'))}>
-              <ChartHeader
-                title='Engagement Recency'
-                tooltipContent={ENGAGEMENT_RECENCY_INFO}
-              />
-            </AccessControl>
             {chartPanel || (
               <div className='LiftTooltip'>
                 <BarChart
@@ -130,7 +118,7 @@ export class EngagementRecencyPage extends Component {
 
     return (
       <Page
-        breadcrumbAction={{ content: 'Back to Overview', to: '/signals', component: Link }}
+        breadcrumbAction={{ content: 'Back to Engagement Recency Overview', to: '/signals/engagement', component: Link }}
         dimensionPrefix={
           <>
             Engagement Recency
