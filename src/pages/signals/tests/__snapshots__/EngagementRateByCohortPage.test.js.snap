@@ -67,7 +67,6 @@ exports[`Signals Engagement Rate By Cohort Page renders correctly 1`] = `
       left={true}
     />
   }
-  subaccountId={0}
 >
   <Grid>
     <Grid.Column
@@ -77,7 +76,6 @@ exports[`Signals Engagement Rate By Cohort Page renders correctly 1`] = `
       <withRouter(Tabs)
         facet="sending-domain"
         facetId="test.com"
-        subaccountId={0}
       />
       <Panel
         sectioned={true}
@@ -236,13 +234,14 @@ exports[`Signals Engagement Rate By Cohort Page renders correctly 1`] = `
               "date": "2017-01-02",
             }
           }
+          facet="sending-domain"
+          facetId="test.com"
           recencyByCohort={
             Object {
               "c_uneng": 0.5,
               "date": "2017-01-02",
             }
           }
-          sid={0}
         />
       </div>
     </Grid.Column>
@@ -250,7 +249,6 @@ exports[`Signals Engagement Rate By Cohort Page renders correctly 1`] = `
   <OtherChartsHeader
     facet="sending-domain"
     facetId="test.com"
-    subaccountId={0}
   />
   <Grid>
     <Grid.Column
@@ -298,7 +296,6 @@ exports[`Signals Engagement Rate By Cohort Page renders error correctly 1`] = `
       left={true}
     />
   }
-  subaccountId={0}
 >
   <Grid>
     <Grid.Column
@@ -308,7 +305,6 @@ exports[`Signals Engagement Rate By Cohort Page renders error correctly 1`] = `
       <withRouter(Tabs)
         facet="sending-domain"
         facetId="test.com"
-        subaccountId={0}
       />
       <Panel
         sectioned={true}
@@ -333,7 +329,6 @@ exports[`Signals Engagement Rate By Cohort Page renders error correctly 1`] = `
   <OtherChartsHeader
     facet="sending-domain"
     facetId="test.com"
-    subaccountId={0}
   />
   <Grid>
     <Grid.Column

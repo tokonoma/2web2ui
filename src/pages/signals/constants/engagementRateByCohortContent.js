@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import styles from '../components/Actions.module.scss';
 
 const showActionCondidtional = (percentage) => percentage > 0.05;
 
@@ -20,7 +22,11 @@ export const contentTotalEngagement = {
   </>
   ),
   type: 'bad',
-  link: (sid) => `https://www.sparkpost.com/signals/signals/health-score/sid/${sid}`
+  link: (facet, facetId) => (
+    <Link to={`/signals/health-score/${facet}/${facetId}`} className={styles.Link}>
+      Learn More
+    </Link>
+  )
 };
 
 // Ordered by priority

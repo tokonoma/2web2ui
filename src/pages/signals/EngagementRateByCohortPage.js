@@ -121,10 +121,12 @@ export class EngagementRateByCohortPage extends Component {
         </Grid.Column>
         <Grid.Column sm={12} md={5} mdOffset={0}>
           <div className={styles.OffsetCol}>
-            {!chartPanel && <EngagementRateByCohortActions engagementByCohort={selectedEngagementRate}
+            {!chartPanel && <EngagementRateByCohortActions
+              engagementByCohort={selectedEngagementRate}
               recencyByCohort={selectedEngagementRecency}
               date={selectedDate}
-              sid={subaccountId}/>}
+              facet={facet}
+              facetId={facetId}/>}
           </div>
         </Grid.Column>
       </Grid>
@@ -133,7 +135,6 @@ export class EngagementRateByCohortPage extends Component {
 
   render() {
     const { facet, facetId, subaccountId } = this.props;
-
     return (
       <Page
         breadcrumbAction={{ content: 'Back to Overview', to: '/signals', component: Link }}

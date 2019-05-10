@@ -13,12 +13,21 @@ describe('Signals Engagement Rate by cohort actions component', () => {
     c_uneng: 1
   };
   it('renders', () => {
-    wrapper = shallow(<EngagementRateByCohortActions engagementByCohort={{ p_total_eng: 0 }} recencyByCohort={fullEngagementRecency} sid={0}/>);
+    wrapper = shallow(<EngagementRateByCohortActions
+      engagementByCohort={{ p_total_eng: 0 }}
+      recencyByCohort={fullEngagementRecency}
+      facet={'facet'}
+      facetId={'someId'}/>);
+
     expect(wrapper.prop('actions')).toMatchSnapshot();
   });
 
   cases('should render', (engagementByCohort) => {
-    wrapper = shallow(<EngagementRateByCohortActions engagementByCohort={engagementByCohort} recencyByCohort={fullEngagementRecency} sid={0}/>);
+    wrapper = shallow(<EngagementRateByCohortActions
+      engagementByCohort={engagementByCohort}
+      recencyByCohort={fullEngagementRecency}
+      facet={'facet'}
+      facetId={'someId'}/>);
     expect(wrapper.prop('actions')).toHaveLength(1);
     expect(wrapper.prop('actions')[0].type).toEqual('bad');
   }, {
@@ -45,7 +54,11 @@ describe('Signals Engagement Rate by cohort actions component', () => {
   });
 
   cases('should render', (engagementByCohort) => {
-    wrapper = shallow(<EngagementRateByCohortActions engagementByCohort={engagementByCohort} recencyByCohort={fullEngagementRecency} sid={0}/>);
+    wrapper = shallow(<EngagementRateByCohortActions
+      engagementByCohort={engagementByCohort}
+      recencyByCohort={fullEngagementRecency}
+      facet={'facet'}
+      facetId={'someId'}/>);
     expect(wrapper.prop('actions')).toHaveLength(1);
     expect(wrapper.prop('actions')[0].type).toEqual('warning');
   }, {
@@ -68,7 +81,11 @@ describe('Signals Engagement Rate by cohort actions component', () => {
   });
 
   it('should not render negative action message if that engagement cohort recency rate is <5%', () => {
-    wrapper = shallow(<EngagementRateByCohortActions engagementByCohort={{ p_new_eng: 0 }} recencyByCohort={{ p_new_eng: 0 }} sid={0}/>);
+    wrapper = shallow(<EngagementRateByCohortActions
+      engagementByCohort={{ p_new_eng: 0 }}
+      recencyByCohort={{ p_new_eng: 0 }}
+      facet={'facet'}
+      facetId={'someId'}/>);
     //Will show the good message because there are no negative action messages, so it will default to the good message
     expect(wrapper.prop('actions')).toHaveLength(1);
     expect(wrapper.prop('actions')[0].type).toEqual('good');
@@ -83,7 +100,11 @@ describe('Signals Engagement Rate by cohort actions component', () => {
       p_365d_eng: 0,
       p_uneng_eng: 0
     };
-    wrapper = shallow(<EngagementRateByCohortActions engagementByCohort={zeroEngagementRate} recencyByCohort={fullEngagementRecency} sid={0}/>);
+    wrapper = shallow(<EngagementRateByCohortActions
+      engagementByCohort={zeroEngagementRate}
+      recencyByCohort={fullEngagementRecency}
+      facet={'facet'}
+      facetId={'someId'}/>);
     expect(wrapper.prop('actions')).toHaveLength(3);
     expect(wrapper.prop('actions')).toMatchSnapshot();
   });
@@ -97,13 +118,21 @@ describe('Signals Engagement Rate by cohort actions component', () => {
       p_365d_eng: 1,
       p_uneng_eng: 1
     };
-    wrapper = shallow(<EngagementRateByCohortActions engagementByCohort={fullEngagementRate} recencyByCohort={fullEngagementRecency} sid={0}/>);
+    wrapper = shallow(<EngagementRateByCohortActions
+      engagementByCohort={fullEngagementRate}
+      recencyByCohort={fullEngagementRecency}
+      facet={'facet'}
+      facetId={'someId'}/>);
     expect(wrapper.prop('actions')).toHaveLength(1);
     expect(wrapper.prop('actions')[0].type).toEqual('good');
   });
 
   it('renders empty', () => {
-    wrapper = shallow(<EngagementRateByCohortActions engagementByCohort={{ p_total_eng: null }} />);
+    wrapper = shallow(<EngagementRateByCohortActions
+      engagementByCohort={{ p_total_eng: null }}
+      recencyByCohort={fullEngagementRecency}
+      facet={'facet'}
+      facetId={'someId'}/>);
     expect(wrapper.prop('empty')).toBe(true);
   });
 });

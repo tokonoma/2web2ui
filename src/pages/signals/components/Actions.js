@@ -9,8 +9,9 @@ import styles from './Actions.module.scss';
 const Action = ({ content, link, type = 'bad' }) => {
   let iconMarkup;
 
-  const linkMarkup = link && (
-    <ExternalLink to={link} className={styles.Link}>Learn More</ExternalLink>
+  const linkMarkup = link && (React.isValidElement(link)
+    ? link
+    : (<ExternalLink to={link} className={styles.Link}>Learn More</ExternalLink>)
   );
 
   if (type === 'bad') {
@@ -53,7 +54,7 @@ Actions.propTypes = {
   actions: PropTypes.arrayOf(PropTypes.shape({
     type: PropTypes.oneOf(['good', 'bad', 'warning']),
     content: PropTypes.node,
-    link: PropTypes.string
+    link: PropTypes.oneOfType([PropTypes.string, PropTypes.node])
   })),
   date: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)])
 };

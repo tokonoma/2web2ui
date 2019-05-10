@@ -36,8 +36,7 @@ describe('Signals Engagement Rate By Cohort Page', () => {
       loading: false,
       empty: false,
       xTicks: [1,2],
-      selectedDate: '2017-01-02',
-      subaccountId: 0
+      selectedDate: '2017-01-02'
     };
     wrapper = shallow(<EngagementRateByCohortPage {...props}/>);
     wrapper.setProps({ data, dataEngRecency });

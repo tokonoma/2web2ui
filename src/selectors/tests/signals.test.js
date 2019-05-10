@@ -310,12 +310,24 @@ describe('Selectors: signals', () => {
     });
 
     it('should be empty with only fill data when not loading', () => {
-      const stateWhenEmpty = { ...state, signals: { engagementRateByCohort: { data: [], loading: false }}};
+      const stateWhenEmpty = {
+        ...state,
+        signals: {
+          engagementRateByCohort: { data: [], loading: false },
+          engagementRecency: { data: [], loading: false }
+        }
+      };
       expect(selectors.selectEngagementRateByCohortDetails(stateWhenEmpty, props).details.empty).toBe(true);
     });
 
     it('should not be empty when loading', () => {
-      const stateWhenLoading = { ...state, signals: { engagementRateByCohort: { data: [], loading: true }}};
+      const stateWhenLoading = {
+        ...state,
+        signals: {
+          engagementRateByCohort: { data: [], loading: true },
+          engagementRecency: { data: [], loading: true }
+        }
+      };
       expect(selectors.selectEngagementRateByCohortDetails(stateWhenLoading, props).details.empty).toBe(false);
     });
 
@@ -356,12 +368,24 @@ describe('Selectors: signals', () => {
     });
 
     it('should be empty with only fill data when not loading', () => {
-      const stateWhenEmpty = { ...state, signals: { complaintsByCohort: { data: [], loading: false }, engagementRecency: { data: [], loading: false }}};
+      const stateWhenEmpty = {
+        ...state,
+        signals: {
+          complaintsByCohort: { data: [], loading: false },
+          engagementRecency: { data: [], loading: false }
+        }
+      };
       expect(selectors.selectComplaintsByCohortDetails(stateWhenEmpty, props).details.empty).toBe(true);
     });
 
     it('should not be empty when loading', () => {
-      const stateWhenLoading = { ...state, signals: { complaintsByCohort: { data: [], loading: true }, engagementRecency: { data: [], loading: false }}};
+      const stateWhenLoading = {
+        ...state,
+        signals: {
+          complaintsByCohort: { data: [], loading: true },
+          engagementRecency: { data: [], loading: false }
+        }
+      };
       expect(selectors.selectComplaintsByCohortDetails(stateWhenLoading, props).details.empty).toBe(false);
     });
 

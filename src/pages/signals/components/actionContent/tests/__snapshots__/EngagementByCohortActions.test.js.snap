@@ -6,7 +6,13 @@ Array [
     "content": <React.Fragment>
       An overall low engagement rate may indicate you emails are being sent to the spam folder. Drill into your Health Score to find the issue.
     </React.Fragment>,
-    "link": "https://www.sparkpost.com/signals/signals/health-score/sid/0",
+    "link": <Link
+      className="Link"
+      replace={false}
+      to="/signals/health-score/facet/someId"
+    >
+      Learn More
+    </Link>,
     "type": "bad",
   },
 ]
@@ -18,7 +24,13 @@ Array [
     "content": <React.Fragment>
       An overall low engagement rate may indicate you emails are being sent to the spam folder. Drill into your Health Score to find the issue.
     </React.Fragment>,
-    "link": "https://www.sparkpost.com/signals/signals/health-score/sid/0",
+    "link": <Link
+      className="Link"
+      replace={false}
+      to="/signals/health-score/facet/someId"
+    >
+      Learn More
+    </Link>,
     "type": "bad",
   },
   Object {
