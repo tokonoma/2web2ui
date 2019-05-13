@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { hasOnlineSupport, hasStatus, hasStatusReasonCategory, isSuspendedForBilling, onPlanWithStatus } from 'src/helpers/conditions/account';
+import { hasOnlineSupport, hasStatus, hasStatusReasonCategory, isSuspendedForBilling, onPlanWithStatus, isSelfServeBilling } from 'src/helpers/conditions/account';
 import { isEmailVerified } from 'src/helpers/conditions/user';
 import { all, not, any } from 'src/helpers/conditions';
 import { isAdmin } from 'src/helpers/conditions/user';
@@ -77,6 +77,15 @@ const supportIssues = [
     label: 'Account upgrade/downgrade issues',
     type: SUPPORT,
     condition: isAdmin
+  },
+  {
+    id: 'request_new_ip',
+    label: 'Request new IP',
+    type: SUPPORT,
+    condition: all(
+      isAdmin,
+      not(isSelfServeBilling)
+    )
   },
   {
     id: 'general_billing',

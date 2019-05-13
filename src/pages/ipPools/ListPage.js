@@ -7,6 +7,10 @@ import { Loading, TableCollection, ApiErrorBanner } from 'src/components';
 import { Page, Button,Banner } from '@sparkpost/matchbox';
 import { OpenInNew } from '@sparkpost/matchbox-icons';
 import { LINKS } from 'src/constants';
+import { openSupportTicketForm } from 'src/actions/support';
+import { not } from 'src/helpers/conditions';
+import { selectCondition } from 'src/selectors/accessConditionState';
+import { isSelfServeBilling } from 'src/helpers/conditions/account';
 
 const columns = [
   { label: 'Name', sortKey: 'name' },
@@ -55,11 +59,15 @@ export class IpPoolsList extends Component {
   }
 
   render() {
-    const { loading, error, showPurchaseCTA } = this.props;
+    const { loading, error, showPurchaseCTA, isManuallyBilled, openSupportTicketForm } = this.props;
     if (loading) { return <Loading />; }
 
     const createAction = { content: 'Create IP Pool', Component: Link, to: '/account/ip-pools/create' };
-    const purchaseActions = showPurchaseCTA ? [{ content: 'Purchase IPs', Component: Link, to: '/account/billing' }] : null;
+    const purchaseActions = showPurchaseCTA
+      ? (isManuallyBilled
+        ? [{ content: 'Request IPs', onClick: () => openSupportTicketForm({ issueId: 'request_new_ip' }) }]
+        : [{ content: 'Purchase IPs', Component: Link, to: '/account/billing' }])
+      : null;
 
     return (
       <Page
@@ -94,8 +102,9 @@ function mapStateToProps(state) {
     ipPools: getOrderedIpPools(state),
     loading: ipPools.listLoading,
     error: ipPools.listError,
+    isManuallyBilled: selectCondition(not(isSelfServeBilling))(state),
     showPurchaseCTA: shouldShowIpPurchaseCTA(state)
   };
 }
 
-export default connect(mapStateToProps, { listPools })(IpPoolsList);
+export default connect(mapStateToProps, { listPools, openSupportTicketForm })(IpPoolsList);

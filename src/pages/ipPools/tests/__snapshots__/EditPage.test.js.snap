@@ -23,6 +23,11 @@ exports[`IP Pools Edit Page render tests should not show purchase action if show
         "to": "/account/billing",
         "visible": false,
       },
+      Object {
+        "content": "Request IPs",
+        "onClick": [Function],
+        "visible": false,
+      },
     ]
   }
   title="My Pool (my-pool)"
@@ -80,6 +85,11 @@ exports[`IP Pools Edit Page render tests should render the edit page correctly 1
         "content": "Purchase IPs",
         "to": "/account/billing",
         "visible": true,
+      },
+      Object {
+        "content": "Request IPs",
+        "onClick": [Function],
+        "visible": false,
       },
     ]
   }

@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
@@ -11,7 +11,11 @@ import { showAlert } from 'src/actions/globalAlert';
 import { deletePool, listPools, updatePool } from 'src/actions/ipPools';
 import { selectCurrentPool, selectIpsForCurrentPool, shouldShowIpPurchaseCTA } from 'src/selectors/ipPools';
 import isDefaultPool from './helpers/defaultPool';
-
+import { not } from 'src/helpers/conditions';
+import { selectCondition } from 'src/selectors/accessConditionState';
+import { isSelfServeBilling } from 'src/helpers/conditions/account';
+import SupportTicketLink from 'src/components/supportTicketLink/SupportTicketLink';
+import { openSupportTicketForm } from 'src/actions/support';
 
 const breadcrumbAction = {
   content: 'IP Pools',
@@ -36,10 +40,7 @@ export class EditPage extends Component {
 
     if (isDefaultPool(id)) {
       const message = 'You can not edit default pool.';
-      showAlert({
-        type: 'error',
-        message
-      });
+      showAlert({ type: 'error', message });
 
       return Promise.reject(new Error(message));
     }
@@ -94,16 +95,19 @@ export class EditPage extends Component {
   }
 
   renderIps() {
-    const { isNew, ips, pool, showPurchaseCTA } = this.props;
+    const { isNew, ips, pool, showPurchaseCTA, isManuallyBilled } = this.props;
 
     if (isNew) {
       return null;
     }
 
     const purchaseCTA = showPurchaseCTA
-      ? <Fragment>, or by <UnstyledLink to="/account/billing" component={Link}>purchasing new
-        IPs</UnstyledLink></Fragment>
-      : null;
+      ? (isManuallyBilled
+        ? <>, or by purchasing new IPs. Please <SupportTicketLink issueId='request_new_ip'>reach out to
+        the support team</SupportTicketLink> for assistance adding a new IP</>
+        : <>, or by <UnstyledLink to="/account/billing" component={Link}>purchasing new
+        IPs</UnstyledLink></>
+      ) : null;
 
     return (<Panel title='Sending IPs'>
       <Panel.Section>
@@ -118,7 +122,7 @@ export class EditPage extends Component {
   }
 
   render() {
-    const { loading, pool, showPurchaseCTA } = this.props;
+    const { loading, pool, showPurchaseCTA, isManuallyBilled, openSupportTicketForm } = this.props;
 
     if (loading) {
       return <Loading />;
@@ -137,7 +141,11 @@ export class EditPage extends Component {
           { content: 'Purchase IPs',
             to: '/account/billing',
             component: Link,
-            visible: showPurchaseCTA
+            visible: showPurchaseCTA && !isManuallyBilled
+          },
+          { content: 'Request IPs',
+            onClick: () => openSupportTicketForm({ issueId: 'request_new_ip' }),
+            visible: showPurchaseCTA && isManuallyBilled
           }]
         }>
 
@@ -165,13 +173,9 @@ const mapStateToProps = (state, props) => {
     pool: selectCurrentPool(state, props),
     ips: selectIpsForCurrentPool(state, props),
     listError,
+    isManuallyBilled: selectCondition(not(isSelfServeBilling))(state),
     showPurchaseCTA: shouldShowIpPurchaseCTA(state)
   };
 };
 
-export default connect(mapStateToProps, {
-  updatePool,
-  deletePool,
-  listPools,
-  showAlert
-})(EditPage);
+export default connect(mapStateToProps, { updatePool, deletePool, listPools, showAlert, openSupportTicketForm })(EditPage);
