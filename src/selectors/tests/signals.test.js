@@ -345,12 +345,22 @@ describe('Selectors: signals', () => {
     });
 
     it('should be empty with only fill data when not loading', () => {
-      const stateWhenEmpty = { ...state, signals: { unsubscribeRateByCohort: { data: [], loading: false }}};
+      const stateWhenEmpty = {
+        ...state,
+        signals: {
+          unsubscribeRateByCohort: { data: [], loading: false },
+          engagementRecency: { data: [], loading: false }
+        }};
       expect(selectors.selectUnsubscribeRateByCohortDetails(stateWhenEmpty, props).details.empty).toBe(true);
     });
 
     it('should not be empty when loading', () => {
-      const stateWhenLoading = { ...state, signals: { unsubscribeRateByCohort: { data: [], loading: true }}};
+      const stateWhenLoading = {
+        ...state,
+        signals: {
+          unsubscribeRateByCohort: { data: [], loading: true },
+          engagementRecency: { data: [], loading: true }
+        }};
       expect(selectors.selectUnsubscribeRateByCohortDetails(stateWhenLoading, props).details.empty).toBe(false);
     });
 
@@ -383,7 +393,7 @@ describe('Selectors: signals', () => {
         ...state,
         signals: {
           complaintsByCohort: { data: [], loading: true },
-          engagementRecency: { data: [], loading: false }
+          engagementRecency: { data: [], loading: true }
         }
       };
       expect(selectors.selectComplaintsByCohortDetails(stateWhenLoading, props).details.empty).toBe(false);

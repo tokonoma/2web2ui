@@ -150,8 +150,8 @@ export const selectEngagementRateByCohortDetails = createSelector(
 );
 
 export const selectUnsubscribeRateByCohortDetails = createSelector(
-  [getUnsubscribeRateByCohortData, getFacetFromParams, getFacetIdFromParams, selectSubaccountIdFromQuery, getOptions],
-  ({ loading, error, data }, facet, facetId, subaccountId, { from, to }) => {
+  [selectEngagementRecencyDetails, getUnsubscribeRateByCohortData, getFacetFromParams, getFacetIdFromParams, selectSubaccountIdFromQuery, getOptions],
+  ({ details: { loading: loadingEngRecency, error: errorEngRecency, data: dataEngRecency }}, { loading, error, data }, facet, facetId, subaccountId, { from, to }) => {
     const match = data.find((item) => String(item[facet]) === facetId) || {};
 
     // Rename date key
@@ -177,9 +177,10 @@ export const selectUnsubscribeRateByCohortDetails = createSelector(
     return {
       details: {
         data: filledHistory,
+        dataEngRecency,
         empty: isEmpty && !loading,
-        error,
-        loading
+        error: error || errorEngRecency,
+        loading: loading || loadingEngRecency
       },
       facet,
       facetId,
