@@ -212,7 +212,27 @@ exports[`Signals Unsubscribe Rate Page renders correctly 1`] = `
       md={5}
       mdOffset={0}
       sm={12}
-    />
+    >
+      <div
+        className="OffsetCol"
+      >
+        <UnsubscribeRateByCohortActions
+          date="2017-01-02"
+          recencyByCohort={
+            Object {
+              "c_uneng": 0.5,
+              "date": "2017-01-02",
+            }
+          }
+          unsubscribeByCohort={
+            Object {
+              "c_total": 10,
+              "date": "2017-01-02",
+            }
+          }
+        />
+      </div>
+    </Grid.Column>
   </Grid>
   <OtherChartsHeader
     facet="sending-domain"

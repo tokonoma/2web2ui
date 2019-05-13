@@ -16,6 +16,15 @@ describe('Signals Unsubscribe Rate Page', () => {
     }
   ];
 
+  const dataEngRecency = [
+    {
+      date: '2017-01-01',
+      c_uneng: .25
+    },
+    {
+      date: '2017-01-02',
+      c_uneng: .5
+    }];
   beforeEach(() => {
     props = {
       facetId: 'test.com',
@@ -29,7 +38,7 @@ describe('Signals Unsubscribe Rate Page', () => {
       selectedDate: '2017-01-02'
     };
     wrapper = shallow(<UnsubscribeRateByCohortPage {...props}/>);
-    wrapper.setProps({ data });
+    wrapper.setProps({ data, dataEngRecency });
   });
 
   it('renders correctly', () => {
