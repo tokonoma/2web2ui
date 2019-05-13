@@ -231,6 +231,10 @@ const routes = [
     supportDocSearch: 'event'
   },
   {
+    path: '/signals',
+    redirect: '/signals/health-score'
+  },
+  {
     path: '/signals/health-score',
     component: signals.HealthScoreDashboard,
     condition: hasGrants('signals/manage'),
