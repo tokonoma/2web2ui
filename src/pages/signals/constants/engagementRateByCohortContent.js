@@ -56,7 +56,7 @@ export const content = [
     link: 'https://www.sparkpost.com/docs/signals/content-refresh/'
   },
   {
-    condition: ({ p_365d_eng, c_90d }) => p_365d_eng < 0.05 && showActionCondidtional(c_90d),
+    condition: ({ p_365d_eng, c_365d }) => p_365d_eng < 0.05 && showActionCondidtional(c_365d),
     content: (
       <>
         Only a small number of your unengaged recipients are re-engaging. Consider introducing a re-engagement campaign to revive your relationship with those subscribers.
@@ -76,7 +76,7 @@ export const content = [
     link: 'https://www.sparkpost.com/docs/signals/re-engagement-campaign/'
   },
   {
-    condition: ({ p_uneng_eng, c_365d }) => p_uneng_eng < 0.02 && showActionCondidtional(c_365d),
+    condition: ({ p_uneng_eng, c_uneng }) => p_uneng_eng < 0.02 && showActionCondidtional(c_uneng),
     content: (
       <>
         Few of your recipients who never engaged in the past are changing their behavior. Consider removing these recipients to increase your engagement rate and drive better results.
