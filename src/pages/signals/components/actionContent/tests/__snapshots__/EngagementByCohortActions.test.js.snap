@@ -8,6 +8,7 @@ Array [
     </React.Fragment>,
     "internal": true,
     "link": "/signals/health-score/facet/someId",
+    "linkText": "View Health Score",
     "type": "bad",
   },
 ]
@@ -21,6 +22,7 @@ Array [
     </React.Fragment>,
     "internal": true,
     "link": "/signals/health-score/facet/someId",
+    "linkText": "View Health Score",
     "type": "bad",
   },
   Object {

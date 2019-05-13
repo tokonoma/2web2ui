@@ -34,6 +34,7 @@ exports[`Signals Recommended Actions Component renders correctly 1`] = `
     internal={true}
     key="3"
     link="/internal"
+    linkText="View Internal Link"
     type="bad"
   />
 </div>
@@ -141,7 +142,7 @@ exports[`Signals Recommended Actions Component renders correctly 5`] = `
         className="Link"
         to="/internal"
       >
-        Learn More
+        View Internal Link
       </PageLink>
     </p>
   </div>

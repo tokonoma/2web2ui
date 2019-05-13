@@ -7,12 +7,12 @@ import { Warning, CheckCircleOutline } from '@sparkpost/matchbox-icons';
 import Callout from 'src/components/callout';
 import styles from './Actions.module.scss';
 
-const Action = ({ content, link, type = 'bad', internal = false }) => {
+const Action = ({ content, link, type = 'bad', internal = false, linkText = 'Learn More' }) => {
   let iconMarkup;
 
   const linkMarkup = link && (internal
-    ? (<PageLink to={link} className={styles.Link}>Learn More</PageLink>)
-    : (<ExternalLink to={link} className={styles.Link}>Learn More</ExternalLink>)
+    ? (<PageLink to={link} className={styles.Link}>{linkText}</PageLink>)
+    : (<ExternalLink to={link} className={styles.Link}>{linkText}</ExternalLink>)
   );
 
   if (type === 'bad') {

@@ -11,7 +11,8 @@ const EngagementRateByCohortActions = ({ engagementByCohort, recencyByCohort, da
       content: contentTotalEngagement.content,
       type: contentTotalEngagement.type,
       link: contentTotalEngagement.link(facet, facetId),
-      internal: true
+      internal: true,
+      linkText: 'View Health Score'
     });
   }
 
