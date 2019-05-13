@@ -2,15 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { formatDate } from 'src/helpers/date';
 import ExternalLink from 'src/components/externalLink/ExternalLink';
+import { PageLink } from 'src/components';
 import { Warning, CheckCircleOutline } from '@sparkpost/matchbox-icons';
 import Callout from 'src/components/callout';
 import styles from './Actions.module.scss';
 
-const Action = ({ content, link, type = 'bad' }) => {
+const Action = ({ content, link, type = 'bad', internal = false }) => {
   let iconMarkup;
 
-  const linkMarkup = link && (React.isValidElement(link)
-    ? link
+  const linkMarkup = link && (internal
+    ? (<PageLink to={link} className={styles.Link}>Learn More</PageLink>)
     : (<ExternalLink to={link} className={styles.Link}>Learn More</ExternalLink>)
   );
 
@@ -54,7 +55,7 @@ Actions.propTypes = {
   actions: PropTypes.arrayOf(PropTypes.shape({
     type: PropTypes.oneOf(['good', 'bad', 'warning']),
     content: PropTypes.node,
-    link: PropTypes.oneOfType([PropTypes.string, PropTypes.node])
+    link: PropTypes.string
   })),
   date: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)])
 };

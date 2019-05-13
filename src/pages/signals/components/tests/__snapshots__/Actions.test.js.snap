@@ -29,6 +29,13 @@ exports[`Signals Recommended Actions Component renders correctly 1`] = `
     key="2"
     type="warning"
   />
+  <Action
+    content="lorem"
+    internal={true}
+    key="3"
+    link="/internal"
+    type="bad"
+  />
 </div>
 `;
 
@@ -105,6 +112,37 @@ exports[`Signals Recommended Actions Component renders correctly 4`] = `
     <p>
       baz
        
+    </p>
+  </div>
+  <hr
+    className="Dash"
+  />
+</div>
+`;
+
+exports[`Signals Recommended Actions Component renders correctly 5`] = `
+<div
+  className="ActionWrapper"
+>
+  <div
+    className="Action"
+  >
+    <div
+      className="IconBad"
+    >
+      <Warning
+        size={25}
+      />
+    </div>
+    <p>
+      lorem
+       
+      <PageLink
+        className="Link"
+        to="/internal"
+      >
+        Learn More
+      </PageLink>
     </p>
   </div>
   <hr

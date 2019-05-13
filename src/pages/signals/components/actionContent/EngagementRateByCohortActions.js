@@ -5,12 +5,13 @@ import { content, contentTotalEngagement, contentGood } from '../../constants/en
 const EngagementRateByCohortActions = ({ engagementByCohort, recencyByCohort, date, facet, facetId }) => {
   let actions = [];
 
-  //First check total engagement because it needs to pass along subaccount id to generate a link
+  //First check total engagement because it needs to pass along facet info to generate a link
   if (contentTotalEngagement.condition(engagementByCohort)) {
     actions.push({
       content: contentTotalEngagement.content,
       type: contentTotalEngagement.type,
-      link: contentTotalEngagement.link(facet, facetId)
+      link: contentTotalEngagement.link(facet, facetId),
+      internal: true
     });
   }
 

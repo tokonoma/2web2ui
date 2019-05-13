@@ -6,13 +6,8 @@ Array [
     "content": <React.Fragment>
       An overall low engagement rate may indicate you emails are being sent to the spam folder. Drill into your Health Score to find the issue.
     </React.Fragment>,
-    "link": <Link
-      className="Link"
-      replace={false}
-      to="/signals/health-score/facet/someId"
-    >
-      Learn More
-    </Link>,
+    "internal": true,
+    "link": "/signals/health-score/facet/someId",
     "type": "bad",
   },
 ]
@@ -24,13 +19,8 @@ Array [
     "content": <React.Fragment>
       An overall low engagement rate may indicate you emails are being sent to the spam folder. Drill into your Health Score to find the issue.
     </React.Fragment>,
-    "link": <Link
-      className="Link"
-      replace={false}
-      to="/signals/health-score/facet/someId"
-    >
-      Learn More
-    </Link>,
+    "internal": true,
+    "link": "/signals/health-score/facet/someId",
     "type": "bad",
   },
   Object {

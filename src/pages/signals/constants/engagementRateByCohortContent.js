@@ -1,6 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import styles from '../components/Actions.module.scss';
 
 const showActionCondidtional = (percentage) => percentage > 0.05;
 
@@ -15,18 +13,14 @@ export const contentGood = {
 
 //Separated because it needs a custom link
 export const contentTotalEngagement = {
-  condition: ({ p_total_eng }) => p_total_eng < 0.15,
+  condition: ({ p_total_eng }) => p_total_eng < 0.05,
   content: (
   <>
     An overall low engagement rate may indicate you emails are being sent to the spam folder. Drill into your Health Score to find the issue.
   </>
   ),
   type: 'bad',
-  link: (facet, facetId) => (
-    <Link to={`/signals/health-score/${facet}/${facetId}`} className={styles.Link}>
-      Learn More
-    </Link>
-  )
+  link: (facet, facetId) => `/signals/health-score/${facet}/${facetId}`
 };
 
 // Ordered by priority

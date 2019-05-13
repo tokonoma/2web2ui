@@ -11,7 +11,8 @@ describe('Signals Recommended Actions Component', () => {
       actions: [
         { content: 'foo', link: 'http://google.com' },
         { content: 'bar', type: 'good' },
-        { content: 'baz', type: 'warning' }
+        { content: 'baz', type: 'warning' },
+        { content: 'lorem', type: 'bad', link: '/internal', internal: true }
       ],
       date: new Date('2018-01-01'),
       empty: false

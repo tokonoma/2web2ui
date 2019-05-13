@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 export const DEFAULT_REDIRECT_ROUTE = '/landing';
 export const AFTER_JOIN_REDIRECT_ROUTE = '/onboarding/plan';
 export const SIGN_UP_ROUTE = '/join';
@@ -164,7 +165,7 @@ export const MAILBOX_PROVIDERS = {
   french_providers: 'French Providers',
   chinese_providers: 'Chinese Providers',
   german_providers: 'German Providers',
-  canandian_providers: 'Canadian Providers',
+  canadian_providers: 'Canadian Providers',
   japanese_providers: 'Japanese Providers',
   other_european_providers: 'Other European Providers',
   other: 'Other Providers'
