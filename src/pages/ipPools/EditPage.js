@@ -15,7 +15,7 @@ import { not } from 'src/helpers/conditions';
 import { selectCondition } from 'src/selectors/accessConditionState';
 import { isSelfServeBilling } from 'src/helpers/conditions/account';
 import SupportTicketLink from 'src/components/supportTicketLink/SupportTicketLink';
-
+import { openSupportTicketForm } from 'src/actions/support';
 
 const breadcrumbAction = {
   content: 'IP Pools',
@@ -40,10 +40,7 @@ export class EditPage extends Component {
 
     if (isDefaultPool(id)) {
       const message = 'You can not edit default pool.';
-      showAlert({
-        type: 'error',
-        message
-      });
+      showAlert({ type: 'error', message });
 
       return Promise.reject(new Error(message));
     }
@@ -125,7 +122,7 @@ export class EditPage extends Component {
   }
 
   render() {
-    const { loading, pool, showPurchaseCTA } = this.props;
+    const { loading, pool, showPurchaseCTA, isManuallyBilled, openSupportTicketForm } = this.props;
 
     if (loading) {
       return <Loading />;
@@ -144,7 +141,11 @@ export class EditPage extends Component {
           { content: 'Purchase IPs',
             to: '/account/billing',
             component: Link,
-            visible: showPurchaseCTA
+            visible: showPurchaseCTA && !isManuallyBilled
+          },
+          { content: 'Request IPs',
+            onClick: () => openSupportTicketForm({ issueId: 'request_new_ip' }),
+            visible: showPurchaseCTA && isManuallyBilled
           }]
         }>
 
@@ -177,4 +178,4 @@ const mapStateToProps = (state, props) => {
   };
 };
 
-export default connect(mapStateToProps, { updatePool, deletePool, listPools, showAlert })(EditPage);
+export default connect(mapStateToProps, { updatePool, deletePool, listPools, showAlert, openSupportTicketForm })(EditPage);

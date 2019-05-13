@@ -7,7 +7,7 @@ import { Loading, TableCollection, ApiErrorBanner } from 'src/components';
 import { Page, Button,Banner } from '@sparkpost/matchbox';
 import { OpenInNew } from '@sparkpost/matchbox-icons';
 import { LINKS } from 'src/constants';
-import SupportTicketLink from 'src/components/supportTicketLink/SupportTicketLink';
+import { openSupportTicketForm } from 'src/actions/support';
 import { not } from 'src/helpers/conditions';
 import { selectCondition } from 'src/selectors/accessConditionState';
 import { isSelfServeBilling } from 'src/helpers/conditions/account';
@@ -59,13 +59,13 @@ export class IpPoolsList extends Component {
   }
 
   render() {
-    const { loading, error, showPurchaseCTA, isManuallyBilled } = this.props;
+    const { loading, error, showPurchaseCTA, isManuallyBilled, openSupportTicketForm } = this.props;
     if (loading) { return <Loading />; }
 
     const createAction = { content: 'Create IP Pool', Component: Link, to: '/account/ip-pools/create' };
     const purchaseActions = showPurchaseCTA
       ? (isManuallyBilled
-        ? [{ content: 'Request IPs', Component: SupportTicketLink, issueId: 'request_new_ip' } ]
+        ? [{ content: 'Request IPs', onClick: () => openSupportTicketForm({ issueId: 'request_new_ip' }) }]
         : [{ content: 'Purchase IPs', Component: Link, to: '/account/billing' }])
       : null;
 
@@ -107,4 +107,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { listPools })(IpPoolsList);
+export default connect(mapStateToProps, { listPools, openSupportTicketForm })(IpPoolsList);
