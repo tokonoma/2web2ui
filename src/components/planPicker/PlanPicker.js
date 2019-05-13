@@ -89,14 +89,12 @@ export class PlanPicker extends Component {
           <div className={listClasses}>{items}</div>
         </div>
         <div className={cx(styles.TierPlansInfo)}>
-          <small>
-            <span>Interested in learning more about our Starter and Premier premier plans? Check out our </span>
-            <ExternalLink
-              to='https://www.sparkpost.com/docs/faq/difference-between-starter-and-premier'
-            >
-              Knowledge Base
-            </ExternalLink>
-          </small>
+          <span>Interested in learning more about our Starter and Premier plans? Check out our </span>
+          <ExternalLink
+            to='https://www.sparkpost.com/docs/faq/difference-between-starter-and-premier'
+          >
+            Knowledge Base
+          </ExternalLink>
         </div>
       </div>
     );
