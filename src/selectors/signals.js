@@ -115,8 +115,8 @@ const excludeLastNDays = (date, n) =>
 const engagementBehaviorDataLagDays = 3;
 
 export const selectEngagementRateByCohortDetails = createSelector(
-  [getEngagementRateByCohortData, getFacetFromParams, getFacetIdFromParams, selectSubaccountIdFromQuery, getOptions],
-  ({ loading, error, data }, facet, facetId, subaccountId, { from, to }) => {
+  [selectEngagementRecencyDetails, getEngagementRateByCohortData, getFacetFromParams, getFacetIdFromParams, selectSubaccountIdFromQuery, getOptions],
+  ({ details: { loading: loadingEngRecency, error: errorEngRecency, data: dataEngRecency }}, { loading, error, data }, facet, facetId, subaccountId, { from, to }) => {
     const match = data.find((item) => String(item[facet]) === facetId) || {};
 
     // Rename date key
@@ -137,9 +137,10 @@ export const selectEngagementRateByCohortDetails = createSelector(
     return {
       details: {
         data: filledHistory,
+        dataEngRecency,
         empty: isEmpty && !loading,
-        error,
-        loading
+        error: error || errorEngRecency,
+        loading: loading || loadingEngRecency
       },
       facet,
       facetId,

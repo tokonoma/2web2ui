@@ -7,6 +7,7 @@ import LineChart from './components/charts/linechart/LineChart';
 import Legend from './components/charts/legend/Legend';
 import Callout from 'src/components/callout';
 import DateFilter from './components/filters/DateFilter';
+import EngagementRateByCohortActions from './components/actionContent/EngagementRateByCohortActions';
 import OtherChartsHeader from './components/OtherChartsHeader';
 import Page from './components/SignalsPage';
 import Tabs from './components/engagement/Tabs';
@@ -22,6 +23,7 @@ import _ from 'lodash';
 import SpamTrapsPreview from './components/previews/SpamTrapsPreview';
 import HealthScorePreview from './components/previews/HealthScorePreview';
 import cohorts from './constants/cohorts';
+import styles from './DetailsPages.module.scss';
 
 export class EngagementRateByCohortPage extends Component {
 
@@ -67,7 +69,12 @@ export class EngagementRateByCohortPage extends Component {
   }
 
   renderContent = () => {
-    const { data = [], facet, facetId, handleDateSelect, loading, empty, error, selectedDate, subaccountId } = this.props;
+    const {
+      data = [], dataEngRecency = [], facet, facetId, handleDateSelect, loading, empty, error, selectedDate, subaccountId
+    } = this.props;
+    const selectedEngagementRate = _.find(data, ['date', selectedDate]) || {};
+    const selectedEngagementRecency = _.find(dataEngRecency, ['date', selectedDate]) || {};
+
     let chartPanel;
 
     if (empty) {
@@ -112,14 +119,22 @@ export class EngagementRateByCohortPage extends Component {
             )}
           </Panel>
         </Grid.Column>
-        <Grid.Column sm={12} md={5} mdOffset={0} />
+        <Grid.Column sm={12} md={5} mdOffset={0}>
+          <div className={styles.OffsetCol}>
+            {!chartPanel && <EngagementRateByCohortActions
+              engagementByCohort={selectedEngagementRate}
+              recencyByCohort={selectedEngagementRecency}
+              date={selectedDate}
+              facet={facet}
+              facetId={facetId}/>}
+          </div>
+        </Grid.Column>
       </Grid>
     );
   }
 
   render() {
     const { facet, facetId, subaccountId } = this.props;
-
     return (
       <Page
         breadcrumbAction={{ content: 'Back to Overview', to: '/signals', component: Link }}

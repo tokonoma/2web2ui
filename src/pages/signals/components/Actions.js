@@ -2,15 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { formatDate } from 'src/helpers/date';
 import ExternalLink from 'src/components/externalLink/ExternalLink';
+import { PageLink } from 'src/components';
 import { Warning, CheckCircleOutline } from '@sparkpost/matchbox-icons';
 import Callout from 'src/components/callout';
 import styles from './Actions.module.scss';
 
-const Action = ({ content, link, type = 'bad' }) => {
+const Action = ({ content, link, type = 'bad', internal = false, linkText = 'Learn More' }) => {
   let iconMarkup;
 
-  const linkMarkup = link && (
-    <ExternalLink to={link} className={styles.Link}>Learn More</ExternalLink>
+  const linkMarkup = link && (internal
+    ? (<PageLink to={link} className={styles.Link}>{linkText}</PageLink>)
+    : (<ExternalLink to={link} className={styles.Link}>{linkText}</ExternalLink>)
   );
 
   if (type === 'bad') {
