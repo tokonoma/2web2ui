@@ -232,17 +232,12 @@ const routes = [
   },
   {
     path: '/signals',
-    component: signals.OverviewPage,
-    condition: hasGrants('signals/manage'),
-    layout: App,
-    title: 'Signals',
-    supportDocSearch: 'signals'
+    redirect: '/signals/health-score'
   },
-  // Signals V2 Dashboards
   {
     path: '/signals/health-score',
     component: signals.HealthScoreDashboard,
-    condition: all(hasGrants('signals/manage'), hasUiOption('feature_signals_v2')),
+    condition: hasGrants('signals/manage'),
     layout: App,
     title: 'Signals',
     supportDocSearch: 'signals'
@@ -250,7 +245,7 @@ const routes = [
   {
     path: '/signals/spam-traps',
     component: signals.SpamTrapDashboard,
-    condition: all(hasGrants('signals/manage'), hasUiOption('feature_signals_v2')),
+    condition: hasGrants('signals/manage'),
     layout: App,
     title: 'Signals',
     supportDocSearch: 'signals'
@@ -258,12 +253,11 @@ const routes = [
   {
     path: '/signals/engagement',
     component: signals.EngagementRecencyDashboard,
-    condition: all(hasGrants('signals/manage'), hasUiOption('feature_signals_v2')),
+    condition: hasGrants('signals/manage'),
     layout: App,
     title: 'Signals',
     supportDocSearch: 'signals'
   },
-  // Details Pages
   {
     path: '/signals/health-score/:facet/:facetId',
     component: signals.HealthScorePage,
@@ -280,7 +274,6 @@ const routes = [
     title: 'Signals',
     supportDocSearch: 'signals'
   },
-  // Signals routes for 'feature_signals_v2'
   {
     path: '/signals/engagement/cohorts/:facet/:facetId',
     component: signals.EngagementRecencyPage,
@@ -292,7 +285,7 @@ const routes = [
   {
     path: '/signals/engagement/engagement-rate/:facet/:facetId',
     component: signals.EngagementRateByCohortPage,
-    condition: all(hasGrants('signals/manage'), hasUiOption('feature_signals_v2')),
+    condition: hasGrants('signals/manage'),
     layout: App,
     title: 'Signals',
     supportDocSearch: 'signals'
@@ -300,7 +293,7 @@ const routes = [
   {
     path: '/signals/engagement/unsubscribes/:facet/:facetId',
     component: signals.UnsubscribeRateByCohortPage,
-    condition: all(hasGrants('signals/manage'), hasUiOption('feature_signals_v2')),
+    condition: hasGrants('signals/manage'),
     layout: App,
     title: 'Signals',
     supportDocSearch: 'signals'
@@ -308,7 +301,7 @@ const routes = [
   {
     path: '/signals/engagement/complaints/:facet/:facetId',
     component: signals.ComplaintsByCohortPage,
-    condition: all(hasGrants('signals/manage'), hasUiOption('feature_signals_v2')),
+    condition: hasGrants('signals/manage'),
     layout: App,
     title: 'Signals',
     supportDocSearch: 'signals'

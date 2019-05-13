@@ -137,7 +137,7 @@ export class EngagementRateByCohortPage extends Component {
     const { facet, facetId, subaccountId } = this.props;
     return (
       <Page
-        breadcrumbAction={{ content: 'Back to Overview', to: '/signals', component: Link }}
+        breadcrumbAction={{ content: 'Back to Engagement Recency Overview', to: '/signals/engagement', component: Link }}
         dimensionPrefix='Engagement Rate by Cohort'
         facet={facet}
         facetId={facetId}

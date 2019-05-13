@@ -45,8 +45,8 @@ exports[`Signals Complaints Page renders correctly 1`] = `
   breadcrumbAction={
     Object {
       "component": [Function],
-      "content": "Back to Overview",
-      "to": "/signals",
+      "content": "Back to Engagement Recency Overview",
+      "to": "/signals/engagement",
     }
   }
   dimensionPrefix="Complaints by Cohort"

@@ -55,8 +55,8 @@ exports[`Signals Engagement Rate By Cohort Page renders correctly 1`] = `
   breadcrumbAction={
     Object {
       "component": [Function],
-      "content": "Back to Overview",
-      "to": "/signals",
+      "content": "Back to Engagement Recency Overview",
+      "to": "/signals/engagement",
     }
   }
   dimensionPrefix="Engagement Rate by Cohort"
@@ -284,8 +284,8 @@ exports[`Signals Engagement Rate By Cohort Page renders error correctly 1`] = `
   breadcrumbAction={
     Object {
       "component": [Function],
-      "content": "Back to Overview",
-      "to": "/signals",
+      "content": "Back to Engagement Recency Overview",
+      "to": "/signals/engagement",
     }
   }
   dimensionPrefix="Engagement Rate by Cohort"

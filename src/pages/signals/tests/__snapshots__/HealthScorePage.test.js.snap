@@ -45,8 +45,8 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
   breadcrumbAction={
     Object {
       "component": [Function],
-      "content": "Back to Overview",
-      "to": "/signals",
+      "content": "Back to Health Score Overview",
+      "to": "/signals/health-score",
     }
   }
   dimensionPrefix="Health Score"
@@ -425,8 +425,8 @@ exports[`Signals Health Score Page renders empty weights 1`] = `
   breadcrumbAction={
     Object {
       "component": [Function],
-      "content": "Back to Overview",
-      "to": "/signals",
+      "content": "Back to Health Score Overview",
+      "to": "/signals/health-score",
     }
   }
   dimensionPrefix="Health Score"
@@ -632,8 +632,8 @@ exports[`Signals Health Score Page renders error correctly 1`] = `
   breadcrumbAction={
     Object {
       "component": [Function],
-      "content": "Back to Overview",
-      "to": "/signals",
+      "content": "Back to Health Score Overview",
+      "to": "/signals/health-score",
     }
   }
   dimensionPrefix="Health Score"
