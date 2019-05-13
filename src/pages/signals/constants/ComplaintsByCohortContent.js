@@ -20,19 +20,20 @@ const content = [
     })
   },
   {
-    condition: ({ p_365d_fbl, p_90d_fbl, p_14d_fbl, c_365d, c_90d, c_14d }) => badConditional(p_365d_fbl) && showActionCondidtional(c_365d) ||
+    condition: ({ p_365d_fbl, p_90d_fbl, p_14d_fbl, c_365d, c_90d, c_14d }) =>
+      badConditional(p_365d_fbl) && showActionCondidtional(c_365d) ||
       badConditional(p_90d_fbl) && showActionCondidtional(c_90d) ||
       badConditional(p_14d_fbl) && showActionCondidtional(c_14d)
     ,
-    actionFn: ({ p_365d_fbl, p_90d_fbl, p_14d_fbl }) => {
+    actionFn: ({ p_365d_fbl, p_90d_fbl, p_14d_fbl, c_365d, c_90d, c_14d }) => {
       const textArray = [];
-      if (badConditional(p_14d_fbl)) {
+      if (badConditional(p_14d_fbl) && showActionCondidtional(c_14d)) {
         textArray.push('Recently Engaged');
       }
-      if (badConditional(p_90d_fbl)) {
+      if (badConditional(p_90d_fbl) && showActionCondidtional(c_90d)) {
         textArray.push('Semi-Recently Engaged');
       }
-      if (badConditional(p_365d_fbl)) {
+      if (badConditional(p_365d_fbl) && showActionCondidtional(c_365d)) {
         textArray.push('Not Recently Engaged');
       }
       const text = toSentence(textArray);
@@ -50,19 +51,20 @@ const content = [
     }
   },
   {
-    condition: ({ p_365d_fbl, p_90d_fbl, p_14d_fbl, c_365d, c_90d, c_14d }) => warnConditional(p_365d_fbl) && showActionCondidtional(c_365d) ||
+    condition: ({ p_365d_fbl, p_90d_fbl, p_14d_fbl, c_365d, c_90d, c_14d }) =>
+      warnConditional(p_365d_fbl) && showActionCondidtional(c_365d) ||
       warnConditional(p_90d_fbl) && showActionCondidtional(c_90d) ||
       warnConditional(p_14d_fbl) && showActionCondidtional(c_14d)
     ,
-    actionFn: ({ p_365d_fbl, p_90d_fbl, p_14d_fbl }) => {
+    actionFn: ({ p_365d_fbl, p_90d_fbl, p_14d_fbl, c_365d, c_90d, c_14d }) => {
       const textArray = [];
-      if (warnConditional(p_14d_fbl)) {
+      if (warnConditional(p_14d_fbl) && showActionCondidtional(c_14d)) {
         textArray.push('Recently Engaged');
       }
-      if (warnConditional(p_90d_fbl)) {
+      if (warnConditional(p_90d_fbl) && showActionCondidtional(c_90d)) {
         textArray.push('Semi-Recently Engaged');
       }
-      if (warnConditional(p_365d_fbl)) {
+      if (warnConditional(p_365d_fbl) && showActionCondidtional(c_365d)) {
         textArray.push('Not Recently Engaged');
       }
       const text = toSentence(textArray);

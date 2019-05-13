@@ -5,8 +5,17 @@ const badConditional = (percentage) => percentage > 0.005;
 const warnConditional = (percentage) => percentage <= 0.005 && percentage > .001;
 const showActionCondidtional = (percentage) => percentage > 0.05;
 
+export const contentGood = {
+  content: (
+    <>
+      Doesn't look like you have any unsubscribe issues. Great job!
+    </>
+  ),
+  type: 'good'
+};
+
 // Ordered by priority
-const content = [
+export const content = [
   {
     condition: ({ p_total_unsub }) => badConditional(p_total_unsub),
     actionFn: () => ({
@@ -25,15 +34,15 @@ const content = [
       badConditional(p_90d_unsub) && showActionCondidtional(c_90d) ||
       badConditional(p_14d_unsub) && showActionCondidtional(c_14d)
     ,
-    actionFn: ({ p_365d_unsub, p_90d_unsub, p_14d_unsub }) => {
+    actionFn: ({ p_365d_unsub, p_90d_unsub, p_14d_unsub, c_365d, c_90d, c_14d }) => {
       const textArray = [];
-      if (badConditional(p_14d_unsub)) {
+      if (badConditional(p_14d_unsub) && showActionCondidtional(c_14d)) {
         textArray.push('Recently Engaged');
       }
-      if (badConditional(p_90d_unsub)) {
+      if (badConditional(p_90d_unsub) && showActionCondidtional(c_90d)) {
         textArray.push('Semi-Recently Engaged');
       }
-      if (badConditional(p_365d_unsub)) {
+      if (badConditional(p_365d_unsub) && showActionCondidtional(c_365d)) {
         textArray.push('Not Recently Engaged');
       }
       const text = toSentence(textArray);
@@ -56,15 +65,15 @@ const content = [
       warnConditional(p_90d_unsub) && showActionCondidtional(c_90d) ||
       warnConditional(p_14d_unsub) && showActionCondidtional(c_14d)
     ,
-    actionFn: ({ p_365d_unsub, p_90d_unsub, p_14d_unsub }) => {
+    actionFn: ({ p_365d_unsub, p_90d_unsub, p_14d_unsub, c_365d, c_90d, c_14d }) => {
       const textArray = [];
-      if (warnConditional(p_14d_unsub)) {
+      if (warnConditional(p_14d_unsub) && showActionCondidtional(c_14d)) {
         textArray.push('Recently Engaged');
       }
-      if (warnConditional(p_90d_unsub)) {
+      if (warnConditional(p_90d_unsub) && showActionCondidtional(c_90d)) {
         textArray.push('Semi-Recently Engaged');
       }
-      if (warnConditional(p_365d_unsub)) {
+      if (warnConditional(p_365d_unsub) && showActionCondidtional(c_365d)) {
         textArray.push('Not Recently Engaged');
       }
       const text = toSentence(textArray);
@@ -123,7 +132,7 @@ const content = [
     actionFn: () => ({
       content: (
         <>
-          "Some of your new recipients are unsubscribing immediately. This may indicate that you need to work on your onboarding and sign up flow."
+          Some of your new recipients are unsubscribing immediately. This may indicate that you need to work on your onboarding and sign up flow.
         </>
       ),
       type: 'warning',
@@ -131,5 +140,3 @@ const content = [
     })
   }
 ];
-
-export default content;

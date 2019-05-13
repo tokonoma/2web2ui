@@ -7,7 +7,7 @@ const ComplaintsByCohortActions = ({ complaintsByCohort, recencyByCohort, date }
 
   content.forEach(({ condition, actionFn }) => {
     if (condition({ ...complaintsByCohort, ...recencyByCohort })) {
-      actions.push(actionFn(complaintsByCohort));
+      actions.push(actionFn({ ...complaintsByCohort, ...recencyByCohort }));
     }
   });
   actions = actions.slice(0, 3);

@@ -359,7 +359,7 @@ describe('Selectors: signals', () => {
         ...state,
         signals: {
           unsubscribeRateByCohort: { data: [], loading: true },
-          engagementRecency: { data: [], loading: false }
+          engagementRecency: { data: [], loading: true }
         }};
       expect(selectors.selectUnsubscribeRateByCohortDetails(stateWhenLoading, props).details.empty).toBe(false);
     });
@@ -393,7 +393,7 @@ describe('Selectors: signals', () => {
         ...state,
         signals: {
           complaintsByCohort: { data: [], loading: true },
-          engagementRecency: { data: [], loading: false }
+          engagementRecency: { data: [], loading: true }
         }
       };
       expect(selectors.selectComplaintsByCohortDetails(stateWhenLoading, props).details.empty).toBe(false);

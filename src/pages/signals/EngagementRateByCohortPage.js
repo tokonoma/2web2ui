@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { getEngagementRateByCohort } from 'src/actions/signals';
+import { getEngagementRateByCohort, getEngagementRecency } from 'src/actions/signals';
 import { selectEngagementRateByCohortDetails } from 'src/selectors/signals';
 import { Panel, Grid } from '@sparkpost/matchbox';
 import LineChart from './components/charts/linechart/LineChart';
@@ -162,6 +162,6 @@ export class EngagementRateByCohortPage extends Component {
 
 export default withDetails(
   withDateSelection(EngagementRateByCohortPage),
-  { getEngagementRateByCohort },
+  { getEngagementRateByCohort, getEngagementRecency },
   selectEngagementRateByCohortDetails
 );

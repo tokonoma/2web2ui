@@ -4,7 +4,7 @@ exports[`Signals complaints by cohort actions component renders 1`] = `
 Array [
   Object {
     "content": <React.Fragment>
-      Your complaint rates are low across the board. Great job!
+      Doesn't look like you have any unsubscribe issues. Great job!
     </React.Fragment>,
     "type": "good",
   },
