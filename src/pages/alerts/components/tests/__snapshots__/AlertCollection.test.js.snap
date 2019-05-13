@@ -72,7 +72,7 @@ exports[`TestCollection Component should render row data properly 1`] = `
 Array [
   <React.Fragment>
     <PageLink
-      to="/alerts-new/edit/id-1?subaccount=101"
+      to="/alerts/edit/id-1?subaccount=101"
     >
       my alert 1
     </PageLink>
@@ -114,7 +114,7 @@ Array [
               "component": [Function],
               "content": "Edit Alert",
               "section": 1,
-              "to": "/alerts-new/edit/id-1?subaccount=101",
+              "to": "/alerts/edit/id-1?subaccount=101",
             },
             Object {
               "content": "Delete Alert",
@@ -134,7 +134,7 @@ exports[`TestCollection Component should render row data properly 2`] = `
 Array [
   <React.Fragment>
     <PageLink
-      to="/alerts-new/edit/id-2"
+      to="/alerts/edit/id-2"
     >
       my alert 2
     </PageLink>
@@ -175,7 +175,7 @@ Array [
               "component": [Function],
               "content": "Edit Alert",
               "section": 1,
-              "to": "/alerts-new/edit/id-2",
+              "to": "/alerts/edit/id-2",
             },
             Object {
               "content": "Delete Alert",
@@ -195,7 +195,7 @@ exports[`TestCollection Component should render row data properly 3`] = `
 Array [
   <React.Fragment>
     <PageLink
-      to="/alerts-new/edit/id-3"
+      to="/alerts/edit/id-3"
     >
       my alert 3
     </PageLink>
@@ -236,7 +236,7 @@ Array [
               "component": [Function],
               "content": "Edit Alert",
               "section": 1,
-              "to": "/alerts-new/edit/id-3",
+              "to": "/alerts/edit/id-3",
             },
             Object {
               "content": "Delete Alert",

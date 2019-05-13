@@ -16,7 +16,7 @@ const filterBoxConfig = {
 };
 
 class AlertCollection extends Component {
-  getDetailsLink = ({ id, subaccount_id }) => `/alerts-new/edit/${id}${setSubaccountQuery(subaccount_id)}`
+  getDetailsLink = ({ id, subaccount_id }) => `/alerts/edit/${id}${setSubaccountQuery(subaccount_id)}`
 
   getColumns() {
     const columns = [

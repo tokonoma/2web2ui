@@ -1,7 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Page: Alerts Create should render error when list fails to load 1`] = `null`;
-
 exports[`Page: Alerts Create should render happy path 1`] = `
 <Page
   breadcrumbAction={

@@ -1,6 +1,5 @@
 export { default as AccountSettingsPage } from './account/AccountSettingsPage';
-export { default as AlertsPage } from './alerts/AlertsPage'; // TODO Remove
-export { default as alerts } from './alerts-new';
+export { default as alerts } from './alerts';
 export { default as AuthPage } from './auth/AuthPage';
 export { default as TfaPage } from './auth/TfaPage';
 export { default as EnableTfaPage } from './auth/EnableTfaPage';

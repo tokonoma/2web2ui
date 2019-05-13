@@ -133,14 +133,14 @@ export default [
   {
     label: 'Alerts',
     to: '/alerts',
-    tag: 'labs',
-    divider: true,
+    tag: 'new',
     icon: NotificationsActive
   },
   {
     label: 'Snippets',
     to: '/snippets',
     tag: 'labs',
+    divider: true,
     icon: Code
   }
 ];

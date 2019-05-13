@@ -19,7 +19,7 @@ export class EditPage extends Component {
   componentDidUpdate() {
     const { error } = this.props;
     if (error) {
-      this.props.history.push('/alerts-new');
+      this.props.history.push('/alerts');
       this.props.showAlert({ type: 'error', message: 'Unable to load alert' });
     }
   }
@@ -34,7 +34,7 @@ export class EditPage extends Component {
     .then(() => {
       this.props.showAlert({ type: 'success', message: 'Alert deleted' });
       this.toggleDelete();
-      this.props.history.push('/alerts-new');
+      this.props.history.push('/alerts');
     })
 
   /*
