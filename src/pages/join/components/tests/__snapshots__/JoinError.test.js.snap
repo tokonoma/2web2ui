@@ -27,18 +27,6 @@ exports[`JoinError render:  invalid email (400) 1`] = `"Email address is not val
 
 exports[`JoinError render:  invalid email (403) 1`] = `"Email address is not valid."`;
 
-exports[`JoinError render:  manual review required (siftscience) 1`] = `
-<span>
-  Your account requires manual review. To proceed with sign up, please 
-  <UnstyledLink
-    to="https://support.sparkpost.com/customer/portal/emails/new?interaction%5Bname%5D=foo%20bar&interaction%5Bemail%5D=foo@bar.com&email%5Bsubject%5D=Account%20requires%20manual%20review"
-  >
-    contact support
-  </UnstyledLink>
-  .
-</span>
-`;
-
 exports[`JoinError render:  no status 1`] = `
 <span>
   Something went wrong. Please try again in a few minutes.

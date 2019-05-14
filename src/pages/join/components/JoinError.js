@@ -1,11 +1,6 @@
 import React from 'react';
-import { LINKS } from 'src/constants';
 import { UnstyledLink } from '@sparkpost/matchbox';
 
-
-function createSupportLink(data) {
-  return LINKS.SUBMIT_SUPPORT_TICKET + encodeURI(`?interaction[name]=${data.first_name} ${data.last_name}&interaction[email]=${data.email}&email[subject]=Account requires manual review`);
-}
 
 export default function JoinError({ errors, data }) {
   let status;
@@ -31,9 +26,6 @@ export default function JoinError({ errors, data }) {
     return <span>It looks like you already have a SparkPost account using {data.email}.&nbsp;
       <UnstyledLink to="/auth">Sign in</UnstyledLink>
     </span>;
-  } else if (status === 403 && message.match(/^Sign up blocked/i)) {
-    return <span>Your account requires manual review. To proceed with sign up, please <UnstyledLink
-      to={createSupportLink(data)}>contact support</UnstyledLink>.</span>;
   } else if (status === 403 && message.match(/^forbidden/i)) {
     return 'SparkPost is not currently available in your location.';
   } else {
