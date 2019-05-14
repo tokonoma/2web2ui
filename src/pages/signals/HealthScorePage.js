@@ -116,6 +116,10 @@ export class HealthScorePage extends Component {
                   }}
                   xAxisProps={this.getXAxisProps()}
                 />
+                {/*
+                  Spam Trap data when faceted by mailbox providers does not exist
+                  Remove when injections are returned from the health score endpoint
+                */}
                 {facet !== 'mb_provider' && (
                   <>
                     <ChartHeader title='Injections' tooltipContent={INJECTIONS_INFO} />
