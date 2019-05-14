@@ -143,6 +143,18 @@ exports[`Plan Picker:  Render Function renders 1`] = `
       />
     </div>
   </div>
+  <div
+    className="TierPlansInfo"
+  >
+    <span>
+      Interested in learning more about our Starter and Premier plans? Check out our 
+    </span>
+    <ExternalLink
+      to="https://www.sparkpost.com/docs/faq/difference-between-starter-and-premier"
+    >
+      Knowledge Base
+    </ExternalLink>
+  </div>
 </div>
 `;
 

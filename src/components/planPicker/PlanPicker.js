@@ -8,6 +8,7 @@ import { ExpandMore } from '@sparkpost/matchbox-icons';
 import Plan from './Plan';
 import styles from './PlanPicker.module.scss';
 import { PLAN_TIERS } from 'src/constants';
+import ExternalLink from 'src/components/externalLink/ExternalLink';
 
 const TIERS = [
   { key: 'default' },
@@ -86,6 +87,14 @@ export class PlanPicker extends Component {
           <Plan {...triggerProps} className={triggerClasses} planPriceProps={planPriceProps}/>
           <input {...getInputProps()} ref={(input) => this.input = input} className={styles.Input} />
           <div className={listClasses}>{items}</div>
+        </div>
+        <div className={cx(styles.TierPlansInfo)}>
+          <span>Interested in learning more about our Starter and Premier plans? Check out our </span>
+          <ExternalLink
+            to='https://www.sparkpost.com/docs/faq/difference-between-starter-and-premier'
+          >
+            Knowledge Base
+          </ExternalLink>
         </div>
       </div>
     );
