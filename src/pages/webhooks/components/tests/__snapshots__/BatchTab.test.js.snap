@@ -17,7 +17,7 @@ exports[`Webhook Component: Batch Status Tab should render batch status tab with
       Array [
         Object {
           "label": "Delivery Time",
-          "sortKey": "formatted_time",
+          "sortKey": "ts",
         },
         Object {
           "label": "Batch ID",
@@ -37,7 +37,7 @@ exports[`Webhook Component: Batch Status Tab should render batch status tab with
         },
       ]
     }
-    defaultSortColumn="formatted_time"
+    defaultSortColumn="ts"
     defaultSortDirection="desc"
     getRowData={[Function]}
     pagination={true}
@@ -49,6 +49,7 @@ exports[`Webhook Component: Batch Status Tab should render batch status tab with
           "formatted_time": "so-formatted",
           "response_code": 200,
           "status": "p",
+          "ts": 1,
         },
         Object {
           "attempts": 4,
@@ -56,6 +57,7 @@ exports[`Webhook Component: Batch Status Tab should render batch status tab with
           "formatted_time": "so-formatted-2",
           "response_code": 500,
           "status": "f",
+          "ts": 2,
         },
       ]
     }
