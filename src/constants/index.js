@@ -46,7 +46,6 @@ export const LINKS = {
   DAILY_USAGE: 'https://www.sparkpost.com/docs/getting-started/what-counts-daily-monthly-usage',
   LEARN_MORE_TFA: 'https://www.sparkpost.com/docs/my-account-and-profile/enabling-two-factor-authentication',
   ONBOARDING_SENDING: 'https://www.sparkpost.com/docs/getting-started/getting-started-sparkpost/#preparing-your-from-address',
-  SUBMIT_SUPPORT_TICKET: 'https://support.sparkpost.com/customer/portal/emails/new',
   RECAPTCHA_LIB_URL: 'https://www.google.com/recaptcha/api.js',
   DAILY_MONTHLY_QUOTA_LIMIT_DOC: 'https://support.sparkpost.com/customer/portal/articles/2030894',
   GETTING_STARTED_GUIDE: 'https://www.sparkpost.com/docs/getting-started/getting-started-sparkpost',
@@ -129,27 +128,6 @@ export const ANALYTICS_WHITELISTED_FORMS = [
   FORMS.JOIN_SENDING_DOMAIN
 ];
 
-export const ROLES = {
-  ADMIN: 'admin',
-  DEVELOPER: 'developer',
-  TEMPLATES: 'email', //Email role renamed to templates. TODO: Update after API access_level changes
-  REPORTING: 'reporting',
-  SUBACCOUNT_REPORTING: 'subaccount_reporting',
-  SUPERUSER: 'superuser'
-};
-
-export const ROLE_LABELS = {
-  email: 'Templates',//Email role renamed to templates. TODO: Update after API access_level changes
-  admin: 'Admin',
-  developer: 'Developer',
-  reporting: 'Reporting',
-  subaccount_reporting: 'Reporting',
-  superuser: 'Super User',
-  heroku: 'Heroku'
-};
-
-export const SUBACCOUNT_ROLES = [ROLES.SUBACCOUNT_REPORTING];
-
 export const MAILBOX_PROVIDERS = {
   apple: 'Apple',
   gmail: 'Gmail',
@@ -175,3 +153,5 @@ export const PLAN_TIERS = {
   starter: 'Starter',
   premier: 'Premier'
 };
+
+export * from './users';
