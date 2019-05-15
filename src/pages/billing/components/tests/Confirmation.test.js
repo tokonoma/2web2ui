@@ -15,6 +15,13 @@ describe('Confirmation: ', () => {
     includesIp: true
   };
 
+  const olderPlan = {
+    monthly: 100,
+    volume: 1000,
+    code: 'oldhundred',
+    status: 'deprecated'
+  };
+
   const upgrade = {
     monthly: 200,
     volume: 2000,
@@ -89,5 +96,21 @@ describe('Confirmation: ', () => {
   it('renders correctly when billing not enabled', () => {
     wrapper.setProps({ billingEnabled: false });
     expect(wrapper).toMatchSnapshot();
+  });
+
+  describe('Deprecated Plan Warning', () => {
+    it('should render null if selected plan is the same as current', () => {
+      expect(wrapper.find({ name: 'deprecated-warning' })).not.toExist();
+    });
+
+    it('should render null if current plan is not deprecated', () => {
+      wrapper.setProps({ current, selected: upgrade });
+      expect(wrapper.find({ name: 'deprecated-warning' })).not.toExist();
+    });
+
+    it('should render warning if current plan has status deprecated', () => {
+      wrapper.setProps({ current: olderPlan, selected: upgrade });
+      expect(wrapper.find({ name: 'deprecated-warning' })).toExist();
+    });
   });
 });
