@@ -135,10 +135,7 @@ exports[`Signals Spam Trap Page renders correctly 1`] = `
       </div>
     </Grid.Column>
   </Grid>
-  <Divider
-    facet="sending-domain"
-    facetId="test.com"
-  />
+  <Divider />
   <Grid>
     <Grid.Column
       sm={6}
@@ -237,10 +234,7 @@ exports[`Signals Spam Trap Page renders error correctly 1`] = `
       />
     </Grid.Column>
   </Grid>
-  <Divider
-    facet="sending-domain"
-    facetId="test.com"
-  />
+  <Divider />
   <Grid>
     <Grid.Column
       sm={6}

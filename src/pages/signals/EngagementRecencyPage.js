@@ -130,7 +130,7 @@ export class EngagementRecencyPage extends Component {
         subaccountId={subaccountId}
         primaryArea={<DateFilter left />}>
         {this.renderContent()}
-        <Divider facet={facet} facetId={facetId} subaccountId={subaccountId} />
+        <Divider />
         <Grid>
           {facet !== 'mb_provider' && (
             <Grid.Column xs={12} sm={6}>

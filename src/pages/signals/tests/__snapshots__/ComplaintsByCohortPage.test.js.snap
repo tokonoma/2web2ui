@@ -234,10 +234,7 @@ exports[`Signals Complaints Page renders correctly 1`] = `
       </div>
     </Grid.Column>
   </Grid>
-  <Divider
-    facet="sending-domain"
-    facetId="test.com"
-  />
+  <Divider />
   <Grid>
     <Grid.Column
       sm={6}

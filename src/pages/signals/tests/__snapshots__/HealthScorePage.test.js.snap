@@ -379,10 +379,7 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
       </div>
     </Grid.Column>
   </Grid>
-  <Divider
-    facet="sending-domain"
-    facetId="test.com"
-  />
+  <Divider />
   <Grid>
     <Grid.Column
       sm={6}
@@ -606,10 +603,7 @@ exports[`Signals Health Score Page renders empty weights 1`] = `
       </div>
     </Grid.Column>
   </Grid>
-  <Divider
-    facet="sending-domain"
-    facetId="test.com"
-  />
+  <Divider />
   <Grid>
     <Grid.Column
       sm={6}
@@ -689,10 +683,7 @@ exports[`Signals Health Score Page renders error correctly 1`] = `
       </div>
     </Grid.Column>
   </Grid>
-  <Divider
-    facet="sending-domain"
-    facetId="test.com"
-  />
+  <Divider />
   <Grid>
     <Grid.Column
       sm={6}
