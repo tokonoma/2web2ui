@@ -1,6 +1,6 @@
 import CreatePage from './containers/CreatePage.container';
 import EditPage from './containers/EditPage.container';
-import EditAndPreviewPage from './EditAndPreviewPage';
+import EditAndPreviewPage from './containers/EditAndPreviewPage.container';
 import ListPage from './containers/ListPage.container';
 import PreviewDraftPage from './containers/PreviewDraftPage.container';
 import PreviewPublishedPage from './containers/PreviewPublishedPage.container';

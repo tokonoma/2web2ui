@@ -1,18 +1,19 @@
 import React from 'react';
 import { Grid, Page } from '@sparkpost/matchbox';
 import useRouter from 'src/hooks/useRouter';
+import EditSection from './components/EditSection';
 
 const EditAndPreviewPage = () => {
-  const router = useRouter();
+  const { requestParams } = useRouter();
 
   return (
     <Page
       breadcrumbAction={{ content: 'Back Link', to: '/templates' }}
-      title={router.requestParams.id}
+      title={requestParams.id}
     >
       <Grid>
         <Grid.Column xs={12} sm={6}>
-          insert edit panel here
+          <EditSection />
         </Grid.Column>
         <Grid.Column xs={12} sm={6}>
           insert preview panel here
