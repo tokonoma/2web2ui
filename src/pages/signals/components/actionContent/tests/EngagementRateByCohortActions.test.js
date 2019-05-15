@@ -5,13 +5,20 @@ import EngagementRateByCohortActions from '../EngagementRateByCohortActions';
 
 describe('Signals Engagement Rate by cohort actions component', () => {
   let wrapper;
+  const c_new = 1;
+  const c_14d = 1;
+  const c_90d = 1;
+  const c_365d = 1;
+  const c_uneng = 1;
+
   const fullEngagementRecency = {
-    c_new: 1,
-    c_14d: 1,
-    c_90d: 1,
-    c_365d: 1,
-    c_uneng: 1
+    c_new,
+    c_14d,
+    c_90d,
+    c_365d,
+    c_uneng
   };
+
   it('renders', () => {
     wrapper = shallow(<EngagementRateByCohortActions
       engagementByCohort={{ p_total_eng: 0 }}
@@ -22,61 +29,61 @@ describe('Signals Engagement Rate by cohort actions component', () => {
     expect(wrapper.prop('actions')).toMatchSnapshot();
   });
 
-  cases('should render', (engagementByCohort) => {
+  cases('should render', ({ engagementByCohort, recencyByCohort }) => {
     wrapper = shallow(<EngagementRateByCohortActions
       engagementByCohort={engagementByCohort}
-      recencyByCohort={fullEngagementRecency}
+      recencyByCohort={recencyByCohort}
       facet={'facet'}
       facetId={'someId'}/>);
     expect(wrapper.prop('actions')).toHaveLength(1);
     expect(wrapper.prop('actions')[0].type).toEqual('bad');
   }, {
-    'new engagement cohort bad value': {
-      ...fullEngagementRecency,
-      p_new_eng: 0.09
+    'New engagement cohort bad value': {
+      engagementByCohort: { p_new_eng: 0.09 },
+      recencyByCohort: { c_new }
     },
-    'unengaged bad value': {
-      ...fullEngagementRecency,
-      p_uneng_eng: 0.01
+    'Unengaged bad value': {
+      engagementByCohort: { p_uneng_eng: 0.01 },
+      recencyByCohort: { c_uneng }
     },
     'Not Recently Engaged bad value': {
-      ...fullEngagementRecency,
-      p_365d_eng: 0.04
+      engagementByCohort: { p_365d_eng: 0.04 },
+      recencyByCohort: { c_365d }
     },
     'Recently Engaged bad value': {
-      ...fullEngagementRecency,
-      p_14d_eng: 0.04
+      engagementByCohort: { p_14d_eng: 0.04 },
+      recencyByCohort: { c_14d }
     },
-    'total complaint rate bad value': {
-      ...fullEngagementRecency,
-      p_total_eng: 0.04
+    'Total complaint rate bad value': {
+      engagementByCohort: { p_total_eng: 0.04 },
+      recencyByCohort: fullEngagementRecency
     }
   });
 
-  cases('should render', (engagementByCohort) => {
+  cases('should render', ({ engagementByCohort, recencyByCohort }) => {
     wrapper = shallow(<EngagementRateByCohortActions
       engagementByCohort={engagementByCohort}
-      recencyByCohort={fullEngagementRecency}
+      recencyByCohort={recencyByCohort}
       facet={'facet'}
       facetId={'someId'}/>);
     expect(wrapper.prop('actions')).toHaveLength(1);
     expect(wrapper.prop('actions')[0].type).toEqual('warning');
   }, {
     'new engagement cohort warning value': {
-      ...fullEngagementRecency,
-      p_new_eng: 0.19
+      engagementByCohort: { p_new_eng: 0.19 },
+      recencyByCohort: { c_new }
     },
     'Not Recently Engaged warning value': {
-      ...fullEngagementRecency,
-      p_365d_eng: 0.14
+      engagementByCohort: { p_365d_eng: 0.14 },
+      recencyByCohort: { c_365d }
     },
     'Semi Recently Engaged warning value': {
-      ...fullEngagementRecency,
-      p_90d_eng: 0.14
+      engagementByCohort: { p_90d_eng: 0.14 },
+      recencyByCohort: { c_90d }
     },
     'Recently Engaged warning value': {
-      ...fullEngagementRecency,
-      p_14d_eng: 0.14
+      engagementByCohort: { p_14d_eng: 0.14 },
+      recencyByCohort: { c_14d }
     }
   });
 

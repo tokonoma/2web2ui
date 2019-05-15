@@ -1,6 +1,6 @@
 import React from 'react';
 import Actions from '../Actions';
-import content from '../../constants/ComplaintsByCohortContent';
+import content from '../../constants/complaintsByCohortContent';
 
 const ComplaintsByCohortActions = ({ complaintsByCohort, recencyByCohort, date }) => {
   let actions = [];
