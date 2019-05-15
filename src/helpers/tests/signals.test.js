@@ -1,108 +1,50 @@
 import { getFriendlyTitle, getDoD, getCaretProps, getDates } from '../signals';
+import cases from 'jest-in-case';
 import thresholds from 'src/pages/signals/constants/healthScoreThresholds';
 
-describe('.getFriendlyTitle', () => {
-  it('returns nothing with no prefix set', () => {
-    expect(getFriendlyTitle({
-      prefix: undefined,
-      facet: 'facet',
-      facetId: 'facetId'
-    })).toEqual(null);
-  });
-
-  it('returns prefix with facet id if facet is not a subaccount and dimension', () => {
-    expect(getFriendlyTitle({
-      prefix: 'title for',
-      facet: 'facet',
-      facetId: 'facetId',
-      dimension: true
-    })).toEqual('facetId');
-  });
-
-  it('returns prefix with facet id if facet is not a subaccount and not dimension', () => {
-    expect(getFriendlyTitle({
-      prefix: 'title for',
-      facet: 'facet',
-      facetId: 'facetId',
-      dimension: false
-    })).toEqual('title for facetId');
-  });
-
-  it('returns title with subaccount id if facet is subaccount but not master and dimension', () => {
-    expect(getFriendlyTitle({
-      prefix: 'title for',
-      facet: 'sid',
-      facetId: 'facetId',
-      dimension: true
-    })).toEqual('Subaccount facetId');
-  });
-
-  it('returns title with subaccount id if facet is subaccount but not master and not dimension', () => {
-    expect(getFriendlyTitle({
-      prefix: 'title for',
-      facet: 'sid',
-      facetId: 'facetId',
-      dimension: false
-    })).toEqual('title for Subaccount facetId');
-  });
-
-  it('returns title with master account if facet is subaccount and id is 0 and dimension', () => {
-    expect(getFriendlyTitle({
-      prefix: 'title for',
-      facet: 'sid',
-      facetId: 0,
-      dimension: true
-    })).toEqual('Master Account');
-  });
-
-  it('returns title with master account if facet is subaccount and id is 0 and not dimension', () => {
-    expect(getFriendlyTitle({
-      prefix: 'title for',
-      facet: 'sid',
-      facetId: 0,
-      dimension: false
-    })).toEqual('title for Master Account');
-  });
-
-  it('returns correct suffix with a facet and non-master subaccount and dimension', () => {
-    expect(getFriendlyTitle({
-      prefix: 'title for',
-      facet: 'facet',
-      facetId: 'facetId',
-      subaccountId: 23,
-      dimension: true
-    })).toEqual('facetId for Subaccount 23');
-  });
-
-  it('returns correct suffix with a facet and non-master subaccount and not dimension', () => {
-    expect(getFriendlyTitle({
-      prefix: 'title for',
-      facet: 'facet',
-      facetId: 'facetId',
-      subaccountId: 23,
-      dimension: false
-    })).toEqual('title for facetId for Subaccount 23');
-  });
-
-  it('returns correct suffix with a facet and master subaccount and dimension', () => {
-    expect(getFriendlyTitle({
-      prefix: 'title for',
-      facet: 'facet',
-      facetId: 'facetId',
-      subaccountId: 0,
-      dimension: true
-    })).toEqual('facetId for Master Account');
-  });
-
-  it('returns correct suffix with a facet and master subaccount and not dimension', () => {
-    expect(getFriendlyTitle({
-      prefix: 'title for',
-      facet: 'facet',
-      facetId: 'facetId',
-      subaccountId: 0,
-      dimension: false
-    })).toEqual('title for facetId for Master Account');
-  });
+cases('.getFriendlyTitle', ({ expected, values }) => {
+  expect(getFriendlyTitle(values)).toEqual(expected);
+}, {
+  'returns nothing with no facet set': {
+    expected: null,
+    values: { facetId: 'facetId' }
+  },
+  'translate mailbox provider': {
+    expected: 'UK Providers',
+    values: { facet: 'mb_provider', facetId: 'uk_providers' }
+  },
+  'translate mailbox provider that is not defined': {
+    expected: 'rando_provider',
+    values: { facet: 'mb_provider', facetId: 'rando_provider' }
+  },
+  'translate ip pool': {
+    expected: 'IP Pool shared',
+    values: { facet: 'ip_pool', facetId: 'shared' }
+  },
+  'translate domain': {
+    expected: 'test.co',
+    values: { facet: 'sending_domain', facetId: 'test.co' }
+  },
+  'translate campaign': {
+    expected: 'Campaign welcome',
+    values: { facet: 'campaign_id', facetId: 'welcome' }
+  },
+  'translate master account': {
+    expected: 'Master Account',
+    values: { facet: 'sid', facetId: '0' }
+  },
+  'translate subaccount': {
+    expected: 'Subaccount 101',
+    values: { facet: 'sid', facetId: '101' }
+  },
+  'appends a subaccount': {
+    expected: 'test.co for Subaccount 102',
+    values: { facet: 'sending_domain', facetId: 'test.co', subaccountId: '102' }
+  },
+  'should trim': {
+    expected: 'test.co for Subaccount 105',
+    values: { facet: 'sending_domain', facetId: '   test.co', subaccountId: '105' }
+  }
 });
 
 describe('.getDoD', () => {

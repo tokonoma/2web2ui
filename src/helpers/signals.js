@@ -2,6 +2,7 @@ import _ from 'lodash';
 import { roundToPlaces } from 'src/helpers/units';
 import { getRelativeDates } from 'src/helpers/date';
 import thresholds from 'src/pages/signals/constants/healthScoreThresholds';
+import { MAILBOX_PROVIDERS } from 'src/constants';
 import moment from 'moment';
 
 const translateSubaccount = (id) => {
@@ -14,23 +15,34 @@ const translateSubaccount = (id) => {
   return `Subaccount ${id}`;
 };
 
-export const getFriendlyTitle = ({ prefix, facet, facetId, subaccountId, dimension = true }) => {
-  if (!prefix) {
+const translateFacet = (facet, id) => {
+  switch (facet) {
+    case 'mb_provider':
+      return MAILBOX_PROVIDERS[id] || id;
+    case 'ip_pool':
+      return `IP Pool ${id}`;
+    case 'sending_domain':
+      return id;
+    case 'campaign_id':
+      return `Campaign ${id}`;
+    case 'sid':
+      return translateSubaccount(id);
+  }
+};
+
+export const getFriendlyTitle = ({ facet, facetId, subaccountId }) => {
+  if (!facet) {
     return null;
   }
 
-  let subtitle = (dimension) ? `${facetId}` : `${prefix} ${facetId}`;
-  let suffix = '';
-
-  if (facet === 'sid') {
-    subtitle = (dimension) ? `${translateSubaccount(facetId)}` : `${prefix} ${translateSubaccount(facetId)}`;
-  }
+  const facetText = translateFacet(facet, facetId);
+  let subaccountSuffix = '';
 
   if (!_.isNil(subaccountId)) {
-    suffix = `for ${translateSubaccount(subaccountId)}`;
+    subaccountSuffix = `for ${translateSubaccount(subaccountId)}`;
   }
 
-  return `${subtitle} ${suffix}`.trim();
+  return `${facetText} ${subaccountSuffix}`.trim();
 };
 
 export const getDoD = (current, before) => {
