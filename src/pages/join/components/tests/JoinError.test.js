@@ -20,7 +20,6 @@ describe('JoinError', () => {
     { name: 'invalid email (403)', message: 'invalid email', status: 403 },
     { name: 'aws account exists', message: 'AWS Account already exists', status: 409 },
     { name: 'duplicate email', message: 'A user with that email address already exists', status: 409 },
-    { name: 'manual review required (siftscience)', message: 'Sign up blocked', status: 403 },
     { name: 'service not available in location', message: 'forbidden', status: 403 },
     { name: 'no status', message: 'some error', status: null }
   ];
