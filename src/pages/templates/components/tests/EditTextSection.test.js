@@ -1,19 +1,19 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import useEditorContext from '../../hooks/useEditorContext';
-import EditHtmlSection from '../EditHtmlSection';
+import EditTextSection from '../EditTextSection';
 
 jest.mock('../../hooks/useEditorContext');
 
-describe('EditHtmlSection', () => {
+describe('EditTextSection', () => {
   const subject = ({ editorState } = {}) => {
     useEditorContext.mockReturnValue({
-      content: { html: '<h1>Test</h1>' },
+      content: { text: 'Test Example' },
       setContent: () => {},
       ...editorState
     });
 
-    return shallow(<EditHtmlSection />);
+    return shallow(<EditTextSection />);
   };
 
   it('renders an editor', () => {
@@ -24,8 +24,8 @@ describe('EditHtmlSection', () => {
     const setContent = jest.fn();
     const wrapper = subject({ editorState: { setContent }});
 
-    wrapper.simulate('change', '<h1>New Value</h1>');
+    wrapper.simulate('change', 'New Value');
 
-    expect(setContent).toHaveBeenCalledWith({ html: '<h1>New Value</h1>' });
+    expect(setContent).toHaveBeenCalledWith({ text: 'New Value' });
   });
 });

@@ -2,9 +2,11 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { EditorContextProvider } from '../EditorContext';
 
+jest.mock('../../hooks/useEditorContent', () => () => ({ content: { text: 'Example' }}));
+
 describe('EditorContext', () => {
   describe('EditorContextProvider', () => {
-    const subject = ({ value } = {}) => shallow(
+    const subject = ({ value = {}} = {}) => shallow(
       <EditorContextProvider value={value}>
         <div>Children</div>
       </EditorContextProvider>
@@ -18,7 +20,7 @@ describe('EditorContext', () => {
       const value = { test: 'example' };
       const wrapper = subject({ value });
 
-      expect(wrapper).toHaveProp('value', value);
+      expect(wrapper).toHaveProp('value', expect.objectContaining(value));
     });
   });
 });

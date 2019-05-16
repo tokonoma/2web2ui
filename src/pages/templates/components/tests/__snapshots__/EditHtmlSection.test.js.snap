@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EditHtmlSection renders an editor 1`] = `
+<Editor
+  mode="html"
+  name="html-content-editor"
+  onChange={[Function]}
+  value="<h1>Test</h1>"
+/>
+`;
