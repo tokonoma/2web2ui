@@ -8,6 +8,7 @@ import SupportTicketLink from 'src/components/supportTicketLink/SupportTicketLin
 import Brightback from 'src/components/brightback/Brightback';
 import styles from './Confirmation.module.scss';
 import { PLAN_TIERS } from 'src/constants';
+import { Warning } from '@sparkpost/matchbox-icons';
 export class Confirmation extends React.Component {
 
   renderSelectedPlanMarkup() {
@@ -42,6 +43,23 @@ export class Confirmation extends React.Component {
           promoError={promoError}
         />
       </Panel.Section>
+    );
+  }
+
+  renderDeprecatedWarning() {
+    const { current = {}, selected = {}} = this.props;
+
+    if (current.code === selected.code || current.status !== 'deprecated') {
+      return null;
+    }
+    return (
+      <div name='deprecated-warning' className={styles.DeprecatedWarning}>
+        <div className={styles.iconContainer}>
+          <Warning className={styles.icon} size={32}/>
+        </div>
+        <div className={styles.content}>The current plan you are on is no longer available.
+      If you switch to the selected plan, you will not be able to switch back to your current one.</div>
+      </div>
     );
   }
 
@@ -114,6 +132,7 @@ export class Confirmation extends React.Component {
           {effectiveDateMarkup}
           {ipMarkup}
           {addonMarkup}
+          {this.renderDeprecatedWarning()}
         </Panel.Section>
         <Panel.Section>
           <Brightback
