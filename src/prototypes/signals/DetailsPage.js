@@ -43,7 +43,10 @@ function DetailsPage(props) {
 
   return (
     <Page
-      title='Health Score'
+      // title='Health Score'
+      dimensionPrefix='Health Score'
+      facet='sending_domain'
+      facetId='example.com'
       primaryAction={{ content: 'Create Alert' }}
       breadcrumbAction={{ content: 'Back to Health Score Dashboard' }}
       >
@@ -153,7 +156,7 @@ function DetailsPage(props) {
 const Container = withDateSelection(DetailsPage);
 
 function Wrapper(props) {
-  const { relativeRange } = props;
+  const { relativeRange, to, from } = props;
   const [data, setData] = useState([]);
   const [filters, setFilters] = useState({});
 
@@ -171,7 +174,7 @@ function Wrapper(props) {
 
   // simulate data change to trigger date selection
   useEffect(() => {
-    let toSlice = 76;
+    let toSlice;
 
     const transformed = healthData.history.map(({ dt, health_score, ...rest }) => ({
       date: dt,
@@ -183,10 +186,12 @@ function Wrapper(props) {
 
     if (relativeRange !== 'custom') {
       toSlice = 90 - relativeRange.replace('days', '');
+    } else {
+      toSlice = 90 - moment(to).diff(moment(from), 'days');
     }
 
     setData([...transformed.slice(toSlice, transformed.length)])
-  },[relativeRange]);
+  },[relativeRange, to, from]);
 
   useEffect(() => {
     setFilters({
@@ -198,4 +203,8 @@ function Wrapper(props) {
   return <Container {...props} data={data} filters={filters} />
 };
 
-export default connect((state) => ({ relativeRange: state.signalOptions.relativeRange }))(Wrapper)
+export default connect((state) => ({
+  relativeRange: state.signalOptions.relativeRange,
+  to: state.signalOptions.to,
+  from: state.signalOptions.from
+}))(Wrapper)

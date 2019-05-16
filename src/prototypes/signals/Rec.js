@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import classnames from 'classnames';
 import { Panel, Grid, Button } from '@sparkpost/matchbox';
-import { Clear } from '@sparkpost/matchbox-icons';
+import { CheckCircleOutline, ErrorOutline, AddCircleOutline } from '@sparkpost/matchbox-icons';
 import { HEALTH_SCORE_COMPONENTS } from 'src/pages/signals/constants/info';
 import { roundToPlaces } from 'src/helpers/units';
 import { formatDate } from 'src/helpers/date';
@@ -96,19 +96,24 @@ export function Recommendation(props) {
 
   return (
     <Panel className={styles.Panel} sectioned>
-      {open && <a className={styles.Clear} onClick={() => setOpen(false)}><Clear /></a>}
-      <h6 className={styles.Title}>{title}</h6>
+      {open && <a className={styles.Clear} onClick={() => setOpen(false)}><AddCircleOutline size={27} /></a>}
+      <h6 className={styles.Title}>
+        {title}
+        {!open && (
+          type === 'bad' ? <ErrorOutline className={styles.BadIcon} size={27} /> : <CheckCircleOutline className={styles.GoodIcon} size={27} />
+        )}
+      </h6>
       <div className={styles.Content}>
         <div className={styles.Value}>{roundToPlaces(value * 100, 3)}%</div>
         <p className={styles.Desc}>{type === 'bad' ? bad : good}</p>
       </div>
-      <div className={styles.ActionSection}>
-        {type === 'bad' ? (
-          <a onClick={() => setOpen(true)}>Fix Now</a>
-        ) : (
-          <span>Looking Good</span>
+
+        {type === 'bad' && (
+          <div className={styles.ActionSection}>
+            <Button onClick={() => setOpen(true)} size='small' outline fullWidth>Fix Now</Button>
+          </div>
         )}
-      </div>
+
       <div className={classnames(styles.Reveal, open && styles.open)}>
         <div className={styles.RevealContent}>
           <p className={styles.Fix}>{fix}</p>

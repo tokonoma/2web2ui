@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { WindowEvent, Popover, ActionList } from '@sparkpost/matchbox';
-import { AddCircleOutline, Clear } from '@sparkpost/matchbox-icons';
+import { Add, Clear } from '@sparkpost/matchbox-icons';
 import { HEALTH_SCORE_COMPONENT_INFO, HEALTH_SCORE_COMPONENTS } from 'src/pages/signals/constants/info';
 import _ from 'lodash';
 
@@ -41,7 +41,7 @@ export function Component({ edge, selected, add, remove, components }) {
 
   function trigger() {
     if (edge) {
-      return <a onClick={() => setOpen(true)} className={styles.AddIcon}><AddCircleOutline size={23} /></a>
+      return <a onClick={() => setOpen(true)} className={styles.AddIcon}><Add size={21} /></a>
     }
 
     return (

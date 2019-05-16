@@ -11,6 +11,7 @@
 .Title {
   font-size: rem(15);
   font-weight: 600;
+  padding: 0;
 }
 
 .SectionTitle {
@@ -38,7 +39,6 @@
   left: 0;
   right: 0;
   padding: spacing();
-  text-align: right;
   border-top: 1px solid color(gray, 9);
 
   font-size: rem(12);
@@ -101,6 +101,10 @@
   &:hover {
     color: color(gray, 2);
   }
+
+  svg {
+    transform: rotate(45deg)
+  }
 }
 
 .RevealContent {
@@ -119,4 +123,23 @@
 
 .FixButton {
   color: color(gray, 10) !important;
+}
+
+.BadIcon, .GoodIcon {
+
+}
+
+
+.BadIcon, .GoodIcon {
+  position: absolute;
+  top: rem(15);
+  right: rem(15);
+}
+
+.BadIcon {
+  fill: color(red, dark);
+}
+
+.GoodIcon {
+  fill: color(green, dark);
 }
