@@ -10,6 +10,7 @@ import { slugify } from 'src/helpers/string';
 
 import FileFieldWrapper from 'src/components/reduxFormWrappers/FileFieldWrapper';
 import exampleRecipientListPath from './example-recipient-list.csv';
+import styles from './Form.module.scss';
 
 export class RecipientListForm extends Component {
   renderCsvErrors() {
@@ -48,7 +49,7 @@ export class RecipientListForm extends Component {
       {error && this.renderCsvErrors()}
       <Panel>
         <Panel.Section>
-          <Grid>
+          <Grid className={styles.Spacer}>
             <Grid.Column>
               <Field
                 name='name'
@@ -62,18 +63,18 @@ export class RecipientListForm extends Component {
               />
             </Grid.Column>
             <Grid.Column>
-              {!editMode && <Field
+              <Field
                 name='id'
                 label='Identifier'
                 placeholder='my-favorite-recipients'
                 validate={[required, maxLength(64), slug]}
-                disabled={submitting}
+                disabled={submitting || editMode}
                 component={TextFieldWrapper}
                 required
-              />}
+              />
             </Grid.Column>
           </Grid>
-          <Grid>
+          <Grid className={styles.Spacer}>
             <Grid.Column>
               <Field
                 name='description'
@@ -85,7 +86,7 @@ export class RecipientListForm extends Component {
               />
             </Grid.Column>
           </Grid>
-          <Grid>
+          <Grid className={styles.Spacer}>
             <Grid.Column>
               <Field
                 component={FileFieldWrapper}
@@ -114,10 +115,15 @@ export class RecipientListForm extends Component {
   }
 }
 
-const mapStateToProps = (state, props) => ({
-  pristine: isPristine(props.formName)(state),
-  valid: isValid(props.formName)(state),
-  submitting: isSubmitting(props.formName)(state)
-});
+const mapStateToProps = (state, props) => {
+  const { formName } = props;
+  return {
+    pristine: isPristine(formName)(state),
+    valid: isValid(formName)(state),
+    submitting: isSubmitting(formName)(state)
+  };
+};
 
-export default connect(mapStateToProps, { change, autofill })(RecipientListForm);
+const connectedForm = connect(mapStateToProps, { change, autofill })(RecipientListForm);
+connectedForm.displayName = 'RecipientsListForm';
+export default connectedForm;

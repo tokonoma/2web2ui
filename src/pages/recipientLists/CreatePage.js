@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link, withRouter } from 'react-router-dom';
-import { change, getFormValues, reduxForm } from 'redux-form';
+import { Link } from 'react-router-dom';
+import { formValueSelector, reduxForm } from 'redux-form';
 
 import { Page } from '@sparkpost/matchbox';
 
@@ -19,7 +19,7 @@ export class CreatePage extends Component {
     recipients: []
   };
 
-  createRecipientList = ({ name, id, description }) => {
+  createRecipientsList = ({ name, id, description }) => {
     const { createRecipientList, showAlert, history } = this.props;
     const data = {
       name,
@@ -29,12 +29,12 @@ export class CreatePage extends Component {
     };
 
     return createRecipientList(data)
-      .then(() => {
+      .then((result) => {
         showAlert({
           type: 'success',
           message: 'Created recipient list'
         });
-        history.push('/lists/recipient-lists');
+        history.push(`/lists/recipient-lists/edit/${result.id}`);
       });
   };
 
@@ -45,19 +45,19 @@ export class CreatePage extends Component {
         this.setState({ recipients });
       })
       .catch((csvErrors) => {
-        showAlert({ type: 'error', message: 'Error while parsing CSV file' });
+        showAlert({ type: 'error', message: csvErrors });
       });
   };
 
   componentDidUpdate(prevProps, prevState) {
-    const { formValues } = this.props;
-    if (prevProps.formValues && formValues.csv !== prevProps.formValues.csv) {
-      this.parseCsv(formValues.csv);
+    const { csv } = this.props;
+    if (csv && csv !== prevProps.csv) {
+      this.parseCsv(csv);
     }
   }
 
   render() {
-    const { handleSubmit } = this.props;
+    const { handleSubmit, csv } = this.props;
     const { recipients } = this.state;
 
     return <Page
@@ -68,25 +68,23 @@ export class CreatePage extends Component {
         to: '/lists/recipient-lists'
       }}>
 
-      <form onSubmit={handleSubmit(this.createRecipientList)}>
-        <RecipientListForm formName={formName} onSubmit={this.createRecipientList}/>
-        {!!recipients.length &&
-        <RecipientsCollection recipients={recipients}/>
-        }
+      <form onSubmit={handleSubmit(this.createRecipientsList)}>
+        <RecipientListForm formName={formName}/>
+        <RecipientsCollection hasCsv={!!csv} recipients={recipients}/>
       </form>
     </Page>;
   }
 }
 
+const valueSelector = formValueSelector(formName);
 const mapStateToProps = (state, props) => ({
   initialValues: {},
-  formValues: getFormValues(formName)(state)
+  csv: valueSelector(state, 'csv')
 });
 
 const mapDispatchToProps = {
   createRecipientList,
-  showAlert,
-  change
+  showAlert
 };
 
 const formOptions = {
@@ -94,5 +92,5 @@ const formOptions = {
   enableReinitialize: true
 };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(reduxForm(formOptions)(CreatePage)));
+export default connect(mapStateToProps, mapDispatchToProps)(reduxForm(formOptions)(CreatePage));
 
