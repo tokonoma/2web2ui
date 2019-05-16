@@ -24,17 +24,7 @@ describe('useEditorContent', () => {
     });
     const { content } = useHook(wrapper);
 
-    expect(content).toEqual({ amp_html: undefined, html: '<h1>Test</h1>', text: 'Test' });
-  });
-
-  it('hydrates null content parts as undefined', () => {
-    const wrapper = useTestWrapper({
-      content: { html: null, text: 'Test' },
-      last_update_time: '2019-05-16T02:25:00+00:00'
-    });
-    const { content } = useHook(wrapper);
-
-    expect(content).toEqual({ amp_html: undefined, html: undefined, text: 'Test' });
+    expect(content).toEqual({ html: '<h1>Test</h1>', text: 'Test' });
   });
 
   it('merges updated content', () => {

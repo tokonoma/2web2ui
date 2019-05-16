@@ -3,7 +3,7 @@ import AceEditor from 'react-ace';
 import 'brace/ext/searchbox';
 import 'brace/theme/tomorrow_night_bright';
 
-const Editor = ({ editorProps = {}, setOptions = {}, ...props }) => (
+const Editor = ({ editorProps = {}, setOptions = {}, value, ...props }) => (
   <AceEditor
     {...props}
     cursorStart={1}
@@ -20,6 +20,8 @@ const Editor = ({ editorProps = {}, setOptions = {}, ...props }) => (
     showPrintMargin={false}
     tabSize={2}
     theme="tomorrow_night_bright"
+    // note, template endpoint allows null content, but Ace doesn't
+    value={value === null ? '' : value}
     width="auto"
   />
 );

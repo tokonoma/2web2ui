@@ -10,4 +10,9 @@ describe('Editor', () => {
   it('renders editor', () => {
     expect(subject({ mode: 'html', value: '<h1>Example</h1>' })).toMatchSnapshot();
   });
+
+  it('sets null value to empty string', () => {
+    const wrapper = subject({ mode: 'html', value: null });
+    expect(wrapper).toHaveProp('value', '');
+  });
 });

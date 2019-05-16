@@ -10,14 +10,7 @@ const useEditorContent = (draft = {}) => {
   // hydrate when draft is loaded (has a last_update_time value) and updated (last_update_time changes)
   useEffect(() => {
     if (draft.last_update_time) {
-      const { amp_html, html, text } = draft.content;
-
-      setState({
-        ...draft.content,
-        amp_html: amp_html === null ? undefined : amp_html,
-        html: html === null ? undefined : html,
-        text: text === null ? undefined : text
-      });
+      setState(draft.content);
     }
   }, [draft.content, draft.last_update_time]);
 
