@@ -58,7 +58,7 @@ export class Confirmation extends React.Component {
           <Warning className={styles.icon} size={32}/>
         </div>
         <div className={styles.content}>The current plan you are on is no longer available.
-      If you switch to a different plan, you will not be able to switch back to this one.</div>
+      If you switch to the new plan, you will not be able to switch back to your current one.</div>
       </div>
     );
   }
