@@ -5,6 +5,14 @@ import useEditorContext from '../hooks/useEditorContext';
 import EditAndPreviewPage from '../EditAndPreviewPage';
 
 jest.mock('src/hooks/useRouter');
+jest.mock('../components/EditPrimaryArea', () => { // todo, remove with use of mount()
+  const EditPrimaryArea = () => null; // must assign to variable for displayName
+  return EditPrimaryArea;
+});
+jest.mock('../components/EditSection', () => { // todo, remove with use of mount()
+  const EditSection = () => null; // must assign to variable for displayName
+  return EditSection;
+});
 jest.mock('../hooks/useEditorContext');
 
 describe('EditAndPreviewPage', () => {

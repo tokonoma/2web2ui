@@ -3,6 +3,7 @@ import { Grid, Page } from '@sparkpost/matchbox';
 import { RedirectAndAlert } from 'src/components/globalAlert';
 import Loading from 'src/components/loading';
 import useRouter from 'src/hooks/useRouter';
+import EditPrimaryArea from './components/EditPrimaryArea';
 import EditSection from './components/EditSection';
 import useEditorContext from './hooks/useEditorContext';
 
@@ -39,6 +40,7 @@ const EditAndPreviewPage = () => {
   return (
     <Page
       breadcrumbAction={{ content: 'Back Link', to: '/templates' }}
+      primaryArea={<EditPrimaryArea />}
       title={draft.name}
     >
       <Grid>
