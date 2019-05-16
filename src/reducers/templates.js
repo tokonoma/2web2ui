@@ -10,7 +10,7 @@ export const initialState = {
   }
 };
 
-export default (state = initialState, action) => {
+export default (state = initialState, { now = new Date(), ...action }) => {
   switch (action.type) {
     // List
     case 'LIST_TEMPLATES_PENDING':
@@ -74,6 +74,11 @@ export default (state = initialState, action) => {
         }
       };
 
+    case 'UPDATE_TEMPLATE_FAIL':
+      return { ...state, updating: false };
+    case 'UPDATE_TEMPLATE_PENDING':
+      return { ...state, updating: true };
+
     // note, need to keep template up to date, so editor can compare vs form state to determine
     //   if form state is dirty
     // note, don't need normalizeTemplateFromAddress because draft should already be normalized
@@ -88,10 +93,13 @@ export default (state = initialState, action) => {
             ...state.byId[id],
             draft: {
               ...state.byId[id].draft,
-              ...action.meta.data
+              ...action.meta.data,
+              // ugh, need to manually set since API doesn't return updated record
+              last_update_time: now.toISOString()
             }
           }
-        }
+        },
+        updating: false
       };
     }
 

@@ -163,6 +163,7 @@ Object {
           "html": "<h1>Updated Test Template</h1>",
           "subject": "Test Template",
         },
+        "last_update_time": "2019-05-16T02:03:33.254Z",
       },
     },
   },
@@ -172,5 +173,32 @@ Object {
   },
   "list": Array [],
   "listError": null,
+  "updating": false,
+}
+`;
+
+exports[`Template reducer updates updating state when update fails 1`] = `
+Object {
+  "byId": Object {},
+  "contentPreview": Object {
+    "draft": Object {},
+    "published": Object {},
+  },
+  "list": Array [],
+  "listError": null,
+  "updating": false,
+}
+`;
+
+exports[`Template reducer updates updating state when update pending 1`] = `
+Object {
+  "byId": Object {},
+  "contentPreview": Object {
+    "draft": Object {},
+    "published": Object {},
+  },
+  "list": Array [],
+  "listError": null,
+  "updating": true,
 }
 `;
