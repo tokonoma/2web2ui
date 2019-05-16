@@ -5,8 +5,6 @@ import { formValueSelector, clearFields } from 'redux-form';
 import { RadioGroup } from 'src/components/reduxFormWrappers';
 import { hasSubaccounts } from 'src/selectors/subaccounts';
 import { FORMS, ROLES, ROLE_LABELS } from 'src/constants';
-import { isAccountUiOptionSet } from 'src/helpers/conditions/account';
-import { selectCondition } from 'src/selectors/accessConditionState';
 import SubaccountAssignment from './SubaccountAssignment';
 
 const ADMIN_ROLE = {
@@ -23,7 +21,7 @@ const DEVELOPER_ROLE = {
     'Setup and development user. Full access to API Keys, and all other email related setup, sending, and reporting features.'
 };
 
-const EMAIL_ROLE = {
+const TEMPLATES_ROLE = {
   label: <strong>{ROLE_LABELS[ROLES.TEMPLATES]}</strong>,
   value: ROLES.TEMPLATES,
   helpText:
@@ -59,15 +57,14 @@ export class RoleRadioGroup extends React.Component {
       selectedRole,
       hasSubaccounts,
       useSubaccountChecked,
-      showDeveloperRoles,
       allowSuperUser,
       allowSubaccountAssignment
     } = this.props;
 
     return [
       ADMIN_ROLE,
-      showDeveloperRoles ? DEVELOPER_ROLE : null,
-      showDeveloperRoles ? EMAIL_ROLE : null,
+      DEVELOPER_ROLE,
+      TEMPLATES_ROLE,
       {
         ...REPORTING_ROLE,
         children: allowSubaccountAssignment &&
@@ -106,8 +103,7 @@ RoleRadioGroup.defaultProps = {
 const mapStateToProps = (state) => ({
   selectedRole: formValueSelector(FORMS.INVITE_USER)(state, 'access'),
   hasSubaccounts: hasSubaccounts(state),
-  useSubaccountChecked: formValueSelector(FORMS.INVITE_USER)(state, 'useSubaccount'),
-  showDeveloperRoles: selectCondition(isAccountUiOptionSet('developer_and_email_roles', false))(state)
+  useSubaccountChecked: formValueSelector(FORMS.INVITE_USER)(state, 'useSubaccount')
 });
 
 const mapDispatchToProps = { clearFields };

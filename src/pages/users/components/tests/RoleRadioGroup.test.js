@@ -15,7 +15,6 @@ describe('Component: RoleRadioGroup', () => {
       allowSubaccountAssignment: false,
       hasSubaccounts: false,
       useSubaccountChecked: false,
-      developer_and_email_roles: false,
       clearFields: jest.fn()
     };
   });
@@ -31,30 +30,6 @@ describe('Component: RoleRadioGroup', () => {
 
   it('should render disabled', () => {
     expect(options(subject({ disabled: true }))).toEqual(expect.arrayContaining([expect.objectContaining({ disabled: true })]));
-  });
-
-  it('should render developer roles when the UI flag `developer_and_email_roles` is enabled', () => {
-    expect(subject({ showDeveloperRoles: true })
-      .find('RadioGroup[title="Role"]')
-      .prop('options'))
-      .toEqual(
-        expect.arrayContaining([
-          expect.objectContaining({ value: ROLES.DEVELOPER }),
-          expect.objectContaining({ value: ROLES.TEMPLATES })
-        ])
-      );
-  });
-
-  it('should not render developer roles when the UI flag `developer_and_email_roles` is disabled', () => {
-    expect(subject({ showDeveloperRoles: false })
-      .find('RadioGroup[title="Role"]')
-      .prop('options'))
-      .not.toEqual(
-        expect.arrayContaining([
-          expect.objectContaining({ value: ROLES.DEVELOPER }),
-          expect.objectContaining({ value: ROLES.TEMPLATES })
-        ])
-      );
   });
 
   it('should render super user', () => {
