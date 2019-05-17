@@ -16,7 +16,7 @@ exports[`Editor renders editor 1`] = `
   highlightActiveLine={true}
   maxLines={null}
   minLines={null}
-  mode="html"
+  mode="text"
   name="brace-editor"
   onChange={null}
   onLoad={null}
@@ -41,7 +41,7 @@ exports[`Editor renders editor 1`] = `
   style={Object {}}
   tabSize={2}
   theme="chaos"
-  value="<h1>Example</h1>"
+  value="Example"
   width="auto"
   wrapEnabled={false}
 />

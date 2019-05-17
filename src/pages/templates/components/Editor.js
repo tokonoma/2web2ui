@@ -1,9 +1,10 @@
 import React from 'react';
 import AceEditor from 'react-ace';
 import 'brace/ext/searchbox';
+import 'brace/mode/text';
 import 'brace/theme/chaos';
 
-const Editor = ({ editorProps = {}, setOptions = {}, value, ...props }) => (
+const Editor = ({ editorProps = {}, setOptions = {}, mode = 'text', value, ...props }) => (
   <AceEditor
     {...props}
     cursorStart={1}
@@ -13,6 +14,7 @@ const Editor = ({ editorProps = {}, setOptions = {}, value, ...props }) => (
     }}
     fontSize={12}
     highlightActiveLine
+    mode={mode}
     setOptions={{
       ...setOptions,
       displayIndentGuides: false

@@ -8,7 +8,7 @@ describe('Editor', () => {
   );
 
   it('renders editor', () => {
-    expect(subject({ mode: 'html', value: '<h1>Example</h1>' })).toMatchSnapshot();
+    expect(subject({ value: 'Example' })).toMatchSnapshot();
   });
 
   it('sets null value to empty string', () => {
