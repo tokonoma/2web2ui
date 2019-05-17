@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 // the store for in progress content changes
-const useEditorContent = (draft = {}) => {
+const useEditorContent = ({ draft = {}}) => {
   const [state, setState] = useState({});
   const setContent = (nextState) => {
     setState({ ...state, ...nextState }); // merge-in

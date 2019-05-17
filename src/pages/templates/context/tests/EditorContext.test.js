@@ -4,7 +4,6 @@ import useRouter from 'src/hooks/useRouter';
 import { EditorContextProvider } from '../EditorContext';
 
 jest.mock('src/hooks/useRouter');
-jest.mock('../../hooks/useEditorContent', () => () => ({ content: { text: 'Example' }}));
 
 describe('EditorContext', () => {
   describe('EditorContextProvider', () => {

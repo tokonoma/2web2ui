@@ -4,11 +4,13 @@ exports[`EditorContext EditorContextProvider renders children wrapped by a conte
 <ContextProvider
   value={
     Object {
-      "content": Object {
-        "text": "Example",
-      },
+      "content": Object {},
       "currentTabIndex": 0,
       "currentTabKey": "html",
+      "getDraft": [Function],
+      "getPublished": [Function],
+      "preview": Object {},
+      "setContent": [Function],
       "setTab": [Function],
     }
   }
