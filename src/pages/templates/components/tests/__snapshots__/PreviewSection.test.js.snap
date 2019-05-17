@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PreviewSection renders preview frame 1`] = `
+<Panel>
+  <div
+    className="PreviewFrameWrapper notranslate"
+  >
+    <PreviewFrame
+      content="<h1>Test Example</h1>"
+      key="html"
+      strict={true}
+    />
+  </div>
+</Panel>
+`;
