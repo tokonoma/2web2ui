@@ -10,7 +10,10 @@ const chainHooks = (...hooks) => (
   hooks.reduce((acc, hook) => ({ ...acc, ...hook(acc) }), {})
 );
 
-export const EditorContextProvider = ({ children, value }) => {
+export const EditorContextProvider = ({
+  children,
+  value: { getDraft, getPublished, ...value }
+}) => {
   const { requestParams } = useRouter();
   const state = chainHooks(
     () => value,
@@ -20,9 +23,9 @@ export const EditorContextProvider = ({ children, value }) => {
   );
 
   useEffect(() => {
-    state.getDraft(requestParams.id, requestParams.subaccount);
-    state.getPublished(requestParams.id, requestParams.subaccount);
-  }, [state.getDraft, state.getPublished, requestParams.id, requestParams.subaccount, state]);
+    getDraft(requestParams.id, requestParams.subaccount);
+    getPublished(requestParams.id, requestParams.subaccount);
+  }, [getDraft, getPublished, requestParams.id, requestParams.subaccount]);
 
   return (
     <EditorContext.Provider value={state}>
