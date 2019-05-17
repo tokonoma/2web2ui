@@ -1,13 +1,13 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import useEditorTabs from '../../hooks/useEditorTabs';
+import useEditorContext from '../../hooks/useEditorContext';
 import EditSection from '../EditSection';
 
-jest.mock('../../hooks/useEditorTabs');
+jest.mock('../../hooks/useEditorContext');
 
 describe('EditSection', () => {
   const subject = ({ tabState }) => {
-    useEditorTabs.mockReturnValue(tabState);
+    useEditorContext.mockReturnValue(tabState);
     return shallow(<EditSection />);
   };
 

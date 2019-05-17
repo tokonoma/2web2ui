@@ -1,6 +1,7 @@
 import React, { createContext, useEffect } from 'react';
 import useRouter from 'src/hooks/useRouter';
 import useEditorContent from '../hooks/useEditorContent';
+import useEditorTabs from '../hooks/useEditorTabs';
 
 const EditorContext = createContext();
 
@@ -9,6 +10,7 @@ export const EditorContextProvider = ({
   value: { getDraft, getPublished, ...value }
 }) => {
   const contentState = useEditorContent(value.draft);
+  const tabState = useEditorTabs();
   const { requestParams } = useRouter();
 
   useEffect(() => {
@@ -17,7 +19,9 @@ export const EditorContextProvider = ({
   }, [getDraft, getPublished, requestParams.id, requestParams.subaccount]);
 
   return (
-    <EditorContext.Provider value={{ ...value, ...contentState }}>
+    <EditorContext.Provider
+      value={{ ...value, ...contentState, ...tabState }}
+    >
       {children}
     </EditorContext.Provider>
   );

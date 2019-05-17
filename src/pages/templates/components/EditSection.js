@@ -1,10 +1,10 @@
 import React from 'react';
 import { Panel, Tabs } from '@sparkpost/matchbox';
 import tabs from '../constants/editTabs';
-import useEditorTabs from '../hooks/useEditorTabs';
+import useEditorContext from '../hooks/useEditorContext';
 
 const EditSection = () => {
-  const { currentTabIndex, setTab } = useEditorTabs();
+  const { currentTabIndex, setTab } = useEditorContext();
   const TabComponent = tabs[currentTabIndex].render;
 
   return (
