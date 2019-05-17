@@ -4,14 +4,17 @@ import useEditorContent from '../hooks/useEditorContent';
 
 const EditorContext = createContext();
 
-export const EditorContextProvider = ({ children, value }) => {
+export const EditorContextProvider = ({
+  children,
+  value: { getDraft, getPublished, ...value }
+}) => {
   const contentState = useEditorContent(value.draft);
   const { requestParams } = useRouter();
 
   useEffect(() => {
-    value.getDraft(requestParams.id, requestParams.subaccount);
-    value.getPublished(requestParams.id, requestParams.subaccount);
-  }, [requestParams.id, requestParams.subaccount, value]);
+    getDraft(requestParams.id, requestParams.subaccount);
+    getPublished(requestParams.id, requestParams.subaccount);
+  }, [getDraft, getPublished, requestParams.id, requestParams.subaccount]);
 
   return (
     <EditorContext.Provider value={{ ...value, ...contentState }}>

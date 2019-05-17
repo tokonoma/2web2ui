@@ -7,8 +7,6 @@ exports[`EditorContext EditorContextProvider renders children wrapped by a conte
       "content": Object {
         "text": "Example",
       },
-      "getDraft": [Function],
-      "getPublished": [Function],
     }
   }
 >
