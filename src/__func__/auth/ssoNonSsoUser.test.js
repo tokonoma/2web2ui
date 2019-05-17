@@ -9,5 +9,7 @@ test('Single sign-on flow: non SSO user', async () => {
 
   expect(global.window.location.assign).not.toHaveBeenCalled();
 
+  expect(page.find('Error')).toExist();
+
   expect(page.mockApiCalls).toMatchSnapshot();
 });
