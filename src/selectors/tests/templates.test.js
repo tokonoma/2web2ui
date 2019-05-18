@@ -205,4 +205,21 @@ describe('Templates selectors', () => {
       expect(selector.selectPublishedTemplatesBySubaccount(store)).toMatchSnapshot();
     });
   });
+
+  describe('selectPreviewErrors', () => {
+    it('should return an empty ', () => {
+      expect(selector.selectPreviewErrors(store)).toEqual([]);
+    });
+
+    it('should return an array of errors', () => {
+      const errors = [
+        { line: 1, message: 'Oh no!' },
+        { line: 2, message: 'Oh no!' }
+      ];
+
+      store.templates.contentPreview.error = { response: { data: { errors }}};
+
+      expect(selector.selectPreviewErrors(store)).toEqual(errors);
+    });
+  });
 });

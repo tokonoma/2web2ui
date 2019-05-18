@@ -41,4 +41,14 @@ describe('PreviewSection', () => {
     const wrapper = subject({ editorState: { currentTabKey: 'amp_html' }});
     expect(wrapper.find('PreviewFrame')).toHaveProp('strict', false);
   });
+
+  it('renders last preview when preview fails', () => {
+    const wrapper = subject({ editorState: { hasFailedToPreview: true }});
+    expect(wrapper.find('PreviewFrame')).toExist();
+  });
+
+  it('renders error frame', () => {
+    const wrapper = subject({ editorState: { hasFailedToPreview: true, preview: {}}});
+    expect(wrapper.find('PreviewErrorFrame')).toExist();
+  });
 });
