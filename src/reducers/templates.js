@@ -59,11 +59,16 @@ export default (state = initialState, { now = new Date(), ...action }) => {
     case 'GET_TEMPLATE_TEST_DATA':
       return { ...state, testData: action.payload };
 
+    // note, purposely don't clear error on pending action, so errors can be displayed while pending
+    case 'GET_TEMPLATE_PREVIEW_FAIL':
+      return { ...state, contentPreview: { ...state.contentPreview, error: action.payload }};
+
     case 'GET_TEMPLATE_PREVIEW_SUCCESS':
       return {
         ...state,
         contentPreview: {
           ...state.contentPreview,
+          error: undefined,
           [action.meta.context.mode]: {
             ...state.contentPreview[action.meta.context.mode],
             [action.meta.context.id]: {
