@@ -8,14 +8,20 @@ const columns = [
 ];
 
 export class RecipientsCollection extends Component {
-  getRowData = ({ address }) => [address.email, address.name]
+  getRowData = ({ address }) => [address.email, address.name];
 
-  renderEmpty = () => <Panel.Section>
+  renderNoCsv = () => <Panel.Section>
     <p>Once you upload a CSV, recipients will be previewed here.</p>
-  </Panel.Section>
+  </Panel.Section>;
 
   renderCollection = () => {
     const { recipients } = this.props;
+
+    if (recipients.length === 0) {
+      return (<Panel.Section>
+        <p>There are no recipients in your uploaded CSV!</p>
+      </Panel.Section>);
+    }
 
     return (<TableCollection
       columns={columns}
@@ -23,13 +29,14 @@ export class RecipientsCollection extends Component {
       getRowData={this.getRowData}
       pagination={true}
     />);
-  }
+  };
+
   render() {
-    const { hasCsv, recipients } = this.props;
+    const { hasCsv } = this.props;
 
     return (<Panel title='Preview Contacts'>
-      {!hasCsv && this.renderEmpty()}
-      {recipients.length > 0 && this.renderCollection()}
+      {!hasCsv && this.renderNoCsv()}
+      {hasCsv && this.renderCollection()}
     </Panel>);
   }
 }
