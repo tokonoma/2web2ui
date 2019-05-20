@@ -59,7 +59,14 @@ exports[`Signals Engagement Recency Page renders correctly 1`] = `
       "to": "/signals/engagement",
     }
   }
-  dimensionPrefix={
+  facet="sending-domain"
+  facetId="test.com"
+  primaryArea={
+    <Connect(DateFilter)
+      left={true}
+    />
+  }
+  title={
     <React.Fragment>
       Engagement Recency
       <InfoTooltip
@@ -69,13 +76,6 @@ exports[`Signals Engagement Recency Page renders correctly 1`] = `
 "
       />
     </React.Fragment>
-  }
-  facet="sending-domain"
-  facetId="test.com"
-  primaryArea={
-    <Connect(DateFilter)
-      left={true}
-    />
   }
 >
   <Grid>
@@ -258,10 +258,7 @@ exports[`Signals Engagement Recency Page renders correctly 1`] = `
       </div>
     </Grid.Column>
   </Grid>
-  <OtherChartsHeader
-    facet="sending-domain"
-    facetId="test.com"
-  />
+  <Divider />
   <Grid>
     <Grid.Column
       sm={6}
@@ -300,7 +297,14 @@ exports[`Signals Engagement Recency Page renders error correctly 1`] = `
       "to": "/signals/engagement",
     }
   }
-  dimensionPrefix={
+  facet="sending-domain"
+  facetId="test.com"
+  primaryArea={
+    <Connect(DateFilter)
+      left={true}
+    />
+  }
+  title={
     <React.Fragment>
       Engagement Recency
       <InfoTooltip
@@ -310,13 +314,6 @@ exports[`Signals Engagement Recency Page renders error correctly 1`] = `
 "
       />
     </React.Fragment>
-  }
-  facet="sending-domain"
-  facetId="test.com"
-  primaryArea={
-    <Connect(DateFilter)
-      left={true}
-    />
   }
 >
   <Grid>
@@ -348,10 +345,7 @@ exports[`Signals Engagement Recency Page renders error correctly 1`] = `
       />
     </Grid.Column>
   </Grid>
-  <OtherChartsHeader
-    facet="sending-domain"
-    facetId="test.com"
-  />
+  <Divider />
   <Grid>
     <Grid.Column
       sm={6}

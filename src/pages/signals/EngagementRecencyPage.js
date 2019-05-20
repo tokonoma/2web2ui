@@ -10,7 +10,7 @@ import DateFilter from './components/filters/DateFilter';
 import EngagementRecencyActions from './components/actionContent/EngagementRecencyActions';
 import InfoTooltip from './components/InfoTooltip';
 import Legend from './components/charts/legend/Legend';
-import OtherChartsHeader from './components/OtherChartsHeader';
+import Divider from './components/Divider';
 import Page from './components/SignalsPage';
 import Tabs from './components/engagement/Tabs';
 import TooltipMetric from './components/charts/tooltip/TooltipMetric';
@@ -119,7 +119,7 @@ export class EngagementRecencyPage extends Component {
     return (
       <Page
         breadcrumbAction={{ content: 'Back to Engagement Recency Overview', to: '/signals/engagement', component: Link }}
-        dimensionPrefix={
+        title={
           <>
             Engagement Recency
             <InfoTooltip content={ENGAGEMENT_RECENCY_INFO} />
@@ -130,7 +130,7 @@ export class EngagementRecencyPage extends Component {
         subaccountId={subaccountId}
         primaryArea={<DateFilter left />}>
         {this.renderContent()}
-        <OtherChartsHeader facet={facet} facetId={facetId} subaccountId={subaccountId} />
+        <Divider />
         <Grid>
           {facet !== 'mb_provider' && (
             <Grid.Column xs={12} sm={6}>

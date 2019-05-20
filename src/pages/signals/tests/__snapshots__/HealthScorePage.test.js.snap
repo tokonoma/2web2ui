@@ -49,7 +49,6 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
       "to": "/signals/health-score",
     }
   }
-  dimensionPrefix="Health Score"
   facet="sending-domain"
   facetId="test.com"
   primaryArea={
@@ -57,6 +56,7 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
       left={true}
     />
   }
+  title="Health Score"
 >
   <Grid>
     <Grid.Column
@@ -379,10 +379,7 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
       </div>
     </Grid.Column>
   </Grid>
-  <OtherChartsHeader
-    facet="sending-domain"
-    facetId="test.com"
-  />
+  <Divider />
   <Grid>
     <Grid.Column
       sm={6}
@@ -429,7 +426,6 @@ exports[`Signals Health Score Page renders empty weights 1`] = `
       "to": "/signals/health-score",
     }
   }
-  dimensionPrefix="Health Score"
   facet="sending-domain"
   facetId="test.com"
   primaryArea={
@@ -437,6 +433,7 @@ exports[`Signals Health Score Page renders empty weights 1`] = `
       left={true}
     />
   }
+  title="Health Score"
 >
   <Grid>
     <Grid.Column
@@ -606,10 +603,7 @@ exports[`Signals Health Score Page renders empty weights 1`] = `
       </div>
     </Grid.Column>
   </Grid>
-  <OtherChartsHeader
-    facet="sending-domain"
-    facetId="test.com"
-  />
+  <Divider />
   <Grid>
     <Grid.Column
       sm={6}
@@ -636,7 +630,6 @@ exports[`Signals Health Score Page renders error correctly 1`] = `
       "to": "/signals/health-score",
     }
   }
-  dimensionPrefix="Health Score"
   facet="sending-domain"
   facetId="test.com"
   primaryArea={
@@ -644,6 +637,7 @@ exports[`Signals Health Score Page renders error correctly 1`] = `
       left={true}
     />
   }
+  title="Health Score"
 >
   <Grid>
     <Grid.Column
@@ -689,10 +683,7 @@ exports[`Signals Health Score Page renders error correctly 1`] = `
       </div>
     </Grid.Column>
   </Grid>
-  <OtherChartsHeader
-    facet="sending-domain"
-    facetId="test.com"
-  />
+  <Divider />
   <Grid>
     <Grid.Column
       sm={6}

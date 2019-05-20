@@ -8,7 +8,7 @@ import Legend from './components/charts/legend/Legend';
 import Callout from 'src/components/callout';
 import DateFilter from './components/filters/DateFilter';
 import ComplaintsByCohortActions from './components/actionContent/ComplaintsByCohortActions';
-import OtherChartsHeader from './components/OtherChartsHeader';
+import Divider from './components/Divider';
 import Page from './components/SignalsPage';
 import Tabs from './components/engagement/Tabs';
 import TooltipMetric from './components/charts/tooltip/TooltipMetric';
@@ -130,13 +130,13 @@ export class ComplaintsByCohortPage extends Component {
     return (
       <Page
         breadcrumbAction={{ content: 'Back to Engagement Recency Overview', to: '/signals/engagement', component: Link }}
-        dimensionPrefix='Complaints by Cohort'
+        title='Complaints by Cohort'
         facet={facet}
         facetId={facetId}
         subaccountId={subaccountId}
         primaryArea={<DateFilter left />}>
         {this.renderContent()}
-        <OtherChartsHeader facet={facet} facetId={facetId} subaccountId={subaccountId} />
+        <Divider />
         <Grid>
           {facet !== 'mb_provider' && (
             <Grid.Column xs={12} sm={6}>

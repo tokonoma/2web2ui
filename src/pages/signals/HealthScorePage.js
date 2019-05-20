@@ -15,7 +15,7 @@ import withDetails from './containers/withDetails';
 import withDateSelection from './containers/withDateSelection';
 import { Loading } from 'src/components';
 import Callout from 'src/components/callout';
-import OtherChartsHeader from './components/OtherChartsHeader';
+import Divider from './components/Divider';
 import ChartHeader from './components/ChartHeader';
 import { formatFullNumber, roundToPlaces, formatNumber } from 'src/helpers/units';
 import moment from 'moment';
@@ -210,13 +210,13 @@ export class HealthScorePage extends Component {
     return (
       <Page
         breadcrumbAction={{ content: 'Back to Health Score Overview', to: '/signals/health-score', component: Link }}
-        dimensionPrefix='Health Score'
+        title='Health Score'
         facet={facet}
         facetId={facetId}
         subaccountId={subaccountId}
         primaryArea={<DateFilter left />}>
         {this.renderContent()}
-        <OtherChartsHeader facet={facet} facetId={facetId} subaccountId={subaccountId} />
+        <Divider />
         <Grid>
           {facet !== 'mb_provider' && (
             <Grid.Column xs={12} sm={6}>

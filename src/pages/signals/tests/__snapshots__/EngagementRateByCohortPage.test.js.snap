@@ -59,7 +59,6 @@ exports[`Signals Engagement Rate By Cohort Page renders correctly 1`] = `
       "to": "/signals/engagement",
     }
   }
-  dimensionPrefix="Engagement Rate by Cohort"
   facet="sending-domain"
   facetId="test.com"
   primaryArea={
@@ -67,6 +66,7 @@ exports[`Signals Engagement Rate By Cohort Page renders correctly 1`] = `
       left={true}
     />
   }
+  title="Engagement Rate by Cohort"
 >
   <Grid>
     <Grid.Column
@@ -246,10 +246,7 @@ exports[`Signals Engagement Rate By Cohort Page renders correctly 1`] = `
       </div>
     </Grid.Column>
   </Grid>
-  <OtherChartsHeader
-    facet="sending-domain"
-    facetId="test.com"
-  />
+  <Divider />
   <Grid>
     <Grid.Column
       sm={6}
@@ -288,7 +285,6 @@ exports[`Signals Engagement Rate By Cohort Page renders error correctly 1`] = `
       "to": "/signals/engagement",
     }
   }
-  dimensionPrefix="Engagement Rate by Cohort"
   facet="sending-domain"
   facetId="test.com"
   primaryArea={
@@ -296,6 +292,7 @@ exports[`Signals Engagement Rate By Cohort Page renders error correctly 1`] = `
       left={true}
     />
   }
+  title="Engagement Rate by Cohort"
 >
   <Grid>
     <Grid.Column
@@ -326,10 +323,7 @@ exports[`Signals Engagement Rate By Cohort Page renders error correctly 1`] = `
       />
     </Grid.Column>
   </Grid>
-  <OtherChartsHeader
-    facet="sending-domain"
-    facetId="test.com"
-  />
+  <Divider />
   <Grid>
     <Grid.Column
       sm={6}

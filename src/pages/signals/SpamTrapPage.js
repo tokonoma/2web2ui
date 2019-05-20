@@ -13,7 +13,7 @@ import withDetails from './containers/withDetails';
 import withDateSelection from './containers/withDateSelection';
 import { Loading } from 'src/components';
 import Callout from 'src/components/callout';
-import OtherChartsHeader from './components/OtherChartsHeader';
+import Divider from './components/Divider';
 import Calculation from './components/viewControls/Calculation';
 import ChartHeader from './components/ChartHeader';
 import { formatFullNumber, formatNumber, roundToPlaces } from 'src/helpers/units';
@@ -128,13 +128,13 @@ export class SpamTrapPage extends Component {
     return (
       <Page
         breadcrumbAction={{ content: 'Back to Spam Trap Overview', to: '/signals/spam-traps', component: Link }}
-        dimensionPrefix='Spam Traps'
+        title='Spam Traps'
         facet={facet}
         facetId={facetId}
         subaccountId={subaccountId}
         primaryArea={<DateFilter left />}>
         {this.renderContent()}
-        <OtherChartsHeader facet={facet} facetId={facetId} subaccountId={subaccountId} />
+        <Divider />
         <Grid>
           <Grid.Column xs={12} sm={6}>
             <EngagementRecencyPreview />
