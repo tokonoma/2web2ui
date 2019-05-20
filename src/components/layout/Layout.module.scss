@@ -22,6 +22,11 @@
     align-items: center;
     width: 100%;
   }
+
+  .fullscreen & {
+    padding: 0;
+    width: 100%;
+  }
 }
 
 .container {
