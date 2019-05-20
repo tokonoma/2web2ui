@@ -1,14 +1,13 @@
 import React from 'react';
 import { Panel } from '@sparkpost/matchbox';
 import classNames from 'classnames';
-import isEmpty from 'lodash/isEmpty';
 import useEditorContext from '../hooks/useEditorContext';
 import PreviewErrorFrame from './PreviewErrorFrame';
 import PreviewFrame from './PreviewFrame';
 import styles from './PreviewSection.module.scss';
 
 const PreviewSection = () => {
-  const { currentTabKey, hasFailedToPreview, preview } = useEditorContext();
+  const { currentTabKey, hasFailedToPreview, preview, previewLineErrors } = useEditorContext();
 
   // Must wrap text content in <p> to apply style and must be a string for injecting into iframe
   const content = currentTabKey === 'text'
@@ -18,9 +17,9 @@ const PreviewSection = () => {
   return (
     <Panel>
       <div className={classNames(styles.PreviewFrameWrapper, 'notranslate')}>
-        {hasFailedToPreview && isEmpty(preview) ? (
+        {hasFailedToPreview ? (
           // only show full error frame if never able to generate a preview
-          <PreviewErrorFrame />
+          <PreviewErrorFrame errors={previewLineErrors} />
         ) : (
           <PreviewFrame
             content={content || ''}

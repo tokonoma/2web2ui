@@ -42,13 +42,10 @@ describe('PreviewSection', () => {
     expect(wrapper.find('PreviewFrame')).toHaveProp('strict', false);
   });
 
-  it('renders last preview when preview fails', () => {
-    const wrapper = subject({ editorState: { hasFailedToPreview: true }});
-    expect(wrapper.find('PreviewFrame')).toExist();
-  });
-
   it('renders error frame', () => {
-    const wrapper = subject({ editorState: { hasFailedToPreview: true, preview: {}}});
-    expect(wrapper.find('PreviewErrorFrame')).toExist();
+    const previewLineErrors = [{ line: 1, message: 'Oh no!' }];
+    const wrapper = subject({ editorState: { hasFailedToPreview: true, previewLineErrors }});
+
+    expect(wrapper.find('PreviewErrorFrame')).toHaveProp('errors', previewLineErrors);
   });
 });
