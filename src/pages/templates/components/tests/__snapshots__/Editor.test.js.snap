@@ -34,6 +34,7 @@ exports[`Editor renders editor 1`] = `
   setOptions={
     Object {
       "displayIndentGuides": false,
+      "useWorker": false,
     }
   }
   showGutter={true}
