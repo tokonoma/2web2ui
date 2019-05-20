@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EditAndPreviewPage renders a page 1`] = `
+<Page
+  breadcrumbAction={
+    Object {
+      "content": "Back Link",
+      "to": "/templates",
+    }
+  }
+  empty={Object {}}
+  title="test-template-id"
+>
+  <Grid>
+    <Grid.Column
+      sm={6}
+      xs={12}
+    >
+      insert edit panel here
+    </Grid.Column>
+    <Grid.Column
+      sm={6}
+      xs={12}
+    >
+      insert preview panel here
+    </Grid.Column>
+  </Grid>
+</Page>
+`;
