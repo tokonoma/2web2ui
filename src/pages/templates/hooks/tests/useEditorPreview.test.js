@@ -11,14 +11,7 @@ describe('useEditorPreview', () => {
 
   it('returns empty object by default', () => {
     const wrapper = useTestWrapper();
-    expect(useHook(wrapper)).toEqual({ preview: {}});
-  });
-
-  it('returns received preview', () => {
-    const preview = { html: '<h1>Test Example</h1>' };
-    const wrapper = useTestWrapper({ preview });
-
-    expect(useHook(wrapper)).toEqual({ preview });
+    expect(useHook(wrapper)).toEqual({});
   });
 
   it('calls getPreview when content changes', () => {

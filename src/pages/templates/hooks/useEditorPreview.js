@@ -11,7 +11,6 @@ const useEditorPreview = ({
   content,
   draft = {},
   getPreview,
-  preview = {},
   debounceAction = debouncer
 }) => {
   useEffect(() => {
@@ -31,7 +30,7 @@ const useEditorPreview = ({
   // clean-up debounced state when unmounted
   useEffect(() => () => { debounceAction.cancel(); }, [debounceAction]);
 
-  return { preview };
+  return {};
 };
 
 export default useEditorPreview;
