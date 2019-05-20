@@ -50,6 +50,7 @@ jest.mock('moment', () => {
 Object.defineProperty(global.navigator, 'userAgent', { value: 'node.js', configurable: true });
 Object.defineProperty(global.navigator, 'language', { value: 'en-US', configurable: true });
 Object.defineProperty(global.window, 'scrollTo', { value: jest.fn(), configurable: true });
+Object.defineProperty(global.window.location, 'assign', { value: jest.fn(), configurable: true });
 
 // Show a stack track for unhandled rejections to help
 // track them down.
