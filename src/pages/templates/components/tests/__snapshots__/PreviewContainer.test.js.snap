@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PreviewContainer renders desktop container 1`] = `
+<div
+  className="PreviewContainer notranslate"
+>
+  <div>
+    Example
+  </div>
+</div>
+`;
+
+exports[`PreviewContainer renders mobile container 1`] = `
+<div
+  className="PreviewMobileContainer notranslate"
+>
+  <div
+    className="PreviewMobilePhone"
+  >
+    <div
+      className="PreviewMobilePhoneScreen"
+    >
+      <div>
+        Example
+      </div>
+    </div>
+  </div>
+</div>
+`;

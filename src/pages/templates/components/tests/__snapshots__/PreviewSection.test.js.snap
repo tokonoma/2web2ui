@@ -3,14 +3,12 @@
 exports[`PreviewSection renders preview frame 1`] = `
 <Panel>
   <PreviewControlBar />
-  <div
-    className="PreviewFrameWrapper notranslate"
-  >
+  <PreviewContainer>
     <PreviewFrame
       content="<h1>Test Example</h1>"
       key="html"
       strict={true}
     />
-  </div>
+  </PreviewContainer>
 </Panel>
 `;
