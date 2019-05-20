@@ -1,4 +1,4 @@
-import MockRecaptcha from 'src/__testHelpers__/MockRecaptcha';
+import MockRecaptcha from 'src/__testHelpers__/mockRecaptcha';
 import mountRoute from 'src/__testHelpers__/mountRoute';
 import getFormFiller from 'src/__testHelpers__/fill';
 import config from 'src/config';
