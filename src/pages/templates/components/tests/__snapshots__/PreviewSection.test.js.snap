@@ -2,6 +2,7 @@
 
 exports[`PreviewSection renders preview frame 1`] = `
 <Panel>
+  <PreviewControlBar />
   <div
     className="PreviewFrameWrapper notranslate"
   >

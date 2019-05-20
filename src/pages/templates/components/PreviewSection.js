@@ -3,6 +3,7 @@ import { Panel } from '@sparkpost/matchbox';
 import classNames from 'classnames';
 import useEditorContext from '../hooks/useEditorContext';
 import PreviewErrorFrame from './PreviewErrorFrame';
+import PreviewControlBar from './PreviewControlBar';
 import PreviewFrame from './PreviewFrame';
 import styles from './PreviewSection.module.scss';
 
@@ -16,6 +17,7 @@ const PreviewSection = () => {
 
   return (
     <Panel>
+      <PreviewControlBar />
       <div className={classNames(styles.PreviewFrameWrapper, 'notranslate')}>
         {hasFailedToPreview ? (
           // only show full error frame if never able to generate a preview

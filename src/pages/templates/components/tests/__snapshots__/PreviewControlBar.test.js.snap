@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PreviewControlBar renders control bar 1`] = `
+<div
+  className="PreviewControlBar"
+>
+  <div
+    className="PreviewDeviceToggle"
+  >
+    <UnstyledLink
+      className="PreviewDeviceButton active"
+      id="preview-content-desktop-button"
+      onClick={[Function]}
+    >
+      <DesktopWindows
+        size={24}
+      />
+    </UnstyledLink>
+    <UnstyledLink
+      className="PreviewDeviceButton"
+      id="preview-content-mobile-button"
+      onClick={[Function]}
+    >
+      <PhoneAndroid
+        size={24}
+      />
+    </UnstyledLink>
+  </div>
+</div>
+`;

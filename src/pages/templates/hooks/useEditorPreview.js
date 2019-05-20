@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import debounce from 'lodash/debounce';
 import isEmpty from 'lodash/isEmpty';
 
@@ -13,6 +13,8 @@ const useEditorPreview = ({
   getPreview,
   debounceAction = debouncer
 }) => {
+  const [previewDevice, setPreviewDevice] = useState('desktop');
+
   useEffect(() => {
     if (!isEmpty(content)) {
       debounceAction(() => {
@@ -30,7 +32,10 @@ const useEditorPreview = ({
   // clean-up debounced state when unmounted
   useEffect(() => () => { debounceAction.cancel(); }, [debounceAction]);
 
-  return {};
+  return {
+    previewDevice,
+    setPreviewDevice
+  };
 };
 
 export default useEditorPreview;

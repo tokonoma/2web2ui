@@ -7,7 +7,9 @@ exports[`EditorContext EditorContextProvider renders children wrapped by a conte
       "content": Object {},
       "currentTabIndex": 0,
       "currentTabKey": "html",
+      "previewDevice": "desktop",
       "setContent": [Function],
+      "setPreviewDevice": [Function],
       "setTab": [Function],
     }
   }
