@@ -53,6 +53,7 @@ export default async function mountRoute(route, { authenticated = true } = {}) {
     simulate: (...rest) => simulate(wrapper, ...rest),
     forceUpdate: (...rest) => forceUpdate(wrapper, ...rest),
     mockApiCalls: axiosMock.mock.calls,
-    axiosMock
+    axiosMock,
+    store
   };
 }
