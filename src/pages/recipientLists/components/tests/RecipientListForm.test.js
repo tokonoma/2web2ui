@@ -53,7 +53,6 @@ describe('RecipientListForm', () => {
 
   it('autofills id on name change on create mode', () => {
     wrapper.find('Field[name="name"]').simulate('change', { target: { value: 'FOo bAr' }});
-    // expect(wrapper.find('Field[name="id"]').value).toEqual('foo-bar');
     expect(props.autofill).toHaveBeenCalledWith('fooForm', 'id', 'foo-b-ar');
   });
 

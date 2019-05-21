@@ -16,10 +16,6 @@ exports[`CreatePage should render correctly 1`] = `
     <RecipientsListForm
       formName="recipientListForm"
     />
-    <RecipientsCollection
-      hasCsv={false}
-      recipients={Array []}
-    />
   </form>
 </Page>
 `;

@@ -20,14 +20,9 @@ describe('RecipientsCollection', () => {
     wrapper = shallow(<RecipientsCollection {...props} />);
   });
 
-  it('renders correctly when hasCsv is false', () => {
-    wrapper.setProps({ hasCsv: false });
-    expect(wrapper.find('p')).toHaveText('Once you upload a CSV, recipients will be previewed here.');
-  });
-
-  it('renders correctly when hasCsv is true but no recipients', () => {
+  it('renders correctly with no recipients', () => {
     wrapper.setProps({ hasCsv: true });
-    expect(wrapper.find('p')).toHaveText('There are no recipients in your uploaded CSV!');
+    expect(wrapper.find('p')).toHaveText('There are no valid recipients in your uploaded CSV!');
   });
 
   it('renders collection correctly', () => {

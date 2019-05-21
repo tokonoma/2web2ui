@@ -27,6 +27,13 @@ describe('CreatePage', () => {
 
 
   describe('parseCsv', () => {
+    const csvErrors = [
+      'Line 73: Too many notes',
+      'Line 247: Vanilla is unacceptable'
+    ];
+
+    const recipients = [{ address: { name: 'foo', email: 'foo@domain.com' }}];
+
     it('parses CSV when CSV is uploaded', () => {
       parseRecipientListCsv.mockImplementationOnce(() => Promise.resolve());
       wrapper.setProps({ csv: 'fooCSV' });
@@ -34,21 +41,23 @@ describe('CreatePage', () => {
     });
 
     it('saves recipients when valid', async () => {
-      const recipients = [{ address: { name: 'foo', email: 'foo@domain.com' }}];
       parseRecipientListCsv.mockImplementationOnce(() => Promise.resolve(recipients));
       await wrapper.instance().parseCsv();
       expect(wrapper.state('recipients')).toEqual(recipients);
     });
 
     it('alerts errors on parsing error', async () => {
-      const csvErrors = [
-        'Line 73: Too many notes',
-        'Line 247: Vanilla is unacceptable'
-      ];
-
       parseRecipientListCsv.mockImplementationOnce(() => Promise.reject(csvErrors));
       await wrapper.instance().parseCsv();
       expect(props.showAlert).toHaveBeenCalledWith({ type: 'error', message: csvErrors });
+    });
+
+    it('resets current recipients when new csv can not be parsed', async () => {
+      wrapper.setState({ recipients });
+      expect(wrapper.state('recipients')).toEqual(recipients);
+      parseRecipientListCsv.mockImplementationOnce(() => Promise.reject(csvErrors));
+      await wrapper.instance().parseCsv();
+      expect(wrapper.state('recipients')).toEqual([]);
     });
   });
 

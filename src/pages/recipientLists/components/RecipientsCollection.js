@@ -10,22 +10,14 @@ const columns = [
 export class RecipientsCollection extends Component {
   getRowData = ({ address }) => [address.email, address.name];
 
-  renderNoCsv = () => <Panel>
+  renderEmptyState = () => (<Panel>
     <Panel.Section>
-      <p>Once you upload a CSV, recipients will be previewed here.</p>
+      <p>There are no valid recipients in your uploaded CSV!</p>
     </Panel.Section>
-  </Panel>;
+  </Panel>)
 
   renderCollection = () => {
     const { recipients } = this.props;
-
-    if (recipients.length === 0) {
-      return (<Panel>
-        <Panel.Section>
-          <p>There are no recipients in your uploaded CSV!</p>
-        </Panel.Section>
-      </Panel>);
-    }
 
     return (<TableCollection
       columns={columns}
@@ -37,18 +29,17 @@ export class RecipientsCollection extends Component {
   };
 
   render() {
-    const { hasCsv } = this.props;
+    const { recipients } = this.props;
 
     return <>
       <h1>Preview Contacts</h1>
-      {hasCsv ? this.renderCollection() : this.renderNoCsv()}
+      {recipients.length ? this.renderCollection() : this.renderEmptyState()}
     </>;
   }
 }
 
 RecipientsCollection.defaultProps = {
-  recipients: [],
-  hasCsv: false
+  recipients: []
 };
 
 export default RecipientsCollection;

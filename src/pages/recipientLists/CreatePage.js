@@ -49,6 +49,7 @@ export class CreatePage extends Component {
         this.setState({ recipients });
       })
       .catch((csvErrors) => {
+        this.setState({ recipients: []});
         showAlert({ type: 'error', message: csvErrors });
       });
   };
@@ -74,7 +75,7 @@ export class CreatePage extends Component {
 
       <form onSubmit={handleSubmit(this.createRecipientsList)}>
         <RecipientListForm formName={formName}/>
-        <RecipientsCollection hasCsv={!!csv} recipients={recipients}/>
+        {csv && <RecipientsCollection recipients={recipients}/>}
       </form>
     </Page>;
   }
