@@ -1,7 +1,7 @@
 import SparkpostApiError from '../sparkpostApiError';
 
 function createTestError(sugar = {}) {
-  const error = new Error();
+  const error = new Error('Oh No!');
   return new SparkpostApiError(Object.assign(error, sugar));
 }
 
@@ -22,6 +22,11 @@ describe('SparkpostApiError', () => {
   });
 
   it('returns error message', () => {
+    const error = createTestError({ response: { status: 400 }});
+    expect(error).toHaveProperty('message', 'Oh No!');
+  });
+
+  it('returns a network error if no axios response', () => {
     const error = createTestError();
     expect(error).toHaveProperty('message', 'You may be having network issues or an adblocker may be blocking part of the app.');
   });
