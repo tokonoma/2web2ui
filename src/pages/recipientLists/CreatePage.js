@@ -29,12 +29,16 @@ export class CreatePage extends Component {
     };
 
     return createRecipientList(data)
-      .then((result) => {
+      .then(({ id, total_rejected_recipients }) => {
+        let message = 'Successfully created recipient list.';
+        if (total_rejected_recipients) {
+          message = `${message} ${total_rejected_recipients} ${total_rejected_recipients === 1 ? 'recipient was' : 'recipients were'} rejected!`;
+        }
         showAlert({
           type: 'success',
-          message: 'Created recipient list'
+          message
         });
-        history.push(`/lists/recipient-lists/edit/${result.id}`);
+        history.push(`/lists/recipient-lists/edit/${id}`);
       });
   };
 
@@ -78,7 +82,6 @@ export class CreatePage extends Component {
 
 const valueSelector = formValueSelector(formName);
 const mapStateToProps = (state, props) => ({
-  initialValues: {},
   csv: valueSelector(state, 'csv')
 });
 

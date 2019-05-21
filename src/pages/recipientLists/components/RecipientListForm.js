@@ -66,6 +66,7 @@ export class RecipientListForm extends Component {
               <Field
                 name='id'
                 label='Identifier'
+                helpText={'A unique ID for your recipient list, we\'ll fill this for you but, once set, this can not be modified.'}
                 placeholder='my-favorite-recipients'
                 validate={[required, maxLength(64), slug]}
                 disabled={submitting || editMode}

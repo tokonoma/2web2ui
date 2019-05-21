@@ -3,8 +3,8 @@ import { TableCollection } from 'src/components';
 import { Panel } from '@sparkpost/matchbox';
 
 const columns = [
-  { label: 'Address', sortKey: 'email' },
-  { label: 'Name', sortKey: 'name' }
+  { label: 'Address', sortKey: 'address.email' },
+  { label: 'Name', sortKey: 'address.name' }
 ];
 
 export class RecipientsCollection extends Component {
@@ -28,6 +28,7 @@ export class RecipientsCollection extends Component {
       rows={recipients}
       getRowData={this.getRowData}
       pagination={true}
+      saveCsv={false}
     />);
   };
 
