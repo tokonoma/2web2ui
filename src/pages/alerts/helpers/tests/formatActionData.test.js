@@ -10,37 +10,26 @@ const subaccount = {
   status: 'active'
 };
 
+const threshold = {
+  error: { comparator: 'lt', target: 66.6 }
+};
+
 const input = {
   id: '19447300-3b8b-11e9-b749-6d43cdcd6095',
   name: 'JimAlertSignalsThresh',
-  alert_metric: 'signals_health_wow',
+  alert_metric: 'signals_health_threshold',
   subaccount,
   email_addresses: 'sparky@sparkpost.com, test@foo.com',
   facet_name: 'ip_pool',
   facet_value: 'abc',
-  threshold: { error: { comparator: 'gt', target: 54 }},
-  criteria_metric: 'wow',
+  threshold,
+  criteria_metric: 'threshold',
   enabled: true
 };
 
 const emailAsArray = ['sparky@sparkpost.com', 'test@foo.com'];
 
 describe('Formatter', () => {
-  it('should format params for alert metric - Monthly Sending Limit', () => {
-    const input = {
-      alert_metric: 'monthly_sending_limit',
-      subaccount,
-      threshold: { error: { comparator: 'lt', target: 90 }},
-      facet_name: 'ALL',
-      facet_value: ''
-    };
-    const returnValue = formatActionData(input);
-    expect(returnValue.alert_subaccount).toBeUndefined();
-    expect(returnValue.facet_name).toBeUndefined();
-    expect(returnValue.facet_value).toBeUndefined();
-    expect(returnValue.threshold.error.comparator).toEqual('gt');
-  });
-
   cases('should initialize alert_subaccount correctly for', ({ input, expected }) => {
     expect(formatActionData(input)).toEqual(expected);
   }, {
@@ -63,4 +52,33 @@ describe('Formatter', () => {
         facet_value: undefined }
     }
   });
+
+  it('should format params for alert metric - Monthly Sending Limit', () => {
+    const values = {
+      alert_metric: 'monthly_sending_limit',
+      subaccount,
+      threshold
+    };
+    const returnValue = formatActionData(values);
+    expect(returnValue.alert_subaccount).toBeUndefined();
+    expect(returnValue.facet_name).toBeUndefined();
+    expect(returnValue.facet_value).toBeUndefined();
+    expect(returnValue.threshold.error.comparator).toEqual('gt');
+    expect(returnValue.threshold.error.target).toEqual(66);
+  });
+
+
+  it('should format params for alert metric - Signals Health DOD', () => {
+    const values = {
+      alert_metric: 'signals_health_dod',
+      subaccount,
+      threshold,
+      facet_name: 'ALL',
+      facet_value: ''
+    };
+    const returnValue = formatActionData(values);
+    expect(returnValue.threshold.error.comparator).toEqual('gt');
+    expect(returnValue.threshold.error.target).toEqual(66);
+  });
+
 });

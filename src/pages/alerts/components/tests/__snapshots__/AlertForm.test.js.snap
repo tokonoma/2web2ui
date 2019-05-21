@@ -63,7 +63,7 @@ Object {
   "disabled": false,
   "name": "threshold.error.target",
   "normalize": [Function],
-  "prefix": "Drops Below",
+  "prefix": "Percent Change Above",
   "style": Object {
     "textAlign": "right",
   },

@@ -20,7 +20,7 @@ import { MAILBOX_PROVIDERS } from 'src/constants';
 import _ from 'lodash';
 
 // Helpers & Validation
-import { domain, required, integer, minNumber, maxNumber, maxLength, numberBetween } from 'src/helpers/validation';
+import { domain, required, integer, minNumber, maxLength, numberBetween } from 'src/helpers/validation';
 import validateEmailList from '../helpers/validateEmailList';
 
 const formName = 'alertForm';
@@ -79,17 +79,15 @@ export class AlertForm extends Component {
 
     const submitText = submitting ? 'Submitting...' : (newAlert ? 'Create Alert' : 'Update Alert');
     const isSignals = alert_metric.startsWith('signals_');
+    const isInteger = ['monthly_sending_limit', 'signals_health_dod', 'signals_health_wow'].includes(alert_metric);
     const isThreshold = (alert_metric === 'monthly_sending_limit' || alert_metric === 'signals_health_threshold');
     const getTargetValidation = () => {
-      if (isThreshold) {
-        if (isSignals) {
-          return [required, numberBetween(0, 100)];
-        } else {
-          return [required, integer, minNumber(0)];
-        }
-      } else {
-        return [required, integer, maxNumber(0)];
+      const validators = [required];
+      if (isInteger) {
+        validators.push(integer);
       }
+      validators.push(isThreshold ? numberBetween(0, 100) : minNumber(0));
+      return validators;
     };
 
     const checkFacet = () => {
@@ -112,13 +110,13 @@ export class AlertForm extends Component {
         case 'signals_health_threshold': return '';
         case 'monthly_sending_limit': return 'Above';
         case 'signals_health_dod':
-        case 'signals_health_wow': return 'Drops Below';
+        case 'signals_health_wow': return 'Percent Change Above';
       }
     };
 
     const negPercentNormalizer = (value, previousValue, values) => {
       if ((values.alert_metric === 'signals_health_dod') || (values.alert_metric === 'signals_health_wow')) {
-        return (value > 0) ? value * (-1) : value;
+        return (value < 0) ? value * (-1) : value;
       } else {
         return value;
       }
