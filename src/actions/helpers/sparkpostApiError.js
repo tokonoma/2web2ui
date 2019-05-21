@@ -4,6 +4,9 @@ import _ from 'lodash';
 function SparkpostApiError(error) {
   const apiError = _.get(error, 'response.data.errors[0]', {});
 
+  if (!error.response) {
+    error.message = 'You may be having network issues or an adblocker may be blocking part of the app.';
+  }
   this.name = 'SparkpostApiError';
   this.message = apiError.description || apiError.message || error.message;
   this.stack = error.stack; // must manually assign prototype value
