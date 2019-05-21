@@ -1,9 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`RecipientsCollection renders collection correctly 1`] = `
-<Panel
-  title="Preview Contacts"
->
+<Fragment>
+  <h1>
+    Preview Contacts
+  </h1>
   <TableCollection
     columns={
       Array [
@@ -39,5 +40,5 @@ exports[`RecipientsCollection renders collection correctly 1`] = `
     }
     saveCsv={false}
   />
-</Panel>
+</Fragment>
 `;

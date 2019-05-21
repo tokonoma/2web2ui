@@ -27,6 +27,12 @@ describe('CreatePage', () => {
 
 
   describe('parseCsv', () => {
+    it('parses CSV when CSV is uploaded', () => {
+      parseRecipientListCsv.mockImplementationOnce(() => Promise.resolve());
+      wrapper.setProps({ csv: 'fooCSV' });
+      expect(parseRecipientListCsv).toHaveBeenCalledWith('fooCSV');
+    });
+
     it('saves recipients when valid', async () => {
       const recipients = [{ address: { name: 'foo', email: 'foo@domain.com' }}];
       parseRecipientListCsv.mockImplementationOnce(() => Promise.resolve(recipients));
@@ -47,10 +53,25 @@ describe('CreatePage', () => {
   });
 
   describe('createRecipientsList', () => {
-    it('should POST with recipients & without csv prop', async () => {
-      const data = { name: 'Foo', id: 'foo', description: 'foo bar', csv: 'hello' };
+    let data;
+    beforeEach(() => {
+      data = { name: 'Foo', id: 'foo', description: 'foo bar' };
+    });
+
+    it('makes a POST request with recipients', async () => {
       await wrapper.instance().createRecipientsList(data);
       expect(props.createRecipientList).toHaveBeenCalledWith({ name: 'Foo', id: 'foo', description: 'foo bar', recipients: []});
+    });
+
+    it('does not include csv prop in POST request', async () => {
+      await wrapper.instance().createRecipientsList({ ...data, csv: 'hello' });
+      expect(props.createRecipientList.mock.calls[0][0]).not.toHaveProperty('csv');
+    });
+
+    it('shows alert with rejected recipients', async () => {
+      props.createRecipientList.mockReturnValue(Promise.resolve({ id: 101, total_rejected_recipients: 2 }));
+      await wrapper.instance().createRecipientsList(data);
+      expect(props.showAlert.mock.calls[0][0]).toMatchObject({ type: 'success', message: 'Successfully created recipient list. 2 recipients were rejected!' });
     });
   });
 });

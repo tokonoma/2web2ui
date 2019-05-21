@@ -10,6 +10,7 @@ exports[`RecipientListForm defaults to create mode 1`] = `
         <Grid.Column>
           <Field
             component={[Function]}
+            disabled={false}
             label="Name"
             name="name"
             onChange={[Function]}
@@ -26,6 +27,7 @@ exports[`RecipientListForm defaults to create mode 1`] = `
         <Grid.Column>
           <Field
             component={[Function]}
+            disabled={false}
             helpText="A unique ID for your recipient list, we'll fill this for you but, once set, this can not be modified."
             label="Identifier"
             name="id"
@@ -47,6 +49,7 @@ exports[`RecipientListForm defaults to create mode 1`] = `
         <Grid.Column>
           <Field
             component={[Function]}
+            disabled={false}
             label="Description"
             name="description"
             placeholder="All my favorite recipients"
@@ -64,6 +67,7 @@ exports[`RecipientListForm defaults to create mode 1`] = `
         <Grid.Column>
           <Field
             component={[Function]}
+            disabled={false}
             fileType="csv"
             helpText={
               <span>
@@ -114,6 +118,7 @@ exports[`RecipientListForm renders correctly in create mode 1`] = `
         <Grid.Column>
           <Field
             component={[Function]}
+            disabled={false}
             label="Name"
             name="name"
             onChange={[Function]}
@@ -152,6 +157,7 @@ exports[`RecipientListForm renders correctly in create mode 1`] = `
         <Grid.Column>
           <Field
             component={[Function]}
+            disabled={false}
             label="Description"
             name="description"
             placeholder="All my favorite recipients"
@@ -169,6 +175,7 @@ exports[`RecipientListForm renders correctly in create mode 1`] = `
         <Grid.Column>
           <Field
             component={[Function]}
+            disabled={false}
             fileType="csv"
             helpText={
               <span>

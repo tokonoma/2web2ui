@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { autofill, change, Field, isPristine, isSubmitting, isValid } from 'redux-form';
 
 import config from 'src/config';
-import { Banner, Button, Error, Grid, Panel } from '@sparkpost/matchbox';
+import { Button, Grid, Panel } from '@sparkpost/matchbox';
 import { DownloadLink, TextFieldWrapper } from 'src/components';
 import { maxFileSize, maxLength, required, slug } from 'src/helpers/validation';
 import { slugify } from 'src/helpers/string';
@@ -13,13 +13,6 @@ import exampleRecipientListPath from './example-recipient-list.csv';
 import styles from './Form.module.scss';
 
 export class RecipientListForm extends Component {
-  renderCsvErrors() {
-    const { error } = this.props;
-    return <Banner status='danger' title='CSV Format Errors'>
-      {error.map((err, idx) => <Error key={idx} error={err}/>)}
-    </Banner>;
-  }
-
   // Fills in identifier field based on Name
   handleIdFill = (e) => {
     const { editMode, autofill, formName } = this.props;
@@ -31,7 +24,7 @@ export class RecipientListForm extends Component {
   };
 
   render() {
-    const { editMode, pristine, valid, error, submitting } = this.props;
+    const { editMode, pristine, valid, submitting } = this.props;
 
     const submitDisabled = pristine || !valid || submitting;
 
@@ -46,7 +39,6 @@ export class RecipientListForm extends Component {
     }
 
     return <div>
-      {error && this.renderCsvErrors()}
       <Panel>
         <Panel.Section>
           <Grid className={styles.Spacer}>
