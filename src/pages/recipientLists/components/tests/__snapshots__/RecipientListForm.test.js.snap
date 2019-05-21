@@ -26,6 +26,7 @@ exports[`RecipientListForm defaults to create mode 1`] = `
         <Grid.Column>
           <Field
             component={[Function]}
+            helpText="A unique ID for your recipient list, we'll fill this for you but, once set, this can not be modified."
             label="Identifier"
             name="id"
             placeholder="my-favorite-recipients"
@@ -130,6 +131,7 @@ exports[`RecipientListForm renders correctly in create mode 1`] = `
           <Field
             component={[Function]}
             disabled={false}
+            helpText="A unique ID for your recipient list, we'll fill this for you but, once set, this can not be modified."
             label="Identifier"
             name="id"
             placeholder="my-favorite-recipients"
@@ -235,6 +237,7 @@ exports[`RecipientListForm should disable form elements during submit 1`] = `
           <Field
             component={[Function]}
             disabled={true}
+            helpText="A unique ID for your recipient list, we'll fill this for you but, once set, this can not be modified."
             label="Identifier"
             name="id"
             placeholder="my-favorite-recipients"

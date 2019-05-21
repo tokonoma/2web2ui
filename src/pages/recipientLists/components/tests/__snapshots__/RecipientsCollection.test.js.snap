@@ -9,11 +9,11 @@ exports[`RecipientsCollection renders collection correctly 1`] = `
       Array [
         Object {
           "label": "Address",
-          "sortKey": "email",
+          "sortKey": "address.email",
         },
         Object {
           "label": "Name",
-          "sortKey": "name",
+          "sortKey": "address.name",
         },
       ]
     }
@@ -37,6 +37,7 @@ exports[`RecipientsCollection renders collection correctly 1`] = `
         },
       ]
     }
+    saveCsv={false}
   />
 </Panel>
 `;
