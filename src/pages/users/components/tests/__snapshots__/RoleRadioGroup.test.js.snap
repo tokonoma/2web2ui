@@ -15,7 +15,6 @@ exports[`Component: RoleRadioGroup should render the RadioGroup 1`] = `
   allowSubaccountAssignment={false}
   allowSuperUser={false}
   clearFields={[MockFunction]}
-  developer_and_email_roles={false}
   hasSubaccounts={false}
   options={
     Array [
@@ -26,6 +25,22 @@ exports[`Component: RoleRadioGroup should render the RadioGroup 1`] = `
           Admin
         </strong>,
         "value": "admin",
+      },
+      Object {
+        "disabled": false,
+        "helpText": "Setup and development user. Full access to API Keys, and all other email related setup, sending, and reporting features.",
+        "label": <strong>
+          Developer
+        </strong>,
+        "value": "developer",
+      },
+      Object {
+        "disabled": false,
+        "helpText": "Content and deliverability management user. Has access to Templates, Recipients Lists, Suppressions, AB Testing, and all reporting features.",
+        "label": <strong>
+          Templates
+        </strong>,
+        "value": "email",
       },
       Object {
         "children": false,
