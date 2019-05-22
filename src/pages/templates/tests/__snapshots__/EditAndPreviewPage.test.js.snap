@@ -1,30 +1,28 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`EditAndPreviewPage renders a page 1`] = `
-<Page
-  breadcrumbAction={
-    Object {
-      "content": "Back Link",
-      "to": "/templates",
-    }
-  }
-  empty={Object {}}
+<FullPage
+  breadcrumbRedirectsTo="/templates"
   primaryArea={<EditPrimaryArea />}
   title="Test Template"
 >
-  <Grid>
+  <Grid
+    className="Contents"
+  >
     <Grid.Column
-      sm={6}
-      xs={12}
+      lg={6}
+      md={12}
+      sm={12}
     >
       <EditSection />
     </Grid.Column>
     <Grid.Column
-      sm={6}
-      xs={12}
+      lg={6}
+      md={12}
+      sm={12}
     >
       <PreviewSection />
     </Grid.Column>
   </Grid>
-</Page>
+</FullPage>
 `;
