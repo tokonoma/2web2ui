@@ -14,7 +14,7 @@ export class RecipientsCollection extends Component {
     <Panel.Section>
       <p>There are no valid recipients in your uploaded CSV!</p>
     </Panel.Section>
-  </Panel>)
+  </Panel>);
 
   renderCollection = () => {
     const { recipients } = this.props;
@@ -29,17 +29,18 @@ export class RecipientsCollection extends Component {
   };
 
   render() {
-    const { recipients } = this.props;
+    const { recipients, isPreview } = this.props;
 
     return <>
-      <h1>Preview Contacts</h1>
+      <h1>{isPreview ? 'Preview Contacts' : 'Contacts'}</h1>
       {recipients.length ? this.renderCollection() : this.renderEmptyState()}
     </>;
   }
 }
 
 RecipientsCollection.defaultProps = {
-  recipients: []
+  recipients: [],
+  isPreview: true
 };
 
 export default RecipientsCollection;

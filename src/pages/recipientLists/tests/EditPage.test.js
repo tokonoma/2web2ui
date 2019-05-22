@@ -11,6 +11,7 @@ describe('EditPage', () => {
   beforeEach(() => {
     id = 'fave-recipients';
     props = {
+      change: jest.fn(),
       handleSubmit: jest.fn(),
       match: { params: { id }},
       list: [{

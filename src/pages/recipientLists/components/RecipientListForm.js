@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { autofill, change, Field, isPristine, isSubmitting, isValid } from 'redux-form';
+import { autofill, Field, isPristine, isSubmitting, isValid } from 'redux-form';
 
 import config from 'src/config';
 import { Button, Grid, Panel } from '@sparkpost/matchbox';
@@ -117,6 +117,6 @@ const mapStateToProps = (state, props) => {
   };
 };
 
-const connectedForm = connect(mapStateToProps, { change, autofill })(RecipientListForm);
+const connectedForm = connect(mapStateToProps, { autofill })(RecipientListForm);
 connectedForm.displayName = 'RecipientsListForm';
 export default connectedForm;

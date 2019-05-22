@@ -15,7 +15,8 @@ describe('CreatePage', () => {
       createRecipientList: jest.fn((args) => Promise.resolve({ id: args.id })),
       showAlert: jest.fn(),
       history: { push: jest.fn() },
-      handleSubmit: jest.fn()
+      handleSubmit: jest.fn(),
+      change: jest.fn()
     };
 
     wrapper = shallow(<CreatePage {...props} />);
@@ -24,7 +25,6 @@ describe('CreatePage', () => {
   it('should render correctly', () => {
     expect(wrapper).toMatchSnapshot();
   });
-
 
   describe('parseCsv', () => {
     const csvErrors = [

@@ -59,7 +59,7 @@ export function getRecipientList(id, params) {
     type: 'GET_RECIPIENT_LIST',
     meta: {
       method: 'GET',
-      url: `/v1/recipient-lists/${id}`,
+      url: `/v1/recipient-lists/${id}?show_recipients=true`,
       params
     }
   });

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { formValueSelector, reduxForm } from 'redux-form';
+import { change, formValueSelector, reduxForm } from 'redux-form';
 
 import { Page } from '@sparkpost/matchbox';
 
@@ -15,9 +15,6 @@ import parseRecipientListCsv from './helpers/csv';
 const formName = 'recipientListForm';
 
 export class CreatePage extends Component {
-  state = {
-    recipients: []
-  };
 
   createRecipientsList = ({ name, id, description }) => {
     const { createRecipientList, showAlert, history } = this.props;
@@ -43,13 +40,13 @@ export class CreatePage extends Component {
   };
 
   parseCsv = (csv) => {
-    const { showAlert } = this.props;
+    const { showAlert, change } = this.props;
     return parseRecipientListCsv(csv)
       .then((recipients) => {
-        this.setState({ recipients });
+        change('recipients', recipients);
       })
       .catch((csvErrors) => {
-        this.setState({ recipients: []});
+        change('recipients', []);
         showAlert({ type: 'error', message: csvErrors });
       });
   };
@@ -62,8 +59,7 @@ export class CreatePage extends Component {
   }
 
   render() {
-    const { handleSubmit, csv } = this.props;
-    const { recipients } = this.state;
+    const { handleSubmit, csv, recipients } = this.props;
 
     return <Page
       title='Create Recipient List'
@@ -83,12 +79,14 @@ export class CreatePage extends Component {
 
 const valueSelector = formValueSelector(formName);
 const mapStateToProps = (state, props) => ({
+  recipients: valueSelector(state, 'recipients'),
   csv: valueSelector(state, 'csv')
 });
 
 const mapDispatchToProps = {
   createRecipientList,
-  showAlert
+  showAlert,
+  change
 };
 
 const formOptions = {
