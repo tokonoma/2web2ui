@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EditSection renders tabs and section 1`] = `
+<Panel>
+  <Tabs
+    color="orange"
+    connectBelow={true}
+    onSelect={[Function]}
+    selected={0}
+    tabs={
+      Array [
+        Object {
+          "content": "HTML",
+          "key": "html",
+        },
+        Object {
+          "content": "AMP HTML",
+          "key": "amp_html",
+        },
+        Object {
+          "content": "Text",
+          "key": "text",
+        },
+      ]
+    }
+  />
+  <EditHtmlSection />
+</Panel>
+`;

@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EditAmpSection renders an editor 1`] = `
+<Editor
+  mode="html"
+  name="amp-html-content-editor"
+  onChange={[Function]}
+  value="<html ⚡4email>"
+/>
+`;

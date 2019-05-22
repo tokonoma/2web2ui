@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`DetailsPage should redirect and alert on error 1`] = `
-<Connect(RedirectAndAlert)
+<RedirectAndAlert
   alert={
     Object {
       "message": "Oh no!",

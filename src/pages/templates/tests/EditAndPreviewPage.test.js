@@ -1,26 +1,33 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import useRouter from 'src/hooks/useRouter';
+import useEditorContext from '../hooks/useEditorContext';
 import EditAndPreviewPage from '../EditAndPreviewPage';
 
-jest.mock('src/hooks/useRouter');
+jest.mock('../hooks/useEditorContext');
 
 describe('EditAndPreviewPage', () => {
-  const subject = (props = {}) => shallow(
-    <EditAndPreviewPage
-      {...props}
-    />
-  );
+  const subject = ({ editorState } = {}) => {
+    useEditorContext.mockReturnValue({
+      draft: { id: 'test-template', name: 'Test Template' },
+      hasDraftFailedToLoad: false,
+      isDraftLoading: false,
+      ...editorState
+    });
 
-  beforeEach(() => {
-    useRouter.mockImplementation(() => ({
-      requestParams: {
-        id: 'test-template-id'
-      }
-    }));
-  });
+    return shallow(<EditAndPreviewPage />);
+  };
 
   it('renders a page', () => {
     expect(subject()).toMatchSnapshot();
+  });
+
+  it('renders loading', () => {
+    const wrapper = subject({ editorState: { isDraftLoading: true }});
+    expect(wrapper.find('Loading')).toExist();
+  });
+
+  it('redirects and alerts when fails to load', () => {
+    const wrapper = subject({ editorState: { hasDraftFailedToLoad: true }});
+    expect(wrapper.find('RedirectAndAlert')).toExist();
   });
 });

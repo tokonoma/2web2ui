@@ -409,7 +409,7 @@ const routes = [
     supportDocSearch: 'template'
   },
   {
-    path: '/templates/edit/:id/next',
+    path: '/templates/edit/:id/next/:tabKey?',
     component: templates.EditAndPreviewPage,
     condition: hasGrants('templates/view'),
     layout: App,

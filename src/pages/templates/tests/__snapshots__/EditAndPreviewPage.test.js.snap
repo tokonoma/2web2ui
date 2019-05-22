@@ -9,14 +9,15 @@ exports[`EditAndPreviewPage renders a page 1`] = `
     }
   }
   empty={Object {}}
-  title="test-template-id"
+  primaryArea={<EditPrimaryArea />}
+  title="Test Template"
 >
   <Grid>
     <Grid.Column
       sm={6}
       xs={12}
     >
-      insert edit panel here
+      <EditSection />
     </Grid.Column>
     <Grid.Column
       sm={6}

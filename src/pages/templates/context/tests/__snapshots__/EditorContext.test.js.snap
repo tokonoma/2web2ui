@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EditorContext EditorContextProvider renders children wrapped by a context provider 1`] = `
+<ContextProvider
+  value={
+    Object {
+      "content": Object {
+        "text": "Example",
+      },
+    }
+  }
+>
+  <div>
+    Hello
+  </div>
+</ContextProvider>
+`;

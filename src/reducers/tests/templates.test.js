@@ -46,7 +46,16 @@ const TEST_CASES = {
     },
     type: 'GET_TEMPLATE_PREVIEW_SUCCESS'
   },
+  'updates updating state when update fails': {
+    type: 'UPDATE_TEMPLATE_FAIL'
+  },
+  'updates updating state when update pending': {
+    type: 'UPDATE_TEMPLATE_PENDING'
+  },
   'stores updated draft': {
+    now: {
+      toISOString: () => '2019-05-16T02:03:33.254Z'
+    },
     type: 'UPDATE_TEMPLATE_SUCCESS',
     meta: {
       context: {
@@ -70,7 +79,8 @@ const TEST_CASES = {
           draft: {
             content: {
               html: '<h1>Test Template</h1>'
-            }
+            },
+            last_update_time: '2019-05-16T02:00:06.928Z'
           }
         }
       }
