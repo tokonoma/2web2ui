@@ -1,30 +1,59 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { autofill, change, Field, isPristine, isSubmitting, isValid } from 'redux-form';
+import { Field, SubmissionError, reduxForm } from 'redux-form';
 
-import config from 'src/config';
-import { Button, Grid, Panel } from '@sparkpost/matchbox';
+import _ from 'lodash';
+
+import { Panel, Banner, Button, Error } from '@sparkpost/matchbox';
 import { DownloadLink, TextFieldWrapper } from 'src/components';
-import { maxFileSize, maxLength, required, slug } from 'src/helpers/validation';
-import { slugify } from 'src/helpers/string';
+import { required, maxLength, maxFileSize } from 'src/helpers/validation';
 
 import FileFieldWrapper from 'src/components/reduxFormWrappers/FileFieldWrapper';
+
+import parseRecipientListCsv from '../helpers/csv';
+
+import config from 'src/config';
+
 import exampleRecipientListPath from './example-recipient-list.csv';
-import styles from './Form.module.scss';
+
+const formName = 'recipientListForm';
 
 export class RecipientListForm extends Component {
-  // Fills in identifier field based on Name
-  handleIdFill = (e) => {
-    const { editMode, autofill, formName } = this.props;
-    if (editMode) {
-      return;
-    }
+  parseCsv = (csv) => parseRecipientListCsv(csv)
+    .catch((csvErrors) => {
+      throw new SubmissionError({ _error: csvErrors });
+    });
 
-    autofill(formName, 'id', slugify(e.target.value));
+  // `csv` is an internal field. The outer conponent can access the parsed records in `recipients`.
+  formatValues = (values) => _.omit(values, ['csv']);
+
+  submitWithRecipients = (values, recipients) => this.props.onSubmit({
+    recipients,
+    ...this.formatValues(values)
+  });
+
+  submitWithoutRecipients = (values) => this.props.onSubmit(this.formatValues(values));
+
+  // Parse CSV, store JSON result, collect and show parsing errors
+  preSubmit = (values) => {
+    if (values.csv) {
+      // CSV upload is optional in edit mode
+      return this.parseCsv(values.csv)
+        .then((recipients) => this.submitWithRecipients(values, recipients));
+    } else {
+      return this.submitWithoutRecipients(this.formatValues(values));
+    }
   };
 
+  renderCsvErrors() {
+    const { error } = this.props;
+    return <Banner status='danger' title='CSV Format Errors'>
+      {error.map((err, idx) => <Error key={idx} error={err}/>)}
+    </Banner>;
+  }
+
   render() {
-    const { editMode, pristine, valid, submitting } = this.props;
+    const { editMode, pristine, valid, error, submitting, handleSubmit } = this.props;
 
     const submitDisabled = pristine || !valid || submitting;
 
@@ -39,84 +68,66 @@ export class RecipientListForm extends Component {
     }
 
     return <div>
-      <Panel>
-        <Panel.Section>
-          <Grid className={styles.Spacer}>
-            <Grid.Column>
-              <Field
-                name='name'
-                label='Name'
-                placeholder='My favorite recipients'
-                validate={[required, maxLength(64)]}
-                onChange={this.handleIdFill}
-                disabled={submitting}
-                component={TextFieldWrapper}
-                required
-              />
-            </Grid.Column>
-            <Grid.Column>
-              <Field
-                name='id'
-                label='Identifier'
-                helpText={'A unique ID for your recipient list, we\'ll fill this for you but, once set, this can not be modified.'}
-                placeholder='my-favorite-recipients'
-                validate={[required, maxLength(64), slug]}
-                disabled={submitting || editMode}
-                component={TextFieldWrapper}
-                required
-              />
-            </Grid.Column>
-          </Grid>
-          <Grid className={styles.Spacer}>
-            <Grid.Column>
-              <Field
-                name='description'
-                label='Description'
-                placeholder='All my favorite recipients'
-                validate={[maxLength(1024)]}
-                disabled={submitting}
-                component={TextFieldWrapper}
-              />
-            </Grid.Column>
-          </Grid>
-          <Grid className={styles.Spacer}>
-            <Grid.Column>
-              <Field
-                component={FileFieldWrapper}
-                disabled={submitting}
-                fileType="csv"
-                helpText={
-                  <span>
+      { error && this.renderCsvErrors() }
+      <form onSubmit={handleSubmit(this.preSubmit)}>
+        <Panel>
+          <Panel.Section>
+            <Field
+              name='name'
+              label='Label'
+              placeholder='My favorite recipients'
+              validate={[required, maxLength(64)]}
+              disabled={submitting}
+              component={TextFieldWrapper}
+              required
+            />
+            { ! editMode && <Field
+              name='id'
+              label='Identifier'
+              placeholder='my-favorite-recipients'
+              validate={[required, maxLength(64)]}
+              disabled={submitting}
+              component={TextFieldWrapper}
+              required
+            /> }
+            <Field
+              name='description'
+              label='Description'
+              placeholder='All my favorite recipients'
+              validate={[maxLength(1024)]}
+              disabled={submitting}
+              component={TextFieldWrapper}
+            />
+            <Field
+              component={FileFieldWrapper}
+              disabled={submitting}
+              fileType="csv"
+              helpText={
+                <span>
                   You can download
                   a <DownloadLink href={exampleRecipientListPath}>CSV template here</DownloadLink> to
                   use when formatting your recipient list for upload.
-                  </span>
-                }
-                label={uploadHint}
-                name="csv"
-                validate={uploadValidators}
-                required
-              />
-            </Grid.Column>
-          </Grid>
-        </Panel.Section>
-        <Panel.Section>
-          <Button primary submit disabled={submitDisabled}>{actionText} Recipient List</Button>
-        </Panel.Section>
-      </Panel>
+                </span>
+              }
+              label={uploadHint}
+              name="csv"
+              validate={uploadValidators}
+              required
+            />
+          </Panel.Section>
+          <Panel.Section>
+            <Button primary submit disabled={submitDisabled}>{actionText} Recipient List</Button>
+          </Panel.Section>
+        </Panel>
+      </form>
     </div>;
   }
 }
 
-const mapStateToProps = (state, props) => {
-  const { formName } = props;
-  return {
-    pristine: isPristine(formName)(state),
-    valid: isValid(formName)(state),
-    submitting: isSubmitting(formName)(state)
-  };
-};
+const WrappedForm = reduxForm({ form: formName })(RecipientListForm);
 
-const connectedForm = connect(mapStateToProps, { change, autofill })(RecipientListForm);
-connectedForm.displayName = 'RecipientsListForm';
-export default connectedForm;
+const mapStateToProps = (state, props) => ({
+  initialValues: props.editMode ? state.recipientLists.current : {}
+});
+
+export default connect(mapStateToProps)(WrappedForm);

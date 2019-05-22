@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { reduxForm } from 'redux-form';
+
 import { Link, withRouter } from 'react-router-dom';
 
 import { Page } from '@sparkpost/matchbox';
@@ -67,7 +67,7 @@ export class EditPage extends Component {
   }
 
   render() {
-    const { loading, handleSubmit } = this.props;
+    const { loading } = this.props;
 
     if (loading) {
       return <Loading />;
@@ -81,10 +81,7 @@ export class EditPage extends Component {
         Component: Link,
         to: '/lists/recipient-lists' }}>
 
-      <form onSubmit={handleSubmit(this.updateRecipientList)}>
-        <RecipientListForm formName={formName} editMode={true} />
-      </form>
-
+      <RecipientListForm editMode={true} onSubmit={this.updateRecipientList} />
 
       <DeleteModal
         open={this.state.showDelete}
@@ -101,8 +98,7 @@ const mapStateToProps = (state) => ({
   current: state.recipientLists.current,
   loading: state.recipientLists.currentLoading,
   list: state.recipientLists.list,
-  error: state.recipientLists.error,
-  initialValues: state.recipientLists.current
+  error: state.recipientLists.error
 });
 
 const mapDispatchToProps = {
@@ -111,9 +107,5 @@ const mapDispatchToProps = {
   deleteRecipientList,
   showAlert
 };
-const formName = 'recipientListForm';
-const formOptions = {
-  form: formName,
-  enableReinitialize: true
-};
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(reduxForm(formOptions)(EditPage)));
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(EditPage));
