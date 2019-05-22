@@ -11,7 +11,6 @@ describe('EditPage', () => {
   beforeEach(() => {
     id = 'fave-recipients';
     props = {
-      handleSubmit: jest.fn(),
       match: { params: { id }},
       list: [{
         id,
@@ -42,13 +41,25 @@ describe('EditPage', () => {
   });
 
   it('should load a recipient list', () => {
-    wrapper.setProps({ current: null, loading: true });
+    const propsLoading = {
+      ...props,
+      current: null,
+      loading: true
+    };
+
+    const wrapper = shallow(<EditPage {...propsLoading} />);
+    expect(wrapper).toMatchSnapshot();
     expect(props.getRecipientList).toHaveBeenCalled();
   });
 
-  it('should handle a missing list id', async () => {
+  it('should handle a missing list id', async() => {
     props.getRecipientList.mockImplementationOnce(() => Promise.reject());
-    wrapper.setProps({ current: null, loading: true });
+    const propsLoading = {
+      ...props,
+      current: null,
+      loading: true
+    };
+    const wrapper = shallow(<EditPage {...propsLoading} />);
     await wrapper.instance().componentDidMount();
     expect(props.history.push).toHaveBeenCalledWith('/lists/recipient-lists');
   });
@@ -56,27 +67,27 @@ describe('EditPage', () => {
   it('should show a delete modal', () => {
     wrapper.instance().toggleDelete();
     wrapper.update();
-    expect(wrapper.find('DeleteModal')).toMatchSnapshot();
+    expect(wrapper).toMatchSnapshot();
   });
 
-  it('should delete a recipient list', async () => {
+  it('should delete a recipient list', async() => {
     await wrapper.instance().deleteRecipientList();
     expect(props.deleteRecipientList).toHaveBeenCalled();
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should redirect after delete', async () => {
+  it('should redirect after delete', async() => {
     await wrapper.instance().deleteRecipientList();
     expect(props.history.push).toHaveBeenCalled();
   });
 
-  it('should update a recipient list', async () => {
+  it('should update a recipient list', async() => {
     await wrapper.instance().updateRecipientList();
     expect(props.updateRecipientList).toHaveBeenCalled();
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should redirect after update', async () => {
+  it('should redirect after update', async() => {
     await wrapper.instance().updateRecipientList();
     expect(props.history.push).toHaveBeenCalled();
   });
