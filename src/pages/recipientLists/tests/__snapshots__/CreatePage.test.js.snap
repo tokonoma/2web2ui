@@ -12,8 +12,10 @@ exports[`CreatePage should render correctly 1`] = `
   empty={Object {}}
   title="Create Recipient List"
 >
-  <Connect(ReduxForm)
-    onSubmit={[Function]}
-  />
+  <form>
+    <RecipientsListForm
+      formName="recipientListForm"
+    />
+  </form>
 </Page>
 `;

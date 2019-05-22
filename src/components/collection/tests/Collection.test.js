@@ -31,7 +31,8 @@ describe('Component: Collection', () => {
       },
       history: {
         push: pushStub
-      }
+      },
+      saveCsv: true
     };
   });
 
@@ -70,6 +71,30 @@ describe('Component: Collection', () => {
     const wrapper = shallow(<Collection {...props} />);
     expect(wrapper).toMatchSnapshot();
     expect(wrapper.find(FilterBox)).toHaveLength(1);
+  });
+
+  describe('save as csv button', () => {
+    let wrapper;
+    beforeEach(() => {
+      addRows(1);
+      wrapper = shallow(<Collection {...props} />);
+    });
+
+    it('should render save as csv button when saveCsv prop is unset', () => {
+      wrapper.setProps({ pagination: true });
+      expect(wrapper.find('CollectionPagination').prop('saveCsv')).toBe(true);
+    });
+
+    it('should render save as csv button when saveCsv is true', () => {
+      wrapper.setProps({ pagination: true, saveCsv: true });
+      expect(wrapper.find('CollectionPagination').prop('saveCsv')).toBe(true);
+    });
+
+    it('should not render save as csv button when saveCsv is false', () => {
+      wrapper.setProps({ pagination: true, saveCsv: false });
+      expect(wrapper.find('CollectionPagination').prop('saveCsv')).toBe(false);
+    });
+
   });
 
   describe('state changes', () => {

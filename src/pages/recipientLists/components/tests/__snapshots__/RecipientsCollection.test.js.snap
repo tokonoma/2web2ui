@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RecipientsCollection renders collection correctly 1`] = `
+<Fragment>
+  <h1>
+    Preview Contacts
+  </h1>
+  <TableCollection
+    columns={
+      Array [
+        Object {
+          "label": "Address",
+          "sortKey": "address.email",
+        },
+        Object {
+          "label": "Name",
+          "sortKey": "address.name",
+        },
+      ]
+    }
+    defaultSortColumn={null}
+    defaultSortDirection="asc"
+    getRowData={[Function]}
+    pagination={true}
+    rows={
+      Array [
+        Object {
+          "address": Object {
+            "email": "foo@domain.com",
+            "name": "foo",
+          },
+        },
+        Object {
+          "address": Object {
+            "email": "bar@domain.com",
+            "name": "bar",
+          },
+        },
+      ]
+    }
+    saveCsv={false}
+  />
+</Fragment>
+`;

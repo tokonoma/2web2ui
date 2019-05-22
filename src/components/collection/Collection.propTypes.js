@@ -30,6 +30,7 @@ export default {
   ]),
   perPageButtons: PropTypes.array,
   pagination: PropTypes.bool,
+  saveCsv: PropTypes.bool,
   filterBox: PropTypes.oneOfType([
     PropTypes.bool,
     PropTypes.object
