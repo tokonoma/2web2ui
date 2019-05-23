@@ -210,7 +210,7 @@ exports[`IP Pools List Page should render the IP warm-up banner correctly 1`] = 
 >
   <div>
     <p>
-      In order to establish a positive spending reputation, warm up new dedicated IP addresses by gradually sending more emails.
+      In order to establish a positive sending reputation, warm up new dedicated IP addresses by gradually sending more emails.
     </p>
     <Button
       external={true}
