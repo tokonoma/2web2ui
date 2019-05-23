@@ -14,20 +14,21 @@ const threshold = {
   error: { comparator: 'lt', target: 66.6 }
 };
 
+const emails = 'sparky@sparkpost.com, test@foo.com';
+const emailAsArray = ['sparky@sparkpost.com', 'test@foo.com'];
+
 const input = {
   id: '19447300-3b8b-11e9-b749-6d43cdcd6095',
   name: 'JimAlertSignalsThresh',
   alert_metric: 'signals_health_threshold',
   subaccount,
-  email_addresses: 'sparky@sparkpost.com, test@foo.com',
+  email_addresses: emails,
   facet_name: 'ip_pool',
   facet_value: 'abc',
   threshold,
   criteria_metric: 'threshold',
   enabled: true
 };
-
-const emailAsArray = ['sparky@sparkpost.com', 'test@foo.com'];
 
 describe('Formatter', () => {
   cases('should initialize alert_subaccount correctly for', ({ input, expected }) => {
@@ -49,7 +50,7 @@ describe('Formatter', () => {
         alert_subaccount: -1,
         email_addresses: emailAsArray,
         facet_name: 'ALL',
-        facet_value: undefined }
+        facet_value: '' }
     }
   });
 
@@ -57,7 +58,8 @@ describe('Formatter', () => {
     const values = {
       alert_metric: 'monthly_sending_limit',
       subaccount,
-      threshold
+      threshold,
+      email_addresses: emails
     };
     const returnValue = formatActionData(values);
     expect(returnValue.alert_subaccount).toBeUndefined();
@@ -74,7 +76,8 @@ describe('Formatter', () => {
       subaccount,
       threshold,
       facet_name: 'ALL',
-      facet_value: ''
+      facet_value: '',
+      email_addresses: emails
     };
     const returnValue = formatActionData(values);
     expect(returnValue.threshold.error.comparator).toEqual('gt');
