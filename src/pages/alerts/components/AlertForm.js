@@ -20,7 +20,7 @@ import { MAILBOX_PROVIDERS } from 'src/constants';
 import _ from 'lodash';
 
 // Helpers & Validation
-import { domain, required, integer, minNumber, maxLength, numberBetween } from 'src/helpers/validation';
+import { domain, required, integer, maxLength, numberBetween } from 'src/helpers/validation';
 import validateEmailList from '../helpers/validateEmailList';
 
 const formName = 'alertForm';
@@ -86,7 +86,9 @@ export class AlertForm extends Component {
       if (isInteger) {
         validators.push(integer);
       }
-      validators.push(isThreshold ? numberBetween(0, 100) : minNumber(0));
+      if (isThreshold) {
+        validators.push(numberBetween(0, 100));
+      }
       return validators;
     };
 
@@ -216,7 +218,7 @@ export class AlertForm extends Component {
             <br/>
             <Field
               name='email_addresses'
-              label='Notify'
+              label='Email Addresses to Notify'
               component={TextFieldWrapper}
               disabled={submitting}
               validate={[required, validateEmailList]}
