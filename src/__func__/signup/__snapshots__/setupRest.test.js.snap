@@ -135,5 +135,25 @@ Array [
       "url": "/v1/authenticate/grants",
     },
   ],
+  Array [
+    Object {
+      "data": Object {
+        "grants": Array [
+          "smtp/inject",
+          "transmissions/modify",
+          "templates/view",
+        ],
+        "label": "Send Email Key (auto-generated)",
+        "valid_ips": Array [],
+      },
+      "headers": Object {
+        "Authorization": "mock-access-token",
+      },
+      "method": "post",
+      "params": undefined,
+      "responseType": "json",
+      "url": "/v1/api-keys",
+    },
+  ],
 ]
 `;
