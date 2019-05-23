@@ -31,7 +31,7 @@ export default async function mountRoute(route, { authenticated = true } = {}) {
   const axiosMock = axios.create();
 
   if (authenticated) {
-    await store.dispatch(authenticate('test-username', 'password'));
+    await store.dispatch(authenticate('test-username', 'test-password'));
     await store.dispatch(initializeAccessControl());
   }
 
