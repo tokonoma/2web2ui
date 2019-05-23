@@ -50,7 +50,7 @@ describe('Formatter', () => {
         alert_subaccount: -1,
         email_addresses: emailAsArray,
         facet_name: 'ALL',
-        facet_value: '' }
+        facet_value: null }
     }
   });
 
@@ -76,7 +76,7 @@ describe('Formatter', () => {
       subaccount,
       threshold,
       facet_name: 'ALL',
-      facet_value: '',
+      facet_value: null,
       email_addresses: emails
     };
     const returnValue = formatActionData(values);

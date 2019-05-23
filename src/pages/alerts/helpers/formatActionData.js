@@ -18,7 +18,7 @@ export default function (values) {
     case 'all':
     default:
       keysToChange.facet_name = 'ALL';
-      keysToChange.facet_value = '';
+      keysToChange.facet_value = null;
       keysToChange.alert_subaccount = -1;
       break;
   }
