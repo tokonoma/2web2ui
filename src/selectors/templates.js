@@ -11,8 +11,15 @@ export const selectTemplateById = (state, props) => state.templates.byId[props.m
 
 export const selectDraftTemplate = (state, id) => _.get(state, ['templates', 'byId', id, 'draft']);
 export const selectPublishedTemplate = (state, id) => _.get(state, ['templates', 'byId', id, 'published']);
-export const selectDraftTemplatePreview = (state, id) => state.templates.contentPreview.draft[id];
-export const selectPublishedTemplatePreview = (state, id) => state.templates.contentPreview.published[id];
+export const selectDraftTemplatePreview = (state, id, defaultValue) => (
+  state.templates.contentPreview.draft[id] || defaultValue
+);
+export const selectPublishedTemplatePreview = (state, id, defaultValue) => (
+  state.templates.contentPreview.published[id] || defaultValue
+);
+export const selectPreviewLineErrors = (state) => (
+  _.get(state, 'templates.contentPreview.error.response.data.errors', [])
+);
 
 export const selectDefaultTestData = () => JSON.stringify(config.templates.testData, null, 2);
 export const selectTemplateTestData = (state) => JSON.stringify(state.templates.testData || config.templates.testData, null, 2);

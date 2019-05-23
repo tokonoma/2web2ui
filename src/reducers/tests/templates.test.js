@@ -46,6 +46,10 @@ const TEST_CASES = {
     },
     type: 'GET_TEMPLATE_PREVIEW_SUCCESS'
   },
+  'stores preview error': {
+    type: 'GET_TEMPLATE_PREVIEW_FAIL',
+    payload: new Error('Oh no!')
+  },
   'updates updating state when update fails': {
     type: 'UPDATE_TEMPLATE_FAIL'
   },

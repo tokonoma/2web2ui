@@ -23,7 +23,7 @@ exports[`EditAndPreviewPage renders a page 1`] = `
       sm={6}
       xs={12}
     >
-      insert preview panel here
+      <PreviewSection />
     </Grid.Column>
   </Grid>
 </Page>

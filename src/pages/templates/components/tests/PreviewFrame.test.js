@@ -41,10 +41,20 @@ describe('PreviewFrame', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('writes content to iframe document', () => {
+  it('writes content to iframe document on mount', () => {
     const write = jest.fn();
     createWrapper({ content: testContent, contentDocument: { write }});
     expect(write).toHaveBeenCalledWith(testContent);
+  });
+
+  it('writes content to iframe document on update', () => {
+    const write = jest.fn();
+    const updatedContent = '<h1>Updated!!</h1>';
+    const wrapper = createWrapper({ content: testContent, contentDocument: { write }});
+
+    wrapper.setProps({ content: updatedContent });
+
+    expect(write).toHaveBeenCalledWith(updatedContent);
   });
 
   it('sets iframe height after it loads', () => {

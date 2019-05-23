@@ -114,18 +114,20 @@ describe('Templates selectors', () => {
     'returns undefined when unknown': { id: 'unknown' }
   });
 
-  cases('.selectDraftTemplatePreview', ({ id }) => {
-    expect(selector.selectDraftTemplatePreview(store, id)).toMatchSnapshot();
+  cases('.selectDraftTemplatePreview', ({ defaultValue, id }) => {
+    expect(selector.selectDraftTemplatePreview(store, id, defaultValue)).toMatchSnapshot();
   }, {
     'returns preview of draft template': { id: 'ape' },
-    'returns undefined when unknown': { id: 'unknown' }
+    'returns undefined when unknown': { id: 'unknown' },
+    'returns default value when unknown': { id: 'unknown', defaultValue: {}}
   });
 
-  cases('.selectPublishedTemplatePreview', ({ id }) => {
-    expect(selector.selectPublishedTemplatePreview(store, id)).toMatchSnapshot();
+  cases('.selectPublishedTemplatePreview', ({ defaultValue, id }) => {
+    expect(selector.selectPublishedTemplatePreview(store, id, defaultValue)).toMatchSnapshot();
   }, {
     'returns preview of draft template': { id: 'ape' },
-    'returns undefined when unknown': { id: 'unknown' }
+    'returns undefined when unknown': { id: 'unknown' },
+    'returns default value when unknown': { id: 'unknown', defaultValue: {}}
   });
 
   describe('cloneTemplate', () => {
@@ -203,6 +205,23 @@ describe('Templates selectors', () => {
     it('should return published templates if no subaccounts exist', () => {
       store.currentUser.has_subaccounts = false;
       expect(selector.selectPublishedTemplatesBySubaccount(store)).toMatchSnapshot();
+    });
+  });
+
+  describe('selectPreviewLineErrors', () => {
+    it('should return an empty ', () => {
+      expect(selector.selectPreviewLineErrors(store)).toEqual([]);
+    });
+
+    it('should return an array of errors', () => {
+      const errors = [
+        { line: 1, message: 'Oh no!' },
+        { line: 2, message: 'Oh no!' }
+      ];
+
+      store.templates.contentPreview.error = { response: { data: { errors }}};
+
+      expect(selector.selectPreviewLineErrors(store)).toEqual(errors);
     });
   });
 });

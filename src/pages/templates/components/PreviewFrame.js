@@ -40,6 +40,12 @@ export default class PreviewFrame extends Component {
     this.writeContent();
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.content !== prevProps.content) {
+      this.writeContent();
+    }
+  }
+
   // Calculate height of loaded content and manually set iframe height to match to avoid
   // a scrollbar
   // @see http://www.dyn-web.com/tutorials/iframes/height/

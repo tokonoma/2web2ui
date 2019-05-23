@@ -1,7 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getDraft, getPublished, update } from 'src/actions/templates';
-import { selectDraftTemplate, selectPublishedTemplate } from 'src/selectors/templates';
+import { getDraft, getPreview, getPublished, update } from 'src/actions/templates';
+import {
+  selectDraftTemplate,
+  selectDraftTemplatePreview,
+  selectPreviewLineErrors,
+  selectPublishedTemplate
+} from 'src/selectors/templates';
 import { EditorContextProvider } from '../context/EditorContext';
 import EditAndPreviewPage from '../EditAndPreviewPage';
 
@@ -19,14 +24,18 @@ const mapStateToProps = (state, props) => {
   return {
     draft,
     hasDraftFailedToLoad: Boolean(state.templates.getDraftError),
+    hasFailedToPreview: Boolean(state.templates.contentPreview.error),
     isDraftLoading: !draft || Boolean(state.templates.getDraftLoading),
     isDraftUpdating: Boolean(state.templates.updating),
+    preview: selectDraftTemplatePreview(state, id, {}),
+    previewLineErrors: selectPreviewLineErrors(state),
     published
   };
 };
 
 const mapDispatchToProps = {
   getDraft,
+  getPreview,
   getPublished,
   updateDraft: update
 };

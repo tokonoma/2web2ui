@@ -54,6 +54,19 @@ Object {
 }
 `;
 
+exports[`Template reducer stores preview error 1`] = `
+Object {
+  "byId": Object {},
+  "contentPreview": Object {
+    "draft": Object {},
+    "error": [Error: Oh no!],
+    "published": Object {},
+  },
+  "list": Array [],
+  "listError": null,
+}
+`;
+
 exports[`Template reducer stores preview of draft with obj from 1`] = `
 Object {
   "byId": Object {},
@@ -68,6 +81,7 @@ Object {
         "subject": "Preview of Test Template",
       },
     },
+    "error": undefined,
     "published": Object {},
   },
   "list": Array [],
@@ -89,6 +103,7 @@ Object {
         "subject": "Preview of Test Template",
       },
     },
+    "error": undefined,
     "published": Object {},
   },
   "list": Array [],

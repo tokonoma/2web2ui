@@ -4,6 +4,7 @@ import { RedirectAndAlert } from 'src/components/globalAlert';
 import Loading from 'src/components/loading';
 import EditPrimaryArea from './components/EditPrimaryArea';
 import EditSection from './components/EditSection';
+import PreviewSection from './components/PreviewSection';
 import useEditorContext from './hooks/useEditorContext';
 
 const EditAndPreviewPage = () => {
@@ -33,7 +34,7 @@ const EditAndPreviewPage = () => {
           <EditSection />
         </Grid.Column>
         <Grid.Column xs={12} sm={6}>
-          insert preview panel here
+          <PreviewSection />
         </Grid.Column>
       </Grid>
     </Page>

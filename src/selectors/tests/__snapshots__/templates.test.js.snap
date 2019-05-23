@@ -10,6 +10,8 @@ Object {
 
 exports[`Templates selectors .selectDraftTemplate returns undefined when unknown 1`] = `undefined`;
 
+exports[`Templates selectors .selectDraftTemplatePreview returns default value when unknown 1`] = `Object {}`;
+
 exports[`Templates selectors .selectDraftTemplatePreview returns preview of draft template 1`] = `
 Object {
   "html": "<h1>Southeastern Asia</h1>",
@@ -28,6 +30,8 @@ Object {
 `;
 
 exports[`Templates selectors .selectPublishedTemplate returns undefined when unknown 1`] = `undefined`;
+
+exports[`Templates selectors .selectPublishedTemplatePreview returns default value when unknown 1`] = `Object {}`;
 
 exports[`Templates selectors .selectPublishedTemplatePreview returns preview of draft template 1`] = `
 Object {
