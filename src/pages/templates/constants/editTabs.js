@@ -6,20 +6,17 @@ const editTabs = [
   {
     content: 'HTML',
     key: 'html',
-    render: EditHtmlSection,
-    routeKey: 'html'
+    render: EditHtmlSection
   },
   {
     content: 'AMP HTML',
     key: 'amp_html',
-    render: EditAmpSection,
-    routeKey: 'amp-html'
+    render: EditAmpSection
   },
   {
     content: 'Text',
     key: 'text',
-    render: EditTextSection,
-    routeKey: 'text'
+    render: EditTextSection
   }
 ];
 
