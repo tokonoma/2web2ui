@@ -58,8 +58,8 @@ describe('Alert Form Component', () => {
       expect(wrapper.find({ name: 'facet_value' }).props().connectLeft.props.name).toEqual('facet_name');
     });
 
-    it('should only show facets select when assignTo is NOT set to ALL', () => {
-      wrapper.setProps({ assignTo: 'ALL' });
+    it('should only show facets select when assignTo is NOT set to all', () => {
+      wrapper.setProps({ assignTo: 'all' });
       expect(wrapper.find({ name: 'facet_value' })).not.toExist();
       wrapper.setProps({ assignTo: 'master' });
       expect(wrapper.find({ name: 'facet_value' }).props().connectLeft.props.name).toEqual('facet_name');
@@ -135,8 +135,8 @@ describe('Alert Form Component', () => {
 
     it('should normalize target', () => {
       const normalize = wrapper.find({ name: 'threshold.error.target' }).props().normalize;
-      expect(normalize(1, null, { alert_metric: 'signals_health_wow' })).toEqual(-1);
-      expect(normalize(-1, null, { alert_metric: 'signals_health_wow' })).toEqual(-1);
+      expect(normalize(1, null, { alert_metric: 'signals_health_wow' })).toEqual(1);
+      expect(normalize(-1, null, { alert_metric: 'signals_health_wow' })).toEqual(1);
       expect(normalize(1, null, { alert_metric: 'monthly_sending_limit' })).toEqual(1);
     });
   });

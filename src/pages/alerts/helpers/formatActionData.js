@@ -1,28 +1,50 @@
 import _ from 'lodash';
 
 export default function (values) {
-  const { email_addresses, alert_metric, threshold, assignTo, subaccount = '' } = values;
+  const keysToOmit = [];
+  const keysToChange = {};
+  const { email_addresses, alert_metric, threshold, assignTo, subaccount = {}} = values;
+  //We use _split here because it works for both Arrays and Strings
   const splitAddresses = _.split(email_addresses,',');
-  values.email_addresses = _.map(splitAddresses, (splitAddress) => _.trim(splitAddress));
+  keysToChange.email_addresses = splitAddresses.map((splitAddress) => splitAddress.trim());
+
   switch (assignTo) {
     case 'master':
-      values.alert_subaccount = 0;
+      keysToChange.alert_subaccount = 0;
       break;
     case 'subaccount':
-      values.alert_subaccount = parseInt(subaccount.id);
+      keysToChange.alert_subaccount = parseInt(subaccount.id);
       break;
     case 'all':
     default:
-      values.alert_subaccount = -1;
+      keysToChange.facet_name = 'ALL';
+      keysToChange.facet_value = null;
+      keysToChange.alert_subaccount = -1;
+      break;
   }
 
   switch (alert_metric) {
     case 'monthly_sending_limit':
-      values.threshold.error.target = parseInt(threshold.error.target);
+      keysToChange.threshold = threshold;
+      keysToChange.threshold.error = {
+        target: parseInt(threshold.error.target),
+        comparator: 'gt'
+      };
+      keysToOmit.push('facet_name', 'facet_value', 'alert_subaccount');
+      break;
+    case 'signals_health_dod':
+    case 'signals_health_wow':
+      keysToChange.threshold = threshold;
+      keysToChange.threshold.error = {
+        target: Math.abs(parseInt(threshold.error.target)),
+        comparator: 'gt'
+      };
       break;
     default:
-      values.threshold.error.target = parseFloat(threshold.error.target);
+      keysToChange.threshold = threshold;
+      keysToChange.threshold.error.target = parseFloat(threshold.error.target);
+      break;
   }
 
-  return values;
+  return _.omit({ ...values, ...keysToChange }, keysToOmit);
 }
