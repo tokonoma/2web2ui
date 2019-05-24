@@ -1,4 +1,7 @@
-import { Home, InsertChart, Code, MailOutline, Language, Settings, Compare, NotificationsActive, Signal, VerifiedUser } from '@sparkpost/matchbox-icons';
+/* eslint-disable max-lines */
+
+import { Home, InsertChart, Code, MailOutline, Language, Settings, Compare, NotificationsActive, Signal, FilterNone, VerifiedUser } from '@sparkpost/matchbox-icons';
+import { hasUiOption } from 'src/helpers/conditions/account';
 
 export default [
   {
@@ -59,6 +62,28 @@ export default [
       {
         label: 'Engagement Recency',
         to: '/signals/engagement'
+      }
+    ]
+  },
+  {
+    label: 'Campaigns',
+    to: '/campaigns',
+    icon: FilterNone,
+    tag: 'new',
+    condition: hasUiOption('templatesV2'),
+    children: [
+      {
+        label: 'Templates',
+        to: '/templates'
+      },
+      {
+        label: 'A/B Testing',
+        to: '/ab-testing'
+      },
+      {
+        label: 'Snippets',
+        to: '/snippets',
+        tag: 'labs'
       }
     ]
   },
