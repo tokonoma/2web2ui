@@ -16,7 +16,7 @@ export const EditorContextProvider = ({
   value: { getDraft, getPublished, ...value }
 }) => {
   const { requestParams } = useRouter();
-  const state = chainHooks(
+  const pageValue = chainHooks(
     () => value,
     useEditorContent,
     useEditorNavigation,
@@ -30,7 +30,7 @@ export const EditorContextProvider = ({
   }, [getDraft, getPublished, requestParams.id, requestParams.subaccount]);
 
   return (
-    <EditorContext.Provider value={state}>
+    <EditorContext.Provider value={pageValue}>
       {children}
     </EditorContext.Provider>
   );
