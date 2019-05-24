@@ -1,8 +1,12 @@
 @import '~@sparkpost/matchbox/src/styles/config.scss';
 
 .PreviewContainer {
-  height: 550px;
-  min-height: 50vh;
+  padding: spacing();
+}
+
+.PreviewScreen {
+  border: 1px solid color(grey, 8);
+  height: 90vh; // must match editor wrapper
   overflow-y: scroll;
   position: relative;
 }
