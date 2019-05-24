@@ -7,8 +7,8 @@ import {
   selectPreviewLineErrors,
   selectPublishedTemplate
 } from 'src/selectors/templates';
-import { EditorContextProvider } from '../context/EditorContext';
-import EditAndPreviewPage from '../EditAndPreviewPage';
+import { EditorContextProvider } from './context/EditorContext';
+import EditAndPreviewPage from './EditAndPreviewPage';
 
 const EditAndPreviewPageContainer = (props) => (
   <EditorContextProvider value={props}>

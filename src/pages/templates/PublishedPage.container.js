@@ -9,7 +9,7 @@ import { selectSubaccountIdFromQuery, selectSubaccountFromQuery } from 'src/sele
 import { hasSubaccounts } from 'src/selectors/subaccounts';
 import { showAlert } from 'src/actions/globalAlert';
 
-import PublishedPage from '../PublishedPage';
+import PublishedPage from './PublishedPage';
 
 const FORM_NAME = 'templatePublished';
 
