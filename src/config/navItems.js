@@ -1,7 +1,6 @@
-/* eslint-disable max-lines */
+import { Home, InsertChart, Code, MailOutline, Language, Settings, Compare, NotificationsActive, Signal, VerifiedUser } from '@sparkpost/matchbox-icons';
 
-import { Home, InsertChart, Code, MailOutline, Language, Settings, Compare, NotificationsActive, Signal, FilterNone, VerifiedUser } from '@sparkpost/matchbox-icons';
-import { hasUiOption } from 'src/helpers/conditions/account';
+import campaignNavItems from './campaignNavItems';
 
 export default [
   {
@@ -66,32 +65,15 @@ export default [
     ]
   },
   {
-    label: 'Campaigns',
-    to: '/campaigns',
-    icon: FilterNone,
-    tag: 'new',
-    condition: hasUiOption('templatesV2'),
-    children: [
-      {
-        label: 'Templates',
-        to: '/templates'
-      },
-      {
-        label: 'A/B Testing',
-        to: '/ab-testing'
-      },
-      {
-        label: 'Snippets',
-        to: '/snippets',
-        tag: 'labs'
-      }
-    ]
+    ...campaignNavItems
   },
+  //TODO remove it in TR-1455
   {
     label: 'Templates',
     to: '/templates',
     icon: Code
   },
+  //TODO remove it in TR-1455
   {
     label: 'A/B Testing',
     to: '/ab-testing',
@@ -161,6 +143,7 @@ export default [
     tag: 'new',
     icon: NotificationsActive
   },
+  //TODO remove it in TR-1455
   {
     label: 'Snippets',
     to: '/snippets',
