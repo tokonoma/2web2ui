@@ -1,4 +1,3 @@
-
 import { hasUiOption } from 'src/helpers/conditions/account';
 import { FilterNone } from '@sparkpost/matchbox-icons/matchbox-icons';
 

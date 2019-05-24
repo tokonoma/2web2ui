@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import classnames from 'classnames';
-import Item from './components/Item';
+import NavItem from './components/NavItem';
 import Top from './components/Top';
 import { WindowSizeContext } from 'src/context/WindowSize';
 import { selectNavItems } from 'src/selectors/navItems';
@@ -15,7 +15,7 @@ export class Navigation extends Component {
 
   renderItems() {
     return this.props.navItems.map((item, key) => (
-      <Item {...item} toggleMobileNav={this.toggleMobileNav} location={this.props.location} key={key} />
+      <NavItem {...item} toggleMobileNav={this.toggleMobileNav} location={this.props.location} key={key} />
     ));
   }
 
