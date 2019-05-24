@@ -15,7 +15,7 @@ const Editor = ({ editorProps = {}, setOptions = {}, mode = 'text', value, ...pr
         $blockScrolling: Infinity
       }}
       fontSize={12}
-      height="90vh"
+      height="100%" // must set height on wrapper
       highlightActiveLine
       // note, must global import modes
       mode={mode}
