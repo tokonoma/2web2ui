@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EditNavigation renders navigation with primary area 1`] = `
+<div
+  className="Navigation"
+>
+  <div
+    className="NavigationLinks"
+  >
+    <UnstyledLink
+      className="NavigationLink NavigationActiveLink"
+      key="contents"
+      onClick={[Function]}
+    >
+      Contents
+    </UnstyledLink>
+    <UnstyledLink
+      className="NavigationLink"
+      key="settings"
+      onClick={[Function]}
+    >
+      Settings
+    </UnstyledLink>
+  </div>
+  <div
+    className="NavigationPrimaryArea"
+  >
+    <button>
+      Click Me
+    </button>
+  </div>
+</div>
+`;

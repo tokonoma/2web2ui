@@ -1,14 +1,14 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import useEditorContext from '../../hooks/useEditorContext';
-import EditPrimaryArea from '../EditPrimaryArea';
+import EditContentsPrimaryArea from '../EditContentsPrimaryArea';
 
 jest.mock('../../hooks/useEditorContext');
 
-describe('EditPrimaryArea', () => {
+describe('EditContentsPrimaryArea', () => {
   const subject = ({ editorState = {}} = {}) => {
     useEditorContext.mockReturnValue(editorState);
-    return shallow(<EditPrimaryArea />);
+    return shallow(<EditContentsPrimaryArea />);
   };
 
   it('renders save button', () => {

@@ -8,6 +8,7 @@ jest.mock('../hooks/useEditorContext');
 describe('EditAndPreviewPage', () => {
   const subject = ({ editorState } = {}) => {
     useEditorContext.mockReturnValue({
+      currentNavigationIndex: 0,
       draft: { id: 'test-template', name: 'Test Template' },
       hasDraftFailedToLoad: false,
       isDraftLoading: false,

@@ -1,6 +1,7 @@
 import React, { createContext, useEffect } from 'react';
 import useRouter from 'src/hooks/useRouter';
 import useEditorContent from '../hooks/useEditorContent';
+import useEditorNavigation from '../hooks/useEditorNavigation';
 import useEditorPreview from '../hooks/useEditorPreview';
 import useEditorTabs from '../hooks/useEditorTabs';
 
@@ -18,6 +19,7 @@ export const EditorContextProvider = ({
   const state = chainHooks(
     () => value,
     useEditorContent,
+    useEditorNavigation,
     useEditorPreview,
     useEditorTabs
   );

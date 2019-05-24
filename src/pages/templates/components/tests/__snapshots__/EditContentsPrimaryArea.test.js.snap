@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`EditPrimaryArea renders save button 1`] = `
+exports[`EditContentsPrimaryArea renders save button 1`] = `
 <Button
   onClick={[Function]}
   primary={true}

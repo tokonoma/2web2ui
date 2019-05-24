@@ -13,7 +13,7 @@ const EditSection = () => {
         color="blue"
         selected={currentTabIndex}
         onSelect={(nextTabIndex) => { setTab(nextTabIndex); }}
-        tabs={tabs.map(({ render, routeKey, ...tab }) => tab)}
+        tabs={tabs.map(({ render, ...tab }) => tab)}
       />
       <TabComponent />
     </Panel>

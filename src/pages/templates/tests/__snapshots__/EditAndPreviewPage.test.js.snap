@@ -3,26 +3,11 @@
 exports[`EditAndPreviewPage renders a page 1`] = `
 <FullPage
   breadcrumbRedirectsTo="/templates"
-  primaryArea={<EditPrimaryArea />}
   title="Test Template"
 >
-  <Grid
-    className="Contents"
-  >
-    <Grid.Column
-      lg={6}
-      md={12}
-      sm={12}
-    >
-      <EditSection />
-    </Grid.Column>
-    <Grid.Column
-      lg={6}
-      md={12}
-      sm={12}
-    >
-      <PreviewSection />
-    </Grid.Column>
-  </Grid>
+  <EditNavigation
+    primaryArea={<EditContentsPrimaryArea />}
+  />
+  <EditContents />
 </FullPage>
 `;

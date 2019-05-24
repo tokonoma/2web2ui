@@ -5,10 +5,13 @@ exports[`EditorContext EditorContextProvider renders children wrapped by a conte
   value={
     Object {
       "content": Object {},
+      "currentNavigationIndex": 0,
+      "currentNavigationKey": "contents",
       "currentTabIndex": 0,
       "currentTabKey": "html",
       "previewDevice": "desktop",
       "setContent": [Function],
+      "setNavigation": [Function],
       "setPreviewDevice": [Function],
       "setTab": [Function],
     }
