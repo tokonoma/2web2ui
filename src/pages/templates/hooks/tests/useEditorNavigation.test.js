@@ -22,7 +22,7 @@ describe('useEditorNavigation', () => {
     const wrapper = useTestWrapper();
 
     expect(useHook(wrapper))
-      .toEqual(expect.objectContaining({ currentNavigationIndex: 0, currentNavigationKey: 'contents' }));
+      .toEqual(expect.objectContaining({ currentNavigationIndex: 0, currentNavigationKey: 'content' }));
   });
 
   it('returns matched link', () => {

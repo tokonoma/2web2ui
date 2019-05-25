@@ -3,11 +3,11 @@ import EditContentsPrimaryArea from '../components/EditContentsPrimaryArea';
 
 const editNavigationLinks = [
   {
-    content: 'Contents',
-    key: 'contents',
+    content: 'Content',
+    key: 'content',
     render: EditContents,
     renderPrimaryArea: EditContentsPrimaryArea,
-    routeKey: 'contents'
+    routeKey: 'content'
   },
   {
     content: 'Settings',

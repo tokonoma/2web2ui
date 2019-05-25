@@ -6,7 +6,7 @@ exports[`EditorContext EditorContextProvider renders children wrapped by a conte
     Object {
       "content": Object {},
       "currentNavigationIndex": 0,
-      "currentNavigationKey": "contents",
+      "currentNavigationKey": "content",
       "currentTabIndex": 0,
       "currentTabKey": "html",
       "previewDevice": "desktop",

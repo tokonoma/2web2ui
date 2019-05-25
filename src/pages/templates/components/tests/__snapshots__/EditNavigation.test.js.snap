@@ -8,11 +8,11 @@ exports[`EditNavigation renders navigation with primary area 1`] = `
     className="NavigationLinks"
   >
     <UnstyledLink
-      className="NavigationLink NavigationActiveLink"
-      key="contents"
+      className="NavigationLink"
+      key="content"
       onClick={[Function]}
     >
-      Contents
+      Content
     </UnstyledLink>
     <UnstyledLink
       className="NavigationLink"
