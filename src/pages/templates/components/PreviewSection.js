@@ -4,6 +4,7 @@ import useEditorContext from '../hooks/useEditorContext';
 import PreviewErrorFrame from './PreviewErrorFrame';
 import PreviewControlBar from './PreviewControlBar';
 import PreviewFrame from './PreviewFrame';
+import PreviewHeader from './PreviewHeader';
 import PreviewContainer from './PreviewContainer';
 import styles from './PreviewSection.module.scss';
 
@@ -23,11 +24,14 @@ const PreviewSection = () => {
           // only show full error frame if never able to generate a preview
           <PreviewErrorFrame errors={previewLineErrors} />
         ) : (
-          <PreviewFrame
-            content={content || ''}
-            key={currentTabKey} // unmount for each content part
-            strict={currentTabKey !== 'amp_html'}
-          />
+          <>
+            <PreviewHeader />
+            <PreviewFrame
+              content={content || ''}
+              key={currentTabKey} // unmount for each content part
+              strict={currentTabKey !== 'amp_html'}
+            />
+          </>
         )}
       </PreviewContainer>
     </Panel>
