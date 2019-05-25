@@ -1,0 +1,103 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ItemWithChildren tests should render children correctly 1`] = `
+<li>
+  <a
+    className="Link hasChildren"
+    onClick={[Function]}
+  >
+    <span
+      className="iconWrapper"
+    >
+      <Mail
+        className="icon"
+        size={21}
+      />
+    </span>
+    <div
+      className="Label"
+    >
+      label
+    </div>
+    <ChevronLeft
+      className="chevron"
+    />
+  </a>
+  <ul
+    className="NestedList"
+  >
+    <_default
+      key="0"
+      label="child 1"
+      location={
+        Object {
+          "pathname": "/to",
+        }
+      }
+      to="/child1"
+    />
+    <_default
+      key="1"
+      label="child 2"
+      location={
+        Object {
+          "pathname": "/to",
+        }
+      }
+      to="/child2"
+    />
+  </ul>
+</li>
+`;
+
+exports[`ItemWithChildren tests should render correctly on mobile 1`] = `
+<li>
+  <a
+    className="Link hasChildren mobile"
+    onClick={[Function]}
+  >
+    <span
+      className="iconWrapper"
+    >
+      <Mail
+        className="icon"
+        size={21}
+      />
+    </span>
+    <div
+      className="Label"
+    >
+      label
+    </div>
+    <ChevronLeft
+      className="chevron"
+    />
+  </a>
+  <ul
+    className="NestedList"
+  >
+    <_default
+      key="0"
+      label="child 1"
+      location={
+        Object {
+          "pathname": "/to",
+        }
+      }
+      mobile={true}
+      to="/child1"
+    />
+    <_default
+      key="1"
+      label="child 2"
+      location={
+        Object {
+          "pathname": "/to",
+        }
+      }
+      mobile={true}
+      to="/child2"
+    />
+  </ul>
+</li>
+`;

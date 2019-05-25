@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NavItem tests render item correctly w/o children 1`] = `
+<_default
+  icon="Mail"
+  label="label"
+  location={
+    Object {
+      "pathname": "to",
+    }
+  }
+  to="/to"
+/>
+`;
+
+exports[`NavItem tests render item correctly with children 1`] = `
+<_default
+  icon="Mail"
+  label="label"
+  location={
+    Object {
+      "pathname": "to",
+    }
+  }
+  to="/to"
+>
+  <Component />
+  <Component />
+</_default>
+`;
