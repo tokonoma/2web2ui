@@ -1,15 +1,20 @@
 import React from 'react';
-import ItemWithChildren from '../ItemWithChildren';
-import { shallow } from 'enzyme/build/index';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { FilterNone } from '@sparkpost/matchbox-icons/matchbox-icons';
 
-describe('ItemWithChildren tests', () => {
+import { act } from 'react-dom/test-utils';
+import ParentNavItem from '../ParentNavItem';
+import { mount, shallow } from 'enzyme/build/index';
+import styles from '../NavItem.module.scss';
+
+describe('ParentNavItem tests', () => {
   let wrapper;
   let props;
 
   beforeEach(() => {
     props = {
       to: '/to',
-      icon: 'Mail',
+      icon: FilterNone,
       label: 'label',
       location: { pathname: '/to' },
       children: [
@@ -17,12 +22,15 @@ describe('ItemWithChildren tests', () => {
         { to: '/child2', label: 'child 2', location }
       ]
     };
-    wrapper = shallow(<ItemWithChildren {...props} />);
+    act(() => {
+      wrapper = shallow(<ParentNavItem {...props} />);
+    });
   });
 
   it('should render children correctly', () => {
     expect(wrapper).toMatchSnapshot();
   });
+
   it('should render correctly on mobile', () => {
     wrapper.setProps({ mobile: true });
     expect(wrapper).toMatchSnapshot();
@@ -34,6 +42,18 @@ describe('ItemWithChildren tests', () => {
     expect(wrapper.find('a').hasClass('isOpen')).toBe(true);
     wrapper.children().find('a').simulate('click');
     expect(wrapper.find('a').hasClass('isOpen')).toBe(false);
+  });
+
+  it('should be open if any children has matching path', () => {
+    act(() => {
+      wrapper = mount(
+        <Router>
+          <ParentNavItem {...props} location={{ pathname: '/child2' }}/>
+        </Router>
+      );
+    });
+    wrapper.update();
+    expect(wrapper.find('a').first().hasClass(styles.isOpen)).toBe(true);
   });
 
 });

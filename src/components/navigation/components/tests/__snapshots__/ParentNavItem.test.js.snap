@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ItemWithChildren tests should render children correctly 1`] = `
+exports[`ParentNavItem tests should render children correctly 1`] = `
 <li>
   <a
     className="Link hasChildren"
@@ -9,7 +9,7 @@ exports[`ItemWithChildren tests should render children correctly 1`] = `
     <span
       className="iconWrapper"
     >
-      <Mail
+      <FilterNone
         className="icon"
         size={21}
       />
@@ -26,7 +26,7 @@ exports[`ItemWithChildren tests should render children correctly 1`] = `
   <ul
     className="NestedList"
   >
-    <_default
+    <NavItem
       key="0"
       label="child 1"
       location={
@@ -36,7 +36,7 @@ exports[`ItemWithChildren tests should render children correctly 1`] = `
       }
       to="/child1"
     />
-    <_default
+    <NavItem
       key="1"
       label="child 2"
       location={
@@ -50,7 +50,7 @@ exports[`ItemWithChildren tests should render children correctly 1`] = `
 </li>
 `;
 
-exports[`ItemWithChildren tests should render correctly on mobile 1`] = `
+exports[`ParentNavItem tests should render correctly on mobile 1`] = `
 <li>
   <a
     className="Link hasChildren mobile"
@@ -59,7 +59,7 @@ exports[`ItemWithChildren tests should render correctly on mobile 1`] = `
     <span
       className="iconWrapper"
     >
-      <Mail
+      <FilterNone
         className="icon"
         size={21}
       />
@@ -76,7 +76,7 @@ exports[`ItemWithChildren tests should render correctly on mobile 1`] = `
   <ul
     className="NestedList"
   >
-    <_default
+    <NavItem
       key="0"
       label="child 1"
       location={
@@ -87,7 +87,7 @@ exports[`ItemWithChildren tests should render correctly on mobile 1`] = `
       mobile={true}
       to="/child1"
     />
-    <_default
+    <NavItem
       key="1"
       label="child 2"
       location={

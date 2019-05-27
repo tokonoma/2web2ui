@@ -1,39 +1,45 @@
 import React from 'react';
-
-import context from 'src/__testHelpers__/context';
+import { shallow } from 'enzyme';
 import NavItem from '../NavItem';
 
 describe('NavItem tests', () => {
-  const defaultContext = { mobile: false };
+  let wrapper;
+  let props;
 
-  it('render item correctly with children', () => {
-    const children = [
-      { to: '/child1', label: 'child 1', location },
-      { to: '/child2', label: 'child 2', location }
-    ];
-
-    const item = context(
-      <NavItem
-        to='/to'
-        icon='Mail'
-        label='label'
-        children={children}
-        location={{ pathname: 'to' }}
-      />
-      , defaultContext);
-    expect(item.children()).toMatchSnapshot();
+  beforeEach(() => {
+    props = {
+      to: '/to',
+      icon: 'Mail',
+      label: 'label',
+      location: { pathname: 'to' }
+    };
+    wrapper = shallow(<NavItem {...props} />);
   });
 
-  it('render item correctly w/o children', () => {
-    const item = context(
-      <NavItem
-        to='/to'
-        icon='Mail'
-        label='label'
-        location={{ pathname: 'to' }}
-      />
-      , defaultContext);
-    expect(item.children()).toMatchSnapshot();
+  it('should render a link correctly', () => {
+    expect(wrapper).toMatchSnapshot();
   });
 
+  it('should render a link with beta tag', () => {
+    wrapper.setProps({ tag: 'beta' });
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render a link with labs tag', () => {
+    wrapper.setProps({ tag: 'labs' });
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render a link with new tag', () => {
+    wrapper.setProps({ tag: 'new' });
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should call toggle nav when on mobile', () => {
+    const toggle = jest.fn();
+    wrapper.setProps({ toggleMobileNav: toggle, mobile: true });
+    expect(wrapper).toMatchSnapshot();
+    wrapper.children().find('Link').simulate('click');
+    expect(toggle).toHaveBeenCalledTimes(1);
+  });
 });

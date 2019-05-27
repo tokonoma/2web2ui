@@ -2,11 +2,13 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import classnames from 'classnames';
-import NavItem from './components/NavItem';
-import Top from './components/Top';
+
 import { WindowSizeContext } from 'src/context/WindowSize';
 import { selectNavItems } from 'src/selectors/navItems';
 import styles from './Navigation.module.scss';
+import Top from './components/Top';
+import NavItem from './components/NavItem';
+import ParentNavItem from './components/ParentNavItem';
 
 export class Navigation extends Component {
   state = {
@@ -14,9 +16,10 @@ export class Navigation extends Component {
   };
 
   renderItems() {
-    return this.props.navItems.map((item, key) => (
-      <NavItem {...item} toggleMobileNav={this.toggleMobileNav} location={this.props.location} key={key} />
-    ));
+    return this.props.navItems.map((item, key) => {
+      const props = { ...item, toggleMobileNav: this.toggleMobileNav, location: this.props.location, key: key };
+      return item.children ? <ParentNavItem {...props} /> : <NavItem {...props} />;
+    });
   }
 
   toggleMobileNav = () => {

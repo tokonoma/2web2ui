@@ -3,10 +3,10 @@ import classnames from 'classnames';
 import _ from 'lodash';
 import { ChevronLeft } from '@sparkpost/matchbox-icons';
 
-import RenderItem from './Item';
-import styles from './Item.module.scss';
+import NavItem from './NavItem';
+import styles from './NavItem.module.scss';
 
-export default function (props) {
+const ParentNavItem = (props) => {
   const [open, setOpen] = useState(false);
 
   const {
@@ -36,15 +36,20 @@ export default function (props) {
   return (
     <li>
       <a onClick={() => setOpen(!open)} className={linkClasses}>
-        <span className={styles.iconWrapper}><Icon size={21} className={styles.icon}/></span>
+        <span className={styles.iconWrapper}>
+          <Icon size={21} className={styles.icon}/>
+        </span>
         <div className={styles.Label}>{label}</div>
         <ChevronLeft className={styles.chevron}/>
       </a>
       <ul className={styles.NestedList}>
-        {children.map((child, key) => <RenderItem {...child} mobile={mobile} location={location} key={key}
+        {children.map((child, key) => <NavItem {...child} mobile={mobile} location={location} key={key}
           toggleMobileNav={toggleMobileNav}/>)}
       </ul>
     </li>
   );
-}
+};
+
+ParentNavItem.displayName = 'ParentNavItem';
+export default ParentNavItem;
 
