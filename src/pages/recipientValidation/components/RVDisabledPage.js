@@ -89,8 +89,8 @@ export class RVDisabledPage extends Component {
         message: 'RV enabled.'
       }));
   }
-  render() {
 
+  render() {
     return (
       <Page title='Recipient Validation'>
         <div className={styles.Description}>
@@ -100,7 +100,7 @@ export class RVDisabledPage extends Component {
           to catch many common problems, including syntax errors and non-existent mailboxes.
           </p>
           <p>
-          We have a monthly pay-as-you-go plan using tiered pricing, The more you validate, the less you pay per message.
+          We have a monthly pay-as-you-go plan using tiered pricing. The more you validate, the less you pay per message.
           </p>
         </div>
         <Panel className = {styles.Table}>
