@@ -18,6 +18,7 @@ export { default as signals } from './signals';
 export { default as suppressions } from './suppressions';
 export { default as subaccounts } from './subaccounts';
 export { default as templates } from './templates';
+export { default as templatesV2 } from './templatesV2';
 export { default as users } from './users';
 export { default as trackingDomains } from './trackingDomains';
 export { default as webhooks } from './webhooks';

@@ -1,60 +1,62 @@
 /* eslint-disable max-lines */
 import {
   abTesting,
+  AccountSettingsPage,
   alerts,
   apiKeys,
-  AccountSettingsPage,
   AuthPage,
-  EnableTfaPage,
-  TfaPage,
-  SsoAuthPage,
-  SSOPage,
   billing,
   DashboardPage,
-  sendingDomains,
-  RegisterPage,
-  reports,
-  recipientLists,
-  SmtpPage,
-  suppressions,
-  subaccounts,
-  templates,
-  trackingDomains,
-  users,
-  webhooks,
-  ipPools,
-  PageNotFound,
   DefaultRedirect,
+  EnableTfaPage,
+  ipPools,
   JoinPage,
+  PageNotFound,
   passwordReset,
   PremiumSupportPage,
+  recipientLists,
   RecipientValidationPage,
+  RegisterPage,
+  reports,
+  sendingDomains,
+  signals,
+  SmtpPage,
   snippets,
-  signals
+  SsoAuthPage,
+  SSOPage,
+  subaccounts,
+  suppressions,
+  TfaPage,
+  trackingDomains,
+  users,
+  webhooks
 } from 'src/pages';
 
 import LogoutPage from 'src/pages/logout/LogoutPage';
 
 import onboarding from 'src/pages/onboarding';
 import { default as emailVerification } from 'src/components/emailVerification/EmailVerification';
-import { emailVerificationRedirect, emailRedirects } from './emailRoutes';
-import SecretBillingPlanOrBillingSummaryPage from './SecretBillingPlanOrBillingSummaryPage';
+import SecretBillingPlanOrBillingSummaryPage from '../SecretBillingPlanOrBillingSummaryPage';
 
-import { hasGrants, all, not } from 'src/helpers/conditions';
-import {
-  isAws,
-  isCustomBilling,
-  isEnterprise,
-  isSelfServeBilling
-} from 'src/helpers/conditions/account';
-import { isHeroku, isAzure, isSubaccountUser } from 'src/helpers/conditions/user';
-import { configFlag, configEquals } from 'src/helpers/conditions/config';
-
+import { all, hasGrants, not } from 'src/helpers/conditions';
+import { isAws, isCustomBilling, isEnterprise, isSelfServeBilling } from 'src/helpers/conditions/account';
+import { isAzure, isHeroku, isSubaccountUser } from 'src/helpers/conditions/user';
+import { configEquals, configFlag } from 'src/helpers/conditions/config';
 import App from 'src/components/layout/App';
 import Fullscreen from 'src/components/layout/Fullscreen';
 import LargeForm from 'src/components/layout/LargeForm';
 
-import { DEFAULT_REDIRECT_ROUTE, SIGN_UP_ROUTE, AUTH_ROUTE, TFA_ROUTE, SSO_AUTH_ROUTE, ENABLE_TFA_AUTH_ROUTE } from 'src/constants';
+import {
+  AUTH_ROUTE,
+  DEFAULT_REDIRECT_ROUTE,
+  ENABLE_TFA_AUTH_ROUTE,
+  SIGN_UP_ROUTE,
+  SSO_AUTH_ROUTE,
+  TFA_ROUTE
+} from 'src/constants';
+//route modules
+import { emailRedirects, emailVerificationRedirect } from './emailRoutes';
+import templateRoutes from './templates';
 
 // See @sparkpost/access for role to grant mappings
 
@@ -385,62 +387,7 @@ const routes = [
     title: 'Edit Snippet',
     supportDocSearch: 'snippet'
   },
-  {
-    path: '/templates',
-    component: templates.ListPage,
-    condition: hasGrants('templates/view'),
-    layout: App,
-    title: 'Templates',
-    supportDocSearch: 'template'
-  },
-  {
-    path: '/templates/create/:id?',
-    component: templates.CreatePage,
-    condition: hasGrants('templates/modify'),
-    layout: App,
-    title: 'New Template',
-    supportDocSearch: 'template'
-  },
-  {
-    path: '/templates/edit/:id',
-    component: templates.EditPage,
-    condition: hasGrants('templates/view'),
-    layout: App,
-    title: 'Edit Template',
-    supportDocSearch: 'template'
-  },
-  {
-    path: '/templates/edit/:id/next/:navKey?',
-    component: templates.EditAndPreviewPage,
-    condition: hasGrants('templates/view'),
-    layout: Fullscreen,
-    title: 'Edit Template',
-    supportDocSearch: 'template'
-  },
-  {
-    path: '/templates/edit/:id/published',
-    component: templates.PublishedPage,
-    condition: hasGrants('templates/view'),
-    layout: App,
-    title: 'View Published Template',
-    supportDocSearch: 'template'
-  },
-  {
-    path: '/templates/preview/:id',
-    component: templates.PreviewDraftPage,
-    condition: hasGrants('templates/view'),
-    layout: App,
-    title: 'Preview Draft Template',
-    supportDocSearch: 'template'
-  },
-  {
-    path: '/templates/preview/:id/published',
-    component: templates.PreviewPublishedPage,
-    condition: hasGrants('templates/view'),
-    layout: App,
-    title: 'Preview Published Template',
-    supportDocSearch: 'template'
-  },
+
   {
     path: '/lists/recipient-lists',
     component: recipientLists.ListPage,
@@ -779,7 +726,8 @@ const routes = [
     path: '/logout',
     component: LogoutPage,
     title: 'Logging out...'
-  }
+  },
+  ...templateRoutes
 ];
 
 // ensure 404 is always last in routes
