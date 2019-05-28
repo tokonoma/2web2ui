@@ -7,7 +7,6 @@ import { selectCondition } from 'src/selectors/accessConditionState';
 import { isSelfServeBilling } from 'src/helpers/conditions/account';
 import { connect } from 'react-redux';
 import { update as updateAccount } from 'src/actions/account';
-import { showAlert } from 'src/actions/globalAlert';
 
 
 const priceData = [
@@ -83,11 +82,7 @@ export class RVDisabledPage extends Component {
         recipient_validation: true
       }
     };
-    return this.props.updateAccount(body)
-      .then(() => showAlert({
-        type: 'success',
-        message: 'RV enabled.'
-      }));
+    this.props.updateAccount(body);
   }
 
   render() {
