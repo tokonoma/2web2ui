@@ -12,7 +12,7 @@ exports[`Recipient Validation Disabled Page should render 1`] = `
       Protect your reputation by guarding against bounces, errors, and even fraud. Recipient Validation is an easy, efficient way to verify that addresses are valid before you send. We run emails through a series of checks to catch many common problems, including syntax errors and non-existent mailboxes.
     </p>
     <p>
-      We have a monthly pay-as-you-go plan using tiered pricing, The more you validate, the less you pay per message.
+      We have a monthly pay-as-you-go plan using tiered pricing. The more you validate, the less you pay per message.
     </p>
   </div>
   <Panel
