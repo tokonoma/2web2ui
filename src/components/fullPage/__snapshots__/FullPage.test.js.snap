@@ -10,6 +10,7 @@ exports[`FullPage renders a page 1`] = `
     >
       <UnstyledLink
         className="FullPageBreadcrumb"
+        component={[Function]}
         to="/here"
       >
         <ChevronLeft
