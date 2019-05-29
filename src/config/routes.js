@@ -51,6 +51,7 @@ import { isHeroku, isAzure, isSubaccountUser } from 'src/helpers/conditions/user
 import { configFlag, configEquals } from 'src/helpers/conditions/config';
 
 import App from 'src/components/layout/App';
+import Fullscreen from 'src/components/layout/Fullscreen';
 import LargeForm from 'src/components/layout/LargeForm';
 
 import { DEFAULT_REDIRECT_ROUTE, SIGN_UP_ROUTE, AUTH_ROUTE, TFA_ROUTE, SSO_AUTH_ROUTE, ENABLE_TFA_AUTH_ROUTE } from 'src/constants';
@@ -409,10 +410,10 @@ const routes = [
     supportDocSearch: 'template'
   },
   {
-    path: '/templates/edit/:id/next/:tabKey?',
+    path: '/templates/edit/:id/next/:navKey?',
     component: templates.EditAndPreviewPage,
     condition: hasGrants('templates/view'),
-    layout: App,
+    layout: Fullscreen,
     title: 'Edit Template',
     supportDocSearch: 'template'
   },

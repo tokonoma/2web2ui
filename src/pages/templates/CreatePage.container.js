@@ -10,7 +10,7 @@ import { showAlert } from 'src/actions/globalAlert';
 // Selectors
 import { selectClonedTemplate, selectDefaultTestData } from 'src/selectors/templates';
 
-import CreatePage from '../CreatePage';
+import CreatePage from './CreatePage';
 
 const FORM_NAME = 'templateCreate';
 

@@ -8,7 +8,7 @@ import { hasGrants } from 'src/helpers/conditions';
 import { selectTemplateById, selectTemplateTestData } from 'src/selectors/templates';
 import { selectSubaccountIdFromQuery, hasSubaccounts, selectSubaccountFromQuery } from 'src/selectors/subaccounts';
 
-import EditPage from '../EditPage';
+import EditPage from './EditPage';
 
 const FORM_NAME = 'templateEdit';
 

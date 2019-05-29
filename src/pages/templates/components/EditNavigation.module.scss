@@ -1,0 +1,35 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.Navigation {
+  background: #fff;
+  display: flex;
+  justify-content: space-between;
+}
+
+.NavigationLinks {
+  padding-left: spacing(large)*4;
+}
+
+.NavigationLink {
+  color: color(gray, 4); // to match default text
+  display: inline-block;
+  padding: spacing(large) spacing();
+
+  &:first-child {
+    padding-left: spacing(large);
+  }
+
+  &:hover {
+    color: color(orange);
+  }
+}
+
+.NavigationActiveLink {
+  color: color(orange);
+}
+
+.NavigationPrimaryArea {
+  align-items: center;
+  display: flex;
+  padding: 0 spacing(large);
+}

@@ -13,6 +13,6 @@ describe('Editor', () => {
 
   it('sets null value to empty string', () => {
     const wrapper = subject({ mode: 'html', value: null });
-    expect(wrapper).toHaveProp('value', '');
+    expect(wrapper.find('ReactAce')).toHaveProp('value', '');
   });
 });

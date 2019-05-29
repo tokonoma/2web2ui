@@ -2,7 +2,6 @@ import React from 'react';
 import classNames from 'classnames';
 import useEditorContext from '../hooks/useEditorContext';
 import styles from './PreviewContainer.module.scss';
-// <div className={classNames(styles.PreviewFrameWrapper, 'notranslate')}>
 
 const PreviewContainer = ({ children }) => {
   const { previewDevice } = useEditorContext();
@@ -20,8 +19,10 @@ const PreviewContainer = ({ children }) => {
   }
 
   return (
-    <div className={classNames(styles.PreviewContainer, 'notranslate')}>
-      {children}
+    <div className={styles.PreviewContainer}>
+      <div className={classNames(styles.PreviewScreen, 'notranslate')}>
+        {children}
+      </div>
     </div>
   );
 };

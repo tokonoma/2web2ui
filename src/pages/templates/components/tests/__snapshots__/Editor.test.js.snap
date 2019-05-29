@@ -1,49 +1,53 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Editor renders editor 1`] = `
-<ReactAce
-  cursorStart={1}
-  editorProps={
-    Object {
-      "$blockScrolling": Infinity,
+<div
+  className="EditorWrapper"
+>
+  <ReactAce
+    cursorStart={1}
+    editorProps={
+      Object {
+        "$blockScrolling": Infinity,
+      }
     }
-  }
-  enableBasicAutocompletion={false}
-  enableLiveAutocompletion={false}
-  focus={false}
-  fontSize={12}
-  height="500px"
-  highlightActiveLine={true}
-  maxLines={null}
-  minLines={null}
-  mode="text"
-  name="brace-editor"
-  onChange={null}
-  onLoad={null}
-  onPaste={null}
-  onScroll={null}
-  readOnly={false}
-  scrollMargin={
-    Array [
-      0,
-      0,
-      0,
-      0,
-    ]
-  }
-  setOptions={
-    Object {
-      "displayIndentGuides": false,
-      "useWorker": false,
+    enableBasicAutocompletion={false}
+    enableLiveAutocompletion={false}
+    focus={false}
+    fontSize={12}
+    height="100%"
+    highlightActiveLine={true}
+    maxLines={null}
+    minLines={null}
+    mode="text"
+    name="brace-editor"
+    onChange={null}
+    onLoad={null}
+    onPaste={null}
+    onScroll={null}
+    readOnly={false}
+    scrollMargin={
+      Array [
+        0,
+        0,
+        0,
+        0,
+      ]
     }
-  }
-  showGutter={true}
-  showPrintMargin={false}
-  style={Object {}}
-  tabSize={2}
-  theme="chaos"
-  value="Example"
-  width="auto"
-  wrapEnabled={false}
-/>
+    setOptions={
+      Object {
+        "displayIndentGuides": false,
+        "useWorker": false,
+      }
+    }
+    showGutter={true}
+    showPrintMargin={false}
+    style={Object {}}
+    tabSize={2}
+    theme="chaos"
+    value="Example"
+    width="auto"
+    wrapEnabled={false}
+  />
+</div>
 `;

@@ -5,6 +5,7 @@ import PreviewErrorFrame from './PreviewErrorFrame';
 import PreviewControlBar from './PreviewControlBar';
 import PreviewFrame from './PreviewFrame';
 import PreviewContainer from './PreviewContainer';
+import styles from './PreviewSection.module.scss';
 
 const PreviewSection = () => {
   const { currentTabKey, hasFailedToPreview, preview, previewLineErrors } = useEditorContext();
@@ -15,7 +16,7 @@ const PreviewSection = () => {
     : preview[currentTabKey];
 
   return (
-    <Panel>
+    <Panel className={styles.PreviewSection}>
       <PreviewControlBar />
       <PreviewContainer>
         {hasFailedToPreview ? (

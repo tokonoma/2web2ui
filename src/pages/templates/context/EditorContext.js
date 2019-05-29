@@ -1,6 +1,7 @@
 import React, { createContext, useEffect } from 'react';
 import useRouter from 'src/hooks/useRouter';
 import useEditorContent from '../hooks/useEditorContent';
+import useEditorNavigation from '../hooks/useEditorNavigation';
 import useEditorPreview from '../hooks/useEditorPreview';
 import useEditorTabs from '../hooks/useEditorTabs';
 
@@ -15,9 +16,10 @@ export const EditorContextProvider = ({
   value: { getDraft, getPublished, ...value }
 }) => {
   const { requestParams } = useRouter();
-  const state = chainHooks(
+  const pageValue = chainHooks(
     () => value,
     useEditorContent,
+    useEditorNavigation,
     useEditorPreview,
     useEditorTabs
   );
@@ -28,7 +30,7 @@ export const EditorContextProvider = ({
   }, [getDraft, getPublished, requestParams.id, requestParams.subaccount]);
 
   return (
-    <EditorContext.Provider value={state}>
+    <EditorContext.Provider value={pageValue}>
       {children}
     </EditorContext.Provider>
   );

@@ -1,40 +1,30 @@
 import React from 'react';
-import { shallow } from 'enzyme';
-import useRouter from 'src/hooks/useRouter';
+import { act } from 'react-dom/test-utils';
+import { mount } from 'enzyme';
 import useEditorTabs from '../useEditorTabs';
 
-jest.mock('src/hooks/useRouter');
-
 describe('useEditorTabs', () => {
-  const subject = () => {
-    const TestComponent = () => <div {...useEditorTabs()} />;
-    return shallow(<TestComponent />).props();
+  const useTestWrapper = (value = {}) => {
+    const TestComponent = () => <div hooked={useEditorTabs(value)} />;
+    return mount(<TestComponent />);
   };
+  const useHook = (wrapper) => wrapper.update().children().prop('hooked');
 
-  it('returns first tab state when no match found', () => {
-    useRouter.mockReturnValue({ requestParams: { tabKey: undefined }});
+  it('returns first tab by default', () => {
+    const wrapper = useTestWrapper();
 
-    expect(subject())
+    expect(useHook(wrapper))
       .toEqual(expect.objectContaining({ currentTabIndex: 0, currentTabKey: 'html' }));
   });
 
-  it('returns tab state when found', () => {
-    useRouter.mockReturnValue({ requestParams: { tabKey: 'AMP-HTML' }});
+  it('returns next tab when set', () => {
+    const wrapper = useTestWrapper();
 
-    expect(subject())
-      .toEqual(expect.objectContaining({ currentTabIndex: 1, currentTabKey: 'amp_html' }));
-  });
-
-  it('updates route when tab is set', () => {
-    const historyPush = jest.fn();
-
-    useRouter.mockReturnValue({
-      history: { push: historyPush },
-      requestParams: { tabKey: 'html' }
+    act(() => {
+      useHook(wrapper).setTab(1);
     });
 
-    subject().setTab(1);
-
-    expect(historyPush).toHaveBeenCalledWith('/templates/edit/amp/next/amp-html');
+    expect(useHook(wrapper))
+      .toEqual(expect.objectContaining({ currentTabIndex: 1, currentTabKey: 'amp_html' }));
   });
 });

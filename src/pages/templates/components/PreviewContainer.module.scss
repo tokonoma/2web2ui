@@ -1,32 +1,43 @@
 @import '~@sparkpost/matchbox/src/styles/config.scss';
+@import './phone.scss';
 
 .PreviewContainer {
-  height: 550px;
-  min-height: 50vh;
-  overflow-y: scroll;
+  height: 90vh; // must match editor wrapper
+  min-height: $phone-container-min-height;
+  min-width: 325px;
+  overflow: scroll;
+  padding: $phone-padding;
+}
+
+.PreviewScreen {
+  border: 1px solid color(grey, 8);
+  height: 100%;
+  overflow: scroll;
   position: relative;
 }
 
 .PreviewMobileContainer {
-  padding: spacing(larger) 0;
+  height: 90vh; // must match editor wrapper
+  min-height: $phone-container-min-height;
+  padding: $phone-padding 0;
 }
 
 .PreviewMobilePhone {
   background: color(grey, 9);
   border: 1px solid color(grey, 8);
-  border-radius: 20px;
-  height: 736px + 40px + 80px + 2px;
+  border-radius: 40px;
+  height: $phone-height;
   margin: 0 auto;
-  padding: 40px 10px 80px 10px;
-  width: 414px + 10px + 10px + 2px;
+  padding: 40px 10px;
+  width: $phone-width;
 }
 
 .PreviewMobilePhoneScreen {
   background: white;
   border: 1px solid color(grey, 8);
   border-radius: 2px;
-  height: 100%;
-  overflow-y: scroll;
+  height: $phone-screen-height;
+  overflow: scroll;
   position: relative;
-  width: 100%;
+  width: $phone-screen-width;
 }

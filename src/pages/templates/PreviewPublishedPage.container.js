@@ -7,7 +7,7 @@ import { selectPublishedTemplate, selectPublishedTemplatePreview } from 'src/sel
 import { selectSubaccountIdFromQuery } from 'src/selectors/subaccounts';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
 import { hasGrants } from 'src/helpers/conditions';
-import PreviewPage from '../PreviewPage';
+import PreviewPage from './PreviewPage';
 
 export const mapStateToProps = (state, props) => {
   const subaccountId = selectSubaccountIdFromQuery(state, props);

@@ -5,7 +5,7 @@ import { hasGrants } from 'src/helpers/conditions';
 import { selectTemplates } from 'src/selectors/templates';
 import { hasSubaccounts } from 'src/selectors/subaccounts';
 
-import ListPage from '../ListPage';
+import ListPage from './ListPage';
 
 function mapStateToProps(state) {
   const templates = selectTemplates(state);

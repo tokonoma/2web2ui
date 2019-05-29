@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EditContents renders edit and preview sections 1`] = `
+<Grid
+  className="EditContents"
+>
+  <Grid.Column
+    lg={6}
+    md={12}
+    sm={12}
+  >
+    <EditSection />
+  </Grid.Column>
+  <Grid.Column
+    lg={6}
+    md={12}
+    sm={12}
+  >
+    <PreviewSection />
+  </Grid.Column>
+</Grid>
+`;

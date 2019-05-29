@@ -2,10 +2,14 @@
 
 exports[`PreviewContainer renders desktop container 1`] = `
 <div
-  className="PreviewContainer notranslate"
+  className="PreviewContainer"
 >
-  <div>
-    Example
+  <div
+    className="PreviewScreen notranslate"
+  >
+    <div>
+      Example
+    </div>
   </div>
 </div>
 `;
