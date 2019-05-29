@@ -24,7 +24,7 @@ const priceDataEdge = [
 
 export class RVDisabledPage extends Component {
   getRows = () => {
-    const rows = priceData.map((row, i) => (
+    const rows = priceData.map((row) => (
       <Table.Row key = {row[0]}>
         <Table.Cell width = {'40%'}>
           <strong>{row[0]}</strong> to <strong>{row[1]}</strong>
@@ -34,25 +34,25 @@ export class RVDisabledPage extends Component {
         </Table.Cell>
       </Table.Row>));
 
+    //Adds the header & first row (includes both in same cell)
     rows.unshift(
       <Table.Row key = {priceDataEdge[0][0]}>
         <Table.Cell >
           <strong className = {styles.Header}>
             Number of Emails
           </strong>
-          <br className={styles.HeaderSpace}/>
           <strong>{priceDataEdge[0][0]}</strong> to <strong>{priceDataEdge[0][1]}</strong>
         </Table.Cell>
         <Table.Cell >
           <strong className = {styles.Header}>
             Cost
           </strong>
-          <br className={styles.HeaderSpace}/>
           <strong>{priceDataEdge[0][2]}</strong> per email
         </Table.Cell>
       </Table.Row>
     );
 
+    //Adds the last row (has slightly different wording)
     rows.push(
       <Table.Row key = {priceDataEdge[1][0]}>
         <Table.Cell>
@@ -64,7 +64,7 @@ export class RVDisabledPage extends Component {
       </Table.Row>
     );
     return rows;
-  }
+  };
 
   getActionButton = () => {
     const { isSelfServeBilling, isFree } = this.props;
@@ -74,7 +74,7 @@ export class RVDisabledPage extends Component {
     return (isFree)
       ? (<UnstyledLink component={Button} to={'/account/billing'} primary>Upgrade your plan</UnstyledLink>)
       : (<Button primary onClick={this.enableRV}>Enable Recipient Validation</Button>);
-  }
+  };
 
   enableRV = () => {
     const body = {
@@ -83,7 +83,7 @@ export class RVDisabledPage extends Component {
       }
     };
     this.props.updateAccount(body);
-  }
+  };
 
   render() {
     return (
@@ -111,6 +111,7 @@ export class RVDisabledPage extends Component {
     );
   }
 }
+
 const mapStateToProps = (state) => ({
   isSelfServeBilling: selectCondition(isSelfServeBilling)(state),
   isFree: currentPlanSelector(state).isFree

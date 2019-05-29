@@ -3,8 +3,8 @@
 .Header {
   color: color(orange);
   font-size: rem(15);
-  margin-bottom: rem(100);
-
+  display: block;
+  margin-bottom: rem(25);
 }
 
 .Table {
@@ -17,10 +17,6 @@
   p {
     @media screen and (min-width: breakpoint(large)) { margin-right: 25%; }
   }
-}
-
-.HeaderSpace {
-  line-height: rem(50);
 }
 
 
