@@ -1,4 +1,4 @@
 export default {
-  routeNamespace: 'templatesV2'
+  routeNamespace: 'templatesv2'
 };
 

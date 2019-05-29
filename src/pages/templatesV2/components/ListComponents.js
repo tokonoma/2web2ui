@@ -45,7 +45,7 @@ export const Status = (rowData) => {
   return <Tag><Edit/> Draft</Tag>;
 };
 
-export const Action = ({ id, subaccount_id, ...rowData }) => (
+export const Action = () => (
   <Button flat><Delete size={20}/></Button>
 );
 
