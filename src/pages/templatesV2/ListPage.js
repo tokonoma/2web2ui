@@ -87,9 +87,8 @@ export default class ListPage extends Component {
         ) : (
           <>
             <p className={styles.LeadText}>
-              Templates are a way to store and edit email content. Instead of passing inline content to a Transmission
-              request, a template can be set to provide the content. All email content in a template (from, headers,
-              text, html, and amp_html) supports the template language for personalized emails.
+              Create re-usable templates that allow for dynamic personalized content. Easily communicate with your team by having a set of named templates to reference.
+              Building a library of "go-to" templates for recurrent use-cases to reduce workload for your team.
             </p>
             <TableCollection
               columns={visibleColumns.map(({ header }) => header)}

@@ -2,7 +2,7 @@ import _ from 'lodash';
 import config from 'src/config';
 import { createSelector } from 'reselect';
 import { getDomains, isVerified } from 'src/selectors/sendingDomains';
-import { selectSubaccountIdFromProps, hasSubaccounts } from 'src/selectors/subaccounts';
+import { hasSubaccounts, selectSubaccountIdFromProps } from 'src/selectors/subaccounts';
 import { filterTemplatesBySubaccount } from 'src/helpers/templates';
 
 export const selectTemplates = (state) => state.templates.list;
@@ -63,3 +63,23 @@ export const selectPublishedTemplatesBySubaccount = createSelector(
   [selectPublishedTemplates, selectSubaccountId, hasSubaccounts],
   (templates, subaccountId, subaccountsExist) => filterTemplatesBySubaccount({ templates, subaccountId, hasSubaccounts: subaccountsExist })
 );
+
+/**
+ * Prepare templates collection for listing with published and draft as separate item.
+ * @return array
+ */
+export const selectTemplatesForListTable = createSelector(
+  [selectTemplates], (templates) => {
+    const templatesForListing = [];
+    templates.forEach((template) => {
+      const hasPublished = template.published;
+
+      if (hasPublished) {
+        templatesForListing.push({ ...template, list_status: template.has_draft ? 'published_with_draft' : 'published' });
+      }
+      if (template.has_draft) {
+        templatesForListing.push({ ...template, name: hasPublished ? `${template.name} (DRAFT)` : template.name, list_status: 'draft' });
+      }
+    });
+    return templatesForListing;
+  });

@@ -4,18 +4,18 @@ import { Button, Tag, Tooltip } from '@sparkpost/matchbox';
 import { CheckCircle, Delete, Edit } from '@sparkpost/matchbox-icons';
 import { formatDateTime } from 'src/helpers/date';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
-import { resolveTemplateStatus } from 'src/helpers/templates';
 import styles from './ListComponents.module.scss';
 
 import constants from '../constants';
 
 export const Name = ({ name, id, subaccount_id, ...rowData }) => {
-  const { published } = resolveTemplateStatus(rowData);
+  const isDraft = rowData.list_status === 'draft';
+
   return (
     <>
       <p className={styles.Name}>
         <Link
-          to={`/${constants.routeNamespace}/edit/${id}${published ? '/published' : ''}${setSubaccountQuery(subaccount_id)}`}>
+          to={`/${constants.routeNamespace}/edit/${id}${isDraft ? '' : '/published'}${setSubaccountQuery(subaccount_id)}`}>
           <strong>{name}</strong>
         </Link>
       </p>
@@ -24,15 +24,15 @@ export const Name = ({ name, id, subaccount_id, ...rowData }) => {
 };
 
 export const Status = (rowData) => {
-  const { published, publishedWithChanges } = resolveTemplateStatus(rowData);
+  const listStatus = rowData.list_status;
 
   const PublishedIcon = <CheckCircle color='#45D09E'/>;
 
-  if (published) {
+  if (listStatus === 'published') {
     return <Tag>{PublishedIcon} Published</Tag>;
   }
 
-  if (publishedWithChanges) {
+  if (listStatus === 'published_with_draft') {
     return (
       <Tooltip dark content='Contains unpublished changes'>
         <Tag className={styles.PublishedWithChanges}>
