@@ -4,7 +4,7 @@ import { TemplateOutlineFill } from '@sparkpost/matchbox-icons';
 const campaignNavItems = [
   {
     label: 'Templates',
-    to: '/templates'
+    to: '/templatesv2'
   },
   {
     label: 'A/B Testing',
