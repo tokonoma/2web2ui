@@ -1,5 +1,4 @@
 import React from 'react';
-import ScrollToTop from './ScrollToTop';
 import WindowSize from 'src/context/WindowSize';
 import styles from './Layout.module.scss';
 
@@ -9,7 +8,6 @@ const Fullscreen = ({ children }) => (
       <main role="main" className={styles.content}>
         {children}
       </main>
-      <ScrollToTop/>
     </div>
   </WindowSize>
 );

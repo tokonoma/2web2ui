@@ -13,7 +13,6 @@ exports[`Fullscreen renders children in fullscreen layout 1`] = `
         My Page
       </div>
     </main>
-    <ScrollToTop />
   </div>
 </WindowSize>
 `;
