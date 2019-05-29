@@ -3,7 +3,7 @@
 exports[`EditSection renders tabs and section 1`] = `
 <Panel>
   <Tabs
-    color="orange"
+    color="blue"
     connectBelow={true}
     onSelect={[Function]}
     selected={0}

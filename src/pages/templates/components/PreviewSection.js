@@ -1,10 +1,10 @@
 import React from 'react';
 import { Panel } from '@sparkpost/matchbox';
-import classNames from 'classnames';
 import useEditorContext from '../hooks/useEditorContext';
 import PreviewErrorFrame from './PreviewErrorFrame';
+import PreviewControlBar from './PreviewControlBar';
 import PreviewFrame from './PreviewFrame';
-import styles from './PreviewSection.module.scss';
+import PreviewContainer from './PreviewContainer';
 
 const PreviewSection = () => {
   const { currentTabKey, hasFailedToPreview, preview, previewLineErrors } = useEditorContext();
@@ -16,7 +16,8 @@ const PreviewSection = () => {
 
   return (
     <Panel>
-      <div className={classNames(styles.PreviewFrameWrapper, 'notranslate')}>
+      <PreviewControlBar />
+      <PreviewContainer>
         {hasFailedToPreview ? (
           // only show full error frame if never able to generate a preview
           <PreviewErrorFrame errors={previewLineErrors} />
@@ -27,7 +28,7 @@ const PreviewSection = () => {
             strict={currentTabKey !== 'amp_html'}
           />
         )}
-      </div>
+      </PreviewContainer>
     </Panel>
   );
 };

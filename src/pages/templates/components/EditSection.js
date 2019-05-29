@@ -10,6 +10,7 @@ const EditSection = () => {
   return (
     <Panel>
       <Tabs
+        color="blue"
         selected={currentTabIndex}
         onSelect={(nextTabIndex) => { setTab(nextTabIndex); }}
         tabs={tabs.map(({ render, routeKey, ...tab }) => tab)}

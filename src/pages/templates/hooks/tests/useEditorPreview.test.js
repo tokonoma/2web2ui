@@ -1,4 +1,5 @@
 import React from 'react';
+import { act } from 'react-dom/test-utils';
 import { mount } from 'enzyme';
 import useEditorPreview from '../useEditorPreview';
 
@@ -11,7 +12,10 @@ describe('useEditorPreview', () => {
 
   it('returns empty object by default', () => {
     const wrapper = useTestWrapper();
-    expect(useHook(wrapper)).toEqual({});
+    expect(useHook(wrapper)).toEqual({
+      previewDevice: 'desktop',
+      setPreviewDevice: expect.any(Function)
+    });
   });
 
   it('calls getPreview when content changes', () => {
@@ -44,5 +48,15 @@ describe('useEditorPreview', () => {
     wrapper.unmount();
 
     expect(debounceAction.cancel).toHaveBeenCalled();
+  });
+
+  it('sets previewDevice', () => {
+    const wrapper = useTestWrapper();
+
+    act(() => {
+      useHook(wrapper).setPreviewDevice('mobile');
+    });
+
+    expect(useHook(wrapper)).toHaveProperty('previewDevice', 'mobile');
   });
 });
