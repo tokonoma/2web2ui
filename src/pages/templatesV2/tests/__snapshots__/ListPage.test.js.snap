@@ -1,0 +1,92 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ListPage renders correctly 1`] = `
+<Page
+  empty={
+    Object {
+      "content": <p>
+        Build, test, preview and send your transmissions.
+      </p>,
+      "image": [Function],
+      "show": false,
+      "title": "Manage your email templates",
+    }
+  }
+  primaryAction={
+    Object {
+      "Component": [Function],
+      "content": "Create New",
+      "to": "/templates/create",
+    }
+  }
+  title="Templates"
+>
+  <p
+    className="LeadText"
+  >
+    Templates are a way to store and edit email content. Instead of passing inline content to a Transmission request, a template can be set to provide the content. All email content in a template (from, headers, text, html, and amp_html) supports the template language for personalized emails.
+  </p>
+  <TableCollection
+    columns={
+      Array [
+        Object {
+          "label": "Template Name",
+          "sortKey": "name",
+        },
+        Object {
+          "label": "Status",
+          "sortKey": [Function],
+        },
+        Object {
+          "label": "Last Updated",
+          "sortKey": "last_update_time",
+        },
+        null,
+      ]
+    }
+    defaultSortColumn="last_update_time"
+    defaultSortDirection="desc"
+    filterBox={
+      Object {
+        "exampleModifiers": Array [
+          "id",
+          "name",
+        ],
+        "itemToStringKeys": Array [
+          "name",
+          "id",
+          "subaccount_id",
+        ],
+        "show": true,
+      }
+    }
+    getRowData={[Function]}
+    pagination={true}
+    rows={
+      Array [
+        Object {
+          "id": "id1",
+          "last_update_time": "2017-08-10T14:15:16+00:00",
+          "name": "subaccount template",
+          "published": true,
+          "shared_with_subaccounts": false,
+          "subaccount_id": 101,
+        },
+        Object {
+          "id": "id2",
+          "last_update_time": "2017-08-10T14:15:16+00:00",
+          "name": "shared template",
+          "published": false,
+          "shared_with_subaccounts": true,
+        },
+        Object {
+          "id": "id3",
+          "last_update_time": "2017-08-10T14:15:16+00:00",
+          "name": "master template",
+          "published": false,
+        },
+      ]
+    }
+  />
+</Page>
+`;
