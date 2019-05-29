@@ -7,7 +7,7 @@ describe('Template List Components', () => {
 
   describe('Name', () => {
     beforeEach(() => {
-      const props = { name: 'template name', id: 'id-123', subaccount_id: 123 };
+      const props = { name: 'template name', id: 'id-123', subaccount_id: 123, list_status: 'draft' };
       wrapper = shallow(<Name {...props} />);
     });
 
@@ -16,22 +16,22 @@ describe('Template List Components', () => {
     });
 
     it('should navigate to published page if template is published', () => {
-      wrapper.setProps({ published: true });
+      wrapper.setProps({ list_status: 'published' });
       expect(wrapper.find('Link').props().to).toEqual('/templatesv2/edit/id-123/published?subaccount=123');
     });
   });
 
   describe('Status', () => {
     it('should render published', () => {
-      expect(shallow(<Status published={true} has_draft={true} has_published={true}/>)).toMatchSnapshot();
+      expect(shallow(<Status list_status='published'/>)).toMatchSnapshot();
     });
 
     it('should render draft', () => {
-      expect(shallow(<Status published={false} has_draft={true} has_published={false}/>)).toMatchSnapshot();
+      expect(shallow(<Status list_status='draft'/>)).toMatchSnapshot();
     });
 
     it('should render unpublished changes', () => {
-      expect(shallow(<Status published={false} has_draft={true} has_published={true}/>)).toMatchSnapshot();
+      expect(shallow(<Status list_status='published_with_draft'/>)).toMatchSnapshot();
     });
   });
 
