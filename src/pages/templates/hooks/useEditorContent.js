@@ -7,12 +7,12 @@ const useEditorContent = ({ draft = {}}) => {
     setState({ ...state, ...nextState }); // merge-in
   };
 
-  // hydrate when draft is loaded (has a last_update_time value) and updated (last_update_time changes)
+  // hydrate when loaded
   useEffect(() => {
-    if (draft.last_update_time) {
+    if (draft.content) {
       setState(draft.content);
     }
-  }, [draft.content, draft.last_update_time]);
+  }, [draft.content]);
 
   return {
     content: state,

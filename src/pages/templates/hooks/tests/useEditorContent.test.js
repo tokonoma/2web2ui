@@ -20,8 +20,7 @@ describe('useEditorContent', () => {
   it('hydrates when draft is provided', () => {
     const wrapper = useTestWrapper({
       draft: {
-        content: { html: '<h1>Test</h1>', text: 'Test' },
-        last_update_time: '2019-05-16T02:25:00+00:00'
+        content: { html: '<h1>Test</h1>', text: 'Test' }
       }
     });
     const { content } = useHook(wrapper);
@@ -32,8 +31,7 @@ describe('useEditorContent', () => {
   it('merges updated content', () => {
     const wrapper = useTestWrapper({
       draft: {
-        content: { html: '<h1>Test</h1>', text: 'Test' },
-        last_update_time: '2019-05-16T02:25:00+00:00'
+        content: { html: '<h1>Test</h1>', text: 'Test' }
       }
     });
 
