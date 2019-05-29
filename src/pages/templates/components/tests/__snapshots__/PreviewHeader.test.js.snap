@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PreviewHeader renders preview header 1`] = `
+<div
+  className="PreviewHeader"
+>
+  <div
+    className="PreviewHeaderSubject"
+  >
+    Example Subject
+  </div>
+  <div
+    className="PreviewHeaderContact"
+  >
+    <div
+      className="PreviewHeaderAvatar"
+    >
+      <Person
+        color="white"
+        size={50}
+      />
+    </div>
+    <div
+      className="PreviewHeaderAddresses"
+    >
+      <div
+        className="PreviewHeaderFrom"
+      >
+        <strong>
+          Test Name
+        </strong>
+        <span>
+           
+        </span>
+        <span>
+          &lt;test@example.com&gt;
+        </span>
+      </div>
+      <div
+        className="PreviewHeaderTo"
+      >
+        to me
+      </div>
+    </div>
+  </div>
+</div>
+`;
