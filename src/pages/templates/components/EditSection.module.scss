@@ -6,4 +6,10 @@
 
 .TabsWrapper > div {
   box-shadow: none;
+  height: 50px; // to match preview control bar
+}
+
+.TabsWrapper > div > a {
+  height: 100%;
+  padding-bottom: 0;
 }
