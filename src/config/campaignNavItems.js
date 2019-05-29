@@ -1,5 +1,5 @@
 import { hasUiOption } from 'src/helpers/conditions/account';
-import { FilterNone } from '@sparkpost/matchbox-icons/matchbox-icons';
+import { FilterNone } from '@sparkpost/matchbox-icons';
 
 const campaignNavItems = [
   {

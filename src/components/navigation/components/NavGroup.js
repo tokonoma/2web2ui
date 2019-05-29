@@ -6,7 +6,7 @@ import { ChevronLeft } from '@sparkpost/matchbox-icons';
 import NavItem from './NavItem';
 import styles from './NavItem.module.scss';
 
-const ParentNavItem = (props) => {
+const NavGroup = (props) => {
   const [open, setOpen] = useState(false);
 
   const {
@@ -21,7 +21,9 @@ const ParentNavItem = (props) => {
   useEffect(() => {
     const isAChildActive = _.some(children, (child) => location.pathname.includes(child.to));
 
-    isAChildActive ? setOpen(true) : null;
+    if (isAChildActive) {
+      setOpen(true);
+    }
   },
   [children, location.pathname]
   );
@@ -43,13 +45,11 @@ const ParentNavItem = (props) => {
         <ChevronLeft className={styles.chevron}/>
       </a>
       <ul className={styles.NestedList}>
-        {children.map((child, key) => <NavItem {...child} mobile={mobile} location={location} key={key}
-          toggleMobileNav={toggleMobileNav}/>)}
+        {children.map((child, key) => <NavItem {...child} mobile={mobile} location={location} key={key} toggleMobileNav={toggleMobileNav}/>)}
       </ul>
     </li>
   );
 };
 
-ParentNavItem.displayName = 'ParentNavItem';
-export default ParentNavItem;
+export default NavGroup;
 

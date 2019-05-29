@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ParentNavItem tests should render children correctly 1`] = `
+exports[`NavGroup tests should render children correctly 1`] = `
 <li>
   <a
     className="Link hasChildren"
@@ -50,7 +50,7 @@ exports[`ParentNavItem tests should render children correctly 1`] = `
 </li>
 `;
 
-exports[`ParentNavItem tests should render correctly on mobile 1`] = `
+exports[`NavGroup tests should render correctly on mobile 1`] = `
 <li>
   <a
     className="Link hasChildren mobile"
