@@ -1,5 +1,5 @@
 import { hasUiOption } from 'src/helpers/conditions/account';
-import { FilterNone } from '@sparkpost/matchbox-icons';
+import { TemplateOutlineFill } from '@sparkpost/matchbox-icons';
 
 const campaignNavItems = [
   {
@@ -20,7 +20,7 @@ const campaignNavItems = [
 export default {
   label: 'Campaigns',
   to: '/campaigns',
-  icon: FilterNone,
+  icon: TemplateOutlineFill,
   condition: hasUiOption('templatesV2'),
   children: campaignNavItems
 };
