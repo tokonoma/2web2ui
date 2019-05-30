@@ -1,4 +1,2 @@
-export default {
-  routeNamespace: 'templatesv2'
-};
+export const routeNamespace = 'templatesv2';
 

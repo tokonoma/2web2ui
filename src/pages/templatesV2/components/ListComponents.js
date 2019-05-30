@@ -6,7 +6,7 @@ import { formatDateTime } from 'src/helpers/date';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
 import styles from './ListComponents.module.scss';
 
-import constants from '../constants';
+import { routeNamespace } from '../constants';
 
 export const Name = ({ name, id, subaccount_id, ...rowData }) => {
   const isDraft = rowData.list_status === 'draft';
@@ -15,7 +15,7 @@ export const Name = ({ name, id, subaccount_id, ...rowData }) => {
     <>
       <p className={styles.Name}>
         <Link
-          to={`/${constants.routeNamespace}/edit/${id}${isDraft ? '' : '/published'}${setSubaccountQuery(subaccount_id)}`}>
+          to={`/${routeNamespace}/edit/${id}${isDraft ? '' : '/published'}${setSubaccountQuery(subaccount_id)}`}>
           <strong>{name}</strong>
         </Link>
       </p>
@@ -45,7 +45,8 @@ export const Status = (rowData) => {
   return <Tag><Edit/> Draft</Tag>;
 };
 
-export const Action = ({ onClick, ...props }) => <Button flat onClick={() => onClick(props)}><Delete size={20}/></Button>;
+export const Action = ({ onClick, ...props }) => <Button flat onClick={() => onClick(props)}><Delete
+  size={20}/></Button>;
 
 export const LastUpdated = ({ last_update_time }) => <p
   className={styles.LastUpdated}>{formatDateTime(last_update_time)}</p>;
