@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { Page } from '@sparkpost/matchbox';
 
 import { ApiErrorBanner, DeleteModal, Loading, TableCollection } from 'src/components';
@@ -7,12 +6,10 @@ import { Templates } from 'src/components/images';
 import PageLink from 'src/components/pageLink';
 import { resolveTemplateStatus } from 'src/helpers/templates';
 import { Action, LastUpdated, Name, Status } from './components/ListComponents';
-import { deleteTemplate } from 'src/actions/templates';
-import { showAlert } from 'src/actions/globalAlert';
 
 import styles from './ListPage.module.scss';
 
-export class ListPage extends Component {
+export default class ListPage extends Component {
   state = {
     showDeleteModal: false,
     templateToDelete: null
@@ -136,8 +133,3 @@ export class ListPage extends Component {
     );
   }
 }
-
-const mapStateToProps = (state, props) => ({
-  deletePending: state.templates.deletePending
-});
-export default connect(mapStateToProps, { deleteTemplate, showAlert })(ListPage);

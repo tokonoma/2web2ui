@@ -39,6 +39,14 @@ describe('Template List Components', () => {
     it('should render correctly', () => {
       expect(shallow(<Action/>)).toMatchSnapshot();
     });
+
+    it('should invoke delete', () => {
+      const fn = jest.fn();
+      const props = { onClick: fn, name: 'Foo', id: 'bar' };
+      const wrapper = shallow(<Action {...props} />);
+      wrapper.find('Button').simulate('click');
+      expect(fn).toHaveBeenCalledWith({ id: 'bar', name: 'Foo' });
+    });
   });
 
   describe('LastUpdated', () => {

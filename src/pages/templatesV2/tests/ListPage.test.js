@@ -8,8 +8,9 @@ describe('ListPage', () => {
     <ListPage
       canModify={true}
       hasSubaccounts={false}
-      listTemplates={() => {
-      }}
+      deletePending={false}
+      showAlert={jest.fn()}
+      listTemplates={jest.fn()}
       loading={false}
       templates={[
         {
@@ -61,6 +62,37 @@ describe('ListPage', () => {
   it('renders Loading', () => {
     const wrapper = subject({ loading: true });
     expect(wrapper.find('Loading')).toExist();
+  });
+
+  it('renders delete modal visible', () => {
+    const wrapper = subject();
+    wrapper.setState({ showDeleteModal: true });
+    expect(wrapper.find('DeleteModal').prop('open')).toBe(true);
+  });
+
+  it('renders delete modal hidden', () => {
+    const wrapper = subject();
+    wrapper.setState({ showDeleteModal: false });
+    expect(wrapper.find('DeleteModal').prop('open')).toBe(false);
+  });
+
+  it('deletes template upon confirmation', async () => {
+    const delFn = jest.fn(() => Promise.resolve());
+    const wrapper = subject({ deleteTemplate: delFn });
+    wrapper.setState({ showDeleteModal: true, templateToDelete: { id: 'foo', name: 'Bar' }});
+    await wrapper.find('DeleteModal').prop('onDelete')();
+    expect(delFn).toHaveBeenCalledWith('foo');
+  });
+
+  it('shows alert after delete and refreshes list', async () => {
+    const delFn = jest.fn(() => Promise.resolve());
+    const alertFn = jest.fn();
+    const listTemplateFn = jest.fn();
+    const wrapper = subject({ deleteTemplate: delFn, showAlert: alertFn, listTemplates: listTemplateFn });
+    wrapper.setState({ showDeleteModal: true, templateToDelete: { id: 'foo', name: 'Bar' }});
+    await wrapper.find('DeleteModal').prop('onDelete')();
+    expect(alertFn).toHaveBeenCalledWith({ type: 'success', message: 'Template Bar deleted' });
+    expect(listTemplateFn).toHaveBeenCalled();
   });
 
   describe('renders error banner', () => {

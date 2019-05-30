@@ -3,6 +3,7 @@
 exports[`Template List Components Action should render correctly 1`] = `
 <Button
   flat={true}
+  onClick={[Function]}
   size="default"
 >
   <Delete
