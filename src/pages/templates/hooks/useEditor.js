@@ -23,7 +23,7 @@ const useEditor = ({ inlineErrors = []}) => {
       // note, this will trigger onValidate which should call our setAnnotations
       editor.getSession().setAnnotations(nextAnnotations);
     }
-  }, [editor, nextAnnotations]);
+  }, [editor, JSON.stringify(nextAnnotations)]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return {
     annotations,
