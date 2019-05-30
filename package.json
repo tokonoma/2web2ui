@@ -58,7 +58,7 @@
     "@sparkpost/boomerang": "^1.0.6",
     "@sparkpost/matchbox": "^3.3.12",
     "@sparkpost/matchbox-icons": "^1.1.7",
-    "axios": "^0.18.0",
+    "axios": "^0.19.0",
     "bowser": "2.1.2",
     "classnames": "^2.2.5",
     "color": "^3.0.0",
