@@ -108,6 +108,15 @@ export default (state = initialState, { now = new Date(), ...action }) => {
       };
     }
 
+    case 'DELETE_TEMPLATE_PENDING':
+      return { ...state, deletePending: true };
+
+    case 'DELETE_TEMPLATE_FAIL':
+      return { ...state, deletePending: false };
+
+    case 'DELETE_TEMPLATE_SUCCESS':
+      return { ...state, deletePending: false };
+
     default:
       return state;
   }

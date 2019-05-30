@@ -1,29 +1,49 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Page } from '@sparkpost/matchbox';
-import { ApiErrorBanner, Loading, TableCollection } from 'src/components';
+
+import { ApiErrorBanner, DeleteModal, Loading, TableCollection } from 'src/components';
 import { Templates } from 'src/components/images';
 import PageLink from 'src/components/pageLink';
 import { resolveTemplateStatus } from 'src/helpers/templates';
 import { Action, LastUpdated, Name, Status } from './components/ListComponents';
+import { deleteTemplate } from 'src/actions/templates';
+import { showAlert } from 'src/actions/globalAlert';
 
 import styles from './ListPage.module.scss';
 
-export default class ListPage extends Component {
+export class ListPage extends Component {
+  state = {
+    showDeleteModal: false,
+    templateToDelete: null
+  };
+
   componentDidMount() {
     this.props.listTemplates();
   }
 
   deleteTemplate = () => {
-    alert('Deleting');
+    const { deleteTemplate, listTemplates, showAlert } = this.props;
+    const { id, name } = this.state.templateToDelete;
+    return deleteTemplate(id)
+      .then(() => {
+        showAlert({ type: 'success', message: `Template ${name} deleted` });
+        this.toggleDeleteModal();
+        return listTemplates();
+      });
   };
+
+  toggleDeleteModal = (props) => {
+    this.setState({ showDeleteModal: !this.state.showDeleteModal, templateToDelete: props });
+  };
+
   columns = [
     {
       component: Name,
       header: {
         label: 'Template Name',
         sortKey: 'name'
-      },
-      visible: () => true
+      }
     },
     {
       component: Status,
@@ -33,31 +53,28 @@ export default class ListPage extends Component {
           resolveTemplateStatus(template).publishedWithChanges,
           template.published
         ]
-      },
-      visible: () => true
+      }
     },
     {
       component: LastUpdated,
       header: {
         label: 'Last Updated',
         sortKey: 'last_update_time'
-      },
-      visible: () => true
+      }
     },
     {
       component: Action,
       header: null,
-      visible: () => true
+      onClick: this.toggleDeleteModal
     }
   ];
 
   renderRow = (columns) => (props) => (
-    columns.map(({ component: Component }) => <Component {...props} />)
+    columns.map(({ component: Component, onClick }) => <Component onClick={onClick} {...props} />)
   );
 
   render() {
-    const { canModify, error, listTemplates, loading, templates } = this.props;
-    const visibleColumns = this.columns.filter(({ visible }) => visible(this.props));
+    const { canModify, error, listTemplates, loading, templates, deletePending } = this.props;
 
     if (loading) {
       return <Loading/>;
@@ -87,13 +104,14 @@ export default class ListPage extends Component {
         ) : (
           <>
             <p className={styles.LeadText}>
-              Create re-usable templates that allow for dynamic personalized content. Easily communicate with your team by having a set of named templates to reference.
+              Create re-usable templates that allow for dynamic personalized content. Easily communicate with your team
+              by having a set of named templates to reference.
               Building a library of "go-to" templates for recurrent use-cases to reduce workload for your team.
             </p>
             <TableCollection
-              columns={visibleColumns.map(({ header }) => header)}
+              columns={this.columns.map(({ header }) => header)}
               rows={templates}
-              getRowData={this.renderRow(visibleColumns)}
+              getRowData={this.renderRow(this.columns)}
               pagination
               filterBox={{
                 show: true,
@@ -104,9 +122,22 @@ export default class ListPage extends Component {
               defaultSortDirection="desc"
               saveCsv={false}
             />
+            <DeleteModal
+              open={this.state.showDeleteModal}
+              title="Are you sure you want to delete this template?"
+              content={<p>Both the draft and published versions of this template will be deleted.</p>}
+              onCancel={this.toggleDeleteModal}
+              onDelete={this.deleteTemplate}
+              isPending={deletePending}
+            />
           </>
         )}
       </Page>
     );
   }
 }
+
+const mapStateToProps = (state, props) => ({
+  deletePending: state.templates.deletePending
+});
+export default connect(mapStateToProps, { deleteTemplate, showAlert })(ListPage);

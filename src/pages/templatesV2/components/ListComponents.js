@@ -45,9 +45,7 @@ export const Status = (rowData) => {
   return <Tag><Edit/> Draft</Tag>;
 };
 
-export const Action = () => (
-  <Button flat><Delete size={20}/></Button>
-);
+export const Action = ({ onClick, ...props }) => <Button flat onClick={() => onClick(props)}><Delete size={20}/></Button>;
 
 export const LastUpdated = ({ last_update_time }) => <p
   className={styles.LastUpdated}>{formatDateTime(last_update_time)}</p>;
