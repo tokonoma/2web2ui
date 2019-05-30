@@ -4,10 +4,11 @@ import Editor from './Editor';
 import 'brace/mode/html';
 
 const EditAmpSection = () => {
-  const { content, setContent, isPublishedMode } = useEditorContext();
+  const { annotations, content, setContent, isPublishedMode } = useEditorContext();
 
   return (
     <Editor
+      inlineErrors={annotations.amp_html}
       mode="html"
       name="amp-html-content-editor"
       onChange={(value) => { setContent({ amp_html: value }); }}
