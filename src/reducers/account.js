@@ -59,6 +59,22 @@ export default (state = initialState, { type, meta, payload }) => {
     case 'GET_BILLING_PENDING':
       return { ...state, billingLoading: true };
 
+    case 'GET_USAGE_PENDING':
+      return { ...state };
+
+    case 'GET_USAGE_FAIL':
+      return { ...state };
+
+    case 'GET_USAGE_SUCCESS':
+      return { ...state };
+
+    case 'GET_USAGE':
+      return { ...state, usage: {
+        day: {},
+        month: { used: 123123 },
+        timestamp: '2019-05-21T18:31:00.000Z'
+      }};
+
     default:
       return state;
   }

@@ -1,0 +1,24 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.PriceTable {
+  top: 0;
+  left: 0;
+  position: relative;
+}
+
+.SelectedTier {
+  color: color(gray, 8);
+}
+
+.Bold {
+  font-weight: bold;
+}
+
+.PriceRow {
+  margin-bottom: 20px;
+}
+
+.TotalCost {
+  color: color(orange);
+  font-weight: 700;
+}

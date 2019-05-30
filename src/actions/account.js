@@ -23,6 +23,10 @@ export function getPlans({ meta = {}} = {}) {
   });
 }
 
+export function getUsage() {
+  return { type: 'GET_USAGE' };
+}
+
 export function getBillingInfo({ meta = {}} = {}) {
   return sparkpostApiRequest({
     type: 'GET_BILLING',
