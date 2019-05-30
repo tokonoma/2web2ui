@@ -29,6 +29,20 @@ describe('useEditorAnnotations', () => {
     });
   });
 
+  it('ignores errors caused by substitution data', () => {
+    ampValidator.renderErrorMessage = jest.fn(() => (
+      'The attribute \'src\' in tag \'AMP-IMG (AMP4EMAIL)\' invalid value \'https://example.com/{{company}}.jpg\'.'
+    ));
+    ampValidator.validateString = jest.fn(() => ({ errors: [{ line: 123 }]}));
+    const wrapper = useTestWrapper({
+      content: { amp_html: '<html ⚡4email>' },
+      debounceEvent: jest.fn((fn) => fn())
+    });
+    const state = useHook(wrapper);
+
+    expect(state.annotations.amp_html).toEqual([]);
+  });
+
   it('cancels remaining debounced calls', () => {
     const debounceEvent = jest.fn();
     debounceEvent.cancel = jest.fn();

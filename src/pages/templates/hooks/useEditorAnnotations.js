@@ -4,16 +4,17 @@ import ampValidator from 'third/ampValidator';
 
 const debouncer = debounce((fn) => fn(), 500);
 
+const isSubstitutionDataError = /invalid value '.*{{.*}}.*'\./;
+
 const useEditorAnnotations = ({ content: { amp_html = '' }, debounceEvent = debouncer }) => {
   const [ampHtmlValidatorErrors, setAmpHtmlValidatorErrors] = useState([]);
 
   useEffect(() => {
     debounceEvent(() => {
       const { errors } = ampValidator.validateString(amp_html, 'AMP4EMAIL');
-      const nextErrors = errors.map((error) => ({
-        line: error.line,
-        message: ampValidator.renderErrorMessage(error)
-      }));
+      const nextErrors = errors
+        .map((error) => ({ line: error.line, message: ampValidator.renderErrorMessage(error) }))
+        .filter((error) => !isSubstitutionDataError.test(error.message));
 
       setAmpHtmlValidatorErrors(nextErrors);
     });
