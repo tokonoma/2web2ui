@@ -61,7 +61,9 @@ export default class ListPage extends Component {
     },
     {
       component: Action,
-      header: null,
+      header: {
+        width: 20
+      },
       onClick: this.toggleDeleteModal
     }
   ];

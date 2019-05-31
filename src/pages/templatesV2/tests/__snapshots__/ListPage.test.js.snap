@@ -41,7 +41,9 @@ exports[`ListPage renders correctly 1`] = `
           "label": "Last Updated",
           "sortKey": "last_update_time",
         },
-        null,
+        Object {
+          "width": 20,
+        },
       ]
     }
     defaultSortColumn="last_update_time"
