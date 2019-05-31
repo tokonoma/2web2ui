@@ -6,6 +6,8 @@ import EditNavigation from './components/EditNavigation';
 import links from './constants/editNavigationLinks';
 import useEditorContext from './hooks/useEditorContext';
 
+import { routeNamespace } from './constants/routes';
+
 const EditAndPreviewPage = () => {
   const { currentNavigationIndex, draft, hasDraftFailedToLoad, isDraftLoading } = useEditorContext();
   const Contents = links[currentNavigationIndex].render;
@@ -26,7 +28,7 @@ const EditAndPreviewPage = () => {
 
   return (
     <FullPage
-      breadcrumbRedirectsTo="/templates"
+      breadcrumbRedirectsTo={`/${routeNamespace}`}
       title={draft.name}
     >
       <EditNavigation primaryArea={<PrimaryArea />} />

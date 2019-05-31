@@ -6,7 +6,7 @@ import { formatDateTime } from 'src/helpers/date';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
 import styles from './ListComponents.module.scss';
 
-import { routeNamespace } from '../constants';
+import { routeNamespace } from '../constants/routes';
 
 export const Name = ({ name, id, subaccount_id, ...rowData }) => {
   const isDraft = rowData.list_status === 'draft';

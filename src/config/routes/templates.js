@@ -1,12 +1,12 @@
 import { templates, templatesV2 } from 'src/pages';
 import { hasGrants } from '../../helpers/conditions';
 import App from '../../components/layout/App';
-
+import Fullscreen from 'src/components/layout/Fullscreen';
 
 const v1Routes = [
   {
     path: '/templates',
-    component: 'ListPage',
+    component: templates.ListPage,
     condition: hasGrants('templates/view'),
     layout: App,
     title: 'Templates',
@@ -14,7 +14,7 @@ const v1Routes = [
   },
   {
     path: '/templates/create/:id?',
-    component: 'CreatePage',
+    component: templates.CreatePage,
     condition: hasGrants('templates/modify'),
     layout: App,
     title: 'New Template',
@@ -22,15 +22,7 @@ const v1Routes = [
   },
   {
     path: '/templates/edit/:id',
-    component: 'EditPage',
-    condition: hasGrants('templates/view'),
-    layout: App,
-    title: 'Edit Template',
-    supportDocSearch: 'template'
-  },
-  {
-    path: '/templates/edit/:id/next/:tabKey?',
-    component: 'EditAndPreviewPage',
+    component: templates.EditPage,
     condition: hasGrants('templates/view'),
     layout: App,
     title: 'Edit Template',
@@ -38,7 +30,7 @@ const v1Routes = [
   },
   {
     path: '/templates/edit/:id/published',
-    component: 'PublishedPage',
+    component: templates.PublishedPage,
     condition: hasGrants('templates/view'),
     layout: App,
     title: 'View Published Template',
@@ -46,7 +38,7 @@ const v1Routes = [
   },
   {
     path: '/templates/preview/:id',
-    component: 'PreviewDraftPage',
+    component: templates.PreviewDraftPage,
     condition: hasGrants('templates/view'),
     layout: App,
     title: 'Preview Draft Template',
@@ -54,7 +46,7 @@ const v1Routes = [
   },
   {
     path: '/templates/preview/:id/published',
-    component: 'PreviewPublishedPage',
+    component: templates.PreviewPublishedPage,
     condition: hasGrants('templates/view'),
     layout: App,
     title: 'Preview Published Template',
@@ -62,13 +54,25 @@ const v1Routes = [
   }
 ];
 
-const allTemplateRoutes = v1Routes.map((route) => ({
-  ...route,
-  component: templates[route.component]
-})).concat(v1Routes.map((route) => ({
-  ...route,
-  path: route.path.replace('/templates', '/templatesv2'),
-  component: templatesV2[route.component] ? templatesV2[route.component] : templates[route.component]
-})));
+const v2Routes = [
+  {
+    path: '/templatesv2',
+    component: templatesV2.ListPage,
+    condition: hasGrants('templates/view'),
+    layout: App,
+    title: 'Templates',
+    supportDocSearch: 'template'
+  },
+  {
+    path: '/templatesv2/edit/:id/:navKey?',
+    component: templatesV2.EditAndPreviewPage,
+    condition: hasGrants('templates/view'),
+    layout: Fullscreen,
+    title: 'Edit Template',
+    supportDocSearch: 'template'
+  }
+];
+
+const allTemplateRoutes = v1Routes.concat(v2Routes);
 
 export default allTemplateRoutes;
