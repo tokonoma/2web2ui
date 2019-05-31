@@ -47,6 +47,6 @@ describe('useEditorNavigation', () => {
       useHook(wrapper).setNavigation('settings');
     });
 
-    expect(historyPush).toHaveBeenCalledWith('/templates/edit/test-template/next/settings');
+    expect(historyPush).toHaveBeenCalledWith('/templatesv2/edit/test-template/settings');
   });
 });

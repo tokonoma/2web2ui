@@ -2,7 +2,7 @@
 
 exports[`EditAndPreviewPage renders a page 1`] = `
 <FullPage
-  breadcrumbRedirectsTo="/templates"
+  breadcrumbRedirectsTo="/templatesv2"
   title="Test Template"
 >
   <EditNavigation
