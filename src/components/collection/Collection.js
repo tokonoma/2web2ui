@@ -1,6 +1,7 @@
 /* eslint max-lines: ["error", 200] */
 import React, { Component } from 'react';
 import CollectionPropTypes from './Collection.propTypes';
+import { Panel } from '@sparkpost/matchbox';
 import qs from 'query-string';
 import _ from 'lodash';
 import { withRouter } from 'react-router-dom';
@@ -104,9 +105,9 @@ export class Collection extends Component {
   }
 
   renderFilterBox() {
-    const { filterBox, rows, perPageButtons = DEFAULT_PER_PAGE_BUTTONS } = this.props;
+    const { filterBox, rows, perPageButtons = DEFAULT_PER_PAGE_BUTTONS, isV2Table } = this.props;
     if (filterBox.show && (rows.length > Math.min(...perPageButtons))) {
-      return <FilterBox {...filterBox} rows={rows} onChange={this.debouncedHandleFilterChange} />;
+      return <FilterBox {...filterBox} isV2Table = {isV2Table} rows={rows} onChange={this.debouncedHandleFilterChange} display={'inline-block'}/>;
     }
     return null;
   }
@@ -138,24 +139,41 @@ export class Collection extends Component {
       rowKeyName = 'id',
       headerComponent: HeaderComponent = NullComponent,
       outerWrapper: OuterWrapper = PassThroughWrapper,
-      bodyWrapper: BodyWrapper = PassThroughWrapper
+      bodyWrapper: BodyWrapper = PassThroughWrapper,
+      isV2Table,
+      title
     } = this.props;
-
     if (!rows.length) {
       return null;
     }
 
     return (
-      <div>
-        {this.renderFilterBox()}
-        <OuterWrapper>
-          <HeaderComponent />
-          <BodyWrapper>
-            {this.getVisibleRows().map((row, i) => <RowComponent key={`${row[rowKeyName] || 'row'}-${i}`} {...row} />)}
-          </BodyWrapper>
-        </OuterWrapper>
-        {this.renderPagination()}
-      </div>
+      isV2Table
+        ? (<>
+          <Panel title ={title} sectioned >
+            {this.renderFilterBox()}
+            <OuterWrapper>
+              <HeaderComponent />
+              <BodyWrapper>
+                {this.getVisibleRows().map((row, i) => <RowComponent key={`${row[rowKeyName] || 'row'}-${i}`} {...row} />)}
+              </BodyWrapper>
+            </OuterWrapper>
+
+          </Panel>
+          {this.renderPagination()}
+        </>)
+        : (
+          <div >
+            {this.renderFilterBox()}
+            <OuterWrapper>
+              <HeaderComponent />
+              <BodyWrapper>
+                {this.getVisibleRows().map((row, i) => <RowComponent key={`${row[rowKeyName] || 'row'}-${i}`} {...row} />)}
+              </BodyWrapper>
+            </OuterWrapper>
+            {this.renderPagination()}
+          </div>
+        )
     );
   }
 }
