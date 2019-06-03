@@ -46,13 +46,13 @@ export class ListPageNew extends Component {
 
   renderRecent() {
 
+    //TODO replace alert metric/name with last triggered date
     const orderedAlerts = [...this.props.alerts].sort((a, b) => {
       if (a.name.toLowerCase() > b.name.toLowerCase()) {
         return 1;
       }
       return -1;
     }).slice(0,4);
-
 
     const grids = orderedAlerts.map((alert) => (<Grid.Column
       xs={12}

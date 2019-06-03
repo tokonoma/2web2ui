@@ -9,19 +9,19 @@ import _ from 'lodash';
 
 const filterBoxConfig = {
   show: true,
-  exampleModifiers: ['enabled', 'metric'],
-  itemToStringKeys: ['name', 'id', 'enabled', 'metric'],
-  keyMap: { metric: 'alert_metric' }
+  itemToStringKeys: ['name'],
+  placeholder: 'Search...'
 };
 
 class AlertCollectionNew extends Component {
+  //TODO Add last triggered date
   getDetailsLink = ({ id, subaccount_id }) => `/alerts/edit/${id}${setSubaccountQuery(subaccount_id)}`
 
   getColumns() {
     const columns = [
       { label: 'Name', sortKey: 'name', width: '40%' },
       { label: 'Metric', sortKey: 'alert_metric' },
-      { label: 'Last Triggered', sortKey: 'alert_metric' },
+      { label: 'Last Triggered', sortKey: '' },
       { label: 'Enabled', sortKey: 'enabled' },
       null
     ];
@@ -32,12 +32,13 @@ class AlertCollectionNew extends Component {
   getRowData = ({ alert_metric, enabled, id, name, subaccount_id }) => {
 
     const deleteFn = () => this.props.toggleDelete({ id, name, subaccount_id });
+
     return [
       <Fragment>
         <PageLink to={this.getDetailsLink({ id, subaccount_id })}>{name}</PageLink>
       </Fragment>,
       <Tag>{_.get(METRICS, alert_metric, alert_metric)}</Tag>,
-      <p>May21st</p>,
+      <></>,
       <AlertToggle enabled={enabled} id={id} subaccountId={subaccount_id} />,
       <Button flat onClick = {deleteFn}><Delete/></Button>
     ];
