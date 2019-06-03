@@ -656,6 +656,13 @@ const routes = [
     supportDocsSearch: 'Alerts'
   },
   {
+    path: '/alerts-new',
+    component: alerts.ListPageNew,
+    layout: App,
+    title: 'Alerts',
+    supportDocsSearch: 'Alerts'
+  },
+  {
     path: '/alerts/edit/:id',
     component: alerts.EditPage,
     condition: hasGrants('alerts/manage'),

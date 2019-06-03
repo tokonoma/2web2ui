@@ -1,0 +1,30 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.Section {
+  display: block;
+  height: 8rem;
+  padding: 0;
+  @media screen and (min-width: breakpoint(small)) { max-width: 13vw; }
+  word-wrap: break-word;
+  overflow: hidden;
+  font-size: rem(20)
+}
+
+.Footer {
+  padding-top: rem(8);
+  padding-right: 0;
+  height: rem(30);
+  text-align: right;
+}
+
+.Time {
+  font-size: rem(16);
+  display: block;
+  margin-bottom: spacing(larger);
+}
+
+.Description {
+  position: relative;
+  top: -20px;
+  width: 75%;
+}
