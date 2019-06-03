@@ -2,11 +2,13 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import classnames from 'classnames';
-import Item from './components/Item';
-import Top from './components/Top';
+
 import { WindowSizeContext } from 'src/context/WindowSize';
 import { selectNavItems } from 'src/selectors/navItems';
 import styles from './Navigation.module.scss';
+import Top from './components/Top';
+import NavItem from './components/NavItem';
+import NavGroup from './components/NavGroup';
 
 export class Navigation extends Component {
   state = {
@@ -14,14 +16,15 @@ export class Navigation extends Component {
   };
 
   renderItems() {
-    return this.props.navItems.map((item, key) => (
-      <Item {...item} toggleMobileNav={this.toggleMobileNav} location={this.props.location} key={key} />
-    ));
+    return this.props.navItems.map((item, key) => {
+      const props = { ...item, toggleMobileNav: this.toggleMobileNav, location: this.props.location, key: key };
+      return item.children ? <NavGroup {...props} /> : <NavItem {...props} />;
+    });
   }
 
   toggleMobileNav = () => {
     this.setState({ open: !this.state.open });
-  }
+  };
 
   renderNav = ({ mobile }) => {
     const asideClasses = classnames(styles.Aside, mobile && styles.mobile);
@@ -44,7 +47,7 @@ export class Navigation extends Component {
         </div>
       </Fragment>
     );
-  }
+  };
 
   render() {
     return <WindowSizeContext.Consumer children={this.renderNav} />;

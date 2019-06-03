@@ -1,5 +1,7 @@
 import { Home, InsertChart, Code, MailOutline, Language, Settings, Compare, NotificationsActive, Signal, VerifiedUser } from '@sparkpost/matchbox-icons';
 
+import campaignNavItems from './campaignNavItems';
+
 export default [
   {
     label: 'Dashboard',
@@ -63,10 +65,15 @@ export default [
     ]
   },
   {
+    ...campaignNavItems
+  },
+  //TODO remove it in TR-1455
+  {
     label: 'Templates',
     to: '/templates',
     icon: Code
   },
+  //TODO remove it in TR-1455
   {
     label: 'A/B Testing',
     to: '/ab-testing',
@@ -136,6 +143,7 @@ export default [
     tag: 'new',
     icon: NotificationsActive
   },
+  //TODO remove it in TR-1455
   {
     label: 'Snippets',
     to: '/snippets',
