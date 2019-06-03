@@ -48,6 +48,13 @@ describe('Component: Collection', () => {
     expect(wrapper.find(FilterBox)).toHaveLength(0);
   });
 
+  it('should render V2 collection correctly with basic props', () => {
+    addRows(3);
+    const wrapper = shallow(<Collection {...props} isV2Table = {true} />);
+    expect(wrapper).toMatchSnapshot();
+    expect(wrapper.find('Panel')).toExist();
+  });
+
   it('should render with custom wrappers', () => {
     addRows(3);
     props.outerWrapper = function CustomOuterWrapper(props) { return props.children; };

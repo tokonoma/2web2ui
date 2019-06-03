@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Grid, Page, Panel } from '@sparkpost/matchbox';
+import { Button, Grid, Page, Panel } from '@sparkpost/matchbox';
 import { RemoveRedEye } from '@sparkpost/matchbox-icons';
 import { ApiErrorBanner, DeleteModal, Loading } from 'src/components';
 import { Templates } from 'src/components/images';
@@ -44,9 +44,9 @@ export class ListPageNew extends Component {
     );
   }
 
-  renderRecent() {
+  renderRecentlyTriggered() {
 
-    //TODO replace alert metric/name with last triggered date
+    //TODO replace alert metric/name with last triggered date and replace link
     const orderedAlerts = [...this.props.alerts].sort((a, b) => {
       if (a.name.toLowerCase() > b.name.toLowerCase()) {
         return 1;
@@ -54,22 +54,21 @@ export class ListPageNew extends Component {
       return -1;
     }).slice(0,4);
 
-    const grids = orderedAlerts.map((alert) => (<Grid.Column
+    const recentlyTriggered = orderedAlerts.map((alert) => (<Grid.Column
       xs={12}
       md={6}
       lg={3}
       key = {alert.id}>
       <Panel
         accent
-        sectioned
       >
-        <Panel.Section className = {styles.Section}>
-          <strong className={styles.Time}>{alert.alert_metric}</strong>
+        <Panel.Section className = {styles.LastTriggeredCard}>
+          <strong className={styles.LastTriggeredTime}>{alert.alert_metric}</strong>
           <strong>{alert.name}</strong>
         </Panel.Section>
 
         <Panel.Section className = {styles.Footer}>
-          <RemoveRedEye />
+          <Button flat to = {'/alerts-new'}><RemoveRedEye className = {styles.Icon}/></Button>
         </Panel.Section>
       </Panel>
     </Grid.Column>));
@@ -77,7 +76,7 @@ export class ListPageNew extends Component {
       <>
         <h3>Recently Triggered Alerts</h3>
         <Grid>
-          {grids}
+          {recentlyTriggered}
         </Grid>
         </>);
   }
@@ -86,11 +85,9 @@ export class ListPageNew extends Component {
     return (
       <>
         <p className={styles.Description}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-          labore et dolore magna aliqua. Cursus turpis massa tincidunt dui ut ornare lectus. Faucibus pulvinar
-          elementum integer enim neque volutpat ac tincidunt.
+          Use alerts to be notified about when important changes occur in your Health Score, bounce rates, and email usage.
         </p>
-        {this.renderRecent()}
+        {this.renderRecentlyTriggered()}
         {this.renderCollection()}
         </>
     );

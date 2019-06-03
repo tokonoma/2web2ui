@@ -1,10 +1,11 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
 import { Button, Tag } from '@sparkpost/matchbox';
 import { TableCollection, PageLink } from 'src/components';
 import AlertToggle from './AlertToggle';
 import { Delete } from '@sparkpost/matchbox-icons';
 import { METRICS } from '../constants/metrics';
+import styles from './AlertCollection.module.scss';
 import _ from 'lodash';
 
 const filterBoxConfig = {
@@ -14,15 +15,15 @@ const filterBoxConfig = {
 };
 
 class AlertCollectionNew extends Component {
-  //TODO Add last triggered date
+  //TODO Add last triggered date and replace link
   getDetailsLink = ({ id, subaccount_id }) => `/alerts/edit/${id}${setSubaccountQuery(subaccount_id)}`
 
   getColumns() {
     const columns = [
-      { label: 'Name', sortKey: 'name', width: '40%' },
+      { label: 'Alert Name', sortKey: 'name', width: '40%', className: styles.TabbedCell },
       { label: 'Metric', sortKey: 'alert_metric' },
       { label: 'Last Triggered', sortKey: '' },
-      { label: 'Enabled', sortKey: 'enabled' },
+      { label: 'Status', sortKey: 'enabled' },
       null
     ];
 
@@ -34,13 +35,13 @@ class AlertCollectionNew extends Component {
     const deleteFn = () => this.props.toggleDelete({ id, name, subaccount_id });
 
     return [
-      <Fragment>
+      <div className = {styles.TabbedCell2}>
         <PageLink to={this.getDetailsLink({ id, subaccount_id })}>{name}</PageLink>
-      </Fragment>,
+      </div>,
       <Tag>{_.get(METRICS, alert_metric, alert_metric)}</Tag>,
       <></>,
       <AlertToggle enabled={enabled} id={id} subaccountId={subaccount_id} />,
-      <Button flat onClick = {deleteFn}><Delete/></Button>
+      <Button flat onClick = {deleteFn}><Delete className = {styles.Icon}/></Button>
     ];
   }
 

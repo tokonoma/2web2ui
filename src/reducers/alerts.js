@@ -55,16 +55,7 @@ export default (state = initialState, { type, payload, meta }) => {
     case 'SET_ALERT_ENABLED_STATUS_PENDING':
       return { ...state, setEnabledStatusPending: true };
 
-    case 'SET_ALERT_ENABLED_STATUS_SUCCESS': {
-      const { list } = state;
-      const updatedAlertList = list.map((alert) => {
-        if (alert.id === payload.id) {
-          alert.enabled = payload.enabled;
-        }
-        return alert;
-      });
-      return { ...state, list: updatedAlertList, setEnabledStatusPending: false };
-    }
+    case 'SET_ALERT_ENABLED_STATUS_SUCCESS':
     case 'SET_ALERT_ENABLED_STATUS_FAIL':
       return { ...state, setEnabledStatusPending: false };
 

@@ -107,7 +107,7 @@ export class Collection extends Component {
   renderFilterBox() {
     const { filterBox, rows, perPageButtons = DEFAULT_PER_PAGE_BUTTONS, isV2Table } = this.props;
     if (filterBox.show && (rows.length > Math.min(...perPageButtons))) {
-      return <FilterBox {...filterBox} isV2Table = {isV2Table} rows={rows} onChange={this.debouncedHandleFilterChange} display={'inline-block'}/>;
+      return <FilterBox {...filterBox} isV2Table = {isV2Table} rows={rows} onChange={this.debouncedHandleFilterChange} />;
     }
     return null;
   }
@@ -147,30 +147,28 @@ export class Collection extends Component {
       return null;
     }
 
+    const collection = (
+      <OuterWrapper>
+        <HeaderComponent />
+        <BodyWrapper>
+          {this.getVisibleRows().map((row, i) => <RowComponent key={`${row[rowKeyName] || 'row'}-${i}`} {...row} />)}
+        </BodyWrapper>
+      </OuterWrapper>
+
+    );
     return (
       isV2Table
         ? (<>
-          <Panel title ={title} sectioned >
+          <Panel title ={title}>
             {this.renderFilterBox()}
-            <OuterWrapper>
-              <HeaderComponent />
-              <BodyWrapper>
-                {this.getVisibleRows().map((row, i) => <RowComponent key={`${row[rowKeyName] || 'row'}-${i}`} {...row} />)}
-              </BodyWrapper>
-            </OuterWrapper>
-
+            {collection}
           </Panel>
           {this.renderPagination()}
         </>)
         : (
           <div >
             {this.renderFilterBox()}
-            <OuterWrapper>
-              <HeaderComponent />
-              <BodyWrapper>
-                {this.getVisibleRows().map((row, i) => <RowComponent key={`${row[rowKeyName] || 'row'}-${i}`} {...row} />)}
-              </BodyWrapper>
-            </OuterWrapper>
+            {collection}
             {this.renderPagination()}
           </div>
         )
