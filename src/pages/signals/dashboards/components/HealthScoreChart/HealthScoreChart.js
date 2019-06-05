@@ -10,6 +10,7 @@ import Callout from 'src/components/callout';
 import MetricDisplay from '../MetricDisplay/MetricDisplay';
 import { formatNumber, roundToPlaces } from 'src/helpers/units';
 import thresholds from '../../../constants/healthScoreThresholds';
+import { newModelLine } from 'src/pages/signals/constants/heathScoreV2';
 import { formatDate, getDateTicks } from 'src/helpers/date';
 import moment from 'moment';
 import _ from 'lodash';
@@ -119,6 +120,7 @@ export function HealthScoreChart(props) {
                 { y: 80, stroke: thresholds.good.color, strokeWidth: 1 },
                 { y: 55, stroke: thresholds.danger.color, strokeWidth: 1 }
               ]}
+              xAxisRefLines={newModelLine}
               yKey='health_score'
               xAxisProps={getXAxisProps()}
               yAxisProps={{ ticks: [0,55,80,100]}}
