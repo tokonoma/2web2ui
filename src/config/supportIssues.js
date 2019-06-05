@@ -38,6 +38,11 @@ const supportIssues = [
     type: ERRORS
   },
   {
+    id: 'signals_issues',
+    label: 'Signals issues',
+    type: SUPPORT
+  },
+  {
     id: 'sending_domain_block',
     label: 'Sending domain block',
     type: COMPLIANCE
@@ -58,7 +63,7 @@ const supportIssues = [
     type: SUPPORT
   },
   {
-    id: 'reporting_and_event_issue',
+    id: 'reporting_and_event_issues',
     label: 'Reporting & event issues',
     type: SUPPORT
   },
