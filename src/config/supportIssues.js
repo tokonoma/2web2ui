@@ -38,7 +38,7 @@ const supportIssues = [
     type: ERRORS
   },
   {
-    id: 'signals_issue',
+    id: 'signals_issues',
     label: 'Signals issues',
     type: SUPPORT
   },
@@ -63,7 +63,7 @@ const supportIssues = [
     type: SUPPORT
   },
   {
-    id: 'reporting_and_event_issue',
+    id: 'reporting_and_event_issues',
     label: 'Reporting & event issues',
     type: SUPPORT
   },
