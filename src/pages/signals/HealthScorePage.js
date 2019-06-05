@@ -25,7 +25,7 @@ import SpamTrapsPreview from './components/previews/SpamTrapsPreview';
 import EngagementRecencyPreview from './components/previews/EngagementRecencyPreview';
 import styles from './DetailsPages.module.scss';
 import thresholds from './constants/healthScoreThresholds';
-import { newModelLine } from './constants/heathScoreV2';
+import { newModelLine } from './constants/healthScoreV2';
 
 export class HealthScorePage extends Component {
   state = {

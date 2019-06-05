@@ -10,7 +10,7 @@ import Callout from 'src/components/callout';
 import MetricDisplay from '../MetricDisplay/MetricDisplay';
 import { formatNumber, roundToPlaces } from 'src/helpers/units';
 import thresholds from '../../../constants/healthScoreThresholds';
-import { newModelLine } from 'src/pages/signals/constants/heathScoreV2';
+import { newModelLine } from 'src/pages/signals/constants/healthScoreV2';
 import { formatDate, getDateTicks } from 'src/helpers/date';
 import moment from 'moment';
 import _ from 'lodash';
