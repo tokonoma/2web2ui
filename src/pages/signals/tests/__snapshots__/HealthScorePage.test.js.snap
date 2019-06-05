@@ -140,7 +140,7 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
                 "label": Object {
                   "fontSize": 9,
                   "position": "top",
-                  "value": "new model",
+                  "value": "New Model",
                 },
                 "stroke": "#d2d2d7",
                 "strokeWidth": 1,
@@ -503,7 +503,7 @@ exports[`Signals Health Score Page renders empty weights 1`] = `
                 "label": Object {
                   "fontSize": 9,
                   "position": "top",
-                  "value": "new model",
+                  "value": "New Model",
                 },
                 "stroke": "#d2d2d7",
                 "strokeWidth": 1,
