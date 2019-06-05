@@ -2,91 +2,95 @@ import cases from 'jest-in-case';
 import * as selector from '../templates';
 
 describe('Templates selectors', () => {
-  const store = {
-    templates: {
-      list: [
-        {
-          name: 'unpublished',
-          has_published: false,
-          shared_with_subaccounts: false,
-          subaccount_id: 101
+  let store;
+  beforeEach(() => {
+    store = {
+      templates: {
+        list: [
+          {
+            name: 'unpublished',
+            has_published: false,
+            shared_with_subaccounts: false,
+            subaccount_id: 101
+          },
+          {
+            name: 'publishedSubaccount',
+            has_published: true,
+            shared_with_subaccounts: false,
+            subaccount_id: 101
+          },
+          {
+            name: 'publishedMaster',
+            has_published: true,
+            shared_with_subaccounts: false,
+            subaccount_id: 0,
+            published: true
+          },
+          {
+            name: 'publishedShared',
+            has_published: true,
+            shared_with_subaccounts: true,
+            subaccount_id: 0
+          }
+        ],
+        testData: { test: 'data' },
+        byId: {
+          ape: {
+            draft: {
+              name: 'Ape',
+              id: 'ape',
+              published: false
+            },
+            published: {
+              name: 'Ape',
+              id: 'ape',
+              published: true
+            }
+          }
         },
-        {
-          name: 'publishedSubaccount',
-          has_published: true,
-          shared_with_subaccounts: false,
-          subaccount_id: 101
-        },
-        {
-          name: 'publishedMaster',
-          has_published: true,
-          shared_with_subaccounts: false,
-          subaccount_id: 0
-        },
-        {
-          name: 'publishedShared',
-          has_published: true,
-          shared_with_subaccounts: true,
-          subaccount_id: 0
-        }
-      ],
-      testData: { test: 'data' },
-      byId: {
-        ape: {
+        contentPreview: {
           draft: {
-            name: 'Ape',
-            id: 'ape',
-            published: false
+            ape: {
+              html: '<h1>Southeastern Asia</h1>',
+              subject: 'New Location: Come visit me'
+            }
           },
           published: {
-            name: 'Ape',
-            id: 'ape',
-            published: true
+            ape: {
+              html: '<h1>Baltimore Zoo</h1>.',
+              subject: 'Come visit me'
+            }
           }
         }
       },
-      contentPreview: {
-        draft: {
-          ape: {
-            html: '<h1>Southeastern Asia</h1>',
-            subject: 'New Location: Come visit me'
+      sendingDomains: {
+        list: [
+          {
+            domain: 'shared.com',
+            shared_with_subaccounts: true,
+            status: { ownership_verified: true, compliance_status: 'valid' }
+          },
+          {
+            domain: 'masterOnly.com',
+            status: { ownership_verified: true, compliance_status: 'valid' }
+          },
+          {
+            domain: 'assignedToSub.com',
+            subaccount_id: 101,
+            status: { ownership_verified: true, compliance_status: 'valid' }
+          },
+          {
+            domain: 'notvalid.com',
+            status: { ownership_verified: false, compliance_status: 'valid' }
           }
-        },
-        published: {
-          ape: {
-            html: '<h1>Baltimore Zoo</h1>.',
-            subject: 'Come visit me'
-          }
-        }
-      }
-    },
-    sendingDomains: {
-      list: [
-        {
-          domain: 'shared.com',
-          shared_with_subaccounts: true,
-          status: { ownership_verified: true, compliance_status: 'valid' }
-        },
-        {
-          domain: 'masterOnly.com',
-          status: { ownership_verified: true, compliance_status: 'valid' }
-        },
-        {
-          domain: 'assignedToSub.com',
-          subaccount_id: 101,
-          status: { ownership_verified: true, compliance_status: 'valid' }
-        },
-        {
-          domain: 'notvalid.com',
-          status: { ownership_verified: false, compliance_status: 'valid' }
-        }
-      ]
-    },
-    currentUser: {
-      has_subaccounts: true
-    },
-    form: { testform: { values: {}}}
-  };
+        ]
+      },
+      currentUser: {
+        has_subaccounts: true
+      },
+      form: { testform: { values: {}}}
+    };
+  });
 
   describe('Templates by id Selector', () => {
     it('returns template', () => {
@@ -223,5 +227,18 @@ describe('Templates selectors', () => {
 
       expect(selector.selectPreviewLineErrors(store)).toEqual(errors);
     });
+  });
+
+  describe('selectTemplatesForListTable', () => {
+
+    it('returns template(s) with published version only', () => {
+      expect(selector.selectTemplatesForListTable(store)).toMatchSnapshot();
+    });
+
+    it('returns template(s) correctly having both published and draft version', () => {
+      store.templates.list[2].has_draft = true;
+      expect(selector.selectTemplatesForListTable(store)).toMatchSnapshot();
+    });
+
   });
 });
