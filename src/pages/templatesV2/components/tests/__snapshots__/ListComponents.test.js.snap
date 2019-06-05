@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Template List Components Action should render correctly 1`] = `
+exports[`Template List Components DeleteAction should render correctly 1`] = `
 <Button
   flat={true}
   onClick={[Function]}
@@ -45,9 +45,11 @@ exports[`Template List Components Status should render draft 1`] = `
 `;
 
 exports[`Template List Components Status should render published 1`] = `
-<Tag>
+<Tag
+  className="published"
+>
   <CheckCircle
-    color="#45D09E"
+    className="PublishedIconColor"
   />
    Published
 </Tag>
@@ -74,7 +76,7 @@ exports[`Template List Components Status should render unpublished changes 1`] =
     className="PublishedWithChanges"
   >
     <CheckCircle
-      color="#45D09E"
+      className="PublishedIconColor"
     />
      Published
   </Tag>

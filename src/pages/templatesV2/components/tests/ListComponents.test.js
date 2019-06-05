@@ -1,6 +1,6 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import { Action, LastUpdated, Name, Status } from '../ListComponents';
+import { DeleteAction, LastUpdated, Name, Status } from '../ListComponents';
 
 describe('Template List Components', () => {
   let wrapper;
@@ -35,15 +35,15 @@ describe('Template List Components', () => {
     });
   });
 
-  describe('Action', () => {
+  describe('DeleteAction', () => {
     it('should render correctly', () => {
-      expect(shallow(<Action/>)).toMatchSnapshot();
+      expect(shallow(<DeleteAction/>)).toMatchSnapshot();
     });
 
     it('should invoke delete', () => {
       const fn = jest.fn();
       const props = { onClick: fn, name: 'Foo', id: 'bar' };
-      const wrapper = shallow(<Action {...props} />);
+      const wrapper = shallow(<DeleteAction {...props} />);
       wrapper.find('Button').simulate('click');
       expect(fn).toHaveBeenCalledWith({ id: 'bar', name: 'Foo' });
     });

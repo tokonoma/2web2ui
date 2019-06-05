@@ -26,10 +26,10 @@ export const Name = ({ name, id, subaccount_id, ...rowData }) => {
 export const Status = (rowData) => {
   const listStatus = rowData.list_status;
 
-  const PublishedIcon = <CheckCircle color='#45D09E'/>;
+  const PublishedIcon = <CheckCircle className={styles.PublishedIconColor}/>;
 
   if (listStatus === 'published') {
-    return <Tag>{PublishedIcon} Published</Tag>;
+    return <Tag className={styles.published}>{PublishedIcon} Published</Tag>;
   }
 
   if (listStatus === 'published_with_draft') {
@@ -45,7 +45,7 @@ export const Status = (rowData) => {
   return <Tag><Edit/> Draft</Tag>;
 };
 
-export const Action = ({ onClick, ...props }) => <Button flat onClick={() => onClick(props)}><Delete
+export const DeleteAction = ({ onClick, ...props }) => <Button flat onClick={() => onClick(props)}><Delete
   size={20}/></Button>;
 
 export const LastUpdated = ({ last_update_time }) => <p

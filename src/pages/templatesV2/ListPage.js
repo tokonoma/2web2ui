@@ -5,7 +5,7 @@ import { ApiErrorBanner, DeleteModal, Loading, TableCollection } from 'src/compo
 import { Templates } from 'src/components/images';
 import PageLink from 'src/components/pageLink';
 import { resolveTemplateStatus } from 'src/helpers/templates';
-import { Action, LastUpdated, Name, Status } from './components/ListComponents';
+import { DeleteAction, LastUpdated, Name, Status } from './components/ListComponents';
 
 import styles from './ListPage.module.scss';
 
@@ -60,7 +60,7 @@ export default class ListPage extends Component {
       }
     },
     {
-      component: Action,
+      component: DeleteAction,
       header: {
         width: 20
       },
