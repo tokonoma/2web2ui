@@ -7,6 +7,9 @@ import { Templates } from 'src/components/images';
 import AlertCollectionNew from './components/AlertCollectionNew';
 import withAlertsList from './containers/ListPage.container';
 import styles from './ListPage.module.scss';
+import { formatDateTime } from 'src/helpers/date';
+import DisplayDate from '../reports/messageEvents/components/DisplayDate';//TODO Move this into generic component
+
 
 
 export class ListPageNew extends Component {
@@ -54,6 +57,10 @@ export class ListPageNew extends Component {
       return -1;
     }).slice(0,4);
 
+    //TODO remove when real data is available through API
+    const timestamp = '2019-06-05T20:29:59.000Z';
+    const lastTriggeredDate = formatDateTime(timestamp);
+
     const recentlyTriggered = orderedAlerts.map((alert) => (<Grid.Column
       xs={12}
       md={6}
@@ -63,7 +70,7 @@ export class ListPageNew extends Component {
         accent
       >
         <Panel.Section className = {styles.LastTriggeredCard}>
-          <strong className={styles.LastTriggeredTime}>{alert.alert_metric}</strong>
+          <div className = {styles.LastTriggeredTime} ><DisplayDate timestamp={timestamp} formattedDate={lastTriggeredDate} /></div>
           <strong>{alert.name}</strong>
         </Panel.Section>
 

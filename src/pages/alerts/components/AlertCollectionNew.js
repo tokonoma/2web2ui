@@ -6,7 +6,9 @@ import AlertToggle from './AlertToggle';
 import { Delete } from '@sparkpost/matchbox-icons';
 import { METRICS } from '../constants/metrics';
 import styles from './AlertCollection.module.scss';
+import { formatDateTime } from 'src/helpers/date';
 import _ from 'lodash';
+import DisplayDate from '../../reports/messageEvents/components/DisplayDate';//TODO Move this into generic component
 
 const filterBoxConfig = {
   show: true,
@@ -37,13 +39,15 @@ class AlertCollectionNew extends Component {
   getRowData = ({ alert_metric, enabled, id, name, subaccount_id }) => {
 
     const deleteFn = () => this.props.toggleDelete({ id, name, subaccount_id });
-
+    //TODO remove when real data is available through API
+    const timestamp = '2019-06-05T20:29:59.000Z';
+    const lastTriggeredDate = formatDateTime(timestamp);
     return [
       <div className = {styles.TabbedCellHeader}>
         <PageLink to={this.getDetailsLink({ id, subaccount_id })}>{name}</PageLink>
       </div>,
       <Tag>{_.get(METRICS, alert_metric, alert_metric)}</Tag>,
-      <></>,
+      <DisplayDate timestamp={timestamp} formattedDate={lastTriggeredDate} />,
       <AlertToggle enabled={enabled} id={id} subaccountId={subaccount_id} />,
       <Button flat onClick = {deleteFn}><Delete className = {styles.Icon}/></Button>
     ];
