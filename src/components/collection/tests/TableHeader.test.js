@@ -37,11 +37,6 @@ describe('Component: TableHeader', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('renders header correctly with new V2 table', () => {
-    wrapper.setProps({ isV2Table: true });
-    expect(wrapper).toMatchSnapshot();
-  });
-
   it('handles sorting correctly', () => {
     wrapper.setProps({ columns: complexColumns });
 

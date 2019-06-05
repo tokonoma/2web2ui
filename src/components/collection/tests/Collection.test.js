@@ -48,17 +48,16 @@ describe('Component: Collection', () => {
     expect(wrapper.find(FilterBox)).toHaveLength(0);
   });
 
-  it('should render V2 collection correctly with basic props', () => {
-    addRows(3);
-    const wrapper = shallow(<Collection {...props} isV2Table = {true} />);
-    expect(wrapper).toMatchSnapshot();
-    expect(wrapper.find('Panel')).toExist();
-  });
-
   it('should render with custom wrappers', () => {
     addRows(3);
     props.outerWrapper = function CustomOuterWrapper(props) { return props.children; };
     props.bodyWrapper = function CustomBodyWrapper(props) { return props.children; };
+    expect(shallow(<Collection {...props} />)).toMatchSnapshot();
+  });
+
+  it('should use custom render function when child is a render function', () => {
+    addRows(3);
+    props.children = function CustomOuterWrapper(props) { return (<div>{props}</div>); };
     expect(shallow(<Collection {...props} />)).toMatchSnapshot();
   });
 

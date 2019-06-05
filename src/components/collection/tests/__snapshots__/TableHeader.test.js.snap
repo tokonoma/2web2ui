@@ -37,24 +37,6 @@ exports[`Component: TableHeader renders header correctly with complex column con
 </thead>
 `;
 
-exports[`Component: TableHeader renders header correctly with new V2 table 1`] = `
-<thead>
-  <Table.Row>
-    <Table.HeaderCell
-      className="TabbedHeader"
-      key="column 0: one"
-    >
-      one
-    </Table.HeaderCell>
-    <Table.HeaderCell
-      key="column 1: two"
-    >
-      two
-    </Table.HeaderCell>
-  </Table.Row>
-</thead>
-`;
-
 exports[`Component: TableHeader renders header correctly with string only column names 1`] = `
 <thead>
   <Table.Row>
