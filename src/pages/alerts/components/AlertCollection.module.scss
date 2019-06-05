@@ -4,10 +4,22 @@
   fill: color(gray, 5);
 }
 
-.TabbedCell {
+.TabbedCellBody {
   padding: 0 0 0 2rem;
 }
-.TabbedCell2 {
+.TabbedCellHeader {
   padding: 0 0 0 1rem;
+}
+
+.FilterBox {
+  padding: spacing(large) 1rem spacing(base);
+}
+
+.TableWrapper {
+  overflow-x: auto;
+
+  & > * {
+    margin-bottom: 0;
+  }
 }
 

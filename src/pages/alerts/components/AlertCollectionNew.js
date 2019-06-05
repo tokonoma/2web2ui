@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
-import { Button, Tag } from '@sparkpost/matchbox';
+import { Button, Table, Tag, Panel } from '@sparkpost/matchbox';
 import { TableCollection, PageLink } from 'src/components';
 import AlertToggle from './AlertToggle';
 import { Delete } from '@sparkpost/matchbox-icons';
@@ -11,7 +11,11 @@ import _ from 'lodash';
 const filterBoxConfig = {
   show: true,
   itemToStringKeys: ['name'],
-  placeholder: 'Search...'
+  placeholder: 'Search...',
+  wrapper: (props) => (
+    <div className = {styles.FilterBox}>
+      {props}
+    </div>)
 };
 
 class AlertCollectionNew extends Component {
@@ -20,7 +24,7 @@ class AlertCollectionNew extends Component {
 
   getColumns() {
     const columns = [
-      { label: 'Alert Name', sortKey: 'name', width: '40%', className: styles.TabbedCell },
+      { label: 'Alert Name', sortKey: 'name', width: '40%', className: styles.TabbedCellBody },
       { label: 'Metric', sortKey: 'alert_metric' },
       { label: 'Last Triggered', sortKey: '' },
       { label: 'Status', sortKey: 'enabled' },
@@ -35,7 +39,7 @@ class AlertCollectionNew extends Component {
     const deleteFn = () => this.props.toggleDelete({ id, name, subaccount_id });
 
     return [
-      <div className = {styles.TabbedCell2}>
+      <div className = {styles.TabbedCellHeader}>
         <PageLink to={this.getDetailsLink({ id, subaccount_id })}>{name}</PageLink>
       </div>,
       <Tag>{_.get(METRICS, alert_metric, alert_metric)}</Tag>,
@@ -45,13 +49,20 @@ class AlertCollectionNew extends Component {
     ];
   }
 
+  TableWrapper = (props) => (
+    <>
+      <div className={styles.TableWrapper}>
+        <Table>{props.children}</Table>
+      </div>
+    </>
+  );
+
   render() {
     const { alerts } = this.props;
 
     return (
       <TableCollection
-        title = {'All Alerts'}
-        isV2Table={true}
+        wrapperComponent={this.TableWrapper}
         columns={this.getColumns()}
         rows={alerts}
         getRowData={this.getRowData}
@@ -59,7 +70,18 @@ class AlertCollectionNew extends Component {
         filterBox={filterBoxConfig}
         defaultSortColumn='name'
         defaultSortDirection='desc'
-      />
+      >
+        {
+          ({ filterBox, collection, pagination }) =>
+            <>
+            <Panel title='All Alerts'>
+              {filterBox}
+              {collection}
+            </Panel>
+            {pagination}
+          </>
+        }
+      </TableCollection>
     );
   }
 }

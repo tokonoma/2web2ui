@@ -2,10 +2,9 @@ import React from 'react';
 import { TextField, Panel } from '@sparkpost/matchbox';
 import { Search } from '@sparkpost/matchbox-icons';
 import { getRandomExampleSearch } from './helpers/exampleSearch';
-import styles from './FilterBox.module.scss';
 
 export default function CollectionFilterBox(props) {
-  const { isV2Table, placeholder } = props;
+  const { placeholder, wrapper } = props;
   const placeholderText = placeholder || `Filter results e.g. ${getRandomExampleSearch(props)}`;
   const text = (<TextField
     name="collection-filter-box"
@@ -15,11 +14,8 @@ export default function CollectionFilterBox(props) {
   />);
 
   return (
-    (isV2Table)
-      ? (
-        <div className = {styles.Box}>
-          {text}
-        </div>)
+    (wrapper)
+      ? wrapper(text)
       : (
         <Panel sectioned>
           {text}

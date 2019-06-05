@@ -13,14 +13,6 @@ const TableWrapper = (props) => (
   </Panel>
 );
 
-const TableWrapperV2 = (props) => (
-  <>
-    <div className={styles.TableWrapper}>
-      <Table>{props.children}</Table>
-    </div>
-  </>
-);
-
 const TableBody = (props) => <tbody>{props.children}</tbody>;
 
 class TableCollection extends Component {
@@ -44,9 +36,10 @@ class TableCollection extends Component {
   }
 
   render() {
-    const { rowComponent, headerComponent, columns, getRowData, rows, isV2Table = false } = this.props;
+    const { rowComponent, wrapperComponent, headerComponent, columns, getRowData, rows } = this.props;
     const { sortColumn, sortDirection } = this.state;
 
+    const WrapperComponent = wrapperComponent ? wrapperComponent : TableWrapper;
     const HeaderComponent = headerComponent ? headerComponent : () => <TableHeader columns={columns} onSort={this.handleSortChange} sortColumn={sortColumn} sortDirection={sortDirection}/>;
     const TableRow = rowComponent
       ? rowComponent
@@ -56,7 +49,7 @@ class TableCollection extends Component {
 
     return (
       <Collection
-        outerWrapper={(isV2Table) ? TableWrapperV2 : TableWrapper}
+        outerWrapper={WrapperComponent}
         headerComponent={HeaderComponent}
         bodyWrapper={TableBody}
         rowComponent={TableRow}

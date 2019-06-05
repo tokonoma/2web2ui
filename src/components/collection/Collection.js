@@ -1,7 +1,6 @@
 /* eslint max-lines: ["error", 200] */
 import React, { Component } from 'react';
 import CollectionPropTypes from './Collection.propTypes';
-import { Panel } from '@sparkpost/matchbox';
 import qs from 'query-string';
 import _ from 'lodash';
 import { withRouter } from 'react-router-dom';
@@ -105,9 +104,9 @@ export class Collection extends Component {
   }
 
   renderFilterBox() {
-    const { filterBox, rows, perPageButtons = DEFAULT_PER_PAGE_BUTTONS, isV2Table } = this.props;
+    const { filterBox, rows, perPageButtons = DEFAULT_PER_PAGE_BUTTONS } = this.props;
     if (filterBox.show && (rows.length > Math.min(...perPageButtons))) {
-      return <FilterBox {...filterBox} isV2Table = {isV2Table} rows={rows} onChange={this.debouncedHandleFilterChange} />;
+      return <FilterBox {...filterBox} rows={rows} onChange={this.debouncedHandleFilterChange} />;
     }
     return null;
   }
@@ -140,8 +139,7 @@ export class Collection extends Component {
       headerComponent: HeaderComponent = NullComponent,
       outerWrapper: OuterWrapper = PassThroughWrapper,
       bodyWrapper: BodyWrapper = PassThroughWrapper,
-      isV2Table,
-      title
+      children
     } = this.props;
     if (!rows.length) {
       return null;
@@ -157,14 +155,8 @@ export class Collection extends Component {
 
     );
     return (
-      isV2Table
-        ? (<>
-          <Panel title ={title}>
-            {this.renderFilterBox()}
-            {collection}
-          </Panel>
-          {this.renderPagination()}
-        </>)
+      typeof(children) === 'function'
+        ? children({ filterBox: this.renderFilterBox(), collection, pagination: this.renderPagination() })
         : (
           <div >
             {this.renderFilterBox()}
