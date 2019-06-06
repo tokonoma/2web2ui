@@ -95,6 +95,11 @@ describe('ListPage', () => {
     expect(listTemplateFn).toHaveBeenCalled();
   });
 
+  it('does not render column with canModify false', () => {
+    const wrapper = subject({ canModify: false });
+    expect(wrapper).toMatchSnapshot();
+  });
+
   describe('renders error banner', () => {
     it('with error details', () => {
       const wrapper = subject({ error: new Error('Oh no!'), templates: []});

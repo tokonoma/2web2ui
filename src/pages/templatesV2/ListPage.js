@@ -34,43 +34,56 @@ export default class ListPage extends Component {
     this.setState({ showDeleteModal: !this.state.showDeleteModal, templateToDelete: props });
   };
 
-  columns = [
-    {
-      component: Name,
-      header: {
-        label: 'Template Name',
-        sortKey: 'name'
-      }
-    },
-    {
-      component: Status,
-      header: {
-        label: 'Status',
-        sortKey: (template) => [
-          resolveTemplateStatus(template).publishedWithChanges,
-          template.published
-        ]
-      }
-    },
-    {
-      component: LastUpdated,
-      header: {
-        label: 'Last Updated',
-        sortKey: 'last_update_time'
-      }
-    },
-    {
-      component: DeleteAction,
-      header: {
-        width: 20
-      },
-      onClick: this.toggleDeleteModal
-    }
-  ];
+  getColumns = () => {
+    const { canModify } = this.props;
 
-  renderRow = (columns) => (props) => (
-    columns.map(({ component: Component, onClick }) => <Component onClick={onClick} {...props} />)
-  );
+    const columns = [
+      {
+        component: Name,
+        header: {
+          label: 'Template Name',
+          sortKey: 'name'
+        },
+        visible: true,
+        key: 'name'
+      },
+      {
+        component: Status,
+        header: {
+          label: 'Status',
+          sortKey: (template) => [
+            resolveTemplateStatus(template).publishedWithChanges,
+            template.published
+          ]
+        },
+        visible: true,
+        key: 'status'
+      },
+      {
+        component: LastUpdated,
+        header: {
+          label: 'Last Updated',
+          sortKey: 'last_update_time'
+        },
+        visible: true,
+        key: 'lastupdated'
+      },
+      {
+        component: DeleteAction,
+        header: {
+          width: 20
+        },
+        onClick: this.toggleDeleteModal,
+        visible: canModify,
+        key: 'deleteaction'
+      }
+    ];
+
+    return columns.filter((col) => col.visible);
+
+  }
+
+  renderRow = (columns) => (props) => columns.map(({ component: Component, onClick }) => <Component onClick={onClick} {...props} />);
 
   render() {
     const { canModify, error, listTemplates, loading, templates, deletePending } = this.props;
@@ -78,6 +91,8 @@ export default class ListPage extends Component {
     if (loading) {
       return <Loading/>;
     }
+
+    const columns = this.getColumns();
 
     return (
       <Page
@@ -108,9 +123,9 @@ export default class ListPage extends Component {
               Building a library of "go-to" templates for recurrent use-cases to reduce workload for your team.
             </p>
             <TableCollection
-              columns={this.columns.map(({ header }) => header)}
+              columns={columns.map(({ header, key }) => ({ ...header, key }))}
               rows={templates}
-              getRowData={this.renderRow(this.columns)}
+              getRowData={this.renderRow(columns)}
               pagination
               filterBox={{
                 show: true,
