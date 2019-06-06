@@ -21,8 +21,8 @@ const RV_MODAL = 'recipient_validation';
 
 export default class BillingSummary extends Component {
   state = {
-    show: RV_MODAL,
-    showCloseButton: true
+    show: false,
+    showCloseButton: false
   }
 
   handleModal = (modal = false, showCloseButton = false) => {
@@ -61,8 +61,33 @@ export default class BillingSummary extends Component {
     />
   );
 
+  renderRecipientValidationSection = () => {
+    const { account } = this.props;
+    const { usage } = account;
+
+    const { recipient_validation } = usage;
+    const volumeUsed = recipient_validation.month.used;
+
+    let totalCost = 0;
+
+    RECIPIENT_TIERS.forEach(({ volumeMax, volumeMin, cost }) => {
+      const tierCost = Math.max(Math.min(volumeMax, volumeUsed) - volumeMin, 0) * cost;
+      totalCost += tierCost;
+    });
+
+    return (
+      <Panel.Section>
+        <LabelledValue label="Recipient Validation">
+          <h6>{formatFullNumber(volumeUsed)} emails validated for {formatCurrency(totalCost)}<small> as of {new Date(recipient_validation.timestamp).toLocaleDateString()}</small></h6>
+          <UnstyledLink onClick={this.handleRvModal}>How was this calculated?</UnstyledLink>
+        </LabelledValue>
+      </Panel.Section>
+    );
+  };
+
   render() {
     const { account, currentPlan, canChangePlan, canUpdateBillingInfo, canPurchaseIps, invoices, isAWSAccount, accountAgeInDays } = this.props;
+    const { usage, usageLoading } = account;
     const { show, showCloseButton } = this.state;
     let changePlanActions = {};
 
@@ -70,23 +95,6 @@ export default class BillingSummary extends Component {
       const changePlanLabel = currentPlan.isFree ? 'Upgrade Now' : 'Change Plan';
       changePlanActions = { actions: [{ content: changePlanLabel, to: '/account/billing/plan', Component: Link, color: 'orange' }]};
     }
-    const usage = 123442;
-
-    let totalCost = 0;
-    let minTier = 0;
-    const currDate = new Date();
-    RECIPIENT_TIERS.forEach(({ volumeMax, volumeMin, cost }) => {
-      let tierCost = 0;
-
-      if (usage > volumeMax) {
-        tierCost = (volumeMax - minTier) * cost;
-      } else {
-        tierCost = Math.max(usage - minTier, 0) * cost;
-      }
-
-      minTier = volumeMax;
-      totalCost += tierCost;
-    });
 
     return (
       <div>
@@ -99,12 +107,7 @@ export default class BillingSummary extends Component {
             </LabelledValue>
           </Panel.Section>
           {canPurchaseIps && this.renderDedicatedIpSummarySection()}
-          <Panel.Section>
-            <LabelledValue label="Recipient Validation">
-              <h6>{formatFullNumber(usage)} emails validated for {formatCurrency(totalCost)}<small> as of {currDate.toLocaleDateString()}</small></h6>
-              <UnstyledLink onClick={this.handleRvModal}>How was this calculated?</UnstyledLink>
-            </LabelledValue>
-          </Panel.Section>
+          {usage && !usageLoading && this.renderRecipientValidationSection()}
         </Panel>
 
         {canUpdateBillingInfo && this.renderSummary()}
@@ -118,7 +121,7 @@ export default class BillingSummary extends Component {
           {show === PAYMENT_MODAL && <UpdatePaymentForm onCancel={this.handleModal}/>}
           {show === CONTACT_MODAL && <UpdateContactForm onCancel={this.handleModal}/>}
           {show === IP_MODAL && <AddIps onClose={this.handleModal}/>}
-          {show === RV_MODAL && <RecipientValidationModal usage={usage} onClose={this.handleModal} />}
+          {show === RV_MODAL && usage && <RecipientValidationModal usage={usage} onClose={this.handleModal} />}
         </Modal>
       </div>
     );
