@@ -26,7 +26,7 @@ class AlertCollectionNew extends Component {
 
   getColumns() {
     const columns = [
-      { label: 'Alert Name', sortKey: 'name', width: '40%', className: styles.TabbedCellBody },
+      { label: 'Alert Name', sortKey: 'name', width: '40%', className: styles.TabbedCellHeader },
       { label: 'Metric', sortKey: 'alert_metric' },
       { label: 'Last Triggered', sortKey: '' },
       { label: 'Status', sortKey: 'enabled' },
@@ -43,7 +43,7 @@ class AlertCollectionNew extends Component {
     const timestamp = '2019-06-05T20:29:59.000Z';
     const lastTriggeredDate = formatDateTime(timestamp);
     return [
-      <div className = {styles.TabbedCellHeader}>
+      <div className = {styles.TabbedCellBody}>
         <PageLink to={this.getDetailsLink({ id, subaccount_id })}>{name}</PageLink>
       </div>,
       <Tag>{_.get(METRICS, alert_metric, alert_metric)}</Tag>,
@@ -78,7 +78,11 @@ class AlertCollectionNew extends Component {
         {
           ({ filterBox, collection, pagination }) =>
             <>
-            <Panel title='All Alerts'>
+            <Panel >
+              <Panel.Section className = {styles.Title}>
+                <h3>All Alerts</h3>
+              </Panel.Section>
+
               {filterBox}
               {collection}
             </Panel>

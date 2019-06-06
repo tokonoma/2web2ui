@@ -8,17 +8,16 @@
   @media screen and (min-width: breakpoint(larger)) { max-width: 13vw; }
   word-wrap: break-word;
   overflow: hidden;
-  font-size: rem(24)
 }
 
 .Footer {
-  padding: rem(10) rem(10) rem(40);
+  padding: rem(10) rem(0) rem(40);
   height: rem(40);
   text-align: right;
 }
 
 .LastTriggeredTime {
-  font-size: rem(18);
+  font-size: rem(17);
   display: block;
   margin-bottom: rem(30);
 }

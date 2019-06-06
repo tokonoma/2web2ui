@@ -74,7 +74,7 @@ export class ListPageNew extends Component {
       >
         <Panel.Section className = {styles.LastTriggeredCard}>
           <div className = {styles.LastTriggeredTime} ><DisplayDate timestamp={timestamp} formattedDate={lastTriggeredDate} /></div>
-          <strong>{alert.name}</strong>
+          <h3>{alert.name}</h3>
         </Panel.Section>
 
         <Panel.Section className = {styles.Footer}>
