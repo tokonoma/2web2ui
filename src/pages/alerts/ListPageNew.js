@@ -8,13 +8,11 @@ import AlertCollectionNew from './components/AlertCollectionNew';
 import withAlertsList from './containers/ListPage.container';
 import styles from './ListPage.module.scss';
 import { formatDateTime } from 'src/helpers/date';
+import _ from 'lodash';
 import DisplayDate from '../reports/messageEvents/components/DisplayDate';//TODO Move this into generic component
-
-
 
 export class ListPageNew extends Component {
   state = {
-    showDeleteModal: false,
     alertToDelete: {}
   }
 
@@ -22,10 +20,15 @@ export class ListPageNew extends Component {
     this.props.listAlerts();
   }
 
-  toggleDelete = ({ id, name, subaccount_id } = {}) => {
+  openDeleteModal = ({ id, name, subaccount_id } = {}) => {
     this.setState({
-      showDeleteModal: !this.state.showDeleteModal,
       alertToDelete: { id, name, subaccountId: subaccount_id }
+    });
+  };
+
+  closeDeleteModal = () => {
+    this.setState({
+      alertToDelete: {}
     });
   };
 
@@ -34,7 +37,7 @@ export class ListPageNew extends Component {
 
     return this.props.deleteAlert({ id, subaccountId }).then(() => {
       this.props.showAlert({ type: 'success', message: 'Alert deleted' });
-      this.toggleDelete();
+      this.closeDeleteModal();
     });
   }
 
@@ -42,7 +45,7 @@ export class ListPageNew extends Component {
     return (
       <AlertCollectionNew
         alerts={this.props.alerts}
-        toggleDelete={this.toggleDelete}
+        handleDelete={this.openDeleteModal}
       />
     );
   }
@@ -112,6 +115,9 @@ export class ListPageNew extends Component {
 
   render() {
     const { alerts, deletePending, error, loading } = this.props;
+    const { alertToDelete } = this.state;
+    const isDeleteModalOpen = !_.isEmpty(alertToDelete);
+
     if (loading) {
       return <Loading />;
     }
@@ -129,11 +135,11 @@ export class ListPageNew extends Component {
       >
         {error ? this.renderError() : this.renderPage()}
         <DeleteModal
-          open={this.state.showDeleteModal}
+          open={isDeleteModalOpen}
           title='Are you sure you want to delete this alert?'
-          content={<p>The alert "<strong>{this.state.alertToDelete.name}</strong>" will be permanently removed. This cannot be undone.</p>}
+          content={<p>The alert "<strong>{alertToDelete.name}</strong>" will be permanently removed. This cannot be undone.</p>}
           onDelete={this.handleDelete}
-          onCancel={this.toggleDelete}
+          onCancel={this.closeDeleteModal}
           isPending={deletePending}
         />
       </Page>

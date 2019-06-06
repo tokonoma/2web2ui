@@ -38,7 +38,7 @@ class AlertCollectionNew extends Component {
 
   getRowData = ({ alert_metric, enabled, id, name, subaccount_id }) => {
 
-    const deleteFn = () => this.props.toggleDelete({ id, name, subaccount_id });
+    const deleteFn = () => this.props.handleDelete({ id, name, subaccount_id });
     //TODO remove when real data is available through API
     const timestamp = '2019-06-05T20:29:59.000Z';
     const lastTriggeredDate = formatDateTime(timestamp);
