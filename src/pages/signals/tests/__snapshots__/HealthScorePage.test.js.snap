@@ -134,7 +134,20 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
               "ticks": Array [],
             }
           }
-          xAxisRefLines={Array []}
+          xAxisRefLines={
+            Array [
+              Object {
+                "label": Object {
+                  "fontSize": 9,
+                  "position": "top",
+                  "value": "New Model",
+                },
+                "stroke": "#d2d2d7",
+                "strokeWidth": 1,
+                "x": "2019-06-07",
+              },
+            ]
+          }
           xKey="date"
           yAxisProps={
             Object {
@@ -484,7 +497,20 @@ exports[`Signals Health Score Page renders empty weights 1`] = `
               "ticks": Array [],
             }
           }
-          xAxisRefLines={Array []}
+          xAxisRefLines={
+            Array [
+              Object {
+                "label": Object {
+                  "fontSize": 9,
+                  "position": "top",
+                  "value": "New Model",
+                },
+                "stroke": "#d2d2d7",
+                "strokeWidth": 1,
+                "x": "2019-06-07",
+              },
+            ]
+          }
           xKey="date"
           yAxisProps={
             Object {

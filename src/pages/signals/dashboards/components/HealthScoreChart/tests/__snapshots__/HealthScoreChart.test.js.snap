@@ -78,7 +78,20 @@ exports[`Signals Health Score Chart renders happy path correctly 1`] = `
           ],
         }
       }
-      xAxisRefLines={Array []}
+      xAxisRefLines={
+        Array [
+          Object {
+            "label": Object {
+              "fontSize": 9,
+              "position": "top",
+              "value": "New Model",
+            },
+            "stroke": "#d2d2d7",
+            "strokeWidth": 1,
+            "x": "2019-06-07",
+          },
+        ]
+      }
       xKey="date"
       yAxisProps={
         Object {
