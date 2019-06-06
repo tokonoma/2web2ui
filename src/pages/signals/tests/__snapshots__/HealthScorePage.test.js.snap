@@ -341,7 +341,7 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
 "
         />
         <DivergingBar
-          barHeight={35}
+          barHeight={23}
           data={
             Array [
               Object {

@@ -190,6 +190,7 @@ export class HealthScorePage extends Component {
             )}
             {(!panelContent && !selectedWeightsAreEmpty) && (
               <DivergingBar
+                barHeight={23}
                 data={selectedWeights}
                 xKey='weight'
                 yKey='weight_type'
