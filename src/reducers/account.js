@@ -60,13 +60,13 @@ export default (state = initialState, { type, meta, payload }) => {
       return { ...state, billingLoading: true };
 
     case 'GET_USAGE_PENDING':
-      return { ...state };
+      return { ...state, usageLoading: true };
 
     case 'GET_USAGE_FAIL':
-      return { ...state };
+      return { ...state, usageLoading: false, usageError: payload };
 
     case 'GET_USAGE_SUCCESS':
-      return { ...state };
+      return { ...state, usageLoading: false, usage: _.isEmpty(payload) ? null : payload };
 
     case 'GET_USAGE':
       return { ...state, usage: {
