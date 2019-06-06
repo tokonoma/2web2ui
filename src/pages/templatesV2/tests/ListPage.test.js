@@ -97,7 +97,8 @@ describe('ListPage', () => {
 
   it('does not render column with canModify false', () => {
     const wrapper = subject({ canModify: false });
-    expect(wrapper).toMatchSnapshot();
+    const headers = wrapper.find('TableCollection').prop('columns').map(({ label }) => label);
+    expect(headers).toEqual(['Template Name', 'Status', 'Last Updated']);
   });
 
   describe('renders error banner', () => {
