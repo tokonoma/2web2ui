@@ -35,16 +35,6 @@ exports[`SendMoreCTA Component renders correctly 1`] = `
           Upgrade your account.
         </PageLink>
       </Case>
-      <Case
-        condition={[Function]}
-      >
-        <UnstyledLink
-          onClick={[Function]}
-        >
-          Submit a request
-        </UnstyledLink>
-         to increase your daily sending limit.
-      </Case>
     </Connect(ConditionSwitch)>
      
     <UnstyledLink
