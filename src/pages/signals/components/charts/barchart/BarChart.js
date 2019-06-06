@@ -133,20 +133,19 @@ class BarChart extends Component {
             {xAxisRefLines.length && (
               _.map(xAxisRefLines, (xAxisRefLine, index) =>
                 <ReferenceLine
-                  key={`x-${index}`}
+                  key={index}
                   style={{ pointerEvents: 'none' }}
                   x={xAxisRefLine.x}
                   shapeRendering='crispEdges'
                   stroke={xAxisRefLine.stroke}
                   strokeWidth={xAxisRefLine.strokeWidth}
-                  label={xAxisRefLine.label}
                 />
               )
             )}
             {yAxisRefLines.length && (
               _.map(yAxisRefLines, (yAxisRefLine, index) =>
                 <ReferenceLine
-                  key={`y-${index}`}
+                  key={index}
                   style={{ pointerEvents: 'none' }}
                   y={yAxisRefLine.y}
                   shapeRendering='crispEdges'

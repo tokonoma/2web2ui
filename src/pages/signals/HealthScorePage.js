@@ -25,7 +25,6 @@ import SpamTrapsPreview from './components/previews/SpamTrapsPreview';
 import EngagementRecencyPreview from './components/previews/EngagementRecencyPreview';
 import styles from './DetailsPages.module.scss';
 import thresholds from './constants/healthScoreThresholds';
-import { newModelLine } from './constants/healthScoreV2';
 
 export class HealthScorePage extends Component {
   state = {
@@ -110,7 +109,6 @@ export class HealthScorePage extends Component {
                     { y: 0.80, stroke: thresholds.good.color, strokeWidth: 1 },
                     { y: 0.55, stroke: thresholds.danger.color, strokeWidth: 1 }
                   ]}
-                  xAxisRefLines={newModelLine}
                   yKey='health_score'
                   yAxisProps={{
                     ticks: [0,0.55,0.8,1],
