@@ -1,6 +1,6 @@
 /* eslint max-lines: ["error", 200] */
 import React, { Component } from 'react';
-import { change, Field, formValueSelector } from 'redux-form';
+import { autofill, Field, formValueSelector } from 'redux-form';
 import { connect } from 'react-redux';
 // Components
 import { Grid } from '@sparkpost/matchbox';
@@ -21,8 +21,8 @@ import { selectDomainsBySubaccountWithDefault } from '../../../../selectors/temp
 export class CreateForm extends Component {
   // Fills in ID based on Name
   handleIdFill = (e) => {
-    const { change, formName } = this.props;
-    change(formName, 'id', slugify(e.target.value));
+    const { autofill, formName } = this.props;
+    autofill(formName, 'id', slugify(e.target.value));
   };
 
   fromEmailWarning() {
@@ -109,5 +109,5 @@ const mapStateToProps = (state, props) => {
   };
 };
 
-export default connect(mapStateToProps, { change })(CreateForm);
+export default connect(mapStateToProps, { autofill })(CreateForm);
 
