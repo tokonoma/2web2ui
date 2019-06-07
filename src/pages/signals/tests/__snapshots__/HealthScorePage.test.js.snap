@@ -85,8 +85,8 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
             Object {
               "bottom": 5,
               "left": 18,
-              "right": 0,
-              "top": 12,
+              "right": 8,
+              "top": 21,
             }
           }
           onClick={[MockFunction]}
@@ -134,7 +134,31 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
               "ticks": Array [],
             }
           }
-          xAxisRefLines={Array []}
+          xAxisRefLines={
+            Array [
+              Object {
+                "label": Object {
+                  "className": "xDividerLabel",
+                  "offset": 14,
+                  "position": "top",
+                  "value": "New",
+                },
+                "stroke": "#d2d2d7",
+                "strokeWidth": 1,
+                "x": "2019-06-07",
+              },
+              Object {
+                "label": Object {
+                  "className": "xDividerLabel",
+                  "position": "top",
+                  "value": "Model",
+                },
+                "stroke": "#d2d2d7",
+                "strokeWidth": 0,
+                "x": "2019-06-07",
+              },
+            ]
+          }
           xKey="date"
           yAxisProps={
             Object {
@@ -185,7 +209,7 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
             Object {
               "bottom": 5,
               "left": 18,
-              "right": 0,
+              "right": 8,
               "top": 12,
             }
           }
@@ -263,7 +287,7 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
             Object {
               "bottom": 5,
               "left": 18,
-              "right": 0,
+              "right": 8,
               "top": 12,
             }
           }
@@ -462,8 +486,8 @@ exports[`Signals Health Score Page renders empty weights 1`] = `
             Object {
               "bottom": 5,
               "left": 18,
-              "right": 0,
-              "top": 12,
+              "right": 8,
+              "top": 21,
             }
           }
           onClick={[MockFunction]}
@@ -484,7 +508,31 @@ exports[`Signals Health Score Page renders empty weights 1`] = `
               "ticks": Array [],
             }
           }
-          xAxisRefLines={Array []}
+          xAxisRefLines={
+            Array [
+              Object {
+                "label": Object {
+                  "className": "xDividerLabel",
+                  "offset": 14,
+                  "position": "top",
+                  "value": "New",
+                },
+                "stroke": "#d2d2d7",
+                "strokeWidth": 1,
+                "x": "2019-06-07",
+              },
+              Object {
+                "label": Object {
+                  "className": "xDividerLabel",
+                  "position": "top",
+                  "value": "Model",
+                },
+                "stroke": "#d2d2d7",
+                "strokeWidth": 0,
+                "x": "2019-06-07",
+              },
+            ]
+          }
           xKey="date"
           yAxisProps={
             Object {
@@ -535,7 +583,7 @@ exports[`Signals Health Score Page renders empty weights 1`] = `
             Object {
               "bottom": 5,
               "left": 18,
-              "right": 0,
+              "right": 8,
               "top": 12,
             }
           }
