@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { snakeToFriendly } from 'src/helpers/string';
 import { Button, Page } from '@sparkpost/matchbox';
 import { PanelLoading, TableCollection, ApiErrorBanner, Empty } from 'src/components';
-import DisplayDate from './components/DisplayDate';
+import DisplayDate from 'src/components/displayDate/DisplayDate';
 import MessageEventsSearch from './components/MessageEventsSearch';
 import ViewDetailsButton from './components/ViewDetailsButton';
 import { getMessageEvents, changePage, getMessageEventsCSV, clearCSV } from 'src/actions/messageEvents';

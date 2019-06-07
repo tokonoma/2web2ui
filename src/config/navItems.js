@@ -1,3 +1,4 @@
+/* eslint max-lines: ["error", 160] */
 import { Home, InsertChart, Code, MailOutline, Language, Settings, Compare, NotificationsActive, Signal, VerifiedUser } from '@sparkpost/matchbox-icons';
 
 import campaignNavItems from './campaignNavItems';
@@ -61,6 +62,10 @@ export default [
       {
         label: 'Engagement Recency',
         to: '/signals/engagement'
+      },
+      {
+        label: 'Event Ingestion',
+        to: '/signals/ingest-batch-status'
       }
     ]
   },
