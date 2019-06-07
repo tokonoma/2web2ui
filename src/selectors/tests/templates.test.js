@@ -230,8 +230,13 @@ describe('Templates selectors', () => {
   });
 
   describe('selectTemplatesForListTable', () => {
-
     it('returns template(s) with published version only', () => {
+      expect(selector.selectTemplatesForListTable(store)).toMatchSnapshot();
+    });
+
+    it('returns template(s) with draft version only', () => {
+      store.templates.list = store.templates.list.map((template) => ({ ...template, has_published: false }));
+      store.templates.list[1].has_draft = true;
       expect(selector.selectTemplatesForListTable(store)).toMatchSnapshot();
     });
 
