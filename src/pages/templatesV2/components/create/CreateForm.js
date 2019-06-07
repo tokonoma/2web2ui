@@ -109,5 +109,7 @@ const mapStateToProps = (state, props) => {
   };
 };
 
-export default connect(mapStateToProps, { autofill })(CreateForm);
+const connectedForm = connect(mapStateToProps, { autofill })(CreateForm);
+connectedForm.displayName = 'TemplateCreateForm';
+export default connectedForm;
 
