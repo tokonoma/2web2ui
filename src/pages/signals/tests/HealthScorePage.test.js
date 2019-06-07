@@ -77,6 +77,23 @@ describe('Signals Health Score Page', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  it('renders component weights bar height dynamically', () => {
+    expect(wrapper.find('DivergingBar').at(0).prop('barHeight')).toEqual(140);
+    const newData = [
+      {
+        date: '2017-01-01',
+        weights: [
+          { weight_type: 'Hard Bounces', weight: 0.5, weight_value: 0.25 },
+          { weight_type: 'eng cohorts: new, 14-day', weight: -0.5, weight_value: 0.25 },
+          { weight_type: 'List Quality', weight: 0.8, weight_value: 0.25 },
+          { weight_type: 'Other bounces', weight: -0.8, weight_value: 0.25 }
+        ]
+      }
+    ];
+    wrapper.setProps({ data: newData });
+    expect(wrapper.find('DivergingBar').at(0).prop('barHeight')).toEqual(70);
+  });
+
   describe('local state', () => {
     it('handles component select', () => {
       wrapper.find('DivergingBar').at(0).simulate('click', { payload: { weight_type: 'eng cohorts: new, 14-day' }});
