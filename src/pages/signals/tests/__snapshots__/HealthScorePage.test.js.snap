@@ -145,7 +145,7 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
                 },
                 "stroke": "#d2d2d7",
                 "strokeWidth": 1,
-                "x": "2019-06-07",
+                "x": "2019-06-08",
               },
               Object {
                 "label": Object {
@@ -153,9 +153,8 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
                   "position": "top",
                   "value": "Model",
                 },
-                "stroke": "#d2d2d7",
                 "strokeWidth": 0,
-                "x": "2019-06-07",
+                "x": "2019-06-08",
               },
             ]
           }
@@ -519,7 +518,7 @@ exports[`Signals Health Score Page renders empty weights 1`] = `
                 },
                 "stroke": "#d2d2d7",
                 "strokeWidth": 1,
-                "x": "2019-06-07",
+                "x": "2019-06-08",
               },
               Object {
                 "label": Object {
@@ -527,9 +526,8 @@ exports[`Signals Health Score Page renders empty weights 1`] = `
                   "position": "top",
                   "value": "Model",
                 },
-                "stroke": "#d2d2d7",
                 "strokeWidth": 0,
-                "x": "2019-06-07",
+                "x": "2019-06-08",
               },
             ]
           }
