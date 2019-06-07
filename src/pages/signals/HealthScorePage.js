@@ -25,7 +25,7 @@ import SpamTrapsPreview from './components/previews/SpamTrapsPreview';
 import EngagementRecencyPreview from './components/previews/EngagementRecencyPreview';
 import styles from './DetailsPages.module.scss';
 import thresholds from './constants/healthScoreThresholds';
-import { newModelLine } from './constants/healthScoreV2';
+import { newModelLine, newModelMarginsHealthScore, newModelMarginsOther } from './constants/healthScoreV2';
 
 export class HealthScorePage extends Component {
   state = {
@@ -91,6 +91,7 @@ export class HealthScorePage extends Component {
             {panelContent || (
               <Fragment>
                 <BarChart
+                  margin = {newModelMarginsHealthScore}
                   gap={gap}
                   onClick={handleDateSelect}
                   onMouseOver={handleDateHover}
@@ -126,6 +127,7 @@ export class HealthScorePage extends Component {
                   <>
                     <ChartHeader title='Injections' tooltipContent={INJECTIONS_INFO} />
                     <BarChart
+                      margin = {newModelMarginsOther}
                       gap={gap}
                       height={190}
                       onClick={handleDateSelect}
@@ -150,6 +152,7 @@ export class HealthScorePage extends Component {
                   <Fragment>
                     <ChartHeader title={HEALTH_SCORE_COMPONENTS[selectedComponent].chartTitle} />
                     <BarChart
+                      margin = {newModelMarginsOther}
                       gap={gap}
                       height={190}
                       onClick={handleDateSelect}
