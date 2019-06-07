@@ -39,6 +39,12 @@ describe('slugify', () => {
   it('should remove invalid characters', () => {
     expect(slugify('Example #1')).toEqual('example-1');
   });
+
+  it('should remove leading & trailing dashes', () => {
+    expect(slugify(' Hello There')).toEqual('hello-there');
+    expect(slugify('Hello There ')).toEqual('hello-there');
+    expect(slugify('  Hello There  ')).toEqual('hello-there');
+  });
 });
 
 describe('slugToFriendly', () => {
