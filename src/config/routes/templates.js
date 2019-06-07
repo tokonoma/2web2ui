@@ -64,6 +64,14 @@ const v2Routes = [
     supportDocSearch: 'template'
   },
   {
+    path: '/templatesv2/create',
+    component: templatesV2.CreatePage,
+    condition: hasGrants('templates/modify'),
+    layout: App,
+    title: 'Create New Template',
+    supportDocSearch: 'template'
+  },
+  {
     path: '/templatesv2/edit/:id/:navKey?',
     component: templatesV2.EditAndPreviewPage,
     condition: hasGrants('templates/view'),
