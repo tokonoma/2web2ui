@@ -57,8 +57,12 @@ describe('Component: Collection', () => {
 
   it('should use custom render function when child is a render function', () => {
     addRows(3);
-    props.children = function CustomOuterWrapper(props) { return (<div>{props}</div>); };
-    expect(shallow(<Collection {...props} />)).toMatchSnapshot();
+    const wrapper = shallow(<Collection {...props}>
+      {
+        () => <>Custom render</>
+      }
+    </Collection>);
+    expect(wrapper).toMatchSnapshot();
   });
 
   it('should render pagination', () => {

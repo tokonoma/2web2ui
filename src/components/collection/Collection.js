@@ -145,6 +145,7 @@ export class Collection extends Component {
       return null;
     }
 
+    const filterBox = this.renderFilterBox();
     const collection = (
       <OuterWrapper>
         <HeaderComponent />
@@ -154,14 +155,16 @@ export class Collection extends Component {
       </OuterWrapper>
 
     );
+    const pagination = this.renderPagination();
+
     return (
       typeof(children) === 'function'
-        ? children({ filterBox: this.renderFilterBox(), collection, pagination: this.renderPagination() })
+        ? children({ filterBox, collection, pagination })
         : (
           <div >
-            {this.renderFilterBox()}
+            {filterBox}
             {collection}
-            {this.renderPagination()}
+            {pagination}
           </div>
         )
     );

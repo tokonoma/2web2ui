@@ -319,9 +319,9 @@ exports[`Component: Collection should render with custom wrappers 1`] = `
 `;
 
 exports[`Component: Collection should use custom render function when child is a render function 1`] = `
-<div>
-  <Component />
-</div>
+<Fragment>
+  Custom render
+</Fragment>
 `;
 
 exports[`Component: Collection state changes should obey sort direction 1`] = `
