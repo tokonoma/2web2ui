@@ -50,3 +50,9 @@
   width: 1px;
   background: color(gray, 6);
 }
+
+.xDividerLabel {
+  fill: color(gray, base);
+  font-size: rem(10);
+  text-anchor: start;
+}
