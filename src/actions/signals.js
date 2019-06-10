@@ -13,7 +13,7 @@ const ORDER_BY_MAPPING = {
 
 const signalsActionCreator = ({ dimension, type }) => ({
   facet = '',
-  filter,
+  filter = '',
   from,
   limit,
   offset,
@@ -36,6 +36,10 @@ const signalsActionCreator = ({ dimension, type }) => ({
     facet = '';
     subaccount = filter;
     filter = '';
+  }
+
+  if (facet === 'mb_provider' && filter) {
+    filter = filter.toLowerCase().replace(' ', '_');
   }
 
   return sparkpostApiRequest({
