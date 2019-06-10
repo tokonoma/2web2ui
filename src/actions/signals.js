@@ -38,6 +38,10 @@ const signalsActionCreator = ({ dimension, type }) => ({
     filter = '';
   }
 
+  if (facet === 'mb_provider' && filter) {
+    filter = filter.toLowerCase().replace(' ', '_');
+  }
+
   return sparkpostApiRequest({
     type,
     meta: {

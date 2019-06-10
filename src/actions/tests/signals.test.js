@@ -74,6 +74,9 @@ describe('Signals Actions', () => {
     },
     'with an order by subaccount': {
       action: () => actions.getHealthScore({ ...requiredOptions, order: 'asc', orderBy: 'sid' })
+    },
+    'with a mailbox provider filter': {
+      action: () => actions.getHealthScore({ ...requiredOptions, facet: 'mb_provider', filter: 'Google Ap' })
     }
   });
 
