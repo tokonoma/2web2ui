@@ -62,11 +62,8 @@ export default class BillingSummary extends Component {
     />
   );
 
-  renderRecipientValidationSection = () => {
-    const { account } = this.props;
-    const { usage } = account;
-
-    const volumeUsed = _.get(usage, 'recipient_validation.month.used', 0);
+  renderRecipientValidationSection = ({ rvUsage }) => {
+    const volumeUsed = _.get(rvUsage, 'recipient_validation.month.used', 0);
 
     let totalCost = 0;
 
@@ -78,7 +75,7 @@ export default class BillingSummary extends Component {
     return (
       <Panel.Section>
         <LabelledValue label="Recipient Validation">
-          <h6>{formatFullNumber(volumeUsed)} emails validated for {formatCurrency(totalCost)}<small> as of {new Date(usage.recipient_validation.timestamp).toLocaleDateString()}</small></h6>
+          <h6>{formatFullNumber(volumeUsed)} emails validated for {formatCurrency(totalCost)}<small> as of {new Date(rvUsage.recipient_validation.timestamp).toLocaleDateString()}</small></h6>
           <UnstyledLink onClick={this.handleRvModal}>How was this calculated?</UnstyledLink>
         </LabelledValue>
       </Panel.Section>
@@ -86,8 +83,8 @@ export default class BillingSummary extends Component {
   };
 
   render() {
-    const { account, currentPlan, canChangePlan, canUpdateBillingInfo, canPurchaseIps, invoices, isAWSAccount, accountAgeInDays } = this.props;
-    const { usage, usageLoading } = account;
+    const { account, currentPlan, canChangePlan, canUpdateBillingInfo, canPurchaseIps, invoices, isAWSAccount, accountAgeInDays, hasRecipientValidation } = this.props;
+    const { rvUsage, usageLoading } = account;
     const { show, showCloseButton } = this.state;
     let changePlanActions = {};
 
@@ -107,7 +104,7 @@ export default class BillingSummary extends Component {
             </LabelledValue>
           </Panel.Section>
           {canPurchaseIps && this.renderDedicatedIpSummarySection()}
-          {usage && !usageLoading && this.renderRecipientValidationSection()}
+          {hasRecipientValidation && rvUsage && !usageLoading && this.renderRecipientValidationSection({ rvUsage })}
         </Panel>
 
         {canUpdateBillingInfo && this.renderSummary()}
@@ -121,7 +118,7 @@ export default class BillingSummary extends Component {
           {show === PAYMENT_MODAL && <UpdatePaymentForm onCancel={this.handleModal}/>}
           {show === CONTACT_MODAL && <UpdateContactForm onCancel={this.handleModal}/>}
           {show === IP_MODAL && <AddIps onClose={this.handleModal}/>}
-          {show === RV_MODAL && <RecipientValidationModal usage={usage} onClose={this.handleModal} />}
+          {show === RV_MODAL && <RecipientValidationModal rvUsage={rvUsage} onClose={this.handleModal} />}
         </Modal>
       </div>
     );

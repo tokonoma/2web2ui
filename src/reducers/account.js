@@ -65,15 +65,9 @@ export default (state = initialState, { type, meta, payload }) => {
     case 'GET_USAGE_FAIL':
       return { ...state, usageLoading: false, usageError: payload };
 
+    //TODO: Dashboard usage (through account?include=usage) will eventually be consolidated and remove rvUsage
     case 'GET_USAGE_SUCCESS':
-      return { ...state, usageLoading: false, usage: _.isEmpty(payload) ? null : payload };
-
-    case 'GET_USAGE':
-      return { ...state, usage: {
-        day: {},
-        month: { used: 123123 },
-        timestamp: '2019-05-21T18:31:00.000Z'
-      }};
+      return { ...state, usageLoading: false, rvUsage: _.isEmpty(payload) ? null : payload };
 
     default:
       return state;

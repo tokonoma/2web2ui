@@ -18,6 +18,12 @@ describe('Component: Billing Summary', () => {
         billing: {},
         subscription: {
           plan_volume: 15000
+        },
+        rvUsage: { // TODO: Rename to usage upon consolidation
+          recipient_validation: {
+            month: { used: 123123 },
+            timestamp: '2019-06-10T00:00:00.000Z'
+          }
         }
       },
       currentPlan: {
@@ -90,6 +96,11 @@ describe('Component: Billing Summary', () => {
 
   it('should show the invoice history if there are invoices', () => {
     wrapper.setProps({ invoices: ['an invoice', 'another invoice']});
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('shoudl render recipient validation section if option is enabled', () => {
+    wrapper.setProps({ hasRecipientValidation: true });
     expect(wrapper).toMatchSnapshot();
   });
 
