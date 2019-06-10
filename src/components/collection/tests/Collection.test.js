@@ -72,6 +72,14 @@ describe('Component: Collection', () => {
     expect(wrapper.find(FilterBox)).toHaveLength(1);
   });
 
+  it('should render without save as csv button', () => {
+    addRows(3);
+    props.saveCsv = false;
+    props.pagination = true;
+    const wrapper = shallow(<Collection {...props} />);
+    expect(wrapper.find(Pagination).prop('saveCsv')).toBe(false);
+  });
+
   describe('state changes', () => {
 
     let wrapper;

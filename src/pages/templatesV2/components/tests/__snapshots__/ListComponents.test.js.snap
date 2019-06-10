@@ -1,0 +1,84 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Template List Components DeleteAction should render correctly 1`] = `
+<Button
+  flat={true}
+  onClick={[Function]}
+  size="default"
+>
+  <Delete
+    size={20}
+  />
+</Button>
+`;
+
+exports[`Template List Components LastUpdated should render 1`] = `
+<p
+  className="LastUpdated"
+>
+  Aug 10 2017, 10:15am
+</p>
+`;
+
+exports[`Template List Components Name should render 1`] = `
+<Fragment>
+  <p
+    className="Name"
+  >
+    <Link
+      replace={false}
+      to="/templatesv2/edit/id-123?subaccount=123"
+    >
+      <strong>
+        template name
+      </strong>
+    </Link>
+  </p>
+</Fragment>
+`;
+
+exports[`Template List Components Status should render draft 1`] = `
+<Tag>
+  <Edit />
+   Draft
+</Tag>
+`;
+
+exports[`Template List Components Status should render published 1`] = `
+<Tag
+  className="published"
+>
+  <CheckCircle
+    className="PublishedIconColor"
+  />
+   Published
+</Tag>
+`;
+
+exports[`Template List Components Status should render unpublished changes 1`] = `
+<Tooltip
+  bottom={true}
+  content="Contains unpublished changes"
+  dark={true}
+  forcePosition={false}
+  horizontalOffset="0px"
+  preferredDirection={
+    Object {
+      "bottom": true,
+      "left": false,
+      "right": true,
+      "top": false,
+    }
+  }
+  right={true}
+>
+  <Tag
+    className="PublishedWithChanges"
+  >
+    <CheckCircle
+      className="PublishedIconColor"
+    />
+     Published
+  </Tag>
+</Tooltip>
+`;
