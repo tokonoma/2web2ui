@@ -13,6 +13,7 @@ import PlanSummary from './PlanSummary';
 import RecipientValidationModal from './RecipientValidationModal';
 import { formatFullNumber, formatCurrency } from 'src/helpers/units';
 import { RECIPIENT_TIERS } from 'src/constants';
+import _ from 'lodash';
 
 const PAYMENT_MODAL = 'payment';
 const CONTACT_MODAL = 'contact';
@@ -65,8 +66,7 @@ export default class BillingSummary extends Component {
     const { account } = this.props;
     const { usage } = account;
 
-    const { recipient_validation } = usage;
-    const volumeUsed = recipient_validation.month.used;
+    const volumeUsed = _.get(usage, 'recipient_validation.month.used', 0);
 
     let totalCost = 0;
 
@@ -78,7 +78,7 @@ export default class BillingSummary extends Component {
     return (
       <Panel.Section>
         <LabelledValue label="Recipient Validation">
-          <h6>{formatFullNumber(volumeUsed)} emails validated for {formatCurrency(totalCost)}<small> as of {new Date(recipient_validation.timestamp).toLocaleDateString()}</small></h6>
+          <h6>{formatFullNumber(volumeUsed)} emails validated for {formatCurrency(totalCost)}<small> as of {new Date(usage.recipient_validation.timestamp).toLocaleDateString()}</small></h6>
           <UnstyledLink onClick={this.handleRvModal}>How was this calculated?</UnstyledLink>
         </LabelledValue>
       </Panel.Section>
@@ -121,7 +121,7 @@ export default class BillingSummary extends Component {
           {show === PAYMENT_MODAL && <UpdatePaymentForm onCancel={this.handleModal}/>}
           {show === CONTACT_MODAL && <UpdateContactForm onCancel={this.handleModal}/>}
           {show === IP_MODAL && <AddIps onClose={this.handleModal}/>}
-          {show === RV_MODAL && usage && <RecipientValidationModal usage={usage} onClose={this.handleModal} />}
+          {show === RV_MODAL && <RecipientValidationModal usage={usage} onClose={this.handleModal} />}
         </Modal>
       </div>
     );

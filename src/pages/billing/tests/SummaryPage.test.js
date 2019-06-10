@@ -19,6 +19,7 @@ describe('Page: BillingSummaryPage', () => {
       getBillingInfo: jest.fn(),
       fetchAccount: jest.fn(),
       getPlans: jest.fn(),
+      getUsage: jest.fn(),
       getSendingIps: jest.fn(),
       getInvoices: jest.fn(),
       accountAgeInDays: 5
@@ -41,6 +42,7 @@ describe('Page: BillingSummaryPage', () => {
     expect(props.getBillingInfo).toHaveBeenCalledTimes(1);
     expect(props.getSendingIps).toHaveBeenCalledTimes(1);
     expect(props.getInvoices).toHaveBeenCalledTimes(1);
+    expect(props.getUsage).toHaveBeenCalledTimes(1);
   });
 
 });

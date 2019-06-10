@@ -7,7 +7,7 @@ import { RECIPIENT_TIERS } from 'src/constants';
 import _ from 'lodash';
 
 export default ({ onClose, usage }) => {
-  const volumeUsed = _.get(undefined, 'recipient_validation.month.used', 0);
+  const volumeUsed = _.get(usage, 'recipient_validation.month.used', 0);
   let totalCost = 0;
 
   const TierRows = RECIPIENT_TIERS.map(({ volumeMax, volumeMin, cost }) => {
