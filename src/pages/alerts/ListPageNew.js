@@ -9,7 +9,7 @@ import withAlertsList from './containers/ListPage.container';
 import styles from './ListPage.module.scss';
 import { formatDateTime } from 'src/helpers/date';
 import _ from 'lodash';
-import DisplayDate from '../reports/messageEvents/components/DisplayDate';//TODO Move this into generic component
+import DisplayDate from 'src/components/displayDate/DisplayDate.js';
 
 export class ListPageNew extends Component {
   state = {

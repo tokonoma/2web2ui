@@ -8,7 +8,7 @@ import { METRICS } from '../constants/metrics';
 import styles from './AlertCollection.module.scss';
 import { formatDateTime } from 'src/helpers/date';
 import _ from 'lodash';
-import DisplayDate from '../../reports/messageEvents/components/DisplayDate';//TODO Move this into generic component
+import DisplayDate from 'src/components/displayDate/DisplayDate.js';
 
 const filterBoxConfig = {
   show: true,
