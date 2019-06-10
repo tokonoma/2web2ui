@@ -13,7 +13,7 @@ const ORDER_BY_MAPPING = {
 
 const signalsActionCreator = ({ dimension, type }) => ({
   facet = '',
-  filter = '',
+  filter,
   from,
   limit,
   offset,
