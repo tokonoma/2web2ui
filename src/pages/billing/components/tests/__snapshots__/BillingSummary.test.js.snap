@@ -86,7 +86,7 @@ exports[`Component: Billing Summary shoudl render recipient validation section i
           $599.37
           <small>
              as of 
-            2019-6-9
+            Jun 9 2019
           </small>
         </h6>
         <UnstyledLink

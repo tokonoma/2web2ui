@@ -14,6 +14,7 @@ import RecipientValidationModal from './RecipientValidationModal';
 import { formatFullNumber, formatCurrency } from 'src/helpers/units';
 import { RECIPIENT_TIERS } from 'src/constants';
 import _ from 'lodash';
+import { formatDate } from 'src/helpers/date';
 
 const PAYMENT_MODAL = 'payment';
 const CONTACT_MODAL = 'contact';
@@ -75,7 +76,7 @@ export default class BillingSummary extends Component {
     return (
       <Panel.Section>
         <LabelledValue label="Recipient Validation">
-          <h6>{formatFullNumber(volumeUsed)} emails validated for {formatCurrency(totalCost)}<small> as of {new Date(rvUsage.recipient_validation.timestamp).toLocaleDateString()}</small></h6>
+          <h6>{formatFullNumber(volumeUsed)} emails validated for {formatCurrency(totalCost)}<small> as of {formatDate(rvUsage.recipient_validation.timestamp)}</small></h6>
           <UnstyledLink onClick={this.handleRvModal}>How was this calculated?</UnstyledLink>
         </LabelledValue>
       </Panel.Section>
