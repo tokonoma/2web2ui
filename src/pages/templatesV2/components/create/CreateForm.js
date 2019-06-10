@@ -1,4 +1,3 @@
-/* eslint max-lines: ["error", 200] */
 import React, { Component } from 'react';
 import { autofill, Field, formValueSelector } from 'redux-form';
 import { connect } from 'react-redux';
@@ -6,17 +5,17 @@ import { connect } from 'react-redux';
 import { Grid } from '@sparkpost/matchbox';
 import SubaccountSection from 'src/components/subaccountSection';
 import { TextFieldWrapper } from 'src/components';
-import FromEmailWrapper from './FromEmailWrapper';
+import FromEmailWrapper from '../FromEmailWrapper';
 // Helpers & Validation
 import config from 'src/config';
 import { required, slug } from 'src/helpers/validation';
 import { slugify } from 'src/helpers/string';
-import { emailOrSubstitution } from './validation';
-import { isSubaccountUser } from '../../../../helpers/conditions/user';
-import { selectCondition } from '../../../../selectors/accessConditionState';
-import { hasSubaccounts } from '../../../../selectors/subaccounts';
-import { not } from '../../../../helpers/conditions';
-import { selectDomainsBySubaccountWithDefault } from '../../../../selectors/templates';
+import { emailOrSubstitution } from '../validation';
+import { isSubaccountUser } from 'src/helpers/conditions/user';
+import { selectCondition } from 'src/selectors/accessConditionState';
+import { hasSubaccounts } from 'src/selectors/subaccounts';
+import { not } from 'src/helpers/conditions';
+import { selectDomainsBySubaccountWithDefault } from 'src/selectors/templates';
 
 export class CreateForm extends Component {
   // Fills in ID based on Name
