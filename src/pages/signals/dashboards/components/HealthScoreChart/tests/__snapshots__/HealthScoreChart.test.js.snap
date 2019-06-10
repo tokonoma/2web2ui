@@ -89,7 +89,7 @@ exports[`Signals Health Score Chart renders happy path correctly 1`] = `
             },
             "stroke": "#d2d2d7",
             "strokeWidth": 1,
-            "x": "2019-06-08",
+            "x": "2019-06-07",
           },
           Object {
             "label": Object {
@@ -98,7 +98,7 @@ exports[`Signals Health Score Chart renders happy path correctly 1`] = `
               "value": "Model",
             },
             "strokeWidth": 0,
-            "x": "2019-06-08",
+            "x": "2019-06-07",
           },
         ]
       }
