@@ -1,125 +1,121 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import moment from 'moment';
-import { Page, Panel, Grid, Select, TextField, Toggle, Tag } from '@sparkpost/matchbox';
-import { Warning, CheckCircleOutline } from '@sparkpost/matchbox-icons';
-import { TableCollection } from 'src/components';
-import DatePicker from 'src/components/datePicker/DatePicker';
-import DisplayDate from 'src/components/displayDate/DisplayDate';
-import LabelledValue from 'src/components/labelledValue/LabelledValue';
-import { formatDateTime, getRelativeDates } from 'src/helpers/date';
-import { capitalize } from 'src/helpers/string';
-import { FORMATS, RELATIVE_DATE_OPTIONS } from 'src/constants';
-import styles from './BatchStatusPage.module.scss';
+import { Page } from '@sparkpost/matchbox';
+import { PanelLoading, ApiErrorBanner } from 'src/components';
+import useCollectionWithCursor from './hooks/useCollectionWithCursor';
 
-const columns = [{ label: 'Timestamp', width: '18%' }, 'Status', 'Batch ID'];
+import BatchStatusCollection from './components/BatchStatusCollection';
+import BatchStatusSearch from './components/BatchStatusSearch';
 
-const retentionPeriodDays = 60;
-
+//
+// Mock api call
+//
 const pick = (array) => array[Math.floor(Math.random() * array.length)];
 
-const events = Array(200)
-  .fill()
-  .map((_, idx) => {
-    const errorTypes = ['validation', 'system', 'parse'];
-
-    const error = Math.random() > 0.5;
-    return {
-      time: moment('2019-06-06T00:00:00Z').subtract(idx, 'hours'),
-      status: error ? 'error' : 'success',
-      error_type: error ? pick(errorTypes) : null,
-      id: 'DB9B0E4D-0917-4709-A915-D6B80221BC7F'
-    };
+const mockApiCall = ({ filters, page, perPage }) =>
+  new Promise((resolve) => {
+    setTimeout(
+      () =>
+        resolve({
+          items: Array(perPage)
+            .fill()
+            .map((_, idx) => {
+              const error = filters.showSuccessful ? Math.random() > 0.5 : true;
+              return {
+                timestamp: moment().subtract(idx * 2 + 1, 'hours'),
+                type: error ? 'error' : 'success',
+                error_type: error
+                  ? pick(BatchStatusSearch.batchErrorTypes.map((errType) => errType.value))
+                  : null,
+                batch_id: 'DB9B0E4D-0917-4709-A915-D6B80221BC7F',
+                number_succeeded: 100,
+                number_failed: error ? 3 : null,
+                number_duplicates: 21
+              };
+            }),
+          totalCount: 1000,
+          extra: {
+            links: {
+              next: page < 3 ? 'next-link' : null
+            }
+          }
+        }),
+      1000
+    );
   });
+//
+//
+//
 
-const Status = ({ status, error }) => {
-  const isError = status !== 'success';
-  const icon = isError ? <Warning /> : <CheckCircleOutline />;
-  const msg = isError ? capitalize(error) : 'Success';
-  const color = isError ? 'red' : '';
-  return (
-    <Tag color={color}>
-      <span className={styles.IconWrapper}>{icon}</span> {msg}
-    </Tag>
-  );
-};
-
-const formatRow = ({ time, status, error_type = '', id }) => [
-  <DisplayDate timestamp={time} formattedDate={formatDateTime(time)} />,
-  <Status status={status} error={error_type} />,
-  id
-];
-
-const BatchStatusCollection = () => (
-  <TableCollection pagination columns={columns} rows={events} getRowData={formatRow} />
+const Error = ({ error }) => (
+  <ApiErrorBanner
+    message="Sorry, we had some trouble loading your events."
+    errorDetails={error.message}
+    reload={() => {}}
+  />
 );
 
-const useDatePicker = () => {
-  const [dateRange, setDateRange] = useState({ ...getRelativeDates('hour') });
-  const updateDateRange = ({ relativeRange, from = null, to = null }) => {
-    const fullDateRange =
-      relativeRange !== 'custom' ? getRelativeDates(relativeRange) : { relativeRange, from, to };
-    setDateRange(fullDateRange);
-  };
-  return { dateRange, setDateRange: updateDateRange };
-};
+const BatchStatusPage = () => {
+  const [error, setError] = useState(false);
+  const onLoadError = useCallback(
+    (err) => {
+      setError(err);
+    },
+    [setError]
+  );
+  const {
+    loading,
+    items,
+    filters,
+    setFilters,
+    totalCount,
+    hasMore,
+    page,
+    perPage,
+    goToPage,
+    setPerPage
+  } = useCollectionWithCursor({ loadItems: mockApiCall, onLoadError });
+  const [now, setNow] = useState(null);
+  useEffect(() => {
+    setNow(new Date());
+  }, []);
 
-const batchErrorTypes = [
-  { label: 'Validation errors', value: 'validation' },
-  { label: 'System errors', value: 'system' },
-  { label: 'Parse errors', value: 'parse' }
-];
+  let content;
 
-const BatchStatusSearch = () => {
-  const now = useState(new Date())[0];
-  const { dateRange, setDateRange } = useDatePicker();
+  if (loading) {
+    content = <PanelLoading />;
+  } else if (error) {
+    content = <Error error={error} />;
+  } else {
+    // Happy path: !loading && !error
+    content = (
+      <BatchStatusCollection
+        events={items}
+        totalCount={totalCount}
+        hasMore={hasMore}
+        page={page}
+        perPage={perPage}
+        onChangePage={goToPage}
+        onChangePageSize={setPerPage}
+      />
+    );
+  }
+
   return (
-    <Panel>
-      <Panel.Section>
-        <Grid>
-          <Grid.Column xs={12} md={6} xl={6}>
-            <DatePicker
-              {...dateRange}
-              onChange={setDateRange}
-              dateFieldFormat={FORMATS.DATETIME}
-              relativeDateOptions={RELATIVE_DATE_OPTIONS}
-              roundToPrecision={false}
-              datePickerProps={{
-                disabledDays: {
-                  after: now,
-                  before: moment(now)
-                    .subtract(retentionPeriodDays, 'days')
-                    .toDate()
-                }
-              }}
-            />
-          </Grid.Column>
-          <Grid.Column xs={12} md={6} xl={6}>
-            <TextField
-              labelHidden
-              placeholder="Filter by batch ID"
-              connectRight={<Select options={['All error types', ...batchErrorTypes]} />}
-            />
-          </Grid.Column>
-          <Grid.Column xsOffset={9} xs={3}>
-            <LabelledValue label='Show successful batches'>
-              <Toggle
-                id="showSuccess"
-                compact
-                value={true}
-              />
-            </LabelledValue>
-          </Grid.Column>
-        </Grid>
-      </Panel.Section>
-    </Panel>
+    <Page title="Signals Ingestion Batch Status">
+      <ul>
+        <li>Review the health of your Signals integration.</li>
+        <li>Review recent Signals ingestion batch status and identify issues.</li>
+      </ul>
+      <BatchStatusSearch
+        now={now}
+        filters={filters}
+        onFilterChange={setFilters}
+        disabled={loading || error}
+      />
+      {content}
+    </Page>
   );
 };
-
-const BatchStatusPage = () => (
-  <Page title="Signals Ingestion Batch Status">
-    <BatchStatusSearch />
-    <BatchStatusCollection />
-  </Page>
-);
 
 export default BatchStatusPage;

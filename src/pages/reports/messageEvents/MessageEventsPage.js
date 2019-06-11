@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { snakeToFriendly } from 'src/helpers/string';
 import { Button, Page } from '@sparkpost/matchbox';
-import { PanelLoading, TableCollection, ApiErrorBanner, Empty } from 'src/components';
+import { PanelLoading, TableCollection, CursorPaging, PerPageButtons, ApiErrorBanner, Empty } from 'src/components';
 import DisplayDate from 'src/components/displayDate/DisplayDate';
 import MessageEventsSearch from './components/MessageEventsSearch';
 import ViewDetailsButton from './components/ViewDetailsButton';
@@ -11,9 +11,7 @@ import { getMessageEvents, changePage, getMessageEventsCSV, clearCSV } from 'src
 import { selectMessageEvents, selectMessageEventsCSV } from 'src/selectors/messageEvents';
 import { formatToCsv, download } from 'src/helpers/downloading';
 import { DEFAULT_PER_PAGE_BUTTONS } from 'src/constants';
-import CursorPaging from './components/CursorPaging';
 import _ from 'lodash';
-import PerPageButtons from 'src/components/collection/PerPageButtons.js';
 import styles from './MessageEventsPage.module.scss';
 
 const errorMsg = 'Sorry, we seem to have had some trouble loading your message events.';
