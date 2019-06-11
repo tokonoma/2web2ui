@@ -8,23 +8,25 @@ import { LoadingSVG } from 'src/components/loading/Loading';
 import styles from './EditContentsPrimaryArea.module.scss';
 
 const EditContentsPrimaryArea = () => {
-  const { content, draft, published, isDraftUpdating, updateDraft, hasPublished, publishDraft, isDraftPublishing, isPublishedMode, history } = useEditorContext();
+  const { content, draft, isDraftUpdating, updateDraft, hasPublished, publishDraft, isDraftPublishing, isPublishedMode, history } = useEditorContext();
 
   const pendingDraftPublishing = isDraftUpdating || isDraftPublishing;
+  const draftPath = `/${routeNamespace}/edit/${draft.id}${setSubaccountQuery(draft.subaccount_id)}`;
   const publishedPath = `/${routeNamespace}/edit/${draft.id}/published${setSubaccountQuery(draft.subaccount_id)}`;
+  const duplicatePath = `/${routeNamespace}/create/${draft.id}${setSubaccountQuery(draft.subaccount_id)}`;
 
   function renderPublishedModeActions() {
     const publishedModeActions = [
       {
         content: <span><FileEdit/> Edit Draft</span>,
         onClick: () => {
-          history.push(`/${routeNamespace}/edit/${published.id}`);
+          history.push(draftPath);
         }
       },
       {
         content: <span><ContentCopy/> Duplicate</span>,
         onClick: () => {
-          alert('wait....until we\'ve implemented duplication'); //todo wait until TR-1445 gets merged
+          history.push(duplicatePath);
         }
       }
     ];
@@ -79,7 +81,7 @@ const EditContentsPrimaryArea = () => {
         content: <span><ContentCopy/> Duplicate</span>,
         group: 2,
         onClick: () => {
-          alert('wait....until we\'ve implemented it');
+          history.push(duplicatePath);
         }
       }
     ];
