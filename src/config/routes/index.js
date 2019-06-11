@@ -40,10 +40,9 @@ import SecretBillingPlanOrBillingSummaryPage from '../SecretBillingPlanOrBilling
 
 import { all, hasGrants, not } from 'src/helpers/conditions';
 import { isAws, isCustomBilling, isEnterprise, isSelfServeBilling } from 'src/helpers/conditions/account';
-import { isAzure, isHeroku, isSubaccountUser } from 'src/helpers/conditions/user';
+import { isAzure, isHeroku, isSubaccountUser, isUserUiOptionSet } from 'src/helpers/conditions/user';
 import { configEquals, configFlag } from 'src/helpers/conditions/config';
 import App from 'src/components/layout/App';
-import Fullscreen from 'src/components/layout/Fullscreen';
 import LargeForm from 'src/components/layout/LargeForm';
 
 import {
@@ -658,6 +657,7 @@ const routes = [
   {
     path: '/alerts-new',
     component: alerts.ListPageNew,
+    condition: isUserUiOptionSet('alerts'),
     layout: App,
     title: 'Alerts',
     supportDocsSearch: 'Alerts'
