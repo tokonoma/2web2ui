@@ -17,7 +17,7 @@ const EditContentsPrimaryArea = () => {
 
   function renderPublishedModeActions() {
     const publishedModeActions = [
-      {
+      { //todo: does it always have edit? what if draft not available for this published template?
         content: <span><FileEdit/> Edit Draft</span>,
         onClick: () => {
           history.push(draftPath);
@@ -40,7 +40,6 @@ const EditContentsPrimaryArea = () => {
           <Popover
             left={true}
             trigger={<Button><ArrowDropDown/></Button>}
-            style={{ width: '200px' }}
           >
             <ActionList actions={publishedModeActions}/>
           </Popover>
@@ -95,7 +94,6 @@ const EditContentsPrimaryArea = () => {
           <Popover
             left={true}
             trigger={<Button><ArrowDropDown/></Button>}
-            style={{ width: '200px' }}
           >
             <ActionList
               groupByKey="group"
