@@ -7,7 +7,7 @@ import { PageLink } from 'src/components';
 import ConditionSwitch, { Case } from 'src/components/auth/ConditionSwitch';
 import { AccessControl } from 'src/components/auth';
 import { isAdmin, isEmailVerified } from 'src/helpers/conditions/user';
-import { isSelfServeBilling, onPlanWithStatus } from 'src/helpers/conditions/account';
+import { onPlanWithStatus } from 'src/helpers/conditions/account';
 import { not } from 'src/helpers/conditions';
 import { LINKS } from 'src/constants';
 
@@ -48,7 +48,7 @@ export class SendMoreCTA extends Component {
             <Case condition={onPlanWithStatus('deprecated')} children={<PageLink to="/account/billing">Switch to a new plan.</PageLink>} />
 
             {/* is self serve billing and doesn't have online support */}
-            <Case condition={isSelfServeBilling} children={<PageLink to="/account/billing">Upgrade your account.</PageLink>} />
+            <Case children={<PageLink to="/account/billing">Upgrade your account.</PageLink>} />
 
           </ConditionSwitch>
           {' '}
