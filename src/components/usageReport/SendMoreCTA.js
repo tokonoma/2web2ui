@@ -47,7 +47,7 @@ export class SendMoreCTA extends Component {
             {/* on a deprecated plan */}
             <Case condition={onPlanWithStatus('deprecated')} children={<PageLink to="/account/billing">Switch to a new plan.</PageLink>} />
 
-            {/* is self serve billing and doesn't have online support */}
+            {/* regardless of self serve billing */}
             <Case children={<PageLink to="/account/billing">Upgrade your account.</PageLink>} />
 
           </ConditionSwitch>
