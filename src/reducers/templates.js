@@ -117,6 +117,15 @@ export default (state = initialState, { now = new Date(), ...action }) => {
     case 'DELETE_TEMPLATE_SUCCESS':
       return { ...state, deletePending: false };
 
+    case 'PUBLISH_TEMPLATE_PENDING':
+      return { ...state, publishPending: true };
+
+    case 'PUBLISH_TEMPLATE_SUCCESS':
+      return { ...state, publishPending: false };
+
+    case 'PUBLISH_TEMPLATE_FAIL':
+      return { ...state, publishPending: false };
+
     default:
       return state;
   }

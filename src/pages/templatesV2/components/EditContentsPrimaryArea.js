@@ -3,11 +3,15 @@ import { ActionList, Button, Popover } from '@sparkpost/matchbox';
 import { ArrowDropDown, CheckCircleOutline, ContentCopy, FileEdit, RemoveRedEye } from '@sparkpost/matchbox-icons';
 import useEditorContext from '../hooks/useEditorContext';
 import { routeNamespace } from '../constants/routes';
+import { setSubaccountQuery } from 'src/helpers/subaccounts';
+import { LoadingSVG } from 'src/components/loading/Loading';
+import styles from './EditContentsPrimaryArea.module.scss';
 
 const EditContentsPrimaryArea = () => {
-  const { content, draft, published, isDraftUpdating, updateDraft, isPublishedMode, history } = useEditorContext();
+  const { content, draft, published, isDraftUpdating, updateDraft, hasPublished, publishDraft, isDraftPublishing, isPublishedMode, history } = useEditorContext();
 
-  const loading = isDraftUpdating;
+  const pendingDraftPublishing = isDraftUpdating || isDraftPublishing;
+  const publishedPath = `/${routeNamespace}/edit/${draft.id}/published${setSubaccountQuery(draft.subaccount_id)}`;
 
   function renderPublishedModeActions() {
     const publishedModeActions = [
@@ -15,8 +19,7 @@ const EditContentsPrimaryArea = () => {
         content: <span><FileEdit/> Edit Draft</span>,
         onClick: () => {
           history.push(`/${routeNamespace}/edit/${published.id}`);
-        },
-        disabled: loading
+        }
       },
       {
         content: <span><ContentCopy/> Duplicate</span>,
@@ -29,7 +32,7 @@ const EditContentsPrimaryArea = () => {
     return (
       <div>
         <Button disabled={publishedModeActions[0].disabled} onClick={publishedModeActions[0].onClick}>
-          Edit Draft
+          <strong>Edit Draft</strong>
         </Button>
         <div style={{ display: 'inline-block' }}>
           <Popover
@@ -48,16 +51,18 @@ const EditContentsPrimaryArea = () => {
 
     const draftModeActions = [
       {
-        content: <span><CheckCircleOutline/> Save and Publish</span>,
+        content: pendingDraftPublishing ? <span><LoadingSVG className={styles.Spinner} />  Publishing</span> : <span><CheckCircleOutline/> Save and Publish</span>,
         group: 1,
         onClick: () => {
-          alert('wait....until we\'ve implemented it');
+          publishDraft({ id: draft.id, content }, draft.subaccount_id)
+            .then(() => {
+              history.push(publishedPath);
+            });
         }
       },
       {
-        content: <span><FileEdit/> Save Draft</span>,
+        content: isDraftUpdating ? <span><LoadingSVG className={styles.Spinner} />  Saving</span> : <span><FileEdit/> Save Draft</span>,
         group: 1,
-        disabled: loading,
         onClick: () => {
           updateDraft({ id: draft.id, content }, draft.subaccount_id);
         }
@@ -66,8 +71,9 @@ const EditContentsPrimaryArea = () => {
         content: <span><RemoveRedEye/> View Published</span>,
         group: 2,
         onClick: () => {
-          history.push(`/${routeNamespace}/edit/${draft.id}/published`);
-        }
+          history.push(publishedPath);
+        },
+        visible: hasPublished
       },
       {
         content: <span><ContentCopy/> Duplicate</span>,
@@ -81,7 +87,7 @@ const EditContentsPrimaryArea = () => {
     return (
       <div>
         <Button disabled={draftModeActions[0].disabled} onClick={draftModeActions[0].onClick}>
-          Save and Publish
+          {pendingDraftPublishing ? <><LoadingSVG className={styles.Spinner} />  Publishing </> : <strong>Save and Publish</strong>}
         </Button>
         <div style={{ display: 'inline-block' }}>
           <Popover
