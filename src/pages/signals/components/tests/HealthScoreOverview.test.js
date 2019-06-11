@@ -10,6 +10,7 @@ describe('HealthScoreOverview', () => {
       data={[
         {
           current_health_score: 98,
+          current_total_injection_count: 200000,
           domain: 'example.com',
           history: [
             { date: '2018-01-13', health_score: 98 }
@@ -91,6 +92,12 @@ describe('HealthScoreOverview', () => {
   it('renders custom date range', () => {
     const wrapper = subject({ signalOptions: { relativeRange: 'custom' }});
     expect(wrapper.find('Column[dataKey="current_health_score"]').prop('label')).toEqual('Score');
+  });
+
+  it('render injections properly when before new model date', () => {
+    const wrapper = subject({ signalOptions: { relativeRange: 'custom' }, to: '2019/06/05' });
+    expect(wrapper.find('Column[dataKey="current_total_injection_count"]').prop('label')).toEqual('Injections');
+    expect(wrapper.find('Column[dataKey="current_total_injection_count"]').prop('sortable')).toEqual(false);
   });
 
   it('does not render title', () => {

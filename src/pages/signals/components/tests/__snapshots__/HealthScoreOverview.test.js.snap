@@ -15,6 +15,7 @@ exports[`HealthScoreOverview renders both subaccount and facet columns 1`] = `
           "WoW": 0.1,
           "average_health_score": 98,
           "current_health_score": 98,
+          "current_total_injection_count": 200000,
           "domain": "example.com",
           "history": Array [
             Object {
@@ -49,7 +50,7 @@ exports[`HealthScoreOverview renders both subaccount and facet columns 1`] = `
       component={[Function]}
       dataKey="history"
       label="Daily Health Score"
-      width="30%"
+      width="20%"
     />
     <Column
       align="right"
@@ -62,16 +63,24 @@ exports[`HealthScoreOverview renders both subaccount and facet columns 1`] = `
     <Column
       align="right"
       component={[Function]}
+      dataKey="current_total_injection_count"
+      label="Current Injections"
+      sortable={true}
+      width="15%"
+    />
+    <Column
+      align="right"
+      component={[Function]}
       dataKey="WoW"
       label={<WoWHeaderCell />}
-      width="12.5%"
+      width="10%"
     />
     <Column
       align="right"
       component={[Function]}
       dataKey="average_health_score"
       label="Average Score"
-      width="15%"
+      width="12.5%"
     />
   </Connect(SummaryTable)>
 </Panel>
@@ -86,6 +95,7 @@ exports[`HealthScoreOverview renders overview panel with controls and table 1`] 
           "WoW": 0.1,
           "average_health_score": 98,
           "current_health_score": 98,
+          "current_total_injection_count": 200000,
           "domain": "example.com",
           "history": Array [
             Object {
@@ -113,7 +123,7 @@ exports[`HealthScoreOverview renders overview panel with controls and table 1`] 
       component={[Function]}
       dataKey="history"
       label="Daily Health Score"
-      width="30%"
+      width="20%"
     />
     <Column
       align="right"
@@ -126,16 +136,24 @@ exports[`HealthScoreOverview renders overview panel with controls and table 1`] 
     <Column
       align="right"
       component={[Function]}
+      dataKey="current_total_injection_count"
+      label="Current Injections"
+      sortable={true}
+      width="15%"
+    />
+    <Column
+      align="right"
+      component={[Function]}
       dataKey="WoW"
       label={<WoWHeaderCell />}
-      width="12.5%"
+      width="10%"
     />
     <Column
       align="right"
       component={[Function]}
       dataKey="average_health_score"
       label="Average Score"
-      width="15%"
+      width="12.5%"
     />
   </Connect(SummaryTable)>
 </Panel>
