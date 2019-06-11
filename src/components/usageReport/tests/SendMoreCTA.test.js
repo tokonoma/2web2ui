@@ -23,11 +23,6 @@ describe('SendMoreCTA Component', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('toggles support ticket form correctly', () => {
-    wrapper.find('UnstyledLink').at(1).simulate('click');
-    expect(props.openSupportTicketForm).toHaveBeenCalledWith({ issueId: 'daily_limits' });
-  });
-
   describe('resendVerification', () => {
     it('renders verifying state', () => {
       wrapper.setProps({ verifyingEmail: true });
