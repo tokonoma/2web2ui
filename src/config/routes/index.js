@@ -43,7 +43,6 @@ import { isAws, isCustomBilling, isEnterprise, isSelfServeBilling } from 'src/he
 import { isAzure, isHeroku, isSubaccountUser } from 'src/helpers/conditions/user';
 import { configEquals, configFlag } from 'src/helpers/conditions/config';
 import App from 'src/components/layout/App';
-import Fullscreen from 'src/components/layout/Fullscreen';
 import LargeForm from 'src/components/layout/LargeForm';
 
 import {

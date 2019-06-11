@@ -1,11 +1,12 @@
 import { useMemo } from 'react';
 import useRouter from 'src/hooks/useRouter';
 import links from '../constants/editNavigationLinks';
+import { routeNamespace } from '../constants/routes';
 
 const useEditorNavigation = () => {
   const { history, requestParams: { id, navKey = '' }} = useRouter();
   const setNavigation = (nextNavigationKey) => {
-    history.push(`/templates/edit/${id}/next/${nextNavigationKey}`);
+    history.push(`/${routeNamespace}/edit/${id}/${nextNavigationKey}`);
   };
 
   return useMemo(() => {
