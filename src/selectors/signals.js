@@ -455,10 +455,11 @@ export const selectCurrentHealthScoreDashboard = createSelector(
 );
 
 export const selectHealthScoreOverview = createSelector(
-  [getHealthScoreData, selectHealthScoreOverviewData],
-  (healthScoreData, data) => ({
+  [getHealthScoreData, selectHealthScoreOverviewData, getOptions],
+  (healthScoreData, data, { to }) => ({
     ...healthScoreData,
-    data
+    data,
+    to
   })
 );
 

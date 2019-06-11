@@ -10,6 +10,7 @@ import NumericDataCell from './dataCells/NumericDataCell';
 import SparklineDataCell from './dataCells/SparklineDataCell';
 import WoWDataCell from './dataCells/WoWDataCell';
 import WoWHeaderCell from './dataCells/WoWHeaderCell';
+import moment from 'moment';
 
 class HealthScoreOverview extends React.Component {
 
@@ -94,7 +95,7 @@ class HealthScoreOverview extends React.Component {
 
   render() {
     const {
-      data, error, facet, loading, signalOptions, subaccounts, tableName, totalCount, header
+      data, error, facet, loading, signalOptions, subaccounts, tableName, totalCount, header, to
     } = this.props;
 
     const subaccountFilter = _.get(signalOptions, 'subaccount.id');
@@ -102,6 +103,7 @@ class HealthScoreOverview extends React.Component {
 
     const noFacetSelected = facet.key === 'sid';
     const noSubaccountFilter = subaccountFilter === undefined;
+    const afterNewModel = moment('2019/06/7').diff(to) <= 0;
 
     // Filter out account aggregate, there is no way to do it via api
     // This is done here to preserve pagination functionality
@@ -155,7 +157,7 @@ class HealthScoreOverview extends React.Component {
           <Column
             dataKey="history"
             label="Daily Health Score"
-            width='30%'
+            width='20%'
             component={({ history, ...filteredData }) => {
               const id = filteredData[facet.key];
 
@@ -182,9 +184,19 @@ class HealthScoreOverview extends React.Component {
           />
           <Column
             align="right"
+            dataKey="current_total_injection_count"
+            label={isCustomRange ? 'Injections' : 'Current Injections'}
+            sortable={afterNewModel}
+            width="15%"
+            component={({ current_total_injection_count }) => (
+              <NumericDataCell value={afterNewModel ? current_total_injection_count : null} />
+            )}
+          />
+          <Column
+            align="right"
             dataKey="WoW"
             label={<WoWHeaderCell/>}
-            width="12.5%"
+            width="10%"
             component={({ WoW }) => (
               <WoWDataCell value={WoW} />
             )}
@@ -193,7 +205,7 @@ class HealthScoreOverview extends React.Component {
             align="right"
             dataKey="average_health_score"
             label="Average Score"
-            width="15%"
+            width="12.5%"
             component={({ average_health_score }) => (
               <NumericDataCell value={average_health_score} />
             )}
