@@ -4,7 +4,7 @@ import { UnstyledLink } from '@sparkpost/matchbox';
 import { verifyEmail } from 'src/actions/currentUser';
 import { showAlert } from 'src/actions/globalAlert';
 import { PageLink } from 'src/components';
-import ConditionSwitch, { Case } from 'src/components/auth/ConditionSwitch';
+import ConditionSwitch, { Case, defaultCase } from 'src/components/auth/ConditionSwitch';
 import { AccessControl } from 'src/components/auth';
 import { isAdmin, isEmailVerified } from 'src/helpers/conditions/user';
 import { onPlanWithStatus } from 'src/helpers/conditions/account';
@@ -48,7 +48,7 @@ export class SendMoreCTA extends Component {
             <Case condition={onPlanWithStatus('deprecated')} children={<PageLink to="/account/billing">Switch to a new plan.</PageLink>} />
 
             {/* regardless of self serve billing */}
-            <Case children={<PageLink to="/account/billing">Upgrade your account.</PageLink>} />
+            <Case condition={defaultCase} children={<PageLink to="/account/billing">Upgrade your account.</PageLink>} />
 
           </ConditionSwitch>
           {' '}
