@@ -7,7 +7,6 @@ import ViewPublished from './ViewPublished';
 import SaveDraft from './SaveDraft';
 import styles from './Actions.module.scss';
 
-
 const DraftModeActions = () => (
   <div>
     <SaveAndPublish className={styles.Actions}>
