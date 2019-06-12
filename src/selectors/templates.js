@@ -50,6 +50,20 @@ export const selectDomainsBySubaccount = createSelector(
 );
 
 /**
+ * Returns domains by subaccount, but if no verified domain exists, return sparkpost default domain
+ */
+export const selectDomainsBySubaccountWithDefault = createSelector(
+  [selectDomainsBySubaccount], (domains) => {
+    if (!domains || !domains.length) {
+      return [{ domain: config.sandbox.domain }];
+    } else {
+      return domains;
+    }
+  }
+);
+
+
+/**
  * Selects subaccountId from the selector's second arguement, in place of props
  */
 export const selectSubaccountId = (state, subaccountId) => subaccountId;

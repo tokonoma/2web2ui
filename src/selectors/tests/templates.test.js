@@ -246,4 +246,19 @@ describe('Templates selectors', () => {
     });
 
   });
+
+  describe('selectDomainsBySubaccountWithDefault', () => {
+    it('returns verified domains when exist', () => {
+      expect(selector.selectDomainsBySubaccountWithDefault(store, {}).map((dom) => dom.domain)).toEqual(['shared.com', 'masterOnly.com']);
+    });
+
+    it('returns subaccount verified domains when exist', () => {
+      const expectedDomains = ['shared.com', 'assignedToSub.com'];
+      expect(selector.selectDomainsBySubaccountWithDefault(store, { subaccountId: 101 }).map((dom) => dom.domain)).toEqual(expectedDomains);
+    });
+
+    it('returns sandbox domain when no verified sending domain exists', () => {
+      expect(selector.selectDomainsBySubaccountWithDefault({ ...store, sendingDomains: { list: []}}, {}).map((dom) => dom.domain)).toEqual(['sparkpostbox.com']);
+    });
+  });
 });

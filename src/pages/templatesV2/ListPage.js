@@ -6,7 +6,7 @@ import { Templates } from 'src/components/images';
 import PageLink from 'src/components/pageLink';
 import { resolveTemplateStatus } from 'src/helpers/templates';
 import { DeleteAction, LastUpdated, Name, Status } from './components/ListComponents';
-
+import { routeNamespace } from './constants/routes';
 import styles from './ListPage.module.scss';
 
 export default class ListPage extends Component {
@@ -98,7 +98,7 @@ export default class ListPage extends Component {
       <Page
         primaryAction={(
           canModify
-            ? { Component: PageLink, content: 'Create New', to: '/templates/create' }
+            ? { Component: PageLink, content: 'Create New', to: `${routeNamespace}/create` }
             : undefined
         )}
         title='Templates'

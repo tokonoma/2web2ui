@@ -16,7 +16,7 @@ exports[`ListPage renders correctly 1`] = `
     Object {
       "Component": [Function],
       "content": "Create New",
-      "to": "/templates/create",
+      "to": "templatesv2/create",
     }
   }
   title="Templates"

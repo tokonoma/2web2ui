@@ -14,6 +14,7 @@ export const slugify = (value = '') => (
     .replace(/\s+/g, '-')
     .toLowerCase()
     .replace(/[^a-z0-9_-]/g, '') // remove invalid
+    .replace(/^-|-$/g, '') //remove leading or trailing dash
 );
 
 export const slugToFriendly = (string = '') => (
