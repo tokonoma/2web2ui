@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Tag } from '@sparkpost/matchbox';
-import { Warning, CheckCircleOutline } from '@sparkpost/matchbox-icons';
+import { Warning, CheckCircle } from '@sparkpost/matchbox-icons';
 import { TableCollection, CursorPaging, PerPageButtons, Empty } from 'src/components';
 import DisplayDate from 'src/components/displayDate/DisplayDate';
 import { formatDateTime } from 'src/helpers/date';
@@ -18,11 +18,10 @@ const friendlyErrorTypeMap = {
 
 const Status = ({ status, error }) => {
   const isError = status !== 'success';
-  const icon = isError ? <Warning /> : <CheckCircleOutline />;
+  const icon = isError ? <Warning color='#fa6423' /> : <CheckCircle color='#9bcd5a' />;
   const msg = isError ? friendlyErrorTypeMap[error] : 'Success';
-  const color = isError ? 'red' : 'blue';
   return (
-    <Tag color={color} className={styles.StatusTag}>
+    <Tag className={styles.StatusTag}>
       {icon} {msg}
     </Tag>
   );
@@ -31,9 +30,7 @@ const Status = ({ status, error }) => {
 const columns = [
   { label: 'Timestamp', width: '18%' },
   'Status',
-  { label: 'Events ingested', width: '10%' },
-  { label: 'Events rejected', width: '10%' },
-  { label: 'Duplicates', width: '10%' },
+  { label: 'Ingested/Rejected/Duplicates', width: '25%' },
   'Batch ID'
 ];
 
@@ -48,9 +45,7 @@ const formatRow = ({
 }) => [
   <DisplayDate timestamp={timestamp} formattedDate={formatDateTime(timestamp)} />,
   <Status status={type} error={error_type} />,
-  number_succeeded,
-  number_failed !== null ? number_failed : 'n/a',
-  number_duplicates,
+  `${number_succeeded} / ${number_failed === null ? 0 : number_failed} / ${number_duplicates}`,
   batch_id
 ];
 

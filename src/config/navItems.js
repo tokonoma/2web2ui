@@ -64,7 +64,7 @@ export default [
         to: '/signals/engagement'
       },
       {
-        label: 'Event Ingestion',
+        label: 'Ingestion Status',
         to: '/signals/ingest-batch-status'
       }
     ]
