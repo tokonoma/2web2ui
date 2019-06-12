@@ -24,7 +24,7 @@ export class CreateForm extends Component {
     autofill(formName, 'id', slugify(e.target.value));
   };
 
-  fromEmailWarning() {
+  fromEmailHelpText() {
     const { domains, domainsLoading, subaccountId, fromEmail } = this.props;
 
     if (domainsLoading) {
@@ -80,7 +80,7 @@ export class CreateForm extends Component {
             label='From Email'
             validate={[required, emailOrSubstitution]}
             domains={domains}
-            helpText={this.fromEmailWarning()}
+            helpText={this.fromEmailHelpText()}
           />
         </Grid.Column>
         <Grid.Column xs={12} lg={5}>
