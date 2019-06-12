@@ -5,9 +5,17 @@ exports[`EditAndPreviewPage renders a page 1`] = `
   breadcrumbRedirectsTo="/templatesv2"
   title="Test Template"
 >
-  <EditNavigation
-    primaryArea={<EditContentsPrimaryArea />}
-  />
-  <EditContents />
+  <div
+    className="EditorNav"
+  >
+    <EditNavigation
+      primaryArea={<EditContentsPrimaryArea />}
+    />
+  </div>
+  <div
+    className="MainContent"
+  >
+    <EditContents />
+  </div>
 </FullPage>
 `;
