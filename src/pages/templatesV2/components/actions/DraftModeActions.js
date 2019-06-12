@@ -8,7 +8,7 @@ import SaveDraft from './SaveDraft';
 import styles from './Actions.module.scss';
 
 
-const EditContentsPrimaryArea = () => (
+const DraftModeActions = () => (
   <div>
     <SaveAndPublish className={styles.Actions}>
       <Button><strong>Save and Publish</strong></Button>
@@ -31,4 +31,4 @@ const EditContentsPrimaryArea = () => (
   </div>
 );
 
-export default EditContentsPrimaryArea;
+export default DraftModeActions;
