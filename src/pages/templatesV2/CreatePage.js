@@ -14,11 +14,14 @@ export default class CreatePage extends Component {
   }
 
   handleCreate = (values) => {
-    const { create, history, subaccountId } = this.props;
+    const { create, history, subaccountId, showAlert } = this.props;
     const formData = { ...values, content: { ...values.content, text: '' }}; //add some content to avoid api validation error
 
     return create(formData)
-      .then(() => history.push(`/${routeNamespace}/edit/${values.id}${setSubaccountQuery(subaccountId)}`));
+      .then(() => {
+        showAlert({ type: 'success', message: 'Template Created.' });
+        history.push(`/${routeNamespace}/edit/${values.id}${setSubaccountQuery(subaccountId)}`);
+      });
   };
 
   render() {

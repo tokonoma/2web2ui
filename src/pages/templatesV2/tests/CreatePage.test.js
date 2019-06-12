@@ -12,6 +12,7 @@ describe('CreatePage', () => {
       handleSubmit={(handler) => handler}
       listDomains={jest.fn()}
       history={{ push: jest.fn() }}
+      showAlert={jest.fn()}
       {...props}
     />
   );
@@ -50,11 +51,13 @@ describe('CreatePage', () => {
       expect(mockCreate).toHaveBeenCalledWith({ ...formData, content: { ...formData.content, text: '' }});
     });
 
-    it('redirects to edit page', async () => {
+    it('alerts & redirects to edit page', async () => {
       const mockPush = jest.fn();
-      const wrapper = subject({ create: jest.fn(() => Promise.resolve()), history: { push: mockPush }});
+      const mockAlert = jest.fn();
+      const wrapper = subject({ create: jest.fn(() => Promise.resolve()), history: { push: mockPush }, showAlert: mockAlert });
       await wrapper.find('form').simulate('submit', { id: 'foo', content: {}});
       expect(mockPush).toHaveBeenCalledWith('/templatesv2/edit/foo');
+      expect(mockAlert).toHaveBeenCalledWith({ type: 'success', message: 'Template Created.' });
     });
   });
 });
