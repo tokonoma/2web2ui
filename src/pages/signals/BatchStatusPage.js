@@ -1,8 +1,11 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import moment from 'moment';
 import { Page } from '@sparkpost/matchbox';
+
 import { PanelLoading, ApiErrorBanner } from 'src/components';
+import { DEFAULT_PER_PAGE_BUTTONS } from 'src/constants';
 import useCollectionWithCursor from './hooks/useCollectionWithCursor';
+import { boolean, array, string, number, useQueryParams } from './hooks/useQueryParams';
 
 import BatchStatusCollection from './components/BatchStatusCollection';
 import BatchStatusSearch from './components/BatchStatusSearch';
@@ -11,38 +14,36 @@ import BatchStatusSearch from './components/BatchStatusSearch';
 // Mock api call
 //
 const pick = (array) => array[Math.floor(Math.random() * array.length)];
-
 const mockApiCall = ({ filters, page, perPage }) =>
   new Promise((resolve) => {
-    setTimeout(
-      () =>
-        resolve({
-          items: Array(perPage)
-            .fill()
-            .map((_, idx) => {
-              const error = filters.showSuccessful ? Math.random() > 0.5 : true;
-              return {
-                timestamp: moment().subtract(idx * 2 + 1, 'hours'),
-                type: error ? 'error' : 'success',
-                error_type: error
-                  ? pick(BatchStatusSearch.batchErrorTypes.map((errType) => errType.value))
-                  : null,
-                batch_id: 'DB9B0E4D-0917-4709-A915-D6B80221BC7F',
-                number_succeeded: 100,
-                number_failed: error ? 3 : null,
-                number_duplicates: 21
-              };
-            }),
-          totalCount: 1000,
-          extra: {
-            links: {
-              next: page < 3 ? 'next-link' : null
-            }
+    setTimeout(() => {
+      resolve({
+        items: Array(perPage)
+          .fill()
+          .map((_, idx) => {
+            const error = filters.showSuccessful ? Math.random() > 0.5 : true;
+            return {
+              timestamp: moment().subtract(idx * 2 + 1, 'hours'),
+              type: error ? 'error' : 'success',
+              error_type: error
+                ? pick(BatchStatusSearch.batchStatusOptions.slice(1).map((errType) => errType.value))
+                : null,
+              batch_id: 'DB9B0E4D-0917-4709-A915-D6B80221BC7F',
+              number_succeeded: 100,
+              number_failed: error ? 3 : null,
+              number_duplicates: 21
+            };
+          }),
+        totalCount: 1000,
+        extra: {
+          links: {
+            next: page < 3 ? 'next-link' : null
           }
-        }),
-      1000
-    );
+        }
+      });
+    }, 1000);
   });
+
 //
 //
 //
@@ -55,14 +56,29 @@ const Error = ({ error }) => (
   />
 );
 
+const queryParamSchema = {
+  errorTypes: array,
+  showSuccessful: boolean,
+  batchIds: string,
+  relativeRange: { type: string, default: 'hour' },
+  page: { type: number, default: 1 },
+  perPage: { type: number, default: DEFAULT_PER_PAGE_BUTTONS[0] }
+};
+
+const initCollectionFromParams = ({ page, perPage, ...filters }) => ({ page, perPage, filters });
+
 const BatchStatusPage = () => {
   const [error, setError] = useState(false);
+  const now = useState(new Date())[0];
   const onLoadError = useCallback(
     (err) => {
       setError(err);
     },
     [setError]
   );
+
+  const { params, setParams } = useQueryParams(queryParamSchema);
+
   const {
     loading,
     items,
@@ -74,11 +90,12 @@ const BatchStatusPage = () => {
     perPage,
     goToPage,
     setPerPage
-  } = useCollectionWithCursor({ loadItems: mockApiCall, onLoadError });
-  const [now, setNow] = useState(null);
+  } = useCollectionWithCursor({ ...initCollectionFromParams(params), loadItems: mockApiCall, onLoadError });
+
   useEffect(() => {
-    setNow(new Date());
-  }, []);
+    const { dateRange, ...rest } = filters;
+    setParams({ ...rest, ...dateRange, page, perPage });
+  }, [filters, page, perPage, setParams]);
 
   let content;
 
@@ -102,16 +119,15 @@ const BatchStatusPage = () => {
   }
 
   return (
-    <Page title="Signals Ingestion Batch Status">
-      <ul>
-        <li>Review the health of your Signals integration.</li>
-        <li>Review recent Signals ingestion batch status and identify issues.</li>
-      </ul>
+    <Page title="Ingestion Status">
+      <p>
+        Review the health of your Signals integration.
+      </p>
       <BatchStatusSearch
         now={now}
-        filters={filters}
-        onFilterChange={setFilters}
         disabled={loading || error}
+        filters={params}
+        onFilterChange={setFilters}
       />
       {content}
     </Page>

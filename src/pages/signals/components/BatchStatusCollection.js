@@ -61,7 +61,7 @@ const BatchStatusCollection = ({
   <Empty message="No batch events to display" />
 ) : (
     <>
-      <TableCollection columns={columns} rows={events} getRowData={formatRow} />
+      <TableCollection columns={columns} rows={events} getRowData={formatRow} updateQueryString={false} />
       <CursorPaging
         currentPage={page}
         handlePageChange={() => onChangePage(page + 1)}
@@ -81,7 +81,6 @@ const BatchStatusCollection = ({
           saveCsv={true}
         />
       </div>
-    </>
-);
+</>);
 
 export default BatchStatusCollection;

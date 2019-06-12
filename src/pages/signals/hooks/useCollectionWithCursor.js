@@ -1,14 +1,20 @@
 import { useState, useEffect } from 'react';
 
-import { DEFAULT_PER_PAGE_BUTTONS } from 'src/constants';
+const comparableJson = (obj) => JSON.stringify(Object.keys(obj).sort().map((key) => ({ [key]: obj[key] })));
 
-const useCollectionWithCursor = ({ initialFilters = {}, loadItems, onLoadError }) => {
+const useCollectionWithCursor = ({
+  filters: initialFilters = {},
+  page: initialPage,
+  perPage: initialPerPage,
+  loadItems,
+  onLoadError
+}) => {
   const [items, setItems] = useState(null);
-  const [filters, setFilters] = useState(initialFilters);
+  const [filters, setFilters] = useState(() => initialFilters);
   const [totalCount, setTotalCount] = useState(0);
   const [hasMore, setHasMore] = useState(false);
-  const [page, goToPage] = useState(1);
-  const [perPage, setPerPage] = useState(DEFAULT_PER_PAGE_BUTTONS[0]);
+  const [page, goToPage] = useState(initialPage);
+  const [perPage, setPerPage] = useState(initialPerPage);
 
   useEffect(
     () => {
@@ -23,7 +29,7 @@ const useCollectionWithCursor = ({ initialFilters = {}, loadItems, onLoadError }
           onLoadError(err);
         });
     },
-    [filters, loadItems, onLoadError, page, perPage, setItems, setTotalCount]
+    [comparableJson(filters), loadItems, onLoadError, page, perPage, setItems, setTotalCount] // eslint-disable-line react-hooks/exhaustive-deps
   );
 
   return {
