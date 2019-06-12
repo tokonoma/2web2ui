@@ -15,7 +15,6 @@ const selector = formValueSelector(formName);
 const mapStateToProps = (state, props) => ({
   id: selector(state, 'id'),
   loading: state.templates.getDraftLoading,
-  cloneId: props.match.params.id, // ID of the template it's cloning from
   subaccountId: _.get(selector(state, 'subaccount'), 'id'),
   formName: formName,
   initialValues: {
