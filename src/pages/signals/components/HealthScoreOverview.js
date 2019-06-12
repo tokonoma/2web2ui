@@ -11,6 +11,7 @@ import SparklineDataCell from './dataCells/SparklineDataCell';
 import WoWDataCell from './dataCells/WoWDataCell';
 import WoWHeaderCell from './dataCells/WoWHeaderCell';
 import moment from 'moment';
+import { V2Date } from '../constants/healthScoreV2';
 
 class HealthScoreOverview extends React.Component {
 
@@ -103,7 +104,7 @@ class HealthScoreOverview extends React.Component {
 
     const noFacetSelected = facet.key === 'sid';
     const noSubaccountFilter = subaccountFilter === undefined;
-    const afterNewModel = moment('2019/06/7').diff(to) <= 0;
+    const afterNewModel = moment(V2Date, 'YYYY-MM-DD').diff(to) <= 0;
 
     // Filter out account aggregate, there is no way to do it via api
     // This is done here to preserve pagination functionality
