@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { autofill, Field, formValueSelector } from 'redux-form';
 import { connect } from 'react-redux';
 // Components
-import { Grid } from '@sparkpost/matchbox';
+import { Grid, Panel } from '@sparkpost/matchbox';
 import SubaccountSection from 'src/components/subaccountSection';
 import { TextFieldWrapper } from 'src/components';
 import FromEmailWrapper from '../FromEmailWrapper';
@@ -32,7 +32,7 @@ export class CreateForm extends Component {
     }
 
     if (fromEmail && fromEmail.split('@')[1] === config.sandbox.domain) {
-      return 'You are using sandbox domain which has certain restrictions!';
+      return 'You are using the sandbox domain which has certain restrictions!';
     }
 
     if (!domains.length) {
@@ -51,41 +51,44 @@ export class CreateForm extends Component {
     return (
       <Grid>
         <Grid.Column xs={12} lg={7}>
-          <Field
-            name='name'
-            component={TextFieldWrapper}
-            label='Template Name'
-            onChange={this.handleIdFill}
-            validate={required}
-          />
+          <Panel.Section>
+            <Field
+              name='name'
+              component={TextFieldWrapper}
+              label='Template Name'
+              onChange={this.handleIdFill}
+              validate={required}
+            />
 
-          <Field
-            name='id'
-            component={TextFieldWrapper}
-            label='Template ID'
-            helpText={'A Unique ID for your template, we\'ll fill this in for you.'}
-            validate={[required, slug]}
-          />
-          <Field
-            name='content.subject'
-            component={TextFieldWrapper}
-            label='Subject'
-            validate={required}
-          />
+            <Field
+              name='id'
+              component={TextFieldWrapper}
+              label='Template ID'
+              helpText={'A Unique ID for your template, we\'ll fill this in for you.'}
+              validate={[required, slug]}
+            />
+            <Field
+              name='content.subject'
+              component={TextFieldWrapper}
+              label='Subject'
+              validate={required}
+            />
 
-          <Field
-            name='content.from.email'
-            component={FromEmailWrapper}
-            placeholder='example@email.com'
-            label='From Email'
-            validate={[required, emailOrSubstitution]}
-            domains={domains}
-            helpText={this.fromEmailHelpText()}
-          />
+            <Field
+              name='content.from.email'
+              component={FromEmailWrapper}
+              placeholder='example@email.com'
+              label='From Email'
+              validate={[required, emailOrSubstitution]}
+              domains={domains}
+              helpText={this.fromEmailHelpText()}
+            />
+          </Panel.Section>
         </Grid.Column>
         <Grid.Column xs={12} lg={5}>
           {canViewSubaccountSection && <SubaccountSection newTemplate={true}/>}
         </Grid.Column>
+
       </Grid>
     );
   }

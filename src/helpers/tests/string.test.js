@@ -44,6 +44,8 @@ describe('slugify', () => {
     expect(slugify(' Hello There')).toEqual('hello-there');
     expect(slugify('Hello There ')).toEqual('hello-there');
     expect(slugify('  Hello There  ')).toEqual('hello-there');
+    expect(slugify('-Hello There')).toEqual('hello-there');
+    expect(slugify('Hello There-')).toEqual('hello-there');
   });
 });
 

@@ -61,7 +61,7 @@ describe('CreateForm', () => {
     it('renders correct helptext with sandbox domain', () => {
       const wrapper = subject({ fromEmail: 'foo@sparkpostbox.com' });
       const fromEmail = wrapper.find('[name="content.from.email"]');
-      expect(fromEmail.prop('helpText')).toEqual('You are using sandbox domain which has certain restrictions!');
+      expect(fromEmail.prop('helpText')).toEqual('You are using the sandbox domain which has certain restrictions!');
     });
 
     it('renders no help text when domains loading', () => {
