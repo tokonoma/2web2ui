@@ -4,7 +4,7 @@ import { Page, Tabs, Panel } from '@sparkpost/matchbox';
 import ListForm from './components/ListForm';
 import SingleAddressForm from './components/SingleAddressForm';
 import ListResults from './components/ListResults';
-import { hasUiOption } from 'src/helpers/conditions/account';
+import { hasAccountOptionEnabled } from 'src/helpers/conditions/account';
 import RVDisabledPage from './components/RVDisabledPage';
 import ConditionSwitch, { Case, defaultCase } from 'src/components/auth/ConditionSwitch';
 
@@ -45,7 +45,7 @@ export class RecipientValidationPage extends Component {
 
     return (
       <ConditionSwitch>
-        <Case condition={hasUiOption('recipient_validation')}>
+        <Case condition={hasAccountOptionEnabled('recipient_validation')}>
           {this.renderRecipientValidation()}
         </Case>
         <Case condition={defaultCase}>
