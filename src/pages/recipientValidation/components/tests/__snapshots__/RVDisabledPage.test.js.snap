@@ -31,9 +31,6 @@ exports[`Recipient Validation Disabled Page should render 1`] = `
             >
               Number of Emails
             </strong>
-            <br
-              className="HeaderSpace"
-            />
             <strong>
               0
             </strong>
@@ -48,9 +45,6 @@ exports[`Recipient Validation Disabled Page should render 1`] = `
             >
               Cost
             </strong>
-            <br
-              className="HeaderSpace"
-            />
             <strong>
               $0.010
             </strong>
@@ -210,3 +204,5 @@ exports[`Recipient Validation Disabled Page should render 1`] = `
   </Button>
 </Page>
 `;
+
+exports[`Recipient Validation Disabled Page should render Loading page when updating account 1`] = `<Loading />`;

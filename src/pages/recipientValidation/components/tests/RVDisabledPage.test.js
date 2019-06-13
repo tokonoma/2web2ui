@@ -19,6 +19,10 @@ describe('Recipient Validation Disabled Page', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  it('should render Loading page when updating account' , () => {
+    wrapper.setProps({ ...props, accountUpdateLoading: true });
+    expect(wrapper).toMatchSnapshot();
+  });
   it('should show no button when customer is manually billed' , () => {
     wrapper.setProps({ ...props, isSelfServeBilling: false });
     expect(wrapper.find('Button')).not.toExist();

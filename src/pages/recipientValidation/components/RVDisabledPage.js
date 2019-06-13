@@ -7,7 +7,7 @@ import { selectCondition } from 'src/selectors/accessConditionState';
 import { isSelfServeBilling } from 'src/helpers/conditions/account';
 import { connect } from 'react-redux';
 import { update as updateAccount } from 'src/actions/account';
-
+import { Loading } from 'src/components';
 
 const priceData = [
   ['5,000', '10,000', '$0.008'],
@@ -86,6 +86,9 @@ export class RVDisabledPage extends Component {
   };
 
   render() {
+    if (this.props.accountUpdateLoading) {
+      return <Loading/>;
+    }
     return (
       <Page title='Recipient Validation'>
         <div className={styles.Description}>
@@ -104,7 +107,6 @@ export class RVDisabledPage extends Component {
               {this.getRows()}
             </tbody>
           </Table>
-
         </Panel>
         {this.getActionButton()}
       </Page>
@@ -114,7 +116,8 @@ export class RVDisabledPage extends Component {
 
 const mapStateToProps = (state) => ({
   isSelfServeBilling: selectCondition(isSelfServeBilling)(state),
-  isFree: currentPlanSelector(state).isFree
+  isFree: currentPlanSelector(state).isFree,
+  accountUpdateLoading: state.account.updateLoading
 });
 
 export default (connect(mapStateToProps, { updateAccount })(RVDisabledPage));
