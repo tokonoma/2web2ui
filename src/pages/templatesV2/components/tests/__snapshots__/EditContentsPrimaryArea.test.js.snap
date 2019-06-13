@@ -1,21 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`EditContentsPrimaryArea draft mode renders actions 1`] = `
+exports[`EditContentsPrimaryArea render draft mode actions 1`] = `
 <div>
-  <Button
-    onClick={[Function]}
-    size="default"
+  <_default
+    className="Actions"
   >
-    <strong>
-      Save and Publish
-    </strong>
-  </Button>
+    <Button
+      size="default"
+    >
+      <strong>
+        Save and Publish
+      </strong>
+    </Button>
+  </_default>
   <div
-    style={
-      Object {
-        "display": "inline-block",
-      }
-    }
+    className="Actions"
   >
     <Popover
       bottom={true}
@@ -29,67 +28,43 @@ exports[`EditContentsPrimaryArea draft mode renders actions 1`] = `
         </Button>
       }
     >
-      <ActionList
-        actions={
-          Array [
-            Object {
-              "content": <span>
-                <CheckCircleOutline />
-                 Save and Publish
-              </span>,
-              "group": 1,
-              "onClick": [Function],
-            },
-            Object {
-              "content": <span>
-                <FileEdit />
-                 Save Draft
-              </span>,
-              "group": 1,
-              "onClick": [Function],
-            },
-            Object {
-              "content": <span>
-                <RemoveRedEye />
-                 View Published
-              </span>,
-              "group": 2,
-              "onClick": [Function],
-              "visible": false,
-            },
-            Object {
-              "content": <span>
-                <ContentCopy />
-                 Duplicate
-              </span>,
-              "group": 2,
-              "onClick": [Function],
-            },
-          ]
-        }
-        groupByKey="group"
-      />
+      <div>
+        <_default
+          className="ActionItem"
+        />
+        <_default
+          className="ActionItem"
+        />
+        <hr
+          className="Divider"
+        />
+        <_default
+          className="ActionItem"
+        />
+        <_default
+          className="ActionItem"
+        />
+      </div>
     </Popover>
   </div>
 </div>
 `;
 
-exports[`EditContentsPrimaryArea published mode renders  actions 1`] = `
+exports[`EditContentsPrimaryArea render published mode actions 1`] = `
 <div>
-  <Button
-    onClick={[Function]}
-    size="default"
+  <_default
+    className="Actions"
   >
-    <strong>
-      Edit Draft
-    </strong>
-  </Button>
+    <Button
+      size="default"
+    >
+      <strong>
+        Edit Draft
+      </strong>
+    </Button>
+  </_default>
   <div
-    style={
-      Object {
-        "display": "inline-block",
-      }
-    }
+    className="Actions"
   >
     <Popover
       bottom={true}
@@ -103,27 +78,14 @@ exports[`EditContentsPrimaryArea published mode renders  actions 1`] = `
         </Button>
       }
     >
-      <ActionList
-        actions={
-          Array [
-            Object {
-              "content": <span>
-                <FileEdit />
-                 Edit Draft
-              </span>,
-              "onClick": [Function],
-            },
-            Object {
-              "content": <span>
-                <ContentCopy />
-                 Duplicate
-              </span>,
-              "onClick": [Function],
-            },
-          ]
-        }
-        groupByKey="section"
-      />
+      <div>
+        <_default
+          className="ActionItem"
+        />
+        <_default
+          className="ActionItem"
+        />
+      </div>
     </Popover>
   </div>
 </div>

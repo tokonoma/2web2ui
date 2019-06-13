@@ -5,8 +5,8 @@ import publishedModeActions from './editorActions/PublishedModeActions';
 
 const EditContentsPrimaryArea = () => {
   const { isPublishedMode, draft } = useEditorContext();
-  const publishedActions = useMemo(publishedModeActions, [isPublishedMode, draft]);
-  const draftActions = useMemo(draftModeActions, [isPublishedMode, draft]);
+  const publishedActions = useMemo(publishedModeActions, [isPublishedMode, draft.id]);
+  const draftActions = useMemo(draftModeActions, [isPublishedMode, draft.id]);
 
   return isPublishedMode ? publishedActions : draftActions;
 
