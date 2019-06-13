@@ -128,7 +128,7 @@ exports[`HealthScoreOverview renders injections column if after V2 release date 
       align="right"
       component={[Function]}
       dataKey="current_health_score"
-      label="Score"
+      label="Current Score"
       sortable={true}
       width="12.5%"
     />
@@ -136,7 +136,7 @@ exports[`HealthScoreOverview renders injections column if after V2 release date 
       align="right"
       component={[Function]}
       dataKey="current_total_injection_count"
-      label="Injections"
+      label="Current Injections"
       sortable={true}
       width="15%"
     />

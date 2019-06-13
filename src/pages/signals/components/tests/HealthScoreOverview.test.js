@@ -90,12 +90,13 @@ describe('HealthScoreOverview', () => {
   });
 
   it('renders custom date range', () => {
-    const wrapper = subject({ signalOptions: { relativeRange: 'custom' }});
+    const wrapper = subject({ signalOptions: { relativeRange: 'custom', to: new Date('2019/06/08') }});
     expect(wrapper.find('Column[dataKey="current_health_score"]').prop('label')).toEqual('Score');
+    expect(wrapper.find('Column[dataKey="current_total_injection_count"]').prop('label')).toEqual('Injections');
   });
 
   it('renders injections column if after V2 release date', () => {
-    const wrapper = subject({ signalOptions: { relativeRange: 'custom', to: new Date('2019/06/08') }});
+    const wrapper = subject({ signalOptions: { to: new Date('2019/06/08') }});
     expect(wrapper).toMatchSnapshot();
   });
 
