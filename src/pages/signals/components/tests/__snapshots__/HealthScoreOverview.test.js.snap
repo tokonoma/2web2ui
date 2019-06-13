@@ -1,5 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`HealthScoreOverview current injections column component renders current injection count 1`] = `
+<NumericDataCell
+  value={235000}
+/>
+`;
+
 exports[`HealthScoreOverview current score column component renders current score 1`] = `
 <NumericDataCell
   value={99}
@@ -15,6 +21,7 @@ exports[`HealthScoreOverview renders both subaccount and facet columns 1`] = `
           "WoW": 0.1,
           "average_health_score": 98,
           "current_health_score": 98,
+          "current_total_injection_count": 200000,
           "domain": "example.com",
           "history": Array [
             Object {
@@ -64,7 +71,7 @@ exports[`HealthScoreOverview renders both subaccount and facet columns 1`] = `
       component={[Function]}
       dataKey="WoW"
       label={<WoWHeaderCell />}
-      width="12.5%"
+      width="15%"
     />
     <Column
       align="right"
@@ -72,6 +79,86 @@ exports[`HealthScoreOverview renders both subaccount and facet columns 1`] = `
       dataKey="average_health_score"
       label="Average Score"
       width="15%"
+    />
+  </Connect(SummaryTable)>
+</Panel>
+`;
+
+exports[`HealthScoreOverview renders injections column if after V2 release date 1`] = `
+<Panel>
+  <Connect(SummaryTable)
+    data={
+      Array [
+        Object {
+          "WoW": 0.1,
+          "average_health_score": 98,
+          "current_health_score": 98,
+          "current_total_injection_count": 200000,
+          "domain": "example.com",
+          "history": Array [
+            Object {
+              "date": "2018-01-13",
+              "health_score": 98,
+            },
+          ],
+          "sid": 123,
+        },
+      ]
+    }
+    empty={false}
+    loading={false}
+    tableName="Test"
+    totalCount={1}
+  >
+    <Column
+      component={[Function]}
+      dataKey="sid"
+      label="Subaccount"
+      sortable={true}
+      width="15%"
+    />
+    <Column
+      component={[Function]}
+      dataKey="domain"
+      label="Domain"
+      sortable={true}
+      width="15%"
+    />
+    <Column
+      component={[Function]}
+      dataKey="history"
+      label="Daily Health Score"
+      width="20%"
+    />
+    <Column
+      align="right"
+      component={[Function]}
+      dataKey="current_health_score"
+      label="Current Score"
+      sortable={true}
+      width="12.5%"
+    />
+    <Column
+      align="right"
+      component={[Function]}
+      dataKey="current_total_injection_count"
+      label="Current Injections"
+      sortable={true}
+      width="15%"
+    />
+    <Column
+      align="right"
+      component={[Function]}
+      dataKey="WoW"
+      label={<WoWHeaderCell />}
+      width="12.5%"
+    />
+    <Column
+      align="right"
+      component={[Function]}
+      dataKey="average_health_score"
+      label="Average Score"
+      width="12.5%"
     />
   </Connect(SummaryTable)>
 </Panel>
@@ -86,6 +173,7 @@ exports[`HealthScoreOverview renders overview panel with controls and table 1`] 
           "WoW": 0.1,
           "average_health_score": 98,
           "current_health_score": 98,
+          "current_total_injection_count": 200000,
           "domain": "example.com",
           "history": Array [
             Object {
@@ -128,7 +216,7 @@ exports[`HealthScoreOverview renders overview panel with controls and table 1`] 
       component={[Function]}
       dataKey="WoW"
       label={<WoWHeaderCell />}
-      width="12.5%"
+      width="15%"
     />
     <Column
       align="right"

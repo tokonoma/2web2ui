@@ -8,7 +8,8 @@ const ORDER_BY_MAPPING = {
   current_health_score: 'health_score',
   current_relative_engaged_recipients: 'perc',
   current_relative_trap_hits: 'perc',
-  current_trap_hits: 'trap_hits'
+  current_trap_hits: 'trap_hits',
+  current_total_injection_count: 'total_injection_count'
 };
 
 const signalsActionCreator = ({ dimension, type }) => ({

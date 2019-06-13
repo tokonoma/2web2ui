@@ -10,6 +10,7 @@ describe('HealthScoreOverview', () => {
       data={[
         {
           current_health_score: 98,
+          current_total_injection_count: 200000,
           domain: 'example.com',
           history: [
             { date: '2018-01-13', health_score: 98 }
@@ -89,8 +90,14 @@ describe('HealthScoreOverview', () => {
   });
 
   it('renders custom date range', () => {
-    const wrapper = subject({ signalOptions: { relativeRange: 'custom' }});
+    const wrapper = subject({ signalOptions: { relativeRange: 'custom', to: new Date('2019/06/08') }});
     expect(wrapper.find('Column[dataKey="current_health_score"]').prop('label')).toEqual('Score');
+    expect(wrapper.find('Column[dataKey="current_total_injection_count"]').prop('label')).toEqual('Injections');
+  });
+
+  it('renders injections column if after V2 release date', () => {
+    const wrapper = subject({ signalOptions: { to: new Date('2019/06/08') }});
+    expect(wrapper).toMatchSnapshot();
   });
 
   it('does not render title', () => {
@@ -250,6 +257,15 @@ describe('HealthScoreOverview', () => {
     });
   });
 
+  describe('current injections column component', () => {
+    it('renders current injection count', () => {
+      const wrapper = subject({ signalOptions: { relativeRange: 'custom', to: new Date('2019/06/08') }});
+      const Column = wrapper.find('Column[dataKey="current_total_injection_count"]').prop('component');
+      const columnWrapper = shallow(<Column current_total_injection_count={235000} />);
+
+      expect(columnWrapper).toMatchSnapshot();
+    });
+  });
 
   it('filters out master and all subaccounts row', () => {
     const data = [

@@ -1,6 +1,6 @@
 import styles from 'src/pages/signals/dashboards/components/HealthScoreChart/HealthScoreChart.module.scss';
 
-const V2Date = '2019-06-07';
+export const V2Date = '2019-06-07';
 
 export const newModelLine = [
   {
