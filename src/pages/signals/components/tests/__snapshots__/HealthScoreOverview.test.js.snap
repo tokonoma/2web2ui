@@ -1,5 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`HealthScoreOverview current injections column component renders current injection count 1`] = `
+<NumericDataCell
+  value={235000}
+/>
+`;
+
 exports[`HealthScoreOverview current score column component renders current score 1`] = `
 <NumericDataCell
   value={99}

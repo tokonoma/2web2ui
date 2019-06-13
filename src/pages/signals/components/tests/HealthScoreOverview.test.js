@@ -257,6 +257,15 @@ describe('HealthScoreOverview', () => {
     });
   });
 
+  describe('current injections column component', () => {
+    it('renders current injection count', () => {
+      const wrapper = subject({ signalOptions: { relativeRange: 'custom', to: new Date('2019/06/08') }});
+      const Column = wrapper.find('Column[dataKey="current_total_injection_count"]').prop('component');
+      const columnWrapper = shallow(<Column current_total_injection_count={235000} />);
+
+      expect(columnWrapper).toMatchSnapshot();
+    });
+  });
 
   it('filters out master and all subaccounts row', () => {
     const data = [
