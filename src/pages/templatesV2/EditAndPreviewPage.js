@@ -7,6 +7,7 @@ import links from './constants/editNavigationLinks';
 import useEditorContext from './hooks/useEditorContext';
 
 import { routeNamespace } from './constants/routes';
+import styles from './EditAndPreview.module.scss';
 
 const EditAndPreviewPage = () => {
   const { currentNavigationIndex, draft, hasDraftFailedToLoad, isDraftLoading } = useEditorContext();
@@ -31,8 +32,13 @@ const EditAndPreviewPage = () => {
       breadcrumbRedirectsTo={`/${routeNamespace}`}
       title={draft.name}
     >
-      <EditNavigation primaryArea={<PrimaryArea />} />
-      <Contents />
+      <div className={styles.EditorNav}>
+        <EditNavigation primaryArea={<PrimaryArea/>}/>
+      </div>
+
+      <div className={styles.MainContent}>
+        <Contents/>
+      </div>
     </FullPage>
   );
 };
