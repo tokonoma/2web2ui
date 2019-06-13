@@ -96,15 +96,15 @@ class HealthScoreOverview extends React.Component {
 
   render() {
     const {
-      data, error, facet, loading, signalOptions, subaccounts, tableName, totalCount, header, to
+      data, error, facet, loading, signalOptions, subaccounts, tableName, totalCount, header
     } = this.props;
+    const { to } = signalOptions;
 
     const subaccountFilter = _.get(signalOptions, 'subaccount.id');
     const isCustomRange = signalOptions.relativeRange === 'custom';
-
     const noFacetSelected = facet.key === 'sid';
     const noSubaccountFilter = subaccountFilter === undefined;
-    const afterNewModel = moment(V2Date, 'YYYY-MM-DD').diff(to) <= 0;
+    const afterNewModel = to && moment(V2Date, 'YYYY-MM-DD').diff(to) <= 0;
 
     // Filter out account aggregate, there is no way to do it via api
     // This is done here to preserve pagination functionality
@@ -158,10 +158,9 @@ class HealthScoreOverview extends React.Component {
           <Column
             dataKey="history"
             label="Daily Health Score"
-            width='20%'
+            width={afterNewModel ? '20%' : '30%'}
             component={({ history, ...filteredData }) => {
               const id = filteredData[facet.key];
-
               return (
                 <SparklineDataCell
                   data={history}
@@ -183,21 +182,22 @@ class HealthScoreOverview extends React.Component {
               <NumericDataCell value={current_health_score} />
             )}
           />
-          <Column
-            align="right"
-            dataKey="current_total_injection_count"
-            label={isCustomRange ? 'Injections' : 'Current Injections'}
-            sortable={afterNewModel}
-            width="15%"
-            component={({ current_total_injection_count }) => (
-              <NumericDataCell value={afterNewModel ? current_total_injection_count : null} />
-            )}
-          />
+          {afterNewModel &&
+            <Column
+              align="right"
+              dataKey="current_total_injection_count"
+              label={isCustomRange ? 'Injections' : 'Current Injections'}
+              sortable
+              width="15%"
+              component={({ current_total_injection_count }) => (
+                <NumericDataCell value={current_total_injection_count} />
+              )}
+            />}
           <Column
             align="right"
             dataKey="WoW"
             label={<WoWHeaderCell/>}
-            width="10%"
+            width={afterNewModel ? '12.5%' : '15%'}
             component={({ WoW }) => (
               <WoWDataCell value={WoW} />
             )}
@@ -206,7 +206,7 @@ class HealthScoreOverview extends React.Component {
             align="right"
             dataKey="average_health_score"
             label="Average Score"
-            width="12.5%"
+            width={afterNewModel ? '12.5%' : '15%'}
             component={({ average_health_score }) => (
               <NumericDataCell value={average_health_score} />
             )}

@@ -94,18 +94,10 @@ describe('HealthScoreOverview', () => {
     expect(wrapper.find('Column[dataKey="current_health_score"]').prop('label')).toEqual('Score');
   });
 
-  it('render injections properly when before new model date', () => {
-    const wrapper = subject({ signalOptions: { relativeRange: 'custom' }, to: new Date('2019/06/05') });
-    expect(wrapper.find('Column[dataKey="current_total_injection_count"]').prop('label')).toEqual('Injections');
-    expect(wrapper.find('Column[dataKey="current_total_injection_count"]').prop('sortable')).toEqual(false);
+  it('renders injections column if after V2 release date', () => {
+    const wrapper = subject({ signalOptions: { relativeRange: 'custom', to: new Date('2019/06/08') }});
+    expect(wrapper).toMatchSnapshot();
   });
-
-  it('render injections properly when after model date', () => {
-    const wrapper = subject({ signalOptions: { relativeRange: 'custom' }, to: new Date('2019/06/07') });
-    expect(wrapper.find('Column[dataKey="current_total_injection_count"]').prop('label')).toEqual('Injections');
-    expect(wrapper.find('Column[dataKey="current_total_injection_count"]').prop('sortable')).toEqual(true);
-  });
-
 
   it('does not render title', () => {
     const wrapper = subject({ hideTitle: true });
