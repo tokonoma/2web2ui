@@ -10,9 +10,8 @@ import DedicatedIpSummarySection from './DedicatedIpSummarySection';
 import InvoiceHistory from './InvoiceHistory';
 import CardSummary from './CardSummary';
 import PlanSummary from './PlanSummary';
-import RecipientValidationModal from './RecipientValidationModal';
-import { formatFullNumber, formatCurrency } from 'src/helpers/units';
-import { RECIPIENT_TIERS } from 'src/constants';
+import RecipientValidationModal, { totalRVCost } from './RecipientValidationModal';
+import { formatFullNumber } from 'src/helpers/units';
 import _ from 'lodash';
 import { formatDate } from 'src/helpers/date';
 
@@ -65,18 +64,12 @@ export default class BillingSummary extends Component {
 
   renderRecipientValidationSection = ({ rvUsage }) => {
     const volumeUsed = _.get(rvUsage, 'recipient_validation.month.used', 0);
-
-    let totalCost = 0;
-
-    RECIPIENT_TIERS.forEach(({ volumeMax, volumeMin, cost }) => {
-      const tierCost = Math.max(Math.min(volumeMax, volumeUsed) - volumeMin, 0) * cost;
-      totalCost += tierCost;
-    });
+    const recipientValidationDate = _.get(rvUsage, 'recipient_validation.timestamp');
 
     return (
       <Panel.Section>
         <LabelledValue label="Recipient Validation">
-          <h6>{formatFullNumber(volumeUsed)} emails validated for {formatCurrency(totalCost)}<small> as of {formatDate(rvUsage.recipient_validation.timestamp)}</small></h6>
+          <h6>{formatFullNumber(volumeUsed)} emails validated for {totalRVCost(volumeUsed)}<small> as of {formatDate(recipientValidationDate)}</small></h6>
           <UnstyledLink onClick={this.handleRvModal}>How was this calculated?</UnstyledLink>
         </LabelledValue>
       </Panel.Section>
@@ -87,6 +80,7 @@ export default class BillingSummary extends Component {
     const { account, currentPlan, canChangePlan, canUpdateBillingInfo, canPurchaseIps, invoices, isAWSAccount, accountAgeInDays, hasRecipientValidation } = this.props;
     const { rvUsage, usageLoading } = account;
     const { show, showCloseButton } = this.state;
+    const showRecipientValidation = hasRecipientValidation && rvUsage && !usageLoading;
     let changePlanActions = {};
 
     if (canChangePlan) {
@@ -105,7 +99,7 @@ export default class BillingSummary extends Component {
             </LabelledValue>
           </Panel.Section>
           {canPurchaseIps && this.renderDedicatedIpSummarySection()}
-          {hasRecipientValidation && rvUsage && !usageLoading && this.renderRecipientValidationSection({ rvUsage })}
+          {showRecipientValidation && this.renderRecipientValidationSection({ rvUsage })}
         </Panel>
 
         {canUpdateBillingInfo && this.renderSummary()}

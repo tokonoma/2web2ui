@@ -99,9 +99,9 @@ describe('Component: Billing Summary', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('shoudl render recipient validation section if option is enabled', () => {
+  it('should render recipient validation section if option is enabled', () => {
     wrapper.setProps({ hasRecipientValidation: true });
-    expect(wrapper).toMatchSnapshot();
+    expect(wrapper.find('LabelledValue[label="Recipient Validation"]')).toExist();
   });
 
 });

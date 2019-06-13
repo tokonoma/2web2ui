@@ -6,6 +6,16 @@ import cx from 'classnames';
 import { RECIPIENT_TIERS } from 'src/constants';
 import _ from 'lodash';
 
+export const totalRVCost = (volume = 0) => {
+  let totalCost = 0;
+
+  RECIPIENT_TIERS.forEach(({ volumeMax, volumeMin, cost }) => {
+    const tierCost = Math.max(Math.min(volumeMax, volume) - volumeMin, 0) * cost;
+    totalCost += tierCost;
+  });
+  return formatCurrency(totalCost);
+};
+
 export default ({ onClose, usage }) => {
   const volumeUsed = _.get(usage, 'recipient_validation.month.used', 0);
   let totalCost = 0;
@@ -14,9 +24,11 @@ export default ({ onClose, usage }) => {
     const tierCost = Math.max(Math.min(volumeMax, volumeUsed) - volumeMin, 0) * cost;
     totalCost += tierCost;
 
+    const tierEmpty = tierCost <= 0;
+
     const rowClass = cx(
       styles.PriceRow,
-      tierCost <= 0 && styles.SelectedTier
+      tierEmpty && styles.EmptyTier
     );
 
     return (
@@ -32,12 +44,16 @@ export default ({ onClose, usage }) => {
         <Grid.Column xs={3}>
           <span className={styles.Bold}>${cost} per email</span>
         </Grid.Column>
+        {!tierEmpty &&
         <Grid.Column xs={1} style={{ textAlign: 'center' }}>
-          {tierCost > 0 && <span>=</span>}
+          <span>=</span>
         </Grid.Column>
+        }
+        {!tierEmpty &&
         <Grid.Column xs={2} style={{ textAlign: 'right' }}>
-          {tierCost > 0 && <span className={styles.Bold}>{formatCurrency(tierCost)}</span>}
+          <span className={styles.Bold}>{formatCurrency(tierCost)}</span>
         </Grid.Column>
+        }
       </Grid>
     );
   });
