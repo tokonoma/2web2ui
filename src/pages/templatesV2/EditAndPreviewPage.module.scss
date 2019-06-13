@@ -3,3 +3,14 @@
 .GreenColor {
   color: color(green);
 }
+
+.EditorNav {
+  position: fixed;
+  width: 100%;
+  top: 50;
+  z-index: 100;
+}
+
+.MainContent {
+  margin-top: 60px;
+}
