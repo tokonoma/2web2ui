@@ -1460,7 +1460,6 @@ Object {
       "sending_domain": "test.com",
     },
   ],
-  "to": "2018-01-04",
   "total_count": 10,
 }
 `;
