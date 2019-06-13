@@ -6,16 +6,6 @@ import cx from 'classnames';
 import { RECIPIENT_TIERS } from 'src/constants';
 import _ from 'lodash';
 
-export const totalRVCost = (volume = 0) => {
-  let totalCost = 0;
-
-  RECIPIENT_TIERS.forEach(({ volumeMax, volumeMin, cost }) => {
-    const tierCost = Math.max(Math.min(volumeMax, volume) - volumeMin, 0) * cost;
-    totalCost += tierCost;
-  });
-  return formatCurrency(totalCost);
-};
-
 export default ({ onClose, usage }) => {
   const volumeUsed = _.get(usage, 'recipient_validation.month.used', 0);
   let totalCost = 0;

@@ -10,8 +10,9 @@ import DedicatedIpSummarySection from './DedicatedIpSummarySection';
 import InvoiceHistory from './InvoiceHistory';
 import CardSummary from './CardSummary';
 import PlanSummary from './PlanSummary';
-import RecipientValidationModal, { totalRVCost } from './RecipientValidationModal';
+import RecipientValidationModal from './RecipientValidationModal';
 import { formatFullNumber } from 'src/helpers/units';
+import totalRVCost from '../helpers/totalRecipientValidationCost';
 import _ from 'lodash';
 import { formatDate } from 'src/helpers/date';
 

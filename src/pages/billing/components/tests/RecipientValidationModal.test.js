@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import RecipientValidationModal, { totalRVCost } from '../RecipientValidationModal';
+import RecipientValidationModal from '../RecipientValidationModal';
 
 describe('Component: RecipientValidationModal', () => {
   let wrapper;
@@ -20,15 +20,5 @@ describe('Component: RecipientValidationModal', () => {
 
   it('should render properly', () => {
     expect(wrapper).toMatchSnapshot();
-  });
-});
-
-describe('Total RV Cost', () => {
-  it('should calculate price correctly', () => {
-    expect(totalRVCost(123321)).toEqual('$599.96');
-  });
-
-  it('should calculate price correctly for undefined', () => {
-    expect(totalRVCost(undefined)).toEqual('$0.00');
   });
 });
