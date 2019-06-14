@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { Page, Panel, Table, Button, UnstyledLink } from '@sparkpost/matchbox';
+import { Page, Panel, Table, Button } from '@sparkpost/matchbox';
 import React from 'react';
 import styles from './RVDisabledPage.module.scss';
 import { currentPlanSelector } from 'src/selectors/accountBillingInfo';
@@ -66,13 +66,13 @@ export class RVDisabledPage extends Component {
     return rows;
   };
 
-  getActionButton = () => {
+  renderActionButton = () => {
     const { isSelfServeBilling, isFree } = this.props;
     if (!isSelfServeBilling) {
       return null;
     }
     return (isFree)
-      ? (<UnstyledLink component={Button} to={'/account/billing'} primary>Upgrade your plan</UnstyledLink>)
+      ? (<Button primary to={'/account/billing'}>Upgrade your plan</Button>)
       : (<Button primary onClick={this.enableRV}>Enable Recipient Validation</Button>);
   };
 
@@ -108,7 +108,7 @@ export class RVDisabledPage extends Component {
             </tbody>
           </Table>
         </Panel>
-        {this.getActionButton()}
+        {this.renderActionButton()}
       </Page>
     );
   }
