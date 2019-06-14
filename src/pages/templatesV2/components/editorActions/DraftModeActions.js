@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Popover } from '@sparkpost/matchbox';
 import { ArrowDropDown } from '@sparkpost/matchbox-icons';
-import Duplicate from './Duplicate';
+// import Duplicate from './Duplicate';
 import SaveAndPublish from './SaveAndPublish';
 import ViewPublished from './ViewPublished';
 import SaveDraft from './SaveDraft';
@@ -19,10 +19,10 @@ const DraftModeActions = () => (
       >
         <div>
           <SaveAndPublish className={styles.ActionItem}/>
-          <Duplicate className={styles.ActionItem}/>
-          <hr className={styles.Divider}/>
           <SaveDraft className={styles.ActionItem}/>
+          <hr className={styles.Divider}/>
           <ViewPublished className={styles.ActionItem}/>
+          {/*<Duplicate className={styles.ActionItem}/>*/}
         </div>
 
       </Popover>
