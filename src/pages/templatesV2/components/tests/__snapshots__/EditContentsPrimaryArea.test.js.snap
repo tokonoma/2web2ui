@@ -41,9 +41,6 @@ exports[`EditContentsPrimaryArea render draft mode actions 1`] = `
         <_default
           className="ActionItem"
         />
-        <_default
-          className="ActionItem"
-        />
       </div>
     </Popover>
   </div>

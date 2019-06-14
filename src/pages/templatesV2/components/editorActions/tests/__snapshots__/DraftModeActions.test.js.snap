@@ -41,9 +41,6 @@ exports[`DraftModeActions renders draft actions 1`] = `
         <_default
           className="ActionItem"
         />
-        <_default
-          className="ActionItem"
-        />
       </div>
     </Popover>
   </div>
