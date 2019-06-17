@@ -37,13 +37,13 @@ export class RVDisabledPage extends Component {
     const firstRow = RECIPIENT_VALIDATION_TIERS[0];
     rows.unshift(
       <Table.Row key = {firstRow.volumeMin}>
-        <Table.Cell >
+        <Table.Cell>
           <strong className = {styles.Header}>
             Number of Emails
           </strong>
           <strong>{formatFullNumber(firstRow.volumeMin)}</strong> to <strong>{formatFullNumber(firstRow.volumeMax)}</strong>
         </Table.Cell>
-        <Table.Cell >
+        <Table.Cell>
           <strong className = {styles.Header}>
             Cost
           </strong>
@@ -91,8 +91,8 @@ export class RVDisabledPage extends Component {
           </p>
         </div>
         <Panel className = {styles.Table}>
-          <Table >
-            <tbody className={styles.Table}>
+          <Table>
+            <tbody>
               {this.getRows()}
             </tbody>
           </Table>

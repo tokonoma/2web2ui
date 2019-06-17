@@ -8,7 +8,7 @@
 }
 
 .Table {
-  padding: rem(30) rem(45);
+  padding: rem(30) rem(45) rem(15);
   font-size: rem(17);
 }
 
@@ -18,5 +18,3 @@
     @media screen and (min-width: breakpoint(large)) { margin-right: 25%; }
   }
 }
-
-

@@ -19,9 +19,7 @@ exports[`Recipient Validation Disabled Page should render 1`] = `
     className="Table"
   >
     <Table>
-      <tbody
-        className="Table"
-      >
+      <tbody>
         <Table.Row
           key="0"
         >
