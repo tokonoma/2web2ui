@@ -1,5 +1,6 @@
 import React from 'react';
 import { Panel, Grid } from '@sparkpost/matchbox';
+import { Close } from '@sparkpost/matchbox-icons';
 import { formatCurrency, formatFullNumber } from 'src/helpers/units';
 import styles from './RecipientValidationModal.module.scss';
 import cx from 'classnames';
@@ -23,7 +24,7 @@ export default ({ onClose, usage }) => {
 
     return (
       <Grid className={rowClass} key={`rv_tier_${volumeMin}_${volumeMax || 'plus'}`}>
-        <Grid.Column xs={4} sm={3} smOffset={1} >
+        <Grid.Column xs={4}>
           <span className={styles.Bold}>{volumeMax < Infinity
             ? `${formatFullNumber(volumeMin)} - ${formatFullNumber(volumeMax)}`
             : `${formatFullNumber(volumeMin)}+`} emails</span>
@@ -31,7 +32,7 @@ export default ({ onClose, usage }) => {
         <Grid.Column xs={1} style={{ textAlign: 'center' }}>
           <span>at</span>
         </Grid.Column>
-        <Grid.Column xs={3}>
+        <Grid.Column xs={4}>
           <span className={styles.Bold}>${cost} per email</span>
         </Grid.Column>
         {!tierEmpty &&
@@ -49,14 +50,12 @@ export default ({ onClose, usage }) => {
   });
 
   return (
-    <Panel accent onClose={onClose} title='How was this calculated?'>
+    <Panel actions={[{ content: <Close />, onClick: onClose }]} className={styles.modalContainer} accent title='How was this calculated?'>
       <Panel.Section>
         {TierRows}
-      </Panel.Section>
-      <Panel.Section>
         <Grid className={styles.TotalCost}>
-          <Grid.Column xs={3} xsOffset={5}>
-            Total Cost:
+          <Grid.Column xs={4} xsOffset={5}>
+            Total:
           </Grid.Column>
           <Grid.Column style={{ textAlign: 'right' }} xsOffset={1} xs={2}>
             {formatCurrency(totalCost)}

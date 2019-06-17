@@ -122,7 +122,6 @@ exports[`Component: Billing Summary should render correctly for a paid plan 1`] 
   <Modal
     onClose={[Function]}
     open={false}
-    showCloseButton={false}
   />
 </div>
 `;
@@ -200,7 +199,6 @@ exports[`Component: Billing Summary should render correctly for a standard free 
   <Modal
     onClose={[Function]}
     open={false}
-    showCloseButton={false}
   />
 </div>
 `;
@@ -318,7 +316,6 @@ exports[`Component: Billing Summary should render correctly if you can't buy IPs
   <Modal
     onClose={[Function]}
     open={false}
-    showCloseButton={false}
   />
 </div>
 `;
@@ -434,7 +431,6 @@ exports[`Component: Billing Summary should render correctly if you can't change 
   <Modal
     onClose={[Function]}
     open={false}
-    showCloseButton={false}
   />
 </div>
 `;
@@ -521,7 +517,6 @@ exports[`Component: Billing Summary should render correctly if you can't update 
   <Modal
     onClose={[Function]}
     open={false}
-    showCloseButton={false}
   />
 </div>
 `;
@@ -648,7 +643,6 @@ exports[`Component: Billing Summary should render with IP modal open 1`] = `
   <Modal
     onClose={[Function]}
     open={true}
-    showCloseButton={false}
   >
     <AddIpsForm
       onClose={[Function]}
@@ -779,7 +773,6 @@ exports[`Component: Billing Summary should render with the billing contact modal
   <Modal
     onClose={[Function]}
     open={true}
-    showCloseButton={false}
   >
     <UpdateContactForm
       onCancel={[Function]}
@@ -910,7 +903,6 @@ exports[`Component: Billing Summary should render with the payment info modal op
   <Modal
     onClose={[Function]}
     open={true}
-    showCloseButton={false}
   >
     <UpdatePaymentForm
       onCancel={[Function]}
@@ -1049,7 +1041,6 @@ exports[`Component: Billing Summary should show the invoice history if there are
   <Modal
     onClose={[Function]}
     open={false}
-    showCloseButton={false}
   />
 </div>
 `;

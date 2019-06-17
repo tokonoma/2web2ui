@@ -15,10 +15,18 @@
 }
 
 .PriceRow {
-  margin-bottom: 15px;
+  margin: 10px 20px;
 }
 
 .TotalCost {
   color: color(orange);
   font-weight: 700;
+  margin: 0 20px;
+  padding: 15px;
+  border-top: 1px solid color(gray, 9);
+}
+
+.modalContainer {
+  max-width: 640px;
+  margin: 0 auto;
 }

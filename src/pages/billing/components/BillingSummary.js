@@ -14,7 +14,7 @@ import RecipientValidationModal from './RecipientValidationModal';
 import { formatFullNumber } from 'src/helpers/units';
 import totalRVCost from '../helpers/totalRecipientValidationCost';
 import _ from 'lodash';
-import { formatDate } from 'src/helpers/date';
+import { formatDateTime } from 'src/helpers/date';
 
 const PAYMENT_MODAL = 'payment';
 const CONTACT_MODAL = 'contact';
@@ -23,12 +23,11 @@ const RV_MODAL = 'recipient_validation';
 
 export default class BillingSummary extends Component {
   state = {
-    show: false,
-    showCloseButton: false
+    show: false
   }
 
-  handleModal = (modal = false, showCloseButton = false) => {
-    this.setState({ show: this.state.show ? false : modal, showCloseButton });
+  handleModal = (modal = false) => {
+    this.setState({ show: this.state.show ? false : modal });
   }
 
   handlePaymentModal = () => this.handleModal(PAYMENT_MODAL);
@@ -66,11 +65,10 @@ export default class BillingSummary extends Component {
   renderRecipientValidationSection = ({ rvUsage }) => {
     const volumeUsed = _.get(rvUsage, 'recipient_validation.month.used', 0);
     const recipientValidationDate = _.get(rvUsage, 'recipient_validation.timestamp');
-
     return (
       <Panel.Section>
         <LabelledValue label="Recipient Validation">
-          <h6>{formatFullNumber(volumeUsed)} emails validated for {totalRVCost(volumeUsed)}<small> as of {formatDate(recipientValidationDate)}</small></h6>
+          <h6>{formatFullNumber(volumeUsed)} emails validated for {totalRVCost(volumeUsed)}<small> as of {formatDateTime(recipientValidationDate)}</small></h6>
           <UnstyledLink onClick={this.handleRvModal}>How was this calculated?</UnstyledLink>
         </LabelledValue>
       </Panel.Section>
@@ -80,7 +78,7 @@ export default class BillingSummary extends Component {
   render() {
     const { account, currentPlan, canChangePlan, canUpdateBillingInfo, canPurchaseIps, invoices, isAWSAccount, accountAgeInDays, hasRecipientValidation } = this.props;
     const { rvUsage, usageLoading } = account;
-    const { show, showCloseButton } = this.state;
+    const { show } = this.state;
     const showRecipientValidation = hasRecipientValidation && rvUsage && !usageLoading;
     let changePlanActions = {};
 
@@ -110,7 +108,7 @@ export default class BillingSummary extends Component {
         <PremiumBanner isAWSAccount={isAWSAccount} />
         <EnterpriseBanner />
 
-        <Modal open={!!show} showCloseButton={showCloseButton} onClose={this.handleModal}>
+        <Modal open={!!show} onClose={this.handleModal}>
           {show === PAYMENT_MODAL && <UpdatePaymentForm onCancel={this.handleModal}/>}
           {show === CONTACT_MODAL && <UpdateContactForm onCancel={this.handleModal}/>}
           {show === IP_MODAL && <AddIps onClose={this.handleModal}/>}
