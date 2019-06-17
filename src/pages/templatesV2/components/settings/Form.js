@@ -2,7 +2,6 @@ import React from 'react';
 import { Field } from 'redux-form';
 
 import { Button, Panel } from '@sparkpost/matchbox';
-
 import ToggleBlock from 'src/components/toggleBlock/ToggleBlock';
 import SubaccountSection from 'src/components/subaccountSection';
 import { TextFieldWrapper } from 'src/components';
@@ -18,7 +17,7 @@ export default class SettingsForm extends React.Component {
     const { draft, updateDraft, subaccountId, showAlert } = this.props;
     return updateDraft({ id: draft.id, ...values }, subaccountId)
       .then(() => {
-        showAlert({ type: 'success', message: 'Template settings updated' }); //todo change to top header feedback
+        showAlert({ type: 'success', message: 'Template settings updated.' });
       });
   };
 
@@ -27,7 +26,7 @@ export default class SettingsForm extends React.Component {
   onDelete = () => {
     const { showAlert, history } = this.props;
     history.push(`/${routeNamespace}`);
-    showAlert({ message: 'Template deleted', type: 'success' });
+    showAlert({ message: 'Template deleted.', type: 'success' });
   };
 
   render() {
