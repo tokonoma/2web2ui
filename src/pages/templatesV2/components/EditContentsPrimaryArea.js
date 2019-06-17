@@ -1,14 +1,12 @@
-import { useMemo } from 'react';
+import React from 'react';
 import useEditorContext from '../hooks/useEditorContext';
-import draftModeActions from './editorActions/DraftModeActions';
-import publishedModeActions from './editorActions/PublishedModeActions';
+import DraftModeActions from './editorActions/DraftModeActions';
+import PublishedModActions from './editorActions/PublishedModeActions';
 
 const EditContentsPrimaryArea = () => {
-  const { isPublishedMode, draft } = useEditorContext();
-  const publishedActions = useMemo(publishedModeActions, [isPublishedMode, draft.id]);
-  const draftActions = useMemo(draftModeActions, [isPublishedMode, draft.id]);
+  const { isPublishedMode } = useEditorContext();
 
-  return isPublishedMode ? publishedActions : draftActions;
+  return isPublishedMode ? <PublishedModActions /> : <DraftModeActions />;
 
 };
 
