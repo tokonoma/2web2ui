@@ -155,4 +155,15 @@ export const PLAN_TIERS = {
   premier: 'Premier'
 };
 
+export const RECIPIENT_VALIDATION_TIERS = [
+  { volumeMin: 0, volumeMax: 5000, cost: 0.01 },
+  { volumeMin: 5000, volumeMax: 10000, cost: 0.008 },
+  { volumeMin: 10000, volumeMax: 50000, cost: 0.006 },
+  { volumeMin: 50000, volumeMax: 100000, cost: 0.004 },
+  { volumeMin: 100000, volumeMax: 250000, cost: 0.003 },
+  { volumeMin: 250000, volumeMax: 750000, cost: 0.0015 },
+  { volumeMin: 750000, volumeMax: 1000000, cost: 0.001 },
+  { volumeMin: 1000000, volumeMax: Infinity, cost: 0.00075 }
+];
+
 export { ROLES, SUBACCOUNT_ROLES, ROLE_LABELS } from './users';

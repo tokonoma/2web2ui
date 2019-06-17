@@ -6,6 +6,14 @@ exports[`Component: Billing Summary should render correctly for a paid plan 1`] 
     account={
       Object {
         "billing": Object {},
+        "rvUsage": Object {
+          "recipient_validation": Object {
+            "month": Object {
+              "used": 123123,
+            },
+            "timestamp": "2019-06-10T00:00:00.000Z",
+          },
+        },
         "subscription": Object {
           "plan_volume": 15000,
         },
@@ -16,6 +24,14 @@ exports[`Component: Billing Summary should render correctly for a paid plan 1`] 
     account={
       Object {
         "billing": Object {},
+        "rvUsage": Object {
+          "recipient_validation": Object {
+            "month": Object {
+              "used": 123123,
+            },
+            "timestamp": "2019-06-10T00:00:00.000Z",
+          },
+        },
         "subscription": Object {
           "plan_volume": 15000,
         },
@@ -116,6 +132,14 @@ exports[`Component: Billing Summary should render correctly for a standard free 
     account={
       Object {
         "billing": Object {},
+        "rvUsage": Object {
+          "recipient_validation": Object {
+            "month": Object {
+              "used": 123123,
+            },
+            "timestamp": "2019-06-10T00:00:00.000Z",
+          },
+        },
         "subscription": Object {
           "plan_volume": 15000,
         },
@@ -126,6 +150,14 @@ exports[`Component: Billing Summary should render correctly for a standard free 
     account={
       Object {
         "billing": Object {},
+        "rvUsage": Object {
+          "recipient_validation": Object {
+            "month": Object {
+              "used": 123123,
+            },
+            "timestamp": "2019-06-10T00:00:00.000Z",
+          },
+        },
         "subscription": Object {
           "plan_volume": 15000,
         },
@@ -177,6 +209,14 @@ exports[`Component: Billing Summary should render correctly if you can't buy IPs
     account={
       Object {
         "billing": Object {},
+        "rvUsage": Object {
+          "recipient_validation": Object {
+            "month": Object {
+              "used": 123123,
+            },
+            "timestamp": "2019-06-10T00:00:00.000Z",
+          },
+        },
         "subscription": Object {
           "plan_volume": 15000,
         },
@@ -187,6 +227,14 @@ exports[`Component: Billing Summary should render correctly if you can't buy IPs
     account={
       Object {
         "billing": Object {},
+        "rvUsage": Object {
+          "recipient_validation": Object {
+            "month": Object {
+              "used": 123123,
+            },
+            "timestamp": "2019-06-10T00:00:00.000Z",
+          },
+        },
         "subscription": Object {
           "plan_volume": 15000,
         },
@@ -278,6 +326,14 @@ exports[`Component: Billing Summary should render correctly if you can't change 
     account={
       Object {
         "billing": Object {},
+        "rvUsage": Object {
+          "recipient_validation": Object {
+            "month": Object {
+              "used": 123123,
+            },
+            "timestamp": "2019-06-10T00:00:00.000Z",
+          },
+        },
         "subscription": Object {
           "plan_volume": 15000,
         },
@@ -288,6 +344,14 @@ exports[`Component: Billing Summary should render correctly if you can't change 
     account={
       Object {
         "billing": Object {},
+        "rvUsage": Object {
+          "recipient_validation": Object {
+            "month": Object {
+              "used": 123123,
+            },
+            "timestamp": "2019-06-10T00:00:00.000Z",
+          },
+        },
         "subscription": Object {
           "plan_volume": 15000,
         },
@@ -377,6 +441,14 @@ exports[`Component: Billing Summary should render correctly if you can't update 
     account={
       Object {
         "billing": Object {},
+        "rvUsage": Object {
+          "recipient_validation": Object {
+            "month": Object {
+              "used": 123123,
+            },
+            "timestamp": "2019-06-10T00:00:00.000Z",
+          },
+        },
         "subscription": Object {
           "plan_volume": 15000,
         },
@@ -387,6 +459,14 @@ exports[`Component: Billing Summary should render correctly if you can't update 
     account={
       Object {
         "billing": Object {},
+        "rvUsage": Object {
+          "recipient_validation": Object {
+            "month": Object {
+              "used": 123123,
+            },
+            "timestamp": "2019-06-10T00:00:00.000Z",
+          },
+        },
         "subscription": Object {
           "plan_volume": 15000,
         },
@@ -447,6 +527,14 @@ exports[`Component: Billing Summary should render with IP modal open 1`] = `
     account={
       Object {
         "billing": Object {},
+        "rvUsage": Object {
+          "recipient_validation": Object {
+            "month": Object {
+              "used": 123123,
+            },
+            "timestamp": "2019-06-10T00:00:00.000Z",
+          },
+        },
         "subscription": Object {
           "plan_volume": 15000,
         },
@@ -457,6 +545,14 @@ exports[`Component: Billing Summary should render with IP modal open 1`] = `
     account={
       Object {
         "billing": Object {},
+        "rvUsage": Object {
+          "recipient_validation": Object {
+            "month": Object {
+              "used": 123123,
+            },
+            "timestamp": "2019-06-10T00:00:00.000Z",
+          },
+        },
         "subscription": Object {
           "plan_volume": 15000,
         },
@@ -561,6 +657,14 @@ exports[`Component: Billing Summary should render with the billing contact modal
     account={
       Object {
         "billing": Object {},
+        "rvUsage": Object {
+          "recipient_validation": Object {
+            "month": Object {
+              "used": 123123,
+            },
+            "timestamp": "2019-06-10T00:00:00.000Z",
+          },
+        },
         "subscription": Object {
           "plan_volume": 15000,
         },
@@ -571,6 +675,14 @@ exports[`Component: Billing Summary should render with the billing contact modal
     account={
       Object {
         "billing": Object {},
+        "rvUsage": Object {
+          "recipient_validation": Object {
+            "month": Object {
+              "used": 123123,
+            },
+            "timestamp": "2019-06-10T00:00:00.000Z",
+          },
+        },
         "subscription": Object {
           "plan_volume": 15000,
         },
@@ -675,6 +787,14 @@ exports[`Component: Billing Summary should render with the payment info modal op
     account={
       Object {
         "billing": Object {},
+        "rvUsage": Object {
+          "recipient_validation": Object {
+            "month": Object {
+              "used": 123123,
+            },
+            "timestamp": "2019-06-10T00:00:00.000Z",
+          },
+        },
         "subscription": Object {
           "plan_volume": 15000,
         },
@@ -685,6 +805,14 @@ exports[`Component: Billing Summary should render with the payment info modal op
     account={
       Object {
         "billing": Object {},
+        "rvUsage": Object {
+          "recipient_validation": Object {
+            "month": Object {
+              "used": 123123,
+            },
+            "timestamp": "2019-06-10T00:00:00.000Z",
+          },
+        },
         "subscription": Object {
           "plan_volume": 15000,
         },
@@ -789,6 +917,14 @@ exports[`Component: Billing Summary should show the invoice history if there are
     account={
       Object {
         "billing": Object {},
+        "rvUsage": Object {
+          "recipient_validation": Object {
+            "month": Object {
+              "used": 123123,
+            },
+            "timestamp": "2019-06-10T00:00:00.000Z",
+          },
+        },
         "subscription": Object {
           "plan_volume": 15000,
         },
@@ -799,6 +935,14 @@ exports[`Component: Billing Summary should show the invoice history if there are
     account={
       Object {
         "billing": Object {},
+        "rvUsage": Object {
+          "recipient_validation": Object {
+            "month": Object {
+              "used": 123123,
+            },
+            "timestamp": "2019-06-10T00:00:00.000Z",
+          },
+        },
         "subscription": Object {
           "plan_volume": 15000,
         },

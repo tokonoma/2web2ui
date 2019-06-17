@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Panel } from '@sparkpost/matchbox';
+import { Panel, UnstyledLink } from '@sparkpost/matchbox';
 import { Modal, LabelledValue } from 'src/components';
 import { PremiumBanner, EnterpriseBanner, PendingPlanBanner, FreePlanWarningBanner } from './Banners';
 import UpdatePaymentForm from '../forms/UpdatePaymentForm';
@@ -10,10 +10,16 @@ import DedicatedIpSummarySection from './DedicatedIpSummarySection';
 import InvoiceHistory from './InvoiceHistory';
 import CardSummary from './CardSummary';
 import PlanSummary from './PlanSummary';
+import RecipientValidationModal from './RecipientValidationModal';
+import { formatFullNumber } from 'src/helpers/units';
+import totalRVCost from '../helpers/totalRecipientValidationCost';
+import _ from 'lodash';
+import { formatDateTime } from 'src/helpers/date';
 
 const PAYMENT_MODAL = 'payment';
 const CONTACT_MODAL = 'contact';
 const IP_MODAL = 'ip';
+const RV_MODAL = 'recipient_validation';
 
 export default class BillingSummary extends Component {
   state = {
@@ -27,6 +33,7 @@ export default class BillingSummary extends Component {
   handlePaymentModal = () => this.handleModal(PAYMENT_MODAL);
   handleContactModal = () => this.handleModal(CONTACT_MODAL);
   handleIpModal = () => this.handleModal(IP_MODAL);
+  handleRvModal = () => this.handleModal(RV_MODAL, true);
 
   renderSummary = () => {
     const { account } = this.props;
@@ -55,9 +62,26 @@ export default class BillingSummary extends Component {
     />
   );
 
+  renderRecipientValidationSection = ({ rvUsage }) => {
+    const volumeUsed = _.get(rvUsage, 'recipient_validation.month.used', 0);
+    const recipientValidationDate = _.get(rvUsage, 'recipient_validation.timestamp');
+    return (
+      <Panel.Section>
+        <LabelledValue label="Recipient Validation">
+          <h6>{formatFullNumber(volumeUsed)} emails validated for {totalRVCost(volumeUsed)}<small> as of {formatDateTime(recipientValidationDate)}</small></h6>
+          <UnstyledLink onClick={this.handleRvModal}>How was this calculated?</UnstyledLink>
+        </LabelledValue>
+      </Panel.Section>
+    );
+  };
+
   render() {
-    const { account, currentPlan, canChangePlan, canUpdateBillingInfo, canPurchaseIps, invoices, isAWSAccount, accountAgeInDays } = this.props;
+    const { account, currentPlan, canChangePlan, canUpdateBillingInfo, canPurchaseIps, invoices, isAWSAccount, accountAgeInDays, hasRecipientValidation } = this.props;
+    const { rvUsage } = account;
     const { show } = this.state;
+
+    const volumeUsed = _.get(rvUsage, 'recipient_validation.month.used', 0);
+    const showRecipientValidation = hasRecipientValidation && rvUsage;
     let changePlanActions = {};
 
     if (canChangePlan) {
@@ -76,6 +100,7 @@ export default class BillingSummary extends Component {
             </LabelledValue>
           </Panel.Section>
           {canPurchaseIps && this.renderDedicatedIpSummarySection()}
+          {showRecipientValidation && this.renderRecipientValidationSection({ rvUsage })}
         </Panel>
 
         {canUpdateBillingInfo && this.renderSummary()}
@@ -89,6 +114,7 @@ export default class BillingSummary extends Component {
           {show === PAYMENT_MODAL && <UpdatePaymentForm onCancel={this.handleModal}/>}
           {show === CONTACT_MODAL && <UpdateContactForm onCancel={this.handleModal}/>}
           {show === IP_MODAL && <AddIps onClose={this.handleModal}/>}
+          {show === RV_MODAL && <RecipientValidationModal volumeUsed={volumeUsed} onClose={this.handleModal} />}
         </Modal>
       </div>
     );
