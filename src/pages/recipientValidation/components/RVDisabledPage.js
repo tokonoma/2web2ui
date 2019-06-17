@@ -10,18 +10,7 @@ import { connect } from 'react-redux';
 import { update as updateAccount } from 'src/actions/account';
 import { Loading } from 'src/components';
 import { formatFullNumber } from 'src/helpers/units';
-
-//TODO Use from constants
-const RECIPIENT_VALIDATION_TIERS = [
-  { volumeMin: 0, volumeMax: 5000, cost: 0.01 },
-  { volumeMin: 5000, volumeMax: 10000, cost: 0.008 },
-  { volumeMin: 10000, volumeMax: 50000, cost: 0.006 },
-  { volumeMin: 50000, volumeMax: 100000, cost: 0.004 },
-  { volumeMin: 100000, volumeMax: 250000, cost: 0.003 },
-  { volumeMin: 250000, volumeMax: 750000, cost: 0.0015 },
-  { volumeMin: 750000, volumeMax: 1000000, cost: 0.001 },
-  { volumeMin: 1000000, volumeMax: Infinity, cost: 0.00075 }
-];
+import { RECIPIENT_VALIDATION_TIERS } from 'src/constants';
 
 export class RVDisabledPage extends Component {
   getRows = () => {
@@ -35,29 +24,30 @@ export class RVDisabledPage extends Component {
           <Table.Cell width = {'40%'}>
             <strong>{formatFullNumber(row.volumeMin)}</strong>
             {row.volumeMax < Infinity //Last row with volumeMax of Infinity has different wording
-              ? <span> to <strong>{formatFullNumber(row.volumeMax)}</strong></span>
+              ? <> to <strong>{formatFullNumber(row.volumeMax)}</strong></>
               : <>+</>}
           </Table.Cell>
           <Table.Cell>
-            <strong>${row.cost}</strong> per email
+            <strong>{row.displayedCost}</strong> per email
           </Table.Cell>
         </Table.Row>);
     });
 
     //Adds the header & first row (includes both in same cell)
+    const firstRow = RECIPIENT_VALIDATION_TIERS[0];
     rows.unshift(
-      <Table.Row key = {RECIPIENT_VALIDATION_TIERS[0].volumeMin}>
+      <Table.Row key = {firstRow.volumeMin}>
         <Table.Cell >
           <strong className = {styles.Header}>
             Number of Emails
           </strong>
-          <strong>{RECIPIENT_VALIDATION_TIERS[0].volumeMin}</strong> to <strong>{RECIPIENT_VALIDATION_TIERS[0].volumeMax}</strong>
+          <strong>{formatFullNumber(firstRow.volumeMin)}</strong> to <strong>{formatFullNumber(firstRow.volumeMax)}</strong>
         </Table.Cell>
         <Table.Cell >
           <strong className = {styles.Header}>
             Cost
           </strong>
-          <strong>${RECIPIENT_VALIDATION_TIERS[0].cost}</strong> per email
+          <strong>{firstRow.displayedCost}</strong> per email
         </Table.Cell>
       </Table.Row>
     );

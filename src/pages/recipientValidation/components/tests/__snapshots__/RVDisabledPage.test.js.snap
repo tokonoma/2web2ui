@@ -52,7 +52,7 @@ exports[`Recipient Validation Disabled Page should render 1`] = `
           </Table.Cell>
         </Table.Row>
         <Table.Row
-          key="5,000"
+          key="5000"
         >
           <Table.Cell
             width="40%"
@@ -73,7 +73,7 @@ exports[`Recipient Validation Disabled Page should render 1`] = `
           </Table.Cell>
         </Table.Row>
         <Table.Row
-          key="10,000"
+          key="10000"
         >
           <Table.Cell
             width="40%"
@@ -94,7 +94,7 @@ exports[`Recipient Validation Disabled Page should render 1`] = `
           </Table.Cell>
         </Table.Row>
         <Table.Row
-          key="50,000"
+          key="50000"
         >
           <Table.Cell
             width="40%"
@@ -115,7 +115,7 @@ exports[`Recipient Validation Disabled Page should render 1`] = `
           </Table.Cell>
         </Table.Row>
         <Table.Row
-          key="100,000"
+          key="100000"
         >
           <Table.Cell
             width="40%"
@@ -136,7 +136,7 @@ exports[`Recipient Validation Disabled Page should render 1`] = `
           </Table.Cell>
         </Table.Row>
         <Table.Row
-          key="250,000"
+          key="250000"
         >
           <Table.Cell
             width="40%"
@@ -157,7 +157,7 @@ exports[`Recipient Validation Disabled Page should render 1`] = `
           </Table.Cell>
         </Table.Row>
         <Table.Row
-          key="750,000"
+          key="750000"
         >
           <Table.Cell
             width="40%"
@@ -172,18 +172,21 @@ exports[`Recipient Validation Disabled Page should render 1`] = `
           </Table.Cell>
           <Table.Cell>
             <strong>
-              $0.00100
+              $0.0010
             </strong>
              per email
           </Table.Cell>
         </Table.Row>
         <Table.Row
-          key="1,000,000+"
+          key="1000000"
         >
-          <Table.Cell>
+          <Table.Cell
+            width="40%"
+          >
             <strong>
-              1,000,000+
+              1,000,000
             </strong>
+            +
           </Table.Cell>
           <Table.Cell>
             <strong>
