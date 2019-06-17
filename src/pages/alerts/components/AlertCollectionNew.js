@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
 import { Button, Table, Tag, Panel } from '@sparkpost/matchbox';
-import { TableCollection, PageLink } from 'src/components';
+import { TableCollection, PageLink, DisplayDate } from 'src/components';
 import AlertToggle from './AlertToggle';
 import { Delete } from '@sparkpost/matchbox-icons';
 import { METRICS } from '../constants/metrics';
 import styles from './AlertCollection.module.scss';
 import { formatDateTime } from 'src/helpers/date';
 import _ from 'lodash';
-import DisplayDate from 'src/components/displayDate/DisplayDate.js';
 
 const filterBoxConfig = {
   show: true,

@@ -3,7 +3,7 @@ import cx from 'classnames';
 import { snakeToFriendly } from 'src/helpers/string';
 
 import { Table } from '@sparkpost/matchbox';
-import DisplayDate from 'src/components/displayDate/DisplayDate.js';
+import { DisplayDate } from 'src/components';
 
 import styles from './HistoryTable.module.scss';
 

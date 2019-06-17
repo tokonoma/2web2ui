@@ -2,14 +2,13 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Grid, Page, Panel } from '@sparkpost/matchbox';
 import { RemoveRedEye } from '@sparkpost/matchbox-icons';
-import { ApiErrorBanner, DeleteModal, Loading } from 'src/components';
+import { ApiErrorBanner, DeleteModal, Loading, DisplayDate } from 'src/components';
 import { Templates } from 'src/components/images';
 import AlertCollectionNew from './components/AlertCollectionNew';
 import withAlertsList from './containers/ListPage.container';
 import styles from './ListPage.module.scss';
 import { formatDateTime } from 'src/helpers/date';
 import _ from 'lodash';
-import DisplayDate from 'src/components/displayDate/DisplayDate.js';
 
 export class ListPageNew extends Component {
   state = {
