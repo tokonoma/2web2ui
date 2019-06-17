@@ -31,7 +31,7 @@ export default class SettingsForm extends React.Component {
   };
 
   render() {
-    const { handleSubmit, domainsLoading, domains, subaccountId, submitting, hasSubaccounts, canViewSubaccount } = this.props;
+    const { handleSubmit, domainsLoading, domains, subaccountId, submitting, pristine, valid, hasSubaccounts, canViewSubaccount } = this.props;
     const canViewSubaccountSection = hasSubaccounts && canViewSubaccount;
     const fromEmailHelpText = !domainsLoading && !domains.length ? (subaccountId ? 'The selected subaccount does not have any verified sending domains.' : 'You do not have any verified sending domains to use.') : null;
 
@@ -42,7 +42,6 @@ export default class SettingsForm extends React.Component {
             name='name'
             component={TextFieldWrapper}
             label='Template Name'
-            // onChange={this.handleIdFill}
             disabled={submitting}
             validate={required}
           />
@@ -136,7 +135,7 @@ export default class SettingsForm extends React.Component {
           <Button
             type='submit'
             primary
-            disabled={submitting}
+            disabled={submitting || !valid || pristine}
           >
             Update Settings
           </Button>

@@ -1,16 +1,16 @@
 import React from 'react';
 import EditorContext from '../../context/EditorContext';
 import SettingsForm from './Form';
-import { isSubaccountUser } from '../../../../helpers/conditions/user';
-import { selectCondition } from '../../../../selectors/accessConditionState';
-import { hasSubaccounts } from '../../../../selectors/subaccounts';
-import { not } from '../../../../helpers/conditions';
-import { selectDomainsBySubaccount } from '../../../../selectors/templates';
+import { isSubaccountUser } from 'src/helpers/conditions/user';
+import { selectCondition } from 'src/selectors/accessConditionState';
+import { hasSubaccounts } from 'src/selectors/subaccounts';
+import { not } from 'src/helpers/conditions';
+import { selectDomainsBySubaccount } from 'src/selectors/templates';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { update as updateTemplate } from '../../../../actions/templates';
+import { update as updateTemplate } from 'src/actions/templates';
 import { reduxForm } from 'redux-form';
-import { showAlert } from '../../../../actions/globalAlert';
+import { showAlert } from 'src/actions/globalAlert';
 
 const formName = 'templateSettings';
 
