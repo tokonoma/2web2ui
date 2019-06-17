@@ -24,15 +24,15 @@ export default ({ onClose, usage }) => {
 
     return (
       <Grid className={rowClass} key={`rv_tier_${volumeMin}_${volumeMax || 'plus'}`}>
-        <Grid.Column xs={4}>
+        <Grid.Column xs={5}>
           <span className={styles.Bold}>{volumeMax < Infinity
             ? `${formatFullNumber(volumeMin)} - ${formatFullNumber(volumeMax)}`
             : `${formatFullNumber(volumeMin)}+`} emails</span>
         </Grid.Column>
-        <Grid.Column xs={1} style={{ textAlign: 'center' }}>
+        <Grid.Column xs={1} >
           <span>at</span>
         </Grid.Column>
-        <Grid.Column xs={4}>
+        <Grid.Column xs={3}>
           <span className={styles.Bold}>${cost} per email</span>
         </Grid.Column>
         {!tierEmpty &&
@@ -54,10 +54,10 @@ export default ({ onClose, usage }) => {
       <Panel.Section>
         {TierRows}
         <Grid className={styles.TotalCost}>
-          <Grid.Column xs={4} xsOffset={5}>
+          <Grid.Column xs={3} xsOffset={6}>
             Total:
           </Grid.Column>
-          <Grid.Column style={{ textAlign: 'right' }} xsOffset={1} xs={2}>
+          <Grid.Column style={{ textAlign: 'right' }} xs={3}>
             {formatCurrency(totalCost)}
           </Grid.Column>
         </Grid>
