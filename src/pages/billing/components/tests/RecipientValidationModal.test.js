@@ -8,17 +8,17 @@ describe('Component: RecipientValidationModal', () => {
 
   beforeEach(() => {
     props = {
-      usage: {
-        recipient_validation: {
-          month: { used: 123123 },
-          timestamp: '2019-06-10T00:00:00.000Z'
-        }
-      }
+      volumeUsed: 123123
     };
     wrapper = shallow(< RecipientValidationModal {...props} />);
   });
 
   it('should render properly', () => {
     expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render the correct number of rows as bold', () => {
+    //VolumeUsed Reaches 5th tier, so there should be 3 tiers that are empty
+    expect(wrapper.find('Grid[className="PriceRow EmptyTier"]')).toHaveLength(3);
   });
 });

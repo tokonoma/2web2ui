@@ -155,7 +155,7 @@ export const PLAN_TIERS = {
   premier: 'Premier'
 };
 
-export const RECIPIENT_TIERS = [
+export const RECIPIENT_VALIDATION_TIERS = [
   { volumeMin: 0, volumeMax: 5000, cost: 0.01 },
   { volumeMin: 5000, volumeMax: 10000, cost: 0.008 },
   { volumeMin: 10000, volumeMax: 50000, cost: 0.006 },

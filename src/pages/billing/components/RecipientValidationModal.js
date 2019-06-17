@@ -4,17 +4,13 @@ import { Close } from '@sparkpost/matchbox-icons';
 import { formatCurrency, formatFullNumber } from 'src/helpers/units';
 import styles from './RecipientValidationModal.module.scss';
 import cx from 'classnames';
-import { RECIPIENT_TIERS } from 'src/constants';
-import _ from 'lodash';
+import { RECIPIENT_VALIDATION_TIERS } from 'src/constants';
+import totalRecipientValidationCost from '../helpers/totalRecipientValidationCost';
 
-export default ({ onClose, usage }) => {
-  const volumeUsed = _.get(usage, 'recipient_validation.month.used', 0);
-  let totalCost = 0;
+export default ({ onClose, volumeUsed }) => {
 
-  const TierRows = RECIPIENT_TIERS.map(({ volumeMax, volumeMin, cost }) => {
+  const TierRows = RECIPIENT_VALIDATION_TIERS.map(({ volumeMax, volumeMin, cost }) => {
     const tierCost = Math.max(Math.min(volumeMax, volumeUsed) - volumeMin, 0) * cost;
-    totalCost += tierCost;
-
     const tierEmpty = tierCost <= 0;
 
     const rowClass = cx(
@@ -58,7 +54,7 @@ export default ({ onClose, usage }) => {
             Total:
           </Grid.Column>
           <Grid.Column style={{ textAlign: 'right' }} xs={3}>
-            {formatCurrency(totalCost)}
+            {totalRecipientValidationCost(volumeUsed)}
           </Grid.Column>
         </Grid>
       </Panel.Section>

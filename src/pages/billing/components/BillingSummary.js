@@ -77,9 +77,11 @@ export default class BillingSummary extends Component {
 
   render() {
     const { account, currentPlan, canChangePlan, canUpdateBillingInfo, canPurchaseIps, invoices, isAWSAccount, accountAgeInDays, hasRecipientValidation } = this.props;
-    const { rvUsage, usageLoading } = account;
+    const { rvUsage } = account;
     const { show } = this.state;
-    const showRecipientValidation = hasRecipientValidation && rvUsage && !usageLoading;
+
+    const volumeUsed = _.get(rvUsage, 'recipient_validation.month.used', 0);
+    const showRecipientValidation = hasRecipientValidation && rvUsage;
     let changePlanActions = {};
 
     if (canChangePlan) {
@@ -112,7 +114,7 @@ export default class BillingSummary extends Component {
           {show === PAYMENT_MODAL && <UpdatePaymentForm onCancel={this.handleModal}/>}
           {show === CONTACT_MODAL && <UpdateContactForm onCancel={this.handleModal}/>}
           {show === IP_MODAL && <AddIps onClose={this.handleModal}/>}
-          {show === RV_MODAL && <RecipientValidationModal rvUsage={rvUsage} onClose={this.handleModal} />}
+          {show === RV_MODAL && <RecipientValidationModal volumeUsed={volumeUsed} onClose={this.handleModal} />}
         </Modal>
       </div>
     );

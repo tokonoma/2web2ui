@@ -81,3 +81,13 @@ Object {
   "type": "GET_PLANS",
 }
 `;
+
+exports[`getUsage 1`] = `
+Object {
+  "meta": Object {
+    "method": "GET",
+    "url": "/v1/usage",
+  },
+  "type": "GET_USAGE",
+}
+`;

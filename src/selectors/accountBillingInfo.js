@@ -102,7 +102,7 @@ export const selectAccountBilling = createSelector(
   (account) => ({
     account,
     error: account.error || account.billingError,
-    loading: account.loading || account.billingLoading
+    loading: account.loading || account.billingLoading || account.usageLoading
   })
 );
 
