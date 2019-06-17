@@ -34,7 +34,7 @@ exports[`Page: Recipient Email Verification renders single email verification ta
   <Case
     condition={[Function]}
   >
-    <RVDisabledPage />
+    <Connect(RVDisabledPage) />
   </Case>
 </Connect(ConditionSwitch)>
 `;
@@ -74,7 +74,7 @@ exports[`Page: Recipient Email Verification should render Recipient Validation p
   <Case
     condition={[Function]}
   >
-    <RVDisabledPage />
+    <Connect(RVDisabledPage) />
   </Case>
 </Connect(ConditionSwitch)>
 `;

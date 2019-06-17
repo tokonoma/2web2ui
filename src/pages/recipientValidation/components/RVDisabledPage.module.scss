@@ -1,0 +1,20 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.Header {
+  color: color(orange);
+  font-size: rem(15);
+  display: block;
+  margin-bottom: rem(25);
+}
+
+.Table {
+  padding: rem(30) rem(45) rem(15);
+  font-size: rem(17);
+}
+
+.Description {
+  margin-bottom: rem(60);
+  p {
+    @media screen and (min-width: breakpoint(large)) { margin-right: 25%; }
+  }
+}

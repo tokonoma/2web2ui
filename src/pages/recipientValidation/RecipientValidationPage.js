@@ -23,7 +23,6 @@ export class RecipientValidationPage extends Component {
   }
 
   renderRecipientValidation = () => {
-
     const { selectedTab } = this.state;
 
     return (
@@ -40,9 +39,9 @@ export class RecipientValidationPage extends Component {
         {selectedTab === 0 && <ListResults/>}
       </Page>
     );
-  }
-  render() {
+  };
 
+  render() {
     return (
       <ConditionSwitch>
         <Case condition={hasAccountOptionEnabled('recipient_validation')}>

@@ -1,0 +1,209 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Recipient Validation Disabled Page should render 1`] = `
+<Page
+  empty={Object {}}
+  title="Recipient Validation"
+>
+  <div
+    className="Description"
+  >
+    <p>
+      Protect your reputation by guarding against bounces, errors, and even fraud. Recipient Validation is an easy, efficient way to verify that addresses are valid before you send. We run emails through a series of checks to catch many common problems, including syntax errors and non-existent mailboxes.
+    </p>
+    <p>
+      We have a monthly pay-as-you-go plan using tiered pricing. The more you validate, the less you pay per message.
+    </p>
+  </div>
+  <Panel
+    className="Table"
+  >
+    <Table>
+      <tbody>
+        <Table.Row
+          key="0"
+        >
+          <Table.Cell>
+            <strong
+              className="Header"
+            >
+              Number of Emails
+            </strong>
+            <strong>
+              0
+            </strong>
+             to 
+            <strong>
+              5,000
+            </strong>
+          </Table.Cell>
+          <Table.Cell>
+            <strong
+              className="Header"
+            >
+              Cost
+            </strong>
+            <strong>
+              $0.010
+            </strong>
+             per email
+          </Table.Cell>
+        </Table.Row>
+        <Table.Row
+          key="5000"
+        >
+          <Table.Cell
+            width="40%"
+          >
+            <strong>
+              5,000
+            </strong>
+             to 
+            <strong>
+              10,000
+            </strong>
+          </Table.Cell>
+          <Table.Cell>
+            <strong>
+              $0.008
+            </strong>
+             per email
+          </Table.Cell>
+        </Table.Row>
+        <Table.Row
+          key="10000"
+        >
+          <Table.Cell
+            width="40%"
+          >
+            <strong>
+              10,000
+            </strong>
+             to 
+            <strong>
+              50,000
+            </strong>
+          </Table.Cell>
+          <Table.Cell>
+            <strong>
+              $0.006
+            </strong>
+             per email
+          </Table.Cell>
+        </Table.Row>
+        <Table.Row
+          key="50000"
+        >
+          <Table.Cell
+            width="40%"
+          >
+            <strong>
+              50,000
+            </strong>
+             to 
+            <strong>
+              100,000
+            </strong>
+          </Table.Cell>
+          <Table.Cell>
+            <strong>
+              $0.004
+            </strong>
+             per email
+          </Table.Cell>
+        </Table.Row>
+        <Table.Row
+          key="100000"
+        >
+          <Table.Cell
+            width="40%"
+          >
+            <strong>
+              100,000
+            </strong>
+             to 
+            <strong>
+              250,000
+            </strong>
+          </Table.Cell>
+          <Table.Cell>
+            <strong>
+              $0.003
+            </strong>
+             per email
+          </Table.Cell>
+        </Table.Row>
+        <Table.Row
+          key="250000"
+        >
+          <Table.Cell
+            width="40%"
+          >
+            <strong>
+              250,000
+            </strong>
+             to 
+            <strong>
+              750,000
+            </strong>
+          </Table.Cell>
+          <Table.Cell>
+            <strong>
+              $0.0015
+            </strong>
+             per email
+          </Table.Cell>
+        </Table.Row>
+        <Table.Row
+          key="750000"
+        >
+          <Table.Cell
+            width="40%"
+          >
+            <strong>
+              750,000
+            </strong>
+             to 
+            <strong>
+              1,000,000
+            </strong>
+          </Table.Cell>
+          <Table.Cell>
+            <strong>
+              $0.0010
+            </strong>
+             per email
+          </Table.Cell>
+        </Table.Row>
+        <Table.Row
+          key="1000000"
+        >
+          <Table.Cell
+            width="40%"
+          >
+            <strong>
+              1,000,000
+            </strong>
+            +
+          </Table.Cell>
+          <Table.Cell>
+            <strong>
+              $0.00075
+            </strong>
+             per email
+          </Table.Cell>
+        </Table.Row>
+      </tbody>
+    </Table>
+  </Panel>
+  <Button
+    onClick={[Function]}
+    primary={true}
+    size="default"
+  >
+    Enable Recipient Validation
+  </Button>
+</Page>
+`;
+
+exports[`Recipient Validation Disabled Page should render Loading page when updating account 1`] = `<Loading />`;
