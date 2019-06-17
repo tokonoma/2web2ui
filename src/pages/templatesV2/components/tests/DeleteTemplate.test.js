@@ -35,6 +35,14 @@ describe('DeleteTemplate', () => {
     expect(mockDelete).toHaveBeenCalledWith('foo', undefined);
   });
 
+  it('hides modal upon clicking on cancel', () => {
+    const wrapper = subject();
+    wrapper.find('Button').simulate('click'); //clicks Delete component
+    expect(wrapper.find('DeleteModal').prop('open')).toBe(true);
+    wrapper.find('DeleteModal').prop('onCancel')(); //invokes onCancel callback
+    expect(wrapper.find('DeleteModal').prop('open')).toBe(false);
+  });
+
   it('deletes template with subaccount upon confirmation', async () => {
     const mockDelete = jest.fn(() => Promise.resolve());
     const wrapper = subject({ deleteTemplate: mockDelete, subaccountId: 101 });

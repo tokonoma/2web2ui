@@ -47,6 +47,16 @@ describe('SettingsForm', () => {
     expect(subject().find('[name="id"]').prop('disabled')).toBe(true);
   });
 
+  describe('parseToggle', () => {
+    const instance = subject().instance();
+    it('converts value to boolean', () => {
+      expect(instance.parseToggle('1')).toBe(true);
+      expect(instance.parseToggle('')).toBe(false);
+      expect(instance.parseToggle(true)).toBe(true);
+      expect(instance.parseToggle(false)).toBe(false);
+    });
+  });
+
   describe('form submission', () => {
     it('renders submit button disabled', () => {
       const buttonSelector = 'Button[type="submit"]';
