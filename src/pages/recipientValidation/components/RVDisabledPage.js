@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import { Page, Panel, Table, Button } from '@sparkpost/matchbox';
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styles from './RVDisabledPage.module.scss';
 import { currentPlanSelector } from 'src/selectors/accountBillingInfo';
 import { selectCondition } from 'src/selectors/accessConditionState';
@@ -8,61 +9,59 @@ import { isSelfServeBilling } from 'src/helpers/conditions/account';
 import { connect } from 'react-redux';
 import { update as updateAccount } from 'src/actions/account';
 import { Loading } from 'src/components';
+import { formatFullNumber } from 'src/helpers/units';
 
-const priceData = [
-  ['5,000', '10,000', '$0.008'],
-  ['10,000', '50,000', '$0.006'],
-  ['50,000', '100,000', '$0.004'],
-  ['100,000', '250,000', '$0.003'],
-  ['250,000', '750,000', '$0.0015'],
-  ['750,000', '1,000,000', '$0.00100']
-];
-const priceDataEdge = [
-  ['0', '5,000', '$0.010'],
-  ['1,000,000+', '$0.00075']
+//TODO Use from constants
+const RECIPIENT_VALIDATION_TIERS = [
+  { volumeMin: 0, volumeMax: 5000, cost: 0.01 },
+  { volumeMin: 5000, volumeMax: 10000, cost: 0.008 },
+  { volumeMin: 10000, volumeMax: 50000, cost: 0.006 },
+  { volumeMin: 50000, volumeMax: 100000, cost: 0.004 },
+  { volumeMin: 100000, volumeMax: 250000, cost: 0.003 },
+  { volumeMin: 250000, volumeMax: 750000, cost: 0.0015 },
+  { volumeMin: 750000, volumeMax: 1000000, cost: 0.001 },
+  { volumeMin: 1000000, volumeMax: Infinity, cost: 0.00075 }
 ];
 
 export class RVDisabledPage extends Component {
   getRows = () => {
-    const rows = priceData.map((row) => (
-      <Table.Row key = {row[0]}>
-        <Table.Cell width = {'40%'}>
-          <strong>{row[0]}</strong> to <strong>{row[1]}</strong>
-        </Table.Cell>
-        <Table.Cell>
-          <strong>{row[2]}</strong> per email
-        </Table.Cell>
-      </Table.Row>));
+    const rows = RECIPIENT_VALIDATION_TIERS.map((row, index) => {
+      //Skips first row
+      if (index < 1) {
+        return;
+      }
+      return (
+        <Table.Row key = {row.volumeMin}>
+          <Table.Cell width = {'40%'}>
+            <strong>{formatFullNumber(row.volumeMin)}</strong>
+            {row.volumeMax < Infinity //Last row with volumeMax of Infinity has different wording
+              ? <span> to <strong>{formatFullNumber(row.volumeMax)}</strong></span>
+              : <>+</>}
+          </Table.Cell>
+          <Table.Cell>
+            <strong>${row.cost}</strong> per email
+          </Table.Cell>
+        </Table.Row>);
+    });
 
     //Adds the header & first row (includes both in same cell)
     rows.unshift(
-      <Table.Row key = {priceDataEdge[0][0]}>
+      <Table.Row key = {RECIPIENT_VALIDATION_TIERS[0].volumeMin}>
         <Table.Cell >
           <strong className = {styles.Header}>
             Number of Emails
           </strong>
-          <strong>{priceDataEdge[0][0]}</strong> to <strong>{priceDataEdge[0][1]}</strong>
+          <strong>{RECIPIENT_VALIDATION_TIERS[0].volumeMin}</strong> to <strong>{RECIPIENT_VALIDATION_TIERS[0].volumeMax}</strong>
         </Table.Cell>
         <Table.Cell >
           <strong className = {styles.Header}>
             Cost
           </strong>
-          <strong>{priceDataEdge[0][2]}</strong> per email
+          <strong>${RECIPIENT_VALIDATION_TIERS[0].cost}</strong> per email
         </Table.Cell>
       </Table.Row>
     );
 
-    //Adds the last row (has slightly different wording)
-    rows.push(
-      <Table.Row key = {priceDataEdge[1][0]}>
-        <Table.Cell>
-          <strong>{priceDataEdge[1][0]}</strong>
-        </Table.Cell>
-        <Table.Cell>
-          <strong>{priceDataEdge[1][1]}</strong> per email
-        </Table.Cell>
-      </Table.Row>
-    );
     return rows;
   };
 
@@ -72,7 +71,7 @@ export class RVDisabledPage extends Component {
       return null;
     }
     return (isFree)
-      ? (<Button primary to={'/account/billing'}>Upgrade your plan</Button>)
+      ? (<Button primary component={Link} to={'/account/billing'}>Upgrade your plan</Button>)
       : (<Button primary onClick={this.enableRV}>Enable Recipient Validation</Button>);
   };
 
