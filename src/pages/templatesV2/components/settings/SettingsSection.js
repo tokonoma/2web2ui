@@ -3,7 +3,7 @@ import { Panel } from '@sparkpost/matchbox';
 import SettingsForm from './Form.Container';
 import styles from './SettingsSection.module.scss';
 
-const SettingsSection = () => (
+export default () => (
   <Panel className={styles.SettingsSection}>
     <Panel.Section className={styles.SettingsHeader}>
       <h2>Template Settings</h2>
@@ -11,5 +11,3 @@ const SettingsSection = () => (
     <SettingsForm/>
   </Panel>
 );
-
-export default SettingsSection;
