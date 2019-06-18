@@ -1,5 +1,93 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`EditContentsPrimaryArea draft mode renders actions 1`] = `
+<div>
+  <_default
+    className="Actions"
+  >
+    <Button
+      size="default"
+    >
+      <strong>
+        Save and Publish
+      </strong>
+    </Button>
+  </_default>
+  <div
+    className="Actions"
+  >
+    <Popover
+      bottom={true}
+      left={true}
+      right={true}
+      trigger={
+        <Button
+          size="default"
+        >
+          <ArrowDropDown />
+        </Button>
+      }
+    >
+      <div>
+        <_default
+          className="ActionItem"
+        />
+        <_default
+          className="ActionItem"
+        />
+        <hr
+          className="Divider"
+        />
+        <_default
+          className="ActionItem"
+        />
+      </div>
+    </Popover>
+  </div>
+</div>
+`;
+
+exports[`EditContentsPrimaryArea published mode renders  actions 1`] = `
+<div>
+  <_default
+    className="Actions"
+  >
+    <Button
+      size="default"
+    >
+      <strong>
+        Edit Draft
+      </strong>
+    </Button>
+  </_default>
+  <div
+    className="Actions"
+  >
+    <Popover
+      bottom={true}
+      left={true}
+      right={true}
+      trigger={
+        <Button
+          size="default"
+        >
+          <ArrowDropDown />
+        </Button>
+      }
+    >
+      <div>
+        <_default
+          className="ActionItem"
+        />
+        <_default
+          className="ActionItem"
+        />
+      </div>
+    </Popover>
+  </div>
+</div>
+`;
+
 exports[`EditContentsPrimaryArea render draft mode actions 1`] = `
 <div>
   <_default
@@ -37,6 +125,9 @@ exports[`EditContentsPrimaryArea render draft mode actions 1`] = `
         />
         <hr
           className="Divider"
+        />
+        <_default
+          className="ActionItem"
         />
         <_default
           className="ActionItem"
