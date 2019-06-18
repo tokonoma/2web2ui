@@ -15,7 +15,7 @@ export default (request) => {
   let storedResponse;
 
   try {
-    storedResponse = require(`src/__integration__/http-responses/${responsePath}`);
+    storedResponse = require(`src/__testHelpers__/http-responses/default/${responsePath}`);
   } catch (err) {
     // ignore require errors
     debugLog(`No stored response for ${method} ${url}`);
