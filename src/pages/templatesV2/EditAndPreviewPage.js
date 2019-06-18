@@ -28,7 +28,7 @@ const EditAndPreviewPage = () => {
     return <Loading />;
   }
 
-  const primaryArea = isPublishedMode ? <span>PUBLISHED <CheckCircle className={styles.GreenColor} /> </span> : <span>DRAFT <FileEdit /></span>;
+  const primaryArea = isPublishedMode ? <div>PUBLISHED <CheckCircle size={17} className={styles.GreenColor} /> </div> : <div>DRAFT <FileEdit size={17} /></div>;
 
   return (
     <FullPage
