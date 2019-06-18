@@ -22,6 +22,10 @@ describe('EditAndPreviewPage', () => {
     expect(subject()).toMatchSnapshot();
   });
 
+  it('renders a page in published mode', () => {
+    expect(subject({ editorState: { isPublishedMode: true }}).prop('primaryArea')).toMatchSnapshot();
+  });
+
   it('renders loading', () => {
     const wrapper = subject({ editorState: { isDraftLoading: true }});
     expect(wrapper.find('Loading')).toExist();

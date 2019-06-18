@@ -20,6 +20,10 @@ describe('EditAmpSection', () => {
     expect(subject()).toMatchSnapshot();
   });
 
+  it('renders correctly in readOnly mode', () => {
+    expect(subject({ editorState: { isPublishedMode: true }}).prop('readOnly')).toBe(true);
+  });
+
   it('sets content on change', () => {
     const setContent = jest.fn();
     const wrapper = subject({ editorState: { setContent }});

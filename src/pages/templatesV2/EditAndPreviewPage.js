@@ -1,16 +1,17 @@
 import React from 'react';
+import { FileEdit, CheckCircle } from '@sparkpost/matchbox-icons';
+
 import { RedirectAndAlert } from 'src/components/globalAlert';
 import FullPage from 'src/components/fullPage';
 import Loading from 'src/components/loading';
 import EditNavigation from './components/EditNavigation';
 import links from './constants/editNavigationLinks';
 import useEditorContext from './hooks/useEditorContext';
-
-import { routeNamespace } from './constants/routes';
 import styles from './EditAndPreviewPage.module.scss';
+import { routeNamespace } from './constants/routes';
 
 const EditAndPreviewPage = () => {
-  const { currentNavigationIndex, draft, hasDraftFailedToLoad, isDraftLoading } = useEditorContext();
+  const { currentNavigationIndex, draft, hasDraftFailedToLoad, isDraftLoading, isPublishedMode } = useEditorContext();
   const Contents = links[currentNavigationIndex].render;
   const PrimaryArea = links[currentNavigationIndex].renderPrimaryArea;
 
@@ -27,10 +28,13 @@ const EditAndPreviewPage = () => {
     return <Loading />;
   }
 
+  const primaryArea = isPublishedMode ? <span>PUBLISHED <CheckCircle className={styles.GreenColor} /> </span> : <span>DRAFT <FileEdit /></span>;
+
   return (
     <FullPage
       breadcrumbRedirectsTo={`/${routeNamespace}`}
       title={draft.name}
+      primaryArea={primaryArea}
     >
       <div className={styles.EditorNav}>
         <EditNavigation primaryArea={<PrimaryArea/>}/>
