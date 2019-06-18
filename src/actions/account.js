@@ -79,3 +79,23 @@ export function emailRequest(data) {
     }
   });
 }
+
+export function cancelAccount() {
+  return sparkpostApiRequest({
+    type: 'CANCEL_ACCOUNT',
+    meta: {
+      method: 'POST',
+      url: '/v1/account/cancellation-request'
+    }
+  });
+}
+
+export function renewAccount() {
+  return sparkpostApiRequest({
+    type: 'RENEW_ACCOUNT',
+    meta: {
+      method: 'DELETE',
+      url: '/v1/account/cancellation-request'
+    }
+  });
+}
