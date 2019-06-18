@@ -2,6 +2,8 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import useEditorContext from '../../hooks/useEditorContext';
 import EditContentsPrimaryArea from '../EditContentsPrimaryArea';
+import DraftModeActions from '../editorActions/DraftModeActions';
+import PublishedModeActions from '../editorActions/PublishedModeActions';
 
 jest.mock('../../hooks/useEditorContext');
 
@@ -12,10 +14,10 @@ describe('EditContentsPrimaryArea', () => {
   };
 
   it('render published mode actions', () => {
-    expect(subject({ isPublishedMode: true })).toMatchSnapshot();
+    expect(subject({ isPublishedMode: true }).equals(<PublishedModeActions />)).toBe(true);
   });
 
   it('render draft mode actions', () => {
-    expect(subject({ isPublishedMode: false })).toMatchSnapshot();
+    expect(subject({ isPublishedMode: false }).equals(<DraftModeActions />)).toBe(true);
   });
 });

@@ -24,5 +24,5 @@ const PublishedModeActions = () => (
     </div>
   </div>
 );
-
+PublishedModeActions.displayName = 'PublishedModeActions';
 export default PublishedModeActions;
