@@ -591,6 +591,13 @@ const routes = [
     supportDocSearch: 'upgrade account'
   },
   {
+    path: '/account/billing/plan/cancel',
+    component: billing.ImmediateCancelPlanPage,
+    condition: all(hasGrants('account/manage'), not(isEnterprise), not(isHeroku), not(isAzure)),
+    layout: App,
+    title: 'Billing | Plan Cancellation In Progress'
+  },
+  {
     path: '/account/ip-pools',
     component: ipPools.ListPage,
     condition: hasGrants('ip_pools/manage'),
