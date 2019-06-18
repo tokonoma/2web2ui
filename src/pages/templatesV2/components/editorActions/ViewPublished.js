@@ -13,7 +13,7 @@ export default ({ className }) => {
 
   return (<div className={className}>
     <UnstyledLink onClick={() => history.push(publishedPath)}>
-      <RemoveRedEye/> View Published
+      <RemoveRedEye/>&nbsp;&nbsp;View Published
     </UnstyledLink>
   </div>);
 

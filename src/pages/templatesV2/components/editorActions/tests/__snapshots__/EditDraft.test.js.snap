@@ -8,7 +8,7 @@ exports[`EditDraft renders edit draft action 1`] = `
     onClick={[Function]}
   >
     <FileEdit />
-     Edit Draft
+      Edit Draft
   </UnstyledLink>
 </div>
 `;

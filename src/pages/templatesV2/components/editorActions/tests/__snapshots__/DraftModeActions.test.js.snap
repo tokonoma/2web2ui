@@ -19,9 +19,12 @@ exports[`DraftModeActions renders draft actions 1`] = `
     <Popover
       bottom={true}
       left={true}
+      onClose={[Function]}
+      open={false}
       right={true}
       trigger={
         <Button
+          onClick={[Function]}
           size="default"
         >
           <ArrowDropDown />
@@ -31,9 +34,11 @@ exports[`DraftModeActions renders draft actions 1`] = `
       <div>
         <_default
           className="ActionItem"
+          onClick={[Function]}
         />
         <_default
           className="ActionItem"
+          onClick={[Function]}
         />
         <hr
           className="Divider"

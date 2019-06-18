@@ -33,7 +33,7 @@ export default ({ className, onClick, children, ...props }) => {
 
   return <div className={className}>
     {children && <UnstyledLink onClick={showModal}>{children}</UnstyledLink>}
-    {!children && <UnstyledLink onClick={showModal}><CheckCircleOutline/> Save and Publish</UnstyledLink>}
+    {!children && <UnstyledLink onClick={showModal}><CheckCircleOutline/>&nbsp;&nbsp;Save and Publish</UnstyledLink>}
     <ConfirmationModal
       title='Are you sure you want to publish your template?'
       content={<p>Once published, your template will be available for use in email campaigns and A/B tests.</p>}

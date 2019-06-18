@@ -15,7 +15,7 @@ export default ({ className, children }) => {
 
   return (<div className={className}>
     {children && <UnstyledLink onClick={onClick}>{children}</UnstyledLink>}
-    {!children && <UnstyledLink onClick={onClick}><FileEdit/> Edit Draft</UnstyledLink>}
+    {!children && <UnstyledLink onClick={onClick}><FileEdit/>&nbsp;&nbsp;Edit Draft</UnstyledLink>}
   </div>);
 
 };
