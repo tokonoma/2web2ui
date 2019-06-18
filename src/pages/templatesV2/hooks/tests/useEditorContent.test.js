@@ -5,8 +5,8 @@ import useEditorContent from '../useEditorContent';
 
 describe('useEditorContent', () => {
   const useTestWrapper = (value = {}) => {
-    const TestComponent = () => <div hooked={useEditorContent(value)}/>;
-    return mount(<TestComponent/>);
+    const TestComponent = () => <div hooked={useEditorContent(value)} />;
+    return mount(<TestComponent />);
   };
   const useHook = (wrapper) => wrapper.update().children().prop('hooked');
 
@@ -28,54 +28,19 @@ describe('useEditorContent', () => {
     expect(content).toEqual({ html: '<h1>Test</h1>', text: 'Test' });
   });
 
-  describe('setContent', () => {
-    let draft;
-    let published;
-    beforeEach(() => {
-      draft = {
-        content: {
-          html: '<h1>Draft HTML</h1>',
-          text: 'Draft Text'
-        }
-      };
-
-      published = {
-        content: {
-          html: '<h1>Published HTML</h1>',
-          text: 'Published Text'
-        }
-      };
+  it('merges updated content', () => {
+    const wrapper = useTestWrapper({
+      draft: {
+        content: { html: '<h1>Test</h1>', text: 'Test' }
+      }
     });
 
-    it('merges draft content', () => {
-      const wrapper = useTestWrapper({
-        isPublishedMode: false,
-        draft,
-        published
-      });
-
-      act(() => {
-        useHook(wrapper).setContent({ html: '<h1>Draft HTML Updated!</h1>' });
-      });
-
-      const { content } = useHook(wrapper);
-      expect(content).toEqual({ html: '<h1>Draft HTML Updated!</h1>', text: 'Draft Text' });
+    act(() => {
+      useHook(wrapper).setContent({ html: '<h1>Updated!</h1>' });
     });
 
-    it('merges published content', () => {
-      const wrapper = useTestWrapper({
-        isPublishedMode: true,
-        draft,
-        published
-      });
+    const { content } = useHook(wrapper);
 
-      act(() => {
-        useHook(wrapper).setContent({ html: '<h1>Published HTML Updated!</h1>' });
-      });
-
-      const { content } = useHook(wrapper);
-      expect(content).toEqual({ html: '<h1>Published HTML Updated!</h1>', text: 'Published Text' });
-    });
+    expect(content).toEqual({ html: '<h1>Updated!</h1>', text: 'Test' });
   });
-
 });

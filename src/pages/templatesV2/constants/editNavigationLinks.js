@@ -4,14 +4,14 @@ import EditContentsPrimaryArea from '../components/EditContentsPrimaryArea';
 
 const editNavigationLinks = [
   {
-    content: 'Email Content',
+    content: 'Content',
     key: 'content',
     render: EditContents,
     renderPrimaryArea: EditContentsPrimaryArea,
     routeKey: 'content'
   },
   {
-    content: 'Template Settings',
+    content: 'Settings',
     key: 'settings',
     render: TemplateSettings,
     renderPrimaryArea: EditContentsPrimaryArea,

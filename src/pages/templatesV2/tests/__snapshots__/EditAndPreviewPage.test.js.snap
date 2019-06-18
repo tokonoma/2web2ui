@@ -3,12 +3,6 @@
 exports[`EditAndPreviewPage renders a page 1`] = `
 <FullPage
   breadcrumbRedirectsTo="/templatesv2"
-  primaryArea={
-    <span>
-      DRAFT 
-      <FileEdit />
-    </span>
-  }
   title="Test Template"
 >
   <div
@@ -24,14 +18,4 @@ exports[`EditAndPreviewPage renders a page 1`] = `
     <EditContents />
   </div>
 </FullPage>
-`;
-
-exports[`EditAndPreviewPage renders a page in published mode 1`] = `
-<span>
-  PUBLISHED 
-  <CheckCircle
-    className="GreenColor"
-  />
-   
-</span>
 `;

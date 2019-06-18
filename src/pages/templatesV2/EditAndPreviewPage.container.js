@@ -25,22 +25,16 @@ const mapStateToProps = (state, props) => {
   const draft = selectDraftTemplate(state, id);
   const published = selectPublishedTemplate(state, id);
   const isPublishedMode = props.match.params.navKey === 'published';
-  const draftOrPublished = draft || published;
-  const hasDraft = draftOrPublished && draftOrPublished.has_draft;
-  const hasPublished = draftOrPublished && draftOrPublished.has_published;
 
   return {
     draft,
     published,
     isPublishedMode,
-    hasDraft,
-    hasPublished,
     hasDraftFailedToLoad: Boolean(state.templates.getDraftError),
     hasFailedToPreview: Boolean(state.templates.contentPreview.error),
     isDraftLoading: !draft || Boolean(state.templates.getDraftLoading),
     isDeletePending: state.templates.deletePending,
     isDraftUpdating: Boolean(state.templates.updating),
-    isDraftPublishing: Boolean(state.templates.publishPending),
     preview: selectDraftTemplatePreview(state, id, {}),
     previewLineErrors: selectPreviewLineErrors(state)
   };

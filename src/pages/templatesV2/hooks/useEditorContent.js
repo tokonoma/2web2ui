@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 // the store for in progress content changes
-const useEditorContent = ({ draft = {}, published = {}, isPublishedMode }) => {
+const useEditorContent = ({ draft = {}}) => {
   const [state, setState] = useState({});
   const setContent = (nextState) => {
     setState({ ...state, ...nextState }); // merge-in
@@ -9,11 +9,10 @@ const useEditorContent = ({ draft = {}, published = {}, isPublishedMode }) => {
 
   // hydrate when loaded
   useEffect(() => {
-    const activeContent = isPublishedMode ? published : draft;
-    if (activeContent.content) {
-      setState(activeContent.content);
+    if (draft.content) {
+      setState(draft.content);
     }
-  }, [draft, draft.content, isPublishedMode, published, published.content]);
+  }, [draft.content]);
 
   return {
     content: state,

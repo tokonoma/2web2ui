@@ -4,7 +4,7 @@ import Editor from './Editor';
 import 'brace/mode/html';
 
 const EditHtmlSection = () => {
-  const { content, setContent, isPublishedMode } = useEditorContext();
+  const { content, setContent } = useEditorContext();
 
   return (
     <Editor
@@ -12,7 +12,6 @@ const EditHtmlSection = () => {
       name="html-content-editor"
       onChange={(value) => { setContent({ html: value }); }}
       value={content.html}
-      readOnly={isPublishedMode}
     />
   );
 };
