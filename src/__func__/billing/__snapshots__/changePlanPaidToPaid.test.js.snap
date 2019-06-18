@@ -153,5 +153,17 @@ Array [
       "url": "/v1/account/invoices",
     },
   ],
+  Array [
+    Object {
+      "data": undefined,
+      "headers": Object {
+        "Authorization": "mock-access-token",
+      },
+      "method": "get",
+      "params": undefined,
+      "responseType": "json",
+      "url": "/v1/usage",
+    },
+  ],
 ]
 `;
