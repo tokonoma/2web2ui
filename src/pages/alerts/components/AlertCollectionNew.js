@@ -41,7 +41,7 @@ class AlertCollectionNew extends Component {
       </div>,
       <Tag>{_.get(METRICS, metric, metric)}</Tag>,
       <DisplayDate timestamp={last_triggered} formattedDate={formattedDate} />,
-      <AlertToggle muted={muted} id={id} />,
+      <AlertToggle muted={muted} id={id.toString()} />,
       <Button flat onClick = {deleteFn}><Delete className = {styles.Icon}/></Button>
     ];
   }
