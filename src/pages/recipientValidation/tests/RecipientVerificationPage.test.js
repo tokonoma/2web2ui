@@ -16,7 +16,6 @@ describe('Page: Recipient Email Verification', () => {
   });
 
   it('should render Recipient Validation page correctly', () => {
-    expect(wrapper).toMatchSnapshot();
     expect(wrapper.find(ListForm)).toExist();
     expect(wrapper.find(ListResults)).toExist();
   });
