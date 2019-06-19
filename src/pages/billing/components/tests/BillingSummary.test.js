@@ -1,6 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import BillingSummary from '../BillingSummary';
+import { Panel } from '@sparkpost/matchbox';
 
 // mock connected components as named functions for better snapshots
 jest.mock('../../forms/UpdatePaymentForm', () => function UpdatePaymentForm() {});
@@ -26,6 +27,10 @@ describe('Component: Billing Summary', () => {
           }
         }
       },
+      brightback: {
+        valid: true,
+        url: 'http://brightback.url/to-cancel'
+      },
       currentPlan: {
         isFree: true
       },
@@ -42,6 +47,11 @@ describe('Component: Billing Summary', () => {
   it('should render correctly for a standard free plan', () => {
     wrapper.setProps({ canUpdateBillingInfo: false, canPurchaseIps: false });
     expect(wrapper).toMatchSnapshot();
+  });
+
+  it('render renew when there is pending cancellation', () => {
+    wrapper.setProps({ account: { ...props.account, pending_cancellation: {}}});
+    expect(wrapper.find(Panel.Section)).toMatchSnapshot();
   });
 
   it('should render correctly for a paid plan', () => {

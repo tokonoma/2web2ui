@@ -1,32 +1,40 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Page } from '@sparkpost/matchbox';
-import { fetch as fetchAccount, getPlans, getBillingInfo, getUsage } from 'src/actions/account';
+import { fetch as fetchAccount, getPlans, getBillingInfo, getUsage, renewAccount } from 'src/actions/account';
 import { list as getSendingIps } from 'src/actions/sendingIps';
 import { selectBillingInfo, selectAccountBilling } from 'src/selectors/accountBillingInfo';
 import { selectAccountAgeInDays } from 'src/selectors/accountAge';
 import ConditionSwitch, { defaultCase } from 'src/components/auth/ConditionSwitch';
 import { not } from 'src/helpers/conditions';
+import { configFlag } from 'src/helpers/conditions/config';
 import { isSuspendedForBilling, isSelfServeBilling, hasAccountOptionEnabled } from 'src/helpers/conditions/account';
 import { Loading } from 'src/components';
 import BillingSummary from './components/BillingSummary';
 import ManuallyBilledBanner from './components/ManuallyBilledBanner';
 import SuspendedForBilling from './components/SuspendedForBilling';
 import { list as getInvoices } from 'src/actions/invoices';
+import { prepBrightback } from 'src/actions/brightback';
+import { selectBrightbackData } from 'src/selectors/brightback';
+import config from 'src/config';
 
 export class BillingSummaryPage extends Component {
 
   componentDidMount() {
-    this.props.fetchAccount();
-    this.props.getBillingInfo();
-    this.props.getPlans();
-    this.props.getSendingIps();
-    this.props.getInvoices();
-    this.props.getUsage();
+    const { fetchAccount, getBillingInfo, getPlans, getSendingIps, getInvoices, getUsage, brightbackEnabled, prepBrightback, brightbackData } = this.props;
+    fetchAccount();
+    getBillingInfo();
+    getPlans();
+    getSendingIps();
+    getInvoices();
+    getUsage();
+    if (brightbackEnabled) {
+      prepBrightback(brightbackData);
+    }
   }
 
   render() {
-    const { loading, account, billingInfo, sendingIps, invoices, accountAgeInDays, hasRecipientValidation } = this.props;
+    const { loading, account, brightback, billingInfo, sendingIps, invoices, accountAgeInDays, hasRecipientValidation, renewAccount } = this.props;
 
     if (loading) {
       return <Loading />;
@@ -38,7 +46,9 @@ export class BillingSummaryPage extends Component {
           <SuspendedForBilling condition={isSuspendedForBilling} account={account} />
           <ManuallyBilledBanner condition={not(isSelfServeBilling)} account={account} onZuoraPlan={billingInfo.onZuoraPlan} />
           <BillingSummary
+            brightback={brightback}
             condition={defaultCase}
+            renewAccount={renewAccount}
             hasRecipientValidation={hasRecipientValidation}
             account={account}
             {...billingInfo} invoices={invoices}
@@ -54,8 +64,11 @@ export class BillingSummaryPage extends Component {
 const mapStateToProps = (state) => {
   const { account, loading } = selectAccountBilling(state);
   return ({
-    loading: loading || state.billing.plansLoading || !state.account.subscription,
+    loading: loading || state.billing.plansLoading || !state.account.subscription || state.brightback.loading,
     account,
+    brightback: state.brightback,
+    brightbackEnabled: configFlag('brightback.enabled')(),
+    brightbackData: selectBrightbackData(state, { config: config.brightback.cancelConfig }),
     accountAgeInDays: selectAccountAgeInDays(state),
     billingInfo: selectBillingInfo(state),
     sendingIps: state.sendingIps.list,
@@ -64,4 +77,4 @@ const mapStateToProps = (state) => {
   });
 };
 
-export default connect(mapStateToProps, { getInvoices, getSendingIps, getPlans, fetchAccount, getBillingInfo, getUsage })(BillingSummaryPage);
+export default connect(mapStateToProps, { getInvoices, getSendingIps, getPlans, fetchAccount, getBillingInfo, renewAccount, getUsage, prepBrightback })(BillingSummaryPage);

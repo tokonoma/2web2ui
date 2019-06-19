@@ -15,6 +15,7 @@ import { formatFullNumber } from 'src/helpers/units';
 import totalRVCost from '../helpers/totalRecipientValidationCost';
 import _ from 'lodash';
 import { formatDateTime } from 'src/helpers/date';
+import { showAlert } from 'src/actions/globalAlert';
 
 const PAYMENT_MODAL = 'payment';
 const CONTACT_MODAL = 'contact';
@@ -74,19 +75,42 @@ export default class BillingSummary extends Component {
       </Panel.Section>
     );
   };
+  onRenewPlan = () => {
+    const { renewAccount } = this.props;
+    return renewAccount().then(() => {
+      showAlert({ type: 'error', message: 'Account Renewed' });
+    });
+  }
 
   render() {
-    const { account, currentPlan, canChangePlan, canUpdateBillingInfo, canPurchaseIps, invoices, isAWSAccount, accountAgeInDays, hasRecipientValidation } = this.props;
-    const { rvUsage } = account;
+    const { account, currentPlan, canChangePlan, canUpdateBillingInfo, canPurchaseIps, invoices, isAWSAccount, accountAgeInDays, hasRecipientValidation, brightback } = this.props;
+    const { rvUsage, pending_cancellation } = account;
     const { show } = this.state;
 
     const volumeUsed = _.get(rvUsage, 'recipient_validation.month.used', 0);
     const showRecipientValidation = hasRecipientValidation && rvUsage;
-    let changePlanActions = {};
 
-    if (canChangePlan) {
+    const changePlanActions = [];
+    if (!pending_cancellation && canChangePlan) {
       const changePlanLabel = currentPlan.isFree ? 'Upgrade Now' : 'Change Plan';
-      changePlanActions = { actions: [{ content: changePlanLabel, to: '/account/billing/plan', Component: Link, color: 'orange' }]};
+      changePlanActions.push({ content: changePlanLabel, to: '/account/billing/plan', Component: Link, color: 'orange' });
+    }
+
+    if (pending_cancellation) {
+      changePlanActions.push({
+        content: 'Renew Plan',
+        color: 'orange',
+        onClick: this.onRenewPlan
+      });
+    }
+
+    if (!pending_cancellation) {
+      changePlanActions.push({
+        content: 'Cancel Plan',
+        to: brightback.url,
+        color: 'orange',
+        disabled: !brightback.valid || !brightback.url
+      });
     }
 
     return (
@@ -94,7 +118,7 @@ export default class BillingSummary extends Component {
         <PendingPlanBanner account={account} />
         <FreePlanWarningBanner account={account} accountAgeInDays={accountAgeInDays} />
         <Panel accent title='Plan Overview'>
-          <Panel.Section {...changePlanActions}>
+          <Panel.Section actions={changePlanActions}>
             <LabelledValue label="Your Plan">
               <PlanSummary plan={account.subscription} />
             </LabelledValue>
