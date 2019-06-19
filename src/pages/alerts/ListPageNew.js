@@ -5,7 +5,7 @@ import { RemoveRedEye } from '@sparkpost/matchbox-icons';
 import { ApiErrorBanner, DeleteModal, Loading, DisplayDate } from 'src/components';
 import { Templates } from 'src/components/images';
 import AlertCollectionNew from './components/AlertCollectionNew';
-import withAlertsList from './containers/ListPage.container';
+import withAlertsList from './containers/ListPageNew.container';
 import styles from './ListPage.module.scss';
 import _ from 'lodash';
 
