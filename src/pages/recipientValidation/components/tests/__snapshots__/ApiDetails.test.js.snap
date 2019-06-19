@@ -76,10 +76,11 @@ exports[`ApiDetails tab should render page correctly 1`] = `
             <br />
             <Tab />
             <Tab />
-            "result": 
+            "result": "
             <White>
-              "undeliverable"
+              undeliverable
             </White>
+            ",
             <br />
             <Tab />
             <Tab />
@@ -87,13 +88,15 @@ exports[`ApiDetails tab should render page correctly 1`] = `
             <White>
               false
             </White>
+            ,
             <br />
             <Tab />
             <Tab />
-            "reason": 
+            "reason": "
             <White>
-              "Invalid Domain"
+              Invalid Domain
             </White>
+            ",
             <br />
             <Tab />
             <Tab />
@@ -101,6 +104,7 @@ exports[`ApiDetails tab should render page correctly 1`] = `
             <White>
               false
             </White>
+            ,
             <br />
             <Tab />
             <Tab />
@@ -108,6 +112,7 @@ exports[`ApiDetails tab should render page correctly 1`] = `
             <White>
               false
             </White>
+            ,
             <br />
             <Tab />
             <Tab />
@@ -115,13 +120,15 @@ exports[`ApiDetails tab should render page correctly 1`] = `
             <White>
               false
             </White>
+            ,
             <br />
             <Tab />
             <Tab />
-            "did_you_mean": 
+            "did_you_mean": "
             <White>
-              "harry.potter@hogwarts.edu"
+              harry.potter@hogwarts.edu
             </White>
+            "
             <br />
             <Tab />
             }

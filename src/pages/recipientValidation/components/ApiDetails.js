@@ -12,13 +12,13 @@ export const ApiIntegrationDocs = () => {
     <small className={styles.blue}>
       {'{'}<br/>
       <Tab />"results": {'{'}<br/>
-      <Tab /><Tab />"result": <White>"undeliverable"</White><br/>
-      <Tab /><Tab />"valid": <White>false</White><br/>
-      <Tab /><Tab />"reason": <White>"Invalid Domain"</White><br/>
-      <Tab /><Tab />"is_role": <White>false</White><br/>
-      <Tab /><Tab />"is_disposable": <White>false</White><br/>
-      <Tab /><Tab />"is_free": <White>false</White><br/>
-      <Tab /><Tab />"did_you_mean": <White>"harry.potter@hogwarts.edu"</White><br/>
+      <Tab /><Tab />"result": "<White>undeliverable</White>",<br/>
+      <Tab /><Tab />"valid": <White>false</White>,<br/>
+      <Tab /><Tab />"reason": "<White>Invalid Domain</White>",<br/>
+      <Tab /><Tab />"is_role": <White>false</White>,<br/>
+      <Tab /><Tab />"is_disposable": <White>false</White>,<br/>
+      <Tab /><Tab />"is_free": <White>false</White>,<br/>
+      <Tab /><Tab />"did_you_mean": "<White>harry.potter@hogwarts.edu</White>"<br/>
       <Tab />{'}'}<br/>
       {'}'}
     </small>
