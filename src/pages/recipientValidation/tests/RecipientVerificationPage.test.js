@@ -1,6 +1,10 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 import { RecipientValidationPage } from '../RecipientValidationPage';
+import ListForm from '../components/ListForm';
+import SingleAddressForm from '../components/SingleAddressForm';
+import ListResults from '../components/ListResults';
+import ApiDetails from '../components/ApiDetails';
 
 describe('Page: Recipient Email Verification', () => {
   let wrapper;
@@ -13,11 +17,18 @@ describe('Page: Recipient Email Verification', () => {
 
   it('should render Recipient Validation page correctly', () => {
     expect(wrapper).toMatchSnapshot();
+    expect(wrapper.find(ListForm)).toExist();
+    expect(wrapper.find(ListResults)).toExist();
   });
 
   it('renders single email verification tab correctly when selected', () => {
     wrapper.setState({ selectedTab: 1 });
-    expect(wrapper).toMatchSnapshot();
+    expect(wrapper.find(SingleAddressForm)).toExist();
+  });
+
+  it('renders Api tab correctly when selected', () => {
+    wrapper.setState({ selectedTab: 2 });
+    expect(wrapper.find(ApiDetails)).toExist();
   });
 
   describe('handleTabs', () => {

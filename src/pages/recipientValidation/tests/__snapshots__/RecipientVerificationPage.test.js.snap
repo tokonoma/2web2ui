@@ -23,6 +23,10 @@ exports[`Page: Recipient Email Verification renders single email verification ta
               "content": "Validate a Single Address",
               "onClick": [Function],
             },
+            Object {
+              "content": "API Integration",
+              "onClick": [Function],
+            },
           ]
         }
       />
@@ -60,6 +64,10 @@ exports[`Page: Recipient Email Verification should render Recipient Validation p
             },
             Object {
               "content": "Validate a Single Address",
+              "onClick": [Function],
+            },
+            Object {
+              "content": "API Integration",
               "onClick": [Function],
             },
           ]
