@@ -1,59 +1,65 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import { Page, Tabs, Panel } from '@sparkpost/matchbox';
 import ListForm from './components/ListForm';
 import SingleAddressForm from './components/SingleAddressForm';
 import ListResults from './components/ListResults';
+import ApiDetails from './components/ApiDetails';
 import { hasAccountOptionEnabled } from 'src/helpers/conditions/account';
 import RVDisabledPage from './components/RVDisabledPage';
 import ConditionSwitch, { Case, defaultCase } from 'src/components/auth/ConditionSwitch';
+import useTabs from 'src/hooks/useTabs';
 
-const tabs = [
-  { content: 'Validate A List' },
-  { content: 'Validate a Single Address' }
+const TABS = [
+  { content: 'Validate A List', key: 'list' },
+  { content: 'Validate a Single Address', key: 'single' },
+  { content: 'API Integration', key: 'api' }
 ];
 
-export class RecipientValidationPage extends Component {
-  state = {
-    selectedTab: 0
-  };
+export const RecipientValidationPage = () => {
 
-  handleTabs(tabIdx) {
-    this.setState({ selectedTab: tabIdx });
+  const [selectedTabIndex, tabs] = useTabs(TABS);
+  const selectedTabKey = tabs[selectedTabIndex].key;
+
+  let panelContent;
+
+  if (selectedTabKey === 'list') {
+    panelContent = <ListForm />;
   }
 
-  renderRecipientValidation = () => {
-    const { selectedTab } = this.state;
-
-    return (
-      <Page
-        title='Recipient Email Validation'>
-        <Tabs
-          selected={selectedTab}
-          connectBelow={true}
-          tabs={tabs.map(({ content }, idx) => ({ content, onClick: () => this.handleTabs(idx) }))}
-        />
-        <Panel>
-          {selectedTab === 1 ? <SingleAddressForm/> : <ListForm/>}
-        </Panel>
-        {selectedTab === 0 && <ListResults/>}
-      </Page>
-    );
-  };
-
-  render() {
-    return (
-      <ConditionSwitch>
-        <Case condition={hasAccountOptionEnabled('recipient_validation')}>
-          {this.renderRecipientValidation()}
-        </Case>
-        <Case condition={defaultCase}>
-          <RVDisabledPage/>
-        </Case>
-      </ConditionSwitch>
-    );
+  if (selectedTabKey === 'single') {
+    panelContent = <SingleAddressForm />;
   }
-}
+
+  if (selectedTabKey === 'api') {
+    panelContent = <ApiDetails />;
+  }
+
+  const renderRecipientValidation = () => (
+    <Page
+      title='Recipient Email Validation'>
+      <Tabs
+        selected={selectedTabIndex}
+        connectBelow={true}
+        tabs={tabs}
+      />
+      <Panel>
+        {panelContent}
+      </Panel>
+      {selectedTabKey === 'list' && <ListResults/>}
+    </Page>
+  );
+
+  return (
+    <ConditionSwitch>
+      <Case condition={hasAccountOptionEnabled('recipient_validation')}>
+        {renderRecipientValidation()}
+      </Case>
+      <Case condition={defaultCase}>
+        <RVDisabledPage/>
+      </Case>
+    </ConditionSwitch>
+  );
+};
 
 export default RecipientValidationPage;
-
