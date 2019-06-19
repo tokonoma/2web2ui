@@ -236,7 +236,9 @@ Object {
       "mxValue": "smtp.eu.sparkpostmail.com",
     },
     "brightback": Object {
-      "freePlan": "free500-SPCEU-0419",
+      "downgradeToFreeConfig": Object {
+        "cancel_confirmation_url": "/account/billing/plan/change?immediatePlanChange=free500-SPCEU-0419",
+      },
     },
     "crossLinkTenant": "spc",
     "environment": "production",

@@ -101,13 +101,17 @@ const config = (identifier) => ({
   },
   brightback: {
     baseUrl: 'https://app.brightback.com',
-    app_id: '9N0rWBvKGR',
-    downgradeToFreeUrls: {
+    downgradeToFreeConfig: {
+      app_id: 'bAJDEmD5EK', //Sandbox app Id
       save_return_url: '/account/billing', // Return URL from Brightback for end-users who do not cancel
-      cancel_confirmation_url: '/account/billing/plan/change' // Return URL from Brightback for end-users who cancel
+      cancel_confirmation_url: '/account/billing/plan/change?immediatePlanChange=free500-0419' // Return URL from Brightback for end-users who cancel
     },
-    freePlan: 'free500-0419',
-    enabled: false
+    cancelConfig: {
+      app_id: 'bAJDEmD5EK', //Sandbox app Id
+      save_return_url: '/account/billing',
+      cancel_confirmation_url: '/account/billing/plan/cancel'
+    },
+    enabled: true
   },
   smtpAuth: {
     host: `${identifier}.smtp.e.sparkpost.com`,

@@ -137,7 +137,7 @@ export class Confirmation extends React.Component {
         <Panel.Section>
           <Brightback
             condition={Boolean(billingEnabled && isPlanSelected && selected.isFree)}
-            urls={config.brightback.downgradeToFreeUrls}
+            config={config.brightback.downgradeToFreeConfig}
             render={({ enabled, to }) => (
               <Button
                 type={enabled ? 'button' : 'submit'}

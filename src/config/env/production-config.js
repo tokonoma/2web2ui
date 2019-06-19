@@ -11,7 +11,12 @@ const productionConfig = {
     }
   },
   brightback: {
-    enabled: true
+    downgradeToFreeConfig: {
+      app_id: '9N0rWBvKGR' //Downgrade to prod
+    },
+    cancelConfig: {
+      app_id: 'RYeoK4Dp3a' //Cancel Prod id
+    }
   }
 };
 

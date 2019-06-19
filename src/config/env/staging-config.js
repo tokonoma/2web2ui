@@ -10,9 +10,6 @@ const stagingConfig = {
       index: 'staging_site_posts_support_article'
     },
     enabled: true
-  },
-  brightback: {
-    enabled: true
   }
 };
 
