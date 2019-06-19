@@ -49,4 +49,15 @@ describe('useEditorNavigation', () => {
 
     expect(historyPush).toHaveBeenCalledWith('/templatesv2/edit/test-template/settings');
   });
+
+  it('redirects with subaccount id', () => {
+    const historyPush = jest.fn();
+    const wrapper = useTestWrapper({ routerState: { history: { push: historyPush }, requestParams: { id: 'test-template', subaccount: 102 }}});
+
+    act(() => {
+      useHook(wrapper).setNavigation('settings');
+    });
+
+    expect(historyPush).toHaveBeenCalledWith('/templatesv2/edit/test-template/settings?subaccount=102');
+  });
 });

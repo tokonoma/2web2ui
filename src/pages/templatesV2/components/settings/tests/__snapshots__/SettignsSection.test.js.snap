@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SettingsSection renders form 1`] = `
+<Panel
+  className="SettingsSection"
+>
+  <Panel.Section
+    className="SettingsHeader"
+  >
+    <h2>
+      Template Settings
+    </h2>
+  </Panel.Section>
+  <FormContainer />
+</Panel>
+`;
