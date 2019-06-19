@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import { setSubaccountQuery } from 'src/helpers/subaccounts';
 import { Button, Table, Tag, Panel } from '@sparkpost/matchbox';
 import { TableCollection, PageLink, DisplayDate } from 'src/components';
-import AlertToggle from './AlertToggle';
+import AlertToggle from './AlertToggleNew';
 import { Delete } from '@sparkpost/matchbox-icons';
-import { METRICS } from '../constants/metrics';
+import { METRICS } from '../constants/metricsV1';
 import styles from './AlertCollection.module.scss';
-import { formatDateTime } from 'src/helpers/date';
 import _ from 'lodash';
 
 const filterBoxConfig = {
@@ -20,34 +18,30 @@ const filterBoxConfig = {
 };
 
 class AlertCollectionNew extends Component {
-  //TODO Add last triggered date and replace link
-  getDetailsLink = ({ id, subaccount_id }) => `/alerts/edit/${id}${setSubaccountQuery(subaccount_id)}`
+  //TODO replace link
+  getDetailsLink = ({ id }) => `/alerts/edit/${id}`;
 
   getColumns() {
     const columns = [
       { label: 'Alert Name', sortKey: 'name', width: '40%', className: styles.TabbedCellHeader },
-      { label: 'Metric', sortKey: 'alert_metric' },
-      { label: 'Last Triggered', sortKey: '' },
-      { label: 'Status', sortKey: 'enabled' },
+      { label: 'Metric', sortKey: 'metric' },
+      { label: 'Last Triggered', sortKey: 'sortKey' },
+      { label: 'Status', sortKey: 'muted' },
       null
     ];
 
     return columns;
   }
 
-  getRowData = ({ alert_metric, enabled, id, name, subaccount_id }) => {
-
-    const deleteFn = () => this.props.handleDelete({ id, name, subaccount_id });
-    //TODO remove when real data is available through API
-    const timestamp = '2019-06-05T20:29:59.000Z';
-    const lastTriggeredDate = formatDateTime(timestamp);
+  getRowData = ({ metric, muted, id, name, last_triggered, formattedDate }) => {
+    const deleteFn = () => this.props.handleDelete({ id, name });
     return [
       <div className = {styles.TabbedCellBody}>
-        <PageLink to={this.getDetailsLink({ id, subaccount_id })}>{name}</PageLink>
+        <PageLink to={this.getDetailsLink({ id })}>{name}</PageLink>
       </div>,
-      <Tag>{_.get(METRICS, alert_metric, alert_metric)}</Tag>,
-      <DisplayDate timestamp={timestamp} formattedDate={lastTriggeredDate} />,
-      <AlertToggle enabled={enabled} id={id} subaccountId={subaccount_id} />,
+      <Tag>{_.get(METRICS, metric, metric)}</Tag>,
+      <DisplayDate timestamp={last_triggered} formattedDate={formattedDate} />,
+      <AlertToggle muted={muted} id={id} />,
       <Button flat onClick = {deleteFn}><Delete className = {styles.Icon}/></Button>
     ];
   }
@@ -71,7 +65,7 @@ class AlertCollectionNew extends Component {
         getRowData={this.getRowData}
         pagination={true}
         filterBox={filterBoxConfig}
-        defaultSortColumn='name'
+        defaultSortColumn='sortKey'
         defaultSortDirection='desc'
       >
         {

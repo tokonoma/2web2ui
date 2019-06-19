@@ -7,7 +7,6 @@ import { Templates } from 'src/components/images';
 import AlertCollectionNew from './components/AlertCollectionNew';
 import withAlertsList from './containers/ListPage.container';
 import styles from './ListPage.module.scss';
-import { formatDateTime } from 'src/helpers/date';
 import _ from 'lodash';
 
 export class ListPageNew extends Component {
@@ -19,9 +18,9 @@ export class ListPageNew extends Component {
     this.props.listAlerts();
   }
 
-  openDeleteModal = ({ id, name, subaccount_id } = {}) => {
+  openDeleteModal = ({ id, name } = {}) => {
     this.setState({
-      alertToDelete: { id, name, subaccountId: subaccount_id }
+      alertToDelete: { id, name }
     });
   };
 
@@ -31,10 +30,19 @@ export class ListPageNew extends Component {
     });
   };
 
-  handleDelete = () => {
-    const { id, subaccountId } = this.state.alertToDelete;
+  getRecentlyTriggeredAlerts = () => {
+    const { alerts } = this.props;
+    const orderedArray = alerts
+      .filter((alert) => alert.last_triggered !== null) //Remove any alert that has never triggered
+      .sort((a, b) => (a.last_triggered > b.last_triggered) ? -1 : 1) //Sorts by last triggered date, descending
+      .slice(0,4);
+    return orderedArray;
+  }
 
-    return this.props.deleteAlert({ id, subaccountId }).then(() => {
+  handleDelete = () => {
+    const { id } = this.state.alertToDelete;
+
+    return this.props.deleteAlert({ id }).then(() => {
       this.props.showAlert({ type: 'success', message: 'Alert deleted' });
       this.closeDeleteModal();
     });
@@ -51,36 +59,31 @@ export class ListPageNew extends Component {
 
   renderRecentlyTriggered() {
 
-    //TODO replace alert metric/name with last triggered date and replace link
-    const orderedAlerts = [...this.props.alerts].sort((a, b) => {
-      if (a.name.toLowerCase() > b.name.toLowerCase()) {
-        return 1;
-      }
-      return -1;
-    }).slice(0,4);
+    const orderedAlerts = this.getRecentlyTriggeredAlerts();
 
-    //TODO remove when real data is available through API
-    const timestamp = '2019-06-05T20:29:59.000Z';
-    const lastTriggeredDate = formatDateTime(timestamp);
+    if (orderedAlerts.length === 0) {
+      return;
+    }
 
-    const recentlyTriggered = orderedAlerts.map((alert) => (<Grid.Column
-      xs={12}
-      md={6}
-      lg={3}
-      key = {alert.id}>
-      <Panel
-        accent
-      >
-        <Panel.Section className = {styles.LastTriggeredCard}>
-          <div className = {styles.LastTriggeredTime} ><DisplayDate timestamp={timestamp} formattedDate={lastTriggeredDate} /></div>
-          <h3>{alert.name}</h3>
-        </Panel.Section>
+    const recentlyTriggered = orderedAlerts.map((alert) => (
+      <Grid.Column
+        xs={12}
+        md={6}
+        lg={3}
+        key = {alert.id}>
+        <Panel
+          accent
+        >
+          <Panel.Section className = {styles.LastTriggeredCard}>
+            <div className = {styles.LastTriggeredTime} ><DisplayDate timestamp={alert.last_triggered} formattedDate={alert.formattedDate} /></div>
+            <h3>{alert.name}</h3>
+          </Panel.Section>
 
-        <Panel.Section className = {styles.Footer}>
-          <Button flat to = {'/alerts-new'}><RemoveRedEye className = {styles.Icon}/></Button>
-        </Panel.Section>
-      </Panel>
-    </Grid.Column>));
+          <Panel.Section className = {styles.Footer}>
+            <Button flat to = {'/alerts-new'}><RemoveRedEye className = {styles.Icon}/></Button>
+          </Panel.Section>
+        </Panel>
+      </Grid.Column>));
     return (
       <>
         <h3>Recently Triggered Alerts</h3>
@@ -94,7 +97,7 @@ export class ListPageNew extends Component {
     return (
       <>
         <p className={styles.Description}>
-          Use alerts to be notified about when important changes occur in your Health Score, bounce rates, and email usage.
+          Use alerts to be notified when important changes occur in your Health Score, bounce rates, and email usage.
         </p>
         {this.renderRecentlyTriggered()}
         {this.renderCollection()}
