@@ -1,0 +1,45 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.Container {
+  padding: rem(20) rem(30);
+}
+
+.Header {
+  margin: spacing(larger) 0;
+  font-size: rem(20);
+  font-weight: 600;
+}
+
+.ApiDocsLink {
+  margin-left: spacing();
+}
+
+.SampleRequest {
+  border-top: 1px solid color(gray, 9);
+  border-bottom: 1px solid color(gray, 9);
+  padding: rem(15) 0;
+  margin: rem(40) 0;
+}
+
+.Method {
+  margin-right: rem(10);
+  color: color(orange);
+  font-weight: 800;
+}
+
+.CodeSection {
+  margin-top: rem(15);
+  min-width: 350px;
+}
+
+.tab {
+  padding-left: 1em;
+}
+
+.blue {
+  color: color(blue);
+}
+
+.white {
+  color: color(gray, 9);
+}
