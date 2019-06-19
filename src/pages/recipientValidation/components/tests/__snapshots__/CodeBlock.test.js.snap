@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Codeblock should render page correctly with defaults 1`] = `
+<div
+  className="panel"
+>
+  <pre
+    className="textBody"
+  >
+    Big
+    code
+  </pre>
+</div>
+`;
