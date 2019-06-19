@@ -117,13 +117,13 @@ export default (state = initialState, { now = new Date(), ...action }) => {
     case 'DELETE_TEMPLATE_SUCCESS':
       return { ...state, deletePending: false };
 
-    case 'PUBLISH_TEMPLATE_PENDING':
+    case 'PUBLISH_ACTION_PENDING':
       return { ...state, publishPending: true };
 
-    case 'PUBLISH_TEMPLATE_SUCCESS':
+    case 'PUBLISH_ACTION_SUCCESS':
       return { ...state, publishPending: false };
 
-    case 'PUBLISH_TEMPLATE_FAIL':
+    case 'PUBLISH_ACTION_FAIL':
       return { ...state, publishPending: false };
 
     default:

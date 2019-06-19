@@ -35,6 +35,7 @@ const mapStateToProps = (state, props) => {
     isDraftLoading: !draft || Boolean(state.templates.getDraftLoading),
     isDeletePending: state.templates.deletePending,
     isDraftUpdating: Boolean(state.templates.updating),
+    isDraftPublishing: Boolean(state.templates.publishPending),
     preview: selectDraftTemplatePreview(state, id, {}),
     previewLineErrors: selectPreviewLineErrors(state)
   };
