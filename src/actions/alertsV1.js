@@ -17,7 +17,8 @@ export function setMutedStatus({ muted, id }) {
     meta: {
       method: 'PUT',
       url: `/v1/alerts/${id}`,
-      data: { muted }
+      data: { muted },
+      id
     }
   });
 }

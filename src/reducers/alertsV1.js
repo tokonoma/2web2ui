@@ -19,11 +19,21 @@ export default (state = initialState, { type, payload, meta }) => {
       return { ...state, list: payload, listPending: false };
 
     // UPDATE single list row Muted status
-    case 'SET_ALERT_MUTED_V1_STATUS_PENDING':
+    case 'SET_ALERT_V1_MUTED_STATUS_PENDING':
       return { ...state, setMutedStatusPending: true };
 
-    case 'SET_ALERT_MUTED_V1_STATUS_SUCCESS':
-    case 'SET_ALERT_MUTED_V1_STATUS_FAIL':
+    case 'SET_ALERT_V1_MUTED_STATUS_SUCCESS': {
+      const { list } = state;
+      const { id } = meta;
+      const updatedAlertList = list.map((alert) => {
+        if (alert.id === id) {
+          alert.muted = payload.muted;
+        }
+        return alert;
+      });
+      return { ...state, list: updatedAlertList, setMutedStatusPending: false };
+    }
+    case 'SET_ALERT_V1_MUTED_STATUS_FAIL':
       return { ...state, setMutedStatusPending: false };
 
       /* DELETE */

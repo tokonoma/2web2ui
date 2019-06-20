@@ -7,11 +7,7 @@ import styles from './AlertToggle.module.scss';
 
 export class AlertToggle extends Component {
   state = {
-    muted: false
-  }
-
-  componentDidMount() {
-    this.setState({ muted: this.props.muted });
+    muted: this.props.muted
   }
 
   handleToggle = () => {
@@ -34,7 +30,7 @@ export class AlertToggle extends Component {
     return (
       <div className={styles.Wrapper}>
         <Toggle
-          id={id}
+          id={id.toString()}
           compact
           checked={!muted}
           disabled={pending}
