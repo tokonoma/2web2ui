@@ -6,6 +6,7 @@ import { TextFieldWrapper } from 'src/components';
 import { required, email, maxLength } from 'src/helpers/validation';
 import { singleAddress } from 'src/actions/recipientValidation';
 import SingleResult from './SingleResult';
+import styles from './SingleAddressForm.module.scss';
 
 const formName = 'singleAddressForm';
 export class SingleAddressForm extends Component {
@@ -21,16 +22,21 @@ export class SingleAddressForm extends Component {
       <Fragment>
         <Panel.Section>
           <form onSubmit={handleSubmit(this.singleAddressForm)}>
-            <p>Validate an email address to determine if it is a deliverable email address or a rejected, undeliverable email address.</p>
-            <Field
-              name='address'
-              component={TextFieldWrapper}
-              label='Email address'
-              placeholder={'eg. example@mail.com'}
-              validate={[required, email, maxLength(254)]}
-              normalize={(value = '') => value.trim()}
-              connectRight={<Button primary submit disabled={submitDisabled}>{buttonContent}</Button>}
-            />
+            <div className={styles.Header}>Validate a Single Address</div>
+            <p className={styles.Paragraph}>Enter the email address below you would like to validate.</p>
+            <div className={styles.Field}>
+              <Field
+                style={{ height: '3.2rem', paddingLeft: '1.5em', fontSize: '.9em' }}
+                name='address'
+                component={TextFieldWrapper}
+                placeholder={'harry.potter@hogwarts.edu'}
+                validate={[required, email, maxLength(254)]}
+                normalize={(value = '') => value.trim()}
+              />
+            </div>
+            <div className={styles.Submit}>
+              <Button size='large' fullWidth primary submit disabled={submitDisabled}>{buttonContent}</Button>
+            </div>
           </form>
         </Panel.Section>
         {singleResults && (

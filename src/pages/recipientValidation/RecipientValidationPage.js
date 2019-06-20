@@ -11,7 +11,7 @@ import ConditionSwitch, { Case, defaultCase } from 'src/components/auth/Conditio
 
 const tabs = [
   { content: 'Validate A List' },
-  { content: 'Validate a Single Address' },
+  { content: 'Single Address' },
   { content: 'API Integration' }
 ];
 
@@ -42,7 +42,7 @@ export class RecipientValidationPage extends Component {
 
     return (
       <Page
-        title='Recipient Email Validation'>
+        title='Recipient Validation'>
         <Tabs
           selected={selectedTab}
           connectBelow={true}
