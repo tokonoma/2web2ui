@@ -5,7 +5,6 @@ import AlertToggle from './AlertToggleNew';
 import { Delete } from '@sparkpost/matchbox-icons';
 import { METRICS } from '../constants/metricsV1';
 import styles from './AlertCollection.module.scss';
-import _ from 'lodash';
 
 const filterBoxConfig = {
   show: true,
@@ -18,7 +17,7 @@ const filterBoxConfig = {
 };
 
 class AlertCollectionNew extends Component {
-  //TODO replace link
+
   getDetailsLink = ({ id }) => `/alerts/edit/${id}`;
 
   getColumns() {
@@ -39,7 +38,7 @@ class AlertCollectionNew extends Component {
       <div className = {styles.TabbedCellBody}>
         <PageLink to={this.getDetailsLink({ id })}>{name}</PageLink>
       </div>,
-      <Tag>{_.get(METRICS, metric, metric)}</Tag>,
+      <Tag>{METRICS[metric]}</Tag>,
       <DisplayDate timestamp={last_triggered_timestamp} formattedDate={last_triggered_formatted || 'Never Triggered'} />,
       <AlertToggle muted={muted} id={id} />,
       <Button flat onClick = {deleteFn}><Delete className = {styles.Icon}/></Button>
@@ -75,7 +74,6 @@ class AlertCollectionNew extends Component {
               <Panel.Section className = {styles.Title}>
                 <h3>All Alerts</h3>
               </Panel.Section>
-
               {filterBox}
               {collection}
             </Panel>

@@ -14,3 +14,12 @@ export const selectAlertsList = createSelector(
   )
 );
 
+export const selectRecentlyTriggeredAlerts = createSelector(
+  [ selectAlertsList ],
+  (alerts) => alerts
+    .filter((alert) => alert.last_triggered !== null) //Remove any alert that has never triggered
+    .sort((a, b) => (b.last_triggered_timestamp - a.last_triggered_timestamp)) //Sorts by last triggered date, descending
+    .slice(0,4)
+);
+
+

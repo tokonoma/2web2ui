@@ -24,9 +24,8 @@ export default (state = initialState, { type, payload, meta }) => {
 
     case 'SET_ALERT_V1_MUTED_STATUS_SUCCESS': {
       const { list } = state;
-      const { id } = meta;
       const updatedAlertList = list.map((alert) => {
-        if (alert.id === id) {
+        if (alert.id === meta.id) {
           alert.muted = payload.muted;
         }
         return alert;
@@ -45,7 +44,6 @@ export default (state = initialState, { type, payload, meta }) => {
       return {
         ...state,
         deletePending: false,
-        // TODO will need to match subaccount id
         list: state.list.filter((a) => a.id !== meta.id)
       };
 

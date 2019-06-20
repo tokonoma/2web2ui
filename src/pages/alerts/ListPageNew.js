@@ -30,14 +30,6 @@ export class ListPageNew extends Component {
     });
   };
 
-  getRecentlyTriggeredAlerts = () => {
-    const { alerts } = this.props;
-    return alerts
-      .filter((alert) => alert.last_triggered !== null) //Remove any alert that has never triggered
-      .sort((a, b) => (a.last_triggered.timestamp > b.last_triggered.timestamp)) //Sorts by last triggered date, descending
-      .slice(0,4);
-  }
-
   handleDelete = () => {
     const { id } = this.state.alertToDelete;
 
@@ -58,38 +50,33 @@ export class ListPageNew extends Component {
 
   renderRecentlyTriggered() {
 
-    const orderedAlerts = this.getRecentlyTriggeredAlerts();
-
-    if (orderedAlerts.length === 0) {
+    const { recentlyTriggeredAlerts } = this.props;
+    if (recentlyTriggeredAlerts.length === 0) {
       return;
     }
 
-    const recentlyTriggered = orderedAlerts.map((alert) => (
-      <Grid.Column
-        xs={12}
-        md={6}
-        lg={3}
-        key = {alert.id}>
-        <Panel
-          accent
-        >
-          <Panel.Section className = {styles.LastTriggeredCard}>
-            <div className = {styles.LastTriggeredTime} >
-              <DisplayDate timestamp={alert.last_triggered_timestamp} formattedDate={alert.last_triggered_formatted} />
-            </div>
-            <h3>{alert.name}</h3>
-          </Panel.Section>
-
-          <Panel.Section className = {styles.Footer}>
-            <Button flat to = {'/alerts-new'/*TODO replace this link*/}><RemoveRedEye className = {styles.Icon}/></Button>
-          </Panel.Section>
-        </Panel>
-      </Grid.Column>));
     return (
       <>
         <h3>Recently Triggered Alerts</h3>
         <Grid>
-          {recentlyTriggered}
+          {recentlyTriggeredAlerts.map((alert) => (
+            <Grid.Column
+              xs={12}
+              md={6}
+              lg={3}
+              key = {alert.id}>
+              <Panel accent>
+                <Panel.Section className = {styles.LastTriggeredCard}>
+                  <div className = {styles.LastTriggeredTime} >
+                    <DisplayDate timestamp={alert.last_triggered_timestamp} formattedDate={alert.last_triggered_formatted} />
+                  </div>
+                  <h3>{alert.name}</h3>
+                </Panel.Section>
+                <Panel.Section className = {styles.Footer}>
+                  <Button flat to = {'/alerts-new'/*TODO replace this link*/}><RemoveRedEye className = {styles.Icon}/></Button>
+                </Panel.Section>
+              </Panel>
+            </Grid.Column>))};
         </Grid>
         </>);
   }
