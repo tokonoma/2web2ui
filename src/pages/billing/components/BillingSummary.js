@@ -104,12 +104,14 @@ export default class BillingSummary extends Component {
       });
     }
 
+    const brightbackReady = brightback.valid && brightback.url;
+
     if (!pending_cancellation) {
       changePlanActions.push({
         content: 'Cancel Plan',
-        to: brightback.url,
+        to: brightbackReady || '/account/billing/plan/cancel',
         color: 'orange',
-        disabled: !brightback.valid || !brightback.url
+        component: brightbackReady ? undefined : Link
       });
     }
 

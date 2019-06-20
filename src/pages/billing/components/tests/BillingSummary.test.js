@@ -54,6 +54,11 @@ describe('Component: Billing Summary', () => {
     expect(wrapper.find(Panel.Section)).toMatchSnapshot();
   });
 
+  it('render cancellation link when brightback disabled or does not load', () => {
+    wrapper.setProps({ account: { ...props.account, brightback: {}}});
+    expect(wrapper.find(Panel.Section)).toMatchSnapshot();
+  });
+
   it('should render correctly for a paid plan', () => {
     wrapper.setProps({
       currentPlan: {

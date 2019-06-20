@@ -1,5 +1,76 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Component: Billing Summary render cancellation link when brightback disabled or does not load 1`] = `
+Array [
+  <Panel.Section
+    actions={
+      Array [
+        Object {
+          "Component": [Function],
+          "color": "orange",
+          "content": "Upgrade Now",
+          "to": "/account/billing/plan",
+        },
+        Object {
+          "color": "orange",
+          "component": undefined,
+          "content": "Cancel Plan",
+          "to": "http://brightback.url/to-cancel",
+        },
+      ]
+    }
+  >
+    <LabelledValue
+      label="Your Plan"
+    >
+      <PlanSummary
+        plan={
+          Object {
+            "plan_volume": 15000,
+          }
+        }
+      />
+    </LabelledValue>
+  </Panel.Section>,
+  <Panel.Section
+    actions={
+      Array [
+        Object {
+          "color": "orange",
+          "content": "Update Payment Information",
+          "onClick": [Function],
+        },
+      ]
+    }
+  >
+    <CardSummary
+      billing={Object {}}
+      label="Credit Card"
+    />
+  </Panel.Section>,
+  <Panel.Section
+    actions={
+      Array [
+        Object {
+          "color": "orange",
+          "content": "Update Billing Contact",
+          "onClick": [Function],
+        },
+      ]
+    }
+  >
+    <LabelledValue
+      label="Billing Contact"
+    >
+      <h6>
+         
+      </h6>
+      <p />
+    </LabelledValue>
+  </Panel.Section>,
+]
+`;
+
 exports[`Component: Billing Summary render renew when there is pending cancellation 1`] = `
 Array [
   <Panel.Section
@@ -118,8 +189,8 @@ exports[`Component: Billing Summary should render correctly for a paid plan 1`] 
           },
           Object {
             "color": "orange",
+            "component": undefined,
             "content": "Cancel Plan",
-            "disabled": false,
             "to": "http://brightback.url/to-cancel",
           },
         ]
@@ -250,8 +321,8 @@ exports[`Component: Billing Summary should render correctly for a standard free 
           },
           Object {
             "color": "orange",
+            "component": undefined,
             "content": "Cancel Plan",
-            "disabled": false,
             "to": "http://brightback.url/to-cancel",
           },
         ]
@@ -333,8 +404,8 @@ exports[`Component: Billing Summary should render correctly if you can't buy IPs
           },
           Object {
             "color": "orange",
+            "component": undefined,
             "content": "Cancel Plan",
-            "disabled": false,
             "to": "http://brightback.url/to-cancel",
           },
         ]
@@ -450,8 +521,8 @@ exports[`Component: Billing Summary should render correctly if you can't change 
         Array [
           Object {
             "color": "orange",
+            "component": undefined,
             "content": "Cancel Plan",
-            "disabled": false,
             "to": "http://brightback.url/to-cancel",
           },
         ]
@@ -582,8 +653,8 @@ exports[`Component: Billing Summary should render correctly if you can't update 
           },
           Object {
             "color": "orange",
+            "component": undefined,
             "content": "Cancel Plan",
-            "disabled": false,
             "to": "http://brightback.url/to-cancel",
           },
         ]
@@ -674,8 +745,8 @@ exports[`Component: Billing Summary should render with IP modal open 1`] = `
           },
           Object {
             "color": "orange",
+            "component": undefined,
             "content": "Cancel Plan",
-            "disabled": false,
             "to": "http://brightback.url/to-cancel",
           },
         ]
@@ -810,8 +881,8 @@ exports[`Component: Billing Summary should render with the billing contact modal
           },
           Object {
             "color": "orange",
+            "component": undefined,
             "content": "Cancel Plan",
-            "disabled": false,
             "to": "http://brightback.url/to-cancel",
           },
         ]
@@ -946,8 +1017,8 @@ exports[`Component: Billing Summary should render with the payment info modal op
           },
           Object {
             "color": "orange",
+            "component": undefined,
             "content": "Cancel Plan",
-            "disabled": false,
             "to": "http://brightback.url/to-cancel",
           },
         ]
@@ -1082,8 +1153,8 @@ exports[`Component: Billing Summary should show the invoice history if there are
           },
           Object {
             "color": "orange",
+            "component": undefined,
             "content": "Cancel Plan",
-            "disabled": false,
             "to": "http://brightback.url/to-cancel",
           },
         ]
