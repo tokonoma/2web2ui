@@ -22,7 +22,7 @@ const simulate = async (wrapper, selector, eventName) => {
   await forceUpdate(wrapper);
 };
 
-const currentRoute = (wrapper) => wrapper.find('MemoryRouter Router').prop('history').location.pathname;
+const currentLocation = (wrapper) => wrapper.find('MemoryRouter Router').prop('history').location;
 
 /** Bring up the app with in-memory routing on enzyme/jsdom.
  * @param {string} route - the app route to load (see src/config/routes.js)
@@ -69,7 +69,8 @@ export default async function mountRoute(route, { authenticated = true, clearApi
    */
   return {
     wrapper,
-    currentRoute: () => currentRoute(wrapper),
+    currentLocation: () => currentLocation(wrapper),
+    currentRoute: () => currentLocation(wrapper).pathname,
     find: wrapper.find.bind(wrapper),
     simulate: (...rest) => simulate(wrapper, ...rest),
     forceUpdate: (...rest) => forceUpdate(wrapper, ...rest),
