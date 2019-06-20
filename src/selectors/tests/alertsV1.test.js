@@ -3,7 +3,8 @@ import * as alertsSelectors from '../alertsV1';
 
 
 describe('Alerts Selectors: ', () => {
-  let alertsV1; let formattedAlerts;
+  let alertsV1;
+  let formattedAlerts;
 
   beforeEach(() => {
     const list = [
@@ -33,27 +34,30 @@ describe('Alerts Selectors: ', () => {
     formattedAlerts = [
       {
         ...list[0],
-        formattedDate: 'Never Triggered',
-        sortKey: '0'
+        last_triggered_formatted: null,
+        last_triggered_timestamp: 0
       },
       {
         ...list[1],
-        formattedDate: 'Jun 5 2019, 10:48am',
-        sortKey: '2019-06-05T14:48:00.000Z'
+        last_triggered_formatted: 'Jun 5 2019, 10:48am',
+        last_triggered_timestamp: 1559746080000
       },
       {
         ...list[2],
-        formattedDate: 'Jun 15 2019, 10:48am',
-        sortKey: '2019-06-15T14:48:00.000Z'
+        last_triggered_formatted: 'Jun 15 2019, 10:48am',
+        last_triggered_timestamp: 1560610080000
       }
     ];
 
     alertsV1 = { list };
   });
 
-  describe('Alerts List', () => {
-    it('returns formatted alerts data', () => {
-      expect(alertsSelectors.selectAlertsList({ alertsV1 })).toEqual(formattedAlerts);
-    });
+  it('selectAlertsList returns formatted alerts data', () => {
+    expect(alertsSelectors.selectAlertsList({ alertsV1 })).toEqual(formattedAlerts);
   });
+
+  it('selectRecentlyTriggeredAlerts returns triggered alerts in order descending ', () => {
+    expect(alertsSelectors.selectRecentlyTriggeredAlerts({ alertsV1 })).toEqual([formattedAlerts[2],formattedAlerts[1]]);
+  });
+
 });

@@ -33,6 +33,7 @@ Array [
       "data": Object {
         "muted": false,
       },
+      "id": "alert-id",
       "method": "PUT",
       "url": "/v1/alerts/alert-id",
     },

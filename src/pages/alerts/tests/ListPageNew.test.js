@@ -28,6 +28,24 @@ describe('Page: Alerts List', () => {
         last_triggered: '2019-06-05T05:48:00.000Z'
       }
     ],
+    recentlyTriggeredAlerts: [
+      {
+        id: 'id-1',
+        name: 'my alert 1',
+        metric: 'health_score',
+        last_triggered: '2019-06-15T14:48:00.000Z',
+        last_triggered_formatted: 'Jun 15 2019, 10:48am',
+        last_triggered_timestamp: 1560610080000
+      },
+      {
+        id: 'id-3',
+        name: 'my alert 3',
+        metric: 'monthly_sending_limit',
+        last_triggered: '2019-06-05T05:48:00.000Z',
+        last_triggered_formatted: 'Jun 5 2019, 10:48am',
+        last_triggered_timestamp: 1559746080000
+      }
+    ],
     loading: false
   };
 
@@ -57,20 +75,11 @@ describe('Page: Alerts List', () => {
   });
 
   it('should render last triggered cards correctly in order', () => {
-    const { alerts } = props;
+    const { recentlyTriggeredAlerts } = props;
     const panel = wrapper.find('Panel');
     expect(panel).toHaveLength(2);
-    expect(panel.first().find('h3').prop('children')).toEqual(alerts[0].name);
-    expect(panel.last().find('h3').prop('children')).toEqual(alerts[2].name);
-  });
-
-  it('should render a maximum of 4 panels', () => {
-    const alertsLong = [ ...props.alerts,
-      { id: 4, last_triggered: '2019-06-05T05:48:00.000Z' },
-      { id: 5, last_triggered: '2019-06-05T05:48:00.000Z' },
-      { id: 6, last_triggered: '2019-06-05T05:48:00.000Z' }];
-    wrapper.setProps({ alerts: alertsLong });
-    expect(wrapper.find('Panel')).toHaveLength(4);
+    expect(panel.first().find('h3').prop('children')).toEqual(recentlyTriggeredAlerts[0].name);
+    expect(panel.last().find('h3').prop('children')).toEqual(recentlyTriggeredAlerts[1].name);
   });
 
   it('should toggle delete modal', () => {

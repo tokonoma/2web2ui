@@ -11,8 +11,8 @@ describe('TestCollection Component', () => {
         name: 'my alert 1',
         metric: 'monthly_sending_limit',
         last_triggered: null,
-        formattedDate: 'Never Triggered',
-        sortKey: '0'
+        last_triggered_formatted: null,
+        last_triggered_timestamp: 0
       },
       {
         id: 'id-2',
@@ -20,8 +20,8 @@ describe('TestCollection Component', () => {
         name: 'my alert 2',
         metric: 'monthly_sending_limit',
         last_triggered: '2019-06-05T14:48:00.000Z',
-        formattedDate: 'Jun 5 2019, 10:48am',
-        sortKey: '2019-06-05T14:48:00.000Z'
+        last_triggered_formatted: 'Jun 5 2019, 10:48am',
+        last_triggered_timestamp: 1559746080000
       },
       {
         id: 'id-3',
@@ -29,8 +29,8 @@ describe('TestCollection Component', () => {
         name: 'my alert 3',
         metric: 'health_score',
         last_triggered: '2019-06-015T14:48:00.000Z',
-        formattedDate: 'Jun 15 2019, 10:48am',
-        sortKey: '2019-06-15T14:48:00.000Z'
+        last_triggered_formatted: 'Jun 15 2019, 10:48am',
+        last_triggered_timestamp: 1560610080000
       }
     ],
     handleDelete: jest.fn()

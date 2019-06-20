@@ -79,7 +79,8 @@ exports[`Page: Alerts List should render happy path 1`] = `
             className="LastTriggeredTime"
           >
             <DisplayDate
-              timestamp="2019-06-15T14:48:00.000Z"
+              formattedDate="Jun 15 2019, 10:48am"
+              timestamp={1560610080000}
             />
           </div>
           <h3>
@@ -117,7 +118,8 @@ exports[`Page: Alerts List should render happy path 1`] = `
             className="LastTriggeredTime"
           >
             <DisplayDate
-              timestamp="2019-06-05T05:48:00.000Z"
+              formattedDate="Jun 5 2019, 10:48am"
+              timestamp={1559746080000}
             />
           </div>
           <h3>
@@ -139,6 +141,7 @@ exports[`Page: Alerts List should render happy path 1`] = `
         </Panel.Section>
       </Panel>
     </Grid.Column>
+    ;
   </Grid>
   <AlertCollectionNew
     alerts={

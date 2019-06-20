@@ -16,7 +16,7 @@ exports[`TestCollection Component should render 1`] = `
       },
       Object {
         "label": "Last Triggered",
-        "sortKey": "sortKey",
+        "sortKey": "last_triggered_timestamp",
       },
       Object {
         "label": "Status",
@@ -25,7 +25,7 @@ exports[`TestCollection Component should render 1`] = `
       null,
     ]
   }
-  defaultSortColumn="sortKey"
+  defaultSortColumn="last_triggered_timestamp"
   defaultSortDirection="desc"
   filterBox={
     Object {
@@ -42,31 +42,31 @@ exports[`TestCollection Component should render 1`] = `
   rows={
     Array [
       Object {
-        "formattedDate": "Never Triggered",
         "id": "id-1",
         "last_triggered": null,
+        "last_triggered_formatted": null,
+        "last_triggered_timestamp": 0,
         "metric": "monthly_sending_limit",
         "muted": true,
         "name": "my alert 1",
-        "sortKey": "0",
       },
       Object {
-        "formattedDate": "Jun 5 2019, 10:48am",
         "id": "id-2",
         "last_triggered": "2019-06-05T14:48:00.000Z",
+        "last_triggered_formatted": "Jun 5 2019, 10:48am",
+        "last_triggered_timestamp": 1559746080000,
         "metric": "monthly_sending_limit",
         "muted": false,
         "name": "my alert 2",
-        "sortKey": "2019-06-05T14:48:00.000Z",
       },
       Object {
-        "formattedDate": "Jun 15 2019, 10:48am",
         "id": "id-3",
         "last_triggered": "2019-06-015T14:48:00.000Z",
+        "last_triggered_formatted": "Jun 15 2019, 10:48am",
+        "last_triggered_timestamp": 1560610080000,
         "metric": "health_score",
         "muted": true,
         "name": "my alert 3",
-        "sortKey": "2019-06-15T14:48:00.000Z",
       },
     ]
   }
@@ -92,7 +92,7 @@ Array [
   </Tag>,
   <DisplayDate
     formattedDate="Never Triggered"
-    timestamp={null}
+    timestamp={0}
   />,
   <Connect(AlertToggle)
     id="id-1"
@@ -126,7 +126,7 @@ Array [
   </Tag>,
   <DisplayDate
     formattedDate="Jun 5 2019, 10:48am"
-    timestamp="2019-06-05T14:48:00.000Z"
+    timestamp={1559746080000}
   />,
   <Connect(AlertToggle)
     id="id-2"
@@ -160,7 +160,7 @@ Array [
   </Tag>,
   <DisplayDate
     formattedDate="Jun 15 2019, 10:48am"
-    timestamp="2019-06-015T14:48:00.000Z"
+    timestamp={1560610080000}
   />,
   <Connect(AlertToggle)
     id="id-3"
