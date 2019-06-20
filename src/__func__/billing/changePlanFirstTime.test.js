@@ -1,6 +1,5 @@
 import mountRoute from 'src/__testHelpers__/mountRoute';
 import getFormFiller from 'src/__testHelpers__/fill';
-import fs from 'fs';
 
 test('Change Plan: first time', async () => {
   const page = await mountRoute('/account/billing/plan');
@@ -9,8 +8,6 @@ test('Change Plan: first time', async () => {
   const formFiller = getFormFiller(page.wrapper);
 
   formFiller({ type: 'downshift', name: 'planpicker', value: newPlan });
-
-  fs.writeFileSync('prepre.html', page.wrapper.html());
 
   formFiller([
     { name: 'card.number', value: '4111111111111111' },
