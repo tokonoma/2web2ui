@@ -10,13 +10,14 @@ exports[`ApiDetails tab should render page correctly 1`] = `
       md={6}
       xs={12}
     >
+      <br />
       <div
         className="Header"
       >
         Integrate Now
       </div>
       <p>
-        Validate an email the moment you reieve it, in real-time.
+        Validate an email the moment you receive it, in real-time.
         <br />
         Block fake emails and catch typos with a single API request.
       </p>
