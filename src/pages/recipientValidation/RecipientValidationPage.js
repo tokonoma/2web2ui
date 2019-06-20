@@ -4,13 +4,15 @@ import { Page, Tabs, Panel } from '@sparkpost/matchbox';
 import ListForm from './components/ListForm';
 import SingleAddressForm from './components/SingleAddressForm';
 import ListResults from './components/ListResults';
+import ApiDetails from './components/ApiDetails';
 import { hasAccountOptionEnabled } from 'src/helpers/conditions/account';
 import RVDisabledPage from './components/RVDisabledPage';
 import ConditionSwitch, { Case, defaultCase } from 'src/components/auth/ConditionSwitch';
 
 const tabs = [
   { content: 'Validate A List' },
-  { content: 'Validate a Single Address' }
+  { content: 'Validate a Single Address' },
+  { content: 'API Integration' }
 ];
 
 export class RecipientValidationPage extends Component {
@@ -20,6 +22,19 @@ export class RecipientValidationPage extends Component {
 
   handleTabs(tabIdx) {
     this.setState({ selectedTab: tabIdx });
+  }
+
+  renderTabContent = (tabId) => {
+    switch (tabId) {
+      case 0:
+        return <ListForm />;
+      case 1:
+        return <SingleAddressForm />;
+      case 2:
+        return <ApiDetails />;
+      default:
+        return null;
+    }
   }
 
   renderRecipientValidation = () => {
@@ -34,7 +49,7 @@ export class RecipientValidationPage extends Component {
           tabs={tabs.map(({ content }, idx) => ({ content, onClick: () => this.handleTabs(idx) }))}
         />
         <Panel>
-          {selectedTab === 1 ? <SingleAddressForm/> : <ListForm/>}
+          {this.renderTabContent(selectedTab)}
         </Panel>
         {selectedTab === 0 && <ListResults/>}
       </Page>
