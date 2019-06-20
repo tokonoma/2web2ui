@@ -95,3 +95,25 @@ const TEST_CASES = {
 cases('Template reducer', ({ state, ...action }) => {
   expect(templatesReducer(state, action)).toMatchSnapshot();
 }, TEST_CASES);
+
+describe('template publishing', () => {
+  const testCases = {
+    'publishes template pending': {
+      type: 'PUBLISH_ACTION_PENDING',
+      match: { publishPending: true }
+    },
+    'publishes template success': {
+      type: 'PUBLISH_ACTION_SUCCESS',
+      match: { publishPending: false }
+    },
+    'publishes template fail': {
+      type: 'PUBLISH_ACTION_FAIL',
+      match: { publishPending: false }
+    }
+  };
+
+  cases('Template reducer', ({ state, match, ...action }) => {
+    expect(templatesReducer({}, action)).toEqual(match); //passing empty state to assert just return value
+  }, testCases);
+
+});

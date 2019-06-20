@@ -1,0 +1,30 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.ActionItem {
+  display: block;
+  padding: rem(9) spacing();
+  color: color(gray, 4);
+  transition: 0.15s;
+  cursor: pointer;
+
+  &:hover {
+    background: color(gray, 9);
+    color: color(gray, 1);
+  }
+
+  a {
+    color: color(gray, 4);
+    font-weight: 400;
+  }
+}
+
+.Actions {
+  display: inline-block;
+
+
+}
+
+.Divider {
+  margin-bottom: 0;
+  margin-top: 0;
+}

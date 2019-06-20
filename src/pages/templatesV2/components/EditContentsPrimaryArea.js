@@ -1,19 +1,13 @@
 import React from 'react';
-import { Button } from '@sparkpost/matchbox';
 import useEditorContext from '../hooks/useEditorContext';
+import DraftModeActions from './editorActions/DraftModeActions';
+import PublishedModeActions from './editorActions/PublishedModeActions';
 
 const EditContentsPrimaryArea = () => {
-  const { content, draft, isDraftUpdating, updateDraft } = useEditorContext();
+  const { isPublishedMode } = useEditorContext();
 
-  return (
-    <Button
-      disabled={isDraftUpdating}
-      onClick={() => { updateDraft({ id: draft.id, content }, draft.subaccount_id); }}
-      primary
-    >
-      {isDraftUpdating ? 'Saving' : 'Save As Draft'}
-    </Button>
-  );
+  return isPublishedMode ? <PublishedModeActions /> : <DraftModeActions />;
+
 };
 
 export default EditContentsPrimaryArea;

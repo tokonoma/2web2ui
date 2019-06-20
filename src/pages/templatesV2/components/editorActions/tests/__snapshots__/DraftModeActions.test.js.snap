@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DraftModeActions renders draft actions 1`] = `
+<Button.Group>
+  <_default
+    className="Actions"
+  >
+    <Button
+      size="default"
+    >
+      <strong>
+        Save and Publish
+      </strong>
+    </Button>
+  </_default>
+  <div
+    className="Actions"
+  >
+    <Popover
+      bottom={true}
+      left={true}
+      onClose={[Function]}
+      open={false}
+      right={true}
+      trigger={
+        <Button
+          onClick={[Function]}
+          size="default"
+        >
+          <ArrowDropDown />
+        </Button>
+      }
+    >
+      <div>
+        <_default
+          className="ActionItem"
+          onClick={[Function]}
+        />
+        <_default
+          className="ActionItem"
+          onClick={[Function]}
+        />
+        <hr
+          className="Divider"
+        />
+        <_default
+          className="ActionItem"
+        />
+      </div>
+    </Popover>
+  </div>
+</Button.Group>
+`;

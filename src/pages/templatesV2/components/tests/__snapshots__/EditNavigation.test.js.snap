@@ -12,14 +12,14 @@ exports[`EditNavigation renders navigation with primary area 1`] = `
       key="content"
       onClick={[Function]}
     >
-      Email Content
+      Content
     </UnstyledLink>
     <UnstyledLink
       className="NavigationLink"
       key="settings"
       onClick={[Function]}
     >
-      Template Settings
+      Settings
     </UnstyledLink>
   </div>
   <div

@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SaveDraft renders save draft action 1`] = `
+<div
+  className="Foo"
+>
+  <UnstyledLink
+    onClick={[Function]}
+  >
+    <FileEdit />
+      Save Draft
+  </UnstyledLink>
+</div>
+`;

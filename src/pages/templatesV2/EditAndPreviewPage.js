@@ -7,7 +7,7 @@ import links from './constants/editNavigationLinks';
 import useEditorContext from './hooks/useEditorContext';
 
 import { routeNamespace } from './constants/routes';
-import styles from './EditAndPreview.module.scss';
+import styles from './EditAndPreviewPage.module.scss';
 
 const EditAndPreviewPage = () => {
   const { currentNavigationIndex, draft, hasDraftFailedToLoad, isDraftLoading } = useEditorContext();

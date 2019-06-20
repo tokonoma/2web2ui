@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PublishedModeActions renders published actions 1`] = `
+<Button.Group>
+  <_default
+    className="Actions"
+  >
+    <Button
+      size="default"
+    >
+      <strong>
+        Edit Draft
+      </strong>
+    </Button>
+  </_default>
+  <div
+    className="Actions"
+  >
+    <Popover
+      bottom={true}
+      left={true}
+      right={true}
+      trigger={
+        <Button
+          size="default"
+        >
+          <ArrowDropDown />
+        </Button>
+      }
+    >
+      <div>
+        <_default
+          className="ActionItem"
+        />
+      </div>
+    </Popover>
+  </div>
+</Button.Group>
+`;

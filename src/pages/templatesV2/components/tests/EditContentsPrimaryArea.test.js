@@ -2,37 +2,22 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import useEditorContext from '../../hooks/useEditorContext';
 import EditContentsPrimaryArea from '../EditContentsPrimaryArea';
+import DraftModeActions from '../editorActions/DraftModeActions';
+import PublishedModeActions from '../editorActions/PublishedModeActions';
 
 jest.mock('../../hooks/useEditorContext');
 
 describe('EditContentsPrimaryArea', () => {
-  const subject = ({ editorState = {}} = {}) => {
-    useEditorContext.mockReturnValue(editorState);
-    return shallow(<EditContentsPrimaryArea />);
+  const subject = (editorState) => {
+    useEditorContext.mockReturnValue({ draft: { id: 'foo' }, ...editorState });
+    return shallow(<EditContentsPrimaryArea/>);
   };
 
-  it('renders save button', () => {
-    expect(subject()).toMatchSnapshot();
+  it('render published mode actions', () => {
+    expect(subject({ isPublishedMode: true }).equals(<PublishedModeActions />)).toBe(true);
   });
 
-  it('renders disabled save button', () => {
-    const wrapper = subject({ editorState: { isDraftUpdating: true }});
-    expect(wrapper).toHaveProp('disabled', true);
-  });
-
-  it('renders save button with pending label', () => {
-    const wrapper = subject({ editorState: { isDraftUpdating: true }});
-    expect(wrapper.children()).toHaveText('Saving');
-  });
-
-  it('calls updateDraft on click', () => {
-    const updateDraft = jest.fn();
-    const content = { html: '<h1>Test Content</h1>' };
-    const draft = { id: 'test-template', subaccount_id: '123' };
-    const wrapper = subject({ editorState: { content, draft, isDraftUpdating: true, updateDraft }});
-
-    wrapper.simulate('click');
-
-    expect(updateDraft).toHaveBeenCalledWith({ id: draft.id, content }, draft.subaccount_id);
+  it('render draft mode actions', () => {
+    expect(subject({ isPublishedMode: false }).equals(<DraftModeActions />)).toBe(true);
   });
 });
