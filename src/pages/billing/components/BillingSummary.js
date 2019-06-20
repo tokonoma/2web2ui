@@ -75,10 +75,13 @@ export default class BillingSummary extends Component {
       </Panel.Section>
     );
   };
+
   onRenewPlan = () => {
-    const { renewAccount } = this.props;
+    const { renewAccount, fetchAccount } = this.props;
     return renewAccount().then(() => {
-      showAlert({ type: 'error', message: 'Account Renewed' });
+      showAlert({ type: 'success', message: 'Account Renewed' });
+    }).then(() => {
+      fetchAccount();
     });
   }
 
@@ -122,7 +125,7 @@ export default class BillingSummary extends Component {
         <Panel accent title='Plan Overview'>
           <Panel.Section actions={changePlanActions}>
             <LabelledValue label="Your Plan">
-              <PlanSummary plan={account.subscription} />
+              <PlanSummary plan={account.subscription} pendingCancellation={pending_cancellation}/>
             </LabelledValue>
           </Panel.Section>
           {canPurchaseIps && this.renderDedicatedIpSummarySection()}

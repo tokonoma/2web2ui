@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { ApiErrorBanner, Loading, PageLink } from 'src/components';
+import { ApiErrorBanner, Loading } from 'src/components';
 import { cancelAccount } from 'src/actions/account';
-import { showAlert } from 'src/actions/globalAlert';
 import styles from './ImmediateChangePlanPage.module.scss';
 
 const BILLING_ROUTE = '/account/billing';
@@ -23,13 +22,6 @@ export class ImmediateCanelPlanPage extends Component {
     return this.handlePlanCancellation();
   }
 
-  redirectToBilling() {
-    const { history } = this.props;
-    history.push({
-      pathname: BILLING_ROUTE
-    });
-  }
-
   handlePlanCancellation = () => {
     const { cancelAccount } = this.props;
     this.setState({ loading: LOAD_STATE.PENDING });
@@ -42,10 +34,10 @@ export class ImmediateCanelPlanPage extends Component {
   }
 
   renderSuccess() {
-    return <div className={styles.MessageInnards}>
-      <h1>Your account has been cancelled</h1>
-      <PageLink to={BILLING_ROUTE}>Back to Billing</PageLink>
-    </div>;
+    const { history } = this.props;
+    history.push({
+      pathname: BILLING_ROUTE
+    });
   }
 
   renderError() {
@@ -73,8 +65,7 @@ export class ImmediateCanelPlanPage extends Component {
 }
 
 const mapDispatchToProps = {
-  cancelAccount,
-  showAlert
+  cancelAccount
 };
 
 export default withRouter(connect(null, mapDispatchToProps)(ImmediateCanelPlanPage));

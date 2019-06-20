@@ -1,5 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`PlanSummary renders pending cancellation date 1`] = `
+<Fragment>
+  <h6
+    className="Headline"
+  >
+    1,000
+     emails for 
+    $100 per month
+    <small>
+       to end 
+      Jun 20 2019
+    </small>
+  </h6>
+</Fragment>
+`;
+
 exports[`PlanSummary renders summary 1`] = `
 <Fragment>
   <h6

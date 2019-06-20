@@ -34,7 +34,7 @@ export class BillingSummaryPage extends Component {
   }
 
   render() {
-    const { loading, account, brightback, billingInfo, sendingIps, invoices, accountAgeInDays, hasRecipientValidation, renewAccount } = this.props;
+    const { loading, account, brightback, billingInfo, sendingIps, invoices, accountAgeInDays, hasRecipientValidation, renewAccount, fetchAccount } = this.props;
 
     if (loading) {
       return <Loading />;
@@ -46,6 +46,7 @@ export class BillingSummaryPage extends Component {
           <SuspendedForBilling condition={isSuspendedForBilling} account={account} />
           <ManuallyBilledBanner condition={not(isSelfServeBilling)} account={account} onZuoraPlan={billingInfo.onZuoraPlan} />
           <BillingSummary
+            fetchAccount={fetchAccount}
             brightback={brightback}
             condition={defaultCase}
             renewAccount={renewAccount}
@@ -62,10 +63,11 @@ export class BillingSummaryPage extends Component {
 }
 
 const mapStateToProps = (state) => {
-  const { account, loading } = selectAccountBilling(state);
+  const { loading } = selectAccountBilling(state);
+
   return ({
     loading: loading || state.billing.plansLoading || !state.account.subscription || state.brightback.loading,
-    account,
+    account: state.account,
     brightback: state.brightback,
     brightbackEnabled: configFlag('brightback.enabled')(),
     brightbackData: selectBrightbackData(state, { config: config.brightback.cancelConfig }),
