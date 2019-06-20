@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`PublishedModeActions renders published actions 1`] = `
-<div>
+<Button.Group>
   <_default
     className="Actions"
   >
@@ -35,5 +35,5 @@ exports[`PublishedModeActions renders published actions 1`] = `
       </div>
     </Popover>
   </div>
-</div>
+</Button.Group>
 `;

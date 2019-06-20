@@ -5,7 +5,7 @@ import styles from './Actions.module.scss';
 import EditDraft from './EditDraft';
 
 const PublishedModeActions = () => (
-  <div>
+  <Button.Group>
     <EditDraft className={styles.Actions}>
       <Button><strong>Edit Draft</strong></Button>
     </EditDraft>
@@ -20,7 +20,7 @@ const PublishedModeActions = () => (
         </div>
       </Popover>
     </div>
-  </div>
+  </Button.Group>
 );
 PublishedModeActions.displayName = 'PublishedModeActions';
 export default PublishedModeActions;

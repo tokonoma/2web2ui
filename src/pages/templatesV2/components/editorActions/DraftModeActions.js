@@ -9,7 +9,7 @@ import styles from './Actions.module.scss';
 export default () => {
   const [open, setOpen] = useState(false);
 
-  return (<div>
+  return (<Button.Group>
     <SaveAndPublish className={styles.Actions}>
       <Button><strong>Save and Publish</strong></Button>
     </SaveAndPublish>
@@ -28,7 +28,7 @@ export default () => {
         </div>
       </Popover>
     </div>
-  </div>
+  </Button.Group>
   );
 };
 
