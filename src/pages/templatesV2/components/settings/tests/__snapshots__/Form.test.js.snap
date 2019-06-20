@@ -1,5 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`SettingsForm Published version renders settings intro when draft does not exist 1`] = `
+<p
+  className="SettingsIntro"
+>
+  Template settings can only be changed in drafts. Simply select 'Save as Draft' in the top right to access the draft version, and adjust settings as needed.
+</p>
+`;
+
+exports[`SettingsForm Published version renders settings intro when draft exists 1`] = `
+<p
+  className="SettingsIntro"
+>
+  Template settings can only be changed in drafts. Simply select 'Edit Draft' in the top right to access the draft version, and adjust settings as needed.
+</p>
+`;
+
 exports[`SettingsForm renders without subaccounts 1`] = `
 <Fragment>
   <form

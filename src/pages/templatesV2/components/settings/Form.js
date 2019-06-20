@@ -29,12 +29,19 @@ export default class SettingsForm extends React.Component {
     showAlert({ message: 'Template deleted.', type: 'success' });
   };
 
+  renderPublishedIntro = () => {
+    const { hasDraft } = this.props;
+    return (<Panel.Section>
+      <p className={styles.SettingsIntro}>{`Template settings can only be changed in drafts. Simply select '${hasDraft ? 'Edit Draft' : 'Save as Draft'}' in the top right to access the draft version, and adjust settings as needed.`}</p>
+    </Panel.Section>);
+  }
   render() {
     const { handleSubmit, domainsLoading, domains, subaccountId, submitting, pristine, valid, hasSubaccounts, canViewSubaccount, isPublishedMode } = this.props;
     const canViewSubaccountSection = hasSubaccounts && canViewSubaccount;
     const fromEmailHelpText = !domainsLoading && !domains.length ? (subaccountId ? 'The selected subaccount does not have any verified sending domains.' : 'You do not have any verified sending domains to use.') : null;
 
     return (<>
+      {isPublishedMode && this.renderPublishedIntro()}
       <form onSubmit={handleSubmit(this.updateSettings)}>
         <Panel.Section>
           <Field

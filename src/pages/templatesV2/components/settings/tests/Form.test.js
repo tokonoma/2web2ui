@@ -33,14 +33,6 @@ describe('SettingsForm', () => {
     expect(subject({ hasSubaccounts: true, canViewSubaccount: true }).exists('SubaccountSection')).toBe(true);
   });
 
-  it('renders with fields disabled in published mode', () => {
-    const wrapper = subject({ hasSubaccounts: true, canViewSubaccount: true, isPublishedMode: true });
-    const fieldProps = wrapper.find('Field').map((field) => field.prop('disabled'));
-    expect(fieldProps.length).toEqual(10);
-    expect(every(fieldProps)).toBe(true);
-    expect(wrapper.find('SubaccountSection').prop('disabled')).toBe(true);
-  });
-
   it('renders From Email help text with no verified domains', () => {
     const wrapper = subject({ domains: []});
     expect(wrapper.find('[name="content.from.email"]').prop('helpText'))
@@ -55,6 +47,24 @@ describe('SettingsForm', () => {
 
   it('renders id field disabled', () => {
     expect(subject().find('[name="id"]').prop('disabled')).toBe(true);
+  });
+
+  describe('Published version', () => {
+    it('renders with fields disabled', () => {
+      const wrapper = subject({ hasSubaccounts: true, canViewSubaccount: true, isPublishedMode: true });
+      const fieldProps = wrapper.find('Field').map((field) => field.prop('disabled'));
+      expect(fieldProps.length).toEqual(10);
+      expect(every(fieldProps)).toBe(true);
+      expect(wrapper.find('SubaccountSection').prop('disabled')).toBe(true);
+    });
+
+    it('renders settings intro when draft does not exist', () => {
+      expect(subject({ hasDraft: false, isPublishedMode: true }).find('[className="SettingsIntro"]')).toMatchSnapshot();
+    });
+
+    it('renders settings intro when draft exists', () => {
+      expect(subject({ hasDraft: true, isPublishedMode: true }).find('[className="SettingsIntro"]')).toMatchSnapshot();
+    });
   });
 
   describe('parseToggle', () => {
