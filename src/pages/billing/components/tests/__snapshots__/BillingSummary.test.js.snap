@@ -88,6 +88,7 @@ Array [
       label="Your Plan"
     >
       <PlanSummary
+        pendingCancellation={Object {}}
         plan={
           Object {
             "plan_volume": 15000,

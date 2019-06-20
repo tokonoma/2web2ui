@@ -33,6 +33,14 @@ exports[`Page: BillingSummaryPage should render correctly when not loading 1`] =
       }
       accountAgeInDays={5}
       condition={[Function]}
+      fetchAccount={
+        [MockFunction] {
+          "calls": Array [
+            Array [],
+          ],
+          "results": undefined,
+        }
+      }
       onZuoraPlan={true}
       sendingIps={
         Object {
