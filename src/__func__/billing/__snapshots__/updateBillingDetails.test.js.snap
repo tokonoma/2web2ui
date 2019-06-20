@@ -82,61 +82,6 @@ Array [
       },
       "method": "get",
       "params": Object {
-        "delimiter": ",",
-        "from": "2019-06-12T15:32",
-        "metrics": "count_sent,count_unique_confirmed_opened_approx,count_accepted",
-        "precision": "day",
-        "timezone": "America/New_York",
-        "to": "2019-06-19T15:32",
-      },
-      "responseType": "json",
-      "url": "/v1/metrics/deliverability",
-    },
-  ],
-  Array [
-    Object {
-      "data": Object {
-        "account": Object {
-          "company_domain": "example.com",
-          "company_name": null,
-          "created_at": 1523588868627,
-          "internal_id": undefined,
-          "value": 21,
-        },
-        "app_id": "bAJDEmD5EK",
-        "cancel_confirmation_url": "http://phoenix.test/account/billing/plan/cancel",
-        "context": Object {
-          "locale": "en-US",
-          "referrer": "",
-          "timezone": "America/New_York",
-          "url": "http://phoenix.test/",
-          "user_agent": "node.js",
-        },
-        "custom": Object {
-          "activity": Object {
-            "emails": 101,
-            "open_rate": 24,
-          },
-        },
-        "email": "test-email@example.com",
-        "save_return_url": "http://phoenix.test/account/billing",
-        "timestamp": "2019-06-19T19:32:28.830Z",
-      },
-      "headers": undefined,
-      "method": "post",
-      "params": undefined,
-      "responseType": "json",
-      "url": "/precancel",
-    },
-  ],
-  Array [
-    Object {
-      "data": undefined,
-      "headers": Object {
-        "Authorization": "mock-access-token",
-      },
-      "method": "get",
-      "params": Object {
         "filter": "billing",
       },
       "responseType": "json",

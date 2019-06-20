@@ -41,7 +41,10 @@ const testConfig = {
       }
     }
   },
-  tenantId: 'test'
+  tenantId: 'test',
+  brightback: {
+    enabled: false
+  }
 };
 
 export default testConfig;
