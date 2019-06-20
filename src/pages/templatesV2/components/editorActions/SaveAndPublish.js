@@ -14,7 +14,7 @@ export default ({ className, onClick = noop, children, ...props }) => {
 
   const onConfirm = useCallback(() => publishDraft({ id: draft.id, content }, draft.subaccount_id)
     .then(() => {
-      history.push(`/${routeNamespace}/edit/${draft.id}/published${setSubaccountQuery(draft.subaccount_id)}`);
+      history.push(`/${routeNamespace}/edit/${draft.id}/published/content${setSubaccountQuery(draft.subaccount_id)}`);
     }), [content, draft.id, draft.subaccount_id, history, publishDraft]);
 
   /*

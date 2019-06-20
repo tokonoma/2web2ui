@@ -10,7 +10,7 @@ export default ({ className, children }) => {
   const { draft, history } = useEditorContext();
 
   const onClick = () => {
-    history.push(`/${routeNamespace}/edit/${draft.id}${setSubaccountQuery(draft.subaccount_id)}`);
+    history.push(`/${routeNamespace}/edit/${draft.id}/draft/content${setSubaccountQuery(draft.subaccount_id)}`);
   };
 
   return (<div className={className}>

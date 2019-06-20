@@ -54,7 +54,7 @@ describe('SaveAndPublish', () => {
     const wrapper = subject({ history: { push }, publishDraft });
     await wrapper.find('ConfirmationModal').prop('onConfirm')(); //invoke attached func
     expect(publishDraft).toHaveBeenCalled();
-    expect(push).toHaveBeenCalledWith('/templatesv2/edit/foo/published');
+    expect(push).toHaveBeenCalledWith('/templatesv2/edit/foo/published/content');
   });
 
   it('redirects to published path with subaccount upon publishing', async () => {
@@ -63,7 +63,7 @@ describe('SaveAndPublish', () => {
     const wrapper = subject({ history: { push }, publishDraft, draft: { id: 'foo', subaccount_id: 101 }});
     await wrapper.find('ConfirmationModal').prop('onConfirm')(); //invoke attached func
     expect(publishDraft).toHaveBeenCalled();
-    expect(push).toHaveBeenCalledWith('/templatesv2/edit/foo/published?subaccount=101');
+    expect(push).toHaveBeenCalledWith('/templatesv2/edit/foo/published/content?subaccount=101');
   });
 
 });
