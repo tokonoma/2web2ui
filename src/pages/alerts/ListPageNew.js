@@ -32,11 +32,10 @@ export class ListPageNew extends Component {
 
   getRecentlyTriggeredAlerts = () => {
     const { alerts } = this.props;
-    const orderedArray = alerts
+    return alerts
       .filter((alert) => alert.last_triggered !== null) //Remove any alert that has never triggered
-      .sort((a, b) => (a.last_triggered > b.last_triggered) ? -1 : 1) //Sorts by last triggered date, descending
+      .sort((a, b) => (a.last_triggered.timestamp > b.last_triggered.timestamp)) //Sorts by last triggered date, descending
       .slice(0,4);
-    return orderedArray;
   }
 
   handleDelete = () => {
@@ -75,7 +74,9 @@ export class ListPageNew extends Component {
           accent
         >
           <Panel.Section className = {styles.LastTriggeredCard}>
-            <div className = {styles.LastTriggeredTime} ><DisplayDate timestamp={alert.last_triggered} formattedDate={alert.formattedDate} /></div>
+            <div className = {styles.LastTriggeredTime} >
+              <DisplayDate timestamp={alert.last_triggered_timestamp} formattedDate={alert.last_triggered_formatted} />
+            </div>
             <h3>{alert.name}</h3>
           </Panel.Section>
 

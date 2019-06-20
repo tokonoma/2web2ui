@@ -25,7 +25,7 @@ class AlertCollectionNew extends Component {
     const columns = [
       { label: 'Alert Name', sortKey: 'name', width: '40%', className: styles.TabbedCellHeader },
       { label: 'Metric', sortKey: 'metric' },
-      { label: 'Last Triggered', sortKey: 'sortKey' },
+      { label: 'Last Triggered', sortKey: 'last_triggered_timestamp' },
       { label: 'Status', sortKey: 'muted' },
       null
     ];
@@ -33,14 +33,14 @@ class AlertCollectionNew extends Component {
     return columns;
   }
 
-  getRowData = ({ metric, muted, id, name, last_triggered, formattedDate }) => {
+  getRowData = ({ metric, muted, id, name, last_triggered_timestamp, last_triggered_formatted }) => {
     const deleteFn = () => this.props.handleDelete({ id, name });
     return [
       <div className = {styles.TabbedCellBody}>
         <PageLink to={this.getDetailsLink({ id })}>{name}</PageLink>
       </div>,
       <Tag>{_.get(METRICS, metric, metric)}</Tag>,
-      <DisplayDate timestamp={last_triggered} formattedDate={formattedDate} />,
+      <DisplayDate timestamp={last_triggered_timestamp} formattedDate={last_triggered_formatted || 'Never Triggered'} />,
       <AlertToggle muted={muted} id={id} />,
       <Button flat onClick = {deleteFn}><Delete className = {styles.Icon}/></Button>
     ];
@@ -65,7 +65,7 @@ class AlertCollectionNew extends Component {
         getRowData={this.getRowData}
         pagination={true}
         filterBox={filterBoxConfig}
-        defaultSortColumn='sortKey'
+        defaultSortColumn='last_triggered_timestamp'
         defaultSortDirection='desc'
       >
         {
