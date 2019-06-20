@@ -23,7 +23,7 @@ export class SingleAddressForm extends Component {
         <Panel.Section>
           <form onSubmit={handleSubmit(this.singleAddressForm)}>
             <div className={styles.Header}>Validate a Single Address</div>
-            <p className={styles.Paragraph}>Enter the email address below you would like to validate.</p>
+            <p className={styles.Subheader}>Enter the email address below you would like to validate.</p>
             <div className={styles.Field}>
               <Field
                 style={{ height: '3.2rem', paddingLeft: '1.5em', fontSize: '.9em' }}
