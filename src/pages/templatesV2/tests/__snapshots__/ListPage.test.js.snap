@@ -30,9 +30,9 @@ exports[`ListPage renders correctly 1`] = `
     columns={
       Array [
         Object {
-          "key": "name",
+          "key": "list_name",
           "label": "Template Name",
-          "sortKey": "name",
+          "sortKey": "list_name",
         },
         Object {
           "key": "status",

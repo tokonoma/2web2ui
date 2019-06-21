@@ -42,10 +42,10 @@ export default class ListPage extends Component {
         component: Name,
         header: {
           label: 'Template Name',
-          sortKey: 'name'
+          sortKey: 'list_name'
         },
         visible: true,
-        key: 'name'
+        key: 'list_name'
       },
       {
         component: Status,

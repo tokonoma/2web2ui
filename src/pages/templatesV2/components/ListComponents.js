@@ -8,7 +8,7 @@ import styles from './ListComponents.module.scss';
 
 import { routeNamespace } from '../constants/routes';
 
-export const Name = ({ name, id, subaccount_id, ...rowData }) => {
+export const Name = ({ list_name: name, id, subaccount_id, ...rowData }) => {
   const version = rowData.list_status === 'draft' ? 'draft' : 'published';
 
   return (

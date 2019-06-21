@@ -90,10 +90,10 @@ export const selectTemplatesForListTable = createSelector(
       const hasDraft = template.has_draft;
 
       if (hasPublished) {
-        templatesForListing.push({ ...template, list_status: hasDraft ? 'published_with_draft' : 'published' });
+        templatesForListing.push({ ...template, list_name: template.name, list_status: hasDraft ? 'published_with_draft' : 'published' });
       }
       if (hasDraft) {
-        templatesForListing.push({ ...template, name: hasPublished ? `${template.name} (DRAFT)` : template.name, list_status: 'draft' });
+        templatesForListing.push({ ...template, list_name: hasPublished ? `${template.name} (DRAFT)` : template.name, list_status: 'draft' });
       }
     });
     return templatesForListing;

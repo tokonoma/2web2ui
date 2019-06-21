@@ -7,7 +7,7 @@ describe('Template List Components', () => {
 
   describe('Name', () => {
     beforeEach(() => {
-      const props = { name: 'template name', id: 'id-123', subaccount_id: 123, list_status: 'draft' };
+      const props = { name: 'template name', list_name: 'template name', id: 'id-123', subaccount_id: 123, list_status: 'draft' };
       wrapper = shallow(<Name {...props} />);
     });
 
