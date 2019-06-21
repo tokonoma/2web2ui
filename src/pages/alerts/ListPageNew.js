@@ -73,10 +73,10 @@ export class ListPageNew extends Component {
                   <h3>{alert.name}</h3>
                 </Panel.Section>
                 <Panel.Section className = {styles.Footer}>
-                  <Button flat to = {'/alerts-new'/*TODO replace this link*/}><RemoveRedEye className = {styles.Icon}/></Button>
+                  <Button flat to = {'/alerts-new'}><RemoveRedEye className = {styles.Icon}/></Button>
                 </Panel.Section>
               </Panel>
-            </Grid.Column>))};
+            </Grid.Column>))}
         </Grid>
         </>);
   }

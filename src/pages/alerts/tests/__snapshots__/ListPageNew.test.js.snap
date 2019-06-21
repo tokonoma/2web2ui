@@ -141,7 +141,6 @@ exports[`Page: Alerts List should render happy path 1`] = `
         </Panel.Section>
       </Panel>
     </Grid.Column>
-    ;
   </Grid>
   <AlertCollectionNew
     alerts={
