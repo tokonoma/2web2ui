@@ -40,7 +40,7 @@ exports[`Component: RoleRadioGroup should render the RadioGroup 1`] = `
         "label": <strong>
           Templates
         </strong>,
-        "value": "email",
+        "value": "templates",
       },
       Object {
         "children": false,
