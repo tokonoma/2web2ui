@@ -28,10 +28,15 @@ exports[`PublishedModeActions renders published actions 1`] = `
         </Button>
       }
     >
-      <div>
+      <div
+        className="ActionsBody"
+      >
         <_default
           className="ActionItem"
-        />
+        >
+          <FileEdit />
+          Edit Draft
+        </_default>
       </div>
     </Popover>
   </div>
