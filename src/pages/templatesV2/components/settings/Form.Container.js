@@ -15,16 +15,20 @@ import { selectSubaccountFromQuery } from '../../../../selectors/subaccounts';
 
 const formName = 'templateSettings';
 
-const mapStateToProps = (state, props) => ({
-  domains: selectDomainsBySubaccount(state, props),
-  domainsLoading: state.sendingDomains.listLoading,
-  hasSubaccounts: hasSubaccounts(state),
-  canViewSubaccount: selectCondition(not(isSubaccountUser))(state),
-  initialValues: {
-    ...props.draft,
-    subaccount: selectSubaccountFromQuery(state, props)
-  }
-});
+const mapStateToProps = (state, props) => {
+  const activeVersion = props.isPublishedMode ? props.published : props.draft;
+
+  return {
+    domains: selectDomainsBySubaccount(state, props),
+    domainsLoading: state.sendingDomains.listLoading,
+    hasSubaccounts: hasSubaccounts(state),
+    canViewSubaccount: selectCondition(not(isSubaccountUser))(state),
+    initialValues: {
+      ...activeVersion,
+      subaccount: selectSubaccountFromQuery(state, props)
+    }
+  };
+};
 
 const formOptions = {
   form: formName,
