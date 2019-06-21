@@ -10,7 +10,7 @@ Array [
     "username": "ape",
   },
   Object {
-    "access": "email",
+    "access": "templates",
     "isCurrentUser": true,
     "name": "Zebra",
     "roleLabel": "Templates",
