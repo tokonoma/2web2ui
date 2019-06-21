@@ -5,7 +5,6 @@ import { routeNamespace } from '../../constants/routes';
 import { UnstyledLink } from '@sparkpost/matchbox';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
 
-
 export default ({ className }) => {
   const { draft, history } = useEditorContext();
 
@@ -13,7 +12,7 @@ export default ({ className }) => {
 
   return (<div className={className}>
     <UnstyledLink onClick={() => history.push(publishedPath)}>
-      <RemoveRedEye/>&nbsp;&nbsp;View Published
+      <RemoveRedEye/>View Published
     </UnstyledLink>
   </div>);
 

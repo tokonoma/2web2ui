@@ -17,7 +17,7 @@ export default ({ className, onClick }) => {
 
   return (<div className={className}>
     <UnstyledLink onClick={handleClick}>
-      <FileEdit/>&nbsp;&nbsp;Save Draft
+      <FileEdit/>Save Draft
     </UnstyledLink>
   </div>);
 

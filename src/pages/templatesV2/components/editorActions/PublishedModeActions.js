@@ -1,13 +1,17 @@
 import React from 'react';
 import { Button, Popover } from '@sparkpost/matchbox';
-import { ArrowDropDown } from '@sparkpost/matchbox-icons';
+import { ArrowDropDown, FileEdit } from '@sparkpost/matchbox-icons';
 import styles from './Actions.module.scss';
 import EditDraft from './EditDraft';
+import useEditorContext from '../../hooks/useEditorContext';
 
-const PublishedModeActions = () => (
-  <Button.Group>
+const PublishedModeActions = () => {
+  const { hasDraft } = useEditorContext();
+  const draftText = hasDraft ? 'Edit Draft' : 'Save as Draft';
+
+  return (<Button.Group>
     <EditDraft className={styles.Actions}>
-      <Button><strong>Edit Draft</strong></Button>
+      <Button><strong>{draftText}</strong></Button>
     </EditDraft>
 
     <div className={styles.Actions}>
@@ -15,12 +19,14 @@ const PublishedModeActions = () => (
         left={true}
         trigger={<Button><ArrowDropDown/></Button>}
       >
-        <div>
-          <EditDraft className={styles.ActionItem}/>
+        <div className={styles.ActionsBody}>
+          <EditDraft className={styles.ActionItem}>
+            <FileEdit/>{draftText}
+          </EditDraft>
         </div>
       </Popover>
     </div>
-  </Button.Group>
-);
+  </Button.Group>);
+};
 PublishedModeActions.displayName = 'PublishedModeActions';
 export default PublishedModeActions;

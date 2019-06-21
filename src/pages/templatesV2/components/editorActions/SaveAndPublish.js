@@ -10,12 +10,12 @@ import { CheckCircleOutline } from '@sparkpost/matchbox-icons';
 
 export default ({ className, onClick = noop, children, ...props }) => {
   const [open, setOpen] = useState(false);
-  const { draft, content, publishDraft, isDraftPublishing, history } = useEditorContext();
+  const { draft, publishDraft, isDraftPublishing, history } = useEditorContext();
 
-  const onConfirm = useCallback(() => publishDraft({ id: draft.id, content }, draft.subaccount_id)
+  const onConfirm = useCallback(() => publishDraft(draft, draft.subaccount_id)
     .then(() => {
       history.push(`/${routeNamespace}/edit/${draft.id}/published/content${setSubaccountQuery(draft.subaccount_id)}`);
-    }), [content, draft.id, draft.subaccount_id, history, publishDraft]);
+    }), [draft, history, publishDraft]);
 
   /*
   hiding popover makes modal hidden too, so it's invoking onClick when modal is being closed.
@@ -31,7 +31,7 @@ export default ({ className, onClick = noop, children, ...props }) => {
 
   return <div className={className}>
     {children && <UnstyledLink onClick={showModal}>{children}</UnstyledLink>}
-    {!children && <UnstyledLink onClick={showModal}><CheckCircleOutline/>&nbsp;&nbsp;Save and Publish</UnstyledLink>}
+    {!children && <UnstyledLink onClick={showModal}><CheckCircleOutline/>Save and Publish</UnstyledLink>}
     <ConfirmationModal
       title='Are you sure you want to publish your template?'
       content={<p>Once published, your template will be available for use in email campaigns and A/B tests.</p>}

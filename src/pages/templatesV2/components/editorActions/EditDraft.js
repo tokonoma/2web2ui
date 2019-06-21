@@ -1,5 +1,4 @@
 import React from 'react';
-import { FileEdit } from '@sparkpost/matchbox-icons';
 import useEditorContext from '../../hooks/useEditorContext';
 import { routeNamespace } from '../../constants/routes';
 import { UnstyledLink } from '@sparkpost/matchbox';
@@ -14,8 +13,7 @@ export default ({ className, children }) => {
   };
 
   return (<div className={className}>
-    {children && <UnstyledLink onClick={onClick}>{children}</UnstyledLink>}
-    {!children && <UnstyledLink onClick={onClick}><FileEdit/>&nbsp;&nbsp;Edit Draft</UnstyledLink>}
+    <UnstyledLink onClick={onClick}>{children}</UnstyledLink>
   </div>);
 
 };
