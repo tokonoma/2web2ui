@@ -28,19 +28,54 @@ describe('useEditorContent', () => {
     expect(content).toEqual({ html: '<h1>Test</h1>', text: 'Test' });
   });
 
-  it('merges updated content', () => {
-    const wrapper = useTestWrapper({
-      draft: {
-        content: { html: '<h1>Test</h1>', text: 'Test' }
-      }
+  describe('setContent', () => {
+    let draft;
+    let published;
+    beforeEach(() => {
+      draft = {
+        content: {
+          html: '<h1>Draft HTML</h1>',
+          text: 'Draft Text'
+        }
+      };
+
+      published = {
+        content: {
+          html: '<h1>Published HTML</h1>',
+          text: 'Published Text'
+        }
+      };
     });
 
-    act(() => {
-      useHook(wrapper).setContent({ html: '<h1>Updated!</h1>' });
+    it('merges draft content', () => {
+      const wrapper = useTestWrapper({
+        isPublishedMode: false,
+        draft,
+        published
+      });
+
+      act(() => {
+        useHook(wrapper).setContent({ html: '<h1>Draft HTML Updated!</h1>' });
+      });
+
+      const { content } = useHook(wrapper);
+      expect(content).toEqual({ html: '<h1>Draft HTML Updated!</h1>', text: 'Draft Text' });
     });
 
-    const { content } = useHook(wrapper);
+    it('does not allow merging published content', () => {
+      const wrapper = useTestWrapper({
+        isPublishedMode: true,
+        draft,
+        published
+      });
 
-    expect(content).toEqual({ html: '<h1>Updated!</h1>', text: 'Test' });
+      act(() => {
+        useHook(wrapper).setContent({ html: '<h1>Published HTML Updated!</h1>' });
+      });
+
+      const { content } = useHook(wrapper);
+      expect(content).toEqual({ html: '<h1>Published HTML</h1>', text: 'Published Text' });
+    });
   });
+
 });
