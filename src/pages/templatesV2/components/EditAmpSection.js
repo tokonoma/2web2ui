@@ -4,7 +4,7 @@ import Editor from './Editor';
 import 'brace/mode/html';
 
 const EditAmpSection = () => {
-  const { content, setContent } = useEditorContext();
+  const { content, setContent, isPublishedMode } = useEditorContext();
 
   return (
     <Editor
@@ -12,6 +12,7 @@ const EditAmpSection = () => {
       name="amp-html-content-editor"
       onChange={(value) => { setContent({ amp_html: value }); }}
       value={content.amp_html}
+      readOnly={isPublishedMode}
     />
   );
 };

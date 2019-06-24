@@ -4,7 +4,6 @@ import { getDraft, getPreview, getPublished, update as updateDraft, publish as p
 import { list as listDomains } from 'src/actions/sendingDomains';
 import { list as listSubaccounts } from 'src/actions/subaccounts';
 
-
 import {
   selectDraftTemplate,
   selectDraftTemplatePreview,
@@ -24,12 +23,17 @@ const mapStateToProps = (state, props) => {
   const id = props.match.params.id;
   const draft = selectDraftTemplate(state, id);
   const published = selectPublishedTemplate(state, id);
-  const isPublishedMode = props.match.params.navKey === 'published';
+  const isPublishedMode = props.match.params.version === 'published';
+  const draftOrPublished = draft || published;
+  const hasDraft = draftOrPublished && draftOrPublished.has_draft;
+  const hasPublished = draftOrPublished && draftOrPublished.has_published;
 
   return {
     draft,
     published,
     isPublishedMode,
+    hasDraft,
+    hasPublished,
     hasDraftFailedToLoad: Boolean(state.templates.getDraftError),
     hasFailedToPreview: Boolean(state.templates.contentPreview.error),
     isDraftLoading: !draft || Boolean(state.templates.getDraftLoading),

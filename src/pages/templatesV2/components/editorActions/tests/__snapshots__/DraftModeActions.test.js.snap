@@ -31,7 +31,9 @@ exports[`DraftModeActions renders draft actions 1`] = `
         </Button>
       }
     >
-      <div>
+      <div
+        className="ActionsBody"
+      >
         <_default
           className="ActionItem"
           onClick={[Function]}

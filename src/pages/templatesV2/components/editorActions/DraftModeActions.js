@@ -5,8 +5,10 @@ import SaveAndPublish from './SaveAndPublish';
 import ViewPublished from './ViewPublished';
 import SaveDraft from './SaveDraft';
 import styles from './Actions.module.scss';
+import useEditorContext from '../../hooks/useEditorContext';
 
 export default () => {
+  const { hasPublished } = useEditorContext();
   const [open, setOpen] = useState(false);
 
   return (<Button.Group>
@@ -20,11 +22,15 @@ export default () => {
         onClose={() => setOpen(false)}
         trigger={<Button onClick={() => setOpen(true)}><ArrowDropDown/></Button>}
       >
-        <div>
+        <div className={styles.ActionsBody}>
           <SaveAndPublish className={styles.ActionItem} onClick={() => setOpen(false)}/>
           <SaveDraft className={styles.ActionItem} onClick={() => setOpen(false)}/>
-          <hr className={styles.Divider}/>
-          <ViewPublished className={styles.ActionItem}/>
+          {hasPublished &&
+            <>
+              <hr className={styles.Divider}/>
+              <ViewPublished className={styles.ActionItem}/>
+            </>
+          }
         </div>
       </Popover>
     </div>

@@ -29,13 +29,13 @@ describe('EditDraft', () => {
     const push = jest.fn();
     const wrapper = subject({ history: { push }});
     wrapper.find('UnstyledLink').simulate('click');
-    expect(push).toHaveBeenCalledWith('/templatesv2/edit/foo');
+    expect(push).toHaveBeenCalledWith('/templatesv2/edit/foo/draft/content');
   });
 
   it('routes to draft path with subaccount on click', () => {
     const push = jest.fn();
     const wrapper = subject({ history: { push }, draft: { id: 'foo', subaccount_id: 101 }});
     wrapper.find('UnstyledLink').simulate('click');
-    expect(push).toHaveBeenCalledWith('/templatesv2/edit/foo?subaccount=101');
+    expect(push).toHaveBeenCalledWith('/templatesv2/edit/foo/draft/content?subaccount=101');
   });
 });

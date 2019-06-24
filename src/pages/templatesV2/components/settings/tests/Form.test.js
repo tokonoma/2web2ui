@@ -1,5 +1,6 @@
 import { shallow } from 'enzyme';
 import React from 'react';
+import every from 'lodash/every';
 import SettingsForm from '../Form';
 
 jest.mock('../../DeleteTemplate');
@@ -14,6 +15,7 @@ describe('SettingsForm', () => {
       domainsLoading: false,
       hasSubaccounts: false,
       canViewSubaccount: false,
+      isPublishedMode: false,
       handleSubmit: jest.fn((func) => func),
       showAlert: jest.fn()
     };
@@ -45,6 +47,24 @@ describe('SettingsForm', () => {
 
   it('renders id field disabled', () => {
     expect(subject().find('[name="id"]').prop('disabled')).toBe(true);
+  });
+
+  describe('Published version', () => {
+    it('renders with fields disabled', () => {
+      const wrapper = subject({ hasSubaccounts: true, canViewSubaccount: true, isPublishedMode: true });
+      const fieldProps = wrapper.find('Field').map((field) => field.prop('disabled'));
+      expect(fieldProps.length).toEqual(10);
+      expect(every(fieldProps)).toBe(true);
+      expect(wrapper.find('SubaccountSection').prop('disabled')).toBe(true);
+    });
+
+    it('renders settings intro when draft does not exist', () => {
+      expect(subject({ hasDraft: false, isPublishedMode: true }).find('[className="SettingsIntro"]')).toMatchSnapshot();
+    });
+
+    it('renders settings intro when draft exists', () => {
+      expect(subject({ hasDraft: true, isPublishedMode: true }).find('[className="SettingsIntro"]')).toMatchSnapshot();
+    });
   });
 
   describe('parseToggle', () => {

@@ -8,14 +8,14 @@ import styles from './ListComponents.module.scss';
 
 import { routeNamespace } from '../constants/routes';
 
-export const Name = ({ name, id, subaccount_id, ...rowData }) => {
-  const isDraft = rowData.list_status === 'draft';
+export const Name = ({ list_name: name, id, subaccount_id, ...rowData }) => {
+  const version = rowData.list_status === 'draft' ? 'draft' : 'published';
 
   return (
     <>
       <p className={styles.Name}>
         <Link
-          to={`/${routeNamespace}/edit/${id}${isDraft ? '' : '/published'}${setSubaccountQuery(subaccount_id)}`}>
+          to={`/${routeNamespace}/edit/${id}/${version}/content${setSubaccountQuery(subaccount_id)}`}>
           <strong>{name}</strong>
         </Link>
       </p>

@@ -1,3 +1,5 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
 .EditorNav {
   position: fixed;
   width: 100%;
@@ -7,4 +9,25 @@
 
 .MainContent {
   margin-top: 60px;
+}
+
+.GreenColor {
+  color: #44D09E;
+}
+
+.Status {
+  display: flex;
+  align-items: center;
+
+  * {
+    line-height: 100%;
+  }
+
+  svg {
+    margin-left: spacing(small);
+  }
+
+  span {
+    text-transform: uppercase;
+  }
 }

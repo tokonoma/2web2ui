@@ -11,16 +11,24 @@ import { withRouter } from 'react-router-dom';
 import { update as updateTemplate } from 'src/actions/templates';
 import { reduxForm } from 'redux-form';
 import { showAlert } from 'src/actions/globalAlert';
+import { selectSubaccountFromQuery } from '../../../../selectors/subaccounts';
 
 const formName = 'templateSettings';
 
-const mapStateToProps = (state, props) => ({
-  domains: selectDomainsBySubaccount(state, props),
-  domainsLoading: state.sendingDomains.listLoading,
-  hasSubaccounts: hasSubaccounts(state),
-  canViewSubaccount: selectCondition(not(isSubaccountUser))(state),
-  initialValues: props.draft
-});
+const mapStateToProps = (state, props) => {
+  const activeVersion = props.isPublishedMode ? props.published : props.draft;
+
+  return {
+    domains: selectDomainsBySubaccount(state, props),
+    domainsLoading: state.sendingDomains.listLoading,
+    hasSubaccounts: hasSubaccounts(state),
+    canViewSubaccount: selectCondition(not(isSubaccountUser))(state),
+    initialValues: {
+      ...activeVersion,
+      subaccount: selectSubaccountFromQuery(state, props)
+    }
+  };
+};
 
 const formOptions = {
   form: formName,

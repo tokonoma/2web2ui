@@ -7,7 +7,7 @@ describe('Template List Components', () => {
 
   describe('Name', () => {
     beforeEach(() => {
-      const props = { name: 'template name', id: 'id-123', subaccount_id: 123, list_status: 'draft' };
+      const props = { name: 'template name', list_name: 'template name', id: 'id-123', subaccount_id: 123, list_status: 'draft' };
       wrapper = shallow(<Name {...props} />);
     });
 
@@ -17,7 +17,7 @@ describe('Template List Components', () => {
 
     it('should navigate to published page if template is published', () => {
       wrapper.setProps({ list_status: 'published' });
-      expect(wrapper.find('Link').props().to).toEqual('/templatesv2/edit/id-123/published?subaccount=123');
+      expect(wrapper.find('Link').props().to).toEqual('/templatesv2/edit/id-123/published/content?subaccount=123');
     });
   });
 
