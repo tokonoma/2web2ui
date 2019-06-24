@@ -28,7 +28,7 @@ export const ApiIntegrationDocs = () => {
     <div className={styles.SampleRequest}>
       <small>
         <span className={styles.Method}>GET</span>
-        <code>/api/v1/recipient-validatioin/single/{'{'}address{'}'}</code>
+        <code>/api/v1/recipient-validation/single/{'{'}address{'}'}</code>
       </small>
     </div>
   );

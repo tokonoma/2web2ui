@@ -6,33 +6,53 @@ exports[`SingleAddressForm renders correctly 1`] = `
     <form
       onSubmit={[Function]}
     >
-      <p>
-        Validate an email address to determine if it is a deliverable email address or a rejected, undeliverable email address.
+      <div
+        className="Header"
+      >
+        Validate a Single Address
+      </div>
+      <p
+        className="Subheader"
+      >
+        Enter the email address below you would like to validate.
       </p>
-      <Field
-        component={[Function]}
-        connectRight={
-          <Button
-            disabled={true}
-            primary={true}
-            size="default"
-            submit={true}
-          >
-            Validate
-          </Button>
-        }
-        label="Email address"
-        name="address"
-        normalize={[Function]}
-        placeholder="eg. example@mail.com"
-        validate={
-          Array [
-            [Function],
-            [Function],
-            [Function],
-          ]
-        }
-      />
+      <div
+        className="Field"
+      >
+        <Field
+          component={[Function]}
+          name="address"
+          normalize={[Function]}
+          placeholder="harry.potter@hogwarts.edu"
+          style={
+            Object {
+              "fontSize": ".9em",
+              "height": "3.2rem",
+              "paddingLeft": "1.5em",
+            }
+          }
+          validate={
+            Array [
+              [Function],
+              [Function],
+              [Function],
+            ]
+          }
+        />
+      </div>
+      <div
+        className="Submit"
+      >
+        <Button
+          disabled={true}
+          fullWidth={true}
+          primary={true}
+          size="large"
+          submit={true}
+        >
+          Validate
+        </Button>
+      </div>
     </form>
   </Panel.Section>
 </Fragment>
@@ -44,33 +64,53 @@ exports[`SingleAddressForm should disable form elements on submit 1`] = `
     <form
       onSubmit={[Function]}
     >
-      <p>
-        Validate an email address to determine if it is a deliverable email address or a rejected, undeliverable email address.
+      <div
+        className="Header"
+      >
+        Validate a Single Address
+      </div>
+      <p
+        className="Subheader"
+      >
+        Enter the email address below you would like to validate.
       </p>
-      <Field
-        component={[Function]}
-        connectRight={
-          <Button
-            disabled={true}
-            primary={true}
-            size="default"
-            submit={true}
-          >
-            Validating...
-          </Button>
-        }
-        label="Email address"
-        name="address"
-        normalize={[Function]}
-        placeholder="eg. example@mail.com"
-        validate={
-          Array [
-            [Function],
-            [Function],
-            [Function],
-          ]
-        }
-      />
+      <div
+        className="Field"
+      >
+        <Field
+          component={[Function]}
+          name="address"
+          normalize={[Function]}
+          placeholder="harry.potter@hogwarts.edu"
+          style={
+            Object {
+              "fontSize": ".9em",
+              "height": "3.2rem",
+              "paddingLeft": "1.5em",
+            }
+          }
+          validate={
+            Array [
+              [Function],
+              [Function],
+              [Function],
+            ]
+          }
+        />
+      </div>
+      <div
+        className="Submit"
+      >
+        <Button
+          disabled={true}
+          fullWidth={true}
+          primary={true}
+          size="large"
+          submit={true}
+        >
+          Validating...
+        </Button>
+      </div>
     </form>
   </Panel.Section>
 </Fragment>
