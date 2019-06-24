@@ -72,6 +72,72 @@ Array [
 ]
 `;
 
+exports[`Component: Billing Summary render disabled renew when attempting to renew account 1`] = `
+Array [
+  <Panel.Section
+    actions={
+      Array [
+        Object {
+          "color": "orange",
+          "content": "Renew Plan",
+          "disabled": true,
+          "onClick": undefined,
+        },
+      ]
+    }
+  >
+    <LabelledValue
+      label="Your Plan"
+    >
+      <PlanSummary
+        pendingCancellation={Object {}}
+        plan={
+          Object {
+            "plan_volume": 15000,
+          }
+        }
+      />
+    </LabelledValue>
+  </Panel.Section>,
+  <Panel.Section
+    actions={
+      Array [
+        Object {
+          "color": "orange",
+          "content": "Update Payment Information",
+          "onClick": [Function],
+        },
+      ]
+    }
+  >
+    <CardSummary
+      billing={Object {}}
+      label="Credit Card"
+    />
+  </Panel.Section>,
+  <Panel.Section
+    actions={
+      Array [
+        Object {
+          "color": "orange",
+          "content": "Update Billing Contact",
+          "onClick": [Function],
+        },
+      ]
+    }
+  >
+    <LabelledValue
+      label="Billing Contact"
+    >
+      <h6>
+         
+      </h6>
+      <p />
+    </LabelledValue>
+  </Panel.Section>,
+]
+`;
+
 exports[`Component: Billing Summary render renew when there is pending cancellation 1`] = `
 Array [
   <Panel.Section
