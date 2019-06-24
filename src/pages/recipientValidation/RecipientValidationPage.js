@@ -10,7 +10,7 @@ import RVDisabledPage from './components/RVDisabledPage';
 import ConditionSwitch, { Case, defaultCase } from 'src/components/auth/ConditionSwitch';
 
 const tabs = [
-  { content: 'Validate A List' },
+  { content: 'List' },
   { content: 'Single Address' },
   { content: 'API Integration' }
 ];
@@ -71,4 +71,3 @@ export class RecipientValidationPage extends Component {
 }
 
 export default RecipientValidationPage;
-
