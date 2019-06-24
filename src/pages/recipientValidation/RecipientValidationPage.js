@@ -10,7 +10,7 @@ import RVDisabledPage from './components/RVDisabledPage';
 import ConditionSwitch, { Case, defaultCase } from 'src/components/auth/ConditionSwitch';
 
 const tabs = [
-  { content: 'List' },
+  { content: <span style={{ padding: '0 18px' }}>List</span> },
   { content: 'Single Address' },
   { content: 'API Integration' }
 ];
