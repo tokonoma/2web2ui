@@ -27,12 +27,7 @@ export default class FileUploadWrapper extends Component {
   }
 
   render() {
-    const { fileType, fileTypes = [], input, meta } = this.props;
-
-    let acceptedTypes = fileType ? `.${fileType}` : '';
-    if (fileTypes.length) {
-      acceptedTypes = fileTypes;
-    }
+    const { input, meta } = this.props;
 
     return (
       <fieldset className={styles.Field}>
@@ -40,7 +35,7 @@ export default class FileUploadWrapper extends Component {
         <h6 className={styles.SubHeader}>or <a onClick={this.handleOpen}>select a file</a> to upload</h6>
         <div className={styles.InputWrapper}>
           <Dropzone
-            accept={acceptedTypes}
+            accept={['.txt','.csv']}
             activeClassName={styles.Active}
             className={styles.Dropzone}
             id={input.id}

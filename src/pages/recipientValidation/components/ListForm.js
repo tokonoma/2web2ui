@@ -36,7 +36,6 @@ export class ListForm extends Component {
   }
 
   render() {
-    const fileTypes = ['.txt','.csv'];
     const uploadValidators = maxFileSize(config.maxRecipVerifUploadSizeBytes);
 
     return (
@@ -44,11 +43,8 @@ export class ListForm extends Component {
         <form>
           <Field
             component={FileUploadWrapper}
-            fileTypes={fileTypes}
-            header='Drag and drop your list here'
             name='csv'
             validate={uploadValidators}
-            handleSubmit={this.handleSubmit}
           />
         </form>
       </Panel.Section>
