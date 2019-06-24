@@ -15,7 +15,6 @@ import { formatFullNumber } from 'src/helpers/units';
 import totalRVCost from '../helpers/totalRecipientValidationCost';
 import _ from 'lodash';
 import { formatDateTime } from 'src/helpers/date';
-import { showAlert } from 'src/actions/globalAlert';
 
 const PAYMENT_MODAL = 'payment';
 const CONTACT_MODAL = 'contact';
@@ -76,18 +75,9 @@ export default class BillingSummary extends Component {
     );
   };
 
-  onRenewPlan = () => {
-    const { renewAccount, fetchAccount } = this.props;
-    return renewAccount().then(() => {
-      showAlert({ type: 'success', message: 'Account Renewed' });
-    }).then(() => {
-      fetchAccount();
-    });
-  }
-
   render() {
-    const { account, currentPlan, canChangePlan, canUpdateBillingInfo, canPurchaseIps, invoices, isAWSAccount, accountAgeInDays, hasRecipientValidation, brightback } = this.props;
-    const { rvUsage, pending_cancellation } = account;
+    const { account, currentPlan, canChangePlan, canUpdateBillingInfo, canPurchaseIps, invoices, isAWSAccount, accountAgeInDays, hasRecipientValidation, brightback, onRenewAccount } = this.props;
+    const { rvUsage, pending_cancellation, cancelLoading } = account;
     const { show } = this.state;
 
     const volumeUsed = _.get(rvUsage, 'recipient_validation.month.used', 0);
@@ -103,7 +93,8 @@ export default class BillingSummary extends Component {
       changePlanActions.push({
         content: 'Renew Plan',
         color: 'orange',
-        onClick: this.onRenewPlan
+        onClick: onRenewAccount,
+        disabled: cancelLoading
       });
     }
 
@@ -114,6 +105,7 @@ export default class BillingSummary extends Component {
         content: 'Cancel Plan',
         to: brightbackReady || '/account/billing/plan/cancel',
         color: 'orange',
+        disabled: cancelLoading,
         component: brightbackReady ? undefined : Link
       });
     }

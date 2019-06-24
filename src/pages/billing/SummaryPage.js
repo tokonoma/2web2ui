@@ -17,6 +17,7 @@ import { list as getInvoices } from 'src/actions/invoices';
 import { prepBrightback } from 'src/actions/brightback';
 import { selectBrightbackData } from 'src/selectors/brightback';
 import config from 'src/config';
+import { showAlert } from 'src/actions/globalAlert';
 
 export class BillingSummaryPage extends Component {
 
@@ -33,6 +34,15 @@ export class BillingSummaryPage extends Component {
     }
   }
 
+  onRenewAccount = () => {
+    const { renewAccount, fetchAccount, showAlert } = this.props;
+    return renewAccount().then(() => {
+      showAlert({ type: 'success', message: 'Your account has been renewed.' });
+      return fetchAccount();
+    });
+  }
+
+
   render() {
     const { loading, account, brightback, billingInfo, sendingIps, invoices, accountAgeInDays, hasRecipientValidation, renewAccount, fetchAccount } = this.props;
 
@@ -46,6 +56,7 @@ export class BillingSummaryPage extends Component {
           <SuspendedForBilling condition={isSuspendedForBilling} account={account} />
           <ManuallyBilledBanner condition={not(isSelfServeBilling)} account={account} onZuoraPlan={billingInfo.onZuoraPlan} />
           <BillingSummary
+            onRenewAccount={this.onRenewAccount}
             fetchAccount={fetchAccount}
             brightback={brightback}
             condition={defaultCase}
@@ -79,4 +90,4 @@ const mapStateToProps = (state) => {
   });
 };
 
-export default connect(mapStateToProps, { getInvoices, getSendingIps, getPlans, fetchAccount, getBillingInfo, renewAccount, getUsage, prepBrightback })(BillingSummaryPage);
+export default connect(mapStateToProps, { getInvoices, getSendingIps, getPlans, fetchAccount, getBillingInfo, renewAccount, getUsage, prepBrightback, showAlert })(BillingSummaryPage);

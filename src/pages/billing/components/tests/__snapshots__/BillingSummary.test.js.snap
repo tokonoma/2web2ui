@@ -15,6 +15,7 @@ Array [
           "color": "orange",
           "component": undefined,
           "content": "Cancel Plan",
+          "disabled": false,
           "to": "http://brightback.url/to-cancel",
         },
       ]
@@ -79,7 +80,8 @@ Array [
         Object {
           "color": "orange",
           "content": "Renew Plan",
-          "onClick": [Function],
+          "disabled": false,
+          "onClick": undefined,
         },
       ]
     }
@@ -142,6 +144,7 @@ exports[`Component: Billing Summary should render correctly for a paid plan 1`] 
     account={
       Object {
         "billing": Object {},
+        "cancelLoading": false,
         "rvUsage": Object {
           "recipient_validation": Object {
             "month": Object {
@@ -160,6 +163,7 @@ exports[`Component: Billing Summary should render correctly for a paid plan 1`] 
     account={
       Object {
         "billing": Object {},
+        "cancelLoading": false,
         "rvUsage": Object {
           "recipient_validation": Object {
             "month": Object {
@@ -192,6 +196,7 @@ exports[`Component: Billing Summary should render correctly for a paid plan 1`] 
             "color": "orange",
             "component": undefined,
             "content": "Cancel Plan",
+            "disabled": false,
             "to": "http://brightback.url/to-cancel",
           },
         ]
@@ -274,6 +279,7 @@ exports[`Component: Billing Summary should render correctly for a standard free 
     account={
       Object {
         "billing": Object {},
+        "cancelLoading": false,
         "rvUsage": Object {
           "recipient_validation": Object {
             "month": Object {
@@ -292,6 +298,7 @@ exports[`Component: Billing Summary should render correctly for a standard free 
     account={
       Object {
         "billing": Object {},
+        "cancelLoading": false,
         "rvUsage": Object {
           "recipient_validation": Object {
             "month": Object {
@@ -324,6 +331,7 @@ exports[`Component: Billing Summary should render correctly for a standard free 
             "color": "orange",
             "component": undefined,
             "content": "Cancel Plan",
+            "disabled": false,
             "to": "http://brightback.url/to-cancel",
           },
         ]
@@ -357,6 +365,7 @@ exports[`Component: Billing Summary should render correctly if you can't buy IPs
     account={
       Object {
         "billing": Object {},
+        "cancelLoading": false,
         "rvUsage": Object {
           "recipient_validation": Object {
             "month": Object {
@@ -375,6 +384,7 @@ exports[`Component: Billing Summary should render correctly if you can't buy IPs
     account={
       Object {
         "billing": Object {},
+        "cancelLoading": false,
         "rvUsage": Object {
           "recipient_validation": Object {
             "month": Object {
@@ -407,6 +417,7 @@ exports[`Component: Billing Summary should render correctly if you can't buy IPs
             "color": "orange",
             "component": undefined,
             "content": "Cancel Plan",
+            "disabled": false,
             "to": "http://brightback.url/to-cancel",
           },
         ]
@@ -480,6 +491,7 @@ exports[`Component: Billing Summary should render correctly if you can't change 
     account={
       Object {
         "billing": Object {},
+        "cancelLoading": false,
         "rvUsage": Object {
           "recipient_validation": Object {
             "month": Object {
@@ -498,6 +510,7 @@ exports[`Component: Billing Summary should render correctly if you can't change 
     account={
       Object {
         "billing": Object {},
+        "cancelLoading": false,
         "rvUsage": Object {
           "recipient_validation": Object {
             "month": Object {
@@ -524,6 +537,7 @@ exports[`Component: Billing Summary should render correctly if you can't change 
             "color": "orange",
             "component": undefined,
             "content": "Cancel Plan",
+            "disabled": false,
             "to": "http://brightback.url/to-cancel",
           },
         ]
@@ -606,6 +620,7 @@ exports[`Component: Billing Summary should render correctly if you can't update 
     account={
       Object {
         "billing": Object {},
+        "cancelLoading": false,
         "rvUsage": Object {
           "recipient_validation": Object {
             "month": Object {
@@ -624,6 +639,7 @@ exports[`Component: Billing Summary should render correctly if you can't update 
     account={
       Object {
         "billing": Object {},
+        "cancelLoading": false,
         "rvUsage": Object {
           "recipient_validation": Object {
             "month": Object {
@@ -656,6 +672,7 @@ exports[`Component: Billing Summary should render correctly if you can't update 
             "color": "orange",
             "component": undefined,
             "content": "Cancel Plan",
+            "disabled": false,
             "to": "http://brightback.url/to-cancel",
           },
         ]
@@ -698,6 +715,7 @@ exports[`Component: Billing Summary should render with IP modal open 1`] = `
     account={
       Object {
         "billing": Object {},
+        "cancelLoading": false,
         "rvUsage": Object {
           "recipient_validation": Object {
             "month": Object {
@@ -716,6 +734,7 @@ exports[`Component: Billing Summary should render with IP modal open 1`] = `
     account={
       Object {
         "billing": Object {},
+        "cancelLoading": false,
         "rvUsage": Object {
           "recipient_validation": Object {
             "month": Object {
@@ -748,6 +767,7 @@ exports[`Component: Billing Summary should render with IP modal open 1`] = `
             "color": "orange",
             "component": undefined,
             "content": "Cancel Plan",
+            "disabled": false,
             "to": "http://brightback.url/to-cancel",
           },
         ]
@@ -834,6 +854,7 @@ exports[`Component: Billing Summary should render with the billing contact modal
     account={
       Object {
         "billing": Object {},
+        "cancelLoading": false,
         "rvUsage": Object {
           "recipient_validation": Object {
             "month": Object {
@@ -852,6 +873,7 @@ exports[`Component: Billing Summary should render with the billing contact modal
     account={
       Object {
         "billing": Object {},
+        "cancelLoading": false,
         "rvUsage": Object {
           "recipient_validation": Object {
             "month": Object {
@@ -884,6 +906,7 @@ exports[`Component: Billing Summary should render with the billing contact modal
             "color": "orange",
             "component": undefined,
             "content": "Cancel Plan",
+            "disabled": false,
             "to": "http://brightback.url/to-cancel",
           },
         ]
@@ -970,6 +993,7 @@ exports[`Component: Billing Summary should render with the payment info modal op
     account={
       Object {
         "billing": Object {},
+        "cancelLoading": false,
         "rvUsage": Object {
           "recipient_validation": Object {
             "month": Object {
@@ -988,6 +1012,7 @@ exports[`Component: Billing Summary should render with the payment info modal op
     account={
       Object {
         "billing": Object {},
+        "cancelLoading": false,
         "rvUsage": Object {
           "recipient_validation": Object {
             "month": Object {
@@ -1020,6 +1045,7 @@ exports[`Component: Billing Summary should render with the payment info modal op
             "color": "orange",
             "component": undefined,
             "content": "Cancel Plan",
+            "disabled": false,
             "to": "http://brightback.url/to-cancel",
           },
         ]
@@ -1106,6 +1132,7 @@ exports[`Component: Billing Summary should show the invoice history if there are
     account={
       Object {
         "billing": Object {},
+        "cancelLoading": false,
         "rvUsage": Object {
           "recipient_validation": Object {
             "month": Object {
@@ -1124,6 +1151,7 @@ exports[`Component: Billing Summary should show the invoice history if there are
     account={
       Object {
         "billing": Object {},
+        "cancelLoading": false,
         "rvUsage": Object {
           "recipient_validation": Object {
             "month": Object {
@@ -1156,6 +1184,7 @@ exports[`Component: Billing Summary should show the invoice history if there are
             "color": "orange",
             "component": undefined,
             "content": "Cancel Plan",
+            "disabled": false,
             "to": "http://brightback.url/to-cancel",
           },
         ]

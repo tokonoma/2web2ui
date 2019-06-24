@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { ApiErrorBanner, Loading } from 'src/components';
 import { cancelAccount } from 'src/actions/account';
 import styles from './ImmediateChangePlanPage.module.scss';
+import { showAlert } from 'src/actions/globalAlert';
 
 const BILLING_ROUTE = '/account/billing';
 
@@ -34,7 +35,11 @@ export class ImmediateCanelPlanPage extends Component {
   }
 
   renderSuccess() {
-    const { history } = this.props;
+    const { history, showAlert } = this.props;
+    showAlert({
+      message: 'Your account has been cancelled.',
+      type: 'success'
+    });
     history.push({
       pathname: BILLING_ROUTE
     });
@@ -65,7 +70,8 @@ export class ImmediateCanelPlanPage extends Component {
 }
 
 const mapDispatchToProps = {
-  cancelAccount
+  cancelAccount,
+  showAlert
 };
 
 export default withRouter(connect(null, mapDispatchToProps)(ImmediateCanelPlanPage));

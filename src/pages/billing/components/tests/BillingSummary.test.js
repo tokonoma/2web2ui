@@ -25,7 +25,8 @@ describe('Component: Billing Summary', () => {
             month: { used: 123123 },
             timestamp: '2019-06-10T00:00:00.000Z'
           }
-        }
+        },
+        cancelLoading: false
       },
       brightback: {
         valid: true,
@@ -53,6 +54,12 @@ describe('Component: Billing Summary', () => {
     wrapper.setProps({ account: { ...props.account, pending_cancellation: {}}});
     expect(wrapper.find(Panel.Section)).toMatchSnapshot();
   });
+
+  it('render disabled renew when attempting to renew account', () => {
+    wrapper.setProps({ account: { ...props.account, pending_cancellation: {}, cancelLoading: true }});
+    expect(wrapper.find(Panel.Section)).toMatchSnapshot();
+  });
+
 
   it('render cancellation link when brightback disabled or does not load', () => {
     wrapper.setProps({ account: { ...props.account, brightback: {}}});

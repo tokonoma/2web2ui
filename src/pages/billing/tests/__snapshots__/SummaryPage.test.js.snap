@@ -41,6 +41,7 @@ exports[`Page: BillingSummaryPage should render correctly when not loading 1`] =
           "results": undefined,
         }
       }
+      onRenewAccount={[Function]}
       onZuoraPlan={true}
       sendingIps={
         Object {

@@ -11,7 +11,10 @@ export const initialState = {
 export default (state = initialState, { type, meta, payload }) => {
   switch (type) {
     case 'FETCH_ACCOUNT_PENDING': {
-      return { ...state, loading: true };
+      const updated = { ...state, loading: true };
+      delete updated.pending_cancellation;
+      delete updated.pending_downgrade;
+      return updated;
     }
 
     case 'FETCH_ACCOUNT_SUCCESS': {
