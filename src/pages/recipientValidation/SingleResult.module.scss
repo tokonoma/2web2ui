@@ -13,6 +13,27 @@
   padding-left: 1em;
 }
 
+.tableKey {
+  width: 9rem;
+  display: inline-block; 
+}
+
+.table {
+  max-width: 400px;
+  margin-bottom: 2rem;
+}
+
+.greenBoolean {
+  color: #44D09E;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.redBoolean {
+  color: color(red);
+  font-weight: 500;
+  text-transform: uppercase;
+}
 
 .blue {
   color: #8FC4FE;

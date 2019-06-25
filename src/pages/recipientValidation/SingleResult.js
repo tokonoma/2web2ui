@@ -13,6 +13,12 @@ const SINGLE_RV_LINK = '/recipient-validation/single';
 const Tab = () => (<span className={styles.tab} />);
 const White = ({ children }) => (<span className={styles.white} >{children}</span>);
 
+const valueResponse = (value) => value ? (
+  <span className={styles.redBoolean}>Yes</span>
+) : (
+  <span className={styles.greenBoolean}>No</span>
+);
+
 const SingleResult = ({ singleResults = {}}) => {
 
   singleResults = {
@@ -20,7 +26,7 @@ const SingleResult = ({ singleResults = {}}) => {
     valid: false,
     reason: 'Invalid Domain',
     is_role: false,
-    is_disposable: false,
+    is_disposable: true,
     is_free: false,
     did_you_mean: 'harry.potter@hogwarts.edu',
     email: 'harry.potter@hogwarts.com'
@@ -49,16 +55,21 @@ const SingleResult = ({ singleResults = {}}) => {
   );
 
   const resultTable = () => (
-    <div>
-      <h6>Did you mean</h6>
+    <div className={styles.table}>
+      <h6 className={styles.tableKey}>Did you mean</h6>
+      <span>{did_you_mean}</span>
       <hr />
-      Normalized
+      <h6 className={styles.tableKey}>Normalized</h6>
+      <span>{email}</span>
       <hr />
-      Role-based <InfoTooltip size={16} content={ROLE_TOOLTIP}/>
+      <h6 className={styles.tableKey}>Role-based <InfoTooltip size={16} content={ROLE_TOOLTIP}/></h6>
+      {valueResponse(is_role)}
       <hr />
-      Disposable <InfoTooltip size={16} content={DISPOSABLE_TOOLTIP}/>
+      <h6 className={styles.tableKey}>Disposable <InfoTooltip size={16} content={DISPOSABLE_TOOLTIP}/></h6>
+      {valueResponse(is_disposable)}
       <hr />
-      Free <InfoTooltip size={16} content={FREE_TOOLTIP}/>
+      <h6 className={styles.tableKey}>Free <InfoTooltip size={16} content={FREE_TOOLTIP}/></h6>
+      {valueResponse(is_role)}
     </div>
   );
 
