@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Dropzone from 'react-dropzone';
-import { DownloadLink } from 'src/components';
+import { DownloadLink, Loading } from 'src/components';
 import { Error } from '@sparkpost/matchbox';
 import { FileType } from '@sparkpost/matchbox-icons';
 import exampleRecipientValidationListPath from './example-recipient-validation-list.csv';
@@ -27,7 +27,16 @@ export default class FileUploadWrapper extends Component {
   }
 
   render() {
-    const { input, meta } = this.props;
+    const { input, meta, uploading } = this.props;
+
+    if (uploading) {
+      return (
+        <fieldset className={styles.Field}>
+          <h3 className={styles.Header}>Uploading...</h3>
+          <div className={styles.LoadingWrapper}><Loading /></div>
+        </fieldset>
+      );
+    }
 
     return (
       <fieldset className={styles.Field}>

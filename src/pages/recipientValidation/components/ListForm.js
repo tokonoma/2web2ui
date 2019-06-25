@@ -53,6 +53,7 @@ export class ListForm extends Component {
             component={FileUploadWrapper}
             name='csv'
             validate={uploadValidators}
+            uploading={this.props.uploading}
           />
         </form>
       </Panel.Section>
@@ -66,6 +67,7 @@ export default connect((state) => {
   const selector = formValueSelector(formName);
   return {
     file: selector(state, 'csv'),
-    listError: state.recipientValidation.listError
+    listError: state.recipientValidation.listError,
+    uploading: state.recipientValidation.uploadLoading
   };
 }, { uploadList, showAlert, resetUploadError })(WrappedForm);

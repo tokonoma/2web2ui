@@ -13,10 +13,15 @@ it('renders correctly', () => {
   expect(wrapper).toMatchSnapshot();
 });
 
-it('renders and error correctly', () => {
+it('renders an error correctly', () => {
   const wrapper = shallow(<FileUploadWrapper {...defaults} meta={{ error: 'oh no', touched: true }}/>);
   expect(wrapper.find('Error')).toExist();
   expect(wrapper.find('Error').prop('error')).toEqual('oh no');
+});
+
+it('renders uploading state correctly', () => {
+  const wrapper = shallow(<FileUploadWrapper {...defaults} uploading />);
+  expect(wrapper).toMatchSnapshot();
 });
 
 // This is ugly.  It would be better to test the behavior and not the implementation

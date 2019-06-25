@@ -80,3 +80,20 @@ exports[`renders correctly 1`] = `
   </p>
 </fieldset>
 `;
+
+exports[`renders uploading state correctly 1`] = `
+<fieldset
+  className="Field"
+>
+  <h3
+    className="Header"
+  >
+    Uploading...
+  </h3>
+  <div
+    className="LoadingWrapper"
+  >
+    <Loading />
+  </div>
+</fieldset>
+`;
