@@ -29,7 +29,7 @@ export class ImmediateCancelPlanPage extends Component {
     return cancelAccount()
       .then(() => {
         showAlert({
-          message: 'Your account has been cancelled.',
+          message: 'Your plan is set to be cancelled.',
           type: 'success'
         });
         history.push(BILLING_ROUTE);

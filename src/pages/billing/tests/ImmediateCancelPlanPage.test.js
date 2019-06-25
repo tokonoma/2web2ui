@@ -23,7 +23,7 @@ describe('Component: ImmediateChangePlanPage', () => {
     expect(props.cancelAccount).toHaveBeenCalled();
     expect(props.history.push).toHaveBeenCalledWith('/account/billing');
     expect(props.showAlert).toHaveBeenCalledWith({
-      message: 'Your account has been cancelled.',
+      message: 'Your plan is set to be cancelled.',
       type: 'success'
     });
   });
