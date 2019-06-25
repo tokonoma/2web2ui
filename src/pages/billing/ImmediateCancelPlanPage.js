@@ -14,7 +14,7 @@ export const LOAD_STATE = {
   FAILURE: 3
 };
 
-export class ImmediateCanelPlanPage extends Component {
+export class ImmediateCancelPlanPage extends Component {
   state = {
     loading: LOAD_STATE.PENDING
   }
@@ -24,25 +24,18 @@ export class ImmediateCanelPlanPage extends Component {
   }
 
   handlePlanCancellation = () => {
-    const { cancelAccount } = this.props;
+    const { cancelAccount, history, showAlert } = this.props;
     this.setState({ loading: LOAD_STATE.PENDING });
     return cancelAccount()
       .then(() => {
-        this.setState({ loading: LOAD_STATE.SUCCESS });
+        showAlert({
+          message: 'Your account has been cancelled.',
+          type: 'success'
+        });
+        history.push(BILLING_ROUTE);
       }, (error) => {
         this.setState({ loading: LOAD_STATE.FAILURE, error });
       });
-  }
-
-  renderSuccess() {
-    const { history, showAlert } = this.props;
-    showAlert({
-      message: 'Your account has been cancelled.',
-      type: 'success'
-    });
-    history.push({
-      pathname: BILLING_ROUTE
-    });
   }
 
   renderError() {
@@ -64,7 +57,6 @@ export class ImmediateCanelPlanPage extends Component {
 
     return <div className={styles.MessageBlock}>
       {loading === LOAD_STATE.FAILURE && this.renderError()}
-      {loading === LOAD_STATE.SUCCESS && this.renderSuccess()}
     </div>;
   }
 }
@@ -74,4 +66,4 @@ const mapDispatchToProps = {
   showAlert
 };
 
-export default withRouter(connect(null, mapDispatchToProps)(ImmediateCanelPlanPage));
+export default withRouter(connect(null, mapDispatchToProps)(ImmediateCancelPlanPage));
