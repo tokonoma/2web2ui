@@ -4,22 +4,16 @@ import { Search } from '@sparkpost/matchbox-icons';
 import { getRandomExampleSearch } from './helpers/exampleSearch';
 
 export default function CollectionFilterBox(props) {
-  const { placeholder, wrapper, onChange } = props;
-  const placeholderText = placeholder || `Filter results e.g. ${getRandomExampleSearch(props)}`;
-  const text = (<TextField
-    name="collection-filter-box"
-    suffix={<Search />}
-    placeholder={placeholderText}
-    onChange={(e) => onChange(e.target.value)}
-  />);
+  const placeholder = `Filter results e.g. ${getRandomExampleSearch(props)}`;
 
   return (
-    (wrapper)
-      ? wrapper(text)
-      : (
-        <Panel sectioned>
-          {text}
-        </Panel>
-      )
+    <Panel sectioned>
+      <TextField
+        name="collection-filter-box"
+        prefix={<Search />}
+        placeholder={placeholder}
+        onChange={(e) => props.onChange(e.target.value)}
+      />
+    </Panel>
   );
 }

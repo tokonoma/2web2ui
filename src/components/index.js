@@ -7,7 +7,6 @@ export { default as ApiKeySuccessBanner } from './apiKeyBanner/ApiKeyBanner';
 export { default as BoomerangBanner } from './boomerangBanner/BoomerangBanner';
 export { default as CopyField } from './copyField/CopyField';
 export { default as DownloadLink } from './downloadLink/DownloadLink';
-export { default as DisplayDate } from './displayDate/DisplayDate';
 export { default as Empty } from './empty/Empty';
 export { default as FilterDropdown } from './filterDropdown/FilterDropdown';
 export { default as GlobalAlertWrapper } from './globalAlert/GlobalAlertWrapper';

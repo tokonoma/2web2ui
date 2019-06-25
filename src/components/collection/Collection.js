@@ -138,35 +138,24 @@ export class Collection extends Component {
       rowKeyName = 'id',
       headerComponent: HeaderComponent = NullComponent,
       outerWrapper: OuterWrapper = PassThroughWrapper,
-      bodyWrapper: BodyWrapper = PassThroughWrapper,
-      children
+      bodyWrapper: BodyWrapper = PassThroughWrapper
     } = this.props;
+
     if (!rows.length) {
       return null;
     }
 
-    const filterBox = this.renderFilterBox();
-    const collection = (
-      <OuterWrapper>
-        <HeaderComponent />
-        <BodyWrapper>
-          {this.getVisibleRows().map((row, i) => <RowComponent key={`${row[rowKeyName] || 'row'}-${i}`} {...row} />)}
-        </BodyWrapper>
-      </OuterWrapper>
-
-    );
-    const pagination = this.renderPagination();
-
     return (
-      typeof(children) === 'function'
-        ? children({ filterBox, collection, pagination })
-        : (
-          <div >
-            {filterBox}
-            {collection}
-            {pagination}
-          </div>
-        )
+      <div>
+        {this.renderFilterBox()}
+        <OuterWrapper>
+          <HeaderComponent />
+          <BodyWrapper>
+            {this.getVisibleRows().map((row, i) => <RowComponent key={`${row[rowKeyName] || 'row'}-${i}`} {...row} />)}
+          </BodyWrapper>
+        </OuterWrapper>
+        {this.renderPagination()}
+      </div>
     );
   }
 }

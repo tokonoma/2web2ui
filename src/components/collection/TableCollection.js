@@ -36,10 +36,9 @@ class TableCollection extends Component {
   }
 
   render() {
-    const { rowComponent, wrapperComponent, headerComponent, columns, getRowData, rows } = this.props;
+    const { rowComponent, headerComponent, columns, getRowData, rows } = this.props;
     const { sortColumn, sortDirection } = this.state;
 
-    const WrapperComponent = wrapperComponent ? wrapperComponent : TableWrapper;
     const HeaderComponent = headerComponent ? headerComponent : () => <TableHeader columns={columns} onSort={this.handleSortChange} sortColumn={sortColumn} sortDirection={sortDirection}/>;
     const TableRow = rowComponent
       ? rowComponent
@@ -49,7 +48,7 @@ class TableCollection extends Component {
 
     return (
       <Collection
-        outerWrapper={WrapperComponent}
+        outerWrapper={TableWrapper}
         headerComponent={HeaderComponent}
         bodyWrapper={TableBody}
         rowComponent={TableRow}
