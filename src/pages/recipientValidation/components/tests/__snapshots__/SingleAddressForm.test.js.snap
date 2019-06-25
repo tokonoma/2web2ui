@@ -1,119 +1,115 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`SingleAddressForm renders correctly 1`] = `
-<Fragment>
-  <Panel.Section>
-    <form
-      onSubmit={[Function]}
+<Panel.Section>
+  <form
+    onSubmit={[Function]}
+  >
+    <div
+      className="Header"
     >
-      <div
-        className="Header"
-      >
-        Validate a Single Address
-      </div>
-      <p
-        className="Subheader"
-      >
-        Enter the email address below you would like to validate.
-      </p>
-      <div
-        className="Field"
-      >
-        <Field
-          component={[Function]}
-          name="address"
-          normalize={[Function]}
-          placeholder="harry.potter@hogwarts.edu"
-          style={
-            Object {
-              "fontSize": ".9em",
-              "height": "3.2rem",
-              "paddingLeft": "1.5em",
-            }
+      Validate a Single Address
+    </div>
+    <p
+      className="Subheader"
+    >
+      Enter the email address below you would like to validate.
+    </p>
+    <div
+      className="Field"
+    >
+      <Field
+        component={[Function]}
+        name="address"
+        normalize={[Function]}
+        placeholder="harry.potter@hogwarts.edu"
+        style={
+          Object {
+            "fontSize": ".9em",
+            "height": "3.2rem",
+            "paddingLeft": "1.5em",
           }
-          validate={
-            Array [
-              [Function],
-              [Function],
-              [Function],
-            ]
-          }
-        />
-      </div>
-      <div
-        className="Submit"
+        }
+        validate={
+          Array [
+            [Function],
+            [Function],
+            [Function],
+          ]
+        }
+      />
+    </div>
+    <div
+      className="Submit"
+    >
+      <Button
+        disabled={true}
+        fullWidth={true}
+        primary={true}
+        size="large"
+        submit={true}
       >
-        <Button
-          disabled={true}
-          fullWidth={true}
-          primary={true}
-          size="large"
-          submit={true}
-        >
-          Validate
-        </Button>
-      </div>
-    </form>
-  </Panel.Section>
-</Fragment>
+        Validate
+      </Button>
+    </div>
+  </form>
+</Panel.Section>
 `;
 
 exports[`SingleAddressForm should disable form elements on submit 1`] = `
-<Fragment>
-  <Panel.Section>
-    <form
-      onSubmit={[Function]}
+<Panel.Section>
+  <form
+    onSubmit={[Function]}
+  >
+    <div
+      className="Header"
     >
-      <div
-        className="Header"
-      >
-        Validate a Single Address
-      </div>
-      <p
-        className="Subheader"
-      >
-        Enter the email address below you would like to validate.
-      </p>
-      <div
-        className="Field"
-      >
-        <Field
-          component={[Function]}
-          name="address"
-          normalize={[Function]}
-          placeholder="harry.potter@hogwarts.edu"
-          style={
-            Object {
-              "fontSize": ".9em",
-              "height": "3.2rem",
-              "paddingLeft": "1.5em",
-            }
+      Validate a Single Address
+    </div>
+    <p
+      className="Subheader"
+    >
+      Enter the email address below you would like to validate.
+    </p>
+    <div
+      className="Field"
+    >
+      <Field
+        component={[Function]}
+        name="address"
+        normalize={[Function]}
+        placeholder="harry.potter@hogwarts.edu"
+        style={
+          Object {
+            "fontSize": ".9em",
+            "height": "3.2rem",
+            "paddingLeft": "1.5em",
           }
-          validate={
-            Array [
-              [Function],
-              [Function],
-              [Function],
-            ]
-          }
-        />
-      </div>
-      <div
-        className="Submit"
+        }
+        validate={
+          Array [
+            [Function],
+            [Function],
+            [Function],
+          ]
+        }
+      />
+    </div>
+    <div
+      className="Submit"
+    >
+      <Button
+        disabled={true}
+        fullWidth={true}
+        primary={true}
+        size="large"
+        submit={true}
       >
-        <Button
-          disabled={true}
-          fullWidth={true}
-          primary={true}
-          size="large"
-          submit={true}
-        >
-          Validating...
-        </Button>
-      </div>
-    </form>
-  </Panel.Section>
-</Fragment>
+        Validating...
+      </Button>
+    </div>
+  </form>
+</Panel.Section>
 `;
 
 exports[`SingleAddressForm should display invalid address result 1`] = `

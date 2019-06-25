@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { Page, Tabs, Panel } from '@sparkpost/matchbox';
 import ListForm from './components/ListForm';
 import SingleAddressForm from './components/SingleAddressForm';
@@ -12,17 +13,20 @@ import ConditionSwitch, { Case, defaultCase } from 'src/components/auth/Conditio
 import styles from './RecipientValidationPage.module.scss';
 
 const tabs = [
-  { content: <span className={styles.TabPadding}>List</span> },
-  { content: 'Single Address' },
-  { content: 'API Integration' }
+  { content: <span className={styles.TabPadding}>List</span>, key: 'list'},
+  { content: 'Single Address', key: 'single' },
+  { content: 'API Integration', key: 'api' }
 ];
 
 export class RecipientValidationPage extends Component {
   state = {
-    selectedTab: 0
+    selectedTab: this.props.tab || 0
   };
 
   handleTabs(tabIdx) {
+    const { history } = this.props;
+
+    history.replace(`/recipient-validation/${tabs[tabIdx].key}`);
     this.setState({ selectedTab: tabIdx });
   }
 
@@ -72,4 +76,8 @@ export class RecipientValidationPage extends Component {
   }
 }
 
-export default RecipientValidationPage;
+const mapStateToProps = (state, props) => ({
+  tab: tabs.findIndex(({ key }) => key === props.match.params.category) || 0
+});
+
+export default withRouter(connect(mapStateToProps)(RecipientValidationPage));

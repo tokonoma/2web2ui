@@ -1,0 +1,28 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.Header {
+  margin-bottom: 2rem;
+}
+
+.Result {
+  display: flex;
+  margin-bottom: 2rem;
+}
+
+.tab {
+  padding-left: 1em;
+}
+
+
+.blue {
+  color: #8FC4FE;
+}
+
+.white {
+  color: color(gray, 9);
+}
+
+.Paragraph {
+  font-size: .9em;
+  margin-bottom: 2.5rem;
+}
