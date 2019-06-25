@@ -6,6 +6,7 @@ Object {
   "jobResultsLoading": false,
   "latest": null,
   "latestJobLoading": false,
+  "listError": null,
   "singleResults": null,
   "uploadLoading": false,
 }
@@ -17,6 +18,7 @@ Object {
   "jobResultsLoading": false,
   "latest": null,
   "latestJobLoading": false,
+  "listError": null,
   "singleResults": null,
   "uploadLoading": false,
 }
@@ -28,6 +30,7 @@ Object {
   "jobResultsLoading": false,
   "latest": null,
   "latestJobLoading": false,
+  "listError": null,
   "singleResults": Object {
     "email": "invalid@address.com",
     "is_role": false,
@@ -44,6 +47,7 @@ Object {
   "jobResultsLoading": false,
   "latest": null,
   "latestJobLoading": false,
+  "listError": null,
   "singleResults": Object {
     "email": "valid@address.com",
     "is_role": false,
