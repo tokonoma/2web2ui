@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { SuccessIcon, WarningIcon, InfoIcon, ErrorIcon } from '../Icons';
+import { SuccessIcon, WarningIcon, InfoIcon, ErrorIcon } from '../icons';
 
 describe('Sending Domains Icons', () => {
   it('renders success icon', () => {
