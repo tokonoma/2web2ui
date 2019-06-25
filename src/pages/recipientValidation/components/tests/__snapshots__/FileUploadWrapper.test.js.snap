@@ -1,12 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders and error correctly 1`] = `
-<Error
-  error="oh no"
-  wrapper="span"
-/>
-`;
-
 exports[`renders correctly 1`] = `
 <fieldset
   className="Field"

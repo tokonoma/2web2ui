@@ -18,7 +18,8 @@ describe('ListForm', () => {
       handleSubmit: jest.fn((a) => () => a(formValuesWithCsv)),
       uploadList: jest.fn(() => Promise.resolve()),
       reset: jest.fn(),
-      showAlert: jest.fn()
+      showAlert: jest.fn(),
+      resetUploadError: jest.fn()
     };
 
     wrapper = shallow(<ListForm {...props} />);
@@ -44,5 +45,15 @@ describe('ListForm', () => {
   it('should not submit csv when over size limit', () => {
     wrapper.setProps({ ...props, file: { size: 200000001 }});
     expect(props.uploadList).not.toHaveBeenCalled();
+  });
+
+  it('should not submit csv with an error', () => {
+    wrapper.setProps({ ...props, file: { size: 45 }, listError: 'error' });
+    expect(props.uploadList).not.toHaveBeenCalled();
+  });
+
+  it('should reset list error', () => {
+    wrapper.setProps({ ...props, listError: 'error' });
+    expect(props.resetUploadError).toHaveBeenCalledTimes(1);
   });
 });
