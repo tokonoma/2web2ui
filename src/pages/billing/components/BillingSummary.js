@@ -15,11 +15,23 @@ import { formatFullNumber } from 'src/helpers/units';
 import totalRVCost from '../helpers/totalRecipientValidationCost';
 import _ from 'lodash';
 import { formatDateTime } from 'src/helpers/date';
+import config from 'src/config';
+import Brightback from 'src/components/brightback/Brightback';
 
 const PAYMENT_MODAL = 'payment';
 const CONTACT_MODAL = 'contact';
 const IP_MODAL = 'ip';
 const RV_MODAL = 'recipient_validation';
+
+const CANCEL_PLAN_ROUTE = '/account/billing/plan/cancel';
+
+const CancelPlanButton = (props) => {
+  const MaybeBB = ({ enabled, to }) => enabled ? <a {...props} href={to}>{props.children}</a> : <Link {...props} to={CANCEL_PLAN_ROUTE} />;
+  return <Brightback
+    config={config.brightback.downgradeToFreeConfig}
+    condition={true}
+    render={MaybeBB} />;
+};
 
 export default class BillingSummary extends Component {
   state = {
@@ -76,7 +88,7 @@ export default class BillingSummary extends Component {
   };
 
   render() {
-    const { account, currentPlan, canChangePlan, canUpdateBillingInfo, canPurchaseIps, invoices, isAWSAccount, accountAgeInDays, hasRecipientValidation, brightback, onRenewAccount } = this.props;
+    const { account, currentPlan, canChangePlan, canUpdateBillingInfo, canPurchaseIps, invoices, isAWSAccount, accountAgeInDays, hasRecipientValidation, onRenewAccount } = this.props;
     const { rvUsage, pending_cancellation, cancelLoading } = account;
     const { show } = this.state;
 
@@ -98,15 +110,13 @@ export default class BillingSummary extends Component {
       });
     }
 
-    const brightbackReady = brightback.valid && brightback.url;
-
     if (!pending_cancellation) {
       changePlanActions.push({
         content: 'Cancel Plan',
-        to: brightbackReady || '/account/billing/plan/cancel',
+        to: CANCEL_PLAN_ROUTE,
         color: 'orange',
         disabled: cancelLoading,
-        component: brightbackReady ? undefined : Link
+        component: CancelPlanButton
       });
     }
 

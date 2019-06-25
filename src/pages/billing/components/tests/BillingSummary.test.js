@@ -28,10 +28,6 @@ describe('Component: Billing Summary', () => {
         },
         cancelLoading: false
       },
-      brightback: {
-        valid: true,
-        url: 'http://brightback.url/to-cancel'
-      },
       currentPlan: {
         isFree: true
       },
@@ -57,12 +53,6 @@ describe('Component: Billing Summary', () => {
 
   it('render disabled renew when attempting to renew account', () => {
     wrapper.setProps({ account: { ...props.account, pending_cancellation: {}, cancelLoading: true }});
-    expect(wrapper.find(Panel.Section)).toMatchSnapshot();
-  });
-
-
-  it('render cancellation link when brightback disabled or does not load', () => {
-    wrapper.setProps({ account: { ...props.account, brightback: {}}});
     expect(wrapper.find(Panel.Section)).toMatchSnapshot();
   });
 
