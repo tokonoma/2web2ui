@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Page, Panel, Button, Grid, UnstyledLink } from '@sparkpost/matchbox';
 import styles from './SingleResult.module.scss';
-import { withRouter, Redirect, Link } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import CodeBlock from './components/CodeBlock';
 import InfoTooltip from 'src/pages/signals/components/InfoTooltip';
 import { WarningIcon, SuccessIcon, InfoIcon, ErrorIcon } from './components/icons';
@@ -58,9 +58,6 @@ export class SingleResult extends Component {
 
     if (loading) {
       return (<Loading />);
-    }
-    if (!singleResults) {
-      return (<Redirect to='/recipient-validation/list' />);
     }
 
     const resultTable = () => (

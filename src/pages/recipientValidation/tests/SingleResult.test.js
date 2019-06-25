@@ -19,15 +19,22 @@ describe('SingleResult', () => {
         email: 'harry.potter@hogwarts.com'
       },
       singleAddress: jest.fn(() => Promise.resolve()),
-      showAlert: jest.fn()
+      showAlert: jest.fn(),
+      history: {
+        push: jest.fn()
+      }
     };
 
     wrapper = shallow(<SingleResult {...props} />);
   });
 
-  it('should redirect if no results', () => {
-    wrapper.setProps({ singleResults: null });
-    expect(wrapper).toMatchSnapshot();
+  it('should redirect and show alert fails to validate', async () => {
+    props.singleAddress = jest.fn(() => Promise.reject({ message: 'error message' }));
+    wrapper = shallow(<SingleResult {...props}/>);
+    await wrapper;
+
+    expect(props.showAlert).toHaveBeenCalledWith({ message: 'error message', type: 'error' });
+    expect(props.history.push).toHaveBeenCalledWith('/recipient-validation/single');
   });
 
   it('should render loading state', () => {
