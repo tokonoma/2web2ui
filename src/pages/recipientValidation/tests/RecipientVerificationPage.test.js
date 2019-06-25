@@ -9,9 +9,17 @@ import ApiDetails from '../components/ApiDetails';
 describe('Page: Recipient Email Verification', () => {
   let wrapper;
   let instance;
+  let props;
 
   beforeEach(() => {
-    wrapper = shallow(<RecipientValidationPage/>);
+    props = {
+      history: {
+        replace: jest.fn(),
+        push: jest.fn()
+      }
+    };
+
+    wrapper = shallow(<RecipientValidationPage {...props}/>);
     instance = wrapper.instance();
   });
 

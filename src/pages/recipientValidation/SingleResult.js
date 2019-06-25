@@ -28,6 +28,16 @@ const ICONS = {
 
 const SingleResult = ({ singleResults = {}}) => {
 
+  // singleResults = {
+  //   result: 'deliverable',
+  //   valid: true,
+  //   reason: 'Invalid Domain',
+  //   is_role: false,
+  //   is_disposable: false,
+  //   is_free: false,
+  //   did_you_mean: 'harry.potter@hogwarts.edu',
+  //   email: 'harry.potter@hogwarts.com'
+  // }
   if (!singleResults) {
     return (<Redirect to='/recipient-validation/list' />);
   }

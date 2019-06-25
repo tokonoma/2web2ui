@@ -12,7 +12,10 @@ describe('SingleAddressForm', () => {
   beforeEach(() => {
     props = {
       handleSubmit: jest.fn((a) => a),
-      singleAddress: jest.fn()
+      singleAddress: jest.fn(),
+      history: {
+        push: jest.fn()
+      }
     };
 
     wrapper = shallow(<SingleAddressForm {...props} />);
@@ -27,15 +30,10 @@ describe('SingleAddressForm', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should disable form elements on submit', () => {
-    const wrapper = shallow(<SingleAddressForm submitting={true} {...props} />);
-    expect(wrapper).toMatchSnapshot();
-  });
-
   it('should submit single email address', async () => {
     wrapper.setProps(props);
     wrapper.find('form').simulate('submit', formValues);
-    expect(props.singleAddress.mock.calls).toMatchSnapshot();
+    expect(props.history.push).toHaveBeenCalledWith('/recipient-validation/result/foo@address.com');
   });
 
   it('should hide previous errors preSubmit', async () => {
@@ -47,38 +45,7 @@ describe('SingleAddressForm', () => {
     };
     wrapper.setProps(props);
     wrapper.find('form').simulate('submit', formValues);
-    expect(props.singleAddress.mock.calls).toMatchSnapshot();
-  });
-
-  it('should show errors if submit failed', async () => {
-    props.submitFailed = true;
-    props.errors = {
-      payload: {
-        message: 'show me'
-      }
-    };
-    wrapper.setProps(props);
-    wrapper.find('form').simulate('submit', formValues);
-    expect(props.singleAddress.mock.calls).toMatchSnapshot();
-  });
-
-  it('should display invalid address result', async () => {
-    props.results = {
-      invalid: true,
-      reason: 'why'
-    };
-    wrapper.setProps(props);
-    wrapper.find('form').simulate('submit', formValues);
-    expect(props.singleAddress.mock.calls).toMatchSnapshot();
-  });
-
-  it('should display valid address result', async () => {
-    props.results = {
-      valid: true
-    };
-    wrapper.setProps(props);
-    wrapper.find('form').simulate('submit', formValues);
-    expect(props.singleAddress.mock.calls).toMatchSnapshot();
+    expect(props.history.push).toHaveBeenCalledWith('/recipient-validation/result/foo@address.com');
   });
 
   it('should trim email value', () => {

@@ -711,7 +711,7 @@ const routes = [
     redirect: '/recipient-validation/list'
   },
   {
-    path: '/recipient-validation/result',
+    path: '/recipient-validation/result/:email',
     component: SingleResultPage,
     condition: hasGrants('recipient-validation/manage'),
     layout: App,
