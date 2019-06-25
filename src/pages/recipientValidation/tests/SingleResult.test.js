@@ -9,39 +9,41 @@ describe('SingleResult', () => {
   beforeEach(() => {
     props = {
       singleResults: {
-        email: 'test@test.com',
-        valid: true
+        result: 'deliverable',
+        valid: true,
+        reason: 'Invalid Domain',
+        is_role: false,
+        is_disposable: false,
+        is_free: false,
+        did_you_mean: 'harry.potter@hogwarts.edu',
+        email: 'harry.potter@hogwarts.com'
       }
     };
 
     wrapper = shallow(<SingleResult {...props} />);
   });
 
+  it('should redirect if no results', () => {
+    wrapper.setProps({ singleResults: null });
+    expect(wrapper).toMatchSnapshot();
+  });
+
   it('renders correctly when valid', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('renders correctly when not valid', () => {
-    wrapper.setProps({
-      singleResults: {
-        email: 'test@fail.com',
-        valid: false,
-        reason: 'invalid domain'
-      }
-    });
+  it('renders correctly when risky', () => {
+    wrapper.setProps({ singleResults: { ...props.singleResults, result: 'risky' }});
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('renders correctly when disposable and role-based', () => {
-    wrapper.setProps({
-      singleResults: {
-        email: 'role@disposable.com',
-        is_role: true,
-        is_disposable: true,
-        valid: false,
-        reason: 'invalid domain'
-      }
-    });
+  it('renders correctly when undeliverable', () => {
+    wrapper.setProps({ singleResults: { ...props.singleResults, result: 'undeliverable' }});
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('renders correctly when result is unknown', () => {
+    wrapper.setProps({ singleResults: { ...props.singleResults, result: 'unknown' }});
     expect(wrapper).toMatchSnapshot();
   });
 });

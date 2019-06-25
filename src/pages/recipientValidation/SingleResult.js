@@ -6,7 +6,7 @@ import { withRouter, Redirect, Link } from 'react-router-dom';
 import CodeBlock from './components/CodeBlock';
 import InfoTooltip from 'src/pages/signals/components/InfoTooltip';
 import { WarningIcon, SuccessIcon, InfoIcon, ErrorIcon } from './components/icons';
-import { ROLE_TOOLTIP, DISPOSABLE_TOOLTIP, FREE_TOOLTIP } from './constants';
+import { ROLE_TOOLTIP, DISPOSABLE_TOOLTIP, FREE_TOOLTIP, RESULT_DESCRIPTIONS } from './constants';
 
 const SINGLE_RV_LINK = '/recipient-validation/single';
 
@@ -19,18 +19,14 @@ const valueResponse = (value) => value ? (
   <span className={styles.greenBoolean}>No</span>
 );
 
-const SingleResult = ({ singleResults = {}}) => {
+const ICONS = {
+  unkown: <InfoIcon />,
+  undeliverable: <ErrorIcon />,
+  deliverable: <SuccessIcon />,
+  risky: <WarningIcon />
+};
 
-  singleResults = {
-    result: 'undeliverable',
-    valid: false,
-    reason: 'Invalid Domain',
-    is_role: false,
-    is_disposable: true,
-    is_free: false,
-    did_you_mean: 'harry.potter@hogwarts.edu',
-    email: 'harry.potter@hogwarts.com'
-  };
+const SingleResult = ({ singleResults = {}}) => {
 
   if (!singleResults) {
     return (<Redirect to='/recipient-validation/list' />);
@@ -73,35 +69,17 @@ const SingleResult = ({ singleResults = {}}) => {
     </div>
   );
 
-  const renderResult = () => {
-    let icon;
-    switch (result) {
-      case 'unknown':
-        icon = <InfoIcon/>;
-        break;
-      case 'undeliverable':
-        icon = <ErrorIcon/>;
-        break;
-      case 'deliverable':
-        icon = <SuccessIcon />;
-        break;
-      case 'risky':
-        icon = <WarningIcon />;
-        break;
-    }
-
-    return (
-      <div className={styles.Result}>
-        <div style={{ marginRight: '15px' }}>
-          {icon}
-        </div>
-        <div>
-          <div style={{ marginBottom: '20px' }}>Status:</div>
-          <div style={{ textTransform: 'capitalize', fontSize: '2.8em', fontWeight: 550 }}>{result}</div>
-        </div>
+  const renderResult = () => (
+    <div className={styles.Result}>
+      <div style={{ marginRight: '15px' }}>
+        {ICONS[result]}
       </div>
-    );
-  };
+      <div>
+        <div style={{ marginBottom: '20px' }}>Status:</div>
+        <div style={{ textTransform: 'capitalize', fontSize: '2.8em', fontWeight: 550 }}>{result}</div>
+      </div>
+    </div>
+  );
 
   return (
     <Page
@@ -117,8 +95,7 @@ const SingleResult = ({ singleResults = {}}) => {
               {renderResult()}
               {resultTable()}
               <p className={styles.Paragraph}>
-                An undeliverable result means that our data analysis confidently points to the fact that the
-                email address does not exist or will hard bounce for some other reason.
+                {RESULT_DESCRIPTIONS[result]}
               </p>
               <Button component={Link} color='orange' to={SINGLE_RV_LINK}>
                 Validate Another
