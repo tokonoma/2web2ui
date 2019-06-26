@@ -33,13 +33,20 @@ exports[`CancellationPanel renders renew button when pending cancellation  1`] =
     Account is set to cancel 
     Jul 19 2019
   </h6>
+  <p>
+    You can undo your cancellation at anytime 
+    <strong>
+      before
+    </strong>
+     8:00 UTC on your cancel date. We hope you decide to stay!
+  </p>
   <div>
     <Button
       color="orange"
       onClick={[Function]}
       size="default"
     >
-      Renew Account
+      Undo Cancellation
     </Button>
   </div>
 </Panel>

@@ -25,8 +25,9 @@ export class CancellationPanel extends React.Component {
       return (
         <Panel sectioned title="Pending Account Cancellation">
           <h6>Account is set to cancel {formatDate(pending_cancellation.effective_date)}</h6>
+          <p>You can undo your cancellation at anytime <strong>before</strong> 8:00 UTC on your cancel date. We hope you decide to stay!</p>
           <div>
-            <Button color='orange' disabled={cancelLoading} onClick={this.onRenewAccount}>Renew Account</Button>
+            <Button color='orange' disabled={cancelLoading} onClick={this.onRenewAccount}>Undo Cancellation</Button>
           </div>
         </Panel>
       );
