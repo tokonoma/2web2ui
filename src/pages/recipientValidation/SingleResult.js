@@ -43,11 +43,12 @@ export class SingleResult extends Component {
   render() {
     const { singleResults = {}, loading } = this.props;
 
-    const { email, result, valid, reason, is_role, is_disposable, is_free, did_you_mean } = singleResults;
-
-    if (loading) {
+    if (!singleResults || loading) {
       return (<Loading />);
     }
+
+    const { email, result, valid, reason, is_role, is_disposable, is_free, did_you_mean } = singleResults;
+
 
     const resultTable = () => (
       <div className={styles.table}>
