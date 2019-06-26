@@ -33,7 +33,7 @@ describe('SingleAddressForm', () => {
   it('should submit single email address', async () => {
     wrapper.setProps(props);
     wrapper.find('form').simulate('submit', formValues);
-    expect(props.history.push).toHaveBeenCalledWith('/recipient-validation/result/foo@address.com');
+    expect(props.history.push).toHaveBeenCalledWith('/recipient-validation/single/foo@address.com');
   });
 
   it('should hide previous errors preSubmit', async () => {
@@ -45,7 +45,7 @@ describe('SingleAddressForm', () => {
     };
     wrapper.setProps(props);
     wrapper.find('form').simulate('submit', formValues);
-    expect(props.history.push).toHaveBeenCalledWith('/recipient-validation/result/foo@address.com');
+    expect(props.history.push).toHaveBeenCalledWith('/recipient-validation/single/foo@address.com');
   });
 
   it('should trim email value', () => {

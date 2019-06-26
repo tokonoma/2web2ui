@@ -11,7 +11,7 @@ import styles from './SingleAddressForm.module.scss';
 const formName = 'singleAddressForm';
 export class SingleAddressForm extends Component {
 
-  singleAddressForm = (values) => this.props.history.push(`/recipient-validation/result/${values.address}`)
+  singleAddressForm = (values) => this.props.history.push(`/recipient-validation/single/${values.address}`)
 
   render() {
     const { valid, pristine, submitting, handleSubmit } = this.props;
