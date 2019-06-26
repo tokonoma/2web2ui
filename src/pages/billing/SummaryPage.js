@@ -37,7 +37,7 @@ export class BillingSummaryPage extends Component {
 
 
   render() {
-    const { loading, account, billingInfo, sendingIps, invoices, accountAgeInDays, hasRecipientValidation, renewAccount, fetchAccount } = this.props;
+    const { loading, account, billingInfo, sendingIps, invoices, accountAgeInDays, hasRecipientValidation } = this.props;
 
     if (loading) {
       return <Loading />;
@@ -50,9 +50,7 @@ export class BillingSummaryPage extends Component {
           <ManuallyBilledBanner condition={not(isSelfServeBilling)} account={account} onZuoraPlan={billingInfo.onZuoraPlan} />
           <BillingSummary
             onRenewAccount={this.onRenewAccount}
-            fetchAccount={fetchAccount}
             condition={defaultCase}
-            renewAccount={renewAccount}
             hasRecipientValidation={hasRecipientValidation}
             account={account}
             {...billingInfo} invoices={invoices}
@@ -69,8 +67,8 @@ const mapStateToProps = (state) => {
   const { loading, account } = selectAccountBilling(state);
 
   return ({
-    loading: loading || state.billing.plansLoading || !state.account.subscription || state.brightback.loading,
-    account: account,
+    loading: loading || state.billing.plansLoading || !state.account.subscription,
+    account,
     accountAgeInDays: selectAccountAgeInDays(state),
     billingInfo: selectBillingInfo(state),
     sendingIps: state.sendingIps.list,
