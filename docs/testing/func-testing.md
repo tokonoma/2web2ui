@@ -42,19 +42,19 @@ test('Login page', async () => {
 
 1. We call `mountRoute` ([docs](#async-mountrouteroute--options-)) to render a whole route.
 
-    `mountRoute` renders the whole `App` and returns an [Enzyme wrapper over the resulting DOM](https://airbnb.io/enzyme/docs/api/mount.html). The returned wrapper includes a few conveniences too. Check out the [API section below](#API) for more details.
+    `mountRoute` renders the whole `App` and returns an [Enzyme wrapper over the resulting DOM](https://airbnb.io/enzyme/docs/api/mount.html). The returned wrapper includes a few conveniences too. Check out the [API section below](#the-api) for more details.
 
-1. We use `formFiller` ([docs](#formFiller)) to fill in the login form.
+1. We use `formFiller` ([docs](#formfillerfieldvalues)) to fill in the login form.
 
     `formFiller` is a utility that simplifies filling in forms. You can also just use the Enzyme wrapper directly.
 
-1. Submit the form using `simulate` ([docs](#Wrapper#simulate)) and wait for the page to settle.
+1. Submit the form using `simulate` ([docs](#wrappersimulateselector-eventname)) and wait for the page to settle.
 
 1. Check that auth has succeeded by asserting the current route using `currentRoute`.
 
 Hint: Use `page.find()` to explore 
 
-For more detail, check out the [API section](#API).
+For more detail, check out the [API section](#the-api).
 
 ## The API
 
