@@ -33,7 +33,6 @@ exports[`Page: BillingSummaryPage should render correctly when not loading 1`] =
       }
       accountAgeInDays={5}
       condition={[Function]}
-      onRenewAccount={[Function]}
       onZuoraPlan={true}
       sendingIps={
         Object {

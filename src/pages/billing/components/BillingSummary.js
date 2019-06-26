@@ -15,23 +15,11 @@ import { formatFullNumber } from 'src/helpers/units';
 import totalRVCost from '../helpers/totalRecipientValidationCost';
 import _ from 'lodash';
 import { formatDateTime } from 'src/helpers/date';
-import config from 'src/config';
-import Brightback from 'src/components/brightback/Brightback';
 
 const PAYMENT_MODAL = 'payment';
 const CONTACT_MODAL = 'contact';
 const IP_MODAL = 'ip';
 const RV_MODAL = 'recipient_validation';
-
-const CANCEL_PLAN_ROUTE = '/account/billing/plan/cancel';
-
-const CancelPlanButton = (props) => {
-  const MaybeBB = ({ enabled, to }) => enabled ? <a {...props} href={to}>{props.children}</a> : <Link {...props} to={CANCEL_PLAN_ROUTE} />;
-  return <Brightback
-    config={config.brightback.downgradeToFreeConfig}
-    condition={true}
-    render={MaybeBB} />;
-};
 
 export default class BillingSummary extends Component {
   state = {
@@ -88,8 +76,8 @@ export default class BillingSummary extends Component {
   };
 
   render() {
-    const { account, currentPlan, canChangePlan, canUpdateBillingInfo, canPurchaseIps, invoices, isAWSAccount, accountAgeInDays, hasRecipientValidation, onRenewAccount } = this.props;
-    const { rvUsage, pending_cancellation, cancelLoading } = account;
+    const { account, currentPlan, canChangePlan, canUpdateBillingInfo, canPurchaseIps, invoices, isAWSAccount, accountAgeInDays, hasRecipientValidation } = this.props;
+    const { rvUsage, pending_cancellation } = account;
     const { show } = this.state;
 
     const volumeUsed = _.get(rvUsage, 'recipient_validation.month.used', 0);
@@ -99,25 +87,6 @@ export default class BillingSummary extends Component {
     if (!pending_cancellation && canChangePlan) {
       const changePlanLabel = currentPlan.isFree ? 'Upgrade Now' : 'Change Plan';
       changePlanActions.push({ content: changePlanLabel, to: '/account/billing/plan', Component: Link, color: 'orange' });
-    }
-
-    if (pending_cancellation) {
-      changePlanActions.push({
-        content: 'Renew Plan',
-        color: 'orange',
-        onClick: onRenewAccount,
-        disabled: cancelLoading
-      });
-    }
-
-    if (!pending_cancellation) {
-      changePlanActions.push({
-        content: 'Cancel Plan',
-        to: CANCEL_PLAN_ROUTE,
-        color: 'orange',
-        disabled: cancelLoading,
-        component: CancelPlanButton
-      });
     }
 
     return (

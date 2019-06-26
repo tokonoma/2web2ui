@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Page } from '@sparkpost/matchbox';
-import { fetch as fetchAccount, getPlans, getBillingInfo, getUsage, renewAccount } from 'src/actions/account';
+import { fetch as fetchAccount, getPlans, getBillingInfo, getUsage } from 'src/actions/account';
 import { list as getSendingIps } from 'src/actions/sendingIps';
 import { selectBillingInfo, selectAccountBilling } from 'src/selectors/accountBillingInfo';
 import { selectAccountAgeInDays } from 'src/selectors/accountAge';
@@ -13,7 +13,6 @@ import BillingSummary from './components/BillingSummary';
 import ManuallyBilledBanner from './components/ManuallyBilledBanner';
 import SuspendedForBilling from './components/SuspendedForBilling';
 import { list as getInvoices } from 'src/actions/invoices';
-import { showAlert } from 'src/actions/globalAlert';
 
 export class BillingSummaryPage extends Component {
 
@@ -26,15 +25,6 @@ export class BillingSummaryPage extends Component {
     getInvoices();
     getUsage();
   }
-
-  onRenewAccount = () => {
-    const { renewAccount, fetchAccount, showAlert } = this.props;
-    return renewAccount().then(() => {
-      showAlert({ type: 'success', message: 'Your account has been renewed.' });
-      return fetchAccount();
-    });
-  }
-
 
   render() {
     const { loading, account, billingInfo, sendingIps, invoices, accountAgeInDays, hasRecipientValidation } = this.props;
@@ -77,4 +67,4 @@ const mapStateToProps = (state) => {
   });
 };
 
-export default connect(mapStateToProps, { getInvoices, getSendingIps, getPlans, fetchAccount, getBillingInfo, renewAccount, getUsage, showAlert })(BillingSummaryPage);
+export default connect(mapStateToProps, { getInvoices, getSendingIps, getPlans, fetchAccount, getBillingInfo, getUsage })(BillingSummaryPage);

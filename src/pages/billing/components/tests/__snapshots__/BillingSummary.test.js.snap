@@ -1,137 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Component: Billing Summary render disabled renew when attempting to renew account 1`] = `
-Array [
-  <Panel.Section
-    actions={
-      Array [
-        Object {
-          "color": "orange",
-          "content": "Renew Plan",
-          "disabled": true,
-          "onClick": undefined,
-        },
-      ]
-    }
-  >
-    <LabelledValue
-      label="Your Plan"
-    >
-      <PlanSummary
-        pendingCancellation={Object {}}
-        plan={
-          Object {
-            "plan_volume": 15000,
-          }
-        }
-      />
-    </LabelledValue>
-  </Panel.Section>,
-  <Panel.Section
-    actions={
-      Array [
-        Object {
-          "color": "orange",
-          "content": "Update Payment Information",
-          "onClick": [Function],
-        },
-      ]
-    }
-  >
-    <CardSummary
-      billing={Object {}}
-      label="Credit Card"
-    />
-  </Panel.Section>,
-  <Panel.Section
-    actions={
-      Array [
-        Object {
-          "color": "orange",
-          "content": "Update Billing Contact",
-          "onClick": [Function],
-        },
-      ]
-    }
-  >
-    <LabelledValue
-      label="Billing Contact"
-    >
-      <h6>
-         
-      </h6>
-      <p />
-    </LabelledValue>
-  </Panel.Section>,
-]
-`;
-
-exports[`Component: Billing Summary render renew when there is pending cancellation 1`] = `
-Array [
-  <Panel.Section
-    actions={
-      Array [
-        Object {
-          "color": "orange",
-          "content": "Renew Plan",
-          "disabled": false,
-          "onClick": undefined,
-        },
-      ]
-    }
-  >
-    <LabelledValue
-      label="Your Plan"
-    >
-      <PlanSummary
-        pendingCancellation={Object {}}
-        plan={
-          Object {
-            "plan_volume": 15000,
-          }
-        }
-      />
-    </LabelledValue>
-  </Panel.Section>,
-  <Panel.Section
-    actions={
-      Array [
-        Object {
-          "color": "orange",
-          "content": "Update Payment Information",
-          "onClick": [Function],
-        },
-      ]
-    }
-  >
-    <CardSummary
-      billing={Object {}}
-      label="Credit Card"
-    />
-  </Panel.Section>,
-  <Panel.Section
-    actions={
-      Array [
-        Object {
-          "color": "orange",
-          "content": "Update Billing Contact",
-          "onClick": [Function],
-        },
-      ]
-    }
-  >
-    <LabelledValue
-      label="Billing Contact"
-    >
-      <h6>
-         
-      </h6>
-      <p />
-    </LabelledValue>
-  </Panel.Section>,
-]
-`;
-
 exports[`Component: Billing Summary should render correctly for a paid plan 1`] = `
 <div>
   <PendingPlanBanner
@@ -185,13 +53,6 @@ exports[`Component: Billing Summary should render correctly for a paid plan 1`] 
             "color": "orange",
             "content": "Change Plan",
             "to": "/account/billing/plan",
-          },
-          Object {
-            "color": "orange",
-            "component": [Function],
-            "content": "Cancel Plan",
-            "disabled": false,
-            "to": "/account/billing/plan/cancel",
           },
         ]
       }
@@ -321,13 +182,6 @@ exports[`Component: Billing Summary should render correctly for a standard free 
             "content": "Upgrade Now",
             "to": "/account/billing/plan",
           },
-          Object {
-            "color": "orange",
-            "component": [Function],
-            "content": "Cancel Plan",
-            "disabled": false,
-            "to": "/account/billing/plan/cancel",
-          },
         ]
       }
     >
@@ -406,13 +260,6 @@ exports[`Component: Billing Summary should render correctly if you can't buy IPs
             "color": "orange",
             "content": "Upgrade Now",
             "to": "/account/billing/plan",
-          },
-          Object {
-            "color": "orange",
-            "component": [Function],
-            "content": "Cancel Plan",
-            "disabled": false,
-            "to": "/account/billing/plan/cancel",
           },
         ]
       }
@@ -525,17 +372,7 @@ exports[`Component: Billing Summary should render correctly if you can't change 
     title="Plan Overview"
   >
     <Panel.Section
-      actions={
-        Array [
-          Object {
-            "color": "orange",
-            "component": [Function],
-            "content": "Cancel Plan",
-            "disabled": false,
-            "to": "/account/billing/plan/cancel",
-          },
-        ]
-      }
+      actions={Array []}
     >
       <LabelledValue
         label="Your Plan"
@@ -662,13 +499,6 @@ exports[`Component: Billing Summary should render correctly if you can't update 
             "content": "Upgrade Now",
             "to": "/account/billing/plan",
           },
-          Object {
-            "color": "orange",
-            "component": [Function],
-            "content": "Cancel Plan",
-            "disabled": false,
-            "to": "/account/billing/plan/cancel",
-          },
         ]
       }
     >
@@ -756,13 +586,6 @@ exports[`Component: Billing Summary should render with IP modal open 1`] = `
             "color": "orange",
             "content": "Upgrade Now",
             "to": "/account/billing/plan",
-          },
-          Object {
-            "color": "orange",
-            "component": [Function],
-            "content": "Cancel Plan",
-            "disabled": false,
-            "to": "/account/billing/plan/cancel",
           },
         ]
       }
@@ -896,13 +719,6 @@ exports[`Component: Billing Summary should render with the billing contact modal
             "content": "Upgrade Now",
             "to": "/account/billing/plan",
           },
-          Object {
-            "color": "orange",
-            "component": [Function],
-            "content": "Cancel Plan",
-            "disabled": false,
-            "to": "/account/billing/plan/cancel",
-          },
         ]
       }
     >
@@ -1035,13 +851,6 @@ exports[`Component: Billing Summary should render with the payment info modal op
             "content": "Upgrade Now",
             "to": "/account/billing/plan",
           },
-          Object {
-            "color": "orange",
-            "component": [Function],
-            "content": "Cancel Plan",
-            "disabled": false,
-            "to": "/account/billing/plan/cancel",
-          },
         ]
       }
     >
@@ -1173,13 +982,6 @@ exports[`Component: Billing Summary should show the invoice history if there are
             "color": "orange",
             "content": "Upgrade Now",
             "to": "/account/billing/plan",
-          },
-          Object {
-            "color": "orange",
-            "component": [Function],
-            "content": "Cancel Plan",
-            "disabled": false,
-            "to": "/account/billing/plan/cancel",
           },
         ]
       }

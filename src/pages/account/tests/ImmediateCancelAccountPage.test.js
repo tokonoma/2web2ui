@@ -21,7 +21,7 @@ describe('Component: ImmediateCancelAcocutPage', () => {
   it('should handle account cancellation immediately', async () => {
     await wrapper;
     expect(props.cancelAccount).toHaveBeenCalled();
-    expect(props.history.push).toHaveBeenCalledWith('/account/billing');
+    expect(props.history.push).toHaveBeenCalledWith('/account/settings');
     expect(props.showAlert).toHaveBeenCalledWith({
       message: 'Your plan is set to be cancelled.',
       type: 'success'

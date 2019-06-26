@@ -6,7 +6,7 @@ import { cancelAccount } from 'src/actions/account';
 import styles from './ImmediateCancelAccountPage.module.scss';
 import { showAlert } from 'src/actions/globalAlert';
 
-const BILLING_ROUTE = '/account/billing';
+const ACCOUNT_SETTINGS_ROUTE = '/account/settings';
 
 export const LOAD_STATE = {
   PENDING: 1,
@@ -32,7 +32,7 @@ export class ImmediateCancelAccountPage extends Component {
           message: 'Your plan is set to be cancelled.',
           type: 'success'
         });
-        history.push(BILLING_ROUTE);
+        history.push(ACCOUNT_SETTINGS_ROUTE);
       }, (error) => {
         this.setState({ loading: LOAD_STATE.FAILURE, error });
       });
