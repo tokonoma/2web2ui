@@ -30,7 +30,7 @@ describe('EditNavigation', () => {
 
     wrapper
       .find('UnstyledLink')
-      .filterWhere((node) => node.children().text() === 'Settings')
+      .filterWhere((node) => node.children().text() === 'Template Settings')
       .simulate('click');
 
     expect(setNavigation).toHaveBeenCalledWith('settings');
