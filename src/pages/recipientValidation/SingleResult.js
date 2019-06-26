@@ -68,7 +68,7 @@ export class SingleResult extends Component {
         {valueResponse(is_disposable)}
         <hr />
         <h6 className={styles.tableKey}>Free <InfoTooltip size={16} content={FREE_TOOLTIP}/></h6>
-        {valueResponse(is_role)}
+        {valueResponse(is_free)}
       </div>
     );
 
