@@ -510,7 +510,7 @@ const routes = [
     supportDocSearch: 'account settings'
   },
   {
-    path: '/account//cancel',
+    path: '/account/cancel',
     component: ImmediateCancelAccountPage,
     condition: all(hasGrants('account/manage'), not(isEnterprise), not(isHeroku), not(isAzure)),
     layout: App,

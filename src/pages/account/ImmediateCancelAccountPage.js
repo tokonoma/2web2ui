@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { ApiErrorBanner, Loading } from 'src/components';
-import { cancelAccount } from 'src/actions/account';
+import { cancelAccount, fetch as fetchAccount } from 'src/actions/account';
 import styles from './ImmediateCancelAccountPage.module.scss';
 import { showAlert } from 'src/actions/globalAlert';
 
@@ -24,9 +24,12 @@ export class ImmediateCancelAccountPage extends Component {
   }
 
   handlePlanCancellation = () => {
-    const { cancelAccount, history, showAlert } = this.props;
+    const { cancelAccount, history, showAlert, fetchAccount } = this.props;
     this.setState({ loading: LOAD_STATE.PENDING });
     return cancelAccount()
+      .then(() => fetchAccount() , (error) => {
+        this.setState({ loading: LOAD_STATE.FAILURE, error });
+      })
       .then(() => {
         showAlert({
           message: 'Your plan is set to be cancelled.',
@@ -63,7 +66,8 @@ export class ImmediateCancelAccountPage extends Component {
 
 const mapDispatchToProps = {
   cancelAccount,
-  showAlert
+  showAlert,
+  fetchAccount
 };
 
 export default withRouter(connect(null, mapDispatchToProps)(ImmediateCancelAccountPage));
