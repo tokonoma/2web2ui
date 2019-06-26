@@ -1,27 +1,62 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Panel, UnstyledLink } from '@sparkpost/matchbox';
-import { openSupportTicketForm } from 'src/actions/support';
+import { fetch as fetchAccount, renewAccount } from 'src/actions/account';
+import { Panel, Button } from '@sparkpost/matchbox';
+import { showAlert } from 'src/actions/globalAlert';
+import config from 'src/config';
+import Brightback from 'src/components/brightback/Brightback';
+import { formatDate } from 'src/helpers/date';
 
 export class CancellationPanel extends React.Component {
-  requestCancellation = () => {
-    this.props.openSupportTicketForm({ issueId: 'account_cancellation' });
+
+  onRenewAccount = () => {
+    const { renewAccount, fetchAccount, showAlert } = this.props;
+    return renewAccount().then(() => {
+      showAlert({ type: 'success', message: 'Your account has been renewed.' });
+      return fetchAccount();
+    });
   }
 
   render() {
+    const { account } = this.props;
+    const { pending_cancellation, cancelLoading } = account;
+
+    if (pending_cancellation) {
+      return (
+        <Panel sectioned title="Pending Account Cancellation">
+          <h6>Account is set to cancel {formatDate(pending_cancellation.effective_date)}</h6>
+          <div>
+            <Button color='orange' disabled={cancelLoading} onClick={this.onRenewAccount}>Renew Account</Button>
+          </div>
+        </Panel>
+      );
+    }
+
     return (
       <Panel sectioned title="Request Account Cancellation">
         <p>
-          To cancel your SparkPost account, {
-            <UnstyledLink onClick={this.requestCancellation}>
-              submit a cancellation request
-            </UnstyledLink>
-          }. The request may take a few days to process.  All your data (e.g. domains, users, etc.)
-          will be permanently deleted. We're sorry to see you go!
+          If you cancel, you can send emails up to your monthly limit before
+          your cancel date, but you cannot overage past that. You will not be
+          able to validate email addresses using recipient validation. Any
+          dedicated IPs assigned to your account will be unrecoverable after your
+          cancel date and might be assigned to other SparkPost accounts.
         </p>
+        <div>
+          <Brightback
+            config={config.brightback.cancelConfig}
+            condition={true}
+            render={({ to }) => (
+              <Button color='orange' to={to}>Cancel Account</Button>
+            )}
+          />
+        </div>
       </Panel>
     );
   }
 }
 
-export default connect(undefined, { openSupportTicketForm })(CancellationPanel);
+const mapStateToProps = ({ account }) => ({
+  account
+});
+
+export default connect(mapStateToProps, { fetchAccount, renewAccount, showAlert })(CancellationPanel);

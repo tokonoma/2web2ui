@@ -6,13 +6,41 @@ exports[`CancellationPanel renders 1`] = `
   title="Request Account Cancellation"
 >
   <p>
-    To cancel your SparkPost account, 
-    <UnstyledLink
-      onClick={[Function]}
-    >
-      submit a cancellation request
-    </UnstyledLink>
-    . The request may take a few days to process.  All your data (e.g. domains, users, etc.) will be permanently deleted. We're sorry to see you go!
+    If you cancel, you can send emails up to your monthly limit before your cancel date, but you cannot overage past that. You will not be able to validate email addresses using recipient validation. Any dedicated IPs assigned to your account will be unrecoverable after your cancel date and might be assigned to other SparkPost accounts.
   </p>
+  <div>
+    <withRouter(Connect(Brightback))
+      condition={true}
+      config={
+        Object {
+          "app_id": "bAJDEmD5EK",
+          "cancel_confirmation_url": "/account/cancel",
+          "save_return_url": "/account/settings",
+        }
+      }
+      render={[Function]}
+    />
+  </div>
+</Panel>
+`;
+
+exports[`CancellationPanel renders renew button when pending cancellation  1`] = `
+<Panel
+  sectioned={true}
+  title="Pending Account Cancellation"
+>
+  <h6>
+    Account is set to cancel 
+    Jul 19 2019
+  </h6>
+  <div>
+    <Button
+      color="orange"
+      onClick={[Function]}
+      size="default"
+    >
+      Renew Account
+    </Button>
+  </div>
 </Panel>
 `;
