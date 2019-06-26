@@ -130,7 +130,11 @@ export class SingleResult extends Component {
                   <p className={styles.Paragraph}>
                     <White>
                       The following raw API results outline the reasons for your email's validation status. Learn how to
-                      <UnstyledLink to='https://developers.sparkpost.com/api/recipient-validation/' style={{ color: 'white', fontWeight: '800' }}> integrate with Recipient Validation </UnstyledLink>
+                      <UnstyledLink
+                        external
+                        to='https://developers.sparkpost.com/api/recipient-validation/'
+                        style={{ color: 'white', fontWeight: '800' }}
+                      > integrate with Recipient Validation </UnstyledLink>
                       in your product.
                     </White>
                   </p>

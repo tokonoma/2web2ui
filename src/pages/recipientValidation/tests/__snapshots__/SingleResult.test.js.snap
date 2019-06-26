@@ -177,6 +177,7 @@ exports[`SingleResult should render correctly 1`] = `
               <White>
                 The following raw API results outline the reasons for your email's validation status. Learn how to
                 <UnstyledLink
+                  external={true}
                   style={
                     Object {
                       "color": "white",
