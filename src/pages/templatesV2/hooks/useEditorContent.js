@@ -12,11 +12,11 @@ const useEditorContent = ({ draft = {}, published = {}, isPublishedMode }) => {
 
   // hydrate when loaded
   useEffect(() => {
-    const activeContent = isPublishedMode ? published : draft;
-    if (activeContent.content) {
-      setState(activeContent.content);
+    const activeContent = isPublishedMode ? published.content : draft.content;
+    if (activeContent) {
+      setState(activeContent);
     }
-  }, [draft, isPublishedMode, published]);
+  }, [draft.content, published.content, isPublishedMode]);
 
   return {
     content: state,
