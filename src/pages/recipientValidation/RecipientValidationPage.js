@@ -9,8 +9,10 @@ import { hasAccountOptionEnabled } from 'src/helpers/conditions/account';
 import RVDisabledPage from './components/RVDisabledPage';
 import ConditionSwitch, { Case, defaultCase } from 'src/components/auth/ConditionSwitch';
 
+import styles from './RecipientValidationPage.module.scss';
+
 const tabs = [
-  { content: 'Validate A List' },
+  { content: <span className={styles.TabPadding}>List</span> },
   { content: 'Single Address' },
   { content: 'API Integration' }
 ];
@@ -71,4 +73,3 @@ export class RecipientValidationPage extends Component {
 }
 
 export default RecipientValidationPage;
-

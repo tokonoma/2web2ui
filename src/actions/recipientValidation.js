@@ -41,3 +41,9 @@ export function getJobStatus(list_id) {
     }
   });
 }
+
+export function resetUploadError() {
+  return {
+    type: 'RESET_RECIPIENT_VALIDATION_ERROR'
+  };
+}

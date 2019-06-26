@@ -4,7 +4,8 @@ const initialState = {
   latestJobLoading: false,
   jobResultsLoading: false,
   jobResults: {},
-  latest: null
+  latest: null,
+  listError: null
 };
 
 export default (state = initialState, { meta, payload, type }) => {
@@ -22,7 +23,10 @@ export default (state = initialState, { meta, payload, type }) => {
       };
 
     case 'UPLOAD_RECIPIENT_VALIDATION_LIST_FAIL':
-      return { ...state, uploadLoading: false };
+      return { ...state, uploadLoading: false, listError: payload };
+
+    case 'RESET_RECIPIENT_VALIDATION_ERROR':
+      return { ...state, listError: null };
 
     // List Results
     case 'GET_LATEST_JOB_PENDING':
