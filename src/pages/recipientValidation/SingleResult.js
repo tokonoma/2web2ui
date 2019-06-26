@@ -23,7 +23,7 @@ const valueResponse = (value) => value ? (
 );
 
 const ICONS = {
-  unkown: <InfoIcon />,
+  unknown: <InfoIcon />,
   undeliverable: <ErrorIcon />,
   deliverable: <SuccessIcon />,
   risky: <WarningIcon />
@@ -41,18 +41,7 @@ export class SingleResult extends Component {
 
 
   render() {
-    let { singleResults = {}, loading } = this.props;
-
-    singleResults = {
-      result: 'deliverable',
-      valid: true,
-      reason: 'Invalid Domain',
-      is_role: false,
-      is_disposable: false,
-      is_free: false,
-      did_you_mean: 'harry.potter@hogwarts.edu',
-      email: 'harry.potter@hogwarts.com'
-    };
+    const { singleResults = {}, loading } = this.props;
 
     const { email, result, valid, reason, is_role, is_disposable, is_free, did_you_mean } = singleResults;
 
@@ -120,7 +109,7 @@ export class SingleResult extends Component {
                 <h2 className={styles.Header}>{email}</h2>
                 {renderResult()}
                 {resultTable()}
-                <p className={styles.Paragraph}>
+                <p className={styles.Paragraph} name="result-description">
                   {RESULT_DESCRIPTIONS[result]}
                 </p>
                 <Button component={Link} color='orange' to={SINGLE_RV_LINK}>

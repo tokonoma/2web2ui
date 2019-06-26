@@ -1,6 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { SingleResult } from '../SingleResult';
+import { RESULT_DESCRIPTIONS } from '../constants';
 
 describe('SingleResult', () => {
   let props;
@@ -28,6 +29,10 @@ describe('SingleResult', () => {
     wrapper = shallow(<SingleResult {...props} />);
   });
 
+  it('should render correctly', () => {
+    expect(wrapper).toMatchSnapshot();
+  });
+
   it('should redirect and show alert fails to validate', async () => {
     props.singleAddress = jest.fn(() => Promise.reject({ message: 'error message' }));
     wrapper = shallow(<SingleResult {...props}/>);
@@ -43,21 +48,25 @@ describe('SingleResult', () => {
   });
 
   it('renders correctly when valid', () => {
-    expect(wrapper).toMatchSnapshot();
+    expect(wrapper.find('SuccessIcon')).toExist();
+    expect(wrapper.find('p[name="result-description"]')).toHaveProp('children', RESULT_DESCRIPTIONS.deliverable);
   });
 
   it('renders correctly when risky', () => {
     wrapper.setProps({ singleResults: { ...props.singleResults, result: 'risky' }});
-    expect(wrapper).toMatchSnapshot();
+    expect(wrapper.find('WarningIcon')).toExist();
+    expect(wrapper.find('p[name="result-description"]')).toHaveProp('children', RESULT_DESCRIPTIONS.risky);
   });
 
   it('renders correctly when undeliverable', () => {
     wrapper.setProps({ singleResults: { ...props.singleResults, result: 'undeliverable' }});
-    expect(wrapper).toMatchSnapshot();
+    expect(wrapper.find('ErrorIcon')).toExist();
+    expect(wrapper.find('p[name="result-description"]')).toHaveProp('children', RESULT_DESCRIPTIONS.undeliverable);
   });
 
   it('renders correctly when result is unknown', () => {
     wrapper.setProps({ singleResults: { ...props.singleResults, result: 'unknown' }});
-    expect(wrapper).toMatchSnapshot();
+    expect(wrapper.find('InfoIcon')).toExist();
+    expect(wrapper.find('p[name="result-description"]')).toHaveProp('children', RESULT_DESCRIPTIONS.unknown);
   });
 });
