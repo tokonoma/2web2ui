@@ -4,6 +4,11 @@ exports[`EditorContext EditorContextProvider renders children wrapped by a conte
 <ContextProvider
   value={
     Object {
+      "annotations": Object {
+        "amp_html": Array [],
+        "html": Array [],
+        "text": Array [],
+      },
       "content": Object {},
       "currentNavigationIndex": 0,
       "currentNavigationKey": "content",

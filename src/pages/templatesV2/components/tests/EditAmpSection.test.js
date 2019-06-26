@@ -8,6 +8,7 @@ jest.mock('../../hooks/useEditorContext');
 describe('EditAmpSection', () => {
   const subject = ({ editorState } = {}) => {
     useEditorContext.mockReturnValue({
+      annotations: { amp_html: [{ line: 1, message: 'Oh no!' }]},
       content: { amp_html: '<html ⚡4email>' },
       setContent: () => {},
       ...editorState

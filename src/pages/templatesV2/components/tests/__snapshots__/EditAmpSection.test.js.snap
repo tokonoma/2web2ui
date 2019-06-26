@@ -2,6 +2,14 @@
 
 exports[`EditAmpSection renders an editor 1`] = `
 <Editor
+  inlineErrors={
+    Array [
+      Object {
+        "line": 1,
+        "message": "Oh no!",
+      },
+    ]
+  }
   mode="html"
   name="amp-html-content-editor"
   onChange={[Function]}

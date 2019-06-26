@@ -5,6 +5,7 @@ exports[`Editor renders editor 1`] = `
   className="EditorWrapper"
 >
   <ReactAce
+    annotations={Array []}
     cursorStart={1}
     editorProps={
       Object {

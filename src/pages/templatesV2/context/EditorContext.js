@@ -1,5 +1,6 @@
 import React, { createContext, useEffect } from 'react';
 import useRouter from 'src/hooks/useRouter';
+import useEditorAnnotations from '../hooks/useEditorAnnotations';
 import useEditorContent from '../hooks/useEditorContent';
 import useEditorNavigation from '../hooks/useEditorNavigation';
 import useEditorPreview from '../hooks/useEditorPreview';
@@ -17,7 +18,8 @@ export const EditorContextProvider = ({ children, value: { getDraft, getPublishe
     () => value,
     useEditorContent,
     useEditorNavigation,
-    useEditorPreview,
+    useEditorPreview, // must follow useEditorContent
+    useEditorAnnotations, // must follow useEditorContent
     useEditorTabs
   );
 
