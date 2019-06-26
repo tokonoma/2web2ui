@@ -52,9 +52,12 @@ export class SingleResult extends Component {
 
     const resultTable = () => (
       <div className={styles.table}>
-        <h6 className={styles.tableKey}>Did you mean</h6>
-        <span>{did_you_mean}</span>
-        <hr />
+        {did_you_mean &&
+          <>
+            <h6 className={styles.tableKey}>Did you mean</h6>
+            <span>{did_you_mean}</span>
+            <hr />
+          </>}
         <h6 className={styles.tableKey}>Normalized</h6>
         <span>{email}</span>
         <hr />
@@ -73,13 +76,13 @@ export class SingleResult extends Component {
       <small className={styles.blue}>
         {'{'}<br/>
         <Tab />"results": {'{'}<br/>
-        <Tab /><Tab />"result": "<White>{result}</White>",<br/>
+        {result && <><Tab /><Tab />"result": "<White>{result}</White>",<br/></>}
         <Tab /><Tab />"valid": <White>{valid.toString()}</White>,<br/>
-        <Tab /><Tab />"reason": "<White>{reason}</White>",<br/>
+        {reason && <><Tab /><Tab />"reason": "<White>{reason}</White>",<br/></>}
         <Tab /><Tab />"is_role": <White>{is_role.toString()}</White>,<br/>
         <Tab /><Tab />"is_disposable": <White>{is_disposable.toString()}</White>,<br/>
         <Tab /><Tab />"is_free": <White>{is_free.toString()}</White>,<br/>
-        <Tab /><Tab />"did_you_mean": "<White>{did_you_mean.toString()}</White>"<br/>
+        {did_you_mean && <><Tab /><Tab />"did_you_mean": "<White>{did_you_mean.toString()}</White>"<br/></>}
         <Tab />{'}'}<br/>
         {'}'}
       </small>
@@ -108,7 +111,7 @@ export class SingleResult extends Component {
             <Grid.Column xs={12} md={7}>
               <div style={{ padding: '1.5rem 2rem' }}>
                 <h2 className={styles.Header}>{email}</h2>
-                {renderResult()}
+                {result && renderResult()}
                 {resultTable()}
                 <p className={styles.Paragraph} name="result-description">
                   {RESULT_DESCRIPTIONS[result]}
