@@ -2,6 +2,7 @@
 import {
   abTesting,
   AccountSettingsPage,
+  ImmediateCancelAccountPage,
   alerts,
   apiKeys,
   AuthPage,
@@ -509,6 +510,13 @@ const routes = [
     supportDocSearch: 'account settings'
   },
   {
+    path: '/account//cancel',
+    component: ImmediateCancelAccountPage,
+    condition: all(hasGrants('account/manage'), not(isEnterprise), not(isHeroku), not(isAzure)),
+    layout: App,
+    title: 'Account | Cancellation In Progress'
+  },
+  {
     path: '/account/profile',
     component: emailVerificationRedirect,
     condition: hasGrants('users/self-manage'),
@@ -589,13 +597,6 @@ const routes = [
     layout: App,
     title: 'Billing | Plan Change In Progress',
     supportDocSearch: 'upgrade account'
-  },
-  {
-    path: '/account/billing/plan/cancel',
-    component: billing.ImmediateCancelPlanPage,
-    condition: all(hasGrants('account/manage'), not(isEnterprise), not(isHeroku), not(isAzure)),
-    layout: App,
-    title: 'Billing | Plan Cancellation In Progress'
   },
   {
     path: '/account/ip-pools',

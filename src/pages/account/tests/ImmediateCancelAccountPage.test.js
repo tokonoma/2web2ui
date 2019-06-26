@@ -1,11 +1,11 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { ImmediateCancelPlanPage } from '../ImmediateCancelPlanPage';
+import { ImmediateCancelAccountPage } from '../ImmediateCancelAccountPage';
 
 jest.mock('src/helpers/conversionTracking');
 
-describe('Component: ImmediateChangePlanPage', () => {
+describe('Component: ImmediateCancelAcocutPage', () => {
   let props;
   let wrapper;
 
@@ -15,10 +15,10 @@ describe('Component: ImmediateChangePlanPage', () => {
       cancelAccount: jest.fn(() => Promise.resolve()),
       showAlert: jest.fn()
     };
-    wrapper = shallow(<ImmediateCancelPlanPage {...props} />);
+    wrapper = shallow(<ImmediateCancelAccountPage {...props} />);
   });
 
-  it('should handle plan change immediately', async () => {
+  it('should handle account cancellation immediately', async () => {
     await wrapper;
     expect(props.cancelAccount).toHaveBeenCalled();
     expect(props.history.push).toHaveBeenCalledWith('/account/billing');
@@ -30,7 +30,7 @@ describe('Component: ImmediateChangePlanPage', () => {
 
   it('should render error page if cannot cancel', async () => {
     props.cancelAccount = jest.fn(() => Promise.reject({ message: 'Error message' }));
-    wrapper = shallow(<ImmediateCancelPlanPage {...props}/>);
+    wrapper = shallow(<ImmediateCancelAccountPage {...props}/>);
     await wrapper;
 
     expect(props.cancelAccount).toHaveBeenCalled();

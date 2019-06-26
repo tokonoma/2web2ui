@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { ApiErrorBanner, Loading } from 'src/components';
 import { cancelAccount } from 'src/actions/account';
-import styles from './ImmediateChangePlanPage.module.scss';
+import styles from './ImmediateCancelAccountPage.module.scss';
 import { showAlert } from 'src/actions/globalAlert';
 
 const BILLING_ROUTE = '/account/billing';
@@ -14,7 +14,7 @@ export const LOAD_STATE = {
   FAILURE: 3
 };
 
-export class ImmediateCancelPlanPage extends Component {
+export class ImmediateCancelAccountPage extends Component {
   state = {
     loading: LOAD_STATE.PENDING
   }
@@ -66,4 +66,4 @@ const mapDispatchToProps = {
   showAlert
 };
 
-export default withRouter(connect(null, mapDispatchToProps)(ImmediateCancelPlanPage));
+export default withRouter(connect(null, mapDispatchToProps)(ImmediateCancelAccountPage));

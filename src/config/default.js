@@ -108,8 +108,8 @@ const config = (identifier) => ({
     },
     cancelConfig: {
       app_id: 'bAJDEmD5EK', //Sandbox app Id
-      save_return_url: '/account/billing',
-      cancel_confirmation_url: '/account/billing/plan/cancel'
+      save_return_url: '/account/settings',
+      cancel_confirmation_url: '/account/cancel'
     },
     enabled: true
   },
