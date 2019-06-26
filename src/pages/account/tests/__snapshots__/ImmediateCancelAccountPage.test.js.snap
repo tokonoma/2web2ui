@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Component: ImmediateChangePlanPage should render error page if cannot cancel 1`] = `
+exports[`Component: ImmediateCancelAccountPage should render error page if cannot cancel 1`] = `
 <div
   className="MessageBlock"
 >
