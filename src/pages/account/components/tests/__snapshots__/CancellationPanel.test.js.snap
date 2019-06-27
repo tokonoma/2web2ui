@@ -1,12 +1,66 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`CancellationPanel cancellation button goes to brightback when enabled 1`] = `
+<Button
+  color="orange"
+  component={null}
+  size="default"
+  to="https://brightback.url"
+>
+  Cancel Account
+</Button>
+`;
+
+exports[`CancellationPanel cancellation button goes to cancellation link when not enabled 1`] = `
+<Button
+  color="orange"
+  component={[Function]}
+  size="default"
+  to="/account/cancel"
+>
+  Cancel Account
+</Button>
+`;
+
 exports[`CancellationPanel renders 1`] = `
 <Panel
   sectioned={true}
   title="Request Account Cancellation"
 >
   <p>
-    If you cancel, you can send emails up to your monthly limit before your cancel date, but you cannot overage past that. You will not be able to validate email addresses using recipient validation. Any dedicated IPs assigned to your account will be unrecoverable after your cancel date and might be assigned to other SparkPost accounts.
+    If you choose to cancel your account, it will be cancelled at the end of your billing cycle. You can change your mind at any time until 8am UTC on the date of cancellation.
+  </p>
+  <p>
+    <span>
+      Before your cancellation date:
+    </span>
+    <ul>
+      <li>
+        You can continue to send up to your monthly limit.
+      </li>
+      <li>
+        You may not go into overage.
+      </li>
+      <li>
+        You may not use our recipient validation feature.
+      </li>
+    </ul>
+  </p>
+  <p>
+    <span>
+      After your cancellation date:
+    </span>
+    <ul>
+      <li>
+        You will no longer be able to log in using your account credentials.
+      </li>
+      <li>
+        You will no longer be able to send email or make API calls using your API keys.
+      </li>
+      <li>
+        Any dedicated IPs on your account will be unrecoverable and may be assigned to other SparkPost accounts.
+      </li>
+    </ul>
   </p>
   <div>
     <withRouter(Connect(Brightback))
@@ -46,7 +100,7 @@ exports[`CancellationPanel renders renew button when pending cancellation  1`] =
       onClick={[Function]}
       size="default"
     >
-      Undo Cancellation
+      Don't cancel my account!
     </Button>
   </div>
 </Panel>
