@@ -11,6 +11,7 @@ exports[`PlanSummary renders pending cancellation date 1`] = `
     <small>
        to end 
       Jun 20 2019
+       when your account will be cancelled
     </small>
   </h6>
 </Fragment>

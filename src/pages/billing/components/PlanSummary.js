@@ -19,7 +19,7 @@ const PlanSummary = ({
   return (
     <React.Fragment>
       <h6 className={styles.Headline}>
-        {volume} emails for {cost}{effective_date && <small> to end {formatDate(effective_date)}</small>}
+        {volume} emails for {cost}{effective_date && <small> to end {formatDate(effective_date)} when your account will be cancelled</small>}
       </h6>
       {overage && <p>${overage.toFixed(2)} per thousand extra emails</p>}
     </React.Fragment>

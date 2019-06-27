@@ -39,7 +39,6 @@ export class BillingSummaryPage extends Component {
           <SuspendedForBilling condition={isSuspendedForBilling} account={account} />
           <ManuallyBilledBanner condition={not(isSelfServeBilling)} account={account} onZuoraPlan={billingInfo.onZuoraPlan} />
           <BillingSummary
-            onRenewAccount={this.onRenewAccount}
             condition={defaultCase}
             hasRecipientValidation={hasRecipientValidation}
             account={account}

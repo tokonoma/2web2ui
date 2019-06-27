@@ -11,7 +11,7 @@ describe('Component: ImmediateCancelAccountPage', () => {
 
   beforeEach(() => {
     props = {
-      history: { push: jest.fn() },
+      history: { replace: jest.fn() },
       fetchAccount: jest.fn(() => Promise.resolve()),
       cancelAccount: jest.fn(() => Promise.resolve()),
       showAlert: jest.fn()
@@ -23,7 +23,7 @@ describe('Component: ImmediateCancelAccountPage', () => {
     await wrapper;
     expect(props.cancelAccount).toHaveBeenCalled();
     expect(props.fetchAccount).toHaveBeenCalled();
-    expect(props.history.push).toHaveBeenCalledWith('/account/settings');
+    expect(props.history.replace).toHaveBeenCalledWith('/account/settings');
     expect(props.showAlert).toHaveBeenCalledWith({
       message: 'Your plan is set to be cancelled.',
       type: 'success'

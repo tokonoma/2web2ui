@@ -35,7 +35,7 @@ export class ImmediateCancelAccountPage extends Component {
           message: 'Your plan is set to be cancelled.',
           type: 'success'
         });
-        history.push(ACCOUNT_SETTINGS_ROUTE);
+        history.replace(ACCOUNT_SETTINGS_ROUTE);
       }, (error) => {
         this.setState({ loading: LOAD_STATE.FAILURE, error });
       });
