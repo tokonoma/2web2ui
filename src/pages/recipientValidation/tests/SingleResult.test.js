@@ -33,6 +33,11 @@ describe('SingleResult', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  it('should render correctly if missing certain fields', () => {
+    wrapper.setProps({ singleResults: { valid: true, is_role: false, is_disposable: false, is_free: true }});
+    expect(wrapper).toMatchSnapshot();
+  });
+
   it('should redirect and show alert fails to validate', async () => {
     props.singleAddress = jest.fn(() => Promise.reject({ message: 'error message' }));
     wrapper = shallow(<SingleResult {...props}/>);

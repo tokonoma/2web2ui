@@ -38,18 +38,11 @@ export class SingleResult extends Component {
     });
   }
 
+  resultTable = () => {
+    const { singleResults = {}} = this.props;
+    const { is_role, is_disposable, is_free, did_you_mean } = singleResults;
 
-  render() {
-    const { singleResults = {}, loading } = this.props;
-
-    if (!singleResults || loading) {
-      return (<Loading />);
-    }
-
-    const { email, result, valid, reason, is_role, is_disposable, is_free, did_you_mean } = singleResults;
-
-
-    const resultTable = () => (
+    return (
       <div className={styles.table}>
         {did_you_mean &&
           <>
@@ -67,8 +60,30 @@ export class SingleResult extends Component {
         {valueResponse(is_free)}
       </div>
     );
+  }
 
-    const codeBlock = () => (
+  renderResult = () => {
+    const { singleResults = {}} = this.props;
+    const { valid, result = valid ? 'valid' : 'undeliverable' } = singleResults;
+
+    return (
+      <div className={styles.Result}>
+        <div style={{ marginRight: '15px' }}>
+          {ICONS[result]}
+        </div>
+        <div>
+          <div style={{ marginBottom: '20px', fontWeight: 600 }}>Status:</div>
+          <div style={{ textTransform: 'capitalize', fontSize: '2.8em', fontWeight: 550 }}>{result}</div>
+        </div>
+      </div>
+    );
+  };
+
+  renderCodeBlock = () => {
+    const { singleResults = {}} = this.props;
+    const { result, valid, reason, is_role, is_disposable, is_free, did_you_mean } = singleResults;
+
+    return (
       <small className={styles.blue}>
         {'{'}<br/>
         <Tab />"results": {'{'}<br/>
@@ -83,18 +98,17 @@ export class SingleResult extends Component {
         {'}'}
       </small>
     );
+  }
 
-    const renderResult = () => (
-      <div className={styles.Result}>
-        <div style={{ marginRight: '15px' }}>
-          {ICONS[result]}
-        </div>
-        <div>
-          <div style={{ marginBottom: '20px', fontWeight: 600 }}>Status:</div>
-          <div style={{ textTransform: 'capitalize', fontSize: '2.8em', fontWeight: 550 }}>{result}</div>
-        </div>
-      </div>
-    );
+
+  render() {
+    const { singleResults = {}, loading } = this.props;
+
+    if (!singleResults || loading) {
+      return (<Loading />);
+    }
+
+    const { email, result } = singleResults;
 
     return (
       <Page
@@ -107,14 +121,12 @@ export class SingleResult extends Component {
             <Grid.Column xs={12} md={7}>
               <div style={{ padding: '2rem 2rem 3rem' }}>
                 <h2 className={styles.Header}>{email}</h2>
-                {result && renderResult()}
-                {resultTable()}
+                {this.renderResult()}
+                {this.resultTable()}
                 <p className={styles.Paragraph} name="result-description">
                   {RESULT_DESCRIPTIONS[result]}
                 </p>
-                <Button component={Link} color='orange' to={SINGLE_RV_LINK}>
-                  Validate Another
-                </Button>
+                <Button component={Link} color='orange' to={SINGLE_RV_LINK}>Validate Another</Button>
               </div>
             </Grid.Column>
             <Grid.Column xs={12} md={5}>
@@ -130,12 +142,11 @@ export class SingleResult extends Component {
                         external
                         to='https://developers.sparkpost.com/api/recipient-validation/'
                         style={{ color: 'white', fontWeight: '800' }}
-                      > integrate with Recipient Validation </UnstyledLink>
-                      in your product.
+                      > integrate with Recipient Validation </UnstyledLink> in your product.
                     </White>
                   </p>
                   <pre>
-                    {codeBlock()}
+                    {this.renderCodeBlock()}
                   </pre>
                 </div>
               </CodeBlock>
