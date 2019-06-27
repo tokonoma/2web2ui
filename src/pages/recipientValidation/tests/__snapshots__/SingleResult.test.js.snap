@@ -1,0 +1,732 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SingleResult renders correctly when valid 1`] = `
+<Page
+  breadcrumbAction={
+    Object {
+      "component": [Function],
+      "content": "Back",
+      "to": "/recipient-validation/single",
+    }
+  }
+  empty={Object {}}
+  subtitle="Results"
+  title="Recipient Validation"
+>
+  <Panel>
+    <Grid>
+      <Grid.Column
+        md={7}
+        xs={12}
+      >
+        <div
+          style={
+            Object {
+              "padding": "2rem 2rem 3rem",
+            }
+          }
+        >
+          <h2
+            className="Header"
+          >
+            harry.potter@hogwarts.com
+          </h2>
+          <div
+            className="Result"
+          >
+            <div
+              style={
+                Object {
+                  "marginRight": "15px",
+                }
+              }
+            >
+              <SuccessIcon />
+            </div>
+            <div>
+              <div
+                style={
+                  Object {
+                    "fontWeight": 600,
+                    "marginBottom": "20px",
+                  }
+                }
+              >
+                Status:
+              </div>
+              <div
+                style={
+                  Object {
+                    "fontSize": "2.8em",
+                    "fontWeight": 550,
+                    "textTransform": "capitalize",
+                  }
+                }
+              >
+                valid
+              </div>
+            </div>
+          </div>
+          <div
+            className="table"
+          >
+            <h6
+              className="tableKey"
+            >
+              Did you mean
+            </h6>
+            <span>
+              harry.potter@hogwarts.edu
+            </span>
+            <hr />
+            <h6
+              className="tableKey"
+            >
+              Role-based 
+              <InfoTooltip
+                content="Role email addresses represent a group or activity (sales, abuse)   and not an individual. They tend to have a lower engagement rate and a higher unsubscribe rate."
+              />
+            </h6>
+            <span
+              className="greenBoolean"
+            >
+              No
+            </span>
+            <hr />
+            <h6
+              className="tableKey"
+            >
+              Disposable 
+              <InfoTooltip
+                content="Disposable email providers are services that create email   addresses that are discarded after one use or a short time period. These addresses should be avoided."
+              />
+            </h6>
+            <span
+              className="greenBoolean"
+            >
+              No
+            </span>
+            <hr />
+            <h6
+              className="tableKey"
+            >
+              Free 
+              <InfoTooltip
+                content="Free email providers such as Gmail allow anyone to sign up   for an email address. Businesses may consider blocking these to eliminate low-quality leads."
+              />
+            </h6>
+            <span
+              className="greenBoolean"
+            >
+              No
+            </span>
+          </div>
+          <p
+            className="Paragraph"
+            name="result-description"
+          >
+            A valid result means that everything checks out for email address and     we have no data suggesting that is invalid for any reason.
+          </p>
+          <Button
+            color="orange"
+            component={[Function]}
+            size="default"
+            to="/recipient-validation/single"
+          >
+            Validate Another
+          </Button>
+        </div>
+      </Grid.Column>
+      <Grid.Column
+        md={5}
+        xs={12}
+      >
+        <CodeBlock
+          preformatted={true}
+        >
+          <div
+            style={
+              Object {
+                "padding": "2rem",
+              }
+            }
+          >
+            <div
+              className="apiHeader"
+            >
+              Raw API Response
+            </div>
+            <p
+              className="ApiDescription"
+            >
+              <White>
+                The following raw API results outline the reasons for your email's validation status. Learn how to
+                <UnstyledLink
+                  external={true}
+                  style={
+                    Object {
+                      "color": "white",
+                      "fontWeight": "800",
+                    }
+                  }
+                  to="https://developers.sparkpost.com/api/recipient-validation/"
+                >
+                   integrate with Recipient Validation 
+                </UnstyledLink>
+                 in your product.
+              </White>
+            </p>
+            <pre>
+              <small
+                className="blue"
+              >
+                {
+                <br />
+                <Tab />
+                "results": 
+                {
+                <br />
+                <Tab />
+                <Tab />
+                "result": "
+                <White>
+                  valid
+                </White>
+                ",
+                <br />
+                <Tab />
+                <Tab />
+                "valid": 
+                <White>
+                  true
+                </White>
+                ,
+                <br />
+                <Tab />
+                <Tab />
+                "reason": "
+                <White>
+                  Invalid Domain
+                </White>
+                ",
+                <br />
+                <Tab />
+                <Tab />
+                "is_role": 
+                <White>
+                  false
+                </White>
+                ,
+                <br />
+                <Tab />
+                <Tab />
+                "is_disposable": 
+                <White>
+                  false
+                </White>
+                ,
+                <br />
+                <Tab />
+                <Tab />
+                "is_free": 
+                <White>
+                  false
+                </White>
+                ,
+                <br />
+                <Tab />
+                <Tab />
+                "did_you_mean": "
+                <White>
+                  harry.potter@hogwarts.edu
+                </White>
+                "
+                <br />
+                <Tab />
+                }
+                <br />
+                }
+              </small>
+            </pre>
+          </div>
+        </CodeBlock>
+      </Grid.Column>
+    </Grid>
+  </Panel>
+</Page>
+`;
+
+exports[`SingleResult should render correctly 1`] = `
+<Page
+  breadcrumbAction={
+    Object {
+      "component": [Function],
+      "content": "Back",
+      "to": "/recipient-validation/single",
+    }
+  }
+  empty={Object {}}
+  subtitle="Results"
+  title="Recipient Validation"
+>
+  <Panel>
+    <Grid>
+      <Grid.Column
+        md={7}
+        xs={12}
+      >
+        <div
+          style={
+            Object {
+              "padding": "2rem 2rem 3rem",
+            }
+          }
+        >
+          <h2
+            className="Header"
+          >
+            harry.potter@hogwarts.com
+          </h2>
+          <div
+            className="Result"
+          >
+            <div
+              style={
+                Object {
+                  "marginRight": "15px",
+                }
+              }
+            >
+              <SuccessIcon />
+            </div>
+            <div>
+              <div
+                style={
+                  Object {
+                    "fontWeight": 600,
+                    "marginBottom": "20px",
+                  }
+                }
+              >
+                Status:
+              </div>
+              <div
+                style={
+                  Object {
+                    "fontSize": "2.8em",
+                    "fontWeight": 550,
+                    "textTransform": "capitalize",
+                  }
+                }
+              >
+                valid
+              </div>
+            </div>
+          </div>
+          <div
+            className="table"
+          >
+            <h6
+              className="tableKey"
+            >
+              Did you mean
+            </h6>
+            <span>
+              harry.potter@hogwarts.edu
+            </span>
+            <hr />
+            <h6
+              className="tableKey"
+            >
+              Role-based 
+              <InfoTooltip
+                content="Role email addresses represent a group or activity (sales, abuse)   and not an individual. They tend to have a lower engagement rate and a higher unsubscribe rate."
+              />
+            </h6>
+            <span
+              className="greenBoolean"
+            >
+              No
+            </span>
+            <hr />
+            <h6
+              className="tableKey"
+            >
+              Disposable 
+              <InfoTooltip
+                content="Disposable email providers are services that create email   addresses that are discarded after one use or a short time period. These addresses should be avoided."
+              />
+            </h6>
+            <span
+              className="greenBoolean"
+            >
+              No
+            </span>
+            <hr />
+            <h6
+              className="tableKey"
+            >
+              Free 
+              <InfoTooltip
+                content="Free email providers such as Gmail allow anyone to sign up   for an email address. Businesses may consider blocking these to eliminate low-quality leads."
+              />
+            </h6>
+            <span
+              className="greenBoolean"
+            >
+              No
+            </span>
+          </div>
+          <p
+            className="Paragraph"
+            name="result-description"
+          >
+            A valid result means that everything checks out for email address and     we have no data suggesting that is invalid for any reason.
+          </p>
+          <Button
+            color="orange"
+            component={[Function]}
+            size="default"
+            to="/recipient-validation/single"
+          >
+            Validate Another
+          </Button>
+        </div>
+      </Grid.Column>
+      <Grid.Column
+        md={5}
+        xs={12}
+      >
+        <CodeBlock
+          preformatted={true}
+        >
+          <div
+            style={
+              Object {
+                "padding": "2rem",
+              }
+            }
+          >
+            <div
+              className="apiHeader"
+            >
+              Raw API Response
+            </div>
+            <p
+              className="ApiDescription"
+            >
+              <White>
+                The following raw API results outline the reasons for your email's validation status. Learn how to
+                <UnstyledLink
+                  external={true}
+                  style={
+                    Object {
+                      "color": "white",
+                      "fontWeight": "800",
+                    }
+                  }
+                  to="https://developers.sparkpost.com/api/recipient-validation/"
+                >
+                   integrate with Recipient Validation 
+                </UnstyledLink>
+                 in your product.
+              </White>
+            </p>
+            <pre>
+              <small
+                className="blue"
+              >
+                {
+                <br />
+                <Tab />
+                "results": 
+                {
+                <br />
+                <Tab />
+                <Tab />
+                "result": "
+                <White>
+                  valid
+                </White>
+                ",
+                <br />
+                <Tab />
+                <Tab />
+                "valid": 
+                <White>
+                  true
+                </White>
+                ,
+                <br />
+                <Tab />
+                <Tab />
+                "reason": "
+                <White>
+                  Invalid Domain
+                </White>
+                ",
+                <br />
+                <Tab />
+                <Tab />
+                "is_role": 
+                <White>
+                  false
+                </White>
+                ,
+                <br />
+                <Tab />
+                <Tab />
+                "is_disposable": 
+                <White>
+                  false
+                </White>
+                ,
+                <br />
+                <Tab />
+                <Tab />
+                "is_free": 
+                <White>
+                  false
+                </White>
+                ,
+                <br />
+                <Tab />
+                <Tab />
+                "did_you_mean": "
+                <White>
+                  harry.potter@hogwarts.edu
+                </White>
+                "
+                <br />
+                <Tab />
+                }
+                <br />
+                }
+              </small>
+            </pre>
+          </div>
+        </CodeBlock>
+      </Grid.Column>
+    </Grid>
+  </Panel>
+</Page>
+`;
+
+exports[`SingleResult should render correctly if missing certain fields 1`] = `
+<Page
+  breadcrumbAction={
+    Object {
+      "component": [Function],
+      "content": "Back",
+      "to": "/recipient-validation/single",
+    }
+  }
+  empty={Object {}}
+  subtitle="Results"
+  title="Recipient Validation"
+>
+  <Panel>
+    <Grid>
+      <Grid.Column
+        md={7}
+        xs={12}
+      >
+        <div
+          style={
+            Object {
+              "padding": "2rem 2rem 3rem",
+            }
+          }
+        >
+          <h2
+            className="Header"
+          />
+          <div
+            className="Result"
+          >
+            <div
+              style={
+                Object {
+                  "marginRight": "15px",
+                }
+              }
+            >
+              <SuccessIcon />
+            </div>
+            <div>
+              <div
+                style={
+                  Object {
+                    "fontWeight": 600,
+                    "marginBottom": "20px",
+                  }
+                }
+              >
+                Status:
+              </div>
+              <div
+                style={
+                  Object {
+                    "fontSize": "2.8em",
+                    "fontWeight": 550,
+                    "textTransform": "capitalize",
+                  }
+                }
+              >
+                valid
+              </div>
+            </div>
+          </div>
+          <div
+            className="table"
+          >
+            <h6
+              className="tableKey"
+            >
+              Role-based 
+              <InfoTooltip
+                content="Role email addresses represent a group or activity (sales, abuse)   and not an individual. They tend to have a lower engagement rate and a higher unsubscribe rate."
+              />
+            </h6>
+            <span
+              className="greenBoolean"
+            >
+              No
+            </span>
+            <hr />
+            <h6
+              className="tableKey"
+            >
+              Disposable 
+              <InfoTooltip
+                content="Disposable email providers are services that create email   addresses that are discarded after one use or a short time period. These addresses should be avoided."
+              />
+            </h6>
+            <span
+              className="greenBoolean"
+            >
+              No
+            </span>
+            <hr />
+            <h6
+              className="tableKey"
+            >
+              Free 
+              <InfoTooltip
+                content="Free email providers such as Gmail allow anyone to sign up   for an email address. Businesses may consider blocking these to eliminate low-quality leads."
+              />
+            </h6>
+            <span
+              className="redBoolean"
+            >
+              Yes
+            </span>
+          </div>
+          <p
+            className="Paragraph"
+            name="result-description"
+          />
+          <Button
+            color="orange"
+            component={[Function]}
+            size="default"
+            to="/recipient-validation/single"
+          >
+            Validate Another
+          </Button>
+        </div>
+      </Grid.Column>
+      <Grid.Column
+        md={5}
+        xs={12}
+      >
+        <CodeBlock
+          preformatted={true}
+        >
+          <div
+            style={
+              Object {
+                "padding": "2rem",
+              }
+            }
+          >
+            <div
+              className="apiHeader"
+            >
+              Raw API Response
+            </div>
+            <p
+              className="ApiDescription"
+            >
+              <White>
+                The following raw API results outline the reasons for your email's validation status. Learn how to
+                <UnstyledLink
+                  external={true}
+                  style={
+                    Object {
+                      "color": "white",
+                      "fontWeight": "800",
+                    }
+                  }
+                  to="https://developers.sparkpost.com/api/recipient-validation/"
+                >
+                   integrate with Recipient Validation 
+                </UnstyledLink>
+                 in your product.
+              </White>
+            </p>
+            <pre>
+              <small
+                className="blue"
+              >
+                {
+                <br />
+                <Tab />
+                "results": 
+                {
+                <br />
+                <Tab />
+                <Tab />
+                "valid": 
+                <White>
+                  true
+                </White>
+                ,
+                <br />
+                <Tab />
+                <Tab />
+                "is_role": 
+                <White>
+                  false
+                </White>
+                ,
+                <br />
+                <Tab />
+                <Tab />
+                "is_disposable": 
+                <White>
+                  false
+                </White>
+                ,
+                <br />
+                <Tab />
+                <Tab />
+                "is_free": 
+                <White>
+                  true
+                </White>
+                ,
+                <br />
+                <Tab />
+                }
+                <br />
+                }
+              </small>
+            </pre>
+          </div>
+        </CodeBlock>
+      </Grid.Column>
+    </Grid>
+  </Panel>
+</Page>
+`;

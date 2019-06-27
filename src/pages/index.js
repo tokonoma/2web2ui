@@ -31,4 +31,5 @@ export { default as SmtpPage } from './smtp/SmtpPage';
 export { default as passwordReset } from './passwordReset';
 export { default as PremiumSupportPage } from './support/PremiumSupportPage';
 export { default as RecipientValidationPage } from './recipientValidation/RecipientValidationPage';
+export { default as SingleResultPage } from './recipientValidation/SingleResult';
 export { default as snippets } from './snippets';

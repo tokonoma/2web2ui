@@ -16,6 +16,7 @@ import {
   PremiumSupportPage,
   recipientLists,
   RecipientValidationPage,
+  SingleResultPage,
   RegisterPage,
   reports,
   sendingDomains,
@@ -707,10 +708,22 @@ const routes = [
   },
   {
     path: '/recipient-validation',
+    redirect: '/recipient-validation/list'
+  },
+  {
+    path: '/recipient-validation/single/:email',
+    component: SingleResultPage,
+    condition: hasGrants('recipient-validation/manage'),
+    layout: App,
+    title: 'Recipient Validation | Results',
+    supportDocsSearch: 'Recipient Validation'
+  },
+  {
+    path: '/recipient-validation/:category',
     component: RecipientValidationPage,
     condition: hasGrants('recipient-validation/manage'),
     layout: App,
-    title: 'Recipient Email Validation',
+    title: 'Recipient Validation',
     supportDocsSearch: 'Recipient Validation'
   },
   {

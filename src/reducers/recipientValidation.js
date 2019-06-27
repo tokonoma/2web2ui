@@ -3,6 +3,7 @@ const initialState = {
   uploadLoading: false,
   latestJobLoading: false,
   jobResultsLoading: false,
+  singleLoading: false,
   jobResults: {},
   latest: null,
   listError: null
@@ -75,7 +76,7 @@ export default (state = initialState, { meta, payload, type }) => {
 
     // Single Recipient
     case 'SINGLE_RECIPIENT_VALIDATION_PENDING':
-      return { ...state, singleResults: null };
+      return { ...state, singleResults: null, singleLoading: true };
 
     case 'SINGLE_RECIPIENT_VALIDATION_SUCCESS':
       return {
@@ -83,11 +84,12 @@ export default (state = initialState, { meta, payload, type }) => {
         singleResults: {
           ...payload,
           email: meta.email
-        }
+        },
+        singleLoading: false
       };
 
     case 'SINGLE_RECIPIENT_VALIDATION_FAIL':
-      return { ...state, singleResults: null };
+      return { ...state, singleResults: null, singleLoading: false };
 
     default:
       return { ...state };
