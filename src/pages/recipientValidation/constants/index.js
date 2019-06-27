@@ -9,12 +9,10 @@ export const FREE_TOOLTIP = 'Free email providers such as Gmail allow anyone to 
   for an email address. Businesses may consider blocking these to eliminate low-quality leads.';
 
 export const RESULT_DESCRIPTIONS = {
-  deliverable: 'A valid result means that everything checks out for email address and \
+  valid: 'A valid result means that everything checks out for email address and \
     we have no data suggesting that is invalid for any reason.',
   undeliverable: 'An undeliverable result means that our data analysis confidently points \
     to the fact that the email address does not exist or will hard bounce for some other reason.',
   risky: 'A risky result means that our data analysis indicated that the email address will likely \
-    bounce or that the address has other issues.',
-  unknown: 'An unknown result means that everything about the email address passed our analysis. \
-    You should send to this email cautiously.'
+    bounce or that the address has other issues.'
 };

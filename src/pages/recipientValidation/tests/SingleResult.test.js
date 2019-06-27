@@ -10,7 +10,7 @@ describe('SingleResult', () => {
   beforeEach(() => {
     props = {
       singleResults: {
-        result: 'deliverable',
+        result: 'valid',
         valid: true,
         reason: 'Invalid Domain',
         is_role: false,
@@ -48,8 +48,9 @@ describe('SingleResult', () => {
   });
 
   it('renders correctly when valid', () => {
+    expect(wrapper).toMatchSnapshot();
     expect(wrapper.find('SuccessIcon')).toExist();
-    expect(wrapper.find('p[name="result-description"]')).toHaveProp('children', RESULT_DESCRIPTIONS.deliverable);
+    expect(wrapper.find('p[name="result-description"]')).toHaveProp('children', RESULT_DESCRIPTIONS.valid);
   });
 
   it('renders correctly when risky', () => {
@@ -62,11 +63,5 @@ describe('SingleResult', () => {
     wrapper.setProps({ singleResults: { ...props.singleResults, result: 'undeliverable' }});
     expect(wrapper.find('ErrorIcon')).toExist();
     expect(wrapper.find('p[name="result-description"]')).toHaveProp('children', RESULT_DESCRIPTIONS.undeliverable);
-  });
-
-  it('renders correctly when result is unknown', () => {
-    wrapper.setProps({ singleResults: { ...props.singleResults, result: 'unknown' }});
-    expect(wrapper.find('InfoIcon')).toExist();
-    expect(wrapper.find('p[name="result-description"]')).toHaveProp('children', RESULT_DESCRIPTIONS.unknown);
   });
 });

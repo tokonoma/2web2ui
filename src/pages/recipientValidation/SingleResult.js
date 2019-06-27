@@ -4,12 +4,12 @@ import { Page, Panel, Button, Grid, UnstyledLink } from '@sparkpost/matchbox';
 import styles from './SingleResult.module.scss';
 import { withRouter, Link } from 'react-router-dom';
 import CodeBlock from './components/CodeBlock';
-import InfoTooltip from 'src/pages/signals/components/InfoTooltip';
-import { WarningIcon, SuccessIcon, InfoIcon, ErrorIcon } from './components/icons';
+import { WarningIcon, SuccessIcon, ErrorIcon } from './components/icons';
 import { ROLE_TOOLTIP, DISPOSABLE_TOOLTIP, FREE_TOOLTIP, RESULT_DESCRIPTIONS } from './constants';
 import { singleAddress } from 'src/actions/recipientValidation';
 import { showAlert } from 'src/actions/globalAlert';
 import Loading from 'src/components/loading';
+import Tooltip from './components/Tooltip';
 
 const SINGLE_RV_LINK = '/recipient-validation/single';
 
@@ -23,9 +23,8 @@ const valueResponse = (value) => value ? (
 );
 
 const ICONS = {
-  unknown: <InfoIcon />,
   undeliverable: <ErrorIcon />,
-  deliverable: <SuccessIcon />,
+  valid: <SuccessIcon />,
   risky: <WarningIcon />
 };
 
@@ -58,16 +57,13 @@ export class SingleResult extends Component {
             <span>{did_you_mean}</span>
             <hr />
           </>}
-        <h6 className={styles.tableKey}>Normalized</h6>
-        <span>{email}</span>
-        <hr />
-        <h6 className={styles.tableKey}>Role-based <InfoTooltip size={16} content={ROLE_TOOLTIP}/></h6>
+        <h6 className={styles.tableKey}>Role-based <Tooltip content={ROLE_TOOLTIP}/></h6>
         {valueResponse(is_role)}
         <hr />
-        <h6 className={styles.tableKey}>Disposable <InfoTooltip size={16} content={DISPOSABLE_TOOLTIP}/></h6>
+        <h6 className={styles.tableKey}>Disposable <Tooltip content={DISPOSABLE_TOOLTIP}/></h6>
         {valueResponse(is_disposable)}
         <hr />
-        <h6 className={styles.tableKey}>Free <InfoTooltip size={16} content={FREE_TOOLTIP}/></h6>
+        <h6 className={styles.tableKey}>Free <Tooltip content={FREE_TOOLTIP}/></h6>
         {valueResponse(is_free)}
       </div>
     );
@@ -94,7 +90,7 @@ export class SingleResult extends Component {
           {ICONS[result]}
         </div>
         <div>
-          <div style={{ marginBottom: '20px' }}>Status:</div>
+          <div style={{ marginBottom: '20px', fontWeight: 600 }}>Status:</div>
           <div style={{ textTransform: 'capitalize', fontSize: '2.8em', fontWeight: 550 }}>{result}</div>
         </div>
       </div>
@@ -109,7 +105,7 @@ export class SingleResult extends Component {
         <Panel>
           <Grid>
             <Grid.Column xs={12} md={7}>
-              <div style={{ padding: '1.5rem 2rem' }}>
+              <div style={{ padding: '2rem 2rem 3rem' }}>
                 <h2 className={styles.Header}>{email}</h2>
                 {result && renderResult()}
                 {resultTable()}
@@ -125,9 +121,9 @@ export class SingleResult extends Component {
               <CodeBlock
                 preformatted
               >
-                <div style={{ padding: '1rem 2rem' }}>
-                  <h2 style={{ color: 'white' }}>Raw API Response</h2>
-                  <p className={styles.Paragraph}>
+                <div style={{ padding: '2rem' }}>
+                  <div className={styles.apiHeader}>Raw API Response</div>
+                  <p className={styles.ApiDescription}>
                     <White>
                       The following raw API results outline the reasons for your email's validation status. Learn how to
                       <UnstyledLink
