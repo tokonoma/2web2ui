@@ -4,51 +4,53 @@ import { CancellationPanel } from '../CancellationPanel';
 import Brightback from 'src/components/brightback/Brightback';
 
 describe('CancellationPanel', () => {
-  let props;
-  let wrapper;
-  const getButton = (props = {}) => wrapper.find(Brightback).props().render(props);
+  const accountPendingCancellation = {
+    pending_cancellation: { effective_date: '2019-07-20T00:00:00.000Z' }
+  };
+  const subject = (props) => shallow(<CancellationPanel
+    account={{ pending_cancellation: null }}
+    renewAccount = {() => {}}
+    showAlert = {() => {}}
+    fetchAccount = {() => {}}
+    {...props}/>);
 
-  const subject = (props) => shallow(<CancellationPanel {...props}/>);
-  beforeEach(() => {
-    props = {
-      account: {
-        pending_cancellation: null
-      },
-      renewAccount: jest.fn(() => Promise.resolve()),
-      showAlert: jest.fn(),
-      fetchAccount: jest.fn()
-    };
-
-    wrapper = shallow(<CancellationPanel {...props}/>);
-  });
+  const getButton = ({ wrapper = subject(), enabled = false, to = '' }) => wrapper
+    .find(Brightback)
+    .renderProp('render')({ enabled, to });
 
   it('renders', () => {
-    expect(wrapper).toMatchSnapshot();
+    expect(subject()).toMatchSnapshot();
   });
 
   it('renders renew button when pending cancellation ', () => {
-    props.account.pending_cancellation = { effective_date: '2019-07-20T00:00:00.000Z' };
-    wrapper = subject(props);
-    expect(wrapper).toMatchSnapshot();
+    expect(subject({ account: accountPendingCancellation })
+      .find('Button')
+      .prop('children')).toEqual(expect.stringMatching(/Don't cancel my account/));
   });
 
   it('cancellation button goes to cancellation link when not enabled', () => {
-    expect(getButton()).toMatchSnapshot();
+    expect(getButton({ enabled: false }).prop('to')).toEqual('/account/cancel');
   });
 
   it('cancellation button goes to brightback when enabled', () => {
-    expect(getButton({ enabled: true, to: 'https://brightback.url' })).toMatchSnapshot();
+    const bbUrl = 'https://brightback.url';
+    expect(getButton({ enabled: true, to: bbUrl }).prop('to')).toEqual(bbUrl);
   });
 
   it('refresh button renews account and retrieves new account state', async () => {
-    props.account.pending_cancellation = { effective_date: '2019-07-20T00:00:00.000Z' };
-    wrapper = subject(props);
+    const renewAccount = jest.fn(() => Promise.resolve());
+    const showAlert = jest.fn();
+    const fetchAccount = jest.fn();
+
+    const wrapper = subject({
+      account: accountPendingCancellation,
+      renewAccount,
+      showAlert,
+      fetchAccount
+    });
     await wrapper.find('Button').simulate('click');
-    expect(props.showAlert).toHaveBeenCalledWith({ type: 'success', message: 'Your account will not be cancelled.' });
-    expect(props.renewAccount).toHaveBeenCalled();
-    expect(props.fetchAccount).toHaveBeenCalled();
-
+    expect(showAlert).toHaveBeenCalledWith({ type: 'success', message: 'Your account will not be cancelled.' });
+    expect(renewAccount).toHaveBeenCalled();
+    expect(fetchAccount).toHaveBeenCalled();
   });
-
-
 });

@@ -1,27 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`CancellationPanel cancellation button goes to brightback when enabled 1`] = `
-<Button
-  color="orange"
-  component={null}
-  size="default"
-  to="https://brightback.url"
->
-  Cancel Account
-</Button>
-`;
-
-exports[`CancellationPanel cancellation button goes to cancellation link when not enabled 1`] = `
-<Button
-  color="orange"
-  component={[Function]}
-  size="default"
-  to="/account/cancel"
->
-  Cancel Account
-</Button>
-`;
-
 exports[`CancellationPanel renders 1`] = `
 <Panel
   sectioned={true}
@@ -74,34 +52,6 @@ exports[`CancellationPanel renders 1`] = `
       }
       render={[Function]}
     />
-  </div>
-</Panel>
-`;
-
-exports[`CancellationPanel renders renew button when pending cancellation  1`] = `
-<Panel
-  sectioned={true}
-  title="Pending Account Cancellation"
->
-  <h6>
-    Account is set to cancel 
-    Jul 19 2019
-  </h6>
-  <p>
-    You can undo your cancellation at anytime 
-    <strong>
-      before
-    </strong>
-     8:00 UTC on your cancel date. We hope you decide to stay!
-  </p>
-  <div>
-    <Button
-      color="orange"
-      onClick={[Function]}
-      size="default"
-    >
-      Don't cancel my account!
-    </Button>
   </div>
 </Panel>
 `;
