@@ -1,0 +1,126 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Alert Form Component should render the alert form component correctly 1`] = `
+<Form
+  onSubmit={[MockFunction]}
+>
+  <Panel
+    className="Form"
+  >
+    <Grid>
+      <Grid.Column
+        lg={9}
+        md={11}
+        sm={12}
+      >
+        <Panel.Section>
+          <label>
+            Alert Name
+          </label>
+          <Field
+            component={[Function]}
+            disabled={false}
+            name="name"
+            validate={
+              Array [
+                [Function],
+                [Function],
+              ]
+            }
+          />
+          <div
+            className="MetricSelector"
+          >
+            <label>
+              Alert Metric
+            </label>
+            <Field
+              component={[Function]}
+              helpText="This assignment is permanent."
+              name="metric"
+              onChange={[Function]}
+              options={
+                Array [
+                  Object {
+                    "disabled": true,
+                    "label": "Select Metric",
+                    "value": "",
+                  },
+                  Object {
+                    "label": "Monthly Sending Limit",
+                    "value": "monthly_sending_limit",
+                  },
+                  Object {
+                    "label": "Health Score",
+                    "value": "health_score",
+                  },
+                  Object {
+                    "label": "Block Bounce Rate",
+                    "value": "block_bounce_rate",
+                  },
+                ]
+              }
+            />
+          </div>
+          <label>
+            <h5>
+              Filtered by 
+              <span
+                className="OptionalText"
+              >
+                optional
+              </span>
+            </h5>
+          </label>
+          <Connect(SubaccountsField)
+            disabled={false}
+          />
+          <Connect(FilterFields)
+            disabled={false}
+          />
+          <div
+            className="Evaluator"
+          >
+            <Connect(EvaluatorFields)
+              disabled={false}
+            />
+          </div>
+          <label>
+             Notify Me
+          </label>
+          <Expandable
+            defaultOpen={false}
+            icon={<Email />}
+            id="email"
+            subtitle="You and your team can receive alerts through email"
+            title="Email"
+          >
+            <Field
+              component={[Function]}
+              disabled={false}
+              multiline={true}
+              name="email_addresses"
+              placeholder="first.last@email.com, TLCWithEmail@SparkpostIsBest.com"
+              validate={
+                Array [
+                  [Function],
+                  [Function],
+                ]
+              }
+            />
+          </Expandable>
+          <br />
+          <Button
+            disabled={true}
+            primary={true}
+            size="default"
+            submit={true}
+          >
+            Create Alert
+          </Button>
+        </Panel.Section>
+      </Grid.Column>
+    </Grid>
+  </Panel>
+</Form>
+`;
