@@ -138,6 +138,10 @@ export const numberBetween = _.memoize(function numberBetween(min, max) {
   return (value) => (value > min && value < max) ? undefined : `Must be between ${min} and ${max}`;
 });
 
+export const numberBetweenInclusive = _.memoize(function numberBetween(min, max) {
+  return (value) => (value >= min && value <= max) ? undefined : `Must be between ${min} and ${max}`;
+});
+
 export const maxFileSize = _.memoize(function maxFilesSize(maxSize) {
   return (file) => {
     if (!file) {

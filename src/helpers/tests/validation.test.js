@@ -168,6 +168,15 @@ describe('Number between validation', () => {
   it('returns error for invalid input', () => {
     expect(validations.numberBetween(0, 1)(0)).toEqual('Must be between 0 and 1');
   });
+
+  it('returns undefined for valid input for inclusive case', () => {
+    expect(validations.numberBetweenInclusive(0, 1)(0)).toBeUndefined();
+  });
+
+  it('returns error for invalid input for inclusive case', () => {
+    expect(validations.numberBetweenInclusive(0, 1)(2)).toEqual('Must be between 0 and 1');
+  });
+
 });
 
 describe('URL Validation', () => {
