@@ -1,0 +1,165 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Evaluator Fields Component does not render operator if it is only 1 option and increases grid size of slider 1`] = `
+<Grid.Column
+  id="sliderColumn"
+  lg={7}
+  md={7}
+  sm={12}
+>
+  <label>
+    Percent Change
+  </label>
+  <Slider
+    defaultValue={0}
+    max={100}
+    min={0}
+    onChange={[Function]}
+    precision={0}
+    value={50}
+  />
+</Grid.Column>
+`;
+
+exports[`Evaluator Fields Component does not render operator nor source if they each only have 1 option and increases grid size of slider 1`] = `
+<Grid.Column
+  id="sliderColumn"
+  lg={10}
+  md={10}
+  sm={12}
+>
+  <label>
+    Percent Used
+  </label>
+  <Slider
+    defaultValue={0}
+    max={100}
+    min={0}
+    onChange={[Function]}
+    precision={0}
+    value={50}
+  />
+</Grid.Column>
+`;
+
+exports[`Evaluator Fields Component does not render source if it is only 1 option and increases grid size of slider 1`] = `
+<Grid.Column
+  id="sliderColumn"
+  lg={8}
+  md={8}
+  sm={12}
+>
+  <label>
+    Bounce Percentage
+  </label>
+  <Slider
+    defaultValue={0}
+    max={100}
+    min={0}
+    onChange={[Function]}
+    precision={0}
+    value={50}
+  />
+</Grid.Column>
+`;
+
+exports[`Evaluator Fields Component renders correctly 1`] = `
+<Grid>
+  <Grid.Column
+    lg={3}
+    md={3}
+    sm={12}
+  >
+    <label>
+      Evaluated
+    </label>
+    <Field
+      component={[Function]}
+      disabled={false}
+      name="source"
+      options={
+        Array [
+          Object {
+            "label": "Value",
+            "value": "raw",
+          },
+          Object {
+            "label": "Week over Week",
+            "value": "week_over_week",
+          },
+          Object {
+            "label": "Day over Day",
+            "value": "day_over_day",
+          },
+        ]
+      }
+    />
+  </Grid.Column>
+  <Grid.Column
+    lg={2}
+    md={2}
+    sm={12}
+  >
+    <label>
+      Comparison
+    </label>
+    <Field
+      component={[Function]}
+      disabled={false}
+      name="operator"
+      options={
+        Array [
+          Object {
+            "label": "Below",
+            "value": "lt",
+          },
+          Object {
+            "label": "Above",
+            "value": "gt",
+          },
+        ]
+      }
+    />
+  </Grid.Column>
+  <Grid.Column
+    id="sliderColumn"
+    lg={5}
+    md={5}
+    sm={12}
+  >
+    <label>
+      Score
+    </label>
+    <Slider
+      defaultValue={0}
+      max={100}
+      min={0}
+      onChange={[Function]}
+      precision={0}
+      value={50}
+    />
+  </Grid.Column>
+  <Grid.Column
+    lg={2}
+    md={2}
+    sm={12}
+  >
+    <br />
+    <Field
+      component={[Function]}
+      disabled={false}
+      name="value"
+      normalize={[Function]}
+      onChange={[Function]}
+      style={
+        Object {
+          "textAlign": "right",
+        }
+      }
+      suffix=""
+      type="number"
+      validate={[Function]}
+    />
+  </Grid.Column>
+</Grid>
+`;
