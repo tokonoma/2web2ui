@@ -2,6 +2,7 @@
 import {
   abTesting,
   AccountSettingsPage,
+  ImmediateCancelAccountPage,
   alerts,
   apiKeys,
   AuthPage,
@@ -508,6 +509,13 @@ const routes = [
     layout: App,
     title: 'Account settings',
     supportDocSearch: 'account settings'
+  },
+  {
+    path: '/account/cancel',
+    component: ImmediateCancelAccountPage,
+    condition: all(hasGrants('account/manage'), not(isEnterprise), not(isHeroku), not(isAzure)),
+    layout: App,
+    title: 'Account | Cancellation In Progress'
   },
   {
     path: '/account/profile',

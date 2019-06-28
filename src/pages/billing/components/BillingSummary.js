@@ -77,16 +77,16 @@ export default class BillingSummary extends Component {
 
   render() {
     const { account, currentPlan, canChangePlan, canUpdateBillingInfo, canPurchaseIps, invoices, isAWSAccount, accountAgeInDays, hasRecipientValidation } = this.props;
-    const { rvUsage } = account;
+    const { rvUsage, pending_cancellation } = account;
     const { show } = this.state;
 
     const volumeUsed = _.get(rvUsage, 'recipient_validation.month.used', 0);
     const showRecipientValidation = hasRecipientValidation && rvUsage;
-    let changePlanActions = {};
 
-    if (canChangePlan) {
+    const changePlanActions = [];
+    if (!pending_cancellation && canChangePlan) {
       const changePlanLabel = currentPlan.isFree ? 'Upgrade Now' : 'Change Plan';
-      changePlanActions = { actions: [{ content: changePlanLabel, to: '/account/billing/plan', Component: Link, color: 'orange' }]};
+      changePlanActions.push({ content: changePlanLabel, to: '/account/billing/plan', Component: Link, color: 'orange' });
     }
 
     return (
@@ -94,9 +94,9 @@ export default class BillingSummary extends Component {
         <PendingPlanBanner account={account} />
         <FreePlanWarningBanner account={account} accountAgeInDays={accountAgeInDays} />
         <Panel accent title='Plan Overview'>
-          <Panel.Section {...changePlanActions}>
+          <Panel.Section actions={changePlanActions}>
             <LabelledValue label="Your Plan">
-              <PlanSummary plan={account.subscription} />
+              <PlanSummary plan={account.subscription} pendingCancellation={pending_cancellation}/>
             </LabelledValue>
           </Panel.Section>
           {canPurchaseIps && this.renderDedicatedIpSummarySection()}

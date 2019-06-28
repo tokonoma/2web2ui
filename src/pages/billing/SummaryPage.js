@@ -17,12 +17,13 @@ import { list as getInvoices } from 'src/actions/invoices';
 export class BillingSummaryPage extends Component {
 
   componentDidMount() {
-    this.props.fetchAccount();
-    this.props.getBillingInfo();
-    this.props.getPlans();
-    this.props.getSendingIps();
-    this.props.getInvoices();
-    this.props.getUsage();
+    const { fetchAccount, getBillingInfo, getPlans, getSendingIps, getInvoices, getUsage } = this.props;
+    fetchAccount();
+    getBillingInfo();
+    getPlans();
+    getSendingIps();
+    getInvoices();
+    getUsage();
   }
 
   render() {
@@ -52,7 +53,8 @@ export class BillingSummaryPage extends Component {
 }
 
 const mapStateToProps = (state) => {
-  const { account, loading } = selectAccountBilling(state);
+  const { loading, account } = selectAccountBilling(state);
+
   return ({
     loading: loading || state.billing.plansLoading || !state.account.subscription,
     account,

@@ -1,4 +1,5 @@
 export { default as AccountSettingsPage } from './account/AccountSettingsPage';
+export { default as ImmediateCancelAccountPage } from './account/ImmediateCancelAccountPage';
 export { default as alerts } from './alerts';
 export { default as AuthPage } from './auth/AuthPage';
 export { default as TfaPage } from './auth/TfaPage';

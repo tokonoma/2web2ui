@@ -6,10 +6,10 @@ describe('Selectors: brightback', () => {
   let state;
 
   const props = {
-    urls: {
+    config: {
       save_return_url: '/save_return_url',
       cancel_confirmation_url: '/cancel_confirmation_url',
-      billing_url: '/billing_url'
+      app_id: 'appid'
     }
   };
 

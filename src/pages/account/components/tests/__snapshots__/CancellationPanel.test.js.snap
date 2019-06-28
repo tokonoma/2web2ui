@@ -6,13 +6,52 @@ exports[`CancellationPanel renders 1`] = `
   title="Request Account Cancellation"
 >
   <p>
-    To cancel your SparkPost account, 
-    <UnstyledLink
-      onClick={[Function]}
-    >
-      submit a cancellation request
-    </UnstyledLink>
-    . The request may take a few days to process.  All your data (e.g. domains, users, etc.) will be permanently deleted. We're sorry to see you go!
+    If you choose to cancel your account, it will be cancelled at the end of your billing cycle. You can change your mind at any time until 8am UTC on the date of cancellation.
   </p>
+  <p>
+    <span>
+      Before your cancellation date:
+    </span>
+    <ul>
+      <li>
+        You can continue to send up to your monthly limit.
+      </li>
+      <li>
+        You may not go into overage.
+      </li>
+      <li>
+        You may not use our recipient validation feature.
+      </li>
+    </ul>
+  </p>
+  <p>
+    <span>
+      After your cancellation date:
+    </span>
+    <ul>
+      <li>
+        You will no longer be able to log in using your account credentials.
+      </li>
+      <li>
+        You will no longer be able to send email or make API calls using your API keys.
+      </li>
+      <li>
+        Any dedicated IPs on your account will be unrecoverable and may be assigned to other SparkPost accounts.
+      </li>
+    </ul>
+  </p>
+  <div>
+    <withRouter(Connect(Brightback))
+      condition={true}
+      config={
+        Object {
+          "app_id": "bAJDEmD5EK",
+          "cancel_confirmation_url": "/account/cancel",
+          "save_return_url": "/account/settings",
+        }
+      }
+      render={[Function]}
+    />
+  </div>
 </Panel>
 `;

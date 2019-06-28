@@ -6,6 +6,7 @@ exports[`Component: Billing Summary should render correctly for a paid plan 1`] 
     account={
       Object {
         "billing": Object {},
+        "cancelLoading": false,
         "rvUsage": Object {
           "recipient_validation": Object {
             "month": Object {
@@ -24,6 +25,7 @@ exports[`Component: Billing Summary should render correctly for a paid plan 1`] 
     account={
       Object {
         "billing": Object {},
+        "cancelLoading": false,
         "rvUsage": Object {
           "recipient_validation": Object {
             "month": Object {
@@ -132,6 +134,7 @@ exports[`Component: Billing Summary should render correctly for a standard free 
     account={
       Object {
         "billing": Object {},
+        "cancelLoading": false,
         "rvUsage": Object {
           "recipient_validation": Object {
             "month": Object {
@@ -150,6 +153,7 @@ exports[`Component: Billing Summary should render correctly for a standard free 
     account={
       Object {
         "billing": Object {},
+        "cancelLoading": false,
         "rvUsage": Object {
           "recipient_validation": Object {
             "month": Object {
@@ -209,6 +213,7 @@ exports[`Component: Billing Summary should render correctly if you can't buy IPs
     account={
       Object {
         "billing": Object {},
+        "cancelLoading": false,
         "rvUsage": Object {
           "recipient_validation": Object {
             "month": Object {
@@ -227,6 +232,7 @@ exports[`Component: Billing Summary should render correctly if you can't buy IPs
     account={
       Object {
         "billing": Object {},
+        "cancelLoading": false,
         "rvUsage": Object {
           "recipient_validation": Object {
             "month": Object {
@@ -326,6 +332,7 @@ exports[`Component: Billing Summary should render correctly if you can't change 
     account={
       Object {
         "billing": Object {},
+        "cancelLoading": false,
         "rvUsage": Object {
           "recipient_validation": Object {
             "month": Object {
@@ -344,6 +351,7 @@ exports[`Component: Billing Summary should render correctly if you can't change 
     account={
       Object {
         "billing": Object {},
+        "cancelLoading": false,
         "rvUsage": Object {
           "recipient_validation": Object {
             "month": Object {
@@ -363,7 +371,9 @@ exports[`Component: Billing Summary should render correctly if you can't change 
     accent={true}
     title="Plan Overview"
   >
-    <Panel.Section>
+    <Panel.Section
+      actions={Array []}
+    >
       <LabelledValue
         label="Your Plan"
       >
@@ -441,6 +451,7 @@ exports[`Component: Billing Summary should render correctly if you can't update 
     account={
       Object {
         "billing": Object {},
+        "cancelLoading": false,
         "rvUsage": Object {
           "recipient_validation": Object {
             "month": Object {
@@ -459,6 +470,7 @@ exports[`Component: Billing Summary should render correctly if you can't update 
     account={
       Object {
         "billing": Object {},
+        "cancelLoading": false,
         "rvUsage": Object {
           "recipient_validation": Object {
             "month": Object {
@@ -527,6 +539,7 @@ exports[`Component: Billing Summary should render with IP modal open 1`] = `
     account={
       Object {
         "billing": Object {},
+        "cancelLoading": false,
         "rvUsage": Object {
           "recipient_validation": Object {
             "month": Object {
@@ -545,6 +558,7 @@ exports[`Component: Billing Summary should render with IP modal open 1`] = `
     account={
       Object {
         "billing": Object {},
+        "cancelLoading": false,
         "rvUsage": Object {
           "recipient_validation": Object {
             "month": Object {
@@ -657,6 +671,7 @@ exports[`Component: Billing Summary should render with the billing contact modal
     account={
       Object {
         "billing": Object {},
+        "cancelLoading": false,
         "rvUsage": Object {
           "recipient_validation": Object {
             "month": Object {
@@ -675,6 +690,7 @@ exports[`Component: Billing Summary should render with the billing contact modal
     account={
       Object {
         "billing": Object {},
+        "cancelLoading": false,
         "rvUsage": Object {
           "recipient_validation": Object {
             "month": Object {
@@ -787,6 +803,7 @@ exports[`Component: Billing Summary should render with the payment info modal op
     account={
       Object {
         "billing": Object {},
+        "cancelLoading": false,
         "rvUsage": Object {
           "recipient_validation": Object {
             "month": Object {
@@ -805,6 +822,7 @@ exports[`Component: Billing Summary should render with the payment info modal op
     account={
       Object {
         "billing": Object {},
+        "cancelLoading": false,
         "rvUsage": Object {
           "recipient_validation": Object {
             "month": Object {
@@ -917,6 +935,7 @@ exports[`Component: Billing Summary should show the invoice history if there are
     account={
       Object {
         "billing": Object {},
+        "cancelLoading": false,
         "rvUsage": Object {
           "recipient_validation": Object {
             "month": Object {
@@ -935,6 +954,7 @@ exports[`Component: Billing Summary should show the invoice history if there are
     account={
       Object {
         "billing": Object {},
+        "cancelLoading": false,
         "rvUsage": Object {
           "recipient_validation": Object {
             "month": Object {
