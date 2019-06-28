@@ -11,6 +11,17 @@ export function listAlerts() {
   });
 }
 
+export function createAlert({ data }) {
+  return sparkpostApiRequest({
+    type: 'CREATE_ALERT',
+    meta: {
+      method: 'POST',
+      url: '/v1/alerts',
+      data
+    }
+  });
+}
+
 export function setMutedStatus({ muted, id }) {
   return sparkpostApiRequest({
     type: 'SET_ALERT_V1_MUTED_STATUS',

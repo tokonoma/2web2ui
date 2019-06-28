@@ -1,5 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Action Creator: Alerts should dispatch a create action 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "data": Object {
+        "name": "Mock Name",
+      },
+      "method": "POST",
+      "url": "/v1/alerts",
+    },
+    "type": "CREATE_ALERT",
+  },
+]
+`;
+
 exports[`Action Creator: Alerts should dispatch a delete action 1`] = `
 Array [
   Object {
