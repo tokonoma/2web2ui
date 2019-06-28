@@ -7,6 +7,9 @@ export const DISPOSABLE_TOOLTIP = 'Disposable email providers are services that 
 export const FREE_TOOLTIP = 'Free email providers such as Gmail allow anyone to sign up \
   for an email address. Businesses may consider blocking these to eliminate low-quality leads.';
 
+export const DID_YOU_MEAN_TOOLTIP = '"Did you mean" indicates a likely typo in the domain for \
+the given email address. This helps you catch human typos and spam traps before you add them to your list.';
+
 export const RESULT_DESCRIPTIONS = {
   valid: 'A valid result means that everything checks out for email address and \
     we have no data suggesting that is invalid for any reason.',
