@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Page, Tabs, Panel, Modal, Button } from '@sparkpost/matchbox';
+import { Close } from '@sparkpost/matchbox-icons';
 import ListForm from './components/ListForm';
 import SingleAddressForm from './components/SingleAddressForm';
 import ListResults from './components/ListResults';
@@ -9,7 +10,7 @@ import ApiDetails from './components/ApiDetails';
 import { hasAccountOptionEnabled } from 'src/helpers/conditions/account';
 import RVDisabledPage from './components/RVDisabledPage';
 import ConditionSwitch, { Case, defaultCase } from 'src/components/auth/ConditionSwitch';
-import RecipientValidationPriceModal from './components/RecipientValidationPriceModal';
+import RecipientValidationPriceTable from './components/RecipientValidationPriceTable';
 
 import styles from './RecipientValidationPage.module.scss';
 
@@ -40,12 +41,33 @@ export class RecipientValidationPage extends Component {
         return <SingleAddressForm />;
       case 2:
         return <ApiDetails />;
-      default:
-        return null;
     }
   }
 
   handleModal = (showPriceModal = false) => this.setState({ showPriceModal });
+
+  renderRVPriceModal = () => (
+    <Panel
+      className={styles.modalContainer}
+      accent
+    >
+      <div style={{ float: 'right' }}>
+        <Button onClick={() => this.handleModal(false)} flat>
+          <Close />
+        </Button>
+      </div>
+      <div className={styles.bodyContainer}>
+        <h3>How was this calculated?</h3>
+        <RecipientValidationPriceTable
+          cellProps={{
+            style: {
+              padding: '8px 0'
+            }
+          }}
+        />
+      </div>
+    </Panel>
+  );
 
   renderRecipientValidation = () => {
     const { selectedTab, showPriceModal } = this.state;
@@ -69,8 +91,8 @@ export class RecipientValidationPage extends Component {
           {this.renderTabContent(selectedTab)}
         </Panel>
         {selectedTab === 0 && <ListResults/>}
-        <Modal open={showPriceModal} onClose={() => this.handleModal()}>
-          <RecipientValidationPriceModal onClose={() => this.handleModal()} />
+        <Modal open={showPriceModal} onClose={() => this.handleModal(false)}>
+          {this.renderRVPriceModal()}
         </Modal>
       </Page>
     );
