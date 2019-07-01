@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { Page, Panel, Table, Button } from '@sparkpost/matchbox';
+import { Page, Panel, Button } from '@sparkpost/matchbox';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from './RVDisabledPage.module.scss';
@@ -9,51 +9,9 @@ import { isSelfServeBilling } from 'src/helpers/conditions/account';
 import { connect } from 'react-redux';
 import { update as updateAccount } from 'src/actions/account';
 import { Loading } from 'src/components';
-import { formatFullNumber } from 'src/helpers/units';
-import { RECIPIENT_VALIDATION_TIERS } from 'src/constants';
+import RecipientValidationPriceTable from './RecipientValidationPriceTable';
 
 export class RVDisabledPage extends Component {
-  getRows = () => {
-    const rows = RECIPIENT_VALIDATION_TIERS.map((row, index) => {
-      //Skips first row
-      if (index < 1) {
-        return;
-      }
-      return (
-        <Table.Row key = {row.volumeMin}>
-          <Table.Cell width = {'40%'}>
-            <strong>{formatFullNumber(row.volumeMin)}</strong>
-            {row.volumeMax < Infinity //Last row with volumeMax of Infinity has different wording
-              ? <> to <strong>{formatFullNumber(row.volumeMax)}</strong></>
-              : <>+</>}
-          </Table.Cell>
-          <Table.Cell>
-            <strong>{row.displayedCost}</strong> per email
-          </Table.Cell>
-        </Table.Row>);
-    });
-
-    //Adds the header & first row (includes both in same cell)
-    const firstRow = RECIPIENT_VALIDATION_TIERS[0];
-    rows.unshift(
-      <Table.Row key = {firstRow.volumeMin}>
-        <Table.Cell>
-          <strong className = {styles.Header}>
-            Number of Emails
-          </strong>
-          <strong>{formatFullNumber(firstRow.volumeMin)}</strong> to <strong>{formatFullNumber(firstRow.volumeMax)}</strong>
-        </Table.Cell>
-        <Table.Cell>
-          <strong className = {styles.Header}>
-            Cost
-          </strong>
-          <strong>{firstRow.displayedCost}</strong> per email
-        </Table.Cell>
-      </Table.Row>
-    );
-
-    return rows;
-  };
 
   renderActionButton = () => {
     const { isSelfServeBilling, isFree } = this.props;
@@ -91,11 +49,9 @@ export class RVDisabledPage extends Component {
           </p>
         </div>
         <Panel className = {styles.Table}>
-          <Table>
-            <tbody>
-              {this.getRows()}
-            </tbody>
-          </Table>
+          <RecipientValidationPriceTable
+            col1Props={{ width: '40%' }}
+          />
         </Panel>
         {this.renderActionButton()}
       </Page>
