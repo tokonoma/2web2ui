@@ -5,7 +5,7 @@ import { formatFullNumber } from 'src/helpers/units';
 import styles from './RecipientValidationPriceTable.module.scss';
 
 export const RecipientValidationPriceTable = ({ cellProps, col1Props, col2Props }) => (
-  <Table className={styles.table}>
+  <Table>
     <tbody>
       <Table.Row className={styles.tableHeader}>
         <Table.Cell {...cellProps} {...col1Props}>

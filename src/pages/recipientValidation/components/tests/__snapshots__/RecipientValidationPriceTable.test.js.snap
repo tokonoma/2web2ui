@@ -1,9 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`RecipientValidationTable should render correctly 1`] = `
-<Table
-  className="table"
->
+<Table>
   <tbody>
     <Table.Row
       className="tableHeader"
