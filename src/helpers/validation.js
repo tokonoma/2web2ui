@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import { formatBytes } from 'src/helpers/units';
 import { getDuration } from 'src/helpers/date';
+import { toSentence } from 'src/helpers/array';
 import { isEmailAddress, isEmailLocalPart, isRecipientEmailAddress } from 'src/helpers/email';
 import { domainRegex, slugRegex } from './regex';
 import isURL from 'validator/lib/isURL';
@@ -103,12 +104,15 @@ export function nonEmptyFile(file) {
 }
 
 export const fileExtension = _.memoize(function fileExtension(...extensions) {
+  extensions = extensions.map((extension) => `.${extension.toLowerCase()}`);
   return (file) => {
     if (!file) {
       return;
     }
-    const extType = _.find(extensions, (extension) => RegExp(`.${extension}$`).test(file.name));
-    return extType ? undefined : `Must be a .${extensions.join(', .')} file`;
+
+    const hasValidExtension = extensions.some((extension) => file.name.toLowerCase().endsWith(extension));
+
+    return hasValidExtension ? undefined : `Must be a ${toSentence(extensions, 'or')} file`;
   };
 });
 
