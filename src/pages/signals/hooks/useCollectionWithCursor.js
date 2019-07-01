@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 const comparableJson = (obj) => JSON.stringify(Object.keys(obj).sort().map((key) => ({ [key]: obj[key] })));
 
@@ -15,6 +15,11 @@ const useCollectionWithCursor = ({
   const [hasMore, setHasMore] = useState(false);
   const [page, goToPage] = useState(initialPage);
   const [perPage, setPerPage] = useState(initialPerPage);
+
+  const updateFilters = useCallback((newFilters) => {
+    goToPage(1);
+    setFilters(newFilters);
+  }, [goToPage, setFilters]);
 
   useEffect(
     () => {
@@ -38,7 +43,7 @@ const useCollectionWithCursor = ({
     page,
     perPage,
     filters,
-    setFilters,
+    setFilters: updateFilters,
     totalCount,
     hasMore,
     goToPage,

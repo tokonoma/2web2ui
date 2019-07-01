@@ -14,6 +14,7 @@ import BatchStatusSearch from './components/BatchStatusSearch';
 // Mock api call
 //
 const pick = (array) => array[Math.floor(Math.random() * array.length)];
+const totalMockCount = 207;
 const mockApiCall = ({ filters, page, perPage }) =>
   new Promise((resolve) => {
     setTimeout(() => {
@@ -34,10 +35,10 @@ const mockApiCall = ({ filters, page, perPage }) =>
               number_duplicates: 21
             };
           }),
-        totalCount: 1000,
+        totalCount: totalMockCount,
         extra: {
           links: {
-            next: page < 3 ? 'next-link' : null
+            next: page < Math.ceil(totalMockCount / perPage) ? 'next-link' : null
           }
         }
       });

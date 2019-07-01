@@ -67,7 +67,7 @@ const BatchStatusCollection = ({
         handlePageChange={() => onChangePage(page + 1)}
         previousDisabled={page <= 1}
         nextDisabled={!hasMore}
-        handleFirstPage={() => onChangePage(0)}
+        handleFirstPage={() => onChangePage(1)}
         perPage={perPage}
         totalCount={totalCount}
       />
