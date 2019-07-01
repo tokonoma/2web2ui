@@ -104,15 +104,15 @@ export function nonEmptyFile(file) {
 }
 
 export const fileExtension = _.memoize(function fileExtension(...extensions) {
-  extensions = extensions.map((extension) => `.${extension.toLowerCase()}`);
+  const formattedExtensions = extensions.map((extension) => `.${extension.toLowerCase()}`);
+
   return (file) => {
     if (!file) {
       return;
     }
+    const hasValidExtension = formattedExtensions.some((extension) => file.name.toLowerCase().endsWith(extension));
 
-    const hasValidExtension = extensions.some((extension) => file.name.toLowerCase().endsWith(extension));
-
-    return hasValidExtension ? undefined : `Must be a ${toSentence(extensions, 'or')} file`;
+    return hasValidExtension ? undefined : `Must be a ${toSentence(formattedExtensions, 'or')} file`;
   };
 });
 
