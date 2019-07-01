@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Action Creator: Alerts should dispatch a delete action 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "id": "alert-id",
+      "method": "DELETE",
+      "url": "/v1/alerts/alert-id",
+    },
+    "type": "DELETE_ALERT_V1",
+  },
+]
+`;
+
+exports[`Action Creator: Alerts should dispatch a list action 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "method": "GET",
+      "showErrorAlert": false,
+      "url": "/v1/alerts",
+    },
+    "type": "LIST_ALERTS_V1",
+  },
+]
+`;
+
+exports[`Action Creator: Alerts should dispatch a set muted status action 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "data": Object {
+        "muted": false,
+      },
+      "id": "alert-id",
+      "method": "PUT",
+      "url": "/v1/alerts/alert-id",
+    },
+    "type": "SET_ALERT_V1_MUTED_STATUS",
+  },
+]
+`;

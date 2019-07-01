@@ -55,6 +55,16 @@ describe('Component: Collection', () => {
     expect(shallow(<Collection {...props} />)).toMatchSnapshot();
   });
 
+  it('should use custom render function when child is a render function', () => {
+    addRows(3);
+    const wrapper = shallow(<Collection {...props}>
+      {
+        () => <>Custom render</>
+      }
+    </Collection>);
+    expect(wrapper).toMatchSnapshot();
+  });
+
   it('should render pagination', () => {
     addRows(3);
     props.pagination = true;

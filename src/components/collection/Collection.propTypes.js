@@ -39,5 +39,6 @@ export default {
     pathname: PropTypes.string.isRequired,
     search: PropTypes.string.isRequired
   }).isRequired,
-  history: PropTypes.shape({ push: PropTypes.func.isRequired }).isRequired
+  history: PropTypes.shape({ push: PropTypes.func.isRequired }).isRequired,
+  children: PropTypes.func
 };
