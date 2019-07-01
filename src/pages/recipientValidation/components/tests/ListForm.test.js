@@ -31,7 +31,7 @@ describe('ListForm', () => {
   });
 
   it('should submit csv', async () => {
-    wrapper.setProps({ ...props, file: { size: 45 }});
+    wrapper.setProps({ ...props, file: { size: 45, name: 'test.csv' }});
 
     const csvUpload = props.uploadList.mock.calls[0][0];
     await expect(props.uploadList).toHaveBeenCalledTimes(1);
@@ -47,8 +47,13 @@ describe('ListForm', () => {
     expect(props.uploadList).not.toHaveBeenCalled();
   });
 
+  it('should not submit if not type csv or txt', () => {
+    wrapper.setProps({ ...props, file: { name: 'thing.doc' }});
+    expect(props.uploadList).not.toHaveBeenCalled();
+  });
+
   it('should not submit csv with an error', () => {
-    wrapper.setProps({ ...props, file: { size: 45 }, listError: 'error' });
+    wrapper.setProps({ ...props, file: { size: 45, name: 'test.csv' }, listError: 'error' });
     expect(props.uploadList).not.toHaveBeenCalled();
   });
 

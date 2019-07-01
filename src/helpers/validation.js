@@ -102,9 +102,14 @@ export function nonEmptyFile(file) {
   return !file || file.size > 0 ? undefined : 'File must be non-empty';
 }
 
-export const fileExtension = _.memoize(function fileExtension(extension) {
-  const regex = RegExp(`.${extension}$`);
-  return (file) => !file || regex.test(file.name) ? undefined : `Must be a .${extension} file`;
+export const fileExtension = _.memoize(function fileExtension(...extensions) {
+  return (file) => {
+    if (!file) {
+      return;
+    }
+    const extType = _.find(extensions, (extension) => RegExp(`.${extension}$`).test(file.name));
+    return extType ? undefined : `Must be a .${extensions.join(', .')} file`;
+  };
 });
 
 export const maxLength = _.memoize(function maxLength(length) {
