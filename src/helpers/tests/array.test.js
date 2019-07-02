@@ -16,4 +16,12 @@ describe('.toSentence', () => {
   it('returns a sentence', () => {
     expect(toSentence(['first', 'second', 'third'])).toEqual('first, second, and third');
   });
+
+  it('returns both values with specified conjuction', () => {
+    expect(toSentence(['first', 'second'], 'or')).toEqual('first or second');
+  });
+
+  it('returns a sentence with specified conjunction', () => {
+    expect(toSentence(['first', 'second', 'third'], 'or')).toEqual('first, second, or third');
+  });
 });

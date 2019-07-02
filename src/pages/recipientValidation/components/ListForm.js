@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
 import { Panel } from '@sparkpost/matchbox';
-import { maxFileSize } from 'src/helpers/validation';
+import { maxFileSize, fileExtension } from 'src/helpers/validation';
 import FileUploadWrapper from './FileUploadWrapper';
 import { uploadList, resetUploadError } from 'src/actions/recipientValidation';
 import { showAlert } from 'src/actions/globalAlert';
@@ -31,7 +31,7 @@ export class ListForm extends Component {
 
     // Redux form validation does not run in the same render cycle after Field's onChange,
     // thus checking props.valid would not work here *shakes fist*
-    const valid = !maxFileSize(config.maxRecipVerifUploadSizeBytes)(file);
+    const valid = !maxFileSize(config.maxRecipVerifUploadSizeBytes)(file) && !fileExtension('csv', 'txt')(file);
 
     if (file && valid && !listError) {
       handleSubmit(this.handleUpload)();
@@ -44,7 +44,7 @@ export class ListForm extends Component {
   }
 
   render() {
-    const uploadValidators = maxFileSize(config.maxRecipVerifUploadSizeBytes);
+    const uploadValidators = [maxFileSize(config.maxRecipVerifUploadSizeBytes), fileExtension('csv', 'txt')];
 
     return (
       <Panel.Section>

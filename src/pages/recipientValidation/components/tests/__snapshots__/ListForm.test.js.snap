@@ -6,7 +6,12 @@ exports[`ListForm renders correctly 1`] = `
     <Field
       component={[Function]}
       name="csv"
-      validate={[Function]}
+      validate={
+        Array [
+          [Function],
+          [Function],
+        ]
+      }
     />
   </form>
 </Panel.Section>
