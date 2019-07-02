@@ -110,4 +110,9 @@
 
 .releaseTag {
   align-self: flex-end;
+  font-weight: 500;
+
+  * {
+    font-size: font-size(200);
+  }
 }
