@@ -5,9 +5,9 @@ import useRouter from 'src/hooks/useRouter';
 
 const toQueryString = (params) => qs.stringify(params, { arrayFormat: 'repeat' });
 
-export const array = (item) => Array.isArray(item) ? item : [item];
-export const boolean = (item) => item === 'true' ? true : false;
-export const string = (param) => param;
+export const array = (param) => Array.isArray(param) ? param : [param];
+export const boolean = (param) => param === 'true' ? true : false;
+export const string = (param) => param ? param : '';
 export const number = (param) => Number(param) || 0;
 
 const defaults = {
