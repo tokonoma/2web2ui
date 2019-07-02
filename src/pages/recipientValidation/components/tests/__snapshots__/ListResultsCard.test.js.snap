@@ -2,85 +2,130 @@
 
 exports[`ListResultsCard renders correctly when batch job fails 1`] = `
 <Panel
+  accent="gray"
   sectioned={true}
+  title={
+    <div
+      className="PanelHeader"
+    >
+      Last Validation:
+    </div>
+  }
 >
   <div
-    className="IconWrapper Failed"
+    className="TableContainer"
   >
-    <ErrorOutline
-      size={40}
-    />
+    <Table>
+      <tbody>
+        <Table.Row
+          className="TableHeader"
+        >
+          <Table.HeaderCell
+            className="TableCell"
+            width="25%"
+          >
+            Date Uploaded:
+          </Table.HeaderCell>
+          <Table.HeaderCell
+            className="TableCell"
+            width="25%"
+          >
+            Status:
+          </Table.HeaderCell>
+        </Table.Row>
+        <Table.Row>
+          <Table.Cell
+            className="TableCell"
+          >
+            Nov 1 2018, 1:16pm
+          </Table.Cell>
+          <Table.Cell
+            className="TableCell"
+          >
+            <Tag>
+              <Icon />
+               
+              Failed. Please try again.
+            </Tag>
+          </Table.Cell>
+          <Table.Cell
+            className="TableCell"
+          />
+        </Table.Row>
+      </tbody>
+    </Table>
   </div>
-  <h6>
-    Validation Results
-  </h6>
-  <div
-    className="Spacer"
-  />
-  <LabelledValue
-    label="Uploaded"
-  >
-    <p
-      className="RightAlign NoWrap"
-    >
-      Nov 1 2018, 1:16pm
-    </p>
-  </LabelledValue>
-  <LabelledValue
-    label="Status"
-  >
-    <h6
-      className="RightAlign"
-    >
-      Failed. Please try again.
-    </h6>
-  </LabelledValue>
 </Panel>
 `;
 
 exports[`ListResultsCard renders correctly when complete 1`] = `
 <Panel
+  accent="gray"
   sectioned={true}
+  title={
+    <div
+      className="PanelHeader"
+    >
+      Last Validation:
+    </div>
+  }
 >
   <div
-    className="IconWrapper Complete"
+    className="TableContainer"
   >
-    <CheckCircleOutline
-      size={40}
-    />
+    <Table>
+      <tbody>
+        <Table.Row
+          className="TableHeader"
+        >
+          <Table.HeaderCell
+            className="TableCell"
+            width="25%"
+          >
+            Date Uploaded:
+          </Table.HeaderCell>
+          <Table.HeaderCell
+            className="TableCell"
+            width="25%"
+          >
+            Status:
+          </Table.HeaderCell>
+        </Table.Row>
+        <Table.Row>
+          <Table.Cell
+            className="TableCell"
+          >
+            Nov 1 2018, 1:16pm
+          </Table.Cell>
+          <Table.Cell
+            className="TableCell"
+          >
+            <Tag>
+              <Icon />
+               
+              Completed
+            </Tag>
+          </Table.Cell>
+          <Table.Cell
+            className="TableCell"
+          >
+            <div
+              className="DownloadButton"
+            >
+              <DownloadLink
+                component={[Function]}
+                size="large"
+                to="testfile.csv"
+              >
+                Download Results 
+                <FileDownload />
+              </DownloadLink>
+            </div>
+          </Table.Cell>
+        </Table.Row>
+      </tbody>
+    </Table>
   </div>
-  <h6>
-    Validation Results
-  </h6>
-  <div
-    className="Spacer"
-  />
-  <LabelledValue
-    label="Uploaded"
-  >
-    <p
-      className="RightAlign NoWrap"
-    >
-      Nov 1 2018, 1:16pm
-    </p>
-  </LabelledValue>
-  <LabelledValue
-    label="Status"
-  >
-    <h6
-      className="RightAlign"
-    >
-      Completed
-    </h6>
-  </LabelledValue>
-  <DownloadLink
-    color="orange"
-    component={[Function]}
-    fullWidth={true}
-    to="testfile.csv"
-  >
-    Download Rejected Recipients
-  </DownloadLink>
 </Panel>
 `;
 
@@ -98,42 +143,58 @@ exports[`ListResultsCard renders correctly when loading and status is unknown 1`
 
 exports[`ListResultsCard renders correctly when not complete 1`] = `
 <Panel
+  accent="gray"
   sectioned={true}
+  title={
+    <div
+      className="PanelHeader"
+    >
+      Last Validation:
+    </div>
+  }
 >
   <div
-    className="IconWrapper"
+    className="TableContainer"
   >
-    <InsertDriveFile
-      size={40}
-    />
+    <Table>
+      <tbody>
+        <Table.Row
+          className="TableHeader"
+        >
+          <Table.HeaderCell
+            className="TableCell"
+            width="25%"
+          >
+            Date Uploaded:
+          </Table.HeaderCell>
+          <Table.HeaderCell
+            className="TableCell"
+            width="25%"
+          >
+            Status:
+          </Table.HeaderCell>
+        </Table.Row>
+        <Table.Row>
+          <Table.Cell
+            className="TableCell"
+          >
+            Nov 1 2018, 1:16pm
+          </Table.Cell>
+          <Table.Cell
+            className="TableCell"
+          >
+            <Tag>
+              <Icon />
+               
+              Processing
+            </Tag>
+          </Table.Cell>
+          <Table.Cell
+            className="TableCell"
+          />
+        </Table.Row>
+      </tbody>
+    </Table>
   </div>
-  <h6>
-    Validation Results
-  </h6>
-  <div
-    className="ProcessingWrapper"
-  >
-    <LoadingSVG
-      size="Small"
-    />
-  </div>
-  <LabelledValue
-    label="Uploaded"
-  >
-    <p
-      className="RightAlign NoWrap"
-    >
-      Nov 1 2018, 1:16pm
-    </p>
-  </LabelledValue>
-  <LabelledValue
-    label="Status"
-  >
-    <h6
-      className="RightAlign"
-    >
-      Processing
-    </h6>
-  </LabelledValue>
 </Panel>
 `;

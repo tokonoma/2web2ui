@@ -1,9 +1,7 @@
 import React from 'react';
-import classnames from 'classnames';
-import { Panel, Button } from '@sparkpost/matchbox';
-import { ErrorOutline, InsertDriveFile, CheckCircleOutline } from '@sparkpost/matchbox-icons';
+import { Panel, Button, Tag, Table } from '@sparkpost/matchbox';
+import { Error, InsertDriveFile, FileDownload, CheckCircle, Cached } from '@sparkpost/matchbox-icons';
 import DownloadLink from 'src/components/downloadLink/DownloadLink';
-import LabelledValue from 'src/components/labelledValue/LabelledValue';
 import { LoadingSVG } from 'src/components/loading/Loading';
 import { formatDateTime } from 'src/helpers/date';
 import moment from 'moment';
@@ -20,52 +18,62 @@ const ListResultsCard = ({ complete = 'unknown', uploaded, rejectedUrl, status }
 
   const loading = !complete && status !== 'ERROR';
   const ready = status === 'SUCCESS';
-  const failed = status === 'ERROR';
+  const failed = status === 'ERROR' ;
 
-  let spinner = <div className={styles.Spacer}/>;
   let Icon = InsertDriveFile;
-  let iconClass = null;
   let statusText = null;
 
   if (loading) {
-    spinner = <div className={styles.ProcessingWrapper}><LoadingSVG size='Small' /></div>;
     statusText = 'Processing';
+    Icon = () => <span className={styles.Loading}><Cached /></span>;
   }
 
   if (failed) {
-    Icon = ErrorOutline;
-    iconClass = styles.Failed;
+    Icon = () => <span className={styles.Failed}><Error /></span>;
     statusText = 'Failed. Please try again.';
   }
 
   if (ready) {
-    Icon = CheckCircleOutline;
-    iconClass = styles.Complete;
+    Icon = () => <span className={styles.Complete}><CheckCircle /></span>;
     statusText = 'Completed';
   }
 
   return (
-    <Panel sectioned>
-      <div className={classnames(styles.IconWrapper, iconClass)}>
-        <Icon size={40} />
+    <Panel sectioned accent='gray' title={<div className={styles.PanelHeader}>Last Validation:</div>}>
+      <div className={styles.TableContainer}>
+        <Table>
+          <tbody>
+            <Table.Row className={styles.TableHeader}>
+              <Table.HeaderCell className={styles.TableCell} width='25%'>
+                Date Uploaded:
+              </Table.HeaderCell>
+              <Table.HeaderCell className={styles.TableCell} width='25%'>
+                Status:
+              </Table.HeaderCell>
+            </Table.Row>
+            <Table.Row>
+              <Table.Cell className={styles.TableCell}>
+                {formatDateTime(moment.unix(uploaded))}
+              </Table.Cell>
+              <Table.Cell className={styles.TableCell}>
+                <Tag><Icon /> {statusText}</Tag>
+              </Table.Cell>
+              <Table.Cell className={styles.TableCell}>
+                {ready && (
+                  <div className={styles.DownloadButton}>
+                    <DownloadLink
+                      size='large'
+                      component={Button}
+                      to={rejectedUrl}>
+                      Download Results <FileDownload />
+                    </DownloadLink>
+                  </div>
+                )}
+              </Table.Cell>
+            </Table.Row>
+          </tbody>
+        </Table>
       </div>
-      <h6>Validation Results</h6>
-      {spinner}
-      {uploaded && (
-        <LabelledValue label='Uploaded'>
-          <p className={classnames(styles.RightAlign, styles.NoWrap)}>
-            {formatDateTime(moment.unix(uploaded))}
-          </p>
-        </LabelledValue>
-      )}
-      <LabelledValue label='Status'>
-        <h6 className={styles.RightAlign}>
-          {statusText}
-        </h6>
-      </LabelledValue>
-      {ready && (
-        <DownloadLink component={Button} to={rejectedUrl} fullWidth color='orange'>Download Rejected Recipients</DownloadLink>
-      )}
     </Panel>
   );
 };

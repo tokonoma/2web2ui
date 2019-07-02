@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { showAlert } from 'src/actions/globalAlert';
-import { Grid } from '@sparkpost/matchbox';
 import { PollContext } from 'src/context/Poll';
 import withContext from 'src/context/withContext';
 
@@ -66,11 +65,7 @@ export class ListResults extends Component {
     }
 
     return (
-      <Grid>
-        <Grid.Column xs={12} md={6} lg={5}>
-          <ListResultsCard {...results} />
-        </Grid.Column>
-      </Grid>
+      <ListResultsCard {...results} />
     );
   }
 }
