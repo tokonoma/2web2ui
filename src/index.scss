@@ -1,4 +1,4 @@
-@import url('//cloud.typography.com/6240112/7332192/css/fonts.css');
+@import url('/static/fonts/calibre/calibre.css');
 @import '~@sparkpost/matchbox/styles.scss'; // Global Compiled
 @import '~@sparkpost/matchbox/src/styles/config.scss';
 
@@ -38,4 +38,8 @@ input[type=number]::-webkit-outer-spin-button {
 
 input[type=number] {
   appearance: textfield;
+}
+
+code {
+  font-size: font-size(200);
 }
