@@ -3,3 +3,19 @@
 .TabPadding {
   padding: 0 spacing();
 }
+
+.LeadText {
+  font-size: small;
+  max-width: 60%;
+  line-height: 130%;
+  margin-bottom: 2rem;
+}
+
+.modalContainer {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.bodyContainer {
+  padding: 2rem 3rem;
+}

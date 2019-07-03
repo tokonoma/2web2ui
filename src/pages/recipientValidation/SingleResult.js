@@ -5,7 +5,7 @@ import styles from './SingleResult.module.scss';
 import { withRouter, Link } from 'react-router-dom';
 import CodeBlock from './components/CodeBlock';
 import { WarningIcon, SuccessIcon, ErrorIcon } from './components/icons';
-import { ROLE_TOOLTIP, DISPOSABLE_TOOLTIP, FREE_TOOLTIP, RESULT_DESCRIPTIONS } from './constants';
+import { ROLE_TOOLTIP, DISPOSABLE_TOOLTIP, FREE_TOOLTIP, DID_YOU_MEAN_TOOLTIP, RESULT_DESCRIPTIONS } from './constants';
 import { singleAddress } from 'src/actions/recipientValidation';
 import { showAlert } from 'src/actions/globalAlert';
 import Loading from 'src/components/loading';
@@ -46,7 +46,7 @@ export class SingleResult extends Component {
       <div className={styles.table}>
         {did_you_mean &&
           <>
-            <h6 className={styles.tableKey}>Did you mean</h6>
+            <h6 className={styles.tableKey}>Did you mean <Tooltip content={DID_YOU_MEAN_TOOLTIP}/></h6>
             <span>{did_you_mean}</span>
             <hr />
           </>}

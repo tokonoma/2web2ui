@@ -53,7 +53,6 @@ describe('SingleResult', () => {
   });
 
   it('renders correctly when valid', () => {
-    expect(wrapper).toMatchSnapshot();
     expect(wrapper.find('SuccessIcon')).toExist();
     expect(wrapper.find('p[name="result-description"]')).toHaveProp('children', RESULT_DESCRIPTIONS.valid);
   });
