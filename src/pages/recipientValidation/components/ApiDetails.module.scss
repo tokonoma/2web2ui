@@ -24,13 +24,17 @@
 .Method {
   margin-right: rem(10);
   color: color(orange);
-  font-weight: 800;
+  font-weight: 600;
 }
 
 .CodeSection {
   margin-top: rem(15);
   margin: 1rem;
   min-width: 350px;
+
+  * {
+    font-size: rem(13);
+  }
 }
 
 .tab {
