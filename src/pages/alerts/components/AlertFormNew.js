@@ -96,7 +96,7 @@ export class AlertFormNew extends Component {
                     component={TextFieldWrapper}
                     disabled={submitting}
                     validate={[required, validateEmailList]}
-                    placeholder='first.last@email.com, TLCWithEmail@SparkpostIsBest.com'
+                    placeholder='list of comma delimited emails'
                     multiline
                   />
                 </Expandable>

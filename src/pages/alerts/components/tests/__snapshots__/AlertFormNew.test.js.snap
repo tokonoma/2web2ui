@@ -100,7 +100,7 @@ exports[`Alert Form Component should render the alert form component correctly 1
               disabled={false}
               multiline={true}
               name="email_addresses"
-              placeholder="first.last@email.com, TLCWithEmail@SparkpostIsBest.com"
+              placeholder="list of comma delimited emails"
               validate={
                 Array [
                   [Function],
