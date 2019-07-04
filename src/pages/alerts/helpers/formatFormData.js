@@ -16,6 +16,11 @@ export default function (values) {
 
   const any_subaccount = (subaccounts.length === 1 && subaccounts[0] === -2) ? true : undefined;
 
+  //If subaccounts is empty, default to '-1'
+  if (subaccounts.length === 0) {
+    subaccounts.push(-1);
+  }
+
   /*
   This gets the correct filters for the different metric types.
   First it looks up the form spec for that metric to get the form type.

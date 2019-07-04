@@ -41,6 +41,10 @@ const testCases =
         input: { ...input, subaccounts: [-2]},
         expected: { ...expected, subaccounts: undefined, any_subaccount: true }
       },
+      'defaults empty subaccount to -1': {
+        input: { ...input, subaccounts: []},
+        expected: { ...expected, subaccounts: [-1], any_subaccount: undefined }
+      },
       'select subaccounts': {
         input: { ...input, subaccounts: [0,1]},
         expected: { ...expected, subaccounts: [0,1]}
