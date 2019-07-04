@@ -20,9 +20,20 @@ export const EvaluatorFields = ({
 
   const [sliderValue, setSliderValue] = useState(target);
 
-  const changeSliderValue = (value) => {
+  const changeSliderValue = (event) => {
+    const { target: { value }} = event;
     setSliderValue(Math.floor(value));
+  };
+
+  const changeValueField = (value) => {
     change(FORM_NAME, 'value', value);
+  };
+
+  const setOperatorOnSourceChange = (event) => {
+    const { target: { value }} = event;
+    if (value !== 'raw') {
+      change(FORM_NAME, 'operator', 'gt');
+    }
   };
 
   const formspec = getFormSpec(metric);
@@ -43,6 +54,7 @@ export const EvaluatorFields = ({
         component={SelectWrapper}
         disabled={disabled}
         options={sourceOptions}
+        onChange={setOperatorOnSourceChange}
       />
     </Grid.Column>}
       {operatorOptions.length > 1 &&
@@ -57,7 +69,7 @@ export const EvaluatorFields = ({
     </Grid.Column>}
       <Grid.Column sm={12} md={sliderLength} lg={sliderLength} id='sliderColumn'>
         <label>{sliderLabel}</label>
-        <Slider value ={sliderValue} onChange={changeSliderValue}/>
+        <Slider value={sliderValue} onChange={changeValueField}/>
       </Grid.Column>
       <Grid.Column sm={12} md={2} lg={2}>
         <br/>
@@ -72,7 +84,7 @@ export const EvaluatorFields = ({
           style={{
             textAlign: 'right'
           }}
-          onChange={(e) => changeSliderValue(e.target.value)}
+          onChange={changeSliderValue}
         />
       </Grid.Column>
     </Grid>

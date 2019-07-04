@@ -46,15 +46,20 @@ describe('Evaluator Fields Component', () => {
     expect(props.change).toHaveBeenCalledWith(FORM_NAME, 'value', 60);
   });
 
-  it('normalizes negative values to positive', () => {
-    const normalize = wrapper.find({ name: 'value' }).props().normalize;
-    expect(normalize(1)).toEqual(1);
-    expect(normalize(-1)).toEqual(1);
-  });
-
   it('changes slider value when value field value changes', () => {
     expect(wrapper.find('Slider').prop('value')).toEqual(50);
     wrapper.find({ name: 'value' }).simulate('change', { target: { value: 60 }});
     expect(wrapper.find('Slider').prop('value')).toEqual(60);
+  });
+
+  it('changes operator to gt when selecting WOW or DOD', () => {
+    wrapper.find({ name: 'source' }).simulate('change', { target: { value: 'week_over_week' }});
+    expect(props.change).toHaveBeenCalledWith(FORM_NAME, 'operator', 'gt');
+  });
+
+  it('normalizes negative values to positive', () => {
+    const normalize = wrapper.find({ name: 'value' }).props().normalize;
+    expect(normalize(1)).toEqual(1);
+    expect(normalize(-1)).toEqual(1);
   });
 });
