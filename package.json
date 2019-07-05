@@ -99,7 +99,7 @@
     "reselect": "^4.0.0",
     "source-map-explorer": "^1.6.0",
     "uuid": "^3.2.1",
-    "validator": "^10.2.0"
+    "validator": "^11.1.0"
   },
   "devDependencies": {
     "@babel/core": "7.1.6",
