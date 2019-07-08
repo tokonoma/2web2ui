@@ -21,13 +21,11 @@
 
 .ButtonLabel {
   color: color(grey, 1); // match other selects
-  display: inline-block;
   margin-right: spacing(small);
   overflow: hidden;
   text-overflow: ellipsis; // to truncate really long subaccount names
   white-space: nowrap;
   max-width: rem(180);
-  vertical-align: middle;
 }
 
 .Popover {
@@ -41,6 +39,10 @@
 .Button {
   text-align: left;
   position: relative;
+
+  * > span {
+    display: inline-block;
+  }
 }
 
 .SubaccountSearch {
