@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { Field, formValueSelector, change } from 'redux-form';
 import { SelectWrapper } from 'src/components/reduxFormWrappers';
 import { getFormSpec } from '../../helpers/alertForm';
-import _ from 'lodash';
 import { MAILBOX_PROVIDERS } from 'src/constants';
 import { ComboBoxTypeaheadWrapper } from 'src/components';
 import { Grid } from '@sparkpost/matchbox';
@@ -45,10 +44,10 @@ export class FilterFields extends Component {
     const formSpec = getFormSpec(metric);
 
     const filterTypeaheadResults = {
-      ip_pool: _.map(ipPools, 'id'),
-      mailbox_provider: _.keys(MAILBOX_PROVIDERS),
-      sending_domain: _.map(sendingDomains, 'domain'),
-      sending_ip: _.map(sendingIps, 'external_ip')
+      ip_pool: ipPools.map(({ id }) => id),
+      mailbox_provider: Object.keys(MAILBOX_PROVIDERS),
+      sending_domain: sendingDomains.map(({ domain }) => domain),
+      sending_ip: sendingIps.map(({ external_ip }) => external_ip)
     };
 
     const extraProps = {

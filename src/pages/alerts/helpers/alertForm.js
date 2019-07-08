@@ -44,7 +44,7 @@ const metricToFormSpecMap = {
 };
 
 export const getFormSpec = (metric) => {
-  if (Object.keys(METRICS).includes(metric)) {
+  if (metric in METRICS) {
     return metricToFormSpecMap[metric];
   }
   return {};

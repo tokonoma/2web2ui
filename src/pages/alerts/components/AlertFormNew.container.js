@@ -3,6 +3,7 @@ import { reduxForm, formValueSelector } from 'redux-form';
 import { withRouter } from 'react-router-dom';
 import { DEFAULT_FORM_VALUES, FORM_NAME } from '../constants/formConstants';
 import validateForm from '../helpers/validateForm';
+import { hasSubaccounts } from 'src/selectors/subaccounts';
 
 export default function withAlertForm(WrappedComponent) {
 
@@ -10,6 +11,7 @@ export default function withAlertForm(WrappedComponent) {
     const selector = formValueSelector(FORM_NAME);
 
     return {
+      hasSubaccounts: hasSubaccounts(state),
       metric: selector(state, 'metric'),
       single_filter: selector(state, 'single_filter'),
       muted: selector(state, 'muted'),

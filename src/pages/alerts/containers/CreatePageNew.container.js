@@ -7,8 +7,7 @@ function withAlertsCreate(WrappedComponent) {
 
   const mapStateToProps = (state) => ({
     error: state.alertsV1.createError,
-    loading: state.alertsV1.createPending,
-    deletePending: state.alertsV1.deletePending
+    loading: state.alertsV1.createPending
   });
 
   return connect(mapStateToProps, mapDispatchToProps)(WrappedComponent);
