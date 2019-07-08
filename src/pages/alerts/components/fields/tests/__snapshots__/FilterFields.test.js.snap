@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Filter Fields Component renders multi type filter correctly 1`] = `
+exports[`Filter Fields Component renders multi type filter 1`] = `
 <Fragment>
   <Field
     component={[Function]}
@@ -61,7 +61,7 @@ exports[`Filter Fields Component renders multi type filter correctly 1`] = `
 </Fragment>
 `;
 
-exports[`Filter Fields Component renders single type filter correctly 1`] = `
+exports[`Filter Fields Component renders single type filter 1`] = `
 <Fragment>
   <Grid>
     <Grid.Column

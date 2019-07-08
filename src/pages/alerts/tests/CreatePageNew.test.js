@@ -2,6 +2,7 @@ import { shallow } from 'enzyme';
 import React from 'react';
 import { CreatePageNew } from '../CreatePageNew';
 import format from '../helpers/formatFormData';
+import AlertFormNew from '../components/AlertFormNew';
 
 jest.mock('../helpers/formatFormData');
 
@@ -28,7 +29,7 @@ describe('Page: Alerts Create', () => {
 
   it('should handle submit', async () => {
     format.mockImplementationOnce((a) => a);
-    await wrapper.find('withRouter(Connect(ReduxForm))').simulate('submit', { value: 'mock value' });
+    await wrapper.find(AlertFormNew).simulate('submit', { value: 'mock value' });
     expect(props.createAlert).toHaveBeenCalledWith({ data: { value: 'mock value' }});
     expect(props.showUIAlert).toHaveBeenCalled();
     expect(props.history.push).toHaveBeenCalledWith('/alerts-new');

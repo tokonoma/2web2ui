@@ -1,78 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Evaluator Fields Component does not render operator if it is only 1 option and increases grid size of slider 1`] = `
-<Grid.Column
-  id="sliderColumn"
-  lg={7}
-  md={7}
-  sm={12}
->
-  <label>
-    Percent Change
-  </label>
-  <Slider
-    defaultValue={0}
-    max={100}
-    min={0}
-    onChange={[Function]}
-    precision={0}
-    value={50}
-  />
-</Grid.Column>
-`;
-
-exports[`Evaluator Fields Component does not render operator nor source if they each only have 1 option and increases grid size of slider 1`] = `
-<Grid.Column
-  id="sliderColumn"
-  lg={10}
-  md={10}
-  sm={12}
->
-  <label>
-    Percent Used
-  </label>
-  <Slider
-    defaultValue={0}
-    max={100}
-    min={0}
-    onChange={[Function]}
-    precision={0}
-    value={50}
-  />
-</Grid.Column>
-`;
-
-exports[`Evaluator Fields Component does not render source if it is only 1 option and increases grid size of slider 1`] = `
-<Grid.Column
-  id="sliderColumn"
-  lg={8}
-  md={8}
-  sm={12}
->
-  <label>
-    Bounce Percentage
-  </label>
-  <Slider
-    defaultValue={0}
-    max={100}
-    min={0}
-    onChange={[Function]}
-    precision={0}
-    value={50}
-  />
-</Grid.Column>
-`;
-
 exports[`Evaluator Fields Component renders correctly 1`] = `
 <Grid>
   <Grid.Column
-    lg={3}
     md={3}
     sm={12}
   >
-    <label>
+    <Label>
       Evaluated
-    </label>
+    </Label>
     <Field
       component={[Function]}
       disabled={false}
@@ -97,13 +33,12 @@ exports[`Evaluator Fields Component renders correctly 1`] = `
     />
   </Grid.Column>
   <Grid.Column
-    lg={2}
     md={2}
     sm={12}
   >
-    <label>
+    <Label>
       Comparison
-    </label>
+    </Label>
     <Field
       component={[Function]}
       disabled={false}
@@ -124,13 +59,12 @@ exports[`Evaluator Fields Component renders correctly 1`] = `
   </Grid.Column>
   <Grid.Column
     id="sliderColumn"
-    lg={5}
     md={5}
     sm={12}
   >
-    <label>
+    <Label>
       Score
-    </label>
+    </Label>
     <Slider
       defaultValue={0}
       max={100}
@@ -141,19 +75,17 @@ exports[`Evaluator Fields Component renders correctly 1`] = `
     />
   </Grid.Column>
   <Grid.Column
-    lg={2}
     md={2}
     sm={12}
   >
-    <br />
     <Field
       component={[Function]}
       disabled={false}
       name="value"
       normalize={[Function]}
-      onChange={[Function]}
       style={
         Object {
+          "marginTop": "13px",
           "textAlign": "right",
         }
       }

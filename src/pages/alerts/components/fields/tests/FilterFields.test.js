@@ -32,16 +32,18 @@ describe('Filter Fields Component', () => {
     expect(props.listSendingIps).toHaveBeenCalled();
   });
 
-  it('renders single type filter correctly', () => {
+  it('renders single type filter', () => {
     expect(wrapper.find({ name: 'single_filter.filter_values' })).toExist();
     expect(wrapper.find({ name: 'sending_ip' })).not.toExist();
+    expect(wrapper.find('Field')).toHaveLength(2);
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('renders multi type filter correctly', () => {
+  it('renders multi type filter', () => {
     wrapper.setProps({ metric: 'block_bounce_rate' });
     expect(wrapper.find({ name: 'single_filter.filter_values' })).not.toExist();
     expect(wrapper.find({ name: 'sending_ip' })).toExist();
+    expect(wrapper.find('Field')).toHaveLength(3);
     expect(wrapper).toMatchSnapshot();
   });
 
