@@ -3,7 +3,8 @@ const initialState = {
   listPending: true,
   listError: null,
   createPending: false,
-  deletePending: false
+  deletePending: false,
+  getPending: false
 };
 
 export default (state = initialState, { type, payload, meta }) => {
@@ -11,7 +12,7 @@ export default (state = initialState, { type, payload, meta }) => {
     /* LIST */
 
     case 'LIST_ALERTS_V1_PENDING':
-      return { ...state, listPending: true, listError: null };
+      return { ...state, listPending: true, listError: null, getError: null };
 
     case 'LIST_ALERTS_V1_FAIL':
       return { ...state, listError: payload, listPending: false };
@@ -27,6 +28,17 @@ export default (state = initialState, { type, payload, meta }) => {
     case 'CREATE_ALERT_V1_SUCCESS':
     case 'CREATE_ALERT_V1_FAIL':
       return { ...state, createPending: false };
+
+      /* GET */
+
+    case 'GET_ALERT_V1_PENDING':
+      return { ...state, alert: {}, getPending: true, getError: null };
+
+    case 'GET_ALERT_V1_FAIL':
+      return { ...state, getPending: false, getError: payload };
+
+    case 'GET_ALERT_V1_SUCCESS':
+      return { ...state, alert: payload, getPending: false };
 
     // UPDATE single list row Muted status
     case 'SET_ALERT_V1_MUTED_STATUS_PENDING':

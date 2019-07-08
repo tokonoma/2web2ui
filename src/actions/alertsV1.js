@@ -44,3 +44,14 @@ export function deleteAlert({ id }) {
     }
   });
 }
+
+export function getAlert({ id }) {
+  return sparkpostApiRequest({
+    type: 'GET_ALERT_V1',
+    meta: {
+      method: 'GET',
+      url: `/v1/alerts/${id}`,
+      showErrorAlert: false
+    }
+  });
+}
