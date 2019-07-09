@@ -133,6 +133,12 @@ Array [
 exports[`Action Creator: Auth logout should dispatch a logout when user is logged in 1`] = `
 Array [
   Array [
+    [Function],
+  ],
+  Array [
+    [Function],
+  ],
+  Array [
     undefined,
   ],
   Array [
