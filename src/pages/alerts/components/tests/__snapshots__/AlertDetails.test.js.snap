@@ -15,13 +15,6 @@ exports[`Alert Details Component should render the alert details component corre
     >
       <Button
         className="Button"
-        outline={true}
-        size="default"
-      >
-        Send Test
-      </Button>
-      <Button
-        className="Button"
         primary={true}
         size="default"
       >
@@ -67,29 +60,30 @@ exports[`Alert Details Component should render the alert details component corre
         md={10}
         xs={12}
       >
-        <div
+        <span
           key="subaccounts"
         >
-          Subaccounts: 
+          Subaccounts:
           <Tag
             className="Tags"
             key="-1"
           >
             -1
           </Tag>
-        </div>
-        <div
+        </span>
+        <span
           key="mailbox_provider"
         >
+          and 
           Mailbox Provider
-          : 
+          :
           <Tag
             className="Tags"
             key="mailbox_provider-gmail"
           >
             Gmail
           </Tag>
-        </div>
+        </span>
       </Grid.Column>
     </Grid>
   </Panel.Section>
