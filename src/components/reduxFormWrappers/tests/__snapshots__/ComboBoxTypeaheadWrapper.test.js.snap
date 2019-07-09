@@ -27,27 +27,3 @@ exports[`ComboBoxTypeaheadWrapper renders Combobox typeahead 1`] = `
   }
 />
 `;
-
-exports[`ComboBoxTypeaheadWrapper renders Combobox typeahead with error 1`] = `
-<ComboBoxTypeahead
-  debounceFn={[Function]}
-  error="Oh no!"
-  itemToString={[Function]}
-  label="Options"
-  maxNumberOfResults={100}
-  name="example"
-  onChange={[MockFunction]}
-  placeholder="Type to Search"
-  results={
-    Array [
-      Object {
-        "value": "option-one",
-      },
-      Object {
-        "value": "option-two",
-      },
-    ]
-  }
-  selectedMap={[Function]}
-/>
-`;

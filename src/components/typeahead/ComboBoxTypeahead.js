@@ -5,12 +5,10 @@ import debounce from 'lodash/debounce';
 import sortMatch from 'src/helpers/sortMatch';
 import PropTypes from 'prop-types';
 
-//This is done so that the debouce cancel can be tested
-const debounce300ms = debounce((fn, input) => fn(input), 300);
-
 export const ComboBoxTypeahead = (props) => {
-  const { error,
-    results = [],
+  const {
+    error,
+    results,
     itemToString,
     maxNumberOfResults,
     onChange,
@@ -21,9 +19,11 @@ export const ComboBoxTypeahead = (props) => {
     placeholder,
     type,
     readOnly,
-    debounceFn } = props;
+    debounceFn //Needed for testing
+  } = props;
   const [selected, setSelected] = useState([]);
   const [matches, setMatches] = useState(results);
+  const [updateMatches, setUpdateMatches] = useState(() => undefined);
 
   //Updates the value of this component
   useEffect(() => {
@@ -40,8 +40,15 @@ export const ComboBoxTypeahead = (props) => {
     setMatches(results);
   }, [results]);
 
-  //Cancels the debounce on unmount
-  useEffect(() => () => debounceFn.cancel(), [debounceFn]);
+  //Creates debounce function and cancels the debounce on unmount
+  useEffect(() => {
+    const updateMatchesFn = debounceFn((inputValue) => {
+      const inputMatches = inputValue ? sortMatch(results, inputValue, itemToString) : results;
+      setMatches(inputMatches.slice(0, maxNumberOfResults));
+    }, 300);
+    setUpdateMatches(() => updateMatchesFn);
+    return () => updateMatchesFn.cancel();
+  }, [debounceFn, itemToString, maxNumberOfResults, results]);
 
   function stateReducer(state, changes) {
 
@@ -59,7 +66,7 @@ export const ComboBoxTypeahead = (props) => {
           return changes;
         }
       case Downshift.stateChangeTypes.changeInput:
-        debounceFn(updateMatches, changes.inputValue);
+        updateMatches(changes.inputValue);
         return changes;
       default:
         return changes;
@@ -72,12 +79,6 @@ export const ComboBoxTypeahead = (props) => {
 
   function removeItem(item) {
     setSelected(selected.filter((i) => i !== item));
-  }
-
-  // note, sorting large result lists can be expensive
-  function updateMatches(inputValue) {
-    const inputMatches = inputValue ? sortMatch(results, inputValue, itemToString) : results;
-    setMatches(inputMatches.slice(0, maxNumberOfResults));
   }
 
   function typeaheadfn(downshift) {
@@ -107,14 +108,23 @@ export const ComboBoxTypeahead = (props) => {
       })
       );
 
+    /*When losing focus, the text input clears. Thus, the first
+    click will always be for an empty text field. This both opens
+    the matches and reset the matches.
+    */
+    const firstOpen = () => {
+      openMenu();
+      setMatches(results);
+    };
+
     const inputProps = getInputProps({
       id: name,
       label,
       selectedItems: selected,
       itemToString,
       removeItem,
-      onFocus: openMenu,
-      onClick: openMenu,
+      onFocus: firstOpen,
+      onClick: firstOpen,
       value: inputValue || '',
       error: error && !isOpen ? error : undefined,
       placeholder: (selected.length) ? '' : placeholder,
@@ -162,5 +172,5 @@ ComboBoxTypeahead.defaultProps = {
   itemToString: (item) => item,
   selectedMap: (item) => item,
   maxNumberOfResults: 100,
-  debounceFn: debounce300ms
+  debounceFn: debounce
 };

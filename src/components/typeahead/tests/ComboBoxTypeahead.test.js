@@ -1,7 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import { ComboBoxTypeahead } from '../ComboBoxTypeahead';
-import debounce from 'lodash/debounce';
 
 jest.mock('lodash/debounce', () => jest.fn((fn) => {
   fn.cancel = jest.fn();
@@ -46,9 +45,13 @@ describe('ComboBoxTypeahead', () => {
   });
 
   it('cancels the debounce on unmount', () => {
-    const debounceFn = debounce((fn, input) => fn(input), 0);
+    const cancel = jest.fn();
+    const debounceFn = jest.fn((fn) => {
+      fn.cancel = cancel;
+      return fn;
+    });
     const wrapper = subject({ debounceFn });
     wrapper.unmount();
-    expect(debounceFn.cancel).toHaveBeenCalled();
+    expect(cancel).toHaveBeenCalled();
   });
 });
