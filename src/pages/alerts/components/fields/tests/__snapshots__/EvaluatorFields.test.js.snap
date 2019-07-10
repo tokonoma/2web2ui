@@ -67,6 +67,7 @@ exports[`Evaluator Fields Component renders correctly 1`] = `
     </Label>
     <Slider
       defaultValue={0}
+      key="5"
       max={100}
       min={0}
       onChange={[Function]}
@@ -83,6 +84,7 @@ exports[`Evaluator Fields Component renders correctly 1`] = `
       disabled={false}
       name="value"
       normalize={[Function]}
+      onChange={[Function]}
       style={
         Object {
           "marginTop": "13px",

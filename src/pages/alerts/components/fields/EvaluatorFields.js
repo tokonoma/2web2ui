@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Field, formValueSelector, change } from 'redux-form';
 import { SelectWrapper, TextFieldWrapper } from 'src/components/reduxFormWrappers';
@@ -7,25 +7,22 @@ import { Grid, Slider, Label } from '@sparkpost/matchbox';
 import { numberBetweenInclusive } from 'src/helpers/validation';
 import { FORM_NAME } from '../../constants/formConstants';
 
-const absoluteNormalize = (value) => Math.abs(value);
-
 export const EvaluatorFields = ({
   metric,
   value,
   source,
   disabled,
-  change,
-  normalize = absoluteNormalize
+  change
 }) => {
 
   const [sliderValue, setSliderValue] = useState(value);
 
-  useEffect(() => {
-    setSliderValue(value);
-  }, [value]);
+  const changeValueField = (val) => {
+    change(FORM_NAME, 'value', val);
+  };
 
-  const changeValueField = (value) => {
-    change(FORM_NAME, 'value', value);
+  const changeSlider = (event) => {
+    setSliderValue(event.target.value);
   };
 
   const setOperatorOnSourceChange = (event) => {
@@ -70,7 +67,7 @@ export const EvaluatorFields = ({
       )}
       <Grid.Column sm={12} md={sliderLength} id='sliderColumn'>
         <Label>{sliderLabel}</Label>
-        <Slider value={sliderValue} onChange={changeValueField}/>
+        <Slider value={sliderValue} key={sliderLength} onChange={changeValueField}/>
       </Grid.Column>
       <Grid.Column sm={12} md={2}>
         <Field
@@ -79,12 +76,13 @@ export const EvaluatorFields = ({
           disabled={disabled}
           suffix={suffix}
           validate={numberBetweenInclusive(0, 100)}
-          normalize={normalize}
+          normalize={Math.abs}
           type='number'
           style={{
             textAlign: 'right',
             marginTop: '13px'
           }}
+          onChange={changeSlider}
         />
       </Grid.Column>
     </Grid>
