@@ -96,7 +96,7 @@ export class FilterFields extends Component {
               name='single_filter.filter_values'
               component={ComboBoxTypeaheadWrapper}
               results={filterTypeaheadResults[single_filter.filter_type] || []}
-              type={single_filter.filter_type}
+              key={single_filter.filter_type}
               {...extraProps[single_filter.filter_type]}
             />
           </div>

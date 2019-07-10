@@ -40,7 +40,7 @@ export class AlertFormNew extends Component {
   isNotificationChannelsEmpty = (formMeta, formErrors) => {
     const channels = ['email_addresses'];
     return channels.some((channel) => (formMeta[channel] && formMeta[channel].touched) && formErrors[channel] === 'At least one notification channel must not be empty');
-  }
+  };
 
   render() {
     const {
@@ -117,8 +117,7 @@ export class AlertFormNew extends Component {
                     multiline
                   />
                 </Expandable>
-                <br/>
-                <Button submit primary disabled={pristine || submitting}>{submitText}</Button>
+                <Button submit primary disabled={pristine || submitting} className={styles.SubmitButton}>{submitText}</Button>
               </Panel.Section>
             </Grid.Column>
           </Grid>

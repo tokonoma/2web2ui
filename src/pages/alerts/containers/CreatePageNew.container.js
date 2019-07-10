@@ -6,7 +6,6 @@ function withAlertsCreate(WrappedComponent) {
   const mapDispatchToProps = { createAlert, showUIAlert: showAlert };
 
   const mapStateToProps = (state) => ({
-    error: state.alertsV1.createError,
     loading: state.alertsV1.createPending
   });
 

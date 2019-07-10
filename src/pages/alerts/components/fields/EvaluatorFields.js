@@ -6,6 +6,7 @@ import { getFormSpec, getEvaluatorOptions } from '../../helpers/alertForm';
 import { Grid, Slider, Label } from '@sparkpost/matchbox';
 import { numberBetweenInclusive } from 'src/helpers/validation';
 import { FORM_NAME } from '../../constants/formConstants';
+import styles from './EvaluatorFields.module.scss';
 
 export const EvaluatorFields = ({
   metric,
@@ -41,7 +42,7 @@ export const EvaluatorFields = ({
   const sliderLength = 10 - ((sourceOptions.length > 1) ? 3 : 0) - ((operatorOptions.length > 1) ? 2 : 0);
 
   return (
-    <Grid>
+    <Grid className={styles.Grid}>
       {sourceOptions.length > 1 && (
         <Grid.Column sm={12} md={3}>
           <Label>Evaluated</Label>
@@ -66,8 +67,14 @@ export const EvaluatorFields = ({
         </Grid.Column>
       )}
       <Grid.Column sm={12} md={sliderLength} id='sliderColumn'>
-        <Label>{sliderLabel}</Label>
-        <Slider value={sliderValue} key={sliderLength} onChange={changeValueField}/>
+        <div className={styles.Slider}>
+          <Label>{sliderLabel}</Label>
+          <Slider
+            value={sliderValue}
+            key={sliderLength}
+            onChange={changeValueField}
+          />
+        </div>
       </Grid.Column>
       <Grid.Column sm={12} md={2}>
         <Field
@@ -78,10 +85,7 @@ export const EvaluatorFields = ({
           validate={numberBetweenInclusive(0, 100)}
           normalize={Math.abs}
           type='number'
-          style={{
-            textAlign: 'right',
-            marginTop: '13px'
-          }}
+          align='right'
           onChange={changeSlider}
         />
       </Grid.Column>

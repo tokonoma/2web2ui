@@ -105,8 +105,8 @@ exports[`Alert Form Component should render the alert form component correctly 1
               validate={[Function]}
             />
           </Expandable>
-          <br />
           <Button
+            className="SubmitButton"
             disabled={true}
             primary={true}
             size="default"

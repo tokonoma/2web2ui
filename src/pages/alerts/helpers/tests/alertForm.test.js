@@ -1,15 +1,15 @@
 import * as alertFormHelper from '../alertForm';
 import cases from 'jest-in-case';
 
-describe('Alert form helper', () => {
+describe('Alert form helper: ', () => {
 
-  it('get list of options', () => {
+  it('getOptionsFromMap gets list of options', () => {
     const input = ['a'];
     const formatter = { a: 'formatted' };
     expect(alertFormHelper.getOptionsFromMap(input, formatter)).toEqual([{ value: 'a', label: 'formatted' }]);
   });
 
-  it('returns form specifications for a known metric', () => {
+  it('getFormSpec returns form specifications for a known metric', () => {
     const metric = 'health_score';
     const expected = {
       hasFilters: true,
@@ -23,11 +23,10 @@ describe('Alert form helper', () => {
     expect(rest).toEqual(expected);
   });
 
-  it('returns empty object for an unknown metric', () => {
+  it('getFormSpec returns empty object for an unknown metric', () => {
     const metric = 'foo';
     expect(alertFormHelper.getFormSpec(metric)).toEqual({});
   });
-
 
   const testCases =
     {
@@ -73,7 +72,7 @@ describe('Alert form helper', () => {
       }
     };
 
-  cases('returns correct evaluator options for', ({ metric, source, expected }) => {
+  cases('getEvaluatorOptions returns correct evaluator options for', ({ metric, source, expected }) => {
     expect(alertFormHelper.getEvaluatorOptions(metric, source)).toEqual(expected);
   }, testCases);
 });

@@ -42,10 +42,14 @@ describe('Alert Form Component', () => {
 
   it('should reset form values when changing metric', () => {
     wrapper.find({ name: 'metric' }).simulate('change', { target: { value: 'block_bounce_rate' }});
-    expect(wrapper.instance().props.change).toHaveBeenCalledWith('sending_ip', []);
-    expect(wrapper.instance().props.change).toHaveBeenCalledWith('mailbox_provider', []);
-    expect(wrapper.instance().props.change).toHaveBeenCalledWith('sending_domain', []);
-    expect(wrapper.instance().props.change).toHaveBeenCalledWith('single_filter', { filter_type: 'none', filter_values: []});
+    expect(wrapper.instance().props.change).toHaveBeenCalledTimes(7);//4 filters + 2 default values + 1 value field ;
+  });
+
+  it('should show filters when metric has filters', () => {
+    jest.spyOn(alertFormHelper, 'getFormSpec').mockImplementationOnce(() => ({ hasFilters: true }));
+    wrapper = shallow(<AlertFormNew {...props} />);
+    expect(wrapper.find(SubaccountField)).toExist();
+    expect(wrapper.find(FilterFields)).toExist();
   });
 
   it('should not show filters when metric has no filters', () => {
@@ -60,6 +64,11 @@ describe('Alert Form Component', () => {
     wrapper = shallow(<AlertFormNew {...props} hasSubaccounts={false} />);
     expect(wrapper.find(SubaccountField)).not.toExist();
     expect(wrapper.find(FilterFields)).toExist();
+  });
+
+  it('should show evaluator Fields when metric selected', () => {
+    wrapper.setProps({ metric: 'health_score' });
+    expect(wrapper.find(EvaluatorFields)).toExist();
   });
 
   it('should not show evaluator Fields when metric is the default "Select Metric" option', () => {

@@ -17,7 +17,6 @@ export const ComboBoxTypeahead = (props) => {
     name,
     selectedMap,
     placeholder,
-    type,
     readOnly,
     debounceFn //Needed for testing
   } = props;
@@ -30,18 +29,9 @@ export const ComboBoxTypeahead = (props) => {
     onChange(selected.map(selectedMap));
   }, [onChange, selected, selectedMap]);
 
-  //Clears the selected tags when the type changes
-  useEffect(() => {
-    setSelected([]);
-  }, [type]);
-
-  //This is so the list of matches is consistent with the prop results
-  useEffect(() => {
-    setMatches(results);
-  }, [results]);
-
   //Creates debounce function and cancels the debounce on unmount
   useEffect(() => {
+    setMatches(results);
     const updateMatchesFn = debounceFn((inputValue) => {
       const inputMatches = inputValue ? sortMatch(results, inputValue, itemToString) : results;
       setMatches(inputMatches.slice(0, maxNumberOfResults));
@@ -162,7 +152,6 @@ ComboBoxTypeahead.propTypes = {
   name: PropTypes.string,
   selectedMap: PropTypes.func,
   placeholder: PropTypes.string,
-  type: PropTypes.string,
   readOnly: PropTypes.bool,
   debounceFn: PropTypes.func
 };
