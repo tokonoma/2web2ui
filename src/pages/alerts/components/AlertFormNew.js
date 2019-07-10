@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Field, Form } from 'redux-form';
 
 // Components
-import { Panel, Grid, Button, Expandable } from '@sparkpost/matchbox';
+import { Panel, Grid, Button, Expandable, Error } from '@sparkpost/matchbox';
 import { TextFieldWrapper, SelectWrapper } from 'src/components';
 import FilterFields from './fields/FilterFields';
 import EvaluatorFields from './fields/EvaluatorFields';
@@ -37,6 +37,11 @@ export class AlertFormNew extends Component {
     change('value', 0);
   };
 
+  isNotificationChannelsEmpty = (formMeta, formErrors) => {
+    const channels = ['email_addresses'];
+    return channels.some((channel) => (formMeta[channel] && formMeta[channel].touched) && formErrors[channel] === 'At least one notification channel must not be empty');
+  }
+
   render() {
     const {
       pristine,
@@ -44,11 +49,13 @@ export class AlertFormNew extends Component {
       metric,
       handleSubmit,
       hasSubaccounts,
-      invalid
+      formErrors,
+      formMeta
     } = this.props;
 
     const submitText = submitting ? 'Submitting...' : 'Create Alert';
     const formSpec = getFormSpec(metric);
+    const channelsError = this.isNotificationChannelsEmpty(formMeta, formErrors);
 
     return (
       <Form onSubmit={handleSubmit}>
@@ -95,6 +102,7 @@ export class AlertFormNew extends Component {
                   </div>
                 }
                 <label> Notify Me</label>
+                {channelsError && <Error wrapper='div' error='At least one notification channel must be not empty'/>}
                 <Expandable
                   icon = {<Email/>}
                   title="Email"
@@ -104,13 +112,13 @@ export class AlertFormNew extends Component {
                     name='email_addresses'
                     component={TextFieldWrapper}
                     disabled={submitting}
-                    validate={[required, validateEmailList]}
+                    validate={validateEmailList}
                     placeholder='list of comma delimited emails'
                     multiline
                   />
                 </Expandable>
                 <br/>
-                <Button submit primary disabled={pristine || submitting || invalid}>{submitText}</Button>
+                <Button submit primary disabled={pristine || submitting}>{submitText}</Button>
               </Panel.Section>
             </Grid.Column>
           </Grid>

@@ -23,7 +23,9 @@ describe('Alert Form Component', () => {
       pristine: true,
       invalid: false,
       metric: 'health_score',
-      change: jest.fn()
+      change: jest.fn(),
+      formMeta: {},
+      formErrors: {}
     };
 
     wrapper = shallow(<AlertFormNew {...props} />);
@@ -53,7 +55,7 @@ describe('Alert Form Component', () => {
     expect(wrapper.find(FilterFields)).not.toExist();
   });
 
-  it('should not show subaccounts when user has no subaccou ts', () => {
+  it('should not show subaccounts when user has no subaccounts', () => {
     jest.spyOn(alertFormHelper, 'getFormSpec').mockImplementationOnce(() => ({ hasFilters: true }));
     wrapper = shallow(<AlertFormNew {...props} hasSubaccounts={false} />);
     expect(wrapper.find(SubaccountField)).not.toExist();
@@ -65,17 +67,22 @@ describe('Alert Form Component', () => {
     expect(wrapper.find(EvaluatorFields)).not.toExist();
   });
 
+  it('should show error when every notification channel is empty', () => {
+    const formMeta = { email_addresses: { touched: true }};
+    const formErrors = { email_addresses: 'At least one notification channel must not be empty' };
+    wrapper.setProps({ formMeta, formErrors });
+    expect(wrapper.find('Error')).toExist();
+  });
+
   describe('submit button props', () => {
 
     const formCases = {
       'pristine': { pristine: true },
-      'submitting': { submitting: true },
-      'invalid': { invalid: true }
+      'submitting': { submitting: true }
     };
     const defaultFormState = {
       pristine: false,
-      submitting: false,
-      invalid: false
+      submitting: false
     };
 
     cases('should disable submit button when form is', (formState) => {
