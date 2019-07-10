@@ -52,8 +52,17 @@ describe('Selector: Account billing form', () => {
       expect(changePlanInitialValues(store)).toMatchSnapshot();
     });
 
+    it('should return promo code', () => {
+      expect(changePlanInitialValues(store, { promoCode: 'promo' })).toEqual(expect.objectContaining({ promoCode: 'promo' }));
+    });
+
     it('should find and return secret plan', () => {
-      expect(changePlanInitialValues(store, { planCode: 'im a secret' })).toMatchSnapshot();
+      expect(changePlanInitialValues(store, { planCode: 'im a secret' }))
+        .toEqual(
+          expect.objectContaining({
+            planpicker: { billingId: 'ias', code: 'im a secret', isFree: false, status: 'secret' }
+          })
+        );
     });
   });
 

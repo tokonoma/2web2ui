@@ -1,23 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Selector: Account billing form changePlanInitialValues when NOT self serve should find and return secret plan 1`] = `
-Object {
-  "billingAddress": Object {
-    "country": "US",
-    "firstName": "ann",
-    "lastName": "perkins",
-    "state": "AL",
-  },
-  "email": "ann@perkins.com",
-  "planpicker": Object {
-    "billingId": "ias",
-    "code": "im a secret",
-    "isFree": false,
-    "status": "secret",
-  },
-}
-`;
-
 exports[`Selector: Account billing form changePlanInitialValues when NOT self serve should return change plan values: with a billing id 1`] = `
 Object {
   "billingAddress": Object {
@@ -31,6 +13,7 @@ Object {
     "billingId": "1",
     "code": "abc",
   },
+  "promoCode": undefined,
 }
 `;
 
@@ -46,6 +29,7 @@ Object {
   "planpicker": Object {
     "code": "abc",
   },
+  "promoCode": undefined,
 }
 `;
 
