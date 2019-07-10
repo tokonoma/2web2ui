@@ -37,6 +37,23 @@ exports[`promoCode should render with description 1`] = `
 </span>
 `;
 
+exports[`promoCode should render with error 1`] = `
+<span>
+  <Field
+    component={[Function]}
+    error="Oh no!"
+    errorInLabel={true}
+    label="Promo Code"
+    name="promoCode"
+    suffix={
+      <Loading
+        loading={false}
+      />
+    }
+  />
+</span>
+`;
+
 exports[`promoCode should render with loading spinner 1`] = `
 <span>
   <Field
