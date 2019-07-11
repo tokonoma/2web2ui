@@ -2,6 +2,7 @@ const initialState = {
   list: [],
   listPending: true,
   listError: null,
+  createPending: false,
   deletePending: false
 };
 
@@ -17,6 +18,15 @@ export default (state = initialState, { type, payload, meta }) => {
 
     case 'LIST_ALERTS_V1_SUCCESS':
       return { ...state, list: payload, listPending: false };
+
+      /* CREATE */
+
+    case 'CREATE_ALERT_V1_PENDING':
+      return { ...state, createPending: true };
+
+    case 'CREATE_ALERT_V1_SUCCESS':
+    case 'CREATE_ALERT_V1_FAIL':
+      return { ...state, createPending: false };
 
     // UPDATE single list row Muted status
     case 'SET_ALERT_V1_MUTED_STATUS_PENDING':

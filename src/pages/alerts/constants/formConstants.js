@@ -1,0 +1,55 @@
+export const FORM_NAME = 'alertForm';
+
+export const METRICS = {
+  monthly_sending_limit: 'Monthly Sending Limit',
+  health_score: 'Health Score',
+  block_bounce_rate: 'Block Bounce Rate'
+};
+
+export const FILTERS_FRIENDLY_NAMES = {
+  none: 'None',
+  ip_pool: 'IP Pool',
+  mailbox_provider: 'Mailbox Provider',
+  sending_domain: 'Sending Domain',
+  sending_ip: 'Sending IP'
+};
+
+export const SIGNALS_FILTERS = [
+  'none',
+  'ip_pool',
+  'mailbox_provider',
+  'sending_domain'
+];
+
+export const REALTIME_FILTERS = [
+  'sending_ip',
+  'mailbox_provider',
+  'sending_domain'
+];
+
+export const SOURCE_FRIENDLY_NAMES =
+  {
+    raw: 'Value',
+    week_over_week: 'Week over Week',
+    day_over_day: 'Day over Day'
+  };
+
+export const OPERATOR_FRIENDLY_NAMES = {
+  gt: 'Above',
+  lt: 'Below'
+};
+
+export const DEFAULT_FORM_VALUES = {
+  name: '',
+  metric: '',
+  subaccounts: [],
+  sending_ip: [],
+  mailbox_provider: [],
+  sending_domain: [],
+  single_filter: { filter_type: 'none', filter_values: []},
+  source: 'raw',
+  operator: 'gt',
+  value: 0,
+  muted: false,
+  email_addresses: ''
+};

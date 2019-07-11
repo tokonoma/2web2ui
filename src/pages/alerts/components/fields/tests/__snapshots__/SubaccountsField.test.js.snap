@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Subaccount Field should render the Subaccounts Field component correctly 1`] = `
+<Field
+  component={[Function]}
+  disabled={false}
+  itemToString={[Function]}
+  label="Subaccounts"
+  name="subaccounts"
+  placeholder="Type To Search"
+  results={
+    Array [
+      Object {
+        "id": -1,
+        "name": "Master and all subaccounts",
+      },
+      Object {
+        "id": -2,
+        "name": "Any subaccount",
+      },
+      Object {
+        "id": 0,
+        "name": "Master account",
+      },
+      Object {
+        "id": 1,
+        "name": "My Subacount",
+      },
+    ]
+  }
+  selectedMap={[Function]}
+/>
+`;

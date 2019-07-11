@@ -3,7 +3,7 @@ import { Button, Table, Tag, Panel } from '@sparkpost/matchbox';
 import { TableCollection, PageLink, DisplayDate } from 'src/components';
 import AlertToggle from './AlertToggleNew';
 import { Delete } from '@sparkpost/matchbox-icons';
-import { METRICS } from '../constants/metricsV1';
+import { METRICS } from '../constants/formConstants';
 import styles from './AlertCollection.module.scss';
 
 const filterBoxConfig = {
