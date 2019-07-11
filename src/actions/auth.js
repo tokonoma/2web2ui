@@ -177,7 +177,9 @@ export function logout() {
       return;
     }
     dispatch(invalidateAuthToken(token));
-    dispatch(invalidateAuthToken(refreshToken));
+    if (refreshToken) {
+      dispatch(invalidateAuthToken(refreshToken));
+    }
     dispatch(websiteAuth.logout());
 
     removeHerokuToolbar();
