@@ -18,9 +18,10 @@ export const ComboBoxTypeahead = (props) => {
     selectedMap,
     placeholder,
     readOnly,
+    defaultSelected,
     debounceFn //Needed for testing
   } = props;
-  const [selected, setSelected] = useState([]);
+  const [selected, setSelected] = useState(defaultSelected);
   const [matches, setMatches] = useState(results);
   const [updateMatches, setUpdateMatches] = useState(() => undefined);
 
@@ -161,5 +162,6 @@ ComboBoxTypeahead.defaultProps = {
   itemToString: (item) => item,
   selectedMap: (item) => item,
   maxNumberOfResults: 100,
-  debounceFn: debounce
+  debounceFn: debounce,
+  defaultSelected: []
 };

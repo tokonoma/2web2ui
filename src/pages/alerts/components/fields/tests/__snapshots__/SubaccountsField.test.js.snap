@@ -3,6 +3,7 @@
 exports[`Subaccount Field should render the Subaccounts Field component correctly 1`] = `
 <Field
   component={[Function]}
+  defaultSelected={Array []}
   disabled={false}
   itemToString={[Function]}
   label="Subaccounts"

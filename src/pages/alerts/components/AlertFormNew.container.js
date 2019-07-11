@@ -7,8 +7,9 @@ import { hasSubaccounts } from 'src/selectors/subaccounts';
 
 export default function withAlertForm(WrappedComponent) {
 
-  const mapStateToProps = (state) => {
+  const mapStateToProps = (state, props) => {
     const selector = formValueSelector(FORM_NAME);
+    const { intialValues } = props;
 
     return {
       formErrors: getFormSyncErrors(FORM_NAME)(state),
@@ -17,7 +18,7 @@ export default function withAlertForm(WrappedComponent) {
       metric: selector(state, 'metric'),
       single_filter: selector(state, 'single_filter'),
       muted: selector(state, 'muted'),
-      initialValues: DEFAULT_FORM_VALUES
+      initialValues: intialValues ? intialValues : DEFAULT_FORM_VALUES
     };
   };
 

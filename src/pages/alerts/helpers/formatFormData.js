@@ -68,7 +68,8 @@ export const formatFromApiToForm = (alert) => {
     'filters',
     'any_subaccount',
     'threshold_evaluator',
-    'channels'];
+    'channels',
+    'last_triggered'];
   const { metric, filters = [], any_subaccount, subaccounts, threshold_evaluator = {}, channels = {}} = alert;
 
   const { filterType } = getFormSpec(metric);

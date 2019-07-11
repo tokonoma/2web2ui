@@ -21,6 +21,13 @@ export class SubaccountsField extends Component {
     this.props.listSubaccounts();
   }
 
+  getAllAvailableSubaccounts = () => [
+    { id: -1, name: 'Master and all subaccounts' },
+    { id: -2, name: 'Any subaccount' },
+    { id: 0, name: 'Master account' },
+    ...this.props.subaccounts
+  ];
+
   /*
   If the field is empty/pristine, show all options.
   If the user has already entered master & all or entered any subaccount, do no show any options
@@ -30,12 +37,7 @@ export class SubaccountsField extends Component {
     const { subaccountsFieldValue, subaccounts } = this.props;
 
     if (subaccountsFieldValue.length === 0) {
-      return [
-        { id: -1, name: 'Master and all subaccounts' },
-        { id: -2, name: 'Any subaccount' },
-        { id: 0, name: 'Master account' },
-        ...subaccounts
-      ];
+      return this.getAllAvailableSubaccounts();
     }
 
     return (subaccountsFieldValue[0] < 0)
@@ -45,7 +47,10 @@ export class SubaccountsField extends Component {
   };
 
   render() {
-    const { disabled } = this.props;
+    const { disabled, subaccountsFieldValue } = this.props;
+    //Maps from an array of subaccount ids to an array of full subaccount objects
+    const selectedSubaccounts = subaccountsFieldValue.map((subaccountId) =>
+      this.getAllAvailableSubaccounts().find(({ id }) => id === subaccountId));
 
     return (
       <Field
@@ -56,6 +61,7 @@ export class SubaccountsField extends Component {
         selectedMap={subaccountMap}
         disabled={disabled}
         placeholder='Type To Search'
+        defaultSelected={selectedSubaccounts}
         label='Subaccounts'
       />
     );

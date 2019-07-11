@@ -17,7 +17,8 @@ describe('Filter Fields Component', () => {
     listPools: jest.fn(),
     listSendingDomains: jest.fn(),
     listSendingIps: jest.fn(),
-    change: jest.fn()
+    change: jest.fn(),
+    myFilter: ['random value']
   };
 
   const subject = (options) => shallow(<FilterFields {...props} {...options} />);

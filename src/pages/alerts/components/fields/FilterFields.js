@@ -97,6 +97,7 @@ export class FilterFields extends Component {
               component={ComboBoxTypeaheadWrapper}
               results={filterTypeaheadResults[single_filter.filter_type] || []}
               key={single_filter.filter_type}
+              defaultSelected={single_filter.filter_values}
               {...extraProps[single_filter.filter_type]}
             />
           </div>
@@ -111,6 +112,7 @@ export class FilterFields extends Component {
           component={ComboBoxTypeaheadWrapper}
           results={filterTypeaheadResults[value]}
           label={label}
+          defaultSelected={this.props[value]}
           {...extraProps[value]}
         />)
       ));
@@ -133,6 +135,9 @@ const mapStateToProps = (state) => {
   return {
     single_filter: selector(state, 'single_filter') || {},
     metric: selector(state, 'metric'),
+    mailbox_provider: selector(state, 'mailbox_provider'),
+    sending_domain: selector(state, 'sending_domain'),
+    sending_ip: selector(state, 'sending_ip'),
     ipPools: getIpPools(state) || [],
     sendingDomains: selectVerifiedDomains(state) || [],
     sendingIps: state.sendingIps.list || [],
