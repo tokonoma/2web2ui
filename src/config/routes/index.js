@@ -680,7 +680,7 @@ const routes = [
     supportDocsSearch: 'Alerts'
   },
   {
-    path: '/alerts-new/create',
+    path: '/alerts-new/create/:id?',
     component: alerts.CreatePageNew,
     condition: isUserUiOptionSet('alerts'),
     layout: App,

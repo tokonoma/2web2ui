@@ -1,7 +1,7 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 import { CreatePageNew } from '../CreatePageNew';
-import format from '../helpers/formatFormData';
+import { formatFromFormToApi } from '../helpers/formatFormData';
 import AlertFormNew from '../components/AlertFormNew';
 
 jest.mock('../helpers/formatFormData');
@@ -14,7 +14,12 @@ describe('Page: Alerts Create', () => {
     history: {
       push: jest.fn()
     },
-    loading: false
+    loading: false,
+    getAlert: jest.fn(),
+    getError: undefined,
+    getLoading: undefined,
+    duplicateId: undefined,
+    alert: {}
   };
 
   let wrapper;
@@ -27,8 +32,24 @@ describe('Page: Alerts Create', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  it('should render Loading when loading duplicate alert', () => {
+    wrapper.setProps({ getLoading: true });
+    expect(wrapper.find('Loading')).toExist();
+  });
+
+  it('should render Error when there is an error during duplicate alert', () => {
+    wrapper.setProps({ getError: true });
+    expect(wrapper.find('RedirectAndAlert')).toExist();
+  });
+
+  it('should get alert if duplicate id exists', () => {
+    const newProps = { duplicateId: 'alert-id-1' };
+    wrapper = shallow(<CreatePageNew {...props} {...newProps} />);
+    expect(props.getAlert).toHaveBeenCalledWith({ id: 'alert-id-1' });
+  });
+
   it('should handle submit', async () => {
-    format.mockImplementationOnce((a) => a);
+    formatFromFormToApi.mockImplementationOnce((a) => a);
     await wrapper.find(AlertFormNew).simulate('submit', { value: 'mock value' });
     expect(props.createAlert).toHaveBeenCalledWith({ data: { value: 'mock value' }});
     expect(props.showUIAlert).toHaveBeenCalled();
