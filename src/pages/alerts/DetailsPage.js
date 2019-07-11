@@ -11,23 +11,23 @@ import _ from 'lodash';
 export class DetailsPage extends Component {
   state = {
     isDeleteModalOpen: false
-  }
+  };
 
   componentDidMount() {
-    const { id, getAlert, hasSubaccounts, listSubaccounts, subaccounts } = this.props;
+    const { id, getAlert, hasSubaccounts, listSubaccounts } = this.props;
     getAlert({ id });
-    if (hasSubaccounts && subaccounts.length === 0) {
+    if (hasSubaccounts) {
       listSubaccounts();
     }
   }
 
   closeDeleteModal = () => {
     this.setState({ isDeleteModalOpen: false });
-  }
+  };
 
   openDeleteModal = () => {
     this.setState({ isDeleteModalOpen: true });
-  }
+  };
 
   handleDelete = () => {
     const { id, deleteAlert, showUIAlert, alert, history } = this.props;
@@ -38,7 +38,7 @@ export class DetailsPage extends Component {
       history.push('../alerts-new');
       showUIAlert({ type: 'success', message: `Alert: ${name} Deleted` });
     });
-  }
+  };
 
   subaccountIdToString= (id) => {
     const { subaccounts } = this.props;
@@ -48,7 +48,7 @@ export class DetailsPage extends Component {
       ...subaccounts];
     const matchedSubaccount = allSubaccounts.find((subaccount) => subaccount.id === id) || {};
     return id > 0 ? `${matchedSubaccount.name} (${matchedSubaccount.id})` : `${matchedSubaccount.name}`;
-  }
+  };
 
   render() {
     const { loading, deletePending, alert = {}, error, id } = this.props;

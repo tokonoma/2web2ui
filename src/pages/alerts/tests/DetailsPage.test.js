@@ -9,7 +9,7 @@ describe('Page: Alert Details', () => {
     showUIAlert: jest.fn(),
     hasSubaccounts: true,
     listSubaccounts: jest.fn(() => Promise.resolve()),
-    subaccounts: [{ id: 1, name: 'My Subacount' }],
+    subaccounts: [{ id: 1, name: 'My Subaccount' }],
     alert: { name: 'My Alert' },
     loading: false,
     id: 'alert-id',
@@ -27,6 +27,11 @@ describe('Page: Alert Details', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  it('should get subaccounts on mount', () => {
+    wrapper = shallow(<DetailsPage {...props} />);
+    expect(props.listSubaccounts).toHaveBeenCalled();
+  });
+
   it('should render loading component when loading data', () => {
     wrapper.setProps({ loading: true });
     expect(wrapper.find('Loading')).toHaveLength(1);
@@ -37,6 +42,12 @@ describe('Page: Alert Details', () => {
     wrapper.setProps({ error: { message: 'this failed' }});
     expect(wrapper.find('RedirectAndAlert')).toHaveLength(1);
     expect(wrapper.find('Page')).not.toExist();
+  });
+
+  it('should handle subaccount id to String', () => {
+    const subaccountIdToString = wrapper.instance().subaccountIdToString;
+    expect(subaccountIdToString(1)).toEqual('My Subaccount (1)');
+    expect(subaccountIdToString(0)).toEqual('Master account');
   });
 
   it('should toggle delete modal upon clicking delete Button', () => {

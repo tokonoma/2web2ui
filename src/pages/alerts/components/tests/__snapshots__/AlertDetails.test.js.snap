@@ -128,7 +128,23 @@ exports[`Alert Details Component should render the alert details component corre
       <Grid.Column
         md={10}
         xs={12}
-      />
+      >
+        <div
+          key="email"
+        >
+          Email: 
+          <Tag
+            className="TagsWithIcon"
+            key="Myemail@email.com"
+          >
+            <Email
+              className="Icon"
+            />
+             
+            Myemail@email.com
+          </Tag>
+        </div>
+      </Grid.Column>
     </Grid>
   </Panel.Section>
   <Panel.Section

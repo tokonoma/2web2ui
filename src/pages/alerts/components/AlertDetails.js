@@ -62,9 +62,9 @@ export const AlertDetails = ({ alert, id, subaccountIdToString }) => {
     if (emails && emails.length > 0) {
       const emailTags = emails.map((email) => <Tag key={email} className={styles.TagsWithIcon}><Email className={styles.Icon}/> {email}</Tag>);
       notifications.push(
-        (<>
+        (<div key={'email'}>
            Email: {emailTags}
-        </>)
+        </div>)
       );
     }
     return notifications;
