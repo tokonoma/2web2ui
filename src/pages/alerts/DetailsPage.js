@@ -14,8 +14,7 @@ export class DetailsPage extends Component {
   }
 
   componentDidMount() {
-    const { match, getAlert, hasSubaccounts, listSubaccounts, subaccounts } = this.props;
-    const { params: { id }} = match;
+    const { id, getAlert, hasSubaccounts, listSubaccounts, subaccounts } = this.props;
     getAlert({ id });
     if (hasSubaccounts && subaccounts.length === 0) {
       listSubaccounts();
@@ -31,8 +30,7 @@ export class DetailsPage extends Component {
   }
 
   handleDelete = () => {
-    const { match, deleteAlert, showUIAlert, alert, history } = this.props;
-    const { params: { id }} = match;
+    const { id, deleteAlert, showUIAlert, alert, history } = this.props;
     const { name } = alert;
 
     return deleteAlert({ id }).then(() => {
@@ -53,9 +51,8 @@ export class DetailsPage extends Component {
   }
 
   render() {
-    const { loading, deletePending, alert = {}, error, match } = this.props;
+    const { loading, deletePending, alert = {}, error, id } = this.props;
     const { isDeleteModalOpen } = this.state;
-    const { params: { id }} = match;
     const { name } = alert;
 
     if (loading) {

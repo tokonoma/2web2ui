@@ -12,7 +12,7 @@ describe('Page: Alert Details', () => {
     subaccounts: [{ id: 1, name: 'My Subacount' }],
     alert: { name: 'My Alert' },
     loading: false,
-    match: { params: { id: 'alert-id' }},
+    id: 'alert-id',
     deletePending: false,
     history: { push: jest.fn() }
   };

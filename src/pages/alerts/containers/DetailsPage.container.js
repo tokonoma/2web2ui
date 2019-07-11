@@ -9,7 +9,8 @@ import { list as listSubaccounts } from 'src/actions/subaccounts';
 function withAlert(WrappedComponent) {
   const mapDispatchToProps = { deleteAlert, getAlert, showUIAlert: showAlert, listSubaccounts };
 
-  const mapStateToProps = (state) => ({
+  const mapStateToProps = (state, props) => ({
+    id: props.match.params.id,
     alert: state.alertsV1.alert,
     error: state.alertsV1.getError,
     loading: state.alertsV1.getPending,
