@@ -1,8 +1,8 @@
 import _ from 'lodash';
-import { REALTIME_FILTERS } from '../constants/formConstants';
+import { REALTIME_FILTERS, DEFAULT_FORM_VALUES } from '../constants/formConstants';
 import { getFormSpec } from './alertForm';
 
-export default function (values) {
+export const formatFromFormToApi = (values) => {
   const keysToOmit = [
     'value',
     'source',
@@ -61,4 +61,42 @@ export default function (values) {
   };
 
   return _.omit({ ...values, ...keysToChange }, keysToOmit);
-}
+};
+
+export const formatFromApiToForm = (alert) => {
+  const keysToOmit = [
+    'filters',
+    'any_subaccount',
+    'threshold_evaluator',
+    'channels'];
+  const { metric, filters = [], any_subaccount, subaccounts, threshold_evaluator = {}, channels = {}} = alert;
+
+  const { filterType } = getFormSpec(metric);
+  const getFormFilters = {
+    single: (() => (filters.length > 0 ? { single_filter: filters[0] } : {})),
+    multi: (() => {
+      const formFilters = {};
+      filters.forEach((filter) => {
+        formFilters[filter.filter_type] = filter.filter_values;
+      });
+      return formFilters;
+    }),
+    default: (() => {})
+  };
+  const formFilters = (getFormFilters[filterType] || getFormFilters.default)();
+
+  const { source, operator, value } = threshold_evaluator;
+
+  const { emails = []} = channels;
+  const email_addresses = emails.join(', ');
+
+  const keysToChange = {
+    subaccounts: any_subaccount ? [-2] : subaccounts,
+    ...formFilters,
+    source,
+    operator,
+    value,
+    email_addresses };
+
+  return _.omit({ ...DEFAULT_FORM_VALUES, ...alert, ...keysToChange }, keysToOmit);
+};

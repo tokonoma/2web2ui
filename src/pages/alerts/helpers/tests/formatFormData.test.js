@@ -1,10 +1,11 @@
-import formatFormData from '../formatFormData';
+import { formatFromFormToApi, formatFromApiToForm } from '../formatFormData';
 import cases from 'jest-in-case';
 
 const emails = 'sparky@sparkpost.com, test@foo.com';
 const emailAsArray = ['sparky@sparkpost.com', 'test@foo.com'];
 
-const input = {
+const formData = {
+  name: 'foo',
   metric: 'health_score',
   subaccounts: [-1],
   sending_ip: [],
@@ -18,7 +19,8 @@ const input = {
   muted: false
 };
 
-const expected = {
+const apiData = {
+  name: 'foo',
   metric: 'health_score',
   subaccounts: [-1],
   filters: [],
@@ -34,40 +36,40 @@ const expected = {
 const testCases =
     {
       'master and all subaccounts': {
-        input: { ...input },
-        expected: { ...expected }
+        formData: { ...formData },
+        apiData: { ...apiData }
       },
       'any subaccount': {
-        input: { ...input, subaccounts: [-2]},
-        expected: { ...expected, subaccounts: undefined, any_subaccount: true }
+        formData: { ...formData, subaccounts: [-2]},
+        apiData: { ...apiData, subaccounts: undefined, any_subaccount: true }
       },
       'defaults empty subaccount to -1': {
-        input: { ...input, subaccounts: []},
-        expected: { ...expected, subaccounts: [-1], any_subaccount: undefined }
+        formData: { ...formData, subaccounts: []},
+        apiData: { ...apiData, subaccounts: [-1], any_subaccount: undefined }
       },
       'select subaccounts': {
-        input: { ...input, subaccounts: [0,1]},
-        expected: { ...expected, subaccounts: [0,1]}
+        formData: { ...formData, subaccounts: [0,1]},
+        apiData: { ...apiData, subaccounts: [0,1]}
       },
       'single filter': {
-        input: { ...input, single_filter: { filter_type: 'mailbox_provider', filter_values: ['a']}},
-        expected: { ...expected, filters: [{ filter_type: 'mailbox_provider', filter_values: ['a']}]}
+        formData: { ...formData, single_filter: { filter_type: 'mailbox_provider', filter_values: ['a']}},
+        apiData: { ...apiData, filters: [{ filter_type: 'mailbox_provider', filter_values: ['a']}]}
       },
       'single filter with no facet selected': {
-        input: { ...input, single_filter: { filter_type: 'none', filter_values: []}},
-        expected: { ...expected }
+        formData: { ...formData, single_filter: { filter_type: 'none', filter_values: []}},
+        apiData: { ...apiData }
       },
       'only sending Ip': {
-        input: { ...input, metric: 'block_bounce_rate', sending_ip: ['a','b']},
-        expected: {
-          ...expected,
+        formData: { ...formData, metric: 'block_bounce_rate', sending_ip: ['a','b']},
+        apiData: {
+          ...apiData,
           metric: 'block_bounce_rate',
           filters: [{ filter_type: 'sending_ip', filter_values: ['a','b']}]}
       },
       'sending Ip, mailbox provider, and sending domain': {
-        input: { ...input, metric: 'block_bounce_rate', sending_ip: ['a'], mailbox_provider: ['b'], sending_domain: ['c']},
-        expected: {
-          ...expected,
+        formData: { ...formData, metric: 'block_bounce_rate', sending_ip: ['a'], mailbox_provider: ['b'], sending_domain: ['c']},
+        apiData: {
+          ...apiData,
           metric: 'block_bounce_rate',
           filters: [
             { filter_type: 'sending_ip', filter_values: ['a']},
@@ -78,8 +80,14 @@ const testCases =
       }
     };
 
-describe('Alert form data transformer', () => {
-  cases('should correctly transform the data for', ({ input, expected }) => {
-    expect(formatFormData(input)).toEqual(expected);
+describe('formatFromFormToApi', () => {
+  cases('should correctly transform the data for', ({ formData, apiData }) => {
+    expect(formatFromFormToApi(formData)).toEqual(apiData);
+  }, testCases);
+});
+
+describe('formatFromApiToForm', () => {
+  cases('should correctly transform the data for', ({ apiData, formData }) => {
+    expect(formatFromApiToForm(apiData)).toEqual(formData);
   }, testCases);
 });
