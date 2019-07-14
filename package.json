@@ -114,7 +114,7 @@
     "babel-plugin-recharts": "^1.2.0",
     "babel-preset-react-app": "^7.0.0",
     "brace": "^0.11.0",
-    "browserslist": "^4.0.0",
+    "browserslist": "^4.6.6",
     "caniuse-db": "^1.0.30000875",
     "case-sensitive-paths-webpack-plugin": "2.2.0",
     "chalk": "^2.3.1",
