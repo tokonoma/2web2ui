@@ -14,9 +14,7 @@ exports[`PlanPrice allows class name overriding 1`] = `
        emails/month 
     </span>
     <span>
-      <span>
-         at 
-      </span>
+       at 
       <strong>
         $9
       </strong>
@@ -44,9 +42,7 @@ exports[`PlanPrice renders as 0 if flat discount is greater than price 1`] = `
        emails/month 
     </span>
     <span>
-      <span>
-         at 
-      </span>
+       at 
       <s
         className="DiscountedLabel"
       >
@@ -80,9 +76,7 @@ exports[`PlanPrice renders correctly 1`] = `
        emails/month 
     </span>
     <span>
-      <span>
-         at 
-      </span>
+       at 
       <strong>
         $9
       </strong>
@@ -133,9 +127,7 @@ exports[`PlanPrice renders correctly for CSM inclusion 1`] = `
        emails/month 
     </span>
     <span>
-      <span>
-         at 
-      </span>
+       at 
       <strong>
         $9
       </strong>
@@ -191,9 +183,7 @@ exports[`PlanPrice renders correctly with hourly plans 1`] = `
        emails/month 
     </span>
     <span>
-      <span>
-         at 
-      </span>
+       at 
       <strong>
         $0.012
       </strong>
@@ -221,9 +211,7 @@ exports[`PlanPrice renders flat discount 1`] = `
        emails/month 
     </span>
     <span>
-      <span>
-         at 
-      </span>
+       at 
       <s
         className="DiscountedLabel"
       >
@@ -257,9 +245,7 @@ exports[`PlanPrice renders free ip 1`] = `
        emails/month 
     </span>
     <span>
-      <span>
-         at 
-      </span>
+       at 
       <strong>
         $9
       </strong>
@@ -289,9 +275,7 @@ exports[`PlanPrice renders free ip and overage correct 1`] = `
        emails/month 
     </span>
     <span>
-      <span>
-         at 
-      </span>
+       at 
       <strong>
         $9
       </strong>
@@ -324,9 +308,7 @@ exports[`PlanPrice renders percent discount 1`] = `
        emails/month 
     </span>
     <span>
-      <span>
-         at 
-      </span>
+       at 
       <s
         className="DiscountedLabel"
       >
@@ -360,9 +342,7 @@ exports[`PlanPrice renders with overage 1`] = `
        emails/month 
     </span>
     <span>
-      <span>
-         at 
-      </span>
+       at 
       <strong>
         $9
       </strong>

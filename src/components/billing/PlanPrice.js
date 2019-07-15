@@ -36,10 +36,12 @@ const PlanPrice = ({ plan, showOverage = false, showIp = false, showCsm = false,
       <span className={styles.MainLabel} {...rest}>
         <strong>{plan.volume.toLocaleString()}</strong><span> emails/month </span>
         {priceInfo.price > 0
-          ? <span><span> at </span>
+          ? <span>
+            {' at '}
             {hasDiscount && <s className={styles.DiscountedLabel}>${priceInfo.price}</s>}
             <strong>{hasDiscount ? formatCurrency(discountAmount) : `$${discountAmount.toLocaleString()}`}</strong>
-            /{priceInfo.intervalShort}</span>
+            /{priceInfo.intervalShort}
+          </span>
           : <span> FREE </span>}
       </span>
       <span className={styles.SupportLabel}>
