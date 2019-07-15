@@ -39,7 +39,7 @@ const PlanPrice = ({ plan, showOverage = false, showIp = false, showCsm = false,
           ? <span>
             {' at '}
             {hasDiscount && <s className={styles.DiscountedLabel}>${priceInfo.price}</s>}
-            <strong>{hasDiscount ? formatCurrency(discountAmount) : `$${discountAmount.toLocaleString()}`}</strong>
+            <strong>{hasDiscount ? formatCurrency(discountAmount) : `$${priceInfo.price}`}</strong>
             /{priceInfo.intervalShort}
           </span>
           : <span> FREE </span>}
