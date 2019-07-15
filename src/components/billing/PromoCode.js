@@ -11,12 +11,13 @@ const Loading = ({ loading }) => loading ? <LoadingSVG size="XSmall" /> : null;
 export class PromoCode extends React.Component {
 
   render() {
-    const { selectedPromo = {}, promoPending = false } = this.props;
+    const { selectedPromo = {}, promoPending = false, promoError = {}} = this.props;
     return (
       <span>
         <Field
           label='Promo Code'
           name="promoCode"
+          error={promoError.message}
           errorInLabel
           component={TextFieldWrapper}
           suffix={<Loading loading={promoPending} />}
@@ -30,7 +31,8 @@ export class PromoCode extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  promoPending: state.billing.promoPending
+  promoPending: state.billing.promoPending,
+  promoError: state.billing.promoError
 });
 
 export default connect(mapStateToProps)(PromoCode);

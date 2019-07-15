@@ -30,4 +30,10 @@ describe('promoCode', () => {
     wrapper.setProps(props);
     expect(wrapper).toMatchSnapshot();
   });
+
+  it('should render with error', () => {
+    props.promoError = { message: 'Oh no!' };
+    wrapper.setProps(props);
+    expect(wrapper).toMatchSnapshot();
+  });
 });
