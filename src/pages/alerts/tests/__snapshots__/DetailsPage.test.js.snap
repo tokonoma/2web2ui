@@ -16,7 +16,9 @@ exports[`Page: Alert Details should render Alert Details Page 1`] = `
         flat={true}
         size="default"
       >
-        <ContentCopy />
+        <ContentCopy
+          className="Icon"
+        />
         Duplicate
       </Button>
       <Button
@@ -24,7 +26,9 @@ exports[`Page: Alert Details should render Alert Details Page 1`] = `
         onClick={[Function]}
         size="default"
       >
-        <Delete />
+        <Delete
+          className="Icon"
+        />
         Delete
       </Button>
     </React.Fragment>

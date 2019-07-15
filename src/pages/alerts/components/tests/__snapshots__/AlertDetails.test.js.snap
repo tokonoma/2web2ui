@@ -8,7 +8,7 @@ exports[`Alert Details Component should render the alert details component corre
     <span
       className="Subtitle"
     >
-      Alert Detail
+      Alert Details
     </span>
     <span
       className="ButtonGroup"
@@ -63,7 +63,7 @@ exports[`Alert Details Component should render the alert details component corre
         <span
           key="subaccounts"
         >
-          Subaccounts:
+          Subaccounts: 
           <Tag
             className="Tags"
             key="-1"
@@ -76,7 +76,7 @@ exports[`Alert Details Component should render the alert details component corre
         >
           and 
           Mailbox Provider
-          :
+          : 
           <Tag
             className="Tags"
             key="mailbox_provider-gmail"

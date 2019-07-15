@@ -6,6 +6,7 @@ import { DeleteModal, Loading } from 'src/components';
 import withAlert from './containers/DetailsPage.container';
 import { AlertDetails } from './components/AlertDetails';
 import RedirectAndAlert from 'src/components/globalAlert/RedirectAndAlert';
+import styles from './DetailsPage.module.scss';
 import _ from 'lodash';
 
 export class DetailsPage extends Component {
@@ -73,8 +74,8 @@ export class DetailsPage extends Component {
         breadcrumbAction={{ content: 'Back to Alerts', to: '/alerts-new', component: Link }}
         primaryArea={
           <>
-          <Button flat><ContentCopy />Duplicate</Button>
-          <Button flat onClick={this.openDeleteModal}><Delete />Delete</Button>
+          <Button flat><ContentCopy className={styles.Icon}/>Duplicate</Button>
+          <Button flat onClick={this.openDeleteModal}><Delete className={styles.Icon}/>Delete</Button>
           </>}
       >
         {!_.isEmpty(alert) && <AlertDetails alert={alert} id={id} subaccountIdToString={this.subaccountIdToString}/>}

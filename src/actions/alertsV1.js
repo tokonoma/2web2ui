@@ -13,7 +13,7 @@ export function listAlerts() {
 
 export function createAlert({ data }) {
   return sparkpostApiRequest({
-    type: 'CREATE_ALERT',
+    type: 'CREATE_ALERT_V1',
     meta: {
       method: 'POST',
       url: '/v1/alerts',

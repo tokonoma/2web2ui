@@ -33,12 +33,12 @@ export const AlertDetails = ({ alert, id, subaccountIdToString }) => {
   const renderFilteredBy = () => {
     const subaccount = (
       <span key={'subaccounts'}>
-        Subaccounts:{getSubaccountsTags()}
+        Subaccounts: {getSubaccountsTags()}
       </span>
     );
     const filtersTags = filters.map((filter) => (
       <span key={filter.filter_type}>
-        and {FILTERS_FRIENDLY_NAMES[filter.filter_type]}:{getFilterValuesTags(filter.filter_type, filter.filter_values)}
+        and {FILTERS_FRIENDLY_NAMES[filter.filter_type]}: {getFilterValuesTags(filter.filter_type, filter.filter_values)}
       </span>
     ));
     return [subaccount, ...filtersTags];
@@ -95,7 +95,7 @@ export const AlertDetails = ({ alert, id, subaccountIdToString }) => {
   return (
     <Panel>
       <Panel.Section className={styles.Panel}>
-        <span className={styles.Subtitle}>Alert Detail</span>
+        <span className={styles.Subtitle}>Alert Details</span>
         <span className={styles.ButtonGroup}>
           <Button className={styles.Button} primary>Edit</Button>
         </span>

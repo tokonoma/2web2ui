@@ -10,7 +10,7 @@ Array [
       "method": "POST",
       "url": "/v1/alerts",
     },
-    "type": "CREATE_ALERT",
+    "type": "CREATE_ALERT_V1",
   },
 ]
 `;

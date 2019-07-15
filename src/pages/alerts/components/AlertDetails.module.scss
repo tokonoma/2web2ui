@@ -2,14 +2,19 @@
 
 
 .Subtitle {
-  font-weight: bold;
-  font-size: 18px;
+  font-weight: 600;
+  font-size: 22px;
   position: relative;
-  top: rem(5);
+  top: rem(6);
 }
 
 .AlertName {
-  font-weight: bold;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.AlertName {
+  font-weight: 600;
   font-size: 16px;
 }
 
