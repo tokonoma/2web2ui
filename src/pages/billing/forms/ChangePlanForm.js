@@ -37,6 +37,9 @@ export class ChangePlanForm extends Component {
   componentDidMount() {
     this.props.getPlans().then(() => {
       const { initialValues, selectedPlan } = this.props;
+
+      //After loading plans, verifies query promo against plan and applies UI discount
+      //TODO: Move to componentDidUpdate
       if (initialValues.promoCode && !_.isEmpty(selectedPlan)) {
         return this.props.verifyPromoCode({
           promoCode: initialValues.promoCode,
