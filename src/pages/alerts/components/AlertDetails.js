@@ -60,7 +60,10 @@ export const AlertDetails = ({ alert, id, subaccountIdToString }) => {
     const notifications = [];
     const { emails } = channels;
     if (emails && emails.length > 0) {
-      const emailTags = emails.map((email) => <Tag key={email} className={styles.TagsWithIcon}><Email className={styles.Icon}/> {email}</Tag>);
+      const emailTags = emails.map((email) =>
+        <Tag key={email} className={styles.TagsWithIcon}>
+          <Email className={styles.Icon}/><span className={styles.TagText}>{email}</span>
+        </Tag>);
       notifications.push(
         (<div key={'email'}>
            Email: {emailTags}
@@ -75,7 +78,7 @@ export const AlertDetails = ({ alert, id, subaccountIdToString }) => {
     { name: 'Filtered By: ', render: (() => (renderFilteredBy())) },
     { name: 'Evaluated:', render: (() => (renderEvaluated())) },
     { name: 'Notify:', render: (() => (renderNotify())) },
-    { name: 'Muted:', render: (() => (<AlertToggle muted={muted} id={id} />)) }
+    { name: 'Status:', render: (() => (<AlertToggle muted={muted} id={id} />)) }
   ];
 
   const renderAlertDetails = () =>

@@ -140,8 +140,11 @@ exports[`Alert Details Component should render the alert details component corre
             <Email
               className="Icon"
             />
-             
-            Myemail@email.com
+            <span
+              className="TagText"
+            >
+              Myemail@email.com
+            </span>
           </Tag>
         </div>
       </Grid.Column>
@@ -156,7 +159,7 @@ exports[`Alert Details Component should render the alert details component corre
         md={2}
         xs={12}
       >
-        Muted:
+        Status:
       </Grid.Column>
       <Grid.Column
         md={10}
