@@ -51,7 +51,7 @@ echo '{"options": {"ui": {"my-new-route": true}}}' | http put app.tst.sparkpost:
 For a user:
 
 ```sh
-echo '{"options": {"ui": {"my-new-route": true}}}' | http put app.tst.sparkpost:8888/api/v1/user/{username}/control
+echo '{"options": {"ui": {"my-new-route": true}}}' | http put app.tst.sparkpost:8888/api/v1/users/{username}/control
 x-msys-tenant:uat x-msys-customer:<CID>
 ```
 
@@ -66,5 +66,5 @@ echo '{"options": {"ui": {"my-new-route": false}}}' | http put app.tst.sparkpost
 
 For a user:
 ```sh
-echo '{"options": {"ui": {"my-new-route": false}}}' | http put app.tst.sparkpost:8888/api/v1/user/{username}/control x-msys-tenant:uat x-msys-customer:<CID>
+echo '{"options": {"ui": {"my-new-route": false}}}' | http put app.tst.sparkpost:8888/api/v1/users/{username}/control x-msys-tenant:uat x-msys-customer:<CID>
 ```
