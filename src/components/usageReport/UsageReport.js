@@ -49,6 +49,8 @@ export class UsageReport extends Component {
 
     const remaining = subscription.plan_volume - usage.month.used;
     const overage = remaining < 0 ? Math.abs(remaining) : 0;
+    const hasDailyLimit = usage.day.limit > 0;
+    const hasMonthlyLimit = usage.month.limit > 0;
 
     const overageMarkup = overage
       ? <DisplayNumber label='Extra Emails Used' content={overage.toLocaleString()}/>
@@ -61,11 +63,11 @@ export class UsageReport extends Component {
             title='Today'
             secondaryTitle={`Since ${formatDateTime(usage.day.start)}`}
           />
-          {usage.day.limit && (
+          {hasDailyLimit && (
             <ProgressBar completed={getPercent(usage.day.used, usage.day.limit)} />
           )}
           <DisplayNumber label='Used' content={usage.day.used.toLocaleString()} orange />
-          {usage.day.limit && (
+          {hasDailyLimit && (
             <DisplayNumber label='Daily Limit' content={usage.day.limit.toLocaleString()} />
           )}
           <SendMoreCTA />
@@ -75,13 +77,13 @@ export class UsageReport extends Component {
             title='This Month'
             secondaryTitle={`Billing cycle: ${formatDate(usage.month.start)} - ${formatDate(usage.month.end)}`}
           />
-          {usage.month.limit && (
+          {hasMonthlyLimit && (
             <ProgressBar completed={getPercent(usage.month.used, usage.month.limit)} />
           )}
           <DisplayNumber label='Used' content={usage.month.used.toLocaleString()} orange />
           <DisplayNumber label='Included' content={subscription.plan_volume.toLocaleString()}/>
           {overageMarkup}
-          {usage.month.limit && (
+          {hasMonthlyLimit && (
             <DisplayNumber label='Monthly limit' content={usage.month.limit.toLocaleString()} />
           )}
         </Panel.Section>
