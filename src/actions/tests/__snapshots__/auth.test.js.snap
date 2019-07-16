@@ -149,7 +149,7 @@ Array [
 ]
 `;
 
-exports[`Action Creator: Auth logout should dispatch a logout when user is logged in 2`] = `
+exports[`Action Creator: Auth logout should skip invalidating the refreshToken if one does not exist 1`] = `
 Array [
   Array [
     [Function],
