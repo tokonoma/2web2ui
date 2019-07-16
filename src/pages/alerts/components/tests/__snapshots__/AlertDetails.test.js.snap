@@ -104,12 +104,14 @@ exports[`Alert Details Component should render the alert details component corre
       >
         <Tag
           className="Tags"
-        />
-        change undefined
+        >
+          Value
+        </Tag>
+        below
         <Tag
           className="Tags"
         >
-          %
+          80
         </Tag>
       </Grid.Column>
     </Grid>

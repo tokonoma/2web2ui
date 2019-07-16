@@ -46,7 +46,7 @@ export const AlertDetails = ({ alert, id, subaccountIdToString }) => {
 
   const renderEvaluated = () => {
     const sourceTag = <Tag className={styles.Tags}>{SOURCE_FRIENDLY_NAMES[source]}</Tag>;
-    const operatorText = (source === 'raw') ? OPERATOR_FRIENDLY_NAMES[operator] : `change ${OPERATOR_FRIENDLY_NAMES[operator]}`;
+    const operatorText = (source === 'raw') ? OPERATOR_FRIENDLY_NAMES[operator].toLowerCase() : `change ${OPERATOR_FRIENDLY_NAMES[operator].toLowerCase()}`;
     const suffix = (source === 'raw') ? '' : '%';
     const valueTag = <Tag className={styles.Tags}>{value}{suffix}</Tag>;
     return (<>

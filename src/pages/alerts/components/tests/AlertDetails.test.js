@@ -11,6 +11,7 @@ describe('Alert Details Component', () => {
         metric: 'health_score',
         channels: { emails: ['Myemail@email.com']},
         filters: [{ filter_type: 'mailbox_provider', filter_values: ['gmail']}],
+        threshold_evaluator: { source: 'raw', operator: 'lt', value: 80 },
         subaccounts: [-1],
         any_subaccount: false,
         muted: false
