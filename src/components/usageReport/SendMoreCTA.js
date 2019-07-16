@@ -22,18 +22,9 @@ export class SendMoreCTA extends Component {
       }));
   }
 
-  renderVerifyEmailCTA() {
-    const { verifyingEmail } = this.props;
-
-    const resendVerificationLink = <UnstyledLink
-      onClick={this.resendVerification}>
-      Verify your email.
-    </UnstyledLink>;
-
-    return verifyingEmail ? <span>Resending a verification email... </span> : resendVerificationLink;
-  }
-
   render() {
+    const { hasSendingLimits, verifyingEmail } = this.props;
+
     return (
       <AccessControl condition={isAdmin}>
         <p>
@@ -42,7 +33,13 @@ export class SendMoreCTA extends Component {
           <ConditionSwitch>
 
             {/* email isn't verified */}
-            <Case condition={not(isEmailVerified)} children={this.renderVerifyEmailCTA()} />
+            <Case condition={not(isEmailVerified)}>
+              {verifyingEmail ? (
+                <span>Resending a verification email... </span>
+              ) : (
+                <UnstyledLink onClick={this.resendVerification}> Verify your email. </UnstyledLink>
+              )}
+            </Case>
 
             {/* on a deprecated plan */}
             <Case condition={onPlanWithStatus('deprecated')} children={<PageLink to="/account/billing">Switch to a new plan.</PageLink>} />
@@ -52,7 +49,11 @@ export class SendMoreCTA extends Component {
 
           </ConditionSwitch>
           {' '}
-          <UnstyledLink to={LINKS.DAILY_MONTHLY_QUOTA_LIMIT_DOC} external>Learn more about these limits.</UnstyledLink>
+          {hasSendingLimits && (
+            <UnstyledLink to={LINKS.DAILY_MONTHLY_QUOTA_LIMIT_DOC} external>
+              Learn more about these limits.
+            </UnstyledLink>
+          )}
         </p>
       </AccessControl>
     );

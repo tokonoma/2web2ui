@@ -70,7 +70,7 @@ export class UsageReport extends Component {
           {hasDailyLimit && (
             <DisplayNumber label='Daily Limit' content={usage.day.limit.toLocaleString()} />
           )}
-          <SendMoreCTA />
+          <SendMoreCTA hasSendingLimits={hasDailyLimit || hasMonthlyLimit} />
         </Panel.Section>
         <Panel.Section>
           <ProgressLabel

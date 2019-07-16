@@ -23,6 +23,14 @@ describe('SendMoreCTA Component', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  it('renders learn more about sending limits link', () => {
+    wrapper.setProps({ hasSendingLimits: true });
+
+    expect(
+      wrapper.findWhere((node) => node.text() === 'Learn more about these limits.')
+    ).toExist();
+  });
+
   describe('resendVerification', () => {
     it('renders verifying state', () => {
       wrapper.setProps({ verifyingEmail: true });
