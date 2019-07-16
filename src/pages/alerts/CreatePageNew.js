@@ -16,10 +16,6 @@ export class CreatePageNew extends Component {
     }
   }
 
-  /*
-    Passed as onSubmit to AlertForm. Figures out what updates need to be passed
-    to the createAlert action.
-  */
   handleCreate = (values) => {
     const { createAlert, showUIAlert, history } = this.props;
     return createAlert({
@@ -50,7 +46,12 @@ export class CreatePageNew extends Component {
       <Page
         title='Create Alert'
         breadcrumbAction={{ content: 'Back to Alerts', to: '/alerts-new', component: Link }}>
-        <AlertFormNew submitting={loading} onSubmit={this.handleCreate} isDuplicate={Boolean(idToDuplicate)}/>
+        <AlertFormNew
+          submitting={loading}
+          onSubmit={this.handleCreate}
+          isDuplicate={Boolean(idToDuplicate)}
+          newAlert={true}
+        />
       </Page>
     );
   }
