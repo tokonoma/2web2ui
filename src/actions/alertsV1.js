@@ -22,6 +22,17 @@ export function createAlert({ data }) {
   });
 }
 
+export function updateAlert({ data, id }) {
+  return sparkpostApiRequest({
+    type: 'UPDATE_ALERT_V1',
+    meta: {
+      method: 'PUT',
+      url: `/v1/alerts/${id}`,
+      data
+    }
+  });
+}
+
 export function setMutedStatus({ muted, id }) {
   return sparkpostApiRequest({
     type: 'SET_ALERT_V1_MUTED_STATUS',

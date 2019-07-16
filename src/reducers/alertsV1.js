@@ -3,6 +3,7 @@ const initialState = {
   listPending: true,
   listError: null,
   createPending: false,
+  updatePending: false,
   deletePending: false,
   getPending: false
 };
@@ -28,6 +29,15 @@ export default (state = initialState, { type, payload, meta }) => {
     case 'CREATE_ALERT_V1_SUCCESS':
     case 'CREATE_ALERT_V1_FAIL':
       return { ...state, createPending: false };
+
+      /* UPDATE */
+
+    case 'UPDATE_ALERT_V1_PENDING':
+      return { ...state, updatePending: true };
+
+    case 'UPDATE_ALERT_V1_SUCCESS':
+    case 'UPDATE_ALERT_V1_FAIL':
+      return { ...state, updatePending: false };
 
       /* GET */
 

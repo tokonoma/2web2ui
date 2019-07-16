@@ -69,3 +69,18 @@ Array [
   },
 ]
 `;
+
+exports[`Action Creator: Alerts should dispatch an update action 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "data": Object {
+        "name": "Updated Name",
+      },
+      "method": "PUT",
+      "url": "/v1/alerts/alert-id",
+    },
+    "type": "UPDATE_ALERT_V1",
+  },
+]
+`;
