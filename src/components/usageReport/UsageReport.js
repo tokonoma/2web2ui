@@ -52,10 +52,6 @@ export class UsageReport extends Component {
     const hasDailyLimit = usage.day.limit > 0;
     const hasMonthlyLimit = usage.month.limit > 0;
 
-    const overageMarkup = overage
-      ? <DisplayNumber label='Extra Emails Used' content={overage.toLocaleString()}/>
-      : null;
-
     return (
       <Panel title='Your Usage Report' actions={actions}>
         <Panel.Section>
@@ -81,8 +77,10 @@ export class UsageReport extends Component {
             <ProgressBar completed={getPercent(usage.month.used, usage.month.limit)} />
           )}
           <DisplayNumber label='Used' content={usage.month.used.toLocaleString()} orange />
-          <DisplayNumber label='Included' content={subscription.plan_volume.toLocaleString()}/>
-          {overageMarkup}
+          <DisplayNumber label='Included' content={subscription.plan_volume.toLocaleString()} />
+          {overage > 0 && (
+            <DisplayNumber label='Extra Emails Used' content={overage.toLocaleString()} />
+          )}
           {hasMonthlyLimit && (
             <DisplayNumber label='Monthly limit' content={usage.month.limit.toLocaleString()} />
           )}
