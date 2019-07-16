@@ -136,6 +136,25 @@ Array [
     [Function],
   ],
   Array [
+    [Function],
+  ],
+  Array [
+    undefined,
+  ],
+  Array [
+    Object {
+      "type": "LOGOUT",
+    },
+  ],
+]
+`;
+
+exports[`Action Creator: Auth logout should dispatch a logout when user is logged in 2`] = `
+Array [
+  Array [
+    [Function],
+  ],
+  Array [
     undefined,
   ],
   Array [

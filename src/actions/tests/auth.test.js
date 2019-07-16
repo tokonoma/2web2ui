@@ -15,12 +15,7 @@ describe('Action Creator: Auth', () => {
   let dispatchMock;
   let getStateMock;
   let stateMock;
-
-  const authData = {
-    username: 'ron-burgundy',
-    token: '245234523423',
-    refreshToken: 'adfa012342342'
-  };
+  let authData;
 
   function mockGetTfaStatus(enabled, required) {
     getTfaStatusBeforeLoggedIn.mockResolvedValue({
@@ -34,12 +29,20 @@ describe('Action Creator: Auth', () => {
   }
 
   beforeEach(() => {
-    dispatchMock = jest.fn((a) => Promise.resolve(a));
+    authData = {
+      username: 'ron-burgundy',
+      token: '245234523423',
+      refreshToken: 'adfa012342342'
+    };
 
+    dispatchMock = jest.fn((a) => Promise.resolve(a));
     stateMock = {
       auth: {
-        loggedIn: false
-      }
+        loggedIn: false,
+        token: '245234523423',
+        refreshToken: 'adfa012342342'
+      },
+      token: 'superToken'
     };
 
     getStateMock = jest.fn(() => stateMock);
@@ -206,6 +209,7 @@ describe('Action Creator: Auth', () => {
       const thunk = authActions.logout();
       await thunk(dispatchMock, getStateMock);
       expect(authCookie.remove).toHaveBeenCalledTimes(1);
+      expect(dispatchMock).toHaveBeenCalledTimes(4);
       expect(dispatchMock.mock.calls).toMatchSnapshot();
     });
 
@@ -215,6 +219,16 @@ describe('Action Creator: Auth', () => {
       await thunk(dispatchMock, getStateMock);
       expect(authCookie.remove).not.toHaveBeenCalled();
       expect(dispatchMock).not.toHaveBeenCalled();
+    });
+
+    it('should skip invalidating the refreshToken if one does not exist', async () => {
+      stateMock.auth.refreshToken = null;
+      stateMock.auth.loggedIn = true;
+      const thunk = authActions.logout();
+      await thunk(dispatchMock, getStateMock);
+      expect(authCookie.remove).toHaveBeenCalledTimes(1);
+      expect(dispatchMock).toHaveBeenCalledTimes(3);
+      expect(dispatchMock.mock.calls).toMatchSnapshot();
     });
   });
 });
