@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Page: Alerts Edit should render happy path 1`] = `
+<Page
+  breadcrumbAction={
+    Object {
+      "component": [Function],
+      "content": "Back to Alerts",
+      "to": "/alerts-new",
+    }
+  }
+  empty={Object {}}
+  title="Edit Alert"
+>
+  <withRouter(Connect(ReduxForm))
+    newAlert={false}
+    onSubmit={[Function]}
+    submitting={false}
+  />
+</Page>
+`;

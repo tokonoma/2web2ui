@@ -684,7 +684,15 @@ const routes = [
     component: alerts.CreatePageNew,
     condition: isUserUiOptionSet('alerts'),
     layout: App,
-    title: 'Create Alerts',
+    title: 'Create Alert',
+    supportDocsSearch: 'Alerts'
+  },
+  {
+    path: '/alerts-new/edit/:id',
+    component: alerts.EditPageNew,
+    condition: isUserUiOptionSet('alerts'),
+    layout: App,
+    title: 'Edit Alert',
     supportDocsSearch: 'Alerts'
   },
   {
