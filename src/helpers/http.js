@@ -29,7 +29,8 @@ function sparkpostLogin(username, password, rememberMe, authHeader = authenticat
     method: 'POST',
     url: '/v1/authenticate',
     data,
-    headers: buildHeaders(authHeader)
+    headers: buildHeaders(authHeader),
+    transformRequest: [(data, headers) => { delete headers['X-Sparky']; return data; }]
   });
 }
 
