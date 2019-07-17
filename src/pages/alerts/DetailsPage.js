@@ -43,12 +43,14 @@ export class DetailsPage extends Component {
 
   subaccountIdToString= (id) => {
     const { subaccounts } = this.props;
-    const allSubaccounts = [
-      { id: -1, name: 'Master and all subaccounts' },
-      { id: 0, name: 'Master account' },
-      ...subaccounts];
-    const matchedSubaccount = allSubaccounts.find((subaccount) => subaccount.id === id) || {};
-    return id > 0 ? `${matchedSubaccount.name} (${matchedSubaccount.id})` : `${matchedSubaccount.name}`;
+    if (id === -1) {
+      return 'Master and all subaccounts';
+    }
+    if (id === 0) {
+      return 'Master account';
+    }
+    const matchedSubaccount = subaccounts.find((subaccount) => subaccount.id === id) || {};
+    return `${matchedSubaccount.name} (${matchedSubaccount.id})`;
   };
 
   render() {
