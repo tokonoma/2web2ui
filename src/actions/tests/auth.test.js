@@ -10,6 +10,7 @@ jest.mock('src/actions/websiteAuth');
 jest.mock('src/actions/accessControl');
 jest.mock('src/helpers/http');
 jest.mock('src/actions/tfa');
+jest.mock('src/actions/helpers/sparkpostApiRequest', () => jest.fn((a) => a));
 
 describe('Action Creator: Auth', () => {
   let dispatchMock;
