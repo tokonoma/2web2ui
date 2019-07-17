@@ -13,7 +13,7 @@ export const AlertDetails = ({ alert, id, subaccountIdToString }) => {
   const getSubaccountsTags = () => {
     if (any_subaccount) {
       return (
-        <Tag>Any Subaccount</Tag>
+        <Tag className={styles.Tags}>Any Subaccount</Tag>
       );
     }
     const subaccountTags = subaccounts.map((subaccount) =>
