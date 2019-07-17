@@ -80,7 +80,7 @@ export class Support extends Component {
           {currentSupportView === 'ticket' && <SupportForm onClose={closeSupportPanel} />}
           {currentSupportView === 'contact' && (
             <div className={styles.SupportContainer}>
-              <h6>We are available Monday through Friday, 9am to 8pm Eastern time.</h6>
+              <h6>We are available Monday through Friday, 9am to 7pm Eastern time.</h6>
               <UnstyledLink to='tel:1-415-751-0928'>+1 (415) 751-0928</UnstyledLink>
             </div>
           )}
