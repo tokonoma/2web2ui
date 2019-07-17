@@ -36,7 +36,7 @@ export class DetailsPage extends Component {
 
     return deleteAlert({ id }).then(() => {
       this.closeDeleteModal();
-      history.push('../alerts-new');
+      history.push('/alerts-new');
       showUIAlert({ type: 'success', message: `Alert: ${name} Deleted` });
     });
   };
@@ -63,7 +63,7 @@ export class DetailsPage extends Component {
     if (error) {
       return (
         <RedirectAndAlert
-          to='..'
+          to='/alerts-new'
           alert={{ type: 'error', message: error.message }}
         />
       );
