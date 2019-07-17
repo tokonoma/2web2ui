@@ -1,6 +1,6 @@
 import React from 'react';
 import { Panel, Button, Tag, Table } from '@sparkpost/matchbox';
-import { Error, InsertDriveFile, FileDownload, CheckCircle, Cached } from '@sparkpost/matchbox-icons';
+import { Error, FileDownload, CheckCircle, Cached } from '@sparkpost/matchbox-icons';
 import DownloadLink from 'src/components/downloadLink/DownloadLink';
 import { LoadingSVG } from 'src/components/loading/Loading';
 import { formatDateTime } from 'src/helpers/date';
@@ -16,27 +16,33 @@ const ListResultsCard = ({ complete = 'unknown', uploaded, rejectedUrl, status }
     );
   }
 
-  const loading = !complete && status !== 'ERROR';
+  const loading = !complete;
   const ready = status === 'SUCCESS';
   const failed = status === 'ERROR' ;
 
-  let Icon = InsertDriveFile;
-  let statusText = null;
+  const renderStatus = () => {
 
-  if (loading) {
-    statusText = 'Processing';
-    Icon = () => <span className={styles.Loading}><Cached /></span>;
-  }
+    if (failed) {
+      return (<Tag>
+        <span className={styles.Failed}><Error /> </span>
+        <span>Failed. Please try again.</span>
+      </Tag>);
+    }
 
-  if (failed) {
-    Icon = () => <span className={styles.Failed}><Error /></span>;
-    statusText = 'Failed. Please try again.';
-  }
+    if (ready) {
+      return (<Tag>
+        <span className={styles.Complete}><CheckCircle /> </span>
+        <span>Completed</span>
+      </Tag>);
+    }
 
-  if (ready) {
-    Icon = () => <span className={styles.Complete}><CheckCircle /></span>;
-    statusText = 'Completed';
-  }
+    if (loading) {
+      return (<Tag>
+        <span className={styles.Loading}><Cached /> </span>
+        <span>Processing</span>
+      </Tag>);
+    }
+  };
 
   return (
     <Panel sectioned accent='gray' title={<div className={styles.PanelHeader}>Last Validation:</div>}>
@@ -56,7 +62,7 @@ const ListResultsCard = ({ complete = 'unknown', uploaded, rejectedUrl, status }
                 {formatDateTime(moment.unix(uploaded))}
               </Table.Cell>
               <Table.Cell className={styles.TableCell}>
-                <Tag><Icon /> {statusText}</Tag>
+                {renderStatus()}
               </Table.Cell>
               <Table.Cell className={styles.TableCell}>
                 {ready && (

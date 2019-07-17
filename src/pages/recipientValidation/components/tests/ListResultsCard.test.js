@@ -6,28 +6,34 @@ describe('ListResultsCard', () => {
   const subject = (props) => shallow(<ListResultsCard {...props} />);
 
   it('renders correctly when not complete', () => {
-    expect(subject({
+    const wrapper = subject({
       complete: false,
       uploaded: 1541092618
-    })).toMatchSnapshot();
+    });
+    expect(wrapper.find('Tag').childAt(1).text()).toEqual('Processing');
+    expect(wrapper.find('Cached')).toExist();
   });
 
   it('renders correctly when complete', () => {
-    expect(subject({
+    const wrapper = subject({
       complete: true,
       uploaded: 1541092618,
       rejectedUrl: 'testfile.csv',
       status: 'SUCCESS'
-    })).toMatchSnapshot();
+    });
+    expect(wrapper.find('Tag').childAt(1).text()).toEqual('Completed');
+    expect(wrapper.find('CheckCircle')).toExist();
   });
 
   it('renders correctly when batch job fails', () => {
-    expect(subject({
+    const wrapper = subject({
       complete: false,
       uploaded: 1541092618,
       rejectedUrl: 'testfile.csv',
       status: 'ERROR'
-    })).toMatchSnapshot();
+    });
+    expect(wrapper.find('Tag').childAt(1).text()).toEqual('Failed. Please try again.');
+    expect(wrapper.find('Error')).toExist();
   });
 
   it('renders correctly when loading and status is unknown', () => {
