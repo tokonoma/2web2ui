@@ -91,9 +91,10 @@ exports[`Page: Alerts List should render happy path 1`] = `
           className="Footer"
         >
           <Button
+            component={[Function]}
             flat={true}
             size="default"
-            to="/alerts-new"
+            to="/alerts-new/details/id-1"
           >
             <RemoveRedEye
               className="Icon"
@@ -130,9 +131,10 @@ exports[`Page: Alerts List should render happy path 1`] = `
           className="Footer"
         >
           <Button
+            component={[Function]}
             flat={true}
             size="default"
-            to="/alerts-new"
+            to="/alerts-new/details/id-3"
           >
             <RemoveRedEye
               className="Icon"

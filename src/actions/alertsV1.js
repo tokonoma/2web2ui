@@ -13,7 +13,7 @@ export function listAlerts() {
 
 export function createAlert({ data }) {
   return sparkpostApiRequest({
-    type: 'CREATE_ALERT',
+    type: 'CREATE_ALERT_V1',
     meta: {
       method: 'POST',
       url: '/v1/alerts',
@@ -41,6 +41,17 @@ export function deleteAlert({ id }) {
       method: 'DELETE',
       url: `/v1/alerts/${id}`,
       id
+    }
+  });
+}
+
+export function getAlert({ id }) {
+  return sparkpostApiRequest({
+    type: 'GET_ALERT_V1',
+    meta: {
+      method: 'GET',
+      url: `/v1/alerts/${id}`,
+      showErrorAlert: false
     }
   });
 }

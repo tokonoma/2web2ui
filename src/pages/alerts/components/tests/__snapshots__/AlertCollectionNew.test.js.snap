@@ -82,7 +82,7 @@ Array [
     className="TabbedCellBody"
   >
     <PageLink
-      to="/alerts/edit/id-1"
+      to="/alerts-new/details/id-1"
     >
       my alert 1
     </PageLink>
@@ -116,7 +116,7 @@ Array [
     className="TabbedCellBody"
   >
     <PageLink
-      to="/alerts/edit/id-2"
+      to="/alerts-new/details/id-2"
     >
       my alert 2
     </PageLink>
@@ -150,7 +150,7 @@ Array [
     className="TabbedCellBody"
   >
     <PageLink
-      to="/alerts/edit/id-3"
+      to="/alerts-new/details/id-3"
     >
       my alert 3
     </PageLink>

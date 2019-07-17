@@ -10,7 +10,7 @@ Array [
       "method": "POST",
       "url": "/v1/alerts",
     },
-    "type": "CREATE_ALERT",
+    "type": "CREATE_ALERT_V1",
   },
 ]
 `;
@@ -24,6 +24,19 @@ Array [
       "url": "/v1/alerts/alert-id",
     },
     "type": "DELETE_ALERT_V1",
+  },
+]
+`;
+
+exports[`Action Creator: Alerts should dispatch a get alert action 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "method": "GET",
+      "showErrorAlert": false,
+      "url": "/v1/alerts/0",
+    },
+    "type": "GET_ALERT_V1",
   },
 ]
 `;
