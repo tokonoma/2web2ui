@@ -37,6 +37,6 @@ describe('ListResultsCard', () => {
   });
 
   it('renders correctly when loading and status is unknown', () => {
-    expect(subject()).toMatchSnapshot();
+    expect(subject().find('LoadingSVG')).toExist();
   });
 });

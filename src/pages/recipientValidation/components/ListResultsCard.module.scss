@@ -3,6 +3,11 @@
 .Loading {
   color: orange;
 }
+
+.LoadingWrapper {
+  padding: rem(100) 0 rem(100);
+  text-align: center;	
+}
 .Complete {
   color: #45D09E;
 }
