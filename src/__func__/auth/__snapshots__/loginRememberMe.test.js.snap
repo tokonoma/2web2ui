@@ -10,6 +10,9 @@ Array [
         "Content-Type": "application/x-www-form-urlencoded",
       },
       "method": "POST",
+      "transformRequest": Array [
+        [Function],
+      ],
       "url": "/v1/authenticate",
     },
   ],
@@ -21,6 +24,9 @@ Array [
         "Content-Type": "application/x-www-form-urlencoded",
       },
       "method": "POST",
+      "transformRequest": Array [
+        [Function],
+      ],
       "url": "/v1/authenticate",
     },
   ],
