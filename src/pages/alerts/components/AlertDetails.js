@@ -1,11 +1,17 @@
 import React from 'react';
 import { Button, Grid, Panel, Tag } from '@sparkpost/matchbox';
 import { METRICS, FILTERS_FRIENDLY_NAMES, SOURCE_FRIENDLY_NAMES, OPERATOR_FRIENDLY_NAMES } from '../constants/formConstants';
+import { capitalizeFirstLetter } from '../helpers/alertForm';
 import { MAILBOX_PROVIDERS } from 'src/constants';
 import styles from './AlertDetails.module.scss';
 import AlertToggle from './AlertToggleNew';
-import { Email } from '../constants/notificationChannelIcons';
+import { Email, Slack, Webhook } from '../constants/notificationChannelIcons';
 import { Link } from 'react-router-dom';
+
+const iconMap = {
+  slack: (props) => <Slack {...props}/>,
+  webhook: (props) => <Webhook {...props}/>
+};
 
 export const AlertDetails = ({ alert, id, subaccountIdToString }) => {
   const { metric, channels = {}, filters = [], subaccounts = [], threshold_evaluator = {}, any_subaccount, muted } = alert;
@@ -59,18 +65,33 @@ export const AlertDetails = ({ alert, id, subaccountIdToString }) => {
 
   const renderNotify = () => {
     const notifications = [];
-    const { emails } = channels;
+    const { emails, ...otherChannels } = channels;
+
     if (emails && emails.length > 0) {
+
       const emailTags = emails.map((email) =>
         <Tag key={email} className={styles.TagsWithIcon}>
           <Email className={styles.Icon}/><span className={styles.TagText}>{email}</span>
         </Tag>);
+
       notifications.push(
         (<div key={'email'}>
-           Email: {emailTags}
+          Email: {emailTags}
         </div>)
       );
     }
+
+    Object.keys(otherChannels).map((channel) => {
+      notifications.push(
+        <div key={channel}>
+          {capitalizeFirstLetter(channel)}: <Tag className={styles.TagsWithIcon}>
+            {iconMap[channel]({ className: styles.Icon })}
+            <span
+              className={styles.TagText}>{otherChannels[channel].target}
+            </span></Tag>
+        </div>);
+    });
+
     return notifications;
   };
 
