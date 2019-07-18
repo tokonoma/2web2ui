@@ -99,17 +99,49 @@ exports[`Alert Form Component should render the alert form component correctly 1
           <Expandable
             defaultOpen={false}
             icon={<Email />}
-            id="email"
+            id="emails"
+            key="emails"
             subtitle="You and your team can receive alerts through email"
-            title="Email"
+            title="Emails"
           >
             <Field
               component={[Function]}
               disabled={false}
+              helpText="Max of 10 emails"
               multiline={true}
-              name="email_addresses"
-              placeholder="list of comma delimited emails"
+              name="emails"
+              placeholder="example@email.com"
               validate={[Function]}
+            />
+          </Expandable>
+          <Expandable
+            defaultOpen={false}
+            icon={<Slack />}
+            id="slack"
+            key="slack"
+            subtitle="Integrate alerts into your Slack channel"
+            title="Slack"
+          >
+            <Field
+              component={[Function]}
+              disabled={false}
+              name="slack"
+              placeholder="https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX"
+            />
+          </Expandable>
+          <Expandable
+            defaultOpen={false}
+            icon={<Webhook />}
+            id="webhook"
+            key="webhook"
+            subtitle="Create a webhook for your alerts"
+            title="Webhook"
+          >
+            <Field
+              component={[Function]}
+              disabled={false}
+              name="webhook"
+              placeholder="https://example.com/webhook-target"
             />
           </Expandable>
           <Button
