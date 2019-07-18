@@ -56,8 +56,7 @@ export default function formatFormValues(values) {
     any_subaccount,
     filters,
     threshold_evaluator,
-    channels: { emails },
-    muted: false //Temporary until edit page is completed and muted Field is added to form.
+    channels: { emails }
   };
 
   return _.omit({ ...values, ...keysToChange }, keysToOmit);

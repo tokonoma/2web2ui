@@ -18,7 +18,7 @@ exports[`Alert Details Component should render the alert details component corre
         component={[Function]}
         primary={true}
         size="default"
-        to="../edit/alert-id"
+        to="/alerts-new/edit/alert-id"
       >
         Edit
       </Button>
