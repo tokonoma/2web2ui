@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { REALTIME_FILTERS } from '../constants/formConstants';
+import { REALTIME_FILTERS, NOTIFICATION_CHANNELS } from '../constants/formConstants';
 import { getFormSpec } from './alertForm';
 
 export default function formatFormValues(values) {
@@ -11,8 +11,8 @@ export default function formatFormValues(values) {
     'mailbox_provider',
     'sending_domain',
     'single_filter',
-    'email_addresses'];
-  const { metric, value, source, operator, single_filter, email_addresses, subaccounts } = values;
+    ...NOTIFICATION_CHANNELS];
+  const { metric, value, source, operator, single_filter, emails: emailsString, subaccounts, slack, webhook } = values;
 
   const any_subaccount = (subaccounts.length === 1 && subaccounts[0] === -2) ? true : undefined;
 
@@ -48,15 +48,24 @@ export default function formatFormValues(values) {
     value
   };
 
-  const splitAddresses = email_addresses.split(',');
-  const emails = splitAddresses.map((splitAddress) => splitAddress.trim());
+  //Splits emails by both commas and newline and then trims whitespace.
+  const emailsArray = _.flatMap(emailsString.split('\n').map((email) => email.split(',')))
+    .map((splitAddress) => splitAddress.trim());
+
+  const channels = {
+    emails: emailsString ? emailsArray : false,
+    slack: slack ? { target: slack } : false,
+    webhook: webhook ? { target: webhook } : false
+  };
+  const channelsFiltered = _.pickBy(channels, (value) => Boolean(value));
 
   const keysToChange = {
     subaccounts: any_subaccount ? undefined : subaccounts,
     any_subaccount,
     filters,
     threshold_evaluator,
-    channels: { emails }
+    channels: channelsFiltered,
+    muted: false //Temporary until edit page is completed and muted Field is added to form.
   };
 
   return _.omit({ ...values, ...keysToChange }, keysToOmit);

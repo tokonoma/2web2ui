@@ -55,8 +55,9 @@ export const selectAlertFormValues = createSelector([getAlert, getIsDuplicate], 
 
   const { source, operator, value } = threshold_evaluator;
 
-  const { emails = []} = channels;
-  const email_addresses = emails.join(', ');
+  const emails = (channels.emails || []).join(', ');
+  const slack = _.get(channels, 'slack.target', '');
+  const webhook = _.get(channels, 'webhook.target', '');
 
   const name = (isDuplicate) ? tagAsCopy(alert.name) : alert.name;
 
@@ -67,7 +68,9 @@ export const selectAlertFormValues = createSelector([getAlert, getIsDuplicate], 
     source,
     operator,
     value,
-    email_addresses };
+    emails,
+    slack,
+    webhook };
 
   return _.omit({ ...DEFAULT_FORM_VALUES, ...alert, ...keysToChange }, keysToOmit);
 });
