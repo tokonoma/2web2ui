@@ -1,5 +1,6 @@
+import { NOTIFICATION_CHANNELS } from '../constants/formConstants';
 
-const channels = ['email_addresses'];
+const channels = NOTIFICATION_CHANNELS;
 
 const isNotificationChannelsEmpty = (values) =>
   channels.every((channel) => (!values[channel] || values[channel] === ''));

@@ -3,7 +3,7 @@ import cases from 'jest-in-case';
 
 const validFormValues = {
   single_filter: { filter_type: 'mailbox_provider', filter_values: ['b']},
-  email_addresses: 'myEmail@email.com'
+  emails: 'myEmail@email.com'
 };
 
 const testCases = [
@@ -14,8 +14,12 @@ const testCases = [
   },
   {
     name: 'fails when all notification channels are empty',
-    formValues: { ...validFormValues, email_addresses: '' },
-    errors: { email_addresses: 'At least one notification channel must not be empty' }
+    formValues: { ...validFormValues, emails: '', slack: '', webhook: '' },
+    errors: {
+      emails: 'At least one notification channel must not be empty',
+      slack: 'At least one notification channel must not be empty',
+      webhook: 'At least one notification channel must not be empty'
+    }
   },
   {
     name: 'passes validation',
