@@ -60,6 +60,19 @@ export function stringToArray(string) {
   return string.split(',').map((item) => _.trim(item));
 }
 
+/**
+ * Converts a comma and/or newline separated string into an array
+ */
+export function stringToArrayNewlineAndCommaDelimited(string) {
+  /**
+   * Splits string by newline into array, then splits the individual elements by commas, then flattens,
+   * Then trims whitespace and then removes any empty Strings(happens when user uses comma and newline);
+   */
+  const stringAsArray = _.flatMap(string.split('\n').map((newLineSeparatedItem) => newLineSeparatedItem.split(',')));
+  const formattedArray = stringAsArray.map((splitAddress) => splitAddress.trim()).filter(Boolean);
+  return formattedArray;
+}
+
 export function stringifyTypeaheadfilter(filter) {
   const subaccount = filter.type === 'Subaccount' ? `:${filter.id}` : '';
   return `${filter.type}:${filter.value}${subaccount}`;

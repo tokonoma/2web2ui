@@ -1,6 +1,7 @@
 import {
   snakeToFriendly, snakeToCamel, slugify, slugToFriendly, shrinkToFit, stringToArray,
-  stringifyTypeaheadfilter, stripTags, decodeBase64, tagAsCopy, trimWhitespaces, pluralString
+  stringToArrayNewlineAndCommaDelimited, stringifyTypeaheadfilter, stripTags, decodeBase64,
+  tagAsCopy, trimWhitespaces, pluralString
 } from '../string';
 
 describe('snakeToFrindly', () => {
@@ -93,6 +94,18 @@ describe('stringToArray', () => {
     expect(stringToArray('one, 2, 3,4')).toEqual(['one', '2', '3', '4']);
     expect(stringToArray('1')).toEqual(['1']);
     expect(stringToArray('')).toEqual([]);
+  });
+});
+
+describe('stringToArrayNewlineAndCommaDelimited', () => {
+  it('should properly parse a comma and newline separated string', () => {
+    expect(stringToArrayNewlineAndCommaDelimited('one, 2,3')).toEqual(['one', '2', '3']);
+    expect(stringToArrayNewlineAndCommaDelimited('one\n 2\n3')).toEqual(['one', '2', '3']);
+    expect(stringToArrayNewlineAndCommaDelimited('one, 2\n3')).toEqual(['one', '2', '3']);
+    expect(stringToArrayNewlineAndCommaDelimited('1')).toEqual(['1']);
+    expect(stringToArrayNewlineAndCommaDelimited('')).toEqual([]);
+    expect(stringToArrayNewlineAndCommaDelimited(', \n')).toEqual([]);
+    expect(stringToArrayNewlineAndCommaDelimited('one,\n two')).toEqual(['one', 'two']);
   });
 });
 

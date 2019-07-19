@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import { REALTIME_FILTERS, NOTIFICATION_CHANNELS } from '../constants/formConstants';
 import { getFormSpec } from './alertForm';
+import { stringToArrayNewlineAndCommaDelimited } from 'src/helpers/string';
 
 export default function formatFormValues(values) {
   const keysToOmit = [
@@ -48,9 +49,7 @@ export default function formatFormValues(values) {
     value
   };
 
-  //Splits emails by both commas and newline and then trims whitespace.
-  const emailsArray = _.flatMap(emailsString.split('\n').map((email) => email.split(',')))
-    .map((splitAddress) => splitAddress.trim());
+  const emailsArray = stringToArrayNewlineAndCommaDelimited(emailsString);
 
   const channels = {
     emails: emailsString ? emailsArray : false,
