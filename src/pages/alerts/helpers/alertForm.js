@@ -9,6 +9,17 @@ import {
 
 export const getOptionsFromMap = (items, friendlyNameMap) => items.map((item) => ({ label: friendlyNameMap[item], value: item }));
 
+const realtimeMetricsSpec = {
+  hasFilters: true,
+  filterType: 'multi',
+  filterOptions: getOptionsFromMap(REALTIME_FILTERS, FILTERS_FRIENDLY_NAMES),
+  sourceOptions: getOptionsFromMap(['raw'], SOURCE_FRIENDLY_NAMES),
+  defaultFieldValues: [
+    { fieldName: 'source', fieldValue: 'raw' },
+    { fieldName: 'operator', fieldValue: 'gt' }
+  ]
+};
+
 const metricToFormSpecMap = {
   monthly_sending_limit: {
     hasFilters: false,
@@ -21,16 +32,9 @@ const metricToFormSpecMap = {
       { fieldName: 'operator', fieldValue: 'gt' }
     ]
   },
-  block_bounce_rate: {
-    hasFilters: true,
-    filterType: 'multi',
-    filterOptions: getOptionsFromMap(REALTIME_FILTERS, FILTERS_FRIENDLY_NAMES),
-    sourceOptions: getOptionsFromMap(['raw'], SOURCE_FRIENDLY_NAMES),
-    defaultFieldValues: [
-      { fieldName: 'source', fieldValue: 'raw' },
-      { fieldName: 'operator', fieldValue: 'gt' }
-    ]
-  },
+  block_bounce_rate: realtimeMetricsSpec,
+  hard_bounce_rate: realtimeMetricsSpec,
+  soft_bounce_rate: realtimeMetricsSpec,
   health_score: {
     hasFilters: true,
     filterType: 'single',
@@ -66,6 +70,8 @@ export const getEvaluatorOptions = (metric, source) => {
         case 'monthly_sending_limit':
           return 'Percent Used';
         case 'block_bounce_rate':
+        case 'hard_bounce_rate':
+        case 'soft_bounce_rate':
           return 'Bounce Percentage';
       }
     }

@@ -28,6 +28,11 @@ describe('Alert form helper: ', () => {
     expect(alertFormHelper.getFormSpec(metric)).toEqual({});
   });
 
+  const expectedRealtimeMetric = {
+    suffix: '%',
+    operatorOptions: [{ label: 'Below', value: 'lt' }, { label: 'Above', value: 'gt' }],
+    sliderLabel: 'Bounce Percentage'
+  };
   const testCases =
     {
       'Monthly Sending Limit': {
@@ -41,10 +46,17 @@ describe('Alert form helper: ', () => {
       'Block Bounce Rate': {
         metric: 'block_bounce_rate',
         source: 'raw',
-        expected: {
-          suffix: '%',
-          operatorOptions: [{ label: 'Below', value: 'lt' }, { label: 'Above', value: 'gt' }],
-          sliderLabel: 'Bounce Percentage' }
+        expected: expectedRealtimeMetric
+      },
+      'Soft Bounce Rate': {
+        metric: 'soft_bounce_rate',
+        source: 'raw',
+        expected: expectedRealtimeMetric
+      },
+      'Hard Bounce Rate': {
+        metric: 'hard_bounce_rate',
+        source: 'raw',
+        expected: expectedRealtimeMetric
       },
       'Raw Health Score': {
         metric: 'health_score',
