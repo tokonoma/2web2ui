@@ -150,6 +150,55 @@ exports[`Alert Details Component should render the alert details component corre
               Myemail@email.com
             </span>
           </Tag>
+          <Tag
+            className="TagsWithIcon"
+            key="email@ddress.com"
+          >
+            <Email
+              className="Icon"
+            />
+            <span
+              className="TagText"
+            >
+              email@ddress.com
+            </span>
+          </Tag>
+        </div>
+        <div
+          key="slack"
+        >
+          Slack
+          : 
+          <Tag
+            className="TagsWithIcon"
+          >
+            <Slack
+              className="Icon"
+            />
+            <span
+              className="TagText"
+            >
+              https://hooks.slack.com/services/X
+            </span>
+          </Tag>
+        </div>
+        <div
+          key="webhook"
+        >
+          Webhook
+          : 
+          <Tag
+            className="TagsWithIcon"
+          >
+            <Webhook
+              className="Icon"
+            />
+            <span
+              className="TagText"
+            >
+              target.com/200
+            </span>
+          </Tag>
         </div>
       </Grid.Column>
     </Grid>
