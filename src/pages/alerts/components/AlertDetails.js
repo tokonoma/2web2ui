@@ -9,8 +9,8 @@ import { Email, Slack, Webhook } from '../constants/notificationChannelIcons';
 import { Link } from 'react-router-dom';
 
 const iconMap = {
-  slack: (props) => <Slack {...props}/>,
-  webhook: (props) => <Webhook {...props}/>
+  slack: Slack,
+  webhook: Webhook
 };
 
 export const AlertDetails = ({ alert, id, subaccountIdToString }) => {
@@ -82,13 +82,13 @@ export const AlertDetails = ({ alert, id, subaccountIdToString }) => {
     }
 
     Object.keys(otherChannels).map((channel) => {
+      const Icon = iconMap[channel];
       notifications.push(
         <div key={channel}>
           {capitalizeFirstLetter(channel)}: <Tag className={styles.TagsWithIcon}>
-            {iconMap[channel]({ className: styles.Icon })}
-            <span
-              className={styles.TagText}>{otherChannels[channel].target}
-            </span></Tag>
+            <Icon className={styles.Icon}/>
+            <span className={styles.TagText}>{otherChannels[channel].target}</span>
+          </Tag>
         </div>);
     });
 
