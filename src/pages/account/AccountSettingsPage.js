@@ -5,6 +5,7 @@ import LabelledValue from 'src/components/labelledValue/LabelledValue';
 import CancellationPanel from './components/CancellationPanel';
 import SingleSignOnPanel from './components/SingleSignOnPanel';
 import EnforceTfaPanel from './components/EnforceTfaPanel';
+import UIOptionsPanel from './components/UIOptionsPanel';
 
 export function AccountSettingsPage({ currentUser }) {
   return (
@@ -16,6 +17,7 @@ export function AccountSettingsPage({ currentUser }) {
       </Panel>
       <SingleSignOnPanel />
       <EnforceTfaPanel />
+      <UIOptionsPanel />
       <CancellationPanel />
     </Page>
   );

@@ -6,7 +6,7 @@ import { Page } from '@sparkpost/matchbox';
 import { Users } from 'src/components/images';
 import { Loading, TableCollection, ApiErrorBanner } from 'src/components';
 import { list as listSubaccounts } from 'src/actions/subaccounts';
-import { selectSubaccounts } from 'src/selectors/subaccounts';
+import { selectFilteredSubaccounts } from 'src/selectors/subaccounts';
 import getRowData from './helpers/getRowData';
 import { LINKS } from 'src/constants';
 
@@ -83,14 +83,14 @@ export class ListPage extends Component {
             external: true
           }
         }}>
-        { error ? this.renderError() : this.renderCollection() }
+        {error ? this.renderError() : this.renderCollection()}
       </Page>
     );
   }
 }
 
 const mapStateToProps = (state) => ({
-  subaccounts: selectSubaccounts(state),
+  subaccounts: selectFilteredSubaccounts(state),
   loading: state.subaccounts.listLoading,
   error: state.subaccounts.listError
 });

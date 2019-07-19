@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UIOptionsPanel renders 1`] = `
+<Panel
+  title="UI Options"
+>
+  <Panel.Section>
+    <Grid>
+      <Grid.Column
+        xs={11}
+      >
+        <LabelledValue
+          label="Hide Subacounts"
+        >
+          <p>
+            Hide terminated subacounts. Resources associated with terminated subaccounts can still be accessed.
+          </p>
+        </LabelledValue>
+      </Grid.Column>
+      <Grid.Column
+        xs={1}
+      >
+        <Toggle
+          checked={false}
+          id="hideTerminatedSubaccounts"
+          onChange={[Function]}
+        />
+      </Grid.Column>
+    </Grid>
+  </Panel.Section>
+</Panel>
+`;

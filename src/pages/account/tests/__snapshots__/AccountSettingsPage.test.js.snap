@@ -16,6 +16,7 @@ exports[`AccountSettingsPage renders 1`] = `
   </Panel>
   <Connect(SingleSignOnPanel) />
   <Connect(EnforceTFAPanel) />
+  <Connect(UIOptionsPanel) />
   <Connect(CancellationPanel) />
 </Page>
 `;

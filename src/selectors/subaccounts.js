@@ -1,6 +1,7 @@
 import { createSelector } from 'reselect';
 import qs from 'query-string';
 import _ from 'lodash';
+import { isAccountUiOptionSet } from '../helpers/conditions/account';
 
 const formatSubaccount = ({ compliance_status = 'active', status = 'active', ...rest }) => {
   const compliance = compliance_status !== 'active';
@@ -32,6 +33,10 @@ export const selectSubaccountFromQuery = createSelector(
   [getSubaccounts, selectSubaccountIdFromQuery],
   (subaccounts, id) => _.find(subaccounts, { id: Number(id) })
 );
+
+export const selectFilteredSubaccounts = (state) => _.filter(state.subaccounts.list, ({ status }) =>
+  !isAccountUiOptionSet('hideTerminatedSubaccounts')(state) || status !== 'terminated');
+
 
 export const selectSubaccountIdFromProps = (state, props) => props.subaccountId;
 
