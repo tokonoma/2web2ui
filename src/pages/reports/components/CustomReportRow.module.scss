@@ -1,0 +1,48 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.Row {
+  display: flex;
+  border-bottom: 1px solid color(gray, 9);
+
+  transition: 0.15s;
+  background: transparent;
+
+  &:last-child {
+    border-bottom: none;
+    border-bottom-left-radius: border-radius(large);
+    border-bottom-right-radius: border-radius(large);
+  }
+
+  &:hover {
+    background: color(gray, 9);
+    cursor: pointer;
+
+    .Delete {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+}
+
+.Delete {
+  flex: 0 0;
+  align-self: flex-end;
+  padding: spacing();
+
+  opacity: 0;
+  transition: 0.15s;
+  visibility: hidden;
+}
+
+.Name {
+  flex: 1 0;
+  padding: spacing();
+  line-height: line-height(600);
+  font-size: font-size(500);
+
+  color: color(blue, dark);
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

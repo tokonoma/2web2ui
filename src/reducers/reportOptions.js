@@ -33,6 +33,9 @@ export default (state = initialState, action) => {
         ]
       };
 
+    case 'CLEAR_FILTERS':
+      return { ...state, filters: []};
+
     default:
       return state;
   }

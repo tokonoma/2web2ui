@@ -8,6 +8,7 @@ import { Grid, Panel, Tag } from '@sparkpost/matchbox';
 import Typeahead from './Typeahead';
 import DatePicker from 'src/components/datePicker/DatePicker';
 import typeaheadCacheSelector from 'src/selectors/reportFilterTypeaheadCache';
+import CustomReports from './CustomReports';
 import styles from './ReportOptions.module.scss';
 
 const RELATIVE_DATE_OPTIONS = [
@@ -48,9 +49,11 @@ export class ReportOptions extends Component {
   };
 
   render() {
-    const { typeaheadCache, reportOptions, reportLoading, refreshReportOptions, searchOptions, roundToPrecision } = this.props;
+    const { customReportsEnabled, typeaheadCache, reportOptions, reportLoading, refreshReportOptions, searchOptions, roundToPrecision } = this.props;
+
     return (
       <Panel>
+        {customReportsEnabled && <CustomReports searchOptions={searchOptions} />}
         <Panel.Section >
           <Grid>
             <Grid.Column xs={12} md={6}>

@@ -98,6 +98,12 @@ export function removeFilter(payload) {
   };
 }
 
+export function clearFilters() {
+  return {
+    type: 'CLEAR_FILTERS'
+  };
+}
+
 /**
  * Refreshes the date range for all reports
  *
