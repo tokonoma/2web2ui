@@ -6,7 +6,7 @@ import { DEFAULT_REDIRECT_ROUTE } from 'src/constants';
 
 describe('Component: RedirectAfterLogin', () => {
   const baseProps = {
-    location: { search: '?test=one' }
+    location: { state: { testkey: 'test-value' }}
   };
 
   function subject(props) {
@@ -22,7 +22,7 @@ describe('Component: RedirectAfterLogin', () => {
     ).toEqual(
       expect.objectContaining({
         pathname: DEFAULT_REDIRECT_ROUTE,
-        search: baseProps.location.search
+        state: { testkey: 'test-value' }
       })
     );
   });
