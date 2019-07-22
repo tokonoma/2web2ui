@@ -145,6 +145,21 @@ export function ssoCheck(username) {
   });
 }
 
+export function invalidateAuthToken(token) {
+  return sparkpostApiRequest({
+    type: 'LOGOUT',
+    meta: {
+      method: 'POST',
+      url: '/v1/authenticate/logout',
+      data: `token=${token}`,
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Authorization': `${token}`
+      }
+    }
+  });
+}
+
 export function refresh(token, refreshToken) {
   return (dispatch) => {
     const newCookie = authCookie.merge({ access_token: token, refresh_token: refreshToken });
@@ -156,11 +171,15 @@ export function refresh(token, refreshToken) {
 export function logout() {
   return (dispatch, getState) => {
     const { auth } = getState();
+    const { token, refreshToken } = auth;
     // only log out if currently logged in
     if (!auth.loggedIn) {
       return;
     }
-
+    dispatch(invalidateAuthToken(token));
+    if (refreshToken) {
+      dispatch(invalidateAuthToken(refreshToken));
+    }
     dispatch(websiteAuth.logout());
 
     removeHerokuToolbar();
