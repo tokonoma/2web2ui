@@ -2,6 +2,7 @@ import React from 'react';
 import _ from 'lodash';
 import { getPlanPrice } from 'src/helpers/billing';
 import styles from './PlanPrice.module.scss';
+import { formatCurrency } from 'src/helpers/units';
 
 const PlanPrice = ({ plan, showOverage = false, showIp = false, showCsm = false, selectedPromo = {}, ...rest }) => {
   if (_.isEmpty(plan)) {
@@ -28,12 +29,19 @@ const PlanPrice = ({ plan, showOverage = false, showIp = false, showCsm = false,
     discountAmount = discountAmount * ((100 - selectedPromo.discount_percentage) / 100);
   }
 
+  const hasDiscount = discountAmount !== priceInfo.price;
+
   return (
     <span className='notranslate'>
       <span className={styles.MainLabel} {...rest}>
         <strong>{plan.volume.toLocaleString()}</strong><span> emails/month </span>
         {priceInfo.price > 0
-          ? <span> at {discountAmount !== priceInfo.price && (<s className={styles.DiscountedLabel}>${priceInfo.price}</s>)}<strong>${discountAmount.toLocaleString()}</strong>/{priceInfo.intervalShort}</span>
+          ? <span>
+            {' at '}
+            {hasDiscount && <s className={styles.DiscountedLabel}>${priceInfo.price}</s>}
+            <strong>{hasDiscount ? formatCurrency(discountAmount) : `$${priceInfo.price}`}</strong>
+            /{priceInfo.intervalShort}
+          </span>
           : <span> FREE </span>}
       </span>
       <span className={styles.SupportLabel}>

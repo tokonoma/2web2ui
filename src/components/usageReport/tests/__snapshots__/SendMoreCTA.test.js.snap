@@ -14,7 +14,7 @@ exports[`SendMoreCTA Component renders correctly 1`] = `
         <UnstyledLink
           onClick={[Function]}
         >
-          Verify your email.
+           Verify your email. 
         </UnstyledLink>
       </Case>
       <Case
@@ -37,12 +37,6 @@ exports[`SendMoreCTA Component renders correctly 1`] = `
       </Case>
     </Connect(ConditionSwitch)>
      
-    <UnstyledLink
-      external={true}
-      to="https://support.sparkpost.com/customer/portal/articles/2030894"
-    >
-      Learn more about these limits.
-    </UnstyledLink>
   </p>
 </AccessControl>
 `;

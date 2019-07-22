@@ -8,7 +8,7 @@
   }
 }
 
-.DiscountedLabel { 
+.DiscountedLabel {
   color: color(gray, 4);
   padding-right: rem(8);
 }
@@ -16,7 +16,6 @@
 .SupportLabel {
   display: block;
   color: color(gray, 2);
-  font-size: rem(15);
+  font-size: font-size(500);
   font-weight: 400;
 }
-

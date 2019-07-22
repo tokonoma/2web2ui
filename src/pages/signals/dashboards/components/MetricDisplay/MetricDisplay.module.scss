@@ -13,7 +13,7 @@
   margin: 0;
   color: color(gray, 4);
   font-weight: 400;
-  font-size: rem(13);
+  font-size: font-size(400);
 }
 
 .Value {
@@ -21,7 +21,7 @@
   display: inline-block;
   margin: 0;
   color: color(gray, 2);
-  font-size: rem(30);
+  font-size: rem(33);
 }
 
 .Icon {

@@ -53,6 +53,7 @@
 
 .xDividerLabel {
   fill: color(gray, base);
-  font-size: rem(10);
+  font-size: rem(12);
+  line-height: line-height(500);
   text-anchor: start;
 }

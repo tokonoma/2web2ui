@@ -73,7 +73,7 @@ export class ListPageNew extends Component {
                   <h3>{alert.name}</h3>
                 </Panel.Section>
                 <Panel.Section className = {styles.Footer}>
-                  <Button flat to = {'/alerts-new'}><RemoveRedEye className = {styles.Icon}/></Button>
+                  <Button flat component={Link} to = {`/alerts-new/details/${alert.id}`}><RemoveRedEye className = {styles.Icon}/></Button>
                 </Panel.Section>
               </Panel>
             </Grid.Column>))}
@@ -115,7 +115,7 @@ export class ListPageNew extends Component {
     return (
       <Page
         title='Alerts'
-        primaryAction={{ content: 'Create an Alert', to: '/alerts/create', component: Link }}
+        primaryAction={{ content: 'Create an Alert', to: '/alerts-new/create', component: Link }}
         empty={{
           show: !error && alerts.length === 0,
           image: Templates,

@@ -672,6 +672,22 @@ const routes = [
     supportDocsSearch: 'Alerts'
   },
   {
+    path: '/alerts-new/details/:id',
+    component: alerts.DetailsPage,
+    condition: isUserUiOptionSet('alerts'),
+    layout: App,
+    title: 'View Details',
+    supportDocsSearch: 'Alerts'
+  },
+  {
+    path: '/alerts-new/create',
+    component: alerts.CreatePageNew,
+    condition: isUserUiOptionSet('alerts'),
+    layout: App,
+    title: 'Create Alerts',
+    supportDocsSearch: 'Alerts'
+  },
+  {
     path: '/alerts/edit/:id',
     component: alerts.EditPage,
     condition: hasGrants('alerts/manage'),

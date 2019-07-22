@@ -35,7 +35,19 @@ export class ChangePlanForm extends Component {
   };
 
   componentDidMount() {
-    this.props.getPlans();
+    this.props.getPlans().then(() => {
+      const { initialValues, selectedPlan } = this.props;
+
+      //After loading plans, verifies query promo against plan and applies UI discount
+      //TODO: Move to componentDidUpdate
+      if (initialValues.promoCode && !_.isEmpty(selectedPlan)) {
+        return this.props.verifyPromoCode({
+          promoCode: initialValues.promoCode,
+          billingId: selectedPlan.billingId,
+          meta: { promoCode: initialValues.promoCode, showErrorAlert: false }
+        });
+      }
+    });
     this.props.getBillingCountries();
     this.props.fetchAccount();
     this.props.getBillingInfo();
@@ -158,10 +170,9 @@ export class ChangePlanForm extends Component {
 
 const mapStateToProps = (state, props) => {
   const selector = formValueSelector(FORMNAME);
-  const { code: planCode } = qs.parse(props.location.search);
+  const { code: planCode, promo: promoCode } = qs.parse(props.location.search);
   const plans = selectTieredVisiblePlans(state);
   const { account, loading } = selectAccountBilling(state);
-
   return {
     loading: (!account.created && loading) || (_.isEmpty(plans) && state.billing.plansLoading),
     isAws: selectCondition(isAws)(state),
@@ -172,7 +183,7 @@ const mapStateToProps = (state, props) => {
     plans,
     currentPlan: currentPlanSelector(state),
     selectedPlan: selector(state, 'planpicker') || {},
-    initialValues: changePlanInitialValues(state, { planCode })
+    initialValues: changePlanInitialValues(state, { planCode, promoCode })
   };
 };
 

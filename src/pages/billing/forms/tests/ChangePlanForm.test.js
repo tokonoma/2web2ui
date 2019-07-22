@@ -35,7 +35,7 @@ describe('Form Container: Change Plan', () => {
       },
       isSelfServeBilling: true,
       billing: { countries: [], plans, selectedPromo: {}},
-      getPlans: jest.fn(),
+      getPlans: jest.fn(() => Promise.resolve()),
       getBillingCountries: jest.fn(),
       verifyPromoCode: jest.fn(() => Promise.resolve({ discount_id: 'test-discount' })),
       getBillingInfo: jest.fn(),
@@ -48,6 +48,9 @@ describe('Form Container: Change Plan', () => {
       location: {
         pathname: '/account/billing/plan',
         search: 'immediatePlanChange=free-0817&pass=through'
+      },
+      initialValues: {
+        promoCode: undefined
       },
       handleSubmit: jest.fn(),
       showAlert: jest.fn(),
@@ -124,6 +127,18 @@ describe('Form Container: Change Plan', () => {
       expect(props.billingCreate).toHaveBeenCalledWith(values);
       expect(props.history.push).toHaveBeenCalledWith('/account/billing');
       expect(props.showAlert).toHaveBeenCalledWith({ type: 'success', message: 'Subscription Updated' });
+    });
+
+    it('should verify promo code if passed in as initial value', async () => {
+      props.initialValues = { promoCode: 'initial-promo-code' };
+      props.selectedPlan = { billingId: 'test-id' };
+      wrapper = await shallow(<ChangePlanForm {...props} />);
+      expect(props.getPlans).toHaveBeenCalled();
+      expect(props.verifyPromoCode).toHaveBeenCalledWith({
+        promoCode: 'initial-promo-code',
+        billingId: 'test-id',
+        meta: { promoCode: 'initial-promo-code', showErrorAlert: false }
+      });
     });
 
     it('should call verify if promo code is attached and update subscription', async () => {
