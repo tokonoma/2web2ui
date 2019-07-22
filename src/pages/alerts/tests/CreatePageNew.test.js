@@ -1,7 +1,7 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 import { CreatePageNew } from '../CreatePageNew';
-import { formatFromFormToApi } from '../helpers/formatFormData';
+import { formatFormValues } from '../helpers/formatFormData';
 import AlertFormNew from '../components/AlertFormNew';
 
 jest.mock('../helpers/formatFormData');
@@ -49,7 +49,7 @@ describe('Page: Alerts Create', () => {
   });
 
   it('should handle submit', async () => {
-    formatFromFormToApi.mockImplementationOnce((a) => a);
+    formatFormValues.mockImplementationOnce((a) => a);
     await wrapper.find(AlertFormNew).simulate('submit', { value: 'mock value' });
     expect(props.createAlert).toHaveBeenCalledWith({ data: { value: 'mock value' }});
     expect(props.showUIAlert).toHaveBeenCalled();

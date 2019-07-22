@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Page } from '@sparkpost/matchbox';
 import withAlertsCreate from './containers/CreatePageNew.container';
 import AlertFormNew from './components/AlertFormNew';
-import { formatFromFormToApi, formatFromApiToForm } from './helpers/formatFormData';
+import { formatFormValues } from './helpers/formatFormData';
 import { Loading } from 'src/components';
 import { RedirectAndAlert } from 'src/components/globalAlert';
 
@@ -23,7 +23,7 @@ export class CreatePageNew extends Component {
   handleCreate = (values) => {
     const { createAlert, showUIAlert, history } = this.props;
     return createAlert({
-      data: formatFromFormToApi(values)
+      data: formatFormValues(values)
     }).then(() => {
       showUIAlert({ type: 'success', message: 'Alert created' });
       history.push('/alerts-new');
@@ -31,7 +31,7 @@ export class CreatePageNew extends Component {
   };
 
   render() {
-    const { loading, getError, getLoading, duplicateId, alert } = this.props;
+    const { loading, getError, getLoading, duplicateId } = this.props;
 
     if (getLoading) {
       return <Loading/>;
@@ -45,13 +45,12 @@ export class CreatePageNew extends Component {
         />
       );
     }
-    const initialValues = duplicateId ? formatFromApiToForm(alert) : undefined;
 
     return (
       <Page
         title='Create Alert'
         breadcrumbAction={{ content: 'Back to Alerts', to: '/alerts-new', component: Link }}>
-        <AlertFormNew submitting={loading} onSubmit={this.handleCreate} intialValues={initialValues}/>
+        <AlertFormNew submitting={loading} onSubmit={this.handleCreate} isDuplicate={Boolean(duplicateId)}/>
       </Page>
     );
   }
