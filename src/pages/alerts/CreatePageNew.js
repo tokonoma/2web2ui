@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Page } from '@sparkpost/matchbox';
 import withAlertsCreate from './containers/CreatePageNew.container';
 import AlertFormNew from './components/AlertFormNew';
-import { formatFormValues } from './helpers/formatFormValues';
+import formatFormValues from './helpers/formatFormValues';
 import { Loading } from 'src/components';
 import { RedirectAndAlert } from 'src/components/globalAlert';
 

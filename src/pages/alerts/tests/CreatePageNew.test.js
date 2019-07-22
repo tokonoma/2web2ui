@@ -1,7 +1,7 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 import { CreatePageNew } from '../CreatePageNew';
-import { formatFormValues } from '../helpers/formatFormValues';
+import formatFormValues from '../helpers/formatFormValues';
 import AlertFormNew from '../components/AlertFormNew';
 
 jest.mock('../helpers/formatFormValues');

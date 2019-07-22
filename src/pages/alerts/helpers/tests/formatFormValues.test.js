@@ -1,4 +1,4 @@
-import { formatFormValues } from '../formatFormValues';
+import formatFormValues from '../formatFormValues';
 import cases from 'jest-in-case';
 
 const emails = 'sparky@sparkpost.com, test@foo.com';

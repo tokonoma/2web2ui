@@ -2,7 +2,7 @@ import _ from 'lodash';
 import { REALTIME_FILTERS } from '../constants/formConstants';
 import { getFormSpec } from './alertForm';
 
-export const formatFormValues = (values) => {
+export default function formatFormValues(values) {
   const keysToOmit = [
     'value',
     'source',
@@ -61,4 +61,4 @@ export const formatFormValues = (values) => {
   };
 
   return _.omit({ ...values, ...keysToChange }, keysToOmit);
-};
+}
