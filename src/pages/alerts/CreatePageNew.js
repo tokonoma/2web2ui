@@ -3,9 +3,18 @@ import { Link } from 'react-router-dom';
 import { Page } from '@sparkpost/matchbox';
 import withAlertsCreate from './containers/CreatePageNew.container';
 import AlertFormNew from './components/AlertFormNew';
-import formatFormData from './helpers/formatFormData';
+import formatFormValues from './helpers/formatFormValues';
+import { Loading } from 'src/components';
+import { RedirectAndAlert } from 'src/components/globalAlert';
 
 export class CreatePageNew extends Component {
+
+  componentDidMount() {
+    const { getAlert, idToDuplicate } = this.props;
+    if (idToDuplicate) {
+      getAlert({ id: idToDuplicate });
+    }
+  }
 
   /*
     Passed as onSubmit to AlertForm. Figures out what updates need to be passed
@@ -14,19 +23,34 @@ export class CreatePageNew extends Component {
   handleCreate = (values) => {
     const { createAlert, showUIAlert, history } = this.props;
     return createAlert({
-      data: formatFormData(values)
+      data: formatFormValues(values)
     }).then(() => {
       showUIAlert({ type: 'success', message: 'Alert created' });
       history.push('/alerts-new');
     });
-  }
+  };
 
   render() {
+    const { loading, getError, getLoading, idToDuplicate } = this.props;
+
+    if (getLoading) {
+      return <Loading/>;
+    }
+
+    if (getError) {
+      return (
+        <RedirectAndAlert
+          to='/alerts-new'
+          alert={{ type: 'error', message: getError.message }}
+        />
+      );
+    }
+
     return (
       <Page
         title='Create Alert'
         breadcrumbAction={{ content: 'Back to Alerts', to: '/alerts-new', component: Link }}>
-        <AlertFormNew submitting={this.props.loading} onSubmit={this.handleCreate}/>
+        <AlertFormNew submitting={loading} onSubmit={this.handleCreate} isDuplicate={Boolean(idToDuplicate)}/>
       </Page>
     );
   }

@@ -3,6 +3,7 @@
 exports[`ComboBoxTypeaheadWrapper renders Combobox typeahead 1`] = `
 <ComboBoxTypeahead
   debounceFn={[Function]}
+  defaultSelected={Array []}
   itemToString={[Function]}
   label="Options"
   maxNumberOfResults={100}

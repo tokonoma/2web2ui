@@ -13,8 +13,10 @@ exports[`Page: Alert Details should render Alert Details Page 1`] = `
   primaryArea={
     <React.Fragment>
       <Button
+        component={[Function]}
         flat={true}
         size="default"
+        to="/alerts-new/create/alert-id"
       >
         <ContentCopy
           className="Icon"

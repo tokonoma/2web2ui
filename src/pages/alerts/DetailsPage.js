@@ -76,7 +76,7 @@ export class DetailsPage extends Component {
         breadcrumbAction={{ content: 'Back to Alerts', to: '/alerts-new', component: Link }}
         primaryArea={
           <>
-          <Button flat><ContentCopy className={styles.Icon}/>Duplicate</Button>
+          <Button flat component={Link} to={`/alerts-new/create/${id}`}><ContentCopy className={styles.Icon}/>Duplicate</Button>
           <Button flat onClick={this.openDeleteModal}><Delete className={styles.Icon}/>Delete</Button>
           </>}
       >

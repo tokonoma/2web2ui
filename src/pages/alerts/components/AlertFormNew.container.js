@@ -4,11 +4,13 @@ import { withRouter } from 'react-router-dom';
 import { DEFAULT_FORM_VALUES, FORM_NAME } from '../constants/formConstants';
 import validateForm from '../helpers/validateForm';
 import { hasSubaccounts } from 'src/selectors/subaccounts';
+import { selectAlertFormValues } from 'src/selectors/alertsV1';
 
 export default function withAlertForm(WrappedComponent) {
 
-  const mapStateToProps = (state) => {
+  const mapStateToProps = (state, props) => {
     const selector = formValueSelector(FORM_NAME);
+    const { isDuplicate } = props;
 
     return {
       formErrors: getFormSyncErrors(FORM_NAME)(state),
@@ -17,7 +19,7 @@ export default function withAlertForm(WrappedComponent) {
       metric: selector(state, 'metric'),
       single_filter: selector(state, 'single_filter'),
       muted: selector(state, 'muted'),
-      initialValues: DEFAULT_FORM_VALUES
+      initialValues: isDuplicate ? selectAlertFormValues(state, props) : DEFAULT_FORM_VALUES
     };
   };
 

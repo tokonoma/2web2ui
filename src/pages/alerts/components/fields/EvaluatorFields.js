@@ -73,6 +73,7 @@ export const EvaluatorFields = ({
             value={sliderValue}
             key={sliderLength}
             onChange={changeValueField}
+            precision={2}
           />
         </div>
       </Grid.Column>

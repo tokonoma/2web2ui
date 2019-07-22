@@ -13,6 +13,7 @@ exports[`Page: Alerts Create should render happy path 1`] = `
   title="Create Alert"
 >
   <withRouter(Connect(ReduxForm))
+    isDuplicate={false}
     onSubmit={[Function]}
     submitting={false}
   />
