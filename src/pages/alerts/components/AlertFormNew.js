@@ -50,10 +50,11 @@ export class AlertFormNew extends Component {
       handleSubmit,
       hasSubaccounts,
       formErrors,
-      formMeta
+      formMeta,
+      isNewAlert
     } = this.props;
 
-    const submitText = submitting ? 'Submitting...' : 'Create Alert';
+    const submitText = submitting ? 'Submitting...' : (isNewAlert ? 'Create Alert' : 'Update Alert');
     const formSpec = getFormSpec(metric);
     const channelsError = this.isNotificationChannelsEmpty(formMeta, formErrors);
 
@@ -76,10 +77,8 @@ export class AlertFormNew extends Component {
                     name='metric'
                     component={SelectWrapper}
                     options={metricsOptions}
-                    helpText={'This assignment is permanent.'}
                     onChange={this.resetFormValues}
                     validate={required}
-
                   />
                 </div>
                 {formSpec.hasFilters &&

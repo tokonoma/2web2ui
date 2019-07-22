@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Page: Alerts Create should render happy path 1`] = `
+exports[`Page: Alerts Edit should render happy path 1`] = `
 <Page
   breadcrumbAction={
     Object {
@@ -10,11 +10,10 @@ exports[`Page: Alerts Create should render happy path 1`] = `
     }
   }
   empty={Object {}}
-  title="Create Alert"
+  title="Edit Alert"
 >
   <withRouter(Connect(ReduxForm))
-    isDuplicate={false}
-    isNewAlert={true}
+    isNewAlert={false}
     onSubmit={[Function]}
     submitting={false}
   />

@@ -10,7 +10,7 @@ export default function withAlertForm(WrappedComponent) {
 
   const mapStateToProps = (state, props) => {
     const selector = formValueSelector(FORM_NAME);
-    const { isDuplicate } = props;
+    const { isDuplicate, isNewAlert } = props;
 
     return {
       formErrors: getFormSyncErrors(FORM_NAME)(state),
@@ -19,7 +19,7 @@ export default function withAlertForm(WrappedComponent) {
       metric: selector(state, 'metric'),
       single_filter: selector(state, 'single_filter'),
       muted: selector(state, 'muted'),
-      initialValues: isDuplicate ? selectAlertFormValues(state, props) : DEFAULT_FORM_VALUES
+      initialValues: (isDuplicate || !isNewAlert) ? selectAlertFormValues(state, props) : DEFAULT_FORM_VALUES
     };
   };
 

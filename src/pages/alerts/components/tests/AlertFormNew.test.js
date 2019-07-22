@@ -1,6 +1,5 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import cases from 'jest-in-case';
 import { AlertFormNew } from '../AlertFormNew';
 import { DEFAULT_FORM_VALUES } from '../../constants/formConstants';
 import * as alertFormHelper from '../../helpers/alertForm';
@@ -25,7 +24,8 @@ describe('Alert Form Component', () => {
       metric: 'health_score',
       change: jest.fn(),
       formMeta: {},
-      formErrors: {}
+      formErrors: {},
+      isNewAlert: true
     };
 
     wrapper = shallow(<AlertFormNew {...props} />);
@@ -83,22 +83,40 @@ describe('Alert Form Component', () => {
     expect(wrapper.find('Error')).toExist();
   });
 
-  describe('submit button props', () => {
+  describe('submit button', () => {
 
-    const formCases = {
-      'pristine': { pristine: true },
-      'submitting': { submitting: true }
-    };
     const defaultFormState = {
       pristine: false,
       submitting: false
     };
 
-    cases('should disable submit button when form is', (formState) => {
+    it('should disable submit button when form is pristine', () => {
       wrapper.setProps(defaultFormState);
-      expect(wrapper.find('Button').props().disabled).toEqual(false);
-      wrapper.setProps({ ...defaultFormState, ...formState });
-      expect(wrapper.find('Button').props().disabled).toEqual(true);
-    }, formCases);
+      expect(wrapper.find('Button')).toHaveProp('disabled', false);
+      wrapper.setProps({ pristine: true });
+      expect(wrapper.find('Button')).toHaveProp('disabled', true);
+    });
+
+    it('should disable submit button when form is submitting', () => {
+      wrapper.setProps(defaultFormState);
+      expect(wrapper.find('Button')).toHaveProp('disabled', false);
+      wrapper.setProps({ pristine: true });
+      expect(wrapper.find('Button')).toHaveProp('disabled', true);
+    });
+
+    it('should display Submitting when submitting ', () => {
+      wrapper.setProps({ submitting: true });
+      expect(wrapper.find('Button').props().children).toEqual('Submitting...');
+    });
+
+    it('should display Create Alert when it is new alert', () => {
+      wrapper.setProps({ ...defaultFormState, isNewAlert: true });
+      expect(wrapper.find('Button').props().children).toEqual('Create Alert');
+    });
+
+    it('should display Update Alert when it is editing alert', () => {
+      wrapper.setProps({ ...defaultFormState, isNewAlert: false });
+      expect(wrapper.find('Button').props().children).toEqual('Update Alert');
+    });
   });
 });

@@ -1,4 +1,5 @@
 import EditPage from './EditPage';
+import EditPageNew from './EditPageNew';
 import CreatePage from './CreatePage';
 import CreatePageNew from './CreatePageNew';
 import ListPage from './ListPage';
@@ -9,6 +10,7 @@ export default {
   CreatePage,
   CreatePageNew,
   EditPage,
+  EditPageNew,
   ListPage,
   ListPageNew,
   DetailsPage

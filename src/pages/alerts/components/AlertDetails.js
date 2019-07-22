@@ -5,6 +5,7 @@ import { MAILBOX_PROVIDERS } from 'src/constants';
 import styles from './AlertDetails.module.scss';
 import AlertToggle from './AlertToggleNew';
 import { Email } from '../constants/notificationChannelIcons';
+import { Link } from 'react-router-dom';
 
 export const AlertDetails = ({ alert, id, subaccountIdToString }) => {
   const { metric, channels = {}, filters = [], subaccounts = [], threshold_evaluator = {}, any_subaccount, muted } = alert;
@@ -100,7 +101,7 @@ export const AlertDetails = ({ alert, id, subaccountIdToString }) => {
       <Panel.Section className={styles.Panel}>
         <span className={styles.Subtitle}>Alert Details</span>
         <span className={styles.ButtonGroup}>
-          <Button className={styles.Button} primary>Edit</Button>
+          <Button component={Link} to={`/alerts-new/edit/${id}`} className={styles.Button} primary>Edit</Button>
         </span>
       </Panel.Section>
       {renderAlertDetails()}

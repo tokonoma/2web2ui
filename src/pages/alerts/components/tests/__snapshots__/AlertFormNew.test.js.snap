@@ -36,7 +36,6 @@ exports[`Alert Form Component should render the alert form component correctly 1
             </label>
             <Field
               component={[Function]}
-              helpText="This assignment is permanent."
               name="metric"
               onChange={[Function]}
               options={

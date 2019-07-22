@@ -25,6 +25,11 @@ describe('Action Creator: Alerts', () => {
     expect(mockStore.getActions()).toMatchSnapshot();
   });
 
+  it('should dispatch an update action', () => {
+    mockStore.dispatch(alerts.updateAlert({ id: 'alert-id', data: { name: 'Updated Name' }}));
+    expect(mockStore.getActions()).toMatchSnapshot();
+  });
+
   it('should dispatch a set muted status action', () => {
     mockStore.dispatch(alerts.setMutedStatus({ id: 'alert-id', muted: false }));
     expect(mockStore.getActions()).toMatchSnapshot();

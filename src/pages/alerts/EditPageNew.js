@@ -1,33 +1,32 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Page } from '@sparkpost/matchbox';
-import withAlertsCreate from './containers/CreatePageNew.container';
+import withEditPage from './containers/EditPageNew.container';
 import AlertFormNew from './components/AlertFormNew';
 import formatFormValues from './helpers/formatFormValues';
 import { Loading } from 'src/components';
-import { RedirectAndAlert } from 'src/components/globalAlert';
+import RedirectAndAlert from 'src/components/globalAlert/RedirectAndAlert';
 
-export class CreatePageNew extends Component {
+export class EditPageNew extends Component {
 
   componentDidMount() {
-    const { getAlert, idToDuplicate } = this.props;
-    if (idToDuplicate) {
-      getAlert({ id: idToDuplicate });
-    }
+    const { getAlert, id } = this.props;
+    getAlert({ id });
   }
 
-  handleCreate = (values) => {
-    const { createAlert, showUIAlert, history } = this.props;
-    return createAlert({
+  handleUpdate = (values) => {
+    const { updateAlert, showUIAlert, history, id } = this.props;
+    return updateAlert({
+      id,
       data: formatFormValues(values)
     }).then(() => {
-      showUIAlert({ type: 'success', message: 'Alert created' });
+      showUIAlert({ type: 'success', message: 'Alert updated' });
       history.push('/alerts-new');
     });
   };
 
   render() {
-    const { loading, getError, getLoading, idToDuplicate } = this.props;
+    const { loading, getError, getLoading } = this.props;
 
     if (getLoading) {
       return <Loading/>;
@@ -44,17 +43,16 @@ export class CreatePageNew extends Component {
 
     return (
       <Page
-        title='Create Alert'
+        title='Edit Alert'
         breadcrumbAction={{ content: 'Back to Alerts', to: '/alerts-new', component: Link }}>
         <AlertFormNew
           submitting={loading}
-          onSubmit={this.handleCreate}
-          isDuplicate={Boolean(idToDuplicate)}
-          isNewAlert={true}
+          onSubmit={this.handleUpdate}
+          isNewAlert={false}
         />
       </Page>
     );
   }
 }
 
-export default withAlertsCreate(CreatePageNew);
+export default withEditPage(EditPageNew);
