@@ -3,16 +3,16 @@ import { Link } from 'react-router-dom';
 import { Page } from '@sparkpost/matchbox';
 import withAlertsCreate from './containers/CreatePageNew.container';
 import AlertFormNew from './components/AlertFormNew';
-import { formatFormValues } from './helpers/formatFormData';
+import { formatFormValues } from './helpers/formatFormValues';
 import { Loading } from 'src/components';
 import { RedirectAndAlert } from 'src/components/globalAlert';
 
 export class CreatePageNew extends Component {
 
   componentDidMount() {
-    const { getAlert, duplicateId } = this.props;
-    if (duplicateId) {
-      getAlert({ id: duplicateId });
+    const { getAlert, idToDuplicate } = this.props;
+    if (idToDuplicate) {
+      getAlert({ id: idToDuplicate });
     }
   }
 
@@ -31,7 +31,7 @@ export class CreatePageNew extends Component {
   };
 
   render() {
-    const { loading, getError, getLoading, duplicateId } = this.props;
+    const { loading, getError, getLoading, idToDuplicate } = this.props;
 
     if (getLoading) {
       return <Loading/>;
@@ -50,7 +50,7 @@ export class CreatePageNew extends Component {
       <Page
         title='Create Alert'
         breadcrumbAction={{ content: 'Back to Alerts', to: '/alerts-new', component: Link }}>
-        <AlertFormNew submitting={loading} onSubmit={this.handleCreate} isDuplicate={Boolean(duplicateId)}/>
+        <AlertFormNew submitting={loading} onSubmit={this.handleCreate} isDuplicate={Boolean(idToDuplicate)}/>
       </Page>
     );
   }

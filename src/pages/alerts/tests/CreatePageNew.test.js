@@ -1,10 +1,10 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 import { CreatePageNew } from '../CreatePageNew';
-import { formatFormValues } from '../helpers/formatFormData';
+import { formatFormValues } from '../helpers/formatFormValues';
 import AlertFormNew from '../components/AlertFormNew';
 
-jest.mock('../helpers/formatFormData');
+jest.mock('../helpers/formatFormValues');
 
 describe('Page: Alerts Create', () => {
   const props = {
@@ -18,7 +18,7 @@ describe('Page: Alerts Create', () => {
     getAlert: jest.fn(),
     getError: undefined,
     getLoading: undefined,
-    duplicateId: undefined,
+    idToDuplicate: undefined,
     alert: {}
   };
 
@@ -43,7 +43,7 @@ describe('Page: Alerts Create', () => {
   });
 
   it('should get alert if duplicate id exists', () => {
-    const newProps = { duplicateId: 'alert-id-1' };
+    const newProps = { idToDuplicate: 'alert-id-1' };
     wrapper = shallow(<CreatePageNew {...props} {...newProps} />);
     expect(props.getAlert).toHaveBeenCalledWith({ id: 'alert-id-1' });
   });

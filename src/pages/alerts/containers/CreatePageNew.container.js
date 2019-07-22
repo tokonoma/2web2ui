@@ -6,7 +6,7 @@ function withAlertsCreate(WrappedComponent) {
   const mapDispatchToProps = { createAlert, showUIAlert: showAlert, getAlert };
 
   const mapStateToProps = (state, props) => ({
-    duplicateId: props.match.params.id, // ID of the alert it's duplicating from
+    idToDuplicate: props.match.params.id, // ID of the alert it's duplicating from
     getError: state.alertsV1.getError,
     getLoading: state.alertsV1.getPending,
     alert: state.alertsV1.alert || {},
