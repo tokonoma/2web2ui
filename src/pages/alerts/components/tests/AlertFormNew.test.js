@@ -92,16 +92,16 @@ describe('Alert Form Component', () => {
 
     it('should disable submit button when form is pristine', () => {
       wrapper.setProps(defaultFormState);
-      expect(wrapper.find('Button').props().disabled).toEqual(false);
+      expect(wrapper.find('Button')).toHaveProp('disabled', false);
       wrapper.setProps({ pristine: true });
-      expect(wrapper.find('Button').props().disabled).toEqual(true);
+      expect(wrapper.find('Button')).toHaveProp('disabled', true);
     });
 
     it('should disable submit button when form is submitting', () => {
       wrapper.setProps(defaultFormState);
-      expect(wrapper.find('Button').props().disabled).toEqual(false);
+      expect(wrapper.find('Button')).toHaveProp('disabled', false);
       wrapper.setProps({ pristine: true });
-      expect(wrapper.find('Button').props().disabled).toEqual(true);
+      expect(wrapper.find('Button')).toHaveProp('disabled', true);
     });
 
     it('should display Submitting when submitting ', () => {
