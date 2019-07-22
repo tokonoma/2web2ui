@@ -135,12 +135,14 @@ describe('Alerts Selectors: ', () => {
     };
 
     cases('should correctly transform the data for', ({ formData, apiData }) => {
-      expect(alertsSelectors.getInitialValues(apiData, false)).toEqual(formData);
+      expect(alertsSelectors.selectAlertFormValues({ alertsV1: { alert: apiData }}, { isDuplicate: false })).toEqual(formData);
     }, testCases);
 
     it('append (Duplicate) for duplicate alerts', () => {
-      expect(alertsSelectors.getInitialValues({ ...apiData, name: 'OG alert' }, true)).
-        toEqual({ ...formData, name: 'OG alert (Duplicate)' });
+      const inputAlert = { ...apiData, name: 'OG alert' };
+      const expected = { ...formData, name: 'OG alert Copy' };
+      expect(alertsSelectors.selectAlertFormValues({ alertsV1: { alert: inputAlert }}, { isDuplicate: true })).
+        toEqual(expected);
     });
   });
 });

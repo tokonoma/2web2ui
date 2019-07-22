@@ -3,8 +3,11 @@ import { createSelector } from 'reselect';
 import { formatDateTime } from '../helpers/date';
 import { getFormSpec } from 'src/pages/alerts/helpers/alertForm';
 import { DEFAULT_FORM_VALUES } from 'src/pages/alerts/constants/formConstants';
+import { tagAsCopy } from 'src/helpers/string';
 
 const getAlertsList = (state) => state.alertsV1.list;
+const getAlert = (state) => state.alertsV1.alert;
+const getIsDuplicate = (state, props) => props.isDuplicate;
 
 export const selectAlertsList = createSelector(
   [ getAlertsList ],
@@ -25,7 +28,7 @@ export const selectRecentlyTriggeredAlerts = createSelector(
     .slice(0,4)
 );
 
-export function getInitialValues(alert = {}, isDuplicate) {
+export const selectAlertFormValues = createSelector([getAlert, getIsDuplicate], (alert = {}, isDuplicate) => {
 
   const keysToOmit = [
     'filters',
@@ -55,7 +58,7 @@ export function getInitialValues(alert = {}, isDuplicate) {
   const { emails = []} = channels;
   const email_addresses = emails.join(', ');
 
-  const name = (isDuplicate) ? `${alert.name} (Duplicate)` : alert.name;
+  const name = (isDuplicate) ? tagAsCopy(alert.name) : alert.name;
 
   const keysToChange = {
     name,
@@ -67,4 +70,4 @@ export function getInitialValues(alert = {}, isDuplicate) {
     email_addresses };
 
   return _.omit({ ...DEFAULT_FORM_VALUES, ...alert, ...keysToChange }, keysToOmit);
-}
+});

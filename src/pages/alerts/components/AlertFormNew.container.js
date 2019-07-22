@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { DEFAULT_FORM_VALUES, FORM_NAME } from '../constants/formConstants';
 import validateForm from '../helpers/validateForm';
 import { hasSubaccounts } from 'src/selectors/subaccounts';
-import { getInitialValues } from 'src/selectors/alertsV1';
+import { selectAlertFormValues } from 'src/selectors/alertsV1';
 
 export default function withAlertForm(WrappedComponent) {
 
@@ -19,7 +19,7 @@ export default function withAlertForm(WrappedComponent) {
       metric: selector(state, 'metric'),
       single_filter: selector(state, 'single_filter'),
       muted: selector(state, 'muted'),
-      initialValues: isDuplicate ? getInitialValues(state.alertsV1.alert, isDuplicate) : DEFAULT_FORM_VALUES
+      initialValues: isDuplicate ? selectAlertFormValues(state, props) : DEFAULT_FORM_VALUES
     };
   };
 
