@@ -9,8 +9,7 @@ describe('AuthPage tests', () => {
     loggedIn: false,
     tfaEnabled: false,
     tfaRequired: false,
-    authenticate: jest.fn(),
-    redirectAuthenticate: jest.fn()
+    authenticate: jest.fn()
   };
 
   function subject(props) {
@@ -47,6 +46,6 @@ describe('AuthPage tests', () => {
 
   it('should process authenticate if username/token passed in', () => {
     const wrapper = subject({ username: 'its-me', access_token: 'bigTOKEN' });
-    expect(wrapper.instance().props.redirectAuthenticate).toHaveBeenCalledWith('its-me', 'bigTOKEN');
+    expect(wrapper.instance().props.authenticate).toHaveBeenCalledWith('its-me', null, false, 'bigTOKEN');
   });
 });
