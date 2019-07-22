@@ -51,10 +51,10 @@ export class AlertFormNew extends Component {
       hasSubaccounts,
       formErrors,
       formMeta,
-      newAlert
+      isNewAlert
     } = this.props;
 
-    const submitText = submitting ? 'Submitting...' : (newAlert ? 'Create Alert' : 'Update Alert');
+    const submitText = submitting ? 'Submitting...' : (isNewAlert ? 'Create Alert' : 'Update Alert');
     const formSpec = getFormSpec(metric);
     const channelsError = this.isNotificationChannelsEmpty(formMeta, formErrors);
 

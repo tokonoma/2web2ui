@@ -50,7 +50,7 @@ export class CreatePageNew extends Component {
           submitting={loading}
           onSubmit={this.handleCreate}
           isDuplicate={Boolean(idToDuplicate)}
-          newAlert={true}
+          isNewAlert={true}
         />
       </Page>
     );

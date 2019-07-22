@@ -13,7 +13,7 @@ exports[`Page: Alerts Edit should render happy path 1`] = `
   title="Edit Alert"
 >
   <withRouter(Connect(ReduxForm))
-    newAlert={false}
+    isNewAlert={false}
     onSubmit={[Function]}
     submitting={false}
   />

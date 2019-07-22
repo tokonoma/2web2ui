@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Page } from '@sparkpost/matchbox';
 import withEditPage from './containers/EditPageNew.container';
 import AlertFormNew from './components/AlertFormNew';
-import { formatFromFormToApi, formatFromApiToForm } from './helpers/formatFormData';
+import formatFormValues from './helpers/formatFormValues';
 import { Loading } from 'src/components';
 import RedirectAndAlert from 'src/components/globalAlert/RedirectAndAlert';
 
@@ -18,7 +18,7 @@ export class EditPageNew extends Component {
     const { updateAlert, showUIAlert, history, id } = this.props;
     return updateAlert({
       id,
-      data: formatFromFormToApi(values)
+      data: formatFormValues(values)
     }).then(() => {
       showUIAlert({ type: 'success', message: 'Alert updated' });
       history.push('/alerts-new');
@@ -26,7 +26,7 @@ export class EditPageNew extends Component {
   };
 
   render() {
-    const { loading, getError, getLoading, alert } = this.props;
+    const { loading, getError, getLoading } = this.props;
 
     if (getLoading) {
       return <Loading/>;
@@ -40,7 +40,6 @@ export class EditPageNew extends Component {
         />
       );
     }
-    const initialValues = formatFromApiToForm(alert);
 
     return (
       <Page
@@ -49,8 +48,7 @@ export class EditPageNew extends Component {
         <AlertFormNew
           submitting={loading}
           onSubmit={this.handleUpdate}
-          intialValues={initialValues}
-          newAlert={false}
+          isNewAlert={false}
         />
       </Page>
     );

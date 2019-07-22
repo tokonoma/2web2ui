@@ -25,7 +25,7 @@ describe('Alert Form Component', () => {
       change: jest.fn(),
       formMeta: {},
       formErrors: {},
-      newAlert: true
+      isNewAlert: true
     };
 
     wrapper = shallow(<AlertFormNew {...props} />);
@@ -110,12 +110,12 @@ describe('Alert Form Component', () => {
     });
 
     it('should display Create Alert when it is new alert', () => {
-      wrapper.setProps({ ...defaultFormState, newAlert: true });
+      wrapper.setProps({ ...defaultFormState, isNewAlert: true });
       expect(wrapper.find('Button').props().children).toEqual('Create Alert');
     });
 
     it('should display Update Alert when it is editing alert', () => {
-      wrapper.setProps({ ...defaultFormState, newAlert: false });
+      wrapper.setProps({ ...defaultFormState, isNewAlert: false });
       expect(wrapper.find('Button').props().children).toEqual('Update Alert');
     });
   });
