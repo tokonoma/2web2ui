@@ -1,4 +1,4 @@
-import { formatFromFormToApi, formatFromApiToForm } from '../formatFormData';
+import { formatFormValues } from '../formatFormData';
 import cases from 'jest-in-case';
 
 const emails = 'sparky@sparkpost.com, test@foo.com';
@@ -80,14 +80,9 @@ const testCases =
       }
     };
 
-describe('formatFromFormToApi', () => {
+describe('formatFormValues', () => {
   cases('should correctly transform the data for', ({ formData, apiData }) => {
-    expect(formatFromFormToApi(formData)).toEqual(apiData);
+    expect(formatFormValues(formData)).toEqual(apiData);
   }, testCases);
 });
 
-describe('formatFromApiToForm', () => {
-  cases('should correctly transform the data for', ({ apiData, formData }) => {
-    expect(formatFromApiToForm(apiData)).toEqual(formData);
-  }, testCases);
-});
