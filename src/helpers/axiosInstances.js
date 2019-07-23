@@ -12,6 +12,11 @@ export const sparkpostAxios = axios.create({
 
 sparkpostAxios.interceptors.response.use(null, sparkpostErrorHandler);
 
+export const sparkpostNoHeaders = axios.create({
+  baseURL: apiBase,
+  withCredentials: true
+});
+
 export const sparkpost = sparkpostAxios;
 
 export const zuora = axios.create({

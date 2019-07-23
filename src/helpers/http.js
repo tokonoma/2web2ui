@@ -1,6 +1,6 @@
 import config from '../config';
 
-import { sparkpost as sparkpostRequest } from 'src/helpers/axiosInstances';
+import { sparkpost as sparkpostRequest, sparkpostNoHeaders } from 'src/helpers/axiosInstances';
 
 const { authentication } = config;
 
@@ -25,12 +25,11 @@ function sparkpostLogin(username, password, rememberMe, authHeader = authenticat
   password = encodeURIComponent(password);
   const data = `grant_type=password&username=${username}&password=${password}&rememberMe=${rememberMe}`;
 
-  return sparkpostRequest({
+  return sparkpostNoHeaders({
     method: 'POST',
     url: '/v1/authenticate',
     data,
-    headers: buildHeaders(authHeader),
-    transformRequest: [(data, headers) => { delete headers['X-Sparky']; return data; }]
+    headers: buildHeaders(authHeader)
   });
 }
 
