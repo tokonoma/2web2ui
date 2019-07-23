@@ -3,7 +3,7 @@ import cases from 'jest-in-case';
 
 
 describe('Alerts Selectors: ', () => {
-  let alertsV1;
+  let alerts;
   let formattedAlerts;
 
   beforeEach(() => {
@@ -49,15 +49,15 @@ describe('Alerts Selectors: ', () => {
       }
     ];
 
-    alertsV1 = { list };
+    alerts = { list };
   });
 
   it('selectAlertsList returns formatted alerts data', () => {
-    expect(alertsSelectors.selectAlertsList({ alertsV1 })).toEqual(formattedAlerts);
+    expect(alertsSelectors.selectAlertsList({ alerts })).toEqual(formattedAlerts);
   });
 
   it('selectRecentlyTriggeredAlerts returns triggered alerts in order descending ', () => {
-    expect(alertsSelectors.selectRecentlyTriggeredAlerts({ alertsV1 })).toEqual([formattedAlerts[1]]);
+    expect(alertsSelectors.selectRecentlyTriggeredAlerts({ alerts })).toEqual([formattedAlerts[1]]);
   });
 
   describe('getInitialValues', () => {
@@ -148,13 +148,13 @@ describe('Alerts Selectors: ', () => {
     };
 
     cases('should correctly transform the data for', ({ formData, apiData }) => {
-      expect(alertsSelectors.selectAlertFormValues({ alertsV1: { alert: apiData }}, { isDuplicate: false })).toEqual(formData);
+      expect(alertsSelectors.selectAlertFormValues({ alerts: { alert: apiData }}, { isDuplicate: false })).toEqual(formData);
     }, testCases);
 
     it('append (Duplicate) for duplicate alerts', () => {
       const inputAlert = { ...apiData, name: 'OG alert' };
       const expected = { ...formData, name: 'OG alert Copy' };
-      expect(alertsSelectors.selectAlertFormValues({ alertsV1: { alert: inputAlert }}, { isDuplicate: true })).
+      expect(alertsSelectors.selectAlertFormValues({ alerts: { alert: inputAlert }}, { isDuplicate: true })).
         toEqual(expected);
     });
   });

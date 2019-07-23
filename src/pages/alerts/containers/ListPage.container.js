@@ -10,9 +10,9 @@ function withAlertsList(WrappedComponent) {
   const mapStateToProps = (state, props) => ({
     alerts: selectAlertsList(state),
     recentlyTriggeredAlerts: selectRecentlyTriggeredAlerts(state),
-    error: state.alertsV1.listError,
-    loading: state.alertsV1.listPending,
-    deletePending: state.alertsV1.deletePending
+    error: state.alerts.listError,
+    loading: state.alerts.listPending,
+    deletePending: state.alerts.deletePending
   });
 
   return withRouter(connect(mapStateToProps, mapDispatchToProps)(WrappedComponent));

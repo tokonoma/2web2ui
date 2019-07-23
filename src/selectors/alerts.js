@@ -5,8 +5,8 @@ import { getFormSpec } from 'src/pages/alerts/helpers/alertForm';
 import { DEFAULT_FORM_VALUES } from 'src/pages/alerts/constants/formConstants';
 import { tagAsCopy } from 'src/helpers/string';
 
-const getAlertsList = (state) => state.alertsV1.list;
-const getAlert = (state) => state.alertsV1.alert;
+const getAlertsList = (state) => state.alerts.list;
+const getAlert = (state) => state.alerts.alert;
 const getIsDuplicate = (state, props) => props.isDuplicate;
 
 export const selectAlertsList = createSelector(

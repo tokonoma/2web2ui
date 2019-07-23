@@ -10,7 +10,7 @@ Array [
       "method": "POST",
       "url": "/v1/alerts",
     },
-    "type": "CREATE_ALERT_V1",
+    "type": "CREATE_ALERT",
   },
 ]
 `;
@@ -23,7 +23,7 @@ Array [
       "method": "DELETE",
       "url": "/v1/alerts/alert-id",
     },
-    "type": "DELETE_ALERT_V1",
+    "type": "DELETE_ALERT",
   },
 ]
 `;
@@ -36,7 +36,7 @@ Array [
       "showErrorAlert": false,
       "url": "/v1/alerts/0",
     },
-    "type": "GET_ALERT_V1",
+    "type": "GET_ALERT",
   },
 ]
 `;
@@ -49,7 +49,7 @@ Array [
       "showErrorAlert": false,
       "url": "/v1/alerts",
     },
-    "type": "LIST_ALERTS_V1",
+    "type": "LIST_ALERTS",
   },
 ]
 `;
@@ -65,7 +65,7 @@ Array [
       "method": "PUT",
       "url": "/v1/alerts/alert-id",
     },
-    "type": "SET_ALERT_V1_MUTED_STATUS",
+    "type": "SET_ALERT_MUTED_STATUS",
   },
 ]
 `;
@@ -80,7 +80,7 @@ Array [
       "method": "PUT",
       "url": "/v1/alerts/alert-id",
     },
-    "type": "UPDATE_ALERT_V1",
+    "type": "UPDATE_ALERT",
   },
 ]
 `;

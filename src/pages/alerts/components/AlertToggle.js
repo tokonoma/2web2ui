@@ -42,7 +42,7 @@ export class AlertToggle extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  pending: state.alertsV1.setMutedStatusPending
+  pending: state.alerts.setMutedStatusPending
 });
 
 export default connect(mapStateToProps, { setMutedStatus, showAlert })(AlertToggle);

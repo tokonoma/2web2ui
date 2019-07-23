@@ -7,9 +7,9 @@ function withAlertsUpdate(WrappedComponent) {
 
   const mapStateToProps = (state, props) => ({
     id: props.match.params.id,
-    getError: state.alertsV1.getError,
-    getLoading: state.alertsV1.getPending,
-    loading: state.alertsV1.updatePending
+    getError: state.alerts.getError,
+    getLoading: state.alerts.getPending,
+    loading: state.alerts.updatePending
   });
 
   return connect(mapStateToProps, mapDispatchToProps)(WrappedComponent);
