@@ -1,6 +1,6 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import { EditPageNew } from '../EditPageNew';
+import { EditPage } from '../EditPage';
 import formatFormValues from '../helpers/formatFormValues';
 import AlertFormNew from '../components/AlertFormNew';
 
@@ -25,7 +25,7 @@ describe('Page: Alerts Edit', () => {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = shallow(<EditPageNew {...props} />);
+    wrapper = shallow(<EditPage {...props} />);
   });
 
   it('should render happy path', () => {
@@ -43,7 +43,7 @@ describe('Page: Alerts Edit', () => {
   });
 
   it('should get alert when component mounts', () => {
-    wrapper = shallow(<EditPageNew {...props} id={'alert-id-2'} />);
+    wrapper = shallow(<EditPage {...props} id={'alert-id-2'} />);
     expect(props.getAlert).toHaveBeenCalledWith({ id: 'alert-id-2' });
   });
 

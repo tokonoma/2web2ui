@@ -1,6 +1,6 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import { ListPageNew } from '../ListPageNew';
+import { ListPage } from '../ListPage';
 
 describe('Page: Alerts List', () => {
   const props = {
@@ -52,7 +52,7 @@ describe('Page: Alerts List', () => {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = shallow(<ListPageNew {...props} />);
+    wrapper = shallow(<ListPage {...props} />);
   });
 
   it('should render happy path', () => {

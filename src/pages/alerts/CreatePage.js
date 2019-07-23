@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Page } from '@sparkpost/matchbox';
-import withAlertsCreate from './containers/CreatePageNew.container';
+import withAlertsCreate from './containers/CreatePage.container';
 import AlertFormNew from './components/AlertFormNew';
 import formatFormValues from './helpers/formatFormValues';
 import { Loading } from 'src/components';
 import { RedirectAndAlert } from 'src/components/globalAlert';
 
-export class CreatePageNew extends Component {
+export class CreatePage extends Component {
 
   componentDidMount() {
     const { getAlert, idToDuplicate } = this.props;
@@ -60,4 +60,4 @@ export class CreatePageNew extends Component {
   }
 }
 
-export default withAlertsCreate(CreatePageNew);
+export default withAlertsCreate(CreatePage);

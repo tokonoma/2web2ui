@@ -658,7 +658,7 @@ const routes = [
   },
   {
     path: '/alerts',
-    component: alerts.ListPageNew,
+    component: alerts.ListPage,
     condition: hasGrants('alerts/manage'),
     layout: App,
     title: 'Alerts',

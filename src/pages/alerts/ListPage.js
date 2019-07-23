@@ -5,11 +5,11 @@ import { RemoveRedEye } from '@sparkpost/matchbox-icons';
 import { ApiErrorBanner, DeleteModal, Loading, DisplayDate } from 'src/components';
 import { Templates } from 'src/components/images';
 import AlertCollectionNew from './components/AlertCollectionNew';
-import withAlertsList from './containers/ListPageNew.container';
+import withAlertsList from './containers/ListPage.container';
 import styles from './ListPage.module.scss';
 import _ from 'lodash';
 
-export class ListPageNew extends Component {
+export class ListPage extends Component {
   state = {
     alertToDelete: {}
   }
@@ -139,4 +139,4 @@ export class ListPageNew extends Component {
   }
 }
 
-export default withAlertsList(ListPageNew);
+export default withAlertsList(ListPage);

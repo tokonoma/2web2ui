@@ -1,6 +1,6 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import { CreatePageNew } from '../CreatePageNew';
+import { CreatePage } from '../CreatePage';
 import formatFormValues from '../helpers/formatFormValues';
 import AlertFormNew from '../components/AlertFormNew';
 
@@ -25,7 +25,7 @@ describe('Page: Alerts Create', () => {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = shallow(<CreatePageNew {...props} />);
+    wrapper = shallow(<CreatePage {...props} />);
   });
 
   it('should render happy path', () => {
@@ -44,7 +44,7 @@ describe('Page: Alerts Create', () => {
 
   it('should get alert if duplicate id exists', () => {
     const newProps = { idToDuplicate: 'alert-id-1' };
-    wrapper = shallow(<CreatePageNew {...props} {...newProps} />);
+    wrapper = shallow(<CreatePage {...props} {...newProps} />);
     expect(props.getAlert).toHaveBeenCalledWith({ id: 'alert-id-1' });
   });
 
