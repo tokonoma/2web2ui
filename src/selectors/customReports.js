@@ -5,6 +5,6 @@ import _ from 'lodash';
 export const selectReportsEnhancementsEnabled = (state) => selectCondition(isUserUiOptionSet('feature_reports_enhancements', true))(state);
 
 export const selectCustomReports = (state) => {
-  const reports = _.get(state, 'currentUser.options.ui.customReports', []);
+  const reports = _.get(state, 'currentUser.options.ui.customReports') || [];
   return _.sortBy(reports, [({ name = '' }) => name.toLowerCase()]);
 };

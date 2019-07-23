@@ -3,8 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { Modal, Button, Panel } from '@sparkpost/matchbox';
 import ReportRow from './CustomReportRow';
 
-
-function CustomReportsList({ deleting, reports, history, onDelete, setName }) {
+function CustomReportsList({ deleting, handleLoad, onDelete, reports, setName }) {
   const [open, setOpen] = React.useState(false);
 
   const reportList = React.useMemo(() => {
@@ -18,29 +17,29 @@ function CustomReportsList({ deleting, reports, history, onDelete, setName }) {
 
     return reports.map((report, i) => {
 
-      function handleLoad() {
+      function onLoad() {
         setOpen(false);
-        history.push(`/reports/summary/?${report.url}`);
-        setName(report.name);
+        handleLoad(report);
       }
 
       return (
         <ReportRow
           key={`${report.name}-${i}`}
           {...report}
-          onLoad={handleLoad}
+          onLoad={onLoad}
           onDelete={onDelete}
           deleting={deleting}
         />
       );
     });
-  }, [deleting, history, onDelete, reports, setName]);
+  }, [deleting, handleLoad, onDelete, reports]);
 
   return (
     <>
       <Button
         flat
         color='orange'
+        size='small'
         onClick={() => setOpen(!open)}>
           Saved Reports
       </Button>
