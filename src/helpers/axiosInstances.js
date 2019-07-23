@@ -9,15 +9,16 @@ export const sparkpostAxios = axios.create({
   headers: apiRequestHeaders,
   withCredentials: true
 });
-
 sparkpostAxios.interceptors.response.use(null, sparkpostErrorHandler);
+export const sparkpost = sparkpostAxios;
 
-export const sparkpostNoHeaders = axios.create({
+export const sparkpostPublicAxios = axios.create({
   baseURL: apiBase,
   withCredentials: true
 });
+sparkpostPublicAxios.interceptors.response.use(null, sparkpostErrorHandler);
+export const sparkpostPublic = sparkpostPublicAxios;
 
-export const sparkpost = sparkpostAxios;
 
 export const zuora = axios.create({
   baseURL: zuoraConfig.baseUrl
