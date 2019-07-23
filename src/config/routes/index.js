@@ -674,7 +674,7 @@ const routes = [
   },
   {
     path: '/alerts/create/:id?',
-    component: alerts.CreatePageNew,
+    component: alerts.CreatePage,
     condition: hasGrants('alerts/manage'),
     layout: App,
     title: 'Create Alert',
@@ -682,7 +682,7 @@ const routes = [
   },
   {
     path: '/alerts/edit/:id',
-    component: alerts.EditPageNew,
+    component: alerts.EditPage,
     condition: hasGrants('alerts/manage'),
     layout: App,
     title: 'Edit Alert',

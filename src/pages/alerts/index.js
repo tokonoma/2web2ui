@@ -1,11 +1,11 @@
-import EditPageNew from './EditPage';
-import CreatePageNew from './CreatePage';
+import EditPage from './EditPage';
+import CreatePage from './CreatePage';
 import ListPage from './ListPage';
 import DetailsPage from './DetailsPage';
 
 export default {
-  CreatePageNew,
-  EditPageNew,
+  CreatePage,
+  EditPage,
   ListPage,
   DetailsPage
 };
