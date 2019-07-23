@@ -1,9 +1,7 @@
 import React from 'react';
-import classnames from 'classnames';
-import { Panel, Button } from '@sparkpost/matchbox';
-import { ErrorOutline, InsertDriveFile, CheckCircleOutline } from '@sparkpost/matchbox-icons';
+import { Panel, Button, Tag, Table } from '@sparkpost/matchbox';
+import { Error, FileDownload, CheckCircle, Cached } from '@sparkpost/matchbox-icons';
 import DownloadLink from 'src/components/downloadLink/DownloadLink';
-import LabelledValue from 'src/components/labelledValue/LabelledValue';
 import { LoadingSVG } from 'src/components/loading/Loading';
 import { formatDateTime } from 'src/helpers/date';
 import moment from 'moment';
@@ -18,54 +16,70 @@ const ListResultsCard = ({ complete = 'unknown', uploaded, rejectedUrl, status }
     );
   }
 
-  const loading = !complete && status !== 'ERROR';
+  const loading = !complete;
   const ready = status === 'SUCCESS';
   const failed = status === 'ERROR';
 
-  let spinner = <div className={styles.Spacer}/>;
-  let Icon = InsertDriveFile;
-  let iconClass = null;
-  let statusText = null;
+  const renderStatus = () => {
 
-  if (loading) {
-    spinner = <div className={styles.ProcessingWrapper}><LoadingSVG size='Small' /></div>;
-    statusText = 'Processing';
-  }
+    if (failed) {
+      return (<Tag>
+        <span className={styles.Failed}><Error /> </span>
+        <span>Failed. Please try again.</span>
+      </Tag>);
+    }
 
-  if (failed) {
-    Icon = ErrorOutline;
-    iconClass = styles.Failed;
-    statusText = 'Failed. Please try again.';
-  }
+    if (ready) {
+      return (<Tag>
+        <span className={styles.Complete}><CheckCircle /> </span>
+        <span>Completed</span>
+      </Tag>);
+    }
 
-  if (ready) {
-    Icon = CheckCircleOutline;
-    iconClass = styles.Complete;
-    statusText = 'Completed';
-  }
+    if (loading) {
+      return (<Tag>
+        <span className={styles.Loading}><Cached /> </span>
+        <span>Processing</span>
+      </Tag>);
+    }
+  };
 
   return (
-    <Panel sectioned>
-      <div className={classnames(styles.IconWrapper, iconClass)}>
-        <Icon size={40} />
+    <Panel sectioned accent='gray' title={<div className={styles.PanelHeader}>Last Validation:</div>}>
+      <div className={styles.TableContainer}>
+        <Table>
+          <tbody>
+            <Table.Row className={styles.TableHeader}>
+              <Table.HeaderCell className={styles.TableCell} width='25%'>
+                Date Uploaded:
+              </Table.HeaderCell>
+              <Table.HeaderCell className={styles.TableCell} width='25%'>
+                Status:
+              </Table.HeaderCell>
+            </Table.Row>
+            <Table.Row>
+              <Table.Cell className={styles.TableCell}>
+                {formatDateTime(moment.unix(uploaded))}
+              </Table.Cell>
+              <Table.Cell className={styles.TableCell}>
+                {renderStatus()}
+              </Table.Cell>
+              <Table.Cell className={styles.TableCell}>
+                {ready && (
+                  <div className={styles.DownloadButton}>
+                    <DownloadLink
+                      size='large'
+                      component={Button}
+                      to={rejectedUrl}>
+                      Download Results <FileDownload />
+                    </DownloadLink>
+                  </div>
+                )}
+              </Table.Cell>
+            </Table.Row>
+          </tbody>
+        </Table>
       </div>
-      <h6>Validation Results</h6>
-      {spinner}
-      {uploaded && (
-        <LabelledValue label='Uploaded'>
-          <p className={classnames(styles.RightAlign, styles.NoWrap)}>
-            {formatDateTime(moment.unix(uploaded))}
-          </p>
-        </LabelledValue>
-      )}
-      <LabelledValue label='Status'>
-        <h6 className={styles.RightAlign}>
-          {statusText}
-        </h6>
-      </LabelledValue>
-      {ready && (
-        <DownloadLink component={Button} to={rejectedUrl} fullWidth color='orange'>Download Rejected Recipients</DownloadLink>
-      )}
     </Panel>
   );
 };

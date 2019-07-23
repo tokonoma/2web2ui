@@ -37,16 +37,8 @@ Array [
 `;
 
 exports[`ListResults renders Results Card with latest results 1`] = `
-<Grid>
-  <Grid.Column
-    lg={5}
-    md={6}
-    xs={12}
-  >
-    <ListResultsCard
-      complete={false}
-      listId="123"
-    />
-  </Grid.Column>
-</Grid>
+<ListResultsCard
+  complete={false}
+  listId="123"
+/>
 `;

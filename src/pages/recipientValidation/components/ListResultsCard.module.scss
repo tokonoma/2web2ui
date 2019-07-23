@@ -1,37 +1,37 @@
 @import '~@sparkpost/matchbox/src/styles/config.scss';
 
+.Loading {
+  color: orange;
+}
+
 .LoadingWrapper {
   padding: rem(100) 0 rem(100);
-  text-align: center;
+  text-align: center;	
+}
+.Complete {
+  color: #45D09E;
 }
 
-.ProcessingWrapper {
-  padding: spacing() 0 spacing(larger);
-  text-align: center;
+.Failed {
+  color: color(red);
 }
 
-.IconWrapper {
-  position: absolute;
-  right: spacing();
-  top: spacing();
-
-  &.Complete {
-    color: color(green, dark);
-  }
-
-  &.Failed {
-    color: color(red, dark);
-  }
+.PanelHeader {
+  font-size: 1.2em;
 }
 
-.RightAlign {
+.TableHeader {
+  border-bottom: 0;
+}
+
+.TableCell {
+  padding: 2px;
+}
+
+.TableContainer {
+  margin-top: 1rem;
+}
+
+.DownloadButton {
   text-align: right;
-}
-
-.Spacer {
-  height: rem(37);
-}
-
-.NoWrap {
-  white-space: nowrap;
 }
