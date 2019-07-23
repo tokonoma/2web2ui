@@ -52,6 +52,6 @@ describe('Page: Alerts Edit', () => {
     await wrapper.find(AlertFormNew).simulate('submit', { value: 'mock value' });
     expect(props.updateAlert).toHaveBeenCalledWith({ data: { value: 'mock value' }, id: props.id });
     expect(props.showUIAlert).toHaveBeenCalled();
-    expect(props.history.push).toHaveBeenCalledWith('/alerts-new/details/alert-id-1');
+    expect(props.history.push).toHaveBeenCalledWith('/alerts/details/alert-id-1');
   });
 });

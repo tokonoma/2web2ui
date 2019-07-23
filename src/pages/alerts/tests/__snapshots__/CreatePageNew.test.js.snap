@@ -6,7 +6,7 @@ exports[`Page: Alerts Create should render happy path 1`] = `
     Object {
       "component": [Function],
       "content": "Back to Alerts",
-      "to": "/alerts-new",
+      "to": "/alerts",
     }
   }
   empty={Object {}}

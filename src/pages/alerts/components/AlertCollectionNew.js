@@ -18,7 +18,7 @@ const filterBoxConfig = {
 
 class AlertCollectionNew extends Component {
 
-  getDetailsLink = ({ id }) => `/alerts-new/details/${id}`;
+  getDetailsLink = ({ id }) => `/alerts/details/${id}`;
 
   getColumns() {
     const columns = [

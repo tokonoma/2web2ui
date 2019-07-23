@@ -74,7 +74,7 @@ export class ListPageNew extends Component {
                 </Panel.Section>
                 <Panel.Section className = {styles.Footer}>
                   <Tooltip dark content='View Details' width='100px' horizontalOffset='-8px'>
-                    <Button flat component={Link} to = {`/alerts-new/details/${alert.id}`}><RemoveRedEye className = {styles.Icon}/></Button>
+                    <Button flat component={Link} to = {`/alerts/details/${alert.id}`}><RemoveRedEye className = {styles.Icon}/></Button>
                   </Tooltip>
                 </Panel.Section>
               </Panel>
@@ -117,7 +117,7 @@ export class ListPageNew extends Component {
     return (
       <Page
         title='Alerts'
-        primaryAction={{ content: 'Create an Alert', to: '/alerts-new/create', component: Link }}
+        primaryAction={{ content: 'Create an Alert', to: '/alerts/create', component: Link }}
         empty={{
           show: !error && alerts.length === 0,
           image: Templates,

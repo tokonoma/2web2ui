@@ -21,7 +21,7 @@ export class EditPageNew extends Component {
       data: formatFormValues(values)
     }).then(() => {
       showUIAlert({ type: 'success', message: 'Alert updated' });
-      history.push(`/alerts-new/details/${id}`);
+      history.push(`/alerts/details/${id}`);
     });
   };
 
@@ -35,7 +35,7 @@ export class EditPageNew extends Component {
     if (getError) {
       return (
         <RedirectAndAlert
-          to={`/alerts-new/details/${id}`}
+          to={`/alerts/details/${id}`}
           alert={{ type: 'error', message: getError.message }}
         />
       );
@@ -44,7 +44,7 @@ export class EditPageNew extends Component {
     return (
       <Page
         title='Edit Alert'
-        breadcrumbAction={{ content: 'Back to Alert', to: `/alerts-new/details/${id}`, component: Link }}>
+        breadcrumbAction={{ content: 'Back to Alert', to: `/alerts/details/${id}`, component: Link }}>
         <AlertFormNew
           submitting={loading}
           onSubmit={this.handleUpdate}

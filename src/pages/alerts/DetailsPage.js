@@ -36,7 +36,7 @@ export class DetailsPage extends Component {
 
     return deleteAlert({ id }).then(() => {
       this.closeDeleteModal();
-      history.push('/alerts-new');
+      history.push('/alerts');
       showUIAlert({ type: 'success', message: `Alert: ${name} Deleted` });
     });
   };
@@ -65,7 +65,7 @@ export class DetailsPage extends Component {
     if (error) {
       return (
         <RedirectAndAlert
-          to='/alerts-new'
+          to='/alerts'
           alert={{ type: 'error', message: error.message }}
         />
       );
@@ -73,10 +73,10 @@ export class DetailsPage extends Component {
     return (
       <Page
         title={name || 'Alert'}
-        breadcrumbAction={{ content: 'Back to Alerts', to: '/alerts-new', component: Link }}
+        breadcrumbAction={{ content: 'Back to Alerts', to: '/alerts', component: Link }}
         primaryArea={
           <>
-          <Button flat component={Link} to={`/alerts-new/create/${id}`}><ContentCopy className={styles.Icon}/>Duplicate</Button>
+          <Button flat component={Link} to={`/alerts/create/${id}`}><ContentCopy className={styles.Icon}/>Duplicate</Button>
           <Button flat onClick={this.openDeleteModal}><Delete className={styles.Icon}/>Delete</Button>
           </>}
       >

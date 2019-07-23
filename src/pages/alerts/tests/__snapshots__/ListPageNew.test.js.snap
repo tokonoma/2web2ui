@@ -49,7 +49,7 @@ exports[`Page: Alerts List should render happy path 1`] = `
     Object {
       "component": [Function],
       "content": "Create an Alert",
-      "to": "/alerts-new/create",
+      "to": "/alerts/create",
     }
   }
   title="Alerts"
@@ -111,7 +111,7 @@ exports[`Page: Alerts List should render happy path 1`] = `
               component={[Function]}
               flat={true}
               size="default"
-              to="/alerts-new/details/id-1"
+              to="/alerts/details/id-1"
             >
               <RemoveRedEye
                 className="Icon"
@@ -169,7 +169,7 @@ exports[`Page: Alerts List should render happy path 1`] = `
               component={[Function]}
               flat={true}
               size="default"
-              to="/alerts-new/details/id-3"
+              to="/alerts/details/id-3"
             >
               <RemoveRedEye
                 className="Icon"

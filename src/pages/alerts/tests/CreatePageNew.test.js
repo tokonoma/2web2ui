@@ -50,7 +50,7 @@ describe('Page: Alerts Create', () => {
 
   it('breadcrumb should link to details page if its a duplicate alert', () => {
     wrapper.setProps({ idToDuplicate: 'alert-id-1' });
-    expect(wrapper.find('Page').prop('breadcrumbAction').to).toEqual('/alerts-new/details/alert-id-1');
+    expect(wrapper.find('Page').prop('breadcrumbAction').to).toEqual('/alerts/details/alert-id-1');
   });
 
   it('should handle submit', async () => {
@@ -58,6 +58,6 @@ describe('Page: Alerts Create', () => {
     await wrapper.find(AlertFormNew).simulate('submit', { value: 'mock value' });
     expect(props.createAlert).toHaveBeenCalledWith({ data: { value: 'mock value' }});
     expect(props.showUIAlert).toHaveBeenCalled();
-    expect(props.history.push).toHaveBeenCalledWith('/alerts-new/details/mock-id');
+    expect(props.history.push).toHaveBeenCalledWith('/alerts/details/mock-id');
   });
 });

@@ -22,7 +22,7 @@ export class CreatePageNew extends Component {
       data: formatFormValues(values)
     }).then(({ id }) => {
       showUIAlert({ type: 'success', message: 'Alert created' });
-      history.push(`/alerts-new/details/${id}`);
+      history.push(`/alerts/details/${id}`);
     });
   };
 
@@ -36,15 +36,15 @@ export class CreatePageNew extends Component {
     if (getError) {
       return (
         <RedirectAndAlert
-          to='/alerts-new'
+          to='/alerts'
           alert={{ type: 'error', message: getError.message }}
         />
       );
     }
 
     const backBreadcrumb = idToDuplicate
-      ? { content: 'Back to Alert', to: `/alerts-new/details/${idToDuplicate}` }
-      : { content: 'Back to Alerts', to: '/alerts-new' };
+      ? { content: 'Back to Alert', to: `/alerts/details/${idToDuplicate}` }
+      : { content: 'Back to Alerts', to: '/alerts' };
     return (
       <Page
         title='Create Alert'
