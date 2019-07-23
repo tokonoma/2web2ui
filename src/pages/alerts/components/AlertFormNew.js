@@ -35,7 +35,7 @@ const notificationChannelData = {
     icon: <Slack/>,
     subtitle: 'Integrate alerts into your Slack channel',
     fieldProps: {
-      placeholder: 'https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX'
+      placeholder: 'https://hooks.slack.com/services/T00/B00/XX '
     }
   },
   webhook: {
