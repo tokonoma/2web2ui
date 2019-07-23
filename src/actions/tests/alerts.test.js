@@ -1,5 +1,5 @@
 import { createMockStore } from 'src/__testHelpers__/mockStore';
-import * as alerts from '../alertsV1';
+import * as alerts from '../alerts';
 
 jest.mock('../helpers/sparkpostApiRequest', () => jest.fn((a) => a));
 

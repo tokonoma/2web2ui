@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { deleteAlert, listAlerts } from 'src/actions/alertsV1';
-import { selectAlertsList, selectRecentlyTriggeredAlerts } from 'src/selectors/alertsV1';
+import { deleteAlert, listAlerts } from 'src/actions/alerts';
+import { selectAlertsList, selectRecentlyTriggeredAlerts } from 'src/selectors/alerts';
 import { showAlert } from 'src/actions/globalAlert';
 
 function withAlertsList(WrappedComponent) {

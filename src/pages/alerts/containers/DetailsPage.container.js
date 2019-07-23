@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { deleteAlert, getAlert } from 'src/actions/alertsV1';
+import { deleteAlert, getAlert } from 'src/actions/alerts';
 import { showAlert } from 'src/actions/globalAlert';
 import { getSubaccounts, hasSubaccounts } from 'src/selectors/subaccounts';
 import { list as listSubaccounts } from 'src/actions/subaccounts';

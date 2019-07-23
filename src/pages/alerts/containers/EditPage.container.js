@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { updateAlert, getAlert } from 'src/actions/alertsV1';
+import { updateAlert, getAlert } from 'src/actions/alerts';
 import { showAlert } from 'src/actions/globalAlert';
 
 function withAlertsUpdate(WrappedComponent) {

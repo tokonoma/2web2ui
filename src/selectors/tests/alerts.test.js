@@ -1,4 +1,4 @@
-import * as alertsSelectors from '../alertsV1';
+import * as alertsSelectors from '../alerts';
 import cases from 'jest-in-case';
 
 

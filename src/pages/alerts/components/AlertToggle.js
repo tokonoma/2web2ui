@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Toggle } from '@sparkpost/matchbox';
-import { setMutedStatus } from 'src/actions/alertsV1';
+import { setMutedStatus } from 'src/actions/alerts';
 import { showAlert } from 'src/actions/globalAlert';
 import styles from './AlertToggle.module.scss';
 
