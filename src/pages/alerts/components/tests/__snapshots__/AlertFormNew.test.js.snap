@@ -57,6 +57,14 @@ exports[`Alert Form Component should render the alert form component correctly 1
                     "label": "Block Bounce Rate",
                     "value": "block_bounce_rate",
                   },
+                  Object {
+                    "label": "Hard Bounce Rate",
+                    "value": "hard_bounce_rate",
+                  },
+                  Object {
+                    "label": "Soft Bounce Rate",
+                    "value": "soft_bounce_rate",
+                  },
                 ]
               }
               validate={[Function]}

@@ -3,7 +3,9 @@ export const FORM_NAME = 'alertForm';
 export const METRICS = {
   monthly_sending_limit: 'Monthly Sending Limit',
   health_score: 'Health Score',
-  block_bounce_rate: 'Block Bounce Rate'
+  block_bounce_rate: 'Block Bounce Rate',
+  hard_bounce_rate: 'Hard Bounce Rate',
+  soft_bounce_rate: 'Soft Bounce Rate'
 };
 
 export const FILTERS_FRIENDLY_NAMES = {
