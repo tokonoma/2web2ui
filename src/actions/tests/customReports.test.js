@@ -6,6 +6,10 @@ jest.mock('../helpers/sparkpostApiRequest', () => jest.fn((a) => a));
 describe('Action Creator: Custom Reports', () => {
   let mockStore;
 
+  function getArgs(mock) {
+    return mock.getActions()[0].meta.data.options.ui;
+  }
+
   describe('with existing reports', () => {
     beforeEach(() => {
       mockStore = createMockStore({
@@ -28,12 +32,22 @@ describe('Action Creator: Custom Reports', () => {
         name: 'report bar',
         url: 'test-url-overwrite'
       }));
-      expect(mockStore.getActions()).toMatchSnapshot();
+
+      expect(getArgs(mockStore)).toEqual({
+        customReports: [
+          { name: 'report foo', url: 'test-url' },
+          { name: 'report bar', url: 'test-url-overwrite' }
+        ]
+      });
     });
 
     it('should dispatch a delete report action', () => {
       mockStore.dispatch(actions.deleteReport('report foo'));
-      expect(mockStore.getActions()).toMatchSnapshot();
+      expect(getArgs(mockStore)).toEqual({
+        customReports: [
+          { name: 'report bar', url: 'test-url' }
+        ]
+      });
     });
   });
 
@@ -49,12 +63,18 @@ describe('Action Creator: Custom Reports', () => {
         name: 'report foo',
         url: 'test-url-baz'
       }));
-      expect(mockStore.getActions()).toMatchSnapshot();
+      expect(getArgs(mockStore)).toEqual({
+        customReports: [
+          { name: 'report foo', url: 'test-url-baz' }
+        ]
+      });
     });
 
     it('should dispatch a delete report action', () => {
       mockStore.dispatch(actions.deleteReport('report foo'));
-      expect(mockStore.getActions()).toMatchSnapshot();
+      expect(getArgs(mockStore)).toEqual({
+        customReports: false
+      });
     });
   });
 });
