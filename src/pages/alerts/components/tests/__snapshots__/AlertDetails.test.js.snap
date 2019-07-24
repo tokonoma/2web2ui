@@ -2,228 +2,164 @@
 
 exports[`Alert Details Component should render the alert details component correctly 1`] = `
 <Panel>
-  <Panel.Section
-    className="Panel"
-  >
-    <span
-      className="Subtitle"
+  <Panel.Section>
+    <h3
+      className="Title"
     >
       Alert Details
-    </span>
-    <span
-      className="ButtonGroup"
+    </h3>
+    <Button
+      className="Button"
+      component={[Function]}
+      primary={true}
+      size="default"
+      to="/alerts-new/edit/alert-id"
     >
-      <Button
-        className="Button"
-        component={[Function]}
-        primary={true}
-        size="default"
-        to="/alerts-new/edit/alert-id"
-      >
-        Edit
-      </Button>
-    </span>
+      Edit
+    </Button>
   </Panel.Section>
   <Panel.Section
-    className="Panel"
     key="0"
   >
-    <Grid>
-      <Grid.Column
-        md={2}
-        xs={12}
-      >
-        Alert Metric: 
-      </Grid.Column>
-      <Grid.Column
-        md={10}
-        xs={12}
-      >
-        <span
-          className="AlertName"
-        >
-          Health Score
-        </span>
-      </Grid.Column>
-    </Grid>
+    <LabelledValue
+      label="Alert Metric:"
+      value="Health Score"
+    />
   </Panel.Section>
   <Panel.Section
-    className="Panel"
     key="1"
   >
-    <Grid>
-      <Grid.Column
-        md={2}
-        xs={12}
-      >
-        Filtered By: 
-      </Grid.Column>
-      <Grid.Column
-        md={10}
-        xs={12}
-      >
-        <span
-          key="subaccounts"
-        >
-          Subaccounts: 
+    <LabelledValue
+      label="Evaluated:"
+      value={
+        <React.Fragment>
+          <Tag
+            className="FirstTag"
+          >
+            Value
+          </Tag>
+          below
           <Tag
             className="Tags"
-            key="-1"
           >
-            -1
+            80
+            
           </Tag>
-        </span>
-        <span
-          key="mailbox_provider"
-        >
-          and 
-          Mailbox Provider
-          : 
-          <Tag
-            className="Tags"
-            key="mailbox_provider-gmail"
-          >
-            Gmail
-          </Tag>
-        </span>
-      </Grid.Column>
-    </Grid>
+        </React.Fragment>
+      }
+    />
   </Panel.Section>
   <Panel.Section
-    className="Panel"
     key="2"
   >
-    <Grid>
-      <Grid.Column
-        md={2}
-        xs={12}
-      >
-        Evaluated:
-      </Grid.Column>
-      <Grid.Column
-        md={10}
-        xs={12}
-      >
-        <Tag
-          className="Tags"
-        >
-          Value
-        </Tag>
-        below
-        <Tag
-          className="Tags"
-        >
-          80
-        </Tag>
-      </Grid.Column>
-    </Grid>
+    <LabelledValue
+      label="Filtered By:"
+      value={
+        Array [
+          <span>
+            Subaccounts: 
+            <Tag
+              className="Tags"
+            >
+              -1
+            </Tag>
+          </span>,
+          <span>
+            and 
+            Mailbox Provider
+            : 
+            <Tag
+              className="Tags"
+            >
+              Gmail
+            </Tag>
+          </span>,
+        ]
+      }
+    />
   </Panel.Section>
   <Panel.Section
-    className="Panel"
     key="3"
   >
-    <Grid>
-      <Grid.Column
-        md={2}
-        xs={12}
-      >
-        Notify:
-      </Grid.Column>
-      <Grid.Column
-        md={10}
-        xs={12}
-      >
-        <div
-          key="email"
-        >
-          Email: 
-          <Tag
-            className="TagsWithIcon"
-            key="Myemail@email.com"
-          >
-            <EmailIcon
-              className="Icon"
-            />
-            <span
-              className="TagText"
+    <LabelledValue
+      label="Notify:"
+      value={
+        <React.Fragment>
+          <div>
+            Email: 
+            <Tag
+              className="TagsWithIcon"
             >
-              Myemail@email.com
-            </span>
-          </Tag>
-          <Tag
-            className="TagsWithIcon"
-            key="email@ddress.com"
-          >
-            <EmailIcon
-              className="Icon"
-            />
-            <span
-              className="TagText"
+              <EmailIcon
+                className="Icon"
+              />
+              <span
+                className="TagText"
+              >
+                Myemail@email.com
+              </span>
+            </Tag>
+            <Tag
+              className="TagsWithIcon"
             >
-              email@ddress.com
-            </span>
-          </Tag>
-        </div>
-        <div
-          key="slack"
-        >
-          Slack
-          : 
-          <Tag
-            className="TagsWithIcon"
-          >
-            <SlackIcon
-              className="Icon"
-            />
-            <span
-              className="TagText"
+              <EmailIcon
+                className="Icon"
+              />
+              <span
+                className="TagText"
+              >
+                email@ddress.com
+              </span>
+            </Tag>
+          </div>
+          <div>
+            Slack
+            : 
+            <Tag
+              className="TagsWithIcon"
             >
-              https://hooks.slack.com/services/X
-            </span>
-          </Tag>
-        </div>
-        <div
-          key="webhook"
-        >
-          Webhook
-          : 
-          <Tag
-            className="TagsWithIcon"
-          >
-            <WebhookIcon
-              className="Icon"
-            />
-            <span
-              className="TagText"
+              <SlackIcon
+                className="Icon"
+              />
+              <span
+                className="TagText"
+              >
+                https://hooks.slack.com/services/X
+              </span>
+            </Tag>
+          </div>
+          <div>
+            Webhook
+            : 
+            <Tag
+              className="TagsWithIcon"
             >
-              target.com/200
-            </span>
-          </Tag>
-        </div>
-      </Grid.Column>
-    </Grid>
+              <WebhookIcon
+                className="Icon"
+              />
+              <span
+                className="TagText"
+              >
+                target.com/200
+              </span>
+            </Tag>
+          </div>
+        </React.Fragment>
+      }
+    />
   </Panel.Section>
   <Panel.Section
-    className="Panel"
     key="4"
   >
-    <Grid>
-      <Grid.Column
-        md={2}
-        xs={12}
-      >
-        Status:
-      </Grid.Column>
-      <Grid.Column
-        md={10}
-        xs={12}
-      >
+    <LabelledValue
+      label="Active:"
+      value={
         <Connect(AlertToggle)
           id="alert-id"
           muted={false}
         />
-      </Grid.Column>
-    </Grid>
+      }
+    />
   </Panel.Section>
 </Panel>
 `;
