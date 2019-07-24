@@ -15,6 +15,7 @@ describe('report helpers', () => {
 
     beforeEach(() => {
       dateHelpers.getRelativeDates = jest.fn(() => ({}));
+      dateHelpers.relativeDateOptions = [{ value: '7days', label: 'Last 7 Days' }];
     });
 
     it('should parse search with missing range', () => {
@@ -29,9 +30,15 @@ describe('report helpers', () => {
     });
 
     it('uses to relative range with valid from & to', () => {
-      const search = `?${filters}&range=week&from=2019-02-09T02%3A00%3A00Z&to=2019-02-16T02%3A59%3A59Z&${metrics}`;
+      const search = `?${filters}&range=7days&from=2019-02-09T02%3A00%3A00Z&to=2019-02-16T02%3A59%3A59Z&${metrics}`;
       reports.parseSearch(search);
-      expect(dateHelpers.getRelativeDates).toHaveBeenCalledWith('week');
+      expect(dateHelpers.getRelativeDates).toHaveBeenCalledWith('7days');
+    });
+
+    it('uses to default to one day with an invalid range', () => {
+      const search = `?${filters}&range=1millionyears&from=2019-02-09T02%3A00%3A00Z&to=2019-02-16T02%3A59%3A59Z&${metrics}`;
+      reports.parseSearch(search);
+      expect(dateHelpers.getRelativeDates).toHaveBeenCalledWith('day');
     });
 
     it('defaults to relative range for invalid custom from or to', () => {

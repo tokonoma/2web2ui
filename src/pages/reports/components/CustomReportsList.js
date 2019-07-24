@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { Modal, Button, Panel } from '@sparkpost/matchbox';
 import ReportRow from './CustomReportRow';
 
-function CustomReportsList({ deleting, handleLoad, onDelete, reports, setName }) {
+export function CustomReportsList({ deleting, handleLoad, onDelete, reports, setName }) {
   const [open, setOpen] = React.useState(false);
 
   const reportList = React.useMemo(() => {

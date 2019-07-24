@@ -15,7 +15,7 @@ import styles from './CustomReports.module.scss';
 
 const REPORT_LIMIT = 10;
 
-function CustomReports(props) {
+export function CustomReports(props) {
   const { addFilters, deleteReport, clearFilters, searchOptions, loading, refreshReportOptions, reports, saveReport } = props;
 
   const [name, setName] = React.useState('');
@@ -36,7 +36,10 @@ function CustomReports(props) {
       toSave = _.omit(toSave, ['to', 'from']);
     }
 
-    saveReport({ name, url: qs.stringify(toSave) });
+    saveReport({
+      name: name.trim(),
+      url: qs.stringify(toSave)
+    });
   }
 
   function handleLoad(report) {
