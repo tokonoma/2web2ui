@@ -1,0 +1,96 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Action Creator: Custom Reports with existing reports should dispatch a delete report action 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "data": Object {
+        "options": Object {
+          "ui": Object {
+            "customReports": Array [
+              Object {
+                "name": "report bar",
+                "url": "test-url",
+              },
+            ],
+          },
+        },
+      },
+      "method": "PUT",
+      "url": "/v1/users/testname",
+    },
+    "type": "UPDATE_USER_UI_OPTIONS",
+  },
+]
+`;
+
+exports[`Action Creator: Custom Reports with existing reports should dispatch a save report action 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "data": Object {
+        "options": Object {
+          "ui": Object {
+            "customReports": Array [
+              Object {
+                "name": "report foo",
+                "url": "test-url",
+              },
+              Object {
+                "name": "report bar",
+                "url": "test-url-overwrite",
+              },
+            ],
+          },
+        },
+      },
+      "method": "PUT",
+      "url": "/v1/users/testname",
+    },
+    "type": "UPDATE_USER_UI_OPTIONS",
+  },
+]
+`;
+
+exports[`Action Creator: Custom Reports with no reports should dispatch a delete report action 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "data": Object {
+        "options": Object {
+          "ui": Object {
+            "customReports": false,
+          },
+        },
+      },
+      "method": "PUT",
+      "url": "/v1/users/testname",
+    },
+    "type": "UPDATE_USER_UI_OPTIONS",
+  },
+]
+`;
+
+exports[`Action Creator: Custom Reports with no reports should dispatch a save report action 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "data": Object {
+        "options": Object {
+          "ui": Object {
+            "customReports": Array [
+              Object {
+                "name": "report foo",
+                "url": "test-url-baz",
+              },
+            ],
+          },
+        },
+      },
+      "method": "PUT",
+      "url": "/v1/users/testname",
+    },
+    "type": "UPDATE_USER_UI_OPTIONS",
+  },
+]
+`;
