@@ -42,7 +42,7 @@ export class CancellationPanel extends React.Component {
           If you choose to cancel your account, it will be cancelled at the end of your billing cycle. You can change your
           mind at any time until 8am UTC on the date of cancellation.
         </p>
-        <p>
+        <div>
           <span>Before your cancellation date:</span>
           <ul>
             <li>
@@ -55,8 +55,8 @@ export class CancellationPanel extends React.Component {
               You may not use our recipient validation feature.
             </li>
           </ul>
-        </p>
-        <p>
+        </div>
+        <div>
           <span>After your cancellation date:</span>
           <ul>
             <li>
@@ -69,7 +69,7 @@ export class CancellationPanel extends React.Component {
               Any dedicated IPs on your account will be unrecoverable and may be assigned to other SparkPost accounts.
             </li>
           </ul>
-        </p>
+        </div>
         <div>
           <Brightback
             config={config.brightback.cancelConfig}
