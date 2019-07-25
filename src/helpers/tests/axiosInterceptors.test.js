@@ -4,12 +4,11 @@ import {
   sparkpostErrorHandler
 } from '../axiosInterceptors';
 
-import {
-  sparkpost
-} from '../axiosInstances';
 
 let err;
 let requestConfig;
+
+const mockAxiosInstance = jest.fn();
 
 describe('Sparkpost Axios error interceptor', () => {
   beforeEach(() => {
@@ -32,8 +31,8 @@ describe('Sparkpost Axios error interceptor', () => {
       err.response.status = 500;
       err.config.retries = retries;
       const expected = retries ? retries + 1 : 1;
-      await sparkpostErrorHandler(sparkpost)(err);
-      expect(sparkpost).toHaveBeenCalledWith({ ...requestConfig, retries: expected });
+      await sparkpostErrorHandler(mockAxiosInstance)(err);
+      expect(mockAxiosInstance).toHaveBeenCalledWith({ ...requestConfig, retries: expected });
     }, [
       { name: 'empty' },
       { retries: 0, name: '0 retries' },
@@ -43,8 +42,8 @@ describe('Sparkpost Axios error interceptor', () => {
 
     cases('should retry with different 5XX errors', async ({ status }) => {
       err.response.status = status;
-      await sparkpostErrorHandler(sparkpost)(err);
-      expect(sparkpost).toHaveBeenCalledWith({ ...requestConfig, retries: 1 });
+      await sparkpostErrorHandler(mockAxiosInstance)(err);
+      expect(mockAxiosInstance).toHaveBeenCalledWith({ ...requestConfig, retries: 1 });
     }, [
       { status: 500, name: '500' },
       { status: 502, name: '502' },
@@ -55,17 +54,17 @@ describe('Sparkpost Axios error interceptor', () => {
     it('should not retry 5XX if it is at max retries', () => {
       err.response.status = 500;
       err.config.retries = 3;
-      expect(sparkpostErrorHandler(sparkpost)(err)).rejects.toMatchObject(err);
+      expect(sparkpostErrorHandler(mockAxiosInstance)(err)).rejects.toMatchObject(err);
     });
   });
 
   it('should reject promise if it is a non 5XX error', () => {
-    expect(sparkpostErrorHandler(sparkpost)(err)).rejects.toMatchObject(err);
+    expect(sparkpostErrorHandler(mockAxiosInstance)(err)).rejects.toMatchObject(err);
   });
 
   it('should reject promise if response is undefined', () => {
     const error = { config: err.config };
-    expect(sparkpostErrorHandler(sparkpost)(error)).rejects.toMatchObject(error);
+    expect(sparkpostErrorHandler(mockAxiosInstance)(error)).rejects.toMatchObject(error);
   });
 
 });
