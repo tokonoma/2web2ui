@@ -7,6 +7,8 @@ import FileUploadWrapper from './FileUploadWrapper';
 import { uploadList, resetUploadError } from 'src/actions/recipientValidation';
 import { showAlert } from 'src/actions/globalAlert';
 import config from 'src/config';
+import { isAccountUiOptionSet } from '../../../helpers/conditions/account';
+import { withRouter } from 'react-router-dom';
 
 const formName = 'recipientValidationListForm';
 
@@ -26,15 +28,27 @@ export class ListForm extends Component {
     });
   }
 
+  handleNewUpload = (field) => {
+    const { reset, showAlert, history } = this.props;
+    reset(formName);
+    showAlert({ type: 'success', message: 'New upload' });
+    history.push('/recipient-validation/list/list-id');
+    //TODO: Uploaded and redirect to uploadedlistpage
+  }
+
   componentDidUpdate(prevProps) {
-    const { file, handleSubmit, listError, resetUploadError } = this.props;
+    const { file, handleSubmit, listError, resetUploadError, newListUpload } = this.props;
 
     // Redux form validation does not run in the same render cycle after Field's onChange,
     // thus checking props.valid would not work here *shakes fist*
     const valid = !maxFileSize(config.maxRecipVerifUploadSizeBytes)(file) && !fileExtension('csv', 'txt')(file);
 
     if (file && valid && !listError) {
-      handleSubmit(this.handleUpload)();
+      if (newListUpload) {
+        handleSubmit(this.handleNewUpload)();
+      } else {
+        handleSubmit(this.handleUpload)();
+      }
     }
 
     // Resets API error post-submit for the subsequent submit after an error
@@ -63,11 +77,14 @@ export class ListForm extends Component {
 
 const WrappedForm = reduxForm({ form: formName })(ListForm);
 
-export default connect((state) => {
+const mapStateToProps = (state) => {
   const selector = formValueSelector(formName);
   return {
     file: selector(state, 'csv'),
     listError: state.recipientValidation.listError,
-    uploading: state.recipientValidation.uploadLoading
+    uploading: state.recipientValidation.uploadLoading,
+    newListUpload: isAccountUiOptionSet('recipientValidationV2')(state)
   };
-}, { uploadList, showAlert, resetUploadError })(WrappedForm);
+};
+
+export default withRouter(connect(mapStateToProps, { uploadList, showAlert, resetUploadError })(WrappedForm));

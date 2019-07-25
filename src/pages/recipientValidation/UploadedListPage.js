@@ -4,6 +4,7 @@ import { Link, withRouter } from 'react-router-dom';
 import UploadedListForm from './components/UploadedListForm';
 import { formatDate, formatTime } from 'src/helpers/date';
 import { connect } from 'react-redux';
+import { showAlert } from 'src/actions/globalAlert';
 
 class UploadedListPage extends Component {
 
@@ -20,6 +21,13 @@ class UploadedListPage extends Component {
       <strong>{formatTime(date)}</strong>
     </div>
   )
+
+  handleSubmit = () => {
+    const { showAlert } = this.props;
+    //TODO: Replace with job trigger
+    showAlert({ message: 'Oh yeah' });
+  }
+
   render() {
     const { batch_status } = this.props;
     return (
@@ -29,7 +37,12 @@ class UploadedListPage extends Component {
             {this.renderTitle()}
           </Panel.Section>
           <Panel.Section>
-            {batch_status === 'queued_for_batch' ? <UploadedListForm /> : <div>List Results</div>}
+            {batch_status === 'queued_for_batch'
+              ? <UploadedListForm
+                onSubmit={this.handleSubmit}
+              />
+              : <div>List Results</div>
+            }
           </Panel.Section>
         </Panel>
       </Page>
@@ -38,7 +51,7 @@ class UploadedListPage extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  batch_status: 'queued_for_batch'
+  batch_status: 'queued_for_batch' //TODO: Replace with status of job
 });
 
-export default withRouter(connect(mapStateToProps)(UploadedListPage));
+export default withRouter(connect(mapStateToProps, { showAlert })(UploadedListPage));

@@ -33,6 +33,7 @@ export default class FileUploadWrapper extends Component {
       return (
         <fieldset className={styles.Field}>
           <h3 className={styles.Header}>Uploading...</h3>
+          <p>Your list will be ready to validate in just a moment.</p>
           <div className={styles.LoadingWrapper}><Loading /></div>
         </fieldset>
       );

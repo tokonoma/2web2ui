@@ -10,6 +10,38 @@ export function uploadList(data) {
     }
   });
 }
+//TODO: Wait for endpoint
+// export function getList() {
+//   return sparkpostApiRequest({
+//     type: 'GET_JOB_LIST',
+//     meta: {
+//       method: 'GET',
+//       url: 'v1/recipient-validation/list'
+//     }
+//   });
+// }
+
+//TODO: wait for endpoint
+// export function uploadListNew(data) {
+//   return sparkpostApiRequest({
+//     type: 'UPLOAD_RECIPIENT_VALIDATION_LIST',
+//     meta: {
+//       method: 'POST',
+//       url: 'v1/recipient-validation/list',
+//       data
+//     }
+//   });
+// }
+
+//TODO: wait for endpoint
+// export function triggerJob(listId) {
+//   return sparkpostApiRequest({type: 'TRIGGER_JOB',
+//     meta: {
+//       method: 'POST',
+//       url: `v1/recipient-validation/${listId}`
+//     }
+//   });
+// }
 
 export function singleAddress(address) {
   return sparkpostApiRequest({

@@ -39,7 +39,7 @@ class UploadedListForm extends React.Component {
   handleModal = (showPriceModal = false) => () => this.setState({ showPriceModal });
 
   render() {
-    const { count = 123321, currentUsage = 1234321, handleSubmit } = this.props;
+    const { count = 123321, currentUsage = 1234321, onSubmit } = this.props;
 
     return (
       <div style={{ padding: '12px' }}>
@@ -59,7 +59,7 @@ class UploadedListForm extends React.Component {
           </Grid.Column>
         </Grid>
         <div className={styles.ButtonRow}>
-          <Button className={styles.ActionButton} onClick={handleSubmit} color='orange'>Validate</Button>
+          <Button className={styles.ActionButton} onClick={onSubmit} color='orange'>Validate</Button>
           <Button className={styles.ActionButton} outline component={Link} to='/recipient-validation'>No, thanks</Button>
         </div>
         <Modal open={this.state.showPriceModal} onClose={this.handleModal(false)}>

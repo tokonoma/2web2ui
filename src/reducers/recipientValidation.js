@@ -26,6 +26,21 @@ export default (state = initialState, { meta, payload, type }) => {
     case 'UPLOAD_RECIPIENT_VALIDATION_LIST_FAIL':
       return { ...state, uploadLoading: false, listError: payload };
 
+      //TODO: Replace UPLOAD_RECIPIENT_VALIDATION_LIST;
+
+    case 'UPLOAD_RV_LIST_NEW_PENDING':
+      return { ...state, uploadLoading: true };
+
+    case 'UPLOAD_RV_LIST_NEW_SUCCESS':
+      return {
+        ...state,
+        uploadLoading: false,
+        latest: payload.list_id
+      };
+
+    case 'UPLOAD_RV_LIST_NEW_FAIL':
+      return { ...state, uploadLoading: false, listError: payload };
+
     case 'RESET_RECIPIENT_VALIDATION_ERROR':
       return { ...state, listError: null };
 
