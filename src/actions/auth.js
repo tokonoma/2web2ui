@@ -58,6 +58,7 @@ export function authenticate(username, password, rememberMe = false, access_toke
         const authData = { ...data, username };
 
         //Skips website login if token login
+        //Token login is used for internal use, so won't need website auth
         if (!isTokenLogin) {
           dispatch(websiteAuth.authenticate(username, password, rememberMe));
         }
