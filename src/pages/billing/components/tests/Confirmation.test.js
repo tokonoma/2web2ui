@@ -49,6 +49,13 @@ describe('Confirmation: ', () => {
     isFree: true
   };
 
+  const oldFree = {
+    monthly: 0,
+    volume: 100,
+    code: 'old-zero',
+    isFree: true
+  };
+
   beforeEach(() => {
     props = {
       current,
@@ -85,6 +92,12 @@ describe('Confirmation: ', () => {
   it('should render correctly with a downgrade to free', () => {
     wrapper.setProps({ selected: free, billingEnabled: true });
     expect(wrapper).toMatchSnapshot();
+    expect(getButton({ enabled: true, to: 'redirect' })).toMatchSnapshot();
+  });
+
+  it('should render correctly with an old free to free plan change', () => {
+    wrapper.setProps({ selected: free, current: oldFree, billingEnabled: true });
+    expect(wrapper.find('withRouter(Connect(Brightback))').prop('condition')).toEqual(false);
     expect(getButton({ enabled: true, to: 'redirect' })).toMatchSnapshot();
   });
 
