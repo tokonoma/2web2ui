@@ -15,7 +15,6 @@
 
 .Panel {
   padding: rem(20) rem(35);
-  line-height: rem(30);
 }
 
 .ButtonGroup {
@@ -29,13 +28,13 @@
 }
 
 .Tags {
-  margin: 0 rem(5);
+  margin: 0 rem(5) rem(10);
   position: relative;
   top: rem(-1);
 }
 
 .TagsWithIcon {
-  margin: 0 rem(5);
+  margin: 0 rem(5) rem(10);
   position: relative;
   top: rem(-1);
 

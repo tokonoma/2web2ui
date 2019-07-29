@@ -1,6 +1,8 @@
 import _ from 'lodash';
 import { isEmailAddress } from 'src/helpers/email';
 
+
+// @deprecated
 export default function validateEmailList(values) {
   if (!values.length) {
     return;

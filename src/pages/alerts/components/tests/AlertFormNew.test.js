@@ -77,8 +77,8 @@ describe('Alert Form Component', () => {
   });
 
   it('should show error when every notification channel is empty', () => {
-    const formMeta = { email_addresses: { touched: true }};
-    const formErrors = { email_addresses: 'At least one notification channel must not be empty' };
+    const formMeta = { emails: { touched: true }};
+    const formErrors = { emails: 'At least one notification channel must not be empty' };
     wrapper.setProps({ formMeta, formErrors });
     expect(wrapper.find('Error')).toExist();
   });

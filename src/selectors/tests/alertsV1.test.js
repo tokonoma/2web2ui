@@ -70,7 +70,9 @@ describe('Alerts Selectors: ', () => {
       mailbox_provider: [],
       sending_domain: [],
       single_filter: { filter_type: 'none', filter_values: []},
-      email_addresses: 'sparky@sparkpost.com, test@foo.com',
+      emails: 'sparky@sparkpost.com, test@foo.com',
+      slack: '',
+      webhook: '',
       source: 'raw',
       operator: 'lt',
       value: 80,
@@ -130,6 +132,17 @@ describe('Alerts Selectors: ', () => {
             { filter_type: 'mailbox_provider', filter_values: ['b']},
             { filter_type: 'sending_domain', filter_values: ['c']}
           ]
+        }
+      },
+      'with slack and webhook channels': {
+        formData: { ...formData, slack: 'target1', webhook: 'target2' },
+        apiData: {
+          ...apiData,
+          channels: {
+            emails: ['sparky@sparkpost.com', 'test@foo.com'],
+            slack: { target: 'target1' },
+            webhook: { target: 'target2' }
+          }
         }
       }
     };

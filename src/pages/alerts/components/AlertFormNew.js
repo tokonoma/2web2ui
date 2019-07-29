@@ -8,17 +8,42 @@ import FilterFields from './fields/FilterFields';
 import EvaluatorFields from './fields/EvaluatorFields';
 import SubaccountField from './fields/SubaccountsField';
 import getOptions from '../helpers/getOptions';
-import { getFormSpec } from '../helpers/alertForm';
-import { METRICS, REALTIME_FILTERS } from '../constants/formConstants';
-import { Email } from '../constants/notificationChannelIcons';
+import { getFormSpec, capitalizeFirstLetter } from '../helpers/alertForm';
+import { METRICS, REALTIME_FILTERS, NOTIFICATION_CHANNELS } from '../constants/formConstants';
+import { EmailIcon, SlackIcon, WebhookIcon } from 'src/components/icons';
 import styles from './AlertForm.module.scss';
 import withAlertForm from './AlertFormNew.container';
 
 // Helpers & Validation
-import { required, maxLength } from 'src/helpers/validation';
-import validateEmailList from '../helpers/validateEmailList';
+import { emails, ifStringPresent, maxLength, required } from 'src/helpers/validation';
 
 const metricsOptions = [{ value: '', label: 'Select Metric', disabled: true }, ...getOptions(METRICS)];
+
+const notificationChannelData = {
+  emails: {
+    icon: <EmailIcon />,
+    subtitle: 'You and your team can receive alerts through email',
+    fieldProps: {
+      validate: ifStringPresent(emails),
+      placeholder: 'example@email.com',
+      multiline: true
+    }
+  },
+  slack: {
+    icon: <SlackIcon />,
+    subtitle: 'Integrate alerts into your Slack channel',
+    fieldProps: {
+      placeholder: 'https://hooks.slack.com/services/T00/B00/XX '
+    }
+  },
+  webhook: {
+    icon: <WebhookIcon />,
+    subtitle: 'Create a webhook for your alerts',
+    fieldProps: {
+      placeholder: 'https://example.com/webhook-target'
+    }
+  }
+};
 
 export class AlertFormNew extends Component {
 
@@ -37,10 +62,27 @@ export class AlertFormNew extends Component {
     change('value', 0);
   };
 
-  isNotificationChannelsEmpty = (formMeta, formErrors) => {
-    const channels = ['email_addresses'];
-    return channels.some((channel) => (formMeta[channel] && formMeta[channel].touched) && formErrors[channel] === 'At least one notification channel must not be empty');
-  };
+  renderNotificationChannels = () => NOTIFICATION_CHANNELS.map((channel) =>
+    (
+      <Expandable
+        icon={notificationChannelData[channel].icon}
+        title={capitalizeFirstLetter(channel)}
+        id={channel}
+        subtitle={notificationChannelData[channel].subtitle}
+        key={channel}>
+        <Field
+          name={channel}
+          component={TextFieldWrapper}
+          disabled={this.props.submitting}
+          {...notificationChannelData[channel].fieldProps}
+        />
+      </Expandable>
+    )
+  );
+
+  isNotificationChannelsEmpty = (formMeta, formErrors) =>
+    NOTIFICATION_CHANNELS.some((channel) =>
+      (formMeta[channel] && formMeta[channel].touched) && formErrors[channel] === 'At least one notification channel must not be empty');
 
   render() {
     const {
@@ -69,7 +111,7 @@ export class AlertFormNew extends Component {
                   name='name'
                   component={TextFieldWrapper}
                   disabled={submitting}
-                  validate={[required, maxLength(24)]}
+                  validate={[required, maxLength(50)]}
                 />
                 <div className = {styles.MetricSelector}>
                   <label>Alert Metric</label>
@@ -102,20 +144,7 @@ export class AlertFormNew extends Component {
                 }
                 <label> Notify Me</label>
                 {channelsError && <Error wrapper='div' error='At least one notification channel must be not empty'/>}
-                <Expandable
-                  icon = {<Email/>}
-                  title="Email"
-                  id="email"
-                  subtitle="You and your team can receive alerts through email">
-                  <Field
-                    name='email_addresses'
-                    component={TextFieldWrapper}
-                    disabled={submitting}
-                    validate={validateEmailList}
-                    placeholder='list of comma delimited emails'
-                    multiline
-                  />
-                </Expandable>
+                {this.renderNotificationChannels()}
                 <Button submit primary disabled={pristine || submitting} className={styles.SubmitButton}>{submitText}</Button>
               </Panel.Section>
             </Grid.Column>

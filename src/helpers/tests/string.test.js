@@ -1,6 +1,7 @@
 import {
   snakeToFriendly, snakeToCamel, slugify, slugToFriendly, shrinkToFit, stringToArray,
-  stringifyTypeaheadfilter, stripTags, decodeBase64, tagAsCopy, trimWhitespaces, pluralString
+  multilineStringToArray, stringifyTypeaheadfilter, stripTags, decodeBase64,
+  tagAsCopy, trimWhitespaces, pluralString
 } from '../string';
 
 describe('snakeToFrindly', () => {
@@ -93,6 +94,18 @@ describe('stringToArray', () => {
     expect(stringToArray('one, 2, 3,4')).toEqual(['one', '2', '3', '4']);
     expect(stringToArray('1')).toEqual(['1']);
     expect(stringToArray('')).toEqual([]);
+  });
+});
+
+describe('multilineStringToArray', () => {
+  it('should properly parse a comma and newline separated string', () => {
+    expect(multilineStringToArray('one, 2,3')).toEqual(['one', '2', '3']);
+    expect(multilineStringToArray('one\n 2\n3')).toEqual(['one', '2', '3']);
+    expect(multilineStringToArray('one, 2\n3')).toEqual(['one', '2', '3']);
+    expect(multilineStringToArray('1')).toEqual(['1']);
+    expect(multilineStringToArray('')).toEqual([]);
+    expect(multilineStringToArray(', \n')).toEqual([]);
+    expect(multilineStringToArray('one,\n two')).toEqual(['one', 'two']);
   });
 });
 

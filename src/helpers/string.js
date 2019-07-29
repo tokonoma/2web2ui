@@ -51,14 +51,19 @@ export function shrinkToFit(string, targetLen) {
 /**
  * Converts a comma separated string into an array
  */
-export function stringToArray(string) {
-  string = _.trim(string, ' ,'); // strip whitespace and commas
-  if (!string) {
-    return [];
-  }
+export const stringToArray = (str, delimiter = ',') => (
+  str.split(delimiter)
+    .map((part) => part.trim())
+    .filter(Boolean)
+);
 
-  return string.split(',').map((item) => _.trim(item));
-}
+// Split a string by newlines then a delimiter
+export const multilineStringToArray = (str, delimiter) => (
+  _.flatMap(
+    stringToArray(str, '\n')
+      .map((part) => stringToArray(part, delimiter))
+  )
+);
 
 export function stringifyTypeaheadfilter(filter) {
   const subaccount = filter.type === 'Subaccount' ? `:${filter.id}` : '';

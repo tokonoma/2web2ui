@@ -1,7 +1,7 @@
 import validateEmailList from '../validateEmailList';
 
 test('all valid', () => {
-  expect(validateEmailList('  email@ddress1.com  ,email@ddress2.com')).toEqual(undefined);
+  expect(validateEmailList('  email@ddress1.com  ,email@ddress1.com')).toEqual(undefined);
 });
 
 test('invalid, but at least one valid', () => {

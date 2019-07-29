@@ -41,6 +41,12 @@ export const OPERATOR_FRIENDLY_NAMES = {
   lt: 'Below'
 };
 
+export const NOTIFICATION_CHANNELS = [
+  'emails',
+  'slack',
+  'webhook'
+];
+
 export const DEFAULT_FORM_VALUES = {
   name: '',
   metric: '',
@@ -52,6 +58,5 @@ export const DEFAULT_FORM_VALUES = {
   source: 'raw',
   operator: 'gt',
   value: 0,
-  muted: false,
-  email_addresses: ''
+  muted: false
 };

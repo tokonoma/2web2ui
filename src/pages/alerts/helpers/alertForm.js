@@ -81,3 +81,5 @@ export const getEvaluatorOptions = (metric, source) => {
 
   return { suffix, operatorOptions, sliderLabel };
 };
+
+export const capitalizeFirstLetter = (word) => word.charAt(0).toUpperCase() + word.slice(1);

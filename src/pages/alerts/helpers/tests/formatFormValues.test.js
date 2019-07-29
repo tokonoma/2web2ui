@@ -12,10 +12,12 @@ const formData = {
   mailbox_provider: [],
   sending_domain: [],
   single_filter: { filter_type: 'none', filter_values: []},
-  email_addresses: emails,
   source: 'raw',
   operator: 'lt',
   value: 80,
+  emails,
+  slack: '',
+  webhook: '',
   muted: false
 };
 
@@ -24,12 +26,12 @@ const apiData = {
   metric: 'health_score',
   subaccounts: [-1],
   filters: [],
-  channels: { emails: emailAsArray },
   threshold_evaluator: {
     source: 'raw',
     operator: 'lt',
     value: 80
   },
+  channels: { emails: emailAsArray },
   muted: false
 };
 
@@ -76,6 +78,17 @@ const testCases =
             { filter_type: 'mailbox_provider', filter_values: ['b']},
             { filter_type: 'sending_domain', filter_values: ['c']}
           ]
+        }
+      },
+      'with slack and webhook channels': {
+        formData: { ...formData, slack: 'target1', webhook: 'target2' },
+        apiData: {
+          ...apiData,
+          channels: {
+            emails: emailAsArray,
+            slack: { target: 'target1' },
+            webhook: { target: 'target2' }
+          }
         }
       }
     };

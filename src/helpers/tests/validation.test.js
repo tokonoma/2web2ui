@@ -16,7 +16,15 @@ const cases = {
   },
   email: {
     good: ['roberto@baggio.example.com', 'x@example.com'],
-    bad: ['bugblatter', 'not.an.email.example.com']
+    bad: ['', 'bugblatter', 'not.an.email.example.com']
+  },
+  emails: {
+    good: [
+      'test@example.com',
+      'test@example.com, test@example.com',
+      'test@example.com\n test@example.com'
+    ],
+    bad: ['', 'invalid', 'test@example.com, invalid']
   },
   emailLocal: {
     good: ['roberto.baggio', '101'],
@@ -157,6 +165,22 @@ describe('Memoized validation helpers', () => {
         expect(instance(arg)).toBeDefined();
       });
     });
+  });
+});
+
+describe('ifStringPresent', () => {
+  const validator = () => 'I\'m always invalid';
+
+  it('returns undefined with undefined', () => {
+    expect(validations.ifStringPresent(validator)()).toBeUndefined();
+  });
+
+  it('returns undefined with empty string', () => {
+    expect(validations.ifStringPresent(validator)('')).toBeUndefined();
+  });
+
+  it('returns invalid message when present', () => {
+    expect(validations.ifStringPresent(validator)('My Value')).toMatch(/invalid/);
   });
 });
 

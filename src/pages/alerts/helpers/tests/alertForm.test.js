@@ -28,11 +28,16 @@ describe('Alert form helper: ', () => {
     expect(alertFormHelper.getFormSpec(metric)).toEqual({});
   });
 
+  it('capitalizeFirstLetter capitalizes first letter.', () => {
+    expect(alertFormHelper.capitalizeFirstLetter('word')).toEqual('Word');
+  });
+
   const expectedRealtimeMetric = {
     suffix: '%',
     operatorOptions: [{ label: 'Below', value: 'lt' }, { label: 'Above', value: 'gt' }],
     sliderLabel: 'Bounce Percentage'
   };
+
   const testCases =
     {
       'Monthly Sending Limit': {

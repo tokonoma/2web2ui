@@ -4,8 +4,21 @@ import { METRICS, FILTERS_FRIENDLY_NAMES, SOURCE_FRIENDLY_NAMES, OPERATOR_FRIEND
 import { MAILBOX_PROVIDERS } from 'src/constants';
 import styles from './AlertDetails.module.scss';
 import AlertToggle from './AlertToggleNew';
-import { Email } from '../constants/notificationChannelIcons';
+import { EmailIcon, SlackIcon, WebhookIcon } from 'src/components/icons';
 import { Link } from 'react-router-dom';
+
+const extraChannels = [
+  {
+    key: 'slack',
+    icon: SlackIcon,
+    label: 'Slack'
+  },
+  {
+    key: 'webhook',
+    icon: WebhookIcon,
+    label: 'Webhook'
+  }
+];
 
 export const AlertDetails = ({ alert, id, subaccountIdToString }) => {
   const { metric, channels = {}, filters = [], subaccounts = [], threshold_evaluator = {}, any_subaccount, muted } = alert;
@@ -58,20 +71,31 @@ export const AlertDetails = ({ alert, id, subaccountIdToString }) => {
   };
 
   const renderNotify = () => {
-    const notifications = [];
-    const { emails } = channels;
-    if (emails && emails.length > 0) {
-      const emailTags = emails.map((email) =>
-        <Tag key={email} className={styles.TagsWithIcon}>
-          <Email className={styles.Icon}/><span className={styles.TagText}>{email}</span>
-        </Tag>);
-      notifications.push(
-        (<div key={'email'}>
-           Email: {emailTags}
-        </div>)
-      );
-    }
-    return notifications;
+    const { emails, ...restChannels } = channels;
+    const visibleExtraChannels = extraChannels.filter(({ key }) => restChannels.hasOwnProperty(key));
+
+    return (
+      <>
+        {emails && emails.length > 0 && (
+          <div key="email">
+            Email: {emails.map((email) => (
+              <Tag key={email} className={styles.TagsWithIcon}>
+                <EmailIcon className={styles.Icon}/>
+                <span className={styles.TagText}>{email}</span>
+              </Tag>
+            ))}
+          </div>
+        )}
+        {visibleExtraChannels.map(({ icon: Icon, key, label }) => (
+          <div key={key}>
+            {label}: <Tag className={styles.TagsWithIcon}>
+              <Icon className={styles.Icon}/>
+              <span className={styles.TagText}>{restChannels[key].target}</span>
+            </Tag>
+          </div>
+        ))}
+      </>
+    );
   };
 
   const detailsMap = [
