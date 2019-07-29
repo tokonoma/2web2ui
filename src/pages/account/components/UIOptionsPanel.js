@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Panel, Toggle, Grid } from '@sparkpost/matchbox';
 import LabelledValue from 'src/components/labelledValue/LabelledValue';
 import { isAccountUiOptionSet } from 'src/helpers/conditions/account';
+import { selectCondition } from 'src/selectors/accessConditionState';
 import { update as updateAccount } from 'src/actions/account';
 import { connect } from 'react-redux';
 
@@ -13,7 +14,7 @@ export class UIOptionsPanel extends Component {
     const body = {
       options: {
         ui: {
-          hideTerminatedSubaccounts: Boolean(!hideTermSubEnabled)
+          hideTerminatedSubaccounts: !hideTermSubEnabled
         }
       }
     };
@@ -24,7 +25,7 @@ export class UIOptionsPanel extends Component {
     const { hideTermSubEnabled, loading } = this.props;
 
     return (
-      <Panel title='UI Options'>
+      <Panel title='Account Options'>
         <Panel.Section>
           <Grid>
             <Grid.Column xs={11}>
@@ -48,7 +49,7 @@ export class UIOptionsPanel extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  hideTermSubEnabled: isAccountUiOptionSet('hideTerminatedSubaccounts')(state),
+  hideTermSubEnabled: selectCondition(isAccountUiOptionSet('hideTerminatedSubaccounts'))(state),
   loading: state.account.updateLoading
 });
 

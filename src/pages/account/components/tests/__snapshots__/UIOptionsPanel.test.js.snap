@@ -10,7 +10,7 @@ exports[`UIOptionsPanel renders 1`] = `
         xs={11}
       >
         <LabelledValue
-          label="Hide Subacounts"
+          label="Hide Subaccounts"
         >
           <p>
             Hide terminated subacounts. Resources associated with terminated subaccounts can still be accessed.

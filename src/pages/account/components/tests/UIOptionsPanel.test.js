@@ -2,30 +2,28 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { UIOptionsPanel } from '../UIOptionsPanel';
 
-let props;
-let wrapper;
+const subject = (props = {}) => shallow(
+  <UIOptionsPanel
+    hideTermSubEnabled={false}
+    updateAccount={() => {}}
+    {...props}
+  />
+);
 
 describe('UIOptionsPanel', () => {
-  beforeEach(() => {
-    props = {
-      hideTermSubEnabled: false,
-      updateAccount: jest.fn()
-    };
-    wrapper = shallow(<UIOptionsPanel {...props} />);
-  });
-
   it('renders', () => {
-    expect(wrapper).toMatchSnapshot();
+    expect(subject()).toMatchSnapshot();
   });
 
   it('renders toggle correctly if option enabled', () => {
-    props.hideTermSubEnabled = true;
-    wrapper = shallow(<UIOptionsPanel {...props} />);
-    expect(wrapper.find('Toggle').prop('checked')).toEqual(true);
+    const wrapper = subject({ hideTermSubEnabled: true });
+    expect(wrapper.find('Toggle')).toHaveProp('checked', true);
   });
 
   it('shoudld toggle', () => {
+    const updateAccount = jest.fn();
+    const wrapper = subject({ updateAccount });
     wrapper.find('Toggle').simulate('change');
-    expect(props.updateAccount).toHaveBeenCalledWith({ options: { ui: { hideTerminatedSubaccounts: true }}});
+    expect(updateAccount).toHaveBeenCalledWith({ options: { ui: { hideTerminatedSubaccounts: true }}});
   });
 });
