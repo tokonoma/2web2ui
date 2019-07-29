@@ -58,6 +58,5 @@ export const DEFAULT_FORM_VALUES = {
   source: 'raw',
   operator: 'gt',
   value: 0,
-  muted: false,
-  emails: ''
+  muted: false
 };

@@ -171,6 +171,10 @@ describe('Memoized validation helpers', () => {
 describe('ifStringPresent', () => {
   const validator = () => 'I\'m always invalid';
 
+  it('returns undefined with undefined', () => {
+    expect(validations.ifStringPresent(validator)()).toBeUndefined();
+  });
+
   it('returns undefined with empty string', () => {
     expect(validations.ifStringPresent(validator)('')).toBeUndefined();
   });

@@ -10,7 +10,9 @@ import Payment from 'payment';
 import moment from 'moment';
 
 // validation gate to only check valiation if string is present
-export const ifStringPresent = (validator) => (str) => str.trim() === '' ? undefined : validator(str);
+export const ifStringPresent = (validator) => (str = '') => (
+  str.trim() === '' ? undefined : validator(str)
+);
 
 export function required(value) {
   return value ? undefined : 'Required';
