@@ -1,15 +1,11 @@
 import validateEmailList from '../validateEmailList';
 
 test('all valid', () => {
-  expect(validateEmailList('  email@ddress1.com  , email@ddress1.com')).toEqual(undefined);
-});
-
-test('all valid separated by newline and commas', () => {
-  expect(validateEmailList(' email@ddress1.com \n email@ddress2.com, email@ddress2.com')).toEqual(undefined);
+  expect(validateEmailList('  email@ddress1.com  ,email@ddress1.com')).toEqual(undefined);
 });
 
 test('invalid, but at least one valid', () => {
-  expect(validateEmailList('  emailaddress1.com  ,email@ddress2.com')).toEqual('Must be a list of valid Email Addresses');
+  expect(validateEmailList('  emailaddress1.com  ,email@ddress2.com')).toEqual('Must be a comma separated list of valid Email Addresses');
 });
 
 test('invalid, none valid', () => {

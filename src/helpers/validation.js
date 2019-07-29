@@ -2,11 +2,15 @@ import _ from 'lodash';
 import { formatBytes } from 'src/helpers/units';
 import { getDuration } from 'src/helpers/date';
 import { toSentence } from 'src/helpers/array';
+import { stringToArrayNewlineAndCommaDelimited } from 'src/helpers/string';
 import { isEmailAddress, isEmailLocalPart, isRecipientEmailAddress } from 'src/helpers/email';
 import { domainRegex, slugRegex } from './regex';
 import isURL from 'validator/lib/isURL';
 import Payment from 'payment';
 import moment from 'moment';
+
+// validation gate to only check valiation if string is present
+export const ifStringPresent = (validator) => (str) => str.trim() === '' ? undefined : validator(str);
 
 export function required(value) {
   return value ? undefined : 'Required';
@@ -14,6 +18,14 @@ export function required(value) {
 
 export function email(value) {
   return isEmailAddress(value) ? undefined : 'Invalid Email';
+}
+
+export function emails(str) {
+  const values = stringToArrayNewlineAndCommaDelimited(str);
+
+  return values.length && values.every(isEmailAddress)
+    ? undefined
+    : 'Must be a comma separated list of valid Email Addresses';
 }
 
 export function emailLocal(value) {

@@ -51,7 +51,7 @@ export function shrinkToFit(string, targetLen) {
 /**
  * Converts a comma separated string into an array
  */
-export function stringToArray(string) {
+export function stringToArray(string, delimiters = [',']) {
   string = _.trim(string, ' ,'); // strip whitespace and commas
   if (!string) {
     return [];

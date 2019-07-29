@@ -15,8 +15,7 @@ import styles from './AlertForm.module.scss';
 import withAlertForm from './AlertFormNew.container';
 
 // Helpers & Validation
-import { required, maxLength } from 'src/helpers/validation';
-import validateEmailList from '../helpers/validateEmailList';
+import { emails, ifStringPresent, maxLength, required } from 'src/helpers/validation';
 
 const metricsOptions = [{ value: '', label: 'Select Metric', disabled: true }, ...getOptions(METRICS)];
 
@@ -25,7 +24,7 @@ const notificationChannelData = {
     icon: <Email/>,
     subtitle: 'You and your team can receive alerts through email',
     fieldProps: {
-      validate: validateEmailList,
+      validate: ifStringPresent(emails),
       placeholder: 'example@email.com',
       multiline: true,
       helpText: 'Max of 10 emails'
