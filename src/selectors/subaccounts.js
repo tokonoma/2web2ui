@@ -2,6 +2,7 @@ import { createSelector } from 'reselect';
 import qs from 'query-string';
 import _ from 'lodash';
 import { isAccountUiOptionSet } from '../helpers/conditions/account';
+import { selectCondition } from 'src/selectors/accessConditionState';
 
 const formatSubaccount = ({ compliance_status = 'active', status = 'active', ...rest }) => {
   const compliance = compliance_status !== 'active';
@@ -12,11 +13,21 @@ const formatSubaccount = ({ compliance_status = 'active', status = 'active', ...
     ...rest
   };
 };
-
+export const getSubaccounts = (state) => state.subaccounts.list;
 export const hasSubaccounts = (state) => state.currentUser.has_subaccounts;
 export const getSubaccount = (state) => state.subaccount;
 
-export const selectSubaccounts = (state) => state.subaccounts.list.map((subaccount) => (formatSubaccount(subaccount)));
+export const selectSubaccounts = createSelector(
+  [getSubaccounts, selectCondition(isAccountUiOptionSet('hideTerminatedSubaccounts'))],
+  (subaccounts, hideTerminatedSubaccounts) => {
+    const visibleSubaccounts = hideTerminatedSubaccounts
+      ? subaccounts.filter(({ status }) => status !== 'terminated')
+      : subaccounts;
+
+    return visibleSubaccounts.map((subaccount) => formatSubaccount(subaccount));
+  }
+);
+
 
 export const selectSubaccount = ({ subaccounts }) => (formatSubaccount(subaccounts.subaccount));
 
@@ -28,15 +39,10 @@ export const selectSubaccountIdFromQuery = (state, props) => qs.parse(props.loca
  * Selects subaccount object from qp
  * Used to fill in initial values for the subaccount typeahead
  */
-export const getSubaccounts = (state) => state.subaccounts.list;
 export const selectSubaccountFromQuery = createSelector(
   [getSubaccounts, selectSubaccountIdFromQuery],
   (subaccounts, id) => _.find(subaccounts, { id: Number(id) })
 );
-
-export const selectFilteredSubaccounts = (state) => _.filter(state.subaccounts.list, ({ status }) =>
-  !isAccountUiOptionSet('hideTerminatedSubaccounts')(state) || status !== 'terminated');
-
 
 export const selectSubaccountIdFromProps = (state, props) => props.subaccountId;
 

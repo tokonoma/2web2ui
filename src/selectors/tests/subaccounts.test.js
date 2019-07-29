@@ -31,7 +31,8 @@ describe('Subaccount selectors', () => {
               name: 'Subby 2'
             }
           ]
-        }
+        },
+        account: { options: {}}
       };
 
       expect(selector.selectSubaccounts(state)).toEqual([
@@ -52,6 +53,31 @@ describe('Subaccount selectors', () => {
       const state = { currentUser: { has_subaccounts: false }};
       expect(selector.hasSubaccounts(state)).toEqual(false);
     });
+
+    it('should return subaccounts without status "terminated" if account UI option "hideTerminatedSubaccounts" is true', () => {
+      const state = {
+        subaccounts: {
+          list: [
+            {
+              compliance_status: 'active',
+              status: 'valid',
+              name: 'Subby 1'
+            },
+            {
+              status: 'terminated',
+              name: 'Subby 2'
+            }
+          ]
+        },
+        account: { options: { ui: { 'hideTerminatedSubaccounts': true }}}
+      };
+      expect(selector.selectSubaccounts(state)).toEqual([{
+        compliance: false,
+        status: 'valid',
+        name: 'Subby 1'
+      }]);
+    });
+
   });
 
   describe('getSubaccountIdFromProps', () => {
