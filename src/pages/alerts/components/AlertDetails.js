@@ -4,9 +4,7 @@ import { METRICS, FILTERS_FRIENDLY_NAMES, SOURCE_FRIENDLY_NAMES, OPERATOR_FRIEND
 import { MAILBOX_PROVIDERS } from 'src/constants';
 import styles from './AlertDetails.module.scss';
 import AlertToggle from './AlertToggleNew';
-import EmailIcon from 'src/components/icons/EmailIcon';
-import SlackIcon from 'src/components/icons/SlackIcon';
-import WebhookIcon from 'src/components/icons/WebhookIcon';
+import { EmailIcon, SlackIcon, WebhookIcon } from 'src/components/icons';
 import { Link } from 'react-router-dom';
 
 const extraChannels = [

@@ -10,9 +10,7 @@ import SubaccountField from './fields/SubaccountsField';
 import getOptions from '../helpers/getOptions';
 import { getFormSpec, capitalizeFirstLetter } from '../helpers/alertForm';
 import { METRICS, REALTIME_FILTERS, NOTIFICATION_CHANNELS } from '../constants/formConstants';
-import EmailIcon from 'src/components/icons/EmailIcon';
-import SlackIcon from 'src/components/icons/SlackIcon';
-import WebhookIcon from 'src/components/icons/WebhookIcon';
+import { EmailIcon, SlackIcon, WebhookIcon } from 'src/components/icons';
 import styles from './AlertForm.module.scss';
 import withAlertForm from './AlertFormNew.container';
 
