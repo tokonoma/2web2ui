@@ -13,7 +13,7 @@ export default function formatFormValues(values) {
     'sending_domain',
     'single_filter',
     ...NOTIFICATION_CHANNELS];
-  const { metric, value, source, operator, single_filter, emails: emailsString, subaccounts, slack, webhook } = values;
+  const { metric, value, source, operator, single_filter, subaccounts } = values;
 
   const any_subaccount = (subaccounts.length === 1 && subaccounts[0] === -2) ? true : undefined;
 
@@ -49,21 +49,29 @@ export default function formatFormValues(values) {
     value
   };
 
-  const emailsArray = multilineStringToArray(emailsString);
+  const channels = {};
+  const emails = values.emails.trim();
+  const slack = values.slack.trim();
+  const webhook = values.webhook.trim();
 
-  const channels = {
-    emails: emailsString ? emailsArray : false,
-    slack: slack ? { target: slack } : false,
-    webhook: webhook ? { target: webhook } : false
-  };
-  const channelsFiltered = _.pickBy(channels, (value) => Boolean(value));
+  if (emails) {
+    channels.emails = multilineStringToArray(emails);
+  }
+
+  if (slack) {
+    channels.slack = { target: slack };
+  }
+
+  if (webhook) {
+    channels.webhook = { target: webhook };
+  }
 
   const keysToChange = {
     subaccounts: any_subaccount ? undefined : subaccounts,
     any_subaccount,
     filters,
     threshold_evaluator,
-    channels: channelsFiltered
+    channels
   };
 
   return _.omit({ ...values, ...keysToChange }, keysToOmit);
