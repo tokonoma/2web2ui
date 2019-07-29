@@ -10,7 +10,9 @@ import SubaccountField from './fields/SubaccountsField';
 import getOptions from '../helpers/getOptions';
 import { getFormSpec, capitalizeFirstLetter } from '../helpers/alertForm';
 import { METRICS, REALTIME_FILTERS, NOTIFICATION_CHANNELS } from '../constants/formConstants';
-import { Email, Webhook, Slack } from '../constants/notificationChannelIcons';
+import EmailIcon from 'src/components/icons/EmailIcon';
+import SlackIcon from 'src/components/icons/SlackIcon';
+import WebhookIcon from 'src/components/icons/WebhookIcon';
 import styles from './AlertForm.module.scss';
 import withAlertForm from './AlertFormNew.container';
 
@@ -21,7 +23,7 @@ const metricsOptions = [{ value: '', label: 'Select Metric', disabled: true }, .
 
 const notificationChannelData = {
   emails: {
-    icon: <Email/>,
+    icon: <EmailIcon />,
     subtitle: 'You and your team can receive alerts through email',
     fieldProps: {
       validate: ifStringPresent(emails),
@@ -30,14 +32,14 @@ const notificationChannelData = {
     }
   },
   slack: {
-    icon: <Slack/>,
+    icon: <SlackIcon />,
     subtitle: 'Integrate alerts into your Slack channel',
     fieldProps: {
       placeholder: 'https://hooks.slack.com/services/T00/B00/XX '
     }
   },
   webhook: {
-    icon: <Webhook/>,
+    icon: <WebhookIcon />,
     subtitle: 'Create a webhook for your alerts',
     fieldProps: {
       placeholder: 'https://example.com/webhook-target'

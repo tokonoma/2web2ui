@@ -4,18 +4,20 @@ import { METRICS, FILTERS_FRIENDLY_NAMES, SOURCE_FRIENDLY_NAMES, OPERATOR_FRIEND
 import { MAILBOX_PROVIDERS } from 'src/constants';
 import styles from './AlertDetails.module.scss';
 import AlertToggle from './AlertToggleNew';
-import { Email, Slack, Webhook } from '../constants/notificationChannelIcons';
+import EmailIcon from 'src/components/icons/EmailIcon';
+import SlackIcon from 'src/components/icons/SlackIcon';
+import WebhookIcon from 'src/components/icons/WebhookIcon';
 import { Link } from 'react-router-dom';
 
 const extraChannels = [
   {
     key: 'slack',
-    icon: Slack,
+    icon: SlackIcon,
     label: 'Slack'
   },
   {
     key: 'webhook',
-    icon: Webhook,
+    icon: WebhookIcon,
     label: 'Webhook'
   }
 ];
@@ -80,7 +82,7 @@ export const AlertDetails = ({ alert, id, subaccountIdToString }) => {
           <div key="email">
             Email: {emails.map((email) => (
               <Tag key={email} className={styles.TagsWithIcon}>
-                <Email className={styles.Icon}/>
+                <EmailIcon className={styles.Icon}/>
                 <span className={styles.TagText}>{email}</span>
               </Tag>
             ))}

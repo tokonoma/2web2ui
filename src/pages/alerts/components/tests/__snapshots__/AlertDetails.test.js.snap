@@ -141,7 +141,7 @@ exports[`Alert Details Component should render the alert details component corre
             className="TagsWithIcon"
             key="Myemail@email.com"
           >
-            <Email
+            <EmailIcon
               className="Icon"
             />
             <span
@@ -154,7 +154,7 @@ exports[`Alert Details Component should render the alert details component corre
             className="TagsWithIcon"
             key="email@ddress.com"
           >
-            <Email
+            <EmailIcon
               className="Icon"
             />
             <span
@@ -172,7 +172,7 @@ exports[`Alert Details Component should render the alert details component corre
           <Tag
             className="TagsWithIcon"
           >
-            <Slack
+            <SlackIcon
               className="Icon"
             />
             <span
@@ -190,7 +190,7 @@ exports[`Alert Details Component should render the alert details component corre
           <Tag
             className="TagsWithIcon"
           >
-            <Webhook
+            <WebhookIcon
               className="Icon"
             />
             <span

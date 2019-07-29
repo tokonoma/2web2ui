@@ -50,15 +50,15 @@ describe('Alert Details Component', () => {
   it('should show only email tags when email is the only channel', () => {
     const newAlert = { ...alert, channels: { emails: ['Myemail@email.com', 'email@ddress.com']}};
     const wrapper = shallow(<AlertDetails {...props} alert={newAlert} />);
-    expect(wrapper.find('Email')).toExist();
-    expect(wrapper.find('Slack')).not.toExist();
-    expect(wrapper.find('Webhook')).not.toExist();
+    expect(wrapper.find('EmailIcon')).toExist();
+    expect(wrapper.find('SlackIcon')).not.toExist();
+    expect(wrapper.find('WebhookIcon')).not.toExist();
   });
 
   it('should show other channels even if emails are not present', () => {
     const newAlert = { ...alert, channels: { slack: { target: 'myslackTarget' }}};
     const wrapper = shallow(<AlertDetails {...props} alert={newAlert} />);
-    expect(wrapper.find('Email')).not.toExist();
-    expect(wrapper.find('Slack')).toExist();
+    expect(wrapper.find('EmailIcon')).not.toExist();
+    expect(wrapper.find('SlackIcon')).toExist();
   });
 });
