@@ -51,27 +51,19 @@ export function shrinkToFit(string, targetLen) {
 /**
  * Converts a comma separated string into an array
  */
-export function stringToArray(string, delimiters = [',']) {
-  string = _.trim(string, ' ,'); // strip whitespace and commas
-  if (!string) {
-    return [];
-  }
+export const stringToArray = (str, delimiter = ',') => (
+  str.split(delimiter)
+    .map((part) => part.trim())
+    .filter(Boolean)
+);
 
-  return string.split(',').map((item) => _.trim(item));
-}
-
-/**
- * Converts a comma and/or newline separated string into an array
- */
-export function stringToArrayNewlineAndCommaDelimited(string) {
-  /**
-   * Splits string by newline into array, then splits the individual elements by commas, then flattens,
-   * Then trims whitespace and then removes any empty Strings(happens when user uses comma and newline);
-   */
-  const stringAsArray = _.flatMap(string.split('\n').map((newLineSeparatedItem) => newLineSeparatedItem.split(',')));
-  const formattedArray = stringAsArray.map((splitAddress) => splitAddress.trim()).filter(Boolean);
-  return formattedArray;
-}
+// Split a string by newlines then a delimiter
+export const multilineStringToArray = (str, delimiter) => (
+  _.flatMap(
+    stringToArray(str, '\n')
+      .map((part) => stringToArray(part, delimiter))
+  )
+);
 
 export function stringifyTypeaheadfilter(filter) {
   const subaccount = filter.type === 'Subaccount' ? `:${filter.id}` : '';

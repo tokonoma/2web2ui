@@ -2,7 +2,7 @@ import _ from 'lodash';
 import { formatBytes } from 'src/helpers/units';
 import { getDuration } from 'src/helpers/date';
 import { toSentence } from 'src/helpers/array';
-import { stringToArrayNewlineAndCommaDelimited } from 'src/helpers/string';
+import { multilineStringToArray } from 'src/helpers/string';
 import { isEmailAddress, isEmailLocalPart, isRecipientEmailAddress } from 'src/helpers/email';
 import { domainRegex, slugRegex } from './regex';
 import isURL from 'validator/lib/isURL';
@@ -21,7 +21,7 @@ export function email(value) {
 }
 
 export function emails(str) {
-  const values = stringToArrayNewlineAndCommaDelimited(str);
+  const values = multilineStringToArray(str);
 
   return values.length && values.every(isEmailAddress)
     ? undefined

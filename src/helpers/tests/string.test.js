@@ -1,6 +1,6 @@
 import {
   snakeToFriendly, snakeToCamel, slugify, slugToFriendly, shrinkToFit, stringToArray,
-  stringToArrayNewlineAndCommaDelimited, stringifyTypeaheadfilter, stripTags, decodeBase64,
+  multilineStringToArray, stringifyTypeaheadfilter, stripTags, decodeBase64,
   tagAsCopy, trimWhitespaces, pluralString
 } from '../string';
 
@@ -97,15 +97,15 @@ describe('stringToArray', () => {
   });
 });
 
-describe('stringToArrayNewlineAndCommaDelimited', () => {
+describe('multilineStringToArray', () => {
   it('should properly parse a comma and newline separated string', () => {
-    expect(stringToArrayNewlineAndCommaDelimited('one, 2,3')).toEqual(['one', '2', '3']);
-    expect(stringToArrayNewlineAndCommaDelimited('one\n 2\n3')).toEqual(['one', '2', '3']);
-    expect(stringToArrayNewlineAndCommaDelimited('one, 2\n3')).toEqual(['one', '2', '3']);
-    expect(stringToArrayNewlineAndCommaDelimited('1')).toEqual(['1']);
-    expect(stringToArrayNewlineAndCommaDelimited('')).toEqual([]);
-    expect(stringToArrayNewlineAndCommaDelimited(', \n')).toEqual([]);
-    expect(stringToArrayNewlineAndCommaDelimited('one,\n two')).toEqual(['one', 'two']);
+    expect(multilineStringToArray('one, 2,3')).toEqual(['one', '2', '3']);
+    expect(multilineStringToArray('one\n 2\n3')).toEqual(['one', '2', '3']);
+    expect(multilineStringToArray('one, 2\n3')).toEqual(['one', '2', '3']);
+    expect(multilineStringToArray('1')).toEqual(['1']);
+    expect(multilineStringToArray('')).toEqual([]);
+    expect(multilineStringToArray(', \n')).toEqual([]);
+    expect(multilineStringToArray('one,\n two')).toEqual(['one', 'two']);
   });
 });
 

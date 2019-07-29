@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import { REALTIME_FILTERS, NOTIFICATION_CHANNELS } from '../constants/formConstants';
 import { getFormSpec } from './alertForm';
-import { stringToArrayNewlineAndCommaDelimited } from 'src/helpers/string';
+import { multilineStringToArray } from 'src/helpers/string';
 
 export default function formatFormValues(values) {
   const keysToOmit = [
@@ -49,7 +49,7 @@ export default function formatFormValues(values) {
     value
   };
 
-  const emailsArray = stringToArrayNewlineAndCommaDelimited(emailsString);
+  const emailsArray = multilineStringToArray(emailsString);
 
   const channels = {
     emails: emailsString ? emailsArray : false,
