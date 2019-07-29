@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Grid, Page, Panel } from '@sparkpost/matchbox';
+import { Button, Grid, Page, Panel, Tooltip } from '@sparkpost/matchbox';
 import { RemoveRedEye } from '@sparkpost/matchbox-icons';
 import { ApiErrorBanner, DeleteModal, Loading, DisplayDate } from 'src/components';
 import { Templates } from 'src/components/images';
@@ -57,7 +57,7 @@ export class ListPageNew extends Component {
 
     return (
       <>
-        <h3>Recently Triggered Alerts</h3>
+        <h3>Recently Triggered</h3>
         <Grid>
           {recentlyTriggeredAlerts.map((alert) => (
             <Grid.Column
@@ -73,7 +73,9 @@ export class ListPageNew extends Component {
                   <h3>{alert.name}</h3>
                 </Panel.Section>
                 <Panel.Section className = {styles.Footer}>
-                  <Button flat component={Link} to = {`/alerts-new/details/${alert.id}`}><RemoveRedEye className = {styles.Icon}/></Button>
+                  <Tooltip content='View Details'>
+                    <Button flat component={Link} to = {`/alerts-new/details/${alert.id}`}><RemoveRedEye className = {styles.Icon}/></Button>
+                  </Tooltip>
                 </Panel.Section>
               </Panel>
             </Grid.Column>))}

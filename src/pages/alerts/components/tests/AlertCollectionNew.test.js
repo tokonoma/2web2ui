@@ -55,7 +55,7 @@ describe('TestCollection Component', () => {
 
   it('should handleDelete', () => {
     const actionCol = shallow(wrapper.instance().getRowData(props.alerts[0]).pop());
-    actionCol.find('button').simulate('click');
+    actionCol.dive().find('Button').simulate('click');
     expect(props.handleDelete).toHaveBeenCalledWith({ id: 'id-1', name: 'my alert 1' });
   });
 });

@@ -60,7 +60,7 @@ exports[`Page: Alerts List should render happy path 1`] = `
     Use alerts to be notified when important changes occur in your Health Score, bounce rates, and email usage.
   </p>
   <h3>
-    Recently Triggered Alerts
+    Recently Triggered
   </h3>
   <Grid>
     <Grid.Column
@@ -90,16 +90,32 @@ exports[`Page: Alerts List should render happy path 1`] = `
         <Panel.Section
           className="Footer"
         >
-          <Button
-            component={[Function]}
-            flat={true}
-            size="default"
-            to="/alerts-new/details/id-1"
+          <Tooltip
+            bottom={true}
+            content="View Details"
+            forcePosition={false}
+            horizontalOffset="0px"
+            preferredDirection={
+              Object {
+                "bottom": true,
+                "left": false,
+                "right": true,
+                "top": false,
+              }
+            }
+            right={true}
           >
-            <RemoveRedEye
-              className="Icon"
-            />
-          </Button>
+            <Button
+              component={[Function]}
+              flat={true}
+              size="default"
+              to="/alerts-new/details/id-1"
+            >
+              <RemoveRedEye
+                className="Icon"
+              />
+            </Button>
+          </Tooltip>
         </Panel.Section>
       </Panel>
     </Grid.Column>
@@ -130,16 +146,32 @@ exports[`Page: Alerts List should render happy path 1`] = `
         <Panel.Section
           className="Footer"
         >
-          <Button
-            component={[Function]}
-            flat={true}
-            size="default"
-            to="/alerts-new/details/id-3"
+          <Tooltip
+            bottom={true}
+            content="View Details"
+            forcePosition={false}
+            horizontalOffset="0px"
+            preferredDirection={
+              Object {
+                "bottom": true,
+                "left": false,
+                "right": true,
+                "top": false,
+              }
+            }
+            right={true}
           >
-            <RemoveRedEye
-              className="Icon"
-            />
-          </Button>
+            <Button
+              component={[Function]}
+              flat={true}
+              size="default"
+              to="/alerts-new/details/id-3"
+            >
+              <RemoveRedEye
+                className="Icon"
+              />
+            </Button>
+          </Tooltip>
         </Panel.Section>
       </Panel>
     </Grid.Column>

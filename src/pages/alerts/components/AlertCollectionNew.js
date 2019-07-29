@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Table, Tag, Panel } from '@sparkpost/matchbox';
+import { Button, Table, Tag, Panel, Tooltip } from '@sparkpost/matchbox';
 import { TableCollection, PageLink, DisplayDate } from 'src/components';
 import AlertToggle from './AlertToggleNew';
 import { Delete } from '@sparkpost/matchbox-icons';
@@ -8,8 +8,8 @@ import styles from './AlertCollection.module.scss';
 
 const filterBoxConfig = {
   show: true,
+  exampleModifiers: ['name'],
   itemToStringKeys: ['name'],
-  placeholder: 'Search...',
   wrapper: (props) => (
     <div className = {styles.FilterBox}>
       {props}
@@ -22,10 +22,10 @@ class AlertCollectionNew extends Component {
 
   getColumns() {
     const columns = [
-      { label: 'Alert Name', sortKey: 'name', width: '40%', className: styles.TabbedCellHeader },
+      { label: 'Alert Name', sortKey: 'name', width: '40%' },
       { label: 'Metric', sortKey: 'metric' },
       { label: 'Last Triggered', sortKey: 'last_triggered_timestamp' },
-      { label: 'Status', sortKey: 'muted' },
+      { label: 'Active', sortKey: 'muted' },
       null
     ];
 
@@ -35,13 +35,11 @@ class AlertCollectionNew extends Component {
   getRowData = ({ metric, muted, id, name, last_triggered_timestamp, last_triggered_formatted }) => {
     const deleteFn = () => this.props.handleDelete({ id, name });
     return [
-      <div className = {styles.TabbedCellBody}>
-        <PageLink to={this.getDetailsLink({ id })}>{name}</PageLink>
-      </div>,
+      <PageLink to={this.getDetailsLink({ id })} className={styles.AlertNameLink}>{name}</PageLink>,
       <Tag>{METRICS[metric]}</Tag>,
       <DisplayDate timestamp={last_triggered_timestamp} formattedDate={last_triggered_formatted || 'Never Triggered'} />,
       <AlertToggle muted={muted} id={id} />,
-      <Button flat onClick = {deleteFn}><Delete className = {styles.Icon}/></Button>
+      <Tooltip content='Delete'><Button flat onClick = {deleteFn}><Delete className = {styles.Icon}/></Button></Tooltip>
     ];
   }
 
@@ -71,7 +69,7 @@ class AlertCollectionNew extends Component {
           ({ filterBox, collection, pagination }) =>
             <>
             <Panel >
-              <Panel.Section className = {styles.Title}>
+              <Panel.Section>
                 <h3>All Alerts</h3>
               </Panel.Section>
               {filterBox}
