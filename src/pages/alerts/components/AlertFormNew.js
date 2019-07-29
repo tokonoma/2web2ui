@@ -123,6 +123,13 @@ export class AlertFormNew extends Component {
                     validate={required}
                   />
                 </div>
+                {metric !== '' &&
+                <div className={styles.Evaluator}>
+                  <EvaluatorFields
+                    disabled={submitting}
+                  />
+                </div>
+                }
                 {formSpec.hasFilters &&
                   <>
                     <label><h5>Filtered by <span className={styles.OptionalText}>optional</span></h5></label>
@@ -135,13 +142,6 @@ export class AlertFormNew extends Component {
                       disabled={submitting}
                     />
                 </>}
-                {metric !== '' &&
-                  <div className={styles.Evaluator}>
-                    <EvaluatorFields
-                      disabled={submitting}
-                    />
-                  </div>
-                }
                 <label> Notify Me</label>
                 {channelsError && <Error wrapper='div' error='At least one notification channel must be not empty'/>}
                 {this.renderNotificationChannels()}

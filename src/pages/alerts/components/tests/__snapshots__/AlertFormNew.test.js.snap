@@ -70,6 +70,13 @@ exports[`Alert Form Component should render the alert form component correctly 1
               validate={[Function]}
             />
           </div>
+          <div
+            className="Evaluator"
+          >
+            <Connect(EvaluatorFields)
+              disabled={false}
+            />
+          </div>
           <label>
             <h5>
               Filtered by 
@@ -86,13 +93,6 @@ exports[`Alert Form Component should render the alert form component correctly 1
           <Connect(FilterFields)
             disabled={false}
           />
-          <div
-            className="Evaluator"
-          >
-            <Connect(EvaluatorFields)
-              disabled={false}
-            />
-          </div>
           <label>
              Notify Me
           </label>
