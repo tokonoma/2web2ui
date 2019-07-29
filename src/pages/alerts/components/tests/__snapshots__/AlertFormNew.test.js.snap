@@ -107,7 +107,6 @@ exports[`Alert Form Component should render the alert form component correctly 1
             <Field
               component={[Function]}
               disabled={false}
-              helpText="Max of 10 emails"
               multiline={true}
               name="emails"
               placeholder="example@email.com"

@@ -26,8 +26,7 @@ const notificationChannelData = {
     fieldProps: {
       validate: ifStringPresent(emails),
       placeholder: 'example@email.com',
-      multiline: true,
-      helpText: 'Max of 10 emails'
+      multiline: true
     }
   },
   slack: {
@@ -112,7 +111,7 @@ export class AlertFormNew extends Component {
                   name='name'
                   component={TextFieldWrapper}
                   disabled={submitting}
-                  validate={[required, maxLength(24)]}
+                  validate={[required, maxLength(50)]}
                 />
                 <div className = {styles.MetricSelector}>
                   <label>Alert Metric</label>
