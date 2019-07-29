@@ -19,7 +19,11 @@ const cases = {
     bad: ['', 'bugblatter', 'not.an.email.example.com']
   },
   emails: {
-    good: ['test@example.com', 'test@example.com, test@example.com'],
+    good: [
+      'test@example.com',
+      'test@example.com, test@example.com',
+      'test@example.com\n test@example.com'
+    ],
     bad: ['', 'invalid', 'test@example.com, invalid']
   },
   emailLocal: {
