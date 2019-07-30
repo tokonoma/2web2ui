@@ -103,6 +103,14 @@ describe('Action Creator: Auth', () => {
       expect(dispatchMock.mock.calls).toMatchSnapshot();
     });
 
+    it('should skip the default sparkpostLogin step if token is available', async () => {
+      const thunk = authActions.authenticate('bar', null, false, 'myToken');
+      await thunk(dispatchMock, getStateMock);
+      expect(sparkpostLogin).not.toHaveBeenCalled();
+      expect(getTfaStatusBeforeLoggedIn).toHaveBeenCalled();
+      expect(websiteAuth.authenticate).not.toHaveBeenCalled();
+    });
+
     it('should return auth status on login success', async () => {
       const thunk = authActions.authenticate('bar', 'pw', true);
       const result = await thunk(dispatchMock, getStateMock);

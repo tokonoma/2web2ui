@@ -43,4 +43,9 @@ describe('AuthPage tests', () => {
   it('should redirect to enable-tfa iff required', () => {
     expect(subject({ tfaRequired: true })).toMatchSnapshot();
   });
+
+  it('should process authenticate if username/token passed in', () => {
+    const wrapper = subject({ username: 'its-me', access_token: 'bigTOKEN' });
+    expect(wrapper.instance().props.authenticate).toHaveBeenCalledWith('its-me', null, false, 'bigTOKEN');
+  });
 });

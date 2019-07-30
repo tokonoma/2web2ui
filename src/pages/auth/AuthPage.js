@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { authenticate } from 'src/actions/auth';
 import { PageLink, CenteredLogo } from 'src/components';
 import { Panel } from '@sparkpost/matchbox';
+import qs from 'query-string';
 
 import config from 'src/config';
 import LoginForm from './components/LoginForm';
@@ -11,6 +12,15 @@ import RedirectAfterLogin from './components/RedirectAfterLogin';
 import { TFA_ROUTE, ENABLE_TFA_AUTH_ROUTE, SSO_AUTH_ROUTE } from 'src/constants';
 
 export class AuthPage extends React.Component {
+
+  componentDidMount() {
+    const { username, access_token, authenticate } = this.props;
+    // username required as we don't have context for who's token
+    if (username && access_token) {
+      authenticate(username, null, false, access_token);
+    }
+  }
+
   loginSubmit = ({ username, password, rememberMe }) => {
     this.props.authenticate(username, password, rememberMe);
   }
@@ -45,10 +55,16 @@ export class AuthPage extends React.Component {
   }
 }
 
-const mapStateToProps = ({ auth, tfa }) => ({
-  loggedIn: auth.loggedIn,
-  tfaEnabled: tfa.enabled,
-  tfaRequired: tfa.required
-});
+const mapStateToProps = ({ auth, tfa }, { location }) => {
+  const { token: access_token, username } = qs.parse(location.search);
+
+  return {
+    loggedIn: auth.loggedIn,
+    tfaEnabled: tfa.enabled,
+    tfaRequired: tfa.required,
+    access_token,
+    username
+  };
+};
 
 export default connect(mapStateToProps, { authenticate })(AuthPage);

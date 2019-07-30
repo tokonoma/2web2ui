@@ -40,23 +40,29 @@ export function login({ authData = {}, saveCookie = false }) {
  * within redux store
  *
  */
-export function authenticate(username, password, rememberMe = false) {
+export function authenticate(username, password, rememberMe = false, access_token) {
   // return a thunk
   return (dispatch, getState) => {
     const { loggedIn } = getState().auth;
-
+    const isTokenLogin = !!access_token;
     if (loggedIn) {
       return;
     }
 
     dispatch({ type: 'LOGIN_PENDING' });
 
-    return sparkpostLogin(username, password, rememberMe)
+    const maybeLogin = isTokenLogin ? Promise.resolve({ data: { access_token }}) : sparkpostLogin(username, password, rememberMe);
+
+    return maybeLogin
       .then(({ data = {}} = {}) => {
         const authData = { ...data, username };
 
+        //Skips website login if token login
+        //Token login is used for internal use, so won't need website auth
+        if (!isTokenLogin) {
+          dispatch(websiteAuth.authenticate(username, password, rememberMe));
+        }
         // Start website auth token cookie setup process
-        dispatch(websiteAuth.authenticate(username, password, rememberMe));
 
         return Promise.all([authData, getTfaStatusBeforeLoggedIn({ username, token: authData.access_token })]);
       })
@@ -89,6 +95,7 @@ export function authenticate(username, password, rememberMe = false) {
       });
   };
 }
+
 
 function actOnTfaStatus(tfaEnabled, tfaRequired, authData) {
   if (tfaEnabled) {
