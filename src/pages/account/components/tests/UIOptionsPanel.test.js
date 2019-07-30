@@ -2,9 +2,18 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { UIOptionsPanel } from '../UIOptionsPanel';
 
+const uiOptions = [
+  {
+    key: 'hideTerminatedSubaccounts',
+    label: 'Hide Subaccounts',
+    description: 'Hide terminated subacounts. Resources associated with terminated subaccounts can still be accessed.',
+    value: false
+  }
+];
+
 const subject = (props = {}) => shallow(
   <UIOptionsPanel
-    hideTermSubEnabled={false}
+    uiOptions={uiOptions}
     setAccountOption={() => {}}
     {...props}
   />
@@ -16,7 +25,8 @@ describe('UIOptionsPanel', () => {
   });
 
   it('renders toggle correctly if option enabled', () => {
-    const wrapper = subject({ hideTermSubEnabled: true });
+    const uiOption = uiOptions[0];
+    const wrapper = subject({ uiOptions: [{ ...uiOption, value: true }]});
     expect(wrapper.find('Toggle')).toHaveProp('checked', true);
   });
 

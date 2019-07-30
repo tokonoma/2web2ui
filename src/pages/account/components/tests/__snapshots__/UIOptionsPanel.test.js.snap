@@ -6,7 +6,8 @@ exports[`UIOptionsPanel renders 1`] = `
 >
   <Panel.Section>
     <LabelledValue
-      label="Hide Subacounts"
+      key="ui-option-hideTerminatedSubaccounts"
+      label="Hide Subaccounts"
     >
       <div
         className="ToggleRow"

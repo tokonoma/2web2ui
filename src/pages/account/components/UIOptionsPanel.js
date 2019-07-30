@@ -7,43 +7,59 @@ import { setAccountOption } from 'src/actions/account';
 import { connect } from 'react-redux';
 import styles from './UIOptionsPanel.module.scss';
 
+const OPTIONS = [
+  {
+    key: 'hideTerminatedSubaccounts',
+    label: 'Hide Subaccounts',
+    description: 'Hide terminated subacounts. Resources associated with terminated subaccounts can still be accessed.'
+  }
+];
+
+
 export class UIOptionsPanel extends Component {
 
-  setUIOption = () => {
-    const { setAccountOption, hideTermSubEnabled } = this.props;
-    setAccountOption('hideTerminatedSubaccounts', !hideTermSubEnabled);
+  setUIOption = (key, value) => {
+    this.props.setAccountOption(key, value);
   };
 
   render() {
-    const { hideTermSubEnabled, loading } = this.props;
+    const { loading, uiOptions } = this.props;
 
     return (
       <Panel title='Account Options'>
         <Panel.Section>
-          <LabelledValue label='Hide Subacounts'>
-            <div className={styles.ToggleRow}>
-              <div>
-                Hide terminated subacounts. Resources associated with terminated subaccounts can still be accessed.
+          {uiOptions.map(({ label, description, value, key }) => (
+            <LabelledValue label={label} key={`ui-option-${key}`}>
+              <div className={styles.ToggleRow}>
+                <div>
+                  {description}
+                </div>
+                <div>
+                  <Toggle
+                    id={key}
+                    checked={value}
+                    disabled={loading}
+                    onChange={() => this.setUIOption(key, !value)}
+                  />
+                </div>
               </div>
-              <div>
-                <Toggle
-                  id="hideTerminatedSubaccounts"
-                  checked={hideTermSubEnabled}
-                  disabled={loading}
-                  onChange={this.setUIOption}
-                />
-              </div>
-            </div>
-          </LabelledValue>
+            </LabelledValue>
+          ))}
         </Panel.Section>
       </Panel>
     );
   }
 }
 
-const mapStateToProps = (state) => ({
-  hideTermSubEnabled: selectCondition(isAccountUiOptionSet('hideTerminatedSubaccounts'))(state),
-  loading: state.account.updateLoading
-});
+const mapStateToProps = (state) => {
+  const uiOptions = OPTIONS.map((option) => {
+    option.value = selectCondition(isAccountUiOptionSet(option.key))(state);
+    return option;
+  });
+  return {
+    uiOptions,
+    loading: state.account.updateLoading
+  };
+};
 
 export default connect(mapStateToProps, { setAccountOption })(UIOptionsPanel);
