@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Page: SeedList tests should render page correctly with defaults 1`] = `
+<Page
+  empty={Object {}}
+  title="Inbox Placement | Seed List"
+>
+  <Panel>
+    <Panel.Section>
+      <h1>
+        Seedlist
+      </h1>
+    </Panel.Section>
+    <Panel.Section>
+      <h3>
+        Directions
+      </h3>
+    </Panel.Section>
+    <Panel.Section>
+      <p>
+        Make sure you are sending the following 0 addresses.
+      </p>
+      <p>
+        Your reference address is ref1@sparkpost.com
+      </p>
+      <p>
+        Reference address is .....
+      </p>
+      <TextField
+        multiline={true}
+        resize="vertical"
+        rows={12}
+        type="text"
+        value=""
+      />
+      <div
+        className="DownloadButtonContainer"
+      >
+        <SaveCSVButton
+          caption="Download List"
+          data={
+            Array [
+              "Seed Address",
+            ]
+          }
+          primary={true}
+          saveCsv={true}
+        />
+      </div>
+    </Panel.Section>
+  </Panel>
+</Page>
+`;
