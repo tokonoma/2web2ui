@@ -57,7 +57,7 @@ export class ListPageNew extends Component {
 
     return (
       <>
-        <h3>Recently Triggered</h3>
+        <h3>Recent Alerts</h3>
         <Grid>
           {recentlyTriggeredAlerts.map((alert) => (
             <Grid.Column
@@ -73,7 +73,7 @@ export class ListPageNew extends Component {
                   <h3>{alert.name}</h3>
                 </Panel.Section>
                 <Panel.Section className = {styles.Footer}>
-                  <Tooltip content='View Details'>
+                  <Tooltip content='View Details' width='100px'>
                     <Button flat component={Link} to = {`/alerts-new/details/${alert.id}`}><RemoveRedEye className = {styles.Icon}/></Button>
                   </Tooltip>
                 </Panel.Section>

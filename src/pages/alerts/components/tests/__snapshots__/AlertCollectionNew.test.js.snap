@@ -110,6 +110,7 @@ Array [
       }
     }
     right={true}
+    width="auto"
   >
     <Button
       flat={true}
@@ -157,6 +158,7 @@ Array [
       }
     }
     right={true}
+    width="auto"
   >
     <Button
       flat={true}
@@ -204,6 +206,7 @@ Array [
       }
     }
     right={true}
+    width="auto"
   >
     <Button
       flat={true}

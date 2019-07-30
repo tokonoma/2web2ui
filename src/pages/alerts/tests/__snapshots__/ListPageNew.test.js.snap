@@ -60,7 +60,7 @@ exports[`Page: Alerts List should render happy path 1`] = `
     Use alerts to be notified when important changes occur in your Health Score, bounce rates, and email usage.
   </p>
   <h3>
-    Recently Triggered
+    Recent Alerts
   </h3>
   <Grid>
     <Grid.Column
@@ -104,6 +104,7 @@ exports[`Page: Alerts List should render happy path 1`] = `
               }
             }
             right={true}
+            width="100px"
           >
             <Button
               component={[Function]}
@@ -160,6 +161,7 @@ exports[`Page: Alerts List should render happy path 1`] = `
               }
             }
             right={true}
+            width="100px"
           >
             <Button
               component={[Function]}
