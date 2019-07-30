@@ -7,4 +7,11 @@ export default {
   tag: 'labs',
   icon: Inbox,
   condition: hasAccountOptionEnabled('inbox_placement')
+  children: [
+    {
+      label: 'Seed List',
+      to: '/inbox-placement/seedlist',
+      tag: 'labs'
+    }
+  ]
 };
