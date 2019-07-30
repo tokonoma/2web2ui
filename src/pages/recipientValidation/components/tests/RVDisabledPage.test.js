@@ -23,9 +23,11 @@ describe('Recipient Validation Disabled Page', () => {
     wrapper.setProps({ ...props, accountUpdateLoading: true });
     expect(wrapper).toMatchSnapshot();
   });
-  it('should show no button when customer is manually billed' , () => {
+  it('should render link to website form when customer is manually billed' , () => {
     wrapper.setProps({ ...props, isSelfServeBilling: false });
-    expect(wrapper.find('Button')).not.toExist();
+    expect(wrapper.find('Button')).toHaveLength(1);
+    expect(wrapper.find('Button').prop('to')).toEqual('https://www.sparkpost.com/recipient-validation/#recipient-validation-form');
+    expect(wrapper.find('Button').prop('children')).toEqual('Contact Sales');
   });
 
   it('should redirect to billing page when customer is self serve and on free plan' , () => {
