@@ -39,7 +39,11 @@ class AlertCollectionNew extends Component {
       <Tag>{METRICS[metric]}</Tag>,
       <DisplayDate timestamp={last_triggered_timestamp} formattedDate={last_triggered_formatted || 'Never Triggered'} />,
       <AlertToggle muted={muted} id={id} />,
-      <Tooltip content='Delete' width='auto'><Button flat onClick = {deleteFn}><Delete className = {styles.Icon}/></Button></Tooltip>
+      <Tooltip content='Delete' width='auto'>
+        <Button flat onClick={deleteFn}>
+          <Delete className={styles.Icon}/>
+        </Button>
+      </Tooltip>
     ];
   }
 

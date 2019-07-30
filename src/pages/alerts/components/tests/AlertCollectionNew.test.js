@@ -54,8 +54,9 @@ describe('TestCollection Component', () => {
   });
 
   it('should handleDelete', () => {
-    const actionCol = shallow(wrapper.instance().getRowData(props.alerts[0]).pop());
-    actionCol.dive().find('Button').simulate('click');
+    const Component = () => wrapper.instance().getRowData(props.alerts[0]).pop();
+    const actionCol = shallow(<Component />);
+    actionCol.find('Button').simulate('click');
     expect(props.handleDelete).toHaveBeenCalledWith({ id: 'id-1', name: 'my alert 1' });
   });
 });
