@@ -100,7 +100,7 @@ export const AlertDetails = ({ alert, id, subaccountIdToString }) => {
   };
 
   const detailsMap = [
-    { label: 'Alert Metric:', render: (() => METRICS[metric]) },
+    { label: 'Alert Metric:', render: (() => METRICS[metric]), bold: true },
     { label: 'Evaluated:', render: (() => (renderEvaluated())) },
     { label: 'Filtered By:', render: (() => (renderFilteredBy())) },
     { label: 'Notify:', render: (() => (renderNotify())) },
@@ -108,9 +108,9 @@ export const AlertDetails = ({ alert, id, subaccountIdToString }) => {
   ];
 
   const renderAlertDetails = () =>
-    detailsMap.map(({ label, render }, i) => (
+    detailsMap.map(({ label, render, bold }, i) => (
       <Panel.Section key={i}>
-        <LabelledValue label={label} bold={i === 0} value={render()}/>
+        <LabelledValue label={label} bold={Boolean(bold)} value={render()}/>
       </Panel.Section>
     ));
 
