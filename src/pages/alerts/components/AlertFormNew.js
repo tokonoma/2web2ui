@@ -113,7 +113,7 @@ export class AlertFormNew extends Component {
                   disabled={submitting}
                   validate={[required, maxLength(50)]}
                 />
-                <div className = {styles.MetricSelector}>
+                <div className={styles.MetricSelector}>
                   <label>Alert Metric</label>
                   <Field
                     name='metric'
@@ -131,7 +131,7 @@ export class AlertFormNew extends Component {
                 </div>
                 }
                 {formSpec.hasFilters &&
-                  <>
+                  <div className={styles.Filters}>
                     <label><h5>Filtered by <span className={styles.OptionalText}>optional</span></h5></label>
                     {hasSubaccounts &&
                       <SubaccountField
@@ -141,11 +141,13 @@ export class AlertFormNew extends Component {
                     <FilterFields
                       disabled={submitting}
                     />
-                </>}
-                <label> Notify Me</label>
-                {channelsError && <Error wrapper='div' error='At least one notification channel must be not empty'/>}
-                {this.renderNotificationChannels()}
-                <Button submit primary disabled={pristine || submitting} className={styles.SubmitButton}>{submitText}</Button>
+                  </div>}
+                <div className={styles.Notifications}>
+                  <label> Notify Me</label>
+                  {channelsError && <Error wrapper='div' error='At least one notification channel must be not empty'/>}
+                  {this.renderNotificationChannels()}
+                  <Button submit primary disabled={pristine || submitting} className={styles.SubmitButton}>{submitText}</Button>
+                </div>
               </Panel.Section>
             </Grid.Column>
           </Grid>
