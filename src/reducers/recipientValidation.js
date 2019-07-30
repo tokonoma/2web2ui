@@ -41,6 +41,10 @@ export default (state = initialState, { meta, payload, type }) => {
     case 'UPLOAD_RV_LIST_NEW_FAIL':
       return { ...state, uploadLoading: false, listError: payload };
 
+    //TODO: Remove placeholder reducer
+    case 'UPLOAD_RV_LIST_NEW':
+      return { ...state, uploading: false };
+
     case 'RESET_RECIPIENT_VALIDATION_ERROR':
       return { ...state, listError: null };
 

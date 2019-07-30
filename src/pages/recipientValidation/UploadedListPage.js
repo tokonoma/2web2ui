@@ -5,13 +5,13 @@ import UploadedListForm from './components/UploadedListForm';
 import { formatDate, formatTime } from 'src/helpers/date';
 import { connect } from 'react-redux';
 import { showAlert } from 'src/actions/globalAlert';
+import { triggerJob, getJobStatus } from 'src/actions/recipientValidation';
 
 class UploadedListPage extends Component {
 
   componentDidMount() {
-    //const { history } = this.props;
-    //TODO: if 404 on loading the list
-    //history.replace('/recipient-validation');
+    // TODO: if 404 on loading the list
+    // history.replace('/recipient-validation');
   }
 
   renderTitle = (date = Date.now()) => ( //TODO: Remove pre-rendered date
@@ -50,8 +50,9 @@ class UploadedListPage extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  batch_status: 'queued_for_batch' //TODO: Replace with status of job
+const mapStateToProps = (state, { match }) => ({
+  batch_status: 'queued_for_batch', //TODO: Replace with status of job
+  listId: match.params.listId
 });
 
-export default withRouter(connect(mapStateToProps, { showAlert })(UploadedListPage));
+export default withRouter(connect(mapStateToProps, { showAlert, getJobStatus, triggerJob })(UploadedListPage));
