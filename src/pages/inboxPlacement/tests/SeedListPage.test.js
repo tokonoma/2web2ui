@@ -26,4 +26,9 @@ describe('Page: SeedList tests', () => {
     const wrapper = subject({ pending: true });
     expect(wrapper.find('Loading')).toExist();
   });
+
+  it('renders error message', () => {
+    const wrapper = subject({ error: true });
+    expect(wrapper.find('ApiErrorBanner')).toExist();
+  });
 });

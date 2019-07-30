@@ -6,11 +6,11 @@ const initialState = {
 export default (state = initialState, { type, payload }) => {
   switch (type) {
     case 'GET_SEEDS_PENDING':
-      return { ...state, pending: true };
+      return { ...state, pending: true, seedsError: null };
     case 'GET_SEEDS_SUCCESS':
-      return { ...state, pending: false, seeds: payload };
+      return { ...state, pending: false, seeds: payload, seedsError: null };
     case 'GET_SEEDS_FAIL':
-      return { ...state, pending: false, error: payload };
+      return { ...state, pending: false, seedsError: payload };
 
     default:
       return state;

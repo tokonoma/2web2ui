@@ -6,7 +6,7 @@ export default {
   to: '/inbox-placement',
   tag: 'labs',
   icon: Inbox,
-  condition: hasAccountOptionEnabled('inbox_placement')
+  condition: hasAccountOptionEnabled('inbox_placement'),
   children: [
     {
       label: 'Seed List',
