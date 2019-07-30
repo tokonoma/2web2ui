@@ -48,3 +48,16 @@ cases('Account reducer', (action) => {
 cases('Billing reducer', (action) => {
   expect(accountReducer(initialState, action)).toMatchSnapshot();
 }, BILLING_TEST_CASES);
+
+describe('setAccountOption', () => {
+  const initState = { ...initialState, options: { otherThing: false, ui: { exists: true }}};
+  const action = { type: 'SET_ACCOUNT_OPTION_SUCCESS', meta: { data: { options: { ui: { newThing: true }}}}};
+  expect(accountReducer(initState, action)).toEqual(
+    expect.objectContaining({
+      options: {
+        otherThing: false,
+        ui: { exists: true, newThing: true }
+      }
+    })
+  );
+});

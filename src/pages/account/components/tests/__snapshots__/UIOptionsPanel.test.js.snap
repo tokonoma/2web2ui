@@ -2,31 +2,27 @@
 
 exports[`UIOptionsPanel renders 1`] = `
 <Panel
-  title="UI Options"
+  title="Account Options"
 >
   <Panel.Section>
-    <Grid>
-      <Grid.Column
-        xs={11}
+    <LabelledValue
+      label="Hide Subacounts"
+    >
+      <div
+        className="ToggleRow"
       >
-        <LabelledValue
-          label="Hide Subaccounts"
-        >
-          <p>
-            Hide terminated subacounts. Resources associated with terminated subaccounts can still be accessed.
-          </p>
-        </LabelledValue>
-      </Grid.Column>
-      <Grid.Column
-        xs={1}
-      >
-        <Toggle
-          checked={false}
-          id="hideTerminatedSubaccounts"
-          onChange={[Function]}
-        />
-      </Grid.Column>
-    </Grid>
+        <div>
+          Hide terminated subacounts. Resources associated with terminated subaccounts can still be accessed.
+        </div>
+        <div>
+          <Toggle
+            checked={false}
+            id="hideTerminatedSubaccounts"
+            onChange={[Function]}
+          />
+        </div>
+      </div>
+    </LabelledValue>
   </Panel.Section>
 </Panel>
 `;

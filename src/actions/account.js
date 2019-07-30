@@ -55,6 +55,23 @@ export function update(data) {
   });
 }
 
+export function setAccountOption(key, value) {
+  return sparkpostApiRequest({
+    type: 'SET_ACCOUNT_OPTION',
+    meta: {
+      method: 'PUT',
+      url: '/v1/account',
+      data: {
+        options: {
+          ui: {
+            [key]: value
+          }
+        }
+      }
+    }
+  });
+}
+
 
 export function register(data) {
 

@@ -5,7 +5,7 @@ import { UIOptionsPanel } from '../UIOptionsPanel';
 const subject = (props = {}) => shallow(
   <UIOptionsPanel
     hideTermSubEnabled={false}
-    updateAccount={() => {}}
+    setAccountOption={() => {}}
     {...props}
   />
 );
@@ -21,9 +21,9 @@ describe('UIOptionsPanel', () => {
   });
 
   it('shoudld toggle', () => {
-    const updateAccount = jest.fn();
-    const wrapper = subject({ updateAccount });
+    const setAccountOption = jest.fn();
+    const wrapper = subject({ setAccountOption });
     wrapper.find('Toggle').simulate('change');
-    expect(updateAccount).toHaveBeenCalledWith({ options: { ui: { hideTerminatedSubaccounts: true }}});
+    expect(setAccountOption).toHaveBeenCalledWith('hideTerminatedSubaccounts', true);
   });
 });

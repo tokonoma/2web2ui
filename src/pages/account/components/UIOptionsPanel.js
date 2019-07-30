@@ -1,24 +1,17 @@
 import React, { Component } from 'react';
-import { Panel, Toggle, Grid } from '@sparkpost/matchbox';
+import { Panel, Toggle } from '@sparkpost/matchbox';
 import LabelledValue from 'src/components/labelledValue/LabelledValue';
 import { isAccountUiOptionSet } from 'src/helpers/conditions/account';
 import { selectCondition } from 'src/selectors/accessConditionState';
-import { update as updateAccount } from 'src/actions/account';
+import { setAccountOption } from 'src/actions/account';
 import { connect } from 'react-redux';
+import styles from './UIOptionsPanel.module.scss';
 
 export class UIOptionsPanel extends Component {
 
-
   setUIOption = () => {
-    const { updateAccount, hideTermSubEnabled } = this.props;
-    const body = {
-      options: {
-        ui: {
-          hideTerminatedSubaccounts: !hideTermSubEnabled
-        }
-      }
-    };
-    updateAccount(body);
+    const { setAccountOption, hideTermSubEnabled } = this.props;
+    setAccountOption('hideTerminatedSubaccounts', !hideTermSubEnabled);
   };
 
   render() {
@@ -27,21 +20,21 @@ export class UIOptionsPanel extends Component {
     return (
       <Panel title='Account Options'>
         <Panel.Section>
-          <Grid>
-            <Grid.Column xs={11}>
-              <LabelledValue label='Hide Subacounts'>
-                <p>Hide terminated subacounts. Resources associated with terminated subaccounts can still be accessed.</p>
-              </LabelledValue>
-            </Grid.Column>
-            <Grid.Column xs={1}>
-              <Toggle
-                id="hideTerminatedSubaccounts"
-                checked={hideTermSubEnabled}
-                disabled={loading}
-                onChange={this.setUIOption}
-              />
-            </Grid.Column>
-          </Grid>
+          <LabelledValue label='Hide Subacounts'>
+            <div className={styles.ToggleRow}>
+              <div>
+                Hide terminated subacounts. Resources associated with terminated subaccounts can still be accessed.
+              </div>
+              <div>
+                <Toggle
+                  id="hideTerminatedSubaccounts"
+                  checked={hideTermSubEnabled}
+                  disabled={loading}
+                  onChange={this.setUIOption}
+                />
+              </div>
+            </div>
+          </LabelledValue>
         </Panel.Section>
       </Panel>
     );
@@ -53,4 +46,4 @@ const mapStateToProps = (state) => ({
   loading: state.account.updateLoading
 });
 
-export default connect(mapStateToProps, { updateAccount })(UIOptionsPanel);
+export default connect(mapStateToProps, { setAccountOption })(UIOptionsPanel);

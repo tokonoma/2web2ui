@@ -42,6 +42,18 @@ export default (state = initialState, { type, meta, payload }) => {
     case 'UPDATE_ACCOUNT_FAIL':
       return { ...state, updateError: payload, updateLoading: false };
 
+    case 'SET_ACCOUNT_OPTION_PENDING':
+      return { ...state, updateLoading: true, updateError: null };
+
+    case 'SET_ACCOUNT_OPTION_SUCCESS': {
+      const { options = {}} = state; //Spread other account options
+      const { ui = {}} = options; //Spread other account UI options
+      return { ...state, updateLoading: false, options: { ...options, ui: { ...ui, ...meta.data.options.ui }}};
+    }
+
+    case 'SET_ACCOUNT_OPTION_FAIL':
+      return { ...state, updateError: payload, updateLoading: false };
+
     case 'CREATE_ACCOUNT_PENDING':
       return { ...state, createLoading: true, createError: null };
 
