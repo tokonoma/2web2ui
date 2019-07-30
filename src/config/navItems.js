@@ -2,7 +2,7 @@ import { Home, InsertChart, Code, MailOutline, Language, Compare, NotificationsA
 
 import campaignNavItems from './campaignNavItems';
 import settingsNavItems from './settingsNavItems';
-import seedlistNavItems from './seedlistNavItems';
+import inboxPlacementNavItems from './inboxPlacementNavItems';
 
 export default [
   {
@@ -125,6 +125,6 @@ export default [
     icon: Code
   },
   {
-    ...seedlistNavItems
+    ...inboxPlacementNavItems
   }
 ];
