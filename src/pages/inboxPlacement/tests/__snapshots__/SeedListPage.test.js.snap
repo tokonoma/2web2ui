@@ -7,46 +7,67 @@ exports[`Page: SeedList tests should render page correctly with defaults 1`] = `
 >
   <Panel>
     <Panel.Section>
-      <h1>
-        Seedlist
-      </h1>
-    </Panel.Section>
-    <Panel.Section>
-      <h3>
-        Directions
-      </h3>
-    </Panel.Section>
-    <Panel.Section>
-      <p>
-        Make sure you are sending the following 0 addresses.
-      </p>
-      <p>
-        Your reference address is ref1@sparkpost.com
-      </p>
-      <p>
-        Reference address is .....
-      </p>
-      <TextField
-        multiline={true}
-        resize="vertical"
-        rows={12}
-        type="text"
-        value=""
-      />
-      <div
-        className="DownloadButtonContainer"
-      >
-        <SaveCSVButton
-          caption="Download List"
-          data={
-            Array [
-              "Seed Address",
-            ]
-          }
-          primary={true}
-          saveCsv={true}
-        />
-      </div>
+      <Grid>
+        <Grid.Column
+          lg={12}
+          xs={12}
+        >
+          <Panel.Section>
+            <h3>
+              Seedlist
+            </h3>
+          </Panel.Section>
+          <Panel.Section>
+            <h6>
+              Directions
+            </h6>
+          </Panel.Section>
+          <Panel.Section>
+            <div
+              className="Directions"
+            >
+              <p>
+                To run an Inbox Placement test, first add the following email addresses to your list. Make sure that the reference email address 
+                ref1@sparkpost.com
+                 is the first one in your list.
+              </p>
+              <p>
+                Next, set up your campaign. Make sure you are sending to the full list of seed email addresses. For best results, set the \`X-SP-Inbox-Placement\` header with a unique value such as "my-first-test". If you don't, you may run into issues if your have more than one test running with the same subject line.
+              </p>
+              <p>
+                Send the email and jump back to 
+                <UnstyledLink
+                  to="/inbox-placement"
+                >
+                  Inbox Placement
+                </UnstyledLink>
+                 to see the results.
+              </p>
+            </div>
+            <TextField
+              multiline={true}
+              resize="vertical"
+              rows={12}
+              type="text"
+              value=""
+            />
+            <div
+              className="DownloadButtonContainer"
+            >
+              <SaveCSVButton
+                caption="Download List"
+                data={
+                  Array [
+                    "Seed Address",
+                  ]
+                }
+                primary={true}
+                saveCsv={true}
+              />
+            </div>
+          </Panel.Section>
+        </Grid.Column>
+      </Grid>
     </Panel.Section>
   </Panel>
 </Page>

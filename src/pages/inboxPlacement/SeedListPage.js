@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Page, Panel, TextField } from '@sparkpost/matchbox';
+import { Grid, Page, Panel, TextField, UnstyledLink } from '@sparkpost/matchbox';
 
 import { getSeedList } from 'src/actions/inboxPlacement';
 import { selectReferenceSeed } from 'src/selectors/inboxPlacement';
@@ -28,20 +28,38 @@ export class SeedListPage extends React.Component {
       <Page title='Inbox Placement | Seed List'>
         <Panel>
           <Panel.Section>
-            <h1>Seedlist</h1>
-          </Panel.Section>
-
-          <Panel.Section>
-            <h3>Directions</h3>
-          </Panel.Section>
-          <Panel.Section>
-            <p>{`Make sure you are sending the following ${seeds.length} addresses.`}</p>
-            <p>{`Your reference address is ${referenceSeed}`}</p>
-            <p>Reference address is .....</p>
-            <TextField multiline value={seeds.join('\n')} resize="vertical" rows={12}/>
-            <div className={styles.DownloadButtonContainer}>
-              <SaveCSVButton primary data={csvData} saveCsv={true} caption='Download List'/>
-            </div>
+            <Grid>
+              <Grid.Column xs={12} lg={12}>
+                <Panel.Section>
+                  <h3>Seedlist</h3>
+                </Panel.Section>
+                <Panel.Section>
+                  <h6>Directions</h6>
+                </Panel.Section>
+                <Panel.Section>
+                  <div className={styles.Directions}>
+                    <p>To run an Inbox Placement test, first add the following email addresses to your list.
+                      Make sure that the reference email address {referenceSeed} is the first one in your list.
+                    </p>
+                    <p>
+                      Next, set up your campaign. Make sure you are sending to the full list of seed email addresses.
+                      For best results, set the `X-SP-Inbox-Placement` header with a unique value such as
+                      "my-first-test".
+                      If you don't, you may run into issues if your have more than one test running with the same
+                      subject line.
+                    </p>
+                    <p>
+                      Send the email and jump back to <UnstyledLink to="/inbox-placement">Inbox
+                      Placement</UnstyledLink> to see the results.
+                    </p>
+                  </div>
+                  <TextField multiline value={seeds.join('\n')} resize="vertical" rows={12}/>
+                  <div className={styles.DownloadButtonContainer}>
+                    <SaveCSVButton primary data={csvData} saveCsv={true} caption='Download List'/>
+                  </div>
+                </Panel.Section>
+              </Grid.Column>
+            </Grid>
           </Panel.Section>
         </Panel>
       </Page>
