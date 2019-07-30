@@ -22,6 +22,7 @@ exports[`Alert Details Component should render the alert details component corre
     key="0"
   >
     <LabelledValue
+      bold={true}
       label="Alert Metric:"
       value="Health Score"
     />
@@ -30,6 +31,7 @@ exports[`Alert Details Component should render the alert details component corre
     key="1"
   >
     <LabelledValue
+      bold={false}
       label="Evaluated:"
       value={
         <React.Fragment>
@@ -53,6 +55,7 @@ exports[`Alert Details Component should render the alert details component corre
     key="2"
   >
     <LabelledValue
+      bold={false}
       label="Filtered By:"
       value={
         Array [
@@ -82,6 +85,7 @@ exports[`Alert Details Component should render the alert details component corre
     key="3"
   >
     <LabelledValue
+      bold={false}
       label="Notify:"
       value={
         <React.Fragment>
@@ -152,6 +156,7 @@ exports[`Alert Details Component should render the alert details component corre
     key="4"
   >
     <LabelledValue
+      bold={false}
       label="Active:"
       value={
         <Connect(AlertToggle)

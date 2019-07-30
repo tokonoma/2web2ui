@@ -110,7 +110,7 @@ export const AlertDetails = ({ alert, id, subaccountIdToString }) => {
   const renderAlertDetails = () =>
     detailsMap.map(({ label, render }, i) => (
       <Panel.Section key={i}>
-        <LabelledValue label={label} value={render()}/>
+        <LabelledValue label={label} bold={i === 0} value={render()}/>
       </Panel.Section>
     ));
 
