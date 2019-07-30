@@ -32,33 +32,38 @@ describe('Alert Details Component', () => {
   it('should show Any Subaccount tag in the subaccounts field if no subaccounts and any_subaccount is true', () => {
     const newAlert = { ...alert, subaccounts: [], any_subaccount: true };
     const wrapper = shallow(<AlertDetails {...props} alert={newAlert} />);
-    expect(wrapper.findWhere((node) => node.text() === 'Any Subaccount')).toExist();
+    const filterWrapper = wrapper.find({ label: 'Filtered By:' }).dive();
+    expect(filterWrapper.findWhere((node) => node.text() === 'Any Subaccount')).toExist();
   });
 
   it('should prepend change to the operator when source is WOW change', () => {
     const newAlert = { ...alert, threshold_evaluator: { source: 'week_over_week', operator: 'gt', value: 5 }};
     const wrapper = shallow(<AlertDetails {...props} alert={newAlert} />);
-    expect(wrapper.findWhere((node) => node.text() === 'change above')).toExist();
+    const evaluatorWrapper = wrapper.find({ label: 'Evaluated:' }).dive();
+    expect(evaluatorWrapper.findWhere((node) => node.text() === 'change above')).toExist();
   });
 
   it('should show % in suffix when source is WOW change', () => {
     const newAlert = { ...alert, threshold_evaluator: { source: 'week_over_week', operator: 'gt', value: 5 }};
     const wrapper = shallow(<AlertDetails {...props} alert={newAlert} />);
-    expect(wrapper.findWhere((node) => node.text() === '%')).toExist();
+    const evaluatorWrapper = wrapper.find({ label: 'Evaluated:' }).dive();
+    expect(evaluatorWrapper.findWhere((node) => node.text() === '%')).toExist();
   });
 
   it('should show only email tags when email is the only channel', () => {
     const newAlert = { ...alert, channels: { emails: ['Myemail@email.com', 'email@ddress.com']}};
     const wrapper = shallow(<AlertDetails {...props} alert={newAlert} />);
-    expect(wrapper.find('EmailIcon')).toExist();
-    expect(wrapper.find('SlackIcon')).not.toExist();
-    expect(wrapper.find('WebhookIcon')).not.toExist();
+    const notifyWrapper = wrapper.find({ label: 'Notify:' }).dive();
+    expect(notifyWrapper.find('EmailIcon')).toExist();
+    expect(notifyWrapper.find('SlackIcon')).not.toExist();
+    expect(notifyWrapper.find('WebhookIcon')).not.toExist();
   });
 
   it('should show other channels even if emails are not present', () => {
     const newAlert = { ...alert, channels: { slack: { target: 'myslackTarget' }}};
     const wrapper = shallow(<AlertDetails {...props} alert={newAlert} />);
-    expect(wrapper.find('EmailIcon')).not.toExist();
-    expect(wrapper.find('SlackIcon')).toExist();
+    const notifyWrapper = wrapper.find({ label: 'Notify:' }).dive();
+    expect(notifyWrapper.find('EmailIcon')).not.toExist();
+    expect(notifyWrapper.find('SlackIcon')).toExist();
   });
 });

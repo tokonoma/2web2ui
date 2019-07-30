@@ -1,6 +1,7 @@
 import React from 'react';
-import { Button, Grid, Panel, Tag } from '@sparkpost/matchbox';
+import { Button, Panel, Tag } from '@sparkpost/matchbox';
 import { METRICS, FILTERS_FRIENDLY_NAMES, SOURCE_FRIENDLY_NAMES, OPERATOR_FRIENDLY_NAMES } from '../constants/formConstants';
+import LabelledValue from 'src/components/labelledValue/LabelledValue';
 import { MAILBOX_PROVIDERS } from 'src/constants';
 import styles from './AlertDetails.module.scss';
 import AlertToggle from './AlertToggleNew';
@@ -59,7 +60,7 @@ export const AlertDetails = ({ alert, id, subaccountIdToString }) => {
   };
 
   const renderEvaluated = () => {
-    const sourceTag = <Tag className={styles.Tags}>{SOURCE_FRIENDLY_NAMES[source]}</Tag>;
+    const sourceTag = <Tag className={styles.FirstTag}>{SOURCE_FRIENDLY_NAMES[source]}</Tag>;
     const operatorText = (source === 'raw') ? OPERATOR_FRIENDLY_NAMES[operator].toLowerCase() : `change ${OPERATOR_FRIENDLY_NAMES[operator].toLowerCase()}`;
     const suffix = (source === 'raw') ? '' : '%';
     const valueTag = <Tag className={styles.Tags}>{value}{suffix}</Tag>;
@@ -99,34 +100,25 @@ export const AlertDetails = ({ alert, id, subaccountIdToString }) => {
   };
 
   const detailsMap = [
-    { name: 'Alert Metric: ', render: (() => (<span className={styles.AlertName}>{METRICS[metric]}</span>)) },
-    { name: 'Filtered By: ', render: (() => (renderFilteredBy())) },
-    { name: 'Evaluated:', render: (() => (renderEvaluated())) },
-    { name: 'Notify:', render: (() => (renderNotify())) },
-    { name: 'Status:', render: (() => (<AlertToggle muted={muted} id={id} />)) }
+    { label: 'Alert Metric:', render: (() => METRICS[metric]), bold: true },
+    { label: 'Evaluated:', render: (() => (renderEvaluated())) },
+    { label: 'Filtered By:', render: (() => (renderFilteredBy())) },
+    { label: 'Notify:', render: (() => (renderNotify())) },
+    { label: 'Active:', render: (() => (<AlertToggle muted={muted} id={id} />)) }
   ];
 
   const renderAlertDetails = () =>
-    detailsMap.map(({ name, render }, i) => (
-      <Panel.Section key={i} className={styles.Panel}>
-        <Grid>
-          <Grid.Column xs={12} md={2}>
-            {name}
-          </Grid.Column>
-          <Grid.Column xs={12} md={10}>
-            {render()}
-          </Grid.Column>
-        </Grid>
+    detailsMap.map(({ label, render, bold }, i) => (
+      <Panel.Section key={i}>
+        <LabelledValue label={label} bold={Boolean(bold)} value={render()}/>
       </Panel.Section>
     ));
 
   return (
     <Panel>
-      <Panel.Section className={styles.Panel}>
-        <span className={styles.Subtitle}>Alert Details</span>
-        <span className={styles.ButtonGroup}>
-          <Button component={Link} to={`/alerts-new/edit/${id}`} className={styles.Button} primary>Edit</Button>
-        </span>
+      <Panel.Section >
+        <h3 className={styles.Title}>Alert Details</h3>
+        <Button component={Link} to={`/alerts-new/edit/${id}`} className={styles.Button} primary>Edit</Button>
       </Panel.Section>
       {renderAlertDetails()}
     </Panel>

@@ -1,34 +1,25 @@
 @import '~@sparkpost/matchbox/src/styles/config.scss';
 
-
-.Subtitle {
-  font-weight: 600;
-  font-size: 22px;
+.Title{
+  display: inline;
   position: relative;
-  top: rem(6);
+  top: rem(8);
 }
 
-.AlertName {
-  font-weight: 600;
-  font-size: 18px;
-}
-
-.Panel {
-  padding: rem(20) rem(35);
-}
-
-.ButtonGroup {
+.Button {
   float: right;
-
-  .Button {
-    margin: 0 rem(10);
-    width: rem(100);
-    text-align: center;
-  }
+  width: rem(100);
+  text-align: center;
 }
 
 .Tags {
   margin: 0 rem(5) rem(10);
+  position: relative;
+  top: rem(-1);
+}
+
+.FirstTag {
+  margin: 0 rem(5) rem(10) 0;
   position: relative;
   top: rem(-1);
 }
