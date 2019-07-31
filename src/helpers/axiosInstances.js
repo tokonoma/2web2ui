@@ -4,21 +4,18 @@ import { sparkpostErrorHandler } from './axiosInterceptors';
 
 const { apiBase, zuora: zuoraConfig, brightback: brightbackConfig, apiRequestHeaders } = config;
 
-const sparkpostAxios = axios.create({
+export const sparkpost = axios.create({
   baseURL: apiBase,
   headers: apiRequestHeaders,
   withCredentials: true
 });
-sparkpostAxios.interceptors.response.use(null, sparkpostErrorHandler(sparkpostAxios));
-export const sparkpost = sparkpostAxios;
+sparkpost.interceptors.response.use(null, sparkpostErrorHandler(sparkpost));
 
-const sparkpostPublicAxios = axios.create({
+export const sparkpostPublic = axios.create({
   baseURL: apiBase,
   withCredentials: true
 });
-sparkpostPublicAxios.interceptors.response.use(null, sparkpostErrorHandler(sparkpostPublicAxios));
-export const sparkpostPublic = sparkpostPublicAxios;
-
+sparkpostPublic.interceptors.response.use(null, sparkpostErrorHandler(sparkpostPublic));
 
 export const zuora = axios.create({
   baseURL: zuoraConfig.baseUrl
@@ -27,3 +24,4 @@ export const zuora = axios.create({
 export const brightback = axios.create({
   baseURL: brightbackConfig.baseUrl
 });
+brightback.interceptors.response.use(null, sparkpostErrorHandler(brightback));
