@@ -9,3 +9,13 @@ export function getSeedList() {
     }
   });
 }
+
+export function getInboxPlacementTest(id) {
+  return sparkpostApiRequest({
+    type: 'GET_INBOX_PLACEMENT_TEST',
+    meta: {
+      method: 'GET',
+      url: `/v1/inbox-placement/${id}`
+    }
+  });
+}
