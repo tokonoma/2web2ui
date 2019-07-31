@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Page, Panel } from '@sparkpost/matchbox';
 import { Link, withRouter } from 'react-router-dom';
 import UploadedListForm from './components/UploadedListForm';
+import ListProgress from './components/ListProgress';
 import { formatDate, formatTime } from 'src/helpers/date';
 import { connect } from 'react-redux';
 import { showAlert } from 'src/actions/globalAlert';
@@ -60,7 +61,7 @@ export class UploadedListPage extends Component {
                 currentUsage={volumeUsed}
 
               />)
-              : <div>List Results</div>
+              : <ListProgress />
             }
           </Panel.Section>
         </Panel>
