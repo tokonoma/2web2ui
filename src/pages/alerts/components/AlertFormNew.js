@@ -59,7 +59,6 @@ export class AlertFormNew extends Component {
     defaultFieldValues.forEach(({ fieldName, fieldValue }) => {
       change(fieldName, fieldValue);
     });
-    change('value', 0);
   };
 
   renderNotificationChannels = () => NOTIFICATION_CHANNELS.map((channel) =>
@@ -113,7 +112,7 @@ export class AlertFormNew extends Component {
                   disabled={submitting}
                   validate={[required, maxLength(50)]}
                 />
-                <div className = {styles.MetricSelector}>
+                <div className={styles.MetricSelector}>
                   <label>Alert Metric</label>
                   <Field
                     name='metric'
@@ -123,8 +122,15 @@ export class AlertFormNew extends Component {
                     validate={required}
                   />
                 </div>
+                {metric !== '' &&
+                <div className={styles.Evaluator}>
+                  <EvaluatorFields
+                    disabled={submitting}
+                  />
+                </div>
+                }
                 {formSpec.hasFilters &&
-                  <>
+                  <div className={styles.Filters}>
                     <label><h5>Filtered by <span className={styles.OptionalText}>optional</span></h5></label>
                     {hasSubaccounts &&
                       <SubaccountField
@@ -134,17 +140,12 @@ export class AlertFormNew extends Component {
                     <FilterFields
                       disabled={submitting}
                     />
-                </>}
-                {metric !== '' &&
-                  <div className={styles.Evaluator}>
-                    <EvaluatorFields
-                      disabled={submitting}
-                    />
-                  </div>
-                }
-                <label> Notify Me</label>
-                {channelsError && <Error wrapper='div' error='At least one notification channel must be not empty'/>}
-                {this.renderNotificationChannels()}
+                  </div>}
+                <div className={styles.Notifications}>
+                  <label> Notify Me</label>
+                  {channelsError && <Error wrapper='div' error='At least one notification channel must be not empty'/>}
+                  {this.renderNotificationChannels()}
+                </div>
                 <Button submit primary disabled={pristine || submitting} className={styles.SubmitButton}>{submitText}</Button>
               </Panel.Section>
             </Grid.Column>

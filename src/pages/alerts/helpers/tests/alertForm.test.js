@@ -35,7 +35,8 @@ describe('Alert form helper: ', () => {
   const expectedRealtimeMetric = {
     suffix: '%',
     operatorOptions: [{ label: 'Below', value: 'lt' }, { label: 'Above', value: 'gt' }],
-    sliderLabel: 'Bounce Percentage'
+    sliderLabel: 'Bounce Percentage',
+    sliderPrecision: 2
   };
 
   const testCases =
@@ -46,7 +47,8 @@ describe('Alert form helper: ', () => {
         expected: {
           suffix: '%',
           operatorOptions: [{ label: 'Above', value: 'gt' }],
-          sliderLabel: 'Percent Used' }
+          sliderLabel: 'Percent Used',
+          sliderPrecision: 0 }
       },
       'Block Bounce Rate': {
         metric: 'block_bounce_rate',
@@ -69,7 +71,8 @@ describe('Alert form helper: ', () => {
         expected: {
           suffix: '',
           operatorOptions: [{ label: 'Below', value: 'lt' }, { label: 'Above', value: 'gt' }],
-          sliderLabel: 'Score' }
+          sliderLabel: 'Score',
+          sliderPrecision: 1 }
       },
       'WOW Health Score': {
         metric: 'health_score',
@@ -77,7 +80,8 @@ describe('Alert form helper: ', () => {
         expected: {
           suffix: '%',
           operatorOptions: [{ label: 'Above', value: 'gt' }],
-          sliderLabel: 'Percent Change' }
+          sliderLabel: 'Percent Change',
+          sliderPrecision: 2 }
       },
       'DOD Health Score': {
         metric: 'health_score',
@@ -85,7 +89,8 @@ describe('Alert form helper: ', () => {
         expected: {
           suffix: '%',
           operatorOptions: [{ label: 'Above', value: 'gt' }],
-          sliderLabel: 'Percent Change' }
+          sliderLabel: 'Percent Change',
+          sliderPrecision: 2 }
       }
     };
 

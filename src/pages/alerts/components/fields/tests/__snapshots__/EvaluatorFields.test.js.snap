@@ -76,7 +76,7 @@ exports[`Evaluator Fields Component renders correctly 1`] = `
         max={100}
         min={0}
         onChange={[Function]}
-        precision={2}
+        precision={1}
         value={50}
       />
     </div>

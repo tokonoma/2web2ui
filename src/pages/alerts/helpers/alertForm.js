@@ -27,7 +27,7 @@ const metricToFormSpecMap = {
     filterOptions: [],
     sourceOptions: getOptionsFromMap(['raw'], SOURCE_FRIENDLY_NAMES),
     defaultFieldValues: [
-      { fieldName: 'subaccounts', fieldValue: [-1]},
+      { fieldName: 'subaccounts', fieldValue: []},
       { fieldName: 'source', fieldValue: 'raw' },
       { fieldName: 'operator', fieldValue: 'gt' }
     ]
@@ -60,26 +60,26 @@ export const getEvaluatorOptions = (metric, source) => {
 
   const suffix = (metric !== 'health_score' || source !== 'raw') ? '%' : '';
 
-  const getSliderLabel = () => {
+  const getSliderProps = () => {
     if (source !== 'raw') {
-      return 'Percent Change';
+      return { sliderLabel: 'Percent Change', sliderPrecision: 2 };
     } else {
       switch (metric) {
         case 'health_score':
-          return 'Score';
+          return { sliderLabel: 'Score', sliderPrecision: 1 };
         case 'monthly_sending_limit':
-          return 'Percent Used';
+          return { sliderLabel: 'Percent Used', sliderPrecision: 0 };
         case 'block_bounce_rate':
         case 'hard_bounce_rate':
         case 'soft_bounce_rate':
-          return 'Bounce Percentage';
+          return { sliderLabel: 'Bounce Percentage', sliderPrecision: 2 };
       }
     }
     return 'value';
   };
-  const sliderLabel = getSliderLabel();
+  const { sliderLabel, sliderPrecision } = getSliderProps();
 
-  return { suffix, operatorOptions, sliderLabel };
+  return { suffix, operatorOptions, sliderLabel, sliderPrecision };
 };
 
 export const capitalizeFirstLetter = (word) => word.charAt(0).toUpperCase() + word.slice(1);

@@ -37,7 +37,7 @@ export const EvaluatorFields = ({
 
   const sourceOptions = formspec.sourceOptions || [];
 
-  const { operatorOptions = [], suffix, sliderLabel } = getEvaluatorOptions(metric, source);
+  const { operatorOptions = [], suffix, sliderLabel, sliderPrecision } = getEvaluatorOptions(metric, source);
 
   const sliderLength = 10 - ((sourceOptions.length > 1) ? 3 : 0) - ((operatorOptions.length > 1) ? 2 : 0);
 
@@ -73,7 +73,7 @@ export const EvaluatorFields = ({
             value={sliderValue}
             key={sliderLength}
             onChange={changeValueField}
-            precision={2}
+            precision={sliderPrecision}
           />
         </div>
       </Grid.Column>

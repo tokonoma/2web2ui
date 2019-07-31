@@ -30,6 +30,10 @@ export const ComboBoxTypeahead = (props) => {
     onChange(selected.map(selectedMap));
   }, [onChange, selected, selectedMap]);
 
+  useEffect(() => {
+    setSelected(defaultSelected);
+  }, [defaultSelected]);
+
   //Creates debounce function and cancels the debounce on unmount
   useEffect(() => {
     setMatches(results);

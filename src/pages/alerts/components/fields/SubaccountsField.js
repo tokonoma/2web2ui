@@ -50,7 +50,10 @@ export class SubaccountsField extends Component {
     const { disabled, subaccountsFieldValue } = this.props;
     //Maps from an array of subaccount ids to an array of full subaccount objects
     const selectedSubaccounts = subaccountsFieldValue.map((subaccountId) =>
-      this.getAllAvailableSubaccounts().find(({ id }) => id === subaccountId));
+      /*Find the correct subaccount object within all available subaccounts. If not found, return a default object with
+      an id and a placeholder name.
+      */
+      this.getAllAvailableSubaccounts().find(({ id }) => id === subaccountId) || { id: subaccountId, name: 'id:' });
 
     return (
       <Field
