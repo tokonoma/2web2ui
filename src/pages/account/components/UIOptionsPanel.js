@@ -11,7 +11,7 @@ const OPTIONS = [
   {
     key: 'hideTerminatedSubaccounts',
     label: 'Hide Subaccounts',
-    description: 'Hide terminated subacounts. Resources associated with terminated subaccounts can still be accessed.'
+    description: 'Hide terminated subaccounts. Resources associated with terminated subaccounts can still be accessed.'
   }
 ];
 
