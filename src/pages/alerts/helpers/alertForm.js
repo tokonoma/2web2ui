@@ -27,7 +27,7 @@ const metricToFormSpecMap = {
     filterOptions: [],
     sourceOptions: getOptionsFromMap(['raw'], SOURCE_FRIENDLY_NAMES),
     defaultFieldValues: [
-      { fieldName: 'subaccounts', fieldValue: [-1]},
+      { fieldName: 'subaccounts', fieldValue: []},
       { fieldName: 'source', fieldValue: 'raw' },
       { fieldName: 'operator', fieldValue: 'gt' }
     ]
