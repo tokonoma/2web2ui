@@ -1,6 +1,6 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import { AlertToggle } from '../AlertToggleNew';
+import { AlertToggle } from '../AlertToggle';
 
 describe('AlertToggle Component', () => {
   const props = {

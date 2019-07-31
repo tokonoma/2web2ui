@@ -4,7 +4,7 @@ import { Button, Grid, Page, Panel, Tooltip } from '@sparkpost/matchbox';
 import { RemoveRedEye } from '@sparkpost/matchbox-icons';
 import { ApiErrorBanner, DeleteModal, Loading, DisplayDate } from 'src/components';
 import { Templates } from 'src/components/images';
-import AlertCollectionNew from './components/AlertCollectionNew';
+import AlertCollection from './components/AlertCollection';
 import withAlertsList from './containers/ListPage.container';
 import styles from './ListPage.module.scss';
 import _ from 'lodash';
@@ -41,7 +41,7 @@ export class ListPage extends Component {
 
   renderCollection() {
     return (
-      <AlertCollectionNew
+      <AlertCollection
         alerts={this.props.alerts}
         handleDelete={this.openDeleteModal}
       />

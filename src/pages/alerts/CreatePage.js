@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Page } from '@sparkpost/matchbox';
 import withAlertsCreate from './containers/CreatePage.container';
-import AlertFormNew from './components/AlertFormNew';
+import AlertForm from './components/AlertForm';
 import formatFormValues from './helpers/formatFormValues';
 import { Loading } from 'src/components';
 import { RedirectAndAlert } from 'src/components/globalAlert';
@@ -49,7 +49,7 @@ export class CreatePage extends Component {
       <Page
         title='Create Alert'
         breadcrumbAction={{ ...backBreadcrumb, component: Link }}>
-        <AlertFormNew
+        <AlertForm
           submitting={loading}
           onSubmit={this.handleCreate}
           isDuplicate={Boolean(idToDuplicate)}

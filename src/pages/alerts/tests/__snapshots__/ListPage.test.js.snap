@@ -180,7 +180,7 @@ exports[`Page: Alerts List should render happy path 1`] = `
       </Panel>
     </Grid.Column>
   </Grid>
-  <AlertCollectionNew
+  <AlertCollection
     alerts={
       Array [
         Object {

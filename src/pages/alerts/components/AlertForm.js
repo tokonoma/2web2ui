@@ -12,7 +12,7 @@ import { getFormSpec, capitalizeFirstLetter } from '../helpers/alertForm';
 import { METRICS, REALTIME_FILTERS, NOTIFICATION_CHANNELS } from '../constants/formConstants';
 import { EmailIcon, SlackIcon, WebhookIcon } from 'src/components/icons';
 import styles from './AlertForm.module.scss';
-import withAlertForm from './AlertFormNew.container';
+import withAlertForm from './AlertForm.container';
 
 // Helpers & Validation
 import { emails, ifStringPresent, maxLength, required } from 'src/helpers/validation';
@@ -45,7 +45,7 @@ const notificationChannelData = {
   }
 };
 
-export class AlertFormNew extends Component {
+export class AlertForm extends Component {
 
   resetFormValues = (event) => {
     const { change } = this.props;
@@ -158,6 +158,6 @@ export class AlertFormNew extends Component {
   }
 }
 
-AlertFormNew.defaultProps = { metric: '' };
+AlertForm.defaultProps = { metric: '' };
 
-export default withAlertForm(AlertFormNew);
+export default withAlertForm(AlertForm);

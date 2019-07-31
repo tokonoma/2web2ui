@@ -4,7 +4,7 @@ import { METRICS, FILTERS_FRIENDLY_NAMES, SOURCE_FRIENDLY_NAMES, OPERATOR_FRIEND
 import LabelledValue from 'src/components/labelledValue/LabelledValue';
 import { MAILBOX_PROVIDERS } from 'src/constants';
 import styles from './AlertDetails.module.scss';
-import AlertToggle from './AlertToggleNew';
+import AlertToggle from './AlertToggle';
 import { SlackIcon, WebhookIcon } from 'src/components/icons';
 import { Link } from 'react-router-dom';
 import { getEvaluatorOptions } from '../helpers/alertForm';

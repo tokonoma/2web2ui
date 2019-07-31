@@ -1,6 +1,6 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import AlertCollectionNew from '../AlertCollectionNew';
+import AlertCollection from '../AlertCollection';
 
 describe('TestCollection Component', () => {
   const props = {
@@ -39,7 +39,7 @@ describe('TestCollection Component', () => {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = shallow(<AlertCollectionNew {...props} />);
+    wrapper = shallow(<AlertCollection {...props} />);
   });
 
   it('should render', () => {

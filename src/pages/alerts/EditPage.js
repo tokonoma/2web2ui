@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Page } from '@sparkpost/matchbox';
 import withEditPage from './containers/EditPage.container';
-import AlertFormNew from './components/AlertFormNew';
+import AlertForm from './components/AlertForm';
 import formatFormValues from './helpers/formatFormValues';
 import { Loading } from 'src/components';
 import RedirectAndAlert from 'src/components/globalAlert/RedirectAndAlert';
@@ -45,7 +45,7 @@ export class EditPage extends Component {
       <Page
         title='Edit Alert'
         breadcrumbAction={{ content: 'Back to Alert', to: `/alerts/details/${id}`, component: Link }}>
-        <AlertFormNew
+        <AlertForm
           submitting={loading}
           onSubmit={this.handleUpdate}
           isNewAlert={false}

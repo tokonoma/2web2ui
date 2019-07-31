@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Table, Tag, Panel, Tooltip } from '@sparkpost/matchbox';
 import { TableCollection, PageLink, DisplayDate } from 'src/components';
-import AlertToggle from './AlertToggleNew';
+import AlertToggle from './AlertToggle';
 import { Delete } from '@sparkpost/matchbox-icons';
 import { METRICS } from '../constants/formConstants';
 import styles from './AlertCollection.module.scss';
@@ -16,7 +16,7 @@ const filterBoxConfig = {
     </div>)
 };
 
-class AlertCollectionNew extends Component {
+class AlertCollection extends Component {
 
   getDetailsLink = ({ id }) => `/alerts/details/${id}`;
 
@@ -87,4 +87,4 @@ class AlertCollectionNew extends Component {
   }
 }
 
-export default AlertCollectionNew;
+export default AlertCollection;

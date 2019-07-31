@@ -1,6 +1,6 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import { AlertFormNew } from '../AlertFormNew';
+import { AlertForm } from '../AlertForm';
 import { DEFAULT_FORM_VALUES } from '../../constants/formConstants';
 import * as alertFormHelper from '../../helpers/alertForm';
 import SubaccountField from '../../components/fields/SubaccountsField';
@@ -28,7 +28,7 @@ describe('Alert Form Component', () => {
       isNewAlert: true
     };
 
-    wrapper = shallow(<AlertFormNew {...props} />);
+    wrapper = shallow(<AlertForm {...props} />);
   });
 
   it('should render the alert form component correctly', () => {
@@ -47,21 +47,21 @@ describe('Alert Form Component', () => {
 
   it('should show filters when metric has filters', () => {
     jest.spyOn(alertFormHelper, 'getFormSpec').mockImplementationOnce(() => ({ hasFilters: true }));
-    wrapper = shallow(<AlertFormNew {...props} />);
+    wrapper = shallow(<AlertForm {...props} />);
     expect(wrapper.find(SubaccountField)).toExist();
     expect(wrapper.find(FilterFields)).toExist();
   });
 
   it('should not show filters when metric has no filters', () => {
     jest.spyOn(alertFormHelper, 'getFormSpec').mockImplementationOnce(() => ({ hasFilters: false }));
-    wrapper = shallow(<AlertFormNew {...props} />);
+    wrapper = shallow(<AlertForm {...props} />);
     expect(wrapper.find(SubaccountField)).not.toExist();
     expect(wrapper.find(FilterFields)).not.toExist();
   });
 
   it('should not show subaccounts when user has no subaccounts', () => {
     jest.spyOn(alertFormHelper, 'getFormSpec').mockImplementationOnce(() => ({ hasFilters: true }));
-    wrapper = shallow(<AlertFormNew {...props} hasSubaccounts={false} />);
+    wrapper = shallow(<AlertForm {...props} hasSubaccounts={false} />);
     expect(wrapper.find(SubaccountField)).not.toExist();
     expect(wrapper.find(FilterFields)).toExist();
   });
