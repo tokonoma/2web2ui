@@ -1,7 +1,7 @@
 
 import { connect } from 'react-redux';
 import { list as getSubaccountsList } from 'src/actions/subaccounts';
-import { hasSubaccounts, selectSubaccounts } from 'src/selectors/subaccounts';
+import { hasSubaccounts, selectSubaccounts, getSubaccounts } from 'src/selectors/subaccounts';
 import { Typeahead } from './Typeahead';
 import React, { Component } from 'react';
 import Item from './SubaccountTypeaheadItem';
@@ -36,9 +36,9 @@ export class SubaccountTypeahead extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state, props) => ({
   hasSubaccounts: hasSubaccounts(state),
-  results: selectSubaccounts(state)
+  results: props.unfiltered ? getSubaccounts(state) : selectSubaccounts(state)
 });
 
 export default connect(mapStateToProps, { getSubaccountsList })(SubaccountTypeahead);

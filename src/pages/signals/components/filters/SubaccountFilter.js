@@ -98,6 +98,7 @@ export class SubaccountFilter extends React.Component {
                     label=""
                     onChange={this.handleChange}
                     placeholder="Search here"
+                    unfiltered
                   />
                 </div>
               </div>
