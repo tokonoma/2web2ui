@@ -9,7 +9,6 @@ function withAlertsUpdate(WrappedComponent) {
     id: props.match.params.id,
     getError: state.alertsV1.getError,
     getLoading: state.alertsV1.getPending,
-    alert: state.alertsV1.alert || {},
     loading: state.alertsV1.updatePending
   });
 

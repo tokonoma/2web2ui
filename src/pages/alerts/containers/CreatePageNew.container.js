@@ -9,7 +9,6 @@ function withAlertsCreate(WrappedComponent) {
     idToDuplicate: props.match.params.id, // ID of the alert it's duplicating from
     getError: state.alertsV1.getError,
     getLoading: state.alertsV1.getPending,
-    alert: state.alertsV1.alert || {},
     loading: state.alertsV1.createPending
   });
 
