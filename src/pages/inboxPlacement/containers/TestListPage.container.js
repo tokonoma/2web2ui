@@ -1,5 +1,4 @@
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 import { listTests } from 'src/actions/inboxPlacement';
 import { selectTestList } from 'src/selectors/inboxPlacement';
 
@@ -8,11 +7,11 @@ function withTestList(WrappedComponent) {
 
   const mapStateToProps = (state, props) => ({
     tests: selectTestList(state),
-    error: state.inboxPlacement.test.listError,
-    loading: state.inboxPlacement.test.listPending
+    error: state.inboxPlacement.testsError,
+    loading: state.inboxPlacement.testsPending
   });
 
-  return withRouter(connect(mapStateToProps, mapDispatchToProps)(WrappedComponent));
+  return connect(mapStateToProps, mapDispatchToProps)(WrappedComponent);
 }
 
 export default withTestList;
