@@ -67,6 +67,7 @@ const appReducer = combineReducers({
   apiKeys,
   currentUser,
   form,
+  inboxPlacement,
   invoices,
   ipPools,
   globalAlert,
@@ -94,8 +95,7 @@ const appReducer = combineReducers({
   typeahead,
   users,
   webhooks,
-  websiteAuth,
-  inboxPlacement
+  websiteAuth
 });
 
 /**

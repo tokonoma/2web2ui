@@ -21,7 +21,6 @@ export default {
       label: 'Sending Domains',
       to: '/account/sending-domains'
     },
-
     {
       label: 'Tracking Domains',
       to: '/account/tracking-domains'
