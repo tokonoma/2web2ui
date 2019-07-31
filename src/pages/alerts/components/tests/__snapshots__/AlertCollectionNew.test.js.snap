@@ -5,7 +5,6 @@ exports[`TestCollection Component should render 1`] = `
   columns={
     Array [
       Object {
-        "className": "TabbedCellHeader",
         "label": "Alert Name",
         "sortKey": "name",
         "width": "40%",
@@ -19,7 +18,7 @@ exports[`TestCollection Component should render 1`] = `
         "sortKey": "last_triggered_timestamp",
       },
       Object {
-        "label": "Status",
+        "label": "Active",
         "sortKey": "muted",
       },
       null,
@@ -29,10 +28,12 @@ exports[`TestCollection Component should render 1`] = `
   defaultSortDirection="desc"
   filterBox={
     Object {
+      "exampleModifiers": Array [
+        "name",
+      ],
       "itemToStringKeys": Array [
         "name",
       ],
-      "placeholder": "Search...",
       "show": true,
       "wrapper": [Function],
     }
@@ -78,15 +79,12 @@ exports[`TestCollection Component should render 1`] = `
 
 exports[`TestCollection Component should render row data properly 1`] = `
 Array [
-  <div
-    className="TabbedCellBody"
+  <PageLink
+    className="AlertNameLink"
+    to="/alerts-new/details/id-1"
   >
-    <PageLink
-      to="/alerts-new/details/id-1"
-    >
-      my alert 1
-    </PageLink>
-  </div>,
+    my alert 1
+  </PageLink>,
   <Tag>
     Monthly Sending Limit
   </Tag>,
@@ -98,29 +96,43 @@ Array [
     id="id-1"
     muted={true}
   />,
-  <Button
-    flat={true}
-    onClick={[Function]}
-    size="default"
+  <Tooltip
+    bottom={true}
+    content="Delete"
+    forcePosition={false}
+    horizontalOffset="0px"
+    preferredDirection={
+      Object {
+        "bottom": true,
+        "left": false,
+        "right": true,
+        "top": false,
+      }
+    }
+    right={true}
+    width="auto"
   >
-    <Delete
-      className="Icon"
-    />
-  </Button>,
+    <Button
+      flat={true}
+      onClick={[Function]}
+      size="default"
+    >
+      <Delete
+        className="Icon"
+      />
+    </Button>
+  </Tooltip>,
 ]
 `;
 
 exports[`TestCollection Component should render row data properly 2`] = `
 Array [
-  <div
-    className="TabbedCellBody"
+  <PageLink
+    className="AlertNameLink"
+    to="/alerts-new/details/id-2"
   >
-    <PageLink
-      to="/alerts-new/details/id-2"
-    >
-      my alert 2
-    </PageLink>
-  </div>,
+    my alert 2
+  </PageLink>,
   <Tag>
     Monthly Sending Limit
   </Tag>,
@@ -132,29 +144,43 @@ Array [
     id="id-2"
     muted={false}
   />,
-  <Button
-    flat={true}
-    onClick={[Function]}
-    size="default"
+  <Tooltip
+    bottom={true}
+    content="Delete"
+    forcePosition={false}
+    horizontalOffset="0px"
+    preferredDirection={
+      Object {
+        "bottom": true,
+        "left": false,
+        "right": true,
+        "top": false,
+      }
+    }
+    right={true}
+    width="auto"
   >
-    <Delete
-      className="Icon"
-    />
-  </Button>,
+    <Button
+      flat={true}
+      onClick={[Function]}
+      size="default"
+    >
+      <Delete
+        className="Icon"
+      />
+    </Button>
+  </Tooltip>,
 ]
 `;
 
 exports[`TestCollection Component should render row data properly 3`] = `
 Array [
-  <div
-    className="TabbedCellBody"
+  <PageLink
+    className="AlertNameLink"
+    to="/alerts-new/details/id-3"
   >
-    <PageLink
-      to="/alerts-new/details/id-3"
-    >
-      my alert 3
-    </PageLink>
-  </div>,
+    my alert 3
+  </PageLink>,
   <Tag>
     Health Score
   </Tag>,
@@ -166,14 +192,31 @@ Array [
     id="id-3"
     muted={true}
   />,
-  <Button
-    flat={true}
-    onClick={[Function]}
-    size="default"
+  <Tooltip
+    bottom={true}
+    content="Delete"
+    forcePosition={false}
+    horizontalOffset="0px"
+    preferredDirection={
+      Object {
+        "bottom": true,
+        "left": false,
+        "right": true,
+        "top": false,
+      }
+    }
+    right={true}
+    width="auto"
   >
-    <Delete
-      className="Icon"
-    />
-  </Button>,
+    <Button
+      flat={true}
+      onClick={[Function]}
+      size="default"
+    >
+      <Delete
+        className="Icon"
+      />
+    </Button>
+  </Tooltip>,
 ]
 `;

@@ -57,7 +57,7 @@ describe('Alerts Selectors: ', () => {
   });
 
   it('selectRecentlyTriggeredAlerts returns triggered alerts in order descending ', () => {
-    expect(alertsSelectors.selectRecentlyTriggeredAlerts({ alertsV1 })).toEqual([formattedAlerts[2],formattedAlerts[1]]);
+    expect(alertsSelectors.selectRecentlyTriggeredAlerts({ alertsV1 })).toEqual([formattedAlerts[1]]);
   });
 
   describe('getInitialValues', () => {
