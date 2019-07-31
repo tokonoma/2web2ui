@@ -59,7 +59,6 @@ export class AlertFormNew extends Component {
     defaultFieldValues.forEach(({ fieldName, fieldValue }) => {
       change(fieldName, fieldValue);
     });
-    change('value', 0);
   };
 
   renderNotificationChannels = () => NOTIFICATION_CHANNELS.map((channel) =>
