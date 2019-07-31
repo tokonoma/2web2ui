@@ -66,6 +66,11 @@ describe('Subaccount selectors', () => {
             {
               status: 'terminated',
               name: 'Subby 2'
+            },
+            {
+              compliance_status: 'terminated',
+              status: 'active',
+              name: 'Subby 3'
             }
           ]
         },

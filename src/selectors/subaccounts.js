@@ -21,7 +21,7 @@ export const selectSubaccounts = createSelector(
   [getSubaccounts, selectCondition(isAccountUiOptionSet('hideTerminatedSubaccounts'))],
   (subaccounts, hideTerminatedSubaccounts) => {
     const visibleSubaccounts = hideTerminatedSubaccounts
-      ? subaccounts.filter(({ status }) => status !== 'terminated')
+      ? subaccounts.filter(({ status, compliance_status }) => status !== 'terminated' && compliance_status !== 'terminated')
       : subaccounts;
 
     return visibleSubaccounts.map((subaccount) => formatSubaccount(subaccount));
