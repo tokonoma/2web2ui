@@ -150,16 +150,16 @@ exports[`Alert Form Component should render the alert form component correctly 1
                 placeholder="https://example.com/webhook-target"
               />
             </Expandable>
-            <Button
-              className="SubmitButton"
-              disabled={true}
-              primary={true}
-              size="default"
-              submit={true}
-            >
-              Create Alert
-            </Button>
           </div>
+          <Button
+            className="SubmitButton"
+            disabled={true}
+            primary={true}
+            size="default"
+            submit={true}
+          >
+            Create Alert
+          </Button>
         </Panel.Section>
       </Grid.Column>
     </Grid>

@@ -145,8 +145,8 @@ export class AlertFormNew extends Component {
                   <label> Notify Me</label>
                   {channelsError && <Error wrapper='div' error='At least one notification channel must be not empty'/>}
                   {this.renderNotificationChannels()}
-                  <Button submit primary disabled={pristine || submitting} className={styles.SubmitButton}>{submitText}</Button>
                 </div>
+                <Button submit primary disabled={pristine || submitting} className={styles.SubmitButton}>{submitText}</Button>
               </Panel.Section>
             </Grid.Column>
           </Grid>
