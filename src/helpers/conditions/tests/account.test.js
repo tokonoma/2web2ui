@@ -241,14 +241,18 @@ describe('Condition: isCustomBilling', () => {
 });
 
 describe('Condition: hasAccountOptionEnabled', () => {
-  const state = {
-    account: {
-      options: {
-        auto_verify_domains: true,
-        auto_verify_tracking_domains: false
+  let state;
+
+  beforeEach(() => {
+    state = {
+      account: {
+        options: {
+          auto_verify_domains: true,
+          auto_verify_tracking_domains: false
+        }
       }
-    }
-  };
+    };
+  });
 
   it('should return false when option is not present', () => {
     expect(hasAccountOptionEnabled('auto_verify_cats')(state)).toEqual(false);
@@ -260,5 +264,10 @@ describe('Condition: hasAccountOptionEnabled', () => {
 
   it('should return true when option is enabled', () => {
     expect(hasAccountOptionEnabled('auto_verify_domains')(state)).toEqual(true);
+  });
+
+  it('should return default value (false) if parent prop does not exist', () => {
+    state.account.options = null;
+    expect(hasAccountOptionEnabled('auto_verify_domains')(state)).toEqual(false);
   });
 });
