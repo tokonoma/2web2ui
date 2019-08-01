@@ -93,6 +93,19 @@ export default (state = initialState, { meta, payload, type }) => {
         }
       };
 
+    //TODO: Remove
+    case 'GET_JOB_STATUS_MOCK':
+      return {
+        ...state,
+        jobResultsLoading: false,
+        jobResults: {
+          ['list-id']: {
+            status: 'queued_for_batch',
+            address_count: 123321
+          }
+        }
+      };
+
     // Single Recipient
     case 'SINGLE_RECIPIENT_VALIDATION_PENDING':
       return { ...state, singleResults: null, singleLoading: true };

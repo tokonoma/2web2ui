@@ -47,6 +47,10 @@ export function triggerJob(listId) {
   // });
 }
 
+export function getJobStatusMock(list_id) {
+  return { type: 'GET_JOB_STATUS_MOCK' };
+}
+
 export function singleAddress(address) {
   return sparkpostApiRequest({
     type: 'SINGLE_RECIPIENT_VALIDATION',

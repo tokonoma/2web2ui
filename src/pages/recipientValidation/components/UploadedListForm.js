@@ -39,7 +39,7 @@ class UploadedListForm extends React.Component {
   handleModal = (showPriceModal = false) => () => this.setState({ showPriceModal });
 
   render() {
-    const { count = 123321, currentUsage = 1234321, onSubmit } = this.props;
+    const { count, currentUsage, onSubmit } = this.props;
 
     return (
       <div style={{ padding: '12px' }}>

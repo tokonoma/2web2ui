@@ -5,17 +5,19 @@ import UploadedListForm from './components/UploadedListForm';
 import { formatDate, formatTime } from 'src/helpers/date';
 import { connect } from 'react-redux';
 import { showAlert } from 'src/actions/globalAlert';
-// import { triggerJob, getJobStatus } from 'src/actions/recipientValidation';
-// import { getUsage } from 'src/actions/account';
+import { getJobStatusMock } from 'src/actions/recipientValidation';
+import { getUsage } from 'src/actions/account';
+import _ from 'lodash';
+import Loading from 'src/components/loading';
+
 export class UploadedListPage extends Component {
 
   componentDidMount() {
-    // const { getJobStatus, history } = this.props;
+    const { getJobStatusMock, getUsage } = this.props;
     // TODO: Use action
-    // getJobStatus().catch(() => {
-    //   history.replace('/recipient-validation');
-    // });
+    getJobStatusMock();
     // TODO: Get usage
+    getUsage();
 
   }
 
@@ -35,7 +37,14 @@ export class UploadedListPage extends Component {
   }
 
   render() {
-    const { batchStatus } = this.props;
+    const { results, currentUsage, loading } = this.props;
+
+    if (loading) {
+      return (<Loading />);
+    }
+    const { status, address_count } = results;
+    const volumeUsed = _.get(currentUsage, 'recipient_validation.month.used', 0);
+
     return (
       <Page title='Recipient Validation' breadcrumbAction={{ content: 'Back', component: Link, to: '/recipient-validation/list' }}>
         <Panel>
@@ -43,10 +52,13 @@ export class UploadedListPage extends Component {
             {this.renderTitle()}
           </Panel.Section>
           <Panel.Section>
-            {batchStatus === 'queued_for_batch'
-              ? <UploadedListForm
+            {status === 'queued_for_batch'
+              ? (<UploadedListForm
                 onSubmit={this.handleSubmit}
-              />
+                count={address_count}
+                currentUsage={volumeUsed}
+
+              />)
               : <div>List Results</div>
             }
           </Panel.Section>
@@ -56,11 +68,15 @@ export class UploadedListPage extends Component {
   }
 }
 
-const mapStateToProps = (state, { match }) => ({
-  batchStatus: 'queued_for_batch', //TODO: Replace with status of job
-  listId: match.params.listId,
-  currentUsage: state.account.rvUsage
-});
+const mapStateToProps = ({ recipientValidation, account }, { match }) => {
+  const { listId } = match.params;
 
-//TODO: Remove promise.resolve
-export default withRouter(connect(mapStateToProps, { showAlert })(UploadedListPage));
+  return {
+    listId,
+    results: recipientValidation.jobResults[listId] || {},
+    currentUsage: account.rvUsage,
+    loading: recipientValidation.jobResultsLoading || account.usageLoading
+  };
+};
+
+export default withRouter(connect(mapStateToProps, { showAlert, getJobStatusMock, getUsage })(UploadedListPage));
