@@ -2,24 +2,24 @@
 
 exports[`Inbox Placement Reducer list seeds fail 1`] = `
 Object {
-  "pending": false,
   "seeds": Array [],
   "seedsError": undefined,
+  "seedsPending": false,
 }
 `;
 
 exports[`Inbox Placement Reducer list seeds pending 1`] = `
 Object {
-  "pending": true,
   "seeds": Array [],
   "seedsError": null,
+  "seedsPending": true,
 }
 `;
 
 exports[`Inbox Placement Reducer list seeds success 1`] = `
 Object {
-  "pending": false,
   "seeds": undefined,
   "seedsError": null,
+  "seedsPending": false,
 }
 `;

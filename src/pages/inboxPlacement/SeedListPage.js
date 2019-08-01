@@ -87,7 +87,7 @@ export class SeedListPage extends React.Component {
 
 const mapStateToProps = (state, props) => ({
   seeds: state.inboxPlacement.seeds,
-  pending: state.inboxPlacement.pending,
+  pending: state.inboxPlacement.seedsPending,
   error: state.inboxPlacement.seedsError,
   referenceSeed: selectReferenceSeed(state)
 });

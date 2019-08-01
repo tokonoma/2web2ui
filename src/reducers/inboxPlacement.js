@@ -1,16 +1,16 @@
 const initialState = {
-  pending: false,
+  seedsPending: false,
   seeds: []
 };
 
 export default (state = initialState, { type, payload }) => {
   switch (type) {
     case 'GET_SEEDS_PENDING':
-      return { ...state, pending: true, seedsError: null };
+      return { ...state, seedsPending: true, seedsError: null };
     case 'GET_SEEDS_SUCCESS':
-      return { ...state, pending: false, seeds: payload, seedsError: null };
+      return { ...state, seedsPending: false, seeds: payload, seedsError: null };
     case 'GET_SEEDS_FAIL':
-      return { ...state, pending: false, seedsError: payload };
+      return { ...state, seedsPending: false, seedsError: payload };
 
     default:
       return state;
