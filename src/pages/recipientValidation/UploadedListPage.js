@@ -5,14 +5,20 @@ import UploadedListForm from './components/UploadedListForm';
 import { formatDate, formatTime } from 'src/helpers/date';
 import { connect } from 'react-redux';
 import { showAlert } from 'src/actions/globalAlert';
-import { triggerJob, getJobStatus } from 'src/actions/recipientValidation';
-
-class UploadedListPage extends Component {
+// import { triggerJob, getJobStatus } from 'src/actions/recipientValidation';
+// import { getUsage } from 'src/actions/account';
+export class UploadedListPage extends Component {
 
   componentDidMount() {
-    // TODO: if 404 on loading the list
-    // history.replace('/recipient-validation');
+    // const { getJobStatus, history } = this.props;
+    // TODO: Use action
+    // getJobStatus().catch(() => {
+    //   history.replace('/recipient-validation');
+    // });
+    // TODO: Get usage
+
   }
+
 
   renderTitle = (date = Date.now()) => ( //TODO: Remove pre-rendered date
     <div style={{ fontSize: '1rem', fontWeight: 200 }}>
@@ -29,7 +35,7 @@ class UploadedListPage extends Component {
   }
 
   render() {
-    const { batch_status } = this.props;
+    const { batchStatus } = this.props;
     return (
       <Page title='Recipient Validation' breadcrumbAction={{ content: 'Back', component: Link, to: '/recipient-validation/list' }}>
         <Panel>
@@ -37,7 +43,7 @@ class UploadedListPage extends Component {
             {this.renderTitle()}
           </Panel.Section>
           <Panel.Section>
-            {batch_status === 'queued_for_batch'
+            {batchStatus === 'queued_for_batch'
               ? <UploadedListForm
                 onSubmit={this.handleSubmit}
               />
@@ -51,8 +57,10 @@ class UploadedListPage extends Component {
 }
 
 const mapStateToProps = (state, { match }) => ({
-  batch_status: 'queued_for_batch', //TODO: Replace with status of job
-  listId: match.params.listId
+  batchStatus: 'queued_for_batch', //TODO: Replace with status of job
+  listId: match.params.listId,
+  currentUsage: state.account.rvUsage
 });
 
-export default withRouter(connect(mapStateToProps, { showAlert, getJobStatus, triggerJob })(UploadedListPage));
+//TODO: Remove promise.resolve
+export default withRouter(connect(mapStateToProps, { showAlert })(UploadedListPage));

@@ -28,7 +28,6 @@ export default class FileUploadWrapper extends Component {
 
   render() {
     const { input, meta, uploading } = this.props;
-
     if (uploading) {
       return (
         <fieldset className={styles.Field}>
