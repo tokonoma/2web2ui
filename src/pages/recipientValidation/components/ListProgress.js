@@ -18,12 +18,12 @@ const BATCH_STATUS = [
 class ListProgress extends Component {
 
   render() {
-    const { status = 'checking_regex', fileName = 'Big_file.csv' } = this.props;
+    const { status, filename } = this.props;
 
     const percentage = 100 * BATCH_STATUS.findIndex((batchStep) => batchStep === status) / BATCH_STATUS.length;
     return (
       <div style={{ width: '80%', margin: '20px' }}>
-        <h2>{fileName}</h2>
+        <h2>{filename}</h2>
         <div style={{ marginBottom: 80 }}>Your list is validating. You can track its progress on the recipient validation home page,
         we'll let you know when validatioin is complete and your results are ready.</div>
         <ProgressBar completed={percentage}/>

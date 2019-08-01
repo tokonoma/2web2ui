@@ -59,9 +59,11 @@ export class UploadedListPage extends Component {
                 onSubmit={this.handleSubmit}
                 job={results}
                 currentUsage={volumeUsed}
-
               />)
-              : <ListProgress />
+              : (<ListProgress
+                status={status}
+                filename={filename}
+              />)
             }
           </Panel.Section>
         </Panel>
