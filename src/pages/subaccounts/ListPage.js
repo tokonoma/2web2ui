@@ -83,7 +83,7 @@ export class ListPage extends Component {
             external: true
           }
         }}>
-        { error ? this.renderError() : this.renderCollection() }
+        {error ? this.renderError() : this.renderCollection()}
       </Page>
     );
   }
