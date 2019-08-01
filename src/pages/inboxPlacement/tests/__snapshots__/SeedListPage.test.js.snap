@@ -46,6 +46,7 @@ exports[`Page: SeedList tests should render page correctly with defaults 1`] = `
             </div>
             <TextField
               multiline={true}
+              readOnly={true}
               resize="vertical"
               rows={12}
               type="text"

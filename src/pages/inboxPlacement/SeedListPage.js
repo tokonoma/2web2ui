@@ -50,7 +50,7 @@ export class SeedListPage extends React.Component {
             Placement</UnstyledLink> to see the results.
           </p>
         </div>
-        <TextField multiline value={seeds.join('\n')} resize="vertical" rows={12}/>
+        <TextField multiline value={seeds.join('\n')} resize="vertical" rows={12} readOnly/>
         <div className={styles.DownloadButtonContainer}>
           <SaveCSVButton primary data={csvData} saveCsv={true} caption='Download List'/>
         </div>
