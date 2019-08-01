@@ -9,17 +9,22 @@ describe('Page: SeedList tests', () => {
       loading: false,
       seeds: [],
       getSeedList: jest.fn(),
-      referenceSeed: 'ref1@sparkpost.com'
+      referenceSeed: 'ref1@seed.sparkpost.com'
     };
     return shallow(<SeedListPage {...defaults} {...props} />);
   };
 
-  it('should render page correctly with defaults', () => {
+  it('renders page correctly with defaults', () => {
     const mockGetSeedList = jest.fn();
     const wrapper = subject({ getSeedList: mockGetSeedList });
 
     expect(wrapper).toMatchSnapshot();
     expect(mockGetSeedList).toHaveBeenCalled();
+  });
+
+  it('renders page with seeds', () => {
+    const wrapper = subject({ seeds: ['seed1@gmail.com', 'seed2@yahoo.com', 'ref1@seed.sparkpost.com']});
+    expect(wrapper.find('TextField')).toMatchSnapshot();
   });
 
   it('renders loading', () => {
