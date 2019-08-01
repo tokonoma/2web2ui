@@ -46,6 +46,7 @@ import trackingDomains from './trackingDomains';
 import typeahead from './typeahead';
 import webhooks from './webhooks';
 import websiteAuth from './websiteAuth';
+import inboxPlacement from './inboxPlacement';
 
 const appReducer = combineReducers({
   acceptedReport,
@@ -66,6 +67,7 @@ const appReducer = combineReducers({
   apiKeys,
   currentUser,
   form,
+  inboxPlacement,
   invoices,
   ipPools,
   globalAlert,

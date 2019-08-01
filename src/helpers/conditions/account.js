@@ -23,4 +23,4 @@ export const hasOnlineSupport = ({ account }) => _.get(account, 'support.online'
 export const hasUiOption = (option) => ({ account }) => _.has(account.options, `ui.${option}`);
 export const isAccountUiOptionSet = (option, defaultValue) => ({ account }) => Boolean(_.get(account.options, `ui.${option}`, defaultValue));
 export const isSubscriptionPending = ({ account }) => Boolean(account.pending_subscription);
-export const hasAccountOptionEnabled = (option) => ({ account }) => Boolean(account.options[option]);
+export const hasAccountOptionEnabled = (option) => ({ account }) => Boolean(_.get(account.options, option, false));

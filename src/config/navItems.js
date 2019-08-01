@@ -1,6 +1,8 @@
-import { Home, InsertChart, Code, MailOutline, Language, Settings, Compare, NotificationsActive, Signal, VerifiedUser } from '@sparkpost/matchbox-icons';
+import { Home, InsertChart, Code, MailOutline, Language, Compare, NotificationsActive, Signal, VerifiedUser } from '@sparkpost/matchbox-icons';
 
 import campaignNavItems from './campaignNavItems';
+import settingsNavItems from './settingsNavItems';
+import inboxPlacementNavItems from './inboxPlacementNavItems';
 
 export default [
   {
@@ -106,36 +108,7 @@ export default [
     icon: Language
   },
   {
-    label: 'Settings',
-    to: '/account',
-    icon: Settings,
-    children: [
-      {
-        label: 'API Keys',
-        to: '/account/api-keys'
-      },
-      {
-        label: 'Subaccounts',
-        to: '/account/subaccounts'
-      },
-      {
-        label: 'SMTP Settings',
-        to: '/account/smtp'
-      },
-      {
-        label: 'Sending Domains',
-        to: '/account/sending-domains'
-      },
-
-      {
-        label: 'Tracking Domains',
-        to: '/account/tracking-domains'
-      },
-      {
-        label: 'IP Pools',
-        to: '/account/ip-pools'
-      }
-    ]
+    ...settingsNavItems
   },
   {
     label: 'Alerts',
@@ -150,5 +123,8 @@ export default [
     tag: 'labs',
     divider: true,
     icon: Code
+  },
+  {
+    ...inboxPlacementNavItems
   }
 ];
