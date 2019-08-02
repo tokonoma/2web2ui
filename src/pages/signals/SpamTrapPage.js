@@ -21,7 +21,7 @@ import ChartHeader from './components/ChartHeader';
 import { formatFullNumber, formatNumber, roundToPlaces } from 'src/helpers/units';
 import moment from 'moment';
 import _ from 'lodash';
-import { spamTrapHitTypesCollection } from './constants/spamTrapHitTypes';
+import { spamTrapHitTypesCollection, spamTrapHitTypesByLabel } from './constants/spamTrapHitTypes';
 
 import EngagementRecencyPreview from './components/previews/EngagementRecencyPreview';
 import HealthScorePreview from './components/previews/HealthScorePreview';
@@ -136,7 +136,10 @@ export class SpamTrapPage extends Component {
                   yAxisProps={this.getYAxisProps()}
                   xAxisProps={this.getXAxisProps()}
                 />
-                <Legend items={spamTrapHitTypesCollection} />
+                <Legend
+                  items={spamTrapHitTypesCollection}
+                  tooltipContent={(label) => spamTrapHitTypesByLabel[label].description}
+                />
               </div>
             )}
           </Panel>

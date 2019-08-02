@@ -171,22 +171,35 @@ exports[`Signals Spam Trap Page renders correctly 1`] = `
             items={
               Array [
                 Object {
+                  "description": "
+      This is an email address from a domain hosted by a parked domain provider. These addresses
+      can point to list quality issues but do not affect your reputation.
+    ",
                   "fill": "#50CFDA",
                   "key": "trap_hits_parked",
                   "label": "Parked",
                 },
                 Object {
+                  "description": "
+      An email address that once was a real address, but now is a spam trap. These addresses signal
+      that you should clean out old unengaged recipients.
+    ",
                   "fill": "#29B9C7",
                   "key": "trap_hits_recycled",
                   "label": "Recycled",
                 },
                 Object {
+                  "description": "
+      This is an email address from a domain that looks like a real mailbox provider, like
+      gmal.com. These addresses signal that you should improve your list acquisition practices.
+    ",
                   "fill": "#1A838B",
                   "key": "trap_hits_typo",
                   "label": "Typo",
                 },
               ]
             }
+            tooltipContent={[Function]}
           />
         </div>
       </Panel>
