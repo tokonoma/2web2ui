@@ -27,7 +27,7 @@ export class SeedListPage extends React.Component {
 
   renderContents = () => {
     const { seeds, referenceSeed } = this.props;
-    const csvData = ['Seed Address'].concat(seeds.map((row) => [row]));
+    const csvData = seeds.map((address) => ({ 'Seed Address': address }));
 
     return (<>
       <Panel.Section>

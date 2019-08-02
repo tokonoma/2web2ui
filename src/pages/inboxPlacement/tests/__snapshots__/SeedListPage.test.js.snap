@@ -1,5 +1,26 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Page: SeedList tests render include csv button with correct format 1`] = `
+<SaveCSVButton
+  caption="Download List"
+  data={
+    Array [
+      Object {
+        "Seed Address": "seed1@gmail.com",
+      },
+      Object {
+        "Seed Address": "seed2@yahoo.com",
+      },
+      Object {
+        "Seed Address": "ref1@seed.sparkpost.com",
+      },
+    ]
+  }
+  primary={true}
+  saveCsv={true}
+/>
+`;
+
 exports[`Page: SeedList tests renders page correctly with defaults 1`] = `
 <Page
   empty={Object {}}
@@ -57,11 +78,7 @@ exports[`Page: SeedList tests renders page correctly with defaults 1`] = `
             >
               <SaveCSVButton
                 caption="Download List"
-                data={
-                  Array [
-                    "Seed Address",
-                  ]
-                }
+                data={Array []}
                 primary={true}
                 saveCsv={true}
               />

@@ -27,6 +27,11 @@ describe('Page: SeedList tests', () => {
     expect(wrapper.find('TextField')).toMatchSnapshot();
   });
 
+  it('render include csv button with correct format', () => {
+    const wrapper = subject({ seeds: ['seed1@gmail.com', 'seed2@yahoo.com', 'ref1@seed.sparkpost.com']});
+    expect(wrapper.find('SaveCSVButton')).toMatchSnapshot();
+  });
+
   it('renders loading', () => {
     const wrapper = subject({ pending: true });
     expect(wrapper.find('Loading')).toExist();
