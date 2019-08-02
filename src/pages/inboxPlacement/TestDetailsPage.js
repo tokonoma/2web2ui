@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Page, Tabs } from '@sparkpost/matchbox';
 
 import { Loading } from 'src/components';
-import { getInboxPlacementTest } from 'src/actions/inboxPlacement';
+import { getInboxPlacementTest, getInboxPlacementByProviders } from 'src/actions/inboxPlacement';
 import { showAlert } from 'src/actions/globalAlert';
 import TestDetails from './components/TestDetails';
 import TestContent from './components/TestContent';
@@ -11,12 +11,13 @@ import useTabs from 'src/hooks/useTabs';
 import { RedirectAndAlert } from 'src/components/globalAlert';
 
 export const TestDetailsPage = (props) => {
-  const { history, id, tabIndex, loading, getInboxPlacementTest } = props;
+  const { history, id, tabIndex, loading, error, getInboxPlacementTest, getInboxPlacementByProviders } = props;
   const [selectedTabIndex, tabs] = useTabs(TABS, tabIndex);
 
   useEffect(() => {
     getInboxPlacementTest(id);
-  }, [getInboxPlacementTest, id]);
+    getInboxPlacementByProviders(id);
+  }, [getInboxPlacementTest, getInboxPlacementByProviders, id]);
 
   useEffect(() => {
     history.replace(`/inbox-placement/details/${id}/${TABS[selectedTabIndex].key}`);
@@ -29,7 +30,7 @@ export const TestDetailsPage = (props) => {
       case 'content':
         return <TestContent/>;
       default:
-        return <TestDetails/>;
+        return <TestDetails currentTest={details} inboxPlacementsByProvider={detailsByProvider}/>;
     }
   };
 
@@ -69,8 +70,9 @@ function mapStateToProps(state, props) {
     id,
     loading: state.inboxPlacement.getTestPending,
     error: state.inboxPlacement.getTestError,
-    details: state.inboxPlacement.currentTestDetails
+    details: state.inboxPlacement.currentTestDetails,
+    detailsByProvider: state.inboxPlacement.inboxPlacementsByProvider
   };
 }
 
-export default connect(mapStateToProps, { getInboxPlacementTest, showAlert })(TestDetailsPage);
+export default connect(mapStateToProps, { getInboxPlacementTest, getInboxPlacementByProviders })(TestDetailsPage);

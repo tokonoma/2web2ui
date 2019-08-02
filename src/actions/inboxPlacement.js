@@ -10,12 +10,21 @@ export function getSeedList() {
   });
 }
 
-export function getInboxPlacementTest(id) {
-  return sparkpostApiRequest({
-    type: 'GET_INBOX_PLACEMENT_TEST',
+export const getInboxPlacementTest = (id) => sparkpostApiRequest({
+  type: 'GET_INBOX_PLACEMENT_TEST',
+  meta: {
+    method: 'GET',
+    url: `/v1/inbox-placement/${id}`
+  }
+});
+
+export const getInboxPlacementByProviders = (id) => sparkpostApiRequest({
+  type: 'GET_INBOX_PLACEMENT_TEST_BY_PROVIDER',
+  meta: {
+    method: 'GET',
+    url: `/v1/inbox-placement/${id}/mailbox-provider`,
     meta: {
-      method: 'GET',
-      url: `/v1/inbox-placement/${id}`
+      testId: id
     }
-  });
-}
+  }
+});
