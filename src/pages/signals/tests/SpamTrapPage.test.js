@@ -8,11 +8,27 @@ describe('Signals Spam Trap Page', () => {
   const data = [
     {
       date: '2017-01-01',
-      relative_trap_hits: 0.1
+      injections: 1240,
+      relative_trap_hits: 0.1,
+      relative_trap_hits_parked: 0.025,
+      relative_trap_hits_recycled: 0.025,
+      relative_trap_hits_typo: 0.05,
+      trap_hits: 124,
+      trap_hits_parked: 31,
+      trap_hits_recycled: 31,
+      trap_hits_typo: 62
     },
     {
       date: '2017-01-02',
-      relative_trap_hits: 0.5
+      injections: 424,
+      relative_trap_hits: 0.5,
+      relative_trap_hits_parked: 0.125,
+      relative_trap_hits_recycled: 0.125,
+      relative_trap_hits_typo: 0.25,
+      trap_hits: 212,
+      trap_hits_parked: 53,
+      trap_hits_recycled: 53,
+      trap_hits_typo: 106
     }
   ];
 
@@ -20,7 +36,7 @@ describe('Signals Spam Trap Page', () => {
     props = {
       facetId: 'test.com',
       facet: 'sending-domain',
-      data: [{ relative_trap_hits: 0.1 }],
+      data,
       gap: 0.25,
       handleDateSelect: jest.fn(),
       loading: false,
@@ -29,7 +45,6 @@ describe('Signals Spam Trap Page', () => {
       xTicks: []
     };
     wrapper = shallow(<SpamTrapPage {...props}/>);
-    wrapper.setProps({ data });
   });
 
   it('renders correctly', () => {
@@ -54,19 +69,20 @@ describe('Signals Spam Trap Page', () => {
   describe('local state', () => {
     it('handles calculation type', () => {
       const calculation = shallow(wrapper.find('ChartHeader').props().primaryArea);
-      calculation.simulate('change', 'relative');
-      expect(wrapper.find('BarChart').prop('yKey')).toEqual('relative_trap_hits');
+      calculation.simulate('change', 'absolute');
+
+      expect(wrapper.find('BarChart').prop('yKeys')).toEqual([
+        expect.objectContaining({ key: 'trap_hits_typo' }),
+        expect.objectContaining({ key: 'trap_hits_recycled' }),
+        expect.objectContaining({ key: 'trap_hits_parked' })
+      ]);
     });
   });
 
   describe('bar chart props', () => {
     it('renders tooltip content', () => {
       const Tooltip = wrapper.find('BarChart').prop('tooltipContent');
-      expect(shallow(<Tooltip payload={{
-        trap_hits: 2,
-        injections: 3,
-        relative_trap_hits: 0.001234567
-      }} />)).toMatchSnapshot();
+      expect(shallow(<Tooltip payload={data[0]} />)).toMatchSnapshot();
     });
 
     it('gets x axis props', () => {

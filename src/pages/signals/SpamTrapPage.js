@@ -1,4 +1,5 @@
-import React, { Component, Fragment } from 'react';
+/* eslint-disable max-lines */
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { getSpamHits } from 'src/actions/signals';
 import { selectSpamHitsDetails } from 'src/selectors/signals';
@@ -13,12 +14,14 @@ import withDetails from './containers/withDetails';
 import withDateSelection from './containers/withDateSelection';
 import { Loading } from 'src/components';
 import Callout from 'src/components/callout';
+import Legend from './components/charts/legend/Legend';
 import Divider from './components/Divider';
 import Calculation from './components/viewControls/Calculation';
 import ChartHeader from './components/ChartHeader';
 import { formatFullNumber, formatNumber, roundToPlaces } from 'src/helpers/units';
 import moment from 'moment';
 import _ from 'lodash';
+import { spamTrapHitTypesCollection } from './constants/spamTrapHitTypes';
 
 import EngagementRecencyPreview from './components/previews/EngagementRecencyPreview';
 import HealthScorePreview from './components/previews/HealthScorePreview';
@@ -53,11 +56,26 @@ export class SpamTrapPage extends Component {
   }
 
   getTooltipContent = ({ payload = {}}) => (
-    <Fragment>
-      <TooltipMetric label='Spam Trap Hits' value={formatFullNumber(payload.trap_hits)} />
+    <>
+      {this.state.calculation === 'absolute' ? (
+        <TooltipMetric label='Spam Trap Hits' value={formatFullNumber(payload.trap_hits)} />
+      ) : (
+        <TooltipMetric label='Spam Trap Rate' value={`${roundToPlaces(payload.relative_trap_hits * 100, 4)}%`} />
+      )}
+      {spamTrapHitTypesCollection.map(({ fill, key, label }) => (
+        <TooltipMetric
+          color={fill}
+          key={key}
+          label={label}
+          value={
+            this.state.calculation === 'absolute'
+              ? `${formatFullNumber(payload[key])}`
+              : `${roundToPlaces(payload[`relative_${key}`] * 100, 4)}%`
+          }
+        />
+      ))}
       <TooltipMetric label='Injections' value={formatFullNumber(payload.injections)} />
-      <TooltipMetric label='Spam Trap Rate' value={`${roundToPlaces(payload.relative_trap_hits * 100, 4)}%`} />
-    </Fragment>
+    </>
   )
 
   renderContent = () => {
@@ -97,19 +115,29 @@ export class SpamTrapPage extends Component {
               tooltipContent={SPAM_TRAP_INFO}
             />
             {chartPanel || (
-              <BarChart
-                gap={gap}
-                onClick={handleDateSelect}
-                selected={selectedDate}
-                timeSeries={data}
-                onMouseOver={handleDateHover}
-                onMouseOut={resetDateHover}
-                hovered={hoveredDate}
-                tooltipContent={this.getTooltipContent}
-                yKey={calculation === 'absolute' ? 'trap_hits' : 'relative_trap_hits'}
-                yAxisProps={this.getYAxisProps()}
-                xAxisProps={this.getXAxisProps()}
-              />
+              <div className='LiftTooltip'>
+                <BarChart
+                  gap={gap}
+                  onClick={handleDateSelect}
+                  selected={selectedDate}
+                  timeSeries={data}
+                  onMouseOver={handleDateHover}
+                  onMouseOut={resetDateHover}
+                  hovered={hoveredDate}
+                  tooltipContent={this.getTooltipContent}
+                  yKeys={
+                    spamTrapHitTypesCollection
+                      .map(({ fill, key }) => ({
+                        key: calculation === 'relative' ? `relative_${key}` : key,
+                        fill
+                      }))
+                      .reverse()
+                  }
+                  yAxisProps={this.getYAxisProps()}
+                  xAxisProps={this.getXAxisProps()}
+                />
+                <Legend items={spamTrapHitTypesCollection} />
+              </div>
             )}
           </Panel>
         </Grid.Column>

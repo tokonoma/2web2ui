@@ -10,16 +10,30 @@ Object {
 exports[`Signals Spam Trap Page bar chart props renders tooltip content 1`] = `
 <Fragment>
   <TooltipMetric
-    label="Spam Trap Hits"
-    value="2"
+    label="Spam Trap Rate"
+    value="10%"
+  />
+  <TooltipMetric
+    color="#50CFDA"
+    key="trap_hits_parked"
+    label="Parked"
+    value="2.5%"
+  />
+  <TooltipMetric
+    color="#29B9C7"
+    key="trap_hits_recycled"
+    label="Recycled"
+    value="2.5%"
+  />
+  <TooltipMetric
+    color="#1A838B"
+    key="trap_hits_typo"
+    label="Typo"
+    value="5%"
   />
   <TooltipMetric
     label="Injections"
-    value="3"
-  />
-  <TooltipMetric
-    label="Spam Trap Rate"
-    value="0.1235%"
+    value="1,240"
   />
 </Fragment>
 `;
@@ -63,61 +77,118 @@ exports[`Signals Spam Trap Page renders correctly 1`] = `
   excessive rate of spam trap hits is an indicator of poor list procurement and hygiene practices.
 "
         />
-        <BarChart
-          activeFill="#22838A"
-          fill="#B3ECEF"
-          gap={0.25}
-          height={250}
-          margin={
-            Object {
-              "bottom": 5,
-              "left": 18,
-              "right": 0,
-              "top": 12,
-            }
-          }
-          onClick={[MockFunction]}
-          selected="2017-01-01"
-          timeSeries={
-            Array [
+        <div
+          className="LiftTooltip"
+        >
+          <BarChart
+            activeFill="#22838A"
+            fill="#B3ECEF"
+            gap={0.25}
+            height={250}
+            margin={
               Object {
-                "date": "2017-01-01",
-                "relative_trap_hits": 0.1,
-              },
-              Object {
-                "date": "2017-01-02",
-                "relative_trap_hits": 0.5,
-              },
-            ]
-          }
-          tooltipContent={[Function]}
-          width="99%"
-          xAxisProps={
-            Object {
-              "tickFormatter": [Function],
-              "ticks": Array [],
+                "bottom": 5,
+                "left": 18,
+                "right": 0,
+                "top": 12,
+              }
             }
-          }
-          xAxisRefLines={Array []}
-          xKey="date"
-          yAxisProps={
-            Object {
-              "domain": Array [
+            onClick={[MockFunction]}
+            selected="2017-01-01"
+            timeSeries={
+              Array [
+                Object {
+                  "date": "2017-01-01",
+                  "injections": 1240,
+                  "relative_trap_hits": 0.1,
+                  "relative_trap_hits_parked": 0.025,
+                  "relative_trap_hits_recycled": 0.025,
+                  "relative_trap_hits_typo": 0.05,
+                  "trap_hits": 124,
+                  "trap_hits_parked": 31,
+                  "trap_hits_recycled": 31,
+                  "trap_hits_typo": 62,
+                },
+                Object {
+                  "date": "2017-01-02",
+                  "injections": 424,
+                  "relative_trap_hits": 0.5,
+                  "relative_trap_hits_parked": 0.125,
+                  "relative_trap_hits_recycled": 0.125,
+                  "relative_trap_hits_typo": 0.25,
+                  "trap_hits": 212,
+                  "trap_hits_parked": 53,
+                  "trap_hits_recycled": 53,
+                  "trap_hits_typo": 106,
+                },
+              ]
+            }
+            tooltipContent={[Function]}
+            width="99%"
+            xAxisProps={
+              Object {
+                "tickFormatter": [Function],
+                "ticks": Array [],
+              }
+            }
+            xAxisRefLines={Array []}
+            xKey="date"
+            yAxisProps={
+              Object {
+                "domain": Array [
+                  "auto",
+                  "auto",
+                ],
+                "tickFormatter": [Function],
+              }
+            }
+            yAxisRefLines={Array []}
+            yKey="value"
+            yKeys={
+              Array [
+                Object {
+                  "fill": "#1A838B",
+                  "key": "relative_trap_hits_typo",
+                },
+                Object {
+                  "fill": "#29B9C7",
+                  "key": "relative_trap_hits_recycled",
+                },
+                Object {
+                  "fill": "#50CFDA",
+                  "key": "relative_trap_hits_parked",
+                },
+              ]
+            }
+            yRange={
+              Array [
                 "auto",
                 "auto",
-              ],
-              "tickFormatter": [Function],
+              ]
             }
-          }
-          yAxisRefLines={Array []}
-          yKey="relative_trap_hits"
-          yRange={
-            Array [
-              "auto",
-              "auto",
-            ]
-          }
-        />
+          />
+          <Legend
+            items={
+              Array [
+                Object {
+                  "fill": "#50CFDA",
+                  "key": "trap_hits_parked",
+                  "label": "Parked",
+                },
+                Object {
+                  "fill": "#29B9C7",
+                  "key": "trap_hits_recycled",
+                  "label": "Recycled",
+                },
+                Object {
+                  "fill": "#1A838B",
+                  "key": "trap_hits_typo",
+                  "label": "Typo",
+                },
+              ]
+            }
+          />
+        </div>
       </Panel>
     </Grid.Column>
     <Grid.Column
