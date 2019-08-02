@@ -33,14 +33,27 @@ export const selectSpamHitsDetails = createSelector(
   ({ loading, error, data }, facet, facetId, subaccountId, { from, to }) => {
     const match = data.find((item) => String(item[facet]) === facetId) || {};
     const history = match.history || [];
-    const normalizedHistory = history.map(({ dt: date, ...values }) => ({ date, ...values }));
+    const normalizedHistory = history.map(({ dt: date, ...values }) => ({
+      ...values,
+      date,
+      // note, this is an exception most other cases these relative metrics are provided by the API
+      relative_trap_hits_parked: (values.trap_hits_parked / values.injections),
+      relative_trap_hits_recycled: (values.trap_hits_recycled / values.injections),
+      relative_trap_hits_typo: (values.trap_hits_typo / values.injections)
+    }));
 
     const filledHistory = fillByDate({
       dataSet: normalizedHistory,
       fill: {
         injections: null,
         relative_trap_hits: null,
-        trap_hits: null
+        trap_hits: null,
+        relative_trap_hits_parked: null,
+        trap_hits_parked: null,
+        relative_trap_hits_recycled: null,
+        trap_hits_recycled: null,
+        relative_trap_hits_typo: null,
+        trap_hits_typo: null
       },
       from, to
     });

@@ -55,7 +55,23 @@ exports[`Signals SpamTrapsPreview Component renders correctly 1`] = `
           }
         }
         yAxisRefLines={Array []}
-        yKey="relative_trap_hits"
+        yKey="value"
+        yKeys={
+          Array [
+            Object {
+              "fill": "#1A838B",
+              "key": "relative_trap_hits_typo",
+            },
+            Object {
+              "fill": "#29B9C7",
+              "key": "relative_trap_hits_recycled",
+            },
+            Object {
+              "fill": "#50CFDA",
+              "key": "relative_trap_hits_parked",
+            },
+          ]
+        }
         yRange={
           Array [
             "auto",

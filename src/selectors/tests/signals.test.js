@@ -39,13 +39,19 @@ describe('Selectors: signals', () => {
                   dt: '2018-01-01',
                   injections: 182400,
                   relative_trap_hits: 0.0025, // bad
-                  trap_hits: 456
+                  trap_hits: 456,
+                  trap_hits_parked: 300,
+                  trap_hits_recycled: 100,
+                  trap_hits_typo: 56
                 },
                 {
                   dt: '2018-01-03',
                   injections: 35000,
                   relative_trap_hits: 0.001, // good
-                  trap_hits: 35
+                  trap_hits: 35,
+                  trap_hits_parked: 20,
+                  trap_hits_recycled: 15,
+                  trap_hits_typo: 0
                 }
               ]
             },
@@ -59,13 +65,19 @@ describe('Selectors: signals', () => {
                   dt: '2018-01-01',
                   injections: 282400,
                   relative_trap_hits: 0.003, // bad
-                  trap_hits: 856
+                  trap_hits: 856,
+                  trap_hits_parked: 56,
+                  trap_hits_recycled: 600,
+                  trap_hits_typo: 200
                 },
                 {
                   dt: '2018-01-02',
                   injections: 50000,
                   relative_trap_hits: 0.001, // good
-                  trap_hits: 50
+                  trap_hits: 50,
+                  trap_hits_parked: 30,
+                  trap_hits_recycled: 15,
+                  trap_hits_typo: 5
                 }
               ]
             }
