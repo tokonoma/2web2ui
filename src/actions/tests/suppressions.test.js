@@ -14,7 +14,7 @@ describe('Action Creator: Suppressions', () => {
     let mockSuppression;
 
     beforeEach(() => {
-      mockSuppression = { recipient: 'foo@bar.com', type: 'non_transactional' } ;
+      mockSuppression = { recipient: 'foo/@bar.com', type: 'non_transactional' } ;
     });
 
     it('makes api call with correct parameter', async () => {
@@ -25,7 +25,7 @@ describe('Action Creator: Suppressions', () => {
           type: 'DELETE_SUPPRESSION',
           meta: {
             method: 'DELETE',
-            url: '/v1/suppression-list/foo@bar.com',
+            url: '/v1/suppression-list/foo%2F%40bar.com',
             headers: {},
             data: { type: mockSuppression.type },
             suppression: mockSuppression
@@ -43,7 +43,7 @@ describe('Action Creator: Suppressions', () => {
           type: 'DELETE_SUPPRESSION',
           meta: {
             method: 'DELETE',
-            url: '/v1/suppression-list/foo@bar.com',
+            url: '/v1/suppression-list/foo%2F%40bar.com',
             headers: { 'x-msys-subaccount': 101 },
             data: { type: mockSuppression.type },
             suppression: mockSuppression
