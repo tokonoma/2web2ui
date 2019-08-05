@@ -23,3 +23,35 @@ Object {
   "seedsPending": false,
 }
 `;
+
+exports[`Inbox Placement Reducer get specific inbox placement test pending 1`] = `
+Object {
+  "currentTest": null,
+  "getTestError": null,
+  "getTestPending": true,
+}
+`;
+
+exports[`Inbox Placement Reducer get specific inbox placement test pending fail 1`] = `
+Object {
+  "currentTest": null,
+  "getTestError": Object {
+    "errors": Array [
+      Object {
+        "message": "Some error occurred",
+      },
+    ],
+  },
+  "getTestPending": false,
+}
+`;
+
+exports[`Inbox Placement Reducer get specific inbox placement test success 1`] = `
+Object {
+  "currentTest": Object {
+    "fakeData": true,
+  },
+  "getTestError": null,
+  "getTestPending": false,
+}
+`;

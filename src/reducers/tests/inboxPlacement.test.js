@@ -10,8 +10,18 @@ const TEST_CASES = {
   },
   'list seeds fail': {
     type: 'GET_SEEDS_FAIL'
+  },
+  'get specific inbox placement test pending': {
+    type: 'GET_INBOX_PLACEMENT_TEST_PENDING'
+  },
+  'get specific inbox placement test success': {
+    payload: { fakeData: true },
+    type: 'GET_INBOX_PLACEMENT_TEST_SUCCESS'
+  },
+  'get specific inbox placement test pending fail': {
+    payload: { errors: [ { message: 'Some error occurred' }]},
+    type: 'GET_INBOX_PLACEMENT_TEST_FAIL'
   }
-
 };
 
 cases('Inbox Placement Reducer', (action) => {
