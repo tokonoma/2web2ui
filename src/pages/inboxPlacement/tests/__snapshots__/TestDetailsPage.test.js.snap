@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Page: Single Inbox Placement Test renders page correctly with defaults 1`] = `
+<Page
+  empty={Object {}}
+  title="Inbox Placement | Results"
+>
+  <Tabs
+    color="orange"
+    connectBelow={true}
+    selected={0}
+    tabs={
+      Array [
+        Object {
+          "content": <span
+            className="TabPadding"
+          >
+            Details
+          </span>,
+          "key": "details",
+        },
+        Object {
+          "content": <span
+            className="TabPadding"
+          >
+            Content
+          </span>,
+          "key": "content",
+        },
+      ]
+    }
+  />
+  <Panel
+    className="TabPadding"
+  >
+    <TestDetails />
+  </Panel>
+</Page>
+`;
