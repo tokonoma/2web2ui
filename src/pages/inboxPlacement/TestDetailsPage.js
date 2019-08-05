@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Page, Panel, Tabs } from '@sparkpost/matchbox';
 
@@ -8,77 +8,64 @@ import { showAlert } from 'src/actions/globalAlert';
 import styles from './TestDetailsPage.module.scss';
 import TestDetails from './components/TestDetails';
 import TestContent from './components/TestContent';
+import useTabs from 'src/hooks/useTabs';
 
-export class TestDetailsPage extends Component {
-  state = {
-    selectedTab: this.props.tab || 0
-  };
+export const TestDetailsPage = (props) => {
+  const { history, id, tabIndex, loading, getInboxPlacementTest } = props;
+  const [selectedTabIndex, tabs] = useTabs(TABS, tabIndex);
 
-  handleTabs(tabIdx) {
-    const { history } = this.props;
-    const { id } = this.props;
-
-    history.replace(`/inbox-placement/details/${id}/${tabs[tabIdx].key}`);
-    this.setState({ selectedTab: tabIdx });
-  }
-
-  componentDidMount() {
-    const { id, getInboxPlacementTest } = this.props;
+  useEffect(() => {
     getInboxPlacementTest(id);
-  }
+  }, [getInboxPlacementTest, id]);
 
-  renderTabContent = (tabId) => {
-    switch (tabId) {
-      case 1:
+  useEffect(() => {
+    history.replace(`/inbox-placement/details/${id}/${TABS[selectedTabIndex].key}`);
+  }, [history, id, selectedTabIndex]);
+
+
+  const renderTabContent = () => {
+    const selectedTabKey = tabs[selectedTabIndex].key;
+    switch (selectedTabKey) {
+      case 'content':
         return <TestContent/>;
       default:
         return <TestDetails/>;
     }
   };
 
-  renderTabs = () => {
-    const { selectedTab } = this.state;
+  const renderTabs = () => (<>
+    <Tabs
+      selected={selectedTabIndex}
+      connectBelow={true}
+      tabs={tabs}
+    />
+    <Panel className={styles.TabPadding}>
+      {renderTabContent(selectedTabIndex)}
+    </Panel>
+  </>);
 
-    return (<>
-      <Tabs
-        selected={selectedTab}
-        connectBelow={true}
-        tabs={tabs.map(({ content }, idx) => ({ content, onClick: () => this.handleTabs(idx) }))}
-      />
-      <Panel className={styles.TabPadding}>
-
-        {this.renderTabContent(selectedTab)}
-      </Panel>
-    </>);
-  };
-
-  render() {
-    const { loading } = this.props;
-
-    if (loading) {
-      return <Loading/>;
-    }
-
-    return (
-      <Page title='Inbox Placement | Results'>
-        {this.renderTabs()}
-      </Page>
-    );
+  if (loading) {
+    return <Loading/>;
   }
-}
 
-const tabs = [
+  return (
+    <Page title='Inbox Placement | Results'>
+      {renderTabs()}
+    </Page>
+  );
+};
+
+const TABS = [
   { content: <span className={styles.TabPadding}>Details</span>, key: 'details' },
-  { content: 'Content', key: 'content' }
+  { content: <span className={styles.TabPadding}>Content</span>, key: 'content' }
 ];
-
 
 function mapStateToProps(state, props) {
   const id = props.match.params.id;
-  const currentTabIndex = tabs.findIndex(({ key }) => key === props.match.params.tab);
+  const currentTabIndex = TABS.findIndex(({ key }) => key === props.match.params.tab);
 
   return {
-    tab: currentTabIndex > 0 ? currentTabIndex : 0,
+    tabIndex: currentTabIndex > 0 ? currentTabIndex : 0,
     id,
     loading: state.inboxPlacement.listLoading,
     error: state.inboxPlacement.listError
