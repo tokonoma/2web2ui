@@ -68,7 +68,8 @@ export class Confirmation extends React.Component {
     const currentPlanPricing = getPlanPrice(current);
     const selectedPlanPricing = getPlanPrice(selected);
     const isPlanSelected = current.code !== selected.code;
-    const isDowngrade = (currentPlanPricing.price > selectedPlanPricing.price) || (isPlanSelected && current.isFree && selected.isFree);
+    const isFreeToFree = (isPlanSelected && current.isFree && selected.isFree);
+    const isDowngrade = currentPlanPricing.price > selectedPlanPricing.price || isFreeToFree;
     let effectiveDateMarkup = null;
     let ipMarkup = null;
     let addonMarkup = null;
