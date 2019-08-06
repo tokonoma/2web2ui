@@ -21,6 +21,17 @@ const TEST_CASES = {
   'get specific inbox placement test pending fail': {
     payload: { errors: [ { message: 'Some error occurred' }]},
     type: 'GET_INBOX_PLACEMENT_TEST_FAIL'
+  },
+  'get specific inbox placement test content pending': {
+    type: 'GET_INBOX_PLACEMENT_TEST_CONTENT_PENDING'
+  },
+  'get specific inbox placement test content success': {
+    payload: { fakeData: true },
+    type: 'GET_INBOX_PLACEMENT_TEST_CONTENT_SUCCESS'
+  },
+  'get specific inbox placement test content pending fail': {
+    payload: { errors: [ { message: 'Some error occurred' }]},
+    type: 'GET_INBOX_PLACEMENT_TEST_CONTENT_FAIL'
   }
 };
 

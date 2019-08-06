@@ -28,3 +28,13 @@ export const getInboxPlacementByProviders = (id) => sparkpostApiRequest({
     }
   }
 });
+
+export function getInboxPlacementTestContent(id) {
+  return sparkpostApiRequest({
+    type: 'GET_INBOX_PLACEMENT_TEST_CONTENT',
+    meta: {
+      method: 'GET',
+      url: `/v1/inbox-placement/${id}/content`
+    }
+  });
+}
