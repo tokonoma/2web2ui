@@ -11,7 +11,7 @@ import useTabs from 'src/hooks/useTabs';
 import { RedirectAndAlert } from 'src/components/globalAlert';
 
 export const TestDetailsPage = (props) => {
-  const { history, id, tabIndex, loading, error, getInboxPlacementTest } = props;
+  const { history, id, tabIndex, loading, getInboxPlacementTest } = props;
   const [selectedTabIndex, tabs] = useTabs(TABS, tabIndex);
 
   useEffect(() => {
