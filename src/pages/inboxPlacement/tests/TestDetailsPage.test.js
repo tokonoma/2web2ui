@@ -37,6 +37,18 @@ describe('Page: Single Inbox Placement Test', () => {
   it('renders loading', () => {
     wrapper.setProps({ loading: true });
     expect(wrapper.find('Loading')).toExist();
+    expect(wrapper.find('Page')).not.toExist();
+  });
+
+  it('handles errors', () => {
+    wrapper.setProps({
+      error: {
+        message: 'You dun goofed'
+      }
+    });
+    expect(wrapper).toMatchSnapshot();
+    expect(wrapper.find('RedirectAndAlert')).toExist();
+    expect(wrapper.find('Page')).not.toExist();
   });
 
   it('renders details when tab is set to details', () => {
@@ -50,7 +62,7 @@ describe('Page: Single Inbox Placement Test', () => {
     expect(wrapper.find('TestDetails')).not.toExist();
   });
 
-  it('updates URl when tabs change', () => {
+  it('updates URL when tabs change', () => {
     wrapper = mount(<TestDetailsPage {...props} />);
     (wrapper.find('Tab').last().simulate('click'));
     expect(mockHistoryReplace).toHaveBeenCalled();

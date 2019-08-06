@@ -8,7 +8,7 @@ import { showAlert } from 'src/actions/globalAlert';
 import TestDetails from './components/TestDetails';
 import TestContent from './components/TestContent';
 import useTabs from 'src/hooks/useTabs';
-import { Redirect } from 'react-router-dom';
+import { RedirectAndAlert } from 'src/components/globalAlert';
 
 export const TestDetailsPage = (props) => {
   const { history, id, tabIndex, loading, error, getInboxPlacementTest } = props;
@@ -38,7 +38,9 @@ export const TestDetailsPage = (props) => {
   }
 
   if (error) {
-    return <Redirect to='/inbox-placement' />;
+    return <RedirectAndAlert
+      to='/inbox-placement'
+      alert={{ type: 'error', message: error.message }}/>;
   }
 
   return (

@@ -1,5 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Page: Single Inbox Placement Test handles errors 1`] = `
+<RedirectAndAlert
+  alert={
+    Object {
+      "message": "You dun goofed",
+      "type": "error",
+    }
+  }
+  to="/inbox-placement"
+/>
+`;
+
 exports[`Page: Single Inbox Placement Test renders page correctly with defaults 1`] = `
 <Page
   empty={Object {}}
