@@ -12,28 +12,16 @@ exports[`Page: Single Inbox Placement Test renders page correctly with defaults 
     tabs={
       Array [
         Object {
-          "content": <span
-            className="TabPadding"
-          >
-            Details
-          </span>,
+          "content": "Details",
           "key": "details",
         },
         Object {
-          "content": <span
-            className="TabPadding"
-          >
-            Content
-          </span>,
+          "content": "Content",
           "key": "content",
         },
       ]
     }
   />
-  <Panel
-    className="TabPadding"
-  >
-    <TestDetails />
-  </Panel>
+  <TestDetails />
 </Page>
 `;

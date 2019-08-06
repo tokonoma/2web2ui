@@ -1,17 +1,17 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Page, Panel, Tabs } from '@sparkpost/matchbox';
+import { Page, Tabs } from '@sparkpost/matchbox';
 
 import { Loading } from 'src/components';
 import { getInboxPlacementTest } from 'src/actions/inboxPlacement';
 import { showAlert } from 'src/actions/globalAlert';
-import styles from './TestDetailsPage.module.scss';
 import TestDetails from './components/TestDetails';
 import TestContent from './components/TestContent';
 import useTabs from 'src/hooks/useTabs';
+import { Redirect } from 'react-router-dom';
 
 export const TestDetailsPage = (props) => {
-  const { history, id, tabIndex, loading, getInboxPlacementTest } = props;
+  const { history, id, tabIndex, loading, error, getInboxPlacementTest } = props;
   const [selectedTabIndex, tabs] = useTabs(TABS, tabIndex);
 
   useEffect(() => {
@@ -33,31 +33,29 @@ export const TestDetailsPage = (props) => {
     }
   };
 
-  const renderTabs = () => (<>
-    <Tabs
-      selected={selectedTabIndex}
-      connectBelow={true}
-      tabs={tabs}
-    />
-    <Panel className={styles.TabPadding}>
-      {renderTabContent(selectedTabIndex)}
-    </Panel>
-  </>);
-
   if (loading) {
     return <Loading/>;
   }
 
+  if (error) {
+    return <Redirect to='/inbox-placement' />;
+  }
+
   return (
     <Page title='Inbox Placement | Results'>
-      {renderTabs()}
+      <Tabs
+        selected={selectedTabIndex}
+        connectBelow={true}
+        tabs={tabs}
+      />
+      {renderTabContent(selectedTabIndex)}
     </Page>
   );
 };
 
 const TABS = [
-  { content: <span className={styles.TabPadding}>Details</span>, key: 'details' },
-  { content: <span className={styles.TabPadding}>Content</span>, key: 'content' }
+  { content: 'Details', key: 'details' },
+  { content: 'Content', key: 'content' }
 ];
 
 function mapStateToProps(state, props) {
@@ -67,8 +65,9 @@ function mapStateToProps(state, props) {
   return {
     tabIndex: currentTabIndex > 0 ? currentTabIndex : 0,
     id,
-    loading: state.inboxPlacement.listLoading,
-    error: state.inboxPlacement.listError
+    loading: state.inboxPlacement.getTestPending,
+    error: state.inboxPlacement.getTestError,
+    details: state.inboxPlacement.currentTestDetails
   };
 }
 

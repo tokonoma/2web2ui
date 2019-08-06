@@ -1,6 +1,6 @@
 const initialState = {
+  currentTestDetails: null,
   seedsPending: false,
-  currentTest,
   seeds: []
 };
 
@@ -15,7 +15,7 @@ export default (state = initialState, { type, payload }) => {
     case 'GET_INBOX_PLACEMENT_TEST_PENDING':
       return { ...state, getTestPending: true, getTestError: null };
     case 'GET_INBOX_PLACEMENT_TEST_SUCCESS':
-      return { ...state, getTestPending: false, currentTest: payload, getTestError: null };
+      return { ...state, getTestPending: false, currentTestDetails: payload, getTestError: null };
     case 'GET_INBOX_PLACEMENT_TEST_FAIL':
       return { ...state, getTestPending: false, getTestError: payload };
 
