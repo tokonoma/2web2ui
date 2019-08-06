@@ -16,7 +16,7 @@ export class RVDisabledPage extends Component {
   renderActionButton = () => {
     const { isSelfServeBilling, isFree } = this.props;
     if (!isSelfServeBilling) {
-      return null;
+      return (<Button external primary to='https://www.sparkpost.com/recipient-validation/#recipient-validation-form'>Contact Sales</Button>);
     }
     return (isFree)
       ? (<Button primary component={Link} to={'/account/billing'}>Upgrade your plan</Button>)
