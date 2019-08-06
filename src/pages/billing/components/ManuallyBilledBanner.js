@@ -1,6 +1,5 @@
 import React from 'react';
 import { Banner } from '@sparkpost/matchbox';
-import PageLink from 'src/components/pageLink/PageLink';
 import SupportTicketLink from 'src/components/supportTicketLink/SupportTicketLink';
 
 /**
@@ -42,31 +41,16 @@ const ManuallyBilledBanner = ({
     );
   }
 
-  const autoBillingAvailable = !custom && onZuoraPlan;
-  const action = autoBillingAvailable
-    ? {
-      Component: PageLink,
-      content: 'Enable Automatic Billing',
-      to: custom ? '/account/billing/enable-automatic' : '/account/billing/plan'
-    }
-    : null;
-
   return (
     <Banner
       status="info"
       title={title}
-      action={action}
     >
       <p>
         To make changes to your plan or billing information, please {
           <SupportTicketLink issueId="general_issue">submit a support ticket</SupportTicketLink>
         }.
       </p>
-      {autoBillingAvailable && (
-        <p>
-          Enable automatic billing to self-manage your plan and add-ons.
-        </p>
-      )}
     </Banner>
   );
 };
