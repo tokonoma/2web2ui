@@ -1,0 +1,71 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Inbox Placement Test Content renders page correctly with defaults 1`] = `
+<Fragment>
+  <Panel
+    sectioned={true}
+    title="foo"
+  >
+    <Grid>
+      <Grid.Column
+        md={3}
+        sm={12}
+      >
+        From:
+        <br />
+        <span
+          className="FromAddress"
+        >
+          foo@bar.com
+        </span>
+      </Grid.Column>
+      <Grid.Column
+        md={3}
+        xs={12}
+      >
+        Raw Message Size:
+        <br />
+        2.52KB
+      </Grid.Column>
+    </Grid>
+  </Panel>
+  <Panel>
+    <Tabs
+      color="orange"
+      connectBelow={true}
+      selected={0}
+      tabs={
+        Array [
+          Object {
+            "content": "Raw Message",
+            "key": "raw_message",
+          },
+          Object {
+            "content": "HTML",
+            "key": "html",
+          },
+          Object {
+            "content": "AMP HTML",
+            "key": "amp",
+          },
+          Object {
+            "content": "Text",
+            "key": "text",
+          },
+          Object {
+            "content": "Headers",
+            "key": "headers",
+          },
+        ]
+      }
+    />
+    <Panel.Section>
+      <CodeBlock
+        code="The Raw message"
+        height={355}
+        numbered={false}
+      />
+    </Panel.Section>
+  </Panel>
+</Fragment>
+`;

@@ -7,6 +7,7 @@ describe('Page: Single Inbox Placement Test', () => {
     const defaults = {
       getInboxPlacementTest: jest.fn(),
       getInboxPlacementByProviders: jest.fn(),
+      getInboxPlacementTestContent: jest.fn(),
       tabIndex: 0,
       id: 0,
       loading: false,
