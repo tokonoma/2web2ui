@@ -1,8 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Page: SeedList tests render include csv button with correct format 1`] = `
+exports[`Page: SeedList tests render include download txt button with correct format 1`] = `
 <SaveCSVButton
-  caption="Download List"
+  caption={
+    <span>
+      <FileDownload />
+      Download CSV
+    </span>
+  }
   data={
     Array [
       Object {
@@ -16,76 +21,92 @@ exports[`Page: SeedList tests render include csv button with correct format 1`] 
       },
     ]
   }
-  primary={true}
   saveCsv={true}
 />
 `;
 
 exports[`Page: SeedList tests renders page correctly with defaults 1`] = `
 <Page
+  breadcrumbAction={
+    Object {
+      "content": "Inbox Placement Tests",
+      "onClick": [Function],
+    }
+  }
   empty={Object {}}
-  title="Inbox Placement | Seed List"
+  title="Inbox Placement | Start a Test"
 >
   <Panel>
     <Panel.Section>
-      <Grid>
-        <Grid.Column
-          lg={12}
-          xs={12}
+      <h3>
+        Send To These Addresses
+      </h3>
+    </Panel.Section>
+    <Panel.Section>
+      <div>
+        <p
+          className="Directions"
         >
-          <Panel.Section>
-            <h3>
-              Seedlist
-            </h3>
-          </Panel.Section>
-          <Panel.Section>
-            <h6>
-              Directions
-            </h6>
-          </Panel.Section>
-          <Panel.Section>
-            <div
-              className="Directions"
-            >
-              <p>
-                To run an Inbox Placement test, first add the following email addresses to your list. Make sure that the reference email address 
-                ref1@seed.sparkpost.com
-                 is the first one in your list.
-              </p>
-              <p>
-                Next, set up your campaign. Make sure you are sending to the full list of seed email addresses. For best results, set the \`X-SP-Inbox-Placement\` header with a unique value such as "my-first-test". If you don't, you may run into issues if your have more than one test running with the same subject line.
-              </p>
-              <p>
-                Send the email and jump back to 
-                <UnstyledLink
-                  to="/inbox-placement"
-                >
-                  Inbox Placement
-                </UnstyledLink>
-                 to see the results.
-              </p>
-            </div>
-            <TextField
-              multiline={true}
-              readOnly={true}
-              resize="vertical"
-              rows={12}
-              type="text"
-              value=""
-            />
-            <div
-              className="DownloadButtonContainer"
-            >
-              <SaveCSVButton
-                caption="Download List"
-                data={Array []}
-                primary={true}
-                saveCsv={true}
-              />
-            </div>
-          </Panel.Section>
-        </Grid.Column>
-      </Grid>
+          To run an Inbox Placement test, first add the following email addresses to your list. Make sure that the reference email address 
+          <strong>
+            ref1@seed.sparkpost.com
+          </strong>
+           is the first one in your list.
+        </p>
+        <hr
+          className="hr"
+        />
+        <p
+          className="Directions"
+        >
+          Next, set up your campaign. Make sure you are sending to the full list of seed email addresses. For best results, set the 
+          <strong>
+            \`X-SP-Inbox-Placement\`
+          </strong>
+           header with a unique value such as 
+          <strong>
+            "my-first-test"
+          </strong>
+          . If you don't, you may run into issues if your have more than one test running with the same subject line.
+        </p>
+        <p>
+          Send the email and jump back to 
+          <UnstyledLink
+            to="/inbox-placement"
+          >
+            Inbox Placement
+          </UnstyledLink>
+           to see the results.
+        </p>
+      </div>
+      <TextField
+        multiline={true}
+        readOnly={true}
+        resize="vertical"
+        rows={10}
+        type="text"
+        value=""
+      />
+      <div>
+        <SaveCSVButton
+          caption={
+            <span>
+              <FileDownload />
+              Download CSV
+            </span>
+          }
+          data={Array []}
+          saveCsv={true}
+        />
+        <span
+          className="CopyButton"
+        >
+          <CopyToClipboard
+            label="Copy List"
+            value=""
+          />
+        </span>
+      </div>
     </Panel.Section>
   </Panel>
 </Page>
@@ -96,7 +117,7 @@ exports[`Page: SeedList tests renders page with seeds 1`] = `
   multiline={true}
   readOnly={true}
   resize="vertical"
-  rows={12}
+  rows={10}
   type="text"
   value="seed1@gmail.com
 seed2@yahoo.com

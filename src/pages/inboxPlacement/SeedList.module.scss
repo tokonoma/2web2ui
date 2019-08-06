@@ -1,7 +1,13 @@
-.DownloadButtonContainer {
-  text-align: right;
-}
+@import '~@sparkpost/matchbox/src/styles/config.scss';
 
 .Directions {
   max-width: 70%;
+}
+
+.hr {
+  border-color: color(gray, 9);
+}
+
+.CopyButton {
+  margin-left: 20px;
 }
