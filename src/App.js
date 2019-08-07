@@ -8,6 +8,7 @@ import Pendo from 'src/components/pendo/Pendo';
 import Layout from 'src/components/layout/Layout';
 import ErrorBoundary from 'src/components/errorBoundaries/ErrorBoundary';
 import AppRoutes from 'src/components/appRoutes';
+import GlobalBanner from 'src/context/GlobalBanner';
 
 import config from 'src/config';
 
@@ -29,9 +30,11 @@ const App = ({ RouterComponent = BrowserRouter }) => (
           <AuthenticationGate />
           <SuspensionAlerts />
           <CookieConsent />
-          <Layout>
-            <AppRoutes />
-          </Layout>
+          <GlobalBanner>
+            <Layout>
+              <AppRoutes />
+            </Layout>
+          </GlobalBanner>
           <Support />
           <GlobalAlertWrapper />
         </div>

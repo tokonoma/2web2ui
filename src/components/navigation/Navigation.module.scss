@@ -51,6 +51,10 @@
   height: 100vh;
   padding-top: rem(56);
   box-shadow: none;
+
+  &.bannerOpen {
+    padding-top: rem(112);
+  }
 }
 
 .List {
@@ -82,4 +86,19 @@
     opacity: 1;
     pointer-events: auto;
   }
+}
+
+
+.banner {
+  background-color: color(orange);
+  position: fixed;
+  z-index: z-index(overlay) - 2;
+  top: rem(56);
+  left: 0;
+  right: 0;
+  text-align: center;
+  color: white;
+  font-size: font-size(500);
+  height: rem(56);
+  line-height: rem(56);
 }

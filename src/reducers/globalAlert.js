@@ -1,7 +1,8 @@
 import _ from 'lodash';
 
 const initialState = {
-  alerts: []
+  alerts: [],
+  showBanner: true
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -27,6 +28,9 @@ export default (state = initialState, { type, payload }) => {
         ...state,
         alerts: state.alerts.filter(({ id }) => id !== payload.id)
       };
+
+    case 'CLEAR_GLOBAL_BANNER':
+      return { ...state, showBanner: false };
 
     default:
       return state;
