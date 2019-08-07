@@ -1,5 +1,5 @@
 const initialState = {
-  currentTestDetails: null,
+  currentTestDetails: {},
   seedsPending: false,
   seeds: [],
   inboxPlacementsByProvider: [] //todo consider combining in currentTest

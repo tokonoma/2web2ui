@@ -13,7 +13,6 @@ const TestInfoBlock = ({ label, value }) => <Grid.Column>
 
 
 const TestDetails = ({ currentTest = {}, inboxPlacementsByProvider }) => {
-
   const placements = currentTest.placement || {};
   const formattedPlacements = [
     {

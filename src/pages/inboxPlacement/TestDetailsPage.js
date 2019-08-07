@@ -3,15 +3,14 @@ import { connect } from 'react-redux';
 import { Page, Tabs } from '@sparkpost/matchbox';
 
 import { Loading } from 'src/components';
-import { getInboxPlacementTest, getInboxPlacementByProviders } from 'src/actions/inboxPlacement';
-import { showAlert } from 'src/actions/globalAlert';
+import { getInboxPlacementByProviders, getInboxPlacementTest } from 'src/actions/inboxPlacement';
 import TestDetails from './components/TestDetails';
 import TestContent from './components/TestContent';
 import useTabs from 'src/hooks/useTabs';
 import { RedirectAndAlert } from 'src/components/globalAlert';
 
 export const TestDetailsPage = (props) => {
-  const { history, id, tabIndex, loading, error, getInboxPlacementTest, getInboxPlacementByProviders } = props;
+  const { history, id, tabIndex, loading, error, details, detailsByProvider, getInboxPlacementTest, getInboxPlacementByProviders } = props;
   const [selectedTabIndex, tabs] = useTabs(TABS, tabIndex);
 
   useEffect(() => {
