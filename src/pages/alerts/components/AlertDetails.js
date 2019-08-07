@@ -104,7 +104,7 @@ export const AlertDetails = ({ alert, id, subaccountIdToString }) => {
     { label: 'Evaluated:', render: (() => (renderEvaluated())) },
     { label: 'Filtered By:', render: (() => (renderFilteredBy())) },
     { label: 'Notify:', render: (() => (renderNotify())) },
-    { label: 'Active:', render: (() => (<AlertToggle muted={muted} id={id} />)) }
+    { label: 'Mute:', render: (() => (<AlertToggle muted={muted} id={id} />)) }
   ];
 
   const renderAlertDetails = () =>

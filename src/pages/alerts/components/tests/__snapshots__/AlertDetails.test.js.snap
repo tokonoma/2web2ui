@@ -157,7 +157,7 @@ exports[`Alert Details Component should render the alert details component corre
   >
     <LabelledValue
       bold={false}
-      label="Active:"
+      label="Mute:"
       value={
         <Connect(AlertToggle)
           id="alert-id"

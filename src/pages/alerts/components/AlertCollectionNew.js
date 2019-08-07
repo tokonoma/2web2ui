@@ -25,7 +25,7 @@ class AlertCollectionNew extends Component {
       { label: 'Alert Name', sortKey: 'name', width: '40%' },
       { label: 'Metric', sortKey: 'metric' },
       { label: 'Last Triggered', sortKey: 'last_triggered_timestamp' },
-      { label: 'Active', sortKey: 'muted' },
+      { label: 'Mute', sortKey: 'muted' },
       null
     ];
 

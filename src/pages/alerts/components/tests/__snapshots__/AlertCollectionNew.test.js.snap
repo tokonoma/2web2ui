@@ -18,7 +18,7 @@ exports[`TestCollection Component should render 1`] = `
         "sortKey": "last_triggered_timestamp",
       },
       Object {
-        "label": "Active",
+        "label": "Mute",
         "sortKey": "muted",
       },
       null,
