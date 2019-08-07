@@ -1,3 +1,25 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Inbox Placement Reducer initial state 1`] = `Object {}`;
+exports[`Inbox Placement Reducer list seeds fail 1`] = `
+Object {
+  "seeds": Array [],
+  "seedsError": undefined,
+  "seedsPending": false,
+}
+`;
+
+exports[`Inbox Placement Reducer list seeds pending 1`] = `
+Object {
+  "seeds": Array [],
+  "seedsError": null,
+  "seedsPending": true,
+}
+`;
+
+exports[`Inbox Placement Reducer list seeds success 1`] = `
+Object {
+  "seeds": undefined,
+  "seedsError": null,
+  "seedsPending": false,
+}
+`;

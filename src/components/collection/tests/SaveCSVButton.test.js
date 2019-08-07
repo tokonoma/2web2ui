@@ -28,4 +28,9 @@ describe('Save CSV Button', () => {
     wrapper.setProps({ saveCsv: false });
     expect(wrapper).toMatchSnapshot();
   });
+
+  it('should render with given button label', () => {
+    wrapper.setProps({ caption: 'Click Me!' });
+    expect(wrapper.dive().text()).toEqual('Click Me!');
+  });
 });
