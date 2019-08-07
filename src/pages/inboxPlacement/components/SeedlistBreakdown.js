@@ -1,7 +1,7 @@
 import React from 'react';
 import { Grid } from '@sparkpost/matchbox';
 
-const GroupPercentage = ({ value }) => <span>{parseFloat(value * 100).toFixed(2)}%</span>;
+export const GroupPercentage = ({ value }) => <span>{parseFloat(value * 100).toFixed(2)}%</span>;
 
 const MailBoxGroup = (groupData, index) => (<Grid key={index}>
   <Grid.Column>

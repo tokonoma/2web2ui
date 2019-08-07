@@ -1,0 +1,95 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: SeedlistBreakdown SubComponent: GroupPercentage renders percentage correctly 1`] = `
+<span>
+  20.00
+  %
+</span>
+`;
+
+exports[`Component: SeedlistBreakdown renders correctly with data 1`] = `
+<Fragment>
+  <Grid>
+    <Grid.Column>
+      Mailbox Provider
+    </Grid.Column>
+    <Grid.Column>
+      Inbox
+    </Grid.Column>
+    <Grid.Column>
+      Spam
+    </Grid.Column>
+    <Grid.Column>
+      Missing
+    </Grid.Column>
+  </Grid>
+  <Grid
+    key="0"
+  >
+    <Grid.Column>
+      <span>
+        dogmail.com
+      </span>
+    </Grid.Column>
+    <Grid.Column>
+      <GroupPercentage
+        value={0}
+      />
+    </Grid.Column>
+    <Grid.Column>
+      <GroupPercentage
+        value={0}
+      />
+    </Grid.Column>
+    <Grid.Column>
+      <GroupPercentage
+        value={1}
+      />
+    </Grid.Column>
+  </Grid>
+  <Grid
+    key="1"
+  >
+    <Grid.Column>
+      <span>
+        doghouseinbox.com
+      </span>
+    </Grid.Column>
+    <Grid.Column>
+      <GroupPercentage
+        value={0.8}
+      />
+    </Grid.Column>
+    <Grid.Column>
+      <GroupPercentage
+        value={0.1}
+      />
+    </Grid.Column>
+    <Grid.Column>
+      <GroupPercentage
+        value={0.1}
+      />
+    </Grid.Column>
+  </Grid>
+</Fragment>
+`;
+
+exports[`Component: SeedlistBreakdown renders correctly with no data 1`] = `
+<Fragment>
+  <Grid>
+    <Grid.Column>
+      Mailbox Provider
+    </Grid.Column>
+    <Grid.Column>
+      Inbox
+    </Grid.Column>
+    <Grid.Column>
+      Spam
+    </Grid.Column>
+    <Grid.Column>
+      Missing
+    </Grid.Column>
+  </Grid>
+  0
+</Fragment>
+`;
