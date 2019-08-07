@@ -34,8 +34,8 @@ export class PendingCancelGlobalBanner extends Component {
         <span> Your account will be cancelled on </span>
         {formatDate(pending_cancellation.effective_date)}
         <span>, and you will no longer be able to send email or login. Changed your mind? </span>
-        <Button style={{ color: 'white', border: '2px solid white' }} flat onClick={this.handleRenewAccount}>Don't Cancel</Button>
-        <Button flat onClick={this.handleClose}><Close style={{ color: 'white', right: 0 }} /></Button>
+        <Button className={styles.RenewButton} flat onClick={this.handleRenewAccount}>Don't Cancel</Button>
+        <Button className={styles.Close} flat onClick={this.handleClose}><Close/></Button>
       </div>
     );
   }
