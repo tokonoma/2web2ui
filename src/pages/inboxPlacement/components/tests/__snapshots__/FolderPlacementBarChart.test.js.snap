@@ -1,0 +1,222 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: FolderPlacementBarChart renders correct with data 1`] = `
+<ResponsiveContainer
+  debounce={0}
+  height={200}
+  width="99%"
+>
+  <BarChart
+    barCategoryGap="10%"
+    barGap={4}
+    data={
+      Array [
+        Object {
+          "name": "Inbox",
+          "value": 90.5,
+        },
+        Object {
+          "name": "Spam",
+          "value": 5.5,
+        },
+        Object {
+          "name": "Missing",
+          "value": 4,
+        },
+      ]
+    }
+    layout="vertical"
+    margin={
+      Object {
+        "right": 80,
+      }
+    }
+    reverseStackOrder={false}
+    stackOffset="none"
+  >
+    <XAxis
+      allowDataOverflow={false}
+      allowDecimals={true}
+      allowDuplicatedCategory={true}
+      domain={
+        Array [
+          0,
+          "auto",
+        ]
+      }
+      height={30}
+      hide={false}
+      mirror={false}
+      orientation="bottom"
+      padding={
+        Object {
+          "left": 0,
+          "right": 0,
+        }
+      }
+      reversed={false}
+      scale="auto"
+      tickCount={5}
+      type="number"
+      width={0}
+      xAxisId={0}
+    />
+    <YAxis
+      allowDataOverflow={false}
+      allowDecimals={true}
+      allowDuplicatedCategory={true}
+      dataKey="name"
+      domain={
+        Array [
+          0,
+          "auto",
+        ]
+      }
+      height={0}
+      hide={false}
+      mirror={false}
+      orientation="left"
+      padding={
+        Object {
+          "bottom": 0,
+          "top": 0,
+        }
+      }
+      reversed={false}
+      scale="auto"
+      tickCount={5}
+      type="category"
+      width={60}
+      yAxisId={0}
+    />
+    <Bar
+      animationBegin={0}
+      animationDuration={400}
+      animationEasing="ease"
+      barSize={20}
+      data={Array []}
+      dataKey="value"
+      fill="#37aadc"
+      hide={false}
+      isAnimationActive={false}
+      layout="vertical"
+      legendType="rect"
+      minPointSize={0}
+      onAnimationEnd={[Function]}
+      onAnimationStart={[Function]}
+      xAxisId={0}
+      yAxisId={0}
+    >
+      <LabelList
+        fill="#55555a"
+        formatter={[Function]}
+        position="right"
+        valueAccessor={[Function]}
+      />
+    </Bar>
+  </BarChart>
+</ResponsiveContainer>
+`;
+
+exports[`Component: FolderPlacementBarChart renders correctly with no data 1`] = `
+<ResponsiveContainer
+  debounce={0}
+  height={200}
+  width="99%"
+>
+  <BarChart
+    barCategoryGap="10%"
+    barGap={4}
+    data={Array []}
+    layout="vertical"
+    margin={
+      Object {
+        "right": 80,
+      }
+    }
+    reverseStackOrder={false}
+    stackOffset="none"
+  >
+    <XAxis
+      allowDataOverflow={false}
+      allowDecimals={true}
+      allowDuplicatedCategory={true}
+      domain={
+        Array [
+          0,
+          "auto",
+        ]
+      }
+      height={30}
+      hide={false}
+      mirror={false}
+      orientation="bottom"
+      padding={
+        Object {
+          "left": 0,
+          "right": 0,
+        }
+      }
+      reversed={false}
+      scale="auto"
+      tickCount={5}
+      type="number"
+      width={0}
+      xAxisId={0}
+    />
+    <YAxis
+      allowDataOverflow={false}
+      allowDecimals={true}
+      allowDuplicatedCategory={true}
+      dataKey="name"
+      domain={
+        Array [
+          0,
+          "auto",
+        ]
+      }
+      height={0}
+      hide={false}
+      mirror={false}
+      orientation="left"
+      padding={
+        Object {
+          "bottom": 0,
+          "top": 0,
+        }
+      }
+      reversed={false}
+      scale="auto"
+      tickCount={5}
+      type="category"
+      width={60}
+      yAxisId={0}
+    />
+    <Bar
+      animationBegin={0}
+      animationDuration={400}
+      animationEasing="ease"
+      barSize={20}
+      data={Array []}
+      dataKey="value"
+      fill="#37aadc"
+      hide={false}
+      isAnimationActive={false}
+      layout="vertical"
+      legendType="rect"
+      minPointSize={0}
+      onAnimationEnd={[Function]}
+      onAnimationStart={[Function]}
+      xAxisId={0}
+      yAxisId={0}
+    >
+      <LabelList
+        fill="#55555a"
+        formatter={[Function]}
+        position="right"
+        valueAccessor={[Function]}
+      />
+    </Bar>
+  </BarChart>
+</ResponsiveContainer>
+`;
