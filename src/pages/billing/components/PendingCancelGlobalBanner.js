@@ -2,20 +2,43 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { formatDate } from 'src/helpers/date';
 import { Button } from '@sparkpost/matchbox';
+import { Close, AccessTime } from '@sparkpost/matchbox-icons';
 import styles from './PendingCancelGlobalBanner.module.scss';
+import { fetch as fetchAccount, renewAccount } from 'src/actions/account';
+import { hideGlobalBanner, showAlert } from 'src/actions/globalAlert';
 
 export class PendingCancelGlobalBanner extends Component {
+  handleClose = () => {
+    const { hideGlobalBanner } = this.props;
+    hideGlobalBanner();
+  }
+
+  handleRenewAccount = () => {
+    const { renewAccount, fetchAccount, showAlert } = this.props;
+    return renewAccount().then(() => {
+      showAlert({ type: 'success', message: 'Your account will not be cancelled.' });
+      return fetchAccount();
+    });
+  }
+
   render() {
+    const { account } = this.props;
+    const { pending_cancellation } = account;
+    if (!pending_cancellation) {
+      return null;
+    }
 
     return (
       <div className={styles.banner}>
-        <span>Your account will be cancelled on </span>
-        {formatDate(new Date())}
-        <span>, and you will no longer be able to send email or login. Changed your mind?</span>
-        <Button color='orange' flat><div style={{ color: 'white', border: '2px solid white' }}>Don't Cancel</div></Button>
+        <AccessTime />
+        <span> Your account will be cancelled on </span>
+        {formatDate(pending_cancellation.effective_date)}
+        <span>, and you will no longer be able to send email or login. Changed your mind? </span>
+        <Button style={{ color: 'white', border: '2px solid white' }} flat onClick={this.handleRenewAccount}>Don't Cancel</Button>
+        <Button flat onClick={this.handleClose}><Close style={{ color: 'white', right: 0 }} /></Button>
       </div>
     );
   }
 }
 
-export default connect(({ account }) => ({ account }))(PendingCancelGlobalBanner);
+export default connect(({ account }) => ({ account }), { renewAccount, showAlert, hideGlobalBanner, fetchAccount })(PendingCancelGlobalBanner);
