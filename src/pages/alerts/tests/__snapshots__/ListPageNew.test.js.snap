@@ -93,8 +93,9 @@ exports[`Page: Alerts List should render happy path 1`] = `
           <Tooltip
             bottom={true}
             content="View Details"
+            dark={true}
             forcePosition={false}
-            horizontalOffset="0px"
+            horizontalOffset="-8px"
             preferredDirection={
               Object {
                 "bottom": true,
@@ -150,8 +151,9 @@ exports[`Page: Alerts List should render happy path 1`] = `
           <Tooltip
             bottom={true}
             content="View Details"
+            dark={true}
             forcePosition={false}
-            horizontalOffset="0px"
+            horizontalOffset="-8px"
             preferredDirection={
               Object {
                 "bottom": true,

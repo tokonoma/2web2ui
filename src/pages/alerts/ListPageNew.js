@@ -73,7 +73,7 @@ export class ListPageNew extends Component {
                   <h3>{alert.name}</h3>
                 </Panel.Section>
                 <Panel.Section className = {styles.Footer}>
-                  <Tooltip content='View Details' width='100px'>
+                  <Tooltip dark content='View Details' width='100px' horizontalOffset='-8px'>
                     <Button flat component={Link} to = {`/alerts-new/details/${alert.id}`}><RemoveRedEye className = {styles.Icon}/></Button>
                   </Tooltip>
                 </Panel.Section>
