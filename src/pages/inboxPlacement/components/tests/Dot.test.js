@@ -1,6 +1,6 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import TestCollection from '../TestCollection';
+import TestCollection from '../AdvancedCollection';
 
 describe('TestCollection Component', () => {
   const props = {

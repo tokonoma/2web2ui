@@ -1,18 +1,13 @@
 @import '~@sparkpost/matchbox/src/styles/config.scss';
 
-.TabbedCellHeader {
-  padding: 0 0 0 2.1rem;
-}
-.TabbedCellBody {
-  padding: 0 0 0 1.1rem;
-}
-
 .Title {
   padding: spacing(larger) 2rem;
 }
 
-.FilterBox {
-  padding: spacing(larger) 2rem spacing(base);
+.FilterPanel {
+  padding: 0 1rem 0 1rem;
+  align-items: center;
+  justify-content: center;
 }
 
 .TableWrapper {

@@ -4,4 +4,83 @@
   position: relative;
   top: -20px;
   width: 75%;
+  font-size: medium;
+}
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.TabbedCellHeader {
+  padding: 0 0 0 2.1rem;
+}
+
+.TabbedCellBody {
+  padding: 0.3rem 0 0.3rem 1rem;
+}
+
+.FilterBox {
+  width: 80%;
+  float: left;
+  margin: 0 spacing() 0 0;
+}
+
+.TabbedRow {
+  padding-top: 0;
+}
+
+.SubjectContainer {
+  padding: 0.2rem 1rem 0 0;
+  align-items: center;
+  justify-content: center;
+  font-size: large;
+}
+
+.Subject {
+  display: inline-block;
+
+  strong {
+    color: #007CB3;
+  }
+}
+
+.TestName {
+  display: flex;
+  padding: 0 0 0 1.3rem;
+  margin: 0.2rem 0 0 0;
+  font-size: font-size(200);
+
+  strong {
+    font: Arial;
+  }
+
+  .Divider {
+    margin: 0 0.5rem 0 0.5rem;
+  }
+}
+
+.TestSchedule {
+  display: flex;
+  padding: 0 0 0 1.3rem;
+  margin: 0.2rem 0 0 0;
+  font-size: font-size(200);
+}
+
+.ScheduleIcon {
+  padding: 0 0.2rem 0 0;
+}
+
+.TooltipWrapper {
+  display: inline-block;
+}
+
+.ColumnHeader {
+  margin-bottom: 0;
+  font-size: font-size(200);
+  padding: 0.4rem 0 0.1rem 0;
+}
+
+.ColumnValue {
+  height: 2.5rem;
+}
+
+.RowTd {
+  padding-top: 0;
 }
