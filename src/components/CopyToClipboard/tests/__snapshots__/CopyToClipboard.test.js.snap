@@ -30,17 +30,3 @@ exports[`CopyToClipboard Component renders with default props 1`] = `
   </Button>
 </Tooltip>
 `;
-
-exports[`CopyToClipboard Component renders with provided label 1`] = `
-<Button
-  name="copy-field-button"
-  onClick={[Function]}
-  size="default"
->
-  <ContentCopy
-    size={14}
-  />
-   
-  Copy
-</Button>
-`;

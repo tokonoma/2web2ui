@@ -17,7 +17,7 @@ describe('CopyToClipboard Component', () => {
   });
 
   it('renders with provided label', () => {
-    expect(subject().find('Button')).toMatchSnapshot();
+    expect(subject({ label: 'Click Me!' }).find('Button').dive().text()).toEqual('<ContentCopy /> Click Me!');
   });
 
   it('should handle copy click', () => {

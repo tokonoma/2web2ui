@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Page: SeedList tests render include download txt button with correct format 1`] = `
+exports[`Page: SeedList tests render include download csv button with correct format 1`] = `
 <SaveCSVButton
   caption={
     <span>
