@@ -11,17 +11,7 @@ import NavItem from './components/NavItem';
 import NavGroup from './components/NavGroup';
 import { BannerContext } from 'src/context/GlobalBanner';
 import withContext from 'src/context/withContext';
-import { formatDate } from 'src/helpers/date';
-import { Button } from '@sparkpost/matchbox';
-
-const PendingCancellationBanner = ({ onClose }) => (
-  <div className={styles.banner}>
-    <span>Your account will be cancelled on </span>
-    {formatDate(new Date())}
-    <span>, and you will no longer be able to send email or login. Changed your mind?</span>
-    <Button color='orange' flat><div style={{ color: 'white', border: '2px solid white' }}>Don't Cancel</div></Button>
-  </div>
-);
+import PendingCancelGlobalBanner from 'src/pages/billing/components/PendingCancelGlobalBanner';
 
 export class Navigation extends Component {
   state = {
@@ -52,7 +42,7 @@ export class Navigation extends Component {
         <Top toggleMobileNav={this.toggleMobileNav} open={this.state.open} />
         <div className={asideClasses}>
           {this.props.bannerOpen && (
-            <PendingCancellationBanner />
+            <PendingCancelGlobalBanner />
           )}
           <nav className={navClasses}>
             <div className={wrapperClasses}>

@@ -21,8 +21,8 @@ export class GlobalBanner extends Component {
     const { pending_cancellation } = account;
 
     const showBannerFromPath = !(
-      (pending_cancellation && moment.duration(moment.utc().diff(pending_cancellation.effective_date)).asDays() > 7) && //Checks if within date
-      !ALWAYS_SHOW_ON_PATH.includes(location.pathName)
+      (pending_cancellation && moment.duration(moment(pending_cancellation.effective_date).diff(moment.utc())).asDays() > 7) && //Checks if outside date
+      !ALWAYS_SHOW_ON_PATH.includes(location.pathname) //Hide from the rest of the paths if outside dateRange
     );
 
     const value = {
