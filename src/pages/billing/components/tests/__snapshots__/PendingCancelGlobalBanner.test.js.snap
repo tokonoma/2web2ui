@@ -24,13 +24,17 @@ exports[`PendingCancelGlobalBanner should render 1`] = `
       Don't Cancel
     </Button>
   </span>
-  <Button
-    className="Close"
-    flat={true}
-    onClick={[Function]}
-    size="default"
+  <span
+    className="RightContainer"
   >
-    <Close />
-  </Button>
+    <Button
+      className="Close"
+      flat={true}
+      onClick={[Function]}
+      size="default"
+    >
+      <Close />
+    </Button>
+  </span>
 </div>
 `;

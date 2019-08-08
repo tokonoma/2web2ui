@@ -26,8 +26,12 @@
   flex: 1 0 0;
 }
 
+.RightContainer {
+  flex: 0 0 0;
+  text-align: right;
+}
+
 .Close {
   color: white;
-  text-align: right;
-  flex: 0 0 0;
+  margin-right: 8px;
 }

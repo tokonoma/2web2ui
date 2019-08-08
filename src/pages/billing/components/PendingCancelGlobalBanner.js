@@ -37,7 +37,9 @@ export class PendingCancelGlobalBanner extends Component {
           <span>, and you will no longer be able to send email or login. Changed your mind? </span>
           <Button className={styles.RenewButton} flat onClick={this.handleRenewAccount}>Don't Cancel</Button>
         </span>
-        <Button className={styles.Close} flat onClick={this.handleClose}><Close/></Button>
+        <span className={styles.RightContainer}>
+          <Button className={styles.Close} flat onClick={this.handleClose}><Close/></Button>
+        </span>
       </div>
     );
   }
