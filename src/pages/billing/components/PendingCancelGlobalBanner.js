@@ -30,11 +30,13 @@ export class PendingCancelGlobalBanner extends Component {
 
     return (
       <div className={styles.banner}>
-        <AccessTime />
-        <span> Your account will be cancelled on </span>
-        {formatDate(pending_cancellation.effective_date)}
-        <span>, and you will no longer be able to send email or login. Changed your mind? </span>
-        <Button className={styles.RenewButton} flat onClick={this.handleRenewAccount}>Don't Cancel</Button>
+        <span className={styles.CenterContainer}>
+          <AccessTime />
+          <span> Your account will be cancelled on </span>
+          {formatDate(pending_cancellation.effective_date)}
+          <span>, and you will no longer be able to send email or login. Changed your mind? </span>
+          <Button className={styles.RenewButton} flat onClick={this.handleRenewAccount}>Don't Cancel</Button>
+        </span>
         <Button className={styles.Close} flat onClick={this.handleClose}><Close/></Button>
       </div>
     );

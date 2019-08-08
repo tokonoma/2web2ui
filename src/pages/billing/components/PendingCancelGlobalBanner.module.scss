@@ -12,6 +12,7 @@
   font-size: font-size(500);
   height: rem(56);
   line-height: rem(56);
+  display: flex;
 }
 
 .RenewButton {
@@ -21,7 +22,12 @@
   padding-left: initial 1rem;
 }
 
+.CenterContainer {
+  flex: 1 0 0;
+}
+
 .Close {
   color: white;
-  float: right;
+  text-align: right;
+  flex: 0 0 0;
 }

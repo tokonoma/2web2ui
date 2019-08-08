@@ -4,22 +4,26 @@ exports[`PendingCancelGlobalBanner should render 1`] = `
 <div
   className="banner"
 >
-  <AccessTime />
-  <span>
-     Your account will be cancelled on 
-  </span>
-  Sep 7 2019
-  <span>
-    , and you will no longer be able to send email or login. Changed your mind? 
-  </span>
-  <Button
-    className="RenewButton"
-    flat={true}
-    onClick={[Function]}
-    size="default"
+  <span
+    className="CenterContainer"
   >
-    Don't Cancel
-  </Button>
+    <AccessTime />
+    <span>
+       Your account will be cancelled on 
+    </span>
+    Sep 7 2019
+    <span>
+      , and you will no longer be able to send email or login. Changed your mind? 
+    </span>
+    <Button
+      className="RenewButton"
+      flat={true}
+      onClick={[Function]}
+      size="default"
+    >
+      Don't Cancel
+    </Button>
+  </span>
   <Button
     className="Close"
     flat={true}
