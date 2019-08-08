@@ -1,7 +1,46 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Inbox Placement Reducer get specific inbox placement test pending 1`] = `
+Object {
+  "currentTestDetails": null,
+  "getTestError": null,
+  "getTestPending": true,
+  "seeds": Array [],
+  "seedsPending": false,
+}
+`;
+
+exports[`Inbox Placement Reducer get specific inbox placement test pending fail 1`] = `
+Object {
+  "currentTestDetails": null,
+  "getTestError": Object {
+    "errors": Array [
+      Object {
+        "message": "Some error occurred",
+      },
+    ],
+  },
+  "getTestPending": false,
+  "seeds": Array [],
+  "seedsPending": false,
+}
+`;
+
+exports[`Inbox Placement Reducer get specific inbox placement test success 1`] = `
+Object {
+  "currentTestDetails": Object {
+    "fakeData": true,
+  },
+  "getTestError": null,
+  "getTestPending": false,
+  "seeds": Array [],
+  "seedsPending": false,
+}
+`;
+
 exports[`Inbox Placement Reducer list seeds fail 1`] = `
 Object {
+  "currentTestDetails": null,
   "seeds": Array [],
   "seedsError": undefined,
   "seedsPending": false,
@@ -10,6 +49,7 @@ Object {
 
 exports[`Inbox Placement Reducer list seeds pending 1`] = `
 Object {
+  "currentTestDetails": null,
   "seeds": Array [],
   "seedsError": null,
   "seedsPending": true,
@@ -18,6 +58,7 @@ Object {
 
 exports[`Inbox Placement Reducer list seeds success 1`] = `
 Object {
+  "currentTestDetails": null,
   "seeds": undefined,
   "seedsError": null,
   "seedsPending": false,
