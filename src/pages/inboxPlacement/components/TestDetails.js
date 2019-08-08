@@ -6,7 +6,7 @@ import { format } from 'date-fns';
 import { FORMATS } from 'src/constants';
 import styles from './TestDetails.module.scss';
 
-export const TestInfoBlock = ({ label, value }) => <Grid.Column>
+export const TestInfoBlock = ({ label, value, columnProps = {}}) => <Grid.Column {...columnProps}>
   <span className={styles.InfoLabel}>{label}:</span>
   <br/>
   <span className={styles.InfoValue}>{value}</span>
@@ -29,7 +29,7 @@ const TestDetails = ({ currentTest = {}, inboxPlacementsByProvider }) => {
     <Panel.Section>
       <h2>{currentTest.subject}</h2>
       <Grid>
-        <TestInfoBlock value={currentTest.from_address} label='From'/>
+        <TestInfoBlock value={currentTest.from_address} label='From' columnProps={{ md: 4 }}/>
         <TestInfoBlock value={format(currentTest.start_time, FORMATS.LONG_DATETIME)} label='Started'/>
         <TestInfoBlock value={currentTest.end_time ? format(currentTest.end_time, FORMATS.LONG_DATETIME) : '--'}
           label='Finished'/>

@@ -25,6 +25,11 @@ exports[`Component: TestDetails renders correctly 1`] = `
     </h2>
     <Grid>
       <TestInfoBlock
+        columnProps={
+          Object {
+            "md": 4,
+          }
+        }
         label="From"
       />
       <TestInfoBlock

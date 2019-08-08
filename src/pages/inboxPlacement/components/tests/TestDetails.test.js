@@ -2,8 +2,6 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import TestDetails, { TestInfoBlock } from '../TestDetails';
 
-'../TestDetails';
-
 describe('Component: TestDetails', () => {
   const subject = ({ ...props }) => {
     const defaults = {
@@ -38,7 +36,11 @@ describe('Component: TestDetails', () => {
 
   describe('Component: TestInfoBlock', () => {
     it('renders the label and value', () => {
-      expect(shallow(<TestInfoBlock label='Foo' value='bar' />)).toMatchSnapshot();
+      expect(shallow(<TestInfoBlock label='Foo' value='bar'/>)).toMatchSnapshot();
+    });
+
+    it('renders with column props', () => {
+      expect(shallow(<TestInfoBlock label='Foo' value='bar' columnProps={{ md: 9 }}/>).prop('md')).toEqual(9);
     });
   });
 });
