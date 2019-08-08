@@ -7,7 +7,7 @@ import withContext from 'src/context/withContext';
 import { BannerContext } from 'src/context/GlobalBanner';
 import cx from 'classnames';
 
-const App = ({ children, bannerOpen }) => (
+export const App = ({ children, bannerOpen }) => (
   <WindowSize>
     <div className={cx(styles.wrapper, styles.app)}>
       <Navigation />

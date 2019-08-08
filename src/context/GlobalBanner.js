@@ -26,8 +26,8 @@ export class GlobalBanner extends Component {
     );
 
     const value = {
-      bannerOpen: showBanner && //Banner state open
-        pending_cancellation && showBannerFromPath
+      bannerOpen: Boolean(showBanner && //Banner state open
+        pending_cancellation && showBannerFromPath)
     };
 
     return (
