@@ -91,4 +91,8 @@ describe('Component: Report Options', () => {
     expect(testProps.addFilters).toHaveBeenCalledWith([item]);
   });
 
+  it('should render custom reports when the option is enabled', () => {
+    wrapper.setProps({ customReportsEnabled: true });
+    expect(wrapper.find('withRouter(Connect(CustomReports))')).toExist();
+  });
 });
