@@ -1,10 +1,10 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import SeedlistBreakdown, { GroupPercentage } from '../SeedlistBreakdown';
+import ProvidersBreakdown, { GroupPercentage } from '../ProvidersBreakdown';
 
-describe('Component: SeedlistBreakdown', () => {
-  const subject = ({ ...props }) => shallow(<SeedlistBreakdown data={[]} {...props}/>);
+describe('Component: ProvidersBreakdown', () => {
+  const subject = ({ ...props }) => shallow(<ProvidersBreakdown data={[]} {...props}/>);
 
   it('renders correctly with no data', () => {
     expect(subject()).toMatchSnapshot();

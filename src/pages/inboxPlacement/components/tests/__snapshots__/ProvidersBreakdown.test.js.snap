@@ -1,0 +1,151 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: ProvidersBreakdown SubComponent: GroupPercentage renders percentage correctly 1`] = `
+<span>
+  20.00
+  %
+</span>
+`;
+
+exports[`Component: ProvidersBreakdown renders correctly with data 1`] = `
+<Table
+  className="ProvidersBreakDown"
+>
+  <tbody>
+    <Table.Row>
+      <Table.HeaderCell>
+        Mailbox Provider
+      </Table.HeaderCell>
+      <Table.HeaderCell>
+        <Grid>
+          <Grid.Column
+            className="ValueCell"
+          >
+            Inbox
+          </Grid.Column>
+          <Grid.Column
+            className="ValueCell"
+          >
+            Spam
+          </Grid.Column>
+          <Grid.Column
+            className="ValueCell"
+          >
+            Missing
+          </Grid.Column>
+        </Grid>
+      </Table.HeaderCell>
+    </Table.Row>
+    <Table.Row
+      key="0"
+    >
+      <Table.Cell
+        className="ProviderCell"
+      >
+        <span>
+          dogmail.com
+        </span>
+      </Table.Cell>
+      <Table.Cell
+        className="CellBorder"
+      >
+        <Grid>
+          <Grid.Column
+            className="ValueCell"
+          >
+            <GroupPercentage
+              value={0}
+            />
+          </Grid.Column>
+          <Grid.Column
+            className="ValueCell"
+          >
+            <GroupPercentage
+              value={0}
+            />
+          </Grid.Column>
+          <Grid.Column
+            className="ValueCell"
+          >
+            <GroupPercentage
+              value={1}
+            />
+          </Grid.Column>
+        </Grid>
+      </Table.Cell>
+    </Table.Row>
+    <Table.Row
+      key="1"
+    >
+      <Table.Cell
+        className="ProviderCell"
+      >
+        <span>
+          doghouseinbox.com
+        </span>
+      </Table.Cell>
+      <Table.Cell
+        className="CellBorder"
+      >
+        <Grid>
+          <Grid.Column
+            className="ValueCell"
+          >
+            <GroupPercentage
+              value={0.8}
+            />
+          </Grid.Column>
+          <Grid.Column
+            className="ValueCell"
+          >
+            <GroupPercentage
+              value={0.1}
+            />
+          </Grid.Column>
+          <Grid.Column
+            className="ValueCell"
+          >
+            <GroupPercentage
+              value={0.1}
+            />
+          </Grid.Column>
+        </Grid>
+      </Table.Cell>
+    </Table.Row>
+  </tbody>
+</Table>
+`;
+
+exports[`Component: ProvidersBreakdown renders correctly with no data 1`] = `
+<Table
+  className="ProvidersBreakDown"
+>
+  <tbody>
+    <Table.Row>
+      <Table.HeaderCell>
+        Mailbox Provider
+      </Table.HeaderCell>
+      <Table.HeaderCell>
+        <Grid>
+          <Grid.Column
+            className="ValueCell"
+          >
+            Inbox
+          </Grid.Column>
+          <Grid.Column
+            className="ValueCell"
+          >
+            Spam
+          </Grid.Column>
+          <Grid.Column
+            className="ValueCell"
+          >
+            Missing
+          </Grid.Column>
+        </Grid>
+      </Table.HeaderCell>
+    </Table.Row>
+    0
+  </tbody>
+</Table>
+`;

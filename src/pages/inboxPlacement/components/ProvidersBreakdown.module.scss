@@ -1,0 +1,17 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.CellBorder {
+  border-left: 1px solid color(gray, 8);
+}
+
+.ProviderCell {
+  width: 30%;
+}
+
+.ValueCell {
+  text-align: center;
+  flex: 0 0 auto;
+  flex-grow: 1;
+  flex-basis: 0;
+  max-width: 100%;
+}
