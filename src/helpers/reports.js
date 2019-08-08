@@ -31,8 +31,8 @@ export function parseSearch(search) {
     // Subaccount filters include 3 parts
     // 'Subaccount:1234 (ID 554):554' -> { type: 'Subaccount', value: '1234 (ID 554)', id: '554' }
     if (type === 'Subaccount') {
-      value = parts[0];
-      id = parts[1];
+      id = parts.pop();
+      value = parts.join(':');
     } else {
       value = parts.join(':');
     }

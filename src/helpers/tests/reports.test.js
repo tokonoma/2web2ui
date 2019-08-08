@@ -29,6 +29,15 @@ describe('report helpers', () => {
       expect(reports.parseSearch('').options).toEqual({});
     });
 
+    it('should parse search with a colon in a subaccount name', () => {
+      const search = '?filters=Subaccount%3ASubaccount%20with%20a%20bad%3A%20symbol%3A100';
+      expect(reports.parseSearch(search).filters).toEqual([{
+        id: '100',
+        type: 'Subaccount',
+        value: 'Subaccount with a bad: symbol'
+      }]);
+    });
+
     it('uses to relative range with valid from & to', () => {
       const search = `?${filters}&range=7days&from=2019-02-09T02%3A00%3A00Z&to=2019-02-16T02%3A59%3A59Z&${metrics}`;
       reports.parseSearch(search);
