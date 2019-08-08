@@ -92,10 +92,12 @@ export class AlertFormNew extends Component {
       hasSubaccounts,
       formErrors,
       formMeta,
-      isNewAlert
+      isNewAlert,
+      isDuplicate
     } = this.props;
 
     const submitText = submitting ? 'Submitting...' : (isNewAlert ? 'Create Alert' : 'Update Alert');
+    const isSubmitDisabled = (pristine && !isDuplicate) || submitting; //Allows user to create the same alert if if's a duplicate
     const formSpec = getFormSpec(metric);
     const channelsError = this.isNotificationChannelsEmpty(formMeta, formErrors);
 
@@ -146,7 +148,7 @@ export class AlertFormNew extends Component {
                   {channelsError && <Error wrapper='div' error='At least one notification channel must be not empty'/>}
                   {this.renderNotificationChannels()}
                 </div>
-                <Button submit primary disabled={pristine || submitting} className={styles.SubmitButton}>{submitText}</Button>
+                <Button submit primary disabled={isSubmitDisabled} className={styles.SubmitButton}>{submitText}</Button>
               </Panel.Section>
             </Grid.Column>
           </Grid>
