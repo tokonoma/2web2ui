@@ -12,24 +12,28 @@ exports[`Component: ProvidersBreakdown renders correctly with data 1`] = `
   className="ProvidersBreakDown"
 >
   <tbody>
-    <Table.Row>
+    <Table.Row
+      className="TableRowHeader"
+    >
       <Table.HeaderCell>
         Mailbox Provider
       </Table.HeaderCell>
-      <Table.HeaderCell>
+      <Table.HeaderCell
+        className="TableCell"
+      >
         <Grid>
           <Grid.Column
-            className="ValueCell"
+            className="GridColumn"
           >
             Inbox
           </Grid.Column>
           <Grid.Column
-            className="ValueCell"
+            className="GridColumn"
           >
             Spam
           </Grid.Column>
           <Grid.Column
-            className="ValueCell"
+            className="GridColumn"
           >
             Missing
           </Grid.Column>
@@ -37,35 +41,41 @@ exports[`Component: ProvidersBreakdown renders correctly with data 1`] = `
       </Table.HeaderCell>
     </Table.Row>
     <Table.Row
+      className="TableRow"
       key="0"
     >
       <Table.Cell
         className="ProviderCell"
       >
-        <span>
-          dogmail.com
-        </span>
+        <Link
+          replace={false}
+          to="/inbox-placement/details/undefined"
+        >
+          <strong>
+            dogmail.com
+          </strong>
+        </Link>
       </Table.Cell>
       <Table.Cell
-        className="CellBorder"
+        className="TableCell"
       >
         <Grid>
           <Grid.Column
-            className="ValueCell"
+            className="GridColumn"
           >
             <GroupPercentage
               value={0}
             />
           </Grid.Column>
           <Grid.Column
-            className="ValueCell"
+            className="GridColumn"
           >
             <GroupPercentage
               value={0}
             />
           </Grid.Column>
           <Grid.Column
-            className="ValueCell"
+            className="GridColumn"
           >
             <GroupPercentage
               value={1}
@@ -75,35 +85,41 @@ exports[`Component: ProvidersBreakdown renders correctly with data 1`] = `
       </Table.Cell>
     </Table.Row>
     <Table.Row
+      className="TableRow"
       key="1"
     >
       <Table.Cell
         className="ProviderCell"
       >
-        <span>
-          doghouseinbox.com
-        </span>
+        <Link
+          replace={false}
+          to="/inbox-placement/details/undefined"
+        >
+          <strong>
+            doghouseinbox.com
+          </strong>
+        </Link>
       </Table.Cell>
       <Table.Cell
-        className="CellBorder"
+        className="TableCell"
       >
         <Grid>
           <Grid.Column
-            className="ValueCell"
+            className="GridColumn"
           >
             <GroupPercentage
               value={0.8}
             />
           </Grid.Column>
           <Grid.Column
-            className="ValueCell"
+            className="GridColumn"
           >
             <GroupPercentage
               value={0.1}
             />
           </Grid.Column>
           <Grid.Column
-            className="ValueCell"
+            className="GridColumn"
           >
             <GroupPercentage
               value={0.1}
@@ -121,24 +137,28 @@ exports[`Component: ProvidersBreakdown renders correctly with no data 1`] = `
   className="ProvidersBreakDown"
 >
   <tbody>
-    <Table.Row>
+    <Table.Row
+      className="TableRowHeader"
+    >
       <Table.HeaderCell>
         Mailbox Provider
       </Table.HeaderCell>
-      <Table.HeaderCell>
+      <Table.HeaderCell
+        className="TableCell"
+      >
         <Grid>
           <Grid.Column
-            className="ValueCell"
+            className="GridColumn"
           >
             Inbox
           </Grid.Column>
           <Grid.Column
-            className="ValueCell"
+            className="GridColumn"
           >
             Spam
           </Grid.Column>
           <Grid.Column
-            className="ValueCell"
+            className="GridColumn"
           >
             Missing
           </Grid.Column>
