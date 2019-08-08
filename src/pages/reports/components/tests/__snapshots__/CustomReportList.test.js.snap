@@ -13,36 +13,28 @@ exports[`Component: CustomReportsList should render 1`] = `
   <Modal
     onClose={[Function]}
     open={false}
+    showCloseButton={true}
   >
-    <div
-      style={
-        Object {
-          "margin": "0 auto",
-          "maxWidth": "600px",
-        }
-      }
+    <Panel
+      title="Saved Reports"
     >
-      <Panel
-        title="Saved Reports"
-      >
-        <ReportRow
-          deleting={false}
-          key="report 1-0"
-          name="report 1"
-          onDelete={[MockFunction]}
-          onLoad={[Function]}
-          url="report1url"
-        />
-        <ReportRow
-          deleting={false}
-          key="report 2-1"
-          name="report 2"
-          onDelete={[MockFunction]}
-          onLoad={[Function]}
-          url="report2url"
-        />
-      </Panel>
-    </div>
+      <ReportRow
+        deleting={false}
+        key="report 1-0"
+        name="report 1"
+        onDelete={[MockFunction]}
+        onLoad={[Function]}
+        url="report1url"
+      />
+      <ReportRow
+        deleting={false}
+        key="report 2-1"
+        name="report 2"
+        onDelete={[MockFunction]}
+        onLoad={[Function]}
+        url="report2url"
+      />
+    </Panel>
   </Modal>
 </Fragment>
 `;

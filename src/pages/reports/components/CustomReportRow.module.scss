@@ -10,10 +10,6 @@
 
   &:hover {
     cursor: pointer;
-
-    .Delete {
-      opacity: 1;
-    }
   }
 }
 
@@ -21,9 +17,6 @@
   flex: 0 0;
   align-self: flex-end;
   padding: spacing();
-
-  opacity: 0;
-  transition: 0.15s;
 }
 
 .DeleteButton {

@@ -46,12 +46,11 @@ export function CustomReportsList({ deleting, handleLoad, onDelete, reports, set
       <Modal
         open={open}
         onClose={() => setOpen(false)}
+        showCloseButton
       >
-        <div style={{ maxWidth: '600px', margin: '0 auto' }}>
-          <Panel title='Saved Reports'>
-            {reportList}
-          </Panel>
-        </div>
+        <Panel title='Saved Reports'>
+          {reportList}
+        </Panel>
       </Modal>
     </>
   );
