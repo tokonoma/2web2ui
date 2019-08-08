@@ -79,10 +79,14 @@ export function authenticate(username, password, rememberMe = false, access_toke
       })
       .catch((err) => {
         const { response = {}} = err;
-        const { data = {}} = response;
-        const { error_description: errorDescription } = data;
+        const { data = {}, status } = response;
+        let { error_description: errorDescription } = data;
 
         // TODO: handle a timeout error better
+
+        if (status === 403) {
+          errorDescription = `${errorDescription || 'Something went wrong.'} Please email compliance@sparkpost.com if you need assistance.`;
+        }
 
         dispatch({
           type: 'LOGIN_FAIL',
