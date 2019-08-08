@@ -22,149 +22,150 @@ exports[`Alert Details Component should render the alert details component corre
     key="0"
   >
     <LabelledValue
-      bold={true}
-      label="Alert Metric:"
-      value="Health Score"
-    />
+      label="Metric:"
+    >
+      <h6>
+        Health Score
+      </h6>
+    </LabelledValue>
   </Panel.Section>
   <Panel.Section
     key="1"
   >
     <LabelledValue
-      bold={false}
-      label="Evaluated:"
-      value={
-        <React.Fragment>
-          <Tag
-            className="FirstTag"
-          >
-            Value
-          </Tag>
-          below
-          <Tag
-            className="Tags"
-          >
-            80
-            
-          </Tag>
-        </React.Fragment>
-      }
-    />
+      label="Condition:"
+    >
+      <Tag
+        className="FirstTag"
+      >
+        Value
+      </Tag>
+      below
+      <Tag
+        className="Tags"
+      >
+        80
+      </Tag>
+    </LabelledValue>
   </Panel.Section>
   <Panel.Section
     key="2"
   >
     <LabelledValue
-      bold={false}
       label="Filtered By:"
-      value={
-        Array [
-          <span>
-            Subaccounts: 
-            <Tag
-              className="Tags"
-            >
-              -1
-            </Tag>
-          </span>,
-          <span>
-            and 
-            Mailbox Provider
-            : 
-            <Tag
-              className="Tags"
-            >
-              Gmail
-            </Tag>
-          </span>,
-        ]
-      }
-    />
+    >
+      <span
+        key="mailbox_provider"
+      >
+         
+        <h6
+          className="BoldInline"
+        >
+          Mailbox Provider
+        </h6>
+         
+        <Tag
+          className="Tags"
+          key="mailbox_provider-gmail"
+        >
+          Gmail
+        </Tag>
+      </span>
+    </LabelledValue>
   </Panel.Section>
   <Panel.Section
     key="3"
   >
     <LabelledValue
-      bold={false}
       label="Notify:"
-      value={
-        <React.Fragment>
-          <div>
-            Email: 
-            <Tag
-              className="TagsWithIcon"
-            >
-              <EmailIcon
-                className="Icon"
-              />
-              <span
-                className="TagText"
-              >
-                Myemail@email.com
-              </span>
-            </Tag>
-            <Tag
-              className="TagsWithIcon"
-            >
-              <EmailIcon
-                className="Icon"
-              />
-              <span
-                className="TagText"
-              >
-                email@ddress.com
-              </span>
-            </Tag>
-          </div>
-          <div>
-            Slack
-            : 
-            <Tag
-              className="TagsWithIcon"
-            >
-              <SlackIcon
-                className="Icon"
-              />
-              <span
-                className="TagText"
-              >
-                https://hooks.slack.com/services/X
-              </span>
-            </Tag>
-          </div>
-          <div>
-            Webhook
-            : 
-            <Tag
-              className="TagsWithIcon"
-            >
-              <WebhookIcon
-                className="Icon"
-              />
-              <span
-                className="TagText"
-              >
-                target.com/200
-              </span>
-            </Tag>
-          </div>
-        </React.Fragment>
-      }
-    />
+    >
+      <div
+        id="email"
+      >
+        <h6
+          className="BoldInline"
+        >
+          Email
+        </h6>
+         
+        <Tag
+          className="Tags"
+          key="Myemail@email.com"
+        >
+          <span
+            className="TagText"
+          >
+            Myemail@email.com
+          </span>
+        </Tag>
+        <Tag
+          className="Tags"
+          key="email@ddress.com"
+        >
+          <span
+            className="TagText"
+          >
+            email@ddress.com
+          </span>
+        </Tag>
+      </div>
+      <div
+        key="slack"
+      >
+        <h6
+          className="BoldInline"
+        >
+          Slack
+        </h6>
+         
+        <Tag
+          className="TagsWithIcon"
+        >
+          <SlackIcon
+            className="Icon"
+          />
+          <span
+            className="TagText"
+          >
+            https://hooks.slack.com/services/X
+          </span>
+        </Tag>
+      </div>
+      <div
+        key="webhook"
+      >
+        <h6
+          className="BoldInline"
+        >
+          Webhook
+        </h6>
+         
+        <Tag
+          className="TagsWithIcon"
+        >
+          <WebhookIcon
+            className="Icon"
+          />
+          <span
+            className="TagText"
+          >
+            target.com/200
+          </span>
+        </Tag>
+      </div>
+    </LabelledValue>
   </Panel.Section>
   <Panel.Section
     key="4"
   >
     <LabelledValue
-      bold={false}
       label="Mute:"
-      value={
-        <Connect(AlertToggle)
-          id="alert-id"
-          muted={false}
-        />
-      }
-    />
+    >
+      <Connect(AlertToggle)
+        id="alert-id"
+        muted={false}
+      />
+    </LabelledValue>
   </Panel.Section>
 </Panel>
 `;
