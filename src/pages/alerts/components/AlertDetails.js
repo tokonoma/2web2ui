@@ -81,8 +81,8 @@ export const AlertDetails = ({ alert, id, subaccountIdToString, hasSubaccounts }
     const valueTag = <Tag className={styles.Tags}>{value}{suffix}</Tag>;
     return (<>
       {sourceTag}
-      {percentChangeText}
-      {operatorText}
+      <h6 className={styles.BoldInline}>{percentChangeText}</h6>
+      <h6 className={styles.BoldInline}>{operatorText}</h6>
       {valueTag}
       </>);
   };

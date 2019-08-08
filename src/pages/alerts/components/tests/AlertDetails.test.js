@@ -41,7 +41,7 @@ describe('Alert Details Component', () => {
     const newAlert = { ...alert, threshold_evaluator: { source: 'week_over_week', operator: 'gt', value: 5 }};
     const wrapper = shallow(<AlertDetails {...props} alert={newAlert} />);
     const evaluatorWrapper = wrapper.find({ label: 'Condition:' }).dive();
-    expect(evaluatorWrapper.findWhere((node) => node.text() === 'change ')).toExist();
+    expect(evaluatorWrapper.findWhere((node) => node.debug() === 'change ')).toExist();
   });
 
   it('should show % in suffix when source is WOW change', () => {

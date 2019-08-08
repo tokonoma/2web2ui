@@ -40,7 +40,14 @@ exports[`Alert Details Component should render the alert details component corre
       >
         Value
       </Tag>
-      below
+      <h6
+        className="BoldInline"
+      />
+      <h6
+        className="BoldInline"
+      >
+        below
+      </h6>
       <Tag
         className="Tags"
       >
