@@ -125,7 +125,7 @@ exports[`Alert Form Component should render the alert form component correctly 1
               icon={<SlackIcon />}
               id="slack"
               key="slack"
-              subtitle="Integrate alerts into your Slack channel"
+              subtitle="Integrate this alert with Slack"
               title="Slack"
             >
               <Field
@@ -140,7 +140,7 @@ exports[`Alert Form Component should render the alert form component correctly 1
               icon={<WebhookIcon />}
               id="webhook"
               key="webhook"
-              subtitle="Create a webhook for your alerts"
+              subtitle="Create a webhook for this alert"
               title="Webhook"
             >
               <Field

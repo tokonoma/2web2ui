@@ -42,10 +42,6 @@ describe('Evaluator Fields Component', () => {
   describe('slider length with', () => {
 
     const formCases = {
-      'no source size': {
-        prop: { metric: 'block_bounce_rate' },
-        length: 8
-      },
       'no operator size': {
         prop: { source: 'week_over_week' },
         length: 7

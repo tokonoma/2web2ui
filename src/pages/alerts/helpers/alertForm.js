@@ -55,10 +55,10 @@ export const getFormSpec = (metric) => {
 };
 
 export const getEvaluatorOptions = (metric, source) => {
-  const operatorArray = (metric !== 'monthly_sending_limit' && source === 'raw') ? ['lt','gt'] : ['gt'];
+  const operatorArray = (metric === 'health_score' && source === 'raw') ? ['lt','gt'] : ['gt'];
   const operatorOptions = getOptionsFromMap(operatorArray, OPERATOR_FRIENDLY_NAMES);
 
-  const suffix = (metric !== 'health_score' || source !== 'raw') ? '%' : '';
+  const suffix = (metric === 'health_score' && source === 'raw') ? '' : '%';
 
   const getSliderProps = () => {
     if (source !== 'raw') {
