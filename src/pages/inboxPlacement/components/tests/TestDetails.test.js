@@ -2,11 +2,13 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import TestDetails, { TestInfoBlock } from '../TestDetails';
 
+jest.mock('date-fns', () => ({ format: jest.fn().mockReturnValue('Jul 8th 2019 11:49am') }));
+
 describe('Component: TestDetails', () => {
   const subject = ({ ...props }) => {
     const defaults = {
       currentTest: {
-        start_time: '2019-07-08T15:49:56.954Z"',
+        start_time: '2019-07-08T15:49:56.954Z',
         end_time: null,
         subject: 'Fooo'
       },
