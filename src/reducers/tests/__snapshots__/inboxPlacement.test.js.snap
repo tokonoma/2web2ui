@@ -1,34 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Inbox Placement Reducer list seeds fail 1`] = `
-Object {
-  "seeds": Array [],
-  "seedsError": undefined,
-  "seedsPending": false,
-}
-`;
-
-exports[`Inbox Placement Reducer list seeds pending 1`] = `
-Object {
-  "seeds": Array [],
-  "seedsError": null,
-  "seedsPending": true,
-}
-`;
-
-exports[`Inbox Placement Reducer list seeds success 1`] = `
-Object {
-  "seeds": undefined,
-  "seedsError": null,
-  "seedsPending": false,
-}
-`;
-
 exports[`Inbox Placement Reducer get specific inbox placement test pending 1`] = `
 Object {
   "currentTestDetails": null,
   "getTestError": null,
   "getTestPending": true,
+  "seeds": Array [],
+  "seedsPending": false,
 }
 `;
 
@@ -43,6 +21,8 @@ Object {
     ],
   },
   "getTestPending": false,
+  "seeds": Array [],
+  "seedsPending": false,
 }
 `;
 
@@ -53,5 +33,34 @@ Object {
   },
   "getTestError": null,
   "getTestPending": false,
+  "seeds": Array [],
+  "seedsPending": false,
+}
+`;
+
+exports[`Inbox Placement Reducer list seeds fail 1`] = `
+Object {
+  "currentTestDetails": null,
+  "seeds": Array [],
+  "seedsError": undefined,
+  "seedsPending": false,
+}
+`;
+
+exports[`Inbox Placement Reducer list seeds pending 1`] = `
+Object {
+  "currentTestDetails": null,
+  "seeds": Array [],
+  "seedsError": null,
+  "seedsPending": true,
+}
+`;
+
+exports[`Inbox Placement Reducer list seeds success 1`] = `
+Object {
+  "currentTestDetails": null,
+  "seeds": undefined,
+  "seedsError": null,
+  "seedsPending": false,
 }
 `;
