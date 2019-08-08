@@ -96,9 +96,17 @@ exports[`renders correctly when logging in 1`] = `
 
 exports[`renders errors 1`] = `
 <Fragment>
-  <Error
-    error="asplode"
-  />
+  <div
+    style={
+      Object {
+        "marginBottom": "12px",
+      }
+    }
+  >
+    <Error
+      error="asplode"
+    />
+  </div>
   <form>
     <Field
       autoFocus={true}

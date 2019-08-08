@@ -18,6 +18,24 @@ Array [
 ]
 `;
 
+exports[`Action Creator: Auth authenticate tests should dispatch a failed login if login fails with 403 1`] = `
+Array [
+  Array [
+    Object {
+      "type": "LOGIN_PENDING",
+    },
+  ],
+  Array [
+    Object {
+      "payload": Object {
+        "errorDescription": "login failed Please email compliance@sparkpost.com if you need assistance.",
+      },
+      "type": "LOGIN_FAIL",
+    },
+  ],
+]
+`;
+
 exports[`Action Creator: Auth authenticate tests should login if user is not TFA 1`] = `
 Array [
   Array [

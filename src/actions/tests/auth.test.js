@@ -154,6 +154,22 @@ describe('Action Creator: Auth', () => {
 
     });
 
+    it('should dispatch a failed login if login fails with 403', async () => {
+      sparkpostLogin.mockRejectedValue({
+        response: {
+          status: 403,
+          data: {
+            error_description: 'login failed'
+          }
+        }
+      });
+
+      const thunk = authActions.authenticate('bar', 'pw', true);
+      await thunk(dispatchMock, getStateMock);
+      expect(dispatchMock.mock.calls).toMatchSnapshot();
+
+    });
+
     it('should return auth status on login failure', async () => {
       sparkpostLogin.mockRejectedValue({
         response: {
