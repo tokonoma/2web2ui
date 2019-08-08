@@ -2,6 +2,7 @@
 
 exports[`Component: FolderPlacementBarChart renders correct with data 1`] = `
 <ResponsiveContainer
+  className="FolderPlacementChart"
   debounce={0}
   height={200}
   width="99%"
@@ -28,16 +29,33 @@ exports[`Component: FolderPlacementBarChart renders correct with data 1`] = `
     layout="vertical"
     margin={
       Object {
+        "left": 20,
         "right": 80,
       }
     }
     reverseStackOrder={false}
     stackOffset="none"
   >
+    <CartesianGrid
+      fill="none"
+      horizontal={true}
+      horizontalFill={Array []}
+      horizontalPoints={
+        Array [
+          55,
+          110,
+        ]
+      }
+      stroke="#ccc"
+      vertical={false}
+      verticalFill={Array []}
+      verticalPoints={Array []}
+    />
     <XAxis
       allowDataOverflow={false}
       allowDecimals={true}
       allowDuplicatedCategory={true}
+      axisLine={false}
       domain={
         Array [
           0,
@@ -50,12 +68,12 @@ exports[`Component: FolderPlacementBarChart renders correct with data 1`] = `
       orientation="bottom"
       padding={
         Object {
-          "left": 0,
-          "right": 0,
+          "left": 20,
         }
       }
       reversed={false}
       scale="auto"
+      tick={false}
       tickCount={5}
       type="number"
       width={0}
@@ -84,7 +102,9 @@ exports[`Component: FolderPlacementBarChart renders correct with data 1`] = `
       }
       reversed={false}
       scale="auto"
+      tick={[Function]}
       tickCount={5}
+      tickLine={false}
       type="category"
       width={60}
       yAxisId={0}
@@ -93,7 +113,7 @@ exports[`Component: FolderPlacementBarChart renders correct with data 1`] = `
       animationBegin={0}
       animationDuration={400}
       animationEasing="ease"
-      barSize={20}
+      barSize={25}
       data={Array []}
       dataKey="value"
       fill="#37aadc"
@@ -107,6 +127,15 @@ exports[`Component: FolderPlacementBarChart renders correct with data 1`] = `
       xAxisId={0}
       yAxisId={0}
     >
+      <Cell
+        key="0"
+      />
+      <Cell
+        key="1"
+      />
+      <Cell
+        key="2"
+      />
       <LabelList
         fill="#55555a"
         formatter={[Function]}
@@ -120,6 +149,7 @@ exports[`Component: FolderPlacementBarChart renders correct with data 1`] = `
 
 exports[`Component: FolderPlacementBarChart renders correctly with no data 1`] = `
 <ResponsiveContainer
+  className="FolderPlacementChart"
   debounce={0}
   height={200}
   width="99%"
@@ -131,16 +161,33 @@ exports[`Component: FolderPlacementBarChart renders correctly with no data 1`] =
     layout="vertical"
     margin={
       Object {
+        "left": 20,
         "right": 80,
       }
     }
     reverseStackOrder={false}
     stackOffset="none"
   >
+    <CartesianGrid
+      fill="none"
+      horizontal={true}
+      horizontalFill={Array []}
+      horizontalPoints={
+        Array [
+          55,
+          110,
+        ]
+      }
+      stroke="#ccc"
+      vertical={false}
+      verticalFill={Array []}
+      verticalPoints={Array []}
+    />
     <XAxis
       allowDataOverflow={false}
       allowDecimals={true}
       allowDuplicatedCategory={true}
+      axisLine={false}
       domain={
         Array [
           0,
@@ -153,12 +200,12 @@ exports[`Component: FolderPlacementBarChart renders correctly with no data 1`] =
       orientation="bottom"
       padding={
         Object {
-          "left": 0,
-          "right": 0,
+          "left": 20,
         }
       }
       reversed={false}
       scale="auto"
+      tick={false}
       tickCount={5}
       type="number"
       width={0}
@@ -187,7 +234,9 @@ exports[`Component: FolderPlacementBarChart renders correctly with no data 1`] =
       }
       reversed={false}
       scale="auto"
+      tick={[Function]}
       tickCount={5}
+      tickLine={false}
       type="category"
       width={60}
       yAxisId={0}
@@ -196,7 +245,7 @@ exports[`Component: FolderPlacementBarChart renders correctly with no data 1`] =
       animationBegin={0}
       animationDuration={400}
       animationEasing="ease"
-      barSize={20}
+      barSize={25}
       data={Array []}
       dataKey="value"
       fill="#37aadc"
