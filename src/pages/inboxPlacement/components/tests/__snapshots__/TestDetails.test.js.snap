@@ -1,0 +1,108 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: TestDetails Component: TestInfoBlock renders the label and value 1`] = `
+<Grid.Column>
+  <span
+    className="InfoLabel"
+  >
+    Foo
+    :
+  </span>
+  <br />
+  <span
+    className="InfoValue"
+  >
+    bar
+  </span>
+</Grid.Column>
+`;
+
+exports[`Component: TestDetails renders correctly 1`] = `
+<Panel>
+  <Panel.Section>
+    <h2>
+      Fooo
+    </h2>
+    <Grid>
+      <TestInfoBlock
+        label="From"
+      />
+      <TestInfoBlock
+        label="Started"
+        value="Jul 8th 2019 11:49am"
+      />
+      <TestInfoBlock
+        label="Finished"
+        value="--"
+      />
+      <TestInfoBlock
+        label="Inbox Placement Test Name"
+        value="test_name"
+      />
+    </Grid>
+  </Panel.Section>
+  <Panel.Section>
+    <Grid>
+      <Grid.Column
+        lg={8}
+        md={8}
+      >
+        <h3>
+          Folder Placement
+        </h3>
+        <FolderPlacementChart
+          data={
+            Array [
+              Object {
+                "color": "#50D0D9",
+                "name": "Inbox",
+                "value": NaN,
+              },
+              Object {
+                "color": "#0CBAC7",
+                "name": "Spam",
+                "value": NaN,
+              },
+              Object {
+                "color": "#00838C",
+                "name": "Missing",
+                "value": NaN,
+              },
+            ]
+          }
+        />
+      </Grid.Column>
+    </Grid>
+  </Panel.Section>
+  <Panel.Section>
+    <h3
+      className="Inline"
+    >
+      Placement Breakdown
+    </h3>
+    <small>
+      undefined Seed
+    </small>
+    <ProvidersBreakdown
+      data={Array []}
+    />
+  </Panel.Section>
+</Panel>
+`;
+
+exports[`Component: TestDetails renders providers breakdown correctly 1`] = `
+<ProvidersBreakdown
+  data={
+    Array [
+      Object {
+        "mailbox_provider": "dogmail.com",
+        "placement": Object {
+          "inbox_pct": 0,
+          "missing_pct": 1,
+          "spam_pct": 0,
+        },
+      },
+    ]
+  }
+/>
+`;
