@@ -5,23 +5,23 @@ import { TestDetailsPage } from '../TestDetailsPage';
 
 describe('Page: Single Inbox Placement Test', () => {
   let wrapper;
-
+  let props;
   const mockGetTest = jest.fn();
+
   const mockHistoryReplace = jest.fn();
-
-  const props = {
-    getInboxPlacementTest: mockGetTest,
-    tabIndex: 0,
-    id: 0,
-    loading: false,
-    error: false,
-    history: {
-      replace: mockHistoryReplace
-    }
-  };
-
-
   beforeEach(() => {
+    props = {
+      getInboxPlacementTest: mockGetTest,
+      getInboxPlacementByProviders: jest.fn(),
+      tabIndex: 0,
+      id: 0,
+      loading: false,
+      error: false,
+      history: {
+        replace: mockHistoryReplace
+      }
+    };
+
     wrapper = shallow(<TestDetailsPage {...props} />);
   });
 
@@ -31,7 +31,7 @@ describe('Page: Single Inbox Placement Test', () => {
 
   it('calls getInboxPlacementTest on load', () => {
     wrapper = mount(<TestDetailsPage {...props} />);
-    expect(mockGetTest).toHaveBeenCalled();
+    expect(wrapper).toHaveBeenCalled();
   });
 
   it('renders loading', () => {

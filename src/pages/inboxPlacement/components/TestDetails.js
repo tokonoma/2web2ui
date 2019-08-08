@@ -7,9 +7,9 @@ import { FORMATS } from 'src/constants';
 import styles from './TestDetails.module.scss';
 
 const TestInfoBlock = ({ label, value }) => <Grid.Column>
-  {label}:
+  <span className={styles.InfoLabel}>{label}:</span>
   <br/>
-  {value}
+  <span className={styles.InfoValue}>{value}</span>
 </Grid.Column>;
 
 
@@ -27,8 +27,7 @@ const TestDetails = ({ currentTest = {}, inboxPlacementsByProvider }) => {
 
   return (<Panel>
     <Panel.Section>
-      <h3>{currentTest.subject}</h3>
-
+      <h2>{currentTest.subject}</h2>
       <Grid>
         <TestInfoBlock value={currentTest.from_address} label='From'/>
         <TestInfoBlock value={format(currentTest.start_time, FORMATS.LONG_DATETIME)} label='Started'/>
