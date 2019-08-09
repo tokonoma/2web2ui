@@ -2,6 +2,15 @@ import cases from 'jest-in-case';
 import inboxPlacementReducer, { initialState } from '../inboxPlacement';
 
 const TEST_CASES = {
+  'list tests pending': {
+    type: 'LIST_TESTS_PENDING'
+  },
+  'list tests success': {
+    type: 'LIST_TESTS_SUCCESS'
+  },
+  'list tests fail': {
+    type: 'LIST_TESTS_FAIL'
+  },
   'list seeds pending': {
     type: 'GET_SEEDS_PENDING'
   },

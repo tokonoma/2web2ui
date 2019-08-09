@@ -1,73 +1,92 @@
-import { shallow } from 'enzyme';
+import { mount } from 'enzyme';
 import React from 'react';
-import TestCollection from '../AdvancedCollection';
+import { act } from 'react-dom/test-utils';
+import FilterSortCollection from '../FilterSortCollection';
+import { Table } from '@sparkpost/matchbox';
+import { BrowserRouter as Router } from 'react-router-dom';
+import MockDate from 'mockdate';
+MockDate.set(1434319925275);
 
-describe('TestCollection Component', () => {
+describe('FilterSortCollection Component', () => {
   const props = {
-    tests: [{
-      id: 1,
-      campaignHeader: 'campaignHeader_test1',
-      subject: 'subject_test1',
-      fromAddress: 'local@fromAddress_test1',
-      createdAt: 'createdAt_test1',
-      stoppedAt: 'stoppedAt_test1',
-      status: 'status_test1',
-      seedlistSize: 11,
-      inboxRate: 0.1,
-      spamRate: 0.1,
-      missingRate: 0.1,
-      spfRate: 0.1,
-      dkimRate: 0.1,
-      dmarcRate: 0.1
+    title: 'Menu',
+    selectOptions: [{ value: 'fruit', label: 'Fruit' },
+      { value: 'vegetable', label: 'Vegetable' }],
+    filterBoxConfig: {
+      show: true,
+      itemToStringKeys: ['fruit', 'vegetable'],
+      placeholder: 'Search By: Fruit, Vegetable',
+      wrapper: (props) => (
+        <div>
+          {props}
+        </div>)
     },
-    {
-      id: 2,
-      campaignHeader: 'campaignHeader_test2',
-      subject: 'subject_test2',
-      fromAddress: 'local@fromAddress_test2',
-      createdAt: 'createdAt_test2',
-      stoppedAt: 'stoppedAt_test2',
-      status: 'status_test2',
-      seedlistSize: 12,
-      inboxRate: 0.2,
-      spamRate: 0.2,
-      missingRate: 0.2,
-      spfRate: 0.2,
-      dkimRate: 0.2,
-      dmarcRate: 0.2
-    },
-    {
-      id: 3,
-      campaignHeader: 'campaignHeader_test3',
-      subject: 'subject_test3',
-      fromAddress: 'local@fromAddress_test3',
-      createdAt: 'createdAt_test3',
-      stoppedAt: 'stoppedAt_test3',
-      status: 'status_test3',
-      seedlistSize: 13,
-      inboxRate: 0.3,
-      spamRate: 0.3,
-      missingRate: 0.3,
-      spfRate: 0.3,
-      dkimRate: 0.3,
-      dmarcRate: 0.3
-    }]
+    defaultSortColumn: 'fruit',
+    rows: [{
+      fruit: 'apple',
+      vegetable: 'celery'
+    }, {
+      fruit: 'banana',
+      vegetable: 'artichoke'
+    }, {
+      fruit: 'carrot',
+      vegetable: 'broccoli'
+    }],
+    rowComponent: ({ fruit, vegetable }, iterator) => ([
+      <Table.Row
+        key={iterator}
+        rowData={[<div>
+          <p>{fruit}</p>
+          <p>{vegetable}</p>
+        </div>]}
+      />
+    ])
   };
 
-  let wrapper;
+  const subject = (props = {}) => mount(
+    <Router>
+      <FilterSortCollection {...props}/>
+    </Router>
+  );
 
-  beforeEach(() => {
-    wrapper = shallow(<TestCollection {...props} />);
+  describe('renders', () => {
+    it('renders without props', () => {
+      expect(subject()).toMatchSnapshot();
+    });
+
+    it('renders with props', () => {
+      expect(subject({ ...props })).toMatchSnapshot();
+    });
   });
 
-  it('should render', () => {
-    expect(wrapper).toMatchSnapshot();
-  });
+  describe('sorts', () => {
 
-  it('should render row data properly', () => {
-    props.tests.forEach((test) => {
-      const row = wrapper.instance().getRowData(test);
-      expect(row).toMatchSnapshot();
+    it('sorts default sort column values in default descending order', () => {
+      const wrapper = subject({ ...props });
+      expect(wrapper.find('table').props()).toMatchSnapshot();
+    });
+
+    it('sorts default sort column values in ascending order', () => {
+      const wrapper = subject({ ...props, defaultSortDirection: 'asc' });
+      expect(wrapper.find('table').props()).toMatchSnapshot();
+    });
+
+    it('sorts selected sort column values in default descending order', () => {
+      const wrapper = subject({ ...props });
+      act(() => {
+        wrapper.find('select option[value="vegetable"]').simulate('change');
+      });
+      wrapper.update();
+      expect(wrapper.find('table').props()).toMatchSnapshot();
+    });
+
+    it('sorts selected sort column values in ascending order', () => {
+      const wrapper = subject({ ...props, defaultSortDirection: 'asc' });
+      act(() => {
+        wrapper.find('select option[value="vegetable"]').simulate('change');
+      });
+      wrapper.update();
+      expect(wrapper.find('table').props()).toMatchSnapshot();
     });
   });
 });

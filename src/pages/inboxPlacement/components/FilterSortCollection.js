@@ -3,7 +3,7 @@ import { Select, Panel, Table } from '@sparkpost/matchbox';
 import { Collection } from 'src/components';
 import _ from 'lodash';
 import styles from './FilterSortCollection.module.scss';
-const FilterSortCollection = ({ wrapperComponent, title, selectOptions, filterBoxConfig, defaultSortColumn, defaultSortDirection = 'desc', rows, rowComponent }) => {
+const FilterSortCollection = ({ wrapperComponent, title, selectOptions, filterBoxConfig, defaultSortColumn, defaultSortDirection = 'desc', rows = [], rowComponent }) => {
 
   const [sortColumn, setSortColumn] = useState(defaultSortColumn);
   const [sortDirection, setSortDirection] = useState(defaultSortDirection);
@@ -24,14 +24,14 @@ const FilterSortCollection = ({ wrapperComponent, title, selectOptions, filterBo
   );
 
   const WrapperComponent = wrapperComponent ? wrapperComponent : CollectionWrapperComponent;
-
+  const RowComponent = rowComponent ? rowComponent : () => (<div></div>) ;
   const sortedRows = sortColumn ? _.orderBy(rows, sortColumn, sortDirection) : rows ;
 
   return (
     <Collection
       outerWrapper={WrapperComponent}
       bodyWrapper={TableBody}
-      rowComponent={rowComponent}
+      rowComponent={RowComponent}
       rows={sortedRows}
       sortColumn={sortColumn}
       filterBox={filterBoxConfig}

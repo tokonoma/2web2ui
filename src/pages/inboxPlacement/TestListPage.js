@@ -8,7 +8,9 @@ import getStatusProps from './helpers/getStatusProps';
 import formatPercentage from './helpers/formatPercentage';
 import FilterSortCollection from './components/FilterSortCollection';
 import Dot from './components/Dot';
-import withTestList from './containers/TestListPage.container';
+import { connect } from 'react-redux';
+import { listTests } from 'src/actions/inboxPlacement';
+import { withRouter } from 'react-router-dom';
 import styles from './TestListPage.module.scss';
 import { STATUS } from './constants/test';
 import EmptyTestListPage from './EmptyTestListPage';
@@ -123,17 +125,19 @@ export class TestListPage extends Component {
       return <Loading />;
     }
 
-    return (
-      (!error && tests.length === 0)
-        ? <EmptyTestListPage />
-        : <Page
-          title='Inbox Placement'
-          primaryAction={{ content: 'Start a Test', to: '/inbox-placement/seedlist', component: Link }}
-        >
-          {error ? this.renderError() : this.renderPage()}
-        </Page>
+    return ((!error && tests.length === 0)
+      ? <EmptyTestListPage />
+      : <Page
+        title='Inbox Placement'
+        primaryAction={{ content: 'Start a Test', to: '/inbox-placement/seedlist', component: Link }}
+      >{error ? this.renderError() : this.renderPage()}</Page>
     );
   }
 }
+const mapStateToProps = (state, props) => ({
+  tests: state.inboxPlacement.tests,
+  error: state.inboxPlacement.testsError,
+  loading: state.inboxPlacement.testsPending
+});
 
-export default withTestList(TestListPage);
+export default withRouter(connect(mapStateToProps, { listTests })(TestListPage));

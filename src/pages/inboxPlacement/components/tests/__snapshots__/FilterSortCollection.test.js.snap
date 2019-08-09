@@ -1,0 +1,771 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FilterSortCollection Component renders renders with props 1`] = `
+<BrowserRouter>
+  <Router
+    history={
+      Object {
+        "action": "POP",
+        "block": [Function],
+        "createHref": [Function],
+        "go": [Function],
+        "goBack": [Function],
+        "goForward": [Function],
+        "length": 1,
+        "listen": [Function],
+        "location": Object {
+          "hash": "",
+          "pathname": "/",
+          "search": "",
+          "state": undefined,
+        },
+        "push": [Function],
+        "replace": [Function],
+      }
+    }
+  >
+    <FilterSortCollection
+      defaultSortColumn="fruit"
+      filterBoxConfig={
+        Object {
+          "itemToStringKeys": Array [
+            "fruit",
+            "vegetable",
+          ],
+          "placeholder": "Search By: Fruit, Vegetable",
+          "show": true,
+          "wrapper": [Function],
+        }
+      }
+      rowComponent={[Function]}
+      rows={
+        Array [
+          Object {
+            "fruit": "apple",
+            "vegetable": "celery",
+          },
+          Object {
+            "fruit": "banana",
+            "vegetable": "artichoke",
+          },
+          Object {
+            "fruit": "carrot",
+            "vegetable": "broccoli",
+          },
+        ]
+      }
+      selectOptions={
+        Array [
+          Object {
+            "label": "Fruit",
+            "value": "fruit",
+          },
+          Object {
+            "label": "Vegetable",
+            "value": "vegetable",
+          },
+        ]
+      }
+      title="Menu"
+    >
+      <withRouter(Collection)
+        bodyWrapper={[Function]}
+        defaultPerPage={10}
+        filterBox={
+          Object {
+            "itemToStringKeys": Array [
+              "fruit",
+              "vegetable",
+            ],
+            "placeholder": "Search By: Fruit, Vegetable",
+            "show": true,
+            "wrapper": [Function],
+          }
+        }
+        outerWrapper={[Function]}
+        pagination={true}
+        rowComponent={[Function]}
+        rows={
+          Array [
+            Object {
+              "fruit": "carrot",
+              "vegetable": "broccoli",
+            },
+            Object {
+              "fruit": "banana",
+              "vegetable": "artichoke",
+            },
+            Object {
+              "fruit": "apple",
+              "vegetable": "celery",
+            },
+          ]
+        }
+        sortColumn="fruit"
+      >
+        <Route
+          render={[Function]}
+        >
+          <Collection
+            bodyWrapper={[Function]}
+            defaultPerPage={10}
+            filterBox={
+              Object {
+                "itemToStringKeys": Array [
+                  "fruit",
+                  "vegetable",
+                ],
+                "placeholder": "Search By: Fruit, Vegetable",
+                "show": true,
+                "wrapper": [Function],
+              }
+            }
+            history={
+              Object {
+                "action": "POP",
+                "block": [Function],
+                "createHref": [Function],
+                "go": [Function],
+                "goBack": [Function],
+                "goForward": [Function],
+                "length": 1,
+                "listen": [Function],
+                "location": Object {
+                  "hash": "",
+                  "pathname": "/",
+                  "search": "",
+                  "state": undefined,
+                },
+                "push": [Function],
+                "replace": [Function],
+              }
+            }
+            location={
+              Object {
+                "hash": "",
+                "pathname": "/",
+                "search": "",
+                "state": undefined,
+              }
+            }
+            match={
+              Object {
+                "isExact": true,
+                "params": Object {},
+                "path": "/",
+                "url": "/",
+              }
+            }
+            outerWrapper={[Function]}
+            pagination={true}
+            rowComponent={[Function]}
+            rows={
+              Array [
+                Object {
+                  "fruit": "carrot",
+                  "vegetable": "broccoli",
+                },
+                Object {
+                  "fruit": "banana",
+                  "vegetable": "artichoke",
+                },
+                Object {
+                  "fruit": "apple",
+                  "vegetable": "celery",
+                },
+              ]
+            }
+            sortColumn="fruit"
+          >
+            <Panel>
+              <div
+                className="Jc_Jf"
+              >
+                <Panel.Section
+                  className="Title"
+                >
+                  <div
+                    className="Jc_Jz Title"
+                  >
+                    <div
+                      className="Jc_J3"
+                    >
+                      <h3>
+                        Menu
+                      </h3>
+                    </div>
+                  </div>
+                </Panel.Section>
+                <Panel.Section>
+                  <div
+                    className="Jc_Jz"
+                  >
+                    <div
+                      className="Jc_J3"
+                    >
+                      <div
+                        className="FilterPanel"
+                      >
+                        <Select
+                          id="sortSelect"
+                          onChange={[Function]}
+                          options={
+                            Array [
+                              Object {
+                                "label": "Fruit",
+                                "value": "fruit",
+                              },
+                              Object {
+                                "label": "Vegetable",
+                                "value": "vegetable",
+                              },
+                            ]
+                          }
+                          value="Sort By"
+                        >
+                          <fieldset
+                            className="Kl_Kn"
+                          >
+                            <select
+                              className="Kl_Av"
+                              onChange={[Function]}
+                              value="Sort By"
+                            >
+                              <Option
+                                key="0"
+                                option={
+                                  Object {
+                                    "label": "Fruit",
+                                    "value": "fruit",
+                                  }
+                                }
+                              >
+                                <option
+                                  value="fruit"
+                                >
+                                  Fruit
+                                </option>
+                              </Option>
+                              <Option
+                                key="1"
+                                option={
+                                  Object {
+                                    "label": "Vegetable",
+                                    "value": "vegetable",
+                                  }
+                                }
+                              >
+                                <option
+                                  value="vegetable"
+                                >
+                                  Vegetable
+                                </option>
+                              </Option>
+                            </select>
+                            <ArrowDropDown
+                              className="Kl_Kr Kl_Kt"
+                            >
+                              <IconBase
+                                className="Kl_Kr Kl_Kt"
+                                size={18}
+                              >
+                                <svg
+                                  className="Kl_Kr Kl_Kt"
+                                  fill="currentColor"
+                                  height={18}
+                                  preserveAspectRatio="xMidYMid meet"
+                                  style={
+                                    Object {
+                                      "verticalAlign": "middle",
+                                    }
+                                  }
+                                  viewBox="0 0 24 24"
+                                  width={18}
+                                >
+                                  <g>
+                                    <path
+                                      d="M7 10l5 5 5-5z"
+                                    />
+                                  </g>
+                                </svg>
+                              </IconBase>
+                            </ArrowDropDown>
+                          </fieldset>
+                        </Select>
+                      </div>
+                    </div>
+                  </div>
+                </Panel.Section>
+                <CollectionWrapperComponent>
+                  <div
+                    className="TableWrapper"
+                  >
+                    <Table>
+                      <table
+                        className="K9_LB"
+                      >
+                        <NullComponent />
+                        <TableBody>
+                          <tbody>
+                            <rowComponent
+                              fruit="carrot"
+                              key="row-0"
+                              vegetable="broccoli"
+                            >
+                              <Table.Row
+                                key="[object Object]"
+                                rowData={
+                                  Array [
+                                    <div>
+                                      <p>
+                                        carrot
+                                      </p>
+                                      <p>
+                                        broccoli
+                                      </p>
+                                    </div>,
+                                  ]
+                                }
+                              >
+                                <tr
+                                  className="K9_LI"
+                                >
+                                  <Table.Cell
+                                    key="Cell-0"
+                                    value={
+                                      <div>
+                                        <p>
+                                          carrot
+                                        </p>
+                                        <p>
+                                          broccoli
+                                        </p>
+                                      </div>
+                                    }
+                                  >
+                                    <td
+                                      className="K9_LG"
+                                    >
+                                      <div>
+                                        <p>
+                                          carrot
+                                        </p>
+                                        <p>
+                                          broccoli
+                                        </p>
+                                      </div>
+                                    </td>
+                                  </Table.Cell>
+                                </tr>
+                              </Table.Row>
+                            </rowComponent>
+                            <rowComponent
+                              fruit="banana"
+                              key="row-1"
+                              vegetable="artichoke"
+                            >
+                              <Table.Row
+                                key="[object Object]"
+                                rowData={
+                                  Array [
+                                    <div>
+                                      <p>
+                                        banana
+                                      </p>
+                                      <p>
+                                        artichoke
+                                      </p>
+                                    </div>,
+                                  ]
+                                }
+                              >
+                                <tr
+                                  className="K9_LI"
+                                >
+                                  <Table.Cell
+                                    key="Cell-0"
+                                    value={
+                                      <div>
+                                        <p>
+                                          banana
+                                        </p>
+                                        <p>
+                                          artichoke
+                                        </p>
+                                      </div>
+                                    }
+                                  >
+                                    <td
+                                      className="K9_LG"
+                                    >
+                                      <div>
+                                        <p>
+                                          banana
+                                        </p>
+                                        <p>
+                                          artichoke
+                                        </p>
+                                      </div>
+                                    </td>
+                                  </Table.Cell>
+                                </tr>
+                              </Table.Row>
+                            </rowComponent>
+                            <rowComponent
+                              fruit="apple"
+                              key="row-2"
+                              vegetable="celery"
+                            >
+                              <Table.Row
+                                key="[object Object]"
+                                rowData={
+                                  Array [
+                                    <div>
+                                      <p>
+                                        apple
+                                      </p>
+                                      <p>
+                                        celery
+                                      </p>
+                                    </div>,
+                                  ]
+                                }
+                              >
+                                <tr
+                                  className="K9_LI"
+                                >
+                                  <Table.Cell
+                                    key="Cell-0"
+                                    value={
+                                      <div>
+                                        <p>
+                                          apple
+                                        </p>
+                                        <p>
+                                          celery
+                                        </p>
+                                      </div>
+                                    }
+                                  >
+                                    <td
+                                      className="K9_LG"
+                                    >
+                                      <div>
+                                        <p>
+                                          apple
+                                        </p>
+                                        <p>
+                                          celery
+                                        </p>
+                                      </div>
+                                    </td>
+                                  </Table.Cell>
+                                </tr>
+                              </Table.Row>
+                            </rowComponent>
+                          </tbody>
+                        </TableBody>
+                      </table>
+                    </Table>
+                  </div>
+                </CollectionWrapperComponent>
+              </div>
+            </Panel>
+            <CollectionPagination
+              currentPage={1}
+              data={
+                Array [
+                  Object {
+                    "fruit": "carrot",
+                    "vegetable": "broccoli",
+                  },
+                  Object {
+                    "fruit": "banana",
+                    "vegetable": "artichoke",
+                  },
+                  Object {
+                    "fruit": "apple",
+                    "vegetable": "celery",
+                  },
+                ]
+              }
+              onPageChange={[Function]}
+              onPerPageChange={[Function]}
+              pageRange={5}
+              perPage={10}
+              perPageButtons={
+                Array [
+                  10,
+                  25,
+                  50,
+                  100,
+                ]
+              }
+              saveCsv={true}
+            >
+              <div>
+                <div
+                  className="PageButtons"
+                />
+                <div
+                  className="PerPageButtons"
+                >
+                  <PerPageButtons
+                    data={
+                      Array [
+                        Object {
+                          "fruit": "carrot",
+                          "vegetable": "broccoli",
+                        },
+                        Object {
+                          "fruit": "banana",
+                          "vegetable": "artichoke",
+                        },
+                        Object {
+                          "fruit": "apple",
+                          "vegetable": "celery",
+                        },
+                      ]
+                    }
+                    onPerPageChange={[Function]}
+                    perPage={10}
+                    perPageButtons={
+                      Array [
+                        10,
+                        25,
+                        50,
+                        100,
+                      ]
+                    }
+                    totalCount={3}
+                  />
+                  <SaveCSVButton
+                    data={
+                      Array [
+                        Object {
+                          "fruit": "carrot",
+                          "vegetable": "broccoli",
+                        },
+                        Object {
+                          "fruit": "banana",
+                          "vegetable": "artichoke",
+                        },
+                        Object {
+                          "fruit": "apple",
+                          "vegetable": "celery",
+                        },
+                      ]
+                    }
+                    saveCsv={true}
+                  >
+                    <Button
+                      download="sparkpost-csv-1434319925.csv"
+                      size="default"
+                      to="data:text/csv;charset=utf-8,fruit%2Cvegetable%0D%0Acarrot%2Cbroccoli%0D%0Abanana%2Cartichoke%0D%0Aapple%2Ccelery"
+                    >
+                      <a
+                        className="AB_AE"
+                        download="sparkpost-csv-1434319925.csv"
+                        href="data:text/csv;charset=utf-8,fruit%2Cvegetable%0D%0Acarrot%2Cbroccoli%0D%0Abanana%2Cartichoke%0D%0Aapple%2Ccelery"
+                        onMouseUp={[Function]}
+                        rel=""
+                        target=""
+                      >
+                        Save As CSV
+                      </a>
+                    </Button>
+                  </SaveCSVButton>
+                </div>
+              </div>
+            </CollectionPagination>
+          </Collection>
+        </Route>
+      </withRouter(Collection)>
+    </FilterSortCollection>
+  </Router>
+</BrowserRouter>
+`;
+
+exports[`FilterSortCollection Component renders renders without props 1`] = `
+<BrowserRouter>
+  <Router
+    history={
+      Object {
+        "action": "POP",
+        "block": [Function],
+        "createHref": [Function],
+        "go": [Function],
+        "goBack": [Function],
+        "goForward": [Function],
+        "length": 1,
+        "listen": [Function],
+        "location": Object {
+          "hash": "",
+          "pathname": "/",
+          "search": "",
+          "state": undefined,
+        },
+        "push": [Function],
+        "replace": [Function],
+      }
+    }
+  >
+    <FilterSortCollection>
+      <withRouter(Collection)
+        bodyWrapper={[Function]}
+        defaultPerPage={10}
+        outerWrapper={[Function]}
+        pagination={true}
+        rowComponent={[Function]}
+        rows={Array []}
+      >
+        <Route
+          render={[Function]}
+        >
+          <Collection
+            bodyWrapper={[Function]}
+            defaultPerPage={10}
+            filterBox={
+              Object {
+                "show": false,
+              }
+            }
+            history={
+              Object {
+                "action": "POP",
+                "block": [Function],
+                "createHref": [Function],
+                "go": [Function],
+                "goBack": [Function],
+                "goForward": [Function],
+                "length": 1,
+                "listen": [Function],
+                "location": Object {
+                  "hash": "",
+                  "pathname": "/",
+                  "search": "",
+                  "state": undefined,
+                },
+                "push": [Function],
+                "replace": [Function],
+              }
+            }
+            location={
+              Object {
+                "hash": "",
+                "pathname": "/",
+                "search": "",
+                "state": undefined,
+              }
+            }
+            match={
+              Object {
+                "isExact": true,
+                "params": Object {},
+                "path": "/",
+                "url": "/",
+              }
+            }
+            outerWrapper={[Function]}
+            pagination={true}
+            rowComponent={[Function]}
+            rows={Array []}
+          />
+        </Route>
+      </withRouter(Collection)>
+    </FilterSortCollection>
+  </Router>
+</BrowserRouter>
+`;
+
+exports[`FilterSortCollection Component sorts sorts default sort column values in ascending order 1`] = `
+Object {
+  "children": Array [
+    <NullComponent />,
+    <TableBody>
+      <rowComponent
+        fruit="apple"
+        vegetable="celery"
+      />
+      <rowComponent
+        fruit="banana"
+        vegetable="artichoke"
+      />
+      <rowComponent
+        fruit="carrot"
+        vegetable="broccoli"
+      />
+    </TableBody>,
+  ],
+  "className": "K9_LB",
+}
+`;
+
+exports[`FilterSortCollection Component sorts sorts default sort column values in default descending order 1`] = `
+Object {
+  "children": Array [
+    <NullComponent />,
+    <TableBody>
+      <rowComponent
+        fruit="carrot"
+        vegetable="broccoli"
+      />
+      <rowComponent
+        fruit="banana"
+        vegetable="artichoke"
+      />
+      <rowComponent
+        fruit="apple"
+        vegetable="celery"
+      />
+    </TableBody>,
+  ],
+  "className": "K9_LB",
+}
+`;
+
+exports[`FilterSortCollection Component sorts sorts selected sort column values in ascending order 1`] = `
+Object {
+  "children": Array [
+    <NullComponent />,
+    <TableBody>
+      <rowComponent
+        fruit="banana"
+        vegetable="artichoke"
+      />
+      <rowComponent
+        fruit="carrot"
+        vegetable="broccoli"
+      />
+      <rowComponent
+        fruit="apple"
+        vegetable="celery"
+      />
+    </TableBody>,
+  ],
+  "className": "K9_LB",
+}
+`;
+
+exports[`FilterSortCollection Component sorts sorts selected sort column values in default descending order 1`] = `
+Object {
+  "children": Array [
+    <NullComponent />,
+    <TableBody>
+      <rowComponent
+        fruit="apple"
+        vegetable="celery"
+      />
+      <rowComponent
+        fruit="carrot"
+        vegetable="broccoli"
+      />
+      <rowComponent
+        fruit="banana"
+        vegetable="artichoke"
+      />
+    </TableBody>,
+  ],
+  "className": "K9_LB",
+}
+`;

@@ -1,5 +1,5 @@
 
-import moment from 'moment-timezone';
+import moment from 'moment';
 import { STATUS, DURATION_HOURS } from '../constants/test';
 
 const formatDateTime = (start_time) => moment(start_time).format('MMM DD, YYYY [at] h:ma');
@@ -24,7 +24,7 @@ export default function formatScheduleLine(status, start_time, end_time) {
       break;
     }
     default: {
-      formatted_remaining = '. Test status unknown.';
+      formatted_remaining = ' and test status unknown';
     }
   }
 
