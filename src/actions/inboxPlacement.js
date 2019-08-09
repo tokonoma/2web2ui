@@ -40,6 +40,17 @@ export const getInboxPlacementByProviders = (id) => sparkpostApiRequest({
   }
 });
 
+export function stopInboxPlacementTest(id) {
+  return sparkpostApiRequest({
+    type: 'STOP_INBOX_PLACEMENT_TEST',
+    meta: {
+      method: 'PUT',
+      url: `/v1/inbox-placement/${id}`,
+      data: { status: 'stopped' }
+    }
+  });
+}
+
 export function getInboxPlacementTestContent(id) {
   return sparkpostApiRequest({
     type: 'GET_INBOX_PLACEMENT_TEST_CONTENT',
