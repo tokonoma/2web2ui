@@ -7,12 +7,12 @@ jest.mock('date-fns', () => ({ format: jest.fn().mockReturnValue('Jul 8th 2019 1
 describe('Component: TestDetails', () => {
   const subject = ({ ...props }) => {
     const defaults = {
-      currentTest: {
+      details: {
         start_time: '2019-07-08T15:49:56.954Z',
         end_time: null,
         subject: 'Fooo'
       },
-      inboxPlacementsByProvider: []
+      placementsByProvider: []
     };
     return shallow(<TestDetails {...defaults} {...props} />);
   };
@@ -22,7 +22,7 @@ describe('Component: TestDetails', () => {
   });
 
   it('renders providers breakdown correctly', () => {
-    const inboxPlacementsByProvider = [
+    const placementsByProvider = [
       {
         'mailbox_provider': 'dogmail.com',
         'placement': {
@@ -33,7 +33,7 @@ describe('Component: TestDetails', () => {
       }
     ];
 
-    expect(subject({ inboxPlacementsByProvider }).find('ProvidersBreakdown')).toMatchSnapshot();
+    expect(subject({ placementsByProvider }).find('ProvidersBreakdown')).toMatchSnapshot();
   });
 
   describe('Component: TestInfoBlock', () => {

@@ -49,7 +49,7 @@ exports[`Component: ProvidersBreakdown renders correctly with data 1`] = `
       >
         <Link
           replace={false}
-          to="/inbox-placement/details/undefined"
+          to="/inbox-placement/details/101/providers/undefined"
         >
           <strong>
             dogmail.com
@@ -93,7 +93,7 @@ exports[`Component: ProvidersBreakdown renders correctly with data 1`] = `
       >
         <Link
           replace={false}
-          to="/inbox-placement/details/undefined"
+          to="/inbox-placement/details/101/providers/undefined"
         >
           <strong>
             doghouseinbox.com

@@ -8,7 +8,8 @@ export const GroupPercentage = ({ value }) => <span>{parseFloat(value * 100).toF
 
 const MailBoxGroup = (groupData, index) => (<Table.Row key={index} className={styles.TableRow}>
   <Table.Cell className={styles.ProviderCell}>
-    <Link to={`/inbox-placement/details/${groupData.id}`}>
+    {/*{todo Fix the link when that route is implemented}*/}
+    <Link to={`/inbox-placement/details/101/providers/${groupData.id}`}>
       <strong>{groupData.mailbox_provider}</strong>
     </Link>
   </Table.Cell>

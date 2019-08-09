@@ -1,8 +1,7 @@
 const initialState = {
   currentTestDetails: {},
   seedsPending: false,
-  seeds: [],
-  inboxPlacementsByProvider: [] //todo consider combining in currentTest
+  seeds: []
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -23,7 +22,7 @@ export default (state = initialState, { type, payload }) => {
     case 'GET_INBOX_PLACEMENT_TEST_BY_PROVIDER_PENDING':
       return { ...state, getByProviderPending: true, getByProviderError: null };
     case 'GET_INBOX_PLACEMENT_TEST_BY_PROVIDER_SUCCESS':
-      return { ...state, getByProviderPending: false, inboxPlacementsByProvider: payload, getByProviderError: null };
+      return { ...state, getByProviderPending: false, placementsByProvider: payload, getByProviderError: null };
     case 'GET_INBOX_PLACEMENT_TEST_BY_PROVIDER_FAIL':
       return { ...state, getByProviderPending: false, getByProviderError: payload };
 

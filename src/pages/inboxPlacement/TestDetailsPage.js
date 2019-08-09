@@ -10,7 +10,7 @@ import useTabs from 'src/hooks/useTabs';
 import { RedirectAndAlert } from 'src/components/globalAlert';
 
 export const TestDetailsPage = (props) => {
-  const { history, id, tabIndex, loading, error, details, detailsByProvider, getInboxPlacementTest, getInboxPlacementByProviders } = props;
+  const { history, id, tabIndex, loading, error, details, placementsByProvider, getInboxPlacementTest, getInboxPlacementByProviders } = props;
   const [selectedTabIndex, tabs] = useTabs(TABS, tabIndex);
 
   useEffect(() => {
@@ -29,7 +29,7 @@ export const TestDetailsPage = (props) => {
       case 'content':
         return <TestContent/>;
       default:
-        return <TestDetails currentTest={details} inboxPlacementsByProvider={detailsByProvider}/>;
+        return <TestDetails details={details} placementsByProvider={placementsByProvider}/>;
     }
   };
 
@@ -67,10 +67,10 @@ function mapStateToProps(state, props) {
   return {
     tabIndex: currentTabIndex > 0 ? currentTabIndex : 0,
     id,
-    loading: state.inboxPlacement.getTestPending,
-    error: state.inboxPlacement.getTestError,
+    loading: state.inboxPlacement.getTestPending || state.inboxPlacement.getByProviderPending,
+    error: state.inboxPlacement.getTestError || state.inboxPlacement.getByProviderError,
     details: state.inboxPlacement.currentTestDetails,
-    detailsByProvider: state.inboxPlacement.inboxPlacementsByProvider
+    placementsByProvider: state.inboxPlacement.placementsByProvider || []
   };
 }
 

@@ -1,8 +1,8 @@
 import React from 'react';
+import { format } from 'date-fns';
 import { Grid, Panel } from '@sparkpost/matchbox';
 import FolderPlacementBarChart from './FolderPlacementBarChart';
 import ProvidersBreakdown from './ProvidersBreakdown';
-import { format } from 'date-fns';
 import { FORMATS } from 'src/constants';
 import styles from './TestDetails.module.scss';
 
@@ -13,8 +13,8 @@ export const TestInfoBlock = ({ label, value, columnProps = {}}) => <Grid.Column
 </Grid.Column>;
 
 
-const TestDetails = ({ currentTest = {}, inboxPlacementsByProvider }) => {
-  const placements = currentTest.placement || {};
+const TestDetails = ({ details, placementsByProvider }) => {
+  const placements = details.placement || {};
   const formattedPlacements = [
     {
       name: 'Inbox', value: placements.inbox_pct * 100, color: '#50D0D9'
@@ -27,11 +27,11 @@ const TestDetails = ({ currentTest = {}, inboxPlacementsByProvider }) => {
 
   return (<Panel>
     <Panel.Section>
-      <h2>{currentTest.subject}</h2>
+      <h2>{details.subject}</h2>
       <Grid>
-        <TestInfoBlock value={currentTest.from_address} label='From' columnProps={{ md: 4 }}/>
-        <TestInfoBlock value={format(currentTest.start_time, FORMATS.LONG_DATETIME)} label='Started'/>
-        <TestInfoBlock value={currentTest.end_time ? format(currentTest.end_time, FORMATS.LONG_DATETIME) : '--'}
+        <TestInfoBlock value={details.from_address} label='From' columnProps={{ md: 4 }}/>
+        <TestInfoBlock value={format(details.start_time, FORMATS.LONG_DATETIME)} label='Started'/>
+        <TestInfoBlock value={details.end_time ? format(details.end_time, FORMATS.LONG_DATETIME) : '--'}
           label='Finished'/>
         <TestInfoBlock value='test_name' label='Inbox Placement Test Name'/>
       </Grid>
@@ -49,9 +49,8 @@ const TestDetails = ({ currentTest = {}, inboxPlacementsByProvider }) => {
       <h3 className={styles.Inline}>
           Placement Breakdown
       </h3>
-      <small>{currentTest.seedlist_size > 1 ? ` | ${currentTest.seedlist_size} Seeds` : `${currentTest.seedlist_size} Seed`}</small>
-
-      <ProvidersBreakdown data={inboxPlacementsByProvider}/>
+      <small>{details.seedlist_size > 1 ? ` | ${details.seedlist_size} Seeds` : `${details.seedlist_size} Seed`}</small>
+      <ProvidersBreakdown data={placementsByProvider}/>
     </Panel.Section>
   </Panel>
   );
