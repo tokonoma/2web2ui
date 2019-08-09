@@ -14,7 +14,8 @@ export default class ConfirmationModal extends Component {
     content: PropTypes.node,
     onCancel: PropTypes.func.isRequired,
     onConfirm: PropTypes.func.isRequired,
-    confirmVerb: PropTypes.string
+    confirmVerb: PropTypes.string,
+    cancelVerb: PropTypes.string
   };
 
   renderContent() {
@@ -24,7 +25,8 @@ export default class ConfirmationModal extends Component {
       content = children,
       onConfirm,
       onCancel,
-      confirmVerb = 'Confirm'
+      confirmVerb = 'Confirm',
+      cancelVerb = 'Cancel'
     } = this.props;
 
     return (
@@ -39,7 +41,7 @@ export default class ConfirmationModal extends Component {
         >
           {confirmVerb}
         </Button>
-        <Button onClick={onCancel} className={styles.Cancel}>Cancel</Button>
+        <Button onClick={onCancel} className={styles.Cancel}>{cancelVerb}</Button>
       </div>
     );
   }
