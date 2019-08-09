@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Button } from '@sparkpost/matchbox';
 import ConfirmationModal from '../../../components/modals/ConfirmationModal';
 
-const StopTest = ({ status, onStop, loading, ...props }) => {
+const StopTest = ({ status, onStop, loading }) => {
   const [modalVisible, setModalVisible] = useState(false);
 
   const toggleModalVisibility = () => {

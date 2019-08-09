@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { connect } from 'react-redux';
 import { Page, Tabs } from '@sparkpost/matchbox';
 
@@ -29,10 +29,18 @@ export const TestDetailsPage = (props) => {
 
   const [selectedTabIndex, tabs] = useTabs(TABS, tabIndex);
 
-  useEffect(() => {
+  const loadTestData = useCallback(() => {
     getInboxPlacementTest(id);
     getInboxPlacementByProviders(id);
   }, [getInboxPlacementTest, getInboxPlacementByProviders, id]);
+
+  const stopTest = useCallback(() => {
+    stopInboxPlacementTest(id).then(loadTestData);
+  }, [id, loadTestData, stopInboxPlacementTest]);
+
+  useEffect(() => {
+    loadTestData();
+  }, [getInboxPlacementTest, id, loadTestData]);
 
   useEffect(() => {
     history.replace(`/inbox-placement/details/${id}/${TABS[selectedTabIndex].key}`);
@@ -60,7 +68,7 @@ export const TestDetailsPage = (props) => {
 
   return (
     <Page title='Inbox Placement | Results'
-      primaryArea={<StopTest status={(details || {}).status} loading={stopTestLoading} onStop={() => stopInboxPlacementTest(id)} />}
+      primaryArea={<StopTest status={(details || {}).status} loading={stopTestLoading} onStop={stopTest} />}
     >
       <Tabs
         selected={selectedTabIndex}
