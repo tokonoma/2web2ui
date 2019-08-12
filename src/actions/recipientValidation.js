@@ -93,7 +93,7 @@ export function getJobStatusMock(list_id) {
     type: 'GET_JOB_STATUS_SUCCESS',
     payload: {
       list_id: list_id,
-      batch_status: 'queued_for_batch',
+      batch_status: 'checking_regex',
       complete: false,
       original_filename: 'test.csv',
       address_count: 1234,

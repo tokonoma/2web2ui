@@ -61,8 +61,7 @@ export class UploadedListPage extends Component {
                 currentUsage={volumeUsed}
               />)
               : (<ListProgress
-                status={status}
-                filename={filename}
+                job={results}
               />)
             }
           </Panel.Section>

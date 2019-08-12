@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Button } from '@sparkpost/matchbox';
 import { Link } from 'react-router-dom';
 import styles from './ListProgress.module.scss';
@@ -33,27 +33,25 @@ const ProgressBar = ({ completed }) => {
 
 
 
-class ListProgress extends Component {
+const ListProgress = ({ job }) => {
 
-  render() {
-    const { status, filename } = this.props;
+  const { status, filename } = job;
 
-    const percentage = 100 * BATCH_STATUS.findIndex((batchStep) => batchStep === status) / BATCH_STATUS.length;
+  const percentage = 100 * BATCH_STATUS.findIndex((batchStep) => batchStep === status) / BATCH_STATUS.length;
 
-    return (
-      <div style={{ width: '80%', margin: '20px' }}>
-        <h2>{filename}</h2>
-        <div style={{ marginBottom: 80 }}>
-          <span>Your list is validating. You can track its progress on the recipient validation </span>
-          <UnstyledLink to='/recipient-validation' component={Link}>home page</UnstyledLink>,
-          <span> we'll let you know when validatioin is complete and your results are ready.</span>
-        </div>
-        <div><strong>Status:</strong> Processing</div>
-        <ProgressBar style={{ marginBottom: '400px' }} completed={percentage}/>
-        <Button color='orange' component={Link} to='/recipient-validation'>Validate Another</Button>
+  return (
+    <div style={{ width: '80%', margin: '20px' }}>
+      <h2>{filename}</h2>
+      <div style={{ marginBottom: 80 }}>
+        <span>Your list is validating. You can track its progress on the recipient validation </span>
+        <UnstyledLink to='/recipient-validation' component={Link}>home page</UnstyledLink>,
+        <span> we'll let you know when validatioin is complete and your results are ready.</span>
       </div>
-    );
-  }
-}
+      <div><strong>Status:</strong> Processing</div>
+      <ProgressBar style={{ marginBottom: '400px' }} completed={percentage}/>
+      <Button color='orange' component={Link} to='/recipient-validation'>Validate Another</Button>
+    </div>
+  );
+};
 
 export default ListProgress;
