@@ -20,8 +20,12 @@
   font-size: 1.2em;
 }
 
-.TableHeader {
+.TableHeader, .TableRow {
   border-bottom: 0;
+}
+
+.TableRow {
+  line-height: 3rem;
 }
 
 .TableCell {

@@ -5,18 +5,28 @@ import { PollContext } from 'src/context/Poll';
 import withContext from 'src/context/withContext';
 
 import ListResultsCard from './ListResultsCard';
-import { getLatestJob, getJobStatus } from 'src/actions/recipientValidation';
+import { isAccountUiOptionSet } from 'src/helpers/conditions/account';
+import { getLatestJob, getJobStatus, getList } from 'src/actions/recipientValidation';
 import _ from 'lodash';
 
 export class ListResults extends Component {
 
   componentDidMount() {
-    this.props.getLatestJob();
+    const { getLatestJob, getList, newListUpload } = this.props;
+    //TODO: Remove getLatestJob and replace with getList
+    if (newListUpload) {
+      getList();
+    } else {
+      getLatestJob();
+    }
   }
 
   componentDidUpdate({ latestId: prevLatestId }) {
-    const { latestId, results, startPolling, stopPolling } = this.props;
+    const { latestId, results, startPolling, stopPolling, newListUpload } = this.props;
 
+    if (newListUpload) {
+      return;
+    }
     // Start polling when a new list ID is recieved, which changes when either:
     // - Upload view first mounts
     // - Form is resubmitted
@@ -58,27 +68,30 @@ export class ListResults extends Component {
   }
 
   render() {
-    const { results, loading } = this.props;
+    const { resultsList, loading } = this.props;
 
-    if (!loading && _.isEmpty(results)) {
+    if (!loading && _.isEmpty(resultsList)) {
       return null;
     }
 
     return (
-      <ListResultsCard {...results} />
+      <ListResultsCard results={resultsList} />
     );
   }
 }
 
 
-const mapStateToProps = ({ recipientValidation }) => {
+const mapStateToProps = (state) => {
+  const { recipientValidation } = state;
   const latestId = recipientValidation.latest;
 
   return {
-    latestId,
-    results: recipientValidation.jobResults[latestId] || {},
-    loading: recipientValidation.jobResultsLoading
+    latestId, //TODO: remove
+    results: recipientValidation.jobResults[latestId] || {}, //TODO: Replace with list
+    loading: recipientValidation.jobResultsLoading,
+    resultsList: recipientValidation.jobResults || {},
+    newListUpload: isAccountUiOptionSet('recipientValidationV2')(state)
   };
 };
 
-export default connect(mapStateToProps, { getLatestJob, getJobStatus, showAlert })(withContext(PollContext, ListResults));
+export default connect(mapStateToProps, { getLatestJob, getJobStatus, showAlert, getList })(withContext(PollContext, ListResults));

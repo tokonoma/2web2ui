@@ -18,7 +18,28 @@ export function uploadList(data) {
 }
 //TODO: Wait for endpoint
 export function getList() {
-  return { type: 'GET_JOB_LIST' };
+
+  return {
+    type: 'GET_JOB_LIST_SUCCESS',
+    payload: [
+      {
+        list_id: 'listid1',
+        batch_status: 'queued_for_batch',
+        complete: false,
+        original_filename: 'test.csv',
+        address_count: 1234,
+        upload_timestamp: 1565187194
+      },
+      {
+        list_id: 'listid2',
+        batch_status: 'success',
+        complete: true,
+        original_filename: 'test2.csv',
+        address_count: 1235,
+        upload_timestamp: 1565187194
+      }
+    ]
+  };
   // return sparkpostApiRequest({
   //   type: 'GET_JOB_LIST',
   //   meta: {

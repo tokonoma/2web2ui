@@ -69,6 +69,32 @@ export default (state = initialState, { meta, payload, type }) => {
         }
       };
 
+    case 'GET_JOB_LIST_PENDING':
+      return { ...state, jobResultsLoading: true, jobResults: {}};
+
+    case 'GET_JOB_LIST_ERROR':
+      return { ...state, jobResultsLoading: false };
+
+    case 'GET_JOB_LIST_SUCCESS': {
+      const jobResults = {};
+      payload.forEach((job) => {
+        jobResults[job.list_id] = {
+          status: job.batch_status,
+          complete: job.complete,
+          uploaded: job.upload_timestamp,
+          rejectedUrl: job.rejected_external_url,
+          filename: job.original_filename,
+          addressCount: job.address_count
+        };
+      });
+      return {
+        ...state,
+        jobResultsLoading: false,
+        latest: payload.list_id,
+        jobResults: { ...state.jobResults, ...jobResults }
+      };
+    }
+
     // List Polling
     case 'GET_JOB_STATUS_PENDING':
       return { ...state, jobResultsLoading: true };
