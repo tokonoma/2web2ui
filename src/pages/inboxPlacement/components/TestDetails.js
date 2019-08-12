@@ -9,44 +9,40 @@ import styles from './TestDetails.module.scss';
 
 const TestDetails = ({ details, placementsByProvider }) => {
   const placements = details.placement || {};
-  const formattedPlacements = [
-    {
-      name: 'Inbox', value: placements.inbox_pct * 100, color: '#50D0D9'
-    }, {
-      name: 'Spam', value: placements.spam_pct * 100, color: '#0CBAC7'
-    }, {
-      name: 'Missing', value: placements.missing_pct * 100, color: '#00838C'
-    }
-  ];
 
-  return (<Panel>
-    <Panel.Section>
-      <h2>{details.subject}</h2>
-      <Grid>
-        <InfoBlock value={details.from_address} label='From' columnProps={{ md: 4 }}/>
-        <InfoBlock value={format(details.start_time, FORMATS.LONG_DATETIME)} label='Started'/>
-        <InfoBlock value={details.end_time ? format(details.end_time, FORMATS.LONG_DATETIME) : '--'}
-          label='Finished'/>
-        <InfoBlock value='test_name' label='Inbox Placement Test Name'/>
-      </Grid>
+  const panelTitle = (<>
+    <h3 className={styles.Inline}>Placement Breakdown</h3>
+    <small
+      className={styles.SeedsCount}>{details.seedlist_count > 1 ? ` | ${details.seedlist_count} Seeds` : `${details.seedlist_count} Seed`}
+    </small>
+  </>);
 
-    </Panel.Section>
-    <Panel.Section>
-      <Grid>
-        <Grid.Column md={8} lg={8}>
-          <h3>Folder Placement</h3>
-          <FolderPlacementBarChart data={formattedPlacements}/>
-        </Grid.Column>
-      </Grid>
-    </Panel.Section>
-    <Panel.Section>
-      <h3 className={styles.Inline}>
-          Placement Breakdown
-      </h3>
-      <small>{details.seedlist_size > 1 ? ` | ${details.seedlist_size} Seeds` : `${details.seedlist_size} Seed`}</small>
-      <ProvidersBreakdown data={placementsByProvider}/>
-    </Panel.Section>
-  </Panel>
+  return (<>
+      <Panel>
+        <Panel.Section>
+          <h2>{details.subject}</h2>
+          <Grid>
+            <InfoBlock value={details.from_address} label='From' columnProps={{ md: 4 }}/>
+            <InfoBlock value={format(details.start_time, FORMATS.LONG_DATETIME)} label='Started'/>
+            <InfoBlock value={details.end_time ? format(details.end_time, FORMATS.LONG_DATETIME) : '--'}
+              label='Finished'/>
+            <InfoBlock value='test_name' label='Inbox Placement Test Name'/>
+          </Grid>
+
+        </Panel.Section>
+        <Panel.Section>
+          <Grid>
+            <Grid.Column md={8}>
+              <h3>Folder Placement</h3>
+              <FolderPlacementBarChart placements={placements}/>
+            </Grid.Column>
+          </Grid>
+        </Panel.Section>
+      </Panel>
+      <Panel title={panelTitle}>
+        <ProvidersBreakdown data={placementsByProvider}/>
+      </Panel>
+    </>
   );
 };
 

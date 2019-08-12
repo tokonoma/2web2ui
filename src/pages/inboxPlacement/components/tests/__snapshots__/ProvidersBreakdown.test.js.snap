@@ -8,164 +8,48 @@ exports[`Component: ProvidersBreakdown SubComponent: GroupPercentage renders per
 `;
 
 exports[`Component: ProvidersBreakdown renders correctly with data 1`] = `
-<Table
-  className="ProvidersBreakDown"
->
-  <tbody>
-    <Table.Row
-      className="TableRowHeader"
-    >
-      <Table.HeaderCell>
-        Mailbox Provider
-      </Table.HeaderCell>
-      <Table.HeaderCell
-        className="TableCell"
-      >
-        <Grid>
-          <Grid.Column
-            className="GridColumn"
-          >
-            Inbox
-          </Grid.Column>
-          <Grid.Column
-            className="GridColumn"
-          >
-            Spam
-          </Grid.Column>
-          <Grid.Column
-            className="GridColumn"
-          >
-            Missing
-          </Grid.Column>
-        </Grid>
-      </Table.HeaderCell>
-    </Table.Row>
-    <Table.Row
-      className="TableRow"
-      key="0"
-    >
-      <Table.Cell
-        className="ProviderCell"
-      >
-        <Link
-          replace={false}
-          to="/inbox-placement/details/101/providers/undefined"
-        >
-          <strong>
-            dogmail.com
-          </strong>
-        </Link>
-      </Table.Cell>
-      <Table.Cell
-        className="TableCell"
-      >
-        <Grid>
-          <Grid.Column
-            className="GridColumn"
-          >
-            <GroupPercentage
-              value={0}
-            />
-          </Grid.Column>
-          <Grid.Column
-            className="GridColumn"
-          >
-            <GroupPercentage
-              value={0}
-            />
-          </Grid.Column>
-          <Grid.Column
-            className="GridColumn"
-          >
-            <GroupPercentage
-              value={1}
-            />
-          </Grid.Column>
-        </Grid>
-      </Table.Cell>
-    </Table.Row>
-    <Table.Row
-      className="TableRow"
-      key="1"
-    >
-      <Table.Cell
-        className="ProviderCell"
-      >
-        <Link
-          replace={false}
-          to="/inbox-placement/details/101/providers/undefined"
-        >
-          <strong>
-            doghouseinbox.com
-          </strong>
-        </Link>
-      </Table.Cell>
-      <Table.Cell
-        className="TableCell"
-      >
-        <Grid>
-          <Grid.Column
-            className="GridColumn"
-          >
-            <GroupPercentage
-              value={0.8}
-            />
-          </Grid.Column>
-          <Grid.Column
-            className="GridColumn"
-          >
-            <GroupPercentage
-              value={0.1}
-            />
-          </Grid.Column>
-          <Grid.Column
-            className="GridColumn"
-          >
-            <GroupPercentage
-              value={0.1}
-            />
-          </Grid.Column>
-        </Grid>
-      </Table.Cell>
-    </Table.Row>
-  </tbody>
-</Table>
+<TableCollection
+  className="ProvidersBreakdownTable"
+  defaultSortColumn="placement.inbox_pct"
+  defaultSortDirection="desc"
+  headerComponent={[Function]}
+  pagination={true}
+  rowComponent={[Function]}
+  rows={
+    Array [
+      Object {
+        "mailbox_provider": "dogmail.com",
+        "placement": Object {
+          "inbox_pct": 0,
+          "missing_pct": 1,
+          "spam_pct": 0,
+        },
+      },
+      Object {
+        "mailbox_provider": "doghouseinbox.com",
+        "placement": Object {
+          "inbox_pct": 0.8,
+          "missing_pct": 0.1,
+          "spam_pct": 0.1,
+        },
+      },
+    ]
+  }
+  saveCsv={false}
+  wrapperComponent={[Function]}
+/>
 `;
 
 exports[`Component: ProvidersBreakdown renders correctly with no data 1`] = `
-<Table
-  className="ProvidersBreakDown"
->
-  <tbody>
-    <Table.Row
-      className="TableRowHeader"
-    >
-      <Table.HeaderCell>
-        Mailbox Provider
-      </Table.HeaderCell>
-      <Table.HeaderCell
-        className="TableCell"
-      >
-        <Grid>
-          <Grid.Column
-            className="GridColumn"
-          >
-            Inbox
-          </Grid.Column>
-          <Grid.Column
-            className="GridColumn"
-          >
-            Spam
-          </Grid.Column>
-          <Grid.Column
-            className="GridColumn"
-          >
-            Missing
-          </Grid.Column>
-        </Grid>
-      </Table.HeaderCell>
-    </Table.Row>
-    0
-  </tbody>
-</Table>
+<TableCollection
+  className="ProvidersBreakdownTable"
+  defaultSortColumn="placement.inbox_pct"
+  defaultSortDirection="desc"
+  headerComponent={[Function]}
+  pagination={true}
+  rowComponent={[Function]}
+  rows={Array []}
+  saveCsv={false}
+  wrapperComponent={[Function]}
+/>
 `;

@@ -1,81 +1,71 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Component: TestDetails renders correctly 1`] = `
-<Panel>
-  <Panel.Section>
-    <h2>
-      Fooo
-    </h2>
-    <Grid>
-      <InfoBlock
-        columnProps={
-          Object {
-            "md": 4,
+<Fragment>
+  <Panel>
+    <Panel.Section>
+      <h2>
+        Fooo
+      </h2>
+      <Grid>
+        <InfoBlock
+          columnProps={
+            Object {
+              "md": 4,
+            }
           }
-        }
-        label="From"
-      />
-      <InfoBlock
-        label="Started"
-        value="Jul 8th 2019 11:49am"
-      />
-      <InfoBlock
-        label="Finished"
-        value="--"
-      />
-      <InfoBlock
-        label="Inbox Placement Test Name"
-        value="test_name"
-      />
-    </Grid>
-  </Panel.Section>
-  <Panel.Section>
-    <Grid>
-      <Grid.Column
-        lg={8}
-        md={8}
-      >
-        <h3>
-          Folder Placement
-        </h3>
-        <FolderPlacementChart
-          data={
-            Array [
-              Object {
-                "color": "#50D0D9",
-                "name": "Inbox",
-                "value": NaN,
-              },
-              Object {
-                "color": "#0CBAC7",
-                "name": "Spam",
-                "value": NaN,
-              },
-              Object {
-                "color": "#00838C",
-                "name": "Missing",
-                "value": NaN,
-              },
-            ]
-          }
+          label="From"
         />
-      </Grid.Column>
-    </Grid>
-  </Panel.Section>
-  <Panel.Section>
-    <h3
-      className="Inline"
-    >
-      Placement Breakdown
-    </h3>
-    <small>
-      undefined Seed
-    </small>
+        <InfoBlock
+          label="Started"
+          value="Jul 8th 2019 11:49am"
+        />
+        <InfoBlock
+          label="Finished"
+          value="--"
+        />
+        <InfoBlock
+          label="Inbox Placement Test Name"
+          value="test_name"
+        />
+      </Grid>
+    </Panel.Section>
+    <Panel.Section>
+      <Grid>
+        <Grid.Column
+          md={8}
+        >
+          <h3>
+            Folder Placement
+          </h3>
+          <FolderPlacementChart
+            placements={Object {}}
+          />
+        </Grid.Column>
+      </Grid>
+    </Panel.Section>
+  </Panel>
+  <Panel
+    title={
+      <React.Fragment>
+        <h3
+          className="Inline"
+        >
+          Placement Breakdown
+        </h3>
+        <small
+          className="SeedsCount"
+        >
+          undefined Seed
+        </small>
+      </React.Fragment>
+    }
+  >
     <ProvidersBreakdown
       data={Array []}
     />
-  </Panel.Section>
-</Panel>
+  </Panel>
+</Fragment>
 `;
 
 exports[`Component: TestDetails renders providers breakdown correctly 1`] = `

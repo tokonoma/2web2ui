@@ -35,8 +35,7 @@ describe('Page: Single Inbox Placement Test', () => {
   });
 
   it('renders loading', () => {
-    const wrapper = subject();
-    wrapper.setProps({ loading: true });
+    const wrapper = subject({ loading: true });
     expect(wrapper.find('Loading')).toExist();
     expect(wrapper.find('Page')).not.toExist();
   });
@@ -48,7 +47,7 @@ describe('Page: Single Inbox Placement Test', () => {
         message: 'You dun goofed'
       }
     });
-    expect(wrapper.find('RedirectAndAlert')).toExist();
+    expect(wrapper.find('RedirectAndAlert')).toMatchSnapshot();
     expect(wrapper.find('Page')).not.toExist();
   });
 

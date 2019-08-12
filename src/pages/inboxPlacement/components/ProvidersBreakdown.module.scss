@@ -1,30 +1,16 @@
 @import '~@sparkpost/matchbox/src/styles/config.scss';
 
-.TableRowHeader {
+.DataRow {
+  &:last-of-type {
+    border-bottom: 0px;
+  }
+}
+
+.HeaderRow {
   border-bottom: 0px;
 }
 
-.TableRow {
-  Grid.Column {
-    text-align: center;
-    flex: 0 0 auto;
-    flex-grow: 1;
-    flex-basis: 0;
-    max-width: 100%;
-  }
-
-  .ProviderCell {
-    border-right: 1px solid color(gray, 8);
-    width: 30%;
-  }
-}
-
-.TableCell {
-  .GridColumn {
-    flex: 0 0 auto;
-    flex-grow: 1;
-    flex-basis: 0;
-    max-width: 100%;
-    text-align: center;
-  }
+.ProviderCell {
+  border-right: 1px solid color(gray, 8);
+  width: 40%;
 }

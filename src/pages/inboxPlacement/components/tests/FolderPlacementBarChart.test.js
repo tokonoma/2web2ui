@@ -4,24 +4,21 @@ import { shallow } from 'enzyme';
 import FolderPlacementBarChart from '../FolderPlacementBarChart';
 
 describe('Component: FolderPlacementBarChart', () => {
+  const defaultPlacements = {};
+  const subject = ({ ...props }) => shallow(<FolderPlacementBarChart placements={defaultPlacements} {...props}/>);
 
-  const subject = ({ ...props }) => shallow(<FolderPlacementBarChart data={[]} {...props}/>);
-
-  it('renders correctly with no data', () => {
+  it('renders correctly with defaults', () => {
     expect(subject()).toMatchSnapshot();
   });
 
   it('renders correct with data', () => {
-    const formattedPlacements = [
-      {
-        name: 'Inbox', value: 90.5
-      }, {
-        name: 'Spam', value: 5.5
-      }, {
-        name: 'Missing', value: 4
-      }
-    ];
-    expect(subject({ data: formattedPlacements })).toMatchSnapshot();
+    const placements = {
+      inbox_pct: 0.905,
+      spam_pct: 0.55,
+      missing_pct: 0.40
+    };
+
+    expect(subject({ placements })).toMatchSnapshot();
 
   });
 
