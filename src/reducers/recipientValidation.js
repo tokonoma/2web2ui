@@ -88,7 +88,9 @@ export default (state = initialState, { meta, payload, type }) => {
             status: payload.batch_status ? payload.batch_status.toLowerCase() : null,
             complete: payload.complete,
             uploaded: payload.upload_timestamp,
-            rejectedUrl: payload.rejected_external_url
+            rejectedUrl: payload.rejected_external_url,
+            filename: payload.original_filename,
+            addressCount: payload.address_count
           }
         }
       };

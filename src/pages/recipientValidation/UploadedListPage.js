@@ -5,7 +5,7 @@ import UploadedListForm from './components/UploadedListForm';
 import { formatDate, formatTime } from 'src/helpers/date';
 import { connect } from 'react-redux';
 import { showAlert } from 'src/actions/globalAlert';
-import { getJobStatusMock } from 'src/actions/recipientValidation';
+import { getJobStatus } from 'src/actions/recipientValidation';
 import { getUsage } from 'src/actions/account';
 import _ from 'lodash';
 import Loading from 'src/components/loading';
@@ -13,9 +13,9 @@ import Loading from 'src/components/loading';
 export class UploadedListPage extends Component {
 
   componentDidMount() {
-    const { getJobStatusMock, getUsage } = this.props;
+    const { getJobStatus, getUsage, listId } = this.props;
     // TODO: Use action
-    getJobStatusMock();
+    getJobStatus(listId);
     // TODO: Get usage
     getUsage();
 
@@ -31,9 +31,7 @@ export class UploadedListPage extends Component {
   )
 
   handleSubmit = () => {
-    const { showAlert } = this.props;
     //TODO: Replace with job trigger
-    showAlert({ message: 'Oh yeah' });
   }
 
   render() {
@@ -42,7 +40,7 @@ export class UploadedListPage extends Component {
     if (loading) {
       return (<Loading />);
     }
-    const { status, address_count } = results;
+    const { status } = results;
     const volumeUsed = _.get(currentUsage, 'recipient_validation.month.used', 0);
 
     return (
@@ -55,7 +53,7 @@ export class UploadedListPage extends Component {
             {status === 'queued_for_batch'
               ? (<UploadedListForm
                 onSubmit={this.handleSubmit}
-                count={address_count}
+                job={results}
                 currentUsage={volumeUsed}
 
               />)
@@ -79,4 +77,4 @@ const mapStateToProps = ({ recipientValidation, account }, { match }) => {
   };
 };
 
-export default withRouter(connect(mapStateToProps, { showAlert, getJobStatusMock, getUsage })(UploadedListPage));
+export default withRouter(connect(mapStateToProps, { showAlert, getJobStatus, getUsage })(UploadedListPage));

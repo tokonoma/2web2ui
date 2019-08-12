@@ -47,10 +47,6 @@ export function triggerJob(listId) {
   // });
 }
 
-export function getJobStatusMock(list_id) {
-  return { type: 'GET_JOB_STATUS_MOCK' };
-}
-
 export function singleAddress(address) {
   return sparkpostApiRequest({
     type: 'SINGLE_RECIPIENT_VALIDATION',
@@ -73,13 +69,24 @@ export function getLatestJob() {
 }
 
 export function getJobStatus(list_id) {
-  return sparkpostApiRequest({
-    type: 'GET_JOB_STATUS',
-    meta: {
-      method: 'GET',
-      url: `v1/recipient-validation/job/${list_id}`
+  // return sparkpostApiRequest({
+  //   type: 'GET_JOB_STATUS',
+  //   meta: {
+  //     method: 'GET',
+  //     url: `v1/recipient-validation/job/${list_id}`
+  //   }
+  // });
+  return {
+    type: 'GET_JOB_STATUS_SUCCESS',
+    payload: {
+      list_id: list_id,
+      batch_status: 'queued_for_batch',
+      complete: false,
+      upload_timestamp: 'time',
+      original_filename: 'test.csv',
+      address_count: 1234
     }
-  });
+  };
 }
 
 export function resetUploadError() {

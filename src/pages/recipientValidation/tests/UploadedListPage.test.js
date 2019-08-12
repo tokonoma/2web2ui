@@ -7,7 +7,7 @@ const subject = (props = {}) => shallow(
   <UploadedListPage
     batchStatus='queued_for_batch'
     listId='listId'
-    getJobStatusMock={jest.fn(() => Promise.resolve())}
+    getJobStatus={jest.fn()}
     results={{ status: 'queued_for_batch', address_count: 1000 }}
     getUsage={jest.fn()}
     currentUsage={{ recipient_validation: { month: { used: 20000 }}}}
@@ -19,10 +19,10 @@ describe('UploadedListPage', () => {
 
   // TODO: Replace mock function with real function
   it('should fetch job status on rendering', () => {
-    const getJobStatusMock = jest.fn(() => Promise.resolve());
+    const getJobStatus = jest.fn();
     const getUsage = jest.fn();
-    subject({ getJobStatusMock, getUsage });
-    expect(getJobStatusMock).toHaveBeenCalled();
+    subject({ getJobStatus, getUsage });
+    expect(getJobStatus).toHaveBeenCalledWith('listId');
     expect(getUsage).toHaveBeenCalled();
   });
 

@@ -8,6 +8,9 @@ exports[`Uploaded List Form should render correctly 1`] = `
     }
   }
 >
+  <h2>
+    big-test.csv
+  </h2>
   <p
     className="descriptionParagraph"
   >
