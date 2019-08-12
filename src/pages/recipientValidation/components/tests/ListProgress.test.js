@@ -5,7 +5,10 @@ import ListProgress from '../ListProgress';
 
 const subject = (props = {}) => shallow(
   <ListProgress
-    status='batch_triggered'
+    job={{
+      filename: 'big-test.csv',
+      status: 'checking_regex'
+    }}
     {...props}
   />
 );
@@ -16,6 +19,6 @@ describe('ListProgress', () => {
   });
 
   it('should render percentage based on status', () => {
-    expect(subject({ status: 'performing_free_email' }).find('ProgressBar').prop('completed')).toEqual(70);
+    expect(subject({ job: { status: 'performing_free_email' }}).find('ProgressBar').prop('completed')).toEqual(70);
   });
 });

@@ -9,7 +9,9 @@ exports[`ListProgress should render correctly 1`] = `
     }
   }
 >
-  <h2 />
+  <h2>
+    big-test.csv
+  </h2>
   <div
     style={
       Object {
@@ -28,7 +30,7 @@ exports[`ListProgress should render correctly 1`] = `
     </UnstyledLink>
     ,
     <span>
-       we'll let you know when validatioin is complete and your results are ready.
+       we'll let you know when validation is complete and your results are ready.
     </span>
   </div>
   <div>
@@ -38,7 +40,7 @@ exports[`ListProgress should render correctly 1`] = `
      Processing
   </div>
   <ProgressBar
-    completed={0}
+    completed={20}
     style={
       Object {
         "marginBottom": "400px",

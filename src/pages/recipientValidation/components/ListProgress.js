@@ -45,7 +45,7 @@ const ListProgress = ({ job }) => {
       <div style={{ marginBottom: 80 }}>
         <span>Your list is validating. You can track its progress on the recipient validation </span>
         <UnstyledLink to='/recipient-validation' component={Link}>home page</UnstyledLink>,
-        <span> we'll let you know when validatioin is complete and your results are ready.</span>
+        <span> we'll let you know when validation is complete and your results are ready.</span>
       </div>
       <div><strong>Status:</strong> Processing</div>
       <ProgressBar style={{ marginBottom: '400px' }} completed={percentage}/>
