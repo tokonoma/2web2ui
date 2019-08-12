@@ -6,7 +6,8 @@ const initialState = {
   tokenError: null,
   storingCookieConsent: null,
   consentFailed: null,
-  options: {}
+  options: {},
+  userOptionsPending: false
 };
 
 export default (state = initialState, { type, payload, meta }) => {
@@ -48,8 +49,20 @@ export default (state = initialState, { type, payload, meta }) => {
     case 'USER_GIVES_COOKIE_CONSENT_SUCCESS':
       return { ...state, storingCookieConsent: false, cookie_consent: true };
 
+    case 'UPDATE_USER_UI_OPTIONS_PENDING':
+      return { ...state, userOptionsPending: true };
+
+    case 'UPDATE_USER_UI_OPTIONS_FAIL':
+      return { ...state, userOptionsPending: false };
+
     case 'UPDATE_USER_UI_OPTIONS_SUCCESS':
-      return { ...state, options: meta.data.options };
+      return { ...state, options: {
+        ...state.options,
+        ui: {
+          ...state.options.ui,
+          ...meta.data.options.ui
+        }
+      }, userOptionsPending: false };
 
     case 'MARK_ALL_NOTIFICATIONS_AS_READ': {
       return {
