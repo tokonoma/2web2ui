@@ -83,11 +83,11 @@ exports[`Alert Form Component should render the alert form component correctly 1
             <label>
               <h5>
                 Filtered by 
-                <span
+                <small
                   className="OptionalText"
                 >
                   optional
-                </span>
+                </small>
               </h5>
             </label>
             <Connect(SubaccountsField)

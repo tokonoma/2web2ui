@@ -133,7 +133,7 @@ export class AlertFormNew extends Component {
                 }
                 {formSpec.hasFilters &&
                   <div className={styles.Filters}>
-                    <label><h5>Filtered by <span className={styles.OptionalText}>optional</span></h5></label>
+                    <label><h5>Filtered by <small className={styles.OptionalText}>optional</small></h5></label>
                     {hasSubaccounts &&
                       <SubaccountField
                         disabled={submitting}
