@@ -90,9 +90,6 @@ exports[`renders uploading state correctly 1`] = `
   >
     Uploading...
   </h3>
-  <p>
-    Your list will be ready to validate in just a moment.
-  </p>
   <div
     className="LoadingWrapper"
   >

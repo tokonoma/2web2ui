@@ -68,6 +68,7 @@ export class ListForm extends Component {
             name='csv'
             validate={uploadValidators}
             uploading={this.props.uploading}
+            uploadV2={this.props.newListUpload}
           />
         </form>
       </Panel.Section>
