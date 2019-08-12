@@ -1,9 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Component: ProvidersBreakdown SubComponent: GroupPercentage renders percentage correctly 1`] = `
-<span>
-  20.00
-  %
+<span
+  className="GroupValue"
+>
+  0.2%
 </span>
 `;
 

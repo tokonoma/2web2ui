@@ -33,6 +33,6 @@ describe('Component: TestDetails', () => {
       }
     ];
 
-    expect(subject({ placementsByProvider }).find('ProvidersBreakdown')).toMatchSnapshot();
+    expect(subject({ placementsByProvider }).find('ProvidersBreakdown').prop('data')).toEqual(placementsByProvider);
   });
 });

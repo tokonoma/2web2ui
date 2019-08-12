@@ -67,20 +67,3 @@ exports[`Component: TestDetails renders correctly 1`] = `
   </Panel>
 </Fragment>
 `;
-
-exports[`Component: TestDetails renders providers breakdown correctly 1`] = `
-<ProvidersBreakdown
-  data={
-    Array [
-      Object {
-        "mailbox_provider": "dogmail.com",
-        "placement": Object {
-          "inbox_pct": 0,
-          "missing_pct": 1,
-          "spam_pct": 0,
-        },
-      },
-    ]
-  }
-/>
-`;
