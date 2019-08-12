@@ -69,6 +69,7 @@ export function getLatestJob() {
 }
 
 export function getJobStatus(list_id) {
+  //TODO: Unmock action + fix tests
   // return sparkpostApiRequest({
   //   type: 'GET_JOB_STATUS',
   //   meta: {

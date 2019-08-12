@@ -3,11 +3,15 @@
 exports[`Recipient Verification Actions .getJobStatus when getting status of a list job 1`] = `
 Array [
   Object {
-    "meta": Object {
-      "method": "GET",
-      "url": "v1/recipient-validation/job/12345",
+    "payload": Object {
+      "address_count": 1234,
+      "batch_status": "queued_for_batch",
+      "complete": false,
+      "list_id": "12345",
+      "original_filename": "test.csv",
+      "upload_timestamp": 1565187194,
     },
-    "type": "GET_JOB_STATUS",
+    "type": "GET_JOB_STATUS_SUCCESS",
   },
 ]
 `;
