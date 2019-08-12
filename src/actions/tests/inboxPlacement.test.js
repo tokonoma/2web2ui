@@ -14,6 +14,17 @@ describe('Action Creator: Inbox Placement', () => {
       }
     });
   });
+  it('it makes request to list tests', async () => {
+    await inboxPlacement.listTests();
+    expect(sparkpostApiRequest).toHaveBeenCalledWith({
+      type: 'LIST_TESTS',
+      meta: {
+        method: 'GET',
+        url: '/v1/inbox-placement',
+        showErrorAlert: false
+      }
+    });
+  });
 
   it('makes request to get single inbox placement test', async () => {
     await inboxPlacement.getInboxPlacementTest(1);

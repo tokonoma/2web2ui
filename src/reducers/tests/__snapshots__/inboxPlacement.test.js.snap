@@ -7,6 +7,8 @@ Object {
   "getTestPending": true,
   "seeds": Array [],
   "seedsPending": false,
+  "tests": Array [],
+  "testsPending": true,
 }
 `;
 
@@ -23,6 +25,8 @@ Object {
   "getTestPending": false,
   "seeds": Array [],
   "seedsPending": false,
+  "tests": Array [],
+  "testsPending": true,
 }
 `;
 
@@ -35,6 +39,8 @@ Object {
   "getTestPending": false,
   "seeds": Array [],
   "seedsPending": false,
+  "tests": Array [],
+  "testsPending": true,
 }
 `;
 
@@ -44,6 +50,8 @@ Object {
   "seeds": Array [],
   "seedsError": undefined,
   "seedsPending": false,
+  "tests": Array [],
+  "testsPending": true,
 }
 `;
 
@@ -53,6 +61,8 @@ Object {
   "seeds": Array [],
   "seedsError": null,
   "seedsPending": true,
+  "tests": Array [],
+  "testsPending": true,
 }
 `;
 
@@ -62,5 +72,40 @@ Object {
   "seeds": undefined,
   "seedsError": null,
   "seedsPending": false,
+  "tests": Array [],
+  "testsPending": true,
+}
+`;
+
+exports[`Inbox Placement Reducer list tests fail 1`] = `
+Object {
+  "currentTestDetails": null,
+  "seeds": Array [],
+  "seedsPending": false,
+  "tests": Array [],
+  "testsError": undefined,
+  "testsPending": false,
+}
+`;
+
+exports[`Inbox Placement Reducer list tests pending 1`] = `
+Object {
+  "currentTestDetails": null,
+  "seeds": Array [],
+  "seedsPending": false,
+  "tests": Array [],
+  "testsError": null,
+  "testsPending": true,
+}
+`;
+
+exports[`Inbox Placement Reducer list tests success 1`] = `
+Object {
+  "currentTestDetails": null,
+  "seeds": Array [],
+  "seedsPending": false,
+  "tests": undefined,
+  "testsError": null,
+  "testsPending": false,
 }
 `;
