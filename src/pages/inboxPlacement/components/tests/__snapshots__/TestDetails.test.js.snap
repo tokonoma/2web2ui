@@ -1,22 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Component: TestDetails Component: TestInfoBlock renders the label and value 1`] = `
-<Grid.Column>
-  <span
-    className="InfoLabel"
-  >
-    Foo
-    :
-  </span>
-  <br />
-  <span
-    className="InfoValue"
-  >
-    bar
-  </span>
-</Grid.Column>
-`;
-
 exports[`Component: TestDetails renders correctly 1`] = `
 <Panel>
   <Panel.Section>
@@ -24,7 +7,7 @@ exports[`Component: TestDetails renders correctly 1`] = `
       Fooo
     </h2>
     <Grid>
-      <TestInfoBlock
+      <InfoBlock
         columnProps={
           Object {
             "md": 4,
@@ -32,15 +15,15 @@ exports[`Component: TestDetails renders correctly 1`] = `
         }
         label="From"
       />
-      <TestInfoBlock
+      <InfoBlock
         label="Started"
         value="Jul 8th 2019 11:49am"
       />
-      <TestInfoBlock
+      <InfoBlock
         label="Finished"
         value="--"
       />
-      <TestInfoBlock
+      <InfoBlock
         label="Inbox Placement Test Name"
         value="test_name"
       />

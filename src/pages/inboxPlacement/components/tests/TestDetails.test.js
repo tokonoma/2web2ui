@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import TestDetails, { TestInfoBlock } from '../TestDetails';
+import TestDetails from '../TestDetails';
 
 jest.mock('date-fns', () => ({ format: jest.fn().mockReturnValue('Jul 8th 2019 11:49am') }));
 
@@ -34,15 +34,5 @@ describe('Component: TestDetails', () => {
     ];
 
     expect(subject({ placementsByProvider }).find('ProvidersBreakdown')).toMatchSnapshot();
-  });
-
-  describe('Component: TestInfoBlock', () => {
-    it('renders the label and value', () => {
-      expect(shallow(<TestInfoBlock label='Foo' value='bar'/>)).toMatchSnapshot();
-    });
-
-    it('renders with column props', () => {
-      expect(shallow(<TestInfoBlock label='Foo' value='bar' columnProps={{ md: 9 }}/>).prop('md')).toEqual(9);
-    });
   });
 });

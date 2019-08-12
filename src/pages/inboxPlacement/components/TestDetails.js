@@ -4,14 +4,8 @@ import { Grid, Panel } from '@sparkpost/matchbox';
 import FolderPlacementBarChart from './FolderPlacementBarChart';
 import ProvidersBreakdown from './ProvidersBreakdown';
 import { FORMATS } from 'src/constants';
+import InfoBlock from './InfoBlock';
 import styles from './TestDetails.module.scss';
-
-export const TestInfoBlock = ({ label, value, columnProps = {}}) => <Grid.Column {...columnProps}>
-  <span className={styles.InfoLabel}>{label}:</span>
-  <br/>
-  <span className={styles.InfoValue}>{value}</span>
-</Grid.Column>;
-
 
 const TestDetails = ({ details, placementsByProvider }) => {
   const placements = details.placement || {};
@@ -29,11 +23,11 @@ const TestDetails = ({ details, placementsByProvider }) => {
     <Panel.Section>
       <h2>{details.subject}</h2>
       <Grid>
-        <TestInfoBlock value={details.from_address} label='From' columnProps={{ md: 4 }}/>
-        <TestInfoBlock value={format(details.start_time, FORMATS.LONG_DATETIME)} label='Started'/>
-        <TestInfoBlock value={details.end_time ? format(details.end_time, FORMATS.LONG_DATETIME) : '--'}
+        <InfoBlock value={details.from_address} label='From' columnProps={{ md: 4 }}/>
+        <InfoBlock value={format(details.start_time, FORMATS.LONG_DATETIME)} label='Started'/>
+        <InfoBlock value={details.end_time ? format(details.end_time, FORMATS.LONG_DATETIME) : '--'}
           label='Finished'/>
-        <TestInfoBlock value='test_name' label='Inbox Placement Test Name'/>
+        <InfoBlock value='test_name' label='Inbox Placement Test Name'/>
       </Grid>
 
     </Panel.Section>
