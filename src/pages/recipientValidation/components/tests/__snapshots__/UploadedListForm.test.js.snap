@@ -2,11 +2,7 @@
 
 exports[`Uploaded List Form should render correctly 1`] = `
 <div
-  style={
-    Object {
-      "padding": "12px",
-    }
-  }
+  className="formContainer"
 >
   <h2>
     big-test.csv
@@ -113,9 +109,7 @@ exports[`Uploaded List Form should render correctly 1`] = `
         <RecipientValidationPriceTable
           cellProps={
             Object {
-              "style": Object {
-                "padding": "8px 0",
-              },
+              "className": "rvModalCell",
             }
           }
         />

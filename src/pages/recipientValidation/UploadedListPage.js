@@ -9,6 +9,8 @@ import { getJobStatus } from 'src/actions/recipientValidation';
 import { getUsage } from 'src/actions/account';
 import _ from 'lodash';
 import Loading from 'src/components/loading';
+import moment from 'moment';
+import styles from './UploadedListPage.module.scss';
 
 export class UploadedListPage extends Component {
 
@@ -16,17 +18,15 @@ export class UploadedListPage extends Component {
     const { getJobStatus, getUsage, listId } = this.props;
     // TODO: Use action
     getJobStatus(listId);
-    // TODO: Get usage
     getUsage();
-
   }
 
 
-  renderTitle = (date = Date.now()) => ( //TODO: Remove pre-rendered date
-    <div style={{ fontSize: '1rem', fontWeight: 200 }}>
-      <strong>{formatDate(date)}</strong>
+  renderTitle = (date) => (
+    <div className={styles.dateHeader}>
+      <strong>{formatDate(moment.unix(date))}</strong>
       <span> at </span>
-      <strong>{formatTime(date)}</strong>
+      <strong>{formatTime(moment.unix(date))}</strong>
     </div>
   )
 
@@ -40,14 +40,14 @@ export class UploadedListPage extends Component {
     if (loading) {
       return (<Loading />);
     }
-    const { status } = results;
+    const { status, uploaded } = results;
     const volumeUsed = _.get(currentUsage, 'recipient_validation.month.used', 0);
 
     return (
       <Page title='Recipient Validation' breadcrumbAction={{ content: 'Back', component: Link, to: '/recipient-validation/list' }}>
         <Panel>
           <Panel.Section>
-            {this.renderTitle()}
+            {this.renderTitle(uploaded)}
           </Panel.Section>
           <Panel.Section>
             {status === 'queued_for_batch'

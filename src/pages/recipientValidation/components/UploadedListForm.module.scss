@@ -1,5 +1,9 @@
 @import '~@sparkpost/matchbox/src/styles/config.scss';
 
+.formContainer {
+  padding: 12px;
+}
+
 .CountBox {
   border: 2px solid color(gray, 8);
   text-align: center;
@@ -12,10 +16,6 @@
   .Number {
     font-weight: 500;
   }
-}
-
-.RVColumn {
-  margin-bottom: 1rem;
 }
 
 .ButtonRow {
@@ -50,4 +50,8 @@
 
 .bodyContainer {
   padding: 2rem 3rem;
+}
+
+.rvModalCell {
+  padding: 8px 0;
 }

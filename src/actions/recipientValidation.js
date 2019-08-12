@@ -82,9 +82,9 @@ export function getJobStatus(list_id) {
       list_id: list_id,
       batch_status: 'queued_for_batch',
       complete: false,
-      upload_timestamp: 'time',
       original_filename: 'test.csv',
-      address_count: 1234
+      address_count: 1234,
+      upload_timestamp: 1565187194
     }
   };
 }

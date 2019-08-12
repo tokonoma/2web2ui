@@ -29,9 +29,7 @@ const UploadedListForm = ({ job, onSubmit, currentUsage }) => {
         <h3>How was this calculated?</h3>
         <RecipientValidationPriceTable
           cellProps={{
-            style: {
-              padding: '8px 0'
-            }
+            className: styles.rvModalCell
           }}
         />
       </div>
@@ -39,7 +37,7 @@ const UploadedListForm = ({ job, onSubmit, currentUsage }) => {
   );
 
   return (
-    <div style={{ padding: '12px' }}>
+    <div className={styles.formContainer}>
       <h2>{filename}</h2>
       <p className={styles.descriptionParagraph}>
         <span>Your list has been uploaded successfully and the cost to validate is below. </span>
