@@ -26,8 +26,12 @@ describe('Page: Single Inbox Placement Test', () => {
 
   it('calls getInboxPlacementTest on load', () => {
     const getInboxPlacementTest = jest.fn().mockReturnValue({});
-    mount(<TestDetailsPage getInboxPlacementTest={getInboxPlacementTest}
+    mount(<TestDetailsPage
+      details={{}}
+      content={{}}
+      getInboxPlacementTest={getInboxPlacementTest}
       getInboxPlacementByProviders={jest.fn()}
+      getInboxPlacementTestContent={jest.fn()}
       id={101}
       tabIndex={1} //not working nicely with tabIndex=0; TestDetails component
       history={{ replace: jest.fn() }}/>);
@@ -68,9 +72,13 @@ describe('Page: Single Inbox Placement Test', () => {
   it('updates URL when tabs change', () => {
     const mockHistory = { replace: jest.fn() };
     const wrapper = mount(<TestDetailsPage tabIndex={1}
+      details={{}}
+      content={{}}
       history={mockHistory}
       getInboxPlacementTest={jest.fn()}
-      getInboxPlacementByProviders={jest.fn()}/>);
+      getInboxPlacementByProviders={jest.fn()}
+      getInboxPlacementTestContent={jest.fn()}
+    />);
     wrapper.find('Tab').last().simulate('click');
     expect(mockHistory.replace).toHaveBeenCalled();
   });
