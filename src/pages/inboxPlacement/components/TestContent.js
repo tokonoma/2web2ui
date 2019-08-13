@@ -1,9 +1,8 @@
 import React from 'react';
 import { Panel, CodeBlock, Tabs, Grid } from '@sparkpost/matchbox';
 import useTabs from 'src/hooks/useTabs';
-import styles from './TestContent.module.scss';
-
 import { formatBytes } from 'src/helpers/units';
+import InfoBlock from './InfoBlock';
 
 const TABS = [
   { content: 'Raw Message', key: 'raw_message' },
@@ -20,27 +19,20 @@ const TestContent = ({ content, details }) => {
 
   return (
     <>
-    <Panel title={details.subject} sectioned>
+    <Panel sectioned>
+      <h2>{details.subject}</h2>
       <Grid>
-        <Grid.Column sm={12} md={3}>
-          From:
-          <br/>
-          <span className={styles.FromAddress}>{from_address}</span>
-        </Grid.Column>
-        <Grid.Column xs={12} md={3}>
-          Raw Message Size:
-          <br/>
-          {formatBytes(message_size)}
-        </Grid.Column>
+        <InfoBlock value={from_address} label='From' columnProps={{ sm: 12, md: 4 }}/>
+        <InfoBlock value={formatBytes(message_size)} label='Raw Message Size:' columnProps={{ sm: 12, md: 4 }}/>
       </Grid>
     </Panel>
-      <Panel>
-        <Tabs selected={selectedTabIndex} tabs={tabs} />
-        <Panel.Section>
-          <CodeBlock code={content[selectedTabKey] || ''}/>
-        </Panel.Section>
-      </Panel>
-      </>
+    <Panel>
+      <Tabs selected={selectedTabIndex} tabs={tabs} color='navy' />
+      <Panel.Section>
+        <CodeBlock code={content[selectedTabKey] || ''}/>
+      </Panel.Section>
+    </Panel>
+    </>
   );
 };
 

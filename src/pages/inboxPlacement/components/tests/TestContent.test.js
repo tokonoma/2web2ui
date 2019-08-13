@@ -1,10 +1,10 @@
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import React from 'react';
 
 import TestContent from '../TestContent';
 
 
-describe('Inbox Placement Test Content', () => {
+describe('Component: TestContent', () => {
   const mockDetails = {
     subject: 'foo',
     message_size: 2580,
@@ -26,6 +26,13 @@ describe('Inbox Placement Test Content', () => {
   it('renders page correctly with defaults', () => {
     const wrapper = shallow(<TestContent {...props} />);
     expect(wrapper).toMatchSnapshot();
+  });
+
+  it('changes tabs correctly', () => {
+    const wrapper = mount(<TestContent {...props} />);
+    expect(wrapper.find('Tabs').prop('selected')).toEqual(0);
+    wrapper.find('Tab').last().simulate('click');
+    expect(wrapper.find('Tabs').prop('selected')).toEqual(4);
   });
 });
 

@@ -1,37 +1,39 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Inbox Placement Test Content renders page correctly with defaults 1`] = `
+exports[`Component: TestContent renders page correctly with defaults 1`] = `
 <Fragment>
   <Panel
     sectioned={true}
-    title="foo"
   >
+    <h2>
+      foo
+    </h2>
     <Grid>
-      <Grid.Column
-        md={3}
-        sm={12}
-      >
-        From:
-        <br />
-        <span
-          className="FromAddress"
-        >
-          foo@bar.com
-        </span>
-      </Grid.Column>
-      <Grid.Column
-        md={3}
-        xs={12}
-      >
-        Raw Message Size:
-        <br />
-        2.52KB
-      </Grid.Column>
+      <InfoBlock
+        columnProps={
+          Object {
+            "md": 4,
+            "sm": 12,
+          }
+        }
+        label="From"
+        value="foo@bar.com"
+      />
+      <InfoBlock
+        columnProps={
+          Object {
+            "md": 4,
+            "sm": 12,
+          }
+        }
+        label="Raw Message Size:"
+        value="2.52KB"
+      />
     </Grid>
   </Panel>
   <Panel>
     <Tabs
-      color="orange"
+      color="navy"
       connectBelow={true}
       selected={0}
       tabs={
