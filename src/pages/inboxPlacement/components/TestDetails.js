@@ -13,7 +13,7 @@ const TestDetails = ({ details, placementsByProvider }) => {
   const panelTitle = (<>
     <h3 className={styles.Inline}>Placement Breakdown</h3>
     <small
-      className={styles.SeedsCount}>{details.seedlist_count > 1 ? ` | ${details.seedlist_count} Seeds` : `${details.seedlist_count} Seed`}
+      className={styles.SeedsCount}>{details.seedlist_count > 1 ? ` | ${details.seedlist_count} Seeds` : ` | ${details.seedlist_count} Seed`}
     </small>
   </>);
 

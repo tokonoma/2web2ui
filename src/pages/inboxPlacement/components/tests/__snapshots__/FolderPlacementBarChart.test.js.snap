@@ -152,5 +152,3 @@ exports[`Component: FolderPlacementBarChart renders correct with data 1`] = `
   </BarChart>
 </ResponsiveContainer>
 `;
-
-exports[`Component: FolderPlacementBarChart renders correctly with defaults 1`] = `""`;

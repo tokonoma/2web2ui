@@ -4,7 +4,7 @@ exports[`Component: ProvidersBreakdown SubComponent: GroupPercentage renders per
 <span
   className="GroupValue"
 >
-  0.2%
+  20%
 </span>
 `;
 

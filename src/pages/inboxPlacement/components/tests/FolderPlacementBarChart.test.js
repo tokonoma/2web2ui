@@ -7,8 +7,8 @@ describe('Component: FolderPlacementBarChart', () => {
   const defaultPlacements = {};
   const subject = ({ ...props }) => shallow(<FolderPlacementBarChart placements={defaultPlacements} {...props}/>);
 
-  it('renders correctly with defaults', () => {
-    expect(subject()).toMatchSnapshot();
+  it('renders nothing with defaults', () => {
+    expect(subject().isEmptyRender()).toBe(true);
   });
 
   it('renders correct with data', () => {
@@ -19,7 +19,6 @@ describe('Component: FolderPlacementBarChart', () => {
     };
 
     expect(subject({ placements })).toMatchSnapshot();
-
   });
 
 });

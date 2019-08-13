@@ -5,7 +5,7 @@ import { TableCollection } from 'src/components/collection';
 import { formatPercent } from 'src/helpers/units';
 import styles from './ProvidersBreakdown.module.scss';
 
-export const GroupPercentage = ({ value }) => <span className={styles.GroupValue}>{formatPercent(value)}</span>;
+export const GroupPercentage = ({ value }) => <span className={styles.GroupValue}>{formatPercent(value * 100)}</span>;
 
 const HeaderComponent = () => (<thead>
   <Table.Row className={styles.HeaderRow}>
