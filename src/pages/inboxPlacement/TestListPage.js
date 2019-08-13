@@ -13,14 +13,15 @@ import { listTests } from 'src/actions/inboxPlacement';
 import { withRouter } from 'react-router-dom';
 import styles from './TestListPage.module.scss';
 import { STATUS } from './constants/test';
-import EmptyTestListPage from './EmptyTestListPage';
+import { Templates } from 'src/components/images';
+import { LINKS } from 'src/constants';
 
 const selectOptions = [
   { value: 'Sort By', label: 'Sort By', disabled: true },
   { value: 'start_time', label: 'Start Time' },
-  { value: 'placement.inbox', label: 'Inbox' },
-  { value: 'placement.spam', label: 'Spam' },
-  { value: 'placement.missing', label: 'Missing' }
+  { value: 'placement.inbox_pct', label: 'Inbox' },
+  { value: 'placement.spam_pct', label: 'Spam' },
+  { value: 'placement.missing_pct', label: 'Missing' }
 ];
 
 const filterBoxConfig = {
@@ -59,8 +60,8 @@ const FilterSortCollectionRow = ({ id, status, subject, test_name, from_address,
               </PageLink>
             </div>
             <div className = {styles.TestName}>
-              <span><strong>{test_name}</strong></span>
-              <span className = {styles.Divider}><strong>{'|'}</strong></span>
+              <strong>{test_name}</strong>
+              <strong className = {styles.Divider}>{'|'}</strong>
               <span>{from_address}</span>
             </div>
             <div className = {styles.TestSchedule}>
@@ -69,9 +70,9 @@ const FilterSortCollectionRow = ({ id, status, subject, test_name, from_address,
             </div>
           </div>
         </div>,
-        <div><p className={styles.ColumnHeader}>Inbox</p><h1 className={styles.ColumnValue}>{formatPercentage(placement.inbox)}</h1></div>,
-        <div><p className={styles.ColumnHeader}>Spam</p><h1 className={styles.ColumnValue}>{formatPercentage(placement.spam)}</h1></div>,
-        <div><p className={styles.ColumnHeader}>Missing</p><h1 className={styles.ColumnValue}>{formatPercentage(placement.missing)}</h1></div>
+        <div><p className={styles.ColumnHeader}>Inbox</p><h1 className={styles.ColumnValue}>{formatPercentage(placement.inbox_pct)}</h1></div>,
+        <div><p className={styles.ColumnHeader}>Spam</p><h1 className={styles.ColumnValue}>{formatPercentage(placement.spam_pct)}</h1></div>,
+        <div><p className={styles.ColumnHeader}>Missing</p><h1 className={styles.ColumnValue}>{formatPercentage(placement.missing_pct)}</h1></div>
       ]}
     />
   ]
@@ -125,12 +126,21 @@ export class TestListPage extends Component {
       return <Loading />;
     }
 
-    return ((!error && tests.length === 0)
-      ? <EmptyTestListPage />
-      : <Page
-        title='Inbox Placement'
-        primaryAction={{ content: 'Start a Test', to: '/inbox-placement/seedlist', component: Link }}
-      >{error ? this.renderError() : this.renderPage()}</Page>
+    return (<Page
+      empty={{
+        show: !error && tests.length === 0,
+        title: 'Find and Fix Inbox Placement Issues',
+        image: Templates,
+        content: <p>Perform seedlist tests that help you predict how your emails are handled by mailbox providers.</p>,
+        secondaryAction: {
+          content: 'Check out our docs',
+          to: LINKS.API_DOCS,
+          external: true
+        }
+      }}
+      title='Inbox Placement'
+      primaryAction={{ content: 'Start a Test', to: '/inbox-placement/seedlist', component: Link }}
+    >{error ? this.renderError() : this.renderPage()}</Page>
     );
   }
 }

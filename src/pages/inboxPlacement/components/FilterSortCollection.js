@@ -13,6 +13,8 @@ const FilterSortCollection = ({ wrapperComponent, title, selectOptions, filterBo
     setSortDirection(sortDirection);
   };
 
+  const sortOnChange = ({ target: { value }}) => setSort({ sortColumn: value, sortDirection: defaultSortDirection });
+
   const TableBody = (props) => <tbody>{props.children}</tbody>;
 
   const CollectionWrapperComponent = (props) => (
@@ -51,7 +53,7 @@ const FilterSortCollection = ({ wrapperComponent, title, selectOptions, filterBo
                 id='sortSelect'
                 value='Sort By'
                 options={selectOptions}
-                onChange={({ target: { value }}) => setSort({ sortColumn: value, sortDirection: defaultSortDirection })}
+                onChange={sortOnChange}
               />
             </div>
           </Panel.Section>

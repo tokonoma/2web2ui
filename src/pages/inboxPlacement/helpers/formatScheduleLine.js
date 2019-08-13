@@ -7,26 +7,19 @@ const getHoursRemaining = (start_time) => moment(start_time).add(DURATION_HOURS,
 
 export default function formatScheduleLine(status, start_time, end_time) {
   const formatted_start_time = formatDateTime(start_time);
-  let formatted_remaining;
 
   switch (status) {
     case STATUS.RUNNING: {
-      const hours_remaining = getHoursRemaining(start_time);
-      formatted_remaining = ` and ${hours_remaining} hours remaining on test`;
-      break;
+      return `Sent ${formatted_start_time} and ${getHoursRemaining(start_time)} hours remaining on test`;
     }
     case STATUS.STOPPED: {
-      formatted_remaining = ` and stopped at ${formatDateTime(end_time)}`;
-      break;
+      return `Sent ${formatted_start_time} and stopped at ${formatDateTime(end_time)}`;
     }
     case STATUS.COMPLETED: {
-      formatted_remaining = ` and completed at ${formatDateTime(end_time)}`;
-      break;
+      return `Sent ${formatted_start_time} and completed at ${formatDateTime(end_time)}`;
     }
     default: {
-      formatted_remaining = ' and test status unknown';
+      return `Sent ${formatted_start_time} and test status unknown`;
     }
   }
-
-  return `Sent ${formatted_start_time}${formatted_remaining}`;
 }

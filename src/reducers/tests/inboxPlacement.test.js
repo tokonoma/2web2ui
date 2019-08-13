@@ -6,9 +6,11 @@ const TEST_CASES = {
     type: 'LIST_TESTS_PENDING'
   },
   'list tests success': {
+    payload: { fakeData: true },
     type: 'LIST_TESTS_SUCCESS'
   },
   'list tests fail': {
+    payload: { errors: [ { message: 'Some error occurred' }]},
     type: 'LIST_TESTS_FAIL'
   },
   'list seeds pending': {

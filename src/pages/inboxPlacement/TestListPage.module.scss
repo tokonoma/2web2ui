@@ -6,14 +6,13 @@
   width: 75%;
   font-size: medium;
 }
-@import '~@sparkpost/matchbox/src/styles/config.scss';
 
 .TabbedCellHeader {
-  padding: 0 0 0 2.1rem;
+  padding: 0 0 0 rem(2.1);
 }
 
 .TabbedCellBody {
-  padding: 0.3rem 0 0.3rem 1rem;
+  padding: rem(0.3) 0 rem(0.3) rem(1);
 }
 
 .FilterBox {

@@ -2,7 +2,7 @@ import formatPercentage from '../formatPercentage';
 
 describe('Format Display of Inbox Placement api percent values', () => {
   it('should format hundreds digit percent correctly', () => {
-    expect(formatPercentage(1)).toEqual('100.0%');
+    expect(formatPercentage(1)).toEqual('100%');
   });
 
   it('should format tens digit percent correctly', () => {

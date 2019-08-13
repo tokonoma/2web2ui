@@ -83,7 +83,13 @@ Object {
   "seeds": Array [],
   "seedsPending": false,
   "tests": Array [],
-  "testsError": undefined,
+  "testsError": Object {
+    "errors": Array [
+      Object {
+        "message": "Some error occurred",
+      },
+    ],
+  },
   "testsPending": false,
 }
 `;
@@ -104,7 +110,9 @@ Object {
   "currentTestDetails": null,
   "seeds": Array [],
   "seedsPending": false,
-  "tests": undefined,
+  "tests": Object {
+    "fakeData": true,
+  },
   "testsError": null,
   "testsPending": false,
 }
