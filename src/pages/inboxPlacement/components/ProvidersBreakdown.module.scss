@@ -1,0 +1,25 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.DataRow {
+  &:last-of-type {
+    border-bottom: 0px;
+  }
+}
+
+.HeaderRow {
+  border-bottom: 0px;
+}
+
+.ProviderCell {
+  border-right: 1px solid color(gray, 8);
+  width: 40%;
+  font-weight: normal;
+}
+
+.Placement {
+  text-align: center;
+  font-weight: normal;
+}
+.GroupValue {
+  font-weight: 600;
+}

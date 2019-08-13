@@ -1,0 +1,56 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: ProvidersBreakdown SubComponent: GroupPercentage renders percentage correctly 1`] = `
+<span
+  className="GroupValue"
+>
+  20%
+</span>
+`;
+
+exports[`Component: ProvidersBreakdown renders correctly with data 1`] = `
+<TableCollection
+  className="ProvidersBreakdownTable"
+  defaultSortColumn="placement.inbox_pct"
+  defaultSortDirection="desc"
+  headerComponent={[Function]}
+  pagination={true}
+  rowComponent={[Function]}
+  rows={
+    Array [
+      Object {
+        "mailbox_provider": "dogmail.com",
+        "placement": Object {
+          "inbox_pct": 0,
+          "missing_pct": 1,
+          "spam_pct": 0,
+        },
+      },
+      Object {
+        "mailbox_provider": "doghouseinbox.com",
+        "placement": Object {
+          "inbox_pct": 0.8,
+          "missing_pct": 0.1,
+          "spam_pct": 0.1,
+        },
+      },
+    ]
+  }
+  saveCsv={false}
+  wrapperComponent={[Function]}
+/>
+`;
+
+exports[`Component: ProvidersBreakdown renders correctly with no data 1`] = `
+<TableCollection
+  className="ProvidersBreakdownTable"
+  defaultSortColumn="placement.inbox_pct"
+  defaultSortDirection="desc"
+  headerComponent={[Function]}
+  pagination={true}
+  rowComponent={[Function]}
+  rows={Array []}
+  saveCsv={false}
+  wrapperComponent={[Function]}
+/>
+`;

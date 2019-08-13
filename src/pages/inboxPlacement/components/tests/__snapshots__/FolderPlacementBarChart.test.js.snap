@@ -1,0 +1,154 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: FolderPlacementBarChart renders correct with data 1`] = `
+<ResponsiveContainer
+  className="FolderPlacementChart"
+  debounce={0}
+  height={200}
+  width="99%"
+>
+  <BarChart
+    barCategoryGap="10%"
+    barGap={4}
+    data={
+      Array [
+        Object {
+          "color": "#50D0D9",
+          "name": "Inbox",
+          "value": 90.5,
+        },
+        Object {
+          "color": "#0CBAC7",
+          "name": "Spam",
+          "value": 55.00000000000001,
+        },
+        Object {
+          "color": "#00838C",
+          "name": "Missing",
+          "value": 40,
+        },
+      ]
+    }
+    layout="vertical"
+    margin={
+      Object {
+        "left": 20,
+        "right": 80,
+      }
+    }
+    reverseStackOrder={false}
+    stackOffset="none"
+  >
+    <CartesianGrid
+      fill="none"
+      horizontal={true}
+      horizontalFill={Array []}
+      horizontalPoints={
+        Array [
+          55,
+          110,
+        ]
+      }
+      stroke="#ccc"
+      vertical={false}
+      verticalFill={Array []}
+      verticalPoints={Array []}
+    />
+    <XAxis
+      allowDataOverflow={false}
+      allowDecimals={true}
+      allowDuplicatedCategory={true}
+      axisLine={false}
+      domain={
+        Array [
+          0,
+          "auto",
+        ]
+      }
+      height={30}
+      hide={false}
+      mirror={false}
+      orientation="bottom"
+      padding={
+        Object {
+          "left": 20,
+        }
+      }
+      reversed={false}
+      scale="auto"
+      tick={false}
+      tickCount={5}
+      type="number"
+      width={0}
+      xAxisId={0}
+    />
+    <YAxis
+      allowDataOverflow={false}
+      allowDecimals={true}
+      allowDuplicatedCategory={true}
+      dataKey="name"
+      domain={
+        Array [
+          0,
+          "auto",
+        ]
+      }
+      height={0}
+      hide={false}
+      mirror={false}
+      orientation="left"
+      padding={
+        Object {
+          "bottom": 0,
+          "top": 0,
+        }
+      }
+      reversed={false}
+      scale="auto"
+      tick={[Function]}
+      tickCount={5}
+      tickLine={false}
+      type="category"
+      width={60}
+      yAxisId={0}
+    />
+    <Bar
+      animationBegin={0}
+      animationDuration={400}
+      animationEasing="ease"
+      barSize={25}
+      data={Array []}
+      dataKey="value"
+      fill="#37aadc"
+      hide={false}
+      isAnimationActive={false}
+      layout="vertical"
+      legendType="rect"
+      minPointSize={0}
+      onAnimationEnd={[Function]}
+      onAnimationStart={[Function]}
+      xAxisId={0}
+      yAxisId={0}
+    >
+      <Cell
+        fill="#50D0D9"
+        key="0"
+      />
+      <Cell
+        fill="#0CBAC7"
+        key="1"
+      />
+      <Cell
+        fill="#00838C"
+        key="2"
+      />
+      <LabelList
+        fill="#55555a"
+        formatter={[Function]}
+        position="right"
+        valueAccessor={[Function]}
+      />
+    </Bar>
+  </BarChart>
+</ResponsiveContainer>
+`;

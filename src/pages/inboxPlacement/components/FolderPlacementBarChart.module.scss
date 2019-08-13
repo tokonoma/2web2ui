@@ -1,0 +1,11 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.FolderPlacementChart {
+  :global .recharts-cartesian-axis-line {
+    stroke: color(gray, 7);
+  }
+
+  :global .recharts-cartesian-grid-horizontal line {
+    stroke: color(gray, 8);
+  }
+}

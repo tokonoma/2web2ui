@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: InfoBlock renders correctly 1`] = `
+<Grid.Column>
+  <span
+    className="InfoLabel"
+  >
+    Foo
+    :
+  </span>
+  <br />
+  <span
+    className="InfoValue"
+  >
+    bar
+  </span>
+</Grid.Column>
+`;

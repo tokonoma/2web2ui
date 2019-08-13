@@ -3,20 +3,20 @@ import { connect } from 'react-redux';
 import { Page, Tabs } from '@sparkpost/matchbox';
 
 import { Loading } from 'src/components';
-import { getInboxPlacementTest } from 'src/actions/inboxPlacement';
-import { showAlert } from 'src/actions/globalAlert';
+import { getInboxPlacementByProviders, getInboxPlacementTest } from 'src/actions/inboxPlacement';
 import TestDetails from './components/TestDetails';
 import TestContent from './components/TestContent';
 import useTabs from 'src/hooks/useTabs';
 import { RedirectAndAlert } from 'src/components/globalAlert';
 
 export const TestDetailsPage = (props) => {
-  const { history, id, tabIndex, loading, error, getInboxPlacementTest } = props;
+  const { history, id, tabIndex, loading, error, details, placementsByProvider, getInboxPlacementTest, getInboxPlacementByProviders } = props;
   const [selectedTabIndex, tabs] = useTabs(TABS, tabIndex);
 
   useEffect(() => {
     getInboxPlacementTest(id);
-  }, [getInboxPlacementTest, id]);
+    getInboxPlacementByProviders(id);
+  }, [getInboxPlacementTest, getInboxPlacementByProviders, id]);
 
   useEffect(() => {
     history.replace(`/inbox-placement/details/${id}/${TABS[selectedTabIndex].key}`);
@@ -29,7 +29,7 @@ export const TestDetailsPage = (props) => {
       case 'content':
         return <TestContent/>;
       default:
-        return <TestDetails/>;
+        return <TestDetails details={details} placementsByProvider={placementsByProvider}/>;
     }
   };
 
@@ -67,10 +67,11 @@ function mapStateToProps(state, props) {
   return {
     tabIndex: currentTabIndex > 0 ? currentTabIndex : 0,
     id,
-    loading: state.inboxPlacement.getTestPending,
-    error: state.inboxPlacement.getTestError,
-    details: state.inboxPlacement.currentTestDetails
+    loading: state.inboxPlacement.getTestPending || state.inboxPlacement.getByProviderPending,
+    error: state.inboxPlacement.getTestError || state.inboxPlacement.getByProviderError,
+    details: state.inboxPlacement.currentTestDetails,
+    placementsByProvider: state.inboxPlacement.placementsByProvider || []
   };
 }
 
-export default connect(mapStateToProps, { getInboxPlacementTest, showAlert })(TestDetailsPage);
+export default connect(mapStateToProps, { getInboxPlacementTest, getInboxPlacementByProviders })(TestDetailsPage);
