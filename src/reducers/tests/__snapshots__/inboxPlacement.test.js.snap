@@ -2,7 +2,7 @@
 
 exports[`Inbox Placement Reducer get specific inbox placement test content pending 1`] = `
 Object {
-  "currentTestDetails": null,
+  "currentTestDetails": Object {},
   "getTestContentError": null,
   "getTestContentPending": true,
   "seeds": Array [],
@@ -12,7 +12,7 @@ Object {
 
 exports[`Inbox Placement Reducer get specific inbox placement test content pending fail 1`] = `
 Object {
-  "currentTestDetails": null,
+  "currentTestDetails": Object {},
   "getTestContentError": Object {
     "errors": Array [
       Object {
@@ -31,7 +31,7 @@ Object {
   "currentTestContent": Object {
     "fakeData": true,
   },
-  "currentTestDetails": null,
+  "currentTestDetails": Object {},
   "getTestContentError": null,
   "getTestContentPending": false,
   "seeds": Array [],
