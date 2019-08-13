@@ -2,7 +2,7 @@ import { selectCondition } from 'src/selectors/accessConditionState';
 import { isUserUiOptionSet } from 'src/helpers/conditions/user';
 import _ from 'lodash';
 
-export const selectReportsEnhancementsEnabled = (state) => selectCondition(isUserUiOptionSet('feature_reports_enhancements', true))(state);
+export const selectReportsEnhancementsEnabled = (state) => selectCondition(isUserUiOptionSet('feature_reports_enhancements', false))(state);
 
 export const selectCustomReports = (state) => {
   // A value of `false` represents zero saved reports

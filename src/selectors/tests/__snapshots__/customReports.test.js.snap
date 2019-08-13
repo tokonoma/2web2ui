@@ -1,7 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Selectors: customReports returns reports ehancements feature flag 1`] = `true`;
-
 exports[`Selectors: customReports returns sorted custom reports 1`] = `
 Array [
   Object {
