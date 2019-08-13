@@ -12,7 +12,12 @@ describe('Selectors: customReports', () => {
       feature_reports_enhancements: true
     });
 
-    expect(selectors.selectReportsEnhancementsEnabled(state)).toMatchSnapshot();
+    expect(selectors.selectReportsEnhancementsEnabled(state)).toBe(true);
+  });
+
+  it('returns false when flag is not set', () => {
+    setUIOptions({});
+    expect(selectors.selectReportsEnhancementsEnabled(state)).toBe(false);
   });
 
   it('returns sorted custom reports', () => {
