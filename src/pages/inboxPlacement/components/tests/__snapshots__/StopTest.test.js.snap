@@ -1,28 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Component: StopTest renders button if test is running 1`] = `
-<Fragment>
-  <ConfirmationModal
-    cancelVerb="Continue Test"
-    confirmVerb="Stop Test"
-    confirming={false}
-    content={
-      <p>
-        By stopping this test no additional data will be gathered. You will not be able to restart test after stopping.
-      </p>
-    }
-    isPending={false}
-    onCancel={[Function]}
-    onConfirm={[MockFunction]}
-    open={false}
-    title="Are you sure you want to stop this test?"
-  />
-  <Button
-    onClick={[Function]}
-    primary={true}
-    size="default"
-  >
-    Stop Test
-  </Button>
-</Fragment>
+<Button
+  onClick={[Function]}
+  primary={true}
+  size="default"
+>
+  Stop Test
+</Button>
 `;
