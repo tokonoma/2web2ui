@@ -4,7 +4,7 @@ import { Field, reduxForm, formValueSelector } from 'redux-form';
 import { Panel } from '@sparkpost/matchbox';
 import { maxFileSize, fileExtension } from 'src/helpers/validation';
 import FileUploadWrapper from './FileUploadWrapper';
-import { uploadList, resetUploadError } from 'src/actions/recipientValidation';
+import { uploadList, resetUploadError, uploadListNew } from 'src/actions/recipientValidation';
 import { showAlert } from 'src/actions/globalAlert';
 import config from 'src/config';
 import { isAccountUiOptionSet } from 'src/helpers/conditions/account';
@@ -28,12 +28,16 @@ export class ListForm extends Component {
     });
   }
 
-  handleNewUpload = (field) => {
-    const { reset, showAlert, history } = this.props;
+  handleNewUpload = (fields) => {
+    const { reset, showAlert, history, uploadListNew } = this.props;
+    const form_data = new FormData();
+
+    form_data.append('myupload', fields.csv);
     reset(formName);
-    showAlert({ type: 'success', message: 'New upload' });
-    history.push('/recipient-validation/list/list-id');
-    //TODO: Uploaded and redirect to uploadedlistpage
+    uploadListNew(form_data).then(({ list_id }) => {
+      showAlert({ type: 'success', message: 'New upload' });
+      history.push(`/recipient-validation/list/${list_id}`);
+    });
   }
 
   componentDidUpdate(prevProps) {
@@ -88,4 +92,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default withRouter(connect(mapStateToProps, { uploadList, showAlert, resetUploadError })(WrappedForm));
+export default withRouter(connect(mapStateToProps, { uploadList, showAlert, resetUploadError, uploadListNew })(WrappedForm));

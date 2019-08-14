@@ -30,7 +30,11 @@ export function getList() {
 
 //TODO: wait for endpoint
 export function uploadListNew(data) {
-  return { type: 'UPLOAD_RV_LIST_NEW' };
+
+  return mockThunk(
+    { type: 'UPLOAD_RV_LIST_NEW_SUCCESS' },
+    Promise.resolve({ list_id: 'list-id' })
+  );
   // return sparkpostApiRequest({
   //   type: 'UPLOAD_RV_LIST_NEW',
   //   meta: {
