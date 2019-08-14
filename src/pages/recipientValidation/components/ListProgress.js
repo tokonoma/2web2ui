@@ -31,7 +31,7 @@ const ListProgress = ({ job }) => {
   const percentage = complete ? 100 : lerp(0, 100, BATCH_STATUS.findIndex((batchStep) => batchStep === status) / BATCH_STATUS.length);
 
   return (
-    <div style={{ width: '80%', margin: '20px' }}>
+    <div className={styles.ListProgressContainer}>
       <h2>{filename}</h2>
       <div style={{ marginBottom: 80 }}>
         <span>Your list is validating. You can track its progress on the recipient validation </span>
@@ -39,7 +39,7 @@ const ListProgress = ({ job }) => {
         <span> we'll let you know when validation is complete and your results are ready.</span>
       </div>
       <div><strong>Status:</strong> {complete ? 'Complete' : 'Processing'}</div>
-      <ProgressBar style={{ marginBottom: '400px' }} completed={percentage}/>
+      <ProgressBar className={styles.ProgressBarContainer} completed={percentage}/>
       <Button color='orange' component={Link} to='/recipient-validation'>Validate Another</Button>
     </div>
   );
