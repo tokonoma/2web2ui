@@ -67,8 +67,9 @@ export class Confirmation extends React.Component {
     const { current = {}, selected = {}, disableSubmit, billingEnabled } = this.props;
     const currentPlanPricing = getPlanPrice(current);
     const selectedPlanPricing = getPlanPrice(selected);
-    const isDowngrade = currentPlanPricing.price > selectedPlanPricing.price;
     const isPlanSelected = current.code !== selected.code;
+    const isFreeToFree = (isPlanSelected && current.isFree && selected.isFree);
+    const isDowngrade = currentPlanPricing.price > selectedPlanPricing.price || isFreeToFree;
     let effectiveDateMarkup = null;
     let ipMarkup = null;
     let addonMarkup = null;
@@ -136,7 +137,7 @@ export class Confirmation extends React.Component {
         </Panel.Section>
         <Panel.Section>
           <Brightback
-            condition={Boolean(billingEnabled && isPlanSelected && selected.isFree)}
+            condition={Boolean(billingEnabled && isPlanSelected && selected.isFree && !current.isFree)}
             config={config.brightback.downgradeToFreeConfig}
             render={({ enabled, to }) => (
               <Button

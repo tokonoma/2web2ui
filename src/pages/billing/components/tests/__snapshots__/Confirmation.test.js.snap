@@ -110,7 +110,6 @@ exports[`Confirmation:  should render correctly for an upgrade effectively immed
 
 exports[`Confirmation:  should render correctly for an upgrade effectively immediately 2`] = `
 <Button
-  destructive={false}
   fullWidth={true}
   primary={true}
   size="default"
@@ -293,6 +292,19 @@ exports[`Confirmation:  should render correctly with a downgrade to free 2`] = `
 </Button>
 `;
 
+exports[`Confirmation:  should render correctly with an old free to free plan change 1`] = `
+<Button
+  destructive={true}
+  fullWidth={true}
+  primary={false}
+  size="default"
+  to="redirect"
+  type="button"
+>
+  Downgrade Plan
+</Button>
+`;
+
 exports[`Confirmation:  should render correctly with an upgrade 1`] = `
 <Panel>
   <Panel.Section>
@@ -361,7 +373,6 @@ exports[`Confirmation:  should render correctly with an upgrade 1`] = `
 
 exports[`Confirmation:  should render correctly with an upgrade 2`] = `
 <Button
-  destructive={false}
   fullWidth={true}
   primary={true}
   size="default"
