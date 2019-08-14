@@ -37,6 +37,14 @@ export function getList() {
         original_filename: 'test2.csv',
         address_count: 1235,
         upload_timestamp: 1565187194
+      },
+      {
+        list_id: 'listid3',
+        batch_status: 'error',
+        complete: true,
+        original_filename: 'test2.csv',
+        address_count: 1235,
+        upload_timestamp: 1565187194
       }
     ]
   };

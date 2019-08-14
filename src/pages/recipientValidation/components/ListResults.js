@@ -68,14 +68,14 @@ export class ListResults extends Component {
   }
 
   render() {
-    const { resultsList, loading } = this.props;
+    const { resultsList, loading, newListUpload } = this.props;
 
     if (!loading && _.isEmpty(resultsList)) {
       return null;
     }
 
     return (
-      <ListResultsCard results={resultsList} />
+      <ListResultsCard results={resultsList} newListUpload={newListUpload} />
     );
   }
 }

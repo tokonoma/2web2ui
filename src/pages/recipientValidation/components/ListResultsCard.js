@@ -1,14 +1,14 @@
 import React from 'react';
-import { Panel, Button, Tag, Table } from '@sparkpost/matchbox';
+import { Panel, Button, Tag, Table, UnstyledLink } from '@sparkpost/matchbox';
 import { Error, FileDownload, CheckCircle, Cached } from '@sparkpost/matchbox-icons';
 import DownloadLink from 'src/components/downloadLink/DownloadLink';
 import { LoadingSVG } from 'src/components/loading/Loading';
 import { formatDateTime } from 'src/helpers/date';
 import moment from 'moment';
 import styles from './ListResultsCard.module.scss';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-const ListResultsCard = ({ results }) => {
+const ListResultsCard = ({ results, newListUpload }) => {
 
   const renderRow = ({ complete = 'unknown', uploaded, rejectedUrl, status, filename, key }) => {
     if (complete === 'unknown') {
@@ -49,9 +49,9 @@ const ListResultsCard = ({ results }) => {
 
     return (
       <Table.Row className={styles.TableRow} key={`rvlist-${key}`}>
-        {/* <Table.Cell className={styles.TableCell}>
+        {newListUpload && <Table.Cell className={styles.TableCell}>
           <UnstyledLink component={Link} to={`/recipient-validation/list/${key}`}>{filename}</UnstyledLink>
-        </Table.Cell> */}
+        </Table.Cell>}
         <Table.Cell className={styles.TableCell}>
           {formatDateTime(moment.unix(uploaded))}
         </Table.Cell>
@@ -80,9 +80,9 @@ const ListResultsCard = ({ results }) => {
         <Table>
           <tbody>
             <Table.Row className={styles.TableHeader}>
-              {/* <Table.HeaderCell className={styles.TableCell} width='25%'>
+              {newListUpload && <Table.HeaderCell className={styles.TableCell} width='25%'>
                 File Name:
-              </Table.HeaderCell> */}
+              </Table.HeaderCell>}
               <Table.HeaderCell className={styles.TableCell} width='25%'>
                 Date Uploaded:
               </Table.HeaderCell>
