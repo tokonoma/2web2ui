@@ -13,7 +13,7 @@ import { listTests } from 'src/actions/inboxPlacement';
 import { withRouter } from 'react-router-dom';
 import styles from './TestListPage.module.scss';
 import { STATUS } from './constants/test';
-import { Templates } from 'src/components/images';
+import { Users } from 'src/components/images';
 import { LINKS } from 'src/constants';
 
 const selectOptions = [
@@ -130,7 +130,7 @@ export class TestListPage extends Component {
       empty={{
         show: !error && tests.length === 0,
         title: 'Find and Fix Inbox Placement Issues',
-        image: Templates,
+        image: Users,
         content: <p>Perform seedlist tests that help you predict how your emails are handled by mailbox providers.</p>,
         secondaryAction: {
           content: 'Check out our docs',

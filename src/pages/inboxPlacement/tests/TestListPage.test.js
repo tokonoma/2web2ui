@@ -31,7 +31,7 @@ describe('Page: Test List', () => {
 
   it('renders empty landing page when there are no tests', () => {
     const wrapper = subject({ tests: []});
-    expect(wrapper.find('Page')).toMatchSnapshot();
+    expect(wrapper.find('Page').prop('empty')).toHaveProperty('show', true);
   });
 
   it('renders loading', () => {

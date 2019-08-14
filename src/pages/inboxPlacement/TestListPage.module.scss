@@ -30,14 +30,14 @@
   align-items: center;
   justify-content: center;
   font-size: large;
+
+  strong {
+    color: color(blue, dark);
+  }
 }
 
 .Subject {
   display: inline-block;
-
-  strong {
-    color: #007CB3;
-  }
 }
 
 .TestName {
@@ -46,10 +46,6 @@
   margin: 0.2rem 0 0 0;
   font-size: font-size(200);
 
-  strong {
-    font: Arial;
-  }
-
   .Divider {
     margin: 0 0.5rem 0 0.5rem;
   }
@@ -57,7 +53,7 @@
 
 .TestSchedule {
   display: flex;
-  padding: 0 0 0 1.3rem;
+  padding: 0 0 0 1.2rem;
   margin: 0.2rem 0 0 0;
   font-size: font-size(200);
 }
