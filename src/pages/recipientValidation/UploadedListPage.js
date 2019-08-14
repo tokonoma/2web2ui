@@ -12,18 +12,66 @@ import _ from 'lodash';
 import Loading from 'src/components/loading';
 import moment from 'moment';
 import styles from './UploadedListPage.module.scss';
+import { PollContext } from 'src/context/Poll';
+import withContext from 'src/context/withContext';
 
 export class UploadedListPage extends Component {
 
   componentDidMount() {
-    const { getJobStatusMock, getUsage, listId, history } = this.props;
+    const { getJobStatusMock, getUsage, listId, history, startPolling } = this.props;
     // TODO: Replace action with real action (and update test)
-    getJobStatusMock(listId).catch(() => {
+    getJobStatusMock(listId).then(({ batch_status, complete }) => {
+      if (batch_status !== 'queued_for_batch' && !complete) {
+        startPolling({
+          key: listId,
+          action: () => this.handlePoll(listId),
+          interval: 5000
+        });
+      }
+    }, () => {
       history.replace('/recipient-validation/list');
     });
     getUsage();
   }
 
+  handleSubmit = () => {
+    const { triggerJob, listId, startPolling } = this.props;
+    triggerJob(listId).then(() => {
+      startPolling({
+        key: listId,
+        action: () => this.handlePoll(listId),
+        interval: 5000
+      });
+    });
+  }
+
+  handlePoll = (id) => {
+    const { showAlert, getJobStatusMock, stopPolling } = this.props;
+    //TODO: replace action with real action
+    return getJobStatusMock(id).then(({ complete, batch_status }) => {
+      if (batch_status === 'queued_for_batch') {
+        stopPolling(id);
+      }
+
+      if (batch_status.toLowerCase() === 'error') {
+        stopPolling(id);
+        showAlert({
+          type: 'error',
+          message: 'Recipient Validation Failed. Please Try Again.',
+          dedupeId: id
+        });
+      }
+
+      if (complete && batch_status.toLowerCase() === 'success') {
+        stopPolling(id);
+        showAlert({
+          type: 'success',
+          message: 'Recipient Validation Results Ready',
+          dedupeId: id
+        });
+      }
+    });
+  }
 
   renderTitle = (date) => (
     <div className={styles.dateHeader}>
@@ -32,11 +80,6 @@ export class UploadedListPage extends Component {
       <strong>{formatTime(moment.unix(date))}</strong>
     </div>
   )
-
-  handleSubmit = () => {
-    const { triggerJob, listId } = this.props;
-    triggerJob(listId);
-  }
 
   render() {
     const { results, currentUsage, loading } = this.props;
@@ -82,4 +125,4 @@ const mapStateToProps = ({ recipientValidation, account }, { match }) => {
   };
 };
 
-export default withRouter(connect(mapStateToProps, { showAlert, getJobStatusMock, getUsage, triggerJob })(UploadedListPage));
+export default withRouter(connect(mapStateToProps, { showAlert, getJobStatusMock, getUsage, triggerJob })(withContext(PollContext, UploadedListPage)));
