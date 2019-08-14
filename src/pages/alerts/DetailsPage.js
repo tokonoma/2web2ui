@@ -54,7 +54,7 @@ export class DetailsPage extends Component {
   };
 
   render() {
-    const { loading, deletePending, alert = {}, error, id } = this.props;
+    const { loading, deletePending, alert = {}, error, id, hasSubaccounts } = this.props;
     const { isDeleteModalOpen } = this.state;
     const { name } = alert;
 
@@ -80,7 +80,9 @@ export class DetailsPage extends Component {
           <Button flat onClick={this.openDeleteModal}><Delete className={styles.Icon}/>Delete</Button>
           </>}
       >
-        {!_.isEmpty(alert) && <AlertDetails alert={alert} id={id} subaccountIdToString={this.subaccountIdToString}/>}
+        {!_.isEmpty(alert) &&
+          <AlertDetails alert={alert} id={id} subaccountIdToString={this.subaccountIdToString} hasSubaccounts={hasSubaccounts}/>
+        }
         <DeleteModal
           open={isDeleteModalOpen}
           title='Are you sure you want to delete this alert?'

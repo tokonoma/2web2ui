@@ -21,7 +21,8 @@ describe('Alert Details Component', () => {
   const props = {
     alert,
     id: 'alert-id',
-    subaccountIdToString: jest.fn((a) => a)
+    subaccountIdToString: jest.fn((a) => a),
+    hasSubaccounts: true
   };
 
   it('should render the alert details component correctly', () => {
@@ -39,14 +40,14 @@ describe('Alert Details Component', () => {
   it('should prepend change to the operator when source is WOW change', () => {
     const newAlert = { ...alert, threshold_evaluator: { source: 'week_over_week', operator: 'gt', value: 5 }};
     const wrapper = shallow(<AlertDetails {...props} alert={newAlert} />);
-    const evaluatorWrapper = wrapper.find({ label: 'Evaluated:' }).dive();
-    expect(evaluatorWrapper.findWhere((node) => node.text() === 'change above')).toExist();
+    const evaluatorWrapper = wrapper.find({ label: 'Condition:' }).dive();
+    expect(evaluatorWrapper.findWhere((node) => node.debug() === 'change ')).toExist();
   });
 
   it('should show % in suffix when source is WOW change', () => {
     const newAlert = { ...alert, threshold_evaluator: { source: 'week_over_week', operator: 'gt', value: 5 }};
     const wrapper = shallow(<AlertDetails {...props} alert={newAlert} />);
-    const evaluatorWrapper = wrapper.find({ label: 'Evaluated:' }).dive();
+    const evaluatorWrapper = wrapper.find({ label: 'Condition:' }).dive();
     expect(evaluatorWrapper.findWhere((node) => node.text() === '%')).toExist();
   });
 
@@ -54,7 +55,7 @@ describe('Alert Details Component', () => {
     const newAlert = { ...alert, channels: { emails: ['Myemail@email.com', 'email@ddress.com']}};
     const wrapper = shallow(<AlertDetails {...props} alert={newAlert} />);
     const notifyWrapper = wrapper.find({ label: 'Notify:' }).dive();
-    expect(notifyWrapper.find('EmailIcon')).toExist();
+    expect(notifyWrapper.find({ id: 'email' })).toExist();
     expect(notifyWrapper.find('SlackIcon')).not.toExist();
     expect(notifyWrapper.find('WebhookIcon')).not.toExist();
   });
@@ -63,7 +64,7 @@ describe('Alert Details Component', () => {
     const newAlert = { ...alert, channels: { slack: { target: 'myslackTarget' }}};
     const wrapper = shallow(<AlertDetails {...props} alert={newAlert} />);
     const notifyWrapper = wrapper.find({ label: 'Notify:' }).dive();
-    expect(notifyWrapper.find('EmailIcon')).not.toExist();
+    expect(notifyWrapper.find({ id: 'email' })).not.toExist();
     expect(notifyWrapper.find('SlackIcon')).toExist();
   });
 });

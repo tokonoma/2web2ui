@@ -48,11 +48,16 @@ describe('Page: Alerts Create', () => {
     expect(props.getAlert).toHaveBeenCalledWith({ id: 'alert-id-1' });
   });
 
+  it('breadcrumb should link to details page if its a duplicate alert', () => {
+    wrapper.setProps({ idToDuplicate: 'alert-id-1' });
+    expect(wrapper.find('Page').prop('breadcrumbAction').to).toEqual('/alerts-new/details/alert-id-1');
+  });
+
   it('should handle submit', async () => {
     formatFormValues.mockImplementationOnce((a) => a);
     await wrapper.find(AlertFormNew).simulate('submit', { value: 'mock value' });
     expect(props.createAlert).toHaveBeenCalledWith({ data: { value: 'mock value' }});
     expect(props.showUIAlert).toHaveBeenCalled();
-    expect(props.history.push).toHaveBeenCalledWith('/alerts-new');
+    expect(props.history.push).toHaveBeenCalledWith('/alerts-new/details/mock-id');
   });
 });

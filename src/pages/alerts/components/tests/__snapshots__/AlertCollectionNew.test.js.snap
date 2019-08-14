@@ -18,7 +18,7 @@ exports[`TestCollection Component should render 1`] = `
         "sortKey": "last_triggered_timestamp",
       },
       Object {
-        "label": "Active",
+        "label": "Mute",
         "sortKey": "muted",
       },
       null,
@@ -99,8 +99,9 @@ Array [
   <Tooltip
     bottom={true}
     content="Delete"
+    dark={true}
     forcePosition={false}
-    horizontalOffset="0px"
+    horizontalOffset="-8px"
     preferredDirection={
       Object {
         "bottom": true,
@@ -147,8 +148,9 @@ Array [
   <Tooltip
     bottom={true}
     content="Delete"
+    dark={true}
     forcePosition={false}
-    horizontalOffset="0px"
+    horizontalOffset="-8px"
     preferredDirection={
       Object {
         "bottom": true,
@@ -195,8 +197,9 @@ Array [
   <Tooltip
     bottom={true}
     content="Delete"
+    dark={true}
     forcePosition={false}
-    horizontalOffset="0px"
+    horizontalOffset="-8px"
     preferredDirection={
       Object {
         "bottom": true,

@@ -8,7 +8,7 @@ jest.mock('../helpers/formatFormValues');
 
 describe('Page: Alerts Edit', () => {
   const props = {
-    updateAlert: jest.fn(() => Promise.resolve({ id: 'mock-id' })),
+    updateAlert: jest.fn(() => Promise.resolve({})),
     showUIAlert: jest.fn(),
     error: null,
     history: {
@@ -52,6 +52,6 @@ describe('Page: Alerts Edit', () => {
     await wrapper.find(AlertFormNew).simulate('submit', { value: 'mock value' });
     expect(props.updateAlert).toHaveBeenCalledWith({ data: { value: 'mock value' }, id: props.id });
     expect(props.showUIAlert).toHaveBeenCalled();
-    expect(props.history.push).toHaveBeenCalledWith('/alerts-new');
+    expect(props.history.push).toHaveBeenCalledWith('/alerts-new/details/alert-id-1');
   });
 });

@@ -5,7 +5,7 @@ exports[`AlertToggle Component should render initial state 1`] = `
   className="Wrapper"
 >
   <Toggle
-    checked={true}
+    checked={false}
     compact={true}
     disabled={false}
     id="mock-id"

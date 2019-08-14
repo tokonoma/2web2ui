@@ -32,7 +32,7 @@ export class AlertToggle extends Component {
         <Toggle
           id={id.toString()}
           compact
-          checked={!muted}
+          checked={muted}
           disabled={pending}
           onChange={this.handleToggle}
         />

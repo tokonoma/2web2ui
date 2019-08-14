@@ -16,7 +16,7 @@ describe('AlertToggle Component', () => {
   it('should render initial state', () => {
     const wrapper = subject();
     expect(wrapper).toMatchSnapshot();
-    expect(wrapper.find('Toggle')).toBeChecked();
+    expect(wrapper.find('Toggle')).not.toBeChecked();
   });
 
   it('should render pending state', () => {
@@ -40,17 +40,17 @@ describe('AlertToggle Component', () => {
       type: 'success'
     });
 
-    expect(wrapper.find('Toggle')).not.toBeChecked();
+    expect(wrapper.find('Toggle')).toBeChecked();
   });
 
   it('should handle a failed toggle', async () => {
     const setMutedStatus = jest.fn(() => Promise.reject());
-    const wrapper = subject({ setMutedStatus, muted: true });
+    const wrapper = subject({ setMutedStatus });
 
     await wrapper.find('Toggle').prop('onChange')();
 
     expect(setMutedStatus).toHaveBeenCalledWith({
-      muted: false,
+      muted: true,
       id: 'mock-id'
     });
 

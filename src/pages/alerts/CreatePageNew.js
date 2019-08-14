@@ -20,9 +20,9 @@ export class CreatePageNew extends Component {
     const { createAlert, showUIAlert, history } = this.props;
     return createAlert({
       data: formatFormValues(values)
-    }).then(() => {
+    }).then(({ id }) => {
       showUIAlert({ type: 'success', message: 'Alert created' });
-      history.push('/alerts-new');
+      history.push(`/alerts-new/details/${id}`);
     });
   };
 
@@ -42,10 +42,13 @@ export class CreatePageNew extends Component {
       );
     }
 
+    const backBreadcrumb = idToDuplicate
+      ? { content: 'Back to Alert', to: `/alerts-new/details/${idToDuplicate}` }
+      : { content: 'Back to Alerts', to: '/alerts-new' };
     return (
       <Page
         title='Create Alert'
-        breadcrumbAction={{ content: 'Back to Alerts', to: '/alerts-new', component: Link }}>
+        breadcrumbAction={{ ...backBreadcrumb, component: Link }}>
         <AlertFormNew
           submitting={loading}
           onSubmit={this.handleCreate}

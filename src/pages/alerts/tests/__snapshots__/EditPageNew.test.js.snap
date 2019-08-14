@@ -5,8 +5,8 @@ exports[`Page: Alerts Edit should render happy path 1`] = `
   breadcrumbAction={
     Object {
       "component": [Function],
-      "content": "Back to Alerts",
-      "to": "/alerts-new",
+      "content": "Back to Alert",
+      "to": "/alerts-new/details/alert-id-1",
     }
   }
   empty={Object {}}

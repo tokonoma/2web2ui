@@ -31,14 +31,14 @@ const notificationChannelData = {
   },
   slack: {
     icon: <SlackIcon />,
-    subtitle: 'Integrate alerts into your Slack channel',
+    subtitle: 'Integrate this alert with Slack',
     fieldProps: {
       placeholder: 'https://hooks.slack.com/services/T00/B00/XX '
     }
   },
   webhook: {
     icon: <WebhookIcon />,
-    subtitle: 'Create a webhook for your alerts',
+    subtitle: 'Create a webhook for this alert',
     fieldProps: {
       placeholder: 'https://example.com/webhook-target'
     }
@@ -92,10 +92,12 @@ export class AlertFormNew extends Component {
       hasSubaccounts,
       formErrors,
       formMeta,
-      isNewAlert
+      isNewAlert,
+      isDuplicate
     } = this.props;
 
     const submitText = submitting ? 'Submitting...' : (isNewAlert ? 'Create Alert' : 'Update Alert');
+    const isSubmitDisabled = (pristine && !isDuplicate) || submitting; //Allows user to create the same alert if if's a duplicate
     const formSpec = getFormSpec(metric);
     const channelsError = this.isNotificationChannelsEmpty(formMeta, formErrors);
 
@@ -131,7 +133,7 @@ export class AlertFormNew extends Component {
                 }
                 {formSpec.hasFilters &&
                   <div className={styles.Filters}>
-                    <label><h5>Filtered by <span className={styles.OptionalText}>optional</span></h5></label>
+                    <label><h5>Filtered by <small className={styles.OptionalText}>optional</small></h5></label>
                     {hasSubaccounts &&
                       <SubaccountField
                         disabled={submitting}
@@ -146,7 +148,7 @@ export class AlertFormNew extends Component {
                   {channelsError && <Error wrapper='div' error='At least one notification channel must be not empty'/>}
                   {this.renderNotificationChannels()}
                 </div>
-                <Button submit primary disabled={pristine || submitting} className={styles.SubmitButton}>{submitText}</Button>
+                <Button submit primary disabled={isSubmitDisabled} className={styles.SubmitButton}>{submitText}</Button>
               </Panel.Section>
             </Grid.Column>
           </Grid>

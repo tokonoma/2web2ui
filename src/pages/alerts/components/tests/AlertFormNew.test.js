@@ -87,7 +87,8 @@ describe('Alert Form Component', () => {
 
     const defaultFormState = {
       pristine: false,
-      submitting: false
+      submitting: false,
+      isDuplicate: false
     };
 
     it('should disable submit button when form is pristine', () => {
@@ -100,8 +101,15 @@ describe('Alert Form Component', () => {
     it('should disable submit button when form is submitting', () => {
       wrapper.setProps(defaultFormState);
       expect(wrapper.find('Button')).toHaveProp('disabled', false);
-      wrapper.setProps({ pristine: true });
+      wrapper.setProps({ submitting: true });
       expect(wrapper.find('Button')).toHaveProp('disabled', true);
+    });
+
+    it('should enable submit button when form is pristine but it is a duplicate', () => {
+      wrapper.setProps(defaultFormState);
+      expect(wrapper.find('Button')).toHaveProp('disabled', false);
+      wrapper.setProps({ pristine: true, isDuplicate: true });
+      expect(wrapper.find('Button')).toHaveProp('disabled', false);
     });
 
     it('should display Submitting when submitting ', () => {

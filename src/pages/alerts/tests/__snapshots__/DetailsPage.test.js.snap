@@ -43,6 +43,7 @@ exports[`Page: Alert Details should render Alert Details Page 1`] = `
         "name": "My Alert",
       }
     }
+    hasSubaccounts={true}
     id="alert-id"
     subaccountIdToString={[Function]}
   />
