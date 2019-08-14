@@ -46,8 +46,18 @@ export function uploadListNew(data) {
 }
 
 //TODO: wait for endpoint
-export function triggerJob(listId) {
-  return { type: 'TRIGGER_JOB' };
+export function triggerJob(list_id) {
+  return {
+    type: 'TRIGGER_JOB_SUCCESS',
+    payload: {
+      list_id: list_id,
+      batch_status: 'checking_regex',
+      complete: false,
+      original_filename: 'test.csv',
+      address_count: 1234,
+      upload_timestamp: 1565187194
+    }
+  };
   // return sparkpostApiRequest({
   //   type: 'TRIGGER_JOB',
   //   meta: {
@@ -93,7 +103,7 @@ export function getJobStatusMock(list_id) {
     type: 'GET_JOB_STATUS_SUCCESS',
     payload: {
       list_id: list_id,
-      batch_status: 'checking_regex',
+      batch_status: 'queued_for_batch',
       complete: false,
       original_filename: 'test.csv',
       address_count: 1234,

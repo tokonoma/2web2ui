@@ -3,6 +3,7 @@ import { Button } from '@sparkpost/matchbox';
 import { Link } from 'react-router-dom';
 import styles from './ListProgress.module.scss';
 import { UnstyledLink } from '@sparkpost/matchbox';
+import { lerp } from 'src/helpers/math';
 
 const BATCH_STATUS = [
   'batch_triggered',
@@ -17,27 +18,17 @@ const BATCH_STATUS = [
   'uploading_results_to_s3'
 ];
 
-const ProgressBar = ({ completed }) => {
-  if (completed > 100) {
-    completed = 100;
-  } else if (completed < 1) {
-    completed = 0;
-  }
-
-  return (
-    <div className={styles.ProgressBar} >
-      <div className={styles.Progress} style={{ width: `${completed}%` }}/>
-    </div>
-  );
-};
-
-
+const ProgressBar = ({ completed }) => (
+  <div className={styles.ProgressBar} >
+    <div className={styles.Progress} style={{ width: `${completed}%` }}/>
+  </div>
+);
 
 const ListProgress = ({ job }) => {
 
-  const { status, filename } = job;
+  const { status, filename, complete } = job;
 
-  const percentage = 100 * BATCH_STATUS.findIndex((batchStep) => batchStep === status) / BATCH_STATUS.length;
+  const percentage = complete ? 100 : lerp(0, 100, BATCH_STATUS.findIndex((batchStep) => batchStep === status) / BATCH_STATUS.length);
 
   return (
     <div style={{ width: '80%', margin: '20px' }}>
