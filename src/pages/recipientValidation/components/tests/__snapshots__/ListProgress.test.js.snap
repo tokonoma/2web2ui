@@ -2,12 +2,7 @@
 
 exports[`ListProgress should render correctly 1`] = `
 <div
-  style={
-    Object {
-      "margin": "20px",
-      "width": "80%",
-    }
-  }
+  className="ListProgressContainer"
 >
   <h2>
     big-test.csv
@@ -41,12 +36,8 @@ exports[`ListProgress should render correctly 1`] = `
     Processing
   </div>
   <ProgressBar
+    className="ProgressBarContainer"
     completed={20}
-    style={
-      Object {
-        "marginBottom": "400px",
-      }
-    }
   />
   <Button
     color="orange"
