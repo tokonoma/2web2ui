@@ -79,7 +79,7 @@ Object {
 
 exports[`Inbox Placement Reducer list tests fail 1`] = `
 Object {
-  "currentTestDetails": null,
+  "currentTestDetails": Object {},
   "seeds": Array [],
   "seedsPending": false,
   "tests": Array [],
@@ -96,7 +96,7 @@ Object {
 
 exports[`Inbox Placement Reducer list tests pending 1`] = `
 Object {
-  "currentTestDetails": null,
+  "currentTestDetails": Object {},
   "seeds": Array [],
   "seedsPending": false,
   "tests": Array [],
@@ -107,7 +107,7 @@ Object {
 
 exports[`Inbox Placement Reducer list tests success 1`] = `
 Object {
-  "currentTestDetails": null,
+  "currentTestDetails": Object {},
   "seeds": Array [],
   "seedsPending": false,
   "tests": Object {

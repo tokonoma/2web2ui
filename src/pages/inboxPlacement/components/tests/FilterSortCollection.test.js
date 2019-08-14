@@ -1,11 +1,9 @@
-import { mount } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import React from 'react';
 import { act } from 'react-dom/test-utils';
 import FilterSortCollection from '../FilterSortCollection';
 import { Table } from '@sparkpost/matchbox';
 import { BrowserRouter as Router } from 'react-router-dom';
-import MockDate from 'mockdate';
-MockDate.set(1434319925275);
 
 describe('FilterSortCollection Component', () => {
   const props = {
@@ -43,13 +41,14 @@ describe('FilterSortCollection Component', () => {
     ])
   };
 
-  const subject = (props = {}) => mount(
-    <Router>
-      <FilterSortCollection {...props}/>
-    </Router>
-  );
-
   describe('renders', () => {
+
+    const subject = (props = {}) => shallow(
+      <Router>
+        <FilterSortCollection {...props}/>
+      </Router>
+    );
+
     it('renders without props', () => {
       expect(subject()).toMatchSnapshot();
     });
@@ -60,6 +59,12 @@ describe('FilterSortCollection Component', () => {
   });
 
   describe('sorts', () => {
+
+    const subject = (props = {}) => mount(
+      <Router>
+        <FilterSortCollection {...props}/>
+      </Router>
+    );
 
     it('sorts default sort column values in default descending order', () => {
       const wrapper = subject({ ...props });
