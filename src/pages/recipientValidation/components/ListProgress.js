@@ -38,7 +38,7 @@ const ListProgress = ({ job }) => {
         <UnstyledLink to='/recipient-validation' component={Link}>home page</UnstyledLink>,
         <span> we'll let you know when validation is complete and your results are ready.</span>
       </div>
-      <div><strong>Status:</strong> Processing</div>
+      <div><strong>Status:</strong> {complete ? 'Complete' : 'Processing'}</div>
       <ProgressBar style={{ marginBottom: '400px' }} completed={percentage}/>
       <Button color='orange' component={Link} to='/recipient-validation'>Validate Another</Button>
     </div>

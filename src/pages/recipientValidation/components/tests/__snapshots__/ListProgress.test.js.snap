@@ -37,7 +37,8 @@ exports[`ListProgress should render correctly 1`] = `
     <strong>
       Status:
     </strong>
-     Processing
+     
+    Processing
   </div>
   <ProgressBar
     completed={20}

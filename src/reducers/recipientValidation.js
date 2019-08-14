@@ -93,6 +93,29 @@ export default (state = initialState, { meta, payload, type }) => {
         }
       };
 
+    case 'TRIGGER_JOB_PENDING':
+      return { ...state, jobResultsLoading: true };
+
+    case 'TRIGGER_JOB_ERROR':
+      return { ...state, jobResultsLoading: false };
+
+    case 'TRIGGER_JOB_SUCCESS':
+      return {
+        ...state,
+        jobResultsLoading: false,
+        jobResults: {
+          ...state.jobResults,
+          [payload.list_id]: {
+            status: payload.batch_status,
+            complete: payload.complete,
+            uploaded: payload.upload_timestamp,
+            rejectedUrl: payload.rejected_external_url,
+            filename: payload.original_filename,
+            addressCount: payload.address_count
+          }
+        }
+      };
+
     // Single Recipient
     case 'SINGLE_RECIPIENT_VALIDATION_PENDING':
       return { ...state, singleResults: null, singleLoading: true };
