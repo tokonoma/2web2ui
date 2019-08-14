@@ -5,7 +5,7 @@ import UploadedListForm from './components/UploadedListForm';
 import { formatDate, formatTime } from 'src/helpers/date';
 import { connect } from 'react-redux';
 import { showAlert } from 'src/actions/globalAlert';
-import { getJobStatus } from 'src/actions/recipientValidation';
+import { getJobStatusMock, triggerJob } from 'src/actions/recipientValidation';
 import { getUsage } from 'src/actions/account';
 import _ from 'lodash';
 import Loading from 'src/components/loading';
@@ -15,9 +15,11 @@ import styles from './UploadedListPage.module.scss';
 export class UploadedListPage extends Component {
 
   componentDidMount() {
-    const { getJobStatus, getUsage, listId } = this.props;
-    // TODO: Use action
-    getJobStatus(listId);
+    const { getJobStatusMock, getUsage, listId, history } = this.props;
+    // TODO: Replace action with real action (and update test)
+    getJobStatusMock(listId).catch(() => {
+      history.replace('/recipient-validation/list');
+    });
     getUsage();
   }
 
@@ -31,7 +33,8 @@ export class UploadedListPage extends Component {
   )
 
   handleSubmit = () => {
-    //TODO: Replace with job trigger
+    const { triggerJob, listId } = this.props;
+    triggerJob(listId);
   }
 
   render() {
@@ -77,4 +80,4 @@ const mapStateToProps = ({ recipientValidation, account }, { match }) => {
   };
 };
 
-export default withRouter(connect(mapStateToProps, { showAlert, getJobStatus, getUsage })(UploadedListPage));
+export default withRouter(connect(mapStateToProps, { showAlert, getJobStatusMock, getUsage, triggerJob })(UploadedListPage));

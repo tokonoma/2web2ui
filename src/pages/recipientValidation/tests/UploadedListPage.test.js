@@ -7,7 +7,9 @@ const subject = (props = {}) => shallow(
   <UploadedListPage
     batchStatus='queued_for_batch'
     listId='listId'
-    getJobStatus={jest.fn()}
+    history={{ replace: {}}}
+    getJobStatusMock={jest.fn(() => Promise.resolve())}
+    triggerJob={jest.fn()}
     results={{ status: 'queued_for_batch', address_count: 1000 }}
     getUsage={jest.fn()}
     currentUsage={{ recipient_validation: { month: { used: 20000 }}}}
@@ -18,12 +20,27 @@ const subject = (props = {}) => shallow(
 describe('UploadedListPage', () => {
 
   // TODO: Replace mock function with real function
-  it('should fetch job status on rendering', () => {
-    const getJobStatus = jest.fn();
+  it('should fetch job status on rendering', async () => {
+    const getJobStatusMock = jest.fn(() => Promise.resolve());
     const getUsage = jest.fn();
-    subject({ getJobStatus, getUsage });
-    expect(getJobStatus).toHaveBeenCalledWith('listId');
+    await subject({ getJobStatusMock, getUsage });
+    expect(getJobStatusMock).toHaveBeenCalledWith('listId');
     expect(getUsage).toHaveBeenCalled();
+  });
+
+  it('should redirect to /recipient-validation/list on error on loading job', async () => {
+    const getJobStatusMock = jest.fn(() => Promise.reject());
+    const history = { replace: jest.fn() };
+    await subject({ getJobStatusMock, history });
+    expect(getJobStatusMock).toHaveBeenCalledWith('listId');
+    expect(history.replace).toHaveBeenCalledWith('/recipient-validation/list');
+  });
+
+  it('should call triggerJob when calling onSubmit', () => {
+    const triggerJob = jest.fn();
+    const wrapper = subject({ triggerJob });
+    wrapper.instance().handleSubmit();
+    expect(triggerJob).toHaveBeenCalledWith('listId');
   });
 
   it('should render UploadedListForm if batch status is queued_for_batch', () => {

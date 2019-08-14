@@ -1,5 +1,10 @@
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
-import { isAccountUiOptionSet } from 'src/helpers/conditions/account';
+
+// If you want to test fail mock response, pass Promise.reject() as another parameter
+const mockThunk = (action, response = Promise.resolve()) => (dispatch) => {
+  dispatch(action);
+  return response;
+};
 
 export function uploadList(data) {
   return sparkpostApiRequest({
@@ -70,30 +75,27 @@ export function getLatestJob() {
 }
 
 export function getJobStatus(list_id) {
-  //TODO: Unmock action + fix tests
-  return (dispatch, getState) => {
-    if (!isAccountUiOptionSet('recipientValidationV2')(getState())) {
-      return sparkpostApiRequest({
-        type: 'GET_JOB_STATUS',
-        meta: {
-          method: 'GET',
-          url: `v1/recipient-validation/job/${list_id}`
-        }
-      });
-    } else {
-      dispatch({
-        type: 'GET_JOB_STATUS_SUCCESS',
-        payload: {
-          list_id: list_id,
-          batch_status: 'queued_for_batch',
-          complete: false,
-          original_filename: 'test.csv',
-          address_count: 1234,
-          upload_timestamp: 1565187194
-        }
-      });
+  return sparkpostApiRequest({
+    type: 'GET_JOB_STATUS',
+    meta: {
+      method: 'GET',
+      url: `v1/recipient-validation/job/${list_id}`
     }
-  };
+  });
+}
+
+export function getJobStatusMock(list_id) {
+  return mockThunk({
+    type: 'GET_JOB_STATUS_SUCCESS',
+    payload: {
+      list_id: list_id,
+      batch_status: 'queued_for_batch',
+      complete: false,
+      original_filename: 'test.csv',
+      address_count: 1234,
+      upload_timestamp: 1565187194
+    }
+  });
 }
 
 export function resetUploadError() {
