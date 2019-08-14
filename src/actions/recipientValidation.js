@@ -1,4 +1,5 @@
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
+import { isAccountUiOptionSet } from 'src/helpers/conditions/account';
 
 export function uploadList(data) {
   return sparkpostApiRequest({
@@ -70,22 +71,27 @@ export function getLatestJob() {
 
 export function getJobStatus(list_id) {
   //TODO: Unmock action + fix tests
-  // return sparkpostApiRequest({
-  //   type: 'GET_JOB_STATUS',
-  //   meta: {
-  //     method: 'GET',
-  //     url: `v1/recipient-validation/job/${list_id}`
-  //   }
-  // });
-  return {
-    type: 'GET_JOB_STATUS_SUCCESS',
-    payload: {
-      list_id: list_id,
-      batch_status: 'queued_for_batch',
-      complete: false,
-      original_filename: 'test.csv',
-      address_count: 1234,
-      upload_timestamp: 1565187194
+  return (dispatch, getState) => {
+    if (!isAccountUiOptionSet('recipientValidationV2')(getState())) {
+      return sparkpostApiRequest({
+        type: 'GET_JOB_STATUS',
+        meta: {
+          method: 'GET',
+          url: `v1/recipient-validation/job/${list_id}`
+        }
+      });
+    } else {
+      dispatch({
+        type: 'GET_JOB_STATUS_SUCCESS',
+        payload: {
+          list_id: list_id,
+          batch_status: 'queued_for_batch',
+          complete: false,
+          original_filename: 'test.csv',
+          address_count: 1234,
+          upload_timestamp: 1565187194
+        }
+      });
     }
   };
 }

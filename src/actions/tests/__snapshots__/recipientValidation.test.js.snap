@@ -1,21 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Recipient Verification Actions .getJobStatus when getting status of a list job 1`] = `
-Array [
-  Object {
-    "payload": Object {
-      "address_count": 1234,
-      "batch_status": "queued_for_batch",
-      "complete": false,
-      "list_id": "12345",
-      "original_filename": "test.csv",
-      "upload_timestamp": 1565187194,
-    },
-    "type": "GET_JOB_STATUS_SUCCESS",
-  },
-]
-`;
-
 exports[`Recipient Verification Actions .getLatestJob when getting latest list upload 1`] = `
 Array [
   Object {

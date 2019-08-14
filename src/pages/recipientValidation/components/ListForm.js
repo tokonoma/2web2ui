@@ -7,7 +7,7 @@ import FileUploadWrapper from './FileUploadWrapper';
 import { uploadList, resetUploadError } from 'src/actions/recipientValidation';
 import { showAlert } from 'src/actions/globalAlert';
 import config from 'src/config';
-import { isAccountUiOptionSet } from '../../../helpers/conditions/account';
+import { isAccountUiOptionSet } from 'src/helpers/conditions/account';
 import { withRouter } from 'react-router-dom';
 
 const formName = 'recipientValidationListForm';
