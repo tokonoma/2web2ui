@@ -1,0 +1,190 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FilterSortCollection Component renders renders with props 1`] = `
+<Router
+  history={
+    Object {
+      "action": "POP",
+      "block": [Function],
+      "createHref": [Function],
+      "go": [Function],
+      "goBack": [Function],
+      "goForward": [Function],
+      "length": 1,
+      "listen": [Function],
+      "location": Object {
+        "hash": "",
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
+      "push": [Function],
+      "replace": [Function],
+    }
+  }
+>
+  <FilterSortCollection
+    defaultSortColumn="fruit"
+    filterBoxConfig={
+      Object {
+        "itemToStringKeys": Array [
+          "fruit",
+          "vegetable",
+        ],
+        "placeholder": "Search By: Fruit, Vegetable",
+        "show": true,
+        "wrapper": [Function],
+      }
+    }
+    rowComponent={[Function]}
+    rows={
+      Array [
+        Object {
+          "fruit": "apple",
+          "vegetable": "celery",
+        },
+        Object {
+          "fruit": "banana",
+          "vegetable": "artichoke",
+        },
+        Object {
+          "fruit": "carrot",
+          "vegetable": "broccoli",
+        },
+      ]
+    }
+    selectOptions={
+      Array [
+        Object {
+          "label": "Fruit",
+          "value": "fruit",
+        },
+        Object {
+          "label": "Vegetable",
+          "value": "vegetable",
+        },
+      ]
+    }
+    title="Menu"
+  />
+</Router>
+`;
+
+exports[`FilterSortCollection Component renders renders without props 1`] = `
+<Router
+  history={
+    Object {
+      "action": "POP",
+      "block": [Function],
+      "createHref": [Function],
+      "go": [Function],
+      "goBack": [Function],
+      "goForward": [Function],
+      "length": 1,
+      "listen": [Function],
+      "location": Object {
+        "hash": "",
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
+      "push": [Function],
+      "replace": [Function],
+    }
+  }
+>
+  <FilterSortCollection />
+</Router>
+`;
+
+exports[`FilterSortCollection Component sorts sorts default sort column values in ascending order 1`] = `
+Object {
+  "children": Array [
+    <NullComponent />,
+    <TableBody>
+      <rowComponent
+        fruit="apple"
+        vegetable="celery"
+      />
+      <rowComponent
+        fruit="banana"
+        vegetable="artichoke"
+      />
+      <rowComponent
+        fruit="carrot"
+        vegetable="broccoli"
+      />
+    </TableBody>,
+  ],
+  "className": "K9_LB",
+}
+`;
+
+exports[`FilterSortCollection Component sorts sorts default sort column values in default descending order 1`] = `
+Object {
+  "children": Array [
+    <NullComponent />,
+    <TableBody>
+      <rowComponent
+        fruit="carrot"
+        vegetable="broccoli"
+      />
+      <rowComponent
+        fruit="banana"
+        vegetable="artichoke"
+      />
+      <rowComponent
+        fruit="apple"
+        vegetable="celery"
+      />
+    </TableBody>,
+  ],
+  "className": "K9_LB",
+}
+`;
+
+exports[`FilterSortCollection Component sorts sorts selected sort column values in ascending order 1`] = `
+Object {
+  "children": Array [
+    <NullComponent />,
+    <TableBody>
+      <rowComponent
+        fruit="banana"
+        vegetable="artichoke"
+      />
+      <rowComponent
+        fruit="carrot"
+        vegetable="broccoli"
+      />
+      <rowComponent
+        fruit="apple"
+        vegetable="celery"
+      />
+    </TableBody>,
+  ],
+  "className": "K9_LB",
+}
+`;
+
+exports[`FilterSortCollection Component sorts sorts selected sort column values in default descending order 1`] = `
+Object {
+  "children": Array [
+    <NullComponent />,
+    <TableBody>
+      <rowComponent
+        fruit="apple"
+        vegetable="celery"
+      />
+      <rowComponent
+        fruit="carrot"
+        vegetable="broccoli"
+      />
+      <rowComponent
+        fruit="banana"
+        vegetable="artichoke"
+      />
+    </TableBody>,
+  ],
+  "className": "K9_LB",
+}
+`;

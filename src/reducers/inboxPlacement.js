@@ -1,11 +1,19 @@
 const initialState = {
   currentTestDetails: {},
   seedsPending: false,
-  seeds: []
+  seeds: [],
+  testsPending: true,
+  tests: []
 };
 
 export default (state = initialState, { type, payload }) => {
   switch (type) {
+    case 'LIST_TESTS_PENDING':
+      return { ...state, testsPending: true, testsError: null };
+    case 'LIST_TESTS_FAIL':
+      return { ...state, testsPending: false, testsError: payload };
+    case 'LIST_TESTS_SUCCESS':
+      return { ...state, tests: payload, testsPending: false, testsError: null };
     case 'GET_SEEDS_PENDING':
       return { ...state, seedsPending: true, seedsError: null };
     case 'GET_SEEDS_SUCCESS':

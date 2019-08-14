@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TestCollection Component should change background color 1`] = `
+<div
+  className="Dot"
+  style={
+    Object {
+      "backgroundColor": "green",
+    }
+  }
+/>
+`;
+
+exports[`TestCollection Component should render 1`] = `
+<div
+  className="Dot"
+  style={
+    Object {
+      "backgroundColor": "red",
+    }
+  }
+/>
+`;
