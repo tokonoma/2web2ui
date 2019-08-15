@@ -72,7 +72,7 @@ export const getEvaluatorOptions = (metric, source) => {
         case 'block_bounce_rate':
         case 'hard_bounce_rate':
         case 'soft_bounce_rate':
-          return { sliderLabel: 'Bounce Percentage', sliderPrecision: 2 };
+          return { sliderLabel: 'Bounce Percentage Above', sliderPrecision: 2 };
       }
     }
     return 'value';

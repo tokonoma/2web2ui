@@ -35,7 +35,7 @@ describe('Alert form helper: ', () => {
   const expectedRealtimeMetric = {
     suffix: '%',
     operatorOptions: [{ label: 'Above', value: 'gt' }],
-    sliderLabel: 'Bounce Percentage',
+    sliderLabel: 'Bounce Percentage Above',
     sliderPrecision: 2
   };
 
