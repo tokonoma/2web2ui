@@ -1,5 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Recipient Verification Actions .getJobStatus when getting status of a list job 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "method": "GET",
+      "url": "v1/recipient-validation/job/12345",
+    },
+    "type": "GET_JOB_STATUS",
+  },
+]
+`;
+
 exports[`Recipient Verification Actions .getLatestJob when getting latest list upload 1`] = `
 Array [
   Object {
