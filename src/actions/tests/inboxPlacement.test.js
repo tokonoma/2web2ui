@@ -37,4 +37,15 @@ describe('Action Creator: Inbox Placement', () => {
     });
   });
 
+  it('makes request to get single inbox placement test content', async () => {
+    await inboxPlacement.getInboxPlacementTestContent(1);
+    expect(sparkpostApiRequest).toHaveBeenCalledWith({
+      type: 'GET_INBOX_PLACEMENT_TEST_CONTENT',
+      meta: {
+        method: 'GET',
+        url: '/v1/inbox-placement/1/content'
+      }
+    });
+  });
+
 });

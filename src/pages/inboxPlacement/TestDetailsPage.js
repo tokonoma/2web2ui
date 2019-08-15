@@ -3,20 +3,35 @@ import { connect } from 'react-redux';
 import { Page, Tabs } from '@sparkpost/matchbox';
 
 import { Loading } from 'src/components';
-import { getInboxPlacementByProviders, getInboxPlacementTest } from 'src/actions/inboxPlacement';
+import { getInboxPlacementTest, getInboxPlacementByProviders, getInboxPlacementTestContent } from 'src/actions/inboxPlacement';
+import { showAlert } from 'src/actions/globalAlert';
 import TestDetails from './components/TestDetails';
 import TestContent from './components/TestContent';
 import useTabs from 'src/hooks/useTabs';
 import { RedirectAndAlert } from 'src/components/globalAlert';
 
 export const TestDetailsPage = (props) => {
-  const { history, id, tabIndex, loading, error, details, placementsByProvider, getInboxPlacementTest, getInboxPlacementByProviders } = props;
+  const {
+    history,
+    id,
+    tabIndex,
+    loading,
+    details,
+    placementsByProvider,
+    content,
+    error,
+    getInboxPlacementTest,
+    getInboxPlacementByProviders,
+    getInboxPlacementTestContent
+  } = props;
+
   const [selectedTabIndex, tabs] = useTabs(TABS, tabIndex);
 
   useEffect(() => {
     getInboxPlacementTest(id);
     getInboxPlacementByProviders(id);
-  }, [getInboxPlacementTest, getInboxPlacementByProviders, id]);
+    getInboxPlacementTestContent(id);
+  }, [getInboxPlacementTest, getInboxPlacementByProviders, getInboxPlacementTestContent, id]);
 
   useEffect(() => {
     history.replace(`/inbox-placement/details/${id}/${TABS[selectedTabIndex].key}`);
@@ -27,7 +42,7 @@ export const TestDetailsPage = (props) => {
     const selectedTabKey = tabs[selectedTabIndex].key;
     switch (selectedTabKey) {
       case 'content':
-        return <TestContent/>;
+        return <TestContent content={content} details={details}/>;
       default:
         return <TestDetails details={details} placementsByProvider={placementsByProvider}/>;
     }
@@ -67,11 +82,12 @@ function mapStateToProps(state, props) {
   return {
     tabIndex: currentTabIndex > 0 ? currentTabIndex : 0,
     id,
-    loading: state.inboxPlacement.getTestPending || state.inboxPlacement.getByProviderPending,
-    error: state.inboxPlacement.getTestError || state.inboxPlacement.getByProviderError,
-    details: state.inboxPlacement.currentTestDetails,
-    placementsByProvider: state.inboxPlacement.placementsByProvider || []
+    loading: state.inboxPlacement.getTestPending || state.inboxPlacement.getByProviderPending || state.inboxPlacement.getTestContentPending,
+    error: state.inboxPlacement.getTestError || state.inboxPlacement.getByProviderError || state.inboxPlacement.getTestContentError,
+    details: state.inboxPlacement.currentTestDetails || {},
+    placementsByProvider: state.inboxPlacement.placementsByProvider || [],
+    content: state.inboxPlacement.currentTestContent || {}
   };
 }
 
-export default connect(mapStateToProps, { getInboxPlacementTest, getInboxPlacementByProviders })(TestDetailsPage);
+export default connect(mapStateToProps, { getInboxPlacementTest, getInboxPlacementByProviders, getInboxPlacementTestContent, showAlert })(TestDetailsPage);

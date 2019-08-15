@@ -34,6 +34,13 @@ export default (state = initialState, { type, payload }) => {
     case 'GET_INBOX_PLACEMENT_TEST_BY_PROVIDER_FAIL':
       return { ...state, getByProviderPending: false, getByProviderError: payload };
 
+    case 'GET_INBOX_PLACEMENT_TEST_CONTENT_PENDING':
+      return { ...state, getTestContentPending: true, getTestContentError: null };
+    case 'GET_INBOX_PLACEMENT_TEST_CONTENT_SUCCESS':
+      return { ...state, getTestContentPending: false, currentTestContent: payload, getTestContentError: null };
+    case 'GET_INBOX_PLACEMENT_TEST_CONTENT_FAIL':
+      return { ...state, getTestContentPending: false, getTestContentError: payload };
+
     default:
       return state;
   }

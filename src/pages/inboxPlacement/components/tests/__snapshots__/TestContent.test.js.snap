@@ -1,0 +1,73 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: TestContent renders page correctly with defaults 1`] = `
+<Fragment>
+  <Panel
+    sectioned={true}
+  >
+    <h2>
+      foo
+    </h2>
+    <Grid>
+      <InfoBlock
+        columnProps={
+          Object {
+            "md": 4,
+            "sm": 12,
+          }
+        }
+        label="From"
+        value="foo@bar.com"
+      />
+      <InfoBlock
+        columnProps={
+          Object {
+            "md": 4,
+            "sm": 12,
+          }
+        }
+        label="Raw Message Size:"
+        value="2.52KB"
+      />
+    </Grid>
+  </Panel>
+  <Panel>
+    <Tabs
+      color="navy"
+      connectBelow={true}
+      selected={0}
+      tabs={
+        Array [
+          Object {
+            "content": "Raw Message",
+            "key": "raw_message",
+          },
+          Object {
+            "content": "HTML",
+            "key": "html",
+          },
+          Object {
+            "content": "AMP HTML",
+            "key": "amp",
+          },
+          Object {
+            "content": "Text",
+            "key": "text",
+          },
+          Object {
+            "content": "Headers",
+            "key": "headers",
+          },
+        ]
+      }
+    />
+    <Panel.Section>
+      <CodeBlock
+        code="The Raw message"
+        height={355}
+        numbered={false}
+      />
+    </Panel.Section>
+  </Panel>
+</Fragment>
+`;

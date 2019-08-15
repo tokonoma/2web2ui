@@ -1,5 +1,44 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Inbox Placement Reducer get specific inbox placement test content pending 1`] = `
+Object {
+  "currentTestDetails": Object {},
+  "getTestContentError": null,
+  "getTestContentPending": true,
+  "seeds": Array [],
+  "seedsPending": false,
+}
+`;
+
+exports[`Inbox Placement Reducer get specific inbox placement test content pending fail 1`] = `
+Object {
+  "currentTestDetails": Object {},
+  "getTestContentError": Object {
+    "errors": Array [
+      Object {
+        "message": "Some error occurred",
+      },
+    ],
+  },
+  "getTestContentPending": false,
+  "seeds": Array [],
+  "seedsPending": false,
+}
+`;
+
+exports[`Inbox Placement Reducer get specific inbox placement test content success 1`] = `
+Object {
+  "currentTestContent": Object {
+    "fakeData": true,
+  },
+  "currentTestDetails": Object {},
+  "getTestContentError": null,
+  "getTestContentPending": false,
+  "seeds": Array [],
+  "seedsPending": false,
+}
+`;
+
 exports[`Inbox Placement Reducer get specific inbox placement test pending 1`] = `
 Object {
   "currentTestDetails": Object {},
