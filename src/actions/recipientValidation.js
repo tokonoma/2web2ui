@@ -23,8 +23,16 @@ export function getList() {
     type: 'GET_JOB_LIST_SUCCESS',
     payload: [
       {
-        list_id: 'listid1',
+        list_id: 'listid0',
         batch_status: 'queued_for_batch',
+        complete: false,
+        original_filename: 'test.csv',
+        address_count: 1234,
+        upload_timestamp: 1565187194
+      },
+      {
+        list_id: 'listid1',
+        batch_status: 'checking_regex',
         complete: false,
         original_filename: 'test.csv',
         address_count: 1234,

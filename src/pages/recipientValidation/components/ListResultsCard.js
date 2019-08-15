@@ -1,27 +1,21 @@
 import React from 'react';
 import { Panel, Button, Tag, Table, UnstyledLink } from '@sparkpost/matchbox';
-import { Error, FileDownload, CheckCircle, Cached } from '@sparkpost/matchbox-icons';
+import { Error, FileDownload, CheckCircle, Cached, CloudUpload } from '@sparkpost/matchbox-icons';
 import DownloadLink from 'src/components/downloadLink/DownloadLink';
-import { LoadingSVG } from 'src/components/loading/Loading';
 import { formatDateTime } from 'src/helpers/date';
 import moment from 'moment';
 import styles from './ListResultsCard.module.scss';
 import { Link } from 'react-router-dom';
 
-const ListResultsCard = ({ results, newListUpload }) => {
+const ListResultsCard = ({ results = {}, newListUpload }) => {
+  //TODO: Remove newListUpload in SE-156
 
-  const renderRow = ({ complete = 'unknown', uploaded, rejectedUrl, status, filename, key }) => {
-    if (complete === 'unknown') {
-      return (
-        <Panel>
-          <div className={styles.LoadingWrapper}><LoadingSVG size='Small' /></div>
-        </Panel>
-      );
-    }
+  const renderRow = ({ complete = 'unknown', uploaded, rejectedUrl, status = 'unknown', filename, key }) => {
 
     const loading = !complete;
     const ready = status === 'success';
     const failed = status === 'error';
+    const uploadedNotProcessing = status === 'queued_for_batch';
 
     const renderStatus = () => {
 
@@ -39,12 +33,23 @@ const ListResultsCard = ({ results, newListUpload }) => {
         </Tag>);
       }
 
+      if (uploadedNotProcessing) {
+        return (
+          <Tag>
+            <span className={styles.Loading}><CloudUpload /> </span>
+            <span>Uploaded</span>
+          </Tag>
+        );
+      }
+
       if (loading) {
         return (<Tag>
           <span className={styles.Loading}><Cached /> </span>
           <span>Processing</span>
         </Tag>);
       }
+
+
     };
 
     return (

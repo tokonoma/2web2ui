@@ -6,14 +6,18 @@ describe('ListResults', () => {
   let props;
   let wrapper;
 
+  const testNotCompleteId = '123';
   const testNotComplete = {
-    listId: '123',
-    complete: false
+    [testNotCompleteId]: {
+      complete: false
+    }
   };
 
+  const testCompleteId = '456';
   const testComplete = {
-    listId: '456',
-    complete: true
+    [testCompleteId]: {
+      complete: true
+    }
   };
 
   beforeEach(() => {
@@ -24,7 +28,8 @@ describe('ListResults', () => {
       getJobStatus: jest.fn(() => Promise.resolve({ complete: false })),
       startPolling: jest.fn(),
       stopPolling: jest.fn(),
-      showAlert: jest.fn()
+      showAlert: jest.fn(),
+      newListUpload: false
     };
 
     wrapper = shallow(<ListResults {...props} />);
@@ -45,15 +50,15 @@ describe('ListResults', () => {
 
   describe('polling', () => {
     it('starts polling when recieving new list id', async () => {
-      wrapper.setProps({ results: testNotComplete, latestId: testNotComplete.listId });
-      await expect(props.getJobStatus).toHaveBeenCalledWith(testNotComplete.listId);
+      wrapper.setProps({ results: testNotComplete, latestId: testNotCompleteId });
+      await expect(props.getJobStatus).toHaveBeenCalledWith(testNotCompleteId);
       expect(props.stopPolling).toHaveBeenCalledTimes(1);
       expect(props.startPolling.mock.calls).toMatchSnapshot();
       expect(props.showAlert).not.toHaveBeenCalled();
     });
 
     it('should not start polling if new list id is complete', () => {
-      wrapper.setProps({ results: testComplete, latestId: testComplete.listId });
+      wrapper.setProps({ results: testComplete, latestId: testCompleteId });
       expect(props.stopPolling).toHaveBeenCalled();
       expect(props.getJobStatus).not.toHaveBeenCalled();
       expect(props.startPolling).not.toHaveBeenCalled();
@@ -61,18 +66,18 @@ describe('ListResults', () => {
 
     it('starts shows an alert when polling results are complete', async () => {
       props.getJobStatus.mockReturnValue(Promise.resolve({ complete: true, batch_status: 'success' }));
-      wrapper.setProps({ results: testNotComplete, latestId: testNotComplete.listId });
-      await expect(props.getJobStatus).toHaveBeenCalledWith(testNotComplete.listId);
+      wrapper.setProps({ results: testNotComplete, latestId: testNotCompleteId });
+      await expect(props.getJobStatus).toHaveBeenCalledWith(testNotCompleteId);
       expect(props.showAlert.mock.calls).toMatchSnapshot();
-      expect(props.stopPolling).toHaveBeenCalledWith(testNotComplete.listId);
+      expect(props.stopPolling).toHaveBeenCalledWith(testNotCompleteId);
     });
 
     it('starts shows an alert when polling results fail', async () => {
       props.getJobStatus.mockReturnValue(Promise.resolve({ complete: false, batch_status: 'error' }));
-      wrapper.setProps({ results: testNotComplete, latestId: testNotComplete.listId });
-      await expect(props.getJobStatus).toHaveBeenCalledWith(testNotComplete.listId);
+      wrapper.setProps({ results: testNotComplete, latestId: testNotCompleteId });
+      await expect(props.getJobStatus).toHaveBeenCalledWith(testNotCompleteId);
       expect(props.showAlert.mock.calls).toMatchSnapshot();
-      expect(props.stopPolling).toHaveBeenCalledWith(testNotComplete.listId);
+      expect(props.stopPolling).toHaveBeenCalledWith(testNotCompleteId);
     });
   });
 });

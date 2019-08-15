@@ -25,25 +25,37 @@ export class ListResults extends Component {
     const { latestId, results, startPolling, stopPolling, newListUpload } = this.props;
 
     if (newListUpload) {
-      return;
-    }
-    // Start polling when a new list ID is recieved, which changes when either:
-    // - Upload view first mounts
-    // - Form is resubmitted
-    if (prevLatestId !== latestId) {
-      stopPolling(prevLatestId); // Stop any previous polling instances
+      startPolling({
+        key: 'poll-list',
+        action: () => this.handleListPoll(),
+        interval: 10000
+      });
+    } else {
+      //TODO: Remove once list takes over
+      // Start polling when a new list ID is recieved, which changes when either:
+      // - Upload view first mounts
+      // - Form is resubmitted
+      if (prevLatestId !== latestId) {
+        stopPolling(prevLatestId); // Stop any previous polling instances
 
-      if (!results.complete) {
-        this.handlePoll(latestId);
-        startPolling({
-          key: latestId,
-          action: () => this.handlePoll(latestId),
-          interval: 5000
-        });
+        if (!results[latestId].complete) {
+          this.handlePoll(latestId);
+          startPolling({
+            key: latestId,
+            action: () => this.handlePoll(latestId),
+            interval: 5000
+          });
+        }
       }
     }
   }
 
+  componentWillUnmount() {
+    const { stopPolling } = this.props;
+    stopPolling('poll-list');
+  }
+
+  //TODO: Remove once list takes over
   handlePoll = (id) => {
     const { showAlert, getJobStatus, stopPolling } = this.props;
     return getJobStatus(id).then(({ complete, batch_status }) => {
@@ -67,15 +79,22 @@ export class ListResults extends Component {
     });
   }
 
-  render() {
-    const { resultsList, loading, newListUpload } = this.props;
+  handleListPoll = () => {
+    const { getList } = this.props;
+    return getList();
+    //TODO: Check if all items are complete, then stop polling
+  }
 
-    if (!loading && _.isEmpty(resultsList)) {
+
+  render() {
+    const { results, loading, newListUpload } = this.props;
+
+    if (!loading && _.isEmpty(results)) {
       return null;
     }
 
     return (
-      <ListResultsCard results={resultsList} newListUpload={newListUpload} />
+      <ListResultsCard results={results} newListUpload={newListUpload} />
     );
   }
 }
@@ -86,11 +105,10 @@ const mapStateToProps = (state) => {
   const latestId = recipientValidation.latest;
 
   return {
-    latestId, //TODO: remove
-    results: recipientValidation.jobResults[latestId] || {}, //TODO: Replace with list
+    latestId,
+    results: recipientValidation.jobResults || {},
     loading: recipientValidation.jobResultsLoading,
-    resultsList: recipientValidation.jobResults || {},
-    newListUpload: isAccountUiOptionSet('recipientValidationV2')(state)
+    newListUpload: isAccountUiOptionSet('recipientValidationV2')(state) //TODO: Remove in SE-156
   };
 };
 
