@@ -8,7 +8,7 @@ Array [
         "name": "Mock Name",
       },
       "method": "POST",
-      "url": "/labs/alerts",
+      "url": "/v1/alerts",
     },
     "type": "CREATE_ALERT",
   },
@@ -21,9 +21,22 @@ Array [
     "meta": Object {
       "id": "alert-id",
       "method": "DELETE",
-      "url": "/labs/alerts/alert-id",
+      "url": "/v1/alerts/alert-id",
     },
     "type": "DELETE_ALERT",
+  },
+]
+`;
+
+exports[`Action Creator: Alerts should dispatch a get alert action 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "method": "GET",
+      "showErrorAlert": false,
+      "url": "/v1/alerts/0",
+    },
+    "type": "GET_ALERT",
   },
 ]
 `;
@@ -34,24 +47,25 @@ Array [
     "meta": Object {
       "method": "GET",
       "showErrorAlert": false,
-      "url": "/labs/alerts",
+      "url": "/v1/alerts",
     },
     "type": "LIST_ALERTS",
   },
 ]
 `;
 
-exports[`Action Creator: Alerts should dispatch a set enabled status action 1`] = `
+exports[`Action Creator: Alerts should dispatch a set muted status action 1`] = `
 Array [
   Object {
     "meta": Object {
       "data": Object {
-        "enabled": false,
+        "muted": false,
       },
+      "id": "alert-id",
       "method": "PUT",
-      "url": "/labs/alerts/alert-id",
+      "url": "/v1/alerts/alert-id",
     },
-    "type": "SET_ALERT_ENABLED_STATUS",
+    "type": "SET_ALERT_MUTED_STATUS",
   },
 ]
 `;
@@ -61,10 +75,10 @@ Array [
   Object {
     "meta": Object {
       "data": Object {
-        "name": "Mock Name",
+        "name": "Updated Name",
       },
       "method": "PUT",
-      "url": "/labs/alerts/alert-id",
+      "url": "/v1/alerts/alert-id",
     },
     "type": "UPDATE_ALERT",
   },

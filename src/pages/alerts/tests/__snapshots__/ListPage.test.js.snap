@@ -5,7 +5,9 @@ exports[`Page: Alerts List should render delete modal 1`] = `
   content={
     <p>
       The alert "
-      <strong />
+      <strong>
+        foo
+      </strong>
       " will be permanently removed. This cannot be undone.
     </p>
   }
@@ -52,24 +54,156 @@ exports[`Page: Alerts List should render happy path 1`] = `
   }
   title="Alerts"
 >
+  <p
+    className="Description"
+  >
+    Use alerts to be notified when important changes occur in your Health Score, bounce rates, and email usage.
+  </p>
+  <h3>
+    Recent Alerts
+  </h3>
+  <Grid>
+    <Grid.Column
+      key="id-1"
+      lg={3}
+      md={6}
+      xs={12}
+    >
+      <Panel
+        accent={true}
+      >
+        <Panel.Section
+          className="LastTriggeredCard"
+        >
+          <div
+            className="LastTriggeredTime"
+          >
+            <DisplayDate
+              formattedDate="Jun 15 2019, 10:48am"
+              timestamp={1560610080000}
+            />
+          </div>
+          <h3>
+            my alert 1
+          </h3>
+        </Panel.Section>
+        <Panel.Section
+          className="Footer"
+        >
+          <Tooltip
+            bottom={true}
+            content="View Details"
+            dark={true}
+            forcePosition={false}
+            horizontalOffset="-8px"
+            preferredDirection={
+              Object {
+                "bottom": true,
+                "left": false,
+                "right": true,
+                "top": false,
+              }
+            }
+            right={true}
+            width="100px"
+          >
+            <Button
+              component={[Function]}
+              flat={true}
+              size="default"
+              to="/alerts/details/id-1"
+            >
+              <RemoveRedEye
+                className="Icon"
+              />
+            </Button>
+          </Tooltip>
+        </Panel.Section>
+      </Panel>
+    </Grid.Column>
+    <Grid.Column
+      key="id-3"
+      lg={3}
+      md={6}
+      xs={12}
+    >
+      <Panel
+        accent={true}
+      >
+        <Panel.Section
+          className="LastTriggeredCard"
+        >
+          <div
+            className="LastTriggeredTime"
+          >
+            <DisplayDate
+              formattedDate="Jun 5 2019, 10:48am"
+              timestamp={1559746080000}
+            />
+          </div>
+          <h3>
+            my alert 3
+          </h3>
+        </Panel.Section>
+        <Panel.Section
+          className="Footer"
+        >
+          <Tooltip
+            bottom={true}
+            content="View Details"
+            dark={true}
+            forcePosition={false}
+            horizontalOffset="-8px"
+            preferredDirection={
+              Object {
+                "bottom": true,
+                "left": false,
+                "right": true,
+                "top": false,
+              }
+            }
+            right={true}
+            width="100px"
+          >
+            <Button
+              component={[Function]}
+              flat={true}
+              size="default"
+              to="/alerts/details/id-3"
+            >
+              <RemoveRedEye
+                className="Icon"
+              />
+            </Button>
+          </Tooltip>
+        </Panel.Section>
+      </Panel>
+    </Grid.Column>
+  </Grid>
   <AlertCollection
     alerts={
       Array [
         Object {
           "id": "id-1",
+          "last_triggered": "2019-06-15T14:48:00.000Z",
+          "metric": "health_score",
           "name": "my alert 1",
         },
         Object {
           "id": "id-2",
+          "last_triggered": null,
+          "metric": "health_score",
           "name": "my alert 2",
         },
         Object {
           "id": "id-3",
+          "last_triggered": "2019-06-05T05:48:00.000Z",
+          "metric": "monthly_sending_limit",
           "name": "my alert 3",
         },
       ]
     }
-    toggleDelete={[Function]}
+    handleDelete={[Function]}
   />
   <DeleteModal
     content={

@@ -1,31 +1,25 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 import { EditPage } from '../EditPage';
+import formatFormValues from '../helpers/formatFormValues';
+import AlertForm from '../components/AlertForm';
+
+jest.mock('../helpers/formatFormValues');
 
 describe('Page: Alerts Edit', () => {
   const props = {
-    getAlert: jest.fn(),
-    updateAlert: jest.fn(),
-    deleteAlert: jest.fn(() => Promise.resolve()),
-    showAlert: jest.fn(),
+    updateAlert: jest.fn(() => Promise.resolve({})),
+    showUIAlert: jest.fn(),
     error: null,
-    history: [],
-    id: 'id-1',
-    alert: {
-      id: 'alert-id',
-      name: 'shortName',
-      email_addresses: 'foo@bar.com',
-      alert_metric: 'signals_health_threshold',
-      threshold: {
-        error: {
-          comparator: 'gt',
-          target: 20
-        }
-      },
-      assignTo: 'subaccount',
-      subaccount: jest.fn()
+    history: {
+      push: jest.fn()
     },
-    loading: false
+    loading: false,
+    getAlert: jest.fn(),
+    getError: undefined,
+    getLoading: undefined,
+    id: 'alert-id-1',
+    alert: {}
   };
 
   let wrapper;
@@ -38,26 +32,26 @@ describe('Page: Alerts Edit', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should render loading component when loading data', () => {
-    wrapper.setProps({ loading: true });
-    expect(wrapper.find('Loading')).toHaveLength(1);
+  it('should render Loading when loading alert', () => {
+    wrapper.setProps({ getLoading: true });
+    expect(wrapper.find('Loading')).toExist();
   });
 
-  it('should render delete modal', () => {
-    wrapper.setState({ showDeleteModal: true });
-    expect(wrapper.find('DeleteModal')).toMatchSnapshot();
+  it('should render Error when there is an error when getting alert', () => {
+    wrapper.setProps({ getError: true });
+    expect(wrapper.find('RedirectAndAlert')).toExist();
   });
 
-  it('should toggle delete modal', () => {
-    expect(wrapper).toHaveState('showDeleteModal', false);
-    wrapper.instance().toggleDelete();
-    expect(wrapper).toHaveState('showDeleteModal', true);
+  it('should get alert when component mounts', () => {
+    wrapper = shallow(<EditPage {...props} id={'alert-id-2'} />);
+    expect(props.getAlert).toHaveBeenCalledWith({ id: 'alert-id-2' });
   });
 
-  it('should handle delete', async () => {
-    await wrapper.instance().handleDelete();
-    expect(props.deleteAlert).toHaveBeenCalledWith({ id: 'alert-id' });
-    expect(props.showAlert).toHaveBeenCalled();
-    expect(props.history[0]).toEqual('/alerts');
+  it('should handle submit', async () => {
+    formatFormValues.mockImplementationOnce((a) => a);
+    await wrapper.find(AlertForm).simulate('submit', { value: 'mock value' });
+    expect(props.updateAlert).toHaveBeenCalledWith({ data: { value: 'mock value' }, id: props.id });
+    expect(props.showUIAlert).toHaveBeenCalled();
+    expect(props.history.push).toHaveBeenCalledWith('/alerts/details/alert-id-1');
   });
 });

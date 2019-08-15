@@ -1,20 +1,18 @@
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
-import { getAlert, updateAlert, deleteAlert } from 'src/actions/alerts';
+import { updateAlert, getAlert } from 'src/actions/alerts';
 import { showAlert } from 'src/actions/globalAlert';
 
-function withAlertsEdit(WrappedComponent) {
-  const mapDispatchToProps = { getAlert, updateAlert, deleteAlert, showAlert };
+function withAlertsUpdate(WrappedComponent) {
+  const mapDispatchToProps = { updateAlert, showUIAlert: showAlert, getAlert };
 
   const mapStateToProps = (state, props) => ({
     id: props.match.params.id,
-    alert: state.alerts.alert,
-    error: state.alerts.getError,
-    loading: state.alerts.getPending,
-    deletePending: state.alerts.deletePending
+    getError: state.alerts.getError,
+    getLoading: state.alerts.getPending,
+    loading: state.alerts.updatePending
   });
 
-  return withRouter(connect(mapStateToProps, mapDispatchToProps)(WrappedComponent));
+  return connect(mapStateToProps, mapDispatchToProps)(WrappedComponent);
 }
 
-export default withAlertsEdit;
+export default withAlertsUpdate;

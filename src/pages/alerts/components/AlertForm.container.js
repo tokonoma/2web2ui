@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { DEFAULT_FORM_VALUES, FORM_NAME } from '../constants/formConstants';
 import validateForm from '../helpers/validateForm';
 import { hasSubaccounts } from 'src/selectors/subaccounts';
-import { selectAlertFormValues } from 'src/selectors/alertsV1';
+import { selectAlertFormValues } from 'src/selectors/alerts';
 
 export default function withAlertForm(WrappedComponent) {
 

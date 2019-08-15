@@ -1,12 +1,11 @@
 const initialState = {
   list: [],
   listPending: true,
-  getPending: true,
   listError: null,
   createPending: false,
   updatePending: false,
   deletePending: false,
-  setEnabledStatusPending: false
+  getPending: false
 };
 
 export default (state = initialState, { type, payload, meta }) => {
@@ -14,24 +13,13 @@ export default (state = initialState, { type, payload, meta }) => {
     /* LIST */
 
     case 'LIST_ALERTS_PENDING':
-      return { ...state, listPending: true, listError: null };
+      return { ...state, listPending: true, listError: null, getError: null };
 
     case 'LIST_ALERTS_FAIL':
       return { ...state, listError: payload, listPending: false };
 
     case 'LIST_ALERTS_SUCCESS':
       return { ...state, list: payload, listPending: false };
-
-      /* GET */
-
-    case 'GET_ALERT_PENDING':
-      return { ...state, getPending: true, getError: null };
-
-    case 'GET_ALERT_FAIL':
-      return { ...state, getPending: false, getError: payload };
-
-    case 'GET_ALERT_SUCCESS':
-      return { ...state, alert: payload, getPending: false };
 
       /* CREATE */
 
@@ -51,13 +39,33 @@ export default (state = initialState, { type, payload, meta }) => {
     case 'UPDATE_ALERT_FAIL':
       return { ...state, updatePending: false };
 
-    // UPDATE single list row enabled status
-    case 'SET_ALERT_ENABLED_STATUS_PENDING':
-      return { ...state, setEnabledStatusPending: true };
+      /* GET */
 
-    case 'SET_ALERT_ENABLED_STATUS_SUCCESS':
-    case 'SET_ALERT_ENABLED_STATUS_FAIL':
-      return { ...state, setEnabledStatusPending: false };
+    case 'GET_ALERT_PENDING':
+      return { ...state, alert: {}, getPending: true, getError: null };
+
+    case 'GET_ALERT_FAIL':
+      return { ...state, getPending: false, getError: payload };
+
+    case 'GET_ALERT_SUCCESS':
+      return { ...state, alert: payload, getPending: false };
+
+    // UPDATE single list row Muted status
+    case 'SET_ALERT_MUTED_STATUS_PENDING':
+      return { ...state, setMutedStatusPending: true };
+
+    case 'SET_ALERT_MUTED_STATUS_SUCCESS': {
+      const { list } = state;
+      const updatedAlertList = list.map((alert) => {
+        if (alert.id === meta.id) {
+          alert.muted = payload.muted;
+        }
+        return alert;
+      });
+      return { ...state, list: updatedAlertList, setMutedStatusPending: false };
+    }
+    case 'SET_ALERT_MUTED_STATUS_FAIL':
+      return { ...state, setMutedStatusPending: false };
 
       /* DELETE */
 
@@ -68,7 +76,6 @@ export default (state = initialState, { type, payload, meta }) => {
       return {
         ...state,
         deletePending: false,
-        // TODO will need to match subaccount id
         list: state.list.filter((a) => a.id !== meta.id)
       };
 

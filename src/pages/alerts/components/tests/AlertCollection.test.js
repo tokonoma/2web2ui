@@ -7,25 +7,33 @@ describe('TestCollection Component', () => {
     alerts: [
       {
         id: 'id-1',
-        enabled: true,
+        muted: true,
         name: 'my alert 1',
-        subaccount_id: 101,
-        alert_metric: 'monthly_sending_limit'
+        metric: 'monthly_sending_limit',
+        last_triggered: null,
+        last_triggered_formatted: null,
+        last_triggered_timestamp: 0
       },
       {
         id: 'id-2',
-        enabled: false,
+        muted: false,
         name: 'my alert 2',
-        alert_metric: 'monthly_sending_limit'
+        metric: 'monthly_sending_limit',
+        last_triggered: '2019-06-05T14:48:00.000Z',
+        last_triggered_formatted: 'Jun 5 2019, 10:48am',
+        last_triggered_timestamp: 1559746080000
       },
       {
         id: 'id-3',
-        enabled: true,
+        muted: true,
         name: 'my alert 3',
-        alert_metric: 'another_metric'
+        metric: 'health_score',
+        last_triggered: '2019-06-015T14:48:00.000Z',
+        last_triggered_formatted: 'Jun 15 2019, 10:48am',
+        last_triggered_timestamp: 1560610080000
       }
     ],
-    toggleDelete: jest.fn()
+    handleDelete: jest.fn()
   };
 
   let wrapper;
@@ -45,9 +53,10 @@ describe('TestCollection Component', () => {
     });
   });
 
-  it('should toggleDelete', () => {
-    const actionCol = shallow(wrapper.instance().getRowData(props.alerts[0]).pop());
-    actionCol.find('ActionList').prop('actions')[1].onClick();
-    expect(props.toggleDelete).toHaveBeenCalledWith({ id: 'id-1', subaccount_id: 101, name: 'my alert 1' });
+  it('should handleDelete', () => {
+    const Component = () => wrapper.instance().getRowData(props.alerts[0]).pop();
+    const actionCol = shallow(<Component />);
+    actionCol.find('Button').simulate('click');
+    expect(props.handleDelete).toHaveBeenCalledWith({ id: 'id-1', name: 'my alert 1' });
   });
 });

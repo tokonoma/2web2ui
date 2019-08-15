@@ -5,39 +5,37 @@ exports[`TestCollection Component should render 1`] = `
   columns={
     Array [
       Object {
-        "label": "Name",
+        "label": "Alert Name",
         "sortKey": "name",
-        "width": "25%",
+        "width": "40%",
       },
       Object {
         "label": "Metric",
-        "sortKey": "alert_metric",
+        "sortKey": "metric",
       },
       Object {
-        "label": "Enabled",
-        "sortKey": "enabled",
+        "label": "Last Triggered",
+        "sortKey": "last_triggered_timestamp",
+      },
+      Object {
+        "label": "Mute",
+        "sortKey": "muted",
       },
       null,
     ]
   }
-  defaultSortColumn="name"
+  defaultSortColumn="last_triggered_timestamp"
   defaultSortDirection="desc"
   filterBox={
     Object {
       "exampleModifiers": Array [
-        "enabled",
-        "metric",
+        "name",
       ],
       "itemToStringKeys": Array [
         "name",
-        "id",
-        "enabled",
-        "metric",
       ],
-      "keyMap": Object {
-        "metric": "alert_metric",
-      },
       "show": true,
+      "wrapper": [Function],
     }
   }
   getRowData={[Function]}
@@ -45,209 +43,183 @@ exports[`TestCollection Component should render 1`] = `
   rows={
     Array [
       Object {
-        "alert_metric": "monthly_sending_limit",
-        "enabled": true,
         "id": "id-1",
+        "last_triggered": null,
+        "last_triggered_formatted": null,
+        "last_triggered_timestamp": 0,
+        "metric": "monthly_sending_limit",
+        "muted": true,
         "name": "my alert 1",
-        "subaccount_id": 101,
       },
       Object {
-        "alert_metric": "monthly_sending_limit",
-        "enabled": false,
         "id": "id-2",
+        "last_triggered": "2019-06-05T14:48:00.000Z",
+        "last_triggered_formatted": "Jun 5 2019, 10:48am",
+        "last_triggered_timestamp": 1559746080000,
+        "metric": "monthly_sending_limit",
+        "muted": false,
         "name": "my alert 2",
       },
       Object {
-        "alert_metric": "another_metric",
-        "enabled": true,
         "id": "id-3",
+        "last_triggered": "2019-06-015T14:48:00.000Z",
+        "last_triggered_formatted": "Jun 15 2019, 10:48am",
+        "last_triggered_timestamp": 1560610080000,
+        "metric": "health_score",
+        "muted": true,
         "name": "my alert 3",
       },
     ]
   }
-/>
+  wrapperComponent={[Function]}
+>
+  <Component />
+</TableCollection>
 `;
 
 exports[`TestCollection Component should render row data properly 1`] = `
 Array [
-  <React.Fragment>
-    <PageLink
-      to="/alerts/edit/id-1?subaccount=101"
-    >
-      my alert 1
-    </PageLink>
-  </React.Fragment>,
+  <PageLink
+    className="AlertNameLink"
+    to="/alerts/details/id-1"
+  >
+    my alert 1
+  </PageLink>,
   <Tag>
     Monthly Sending Limit
   </Tag>,
-  <Connect(AlertToggle)
-    enabled={true}
-    id="id-1"
-    subaccountId={101}
+  <DisplayDate
+    formattedDate="Never Triggered"
+    timestamp={0}
   />,
-  <div
-    style={
+  <Connect(AlertToggle)
+    id="id-1"
+    muted={true}
+  />,
+  <Tooltip
+    bottom={true}
+    content="Delete"
+    dark={true}
+    forcePosition={false}
+    horizontalOffset="-8px"
+    preferredDirection={
       Object {
-        "textAlign": "right",
+        "bottom": true,
+        "left": false,
+        "right": true,
+        "top": false,
       }
     }
+    right={true}
+    width="auto"
   >
-    <Popover
-      bottom={true}
-      left={true}
-      right={true}
-      trigger={
-        <Button
-          flat={true}
-          size="large"
-        >
-          <MoreHoriz
-            size={21}
-          />
-        </Button>
-      }
+    <Button
+      flat={true}
+      onClick={[Function]}
+      size="default"
     >
-      <ActionList
-        actions={
-          Array [
-            Object {
-              "component": [Function],
-              "content": "Edit Alert",
-              "section": 1,
-              "to": "/alerts/edit/id-1?subaccount=101",
-            },
-            Object {
-              "content": "Delete Alert",
-              "onClick": [Function],
-              "section": 2,
-            },
-          ]
-        }
-        groupByKey="section"
+      <Delete
+        className="Icon"
       />
-    </Popover>
-  </div>,
+    </Button>
+  </Tooltip>,
 ]
 `;
 
 exports[`TestCollection Component should render row data properly 2`] = `
 Array [
-  <React.Fragment>
-    <PageLink
-      to="/alerts/edit/id-2"
-    >
-      my alert 2
-    </PageLink>
-  </React.Fragment>,
+  <PageLink
+    className="AlertNameLink"
+    to="/alerts/details/id-2"
+  >
+    my alert 2
+  </PageLink>,
   <Tag>
     Monthly Sending Limit
   </Tag>,
-  <Connect(AlertToggle)
-    enabled={false}
-    id="id-2"
+  <DisplayDate
+    formattedDate="Jun 5 2019, 10:48am"
+    timestamp={1559746080000}
   />,
-  <div
-    style={
+  <Connect(AlertToggle)
+    id="id-2"
+    muted={false}
+  />,
+  <Tooltip
+    bottom={true}
+    content="Delete"
+    dark={true}
+    forcePosition={false}
+    horizontalOffset="-8px"
+    preferredDirection={
       Object {
-        "textAlign": "right",
+        "bottom": true,
+        "left": false,
+        "right": true,
+        "top": false,
       }
     }
+    right={true}
+    width="auto"
   >
-    <Popover
-      bottom={true}
-      left={true}
-      right={true}
-      trigger={
-        <Button
-          flat={true}
-          size="large"
-        >
-          <MoreHoriz
-            size={21}
-          />
-        </Button>
-      }
+    <Button
+      flat={true}
+      onClick={[Function]}
+      size="default"
     >
-      <ActionList
-        actions={
-          Array [
-            Object {
-              "component": [Function],
-              "content": "Edit Alert",
-              "section": 1,
-              "to": "/alerts/edit/id-2",
-            },
-            Object {
-              "content": "Delete Alert",
-              "onClick": [Function],
-              "section": 2,
-            },
-          ]
-        }
-        groupByKey="section"
+      <Delete
+        className="Icon"
       />
-    </Popover>
-  </div>,
+    </Button>
+  </Tooltip>,
 ]
 `;
 
 exports[`TestCollection Component should render row data properly 3`] = `
 Array [
-  <React.Fragment>
-    <PageLink
-      to="/alerts/edit/id-3"
-    >
-      my alert 3
-    </PageLink>
-  </React.Fragment>,
+  <PageLink
+    className="AlertNameLink"
+    to="/alerts/details/id-3"
+  >
+    my alert 3
+  </PageLink>,
   <Tag>
-    another_metric
+    Health Score
   </Tag>,
-  <Connect(AlertToggle)
-    enabled={true}
-    id="id-3"
+  <DisplayDate
+    formattedDate="Jun 15 2019, 10:48am"
+    timestamp={1560610080000}
   />,
-  <div
-    style={
+  <Connect(AlertToggle)
+    id="id-3"
+    muted={true}
+  />,
+  <Tooltip
+    bottom={true}
+    content="Delete"
+    dark={true}
+    forcePosition={false}
+    horizontalOffset="-8px"
+    preferredDirection={
       Object {
-        "textAlign": "right",
+        "bottom": true,
+        "left": false,
+        "right": true,
+        "top": false,
       }
     }
+    right={true}
+    width="auto"
   >
-    <Popover
-      bottom={true}
-      left={true}
-      right={true}
-      trigger={
-        <Button
-          flat={true}
-          size="large"
-        >
-          <MoreHoriz
-            size={21}
-          />
-        </Button>
-      }
+    <Button
+      flat={true}
+      onClick={[Function]}
+      size="default"
     >
-      <ActionList
-        actions={
-          Array [
-            Object {
-              "component": [Function],
-              "content": "Edit Alert",
-              "section": 1,
-              "to": "/alerts/edit/id-3",
-            },
-            Object {
-              "content": "Delete Alert",
-              "onClick": [Function],
-              "section": 2,
-            },
-          ]
-        }
-        groupByKey="section"
+      <Delete
+        className="Icon"
       />
-    </Popover>
-  </div>,
+    </Button>
+  </Tooltip>,
 ]
 `;

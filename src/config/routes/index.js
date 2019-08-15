@@ -42,7 +42,7 @@ import SecretBillingPlanOrBillingSummaryPage from '../SecretBillingPlanOrBilling
 
 import { all, hasGrants, not } from 'src/helpers/conditions';
 import { isAws, isCustomBilling, isEnterprise, isSelfServeBilling } from 'src/helpers/conditions/account';
-import { isAzure, isHeroku, isSubaccountUser, isUserUiOptionSet } from 'src/helpers/conditions/user';
+import { isAzure, isHeroku, isSubaccountUser } from 'src/helpers/conditions/user';
 import { configEquals, configFlag } from 'src/helpers/conditions/config';
 import App from 'src/components/layout/App';
 import LargeForm from 'src/components/layout/LargeForm';
@@ -665,35 +665,19 @@ const routes = [
     supportDocsSearch: 'Alerts'
   },
   {
-    path: '/alerts-new',
-    component: alerts.ListPageNew,
-    condition: isUserUiOptionSet('alerts'),
-    layout: App,
-    title: 'Alerts',
-    supportDocsSearch: 'Alerts'
-  },
-  {
-    path: '/alerts-new/details/:id',
+    path: '/alerts/details/:id',
     component: alerts.DetailsPage,
-    condition: isUserUiOptionSet('alerts'),
+    condition: hasGrants('alerts/manage'),
     layout: App,
     title: 'View Details',
     supportDocsSearch: 'Alerts'
   },
   {
-    path: '/alerts-new/create/:id?',
-    component: alerts.CreatePageNew,
-    condition: isUserUiOptionSet('alerts'),
+    path: '/alerts/create/:id?',
+    component: alerts.CreatePage,
+    condition: hasGrants('alerts/manage'),
     layout: App,
     title: 'Create Alert',
-    supportDocsSearch: 'Alerts'
-  },
-  {
-    path: '/alerts-new/edit/:id',
-    component: alerts.EditPageNew,
-    condition: isUserUiOptionSet('alerts'),
-    layout: App,
-    title: 'Edit Alert',
     supportDocsSearch: 'Alerts'
   },
   {
@@ -702,14 +686,6 @@ const routes = [
     condition: hasGrants('alerts/manage'),
     layout: App,
     title: 'Edit Alert',
-    supportDocsSearch: 'Alerts'
-  },
-  {
-    path: '/alerts/create',
-    component: alerts.CreatePage,
-    condition: hasGrants('alerts/manage'),
-    layout: App,
-    title: 'Create Alert',
     supportDocsSearch: 'Alerts'
   },
   {

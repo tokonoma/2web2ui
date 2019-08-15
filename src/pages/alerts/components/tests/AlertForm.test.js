@@ -1,6 +1,12 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 import { AlertForm } from '../AlertForm';
+import { DEFAULT_FORM_VALUES } from '../../constants/formConstants';
+import * as alertFormHelper from '../../helpers/alertForm';
+import SubaccountField from '../../components/fields/SubaccountsField';
+import FilterFields from '../../components/fields/FilterFields';
+import EvaluatorFields from '../../components/fields/EvaluatorFields';
+
 
 describe('Alert Form Component', () => {
   let props;
@@ -8,24 +14,18 @@ describe('Alert Form Component', () => {
 
   beforeEach(() => {
     props = {
+      ...DEFAULT_FORM_VALUES,
       handleSubmit: jest.fn(),
       submitting: false,
+      hasSubaccounts: true,
       name: 'shortname',
       pristine: true,
-      newAlert: false,
-      assignTo: 'master',
-      threshold: {
-        error: {
-          comparator: 'lt',
-          target: 50
-        }
-      },
-      ipPools: [{ id: 'someIpPool' }, { id: 'someOtherIpPool' }],
-      alert_metric: 'signals_health_threshold',
-      facet_name: 'sending_domain',
-      enabled: true,
-      listPools: jest.fn(),
-      change: jest.fn()
+      invalid: false,
+      metric: 'health_score',
+      change: jest.fn(),
+      formMeta: {},
+      formErrors: {},
+      isNewAlert: true
     };
 
     wrapper = shallow(<AlertForm {...props} />);
@@ -38,133 +38,93 @@ describe('Alert Form Component', () => {
   it('should handle submit', () => {
     wrapper.find('Form').simulate('submit');
     expect(props.handleSubmit).toHaveBeenCalled();
-    expect(wrapper).toMatchSnapshot();
   });
 
-  describe('account/subaccount props', () => {
-    it('should show subaccount typeahead when assignTo is set to subaccount', () => {
-      wrapper.setProps({ assignTo: 'subaccount' });
-      expect(wrapper.find({ name: 'subaccount' })).toExist();
-      wrapper.setProps({ assignTo: 'master' });
-      expect(wrapper.find({ name: 'subaccount' })).not.toExist();
-    });
+  it('should reset form values when changing metric', () => {
+    wrapper.find({ name: 'metric' }).simulate('change', { target: { value: 'block_bounce_rate' }});
+    expect(wrapper.instance().props.change).toHaveBeenCalledTimes(6);//4 filters + 2 default values ;
   });
 
-  describe('facet props', () => {
-    it('should only show facets select when alert_metric is NOT set to monthly_sending_limit', () => {
-      wrapper.setProps({ alert_metric: 'monthly_sending_limit' });
-      expect(wrapper.find({ name: 'facet_value' })).not.toExist();
-      wrapper.setProps({ alert_metric: 'signals_health_threshold' });
-      expect(wrapper.find({ name: 'facet_value' }).props().connectLeft.props.name).toEqual('facet_name');
-    });
-
-    it('should only show facets select when assignTo is NOT set to all', () => {
-      wrapper.setProps({ assignTo: 'all' });
-      expect(wrapper.find({ name: 'facet_value' })).not.toExist();
-      wrapper.setProps({ assignTo: 'master' });
-      expect(wrapper.find({ name: 'facet_value' }).props().connectLeft.props.name).toEqual('facet_name');
-    });
-
-    it('should show sending domain facets textfield component with correct props when facet_name is set to sending_domain', () => {
-      wrapper.setProps({ facet_value: 'blah' });
-      const field = wrapper.find({ name: 'facet_value' });
-      expect(field.prop('component').name).toEqual('TextFieldWrapper');
-      expect(field.prop('items')).toEqual(null);
-      expect(field.prop('placeholder')).toEqual('mail.example.com');
-    });
-
-    it('should validate domain', () => {
-      wrapper.setProps({ facet_value: 'blah' });
-      const validate = wrapper.find({ name: 'facet_value' }).prop('validate');
-      expect(validate('foo', { facet_name: 'sending_domain' })).toEqual('Invalid Domain');
-      expect(validate('foo.co', { facet_name: 'sending_domain' })).toBe(undefined);
-    });
-
-    it('should show warning if no ip pools', () => {
-      wrapper.setProps({ facet_name: 'ip_pool', ipPools: []});
-      expect(wrapper.find({ name: 'facet_value' }).props()).toMatchSnapshot();
-    });
-
-    it('should show ip pool facets typeahead component with correct props when facet_name is set to ip_pool', () => {
-      wrapper.setProps({ facet_name: 'ip_pool', facet_value: 'blah' });
-      expect(wrapper.find({ name: 'facet_value' }).prop('component').name).toEqual('MultiFacetWrapper');
-      expect(wrapper.find({ name: 'facet_value' }).props()).toMatchSnapshot();
-    });
-
-    it('should clear facet_value and validation when facet_name is set to ip pool and signals threshold', () => {
-      wrapper.setProps({ facet_name: 'ip_pool' });
-      expect(props.change).toHaveBeenCalled();
-    });
+  it('should show filters when metric has filters', () => {
+    jest.spyOn(alertFormHelper, 'getFormSpec').mockImplementationOnce(() => ({ hasFilters: true }));
+    wrapper = shallow(<AlertForm {...props} />);
+    expect(wrapper.find(SubaccountField)).toExist();
+    expect(wrapper.find(FilterFields)).toExist();
   });
 
-  describe('criteria props', () => {
-    it('should only show comparator select when alert_metric is set to signals_health_threshold', () => {
-      wrapper.setProps({ alert_metric: 'monthly_sending_limit' });
-      expect(wrapper.find({ name: 'threshold.error.target' }).props().connectLeft).toEqual(false);
-      wrapper.setProps({ alert_metric: 'signals_health_threshold' });
-      expect(wrapper.find({ name: 'threshold.error.target' }).props().connectLeft.props.name).toEqual('threshold.error.comparator');
-    });
-
-    it('should add prefix and suffix to target when alert_metric is NOT set to signals_health_threshold', () => {
-      wrapper.setProps({ alert_metric: 'monthly_sending_limit' });
-      expect(wrapper.find({ name: 'threshold.error.target' }).props()).toMatchSnapshot();
-      wrapper.setProps({ alert_metric: 'signals_health_threshold' });
-      expect(wrapper.find({ name: 'threshold.error.target' }).props()).toMatchSnapshot();
-      wrapper.setProps({ alert_metric: 'signals_health_wow' });
-      expect(wrapper.find({ name: 'threshold.error.target' }).props()).toMatchSnapshot();
-    });
-
-    it('should validate target when alert_metric is set to signals_health_threshold', () => {
-      wrapper.setProps({ threshold: { error: { target: 500 }}});
-      expect(wrapper.find({ name: 'threshold.error.target' }).props().validate[0]()).toEqual('Required');
-      expect(wrapper.find({ name: 'threshold.error.target' }).props().validate[1]()).toEqual('Must be between 0 and 100');
-    });
-
-    it('should validate target when alert_metric is set to monthly_sending_limit', () => {
-      wrapper.setProps({ alert_metric: 'monthly_sending_limit' });
-      expect(wrapper.find({ name: 'threshold.error.target' }).props().validate[0]()).toEqual('Required');
-      expect(wrapper.find({ name: 'threshold.error.target' }).props().validate[1]()).toEqual('Integers only please');
-    });
-
-    it('should validate target when alert_metric is set to signals_health_dod or signals_health_wow', () => {
-      wrapper.setProps({ alert_metric: 'signals_health_wow' });
-      expect(wrapper.find({ name: 'threshold.error.target' }).props().validate[1]()).toEqual('Integers only please');
-      wrapper.setProps({ alert_metric: 'signals_health_dod' });
-      expect(wrapper.find({ name: 'threshold.error.target' }).props().validate[1]()).toEqual('Integers only please');
-    });
-
-    it('should normalize target', () => {
-      const normalize = wrapper.find({ name: 'threshold.error.target' }).props().normalize;
-      expect(normalize(1, null, { alert_metric: 'signals_health_wow' })).toEqual(1);
-      expect(normalize(-1, null, { alert_metric: 'signals_health_wow' })).toEqual(1);
-      expect(normalize(1, null, { alert_metric: 'monthly_sending_limit' })).toEqual(1);
-    });
+  it('should not show filters when metric has no filters', () => {
+    jest.spyOn(alertFormHelper, 'getFormSpec').mockImplementationOnce(() => ({ hasFilters: false }));
+    wrapper = shallow(<AlertForm {...props} />);
+    expect(wrapper.find(SubaccountField)).not.toExist();
+    expect(wrapper.find(FilterFields)).not.toExist();
   });
 
-  describe('enabled prop', () => {
-    it('should only show enabled toggle on edit page', () => {
-      wrapper.setProps({ alert_metric: 'signals_health_threshold', newAlert: true });
-      expect(wrapper).toMatchSnapshot();
-      wrapper.setProps({ newAlert: false });
-      expect(wrapper).toMatchSnapshot();
-    });
+  it('should not show subaccounts when user has no subaccounts', () => {
+    jest.spyOn(alertFormHelper, 'getFormSpec').mockImplementationOnce(() => ({ hasFilters: true }));
+    wrapper = shallow(<AlertForm {...props} hasSubaccounts={false} />);
+    expect(wrapper.find(SubaccountField)).not.toExist();
+    expect(wrapper.find(FilterFields)).toExist();
   });
 
-  describe('submit button props', () => {
-    it('should render submit text', () => {
-      wrapper.setProps({ newAlert: true });
-      expect(wrapper.find('Button').props().children).not.toEqual('Update Alert');
-      wrapper.setProps({ newAlert: false });
+  it('should show evaluator Fields when metric selected', () => {
+    wrapper.setProps({ metric: 'health_score' });
+    expect(wrapper.find(EvaluatorFields)).toExist();
+  });
+
+  it('should not show evaluator Fields when metric is the default "Select Metric" option', () => {
+    wrapper.setProps({ metric: '' });
+    expect(wrapper.find(EvaluatorFields)).not.toExist();
+  });
+
+  it('should show error when every notification channel is empty', () => {
+    const formMeta = { emails: { touched: true }};
+    const formErrors = { emails: 'At least one notification channel must not be empty' };
+    wrapper.setProps({ formMeta, formErrors });
+    expect(wrapper.find('Error')).toExist();
+  });
+
+  describe('submit button', () => {
+
+    const defaultFormState = {
+      pristine: false,
+      submitting: false,
+      isDuplicate: false
+    };
+
+    it('should disable submit button when form is pristine', () => {
+      wrapper.setProps(defaultFormState);
+      expect(wrapper.find('Button')).toHaveProp('disabled', false);
+      wrapper.setProps({ pristine: true });
+      expect(wrapper.find('Button')).toHaveProp('disabled', true);
+    });
+
+    it('should disable submit button when form is submitting', () => {
+      wrapper.setProps(defaultFormState);
+      expect(wrapper.find('Button')).toHaveProp('disabled', false);
+      wrapper.setProps({ submitting: true });
+      expect(wrapper.find('Button')).toHaveProp('disabled', true);
+    });
+
+    it('should enable submit button when form is pristine but it is a duplicate', () => {
+      wrapper.setProps(defaultFormState);
+      expect(wrapper.find('Button')).toHaveProp('disabled', false);
+      wrapper.setProps({ pristine: true, isDuplicate: true });
+      expect(wrapper.find('Button')).toHaveProp('disabled', false);
+    });
+
+    it('should display Submitting when submitting ', () => {
+      wrapper.setProps({ submitting: true });
+      expect(wrapper.find('Button').props().children).toEqual('Submitting...');
+    });
+
+    it('should display Create Alert when it is new alert', () => {
+      wrapper.setProps({ ...defaultFormState, isNewAlert: true });
+      expect(wrapper.find('Button').props().children).toEqual('Create Alert');
+    });
+
+    it('should display Update Alert when it is editing alert', () => {
+      wrapper.setProps({ ...defaultFormState, isNewAlert: false });
       expect(wrapper.find('Button').props().children).toEqual('Update Alert');
-    });
-
-    it('should disable submit button when pristine or submitting', () => {
-      wrapper.setProps({ pristine: true, submitting: false });
-      expect(wrapper.find('Button').props().disabled).toEqual(true);
-      wrapper.setProps({ pristine: false, submitting: false });
-      expect(wrapper.find('Button').props().disabled).toEqual(false);
-      wrapper.setProps({ pristine: false, submitting: true });
-      expect(wrapper.find('Button').props().disabled).toEqual(true);
     });
   });
 });

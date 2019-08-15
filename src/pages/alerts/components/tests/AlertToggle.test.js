@@ -5,10 +5,9 @@ import { AlertToggle } from '../AlertToggle';
 describe('AlertToggle Component', () => {
   const props = {
     id: 'mock-id',
-    subaccountId: 101,
-    enabled: true,
+    muted: false,
     pending: false,
-    setEnabledStatus: jest.fn(),
+    setMutedStatus: jest.fn(),
     showAlert: jest.fn()
   };
 
@@ -17,7 +16,7 @@ describe('AlertToggle Component', () => {
   it('should render initial state', () => {
     const wrapper = subject();
     expect(wrapper).toMatchSnapshot();
-    expect(wrapper.find('Toggle')).toBeChecked();
+    expect(wrapper.find('Toggle')).not.toBeChecked();
   });
 
   it('should render pending state', () => {
@@ -26,15 +25,14 @@ describe('AlertToggle Component', () => {
   });
 
   it('should handle a successful toggle', async () => {
-    const setEnabledStatus = jest.fn(() => Promise.resolve());
-    const wrapper = subject({ setEnabledStatus });
+    const setMutedStatus = jest.fn(() => Promise.resolve());
+    const wrapper = subject({ setMutedStatus });
 
     await wrapper.find('Toggle').prop('onChange')();
 
-    expect(setEnabledStatus).toHaveBeenCalledWith({
-      enabled: false,
-      id: 'mock-id',
-      subaccountId: 101
+    expect(setMutedStatus).toHaveBeenCalledWith({
+      muted: true,
+      id: 'mock-id'
     });
 
     expect(props.showAlert).toHaveBeenCalledWith({
@@ -42,19 +40,18 @@ describe('AlertToggle Component', () => {
       type: 'success'
     });
 
-    expect(wrapper.find('Toggle')).not.toBeChecked();
+    expect(wrapper.find('Toggle')).toBeChecked();
   });
 
   it('should handle a failed toggle', async () => {
-    const setEnabledStatus = jest.fn(() => Promise.reject());
-    const wrapper = subject({ setEnabledStatus, enabled: false });
+    const setMutedStatus = jest.fn(() => Promise.reject());
+    const wrapper = subject({ setMutedStatus });
 
     await wrapper.find('Toggle').prop('onChange')();
 
-    expect(setEnabledStatus).toHaveBeenCalledWith({
-      enabled: true,
-      id: 'mock-id',
-      subaccountId: 101
+    expect(setMutedStatus).toHaveBeenCalledWith({
+      muted: true,
+      id: 'mock-id'
     });
 
     expect(wrapper.find('Toggle')).not.toBeChecked();

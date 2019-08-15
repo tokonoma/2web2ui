@@ -11,15 +11,39 @@ describe('Page: Alerts List', () => {
     alerts: [
       {
         id: 'id-1',
-        name: 'my alert 1'
+        name: 'my alert 1',
+        metric: 'health_score',
+        last_triggered: '2019-06-15T14:48:00.000Z'
       },
       {
         id: 'id-2',
-        name: 'my alert 2'
+        name: 'my alert 2',
+        metric: 'health_score',
+        last_triggered: null
       },
       {
         id: 'id-3',
-        name: 'my alert 3'
+        name: 'my alert 3',
+        metric: 'monthly_sending_limit',
+        last_triggered: '2019-06-05T05:48:00.000Z'
+      }
+    ],
+    recentlyTriggeredAlerts: [
+      {
+        id: 'id-1',
+        name: 'my alert 1',
+        metric: 'health_score',
+        last_triggered: '2019-06-15T14:48:00.000Z',
+        last_triggered_formatted: 'Jun 15 2019, 10:48am',
+        last_triggered_timestamp: 1560610080000
+      },
+      {
+        id: 'id-3',
+        name: 'my alert 3',
+        metric: 'monthly_sending_limit',
+        last_triggered: '2019-06-05T05:48:00.000Z',
+        last_triggered_formatted: 'Jun 5 2019, 10:48am',
+        last_triggered_timestamp: 1559746080000
       }
     ],
     loading: false
@@ -46,22 +70,29 @@ describe('Page: Alerts List', () => {
   });
 
   it('should render delete modal', () => {
-    wrapper.setState({ showDeleteModal: true });
+    wrapper.setState({ alertToDelete: { id: 1, name: 'foo' }});
     expect(wrapper.find('DeleteModal')).toMatchSnapshot();
   });
 
+  it('should render last triggered cards correctly in order', () => {
+    const { recentlyTriggeredAlerts } = props;
+    const panel = wrapper.find('Panel');
+    expect(panel).toHaveLength(2);
+    expect(panel.first().find('h3').prop('children')).toEqual(recentlyTriggeredAlerts[0].name);
+    expect(panel.last().find('h3').prop('children')).toEqual(recentlyTriggeredAlerts[1].name);
+  });
+
   it('should toggle delete modal', () => {
-    expect(wrapper).toHaveState('showDeleteModal', false);
     expect(wrapper).toHaveState('alertToDelete', {});
-    wrapper.instance().toggleDelete({ id: 'test-id', subaccount_id: 101, name: 'mock name' });
-    expect(wrapper).toHaveState('showDeleteModal', true);
-    expect(wrapper).toHaveState('alertToDelete', { id: 'test-id', subaccountId: 101, name: 'mock name' });
+    wrapper.instance().openDeleteModal({ id: 'test-id', name: 'mock name' });
+    expect(wrapper).toHaveState('alertToDelete', { id: 'test-id', name: 'mock name' });
+    expect(wrapper.find('DeleteModal').prop('open')).toEqual(true);
   });
 
   it('should handle delete', async () => {
-    wrapper.setState({ 'alertToDelete': { id: 'alert-id', subaccountId: 202 }});
+    wrapper.setState({ 'alertToDelete': { id: 'alert-id' }});
     await wrapper.instance().handleDelete();
-    expect(props.deleteAlert).toHaveBeenCalledWith({ id: 'alert-id', subaccountId: 202 });
+    expect(props.deleteAlert).toHaveBeenCalledWith({ id: 'alert-id' });
     expect(props.showAlert).toHaveBeenCalled();
   });
 });

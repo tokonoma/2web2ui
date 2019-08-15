@@ -1,76 +1,88 @@
-import React, { Component, Fragment } from 'react';
-import { Link } from 'react-router-dom';
-import { setSubaccountQuery } from 'src/helpers/subaccounts';
-import { ActionList, Button, Popover, Tag } from '@sparkpost/matchbox';
-import { TableCollection, PageLink } from 'src/components';
+import React, { Component } from 'react';
+import { Button, Table, Tag, Panel, Tooltip } from '@sparkpost/matchbox';
+import { TableCollection, PageLink, DisplayDate } from 'src/components';
 import AlertToggle from './AlertToggle';
-import { MoreHoriz } from '@sparkpost/matchbox-icons';
-import { METRICS } from '../constants/metrics';
-import _ from 'lodash';
+import { Delete } from '@sparkpost/matchbox-icons';
+import { METRICS } from '../constants/formConstants';
+import styles from './AlertCollection.module.scss';
 
 const filterBoxConfig = {
   show: true,
-  exampleModifiers: ['enabled', 'metric'],
-  itemToStringKeys: ['name', 'id', 'enabled', 'metric'],
-  keyMap: { metric: 'alert_metric' }
+  exampleModifiers: ['name'],
+  itemToStringKeys: ['name'],
+  wrapper: (props) => (
+    <div className = {styles.FilterBox}>
+      {props}
+    </div>)
 };
 
 class AlertCollection extends Component {
-  getDetailsLink = ({ id, subaccount_id }) => `/alerts/edit/${id}${setSubaccountQuery(subaccount_id)}`
+
+  getDetailsLink = ({ id }) => `/alerts/details/${id}`;
 
   getColumns() {
     const columns = [
-      { label: 'Name', sortKey: 'name', width: '25%' },
-      { label: 'Metric', sortKey: 'alert_metric' },
-      { label: 'Enabled', sortKey: 'enabled' },
+      { label: 'Alert Name', sortKey: 'name', width: '40%' },
+      { label: 'Metric', sortKey: 'metric' },
+      { label: 'Last Triggered', sortKey: 'last_triggered_timestamp' },
+      { label: 'Mute', sortKey: 'muted' },
       null
     ];
 
     return columns;
   }
 
-  getRowData = ({ alert_metric, enabled, id, name, subaccount_id }) => {
-    const actions = [
-      {
-        content: 'Edit Alert',
-        to: this.getDetailsLink({ id, subaccount_id }),
-        component: Link,
-        section: 1
-      },
-      {
-        content: 'Delete Alert',
-        onClick: () => this.props.toggleDelete({ id, name, subaccount_id }),
-        section: 2
-      }
-    ];
-
+  getRowData = ({ metric, muted, id, name, last_triggered_timestamp, last_triggered_formatted }) => {
+    const deleteFn = () => this.props.handleDelete({ id, name });
     return [
-      <Fragment>
-        <PageLink to={this.getDetailsLink({ id, subaccount_id })}>{name}</PageLink>
-      </Fragment>,
-      <Tag>{_.get(METRICS, alert_metric, alert_metric)}</Tag>,
-      <AlertToggle enabled={enabled} id={id} subaccountId={subaccount_id} />,
-      <div style={{ textAlign: 'right' }}>
-        <Popover left trigger={<Button flat size='large'><MoreHoriz size={21}/></Button>}>
-          <ActionList actions={actions}/>
-        </Popover>
-      </div>
+      <PageLink to={this.getDetailsLink({ id })} className={styles.AlertNameLink}>{name}</PageLink>,
+      <Tag>{METRICS[metric]}</Tag>,
+      <DisplayDate timestamp={last_triggered_timestamp} formattedDate={last_triggered_formatted || 'Never Triggered'} />,
+      <AlertToggle muted={muted} id={id} />,
+      <Tooltip dark content='Delete' width='auto' horizontalOffset='-8px'>
+        <Button flat onClick={deleteFn}>
+          <Delete className={styles.Icon}/>
+        </Button>
+      </Tooltip>
     ];
   }
+
+  TableWrapper = (props) => (
+    <>
+      <div className={styles.TableWrapper}>
+        <Table>{props.children}</Table>
+      </div>
+    </>
+  );
 
   render() {
     const { alerts } = this.props;
 
     return (
       <TableCollection
+        wrapperComponent={this.TableWrapper}
         columns={this.getColumns()}
         rows={alerts}
         getRowData={this.getRowData}
         pagination={true}
         filterBox={filterBoxConfig}
-        defaultSortColumn='name'
+        defaultSortColumn='last_triggered_timestamp'
         defaultSortDirection='desc'
-      />
+      >
+        {
+          ({ filterBox, collection, pagination }) =>
+            <>
+            <Panel >
+              <Panel.Section>
+                <h3>All Alerts</h3>
+              </Panel.Section>
+              {filterBox}
+              {collection}
+            </Panel>
+            {pagination}
+          </>
+        }
+      </TableCollection>
     );
   }
 }
