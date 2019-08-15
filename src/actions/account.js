@@ -38,7 +38,7 @@ export function getBillingInfo({ meta = {}} = {}) {
     type: 'GET_BILLING',
     meta: {
       method: 'GET',
-      url: '/v1/billing',
+      url: '/v1/account/billing',
       ...meta
     }
   });
