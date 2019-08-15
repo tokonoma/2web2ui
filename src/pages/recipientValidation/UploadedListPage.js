@@ -6,7 +6,7 @@ import ListProgress from './components/ListProgress';
 import { formatDate, formatTime } from 'src/helpers/date';
 import { connect } from 'react-redux';
 import { showAlert } from 'src/actions/globalAlert';
-import { getJobStatusMock, triggerJob } from 'src/actions/recipientValidation';
+import { getJobStatus, triggerJob } from 'src/actions/recipientValidation';
 import { getUsage } from 'src/actions/account';
 import _ from 'lodash';
 import Loading from 'src/components/loading';
@@ -18,9 +18,8 @@ import { selectRecipientValidationJobById } from 'src/selectors/recipientValidat
 export class UploadedListPage extends Component {
 
   componentDidMount() {
-    const { getJobStatusMock, getUsage, listId, history, startPolling } = this.props;
-    // TODO: Replace action with real action (and update test)
-    getJobStatusMock(listId).then(({ batch_status, complete }) => {
+    const { getJobStatus, getUsage, listId, history, startPolling } = this.props;
+    getJobStatus(listId).then(({ batch_status, complete }) => {
       if (batch_status !== 'queued_for_batch' && !complete) {
         startPolling({
           key: listId,
@@ -46,9 +45,9 @@ export class UploadedListPage extends Component {
   }
 
   handlePoll = (id) => {
-    const { showAlert, getJobStatusMock, stopPolling } = this.props;
-    //TODO: replace action with real action
-    return getJobStatusMock(id).then(({ complete, batch_status }) => {
+    const { showAlert, getJobStatus, stopPolling } = this.props;
+
+    return getJobStatus(id).then(({ complete, batch_status }) => {
       if (batch_status === 'queued_for_batch') {
         stopPolling(id);
       }
@@ -123,4 +122,4 @@ const mapStateToProps = (state, props) => {
   };
 };
 
-export default withRouter(connect(mapStateToProps, { showAlert, getJobStatusMock, getUsage, triggerJob })(withContext(PollContext, UploadedListPage)));
+export default withRouter(connect(mapStateToProps, { showAlert, getJobStatus, getUsage, triggerJob })(withContext(PollContext, UploadedListPage)));

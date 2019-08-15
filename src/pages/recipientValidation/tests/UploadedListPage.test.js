@@ -9,7 +9,7 @@ describe('UploadedListPage', () => {
       listId='listId'
       history={{ replace: jest.fn() }}
       startPolling={jest.fn()}
-      getJobStatusMock={jest.fn(() => Promise.resolve({}))}
+      getJobStatus={jest.fn(() => Promise.resolve({}))}
       triggerJob={jest.fn()}
       job={{ status: 'queued_for_batch', address_count: 1000 }}
       getUsage={jest.fn()}
@@ -18,30 +18,28 @@ describe('UploadedListPage', () => {
     />
   );
 
-  // TODO: Replace mock function with real function
   it('should fetch job status on rendering', async () => {
-    const getJobStatusMock = jest.fn(() => Promise.resolve({ batch_status: 'queued_for_batch', complete: false }));
+    const getJobStatus = jest.fn(() => Promise.resolve({ batch_status: 'queued_for_batch', complete: false }));
     const getUsage = jest.fn();
-    await subject({ getJobStatusMock, getUsage });
-    expect(getJobStatusMock).toHaveBeenCalledWith('listId');
+    await subject({ getJobStatus, getUsage });
+    expect(getJobStatus).toHaveBeenCalledWith('listId');
     expect(getUsage).toHaveBeenCalled();
   });
 
   it('should start polling if not complete and batch status is not "queued_for_batch"', async () => {
-    const getJobStatusMock = jest.fn(() => Promise.resolve({ batch_status: 'checking_regex', complete: false }));
+    const getJobStatus = jest.fn(() => Promise.resolve({ batch_status: 'checking_regex', complete: false }));
     const startPolling = jest.fn();
-    await subject({ getJobStatusMock, startPolling });
+    await subject({ getJobStatus, startPolling });
     expect(startPolling).toHaveBeenCalledWith(expect.objectContaining(
       { key: 'listId', interval: 5000 }
     ));
   });
 
-  //TODO: Replace mock function
   it('should redirect to /recipient-validation/list on error on loading job', async () => {
-    const getJobStatusMock = jest.fn(() => Promise.reject());
+    const getJobStatus = jest.fn(() => Promise.reject());
     const history = { replace: jest.fn() };
-    await subject({ getJobStatusMock, history });
-    expect(getJobStatusMock).toHaveBeenCalledWith('listId');
+    await subject({ getJobStatus, history });
+    expect(getJobStatus).toHaveBeenCalledWith('listId');
     expect(history.replace).toHaveBeenCalledWith('/recipient-validation/list');
   });
 
