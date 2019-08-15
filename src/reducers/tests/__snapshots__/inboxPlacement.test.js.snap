@@ -7,6 +7,8 @@ Object {
   "getTestContentPending": true,
   "seeds": Array [],
   "seedsPending": false,
+  "tests": Array [],
+  "testsPending": true,
 }
 `;
 
@@ -23,6 +25,8 @@ Object {
   "getTestContentPending": false,
   "seeds": Array [],
   "seedsPending": false,
+  "tests": Array [],
+  "testsPending": true,
 }
 `;
 
@@ -36,6 +40,8 @@ Object {
   "getTestContentPending": false,
   "seeds": Array [],
   "seedsPending": false,
+  "tests": Array [],
+  "testsPending": true,
 }
 `;
 
