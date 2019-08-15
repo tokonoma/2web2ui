@@ -1,27 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Component: ConfirmationModal should allow overriding cancel verb 1`] = `
-<Button
-  className="Cancel"
-  onClick={[MockFunction]}
-  size="default"
->
-  Do not Cancel
-</Button>
-`;
-
-exports[`Component: ConfirmationModal should allow overriding confirm verb 1`] = `
-<Button
-  className="Confirm"
-  name="confirmation-modal-confirm-button"
-  onClick={[MockFunction]}
-  primary={true}
-  size="default"
->
-  I am sure about it
-</Button>
-`;
-
 exports[`Component: ConfirmationModal should disable confirmation button 1`] = `
 <Modal
   onClose={[MockFunction]}

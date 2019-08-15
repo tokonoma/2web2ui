@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Page, Tabs } from '@sparkpost/matchbox';
 
 import { Loading } from 'src/components';
-import { getInboxPlacementByProviders, getInboxPlacementTest, stopInboxPlacementTest, getInboxPlacementByProviders, getInboxPlacementTestContent } from 'src/actions/inboxPlacement';
+import { getInboxPlacementTest, stopInboxPlacementTest, getInboxPlacementByProviders, getInboxPlacementTestContent } from 'src/actions/inboxPlacement';
 import TestDetails from './components/TestDetails';
 import TestContent from './components/TestContent';
 import useTabs from 'src/hooks/useTabs';
@@ -32,7 +32,8 @@ export const TestDetailsPage = (props) => {
   const loadTestData = useCallback(() => {
     getInboxPlacementTest(id);
     getInboxPlacementByProviders(id);
-  }, [getInboxPlacementTest, getInboxPlacementByProviders, id]);
+    getInboxPlacementTestContent(id);
+  }, [getInboxPlacementTest, getInboxPlacementByProviders, getInboxPlacementTestContent, id]);
 
   const stopTest = useCallback(() => {
     stopInboxPlacementTest(id).then(loadTestData);
@@ -101,4 +102,4 @@ function mapStateToProps(state, props) {
   };
 }
 
-export default connect(mapStateToProps, { getInboxPlacementTest, getInboxPlacementByProviders, getInboxPlacementTestContent, stopInboxPlacementTest, showAlert })(TestDetailsPage);
+export default connect(mapStateToProps, { getInboxPlacementTest, getInboxPlacementByProviders, getInboxPlacementTestContent, stopInboxPlacementTest })(TestDetailsPage);
