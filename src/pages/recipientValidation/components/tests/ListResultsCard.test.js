@@ -44,7 +44,7 @@ describe('ListResultsCard', () => {
         }
       }
     });
-    expect(wrapper.find('Tag').childAt(1).text()).toEqual('Uploaded');
+    expect(wrapper.find('Tag').childAt(1).text()).toEqual('Ready to validate');
     expect(wrapper.find('CloudUpload')).toExist();
   });
 

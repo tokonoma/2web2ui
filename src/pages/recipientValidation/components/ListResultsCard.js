@@ -36,8 +36,8 @@ const ListResultsCard = ({ results = {}, newListUpload }) => {
       if (uploadedNotProcessing) {
         return (
           <Tag>
-            <span className={styles.Loading}><CloudUpload /> </span>
-            <span>Uploaded</span>
+            <span className={styles.Ready}><CloudUpload /> </span>
+            <span>Ready to validate</span>
           </Tag>
         );
       }
@@ -67,7 +67,6 @@ const ListResultsCard = ({ results = {}, newListUpload }) => {
           {ready && (
             <div className={styles.DownloadButton}>
               <DownloadLink
-                size='large'
                 component={Button}
                 to={rejectedUrl}>
                 Download Results <FileDownload />
@@ -80,7 +79,7 @@ const ListResultsCard = ({ results = {}, newListUpload }) => {
   };
 
   return (
-    <Panel sectioned accent='gray' title={<div className={styles.PanelHeader}>Recent Validations:</div>}>
+    <Panel sectioned title={<div className={styles.PanelHeader}>Recent Validations</div>}>
       <div className={styles.TableContainer}>
         <Table>
           <tbody>
