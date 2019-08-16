@@ -69,12 +69,14 @@ describe('Component: ConfirmationModal', () => {
   });
 
   it('should allow overriding confirm verb', () => {
-    const wrapper = shallow(<ConfirmationModal confirmVerb='I am sure about it' onCancel={onCancelMock} onConfirm={onConfirmMock} />);
-    expect(wrapper.find('Button').at(0)).toMatchSnapshot();
+    const text = 'I am sure about it';
+    const wrapper = shallow(<ConfirmationModal confirmVerb={text} onCancel={onCancelMock} onConfirm={onConfirmMock} />);
+    expect(wrapper.find('Button').at(0).prop('children')).toEqual(text);
   });
 
   it('should allow overriding cancel verb', () => {
-    const wrapper = shallow(<ConfirmationModal cancelVerb='Do not Cancel' onCancel={onCancelMock} onConfirm={onConfirmMock} />);
-    expect(wrapper.find('Button').at(1)).toMatchSnapshot();
+    const text = 'Do not Cancel';
+    const wrapper = shallow(<ConfirmationModal cancelVerb={text} onCancel={onCancelMock} onConfirm={onConfirmMock} />);
+    expect(wrapper.find('Button').at(1).prop('children')).toEqual(text);
   });
 });
