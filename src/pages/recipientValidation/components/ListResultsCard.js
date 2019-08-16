@@ -17,8 +17,8 @@ const ListResultsCard = ({ complete = 'unknown', uploaded, rejectedUrl, status }
   }
 
   const loading = !complete;
-  const ready = status === 'SUCCESS';
-  const failed = status === 'ERROR';
+  const ready = status === 'success';
+  const failed = status === 'error';
 
   const renderStatus = () => {
 
