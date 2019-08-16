@@ -56,8 +56,10 @@
   },
   "dependencies": {
     "@sparkpost/boomerang": "^1.0.6",
-    "@sparkpost/matchbox": "^3.5.3",
+    "@sparkpost/matchbox": "^3.6.0",
     "@sparkpost/matchbox-icons": "^1.1.12",
+    "acorn-jsx": "^5.0.1",
+    "ajv-keywords": "^3.2.0",
     "axios": "^0.18.0",
     "bowser": "2.1.2",
     "classnames": "^2.2.5",
@@ -85,6 +87,7 @@
     "react-dropzone": "^7.0.1",
     "react-helmet": "^5.2.0",
     "react-instantsearch": "^5.3.1",
+    "react-instantsearch-native": "^5.3.2",
     "react-load-script": "0.0.6",
     "react-loadable": "^5.3.1",
     "react-qr-svg": "^2.1.0",
@@ -98,6 +101,7 @@
     "redux-thunk": "^2.2.0",
     "reselect": "^4.0.0",
     "source-map-explorer": "^1.6.0",
+    "ts-pnp": "^1.0.0",
     "uuid": "^3.2.1",
     "validator": "^10.2.0"
   },

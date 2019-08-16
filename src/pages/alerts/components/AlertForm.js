@@ -1,6 +1,6 @@
+/* eslint-disable max-lines */
 import React, { Component } from 'react';
 import { Field, Form } from 'redux-form';
-
 // Components
 import { Panel, Grid, Button, Expandable, Error } from '@sparkpost/matchbox';
 import { TextFieldWrapper, SelectWrapper } from 'src/components';
@@ -16,9 +16,7 @@ import withAlertForm from './AlertForm.container';
 
 // Helpers & Validation
 import { emails, ifStringPresent, maxLength, required } from 'src/helpers/validation';
-
 const metricsOptions = [{ value: '', label: 'Select Metric', disabled: true }, ...getOptions(METRICS)];
-
 const notificationChannelData = {
   emails: {
     icon: <EmailIcon />,
@@ -51,7 +49,7 @@ export class AlertForm extends Component {
     const { change } = this.props;
     const formSpec = getFormSpec(event.target.value);
     const { defaultFieldValues } = formSpec;
-
+    // console.log(defaultFieldValues);
     REALTIME_FILTERS.forEach((filter) => {
       change(filter, []);
     });
@@ -83,6 +81,10 @@ export class AlertForm extends Component {
     NOTIFICATION_CHANNELS.some((channel) =>
       (formMeta[channel] && formMeta[channel].touched) && formErrors[channel] === 'At least one notification channel must not be empty');
 
+  handleChangeInFormField = (fieldName, fieldValue) => {
+    const { change } = this.props;
+    change(fieldName, fieldValue);
+  }
   render() {
     const {
       pristine,
@@ -128,6 +130,7 @@ export class AlertForm extends Component {
                 <div className={styles.Evaluator}>
                   <EvaluatorFields
                     disabled={submitting}
+                    changeFormField={(fieldName, fieldValue) => this.handleChangeInFormField(fieldName, fieldValue)}
                   />
                 </div>
                 }

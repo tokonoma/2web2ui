@@ -5,21 +5,25 @@ import { SelectWrapper, TextFieldWrapper } from 'src/components/reduxFormWrapper
 import { getFormSpec, getEvaluatorOptions } from '../../helpers/alertForm';
 import { Grid, Slider, Label } from '@sparkpost/matchbox';
 import { numberBetweenInclusive } from 'src/helpers/validation';
-import { FORM_NAME } from '../../constants/formConstants';
+import { FORM_NAME, RECOMMENDED_METRIC_VALUE } from '../../constants/formConstants';
 import styles from './EvaluatorFields.module.scss';
 
 export const EvaluatorFields = ({
   metric,
   value,
   source,
+  operator,
   disabled,
-  change
+  change,
+  changeFormField
 }) => {
 
   const [sliderValue, setSliderValue] = useState(value);
 
   const changeValueField = (val) => {
-    change(FORM_NAME, 'value', val);
+    // changeFormField('value',val);
+    // change(FORM_NAME, 'value', val);
+
   };
 
   const changeSlider = (event) => {
@@ -74,6 +78,13 @@ export const EvaluatorFields = ({
             key={sliderLength}
             onChange={changeValueField}
             precision={sliderPrecision}
+            ticks={{
+              [sourceOptions.length > 1
+                ? operatorOptions.length > 1
+                  ? RECOMMENDED_METRIC_VALUE[metric][source][operator]
+                  : RECOMMENDED_METRIC_VALUE[metric][source]
+                : RECOMMENDED_METRIC_VALUE[metric]]: 'Recommended'
+            }}
           />
         </div>
       </Grid.Column>
@@ -100,7 +111,8 @@ const mapStateToProps = (state) => {
   return {
     metric: selector(state, 'metric'),
     value: selector(state, 'value'),
-    source: selector(state, 'source') || []
+    source: selector(state, 'source') || [],
+    operator: selector(state,'operator') || []
   };
 };
 

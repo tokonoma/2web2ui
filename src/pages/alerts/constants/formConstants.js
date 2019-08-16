@@ -16,6 +16,21 @@ export const FILTERS_FRIENDLY_NAMES = {
   sending_ip: 'Sending IP'
 };
 
+export const RECOMMENDED_METRIC_VALUE = {
+  monthly_sending_limit: 80,
+  health_score: {
+    raw: {
+      lt: 80,
+      gt: 70
+    },
+    week_over_week: 10,
+    day_over_day: 10
+  },
+  block_bounce_rate: 20,
+  hard_bounce_rate: 20,
+  soft_bounce_rate: 20
+};
+
 export const SIGNALS_FILTERS = [
   'none',
   'ip_pool',
