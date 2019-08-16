@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { Button } from '@sparkpost/matchbox';
 import ConfirmationModal from 'src/components/modals/ConfirmationModal';
-
-const RUNNING_STATUS = 'running';
+import { STATUS } from '../constants/test';
 
 const StopTest = ({ status, onStop, loading }) => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -11,7 +10,7 @@ const StopTest = ({ status, onStop, loading }) => {
     setModalVisible(!modalVisible);
   };
 
-  if (status !== RUNNING_STATUS) {
+  if (status !== STATUS.RUNNING) {
     return null;
   }
 
