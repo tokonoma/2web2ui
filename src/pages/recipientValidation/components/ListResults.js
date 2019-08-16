@@ -37,7 +37,9 @@ export class ListResults extends Component {
   handlePoll = (id) => {
     const { showAlert, getJobStatus, stopPolling } = this.props;
     return getJobStatus(id).then(({ complete, batch_status }) => {
-      if (batch_status === 'ERROR') {
+      const normalizedStatus = batch_status.toLowerCase();
+
+      if (normalizedStatus === 'error') {
         stopPolling(id);
         showAlert({
           type: 'error',
@@ -46,7 +48,7 @@ export class ListResults extends Component {
         });
       }
 
-      if (complete && batch_status === 'SUCCESS') {
+      if (complete && normalizedStatus === 'success') {
         stopPolling(id);
         showAlert({
           type: 'success',

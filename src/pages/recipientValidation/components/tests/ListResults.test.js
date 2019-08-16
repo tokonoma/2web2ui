@@ -60,7 +60,7 @@ describe('ListResults', () => {
     });
 
     it('starts shows an alert when polling results are complete', async () => {
-      props.getJobStatus.mockReturnValue(Promise.resolve({ complete: true, batch_status: 'SUCCESS' }));
+      props.getJobStatus.mockReturnValue(Promise.resolve({ complete: true, batch_status: 'success' }));
       wrapper.setProps({ results: testNotComplete, latestId: testNotComplete.listId });
       await expect(props.getJobStatus).toHaveBeenCalledWith(testNotComplete.listId);
       expect(props.showAlert.mock.calls).toMatchSnapshot();
@@ -68,7 +68,7 @@ describe('ListResults', () => {
     });
 
     it('starts shows an alert when polling results fail', async () => {
-      props.getJobStatus.mockReturnValue(Promise.resolve({ complete: false, batch_status: 'ERROR' }));
+      props.getJobStatus.mockReturnValue(Promise.resolve({ complete: false, batch_status: 'error' }));
       wrapper.setProps({ results: testNotComplete, latestId: testNotComplete.listId });
       await expect(props.getJobStatus).toHaveBeenCalledWith(testNotComplete.listId);
       expect(props.showAlert.mock.calls).toMatchSnapshot();
