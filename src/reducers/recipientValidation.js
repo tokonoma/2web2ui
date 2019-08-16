@@ -44,7 +44,7 @@ export default (state = initialState, { meta, payload, type }) => {
         jobResults: {
           ...state.jobResults,
           [payload.list_id]: {
-            status: payload.batch_status,
+            status: payload.batch_status.toLowerCase(),
             complete: payload.complete,
             uploaded: payload.upload_timestamp,
             rejectedUrl: payload.rejected_external_url

@@ -19,7 +19,7 @@ describe('ListResultsCard', () => {
       complete: true,
       uploaded: 1541092618,
       rejectedUrl: 'testfile.csv',
-      status: 'success'
+      status: 'SUCCESS'
     });
     expect(wrapper.find('Tag').childAt(1).text()).toEqual('Completed');
     expect(wrapper.find('CheckCircle')).toExist();
