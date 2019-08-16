@@ -49,7 +49,6 @@ export class AlertForm extends Component {
     const { change } = this.props;
     const formSpec = getFormSpec(event.target.value);
     const { defaultFieldValues } = formSpec;
-    // console.log(defaultFieldValues);
     REALTIME_FILTERS.forEach((filter) => {
       change(filter, []);
     });
@@ -81,10 +80,6 @@ export class AlertForm extends Component {
     NOTIFICATION_CHANNELS.some((channel) =>
       (formMeta[channel] && formMeta[channel].touched) && formErrors[channel] === 'At least one notification channel must not be empty');
 
-  handleChangeInFormField = (fieldName, fieldValue) => {
-    const { change } = this.props;
-    change(fieldName, fieldValue);
-  }
   render() {
     const {
       pristine,
@@ -129,8 +124,8 @@ export class AlertForm extends Component {
                 {metric !== '' &&
                 <div className={styles.Evaluator}>
                   <EvaluatorFields
+                    key={metric}
                     disabled={submitting}
-                    changeFormField={(fieldName, fieldValue) => this.handleChangeInFormField(fieldName, fieldValue)}
                   />
                 </div>
                 }
