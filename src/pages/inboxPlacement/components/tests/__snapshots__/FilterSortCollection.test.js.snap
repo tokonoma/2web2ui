@@ -96,3 +96,95 @@ exports[`FilterSortCollection Component renders renders without props 1`] = `
   <FilterSortCollection />
 </Router>
 `;
+
+exports[`FilterSortCollection Component sorts sorts default sort column values in ascending order 1`] = `
+Object {
+  "children": Array [
+    <NullComponent />,
+    <TableBody>
+      <rowComponent
+        fruit="apple"
+        vegetable="celery"
+      />
+      <rowComponent
+        fruit="banana"
+        vegetable="artichoke"
+      />
+      <rowComponent
+        fruit="carrot"
+        vegetable="broccoli"
+      />
+    </TableBody>,
+  ],
+  "className": "LG_LI",
+}
+`;
+
+exports[`FilterSortCollection Component sorts sorts default sort column values in default descending order 1`] = `
+Object {
+  "children": Array [
+    <NullComponent />,
+    <TableBody>
+      <rowComponent
+        fruit="carrot"
+        vegetable="broccoli"
+      />
+      <rowComponent
+        fruit="banana"
+        vegetable="artichoke"
+      />
+      <rowComponent
+        fruit="apple"
+        vegetable="celery"
+      />
+    </TableBody>,
+  ],
+  "className": "LG_LI",
+}
+`;
+
+exports[`FilterSortCollection Component sorts sorts selected sort column values in ascending order 1`] = `
+Object {
+  "children": Array [
+    <NullComponent />,
+    <TableBody>
+      <rowComponent
+        fruit="banana"
+        vegetable="artichoke"
+      />
+      <rowComponent
+        fruit="carrot"
+        vegetable="broccoli"
+      />
+      <rowComponent
+        fruit="apple"
+        vegetable="celery"
+      />
+    </TableBody>,
+  ],
+  "className": "LG_LI",
+}
+`;
+
+exports[`FilterSortCollection Component sorts sorts selected sort column values in default descending order 1`] = `
+Object {
+  "children": Array [
+    <NullComponent />,
+    <TableBody>
+      <rowComponent
+        fruit="apple"
+        vegetable="celery"
+      />
+      <rowComponent
+        fruit="carrot"
+        vegetable="broccoli"
+      />
+      <rowComponent
+        fruit="banana"
+        vegetable="artichoke"
+      />
+    </TableBody>,
+  ],
+  "className": "LG_LI",
+}
+`;
