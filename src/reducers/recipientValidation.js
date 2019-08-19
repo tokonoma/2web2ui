@@ -26,6 +26,23 @@ export default (state = initialState, { meta, payload, type }) => {
     case 'UPLOAD_RECIPIENT_VALIDATION_LIST_FAIL':
       return { ...state, uploadLoading: false, listError: payload };
 
+    //TODO: Replace UPLOAD_RECIPIENT_VALIDATION_LIST;
+    case 'UPLOAD_RV_LIST_NEW_PENDING':
+      return { ...state, uploadLoading: true };
+
+    case 'UPLOAD_RV_LIST_NEW_SUCCESS':
+      return {
+        ...state,
+        uploadLoading: false
+      };
+
+    case 'UPLOAD_RV_LIST_NEW_FAIL':
+      return { ...state, uploadLoading: false, listError: payload };
+
+    //TODO: Remove placeholder reducer
+    case 'UPLOAD_RV_LIST_NEW':
+      return { ...state, uploading: false };
+
     case 'RESET_RECIPIENT_VALIDATION_ERROR':
       return { ...state, listError: null };
 
@@ -69,7 +86,9 @@ export default (state = initialState, { meta, payload, type }) => {
             status: payload.batch_status ? payload.batch_status.toLowerCase() : null,
             complete: payload.complete,
             uploaded: payload.upload_timestamp,
-            rejectedUrl: payload.rejected_external_url
+            rejectedUrl: payload.rejected_external_url,
+            filename: payload.original_filename,
+            addressCount: payload.address_count
           }
         }
       };

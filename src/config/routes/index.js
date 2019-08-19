@@ -18,6 +18,7 @@ import {
   recipientLists,
   RecipientValidationPage,
   SingleResultPage,
+  UploadedListPage,
   RegisterPage,
   reports,
   sendingDomains,
@@ -41,7 +42,7 @@ import { default as emailVerification } from 'src/components/emailVerification/E
 import SecretBillingPlanOrBillingSummaryPage from '../SecretBillingPlanOrBillingSummaryPage';
 
 import { all, hasGrants, not } from 'src/helpers/conditions';
-import { isAws, isCustomBilling, isEnterprise, isSelfServeBilling } from 'src/helpers/conditions/account';
+import { isAws, isCustomBilling, isEnterprise, isSelfServeBilling, isAccountUiOptionSet } from 'src/helpers/conditions/account';
 import { isAzure, isHeroku, isSubaccountUser } from 'src/helpers/conditions/user';
 import { configEquals, configFlag } from 'src/helpers/conditions/config';
 import App from 'src/components/layout/App';
@@ -733,6 +734,14 @@ const routes = [
     condition: hasGrants('recipient-validation/manage'),
     layout: App,
     title: 'Recipient Validation | Results',
+    supportDocsSearch: 'Recipient Validation'
+  },
+  {
+    path: '/recipient-validation/list/:listId',
+    component: UploadedListPage,
+    condition: all(hasGrants('recipient-validation/manage'), isAccountUiOptionSet('recipientValidationV2')),
+    layout: App,
+    title: 'Recipient Validation | List',
     supportDocsSearch: 'Recipient Validation'
   },
   {

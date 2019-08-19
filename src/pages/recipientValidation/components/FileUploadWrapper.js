@@ -27,12 +27,13 @@ export default class FileUploadWrapper extends Component {
   }
 
   render() {
-    const { input, meta, uploading } = this.props;
-
+    const { input, meta, uploading, uploadV2 } = this.props;
+    //TODO: Remove uploadV2 check
     if (uploading) {
       return (
         <fieldset className={styles.Field}>
           <h3 className={styles.Header}>Uploading...</h3>
+          {uploadV2 && <p>Your list will be ready to validate in just a moment.</p>}
           <div className={styles.LoadingWrapper}><Loading /></div>
         </fieldset>
       );

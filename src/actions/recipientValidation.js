@@ -1,5 +1,11 @@
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
 
+// If you want to test fail mock response, pass Promise.reject() as another parameter
+const mockThunk = (action, response = Promise.resolve()) => (dispatch) => {
+  dispatch(action);
+  return response;
+};
+
 export function uploadList(data) {
   return sparkpostApiRequest({
     type: 'UPLOAD_RECIPIENT_VALIDATION_LIST',
@@ -9,6 +15,46 @@ export function uploadList(data) {
       data
     }
   });
+}
+//TODO: Wait for endpoint
+export function getList() {
+  return { type: 'GET_JOB_LIST' };
+  // return sparkpostApiRequest({
+  //   type: 'GET_JOB_LIST',
+  //   meta: {
+  //     method: 'GET',
+  //     url: 'v1/recipient-validation/list'
+  //   }
+  // });
+}
+
+//TODO: wait for endpoint
+export function uploadListNew(data) {
+
+  return mockThunk(
+    { type: 'UPLOAD_RV_LIST_NEW_SUCCESS' },
+    Promise.resolve({ list_id: 'list-id' })
+  );
+  // return sparkpostApiRequest({
+  //   type: 'UPLOAD_RV_LIST_NEW',
+  //   meta: {
+  //     method: 'POST',
+  //     url: 'v1/recipient-validation/list',
+  //     data
+  //   }
+  // });
+}
+
+//TODO: wait for endpoint
+export function triggerJob(listId) {
+  return { type: 'TRIGGER_JOB' };
+  // return sparkpostApiRequest({
+  //   type: 'TRIGGER_JOB',
+  //   meta: {
+  //     method: 'POST',
+  //     url: `v1/recipient-validation/${listId}`
+  //   }
+  // });
 }
 
 export function singleAddress(address) {
@@ -38,6 +84,20 @@ export function getJobStatus(list_id) {
     meta: {
       method: 'GET',
       url: `v1/recipient-validation/job/${list_id}`
+    }
+  });
+}
+
+export function getJobStatusMock(list_id) {
+  return mockThunk({
+    type: 'GET_JOB_STATUS_SUCCESS',
+    payload: {
+      list_id: list_id,
+      batch_status: 'queued_for_batch',
+      complete: false,
+      original_filename: 'test.csv',
+      address_count: 1234,
+      upload_timestamp: 1565187194
     }
   });
 }
