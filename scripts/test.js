@@ -58,7 +58,7 @@ if (process.env.CI && process.env.TRAVIS) {
     // TODO This is an experimental feature that is noisy, but could be very beneficial
     // SEE https://github.com/facebook/jest/pull/4895
     // SEE https://github.com/facebook/jest/blob/1918f6beb6b32471304125b31329129b21ebd3ef/website/blog/2017-12-18-jest-22.md#experimental-leak-detection
-    '--detectLeak',
+    '--detectLeaks',
 
     // prints heap size per test file
     '--logHeapUsage',
