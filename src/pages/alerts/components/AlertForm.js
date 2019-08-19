@@ -45,7 +45,7 @@ const notificationChannelData = {
 
 export class AlertForm extends Component {
 
-  resetFormValues = (event) => {
+  resetFormValues = (event, isNewAlert, isDuplicate) => {
     const { change } = this.props;
     const formSpec = getFormSpec(event.target.value);
     const { defaultFieldValues } = formSpec;
@@ -54,7 +54,13 @@ export class AlertForm extends Component {
     });
     change('single_filter', { filter_type: 'none', filter_values: []});
     defaultFieldValues.forEach(({ fieldName, fieldValue }) => {
-      change(fieldName, fieldValue);
+      if (fieldName === 'value') {
+        if (isNewAlert && !isDuplicate) {
+          change(fieldName, fieldValue);
+        }
+      } else {
+        change(fieldName, fieldValue);
+      }
     });
   };
 
@@ -97,7 +103,6 @@ export class AlertForm extends Component {
     const isSubmitDisabled = (pristine && !isDuplicate) || submitting; //Allows user to create the same alert if if's a duplicate
     const formSpec = getFormSpec(metric);
     const channelsError = this.isNotificationChannelsEmpty(formMeta, formErrors);
-
     return (
       <Form onSubmit={handleSubmit}>
         <Panel className = {styles.Form}>
@@ -117,15 +122,17 @@ export class AlertForm extends Component {
                     name='metric'
                     component={SelectWrapper}
                     options={metricsOptions}
-                    onChange={this.resetFormValues}
+                    onChange={(event) => this.resetFormValues(event, isNewAlert, isDuplicate)}
                     validate={required}
                   />
                 </div>
                 {metric !== '' &&
                 <div className={styles.Evaluator}>
                   <EvaluatorFields
-                    key={metric}
+                    key={isNewAlert && !isDuplicate ? metric : 'evaluator-field'}
                     disabled={submitting}
+                    isNewAlert={isNewAlert}
+                    isDuplicate={isDuplicate}
                   />
                 </div>
                 }

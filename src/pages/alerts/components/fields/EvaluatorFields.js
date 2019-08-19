@@ -14,7 +14,9 @@ export const EvaluatorFields = ({
   source,
   operator,
   disabled,
-  change
+  change,
+  isNewAlert,
+  isDuplicate
 }) => {
 
   const [sliderValue, setSliderValue] = useState(value);
@@ -29,21 +31,31 @@ export const EvaluatorFields = ({
     setSliderValue(event.target.value);
   };
 
-  const setOperatorOnSourceChange = (event,metric,source,operator) => {
+  const setOperatorOnSourceChange = (event,metric) => {
     const { target: { value }} = event;
     if (value !== 'raw') {
       change(FORM_NAME, 'operator', 'gt');
-
-      if (metric) {
+      if (isNewAlert && !isDuplicate) {
         changeValueField(RECOMMENDED_METRIC_VALUE[metric][value]);
       }
     } else {
-      if (metric) {
+      if (isNewAlert && !isDuplicate) {
         changeValueField(RECOMMENDED_METRIC_VALUE[metric][value].gt);
       }
-
     }
   };
+
+  const setValueOnOperatorChange = (event) => {
+    if (isNewAlert && !isDuplicate) {
+      changeValueField(RECOMMENDED_METRIC_VALUE[metric][source][event.target.value]);
+    }
+  };
+
+  const getTicksRecommendedValue = (sourceOptions, operatorOptions) => sourceOptions.length > 1
+    ? operatorOptions.length > 1
+      ? RECOMMENDED_METRIC_VALUE[metric][source][operator]
+      : RECOMMENDED_METRIC_VALUE[metric][source]
+    : RECOMMENDED_METRIC_VALUE[metric];
 
   const formspec = getFormSpec(metric);
 
@@ -52,7 +64,6 @@ export const EvaluatorFields = ({
   const { operatorOptions = [], suffix, sliderLabel, sliderPrecision } = getEvaluatorOptions(metric, source);
 
   const sliderLength = 10 - ((sourceOptions.length > 1) ? 3 : 0) - ((operatorOptions.length > 1) ? 2 : 0);
-
   return (
     <Grid className={styles.Grid}>
       {sourceOptions.length > 1 && (
@@ -63,7 +74,7 @@ export const EvaluatorFields = ({
             component={SelectWrapper}
             disabled={disabled}
             options={sourceOptions}
-            onChange={(event) => setOperatorOnSourceChange(event, metric, source, operator)}
+            onChange={(event) => setOperatorOnSourceChange(event, metric)}
           />
         </Grid.Column>
       )}
@@ -75,7 +86,7 @@ export const EvaluatorFields = ({
             component={SelectWrapper}
             disabled={disabled}
             options={operatorOptions}
-            onChange={(event) => changeValueField(RECOMMENDED_METRIC_VALUE[metric][source][event.target.value])}
+            onChange={setValueOnOperatorChange}
           />
         </Grid.Column>
       )}
@@ -83,16 +94,13 @@ export const EvaluatorFields = ({
         <div className={styles.Slider}>
           <Label>{sliderLabel}</Label>
           <Slider
+            id='slider'
             value={sliderValue}
             key={sliderLength}
             onChange={changeValueField}
             precision={sliderPrecision}
             ticks={{
-              [sourceOptions.length > 1
-                ? operatorOptions.length > 1
-                  ? RECOMMENDED_METRIC_VALUE[metric][source][operator]
-                  : RECOMMENDED_METRIC_VALUE[metric][source]
-                : RECOMMENDED_METRIC_VALUE[metric]]: 'Recommended'
+              [getTicksRecommendedValue(sourceOptions,operatorOptions)]: 'Recommended'
             }}
           />
         </div>

@@ -45,6 +45,7 @@ exports[`Evaluator Fields Component renders correctly 1`] = `
       component={[Function]}
       disabled={false}
       name="operator"
+      onChange={[Function]}
       options={
         Array [
           Object {
@@ -72,11 +73,17 @@ exports[`Evaluator Fields Component renders correctly 1`] = `
       </Label>
       <Slider
         defaultValue={0}
+        id="slider"
         key="5"
         max={100}
         min={0}
         onChange={[Function]}
         precision={1}
+        ticks={
+          Object {
+            "70": "Recommended",
+          }
+        }
         value={50}
       />
     </div>
