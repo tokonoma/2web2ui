@@ -19,7 +19,7 @@ describe('ListResultsCard', () => {
       complete: true,
       uploaded: 1541092618,
       rejectedUrl: 'testfile.csv',
-      status: 'SUCCESS'
+      status: 'success'
     });
     expect(wrapper.find('Tag').childAt(1).text()).toEqual('Completed');
     expect(wrapper.find('CheckCircle')).toExist();
@@ -30,7 +30,7 @@ describe('ListResultsCard', () => {
       complete: false,
       uploaded: 1541092618,
       rejectedUrl: 'testfile.csv',
-      status: 'ERROR'
+      status: 'error'
     });
     expect(wrapper.find('Tag').childAt(1).text()).toEqual('Failed. Please try again.');
     expect(wrapper.find('Error')).toExist();
