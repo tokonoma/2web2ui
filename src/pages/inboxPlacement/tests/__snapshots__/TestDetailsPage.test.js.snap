@@ -15,6 +15,11 @@ exports[`Page: Single Inbox Placement Test handles errors 1`] = `
 exports[`Page: Single Inbox Placement Test renders page correctly with defaults 1`] = `
 <Page
   empty={Object {}}
+  primaryArea={
+    <StopTest
+      onStop={[Function]}
+    />
+  }
   title="Inbox Placement | Results"
 >
   <Tabs

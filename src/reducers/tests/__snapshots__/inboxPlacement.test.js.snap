@@ -7,6 +7,7 @@ Object {
   "getTestContentPending": true,
   "seeds": Array [],
   "seedsPending": false,
+  "stopTestPending": false,
   "tests": Array [],
   "testsPending": true,
 }
@@ -25,6 +26,7 @@ Object {
   "getTestContentPending": false,
   "seeds": Array [],
   "seedsPending": false,
+  "stopTestPending": false,
   "tests": Array [],
   "testsPending": true,
 }
@@ -40,6 +42,7 @@ Object {
   "getTestContentPending": false,
   "seeds": Array [],
   "seedsPending": false,
+  "stopTestPending": false,
   "tests": Array [],
   "testsPending": true,
 }
@@ -52,6 +55,7 @@ Object {
   "getTestPending": true,
   "seeds": Array [],
   "seedsPending": false,
+  "stopTestPending": false,
   "tests": Array [],
   "testsPending": true,
 }
@@ -70,6 +74,7 @@ Object {
   "getTestPending": false,
   "seeds": Array [],
   "seedsPending": false,
+  "stopTestPending": false,
   "tests": Array [],
   "testsPending": true,
 }
@@ -84,6 +89,7 @@ Object {
   "getTestPending": false,
   "seeds": Array [],
   "seedsPending": false,
+  "stopTestPending": false,
   "tests": Array [],
   "testsPending": true,
 }
@@ -95,6 +101,7 @@ Object {
   "seeds": Array [],
   "seedsError": undefined,
   "seedsPending": false,
+  "stopTestPending": false,
   "tests": Array [],
   "testsPending": true,
 }
@@ -106,6 +113,7 @@ Object {
   "seeds": Array [],
   "seedsError": null,
   "seedsPending": true,
+  "stopTestPending": false,
   "tests": Array [],
   "testsPending": true,
 }
@@ -117,6 +125,7 @@ Object {
   "seeds": undefined,
   "seedsError": null,
   "seedsPending": false,
+  "stopTestPending": false,
   "tests": Array [],
   "testsPending": true,
 }
@@ -127,6 +136,7 @@ Object {
   "currentTestDetails": Object {},
   "seeds": Array [],
   "seedsPending": false,
+  "stopTestPending": false,
   "tests": Array [],
   "testsError": Object {
     "errors": Array [
@@ -144,6 +154,7 @@ Object {
   "currentTestDetails": Object {},
   "seeds": Array [],
   "seedsPending": false,
+  "stopTestPending": false,
   "tests": Array [],
   "testsError": null,
   "testsPending": true,
@@ -155,6 +166,7 @@ Object {
   "currentTestDetails": Object {},
   "seeds": Array [],
   "seedsPending": false,
+  "stopTestPending": false,
   "tests": Object {
     "fakeData": true,
   },

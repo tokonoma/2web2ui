@@ -48,4 +48,15 @@ describe('Action Creator: Inbox Placement', () => {
     });
   });
 
+  it('makes request to stop inbox placement test', async () => {
+    await inboxPlacement.stopInboxPlacementTest(1);
+    expect(sparkpostApiRequest).toHaveBeenCalledWith({
+      type: 'STOP_INBOX_PLACEMENT_TEST',
+      meta: {
+        method: 'PUT',
+        url: '/v1/inbox-placement/1',
+        data: { status: 'stopped' }
+      }
+    });
+  });
 });
