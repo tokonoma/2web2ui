@@ -49,12 +49,9 @@ if (
   argv.push(hasSourceControl ? '--watch' : '--watchAll');
 }
 
+
 if (process.env.CI && process.env.TRAVIS) {
   argv.push(
-    // Preserves color highlighting for Jest output when Jest is invoked from
-    // another script rather than directly
-    '--colors',
-
     // Jest v22 introduced jest-worker for easy parallelization by forking processes in parallel.  The
     // spawning of each worker is expensive.  The recommendation is number of workers should be number
     // of CPUs minus one.  Our Travis CI free plan only provides a machine with two CPU.

@@ -12,7 +12,7 @@
     "analyze": "source-map-explorer build/static/js/main.*",
     "test": "node scripts/test.js --env=jsdom --config=./jest.config.js",
     "test-coverage": "npm test -- --coverage",
-    "test-ci": "CI=true npm test -- --coverage",
+    "test-ci": "CI=true npm test -- --coverage --colors",
     "coveralls": "cat ./build-reports/lcov.info | coveralls",
     "lint": "node node_modules/eslint/bin/eslint.js src",
     "lintfix": "npm run lint -- --fix",
