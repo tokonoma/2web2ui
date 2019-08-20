@@ -1,7 +1,7 @@
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
 
 // If you want to test fail mock response, pass Promise.reject() as another parameter
-const mockThunk = (action, response = Promise.resolve()) => (dispatch) => {
+const mockThunk = (action, response = Promise.resolve(action.payload || {})) => (dispatch) => {
   dispatch(action);
   return response;
 };
@@ -46,8 +46,18 @@ export function uploadListNew(data) {
 }
 
 //TODO: wait for endpoint
-export function triggerJob(listId) {
-  return { type: 'TRIGGER_JOB' };
+export function triggerJob(list_id) {
+  return mockThunk({
+    type: 'TRIGGER_JOB_SUCCESS',
+    payload: {
+      list_id: list_id,
+      batch_status: 'checking_regex',
+      complete: false,
+      original_filename: 'test.csv',
+      address_count: 1234,
+      upload_timestamp: 1565187194
+    }
+  });
   // return sparkpostApiRequest({
   //   type: 'TRIGGER_JOB',
   //   meta: {

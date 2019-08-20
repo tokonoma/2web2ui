@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ListProgress should render correctly 1`] = `
+<div
+  className="ListProgressContainer"
+>
+  <h2>
+    big-test.csv
+  </h2>
+  <div
+    style={
+      Object {
+        "marginBottom": 80,
+      }
+    }
+  >
+    <span>
+      Your list is validating. You can track its progress on the recipient validation 
+    </span>
+    <UnstyledLink
+      component={[Function]}
+      to="/recipient-validation"
+    >
+      home page
+    </UnstyledLink>
+    ,
+    <span>
+       we'll let you know when validation is complete and your results are ready.
+    </span>
+  </div>
+  <div>
+    <strong>
+      Status:
+    </strong>
+     
+    Processing
+  </div>
+  <ProgressBar
+    className="ProgressBarContainer"
+    completed={20}
+  />
+  <Button
+    color="orange"
+    component={[Function]}
+    size="default"
+    to="/recipient-validation"
+  >
+    Validate Another
+  </Button>
+</div>
+`;
