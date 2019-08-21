@@ -1,6 +1,7 @@
 import { snapshotActionCases } from 'src/__testHelpers__/snapshotActionHelpers';
 import {
   uploadList,
+  uploadListNew,
   singleAddress,
   getLatestJob,
   getJobStatus,
@@ -16,6 +17,17 @@ describe('Recipient Verification Actions', () => {
       name: 'when uploading csv',
       action: () => (
         uploadList({
+          data: 'csv-file'
+        })
+      )
+    }
+  ]);
+
+  snapshotActionCases('.uploadListNew', [
+    {
+      name: 'when uploading csv',
+      action: () => (
+        uploadListNew({
           data: 'csv-file'
         })
       )

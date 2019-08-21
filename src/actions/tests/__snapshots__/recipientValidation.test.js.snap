@@ -77,3 +77,18 @@ Array [
   },
 ]
 `;
+
+exports[`Recipient Verification Actions .uploadListNew when uploading csv 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "data": Object {
+        "data": "csv-file",
+      },
+      "method": "POST",
+      "url": "v1/recipient-validation/upload",
+    },
+    "type": "UPLOAD_RV_LIST_NEW",
+  },
+]
+`;
