@@ -6,7 +6,7 @@ import { Table } from '@sparkpost/matchbox';
 import { BrowserRouter as Router } from 'react-router-dom';
 
 describe('FilterSortCollection Component', () => {
-  const fruits = ['apple', 'banana', 'carrot'];
+  const fruits = ['apple', 'banana', 'cherry'];
   const vegetables = ['artichoke', 'broccoli', 'celery'];
   const props = {
     title: 'Menu',
@@ -73,9 +73,9 @@ describe('FilterSortCollection Component', () => {
       const rowsWrapper = wrapper.find('rowComponent');
 
       expect(rowsWrapper).toHaveLength(3);
-      rowsWrapper.forEach((rowWrapper, i) => {
-        expect(rowWrapper.prop('fruit')).toEqual(fruits.slice().reverse()[i]);
-      });
+      expect(rowsWrapper.at(0)).toHaveProp('fruit', fruits[2]);
+      expect(rowsWrapper.at(1)).toHaveProp('fruit', fruits[1]);
+      expect(rowsWrapper.at(2)).toHaveProp('fruit', fruits[0]);
     });
 
     it('sorts default sort column values (fruit) in ascending order', () => {
@@ -83,9 +83,9 @@ describe('FilterSortCollection Component', () => {
       const rowsWrapper = wrapper.find('rowComponent');
 
       expect(rowsWrapper).toHaveLength(3);
-      rowsWrapper.forEach((rowWrapper, i) => {
-        expect(rowWrapper.prop('fruit')).toEqual(fruits[i]);
-      });
+      expect(rowsWrapper.at(0)).toHaveProp('fruit', fruits[0]);
+      expect(rowsWrapper.at(1)).toHaveProp('fruit', fruits[1]);
+      expect(rowsWrapper.at(2)).toHaveProp('fruit', fruits[2]);
     });
 
     it('sorts selected sort column (vegetables) values in default descending order', () => {
@@ -97,9 +97,9 @@ describe('FilterSortCollection Component', () => {
       const rowsWrapper = wrapper.find('rowComponent');
 
       expect(rowsWrapper).toHaveLength(3);
-      rowsWrapper.forEach((rowWrapper, i) => {
-        expect(rowWrapper.prop('vegetable')).toEqual(vegetables.slice().reverse()[i]);
-      });
+      expect(rowsWrapper.at(0)).toHaveProp('vegetable', vegetables[2]);
+      expect(rowsWrapper.at(1)).toHaveProp('vegetable', vegetables[1]);
+      expect(rowsWrapper.at(2)).toHaveProp('vegetable', vegetables[0]);
     });
 
     it('sorts selected sort column (vegetables) values in ascending order', () => {
@@ -111,9 +111,9 @@ describe('FilterSortCollection Component', () => {
       const rowsWrapper = wrapper.find('rowComponent');
 
       expect(rowsWrapper).toHaveLength(3);
-      rowsWrapper.forEach((rowWrapper, i) => {
-        expect(rowWrapper.prop('vegetable')).toEqual(vegetables[i]);
-      });
+      expect(rowsWrapper.at(0)).toHaveProp('vegetable', vegetables[0]);
+      expect(rowsWrapper.at(1)).toHaveProp('vegetable', vegetables[1]);
+      expect(rowsWrapper.at(2)).toHaveProp('vegetable', vegetables[2]);
     });
   });
 });

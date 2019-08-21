@@ -48,7 +48,7 @@ exports[`FilterSortCollection Component renders renders with props 1`] = `
           "vegetable": "artichoke",
         },
         Object {
-          "fruit": "carrot",
+          "fruit": "cherry",
           "vegetable": "broccoli",
         },
       ]
