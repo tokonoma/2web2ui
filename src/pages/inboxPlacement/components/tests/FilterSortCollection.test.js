@@ -6,6 +6,8 @@ import { Table } from '@sparkpost/matchbox';
 import { BrowserRouter as Router } from 'react-router-dom';
 
 describe('FilterSortCollection Component', () => {
+  const fruits = ['apple', 'banana', 'cherry'];
+  const vegetables = ['artichoke', 'broccoli', 'celery'];
   const props = {
     title: 'Menu',
     selectOptions: [{ value: 'fruit', label: 'Fruit' },
@@ -21,14 +23,14 @@ describe('FilterSortCollection Component', () => {
     },
     defaultSortColumn: 'fruit',
     rows: [{
-      fruit: 'apple',
-      vegetable: 'celery'
+      fruit: fruits[0],
+      vegetable: vegetables[2]
     }, {
-      fruit: 'banana',
-      vegetable: 'artichoke'
+      fruit: fruits[1],
+      vegetable: vegetables[0]
     }, {
-      fruit: 'carrot',
-      vegetable: 'broccoli'
+      fruit: fruits[2],
+      vegetable: vegetables[1]
     }],
     rowComponent: ({ fruit, vegetable }, iterator) => ([
       <Table.Row
@@ -66,32 +68,52 @@ describe('FilterSortCollection Component', () => {
       </Router>
     );
 
-    it('sorts default sort column values in default descending order', () => {
+    it('sorts default sort column (fruits) values in default descending order', () => {
       const wrapper = subject({ ...props });
-      expect(wrapper.find('table').props()).toMatchSnapshot();
+      const rowsWrapper = wrapper.find('rowComponent');
+
+      expect(rowsWrapper).toHaveLength(3);
+      expect(rowsWrapper.at(0)).toHaveProp('fruit', fruits[2]);
+      expect(rowsWrapper.at(1)).toHaveProp('fruit', fruits[1]);
+      expect(rowsWrapper.at(2)).toHaveProp('fruit', fruits[0]);
     });
 
-    it('sorts default sort column values in ascending order', () => {
+    it('sorts default sort column values (fruit) in ascending order', () => {
       const wrapper = subject({ ...props, defaultSortDirection: 'asc' });
-      expect(wrapper.find('table').props()).toMatchSnapshot();
+      const rowsWrapper = wrapper.find('rowComponent');
+
+      expect(rowsWrapper).toHaveLength(3);
+      expect(rowsWrapper.at(0)).toHaveProp('fruit', fruits[0]);
+      expect(rowsWrapper.at(1)).toHaveProp('fruit', fruits[1]);
+      expect(rowsWrapper.at(2)).toHaveProp('fruit', fruits[2]);
     });
 
-    it('sorts selected sort column values in default descending order', () => {
+    it('sorts selected sort column (vegetables) values in default descending order', () => {
       const wrapper = subject({ ...props });
       act(() => {
         wrapper.find('select option[value="vegetable"]').simulate('change');
       });
       wrapper.update();
-      expect(wrapper.find('table').props()).toMatchSnapshot();
+      const rowsWrapper = wrapper.find('rowComponent');
+
+      expect(rowsWrapper).toHaveLength(3);
+      expect(rowsWrapper.at(0)).toHaveProp('vegetable', vegetables[2]);
+      expect(rowsWrapper.at(1)).toHaveProp('vegetable', vegetables[1]);
+      expect(rowsWrapper.at(2)).toHaveProp('vegetable', vegetables[0]);
     });
 
-    it('sorts selected sort column values in ascending order', () => {
+    it('sorts selected sort column (vegetables) values in ascending order', () => {
       const wrapper = subject({ ...props, defaultSortDirection: 'asc' });
       act(() => {
         wrapper.find('select option[value="vegetable"]').simulate('change');
       });
       wrapper.update();
-      expect(wrapper.find('table').props()).toMatchSnapshot();
+      const rowsWrapper = wrapper.find('rowComponent');
+
+      expect(rowsWrapper).toHaveLength(3);
+      expect(rowsWrapper.at(0)).toHaveProp('vegetable', vegetables[0]);
+      expect(rowsWrapper.at(1)).toHaveProp('vegetable', vegetables[1]);
+      expect(rowsWrapper.at(2)).toHaveProp('vegetable', vegetables[2]);
     });
   });
 });
