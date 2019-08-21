@@ -56,7 +56,7 @@ Array [
   Object {
     "meta": Object {
       "method": "POST",
-      "url": "v1/recipient-validation/12345",
+      "url": "v1/recipient-validation/trigger/12345",
     },
     "type": "TRIGGER_JOB",
   },
