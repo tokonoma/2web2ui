@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { Field, formValueSelector, change } from 'redux-form';
 import { SelectWrapper, TextFieldWrapper } from 'src/components/reduxFormWrappers';
@@ -7,6 +7,7 @@ import { Grid, Slider, Label } from '@sparkpost/matchbox';
 import { numberBetweenInclusive } from 'src/helpers/validation';
 import { FORM_NAME, RECOMMENDED_METRIC_VALUE } from '../../constants/formConstants';
 import styles from './EvaluatorFields.module.scss';
+import _ from 'lodash';
 
 export const EvaluatorFields = ({
   metric,
@@ -15,48 +16,29 @@ export const EvaluatorFields = ({
   operator,
   disabled,
   change,
-  isNewAlert,
-  isDuplicate
+  shouldUpdateRecommendation
 }) => {
-
-  const [sliderValue, setSliderValue] = useState(value);
-
-
   const changeValueField = (val) => {
-    setSliderValue(val);
     change(FORM_NAME, 'value', val);
   };
 
-  const changeSlider = (event) => {
-    setSliderValue(event.target.value);
-  };
-
-  const setOperatorOnSourceChange = (event,metric) => {
+  const handleSourceChange = (event) => {
     const { target: { value }} = event;
     if (value !== 'raw') {
       change(FORM_NAME, 'operator', 'gt');
-      if (isNewAlert && !isDuplicate) {
-        changeValueField(RECOMMENDED_METRIC_VALUE[metric][value]);
-      }
-    } else {
-      if (isNewAlert && !isDuplicate) {
-        changeValueField(RECOMMENDED_METRIC_VALUE[metric][value].gt);
-      }
     }
+    if (shouldUpdateRecommendation) {
+      changeValueField(RECOMMENDED_METRIC_VALUE[metric][value].gt);
+    }
+
   };
 
   const setValueOnOperatorChange = (event) => {
-    if (isNewAlert && !isDuplicate) {
+    if (shouldUpdateRecommendation) {
       changeValueField(RECOMMENDED_METRIC_VALUE[metric][source][event.target.value]);
     }
   };
-
-  const getTicksRecommendedValue = (sourceOptions, operatorOptions) => sourceOptions.length > 1
-    ? operatorOptions.length > 1
-      ? RECOMMENDED_METRIC_VALUE[metric][source][operator]
-      : RECOMMENDED_METRIC_VALUE[metric][source]
-    : RECOMMENDED_METRIC_VALUE[metric];
-
+  const getRecommendedValue = () => _.get(RECOMMENDED_METRIC_VALUE, [metric, source, operator], 0);
   const formspec = getFormSpec(metric);
 
   const sourceOptions = formspec.sourceOptions || [];
@@ -74,7 +56,7 @@ export const EvaluatorFields = ({
             component={SelectWrapper}
             disabled={disabled}
             options={sourceOptions}
-            onChange={(event) => setOperatorOnSourceChange(event, metric)}
+            onChange={handleSourceChange}
           />
         </Grid.Column>
       )}
@@ -95,12 +77,12 @@ export const EvaluatorFields = ({
           <Label>{sliderLabel}</Label>
           <Slider
             id='slider'
-            value={sliderValue}
+            value={value}
             key={sliderLength}
             onChange={changeValueField}
             precision={sliderPrecision}
             ticks={{
-              [getTicksRecommendedValue(sourceOptions,operatorOptions)]: 'Recommended'
+              [ getRecommendedValue() ]: 'Recommended'
             }}
           />
         </div>
@@ -115,7 +97,7 @@ export const EvaluatorFields = ({
           normalize={Math.abs}
           type='number'
           align='right'
-          onChange={changeSlider}
+          onChange={changeValueField}
         />
       </Grid.Column>
     </Grid>

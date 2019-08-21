@@ -15,10 +15,10 @@ const realtimeMetricsSpec = (metric) => ({
   filterType: 'multi',
   filterOptions: getOptionsFromMap(REALTIME_FILTERS, FILTERS_FRIENDLY_NAMES),
   sourceOptions: getOptionsFromMap(['raw'], SOURCE_FRIENDLY_NAMES),
+  defaultRecommendedValue: RECOMMENDED_METRIC_VALUE[metric].raw.gt,
   defaultFieldValues: [
     { fieldName: 'source', fieldValue: 'raw' },
-    { fieldName: 'operator', fieldValue: 'gt' },
-    { fieldName: 'value', fieldValue: RECOMMENDED_METRIC_VALUE[metric] }
+    { fieldName: 'operator', fieldValue: 'gt' }
   ]
 });
 
@@ -28,11 +28,11 @@ const metricToFormSpecMap = {
     filterType: null,
     filterOptions: [],
     sourceOptions: getOptionsFromMap(['raw'], SOURCE_FRIENDLY_NAMES),
+    defaultRecommendedValue: RECOMMENDED_METRIC_VALUE['monthly_sending_limit'].raw.gt,
     defaultFieldValues: [
       { fieldName: 'subaccounts', fieldValue: []},
       { fieldName: 'source', fieldValue: 'raw' },
-      { fieldName: 'operator', fieldValue: 'gt' },
-      { fieldName: 'value', fieldValue: RECOMMENDED_METRIC_VALUE['monthly_sending_limit'] }
+      { fieldName: 'operator', fieldValue: 'gt' }
     ]
   },
   block_bounce_rate: realtimeMetricsSpec('block_bounce_rate'),
@@ -43,10 +43,10 @@ const metricToFormSpecMap = {
     filterType: 'single',
     filterOptions: getOptionsFromMap(SIGNALS_FILTERS, FILTERS_FRIENDLY_NAMES),
     sourceOptions: getOptionsFromMap(['raw','week_over_week','day_over_day'], SOURCE_FRIENDLY_NAMES),
+    defaultRecommendedValue: RECOMMENDED_METRIC_VALUE['health_score'].raw.lt,
     defaultFieldValues: [
       { fieldName: 'source', fieldValue: 'raw' },
-      { fieldName: 'operator', fieldValue: 'lt' },
-      { fieldName: 'value', fieldValue: RECOMMENDED_METRIC_VALUE['health_score'].raw.lt }
+      { fieldName: 'operator', fieldValue: 'lt' }
     ]
   }
 };

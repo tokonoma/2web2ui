@@ -16,9 +16,9 @@ describe('Alert form helper: ', () => {
       filterType: 'single',
       defaultFieldValues: [
         { fieldName: 'source', fieldValue: 'raw' },
-        { fieldName: 'operator', fieldValue: 'lt' },
-        { fieldName: 'value', fieldValue: 80 }
-      ]
+        { fieldName: 'operator', fieldValue: 'lt' }
+      ],
+      defaultRecommendedValue: 80
     };
     const { filterOptions, sourceOptions, ...rest } = alertFormHelper.getFormSpec(metric);
     expect(rest).toEqual(expected);
