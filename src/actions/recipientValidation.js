@@ -26,7 +26,7 @@ export function uploadListNew(data) {
     type: 'UPLOAD_RV_LIST_NEW',
     meta: {
       method: 'POST',
-      url: 'v1/recipient-validation/list',
+      url: 'v1/recipient-validation/upload',
       data
     }
   });
@@ -37,7 +37,7 @@ export function triggerJob(list_id) {
     type: 'TRIGGER_JOB',
     meta: {
       method: 'POST',
-      url: `v1/recipient-validation/${list_id}`
+      url: `v1/recipient-validation/trigger/${list_id}`
     }
   });
 }
