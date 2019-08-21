@@ -98,7 +98,6 @@ exports[`Evaluator Fields Component renders correctly 1`] = `
       disabled={false}
       name="value"
       normalize={[Function]}
-      onChange={[Function]}
       suffix=""
       type="number"
       validate={[Function]}

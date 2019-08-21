@@ -65,8 +65,9 @@ describe('Evaluator Fields Component', () => {
   });
 
   it('changes slider value when value field value changes', () => {
-    wrapper.find({ name: 'value' }).simulate('change', 60);
-    expect(props.change).toHaveBeenCalledWith(FORM_NAME, 'value', 60);
+    expect(wrapper.find('Slider').prop('value')).toEqual(50);
+    wrapper.setProps({ value: 60 });
+    expect(wrapper.find('Slider').prop('value')).toEqual(60);
   });
 
   it('changes operator to gt when selecting WOW or DOD', () => {

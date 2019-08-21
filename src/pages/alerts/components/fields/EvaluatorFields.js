@@ -97,7 +97,6 @@ export const EvaluatorFields = ({
           normalize={Math.abs}
           type='number'
           align='right'
-          onChange={changeValueField}
         />
       </Grid.Column>
     </Grid>
