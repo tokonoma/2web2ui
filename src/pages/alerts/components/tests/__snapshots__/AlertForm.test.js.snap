@@ -75,6 +75,8 @@ exports[`Alert Form Component should render the alert form component correctly 1
           >
             <Connect(EvaluatorFields)
               disabled={false}
+              key="health_score"
+              shouldUpdateRecommendation={true}
             />
           </div>
           <div

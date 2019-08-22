@@ -42,7 +42,7 @@ describe('Alert Form Component', () => {
 
   it('should reset form values when changing metric', () => {
     wrapper.find({ name: 'metric' }).simulate('change', { target: { value: 'block_bounce_rate' }});
-    expect(wrapper.instance().props.change).toHaveBeenCalledTimes(6);//4 filters + 2 default values ;
+    expect(wrapper.instance().props.change).toHaveBeenCalledTimes(7);//4 filters + 3 default values ;
   });
 
   it('should show filters when metric has filters', () => {

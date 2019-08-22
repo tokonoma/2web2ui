@@ -14,7 +14,8 @@ describe('Evaluator Fields Component', () => {
       disabled: false,
       change: jest.fn(),
       value: 50,
-      source: 'raw'
+      source: 'raw',
+      operator: 'gt'
     };
 
     wrapper = shallow(<EvaluatorFields {...props} />);
@@ -65,12 +66,37 @@ describe('Evaluator Fields Component', () => {
 
   it('changes slider value when value field value changes', () => {
     expect(wrapper.find('Slider').prop('value')).toEqual(50);
-    wrapper.find({ name: 'value' }).simulate('change', { target: { value: 60 }});
+    wrapper.setProps({ value: 60 });
     expect(wrapper.find('Slider').prop('value')).toEqual(60);
   });
 
   it('changes operator to gt when selecting WOW or DOD', () => {
     wrapper.find({ name: 'source' }).simulate('change', { target: { value: 'week_over_week' }});
     expect(props.change).toHaveBeenCalledWith(FORM_NAME, 'operator', 'gt');
+  });
+
+
+  describe('slider recommended tick changes with',() => {
+    const formCases = {
+      'metric change': {
+        prop: { metric: 'block_bounce_rate' },
+        recommendedValue: 20
+      },
+      'operator change': {
+        prop: { metric: 'health_score', source: 'raw', operator: 'gt' },
+        recommendedValue: 70
+      },
+      'source change': {
+        prop: { metric: 'health_score', source: 'week_over_week' },
+        recommendedValue: 10
+      }
+    };
+
+    cases('should be correct tick', ({ prop, recommendedValue }) => {
+      wrapper.setProps(prop);
+      expect(wrapper.find({ id: 'slider' }).prop('ticks')).toMatchObject({ [recommendedValue]: 'Recommended' });
+    }, formCases);
+
+
   });
 });

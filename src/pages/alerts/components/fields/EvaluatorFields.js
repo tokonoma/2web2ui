@@ -1,38 +1,44 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { Field, formValueSelector, change } from 'redux-form';
 import { SelectWrapper, TextFieldWrapper } from 'src/components/reduxFormWrappers';
 import { getFormSpec, getEvaluatorOptions } from '../../helpers/alertForm';
 import { Grid, Slider, Label } from '@sparkpost/matchbox';
 import { numberBetweenInclusive } from 'src/helpers/validation';
-import { FORM_NAME } from '../../constants/formConstants';
+import { FORM_NAME, RECOMMENDED_METRIC_VALUE } from '../../constants/formConstants';
 import styles from './EvaluatorFields.module.scss';
+import _ from 'lodash';
 
 export const EvaluatorFields = ({
   metric,
   value,
   source,
+  operator,
   disabled,
-  change
+  change,
+  shouldUpdateRecommendation
 }) => {
-
-  const [sliderValue, setSliderValue] = useState(value);
-
   const changeValueField = (val) => {
     change(FORM_NAME, 'value', val);
   };
 
-  const changeSlider = (event) => {
-    setSliderValue(event.target.value);
-  };
-
-  const setOperatorOnSourceChange = (event) => {
+  const handleSourceChange = (event) => {
     const { target: { value }} = event;
     if (value !== 'raw') {
       change(FORM_NAME, 'operator', 'gt');
     }
+    if (shouldUpdateRecommendation) {
+      changeValueField(RECOMMENDED_METRIC_VALUE[metric][value].gt);
+    }
+
   };
 
+  const setValueOnOperatorChange = (event) => {
+    if (shouldUpdateRecommendation) {
+      changeValueField(RECOMMENDED_METRIC_VALUE[metric][source][event.target.value]);
+    }
+  };
+  const getRecommendedValue = () => _.get(RECOMMENDED_METRIC_VALUE, [metric, source, operator], 0);
   const formspec = getFormSpec(metric);
 
   const sourceOptions = formspec.sourceOptions || [];
@@ -40,7 +46,6 @@ export const EvaluatorFields = ({
   const { operatorOptions = [], suffix, sliderLabel, sliderPrecision } = getEvaluatorOptions(metric, source);
 
   const sliderLength = 10 - ((sourceOptions.length > 1) ? 3 : 0) - ((operatorOptions.length > 1) ? 2 : 0);
-
   return (
     <Grid className={styles.Grid}>
       {sourceOptions.length > 1 && (
@@ -51,7 +56,7 @@ export const EvaluatorFields = ({
             component={SelectWrapper}
             disabled={disabled}
             options={sourceOptions}
-            onChange={setOperatorOnSourceChange}
+            onChange={handleSourceChange}
           />
         </Grid.Column>
       )}
@@ -63,6 +68,7 @@ export const EvaluatorFields = ({
             component={SelectWrapper}
             disabled={disabled}
             options={operatorOptions}
+            onChange={setValueOnOperatorChange}
           />
         </Grid.Column>
       )}
@@ -70,10 +76,14 @@ export const EvaluatorFields = ({
         <div className={styles.Slider}>
           <Label>{sliderLabel}</Label>
           <Slider
-            value={sliderValue}
+            id='slider'
+            value={value}
             key={sliderLength}
             onChange={changeValueField}
             precision={sliderPrecision}
+            ticks={{
+              [ getRecommendedValue() ]: 'Recommended'
+            }}
           />
         </div>
       </Grid.Column>
@@ -87,7 +97,6 @@ export const EvaluatorFields = ({
           normalize={Math.abs}
           type='number'
           align='right'
-          onChange={changeSlider}
         />
       </Grid.Column>
     </Grid>
@@ -100,7 +109,8 @@ const mapStateToProps = (state) => {
   return {
     metric: selector(state, 'metric'),
     value: selector(state, 'value'),
-    source: selector(state, 'source') || []
+    source: selector(state, 'source') || [],
+    operator: selector(state,'operator') || []
   };
 };
 

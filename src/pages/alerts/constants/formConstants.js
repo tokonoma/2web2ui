@@ -1,3 +1,6 @@
+import React from 'react';
+import { EmailIcon, SlackIcon, WebhookIcon } from 'src/components/icons';
+import { emails, ifStringPresent } from 'src/helpers/validation';
 export const FORM_NAME = 'alertForm';
 
 export const METRICS = {
@@ -14,6 +17,66 @@ export const FILTERS_FRIENDLY_NAMES = {
   mailbox_provider: 'Mailbox Provider',
   sending_domain: 'Sending Domain',
   sending_ip: 'Sending IP'
+};
+
+export const RECOMMENDED_METRIC_VALUE = {
+  monthly_sending_limit: {
+    raw: {
+      gt: 80
+    }},
+  health_score: {
+    raw: {
+      lt: 80,
+      gt: 70
+    },
+    week_over_week: {
+      gt: 10
+    },
+    day_over_day: {
+      gt: 10
+    }
+  },
+  block_bounce_rate: {
+    raw: {
+      gt: 20
+    }
+  },
+  hard_bounce_rate: {
+    raw: {
+      gt: 20
+    }
+  },
+  soft_bounce_rate: {
+    raw: {
+      gt: 20
+    }
+  }
+};
+
+export const NOTIFICATION_CHANNEL_DATA = {
+  emails: {
+    icon: <EmailIcon />,
+    subtitle: 'You and your team can receive alerts through email',
+    fieldProps: {
+      validate: ifStringPresent(emails),
+      placeholder: 'example@email.com',
+      multiline: true
+    }
+  },
+  slack: {
+    icon: <SlackIcon />,
+    subtitle: 'Integrate this alert with Slack',
+    fieldProps: {
+      placeholder: 'https://hooks.slack.com/services/T00/B00/XX '
+    }
+  },
+  webhook: {
+    icon: <WebhookIcon />,
+    subtitle: 'Create a webhook for this alert',
+    fieldProps: {
+      placeholder: 'https://example.com/webhook-target'
+    }
+  }
 };
 
 export const SIGNALS_FILTERS = [

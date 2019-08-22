@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Field, Form } from 'redux-form';
-
 // Components
 import { Panel, Grid, Button, Expandable, Error } from '@sparkpost/matchbox';
 import { TextFieldWrapper, SelectWrapper } from 'src/components';
@@ -9,49 +8,19 @@ import EvaluatorFields from './fields/EvaluatorFields';
 import SubaccountField from './fields/SubaccountsField';
 import getOptions from '../helpers/getOptions';
 import { getFormSpec, capitalizeFirstLetter } from '../helpers/alertForm';
-import { METRICS, REALTIME_FILTERS, NOTIFICATION_CHANNELS } from '../constants/formConstants';
-import { EmailIcon, SlackIcon, WebhookIcon } from 'src/components/icons';
+import { METRICS, REALTIME_FILTERS, NOTIFICATION_CHANNELS, NOTIFICATION_CHANNEL_DATA } from '../constants/formConstants';
 import styles from './AlertForm.module.scss';
 import withAlertForm from './AlertForm.container';
-
 // Helpers & Validation
-import { emails, ifStringPresent, maxLength, required } from 'src/helpers/validation';
-
+import { maxLength, required } from 'src/helpers/validation';
 const metricsOptions = [{ value: '', label: 'Select Metric', disabled: true }, ...getOptions(METRICS)];
-
-const notificationChannelData = {
-  emails: {
-    icon: <EmailIcon />,
-    subtitle: 'You and your team can receive alerts through email',
-    fieldProps: {
-      validate: ifStringPresent(emails),
-      placeholder: 'example@email.com',
-      multiline: true
-    }
-  },
-  slack: {
-    icon: <SlackIcon />,
-    subtitle: 'Integrate this alert with Slack',
-    fieldProps: {
-      placeholder: 'https://hooks.slack.com/services/T00/B00/XX '
-    }
-  },
-  webhook: {
-    icon: <WebhookIcon />,
-    subtitle: 'Create a webhook for this alert',
-    fieldProps: {
-      placeholder: 'https://example.com/webhook-target'
-    }
-  }
-};
 
 export class AlertForm extends Component {
 
   resetFormValues = (event) => {
-    const { change } = this.props;
+    const { change, isNewAlert, isDuplicate } = this.props;
     const formSpec = getFormSpec(event.target.value);
-    const { defaultFieldValues } = formSpec;
-
+    const { defaultFieldValues, defaultRecommendedValue } = formSpec;
     REALTIME_FILTERS.forEach((filter) => {
       change(filter, []);
     });
@@ -59,21 +28,24 @@ export class AlertForm extends Component {
     defaultFieldValues.forEach(({ fieldName, fieldValue }) => {
       change(fieldName, fieldValue);
     });
+    if (isNewAlert && !isDuplicate) {
+      change('value', defaultRecommendedValue);
+    }
   };
 
   renderNotificationChannels = () => NOTIFICATION_CHANNELS.map((channel) =>
     (
       <Expandable
-        icon={notificationChannelData[channel].icon}
+        icon={NOTIFICATION_CHANNEL_DATA[channel].icon}
         title={capitalizeFirstLetter(channel)}
         id={channel}
-        subtitle={notificationChannelData[channel].subtitle}
+        subtitle={NOTIFICATION_CHANNEL_DATA[channel].subtitle}
         key={channel}>
         <Field
           name={channel}
           component={TextFieldWrapper}
           disabled={this.props.submitting}
-          {...notificationChannelData[channel].fieldProps}
+          {...NOTIFICATION_CHANNEL_DATA[channel].fieldProps}
         />
       </Expandable>
     )
@@ -100,7 +72,6 @@ export class AlertForm extends Component {
     const isSubmitDisabled = (pristine && !isDuplicate) || submitting; //Allows user to create the same alert if if's a duplicate
     const formSpec = getFormSpec(metric);
     const channelsError = this.isNotificationChannelsEmpty(formMeta, formErrors);
-
     return (
       <Form onSubmit={handleSubmit}>
         <Panel className = {styles.Form}>
@@ -127,7 +98,9 @@ export class AlertForm extends Component {
                 {metric !== '' &&
                 <div className={styles.Evaluator}>
                   <EvaluatorFields
+                    key={metric}
                     disabled={submitting}
+                    shouldUpdateRecommendation = {isNewAlert && !isDuplicate}
                   />
                 </div>
                 }
