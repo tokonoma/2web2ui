@@ -1,5 +1,5 @@
 import React from 'react';
-import { Panel, Tag } from '@sparkpost/matchbox';
+import { Panel, Tag, Button } from '@sparkpost/matchbox';
 import { Error, FileDownload, CheckCircle, Cached, CloudUpload } from '@sparkpost/matchbox-icons';
 import DownloadLink from 'src/components/downloadLink/DownloadLink';
 import TableCollection from 'src/components/collection/TableCollection';
@@ -49,38 +49,51 @@ const ListResultsCard = ({ results = {}, newListUpload }) => {
       }
     },
     {
-      dataCellComponent: ({ status }) => {
-        if (statusProps[status]) {
-          const { className, icon: Icon, message } = statusProps[status];
+      dataCellComponent: ({ complete, status }) => {
+        let jobStatus;
 
-          return (
-            <Tag>
-              <span className={className}>
-                <Icon />&nbsp;
-              </span>
-
-              <span>{message}</span>
-            </Tag>
-          );
+        if (!complete && status !== 'queued_for_batch') {
+          jobStatus = 'loading';
+        } else {
+          jobStatus = status;
         }
 
-        return null;
+        const { className, icon: Icon, message } = statusProps[jobStatus];
+
+        return (
+          <Tag>
+            <span className={className}>
+              <Icon />&nbsp;
+            </span>
+
+            <span>{message}</span>
+          </Tag>
+        );
       },
       header: {
         label: 'Status'
       }
     },
     {
-      dataCellComponent: () => null,
+      dataCellComponent: ({ addressCount }) => <span>{addressCount}</span>,
       header: {
         label: 'Total'
       }
     },
     {
-      dataCellComponent: () => (
-        <DownloadLink>
-          <FileDownload/>
-        </DownloadLink>
+      dataCellComponent: ({ complete, uploadedFile, rejectedUrl }) => (
+        <>
+          {complete &&
+            <DownloadLink
+              component={Button}
+              to={rejectedUrl ? rejectedUrl : uploadedFile}
+            >
+              <span>Download Results&nbsp;</span>
+
+              <FileDownload/>
+            </DownloadLink>
+          }
+        </>
       ),
       header: {
         label: 'Download'
