@@ -85,6 +85,7 @@ const ListResultsCard = ({ results = {}, newListUpload }) => {
         <>
           {complete &&
             <DownloadLink
+              style={{ 'float': 'right' }}
               component={Button}
               to={rejectedUrl ? rejectedUrl : uploadedFile}
             >
