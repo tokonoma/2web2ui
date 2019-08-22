@@ -1,20 +1,29 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Summary Table should render row data 1`] = `
+exports[`Summary Table group by should render row data 1`] = `
 Array [
-  <a
-    href="/reports/summary/?filters=Subaccount%3AMaster%20Account%20%28ID%200%29%3A0"
-    rel=""
-    target=""
+  <UnstyledLink
+    onClick={[Function]}
+    to="/reports/summary/?filters=Subaccount%3AMaster%20Account%20%28ID%200%29%3A0"
   >
-    Master Account (ID 0)
-  </a>,
+    <a
+      href="/reports/summary/?filters=Subaccount%3AMaster%20Account%20%28ID%200%29%3A0"
+      onClick={[Function]}
+      rel=""
+      target=""
+    >
+      Master Account (ID 0)
+       
+    </a>
+  </UnstyledLink>,
   <div
     className="RightAlign"
   >
     <Unit
       value={123}
-    />
+    >
+      123
+    </Unit>
   </div>,
   <div
     className="RightAlign"
@@ -22,21 +31,32 @@ Array [
     <Unit
       unit="millisecond"
       value={12345}
-    />
+    >
+      12,345
+    </Unit>
   </div>,
-  <a
-    href="/reports/summary/?filters=Subaccount%3Asub%201%20name%3A555"
-    rel=""
-    target=""
+  <UnstyledLink
+    onClick={[Function]}
+    to="/reports/summary/?filters=Subaccount%3Asub%201%20name%3A555"
   >
-    sub 1 name
-  </a>,
+    <a
+      href="/reports/summary/?filters=Subaccount%3Asub%201%20name%3A555"
+      onClick={[Function]}
+      rel=""
+      target=""
+    >
+      sub 1 name
+       
+    </a>
+  </UnstyledLink>,
   <div
     className="RightAlign"
   >
     <Unit
       value={123}
-    />
+    >
+      123
+    </Unit>
   </div>,
   <div
     className="RightAlign"
@@ -44,21 +64,32 @@ Array [
     <Unit
       unit="millisecond"
       value={12345}
-    />
+    >
+      12,345
+    </Unit>
   </div>,
-  <a
-    href="/reports/summary/?filters=Subaccount%3ADeleted%20%28ID%201010%29%3A1010"
-    rel=""
-    target=""
+  <UnstyledLink
+    onClick={[Function]}
+    to="/reports/summary/?filters=Subaccount%3ADeleted%20%28ID%201010%29%3A1010"
   >
-    Deleted (ID 1010)
-  </a>,
+    <a
+      href="/reports/summary/?filters=Subaccount%3ADeleted%20%28ID%201010%29%3A1010"
+      onClick={[Function]}
+      rel=""
+      target=""
+    >
+      Deleted (ID 1010)
+       
+    </a>
+  </UnstyledLink>,
   <div
     className="RightAlign"
   >
     <Unit
       value={123}
-    />
+    >
+      123
+    </Unit>
   </div>,
   <div
     className="RightAlign"
@@ -66,7 +97,9 @@ Array [
     <Unit
       unit="millisecond"
       value={12345}
-    />
+    >
+      12,345
+    </Unit>
   </div>,
 ]
 `;

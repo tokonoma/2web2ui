@@ -1,6 +1,6 @@
 import React from 'react';
 import { Table } from '../Table';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import _ from 'lodash';
 
 describe('Summary Table', () => {
@@ -51,17 +51,24 @@ describe('Summary Table', () => {
     expect(wrapper.find('Loading')).toHaveLength(1);
   });
 
-  it('should render row data', () => {
-    const snaps = [];
-    wrapper.setProps({ groupBy: 'subaccount' });
-    const func = wrapper.instance().getRowData();
-    const results = _.flatten(data.map(func));
+  describe('group by', () => {
+    let snaps;
+    beforeEach(() => {
+      wrapper.setProps({ groupBy: 'subaccount' });
+      const func = wrapper.instance().getRowData();
+      const results = _.flatten(data.map(func));
 
-    _.each(results, (item, i) => {
-      snaps.push(shallow(item));
+      snaps = _.map(results, (item) => mount(item));
     });
 
-    expect(snaps).toMatchSnapshot();
+    it('should render row data', () => {
+      expect(snaps).toMatchSnapshot();
+    });
+
+    it('should handle row click', () => {
+      snaps[0].find('UnstyledLink').simulate('click');
+      expect(props.addFilters).toHaveBeenCalledWith([{ id: 0, type: 'Subaccount', value: 'Master Account (ID 0)' }]);
+    });
   });
 
   it('should render with aggregate data', () => {

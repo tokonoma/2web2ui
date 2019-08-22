@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import cx from 'classnames';
 
 import { _getTableData } from 'src/actions/summaryChart';
+import { addFilters } from 'src/actions/reportOptions';
 import typeaheadCacheSelector from 'src/selectors/reportFilterTypeaheadCache';
 import { hasSubaccounts } from 'src/selectors/subaccounts';
 
@@ -14,11 +15,16 @@ import { GROUP_CONFIG } from './tableConfig';
 import _ from 'lodash';
 
 import styles from './Table.module.scss';
-import qs from 'query-string';
+import qs from 'qs';
 import { stringifyTypeaheadfilter } from 'src/helpers/string';
 import { selectSummaryChartSearchOptions } from 'src/selectors/reportSearchOptions';
 
 export class Table extends Component {
+
+  handleRowClick = (item, e) => {
+    this.props.addFilters([item]);
+    e.preventDefault();
+  };
 
   getColumnHeaders() {
     const { metrics, groupBy } = this.props;
@@ -66,9 +72,9 @@ export class Table extends Component {
 
       const currentFilters = searchOptions.filters || [];
       const mergedFilters = _.uniqWith([ ...currentFilters, stringifyTypeaheadfilter(filter)], _.isEqual);
-      const linkParams = qs.stringify({ ...searchOptions, filters: mergedFilters });
+      const linkParams = qs.stringify({ ...searchOptions, filters: mergedFilters }, { arrayFormat: 'repeat' });
 
-      const primaryCol = groupBy === 'aggregate' ? 'Aggregate Total' : <UnstyledLink to={`/reports/summary/?${linkParams}`}>{filter.value}</UnstyledLink>;
+      const primaryCol = groupBy === 'aggregate' ? 'Aggregate Total' : <UnstyledLink onClick={(e) => this.handleRowClick(filter, e)} to={`/reports/summary/?${linkParams}`}>{filter.value} </UnstyledLink>;
       const metricCols = metrics.map((metric) => (
         <div className={styles.RightAlign}>
           <Unit value={row[metric.key]} unit={metric.unit}/>
@@ -159,4 +165,4 @@ const mapStateToProps = (state) => ({
   searchOptions: selectSummaryChartSearchOptions(state),
   ...state.summaryChart
 });
-export default connect(mapStateToProps, { _getTableData })(Table);
+export default connect(mapStateToProps, { _getTableData, addFilters })(Table);
