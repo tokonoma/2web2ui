@@ -1,24 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Summary Table  should render row data & handle click 1`] = `
+exports[`Summary Table should render row data 1`] = `
 Array [
-  <UnstyledLink
-    onClick={[Function]}
+  <a
+    href="/reports/summary/?filters=Subaccount%3AMaster%20Account%20%28ID%200%29%3A0"
+    rel=""
+    target=""
   >
-    <a
-      onClick={[Function]}
-    >
-      Master Account (ID 0)
-    </a>
-  </UnstyledLink>,
+    Master Account (ID 0)
+  </a>,
   <div
     className="RightAlign"
   >
     <Unit
       value={123}
-    >
-      123
-    </Unit>
+    />
   </div>,
   <div
     className="RightAlign"
@@ -26,27 +22,21 @@ Array [
     <Unit
       unit="millisecond"
       value={12345}
-    >
-      12,345
-    </Unit>
+    />
   </div>,
-  <UnstyledLink
-    onClick={[Function]}
+  <a
+    href="/reports/summary/?filters=Subaccount%3Asub%201%20name%3A555"
+    rel=""
+    target=""
   >
-    <a
-      onClick={[Function]}
-    >
-      sub 1 name
-    </a>
-  </UnstyledLink>,
+    sub 1 name
+  </a>,
   <div
     className="RightAlign"
   >
     <Unit
       value={123}
-    >
-      123
-    </Unit>
+    />
   </div>,
   <div
     className="RightAlign"
@@ -54,27 +44,21 @@ Array [
     <Unit
       unit="millisecond"
       value={12345}
-    >
-      12,345
-    </Unit>
+    />
   </div>,
-  <UnstyledLink
-    onClick={[Function]}
+  <a
+    href="/reports/summary/?filters=Subaccount%3ADeleted%20%28ID%201010%29%3A1010"
+    rel=""
+    target=""
   >
-    <a
-      onClick={[Function]}
-    >
-      Deleted (ID 1010)
-    </a>
-  </UnstyledLink>,
+    Deleted (ID 1010)
+  </a>,
   <div
     className="RightAlign"
   >
     <Unit
       value={123}
-    >
-      123
-    </Unit>
+    />
   </div>,
   <div
     className="RightAlign"
@@ -82,14 +66,12 @@ Array [
     <Unit
       unit="millisecond"
       value={12345}
-    >
-      12,345
-    </Unit>
+    />
   </div>,
 ]
 `;
 
-exports[`Summary Table  should render with aggregate data 1`] = `
+exports[`Summary Table should render with aggregate data 1`] = `
 <TableCollection
   defaultSortColumn={null}
   defaultSortDirection="asc"
@@ -107,7 +89,7 @@ exports[`Summary Table  should render with aggregate data 1`] = `
 />
 `;
 
-exports[`Summary Table  should render with data 1`] = `
+exports[`Summary Table should render with data 1`] = `
 <TableCollection
   columns={
     Array [
@@ -162,7 +144,7 @@ exports[`Summary Table  should render with data 1`] = `
 />
 `;
 
-exports[`Summary Table  should render with no data 1`] = `
+exports[`Summary Table should render with no data 1`] = `
 <Panel>
   <Panel.Section>
     <GroupByOption

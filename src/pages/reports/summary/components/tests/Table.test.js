@@ -1,9 +1,9 @@
 import React from 'react';
 import { Table } from '../Table';
-import { shallow, mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import _ from 'lodash';
 
-describe('Summary Table ', () => {
+describe('Summary Table', () => {
 
   let wrapper;
 
@@ -21,7 +21,10 @@ describe('Summary Table ', () => {
     ],
     tableData: [],
     tableLoading: false,
-    hasSubaccounts: false
+    hasSubaccounts: false,
+    searchOptions: {
+      filters: []
+    }
   };
 
   const data = [
@@ -48,20 +51,17 @@ describe('Summary Table ', () => {
     expect(wrapper.find('Loading')).toHaveLength(1);
   });
 
-  it('should render row data & handle click', () => {
+  it('should render row data', () => {
     const snaps = [];
     wrapper.setProps({ groupBy: 'subaccount' });
     const func = wrapper.instance().getRowData();
     const results = _.flatten(data.map(func));
 
     _.each(results, (item, i) => {
-      snaps.push(mount(item));
+      snaps.push(shallow(item));
     });
 
     expect(snaps).toMatchSnapshot();
-
-    snaps[0].find('UnstyledLink').simulate('click');
-    expect(props.addFilters).toHaveBeenCalledWith([{ id: 0, type: 'Subaccount', value: 'Master Account (ID 0)' }]);
   });
 
   it('should render with aggregate data', () => {
