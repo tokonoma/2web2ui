@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`selectRecipientValidationJobs returns collection of jobs 1`] = `
+Array [
+  Object {
+    "addressCount": 123,
+    "filename": "example.csv",
+    "jobId": "A1C2_D1C2",
+    "rejectedUrl": "http://example.com/download/reject.csv",
+    "status": "success",
+    "uploadedAt": 1318781876,
+    "uploadedFile": "http://example.com/download/upload.csv",
+  },
+]
+`;
