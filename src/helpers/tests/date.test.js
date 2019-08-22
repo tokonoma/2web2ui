@@ -16,7 +16,8 @@ import {
   formatInputTime,
   parseDate,
   parseTime,
-  parseDatetime
+  parseDatetime,
+  toMilliseconds
 } from '../date';
 import { roundBoundaries } from '../metrics';
 import cases from 'jest-in-case';
@@ -319,6 +320,12 @@ describe('Date helpers', () => {
         '2018-05-13',
         '2018-05-25'
       ]);
+    });
+  });
+
+  describe('toMilliseconds', () => {
+    it('returns milliseconds', () => {
+      expect(toMilliseconds(1318781876.721)).toEqual(1318781876721);
     });
   });
 });
