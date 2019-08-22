@@ -8,6 +8,7 @@
   padding: rem(100) 0 rem(100);
   text-align: center;	
 }
+
 .Complete {
   color: #45D09E;
 }
@@ -18,28 +19,4 @@
 
 .Ready {
   color: color(blue);
-}
-
-.PanelHeader {
-  font-size: 1.2em;
-}
-
-.TableHeader, .TableRow {
-  border-bottom: 0;
-}
-
-.TableRow {
-  line-height: 3rem;
-}
-
-.TableCell {
-  padding: 2px;
-}
-
-.TableContainer {
-  margin-top: 1rem;
-}
-
-.DownloadButton {
-  text-align: right;
 }
