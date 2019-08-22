@@ -1,12 +1,12 @@
 @import '~@sparkpost/matchbox/src/styles/config.scss';
 
 .Loading {
-  color: orange;
+  color: color(orange);
 }
 
 .LoadingWrapper {
   padding: rem(100) 0 rem(100);
-  text-align: center;	
+  text-align: center;
 }
 
 .Complete {
