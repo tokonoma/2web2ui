@@ -189,3 +189,6 @@ export function getDateTicks({ to, from }) {
     formatInputDate(to)
   ];
 }
+
+// see, https://momentjs.com/docs/#/parsing/unix-timestamp-milliseconds/
+export const toMilliseconds = (seconds) => seconds * 1000;

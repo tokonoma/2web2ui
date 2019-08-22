@@ -36,7 +36,15 @@ class TableCollection extends Component {
   }
 
   render() {
-    const { rowComponent, wrapperComponent, headerComponent, columns, getRowData, rows } = this.props;
+    const {
+      rowComponent,
+      wrapperComponent,
+      headerComponent,
+      columns,
+      getRowData,
+      rows,
+      title
+    } = this.props;
     const { sortColumn, sortDirection } = this.state;
 
     const WrapperComponent = wrapperComponent ? wrapperComponent : TableWrapper;
@@ -57,6 +65,7 @@ class TableCollection extends Component {
         rows={sortedRows}
         sortColumn={sortColumn}
         sortDirection={sortDirection}
+        title={title}
       />
     );
   }

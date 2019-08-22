@@ -76,17 +76,11 @@ export default (state = initialState, { meta, payload, type }) => {
       return { ...state, jobResultsLoading: false };
 
     case 'GET_JOB_LIST_SUCCESS': {
-      const jobResults = {};
-      payload.forEach((job) => {
-        jobResults[job.list_id] = {
-          status: job.batch_status,
-          complete: job.complete,
-          uploaded: job.upload_timestamp,
-          rejectedUrl: job.rejected_external_url,
-          filename: job.original_filename,
-          addressCount: job.address_count
-        };
-      });
+      const jobResults = payload.reduce((acc, job) => ({
+        ...acc,
+        [job.list_id]: job
+      }), {});
+
       return {
         ...state,
         jobResultsLoading: false,

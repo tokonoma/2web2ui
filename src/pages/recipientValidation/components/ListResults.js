@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import _ from 'lodash';
 import { connect } from 'react-redux';
 import { showAlert } from 'src/actions/globalAlert';
 import { PollContext } from 'src/context/Poll';
@@ -7,7 +8,7 @@ import withContext from 'src/context/withContext';
 import ListResultsCard from './ListResultsCard';
 import { isAccountUiOptionSet } from 'src/helpers/conditions/account';
 import { getLatestJob, getJobStatus, getList } from 'src/actions/recipientValidation';
-import _ from 'lodash';
+import { selectRecipientValidationJobs } from 'src/selectors/recipientValidation';
 
 export class ListResults extends Component {
 
@@ -106,7 +107,7 @@ const mapStateToProps = (state) => {
 
   return {
     latestId,
-    results: recipientValidation.jobResults || {},
+    results: selectRecipientValidationJobs(state),
     loading: recipientValidation.jobResultsLoading,
     newListUpload: isAccountUiOptionSet('recipientValidationV2')(state) //TODO: Remove in SE-156
   };

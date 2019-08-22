@@ -139,8 +139,10 @@ export class Collection extends Component {
       headerComponent: HeaderComponent = NullComponent,
       outerWrapper: OuterWrapper = PassThroughWrapper,
       bodyWrapper: BodyWrapper = PassThroughWrapper,
-      children
+      children,
+      title
     } = this.props;
+
     if (!rows.length) {
       return null;
     }
@@ -153,15 +155,16 @@ export class Collection extends Component {
           {this.getVisibleRows().map((row, i) => <RowComponent key={`${row[rowKeyName] || 'row'}-${i}`} {...row} />)}
         </BodyWrapper>
       </OuterWrapper>
-
     );
     const pagination = this.renderPagination();
+    const heading = <h3>{title}</h3>;
 
     return (
       typeof(children) === 'function'
-        ? children({ filterBox, collection, pagination })
+        ? children({ filterBox, collection, heading, pagination })
         : (
           <div >
+            {title && heading}
             {filterBox}
             {collection}
             {pagination}
