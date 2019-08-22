@@ -1,0 +1,152 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`recipientValidationReducer default 1`] = `
+Object {
+  "jobResults": Object {},
+  "jobResultsLoading": false,
+  "latest": null,
+  "listError": null,
+  "singleLoading": false,
+  "singleResults": null,
+  "uploadLoading": false,
+}
+`;
+
+exports[`recipientValidationReducer when get job list request fails 1`] = `
+Object {
+  "jobResults": Object {},
+  "jobResultsLoading": false,
+  "latest": null,
+  "listError": null,
+  "singleLoading": false,
+  "singleResults": null,
+  "uploadLoading": false,
+}
+`;
+
+exports[`recipientValidationReducer when get job list request succeeds 1`] = `
+Object {
+  "jobResults": Object {
+    "1": Object {
+      "batch_status": "success",
+      "list_id": 1,
+    },
+    "2": Object {
+      "batch_status": "success",
+      "list_id": 2,
+    },
+    "3": Object {
+      "batch_status": "success",
+      "list_id": 3,
+    },
+  },
+  "jobResultsLoading": false,
+  "latest": null,
+  "listError": null,
+  "singleLoading": false,
+  "singleResults": null,
+  "uploadLoading": false,
+}
+`;
+
+exports[`recipientValidationReducer when get job status request fails 1`] = `
+Object {
+  "jobResults": Object {},
+  "jobResultsLoading": false,
+  "latest": null,
+  "listError": null,
+  "singleLoading": false,
+  "singleResults": null,
+  "uploadLoading": false,
+}
+`;
+
+exports[`recipientValidationReducer when get job status request succeeds 1`] = `
+Object {
+  "jobResults": Object {
+    "1": Object {
+      "batch_status": "success",
+      "list_id": 1,
+    },
+    "2": Object {
+      "batch_status": "success",
+      "list_id": 2,
+    },
+  },
+  "jobResultsLoading": false,
+  "latest": null,
+  "listError": null,
+  "singleLoading": false,
+  "singleResults": null,
+  "uploadLoading": false,
+}
+`;
+
+exports[`recipientValidationReducer when verification is pending 1`] = `
+Object {
+  "jobResults": Object {},
+  "jobResultsLoading": false,
+  "latest": null,
+  "listError": null,
+  "singleLoading": true,
+  "singleResults": null,
+  "uploadLoading": false,
+}
+`;
+
+exports[`recipientValidationReducer when verification successfully returns invalid address 1`] = `
+Object {
+  "jobResults": Object {},
+  "jobResultsLoading": false,
+  "latest": null,
+  "listError": null,
+  "singleLoading": false,
+  "singleResults": Object {
+    "email": "invalid@address.com",
+    "is_role": false,
+    "reason": "not valid because mx lookup failed",
+    "valid": false,
+  },
+  "uploadLoading": false,
+}
+`;
+
+exports[`recipientValidationReducer when verification successfully returns valid address 1`] = `
+Object {
+  "jobResults": Object {},
+  "jobResultsLoading": false,
+  "latest": null,
+  "listError": null,
+  "singleLoading": false,
+  "singleResults": Object {
+    "email": "valid@address.com",
+    "is_role": false,
+    "valid": true,
+  },
+  "uploadLoading": false,
+}
+`;
+
+exports[`recipientValidationReducer with get job list request is pending 1`] = `
+Object {
+  "jobResults": Object {},
+  "jobResultsLoading": true,
+  "latest": null,
+  "listError": null,
+  "singleLoading": false,
+  "singleResults": null,
+  "uploadLoading": false,
+}
+`;
+
+exports[`recipientValidationReducer with get job status request is pending 1`] = `
+Object {
+  "jobResults": Object {},
+  "jobResultsLoading": true,
+  "latest": null,
+  "listError": null,
+  "singleLoading": false,
+  "singleResults": null,
+  "uploadLoading": false,
+}
+`;

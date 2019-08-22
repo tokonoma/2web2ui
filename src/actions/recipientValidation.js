@@ -151,6 +151,6 @@ export function getJobStatusMock(list_id) {
 
 export function resetUploadError() {
   return {
-    type: 'RESET_RECIPIENT_VALIDATION_ERROR'
+    type: 'RESET_RECIPIENT_VALIDATION_FAIL'
   };
 }
