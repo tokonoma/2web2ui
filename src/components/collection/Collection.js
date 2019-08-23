@@ -163,7 +163,7 @@ export class Collection extends Component {
       typeof(children) === 'function'
         ? children({ filterBox, collection, heading, pagination })
         : (
-          <div >
+          <div>
             {title && heading}
             {filterBox}
             {collection}
