@@ -11,7 +11,7 @@ export const initialState = {
 const recipientValidationReducer = (state = initialState, { meta, payload, type }) => {
   switch (type) {
     case 'GET_JOB_LIST_PENDING':
-      return { ...state, jobResultsLoading: true, jobResults: {}}; // do we want to clear???
+      return { ...state, jobResultsLoading: true };
 
     case 'GET_JOB_LIST_FAIL':
       return { ...state, jobResultsLoading: false };
