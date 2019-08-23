@@ -33,8 +33,15 @@ const recipientValidationReducer = (state = initialState, { meta, payload, type 
     case 'TRIGGER_JOB_FAIL':
       return { ...state, jobResultsLoading: false };
 
-    case 'GET_JOB_STATUS_SUCCESS':
     case 'GET_LATEST_JOB_SUCCESS':
+      return {
+        ...state,
+        jobResultsLoading: false,
+        jobResults: { ...state.jobResults, [payload.list_id]: payload },
+        latest: payload.list_id
+      };
+
+    case 'GET_JOB_STATUS_SUCCESS':
     case 'TRIGGER_JOB_SUCCESS':
       return {
         ...state,

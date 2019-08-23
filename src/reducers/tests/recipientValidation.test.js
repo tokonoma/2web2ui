@@ -36,6 +36,19 @@ const testCases = {
       }
     }
   },
+  'when get latest job request succeeds': {
+    type: 'GET_LATEST_JOB_SUCCESS',
+    payload: {
+      list_id: 2, batch_status: 'success'
+    },
+    state: {
+      jobResults: {
+        1: {
+          list_id: 1, batch_status: 'success'
+        }
+      }
+    }
+  },
   'when verification successfully returns invalid address': {
     type: 'SINGLE_RECIPIENT_VALIDATION_SUCCESS',
     payload: {

@@ -82,6 +82,27 @@ Object {
 }
 `;
 
+exports[`recipientValidationReducer when get latest job request succeeds 1`] = `
+Object {
+  "jobResults": Object {
+    "1": Object {
+      "batch_status": "success",
+      "list_id": 1,
+    },
+    "2": Object {
+      "batch_status": "success",
+      "list_id": 2,
+    },
+  },
+  "jobResultsLoading": false,
+  "latest": 2,
+  "listError": null,
+  "singleLoading": false,
+  "singleResults": null,
+  "uploadLoading": false,
+}
+`;
+
 exports[`recipientValidationReducer when verification is pending 1`] = `
 Object {
   "jobResults": Object {},

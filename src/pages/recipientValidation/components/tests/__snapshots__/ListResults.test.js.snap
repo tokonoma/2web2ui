@@ -38,13 +38,7 @@ Array [
 
 exports[`ListResults renders Results Card with latest results 1`] = `
 <ListResultsCard
-  newListUpload={false}
-  results={
-    Object {
-      "123": Object {
-        "complete": false,
-      },
-    }
-  }
+  complete={false}
+  listId="123"
 />
 `;

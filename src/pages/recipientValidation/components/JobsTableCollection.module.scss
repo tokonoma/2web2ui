@@ -1,0 +1,22 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.Loading {
+  color: color(orange);
+}
+
+.LoadingWrapper {
+  padding: rem(100) 0 rem(100);
+  text-align: center;
+}
+
+.Complete {
+  color: color(green);
+}
+
+.Failed {
+  color: color(red);
+}
+
+.Ready {
+  color: color(blue);
+}

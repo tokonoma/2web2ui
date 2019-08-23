@@ -10,10 +10,10 @@ import { getJobStatusMock, triggerJob } from 'src/actions/recipientValidation';
 import { getUsage } from 'src/actions/account';
 import _ from 'lodash';
 import Loading from 'src/components/loading';
-import moment from 'moment';
 import styles from './UploadedListPage.module.scss';
 import { PollContext } from 'src/context/Poll';
 import withContext from 'src/context/withContext';
+import { selectRecipientValidationJobById } from 'src/selectors/recipientValidation';
 
 export class UploadedListPage extends Component {
 
@@ -73,40 +73,38 @@ export class UploadedListPage extends Component {
     });
   }
 
-  renderTitle = (date) => (
-    <div className={styles.dateHeader}>
-      <strong>{formatDate(moment.unix(date))}</strong>
-      <span> at </span>
-      <strong>{formatTime(moment.unix(date))}</strong>
-    </div>
-  )
-
   render() {
-    const { results, currentUsage, loading } = this.props;
+    const { job, currentUsage, loading } = this.props;
 
-    if (loading) {
+    if (!job || loading) {
       return (<Loading />);
     }
-    const { status, uploaded } = results;
+
     const volumeUsed = _.get(currentUsage, 'recipient_validation.month.used', 0);
 
     return (
-      <Page title='Recipient Validation' breadcrumbAction={{ content: 'Back', component: Link, to: '/recipient-validation/list' }}>
+      <Page
+        title='Recipient Validation'
+        breadcrumbAction={{ content: 'Back', component: Link, to: '/recipient-validation/list' }}
+      >
         <Panel>
           <Panel.Section>
-            {this.renderTitle(uploaded)}
+            <div className={styles.dateHeader}>
+              <strong>{formatDate(job.updatedAt)}</strong>
+              <span> at </span>
+              <strong>{formatTime(job.updatedAt)}</strong>
+            </div>
           </Panel.Section>
           <Panel.Section>
-            {status === 'queued_for_batch'
-              ? (<UploadedListForm
+            {job.status === 'queued_for_batch' ? (
+              <UploadedListForm
                 onSubmit={this.handleSubmit}
-                job={results}
+                job={job}
                 currentUsage={volumeUsed}
-              />)
-              : (<ListProgress
-                job={results}
-              />)
-            }
+              />
+            ) : (
+              <ListProgress job={job} />
+            )}
           </Panel.Section>
         </Panel>
       </Page>
@@ -114,14 +112,14 @@ export class UploadedListPage extends Component {
   }
 }
 
-const mapStateToProps = ({ recipientValidation, account }, { match }) => {
-  const { listId } = match.params;
+const mapStateToProps = (state, props) => {
+  const { listId } = props.match.params;
 
   return {
+    currentUsage: state.account.rvUsage,
     listId,
-    results: recipientValidation.jobResults[listId] || {},
-    currentUsage: account.rvUsage,
-    loading: recipientValidation.jobResultsLoading || account.usageLoading
+    job: selectRecipientValidationJobById(state, listId),
+    loading: state.recipientValidation.jobResultsLoading || state.account.usageLoading
   };
 };
 

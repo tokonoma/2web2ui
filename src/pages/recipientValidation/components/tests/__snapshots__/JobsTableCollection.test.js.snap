@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`JobsTableCollection renders a table of jobs 1`] = `
+<TableCollection
+  columns={
+    Array [
+      Object {
+        "label": "File Name",
+      },
+      Object {
+        "label": "Date Uploaded",
+      },
+      Object {
+        "label": "Status",
+      },
+      Object {
+        "label": "Total",
+      },
+      Object {
+        "label": "Download",
+      },
+    ]
+  }
+  defaultSortColumn={null}
+  defaultSortDirection="asc"
+  getRowData={[Function]}
+  rows={Array []}
+  title="Recent Validations"
+>
+  <Component />
+</TableCollection>
+`;

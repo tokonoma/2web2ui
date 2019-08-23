@@ -3,7 +3,7 @@ import React from 'react';
 import { RecipientValidationPage } from '../RecipientValidationPage';
 import ListForm from '../components/ListForm';
 import SingleAddressForm from '../components/SingleAddressForm';
-import ListResults from '../components/ListResults';
+import ListResultsFeatureToggle from '../components/ListResultsFeatureToggle';
 import ApiDetails from '../components/ApiDetails';
 
 describe('Page: Recipient Email Verification', () => {
@@ -25,7 +25,7 @@ describe('Page: Recipient Email Verification', () => {
 
   it('should render Recipient Validation page correctly', () => {
     expect(wrapper.find(ListForm)).toExist();
-    expect(wrapper.find(ListResults)).toExist();
+    expect(wrapper.find(ListResultsFeatureToggle)).toExist();
   });
 
   it('renders single email verification tab correctly when selected', () => {
