@@ -5,6 +5,20 @@ import ListResultsCard from '../ListResultsCard';
 describe('ListResultsCard', () => {
   const subject = (props) => shallow(<ListResultsCard {...props} />);
 
+  it('renders with the the `<TableCollection/>` with a `title` prop of "Recent Validations"', () => {
+    expect(subject().props().title).toEqual('Recent Validations');
+  });
+
+  it('Renders with the appropriate columns', () => {
+    expect(subject().props().columns).toEqual([
+      { label: 'File Name' },
+      { label: 'Date Uploaded' },
+      { label: 'Status' },
+      { label: 'Total' },
+      { label: 'Download' }
+    ]);
+  });
+
   it('renders correctly when not complete', () => {
     const wrapper = subject({
       results: {
@@ -14,7 +28,8 @@ describe('ListResultsCard', () => {
         }
       }
     });
-    expect(wrapper.find('Tag').childAt(1).text()).toEqual('Processing');
+
+    expect(wrapper.find('Tag').text()).toEqual('Processing');
     expect(wrapper.find('Cached')).toExist();
   });
 
@@ -29,6 +44,7 @@ describe('ListResultsCard', () => {
         }
       }
     });
+
     expect(wrapper.find('Tag').childAt(1).text()).toEqual('Completed');
     expect(wrapper.find('CheckCircle')).toExist();
   });
@@ -62,5 +78,4 @@ describe('ListResultsCard', () => {
     expect(wrapper.find('Tag').childAt(1).text()).toEqual('Failed. Please try again.');
     expect(wrapper.find('Error')).toExist();
   });
-
 });
