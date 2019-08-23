@@ -1,4 +1,5 @@
 import { createSelector } from 'reselect';
+import { formatApiTimestamp, toMilliseconds } from 'src/helpers/date';
 
 const getRecipientValidationJobs = (state) => state.recipientValidation.jobResults;
 
@@ -26,8 +27,13 @@ export const selectRecipientValidationJobs = createSelector(
         rejectedUrl: rejected_external_url,
         status: batch_status ? batch_status.toLowerCase() : undefined,
         uploadedFile: uploaded_file,
-        uploadedAt: upload_timestamp
+        uploadedAt: upload_timestamp ? formatApiTimestamp(toMilliseconds(upload_timestamp)) : undefined
       }
     ];
   }, [])
+);
+
+export const selectRecipientValidationJobById = createSelector(
+  [selectRecipientValidationJobs, (state, jobId) => jobId],
+  (jobs, jobId) => jobs.find((job) => job.jobId === jobId)
 );
