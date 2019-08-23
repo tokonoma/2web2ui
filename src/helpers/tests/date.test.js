@@ -12,6 +12,7 @@ import {
   formatDateTime,
   isSameDate,
   getLocalTimezone,
+  formatApiTimestamp,
   formatInputDate,
   formatInputTime,
   parseDate,
@@ -205,6 +206,12 @@ describe('Date helpers', () => {
       expect(getLocalTimezone()).toEqual('Cool/Story');
       expect(dtfMock).toHaveBeenCalledTimes(1);
       expect(optionsMock).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  describe('formatApiTimestamp', () => {
+    it('returns ISO 8601 timestamp', () => {
+      expect(formatApiTimestamp('Fri, 21 Nov 1997 09:55:06 -0600')).toEqual('1997-11-21T15:55:06Z');
     });
   });
 
