@@ -3,7 +3,7 @@
 exports[`JobReportDownloadLink renders a download link 1`] = `
 <DownloadLink
   component={[Function]}
-  to="http://example.com/upload.csv"
+  to="http://example.com/rejected.csv"
 >
   <span>
     Download Results 

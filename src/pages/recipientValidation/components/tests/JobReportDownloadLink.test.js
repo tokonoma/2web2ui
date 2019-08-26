@@ -7,17 +7,12 @@ describe('JobReportDownloadLink', () => {
     <JobReportDownloadLink {...props} />
   );
 
+  it('renders null when no file is provided', () => {
+    expect(subject()).toBeEmptyRender();
+  });
+
   it('renders a download link', () => {
-    const wrapper = subject({ complete: true, uploadedFile: 'http://example.com/upload.csv' });
+    const wrapper = subject({ href: 'http://example.com/rejected.csv' });
     expect(wrapper).toMatchSnapshot();
-  });
-
-  it('renders a download link to rejected results', () => {
-    const wrapper = subject({ complete: true, rejectedUrl: 'http://example.com/rejected.csv' });
-    expect(wrapper).toHaveProp('to', 'http://example.com/rejected.csv');
-  });
-
-  it('renders null when not complete', () => {
-    expect(subject({ complete: false })).toBeEmptyRender();
   });
 });

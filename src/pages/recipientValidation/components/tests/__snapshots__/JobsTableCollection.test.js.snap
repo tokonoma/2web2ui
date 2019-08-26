@@ -13,8 +13,7 @@ Array [
   />,
   999,
   <JobReportDownloadLink
-    complete={true}
-    uploadedFile="https://example.csv"
+    href="https://example.com/rejects.csv"
   />,
 ]
 `;
