@@ -12,12 +12,8 @@ import JobStatusTag from './JobStatusTag';
 export const JobsTableCollection = ({ jobs }) => {
   const columns = [
     {
-      dataCellComponent: ({ status, filename, jobId }) => (
-        <JobFileName
-          status={status}
-          filename={filename}
-          jobId={jobId}
-        />
+      dataCellComponent: ({ filename }) => (
+        <JobFileName filename={filename} />
       ),
       header: {
         label: 'File Name',
@@ -48,11 +44,15 @@ export const JobsTableCollection = ({ jobs }) => {
       }
     },
     {
-      dataCellComponent: ({ rejectedUrl, status }) => (
-        <JobReportDownloadLink href={rejectedUrl} status={status} />
+      dataCellComponent: ({ rejectedUrl, status, jobId }) => (
+        <JobReportDownloadLink
+          fileHref={rejectedUrl}
+          status={status}
+          jobId={jobId}
+        />
       ),
       header: {
-        label: 'Download'
+        label: 'Actions'
       }
     }
   ];

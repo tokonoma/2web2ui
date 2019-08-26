@@ -7,12 +7,26 @@ describe('JobReportDownloadLink', () => {
     <JobReportDownloadLink {...props} />
   );
 
-  it('renders null when no file is provided', () => {
-    expect(subject()).toBeEmptyRender();
+  it('Renders the review variant of the component when the status is `queued_for_batch`', () => {
+    const wrapper = subject({ status: 'queued_for_batch' });
+
+    expect(wrapper.find('ScreenReaderOnly').childAt(0).text()).toEqual('Review');
+    expect(wrapper.find('Queue')).toExist();
   });
 
-  it('renders a download link', () => {
-    const wrapper = subject({ href: 'http://example.com/rejected.csv', status: 'success' });
-    expect(wrapper).toMatchSnapshot();
+  it('Renders the download link when a `fileHref` is present and the status is `success`', () => {
+    const wrapper = subject({
+      fileHref: 'https://nicklemmon.com',
+      status: 'success'
+    });
+
+    expect(wrapper.find('ScreenReaderOnly').childAt(0).text()).toEqual('Download Results');
+    expect(wrapper.find('FileDownload')).toExist();
+  });
+
+  it('Renders nothing when there is no fileHref and the status it not either `queued_for_batch` or `success`', () => {
+    const wrapper = subject();
+
+    expect(wrapper).toBeEmptyRender();
   });
 });
