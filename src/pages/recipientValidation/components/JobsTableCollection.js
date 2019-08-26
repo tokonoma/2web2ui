@@ -1,17 +1,22 @@
 import React from 'react';
 import { Panel } from '@sparkpost/matchbox';
 import TableCollection from 'src/components/collection/TableCollection';
-import PageLink from 'src/components/pageLink/PageLink';
+
 import { formatDateTime } from 'src/helpers/date';
 import withPollingJobs from '../containers/withPollingJobs';
+import JobFileName from './JobFileName';
 import JobReportDownloadLink from './JobReportDownloadLink';
 import JobStatusTag from './JobStatusTag';
 
 export const JobsTableCollection = ({ jobs }) => {
   const columns = [
     {
-      dataCellComponent: ({ filename, jobId }) => (
-        <PageLink children={filename} to={`/recipient-validation/list/${jobId}`} />
+      dataCellComponent: ({ status, filename, jobId }) => (
+        <JobFileName
+          status={status}
+          filename={filename}
+          jobId={jobId}
+        />
       ),
       header: {
         label: 'File Name',
