@@ -77,7 +77,7 @@ const mapStateToProps = (state) => {
 
   return {
     latestId,
-    results: selectRecipientValidationJobById(state, latestId),
+    results: selectRecipientValidationJobById(state, latestId) || {},
     loading: state.recipientValidation.jobResultsLoading
   };
 };
