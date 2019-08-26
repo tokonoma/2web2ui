@@ -54,6 +54,7 @@ export const JobsTableCollection = ({ jobs }) => {
       columns={columns.map(({ header }) => header)}
       getRowData={renderRow(columns)}
       rows={jobs}
+      pagination
       title="Recent Validations"
     >
       {({ collection, filterBox, heading, pagination }) => (
