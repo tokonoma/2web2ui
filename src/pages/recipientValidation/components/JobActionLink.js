@@ -5,7 +5,7 @@ import DownloadLink from 'src/components/downloadLink/DownloadLink';
 import { ScreenReaderOnly } from '@sparkpost/matchbox';
 
 const JobActionLink = ({ jobId, fileHref, status }) => {
-  if (status === 'queued_for_batch') {
+  if (status !== 'error' && status !== 'success') {
     return (
       <Button to={`/recipient-validation/list/${jobId}`} flat color="orange">
         <ScreenReaderOnly>Review</ScreenReaderOnly>
