@@ -4,6 +4,7 @@ import TableCollection from 'src/components/collection/TableCollection';
 import PageLink from 'src/components/pageLink/PageLink';
 import { formatDateTime } from 'src/helpers/date';
 import withPollingJobs from '../containers/withPollingJobs';
+import JobAddressCount from './JobAddressCount';
 import JobReportDownloadLink from './JobReportDownloadLink';
 import JobStatusTag from './JobStatusTag';
 
@@ -33,7 +34,9 @@ export const JobsTableCollection = ({ jobs }) => {
       }
     },
     {
-      dataCellComponent: ({ addressCount }) => addressCount,
+      dataCellComponent: ({ addressCount, status }) => (
+        <JobAddressCount count={addressCount} status={status} />
+      ),
       header: {
         label: 'Total',
         sortKey: 'addressCount'
