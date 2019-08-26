@@ -1,7 +1,6 @@
-const initialState = {
+export const initialState = {
   singleResults: null,
   uploadLoading: false,
-  latestJobLoading: false,
   jobResultsLoading: false,
   singleLoading: false,
   jobResults: {},
@@ -9,8 +8,46 @@ const initialState = {
   listError: null
 };
 
-export default (state = initialState, { meta, payload, type }) => {
+const recipientValidationReducer = (state = initialState, { meta, payload, type }) => {
   switch (type) {
+    case 'GET_JOB_LIST_PENDING':
+      return { ...state, jobResultsLoading: true };
+
+    case 'GET_JOB_LIST_FAIL':
+      return { ...state, jobResultsLoading: false };
+
+    case 'GET_JOB_LIST_SUCCESS':
+      return {
+        ...state,
+        jobResultsLoading: false,
+        jobResults: payload.reduce((acc, job) => ({ ...acc, [job.list_id]: job }), state.jobResults)
+      };
+
+    case 'GET_JOB_STATUS_PENDING':
+    case 'GET_LATEST_JOB_PENDING':
+    case 'TRIGGER_JOB_PENDING':
+      return { ...state, jobResultsLoading: true };
+
+    case 'GET_JOB_STATUS_FAIL':
+    case 'GET_LATEST_JOB_FAIL':
+    case 'TRIGGER_JOB_FAIL':
+      return { ...state, jobResultsLoading: false };
+
+    case 'GET_LATEST_JOB_SUCCESS':
+      return {
+        ...state,
+        jobResultsLoading: false,
+        jobResults: { ...state.jobResults, [payload.list_id]: payload },
+        latest: payload.list_id
+      };
+
+    case 'GET_JOB_STATUS_SUCCESS':
+    case 'TRIGGER_JOB_SUCCESS':
+      return {
+        ...state,
+        jobResultsLoading: false,
+        jobResults: { ...state.jobResults, [payload.list_id]: payload }
+      };
 
     // List Upload
     case 'UPLOAD_RECIPIENT_VALIDATION_LIST_PENDING':
@@ -43,78 +80,8 @@ export default (state = initialState, { meta, payload, type }) => {
     case 'UPLOAD_RV_LIST_NEW':
       return { ...state, uploading: false };
 
-    case 'RESET_RECIPIENT_VALIDATION_ERROR':
+    case 'RESET_RECIPIENT_VALIDATION_FAIL':
       return { ...state, listError: null };
-
-    // List Results
-    case 'GET_LATEST_JOB_PENDING':
-      return { ...state, latestJobLoading: true, jobResults: {}};
-
-    case 'GET_LATEST_JOB_ERROR':
-      return { ...state, latestJobLoading: false };
-
-    case 'GET_LATEST_JOB_SUCCESS':
-      return {
-        ...state,
-        jobResultsLoading: false,
-        latest: payload.list_id,
-        jobResults: {
-          ...state.jobResults,
-          [payload.list_id]: {
-            status: payload.batch_status ? payload.batch_status.toLowerCase() : null,
-            complete: payload.complete,
-            uploaded: payload.upload_timestamp,
-            rejectedUrl: payload.rejected_external_url
-          }
-        }
-      };
-
-    // List Polling
-    case 'GET_JOB_STATUS_PENDING':
-      return { ...state, jobResultsLoading: true };
-
-    case 'GET_JOB_STATUS_ERROR':
-      return { ...state, jobResultsLoading: false };
-
-    case 'GET_JOB_STATUS_SUCCESS':
-      return {
-        ...state,
-        jobResultsLoading: false,
-        jobResults: {
-          ...state.jobResults,
-          [payload.list_id]: {
-            status: payload.batch_status ? payload.batch_status.toLowerCase() : null,
-            complete: payload.complete,
-            uploaded: payload.upload_timestamp,
-            rejectedUrl: payload.rejected_external_url,
-            filename: payload.original_filename,
-            addressCount: payload.address_count
-          }
-        }
-      };
-
-    case 'TRIGGER_JOB_PENDING':
-      return { ...state, jobResultsLoading: true };
-
-    case 'TRIGGER_JOB_ERROR':
-      return { ...state, jobResultsLoading: false };
-
-    case 'TRIGGER_JOB_SUCCESS':
-      return {
-        ...state,
-        jobResultsLoading: false,
-        jobResults: {
-          ...state.jobResults,
-          [payload.list_id]: {
-            status: payload.batch_status,
-            complete: payload.complete,
-            uploaded: payload.upload_timestamp,
-            rejectedUrl: payload.rejected_external_url,
-            filename: payload.original_filename,
-            addressCount: payload.address_count
-          }
-        }
-      };
 
     // Single Recipient
     case 'SINGLE_RECIPIENT_VALIDATION_PENDING':
@@ -132,8 +99,9 @@ export default (state = initialState, { meta, payload, type }) => {
 
     case 'SINGLE_RECIPIENT_VALIDATION_FAIL':
       return { ...state, singleResults: null, singleLoading: false };
-
-    default:
-      return { ...state };
   }
+
+  return state;
 };
+
+export default recipientValidationReducer;

@@ -35,7 +35,7 @@ export class ListForm extends Component {
     form_data.append('myupload', fields.csv);
     reset(formName);
     uploadListNew(form_data).then(({ list_id }) => {
-      showAlert({ type: 'success', message: 'New upload' });
+      showAlert({ type: 'success', message: 'Recipients Uploaded' });
       history.push(`/recipient-validation/list/${list_id}`);
     });
   }
@@ -48,6 +48,7 @@ export class ListForm extends Component {
     const valid = !maxFileSize(config.maxRecipVerifUploadSizeBytes)(file) && !fileExtension('csv', 'txt')(file);
 
     if (file && valid && !listError) {
+      //TODO: Replace upload with newUpload
       if (newListUpload) {
         handleSubmit(this.handleNewUpload)();
       } else {

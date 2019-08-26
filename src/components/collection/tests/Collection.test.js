@@ -57,11 +57,13 @@ describe('Component: Collection', () => {
 
   it('should use custom render function when child is a render function', () => {
     addRows(3);
-    const wrapper = shallow(<Collection {...props}>
-      {
-        () => <>Custom render</>
-      }
-    </Collection>);
+    const renderFn = (renderProps) => (
+      <>
+        {Object.keys(renderProps).map((key) => <div key={key}>{renderProps[key]}</div>)}
+      </>
+    );
+    const wrapper = shallow(<Collection {...props} children={renderFn} />);
+
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -88,6 +90,12 @@ describe('Component: Collection', () => {
     props.pagination = true;
     const wrapper = shallow(<Collection {...props} />);
     expect(wrapper.find(Pagination).prop('saveCsv')).toBe(false);
+  });
+
+  it('should render a title', () => {
+    addRows(3);
+    const wrapper = shallow(<Collection {...props} title="Example" />);
+    expect(wrapper.find('h3')).toHaveProp('children', 'Example');
   });
 
   describe('state changes', () => {

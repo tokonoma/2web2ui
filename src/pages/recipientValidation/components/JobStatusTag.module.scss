@@ -1,0 +1,17 @@
+@import 'src/styles/status-color';
+
+.Complete {
+  color: status-color('success');
+}
+
+.Failed {
+  color: status-color('error');
+}
+
+.Loading {
+  color: color(orange);
+}
+
+.Ready {
+  color: status-color('info');
+}

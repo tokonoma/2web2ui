@@ -12,11 +12,13 @@ import {
   formatDateTime,
   isSameDate,
   getLocalTimezone,
+  formatApiTimestamp,
   formatInputDate,
   formatInputTime,
   parseDate,
   parseTime,
-  parseDatetime
+  parseDatetime,
+  toMilliseconds
 } from '../date';
 import { roundBoundaries } from '../metrics';
 import cases from 'jest-in-case';
@@ -207,6 +209,12 @@ describe('Date helpers', () => {
     });
   });
 
+  describe('formatApiTimestamp', () => {
+    it('returns ISO 8601 timestamp', () => {
+      expect(formatApiTimestamp('Fri, 21 Nov 1997 09:55:06 -0600')).toEqual('1997-11-21T15:55:06Z');
+    });
+  });
+
   describe('formatInputDate', () => {
     const dateTime = '2018-04-17T15:18:42Z';
 
@@ -319,6 +327,12 @@ describe('Date helpers', () => {
         '2018-05-13',
         '2018-05-25'
       ]);
+    });
+  });
+
+  describe('toMilliseconds', () => {
+    it('returns milliseconds', () => {
+      expect(toMilliseconds(1318781876.721)).toEqual(1318781876721);
     });
   });
 });

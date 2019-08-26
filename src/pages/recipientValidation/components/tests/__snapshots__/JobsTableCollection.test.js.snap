@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`JobsTableCollection renders a job row 1`] = `
+Array [
+  <PageLink
+    to="/recipient-validation/list/A1C1_D1_C1"
+  >
+    example.csv
+  </PageLink>,
+  "Feb 4 2013, 5:44pm",
+  <JobStatusTag
+    status="success"
+  />,
+  999,
+  <JobReportDownloadLink
+    complete={true}
+    uploadedFile="https://example.csv"
+  />,
+]
+`;
+
+exports[`JobsTableCollection renders a table of jobs 1`] = `
+<TableCollection
+  columns={
+    Array [
+      Object {
+        "label": "File Name",
+      },
+      Object {
+        "label": "Date Uploaded",
+      },
+      Object {
+        "label": "Status",
+      },
+      Object {
+        "label": "Total",
+      },
+      Object {
+        "label": "Download",
+      },
+    ]
+  }
+  defaultSortColumn={null}
+  defaultSortDirection="asc"
+  getRowData={[Function]}
+  rows={Array []}
+  title="Recent Validations"
+>
+  <Component />
+</TableCollection>
+`;

@@ -1,4 +1,4 @@
-@import '~@sparkpost/matchbox/src/styles/config.scss';
+@import 'src/styles/status-color';
 
 .Name {
   margin-bottom: 0;
@@ -24,5 +24,5 @@
 }
 
 .PublishedIconColor {
-  color: #45D09E;
+  color: status-color('success');
 }

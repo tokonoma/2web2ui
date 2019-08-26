@@ -7,6 +7,7 @@ import withContext from 'src/context/withContext';
 import ListResultsCard from './ListResultsCard';
 import { getLatestJob, getJobStatus } from 'src/actions/recipientValidation';
 import _ from 'lodash';
+import { selectRecipientValidationJobById } from 'src/selectors/recipientValidation';
 
 export class ListResults extends Component {
 
@@ -71,13 +72,13 @@ export class ListResults extends Component {
 }
 
 
-const mapStateToProps = ({ recipientValidation }) => {
-  const latestId = recipientValidation.latest;
+const mapStateToProps = (state) => {
+  const latestId = state.recipientValidation.latest;
 
   return {
     latestId,
-    results: recipientValidation.jobResults[latestId] || {},
-    loading: recipientValidation.jobResultsLoading
+    results: selectRecipientValidationJobById(state, latestId) || {},
+    loading: state.recipientValidation.jobResultsLoading
   };
 };
 

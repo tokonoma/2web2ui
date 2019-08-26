@@ -25,14 +25,14 @@ describe('TableCollection Component', () => {
       columns: columns,
       getRowData: () => {},
       extraProp: 'plsPassDown',
-      rows: []
+      rows: [],
+      title: 'Example Table'
     };
   });
 
   describe('render', () => {
     it('renders with no props', () => {
       const wrapper = shallow(<TableCollection />);
-
       expect(wrapper).toMatchSnapshot();
     });
 

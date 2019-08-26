@@ -43,5 +43,6 @@ exports[`TableCollection Component render renders with props 1`] = `
   rows={Array []}
   sortColumn={null}
   sortDirection="asc"
+  title="Example Table"
 />
 `;

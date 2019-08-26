@@ -4,10 +4,9 @@ import { Error, FileDownload, CheckCircle, Cached } from '@sparkpost/matchbox-ic
 import DownloadLink from 'src/components/downloadLink/DownloadLink';
 import { LoadingSVG } from 'src/components/loading/Loading';
 import { formatDateTime } from 'src/helpers/date';
-import moment from 'moment';
 import styles from './ListResultsCard.module.scss';
 
-const ListResultsCard = ({ complete = 'unknown', uploaded, rejectedUrl, status }) => {
+const ListResultsCard = ({ complete = 'unknown', uploadedAt, rejectedUrl, status }) => {
   if (complete === 'unknown') {
     return (
       <Panel>
@@ -50,16 +49,16 @@ const ListResultsCard = ({ complete = 'unknown', uploaded, rejectedUrl, status }
         <Table>
           <tbody>
             <Table.Row className={styles.TableHeader}>
-              <Table.HeaderCell className={styles.TableCell} width='25%'>
+              <Table.HeaderCell className={styles.TableHeaderCell} width='25%'>
                 Date Uploaded:
               </Table.HeaderCell>
-              <Table.HeaderCell className={styles.TableCell} width='25%'>
+              <Table.HeaderCell className={styles.TableHeaderCell} width='25%'>
                 Status:
               </Table.HeaderCell>
             </Table.Row>
             <Table.Row>
               <Table.Cell className={styles.TableCell}>
-                {formatDateTime(moment.unix(uploaded))}
+                {formatDateTime(uploadedAt)}
               </Table.Cell>
               <Table.Cell className={styles.TableCell}>
                 {renderStatus()}

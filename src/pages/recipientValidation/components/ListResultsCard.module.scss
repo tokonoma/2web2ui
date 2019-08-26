@@ -1,4 +1,4 @@
-@import '~@sparkpost/matchbox/src/styles/config.scss';
+@import 'src/styles/status-color';
 
 .Loading {
   color: orange;
@@ -6,14 +6,15 @@
 
 .LoadingWrapper {
   padding: rem(100) 0 rem(100);
-  text-align: center;	
+  text-align: center;
 }
+
 .Complete {
-  color: #45D09E;
+  color: status-color('success');
 }
 
 .Failed {
-  color: color(red);
+  color: status-color('error');
 }
 
 .PanelHeader {
@@ -22,6 +23,10 @@
 
 .TableHeader {
   border-bottom: 0;
+}
+
+.TableHeaderCell {
+  padding: 2px;
 }
 
 .TableCell {

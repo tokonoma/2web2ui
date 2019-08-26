@@ -2,23 +2,21 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { UploadedListPage } from '../UploadedListPage';
 
-
-const subject = (props = {}) => shallow(
-  <UploadedListPage
-    batchStatus='queued_for_batch'
-    listId='listId'
-    history={{ replace: jest.fn() }}
-    startPolling={jest.fn()}
-    getJobStatusMock={jest.fn(() => Promise.resolve({}))}
-    triggerJob={jest.fn()}
-    results={{ status: 'queued_for_batch', address_count: 1000 }}
-    getUsage={jest.fn()}
-    currentUsage={{ recipient_validation: { month: { used: 20000 }}}}
-    {...props}
-  />
-);
-
 describe('UploadedListPage', () => {
+  const subject = (props = {}) => shallow(
+    <UploadedListPage
+      batchStatus='queued_for_batch'
+      listId='listId'
+      history={{ replace: jest.fn() }}
+      startPolling={jest.fn()}
+      getJobStatusMock={jest.fn(() => Promise.resolve({}))}
+      triggerJob={jest.fn()}
+      job={{ status: 'queued_for_batch', address_count: 1000 }}
+      getUsage={jest.fn()}
+      currentUsage={{ recipient_validation: { month: { used: 20000 }}}}
+      {...props}
+    />
+  );
 
   // TODO: Replace mock function with real function
   it('should fetch job status on rendering', async () => {
@@ -59,7 +57,7 @@ describe('UploadedListPage', () => {
   });
 
   it('should render progress if batch status is not queued_for_batch', () => {
-    expect(subject({ results: { batchStatus: 'continuing' }}).find('UploadedListForm')).not.toExist();
+    expect(subject({ job: { batchStatus: 'continuing' }}).find('UploadedListForm')).not.toExist();
   });
 
   it('should render Loading if still loading', () => {
