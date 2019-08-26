@@ -11,7 +11,10 @@ Array [
   <JobStatusTag
     status="success"
   />,
-  999,
+  <JobAddressCount
+    count={999}
+    status="success"
+  />,
   <JobReportDownloadLink
     href="https://example.com/rejects.csv"
     status="success"
