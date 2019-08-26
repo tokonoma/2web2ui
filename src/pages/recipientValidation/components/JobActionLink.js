@@ -1,16 +1,16 @@
 import React from 'react';
 import { Button } from '@sparkpost/matchbox';
-import { Queue, FileDownload } from '@sparkpost/matchbox-icons';
+import { PlaylistAddCheck, FileDownload } from '@sparkpost/matchbox-icons';
 import DownloadLink from 'src/components/downloadLink/DownloadLink';
 import { ScreenReaderOnly } from '@sparkpost/matchbox';
 
-const JobReportDownloadLink = ({ jobId, fileHref, status }) => {
+const JobActionLink = ({ jobId, fileHref, status }) => {
   if (status === 'queued_for_batch') {
     return (
       <Button to={`/recipient-validation/list/${jobId}`} flat color="orange">
         <ScreenReaderOnly>Review</ScreenReaderOnly>
 
-        <Queue/>
+        <PlaylistAddCheck/>
       </Button>
     );
   }
@@ -28,4 +28,4 @@ const JobReportDownloadLink = ({ jobId, fileHref, status }) => {
   return null;
 };
 
-export default JobReportDownloadLink;
+export default JobActionLink;

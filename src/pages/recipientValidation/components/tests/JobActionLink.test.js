@@ -1,17 +1,17 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import JobReportDownloadLink from '../JobReportDownloadLink';
+import JobActionLink from '../JobActionLink';
 
-describe('JobReportDownloadLink', () => {
+describe('JobActionLink', () => {
   const subject = (props = {}) => shallow(
-    <JobReportDownloadLink {...props} />
+    <JobActionLink {...props} />
   );
 
   it('Renders the review variant of the component when the status is `queued_for_batch`', () => {
     const wrapper = subject({ status: 'queued_for_batch' });
 
     expect(wrapper.find('ScreenReaderOnly').childAt(0).text()).toEqual('Review');
-    expect(wrapper.find('Queue')).toExist();
+    expect(wrapper.find('PlaylistAddCheck')).toExist();
   });
 
   it('Renders the download link when a `fileHref` is present and the status is `success`', () => {

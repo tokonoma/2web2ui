@@ -6,7 +6,7 @@ import { formatDateTime } from 'src/helpers/date';
 import withPollingJobs from '../containers/withPollingJobs';
 import JobFileName from './JobFileName';
 import JobAddressCount from './JobAddressCount';
-import JobReportDownloadLink from './JobReportDownloadLink';
+import JobActionLink from './JobActionLink';
 import JobStatusTag from './JobStatusTag';
 
 export const JobsTableCollection = ({ jobs }) => {
@@ -45,7 +45,7 @@ export const JobsTableCollection = ({ jobs }) => {
     },
     {
       dataCellComponent: ({ rejectedUrl, status, jobId }) => (
-        <JobReportDownloadLink
+        <JobActionLink
           fileHref={rejectedUrl}
           status={status}
           jobId={jobId}
