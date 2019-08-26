@@ -2,13 +2,17 @@ import React from 'react';
 import { Button } from '@sparkpost/matchbox';
 import { PlaylistAddCheck, FileDownload } from '@sparkpost/matchbox-icons';
 import DownloadLink from 'src/components/downloadLink/DownloadLink';
-import { ScreenReaderOnly } from '@sparkpost/matchbox';
 
 const JobActionLink = ({ jobId, fileHref, status }) => {
   if (status !== 'error' && status !== 'success') {
     return (
-      <Button to={`/recipient-validation/list/${jobId}`} flat color="orange">
-        <ScreenReaderOnly>Review</ScreenReaderOnly>
+      <Button
+        to={`/recipient-validation/list/${jobId}`}
+        flat
+        color="orange"
+        size="small"
+      >
+        <span>Review</span>
 
         <PlaylistAddCheck/>
       </Button>
@@ -17,8 +21,14 @@ const JobActionLink = ({ jobId, fileHref, status }) => {
 
   if (fileHref && status === 'success') {
     return (
-      <DownloadLink component={Button} to={fileHref} flat>
-        <ScreenReaderOnly>Download Results</ScreenReaderOnly>
+      <DownloadLink
+        component={Button}
+        to={fileHref}
+        flat
+        color="orange"
+        size="small"
+      >
+        <span>Download</span>
 
         <FileDownload />
       </DownloadLink>

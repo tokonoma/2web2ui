@@ -10,7 +10,7 @@ describe('JobActionLink', () => {
   it('Renders the review variant of the component when the status not "error" or "success"', () => {
     const wrapper = subject({ status: 'queued_for_batch' });
 
-    expect(wrapper.find('ScreenReaderOnly').childAt(0).text()).toEqual('Review');
+    expect(wrapper.find('Button').childAt(0).text()).toEqual('Review');
     expect(wrapper.find('PlaylistAddCheck')).toExist();
   });
 
@@ -20,7 +20,7 @@ describe('JobActionLink', () => {
       status: 'success'
     });
 
-    expect(wrapper.find('ScreenReaderOnly').childAt(0).text()).toEqual('Download Results');
+    expect(wrapper.find('DownloadLink').childAt(0).text()).toEqual('Download');
     expect(wrapper.find('FileDownload')).toExist();
   });
 
