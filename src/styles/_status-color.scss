@@ -1,0 +1,20 @@
+@import '~@sparkpost/matchbox/src/styles/config/colors';
+
+// Re-usable status colors
+$status-color-map: (
+  'success': #45D09E,
+  'error': color(red),
+  'info': color(blue)
+);
+
+// The `status-color` function can be used to retrieve values from the status color map
+// i.e., `color: status-color('success')`
+@function status-color($status) {
+  $color: map-get($status-color-map, $status);
+
+  @if type-of($color) == color {
+    @return $color;
+  } @else {
+    @error 'Status `#{$status}` not found.';
+  }
+}

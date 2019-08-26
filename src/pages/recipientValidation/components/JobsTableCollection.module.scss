@@ -1,4 +1,4 @@
-@import '~@sparkpost/matchbox/src/styles/config.scss';
+@import 'src/styles/status-color';
 
 .Loading {
   color: color(orange);
@@ -10,13 +10,13 @@
 }
 
 .Complete {
-  color: color(green);
+  color: status-color('success');
 }
 
 .Failed {
-  color: color(red);
+  color: status-color('error');
 }
 
 .Ready {
-  color: color(blue);
+  color: status-color('info');
 }
