@@ -24,8 +24,14 @@ describe('JobActionLink', () => {
     expect(wrapper.find('FileDownload')).toExist();
   });
 
-  it('Renders nothing when there is no fileHref and the status it not either `queued_for_batch` or `success`', () => {
-    const wrapper = subject();
+  it('Renders nothing when the status is "success" but the there is no value for `fileHref`', () => {
+    const wrapper = subject({ status: 'success' });
+
+    expect(wrapper).toBeEmptyRender();
+  });
+
+  it('Renders nothing when the status is "error"', () => {
+    const wrapper = subject({ status: 'error' });
 
     expect(wrapper).toBeEmptyRender();
   });
