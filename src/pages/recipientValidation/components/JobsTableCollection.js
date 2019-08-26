@@ -1,9 +1,8 @@
 import React from 'react';
 import { Panel } from '@sparkpost/matchbox';
 import TableCollection from 'src/components/collection/TableCollection';
-
 import { formatDateTime } from 'src/helpers/date';
-import withPollingJobs from '../containers/withPollingJobs';
+import withJobs from '../containers/withJobs';
 import JobFileName from './JobFileName';
 import JobAddressCount from './JobAddressCount';
 import JobReportDownloadLink from './JobReportDownloadLink';
@@ -87,4 +86,4 @@ export const JobsTableCollection = ({ jobs }) => {
   );
 };
 
-export default withPollingJobs(JobsTableCollection);
+export default withJobs(JobsTableCollection);
