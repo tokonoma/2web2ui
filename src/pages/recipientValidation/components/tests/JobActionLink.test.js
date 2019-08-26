@@ -7,7 +7,7 @@ describe('JobActionLink', () => {
     <JobActionLink {...props} />
   );
 
-  it('Renders the review variant of the component when the status is `queued_for_batch`', () => {
+  it('Renders the review variant of the component when the status not "error" or "success"', () => {
     const wrapper = subject({ status: 'queued_for_batch' });
 
     expect(wrapper.find('ScreenReaderOnly').childAt(0).text()).toEqual('Review');
