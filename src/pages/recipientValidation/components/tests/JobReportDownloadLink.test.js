@@ -12,7 +12,7 @@ describe('JobReportDownloadLink', () => {
   });
 
   it('renders a download link', () => {
-    const wrapper = subject({ href: 'http://example.com/rejected.csv' });
+    const wrapper = subject({ href: 'http://example.com/rejected.csv', status: 'success' });
     expect(wrapper).toMatchSnapshot();
   });
 });

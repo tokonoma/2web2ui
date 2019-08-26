@@ -3,8 +3,8 @@ import { Button } from '@sparkpost/matchbox';
 import { FileDownload } from '@sparkpost/matchbox-icons';
 import DownloadLink from 'src/components/downloadLink/DownloadLink';
 
-const JobReportDownloadLink = ({ href }) => {
-  if (!href) {
+const JobReportDownloadLink = ({ href, status }) => {
+  if (!href || status !== 'success') {
     return null;
   }
 

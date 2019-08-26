@@ -40,7 +40,9 @@ export const JobsTableCollection = ({ jobs }) => {
       }
     },
     {
-      dataCellComponent: ({ rejectedUrl }) => <JobReportDownloadLink href={rejectedUrl} />,
+      dataCellComponent: ({ rejectedUrl, status }) => (
+        <JobReportDownloadLink href={rejectedUrl} status={status} />
+      ),
       header: {
         label: 'Download'
       }
