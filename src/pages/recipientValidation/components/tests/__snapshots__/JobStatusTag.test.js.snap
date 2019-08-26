@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`JobStatusTag renders a loading tag 1`] = `
+<Tag>
+  <span
+    className="Loading"
+  >
+    <Cached />
+     
+  </span>
+  <span>
+    Processing
+  </span>
+</Tag>
+`;
+
+exports[`JobStatusTag renders a ready tag 1`] = `
+<Tag>
+  <span
+    className="Ready"
+  >
+    <CloudUpload />
+     
+  </span>
+  <span>
+    Ready to validate
+  </span>
+</Tag>
+`;
+
+exports[`JobStatusTag renders a success tag 1`] = `
+<Tag>
+  <span
+    className="Complete"
+  >
+    <CheckCircle />
+     
+  </span>
+  <span>
+    Completed
+  </span>
+</Tag>
+`;
+
+exports[`JobStatusTag renders an error tag 1`] = `
+<Tag>
+  <span
+    className="Failed"
+  >
+    <Error />
+     
+  </span>
+  <span>
+    Failed. Please try again.
+  </span>
+</Tag>
+`;

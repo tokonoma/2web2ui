@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`JobReportDownloadLink renders a download link 1`] = `
+<DownloadLink
+  component={[Function]}
+  to="http://example.com/upload.csv"
+>
+  <span>
+    Download Results 
+  </span>
+  <FileDownload />
+</DownloadLink>
+`;

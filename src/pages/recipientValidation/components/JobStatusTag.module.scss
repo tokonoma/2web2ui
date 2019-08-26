@@ -1,0 +1,17 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.Complete {
+  color: color(green);
+}
+
+.Failed {
+  color: color(red);
+}
+
+.Loading {
+  color: color(orange);
+}
+
+.Ready {
+  color: color(blue);
+}
