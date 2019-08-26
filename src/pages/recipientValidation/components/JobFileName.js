@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './JobFileName.module.scss';
 
-const JobFileName = ({ filename }) => {
+const JobFileName = ({ status, filename, jobId }) => {
   if (!filename) {
     return (
       <span className={styles.NotAvailable}>
