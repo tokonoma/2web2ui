@@ -14,25 +14,29 @@ export const JobsTableCollection = ({ jobs }) => {
         <PageLink children={filename} to={`/recipient-validation/list/${jobId}`} />
       ),
       header: {
-        label: 'File Name'
+        label: 'File Name',
+        sortKey: 'filename'
       }
     },
     {
       dataCellComponent: ({ uploadedAt }) => formatDateTime(uploadedAt),
       header: {
-        label: 'Date Uploaded'
+        label: 'Date Uploaded',
+        sortKey: 'uploadedAt'
       }
     },
     {
       dataCellComponent: ({ status }) => <JobStatusTag status={status} />,
       header: {
-        label: 'Status'
+        label: 'Status',
+        sortKey: 'status'
       }
     },
     {
       dataCellComponent: ({ addressCount }) => addressCount,
       header: {
-        label: 'Total'
+        label: 'Total',
+        sortKey: 'addressCount'
       }
     },
     {
@@ -50,6 +54,8 @@ export const JobsTableCollection = ({ jobs }) => {
   return (
     <TableCollection
       columns={columns.map(({ header }) => header)}
+      defaultSortColumn="uploadedAt"
+      defaultSortDirection="desc"
       getRowData={renderRow(columns)}
       rows={jobs}
       pagination

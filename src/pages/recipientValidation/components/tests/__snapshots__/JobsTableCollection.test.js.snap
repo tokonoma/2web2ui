@@ -24,23 +24,27 @@ exports[`JobsTableCollection renders a table of jobs 1`] = `
     Array [
       Object {
         "label": "File Name",
+        "sortKey": "filename",
       },
       Object {
         "label": "Date Uploaded",
+        "sortKey": "uploadedAt",
       },
       Object {
         "label": "Status",
+        "sortKey": "status",
       },
       Object {
         "label": "Total",
+        "sortKey": "addressCount",
       },
       Object {
         "label": "Download",
       },
     ]
   }
-  defaultSortColumn={null}
-  defaultSortDirection="asc"
+  defaultSortColumn="uploadedAt"
+  defaultSortDirection="desc"
   getRowData={[Function]}
   pagination={true}
   rows={Array []}
