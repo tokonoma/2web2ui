@@ -37,7 +37,7 @@ exports[`JobStatusTag renders a success tag 1`] = `
      
   </span>
   <span>
-    Completed
+    Complete
   </span>
 </Tag>
 `;
@@ -51,7 +51,7 @@ exports[`JobStatusTag renders an error tag 1`] = `
      
   </span>
   <span>
-    Failed. Please try again.
+    Validation Error
   </span>
 </Tag>
 `;

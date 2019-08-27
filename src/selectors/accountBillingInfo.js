@@ -14,6 +14,7 @@ const selectIsCcFree1 = selectCondition(onPlan('ccfree1'));
 const selectIsFree1 = selectCondition(onPlan('free1'));
 const selectOnZuoraPlan = selectCondition(onZuoraPlan);
 const currentFreePlans = ['free500-1018', 'free15K-1018', 'free500-0419', 'free500-SPCEU-0419'];
+const getRecipientValidationUsage = (state) => _.get(state, 'account.rvUsage.recipient_validation');
 
 export const currentSubscriptionSelector = (state) => state.account.subscription;
 
@@ -125,4 +126,9 @@ export const selectBillingInfo = createSelector(
     plans,
     isAWSAccount
   })
+);
+
+export const selectMonthlyRecipientValidationUsage = createSelector(
+  getRecipientValidationUsage,
+  (usage) => _.get(usage, 'month.used', 0)
 );

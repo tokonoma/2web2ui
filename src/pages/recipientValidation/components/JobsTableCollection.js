@@ -1,46 +1,57 @@
 import React from 'react';
 import { Panel } from '@sparkpost/matchbox';
 import TableCollection from 'src/components/collection/TableCollection';
-import PageLink from 'src/components/pageLink/PageLink';
 import { formatDateTime } from 'src/helpers/date';
-import withPollingJobs from '../containers/withPollingJobs';
-import JobReportDownloadLink from './JobReportDownloadLink';
+import withJobs from '../containers/withJobs';
+import JobFileName from './JobFileName';
+import JobAddressCount from './JobAddressCount';
+import JobActionLink from './JobActionLink';
 import JobStatusTag from './JobStatusTag';
 
 export const JobsTableCollection = ({ jobs }) => {
   const columns = [
     {
-      dataCellComponent: ({ filename, jobId }) => (
-        <PageLink children={filename} to={`/recipient-validation/list/${jobId}`} />
+      dataCellComponent: ({ filename }) => (
+        <JobFileName filename={filename} />
       ),
       header: {
-        label: 'File Name'
+        label: 'File Name',
+        sortKey: 'filename'
       }
     },
     {
       dataCellComponent: ({ uploadedAt }) => formatDateTime(uploadedAt),
       header: {
-        label: 'Date Uploaded'
+        label: 'Date Uploaded',
+        sortKey: 'uploadedAt'
       }
     },
     {
       dataCellComponent: ({ status }) => <JobStatusTag status={status} />,
       header: {
-        label: 'Status'
+        label: 'Status',
+        sortKey: 'status'
       }
     },
     {
-      dataCellComponent: ({ addressCount }) => addressCount,
-      header: {
-        label: 'Total'
-      }
-    },
-    {
-      dataCellComponent: ({ complete, rejectedUrl, uploadedFile }) => (
-        <JobReportDownloadLink complete={complete} rejectedUrl={rejectedUrl} uploadedFile={uploadedFile} />
+      dataCellComponent: ({ addressCount, status }) => (
+        <JobAddressCount count={addressCount} status={status} />
       ),
       header: {
-        label: 'Download'
+        label: 'Total',
+        sortKey: 'addressCount'
+      }
+    },
+    {
+      dataCellComponent: ({ rejectedUrl, status, jobId }) => (
+        <JobActionLink
+          fileHref={rejectedUrl}
+          status={status}
+          jobId={jobId}
+        />
+      ),
+      header: {
+        label: 'Actions'
       }
     }
   ];
@@ -52,8 +63,11 @@ export const JobsTableCollection = ({ jobs }) => {
   return (
     <TableCollection
       columns={columns.map(({ header }) => header)}
+      defaultSortColumn="uploadedAt"
+      defaultSortDirection="desc"
       getRowData={renderRow(columns)}
       rows={jobs}
+      pagination
       title="Recent Validations"
     >
       {({ collection, filterBox, heading, pagination }) => (
@@ -72,4 +86,4 @@ export const JobsTableCollection = ({ jobs }) => {
   );
 };
 
-export default withPollingJobs(JobsTableCollection);
+export default withJobs(JobsTableCollection);

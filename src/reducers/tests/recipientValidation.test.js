@@ -18,13 +18,28 @@ const testCases = {
     ]
   },
   'with get job status request is pending': {
-    type: 'GET_JOB_STATUS_PENDING'
+    type: 'GET_JOB_STATUS_PENDING',
+    meta: {
+      context: {
+        id: 'A1C1_D1C1'
+      }
+    }
   },
   'when get job status request fails': {
-    type: 'GET_JOB_STATUS_FAIL'
+    type: 'GET_JOB_STATUS_FAIL',
+    meta: {
+      context: {
+        id: 'A1C1_D1C1'
+      }
+    }
   },
   'when get job status request succeeds': {
     type: 'GET_JOB_STATUS_SUCCESS',
+    meta: {
+      context: {
+        id: 'A1C1_D1C1'
+      }
+    },
     payload: {
       list_id: 2, batch_status: 'success'
     },

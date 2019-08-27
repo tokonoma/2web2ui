@@ -17,12 +17,11 @@ describe('JobsTableCollection', () => {
     const rowWrapper = shallow(
       <Row
         addressCount={999}
-        complete={true}
         filename="example.csv"
         jobId="A1C1_D1_C1"
+        rejectedUrl="https://example.com/rejects.csv"
         status="success"
         uploadedAt="2013-02-04T22:44:30.652Z"
-        uploadedFile="https://example.csv"
       />
     );
 

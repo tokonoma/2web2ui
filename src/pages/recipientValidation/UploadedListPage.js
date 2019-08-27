@@ -1,91 +1,51 @@
 import React, { Component } from 'react';
 import { Page, Panel } from '@sparkpost/matchbox';
-import { Link, withRouter } from 'react-router-dom';
-import UploadedListForm from './components/UploadedListForm';
-import ListProgress from './components/ListProgress';
-import { formatDate, formatTime } from 'src/helpers/date';
 import { connect } from 'react-redux';
-import { showAlert } from 'src/actions/globalAlert';
-import { getJobStatusMock, triggerJob } from 'src/actions/recipientValidation';
-import { getUsage } from 'src/actions/account';
-import _ from 'lodash';
+import { formatDate, formatTime } from 'src/helpers/date';
+import { getJobStatus, triggerJob } from 'src/actions/recipientValidation';
 import Loading from 'src/components/loading';
-import styles from './UploadedListPage.module.scss';
-import { PollContext } from 'src/context/Poll';
-import withContext from 'src/context/withContext';
+import PageLink from 'src/components/pageLink/PageLink';
+import { RedirectAndAlert } from 'src/components/globalAlert';
 import { selectRecipientValidationJobById } from 'src/selectors/recipientValidation';
+import ListError from './components/ListError';
+import ListProgress from './components/ListProgress';
+import UploadedListForm from './components/UploadedListForm';
+import styles from './UploadedListPage.module.scss';
 
 export class UploadedListPage extends Component {
-
   componentDidMount() {
-    const { getJobStatusMock, getUsage, listId, history, startPolling } = this.props;
-    // TODO: Replace action with real action (and update test)
-    getJobStatusMock(listId).then(({ batch_status, complete }) => {
-      if (batch_status !== 'queued_for_batch' && !complete) {
-        startPolling({
-          key: listId,
-          action: () => this.handlePoll(listId),
-          interval: 5000
-        });
-      }
-    }, () => {
-      history.replace('/recipient-validation/list');
-    });
-    getUsage();
+    const { getJobStatus, listId } = this.props;
+    getJobStatus(listId);
   }
 
   handleSubmit = () => {
-    const { triggerJob, listId, startPolling } = this.props;
-    triggerJob(listId).then(() => {
-      startPolling({
-        key: listId,
-        action: () => this.handlePoll(listId),
-        interval: 5000
-      });
-    });
-  }
-
-  handlePoll = (id) => {
-    const { showAlert, getJobStatusMock, stopPolling } = this.props;
-    //TODO: replace action with real action
-    return getJobStatusMock(id).then(({ complete, batch_status }) => {
-      if (batch_status === 'queued_for_batch') {
-        stopPolling(id);
-      }
-
-      if (batch_status.toLowerCase() === 'error') {
-        stopPolling(id);
-        showAlert({
-          type: 'error',
-          message: 'Recipient Validation Failed. Please Try Again.',
-          dedupeId: id
-        });
-      }
-
-      if (complete && batch_status.toLowerCase() === 'success') {
-        stopPolling(id);
-        showAlert({
-          type: 'success',
-          message: 'Recipient Validation Results Ready',
-          dedupeId: id
-        });
-      }
-    });
+    const { listId, triggerJob } = this.props;
+    triggerJob(listId);
   }
 
   render() {
-    const { job, currentUsage, loading } = this.props;
+    const { job, jobLoadingStatus, listId } = this.props;
 
-    if (!job || loading) {
-      return (<Loading />);
+    if (!job && jobLoadingStatus === 'fail') {
+      return (
+        <RedirectAndAlert
+          alert={{
+            message: `Unable to find list ${listId}`,
+            type: 'error'
+          }}
+          to="/recipient-validation"
+        />
+      );
     }
 
-    const volumeUsed = _.get(currentUsage, 'recipient_validation.month.used', 0);
+    if (!job) {
+      return <Loading />;
+    }
 
     return (
       <Page
         title='Recipient Validation'
-        breadcrumbAction={{ content: 'Back', component: Link, to: '/recipient-validation/list' }}
+        breadcrumbAction={{ content: 'Back', component: PageLink, to: '/recipient-validation' }}
       >
         <Panel>
           <Panel.Section>
@@ -96,15 +56,11 @@ export class UploadedListPage extends Component {
             </div>
           </Panel.Section>
           <Panel.Section>
-            {job.status === 'queued_for_batch' ? (
-              <UploadedListForm
-                onSubmit={this.handleSubmit}
-                job={job}
-                currentUsage={volumeUsed}
-              />
-            ) : (
-              <ListProgress job={job} />
-            )}
+            {job.status === 'queued_for_batch' && <UploadedListForm job={job} onSubmit={this.handleSubmit} />}
+
+            {job.status === 'error' && <ListError/>}
+
+            {(job.status !== 'queued_for_batch' && job.status !== 'error') && <ListProgress job={job} />}
           </Panel.Section>
         </Panel>
       </Page>
@@ -116,11 +72,10 @@ const mapStateToProps = (state, props) => {
   const { listId } = props.match.params;
 
   return {
-    currentUsage: state.account.rvUsage,
     listId,
     job: selectRecipientValidationJobById(state, listId),
-    loading: state.recipientValidation.jobResultsLoading || state.account.usageLoading
+    jobLoadingStatus: state.recipientValidation.jobLoadingStatus[listId]
   };
 };
 
-export default withRouter(connect(mapStateToProps, { showAlert, getJobStatusMock, getUsage, triggerJob })(withContext(PollContext, UploadedListPage)));
+export default connect(mapStateToProps, { getJobStatus, triggerJob })(UploadedListPage);

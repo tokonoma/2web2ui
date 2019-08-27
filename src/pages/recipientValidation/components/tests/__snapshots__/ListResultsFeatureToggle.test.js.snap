@@ -1,5 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ListResultsFeatureToggle renders jobs table collection 1`] = `<Connect(WithContext(withPollingJobs(JobsTableCollection))) />`;
+exports[`ListResultsFeatureToggle renders jobs table collection 1`] = `<Connect(withJobs(JobsTableCollection)) />`;
 
 exports[`ListResultsFeatureToggle renders list results by default 1`] = `<Connect(WithContext(ListResults)) />`;

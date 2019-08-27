@@ -2,8 +2,10 @@
 
 exports[`recipientValidationReducer default 1`] = `
 Object {
+  "jobLoadingStatus": Object {},
   "jobResults": Object {},
   "jobResultsLoading": false,
+  "jobsLoadingStatus": "init",
   "latest": null,
   "listError": null,
   "singleLoading": false,
@@ -14,8 +16,10 @@ Object {
 
 exports[`recipientValidationReducer when get job list request fails 1`] = `
 Object {
+  "jobLoadingStatus": Object {},
   "jobResults": Object {},
   "jobResultsLoading": false,
+  "jobsLoadingStatus": "fail",
   "latest": null,
   "listError": null,
   "singleLoading": false,
@@ -26,6 +30,7 @@ Object {
 
 exports[`recipientValidationReducer when get job list request succeeds 1`] = `
 Object {
+  "jobLoadingStatus": Object {},
   "jobResults": Object {
     "1": Object {
       "batch_status": "success",
@@ -41,6 +46,7 @@ Object {
     },
   },
   "jobResultsLoading": false,
+  "jobsLoadingStatus": "success",
   "latest": null,
   "listError": null,
   "singleLoading": false,
@@ -51,8 +57,12 @@ Object {
 
 exports[`recipientValidationReducer when get job status request fails 1`] = `
 Object {
+  "jobLoadingStatus": Object {
+    "A1C1_D1C1": "fail",
+  },
   "jobResults": Object {},
   "jobResultsLoading": false,
+  "jobsLoadingStatus": "init",
   "latest": null,
   "listError": null,
   "singleLoading": false,
@@ -63,6 +73,9 @@ Object {
 
 exports[`recipientValidationReducer when get job status request succeeds 1`] = `
 Object {
+  "jobLoadingStatus": Object {
+    "A1C1_D1C1": "success",
+  },
   "jobResults": Object {
     "1": Object {
       "batch_status": "success",
@@ -74,6 +87,7 @@ Object {
     },
   },
   "jobResultsLoading": false,
+  "jobsLoadingStatus": "init",
   "latest": null,
   "listError": null,
   "singleLoading": false,
@@ -84,6 +98,7 @@ Object {
 
 exports[`recipientValidationReducer when get latest job request succeeds 1`] = `
 Object {
+  "jobLoadingStatus": Object {},
   "jobResults": Object {
     "1": Object {
       "batch_status": "success",
@@ -95,6 +110,7 @@ Object {
     },
   },
   "jobResultsLoading": false,
+  "jobsLoadingStatus": "init",
   "latest": 2,
   "listError": null,
   "singleLoading": false,
@@ -105,8 +121,10 @@ Object {
 
 exports[`recipientValidationReducer when verification is pending 1`] = `
 Object {
+  "jobLoadingStatus": Object {},
   "jobResults": Object {},
   "jobResultsLoading": false,
+  "jobsLoadingStatus": "init",
   "latest": null,
   "listError": null,
   "singleLoading": true,
@@ -117,8 +135,10 @@ Object {
 
 exports[`recipientValidationReducer when verification successfully returns invalid address 1`] = `
 Object {
+  "jobLoadingStatus": Object {},
   "jobResults": Object {},
   "jobResultsLoading": false,
+  "jobsLoadingStatus": "init",
   "latest": null,
   "listError": null,
   "singleLoading": false,
@@ -134,8 +154,10 @@ Object {
 
 exports[`recipientValidationReducer when verification successfully returns valid address 1`] = `
 Object {
+  "jobLoadingStatus": Object {},
   "jobResults": Object {},
   "jobResultsLoading": false,
+  "jobsLoadingStatus": "init",
   "latest": null,
   "listError": null,
   "singleLoading": false,
@@ -150,8 +172,10 @@ Object {
 
 exports[`recipientValidationReducer with get job list request is pending 1`] = `
 Object {
+  "jobLoadingStatus": Object {},
   "jobResults": Object {},
-  "jobResultsLoading": true,
+  "jobResultsLoading": false,
+  "jobsLoadingStatus": "pending",
   "latest": null,
   "listError": null,
   "singleLoading": false,
@@ -162,8 +186,12 @@ Object {
 
 exports[`recipientValidationReducer with get job status request is pending 1`] = `
 Object {
+  "jobLoadingStatus": Object {
+    "A1C1_D1C1": "pending",
+  },
   "jobResults": Object {},
   "jobResultsLoading": true,
+  "jobsLoadingStatus": "init",
   "latest": null,
   "listError": null,
   "singleLoading": false,

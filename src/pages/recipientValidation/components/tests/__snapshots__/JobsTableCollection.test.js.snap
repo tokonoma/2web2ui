@@ -2,19 +2,21 @@
 
 exports[`JobsTableCollection renders a job row 1`] = `
 Array [
-  <PageLink
-    to="/recipient-validation/list/A1C1_D1_C1"
-  >
-    example.csv
-  </PageLink>,
+  <JobFileName
+    filename="example.csv"
+  />,
   "Feb 4 2013, 5:44pm",
   <JobStatusTag
     status="success"
   />,
-  999,
-  <JobReportDownloadLink
-    complete={true}
-    uploadedFile="https://example.csv"
+  <JobAddressCount
+    count={999}
+    status="success"
+  />,
+  <JobActionLink
+    fileHref="https://example.com/rejects.csv"
+    jobId="A1C1_D1_C1"
+    status="success"
   />,
 ]
 `;
@@ -25,24 +27,29 @@ exports[`JobsTableCollection renders a table of jobs 1`] = `
     Array [
       Object {
         "label": "File Name",
+        "sortKey": "filename",
       },
       Object {
         "label": "Date Uploaded",
+        "sortKey": "uploadedAt",
       },
       Object {
         "label": "Status",
+        "sortKey": "status",
       },
       Object {
         "label": "Total",
+        "sortKey": "addressCount",
       },
       Object {
-        "label": "Download",
+        "label": "Actions",
       },
     ]
   }
-  defaultSortColumn={null}
-  defaultSortDirection="asc"
+  defaultSortColumn="uploadedAt"
+  defaultSortDirection="desc"
   getRowData={[Function]}
+  pagination={true}
   rows={Array []}
   title="Recent Validations"
 >
