@@ -7,6 +7,7 @@ import PageLink from 'src/components/pageLink';
 import { PollContext } from 'src/context/Poll';
 import withContext from 'src/context/withContext';
 import { lerp } from 'src/helpers/math';
+import { showAlert } from 'src/actions/globalAlert';
 import JobStatusTag from './JobStatusTag';
 import styles from './ListProgress.module.scss';
 
@@ -57,26 +58,28 @@ const ListProgress = ({ getJobStatus, job: { filename, jobId, status }, startPol
       },
       interval: 5000
     });
-  }, [startPolling]);
+  }, [filename, getJobStatus, jobId, startPolling, stopPolling]);
 
   return (
-    <FocusContainer className={styles.ListProgressContainer}>
-      <h2>{filename}</h2>
-      <p>
-        <span>Your list is validating. You can track its progress on the recipient validation </span>
-        <PageLink to="/recipient-validation">home page</PageLink>,
-        <span> we'll let you know when validation is complete and your results are ready.</span>
-      </p>
-      <div className={styles.ListProgress}>
-        <div className={styles.ListProgressStatus}>
-          <strong>Status:</strong>&nbsp;
-          <JobStatusTag status={status} />
+    <FocusContainer>
+      <div className={styles.ListProgressContainer}>
+        <h2>{filename}</h2>
+        <p>
+          <span>Your list is validating. You can track its progress on the recipient validation </span>
+          <PageLink to="/recipient-validation">home page</PageLink>,
+          <span> we'll let you know when validation is complete and your results are ready.</span>
+        </p>
+        <div className={styles.ListProgress}>
+          <div className={styles.ListProgressStatus}>
+            <strong>Status:</strong>&nbsp;
+            <JobStatusTag status={status} />
+          </div>
+          {status !== 'error' && (
+            <ProgressBar className={styles.ProgressBarContainer} completed={formattedPercentage}/>
+          )}
         </div>
-        {status !== 'error' && (
-          <ProgressBar className={styles.ProgressBarContainer} completed={formattedPercentage}/>
-        )}
+        <Button color='orange' component={PageLink} to='/recipient-validation'>Validate Another</Button>
       </div>
-      <Button color='orange' component={PageLink} to='/recipient-validation'>Validate Another</Button>
     </FocusContainer>
   );
 };
