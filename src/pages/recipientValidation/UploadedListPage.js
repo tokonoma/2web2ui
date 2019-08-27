@@ -7,6 +7,7 @@ import Loading from 'src/components/loading';
 import PageLink from 'src/components/pageLink/PageLink';
 import { RedirectAndAlert } from 'src/components/globalAlert';
 import { selectRecipientValidationJobById } from 'src/selectors/recipientValidation';
+import ListError from './components/ListError';
 import ListProgress from './components/ListProgress';
 import UploadedListForm from './components/UploadedListForm';
 import styles from './UploadedListPage.module.scss';
@@ -55,11 +56,11 @@ export class UploadedListPage extends Component {
             </div>
           </Panel.Section>
           <Panel.Section>
-            {job.status === 'queued_for_batch' ? (
-              <UploadedListForm job={job} onSubmit={this.handleSubmit} />
-            ) : (
-              <ListProgress job={job} />
-            )}
+            {job.status === 'queued_for_batch' && <UploadedListForm job={job} onSubmit={this.handleSubmit} />}
+
+            {job.status === 'error' && <ListError/>}
+
+            {(job.status !== 'queued_for_batch' && job.status !== 'error') && <ListProgress job={job} />}
           </Panel.Section>
         </Panel>
       </Page>

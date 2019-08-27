@@ -38,6 +38,18 @@ describe('UploadedListPage', () => {
     expect(wrapper).toHaveDisplayName('Loading');
   });
 
+  it('renders the list error when the job status is error', () => {
+    const wrapper = subject({
+      job: {
+        jobId: 'A1C1_D1C1',
+        status: 'error',
+        updatedAt: '1997-11-21T15:55:06Z'
+      }
+    });
+
+    expect(wrapper).toMatchSnapshot();
+  });
+
   describe('when job is queued', () => {
     const queuedSubject = (props = {}) => (
       subject({

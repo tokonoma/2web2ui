@@ -12,6 +12,41 @@ exports[`UploadedListPage redirects and alerts when loading fails 1`] = `
 />
 `;
 
+exports[`UploadedListPage renders the list error when the job status is error 1`] = `
+<Page
+  breadcrumbAction={
+    Object {
+      "component": [Function],
+      "content": "Back",
+      "to": "/recipient-validation",
+    }
+  }
+  empty={Object {}}
+  title="Recipient Validation"
+>
+  <Panel>
+    <Panel.Section>
+      <div
+        className="dateHeader"
+      >
+        <strong>
+          Nov 21 1997
+        </strong>
+        <span>
+           at 
+        </span>
+        <strong>
+          10:55am
+        </strong>
+      </div>
+    </Panel.Section>
+    <Panel.Section>
+      <ListError />
+    </Panel.Section>
+  </Panel>
+</Page>
+`;
+
 exports[`UploadedListPage renders with list progress 1`] = `
 <Page
   breadcrumbAction={
