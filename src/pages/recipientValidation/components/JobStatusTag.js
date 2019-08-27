@@ -8,12 +8,12 @@ const statusProps = {
   error: {
     className: styles.Failed,
     icon: Error,
-    message: 'Failed. Please try again.'
+    message: 'Validation Error'
   },
   success: {
     className: styles.Complete,
     icon: CheckCircle,
-    message: 'Completed'
+    message: 'Complete'
   },
   queued_for_batch: {
     className: styles.Ready,
