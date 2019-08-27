@@ -1,6 +1,6 @@
 import React from 'react';
 import { Table } from '../Table';
-import { shallow, mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import _ from 'lodash';
 
 describe('Summary Table', () => {
@@ -8,7 +8,6 @@ describe('Summary Table', () => {
   let wrapper;
 
   const props = {
-    addFilters: jest.fn(),
     _getTableData: jest.fn(),
     refresh: jest.fn(),
     metrics: [
@@ -21,10 +20,7 @@ describe('Summary Table', () => {
     ],
     tableData: [],
     tableLoading: false,
-    hasSubaccounts: false,
-    searchOptions: {
-      filters: []
-    }
+    hasSubaccounts: false
   };
 
   const data = [
@@ -51,24 +47,11 @@ describe('Summary Table', () => {
     expect(wrapper.find('Loading')).toHaveLength(1);
   });
 
-  describe('group by', () => {
-    let snaps;
-    beforeEach(() => {
-      wrapper.setProps({ groupBy: 'subaccount' });
-      const func = wrapper.instance().getRowData();
-      const results = _.flatten(data.map(func));
-
-      snaps = _.map(results, (item) => mount(item));
-    });
-
-    it('should render row data', () => {
-      expect(snaps).toMatchSnapshot();
-    });
-
-    it('should handle row click', () => {
-      snaps[0].find('UnstyledLink').simulate('click');
-      expect(props.addFilters).toHaveBeenCalledWith([{ id: 0, type: 'Subaccount', value: 'Master Account (ID 0)' }]);
-    });
+  it('should render group by row data', () => {
+    wrapper.setProps({ groupBy: 'subaccount' });
+    const func = wrapper.instance().getRowData();
+    const results = _.flatten(data.map(func));
+    expect(results).toMatchSnapshot();
   });
 
   it('should render with aggregate data', () => {

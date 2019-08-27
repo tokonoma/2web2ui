@@ -3,28 +3,20 @@ import { connect } from 'react-redux';
 import cx from 'classnames';
 
 import { _getTableData } from 'src/actions/summaryChart';
-import { addFilters } from 'src/actions/reportOptions';
 import typeaheadCacheSelector from 'src/selectors/reportFilterTypeaheadCache';
 import { hasSubaccounts } from 'src/selectors/subaccounts';
 
 import { TableCollection, TableHeader, Unit, Loading } from 'src/components';
 import GroupByOption from './GroupByOption';
 import { Empty } from 'src/components';
-import { Panel, UnstyledLink } from '@sparkpost/matchbox';
+import { Panel } from '@sparkpost/matchbox';
 import { GROUP_CONFIG } from './tableConfig';
+import AddFilterLink from '../../components/AddFilterLink';
 import _ from 'lodash';
 
 import styles from './Table.module.scss';
-import qs from 'qs';
-import { stringifyTypeaheadfilter } from 'src/helpers/string';
-import { selectSummaryChartSearchOptions } from 'src/selectors/reportSearchOptions';
 
 export class Table extends Component {
-
-  handleRowClick = (item, e) => {
-    this.props.addFilters([item]);
-    e.preventDefault();
-  };
 
   getColumnHeaders() {
     const { metrics, groupBy } = this.props;
@@ -61,20 +53,16 @@ export class Table extends Component {
   };
 
   getRowData = () => {
-    const { metrics, groupBy, searchOptions } = this.props;
+    const { metrics, groupBy } = this.props;
     const group = GROUP_CONFIG[groupBy];
 
     return (row) => {
       const filterKey = row[group.keyName];
-      const filter = (group.label === 'Subaccount')
+      const newFilter = (group.label === 'Subaccount')
         ? this.getSubaccountFilter(filterKey)
         : { type: group.label, value: filterKey };
 
-      const currentFilters = searchOptions.filters || [];
-      const mergedFilters = _.uniqWith([ ...currentFilters, stringifyTypeaheadfilter(filter)], _.isEqual);
-      const linkParams = qs.stringify({ ...searchOptions, filters: mergedFilters }, { arrayFormat: 'repeat' });
-
-      const primaryCol = groupBy === 'aggregate' ? 'Aggregate Total' : <UnstyledLink onClick={(e) => this.handleRowClick(filter, e)} to={`/reports/summary/?${linkParams}`}>{filter.value} </UnstyledLink>;
+      const primaryCol = groupBy === 'aggregate' ? 'Aggregate Total' : <AddFilterLink newFilter={newFilter} reportType={'summary'} content={newFilter.value}/>;
       const metricCols = metrics.map((metric) => (
         <div className={styles.RightAlign}>
           <Unit value={row[metric.key]} unit={metric.unit}/>
@@ -162,7 +150,6 @@ export class Table extends Component {
 const mapStateToProps = (state) => ({
   typeaheadCache: typeaheadCacheSelector(state),
   hasSubaccounts: hasSubaccounts(state),
-  searchOptions: selectSummaryChartSearchOptions(state),
   ...state.summaryChart
 });
-export default connect(mapStateToProps, { _getTableData, addFilters })(Table);
+export default connect(mapStateToProps, { _getTableData })(Table);
