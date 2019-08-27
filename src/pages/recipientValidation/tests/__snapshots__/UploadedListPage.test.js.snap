@@ -1,0 +1,56 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UploadedListPage redirects and alerts when loading fails 1`] = `
+<RedirectAndAlert
+  alert={
+    Object {
+      "message": "Unable to find list A1C1_D1C1",
+      "type": "error",
+    }
+  }
+  to="/recipient-validation"
+/>
+`;
+
+exports[`UploadedListPage renders with list progress 1`] = `
+<Page
+  breadcrumbAction={
+    Object {
+      "component": [Function],
+      "content": "Back",
+      "to": "/recipient-validation",
+    }
+  }
+  empty={Object {}}
+  title="Recipient Validation"
+>
+  <Panel>
+    <Panel.Section>
+      <div
+        className="dateHeader"
+      >
+        <strong>
+          Nov 21 1997
+        </strong>
+        <span>
+           at 
+        </span>
+        <strong>
+          10:55am
+        </strong>
+      </div>
+    </Panel.Section>
+    <Panel.Section>
+      <Connect(WithContext(ListProgress))
+        job={
+          Object {
+            "jobId": "A1C1_D1C1",
+            "status": "success",
+            "updatedAt": "1997-11-21T15:55:06Z",
+          }
+        }
+      />
+    </Panel.Section>
+  </Panel>
+</Page>
+`;

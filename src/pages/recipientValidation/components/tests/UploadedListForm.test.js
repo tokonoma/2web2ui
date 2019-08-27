@@ -1,22 +1,29 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import UploadedListForm from '../UploadedListForm';
+import { UploadedListForm } from '../UploadedListForm';
 
-const subject = (props = {}) => shallow(
-  <UploadedListForm
-    onSubmit={jest.fn()}
-    job={{
-      filename: 'big-test.csv',
-      addressCount: 123
-    }}
-    currentUsage={12345}
-    {...props}
-  />
-);
+describe('UploadedListForm', () => {
+  const subject = (props = {}) => shallow(
+    <UploadedListForm
+      currentUsage={12345}
+      getUsage={() => {}}
+      job={{
+        filename: 'big-test.csv',
+        addressCount: 123
+      }}
+      onSubmit={() => {}}
+      {...props}
+    />
+  );
 
-describe('Uploaded List Form', () => {
   it('should render correctly', () => {
     expect(subject()).toMatchSnapshot();
+  });
+
+  it('should call getUsage on mount', () => {
+    const getUsage = jest.fn();
+    subject({ getUsage });
+    expect(getUsage).toHaveBeenCalled();
   });
 
   it('should call onSubmit when clicking validate button', () => {
@@ -26,9 +33,9 @@ describe('Uploaded List Form', () => {
     expect(onSubmit).toHaveBeenCalled();
   });
 
-  it('should open modal on click of link', () => {
+  it('should open modal on click of link', async () => {
     const wrapper = subject();
-    wrapper.find('UnstyledLink').simulate('click');
-    expect(wrapper.find('Modal').prop('open')).toEqual(true);
+    await wrapper.find('UnstyledLink').simulate('click');
+    expect(wrapper.find('Modal')).toHaveProp('open', true);
   });
 });

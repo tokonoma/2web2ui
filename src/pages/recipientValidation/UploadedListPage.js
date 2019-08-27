@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import React, { Component } from 'react';
 import { Page, Panel } from '@sparkpost/matchbox';
 import { connect } from 'react-redux';
@@ -33,7 +32,7 @@ export class UploadedListPage extends Component {
             message: `Unable to find list ${listId}`,
             type: 'error'
           }}
-          to="/recipient-validation/list"
+          to="/recipient-validation"
         />
       );
     }
@@ -45,7 +44,7 @@ export class UploadedListPage extends Component {
     return (
       <Page
         title='Recipient Validation'
-        breadcrumbAction={{ content: 'Back', component: PageLink, to: '/recipient-validation/list' }}
+        breadcrumbAction={{ content: 'Back', component: PageLink, to: '/recipient-validation' }}
       >
         <Panel>
           <Panel.Section>

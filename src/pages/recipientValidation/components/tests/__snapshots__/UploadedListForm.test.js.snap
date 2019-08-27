@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Uploaded List Form should render correctly 1`] = `
+exports[`UploadedListForm should render correctly 1`] = `
 <div
   className="formContainer"
 >
@@ -62,7 +62,7 @@ exports[`Uploaded List Form should render correctly 1`] = `
     <Button
       className="ActionButton"
       color="orange"
-      onClick={[MockFunction]}
+      onClick={[Function]}
       size="default"
     >
       Validate

@@ -31,7 +31,6 @@ const ProgressBar = ({ completed }) => (
   </div>
 );
 
-
 const ListProgress = ({ getJobStatus, job: { filename, jobId, status }, startPolling, stopPolling }) => {
   const percentage = BATCH_STATUS.findIndex((batchStatus) => batchStatus === status) / (BATCH_STATUS.length - 1);
   const formattedPercentage = lerp(0, 100, percentage);
