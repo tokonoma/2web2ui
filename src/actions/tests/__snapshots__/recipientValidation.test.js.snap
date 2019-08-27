@@ -15,18 +15,6 @@ Array [
 ]
 `;
 
-exports[`Recipient Verification Actions .getLatestJob when getting latest list upload 1`] = `
-Array [
-  Object {
-    "meta": Object {
-      "method": "GET",
-      "url": "v1/recipient-validation/latest",
-    },
-    "type": "GET_LATEST_JOB",
-  },
-]
-`;
-
 exports[`Recipient Verification Actions .getList when getting list of jobs 1`] = `
 Array [
   Object {

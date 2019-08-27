@@ -43,16 +43,6 @@ export function singleAddress(address) {
   });
 }
 
-export function getLatestJob() {
-  return sparkpostApiRequest({
-    type: 'GET_LATEST_JOB',
-    meta: {
-      method: 'GET',
-      url: 'v1/recipient-validation/latest'
-    }
-  });
-}
-
 export function getJobStatus(id) {
   return sparkpostApiRequest({
     type: 'GET_JOB_STATUS',

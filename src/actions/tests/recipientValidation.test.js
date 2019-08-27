@@ -2,7 +2,6 @@ import { snapshotActionCases } from 'src/__testHelpers__/snapshotActionHelpers';
 import {
   uploadList,
   singleAddress,
-  getLatestJob,
   getJobStatus,
   getList,
   triggerJob
@@ -30,13 +29,6 @@ describe('Recipient Verification Actions', () => {
           address: 'foo@bar.com'
         })
       )
-    }
-  ]);
-
-  snapshotActionCases('.getLatestJob', [
-    {
-      name: 'when getting latest list upload',
-      action: () => getLatestJob()
     }
   ]);
 
