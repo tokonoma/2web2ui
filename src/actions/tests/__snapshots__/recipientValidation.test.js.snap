@@ -4,6 +4,9 @@ exports[`Recipient Verification Actions .getJobStatus when getting status of a l
 Array [
   Object {
     "meta": Object {
+      "context": Object {
+        "id": "12345",
+      },
       "method": "GET",
       "url": "v1/recipient-validation/job/12345",
     },
@@ -55,6 +58,9 @@ exports[`Recipient Verification Actions .triggerJob when triggering a job to be 
 Array [
   Object {
     "meta": Object {
+      "context": Object {
+        "id": "12345",
+      },
       "method": "POST",
       "url": "v1/recipient-validation/trigger/12345",
     },
