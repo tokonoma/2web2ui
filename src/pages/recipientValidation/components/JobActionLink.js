@@ -1,11 +1,15 @@
 import React from 'react';
 import { Button } from '@sparkpost/matchbox';
-import { PlaylistAddCheck, FileDownload } from '@sparkpost/matchbox-icons';
+import { Cached, FileDownload, PlaylistAddCheck } from '@sparkpost/matchbox-icons';
 import DownloadLink from 'src/components/downloadLink/DownloadLink';
 import PageLink from 'src/components/pageLink/PageLink';
 
 const JobActionLink = ({ jobId, fileHref, status }) => {
-  if (status !== 'error' && status !== 'success') {
+  if (status === 'error') {
+    return null;
+  }
+
+  if (status === 'queued_for_batch') {
     return (
       <Button
         component={PageLink}
@@ -20,7 +24,7 @@ const JobActionLink = ({ jobId, fileHref, status }) => {
     );
   }
 
-  if (fileHref && status === 'success') {
+  if (status === 'success') {
     return (
       <DownloadLink
         component={Button}
@@ -35,7 +39,18 @@ const JobActionLink = ({ jobId, fileHref, status }) => {
     );
   }
 
-  return null;
+  return (
+    <Button
+      component={PageLink}
+      to={`/recipient-validation/list/${jobId}`}
+      flat
+      color="orange"
+      size="small"
+    >
+      <span>See Progress</span>&nbsp;
+      <Cached />
+    </Button>
+  );
 };
 
 export default JobActionLink;

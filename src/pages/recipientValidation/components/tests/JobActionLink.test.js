@@ -7,14 +7,21 @@ describe('JobActionLink', () => {
     <JobActionLink {...props} />
   );
 
-  it('Renders the review variant of the component when the status not "error" or "success"', () => {
+  it('renders see progress button', () => {
+    const wrapper = subject({ status: 'batch_triggered' });
+
+    expect(wrapper.find('Button').childAt(0).text()).toEqual('See Progress');
+    expect(wrapper.find('Cached')).toExist();
+  });
+
+  it('renders the review variant of the component when the status not "error" or "success"', () => {
     const wrapper = subject({ status: 'queued_for_batch' });
 
     expect(wrapper.find('Button').childAt(0).text()).toEqual('Review');
     expect(wrapper.find('PlaylistAddCheck')).toExist();
   });
 
-  it('Renders the download link when a `fileHref` is present and the status is `success`', () => {
+  it('renders the download link when a `fileHref` is present and the status is `success`', () => {
     const wrapper = subject({
       fileHref: 'https://nicklemmon.com',
       status: 'success'
@@ -24,15 +31,8 @@ describe('JobActionLink', () => {
     expect(wrapper.find('FileDownload')).toExist();
   });
 
-  it('Renders nothing when the status is "success" but the there is no value for `fileHref`', () => {
-    const wrapper = subject({ status: 'success' });
-
-    expect(wrapper).toBeEmptyRender();
-  });
-
-  it('Renders nothing when the status is "error"', () => {
+  it('renders nothing when the status is "error"', () => {
     const wrapper = subject({ status: 'error' });
-
     expect(wrapper).toBeEmptyRender();
   });
 });
