@@ -4,15 +4,19 @@ import { getList } from 'src/actions/recipientValidation';
 import { getDisplayName } from 'src/helpers/hoc';
 import { selectRecipientValidationJobs } from 'src/selectors/recipientValidation';
 
-export const Container = ({ component: Component, getList, jobs }) => {
+export const Container = ({ component: Component, getList, jobs, jobsLoadingStatus }) => {
   useEffect(() => {
     getList();
   }, [getList]);
 
+  if (jobsLoadingStatus !== 'success') {
+    return null;
+  }
+
   return <Component jobs={jobs} />;
 };
 
-const withPollingJobs = (WrappedComponent) => {
+const withJobs = (WrappedComponent) => {
   const Wrapper = (props) => (
     <Container {...props} component={WrappedComponent} />
   );
@@ -20,7 +24,8 @@ const withPollingJobs = (WrappedComponent) => {
   Wrapper.displayName = getDisplayName(WrappedComponent, 'withJobs');
 
   const mapStateToProps = (state) => ({
-    jobs: selectRecipientValidationJobs(state)
+    jobs: selectRecipientValidationJobs(state),
+    jobsLoadingStatus: state.recipientValidation.jobsLoadingStatus
   });
 
   const mapDispatchToProps = {
@@ -30,4 +35,4 @@ const withPollingJobs = (WrappedComponent) => {
   return connect(mapStateToProps, mapDispatchToProps)(Wrapper);
 };
 
-export default withPollingJobs;
+export default withJobs;

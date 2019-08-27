@@ -5,21 +5,22 @@ export const initialState = {
   singleLoading: false,
   jobResults: {},
   latest: null,
-  listError: null
+  listError: null,
+  jobsLoadingStatus: 'init'
 };
 
 const recipientValidationReducer = (state = initialState, { meta, payload, type }) => {
   switch (type) {
     case 'GET_JOB_LIST_PENDING':
-      return { ...state, jobResultsLoading: true };
+      return { ...state, jobsLoadingStatus: 'pending' };
 
     case 'GET_JOB_LIST_FAIL':
-      return { ...state, jobResultsLoading: false };
+      return { ...state, jobsLoadingStatus: 'fail' };
 
     case 'GET_JOB_LIST_SUCCESS':
       return {
         ...state,
-        jobResultsLoading: false,
+        jobsLoadingStatus: 'success',
         jobResults: payload.reduce((acc, job) => ({ ...acc, [job.list_id]: job }), state.jobResults)
       };
 

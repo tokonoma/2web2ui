@@ -5,6 +5,7 @@ exports[`withJobs renders wrapped component 1`] = `
   component="div"
   getList={[Function]}
   jobs={Array []}
+  jobsLoadingStatus="success"
 >
   <div
     jobs={Array []}
