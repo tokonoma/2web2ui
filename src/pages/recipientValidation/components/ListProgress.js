@@ -61,25 +61,23 @@ const ListProgress = ({ getJobStatus, job: { filename, jobId, status }, startPol
   }, [filename, getJobStatus, jobId, startPolling, stopPolling]);
 
   return (
-    <FocusContainer>
-      <div className={styles.ListProgressContainer}>
-        <h2>{filename}</h2>
-        <p>
-          <span>Your list is validating. You can track its progress on the recipient validation </span>
-          <PageLink to="/recipient-validation">home page</PageLink>,
-          <span> we'll let you know when validation is complete and your results are ready.</span>
-        </p>
-        <div className={styles.ListProgress}>
-          <div className={styles.ListProgressStatus}>
-            <strong>Status:</strong>&nbsp;
-            <JobStatusTag status={status} />
-          </div>
-          {status !== 'error' && (
-            <ProgressBar className={styles.ProgressBarContainer} completed={formattedPercentage}/>
-          )}
+    <FocusContainer className={styles.ListProgressContainer}>
+      <h2>{filename}</h2>
+      <p>
+        <span>Your list is validating. You can track its progress on the recipient validation </span>
+        <PageLink to="/recipient-validation">home page</PageLink>,
+        <span> we'll let you know when validation is complete and your results are ready.</span>
+      </p>
+      <div className={styles.ListProgress}>
+        <div className={styles.ListProgressStatus}>
+          <strong>Status:</strong>&nbsp;
+          <JobStatusTag status={status} />
         </div>
-        <Button color='orange' component={PageLink} to='/recipient-validation'>Validate Another</Button>
+        {status !== 'error' && (
+          <ProgressBar className={styles.ProgressBarContainer} completed={formattedPercentage}/>
+        )}
       </div>
+      <Button color='orange' component={PageLink} to='/recipient-validation'>Validate Another</Button>
     </FocusContainer>
   );
 };
