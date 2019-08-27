@@ -3,7 +3,7 @@ import React from 'react';
 import { RecipientValidationPage } from '../RecipientValidationPage';
 import ListForm from '../components/ListForm';
 import SingleAddressForm from '../components/SingleAddressForm';
-import ListResultsFeatureToggle from '../components/ListResultsFeatureToggle';
+import JobsTableCollection from '../components/JobsTableCollection';
 import ApiDetails from '../components/ApiDetails';
 
 describe('Page: Recipient Email Verification', () => {
@@ -14,8 +14,7 @@ describe('Page: Recipient Email Verification', () => {
   beforeEach(() => {
     props = {
       history: {
-        replace: jest.fn(),
-        push: jest.fn()
+        replace: jest.fn()
       }
     };
 
@@ -25,7 +24,7 @@ describe('Page: Recipient Email Verification', () => {
 
   it('should render Recipient Validation page correctly', () => {
     expect(wrapper.find(ListForm)).toExist();
-    expect(wrapper.find(ListResultsFeatureToggle)).toExist();
+    expect(wrapper.find(JobsTableCollection)).toExist();
   });
 
   it('renders single email verification tab correctly when selected', () => {
