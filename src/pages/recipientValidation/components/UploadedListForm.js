@@ -4,6 +4,7 @@ import { Button, Grid, UnstyledLink, Modal,Panel } from '@sparkpost/matchbox';
 import { Close } from '@sparkpost/matchbox-icons';
 import { Link } from 'react-router-dom';
 import { getUsage } from 'src/actions/account';
+import { LoadingSVG } from 'src/components/loading/Loading';
 import { selectMonthlyRecipientValidationUsage } from 'src/selectors/accountBillingInfo';
 import { calculateNewCost } from 'src/pages/billing/helpers/totalRecipientValidationCost';
 import RecipientValidationPriceTable from './RecipientValidationPriceTable';
@@ -25,7 +26,7 @@ export class UploadedListForm extends React.Component {
   }
 
   render() {
-    const { currentUsage, job, onSubmit } = this.props;
+    const { currentUsage, job, loading, onSubmit } = this.props;
     const { addressCount, filename } = job;
 
     const renderRVPriceModal = () => (
@@ -63,8 +64,18 @@ export class UploadedListForm extends React.Component {
           </Grid.Column>
           <Grid.Column xs={12} mdOffset={1} md={7}>
             <div>and will cost</div>
-            <div className={styles.Cost}>{calculateNewCost(currentUsage, addressCount)}</div>
-            <UnstyledLink onClick={this.handleModal(true)}>How was this calculated?</UnstyledLink>
+            {loading ? (
+              <div className={styles.LoadingCostContainer}>
+                <LoadingSVG size='Small' />
+              </div>
+            ) : (
+              <>
+                <div className={styles.Cost}>
+                  {calculateNewCost(currentUsage, addressCount)}
+                </div>
+                <UnstyledLink onClick={this.handleModal(true)}>How was this calculated?</UnstyledLink>
+              </>
+            )}
           </Grid.Column>
         </Grid>
         <div className={styles.ButtonRow}>
@@ -80,7 +91,8 @@ export class UploadedListForm extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  currentUsage: selectMonthlyRecipientValidationUsage(state)
+  currentUsage: selectMonthlyRecipientValidationUsage(state),
+  loading: state.account.usageLoading
 });
 
 export default connect(mapStateToProps, { getUsage })(UploadedListForm);

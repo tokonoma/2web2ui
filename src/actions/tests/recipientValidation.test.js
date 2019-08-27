@@ -1,9 +1,7 @@
 import { snapshotActionCases } from 'src/__testHelpers__/snapshotActionHelpers';
 import {
   uploadList,
-  uploadListNew,
   singleAddress,
-  getLatestJob,
   getJobStatus,
   getList,
   triggerJob
@@ -23,17 +21,6 @@ describe('Recipient Verification Actions', () => {
     }
   ]);
 
-  snapshotActionCases('.uploadListNew', [
-    {
-      name: 'when uploading csv',
-      action: () => (
-        uploadListNew({
-          data: 'csv-file'
-        })
-      )
-    }
-  ]);
-
   snapshotActionCases('.singleAddress', [
     {
       name: 'when verifying a single address',
@@ -42,13 +29,6 @@ describe('Recipient Verification Actions', () => {
           address: 'foo@bar.com'
         })
       )
-    }
-  ]);
-
-  snapshotActionCases('.getLatestJob', [
-    {
-      name: 'when getting latest list upload',
-      action: () => getLatestJob()
     }
   ]);
 

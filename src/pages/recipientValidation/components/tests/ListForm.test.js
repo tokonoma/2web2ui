@@ -1,7 +1,5 @@
 import React from 'react';
-
 import { shallow } from 'enzyme';
-
 import { ListForm } from '../ListForm';
 
 describe('ListForm', () => {
@@ -16,7 +14,10 @@ describe('ListForm', () => {
 
     props = {
       handleSubmit: jest.fn((a) => () => a(formValuesWithCsv)),
-      uploadList: jest.fn(() => Promise.resolve()),
+      history: {
+        push: jest.fn()
+      },
+      uploadList: jest.fn(() => Promise.resolve({ list_id: 'A1C1_D1C1' })),
       reset: jest.fn(),
       showAlert: jest.fn(),
       resetUploadError: jest.fn()
@@ -39,7 +40,11 @@ describe('ListForm', () => {
     expect(csvUpload).toBeInstanceOf(FormData);
     expect(csvUpload.get('myupload')).toEqual(formValuesWithCsv.csv);
     expect(props.reset).toHaveBeenCalledWith('recipientValidationListForm');
-    expect(props.showAlert.mock.calls).toMatchSnapshot();
+    expect(props.showAlert).toHaveBeenCalledWith({
+      type: 'success',
+      message: 'Recipients Uploaded'
+    });
+    expect(props.history.push).toHaveBeenCalledWith('/recipient-validation/list/A1C1_D1C1');
   });
 
   it('should not submit csv when over size limit', () => {

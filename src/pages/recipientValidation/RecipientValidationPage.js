@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Page, Tabs, Panel, Modal, Button } from '@sparkpost/matchbox';
 import { Close } from '@sparkpost/matchbox-icons';
+import JobsTableCollection from './components/JobsTableCollection';
 import ListForm from './components/ListForm';
 import SingleAddressForm from './components/SingleAddressForm';
-import ListResultsFeatureToggle from './components/ListResultsFeatureToggle';
 import ApiDetails from './components/ApiDetails';
 import { hasAccountOptionEnabled } from 'src/helpers/conditions/account';
 import RVDisabledPage from './components/RVDisabledPage';
@@ -90,7 +90,7 @@ export class RecipientValidationPage extends Component {
         <Panel>
           {this.renderTabContent(selectedTab)}
         </Panel>
-        {selectedTab === 0 && <ListResultsFeatureToggle />}
+        {selectedTab === 0 && <JobsTableCollection />}
         <Modal open={showPriceModal} onClose={() => this.handleModal(false)}>
           {this.renderRVPriceModal()}
         </Modal>

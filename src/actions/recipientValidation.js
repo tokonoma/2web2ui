@@ -5,29 +5,18 @@ export function uploadList(data) {
     type: 'UPLOAD_RECIPIENT_VALIDATION_LIST',
     meta: {
       method: 'POST',
-      url: 'v1/recipient-validation',
+      url: 'v1/recipient-validation/upload',
       data
     }
   });
 }
+
 export function getList() {
   return sparkpostApiRequest({
     type: 'GET_JOB_LIST',
     meta: {
       method: 'GET',
       url: 'v1/recipient-validation/list'
-    }
-  });
-}
-
-//TODO: replace uploadList on SE-156
-export function uploadListNew(data) {
-  return sparkpostApiRequest({
-    type: 'UPLOAD_RV_LIST_NEW',
-    meta: {
-      method: 'POST',
-      url: 'v1/recipient-validation/upload',
-      data
     }
   });
 }
@@ -50,16 +39,6 @@ export function singleAddress(address) {
       method: 'GET',
       url: `v1/recipient-validation/single/${address}`,
       email: address
-    }
-  });
-}
-
-export function getLatestJob() {
-  return sparkpostApiRequest({
-    type: 'GET_LATEST_JOB',
-    meta: {
-      method: 'GET',
-      url: 'v1/recipient-validation/latest'
     }
   });
 }

@@ -1,13 +1,11 @@
 export const initialState = {
   singleResults: null,
   uploadLoading: false,
-  jobResultsLoading: false,
   singleLoading: false,
   jobResults: {},
-  latest: null,
   listError: null,
   jobLoadingStatus: {
-    // id: 'init'
+    // id: 'pending'
   },
   jobsLoadingStatus: 'init'
 };
@@ -31,7 +29,6 @@ const recipientValidationReducer = (state = initialState, { meta, payload, type 
     case 'TRIGGER_JOB_PENDING':
       return {
         ...state,
-        jobResultsLoading: true, // todo, remove with latest
         jobLoadingStatus: { ...state.jobLoadingStatus, [meta.context.id]: 'pending' }
       };
 
@@ -39,7 +36,6 @@ const recipientValidationReducer = (state = initialState, { meta, payload, type 
     case 'TRIGGER_JOB_FAIL':
       return {
         ...state,
-        jobResultsLoading: false, // todo, remove with latest
         jobLoadingStatus: { ...state.jobLoadingStatus, [meta.context.id]: 'fail' }
       };
 
@@ -48,21 +44,7 @@ const recipientValidationReducer = (state = initialState, { meta, payload, type 
       return {
         ...state,
         jobLoadingStatus: { ...state.jobLoadingStatus, [meta.context.id]: 'success' },
-        jobResultsLoading: false, // todo, remove with latest
         jobResults: { ...state.jobResults, [payload.list_id]: payload }
-      };
-
-
-    case 'GET_LATEST_JOB_PENDING':
-      return { ...state, jobResultsLoading: true };
-    case 'GET_LATEST_JOB_FAIL':
-      return { ...state, jobResultsLoading: false };
-    case 'GET_LATEST_JOB_SUCCESS':
-      return {
-        ...state,
-        jobResultsLoading: false,
-        jobResults: { ...state.jobResults, [payload.list_id]: payload },
-        latest: payload.list_id
       };
 
     // List Upload
@@ -70,31 +52,10 @@ const recipientValidationReducer = (state = initialState, { meta, payload, type 
       return { ...state, uploadLoading: true };
 
     case 'UPLOAD_RECIPIENT_VALIDATION_LIST_SUCCESS':
-      return {
-        ...state,
-        uploadLoading: false,
-        latest: payload.list_id
-      };
+      return { ...state, uploadLoading: false };
 
     case 'UPLOAD_RECIPIENT_VALIDATION_LIST_FAIL':
       return { ...state, uploadLoading: false, listError: payload };
-
-    //TODO: Replace UPLOAD_RECIPIENT_VALIDATION_LIST;
-    case 'UPLOAD_RV_LIST_NEW_PENDING':
-      return { ...state, uploadLoading: true };
-
-    case 'UPLOAD_RV_LIST_NEW_SUCCESS':
-      return {
-        ...state,
-        uploadLoading: false
-      };
-
-    case 'UPLOAD_RV_LIST_NEW_FAIL':
-      return { ...state, uploadLoading: false, listError: payload };
-
-    //TODO: Remove placeholder reducer
-    case 'UPLOAD_RV_LIST_NEW':
-      return { ...state, uploading: false };
 
     case 'RESET_RECIPIENT_VALIDATION_FAIL':
       return { ...state, listError: null };

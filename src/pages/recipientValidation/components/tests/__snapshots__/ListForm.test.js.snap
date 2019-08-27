@@ -16,14 +16,3 @@ exports[`ListForm renders correctly 1`] = `
   </form>
 </Panel.Section>
 `;
-
-exports[`ListForm should submit csv 1`] = `
-Array [
-  Array [
-    Object {
-      "message": "Recipients Uploaded",
-      "type": "success",
-    },
-  ],
-]
-`;
