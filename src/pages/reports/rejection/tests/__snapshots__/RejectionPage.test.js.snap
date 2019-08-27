@@ -41,7 +41,6 @@ exports[`RejectionPage:  renders loading pannel when aggregates are still loadin
   />
   <hr />
   <DataTable
-    addFilters={[MockFunction]}
     list={
       Array [
         Object {
@@ -87,7 +86,6 @@ exports[`RejectionPage:  should render 1`] = `
   </Connect(MetricsSummary)>
   <hr />
   <DataTable
-    addFilters={[MockFunction]}
     list={
       Array [
         Object {
