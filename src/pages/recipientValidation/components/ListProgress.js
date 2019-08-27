@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { Button } from '@sparkpost/matchbox';
 import { getJobStatus } from 'src/actions/recipientValidation';
@@ -25,20 +25,20 @@ const BATCH_STATUS = [
   'success'
 ];
 
-const ProgressBar = ({ completed }) => (
-  <div className={styles.ProgressBar} >
-    <div className={styles.Progress} style={{ width: `${completed}%` }}/>
-  </div>
-);
-
-const ListProgress = ({ getJobStatus, job: { filename, jobId, status }, startPolling, stopPolling }) => {
+export const ListProgress = ({
+  getJobStatus,
+  job: { filename, jobId, status },
+  showAlert,
+  startPolling,
+  stopPolling
+}) => {
   const percentage = BATCH_STATUS.findIndex((batchStatus) => batchStatus === status) / (BATCH_STATUS.length - 1);
   const formattedPercentage = lerp(0, 100, percentage);
 
-  useEffect(() => {
+  React.useEffect(() => {
     startPolling({
       key: jobId,
-      action: () => {
+      action: () => (
         getJobStatus(jobId)
           .then((nextJob) => {
             // This needs to live on after this component is unmounted
@@ -53,11 +53,11 @@ const ListProgress = ({ getJobStatus, job: { filename, jobId, status }, startPol
           })
           .catch(() => {
             stopPolling(jobId);
-          });
-      },
+          })
+      ),
       interval: 5000
     });
-  }, [filename, getJobStatus, jobId, startPolling, stopPolling]);
+  }, [filename, getJobStatus, jobId, showAlert, startPolling, stopPolling]);
 
   return (
     <FocusContainer className={styles.ListProgressContainer}>
@@ -73,12 +73,14 @@ const ListProgress = ({ getJobStatus, job: { filename, jobId, status }, startPol
           <JobStatusTag status={status} />
         </div>
         {status !== 'error' && (
-          <ProgressBar className={styles.ProgressBarContainer} completed={formattedPercentage}/>
+          <div className={styles.ProgressBar}>
+            <div className={styles.Progress} style={{ width: `${formattedPercentage}%` }} />
+          </div>
         )}
       </div>
-      <Button color='orange' component={PageLink} to='/recipient-validation'>Validate Another</Button>
+      <Button color='orange' component={PageLink} to="/recipient-validation">Validate Another</Button>
     </FocusContainer>
   );
 };
 
-export default connect(undefined, { getJobStatus })(withContext(PollContext, ListProgress));
+export default connect(undefined, { getJobStatus, showAlert })(withContext(PollContext, ListProgress));

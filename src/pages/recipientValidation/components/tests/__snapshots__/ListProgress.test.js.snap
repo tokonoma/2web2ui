@@ -1,44 +1,53 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ListProgress should render correctly 1`] = `
-<div
+exports[`ListProgress renders status and progress bar 1`] = `
+<FocusContainer
   className="ListProgressContainer"
 >
   <h2>
     big-test.csv
   </h2>
-  <div
-    style={
-      Object {
-        "marginBottom": 80,
-      }
-    }
-  >
+  <p>
     <span>
       Your list is validating. You can track its progress on the recipient validation 
     </span>
-    <UnstyledLink
-      component={[Function]}
+    <PageLink
       to="/recipient-validation"
     >
       home page
-    </UnstyledLink>
+    </PageLink>
     ,
     <span>
        we'll let you know when validation is complete and your results are ready.
     </span>
+  </p>
+  <div
+    className="ListProgress"
+  >
+    <div
+      className="ListProgressStatus"
+    >
+      <strong>
+        Status:
+      </strong>
+       
+      <JobStatusTag
+        status="checking_regex"
+      />
+    </div>
+    <div
+      className="ProgressBar"
+    >
+      <div
+        className="Progress"
+        style={
+          Object {
+            "width": "20%",
+          }
+        }
+      />
+    </div>
   </div>
-  <div>
-    <strong>
-      Status:
-    </strong>
-     
-    Processing
-  </div>
-  <ProgressBar
-    className="ProgressBarContainer"
-    completed={20}
-  />
   <Button
     color="orange"
     component={[Function]}
@@ -47,5 +56,5 @@ exports[`ListProgress should render correctly 1`] = `
   >
     Validate Another
   </Button>
-</div>
+</FocusContainer>
 `;
