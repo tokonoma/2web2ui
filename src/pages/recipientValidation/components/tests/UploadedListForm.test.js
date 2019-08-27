@@ -38,4 +38,9 @@ describe('UploadedListForm', () => {
     await wrapper.find('UnstyledLink').simulate('click');
     expect(wrapper.find('Modal')).toHaveProp('open', true);
   });
+
+  it('should render cost loader', () => {
+    const wrapper = subject({ loading: true });
+    expect(wrapper.find('.LoadingCostContainer')).toExist();
+  });
 });
