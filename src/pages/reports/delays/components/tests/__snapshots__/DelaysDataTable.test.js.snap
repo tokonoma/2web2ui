@@ -44,11 +44,16 @@ Array [
   <LongTextContainer
     text="bad delay"
   />,
-  <UnstyledLink
-    onClick={[Function]}
-  >
-    gmail.com
-  </UnstyledLink>,
+  <Connect(AddFilterLink)
+    content="gmail.com"
+    newFilter={
+      Object {
+        "type": "Recipient Domain",
+        "value": "gmail.com",
+      }
+    }
+    reportType="delayed"
+  />,
   1,
   <span>
     10
