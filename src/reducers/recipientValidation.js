@@ -6,6 +6,9 @@ export const initialState = {
   jobResults: {},
   latest: null,
   listError: null,
+  jobLoadingStatus: {
+    // id: 'init'
+  },
   jobsLoadingStatus: 'init'
 };
 
@@ -25,29 +28,41 @@ const recipientValidationReducer = (state = initialState, { meta, payload, type 
       };
 
     case 'GET_JOB_STATUS_PENDING':
-    case 'GET_LATEST_JOB_PENDING':
     case 'TRIGGER_JOB_PENDING':
-      return { ...state, jobResultsLoading: true };
-
-    case 'GET_JOB_STATUS_FAIL':
-    case 'GET_LATEST_JOB_FAIL':
-    case 'TRIGGER_JOB_FAIL':
-      return { ...state, jobResultsLoading: false };
-
-    case 'GET_LATEST_JOB_SUCCESS':
       return {
         ...state,
-        jobResultsLoading: false,
-        jobResults: { ...state.jobResults, [payload.list_id]: payload },
-        latest: payload.list_id
+        jobResultsLoading: true, // todo, remove with latest
+        jobLoadingStatus: { ...state.jobLoadingStatus, [meta.context.id]: 'pending' }
+      };
+
+    case 'GET_JOB_STATUS_FAIL':
+    case 'TRIGGER_JOB_FAIL':
+      return {
+        ...state,
+        jobResultsLoading: false, // todo, remove with latest
+        jobLoadingStatus: { ...state.jobLoadingStatus, [meta.context.id]: 'fail' }
       };
 
     case 'GET_JOB_STATUS_SUCCESS':
     case 'TRIGGER_JOB_SUCCESS':
       return {
         ...state,
-        jobResultsLoading: false,
+        jobLoadingStatus: { ...state.jobLoadingStatus, [meta.context.id]: 'success' },
+        jobResultsLoading: false, // todo, remove with latest
         jobResults: { ...state.jobResults, [payload.list_id]: payload }
+      };
+
+
+    case 'GET_LATEST_JOB_PENDING':
+      return { ...state, jobResultsLoading: true };
+    case 'GET_LATEST_JOB_FAIL':
+      return { ...state, jobResultsLoading: false };
+    case 'GET_LATEST_JOB_SUCCESS':
+      return {
+        ...state,
+        jobResultsLoading: false,
+        jobResults: { ...state.jobResults, [payload.list_id]: payload },
+        latest: payload.list_id
       };
 
     // List Upload

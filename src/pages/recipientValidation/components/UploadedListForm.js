@@ -1,15 +1,17 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
 import { Button, Grid, UnstyledLink, Modal,Panel } from '@sparkpost/matchbox';
 import { Close } from '@sparkpost/matchbox-icons';
 import { Link } from 'react-router-dom';
+import { getUsage } from 'src/actions/account';
+import { selectMonthlyRecipientValidationUsage } from 'src/selectors/accountBillingInfo';
 import { calculateNewCost } from 'src/pages/billing/helpers/totalRecipientValidationCost';
 import RecipientValidationPriceTable from './RecipientValidationPriceTable';
 
 import styles from './UploadedListForm.module.scss';
 import { formatFullNumber } from 'src/helpers/units';
 
-const UploadedListForm = ({ job, onSubmit, currentUsage }) => {
-
+export const UploadedListForm = ({ currentUsage, getUsage, job, onSubmit }) => {
   const [ modalOpen, setModalOpen ] = useState(false);
   const { addressCount, filename } = job;
 
@@ -35,6 +37,8 @@ const UploadedListForm = ({ job, onSubmit, currentUsage }) => {
       </div>
     </Panel>
   );
+
+  useEffect(() => { getUsage(); }, [getUsage]);
 
   return (
     <div className={styles.formContainer}>
@@ -66,4 +70,8 @@ const UploadedListForm = ({ job, onSubmit, currentUsage }) => {
 };
 
 
-export default UploadedListForm;
+const mapStateToProps = (state) => ({
+  currentUsage: selectMonthlyRecipientValidationUsage(state),
+});
+
+export default connect(mapStateToProps, { getUsage })(UploadedListForm);

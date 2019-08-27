@@ -32,12 +32,13 @@ export function uploadListNew(data) {
   });
 }
 
-export function triggerJob(list_id) {
+export function triggerJob(id) {
   return sparkpostApiRequest({
     type: 'TRIGGER_JOB',
     meta: {
       method: 'POST',
-      url: `v1/recipient-validation/trigger/${list_id}`
+      url: `v1/recipient-validation/trigger/${id}`,
+      context: { id }
     }
   });
 }
@@ -63,12 +64,13 @@ export function getLatestJob() {
   });
 }
 
-export function getJobStatus(list_id) {
+export function getJobStatus(id) {
   return sparkpostApiRequest({
     type: 'GET_JOB_STATUS',
     meta: {
       method: 'GET',
-      url: `v1/recipient-validation/job/${list_id}`
+      url: `v1/recipient-validation/job/${id}`,
+      context: { id }
     }
   });
 }

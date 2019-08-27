@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
 import { Button } from '@sparkpost/matchbox';
-import { Link } from 'react-router-dom';
-import styles from './ListProgress.module.scss';
-import { UnstyledLink } from '@sparkpost/matchbox';
+import { getJobStatus } from 'src/actions/recipientValidation';
+import FocusContainer from 'src/components/focusContainer';
+import PageLink from 'src/components/pageLink';
+import { PollContext } from 'src/context/Poll';
+import withContext from 'src/context/withContext';
 import { lerp } from 'src/helpers/math';
+import JobStatusTag from './JobStatusTag';
+import styles from './ListProgress.module.scss';
 
 const BATCH_STATUS = [
   'batch_triggered',
@@ -15,7 +20,8 @@ const BATCH_STATUS = [
   'performing_disposable_domain',
   'performing_free_email',
   'performing_did_you_mean',
-  'uploading_results_to_s3'
+  'uploading_results_to_s3',
+  'success'
 ];
 
 const ProgressBar = ({ completed }) => (
@@ -24,25 +30,55 @@ const ProgressBar = ({ completed }) => (
   </div>
 );
 
-const ListProgress = ({ job }) => {
 
-  const { status, filename, complete } = job;
+const ListProgress = ({ getJobStatus, job: { filename, jobId, status }, startPolling, stopPolling }) => {
+  const percentage = BATCH_STATUS.findIndex((batchStatus) => batchStatus === status) / (BATCH_STATUS.length - 1);
+  const formattedPercentage = lerp(0, 100, percentage);
 
-  const percentage = complete ? 100 : lerp(0, 100, BATCH_STATUS.findIndex((batchStep) => batchStep === status) / BATCH_STATUS.length);
+  useEffect(() => {
+    startPolling({
+      key: jobId,
+      action: () => {
+        getJobStatus(jobId)
+          .then((nextJob) => {
+            // This needs to live on after this component is unmounted
+            if (nextJob.batch_status === 'error' || nextJob.batch_status === 'success') {
+              stopPolling(jobId);
+              showAlert({
+                type: nextJob.batch_status,
+                message: `Validation of ${filename} recipient list has completed`,
+                dedupeId: jobId
+              });
+            }
+          })
+          .catch(() => {
+            stopPolling(jobId);
+          });
+      },
+      interval: 5000
+    });
+  }, [startPolling]);
 
   return (
-    <div className={styles.ListProgressContainer}>
+    <FocusContainer className={styles.ListProgressContainer}>
       <h2>{filename}</h2>
-      <div style={{ marginBottom: 80 }}>
+      <p>
         <span>Your list is validating. You can track its progress on the recipient validation </span>
-        <UnstyledLink to='/recipient-validation' component={Link}>home page</UnstyledLink>,
+        <PageLink to="/recipient-validation">home page</PageLink>,
         <span> we'll let you know when validation is complete and your results are ready.</span>
+      </p>
+      <div className={styles.ListProgress}>
+        <div className={styles.ListProgressStatus}>
+          <strong>Status:</strong>&nbsp;
+          <JobStatusTag status={status} />
+        </div>
+        {status !== 'error' && (
+          <ProgressBar className={styles.ProgressBarContainer} completed={formattedPercentage}/>
+        )}
       </div>
-      <div><strong>Status:</strong> {complete ? 'Complete' : 'Processing'}</div>
-      <ProgressBar className={styles.ProgressBarContainer} completed={percentage}/>
-      <Button color='orange' component={Link} to='/recipient-validation'>Validate Another</Button>
-    </div>
+      <Button color='orange' component={PageLink} to='/recipient-validation'>Validate Another</Button>
+    </FocusContainer>
   );
 };
 
-export default ListProgress;
+export default connect(undefined, { getJobStatus })(withContext(PollContext, ListProgress));
