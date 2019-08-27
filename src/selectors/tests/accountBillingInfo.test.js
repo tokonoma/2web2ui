@@ -221,4 +221,26 @@ describe('plan selector', () => {
       expect(billingInfo.selectTieredVisiblePlans(state)).toMatchSnapshot();
     });
   });
+
+  describe('selectMonthlyRecipientValidationUsage', () => {
+    it('returns zero when uage is undefined', () => {
+      expect(billingInfo.selectMonthlyRecipientValidationUsage({})).toEqual(0);
+    });
+
+    it('returns usage count', () => {
+      state = {
+        account: {
+          rvUsage: {
+            recipient_validation: {
+              month: {
+                used: 999
+              }
+            }
+          }
+        }
+      };
+
+      expect(billingInfo.selectMonthlyRecipientValidationUsage(state)).toEqual(999);
+    });
+  });
 });
