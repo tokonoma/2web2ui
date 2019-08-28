@@ -10,10 +10,7 @@ describe('Add Filter Link', () => {
     reportType: 'summary',
     content: 'master account',
     addFilters: jest.fn(),
-    reportSearchOptions: {
-      filters
-    },
-    summarySearchOptions: {
+    currentSearchOptions: {
       filters,
       metrics: ['count_something']
     }
@@ -29,7 +26,7 @@ describe('Add Filter Link', () => {
   });
 
   it('should render correctly for other reports and should not include metrics in the link', () => {
-    const wrapper = subject({ reportType: 'bounce' });
+    const wrapper = subject({ reportType: 'bounce' , currentSearchOptions: { filters }});
     expect(wrapper).toMatchSnapshot();
   });
 

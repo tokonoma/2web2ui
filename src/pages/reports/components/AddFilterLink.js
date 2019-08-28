@@ -14,12 +14,10 @@ export const AddFilterLink = ({
   reportType,
   content,
   //From redux
-  summarySearchOptions,
-  reportSearchOptions,
+  currentSearchOptions,
   addFilters }) => {
 
-  const searchOptions = reportType === 'summary' ? summarySearchOptions : reportSearchOptions; //summarySearchOptions includes selected metrics options
-  const oldFilters = searchOptions.filters || [];
+  const currentFilters = currentSearchOptions.filters || [];
 
   const handleOnClick = (e) => {
     addFilters([newFilter]);
@@ -27,8 +25,9 @@ export const AddFilterLink = ({
     e.preventDefault();
   };
 
-  const mergedFilters = _.uniqWith([ ...oldFilters, stringifyTypeaheadfilter(newFilter)], _.isEqual);
-  const linkParams = qs.stringify({ ...searchOptions, filters: mergedFilters }, { arrayFormat: 'repeat' });
+  const mergedFilters = _.uniqWith([ ...currentFilters, stringifyTypeaheadfilter(newFilter)], _.isEqual);
+  const newSearchOptions = { ...currentSearchOptions, filters: mergedFilters };
+  const linkParams = qs.stringify(newSearchOptions, { arrayFormat: 'repeat' });
   const fullLink = `/reports/${reportType}/?${linkParams}`;
 
   return (
@@ -36,9 +35,10 @@ export const AddFilterLink = ({
   );
 };
 
-const mapStateToProps = (state) => ({
-  summarySearchOptions: selectSummaryChartSearchOptions(state),
-  reportSearchOptions: selectReportSearchOptions(state)
+const mapStateToProps = (state, props) => ({
+  currentSearchOptions: (props.reportType === 'summary')
+    ? selectSummaryChartSearchOptions(state)
+    : selectReportSearchOptions(state)
 });
 
 export default connect(mapStateToProps, { addFilters })(AddFilterLink);
