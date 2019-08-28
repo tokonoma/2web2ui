@@ -49,17 +49,4 @@ if (
   argv.push(hasSourceControl ? '--watch' : '--watchAll');
 }
 
-
-if (process.env.CI && process.env.TRAVIS) {
-  argv.push(
-    // Jest v22 introduced jest-worker for easy parallelization by forking processes in parallel.  The
-    // spawning of each worker is expensive.  The recommendation is number of workers should be number
-    // of CPUs minus one.  Our Travis CI free plan only provides a machine with two CPU.
-    // SEE https://github.com/facebook/jest/pull/4497/files
-    // SEE https://github.com/facebook/jest/blob/1918f6beb6b32471304125b31329129b21ebd3ef/website/blog/2017-12-18-jest-22.md#custom-runners--easy-parallelization-with-jest-worker
-    // SEE https://github.com/facebook/jest/blob/a0370ade8aa53dbce95e68d9d01e952bcd2b6f40/docs/Troubleshooting.md#tests-are-extremely-slow-on-docker-andor-continuous-integration-ci-server
-    //'--maxWorkers=4'
-  );
-}
-
 jest.run(argv);
