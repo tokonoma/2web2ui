@@ -24,7 +24,7 @@ describe('PendingCancelGlobalBanner', () => {
     expect(subject()).toMatchSnapshot();
   });
 
-  it('should call renewAccount, showAlert, and fetcAccount on renewAccount', async () => {
+  it('should call renewAccount, showAlert, and fetchAccount on renewAccount', async () => {
     const wrapper = subject();
     await wrapper.find('Button').at(0).simulate('click');
     expect(mockFunctions.renewAccount).toHaveBeenCalled();
