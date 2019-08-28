@@ -17,17 +17,18 @@ export const BannerContext = createContext(defaultContext);
 export class GlobalBanner extends Component {
 
   render() {
-    const { account, location, showBanner } = this.props;
-    const { pending_cancellation } = account;
-
-    const showBannerFromPath = !(
-      (pending_cancellation && moment.duration(moment(pending_cancellation.effective_date).diff(moment.utc())).asDays() > 7) && //Checks if outside date
-      !ALWAYS_SHOW_ON_PATH.includes(location.pathname) //Hide from the rest of the paths if outside dateRange
-    );
+    const { account: { pending_cancellation }, location, showBanner } = this.props;
 
     const value = {
-      bannerOpen: Boolean(showBanner && //Banner state open
-        pending_cancellation && showBannerFromPath)
+      bannerOpen: Boolean(
+        showBanner &&
+        pending_cancellation && (
+          //Within 7 days of cancellation
+          moment.duration(moment(pending_cancellation.effective_date).diff(moment.utc(), 'days')) < 7 ||
+          //Always show because of path
+          ALWAYS_SHOW_ON_PATH.includes(location.pathname)
+        )
+      )
     };
 
     return (
