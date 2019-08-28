@@ -1,6 +1,6 @@
 import React from 'react';
 import { BouncePage } from '../BouncePage';
-import { shallow, mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import MetricsSummary from '../../components/MetricsSummary';
 
 describe('BouncePage: ', () => {
@@ -137,19 +137,6 @@ describe('BouncePage: ', () => {
     });
 
     expect(rows).toMatchSnapshot();
-  });
-
-  it('should filter by domain', () => {
-    const rows = wrapper.instance().getRowData({
-      reason: 'u y bounce?',
-      domain: 'gmail',
-      bounce_category_name: 'bouncy',
-      count_bounce: 10
-    });
-
-    const link = mount(rows[1]);
-    link.find('UnstyledLink').simulate('click');
-    expect(props.addFilters).toHaveBeenCalledWith([{ type: 'Recipient Domain', value: 'gmail' }]);
   });
 
   it('should change state when the tab is clicked', () => {

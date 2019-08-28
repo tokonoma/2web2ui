@@ -32,7 +32,6 @@ describe('RejectionPage: ', () => {
         count_rejected: 14,
         count_targeted: 100
       },
-      addFilters: jest.fn(),
       refreshRejectionReport: jest.fn()
     };
 

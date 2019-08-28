@@ -334,11 +334,16 @@ Array [
   <LongTextContainer
     text="bouncy boi"
   />,
-  <UnstyledLink
-    onClick={[Function]}
-  >
-    gmail
-  </UnstyledLink>,
+  <Connect(AddFilterLink)
+    content="gmail"
+    newFilter={
+      Object {
+        "type": "Recipient Domain",
+        "value": "gmail",
+      }
+    }
+    reportType="bounce"
+  />,
   "Admin",
   undefined,
   <span>
@@ -360,11 +365,16 @@ Array [
   <LongTextContainer
     text="u y bounce?"
   />,
-  <UnstyledLink
-    onClick={[Function]}
-  >
-    gmail
-  </UnstyledLink>,
+  <Connect(AddFilterLink)
+    content="gmail"
+    newFilter={
+      Object {
+        "type": "Recipient Domain",
+        "value": "gmail",
+      }
+    }
+    reportType="bounce"
+  />,
   "bouncy",
   undefined,
   <span>

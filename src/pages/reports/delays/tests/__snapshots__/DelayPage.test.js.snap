@@ -25,7 +25,6 @@ exports[`DelayPage:  should render 1`] = `
     title="Delayed Messages"
   >
     <DelaysDataTable
-      addFilters={[MockFunction]}
       rows={
         Array [
           Object {
@@ -88,7 +87,6 @@ exports[`DelayPage:  should show loading panel when aggregates are still loading
     title="Delayed Messages"
   >
     <DelaysDataTable
-      addFilters={[MockFunction]}
       rows={
         Array [
           Object {
