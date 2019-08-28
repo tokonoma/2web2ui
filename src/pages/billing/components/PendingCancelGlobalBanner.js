@@ -22,8 +22,8 @@ export class PendingCancelGlobalBanner extends Component {
   }
 
   render() {
-    const { account } = this.props;
-    const { pending_cancellation } = account;
+    const { account: { pending_cancellation }} = this.props;
+
     if (!pending_cancellation) {
       return null;
     }
