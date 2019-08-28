@@ -60,8 +60,11 @@ const FilterSortCollectionRow = ({ id, status, subject, test_name, from_address,
               </PageLink>
             </div>
             <div className = {styles.TestName}>
-              <strong>{test_name}</strong>
-              <strong className = {styles.Divider}>{'|'}</strong>
+              {test_name &&
+                <>
+                  <strong>{test_name}</strong>
+                  <strong className = {styles.Divider}>{'|'}</strong>
+                </>}
               <span>{from_address}</span>
             </div>
             <div className = {styles.TestSchedule}>

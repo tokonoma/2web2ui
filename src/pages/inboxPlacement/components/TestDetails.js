@@ -26,7 +26,7 @@ const TestDetails = ({ details, placementsByProvider }) => {
             <InfoBlock value={format(details.start_time, FORMATS.LONG_DATETIME)} label='Started'/>
             <InfoBlock value={details.end_time ? format(details.end_time, FORMATS.LONG_DATETIME) : '--'}
               label='Finished'/>
-            <InfoBlock value='test_name' label='Inbox Placement Test Name'/>
+            <InfoBlock value={details.test_name || 'None'} label='Inbox Placement Test Name'/>
           </Grid>
 
         </Panel.Section>
