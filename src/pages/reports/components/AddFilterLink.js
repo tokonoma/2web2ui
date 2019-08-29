@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import qs from 'qs';
@@ -6,7 +6,7 @@ import qs from 'qs';
 import { addFilters } from 'src/actions/reportOptions';
 import { stringifyTypeaheadfilter } from 'src/helpers/string';
 import { selectReportSearchOptions, selectSummaryChartSearchOptions } from 'src/selectors/reportSearchOptions';
-import { UnstyledLink } from '@sparkpost/matchbox';
+import { PageLink } from 'src/components';
 
 export const AddFilterLink = ({
   //From parent
@@ -17,12 +17,23 @@ export const AddFilterLink = ({
   currentSearchOptions,
   addFilters }) => {
 
+  const [isNewTabKeyPressed, setNewTabKeyPressed] = useState(false);
+
   const currentFilters = currentSearchOptions.filters || [];
 
-  const handleOnClick = (e) => {
-    addFilters([newFilter]);
-    //This prevents the browser from following the link and reloading the page.
-    e.preventDefault();
+  /**
+   * Needs to first check if cmd/ctrl key is pressed when mouse is released
+   * Then it's saved for use in the onClick handler. We need both because
+   * onClick does not have the correct values for metaKey and ctrlKey
+   **/
+  const handleMouseUp = (e) => {
+    setNewTabKeyPressed(e.metaKey || e.ctrlKey);
+  };
+
+  const handleClick = () => {
+    if (!isNewTabKeyPressed) {
+      addFilters([newFilter]);
+    }
   };
 
   const mergedFilters = _.uniqWith([ ...currentFilters, stringifyTypeaheadfilter(newFilter)], _.isEqual);
@@ -31,7 +42,7 @@ export const AddFilterLink = ({
   const fullLink = `/reports/${reportType}/?${linkParams}`;
 
   return (
-    <UnstyledLink onClick={handleOnClick} to={fullLink}>{content}</UnstyledLink>
+    <PageLink onMouseUp={handleMouseUp} onClick={handleClick} to={fullLink} replace>{content}</PageLink>
   );
 };
 
