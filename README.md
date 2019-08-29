@@ -5,7 +5,7 @@
 [![Greenkeeper badge](https://badges.greenkeeper.io/SparkPost/2web2ui.svg)](https://greenkeeper.io/)
 
 
-A re-build of the current SparkPost web app using React and Redux.
+A re-build of the SparkPost web app using React and Redux.
 
 ## Installing dependencies
 
@@ -18,7 +18,7 @@ Then `npm install` to install deps.
 
 ## Local development
 
-`npm start` will start a dev server backed by api.sparkpost.test with live reload on http://localhost:3100/
+`npm start` will start a dev server backed by api.sparkpost.test with live reload on http://localhost:3100/ and http://app.sparkpost.test
 
 ## Tests
 
@@ -79,16 +79,4 @@ Before jumping into writing code, here are a few conventions you should be aware
 
 ### Docs
 
-We have two types of internal docs: general and directory-based. You'll find general docs like testing guides and general redux patterns, etc. in [our top level docs folder](./docs), but component directories will often have their own README.md files or docs folders (similar to tests) where individual docs related to those specific components can be found.
-
-- [Access Control](./docs/access-control.md)
-- [Redux Form](./docs/redux-form.md)
-- [Redux](./docs/redux-redux.md)
-- [Styles](./docs/styles.md)
-- [Testing](./docs/testing/)
-
-Components:
-- [Collection](./src/components/collection/docs/Collection.md)
-- [PlanPicker](./src/components/planPicker/readme.md)
-
-![](https://media0.giphy.com/media/5y1LH29N3k556/giphy.gif)
+Documentation is hosted on the [GitHub Wiki](https://github.com/SparkPost/2web2ui/wiki).
