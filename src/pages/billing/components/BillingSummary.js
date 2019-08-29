@@ -15,7 +15,7 @@ import { formatFullNumber } from 'src/helpers/units';
 import totalRVCost from '../helpers/totalRecipientValidationCost';
 import _ from 'lodash';
 import { formatDateTime } from 'src/helpers/date';
-
+import FeatureCompariosnModal from './FeatureComparisonModal';
 const PAYMENT_MODAL = 'payment';
 const CONTACT_MODAL = 'contact';
 const IP_MODAL = 'ip';
@@ -23,7 +23,8 @@ const RV_MODAL = 'recipient_validation';
 
 export default class BillingSummary extends Component {
   state = {
-    show: false
+    show: false,
+    openComparisonModal: true
   }
 
   handleModal = (modal = false) => {
@@ -74,11 +75,12 @@ export default class BillingSummary extends Component {
       </Panel.Section>
     );
   };
+  toggleComparisonModal = () => this.setState({ openComparisonModal: !this.state.openComparisonModal })
 
   render() {
     const { account, currentPlan, canChangePlan, canUpdateBillingInfo, canPurchaseIps, invoices, isAWSAccount, accountAgeInDays, hasRecipientValidation } = this.props;
     const { rvUsage, pending_cancellation } = account;
-    const { show } = this.state;
+    const { show, openComparisonModal } = this.state;
 
     const volumeUsed = _.get(rvUsage, 'recipient_validation.month.used', 0);
     const showRecipientValidation = hasRecipientValidation && rvUsage;
@@ -89,7 +91,8 @@ export default class BillingSummary extends Component {
       changePlanActions.push({ content: changePlanLabel, to: '/account/billing/plan', Component: Link, color: 'orange' });
     }
 
-    return (
+    return (<>
+    <FeatureCompariosnModal open={openComparisonModal} handleClose={this.toggleComparisonModal}/>
       <div>
         <PendingPlanBanner account={account} />
         <FreePlanWarningBanner account={account} accountAgeInDays={accountAgeInDays} />
@@ -116,7 +119,7 @@ export default class BillingSummary extends Component {
           {show === IP_MODAL && <AddIps onClose={this.handleModal}/>}
           {show === RV_MODAL && <RecipientValidationModal volumeUsed={volumeUsed} onClose={this.handleModal} />}
         </Modal>
-      </div>
+      </div></>
     );
   }
 
