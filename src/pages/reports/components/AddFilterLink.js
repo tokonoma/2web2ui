@@ -21,8 +21,11 @@ export const AddFilterLink = ({
 
   const currentFilters = currentSearchOptions.filters || [];
 
-  //Needs to first check if cmd/ctrl key is pressed when mouse is released
-  //Then it's saved for use in the onClick handler.
+  /**
+   * Needs to first check if cmd/ctrl key is pressed when mouse is released
+   * Then it's saved for use in the onClick handler. We need both because
+   * onClick does not have the correct values for metaKey and ctrlKey
+   **/
   const handleMouseUp = (e) => {
     setNewTabKeyPressed(e.metaKey || e.ctrlKey);
   };
