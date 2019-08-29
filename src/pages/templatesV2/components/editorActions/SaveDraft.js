@@ -15,10 +15,13 @@ export default ({ className, onClick }) => {
     updateDraft({ id: draft.id, content }, draft.subaccount_id);
   });
 
-  return (<div className={className}>
-    <UnstyledLink onClick={handleClick}>
-      <FileEdit/>Save Draft
-    </UnstyledLink>
-  </div>);
+  return (
+    <div className={className}>
+      <UnstyledLink onClick={handleClick} to="javascript:void(0);" role="button">
+        <FileEdit/>
 
+        <span>Save Draft</span>
+      </UnstyledLink>
+    </div>
+  );
 };

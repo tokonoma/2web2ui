@@ -29,18 +29,22 @@ export default ({ className, onClick = noop, children, ...props }) => {
     setOpen(true);
   });
 
-  return <div className={className}>
-    {children && <UnstyledLink onClick={showModal}>{children}</UnstyledLink>}
-    {!children && <UnstyledLink onClick={showModal}><CheckCircleOutline/>Save and Publish</UnstyledLink>}
-    <ConfirmationModal
-      title='Are you sure you want to publish your template?'
-      content={<p>Once published, your template will be available for use in email campaigns and A/B tests.</p>}
-      confirming={isDraftPublishing}
-      isPending={isDraftPublishing}
-      open={open}
-      confirmVerb='Save and Publish'
-      onCancel={hideModal}
-      onConfirm={onConfirm}
-    />
-  </div>;
+  return (
+    <div className={className}>
+      {children && <UnstyledLink onClick={showModal} role="button" to="javascript:void(0);">{children}</UnstyledLink>}
+
+      {!children && <UnstyledLink onClick={showModal} role="button" to="javascript:void(0);"><CheckCircleOutline/>Save and Publish</UnstyledLink>}
+
+      <ConfirmationModal
+        title='Are you sure you want to publish your template?'
+        content={<p>Once published, your template will be available for use in email campaigns and A/B tests.</p>}
+        confirming={isDraftPublishing}
+        isPending={isDraftPublishing}
+        open={open}
+        confirmVerb='Save and Publish'
+        onCancel={hideModal}
+        onConfirm={onConfirm}
+      />
+    </div>
+  );
 };
