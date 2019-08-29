@@ -32,10 +32,23 @@ describe('Add Filter Link', () => {
 
   it('should handle click correctly', () => {
     const wrapper = subject();
-    const preventDefaultMock = jest.fn();
-    wrapper.find('UnstyledLink').simulate('click', { preventDefault: preventDefaultMock });
+    wrapper.find('PageLink').simulate('mouseUp', {});
+    wrapper.find('PageLink').simulate('click');
 
     expect(baseProps.addFilters).toHaveBeenCalledWith([{ id: 0, type: 'Subaccount', value: 'Master Account (ID 0)' }]);
-    expect(preventDefaultMock).toHaveBeenCalled();
+  });
+
+  it('should handle click while holding down meta(cmd) key correctly', () => {
+    const wrapper = subject();
+    wrapper.find('PageLink').simulate('mouseUp', { metaKey: true });
+    wrapper.find('PageLink').simulate('click');
+    expect(baseProps.addFilters).not.toHaveBeenCalled();
+  });
+
+  it('should handle click while holding down control key correctly', () => {
+    const wrapper = subject();
+    wrapper.find('PageLink').simulate('mouseUp', { ctrlKey: true });
+    wrapper.find('PageLink').simulate('click');
+    expect(baseProps.addFilters).not.toHaveBeenCalled();
   });
 });
