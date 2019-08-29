@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PendingCancelGlobalBanner should render 1`] = `
+<div
+  className="banner"
+>
+  <span
+    className="CenterContainer"
+  >
+    <AccessTime />
+    <span>
+       Your account will be cancelled on 
+    </span>
+    Sep 7 2019
+    <span>
+      , and you will no longer be able to send email or login. Changed your mind? 
+    </span>
+    <Button
+      className="RenewButton"
+      flat={true}
+      onClick={[Function]}
+      size="default"
+    >
+      Don't Cancel
+    </Button>
+  </span>
+  <span
+    className="RightContainer"
+  >
+    <Button
+      className="Close"
+      flat={true}
+      onClick={[Function]}
+      size="default"
+    >
+      <Close />
+    </Button>
+  </span>
+</div>
+`;

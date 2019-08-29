@@ -1,6 +1,7 @@
 import React from 'react';
 import { Navigation } from '../Navigation';
 import context from 'src/__testHelpers__/context';
+import PendingCancelGlobalBanner from 'src/pages/billing/components/PendingCancelGlobalBanner';
 
 describe('Navigation', () => {
   let props;
@@ -37,5 +38,10 @@ describe('Navigation', () => {
     consumer.component.instance().toggleMobileNav();
     consumer.children().find('.Overlay').simulate('click');
     expect(consumer.children().find('.Navigation').props().className).toMatchSnapshot();
+  });
+
+  it('should render banner if bannerOpen is true', () => {
+    const consumer = context(<Navigation {...props} bannerOpen={true} />, { mobile: true });
+    expect(consumer.children().find(PendingCancelGlobalBanner)).toExist();
   });
 });
