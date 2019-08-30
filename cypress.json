@@ -1,3 +1,9 @@
 {
-  "baseUrl": "http://localhost:3100"
+  "baseUrl": "http://localhost:3100",
+  "blackListHosts": [
+    "*google-analytics.com",
+    "*pendo.io",
+    "*siftscience.com",
+    "*googletagmanager.com"
+  ]
 }
