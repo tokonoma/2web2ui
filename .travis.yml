@@ -10,7 +10,17 @@ cache:
     - "$HOME/.cache"
 
 before_install: npm install -g greenkeeper-lockfile@1
+
 install: npm ci --loglevel http
-before_script: greenkeeper-lockfile-update
-script: npm run travis
-after_script: greenkeeper-lockfile-upload
+
+jobs:
+  include:
+    - stage: test
+      name: "Unit Tests"
+      script: npm run test-ci
+    - stage: test
+      name: "End to End Testing"
+      script: npm run test-e2e-ci
+    - stage: build
+      name: "Verify Build"
+      script: npm run build-ci
