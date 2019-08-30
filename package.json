@@ -16,7 +16,7 @@
     "test-ci": "CI=true npm test -- --coverage --colors",
     "test-e2e-headless": "cypress run",
     "test-e2e-gui": "cypress open",
-    "test-e2e-ci": "start-server-and-test serve http://localhost:3100 test-e2e-headless",
+    "test-e2e-ci": "start-server-and-test serve http://127.0.0.1:3100 test-e2e-headless",
     "coveralls": "cat ./build-reports/lcov.info | coveralls",
     "lint": "node node_modules/eslint/bin/eslint.js src",
     "lintfix": "npm run lint -- --fix",
