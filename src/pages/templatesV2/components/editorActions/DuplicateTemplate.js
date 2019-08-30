@@ -37,7 +37,11 @@ const DuplicateTemplate = (props) => {
   return (
     <>
       <div className={className}>
-        <UnstyledLink onClick={handleClick} role="button" to="javascript:void(0);">
+        <UnstyledLink
+          onClick={handleClick}
+          role="button"
+          to="javascript:void(0);"
+        >
           <ControlPointDuplicate/>
 
           <span>Duplicate Template</span>
