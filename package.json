@@ -8,6 +8,7 @@
   },
   "scripts": {
     "start": "REACT_APP_VERSION=local-$USER-$(git rev-parse HEAD) node scripts/start.js",
+    "build": "node scripts/build.js",
     "serve": "http-server build -p 3100",
     "report": "npm run coveralls || exit 0",
     "analyze": "source-map-explorer build/static/js/main.*",
