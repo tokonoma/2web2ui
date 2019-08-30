@@ -3,6 +3,11 @@ language: node_js
 node_js:
   - "10.8"
 
+addons:
+  apt:
+    packages:
+      - libgconf-2-4 # Required package for Cypress, see https://docs.cypress.io/guides/guides/continuous-integration.html#Travis
+
 cache:
   directories:
     - build # shows bundle size diff per file/chunk
@@ -16,7 +21,7 @@ install: npm ci --loglevel http
 jobs:
   include:
     - stage: test
-      name: "Unit Tests"
+      name: "Unit Testing"
       script: npm run test-ci
     - stage: test
       name: "End to End Testing"
