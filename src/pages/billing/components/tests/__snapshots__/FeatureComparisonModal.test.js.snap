@@ -1,0 +1,82 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FeatureComparisonModal:  GroupHeading:  should render correctly 1`] = `
+<Table.Row>
+  <Table.HeaderCell
+    className="GroupHeading"
+    colSpan={3}
+  >
+    Standard Features
+  </Table.HeaderCell>
+</Table.Row>
+`;
+
+exports[`FeatureComparisonModal:  HeaderRow: should render correctly 1`] = `
+<Table.Row>
+  <Table.Cell
+    className="FeatureCell"
+  >
+      
+  </Table.Cell>
+  <Table.Cell
+    className="FeatureComaprisonCell PlanOne TableCaption"
+  >
+     
+    Test Account
+     
+  </Table.Cell>
+  <Table.Cell
+    className="FeatureComaprisonCell PlanTwo TableCaption"
+  >
+     
+    Starter Plans
+     
+  </Table.Cell>
+  <Table.Cell
+    className="FeatureComaprisonCell PlanThree TableCaption"
+  >
+     
+    Premier Plans
+     
+  </Table.Cell>
+</Table.Row>
+`;
+
+exports[`FeatureComparisonModal:  Row:  should render correctly 1`] = `
+<Table.Row>
+  <Table.Cell
+    className="FeatureCell"
+  >
+     
+    Signals Predictive Analytics
+     
+  </Table.Cell>
+  <Table.Cell
+    className="FeatureComaprisonCell PlanOne"
+  >
+     
+    <Icon
+      value={true}
+    />
+     
+  </Table.Cell>
+  <Table.Cell
+    className="FeatureComaprisonCell PlanTwo"
+  >
+     
+    <Icon
+      value={true}
+    />
+     
+  </Table.Cell>
+  <Table.Cell
+    className="FeatureComaprisonCell PlanThree"
+  >
+     
+    <Icon
+      value={true}
+    />
+     
+  </Table.Cell>
+</Table.Row>
+`;

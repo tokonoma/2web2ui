@@ -5,7 +5,7 @@ import _ from 'lodash';
 import styles from './FeatureComparisonModal.module.scss';
 import classNames from 'classnames';
 import { Check, Close } from '@sparkpost/matchbox-icons';
-function Row({ featureName, testAccount, starterPlans, premierPlans }) {
+export function Row({ featureName, testAccount, starterPlans, premierPlans }) {
   return <Table.Row>
     <Table.Cell className={styles.FeatureCell}> {featureName} </Table.Cell>
     <Table.Cell className={classNames(styles.FeatureComaprisonCell, styles.PlanOne)}> {renderCell(testAccount)} </Table.Cell>
@@ -13,7 +13,7 @@ function Row({ featureName, testAccount, starterPlans, premierPlans }) {
     <Table.Cell className={classNames(styles.FeatureComaprisonCell, styles.PlanThree)}> {renderCell(premierPlans)} </Table.Cell>
   </Table.Row>;
 }
-function HeaderRow({ plans }) {
+export function HeaderRow({ plans }) {
   return <Table.Row>
     <Table.Cell className={styles.FeatureCell}>  </Table.Cell>
     <Table.Cell className={classNames(styles.FeatureComaprisonCell, styles.PlanOne, styles.TableCaption)}> {plans[0]} </Table.Cell>
@@ -21,7 +21,7 @@ function HeaderRow({ plans }) {
     <Table.Cell className={classNames(styles.FeatureComaprisonCell, styles.PlanThree, styles.TableCaption)}> {plans[2]} </Table.Cell>
   </Table.Row>;
 }
-function GroupHeading({ groupName, colSpan }) {
+export function GroupHeading({ groupName, colSpan }) {
   return <Table.Row>
     <Table.HeaderCell colSpan={colSpan} className={styles.GroupHeading}>
       {groupName}
@@ -31,15 +31,16 @@ function GroupHeading({ groupName, colSpan }) {
 function Icon({ value }) {
   return value ? <Check/> : <Close/>;
 }
-function renderCell(cellValue) {
-  if (typeof cellValue === 'boolean') { return <Icon value={cellValue}/> ; } else {
+export function renderCell(cellValue) {
+  if (typeof cellValue === 'boolean') { return <Icon value={cellValue}/> ; }
+  if (typeof cellValue === 'string') {
     if (cellValue.indexOf('\n') !== -1) {
-      return <> {cellValue.substring(0,cellValue.indexOf('\n'))} <br/>
-    <span style={{ fontSize: '12px' }}> {cellValue.substring(cellValue.indexOf('\n'),cellValue.length)}</span>
-      </>;
+      return <div> {cellValue.substring(0,cellValue.indexOf('\n'))} <br/>
+        <span style={{ fontSize: '12px' }}> {cellValue.substring(cellValue.indexOf('\n'),cellValue.length)}</span>
+      </div>;
     }
-    return cellValue;
   }
+  return cellValue;
 }
 function ComparisonModal({ open, handleClose }) {
   return (<Modal open={open} showCloseButton={true} onClose={handleClose} >
