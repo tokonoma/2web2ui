@@ -11,7 +11,6 @@ import ButtonWrapper from 'src/components/buttonWrapper';
 import { create } from 'src/actions/templates';
 import useEditorContext from '../../hooks/useEditorContext';
 
-/* eslint-disable */
 const DuplicateTemplate = (props) => {
   const { className, onClick } = props;
   const { draft } = useEditorContext();
@@ -22,7 +21,7 @@ const DuplicateTemplate = (props) => {
     if (onClick) {
       onClick();
     }
-    
+
     setModalOpen(true);
   });
   const handleModalClose = () => setModalOpen(false);
@@ -32,11 +31,6 @@ const DuplicateTemplate = (props) => {
       name: draftName,
       id: draftId
     });
-    console.log(create({
-      ...draft,
-      name: draftName,
-      id: draftId
-    }));
     setModalOpen(false);
   };
 
@@ -64,7 +58,7 @@ const DuplicateTemplate = (props) => {
             name="templateName"
             label="Template Name"
             value={draftName}
-            onChange={e => setDraftName(e.target.value)}
+            onChange={(e) => setDraftName(e.target.value)}
           />
 
           <TextField
@@ -72,7 +66,7 @@ const DuplicateTemplate = (props) => {
             name="templateId"
             label="Template ID"
             value={draftId}
-            onChange={e => setDraftId(e.target.value)}
+            onChange={(e) => setDraftId(e.target.value)}
           />
 
           <ButtonWrapper>
