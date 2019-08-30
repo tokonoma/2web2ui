@@ -5,6 +5,7 @@ import {
   TextField,
   Button
 } from '@sparkpost/matchbox';
+import { showAlert } from 'src/actions/globalAlert';
 import ButtonWrapper from 'src/components/buttonWrapper';
 import useEditorContext from '../../hooks/useEditorContext';
 import { create } from 'src/actions/templates';
@@ -19,10 +20,17 @@ const DuplicateTemplateModal = (props) => {
   const [draftName, setDraftName] = useState(draft.name);
   const [draftId, setDraftId] = useState(draft.id);
   const handleButtonClick = (draft, callback) => {
+    // Not currently working - lacking accessing to store?
     create({
       ...draft,
       name: draftName,
       id: draftId
+    });
+
+    // Not currently working - lacking accessing to store?
+    showAlert({
+      message: 'Template duplicated',
+      type: 'success'
     });
 
     if (callback) {
