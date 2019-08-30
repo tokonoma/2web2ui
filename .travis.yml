@@ -24,8 +24,10 @@ jobs:
       name: "Unit Testing"
       script: npm run test-ci
     - stage: test
-      name: "End to End Testing"
-      script: npm run test-e2e-ci
-    - stage: build
-      name: "Verify Build"
-      script: npm run build-ci
+      name: "Verify Build and End to End Testing"
+      script:
+        - npm run build
+        - npm run test-e2e-ci
+    - stage: report
+      name: "Collect Code coverage"
+      script: npm run report
