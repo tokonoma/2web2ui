@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import {
   UnstyledLink,
   Modal,
@@ -13,19 +13,30 @@ import useEditorContext from '../../hooks/useEditorContext';
 
 /* eslint-disable */
 const DuplicateTemplate = (props) => {
-  const { className } = props;
+  const { className, onClick } = props;
   const { draft } = useEditorContext();
   const [isModalOpen, setModalOpen] = useState(false);
   const [draftName, setDraftName] = useState(draft.name);
   const [draftId, setDraftId] = useState(draft.id);
-  const handleClick = () => setModalOpen(true);
+  const handleClick = useCallback(() => {
+    if (onClick) {
+      onClick();
+    }
+    
+    setModalOpen(true);
+  });
   const handleModalClose = () => setModalOpen(false);
-  const handleButtonClick = (draft) => {
+  const handleButtonClick = (draft, onClick) => {
     create({
       ...draft,
       name: draftName,
       id: draftId
     });
+    console.log(create({
+      ...draft,
+      name: draftName,
+      id: draftId
+    }));
     setModalOpen(false);
   };
 
