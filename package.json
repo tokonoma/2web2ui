@@ -16,7 +16,7 @@
     "test-coverage": "npm test -- --coverage",
     "test-ci": "CI=true npm test -- --coverage --colors",
     "test-e2e-headless": "cypress run",
-    "test-e2e-headless-ci": "npm run test-e2e-headless -- --record --config baseUrl=http://127.0.0.1:3100",
+    "test-e2e-headless-ci": "npm run test-e2e-headless -- --config baseUrl=http://127.0.0.1:3100",
     "test-e2e-gui": "cypress open",
     "test-e2e-ci": "start-server-and-test serve http://127.0.0.1:3100 test-e2e-headless-ci",
     "coveralls": "cat ./build-reports/lcov.info | coveralls",
