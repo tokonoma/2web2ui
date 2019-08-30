@@ -7,10 +7,17 @@ import SaveDraft from './SaveDraft';
 import styles from './Actions.module.scss';
 import useEditorContext from '../../hooks/useEditorContext';
 import DuplicateTemplate from './DuplicateTemplate';
+import DuplicateTemplateModal from './DuplicateTemplateModal';
 
 const DraftModeActions = () => {
   const { hasPublished } = useEditorContext();
-  const [open, setOpen] = useState(false);
+  const [isPopoverOpen, setPopoverOpen] = useState(false);
+  const [isModalOpen, setModalOpen] = useState(false);
+  const handleModalClose = () => setModalOpen(false);
+  const handleDuplicateDraftClick = () => {
+    setModalOpen(true);
+    setPopoverOpen(false);
+  };
 
   return (
     <Button.Group>
@@ -21,14 +28,20 @@ const DraftModeActions = () => {
       <div className={styles.Actions}>
         <Popover
           left={true}
-          open={open}
-          onClose={() => setOpen(false)}
-          trigger={<Button onClick={() => setOpen(true)}><ArrowDropDown/></Button>}
+          open={isPopoverOpen}
+          onClose={() => setPopoverOpen(false)}
+          trigger={<Button onClick={() => setPopoverOpen(true)}><ArrowDropDown/></Button>}
         >
           <div className={styles.ActionsBody}>
-            <SaveAndPublish className={styles.ActionItem} onClick={() => setOpen(false)}/>
+            <SaveAndPublish
+              className={styles.ActionItem}
+              onClick={() => setPopoverOpen(false)}
+            />
 
-            <SaveDraft className={styles.ActionItem} onClick={() => setOpen(false)}/>
+            <SaveDraft
+              className={styles.ActionItem}
+              onClick={() => setPopoverOpen(false)}
+            />
 
             {hasPublished &&
               <>
@@ -37,9 +50,17 @@ const DraftModeActions = () => {
               </>
             }
 
-            <DuplicateTemplate className={styles.ActionItem} onClick={() => setOpen(false)}/>
+            <DuplicateTemplate
+              className={styles.ActionItem}
+              onClick={handleDuplicateDraftClick}
+            />
           </div>
         </Popover>
+
+        <DuplicateTemplateModal
+          open={isModalOpen}
+          onClose={handleModalClose}
+        />
       </div>
     </Button.Group>
   );
