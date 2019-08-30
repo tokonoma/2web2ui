@@ -7,4 +7,10 @@ describe('The auth view', () => {
   it('Renders the content "Log In"', () => {
     cy.contains('Log In').should('be.visible');
   });
+
+  it('Logs in', () => {
+    cy.get('[name="username"]').type(Cypress.env('USERNAME'));
+    cy.get('[name="password"]').type(Cypress.env('PASSWORD'));
+    cy.get('button[type="submit"]').click();
+  });
 });
