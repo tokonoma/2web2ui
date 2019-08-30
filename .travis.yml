@@ -1,10 +1,14 @@
 language: node_js
+
 node_js:
   - "10.8"
+
 cache:
   directories:
     - build # shows bundle size diff per file/chunk
     - "$HOME/.npm" # to avoid fetching modules from npm every time
+    - "$HOME/.cache"
+
 before_install: npm install -g greenkeeper-lockfile@1
 install: npm ci --loglevel http
 before_script: greenkeeper-lockfile-update
