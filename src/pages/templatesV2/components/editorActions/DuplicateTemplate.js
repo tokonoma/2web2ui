@@ -14,17 +14,20 @@ import useEditorContext from '../../hooks/useEditorContext';
 /* eslint-disable */
 const DuplicateTemplate = (props) => {
   const { className } = props;
-  const [isModalOpen, setModalOpen] = useState(false);
-  const allTheThings = useEditorContext();
   const { draft } = useEditorContext();
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [draftName, setDraftName] = useState(draft.name);
+  const [draftId, setDraftId] = useState(draft.id);
   const handleClick = () => setModalOpen(true);
   const handleModalClose = () => setModalOpen(false);
-  const handleButtonClick = () => {
-    console.log('handleButtonClick');
+  const handleButtonClick = (draft) => {
+    create({
+      ...draft,
+      name: draftName,
+      id: draftId
+    });
     setModalOpen(false);
   };
-
-  console.log(create);
 
   return (
     <>
@@ -49,18 +52,20 @@ const DuplicateTemplate = (props) => {
             id="template-name"
             name="templateName"
             label="Template Name"
-            defaultValue={draft.name}
+            value={draftName}
+            onChange={e => setDraftName(e.target.value)}
           />
 
           <TextField
             id="template-id"
             name="templateId"
             label="Template ID"
-            defaultValue={draft.id}
+            value={draftId}
+            onChange={e => setDraftId(e.target.value)}
           />
 
           <ButtonWrapper>
-            <Button color="orange" onClick={handleButtonClick}>
+            <Button color="orange" onClick={() => handleButtonClick(draft)}>
               Duplicate
             </Button>
           </ButtonWrapper>
