@@ -12,5 +12,6 @@ describe('The auth view', () => {
     cy.get('[name="username"]').type(Cypress.env('USERNAME'));
     cy.get('[name="password"]').type(Cypress.env('PASSWORD'));
     cy.get('button[type="submit"]').click();
+    cy.url().should('include', '/dashboard');
   });
 });
