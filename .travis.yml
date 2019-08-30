@@ -28,6 +28,3 @@ jobs:
       script:
         - npm run build
         - npm run test-e2e-ci
-    - stage: report
-      name: "Collect Code coverage"
-      script: npm run report
