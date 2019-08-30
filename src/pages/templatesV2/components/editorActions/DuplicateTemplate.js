@@ -6,7 +6,7 @@ import {
   TextField,
   Button
 } from '@sparkpost/matchbox';
-import { ControlPointDuplicate } from '@sparkpost/matchbox-icons';
+import { ContentCopy } from '@sparkpost/matchbox-icons';
 import ButtonWrapper from 'src/components/buttonWrapper';
 import { create } from 'src/actions/templates';
 import useEditorContext from '../../hooks/useEditorContext';
@@ -42,7 +42,7 @@ const DuplicateTemplate = (props) => {
           role="button"
           to="javascript:void(0);"
         >
-          <ControlPointDuplicate/>
+          <ContentCopy/>
 
           <span>Duplicate Template</span>
         </UnstyledLink>
