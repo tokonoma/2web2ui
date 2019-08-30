@@ -12,17 +12,22 @@ import { create } from 'src/actions/templates';
 const DuplicateTemplateModal = (props) => {
   const {
     open,
-    onClose
+    onClose,
+    onPrimaryButtonClick
   } = props;
   const { draft } = useEditorContext();
   const [draftName, setDraftName] = useState(draft.name);
   const [draftId, setDraftId] = useState(draft.id);
-  const handleButtonClick = (draft, onClick) => {
+  const handleButtonClick = (draft, callback) => {
     create({
       ...draft,
       name: draftName,
       id: draftId
     });
+
+    if (callback) {
+      callback();
+    }
   };
 
   return (
@@ -52,7 +57,7 @@ const DuplicateTemplateModal = (props) => {
         />
 
         <ButtonWrapper>
-          <Button color="orange" onClick={() => handleButtonClick(draft)}>
+          <Button color="orange" onClick={() => handleButtonClick(draft, onPrimaryButtonClick)}>
             Duplicate
           </Button>
         </ButtonWrapper>
