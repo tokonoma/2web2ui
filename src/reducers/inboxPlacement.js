@@ -15,18 +15,21 @@ export default (state = initialState, { type, payload }) => {
       return { ...state, testsPending: false, testsError: payload };
     case 'LIST_TESTS_SUCCESS':
       return { ...state, tests: payload, testsPending: false, testsError: null };
+
     case 'GET_SEEDS_PENDING':
       return { ...state, seedsPending: true, seedsError: null };
     case 'GET_SEEDS_SUCCESS':
       return { ...state, seedsPending: false, seeds: payload, seedsError: null };
     case 'GET_SEEDS_FAIL':
       return { ...state, seedsPending: false, seedsError: payload };
+
     case 'GET_INBOX_PLACEMENT_TEST_PENDING':
       return { ...state, getTestPending: true, getTestError: null };
     case 'GET_INBOX_PLACEMENT_TEST_SUCCESS':
       return { ...state, getTestPending: false, currentTestDetails: payload, getTestError: null };
     case 'GET_INBOX_PLACEMENT_TEST_FAIL':
       return { ...state, getTestPending: false, getTestError: payload };
+
     case 'STOP_INBOX_PLACEMENT_TEST_PENDING':
       return { ...state, stopTestPending: true, stopTestError: null };
     case 'STOP_INBOX_PLACEMENT_TEST_SUCCESS':

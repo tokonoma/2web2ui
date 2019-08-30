@@ -61,11 +61,11 @@ const FilterSortCollectionRow = ({ id, status, subject, test_name, from_address,
             </div>
             <div className = {styles.TestName}>
               {test_name &&
-                <>
+                <span id={'testName'}>
                   <strong>{test_name}</strong>
                   <strong className = {styles.Divider}>{'|'}</strong>
-                </>}
-              <span>{from_address}</span>
+                </span>}
+              <span id={'fromAddress'}>{from_address}</span>
             </div>
             <div className = {styles.TestSchedule}>
               <span ><Schedule className={styles.ScheduleIcon}/></span>
