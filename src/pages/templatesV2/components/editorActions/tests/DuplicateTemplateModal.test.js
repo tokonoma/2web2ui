@@ -44,6 +44,19 @@ describe('DuplicateTemplateModal', () => {
     expect(wrapper.find('Button')).toExist();
   });
 
+  it('determines the child Modal component `open` prop value via the `open` prop', () => {
+    const wrapper = shallow(<DuplicateTemplateModal open={false}/>);
+
+    expect(wrapper.find('Modal').props().open).toEqual(false);
+  });
+
+  it('determines the child Modal component `onClose` prop value via the `onClose` prop', () => {
+    const mockFn = jest.fn();
+    const wrapper = shallow(<DuplicateTemplateModal onClose={mockFn}/>);
+
+    expect(wrapper.find('Modal').props().onClose).toEqual(mockFn);
+  });
+
   it('Fires a the passed in to the `onPrimaryButtonClick`', () => {
     const mockFn = jest.fn();
     const wrapper = shallow(<DuplicateTemplateModal onPrimaryButtonClick={() => mockFn()}/>);
