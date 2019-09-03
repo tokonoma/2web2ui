@@ -1,29 +1,20 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import useEditorContext from '../../../hooks/useEditorContext';
 import DuplicateTemplate from '../DuplicateTemplate';
 
-jest.mock('../../../hooks/useEditorContext');
-
 describe('DuplicateTemplate', () => {
-  const subject = (editorState, props) => {
-    useEditorContext.mockReturnValue({
-      hasDraft: true,
-      draft: {
-        name: 'My Draft',
-        id: 'my-draft'
-      },
-      ...editorState
-    });
-
-    return shallow(<DuplicateTemplate {...props}/>);
-  };
-
-  it('Opens a child modal component when clicked', () => {
-    const wrapper = subject();
+  it('invokes the function passed via the `onClick` prop', () => {
+    const mockFn = jest.fn();
+    const wrapper = shallow(<DuplicateTemplate onClick={mockFn}/>);
 
     wrapper.find('UnstyledLink').simulate('click');
 
-    expect(wrapper.find('DuplicateTemplateModal').props().open).toBe(true);
+    expect(mockFn).toHaveBeenCalled();
+  });
+
+  it('Renders with the passed in `className`', () => {
+    const wrapper = shallow(<DuplicateTemplate className="foobar"/>);
+
+    expect(wrapper.find('div').props().className).toEqual('foobar');
   });
 });

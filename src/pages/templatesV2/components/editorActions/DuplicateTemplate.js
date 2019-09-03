@@ -6,19 +6,17 @@ const DuplicateTemplate = (props) => {
   const { className, onClick } = props;
 
   return (
-    <>
-      <div className={className}>
-        <UnstyledLink
-          onClick={onClick}
-          role="button"
-          to="javascript:void(0);"
-        >
-          <ContentCopy/>
+    <div className={className}>
+      <UnstyledLink
+        onClick={onClick}
+        role="button"
+        to="javascript:void(0);"
+      >
+        <ContentCopy/>
 
-          <span>Duplicate Template</span>
-        </UnstyledLink>
-      </div>
-    </>
+        <span>Duplicate Template</span>
+      </UnstyledLink>
+    </div>
   );
 };
 
