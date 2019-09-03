@@ -24,6 +24,6 @@ describe('DuplicateTemplate', () => {
 
     wrapper.find('UnstyledLink').simulate('click');
 
-    expect(wrapper.find('Modal').props().open).toBe(true);
+    expect(wrapper.find('DuplicateTemplateModal').props().open).toBe(true);
   });
 });
