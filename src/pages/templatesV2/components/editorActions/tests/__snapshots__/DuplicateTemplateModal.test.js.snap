@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DuplicateTemplateModal renders with default props and some data from the current draft 1`] = `
+<Modal
+  showCloseButton={true}
+>
+  <Panel
+    sectioned={true}
+    title="Duplicate Template"
+  >
+    <TextField
+      id="template-name"
+      label="Template Name"
+      name="templateName"
+      onChange={[Function]}
+      resize="both"
+      type="text"
+      value="My Draft"
+    />
+    <TextField
+      id="template-id"
+      label="Template ID"
+      name="templateId"
+      onChange={[Function]}
+      resize="both"
+      type="text"
+      value="my-draft"
+    />
+    <ButtonWrapper>
+      <Button
+        color="orange"
+        onClick={[Function]}
+        size="default"
+      >
+        Duplicate
+      </Button>
+    </ButtonWrapper>
+  </Panel>
+</Modal>
+`;

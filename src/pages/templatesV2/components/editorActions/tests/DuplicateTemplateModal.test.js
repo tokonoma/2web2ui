@@ -19,6 +19,12 @@ describe('DuplicateTemplateModal', () => {
     return shallow(<DuplicateTemplateModal {...props}/>);
   };
 
+  it('renders with default props and some data from the current draft', () => {
+    const wrapper = subject();
+
+    expect(wrapper).toMatchSnapshot();
+  });
+
   it('has a close button', () => {
     const wrapper = subject();
     const modalProps = wrapper.find('Modal').props();
