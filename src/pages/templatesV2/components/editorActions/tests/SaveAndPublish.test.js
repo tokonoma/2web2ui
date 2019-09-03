@@ -21,8 +21,7 @@ describe('SaveAndPublish', () => {
   });
 
   it('renders SaveAndPublish action with provided children', () => {
-    expect(subject(null,
-      <span>Click here</span>).find('UnstyledLink').html()).toMatch('<a><span>Click here</span></a>');
+    expect(subject(null,<span>Click here</span>).find('UnstyledLink').html()).toMatch('<a href="javascript:void(0);" target="" rel="" role="button"><span>Click here</span></a>');
   });
 
   it('renders confirmation modal upon clicking', () => {
