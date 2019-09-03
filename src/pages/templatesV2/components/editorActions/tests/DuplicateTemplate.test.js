@@ -26,29 +26,4 @@ describe('DuplicateTemplate', () => {
 
     expect(wrapper.find('Modal').props().open).toBe(true);
   });
-
-  describe('The duplicate template modal', () => {
-    const wrapper = subject();
-    const modalProps = wrapper.find('Modal').props();
-
-    it('is initially closed on mount', () => {
-      expect(modalProps.open).toBe(false);
-    });
-
-    it('has a close button', () => {
-      expect(modalProps.showCloseButton).toBe(true);
-    });
-
-    it('has a `Panel` component with the title "Duplicate Template"', () => {
-      expect(wrapper.find('Panel').props().title).toBe('Duplicate Template');
-    });
-
-    it('has a two `TextField` components', () => {
-      expect(wrapper.find('TextField')).toHaveLength(2);
-    });
-
-    it('has a "Duplicate" button', () => {
-      expect(wrapper.find('Button')).toExist();
-    });
-  });
 });
