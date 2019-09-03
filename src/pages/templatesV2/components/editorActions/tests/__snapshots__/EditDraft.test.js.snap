@@ -6,6 +6,8 @@ exports[`EditDraft renders edit draft action 1`] = `
 >
   <UnstyledLink
     onClick={[Function]}
+    role="button"
+    to="javascript:void(0);"
   />
 </div>
 `;

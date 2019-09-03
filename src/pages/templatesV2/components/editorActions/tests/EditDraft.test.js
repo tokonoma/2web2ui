@@ -21,8 +21,10 @@ describe('EditDraft', () => {
   });
 
   it('renders edit draft action with provided children', () => {
+    /* eslint-disable no-useless-escape */
     expect(subject(null,
-      <span>Click here</span>).find('UnstyledLink').html()).toMatch('<a><span>Click here</span></a>');
+      <span>Click here</span>).find('UnstyledLink').html()).toMatch('<a href=\"javascript:void(0);\" target=\"\" rel=\"\" role=\"button\"><span>Click here</span></a>');
+    /* eslint-enable no-useless-escape */
   });
 
   it('routes to draft path on click', () => {
