@@ -48,8 +48,17 @@ exports[`DraftModeActions renders draft actions 1`] = `
         <_default
           className="ActionItem"
         />
+        <DuplicateTemplate
+          className="ActionItem"
+          onClick={[Function]}
+        />
       </div>
     </Popover>
+    <DuplicateTemplateModal
+      onClose={[Function]}
+      onPrimaryButtonClick={[Function]}
+      open={false}
+    />
   </div>
 </Button.Group>
 `;
