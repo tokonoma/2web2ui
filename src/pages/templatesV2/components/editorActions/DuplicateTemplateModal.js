@@ -24,13 +24,14 @@ const DuplicateTemplateModal = (props) => {
       ...draft,
       name: draftName,
       id: draftId
-    });
-
-    // Not currently working - lacking accessing to store?
-    showAlert({
-      message: 'Template duplicated',
-      type: 'success'
-    });
+    })
+      .then(() => {
+        // Not currently working - lacking accessing to store?
+        showAlert({
+          message: 'Template duplicated',
+          type: 'success'
+        });
+      });
 
     if (callback) {
       callback();
