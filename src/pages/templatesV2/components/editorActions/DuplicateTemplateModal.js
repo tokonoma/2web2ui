@@ -13,12 +13,14 @@ const DuplicateTemplateModal = (props) => {
   const {
     open,
     onClose,
-    onPrimaryButtonClick
+    onSubmit
   } = props;
   const { draft, createTemplate } = useEditorContext();
   const [draftName, setDraftName] = useState(draft.name);
   const [draftId, setDraftId] = useState(draft.id);
-  const handleButtonClick = (draft, callback) => {
+  const handleSubmit = (e, draft, callback) => {
+    e.preventDefault();
+
     // Not currently working - lacking accessing to store?
     createTemplate({
       ...draft,
@@ -48,27 +50,29 @@ const DuplicateTemplateModal = (props) => {
         title="Duplicate Template"
         sectioned
       >
-        <TextField
-          id="template-name"
-          name="templateName"
-          label="Template Name"
-          value={draftName}
-          onChange={(e) => setDraftName(e.target.value)}
-        />
+        <form onSubmit={(e) => handleSubmit(e, draft, onSubmit)}>
+          <TextField
+            id="template-name"
+            name="templateName"
+            label="Template Name"
+            value={draftName}
+            onChange={(e) => setDraftName(e.target.value)}
+          />
 
-        <TextField
-          id="template-id"
-          name="templateId"
-          label="Template ID"
-          value={draftId}
-          onChange={(e) => setDraftId(e.target.value)}
-        />
+          <TextField
+            id="template-id"
+            name="templateId"
+            label="Template ID"
+            value={draftId}
+            onChange={(e) => setDraftId(e.target.value)}
+          />
 
-        <ButtonWrapper>
-          <Button color="orange" onClick={() => handleButtonClick(draft, onPrimaryButtonClick)}>
-            Duplicate
-          </Button>
-        </ButtonWrapper>
+          <ButtonWrapper>
+            <Button color="orange" submit>
+              Duplicate
+            </Button>
+          </ButtonWrapper>
+        </form>
       </Panel>
     </Modal>
   );
