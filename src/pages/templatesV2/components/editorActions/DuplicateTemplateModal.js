@@ -11,11 +11,7 @@ import useEditorContext from '../../hooks/useEditorContext';
 import { routeNamespace } from '../../constants/routes';
 
 const DuplicateTemplateModal = (props) => {
-  const {
-    open,
-    onClose,
-    onSubmitCallback
-  } = props;
+  const { open, onClose } = props;
   const { draft, createTemplate } = useEditorContext();
   const initialDraftName = draft.name;
   const initialDraftId = draft.id;
@@ -46,10 +42,7 @@ const DuplicateTemplateModal = (props) => {
         ...draft,
         name: draftName,
         id: draftId
-      })
-        .then(() => {
-          setSuccessRedirect(true);
-        });
+      }).then(() => setSuccessRedirect(true));
     }
   };
 
@@ -74,7 +67,7 @@ const DuplicateTemplateModal = (props) => {
           title="Duplicate Template"
           sectioned
         >
-          <form onSubmit={(e) => handleSubmit(e, onSubmitCallback)}>
+          <form onSubmit={handleSubmit}>
             <TextField
               id="template-name"
               name="templateName"
