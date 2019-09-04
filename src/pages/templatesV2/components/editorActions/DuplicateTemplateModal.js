@@ -8,7 +8,6 @@ import {
 import { showAlert } from 'src/actions/globalAlert';
 import ButtonWrapper from 'src/components/buttonWrapper';
 import useEditorContext from '../../hooks/useEditorContext';
-import { create } from 'src/actions/templates';
 
 const DuplicateTemplateModal = (props) => {
   const {
@@ -16,12 +15,12 @@ const DuplicateTemplateModal = (props) => {
     onClose,
     onPrimaryButtonClick
   } = props;
-  const { draft } = useEditorContext();
+  const { draft, createTemplate } = useEditorContext();
   const [draftName, setDraftName] = useState(draft.name);
   const [draftId, setDraftId] = useState(draft.id);
   const handleButtonClick = (draft, callback) => {
     // Not currently working - lacking accessing to store?
-    create({
+    createTemplate({
       ...draft,
       name: draftName,
       id: draftId
