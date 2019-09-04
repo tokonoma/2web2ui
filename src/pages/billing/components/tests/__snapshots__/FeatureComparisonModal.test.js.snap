@@ -19,21 +19,21 @@ exports[`FeatureComparisonModal:  HeaderRow: should render correctly 1`] = `
       
   </Table.Cell>
   <Table.Cell
-    className="FeatureComaprisonCell PlanOne TableCaption"
+    className="FeatureComparisonCell PlanOne PlanName"
   >
      
     Test Account
      
   </Table.Cell>
   <Table.Cell
-    className="FeatureComaprisonCell PlanTwo TableCaption"
+    className="FeatureComparisonCell PlanTwo PlanName"
   >
      
     Starter Plans
      
   </Table.Cell>
   <Table.Cell
-    className="FeatureComaprisonCell PlanThree TableCaption"
+    className="FeatureComparisonCell PlanThree PlanName"
   >
      
     Premier Plans
@@ -52,30 +52,24 @@ exports[`FeatureComparisonModal:  Row:  should render correctly 1`] = `
      
   </Table.Cell>
   <Table.Cell
-    className="FeatureComaprisonCell PlanOne"
+    className="FeatureComparisonCell PlanOne"
   >
      
-    <Icon
-      value={true}
-    />
+    <Check />
      
   </Table.Cell>
   <Table.Cell
-    className="FeatureComaprisonCell PlanTwo"
+    className="FeatureComparisonCell PlanTwo"
   >
      
-    <Icon
-      value={true}
-    />
+    <Check />
      
   </Table.Cell>
   <Table.Cell
-    className="FeatureComaprisonCell PlanThree"
+    className="FeatureComparisonCell PlanThree"
   >
      
-    <Icon
-      value={true}
-    />
+    <Check />
      
   </Table.Cell>
 </Table.Row>

@@ -38,11 +38,11 @@ describe('FeatureComparisonModal: ', () => {
   describe('renderCell: ', () => {
     it('should render a icon when value passed is boolean', () => {
       const wrapper = shallow(renderCell(true));
-      expect(wrapper).toContainExactlyOneMatchingElement('Check');
+      expect(wrapper).toContainExactlyOneMatchingElement('IconBase');
     });
     it('should render a node when value is a string containing \n', () => {
-      const wrapper = shallow(renderCell('test string \n '));
-      expect(wrapper).toContainExactlyOneMatchingElement('div');
+      const wrapper = shallow(renderCell('test string \n'));
+      expect(wrapper).toContainMatchingElements('div');
     });
   });
 });

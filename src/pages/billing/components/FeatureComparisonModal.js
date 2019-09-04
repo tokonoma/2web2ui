@@ -8,17 +8,17 @@ import { Check, Close } from '@sparkpost/matchbox-icons';
 export function Row({ featureName, testAccount, starterPlans, premierPlans }) {
   return <Table.Row>
     <Table.Cell className={styles.FeatureCell}> {featureName} </Table.Cell>
-    <Table.Cell className={classNames(styles.FeatureComaprisonCell, styles.PlanOne)}> {renderCell(testAccount)} </Table.Cell>
-    <Table.Cell className={classNames(styles.FeatureComaprisonCell, styles.PlanTwo)}> {renderCell(starterPlans)} </Table.Cell>
-    <Table.Cell className={classNames(styles.FeatureComaprisonCell, styles.PlanThree)}> {renderCell(premierPlans)} </Table.Cell>
+    <Table.Cell className={classNames(styles.FeatureComparisonCell, styles.PlanOne)}> {renderCell(testAccount)} </Table.Cell>
+    <Table.Cell className={classNames(styles.FeatureComparisonCell, styles.PlanTwo)}> {renderCell(starterPlans)} </Table.Cell>
+    <Table.Cell className={classNames(styles.FeatureComparisonCell, styles.PlanThree)}> {renderCell(premierPlans)} </Table.Cell>
   </Table.Row>;
 }
 export function HeaderRow({ plans }) {
   return <Table.Row>
     <Table.Cell className={styles.FeatureCell}>  </Table.Cell>
-    <Table.Cell className={classNames(styles.FeatureComaprisonCell, styles.PlanOne, styles.TableCaption)}> {plans[0]} </Table.Cell>
-    <Table.Cell className={classNames(styles.FeatureComaprisonCell, styles.PlanTwo, styles.TableCaption)}> {plans[1]} </Table.Cell>
-    <Table.Cell className={classNames(styles.FeatureComaprisonCell, styles.PlanThree, styles.TableCaption)}> {plans[2]} </Table.Cell>
+    <Table.Cell className={classNames(styles.FeatureComparisonCell, styles.PlanOne, styles.PlanName)}> {plans[0]} </Table.Cell>
+    <Table.Cell className={classNames(styles.FeatureComparisonCell, styles.PlanTwo, styles.PlanName)}> {plans[1]} </Table.Cell>
+    <Table.Cell className={classNames(styles.FeatureComparisonCell, styles.PlanThree, styles.PlanName)}> {plans[2]} </Table.Cell>
   </Table.Row>;
 }
 export function GroupHeading({ groupName, colSpan }) {
@@ -28,17 +28,12 @@ export function GroupHeading({ groupName, colSpan }) {
     </Table.HeaderCell>
   </Table.Row>;
 }
-function Icon({ value }) {
-  return value ? <Check/> : <Close/>;
-}
+
 export function renderCell(cellValue) {
-  if (typeof cellValue === 'boolean') { return <Icon value={cellValue}/> ; }
+  if (typeof cellValue === 'boolean') { return cellValue ? <Check/> : <Close/>; }
   if (typeof cellValue === 'string') {
-    if (cellValue.indexOf('\n') !== -1) {
-      return <div> {cellValue.substring(0,cellValue.indexOf('\n'))} <br/>
-        <span style={{ fontSize: '12px' }}> {cellValue.substring(cellValue.indexOf('\n'),cellValue.length)}</span>
-      </div>;
-    }
+    return <>{cellValue.split('\n').map((item, index) => <div key={index} className={index > 0 ? styles.SmallerFont : ''}>{item}</div>)}</>
+    ;
   }
   return cellValue;
 }
@@ -47,14 +42,18 @@ function ComparisonModal({ open, handleClose }) {
     <Panel>
       <div className={styles.FeatureComparisonTable}>
         <Table>
-          <HeaderRow plans={PLANS}/>
+          <tbody>
+            <HeaderRow plans={PLANS}/>
+          </tbody>
         </Table>
-        {_.map(FEATURE_COMPARISON, (featureArray, groupName) => <>
-          <Table>
-            <GroupHeading groupName={groupName} colSpan={featureArray.length} />
-            {featureArray.map((f) => <Row featureName={f[0]} testAccount={f[1]} starterPlans={f[2]} premierPlans={f[3]}/>)}
+        {_.map(FEATURE_COMPARISON, (featureArray, groupName) =>
+          <Table key={groupName}>
+            <tbody>
+              <GroupHeading groupName={groupName} colSpan={featureArray.length} />
+              {featureArray.map((f,index) => <Row key={index} featureName={f[0]} testAccount={f[1]} starterPlans={f[2]} premierPlans={f[3]}/>)}
+            </tbody>
           </Table>
-      </>)}
+        )}
       </div>
     </Panel>
   </Modal>);
