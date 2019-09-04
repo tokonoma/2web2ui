@@ -60,7 +60,7 @@ const DraftModeActions = () => {
         <DuplicateTemplateModal
           open={isModalOpen}
           onClose={handleModalClose}
-          onSubmit={() => setModalOpen(false)}
+          onSubmitCallback={() => setModalOpen(false)}
         />
       </div>
     </Button.Group>
