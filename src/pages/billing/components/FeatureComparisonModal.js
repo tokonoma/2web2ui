@@ -5,20 +5,22 @@ import _ from 'lodash';
 import styles from './FeatureComparisonModal.module.scss';
 import classNames from 'classnames';
 import { Check, Close } from '@sparkpost/matchbox-icons';
-export function Row({ featureName, testAccount, starterPlans, premierPlans }) {
+export function Row({ featureName, ...value }) {
   return <Table.Row>
     <Table.Cell className={styles.FeatureCell}> {featureName} </Table.Cell>
-    <Table.Cell className={classNames(styles.FeatureComparisonCell, styles.PlanOne)}> {renderCell(testAccount)} </Table.Cell>
-    <Table.Cell className={classNames(styles.FeatureComparisonCell, styles.PlanTwo)}> {renderCell(starterPlans)} </Table.Cell>
-    <Table.Cell className={classNames(styles.FeatureComparisonCell, styles.PlanThree)}> {renderCell(premierPlans)} </Table.Cell>
+    <Table.Cell className={classNames(styles.FeatureComparisonCell, styles.PlanOne)}> {renderCell(value[PLANS[0]])} </Table.Cell>
+    <Table.Cell className={classNames(styles.FeatureComparisonCell, styles.PlanTwo)}> {renderCell(value[PLANS[1]])} </Table.Cell>
+    <Table.Cell className={classNames(styles.FeatureComparisonCell, styles.PlanThree)}> {renderCell(value[PLANS[2]])} </Table.Cell>
   </Table.Row>;
 }
 export function HeaderRow({ plans }) {
   return <Table.Row>
     <Table.Cell className={styles.FeatureCell}>  </Table.Cell>
-    <Table.Cell className={classNames(styles.FeatureComparisonCell, styles.PlanOne, styles.PlanName)}> {plans[0]} </Table.Cell>
-    <Table.Cell className={classNames(styles.FeatureComparisonCell, styles.PlanTwo, styles.PlanName)}> {plans[1]} </Table.Cell>
-    <Table.Cell className={classNames(styles.FeatureComparisonCell, styles.PlanThree, styles.PlanName)}> {plans[2]} </Table.Cell>
+    {plans.map((plan,index) => <Table.Cell key={plan} className={classNames(styles.FeatureComparisonCell,
+      index + 1 === 1 ? styles.PlanOne : '',
+      index + 1 === 2 ? styles.PlanTwo : '',
+      index + 1 === 3 ? styles.PlanThree : '',
+      styles.PlanName)}> {plan} </Table.Cell>)}
   </Table.Row>;
 }
 export function GroupHeading({ groupName, colSpan }) {
@@ -46,11 +48,11 @@ function ComparisonModal({ open, handleClose }) {
             <HeaderRow plans={PLANS}/>
           </tbody>
         </Table>
-        {_.map(FEATURE_COMPARISON, (featureArray, groupName) =>
+        {_.map(FEATURE_COMPARISON, (featureObj, groupName) =>
           <Table key={groupName}>
             <tbody>
-              <GroupHeading groupName={groupName} colSpan={featureArray.length} />
-              {featureArray.map((f,index) => <Row key={index} featureName={f[0]} testAccount={f[1]} starterPlans={f[2]} premierPlans={f[3]}/>)}
+              <GroupHeading groupName={groupName} colSpan={PLANS.length + 1} />
+              {_.map(featureObj, (value, featureName) => <Row key={featureName} featureName={featureName} {...value}/>)}
             </tbody>
           </Table>
         )}

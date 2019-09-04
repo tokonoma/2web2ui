@@ -42,7 +42,7 @@ describe('FeatureComparisonModal: ', () => {
     });
     it('should render a node when value is a string containing \n', () => {
       const wrapper = shallow(renderCell('test string \n'));
-      expect(wrapper).toContainMatchingElements('div');
+      expect(wrapper).toContainMatchingElements(3, 'div');
     });
   });
 });

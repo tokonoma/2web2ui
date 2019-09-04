@@ -1,37 +1,126 @@
 export const FEATURE_COMPARISON = {
-  'Standard Features': [
-    ['Signals Predictive Analytics', true, true,true],
-    ['Spam Trap Monitoring',true, true,true ],
-    ['Engagement Insights',	true	,true	,true],
-    ['Sending Domains',	true,	'10',	'50'],
-    ['Bounce Domains',	true,	'10',	'50'],
-    ['Tracking Domains',	true,	'5',	'25'],
-    ['Searchable Email Event Data',	'10 days',	'5 days',	'10 days']
-  ],
-  'Advanced Settings': [
-    ['Scheduled Sending',	'30 days'	,'3 days',	'30 days'],
-    ['Custom Webhooks',	true	,'2',	'5'],
-    ['Inbound Email Webhooks',	true,	false	,true],
-    ['Real Time Alerts',	true	,false,	true],
-    ['Dedicated IP Address',	false,	false	,'1 \n with the option to buy more'],
-    ['IP Pools' ,	false,	false,	true ],
-    ['Automated IP Warmup',	false,	false,	true]
-  ],
-  'Content and Recipients': [
-    ['Advanced Templates',	true,	'10',	true],
-    ['Snippets',	true,	'10',	true],
-    ['Dynamic AMP Emails',	true,	true,	true],
-    ['AB Testing',	true,	false,	'10'],
-    ['Recipient Lists', 	true,	'10',	true]
-  ],
-  'Account Management and Support': [
-    [ 'Subaccounts',	true,	false,	'15 Active'],
-    [ 'Online Support',	'30 days',	true,	true],
-    [ 'Phone Support',	false,	false,	true],
-    [ 'Customer support manager (CSM)',	false,	false,	'Above 5M plans only'],
-    [ 'Single Sign-On',	true,	false	,true],
-    [ 'Advanced Security Features',	true,	false	,true]
-  ]
+  'Standard Features': {
+    'Signals Predictive Analytics': {
+      'Test Account': true,
+      'Starter Plans': true,
+      'Premier Plans': true
+    },
+    'Spam Trap Monitoring': {
+      'Test Account': true,
+      'Starter Plans': true,
+      'Premier Plans': true
+    },
+    'Engagement Insights':	{
+      'Test Account': true,
+      'Starter Plans': true,
+      'Premier Plans': true
+    },
+    'Sending Domains':	{
+      'Test Account': true,
+      'Starter Plans': '10',
+      'Premier Plans': '50'
+    },
+    'Bounce Domains':	{
+      'Test Account': true,
+      'Starter Plans': '10',
+      'Premier Plans': '50'
+    },
+    'Tracking Domains':	{
+      'Test Account': true,
+      'Starter Plans': '5',
+      'Premier Plans': '25'
+    },
+    'Searchable Email Event Data':	{
+      'Test Account': '10 days',
+      'Starter Plans': '5 days',
+      'Premier Plans': '10 days'
+
+    }
+  },
+  'Advanced Settings': {
+    'Scheduled Sending':	{
+      'Test Account': '30 days',
+      'Starter Plans': '3 days',
+      'Premier Plans': '30 days'
+    },
+    'Custom Webhooks':	{
+      'Test Account': true,
+      'Starter Plans': '2',
+      'Premier Plans': '5'
+    },
+    'Inbound Email Webhooks':	{
+      'Test Account': true,
+      'Starter Plans': false ,
+      'Premier Plans': true
+    },
+    'Real Time Alerts':	{
+      'Test Account': true,
+      'Starter Plans': false ,
+      'Premier Plans': true
+
+    },
+    'Dedicated IP Address':	{
+      'Test Account': false,
+      'Starter Plans': false ,
+      'Premier Plans': '1 \n with the option to buy more'
+    },
+    'IP Pools':	{ 'Test Account': false,
+      'Starter Plans': false ,
+      'Premier Plans': true },
+    'Automated IP Warmup':	{ 'Test Account': false,
+      'Starter Plans': false ,
+      'Premier Plans': true }
+  },
+  'Content and Recipients': {
+    'Advanced Templates':	{ 'Test Account': true,
+      'Starter Plans': '10' ,
+      'Premier Plans': true },
+    'Snippets':	{ 'Test Account': true,
+      'Starter Plans': '10' ,
+      'Premier Plans': true },
+    'Dynamic AMP Emails':	{ 'Test Account': true,
+      'Starter Plans': true ,
+      'Premier Plans': true },
+    'AB Testing':	{
+      'Test Account': true,
+      'Starter Plans': false ,
+      'Premier Plans': '10'
+    },
+    'Recipient Lists': {
+      'Test Account': true,
+      'Starter Plans': '10' ,
+      'Premier Plans': true }
+  },
+  'Account Management and Support': {
+    'Subaccounts': {
+      'Test Account': true,
+      'Starter Plans': false ,
+      'Premier Plans': '15 Active'
+    },
+    'Online Support':	{
+      'Test Account': '30 days',
+      'Starter Plans': true ,
+      'Premier Plans': true
+    },
+    'Phone Support':	{ 'Test Account': false,
+      'Starter Plans': false ,
+      'Premier Plans': true },
+    'Customer support manager (CSM)':	{
+      'Test Account': false,
+      'Starter Plans': false ,
+      'Premier Plans': 'Above 5M plans only'
+    },
+    'Single Sign-On':	{
+      'Test Account': true,
+      'Starter Plans': false ,
+      'Premier Plans': true
+    },
+    'Advanced Security Features':	{
+      'Test Account': true,
+      'Starter Plans': false ,
+      'Premier Plans': true
+    }
+  }
 
 };
 
