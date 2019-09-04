@@ -62,13 +62,4 @@ describe('DuplicateTemplateModal', () => {
 
     expect(wrapper.find('Modal').props().onClose).toEqual(mockFn);
   });
-
-  it('Fires a the passed in to the `onPrimaryButtonClick`', () => {
-    const mockFn = jest.fn();
-    const wrapper = shallow(<DuplicateTemplateModal onPrimaryButtonClick={() => mockFn()}/>);
-    const primaryButton = wrapper.find('Button');
-
-    primaryButton.simulate('click');
-    expect(mockFn).toHaveBeenCalled();
-  });
 });
