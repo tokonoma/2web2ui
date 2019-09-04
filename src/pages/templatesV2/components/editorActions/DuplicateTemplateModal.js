@@ -18,25 +18,31 @@ const DuplicateTemplateModal = (props) => {
   const { draft, createTemplate } = useEditorContext();
   const [draftName, setDraftName] = useState(draft.name);
   const [draftId, setDraftId] = useState(draft.id);
+  const [hasDraftError, setDraftError] = useState(false);
   const handleSubmit = (e, draft, callback) => {
     e.preventDefault();
 
-    // Not currently working - lacking accessing to store?
-    createTemplate({
-      ...draft,
-      name: draftName,
-      id: draftId
-    })
-      .then(() => {
-        // Not currently working - lacking accessing to store?
-        showAlert({
-          message: 'Template duplicated',
-          type: 'success'
-        });
-      });
+    if (draft.id === draftId) {
+      setDraftError(true);
+    } else {
+      setDraftError(false);
 
-    if (callback) {
-      callback();
+      createTemplate({
+        ...draft,
+        name: draftName,
+        id: draftId
+      })
+        .then(() => {
+          // Not currently working - lacking accessing to store?
+          showAlert({
+            message: 'Template duplicated',
+            type: 'success'
+          });
+        });
+
+      if (callback) {
+        callback();
+      }
     }
   };
 
@@ -55,6 +61,7 @@ const DuplicateTemplateModal = (props) => {
             id="template-name"
             name="templateName"
             label="Template Name"
+            //required // not working as I would expect...
             value={draftName}
             onChange={(e) => setDraftName(e.target.value)}
           />
@@ -63,7 +70,9 @@ const DuplicateTemplateModal = (props) => {
             id="template-id"
             name="templateId"
             label="Template ID"
+            //required // not working as I would expect...
             value={draftId}
+            error={hasDraftError && 'Please enter a unique template ID.'}
             onChange={(e) => setDraftId(e.target.value)}
           />
 
