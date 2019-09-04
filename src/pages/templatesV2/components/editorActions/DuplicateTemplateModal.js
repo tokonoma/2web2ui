@@ -13,12 +13,12 @@ import { routeNamespace } from '../../constants/routes';
 const DuplicateTemplateModal = (props) => {
   const { open, onClose } = props;
   const { draft, createTemplate } = useEditorContext();
-  const initialDraftName = draft.name;
-  const initialDraftId = draft.id;
+  const initialDraftName = draft.name ? `${draft.name} (COPY)` : null;
+  const initialDraftId = draft.id ? `${draft.id}-copy` : null;
 
   // State
-  const [draftName, setDraftName] = useState(`${initialDraftName} (COPY)`);
-  const [draftId, setDraftId] = useState(`${initialDraftId}-copy`);
+  const [draftName, setDraftName] = useState(initialDraftName);
+  const [draftId, setDraftId] = useState(initialDraftId);
   const [hasNameError, setNameError] = useState(false);
   const [hasDraftError, setDraftError] = useState(false);
   const [hasSuccessRedirect, setSuccessRedirect] = useState(false);
@@ -26,11 +26,11 @@ const DuplicateTemplateModal = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!draftName) {
+    if (!draftName || draftName.length === 0) {
       setNameError(true);
     }
 
-    if (!draftId) {
+    if (!draftId || draftId.length === 0) {
       setDraftError(true);
     }
 
@@ -67,13 +67,13 @@ const DuplicateTemplateModal = (props) => {
           title="Duplicate Template"
           sectioned
         >
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={(e) => handleSubmit(e)}>
             <TextField
               id="template-name"
               name="templateName"
               label="Template Name"
               required // not working as I would expect...
-              value={draftName}
+              value={draftName ? draftName : null}
               error={hasNameError ? 'Please enter a template name.' : null}
               onChange={(e) => setDraftName(e.target.value)}
             />
@@ -83,7 +83,7 @@ const DuplicateTemplateModal = (props) => {
               name="templateId"
               label="Template ID"
               required // not working as I would expect...
-              value={draftId}
+              value={draftId ? draftId : null}
               error={hasDraftError ? 'Please enter a unique template ID.' : null}
               onChange={(e) => setDraftId(e.target.value)}
             />

@@ -62,4 +62,28 @@ describe('DuplicateTemplateModal', () => {
 
     expect(wrapper.find('Modal').props().onClose).toEqual(mockFn);
   });
+
+  it('Renders the default value of the "templateName" `TextField` with the word `(COPY)` appended', () => {
+    const wrapper = shallow(<DuplicateTemplateModal open={true}/>);
+
+    expect(wrapper.find('[name="templateName"]').props().value).toEqual('My Draft (COPY)');
+  });
+
+  it('Renders the default value of the "templateId" `TextField` with the word "-copy"', () => {
+    const wrapper = shallow(<DuplicateTemplateModal open={true}/>);
+
+    expect(wrapper.find('[name="templateId"]').props().value).toEqual('my-draft-copy');
+  });
+
+  it('Renders with an error message if the user does not type in a value for the draft name or for draft ID', () => {
+    const wrapper = subject({ draft: { name: null }});
+    wrapper.find('form').simulate('submit', {
+      preventDefault: jest.fn(),
+      templateName: '',
+      templateId: ''
+    });
+
+    expect(wrapper.find('[name="templateName"]').props().error).toEqual('Please enter a template name.');
+    expect(wrapper.find('[name="templateId"]').props().error).toEqual('Please enter a unique template ID.');
+  });
 });
