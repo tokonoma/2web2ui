@@ -1,0 +1,75 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Change Plan Form should render 1`] = `
+<form>
+  <Grid>
+    <Grid.Column
+      xs={8}
+    >
+      <PlanSelectSection
+        currentPlan={
+          Object {
+            "code": "3",
+            "monthly": 300,
+            "name": "Three",
+            "overage": 0.3,
+            "tier": "starter",
+            "volume": 3,
+          }
+        }
+        onSelect={[Function]}
+        plans={
+          Object {
+            "default": Array [
+              Object {
+                "code": "1",
+                "includesIp": true,
+                "monthly": 100,
+                "name": "One",
+                "overage": 0.1,
+                "volume": 1,
+              },
+            ],
+            "starter": Array [
+              Object {
+                "code": "3",
+                "monthly": 300,
+                "name": "Three",
+                "overage": 0.3,
+                "volume": 3,
+              },
+            ],
+            "test": Array [
+              Object {
+                "code": "2",
+                "includesIp": false,
+                "isFree": true,
+                "monthly": 0,
+                "name": "Two",
+                "overage": 0.2,
+                "volume": 2,
+              },
+            ],
+          }
+        }
+      />
+    </Grid.Column>
+    <Grid.Column
+      xs={4}
+    >
+      <CurrentPlanSection
+        currentPlan={
+          Object {
+            "code": "3",
+            "monthly": 300,
+            "name": "Three",
+            "overage": 0.3,
+            "tier": "starter",
+            "volume": 3,
+          }
+        }
+      />
+    </Grid.Column>
+  </Grid>
+</form>
+`;

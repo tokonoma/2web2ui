@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Grid } from '@sparkpost/matchbox';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { reduxForm, formValueSelector } from 'redux-form';
+import { reduxForm } from 'redux-form';
 import qs from 'query-string';
 
 import promoCodeValidate from '../helpers/promoCodeValidate';
@@ -10,7 +10,7 @@ import PlanSelectSection, { SelectedPlan } from '../components/PlanSelect';
 import CurrentPlanSection from '../components/CurrentPlanSection';
 
 //Actions
-import { fetch as fetchAccount, getBillingInfo, getPlans } from 'src/actions/account';
+import { getBillingInfo, getPlans } from 'src/actions/account';
 import { getBillingCountries } from 'src/actions/billing';
 
 //Selectors
@@ -19,10 +19,9 @@ import { changePlanInitialValues } from 'src/selectors/accountBillingForms';
 
 const FORMNAME = 'changePlan';
 
-const ChangePlanForm = ({
+export const ChangePlanForm = ({
   //Redux Props
   plans,
-  fetchAccount,
   getBillingInfo,
   getBillingCountries,
   getPlans,
@@ -30,13 +29,11 @@ const ChangePlanForm = ({
   // initialValues: {
   //   promoCode
   // },
-  // selectedPlan,
   currentPlan
 }) => {
   const [selectedPlan, selectPlan] = useState(null);
 
   // const [useSavedCC, setUseSavedCC] = useState(null);
-  useEffect(() => { fetchAccount(); }, [fetchAccount]);
   useEffect(() => { getBillingCountries(); }, [getBillingCountries]);
   useEffect(() => { getBillingInfo(); }, [getBillingInfo]);
   useEffect(() => { getPlans(); }, [getPlans]);
@@ -74,18 +71,15 @@ const ChangePlanForm = ({
 
 const mapStateToProps = (state, props) => {
   const { code: planCode, promo: promoCode } = qs.parse(props.location.search);
-  const selector = formValueSelector(FORMNAME);
 
   return {
     plans: selectTieredVisiblePlans(state),
     initialValues: changePlanInitialValues(state, { planCode, promoCode }),
-    currentPlan: currentPlanSelector(state),
-    selectedPlan: selector(state, 'planpicker') || {}
+    currentPlan: currentPlanSelector(state)
   };
 };
 
 const mapDispatchToProps = ({
-  fetchAccount,
   getBillingInfo,
   getBillingCountries,
   getPlans
