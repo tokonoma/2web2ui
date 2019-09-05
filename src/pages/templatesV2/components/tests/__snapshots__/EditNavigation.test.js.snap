@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`EditNavigation renders navigation with primary area 1`] = `
-<div
+<nav
   className="Navigation"
 >
   <div
@@ -11,6 +11,8 @@ exports[`EditNavigation renders navigation with primary area 1`] = `
       className="NavigationLink"
       key="content"
       onClick={[Function]}
+      role="button"
+      to="javascript:void(0)"
     >
       Email Content
     </UnstyledLink>
@@ -18,6 +20,8 @@ exports[`EditNavigation renders navigation with primary area 1`] = `
       className="NavigationLink"
       key="settings"
       onClick={[Function]}
+      role="button"
+      to="javascript:void(0)"
     >
       Template Settings
     </UnstyledLink>
@@ -29,5 +33,5 @@ exports[`EditNavigation renders navigation with primary area 1`] = `
       Click Me
     </button>
   </div>
-</div>
+</nav>
 `;
