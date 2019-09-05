@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Popover } from '@sparkpost/matchbox';
+import { Button, Popover, ScreenReaderOnly } from '@sparkpost/matchbox';
 import { ArrowDropDown } from '@sparkpost/matchbox-icons';
 import SaveAndPublish from './SaveAndPublish';
 import SaveAndPublishConfirmationModal from './SaveAndPublishConfirmationModal';
@@ -45,7 +45,7 @@ const DraftModeActions = () => {
           left={true}
           open={isPopoverOpen}
           onClose={() => setPopoverOpen(false)}
-          trigger={<Button onClick={() => setPopoverOpen(true)}><ArrowDropDown/></Button>}
+          trigger={<Button onClick={() => setPopoverOpen(true)}><ArrowDropDown/><ScreenReaderOnly>Open Menu</ScreenReaderOnly></Button>}
         >
           <div className={styles.ActionsBody}>
             {/* TODO: bring <ConfirmationModal/> up to this level vs. <SaveAndPublish/> component */}

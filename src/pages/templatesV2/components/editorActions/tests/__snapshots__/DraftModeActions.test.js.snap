@@ -25,6 +25,9 @@ exports[`DraftModeActions renders draft actions 1`] = `
           size="default"
         >
           <ArrowDropDown />
+          <ScreenReaderOnly>
+            Open Menu
+          </ScreenReaderOnly>
         </Button>
       }
     >
