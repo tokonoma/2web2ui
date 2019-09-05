@@ -3,26 +3,25 @@ import { shallow } from 'enzyme';
 import { renderCell, HeaderRow, GroupHeading, Row } from '../FeatureComparisonModal';
 import { PLANS } from '../../constants';
 describe('FeatureComparisonModal: ', () => {
-  const props = {
-    open: true,
-    plans: PLANS,
-    handleClose: jest.fn((x) => true),
-    onClose: jest.fn((x) => true),
-    showCloseButton: true,
-    groupName: 'Standard Features',
-    colSpan: 3,
-    featureName: 'Signals Predictive Analytics',
-    testAccount: true,
-    starterPlans: true,
-    premierPlans: true
-  };
   describe('Row: ', () => {
+    const props = {
+      featureName: 'Signals Predictive Analytics',
+      featuerValues: {
+        testAccount: true,
+        starterPlans: true,
+        premierPlans: true
+      }
+    };
     it('should render correctly', () => {
-      const wrapper = shallow(<Row {...props} />);
+      const wrapper = shallow(<Row featureName = {props.featureName} {...props.featuerValues} />);
       expect(wrapper).toMatchSnapshot();
     });
   });
   describe('GroupHeading: ', () => {
+    const props = {
+      groupName: 'Standard Features',
+      colSpan: PLANS.length
+    };
     it('should render correctly', () => {
       const wrapper = shallow(<GroupHeading {...props} />);
       expect(wrapper).toMatchSnapshot();
@@ -30,6 +29,9 @@ describe('FeatureComparisonModal: ', () => {
   });
 
   describe('HeaderRow:', () => {
+    const props = {
+      plans: PLANS
+    };
     it('should render correctly', () => {
       const wrapper = shallow(<HeaderRow {...props}/>);
       expect(wrapper).toMatchSnapshot();

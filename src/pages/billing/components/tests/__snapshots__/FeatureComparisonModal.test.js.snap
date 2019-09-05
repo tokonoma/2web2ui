@@ -20,6 +20,7 @@ exports[`FeatureComparisonModal:  HeaderRow: should render correctly 1`] = `
   </Table.Cell>
   <Table.Cell
     className="FeatureComparisonCell PlanOne PlanName"
+    key="Test Account"
   >
      
     Test Account
@@ -27,6 +28,7 @@ exports[`FeatureComparisonModal:  HeaderRow: should render correctly 1`] = `
   </Table.Cell>
   <Table.Cell
     className="FeatureComparisonCell PlanTwo PlanName"
+    key="Starter Plans"
   >
      
     Starter Plans
@@ -34,6 +36,7 @@ exports[`FeatureComparisonModal:  HeaderRow: should render correctly 1`] = `
   </Table.Cell>
   <Table.Cell
     className="FeatureComparisonCell PlanThree PlanName"
+    key="Premier Plans"
   >
      
     Premier Plans
@@ -52,21 +55,24 @@ exports[`FeatureComparisonModal:  Row:  should render correctly 1`] = `
      
   </Table.Cell>
   <Table.Cell
-    className="FeatureComparisonCell PlanOne"
+    className="FeatureComparisonCell"
+    key="testAccount"
   >
      
     <Check />
      
   </Table.Cell>
   <Table.Cell
-    className="FeatureComparisonCell PlanTwo"
+    className="FeatureComparisonCell"
+    key="starterPlans"
   >
      
     <Check />
      
   </Table.Cell>
   <Table.Cell
-    className="FeatureComparisonCell PlanThree"
+    className="FeatureComparisonCell"
+    key="premierPlans"
   >
      
     <Check />
