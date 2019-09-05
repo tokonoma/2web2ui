@@ -22,6 +22,14 @@ describe('SaveAndPublishConfirmationModal', () => {
   };
 
   it('renders', () => {
-    expect(subject()).toMatchSnapshot();
+    const wrapper = subject();
+
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('sets the `ConfirmationModal` `open` prop to `false` when set via the `open` prop of the wrapper', () => {
+    const wrapper = subject(undefined, { open: false });
+
+    expect(wrapper.find('ConfirmationModal').props().open).toEqual(false);
   });
 });
