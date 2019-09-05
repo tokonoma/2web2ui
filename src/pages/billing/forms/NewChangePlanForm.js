@@ -48,6 +48,7 @@ const ChangePlanForm = ({
         <Grid.Column xs={8}>
           <PlanSelectSection
             plans={plans}
+            currentPlan={currentPlan}
           />
         </Grid.Column>
         <Grid.Column xs={4}>

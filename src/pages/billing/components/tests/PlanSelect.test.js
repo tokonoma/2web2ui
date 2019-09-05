@@ -7,6 +7,9 @@ describe('Plan Select: ', () => {
 
   const defaultProps = {
     onSelect: jest.fn(),
+    currentPlan: {
+      code: '2'
+    },
     plans: {
       'default': [{
         code: '1',

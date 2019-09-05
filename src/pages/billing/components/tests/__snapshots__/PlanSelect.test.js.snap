@@ -37,6 +37,7 @@ exports[`Plan Select:  should render correctly 1`] = `
         <div>
           <Button
             className="selectButton"
+            disabled={false}
             onClick={[MockFunction]}
             size="small"
           >
@@ -58,10 +59,13 @@ exports[`Plan Select:  should render correctly 1`] = `
       className="tierPlans"
     >
       <div
-        className="PlanRow"
+        className="PlanRow SelectedPlan"
         key="plan_row_2"
       >
         <div>
+          <Check
+            className="CheckIcon"
+          />
           <PlanPrice
             plan={
               Object {
@@ -82,6 +86,7 @@ exports[`Plan Select:  should render correctly 1`] = `
         <div>
           <Button
             className="selectButton"
+            disabled={true}
             onClick={[MockFunction]}
             size="small"
           >
@@ -125,6 +130,7 @@ exports[`Plan Select:  should render correctly 1`] = `
         <div>
           <Button
             className="selectButton"
+            disabled={false}
             onClick={[MockFunction]}
             size="small"
           >
