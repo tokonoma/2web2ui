@@ -7,6 +7,22 @@ import cx from 'classnames';
 
 import styles from './PlanSelect.module.scss';
 
+export const SelectedPlan = ({ plan, onChange }) => (
+  <Panel title='Your New Plan'>
+    <Panel.Section>
+      <div className={styles.Title}>{PLAN_TIERS[plan.tier]}</div>
+      <div className={styles.PlanRow}>
+        <div className={cx(styles.SelectedPlan, styles.Plan)}>
+          <PlanPrice showOverage showIp showCsm plan={plan} />
+        </div>
+        <div>
+          <Button onClick={() => onChange()} size='small' flat color='orange'>Change</Button>
+        </div>
+      </div>
+    </Panel.Section>
+  </Panel>
+);
+
 const PlanSelectSection = ({ plans, currentPlan, onSelect }) => {
   const TIERS = [
     { key: 'default' },
@@ -38,7 +54,8 @@ const PlanSelectSection = ({ plans, currentPlan, onSelect }) => {
                     <Button
                       className={styles.selectButton}
                       disabled={isCurrentPlan}
-                      onClick={onSelect}
+                      onClick={() => onSelect(bundle)}
+                      value={bundle}
                       size='small'>
                         Select
                     </Button>
@@ -53,7 +70,7 @@ const PlanSelectSection = ({ plans, currentPlan, onSelect }) => {
   });
 
   return (
-    <Panel title='Select A Plan'>
+    <Panel title='Select a Plan'>
       {planList}
     </Panel>
   );

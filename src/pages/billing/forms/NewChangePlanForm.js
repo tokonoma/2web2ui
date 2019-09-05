@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Grid } from '@sparkpost/matchbox';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -6,7 +6,7 @@ import { reduxForm, formValueSelector } from 'redux-form';
 import qs from 'query-string';
 
 import promoCodeValidate from '../helpers/promoCodeValidate';
-import PlanSelectSection from '../components/PlanSelect';
+import PlanSelectSection, { SelectedPlan } from '../components/PlanSelect';
 import CurrentPlanSection from '../components/CurrentPlanSection';
 
 //Actions
@@ -33,6 +33,7 @@ const ChangePlanForm = ({
   // selectedPlan,
   currentPlan
 }) => {
+  const [selectedPlan, selectPlan] = useState(null);
 
   // const [useSavedCC, setUseSavedCC] = useState(null);
   useEffect(() => { fetchAccount(); }, [fetchAccount]);
@@ -42,14 +43,26 @@ const ChangePlanForm = ({
   //TODO: Implement in AC-986
   // useEffect(() => { console.log(selectedPlan, promoCode)}, [verifyPromoCode, promoCode, selectedPlan]);
 
+  const onSelect = (plan) => {
+    selectPlan(plan);
+  };
+
   return (
     <form>
       <Grid>
         <Grid.Column xs={8}>
-          <PlanSelectSection
-            plans={plans}
-            currentPlan={currentPlan}
-          />
+          {
+            selectedPlan
+              ? <SelectedPlan
+                plan={selectedPlan}
+                onChange={onSelect}
+              />
+              : <PlanSelectSection
+                onSelect={onSelect}
+                plans={plans}
+                currentPlan={currentPlan}
+              />
+          }
         </Grid.Column>
         <Grid.Column xs={4}>
           <CurrentPlanSection currentPlan={currentPlan}/>

@@ -34,3 +34,19 @@
   position: absolute;
   transform: translate(-20px, 2px);
 }
+
+.SelectedPlan {
+  .Title {
+    font-weight: 500;
+  }
+  
+  .Plan {
+    margin: 1rem 0 0 1rem;
+  }
+
+  :first-child {
+    flex-grow: 1;
+  }
+}
+
+
