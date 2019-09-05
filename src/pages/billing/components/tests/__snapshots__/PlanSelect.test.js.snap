@@ -1,0 +1,138 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Plan Select:  should render correctly 1`] = `
+<Panel
+  title="Select A Plan"
+>
+  <Panel.Section
+    key="tier_section_default"
+  >
+    <div
+      className="tierLabel"
+    />
+    <div
+      className="tierPlans"
+    >
+      <div
+        className="PlanRow"
+        key="plan_row_1"
+      >
+        <div>
+          <PlanPrice
+            plan={
+              Object {
+                "code": "1",
+                "includesIp": true,
+                "monthly": 100,
+                "name": "One",
+                "overage": 0.1,
+                "volume": 1,
+              }
+            }
+            showCsm={true}
+            showIp={true}
+            showOverage={true}
+          />
+        </div>
+        <div>
+          <Button
+            className="selectButton"
+            onClick={[MockFunction]}
+            size="small"
+          >
+            Select
+          </Button>
+        </div>
+      </div>
+    </div>
+  </Panel.Section>
+  <Panel.Section
+    key="tier_section_test"
+  >
+    <div
+      className="tierLabel"
+    >
+      Test Account
+    </div>
+    <div
+      className="tierPlans"
+    >
+      <div
+        className="PlanRow"
+        key="plan_row_2"
+      >
+        <div>
+          <PlanPrice
+            plan={
+              Object {
+                "code": "2",
+                "includesIp": false,
+                "isFree": true,
+                "monthly": 0,
+                "name": "Two",
+                "overage": 0.2,
+                "volume": 2,
+              }
+            }
+            showCsm={true}
+            showIp={true}
+            showOverage={true}
+          />
+        </div>
+        <div>
+          <Button
+            className="selectButton"
+            onClick={[MockFunction]}
+            size="small"
+          >
+            Select
+          </Button>
+        </div>
+      </div>
+    </div>
+  </Panel.Section>
+  <Panel.Section
+    key="tier_section_starter"
+  >
+    <div
+      className="tierLabel"
+    >
+      Starter
+    </div>
+    <div
+      className="tierPlans"
+    >
+      <div
+        className="PlanRow"
+        key="plan_row_3"
+      >
+        <div>
+          <PlanPrice
+            plan={
+              Object {
+                "code": "3",
+                "monthly": 300,
+                "name": "Three",
+                "overage": 0.3,
+                "volume": 3,
+              }
+            }
+            showCsm={true}
+            showIp={true}
+            showOverage={true}
+          />
+        </div>
+        <div>
+          <Button
+            className="selectButton"
+            onClick={[MockFunction]}
+            size="small"
+          >
+            Select
+          </Button>
+        </div>
+      </div>
+    </div>
+  </Panel.Section>
+</Panel>
+`;
