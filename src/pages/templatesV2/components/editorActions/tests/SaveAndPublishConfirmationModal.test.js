@@ -9,12 +9,11 @@ describe('SaveAndPublishConfirmationModal', () => {
   const subject = (editorState, props) => {
     useEditorContext.mockReturnValue({
       draft: {
-        id: 'abcdefg',
-        subaccount_id: 'hijklmnop'
+        id: 'foo'
       },
       isDraftPublishing: false,
       publishDraft: jest.fn(),
-      history: jest.fn(),
+      history: { push: jest.fn() },
       ...editorState
     });
 
