@@ -45,7 +45,13 @@ const DraftModeActions = () => {
           left={true}
           open={isPopoverOpen}
           onClose={() => setPopoverOpen(false)}
-          trigger={<Button onClick={() => setPopoverOpen(true)}><ArrowDropDown/><ScreenReaderOnly>Open Menu</ScreenReaderOnly></Button>}
+          trigger={
+            <Button onClick={() => setPopoverOpen(true)}>
+              <ArrowDropDown/>
+
+              <ScreenReaderOnly>Open Menu</ScreenReaderOnly>
+            </Button>
+          }
         >
           <div className={styles.ActionsBody}>
             {/* TODO: bring <ConfirmationModal/> up to this level vs. <SaveAndPublish/> component */}
