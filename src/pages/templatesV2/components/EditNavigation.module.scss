@@ -11,13 +11,10 @@
 }
 
 .NavigationLink {
+  font-size: rem(18);
   color: color(gray, 4); // to match default text
   display: inline-block;
-  padding: spacing(large) spacing();
-
-  &:first-child {
-    padding-left: spacing(large);
-  }
+  padding: spacing(large) spacing(large);
 
   &:hover {
     color: color(orange);
@@ -25,7 +22,21 @@
 }
 
 .NavigationActiveLink {
+  position: relative; // allows absolute positioning within
   color: color(orange);
+
+  &:after {
+    content: "";
+    display: block;
+    width: 75%;
+    position: absolute;
+    left: 50%;
+    right: 50%;
+    transform: translateX(-50%);
+    bottom: -1px;
+    height: rem(4);
+    background-color: color(orange);
+  }
 }
 
 .NavigationPrimaryArea {
