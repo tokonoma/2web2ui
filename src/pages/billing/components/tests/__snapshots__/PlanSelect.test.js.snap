@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Plan Select:  should render correctly 1`] = `
+exports[`Plan Select: should render correctly 1`] = `
 <Panel
-  title="Select A Plan"
+  title="Select a Plan"
 >
   <Panel.Section
     key="tier_section_default"
@@ -38,7 +38,7 @@ exports[`Plan Select:  should render correctly 1`] = `
           <Button
             className="selectButton"
             disabled={false}
-            onClick={[MockFunction]}
+            onClick={[Function]}
             size="small"
           >
             Select
@@ -87,7 +87,7 @@ exports[`Plan Select:  should render correctly 1`] = `
           <Button
             className="selectButton"
             disabled={true}
-            onClick={[MockFunction]}
+            onClick={[Function]}
             size="small"
           >
             Select
@@ -131,12 +131,61 @@ exports[`Plan Select:  should render correctly 1`] = `
           <Button
             className="selectButton"
             disabled={false}
-            onClick={[MockFunction]}
+            onClick={[Function]}
             size="small"
           >
             Select
           </Button>
         </div>
+      </div>
+    </div>
+  </Panel.Section>
+</Panel>
+`;
+
+exports[`Selected Plan: should render plan price with the plan 1`] = `
+<Panel
+  title="Your New Plan"
+>
+  <Panel.Section>
+    <div
+      className="Title"
+    >
+      Starter
+    </div>
+    <div
+      className="PlanRow"
+    >
+      <div
+        className="SelectedPlan Plan"
+      >
+        <PlanPrice
+          plan={
+            Object {
+              "code": "2",
+              "includesIp": false,
+              "isFree": true,
+              "monthly": 0,
+              "name": "Two",
+              "overage": 0.2,
+              "tier": "starter",
+              "volume": 2,
+            }
+          }
+          showCsm={true}
+          showIp={true}
+          showOverage={true}
+        />
+      </div>
+      <div>
+        <Button
+          color="orange"
+          flat={true}
+          onClick={[Function]}
+          size="small"
+        >
+          Change
+        </Button>
       </div>
     </div>
   </Panel.Section>

@@ -1,9 +1,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import PlanSelect from '../PlanSelect';
+import PlanSelect, { SelectedPlan } from '../PlanSelect';
 
-describe('Plan Select: ', () => {
+describe('Plan Select:', () => {
 
   const defaultProps = {
     onSelect: jest.fn(),
@@ -48,4 +48,31 @@ describe('Plan Select: ', () => {
     expect(subject()).toMatchSnapshot();
   });
 
+});
+
+describe('Selected Plan:', () => {
+  const defaultProps = {
+    onChange: jest.fn(),
+    plan: {
+      tier: 'starter',
+      code: '2',
+      includesIp: false,
+      monthly: 0,
+      name: 'Two',
+      overage: 0.2,
+      volume: 2,
+      isFree: true
+    }
+  };
+
+  const subject = (props) => shallow(
+    <SelectedPlan
+      {...defaultProps}
+      {...props}
+    />
+  );
+
+  it('should render plan price with the plan', () => {
+    expect(subject()).toMatchSnapshot();
+  });
 });

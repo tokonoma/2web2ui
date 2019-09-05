@@ -55,7 +55,6 @@ const PlanSelectSection = ({ plans, currentPlan, onSelect }) => {
                       className={styles.selectButton}
                       disabled={isCurrentPlan}
                       onClick={() => onSelect(bundle)}
-                      value={bundle}
                       size='small'>
                         Select
                     </Button>
