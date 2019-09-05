@@ -44,14 +44,27 @@ describe('Page: Test List', () => {
     expect(wrapper.find('ApiErrorBanner')).toExist();
   });
 
-  it('doest not render test name and divider if test name does not exist', () => {
-    const wrapper = subject();
-    const rowFn = wrapper.find('FilterSortCollection').prop('rowComponent');
+  describe('Test Name:', () => {
 
-    const { test_name, ...testWithoutName } = tests[0];
-    const row = rowFn(testWithoutName)[0];
-    const firstColumn = (shallow(shallow(row).prop('children')[0]));
-    expect(firstColumn.find({ id: 'testName' })).not.toExist();
-    expect(firstColumn.find({ id: 'fromAddress' })).toExist();
+    const renderFirstColumn = (rowProps) => {
+      const wrapper = subject();
+      const rowFn = wrapper.find('FilterSortCollection').prop('rowComponent');
+      const row = rowFn(rowProps)[0];
+      return shallow(shallow(row).prop('children')[0]);
+    };
+
+    it('render test name and divider if test name exists', () => {
+      const firstColumn = renderFirstColumn(tests[0]);
+      const spanTexts = firstColumn.find('span');
+      expect(spanTexts.someWhere((text) => (text).text().includes(tests[0].test_name))).toEqual(true);
+    });
+
+    it('doest not render test name and divider if test name does not exist', () => {
+      const { test_name, ...testWithoutName } = tests[0];
+      const firstColumn = renderFirstColumn(testWithoutName);
+      const spanTexts = firstColumn.find('span');
+      expect(spanTexts.someWhere((text) => (text).text().includes(tests[0].from_address))).toEqual(true);
+      expect(spanTexts.someWhere((text) => (text).text().includes(tests[0].test_name))).toEqual(false);
+    });
   });
 });

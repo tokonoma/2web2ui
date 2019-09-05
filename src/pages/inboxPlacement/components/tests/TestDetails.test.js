@@ -29,7 +29,7 @@ describe('Component: TestDetails', () => {
       subject: 'Fooo'
     };
     const wrapper = subject({ details: detailsWithoutName });
-    expect(wrapper.find('InfoBlock').at(3).prop('value')).toEqual('None');
+    expect(wrapper.find('InfoBlock').at(3)).toHaveProp('value', 'None');
   });
 
   it('renders providers breakdown correctly', () => {
