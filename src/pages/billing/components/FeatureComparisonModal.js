@@ -9,19 +9,20 @@ export function Row({ featureName, ...featureValues }) {
   return <Table.Row>
     <Table.Cell className={styles.FeatureCell}> {featureName} </Table.Cell>
     {_.map(featureValues, (val, key) => <Table.Cell key={key} className={classNames(styles.FeatureComparisonCell,
-      key === 'Test Account' ? styles.PlanOne : '',
-      key === 'Starter Plans' ? styles.PlanTwo : '',
-      key === 'Premier Plans' ? styles.PlanThree : '')}> {renderCell(val)} </Table.Cell>)}
+      key === 'Test Account' && styles.PlanOne,
+      key === 'Starter Plans' && styles.PlanTwo,
+      key === 'Premier Plans' && styles.PlanThree)}> {renderCell(val)} </Table.Cell>)}
   </Table.Row>;
 }
 export function HeaderRow({ plans }) {
   return <Table.Row>
     <Table.Cell className={styles.FeatureCell}>  </Table.Cell>
-    {plans.map((plan) => <Table.Cell key={plan} className={classNames(styles.FeatureComparisonCell,
-      plan === 'Test Account' ? styles.PlanOne : '',
-      plan === 'Starter Plans' ? styles.PlanTwo : '',
-      plan === 'Premier Plans' ? styles.PlanThree : '',
-      styles.PlanName)}> {plan} </Table.Cell>)}
+    {plans.map((plan) =>
+      <Table.Cell key={plan} className={classNames(styles.FeatureComparisonCell,
+        plan === 'Test Account' && styles.PlanOne,
+        plan === 'Starter Plans' && styles.PlanTwo,
+        plan === 'Premier Plans' && styles.PlanThree,
+        styles.PlanName)}> {plan} </Table.Cell>)}
   </Table.Row>;
 }
 export function GroupHeading({ groupName, colSpan }) {
@@ -35,7 +36,12 @@ export function GroupHeading({ groupName, colSpan }) {
 export function renderCell(cellValue) {
   if (typeof cellValue === 'boolean') { return cellValue ? <Check/> : <Close/>; }
   if (typeof cellValue === 'string') {
-    return <div>{cellValue.split('\n').map((item, index) => <div key={index} className={index > 0 ? styles.SmallerFont : ''}>{item}</div>)}</div>
+    return <div>
+      {cellValue.split('\n').map((item, index) =>
+        <div key={index} className={index > 0 ? styles.SmallerFont : ''}>
+          {item}
+        </div>)}
+    </div>
     ;
   }
   return cellValue;
@@ -53,7 +59,9 @@ function ComparisonModal({ open, handleClose }) {
           <Table key={groupName}>
             <tbody>
               <GroupHeading groupName={groupName} colSpan={PLANS.length + 1} />
-              {_.map(featureObj, (featureValues, featureName) => <Row key={featureName} featureName={featureName} {...featureValues}/>)}
+              {_.map(featureObj, (featureValues, featureName) =>
+                <Row key={featureName} featureName={featureName} {...featureValues}/>
+              )}
             </tbody>
           </Table>
         )}

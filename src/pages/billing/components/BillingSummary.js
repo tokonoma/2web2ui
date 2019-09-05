@@ -15,6 +15,7 @@ import { formatFullNumber } from 'src/helpers/units';
 import totalRVCost from '../helpers/totalRecipientValidationCost';
 import _ from 'lodash';
 import { formatDateTime } from 'src/helpers/date';
+import FeatureComparisonModal from './FeatureComparisonModal';
 const PAYMENT_MODAL = 'payment';
 const CONTACT_MODAL = 'contact';
 const IP_MODAL = 'ip';
@@ -90,6 +91,7 @@ export default class BillingSummary extends Component {
 
     return (
       <div>
+        <FeatureComparisonModal open={true} handleClose={() => {}}/>
         <PendingPlanBanner account={account} />
         <FreePlanWarningBanner account={account} accountAgeInDays={accountAgeInDays} />
         <Panel accent title='Plan Overview'>

@@ -17,14 +17,14 @@ describe('FeatureComparisonModal: ', () => {
   describe('Row: ', () => {
     const props = {
       featureName: 'Signals Predictive Analytics',
-      featuerValues: {
+      featureValues: {
         testAccount: true,
         starterPlans: true,
         premierPlans: true
       }
     };
     it('should render correctly', () => {
-      const wrapper = shallow(<Row featureName = {props.featureName} {...props.featuerValues} />);
+      const wrapper = shallow(<Row featureName = {props.featureName} {...props.featureValues} />);
       expect(wrapper).toMatchSnapshot();
     });
   });
