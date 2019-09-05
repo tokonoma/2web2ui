@@ -32,4 +32,38 @@ describe('SaveAndPublishConfirmationModal', () => {
 
     expect(wrapper.find('ConfirmationModal').props().open).toEqual(false);
   });
+
+  it('publishes content upon confirmation', () => {
+    const publishDraft = jest.fn(() => Promise.resolve());
+    const draft = { id: 'foo', content: { text: 'foo text', html: '<h1>foo html</h1>' }};
+    const wrapper = subject({ publishDraft, draft });
+    wrapper.find('ConfirmationModal').prop('onConfirm')(); //invoke attached func
+    expect(publishDraft).toHaveBeenCalledWith(draft, undefined);
+  });
+
+  it('publishes content with subaccount upon confirmation', () => {
+    const publishDraft = jest.fn(() => Promise.resolve());
+    const draft = { id: 'foo', content: { text: 'foo text', html: '<h1>foo html</h1>' }, subaccount_id: 101 };
+    const wrapper = subject({ publishDraft, draft });
+    wrapper.find('ConfirmationModal').prop('onConfirm')(); //invoke attached func
+    expect(publishDraft).toHaveBeenCalledWith(draft, 101);
+  });
+
+  it('redirects to published path upon publishing', async () => {
+    const push = jest.fn();
+    const publishDraft = jest.fn(() => Promise.resolve());
+    const wrapper = subject({ history: { push }, publishDraft });
+    await wrapper.find('ConfirmationModal').prop('onConfirm')(); //invoke attached func
+    expect(publishDraft).toHaveBeenCalled();
+    expect(push).toHaveBeenCalledWith('/templatesv2/edit/foo/published/content');
+  });
+
+  it('redirects to published path with subaccount upon publishing', async () => {
+    const push = jest.fn();
+    const publishDraft = jest.fn(() => Promise.resolve());
+    const wrapper = subject({ history: { push }, publishDraft, draft: { id: 'foo', subaccount_id: 101 }});
+    await wrapper.find('ConfirmationModal').prop('onConfirm')(); //invoke attached func
+    expect(publishDraft).toHaveBeenCalled();
+    expect(push).toHaveBeenCalledWith('/templatesv2/edit/foo/published/content?subaccount=101');
+  });
 });

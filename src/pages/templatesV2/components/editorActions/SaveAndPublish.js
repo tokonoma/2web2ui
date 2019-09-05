@@ -12,7 +12,10 @@ const SaveAndPublish = (props) => {
   return (
     <div className={className}>
       {children &&
-        <Button onClick={onClick} title="Opens a dialog">
+        <Button
+          onClick={onClick}
+          title="Opens a dialog"
+        >
           {children}
         </Button>
       }

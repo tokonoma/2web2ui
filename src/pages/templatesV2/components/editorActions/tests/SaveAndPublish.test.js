@@ -6,14 +6,14 @@ import useEditorContext from '../../../hooks/useEditorContext';
 jest.mock('../../../hooks/useEditorContext');
 
 describe('SaveAndPublish', () => {
-  const subject = (editorState, children = null) => {
+  const subject = (editorState, children = null, props) => {
     useEditorContext.mockReturnValue({
       draft: { id: 'foo' },
       history: { push: jest.fn() },
       ...editorState
     });
 
-    return shallow(<SaveAndPublish className={'Foo'}>{children}</SaveAndPublish>);
+    return shallow(<SaveAndPublish className={'Foo'} {...props}>{children}</SaveAndPublish>);
   };
 
   it('renders SaveAndPublish action', () => {
@@ -21,48 +21,21 @@ describe('SaveAndPublish', () => {
   });
 
   it('renders SaveAndPublish action with provided children', () => {
-    expect(subject(null,<span>Click here</span>).find('UnstyledLink').html()).toMatch('<a href="javascript:void(0);" target="" rel="" role="button"><span>Click here</span></a>');
+    expect(subject(null, <span>Click here</span>).find('Button')).toExist();
+  });
+
+  it('Renders and icon and default content when no children are supplied', () => {
+    const wrapper = shallow(<SaveAndPublish/>);
+
+    expect(wrapper).toMatchSnapshot();
   });
 
   it('renders confirmation modal upon clicking', () => {
-    const wrapper = subject();
-    expect(wrapper.find('ConfirmationModal').prop('open')).toBe(false);
+    const mockFn = jest.fn();
+    const wrapper = subject(undefined, null, { onClick: mockFn });
+
     wrapper.find('UnstyledLink').simulate('click');
-    expect(wrapper.find('ConfirmationModal').prop('open')).toBe(true);
-  });
 
-  it('publishes content upon confirmation', () => {
-    const publishDraft = jest.fn(() => Promise.resolve());
-    const draft = { id: 'foo', content: { text: 'foo text', html: '<h1>foo html</h1>' }};
-    const wrapper = subject({ publishDraft, draft });
-    wrapper.find('ConfirmationModal').prop('onConfirm')(); //invoke attached func
-    expect(publishDraft).toHaveBeenCalledWith(draft, undefined);
+    expect(mockFn).toHaveBeenCalled();
   });
-
-  it('publishes content with subaccount upon confirmation', () => {
-    const publishDraft = jest.fn(() => Promise.resolve());
-    const draft = { id: 'foo', content: { text: 'foo text', html: '<h1>foo html</h1>' }, subaccount_id: 101 };
-    const wrapper = subject({ publishDraft, draft });
-    wrapper.find('ConfirmationModal').prop('onConfirm')(); //invoke attached func
-    expect(publishDraft).toHaveBeenCalledWith(draft, 101);
-  });
-
-  it('redirects to published path upon publishing', async () => {
-    const push = jest.fn();
-    const publishDraft = jest.fn(() => Promise.resolve());
-    const wrapper = subject({ history: { push }, publishDraft });
-    await wrapper.find('ConfirmationModal').prop('onConfirm')(); //invoke attached func
-    expect(publishDraft).toHaveBeenCalled();
-    expect(push).toHaveBeenCalledWith('/templatesv2/edit/foo/published/content');
-  });
-
-  it('redirects to published path with subaccount upon publishing', async () => {
-    const push = jest.fn();
-    const publishDraft = jest.fn(() => Promise.resolve());
-    const wrapper = subject({ history: { push }, publishDraft, draft: { id: 'foo', subaccount_id: 101 }});
-    await wrapper.find('ConfirmationModal').prop('onConfirm')(); //invoke attached func
-    expect(publishDraft).toHaveBeenCalled();
-    expect(push).toHaveBeenCalledWith('/templatesv2/edit/foo/published/content?subaccount=101');
-  });
-
 });
