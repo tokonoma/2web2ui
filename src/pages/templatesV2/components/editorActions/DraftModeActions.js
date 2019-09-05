@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Button, Popover } from '@sparkpost/matchbox';
 import { ArrowDropDown } from '@sparkpost/matchbox-icons';
 import SaveAndPublish from './SaveAndPublish';
+import SaveAndPublishConfirmationModal from './SaveAndPublishConfirmationModal';
 import ViewPublished from './ViewPublished';
 import SaveDraft from './SaveDraft';
 import styles from './Actions.module.scss';
@@ -12,17 +13,31 @@ import DuplicateTemplateModal from './DuplicateTemplateModal';
 const DraftModeActions = () => {
   const { hasPublished } = useEditorContext();
   const [isPopoverOpen, setPopoverOpen] = useState(false);
-  const [isModalOpen, setModalOpen] = useState(false);
-  const handleModalClose = () => setModalOpen(false);
+  const [isDuplicateModalOpen, setDuplicateModalOpen] = useState(false);
+  const [isSaveAndPublishModalOpen, setSaveAndPublishModalOpen] = useState(false);
+
+  const handleModalClose = () => {
+    setDuplicateModalOpen(false);
+    setSaveAndPublishModalOpen(false);
+  };
+
   const handleDuplicateDraftClick = () => {
-    setModalOpen(true);
+    setDuplicateModalOpen(true);
+    setPopoverOpen(false);
+  };
+
+  const handleSaveAndPublishClick = () => {
+    setSaveAndPublishModalOpen(true);
     setPopoverOpen(false);
   };
 
   return (
     <Button.Group>
-      <SaveAndPublish className={styles.Actions}>
-        <Button><strong>Save and Publish</strong></Button>
+      <SaveAndPublish
+        onClick={handleSaveAndPublishClick}
+        className={styles.Actions}
+      >
+        <strong>Save and Publish</strong>
       </SaveAndPublish>
 
       <div className={styles.Actions}>
@@ -33,9 +48,10 @@ const DraftModeActions = () => {
           trigger={<Button onClick={() => setPopoverOpen(true)}><ArrowDropDown/></Button>}
         >
           <div className={styles.ActionsBody}>
+            {/* TODO: bring <ConfirmationModal/> up to this level vs. <SaveAndPublish/> component */}
             <SaveAndPublish
               className={styles.ActionItem}
-              onClick={() => setPopoverOpen(false)}
+              onClick={handleSaveAndPublishClick}
             />
 
             <SaveDraft
@@ -51,6 +67,7 @@ const DraftModeActions = () => {
             {hasPublished &&
               <>
                 <hr className={styles.Divider}/>
+
                 <ViewPublished className={styles.ActionItem}/>
               </>
             }
@@ -58,8 +75,13 @@ const DraftModeActions = () => {
         </Popover>
 
         <DuplicateTemplateModal
-          open={isModalOpen}
+          open={isDuplicateModalOpen}
           onClose={handleModalClose}
+        />
+
+        <SaveAndPublishConfirmationModal
+          open={isSaveAndPublishModalOpen}
+          onCancel={handleModalClose}
         />
       </div>
     </Button.Group>

@@ -1,50 +1,36 @@
-import React, { useCallback, useState } from 'react';
-import { UnstyledLink } from '@sparkpost/matchbox';
-import noop from 'lodash/noop';
-
-import ConfirmationModal from 'src/components/modals/ConfirmationModal';
-import useEditorContext from '../../hooks/useEditorContext';
-import { routeNamespace } from '../../constants/routes';
-import { setSubaccountQuery } from 'src/helpers/subaccounts';
+import React from 'react';
+import { UnstyledLink, Button } from '@sparkpost/matchbox';
 import { CheckCircleOutline } from '@sparkpost/matchbox-icons';
 
-export default ({ className, onClick = noop, children, ...props }) => {
-  const [open, setOpen] = useState(false);
-  const { draft, publishDraft, isDraftPublishing, history } = useEditorContext();
-
-  const onConfirm = useCallback(() => publishDraft(draft, draft.subaccount_id)
-    .then(() => {
-      history.push(`/${routeNamespace}/edit/${draft.id}/published/content${setSubaccountQuery(draft.subaccount_id)}`);
-    }), [draft, history, publishDraft]);
-
-  /*
-  hiding popover makes modal hidden too, so it's invoking onClick when modal is being closed.
-   */
-  const hideModal = useCallback(() => {
-    onClick();
-    setOpen(false);
-  });
-
-  const showModal = useCallback(() => {
-    setOpen(true);
-  });
+const SaveAndPublish = (props) => {
+  const {
+    onClick,
+    className,
+    children
+  } = props;
 
   return (
     <div className={className}>
-      {children && <UnstyledLink onClick={showModal} role="button" to="javascript:void(0);">{children}</UnstyledLink>}
+      {children &&
+        <Button onClick={onClick} title="Opens a dialog">
+          {children}
+        </Button>
+      }
 
-      {!children && <UnstyledLink onClick={showModal} role="button" to="javascript:void(0);"><CheckCircleOutline/>Save and Publish</UnstyledLink>}
+      {!children &&
+        <UnstyledLink
+          onClick={onClick}
+          role="button"
+          to="javascript:void(0);"
+          title="Opens a dialog"
+        >
+          <CheckCircleOutline/>
 
-      <ConfirmationModal
-        title='Are you sure you want to publish your template?'
-        content={<p>Once published, your template will be available for use in email campaigns and A/B tests.</p>}
-        confirming={isDraftPublishing}
-        isPending={isDraftPublishing}
-        open={open}
-        confirmVerb='Save and Publish'
-        onCancel={hideModal}
-        onConfirm={onConfirm}
-      />
+          <span>Save and Publish</span>
+        </UnstyledLink>
+      }
     </div>
   );
 };
+
+export default SaveAndPublish;
