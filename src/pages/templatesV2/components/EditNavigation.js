@@ -18,6 +18,8 @@ const EditNavigation = ({ primaryArea }) => {
             })}
             key={key}
             onClick={() => { setNavigation(key); }}
+            to="javascript:void(0)"
+            role="button"
           >
             {content}
           </UnstyledLink>
