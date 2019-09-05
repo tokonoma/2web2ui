@@ -9,8 +9,8 @@ import { Helmet } from 'react-helmet';
  */
 export const Layout = ({ children, location }) => {
   const route = findRouteByPath(location.pathname);
-
   const LayoutComponent = route.layout || Form;
+
   return (
     <LayoutComponent>
       {route.title && <Helmet><title>{route.title} | SparkPost</title></Helmet>}
