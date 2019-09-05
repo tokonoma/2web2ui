@@ -10,13 +10,15 @@ import styles from './PlanSelect.module.scss';
 export const SelectedPlan = ({ plan, onChange }) => (
   <Panel title='Your New Plan'>
     <Panel.Section>
-      <div className={styles.Title}>{PLAN_TIERS[plan.tier]}</div>
-      <div className={styles.PlanRow}>
-        <div className={cx(styles.SelectedPlan, styles.Plan)}>
-          <PlanPrice showOverage showIp showCsm plan={plan} />
-        </div>
-        <div>
-          <Button onClick={() => onChange()} size='small' flat color='orange'>Change</Button>
+      <div className={styles.SelectedPlan}>
+        <div className={styles.tierLabel}>{PLAN_TIERS[plan.tier]}</div>
+        <div className={styles.PlanRow}>
+          <div>
+            <PlanPrice showOverage showIp showCsm plan={plan} />
+          </div>
+          <div>
+            <Button onClick={() => onChange()} size='small' flat color='orange'>Change</Button>
+          </div>
         </div>
       </div>
     </Panel.Section>

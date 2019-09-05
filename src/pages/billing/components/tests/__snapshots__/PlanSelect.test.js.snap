@@ -149,43 +149,45 @@ exports[`Selected Plan: should render plan price with the plan 1`] = `
 >
   <Panel.Section>
     <div
-      className="Title"
-    >
-      Starter
-    </div>
-    <div
-      className="PlanRow"
+      className="SelectedPlan"
     >
       <div
-        className="SelectedPlan Plan"
+        className="tierLabel"
       >
-        <PlanPrice
-          plan={
-            Object {
-              "code": "2",
-              "includesIp": false,
-              "isFree": true,
-              "monthly": 0,
-              "name": "Two",
-              "overage": 0.2,
-              "tier": "starter",
-              "volume": 2,
-            }
-          }
-          showCsm={true}
-          showIp={true}
-          showOverage={true}
-        />
+        Starter
       </div>
-      <div>
-        <Button
-          color="orange"
-          flat={true}
-          onClick={[Function]}
-          size="small"
-        >
-          Change
-        </Button>
+      <div
+        className="PlanRow"
+      >
+        <div>
+          <PlanPrice
+            plan={
+              Object {
+                "code": "2",
+                "includesIp": false,
+                "isFree": true,
+                "monthly": 0,
+                "name": "Two",
+                "overage": 0.2,
+                "tier": "starter",
+                "volume": 2,
+              }
+            }
+            showCsm={true}
+            showIp={true}
+            showOverage={true}
+          />
+        </div>
+        <div>
+          <Button
+            color="orange"
+            flat={true}
+            onClick={[Function]}
+            size="small"
+          >
+            Change
+          </Button>
+        </div>
       </div>
     </div>
   </Panel.Section>
