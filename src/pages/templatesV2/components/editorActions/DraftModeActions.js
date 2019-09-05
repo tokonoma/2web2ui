@@ -54,7 +54,6 @@ const DraftModeActions = () => {
           }
         >
           <div className={styles.ActionsBody}>
-            {/* TODO: bring <ConfirmationModal/> up to this level vs. <SaveAndPublish/> component */}
             <SaveAndPublish
               className={styles.ActionItem}
               onClick={handleSaveAndPublishClick}

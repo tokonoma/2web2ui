@@ -15,6 +15,7 @@ export default ({ className, onClick }) => {
     updateDraft({ id: draft.id, content }, draft.subaccount_id);
   });
 
+  // TODO: User needs feedback (i.e., `showAlert`) when save is successful
   return (
     <div className={className}>
       <UnstyledLink onClick={handleClick} to="javascript:void(0);" role="button">
