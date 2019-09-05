@@ -7,7 +7,7 @@ describe('DuplicateTemplate', () => {
     const mockFn = jest.fn();
     const wrapper = shallow(<DuplicateTemplate onClick={mockFn}/>);
 
-    wrapper.find('UnstyledLink').simulate('click');
+    wrapper.childAt(0).simulate('click');
 
     expect(mockFn).toHaveBeenCalled();
   });
@@ -15,6 +15,6 @@ describe('DuplicateTemplate', () => {
   it('Renders with the passed in `className`', () => {
     const wrapper = shallow(<DuplicateTemplate className="foobar"/>);
 
-    expect(wrapper.find('div').props().className).toEqual('foobar');
+    expect(wrapper.find('.foobar')).toExist();
   });
 });
