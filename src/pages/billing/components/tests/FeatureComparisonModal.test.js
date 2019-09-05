@@ -1,8 +1,19 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { renderCell, HeaderRow, GroupHeading, Row } from '../FeatureComparisonModal';
+import ComparisonModal, { renderCell, HeaderRow, GroupHeading, Row } from '../FeatureComparisonModal';
 import { PLANS } from '../../constants';
 describe('FeatureComparisonModal: ', () => {
+  describe('ComparisonModal: ', () => {
+    const props = {
+      open: true,
+      handleClose: jest.fn()
+    };
+    it('should render correctly', () => {
+      const wrapper = shallow(<ComparisonModal {...props}/>);
+      expect(wrapper).toMatchSnapshot();
+    });
+
+  });
   describe('Row: ', () => {
     const props = {
       featureName: 'Signals Predictive Analytics',

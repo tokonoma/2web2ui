@@ -1,5 +1,249 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`FeatureComparisonModal:  ComparisonModal:  should render correctly 1`] = `
+<Modal
+  onClose={[MockFunction]}
+  open={true}
+  showCloseButton={true}
+>
+  <Panel>
+    <div
+      className="FeatureComparisonTable"
+    >
+      <Table>
+        <tbody>
+          <HeaderRow
+            plans={
+              Array [
+                "Test Account",
+                "Starter Plans",
+                "Premier Plans",
+              ]
+            }
+          />
+        </tbody>
+      </Table>
+      <Table
+        key="Standard Features"
+      >
+        <tbody>
+          <GroupHeading
+            colSpan={4}
+            groupName="Standard Features"
+          />
+          <Row
+            Premier Plans={true}
+            Starter Plans={true}
+            Test Account={true}
+            featureName="Signals Predictive Analytics"
+            key="Signals Predictive Analytics"
+          />
+          <Row
+            Premier Plans={true}
+            Starter Plans={true}
+            Test Account={true}
+            featureName="Spam Trap Monitoring"
+            key="Spam Trap Monitoring"
+          />
+          <Row
+            Premier Plans={true}
+            Starter Plans={true}
+            Test Account={true}
+            featureName="Engagement Insights"
+            key="Engagement Insights"
+          />
+          <Row
+            Premier Plans="50"
+            Starter Plans="10"
+            Test Account={true}
+            featureName="Sending Domains"
+            key="Sending Domains"
+          />
+          <Row
+            Premier Plans="50"
+            Starter Plans="10"
+            Test Account={true}
+            featureName="Bounce Domains"
+            key="Bounce Domains"
+          />
+          <Row
+            Premier Plans="25"
+            Starter Plans="5"
+            Test Account={true}
+            featureName="Tracking Domains"
+            key="Tracking Domains"
+          />
+          <Row
+            Premier Plans="10 days"
+            Starter Plans="5 days"
+            Test Account="10 days"
+            featureName="Searchable Email Event Data"
+            key="Searchable Email Event Data"
+          />
+        </tbody>
+      </Table>
+      <Table
+        key="Advanced Settings"
+      >
+        <tbody>
+          <GroupHeading
+            colSpan={4}
+            groupName="Advanced Settings"
+          />
+          <Row
+            Premier Plans="30 days"
+            Starter Plans="3 days"
+            Test Account="30 days"
+            featureName="Scheduled Sending"
+            key="Scheduled Sending"
+          />
+          <Row
+            Premier Plans="5"
+            Starter Plans="2"
+            Test Account={true}
+            featureName="Custom Webhooks"
+            key="Custom Webhooks"
+          />
+          <Row
+            Premier Plans={true}
+            Starter Plans={false}
+            Test Account={true}
+            featureName="Inbound Email Webhooks"
+            key="Inbound Email Webhooks"
+          />
+          <Row
+            Premier Plans={true}
+            Starter Plans={false}
+            Test Account={true}
+            featureName="Real Time Alerts"
+            key="Real Time Alerts"
+          />
+          <Row
+            Premier Plans="1 
+ with the option to buy more"
+            Starter Plans={false}
+            Test Account={false}
+            featureName="Dedicated IP Address"
+            key="Dedicated IP Address"
+          />
+          <Row
+            Premier Plans={true}
+            Starter Plans={false}
+            Test Account={false}
+            featureName="IP Pools"
+            key="IP Pools"
+          />
+          <Row
+            Premier Plans={true}
+            Starter Plans={false}
+            Test Account={false}
+            featureName="Automated IP Warmup"
+            key="Automated IP Warmup"
+          />
+        </tbody>
+      </Table>
+      <Table
+        key="Content and Recipients"
+      >
+        <tbody>
+          <GroupHeading
+            colSpan={4}
+            groupName="Content and Recipients"
+          />
+          <Row
+            Premier Plans={true}
+            Starter Plans="10"
+            Test Account={true}
+            featureName="Advanced Templates"
+            key="Advanced Templates"
+          />
+          <Row
+            Premier Plans={true}
+            Starter Plans="10"
+            Test Account={true}
+            featureName="Snippets"
+            key="Snippets"
+          />
+          <Row
+            Premier Plans={true}
+            Starter Plans={true}
+            Test Account={true}
+            featureName="Dynamic AMP Emails"
+            key="Dynamic AMP Emails"
+          />
+          <Row
+            Premier Plans="10"
+            Starter Plans={false}
+            Test Account={true}
+            featureName="AB Testing"
+            key="AB Testing"
+          />
+          <Row
+            Premier Plans={true}
+            Starter Plans="10"
+            Test Account={true}
+            featureName="Recipient Lists"
+            key="Recipient Lists"
+          />
+        </tbody>
+      </Table>
+      <Table
+        key="Account Management and Support"
+      >
+        <tbody>
+          <GroupHeading
+            colSpan={4}
+            groupName="Account Management and Support"
+          />
+          <Row
+            Premier Plans="15 Active"
+            Starter Plans={false}
+            Test Account={true}
+            featureName="Subaccounts"
+            key="Subaccounts"
+          />
+          <Row
+            Premier Plans={true}
+            Starter Plans={true}
+            Test Account="30 days"
+            featureName="Online Support"
+            key="Online Support"
+          />
+          <Row
+            Premier Plans={true}
+            Starter Plans={false}
+            Test Account={false}
+            featureName="Phone Support"
+            key="Phone Support"
+          />
+          <Row
+            Premier Plans="Above 5M plans only"
+            Starter Plans={false}
+            Test Account={false}
+            featureName="Customer support manager (CSM)"
+            key="Customer support manager (CSM)"
+          />
+          <Row
+            Premier Plans={true}
+            Starter Plans={false}
+            Test Account={true}
+            featureName="Single Sign-On"
+            key="Single Sign-On"
+          />
+          <Row
+            Premier Plans={true}
+            Starter Plans={false}
+            Test Account={true}
+            featureName="Advanced Security Features"
+            key="Advanced Security Features"
+          />
+        </tbody>
+      </Table>
+    </div>
+  </Panel>
+</Modal>
+`;
+
 exports[`FeatureComparisonModal:  GroupHeading:  should render correctly 1`] = `
 <Table.Row>
   <Table.HeaderCell
