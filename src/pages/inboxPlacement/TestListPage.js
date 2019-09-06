@@ -34,14 +34,14 @@ const filterBoxConfig = {
     </div>)
 };
 
-const FilterSortCollectionRow = ({ id, status, subject, test_name, from_address, start_time, end_time, placement }, iterator) => (
+const FilterSortCollectionRow = ({ id, status, subject, test_name, from_address, start_time, end_time, placement }) => (
   [
     <Table.Row
-      key={iterator}
+      key={id}
       className={styles.TableRow}
       rowData={[
-        <div className = {styles.TabbedCellBody}>
-          <div className = {styles.SubjectContainer}>
+        <div className={styles.TabbedCellBody}>
+          <div className={styles.SubjectContainer}>
             <div className={styles.TooltipWrapper}>
               <Tooltip
                 disabled={status === STATUS.COMPLETED}
@@ -59,16 +59,17 @@ const FilterSortCollectionRow = ({ id, status, subject, test_name, from_address,
                 <strong>{subject}</strong>
               </PageLink>
             </div>
-            <div className = {styles.TestName}>
-              {test_name &&
-                <span id={'testName'}>
+            <div className={styles.TestName}>
+              {test_name && (
+                <>
                   <strong>{test_name}</strong>
-                  <strong className = {styles.Divider}>{'|'}</strong>
-                </span>}
-              <span id={'fromAddress'}>{from_address}</span>
+                  <strong className={styles.Divider}>{'|'}</strong>
+                </>
+              )}
+              <span>{from_address}</span>
             </div>
-            <div className = {styles.TestSchedule}>
-              <span ><Schedule className={styles.ScheduleIcon}/></span>
+            <div className={styles.TestSchedule}>
+              <span><Schedule className={styles.ScheduleIcon}/></span>
               <span>{formatScheduleLine(status, start_time, end_time)}</span>
             </div>
           </div>

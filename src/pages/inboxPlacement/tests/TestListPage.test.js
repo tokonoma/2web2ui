@@ -5,7 +5,6 @@ import { tests } from './mockTests';
 import { TestListPage } from '../TestListPage';
 
 describe('Page: Test List', () => {
-
   const subject = ({ ...props }) => {
     const defaults = {
       testsError: false,
@@ -13,6 +12,7 @@ describe('Page: Test List', () => {
       tests: [],
       listTests: jest.fn()
     };
+
     return shallow(<TestListPage {...defaults} {...props} />);
   };
 
@@ -45,26 +45,22 @@ describe('Page: Test List', () => {
   });
 
   describe('Test Name:', () => {
-
-    const renderFirstColumn = (rowProps) => {
+    const renderFirstColumn = (props) => {
       const wrapper = subject();
-      const rowFn = wrapper.find('FilterSortCollection').prop('rowComponent');
-      const row = rowFn(rowProps)[0];
-      return shallow(shallow(row).prop('children')[0]);
+      const Rows = wrapper.find('FilterSortCollection').prop('rowComponent');
+      const Row = () => shallow(<Rows {...tests[0]} {...props} />).prop('rowData');
+
+      return shallow(<Row />);
     };
 
     it('render test name and divider if test name exists', () => {
-      const firstColumn = renderFirstColumn(tests[0]);
-      const spanTexts = firstColumn.find('span');
-      expect(spanTexts.someWhere((text) => (text).text().includes(tests[0].test_name))).toEqual(true);
+      const wrapper = renderFirstColumn();
+      expect(wrapper.at(0)).toIncludeText(tests[0].test_name);
     });
 
     it('doest not render test name and divider if test name does not exist', () => {
-      const { test_name, ...testWithoutName } = tests[0];
-      const firstColumn = renderFirstColumn(testWithoutName);
-      const spanTexts = firstColumn.find('span');
-      expect(spanTexts.someWhere((text) => (text).text().includes(tests[0].from_address))).toEqual(true);
-      expect(spanTexts.someWhere((text) => (text).text().includes(tests[0].test_name))).toEqual(false);
+      const wrapper = renderFirstColumn({ test_name: undefined });
+      expect(wrapper.at(0)).not.toIncludeText('|');
     });
   });
 });
