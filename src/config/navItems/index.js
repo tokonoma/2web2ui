@@ -1,8 +1,8 @@
 import { Home, InsertChart, Code, MailOutline, Language, Compare, NotificationsActive, Signal, VerifiedUser } from '@sparkpost/matchbox-icons';
 
-import campaignNavItems from './campaignNavItems';
-import settingsNavItems from './settingsNavItems';
-import inboxPlacementNavItems from './inboxPlacementNavItems';
+import campaign from './campaign';
+import settings from './settings';
+import inboxPlacement from './inboxPlacement';
 
 export default [
   {
@@ -66,9 +66,7 @@ export default [
       }
     ]
   },
-  {
-    ...campaignNavItems
-  },
+  campaign,
   //TODO remove it in TR-1455
   {
     label: 'Templates',
@@ -107,9 +105,7 @@ export default [
     to: '/webhooks',
     icon: Language
   },
-  {
-    ...settingsNavItems
-  },
+  settings,
   {
     label: 'Alerts',
     to: '/alerts',
@@ -124,7 +120,5 @@ export default [
     divider: true,
     icon: Code
   },
-  {
-    ...inboxPlacementNavItems
-  }
+  inboxPlacement
 ];

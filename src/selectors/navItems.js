@@ -2,7 +2,7 @@ import { createSelector } from 'reselect';
 import _ from 'lodash';
 import routes from 'src/config/routes';
 import navItems from 'src/config/navItems';
-import accountNavItems from 'src/config/accountNavItems';
+import accountNavItems from 'src/config/navItems/account';
 import selectAccessConditionState from './accessConditionState';
 import { all } from 'src/helpers/conditions/compose';
 
