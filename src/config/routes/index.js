@@ -747,7 +747,7 @@ const routes = [
   {
     path: '/recipient-validation/:category',
     component: RecipientValidationPage,
-    condition: hasGrants('recipient-validation/manage'),
+    condition: hasGrants('recipient-validation/manage'), // must manual keep in sync with nav item
     layout: App,
     title: 'Recipient Validation',
     supportDocsSearch: 'Recipient Validation'

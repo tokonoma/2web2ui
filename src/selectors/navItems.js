@@ -11,7 +11,7 @@ export const mapNavToRoutes = _.memoize((items) => {
   return items.map((item) => {
     item.route = routesByPath[item.to];
     if (item.children) {
-      item = { ...item, children: mapNavToRoutes(item.children) };
+      item.children = mapNavToRoutes(item.children);
     }
     return item;
   });
