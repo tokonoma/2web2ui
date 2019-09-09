@@ -10,7 +10,8 @@ describe('Component: TestDetails', () => {
       details: {
         start_time: '2019-07-08T15:49:56.954Z',
         end_time: null,
-        subject: 'Fooo'
+        subject: 'Fooo',
+        test_name: 'Baz'
       },
       placementsByProvider: []
     };
@@ -19,6 +20,16 @@ describe('Component: TestDetails', () => {
 
   it('renders correctly', () => {
     expect(subject()).toMatchSnapshot();
+  });
+
+  it('renders test name as None when it does not exist', () => {
+    const detailsWithoutName = {
+      start_time: '2019-07-08T15:49:56.954Z',
+      end_time: null,
+      subject: 'Fooo'
+    };
+    const wrapper = subject({ details: detailsWithoutName });
+    expect(wrapper.find('InfoBlock').at(3)).toHaveProp('value', 'None');
   });
 
   it('renders providers breakdown correctly', () => {
