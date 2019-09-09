@@ -76,8 +76,12 @@ export function getPrecision(from, to = moment()) {
   return precisionMap.find(({ time }) => diff <= time).value;
 }
 
-export function getMomentPrecision(precision) {
-  return (indexedPrecisions[precision].time <= (60 * 24)) ? 'minutes' : 'hours';
+export function getMomentPrecision(from, to = moment()) {
+  const diff = to.diff(from, 'minutes');
+  if (diff <= (60 * 24)) {
+    return 'minutes';
+  }
+  return diff <= (60 * 24 * 2) ? 'hours' : 'days';
 }
 
 export function getPrecisionType(precision) {
@@ -96,9 +100,9 @@ export function roundBoundaries(fromInput, toInput) {
   const to = moment(toInput);
 
   const precision = getPrecision(from, to);
-  const momentPrecision = getMomentPrecision(precision);
+  const momentPrecision = getMomentPrecision(from, to);
   // extract rounding interval from precision query param value
-  const roundInt = _.parseInt(_.words(precision)[0]) || 1;
+  const roundInt = (momentPrecision === 'minutes') ? parseInt(precision.replace('min', '')) : 1;
 
   floorMoment(from, roundInt, momentPrecision);
   // if we're only at a minute precision, don't round up to the next minute
