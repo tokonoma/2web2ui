@@ -72,6 +72,27 @@ describe('Component: DatePicker ManualEntryForm', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  it('should disable time picker if precision is day (time difference > 2 days)', () => {
+    wrapper.setProps({
+      from: moment('2018-01-10T10:00:00'),
+      to: moment('2018-01-15T14:00:00')
+    });
+    wrapper.update();
+    expect(wrapper.find({ id: 'fromTime' })).toHaveProp('disabled', true);
+    expect(wrapper.find({ id: 'toTime' })).toHaveProp('disabled', true);
+  });
+
+  it('should enable time picker if precision is minutes or hours (time difference <= 2 days)', () => {
+    mockTo = moment('2018-01-12T10:00:00');
+    wrapper.setProps({
+      from: moment('2018-01-10T10:00:00'),
+      to: moment('2018-01-12T10:00:00')
+    });
+    wrapper.update();
+    expect(wrapper.find({ id: 'fromTime' })).toHaveProp('disabled', false);
+    expect(wrapper.find({ id: 'toTime' })).toHaveProp('disabled', false);
+  });
+
   it('should handle a field change', () => {
     const event = { target: { id: 'fromDate', value: '2018-04-15' }};
 

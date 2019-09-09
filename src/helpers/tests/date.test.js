@@ -75,7 +75,7 @@ describe('Date helpers', () => {
   describe('getRelativeDates', () => {
 
     cases('calculations', ({ range, roundToPrecision, subtractArgs }) => {
-      const date = moment(new Date('2017-12-17T12:00:00')).utc();
+      const date = moment(new Date('2017-12-17T12:00:00'));
       Date.now = jest.fn(() => date);
       const { from, to, relativeRange } = getRelativeDates(range, { roundToPrecision });
       let expectedFrom = moment(date.toDate()).subtract(...subtractArgs);
@@ -105,7 +105,7 @@ describe('Date helpers', () => {
     });
 
     it('should default to rounding the range', () => {
-      const date = moment(new Date('2017-12-17T12:00:00')).utc();
+      const date = moment(new Date('2017-12-17T12:00:00'));
       Date.now = jest.fn(() => date);
       const { from: expectedFrom, to: expectedTo } = roundBoundaries(moment(date.toDate()).subtract(7, 'days'), date);
       const { from, to, relativeRange } = getRelativeDates('7days');

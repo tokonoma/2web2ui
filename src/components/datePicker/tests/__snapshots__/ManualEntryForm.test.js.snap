@@ -23,6 +23,7 @@ exports[`Component: DatePicker ManualEntryForm should not show precision when ro
     </Grid.Column>
     <Grid.Column>
       <TextField
+        disabled={false}
         id="fromTime"
         label="From Time"
         labelHidden={true}
@@ -58,6 +59,7 @@ exports[`Component: DatePicker ManualEntryForm should not show precision when ro
     </Grid.Column>
     <Grid.Column>
       <TextField
+        disabled={false}
         id="toTime"
         label="To Time"
         labelHidden={true}
@@ -96,6 +98,7 @@ exports[`Component: DatePicker ManualEntryForm should render correctly by defaul
     </Grid.Column>
     <Grid.Column>
       <TextField
+        disabled={true}
         id="fromTime"
         label="From Time"
         labelHidden={true}
@@ -131,6 +134,7 @@ exports[`Component: DatePicker ManualEntryForm should render correctly by defaul
     </Grid.Column>
     <Grid.Column>
       <TextField
+        disabled={true}
         id="toTime"
         label="To Time"
         labelHidden={true}
@@ -175,6 +179,7 @@ exports[`Component: DatePicker ManualEntryForm should sync props to state 1`] = 
     </Grid.Column>
     <Grid.Column>
       <TextField
+        disabled={true}
         id="fromTime"
         label="From Time"
         labelHidden={true}
@@ -210,6 +215,7 @@ exports[`Component: DatePicker ManualEntryForm should sync props to state 1`] = 
     </Grid.Column>
     <Grid.Column>
       <TextField
+        disabled={true}
         id="toTime"
         label="To Time"
         labelHidden={true}
@@ -254,6 +260,7 @@ exports[`Component: DatePicker ManualEntryForm should update state from new prop
     </Grid.Column>
     <Grid.Column>
       <TextField
+        disabled={true}
         id="fromTime"
         label="From Time"
         labelHidden={true}
@@ -289,6 +296,7 @@ exports[`Component: DatePicker ManualEntryForm should update state from new prop
     </Grid.Column>
     <Grid.Column>
       <TextField
+        disabled={true}
         id="toTime"
         label="To Time"
         labelHidden={true}
