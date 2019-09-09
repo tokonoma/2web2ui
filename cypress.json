@@ -5,5 +5,6 @@
     "*pendo.io",
     "*siftscience.com",
     "*googletagmanager.com"
-  ]
+  ],
+  "integrationFolder": "cypress/tests"
 }
