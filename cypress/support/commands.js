@@ -23,3 +23,12 @@
 //
 // -- This is will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+
+/* eslint-disable no-undef */
+// TODO: refactor to use `cy.request()` to log in programmatically instead of via UI interaction
+Cypress.Commands.add('login', () => {
+  cy.visit('/');
+  cy.get('[name="username"]').type(Cypress.env('USERNAME'));
+  cy.get('[name="password"]').type(Cypress.env('PASSWORD'));
+  cy.get('button[type="submit"]').click();
+});

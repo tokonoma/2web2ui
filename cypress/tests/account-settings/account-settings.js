@@ -3,11 +3,7 @@
 /* eslint-disable no-undef */
 describe('Account settings', () => {
   it('is accessible via the user popover in the header', () => {
-    // TODO: refactor to use `cy.request()` to log in programmatically instead of via UI interaction
-    cy.visit('/');
-    cy.get('[name="username"]').type(Cypress.env('USERNAME'));
-    cy.get('[name="password"]').type(Cypress.env('PASSWORD'));
-    cy.get('button[type="submit"]').click();
+    cy.login();
     cy.contains('appteam@messagesystems.com').click();
     cy.contains('Account Settings').click();
     cy.url().should('include', 'settings');
