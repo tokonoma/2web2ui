@@ -19,7 +19,19 @@ describe('.shapeContent', () => {
     expect(shapeContent({ reply_to: 'test@example.com' })).toHaveProperty('reply_to');
   });
 
-  it('should return content object without reply_to key', () => {
-    expect(shapeContent({ reply_to: '' })).not.toHaveProperty('reply_to');
+  it('should return content object without `reply_to` key', () => {
+    expect(shapeContent({ reply_to: '' }).reply_to).toBeNull();
+  });
+
+  it('should return content object without `amp_html` key', () => {
+    expect(shapeContent({ amp_html: '' }).amp_html).toBeNull();
+  });
+
+  it('should return content object without `text` key', () => {
+    expect(shapeContent({ text: '' }).text).toBeNull();
+  });
+
+  it('should return content object without `html` key', () => {
+    expect(shapeContent({ html: '' }).html).toBeNull();
   });
 });

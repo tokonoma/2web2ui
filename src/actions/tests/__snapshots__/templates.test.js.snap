@@ -82,7 +82,12 @@ Array [
   Object {
     "meta": Object {
       "data": Object {
-        "content": Object {},
+        "content": Object {
+          "amp_html": null,
+          "html": null,
+          "reply_to": null,
+          "text": null,
+        },
         "form": "data",
         "id": "id",
         "shared_with_subaccounts": false,
@@ -233,7 +238,12 @@ Array [
         "id": "id",
       },
       "data": Object {
-        "content": Object {},
+        "content": Object {
+          "amp_html": null,
+          "html": null,
+          "reply_to": null,
+          "text": null,
+        },
         "form": "data",
       },
       "headers": Object {},
