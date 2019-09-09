@@ -1,7 +1,30 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import ComparisonModal, { renderCell, HeaderRow, GroupHeading, Row } from '../FeatureComparisonModal';
-import { PLANS } from '../../constants';
+jest.mock('src/pages/billing/constants', () => ({
+  FEATURE_COMPARISON: {
+    featureGroup1: {
+      'featureA': {
+        PLANA: true,
+        PLANB: '15 days',
+        PLANC: 'test /n string'
+      }
+    },
+    featureGroup2: {
+      'featureA': {
+        PLANA: true,
+        PLANB: '15 days',
+        PLANC: 'test /n string'
+      }
+    }
+  },
+  PLANS: [
+    'PLANA',
+    'PLANB',
+    'PLANC'
+  ]
+}));
+const PLANS = ['PLANA','PLANB','PLANC'];
 describe('FeatureComparisonModal: ', () => {
   describe('ComparisonModal: ', () => {
     const props = {
