@@ -20,7 +20,7 @@ export class AccountDropdown extends Component {
   renderActivator = () => (
     <WindowSizeContext.Consumer>
       {({ mobile }) => (
-        <UnstyledLink className={styles.Email} onClick={this.toggleDropdown}>
+        <UnstyledLink className={styles.Email} onClick={this.toggleDropdown} to="javascript:void(0)" role="button">
           {(mobile || !this.props.email) ? <Person size={24}/> : <Fragment>{this.props.email} <ArrowDropDown/></Fragment>}
         </UnstyledLink>
       )}
@@ -29,7 +29,7 @@ export class AccountDropdown extends Component {
 
   getItems() {
     const { accountNavItems, dispatch } = this.props;
-    const items = accountNavItems.map(({ action, label, external, condition, icon: Icon, labs, to, ...rest }) => {
+    const items = accountNavItems.map(({ action, label, external, icon: Icon, labs, to, ...rest }) => {
       const labsMarkup = labs
         ? <div className={styles.FloatIcon}><Tag color='blue'>LABS</Tag></div>
         : null;
