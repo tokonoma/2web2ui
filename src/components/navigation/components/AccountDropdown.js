@@ -20,7 +20,7 @@ export class AccountDropdown extends Component {
   renderActivator = () => (
     <WindowSizeContext.Consumer>
       {({ mobile }) => (
-        <UnstyledLink className={styles.Email} onClick={this.toggleDropdown}>
+        <UnstyledLink className={styles.Email} onClick={this.toggleDropdown} to="javascript:void(0)" role="button">
           {(mobile || !this.props.email) ? <Person size={24}/> : <Fragment>{this.props.email} <ArrowDropDown/></Fragment>}
         </UnstyledLink>
       )}
