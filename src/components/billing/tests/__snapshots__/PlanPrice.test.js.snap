@@ -2,10 +2,10 @@
 
 exports[`PlanPrice allows class name overriding 1`] = `
 <span
-  className="notranslate"
+  className="notranslate abcd-class"
 >
   <span
-    className="abcd-class"
+    className="MainLabel"
   >
     <strong>
       50,000
@@ -23,7 +23,7 @@ exports[`PlanPrice allows class name overriding 1`] = `
     </span>
   </span>
   <span
-    className="abcd-class"
+    className="SupportLabel"
   />
 </span>
 `;
