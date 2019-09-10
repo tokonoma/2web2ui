@@ -4,6 +4,7 @@ import { Check } from '@sparkpost/matchbox-icons';
 import { PLAN_TIERS } from 'src/constants';
 import PlanPrice from 'src/components/billing/PlanPrice';
 import cx from 'classnames';
+import _ from 'lodash';
 
 import styles from './PlanSelect.module.scss';
 
@@ -26,25 +27,19 @@ export const SelectedPlan = ({ plan, onChange }) => (
 );
 
 const PlanSelectSection = ({ plans, currentPlan, onSelect }) => {
-  const TIERS = [
-    { key: 'default' },
-    { key: 'test', label: PLAN_TIERS.test },
-    { key: 'starter', label: PLAN_TIERS.starter },
-    { key: 'premier', label: PLAN_TIERS.premier }
-  ];
 
-  const planList = TIERS.map((tier) => {
-    const tierPlans = plans[tier.key];
+  const planList = _.map(PLAN_TIERS, (label, key) => {
+    const tierPlans = plans[key];
     if (!tierPlans) {
       return;
     }
 
     return (
-      <Panel.Section key={`tier_section_${tier.key}`}>
-        <div className={styles.tierLabel}>{tier.label}</div>
+      <Panel.Section key={`tier_section_${key}`}>
+        <div className={styles.tierLabel}>{label}</div>
         <div className={styles.tierPlans}>
           {
-            plans[tier.key].map((bundle) => {
+            plans[key].map((bundle) => {
               const isCurrentPlan = currentPlan.code === bundle.code;
               return (
                 <div className={cx(styles.PlanRow, isCurrentPlan && styles.SelectedPlan)} key={`plan_row_${bundle.code}`}>

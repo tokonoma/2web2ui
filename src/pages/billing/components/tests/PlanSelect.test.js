@@ -11,14 +11,6 @@ describe('Plan Select:', () => {
       code: '2'
     },
     plans: {
-      'default': [{
-        code: '1',
-        includesIp: true,
-        monthly: 100,
-        name: 'One',
-        overage: 0.1,
-        volume: 1
-      }],
       'test': [{
         code: '2',
         includesIp: false,
@@ -34,6 +26,14 @@ describe('Plan Select:', () => {
         name: 'Three',
         overage: 0.3,
         volume: 3
+      }],
+      'premier': [{
+        code: '4',
+        includesIp: true,
+        monthly: 400,
+        name: 'Four',
+        overage: 0.4,
+        volume: 4
       }]
     }
   };
@@ -54,7 +54,7 @@ describe('Selected Plan:', () => {
   const defaultProps = {
     onChange: jest.fn(),
     plan: {
-      tier: 'starter',
+      tier: 'test',
       code: '2',
       includesIp: false,
       monthly: 0,

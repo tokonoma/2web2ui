@@ -5,49 +5,6 @@ exports[`Plan Select: should render correctly 1`] = `
   title="Select a Plan"
 >
   <Panel.Section
-    key="tier_section_default"
-  >
-    <div
-      className="tierLabel"
-    />
-    <div
-      className="tierPlans"
-    >
-      <div
-        className="PlanRow"
-        key="plan_row_1"
-      >
-        <div>
-          <PlanPrice
-            plan={
-              Object {
-                "code": "1",
-                "includesIp": true,
-                "monthly": 100,
-                "name": "One",
-                "overage": 0.1,
-                "volume": 1,
-              }
-            }
-            showCsm={true}
-            showIp={true}
-            showOverage={true}
-          />
-        </div>
-        <div>
-          <Button
-            className="selectButton"
-            disabled={false}
-            onClick={[Function]}
-            size="small"
-          >
-            Select
-          </Button>
-        </div>
-      </div>
-    </div>
-  </Panel.Section>
-  <Panel.Section
     key="tier_section_test"
   >
     <div
@@ -140,6 +97,51 @@ exports[`Plan Select: should render correctly 1`] = `
       </div>
     </div>
   </Panel.Section>
+  <Panel.Section
+    key="tier_section_premier"
+  >
+    <div
+      className="tierLabel"
+    >
+      Premier
+    </div>
+    <div
+      className="tierPlans"
+    >
+      <div
+        className="PlanRow"
+        key="plan_row_4"
+      >
+        <div>
+          <PlanPrice
+            plan={
+              Object {
+                "code": "4",
+                "includesIp": true,
+                "monthly": 400,
+                "name": "Four",
+                "overage": 0.4,
+                "volume": 4,
+              }
+            }
+            showCsm={true}
+            showIp={true}
+            showOverage={true}
+          />
+        </div>
+        <div>
+          <Button
+            className="selectButton"
+            disabled={false}
+            onClick={[Function]}
+            size="small"
+          >
+            Select
+          </Button>
+        </div>
+      </div>
+    </div>
+  </Panel.Section>
 </Panel>
 `;
 
@@ -154,7 +156,7 @@ exports[`Selected Plan: should render plan price with the plan 1`] = `
       <div
         className="tierLabel"
       >
-        Starter
+        Test Account
       </div>
       <div
         className="PlanRow"
@@ -169,7 +171,7 @@ exports[`Selected Plan: should render plan price with the plan 1`] = `
                 "monthly": 0,
                 "name": "Two",
                 "overage": 0.2,
-                "tier": "starter",
+                "tier": "test",
                 "volume": 2,
               }
             }
