@@ -28,42 +28,35 @@ export const SelectedPlan = ({ plan, onChange }) => (
 
 const PlanSelectSection = ({ plans, currentPlan, onSelect }) => {
 
-  const planList = _.map(PLAN_TIERS, (label, key) => {
-    const tierPlans = plans[key];
-    if (!tierPlans) {
-      return;
-    }
-
-    return (
-      <Panel.Section key={`tier_section_${key}`}>
-        <div className={styles.tierLabel}>{label}</div>
-        <div className={styles.tierPlans}>
-          {
-            plans[key].map((bundle) => {
-              const isCurrentPlan = currentPlan.code === bundle.code;
-              return (
-                <div className={cx(styles.PlanRow, isCurrentPlan && styles.SelectedPlan)} key={`plan_row_${bundle.code}`}>
-                  <div>
-                    {isCurrentPlan && <Check className={styles.CheckIcon}/>}
-                    <PlanPrice showOverage showIp showCsm plan={bundle} />
-                  </div>
-                  <div>
-                    <Button
-                      className={styles.selectButton}
-                      disabled={isCurrentPlan}
-                      onClick={() => onSelect(bundle)}
-                      size='small'>
-                        Select
-                    </Button>
-                  </div>
+  const planList = _.map(PLAN_TIERS, (label, key) => (
+    <Panel.Section key={`tier_section_${key}`}>
+      <div className={styles.tierLabel}>{label}</div>
+      <div className={styles.tierPlans}>
+        {
+          plans[key].map((bundle) => {
+            const isCurrentPlan = currentPlan.code === bundle.code;
+            return (
+              <div className={cx(styles.PlanRow, isCurrentPlan && styles.SelectedPlan)} key={`plan_row_${bundle.code}`}>
+                <div>
+                  {isCurrentPlan && <Check className={styles.CheckIcon}/>}
+                  <PlanPrice showOverage showIp showCsm plan={bundle} />
                 </div>
-              );
-            })
-          }
-        </div>
-      </Panel.Section>
-    );
-  });
+                <div>
+                  <Button
+                    className={styles.selectButton}
+                    disabled={isCurrentPlan}
+                    onClick={() => onSelect(bundle)}
+                    size='small'>
+                      Select
+                  </Button>
+                </div>
+              </div>
+            );
+          })
+        }
+      </div>
+    </Panel.Section>
+  ));
 
   return (
     <Panel title='Select a Plan'>
