@@ -44,7 +44,7 @@ const PlanPrice = ({ plan, showOverage = false, showIp = false, showCsm = false,
           </span>
           : <span> FREE </span>}
       </span>
-      <span className={styles.SupportLabel}>
+      <span className={styles.SupportLabel} {...rest}>
         {showOverage && overage}
         {showIp && ip}
       </span>
