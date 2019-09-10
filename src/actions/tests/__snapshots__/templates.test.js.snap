@@ -82,7 +82,12 @@ Array [
   Object {
     "meta": Object {
       "data": Object {
-        "content": Object {},
+        "content": Object {
+          "amp_html": undefined,
+          "html": undefined,
+          "reply_to": undefined,
+          "text": undefined,
+        },
         "form": "data",
         "id": "id",
         "shared_with_subaccounts": false,
@@ -233,7 +238,12 @@ Array [
         "id": "id",
       },
       "data": Object {
-        "content": Object {},
+        "content": Object {
+          "amp_html": undefined,
+          "html": undefined,
+          "reply_to": undefined,
+          "text": undefined,
+        },
         "form": "data",
       },
       "headers": Object {},
