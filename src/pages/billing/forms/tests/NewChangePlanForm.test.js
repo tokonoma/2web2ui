@@ -5,7 +5,7 @@ import { shallow, mount } from 'enzyme';
 describe('Change Plan Form', () => {
   const defaultProps = {
     plans: {
-      'default': [{
+      'test': [{
         code: '1',
         includesIp: true,
         monthly: 100,
@@ -13,7 +13,7 @@ describe('Change Plan Form', () => {
         overage: 0.1,
         volume: 1
       }],
-      'test': [{
+      'starter': [{
         code: '2',
         includesIp: false,
         monthly: 0,
@@ -22,7 +22,7 @@ describe('Change Plan Form', () => {
         volume: 2,
         isFree: true
       }],
-      'starter': [{
+      'premier': [{
         code: '3',
         monthly: 300,
         name: 'Three',
@@ -31,7 +31,7 @@ describe('Change Plan Form', () => {
       }]
     },
     currentPlan: {
-      tier: 'starter',
+      tier: 'premier',
       code: '3',
       monthly: 300,
       name: 'Three',
