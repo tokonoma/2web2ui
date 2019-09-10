@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CurrentPlanSection renders correctly 1`] = `
+<Panel
+  title="Current Plan"
+>
+  <Panel.Section
+    className="currentPlan"
+  >
+    <div
+      className="Title"
+    >
+      Starter
+    </div>
+    <div
+      className="Plan"
+    >
+      <PlanPrice
+        plan={
+          Object {
+            "code": "big-code",
+            "monthly": 300,
+            "name": "Three",
+            "overage": 0.3,
+            "tier": "starter",
+            "volume": 3,
+          }
+        }
+        showCsm={true}
+        showIp={true}
+        showOverage={true}
+      />
+    </div>
+  </Panel.Section>
+</Panel>
+`;

@@ -3,12 +3,17 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Page } from '@sparkpost/matchbox';
 import { PendingPlanBanner } from './components/Banners';
-import ChangePlanForm from './forms/ChangePlanForm';
+import OldChangePlanForm from './forms/ChangePlanForm'; //TODO: Replace in AC-991
 import { canChangePlanSelector } from 'src/selectors/accountBillingInfo';
+import NewChangePlanForm from './forms/NewChangePlanForm';
+import { isAccountUiOptionSet } from 'src/helpers/conditions/account';
 
 export class ChangePlanPage extends Component {
 
   render() {
+    //TODO: Remove in AC-991
+    const ChangePlanForm = this.props.newChangePlan ? NewChangePlanForm : OldChangePlanForm;
+
     return (
       <Page breadcrumbAction={{ content: 'Back to billing', to: '/account/billing', Component: Link }}>
         <PendingPlanBanner account={this.props.account} />
@@ -20,7 +25,8 @@ export class ChangePlanPage extends Component {
 
 const mapStateToProps = (state) => ({
   account: state.account,
-  canChangePlan: canChangePlanSelector(state)
+  canChangePlan: canChangePlanSelector(state),
+  newChangePlan: isAccountUiOptionSet('account_feature_limits')(state)
 });
 
 export default connect(mapStateToProps)(ChangePlanPage);

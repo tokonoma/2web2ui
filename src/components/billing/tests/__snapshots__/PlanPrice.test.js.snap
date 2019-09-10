@@ -23,7 +23,7 @@ exports[`PlanPrice allows class name overriding 1`] = `
     </span>
   </span>
   <span
-    className="SupportLabel"
+    className="abcd-class"
   />
 </span>
 `;
