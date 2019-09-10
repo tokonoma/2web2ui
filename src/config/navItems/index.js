@@ -1,8 +1,18 @@
-import { Home, InsertChart, Code, MailOutline, Language, Compare, NotificationsActive, Signal, VerifiedUser } from '@sparkpost/matchbox-icons';
-
-import campaignNavItems from './campaignNavItems';
-import settingsNavItems from './settingsNavItems';
-import inboxPlacementNavItems from './inboxPlacementNavItems';
+import {
+  Home,
+  InsertChart,
+  Code,
+  MailOutline,
+  Language,
+  Compare,
+  NotificationsActive,
+  Signal,
+  VerifiedUser
+} from '@sparkpost/matchbox-icons';
+import { hasGrants } from 'src/helpers/conditions';
+import campaign from './campaign';
+import settings from './settings';
+import inboxPlacement from './inboxPlacement';
 
 export default [
   {
@@ -66,9 +76,7 @@ export default [
       }
     ]
   },
-  {
-    ...campaignNavItems
-  },
+  campaign,
   //TODO remove it in TR-1455
   {
     label: 'Templates',
@@ -98,6 +106,9 @@ export default [
   },
   {
     label: 'Recipient Validation',
+    // this route is a redirect, its condition is not correctly inherited, so this condition will
+    // need to be manually kept up to date
+    condition: hasGrants('recipient-validation/manage'),
     to: '/recipient-validation',
     icon: VerifiedUser,
     tag: 'new'
@@ -107,9 +118,7 @@ export default [
     to: '/webhooks',
     icon: Language
   },
-  {
-    ...settingsNavItems
-  },
+  settings,
   {
     label: 'Alerts',
     to: '/alerts',
@@ -124,7 +133,5 @@ export default [
     divider: true,
     icon: Code
   },
-  {
-    ...inboxPlacementNavItems
-  }
+  inboxPlacement
 ];
