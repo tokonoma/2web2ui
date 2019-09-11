@@ -1,15 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Button,
-  Modal,
   Panel,
   ComboBoxTextField,
+  Modal,
   TextField
 } from '@sparkpost/matchbox';
+import useEditorContext from '../hooks/useEditorContext';
 
 const SendTestEmail = (props) => {
   const { onClose } = props;
+  const { content, match } = useEditorContext();
+
+  /* eslint-disable no-console */
+  console.log(useEditorContext());
+
   const [toValue, setToValue] = useState(undefined);
+
+  useEffect(() => {
+    const templateId = match.params.id;
+
+    console.log(templateId);
+  });
+  /* eslint-enable no-console */
 
   return (
     <Modal
@@ -37,7 +50,7 @@ const SendTestEmail = (props) => {
             type="email"
             label="From:"
             disabled
-            value="GRAB THIS DATA" // TODO populate data
+            value={content.from.email}
           />
 
           <TextField
@@ -45,7 +58,7 @@ const SendTestEmail = (props) => {
             type="email"
             label="Subject:"
             disabled
-            value="GRAB THIS DATA TOO" // TODO populate data
+            value={content.subject}
           />
 
           <Button
