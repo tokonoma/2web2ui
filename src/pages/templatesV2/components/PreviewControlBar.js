@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
-import { UnstyledLink, ScreenReaderOnly } from '@sparkpost/matchbox';
+import { UnstyledLink, ScreenReaderOnly, Button } from '@sparkpost/matchbox';
 import { DesktopWindows, PhoneAndroid } from '@sparkpost/matchbox-icons';
 import useEditorContext from '../hooks/useEditorContext';
 import styles from './PreviewControlBar.module.scss';
@@ -34,6 +34,17 @@ const PreviewControlBar = () => {
 
           <ScreenReaderOnly>Mobile Preview</ScreenReaderOnly>
         </UnstyledLink>
+      </div>
+
+      <div>
+        <Button
+          flat
+          color="blue"
+          size="small"
+          title="Opens a dialog"
+        >
+          Send a Test
+        </Button>
       </div>
     </div>
   );

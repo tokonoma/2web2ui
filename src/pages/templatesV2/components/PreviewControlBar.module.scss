@@ -1,6 +1,9 @@
 @import '~@sparkpost/matchbox/src/styles/config.scss';
 
 .PreviewControlBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   border-bottom: 1px solid color(gray, 8);
   padding: 0 spacing();
   height: 100%;
