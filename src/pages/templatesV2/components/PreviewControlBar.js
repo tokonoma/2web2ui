@@ -16,12 +16,16 @@ const PreviewControlBar = () => {
           className={classNames(styles.PreviewDeviceButton, previewDevice === 'desktop' && styles.active)}
           id="preview-content-desktop-button"
           onClick={() => { setPreviewDevice('desktop'); }}
+          to="javascript:void(0);"
+          role="button"
         />
         <UnstyledLink
           children={<PhoneAndroid size={24} />}
           className={classNames(styles.PreviewDeviceButton, previewDevice === 'mobile' && styles.active)}
           id="preview-content-mobile-button"
           onClick={() => { setPreviewDevice('mobile'); }}
+          to="javascript:void(0);"
+          role="button"
         />
       </div>
     </div>

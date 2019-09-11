@@ -5,7 +5,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 50px; // must match height of left panel
+  height: 100%;
 }
 
 .PreviewDeviceToggle {
@@ -13,10 +13,29 @@
 }
 
 .PreviewDeviceButton {
+  height: 50px;
+  display: inline-flex;
+  align-items: center;
   color: color(gray, 4); // to match default text
   margin-right: spacing();
+  position: relative; // allows absolute positioning within
+
+  &:after {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    background-color: color(blue);
+    height: rem(4);
+    width: 100%;
+    display: none;
+  }
 
   &.active {
     color: color(blue);
+
+    &:after {
+      display: block;
+    }
   }
 }
