@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Button,
   Modal,
   Panel,
+  ComboBoxTextField,
   TextField
 } from '@sparkpost/matchbox';
 
 const SendTestEmail = (props) => {
   const { onClose } = props;
+  const [toValue, setToValue] = useState(undefined);
+  const handleChange = (e) => setToValue(e.target.value);
 
   return (
     <Modal
@@ -23,10 +26,11 @@ const SendTestEmail = (props) => {
         <p>Verify your email renders as expected in the inbox by sending a quick test.</p>
 
         <form>
-          <TextField
+          <ComboBoxTextField
             id="text-field-test-email-to"
-            type="email"
+            value={toValue}
             label="To:"
+            onChange={(e) => handleChange(e)}
           />
 
           <TextField
