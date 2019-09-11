@@ -10,7 +10,6 @@ import {
 const SendTestEmail = (props) => {
   const { onClose } = props;
   const [toValue, setToValue] = useState(undefined);
-  const handleChange = (e) => setToValue(e.target.value);
 
   return (
     <Modal
@@ -30,7 +29,7 @@ const SendTestEmail = (props) => {
             id="text-field-test-email-to"
             value={toValue}
             label="To:"
-            onChange={(e) => handleChange(e)}
+            onChange={(e) => setToValue(e.target.value)}
           />
 
           <TextField
