@@ -6,6 +6,8 @@ import PlanPrice from 'src/components/billing/PlanPrice';
 import FeatureComparisonModal from './FeatureComparisonModal';
 import cx from 'classnames';
 import _ from 'lodash';
+import PromoCode from 'src/components/billing/PromoCode';
+
 import styles from './PlanSelect.module.scss';
 import { useState } from 'react';
 
@@ -53,6 +55,11 @@ export const SelectedPlan = ({ plan, onChange }) => {
               </Button>
             </div>
           </div>
+        </div>
+      </Panel.Section>
+      <Panel.Section>
+        <div className={styles.PlanRow}>
+          <PromoCode/>
         </div>
       </Panel.Section>
     </Panel>
