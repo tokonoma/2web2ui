@@ -2,14 +2,8 @@
 
 .PreviewControlBar {
   border-bottom: 1px solid color(gray, 8);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  padding: 0 spacing();
   height: 100%;
-}
-
-.PreviewDeviceToggle {
-  margin-left: spacing();
 }
 
 .PreviewDeviceButton {
@@ -19,23 +13,41 @@
   color: color(gray, 4); // to match default text
   margin-right: spacing();
   position: relative; // allows absolute positioning within
+  transition: color 0.2s ease-in-out;
 
+  // Pseudo element that becomes visible when one of the device buttons becomes active
   &:after {
     content: "";
     position: absolute;
     right: 0;
     bottom: 0;
-    background-color: color(blue);
     height: rem(4);
     width: 100%;
-    display: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease-in-out,
+                visibility 0.2s ease-in-out;
   }
+
+  &:hover,
+  &:focus {
+    color: color(gray, 2);
+
+    &:after {
+      opacity: 1;
+      visibility: visible;
+      background-color: color(gray, 8);
+    }
+  }
+
 
   &.active {
     color: color(blue);
 
     &:after {
-      display: block;
+      opacity: 1;
+      visibility: visible;
+      background-color: color(blue);
     }
   }
 }
