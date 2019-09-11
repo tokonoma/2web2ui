@@ -78,7 +78,6 @@ export class MessageEventsSearch extends Component {
                   },
                   canChangeMonth: false
                 }}
-                roundToPrecision={false}
               />
             </Grid.Column>
             <Grid.Column xs={12} md={5}>

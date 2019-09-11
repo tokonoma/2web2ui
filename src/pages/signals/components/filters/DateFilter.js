@@ -37,7 +37,6 @@ export function DateFilter({ signalOptions, changeSignalOptions, left, now = new
         },
         fromMonth: moment(now).subtract(91, 'day').toDate()
       }}
-      roundToPrecision={false}
       hideManualEntry
       left={left}
       validate={minDays(7)}

@@ -252,6 +252,6 @@ AppDatePicker.propTypes = {
 };
 
 AppDatePicker.defaultProps = {
-  roundToPrecision: true,
+  roundToPrecision: false,
   preventFuture: true
 };
