@@ -1,15 +1,31 @@
 import React from 'react';
 import { Panel, Button } from '@sparkpost/matchbox';
-import { Check } from '@sparkpost/matchbox-icons';
+import { Check, ViewModule } from '@sparkpost/matchbox-icons';
 import { PLAN_TIERS } from 'src/constants';
 import PlanPrice from 'src/components/billing/PlanPrice';
+import FeatureComparisonModal from './FeatureComparisonModal';
 import cx from 'classnames';
 import _ from 'lodash';
-
 import styles from './PlanSelect.module.scss';
+import { useState } from 'react';
 
-export const SelectedPlan = ({ plan, onChange }) => (
-  <Panel title='Your New Plan'>
+export const useModal = () => {
+  const [isShowing, setIsShowing] = useState(false);
+  function toggle() {
+    setIsShowing(!isShowing);
+  }
+  return {
+    isShowing,
+    toggle
+  };
+};
+
+
+export const SelectedPlan = ({ plan, onChange }) => {
+  const { isShowing, toggle } = useModal(false);
+  return <>
+  <FeatureComparisonModal open={isShowing} handleClose={toggle}/>
+  <Panel title={<PanelTitle title={'Your New Plan'} toggleModal={toggle}/>}>
     <Panel.Section>
       <div className={styles.SelectedPlan}>
         <div className={styles.tierLabel}>{PLAN_TIERS[plan.tier]}</div>
@@ -24,10 +40,25 @@ export const SelectedPlan = ({ plan, onChange }) => (
       </div>
     </Panel.Section>
   </Panel>
+  </>;
+};
+
+export const PanelTitle = ({ title, toggleModal }) => (
+  <>
+    <span>{title}</span>
+    <Button
+      onClick={toggleModal}
+      size="small"
+      flat
+      color="orange"
+      className={styles.Right}
+    > Compare Features <ViewModule />
+    </Button>
+  </>
 );
 
 const PlanSelectSection = ({ plans, currentPlan, onSelect }) => {
-
+  const { isShowing, toggle } = useModal(false);
   const planList = _.map(PLAN_TIERS, (label, key) => (
     <Panel.Section key={`tier_section_${key}`}>
       <div className={styles.tierLabel}>{label}</div>
@@ -59,9 +90,12 @@ const PlanSelectSection = ({ plans, currentPlan, onSelect }) => {
   ));
 
   return (
-    <Panel title='Select a Plan'>
+    <>
+    <FeatureComparisonModal open={isShowing} handleClose={toggle}/>
+    <Panel title={<PanelTitle title={'Select a Plan'} toggleModal={toggle}/>}>
       {planList}
     </Panel>
+    </>
   );
 }
 ;
