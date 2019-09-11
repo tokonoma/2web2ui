@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
-import { UnstyledLink } from '@sparkpost/matchbox';
+import { UnstyledLink, ScreenReaderOnly } from '@sparkpost/matchbox';
 import { DesktopWindows, PhoneAndroid } from '@sparkpost/matchbox-icons';
 import useEditorContext from '../hooks/useEditorContext';
 import styles from './PreviewControlBar.module.scss';
@@ -18,7 +18,10 @@ const PreviewControlBar = () => {
           onClick={() => { setPreviewDevice('desktop'); }}
           to="javascript:void(0);"
           role="button"
-        />
+        >
+          <ScreenReaderOnly>Desktop Preview</ScreenReaderOnly>
+        </UnstyledLink>
+
         <UnstyledLink
           children={<PhoneAndroid size={24} />}
           className={classNames(styles.PreviewDeviceButton, previewDevice === 'mobile' && styles.active)}
@@ -26,7 +29,9 @@ const PreviewControlBar = () => {
           onClick={() => { setPreviewDevice('mobile'); }}
           to="javascript:void(0);"
           role="button"
-        />
+        >
+          <ScreenReaderOnly>Mobile Preview</ScreenReaderOnly>
+        </UnstyledLink>
       </div>
     </div>
   );
