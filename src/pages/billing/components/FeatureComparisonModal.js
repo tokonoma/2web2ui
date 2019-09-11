@@ -34,7 +34,7 @@ export function GroupHeading({ groupName, colSpan }) {
 }
 
 export function renderCell(cellValue) {
-  if (typeof cellValue === 'boolean') { return cellValue ? <Check/> : <Close/>; }
+  if (typeof cellValue === 'boolean') { return cellValue ? <Check/> : <Close className={styles.NotAvailable}/>; }
   if (typeof cellValue === 'string') {
     return <div>
       {cellValue.split('\n').map((item, index) =>

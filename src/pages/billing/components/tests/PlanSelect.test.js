@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow, mount } from 'enzyme';
 import { act } from 'react-dom/test-utils';
 
-import PlanSelect, { SelectedPlan, PanelTitle, useModal } from '../PlanSelect';
+import PlanSelect, { SelectedPlan, useModal } from '../PlanSelect';
 
 describe('Plan Select:', () => {
 
@@ -77,20 +77,6 @@ describe('Selected Plan:', () => {
     expect(subject()).toMatchSnapshot();
   });
 });
-
-
-describe('PanelTitle: ', () => {
-  const df = {
-    title: 'Abc', toggleModal: jest.fn()
-  };
-  it('should render correctly', () => {
-    const wrapper = shallow(<PanelTitle {...df}/>);
-    expect(wrapper).toMatchSnapshot();
-  });
-
-});
-
-
 
 describe('useModal:', () => {
   const TestModal = (props) => {

@@ -6,7 +6,6 @@
     border-bottom: 1px solid color(gray,5);
 }
 .FeatureCell {
-    border-left: 1px solid color(gray,5);
     width: 31%;
     padding-left: 2em;
     max-height: 40px;
@@ -42,4 +41,7 @@
     padding: 31px;
     font-size: 24px;
     font-weight: bold;
+}
+.NotAvailable{
+    color: color(gray, 5);
 }

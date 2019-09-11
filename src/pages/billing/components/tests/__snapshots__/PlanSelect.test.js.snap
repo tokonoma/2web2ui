@@ -1,39 +1,189 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`PanelTitle:  should render correctly 1`] = `
-<Fragment>
-  <span>
-    Abc
-  </span>
-  <Button
-    className="Right"
-    color="orange"
-    flat={true}
-    onClick={[MockFunction]}
-    size="small"
-  >
-     Compare Features 
-    <ViewModule />
-  </Button>
-</Fragment>
-`;
-
 exports[`Plan Select: should render correctly 1`] = `
-<Fragment>
+<Panel
+  actions={
+    Array [
+      Object {
+        "color": "orange",
+        "content": <span>
+          Compare Features 
+          <ViewModule />
+        </span>,
+        "onClick": [Function],
+      },
+    ]
+  }
+  title="Select a Plan"
+>
   <ComparisonModal
     handleClose={[Function]}
     open={false}
   />
-  <Panel
-    title={
-      <PanelTitle
-        title="Select a Plan"
-        toggleModal={[Function]}
-      />
-    }
+  <Panel.Section
+    key="tier_section_test"
   >
-    <Panel.Section
-      key="tier_section_test"
+    <div
+      className="tierLabel"
+    >
+      Test Account
+    </div>
+    <div
+      className="tierPlans"
+    >
+      <div
+        className="PlanRow SelectedPlan"
+        key="plan_row_2"
+      >
+        <div>
+          <Check
+            className="CheckIcon"
+          />
+          <PlanPrice
+            plan={
+              Object {
+                "code": "2",
+                "includesIp": false,
+                "isFree": true,
+                "monthly": 0,
+                "name": "Two",
+                "overage": 0.2,
+                "volume": 2,
+              }
+            }
+            showCsm={true}
+            showIp={true}
+            showOverage={true}
+          />
+        </div>
+        <div>
+          <Button
+            className="selectButton"
+            disabled={true}
+            onClick={[Function]}
+            size="small"
+          >
+            Select
+          </Button>
+        </div>
+      </div>
+    </div>
+  </Panel.Section>
+  <Panel.Section
+    key="tier_section_starter"
+  >
+    <div
+      className="tierLabel"
+    >
+      Starter
+    </div>
+    <div
+      className="tierPlans"
+    >
+      <div
+        className="PlanRow"
+        key="plan_row_3"
+      >
+        <div>
+          <PlanPrice
+            plan={
+              Object {
+                "code": "3",
+                "monthly": 300,
+                "name": "Three",
+                "overage": 0.3,
+                "volume": 3,
+              }
+            }
+            showCsm={true}
+            showIp={true}
+            showOverage={true}
+          />
+        </div>
+        <div>
+          <Button
+            className="selectButton"
+            disabled={false}
+            onClick={[Function]}
+            size="small"
+          >
+            Select
+          </Button>
+        </div>
+      </div>
+    </div>
+  </Panel.Section>
+  <Panel.Section
+    key="tier_section_premier"
+  >
+    <div
+      className="tierLabel"
+    >
+      Premier
+    </div>
+    <div
+      className="tierPlans"
+    >
+      <div
+        className="PlanRow"
+        key="plan_row_4"
+      >
+        <div>
+          <PlanPrice
+            plan={
+              Object {
+                "code": "4",
+                "includesIp": true,
+                "monthly": 400,
+                "name": "Four",
+                "overage": 0.4,
+                "volume": 4,
+              }
+            }
+            showCsm={true}
+            showIp={true}
+            showOverage={true}
+          />
+        </div>
+        <div>
+          <Button
+            className="selectButton"
+            disabled={false}
+            onClick={[Function]}
+            size="small"
+          >
+            Select
+          </Button>
+        </div>
+      </div>
+    </div>
+  </Panel.Section>
+</Panel>
+`;
+
+exports[`Selected Plan: should render plan price with the plan 1`] = `
+<Panel
+  actions={
+    Array [
+      Object {
+        "color": "orange",
+        "content": <span>
+          Compare Features 
+          <ViewModule />
+        </span>,
+        "onClick": [Function],
+      },
+    ]
+  }
+  title="Your New Plan"
+>
+  <ComparisonModal
+    handleClose={[Function]}
+    open={false}
+  />
+  <Panel.Section>
+    <div
+      className="SelectedPlan"
     >
       <div
         className="tierLabel"
@@ -41,197 +191,39 @@ exports[`Plan Select: should render correctly 1`] = `
         Test Account
       </div>
       <div
-        className="tierPlans"
+        className="PlanRow"
       >
-        <div
-          className="PlanRow SelectedPlan"
-          key="plan_row_2"
-        >
-          <div>
-            <Check
-              className="CheckIcon"
-            />
-            <PlanPrice
-              plan={
-                Object {
-                  "code": "2",
-                  "includesIp": false,
-                  "isFree": true,
-                  "monthly": 0,
-                  "name": "Two",
-                  "overage": 0.2,
-                  "volume": 2,
-                }
+        <div>
+          <PlanPrice
+            plan={
+              Object {
+                "code": "2",
+                "includesIp": false,
+                "isFree": true,
+                "monthly": 0,
+                "name": "Two",
+                "overage": 0.2,
+                "tier": "test",
+                "volume": 2,
               }
-              showCsm={true}
-              showIp={true}
-              showOverage={true}
-            />
-          </div>
-          <div>
-            <Button
-              className="selectButton"
-              disabled={true}
-              onClick={[Function]}
-              size="small"
-            >
-              Select
-            </Button>
-          </div>
+            }
+            showCsm={true}
+            showIp={true}
+            showOverage={true}
+          />
+        </div>
+        <div>
+          <Button
+            color="orange"
+            flat={true}
+            onClick={[Function]}
+            size="small"
+          >
+            Change
+          </Button>
         </div>
       </div>
-    </Panel.Section>
-    <Panel.Section
-      key="tier_section_starter"
-    >
-      <div
-        className="tierLabel"
-      >
-        Starter
-      </div>
-      <div
-        className="tierPlans"
-      >
-        <div
-          className="PlanRow"
-          key="plan_row_3"
-        >
-          <div>
-            <PlanPrice
-              plan={
-                Object {
-                  "code": "3",
-                  "monthly": 300,
-                  "name": "Three",
-                  "overage": 0.3,
-                  "volume": 3,
-                }
-              }
-              showCsm={true}
-              showIp={true}
-              showOverage={true}
-            />
-          </div>
-          <div>
-            <Button
-              className="selectButton"
-              disabled={false}
-              onClick={[Function]}
-              size="small"
-            >
-              Select
-            </Button>
-          </div>
-        </div>
-      </div>
-    </Panel.Section>
-    <Panel.Section
-      key="tier_section_premier"
-    >
-      <div
-        className="tierLabel"
-      >
-        Premier
-      </div>
-      <div
-        className="tierPlans"
-      >
-        <div
-          className="PlanRow"
-          key="plan_row_4"
-        >
-          <div>
-            <PlanPrice
-              plan={
-                Object {
-                  "code": "4",
-                  "includesIp": true,
-                  "monthly": 400,
-                  "name": "Four",
-                  "overage": 0.4,
-                  "volume": 4,
-                }
-              }
-              showCsm={true}
-              showIp={true}
-              showOverage={true}
-            />
-          </div>
-          <div>
-            <Button
-              className="selectButton"
-              disabled={false}
-              onClick={[Function]}
-              size="small"
-            >
-              Select
-            </Button>
-          </div>
-        </div>
-      </div>
-    </Panel.Section>
-  </Panel>
-</Fragment>
-`;
-
-exports[`Selected Plan: should render plan price with the plan 1`] = `
-<Fragment>
-  <ComparisonModal
-    handleClose={[Function]}
-    open={false}
-  />
-  <Panel
-    title={
-      <PanelTitle
-        title="Your New Plan"
-        toggleModal={[Function]}
-      />
-    }
-  >
-    <Panel.Section>
-      <div
-        className="SelectedPlan"
-      >
-        <div
-          className="tierLabel"
-        >
-          Test Account
-        </div>
-        <div
-          className="PlanRow"
-        >
-          <div>
-            <PlanPrice
-              plan={
-                Object {
-                  "code": "2",
-                  "includesIp": false,
-                  "isFree": true,
-                  "monthly": 0,
-                  "name": "Two",
-                  "overage": 0.2,
-                  "tier": "test",
-                  "volume": 2,
-                }
-              }
-              showCsm={true}
-              showIp={true}
-              showOverage={true}
-            />
-          </div>
-          <div>
-            <Button
-              color="orange"
-              flat={true}
-              onClick={[Function]}
-              size="small"
-            >
-              Change
-            </Button>
-          </div>
-        </div>
-      </div>
-    </Panel.Section>
-  </Panel>
-</Fragment>
+    </div>
+  </Panel.Section>
+</Panel>
 `;
