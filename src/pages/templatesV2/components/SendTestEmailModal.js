@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   Button,
   Panel,
-  ComboBoxTextField,
   Modal,
   TextField
 } from '@sparkpost/matchbox';
+// import { isEmailAddress } from 'src/helpers/email';
 import useEditorContext from '../hooks/useEditorContext';
 
 const SendTestEmail = (props) => {
@@ -19,33 +19,27 @@ const SendTestEmail = (props) => {
   } = useEditorContext();
   const fromEmail = content.from.email;
   const templateId = match.params.id;
-  const [toValue, setToValue] = useState('');
-  const [toEmails, setToEmails] = useState([]);
-  const handleSelection = (val) => {
-    if (val.includes(' ')) {
-      const arr = val.split(' ');
-      const selectedValues = arr.filter((email, index) => {
-        if (index + 1 !== arr.length) {
-          return email;
-        }
-      });
-
-      return selectedValues;
-    }
-  };
+  const [toEmail, setToEmail] = useState('');
+  //const [toEmails, setToEmails] = useState([]);
 
   const handleToChange = (e) => {
-    setToValue(e.target.value);
+    setToEmail(e.target.value);
   };
 
-  useEffect(() => {
-    setToEmails(handleSelection(toValue));
-  }, [toValue, setToEmails, handleSelection]);
+  // const handleToKeyDown = (e) => {
+  //   console.log('e.keyCode', e.keyCode);
 
-  // const handleToKeydown = (e) => {
-  //   console.log('toValue', toValue);
+  //   if (e.keyCode === 13) {
+  //     e.preventDefault; // prevent form submission
+  //   }
+
   //   if (e.keyCode === 32) {
-  //     setToEmails(handleSelection(toValue));
+  //     if (isEmailAddress(toEmail)) {
+  //       setToEmails([...toEmails, { email: toEmail }]);
+  //       setToEmail('');
+
+  //       console.log('toEmail', toEmail);
+  //     }
   //   }
   // };
 
@@ -57,7 +51,7 @@ const SendTestEmail = (props) => {
         id: templateId,
         subaccountId: subaccountId,
         mode: isPublishedMode ? 'published' : 'draft',
-        emails: toEmails,
+        emails: [ toEmail ],
         from: fromEmail
       });
     }
@@ -78,12 +72,22 @@ const SendTestEmail = (props) => {
 
         <form onSubmit={(e) => handleSubmit(e)}>
           {/* TODO: Get this guy working! */}
-          <ComboBoxTextField
+          {/* <ComboBoxTextField
             id="text-field-test-email-to"
             label="To:"
             value={toValue}
             selectedItems={toEmails}
+            itemToString={({ email }) => email}
             onChange={handleToChange}
+            onKeyDown={handleToKeyDown}
+          /> */}
+
+          <TextField
+            id="text-field-email-to"
+            label="To:"
+            type="email"
+            onChange={handleToChange}
+            value={toEmail}
           />
 
           <TextField
