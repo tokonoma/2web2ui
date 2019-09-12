@@ -51,7 +51,7 @@ const productionTenants = {
       cnameValue: 'eu.spgo.io'
     },
     zuora: {
-      baseUrl: 'https://api.zuora.com/rest/v1'
+      baseUrl: 'https://rest.zuora.com/v1'
     }
   },
   spc: {
@@ -83,7 +83,7 @@ const productionTenants = {
       cnameValue: 'spgo.io'
     },
     zuora: {
-      baseUrl: 'https://api.zuora.com/rest/v1'
+      baseUrl: 'https://rest.zuora.com/v1'
     }
   },
   demo: {
