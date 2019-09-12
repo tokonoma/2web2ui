@@ -10,19 +10,58 @@ import useEditorContext from '../hooks/useEditorContext';
 
 const SendTestEmail = (props) => {
   const { onClose } = props;
-  const { content, match } = useEditorContext();
+  const {
+    content,
+    match,
+    sendPreview,
+    isPublishedMode,
+    subaccountId
+  } = useEditorContext();
+  const fromEmail = content.from.email;
+  const templateId = match.params.id;
+  const [toValue, setToValue] = useState('');
+  const [toEmails, setToEmails] = useState([]);
+  const handleSelection = (val) => {
+    if (val.includes(' ')) {
+      const arr = val.split(' ');
+      const selectedValues = arr.filter((email, index) => {
+        if (index + 1 !== arr.length) {
+          return email;
+        }
+      });
 
-  /* eslint-disable no-console */
-  console.log(useEditorContext());
+      return selectedValues;
+    }
+  };
 
-  const [toValue, setToValue] = useState(undefined);
+  const handleToChange = (e) => {
+    setToValue(e.target.value);
+  };
 
   useEffect(() => {
-    const templateId = match.params.id;
+    setToEmails(handleSelection(toValue));
+  }, [toValue, setToEmails, handleSelection]);
 
-    console.log(templateId);
-  });
-  /* eslint-enable no-console */
+  // const handleToKeydown = (e) => {
+  //   console.log('toValue', toValue);
+  //   if (e.keyCode === 32) {
+  //     setToEmails(handleSelection(toValue));
+  //   }
+  // };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (templateId) {
+      sendPreview({
+        id: templateId,
+        subaccountId: subaccountId,
+        mode: isPublishedMode ? 'published' : 'draft',
+        emails: toEmails,
+        from: fromEmail
+      });
+    }
+  };
 
   return (
     <Modal
@@ -37,26 +76,28 @@ const SendTestEmail = (props) => {
       >
         <p>Verify your email renders as expected in the inbox by sending a quick test.</p>
 
-        <form>
+        <form onSubmit={(e) => handleSubmit(e)}>
+          {/* TODO: Get this guy working! */}
           <ComboBoxTextField
             id="text-field-test-email-to"
-            value={toValue}
             label="To:"
-            onChange={(e) => setToValue(e.target.value)}
+            value={toValue}
+            selectedItems={toEmails}
+            onChange={handleToChange}
           />
 
           <TextField
             id="text-field-test-email-from"
-            type="email"
             label="From:"
+            type="email"
             disabled
-            value={content.from.email}
+            value={fromEmail}
           />
 
           <TextField
             id="text-field-test-email-subject"
-            type="email"
             label="Subject:"
+            type="email"
             disabled
             value={content.subject}
           />
