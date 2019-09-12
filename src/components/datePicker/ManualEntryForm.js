@@ -83,7 +83,7 @@ export default class ManualEntryForm extends Component {
 
     let precisionLabel = null;
     let precisionLabelValue;
-    let momentPrecision = '';
+    let momentPrecision;
     const from = parseDatetime(fromDate, fromTime);
     const to = parseDatetime(toDate, toTime);
 
