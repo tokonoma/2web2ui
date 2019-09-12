@@ -15,7 +15,6 @@ import { formatFullNumber } from 'src/helpers/units';
 import totalRVCost from '../helpers/totalRecipientValidationCost';
 import _ from 'lodash';
 import { formatDateTime } from 'src/helpers/date';
-
 const PAYMENT_MODAL = 'payment';
 const CONTACT_MODAL = 'contact';
 const IP_MODAL = 'ip';

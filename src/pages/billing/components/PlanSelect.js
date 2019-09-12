@@ -1,33 +1,67 @@
 import React from 'react';
 import { Panel, Button } from '@sparkpost/matchbox';
-import { Check } from '@sparkpost/matchbox-icons';
+import { Check, ViewModule } from '@sparkpost/matchbox-icons';
 import { PLAN_TIERS } from 'src/constants';
 import PlanPrice from 'src/components/billing/PlanPrice';
+import FeatureComparisonModal from './FeatureComparisonModal';
 import cx from 'classnames';
 import _ from 'lodash';
-
 import styles from './PlanSelect.module.scss';
+import { useState } from 'react';
 
-export const SelectedPlan = ({ plan, onChange }) => (
-  <Panel title='Your New Plan'>
-    <Panel.Section>
-      <div className={styles.SelectedPlan}>
-        <div className={styles.tierLabel}>{PLAN_TIERS[plan.tier]}</div>
-        <div className={styles.PlanRow}>
-          <div>
-            <PlanPrice showOverage showIp showCsm plan={plan} />
-          </div>
-          <div>
-            <Button onClick={() => onChange()} size='small' flat color='orange'>Change</Button>
+export const useModal = () => {
+  const [isShowing, setIsShowing] = useState(false);
+  function toggle() {
+    setIsShowing(!isShowing);
+  }
+  return {
+    isShowing,
+    toggle
+  };
+};
+
+
+export const SelectedPlan = ({ plan, onChange }) => {
+  const { isShowing, toggle } = useModal(false);
+  return (
+    <Panel
+      title="Your New Plan"
+      actions={[
+        {
+          content: (<span>Compare Features <ViewModule /></span>),
+          onClick: toggle,
+          color: 'orange'
+        }
+      ]}
+    >
+      <FeatureComparisonModal open={isShowing} handleClose={toggle} />
+      <Panel.Section>
+        <div className={styles.SelectedPlan}>
+          <div className={styles.tierLabel}>{PLAN_TIERS[plan.tier]}</div>
+          <div className={styles.PlanRow}>
+            <div>
+              <PlanPrice showOverage showIp showCsm plan={plan} />
+            </div>
+            <div>
+              <Button
+                onClick={() => onChange()}
+                size="small"
+                flat
+                color="orange"
+              >
+                Change
+              </Button>
+            </div>
           </div>
         </div>
-      </div>
-    </Panel.Section>
-  </Panel>
-);
+      </Panel.Section>
+    </Panel>
+  );
+};
+
 
 const PlanSelectSection = ({ plans, currentPlan, onSelect }) => {
-
+  const { isShowing, toggle } = useModal(false);
   const planList = _.map(PLAN_TIERS, (label, key) => (
     <Panel.Section key={`tier_section_${key}`}>
       <div className={styles.tierLabel}>{label}</div>
@@ -58,11 +92,12 @@ const PlanSelectSection = ({ plans, currentPlan, onSelect }) => {
     </Panel.Section>
   ));
 
-  return (
-    <Panel title='Select a Plan'>
-      {planList}
-    </Panel>
-  );
+  return <Panel title="Select a Plan"
+    actions={[{
+      content: <span>Compare Features <ViewModule /></span>, onClick: toggle, color: 'orange' }]}>
+    <FeatureComparisonModal open={isShowing} handleClose={toggle} />
+    {planList}
+  </Panel>;
 }
 ;
 

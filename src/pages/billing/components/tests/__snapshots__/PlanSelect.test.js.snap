@@ -2,8 +2,24 @@
 
 exports[`Plan Select: should render correctly 1`] = `
 <Panel
+  actions={
+    Array [
+      Object {
+        "color": "orange",
+        "content": <span>
+          Compare Features 
+          <ViewModule />
+        </span>,
+        "onClick": [Function],
+      },
+    ]
+  }
   title="Select a Plan"
 >
+  <ComparisonModal
+    handleClose={[Function]}
+    open={false}
+  />
   <Panel.Section
     key="tier_section_test"
   >
@@ -147,8 +163,24 @@ exports[`Plan Select: should render correctly 1`] = `
 
 exports[`Selected Plan: should render plan price with the plan 1`] = `
 <Panel
+  actions={
+    Array [
+      Object {
+        "color": "orange",
+        "content": <span>
+          Compare Features 
+          <ViewModule />
+        </span>,
+        "onClick": [Function],
+      },
+    ]
+  }
   title="Your New Plan"
 >
+  <ComparisonModal
+    handleClose={[Function]}
+    open={false}
+  />
   <Panel.Section>
     <div
       className="SelectedPlan"
