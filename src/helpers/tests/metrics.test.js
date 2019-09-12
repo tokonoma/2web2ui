@@ -101,12 +101,22 @@ describe('metrics helpers', () => {
 
   });
 
-  it('should return minutes as moment precision type', () => {
-    expect(metricsHelpers.getMomentPrecision('1min')).toEqual('minutes');
+  it('should return minute as moment precision type', () => {
+    const from = moment('2016-12-18T00:00').utc();
+    const to = moment('2016-12-18T00:30').utc();
+    expect(metricsHelpers.getMomentPrecision(from, to)).toEqual('minutes');
   });
 
-  it('should return hours as moment precision type', () => {
-    expect(metricsHelpers.getMomentPrecision('day')).toEqual('hours');
+  it('should return hour as moment precision type', () => {
+    const from = moment('2016-12-18T00:00').utc();
+    const to = moment('2016-12-19T00:30').utc();
+    expect(metricsHelpers.getMomentPrecision(from, to)).toEqual('hours');
+  });
+
+  it('should return day as moment precision type', () => {
+    const from = moment('2016-12-18T00:00').utc();
+    const to = moment('2016-12-25T00:30').utc();
+    expect(metricsHelpers.getMomentPrecision(from, to)).toEqual('days');
   });
 
   it('should return hours as precision type', () => {
@@ -140,26 +150,26 @@ describe('metrics helpers', () => {
       {
         timeLabel: 'hour',
         from: '2016-12-16T10:59',
-        to: '2016-12-18T10:01',
-        expected: { from: '2016-12-16T10:00', to: '2016-12-18T10:59' }
+        to: '2016-12-18T09:01',
+        expected: { from: '2016-12-16T10:00', to: '2016-12-18T09:59' }
       },
       {
         timeLabel: 'day',
         from: '2016-11-15T10:59',
         to: '2016-12-18T10:01',
-        expected: { from: '2016-11-15T10:00', to: '2016-12-18T10:59' }
+        expected: { from: '2016-11-15T00:00', to: '2016-12-18T23:59' }
       },
       {
         timeLabel: 'week',
         from: '2016-06-21T10:59',
         to: '2016-12-18T10:02',
-        expected: { from: '2016-06-21T10:00', to: '2016-12-18T10:59' }
+        expected: { from: '2016-06-21T00:00', to: '2016-12-18T23:59' }
       },
       {
         timeLabel: 'month',
         from: '2016-02-18T10:59',
         to: '2016-12-18T10:02',
-        expected: { from: '2016-02-18T10:00', to: '2016-12-18T10:59' }
+        expected: { from: '2016-02-18T00:00', to: '2016-12-18T23:59' }
       }
     ];
 

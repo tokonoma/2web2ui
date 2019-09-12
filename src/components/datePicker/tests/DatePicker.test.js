@@ -31,7 +31,8 @@ describe('Component: DatePicker', () => {
       onChange: jest.fn(),
       onBlur: jest.fn(),
       now: mockNow,
-      disabled: false
+      disabled: false,
+      roundToPrecision: true
     };
 
     dateHelpers.getStartOfDay = jest.fn(() => 'start-of-day');
