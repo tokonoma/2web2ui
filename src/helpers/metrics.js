@@ -106,7 +106,10 @@ export function roundBoundaries(fromInput, toInput) {
 
   floorMoment(from, roundInt, momentPrecision);
   // if we're only at a minute precision, don't round up to the next minute
-  if (precision !== '1min') { ceilMoment(to, roundInt, momentPrecision); }
+  const isToSameAsNow = Math.abs(moment().diff(to, 'minutes')) < 1;
+  if (precision !== '1min' && !isToSameAsNow) {
+    ceilMoment(to, roundInt, momentPrecision);
+  }
 
   return { to, from };
 }

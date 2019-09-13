@@ -76,7 +76,7 @@ export const getDates = ({ from, relativeRange, to, now = new Date() } = {}) => 
 
   if (relativeRange !== 'custom') {
     options = {
-      ...getRelativeDates(relativeRange, { now: moment(now).subtract(1, 'day') }),
+      ...getRelativeDates(relativeRange, { now: moment(now).subtract(1, 'day').toDate() }),
       relativeRange: relativeRange
     };
   }

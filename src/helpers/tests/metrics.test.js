@@ -200,6 +200,14 @@ describe('metrics helpers', () => {
       expect(resFrom.toISOString()).toEqual(expectedValue.from);
       expect(resTo.toISOString()).toEqual(expectedValue.to);
     }, allCases);
+
+    it('should not round To if it is same as now', () => {
+      const now = '2018-12-18T10:02';
+      const date = moment(new Date(now));
+      Date.now = jest.fn(() => date);
+      const { to } = metricsHelpers.roundBoundaries(moment('2018-11-15T10:59'), moment(now));
+      expect(to.toISOString()).toEqual(date.toISOString()); //Round to ceiling was not called
+    });
   });
 
 
