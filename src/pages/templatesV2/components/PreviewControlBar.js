@@ -1,18 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import classNames from 'classnames';
 import {
   UnstyledLink,
-  ScreenReaderOnly,
-  Button
+  ScreenReaderOnly
 } from '@sparkpost/matchbox';
 import { DesktopWindows, PhoneAndroid } from '@sparkpost/matchbox-icons';
 import useEditorContext from '../hooks/useEditorContext';
-import SendTestEmailModal from './SendTestEmailModal';
+import SendTestEmailModalButton from './SendTestEmailModalButton';
 import styles from './PreviewControlBar.module.scss';
 
 const PreviewControlBar = () => {
   const { previewDevice, setPreviewDevice } = useEditorContext();
-  const [isModalOpen, setModalOpen] = useState(false);
 
   return (
     <div className={styles.PreviewControlBar}>
@@ -43,17 +41,7 @@ const PreviewControlBar = () => {
       </div>
 
       <div>
-        <Button
-          flat
-          color="blue"
-          size="small"
-          title="Opens a dialog"
-          onClick={() => setModalOpen(true)}
-        >
-          Send a Test
-        </Button>
-
-        {isModalOpen && <SendTestEmailModal onClose={() => setModalOpen(false)} />}
+        <SendTestEmailModalButton/>
       </div>
     </div>
   );
