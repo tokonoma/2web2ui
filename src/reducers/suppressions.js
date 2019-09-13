@@ -28,7 +28,7 @@ export default (state = initialState, action) => {
       return { ...state, listError: action.payload };
 
 
-    // Fetch list
+      // Fetch list
 
     case 'GET_SUPPRESSIONS_PENDING':
       return { ...state, listLoading: true, listError: null };
@@ -41,7 +41,7 @@ export default (state = initialState, action) => {
 
 
 
-    // Recipients search
+      // Recipients search
 
     case 'SEARCH_SUPPRESSIONS_RECIPIENT_PENDING':
       return { ...state, listLoading: true };
@@ -62,7 +62,7 @@ export default (state = initialState, action) => {
     // Refresh date range for suppression search
 
     case 'REFRESH_SUPPRESSION_SEARCH_DATE_OPTIONS': {
-      const dateOptions = { ...state.search.dateOptions, ...action.payload, ...getRelativeDates(action.payload.relativeRange) };
+      const dateOptions = { ...state.search.dateOptions, ...action.payload, ...getRelativeDates(action.payload.relativeRange, { roundToPrecision: false }) };
       return { ...state, search: { ...state.search, dateOptions }};
     }
 
@@ -92,7 +92,7 @@ export default (state = initialState, action) => {
       return { ...state, deleting: false, deleteError: action.payload };
 
 
-    // Reset results
+      // Reset results
 
     case 'RESET_SUPPRESSIONS_RESULTS':
       return { ...state, list: null };
@@ -103,7 +103,7 @@ export default (state = initialState, action) => {
       return { ...state, persistError: null };
 
 
-    // Parse suppression upload file
+      // Parse suppression upload file
 
     case 'PARSE_SUPPRESSIONS_FILE_FAIL':
       return { ...state, parseError: action.payload };
