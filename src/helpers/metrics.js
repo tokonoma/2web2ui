@@ -95,7 +95,7 @@ export function getPrecisionType(precision) {
  * @param toInput
  * @return {{to: *|moment.Moment, from: *|moment.Moment}}
  */
-export function roundBoundaries(fromInput, toInput) {
+export function roundBoundaries(fromInput, toInput, now = moment()) {
   const from = moment(fromInput);
   const to = moment(toInput);
 
@@ -105,8 +105,10 @@ export function roundBoundaries(fromInput, toInput) {
   const roundInt = (momentPrecision === 'minutes') ? parseInt(precision.replace('min', '')) : 1;
 
   floorMoment(from, roundInt, momentPrecision);
+
   // if we're only at a minute precision, don't round up to the next minute
-  const isToSameAsNow = Math.abs(moment().diff(to, 'minutes')) < 1;
+  const isToSameAsNow = Math.abs(moment(now).diff(to, 'minutes')) < 1;
+
   if (precision !== '1min' && !isToSameAsNow) {
     ceilMoment(to, roundInt, momentPrecision);
   }

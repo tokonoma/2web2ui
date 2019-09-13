@@ -178,12 +178,14 @@ describe('metrics helpers', () => {
       const expectedTo = caseObj.timeLabel === '1min' // we don't round at this precision
         ? moment(caseObj.expected.to)
         : moment(caseObj.expected.to).endOf('minutes');
+
       cases.push({
         name: `should round at ${caseObj.timeLabel}`,
         from: moment(caseObj.from),
         to: moment(caseObj.to),
         expectedValue: { from: moment(caseObj.expected.from).toISOString(), to: expectedTo.toISOString() }
       });
+
       cases.push({
         name: `should not round if already at nearest precision for ${caseObj.timeLabel}`,
         from: moment(caseObj.expected.from),
@@ -194,19 +196,19 @@ describe('metrics helpers', () => {
       return cases;
     });
 
-    cases('should round from and to values', ({ timeLabel, from, to, expectedValue }) => {
+    cases('should round from and to values', ({ from, to, expectedValue }) => {
       const { from: resFrom, to: resTo } = metricsHelpers.roundBoundaries(from, to);
 
       expect(resFrom.toISOString()).toEqual(expectedValue.from);
       expect(resTo.toISOString()).toEqual(expectedValue.to);
     }, allCases);
 
-    it('should not round To if it is same as now', () => {
-      const now = '2018-12-18T10:02';
-      const date = moment(new Date(now));
-      Date.now = jest.fn(() => date);
-      const { to } = metricsHelpers.roundBoundaries(moment('2018-11-15T10:59'), moment(now));
-      expect(to.toISOString()).toEqual(date.toISOString()); //Round to ceiling was not called
+    it('should not round to when in future', () => {
+      const now = moment('2016-12-19T10:02');
+      const { from, to } = metricsHelpers.roundBoundaries(moment('2016-02-18T10:59'), now, now);
+
+      expect(from.toISOString()).toEqual(moment('2016-02-18T00:00').toISOString());
+      expect(to.toISOString()).toEqual(now.toISOString());
     });
   });
 
