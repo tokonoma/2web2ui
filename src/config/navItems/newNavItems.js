@@ -86,7 +86,7 @@ export default [
     children: [
       {
         label: 'Recipient Validation',
-        to: '/recipient-validation',
+        to: '/recipient-validation/list',
         condition: hasGrants('recipient-validation/manage')
       },
       {
