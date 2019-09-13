@@ -20,7 +20,8 @@ const NavItem = (props) => {
     to,
     toggleMobileNav,
     mobile,
-    location
+    location,
+    newNav
   } = props;
 
   const active = location.pathname.includes(to);
@@ -28,7 +29,8 @@ const NavItem = (props) => {
   const linkClasses = classnames(
     styles.Link,
     active && styles.isActive,
-    mobile && styles.mobile
+    mobile && styles.mobile,
+    divider && styles.divider
   );
 
   let releaseTag;
@@ -39,8 +41,7 @@ const NavItem = (props) => {
   }
 
   return (
-    <li>
-      {divider && <hr className={styles.divider}/>}
+    <li className={classnames(newNav && styles.newNav)}>
       <Link to={to} className={linkClasses} onClick={mobile ? toggleMobileNav : null}>
         {Icon && <span className={styles.iconWrapper}><Icon size={21} className={styles.icon}/></span>}
         <div className={styles.Label}>{label}</div>
