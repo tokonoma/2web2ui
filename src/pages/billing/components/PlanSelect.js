@@ -6,10 +6,9 @@ import PlanPrice from 'src/components/billing/PlanPrice';
 import FeatureComparisonModal from './FeatureComparisonModal';
 import cx from 'classnames';
 import _ from 'lodash';
-import PromoCode from 'src/components/billing/PromoCode';
-
 import styles from './PlanSelect.module.scss';
 import { useState } from 'react';
+import PromoCodeNew from '../../../components/billing/PromoCodeNew';
 
 export const useModal = () => {
   const [isShowing, setIsShowing] = useState(false);
@@ -59,7 +58,7 @@ export const SelectedPlan = ({ plan, onChange }) => {
       </Panel.Section>
       <Panel.Section>
         <div className={styles.PlanRow}>
-          <PromoCode/>
+          <PromoCodeNew verifyPromoCode={() => {}} />
         </div>
       </Panel.Section>
     </Panel>

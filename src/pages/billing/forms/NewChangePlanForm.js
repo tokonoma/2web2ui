@@ -4,8 +4,6 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import qs from 'query-string';
-
-import promoCodeValidate from '../helpers/promoCodeValidate';
 import PlanSelectSection, { SelectedPlan } from '../components/PlanSelect';
 import CurrentPlanSection from '../components/CurrentPlanSection';
 
@@ -88,9 +86,7 @@ const mapDispatchToProps = ({
 const formOptions = {
   form: FORMNAME,
   enableReinitialize: true,
-  asyncValidate: promoCodeValidate(FORMNAME),
-  asyncChangeFields: ['planpicker'],
-  asyncBlurFields: ['promoCode']
+  asyncChangeFields: ['planpicker']
 };
 
 export default withRouter(
