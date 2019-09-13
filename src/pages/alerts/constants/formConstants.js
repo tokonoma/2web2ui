@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { EmailIcon, SlackIcon, WebhookIcon } from 'src/components/icons';
 import { emails, ifStringPresent } from 'src/helpers/validation';
+import { UnstyledLink } from '@sparkpost/matchbox';
 export const FORM_NAME = 'alertForm';
 
 export const METRICS = {
@@ -53,6 +54,16 @@ export const RECOMMENDED_METRIC_VALUE = {
   }
 };
 
+const webhookSubtitle = <Fragment>
+  {'Create a webhook for this alert. '}
+  <UnstyledLink external to={'https://www.sparkpost.com/docs/user-guide/alerts/#webhook-payload-sample'}>Sample payload</UnstyledLink>
+</Fragment>;
+
+const slackSubtitle = <Fragment>
+  {'Integrate this alert with Slack. '}
+  <UnstyledLink external to={'https://api.slack.com/incoming-webhooks'}>How to create a Slack Incoming webhook</UnstyledLink>
+</Fragment>;
+
 export const NOTIFICATION_CHANNEL_DATA = {
   emails: {
     icon: <EmailIcon />,
@@ -65,14 +76,14 @@ export const NOTIFICATION_CHANNEL_DATA = {
   },
   slack: {
     icon: <SlackIcon />,
-    subtitle: 'Integrate this alert with Slack',
+    subtitle: webhookSubtitle,
     fieldProps: {
       placeholder: 'https://hooks.slack.com/services/T00/B00/XX '
     }
   },
   webhook: {
     icon: <WebhookIcon />,
-    subtitle: 'Create a webhook for this alert',
+    subtitle: slackSubtitle,
     fieldProps: {
       placeholder: 'https://example.com/webhook-target'
     }
@@ -94,7 +105,7 @@ export const REALTIME_FILTERS = [
 
 export const SOURCE_FRIENDLY_NAMES =
   {
-    raw: 'Value',
+    raw: 'Score',
     week_over_week: 'Week over Week',
     day_over_day: 'Day over Day'
   };

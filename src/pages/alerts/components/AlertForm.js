@@ -106,7 +106,7 @@ export class AlertForm extends Component {
                 }
                 {formSpec.hasFilters &&
                   <div className={styles.Filters}>
-                    <label><h5>Filtered by <small className={styles.OptionalText}>optional</small></h5></label>
+                    <label><h5>Filtered by <small className={styles.OptionalText}>Add up to 10 filters to your alert.</small></h5></label>
                     {hasSubaccounts &&
                       <SubaccountField
                         disabled={submitting}

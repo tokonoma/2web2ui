@@ -104,18 +104,29 @@ export class FilterFields extends Component {
         </Grid.Column>
       </Grid>);
 
+    const shouldRenderFilter = (filter) => {
+      const emptyIP = filter.value === 'sending_ip' && sendingIps.length <= 0;
+      const emptyDomain = filter.value === 'sending_domain' && sendingDomains.length <= 0;
+      if (emptyIP || emptyDomain) {
+        return false;
+      }
+      return true;
+    };
+
     const renderMultiFilters = () => (
-      formSpec.filterOptions.map(({ label, value }) =>
-        (<Field
-          key={value}
-          name={value}
-          component={ComboBoxTypeaheadWrapper}
-          results={filterTypeaheadResults[value]}
-          label={label}
-          defaultSelected={this.props[value]}
-          {...extraProps[value]}
-        />)
-      ));
+      formSpec.filterOptions
+        .filter((option) => shouldRenderFilter(option))
+        .map(({ label, value }) =>
+          (<Field
+            key={value}
+            name={value}
+            component={ComboBoxTypeaheadWrapper}
+            results={filterTypeaheadResults[value]}
+            label={label}
+            defaultSelected={this.props[value]}
+            {...extraProps[value]}
+          />)
+        ));
 
     return (
       <>
