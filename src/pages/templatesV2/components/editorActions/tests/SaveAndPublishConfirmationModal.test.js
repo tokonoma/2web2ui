@@ -1,9 +1,11 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import useEditorContext from '../../../hooks/useEditorContext';
+import useRouter from 'src/hooks/useRouter';
 import SaveAndPublishConfirmationModal from '../SaveAndPublishConfirmationModal';
 
 jest.mock('../../../hooks/useEditorContext');
+jest.mock('src/hooks/useRouter');
 
 describe('SaveAndPublishConfirmationModal', () => {
   const subject = (editorState, props) => {
@@ -13,11 +15,21 @@ describe('SaveAndPublishConfirmationModal', () => {
       },
       isDraftPublishing: false,
       publishDraft: jest.fn(),
-      history: { push: jest.fn() },
       ...editorState
     });
+    useRouter.mockReturnValue({
+      history: {
+        push: jest.fn()
+      }
+    });
 
-    return shallow(<SaveAndPublishConfirmationModal onCancel={jest.fn()} open={true} {...props} />);
+    return shallow(
+      <SaveAndPublishConfirmationModal
+        onCancel={jest.fn()}
+        open={true}
+        {...props}
+      />
+    );
   };
 
   it('renders', () => {
@@ -49,18 +61,18 @@ describe('SaveAndPublishConfirmationModal', () => {
   });
 
   it('redirects to published path upon publishing', async () => {
-    const push = jest.fn();
+    const { history } = useRouter();
     const publishDraft = jest.fn(() => Promise.resolve());
-    const wrapper = subject({ history: { push }, publishDraft });
+    const wrapper = subject({ publishDraft });
     await wrapper.find('ConfirmationModal').prop('onConfirm')(); //invoke attached func
     expect(publishDraft).toHaveBeenCalled();
-    expect(push).toHaveBeenCalledWith('/templatesv2/edit/foo/published/content');
+    expect(history.push).toHaveBeenCalledWith('/templatesv2/edit/foo/published/content');
   });
 
   it('redirects to published path with subaccount upon publishing', async () => {
-    const push = jest.fn();
+    const push = useRouter().history.push();
     const publishDraft = jest.fn(() => Promise.resolve());
-    const wrapper = subject({ history: { push }, publishDraft, draft: { id: 'foo', subaccount_id: 101 }});
+    const wrapper = subject({ publishDraft, draft: { id: 'foo', subaccount_id: 101 }});
     await wrapper.find('ConfirmationModal').prop('onConfirm')(); //invoke attached func
     expect(publishDraft).toHaveBeenCalled();
     expect(push).toHaveBeenCalledWith('/templatesv2/edit/foo/published/content?subaccount=101');
