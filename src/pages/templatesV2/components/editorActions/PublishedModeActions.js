@@ -1,10 +1,7 @@
 import React from 'react';
-import {
-  Button,
-  Popover,
-  UnstyledLink
-} from '@sparkpost/matchbox';
+import { Button, Popover } from '@sparkpost/matchbox';
 import { ArrowDropDown, FileEdit } from '@sparkpost/matchbox-icons';
+import PageLink from 'src/components/pageLink';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
 import { routeNamespace } from '../../constants/routes';
 import styles from './Actions.module.scss';
@@ -28,11 +25,11 @@ const PublishedModeActions = () => {
         >
           <div className={styles.ActionsBody}>
             <div className={styles.ActionItem}>
-              <UnstyledLink to={editDraftTo}>
+              <PageLink to={editDraftTo}>
                 <FileEdit/>
 
                 {draftText}
-              </UnstyledLink>
+              </PageLink>
             </div>
           </div>
         </Popover>
