@@ -36,9 +36,11 @@ const DuplicateTemplateModal = (props) => {
 
     if (draftName.length && draftId.length) {
       createTemplate({
-        ...draft,
         name: draftName,
-        id: draftId
+        id: draftId,
+        content: draft.content,
+        options: draft.options,
+        shared_with_subaccounts: draft.shared_with_subaccounts
       }).then(() => setSuccessRedirect(true));
     }
   };
