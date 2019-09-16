@@ -10,7 +10,7 @@ import {
 import { isEmailAddress } from 'src/helpers/email';
 import useEditorContext from '../hooks/useEditorContext';
 
-const SendTestEmailModalButton = (props) => {
+const SendTestEmailButton = () => {
   const {
     content,
     match,
@@ -183,4 +183,4 @@ const SendTestEmailModalButton = (props) => {
   );
 };
 
-export default SendTestEmailModalButton;
+export default SendTestEmailButton;

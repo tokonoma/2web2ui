@@ -6,7 +6,7 @@ import {
 } from '@sparkpost/matchbox';
 import { DesktopWindows, PhoneAndroid } from '@sparkpost/matchbox-icons';
 import useEditorContext from '../hooks/useEditorContext';
-import SendTestEmailModalButton from './SendTestEmailModalButton';
+import SendTestEmailButton from './SendTestEmailButton';
 import styles from './PreviewControlBar.module.scss';
 
 const PreviewControlBar = () => {
@@ -41,7 +41,7 @@ const PreviewControlBar = () => {
       </div>
 
       <div>
-        <SendTestEmailModalButton/>
+        <SendTestEmailButton/>
       </div>
     </div>
   );
