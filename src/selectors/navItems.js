@@ -3,6 +3,7 @@ import _ from 'lodash';
 import routes from 'src/config/routes';
 import navItems from 'src/config/navItems';
 import accountNavItems from 'src/config/navItems/account';
+import newNavItems from 'src/config/navItems/newNavItems';
 import selectAccessConditionState from './accessConditionState';
 import { all } from 'src/helpers/conditions/compose';
 
@@ -48,4 +49,9 @@ export const selectNavItems = createSelector(
 export const selectAccountNavItems = createSelector(
   [selectAccessConditionState],
   (accessConditionState) => prepareNavItems(accountNavItems, accessConditionState)
+);
+
+export const selectNewNavItems = createSelector(
+  [selectAccessConditionState],
+  (accessConditionState) => prepareNavItems(newNavItems, accessConditionState)
 );

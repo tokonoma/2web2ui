@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`NavItem tests should call toggle nav when on mobile 1`] = `
-<li>
+<li
+  className=""
+>
   <Link
     className="Link mobile"
     onClick={[MockFunction]}
@@ -26,7 +28,9 @@ exports[`NavItem tests should call toggle nav when on mobile 1`] = `
 `;
 
 exports[`NavItem tests should render a link correctly 1`] = `
-<li>
+<li
+  className=""
+>
   <Link
     className="Link"
     onClick={null}
@@ -51,7 +55,9 @@ exports[`NavItem tests should render a link correctly 1`] = `
 `;
 
 exports[`NavItem tests should render a link with beta tag 1`] = `
-<li>
+<li
+  className=""
+>
   <Link
     className="Link"
     onClick={null}
@@ -83,7 +89,9 @@ exports[`NavItem tests should render a link with beta tag 1`] = `
 `;
 
 exports[`NavItem tests should render a link with labs tag 1`] = `
-<li>
+<li
+  className=""
+>
   <Link
     className="Link"
     onClick={null}
@@ -115,7 +123,9 @@ exports[`NavItem tests should render a link with labs tag 1`] = `
 `;
 
 exports[`NavItem tests should render a link with new tag 1`] = `
-<li>
+<li
+  className=""
+>
   <Link
     className="Link"
     onClick={null}

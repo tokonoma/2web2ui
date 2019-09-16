@@ -15,7 +15,8 @@ const NavGroup = (props) => {
     label,
     toggleMobileNav,
     mobile,
-    location
+    location,
+    newNav
   } = props;
 
   useEffect(() => {
@@ -45,7 +46,7 @@ const NavGroup = (props) => {
         <ChevronLeft className={styles.chevron}/>
       </a>
       <ul className={styles.NestedList}>
-        {children.map((child, key) => <NavItem {...child} mobile={mobile} location={location} key={key} toggleMobileNav={toggleMobileNav}/>)}
+        {children.map((child, key) => <NavItem newNav={newNav} {...child} mobile={mobile} location={location} key={key} toggleMobileNav={toggleMobileNav}/>)}
       </ul>
     </li>
   );
