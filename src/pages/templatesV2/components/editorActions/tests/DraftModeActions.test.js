@@ -29,7 +29,7 @@ describe('DraftModeActions', () => {
 
     duplicateButton.simulate('click');
 
-    expect(wrapper.find('DuplicateTemplateModal').props().open).toEqual(true);
+    expect(wrapper.find('DuplicateTemplateModal')).toHaveProp('open', true);
   });
 
   it('Sets the `SaveAndPublishConfirmationModal` oen prop to `true` when clicking on `SaveAndPublish`', () => {
@@ -38,6 +38,6 @@ describe('DraftModeActions', () => {
 
     saveAndPublishButton.simulate('click');
 
-    expect(wrapper.find('SaveAndPublishConfirmationModal').props().open).toEqual(true);
+    expect(wrapper.find('SaveAndPublishConfirmationModal')).toHaveProp('open', true);
   });
 });
