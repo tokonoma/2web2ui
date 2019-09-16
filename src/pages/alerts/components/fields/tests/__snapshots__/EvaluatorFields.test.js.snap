@@ -9,7 +9,7 @@ exports[`Evaluator Fields Component renders correctly 1`] = `
     sm={12}
   >
     <Label>
-      Evaluated
+      Score
     </Label>
     <Field
       component={[Function]}
@@ -19,7 +19,7 @@ exports[`Evaluator Fields Component renders correctly 1`] = `
       options={
         Array [
           Object {
-            "label": "Value",
+            "label": "Score",
             "value": "raw",
           },
           Object {
