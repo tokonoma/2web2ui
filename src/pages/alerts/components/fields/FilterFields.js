@@ -104,6 +104,12 @@ export class FilterFields extends Component {
         </Grid.Column>
       </Grid>);
 
+    /**
+     * Determine if a filter should be rendered depending on state of state of the filters
+     *
+     * @param {Object} a single filter field object
+     * @returns {boolean} true or false depending on the filter should be rendered
+     */
     const shouldRenderFilter = (filter) => {
       const emptyIP = filter.value === 'sending_ip' && sendingIps.length <= 0;
       const emptyDomain = filter.value === 'sending_domain' && sendingDomains.length <= 0;
