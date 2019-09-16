@@ -73,6 +73,7 @@ const DuplicateTemplateModal = (props) => {
         showCloseButton={true}
       >
         <Panel
+          accent
           title="Duplicate Template"
           sectioned
         >
