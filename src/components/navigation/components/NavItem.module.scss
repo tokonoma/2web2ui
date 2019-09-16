@@ -6,15 +6,12 @@
   padding: 0;
   margin-bottom: rem(13);
 
-  > .newNav { //Change to *
+  > * {
     margin-left: rem(56);
   }
 
-  > :not(.newNav) { //Remove
-    margin-left: rem(48);
-  }
 
-  > :last-child.newNav{ //Remove .newNav
+  > :last-child{
     border-bottom: 1px solid color(gray, 8);
     padding-bottom: rem(13);
   }
