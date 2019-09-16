@@ -64,18 +64,14 @@ const DraftModeActions = () => {
               onClick={() => setPopoverOpen(false)}
             />
 
+            <hr className={styles.Divider}/>
+
+            {hasPublished && <ViewPublished className={styles.ActionItem}/>}
+
             <DuplicateTemplate
               className={styles.ActionItem}
               onClick={handleDuplicateDraftClick}
             />
-
-            {hasPublished &&
-              <>
-                <hr className={styles.Divider}/>
-
-                <ViewPublished className={styles.ActionItem}/>
-              </>
-            }
           </div>
         </Popover>
 
