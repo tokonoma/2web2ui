@@ -80,10 +80,6 @@ const SendTestEmailModalButton = (props) => {
       if (toEmail && (!isValidEmail || emailAlreadyAdded)) {
         setToEmailError(true);
       }
-
-      if (e.type === 'blur' && toEmailList.length === 0) {
-        setToEmailError(true);
-      }
     }
   };
 
@@ -107,7 +103,7 @@ const SendTestEmailModalButton = (props) => {
         id: templateId,
         subaccountId: subaccountId,
         mode: isPublishedMode ? 'published' : 'draft',
-        emails: [ toEmail ],
+        emails: toEmailList.map((item) => item.address),
         from: fromEmail
       }).then(() => {
         setModalOpen(false);
@@ -155,16 +151,8 @@ const SendTestEmailModalButton = (props) => {
               onKeyDown={handleToKeyDownAndBlur}
               onBlur={handleToKeyDownAndBlur}
               removeItem={handleRemoveItem}
-              error={hasToEmailError ? 'Please enter valid addresses without duplication' : null}
+              error={hasToEmailError ? 'Please enter valid email addresses without duplicates' : null}
             />
-
-            {/* <TextField
-              id="text-field-email-to"
-              label="To:"
-              type="email"
-              onChange={handleToChange}
-              value={toEmail}
-            /> */}
 
             <TextField
               id="text-field-test-email-from"
