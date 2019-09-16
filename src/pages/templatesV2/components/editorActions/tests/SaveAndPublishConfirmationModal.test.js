@@ -8,7 +8,7 @@ jest.mock('../../../hooks/useEditorContext');
 jest.mock('src/hooks/useRouter');
 
 describe('SaveAndPublishConfirmationModal', () => {
-  const subject = (editorState, props) => {
+  const subject = (editorState, history, props) => {
     useEditorContext.mockReturnValue({
       draft: {
         id: 'foo'
@@ -19,7 +19,8 @@ describe('SaveAndPublishConfirmationModal', () => {
     });
     useRouter.mockReturnValue({
       history: {
-        push: jest.fn()
+        push: jest.fn(),
+        ...history
       }
     });
 
@@ -39,7 +40,7 @@ describe('SaveAndPublishConfirmationModal', () => {
   });
 
   it('sets the `ConfirmationModal` `open` prop to `false` when set via the `open` prop of the wrapper', () => {
-    const wrapper = subject(undefined, { open: false });
+    const wrapper = subject(undefined, undefined, { open: false });
 
     expect(wrapper.find('ConfirmationModal').props().open).toEqual(false);
   });
@@ -61,20 +62,30 @@ describe('SaveAndPublishConfirmationModal', () => {
   });
 
   it('redirects to published path upon publishing', async () => {
-    const { history } = useRouter();
-    const publishDraft = jest.fn(() => Promise.resolve());
+    const promise = Promise.resolve();
+    const publishDraft = jest.fn(() => promise);
     const wrapper = subject({ publishDraft });
-    await wrapper.find('ConfirmationModal').prop('onConfirm')(); //invoke attached func
-    expect(publishDraft).toHaveBeenCalled();
-    expect(history.push).toHaveBeenCalledWith('/templatesv2/edit/foo/published/content');
+    const { history } = useRouter();
+
+    wrapper.find('ConfirmationModal').simulate('confirm');
+
+    return promise.then(() => {
+      expect(publishDraft).toHaveBeenCalled();
+      expect(history.push).toHaveBeenCalledWith('/templatesv2/edit/foo/published/content');
+    });
   });
 
   it('redirects to published path with subaccount upon publishing', async () => {
-    const push = useRouter().history.push();
-    const publishDraft = jest.fn(() => Promise.resolve());
+    const promise = Promise.resolve();
+    const publishDraft = jest.fn(() => promise);
     const wrapper = subject({ publishDraft, draft: { id: 'foo', subaccount_id: 101 }});
-    await wrapper.find('ConfirmationModal').prop('onConfirm')(); //invoke attached func
-    expect(publishDraft).toHaveBeenCalled();
-    expect(push).toHaveBeenCalledWith('/templatesv2/edit/foo/published/content?subaccount=101');
+    const { history } = useRouter();
+
+    wrapper.find('ConfirmationModal').simulate('confirm');
+
+    return promise.then(() => {
+      expect(publishDraft).toHaveBeenCalled();
+      expect(history.push).toHaveBeenCalledWith('/templatesv2/edit/foo/published/content?subaccount=101');
+    });
   });
 });
