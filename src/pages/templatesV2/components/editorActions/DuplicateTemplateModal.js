@@ -13,37 +13,44 @@ import { routeNamespace } from '../../constants/routes';
 const DuplicateTemplateModal = (props) => {
   const { open, onClose } = props;
   const { draft, createTemplate } = useEditorContext();
-  const initialDraftName = draft.name ? `${draft.name} (COPY)` : null;
-  const initialDraftId = draft.id ? `${draft.id}-copy` : null;
+  const initialDraftName = draft.name ? `${draft.name} (COPY)` : '';
+  const initialDraftId = draft.id ? `${draft.id}-copy` : '';
 
   // State
   const [draftName, setDraftName] = useState(initialDraftName);
   const [draftId, setDraftId] = useState(initialDraftId);
   const [hasNameError, setNameError] = useState(false);
-  const [hasDraftError, setDraftError] = useState(false);
+  const [hasIdError, setIdError] = useState(false);
   const [hasSuccessRedirect, setSuccessRedirect] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!draftName || draftName.length === 0) {
+    if (draftName.length === 0) {
       setNameError(true);
     }
 
-    if (!draftId || draftId.length === 0) {
-      setDraftError(true);
+    if (draftId.length === 0) {
+      setIdError(true);
     }
 
-    if (draftName && draftId) {
-      setNameError(false);
-      setDraftError(false);
-
+    if (draftName.length && draftId.length) {
       createTemplate({
         ...draft,
         name: draftName,
         id: draftId
       }).then(() => setSuccessRedirect(true));
     }
+  };
+
+  const handleNameChange = (e) => {
+    setNameError(false);
+    setDraftName(e.target.value);
+  };
+
+  const handleIdChange = (e) => {
+    setIdError(false);
+    setDraftId(e.target.value);
   };
 
   return (
@@ -73,9 +80,9 @@ const DuplicateTemplateModal = (props) => {
               name="templateName"
               label="Template Name"
               required // not working as I would expect...
-              value={draftName ? draftName : null}
-              error={hasNameError ? 'Please enter a template name.' : null}
-              onChange={(e) => setDraftName(e.target.value)}
+              value={draftName}
+              error={hasNameError ? 'Please enter a template name.' : undefined}
+              onChange={handleNameChange}
             />
 
             <TextField
@@ -83,9 +90,9 @@ const DuplicateTemplateModal = (props) => {
               name="templateId"
               label="Template ID"
               required // not working as I would expect...
-              value={draftId ? draftId : null}
-              error={hasDraftError ? 'Please enter a unique template ID.' : null}
-              onChange={(e) => setDraftId(e.target.value)}
+              value={draftId}
+              error={hasIdError ? 'Please enter a unique template ID.' : undefined}
+              onChange={handleIdChange}
             />
 
             <ButtonWrapper>
