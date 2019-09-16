@@ -2,6 +2,7 @@ import React, { useCallback } from 'react';
 import ConfirmationModal from 'src/components/modals/ConfirmationModal';
 import { routeNamespace } from '../../constants/routes';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
+import useRouter from 'src/hooks/useRouter';
 import useEditorContext from '../../hooks/useEditorContext';
 
 const SaveAndPublishConfirmationModal = (props) => {
@@ -12,9 +13,9 @@ const SaveAndPublishConfirmationModal = (props) => {
   const {
     draft,
     publishDraft,
-    history,
     isDraftPublishing
   } = useEditorContext();
+  const { history } = useRouter();
 
   const handleConfirm = useCallback(() => publishDraft(draft, draft.subaccount_id)
     .then(() => {
