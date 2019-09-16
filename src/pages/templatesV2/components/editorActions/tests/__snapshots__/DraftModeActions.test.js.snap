@@ -42,15 +42,15 @@ exports[`DraftModeActions renders draft actions 1`] = `
           className="ActionItem"
           onClick={[Function]}
         />
-        <DuplicateTemplate
-          className="ActionItem"
-          onClick={[Function]}
-        />
         <hr
           className="Divider"
         />
         <_default
           className="ActionItem"
+        />
+        <DuplicateTemplate
+          className="ActionItem"
+          onClick={[Function]}
         />
       </div>
     </Popover>
