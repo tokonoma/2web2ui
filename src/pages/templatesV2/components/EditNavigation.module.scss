@@ -16,7 +16,8 @@
   display: inline-block;
   padding: spacing(large) spacing(large);
 
-  &:hover {
+  &:hover,
+  &:focus {
     color: color(orange);
   }
 }
@@ -33,7 +34,7 @@
     left: 50%;
     right: 50%;
     transform: translateX(-50%);
-    bottom: -1px;
+    bottom: 0;
     height: rem(4);
     background-color: color(orange);
   }
