@@ -293,7 +293,7 @@ export const selectHealthScoreDetails = createSelector(
       from, to
     });
 
-    // Merge in injections and rankings
+    // Merge in rankings
     const mergedHistory = _.map(filledHistory, (healthData) => ({ ranking: rankHealthScore(roundToPlaces(healthData.health_score * 100, 1)), ...healthData }));
 
     const isEmpty = mergedHistory.every((values) => values.health_score === null);

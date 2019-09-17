@@ -58,7 +58,7 @@ export class HealthScorePage extends Component {
   }
 
   renderContent = () => {
-    const { data = [], facet, handleDateSelect, handleDateHover, loading, gap, empty, error, selectedDate, hoveredDate, resetDateHover } = this.props;
+    const { data = [], handleDateSelect, handleDateHover, loading, gap, empty, error, selectedDate, hoveredDate, resetDateHover } = this.props;
     const { selectedComponent } = this.state;
 
     const selectedWeights = _.get(_.find(data, ['date', selectedDate]), 'weights', []);
@@ -119,8 +119,6 @@ export class HealthScorePage extends Component {
                   }}
                   xAxisProps={this.getXAxisProps()}
                 />
-
-
                 <ChartHeader title='Injections' tooltipContent={INJECTIONS_INFO} />
                 <BarChart
                   margin = {newModelMarginsOther}
@@ -141,9 +139,6 @@ export class HealthScorePage extends Component {
                   }}
                   xAxisProps={this.getXAxisProps()}
                 />
-
-
-
                 {(selectedComponent && !selectedWeightsAreEmpty) && (
                   <Fragment>
                     <ChartHeader title={HEALTH_SCORE_COMPONENTS[selectedComponent].chartTitle} />

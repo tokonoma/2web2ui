@@ -233,7 +233,8 @@ describe('Selectors: signals', () => {
                 },
                 {
                   dt: '2018-01-02',
-                  health_score: 0.8
+                  health_score: 0.8,
+                  total_injection_count: 12345
                 },
                 {
                   dt: '2018-01-03',
