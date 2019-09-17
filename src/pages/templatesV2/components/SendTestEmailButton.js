@@ -25,14 +25,20 @@ const SendTestEmailButton = () => {
   const templateId = match.params.id;
   const [isModalOpen, setModalOpen] = useState(false);
   const [isModalLoading, setModalLoading] = useState(false);
-  const [fromEmail, setFromEmail] = useState(undefined);
-  const [hasToEmailError, setToEmailError] = useState(false);
-  const [subject, setSubject] = useState(undefined);
   const [toEmail, setToEmail] = useState('');
   const [toEmailList, setToEmailList] = useState([]);
+  const [hasToEmailError, setToEmailError] = useState(false);
+  const [fromEmail, setFromEmail] = useState('');
+  const [subject, setSubject] = useState('');
+
+  const clearForm = () => {
+    setToEmail('');
+    setToEmailList([]);
+  };
 
   const handleToChange = (e) => {
     setToEmail(e.target.value);
+    setToEmailError(false);
   };
 
   const handleModalOpen = () => {
@@ -50,6 +56,7 @@ const SendTestEmailButton = () => {
   };
 
   const handleModalClose = () => {
+    clearForm();
     setModalOpen(false);
     setToEmailError(false);
   };
@@ -106,10 +113,10 @@ const SendTestEmailButton = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    setModalLoading(true);
-
     if (toEmailList.length === 0) {
       setToEmailError(true);
+    } else {
+      setModalLoading(true);
     }
 
     if (toEmailList.length && templateId) {
