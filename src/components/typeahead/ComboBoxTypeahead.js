@@ -1,131 +1,93 @@
 import React, { useState, useEffect } from 'react';
 import { ComboBox, ComboBoxTextField, ComboBoxMenu } from '@sparkpost/matchbox';
 import Downshift from 'downshift';
-import debounce from 'lodash/debounce';
-import sortMatch from 'src/helpers/sortMatch';
 import PropTypes from 'prop-types';
+import { useDebouncedCallback } from 'use-debounce';
+import sortMatch from 'src/helpers/sortMatch';
 
-export const ComboBoxTypeahead = (props) => {
-  const {
-    error,
-    results,
-    itemToString,
-    maxNumberOfResults,
-    onChange,
-    disabled,
-    label,
-    name,
-    selectedMap,
-    placeholder,
-    readOnly,
-    defaultSelected,
-    debounceFn //Needed for testing
-  } = props;
+export const ComboBoxTypeahead = ({
+  defaultSelected,
+  disabled,
+  error,
+  itemToString,
+  label,
+  maxNumberOfResults,
+  name,
+  onChange,
+  placeholder,
+  readOnly,
+  results,
+  selectedMap
+}) => {
+  const [inputValue, setInputValue] = useState('');
   const [selected, setSelected] = useState(defaultSelected);
-  const [matches, setMatches] = useState(results);
-  const [updateMatches, setUpdateMatches] = useState(() => undefined);
+  const [menuItems, setMenuItems] = useState([]);
+  const [updateMenuItems] = useDebouncedCallback((value) => {
+    const items = value ? sortMatch(results, value, itemToString) : results;
+    setMenuItems(items.slice(0, maxNumberOfResults));
+  }, 400);
 
-  //Updates the value of this component
   useEffect(() => {
     onChange(selected.map(selectedMap));
-  }, [onChange, selected, selectedMap]);
+  }, [onChange, selectedMap, selected]);
 
   useEffect(() => {
-    setSelected(defaultSelected);
-  }, [defaultSelected]);
+    updateMenuItems(inputValue);
+  }, [inputValue, results, selected, updateMenuItems]);
 
-  //Creates debounce function and cancels the debounce on unmount
-  useEffect(() => {
-    setMatches(results);
-    const updateMatchesFn = debounceFn((inputValue) => {
-      const inputMatches = inputValue ? sortMatch(results, inputValue, itemToString) : results;
-      setMatches(inputMatches.slice(0, maxNumberOfResults));
-    }, 300);
-    setUpdateMatches(() => updateMatchesFn);
-    return () => updateMatchesFn.cancel();
-  }, [debounceFn, itemToString, maxNumberOfResults, results]);
-
-  function stateReducer(state, changes) {
-
+  // see, https://github.com/downshift-js/downshift#statechangetypes
+  const stateReducer = (state, changes) => {
     switch (changes.type) {
       case Downshift.stateChangeTypes.clickItem:
-      case Downshift.stateChangeTypes.keyDownEnter:
-        if (changes.selectedItem) {
-          addItem(changes.selectedItem);
-          return {
-            ...changes,
-            inputValue: '',
-            selectedItem: null
-          };
-        } else {
-          return changes;
-        }
-      case Downshift.stateChangeTypes.changeInput:
-        updateMatches(changes.inputValue);
-        return changes;
-      default:
-        return changes;
+      case Downshift.stateChangeTypes.keyDownEnter: {
+        setSelected([...selected, changes.selectedItem]);
+        setInputValue('');
+
+        return {
+          ...changes,
+          inputValue: '',
+          isOpen: true, // leave menu open
+          selectedItem: null
+        };
+      }
     }
-  }
 
-  function addItem(item) {
-    setSelected([ ...selected, item ]);
-  }
+    return changes;
+  };
 
-  function removeItem(item) {
-    setSelected(selected.filter((i) => i !== item));
-  }
-
-  function typeaheadfn(downshift) {
-    const {
-      getInputProps,
-      getMenuProps,
-      isOpen,
-      getItemProps,
-      inputValue,
-      highlightedIndex,
-      openMenu,
-      getRootProps
-    } = downshift;
-
-
-    const rootProps = getRootProps({
-      refKey: 'rootRef'
-    });
-
-    const items = matches
+  const typeaheadfn = ({
+    getInputProps,
+    getMenuProps,
+    isOpen,
+    getItemProps,
+    inputValue,
+    highlightedIndex,
+    getRootProps,
+    openMenu
+  }) => {
+    const items = menuItems
       .filter((item) => !selected.some((selected) => selectedMap(selected) === selectedMap(item)))
       .map((item, index) => getItemProps({
         content: itemToString(item),
         highlighted: highlightedIndex === index,
         index,
         item
-      })
-      );
-
-    /*When losing focus, the text input clears. Thus, the first
-    click will always be for an empty text field. This both opens
-    the matches and reset the matches.
-    */
-    const firstOpen = () => {
-      openMenu();
-      setMatches(results);
-    };
+      }));
 
     const inputProps = getInputProps({
-      id: name,
-      label,
-      selectedItems: selected,
-      itemToString,
-      removeItem,
-      onFocus: firstOpen,
-      onClick: firstOpen,
-      value: inputValue || '',
-      error: error && !isOpen ? error : undefined,
-      placeholder: (selected.length) ? '' : placeholder,
       disabled,
-      readOnly: readOnly || (results.length === 0)
+      error: error && !isOpen ? error : undefined,
+      id: name,
+      itemToString,
+      label,
+      onFocus: () => { openMenu(); },
+      placeholder: selected.length ? '' : placeholder,
+      readOnly: readOnly || results.length === 0,
+      removeItem: (item) => { setSelected(selected.filter((i) => i !== item)); },
+      selectedItems: selected,
+      value: inputValue || ''
     });
+
     const menuProps = getMenuProps({
       items,
       isOpen: Boolean(isOpen && items.length),
@@ -133,15 +95,20 @@ export const ComboBoxTypeahead = (props) => {
     });
 
     return (
-      <ComboBox {...rootProps}>
+      <ComboBox {...getRootProps({ refKey: 'rootRef' })}>
         <ComboBoxTextField {...inputProps} />
         <ComboBoxMenu {...menuProps} />
       </ComboBox>
     );
-  }
+  };
 
   return (
-    <Downshift itemToString={itemToString} stateReducer={stateReducer} >
+    <Downshift
+      defaultHighlightedIndex={0}
+      itemToString={itemToString}
+      onInputValueChange={(nextInputValue) => { setInputValue(nextInputValue); }}
+      stateReducer={stateReducer}
+    >
       {typeaheadfn}
     </Downshift>
   );
@@ -157,15 +124,13 @@ ComboBoxTypeahead.propTypes = {
   name: PropTypes.string,
   selectedMap: PropTypes.func,
   placeholder: PropTypes.string,
-  readOnly: PropTypes.bool,
-  debounceFn: PropTypes.func
+  readOnly: PropTypes.bool
 };
 
 ComboBoxTypeahead.defaultProps = {
-  results: [],
+  defaultSelected: [],
   itemToString: (item) => item,
-  selectedMap: (item) => item,
   maxNumberOfResults: 100,
-  debounceFn: debounce,
-  defaultSelected: []
+  results: [],
+  selectedMap: (item) => item
 };
