@@ -6,6 +6,7 @@ import { reduxForm } from 'redux-form';
 import qs from 'query-string';
 import PlanSelectSection, { SelectedPlan } from '../components/PlanSelect';
 import CurrentPlanSection from '../components/CurrentPlanSection';
+import { verifyPromoCode, clearPromoCode } from 'src/actions/billing';
 
 //Actions
 import { getBillingInfo, getPlans } from 'src/actions/account';
@@ -23,7 +24,11 @@ export const ChangePlanForm = ({
   getBillingInfo,
   getBillingCountries,
   getPlans,
-  // verifyPromoCode,
+  verifyPromoCode,
+  promoPending,
+  promoError,
+  selectedPromo,
+  clearPromoCode,
   // initialValues: {
   //   promoCode
   // },
@@ -38,6 +43,9 @@ export const ChangePlanForm = ({
   //TODO: Implement in AC-986
   // useEffect(() => { console.log(selectedPlan, promoCode)}, [verifyPromoCode, promoCode, selectedPlan]);
 
+  const applyPromoCode = (promoCode) => {
+    verifyPromoCode({ promoCode , billingId: selectedPlan.billingId, meta: { promoCode }});
+  };
   const onSelect = (plan) => {
     selectPlan(plan);
   };
@@ -51,6 +59,14 @@ export const ChangePlanForm = ({
               ? <SelectedPlan
                 plan={selectedPlan}
                 onChange={onSelect}
+                promoCodeObj = {
+                  { applyPromoCode: applyPromoCode,
+                    clearPromoCode: clearPromoCode,
+                    selectedPromo: selectedPromo,//MAKE THE THREE KEYS INTO AN OBJECT
+                    promoError: promoError,//
+                    promoPending: promoPending//
+                  }
+                }
               />
               : <PlanSelectSection
                 onSelect={onSelect}
@@ -73,14 +89,19 @@ const mapStateToProps = (state, props) => {
   return {
     plans: selectTieredVisiblePlans(state),
     initialValues: changePlanInitialValues(state, { planCode, promoCode }),
-    currentPlan: currentPlanSelector(state)
+    currentPlan: currentPlanSelector(state),
+    promoPending: state.billing.promoPending,
+    selectedPromo: state.billing.selectedPromo,
+    promoError: state.billing.promoError
   };
 };
 
 const mapDispatchToProps = ({
   getBillingInfo,
   getBillingCountries,
-  getPlans
+  getPlans,
+  verifyPromoCode,
+  clearPromoCode
 });
 
 const formOptions = {

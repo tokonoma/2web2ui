@@ -22,8 +22,9 @@ export const useModal = () => {
 };
 
 
-export const SelectedPlan = ({ plan, onChange }) => {
+export const SelectedPlan = ({ plan, onChange, promoCodeObj }) => {
   const { isShowing, toggle } = useModal(false);
+  const { selectedPromo } = promoCodeObj;
   return (
     <Panel
       title="Your New Plan"
@@ -41,7 +42,7 @@ export const SelectedPlan = ({ plan, onChange }) => {
           <div className={styles.tierLabel}>{PLAN_TIERS[plan.tier]}</div>
           <div className={styles.PlanRow}>
             <div>
-              <PlanPrice showOverage showIp showCsm plan={plan} />
+              <PlanPrice showOverage showIp showCsm plan={plan} selectedPromo={selectedPromo}/>
             </div>
             <div>
               <Button
@@ -58,7 +59,10 @@ export const SelectedPlan = ({ plan, onChange }) => {
       </Panel.Section>
       <Panel.Section>
         <div className={styles.PlanRow}>
-          <PromoCodeNew verifyPromoCode={() => {}} />
+          <PromoCodeNew
+            key={selectedPromo.promoCode || 'promocode'}
+            promoCodeObj ={promoCodeObj}
+          />
         </div>
       </Panel.Section>
     </Panel>
