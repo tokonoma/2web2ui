@@ -212,6 +212,7 @@ describe('Selectors: signals', () => {
                 {
                   dt: '2018-01-01',
                   health_score: 0.74321, // bad
+                  total_injection_count: 182400,
                   weights: [
                     {
                       weight_type: 'eng cohorts: new, 14-day',
@@ -238,6 +239,7 @@ describe('Selectors: signals', () => {
                   dt: '2018-01-03',
                   health_score: 0.98, // good
                   weights: [],
+                  total_injection_count: 35000,
                   WoW: null
                 }
               ]
@@ -257,27 +259,23 @@ describe('Selectors: signals', () => {
                 {
                   dt: '2018-01-01',
                   health_score: 0.74321, // bad
+                  total_injection_count: 100,
                   weights: []
                 },
                 {
                   dt: '2018-01-02',
-                  health_score: 0.8
+                  health_score: 0.8,
+                  total_injection_count: 100
                 },
                 {
                   dt: '2018-01-03',
                   health_score: 0.98, // good
                   weights: [],
+                  total_injection_count: 100,
                   WoW: null
                 }
               ]
             }
-          ]
-        },
-        injections: {
-          data: [
-            { injections: 100, spam_hits: 1, dt: '2018-01-01' },
-            { injections: 100, spam_hits: 1, dt: '2018-01-02' },
-            { injections: 100, spam_hits: 1, dt: '2018-01-03' }
           ]
         }
       }

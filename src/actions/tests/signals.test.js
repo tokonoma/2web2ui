@@ -85,10 +85,4 @@ describe('Signals Actions', () => {
       action: () => actions.getCurrentHealthScore({ ...requiredOptions })
     }
   });
-
-  snapshotActionCases('.getInjections', {
-    'by default': {
-      action: () => actions.getInjections({ ...requiredOptions })
-    }
-  });
 });

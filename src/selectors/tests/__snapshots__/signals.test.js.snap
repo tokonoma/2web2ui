@@ -1155,7 +1155,7 @@ Object {
       Object {
         "date": "2018-01-02",
         "health_score": 0.8,
-        "injections": null,
+        "injections": undefined,
         "ranking": "good",
         "weights": Array [],
       },
@@ -1426,6 +1426,7 @@ Object {
           "date": "2018-01-01",
           "health_score": 74.3,
           "ranking": "warning",
+          "total_injection_count": 182400,
           "weights": Array [
             Object {
               "weight": 0.5,
@@ -1454,6 +1455,7 @@ Object {
           "date": "2018-01-03",
           "health_score": 98,
           "ranking": "good",
+          "total_injection_count": 35000,
           "weights": Array [],
         },
       ],
@@ -1502,6 +1504,7 @@ Array [
         "date": "2018-01-01",
         "health_score": 74.3,
         "ranking": "warning",
+        "total_injection_count": 182400,
         "weights": Array [
           Object {
             "weight": 0.5,
@@ -1530,6 +1533,7 @@ Array [
         "date": "2018-01-03",
         "health_score": 98,
         "ranking": "good",
+        "total_injection_count": 35000,
         "weights": Array [],
       },
     ],

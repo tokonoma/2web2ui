@@ -161,24 +161,6 @@ Array [
 ]
 `;
 
-exports[`Signals Actions .getInjections by default 1`] = `
-Array [
-  Object {
-    "meta": Object {
-      "headers": Object {},
-      "method": "GET",
-      "params": Object {
-        "from": "2018-01-12",
-        "to": "2018-01-13",
-      },
-      "showErrorAlert": false,
-      "url": "/v1/signals/injections",
-    },
-    "type": "GET_INJECTIONS",
-  },
-]
-`;
-
 exports[`Signals Actions .getSpamHits by default 1`] = `
 Array [
   Object {
