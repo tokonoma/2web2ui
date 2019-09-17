@@ -7,20 +7,24 @@ import {
   TextField,
   ComboBoxTextField
 } from '@sparkpost/matchbox';
+import Loading from 'src/components/loading';
 import { isEmailAddress } from 'src/helpers/email';
 import useEditorContext from '../hooks/useEditorContext';
+import styles from './SendTestEmailButton.module.scss';
 
 const SendTestEmailButton = () => {
   const {
     content,
+    isPublishedMode,
     match,
     sendPreview,
     showAlert,
-    isPublishedMode,
-    subaccountId
+    subaccountId,
+    updateDraft
   } = useEditorContext();
   const templateId = match.params.id;
   const [isModalOpen, setModalOpen] = useState(false);
+  const [isModalLoading, setModalLoading] = useState(false);
   const [fromEmail, setFromEmail] = useState(undefined);
   const [hasToEmailError, setToEmailError] = useState(false);
   const [subject, setSubject] = useState(undefined);
@@ -33,8 +37,16 @@ const SendTestEmailButton = () => {
 
   const handleModalOpen = () => {
     setModalOpen(true);
-    setFromEmail(content.from.email);
-    setSubject(content.subject);
+    setModalLoading(true);
+
+    // Save the template, then allow the user to send a preview
+    // The preview can be send whether the current draft was successfully saved or not.
+    updateDraft({ id: templateId, content }, subaccountId)
+      .finally(() => {
+        setModalLoading(false);
+        setFromEmail(content.from.email);
+        setSubject(content.subject);
+      });
   };
 
   const handleModalClose = () => {
@@ -138,45 +150,55 @@ const SendTestEmailButton = () => {
           title="Send a Test"
           sectioned
         >
-          <p>Verify your email renders as expected in the inbox by sending a quick test.</p>
+          {isModalLoading &&
+            <div className={styles.LoadingWrapper}>
+              <Loading className={styles.Loading}/>
+            </div>
+          }
 
-          <form onSubmit={(e) => handleSubmit(e)}>
-            <ComboBoxTextField
-              id="text-field-test-email-to"
-              label="To:"
-              value={toEmail}
-              selectedItems={toEmailList}
-              itemToString={({ email }) => email}
-              onChange={handleToChange}
-              onKeyDown={handleToKeyDownAndBlur}
-              onBlur={handleToKeyDownAndBlur}
-              removeItem={handleRemoveItem}
-              error={hasToEmailError ? 'Please enter valid email addresses without duplicates' : null}
-            />
+          {!isModalLoading &&
+            <>
+              <p>Verify your email renders as expected in the inbox by sending a quick test.</p>
 
-            <TextField
-              id="text-field-test-email-from"
-              label="From:"
-              type="email"
-              disabled
-              value={fromEmail}
-            />
+              <form onSubmit={(e) => handleSubmit(e)}>
+                <ComboBoxTextField
+                  id="text-field-test-email-to"
+                  label="To:"
+                  value={toEmail}
+                  selectedItems={toEmailList}
+                  itemToString={({ email }) => email}
+                  onChange={handleToChange}
+                  onKeyDown={handleToKeyDownAndBlur}
+                  onBlur={handleToKeyDownAndBlur}
+                  removeItem={handleRemoveItem}
+                  error={hasToEmailError ? 'Please enter valid email addresses without duplicates' : null}
+                />
 
-            <TextField
-              id="text-field-test-email-subject"
-              label="Subject:"
-              type="email"
-              disabled
-              value={subject}
-            />
+                <TextField
+                  id="text-field-test-email-from"
+                  label="From:"
+                  type="email"
+                  disabled
+                  value={fromEmail}
+                />
 
-            <Button
-              color="orange"
-              type="submit"
-            >
-              Send Email
-            </Button>
-          </form>
+                <TextField
+                  id="text-field-test-email-subject"
+                  label="Subject:"
+                  type="email"
+                  disabled
+                  value={subject}
+                />
+
+                <Button
+                  color="orange"
+                  type="submit"
+                >
+                  Send Email
+                </Button>
+              </form>
+            </>
+          }
         </Panel>
       </Modal>
     </>
