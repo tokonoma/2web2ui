@@ -119,6 +119,7 @@ const SendTestEmailButton = () => {
       setModalLoading(true);
     }
 
+    // QUESTION: Would it be better to update editor context instead of using chaining to control the state here?
     if (toEmailList.length && templateId) {
       sendPreview({
         id: templateId,

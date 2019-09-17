@@ -22,11 +22,11 @@ console.error = (message) => {
 // mock out a file that uses require.context under the hood
 jest.mock('src/components/notifications/staticMarkdownNotifications', () => [
   {
-    component: function() {},
+    component: function () {},
     meta: { title: 'Some notification', type: 'info' }
   },
   {
-    component: function() {},
+    component: function () {},
     meta: { type: 'notice' }
   }
 ]);
@@ -55,5 +55,5 @@ Object.defineProperty(global.window.location, 'assign', { value: jest.fn(), conf
 // Show a stack track for unhandled rejections to help
 // track them down.
 process.on('unhandledRejection', (reason) => {
-	console.log(reason)
+  console.log(reason);
 });
