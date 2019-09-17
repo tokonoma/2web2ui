@@ -123,6 +123,7 @@ exports[`EngagementRecencyOverview renders overview panel with controls and tabl
       component={[Function]}
       dataKey="total_engagement"
       label="Total Recipients"
+      sortable={true}
       width="15%"
     />
   </Connect(SummaryTable)>

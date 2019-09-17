@@ -194,6 +194,7 @@ class EngagementRecencyOverview extends React.Component {
             align="right"
             dataKey="total_engagement"
             label="Total Recipients"
+            sortable
             width="15%"
             component={({ total_engagement }) => <NumericDataCell value={total_engagement} />}
           />
