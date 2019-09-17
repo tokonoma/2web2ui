@@ -1,7 +1,6 @@
 @import '~@sparkpost/matchbox/src/styles/config.scss';
 
-// Specificity wars 💣💥 -> https://stuffandnonsense.co.uk/archives/css_specificity_wars.html
-.LoadingWrapper.LoadingWrapper {
+.LoadingWrapper {
   display: flex;
   align-items: center;
   justify-content: center;
