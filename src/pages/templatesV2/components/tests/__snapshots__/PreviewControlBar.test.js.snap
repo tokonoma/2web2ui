@@ -11,20 +11,33 @@ exports[`PreviewControlBar renders control bar 1`] = `
       className="PreviewDeviceButton active"
       id="preview-content-desktop-button"
       onClick={[Function]}
+      role="button"
+      to="javascript:void(0);"
     >
       <DesktopWindows
         size={24}
       />
+      <ScreenReaderOnly>
+        Desktop Preview
+      </ScreenReaderOnly>
     </UnstyledLink>
     <UnstyledLink
       className="PreviewDeviceButton"
       id="preview-content-mobile-button"
       onClick={[Function]}
+      role="button"
+      to="javascript:void(0);"
     >
       <PhoneAndroid
         size={24}
       />
+      <ScreenReaderOnly>
+        Mobile Preview
+      </ScreenReaderOnly>
     </UnstyledLink>
+  </div>
+  <div>
+    <SendTestEmailButton />
   </div>
 </div>
 `;
