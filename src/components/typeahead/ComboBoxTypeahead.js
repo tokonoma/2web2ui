@@ -29,7 +29,7 @@ export const ComboBoxTypeahead = ({
 
   useEffect(() => {
     onChange(selected.map(selectedMap));
-  }, [onChange, selectedMap, selected]);
+  }, [onChange, selectedMap, defaultSelected, selected]);
 
   useEffect(() => {
     updateMenuItems(inputValue);
@@ -50,6 +50,8 @@ export const ComboBoxTypeahead = ({
           selectedItem: null
         };
       }
+      case Downshift.stateChangeTypes.changeInput:
+        setInputValue(changes.inputValue);
     }
 
     return changes;
@@ -106,7 +108,7 @@ export const ComboBoxTypeahead = ({
     <Downshift
       defaultHighlightedIndex={0}
       itemToString={itemToString}
-      onInputValueChange={(nextInputValue) => { setInputValue(nextInputValue); }}
+
       stateReducer={stateReducer}
     >
       {typeaheadfn}
