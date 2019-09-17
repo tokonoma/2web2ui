@@ -6,6 +6,7 @@ exports[`DuplicateTemplateModal renders with default props and some data from th
     showCloseButton={true}
   >
     <Panel
+      accent={true}
       sectioned={true}
       title="Duplicate Template"
     >
@@ -13,7 +14,6 @@ exports[`DuplicateTemplateModal renders with default props and some data from th
         onSubmit={[Function]}
       >
         <TextField
-          error={null}
           id="template-name"
           label="Template Name"
           name="templateName"
@@ -24,7 +24,6 @@ exports[`DuplicateTemplateModal renders with default props and some data from th
           value="My Draft (COPY)"
         />
         <TextField
-          error={null}
           id="template-id"
           label="Template ID"
           name="templateId"
