@@ -13,7 +13,6 @@ import {
 } from 'src/actions/templates';
 import { list as listDomains } from 'src/actions/sendingDomains';
 import { list as listSubaccounts } from 'src/actions/subaccounts';
-
 import {
   selectDraftTemplate,
   selectDraftTemplatePreview,
