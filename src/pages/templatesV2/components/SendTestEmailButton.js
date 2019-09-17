@@ -106,6 +106,8 @@ const SendTestEmailButton = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    setModalLoading(true);
+
     if (toEmailList.length === 0) {
       setToEmailError(true);
     }
@@ -115,16 +117,19 @@ const SendTestEmailButton = () => {
         id: templateId,
         subaccountId: subaccountId,
         mode: isPublishedMode ? 'published' : 'draft',
-        emails: toEmailList.map((item) => item.address),
+        emails: toEmailList.map((item) => item.email),
         from: fromEmail
-      }).then(() => {
-        setModalOpen(false);
+      })
+        .then(() => {
+          setModalLoading(false); // Seems repetitive, but prevents janky loading state from continuing even after success
+          setModalOpen(false);
 
-        showAlert({
-          type: 'success',
-          message: 'Successfully sent a test email'
-        });
-      });
+          showAlert({
+            type: 'success',
+            message: 'Successfully sent a test email'
+          });
+        })
+        .finally(() => setModalLoading(false));
     }
   };
 
