@@ -4,11 +4,10 @@ import {
   Button,
   Panel,
   Modal,
-  TextField,
-  ComboBoxTextField
+  TextField
 } from '@sparkpost/matchbox';
 import Loading from 'src/components/loading';
-import { isEmailAddress } from 'src/helpers/email';
+import MultiEmailField, { useMultiEmailField } from 'src/components/multiEmailField';
 import useEditorContext from '../hooks/useEditorContext';
 import styles from './SendTestEmailButton.module.scss';
 
@@ -22,23 +21,26 @@ const SendTestEmailButton = () => {
     subaccountId,
     updateDraft
   } = useEditorContext();
+  const {
+    handleMultiEmailChange,
+    handleMultiEmailKeyDownAndBlur,
+    handleMultiEmailRemove,
+    setMultiEmailError,
+    setMultiEmailValue,
+    setMultiEmailList,
+    multiEmailValue,
+    multiEmailList,
+    multiEmailError
+  } = useMultiEmailField();
   const templateId = match.params.id;
   const [isModalOpen, setModalOpen] = useState(false);
   const [isModalLoading, setModalLoading] = useState(false);
-  const [toEmail, setToEmail] = useState('');
-  const [toEmailList, setToEmailList] = useState([]);
-  const [hasToEmailError, setToEmailError] = useState(false);
   const [fromEmail, setFromEmail] = useState('');
   const [subject, setSubject] = useState('');
 
   const clearForm = () => {
-    setToEmail('');
-    setToEmailList([]);
-  };
-
-  const handleToChange = (e) => {
-    setToEmail(e.target.value);
-    setToEmailError(false);
+    setMultiEmailValue('');
+    setMultiEmailList([]);
   };
 
   const handleModalOpen = () => {
@@ -58,72 +60,24 @@ const SendTestEmailButton = () => {
   const handleModalClose = () => {
     clearForm();
     setModalOpen(false);
-    setToEmailError(false);
-  };
-
-  const handleToKeyDownAndBlur = (e) => {
-    // prevent form submission when using the enter key
-    if (e.keyCode === 13) {
-      e.preventDefault();
-    }
-
-    // Remove the last email from the list when the user deletes
-    // and no in progress value is present in the field
-    if (e.keyCode === 8 && !toEmail) {
-      setToEmailList(toEmailList.filter((email, index) => {
-        if (index + 1 !== toEmailList.length) {
-          return email;
-        }
-      }));
-    }
-
-    if (e.type === 'blur' || e.keyCode === 32) {
-      if (e.type === 'keydown') {
-        e.preventDefault(); // Prevents spaces from being written to the field
-      }
-
-      const isValidEmail = isEmailAddress(toEmail);
-
-      // A valid email address is entered, and it is added to the array
-      if (isValidEmail) {
-        setToEmailList([...toEmailList, { email: toEmail }]);
-        setToEmail('');
-        setToEmailError(false);
-      }
-
-      // Throw an error on the field if:
-      // 1. There is some text entry in the field
-      // 2. The entered email is not valid or
-      // 3. The entered email already exists in the list
-      if (toEmail && !isValidEmail) {
-        setToEmailError(true);
-      }
-    }
-  };
-
-  const handleRemoveItem = (target) => {
-    setToEmailList(toEmailList.filter((item) => {
-      if (target !== item) {
-        return item;
-      }
-    }));
+    setMultiEmailError(false);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (toEmailList.length === 0) {
-      setToEmailError(true);
+    if (multiEmailList.length === 0) {
+      setMultiEmailError(true);
     } else {
       setModalLoading(true);
     }
 
-    if (toEmailList.length && templateId) {
+    if (multiEmailList.length && templateId) {
       sendPreview({
         id: templateId,
         subaccountId: subaccountId,
         mode: isPublishedMode ? 'published' : 'draft',
-        emails: toEmailList.map((item) => item.email),
+        emails: multiEmailList.map((item) => item.email),
         from: fromEmail
       })
         .then(() => {
@@ -173,18 +127,16 @@ const SendTestEmailButton = () => {
               <p>Verify your email renders as expected in the inbox by sending a quick test.</p>
 
               <form onSubmit={(e) => handleSubmit(e)}>
-                <ComboBoxTextField
-                  id="text-field-test-email-to"
+                <MultiEmailField
+                  id="multi-email-email-to"
                   label="To:"
                   name="emailTo"
-                  value={toEmail}
-                  selectedItems={toEmailList}
-                  itemToString={({ email }) => email}
-                  onChange={handleToChange}
-                  onKeyDown={handleToKeyDownAndBlur}
-                  onBlur={handleToKeyDownAndBlur}
-                  removeItem={handleRemoveItem}
-                  error={hasToEmailError ? 'Please enter a valid email address' : ''}
+                  onChange={(e) => handleMultiEmailChange(e)}
+                  onKeyDownAndBlur={(e) => handleMultiEmailKeyDownAndBlur(e)}
+                  onRemoveEmail={handleMultiEmailRemove}
+                  error={multiEmailError}
+                  value={multiEmailValue}
+                  emailList={multiEmailList}
                 />
 
                 <TextField
