@@ -64,7 +64,7 @@ const SendTestEmailButton = () => {
   const handleToKeyDownAndBlur = (e) => {
     // prevent form submission when using the enter key
     if (e.keyCode === 13) {
-      e.preventDefault;
+      e.preventDefault();
     }
 
     // Remove the last email from the list when the user deletes
@@ -177,6 +177,7 @@ const SendTestEmailButton = () => {
                 <ComboBoxTextField
                   id="text-field-test-email-to"
                   label="To:"
+                  name="emailTo"
                   value={toEmail}
                   selectedItems={toEmailList}
                   itemToString={({ email }) => email}
@@ -184,12 +185,13 @@ const SendTestEmailButton = () => {
                   onKeyDown={handleToKeyDownAndBlur}
                   onBlur={handleToKeyDownAndBlur}
                   removeItem={handleRemoveItem}
-                  error={hasToEmailError ? 'Please enter valid email addresses without duplicates' : null}
+                  error={hasToEmailError ? 'Please enter valid email addresses without duplicates' : ''}
                 />
 
                 <TextField
                   id="text-field-test-email-from"
                   label="From:"
+                  name="emailFrom"
                   type="email"
                   disabled
                   value={fromEmail}
@@ -198,6 +200,7 @@ const SendTestEmailButton = () => {
                 <TextField
                   id="text-field-test-email-subject"
                   label="Subject:"
+                  name="emailSubject"
                   type="email"
                   disabled
                   value={subject}
