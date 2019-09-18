@@ -1,4 +1,5 @@
 import { formatCountries } from 'src/helpers/billing';
+import _ from 'lodash';
 
 const initialState = {
   plansError: null,
@@ -46,8 +47,12 @@ export default (state = initialState, action) => {
     case 'GET_BUNDLES_PENDING':
       return { ...state, bundlesLoading: true, bundlesError: null };
 
-    case 'GET_BUNDLES_SUCCESS':
-      return { ...state, bundlesLoading: false, bundles: action.payload.bundles };
+    case 'GET_BUNDLES_SUCCESS': {
+      const { plans, bundles } = action.payload;
+      const plansById = _.keyBy(plans, 'plan');
+      const mappedBundles = bundles.map((bundle) => ({ ...bundle, ...plansById[bundle.bundle] }));
+      return { ...state, bundlesLoading: false, bundles: mappedBundles };
+    }
 
     case 'GET_BUNDLES_FAIL':
       return { ...state, bundlesLoading: false, bundlesError: action.payload };

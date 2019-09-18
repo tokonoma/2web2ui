@@ -1,5 +1,10 @@
 const mockThunk = (action, response = {}, resolve = true) => (dispatch) => {
-  dispatch(action);
+  const { type, ...rest } = action;
+  dispatch({
+    type: resolve ? `${type}_SUCCESS` : `${type}_FAIL`,
+    ...rest,
+    payload: response
+  });
   return resolve ? Promise.resolve(response) : Promise.reject(response);
 };
 
