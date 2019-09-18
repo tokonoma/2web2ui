@@ -6,6 +6,7 @@ import { selectCondition } from './accessConditionState';
 const suspendedSelector = (state) => state.account.isSuspendedForBilling;
 const pendingSubscriptionSelector = (state) => state.account.pending_subscription;
 const plansSelector = (state) => state.billing.plans || [];
+const bundleSelector = (state) => state.billing.bundles || [];
 const accountBillingSelector = (state) => state.account.billing;
 const accountBilling = (state) => state.billing;
 const selectIsAws = selectCondition(isAws);
@@ -102,6 +103,38 @@ export const selectTieredVisiblePlans = createSelector(
     return _.groupBy(normalizedPlans, 'tier');
   }
 );
+
+export const selectAvailableBundles = createSelector(
+  [bundleSelector, selectIsSelfServeBilling],
+  (bundles, isSelfServeBilling) => {
+    const availableBundles = bundles;
+    if (!isSelfServeBilling) {
+      _.remove(availableBundles, ({ isFree = false }) => isFree);
+    }
+    return availableBundles;
+  }
+);
+
+export const selectVisibleBundles = createSelector(
+  [selectAvailableBundles, selectIsFree1, currentPlanCodeSelector],
+  (bundles, isOnLegacyFree1Plan) => bundles.filter(({ isFree, status }) =>
+    status === 'public' &&
+      !(isOnLegacyFree1Plan && isFree) //hide new free plans if on legacy free1 plan
+  )
+);
+
+export const selectTieredVisibleBundles = createSelector(
+  [selectVisibleBundles],
+  (bundles) => {
+    const normalizedPlans = bundles.map((bundle) => ({
+      ...bundle,
+      tier: bundle.tier || (currentFreePlans.includes(bundle.code) ? 'test' : 'default')
+    }));
+
+    return _.groupBy(normalizedPlans, 'tier');
+  }
+);
+
 export const selectAccount = (state) => state.account;
 
 export const selectAccountBilling = createSelector(

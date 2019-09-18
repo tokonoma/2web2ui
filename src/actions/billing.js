@@ -5,6 +5,8 @@ import { list as getSendingIps } from './sendingIps';
 import { isAws } from 'src/helpers/conditions/account';
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
 import zuoraRequest from 'src/actions/helpers/zuoraRequest';
+import { MOCK_BUNDLES, MOCK_SUBSCRIPTION } from './helpers/mockData';
+import mockThunk from './helpers/mockThunk'; //TODO: Remove
 
 export function syncSubscription({ meta = {}} = {}) {
   return sparkpostApiRequest({
@@ -16,7 +18,6 @@ export function syncSubscription({ meta = {}} = {}) {
     }
   });
 }
-
 
 /**
  * Updates plan
@@ -181,4 +182,28 @@ export function getBillingCountries() {
       }
     }
   });
+}
+
+export function getBundles() {
+  //TODO: Replace with sparkpostApiRequest
+  return mockThunk({
+    type: 'GET_BUNDLES',
+    meta: {
+      method: 'GET',
+      url: '/v1/billing/bundles'
+    }
+  }, MOCK_BUNDLES //TODO: Delete mock response
+  );
+}
+
+export function getSubscription() {
+  //TODO: Replace with sparkpostApiRequest
+  return mockThunk({
+    type: 'GET_SUBSCRIPTION',
+    meta: {
+      method: 'GET',
+      url: '/v1/billing/subscription'
+    }
+  }, MOCK_SUBSCRIPTION//TODO: Delete mock response
+  );
 }

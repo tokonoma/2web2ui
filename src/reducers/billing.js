@@ -43,6 +43,15 @@ export default (state = initialState, action) => {
     case 'REMOVE_ACTIVE_PROMO':
       return { ...state, promoPending: false, promoError: undefined, selectedPromo: {}};
 
+    case 'GET_BUNDLES_PENDING':
+      return { ...state, bundlesLoading: true, bundlesError: null };
+
+    case 'GET_BUNDLES_SUCCESS':
+      return { ...state, bundlesLoading: false, bundles: action.payload.bundles };
+
+    case 'GET_BUNDLES_FAIL':
+      return { ...state, bundlesLoading: false, bundlesError: action.payload };
+
     default:
       return state;
   }
