@@ -24,7 +24,7 @@ describe('SendTestEmailButton', () => {
 
     return shallow(<SendTestEmailButton {...props}/>);
   };
-  const toEmailSelector = '[name="emailTo"]';
+  const getToEmailComponent = (wrapper) => wrapper.find('[name="emailTo"]');
 
   // Render the subject, open the modal, and return relevant variables for use in test cases
   const openModal = () => {
@@ -69,7 +69,7 @@ describe('SendTestEmailButton', () => {
     const { promise, wrapper } = openModal();
 
     return promise.then(() => {
-      const emailToField = wrapper.find('[name="emailTo"]');
+      const emailToField = getToEmailComponent(wrapper);
 
       wrapper.find('Modal').simulate('close'); // Simulates `onClose` prop
 
@@ -91,7 +91,7 @@ describe('SendTestEmailButton', () => {
       return promise.then(() => {
         const mockPreventDefault = jest.fn();
 
-        wrapper.find('[name="emailTo"]').simulate('keydown', { keyCode: 13, preventDefault: mockPreventDefault });
+        getToEmailComponent(wrapper).simulate('keydown', { keyCode: 13, preventDefault: mockPreventDefault });
 
         expect(mockPreventDefault).toHaveBeenCalled();
       });
@@ -103,7 +103,7 @@ describe('SendTestEmailButton', () => {
       return promise.then(() => {
         const mockPreventDefault = jest.fn();
 
-        wrapper.find('[name="emailTo"]').simulate('keydown', { keyCode: 32, type: 'keydown', preventDefault: mockPreventDefault });
+        getToEmailComponent(wrapper).simulate('keydown', { keyCode: 32, type: 'keydown', preventDefault: mockPreventDefault });
         expect(mockPreventDefault).toHaveBeenCalled();
         expect(wrapper).not.toHaveProp('value', ' ');
       });
@@ -111,40 +111,38 @@ describe('SendTestEmailButton', () => {
 
     it('updates the `selectedItems` prop, clears the `value` prop a valid email address and hits the space bar or tab key', () => {
       const { promise, wrapper } = openModal();
-      const toEmailSelector = '[name="emailTo"]';
 
       return promise.then(() => {
         // Adding a selected item via the spacebar
-        wrapper.find(toEmailSelector).simulate('change', { target: { value: 'hello@me.com' }});
+        getToEmailComponent(wrapper).simulate('change', { target: { value: 'hello@me.com' }});
 
-        expect(wrapper.find(toEmailSelector)).toHaveProp('value', 'hello@me.com');
+        expect(getToEmailComponent(wrapper)).toHaveProp('value', 'hello@me.com');
 
-        wrapper.find(toEmailSelector).simulate('keydown', { keyCode: 32, preventDefault: jest.fn() });
+        getToEmailComponent(wrapper).simulate('keydown', { keyCode: 32, preventDefault: jest.fn() });
 
-        expect(wrapper.find(toEmailSelector)).not.toHaveProp('value', 'hello@me.com');
-        expect(wrapper.find(toEmailSelector)).toHaveProp('selectedItems', [ { email: 'hello@me.com' } ]);
+        expect(getToEmailComponent(wrapper)).not.toHaveProp('value', 'hello@me.com');
+        expect(getToEmailComponent(wrapper)).toHaveProp('selectedItems', [ { email: 'hello@me.com' } ]);
       });
     });
 
     it('updates the `error` prop when the user enters an invalid email and hits the spacebar or blurs the field', () => {
       const { promise, wrapper } = openModal();
-      const toEmailSelector = '[name="emailTo"]';
 
       return promise.then(() => {
-        wrapper.find(toEmailSelector).simulate('change', { target: { value: 'invalidEmail' }});
-        wrapper.find(toEmailSelector).simulate('keydown', { keyCode: 32, preventDefault: jest.fn() });
+        getToEmailComponent(wrapper).simulate('change', { target: { value: 'invalidEmail' }});
+        getToEmailComponent(wrapper).simulate('keydown', { keyCode: 32, preventDefault: jest.fn() });
 
-        expect(wrapper.find(toEmailSelector)).toHaveProp('error', 'Please enter valid email addresses without duplicates');
+        expect(getToEmailComponent(wrapper)).toHaveProp('error', 'Please enter valid email addresses without duplicates');
 
-        wrapper.find(toEmailSelector).simulate('change', { target: { value: '' }}); // Clear the error
+        getToEmailComponent(wrapper).simulate('change', { target: { value: '' }}); // Clear the error
 
-        expect(wrapper.find(toEmailSelector)).toHaveProp('error', '');
+        expect(getToEmailComponent(wrapper)).toHaveProp('error', '');
 
-        wrapper.find(toEmailSelector).simulate('change', { target: { value: 'invalidEmailAgain' }});
+        getToEmailComponent(wrapper).simulate('change', { target: { value: 'invalidEmailAgain' }});
 
-        wrapper.find(toEmailSelector).simulate('blur', { type: 'blur' });
+        getToEmailComponent(wrapper).simulate('blur', { type: 'blur' });
 
-        expect(wrapper.find(toEmailSelector)).toHaveProp('error', 'Please enter valid email addresses without duplicates');
+        expect(getToEmailComponent(wrapper)).toHaveProp('error', 'Please enter valid email addresses without duplicates');
       });
 
     });
@@ -153,21 +151,21 @@ describe('SendTestEmailButton', () => {
       const { promise, wrapper } = openModal();
 
       return promise.then(() => {
-        wrapper.find(toEmailSelector).simulate('change', { target: { value: 'hello@me.com' }});
-        wrapper.find(toEmailSelector).simulate('keydown', { keyCode: 32, preventDefault: jest.fn() });
+        getToEmailComponent(wrapper).simulate('change', { target: { value: 'hello@me.com' }});
+        getToEmailComponent(wrapper).simulate('keydown', { keyCode: 32, preventDefault: jest.fn() });
 
-        expect(wrapper.find(toEmailSelector)).toHaveProp('selectedItems', [ { email: 'hello@me.com' } ]);
+        expect(getToEmailComponent(wrapper)).toHaveProp('selectedItems', [ { email: 'hello@me.com' } ]);
 
-        wrapper.find(toEmailSelector).simulate('change', { target: { value: 'hello@you.com' }});
-        wrapper.find(toEmailSelector).simulate('keydown', { keyCode: 32, preventDefault: jest.fn() });
+        getToEmailComponent(wrapper).simulate('change', { target: { value: 'hello@you.com' }});
+        getToEmailComponent(wrapper).simulate('keydown', { keyCode: 32, preventDefault: jest.fn() });
 
-        wrapper.find(toEmailSelector).simulate('keydown', { keyCode: 8, preventDefault: jest.fn() });
+        getToEmailComponent(wrapper).simulate('keydown', { keyCode: 8, preventDefault: jest.fn() });
 
-        expect(wrapper.find(toEmailSelector)).toHaveProp('selectedItems', [ { email: 'hello@me.com' } ]);
+        expect(getToEmailComponent(wrapper)).toHaveProp('selectedItems', [ { email: 'hello@me.com' } ]);
 
-        wrapper.find(toEmailSelector).simulate('keydown', { keyCode: 8, preventDefault: jest.fn() });
+        getToEmailComponent(wrapper).simulate('keydown', { keyCode: 8, preventDefault: jest.fn() });
 
-        expect(wrapper.find(toEmailSelector)).toHaveProp('selectedItems', []);
+        expect(getToEmailComponent(wrapper)).toHaveProp('selectedItems', []);
       });
     });
 
@@ -175,12 +173,12 @@ describe('SendTestEmailButton', () => {
       const { promise, wrapper } = openModal();
 
       return promise.then(() => {
-        wrapper.find(toEmailSelector).simulate('change', { target: { value: 'hello@me.com' }});
-        wrapper.find(toEmailSelector).simulate('keydown', { keyCode: 32, preventDefault: jest.fn() });
-        wrapper.find(toEmailSelector).simulate('change', { target: { value: 'hello@me.com' }});
-        wrapper.find(toEmailSelector).simulate('keydown', { keyCode: 32, preventDefault: jest.fn() });
+        getToEmailComponent(wrapper).simulate('change', { target: { value: 'hello@me.com' }});
+        getToEmailComponent(wrapper).simulate('keydown', { keyCode: 32, preventDefault: jest.fn() });
+        getToEmailComponent(wrapper).simulate('change', { target: { value: 'hello@me.com' }});
+        getToEmailComponent(wrapper).simulate('keydown', { keyCode: 32, preventDefault: jest.fn() });
 
-        expect(wrapper.find(toEmailSelector)).toHaveProp('error', 'Please enter valid email addresses without duplicates');
+        expect(getToEmailComponent(wrapper)).toHaveProp('error', 'Please enter valid email addresses without duplicates');
       });
     });
 
@@ -188,11 +186,11 @@ describe('SendTestEmailButton', () => {
       const { promise, wrapper } = openModal();
 
       return promise.then(() => {
-        wrapper.find(toEmailSelector).simulate('change', { target: { value: 'hello@me.com' }});
-        wrapper.find(toEmailSelector).simulate('keydown', { keyCode: 32, preventDefault: jest.fn() });
-        wrapper.find(toEmailSelector).props().removeItem({ email: 'hello@me.com' });
+        getToEmailComponent(wrapper).simulate('change', { target: { value: 'hello@me.com' }});
+        getToEmailComponent(wrapper).simulate('keydown', { keyCode: 32, preventDefault: jest.fn() });
+        getToEmailComponent(wrapper).props().removeItem({ email: 'hello@me.com' });
 
-        expect(wrapper.find(toEmailSelector)).toHaveProp('selectedItems', []);
+        expect(getToEmailComponent(wrapper)).toHaveProp('selectedItems', []);
       });
     });
   });
@@ -204,7 +202,7 @@ describe('SendTestEmailButton', () => {
       return promise.then(() => {
         wrapper.find('form').simulate('submit', { preventDefault: jest.fn() });
 
-        expect(wrapper.find(toEmailSelector)).toHaveProp('error', 'Please enter valid email addresses without duplicates');
+        expect(getToEmailComponent(wrapper)).toHaveProp('error', 'Please enter valid email addresses without duplicates');
       });
     });
 
@@ -217,8 +215,8 @@ describe('SendTestEmailButton', () => {
       } = openModal();
 
       return promise.then(() => {
-        wrapper.find(toEmailSelector).simulate('change', { target: { value: 'hello@me.com' }});
-        wrapper.find(toEmailSelector).simulate('keydown', { keyCode: 32, preventDefault: jest.fn() });
+        getToEmailComponent(wrapper).simulate('change', { target: { value: 'hello@me.com' }});
+        getToEmailComponent(wrapper).simulate('keydown', { keyCode: 32, preventDefault: jest.fn() });
         wrapper.find('form').simulate('submit', { preventDefault: jest.fn() });
 
         expect(wrapper.find('Loading')).toExist();
@@ -236,8 +234,8 @@ describe('SendTestEmailButton', () => {
       const { promise, wrapper } = openModal();
 
       return promise.then(() => {
-        wrapper.find(toEmailSelector).simulate('change', { target: { value: 'hello@me.com' }});
-        wrapper.find(toEmailSelector).simulate('keydown', { keyCode: 32, preventDefault: jest.fn() });
+        getToEmailComponent(wrapper).simulate('change', { target: { value: 'hello@me.com' }});
+        getToEmailComponent(wrapper).simulate('keydown', { keyCode: 32, preventDefault: jest.fn() });
         wrapper.find('form').simulate('submit', { preventDefault: jest.fn() });
 
         expect(wrapper.find('Loading')).toExist();
