@@ -263,6 +263,22 @@ describe('SendTestEmailButton', () => {
         });
       });
     });
+
+    it('no longer renders the loading UI if sending succeeds or catches', () => {
+      const { promise, wrapper } = openModal();
+
+      return promise.then(() => {
+        wrapper.find(toEmailSelector).simulate('change', { target: { value: 'hello@me.com' }});
+        wrapper.find(toEmailSelector).simulate('keydown', { keyCode: 32, preventDefault: jest.fn() });
+        wrapper.find('form').simulate('submit', { preventDefault: jest.fn() });
+
+        expect(wrapper.find('Loading')).toExist();
+
+        return promise.finally(() => {
+          expect(wrapper.find('Loading')).not.toExist();
+        });
+      });
+    });
   });
 });
 
