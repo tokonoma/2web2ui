@@ -119,6 +119,16 @@ describe('ComboBoxTypeahead', () => {
     expect(wrapper.find('ComboBoxTextField')).toHaveProp('readOnly', true);
   });
 
+  it('renders placeholder message when no items have been selected', () => {
+    const wrapper = subject({ placeholder: 'Do something!' });
+    expect(wrapper.find('ComboBoxTextField')).toHaveProp('placeholder', 'Do something!');
+  });
+
+  it('does not render placeholder message when items have been selected', () => {
+    const wrapper = subject({ defaultSelected: ['apple'], placeholder: 'Do something!' });
+    expect(wrapper.find('ComboBoxTextField')).toHaveProp('placeholder', '');
+  });
+
   it('calls onChange on mount', () => {
     const onChange = jest.fn();
     subject({ defaultSelected: ['pineapple'], onChange });

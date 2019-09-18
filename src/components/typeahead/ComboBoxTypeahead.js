@@ -89,7 +89,7 @@ export const ComboBoxTypeahead = ({
       itemToString,
       label,
       onFocus: () => { openMenu(); },
-      placeholder,
+      placeholder: selectedItems.length ? '' : placeholder,
       readOnly: readOnly || results.length === 0,
       removeItem: (itemToRemove) => {
         const mappedItemToRemove = selectedMap(itemToRemove);
@@ -145,6 +145,7 @@ ComboBoxTypeahead.defaultProps = {
   defaultSelected: [],
   itemToString: (item) => item,
   maxNumberOfResults: 100,
+  placeholder: '',
   results: [],
   selectedMap: (item) => item
 };
