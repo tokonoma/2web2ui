@@ -24,17 +24,18 @@ const PromoCodeNew = ({ promoCodeObj, handlePromoCode }) => {
     }
     return <></>;
   };
+  const isDisabled = () => promoPending || typeof selectedPromo.promoCode === 'string';
+  const displayErrorMessage = () => promoError ? promoError.message : '';
   return <TextField
     name="promo"
     label="Promo Code"
-    disabled={promoPending || typeof selectedPromo.promoCode === 'string'}
+    disabled={isDisabled()}
     connectRight={renderConnectRight(selectedPromo.promoCode)}
     onChange={handleChange}
     suffix={renderSuffix(promoPending)}
     errorInLabel={true}
-    error={promoError ? promoError.message : ''}
+    error={displayErrorMessage()}
     defaultValue={selectedPromo.promoCode || ''}
-    onKeyPress={(e) => e.target.keyCode === 13 && e.preventDefault()}
   />;
 };
 

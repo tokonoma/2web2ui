@@ -1,12 +1,6 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 import CreditCardSection from '../CreditCardSection';
-// jest.mock('src/constants', () => ({
-//   FORMS: {
-//     JOIN_PLAN: 'test'
-//   }
-// }));
-
 describe('creditCardSection', () => {
   let wrapper;
   let props;
