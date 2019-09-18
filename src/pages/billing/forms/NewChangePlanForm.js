@@ -24,9 +24,7 @@ export const ChangePlanForm = ({
   getBillingCountries,
   getPlans,
   verifyPromoCode,
-  promoPending,
-  promoError,
-  selectedPromo,
+  billing,
   clearPromoCode,
   // initialValues: {
   //   promoCode
@@ -34,6 +32,7 @@ export const ChangePlanForm = ({
   currentPlan
 }) => {
   const [selectedPlan, selectPlan] = useState(null);
+  const { promoPending, promoError, selectedPromo = {}} = billing;
   // const [useSavedCC, setUseSavedCC] = useState(null);
   useEffect(() => { getBillingCountries(); }, [getBillingCountries]);
   useEffect(() => { getBillingInfo(); }, [getBillingInfo]);
@@ -88,9 +87,7 @@ const mapStateToProps = (state, props) => {
     plans: selectTieredVisiblePlans(state),
     initialValues: changePlanInitialValues(state, { planCode, promoCode }),
     currentPlan: currentPlanSelector(state),
-    promoPending: state.billing.promoPending,
-    selectedPromo: state.billing.selectedPromo,
-    promoError: state.billing.promoError
+    billing: state.billing
   };
 };
 
