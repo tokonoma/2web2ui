@@ -3,9 +3,9 @@ import { useState } from 'react';
 import { isEmailAddress } from 'src/helpers/email';
 
 const useMultiEmailField = (value = '', emailList = [], error = '') => {
-  const [multiEmailValue, setValue] = useState(value);
-  const [multiEmailError, setError] = useState(error);
-  const [multiEmailList, setList] = useState(emailList);
+  const [multiEmailValue, setMultiEmailValue] = useState(value);
+  const [multiEmailError, setMultiEmailError] = useState(error);
+  const [multiEmailList, setMultiEmailList] = useState(emailList);
 
   const handleMultiEmailKeyDownAndBlur = (e) => {
     // prevent form submission when using the enter key
@@ -16,7 +16,7 @@ const useMultiEmailField = (value = '', emailList = [], error = '') => {
     // Remove the last email from the list when the user deletes
     // and no in progress value is present in the field
     if (e.keyCode === 8 && !multiEmailValue) {
-      setList(multiEmailList.filter((email, index) => {
+      setMultiEmailList(multiEmailList.filter((email, index) => {
         if (index + 1 !== multiEmailList.length) {
           return email;
         }
@@ -32,9 +32,9 @@ const useMultiEmailField = (value = '', emailList = [], error = '') => {
 
       // A valid email address is entered, and it is added to the array
       if (isValidEmail) {
-        setList([...multiEmailList, { email: multiEmailValue }]);
-        setValue('');
-        setError('');
+        setMultiEmailList([...multiEmailList, { email: multiEmailValue }]);
+        setMultiEmailValue('');
+        setMultiEmailError('');
       }
 
       // Throw an error on the field if:
@@ -42,34 +42,22 @@ const useMultiEmailField = (value = '', emailList = [], error = '') => {
       // 2. The entered email is not valid or
       // 3. The entered email already exists in the list
       if (value && !isValidEmail) {
-        setError('Please enter a valid email address');
+        setMultiEmailError('Please enter a valid email address');
       }
     }
   };
 
   const handleMultiEmailChange = (e) => {
-    setValue(e.target.value);
-    setError('');
+    setMultiEmailValue(e.target.value);
+    setMultiEmailError('');
   };
 
   const handleMultiEmailRemove = (target) => {
-    setList(multiEmailList.filter((item) => {
+    setMultiEmailList(multiEmailList.filter((item) => {
       if (target !== item) {
         return item;
       }
     }));
-  };
-
-  const setMultiEmailValue = (str) => {
-    setValue(str);
-  };
-
-  const setMultiEmailError = (bool) => {
-    setError(bool);
-  };
-
-  const setMultiEmailList = (arr) => {
-    setList(arr);
   };
 
   return {

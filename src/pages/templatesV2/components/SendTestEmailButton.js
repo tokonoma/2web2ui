@@ -60,14 +60,14 @@ const SendTestEmailButton = () => {
   const handleModalClose = () => {
     clearForm();
     setModalOpen(false);
-    setMultiEmailError(false);
+    setMultiEmailError('');
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (multiEmailList.length === 0) {
-      setMultiEmailError(true);
+      setMultiEmailError('Please enter a valid email address');
     } else {
       setModalLoading(true);
     }
