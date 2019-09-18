@@ -1,9 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
-import {
-  UnstyledLink,
-  ScreenReaderOnly
-} from '@sparkpost/matchbox';
+import { UnstyledLink, ScreenReaderOnly } from '@sparkpost/matchbox';
 import { DesktopWindows, PhoneAndroid } from '@sparkpost/matchbox-icons';
 import useEditorContext from '../hooks/useEditorContext';
 import SendTestEmailButton from './SendTestEmailButton';
