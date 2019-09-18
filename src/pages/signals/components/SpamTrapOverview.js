@@ -199,7 +199,6 @@ class SpamTrapOverview extends React.Component {
             align="right"
             dataKey="total_injections"
             label="Total Injections"
-            sortable
             width="15%"
             component={({ total_injections }) => <NumericDataCell value={total_injections} />}
           />

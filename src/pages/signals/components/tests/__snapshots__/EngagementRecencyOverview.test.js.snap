@@ -121,8 +121,8 @@ exports[`EngagementRecencyOverview renders overview panel with controls and tabl
     <Column
       align="right"
       component={[Function]}
-      dataKey="total_engagement"
-      label="Total Recipients"
+      dataKey="c_total"
+      label="Current Injections"
       sortable={true}
       width="15%"
     />
