@@ -83,10 +83,9 @@ const SendTestEmailButton = () => {
       }
 
       const isValidEmail = isEmailAddress(toEmail);
-      const emailAlreadyAdded = toEmailList.find((item) => item.email === toEmail);
 
       // A valid email address is entered, and it is added to the array
-      if (isValidEmail && !emailAlreadyAdded) {
+      if (isValidEmail) {
         setToEmailList([...toEmailList, { email: toEmail }]);
         setToEmail('');
         setToEmailError(false);
@@ -96,7 +95,7 @@ const SendTestEmailButton = () => {
       // 1. There is some text entry in the field
       // 2. The entered email is not valid or
       // 3. The entered email already exists in the list
-      if (toEmail && (!isValidEmail || emailAlreadyAdded)) {
+      if (toEmail && !isValidEmail) {
         setToEmailError(true);
       }
     }
@@ -104,7 +103,7 @@ const SendTestEmailButton = () => {
 
   const handleRemoveItem = (target) => {
     setToEmailList(toEmailList.filter((item) => {
-      if (target.email !== item.email) {
+      if (target !== item) {
         return item;
       }
     }));
@@ -185,7 +184,7 @@ const SendTestEmailButton = () => {
                   onKeyDown={handleToKeyDownAndBlur}
                   onBlur={handleToKeyDownAndBlur}
                   removeItem={handleRemoveItem}
-                  error={hasToEmailError ? 'Please enter valid email addresses without duplicates' : ''}
+                  error={hasToEmailError ? 'Please enter a valid email address' : ''}
                 />
 
                 <TextField

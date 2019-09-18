@@ -132,7 +132,7 @@ describe('SendTestEmailButton', () => {
         getToEmailComponent(wrapper).simulate('change', { target: { value: 'invalidEmail' }});
         getToEmailComponent(wrapper).simulate('keydown', { keyCode: 32, preventDefault: jest.fn() });
 
-        expect(getToEmailComponent(wrapper)).toHaveProp('error', 'Please enter valid email addresses without duplicates');
+        expect(getToEmailComponent(wrapper)).toHaveProp('error', 'Please enter a valid email address');
 
         getToEmailComponent(wrapper).simulate('change', { target: { value: '' }}); // Clear the error
 
@@ -142,7 +142,7 @@ describe('SendTestEmailButton', () => {
 
         getToEmailComponent(wrapper).simulate('blur', { type: 'blur' });
 
-        expect(getToEmailComponent(wrapper)).toHaveProp('error', 'Please enter valid email addresses without duplicates');
+        expect(getToEmailComponent(wrapper)).toHaveProp('error', 'Please enter a valid email address');
       });
 
     });
@@ -169,19 +169,6 @@ describe('SendTestEmailButton', () => {
       });
     });
 
-    it('renders an error if the user enters a duplicate email address', () => {
-      const { promise, wrapper } = openModal();
-
-      return promise.then(() => {
-        getToEmailComponent(wrapper).simulate('change', { target: { value: 'hello@me.com' }});
-        getToEmailComponent(wrapper).simulate('keydown', { keyCode: 32, preventDefault: jest.fn() });
-        getToEmailComponent(wrapper).simulate('change', { target: { value: 'hello@me.com' }});
-        getToEmailComponent(wrapper).simulate('keydown', { keyCode: 32, preventDefault: jest.fn() });
-
-        expect(getToEmailComponent(wrapper)).toHaveProp('error', 'Please enter valid email addresses without duplicates');
-      });
-    });
-
     it('removes an item from the `selectedItems` prop when `removeItem` is invoked', () => {
       const { promise, wrapper } = openModal();
 
@@ -202,7 +189,7 @@ describe('SendTestEmailButton', () => {
       return promise.then(() => {
         wrapper.find('form').simulate('submit', { preventDefault: jest.fn() });
 
-        expect(getToEmailComponent(wrapper)).toHaveProp('error', 'Please enter valid email addresses without duplicates');
+        expect(getToEmailComponent(wrapper)).toHaveProp('error', 'Please enter a valid email address');
       });
     });
 
