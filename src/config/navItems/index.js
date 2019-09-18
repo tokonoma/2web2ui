@@ -50,6 +50,11 @@ export default [
       {
         label: 'Engagement',
         to: '/reports/engagement'
+      },
+      {
+        label: 'Integration',
+        to: '/signals/integration',
+        divider: true
       }
     ]
   },

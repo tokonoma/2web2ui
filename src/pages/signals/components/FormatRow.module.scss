@@ -1,0 +1,11 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.border-Accepted{
+    border-left: 5px solid rgba(84, 131, 23, 0.986)
+}
+.border-Rejected{
+    border-left: 5px solid red
+}
+.border-Duplicates{
+    border-left: 5px solid orange
+}
