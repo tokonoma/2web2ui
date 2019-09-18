@@ -46,13 +46,20 @@ export default (state = initialState, action) => {
     case 'GET_BUNDLES_PENDING':
       return { ...state, bundlesLoading: true, bundlesError: null };
 
-    case 'GET_BUNDLES_SUCCESS': {
-      const { plans: bundlePlans , bundles } = action.payload;
-      return { ...state, bundlesLoading: false, bundles, bundlePlans };
-    }
+    case 'GET_BUNDLES_SUCCESS':
+      return { ...state, bundlesLoading: false, bundles: action.payload.bundles, bundlePlans: action.payload.plans };
 
     case 'GET_BUNDLES_FAIL':
       return { ...state, bundlesLoading: false, bundlesError: action.payload };
+
+    case 'GET_SUBSCRIPTION_PENDING':
+      return { ...state, loading: true, Error: null };
+
+    case 'GET_SUBSCRIPTION_SUCCESS':
+      return { ...state, loading: false, subscription: action.payload };
+
+    case 'GET_SUBSCRIPTION_FAIL':
+      return { ...state, loading: false, Error: action.payload };
 
     default:
       return state;

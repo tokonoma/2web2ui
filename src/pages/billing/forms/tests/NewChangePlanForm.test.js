@@ -6,45 +6,52 @@ jest.mock('src/hooks/useRouter');
 
 describe('Change Plan Form', () => {
   const defaultProps = {
-    plans: {
+    bundles: {
       'test': [{
-        code: '1',
-        includesIp: true,
-        monthly: 100,
-        name: 'One',
-        overage: 0.1,
-        volume: 1,
-        billingId: '1'
+        bundle: '2',
+        messaging: {
+          code: '2',
+          includesIp: false,
+          monthly: 0,
+          name: 'Two',
+          overage: 0.2,
+          volume: 2,
+          isFree: true
+        }
       }],
       'starter': [{
-        code: '2',
-        includesIp: false,
-        monthly: 0,
-        name: 'Two',
-        overage: 0.2,
-        volume: 2,
-        isFree: true,
-        billingId: '2'
+        bundle: '3',
+        messaging: {
+          code: '3',
+          monthly: 300,
+          name: 'Three',
+          overage: 0.3,
+          volume: 3
+        }
       }],
       'premier': [{
-        code: '3',
-        monthly: 300,
-        name: 'Three',
-        overage: 0.3,
-        volume: 3,
-        billingId: '3'
+        bundle: '4',
+        messaging: {
+          code: '4',
+          includesIp: true,
+          monthly: 400,
+          name: 'Four',
+          overage: 0.4,
+          volume: 4
+        }
       }]
     },
     currentPlan: {
-      tier: 'premier',
-      code: '3',
+      tier: 'starter',
+      code: 'big-code',
       monthly: 300,
       name: 'Three',
       overage: 0.3,
       volume: 3,
       billingId: '3'
     },
-    getPlans: jest.fn(),
+    getSubscription: jest.fn(),
+    getBundles: jest.fn(),
     getBillingCountries: jest.fn(),
     getBillingInfo: jest.fn(),
     clearPromoCode: jest.fn(),
@@ -82,10 +89,11 @@ describe('Change Plan Form', () => {
 
   it('should call functions on initial render', () => {
     subject({}, mount);
-    expect(defaultProps.getPlans).toHaveBeenCalled();
+    expect(defaultProps.getBundles).toHaveBeenCalled();
     expect(defaultProps.getBillingCountries).toHaveBeenCalled();
     expect(defaultProps.getBillingInfo).toHaveBeenCalled();
     expect(defaultProps.clearPromoCode).toHaveBeenCalled();
+    expect(defaultProps.getSubscription).toHaveBeenCalled();
   });
 
   it('selects plan and applies promocode if code present in request params', () => {
