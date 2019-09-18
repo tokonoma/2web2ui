@@ -130,6 +130,7 @@ const SendTestEmailButton = () => {
         .then(() => {
           setModalLoading(false); // Seems repetitive, but prevents janky loading state from continuing even after success
           setModalOpen(false);
+          clearForm();
 
           showAlert({
             type: 'success',

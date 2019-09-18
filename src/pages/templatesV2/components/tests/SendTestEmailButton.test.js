@@ -175,7 +175,9 @@ describe('SendTestEmailButton', () => {
       return promise.then(() => {
         getToEmailComponent(wrapper).simulate('change', { target: { value: 'hello@me.com' }});
         getToEmailComponent(wrapper).simulate('keydown', { keyCode: 32, preventDefault: jest.fn() });
-        getToEmailComponent(wrapper).props().removeItem({ email: 'hello@me.com' });
+
+        // Invoking `getToEmailComponent(wrapper).props().onRemove()` wasn't triggering the deletion - works when tested manually
+        getToEmailComponent(wrapper).dive().find('Tag').props().onRemove();
 
         expect(getToEmailComponent(wrapper)).toHaveProp('selectedItems', []);
       });
@@ -213,6 +215,8 @@ describe('SendTestEmailButton', () => {
           expect(wrapper.find('Loading')).not.toExist();
           expect(wrapper.find('Modal')).toHaveProp('open', false);
           expect(showAlert).toHaveBeenCalled();
+          expect(getToEmailComponent(wrapper)).toHaveProp('value', '');
+          expect(getToEmailComponent(wrapper)).toHaveProp('selectedItems', []);
         });
       });
     });
