@@ -20,32 +20,36 @@ export const ComboBoxTypeahead = ({
   selectedMap
 }) => {
   const [inputValue, setInputValue] = useState('');
-  const [selected, setSelected] = useState(defaultSelected);
   const [menuItems, setMenuItems] = useState([]);
+  const [selectedItems, setSelectedItems] = useState(defaultSelected);
   const [updateMenuItems] = useDebouncedCallback((value) => {
     const items = value ? sortMatch(results, value, itemToString) : results;
-    setMenuItems(items.slice(0, maxNumberOfResults));
+    const nextMenuItems = items.slice(0, maxNumberOfResults);
+    setMenuItems(nextMenuItems);
   }, 400);
 
+  // Report change to selected items (important for redux-form Fields)
   useEffect(() => {
-    onChange(selected.map(selectedMap));
-  }, [onChange, selectedMap, defaultSelected, selected]);
+    onChange(selectedItems.map(selectedMap));
+  }, [onChange, selectedMap, selectedItems]);
 
+  // Update list of menu items when available list of items (results), input value or select items changes
   useEffect(() => {
     updateMenuItems(inputValue);
-  }, [inputValue, results, selected, updateMenuItems]);
+  }, [updateMenuItems, inputValue, results, selectedItems]);
 
+  // Must use state reducer to avoid menu automatically closing
   // see, https://github.com/downshift-js/downshift#statechangetypes
   const stateReducer = (state, changes) => {
     switch (changes.type) {
       case Downshift.stateChangeTypes.clickItem:
       case Downshift.stateChangeTypes.keyDownEnter: {
-        setSelected([...selected, changes.selectedItem]);
-        setInputValue('');
+        setSelectedItems([...selectedItems, changes.selectedItem]);
+        setInputValue(''); // unset below won't trigger a changeInput action
 
         return {
           ...changes,
-          inputValue: '',
+          inputValue: '', // unset input value, now that it has been saved in selected items
           isOpen: true, // leave menu open
           selectedItem: null
         };
@@ -59,16 +63,18 @@ export const ComboBoxTypeahead = ({
 
   const typeaheadfn = ({
     getInputProps,
-    getMenuProps,
-    isOpen,
     getItemProps,
-    inputValue,
-    highlightedIndex,
+    getMenuProps,
     getRootProps,
+    highlightedIndex,
+    inputValue,
+    isOpen,
     openMenu
   }) => {
     const items = menuItems
-      .filter((item) => !selected.some((selected) => selectedMap(selected) === selectedMap(item)))
+      .filter((item) => ( // remove selected items from menu
+        !selectedItems.some((selectedItem) => selectedMap(selectedItem) === selectedMap(item))
+      ))
       .map((item, index) => getItemProps({
         content: itemToString(item),
         highlighted: highlightedIndex === index,
@@ -83,10 +89,16 @@ export const ComboBoxTypeahead = ({
       itemToString,
       label,
       onFocus: () => { openMenu(); },
-      placeholder: selected.length ? '' : placeholder,
+      placeholder,
       readOnly: readOnly || results.length === 0,
-      removeItem: (item) => { setSelected(selected.filter((i) => i !== item)); },
-      selectedItems: selected,
+      removeItem: (itemToRemove) => {
+        const mappedItemToRemove = selectedMap(itemToRemove);
+        const nextSelectedItems = selectedItems.filter((selectedItem) => (
+          selectedMap(selectedItem) !== mappedItemToRemove)
+        );
+        setSelectedItems(nextSelectedItems);
+      },
+      selectedItems,
       value: inputValue || ''
     });
 
@@ -108,7 +120,6 @@ export const ComboBoxTypeahead = ({
     <Downshift
       defaultHighlightedIndex={0}
       itemToString={itemToString}
-
       stateReducer={stateReducer}
     >
       {typeaheadfn}
@@ -117,16 +128,17 @@ export const ComboBoxTypeahead = ({
 };
 
 ComboBoxTypeahead.propTypes = {
-  results: PropTypes.array,
-  itemToString: PropTypes.func,
-  maxNumberOfResults: PropTypes.number,
-  onChange: PropTypes.func.isRequired,
+  defaultSelected: PropTypes.array,
   disabled: PropTypes.bool,
+  itemToString: PropTypes.func,
   label: PropTypes.string,
+  maxNumberOfResults: PropTypes.number,
   name: PropTypes.string,
-  selectedMap: PropTypes.func,
+  onChange: PropTypes.func.isRequired,
   placeholder: PropTypes.string,
-  readOnly: PropTypes.bool
+  readOnly: PropTypes.bool,
+  results: PropTypes.array,
+  selectedMap: PropTypes.func
 };
 
 ComboBoxTypeahead.defaultProps = {
