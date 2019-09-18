@@ -7,6 +7,7 @@ const suspendedSelector = (state) => state.account.isSuspendedForBilling;
 const pendingSubscriptionSelector = (state) => state.account.pending_subscription;
 const plansSelector = (state) => state.billing.plans || [];
 const bundleSelector = (state) => state.billing.bundles || [];
+const bundlePlanSelector = (state) => state.billing.bundlePlans || [];
 const accountBillingSelector = (state) => state.account.billing;
 const accountBilling = (state) => state.billing;
 const selectIsAws = selectCondition(isAws);
@@ -105,13 +106,19 @@ export const selectTieredVisiblePlans = createSelector(
 );
 
 export const selectAvailableBundles = createSelector(
-  [bundleSelector, selectIsSelfServeBilling],
-  (bundles, isSelfServeBilling) => {
+  [bundleSelector, bundlePlanSelector, selectIsSelfServeBilling],
+  (bundles, plans, isSelfServeBilling) => {
     const availableBundles = bundles;
     if (!isSelfServeBilling) {
       _.remove(availableBundles, ({ isFree = false }) => isFree);
     }
-    return availableBundles;
+
+    const plansByKey = _.keyBy(plans, 'plan');
+    const bundlesWithPlans = _.map(availableBundles, (bundle) => {
+      const messaging = plansByKey[bundle.bundle];
+      return { ...bundle, messaging };
+    });
+    return bundlesWithPlans;
   }
 );
 
