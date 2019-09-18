@@ -207,6 +207,7 @@ exports[`Selected Plan: should render plan price with the plan 1`] = `
                 "volume": 2,
               }
             }
+            selectedPromo={Object {}}
             showCsm={true}
             showIp={true}
             showOverage={true}
@@ -223,6 +224,28 @@ exports[`Selected Plan: should render plan price with the plan 1`] = `
           </Button>
         </div>
       </div>
+    </div>
+  </Panel.Section>
+  <Panel.Section>
+    <div
+      className="PlanRow"
+    >
+      <PromoCodeNew
+        handlePromoCode={
+          Object {
+            "applyPromoCode": [MockFunction],
+            "clearPromoCode": [MockFunction],
+          }
+        }
+        key="promocode"
+        promoCodeObj={
+          Object {
+            "promoError": false,
+            "promoPending": false,
+            "selectedPromo": Object {},
+          }
+        }
+      />
     </div>
   </Panel.Section>
 </Panel>

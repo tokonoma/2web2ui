@@ -82,13 +82,14 @@ export class OnboardingPlanPage extends Component {
     const { loading, plans, submitting, selectedPlan = {}, billing, clearPromoCode } = this.props;
     const { selectedPromo = {}, promoError, promoPending } = billing;
     const promoCodeObj = {
-      applyPromoCode: this.applyPromoCode,
-      clearPromoCode: clearPromoCode,
       selectedPromo: selectedPromo,
       promoError: promoError,
       promoPending: promoPending
     };
-
+    const handlePromoCode = {
+      applyPromoCode: this.applyPromoCode,
+      clearPromoCode: clearPromoCode
+    };
     if (loading) {
       return <Loading />;
     }
@@ -109,6 +110,7 @@ export class OnboardingPlanPage extends Component {
                   <PromoCodeNew
                     key={selectedPromo.promoCode || 'promocode'}
                     promoCodeObj ={promoCodeObj}
+                    handlePromoCode ={handlePromoCode}
                   />
                 </Panel.Section>}
                 <CreditCardSection billing={billing} submitting={submitting} selectedPlan={selectedPlan}/>

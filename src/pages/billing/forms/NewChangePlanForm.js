@@ -57,11 +57,15 @@ export const ChangePlanForm = ({
                 plan={selectedPlan}
                 onChange={onSelect}
                 promoCodeObj = {
-                  { applyPromoCode: applyPromoCode,
-                    clearPromoCode: clearPromoCode,
-                    selectedPromo: selectedPromo,//MAKE THE THREE KEYS INTO AN OBJECT
-                    promoError: promoError,//
-                    promoPending: promoPending//
+                  { selectedPromo: selectedPromo,
+                    promoError: promoError,
+                    promoPending: promoPending
+                  }
+                }
+                handlePromoCode = {
+                  {
+                    applyPromoCode: applyPromoCode,
+                    clearPromoCode: clearPromoCode
                   }
                 }
               />

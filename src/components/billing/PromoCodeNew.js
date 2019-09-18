@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { TextField, Button } from '@sparkpost/matchbox';
 import { LoadingSVG } from 'src/components';
 
-const PromoCodeNew = ({ promoCodeObj }) => {
-  const { applyPromoCode, clearPromoCode, promoError, promoPending, selectedPromo } = promoCodeObj;
+const PromoCodeNew = ({ promoCodeObj, handlePromoCode }) => {
+  const { applyPromoCode, clearPromoCode } = handlePromoCode;
+  const { promoError, promoPending, selectedPromo } = promoCodeObj;
   const [promocode, setPromocode] = useState(selectedPromo.promoCode || '');
   const handleChange = (event) => {
     setPromocode(event.target.value);

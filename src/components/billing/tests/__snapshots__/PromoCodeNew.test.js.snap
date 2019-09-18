@@ -1,0 +1,101 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`promoCode should render correctly 1`] = `
+<TextField
+  connectRight={
+    <Button
+      onClick={[Function]}
+      size="default"
+    >
+      Apply
+    </Button>
+  }
+  defaultValue=""
+  disabled={false}
+  error=""
+  errorInLabel={true}
+  label="Promo Code"
+  name="promo"
+  onChange={[Function]}
+  onKeyPress={[Function]}
+  resize="both"
+  suffix={<React.Fragment />}
+  type="text"
+/>
+`;
+
+exports[`promoCode should render with error 1`] = `
+<TextField
+  connectRight={
+    <Button
+      onClick={[Function]}
+      size="default"
+    >
+      Apply
+    </Button>
+  }
+  defaultValue=""
+  disabled={false}
+  error="Oh no!"
+  errorInLabel={true}
+  label="Promo Code"
+  name="promo"
+  onChange={[Function]}
+  onKeyPress={[Function]}
+  resize="both"
+  suffix={<React.Fragment />}
+  type="text"
+/>
+`;
+
+exports[`promoCode should render with loading spinner 1`] = `
+<TextField
+  connectRight={
+    <Button
+      onClick={[Function]}
+      size="default"
+    >
+      Apply
+    </Button>
+  }
+  defaultValue=""
+  disabled={true}
+  error=""
+  errorInLabel={true}
+  label="Promo Code"
+  name="promo"
+  onChange={[Function]}
+  onKeyPress={[Function]}
+  resize="both"
+  suffix={
+    <LoadingSVG
+      size="XSmall"
+    />
+  }
+  type="text"
+/>
+`;
+
+exports[`promoCode text field should disable and button should change to remove when a promocode is applied 1`] = `
+<TextField
+  connectRight={
+    <Button
+      onClick={[MockFunction]}
+      size="default"
+    >
+      Remove
+    </Button>
+  }
+  defaultValue="TESTCODE"
+  disabled={true}
+  error=""
+  errorInLabel={true}
+  label="Promo Code"
+  name="promo"
+  onChange={[Function]}
+  onKeyPress={[Function]}
+  resize="both"
+  suffix={<React.Fragment />}
+  type="text"
+/>
+`;

@@ -22,7 +22,7 @@ export const useModal = () => {
 };
 
 
-export const SelectedPlan = ({ plan, onChange, promoCodeObj }) => {
+export const SelectedPlan = ({ plan, onChange, promoCodeObj, handlePromoCode }) => {
   const { isShowing, toggle } = useModal(false);
   const { selectedPromo } = promoCodeObj;
   return (
@@ -59,12 +59,11 @@ export const SelectedPlan = ({ plan, onChange, promoCodeObj }) => {
       </Panel.Section>
       <Panel.Section>
         <div className={styles.PlanRow}>
-          {/* <form onSubmit={(e) => e.preventDefault()}> */}
           <PromoCodeNew
             key={selectedPromo.promoCode || 'promocode'}
             promoCodeObj ={promoCodeObj}
+            handlePromoCode ={handlePromoCode}
           />
-          {/* </form> */}
         </div>
       </Panel.Section>
     </Panel>
