@@ -23,17 +23,17 @@ const PromoCodeNew = ({ promoCodeObj }) => {
     }
     return <></>;
   };
-
   return <TextField
     name="promo"
     label="Promo Code"
-    disabled={promoPending || selectedPromo.promoCode}
+    disabled={promoPending || typeof selectedPromo.promoCode === 'string'}
     connectRight={renderConnectRight(selectedPromo.promoCode)}
     onChange={handleChange}
     suffix={renderSuffix(promoPending)}
     errorInLabel={true}
     error={promoError ? promoError.message : ''}
     defaultValue={selectedPromo.promoCode || ''}
+    onKeyPress={(e) => e.target.keyCode === 13 && e.preventDefault()}
   />;
 };
 

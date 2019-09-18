@@ -59,10 +59,12 @@ export const SelectedPlan = ({ plan, onChange, promoCodeObj }) => {
       </Panel.Section>
       <Panel.Section>
         <div className={styles.PlanRow}>
+          {/* <form onSubmit={(e) => e.preventDefault()}> */}
           <PromoCodeNew
             key={selectedPromo.promoCode || 'promocode'}
             promoCodeObj ={promoCodeObj}
           />
+          {/* </form> */}
         </div>
       </Panel.Section>
     </Panel>

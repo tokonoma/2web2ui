@@ -7,7 +7,6 @@ import qs from 'query-string';
 import PlanSelectSection, { SelectedPlan } from '../components/PlanSelect';
 import CurrentPlanSection from '../components/CurrentPlanSection';
 import { verifyPromoCode, clearPromoCode } from 'src/actions/billing';
-
 //Actions
 import { getBillingInfo, getPlans } from 'src/actions/account';
 import { getBillingCountries } from 'src/actions/billing';
@@ -35,7 +34,6 @@ export const ChangePlanForm = ({
   currentPlan
 }) => {
   const [selectedPlan, selectPlan] = useState(null);
-
   // const [useSavedCC, setUseSavedCC] = useState(null);
   useEffect(() => { getBillingCountries(); }, [getBillingCountries]);
   useEffect(() => { getBillingInfo(); }, [getBillingInfo]);
