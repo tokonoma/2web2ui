@@ -1,14 +1,20 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import styles from './Loading.module.scss';
 
 /**
  * A centered loading animation
  */
-export const Loading = function Loading({ className }) {
+export const Loading = function Loading(props) {
+  const { className } = props;
+
   return <LoadingSVG className={classnames(styles.Center, className)}/>;
 };
 
+Loading.propTypes = {
+  className: PropTypes.string
+};
 
 Loading.displayName = 'Loading';
 
