@@ -1,4 +1,4 @@
-const toHaveTextContent = (received /* Enzyme Wrapper */, expectedContent /* String or Regex */) => {
+const toHaveTextContent = (received, expectedContent) => {
   const text = received.debug && received.debug();
 
   return {
