@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { TextField, Button } from '@sparkpost/matchbox';
 import { LoadingSVG } from 'src/components';
+import _ from 'lodash';
 
 const PromoCodeNew = ({ promoCodeObj, handlePromoCode }) => {
   const { applyPromoCode, clearPromoCode } = handlePromoCode;
@@ -12,27 +13,22 @@ const PromoCodeNew = ({ promoCodeObj, handlePromoCode }) => {
   const handleClick = () => {
     applyPromoCode(promocode);
   };
-  const renderConnectRight = (condition) => {
+  const renderActionButton = (condition) => {
     if (condition) {
       return <Button onClick={clearPromoCode} >Remove</Button>;
     }
     return <Button onClick={handleClick} >Apply</Button>;
   };
-  const renderSuffix = (condition) => {
-    if (condition) {
-      return <LoadingSVG size="XSmall" />;
-    }
-    return <></>;
-  };
-  const isDisabled = () => promoPending || typeof selectedPromo.promoCode === 'string';
+  const renderLoading = (condition) => condition ? <LoadingSVG size="XSmall"/> : null;
+  const isDisabled = () => promoPending || _.has(selectedPromo, 'promoCode');
   const displayErrorMessage = () => promoError ? promoError.message : '';
   return <TextField
     name="promo"
     label="Promo Code"
     disabled={isDisabled()}
-    connectRight={renderConnectRight(selectedPromo.promoCode)}
+    connectRight={renderActionButton(selectedPromo.promoCode)}
     onChange={handleChange}
-    suffix={renderSuffix(promoPending)}
+    suffix={renderLoading(promoPending)}
     errorInLabel={true}
     error={displayErrorMessage()}
     defaultValue={selectedPromo.promoCode || ''}

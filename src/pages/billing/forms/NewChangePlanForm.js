@@ -12,7 +12,7 @@ import { getBillingInfo, getPlans } from 'src/actions/account';
 import { getBillingCountries } from 'src/actions/billing';
 
 //Selectors
-import { selectTieredVisiblePlans, currentPlanSelector } from 'src/selectors/accountBillingInfo';
+import { selectTieredVisiblePlans, currentPlanSelector, getPromoCodeObject } from 'src/selectors/accountBillingInfo';
 import { changePlanInitialValues } from 'src/selectors/accountBillingForms';
 
 const FORMNAME = 'changePlan';
@@ -24,7 +24,7 @@ export const ChangePlanForm = ({
   getBillingCountries,
   getPlans,
   verifyPromoCode,
-  billing,
+  promoCodeObj,
   clearPromoCode,
   // initialValues: {
   //   promoCode
@@ -32,11 +32,15 @@ export const ChangePlanForm = ({
   currentPlan
 }) => {
   const [selectedPlan, selectPlan] = useState(null);
-  const { promoPending, promoError, selectedPromo = {}} = billing;
   // const [useSavedCC, setUseSavedCC] = useState(null);
   useEffect(() => { getBillingCountries(); }, [getBillingCountries]);
   useEffect(() => { getBillingInfo(); }, [getBillingInfo]);
   useEffect(() => { getPlans(); }, [getPlans]);
+  useEffect(() => {
+    if (!selectedPlan) {
+      clearPromoCode();
+    }
+  },[clearPromoCode, selectedPlan]);
   //TODO: Implement in AC-986
   // useEffect(() => { console.log(selectedPlan, promoCode)}, [verifyPromoCode, promoCode, selectedPlan]);
 
@@ -56,12 +60,7 @@ export const ChangePlanForm = ({
               ? <SelectedPlan
                 plan={selectedPlan}
                 onChange={onSelect}
-                promoCodeObj = {
-                  { selectedPromo: selectedPromo,
-                    promoError: promoError,
-                    promoPending: promoPending
-                  }
-                }
+                promoCodeObj = {promoCodeObj}
                 handlePromoCode = {
                   {
                     applyPromoCode: applyPromoCode,
@@ -86,12 +85,11 @@ export const ChangePlanForm = ({
 
 const mapStateToProps = (state, props) => {
   const { code: planCode, promo: promoCode } = qs.parse(props.location.search);
-
   return {
     plans: selectTieredVisiblePlans(state),
     initialValues: changePlanInitialValues(state, { planCode, promoCode }),
     currentPlan: currentPlanSelector(state),
-    billing: state.billing
+    promoCodeObj: getPromoCodeObject(state)
   };
 };
 

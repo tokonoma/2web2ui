@@ -8,7 +8,7 @@ import cx from 'classnames';
 import _ from 'lodash';
 import styles from './PlanSelect.module.scss';
 import { useState } from 'react';
-import PromoCodeNew from '../../../components/billing/PromoCodeNew';
+import PromoCodeNew from 'src/components/billing/PromoCodeNew';
 
 export const useModal = () => {
   const [isShowing, setIsShowing] = useState(false);
