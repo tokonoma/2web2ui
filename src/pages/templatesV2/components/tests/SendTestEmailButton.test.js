@@ -24,7 +24,7 @@ describe('SendTestEmailButton', () => {
 
     return shallow(<SendTestEmailButton {...props}/>);
   };
-  const getToEmailComponent = (wrapper) => wrapper.find('[name="emailTo"]');
+  const getMultiEmailField = (wrapper) => wrapper.find('[name="emailTo"]');
 
   // Render the subject, open the modal, and return relevant variables for use in test cases
   const openModal = () => {
@@ -69,7 +69,7 @@ describe('SendTestEmailButton', () => {
     const { promise, wrapper } = openModal();
 
     return promise.then(() => {
-      const emailToField = getToEmailComponent(wrapper);
+      const emailToField = getMultiEmailField(wrapper);
 
       wrapper.find('Modal').simulate('close'); // Simulates `onClose` prop
 
@@ -79,7 +79,7 @@ describe('SendTestEmailButton', () => {
 
       expect(wrapper.find('Loading')).not.toExist();
       expect(emailToField).toHaveProp('value', '');
-      expect(emailToField).toHaveProp('selectedItems', []);
+      expect(emailToField).toHaveProp('emailList', []);
       expect(emailToField).toHaveProp('error', '');
     });
   });
@@ -91,7 +91,7 @@ describe('SendTestEmailButton', () => {
       return promise.then(() => {
         const mockPreventDefault = jest.fn();
 
-        getToEmailComponent(wrapper).simulate('keydown', { keyCode: 13, preventDefault: mockPreventDefault });
+        getMultiEmailField(wrapper).simulate('keyDownAndBlur', { keyCode: 13, preventDefault: mockPreventDefault });
 
         expect(mockPreventDefault).toHaveBeenCalled();
       });
@@ -103,25 +103,25 @@ describe('SendTestEmailButton', () => {
       return promise.then(() => {
         const mockPreventDefault = jest.fn();
 
-        getToEmailComponent(wrapper).simulate('keydown', { keyCode: 32, type: 'keydown', preventDefault: mockPreventDefault });
+        getMultiEmailField(wrapper).simulate('keyDownAndBlur', { keyCode: 32, type: 'keydown', preventDefault: mockPreventDefault });
         expect(mockPreventDefault).toHaveBeenCalled();
         expect(wrapper).not.toHaveProp('value', ' ');
       });
     });
 
-    it('updates the `selectedItems` prop, clears the `value` prop a valid email address and hits the space bar or tab key', () => {
+    it('updates the `emailList` prop, clears the `value` prop a valid email address and hits the space bar or tab key', () => {
       const { promise, wrapper } = openModal();
 
       return promise.then(() => {
         // Adding a selected item via the spacebar
-        getToEmailComponent(wrapper).simulate('change', { target: { value: 'hello@me.com' }});
+        getMultiEmailField(wrapper).simulate('change', { target: { value: 'hello@me.com' }});
 
-        expect(getToEmailComponent(wrapper)).toHaveProp('value', 'hello@me.com');
+        expect(getMultiEmailField(wrapper)).toHaveProp('value', 'hello@me.com');
 
-        getToEmailComponent(wrapper).simulate('keydown', { keyCode: 32, preventDefault: jest.fn() });
+        getMultiEmailField(wrapper).simulate('keyDownAndBlur', { keyCode: 32, preventDefault: jest.fn() });
 
-        expect(getToEmailComponent(wrapper)).not.toHaveProp('value', 'hello@me.com');
-        expect(getToEmailComponent(wrapper)).toHaveProp('selectedItems', [ { email: 'hello@me.com' } ]);
+        expect(getMultiEmailField(wrapper)).not.toHaveProp('value', 'hello@me.com');
+        expect(getMultiEmailField(wrapper)).toHaveProp('emailList', [ { email: 'hello@me.com' } ]);
       });
     });
 
@@ -129,57 +129,60 @@ describe('SendTestEmailButton', () => {
       const { promise, wrapper } = openModal();
 
       return promise.then(() => {
-        getToEmailComponent(wrapper).simulate('change', { target: { value: 'invalidEmail' }});
-        getToEmailComponent(wrapper).simulate('keydown', { keyCode: 32, preventDefault: jest.fn() });
+        getMultiEmailField(wrapper).simulate('change', { target: { value: 'invalidEmail' }});
+        getMultiEmailField(wrapper).simulate('keyDownAndBlur', { keyCode: 32, preventDefault: jest.fn() });
 
-        expect(getToEmailComponent(wrapper)).toHaveProp('error', 'Please enter a valid email address');
+        expect(getMultiEmailField(wrapper)).toHaveProp('error', 'Please enter a valid email address');
 
-        getToEmailComponent(wrapper).simulate('change', { target: { value: '' }}); // Clear the error
+        getMultiEmailField(wrapper).simulate('change', { target: { value: '' }}); // Clear the error
 
-        expect(getToEmailComponent(wrapper)).toHaveProp('error', '');
+        expect(getMultiEmailField(wrapper)).toHaveProp('error', '');
 
-        getToEmailComponent(wrapper).simulate('change', { target: { value: 'invalidEmailAgain' }});
+        getMultiEmailField(wrapper).simulate('change', { target: { value: 'invalidEmailAgain' }});
+        getMultiEmailField(wrapper).simulate('keyDownAndBlur', { type: 'blur' });
 
-        getToEmailComponent(wrapper).simulate('blur', { type: 'blur' });
-
-        expect(getToEmailComponent(wrapper)).toHaveProp('error', 'Please enter a valid email address');
+        expect(getMultiEmailField(wrapper)).toHaveProp('error', 'Please enter a valid email address');
       });
 
     });
 
-    it('removes the last item in the `selectedItems` array when the user uses the backspace key', () => {
+    it('removes the last item in the `emailList` array when the user uses the backspace key', () => {
       const { promise, wrapper } = openModal();
 
       return promise.then(() => {
-        getToEmailComponent(wrapper).simulate('change', { target: { value: 'hello@me.com' }});
-        getToEmailComponent(wrapper).simulate('keydown', { keyCode: 32, preventDefault: jest.fn() });
+        getMultiEmailField(wrapper).simulate('change', { target: { value: 'hello@me.com' }});
+        getMultiEmailField(wrapper).simulate('keyDownAndBlur', { keyCode: 32, preventDefault: jest.fn() });
 
-        expect(getToEmailComponent(wrapper)).toHaveProp('selectedItems', [ { email: 'hello@me.com' } ]);
+        expect(getMultiEmailField(wrapper)).toHaveProp('emailList', [ { email: 'hello@me.com' } ]);
 
-        getToEmailComponent(wrapper).simulate('change', { target: { value: 'hello@you.com' }});
-        getToEmailComponent(wrapper).simulate('keydown', { keyCode: 32, preventDefault: jest.fn() });
+        getMultiEmailField(wrapper).simulate('change', { target: { value: 'hello@you.com' }});
+        getMultiEmailField(wrapper).simulate('keyDownAndBlur', { keyCode: 32, preventDefault: jest.fn() });
 
-        getToEmailComponent(wrapper).simulate('keydown', { keyCode: 8, preventDefault: jest.fn() });
+        getMultiEmailField(wrapper).simulate('keyDownAndBlur', { keyCode: 8, preventDefault: jest.fn() });
 
-        expect(getToEmailComponent(wrapper)).toHaveProp('selectedItems', [ { email: 'hello@me.com' } ]);
+        expect(getMultiEmailField(wrapper)).toHaveProp('emailList', [ { email: 'hello@me.com' } ]);
 
-        getToEmailComponent(wrapper).simulate('keydown', { keyCode: 8, preventDefault: jest.fn() });
+        getMultiEmailField(wrapper).simulate('keyDownAndBlur', { keyCode: 8, preventDefault: jest.fn() });
 
-        expect(getToEmailComponent(wrapper)).toHaveProp('selectedItems', []);
+        expect(getMultiEmailField(wrapper)).toHaveProp('emailList', []);
       });
     });
 
-    it('removes an item from the `selectedItems` prop when `removeItem` is invoked', () => {
+    it('removes an item from the `emailList` prop when `removeItem` is invoked', () => {
       const { promise, wrapper } = openModal();
 
       return promise.then(() => {
-        getToEmailComponent(wrapper).simulate('change', { target: { value: 'hello@me.com' }});
-        getToEmailComponent(wrapper).simulate('keydown', { keyCode: 32, preventDefault: jest.fn() });
+        getMultiEmailField(wrapper).simulate('change', { target: { value: 'hello@me.com' }});
+        getMultiEmailField(wrapper).simulate('keyDownAndBlur', { type: 'keyDown', keyCode: 32, preventDefault: jest.fn() });
 
-        // Invoking `getToEmailComponent(wrapper).props().onRemove()` wasn't triggering the deletion - works when tested manually
-        getToEmailComponent(wrapper).dive().find('Tag').props().onRemove();
+        // Invoking `getMultiEmailField(wrapper).props().onRemove()` wasn't triggering the deletion - works when tested manually
+        getMultiEmailField(wrapper)
+          .dive()
+          .dive()
+          .find('Tag')
+          .simulate('remove');
 
-        expect(getToEmailComponent(wrapper)).toHaveProp('selectedItems', []);
+        expect(getMultiEmailField(wrapper)).toHaveProp('emailList', []);
       });
     });
   });
@@ -191,7 +194,7 @@ describe('SendTestEmailButton', () => {
       return promise.then(() => {
         wrapper.find('form').simulate('submit', { preventDefault: jest.fn() });
 
-        expect(getToEmailComponent(wrapper)).toHaveProp('error', 'Please enter a valid email address');
+        expect(getMultiEmailField(wrapper)).toHaveProp('error', 'Please enter a valid email address');
       });
     });
 
@@ -204,8 +207,8 @@ describe('SendTestEmailButton', () => {
       } = openModal();
 
       return promise.then(() => {
-        getToEmailComponent(wrapper).simulate('change', { target: { value: 'hello@me.com' }});
-        getToEmailComponent(wrapper).simulate('keydown', { keyCode: 32, preventDefault: jest.fn() });
+        getMultiEmailField(wrapper).simulate('change', { target: { value: 'hello@me.com' }});
+        getMultiEmailField(wrapper).simulate('keyDownAndBlur', { keyCode: 32, preventDefault: jest.fn() });
         wrapper.find('form').simulate('submit', { preventDefault: jest.fn() });
 
         expect(wrapper.find('Loading')).toExist();
@@ -215,8 +218,8 @@ describe('SendTestEmailButton', () => {
           expect(wrapper.find('Loading')).not.toExist();
           expect(wrapper.find('Modal')).toHaveProp('open', false);
           expect(showAlert).toHaveBeenCalled();
-          expect(getToEmailComponent(wrapper)).toHaveProp('value', '');
-          expect(getToEmailComponent(wrapper)).toHaveProp('selectedItems', []);
+          expect(getMultiEmailField(wrapper)).toHaveProp('value', '');
+          expect(getMultiEmailField(wrapper)).toHaveProp('emailList', []);
         });
       });
     });
@@ -225,8 +228,8 @@ describe('SendTestEmailButton', () => {
       const { promise, wrapper } = openModal();
 
       return promise.then(() => {
-        getToEmailComponent(wrapper).simulate('change', { target: { value: 'hello@me.com' }});
-        getToEmailComponent(wrapper).simulate('keydown', { keyCode: 32, preventDefault: jest.fn() });
+        getMultiEmailField(wrapper).simulate('change', { target: { value: 'hello@me.com' }});
+        getMultiEmailField(wrapper).simulate('keyDownAndBlur', { keyCode: 32, preventDefault: jest.fn() });
         wrapper.find('form').simulate('submit', { preventDefault: jest.fn() });
 
         expect(wrapper.find('Loading')).toExist();

@@ -41,7 +41,7 @@ const useMultiEmailField = (value = '', emailList = [], error = '') => {
       // 1. There is some text entry in the field
       // 2. The entered email is not valid or
       // 3. The entered email already exists in the list
-      if (value && !isValidEmail) {
+      if (multiEmailValue && !isValidEmail) {
         setMultiEmailError('Please enter a valid email address');
       }
     }

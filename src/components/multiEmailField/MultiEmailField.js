@@ -36,7 +36,7 @@ MultiEmailField.propTypes = {
   label: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
   name: PropTypes.string,
-  selectedEmails: PropTypes.array,
+  emailList: PropTypes.array,
   error: PropTypes.string,
   onChange: PropTypes.func,
   onKeyDownAndBlur: PropTypes.func,
@@ -44,7 +44,7 @@ MultiEmailField.propTypes = {
 };
 
 MultiEmailField.defaultProps = {
-  selectedEmails: [],
+  emailList: [],
   value: '',
   error: ''
 };
