@@ -38,7 +38,7 @@ const MyComponent = () => {
 
       <button onClick={() => setMultiEmailValue('')}>Clear Value</button>
 
-      <button onClick={() => setMultiEmailList('')}>Clear List</button>
+      <button onClick={() => setMultiEmailList([])}>Clear List</button>
 
       <button onClick={() => setMultiEmailError('')}>Clear Error</button>
     </form>
