@@ -1,171 +1,163 @@
 import React, { useState, useEffect } from 'react';
 import { ComboBox, ComboBoxTextField, ComboBoxMenu } from '@sparkpost/matchbox';
 import Downshift from 'downshift';
-import debounce from 'lodash/debounce';
-import sortMatch from 'src/helpers/sortMatch';
 import PropTypes from 'prop-types';
+import { useDebouncedCallback } from 'use-debounce';
+import sortMatch from 'src/helpers/sortMatch';
 
-export const ComboBoxTypeahead = (props) => {
-  const {
-    error,
-    results,
-    itemToString,
-    maxNumberOfResults,
-    onChange,
-    disabled,
-    label,
-    name,
-    selectedMap,
-    placeholder,
-    readOnly,
-    defaultSelected,
-    debounceFn //Needed for testing
-  } = props;
-  const [selected, setSelected] = useState(defaultSelected);
-  const [matches, setMatches] = useState(results);
-  const [updateMatches, setUpdateMatches] = useState(() => undefined);
+export const ComboBoxTypeahead = ({
+  defaultSelected,
+  disabled,
+  error,
+  itemToString,
+  label,
+  maxNumberOfResults,
+  name,
+  onChange,
+  placeholder,
+  readOnly,
+  results,
+  selectedMap
+}) => {
+  const [inputValue, setInputValue] = useState('');
+  const [menuItems, setMenuItems] = useState([]);
+  const [selectedItems, setSelectedItems] = useState(defaultSelected);
+  const [updateMenuItems] = useDebouncedCallback((value) => {
+    const items = value ? sortMatch(results, value, itemToString) : results;
+    const nextMenuItems = items.slice(0, maxNumberOfResults);
+    setMenuItems(nextMenuItems);
+  }, 300);
 
-  //Updates the value of this component
+  // Updated list of selected menu items when combo box is being controlled
+  // note, state must be initialized with defaultSelected to avoid a runaway effect
   useEffect(() => {
-    onChange(selected.map(selectedMap));
-  }, [onChange, selected, selectedMap]);
+    setSelectedItems(defaultSelected);
+  }, [setSelectedItems, defaultSelected]);
 
+  // Report change to selected items (important for redux-form Fields)
   useEffect(() => {
-    setSelected(defaultSelected);
-  }, [defaultSelected]);
+    onChange(selectedItems.map(selectedMap));
+  }, [onChange, selectedMap, selectedItems]);
 
-  //Creates debounce function and cancels the debounce on unmount
+  // Update list of menu items when available list of items (results), input value or select items changes
   useEffect(() => {
-    setMatches(results);
-    const updateMatchesFn = debounceFn((inputValue) => {
-      const inputMatches = inputValue ? sortMatch(results, inputValue, itemToString) : results;
-      setMatches(inputMatches.slice(0, maxNumberOfResults));
-    }, 300);
-    setUpdateMatches(() => updateMatchesFn);
-    return () => updateMatchesFn.cancel();
-  }, [debounceFn, itemToString, maxNumberOfResults, results]);
+    updateMenuItems(inputValue);
+  }, [updateMenuItems, inputValue, results, selectedItems]);
 
-  function stateReducer(state, changes) {
+  // note, not all items are objects
+  const isExclusiveItem = (item) => (
+    typeof item === 'object' && Boolean(item.isExclusiveItem)
+  );
 
+  const isSelectedItem = (item) => (
+    selectedItems.some((selectedItem) => selectedMap(selectedItem) === selectedMap(item))
+  );
+
+  // Must use state reducer to avoid menu automatically closing
+  // see, https://github.com/downshift-js/downshift#statechangetypes
+  const stateReducer = (state, changes) => {
     switch (changes.type) {
       case Downshift.stateChangeTypes.clickItem:
-      case Downshift.stateChangeTypes.keyDownEnter:
-        if (changes.selectedItem) {
-          addItem(changes.selectedItem);
-          return {
-            ...changes,
-            inputValue: '',
-            selectedItem: null
-          };
-        } else {
-          return changes;
-        }
+      case Downshift.stateChangeTypes.keyDownEnter: {
+        setSelectedItems([...selectedItems, changes.selectedItem]);
+        setInputValue(''); // unset below won't trigger a changeInput action
+
+        return {
+          ...changes,
+          inputValue: '', // unset input value, now that it has been saved in selected items
+          isOpen: true, // leave menu open
+          selectedItem: null
+        };
+      }
       case Downshift.stateChangeTypes.changeInput:
-        updateMatches(changes.inputValue);
-        return changes;
-      default:
-        return changes;
+        setInputValue(changes.inputValue);
     }
-  }
 
-  function addItem(item) {
-    setSelected([ ...selected, item ]);
-  }
+    return changes;
+  };
 
-  function removeItem(item) {
-    setSelected(selected.filter((i) => i !== item));
-  }
-
-  function typeaheadfn(downshift) {
-    const {
-      getInputProps,
-      getMenuProps,
-      isOpen,
-      getItemProps,
-      inputValue,
-      highlightedIndex,
-      openMenu,
-      getRootProps
-    } = downshift;
-
-
-    const rootProps = getRootProps({
-      refKey: 'rootRef'
-    });
-
-    const items = matches
-      .filter((item) => !selected.some((selected) => selectedMap(selected) === selectedMap(item)))
+  const typeaheadfn = ({
+    getInputProps,
+    getItemProps,
+    getMenuProps,
+    getRootProps,
+    highlightedIndex,
+    inputValue,
+    isOpen,
+    openMenu
+  }) => {
+    const hasSelectedItems = Boolean(selectedItems.length);
+    const isSelectedItemExclusive = isExclusiveItem(selectedItems[0]);
+    const items = menuItems
+      .filter((item) => (
+        !isSelectedItemExclusive && !isSelectedItem(item) && !(hasSelectedItems && isExclusiveItem(item))
+      ))
       .map((item, index) => getItemProps({
         content: itemToString(item),
         highlighted: highlightedIndex === index,
         index,
         item
-      })
-      );
-
-    /*When losing focus, the text input clears. Thus, the first
-    click will always be for an empty text field. This both opens
-    the matches and reset the matches.
-    */
-    const firstOpen = () => {
-      openMenu();
-      setMatches(results);
-    };
+      }));
+    const isMenuOpen = isOpen && Boolean(items.length);
 
     const inputProps = getInputProps({
-      id: name,
-      label,
-      selectedItems: selected,
-      itemToString,
-      removeItem,
-      onFocus: firstOpen,
-      onClick: firstOpen,
-      value: inputValue || '',
-      error: error && !isOpen ? error : undefined,
-      placeholder: (selected.length) ? '' : placeholder,
       disabled,
-      readOnly: readOnly || (results.length === 0)
-    });
-    const menuProps = getMenuProps({
-      items,
-      isOpen: Boolean(isOpen && items.length),
-      refKey: 'menuRef'
+      error: error && !isMenuOpen ? error : undefined,
+      id: name,
+      itemToString,
+      label,
+      onFocus: () => { openMenu(); },
+      placeholder: hasSelectedItems ? '' : placeholder,
+      readOnly: readOnly || isSelectedItemExclusive,
+      removeItem: (itemToRemove) => {
+        const mappedItemToRemove = selectedMap(itemToRemove);
+        const nextSelectedItems = selectedItems.filter((selectedItem) => (
+          selectedMap(selectedItem) !== mappedItemToRemove)
+        );
+        setSelectedItems(nextSelectedItems);
+      },
+      selectedItems,
+      value: inputValue || ''
     });
 
     return (
-      <ComboBox {...rootProps}>
+      <ComboBox {...getRootProps({ refKey: 'rootRef' })}>
         <ComboBoxTextField {...inputProps} />
-        <ComboBoxMenu {...menuProps} />
+        <ComboBoxMenu {...getMenuProps({ items, isOpen: isMenuOpen, refKey: 'menuRef' })} />
       </ComboBox>
     );
-  }
+  };
 
   return (
-    <Downshift itemToString={itemToString} stateReducer={stateReducer} >
+    <Downshift
+      defaultHighlightedIndex={0}
+      itemToString={itemToString}
+      stateReducer={stateReducer}
+    >
       {typeaheadfn}
     </Downshift>
   );
 };
 
 ComboBoxTypeahead.propTypes = {
-  results: PropTypes.array,
-  itemToString: PropTypes.func,
-  maxNumberOfResults: PropTypes.number,
-  onChange: PropTypes.func.isRequired,
+  defaultSelected: PropTypes.array,
   disabled: PropTypes.bool,
+  itemToString: PropTypes.func,
   label: PropTypes.string,
+  maxNumberOfResults: PropTypes.number,
   name: PropTypes.string,
-  selectedMap: PropTypes.func,
+  onChange: PropTypes.func.isRequired,
   placeholder: PropTypes.string,
   readOnly: PropTypes.bool,
-  debounceFn: PropTypes.func
+  results: PropTypes.array,
+  selectedMap: PropTypes.func
 };
 
 ComboBoxTypeahead.defaultProps = {
-  results: [],
+  defaultSelected: [],
   itemToString: (item) => item,
-  selectedMap: (item) => item,
   maxNumberOfResults: 100,
-  debounceFn: debounce,
-  defaultSelected: []
+  placeholder: '',
+  results: [],
+  selectedMap: (item) => item
 };
