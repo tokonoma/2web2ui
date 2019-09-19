@@ -25,7 +25,6 @@ export const getUnsubscribeRateByCohortData = (state, props) => _.get(state, 'si
 export const getComplaintsByCohortData = (state, props) => _.get(state, 'signals.complaintsByCohort', {});
 export const getHealthScoreData = (state, props) => _.get(state, 'signals.healthScore', {});
 export const getCurrentHealthScoreData = (state, props) => _.get(state, 'signals.currentHealthScore', {});
-export const getInjections = (state, props) => _.get(state, 'signals.injections', {});
 
 // Details
 export const selectSpamHitsDetails = createSelector(
@@ -268,9 +267,10 @@ export const selectHealthScoreDetails = createSelector(
     const match = data.find((item) => String(item[facet]) === facetId) || {};
 
     const history = _.get(match, 'history', []);
-    const normalizedHistory = history.map(({ dt: date, weights, ...values }) => ({
+    const normalizedHistory = history.map(({ dt: date, weights, total_injection_count: injections, ...values }) => ({
       date,
       weights: _.sortBy(weights, ({ weight }) => parseFloat(weight)),
+      injections,
       ...values
     }));
 
@@ -287,16 +287,14 @@ export const selectHealthScoreDetails = createSelector(
           { weight_type: 'eng cohorts: new, 14-day', weight: null, weight_value: null },
           { weight_type: 'eng cohorts: unengaged', weight: null, weight_value: null }
         ],
-        health_score: null
+        health_score: null,
+        injections: null
       },
       from, to
     });
 
-    // Merge in injections and rankings
-    const mergedHistory = _.map(filledHistory, (healthData) => {
-      const spamData = _.find(spamDetails.data, ['date', healthData.date]);
-      return { injections: spamData.injections, ranking: rankHealthScore(roundToPlaces(healthData.health_score * 100, 1)), ...healthData };
-    });
+    // Merge in rankings
+    const mergedHistory = filledHistory.map((healthData) => ({ ranking: rankHealthScore(roundToPlaces(healthData.health_score * 100, 1)), ...healthData }));
 
     const isEmpty = mergedHistory.every((values) => values.health_score === null);
 
@@ -426,21 +424,19 @@ export const selectHealthScoreOverviewData = createSelector(
 );
 
 export const selectCurrentHealthScoreDashboard = createSelector(
-  [getCurrentHealthScoreData, getOptions, getInjections],
-  ({ data, loading, error }, { from, to }, injections) => {
+  [getCurrentHealthScoreData, getOptions],
+  ({ data, loading, error }, { from, to }) => {
     const accountData = _.find(data, ['sid', -1]) || {};
     const history = accountData.history || [];
 
-    const normalizedHistory = history.map(({ dt: date, health_score, ...values }) => {
+    const normalizedHistory = history.map(({ dt: date, health_score, total_injection_count: injections, ...values }) => {
       const roundedHealthScore = roundToPlaces(health_score * 100, 1);
-      const injectionData = _.find(injections.data, ['dt', date]) || {};
-
       return {
         ...values,
         date,
         health_score: roundedHealthScore,
         ranking: rankHealthScore(roundedHealthScore),
-        injections: injectionData.injections
+        injections
       };
     });
 

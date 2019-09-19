@@ -27,7 +27,7 @@ describe('Selectors: signals', () => {
       },
       signals: {
         spamHits: {
-          total_count: 1,
+          totalCount: 2,
           data: [
             {
               sending_domain: 'test.com',
@@ -86,7 +86,7 @@ describe('Selectors: signals', () => {
           error: null
         },
         engagementRecency: {
-          total_count: 10,
+          totalCount: 1,
           data: [
             {
               sending_domain: 'test.com',
@@ -117,7 +117,7 @@ describe('Selectors: signals', () => {
           error: null
         },
         engagementRateByCohort: {
-          total_count: 10,
+          totalCount: 1,
           data: [
             {
               sending_domain: 'test.com',
@@ -145,7 +145,7 @@ describe('Selectors: signals', () => {
           error: null
         },
         unsubscribeRateByCohort: {
-          total_count: 10,
+          totalCount: 1,
           data: [
             {
               sending_domain: 'test.com',
@@ -173,7 +173,7 @@ describe('Selectors: signals', () => {
           error: null
         },
         complaintsByCohort: {
-          total_count: 10,
+          totalCount: 1,
           data: [
             {
               sending_domain: 'test.com',
@@ -201,7 +201,7 @@ describe('Selectors: signals', () => {
           error: null
         },
         healthScore: {
-          total_count: 10,
+          totalCount: 1,
           data: [
             {
               current_weights: [],
@@ -212,6 +212,7 @@ describe('Selectors: signals', () => {
                 {
                   dt: '2018-01-01',
                   health_score: 0.74321, // bad
+                  total_injection_count: 182400,
                   weights: [
                     {
                       weight_type: 'eng cohorts: new, 14-day',
@@ -232,20 +233,22 @@ describe('Selectors: signals', () => {
                 },
                 {
                   dt: '2018-01-02',
-                  health_score: 0.8
+                  health_score: 0.8,
+                  weights: [],
+                  total_injection_count: 12345
                 },
                 {
                   dt: '2018-01-03',
                   health_score: 0.98, // good
                   weights: [],
-                  WoW: null
+                  total_injection_count: 35000
                 }
               ]
             }
           ]
         },
         currentHealthScore: {
-          total_count: 10,
+          totalCount: 1,
           data: [
             {
               sid: -1,
@@ -257,27 +260,23 @@ describe('Selectors: signals', () => {
                 {
                   dt: '2018-01-01',
                   health_score: 0.74321, // bad
+                  total_injection_count: 100,
                   weights: []
                 },
                 {
                   dt: '2018-01-02',
-                  health_score: 0.8
+                  health_score: 0.8,
+                  total_injection_count: 100,
+                  weights: []
                 },
                 {
                   dt: '2018-01-03',
                   health_score: 0.98, // good
                   weights: [],
-                  WoW: null
+                  total_injection_count: 100
                 }
               ]
             }
-          ]
-        },
-        injections: {
-          data: [
-            { injections: 100, spam_hits: 1, dt: '2018-01-01' },
-            { injections: 100, spam_hits: 1, dt: '2018-01-02' },
-            { injections: 100, spam_hits: 1, dt: '2018-01-03' }
           ]
         }
       }

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { list as getSubaccounts } from 'src/actions/subaccounts';
-import { getCurrentHealthScore, getInjections } from 'src/actions/signals';
+import { getCurrentHealthScore } from 'src/actions/signals';
 import { Grid } from '@sparkpost/matchbox';
 import Page from '../components/SignalsPage';
 import HealthScoreOverview from '../containers/HealthScoreOverviewContainer';
@@ -15,7 +15,7 @@ import InfoTooltip from '../components/InfoTooltip';
 import { HEALTH_SCORE_INFO } from '../constants/info';
 
 export function HealthScoreDashboard(props) {
-  const { from, getCurrentHealthScore, getInjections, getSubaccounts, relativeRange, subaccounts, to } = props;
+  const { from, getCurrentHealthScore, getSubaccounts, relativeRange, subaccounts, to } = props;
 
   // Gets subaccount info on mount
   useEffect(() => {
@@ -27,8 +27,7 @@ export function HealthScoreDashboard(props) {
     // Ordered by ascending sid to guarantee account rollup (-1) is returned
     // order_by: 'sid' is the default behavior
     getCurrentHealthScore({ relativeRange, order: 'asc', limit: 1, from, to });
-    getInjections({ relativeRange, from, to });
-  }, [getCurrentHealthScore, getInjections, relativeRange, from, to]);
+  }, [getCurrentHealthScore, relativeRange, from, to]);
 
   return (
     <Page
@@ -73,8 +72,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   getCurrentHealthScore,
-  getSubaccounts,
-  getInjections
+  getSubaccounts
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(HealthScoreDashboard);

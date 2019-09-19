@@ -58,7 +58,7 @@ export class HealthScorePage extends Component {
   }
 
   renderContent = () => {
-    const { data = [], facet, handleDateSelect, handleDateHover, loading, gap, empty, error, selectedDate, hoveredDate, resetDateHover } = this.props;
+    const { data = [], handleDateSelect, handleDateHover, loading, gap, empty, error, selectedDate, hoveredDate, resetDateHover } = this.props;
     const { selectedComponent } = this.state;
 
     const selectedWeights = _.get(_.find(data, ['date', selectedDate]), 'weights', []);
@@ -119,35 +119,26 @@ export class HealthScorePage extends Component {
                   }}
                   xAxisProps={this.getXAxisProps()}
                 />
-                {/*
-                  Spam Trap data when faceted by mailbox providers does not exist
-                  Remove when injections are returned from the health score endpoint
-                */}
-                {facet !== 'mb_provider' && (
-                  <>
-                    <ChartHeader title='Injections' tooltipContent={INJECTIONS_INFO} />
-                    <BarChart
-                      margin = {newModelMarginsOther}
-                      gap={gap}
-                      height={190}
-                      onClick={handleDateSelect}
-                      onMouseOver={handleDateHover}
-                      selected={selectedDate}
-                      hovered={hoveredDate}
-                      onMouseOut={resetDateHover}
-                      timeSeries={data}
-                      tooltipContent={({ payload = {}}) => (
-                        <TooltipMetric label='Injections' value={formatFullNumber(payload.injections)} />
-                      )}
-                      yKey='injections'
-                      yAxisProps={{
-                        tickFormatter: (tick) => formatNumber(tick)
-                      }}
-                      xAxisProps={this.getXAxisProps()}
-                    />
-                  </>
-                )}
-
+                <ChartHeader title='Injections' tooltipContent={INJECTIONS_INFO} />
+                <BarChart
+                  margin = {newModelMarginsOther}
+                  gap={gap}
+                  height={190}
+                  onClick={handleDateSelect}
+                  onMouseOver={handleDateHover}
+                  selected={selectedDate}
+                  hovered={hoveredDate}
+                  onMouseOut={resetDateHover}
+                  timeSeries={data}
+                  tooltipContent={({ payload = {}}) => (
+                    <TooltipMetric label='Injections' value={formatFullNumber(payload.injections)} />
+                  )}
+                  yKey='injections'
+                  yAxisProps={{
+                    tickFormatter: (tick) => formatNumber(tick)
+                  }}
+                  xAxisProps={this.getXAxisProps()}
+                />
                 {(selectedComponent && !selectedWeightsAreEmpty) && (
                   <Fragment>
                     <ChartHeader title={HEALTH_SCORE_COMPONENTS[selectedComponent].chartTitle} />

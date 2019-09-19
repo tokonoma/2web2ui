@@ -1155,12 +1155,11 @@ Object {
       Object {
         "date": "2018-01-02",
         "health_score": 0.8,
-        "injections": null,
+        "injections": 12345,
         "ranking": "good",
         "weights": Array [],
       },
       Object {
-        "WoW": null,
         "date": "2018-01-03",
         "health_score": 0.98,
         "injections": 35000,
@@ -1228,9 +1227,9 @@ Object {
       "health_score": 80,
       "injections": 100,
       "ranking": "good",
+      "weights": Array [],
     },
     Object {
-      "WoW": null,
       "date": "2018-01-03",
       "health_score": 98,
       "injections": 100,
@@ -1317,7 +1316,7 @@ Object {
     "max": 10,
     "relativeMax": 20,
   },
-  "total_count": 10,
+  "totalCount": 1,
 }
 `;
 
@@ -1426,6 +1425,7 @@ Object {
           "date": "2018-01-01",
           "health_score": 74.3,
           "ranking": "warning",
+          "total_injection_count": 182400,
           "weights": Array [
             Object {
               "weight": 0.5,
@@ -1448,19 +1448,21 @@ Object {
           "date": "2018-01-02",
           "health_score": 80,
           "ranking": "good",
+          "total_injection_count": 12345,
+          "weights": Array [],
         },
         Object {
-          "WoW": null,
           "date": "2018-01-03",
           "health_score": 98,
           "ranking": "good",
+          "total_injection_count": 35000,
           "weights": Array [],
         },
       ],
       "sending_domain": "test.com",
     },
   ],
-  "total_count": 10,
+  "totalCount": 1,
 }
 `;
 
@@ -1502,6 +1504,7 @@ Array [
         "date": "2018-01-01",
         "health_score": 74.3,
         "ranking": "warning",
+        "total_injection_count": 182400,
         "weights": Array [
           Object {
             "weight": 0.5,
@@ -1524,12 +1527,14 @@ Array [
         "date": "2018-01-02",
         "health_score": 80,
         "ranking": "good",
+        "total_injection_count": 12345,
+        "weights": Array [],
       },
       Object {
-        "WoW": null,
         "date": "2018-01-03",
         "health_score": 98,
         "ranking": "good",
+        "total_injection_count": 35000,
         "weights": Array [],
       },
     ],
@@ -1692,7 +1697,7 @@ Object {
     "max": 856,
     "relativeMax": 0.3,
   },
-  "total_count": 1,
+  "totalCount": 2,
 }
 `;
 
