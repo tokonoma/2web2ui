@@ -110,7 +110,7 @@ exports[`Alert Form Component should render the alert form component correctly 1
               icon={<EmailIcon />}
               id="emails"
               key="emails"
-              subtitle="You and your team can receive alerts through email"
+              subtitle="Receive notifications through email. One address per line. Up to 10 addresses."
               title="Emails"
             >
               <Field

@@ -46,6 +46,28 @@ describe('Filter Fields Component', () => {
     expect(wrapper.find('Field')).toHaveLength(1);
   });
 
+  it('should hide filtering by IP address when the account has no IP addresses', () => {
+    jest.spyOn(alertFormHelper, 'getFormSpec').mockImplementationOnce(() =>
+      ({ filterType: 'multi' , filterOptions: [{ label: 'My Sending IPs', value: 'sending_ip' }]}));
+    const wrapper = subject({
+      sendingIps: []
+    });
+
+    expect(wrapper.find({ name: 'sending_ip' })).not.toExist();
+    expect(wrapper.find('Field')).toHaveLength(0);
+  });
+
+  it('should show filtering by IP address when the account has IP addresses', () => {
+    jest.spyOn(alertFormHelper, 'getFormSpec').mockImplementationOnce(() =>
+      ({ filterType: 'multi' , filterOptions: [{ label: 'My Sending IPs', value: 'sending_ip' }]}));
+    const wrapper = subject({
+      sendingIps: [{ external_ip: '192.168.1.1' }]
+    });
+
+    expect(wrapper.find({ name: 'sending_ip' })).toExist();
+    expect(wrapper.find('Field')).toHaveLength(1);
+  });
+
   it('reset single filter value when single filter facet changes', () => {
     const wrapper = subject();
     wrapper.find({ name: 'single_filter.filter_type' }).simulate('change', 'mailbox_provider');

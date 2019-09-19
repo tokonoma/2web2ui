@@ -67,7 +67,7 @@ const slackSubtitle = <Fragment>
 export const NOTIFICATION_CHANNEL_DATA = {
   emails: {
     icon: <EmailIcon />,
-    subtitle: 'You and your team can receive alerts through email',
+    subtitle: 'Receive notifications through email. One address per line. Up to 10 addresses.',
     fieldProps: {
       validate: ifStringPresent(emails),
       placeholder: 'example@email.com',
