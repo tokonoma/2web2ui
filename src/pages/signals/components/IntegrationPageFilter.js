@@ -39,6 +39,7 @@ const IntegrationPageFilter = ({ onChange, disabled, initialValues }) => {
         </Grid.Column>
         <Grid.Column xs={12} md={8}>
           <TextField
+            id='batchIdFilter'
             key={filterParams.batchStatus.length === 0}
             labelHidden
             name='batchIds'
