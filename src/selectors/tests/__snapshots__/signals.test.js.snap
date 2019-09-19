@@ -1160,7 +1160,6 @@ Object {
         "weights": Array [],
       },
       Object {
-        "WoW": null,
         "date": "2018-01-03",
         "health_score": 0.98,
         "injections": 35000,
@@ -1228,9 +1227,9 @@ Object {
       "health_score": 80,
       "injections": 100,
       "ranking": "good",
+      "weights": Array [],
     },
     Object {
-      "WoW": null,
       "date": "2018-01-03",
       "health_score": 98,
       "injections": 100,
@@ -1317,7 +1316,7 @@ Object {
     "max": 10,
     "relativeMax": 20,
   },
-  "total_count": 10,
+  "totalCount": 1,
 }
 `;
 
@@ -1450,9 +1449,9 @@ Object {
           "health_score": 80,
           "ranking": "good",
           "total_injection_count": 12345,
+          "weights": Array [],
         },
         Object {
-          "WoW": null,
           "date": "2018-01-03",
           "health_score": 98,
           "ranking": "good",
@@ -1463,7 +1462,7 @@ Object {
       "sending_domain": "test.com",
     },
   ],
-  "total_count": 10,
+  "totalCount": 1,
 }
 `;
 
@@ -1529,9 +1528,9 @@ Array [
         "health_score": 80,
         "ranking": "good",
         "total_injection_count": 12345,
+        "weights": Array [],
       },
       Object {
-        "WoW": null,
         "date": "2018-01-03",
         "health_score": 98,
         "ranking": "good",
@@ -1698,7 +1697,7 @@ Object {
     "max": 856,
     "relativeMax": 0.3,
   },
-  "total_count": 1,
+  "totalCount": 2,
 }
 `;
 
