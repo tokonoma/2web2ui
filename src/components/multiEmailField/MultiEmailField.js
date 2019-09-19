@@ -33,14 +33,15 @@ const MultiEmailField = (props) => {
 };
 
 MultiEmailField.propTypes = {
-  label: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
   name: PropTypes.string,
+  value: PropTypes.string,
   emailList: PropTypes.array,
-  error: PropTypes.string,
   onChange: PropTypes.func,
   onKeyDownAndBlur: PropTypes.func,
-  onRemoveEmail: PropTypes.func
+  onRemoveEmail: PropTypes.func,
+  error: PropTypes.string
 };
 
 MultiEmailField.defaultProps = {
