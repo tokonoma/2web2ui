@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MultiEmailField renders 1`] = `
+<ComboBoxTextField
+  error=""
+  id="multi-email-email-to"
+  itemToString={[Function]}
+  label="To:"
+  name="emailTo"
+  removeItem={[Function]}
+  selectedItems={Array []}
+  value=""
+/>
+`;

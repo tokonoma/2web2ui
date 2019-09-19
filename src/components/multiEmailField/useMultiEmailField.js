@@ -1,4 +1,3 @@
-// NOTE - should this be in `src/hooks` instead of co-locating?
 import { useState } from 'react';
 import { isEmailAddress } from 'src/helpers/email';
 
