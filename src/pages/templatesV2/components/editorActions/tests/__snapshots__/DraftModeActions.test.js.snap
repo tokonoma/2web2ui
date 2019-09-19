@@ -2,17 +2,14 @@
 
 exports[`DraftModeActions renders draft actions 1`] = `
 <Button.Group>
-  <_default
+  <SaveAndPublish
     className="Actions"
+    onClick={[Function]}
   >
-    <Button
-      size="default"
-    >
-      <strong>
-        Save and Publish
-      </strong>
-    </Button>
-  </_default>
+    <strong>
+      Save and Publish
+    </strong>
+  </SaveAndPublish>
   <div
     className="Actions"
   >
@@ -28,13 +25,16 @@ exports[`DraftModeActions renders draft actions 1`] = `
           size="default"
         >
           <ArrowDropDown />
+          <ScreenReaderOnly>
+            Open Menu
+          </ScreenReaderOnly>
         </Button>
       }
     >
       <div
         className="ActionsBody"
       >
-        <_default
+        <SaveAndPublish
           className="ActionItem"
           onClick={[Function]}
         />
@@ -48,8 +48,20 @@ exports[`DraftModeActions renders draft actions 1`] = `
         <_default
           className="ActionItem"
         />
+        <DuplicateTemplate
+          className="ActionItem"
+          onClick={[Function]}
+        />
       </div>
     </Popover>
+    <DuplicateTemplateModal
+      onClose={[Function]}
+      open={false}
+    />
+    <SaveAndPublishConfirmationModal
+      onCancel={[Function]}
+      open={false}
+    />
   </div>
 </Button.Group>
 `;

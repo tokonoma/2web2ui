@@ -1,26 +1,33 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`SaveAndPublish Renders and icon and default content when no children are supplied 1`] = `
+<div>
+  <UnstyledLink
+    role="button"
+    title="Opens a dialog"
+    to="javascript:void(0);"
+  >
+    <CheckCircleOutline />
+    <span>
+      Save and Publish
+    </span>
+  </UnstyledLink>
+</div>
+`;
+
 exports[`SaveAndPublish renders SaveAndPublish action 1`] = `
 <div
   className="Foo"
 >
   <UnstyledLink
-    onClick={[Function]}
+    role="button"
+    title="Opens a dialog"
+    to="javascript:void(0);"
   >
     <CheckCircleOutline />
-    Save and Publish
+    <span>
+      Save and Publish
+    </span>
   </UnstyledLink>
-  <ConfirmationModal
-    confirmVerb="Save and Publish"
-    content={
-      <p>
-        Once published, your template will be available for use in email campaigns and A/B tests.
-      </p>
-    }
-    onCancel={[Function]}
-    onConfirm={[Function]}
-    open={false}
-    title="Are you sure you want to publish your template?"
-  />
 </div>
 `;
