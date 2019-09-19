@@ -157,6 +157,16 @@ describe('ComboBoxTypeahead', () => {
     expect(wrapper.find('ComboBoxTextField')).toHaveProp('placeholder', '');
   });
 
+  it('controls selected items from parent component', () => {
+    const wrapper = subject();
+    const selectedItems = ['apple', 'banana'];
+
+    wrapper.setProps({ defaultSelected: selectedItems });
+    wrapper.update();
+
+    expect(wrapper.find('ComboBoxTextField')).toHaveProp('selectedItems', selectedItems);
+  });
+
   it('calls onChange on mount', () => {
     const onChange = jest.fn();
     subject({ defaultSelected: ['pineapple'], onChange });

@@ -28,6 +28,12 @@ export const ComboBoxTypeahead = ({
     setMenuItems(nextMenuItems);
   }, 300);
 
+  // Updated list of selected menu items when combo box is being controlled
+  // note, state must be initialized with defaultSelected to avoid a runaway effect
+  useEffect(() => {
+    setSelectedItems(defaultSelected);
+  }, [setSelectedItems, defaultSelected]);
+
   // Report change to selected items (important for redux-form Fields)
   useEffect(() => {
     onChange(selectedItems.map(selectedMap));
