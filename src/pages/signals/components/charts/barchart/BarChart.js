@@ -22,6 +22,17 @@ import healthScoreThresholds from '../../../constants/healthScoreThresholds';
  * />
  */
 class BarChart extends Component {
+
+  getSelectedStyle = _.memoize((key, isActiveDate, selectedFill) =>
+    {
+      if (key === 'health_score' || key === 'injections' || key === 'weight_value')  {
+       return isActiveDate ? {fill: selectedFill} : {};
+      }
+      return isActiveDate ? {opacity : 1} : {opacity : .7}
+    },
+    (key,isActiveDate,selectedFill) =>`${key}${isActiveDate}${selectedFill}`
+  );
+
   renderBar = ({ key, selected, hovered, fill, activeFill }) => (
     <Bar
       stackId='stack'
@@ -35,34 +46,24 @@ class BarChart extends Component {
       activeFill={activeFill}
       cursor='pointer'
       shape={(props) => {
-        let eventFill = props.fill;
+        const selectedFill = (key === 'health_score') ? healthScoreThresholds[props.ranking].barColor : activeFill;
+        const isActiveDate= (props.date === hovered) || (props.date === selected);
+        const selectedStyle = selected ? this.getSelectedStyle(key, isActiveDate, selectedFill) : {};
 
-        if (key === 'health_score') {
-          if ((props.date === hovered) || (props.date === selected)) {
-            const ranking = props.ranking || 'danger';
-            eventFill = healthScoreThresholds[ranking].barColor
-          }
-        } else {
-          if ((props.date === hovered) || (props.date === selected)) {
-            eventFill = activeFill;
-          }
-        }
-
-        return <Rectangle {...props} fill={eventFill} style={{ transition: '0s' }}/>
+        return <Rectangle {...props} fill={props.fill} style={{ transition: '0s' }} {...selectedStyle}/>
       }}
     />
-
   )
 
   renderBars = () => {
     const { yKeys, yKey, selected, hovered, fill, activeFill } = this.props;
 
     if (yKeys) {
-      return yKeys.map(this.renderBar);
+      return yKeys.map((key) => this.renderBar({...key, selected, hovered}));
     }
 
     return this.renderBar({ key: yKey, selected, hovered, fill, activeFill });
-  }
+  };
 
   renderBackgrounds = () => {
     const { onClick, onMouseOver, ykey } = this.props;
@@ -94,6 +95,7 @@ class BarChart extends Component {
             barCategoryGap={gap}
             data={timeSeries}
             margin={margin}
+            cursor={(disableHover) ? 'pointer' : undefined}
           >
             {this.renderBackgrounds()}
             <CartesianGrid

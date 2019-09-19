@@ -33,7 +33,7 @@ export class EngagementRecencyPage extends Component {
     tickFormatter: (tick) => `${roundToPlaces(tick * 100, 0)}%`,
     domain: [0, 1],
     ticks: [0, 0.25, 0.5, 0.75, 1.0]
-  })
+  });
 
   getXAxisProps = () => {
     const { xTicks } = this.props;
@@ -41,7 +41,7 @@ export class EngagementRecencyPage extends Component {
       ticks: xTicks,
       tickFormatter: (tick) => moment(tick).format('M/D')
     };
-  }
+  };
 
   getTooltipContent = ({ payload = {}}) => (
     <Fragment>
@@ -55,10 +55,25 @@ export class EngagementRecencyPage extends Component {
         />
       ))}
     </Fragment>
-  )
+  );
 
   renderContent = () => {
-    const { data = [], empty, error, facet, facetId, gap, handleDateSelect, loading, selectedDate, subaccountId } = this.props;
+    const {
+      data = [],
+      empty,
+      error,
+      facet,
+      facetId,
+      gap,
+      handleDateSelect,
+      loading,
+      selectedDate,
+      subaccountId,
+      hoveredDate,
+      handleDateHover,
+      resetDateHover
+    } = this.props;
+
     const selectedCohorts = _.find(data, ['date', selectedDate]) || {};
     let chartPanel;
 
@@ -87,8 +102,11 @@ export class EngagementRecencyPage extends Component {
               <div className='LiftTooltip'>
                 <BarChart
                   gap={gap}
+                  onMouseOver={handleDateHover}
+                  onMouseOut={resetDateHover}
                   onClick={handleDateSelect}
                   selected={selectedDate}
+                  hovered={hoveredDate}
                   timeSeries={data}
                   tooltipContent={this.getTooltipContent}
                   tooltipWidth='250px'
@@ -111,7 +129,7 @@ export class EngagementRecencyPage extends Component {
         </Grid.Column>
       </Grid>
     );
-  }
+  };
 
   render() {
     const { facet, facetId, subaccountId } = this.props;
