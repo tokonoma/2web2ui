@@ -59,19 +59,34 @@ describe('ComboBoxTypeahead', () => {
     expect(wrapper.find('ComboBoxMenu').prop('items')).toHaveLength(5);
   });
 
-  it('renders filtered menu items', async () => {
+  it('renders filtered menu items', () => {
     const wrapper = subject();
     changeInputValue(wrapper, 'grape');
     expect(wrapper.find('ComboBoxMenu').prop('items')).toHaveLength(2);
   });
 
-  it('renders filtered menu items without selected items', async () => {
+  it('renders filtered menu items without selected items', () => {
     const wrapper = subject({ defaultSelected: ['grape']});
     changeInputValue(wrapper, 'grape');
     expect(wrapper.find('ComboBoxMenu').prop('items')).toHaveLength(1);
   });
 
-  it('does not render a menu when no matches', async () => {
+  it('renders filtered menu items without exclusive items', () => {
+    const wrapper = subject({
+      defaultSelected: [{ content: 'B' }],
+      itemToString: (item) => item.content,
+      results: [
+        { content: 'A', isExclusiveItem: true },
+        { content: 'B' },
+        { content: 'C' }
+      ],
+      selectedMap: (item) => item.content
+    });
+
+    expect(wrapper.find('ComboBoxMenu').prop('items')).toHaveLength(1);
+  });
+
+  it('does not render a menu when no matches', () => {
     const wrapper = subject();
     changeInputValue(wrapper, 'xyz');
     expect(wrapper.find('ComboBoxMenu')).toHaveProp('isOpen', false);
@@ -81,6 +96,15 @@ describe('ComboBoxTypeahead', () => {
     const wrapper = subject();
     selectMenuItem(wrapper, 0);
     expect(wrapper.find('ComboBoxMenu')).toHaveProp('isOpen', true);
+  });
+
+  it('closes menu when exclusive item is selected', () => {
+    const wrapper = subject({
+      itemToString: (item) => item.content,
+      results: [{ content: 'My Example', isExclusiveItem: true }]
+    });
+    selectMenuItem(wrapper, 0);
+    expect(wrapper.find('ComboBoxMenu')).toHaveProp('isOpen', false);
   });
 
   it('resets input value after a selection', () => {
@@ -114,8 +138,12 @@ describe('ComboBoxTypeahead', () => {
     expect(wrapper.find('ComboBoxTextField')).toHaveProp('readOnly', true);
   });
 
-  it('enabled read only mode for text field when no results are provided', () => {
-    const wrapper = subject({ results: []});
+  it('enabled read only mode for text field when an exclusive item is selected', () => {
+    const wrapper = subject({
+      itemToString: (item) => item.content,
+      results: [{ content: 'My Example', isExclusiveItem: true }]
+    });
+    selectMenuItem(wrapper, 0);
     expect(wrapper.find('ComboBoxTextField')).toHaveProp('readOnly', true);
   });
 
