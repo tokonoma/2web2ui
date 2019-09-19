@@ -18,7 +18,7 @@ exports[`promoCode should render correctly 1`] = `
   name="promo"
   onChange={[Function]}
   resize="both"
-  suffix={<React.Fragment />}
+  suffix={null}
   type="text"
 />
 `;
@@ -41,7 +41,7 @@ exports[`promoCode should render with error 1`] = `
   name="promo"
   onChange={[Function]}
   resize="both"
-  suffix={<React.Fragment />}
+  suffix={null}
   type="text"
 />
 `;
@@ -91,7 +91,7 @@ exports[`promoCode text field should disable and button should change to remove 
   name="promo"
   onChange={[Function]}
   resize="both"
-  suffix={<React.Fragment />}
+  suffix={null}
   type="text"
 />
 `;
