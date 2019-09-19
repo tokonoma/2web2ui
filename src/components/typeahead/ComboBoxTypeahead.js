@@ -90,7 +90,7 @@ export const ComboBoxTypeahead = ({
     const isSelectedItemExclusive = isExclusiveItem(selectedItems[0]);
     const items = menuItems
       .filter((item) => (
-        !isSelectedItem(item) && !(hasSelectedItems && isExclusiveItem(item))
+        !isSelectedItemExclusive && !isSelectedItem(item) && !(hasSelectedItems && isExclusiveItem(item))
       ))
       .map((item, index) => getItemProps({
         content: itemToString(item),
@@ -98,7 +98,7 @@ export const ComboBoxTypeahead = ({
         index,
         item
       }));
-    const isMenuOpen = isOpen && Boolean(items.length) && !isSelectedItemExclusive;
+    const isMenuOpen = isOpen && Boolean(items.length);
 
     const inputProps = getInputProps({
       disabled,
