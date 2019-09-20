@@ -18,8 +18,8 @@ export const getTestDataKey = ({ id, username, mode }) => ([ 'tpldata', username
 export const shapeContent = (content = {}) => {
   const shapedContent = {
     ...content,
+    text: content.text,
     reply_to: _.isEmpty(content.reply_to) ? undefined : content.reply_to,
-    text: _.isEmpty(content.text) ? undefined : content.text,
     html: _.isEmpty(content.html) ? undefined : content.html,
     amp_html: _.isEmpty(content.amp_html) ? undefined : content.amp_html
   };
