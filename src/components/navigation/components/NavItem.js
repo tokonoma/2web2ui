@@ -20,8 +20,7 @@ const NavItem = (props) => {
     to,
     toggleMobileNav,
     mobile,
-    location,
-    newNav
+    location
   } = props;
 
   const active = location.pathname.includes(to);
@@ -41,7 +40,7 @@ const NavItem = (props) => {
   }
 
   return (
-    <li className={classnames(newNav && styles.newNav)}>
+    <li>
       <Link to={to} className={linkClasses} onClick={mobile ? toggleMobileNav : null}>
         {Icon && <span className={styles.iconWrapper}><Icon size={21} className={styles.icon}/></span>}
         <div className={styles.Label}>{label}</div>

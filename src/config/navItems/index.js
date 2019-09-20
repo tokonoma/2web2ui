@@ -1,18 +1,6 @@
-import {
-  Home,
-  InsertChart,
-  Code,
-  MailOutline,
-  Language,
-  Compare,
-  NotificationsActive,
-  Signal,
-  VerifiedUser
-} from '@sparkpost/matchbox-icons';
+import { Home, People, Code, List, NotificationsActive, Settings, BarChart } from '@sparkpost/matchbox-icons';
 import { hasGrants } from 'src/helpers/conditions';
-import campaign from './campaign';
-import settings from './settings';
-import inboxPlacement from './inboxPlacement';
+import inboxPlacementNavItems from './inboxPlacement';
 
 export default [
   {
@@ -21,9 +9,9 @@ export default [
     icon: Home
   },
   {
-    label: 'Reports',
+    label: 'Signals Analytics',
     to: '/reports',
-    icon: InsertChart,
+    icon: BarChart,
     children: [
       {
         label: 'Summary',
@@ -46,25 +34,9 @@ export default [
         to: '/reports/delayed'
       },
       {
-        label: 'Engagement',
-        to: '/reports/engagement'
-      },
-      {
-        label: 'Events Search',
-        to: '/reports/message-events',
-        tag: 'new'
-      }
-    ]
-  },
-  {
-    label: 'Signals',
-    to: '/signals',
-    icon: Signal,
-    tag: 'new',
-    children: [
-      {
         label: 'Health Score',
-        to: '/signals/health-score'
+        to: '/signals/health-score',
+        divider: true
       },
       {
         label: 'Spam Traps',
@@ -72,28 +44,51 @@ export default [
       },
       {
         label: 'Engagement Recency',
-        to: '/signals/engagement'
+        to: '/signals/engagement',
+        divider: true
+      },
+      {
+        label: 'Engagement',
+        to: '/reports/engagement'
       }
     ]
   },
-  campaign,
-  //TODO remove it in TR-1455
   {
-    label: 'Templates',
-    to: '/templates',
-    icon: Code
-  },
-  //TODO remove it in TR-1455
-  {
-    label: 'A/B Testing',
-    to: '/ab-testing',
-    icon: Compare
+    label: 'Events',
+    to: '/reports/message-events',
+    icon: List
   },
   {
-    label: 'Lists',
-    to: '/lists',
-    icon: MailOutline,
+    label: 'Content',
+    to: '/',
+    icon: Code,
+    tag: 'new',
     children: [
+      {
+        label: 'Templates',
+        to: '/templates'
+      },
+      {
+        label: 'A/B Testing',
+        to: '/ab-testing'
+      },
+      {
+        label: 'Snippets',
+        to: '/snippets',
+        tag: 'labs'
+      }
+    ]
+  },
+  {
+    label: 'Recipients',
+    to: '/lists',
+    icon: People,
+    children: [
+      {
+        label: 'Recipient Validation',
+        to: '/recipient-validation/list',
+        condition: hasGrants('recipient-validation/manage')
+      },
       {
         label: 'Recipient Lists',
         to: '/lists/recipient-lists'
@@ -105,33 +100,49 @@ export default [
     ]
   },
   {
-    label: 'Recipient Validation',
-    // this route is a redirect, its condition is not correctly inherited, so this condition will
-    // need to be manually kept up to date
-    condition: hasGrants('recipient-validation/manage'),
-    to: '/recipient-validation',
-    icon: VerifiedUser,
-    tag: 'new'
-  },
-  {
-    label: 'Webhooks',
-    to: '/webhooks',
-    icon: Language
-  },
-  settings,
-  {
     label: 'Alerts',
     to: '/alerts',
     tag: 'new',
     icon: NotificationsActive
   },
-  //TODO remove it in TR-1455
   {
-    label: 'Snippets',
-    to: '/snippets',
-    tag: 'labs',
-    divider: true,
-    icon: Code
+    label: 'Configuration',
+    to: '/account',
+    icon: Settings,
+    children: [
+      {
+        label: 'Webhooks',
+        to: '/webhooks'
+      },
+      {
+        label: 'IP Pools',
+        to: '/account/ip-pools'
+      },
+      {
+        label: 'API Keys',
+        to: '/account/api-keys'
+      },
+      {
+        label: 'SMTP Settings',
+        to: '/account/smtp'
+      },
+      {
+        label: 'Sending Domains',
+        to: '/account/sending-domains',
+        divider: true
+      },
+      {
+        label: 'Tracking Domains',
+        to: '/account/tracking-domains'
+      },
+      {
+        label: 'Subaccounts',
+        to: '/account/subaccounts',
+        divider: true
+      }
+    ]
   },
-  inboxPlacement
+  {
+    ...inboxPlacementNavItems
+  }
 ];

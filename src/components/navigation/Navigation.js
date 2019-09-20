@@ -4,8 +4,7 @@ import { withRouter } from 'react-router-dom';
 import classnames from 'classnames';
 
 import { WindowSizeContext } from 'src/context/WindowSize';
-import { selectNavItems, selectNewNavItems } from 'src/selectors/navItems'; //TODO: Remove newNavItems
-import { isAccountUiOptionSet } from 'src/helpers/conditions/account';
+import { selectNavItems } from 'src/selectors/navItems';
 import styles from './Navigation.module.scss';
 import Top from './components/Top';
 import NavItem from './components/NavItem';
@@ -20,11 +19,10 @@ export class Navigation extends Component {
   };
 
   renderItems() {
-    const { navItems, newNavItems, isNewNav } = this.props;
-    const navItemsList = isNewNav ? newNavItems : navItems;
+    const { navItems, location } = this.props;
 
-    return navItemsList.map((item, key) => {
-      const props = { ...item, toggleMobileNav: this.toggleMobileNav, location: this.props.location, key: key, newNav: isNewNav };
+    return navItems.map((item, key) => {
+      const props = { ...item, toggleMobileNav: this.toggleMobileNav, location, key: key };
       return item.children ? <NavGroup {...props} /> : <NavItem {...props} />;
     });
   }
@@ -66,7 +64,5 @@ export class Navigation extends Component {
 }
 
 export default withRouter(connect((state) => ({
-  navItems: selectNavItems(state), //TODO: Replace when feature flag is removed
-  newNavItems: selectNewNavItems(state),
-  isNewNav: isAccountUiOptionSet('new_navigation')(state)
+  navItems: selectNavItems(state)
 }))(withContext(BannerContext, Navigation)));
