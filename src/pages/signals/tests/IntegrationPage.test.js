@@ -7,7 +7,7 @@ import IntegrationPage from '../IntegrationPage';
 
 jest.mock('src/actions/ingestBatchEvents');
 
-describe('BatchStatusPage', () => {
+describe('IntegrationPage', () => {
   const App = ({ requestParams = 'statuses=system', children }) => <MemoryRouter initialEntries={[`/?${requestParams}`]}>
     <RouterContextProvider>
       {children}

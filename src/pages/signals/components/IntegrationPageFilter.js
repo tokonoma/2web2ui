@@ -20,6 +20,12 @@ const IntegrationPageFilter = ({ onChange, disabled, initialValues }) => {
     setFilterParams({ batchIds: [], batchStatus: statusArray });
   };
 
+  const handleEnterKey = (e) => {
+    if (e.key === 'Enter') {
+      handleFieldChange(e);
+    }
+  };
+
   useEffect(() => {
     onChange(filterParams);
   }, [filterParams, onChange]);
@@ -47,6 +53,7 @@ const IntegrationPageFilter = ({ onChange, disabled, initialValues }) => {
             onBlur={handleFieldChange}
             disabled={disabled}
             defaultValue={filterParams.batchIds.join(',')}
+            onKeyPress={handleEnterKey}
           />
         </Grid.Column>
       </Grid>
