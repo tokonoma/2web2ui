@@ -115,7 +115,7 @@ const IntegrationPage = ({ getIngestBatchEvents, eventsByPage, totalCount, nextC
         perPage={perPage}
         totalCount={totalCount}
       />
-      <div style={{ float: 'right' }}>
+      <div className={styles.PerPageContainer}>
         <PerPageButtons
           onPerPageChange={onChangePageSize}
           perPage={perPage}
