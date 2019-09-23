@@ -47,7 +47,8 @@ import {
   isAws,
   isCustomBilling,
   isEnterprise,
-  isSelfServeBilling
+  isSelfServeBilling,
+  isAccountUiOptionSet
 } from 'src/helpers/conditions/account';
 import { isAzure, isHeroku, isSubaccountUser } from 'src/helpers/conditions/user';
 import { configEquals, configFlag } from 'src/helpers/conditions/config';
@@ -269,6 +270,14 @@ const routes = [
     path: '/signals/health-score/:facet/:facetId',
     component: signals.HealthScorePage,
     condition: hasGrants('signals/manage'),
+    layout: App,
+    title: 'Signals',
+    supportDocSearch: 'signals'
+  },
+  {
+    path: '/signals/health-scoreV3/:facet/:facetId',
+    component: signals.HealthScorePageV3,
+    condition: isAccountUiOptionSet('allow_health_score_v3'),
     layout: App,
     title: 'Signals',
     supportDocSearch: 'signals'

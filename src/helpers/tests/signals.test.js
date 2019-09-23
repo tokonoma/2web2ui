@@ -40,11 +40,11 @@ cases('.getFriendlyTitle', ({ expected, values }) => {
     values: { facet: 'sid', facetId: '101' }
   },
   'appends a subaccount': {
-    expected: 'test.co for Subaccount 102',
+    expected: 'test.co | Subaccount 102',
     values: { facet: 'sending_domain', facetId: 'test.co', subaccountId: '102' }
   },
   'should trim': {
-    expected: 'test.co for Subaccount 105',
+    expected: 'test.co | Subaccount 105',
     values: { facet: 'sending_domain', facetId: '   test.co', subaccountId: '105' }
   }
 });

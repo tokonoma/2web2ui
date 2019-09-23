@@ -39,7 +39,7 @@ export const getFriendlyTitle = ({ facet, facetId, subaccountId }) => {
   let subaccountSuffix = '';
 
   if (!_.isNil(subaccountId)) {
-    subaccountSuffix = `for ${translateSubaccount(subaccountId)}`;
+    subaccountSuffix = `| ${translateSubaccount(subaccountId)}`;
   }
 
   return `${facetText} ${subaccountSuffix}`.trim();
