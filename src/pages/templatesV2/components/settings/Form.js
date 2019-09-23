@@ -11,7 +11,6 @@ import CopyField from 'src/components/copyField/CopyField';
 import { required } from 'src/helpers/validation';
 import styles from './Form.module.scss';
 import { emailOrSubstitution } from '../validation';
-import DeleteTemplate from '../DeleteTemplate';
 import { routeNamespace } from '../../constants/routes';
 
 export default class SettingsForm extends React.Component {
@@ -158,8 +157,6 @@ export default class SettingsForm extends React.Component {
           >
             Update Settings
           </Button>
-
-          <DeleteTemplate className={styles.DeleteButton} afterDelete={this.onDelete}>Delete Template</DeleteTemplate>
         </Panel.Section>
       </form>
     </>);

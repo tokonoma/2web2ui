@@ -1,8 +1,8 @@
 import React from 'react';
 import { UnstyledLink } from '@sparkpost/matchbox';
-import { ContentCopy } from '@sparkpost/matchbox-icons';
+import { Delete } from '@sparkpost/matchbox-icons';
 
-const DuplicateTemplate = (props) => {
+const DeleteTemplate = (props) => {
   const { className, onClick } = props;
 
   return (
@@ -12,12 +12,12 @@ const DuplicateTemplate = (props) => {
         role="button"
         to="javascript:void(0);"
       >
-        <ContentCopy/>
+        <Delete/>
 
-        <span>Duplicate</span>
+        <span>Delete</span>
       </UnstyledLink>
     </div>
   );
 };
 
-export default DuplicateTemplate;
+export default DeleteTemplate;
