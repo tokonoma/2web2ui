@@ -28,7 +28,7 @@ describe('.shapeContent', () => {
   });
 
   it('should return content object without `text` key', () => {
-    expect(shapeContent({ text: '' }).text).toBeUndefined();
+    expect(shapeContent({ text: '' }).text).toBe('');
   });
 
   it('should return content object without `html` key', () => {
