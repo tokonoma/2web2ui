@@ -11,7 +11,15 @@ import styles from './EditAndPreviewPage.module.scss';
 import { routeNamespace } from './constants/routes';
 
 const EditAndPreviewPage = () => {
-  const { currentNavigationIndex, draft, hasDraftFailedToLoad, isDraftLoading, isPublishedMode } = useEditorContext();
+  const {
+    currentNavigationIndex,
+    draft,
+    // hasDraft,
+    // hasPublished,
+    hasDraftFailedToLoad,
+    isDraftLoading,
+    isPublishedMode
+  } = useEditorContext();
   const Contents = links[currentNavigationIndex].render;
   const PrimaryArea = links[currentNavigationIndex].renderPrimaryArea;
 
@@ -28,13 +36,43 @@ const EditAndPreviewPage = () => {
     return <Loading />;
   }
 
-  const primaryArea = isPublishedMode ? <div className={styles.Status}><span>Published</span><CheckCircle size={17} className={styles.GreenColor} /></div> : <div className={styles.Status}><span>Draft</span><FileEdit size={17} /></div>;
+  const primaryArea = () => (
+    <>
+      {/* {(hasDraft || hasPublished) && <span>Saved</span>} */}
+
+      {isPublishedMode && (
+        <div className={styles.Status}>
+          <span>Published</span>
+
+          <CheckCircle size={17} className={styles.GreenColor} />
+        </div>
+      )}
+
+      {!isPublishedMode && (
+        <div className={styles.Status}>
+          <span>Draft</span>
+
+          <FileEdit size={17} />
+        </div>
+      )}
+    </>
+  );
+
+  const title = (draft) => {
+    if (isPublishedMode) {
+      return draft.name;
+    }
+
+    if (!isPublishedMode) {
+      return `${draft.name} (DRAFT)`;
+    }
+  };
 
   return (
     <FullPage
       breadcrumbRedirectsTo={`/${routeNamespace}`}
-      title={draft.name}
-      primaryArea={primaryArea}
+      title={title(draft)}
+      primaryArea={primaryArea()}
     >
       <div className={styles.EditorNav}>
         <EditNavigation primaryArea={<PrimaryArea/>}/>
