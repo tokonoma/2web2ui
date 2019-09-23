@@ -17,12 +17,19 @@ exports[`PublishedModeActions renders published actions 1`] = `
     <Popover
       bottom={true}
       left={true}
+      onClose={[Function]}
+      open={false}
       right={true}
       trigger={
         <Button
+          aria-expanded="false"
+          onClick={[Function]}
           size="default"
         >
           <ArrowDropDown />
+          <ScreenReaderOnly>
+            Open Menu
+          </ScreenReaderOnly>
         </Button>
       }
     >
@@ -39,8 +46,27 @@ exports[`PublishedModeActions renders published actions 1`] = `
             Edit Draft
           </PageLink>
         </div>
+        <hr
+          className="Divider"
+        />
+        <DuplicateTemplate
+          className="ActionItem"
+          onClick={[Function]}
+        />
+        <DeleteTemplate
+          className="ActionItem"
+          onClick={[Function]}
+        />
       </div>
     </Popover>
+    <DuplicateTemplateModal
+      onClose={[Function]}
+      open={false}
+    />
+    <DeleteTemplateModal
+      onCancel={[Function]}
+      open={false}
+    />
   </div>
 </Button.Group>
 `;
