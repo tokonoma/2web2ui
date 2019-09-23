@@ -9,6 +9,10 @@ describe('DraftModeActions', () => {
   const subject = (editorState) => {
     useEditorContext.mockReturnValue({
       hasPublished: true,
+      draft: {
+        id: 'a-random-id-123',
+        subaccount_id: 'some-subaccount-id'
+      },
       ...editorState
     });
 
