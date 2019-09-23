@@ -15,107 +15,48 @@ Array [
       content={
         <div>
           <div
-            style={
-              Object {
-                "borderBottom": "1px solid black",
-                "paddingBottom": "10px",
-              }
-            }
+            className="Tooltip-date"
           >
             September 18, 2019
           </div>
           <div
-            className="border-Accepted"
-            style={
-              Object {
-                "height": "45px",
-                "marginTop": "8px",
-              }
-            }
+            className="border-Accepted Tooltip-body"
           >
             <div
-              style={
-                Object {
-                  "padding": 0,
-                  "paddingLeft": "20px",
-                }
-              }
+              className="Tooltip-label"
             >
               Accepted
             </div>
             <div
-              style={
-                Object {
-                  "fontSize": "25px",
-                  "fontWeight": 600,
-                  "padding": 0,
-                  "paddingLeft": "20px",
-                }
-              }
+              className="Tooltip-value"
             >
               1
             </div>
           </div>
           <div
-            className="border-Rejected"
-            style={
-              Object {
-                "height": "45px",
-                "marginTop": "8px",
-              }
-            }
+            className="border-Rejected Tooltip-body"
           >
             <div
-              style={
-                Object {
-                  "padding": 0,
-                  "paddingLeft": "20px",
-                }
-              }
+              className="Tooltip-label"
             >
               Rejected
             </div>
             <div
-              style={
-                Object {
-                  "fontSize": "25px",
-                  "fontWeight": 600,
-                  "padding": 0,
-                  "paddingLeft": "20px",
-                }
-              }
+              className="Tooltip-value"
             >
               1
             </div>
           </div>
           <div
-            className="border-Duplicates"
-            style={
-              Object {
-                "height": "45px",
-                "marginTop": "8px",
-              }
-            }
+            className="border-Duplicates Tooltip-body"
           >
             <div
-              style={
-                Object {
-                  "padding": 0,
-                  "paddingLeft": "20px",
-                }
-              }
+              className="Tooltip-label"
             >
               Duplicates
             </div>
             <div
-              style={
-                Object {
-                  "fontSize": "25px",
-                  "fontWeight": 600,
-                  "padding": 0,
-                  "paddingLeft": "20px",
-                }
-              }
+              className="Tooltip-value"
             >
               0
             </div>

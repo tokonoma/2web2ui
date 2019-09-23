@@ -8,6 +8,7 @@ import formatRow from './components/FormatRow';
 import { columns } from './constants/integration';
 import { getLegitBatchStatus, getLegitPageSize } from './helpers/batchStatusFilter';
 import _ from 'lodash';
+import styles from './IntegrationPage.module.scss';
 
 const IntegrationPage = ({ getIngestBatchEvents, eventsByPage, totalCount, nextCursor, loadingStatus }) => {
   const getParams = (requestParams) => {
@@ -68,7 +69,7 @@ const IntegrationPage = ({ getIngestBatchEvents, eventsByPage, totalCount, nextC
   },[getIngestBatchEvents, getParams, perPage, queryParams, requestParams, updateRoute, retry]);
 
   useEffect(() => {
-    if (!events && loadingStatus !== 'pending') {
+    if (!events && loadingStatus !== 'pending' && loadingStatus !== 'fail') {
       getIngestBatchEvents({
         perPage,
         statuses: queryParams.batchStatus.length !== 0 ? queryParams.batchStatus : undefined,
@@ -79,10 +80,10 @@ const IntegrationPage = ({ getIngestBatchEvents, eventsByPage, totalCount, nextC
   }, [perPage, nextCursor, getIngestBatchEvents, events, page, queryParams.batchStatus, queryParams.batchIds, loadingStatus]);
 
   const renderBody = () => {
-    if (loadingStatus === 'pending' || retry) { return <Panel style={{ width: '100%', height: '100px' }}><Loading/></Panel>; }
+    if (loadingStatus === 'pending' || retry) { return <Panel className={styles.LoadingPanel}><Loading/></Panel>; }
     if (loadingStatus === 'fail') {
       return <Panel
-        style={{ width: '100%' }}
+        className={styles.ErrorPanel}
         accent='red'
         title='Something went wrong' actions={[{ content: 'Retry', onClick: () => setRetry(true) }]}/>;
     }
