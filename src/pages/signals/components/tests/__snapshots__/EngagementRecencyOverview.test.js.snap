@@ -81,7 +81,6 @@ exports[`EngagementRecencyOverview renders overview panel with controls and tabl
               "relative_engaged_recipients": 5,
             },
           ],
-          "total_engagement": 12,
         },
       ]
     }
