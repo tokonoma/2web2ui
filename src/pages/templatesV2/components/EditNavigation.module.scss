@@ -2,12 +2,14 @@
 
 .Navigation {
   background: #fff;
-  display: flex;
-  justify-content: space-between;
-}
+  display: grid;
+  grid-gap: spacing();
+  padding: 0 spacing(large) spacing(large);
 
-.NavigationLinks {
-  padding-left: spacing(large)*4;
+  @media (min-width: breakpoint(small)) {
+    padding: 0 spacing(large) 0 (spacing(large) * 4);
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 .NavigationLink {
@@ -15,7 +17,7 @@
   position: relative; // allows absolute positioning within
   color: color(gray, 4); // to match default text
   display: inline-block;
-  padding: spacing(large);
+  padding: spacing() spacing(small);
   transition: color 0.2s ease-in-out;
 
   &:after {
@@ -51,6 +53,10 @@
       background-color: color(orange);
     }
   }
+
+  @media (min-width: breakpoint(small)) {
+    padding: spacing(large);
+  }
 }
 
 .NavigationActiveLink {
@@ -61,5 +67,5 @@
 .NavigationPrimaryArea {
   align-items: center;
   display: flex;
-  padding: 0 spacing(large);
+  justify-content: flex-end;
 }

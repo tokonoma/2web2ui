@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import React from 'react';
 import { Field } from 'redux-form';
 
@@ -6,6 +7,7 @@ import ToggleBlock from 'src/components/toggleBlock/ToggleBlock';
 import SubaccountSection from 'src/components/subaccountSection';
 import { TextFieldWrapper } from 'src/components';
 import FromEmailWrapper from '../FromEmailWrapper';
+import CopyField from 'src/components/copyField/CopyField';
 import { required } from 'src/helpers/validation';
 import styles from './Form.module.scss';
 import { emailOrSubstitution } from '../validation';
@@ -36,7 +38,19 @@ export default class SettingsForm extends React.Component {
     </Panel.Section>);
   }
   render() {
-    const { handleSubmit, domainsLoading, domains, subaccountId, submitting, pristine, valid, hasSubaccounts, canViewSubaccount, isPublishedMode } = this.props;
+    const {
+      handleSubmit,
+      domainsLoading,
+      domains,
+      subaccountId,
+      submitting,
+      pristine,
+      valid,
+      hasSubaccounts,
+      canViewSubaccount,
+      isPublishedMode,
+      draft
+    } = this.props;
     const canViewSubaccountSection = hasSubaccounts && canViewSubaccount;
     const fromEmailHelpText = !domainsLoading && !domains.length ? (subaccountId ? 'The selected subaccount does not have any verified sending domains.' : 'You do not have any verified sending domains to use.') : null;
 
@@ -52,10 +66,10 @@ export default class SettingsForm extends React.Component {
             validate={required}
           />
 
-          <Field
-            name='id'
-            component={TextFieldWrapper}
+          <CopyField
+            id='template-id-field'
             label='Template ID'
+            value={draft.id}
             helpText={'A Unique ID for your template, we\'ll fill this in for you.'}
             disabled={true}
           />

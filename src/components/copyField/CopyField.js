@@ -38,7 +38,7 @@ class CopyField extends Component {
   }
 
   render() {
-    const { value, hideCopy, ...fieldProps } = this.props;
+    const { value, hideCopy, id, ...fieldProps } = this.props;
     const { copied } = this.state;
     let connectRight = null;
 
@@ -54,6 +54,7 @@ class CopyField extends Component {
 
     return (
       <TextField
+        id={id}
         name="copy-field"
         readOnly
         connectRight={connectRight}
@@ -66,6 +67,7 @@ class CopyField extends Component {
 }
 
 CopyField.propTypes = {
+  id: PropTypes.string,
   value: PropTypes.string,
   hideCopy: PropTypes.bool
 };
