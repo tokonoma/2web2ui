@@ -28,7 +28,7 @@ class BarChart extends Component {
       if (key === 'health_score' || key === 'injections' || key === 'weight_value')  {
        return isActiveDate ? {fill: selectedFill} : {};
       }
-      return isActiveDate ? {opacity : 1} : {opacity : .7}
+      return isActiveDate ? {opacity : 1} : {opacity : .5}
     },
     (key,isActiveDate,selectedFill) =>`${key}${isActiveDate}${selectedFill}`
   );

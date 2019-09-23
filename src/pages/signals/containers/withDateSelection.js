@@ -25,17 +25,28 @@ export class WithDateSelection extends Component {
     const { selectedDate } = this.state;
 
     const dataSetChanged = prevProps.data !== data;
-    let selectedDataByDay = _.find(data, ['date', selectedDate]);
+    const selectedDataByDay = _.find(data, ['date', selectedDate]);
 
-    // Select last date in time series
+
     if (dataSetChanged && !selectedDataByDay) {
-      selectedDataByDay = _.last(data);
-      this.setState({ selectedDate: selectedDataByDay.date });
+      this.setDefaultSelected();
     }
   }
 
+  // Select last date in time series
+  setDefaultSelected() {
+    const lastDataByDay = _.last(this.props.data);
+    this.setState({ selectedDate: lastDataByDay.date });
+  }
+
   handleDateSelect = (node) => {
-    this.setState({ selectedDate: _.get(node, 'payload.date') });
+    const newDate = _.get(node, 'payload.date');
+
+    if (newDate === this.state.selectedDate) {
+      this.setDefaultSelected();
+    } else {
+      this.setState({ selectedDate: _.get(node, 'payload.date') });
+    }
   }
 
   handleDateHover = (node) => {

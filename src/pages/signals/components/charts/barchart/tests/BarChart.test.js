@@ -76,7 +76,7 @@ describe('BarChart Component', () => {
     wrapper.setProps({ selected: '2011-01-02', yKey: key, timeSeries: [{ [key]: 75, date: '2011-01-01' },{ [key]: 80, date: '2011-01-02' }]});
     const payload = { fill: '#fill', [key]: 75, date: '2011-01-01' };
     expect(wrapper.find({ dataKey: key }).at(0).props().shape(payload).props.fill).toEqual('#fill');
-    expect(wrapper.find({ dataKey: key }).at(0).props().shape(payload).props.opacity).toEqual(.7);
+    expect(wrapper.find({ dataKey: key }).at(0).props().shape(payload).props.opacity).toEqual(.5);
   });
 
   it('renders a normal bar chart with correct fill for selected/hovered stacked bar events', () => {

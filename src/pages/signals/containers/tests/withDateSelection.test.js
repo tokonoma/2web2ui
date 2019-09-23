@@ -35,10 +35,17 @@ describe('Signals Spam Trap Details Container', () => {
     expect(wrapper).toHaveProp('selectedDate', '2015-01-01');
   });
 
-  it('handles date select', () => {
+  it('handles date select for a new date', () => {
     const wrapper = subject({ data: [{ date: '2015-01-01' }, { date: '2999-99-99' }]});
     wrapper.prop('handleDateSelect')({ payload: { date: '2015-01-01' }});
     expect(wrapper).toHaveProp('selectedDate', '2015-01-01');
+  });
+
+  it('handles date select for re-selecting the already selected date by defaulting to last date', () => {
+    const wrapper = subject({ data: [{ date: '2015-01-01' }, { date: '2999-99-99' }]});
+    wrapper.setState({ selectedDate: '2015-01-01' });
+    wrapper.prop('handleDateSelect')({ payload: { date: '2015-01-01' }});
+    expect(wrapper).toHaveProp('selectedDate', '2999-99-99');
   });
 
   it('handles date hover', () => {
