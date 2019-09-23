@@ -160,8 +160,10 @@ export class HealthScorePage extends Component {
                       )}
                       yKey='weight_value'
                       yAxisProps={{
-                        tickFormatter: (tick) => `${roundToPlaces(tick * 100, 3)}%`
+                        tickFormatter: (tick) => `${roundToPlaces(tick * 100, 3)}%`,
+                        interval: 'preserveStartEnd'
                       }}
+                      yDomain={[0, (dataMax) => dataMax > 0 ? dataMax : 1 ]}
                       xAxisProps={this.getXAxisProps()}
                     />
                   </Fragment>
