@@ -45,7 +45,7 @@ export const ChangePlanForm = ({
   // useEffect(() => { console.log(selectedPlan, promoCode)}, [verifyPromoCode, promoCode, selectedPlan]);
 
   const applyPromoCode = (promoCode) => {
-    verifyPromoCode({ promoCode , billingId: selectedPlan.billingId, meta: { promoCode }});
+    verifyPromoCode({ promoCode , billingId: selectedPlan.billingId, meta: { promoCode, showErrorAlert: false }});
   };
   const onSelect = (plan) => {
     selectPlan(plan);

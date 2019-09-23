@@ -29,7 +29,6 @@ const PromoCodeNew = ({ promoCodeObj, handlePromoCode }) => {
     connectRight={renderActionButton(selectedPromo.promoCode)}
     onChange={handleChange}
     suffix={renderLoading(promoPending)}
-    errorInLabel={true}
     error={displayErrorMessage()}
     defaultValue={selectedPromo.promoCode || ''}
   />;
