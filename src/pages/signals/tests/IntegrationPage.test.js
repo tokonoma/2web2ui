@@ -16,7 +16,7 @@ describe('BatchStatusPage', () => {
 
   const renderPage = (props) => {
     const baseProps = {
-      loadingStatus: false,
+      loadingStatus: 'success',
       eventsByPage: [],
       getIngestBatchEvents: jest.fn(),
       nextCursor: jest.fn(),
@@ -33,4 +33,14 @@ describe('BatchStatusPage', () => {
   it('renders a page', () => {
     expect(subject().find('Page')).toExist();
   });
+
+  it('renders loading component', () => {
+    expect(subject({ props: { loadingStatus: 'pending' }}).find('svg')).toExist();
+  });
+
+  it('renders error', () => {
+    const wrapper = subject({ props: { loadingStatus: 'fail' }});
+    expect(wrapper.find('Panel').at(1).prop('title')).toEqual('Something went wrong');
+  });
+
 });
