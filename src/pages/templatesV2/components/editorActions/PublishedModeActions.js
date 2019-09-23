@@ -49,7 +49,10 @@ const PublishedModeActions = () => {
           open={isPopoverOpen}
           onClose={() => setPopoverOpen(false)}
           trigger={
-            <Button onClick={() => setPopoverOpen(!isPopoverOpen)}>
+            <Button
+              onClick={() => setPopoverOpen(!isPopoverOpen)}
+              aria-expanded={isPopoverOpen ? 'true' : 'false'}
+            >
               <ArrowDropDown/>
 
               <ScreenReaderOnly>Open Menu</ScreenReaderOnly>
