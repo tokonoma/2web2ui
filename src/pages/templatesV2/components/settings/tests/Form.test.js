@@ -3,8 +3,6 @@ import React from 'react';
 import every from 'lodash/every';
 import SettingsForm from '../Form';
 
-jest.mock('../../DeleteTemplate');
-
 describe('SettingsForm', () => {
   const subject = (props) => {
     const defaultProps = {
@@ -124,20 +122,6 @@ describe('SettingsForm', () => {
       });
       wrapper.find('form').simulate('submit');
       expect(mockUpdateDraft).toHaveBeenCalledWith({ id: 'foo' }, 101);
-    });
-  });
-
-  describe('Delete Template', () => {
-    it('renders delete template', () => {
-      expect(subject().exists('DeleteTemplate')).toBe(true);
-    });
-
-    it('shows alert after delete and redirects', async () => {
-      const mockAlert = jest.fn();
-      const mockHistory = { push: jest.fn() };
-      await subject({ showAlert: mockAlert, history: mockHistory }).find('DeleteTemplate').prop('afterDelete')();
-      expect(mockAlert).toHaveBeenCalledWith({ type: 'success', message: 'Template deleted.' });
-      expect(mockHistory.push).toHaveBeenCalledWith('/templatesv2');
     });
   });
 });
