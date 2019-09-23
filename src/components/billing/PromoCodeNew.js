@@ -15,9 +15,9 @@ const PromoCodeNew = ({ promoCodeObj, handlePromoCode }) => {
   };
   const renderActionButton = (condition) => {
     if (condition) {
-      return <Button onClick={clearPromoCode} >Remove</Button>;
+      return <Button onClick={clearPromoCode}>Remove</Button>;
     }
-    return <Button onClick={handleClick} >Apply</Button>;
+    return <Button onClick={handleClick} disabled={promoPending}>Apply</Button>;
   };
   const renderLoading = (condition) => condition ? <LoadingSVG size="XSmall"/> : null;
   const isDisabled = () => promoPending || _.has(selectedPromo, 'promoCode');

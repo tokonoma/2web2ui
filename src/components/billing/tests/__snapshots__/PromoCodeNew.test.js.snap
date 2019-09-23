@@ -4,6 +4,7 @@ exports[`promoCode should render correctly 1`] = `
 <TextField
   connectRight={
     <Button
+      disabled={false}
       onClick={[Function]}
       size="default"
     >
@@ -26,6 +27,7 @@ exports[`promoCode should render with error 1`] = `
 <TextField
   connectRight={
     <Button
+      disabled={false}
       onClick={[Function]}
       size="default"
     >
@@ -48,6 +50,7 @@ exports[`promoCode should render with loading spinner 1`] = `
 <TextField
   connectRight={
     <Button
+      disabled={true}
       onClick={[Function]}
       size="default"
     >
