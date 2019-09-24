@@ -149,6 +149,7 @@ exports[`ChoosePlan page tests should show free bullets when isFree is selected 
                 "selectedPromo": Object {},
               }
             }
+            isPlanFree={true}
             submitting={false}
           />
         </AccessControl>
