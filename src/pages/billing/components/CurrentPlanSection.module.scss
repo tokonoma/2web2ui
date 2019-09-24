@@ -12,3 +12,16 @@
   }
 }
 
+.DeprecatedWarning {
+  color: color(red);
+  display: flex;
+  font-size: rem(14);
+  line-height: 1.2em;
+  .content {
+    padding: 0 20px;
+    flex: 1 0 0;
+  }
+}
+
+
+
