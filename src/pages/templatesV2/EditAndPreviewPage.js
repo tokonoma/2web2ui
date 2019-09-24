@@ -1,10 +1,12 @@
 import React from 'react';
 import { FileEdit, CheckCircle } from '@sparkpost/matchbox-icons';
+//import { Prompt } from 'react-router';
 
 import { RedirectAndAlert } from 'src/components/globalAlert';
 import FullPage from 'src/components/fullPage';
 import Loading from 'src/components/loading';
 import EditNavigation from './components/EditNavigation';
+//import LeaveConfirmationModal from './components/LeaveConfirmationModal';
 import links from './constants/editNavigationLinks';
 import useEditorContext from './hooks/useEditorContext';
 import styles from './EditAndPreviewPage.module.scss';
@@ -81,6 +83,16 @@ const EditAndPreviewPage = () => {
       <div className={styles.MainContent}>
         <Contents/>
       </div>
+
+      {/* <Prompt
+        when={true}
+        message="Are you sure you want to leave?"
+      /> */}
+
+      {/* <LeaveConfirmationModal
+        open={true}
+        onClose={() => console.log('close!')}
+      /> */}
     </FullPage>
   );
 };

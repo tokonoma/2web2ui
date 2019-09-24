@@ -12,7 +12,7 @@ import DuplicateTemplate from './DuplicateTemplate';
 import DuplicateTemplateModal from './DuplicateTemplateModal';
 
 const PublishedModeActions = () => {
-  const { hasDraft, draft } = useEditorContext();
+  const { hasDraft, draft, createTemplate } = useEditorContext();
   const draftText = hasDraft ? 'Edit Draft' : 'Save as Draft';
   const editDraftTo = `/${routeNamespace}/edit/${draft.id}/draft/content${setSubaccountQuery(draft.subaccount_id)}`;
 
@@ -85,6 +85,8 @@ const PublishedModeActions = () => {
         <DuplicateTemplateModal
           open={isDuplicateModalOpen}
           onClose={handleModalClose}
+          template={draft}
+          createTemplate={createTemplate}
         />
 
         <DeleteTemplateModal

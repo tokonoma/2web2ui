@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import React, { Component } from 'react';
 import { Page } from '@sparkpost/matchbox';
 
@@ -5,14 +6,17 @@ import { ApiErrorBanner, DeleteModal, Loading, TableCollection } from 'src/compo
 import { Templates } from 'src/components/images';
 import PageLink from 'src/components/pageLink';
 import { resolveTemplateStatus } from 'src/helpers/templates';
-import { DeleteAction, LastUpdated, Name, Status } from './components/ListComponents';
+import { DeleteAction, DuplicateAction, LastUpdated, Name, Status } from './components/ListComponents';
+import DuplicateTemplateModal from './components/editorActions/DuplicateTemplateModal';
 import { routeNamespace } from './constants/routes';
 import styles from './ListPage.module.scss';
 
 export default class ListPage extends Component {
   state = {
     showDeleteModal: false,
-    templateToDelete: null
+    showDuplicateModal: false,
+    templateToDelete: null,
+    templateToDuplicate: null
   };
 
   componentDidMount() {
@@ -21,6 +25,7 @@ export default class ListPage extends Component {
 
   deleteTemplate = () => {
     const { deleteTemplate, listTemplates, showAlert } = this.props;
+
     const { id, name } = this.state.templateToDelete;
     return deleteTemplate(id)
       .then(() => {
@@ -31,7 +36,48 @@ export default class ListPage extends Component {
   };
 
   toggleDeleteModal = (props) => {
-    this.setState({ showDeleteModal: !this.state.showDeleteModal, templateToDelete: props });
+    this.setState({
+      showDeleteModal: !this.state.showDeleteModal,
+      templateToDelete: props
+    });
+  };
+
+  toggleDuplicateModal = (template) => {
+    const { getDraft, getPublished } = this.props;
+
+    if (template.has_draft) {
+      getDraft(template.id)
+        .then((res) => {
+          this.setState({
+            templateToDuplicate: res,
+            showDuplicateModal: !this.state.showDuplicateModal
+          });
+        });
+    }
+
+    if (template.has_published) {
+      getPublished(template.id)
+        .then((res) => {
+          this.setState({
+            templateToDuplicate: res,
+            showDuplicateModal: !this.state.showDuplicateModal
+          });
+        });
+    }
+  }
+
+  handleDuplicateSuccess = () => {
+    const { showAlert, listTemplates } = this.props;
+    const template = this.state.templateToDuplicate;
+
+    this.setState({ showDuplicateModal: false });
+
+    showAlert({
+      type: 'success',
+      message: `Template ${template.name} duplicated`
+    });
+
+    return listTemplates();
   };
 
   getColumns = () => {
@@ -69,13 +115,18 @@ export default class ListPage extends Component {
         key: 'lastupdated'
       },
       {
-        component: DeleteAction,
+        component: (template) => (
+          <span className={styles.Actions}>
+            <DeleteAction onClick={() => this.toggleDeleteModal(template)}/>
+
+            <DuplicateAction onClick={() => this.toggleDuplicateModal(template)}/>
+          </span>
+        ),
         header: {
           width: 20
         },
-        onClick: this.toggleDeleteModal,
         visible: canModify,
-        key: 'deleteaction'
+        key: 'actions'
       }
     ];
 
@@ -122,6 +173,7 @@ export default class ListPage extends Component {
               by having a set of named templates to reference.
               Building a library of "go-to" templates for recurrent use-cases to reduce workload for your team.
             </p>
+
             <TableCollection
               columns={columns.map(({ header, key }) => ({ ...header, key }))}
               rows={templates}
@@ -136,6 +188,7 @@ export default class ListPage extends Component {
               defaultSortDirection="desc"
               saveCsv={false}
             />
+
             <DeleteModal
               open={this.state.showDeleteModal}
               title="Are you sure you want to delete this template?"
@@ -143,6 +196,14 @@ export default class ListPage extends Component {
               onCancel={this.toggleDeleteModal}
               onDelete={this.deleteTemplate}
               isPending={deletePending}
+            />
+
+            <DuplicateTemplateModal
+              open={this.state.showDuplicateModal}
+              onClose={() => this.setState({ showDuplicateModal: false })}
+              createTemplate={this.props.createTemplate}
+              template={this.state.templateToDuplicate}
+              successCallback={this.handleDuplicateSuccess}
             />
           </>
         )}
