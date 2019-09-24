@@ -340,7 +340,6 @@ export const selectEngagementRecencyOverviewData = createSelector(
       current_engaged_recipients: _.last(filledHistory).engaged_recipients,
       current_relative_engaged_recipients: _.last(filledHistory).relative_engaged_recipients,
       history: filledHistory,
-      total_engagement: history.reduce((total, { c_total }) => total + c_total, 0),
       WoW: _.isNil(WoW) ? null : roundToPlaces(WoW * 100, 0)
     };
   })
