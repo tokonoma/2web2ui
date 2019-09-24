@@ -105,6 +105,7 @@ export default [
     tag: 'new',
     icon: NotificationsActive
   },
+  inboxPlacementNavItems,
   {
     label: 'Configuration',
     to: '/account',
@@ -141,8 +142,5 @@ export default [
         divider: true
       }
     ]
-  },
-  {
-    ...inboxPlacementNavItems
   }
 ];
