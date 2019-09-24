@@ -1,4 +1,3 @@
-/* eslint-disable max-lines */
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { selectHealthScoreDetails } from 'src/selectors/signals';
@@ -15,7 +14,14 @@ export function HealthScorePageV3(props) {
       facet={facet}
       facetId={facetId}
       subaccountId={subaccountId}
-      primaryArea={<Button primary>Create Alert</Button>}>
+      primaryArea={
+        <Button
+          primary
+          component={Link}
+          to='/alerts'
+        >
+          Create Alert
+        </Button>}>
     </Page>
   );
 }

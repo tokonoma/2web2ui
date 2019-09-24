@@ -1,6 +1,6 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import { HealthScorePage } from '../HealthScorePage';
+import { HealthScorePageV3 } from '../HealthScorePageV3';
 
 describe('Signals Health Score Page V3', () => {
   let wrapper;
@@ -11,7 +11,7 @@ describe('Signals Health Score Page V3', () => {
       facetId: 'test.com',
       facet: 'sending-domain'
     };
-    wrapper = shallow(<HealthScorePage {...props}/>);
+    wrapper = shallow(<HealthScorePageV3 {...props}/>);
   });
 
   it('renders correctly when receiving data', () => {
