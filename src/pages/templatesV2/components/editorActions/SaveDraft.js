@@ -3,19 +3,27 @@ import { FileEdit } from '@sparkpost/matchbox-icons';
 import useEditorContext from '../../hooks/useEditorContext';
 import { UnstyledLink } from '@sparkpost/matchbox';
 
-
-export default ({ className, onClick }) => {
-  const { draft, content, updateDraft } = useEditorContext();
+const SaveDraft = (props) => {
+  const { className, onClick } = props;
+  const {
+    draft,
+    content,
+    updateDraft,
+    showAlert
+  } = useEditorContext();
 
   const handleClick = useCallback(() => {
     if (onClick) {
       onClick();
     }
 
-    updateDraft({ id: draft.id, content }, draft.subaccount_id);
+    updateDraft({ id: draft.id, content }, draft.subaccount_id)
+      .then(() => showAlert({
+        type: 'success',
+        message: 'Draft saved'
+      }));
   });
 
-  // TODO: User needs feedback (i.e., `showAlert`) when save is successful
   return (
     <div className={className}>
       <UnstyledLink onClick={handleClick} to="javascript:void(0);" role="button">
@@ -26,3 +34,5 @@ export default ({ className, onClick }) => {
     </div>
   );
 };
+
+export default SaveDraft;
