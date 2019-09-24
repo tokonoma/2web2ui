@@ -73,8 +73,8 @@ export class FilterFields extends Component {
           : (sendingDomains.length === 0) ? 'No Options Available' : 'Type To Search'
       },
       sending_ip: {
-        disabled: disabled || (sendingIps.length === 0),
-        placeholder: (sendingIps.length === 0) ? 'No Options Available' : 'Type To Search'
+        disabled: disabled,
+        placeholder: 'Type To Search'
       }
     };
 
@@ -105,7 +105,7 @@ export class FilterFields extends Component {
       </Grid>);
 
     /**
-     * Determine if a filter should be rendered depending on state of state of the filters
+     * Determine if a filter should be rendered depending on the state of the filters
      *
      * @param {Object} single filter field object
      * @returns {boolean} true or false depending on the filter should be rendered

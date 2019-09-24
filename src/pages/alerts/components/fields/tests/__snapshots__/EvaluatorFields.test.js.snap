@@ -9,7 +9,7 @@ exports[`Evaluator Fields Component renders correctly 1`] = `
     sm={12}
   >
     <Label>
-      Score
+      Evaluated
     </Label>
     <Field
       component={[Function]}

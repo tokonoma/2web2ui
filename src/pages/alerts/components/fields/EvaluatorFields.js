@@ -50,7 +50,7 @@ export const EvaluatorFields = ({
     <Grid className={styles.Grid}>
       {sourceOptions.length > 1 && (
         <Grid.Column sm={12} md={3}>
-          <Label>Score</Label>
+          <Label>Evaluated</Label>
           <Field
             name='source'
             component={SelectWrapper}
