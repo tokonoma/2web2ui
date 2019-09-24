@@ -33,7 +33,7 @@ const DuplicateTemplateModal = (props) => {
   useEffect(() => {
     setDraftName(initialDraftName);
     setDraftId(initialDraftId);
-  }, [initialDraftName, initialDraftId]);
+  }, [initialDraftName, initialDraftId, template]);
 
   const handleSubmit = (e) => {
     e.preventDefault();

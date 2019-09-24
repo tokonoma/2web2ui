@@ -43,27 +43,15 @@ export default class ListPage extends Component {
   };
 
   toggleDuplicateModal = (template) => {
-    const { getDraft, getPublished } = this.props;
+    const { getDraft } = this.props;
 
-    if (template.has_draft) {
-      getDraft(template.id)
-        .then((res) => {
-          this.setState({
-            templateToDuplicate: res,
-            showDuplicateModal: !this.state.showDuplicateModal
-          });
+    getDraft(template.id)
+      .then((res) => {
+        this.setState({
+          templateToDuplicate: res,
+          showDuplicateModal: !this.state.showDuplicateModal
         });
-    }
-
-    if (template.has_published) {
-      getPublished(template.id)
-        .then((res) => {
-          this.setState({
-            templateToDuplicate: res,
-            showDuplicateModal: !this.state.showDuplicateModal
-          });
-        });
-    }
+      });
   }
 
   handleDuplicateSuccess = () => {
