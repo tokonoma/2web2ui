@@ -318,7 +318,6 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
           xKey="date"
           yAxisProps={
             Object {
-              "interval": "preserveStartEnd",
               "tickFormatter": [Function],
             }
           }
@@ -326,7 +325,7 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
           yDomain={
             Array [
               0,
-              [Function],
+              "auto",
             ]
           }
           yKey="weight_value"
