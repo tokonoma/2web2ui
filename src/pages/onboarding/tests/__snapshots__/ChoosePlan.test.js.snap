@@ -41,7 +41,6 @@ exports[`ChoosePlan page tests should disable submit and plan picker when submit
                 "selectedPromo": Object {},
               }
             }
-            selectedPlan={Object {}}
             submitting={true}
           />
         </AccessControl>
@@ -104,7 +103,6 @@ exports[`ChoosePlan page tests should render correctly 1`] = `
                 "selectedPromo": Object {},
               }
             }
-            selectedPlan={Object {}}
             submitting={false}
           />
         </AccessControl>
@@ -149,11 +147,6 @@ exports[`ChoosePlan page tests should show free bullets when isFree is selected 
                 "countries": Array [],
                 "promoPending": false,
                 "selectedPromo": Object {},
-              }
-            }
-            selectedPlan={
-              Object {
-                "isFree": true,
               }
             }
             submitting={false}

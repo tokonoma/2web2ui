@@ -4,8 +4,8 @@ import PaymentForm from 'src/pages/billing/forms/fields/PaymentForm';
 import BillingAddressForm from 'src/pages/billing/forms/fields/BillingAddressForm';
 import { FORMS } from 'src/constants';
 
-const CreditCardSection = ({ billing, submitting, selectedPlan = {}}) => {
-  if (selectedPlan.isFree) {
+const CreditCardSection = ({ billing, submitting, isPlanFree }) => {
+  if (isPlanFree) {
     return (
       <Panel.Section>
         <p>Full featured test account that includes:</p>

@@ -113,7 +113,7 @@ export class OnboardingPlanPage extends Component {
                     handlePromoCode ={handlePromoCode}
                   />
                 </Panel.Section>}
-                <CreditCardSection billing={billing} submitting={submitting} selectedPlan={selectedPlan}/>
+                <CreditCardSection billing={billing} submitting={submitting} isPlanFree={selectedPlan.isFree}/>
               </AccessControl>
               <Panel.Section>
                 <Button disabled={disableSubmit} primary={true} type='submit' size='large' fullWidth={true}>{buttonText}</Button>

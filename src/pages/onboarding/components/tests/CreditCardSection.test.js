@@ -11,7 +11,7 @@ describe('creditCardSection', () => {
         countries: []
       },
       submitting: false,
-      selectedPlan: {}
+      isPlanFree: undefined
     };
     wrapper = shallow(<CreditCardSection {...props} />);
   });
@@ -22,9 +22,7 @@ describe('creditCardSection', () => {
 
 
   it('should render correctly when selectedPlan is Free', () => {
-    props.selectedPlan = {
-      isFree: true
-    };
+    props.isPlanFree = true;
     wrapper.setProps(props);
     expect(wrapper).toMatchSnapshot();
   });

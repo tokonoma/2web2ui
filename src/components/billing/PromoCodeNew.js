@@ -6,12 +6,12 @@ import _ from 'lodash';
 const PromoCodeNew = ({ promoCodeObj, handlePromoCode }) => {
   const { applyPromoCode, clearPromoCode } = handlePromoCode;
   const { promoError, promoPending, selectedPromo } = promoCodeObj;
-  const [promocode, setPromocode] = useState(selectedPromo.promoCode || '');
+  const [promoCode, setPromoCode] = useState(selectedPromo.promoCode || '');
   const handleChange = (event) => {
-    setPromocode(event.target.value);
+    setPromoCode(event.target.value);
   };
   const handleClick = () => {
-    applyPromoCode(promocode);
+    applyPromoCode(promoCode);
   };
   const renderActionButton = (condition) => {
     if (condition) {
