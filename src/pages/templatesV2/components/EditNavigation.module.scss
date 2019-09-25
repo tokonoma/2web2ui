@@ -5,6 +5,7 @@
   display: grid;
   grid-gap: spacing();
   padding: 0 spacing(large) spacing(large);
+  box-shadow: shadow();
 
   @media (min-width: breakpoint(small)) {
     padding: 0 spacing(large) 0 (spacing(large) * 4);
