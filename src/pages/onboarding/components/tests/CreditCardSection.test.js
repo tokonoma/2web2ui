@@ -30,7 +30,8 @@ describe('creditCardSection', () => {
   it('should render correctly when form is being submitted', () => {
     props.submitting = true;
     wrapper.setProps(props);
-    expect(wrapper).toMatchSnapshot();
+    expect(wrapper.find('Connect(PaymentForm)').prop('disabled')).toBeTruthy();
+    expect(wrapper.find('Connect(BillingAddressForm)').prop('disabled')).toBeTruthy();
   });
 
 

@@ -34,7 +34,7 @@ describe('promoCode', () => {
       selectedPromo: {}
     };
     wrapper.setProps(props);
-    expect(wrapper).toMatchSnapshot();
+    expect(wrapper.prop('suffix').type.displayName).toEqual('LoadingSVG');
   });
 
   it('should render with error', () => {
@@ -44,7 +44,7 @@ describe('promoCode', () => {
       selectedPromo: {}
     };
     wrapper.setProps(props);
-    expect(wrapper).toMatchSnapshot();
+    expect(wrapper.prop('error')).toEqual('Oh no!');
   });
 
   it('text field should disable and button should change to remove when a promocode is applied',() => {
@@ -56,6 +56,7 @@ describe('promoCode', () => {
       }
     };
     wrapper.setProps(props);
-    expect(wrapper).toMatchSnapshot();
+    expect(wrapper.prop('disabled')).toBeTruthy();
+    expect(wrapper.prop('connectRight').props.children).toEqual('Remove');
   });
 });

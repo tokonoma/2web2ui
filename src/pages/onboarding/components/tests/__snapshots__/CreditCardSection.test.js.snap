@@ -18,24 +18,6 @@ exports[`creditCardSection should render correctly 1`] = `
 </Fragment>
 `;
 
-exports[`creditCardSection should render correctly when form is being submitted 1`] = `
-<Fragment>
-  <Panel.Section>
-    <Connect(PaymentForm)
-      disabled={true}
-      formName="joinPlanForm"
-    />
-  </Panel.Section>
-  <Panel.Section>
-    <Connect(BillingAddressForm)
-      countries={Array []}
-      disabled={true}
-      formName="joinPlanForm"
-    />
-  </Panel.Section>
-</Fragment>
-`;
-
 exports[`creditCardSection should render correctly when selectedPlan is Free 1`] = `
 <Panel.Section>
   <p>
