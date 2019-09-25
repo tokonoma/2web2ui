@@ -13,7 +13,7 @@ export const ProviderComponent = ({ children, ...routerProps }) => {
       ...qs.parse(routerProps.location.search, { ignoreQueryPrefix: true }),
       ...routerProps.match.params
     }
-  }), [routerProps ]);
+  }), [routerProps]);
 
   const updateRoute = useCallback((newParams) => {
     const queryString = qs.stringify(newParams, { arrayFormat: 'repeat' });
@@ -21,7 +21,7 @@ export const ProviderComponent = ({ children, ...routerProps }) => {
   },[routerProps.history, routerProps.location.pathname]);
 
   return (
-    <RouterContext.Provider value={{ ...value, updateRoute: updateRoute }} >
+    <RouterContext.Provider value={{ ...value, updateRoute }}>
       {children}
     </RouterContext.Provider>
   );
