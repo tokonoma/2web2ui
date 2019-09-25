@@ -6,6 +6,7 @@ export const batchStatusOptions = [
   { label: 'Duplicates', value: 'duplicate_batch' },
   { label: 'Empty batches', value: 'empty_batch' }
 ];
+
 export const columns = [
   'Time', 'Status', 'Events', 'Batch ID'
 ];
