@@ -69,7 +69,7 @@ export class OnboardingPlanPage extends Component {
 
   applyPromoCode = (promoCode) => {
     const { verifyPromoCode } = this.props;
-    verifyPromoCode({ promoCode , billingId: this.props.selectedPlan.billingId, meta: { promoCode }});
+    verifyPromoCode({ promoCode , billingId: this.props.selectedPlan.billingId, meta: { promoCode, showErrorAlert: false }});
   }
 
   onPlanSelect = (e) => {
