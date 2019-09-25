@@ -70,6 +70,17 @@ describe('Signals Health Score Page', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  it('renders weight chart at 100% if data all data is 0', () => {
+    const newData = [
+      {
+        date: '2017-01-01',
+        weights: [{ weight_type: 'Hard Bounces', weight: 0.5, weight_value: 0 }]
+      }
+    ];
+    wrapper.setProps({ data: newData });
+    expect(wrapper.find('BarChart').at(2).prop('yDomain')).toEqual([0, 1]);
+  });
+
   it('renders component weights bar height dynamically', () => {
     expect(wrapper.find('DivergingBar').at(0).prop('barHeight')).toEqual(140);
     const newData = [
