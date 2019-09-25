@@ -40,7 +40,13 @@ describe('Change Plan Form', () => {
     },
     getPlans: jest.fn(),
     getBillingCountries: jest.fn(),
-    getBillingInfo: jest.fn()
+    getBillingInfo: jest.fn(),
+    clearPromoCode: jest.fn(),
+    billing: {
+      promoPending: false,
+      promoError: false,
+      selectedPromo: {}
+    }
   };
 
   const subject = (props, render = shallow) => render(
@@ -59,5 +65,6 @@ describe('Change Plan Form', () => {
     expect(defaultProps.getPlans).toHaveBeenCalled();
     expect(defaultProps.getBillingCountries).toHaveBeenCalled();
     expect(defaultProps.getBillingInfo).toHaveBeenCalled();
+    expect(defaultProps.clearPromoCode).toHaveBeenCalled();
   });
 });

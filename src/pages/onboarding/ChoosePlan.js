@@ -1,23 +1,22 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { Panel, Grid, Button } from '@sparkpost/matchbox';
 import { showAlert } from 'src/actions/globalAlert';
 import { CenteredLogo, Loading, PlanPicker } from 'src/components';
-import { FORMS } from 'src/constants';
 import Steps from './components/Steps';
 import { getPlans } from 'src/actions/account';
 import { getBillingCountries, verifyPromoCode, clearPromoCode } from 'src/actions/billing';
 import billingCreate from 'src/actions/billingCreate';
 import { choosePlanMSTP } from 'src/selectors/onboarding';
-import PaymentForm from 'src/pages/billing/forms/fields/PaymentForm';
-import BillingAddressForm from 'src/pages/billing/forms/fields/BillingAddressForm';
 import promoCodeValidate from 'src/pages/billing/helpers/promoCodeValidate';
 import { isAws } from 'src/helpers/conditions/account';
 import { not } from 'src/helpers/conditions';
 import AccessControl from 'src/components/auth/AccessControl';
 import { prepareCardInfo } from 'src/helpers/billing';
-import PromoCode from 'src/components/billing/PromoCode';
+import PromoCodeNew from '../../components/billing/PromoCodeNew';
+import { FORMS } from 'src/constants';
+import CreditCardSection from './components/CreditCardSection';
 
 const NEXT_STEP = '/onboarding/sending-domain';
 
@@ -67,51 +66,10 @@ export class OnboardingPlanPage extends Component {
       .then(() => showAlert({ type: 'success', message: 'Added your plan' }));
   };
 
-  renderCCSection = () => {
-    const { billing, submitting, selectedPlan = {}} = this.props;
 
-    if (selectedPlan.isFree) {
-      return (
-        <Panel.Section>
-          <p>Full featured test account that includes:</p>
-          <ul>
-            <li>Limited sending volume for testing.</li>
-            <li>Access to all of our powerful API features.</li>
-            <li>30 days of free technical support to get you up and running.</li>
-          </ul>
-        </Panel.Section>
-      );
-    }
-
-    return (
-      <Fragment>
-        <Panel.Section>
-          <PaymentForm
-            formName={FORMS.JOIN_PLAN}
-            disabled={submitting}
-          />
-        </Panel.Section>
-        <Panel.Section>
-          <BillingAddressForm
-            formName={FORMS.JOIN_PLAN}
-            disabled={submitting}
-            countries={billing.countries}
-          />
-        </Panel.Section>
-      </Fragment>
-    );
-  }
-
-  renderPromoCodeField() {
-    const { billing } = this.props;
-    const { selectedPromo = {}} = billing;
-    return (
-      <Panel.Section>
-        <PromoCode
-          selectedPromo={selectedPromo}
-        />
-      </Panel.Section>
-    );
+  applyPromoCode = (promoCode) => {
+    const { verifyPromoCode } = this.props;
+    verifyPromoCode({ promoCode , billingId: this.props.selectedPlan.billingId, meta: { promoCode }});
   }
 
   onPlanSelect = (e) => {
@@ -121,12 +79,21 @@ export class OnboardingPlanPage extends Component {
     }
   }
   render() {
-    const { loading, plans, submitting, selectedPlan = {}, billing } = this.props;
-
+    const { loading, plans, submitting, selectedPlan = {}, billing, clearPromoCode } = this.props;
+    const { selectedPromo = {}, promoError, promoPending } = billing;
+    const promoCodeObj = {
+      selectedPromo: selectedPromo,
+      promoError: promoError,
+      promoPending: promoPending
+    };
+    const handlePromoCode = {
+      applyPromoCode: this.applyPromoCode,
+      clearPromoCode: clearPromoCode
+    };
     if (loading) {
       return <Loading />;
     }
-    const disableSubmit = submitting || billing.promoPending;
+    const disableSubmit = submitting || promoPending;
 
     const buttonText = submitting ? 'Updating Subscription...' : 'Get Started';
 
@@ -136,10 +103,17 @@ export class OnboardingPlanPage extends Component {
         <Grid>
           <Grid.Column>
             <Panel>
-              <PlanPicker selectedPromo={billing.selectedPromo} disabled={disableSubmit} plans={plans} onChange={this.onPlanSelect}/>
+              <PlanPicker selectedPromo={selectedPromo} disabled={disableSubmit} plans={plans} onChange={this.onPlanSelect}/>
               <AccessControl condition={not(isAws)}>
-                {!selectedPlan.isFree && this.renderPromoCodeField()}
-                {this.renderCCSection()}
+                {!selectedPlan.isFree &&
+                <Panel.Section>
+                  <PromoCodeNew
+                    key={selectedPromo.promoCode || 'promocode'}
+                    promoCodeObj ={promoCodeObj}
+                    handlePromoCode ={handlePromoCode}
+                  />
+                </Panel.Section>}
+                <CreditCardSection billing={billing} submitting={submitting} isPlanFree={selectedPlan.isFree}/>
               </AccessControl>
               <Panel.Section>
                 <Button disabled={disableSubmit} primary={true} type='submit' size='large' fullWidth={true}>{buttonText}</Button>

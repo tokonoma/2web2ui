@@ -16,23 +16,33 @@ exports[`ChoosePlan page tests should disable submit and plan picker when submit
           condition={[Function]}
         >
           <Panel.Section>
-            <Connect(PromoCode)
-              selectedPromo={Object {}}
+            <PromoCodeNew
+              handlePromoCode={
+                Object {
+                  "applyPromoCode": [Function],
+                  "clearPromoCode": undefined,
+                }
+              }
+              key="promocode"
+              promoCodeObj={
+                Object {
+                  "promoError": undefined,
+                  "promoPending": false,
+                  "selectedPromo": Object {},
+                }
+              }
             />
           </Panel.Section>
-          <Panel.Section>
-            <Connect(PaymentForm)
-              disabled={true}
-              formName="joinPlanForm"
-            />
-          </Panel.Section>
-          <Panel.Section>
-            <Connect(BillingAddressForm)
-              countries={Array []}
-              disabled={true}
-              formName="joinPlanForm"
-            />
-          </Panel.Section>
+          <CreditCardSection
+            billing={
+              Object {
+                "countries": Array [],
+                "promoPending": false,
+                "selectedPromo": Object {},
+              }
+            }
+            submitting={true}
+          />
         </AccessControl>
         <Panel.Section>
           <Button
@@ -68,23 +78,33 @@ exports[`ChoosePlan page tests should render correctly 1`] = `
           condition={[Function]}
         >
           <Panel.Section>
-            <Connect(PromoCode)
-              selectedPromo={Object {}}
+            <PromoCodeNew
+              handlePromoCode={
+                Object {
+                  "applyPromoCode": [Function],
+                  "clearPromoCode": undefined,
+                }
+              }
+              key="promocode"
+              promoCodeObj={
+                Object {
+                  "promoError": undefined,
+                  "promoPending": false,
+                  "selectedPromo": Object {},
+                }
+              }
             />
           </Panel.Section>
-          <Panel.Section>
-            <Connect(PaymentForm)
-              disabled={false}
-              formName="joinPlanForm"
-            />
-          </Panel.Section>
-          <Panel.Section>
-            <Connect(BillingAddressForm)
-              countries={Array []}
-              disabled={false}
-              formName="joinPlanForm"
-            />
-          </Panel.Section>
+          <CreditCardSection
+            billing={
+              Object {
+                "countries": Array [],
+                "promoPending": false,
+                "selectedPromo": Object {},
+              }
+            }
+            submitting={false}
+          />
         </AccessControl>
         <Panel.Section>
           <Button
@@ -121,22 +141,17 @@ exports[`ChoosePlan page tests should show free bullets when isFree is selected 
         <AccessControl
           condition={[Function]}
         >
-          <Panel.Section>
-            <p>
-              Full featured test account that includes:
-            </p>
-            <ul>
-              <li>
-                Limited sending volume for testing.
-              </li>
-              <li>
-                Access to all of our powerful API features.
-              </li>
-              <li>
-                30 days of free technical support to get you up and running.
-              </li>
-            </ul>
-          </Panel.Section>
+          <CreditCardSection
+            billing={
+              Object {
+                "countries": Array [],
+                "promoPending": false,
+                "selectedPromo": Object {},
+              }
+            }
+            isPlanFree={true}
+            submitting={false}
+          />
         </AccessControl>
         <Panel.Section>
           <Button

@@ -63,6 +63,15 @@ describe('Selected Plan:', () => {
       overage: 0.2,
       volume: 2,
       isFree: true
+    },
+    promoCodeObj: {
+      selectedPromo: {},
+      promoPending: false,
+      promoError: false
+    },
+    handlePromoCode: {
+      applyPromoCode: jest.fn(),
+      clearPromoCode: jest.fn()
     }
   };
 

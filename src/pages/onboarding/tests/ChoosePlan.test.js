@@ -2,6 +2,7 @@ import { shallow } from 'enzyme';
 import React from 'react';
 import { OnboardingPlanPage as ChoosePlan } from '../ChoosePlan';
 import * as billingHelpers from 'src/helpers/billing';
+import PromoCodeNew from '../../../components/billing/PromoCodeNew';
 
 jest.mock('src/helpers/billing');
 
@@ -50,6 +51,11 @@ describe('ChoosePlan page tests', () => {
   it('should show free bullets when isFree is selected', () => {
     wrapper.setProps({ selectedPlan: { isFree: true }});
     expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should not PromoCode field if plan isFree', () => {
+    wrapper.setProps({ selectedPlan: { isFree: true }});
+    expect(wrapper.find(PromoCodeNew)).toHaveLength(0);
   });
 
   it('should disable submit and plan picker when submitting', () => {

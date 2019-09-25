@@ -4,17 +4,15 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import qs from 'query-string';
-
-import promoCodeValidate from '../helpers/promoCodeValidate';
 import PlanSelectSection, { SelectedPlan } from '../components/PlanSelect';
 import CurrentPlanSection from '../components/CurrentPlanSection';
-
+import { verifyPromoCode, clearPromoCode } from 'src/actions/billing';
 //Actions
 import { getBillingInfo, getPlans } from 'src/actions/account';
 import { getBillingCountries } from 'src/actions/billing';
 
 //Selectors
-import { selectTieredVisiblePlans, currentPlanSelector } from 'src/selectors/accountBillingInfo';
+import { selectTieredVisiblePlans, currentPlanSelector, getPromoCodeObject } from 'src/selectors/accountBillingInfo';
 import { changePlanInitialValues } from 'src/selectors/accountBillingForms';
 
 const FORMNAME = 'changePlan';
@@ -25,21 +23,30 @@ export const ChangePlanForm = ({
   getBillingInfo,
   getBillingCountries,
   getPlans,
-  // verifyPromoCode,
+  verifyPromoCode,
+  promoCodeObj,
+  clearPromoCode,
   // initialValues: {
   //   promoCode
   // },
   currentPlan
 }) => {
   const [selectedPlan, selectPlan] = useState(null);
-
   // const [useSavedCC, setUseSavedCC] = useState(null);
   useEffect(() => { getBillingCountries(); }, [getBillingCountries]);
   useEffect(() => { getBillingInfo(); }, [getBillingInfo]);
   useEffect(() => { getPlans(); }, [getPlans]);
+  useEffect(() => {
+    if (!selectedPlan) {
+      clearPromoCode();
+    }
+  },[clearPromoCode, selectedPlan]);
   //TODO: Implement in AC-986
   // useEffect(() => { console.log(selectedPlan, promoCode)}, [verifyPromoCode, promoCode, selectedPlan]);
 
+  const applyPromoCode = (promoCode) => {
+    verifyPromoCode({ promoCode , billingId: selectedPlan.billingId, meta: { promoCode, showErrorAlert: false }});
+  };
   const onSelect = (plan) => {
     selectPlan(plan);
   };
@@ -53,6 +60,13 @@ export const ChangePlanForm = ({
               ? <SelectedPlan
                 plan={selectedPlan}
                 onChange={onSelect}
+                promoCodeObj = {promoCodeObj}
+                handlePromoCode = {
+                  {
+                    applyPromoCode: applyPromoCode,
+                    clearPromoCode: clearPromoCode
+                  }
+                }
               />
               : <PlanSelectSection
                 onSelect={onSelect}
@@ -71,26 +85,26 @@ export const ChangePlanForm = ({
 
 const mapStateToProps = (state, props) => {
   const { code: planCode, promo: promoCode } = qs.parse(props.location.search);
-
   return {
     plans: selectTieredVisiblePlans(state),
     initialValues: changePlanInitialValues(state, { planCode, promoCode }),
-    currentPlan: currentPlanSelector(state)
+    currentPlan: currentPlanSelector(state),
+    promoCodeObj: getPromoCodeObject(state)
   };
 };
 
 const mapDispatchToProps = ({
   getBillingInfo,
   getBillingCountries,
-  getPlans
+  getPlans,
+  verifyPromoCode,
+  clearPromoCode
 });
 
 const formOptions = {
   form: FORMNAME,
   enableReinitialize: true,
-  asyncValidate: promoCodeValidate(FORMNAME),
-  asyncChangeFields: ['planpicker'],
-  asyncBlurFields: ['promoCode']
+  asyncChangeFields: ['planpicker']
 };
 
 export default withRouter(
