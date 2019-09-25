@@ -2,7 +2,7 @@
 import moment from 'moment';
 import { STATUS, DURATION_HOURS } from '../constants/test';
 
-const formatDateTime = (start_time) => moment(start_time).format('MMM DD, YYYY [at] h:ma');
+const formatDateTime = (start_time) => moment(start_time).format('MMM DD, YYYY [at] h:mma');
 const getHoursRemaining = (start_time) => moment(start_time).add(DURATION_HOURS, 'hours').diff(moment(), 'hours');
 
 export default function formatScheduleLine(status, start_time, end_time) {
