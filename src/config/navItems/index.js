@@ -50,11 +50,6 @@ export default [
       {
         label: 'Engagement',
         to: '/reports/engagement'
-      },
-      {
-        label: 'Integration',
-        to: '/signals/integration',
-        divider: true
       }
     ]
   },
@@ -131,6 +126,11 @@ export default [
       {
         label: 'SMTP Settings',
         to: '/account/smtp'
+      },
+      {
+        label: 'Signals Integration',
+        to: '/signals/integration',
+        divider: true
       },
       {
         label: 'Sending Domains',
