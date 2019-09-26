@@ -5,6 +5,11 @@
   display: flex;
   margin: 1rem;
 
+  .description {
+    margin-right: 2rem;
+    font-size: .9em;
+  }
+
   & > :first-child {
     padding-right: 2rem;
     flex-grow: 1;

@@ -2,6 +2,7 @@ import React from 'react';
 import { Panel } from '@sparkpost/matchbox';
 import { CheckCircle, Warning } from '@sparkpost/matchbox-icons';
 
+import { Loading } from 'src/components/loading/Loading';
 import { useFeatureChangeContext } from '../context/FeatureChangeContext';
 
 import cx from 'classnames';
@@ -11,14 +12,14 @@ const Feature = ({ key, value, label, description, action }) => (
   <Panel.Section key={`confirm_${key}`}>
     <div className={styles.Label}>{label}</div>
     <div className={styles.Feature}>
-      <div>
+      <div className={styles.description}>
         {description}
       </div>
       <div>
         {
           value ? (
             <CheckCircle className={styles.FeatureCheckIcon}/>
-          ) : action(key)
+          ) : action
         }
       </div>
     </div>
@@ -26,7 +27,15 @@ const Feature = ({ key, value, label, description, action }) => (
 );
 
 const FeatureChangeSection = () => {
-  const { isReady, features } = useFeatureChangeContext();
+  const { isReady, features, loading } = useFeatureChangeContext();
+
+  if (loading) {
+    return (
+      <Panel sectioned style={{ minHeight: '200px' }}>
+        <Loading />
+      </Panel>
+    );
+  }
 
   const renderCTA = () => {
     const Icon = isReady ? CheckCircle : Warning;
