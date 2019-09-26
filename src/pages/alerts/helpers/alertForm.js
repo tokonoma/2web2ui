@@ -76,8 +76,6 @@ export const getEvaluatorOptions = (metric, source) => {
           return { sliderLabel: 'Score', sliderPrecision: 1 };
         case 'monthly_sending_limit':
           return { sliderLabel: 'Percent Used', sliderPrecision: 0 };
-        case 'week_over_week':
-        case 'day_over_day':
         case 'block_bounce_rate':
         case 'hard_bounce_rate':
         case 'soft_bounce_rate':
