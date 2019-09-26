@@ -71,7 +71,7 @@ export const TestDetailsPage = (props) => {
     <Page
       breadcrumbAction={{
         content: 'All Inbox Placement Tests',
-        onClick: () => this.props.history.push('/inbox-placement')
+        onClick: () => history.push('/inbox-placement')
       }}
       title='Inbox Placement'
       subtitle='Results'
