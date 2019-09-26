@@ -2,16 +2,19 @@ import _ from 'lodash';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Page } from '@sparkpost/matchbox';
 import { CursorPaging, PerPageButtons } from 'src/components/collection';
+import { DEFAULT_PER_PAGE_BUTTONS } from 'src/constants';
 import useRouter from 'src/hooks/useRouter';
 import IntegrationCollection from './components/IntegrationCollection';
 import IntegrationPageFilter from './components/IntegrationPageFilter';
-import { getLegitPageSize } from './helpers/batchStatusFilter';
 import styles from './IntegrationPage.module.scss';
 
 const IntegrationPage = ({ getIngestBatchEvents, eventsByPage, loadingStatus, nextCursor, totalCount }) => {
   const { requestParams, updateRoute } = useRouter();
   const [page, setPage] = useState(0);
-  const [perPage, setPerPage] = useState(getLegitPageSize(requestParams.perPage)); //should be set to the value in link
+  const [perPage, setPerPage] = useState(() => {
+    const { perPage = 10 } = requestParams;
+    return DEFAULT_PER_PAGE_BUTTONS.find((num) => num === perPage) || 10;
+  });
   const [filters, setFilters] = useState(() => {
     const { batchIds = [], batchStatus = '' } = requestParams;
 
