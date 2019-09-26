@@ -4,6 +4,7 @@ import { verifyEmailToken } from 'src/actions/currentUser';
 import { Loading } from 'src/components';
 import { showAlert } from 'src/actions/globalAlert';
 
+// you should be a page
 export class EmailVerification extends Component {
   componentDidMount() {
     const { token, verifyEmailToken } = this.props;
@@ -51,4 +52,3 @@ const mapStateToProps = (state, props) => ({
 });
 
 export default connect(mapStateToProps, { verifyEmailToken, showAlert })(EmailVerification);
-

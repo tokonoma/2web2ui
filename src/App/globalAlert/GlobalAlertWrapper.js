@@ -15,7 +15,7 @@ export const GlobalAlertWrapper = ({
   <Portal containerId='alert-portal'>
     <div className={styles.Wrapper}>
       <TransitionGroup>
-        { alerts.map((alert, i) => (
+        {alerts.map((alert, i) => (
           <Animator key={alert.id}>
             <div className={styles.Alert}>
               <Alert onDismiss={() => clear(alert.id)} {...alert} />

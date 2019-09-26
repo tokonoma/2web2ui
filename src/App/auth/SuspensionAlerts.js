@@ -16,7 +16,7 @@ export class SuspensionAlerts extends Component {
     this.props.openSupportTicketForm({ issueId: 'account_suspension' });
   }
 
-  getMessage () {
+  getMessage() {
     return this.props.isSuspendedForBilling
       ? (
         <Fragment>
@@ -31,7 +31,7 @@ export class SuspensionAlerts extends Component {
       );
   }
 
-  componentDidUpdate (prevProps) {
+  componentDidUpdate(prevProps) {
     const { isSuspended, showAlert } = this.props;
 
     if (!prevProps.isSuspended && isSuspended) {
@@ -45,7 +45,7 @@ export class SuspensionAlerts extends Component {
     }
   }
 
-  render () {
+  render() {
     return null;
   }
 }

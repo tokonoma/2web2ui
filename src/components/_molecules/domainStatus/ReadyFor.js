@@ -13,7 +13,7 @@ const ReadyFor = ({ bounce, dkim, sending, bounceDefault, subaccount }) => {
 
   if (bounce) {
     bounceMarkup = bounceDefault
-      ? <Tag color='orange'>Bounce ({subaccount ? 'Subaccount ' : '' }Default)</Tag>
+      ? <Tag color='orange'>Bounce ({subaccount ? 'Subaccount ' : ''}Default)</Tag>
       : <Tag>Bounce</Tag>;
   }
 

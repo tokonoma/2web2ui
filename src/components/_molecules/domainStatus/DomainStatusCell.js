@@ -12,7 +12,6 @@ const DomainStatusCell = ({ domain }) => {
   }
 
   return <ReadyFor {...resolveReadyFor(status)} bounceDefault={is_default_bounce_domain} subaccount={subaccount_id} />;
-
 };
 
 export default DomainStatusCell;

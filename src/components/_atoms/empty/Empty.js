@@ -3,6 +3,7 @@ import { Panel } from '@sparkpost/matchbox';
 
 import styles from './Empty.module.scss';
 
+// who named you?  EmptyPanel
 class Empty extends Component {
   render() {
     const { title, message } = this.props;

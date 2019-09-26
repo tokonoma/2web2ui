@@ -5,6 +5,7 @@ import { Help } from '@sparkpost/matchbox-icons';
 
 const tooltipContent = 'Domains can be ready for sending (From), sending with DKIM signing, and bounce (Return Path) usage.';
 
+// todo, should have been an atom HeaderWithHelp
 const StatusTooltipHeader = () => <Tooltip dark content={tooltipContent}>Status <Help size={14}/></Tooltip>;
 
 export default StatusTooltipHeader;
