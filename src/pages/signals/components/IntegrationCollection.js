@@ -6,8 +6,8 @@ import { columns } from '../constants/integration';
 import formatRow from './FormatRow';
 import styles from './IntegrationCollection.module.scss';
 
-const IntegrationCollection = ({ events = [], loadingStatus, onRetry, retry = false }) => {
-  if (loadingStatus === 'pending' || retry) {
+const IntegrationCollection = ({ events = [], loadingStatus, onRetry }) => {
+  if (loadingStatus === 'pending') {
     return (
       <Panel className={styles.LoadingPanel}>
         <Loading/>
