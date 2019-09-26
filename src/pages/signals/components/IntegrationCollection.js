@@ -7,14 +7,6 @@ import formatRow from './FormatRow';
 import styles from './IntegrationCollection.module.scss';
 
 const IntegrationCollection = ({ events = [], loadingStatus, onRetry }) => {
-  if (loadingStatus === 'pending') {
-    return (
-      <Panel className={styles.LoadingPanel}>
-        <Loading/>
-      </Panel>
-    );
-  }
-
   if (loadingStatus === 'fail') {
     return (
       <Panel
@@ -26,7 +18,15 @@ const IntegrationCollection = ({ events = [], loadingStatus, onRetry }) => {
     );
   }
 
-  if (events && events.length === 0) {
+  if (loadingStatus === 'pending') {
+    return (
+      <Panel className={styles.LoadingPanel}>
+        <Loading/>
+      </Panel>
+    );
+  }
+
+  if (events.length === 0) {
     return <Panel title="No Data Found!" />;
   }
 
