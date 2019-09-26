@@ -53,7 +53,7 @@ export class OnboardingPlanPage extends Component {
     if (selectedPromo.promoCode && !values.planpicker.isFree) {
       const { promoCode } = selectedPromo;
       newValues.promoCode = promoCode;
-      action = verifyPromoCode({ promoCode, billingId: values.planpicker.billingId, meta: { promoCode }});
+      action = verifyPromoCode({ promoCode, billingId: values.planpicker.billingId, meta: { promoCode, showErrorAlert: false }});
     }
 
     // Note: billingCreate will update the subscription if the account is AWS
@@ -69,7 +69,7 @@ export class OnboardingPlanPage extends Component {
 
   applyPromoCode = (promoCode) => {
     const { verifyPromoCode } = this.props;
-    verifyPromoCode({ promoCode , billingId: this.props.selectedPlan.billingId, meta: { promoCode }});
+    verifyPromoCode({ promoCode , billingId: this.props.selectedPlan.billingId, meta: { promoCode, showErrorAlert: false }});
   }
 
   onPlanSelect = (e) => {

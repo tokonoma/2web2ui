@@ -98,7 +98,7 @@ describe('ChoosePlan page tests', () => {
       expect(props.verifyPromoCode).toHaveBeenCalledWith({
         promoCode: 'test-promo-code',
         billingId: 'test-id',
-        meta: { promoCode: 'test-promo-code' }
+        meta: { promoCode: 'test-promo-code', showErrorAlert: false }
       });
       expect(instance.props.billingCreate).toHaveBeenCalledWith({ ...values, discountId: 'test-discount' });
       expect(instance.props.history.push).toHaveBeenCalledWith('/onboarding/sending-domain');
