@@ -8,6 +8,20 @@ describe('Formatting helpers', () => {
     it('handles Infinity better than humans', () => expect(formatting.isNumber(Infinity)).toBeTruthy());
   });
 
+  describe('coalesce', () => {
+    it('return undefined when all undefined', () => {
+      expect(formatting.coalesce(undefined)).toBeUndefined();
+    });
+
+    it('return first integer', () => {
+      expect(formatting.coalesce(undefined, 0)).toEqual(0);
+    });
+
+    it('return first float', () => {
+      expect(formatting.coalesce(undefined, 0.5)).toEqual(0.5);
+    });
+  });
+
   describe('roundToPlaces', () => {
     it('should round to specified decimal places', () => {
       expect(formatting.roundToPlaces(2.116, 2)).toBeCloseTo(2.12);
