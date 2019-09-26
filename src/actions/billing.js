@@ -192,7 +192,7 @@ export function getBundles() {
       method: 'GET',
       url: '/v1/billing/bundles'
     }
-  }, MOCK_BUNDLES //TODO: Delete mock response
+  }, { data: MOCK_BUNDLES } //TODO: Delete mock response
   );
 }
 
@@ -204,6 +204,6 @@ export function getSubscription() {
       method: 'GET',
       url: '/v1/billing/subscription'
     }
-  }, MOCK_SUBSCRIPTION//TODO: Delete mock response
+  }, { data: MOCK_SUBSCRIPTION }//TODO: Delete mock response
   );
 }

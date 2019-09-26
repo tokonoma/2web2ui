@@ -93,6 +93,14 @@ export const MOCK_SUBSCRIPTION = {
       plan: 'subaccounts-0519',
       quantity: 17,
       limit_override: 20
+    },
+    {
+      product: 'sso',
+      plan: 'sso-0519'
+    },
+    {
+      product: 'tfa_required',
+      plan: 'tfa-required-0519'
     }
   ]
 };
