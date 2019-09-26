@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { Table } from '@sparkpost/matchbox';
 import { TableCollection } from 'src/components/collection';
 import { formatPercent } from 'src/helpers/units';
@@ -22,9 +21,7 @@ const WrapperComponent = ({ children }) => (<div className={styles.TableWrapper}
 
 const RowComponent = ({ id, mailbox_provider, placement }) => (<Table.Row className={styles.DataRow}>
   <Table.Cell className={styles.ProviderCell}>
-    <Link to={`/inbox-placement/details/101/providers/${id}`}>
-      <strong>{mailbox_provider}</strong>
-    </Link>
+    <strong>{mailbox_provider}</strong>
   </Table.Cell>
   <Table.Cell className={styles.Placement}><GroupPercentage value={placement.inbox_pct}/></Table.Cell>
   <Table.Cell className={styles.Placement}><GroupPercentage value={placement.spam_pct}/></Table.Cell>
