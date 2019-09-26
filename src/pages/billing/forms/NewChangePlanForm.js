@@ -100,8 +100,8 @@ export const ChangePlanForm = ({
           }
           {
             isPlanSelected && (
-              <FeatureChangeContextProvider>
-                <FeatureChangeSection />
+              <FeatureChangeContextProvider selectedBundle={selectedPlan}>
+                <FeatureChangeSection/>
               </FeatureChangeContextProvider>
             )
           }

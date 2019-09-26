@@ -84,23 +84,65 @@ export const MOCK_BUNDLES = {
   ]
 };
 
-export const MOCK_SUBSCRIPTION = {
-  type: 'active',
-  products: [
-    { product: 'messaging', plan: '100K-premier-0519' },
-    {
-      product: 'subaccounts',
-      plan: 'subaccounts-0519',
-      quantity: 17,
-      limit_override: 20
-    },
-    {
-      product: 'sso',
-      plan: 'sso-0519'
-    },
-    {
-      product: 'tfa_required',
-      plan: 'tfa-required-0519'
-    }
-  ]
+export const getMockSubscription = (index = 0) => {
+  const mockData = [{
+    type: 'active',
+    products: [
+      { product: 'messaging', plan: '100K-premier-0519' },
+      {
+        product: 'subaccounts',
+        plan: 'subaccounts-0519',
+        quantity: 17,
+        limit_override: 20
+      },
+      {
+        product: 'sso',
+        plan: 'sso-0519'
+      },
+      {
+        product: 'tfa_required',
+        plan: 'tfa-required-0519'
+      }
+    ]
+  }, {
+    type: 'active',
+    products: [
+      { product: 'messaging', plan: '100K-premier-0519' },
+      {
+        product: 'subaccounts',
+        plan: 'subaccounts-0519',
+        quantity: 16,
+        limit_override: 20
+      },
+      {
+        product: 'sso',
+        plan: 'sso-0519'
+      },
+      {
+        product: 'tfa_required',
+        plan: 'tfa-required-0519'
+      }
+    ]
+  }, {
+    type: 'active',
+    products: [
+      { product: 'messaging', plan: '100K-premier-0519' },
+      {
+        product: 'subaccounts',
+        plan: 'subaccounts-0519',
+        quantity: 0,
+        limit_override: 20
+      },
+      {
+        product: 'sso',
+        plan: 'sso-0519'
+      },
+      {
+        product: 'tfa_required',
+        plan: 'tfa-required-0519'
+      }
+    ]
+  }];
+
+  return mockData[index] || mockData[0];
 };

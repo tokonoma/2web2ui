@@ -142,6 +142,11 @@ export const selectTieredVisibleBundles = createSelector(
   }
 );
 
+export const selectPlansByKey = createSelector(
+  [bundlePlanSelector],
+  (plans) => (_.keyBy(plans, 'plan'))
+);
+
 export const selectAccount = (state) => state.account;
 
 export const selectAccountBilling = createSelector(

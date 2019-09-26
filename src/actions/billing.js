@@ -5,7 +5,7 @@ import { list as getSendingIps } from './sendingIps';
 import { isAws } from 'src/helpers/conditions/account';
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
 import zuoraRequest from 'src/actions/helpers/zuoraRequest';
-import { MOCK_BUNDLES, MOCK_SUBSCRIPTION } from './helpers/mockData';
+import { MOCK_BUNDLES, getMockSubscription } from './helpers/mockData';
 import mockThunk from './helpers/mockThunk'; //TODO: Remove
 
 export function syncSubscription({ meta = {}} = {}) {
@@ -196,7 +196,9 @@ export function getBundles() {
   );
 }
 
-export function getSubscription() {
+export function getSubscription(index) {
+
+  const mockData = getMockSubscription(index);
   //TODO: Replace with sparkpostApiRequest
   return mockThunk({
     type: 'GET_SUBSCRIPTION',
@@ -204,6 +206,6 @@ export function getSubscription() {
       method: 'GET',
       url: '/v1/billing/subscription'
     }
-  }, { data: MOCK_SUBSCRIPTION }//TODO: Delete mock response
+  }, { data: mockData }//TODO: Delete mock response
   );
 }
