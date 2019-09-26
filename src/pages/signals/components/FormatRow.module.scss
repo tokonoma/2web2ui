@@ -1,34 +1,18 @@
 @import '~@sparkpost/matchbox/src/styles/config.scss';
 
-.border-Accepted{
-    border-left: 5px solid rgba(84, 131, 23, 0.986)
-}
-.border-Rejected{
-    border-left: 5px solid red
-}
-.border-Duplicates{
-    border-left: 5px solid orange
+.TooltipDate {
+  border-bottom: 1px solid darken(color(gray, 1), 5);
+  color: color(gray, 10);
+  font-size: rem(15);
+  padding: spacing(small) spacing();
 }
 
-.Tooltip-date {
-    border-bottom: 1px solid black;
-    padding-bottom: 10px;
+.TooltipIcon {
+  color: color(blue);
+  margin-left: spacing(small);
+  margin-top: -4px;
 }
 
-.Tooltip-label {
-    padding: 0;
-    padding-left: 20px;
-}
-
-.Tooltip-value {
-    padding: 0;
-    font-weight: 600;
-    font-size: 25px;
-    padding-left: 20px;
-}
-
-.Tooltip-body {
-    height: 45px;
-    margin-top: 5px;
-
+.TooltipMetrics {
+  padding: spacing(small) spacing();
 }

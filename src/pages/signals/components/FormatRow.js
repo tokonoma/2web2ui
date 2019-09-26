@@ -1,34 +1,40 @@
 import React from 'react';
+import { InfoOutline } from '@sparkpost/matchbox-icons';
 import DisplayDate from 'src/components/displayDate/DisplayDate';
-import { formatDateTime } from 'src/helpers/date';
+import Tooltip from 'src/components/tooltip';
+import { formatDate, formatDateTime } from 'src/helpers/date';
+import { sum } from 'src/helpers/math';
+import { coalesce, formatFullNumber } from 'src/helpers/units';
+import TooltipMetric from './charts/tooltip/TooltipMetric';
 import Status from './tags/statusTags';
-import InfoTooltip from './InfoTooltip';
 import styles from './FormatRow.module.scss';
-import moment from 'moment';
-import classnames from 'classnames';
 
-
-
-const getNumber = (n) => !isNaN(parseFloat(n)) && isFinite(n) ? n : 0;
-
-const getTooltipcontent = (timestamp,arr) => <div>
-  <div className={styles['Tooltip-date']} >{moment(timestamp).format('LL')}</div>
-  {arr.map((elem,index) => (
-    <div key={index} className={classnames(styles[`border-${elem.key}`],styles['Tooltip-body'])}>
-      <div className={styles['Tooltip-label']}>{elem.key}</div>
-      <div className={styles['Tooltip-value']}>{elem.value}</div>
+const getTooltipcontent = (timestamp, metrics) => (
+  <>
+    <div className={styles.TooltipDate}>
+      {formatDate(timestamp)}
     </div>
-  ))}
-</div>;
+    <div className={styles.TooltipMetrics}>
+      {metrics.map(({ color, label, value }) => (
+        <TooltipMetric
+          color={color}
+          key={label}
+          label={label}
+          value={formatFullNumber(coalesce(value, 0))}
+        />
+      ))}
+    </div>
+  </>
+);
 
 const formatRow = ({
-  timestamp,
-  type,
+  batch_id,
   error_type,
-  number_succeeded,
-  number_failed,
   number_duplicates,
-  batch_id
+  number_failed,
+  number_succeeded,
+  timestamp,
+  type
 }) => [
   <DisplayDate
     timestamp={timestamp}
@@ -37,20 +43,21 @@ const formatRow = ({
   <>
     <Status status={type} error={error_type} />
     {error_type === 'validation' && (
-      <InfoTooltip content={getTooltipcontent(timestamp,[
-        { key: 'Accepted', value: getNumber(number_succeeded) },
-        { key: 'Rejected', value: getNumber(number_failed) },
-        { key: 'Duplicates', value: getNumber(number_duplicates) } ])}
-      />
+      <Tooltip
+        content={
+          getTooltipcontent(timestamp, [
+            { label: 'Accepted', color: '#8CCA3A', value: number_succeeded },
+            { label: 'Rejected', color: '#DB2F2D', value: number_failed },
+            { label: 'Duplicates', color: '#FA6423', value: number_duplicates }
+          ])
+        }
+      >
+        <InfoOutline className={styles.TooltipIcon} size={24} />
+      </Tooltip>
     )}
   </>,
-  <span>
-    {getNumber(number_succeeded) +
-      getNumber(number_failed) +
-      getNumber(number_duplicates)}
-  </span>,
-  <span>{batch_id}</span>
+  formatFullNumber(sum(number_duplicates, number_failed, number_succeeded)),
+  batch_id
 ];
-
 
 export default formatRow;

@@ -1,75 +1,69 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`formatRow:  renders correctly 1`] = `
+exports[`FormatRow renders a row 1`] = `
 Array [
   <DisplayDate
     formattedDate="Sep 18 2019, 4:09pm"
     timestamp="2019-09-18T20:09:38.000Z"
   />,
-  <React.Fragment>
+  <Fragment>
+    <Status
+      status="success"
+    />
+  </Fragment>,
+  "1",
+  "8c4b19fb-07a2-42cb-84f7-3ab09a8049e0",
+]
+`;
+
+exports[`FormatRow renders a row with validation error 1`] = `
+Array [
+  <DisplayDate
+    formattedDate="Sep 18 2019, 4:09pm"
+    timestamp="2019-09-18T20:09:38.000Z"
+  />,
+  <Fragment>
     <Status
       error="validation"
       status="error"
     />
-    <InfoTooltip
+    <Tooltip
       content={
-        <div>
+        <React.Fragment>
           <div
-            className="Tooltip-date"
+            className="TooltipDate"
           >
-            September 18, 2019
+            Sep 18 2019
           </div>
           <div
-            className="border-Accepted Tooltip-body"
+            className="TooltipMetrics"
           >
-            <div
-              className="Tooltip-label"
-            >
-              Accepted
-            </div>
-            <div
-              className="Tooltip-value"
-            >
-              1
-            </div>
+            <TooltipMetric
+              color="#8CCA3A"
+              label="Accepted"
+              value="1"
+            />
+            <TooltipMetric
+              color="#DB2F2D"
+              label="Rejected"
+              value="1,234"
+            />
+            <TooltipMetric
+              color="#FA6423"
+              label="Duplicates"
+              value="0"
+            />
           </div>
-          <div
-            className="border-Rejected Tooltip-body"
-          >
-            <div
-              className="Tooltip-label"
-            >
-              Rejected
-            </div>
-            <div
-              className="Tooltip-value"
-            >
-              1
-            </div>
-          </div>
-          <div
-            className="border-Duplicates Tooltip-body"
-          >
-            <div
-              className="Tooltip-label"
-            >
-              Duplicates
-            </div>
-            <div
-              className="Tooltip-value"
-            >
-              0
-            </div>
-          </div>
-        </div>
+        </React.Fragment>
       }
-    />
-  </React.Fragment>,
-  <span>
-    2
-  </span>,
-  <span>
-    8c4b19fb-07a2-42cb-84f7-3ab09a8049e0
-  </span>,
+    >
+      <InfoOutline
+        className="TooltipIcon"
+        size={24}
+      />
+    </Tooltip>
+  </Fragment>,
+  "1,235",
+  "8c4b19fb-07a2-42cb-84f7-3ab09a8049e0",
 ]
 `;
