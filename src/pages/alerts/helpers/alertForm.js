@@ -65,7 +65,10 @@ export const getEvaluatorOptions = (metric, source) => {
   const suffix = (metric === 'health_score' && source === 'raw') ? '' : '%';
 
   const getSliderProps = () => {
-    if (source !== 'raw') {
+    const sourceLabels = ['week_over_week', 'day_over_day'];
+    if (sourceLabels.includes(source)) {
+      return { sliderLabel: 'Percent Change', sliderPrecision: 0 };
+    } else if (source !== 'raw') {
       return { sliderLabel: 'Percent Change', sliderPrecision: 2 };
     } else {
       switch (metric) {
@@ -76,7 +79,7 @@ export const getEvaluatorOptions = (metric, source) => {
         case 'block_bounce_rate':
         case 'hard_bounce_rate':
         case 'soft_bounce_rate':
-          return { sliderLabel: 'Bounce Percentage Above', sliderPrecision: 2 };
+          return { sliderLabel: 'Bounce Percentage Above', sliderPrecision: 0 };
       }
     }
     return 'value';

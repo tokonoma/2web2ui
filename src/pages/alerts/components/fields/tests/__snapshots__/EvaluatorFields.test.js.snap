@@ -19,7 +19,7 @@ exports[`Evaluator Fields Component renders correctly 1`] = `
       options={
         Array [
           Object {
-            "label": "Value",
+            "label": "Score",
             "value": "raw",
           },
           Object {

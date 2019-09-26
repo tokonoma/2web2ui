@@ -73,8 +73,8 @@ export class FilterFields extends Component {
           : (sendingDomains.length === 0) ? 'No Options Available' : 'Type To Search'
       },
       sending_ip: {
-        disabled: disabled || (sendingIps.length === 0),
-        placeholder: (sendingIps.length === 0) ? 'No Options Available' : 'Type To Search'
+        disabled: disabled,
+        placeholder: 'Type To Search'
       }
     };
 
@@ -104,18 +104,31 @@ export class FilterFields extends Component {
         </Grid.Column>
       </Grid>);
 
+    /**
+     * Determine if a filter should be rendered depending on the state of the filters
+     *
+     * @param {Object} single filter field object
+     * @returns {boolean} true or false depending on the filter should be rendered
+     */
+    const shouldRenderFilter = (filter) => {
+      const emptyIP = filter.value === 'sending_ip' && sendingIps.length <= 0;
+      return !emptyIP;
+    };
+
     const renderMultiFilters = () => (
-      formSpec.filterOptions.map(({ label, value }) =>
-        (<Field
-          key={value}
-          name={value}
-          component={ComboBoxTypeaheadWrapper}
-          results={filterTypeaheadResults[value]}
-          label={label}
-          defaultSelected={this.props[value]}
-          {...extraProps[value]}
-        />)
-      ));
+      formSpec.filterOptions
+        .filter((option) => shouldRenderFilter(option))
+        .map(({ label, value }) =>
+          (<Field
+            key={value}
+            name={value}
+            component={ComboBoxTypeaheadWrapper}
+            results={filterTypeaheadResults[value]}
+            label={label}
+            defaultSelected={this.props[value]}
+            {...extraProps[value]}
+          />)
+        ));
 
     return (
       <>

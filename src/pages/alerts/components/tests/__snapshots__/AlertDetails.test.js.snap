@@ -38,7 +38,7 @@ exports[`Alert Details Component should render the alert details component corre
       <Tag
         className="FirstTag"
       >
-        Value
+        Score
       </Tag>
       <h6
         className="BoldInline"

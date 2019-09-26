@@ -37,7 +37,7 @@ describe('Alert form helper: ', () => {
     suffix: '%',
     operatorOptions: [{ label: 'Above', value: 'gt' }],
     sliderLabel: 'Bounce Percentage Above',
-    sliderPrecision: 2
+    sliderPrecision: 0
   };
 
   const testCases =
@@ -82,7 +82,7 @@ describe('Alert form helper: ', () => {
           suffix: '%',
           operatorOptions: [{ label: 'Above', value: 'gt' }],
           sliderLabel: 'Percent Change',
-          sliderPrecision: 2 }
+          sliderPrecision: 0 }
       },
       'DOD Health Score': {
         metric: 'health_score',
@@ -91,7 +91,7 @@ describe('Alert form helper: ', () => {
           suffix: '%',
           operatorOptions: [{ label: 'Above', value: 'gt' }],
           sliderLabel: 'Percent Change',
-          sliderPrecision: 2 }
+          sliderPrecision: 0 }
       }
     };
 
