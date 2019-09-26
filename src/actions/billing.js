@@ -206,6 +206,6 @@ export function getSubscription(index) {
       method: 'GET',
       url: '/v1/billing/subscription'
     }
-  }, { data: mockData }//TODO: Delete mock response
+  }, { data: mockData, delay: 500 }//TODO: Delete mock response
   );
 }
