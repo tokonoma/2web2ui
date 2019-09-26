@@ -12,3 +12,4 @@ Note: Give your PR a short title. Something like "_TICKET NUMBER: feature descri
 ### To Do
 - [ ] Any outstanding tasks go here
     > Manage reviewers' expectations on missing features, tests, bugs, late design changes, ...)
+- [ ] Tag new routes in Pendo

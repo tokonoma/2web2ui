@@ -4,25 +4,39 @@ import { connect } from 'react-redux';
 import { formValueSelector, clearFields } from 'redux-form';
 import { RadioGroup } from 'src/components/reduxFormWrappers';
 import { hasSubaccounts } from 'src/selectors/subaccounts';
-import { FORMS, ROLES } from 'src/constants';
+import { FORMS, ROLES, ROLE_LABELS } from 'src/constants';
 import SubaccountAssignment from './SubaccountAssignment';
 
 const ADMIN_ROLE = {
-  label: <strong>Admin</strong>,
+  label: <strong>{ROLE_LABELS[ROLES.ADMIN]}</strong>,
   value: ROLES.ADMIN,
   helpText:
-    'Has access to all features, including the ability to invite additional users.'
+    'All permissions. The only user that can manage users, security, and billing settings.'
+};
+
+const DEVELOPER_ROLE = {
+  label: <strong>{ROLE_LABELS[ROLES.DEVELOPER]}</strong>,
+  value: ROLES.DEVELOPER,
+  helpText:
+    'Setup and development user. Full access to API Keys, and all other email related setup, sending, and reporting features.'
+};
+
+const TEMPLATES_ROLE = {
+  label: <strong>{ROLE_LABELS[ROLES.TEMPLATES]}</strong>,
+  value: ROLES.TEMPLATES,
+  helpText:
+    'Content and deliverability management user. Has access to Templates, Recipients Lists, Suppressions, AB Testing, and all reporting features.'
 };
 
 const REPORTING_ROLE = {
-  label: <strong>Reporting</strong>,
+  label: <strong>{ROLE_LABELS[ROLES.REPORTING]}</strong>,
   value: ROLES.REPORTING,
   helpText:
-    'Has access to reporting and read-only access to templates.'
+    'Data analytics user. Has access to all reporting features and can view templates. No access to any account or feature settings.'
 };
 
 const SUPERUSER_ROLE = {
-  label: <strong>Super User</strong>,
+  label: <strong>{ROLE_LABELS[ROLES.SUPERUSER]}</strong>,
   value: ROLES.SUPERUSER
 };
 
@@ -49,6 +63,8 @@ export class RoleRadioGroup extends React.Component {
 
     return [
       ADMIN_ROLE,
+      DEVELOPER_ROLE,
+      TEMPLATES_ROLE,
       {
         ...REPORTING_ROLE,
         children: allowSubaccountAssignment &&
@@ -69,7 +85,7 @@ export class RoleRadioGroup extends React.Component {
     const roles = this.renderRoles();
     const options = roles.map((role) => ({ ...role, disabled }));
 
-    return <RadioGroup title="Role" grid={{ xs: 12, sm: 12, md: 6 }} options={options} {...rest} />;
+    return <RadioGroup title="Role" options={options} {...rest} />;
   }
 }
 

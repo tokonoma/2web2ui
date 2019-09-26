@@ -3,11 +3,10 @@ import * as messageEventHelpers from '../messageEvents';
 import * as dateHelpers from 'src/helpers/date';
 
 jest.mock('src/constants', () => ({
-  EVENTS_SEARCH_FILTERS: {
+  ALL_EVENTS_FILTERS: {
     filter1: {},
     filter2: {}
-  }
-}));
+  }}));
 
 describe('messageEvents helpers', () => {
 
@@ -47,23 +46,92 @@ describe('messageEvents helpers', () => {
     });
   });
 
-  const testCases = {
-    'parses correctly when all param exists': { searchText: '?from=2018-03-23T03:02:32Z&range=hour&to=2018-03-23T04:02:32Z&filter1=foo&filter2=bar' },
-    'parses correctly when from does not exist': { searchText: '?range=hour&to=2018-03-23T04:02:32Z&filter1=foo&filter2=bar' },
-    'parses correctly when to does not exist': { searchText: '?from=2018-03-23T03:02:32Z&range=hour&filter1=foo&filter2=bar' },
-    'parses correctly when range does not exist (does not override from, to)': { searchText: '?from=2018-03-23T03:02:32Z&to=2018-03-23T04:02:32Z&filter1=foo&filter2=bar' },
-    'parses correctly when extra filters do not exist': { searchText: '?from=2018-03-23T03:02:32Z&range=hour&to=2018-03-23T04:02:32Z' },
-    'parses correctly when using old message events filters by transforming them into the new events filters': {
-      searchText: '?from=2018-03-23T03:02:32Z&range=hour&to=2018-03-23T04:02:32Z&campaign_ids=foo&message_ids=foo&transmission_ids=foo&ab_test_ids=foo&template_ids=foo&friendly_froms=foo'
-    },
-    'parses correctly when adding in unsupported filters by removing them': { searchText: '?from=2018-03-23T03:02:32Z&range=hour&to=2018-03-23T04:02:32Z&filter3' }
+  const defaultDateFrom = 'from=2018-03-23T03:02:32Z';
+  const defaultDateRange = 'range=hour';
+  const defaultDateTo = 'to=2018-03-23T04:02:32Z';
+  const defaultDateURL = `${defaultDateFrom}&${defaultDateRange}&${defaultDateTo}`;
+  const mockRelativeRangeToDate = {
+    from: '2018-02-23T03:02:32Z',
+    relativeRange: 'hour',
+    to: '2018-03-22T03:02:32Z'
   };
-  cases('parseSearch', ({ searchText }) => {
-    const mockRelativeRangeToDate = { from: '2018-02-23T03:02:32Z', to: '2018-03-22T03:02:32Z', relativeRange: 'hour' };
+
+  const testCases = {
+    'parses correctly when all filter parameters exists':
+      {
+        searchText: `?${defaultDateURL}&filter1=foo&filter2=bar`,
+        expected: {
+          dateOptions: mockRelativeRangeToDate,
+          filter1: ['foo'],
+          filter2: ['bar']
+        }
+      },
+    'parses correctly when a parameter has multiple values':
+      {
+        searchText: `?${defaultDateURL}&filter1=foo&filter1=bar`,
+        expected: {
+          dateOptions: mockRelativeRangeToDate,
+          filter1: ['foo','bar']
+        }
+      },
+    'parses correctly when from does not exist':
+      {
+        searchText: `?${defaultDateRange}&${defaultDateTo}&filter1=foo`,
+        expected: {
+          dateOptions: mockRelativeRangeToDate,
+          filter1: ['foo']
+        }
+      },
+    'parses correctly when to does not exist':
+      {
+        searchText: `?${defaultDateFrom}&${defaultDateRange}&filter1=foo`,
+        expected: {
+          dateOptions: mockRelativeRangeToDate,
+          filter1: ['foo']
+        }
+      },
+    'parses correctly when range does not exist (does not override from, to)':
+      {
+        searchText: '?from=2018-03-23T03:02:32Z&to=2018-03-23T04:02:32Z&filter1=foo',
+        expected: {
+          dateOptions: {
+            from: new Date('2018-03-23T03:02:32.000Z'),
+            to: new Date('2018-03-23T04:02:32.000Z')
+          },
+          filter1: ['foo']
+        }
+      },
+    'parses correctly when extra filters do not exist':
+      {
+        searchText: `?${defaultDateURL}`,
+        expected: {
+          dateOptions: mockRelativeRangeToDate
+        }
+      },
+    'parses correctly when using old message events filters by transforming them into the new events filters':
+      {
+        searchText: `?${defaultDateURL}&campaign_ids=foo&message_ids=foo&transmission_ids=foo&ab_test_ids=foo&template_ids=foo&friendly_froms=foo`,
+        expected: {
+          dateOptions: mockRelativeRangeToDate,
+          ab_tests: ['foo'],
+          campaigns: ['foo'],
+          from_addresses: ['foo'],
+          messages: ['foo'],
+          templates: ['foo'],
+          transmissions: ['foo']
+        }
+      },
+    'parses correctly when adding in unsupported filters by removing them':
+      {
+        searchText: `?${defaultDateURL}&filter3=foo`,
+        expected: {
+          dateOptions: mockRelativeRangeToDate
+        }}
+  };
+  cases('parseSearch', ({ searchText, expected }) => {
 
     dateHelpers.getRelativeDates = jest.fn(() => mockRelativeRangeToDate);
-
-    expect(messageEventHelpers.parseSearch(searchText)).toMatchSnapshot();
+    expect(messageEventHelpers.parseSearch(searchText)).toEqual(expected);
   }, testCases);
 
 

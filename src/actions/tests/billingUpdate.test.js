@@ -23,7 +23,8 @@ describe('Action Creator: Billing Update', () => {
     billingActions.updateSubscription = jest.fn(({ meta }) => meta.onSuccess({}));
     billingActions.syncSubscription = jest.fn(({ meta }) => meta.onSuccess({}));
     billingActions.collectPayments = jest.fn(({ meta }) => meta.onSuccess({}));
-    accountActions.fetch = jest.fn();
+    accountActions.fetch = jest.fn(({ meta }) => meta.onSuccess({}));
+    accountActions.getBillingInfo = jest.fn();
     billingHelpers.formatUpdateData = jest.fn((a) => a);
   });
 
@@ -46,7 +47,8 @@ describe('Action Creator: Billing Update', () => {
     expect(billingActions.updateSubscription).not.toHaveBeenCalled();
     expect(billingActions.syncSubscription).toHaveBeenCalled();
     expect(billingActions.collectPayments).toHaveBeenCalled();
-    expect(accountActions.fetch).toHaveBeenCalledWith({ include: 'usage,billing' });
+    expect(accountActions.fetch).toHaveBeenCalledWith(expect.objectContaining({ include: 'usage' }));
+    expect(accountActions.getBillingInfo).toHaveBeenCalled();
   });
 
   it('update with a planpicker code', () => {
@@ -75,6 +77,7 @@ describe('Action Creator: Billing Update', () => {
     }));
     expect(billingActions.syncSubscription).toHaveBeenCalled();
     expect(billingActions.collectPayments).toHaveBeenCalled();
-    expect(accountActions.fetch).toHaveBeenCalledWith({ include: 'usage,billing' });
+    expect(accountActions.fetch).toHaveBeenCalledWith(expect.objectContaining({ include: 'usage' }));
+    expect(accountActions.getBillingInfo).toHaveBeenCalled();
   });
 });

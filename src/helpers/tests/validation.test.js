@@ -16,7 +16,15 @@ const cases = {
   },
   email: {
     good: ['roberto@baggio.example.com', 'x@example.com'],
-    bad: ['bugblatter', 'not.an.email.example.com']
+    bad: ['', 'bugblatter', 'not.an.email.example.com']
+  },
+  emails: {
+    good: [
+      'test@example.com',
+      'test@example.com, test@example.com',
+      'test@example.com\n test@example.com'
+    ],
+    bad: ['', 'invalid', 'test@example.com, invalid']
   },
   emailLocal: {
     good: ['roberto.baggio', '101'],
@@ -112,6 +120,10 @@ const memoizedCases = {
     // The null case below is for the redux-form validation that sometimes occurs before underlying fields are available
     good: [[1024, { size: 1000 }], [1, null]],
     bad: [[1024, { size: 1025 }]]
+  },
+  minDays: {
+    good: [[7, { from: '2018-01-07T05:00:00.000Z', to: '2017-01-01T01:00:00.000Z' }], [7, { from: '2018-01-01T05:00:00.000Z', to: '2018-01-07T24:00:00.000Z' }]],
+    bad: [[7, { from: '2018-01-01', to: '2017-12-31' }]]
   }
 };
 
@@ -156,6 +168,22 @@ describe('Memoized validation helpers', () => {
   });
 });
 
+describe('ifStringPresent', () => {
+  const validator = () => 'I\'m always invalid';
+
+  it('returns undefined with undefined', () => {
+    expect(validations.ifStringPresent(validator)()).toBeUndefined();
+  });
+
+  it('returns undefined with empty string', () => {
+    expect(validations.ifStringPresent(validator)('')).toBeUndefined();
+  });
+
+  it('returns invalid message when present', () => {
+    expect(validations.ifStringPresent(validator)('My Value')).toMatch(/invalid/);
+  });
+});
+
 describe('Number between validation', () => {
   it('returns undefined for valid input', () => {
     expect(validations.numberBetween(0, 1)(0.5)).toBeUndefined();
@@ -164,6 +192,15 @@ describe('Number between validation', () => {
   it('returns error for invalid input', () => {
     expect(validations.numberBetween(0, 1)(0)).toEqual('Must be between 0 and 1');
   });
+
+  it('returns undefined for valid input for inclusive case', () => {
+    expect(validations.numberBetweenInclusive(0, 1)(0)).toBeUndefined();
+  });
+
+  it('returns error for invalid input for inclusive case', () => {
+    expect(validations.numberBetweenInclusive(0, 1)(2)).toEqual('Must be between 0 and 1');
+  });
+
 });
 
 describe('URL Validation', () => {

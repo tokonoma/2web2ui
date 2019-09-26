@@ -1,0 +1,326 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LineChart Component renders a dot if selected 1`] = `
+<Dot
+  fill="#stroke"
+  style={
+    Object {
+      "pointerEvents": "none",
+    }
+  }
+  test="test"
+/>
+`;
+
+exports[`LineChart Component renders a line chart with a single line correctly 1`] = `
+<ResponsiveContainer
+  className="SignalsBarChart"
+  debounce={0}
+  height={50}
+  width={100}
+>
+  <ComposedChart
+    barCategoryGap={0}
+    barGap={4}
+    data={
+      Array [
+        Object {
+          "date": "2011-01-01",
+          "value": 2,
+        },
+      ]
+    }
+    layout="horizontal"
+    margin={
+      Object {
+        "bottom": 5,
+        "left": 18,
+        "right": 0,
+        "top": 12,
+      }
+    }
+    reverseStackOrder={false}
+    stackOffset="none"
+  >
+    <Bar
+      animationBegin={0}
+      animationDuration={400}
+      animationEasing="ease"
+      cursor="pointer"
+      data={Array []}
+      dataKey="noKey"
+      fill="#5DCFF5"
+      hide={false}
+      isAnimationActive={false}
+      layout="vertical"
+      legendType="rect"
+      minPointSize={0}
+      onAnimationEnd={[Function]}
+      onAnimationStart={[Function]}
+      onClick={[MockFunction]}
+      shape={[Function]}
+      xAxisId={0}
+      yAxisId={0}
+    />
+    <CartesianGrid
+      fill="none"
+      horizontal={true}
+      horizontalFill={Array []}
+      horizontalPoints={Array []}
+      shapeRendering="crispEdges"
+      stroke="#e1e1e6"
+      vertical={false}
+      verticalFill={Array []}
+      verticalPoints={Array []}
+    />
+    <YAxis
+      allowDataOverflow={false}
+      allowDecimals={true}
+      allowDuplicatedCategory={true}
+      axisLine={false}
+      domain={
+        Array [
+          0,
+          "auto",
+        ]
+      }
+      height={0}
+      hide={false}
+      minTickGap={2}
+      mirror={false}
+      orientation="left"
+      padding={
+        Object {
+          "bottom": 0,
+          "top": 0,
+        }
+      }
+      reversed={false}
+      scale="auto"
+      tickCount={5}
+      tickLine={false}
+      type="number"
+      width={30}
+      yAxisId={0}
+    />
+    <XAxis
+      allowDataOverflow={false}
+      allowDecimals={true}
+      allowDuplicatedCategory={true}
+      axisLine={false}
+      dataKey="date"
+      domain={
+        Array [
+          0,
+          "auto",
+        ]
+      }
+      height={30}
+      hide={false}
+      mirror={false}
+      orientation="bottom"
+      padding={
+        Object {
+          "left": 6,
+          "right": 6,
+        }
+      }
+      reversed={false}
+      scale="auto"
+      shapeRendering="crispEdges"
+      tickCount={5}
+      tickLine={false}
+      type="category"
+      width={0}
+      xAxisId={0}
+    />
+    <Tooltip
+      active={false}
+      animationDuration={400}
+      animationEasing="ease"
+      content={
+        <Tooltip
+          offset={25}
+          width="200px"
+        >
+          [MockFunction]
+        </Tooltip>
+      }
+      contentStyle={Object {}}
+      coordinate={
+        Object {
+          "x": 0,
+          "y": 0,
+        }
+      }
+      cursor={false}
+      cursorStyle={Object {}}
+      filterNull={true}
+      isAnimationActive={false}
+      itemSorter={[Function]}
+      itemStyle={Object {}}
+      labelStyle={Object {}}
+      offset={25}
+      position={
+        Object {
+          "x": 0,
+          "y": 0,
+        }
+      }
+      separator=" : "
+      useTranslate3d={false}
+      viewBox={
+        Object {
+          "x1": 0,
+          "x2": 0,
+          "y1": 0,
+          "y2": 0,
+        }
+      }
+      wrapperStyle={Object {}}
+    />
+    <Line
+      activeDot={[Function]}
+      animateNewValues={true}
+      animationBegin={0}
+      animationDuration={1500}
+      animationEasing="ease"
+      connectNulls={false}
+      dataKey="value"
+      dot={[Function]}
+      fill="#fff"
+      hide={false}
+      isAnimationActive={false}
+      key="value"
+      legendType="line"
+      onAnimationEnd={[Function]}
+      onAnimationStart={[Function]}
+      onClick={[MockFunction]}
+      points={Array []}
+      stroke="#stroke"
+      strokeWidth={1.5}
+      style={
+        Object {
+          "pointerEvents": "none",
+        }
+      }
+      type="linear"
+      xAxisId={0}
+      yAxisId={0}
+    />
+  </ComposedChart>
+</ResponsiveContainer>
+`;
+
+exports[`LineChart Component renders a multiple lines correctly 1`] = `
+Array [
+  <Line
+    activeDot={[Function]}
+    animateNewValues={true}
+    animationBegin={0}
+    animationDuration={1500}
+    animationEasing="ease"
+    connectNulls={false}
+    dataKey="ab"
+    dot={[Function]}
+    fill="#fff"
+    hide={false}
+    isAnimationActive={false}
+    key="ab"
+    legendType="line"
+    onAnimationEnd={[Function]}
+    onAnimationStart={[Function]}
+    onClick={[MockFunction]}
+    points={Array []}
+    stroke="blue"
+    strokeWidth={1.5}
+    style={
+      Object {
+        "pointerEvents": "none",
+      }
+    }
+    type="linear"
+    xAxisId={0}
+    yAxisId={0}
+  />,
+  <Line
+    activeDot={[Function]}
+    animateNewValues={true}
+    animationBegin={0}
+    animationDuration={1500}
+    animationEasing="ease"
+    connectNulls={false}
+    dataKey="cd"
+    dot={[Function]}
+    fill="#fff"
+    hide={false}
+    isAnimationActive={false}
+    key="cd"
+    legendType="line"
+    onAnimationEnd={[Function]}
+    onAnimationStart={[Function]}
+    onClick={[MockFunction]}
+    points={Array []}
+    stroke="red"
+    strokeWidth={1.5}
+    style={
+      Object {
+        "pointerEvents": "none",
+      }
+    }
+    type="linear"
+    xAxisId={0}
+    yAxisId={0}
+  />,
+]
+`;
+
+exports[`LineChart Component renders active dot 1`] = `
+<Dot
+  payload={
+    Object {
+      "date": "2011-01-01",
+    }
+  }
+  style={
+    Object {
+      "pointerEvents": "none",
+    }
+  }
+  test="test"
+/>
+`;
+
+exports[`LineChart Component renders background bars with no opacity if unselected 1`] = `
+<Rectangle
+  animationBegin={0}
+  animationDuration={1500}
+  animationEasing="ease"
+  height={0}
+  isAnimationActive={false}
+  isUpdateAnimationActive={false}
+  opacity={0}
+  radius={0}
+  test="test"
+  width={0}
+  x={0}
+  y={0}
+/>
+`;
+
+exports[`LineChart Component renders background bars with opacity if selected 1`] = `
+<Rectangle
+  animationBegin={0}
+  animationDuration={1500}
+  animationEasing="ease"
+  height={0}
+  isAnimationActive={false}
+  isUpdateAnimationActive={false}
+  opacity={0.4}
+  radius={0}
+  test="test"
+  width={0}
+  x={0}
+  y={0}
+/>
+`;

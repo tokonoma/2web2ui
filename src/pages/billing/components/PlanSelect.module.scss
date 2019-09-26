@@ -1,0 +1,36 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.PlanRow {
+  margin: .5rem 1rem;
+  padding: .5rem 0;
+  display: flex;
+
+  :first-child {
+    flex-grow: 1;
+  }
+}
+
+.tierPlans{
+  & > *:not(:last-child) {
+    border-bottom: 1px solid color(gray, 8);
+  }
+  margin: 0;
+}
+
+.tierLabel {
+  font-weight: 500;
+}
+
+.selectButton {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.SelectedPlan {
+  color: color(orange);
+}
+
+.CheckIcon {
+  position: absolute;
+  transform: translate(-20px, 2px);
+}

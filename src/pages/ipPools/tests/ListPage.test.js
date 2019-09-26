@@ -15,7 +15,9 @@ describe('IP Pools List Page', () => {
         { name: 'Test Pool 2', id: 102, ips: []}
       ],
       listPools: jest.fn(() => []),
-      showPurchaseCTA: true
+      showPurchaseCTA: true,
+      isManuallyBilled: false,
+      isAdmin: true
     };
 
     wrapper = shallow(<IpPoolsList {...props} />);
@@ -52,6 +54,20 @@ describe('IP Pools List Page', () => {
 
   it('does not render purchase action if showPurchaseCTA is false2', () => {
     wrapper.setProps({ ipPools: [{ name: 'Default', ips: []}], showPurchaseCTA: false });
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('renders request IP action if showPurchaseCTA is true and isManuallyBilled is true', () => {
+    wrapper.setProps({ isManuallyBilled: true });
+    expect(wrapper.prop('secondaryActions')).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({ content: 'Request IPs' })
+      ])
+    );
+  });
+
+  it('does not render purchase action if isAdmin is false', () => {
+    wrapper.setProps({ ipPools: [{ name: 'Default', ips: []}], isAdmin: false });
     expect(wrapper).toMatchSnapshot();
   });
 

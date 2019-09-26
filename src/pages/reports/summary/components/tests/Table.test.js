@@ -1,14 +1,13 @@
 import React from 'react';
 import { Table } from '../Table';
-import { shallow, mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import _ from 'lodash';
 
-describe('Summary Table ', () => {
+describe('Summary Table', () => {
 
   let wrapper;
 
   const props = {
-    addFilters: jest.fn(),
     _getTableData: jest.fn(),
     refresh: jest.fn(),
     metrics: [
@@ -48,20 +47,11 @@ describe('Summary Table ', () => {
     expect(wrapper.find('Loading')).toHaveLength(1);
   });
 
-  it('should render row data & handle click', () => {
-    const snaps = [];
+  it('should render group by row data', () => {
     wrapper.setProps({ groupBy: 'subaccount' });
     const func = wrapper.instance().getRowData();
     const results = _.flatten(data.map(func));
-
-    _.each(results, (item, i) => {
-      snaps.push(mount(item));
-    });
-
-    expect(snaps).toMatchSnapshot();
-
-    snaps[0].find('UnstyledLink').simulate('click');
-    expect(props.addFilters).toHaveBeenCalledWith([{ id: 0, type: 'Subaccount', value: 'Master Account (ID 0)' }]);
+    expect(results).toMatchSnapshot();
   });
 
   it('should render with aggregate data', () => {

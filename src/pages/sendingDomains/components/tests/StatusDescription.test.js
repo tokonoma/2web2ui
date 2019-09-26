@@ -42,4 +42,3 @@ describe('StatusDescription component', () => {
     });
   });
 });
-

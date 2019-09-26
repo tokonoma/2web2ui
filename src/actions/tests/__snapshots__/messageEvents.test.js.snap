@@ -62,6 +62,22 @@ Object {
 }
 `;
 
+exports[`Action Creator: MessageEvents getMessageEventsCSV should dispatch get action with from/to 1`] = `
+Object {
+  "meta": Object {
+    "method": "GET",
+    "params": Object {
+      "from": "2018-02-01T10:10",
+      "per_page": 5000,
+      "to": "2018-02-01T10:10",
+    },
+    "showErrorAlert": false,
+    "url": "/v1/events/message",
+  },
+  "type": "GET_MESSAGE_EVENTS_CSV",
+}
+`;
+
 exports[`Action Creator: MessageEvents getMessageHistory makes api call with defaults 1`] = `
 Object {
   "meta": Object {
@@ -74,6 +90,21 @@ Object {
     "url": "/v1/events/message",
   },
   "type": "GET_MESSAGE_HISTORY",
+}
+`;
+
+exports[`Action Creator: MessageEvents getSelectedEvent makes api call with defaults 1`] = `
+Object {
+  "meta": Object {
+    "method": "GET",
+    "params": Object {
+      "event_ids": "abc123",
+      "from": "2018-02-01T10:10",
+      "to": "2018-02-01T10:10",
+    },
+    "url": "/v1/events/message",
+  },
+  "type": "GET_SELECTED_EVENT",
 }
 `;
 

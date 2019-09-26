@@ -1,63 +1,63 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Field, reduxForm } from 'redux-form';
-import { Button, Grid, Panel } from '@sparkpost/matchbox';
-import { DownloadLink } from 'src/components';
-import { required, maxFileSize } from 'src/helpers/validation';
-import FileFieldWrapper from 'src/components/reduxFormWrappers/FileFieldWrapper';
-import { uploadList } from 'src/actions/recipientValidation';
+import { Field, reduxForm, formValueSelector } from 'redux-form';
+import { Panel } from '@sparkpost/matchbox';
+import { maxFileSize, fileExtension } from 'src/helpers/validation';
+import FileUploadWrapper from './FileUploadWrapper';
+import { uploadList, resetUploadError } from 'src/actions/recipientValidation';
 import { showAlert } from 'src/actions/globalAlert';
 import config from 'src/config';
-import exampleRecipientValidationListPath from './example-recipient-validation-list.csv';
+import { withRouter } from 'react-router-dom';
 
 const formName = 'recipientValidationListForm';
 
 export class ListForm extends Component {
-
   handleUpload = (fields) => {
-    const { uploadList, showAlert, reset } = this.props;
+    const { history, reset, showAlert, uploadList } = this.props;
     const form_data = new FormData();
 
     form_data.append('myupload', fields.csv);
-    return uploadList(form_data).then(() => {
+
+    // Always reset file on submit
+    reset(formName);
+
+    uploadList(form_data).then(({ list_id }) => {
       showAlert({ type: 'success', message: 'Recipients Uploaded' });
-      reset(formName);
+      history.push(`/recipient-validation/list/${list_id}`);
     });
   }
 
+  componentDidUpdate(prevProps) {
+    const { file, handleSubmit, listError, resetUploadError } = this.props;
+
+    // Redux form validation does not run in the same render cycle after Field's onChange,
+    // thus checking props.valid would not work here *shakes fist*
+    const valid = !maxFileSize(config.maxRecipVerifUploadSizeBytes)(file) && !fileExtension('csv', 'txt')(file);
+
+    if (file && valid && !listError) {
+      handleSubmit(this.handleUpload)();
+    }
+
+    // Resets API error post-submit for the subsequent submit after an error
+    if (listError) {
+      resetUploadError();
+    }
+  }
+
   render() {
-    const { pristine, valid, submitting, handleSubmit } = this.props;
-    const submitDisabled = pristine || !valid || submitting;
-
-    const headerContent = 'Validate a list of your recipients by separating out rejected or undeliverable email addresses.';
-    const fileTypes = ['.txt','.csv'];
-    const uploadValidators = [required, maxFileSize(config.maxRecipVerifUploadSizeBytes)];
-    const buttonContent = (submitting) ? 'Uploading...' : 'Validate Email Addresses';
-
     return (
       <Panel.Section>
-        <Grid>
-          <Grid.Column xs={12} md={8}>
-            <form onSubmit={handleSubmit(this.handleUpload)}>
-              <p>{headerContent}</p>
-              <Field
-                component={FileFieldWrapper}
-                disabled={submitting}
-                fileTypes={fileTypes}
-                helpText={<span>You can download an <DownloadLink href={exampleRecipientValidationListPath}>example file here</DownloadLink> to use when formatting your list of addresses for upload.</span>}
-                name='csv'
-                validate={uploadValidators}
-                labelHidden
-                placeholder='Drag a file here, or click to browse'
-                style={{
-                  paddingTop: '3rem',
-                  paddingBottom: '3rem'
-                }}
-              />
-              <Button primary submit disabled={submitDisabled}>{buttonContent}</Button>
-            </form>
-          </Grid.Column>
-        </Grid>
+        <form>
+          <Field
+            component={FileUploadWrapper}
+            name='csv'
+            validate={[
+              maxFileSize(config.maxRecipVerifUploadSizeBytes),
+              fileExtension('csv', 'txt')
+            ]}
+            uploading={this.props.uploading}
+          />
+        </form>
       </Panel.Section>
     );
   }
@@ -65,4 +65,14 @@ export class ListForm extends Component {
 
 const WrappedForm = reduxForm({ form: formName })(ListForm);
 
-export default connect(null, { uploadList, showAlert })(WrappedForm);
+const mapStateToProps = (state) => {
+  const selector = formValueSelector(formName);
+
+  return {
+    file: selector(state, 'csv'),
+    listError: state.recipientValidation.listError,
+    uploading: state.recipientValidation.uploadLoading
+  };
+};
+
+export default withRouter(connect(mapStateToProps, { uploadList, showAlert, resetUploadError })(WrappedForm));

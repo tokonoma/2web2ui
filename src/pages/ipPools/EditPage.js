@@ -1,20 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { withRouter } from 'react-router-dom';
 
-import { Page } from '@sparkpost/matchbox';
-import { Loading, DeleteModal, ApiErrorBanner } from 'src/components';
+import { Page, Panel, UnstyledLink } from '@sparkpost/matchbox';
+import { ApiErrorBanner, DeleteModal, Loading } from 'src/components';
 import PoolForm from './components/PoolForm';
+import IpList from './components/IpList';
 
 import { showAlert } from 'src/actions/globalAlert';
-import { listPools, getPool, updatePool, deletePool } from 'src/actions/ipPools';
-import { updateSendingIp } from 'src/actions/sendingIps';
-import { shouldShowIpPurchaseCTA } from 'src/selectors/ipPools';
-
-import { decodeIp } from 'src/helpers/ipNames';
+import { deletePool, listPools, updatePool } from 'src/actions/ipPools';
+import { selectCurrentPool, selectIpsForCurrentPool, shouldShowIpPurchaseCTA } from 'src/selectors/ipPools';
 import isDefaultPool from './helpers/defaultPool';
-
+import { not } from 'src/helpers/conditions';
+import { selectCondition } from 'src/selectors/accessConditionState';
+import { isSelfServeBilling } from 'src/helpers/conditions/account';
+import SupportTicketLink from 'src/components/supportTicketLink/SupportTicketLink';
+import { openSupportTicketForm } from 'src/actions/support';
 
 const breadcrumbAction = {
   content: 'IP Pools',
@@ -32,38 +33,30 @@ export class EditPage extends Component {
   };
 
   onUpdatePool = (values) => {
-    const { updateSendingIp, updatePool, showAlert, history, match: { params: { id }}} = this.props;
-
-    /**
-     * Pick out the IPs whose pool assignment is not the current pool ergo
-     * have been reassigned by the user.
-     */
-    const changedIpKeys = Object.keys(values).filter((key) =>
-      key !== 'name' && key !== 'signing_domain' && values[key] !== id);
+    const { updatePool, showAlert, history, pool: { id }} = this.props;
 
     // if signing_domain is not set, then we want to clear it out to empty string.
     values.signing_domain = values.signing_domain || '';
 
-    // Update each changed sending IP
-    return Promise.all(changedIpKeys.map((ipKey) =>
-      updateSendingIp(decodeIp(ipKey), values[ipKey])))
-      .then(() => {
-        // Update the pool itself
-        if (!isDefaultPool(id)) {
-          return updatePool(id, values);
-        }
-      })
+    if (isDefaultPool(id)) {
+      const message = 'You can not edit default pool.';
+      showAlert({ type: 'error', message });
+
+      return Promise.reject(new Error(message));
+    }
+
+    return updatePool(id, values)
       .then((res) => {
         showAlert({
           type: 'success',
           message: `Updated IP pool ${id}.`
         });
-        history.push('/account/ip-pools');
+        history.replace(`/account/ip-pools/edit/${id}`);
       });
   };
 
   onDeletePool = () => {
-    const { deletePool, showAlert, history, match: { params: { id }}} = this.props;
+    const { deletePool, showAlert, history, pool: { id }} = this.props;
 
     return deletePool(id).then(() => {
       showAlert({
@@ -76,7 +69,6 @@ export class EditPage extends Component {
 
   loadDependentData = () => {
     this.props.listPools();
-    this.props.getPool(this.props.match.params.id);
   };
 
   componentDidMount() {
@@ -84,12 +76,11 @@ export class EditPage extends Component {
   }
 
   renderError() {
-    const { listError, getError } = this.props;
-    const msg = listError ? listError.message : getError.message;
+    const { listError } = this.props;
     return <ApiErrorBanner
-      errorDetails={msg}
+      errorDetails={listError.message}
       message="Sorry, we seem to have had some trouble loading your IP pool."
-      reload={this.loadDependantData}
+      reload={this.loadDependentData}
     />;
   }
 
@@ -103,8 +94,35 @@ export class EditPage extends Component {
     return <PoolForm onSubmit={this.onUpdatePool} isNew={false} />;
   }
 
+  renderIps() {
+    const { isNew, ips, pool, showPurchaseCTA, isManuallyBilled } = this.props;
+
+    if (isNew) {
+      return null;
+    }
+
+    const purchaseCTA = showPurchaseCTA
+      ? (isManuallyBilled
+        ? <>, or by purchasing new IPs. Please <SupportTicketLink issueId='request_new_ip'>reach out to
+        the support team</SupportTicketLink> for assistance adding a new IP</>
+        : <>, or by <UnstyledLink to="/account/billing" component={Link}>purchasing new
+        IPs</UnstyledLink></>
+      ) : null;
+
+    return (<Panel title='Sending IPs'>
+      <Panel.Section>
+        <p>
+          {!ips && <span>There are no IPs in this pool. </span>}
+          Add dedicated IPs to this pool by moving them from their current pool{purchaseCTA}.
+          {ips && <span> Click on existing Sending IP to modify.</span>}
+        </p>
+      </Panel.Section>
+      {ips && <IpList ips={ips} pool={pool}/>}
+    </Panel>);
+  }
+
   render() {
-    const { loading, pool, showPurchaseCTA } = this.props;
+    const { loading, pool, showPurchaseCTA, isManuallyBilled, openSupportTicketForm } = this.props;
 
     if (loading) {
       return <Loading />;
@@ -118,16 +136,21 @@ export class EditPage extends Component {
           [{
             content: 'Delete',
             onClick: this.toggleDelete,
-            visible: !isDefaultPool(this.props.match.params.id)
+            visible: !isDefaultPool(pool.id)
           },
           { content: 'Purchase IPs',
             to: '/account/billing',
             component: Link,
-            visible: showPurchaseCTA
+            visible: showPurchaseCTA && !isManuallyBilled
+          },
+          { content: 'Request IPs',
+            onClick: () => openSupportTicketForm({ issueId: 'request_new_ip' }),
+            visible: showPurchaseCTA && isManuallyBilled
           }]
         }>
 
         {this.renderForm()}
+        {this.renderIps()}
 
         <DeleteModal
           open={this.state.showDelete}
@@ -141,24 +164,18 @@ export class EditPage extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  const { getLoading, getError, listLoading, listError, pool } = state.ipPools;
+const mapStateToProps = (state, props) => {
+  const { listLoading, listError } = state.ipPools;
 
   return {
-    loading: getLoading || listLoading,
-    error: listError || getError,
-    pool,
+    loading: listLoading,
+    error: listError,
+    pool: selectCurrentPool(state, props),
+    ips: selectIpsForCurrentPool(state, props),
     listError,
-    getError,
+    isManuallyBilled: selectCondition(not(isSelfServeBilling))(state),
     showPurchaseCTA: shouldShowIpPurchaseCTA(state)
   };
 };
 
-export default withRouter(connect(mapStateToProps, {
-  updatePool,
-  deletePool,
-  getPool,
-  listPools,
-  updateSendingIp,
-  showAlert
-})(EditPage));
+export default connect(mapStateToProps, { updatePool, deletePool, listPools, showAlert, openSupportTicketForm })(EditPage);

@@ -82,7 +82,12 @@ Array [
   Object {
     "meta": Object {
       "data": Object {
-        "content": Object {},
+        "content": Object {
+          "amp_html": undefined,
+          "html": undefined,
+          "reply_to": undefined,
+          "text": undefined,
+        },
         "form": "data",
         "id": "id",
         "shared_with_subaccounts": false,
@@ -194,6 +199,9 @@ Array [
 
 exports[`Action Creator: Templates should dispatch a publish action 1`] = `
 Array [
+  Object {
+    "type": "PUBLISH_ACTION_PENDING",
+  },
   [Function],
   [Function],
   Object {
@@ -206,6 +214,9 @@ Array [
       "url": "/v1/templates/id",
     },
     "type": "PUBLISH_TEMPLATE",
+  },
+  Object {
+    "type": "PUBLISH_ACTION_SUCCESS",
   },
 ]
 `;
@@ -223,8 +234,16 @@ Array [
   [Function],
   Object {
     "meta": Object {
+      "context": Object {
+        "id": "id",
+      },
       "data": Object {
-        "content": Object {},
+        "content": Object {
+          "amp_html": undefined,
+          "html": undefined,
+          "reply_to": undefined,
+          "text": undefined,
+        },
         "form": "data",
       },
       "headers": Object {},

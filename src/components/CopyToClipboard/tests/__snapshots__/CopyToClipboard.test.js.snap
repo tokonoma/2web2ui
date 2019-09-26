@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CopyToClipboard Component renders with default props 1`] = `
+<Tooltip
+  bottom={true}
+  content="Copy to Clipboard"
+  dark={true}
+  forcePosition={false}
+  horizontalOffset="0px"
+  preferredDirection={
+    Object {
+      "bottom": true,
+      "left": false,
+      "right": true,
+      "top": false,
+    }
+  }
+  right={true}
+>
+  <Button
+    name="copy-field-button"
+    onClick={[Function]}
+    size="default"
+  >
+    <ContentCopy
+      size={14}
+    />
+     
+    Copy
+  </Button>
+</Tooltip>
+`;

@@ -3,13 +3,17 @@
 exports[`Users Selectors returns enriched and sorted list 1`] = `
 Array [
   Object {
+    "access": "access",
     "isCurrentUser": false,
     "name": "Ape",
+    "roleLabel": "access",
     "username": "ape",
   },
   Object {
+    "access": "templates",
     "isCurrentUser": true,
     "name": "Zebra",
+    "roleLabel": "Templates",
     "username": "zebra",
   },
 ]
@@ -19,6 +23,7 @@ exports[`Users Selectors returns if user not found 1`] = `undefined`;
 
 exports[`Users Selectors returns user from user list 1`] = `
 Object {
+  "access": "access",
   "isCurrentUser": false,
   "name": "Ape",
   "username": "ape",

@@ -1,5 +1,74 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Signals Actions .getComplaintsByCohort by default 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "headers": Object {},
+      "method": "GET",
+      "params": Object {
+        "filter": undefined,
+        "from": "2018-01-12",
+        "limit": undefined,
+        "offset": undefined,
+        "order": undefined,
+        "order_by": undefined,
+        "to": "2018-01-13",
+      },
+      "showErrorAlert": false,
+      "url": "/v1/signals/fbl-cohort/",
+    },
+    "type": "GET_COMPLAINTS_BY_COHORT",
+  },
+]
+`;
+
+exports[`Signals Actions .getCurrentHealthScore by default 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "headers": Object {},
+      "method": "GET",
+      "params": Object {
+        "filter": undefined,
+        "from": "2018-01-12",
+        "limit": undefined,
+        "offset": undefined,
+        "order": undefined,
+        "order_by": undefined,
+        "to": "2018-01-13",
+      },
+      "showErrorAlert": false,
+      "url": "/v1/signals/health-score/",
+    },
+    "type": "GET_CURRENT_HEALTH_SCORE",
+  },
+]
+`;
+
+exports[`Signals Actions .getEngagementRateByCohort by default 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "headers": Object {},
+      "method": "GET",
+      "params": Object {
+        "filter": undefined,
+        "from": "2018-01-12",
+        "limit": undefined,
+        "offset": undefined,
+        "order": undefined,
+        "order_by": undefined,
+        "to": "2018-01-13",
+      },
+      "showErrorAlert": false,
+      "url": "/v1/signals/eng-cohort/",
+    },
+    "type": "GET_ENGAGEMENT_RATE_BY_COHORT",
+  },
+]
+`;
+
 exports[`Signals Actions .getEngagementRecency by default 1`] = `
 Array [
   Object {
@@ -42,6 +111,70 @@ Array [
       "url": "/v1/signals/health-score/",
     },
     "type": "GET_HEALTH_SCORE",
+  },
+]
+`;
+
+exports[`Signals Actions .getHealthScore with a mailbox provider filter 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "headers": Object {},
+      "method": "GET",
+      "params": Object {
+        "filter": "google_ap",
+        "from": "2018-01-12",
+        "limit": undefined,
+        "offset": undefined,
+        "order": undefined,
+        "order_by": undefined,
+        "to": "2018-01-13",
+      },
+      "showErrorAlert": false,
+      "url": "/v1/signals/health-score/mb_provider",
+    },
+    "type": "GET_HEALTH_SCORE",
+  },
+]
+`;
+
+exports[`Signals Actions .getHealthScore with an order by subaccount 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "headers": Object {},
+      "method": "GET",
+      "params": Object {
+        "filter": undefined,
+        "from": "2018-01-12",
+        "limit": undefined,
+        "offset": undefined,
+        "order": "asc",
+        "order_by": "sid",
+        "to": "2018-01-13",
+      },
+      "showErrorAlert": false,
+      "url": "/v1/signals/health-score/",
+    },
+    "type": "GET_HEALTH_SCORE",
+  },
+]
+`;
+
+exports[`Signals Actions .getInjections by default 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "headers": Object {},
+      "method": "GET",
+      "params": Object {
+        "from": "2018-01-12",
+        "to": "2018-01-13",
+      },
+      "showErrorAlert": false,
+      "url": "/v1/signals/injections",
+    },
+    "type": "GET_INJECTIONS",
   },
 ]
 `;
@@ -276,6 +409,29 @@ Array [
       "url": "/v1/signals/spam-hits/",
     },
     "type": "GET_SPAM_HITS",
+  },
+]
+`;
+
+exports[`Signals Actions .getUnsubscribeRateByCohort by default 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "headers": Object {},
+      "method": "GET",
+      "params": Object {
+        "filter": undefined,
+        "from": "2018-01-12",
+        "limit": undefined,
+        "offset": undefined,
+        "order": undefined,
+        "order_by": undefined,
+        "to": "2018-01-13",
+      },
+      "showErrorAlert": false,
+      "url": "/v1/signals/unsub-cohort/",
+    },
+    "type": "GET_UNSUBSCRIBE_RATE_BY_COHORT",
   },
 ]
 `;

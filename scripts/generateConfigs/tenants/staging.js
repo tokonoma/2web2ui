@@ -5,9 +5,6 @@
  *     // the unique tenant id
  *     myTenant: {
  *
- *       // an alternative identifier for tenantId
- *       alias: 'meTenant',
- *
  *       // host to "next" deployment
  *       nextHost: 'next.tst.sparkpost.com'
  *
@@ -37,7 +34,8 @@ const stagingTenants = {
   stagingmtas2: {
     apiBase: 'https://api-staging-mtas2.sparkpost.com/api',
     bounceDomains: {
-      cnameValue: 'staging-mtas2.mail.e.sparkpost.com'
+      cnameValue: 'staging-mtas2.mail.e.sparkpost.com',
+      mxValue: 'staging-mtas2.mx.e.sparkpost.com'
     },
     featureFlags: {
       allow_anyone_at_verification: true

@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Recipient Validation Disabled Page should render 1`] = `
+<Page
+  empty={Object {}}
+  title="Recipient Validation"
+>
+  <div
+    className="Description"
+  >
+    <p>
+      Protect your reputation by guarding against bounces, errors, and even fraud. Recipient Validation is an easy, efficient way to verify that addresses are valid before you send. We run emails through a series of checks to catch many common problems, including syntax errors and non-existent mailboxes.
+    </p>
+    <p>
+      We have a monthly pay-as-you-go plan using tiered pricing. The more you validate, the less you pay per message.
+    </p>
+  </div>
+  <Panel
+    className="Table"
+  >
+    <RecipientValidationPriceTable
+      col1Props={
+        Object {
+          "width": "40%",
+        }
+      }
+    />
+  </Panel>
+  <Button
+    onClick={[Function]}
+    primary={true}
+    size="default"
+  >
+    Enable Recipient Validation
+  </Button>
+</Page>
+`;
+
+exports[`Recipient Validation Disabled Page should render Loading page when updating account 1`] = `<Loading />`;

@@ -1,0 +1,56 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Signals Spam Trap Dashboard Dashboard renders page 1`] = `
+<SignalsPage
+  title={
+    <React.Fragment>
+      Spam Trap Monitoring
+      <InfoTooltip
+        content="
+  The share over time of your total email that has been sent to known spam traps. An
+  excessive rate of spam trap hits is an indicator of poor list procurement and hygiene practices.
+"
+      />
+    </React.Fragment>
+  }
+>
+  <Panel
+    sectioned={true}
+  >
+    <Grid>
+      <Grid.Column
+        xs={4}
+      >
+        <Connect(DateFilter) />
+      </Grid.Column>
+      <Connect(Connect(SubaccountFilter)) />
+      <Connect(FacetFilter)
+        facets={
+          Array [
+            Object {
+              "key": "campaign_id",
+              "label": "Campaign",
+            },
+            Object {
+              "key": "ip_pool",
+              "label": "IP Pool",
+            },
+            Object {
+              "key": "sending_domain",
+              "label": "Sending Domain",
+            },
+          ]
+        }
+      />
+    </Grid>
+  </Panel>
+  <Connect(withRouter(Connect(SpamTrapOverview)))
+    defaults={
+      Object {
+        "perPage": 25,
+      }
+    }
+    hideTitle={true}
+  />
+</SignalsPage>
+`;

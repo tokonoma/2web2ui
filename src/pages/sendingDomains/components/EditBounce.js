@@ -2,34 +2,22 @@ import React, { Component, Fragment } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { verifyCname, update } from 'src/actions/sendingDomains';
+import { update } from 'src/actions/sendingDomains';
 
-import { VerifiedIcon, ErrorIcon } from './Icons';
 import { Panel, Banner, Tooltip } from '@sparkpost/matchbox';
 import { Help } from '@sparkpost/matchbox-icons';
 import ToggleBlock from 'src/components/toggleBlock/ToggleBlock';
-import { LabelledValue } from 'src/components';
-import { showAlert } from 'src/actions/globalAlert';
 import { SendingDomainSection } from './SendingDomainSection';
 import { resolveReadyFor } from 'src/helpers/domains';
-import config from 'src/config';
+import BounceSetupInstructionContainer from './BounceSetupInstruction.container';
+
+import {
+  hasAutoVerifyEnabledSelector,
+  selectAllowDefaultBounceDomains,
+  selectAllSubaccountDefaultBounceDomains
+} from 'src/selectors/account';
 
 export class EditBounce extends Component {
-
-  verifyDomain = () => {
-    const { id, verifyCname, showAlert, domain: { subaccount_id: subaccount }} = this.props;
-
-    return verifyCname({ id, subaccount })
-      .then((results) => {
-        const readyFor = resolveReadyFor(results);
-        if (readyFor.bounce) {
-          showAlert({ type: 'success', message: `You have successfully verified CNAME record of ${id}` });
-        } else {
-          showAlert({ type: 'error', message: `Unable to verify CNAME record of ${id}. ${results.dns.cname_error}` });
-        }
-      });
-  }
-
   toggleDefaultBounce = () => {
     const { id, update, domain, reset } = this.props;
 
@@ -59,53 +47,27 @@ export class EditBounce extends Component {
     );
   }
 
-  getVerifyAction() {
-    const { verifyCnameLoading, domain } = this.props;
-    const { bounce } = resolveReadyFor(domain.status);
-
-    const verifyText = bounce ? 'Re-verify CNAME Record' : 'Verify CNAME Record';
-    const buttonText = verifyCnameLoading ? 'Verifying...' : verifyText;
-
-    return {
-      content: buttonText,
-      onClick: this.verifyDomain,
-      disabled: verifyCnameLoading,
-      color: 'orange'
-    };
-  }
-
-  renderDnsSettings() {
-    const { id, domain } = this.props;
-    const { bounce } = resolveReadyFor(domain.status);
-    const titleIcon = bounce ? <VerifiedIcon/> : <ErrorIcon/>;
-
-    return (
-      <Panel title={<Fragment>{titleIcon} <span>DNS Settings</span></Fragment>} sectioned
-        actions={[this.getVerifyAction()]} >
-        <LabelledValue label='Type'><p>CNAME</p></LabelledValue>
-        <LabelledValue label='Hostname'><p>{id}</p></LabelledValue>
-        <LabelledValue label='Value'><p>{config.bounceDomains.cnameValue}</p></LabelledValue>
-      </Panel>
-    );
-  }
-
   renderNotReady() {
+    const { domain } = this.props;
+
     return (
       <Fragment>
         <SendingDomainSection.Left>
-          <p><strong>To use this domain for bounces</strong>, add this CNAME record to your DNS settings.</p>
-          <p><em>Note: Bounce domains must be verified via DNS.</em></p>
+          <p>
+            To use this domain for bounces, connect your domain by setting the required DNS record(s)
+            and verifying the connection.
+          </p>
         </SendingDomainSection.Left>
         <SendingDomainSection.Right>
           {this.renderRootDomainWarning()}
-          {this.renderDnsSettings()}
+          <BounceSetupInstructionContainer domain={domain} />
         </SendingDomainSection.Right>
       </Fragment>
     );
   }
 
   renderReady() {
-    const { updateLoading, id, domain } = this.props;
+    const { domain, id, updateLoading, allowDefault, allowSubaccountDefault } = this.props;
     const readyFor = resolveReadyFor(domain.status);
 
     // Allow default bounce toggle if:
@@ -113,8 +75,8 @@ export class EditBounce extends Component {
     // Domain is verified
     // Domain is ready for bounce
     // Bounce domain by subaccount config flag is true
-    const showDefaultBounceSubaccount = (!domain.subaccount_id || domain.subaccount_id && config.bounceDomains.allowSubaccountDefault);
-    const showDefaultBounceToggle = config.bounceDomains.allowDefault && readyFor.sending && readyFor.bounce && showDefaultBounceSubaccount;
+    const showDefaultBounceSubaccount = (!domain.subaccount_id || domain.subaccount_id && allowSubaccountDefault);
+    const showDefaultBounceToggle = allowDefault && readyFor.sending && readyFor.bounce && showDefaultBounceSubaccount;
 
     const tooltip = (
       <Tooltip dark content={`When this is set to "ON", all future transmissions ${domain.subaccount_id ? 'for this subaccount ' : ''}will use ${id} as their bounce domain (unless otherwise specified).`}>
@@ -128,7 +90,7 @@ export class EditBounce extends Component {
         <SendingDomainSection.Left/>
         <SendingDomainSection.Right>
           {this.renderRootDomainWarning()}
-          {this.renderDnsSettings()}
+          <BounceSetupInstructionContainer domain={domain} />
           {showDefaultBounceToggle &&
               <Panel sectioned>
                 <Field
@@ -164,12 +126,14 @@ const formOptions = {
   enableReinitialize: true // required to update initial values from redux state
 };
 
-const mapStateToProps = ({ sendingDomains }, { domain }) => ({
-  updateLoading: sendingDomains.updateLoading,
-  verifyCnameLoading: sendingDomains.verifyCnameLoading,
+const mapStateToProps = (state, { domain }) => ({
+  hasAutoVerifyEnabled: hasAutoVerifyEnabledSelector(state),
+  allowDefault: selectAllowDefaultBounceDomains(state),
+  allowSubaccountDefault: selectAllSubaccountDefaultBounceDomains(state),
+  updateLoading: state.sendingDomains.updateLoading,
   initialValues: {
     ...domain
   }
 });
 
-export default connect(mapStateToProps, { verifyCname, update, showAlert })(reduxForm(formOptions)(EditBounce));
+export default connect(mapStateToProps, { update })(reduxForm(formOptions)(EditBounce));

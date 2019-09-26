@@ -12,6 +12,17 @@ exports[`EngagementRecencyOverview current column component renders current rate
 />
 `;
 
+exports[`EngagementRecencyOverview does not render title 1`] = `
+<div
+  className="Controls"
+>
+  <Calculation
+    initialSelected="relative"
+    onChange={[Function]}
+  />
+</div>
+`;
+
 exports[`EngagementRecencyOverview handles calculation change 1`] = `
 <Column
   align="right"
@@ -23,32 +34,12 @@ exports[`EngagementRecencyOverview handles calculation change 1`] = `
 />
 `;
 
-exports[`EngagementRecencyOverview history component renders absolute bar chart 1`] = `
-<BarChartDataCell
-  dataKey="engaged_recipients"
-  label="Recently Engaged"
-  max={200}
-  onClick={[Function]}
-  relative={false}
-/>
-`;
-
 exports[`EngagementRecencyOverview history component renders absolute sparkline 1`] = `
 <SparklineDataCell
   dataKey="engaged_recipients"
   label="Recently Engaged"
   onClick={[Function]}
   relative={false}
-/>
-`;
-
-exports[`EngagementRecencyOverview history component renders relative bar chart 1`] = `
-<BarChartDataCell
-  dataKey="relative_engaged_recipients"
-  label="Recently Engaged"
-  max={40}
-  onClick={[Function]}
-  relative={true}
 />
 `;
 
@@ -66,46 +57,11 @@ exports[`EngagementRecencyOverview renders overview panel with controls and tabl
   <div
     className="Header"
   >
-    <h5>
-      Engagement Recency Summary
-    </h5>
-    <div
-      className="Tooltip"
-    >
-      <Tooltip
-        bottom={true}
-        content="
-  The share over time of your email that has been sent to recipients who most recently
-  opened messages or clicked links during several defined time periods.
-"
-        dark={true}
-        forcePosition={false}
-        horizontalOffset="-1rem"
-        preferredDirection={
-          Object {
-            "bottom": true,
-            "left": false,
-            "right": true,
-            "top": false,
-          }
-        }
-        right={true}
-      >
-        <InfoOutline
-          className="TooltipIcon"
-          size={18}
-        />
-      </Tooltip>
-    </div>
     <div
       className="Controls"
     >
       <Calculation
         initialSelected="relative"
-        onChange={[Function]}
-      />
-      <ChartType
-        initialSelected="line"
         onChange={[Function]}
       />
     </div>

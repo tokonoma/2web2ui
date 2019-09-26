@@ -2,10 +2,20 @@ import React, { Component } from 'react';
 import Downshift from 'downshift';
 import { Field } from 'redux-form';
 import cx from 'classnames';
+import _ from 'lodash';
 
 import { ExpandMore } from '@sparkpost/matchbox-icons';
 import Plan from './Plan';
 import styles from './PlanPicker.module.scss';
+import { PLAN_TIERS } from 'src/constants';
+import ExternalLink from 'src/components/externalLink/ExternalLink';
+
+const TIERS = [
+  { key: 'default' },
+  { key: 'test', label: PLAN_TIERS.test },
+  { key: 'starter', label: PLAN_TIERS.starter },
+  { key: 'premier', label: PLAN_TIERS.premier }
+];
 
 /**
  * This component will register the a redux-form field named 'planpicker'
@@ -24,20 +34,32 @@ export class PlanPicker extends Component {
     selectedItem,
     highlightedIndex
   }) => {
-    const { plans, input, disabled, selectedPromo } = this.props;
+    const { plansByTier, input, disabled, selectedPromo } = this.props;
 
-    if (!selectedItem || !plans) {
+    if (!selectedItem || _.isEmpty(plansByTier)) {
       return null;
     }
 
-    const items = plans.map((item, index) => {
-      const classes = cx(
-        styles.DropdownPlan,
-        selectedItem.code === item.code && styles.selected,
-        highlightedIndex === index && styles.highlighted
-      );
+    let index = 0;
+    const items = [];
 
-      return <Plan key={index} className={classes} {...getItemProps({ item, index, plan: item })} />;
+    TIERS.forEach((tier) => {
+      const tierPlans = plansByTier[tier.key];
+      if (tierPlans) {
+        if (tier.label) {
+          items.push(<div key={`label_${tier.key}`} className={cx(styles.DropdownLabel)}>{tier.label}:</div>);
+        }
+
+        plansByTier[tier.key].forEach((item) => {
+          const classes = cx(
+            styles.DropdownPlan,
+            selectedItem.code === item.code && styles.selected,
+            highlightedIndex === index && styles.highlighted
+          );
+          items.push(<Plan key={index} className={classes} {...getItemProps({ item, index, plan: item })} />);
+          index++;
+        });
+      }
     });
 
     const listClasses = cx(styles.List, isOpen && styles.open);
@@ -56,28 +78,42 @@ export class PlanPicker extends Component {
 
     return (
       <div className={styles.PlanPicker}>
-        <div className={listClasses}>{items}</div>
-        <ExpandMore size={24} className={styles.Chevron} />
-        <input {...getInputProps()} ref={(input) => this.input = input} className={styles.Input} />
-        <Plan {...triggerProps} className={triggerClasses} planPriceProps={planPriceProps}/>
+        <div {...triggerProps} className={cx(styles.TriggerHeader)}>
+          <span>Select A Plan</span>
+          <ExpandMore size={24} className={styles.Chevron} />
+        </div>
+        <div className={cx(styles.PlanContainer)}>
+          {PLAN_TIERS[selectedItem.tier] && <div className={cx(styles.DropdownLabel)}>{PLAN_TIERS[selectedItem.tier]}</div>}
+          <Plan {...triggerProps} className={triggerClasses} planPriceProps={planPriceProps}/>
+          <input {...getInputProps()} ref={(input) => this.input = input} className={styles.Input} />
+          <div className={listClasses}>{items}</div>
+        </div>
+        <div className={cx(styles.TierPlansInfo)}>
+          <span>Interested in learning more about our Starter and Premier plans? Check out our </span>
+          <ExternalLink
+            to='https://www.sparkpost.com/docs/faq/difference-between-starter-and-premier'
+          >
+            Knowledge Base
+          </ExternalLink>
+        </div>
       </div>
     );
   };
 
 
   render() {
-    const { plans, input } = this.props;
+    const { plansByTier, input } = this.props;
     const { onChange, value } = input;
 
     return (
       <Downshift
         onChange={onChange}
         itemToString={(item) => (item ? item.code : '')} // prevents the downshift console warning
-        initialSelectedItem={(value && value.code) ? value : plans[0]} >
+        initialSelectedItem={(value && value.code) ? value : (plansByTier.default && plansByTier.default[0])} >
         {this.planFn}
       </Downshift>
     );
   }
 }
 
-export default ({ plans = [], ...rest }) => <Field component={PlanPicker} name='planpicker' plans={plans} {...rest} />;
+export default ({ plans = {}, ...rest }) => <Field component={PlanPicker} name='planpicker' plansByTier={plans} {...rest} />;

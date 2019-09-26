@@ -120,7 +120,7 @@ exports[`Support renders support contact panel 1`] = `
       className="SupportContainer"
     >
       <h6>
-        We are available Monday through Friday, 9am to 8pm Eastern time.
+        We are available Monday through Friday, 9am to 7pm Eastern time.
       </h6>
       <UnstyledLink
         to="tel:1-415-751-0928"

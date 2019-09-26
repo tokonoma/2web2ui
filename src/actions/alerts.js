@@ -5,7 +5,7 @@ export function listAlerts() {
     type: 'LIST_ALERTS',
     meta: {
       method: 'GET',
-      url: '/labs/alerts',
+      url: '/v1/alerts',
       showErrorAlert: false
     }
   });
@@ -16,7 +16,7 @@ export function createAlert({ data }) {
     type: 'CREATE_ALERT',
     meta: {
       method: 'POST',
-      url: '/labs/alerts',
+      url: '/v1/alerts',
       data
     }
   });
@@ -27,19 +27,20 @@ export function updateAlert({ data, id }) {
     type: 'UPDATE_ALERT',
     meta: {
       method: 'PUT',
-      url: `/labs/alerts/${id}`,
+      url: `/v1/alerts/${id}`,
       data
     }
   });
 }
 
-export function setEnabledStatus({ enabled, id }) {
+export function setMutedStatus({ muted, id }) {
   return sparkpostApiRequest({
-    type: 'SET_ALERT_ENABLED_STATUS',
+    type: 'SET_ALERT_MUTED_STATUS',
     meta: {
       method: 'PUT',
-      url: `/labs/alerts/${id}`,
-      data: { enabled }
+      url: `/v1/alerts/${id}`,
+      data: { muted },
+      id
     }
   });
 }
@@ -49,8 +50,19 @@ export function deleteAlert({ id }) {
     type: 'DELETE_ALERT',
     meta: {
       method: 'DELETE',
-      url: `/labs/alerts/${id}`,
+      url: `/v1/alerts/${id}`,
       id
+    }
+  });
+}
+
+export function getAlert({ id }) {
+  return sparkpostApiRequest({
+    type: 'GET_ALERT',
+    meta: {
+      method: 'GET',
+      url: `/v1/alerts/${id}`,
+      showErrorAlert: false
     }
   });
 }

@@ -1,0 +1,176 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Inbox Placement Reducer get specific inbox placement test content pending 1`] = `
+Object {
+  "currentTestDetails": Object {},
+  "getTestContentError": null,
+  "getTestContentPending": true,
+  "seeds": Array [],
+  "seedsPending": false,
+  "stopTestPending": false,
+  "tests": Array [],
+  "testsPending": true,
+}
+`;
+
+exports[`Inbox Placement Reducer get specific inbox placement test content pending fail 1`] = `
+Object {
+  "currentTestDetails": Object {},
+  "getTestContentError": Object {
+    "errors": Array [
+      Object {
+        "message": "Some error occurred",
+      },
+    ],
+  },
+  "getTestContentPending": false,
+  "seeds": Array [],
+  "seedsPending": false,
+  "stopTestPending": false,
+  "tests": Array [],
+  "testsPending": true,
+}
+`;
+
+exports[`Inbox Placement Reducer get specific inbox placement test content success 1`] = `
+Object {
+  "currentTestContent": Object {
+    "fakeData": true,
+  },
+  "currentTestDetails": Object {},
+  "getTestContentError": null,
+  "getTestContentPending": false,
+  "seeds": Array [],
+  "seedsPending": false,
+  "stopTestPending": false,
+  "tests": Array [],
+  "testsPending": true,
+}
+`;
+
+exports[`Inbox Placement Reducer get specific inbox placement test pending 1`] = `
+Object {
+  "currentTestDetails": Object {},
+  "getTestError": null,
+  "getTestPending": true,
+  "seeds": Array [],
+  "seedsPending": false,
+  "stopTestPending": false,
+  "tests": Array [],
+  "testsPending": true,
+}
+`;
+
+exports[`Inbox Placement Reducer get specific inbox placement test pending fail 1`] = `
+Object {
+  "currentTestDetails": Object {},
+  "getTestError": Object {
+    "errors": Array [
+      Object {
+        "message": "Some error occurred",
+      },
+    ],
+  },
+  "getTestPending": false,
+  "seeds": Array [],
+  "seedsPending": false,
+  "stopTestPending": false,
+  "tests": Array [],
+  "testsPending": true,
+}
+`;
+
+exports[`Inbox Placement Reducer get specific inbox placement test success 1`] = `
+Object {
+  "currentTestDetails": Object {
+    "fakeData": true,
+  },
+  "getTestError": null,
+  "getTestPending": false,
+  "seeds": Array [],
+  "seedsPending": false,
+  "stopTestPending": false,
+  "tests": Array [],
+  "testsPending": true,
+}
+`;
+
+exports[`Inbox Placement Reducer list seeds fail 1`] = `
+Object {
+  "currentTestDetails": Object {},
+  "seeds": Array [],
+  "seedsError": undefined,
+  "seedsPending": false,
+  "stopTestPending": false,
+  "tests": Array [],
+  "testsPending": true,
+}
+`;
+
+exports[`Inbox Placement Reducer list seeds pending 1`] = `
+Object {
+  "currentTestDetails": Object {},
+  "seeds": Array [],
+  "seedsError": null,
+  "seedsPending": true,
+  "stopTestPending": false,
+  "tests": Array [],
+  "testsPending": true,
+}
+`;
+
+exports[`Inbox Placement Reducer list seeds success 1`] = `
+Object {
+  "currentTestDetails": Object {},
+  "seeds": undefined,
+  "seedsError": null,
+  "seedsPending": false,
+  "stopTestPending": false,
+  "tests": Array [],
+  "testsPending": true,
+}
+`;
+
+exports[`Inbox Placement Reducer list tests fail 1`] = `
+Object {
+  "currentTestDetails": Object {},
+  "seeds": Array [],
+  "seedsPending": false,
+  "stopTestPending": false,
+  "tests": Array [],
+  "testsError": Object {
+    "errors": Array [
+      Object {
+        "message": "Some error occurred",
+      },
+    ],
+  },
+  "testsPending": false,
+}
+`;
+
+exports[`Inbox Placement Reducer list tests pending 1`] = `
+Object {
+  "currentTestDetails": Object {},
+  "seeds": Array [],
+  "seedsPending": false,
+  "stopTestPending": false,
+  "tests": Array [],
+  "testsError": null,
+  "testsPending": true,
+}
+`;
+
+exports[`Inbox Placement Reducer list tests success 1`] = `
+Object {
+  "currentTestDetails": Object {},
+  "seeds": Array [],
+  "seedsPending": false,
+  "stopTestPending": false,
+  "tests": Object {
+    "fakeData": true,
+  },
+  "testsError": null,
+  "testsPending": false,
+}
+`;

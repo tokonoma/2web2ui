@@ -2,7 +2,7 @@ import { createSelector } from 'reselect';
 import _ from 'lodash';
 import routes from 'src/config/routes';
 import navItems from 'src/config/navItems';
-import accountNavItems from 'src/config/accountNavItems';
+import accountNavItems from 'src/config/navItems/account';
 import selectAccessConditionState from './accessConditionState';
 import { all } from 'src/helpers/conditions/compose';
 
@@ -11,7 +11,7 @@ export const mapNavToRoutes = _.memoize((items) => {
   return items.map((item) => {
     item.route = routesByPath[item.to];
     if (item.children) {
-      item = { ...item, children: mapNavToRoutes(item.children) };
+      item.children = mapNavToRoutes(item.children);
     }
     return item;
   });

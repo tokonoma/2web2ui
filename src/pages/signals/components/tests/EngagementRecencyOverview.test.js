@@ -29,10 +29,12 @@ describe('EngagementRecencyOverview', () => {
       signalOptions={{
         facet: 'domain',
         facetSearchTerm: 'example.com',
+        from: '2015-01-01',
         relativeRange: '14days',
         subaccount: {
           id: 123
-        }
+        },
+        to: '2015-01-05'
       }}
       subaccounts={{
         123: { id: 123, name: 'Test Subaccount' }
@@ -75,6 +77,11 @@ describe('EngagementRecencyOverview', () => {
     expect(wrapper.find(SummaryTable).prop('loading')).toEqual(true);
   });
 
+  it('renders custom date range', () => {
+    const wrapper = subject({ signalOptions: { relativeRange: 'custom' }});
+    expect(wrapper.find('Column[dataKey="current_relative_engaged_recipients"]').prop('label')).toEqual('Ratio');
+  });
+
   it('handles calculation change', () => {
     const wrapper = subject();
     wrapper.find('Calculation').simulate('change', 'absolute');
@@ -82,16 +89,27 @@ describe('EngagementRecencyOverview', () => {
     expect(wrapper.find('Column[dataKey="current_engaged_recipients"]')).toMatchSnapshot();
   });
 
-  it('handles chart type change', () => {
-    const wrapper = subject();
-    wrapper.find('ChartType').simulate('change', 'bar');
-    expect(wrapper.state('chartType')).toEqual('bar');
+  it('renders custom date range with absolute calculation', () => {
+    const wrapper = subject({ signalOptions: { relativeRange: 'custom' }});
+    wrapper.find('Calculation').simulate('change', 'absolute');
+    expect(wrapper.find('Column[dataKey="current_engaged_recipients"]').prop('label')).toEqual('Count');
+  });
+
+  it('does not render title', () => {
+    const wrapper = subject({ hideTitle: true });
+    expect(wrapper.find('div[className="Header"]').children()).toMatchSnapshot();
   });
 
   it('requests reset on mount', () => {
     const resetSummaryTable = jest.fn();
     subject({ resetSummaryTable });
-    expect(resetSummaryTable).toHaveBeenCalledWith('Test', undefined);
+    expect(resetSummaryTable).toHaveBeenCalledWith('Test', {});
+  });
+
+  it('requests reset on mount with default options', () => {
+    const resetSummaryTable = jest.fn();
+    subject({ resetSummaryTable, defaults: { perPage: 25 }});
+    expect(resetSummaryTable).toHaveBeenCalledWith('Test', { perPage: 25 });
   });
 
   it('requests reset to default view for subaccount view on mount', () => {
@@ -105,7 +123,7 @@ describe('EngagementRecencyOverview', () => {
     const wrapper = subject();
     wrapper.setProps({ resetSummaryTable, signalOptions: {}});
 
-    expect(resetSummaryTable).toHaveBeenCalledWith('Test', undefined);
+    expect(resetSummaryTable).toHaveBeenCalledWith('Test', {});
   });
 
   it('requests data on summary table update', () => {
@@ -121,6 +139,7 @@ describe('EngagementRecencyOverview', () => {
     expect(getEngagementRecency).toHaveBeenCalledWith({
       facet: 'domain',
       filter: 'example.com',
+      from: '2015-01-01',
       limit: 10,
       offset: 10,
       order: undefined,
@@ -128,7 +147,8 @@ describe('EngagementRecencyOverview', () => {
       relativeRange: '14days',
       subaccount: {
         id: 123
-      }
+      },
+      to: '2015-01-05'
     });
   });
 
@@ -174,26 +194,16 @@ describe('EngagementRecencyOverview', () => {
   });
 
   describe('history component', () => {
-    const factory = ({ calculation, chartType, history, ...props }) => {
+    const factory = ({ calculation, history, ...props }) => {
       const wrapper = subject({
         history,
         metaData: { currentMax: 200, currentRelativeMax: 40 }
       });
-      wrapper.setState({ calculation, chartType });
+      wrapper.setState({ calculation });
       const Column = wrapper.find('Column[dataKey="history"]').prop('component');
 
       return shallow(<Column {...props} domain="example.com" />);
     };
-
-    it('renders absolute bar chart', () => {
-      const wrapper = factory({ chartType: 'bar' });
-      expect(wrapper).toMatchSnapshot();
-    });
-
-    it('renders relative bar chart', () => {
-      const wrapper = factory({ calculation: 'relative', chartType: 'bar' });
-      expect(wrapper).toMatchSnapshot();
-    });
 
     it('renders absolute sparkline', () => {
       const wrapper = factory({ chartType: 'line' });
@@ -211,7 +221,7 @@ describe('EngagementRecencyOverview', () => {
       wrapper.simulate('click', { date: '2018-01-13' });
 
       expect(historyPush).toHaveBeenCalledWith({
-        pathname: '/signals/engagement-recency/domain/example.com',
+        pathname: '/signals/engagement/cohorts/domain/example.com',
         search: '?subaccount=123',
         state: { date: '2018-01-13' }
       });
@@ -223,7 +233,7 @@ describe('EngagementRecencyOverview', () => {
       wrapper.simulate('click', { date: '2018-01-13' });
 
       expect(historyPush).toHaveBeenCalledWith({
-        pathname: '/signals/engagement-recency/domain/example.com',
+        pathname: '/signals/engagement/cohorts/domain/example.com',
         search: '?subaccount=123',
         state: { date: '2018-01-13' }
       });

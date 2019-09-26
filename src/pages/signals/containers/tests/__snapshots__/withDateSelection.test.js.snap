@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Signals Spam Trap Details Container should set date if provided one 1`] = `
+<Component
+  data={Array []}
+  handleDateHover={[Function]}
+  handleDateSelect={[Function]}
+  hoveredDate={null}
+  resetDateHover={[Function]}
+  selectedDate="2015-01-01"
+/>
+`;

@@ -22,7 +22,8 @@ describe('Selectors: signals', () => {
   beforeEach(() => {
     state = {
       signalOptions: {
-        relativeRange: '7days'
+        to: '2018-01-04',
+        from: '2017-12-27'
       },
       signals: {
         spamHits: {
@@ -38,13 +39,19 @@ describe('Selectors: signals', () => {
                   dt: '2018-01-01',
                   injections: 182400,
                   relative_trap_hits: 0.0025, // bad
-                  trap_hits: 456
+                  trap_hits: 456,
+                  trap_hits_parked: 300,
+                  trap_hits_recycled: 100,
+                  trap_hits_typo: 56
                 },
                 {
                   dt: '2018-01-03',
                   injections: 35000,
                   relative_trap_hits: 0.001, // good
-                  trap_hits: 35
+                  trap_hits: 35,
+                  trap_hits_parked: 20,
+                  trap_hits_recycled: 15,
+                  trap_hits_typo: 0
                 }
               ]
             },
@@ -58,13 +65,19 @@ describe('Selectors: signals', () => {
                   dt: '2018-01-01',
                   injections: 282400,
                   relative_trap_hits: 0.003, // bad
-                  trap_hits: 856
+                  trap_hits: 856,
+                  trap_hits_parked: 56,
+                  trap_hits_recycled: 600,
+                  trap_hits_typo: 200
                 },
                 {
                   dt: '2018-01-02',
                   injections: 50000,
                   relative_trap_hits: 0.001, // good
-                  trap_hits: 50
+                  trap_hits: 50,
+                  trap_hits_parked: 30,
+                  trap_hits_recycled: 15,
+                  trap_hits_typo: 5
                 }
               ]
             }
@@ -95,6 +108,90 @@ describe('Selectors: signals', () => {
                   c_uneng: 10,
                   c_14d: 10,
                   c_365d: 10,
+                  dt: '2018-01-03'
+                }
+              ]
+            }
+          ],
+          loading: false,
+          error: null
+        },
+        engagementRateByCohort: {
+          total_count: 10,
+          data: [
+            {
+              sending_domain: 'test.com',
+              history: [
+                {
+                  p_total_eng: 25,
+                  p_new_eng: 5,
+                  p_uneng_eng: 5,
+                  p_14d_eng: 5,
+                  p_365d_eng: 5,
+                  dt: '2018-01-01'
+                },
+                {
+                  p_total_eng: 50,
+                  p_new_eng: 10,
+                  p_uneng_eng: 10,
+                  p_14d_eng: 10,
+                  p_365d_eng: 10,
+                  dt: '2018-01-03'
+                }
+              ]
+            }
+          ],
+          loading: false,
+          error: null
+        },
+        unsubscribeRateByCohort: {
+          total_count: 10,
+          data: [
+            {
+              sending_domain: 'test.com',
+              history: [
+                {
+                  p_total_unsub: 25,
+                  p_new_unsub: 5,
+                  p_uneng_unsub: 5,
+                  p_14d_unsub: 5,
+                  p_365d_unsub: 5,
+                  dt: '2018-01-01'
+                },
+                {
+                  p_total_unsub: 50,
+                  p_new_unsub: 10,
+                  p_uneng_unsub: 10,
+                  p_14d_unsub: 10,
+                  p_365d_unsub: 10,
+                  dt: '2018-01-03'
+                }
+              ]
+            }
+          ],
+          loading: false,
+          error: null
+        },
+        complaintsByCohort: {
+          total_count: 10,
+          data: [
+            {
+              sending_domain: 'test.com',
+              history: [
+                {
+                  p_total_fbl: .25,
+                  p_new_fbl: .5,
+                  p_uneng_fbl: .5,
+                  p_14d_fbl: .5,
+                  p_365d_fbl: .5,
+                  dt: '2018-01-01'
+                },
+                {
+                  p_total_fbl: .5,
+                  p_new_fbl: .1,
+                  p_uneng_fbl: .1,
+                  p_14d_fbl: .1,
+                  p_365d_fbl: .1,
                   dt: '2018-01-03'
                 }
               ]
@@ -134,6 +231,10 @@ describe('Selectors: signals', () => {
                   ]
                 },
                 {
+                  dt: '2018-01-02',
+                  health_score: 0.8
+                },
+                {
                   dt: '2018-01-03',
                   health_score: 0.98, // good
                   weights: [],
@@ -141,6 +242,42 @@ describe('Selectors: signals', () => {
                 }
               ]
             }
+          ]
+        },
+        currentHealthScore: {
+          total_count: 10,
+          data: [
+            {
+              sid: -1,
+              current_weights: [],
+              current_health_score: 0.98,
+              sending_domain: 'test.com',
+              WoW: -0.07,
+              history: [
+                {
+                  dt: '2018-01-01',
+                  health_score: 0.74321, // bad
+                  weights: []
+                },
+                {
+                  dt: '2018-01-02',
+                  health_score: 0.8
+                },
+                {
+                  dt: '2018-01-03',
+                  health_score: 0.98, // good
+                  weights: [],
+                  WoW: null
+                }
+              ]
+            }
+          ]
+        },
+        injections: {
+          data: [
+            { injections: 100, spam_hits: 1, dt: '2018-01-01' },
+            { injections: 100, spam_hits: 1, dt: '2018-01-02' },
+            { injections: 100, spam_hits: 1, dt: '2018-01-03' }
           ]
         }
       }
@@ -176,6 +313,109 @@ describe('Selectors: signals', () => {
     it('should not be empty when loading', () => {
       const stateWhenLoading = { ...state, signals: { engagementRecency: { data: [], loading: true }}};
       expect(selectors.selectEngagementRecencyDetails(stateWhenLoading, props).details.empty).toBe(false);
+    });
+  });
+
+  describe('engagement rate by cohort details', () => {
+    it('should select details', () => {
+      expect(selectors.selectEngagementRateByCohortDetails(state, props)).toMatchSnapshot();
+    });
+
+    it('should be empty with only fill data when not loading', () => {
+      const stateWhenEmpty = {
+        ...state,
+        signals: {
+          engagementRateByCohort: { data: [], loading: false },
+          engagementRecency: { data: [], loading: false }
+        }
+      };
+      expect(selectors.selectEngagementRateByCohortDetails(stateWhenEmpty, props).details.empty).toBe(true);
+    });
+
+    it('should not be empty when loading', () => {
+      const stateWhenLoading = {
+        ...state,
+        signals: {
+          engagementRateByCohort: { data: [], loading: true },
+          engagementRecency: { data: [], loading: true }
+        }
+      };
+      expect(selectors.selectEngagementRateByCohortDetails(stateWhenLoading, props).details.empty).toBe(false);
+    });
+
+    it('should cutoff to date if to is within 3 days of today', () => {
+      const mockNow = new Date('2018-01-05');
+      jest.spyOn(Date, 'now').mockImplementation(() => mockNow);
+      const data = selectors.selectEngagementRateByCohortDetails(state, props).details.data;
+      expect(data[data.length - 1].date).toEqual('2018-01-01');
+    });
+  });
+
+  describe('unsubscribe rate by cohort details', () => {
+    it('should select details', () => {
+      expect(selectors.selectUnsubscribeRateByCohortDetails(state, props)).toMatchSnapshot();
+    });
+
+    it('should be empty with only fill data when not loading', () => {
+      const stateWhenEmpty = {
+        ...state,
+        signals: {
+          unsubscribeRateByCohort: { data: [], loading: false },
+          engagementRecency: { data: [], loading: false }
+        }};
+      expect(selectors.selectUnsubscribeRateByCohortDetails(stateWhenEmpty, props).details.empty).toBe(true);
+    });
+
+    it('should not be empty when loading', () => {
+      const stateWhenLoading = {
+        ...state,
+        signals: {
+          unsubscribeRateByCohort: { data: [], loading: true },
+          engagementRecency: { data: [], loading: true }
+        }};
+      expect(selectors.selectUnsubscribeRateByCohortDetails(stateWhenLoading, props).details.empty).toBe(false);
+    });
+
+    it('should cutoff to date if to is within 3 days of today', () => {
+      const mockNow = new Date('2018-01-05');
+      jest.spyOn(Date, 'now').mockImplementation(() => mockNow);
+      const data = selectors.selectUnsubscribeRateByCohortDetails(state, props).details.data;
+      expect(data[data.length - 1].date).toEqual('2018-01-01');
+    });
+  });
+
+  describe('complaints by cohort details', () => {
+    it('should select details', () => {
+      expect(selectors.selectComplaintsByCohortDetails(state, props)).toMatchSnapshot();
+    });
+
+    it('should be empty with only fill data when not loading', () => {
+      const stateWhenEmpty = {
+        ...state,
+        signals: {
+          complaintsByCohort: { data: [], loading: false },
+          engagementRecency: { data: [], loading: false }
+        }
+      };
+      expect(selectors.selectComplaintsByCohortDetails(stateWhenEmpty, props).details.empty).toBe(true);
+    });
+
+    it('should not be empty when loading', () => {
+      const stateWhenLoading = {
+        ...state,
+        signals: {
+          complaintsByCohort: { data: [], loading: true },
+          engagementRecency: { data: [], loading: true }
+        }
+      };
+      expect(selectors.selectComplaintsByCohortDetails(stateWhenLoading, props).details.empty).toBe(false);
+    });
+
+    it('should cutoff to date if to is within 3 days of today', () => {
+      const mockNow = new Date('2018-01-05');
+      jest.spyOn(Date, 'now').mockImplementation(() => mockNow);
+      const data = selectors.selectComplaintsByCohortDetails(state, props).details.data;
+      expect(data[data.length - 1].date).toEqual('2018-01-01');
     });
   });
 
@@ -291,6 +531,12 @@ describe('Selectors: signals', () => {
   describe('selectHealthScoreOverview', () => {
     it('returns all overview data', () => {
       expect(selectors.selectHealthScoreOverview(state, props)).toMatchSnapshot();
+    });
+  });
+
+  describe('selectCurrentHealthScoreDashboard', () => {
+    it('returns data', () => {
+      expect(selectors.selectCurrentHealthScoreDashboard(state, props)).toMatchSnapshot();
     });
   });
 });

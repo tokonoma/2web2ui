@@ -5,7 +5,7 @@
 [![Greenkeeper badge](https://badges.greenkeeper.io/SparkPost/2web2ui.svg)](https://greenkeeper.io/)
 
 
-A re-build of the current SparkPost web app using React and Redux.
+A re-build of the SparkPost web app using React and Redux.
 
 ## Installing dependencies
 
@@ -18,7 +18,7 @@ Then `npm install` to install deps.
 
 ## Local development
 
-`npm start` will start a dev server backed by api.sparkpost.dev with live reload on http://localhost:3100/
+`npm start` will start a dev server backed by api.sparkpost.test with live reload on http://localhost:3100/ and http://app.sparkpost.test
 
 ## Tests
 
@@ -77,43 +77,6 @@ Before jumping into writing code, here are a few conventions you should be aware
     * Note: use `flow` and not `compose` bc compose is backwards and weird. ;)
     * Other note: you can import directly from `lodash/fp` because of our babel transform. (e.g. `import { map, flow } from 'lodash/fp'`)
 
-### Testing Conventions
-
-* `tests/` folders are to be included as a sibling to the files they test, with all test files for that folder contained inside the `tests/` directory there.
-
-* We use jest for testing and, as much as possible, for all unit test mocking. See our [jest guide](./docs/jest.md) for how we accomplish this black magic.
-
-* Always prefer to use built in jest assertions over generic equality comparisons:
-    ```javascript
-    // do this
-    expect(fn).toHaveBeenCalledWith(arg1, arg2);
-
-    // not this
-    expect(fn.mock.calls[0]).toEqual([arg1, arg2]);
-    ```
-
-* We use *a lot* of snapshot testing. It works great for anything serializable. We first thought we would keep these tests separate in their own files but that turned out to be a silly idea, Jason. Now we just incorporate them into any test where they make sense, so you'll see lots of `tests/__snapshots__` directories all over.
-
-* We use a good amount of enzyme for any kind of logic testing (simulating actions in a component) or for shallow rendering, usually so we can snapshot test something without testing all of its dependency components.
-
-* We believe in direct regular old unit testing wherever possible, mostly for helpers. In other words, if we don't have to involve react in a test, we don't.
-
-* We try not to unit test redux, i.e. no tests for connected components or for mapStateToProps functions etc., we mock connected state and actions and pull any mapStateToProps logic into selectors where they can be tested more easily. We do sometimes use redux-mock-store to test chains of dispatches, but in those cases we just end up snapshot testing the dispatch chain.
-
 ### Docs
 
-We have two types of internal docs: general and directory-based. You'll find general docs like testing guides and general redux patterns, etc. in [our top level docs folder](./docs), but component directories will often have their own README.md files or docs folders (similar to tests) where individual docs related to those specific components can be found.
-
-- [Access Control](./docs/access-control.md)
-- [Jest](./docs/jest.md)
-- [Redux Form](./docs/redux-form.md)
-- [Redux](./docs/redux-redux.md)
-- [Styles](./docs/styles.md)
-
-Components:
-- [Collection](./src/components/collection/docs/Collection.md)
-- [PlanPicker](./src/components/planPicker/readme.md)
-
-![](https://media0.giphy.com/media/5y1LH29N3k556/giphy.gif)
-
-*Testing a change to a .md file, should not trigger a bamboo build*
+Documentation is hosted on the [GitHub Wiki](https://github.com/SparkPost/2web2ui/wiki).

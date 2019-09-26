@@ -2,10 +2,10 @@ import {
   fetchMetricsDomains,
   fetchMetricsCampaigns,
   fetchMetricsSendingIps,
-  fetchMetricsIpPools
+  fetchMetricsIpPools,
+  fetchMetricsTemplates
 } from './metrics';
 
-import { listTemplates } from './templates';
 import { list as listSubaccounts } from './subaccounts';
 import { list as listSendingDomains } from './sendingDomains';
 import { getRelativeDates } from 'src/helpers/date';
@@ -18,7 +18,8 @@ const metricLists = [
   fetchMetricsDomains,
   fetchMetricsCampaigns,
   fetchMetricsSendingIps,
-  fetchMetricsIpPools
+  fetchMetricsIpPools,
+  fetchMetricsTemplates
 ];
 
 /**
@@ -30,12 +31,8 @@ const metricLists = [
  */
 export function initTypeaheadCache() {
   return (dispatch, getState) => {
-    const { templates, subaccounts, sendingDomains } = getState();
+    const { subaccounts, sendingDomains } = getState();
     const requests = [];
-
-    if (templates.list.length === 0) {
-      requests.push(dispatch(listTemplates()));
-    }
 
     if (subaccounts.list.length === 0) {
       requests.push(dispatch(listSubaccounts()));
@@ -98,6 +95,12 @@ export function removeFilter(payload) {
   return {
     type: 'REMOVE_FILTER',
     payload
+  };
+}
+
+export function clearFilters() {
+  return {
+    type: 'CLEAR_FILTERS'
   };
 }
 

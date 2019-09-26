@@ -1,21 +1,18 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders columns correctly with subaccounts 1`] = `
+exports[`ListPage renders columns with all columns 1`] = `
 Array [
   Object {
     "label": "Name",
     "sortKey": "name",
-    "width": "28%",
   },
   Object {
     "label": "Status",
     "sortKey": [Function],
-    "width": "18%",
   },
   Object {
     "label": "Subaccount",
     "sortKey": [Function],
-    "width": "18%",
   },
   Object {
     "label": "Last Updated",
@@ -25,7 +22,7 @@ Array [
 ]
 `;
 
-exports[`renders correctly 1`] = `
+exports[`ListPage renders correctly 1`] = `
 <Page
   empty={
     Object {
@@ -52,12 +49,10 @@ exports[`renders correctly 1`] = `
         Object {
           "label": "Name",
           "sortKey": "name",
-          "width": "28%",
         },
         Object {
           "label": "Status",
           "sortKey": [Function],
-          "width": "18%",
         },
         Object {
           "label": "Last Updated",
@@ -66,8 +61,8 @@ exports[`renders correctly 1`] = `
         null,
       ]
     }
-    defaultSortColumn="name"
-    defaultSortDirection="asc"
+    defaultSortColumn="last_update_time"
+    defaultSortDirection="desc"
     filterBox={
       Object {
         "exampleModifiers": Array [
@@ -87,10 +82,25 @@ exports[`renders correctly 1`] = `
     rows={
       Array [
         Object {
-          "name": "Temp 1",
+          "id": "id1",
+          "last_update_time": "2017-08-10T14:15:16+00:00",
+          "name": "subaccount template",
+          "published": true,
+          "shared_with_subaccounts": false,
+          "subaccount_id": 101,
         },
         Object {
-          "name": "Temp 2",
+          "id": "id2",
+          "last_update_time": "2017-08-10T14:15:16+00:00",
+          "name": "shared template",
+          "published": false,
+          "shared_with_subaccounts": true,
+        },
+        Object {
+          "id": "id3",
+          "last_update_time": "2017-08-10T14:15:16+00:00",
+          "name": "master template",
+          "published": false,
         },
       ]
     }
@@ -98,71 +108,7 @@ exports[`renders correctly 1`] = `
 </Page>
 `;
 
-exports[`renders empty state 1`] = `
-<EmptyState
-  image={[Function]}
-  primaryAction={
-    Object {
-      "Component": [Function],
-      "content": "Create Template",
-      "to": "/templates/create",
-    }
-  }
-  title="Manage your email templates"
->
-  <p>
-    Build, test, preview and send your transmissions.
-  </p>
-</EmptyState>
-`;
-
-exports[`renders errors when present 1`] = `
-<ApiErrorBanner
-  errorDetails="Uh oh! It broke. "
-  message="Sorry, we seem to have had some trouble loading your templates."
-  reload={
-    [MockFunction] {
-      "calls": Array [
-        Array [],
-      ],
-      "results": undefined,
-    }
-  }
-/>
-`;
-
-exports[`renders rows correctly with NO subaccounts 1`] = `
-Array [
-  Array [
-    <Name
-      id="id3"
-      last_update_time="2017-08-10T14:15:16+00:00"
-      name="no subs template"
-      published={true}
-    />,
-    <Status
-      id="id3"
-      last_update_time="2017-08-10T14:15:16+00:00"
-      name="no subs template"
-      published={true}
-    />,
-    <LastUpdated
-      id="id3"
-      last_update_time="2017-08-10T14:15:16+00:00"
-      name="no subs template"
-      published={true}
-    />,
-    <Actions
-      id="id3"
-      last_update_time="2017-08-10T14:15:16+00:00"
-      name="no subs template"
-      published={true}
-    />,
-  ],
-]
-`;
-
-exports[`renders rows correctly with subaccounts 1`] = `
+exports[`ListPage renders rows with all columns 1`] = `
 Array [
   Array [
     <Name
@@ -170,6 +116,7 @@ Array [
       last_update_time="2017-08-10T14:15:16+00:00"
       name="subaccount template"
       published={true}
+      shared_with_subaccounts={false}
       subaccount_id={101}
     />,
     <Status
@@ -177,20 +124,23 @@ Array [
       last_update_time="2017-08-10T14:15:16+00:00"
       name="subaccount template"
       published={true}
+      shared_with_subaccounts={false}
       subaccount_id={101}
     />,
-    <SubaccountTag
-      all={false}
-      id={101}
-      isDefault={false}
-      master={false}
-      receiveAll={false}
+    <Subaccount
+      id="id1"
+      last_update_time="2017-08-10T14:15:16+00:00"
+      name="subaccount template"
+      published={true}
+      shared_with_subaccounts={false}
+      subaccount_id={101}
     />,
     <LastUpdated
       id="id1"
       last_update_time="2017-08-10T14:15:16+00:00"
       name="subaccount template"
       published={true}
+      shared_with_subaccounts={false}
       subaccount_id={101}
     />,
     <Actions
@@ -198,6 +148,7 @@ Array [
       last_update_time="2017-08-10T14:15:16+00:00"
       name="subaccount template"
       published={true}
+      shared_with_subaccounts={false}
       subaccount_id={101}
     />,
   ],
@@ -207,31 +158,35 @@ Array [
       last_update_time="2017-08-10T14:15:16+00:00"
       name="shared template"
       published={false}
+      shared_with_subaccounts={true}
     />,
     <Status
       id="id2"
       last_update_time="2017-08-10T14:15:16+00:00"
       name="shared template"
       published={false}
+      shared_with_subaccounts={true}
     />,
-    <SubaccountTag
-      all={true}
-      id={null}
-      isDefault={false}
-      master={false}
-      receiveAll={false}
+    <Subaccount
+      id="id2"
+      last_update_time="2017-08-10T14:15:16+00:00"
+      name="shared template"
+      published={false}
+      shared_with_subaccounts={true}
     />,
     <LastUpdated
       id="id2"
       last_update_time="2017-08-10T14:15:16+00:00"
       name="shared template"
       published={false}
+      shared_with_subaccounts={true}
     />,
     <Actions
       id="id2"
       last_update_time="2017-08-10T14:15:16+00:00"
       name="shared template"
       published={false}
+      shared_with_subaccounts={true}
     />,
   ],
   Array [
@@ -247,7 +202,12 @@ Array [
       name="master template"
       published={false}
     />,
-    null,
+    <Subaccount
+      id="id3"
+      last_update_time="2017-08-10T14:15:16+00:00"
+      name="master template"
+      published={false}
+    />,
     <LastUpdated
       id="id3"
       last_update_time="2017-08-10T14:15:16+00:00"
@@ -262,70 +222,4 @@ Array [
     />,
   ],
 ]
-`;
-
-exports[`renders without primary action for read-only users 1`] = `
-<Page
-  empty={
-    Object {
-      "content": <p>
-        Build, test, preview and send your transmissions.
-      </p>,
-      "image": [Function],
-      "show": false,
-      "title": "Manage your email templates",
-    }
-  }
-  title="Templates"
->
-  <TableCollection
-    columns={
-      Array [
-        Object {
-          "label": "Name",
-          "sortKey": "name",
-          "width": "28%",
-        },
-        Object {
-          "label": "Status",
-          "sortKey": [Function],
-          "width": "18%",
-        },
-        Object {
-          "label": "Last Updated",
-          "sortKey": "last_update_time",
-        },
-        null,
-      ]
-    }
-    defaultSortColumn="name"
-    defaultSortDirection="asc"
-    filterBox={
-      Object {
-        "exampleModifiers": Array [
-          "id",
-          "name",
-        ],
-        "itemToStringKeys": Array [
-          "name",
-          "id",
-          "subaccount_id",
-        ],
-        "show": true,
-      }
-    }
-    getRowData={[Function]}
-    pagination={true}
-    rows={
-      Array [
-        Object {
-          "name": "Temp 1",
-        },
-        Object {
-          "name": "Temp 2",
-        },
-      ]
-    }
-  />
-</Page>
 `;

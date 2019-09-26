@@ -1,8 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`MessageEvents Selectors Selectors: Initial Event Id returns default event_id 1`] = `"default_id"`;
-
-exports[`MessageEvents Selectors Selectors: Initial Event Id returns event_id 1`] = `"selected_id"`;
+exports[`MessageEvents Selectors Selectors: Message Events CSV returns formatted message events CSV data 1`] = `
+Array [
+  Object {
+    "event_id": "default_id",
+    "foo": "bar",
+    "formattedDate": "Nov 9 2017, 12:00am",
+    "timestamp": "2017-11-09T00:00",
+  },
+  Object {
+    "bat": "baz",
+    "foo": "bar",
+    "formattedDate": "Nov 8 2017, 11:00am",
+    "timestamp": "2017-11-08T11:00",
+  },
+]
+`;
 
 exports[`MessageEvents Selectors Selectors: Message Events returns formatted message event data 1`] = `
 Array [
@@ -77,25 +90,14 @@ Object {
   "loading": false,
   "messageHistory": Array [],
   "messageId": "_noid_",
-  "selectedEvent": undefined,
+  "selectedEvent": Array [
+    Object {
+      "event_id": "selected_id",
+      "foo": "bar",
+      "timestamp": "2017-11-09T00:00",
+    },
+  ],
   "selectedEventId": "default_id",
-}
-`;
-
-exports[`MessageEvents Selectors getSelectedEventFromEventsList returns correct event from events list 1`] = `
-Object {
-  "event_id": "default_id",
-  "foo": "bar",
-  "timestamp": "2017-11-09T00:00",
-}
-`;
-
-exports[`MessageEvents Selectors getSelectedEventFromMessageHistory returns correct event from messageHistory 1`] = `
-Object {
-  "event_id": "default_id",
-  "foo": "bar",
-  "formattedDate": "Nov 9 2017, 12:00am",
-  "timestamp": "2017-11-09T00:00",
 }
 `;
 

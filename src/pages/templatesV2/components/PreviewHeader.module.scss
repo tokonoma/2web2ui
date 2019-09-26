@@ -1,0 +1,33 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.PreviewHeader {
+  padding: spacing();
+}
+
+.PreviewHeaderSubject {
+  border-bottom: 1px solid color(grey, 8);
+  font-size: rem(18);
+  padding-bottom: spacing();
+}
+
+.PreviewHeaderContact {
+  display: flex;
+  padding-top: spacing();
+}
+
+.PreviewHeaderAvatar {
+  background: color(grey, 8);
+  border-radius: 2px;
+}
+
+.PreviewHeaderAddresses {
+  min-width: 0;
+  padding-left: spacing();
+  position: relative;
+}
+
+.PreviewHeaderFrom {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

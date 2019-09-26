@@ -8,7 +8,7 @@ import { trimWhitespaces } from 'src/helpers/string';
 import { Button, Error } from '@sparkpost/matchbox';
 
 export const LoginForm = ({ loginPending, loginError, handleSubmit }) => <React.Fragment>
-  {loginError && <Error error={loginError} />}
+  {loginError && <div style={{ marginBottom: '12px' }}><Error error={loginError}/></div>}
   <form onSubmit={handleSubmit}>
     <Field
       autoFocus

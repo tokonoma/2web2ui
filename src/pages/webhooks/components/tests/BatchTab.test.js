@@ -18,14 +18,16 @@ describe('Webhook Component: Batch Status Tab', () => {
           batch_id: '243423423423',
           status: 'p',
           attempts: 1,
-          response_code: 200
+          response_code: 200,
+          ts: 1
         },
         {
           formatted_time: 'so-formatted-2',
           batch_id: '996969545',
           status: 'f',
           attempts: 4,
-          response_code: 500
+          response_code: 500,
+          ts: 2
         }
       ],
       batchesLoading: false,

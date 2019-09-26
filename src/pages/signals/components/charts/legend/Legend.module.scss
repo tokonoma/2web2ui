@@ -8,15 +8,15 @@
 .Fill {
   display: inline-block;
   margin: 0 spacing(small) 0 rem(14);
-  width: rem(16);
-  height: rem(16);
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
   vertical-align: middle;
 }
 
 .Label {
   font-weight: 400;
-  font-size: rem(9);
+  font-size: rem(12);
   white-space: nowrap;
   vertical-align: middle;
 }

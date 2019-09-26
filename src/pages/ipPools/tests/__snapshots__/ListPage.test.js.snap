@@ -1,5 +1,73 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`IP Pools List Page does not render purchase action if isAdmin is false 1`] = `
+<Page
+  empty={Object {}}
+  primaryAction={
+    Object {
+      "Component": [Function],
+      "content": "Create IP Pool",
+      "to": "/account/ip-pools/create",
+    }
+  }
+  secondaryActions={
+    Array [
+      Object {
+        "Component": [Function],
+        "content": "Purchase IPs",
+        "to": "/account/billing",
+      },
+    ]
+  }
+  title="IP Pools"
+>
+  <IPWarmupReminderBanner />
+  <TableCollection
+    columns={
+      Array [
+        Object {
+          "label": "Name",
+          "sortKey": "name",
+        },
+        Object {
+          "label": "ID",
+          "sortKey": "id",
+        },
+        Object {
+          "label": "Number of IPs Assigned",
+          "sortKey": [Function],
+        },
+      ]
+    }
+    defaultSortColumn={null}
+    defaultSortDirection="asc"
+    filterBox={
+      Object {
+        "exampleModifiers": Array [
+          "name",
+          "id",
+        ],
+        "itemToStringKeys": Array [
+          "name",
+          "id",
+        ],
+        "show": true,
+      }
+    }
+    getRowData={[Function]}
+    pagination={true}
+    rows={
+      Array [
+        Object {
+          "ips": Array [],
+          "name": "Default",
+        },
+      ]
+    }
+  />
+</Page>
+`;
+
 exports[`IP Pools List Page does not render purchase action if showPurchaseCTA is false 1`] = `
 <Page
   empty={Object {}}
@@ -142,7 +210,7 @@ exports[`IP Pools List Page should render the IP warm-up banner correctly 1`] = 
 >
   <div>
     <p>
-      In order to establish a positive spending reputation, warm up new dedicated IP addresses by gradually sending more emails.
+      In order to establish a positive sending reputation, warm up new dedicated IP addresses by gradually sending more emails.
     </p>
     <Button
       external={true}

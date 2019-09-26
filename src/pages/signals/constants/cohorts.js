@@ -1,26 +1,31 @@
 export default {
-  c_new: {
-    fill: '#E4EEF0',
+  'new': {
+    fill: '#88E2E7',
+    stroke: '#88E2E7',
     label: 'New',
     description: 'Never engaged, first email in last 7 days'
   },
-  c_uneng: {
-    fill: '#B9E2E9',
+  'uneng': {
+    fill: '#50CFDA',
+    stroke: '#50CFDA',
     label: 'Never Engaged',
     description: '365+ days since last engagement'
   },
-  c_365d: {
-    fill: '#9AD8E3',
+  '365d': {
+    fill: '#29B9C7',
+    stroke: '#29B9C7',
     label: 'Not Recently Engaged',
     description: '90-365 days since last engagement'
   },
-  c_90d: {
-    fill: '#44A8AD',
+  '90d': {
+    fill: '#219EA8',
+    stroke: '#219EA8',
     label: 'Semi Recently Engaged',
     description: '14-90 days since last engagement'
   },
-  c_14d: {
-    fill: '#3F8B93',
+  '14d': {
+    fill: '#1A838B',
+    stroke: '#1A838B',
     label: 'Recently Engaged',
     description: '0-14 days since last engagement'
   }

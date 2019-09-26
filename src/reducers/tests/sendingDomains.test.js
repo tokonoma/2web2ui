@@ -26,6 +26,17 @@ cases('Sending Domain reducer', (action) => {
     payload: { errors: [ { message: 'Some error occurred' }]},
     type: 'VERIFY_SENDING_DOMAIN_CNAME_FAIL'
   },
+  'verify mx pending': {
+    type: 'VERIFY_SENDING_DOMAIN_MX_PENDING'
+  },
+  'verify mx': {
+    payload: { mx_status: 'valid', ownership_verified: 1 },
+    type: 'VERIFY_SENDING_DOMAIN_MX_SUCCESS'
+  },
+  'verify mx fail': {
+    payload: { errors: [ { message: 'Some error occurred' }]},
+    type: 'VERIFY_SENDING_DOMAIN_MX_FAIL'
+  },
   'verify dkim pending': {
     type: 'VERIFY_SENDING_DOMAIN_DKIM_PENDING'
   },

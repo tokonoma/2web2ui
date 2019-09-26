@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BounceSetupInstructionPanel renders cname setup instructions 1`] = `
+<SetupInstructionPanel
+  isAutoVerified={false}
+  isVerified={false}
+  isVerifying={false}
+  onVerify={[Function]}
+  recordType="CNAME"
+  verifyButtonIdentifier="verify-cname"
+>
+  <LabelledValue
+    bold={false}
+    label="Type"
+    value="CNAME"
+  />
+  <LabelledValue
+    bold={false}
+    label="Hostname"
+    value="example.com"
+  />
+  <LabelledValue
+    bold={false}
+    label="Value"
+    value="spark.mail"
+  />
+</SetupInstructionPanel>
+`;

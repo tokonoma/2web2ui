@@ -1,18 +1,23 @@
+/* eslint-disable max-lines */
 import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
+import { getEngagementRecency } from 'src/actions/signals';
+import { selectEngagementRecencyDetails } from 'src/selectors/signals';
 import { Panel, Grid } from '@sparkpost/matchbox';
-import Page from './components/SignalsPage';
 import BarChart from './components/charts/barchart/BarChart';
-import EngagementRecencyActions from './components/actionContent/EngagementRecencyActions';
-import TooltipMetric from './components/charts/tooltip/TooltipMetric';
-import DateFilter from './components/filters/DateFilter';
-import { ENGAGEMENT_RECENCY_COHORTS, ENGAGEMENT_RECENCY_INFO } from './constants/info';
-import withEngagementRecencyDetails from './containers/EngagementRecencyDetailsContainer';
-import { Loading } from 'src/components';
 import Callout from 'src/components/callout';
-import OtherChartsHeader from './components/OtherChartsHeader';
-import ChartHeader from './components/ChartHeader';
+import DateFilter from './components/filters/DateFilter';
+import EngagementRecencyActions from './components/actionContent/EngagementRecencyActions';
+import InfoTooltip from './components/InfoTooltip';
 import Legend from './components/charts/legend/Legend';
+import Divider from './components/Divider';
+import Page from './components/SignalsPage';
+import Tabs from './components/engagement/Tabs';
+import TooltipMetric from './components/charts/tooltip/TooltipMetric';
+import withDetails from './containers/withDetails';
+import withDateSelection from './containers/withDateSelection';
+import { ENGAGEMENT_RECENCY_COHORTS, ENGAGEMENT_RECENCY_INFO } from './constants/info';
+import { Loading } from 'src/components';
 import { roundToPlaces } from 'src/helpers/units';
 import moment from 'moment';
 import _ from 'lodash';
@@ -23,35 +28,6 @@ import cohorts from './constants/cohorts';
 import styles from './DetailsPages.module.scss';
 
 export class EngagementRecencyPage extends Component {
-  state = {
-    selectedDate: null
-  }
-
-  componentDidMount() {
-    const { selected } = this.props;
-
-    if (selected) {
-      this.setState({ selectedDate: selected });
-    }
-  }
-
-  componentDidUpdate(prevProps) {
-    const { data } = this.props;
-    const { selectedDate } = this.state;
-
-    const dataSetChanged = prevProps.data !== data;
-    let selectedDataByDay = _.find(data, ['date', selectedDate]);
-
-    // Select last date in time series
-    if (dataSetChanged && !selectedDataByDay) {
-      selectedDataByDay = _.last(data);
-      this.setState({ selectedDate: selectedDataByDay.date });
-    }
-  }
-
-  handleDateSelect = (node) => {
-    this.setState({ selectedDate: _.get(node, 'payload.date') });
-  }
 
   getYAxisProps = () => ({
     tickFormatter: (tick) => `${roundToPlaces(tick * 100, 0)}%`,
@@ -75,15 +51,14 @@ export class EngagementRecencyPage extends Component {
           color={cohorts[key].fill}
           label={cohorts[key].label}
           description={cohorts[key].description}
-          value={`${roundToPlaces(payload[key] * 100, 1)}%`}
+          value={`${roundToPlaces(payload[`c_${key}`] * 100, 1)}%`}
         />
       ))}
     </Fragment>
   )
 
   renderContent = () => {
-    const { data = [], loading, gap, empty, error } = this.props;
-    const { selectedDate } = this.state;
+    const { data = [], empty, error, facet, facetId, gap, handleDateSelect, loading, selectedDate, subaccountId } = this.props;
     const selectedCohorts = _.find(data, ['date', selectedDate]) || {};
     let chartPanel;
 
@@ -106,21 +81,18 @@ export class EngagementRecencyPage extends Component {
     return (
       <Grid>
         <Grid.Column sm={12} md={7}>
+          <Tabs facet={facet} facetId={facetId} subaccountId={subaccountId} />
           <Panel sectioned>
-            <ChartHeader
-              title='Engagement Recency'
-              tooltipContent={ENGAGEMENT_RECENCY_INFO}
-            />
             {chartPanel || (
               <div className='LiftTooltip'>
                 <BarChart
                   gap={gap}
-                  onClick={this.handleDateSelect}
+                  onClick={handleDateSelect}
                   selected={selectedDate}
                   timeSeries={data}
                   tooltipContent={this.getTooltipContent}
                   tooltipWidth='250px'
-                  yKeys={_.keys(cohorts).map((key) => ({ key, ...cohorts[key] })).reverse()}
+                  yKeys={_.keys(cohorts).map((key) => ({ key: `c_${key}`, ...cohorts[key] })).reverse()}
                   yAxisProps={this.getYAxisProps()}
                   xAxisProps={this.getXAxisProps()}
                 />
@@ -146,18 +118,25 @@ export class EngagementRecencyPage extends Component {
 
     return (
       <Page
-        breadcrumbAction={{ content: 'Back to Overview', to: '/signals', component: Link }}
-        dimensionPrefix='Engagement Recency for'
+        breadcrumbAction={{ content: 'Back to Engagement Recency Overview', to: '/signals/engagement', component: Link }}
+        title={
+          <>
+            Engagement Recency
+            <InfoTooltip content={ENGAGEMENT_RECENCY_INFO} />
+          </>
+        }
         facet={facet}
         facetId={facetId}
         subaccountId={subaccountId}
-        primaryArea={<DateFilter />}>
+        primaryArea={<DateFilter left />}>
         {this.renderContent()}
-        <OtherChartsHeader facet={facet} facetId={facetId} subaccountId={subaccountId} />
+        <Divider />
         <Grid>
-          <Grid.Column xs={12} sm={6}>
-            <SpamTrapsPreview />
-          </Grid.Column>
+          {facet !== 'mb_provider' && (
+            <Grid.Column xs={12} sm={6}>
+              <SpamTrapsPreview />
+            </Grid.Column>
+          )}
           <Grid.Column xs={12} sm={6}>
             <HealthScorePreview />
           </Grid.Column>
@@ -167,4 +146,8 @@ export class EngagementRecencyPage extends Component {
   }
 }
 
-export default withEngagementRecencyDetails(EngagementRecencyPage);
+export default withDetails(
+  withDateSelection(EngagementRecencyPage),
+  { getEngagementRecency },
+  selectEngagementRecencyDetails
+);

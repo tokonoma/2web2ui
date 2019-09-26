@@ -2,21 +2,21 @@
 
 exports[`PlanPrice allows class name overriding 1`] = `
 <span
-  className="notranslate"
+  className="notranslate abcd-class"
 >
   <span
-    className="abcd-class"
+    className="MainLabel"
   >
     <strong>
       50,000
     </strong>
-     
-    emails/month
+    <span>
+       emails/month 
+    </span>
     <span>
        at 
       <strong>
-        $
-        9
+        $9
       </strong>
       /
       mo
@@ -38,8 +38,9 @@ exports[`PlanPrice renders as 0 if flat discount is greater than price 1`] = `
     <strong>
       50,000
     </strong>
-     
-    emails/month
+    <span>
+       emails/month 
+    </span>
     <span>
        at 
       <s
@@ -49,8 +50,7 @@ exports[`PlanPrice renders as 0 if flat discount is greater than price 1`] = `
         9
       </s>
       <strong>
-        $
-        0
+        $0.00
       </strong>
       /
       mo
@@ -72,13 +72,13 @@ exports[`PlanPrice renders correctly 1`] = `
     <strong>
       50,000
     </strong>
-     
-    emails/month
+    <span>
+       emails/month 
+    </span>
     <span>
        at 
       <strong>
-        $
-        9
+        $9
       </strong>
       /
       mo
@@ -100,8 +100,12 @@ exports[`PlanPrice renders correctly for 30 day free plan 1`] = `
     <strong>
       50,000
     </strong>
-     
-    emails/month
+    <span>
+       emails/month 
+    </span>
+    <span>
+       FREE 
+    </span>
   </span>
   <span
     className="SupportLabel"
@@ -119,13 +123,13 @@ exports[`PlanPrice renders correctly for CSM inclusion 1`] = `
     <strong>
       50,000
     </strong>
-     
-    emails/month
+    <span>
+       emails/month 
+    </span>
     <span>
        at 
       <strong>
-        $
-        9
+        $9
       </strong>
       /
       mo
@@ -152,8 +156,12 @@ exports[`PlanPrice renders correctly for eternal free plan 1`] = `
     <strong>
       50,000
     </strong>
-     
-    emails/month
+    <span>
+       emails/month 
+    </span>
+    <span>
+       FREE 
+    </span>
   </span>
   <span
     className="SupportLabel"
@@ -171,13 +179,13 @@ exports[`PlanPrice renders correctly with hourly plans 1`] = `
     <strong>
       50,000
     </strong>
-     
-    emails/month
+    <span>
+       emails/month 
+    </span>
     <span>
        at 
       <strong>
-        $
-        0.012
+        $0.012
       </strong>
       /
       hr
@@ -199,8 +207,9 @@ exports[`PlanPrice renders flat discount 1`] = `
     <strong>
       50,000
     </strong>
-     
-    emails/month
+    <span>
+       emails/month 
+    </span>
     <span>
        at 
       <s
@@ -210,8 +219,7 @@ exports[`PlanPrice renders flat discount 1`] = `
         9
       </s>
       <strong>
-        $
-        4
+        $4.00
       </strong>
       /
       mo
@@ -233,13 +241,13 @@ exports[`PlanPrice renders free ip 1`] = `
     <strong>
       50,000
     </strong>
-     
-    emails/month
+    <span>
+       emails/month 
+    </span>
     <span>
        at 
       <strong>
-        $
-        9
+        $9
       </strong>
       /
       mo
@@ -263,13 +271,13 @@ exports[`PlanPrice renders free ip and overage correct 1`] = `
     <strong>
       50,000
     </strong>
-     
-    emails/month
+    <span>
+       emails/month 
+    </span>
     <span>
        at 
       <strong>
-        $
-        9
+        $9
       </strong>
       /
       mo
@@ -296,8 +304,9 @@ exports[`PlanPrice renders percent discount 1`] = `
     <strong>
       50,000
     </strong>
-     
-    emails/month
+    <span>
+       emails/month 
+    </span>
     <span>
        at 
       <s
@@ -307,8 +316,7 @@ exports[`PlanPrice renders percent discount 1`] = `
         9
       </s>
       <strong>
-        $
-        6.75
+        $6.75
       </strong>
       /
       mo
@@ -330,13 +338,13 @@ exports[`PlanPrice renders with overage 1`] = `
     <strong>
       50,000
     </strong>
-     
-    emails/month
+    <span>
+       emails/month 
+    </span>
     <span>
        at 
       <strong>
-        $
-        9
+        $9
       </strong>
       /
       mo

@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 export const initialState = {
   updateError: null,
   loading: false,
@@ -9,7 +11,8 @@ export const initialState = {
 export default (state = initialState, { type, meta, payload }) => {
   switch (type) {
     case 'FETCH_ACCOUNT_PENDING': {
-      return { ...state, loading: true };
+      const { pending_cancellation, pending_downgrade, ...updated } = state;
+      return { ...updated, loading: true };
     }
 
     case 'FETCH_ACCOUNT_SUCCESS': {
@@ -39,6 +42,18 @@ export default (state = initialState, { type, meta, payload }) => {
     case 'UPDATE_ACCOUNT_FAIL':
       return { ...state, updateError: payload, updateLoading: false };
 
+    case 'SET_ACCOUNT_OPTION_PENDING':
+      return { ...state, updateLoading: true, updateError: null };
+
+    case 'SET_ACCOUNT_OPTION_SUCCESS': {
+      const { options = {}} = state; //Spread other account options
+      const { ui = {}} = options; //Spread other account UI options
+      return { ...state, updateLoading: false, options: { ...options, ui: { ...ui, ...meta.data.options.ui }}};
+    }
+
+    case 'SET_ACCOUNT_OPTION_FAIL':
+      return { ...state, updateError: payload, updateLoading: false };
+
     case 'CREATE_ACCOUNT_PENDING':
       return { ...state, createLoading: true, createError: null };
 
@@ -47,6 +62,43 @@ export default (state = initialState, { type, meta, payload }) => {
 
     case 'CREATE_ACCOUNT_FAIL':
       return { ...state, createError: payload, createLoading: false };
+
+    case 'GET_BILLING_SUCCESS':
+      return { ...state, billing: _.isEmpty(payload) ? null : payload, billingLoading: false };
+
+    case 'GET_BILLING_FAIL':
+      return { ...state, billingError: payload, billingLoading: false };
+
+    case 'GET_BILLING_PENDING':
+      return { ...state, billingLoading: true };
+
+    case 'GET_USAGE_PENDING':
+      return { ...state, usageLoading: true };
+
+    //TODO: Dashboard usage (through account?include=usage) will eventually be consolidated and remove rvUsage
+    case 'GET_USAGE_SUCCESS':
+      return { ...state, usageLoading: false, rvUsage: _.isEmpty(payload) ? null : payload };
+
+    case 'GET_USAGE_FAIL':
+      return { ...state, usageLoading: false, usageError: payload };
+
+    case 'CANCEL_ACCOUNT_PENDING':
+      return { ...state, cancelLoading: true, cancelError: null };
+
+    case 'CANCEL_ACCOUNT_SUCCESS':
+      return { ...state, cancelLoading: false };
+
+    case 'CANCEL_ACCOUNT_FAIL':
+      return { ...state, cancelError: payload, cancelLoading: false };
+
+    case 'RENEW_ACCOUNT_PENDING':
+      return { ...state, cancelLoading: true, cancelError: null };
+
+    case 'RENEW_ACCOUNT_SUCCESS':
+      return { ...state, cancelLoading: false };
+
+    case 'RENEW_ACCOUNT_FAIL':
+      return { ...state, cancelError: payload, cancelLoading: false };
 
     default:
       return state;

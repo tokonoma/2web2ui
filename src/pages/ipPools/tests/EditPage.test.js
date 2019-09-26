@@ -20,18 +20,17 @@ describe('IP Pools Edit Page', () => {
         signing_domain: 'my-domain.sparkpost.com'
       },
       updatePool: jest.fn(() => Promise.resolve()),
-      updateSendingIp: jest.fn(() => Promise.resolve()),
       deletePool: jest.fn(() => Promise.resolve()),
       showAlert: jest.fn(),
       history: {
-        push: jest.fn()
+        push: jest.fn(),
+        replace: jest.fn()
       },
       loading: false,
       listPools: jest.fn(),
       listError: null,
-      getError: null,
-      getPool: jest.fn(),
-      showPurchaseCTA: true
+      showPurchaseCTA: true,
+      isManuallyBilled: false
     };
 
     wrapper = shallow(<EditPage {...props} />);
@@ -52,64 +51,78 @@ describe('IP Pools Edit Page', () => {
       expect(wrapper).toMatchSnapshot();
     });
 
+    it('should show support ticket link if manually billed', () => {
+      wrapper.setProps({ isManuallyBilled: true });
+      expect(wrapper.find('Connect(SupportTicketLink)')).toExist();
+    });
+
     it('should list pools and get pool when calling loadDependentData', () => {
       const component = wrapper.instance();
       component.loadDependentData();
       expect(component.props.listPools).toHaveBeenCalled();
-      expect(component.props.getPool).toHaveBeenCalledWith('my-pool');
     });
   });
 
   describe('renderForm tests', () => {
     it('should show list error msg on error', () => {
       wrapper.setProps({ error: true, listError: { message: 'failed listing pools' }});
-      expect(wrapper).toMatchSnapshot();
+      expect(wrapper.find('ApiErrorBanner')).toMatchSnapshot();
+    });
+  });
+
+  describe('renderIps', () => {
+    it('should not render table if pool is new', () => {
+      wrapper.setProps({ isNew: true });
+      expect(wrapper.find('Panel[title="Sending IPs"]')).not.toExist();
     });
 
-    it('should show get error msg on error', () => {
-      wrapper.setProps({ error: true, getError: { message: 'failed getting pools' }});
-      expect(wrapper).toMatchSnapshot();
+    it('should not render table if no ips exist', () => {
+      wrapper.setProps({ ips: null });
+      expect(wrapper.find('Panel[title="Sending IPs"]')).toExist();
+      expect(wrapper.find('IPList')).not.toExist();
+    });
+
+    it('should not show purchase cta if showPurchaseCTA is false', () => {
+      wrapper.setProps({ showPurchaseCTA: false });
+      expect(wrapper.find('Panel[title="Sending IPs"]').find('UnstyledLink')).not.toExist();
     });
   });
 
   describe('onUpdatePool tests', () => {
-    let updatePoolSpy;
-
-    beforeEach(() => {
-      updatePoolSpy = jest.spyOn(wrapper.instance().props, 'updatePool');
-    });
-
     it('should show an alert on successful pool update', async () => {
-      await wrapper.instance().onUpdatePool({ name: 'my_pool', signing_domain: 'my-domain.sparkpost.com', '127_0_0_1': 'other_pool', '127_0_0_2': 'my-pool' });
+      await wrapper.instance().onUpdatePool({ name: 'my_pool', signing_domain: 'my-domain.sparkpost.com' });
       expect(wrapper.instance().props.showAlert).toHaveBeenCalledWith({
         type: 'success',
         message: 'Updated IP pool my-pool.'
       });
-      expect(updatePoolSpy).toHaveBeenCalledWith('my-pool', { name: 'my_pool', signing_domain: 'my-domain.sparkpost.com', '127_0_0_1': 'other_pool', '127_0_0_2': 'my-pool' });
-      expect(wrapper.instance().props.history.push).toHaveBeenCalled();
+      expect(props.updatePool).toHaveBeenCalledWith('my-pool', { name: 'my_pool', signing_domain: 'my-domain.sparkpost.com' });
+      expect(wrapper.instance().props.history.replace).toHaveBeenCalledWith('/account/ip-pools/edit/my-pool');
 
     });
 
     it('should set signing_domain to empty string if it is null', async () => {
       props.pool.signing_domain = null;
-      await wrapper.instance().onUpdatePool({ name: 'my_pool', '127_0_0_1': 'other_pool', '127_0_0_2': 'my-pool' });
+      await wrapper.instance().onUpdatePool({ name: 'my_pool' });
       expect(wrapper.instance().props.showAlert).toHaveBeenCalledWith({
         type: 'success',
         message: 'Updated IP pool my-pool.'
       });
-      expect(updatePoolSpy).toHaveBeenCalledWith('my-pool', { name: 'my_pool', signing_domain: '', '127_0_0_1': 'other_pool', '127_0_0_2': 'my-pool' });
-      expect(wrapper.instance().props.history.push).toHaveBeenCalled();
+      expect(props.updatePool).toHaveBeenCalledWith('my-pool', { name: 'my_pool', signing_domain: '' });
+      expect(wrapper.instance().props.history.replace).toHaveBeenCalled();
     });
 
     it('should not update pool if editing default pool', async () => {
-      wrapper.setProps({ match: { params: { id: 'default' }}});
-      await wrapper.instance().onUpdatePool({ name: 'default', '127_0_0_1': 'other_pool', '127_0_0_2': 'default' });
+      const err = new Error('You can not edit default pool.');
+
+      wrapper.setProps({ pool: { id: 'default' }});
+      await expect(wrapper.instance().onUpdatePool({ name: 'default', id: 'default' })).rejects.toThrow(err);
       expect(wrapper.instance().props.showAlert).toHaveBeenCalledWith({
-        type: 'success',
-        message: 'Updated IP pool default.'
+        type: 'error',
+        message: 'You can not edit default pool.'
       });
-      expect(updatePoolSpy).not.toHaveBeenCalled();
-      expect(wrapper.instance().props.history.push).toHaveBeenCalled();
+
+      expect(props.updatePool).not.toHaveBeenCalled();
+      expect(wrapper.instance().props.history.replace).not.toHaveBeenCalled();
     });
   });
 

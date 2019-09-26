@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
-import { addFilters } from 'src/actions/reportOptions';
 import { refreshRejectionReport } from 'src/actions/rejectionReport';
 import { selectReportSearchOptions } from 'src/selectors/reportSearchOptions';
 import PanelLoading from 'src/components/panelLoading/PanelLoading';
@@ -26,7 +25,7 @@ export class RejectionPage extends Component {
       return <PanelLoading />;
     }
 
-    return <DataTable list={list} addFilters={this.props.addFilters} />;
+    return <DataTable list={list} />;
   }
 
   renderTopLevelMetrics() {
@@ -74,7 +73,6 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-  addFilters,
   refreshRejectionReport
 };
 export default connect(mapStateToProps, mapDispatchToProps)(RejectionPage);

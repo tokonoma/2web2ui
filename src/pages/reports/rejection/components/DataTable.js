@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { TableCollection, Empty, LongTextContainer } from 'src/components';
-import { UnstyledLink } from '@sparkpost/matchbox';
+import AddFilterLink from '../../components/AddFilterLink';
 
 const columns = [
   { label: 'Reason', width: '45%', sortKey: 'reason' },
@@ -11,11 +11,10 @@ const columns = [
 
 export class DataTable extends Component {
   getRowData = (rowData) => {
-    const { addFilters } = this.props;
     const { reason, domain, rejection_category_name, count_rejected } = rowData;
     return [
       <LongTextContainer text={reason} />,
-      <UnstyledLink onClick={() => addFilters([{ type: 'Recipient Domain', value: domain }])}>{ domain }</UnstyledLink>,
+      <AddFilterLink newFilter={{ type: 'Recipient Domain', value: domain }} reportType={'rejections'} content={domain}/>,
       rejection_category_name,
       count_rejected
     ];

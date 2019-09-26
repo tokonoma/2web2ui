@@ -1,12 +1,10 @@
 import React from 'react';
 import { ChangePlanForm } from '../ChangePlanForm';
 import { shallow } from 'enzyme';
-import * as accountConditions from 'src/selectors/accessConditionState';
 import * as conversions from 'src/helpers/conversionTracking';
 import * as billingHelpers from 'src/helpers/billing';
 
 jest.mock('src/helpers/billing');
-jest.mock('src/selectors/accessConditionState');
 jest.mock('src/helpers/conversionTracking');
 
 describe('Form Container: Change Plan', () => {
@@ -37,9 +35,10 @@ describe('Form Container: Change Plan', () => {
       },
       isSelfServeBilling: true,
       billing: { countries: [], plans, selectedPromo: {}},
-      getPlans: jest.fn(),
+      getPlans: jest.fn(() => Promise.resolve()),
       getBillingCountries: jest.fn(),
       verifyPromoCode: jest.fn(() => Promise.resolve({ discount_id: 'test-discount' })),
+      getBillingInfo: jest.fn(),
       fetchAccount: jest.fn(),
       plans,
       currentPlan: {},
@@ -50,6 +49,9 @@ describe('Form Container: Change Plan', () => {
         pathname: '/account/billing/plan',
         search: 'immediatePlanChange=free-0817&pass=through'
       },
+      initialValues: {
+        promoCode: undefined
+      },
       handleSubmit: jest.fn(),
       showAlert: jest.fn(),
       billingCreate: jest.fn(() => Promise.resolve()),
@@ -57,7 +59,6 @@ describe('Form Container: Change Plan', () => {
       updateSubscription: jest.fn(() => Promise.resolve()),
       isAws: false
     };
-    accountConditions.isAws = jest.fn(() => false);
     wrapper = shallow(<ChangePlanForm {...props} />);
     instance = wrapper.instance();
     submitSpy = jest.spyOn(instance.props, 'handleSubmit');
@@ -70,9 +71,8 @@ describe('Form Container: Change Plan', () => {
   });
 
   it('should get plans and countries on mount', () => {
-    expect(props.fetchAccount).toHaveBeenCalledWith(expect.objectContaining({
-      include: expect.stringContaining('billing')
-    }));
+    expect(props.fetchAccount).toHaveBeenCalled();
+    expect(props.getBillingInfo).toHaveBeenCalled();
     expect(props.getPlans).toHaveBeenCalled();
     expect(props.getBillingCountries).toHaveBeenCalled();
   });
@@ -87,15 +87,6 @@ describe('Form Container: Change Plan', () => {
     wrapper.setProps({ canUpdateBillingInfo: true });
     expect(wrapper).toHaveState('useSavedCC', true);
     expect(wrapper).toMatchSnapshot();
-  });
-
-  it('should handle toggle', () => {
-    wrapper.setProps({ canUpdateBillingInfo: true });
-    expect(wrapper.find('CardSummary')).toExist();
-    expect(wrapper.find('Connect(PaymentForm)')).not.toExist();
-    wrapper.setState({ useSavedCC: false });
-    expect(wrapper.find('CardSummary')).not.toExist();
-    expect(wrapper.find('Connect(PaymentForm)')).toExist();
   });
 
   it('should not render payment form if selecting free', () => {
@@ -116,6 +107,11 @@ describe('Form Container: Change Plan', () => {
     expect(submitSpy).toHaveBeenCalled();
   });
 
+  it('should render error', () => {
+    wrapper.setProps({ error: { message: 'Oh no! It broke.' }});
+    expect(wrapper).toMatchSnapshot();
+  });
+
   describe('onSubmit tests', () => {
     let values;
 
@@ -131,6 +127,18 @@ describe('Form Container: Change Plan', () => {
       expect(props.billingCreate).toHaveBeenCalledWith(values);
       expect(props.history.push).toHaveBeenCalledWith('/account/billing');
       expect(props.showAlert).toHaveBeenCalledWith({ type: 'success', message: 'Subscription Updated' });
+    });
+
+    it('should verify promo code if passed in as initial value', async () => {
+      props.initialValues = { promoCode: 'initial-promo-code' };
+      props.selectedPlan = { billingId: 'test-id' };
+      wrapper = await shallow(<ChangePlanForm {...props} />);
+      expect(props.getPlans).toHaveBeenCalled();
+      expect(props.verifyPromoCode).toHaveBeenCalledWith({
+        promoCode: 'initial-promo-code',
+        billingId: 'test-id',
+        meta: { promoCode: 'initial-promo-code', showErrorAlert: false }
+      });
     });
 
     it('should call verify if promo code is attached and update subscription', async () => {

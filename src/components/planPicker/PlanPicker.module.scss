@@ -14,11 +14,21 @@
   }
 }
 
+.TriggerHeader {
+  display: block;
+  padding: spacing(large);
+  font-size: rem(16);
+  font-weight: 600;
+  color: color(gray, 1);
+  cursor: pointer;
+  border-bottom: 1px solid color(gray, 9);
+}
+
 .TriggerPlan {
   position: relative;
   z-index: 1;
   display: block;
-  padding: spacing(large);
+  padding: spacing() rem(40);
 
   &.triggerOpen {
     box-shadow: shadow(deep);
@@ -26,7 +36,7 @@
 
   .MainLabel {
     color: color(orange);
-    font-size: rem(25);
+    font-size: font-size(700);
   }
 
   &.disabled {
@@ -35,10 +45,19 @@
   }
 }
 
+.DropdownLabel {
+  display: block;
+  padding: spacing() spacing() spacing(smaller);
+  background: color(gray, 10);
+  border-top: 1px solid color(gray, 9);
+  font-weight: 500;
+  color: color(gray, 1);
+}
+
 .DropdownPlan {
   display: block;
-  padding: spacing() spacing(large);
-  border-bottom: 1px solid color(gray, 9);
+  padding: spacing() spacing(larger);
+  padding-left: rem(40);
   background: color(gray, 10);
   transition: 0.15s;
 
@@ -47,7 +66,7 @@
   }
 
   .MainLabel {
-    font-size: rem(16);
+    font-size: font-size(700);
     line-height: 1em;
     color: color(gray, 4);
   }
@@ -61,20 +80,18 @@
   }
 }
 
-.SupportLabel {
-  display: block;
-  color: color(gray, 4);
-  font-size: rem(15);
+.PlanContainer {
+  position: relative;
 }
 
 .List {
   position: absolute;
   z-index: 100;
-  top: 100%;
+  top: 0;
   left: 0;
   right: 0;
 
-  max-height: rem(280);
+  max-height: rem(300);
   overflow: auto;
 
   box-shadow: shadow(deep);
@@ -95,8 +112,6 @@
 .Chevron {
   position: absolute;
   right: spacing(large);
-  top: 50%;
-  transform: translate(0, -50%);
   pointer-events: none;
   fill: color(orange);
 }
@@ -115,4 +130,10 @@
   font-size: rem(15);
   margin: 0;
   padding: 0 spacing() spacing();
+}
+
+.TierPlansInfo {
+  font-size: font-size(300);
+  line-height: line-height(300);
+  padding: 0 spacing(large) spacing();
 }

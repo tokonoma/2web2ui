@@ -2,7 +2,7 @@
 
 exports[`Signals EngagementRecencyPreview Component renders correctly 1`] = `
 <PageLink
-  to="/signals/engagement-recency/ip-pool/best-pool?subaccount=101"
+  to="/signals/engagement/cohorts/ip-pool/best-pool?subaccount=101"
 >
   <Panel>
     <Panel.Section>
@@ -17,8 +17,9 @@ exports[`Signals EngagementRecencyPreview Component renders correctly 1`] = `
     </Panel.Section>
     <Panel.Section>
       <BarChart
+        activeFill="#22838A"
         disableHover={true}
-        fill="#B157CE"
+        fill="#B3ECEF"
         gap={0.5}
         height={170}
         margin={
@@ -42,6 +43,7 @@ exports[`Signals EngagementRecencyPreview Component renders correctly 1`] = `
             "hide": true,
           }
         }
+        xAxisRefLines={Array []}
         xKey="date"
         yAxisProps={
           Object {
@@ -59,38 +61,44 @@ exports[`Signals EngagementRecencyPreview Component renders correctly 1`] = `
             ],
           }
         }
+        yAxisRefLines={Array []}
         yKey="value"
         yKeys={
           Array [
             Object {
               "description": "0-14 days since last engagement",
-              "fill": "#3F8B93",
+              "fill": "#1A838B",
               "key": "c_14d",
               "label": "Recently Engaged",
+              "stroke": "#1A838B",
             },
             Object {
               "description": "14-90 days since last engagement",
-              "fill": "#44A8AD",
+              "fill": "#219EA8",
               "key": "c_90d",
               "label": "Semi Recently Engaged",
+              "stroke": "#219EA8",
             },
             Object {
               "description": "90-365 days since last engagement",
-              "fill": "#9AD8E3",
+              "fill": "#29B9C7",
               "key": "c_365d",
               "label": "Not Recently Engaged",
+              "stroke": "#29B9C7",
             },
             Object {
               "description": "365+ days since last engagement",
-              "fill": "#B9E2E9",
+              "fill": "#50CFDA",
               "key": "c_uneng",
               "label": "Never Engaged",
+              "stroke": "#50CFDA",
             },
             Object {
               "description": "Never engaged, first email in last 7 days",
-              "fill": "#E4EEF0",
+              "fill": "#88E2E7",
               "key": "c_new",
               "label": "New",
+              "stroke": "#88E2E7",
             },
           ]
         }
@@ -108,7 +116,7 @@ exports[`Signals EngagementRecencyPreview Component renders correctly 1`] = `
 
 exports[`Signals EngagementRecencyPreview Component renders empty correctly 1`] = `
 <PageLink
-  to="/signals/engagement-recency/ip-pool/best-pool?subaccount=101"
+  to="/signals/engagement/cohorts/ip-pool/best-pool?subaccount=101"
 >
   <Panel>
     <Panel.Section>
@@ -135,7 +143,7 @@ exports[`Signals EngagementRecencyPreview Component renders empty correctly 1`] 
 
 exports[`Signals EngagementRecencyPreview Component renders error correctly 1`] = `
 <PageLink
-  to="/signals/engagement-recency/ip-pool/best-pool?subaccount=101"
+  to="/signals/engagement/cohorts/ip-pool/best-pool?subaccount=101"
 >
   <Panel>
     <Panel.Section>

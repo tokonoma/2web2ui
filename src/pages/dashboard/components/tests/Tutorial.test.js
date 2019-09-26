@@ -8,10 +8,15 @@ describe('Component: Tutorial', () => {
     currentUser: {
       email_verified: true
     },
+    checkSuppression: jest.fn(() => []),
+    listSendingDomains: jest.fn(() => []),
+    listApiKeys: jest.fn(() => []),
     hasSendingDomains: false,
     hasVerifiedDomains: true,
     hasApiKeysForSending: false,
-    hasBounceDomains: true
+    hasBounceDomains: true,
+    accountAgeInWeeks: 4,
+    hasSuppressions: false
   };
 
   let wrapper;
@@ -24,4 +29,9 @@ describe('Component: Tutorial', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  it('should call the correct functions on mount', () => {
+    expect(props.checkSuppression).toHaveBeenCalled();
+    expect(props.listSendingDomains).toHaveBeenCalled();
+    expect(props.listApiKeys).toHaveBeenCalledWith({ id: 0 });
+  });
 });

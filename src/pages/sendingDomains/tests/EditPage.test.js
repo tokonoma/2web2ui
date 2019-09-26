@@ -26,7 +26,8 @@ describe('Sending Domains Edit Page', () => {
       showAlert: jest.fn(),
       match: {
         params: { id: 'example.com' }
-      }
+      },
+      hasAutoVerifyEnabled: false
     };
 
     wrapper = shallow(<EditPage {...props}/>);

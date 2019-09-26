@@ -15,11 +15,20 @@
   .app & {
     flex: 1 0 0;
     padding: rem(56) spacing(larger) spacing(larger);
+
+    &.bannerOpen {
+      padding: rem(112) spacing(larger) spacing(larger);
+    }
   }
 
   .form &, .largeForm & {
     display: flex;
     align-items: center;
+    width: 100%;
+  }
+
+  .fullscreen & {
+    padding: 0;
     width: 100%;
   }
 }
@@ -40,6 +49,8 @@
   }
 
   .app & {
+    margin-left: spacing(larger);
+    margin-right: spacing(larger);
     min-height: 100%;
     max-width: rem(1080);
     margin: 0 auto;

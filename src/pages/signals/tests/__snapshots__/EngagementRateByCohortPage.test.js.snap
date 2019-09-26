@@ -1,0 +1,359 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Signals Engagement Rate By Cohort Page bar chart props gets x axis props 1`] = `
+Object {
+  "tickFormatter": [Function],
+  "ticks": Array [
+    1,
+    2,
+  ],
+}
+`;
+
+exports[`Signals Engagement Rate By Cohort Page bar chart props renders tooltip content 1`] = `
+<Fragment>
+  <TooltipMetric
+    color="#88E2E7"
+    description="Never engaged, first email in last 7 days"
+    key="new"
+    label="New"
+    value="50%"
+  />
+  <TooltipMetric
+    color="#1A838B"
+    description="0-14 days since last engagement"
+    key="14d"
+    label="Recently Engaged"
+    value="40%"
+  />
+  <TooltipMetric
+    color="#219EA8"
+    description="14-90 days since last engagement"
+    key="90d"
+    label="Semi Recently Engaged"
+    value="30%"
+  />
+  <TooltipMetric
+    color="#29B9C7"
+    description="90-365 days since last engagement"
+    key="365d"
+    label="Not Recently Engaged"
+    value="20%"
+  />
+  <TooltipMetric
+    color="#50CFDA"
+    description="365+ days since last engagement"
+    key="uneng"
+    label="Never Engaged"
+    value="11.1%"
+  />
+</Fragment>
+`;
+
+exports[`Signals Engagement Rate By Cohort Page renders correctly 1`] = `
+<SignalsPage
+  breadcrumbAction={
+    Object {
+      "component": [Function],
+      "content": "Back to Engagement Recency Overview",
+      "to": "/signals/engagement",
+    }
+  }
+  facet="sending-domain"
+  facetId="test.com"
+  primaryArea={
+    <Connect(DateFilter)
+      left={true}
+    />
+  }
+  title="Engagement Rate by Cohort"
+>
+  <Grid>
+    <Grid.Column
+      md={7}
+      sm={12}
+    >
+      <withRouter(Tabs)
+        facet="sending-domain"
+        facetId="test.com"
+      />
+      <Panel
+        sectioned={true}
+      >
+        <div
+          className="LiftTooltip"
+        >
+          <LineChart
+            height={300}
+            lineType="linear"
+            lines={
+              Array [
+                Object {
+                  "c_total": 1,
+                  "date": "2017-01-01",
+                },
+                Object {
+                  "c_total": 10,
+                  "date": "2017-01-02",
+                },
+              ]
+            }
+            margin={
+              Object {
+                "bottom": 5,
+                "left": 18,
+                "right": 0,
+                "top": 12,
+              }
+            }
+            onClick={[MockFunction]}
+            selected="2017-01-02"
+            stroke="#000"
+            tooltipContent={[Function]}
+            tooltipWidth="250px"
+            width="99%"
+            xAxisProps={
+              Object {
+                "tickFormatter": [Function],
+                "ticks": Array [
+                  1,
+                  2,
+                ],
+              }
+            }
+            xKey="date"
+            yAxisProps={
+              Object {
+                "domain": Array [
+                  0,
+                  1,
+                ],
+                "tickFormatter": [Function],
+              }
+            }
+            yKey="value"
+            yKeys={
+              Array [
+                Object {
+                  "description": "Never engaged, first email in last 7 days",
+                  "fill": "#88E2E7",
+                  "key": "p_new_eng",
+                  "label": "New",
+                  "stroke": "#88E2E7",
+                },
+                Object {
+                  "description": "365+ days since last engagement",
+                  "fill": "#50CFDA",
+                  "key": "p_uneng_eng",
+                  "label": "Never Engaged",
+                  "stroke": "#50CFDA",
+                },
+                Object {
+                  "description": "90-365 days since last engagement",
+                  "fill": "#29B9C7",
+                  "key": "p_365d_eng",
+                  "label": "Not Recently Engaged",
+                  "stroke": "#29B9C7",
+                },
+                Object {
+                  "description": "14-90 days since last engagement",
+                  "fill": "#219EA8",
+                  "key": "p_90d_eng",
+                  "label": "Semi Recently Engaged",
+                  "stroke": "#219EA8",
+                },
+                Object {
+                  "description": "0-14 days since last engagement",
+                  "fill": "#1A838B",
+                  "key": "p_14d_eng",
+                  "label": "Recently Engaged",
+                  "stroke": "#1A838B",
+                },
+              ]
+            }
+            yRange={
+              Array [
+                "auto",
+                "auto",
+              ]
+            }
+          />
+          <Legend
+            items={
+              Array [
+                Object {
+                  "description": "Never engaged, first email in last 7 days",
+                  "fill": "#88E2E7",
+                  "label": "New",
+                  "stroke": "#88E2E7",
+                },
+                Object {
+                  "description": "365+ days since last engagement",
+                  "fill": "#50CFDA",
+                  "label": "Never Engaged",
+                  "stroke": "#50CFDA",
+                },
+                Object {
+                  "description": "90-365 days since last engagement",
+                  "fill": "#29B9C7",
+                  "label": "Not Recently Engaged",
+                  "stroke": "#29B9C7",
+                },
+                Object {
+                  "description": "14-90 days since last engagement",
+                  "fill": "#219EA8",
+                  "label": "Semi Recently Engaged",
+                  "stroke": "#219EA8",
+                },
+                Object {
+                  "description": "0-14 days since last engagement",
+                  "fill": "#1A838B",
+                  "label": "Recently Engaged",
+                  "stroke": "#1A838B",
+                },
+              ]
+            }
+            tooltipContent={[Function]}
+          />
+        </div>
+      </Panel>
+    </Grid.Column>
+    <Grid.Column
+      md={5}
+      mdOffset={0}
+      sm={12}
+    >
+      <div
+        className="OffsetCol"
+      >
+        <EngagementRateByCohortActions
+          date="2017-01-02"
+          engagementByCohort={
+            Object {
+              "c_total": 10,
+              "date": "2017-01-02",
+            }
+          }
+          facet="sending-domain"
+          facetId="test.com"
+          recencyByCohort={
+            Object {
+              "c_uneng": 0.5,
+              "date": "2017-01-02",
+            }
+          }
+        />
+      </div>
+    </Grid.Column>
+  </Grid>
+  <Divider />
+  <Grid>
+    <Grid.Column
+      sm={6}
+      xs={12}
+    >
+      <withRouter(Connect(WithDetails(SpamTrapsPreview))) />
+    </Grid.Column>
+    <Grid.Column
+      sm={6}
+      xs={12}
+    >
+      <withRouter(Connect(WithDetails(HealthScorePreview))) />
+    </Grid.Column>
+  </Grid>
+</SignalsPage>
+`;
+
+exports[`Signals Engagement Rate By Cohort Page renders empty correctly 1`] = `
+<Panel
+  sectioned={true}
+>
+  <Callout
+    title="No Data Available"
+  >
+    Insufficient data to populate this chart
+  </Callout>
+</Panel>
+`;
+
+exports[`Signals Engagement Rate By Cohort Page renders error correctly 1`] = `
+<SignalsPage
+  breadcrumbAction={
+    Object {
+      "component": [Function],
+      "content": "Back to Engagement Recency Overview",
+      "to": "/signals/engagement",
+    }
+  }
+  facet="sending-domain"
+  facetId="test.com"
+  primaryArea={
+    <Connect(DateFilter)
+      left={true}
+    />
+  }
+  title="Engagement Rate by Cohort"
+>
+  <Grid>
+    <Grid.Column
+      md={7}
+      sm={12}
+    >
+      <withRouter(Tabs)
+        facet="sending-domain"
+        facetId="test.com"
+      />
+      <Panel
+        sectioned={true}
+      >
+        <Callout
+          title="Unable to Load Data"
+        >
+          error message
+        </Callout>
+      </Panel>
+    </Grid.Column>
+    <Grid.Column
+      md={5}
+      mdOffset={0}
+      sm={12}
+    >
+      <div
+        className="OffsetCol"
+      />
+    </Grid.Column>
+  </Grid>
+  <Divider />
+  <Grid>
+    <Grid.Column
+      sm={6}
+      xs={12}
+    >
+      <withRouter(Connect(WithDetails(SpamTrapsPreview))) />
+    </Grid.Column>
+    <Grid.Column
+      sm={6}
+      xs={12}
+    >
+      <withRouter(Connect(WithDetails(HealthScorePreview))) />
+    </Grid.Column>
+  </Grid>
+</SignalsPage>
+`;
+
+exports[`Signals Engagement Rate By Cohort Page renders loading correctly 1`] = `
+<Panel
+  sectioned={true}
+>
+  <div
+    style={
+      Object {
+        "height": "220px",
+        "position": "relative",
+      }
+    }
+  >
+    <Loading />
+  </div>
+</Panel>
+`;

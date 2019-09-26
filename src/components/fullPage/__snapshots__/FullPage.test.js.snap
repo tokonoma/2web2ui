@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FullPage renders a page 1`] = `
+<Fragment>
+  <div
+    className="FullPageNav"
+  >
+    <div
+      className="FullPageHeaderArea"
+    >
+      <UnstyledLink
+        className="FullPageBreadcrumb"
+        component={[Function]}
+        to="/here"
+      >
+        <ChevronLeft
+          size={28}
+        />
+        <Icon
+          height={28}
+          width={28}
+        />
+      </UnstyledLink>
+      <h1
+        className="FullPageTitle"
+      >
+        Test Example
+      </h1>
+    </div>
+    <div
+      className="FullPagePrimaryArea"
+    >
+      <button>
+        Click Me
+      </button>
+    </div>
+  </div>
+  <div
+    className="FullPageContents"
+  >
+    <div>
+      children
+    </div>
+  </div>
+</Fragment>
+`;

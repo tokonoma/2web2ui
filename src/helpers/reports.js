@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import qs from 'query-string';
-import { getRelativeDates } from 'src/helpers/date';
+import { getRelativeDates, relativeDateOptions } from 'src/helpers/date';
 import { stringifyTypeaheadfilter } from 'src/helpers/string';
 
 export function dedupeFilters(filters) {
@@ -31,8 +31,8 @@ export function parseSearch(search) {
     // Subaccount filters include 3 parts
     // 'Subaccount:1234 (ID 554):554' -> { type: 'Subaccount', value: '1234 (ID 554)', id: '554' }
     if (type === 'Subaccount') {
-      value = parts[0];
-      id = parts[1];
+      id = parts.pop();
+      value = parts.join(':');
     } else {
       value = parts.join(':');
     }
@@ -59,7 +59,8 @@ export function parseSearch(search) {
   }
 
   if (range) {
-    const effectiveRange = options.from && options.to ? range : 'day';
+    const invalidRange = !_.find(relativeDateOptions, ['value', range]);
+    const effectiveRange = invalidRange ? 'day' : range;
     options = { ...options, ...getRelativeDates(effectiveRange) };
   }
 

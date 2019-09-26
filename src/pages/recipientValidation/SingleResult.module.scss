@@ -1,0 +1,60 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.Header {
+  margin-bottom: 2rem;
+}
+
+.Result {
+  display: flex;
+  margin-bottom: 2rem;
+}
+
+.tab {
+  padding-left: 1em;
+}
+
+.apiHeader {
+  margin-bottom: 2rem;
+  font-size: 1rem;   
+}
+
+.tableKey {
+  width: 10rem;
+  display: inline-block; 
+}
+
+.table {
+  max-width: 400px;
+  margin-bottom: 2rem;
+}
+
+.greenBoolean {
+  color: #44D09E;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.redBoolean {
+  color: color(red);
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.blue {
+  color: #8FC4FE;
+}
+
+.white {
+  color: color(gray, 9);
+}
+
+.Paragraph {
+  line-height: 1.5em;
+  margin-bottom: 2.5rem;
+}
+
+.ApiDescription {
+  margin-bottom: 1.5rem;
+  line-height: 1.5em;
+  padding: 1rem;
+}

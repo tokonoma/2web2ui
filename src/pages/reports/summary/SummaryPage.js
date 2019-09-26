@@ -8,7 +8,7 @@ import { Loading } from 'src/components';
 import ReportOptions from '../components/ReportOptions';
 import { Table, MetricsModal, ChartGroup, ChartHeader } from './components';
 import { selectSummaryChartSearchOptions } from 'src/selectors/reportSearchOptions';
-
+import { selectReportsEnhancementsEnabled } from 'src/selectors/customReports';
 import styles from './SummaryPage.module.scss';
 
 export class SummaryReportPage extends Component {
@@ -49,7 +49,7 @@ export class SummaryReportPage extends Component {
   }
 
   render() {
-    const { chart, summarySearchOptions } = this.props;
+    const { chart, summarySearchOptions, enhancementsEnabled } = this.props;
     const { scale, eventTime, metricsModal } = this.state;
 
     return (
@@ -57,6 +57,7 @@ export class SummaryReportPage extends Component {
         <ReportOptions
           reportLoading={chart.chartLoading}
           searchOptions={summarySearchOptions}
+          customReportsEnabled={enhancementsEnabled}
         />
 
         <Panel>
@@ -90,7 +91,8 @@ export class SummaryReportPage extends Component {
 const mapStateToProps = (state) => ({
   chart: state.summaryChart,
   reportOptions: state.reportOptions,
-  summarySearchOptions: selectSummaryChartSearchOptions(state)
+  summarySearchOptions: selectSummaryChartSearchOptions(state),
+  enhancementsEnabled: selectReportsEnhancementsEnabled(state)
 });
 
 const mapDispatchToProps = {

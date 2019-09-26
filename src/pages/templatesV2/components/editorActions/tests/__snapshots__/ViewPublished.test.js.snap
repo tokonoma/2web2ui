@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ViewPublished renders ViewPublished action 1`] = `
+<div
+  className="Foo"
+>
+  <UnstyledLink
+    onClick={[Function]}
+  >
+    <RemoveRedEye />
+    View Published
+  </UnstyledLink>
+</div>
+`;

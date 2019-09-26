@@ -1,5 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`IP Pools Create Page renders error on listError 1`] = `
+<ApiErrorBanner
+  errorDetails="network error"
+  message="Sorry, we seem to have had some trouble loading your IP pool."
+  reload={[Function]}
+/>
+`;
+
 exports[`IP Pools Create Page should render the list page correctly 1`] = `
 <Page
   breadcrumbAction={
@@ -12,11 +20,9 @@ exports[`IP Pools Create Page should render the list page correctly 1`] = `
   empty={Object {}}
   title="Create IP Pool"
 >
-  <Connect(ReduxForm)
+  <withRouter(Connect(ReduxForm))
     isNew={true}
     onSubmit={[Function]}
   />
 </Page>
 `;
-
-exports[`IP Pools Create Page should show loading component when data is loading 1`] = `<Loading />`;

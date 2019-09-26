@@ -1,48 +1,38 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { act } from 'react-dom/test-utils';
+import { mount, shallow } from 'enzyme';
 
 import PreviewPanel from '../PreviewPanel';
 
-const props = {
-  html: '<h1>Test Template</h1>',
-  text: 'Test Template',
-  amp_html: '<h2>Test Template</h2>'
-};
-
-it('renders blank panel', () => {
-  const wrapper = shallow(<PreviewPanel />);
-  expect(wrapper).toMatchSnapshot();
-});
-
-it('renders HTML by default', () => {
-  const wrapper = shallow(<PreviewPanel {...props} />);
-  expect(wrapper).toMatchSnapshot();
-});
-
-it('renders text on tab click', () => {
-  const wrapper = shallow(<PreviewPanel {...props} />);
-
-  // @todo should be able to .find() the Text tab then .simulate('click')
-  wrapper.instance().onChange({
-    currentTarget: {
-      text: 'Text'
-    }
+describe('PreviewPanel', () => {
+  it('renders blank panel', () => {
+    const wrapper = shallow(<PreviewPanel />);
+    expect(wrapper).toMatchSnapshot();
   });
-  wrapper.update();
 
-  expect(wrapper).toMatchSnapshot();
-});
+  it('renders HTML content by default', () => {
+    const html = '<!DOCTYPE html>';
+    const wrapper = shallow(<PreviewPanel html={html} />);
 
-it('renders AMP HTML on tab click', () => {
-  const wrapper = shallow(<PreviewPanel {...props} isAmpLive={true} />);
-
-  // @todo should be able to .find() the AMP HTML tab then .simulate('click')
-  wrapper.instance().onChange({
-    currentTarget: {
-      text: 'AMP HTML'
-    }
+    expect(wrapper.find('PreviewFrame')).toHaveProp('content', html);
   });
-  wrapper.update();
 
-  expect(wrapper).toMatchSnapshot();
+  it('renders AMP HTML content when tab is clicked', () => {
+    const ampHtml = '<html ⚡>';
+    const TestPreviewFrame = () => null; // stub frame for a safe mount
+    const wrapper = mount(<PreviewPanel ampHtml={ampHtml} Frame={TestPreviewFrame} />);
+
+    act(() => {
+      wrapper
+        .find('Tabs')
+        .prop('tabs')
+        .find(({ key }) => key === 'ampHtml')
+        .onClick();
+    });
+
+    wrapper.update();
+
+    expect(wrapper.find('TestPreviewFrame')).toHaveProp('content', ampHtml);
+    expect(wrapper.find('TestPreviewFrame')).toHaveProp('strict', false);
+  });
 });

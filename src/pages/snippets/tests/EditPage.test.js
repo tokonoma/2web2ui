@@ -1,6 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import EditPage from '../EditPage';
+import SubaccountSection from 'src/components/subaccountSection';
 
 describe('EditPage', () => {
   const subject = (props = {}) => shallow(
@@ -9,6 +10,7 @@ describe('EditPage', () => {
       getSnippet={() => {}}
       handleSubmit={(fn) => fn}
       hasSubaccounts={true}
+      canViewSubaccount={true}
       id="test-snippet"
       {...props}
     />
@@ -18,10 +20,6 @@ describe('EditPage', () => {
     expect(subject()).toMatchSnapshot();
   });
 
-  it('renders edit form with AMP enabled', () => {
-    expect(subject({ isAmpLive: true }).find('LoadableComponent').props().isAmpLive).toEqual(true);
-  });
-
   it('redirects with alert when load request fails', () => {
     const wrapper = subject({ loadingError: new Error('Oh no!') });
     expect(wrapper).toMatchSnapshot();
@@ -29,12 +27,22 @@ describe('EditPage', () => {
 
   it('renders loading', () => {
     const wrapper = subject({ loading: true });
-    expect(wrapper).toMatchSnapshot();
+    expect(wrapper.find('Loading')).toExist();
+    expect(wrapper.find('Page')).not.toExist();
+  });
+
+  it('renders subaccount section if account has subaccounts and can view subaccount', () => {
+    expect(subject().find(SubaccountSection)).toExist();
   });
 
   it('renders without subaccount section when account has no subaccounts', () => {
     const wrapper = subject({ hasSubaccounts: false });
-    expect(wrapper).toMatchSnapshot();
+    expect(wrapper.find(SubaccountSection)).not.toExist();
+  });
+
+  it('renders without subaccount section when user is a subaccount user', () => {
+    const wrapper = subject({ canViewSubaccount: false });
+    expect(wrapper.find(SubaccountSection)).not.toExist();
   });
 
   it('renders disabled form when submitting', () => {

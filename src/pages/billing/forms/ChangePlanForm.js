@@ -4,21 +4,19 @@ import { connect } from 'react-redux';
 import { reduxForm, formValueSelector } from 'redux-form';
 import { withRouter } from 'react-router-dom';
 import qs from 'query-string';
-import { fetch as fetchAccount, getPlans } from 'src/actions/account';
+import { fetch as fetchAccount, getPlans, getBillingInfo } from 'src/actions/account';
 import { updateSubscription, getBillingCountries, verifyPromoCode, clearPromoCode } from 'src/actions/billing';
 import billingCreate from 'src/actions/billingCreate';
 import billingUpdate from 'src/actions/billingUpdate';
 import { showAlert } from 'src/actions/globalAlert';
 import { changePlanInitialValues } from 'src/selectors/accountBillingForms';
 import {
-  currentPlanSelector, canUpdateBillingInfoSelector, selectVisiblePlans
+  currentPlanSelector, canUpdateBillingInfoSelector, selectTieredVisiblePlans, selectAccountBilling
 } from 'src/selectors/accountBillingInfo';
 import { Panel, Grid } from '@sparkpost/matchbox';
-import { Loading, PlanPicker } from 'src/components';
-import PaymentForm from './fields/PaymentForm';
-import BillingAddressForm from './fields/BillingAddressForm';
+import { Loading, PlanPicker, ApiErrorBanner } from 'src/components';
 import Confirmation from '../components/Confirmation';
-import CardSummary from '../components/CardSummary';
+import CardSection from '../components/CardSection';
 import promoCodeValidate from '../helpers/promoCodeValidate';
 import { isAws, isSelfServeBilling } from 'src/helpers/conditions/account';
 import { selectCondition } from 'src/selectors/accessConditionState';
@@ -37,9 +35,22 @@ export class ChangePlanForm extends Component {
   };
 
   componentDidMount() {
-    this.props.getPlans();
+    this.props.getPlans().then(() => {
+      const { initialValues, selectedPlan } = this.props;
+
+      //After loading plans, verifies query promo against plan and applies UI discount
+      //TODO: Move to componentDidUpdate
+      if (initialValues.promoCode && !_.isEmpty(selectedPlan)) {
+        return this.props.verifyPromoCode({
+          promoCode: initialValues.promoCode,
+          billingId: selectedPlan.billingId,
+          meta: { promoCode: initialValues.promoCode, showErrorAlert: false }
+        });
+      }
+    });
     this.props.getBillingCountries();
-    this.props.fetchAccount({ include: 'billing' });
+    this.props.fetchAccount();
+    this.props.getBillingInfo();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -87,42 +98,6 @@ export class ChangePlanForm extends Component {
       });
   };
 
-  renderCCSection = () => {
-    const { account, selectedPlan } = this.props;
-
-    if (selectedPlan.isFree) {
-      return null; // CC not required on free plans
-    }
-
-    if (account.billing && this.state.useSavedCC) {
-      return (
-        <Panel title='Pay With Saved Payment Method' actions={[{ content: 'Use Another Credit Card', onClick: this.handleCardToggle, color: 'orange' }]}>
-          <Panel.Section><CardSummary billing={account.billing} /></Panel.Section>
-        </Panel>
-      );
-    }
-
-    const savedPaymentAction = this.props.canUpdateBillingInfo
-      ? [{ content: 'Use Saved Payment Method', onClick: this.handleCardToggle, color: 'orange' }]
-      : null;
-
-    return (
-      <Panel title='Add a Credit Card' actions={savedPaymentAction}>
-        <Panel.Section>
-          <PaymentForm
-            formName={FORMNAME}
-            disabled={this.props.submitting} />
-        </Panel.Section>
-        <Panel.Section>
-          <BillingAddressForm
-            formName={FORMNAME}
-            disabled={this.props.submitting}
-            countries={this.props.billing.countries} />
-        </Panel.Section>
-      </Panel>
-    );
-  }
-
   onPlanSelect = (e) => {
     const { currentPlan, clearPromoCode } = this.props;
     if (currentPlan.code !== e.code) {
@@ -131,7 +106,19 @@ export class ChangePlanForm extends Component {
   }
 
   render() {
-    const { loading, submitting, currentPlan, selectedPlan, plans, isSelfServeBilling, billing, verifyPromoCode } = this.props;
+    const { loading, canUpdateBillingInfo, submitting, currentPlan, selectedPlan, plans, isSelfServeBilling, billing, verifyPromoCode, error, account } = this.props;
+    const { countries } = billing;
+    if (error) {
+      return (
+        <ApiErrorBanner
+          status='danger'
+          message="We couldn't render the page. Reload to try again."
+          reload={() => location.reload()}
+          errorDetails={error.message}
+        />
+      );
+    }
+
     if (loading) {
       return <Loading />;
     }
@@ -148,14 +135,22 @@ export class ChangePlanForm extends Component {
       <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
         <Grid>
           <Grid.Column>
-            <Panel title='Select A Plan'>
-              {plans.length
+            <Panel>
+              {!_.isEmpty(plans)
                 ? <PlanPicker disabled={submitting} plans={plans} onChange={this.onPlanSelect}/>
                 : null
               }
             </Panel>
             <AccessControl condition={not(isAws)}>
-              {this.renderCCSection()}
+              <CardSection
+                account={account}
+                countries={countries}
+                selectedPlan={selectedPlan}
+                submitting={submitting}
+                canUpdateBillingInfo={canUpdateBillingInfo}
+                useSavedCC={this.state.useSavedCC}
+                handleCardToggle={this.handleCardToggle}
+              />
             </AccessControl>
           </Grid.Column>
           <Grid.Column xs={12} md={5}>
@@ -175,24 +170,23 @@ export class ChangePlanForm extends Component {
 
 const mapStateToProps = (state, props) => {
   const selector = formValueSelector(FORMNAME);
-  const { code: planCode } = qs.parse(props.location.search);
-
-  const plans = selectVisiblePlans(state);
-
+  const { code: planCode, promo: promoCode } = qs.parse(props.location.search);
+  const plans = selectTieredVisiblePlans(state);
+  const { account, loading } = selectAccountBilling(state);
   return {
-    loading: (!state.account.created && state.account.loading) || (plans.length === 0 && state.billing.plansLoading),
+    loading: (!account.created && loading) || (_.isEmpty(plans) && state.billing.plansLoading),
     isAws: selectCondition(isAws)(state),
-    account: state.account,
+    account,
     billing: state.billing,
     canUpdateBillingInfo: canUpdateBillingInfoSelector(state),
     isSelfServeBilling: selectCondition(isSelfServeBilling)(state),
     plans,
     currentPlan: currentPlanSelector(state),
     selectedPlan: selector(state, 'planpicker') || {},
-    initialValues: changePlanInitialValues(state, { planCode })
+    initialValues: changePlanInitialValues(state, { planCode, promoCode })
   };
 };
 
-const mapDispatchtoProps = { billingCreate, billingUpdate, updateSubscription, showAlert, getPlans, getBillingCountries, fetchAccount, verifyPromoCode, clearPromoCode };
-const formOptions = { form: FORMNAME, asyncValidate: promoCodeValidate(FORMNAME), asyncChangeFields: ['planpicker'], asyncBlurFields: ['promoCode']};
+const mapDispatchtoProps = { getBillingInfo, billingCreate, billingUpdate, updateSubscription, showAlert, getPlans, getBillingCountries, fetchAccount, verifyPromoCode, clearPromoCode };
+const formOptions = { form: FORMNAME, enableReinitialize: true, asyncValidate: promoCodeValidate(FORMNAME), asyncChangeFields: ['planpicker'], asyncBlurFields: ['promoCode']};
 export default withRouter(connect(mapStateToProps, mapDispatchtoProps)(reduxForm(formOptions)(ChangePlanForm)));

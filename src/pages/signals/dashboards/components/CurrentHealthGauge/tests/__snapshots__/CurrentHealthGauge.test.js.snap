@@ -1,0 +1,96 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Signals Health Score Gauge Container renders bad threshold color 1`] = `"#FF594D"`;
+
+exports[`Signals Health Score Gauge Container renders error correctly 1`] = `
+<Callout
+  height="auto"
+  title="Unable to Load Data"
+>
+  mock error
+</Callout>
+`;
+
+exports[`Signals Health Score Gauge Container renders happy path correctly 1`] = `
+<Panel
+  sectioned={true}
+>
+  <div
+    className="Content"
+  >
+    <h2
+      className="Header"
+    >
+      Current Health Score
+    </h2>
+    <Gauge
+      score={88}
+      threshold={
+        Object {
+          "barColor": "#2CC995",
+          "color": "#2CC995",
+          "condition": [Function],
+          "description": <React.Fragment>
+            A Health score above 80 is considered to be 
+            <strong>
+              good
+            </strong>
+            .
+          </React.Fragment>,
+          "icon": [Function],
+        }
+      }
+    />
+    <div
+      className="Description"
+    >
+      <CheckCircleOutline
+        className="DescriptionIcon"
+        size={25}
+        style={
+          Object {
+            "fill": "#2CC995",
+          }
+        }
+      />
+      <p
+        className="DescriptionContent"
+      >
+        A Health score above 80 is considered to be 
+        <strong>
+          good
+        </strong>
+        .
+      </p>
+    </div>
+    <div
+      className="Metrics"
+    >
+      <MetricDisplay
+        color="#FF594D"
+        direction="down"
+        label="WoW Change"
+        value="-5%"
+      />
+      <MetricDisplay
+        color="#2CC995"
+        direction="up"
+        label="DoD Change"
+        value="5%"
+      />
+    </div>
+  </div>
+</Panel>
+`;
+
+exports[`Signals Health Score Gauge Container renders no current score correctly 1`] = `
+<Callout
+  height="auto"
+>
+  Current Health Score Not Available
+</Callout>
+`;
+
+exports[`Signals Health Score Gauge Container renders title with a custom date 1`] = `"Health Score for Jan 1st"`;
+
+exports[`Signals Health Score Gauge Container renders warning threshold color 1`] = `"#E6B400"`;

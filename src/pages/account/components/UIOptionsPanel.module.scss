@@ -1,0 +1,10 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.ToggleRow {
+  display: flex;
+
+  :first-child {
+    flex-grow: 1;
+    padding-right: spacing();
+  }
+}

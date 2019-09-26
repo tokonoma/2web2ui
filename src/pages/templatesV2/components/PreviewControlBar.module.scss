@@ -1,0 +1,22 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.PreviewControlBar {
+  border-bottom: 1px solid color(gray, 8);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 50px; // must match height of left panel
+}
+
+.PreviewDeviceToggle {
+  margin-left: spacing();
+}
+
+.PreviewDeviceButton {
+  color: color(gray, 4); // to match default text
+  margin-right: spacing();
+
+  &.active {
+    color: color(blue);
+  }
+}

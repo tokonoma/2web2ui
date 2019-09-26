@@ -6,17 +6,9 @@ exports[`StatusDescription component Shallow tests does not render subaccount de
     <LabelledValue
       label={<StatusTooltipHeader />}
     >
-      <DomainStatusTag
+      <StatusLabel
         status="unverified"
       />
-      <div>
-        <ReadyFor
-          bounce={false}
-          bounceDefault={false}
-          dkim={false}
-          sending={false}
-        />
-      </div>
     </LabelledValue>
   </Panel.Section>
 </Fragment>
@@ -28,18 +20,9 @@ exports[`StatusDescription component Shallow tests renders subaccount details 1`
     <LabelledValue
       label={<StatusTooltipHeader />}
     >
-      <DomainStatusTag
+      <StatusLabel
         status="unverified"
       />
-      <div>
-        <ReadyFor
-          bounce={false}
-          bounceDefault={false}
-          dkim={false}
-          sending={false}
-          subaccount={101}
-        />
-      </div>
     </LabelledValue>
   </Panel.Section>
   <Panel.Section>
@@ -64,17 +47,9 @@ exports[`StatusDescription component Shallow tests renders verification status c
     <LabelledValue
       label={<StatusTooltipHeader />}
     >
-      <DomainStatusTag
+      <StatusLabel
         status="blocked"
       />
-      <div>
-        <ReadyFor
-          bounce={false}
-          bounceDefault={false}
-          dkim={false}
-          sending={false}
-        />
-      </div>
     </LabelledValue>
   </Panel.Section>
 </Fragment>
@@ -86,17 +61,9 @@ exports[`StatusDescription component Shallow tests renders verification status c
     <LabelledValue
       label={<StatusTooltipHeader />}
     >
-      <DomainStatusTag
+      <StatusLabel
         status="pending"
       />
-      <div>
-        <ReadyFor
-          bounce={false}
-          bounceDefault={false}
-          dkim={false}
-          sending={false}
-        />
-      </div>
     </LabelledValue>
   </Panel.Section>
 </Fragment>
@@ -108,17 +75,9 @@ exports[`StatusDescription component Shallow tests renders verification status c
     <LabelledValue
       label={<StatusTooltipHeader />}
     >
-      <DomainStatusTag
+      <StatusLabel
         status="unverified"
       />
-      <div>
-        <ReadyFor
-          bounce={false}
-          bounceDefault={false}
-          dkim={false}
-          sending={false}
-        />
-      </div>
     </LabelledValue>
   </Panel.Section>
 </Fragment>
@@ -130,13 +89,9 @@ exports[`StatusDescription component Shallow tests renders verification status c
     <LabelledValue
       label={<StatusTooltipHeader />}
     >
-      <div>
-        <VerifiedIcon />
-         
-        <strong>
-          Verified
-        </strong>
-      </div>
+      <StatusLabel
+        status="verified"
+      />
       <div>
         <ReadyFor
           bounce={false}

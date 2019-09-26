@@ -19,6 +19,10 @@ exports[`ContentEditor should render 1`] = `
           "onClick": [Function],
         },
         Object {
+          "content": "AMP HTML",
+          "onClick": [Function],
+        },
+        Object {
           "content": "Test Data",
           "onClick": [Function],
         },
@@ -61,6 +65,10 @@ exports[`ContentEditor should render without test data tab 1`] = `
         },
         Object {
           "content": "Text",
+          "onClick": [Function],
+        },
+        Object {
+          "content": "AMP HTML",
           "onClick": [Function],
         },
       ]

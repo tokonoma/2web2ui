@@ -1,0 +1,34 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.LastTriggeredCard {
+  display: block;
+  height: 8rem;
+  padding: 1rem;
+  max-width: 100vw;
+  word-wrap: break-word;
+  overflow: hidden;
+}
+
+.Footer {
+  padding: rem(10) 0 rem(45);
+  height: rem(40);
+  text-align: right;
+}
+
+.LastTriggeredTime {
+  font-size: rem(17);
+  display: block;
+  margin-bottom: rem(30);
+}
+
+.Description {
+  position: relative;
+  top: -20px;
+  width: 75%;
+}
+
+.Icon {
+  fill: color(gray, 5);
+  position: relative;
+  top: -1px;
+}

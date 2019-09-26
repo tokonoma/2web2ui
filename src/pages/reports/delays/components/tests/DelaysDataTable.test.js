@@ -1,6 +1,6 @@
 import React from 'react';
 import { DelaysDataTable } from '../DelaysDataTable';
-import { shallow, mount } from 'enzyme';
+import { shallow } from 'enzyme';
 
 describe('DelaysDataTable: ', () => {
   let wrapper;
@@ -42,10 +42,4 @@ describe('DelaysDataTable: ', () => {
     expect(rows).toMatchSnapshot();
   });
 
-  it('should filter by domain', () => {
-    const rows = wrapper.instance().getRowData({ reason: 'bad delay', count_delayed: 1, count_delayed_first: 10, domain: 'yahoo.com' });
-    const link = mount(rows[1]);
-    link.find('UnstyledLink').simulate('click');
-    expect(props.addFilters).toHaveBeenCalledWith([{ type: 'Recipient Domain', value: 'yahoo.com' }]);
-  });
 });

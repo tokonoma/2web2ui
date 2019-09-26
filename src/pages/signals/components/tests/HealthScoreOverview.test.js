@@ -10,6 +10,7 @@ describe('HealthScoreOverview', () => {
       data={[
         {
           current_health_score: 98,
+          current_total_injection_count: 200000,
           domain: 'example.com',
           history: [
             { date: '2018-01-13', health_score: 98 }
@@ -29,10 +30,12 @@ describe('HealthScoreOverview', () => {
       signalOptions={{
         facet: 'domain',
         facetSearchTerm: 'example.com',
+        from: '2015-01-01',
         relativeRange: '14days',
         subaccount: {
           id: 123
-        }
+        },
+        to: '2015-01-05'
       }}
       subaccounts={{
         123: { id: 123, name: 'Test Subaccount' }
@@ -86,16 +89,32 @@ describe('HealthScoreOverview', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('handles chart type change', () => {
-    const wrapper = subject();
-    wrapper.find('ChartType').simulate('change', 'bar');
-    expect(wrapper.state('chartType')).toEqual('bar');
+  it('renders custom date range', () => {
+    const wrapper = subject({ signalOptions: { relativeRange: 'custom', to: new Date('2019/06/08') }});
+    expect(wrapper.find('Column[dataKey="current_health_score"]').prop('label')).toEqual('Score');
+    expect(wrapper.find('Column[dataKey="current_total_injection_count"]').prop('label')).toEqual('Injections');
+  });
+
+  it('renders injections column if after V2 release date', () => {
+    const wrapper = subject({ signalOptions: { to: new Date('2019/06/08') }});
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('does not render title', () => {
+    const wrapper = subject({ hideTitle: true });
+    expect(wrapper.find('div[className="Header"]')).not.toExist();
   });
 
   it('requests reset on mount', () => {
     const resetSummaryTable = jest.fn();
     subject({ resetSummaryTable });
-    expect(resetSummaryTable).toHaveBeenCalledWith('Test', undefined);
+    expect(resetSummaryTable).toHaveBeenCalledWith('Test', {});
+  });
+
+  it('requests reset on mount with default options', () => {
+    const resetSummaryTable = jest.fn();
+    subject({ resetSummaryTable, defaults: { perPage: 25 }});
+    expect(resetSummaryTable).toHaveBeenCalledWith('Test', { perPage: 25 });
   });
 
   it('requests reset to default view for subaccount view on mount', () => {
@@ -109,7 +128,7 @@ describe('HealthScoreOverview', () => {
     const wrapper = subject();
     wrapper.setProps({ resetSummaryTable, signalOptions: {}});
 
-    expect(resetSummaryTable).toHaveBeenCalledWith('Test', undefined);
+    expect(resetSummaryTable).toHaveBeenCalledWith('Test', {});
   });
 
   it('requests data on summary table update', () => {
@@ -125,6 +144,7 @@ describe('HealthScoreOverview', () => {
     expect(getHealthScore).toHaveBeenCalledWith({
       facet: 'domain',
       filter: 'example.com',
+      from: '2015-01-01',
       limit: 10,
       offset: 10,
       order: undefined,
@@ -132,7 +152,8 @@ describe('HealthScoreOverview', () => {
       relativeRange: '14days',
       subaccount: {
         id: 123
-      }
+      },
+      to: '2015-01-05'
     });
   });
 
@@ -178,27 +199,16 @@ describe('HealthScoreOverview', () => {
   });
 
   describe('history component', () => {
-    const factory = (pageProps) => ({ chartType, ...props }) => {
+    const factory = (pageProps) => (props) => {
       const wrapper = subject(pageProps);
-      wrapper.setState({ chartType });
       const Column = wrapper.find('Column[dataKey="history"]').prop('component');
 
       return shallow(<Column domain="example.com" sid={123} {...props} />);
     };
 
-    it('renders absolute bar chart', () => {
-      const wrapper = factory()({ chartType: 'bar' });
-      expect(wrapper).toMatchSnapshot();
-    });
-
-    it('renders absolute sparkline', () => {
-      const wrapper = factory()({ chartType: 'line' });
-      expect(wrapper).toMatchSnapshot();
-    });
-
     it('redirects to details page when bar is clicked', () => {
       const historyPush = jest.fn();
-      const wrapper = factory({ history: { push: historyPush }})({ chartType: 'bar' });
+      const wrapper = factory({ history: { push: historyPush }})();
       wrapper.simulate('click', { date: '2018-01-13' });
 
       expect(historyPush).toHaveBeenCalledWith({
@@ -210,7 +220,7 @@ describe('HealthScoreOverview', () => {
 
     it('redirects to details page when dot is clicked', () => {
       const historyPush = jest.fn();
-      const wrapper = factory({ history: { push: historyPush }})({ chartType: 'line' });
+      const wrapper = factory({ history: { push: historyPush }})();
       wrapper.simulate('click', { date: '2018-01-13' });
 
       expect(historyPush).toHaveBeenCalledWith({
@@ -229,7 +239,6 @@ describe('HealthScoreOverview', () => {
         },
         history: { push: historyPush }
       })({
-        chartType: 'line',
         sid: -1
       });
       wrapper.simulate('click', { date: '2018-01-13' });
@@ -247,4 +256,43 @@ describe('HealthScoreOverview', () => {
       expect(columnWrapper).toMatchSnapshot();
     });
   });
+
+  describe('current injections column component', () => {
+    it('renders current injection count', () => {
+      const wrapper = subject({ signalOptions: { relativeRange: 'custom', to: new Date('2019/06/08') }});
+      const Column = wrapper.find('Column[dataKey="current_total_injection_count"]').prop('component');
+      const columnWrapper = shallow(<Column current_total_injection_count={235000} />);
+
+      expect(columnWrapper).toMatchSnapshot();
+    });
+  });
+
+  it('filters out master and all subaccounts row', () => {
+    const data = [
+      {
+        current_health_score: 98,
+        domain: 'example.com',
+        history: [
+          { date: '2018-01-13', health_score: 98 }
+        ],
+        average_health_score: 98,
+        WoW: 0.1,
+        sid: 123
+      },
+      {
+        current_health_score: 50,
+        domain: 'master-and-all.com',
+        history: [
+          { date: '2018-01-13', health_score: 50 }
+        ],
+        average_health_score: 50,
+        WoW: 0.5,
+        sid: -1
+      }
+    ];
+    const wrapper = subject({ data });
+    expect(wrapper.find(SummaryTable).prop('data')).toHaveLength(1);
+    expect(wrapper.find(SummaryTable).prop('data')[0]).toEqual(data[0]);
+  });
+
 });

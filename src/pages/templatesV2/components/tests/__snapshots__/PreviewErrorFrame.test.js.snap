@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PreviewErrorFrame renders error message 1`] = `
+<div
+  className="PreviewErrorFrame"
+>
+  <Warning
+    size={72}
+  />
+  <h1>
+    Oh no! An Error Occurred
+  </h1>
+  <p>
+    We are unable to load your template preview due to a 
+    oh no!
+     on line 
+    1
+     of your 
+    html
+    .
+  </p>
+  <p>
+    If you notice this happens often, check your substitution data or code syntax as these are frequent causes of preview errors.
+  </p>
+</div>
+`;

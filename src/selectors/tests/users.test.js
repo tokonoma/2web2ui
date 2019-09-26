@@ -5,8 +5,8 @@ describe('Users Selectors', () => {
     currentUser: { username: 'zebra' },
     users: {
       entities: {
-        ape: { name: 'Ape', username: 'ape' },
-        zebra: { name: 'Zebra', username: 'zebra' }
+        ape: { name: 'Ape', username: 'ape', access: 'access' },
+        zebra: { name: 'Zebra', username: 'zebra', access: 'templates' }
       },
       sortKey: 'name'
     }

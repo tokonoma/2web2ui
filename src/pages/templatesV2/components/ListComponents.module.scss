@@ -1,0 +1,28 @@
+@import 'src/styles/status-color';
+
+.Name {
+  margin-bottom: 0;
+}
+
+.Id {
+  margin-bottom: 0;
+  line-height: 1.4em;
+  font-size: font-size(300);
+}
+
+.LastUpdated {
+  margin-bottom: 0;
+}
+
+.PublishedWithChanges {
+  font-style: italic;
+  white-space: nowrap;
+}
+
+.published {
+  white-space: nowrap;
+}
+
+.PublishedIconColor {
+  color: status-color('success');
+}

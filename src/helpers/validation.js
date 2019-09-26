@@ -1,10 +1,18 @@
 import _ from 'lodash';
 import { formatBytes } from 'src/helpers/units';
 import { getDuration } from 'src/helpers/date';
+import { toSentence } from 'src/helpers/array';
+import { multilineStringToArray } from 'src/helpers/string';
 import { isEmailAddress, isEmailLocalPart, isRecipientEmailAddress } from 'src/helpers/email';
 import { domainRegex, slugRegex } from './regex';
 import isURL from 'validator/lib/isURL';
 import Payment from 'payment';
+import moment from 'moment';
+
+// validation gate to only check valiation if string is present
+export const ifStringPresent = (validator) => (str = '') => (
+  str.trim() === '' ? undefined : validator(str)
+);
 
 export function required(value) {
   return value ? undefined : 'Required';
@@ -12,6 +20,14 @@ export function required(value) {
 
 export function email(value) {
   return isEmailAddress(value) ? undefined : 'Invalid Email';
+}
+
+export function emails(str) {
+  const values = multilineStringToArray(str);
+
+  return values.length && values.every(isEmailAddress)
+    ? undefined
+    : 'Must be a comma separated list of valid Email Addresses';
 }
 
 export function emailLocal(value) {
@@ -101,9 +117,17 @@ export function nonEmptyFile(file) {
   return !file || file.size > 0 ? undefined : 'File must be non-empty';
 }
 
-export const fileExtension = _.memoize(function fileExtension(extension) {
-  const regex = RegExp(`.${extension}$`);
-  return (file) => !file || regex.test(file.name) ? undefined : `Must be a .${extension} file`;
+export const fileExtension = _.memoize(function fileExtension(...extensions) {
+  const formattedExtensions = extensions.map((extension) => `.${extension.toLowerCase()}`);
+
+  return (file) => {
+    if (!file) {
+      return;
+    }
+    const hasValidExtension = formattedExtensions.some((extension) => file.name.toLowerCase().endsWith(extension));
+
+    return hasValidExtension ? undefined : `Must be a ${toSentence(formattedExtensions, 'or')} file`;
+  };
 });
 
 export const maxLength = _.memoize(function maxLength(length) {
@@ -126,6 +150,10 @@ export const maxNumber = _.memoize(function maxNumber(max) {
 
 export const numberBetween = _.memoize(function numberBetween(min, max) {
   return (value) => (value > min && value < max) ? undefined : `Must be between ${min} and ${max}`;
+});
+
+export const numberBetweenInclusive = _.memoize(function numberBetween(min, max) {
+  return (value) => (value >= min && value <= max) ? undefined : `Must be between ${min} and ${max}`;
 });
 
 export const maxFileSize = _.memoize(function maxFilesSize(maxSize) {
@@ -152,3 +180,14 @@ export const json = (value) => {
     return 'Must be valid JSON';
   }
 };
+
+// Date validator for the DatePicker component
+export const minDays = _.memoize(function minDays(min) {
+  return function (dates) {
+    // This checks if the dates meet the minimum, and does not factor in the time of those dates
+    // Min is subtracted by 1 to account for up to one 24 hour period excluded from the calculation
+    return Math.abs(moment(dates.from).diff(moment(dates.to), 'days')) < min - 1
+      ? `Select a range of at least ${min} days`
+      : undefined;
+  };
+});

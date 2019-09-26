@@ -1,0 +1,19 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.Title {
+  padding: spacing(base) 1rem;
+}
+
+.FilterPanel {
+  padding: 1rem 1rem 0;
+  align-items: center;
+  justify-content: center;
+}
+
+.TableWrapper {
+  overflow-x: auto;
+
+  & > * {
+    margin-bottom: 0;
+  }
+}

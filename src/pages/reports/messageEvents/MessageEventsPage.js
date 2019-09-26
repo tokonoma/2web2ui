@@ -1,17 +1,20 @@
+/* eslint-disable max-lines */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { snakeToFriendly } from 'src/helpers/string';
-import { Page } from '@sparkpost/matchbox';
+import { Button, Page } from '@sparkpost/matchbox';
 import { PanelLoading, TableCollection, ApiErrorBanner, Empty } from 'src/components';
-import DisplayDate from './components/DisplayDate';
+import { DisplayDate } from 'src/components';
 import MessageEventsSearch from './components/MessageEventsSearch';
 import ViewDetailsButton from './components/ViewDetailsButton';
-import { getMessageEvents, changePage } from 'src/actions/messageEvents';
-import { selectMessageEvents } from 'src/selectors/messageEvents';
-import CollectionControls from 'src/components/collection/CollectionControls';
+import { getMessageEvents, changePage, getMessageEventsCSV, clearCSV } from 'src/actions/messageEvents';
+import { selectMessageEvents, selectMessageEventsCSV } from 'src/selectors/messageEvents';
+import { formatToCsv, download } from 'src/helpers/downloading';
 import { DEFAULT_PER_PAGE_BUTTONS } from 'src/constants';
 import CursorPaging from './components/CursorPaging';
 import _ from 'lodash';
+import PerPageButtons from 'src/components/collection/PerPageButtons.js';
+import styles from './MessageEventsPage.module.scss';
 
 const errorMsg = 'Sorry, we seem to have had some trouble loading your message events.';
 const emptyMessage = 'There are no message events for your current query';
@@ -32,14 +35,25 @@ export class MessageEventsPage extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { search, getMessageEvents } = this.props;
+    const { search, getMessageEvents, eventsCSV } = this.props;
     const { perPage } = this.state;
     //Refresh the page & load new data if the search filters have changed
     if (!_.isEqual(prevProps.search, search)) {
       this.setState({ currentPage: 1 });
       getMessageEvents({ perPage, ...search });
     }
+    if (!prevProps.eventsCSV.length && eventsCSV.length) {
+      this.downloadCSV();
+    }
   }
+
+  downloadCSV = () => {
+    const { eventsCSV, clearCSV } = this.props;
+    const url = formatToCsv({ data: eventsCSV, returnBlob: true });
+    const now = Math.floor(Date.now() / 1000);
+    download({ name: `sparkpost-csv-${now}.csv`, url });
+    clearCSV();
+  };
 
   handlePageChange = (currentPage) => {
     this.setState({ currentPage });
@@ -71,6 +85,11 @@ export class MessageEventsPage extends Component {
     return !hasMorePagesAvailable;
   }
 
+  getCSV = () => {
+    const { search, getMessageEventsCSV } = this.props;
+    getMessageEventsCSV(search);
+  }
+
   getRowData = (rowData) => {
     const { timestamp, formattedDate, type, friendly_from, rcpt_to } = rowData;
     return [
@@ -94,7 +113,7 @@ export class MessageEventsPage extends Component {
   }
 
   renderCollection() {
-    const { events, empty, loading, totalCount } = this.props;
+    const { events, empty, loading, totalCount, eventsCSVLoading } = this.props;
     const { currentPage, perPage } = this.state;
 
     if (loading) {
@@ -121,14 +140,19 @@ export class MessageEventsPage extends Component {
             perPage={perPage}
             totalCount={totalCount}
           />
-          <CollectionControls
-            totalCount={totalCount}
-            data={events}
-            onPerPageChange={this.handlePerPageChange}
-            perPageButtons={DEFAULT_PER_PAGE_BUTTONS}
-            perPage={perPage}
-            saveCsv={true}
-          />
+          <div className={styles.RightAlignedButtons}>
+            <PerPageButtons
+              totalCount={totalCount}
+              data={events}
+              onPerPageChange={this.handlePerPageChange}
+              perPageButtons={DEFAULT_PER_PAGE_BUTTONS}
+              perPage={perPage}
+              saveCsv={true}
+            />
+            <Button onClick={this.getCSV} disabled={eventsCSVLoading}>
+              {(eventsCSVLoading) ? 'Saving CSV...' : 'Save as CSV'}
+            </Button>
+          </div>
         </div>
       );
 
@@ -150,8 +174,9 @@ export class MessageEventsPage extends Component {
 
 const mapStateToProps = (state) => {
   const events = selectMessageEvents(state);
+  const eventsCSV = selectMessageEventsCSV(state);
   const { messageEvents } = state;
-  const { loading, error, search, totalCount, hasMorePagesAvailable } = messageEvents;
+  const { loading, error, search, totalCount, hasMorePagesAvailable, eventsCSVLoading } = messageEvents;
   return {
     events: events,
     loading,
@@ -159,8 +184,10 @@ const mapStateToProps = (state) => {
     empty: events.length === 0,
     search,
     totalCount,
-    hasMorePagesAvailable
+    hasMorePagesAvailable,
+    eventsCSV,
+    eventsCSVLoading
   };
 };
 
-export default connect(mapStateToProps, { getMessageEvents, changePage })(MessageEventsPage);
+export default connect(mapStateToProps, { getMessageEvents, getMessageEventsCSV, changePage, clearCSV })(MessageEventsPage);

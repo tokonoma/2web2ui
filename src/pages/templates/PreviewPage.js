@@ -72,7 +72,7 @@ export default class PreviewPage extends Component {
   }
 
   render() {
-    const { canSendEmail, mode, preview, returnPath, template, isAmpLive } = this.props;
+    const { canSendEmail, mode, preview, returnPath, template } = this.props;
     const { loading, loadingError, sending, to, validationError } = this.state;
 
     if (loading) {
@@ -110,6 +110,7 @@ export default class PreviewPage extends Component {
                 disabled={!!loadingError}
                 error={validationError}
                 label="To"
+                name="test-send-to"
                 placeholder="Send to recipient email addresses"
                 onChange={this.onTextChange}
                 value={to}
@@ -117,7 +118,7 @@ export default class PreviewPage extends Component {
           }
           <TextField disabled label="From" value={name ? `${name} <${email}>` : email} />
           <TextField disabled label="Subject" value={preview.subject} />
-          <PreviewPanel html={preview.html} text={preview.text} amp_html={preview.amp_html} isAmpLive={isAmpLive} />
+          <PreviewPanel ampHtml={preview.amp_html} html={preview.html} text={preview.text} />
         </Panel>
       </Page>
     );

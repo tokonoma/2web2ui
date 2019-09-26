@@ -1,17 +1,19 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 // components
-import { Panel, UnstyledLink } from '@sparkpost/matchbox';
+import { UnstyledLink } from '@sparkpost/matchbox';
 import { LabelledValue } from 'src/components';
 import VerifyEmail from './VerifyEmail';
 import { SendingDomainSection } from './SendingDomainSection';
-import { VerifiedIcon, ErrorIcon } from './Icons';
+import SetupInstructionPanel from './SetupInstructionPanel';
 
 // actions
 import { showAlert } from 'src/actions/globalAlert';
 import { verifyDkim } from 'src/actions/sendingDomains';
+
+import { hasAutoVerifyEnabledSelector } from 'src/selectors/account';
 
 import { resolveReadyFor } from 'src/helpers/domains';
 import config from 'src/config';
@@ -83,29 +85,22 @@ export class SetupSending extends Component {
   }
 
   renderTxtRecordPanel() {
-    const { domain: { dkimHostname, dkimValue, status }, verifyDkimLoading } = this.props;
+    const { domain: { dkimHostname, dkimValue, status }, hasAutoVerifyEnabled, verifyDkimLoading } = this.props;
     const readyFor = resolveReadyFor(status);
-    const verified = readyFor.sending && readyFor.dkim;
-
-    const titleIcon = verified ? <VerifiedIcon/> : <ErrorIcon/>;
-    const verifyButtonContent = verified ? 'Re-verify TXT Record' : 'Verify TXT Record';
 
     return (
-      <Panel
-        actions={[{
-          id: 'verify-dkim',
-          content: verifyDkimLoading ? 'Verifying...' : verifyButtonContent,
-          onClick: this.verifyDomain,
-          disabled: verifyDkimLoading,
-          color: 'orange'
-        }]}
-        sectioned
-        title={<Fragment>{titleIcon} <span>DNS Settings</span></Fragment>}
+      <SetupInstructionPanel
+        isAutoVerified={hasAutoVerifyEnabled}
+        isVerified={readyFor.sending && readyFor.dkim}
+        isVerifying={verifyDkimLoading}
+        onVerify={this.verifyDomain}
+        recordType="TXT"
+        verifyButtonIdentifier="verify-dkim"
       >
         <LabelledValue label='Type'><p>TXT</p></LabelledValue>
         <LabelledValue label='Hostname'><p>{dkimHostname}</p></LabelledValue>
         <LabelledValue label='Value'><p>{dkimValue}</p></LabelledValue>
-      </Panel>
+      </SetupInstructionPanel>
     );
   }
 
@@ -123,9 +118,10 @@ export class SetupSending extends Component {
   }
 }
 
-const mapStateToProps = ({ sendingDomains: { verifyDkimError, verifyDkimLoading }}) => ({
-  verifyDkimError,
-  verifyDkimLoading
+const mapStateToProps = (state) => ({
+  hasAutoVerifyEnabled: hasAutoVerifyEnabledSelector(state),
+  verifyDkimError: state.sendingDomains.verifyDkimError,
+  verifyDkimLoading: state.sendingDomains.verifyDkimLoading
 });
 
 export default withRouter(connect(mapStateToProps, { verifyDkim, showAlert })(SetupSending));

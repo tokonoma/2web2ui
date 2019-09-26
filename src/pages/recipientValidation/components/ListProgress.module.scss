@@ -1,0 +1,30 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.ListProgress {
+  margin: spacing(larger)*3 0;
+}
+
+.ListProgressContainer {
+  width: 80%;
+  padding: spacing();
+}
+
+.ListProgressStatus {
+  margin-bottom: spacing(larger);
+}
+
+.ProgressBar {
+  position: relative;
+  height: rem(10);
+  background: color(gray, 8);
+  border-bottom: 1px solid color(gray, 7);
+  border-radius: border-radius();
+}
+
+.Progress {
+  height: rem(10);
+  background: color(gray, 4);
+  border-radius: border-radius();
+  box-shadow: shadow();
+  transition: 0.15s;
+}

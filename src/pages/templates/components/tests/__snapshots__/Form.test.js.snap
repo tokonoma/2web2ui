@@ -23,6 +23,10 @@ exports[`Template Form should disable fields for read-only users 1`] = `
         validate={null}
       />
     </Panel.Section>
+    <SubaccountSection
+      disabled={true}
+      newTemplate={false}
+    />
   </Panel>
   <Panel>
     <Panel.Section>
@@ -145,6 +149,10 @@ exports[`Template Form should render 1`] = `
         validate={null}
       />
     </Panel.Section>
+    <SubaccountSection
+      disabled={false}
+      newTemplate={false}
+    />
   </Panel>
   <Panel>
     <Panel.Section>
@@ -235,11 +243,4 @@ exports[`Template Form should render 1`] = `
     </Panel.Section>
   </Panel>
 </div>
-`;
-
-exports[`Template Form should render subaccount fields if has subaccounts 1`] = `
-<Component
-  disabled={false}
-  newTemplate={false}
-/>
 `;

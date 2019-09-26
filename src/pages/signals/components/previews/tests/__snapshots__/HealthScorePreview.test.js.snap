@@ -18,8 +18,9 @@ exports[`Signals HealthScorePreview Component renders correctly 1`] = `
     </Panel.Section>
     <Panel.Section>
       <BarChart
+        activeFill="#22838A"
         disableHover={true}
-        fill="#B157CE"
+        fill="#B3ECEF"
         gap={0.5}
         height={170}
         margin={
@@ -43,12 +44,18 @@ exports[`Signals HealthScorePreview Component renders correctly 1`] = `
             "hide": true,
           }
         }
+        xAxisRefLines={Array []}
         xKey="date"
         yAxisProps={
           Object {
+            "domain": Array [
+              0,
+              1,
+            ],
             "tickFormatter": [Function],
           }
         }
+        yAxisRefLines={Array []}
         yKey="health_score"
         yRange={
           Array [

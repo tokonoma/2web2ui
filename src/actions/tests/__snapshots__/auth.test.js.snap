@@ -18,6 +18,24 @@ Array [
 ]
 `;
 
+exports[`Action Creator: Auth authenticate tests should dispatch a failed login if login fails with 403 1`] = `
+Array [
+  Array [
+    Object {
+      "type": "LOGIN_PENDING",
+    },
+  ],
+  Array [
+    Object {
+      "payload": Object {
+        "errorDescription": "login failed Please email compliance@sparkpost.com if you need assistance.",
+      },
+      "type": "LOGIN_FAIL",
+    },
+  ],
+]
+`;
+
 exports[`Action Creator: Auth authenticate tests should login if user is not TFA 1`] = `
 Array [
   Array [
@@ -132,6 +150,61 @@ Array [
 
 exports[`Action Creator: Auth logout should dispatch a logout when user is logged in 1`] = `
 Array [
+  Array [
+    Object {
+      "meta": Object {
+        "data": "token=245234523423",
+        "headers": Object {
+          "Authorization": "245234523423",
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        "method": "POST",
+        "url": "/v1/authenticate/logout",
+      },
+      "type": "LOGOUT",
+    },
+  ],
+  Array [
+    Object {
+      "meta": Object {
+        "data": "token=adfa012342342",
+        "headers": Object {
+          "Authorization": "adfa012342342",
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        "method": "POST",
+        "url": "/v1/authenticate/logout",
+      },
+      "type": "LOGOUT",
+    },
+  ],
+  Array [
+    undefined,
+  ],
+  Array [
+    Object {
+      "type": "LOGOUT",
+    },
+  ],
+]
+`;
+
+exports[`Action Creator: Auth logout should skip invalidating the refreshToken if one does not exist 1`] = `
+Array [
+  Array [
+    Object {
+      "meta": Object {
+        "data": "token=245234523423",
+        "headers": Object {
+          "Authorization": "245234523423",
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        "method": "POST",
+        "url": "/v1/authenticate/logout",
+      },
+      "type": "LOGOUT",
+    },
+  ],
   Array [
     undefined,
   ],

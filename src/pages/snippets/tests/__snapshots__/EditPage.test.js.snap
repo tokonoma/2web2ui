@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`EditPage redirects with alert when load request fails 1`] = `
-<Connect(RedirectAndAlert)
+<RedirectAndAlert
   alert={
     Object {
       "message": "Unable to load test-snippet snippet",
@@ -84,7 +84,7 @@ exports[`EditPage renders disabled form when submitting 1`] = `
               name="id"
             />
           </Panel.Section>
-          <Component
+          <SubaccountSection
             disabled={true}
             newTemplate={false}
           />
@@ -104,7 +104,7 @@ exports[`EditPage renders disabled form when submitting 1`] = `
         lg={8}
         xs={12}
       >
-        <LoadableComponent
+        <ContentEditor
           contentOnly={true}
           readOnly={true}
         />
@@ -165,7 +165,7 @@ exports[`EditPage renders disabled form when user does not have authorization to
               name="id"
             />
           </Panel.Section>
-          <Component
+          <SubaccountSection
             disabled={true}
             newTemplate={false}
           />
@@ -185,7 +185,7 @@ exports[`EditPage renders disabled form when user does not have authorization to
         lg={8}
         xs={12}
       >
-        <LoadableComponent
+        <ContentEditor
           contentOnly={true}
           readOnly={true}
         />
@@ -266,7 +266,7 @@ exports[`EditPage renders edit form 1`] = `
               name="id"
             />
           </Panel.Section>
-          <Component
+          <SubaccountSection
             newTemplate={false}
           />
         </Panel>
@@ -285,105 +285,7 @@ exports[`EditPage renders edit form 1`] = `
         lg={8}
         xs={12}
       >
-        <LoadableComponent
-          contentOnly={true}
-        />
-      </Grid.Column>
-    </Grid>
-  </Form>
-</Page>
-`;
-
-exports[`EditPage renders loading 1`] = `<Loading />`;
-
-exports[`EditPage renders without subaccount section when account has no subaccounts 1`] = `
-<Page
-  breadcrumbAction={
-    Object {
-      "Component": [Function],
-      "content": "Snippets",
-      "to": "/snippets",
-    }
-  }
-  empty={Object {}}
-  primaryAction={
-    Object {
-      "Component": [Function],
-      "content": "Save Snippet",
-      "disabled": undefined,
-      "onClick": [Function],
-    }
-  }
-  secondaryActions={
-    Array [
-      Object {
-        "Component": [Function],
-        "content": "Delete",
-        "to": "/",
-        "visible": [Function],
-      },
-      Object {
-        "Component": [Function],
-        "content": "Duplicate",
-        "to": Object {
-          "pathname": "/snippets/create",
-          "state": Object {
-            "id": "test-snippet",
-            "subaccountId": undefined,
-          },
-        },
-        "visible": [Function],
-      },
-    ]
-  }
-  title="test-snippet"
->
-  <Form
-    onSubmit={[Function]}
-  >
-    <Grid>
-      <Grid.Column
-        lg={4}
-        xs={12}
-      >
-        <Panel>
-          <Panel.Section>
-            <Field
-              component={[Function]}
-              label="Snippet Name"
-              name="name"
-              validate={
-                Array [
-                  [Function],
-                  [Function],
-                ]
-              }
-            />
-            <Field
-              component={[Function]}
-              disabled={true}
-              helpText={<IdentifierHelpText />}
-              label="Snippet ID"
-              name="id"
-            />
-          </Panel.Section>
-        </Panel>
-        <Panel
-          sectioned={true}
-        >
-          <CopyField
-            helpText="Copy and use this code in your templates"
-            hideCopy={false}
-            label="Code Example"
-            value="{{ render_snippet( \\"test-snippet\\" ) }}"
-          />
-        </Panel>
-      </Grid.Column>
-      <Grid.Column
-        lg={8}
-        xs={12}
-      >
-        <LoadableComponent
+        <ContentEditor
           contentOnly={true}
         />
       </Grid.Column>

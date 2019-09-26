@@ -6,12 +6,6 @@ import { Field } from 'redux-form';
 import { RadioGroup, SubaccountTypeaheadWrapper, TextFieldWrapper } from 'src/components';
 import { required } from 'src/helpers/validation';
 
-const createOptions = [
-  { label: 'Master and all subaccounts', value: 'all' },
-  { label: 'Master account only', value: 'master' },
-  { label: 'Single Subaccount', value: 'subaccount' }
-];
-
 /**
  * Component produces the follow redux form fields
  * If newWebhook
@@ -22,7 +16,7 @@ const createOptions = [
  * - subaccount TextField | typeahead (disabled)
  */
 export class SubaccountSection extends Component {
-  componentDidUpdate (prevProps) {
+  componentDidUpdate(prevProps) {
     const { assignTo, formName, change } = this.props;
 
     // Clear subaccount value if switching away from subaccount
@@ -31,8 +25,14 @@ export class SubaccountSection extends Component {
     }
   }
 
-  renderCreate () {
-    const { assignTo } = this.props;
+  renderCreate() {
+    const { assignTo, disabled } = this.props;
+
+    const createOptions = [
+      { label: 'Master and all subaccounts', value: 'all', disabled },
+      { label: 'Master account only', value: 'master', disabled },
+      { label: 'Single Subaccount', value: 'subaccount', disabled }
+    ];
 
     const typeahead = assignTo === 'subaccount'
       ? <Field name='subaccount' component={SubaccountTypeaheadWrapper} validate={required} />
@@ -50,7 +50,7 @@ export class SubaccountSection extends Component {
     );
   }
 
-  renderEdit () {
+  renderEdit() {
     const { subaccount } = this.props;
     let component = SubaccountTypeaheadWrapper;
 
@@ -69,7 +69,7 @@ export class SubaccountSection extends Component {
     );
   }
 
-  render () {
+  render() {
     return this.props.newWebhook ? this.renderCreate() : this.renderEdit();
   }
 }

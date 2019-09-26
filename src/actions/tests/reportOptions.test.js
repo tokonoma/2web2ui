@@ -1,6 +1,5 @@
 import * as reportOptions from '../reportOptions';
 import * as metrics from 'src/actions/metrics';
-import { listTemplates } from 'src/actions/templates';
 import { list as listSubaccounts } from 'src/actions/subaccounts';
 import { list as listSendingDomains } from 'src/actions/sendingDomains';
 import { getRelativeDates, isSameDate } from 'src/helpers/date';
@@ -23,10 +22,8 @@ describe('Action Creator: Report Options', () => {
         campaigns: [],
         domains: [],
         sendingIps: [],
-        ipPools: []
-      },
-      templates: {
-        list: []
+        ipPools: [],
+        templates: []
       },
       subaccounts: {
         list: []
@@ -47,23 +44,20 @@ describe('Action Creator: Report Options', () => {
 
   describe('initTypeaheadCache', () => {
 
-    it('should dispatch 4 actions', () => {
+    it('should dispatch 2 actions', () => {
       reportOptions.initTypeaheadCache()(dispatchMock, getStateMock);
-      expect(dispatchMock).toHaveBeenCalledTimes(3);
-      expect(listTemplates).toHaveBeenCalledTimes(1);
+      expect(dispatchMock).toHaveBeenCalledTimes(2);
       expect(listSubaccounts).toHaveBeenCalledTimes(1);
       expect(listSendingDomains).toHaveBeenCalledTimes(1);
     });
 
     it('should skip calls if already in state', () => {
-      testState.templates.list.push('template');
       testState.subaccounts.list.push('subaccount');
       testState.sendingDomains.list.push('sending-domain');
 
       reportOptions.initTypeaheadCache()(dispatchMock, getStateMock);
 
       expect(dispatchMock).toHaveBeenCalledTimes(0);
-      expect(listTemplates).not.toHaveBeenCalled();
       expect(listSubaccounts).not.toHaveBeenCalled();
       expect(listSendingDomains).not.toHaveBeenCalled();
     });
@@ -76,6 +70,7 @@ describe('Action Creator: Report Options', () => {
     expect(metrics.fetchMetricsCampaigns).toHaveBeenCalledTimes(1);
     expect(metrics.fetchMetricsSendingIps).toHaveBeenCalledTimes(1);
     expect(metrics.fetchMetricsIpPools).toHaveBeenCalledTimes(1);
+    expect(metrics.fetchMetricsTemplates).toHaveBeenCalledTimes(1);
   });
 
   it('should load metrics lists for the typeahead from cache if exists', async () => {
@@ -90,6 +85,7 @@ describe('Action Creator: Report Options', () => {
     expect(metrics.fetchMetricsCampaigns).not.toHaveBeenCalled();
     expect(metrics.fetchMetricsSendingIps).not.toHaveBeenCalled();
     expect(metrics.fetchMetricsIpPools).not.toHaveBeenCalled();
+    expect(metrics.fetchMetricsTemplates).not.toHaveBeenCalled();
 
   });
 

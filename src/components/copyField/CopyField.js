@@ -45,13 +45,16 @@ class CopyField extends Component {
     if (!hideCopy) {
       connectRight = (
         <Tooltip dark content='Copied to clipboard!' disabled={!copied}>
-          <Button onClick={this.handleCopy}><ContentCopy size={14}/> Copy</Button>
+          <Button name="copy-field-button" onClick={this.handleCopy}>
+            <ContentCopy size={14}/> Copy
+          </Button>
         </Tooltip>
       );
     }
 
     return (
       <TextField
+        name="copy-field"
         readOnly
         connectRight={connectRight}
         value={value}

@@ -318,6 +318,46 @@ exports[`Component: Collection should render with custom wrappers 1`] = `
 </div>
 `;
 
+exports[`Component: Collection should use custom render function when child is a render function 1`] = `
+<Fragment>
+  <div
+    key="filterBox"
+  />
+  <div
+    key="collection"
+  >
+    <PassThroughWrapper>
+      <headerComponent />
+      <PassThroughWrapper>
+        <rowComponent
+          id={0}
+          key="row-0"
+          name="row-name--0"
+        />
+        <rowComponent
+          id={1}
+          key="1-1"
+          name="row-name--1"
+        />
+        <rowComponent
+          id={2}
+          key="2-2"
+          name="row-name--2"
+        />
+      </PassThroughWrapper>
+    </PassThroughWrapper>
+  </div>
+  <div
+    key="heading"
+  >
+    <h3 />
+  </div>
+  <div
+    key="pagination"
+  />
+</Fragment>
+`;
+
 exports[`Component: Collection state changes should obey sort direction 1`] = `
 Array [
   Object {

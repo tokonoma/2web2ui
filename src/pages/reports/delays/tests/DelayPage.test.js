@@ -21,7 +21,6 @@ describe('DelayPage: ', () => {
       count_accepted: 10000
     },
     totalAccepted: 1000,
-    addFilters: jest.fn(),
     refreshDelayReport: jest.fn()
   };
 

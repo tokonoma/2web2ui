@@ -14,4 +14,16 @@
     font-size: rem(13);
     font-weight: 500;
   }
+
+  :global .recharts-cartesian-axis-line {
+    stroke: color(gray, 7);
+  }
+
+  :global .xAxis .recharts-text.recharts-cartesian-axis-tick-value {
+    transform: translate(0, 6px);
+  }
+
+  :global .recharts-cartesian-grid-horizontal line {
+    stroke: color(gray, 8);
+  }
 }

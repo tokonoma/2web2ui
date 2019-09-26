@@ -15,6 +15,13 @@ describe('Confirmation: ', () => {
     includesIp: true
   };
 
+  const olderPlan = {
+    monthly: 100,
+    volume: 1000,
+    code: 'oldhundred',
+    status: 'deprecated'
+  };
+
   const upgrade = {
     monthly: 200,
     volume: 2000,
@@ -39,6 +46,13 @@ describe('Confirmation: ', () => {
     monthly: 0,
     volume: 100,
     code: 'zero',
+    isFree: true
+  };
+
+  const oldFree = {
+    monthly: 0,
+    volume: 100,
+    code: 'old-zero',
     isFree: true
   };
 
@@ -81,6 +95,12 @@ describe('Confirmation: ', () => {
     expect(getButton({ enabled: true, to: 'redirect' })).toMatchSnapshot();
   });
 
+  it('should render correctly with an old free to free plan change', () => {
+    wrapper.setProps({ selected: free, current: oldFree, billingEnabled: true });
+    expect(wrapper.find('withRouter(Connect(Brightback))').prop('condition')).toEqual(false);
+    expect(getButton({ enabled: true, to: 'redirect' })).toMatchSnapshot();
+  });
+
   it('should render correctly with an upgrade with IP', () => {
     wrapper.setProps({ current: free, selected: upgradeWithIP, billingEnabled: true });
     expect(wrapper).toMatchSnapshot();
@@ -89,5 +109,21 @@ describe('Confirmation: ', () => {
   it('renders correctly when billing not enabled', () => {
     wrapper.setProps({ billingEnabled: false });
     expect(wrapper).toMatchSnapshot();
+  });
+
+  describe('Deprecated Plan Warning', () => {
+    it('should render null if selected plan is the same as current', () => {
+      expect(wrapper.find({ name: 'deprecated-warning' })).not.toExist();
+    });
+
+    it('should render null if current plan is not deprecated', () => {
+      wrapper.setProps({ current, selected: upgrade });
+      expect(wrapper.find({ name: 'deprecated-warning' })).not.toExist();
+    });
+
+    it('should render warning if current plan has status deprecated', () => {
+      wrapper.setProps({ current: olderPlan, selected: upgrade });
+      expect(wrapper.find({ name: 'deprecated-warning' })).toExist();
+    });
   });
 });

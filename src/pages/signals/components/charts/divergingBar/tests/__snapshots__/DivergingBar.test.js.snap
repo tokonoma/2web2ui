@@ -138,6 +138,7 @@ exports[`DivergingBar Component renders correctly 1`] = `
       animationEasing="ease"
       content={
         <Tooltip
+          offset={25}
           width="200px"
         >
           [MockFunction]
@@ -158,6 +159,12 @@ exports[`DivergingBar Component renders correctly 1`] = `
       itemStyle={Object {}}
       labelStyle={Object {}}
       offset={10}
+      position={
+        Object {
+          "x": 0,
+          "y": 0,
+        }
+      }
       separator=" : "
       useTranslate3d={false}
       viewBox={

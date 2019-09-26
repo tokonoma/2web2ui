@@ -5,7 +5,7 @@ exports[`Component: App Layout should render correctly 1`] = `
   <div
     className="wrapper app"
   >
-    <withRouter(Connect(Navigation)) />
+    <withRouter(Connect(WithContext(Navigation))) />
     <main
       className="content"
       role="main"

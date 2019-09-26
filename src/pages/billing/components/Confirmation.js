@@ -7,7 +7,8 @@ import PromoCode from 'src/components/billing/PromoCode';
 import SupportTicketLink from 'src/components/supportTicketLink/SupportTicketLink';
 import Brightback from 'src/components/brightback/Brightback';
 import styles from './Confirmation.module.scss';
-
+import { PLAN_TIERS } from 'src/constants';
+import { Warning } from '@sparkpost/matchbox-icons';
 export class Confirmation extends React.Component {
 
   renderSelectedPlanMarkup() {
@@ -16,7 +17,10 @@ export class Confirmation extends React.Component {
       ? <p>Select a plan on the left to update your subscription</p>
       : <div>
         <small>New Plan</small>
-        <h5><PlanPrice className={styles.MainLabel} plan={selected} selectedPromo={selectedPromo}/></h5>
+        <h5 className={styles.MainLabel}>
+          {PLAN_TIERS[selected.tier] && <span>{PLAN_TIERS[selected.tier].toUpperCase()}:</span>}
+          <PlanPrice plan={selected} selectedPromo={selectedPromo}/>
+        </h5>
       </div>;
   }
 
@@ -42,12 +46,30 @@ export class Confirmation extends React.Component {
     );
   }
 
+  renderDeprecatedWarning() {
+    const { current = {}, selected = {}} = this.props;
+
+    if (current.code === selected.code || current.status !== 'deprecated') {
+      return null;
+    }
+    return (
+      <div name='deprecated-warning' className={styles.DeprecatedWarning}>
+        <div className={styles.iconContainer}>
+          <Warning className={styles.icon} size={32}/>
+        </div>
+        <div className={styles.content}>The current plan you are on is no longer available.
+      If you switch to the selected plan, you will not be able to switch back to your current one.</div>
+      </div>
+    );
+  }
+
   render() {
     const { current = {}, selected = {}, disableSubmit, billingEnabled } = this.props;
     const currentPlanPricing = getPlanPrice(current);
     const selectedPlanPricing = getPlanPrice(selected);
-    const isDowngrade = currentPlanPricing.price > selectedPlanPricing.price;
     const isPlanSelected = current.code !== selected.code;
+    const isFreeToFree = (isPlanSelected && current.isFree && selected.isFree);
+    const isDowngrade = currentPlanPricing.price > selectedPlanPricing.price || isFreeToFree;
     let effectiveDateMarkup = null;
     let ipMarkup = null;
     let addonMarkup = null;
@@ -111,11 +133,12 @@ export class Confirmation extends React.Component {
           {effectiveDateMarkup}
           {ipMarkup}
           {addonMarkup}
+          {this.renderDeprecatedWarning()}
         </Panel.Section>
         <Panel.Section>
           <Brightback
-            condition={Boolean(billingEnabled && isPlanSelected && selected.isFree)}
-            urls={config.brightback.downgradeToFreeUrls}
+            condition={Boolean(billingEnabled && isPlanSelected && selected.isFree && !current.isFree)}
+            config={config.brightback.downgradeToFreeConfig}
             render={({ enabled, to }) => (
               <Button
                 type={enabled ? 'button' : 'submit'}

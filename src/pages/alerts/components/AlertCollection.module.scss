@@ -1,0 +1,21 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.Icon {
+  fill: color(gray, 5);
+}
+
+.AlertNameLink {
+  font-weight: 600;
+}
+
+.FilterBox {
+  padding: spacing();
+}
+
+.TableWrapper {
+  overflow-x: auto;
+
+  & > * {
+    margin-bottom: 0;
+  }
+}

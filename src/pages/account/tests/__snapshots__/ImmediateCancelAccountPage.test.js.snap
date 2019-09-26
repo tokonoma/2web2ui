@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: ImmediateCancelAccountPage should render error page if cannot cancel 1`] = `
+<div
+  className="MessageBlock"
+>
+  <div
+    className="ErrorBanner"
+  >
+    <ApiErrorBanner
+      errorDetails="Error message"
+      message="Sorry, we had some trouble cancelling your plan."
+      reload={[Function]}
+    />
+  </div>
+</div>
+`;

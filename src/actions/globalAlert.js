@@ -1,13 +1,19 @@
-export function showAlert (alert) {
+export function showAlert(alert) {
   return {
     type: 'SHOW_GLOBAL_ALERT',
     payload: alert
   };
 }
 
-export function clear (id) {
+export function clear(id) {
   return {
     type: 'CLEAR_GLOBAL_ALERT',
     payload: { id }
+  };
+}
+
+export function hideGlobalBanner() {
+  return {
+    type: 'CLEAR_GLOBAL_BANNER'
   };
 }

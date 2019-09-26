@@ -1,5 +1,7 @@
-const config = {
-  apiBase: 'no-default-set',
+const tenantIdFromHostname = (hostname) => hostname.split('.')[0];
+
+const config = (identifier) => ({
+  apiBase: `https://${identifier}.api.e.sparkpost.com/api`,
   apiDateFormat: 'YYYY-MM-DDTHH:mm',
   apiRequestTimeout: 60000,
   apiRequestHeaders: {
@@ -45,7 +47,7 @@ const config = {
     }
   },
   featureFlags: {
-    allow_default_signing_domains_for_ip_pools: false,
+    allow_default_signing_domains_for_ip_pools: true,
     allow_mailbox_verification: true,
     allow_anyone_at_verification: false,
     has_signup: false
@@ -89,7 +91,7 @@ const config = {
       options: {}
     }
   },
-  tenant: 'local',
+  tenantId: identifier,
   website: {
     domain: 'sparkpost.com'
   },
@@ -99,26 +101,32 @@ const config = {
   },
   brightback: {
     baseUrl: 'https://app.brightback.com',
-    app_id: '9N0rWBvKGR',
-    downgradeToFreeUrls: {
+    downgradeToFreeConfig: {
+      app_id: 'bAJDEmD5EK', //Sandbox app Id
       save_return_url: '/account/billing', // Return URL from Brightback for end-users who do not cancel
-      cancel_confirmation_url: '/account/billing/plan/change', // Return URL from Brightback for end-users who cancel
-      billing_url: '/account/billing/plan' // Billing URL to direct end-users to enter coupon code or other billing changes
+      cancel_confirmation_url: '/account/billing/plan/change?immediatePlanChange=free500-0419' // Return URL from Brightback for end-users who cancel
     },
-    freePlan: 'free500-1018'
+    cancelConfig: {
+      app_id: 'bAJDEmD5EK', //Sandbox app Id
+      save_return_url: '/account/settings',
+      cancel_confirmation_url: '/account/cancel'
+    },
+    enabled: true
   },
   smtpAuth: {
-    host: 'no-default-set',
+    host: `${identifier}.smtp.e.sparkpost.com`,
     port: 587,
-    username: 'SMTP_Injection'
+    username: identifier,
+    enabled: true
   },
   bounceDomains: {
     allowDefault: true,
-    allowSubaccountDefault: false,
-    cnameValue: 'sparkpostmail.com'
+    allowSubaccountDefault: true,
+    cnameValue: `${identifier}.mail.e.sparkpost.com`,
+    mxValue: `${identifier}.mx.e.sparkpost.com`
   },
   trackingDomains: {
-    cnameValue: 'spgo.io'
+    cnameValue: `${identifier}.et.e.sparkpost.com`
   },
   dateFormat: 'MMM D YYYY',
   timeFormat: 'h:mma',
@@ -135,6 +143,6 @@ const config = {
     cookieDomain: '.sparkpost.com'
   },
   salesforceDataParams: ['src', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term']
-};
+});
 
-export default config;
+export default (hostname) => config(tenantIdFromHostname(hostname));

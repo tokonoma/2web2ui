@@ -40,23 +40,29 @@ export function login({ authData = {}, saveCookie = false }) {
  * within redux store
  *
  */
-export function authenticate(username, password, rememberMe = false) {
+export function authenticate(username, password, rememberMe = false, access_token) {
   // return a thunk
   return (dispatch, getState) => {
     const { loggedIn } = getState().auth;
-
+    const isTokenLogin = !!access_token;
     if (loggedIn) {
       return;
     }
 
     dispatch({ type: 'LOGIN_PENDING' });
 
-    return sparkpostLogin(username, password, rememberMe)
+    const maybeLogin = isTokenLogin ? Promise.resolve({ data: { access_token }}) : sparkpostLogin(username, password, rememberMe);
+
+    return maybeLogin
       .then(({ data = {}} = {}) => {
         const authData = { ...data, username };
 
+        //Skips website login if token login
+        //Token login is used for internal use, so won't need website auth
+        if (!isTokenLogin) {
+          dispatch(websiteAuth.authenticate(username, password, rememberMe));
+        }
         // Start website auth token cookie setup process
-        dispatch(websiteAuth.authenticate(username, password, rememberMe));
 
         return Promise.all([authData, getTfaStatusBeforeLoggedIn({ username, token: authData.access_token })]);
       })
@@ -73,10 +79,14 @@ export function authenticate(username, password, rememberMe = false) {
       })
       .catch((err) => {
         const { response = {}} = err;
-        const { data = {}} = response;
-        const { error_description: errorDescription } = data;
+        const { data = {}, status } = response;
+        let { error_description: errorDescription } = data;
 
         // TODO: handle a timeout error better
+
+        if (status === 403) {
+          errorDescription = `${errorDescription || 'Something went wrong.'} Please email compliance@sparkpost.com if you need assistance.`;
+        }
 
         dispatch({
           type: 'LOGIN_FAIL',
@@ -89,6 +99,7 @@ export function authenticate(username, password, rememberMe = false) {
       });
   };
 }
+
 
 function actOnTfaStatus(tfaEnabled, tfaRequired, authData) {
   if (tfaEnabled) {
@@ -145,6 +156,21 @@ export function ssoCheck(username) {
   });
 }
 
+export function invalidateAuthToken(token) {
+  return sparkpostApiRequest({
+    type: 'LOGOUT',
+    meta: {
+      method: 'POST',
+      url: '/v1/authenticate/logout',
+      data: `token=${token}`,
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Authorization': `${token}`
+      }
+    }
+  });
+}
+
 export function refresh(token, refreshToken) {
   return (dispatch) => {
     const newCookie = authCookie.merge({ access_token: token, refresh_token: refreshToken });
@@ -156,11 +182,15 @@ export function refresh(token, refreshToken) {
 export function logout() {
   return (dispatch, getState) => {
     const { auth } = getState();
+    const { token, refreshToken } = auth;
     // only log out if currently logged in
     if (!auth.loggedIn) {
       return;
     }
-
+    dispatch(invalidateAuthToken(token));
+    if (refreshToken) {
+      dispatch(invalidateAuthToken(refreshToken));
+    }
     dispatch(websiteAuth.logout());
 
     removeHerokuToolbar();

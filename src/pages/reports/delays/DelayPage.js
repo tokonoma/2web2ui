@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
-import { addFilters } from 'src/actions/reportOptions';
 import { refreshDelayReport } from 'src/actions/delayReport';
 import { selectReportSearchOptions } from 'src/selectors/reportSearchOptions';
 import { Page, Panel } from '@sparkpost/matchbox';
@@ -26,7 +25,7 @@ export class DelayPage extends Component {
       return <PanelLoading />;
     }
 
-    return <DelaysDataTable totalAccepted={totalAccepted} rows={reasons} addFilters={this.props.addFilters} />;
+    return <DelaysDataTable totalAccepted={totalAccepted} rows={reasons} />;
   }
 
   renderTopLevelMetrics() {
@@ -58,9 +57,9 @@ export class DelayPage extends Component {
     return (
       <Page title='Delay Report'>
         <ReportOptions reportLoading={loading} searchOptions={delaySearchOptions} />
-        { this.renderTopLevelMetrics() }
+        {this.renderTopLevelMetrics()}
         <Panel title='Delayed Messages' className='ReasonsTable'>
-          { this.renderDataTable() }
+          {this.renderDataTable()}
         </Panel>
       </Page>
     );
@@ -81,7 +80,6 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-  addFilters,
   refreshDelayReport
 };
 

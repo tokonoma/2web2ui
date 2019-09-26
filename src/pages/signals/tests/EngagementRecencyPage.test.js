@@ -22,9 +22,11 @@ describe('Signals Engagement Recency Page', () => {
       facet: 'sending-domain',
       data: [{ c_total: 10 }],
       gap: 0.25,
+      handleDateSelect: jest.fn(),
       loading: false,
       empty: false,
-      xTicks: [1,2]
+      xTicks: [1,2],
+      selectedDate: '2017-01-02'
     };
     wrapper = shallow(<EngagementRecencyPage {...props}/>);
     wrapper.setProps({ data });
@@ -39,6 +41,12 @@ describe('Signals Engagement Recency Page', () => {
     expect(wrapper.find('Panel')).toMatchSnapshot();
   });
 
+  it('does not render SpamTrapsPreview when facet is mb_provider', () => {
+    wrapper.setProps({ facet: 'mb_provider' });
+    wrapper.update();
+    expect(wrapper.find('withRouter(Connect(WithDetails(SpamTrapsPreview)))')).not.toContainMatchingElement();
+  });
+
   it('renders empty correctly', () => {
     wrapper.setProps({ empty: true });
     expect(wrapper.find('Panel')).toMatchSnapshot();
@@ -47,34 +55,6 @@ describe('Signals Engagement Recency Page', () => {
   it('renders error correctly', () => {
     wrapper.setProps({ error: { message: 'error message' }});
     expect(wrapper).toMatchSnapshot();
-  });
-
-  describe('local state', () => {
-    it('handles date select', () => {
-      wrapper.find('BarChart').simulate('click', { payload: { date: '2017-01-02' }});
-      expect(wrapper.find('BarChart').prop('selected')).toEqual('2017-01-02');
-      expect(wrapper.find('EngagementRecencyActions')).toMatchSnapshot();
-    });
-
-    it('sets selected date on mount if provided one', () => {
-      wrapper = shallow(<EngagementRecencyPage {...props} selected='initial-selected'/>);
-      expect(wrapper.find('BarChart').prop('selected')).toEqual('initial-selected');
-      expect(wrapper.find('EngagementRecencyActions').prop('date')).toEqual('initial-selected');
-    });
-
-    it('uses last selected date if selected date is not in data', () => {
-      wrapper = shallow(<EngagementRecencyPage {...props} loading={true} selected='initial-selected'/>);
-      wrapper.setProps({ data: [1, { date: 'last-date' }], loading: false });
-      expect(wrapper.find('BarChart').prop('selected')).toEqual('last-date');
-      expect(wrapper.find('EngagementRecencyActions').prop('date')).toEqual('last-date');
-    });
-
-    it('does not use last selected date if selected date is in data', () => {
-      wrapper = shallow(<EngagementRecencyPage {...props} selected='first-date'/>);
-      wrapper.setProps({ data: [{ date: 'first-date' }, { date: 'last-date' }]});
-      expect(wrapper.find('BarChart').prop('selected')).toEqual('first-date');
-      expect(wrapper.find('EngagementRecencyActions').prop('date')).toEqual('first-date');
-    });
   });
 
   describe('bar chart props', () => {

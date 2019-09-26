@@ -55,18 +55,18 @@ describe('Formatting helpers', () => {
   });
 
   describe('formatBytes', () => {
+    const kb = 1024;
     it('should leave non-numbers alone', () => {
       const iceCream = 'vanilla';
       expect(formatting.formatBytes(iceCream)).toBe(iceCream);
     });
     it('should include suffixes where appropriate', () => {
-      expect(formatting.formatBytes(999)).toMatch(/B$/);
-      expect(formatting.formatBytes(1000)).toMatch(/KB$/);
-      expect(formatting.formatBytes(1000 * 1000)).toMatch(/MB$/);
-      expect(formatting.formatBytes(1000 * 1000)).toMatch(/MB$/);
-      expect(formatting.formatBytes(1000 * 1000 * 1000)).toMatch(/GB$/);
-      expect(formatting.formatBytes(1000 * 1000 * 1000 * 1000)).toMatch(/TB$/);
-      expect(formatting.formatBytes(1000 * 1000 * 1000 * 1000 * 1000)).toMatch(/PB$/);
+      expect(formatting.formatBytes(1023)).toMatch(/B$/);
+      expect(formatting.formatBytes(kb)).toMatch(/KB$/);
+      expect(formatting.formatBytes(kb * kb)).toMatch(/MB$/);
+      expect(formatting.formatBytes(kb * kb * kb)).toMatch(/GB$/);
+      expect(formatting.formatBytes(kb * kb * kb * kb)).toMatch(/TB$/);
+      expect(formatting.formatBytes(kb * kb * kb * kb * kb)).toMatch(/PB$/);
     });
   });
 

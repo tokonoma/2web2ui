@@ -1,0 +1,69 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: TestDetails renders correctly 1`] = `
+<Fragment>
+  <Panel>
+    <Panel.Section>
+      <h2>
+        Fooo
+      </h2>
+      <Grid>
+        <InfoBlock
+          columnProps={
+            Object {
+              "md": 4,
+            }
+          }
+          label="From"
+        />
+        <InfoBlock
+          label="Started"
+          value="Jul 8th 2019 11:49am"
+        />
+        <InfoBlock
+          label="Finished"
+          value="--"
+        />
+        <InfoBlock
+          label="Inbox Placement Test Name"
+          value="Baz"
+        />
+      </Grid>
+    </Panel.Section>
+    <Panel.Section>
+      <Grid>
+        <Grid.Column
+          md={8}
+        >
+          <h3>
+            Folder Placement
+          </h3>
+          <FolderPlacementChart
+            placements={Object {}}
+          />
+        </Grid.Column>
+      </Grid>
+    </Panel.Section>
+  </Panel>
+  <Panel
+    title={
+      <React.Fragment>
+        <h3
+          className="Inline"
+        >
+          Placement Breakdown
+        </h3>
+        <small
+          className="SeedsCount"
+        >
+           | undefined Seed
+        </small>
+      </React.Fragment>
+    }
+  >
+    <ProvidersBreakdown
+      data={Array []}
+    />
+  </Panel>
+</Fragment>
+`;

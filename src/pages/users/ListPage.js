@@ -7,7 +7,6 @@ import { Page, Tag } from '@sparkpost/matchbox';
 import TimeAgo from 'react-timeago';
 import { Users } from 'src/components/images';
 import PageLink from 'src/components/pageLink/PageLink';
-import { SUBACCOUNT_REPORTING_ROLE } from 'src/constants';
 import { hasUiOption } from 'src/helpers/conditions/account';
 
 import * as usersActions from 'src/actions/users';
@@ -19,7 +18,7 @@ import User from './components/User';
 
 const COLUMNS = [
   { label: 'User', sortKey: 'name' },
-  { label: 'Role', sortKey: 'access' },
+  { label: 'Role', sortKey: 'roleLabel' },
   { label: 'Two Factor Auth', sortKey: 'tfa_enabled' },
   { label: 'Last Login', sortKey: 'last_login' },
   null
@@ -27,7 +26,7 @@ const COLUMNS = [
 
 const SUB_COLUMN = [
   { label: 'User', sortKey: 'name', width: '40%' },
-  { label: 'Role', sortKey: 'access', width: '11%' },
+  { label: 'Role', sortKey: 'roleLabel', width: '11%' },
   { label: 'Subaccount', sortKey: 'subaccount_id', width: '15%' },
   { label: 'Two Factor Auth', sortKey: 'tfa_enabled', width: '8%' },
   { label: 'Last Login', sortKey: 'last_login', width: '14%' },
@@ -61,19 +60,12 @@ export class ListPage extends Component {
     this.props.listUsers();
   }
 
-  formatRole(role) {
-    if (role === SUBACCOUNT_REPORTING_ROLE) {
-      return 'reporting';
-    }
-    return role;
-  }
-
   // Do not allow current user to change their access/role or delete their account
   getRowData = (user) => {
     const { hasSubaccounts, isSubAccountReportingLive } = this.props;
     const data = [
       <User name={user.name} email={user.email} username={user.username} />,
-      this.formatRole(user.access),
+      user.roleLabel,
       user.tfa_enabled ? <Tag color={'blue'}>Enabled</Tag> : <Tag>Disabled</Tag>,
       user.last_login ? <TimeAgo date={user.last_login} live={false} /> : 'Never',
       <Actions username={user.username} deletable={!user.isCurrentUser} onDelete={this.handleDeleteRequest} />
@@ -140,7 +132,7 @@ export class ListPage extends Component {
           rows={this.props.users}
           filterBox={{
             show: true,
-            keyMap: { role: 'access' },
+            keyMap: { role: 'roleLabel' },
             exampleModifiers: ['name', 'email', 'role'],
             itemToStringKeys: ['username', 'name', 'email']
           }}

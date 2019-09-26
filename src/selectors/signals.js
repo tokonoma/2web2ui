@@ -2,6 +2,7 @@
 import { createSelector } from 'reselect';
 import { fillByDate } from 'src/helpers/date';
 import { roundToPlaces } from 'src/helpers/units';
+import { getDoD } from 'src/helpers/signals';
 import { selectSubaccountIdFromQuery } from 'src/selectors/subaccounts';
 import _ from 'lodash';
 import moment from 'moment';
@@ -19,25 +20,42 @@ export const getOptions = (state, { now = moment().subtract(1, 'day'), ...option
 // Redux store
 export const getSpamHitsData = (state, props) => _.get(state, 'signals.spamHits', {});
 export const getEngagementRecencyData = (state, props) => _.get(state, 'signals.engagementRecency', {});
+export const getEngagementRateByCohortData = (state, props) => _.get(state, 'signals.engagementRateByCohort', {});
+export const getUnsubscribeRateByCohortData = (state, props) => _.get(state, 'signals.unsubscribeRateByCohort', {});
+export const getComplaintsByCohortData = (state, props) => _.get(state, 'signals.complaintsByCohort', {});
 export const getHealthScoreData = (state, props) => _.get(state, 'signals.healthScore', {});
+export const getCurrentHealthScoreData = (state, props) => _.get(state, 'signals.currentHealthScore', {});
+export const getInjections = (state, props) => _.get(state, 'signals.injections', {});
 
 // Details
 export const selectSpamHitsDetails = createSelector(
   [getSpamHitsData, getFacetFromParams, getFacetIdFromParams, selectSubaccountIdFromQuery, getOptions],
-  ({ loading, error, data }, facet, facetId, subaccountId, { now, relativeRange }) => {
+  ({ loading, error, data }, facet, facetId, subaccountId, { from, to }) => {
     const match = data.find((item) => String(item[facet]) === facetId) || {};
     const history = match.history || [];
-    const normalizedHistory = history.map(({ dt: date, ...values }) => ({ date, ...values }));
+    const normalizedHistory = history.map(({ dt: date, ...values }) => ({
+      ...values,
+      date,
+      // note, this is an exception most other cases these relative metrics are provided by the API
+      relative_trap_hits_parked: (values.trap_hits_parked / values.injections),
+      relative_trap_hits_recycled: (values.trap_hits_recycled / values.injections),
+      relative_trap_hits_typo: (values.trap_hits_typo / values.injections)
+    }));
 
     const filledHistory = fillByDate({
       dataSet: normalizedHistory,
       fill: {
         injections: null,
         relative_trap_hits: null,
-        trap_hits: null
+        trap_hits: null,
+        relative_trap_hits_parked: null,
+        trap_hits_parked: null,
+        relative_trap_hits_recycled: null,
+        trap_hits_recycled: null,
+        relative_trap_hits_typo: null,
+        trap_hits_typo: null
       },
-      now,
-      relativeRange
+      from, to
     });
 
     const isEmpty = filledHistory.every((values) => values.trap_hits === null);
@@ -58,7 +76,7 @@ export const selectSpamHitsDetails = createSelector(
 
 export const selectEngagementRecencyDetails = createSelector(
   [getEngagementRecencyData, getFacetFromParams, getFacetIdFromParams, selectSubaccountIdFromQuery, getOptions],
-  ({ loading, error, data }, facet, facetId, subaccountId, { now, relativeRange }) => {
+  ({ loading, error, data }, facet, facetId, subaccountId, { from, to }) => {
     const match = data.find((item) => String(item[facet]) === facetId) || {};
 
     const calculatePercentages = (data) => data.map(({ c_total, dt, ...absolutes }) => {
@@ -84,8 +102,7 @@ export const selectEngagementRecencyDetails = createSelector(
         c_uneng: null,
         c_total: null
       },
-      now,
-      relativeRange
+      from, to
     });
 
     const isEmpty = filledHistory.every((values) => values.c_total === null);
@@ -104,9 +121,150 @@ export const selectEngagementRecencyDetails = createSelector(
   }
 );
 
+// Engagement behavior charts do not contain data within the last 3 days (including today)
+const excludeLastNDays = (date, n) =>
+  moment().diff(date, 'days') < n ? moment().subtract(n, 'days') : date;
+
+const engagementBehaviorDataLagDays = 3;
+
+export const selectEngagementRateByCohortDetails = createSelector(
+  [selectEngagementRecencyDetails, getEngagementRateByCohortData, getFacetFromParams, getFacetIdFromParams, selectSubaccountIdFromQuery, getOptions],
+  ({ details: { loading: loadingEngRecency, error: errorEngRecency, data: dataEngRecency }}, { loading, error, data }, facet, facetId, subaccountId, { from, to }) => {
+    const match = data.find((item) => String(item[facet]) === facetId) || {};
+
+    // Rename date key
+    const normalizedHistory = _.get(match, 'history', []).map(({ dt: date, ...values }) => ({ date, ...values }));
+
+    const filledHistory = fillByDate({
+      dataSet: normalizedHistory,
+      fill: {
+        p_new_eng: null, p_14d_eng: null, p_90d_eng: null, p_365d_eng: null, p_uneng_eng: null, p_total_eng: null
+      },
+      from,
+      to: excludeLastNDays(to, engagementBehaviorDataLagDays)
+    });
+
+    const isEmpty = filledHistory.every((values) => _.isNil(values.p_total_eng));
+
+
+    return {
+      details: {
+        data: filledHistory,
+        dataEngRecency,
+        empty: isEmpty && !loading,
+        error: error || errorEngRecency,
+        loading: loading || loadingEngRecency
+      },
+      facet,
+      facetId,
+      subaccountId
+    };
+  }
+);
+
+export const selectUnsubscribeRateByCohortDetails = createSelector(
+  [selectEngagementRecencyDetails, getUnsubscribeRateByCohortData, getFacetFromParams, getFacetIdFromParams, selectSubaccountIdFromQuery, getOptions],
+  ({ details: { loading: loadingEngRecency, error: errorEngRecency, data: dataEngRecency }}, { loading, error, data }, facet, facetId, subaccountId, { from, to }) => {
+    const match = data.find((item) => String(item[facet]) === facetId) || {};
+
+    // Rename date key
+    const normalizedHistory = _.get(match, 'history', []).map(({ dt: date, ...values }) => ({ date, ...values }));
+
+
+    const filledHistory = fillByDate({
+      dataSet: normalizedHistory,
+      fill: {
+        p_new_unsub: null,
+        p_14d_unsub: null,
+        p_90d_unsub: null,
+        p_365d_unsub: null,
+        p_uneng_unsub: null,
+        p_total_unsub: null
+      },
+      from,
+      to: excludeLastNDays(to, engagementBehaviorDataLagDays)
+    });
+
+    const isEmpty = filledHistory.every((values) => _.isNil(values.p_total_unsub));
+
+    return {
+      details: {
+        data: filledHistory,
+        dataEngRecency,
+        empty: isEmpty && !loading,
+        error: error || errorEngRecency,
+        loading: loading || loadingEngRecency
+      },
+      facet,
+      facetId,
+      subaccountId
+    };
+  }
+);
+
+export const selectComplaintsByCohortDetails = createSelector(
+  [selectEngagementRecencyDetails, getComplaintsByCohortData, getFacetFromParams, getFacetIdFromParams, selectSubaccountIdFromQuery, getOptions],
+  ({ details: { loading: loadingEngRecency, error: errorEngRecency, data: dataEngRecency }}, { loading, error, data }, facet, facetId, subaccountId, { from, to }) => {
+    const match = data.find((item) => String(item[facet]) === facetId) || {};
+    // Rename date key
+    const normalizedHistory = _.get(match, 'history', []).map(({ dt: date, ...values }) => ({ date, ...values }));
+
+
+    const filledHistory = fillByDate({
+      dataSet: normalizedHistory,
+      fill: {
+        p_new_fbl: null,
+        p_14d_fbl: null,
+        p_90d_fbl: null,
+        p_365d_fbl: null,
+        p_uneng_fbl: null,
+        p_total_fbl: null
+      },
+      from,
+      to: excludeLastNDays(to, engagementBehaviorDataLagDays)
+    });
+
+    const isEmpty = filledHistory.every((values) => _.isNil(values.p_total_fbl));
+
+    return {
+      details: {
+        data: filledHistory,
+        dataEngRecency,
+        empty: isEmpty && !loading,
+        error: error || errorEngRecency,
+        loading: loading || loadingEngRecency
+      },
+      facet,
+      facetId,
+      subaccountId
+    };
+  }
+);
+
+function rankHealthScore(value) {
+  let rank = '';
+
+  switch (true) {
+    case (value < 55):
+      rank = 'danger';
+      break;
+    case (value < 80):
+      rank = 'warning';
+      break;
+    case (value >= 80):
+      rank = 'good';
+      break;
+    default:
+      rank = '';
+      break;
+  }
+
+  return rank;
+}
+
 export const selectHealthScoreDetails = createSelector(
   [getHealthScoreData, selectSpamHitsDetails, getFacetFromParams, getFacetIdFromParams, selectSubaccountIdFromQuery, getOptions],
-  ({ loading, error, data }, { details: spamDetails }, facet, facetId, subaccountId, { now, relativeRange }) => {
+  ({ loading, error, data }, { details: spamDetails }, facet, facetId, subaccountId, { from, to }) => {
     const match = data.find((item) => String(item[facet]) === facetId) || {};
 
     const history = _.get(match, 'history', []);
@@ -131,14 +289,13 @@ export const selectHealthScoreDetails = createSelector(
         ],
         health_score: null
       },
-      now,
-      relativeRange
+      from, to
     });
 
-    // Merge in injections
+    // Merge in injections and rankings
     const mergedHistory = _.map(filledHistory, (healthData) => {
       const spamData = _.find(spamDetails.data, ['date', healthData.date]);
-      return { injections: spamData.injections, ...healthData };
+      return { injections: spamData.injections, ranking: rankHealthScore(roundToPlaces(healthData.health_score * 100, 1)), ...healthData };
     });
 
     const isEmpty = mergedHistory.every((values) => values.health_score === null);
@@ -159,7 +316,7 @@ export const selectHealthScoreDetails = createSelector(
 
 export const selectEngagementRecencyOverviewData = createSelector(
   getEngagementRecencyData, getOptions,
-  ({ data }, { now, relativeRange }) => data.map(({ WoW, ...rowOfData }) => {
+  ({ data }, { from, to }) => data.map(({ WoW, ...rowOfData }) => {
     const history = rowOfData.history || [];
     const normalizedHistory = history.map(({ dt: date, ...values }) => {
       const relative_engaged_recipients = (values.c_14d / values.c_total) * 100;
@@ -177,8 +334,7 @@ export const selectEngagementRecencyOverviewData = createSelector(
         engaged_recipients: null,
         relative_engaged_recipients: null
       },
-      now,
-      relativeRange
+      from, to
     });
 
     return {
@@ -234,7 +390,7 @@ export const selectEngagementRecencyOverview = createSelector(
 
 export const selectHealthScoreOverviewData = createSelector(
   getHealthScoreData, getOptions,
-  ({ data }, { now, relativeRange }) => data.map(({ current_health_score, WoW, ...rowOfData }) => {
+  ({ data }, { from, to }) => data.map(({ current_health_score, WoW, ...rowOfData }) => {
     const history = rowOfData.history || [];
     const normalizedHistory = history.map(({ dt: date, health_score, ...values }) => {
       const roundedHealthScore = roundToPlaces(health_score * 100, 1);
@@ -243,7 +399,7 @@ export const selectHealthScoreOverviewData = createSelector(
         ...values,
         date,
         health_score: roundedHealthScore,
-        ranking: roundedHealthScore < 75 ? 'bad' : 'good'
+        ranking: rankHealthScore(roundedHealthScore)
       };
     });
     const filledHistory = fillByDate({
@@ -252,8 +408,7 @@ export const selectHealthScoreOverviewData = createSelector(
         health_score: null,
         ranking: null
       },
-      now,
-      relativeRange
+      from, to
     });
 
     return {
@@ -264,9 +419,52 @@ export const selectHealthScoreOverviewData = createSelector(
         normalizedHistory.reduce((total, { health_score }) => total + health_score, 0) / normalizedHistory.length,
         1
       ),
-      WoW: _.isNil(WoW) ? null : roundToPlaces(WoW * 100, 0)
+      WoW: _.isNil(WoW) ? null : roundToPlaces(WoW * 100, 0),
+      current_DoD: getDoD(_.last(filledHistory).health_score, filledHistory[filledHistory.length - 2].health_score)
     };
   })
+);
+
+export const selectCurrentHealthScoreDashboard = createSelector(
+  [getCurrentHealthScoreData, getOptions, getInjections],
+  ({ data, loading, error }, { from, to }, injections) => {
+    const accountData = _.find(data, ['sid', -1]) || {};
+    const history = accountData.history || [];
+
+    const normalizedHistory = history.map(({ dt: date, health_score, ...values }) => {
+      const roundedHealthScore = roundToPlaces(health_score * 100, 1);
+      const injectionData = _.find(injections.data, ['dt', date]) || {};
+
+      return {
+        ...values,
+        date,
+        health_score: roundedHealthScore,
+        ranking: rankHealthScore(roundedHealthScore),
+        injections: injectionData.injections
+      };
+    });
+
+    const filledHistory = fillByDate({
+      dataSet: normalizedHistory,
+      fill: {
+        health_score: null,
+        ranking: null,
+        injections: null
+      },
+      from, to
+    });
+
+    const latestHealthScore = _.get(_.last(filledHistory), 'health_score');
+
+    return {
+      ...accountData,
+      loading, error,
+      current_health_score: latestHealthScore,
+      history: filledHistory,
+      WoW: _.isNil(accountData.WoW) ? null : roundToPlaces(accountData.WoW * 100, 0),
+      current_DoD: getDoD(latestHealthScore, _.get(filledHistory, `[${filledHistory.length - 2}].health_score`))
+    };
+  }
 );
 
 export const selectHealthScoreOverview = createSelector(
@@ -280,7 +478,7 @@ export const selectHealthScoreOverview = createSelector(
 
 export const selectSpamHitsOverviewData = createSelector(
   getSpamHitsData, getOptions,
-  ({ data }, { now, relativeRange }) => data.map(({ WoW, ...rowOfData }) => {
+  ({ data }, { from, to }) => data.map(({ WoW, ...rowOfData }) => {
     const history = rowOfData.history || [];
     const normalizedHistory = history.map(({ dt: date, relative_trap_hits, ...values }) => ({
       ...values,
@@ -297,8 +495,7 @@ export const selectSpamHitsOverviewData = createSelector(
         relative_trap_hits: null,
         trap_hits: null
       },
-      now,
-      relativeRange
+      from, to
     });
 
     return {

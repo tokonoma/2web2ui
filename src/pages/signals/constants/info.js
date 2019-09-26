@@ -36,10 +36,10 @@ export const HEALTH_SCORE_COMPONENTS = {
     `
   },
   'List Quality': {
-    label: 'List Quality',
-    chartTitle: 'Percent of List Quality Issues',
+    label: 'Subscriber Quality',
+    chartTitle: 'Percent of Subscriber Quality Issues',
     info: `
-      List Quality is determined by the share of attempted email injections that match address
+      Subscriber Quality is determined by the share of attempted email injections that match address
       patterns associated with problematic list procurement and hygiene practices.
     `
   },
@@ -55,8 +55,36 @@ export const HEALTH_SCORE_COMPONENTS = {
     label: 'Transient Failures',
     chartTitle: 'Transient Failure Percent',
     info: `
-      Transient Failures are calcuated as the share of attempted email injections that exhibit
+      Transient Failures are calculated as the share of attempted email injections that exhibit
       temporary delivery problems.
+    `
+  },
+  'Spam Trap Hits': {
+    label: 'Spam Trap Hits',
+    chartTitle: 'Spam Trap Hits Percent',
+    info: `
+      Spam traps hits are calculated as the percent of your injections that are sent to spam traps. 
+    `
+  },
+  'Suppression Hits': {
+    label: 'Suppression Hits',
+    chartTitle: 'Suppression Hits Percent',
+    info: `
+      Percent of the injections that were sent to addresses on your suppression list.
+    `
+  },
+  'Historical Engagement': {
+    label: 'Historical Engagement',
+    chartTitle: 'Historical Engagement Percent',
+    info: `
+      The engagement rate calculated for the previous 3 days of emails sent.
+    `
+  },
+  'Unsubscribes': {
+    label: 'Unsubscribes',
+    chartTitle: 'Unsubscribes Percent',
+    info: `
+      Unsubscribes are the share of emails injected that led to the recipient unsubscribing.
     `
   },
   'eng cohorts: unengaged': {

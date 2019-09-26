@@ -12,11 +12,13 @@ import {
   formatDateTime,
   isSameDate,
   getLocalTimezone,
+  formatApiTimestamp,
   formatInputDate,
   formatInputTime,
   parseDate,
   parseTime,
-  parseDatetime
+  parseDatetime,
+  toMilliseconds
 } from '../date';
 import { roundBoundaries } from '../metrics';
 import cases from 'jest-in-case';
@@ -207,6 +209,12 @@ describe('Date helpers', () => {
     });
   });
 
+  describe('formatApiTimestamp', () => {
+    it('returns ISO 8601 timestamp', () => {
+      expect(formatApiTimestamp('Fri, 21 Nov 1997 09:55:06 -0600')).toEqual('1997-11-21T15:55:06Z');
+    });
+  });
+
   describe('formatInputDate', () => {
     const dateTime = '2018-04-17T15:18:42Z';
 
@@ -300,23 +308,31 @@ describe('Date helpers', () => {
   });
 
   describe('fillByDate', () => {
-    const now = moment('2018-02-02');
-    const relativeRange = '7days';
-
     it('returns sorted and filled dataset', () => {
+      const dates = { to: '2018-02-03T04:20:00-04:00', from: '2018-01-26T04:20:00-04:00' };
       const dataSet = [
         { date: '2018-02-02', value: 234 },
         { date: '2018-01-30', value: 123 }
       ];
       const fill = { value: null };
 
-      expect(fillByDate({ dataSet, fill, now, relativeRange })).toMatchSnapshot();
+      expect(fillByDate({ dataSet, fill, ...dates })).toMatchSnapshot();
     });
   });
 
   describe('getDateTicks', () => {
     it('returns an array of start, end and middle days', () => {
-      expect(getDateTicks('14days')).toMatchSnapshot();
+      expect(getDateTicks({ to: '2018-05-25T04:20:00-04:00', from: '2018-05-01T04:20:00-04:00' })).toEqual([
+        '2018-05-01',
+        '2018-05-13',
+        '2018-05-25'
+      ]);
+    });
+  });
+
+  describe('toMilliseconds', () => {
+    it('returns milliseconds', () => {
+      expect(toMilliseconds(1318781876.721)).toEqual(1318781876721);
     });
   });
 });

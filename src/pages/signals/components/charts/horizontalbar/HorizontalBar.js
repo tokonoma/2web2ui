@@ -35,6 +35,7 @@ const HorizontalBar = ({ color, value, height, width, xKey, onClick, xRange, too
           cursor={false}
           isAnimationActive={false}
           content={<TooltipWrapper children={tooltipContent} />}
+          position={{ x: 0, y: 0 }}
         />
       </BarChart>
     </ResponsiveContainer>

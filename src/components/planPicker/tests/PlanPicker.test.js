@@ -1,23 +1,23 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import PlanPicker from '../PlanPicker';
+import PlanPicker, { PlanPicker as PlanPickerComponent } from '../PlanPicker';
 
 describe('Plan Picker: ', () => {
   let wrapper;
   let props;
 
   beforeEach(() => {
-    const plans = [
-      {
+    const plansByTier = {
+      'default': [{
         code: '1',
         includesIp: true,
         monthly: 100,
         name: 'One',
         overage: 0.1,
         volume: 1
-      },
-      {
+      }],
+      'test': [{
         code: '2',
         includesIp: false,
         monthly: 0,
@@ -25,19 +25,19 @@ describe('Plan Picker: ', () => {
         overage: 0.2,
         volume: 2,
         isFree: true
-      },
-      {
+      }],
+      'starter': [{
         code: '3',
         monthly: 300,
         name: 'Three',
         overage: 0.3,
         volume: 3
-      }
-    ];
+      }]
+    };
 
     props = {
       input: { onChange: jest.fn() },
-      plans
+      plansByTier
     };
 
     wrapper = shallow(<PlanPicker {...props} />);
@@ -59,5 +59,55 @@ describe('Plan Picker: ', () => {
     const wrapper = shallow(<PlanPicker {...selectedProps} />);
     expect(wrapper).toMatchSnapshot();
   });
+
+
+  describe('Render Function', () => {
+
+    const subject = (subProps) => shallow(<PlanPickerComponent {...props} {...subProps}/>);
+
+    const renderFn = (wrapper, props = {}) => {
+      const Component = wrapper.prop('children');
+
+      return shallow(
+        <Component
+          getInputProps={jest.fn((props) => props)}
+          getItemProps={jest.fn((props) => props)}
+          getToggleButtonProps={jest.fn((props) => props)}
+          {...props}
+        />
+      );
+    };
+
+    it('renders', () => {
+      const selected = {
+        code: '4',
+        monthly: 400,
+        name: 'Four',
+        overage: 0.4,
+        volume: 4
+      };
+
+      const wrapper = subject();
+      expect(renderFn(wrapper, { selectedItem: selected })).toMatchSnapshot();
+    });
+
+    it('renders null if no initial selectedPlan', () => {
+      const wrapper = subject();
+      expect(renderFn(wrapper)).toBeEmptyRender();
+    });
+
+    it('renders null if no plans', () => {
+      const selected = {
+        code: '4',
+        monthly: 400,
+        name: 'Four',
+        overage: 0.4,
+        volume: 4
+      };
+      const wrapper = subject({ plansByTier: {}});
+      expect(renderFn(wrapper, { selectedItem: selected })).toBeEmptyRender();
+    });
+  });
+
 
 });

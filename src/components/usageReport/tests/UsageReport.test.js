@@ -27,8 +27,7 @@ describe('UsageReport Component', () => {
           start: '2017-08-30T00:00:00.000Z'
         }
       },
-      getAccount,
-      accountAgeInWeeks: 4
+      getAccount
     };
   });
 
@@ -57,10 +56,24 @@ describe('UsageReport Component', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should not render with no usage on a new account', () => {
-    props.usage.month.used = 0;
-    props.accountAgeInWeeks = 1;
-    const wrapper = shallow(<UsageReport {...props} />);
-    expect(wrapper.html()).toBe(null);
+  it('should not render limits for unrestricted accounts', () => {
+    const usage = {
+      day: {
+        used: 1000,
+        limit: null,
+        start: '2017-08-30T00:00:00.000Z'
+      },
+      month: {
+        used: 1000,
+        limit: null,
+        start: '2017-08-01T08:00:00.000Z',
+        end: '2017-08-31T08:00:00.000Z'
+      }
+    };
+    const wrapper = shallow(<UsageReport {...props} usage={usage} />);
+
+    expect(wrapper.find('ProgressBar')).not.toExist();
+    expect(wrapper.find('DisplayNumber[label="Daily limit"]')).not.toExist();
+    expect(wrapper.find('DisplayNumber[label="Monthly limit"]')).not.toExist();
   });
 });

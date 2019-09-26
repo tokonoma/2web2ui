@@ -1,7 +1,14 @@
-import qs from 'query-string';
-import lookup from 'src/__integration__/http-responses';
+import { lookupResponse } from 'src/__testHelpers__/mockApi';
 
-export const singleton = jest.fn((request) => Promise.resolve(lookup(request)));
+// lookup() returns an API response body object or throws on error to simulate axios exception behaviour
+export const singleton = jest.fn((request) => new Promise((resolve) => resolve(lookupResponse(request))));
+
+singleton.interceptors = {
+  response: {
+    use: jest.fn()
+  }
+};
+
 const mock = {
   create: () => singleton
 };

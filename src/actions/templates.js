@@ -117,21 +117,25 @@ export function update(data, subaccountId, params = {}) {
           content: shapeContent(content)
         },
         params,
-        headers: setSubaccountHeader(subaccountId)
+        headers: setSubaccountHeader(subaccountId),
+        context: {
+          id
+        }
       }
     }));
   };
 }
 
 export function publish(data, subaccountId) {
-  return (dispatch) => {
+  return async (dispatch) => {
     const { id, testData } = data;
+    dispatch({ type: 'PUBLISH_ACTION_PENDING' });
 
-    // Save draft first, then publish
-    return dispatch(update(data, subaccountId)).then(() => {
+    try { // Save draft first, then publish
+      await dispatch(update(data, subaccountId));
       dispatch(setTestData({ id, mode: 'published', data: testData }));
 
-      return dispatch(sparkpostApiRequest({
+      await dispatch(sparkpostApiRequest({
         type: 'PUBLISH_TEMPLATE',
         meta: {
           method: 'PUT',
@@ -140,7 +144,11 @@ export function publish(data, subaccountId) {
           headers: setSubaccountHeader(subaccountId)
         }
       }));
-    });
+      dispatch({ type: 'PUBLISH_ACTION_SUCCESS' });
+    } catch (err) {
+      dispatch({ type: 'PUBLISH_ACTION_FAIL' });
+      throw err;
+    }
   };
 }
 

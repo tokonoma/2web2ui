@@ -16,10 +16,13 @@ exports[`Signals Health Score Page bar chart props renders tooltip content for c
 
 exports[`Signals Health Score Page bar chart props renders tooltip content for health score 1`] = `
 <TooltipMetric
+  color="#FF594D"
   label="Health Score"
   value="12"
 />
 `;
+
+exports[`Signals Health Score Page bar chart props renders tooltip content for hovered component 1`] = `""`;
 
 exports[`Signals Health Score Page bar chart props renders tooltip content for injections 1`] = `
 <TooltipMetric
@@ -30,46 +33,30 @@ exports[`Signals Health Score Page bar chart props renders tooltip content for i
 
 exports[`Signals Health Score Page bar chart props renders tooltip content for selected component 1`] = `
 <TooltipMetric
-  label="Complaints"
+  label="Engaged Recipients"
   value="0.1235%"
 />
 `;
 
 exports[`Signals Health Score Page bar chart props renders y label content for component weights 1`] = `"Engaged Recipients"`;
 
-exports[`Signals Health Score Page local state handles date select 1`] = `
-<HealthScoreActions
-  date="2017-01-02"
-  weights={
-    Array [
-      Object {
-        "weight": 0.8,
-        "weight_type": "List Quality",
-        "weight_value": 0.25,
-      },
-      Object {
-        "weight": -0.8,
-        "weight_type": "Other bounces",
-        "weight_value": 0.25,
-      },
-    ]
-  }
-/>
-`;
-
 exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
 <SignalsPage
   breadcrumbAction={
     Object {
       "component": [Function],
-      "content": "Back to Overview",
-      "to": "/signals",
+      "content": "Back to Health Score Overview",
+      "to": "/signals/health-score",
     }
   }
-  dimensionPrefix="Health Score for"
   facet="sending-domain"
   facetId="test.com"
-  primaryArea={<Connect(DateFilter) />}
+  primaryArea={
+    <Connect(DateFilter)
+      left={true}
+    />
+  }
+  title="Health Score"
 >
   <Grid>
     <Grid.Column
@@ -88,18 +75,22 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
 "
         />
         <BarChart
-          fill="#B157CE"
+          activeFill="#22838A"
+          disableHover={false}
+          fill="#B3ECEF"
           gap={0.25}
           height={250}
+          hovered="2017-01-05"
           margin={
             Object {
               "bottom": 5,
               "left": 18,
-              "right": 0,
-              "top": 12,
+              "right": 8,
+              "top": 21,
             }
           }
-          onClick={[Function]}
+          onClick={[MockFunction]}
+          onMouseOver={[MockFunction]}
           selected="2017-01-01"
           timeSeries={
             Array [
@@ -113,7 +104,7 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
                   },
                   Object {
                     "weight": -0.5,
-                    "weight_type": "Complaints",
+                    "weight_type": "eng cohorts: new, 14-day",
                     "weight_value": 0.25,
                   },
                 ],
@@ -143,11 +134,55 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
               "ticks": Array [],
             }
           }
+          xAxisRefLines={
+            Array [
+              Object {
+                "label": Object {
+                  "className": "xDividerLabel",
+                  "offset": 14,
+                  "position": "top",
+                  "value": "New",
+                },
+                "stroke": "#d2d2d7",
+                "strokeWidth": 1,
+                "x": "2019-06-07",
+              },
+              Object {
+                "label": Object {
+                  "className": "xDividerLabel",
+                  "position": "top",
+                  "value": "Model",
+                },
+                "strokeWidth": 0,
+                "x": "2019-06-07",
+              },
+            ]
+          }
           xKey="date"
           yAxisProps={
             Object {
               "tickFormatter": [Function],
+              "ticks": Array [
+                0,
+                0.55,
+                0.8,
+                1,
+              ],
             }
+          }
+          yAxisRefLines={
+            Array [
+              Object {
+                "stroke": "#2CC995",
+                "strokeWidth": 1,
+                "y": 0.8,
+              },
+              Object {
+                "stroke": "#FF594D",
+                "strokeWidth": 1,
+                "y": 0.55,
+              },
+            ]
           }
           yKey="health_score"
           yRange={
@@ -164,18 +199,21 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
 "
         />
         <BarChart
-          fill="#B157CE"
+          activeFill="#22838A"
+          fill="#B3ECEF"
           gap={0.25}
           height={190}
+          hovered="2017-01-05"
           margin={
             Object {
               "bottom": 5,
               "left": 18,
-              "right": 0,
+              "right": 8,
               "top": 12,
             }
           }
-          onClick={[Function]}
+          onClick={[MockFunction]}
+          onMouseOver={[MockFunction]}
           selected="2017-01-01"
           timeSeries={
             Array [
@@ -189,7 +227,7 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
                   },
                   Object {
                     "weight": -0.5,
-                    "weight_type": "Complaints",
+                    "weight_type": "eng cohorts: new, 14-day",
                     "weight_value": 0.25,
                   },
                 ],
@@ -219,12 +257,14 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
               "ticks": Array [],
             }
           }
+          xAxisRefLines={Array []}
           xKey="date"
           yAxisProps={
             Object {
               "tickFormatter": [Function],
             }
           }
+          yAxisRefLines={Array []}
           yKey="injections"
           yRange={
             Array [
@@ -237,18 +277,21 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
           title="Hard Bounces Percent"
         />
         <BarChart
-          fill="#B157CE"
+          activeFill="#22838A"
+          fill="#B3ECEF"
           gap={0.25}
           height={190}
+          hovered="2017-01-05"
           margin={
             Object {
               "bottom": 5,
               "left": 18,
-              "right": 0,
+              "right": 8,
               "top": 12,
             }
           }
-          onClick={[Function]}
+          onClick={[MockFunction]}
+          onMouseOver={[MockFunction]}
           selected="2017-01-01"
           timeSeries={
             Array [
@@ -271,12 +314,14 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
               "ticks": Array [],
             }
           }
+          xAxisRefLines={Array []}
           xKey="date"
           yAxisProps={
             Object {
               "tickFormatter": [Function],
             }
           }
+          yAxisRefLines={Array []}
           yKey="weight_value"
           yRange={
             Array [
@@ -306,7 +351,7 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
 "
         />
         <DivergingBar
-          barHeight={35}
+          barHeight={140}
           data={
             Array [
               Object {
@@ -316,7 +361,7 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
               },
               Object {
                 "weight": -0.5,
-                "weight_type": "Complaints",
+                "weight_type": "eng cohorts: new, 14-day",
                 "weight_value": 0.25,
               },
             ]
@@ -348,7 +393,7 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
               },
               Object {
                 "weight": -0.5,
-                "weight_type": "Complaints",
+                "weight_type": "eng cohorts: new, 14-day",
                 "weight_value": 0.25,
               },
             ]
@@ -357,22 +402,19 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
       </div>
     </Grid.Column>
   </Grid>
-  <OtherChartsHeader
-    facet="sending-domain"
-    facetId="test.com"
-  />
+  <Divider />
   <Grid>
     <Grid.Column
       sm={6}
       xs={12}
     >
-      <withRouter(Connect(WithSpamTrapDetails(SpamTrapsPreview))) />
+      <withRouter(Connect(WithDetails(SpamTrapsPreview))) />
     </Grid.Column>
     <Grid.Column
       sm={6}
       xs={12}
     >
-      <withRouter(Connect(withEngagementRecencyDetails(EngagementRecencyPreview))) />
+      <withRouter(Connect(WithDetails(EngagementRecencyPreview))) />
     </Grid.Column>
   </Grid>
 </SignalsPage>
@@ -403,14 +445,18 @@ exports[`Signals Health Score Page renders empty weights 1`] = `
   breadcrumbAction={
     Object {
       "component": [Function],
-      "content": "Back to Overview",
-      "to": "/signals",
+      "content": "Back to Health Score Overview",
+      "to": "/signals/health-score",
     }
   }
-  dimensionPrefix="Health Score for"
   facet="sending-domain"
   facetId="test.com"
-  primaryArea={<Connect(DateFilter) />}
+  primaryArea={
+    <Connect(DateFilter)
+      left={true}
+    />
+  }
+  title="Health Score"
 >
   <Grid>
     <Grid.Column
@@ -429,18 +475,22 @@ exports[`Signals Health Score Page renders empty weights 1`] = `
 "
         />
         <BarChart
-          fill="#B157CE"
+          activeFill="#22838A"
+          disableHover={false}
+          fill="#B3ECEF"
           gap={0.25}
           height={250}
+          hovered="2017-01-05"
           margin={
             Object {
               "bottom": 5,
               "left": 18,
-              "right": 0,
-              "top": 12,
+              "right": 8,
+              "top": 21,
             }
           }
-          onClick={[Function]}
+          onClick={[MockFunction]}
+          onMouseOver={[MockFunction]}
           selected="2017-01-01"
           timeSeries={
             Array [
@@ -457,11 +507,55 @@ exports[`Signals Health Score Page renders empty weights 1`] = `
               "ticks": Array [],
             }
           }
+          xAxisRefLines={
+            Array [
+              Object {
+                "label": Object {
+                  "className": "xDividerLabel",
+                  "offset": 14,
+                  "position": "top",
+                  "value": "New",
+                },
+                "stroke": "#d2d2d7",
+                "strokeWidth": 1,
+                "x": "2019-06-07",
+              },
+              Object {
+                "label": Object {
+                  "className": "xDividerLabel",
+                  "position": "top",
+                  "value": "Model",
+                },
+                "strokeWidth": 0,
+                "x": "2019-06-07",
+              },
+            ]
+          }
           xKey="date"
           yAxisProps={
             Object {
               "tickFormatter": [Function],
+              "ticks": Array [
+                0,
+                0.55,
+                0.8,
+                1,
+              ],
             }
+          }
+          yAxisRefLines={
+            Array [
+              Object {
+                "stroke": "#2CC995",
+                "strokeWidth": 1,
+                "y": 0.8,
+              },
+              Object {
+                "stroke": "#FF594D",
+                "strokeWidth": 1,
+                "y": 0.55,
+              },
+            ]
           }
           yKey="health_score"
           yRange={
@@ -478,18 +572,21 @@ exports[`Signals Health Score Page renders empty weights 1`] = `
 "
         />
         <BarChart
-          fill="#B157CE"
+          activeFill="#22838A"
+          fill="#B3ECEF"
           gap={0.25}
           height={190}
+          hovered="2017-01-05"
           margin={
             Object {
               "bottom": 5,
               "left": 18,
-              "right": 0,
+              "right": 8,
               "top": 12,
             }
           }
-          onClick={[Function]}
+          onClick={[MockFunction]}
+          onMouseOver={[MockFunction]}
           selected="2017-01-01"
           timeSeries={
             Array [
@@ -506,12 +603,14 @@ exports[`Signals Health Score Page renders empty weights 1`] = `
               "ticks": Array [],
             }
           }
+          xAxisRefLines={Array []}
           xKey="date"
           yAxisProps={
             Object {
               "tickFormatter": [Function],
             }
           }
+          yAxisRefLines={Array []}
           yKey="injections"
           yRange={
             Array [
@@ -550,22 +649,19 @@ exports[`Signals Health Score Page renders empty weights 1`] = `
       </div>
     </Grid.Column>
   </Grid>
-  <OtherChartsHeader
-    facet="sending-domain"
-    facetId="test.com"
-  />
+  <Divider />
   <Grid>
     <Grid.Column
       sm={6}
       xs={12}
     >
-      <withRouter(Connect(WithSpamTrapDetails(SpamTrapsPreview))) />
+      <withRouter(Connect(WithDetails(SpamTrapsPreview))) />
     </Grid.Column>
     <Grid.Column
       sm={6}
       xs={12}
     >
-      <withRouter(Connect(withEngagementRecencyDetails(EngagementRecencyPreview))) />
+      <withRouter(Connect(WithDetails(EngagementRecencyPreview))) />
     </Grid.Column>
   </Grid>
 </SignalsPage>
@@ -576,14 +672,18 @@ exports[`Signals Health Score Page renders error correctly 1`] = `
   breadcrumbAction={
     Object {
       "component": [Function],
-      "content": "Back to Overview",
-      "to": "/signals",
+      "content": "Back to Health Score Overview",
+      "to": "/signals/health-score",
     }
   }
-  dimensionPrefix="Health Score for"
   facet="sending-domain"
   facetId="test.com"
-  primaryArea={<Connect(DateFilter) />}
+  primaryArea={
+    <Connect(DateFilter)
+      left={true}
+    />
+  }
+  title="Health Score"
 >
   <Grid>
     <Grid.Column
@@ -629,22 +729,19 @@ exports[`Signals Health Score Page renders error correctly 1`] = `
       </div>
     </Grid.Column>
   </Grid>
-  <OtherChartsHeader
-    facet="sending-domain"
-    facetId="test.com"
-  />
+  <Divider />
   <Grid>
     <Grid.Column
       sm={6}
       xs={12}
     >
-      <withRouter(Connect(WithSpamTrapDetails(SpamTrapsPreview))) />
+      <withRouter(Connect(WithDetails(SpamTrapsPreview))) />
     </Grid.Column>
     <Grid.Column
       sm={6}
       xs={12}
     >
-      <withRouter(Connect(withEngagementRecencyDetails(EngagementRecencyPreview))) />
+      <withRouter(Connect(WithDetails(EngagementRecencyPreview))) />
     </Grid.Column>
   </Grid>
 </SignalsPage>

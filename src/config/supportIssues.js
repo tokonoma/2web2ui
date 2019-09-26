@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { hasOnlineSupport, hasStatus, hasStatusReasonCategory, isSuspendedForBilling, onPlanWithStatus } from 'src/helpers/conditions/account';
+import { hasOnlineSupport, hasStatus, hasStatusReasonCategory, isSuspendedForBilling, onPlanWithStatus, isSelfServeBilling } from 'src/helpers/conditions/account';
 import { isEmailVerified } from 'src/helpers/conditions/user';
 import { all, not, any } from 'src/helpers/conditions';
 import { isAdmin } from 'src/helpers/conditions/user';
@@ -38,6 +38,11 @@ const supportIssues = [
     type: ERRORS
   },
   {
+    id: 'signals_issues',
+    label: 'Signals issues',
+    type: SUPPORT
+  },
+  {
     id: 'sending_domain_block',
     label: 'Sending domain block',
     type: COMPLIANCE
@@ -58,7 +63,7 @@ const supportIssues = [
     type: SUPPORT
   },
   {
-    id: 'reporting_and_event_issue',
+    id: 'reporting_and_event_issues',
     label: 'Reporting & event issues',
     type: SUPPORT
   },
@@ -75,7 +80,17 @@ const supportIssues = [
   {
     id: 'account_upgrade/downgrade_issue',
     label: 'Account upgrade/downgrade issues',
-    type: SUPPORT
+    type: SUPPORT,
+    condition: isAdmin
+  },
+  {
+    id: 'request_new_ip',
+    label: 'Request new IP',
+    type: SUPPORT,
+    condition: all(
+      isAdmin,
+      not(isSelfServeBilling)
+    )
   },
   {
     id: 'general_billing',
@@ -93,6 +108,7 @@ const supportIssues = [
     messageLabel: 'Why do you think your account should be unsuspended?',
     type: COMPLIANCE,
     condition: all(
+      isAdmin,
       hasStatus('suspended'),
       not(hasStatusReasonCategory('100.01'))
     )

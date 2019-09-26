@@ -1,0 +1,178 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Signals Health Score Chart renders error correctly 1`] = `
+<Callout
+  height="auto"
+  title="Unable to Load Data"
+>
+  mock error
+</Callout>
+`;
+
+exports[`Signals Health Score Chart renders happy path correctly 1`] = `
+<Panel
+  sectioned={true}
+>
+  <div
+    className="Content"
+  >
+    <h2
+      className="Header"
+    >
+      Dec 1 2014
+       – 
+      Feb 1 2015
+    </h2>
+    <BarChart
+      activeFill="#22838A"
+      fill="#B3ECEF"
+      gap={1}
+      height={250}
+      margin={
+        Object {
+          "bottom": 5,
+          "left": 18,
+          "right": 8,
+          "top": 21,
+        }
+      }
+      onMouseOut={[Function]}
+      onMouseOver={[Function]}
+      selected="2019-03-27"
+      timeSeries={
+        Array [
+          Object {
+            "date": "2019-03-24",
+            "health_score": 75,
+            "injections": 75000000000,
+            "ranking": "warning",
+          },
+          Object {
+            "date": "2019-03-25",
+            "health_score": 96,
+            "injections": 75000000000,
+            "ranking": "good",
+          },
+          Object {
+            "date": "2019-03-26",
+            "health_score": 23,
+            "injections": 75000000000,
+            "ranking": "danger",
+          },
+          Object {
+            "date": "2019-03-27",
+            "health_score": null,
+            "ranking": null,
+          },
+        ]
+      }
+      tooltipContent={[Function]}
+      width="99%"
+      xAxisProps={
+        Object {
+          "tickFormatter": [Function],
+          "ticks": Array [
+            "2014-12-01",
+            "2015-01-01",
+            "2015-02-01",
+          ],
+        }
+      }
+      xAxisRefLines={
+        Array [
+          Object {
+            "label": Object {
+              "className": "xDividerLabel",
+              "offset": 14,
+              "position": "top",
+              "value": "New",
+            },
+            "stroke": "#d2d2d7",
+            "strokeWidth": 1,
+            "x": "2019-06-07",
+          },
+          Object {
+            "label": Object {
+              "className": "xDividerLabel",
+              "position": "top",
+              "value": "Model",
+            },
+            "strokeWidth": 0,
+            "x": "2019-06-07",
+          },
+        ]
+      }
+      xKey="date"
+      yAxisProps={
+        Object {
+          "ticks": Array [
+            0,
+            55,
+            80,
+            100,
+          ],
+        }
+      }
+      yAxisRefLines={
+        Array [
+          Object {
+            "stroke": "#2CC995",
+            "strokeWidth": 1,
+            "y": 80,
+          },
+          Object {
+            "stroke": "#FF594D",
+            "strokeWidth": 1,
+            "y": 55,
+          },
+        ]
+      }
+      yKey="health_score"
+      yRange={
+        Array [
+          "auto",
+          "auto",
+        ]
+      }
+    />
+    <div
+      className="Metrics"
+    >
+      <MetricDisplay
+        label="Total Injections"
+        value="225B"
+      />
+      <MetricDisplay
+        label="High"
+        value={96}
+      />
+      <MetricDisplay
+        label="Low"
+        value={23}
+      />
+    </div>
+  </div>
+</Panel>
+`;
+
+exports[`Signals Health Score Chart renders metric displays 1`] = `
+<MetricDisplay
+  label="Total Injections"
+  value="225B"
+/>
+`;
+
+exports[`Signals Health Score Chart renders metric displays 2`] = `
+<MetricDisplay
+  label="High"
+  value={96}
+/>
+`;
+
+exports[`Signals Health Score Chart renders no account level data callout correctly 1`] = `
+<Callout
+  height="auto"
+>
+  Health Scores Not Available
+</Callout>
+`;

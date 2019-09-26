@@ -4,9 +4,8 @@ import { Link } from 'react-router-dom';
 import { Page, Banner, UnstyledLink } from '@sparkpost/matchbox';
 import CreateForm from './components/CreateForm';
 import { createTrackingDomain } from 'src/actions/trackingDomains';
+import { selectTrackingDomainCname } from 'src/selectors/account';
 import { LINKS } from 'src/constants';
-import config from 'src/config';
-const cname = config.trackingDomains.cnameValue;
 
 export class CreatePage extends Component {
 
@@ -18,6 +17,7 @@ export class CreatePage extends Component {
   };
 
   render() {
+    const { cname } = this.props;
     return (
       <div>
         <Page
@@ -35,4 +35,6 @@ export class CreatePage extends Component {
   }
 }
 
-export default connect(null, { createTrackingDomain })(CreatePage);
+export default connect((state) => ({
+  cname: selectTrackingDomainCname(state)
+}), { createTrackingDomain })(CreatePage);

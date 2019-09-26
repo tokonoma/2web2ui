@@ -2,91 +2,95 @@ import cases from 'jest-in-case';
 import * as selector from '../templates';
 
 describe('Templates selectors', () => {
-  const store = {
-    templates: {
-      list: [
-        {
-          name: 'unpublished',
-          has_published: false,
-          shared_with_subaccounts: false,
-          subaccount_id: 101
+  let store;
+  beforeEach(() => {
+    store = {
+      templates: {
+        list: [
+          {
+            name: 'unpublished',
+            has_published: false,
+            shared_with_subaccounts: false,
+            subaccount_id: 101
+          },
+          {
+            name: 'publishedSubaccount',
+            has_published: true,
+            shared_with_subaccounts: false,
+            subaccount_id: 101
+          },
+          {
+            name: 'publishedMaster',
+            has_published: true,
+            shared_with_subaccounts: false,
+            subaccount_id: 0,
+            published: true
+          },
+          {
+            name: 'publishedShared',
+            has_published: true,
+            shared_with_subaccounts: true,
+            subaccount_id: 0
+          }
+        ],
+        testData: { test: 'data' },
+        byId: {
+          ape: {
+            draft: {
+              name: 'Ape',
+              id: 'ape',
+              published: false
+            },
+            published: {
+              name: 'Ape',
+              id: 'ape',
+              published: true
+            }
+          }
         },
-        {
-          name: 'publishedSubaccount',
-          has_published: true,
-          shared_with_subaccounts: false,
-          subaccount_id: 101
-        },
-        {
-          name: 'publishedMaster',
-          has_published: true,
-          shared_with_subaccounts: false,
-          subaccount_id: 0
-        },
-        {
-          name: 'publishedShared',
-          has_published: true,
-          shared_with_subaccounts: true,
-          subaccount_id: 0
-        }
-      ],
-      testData: { test: 'data' },
-      byId: {
-        ape: {
+        contentPreview: {
           draft: {
-            name: 'Ape',
-            id: 'ape',
-            published: false
+            ape: {
+              html: '<h1>Southeastern Asia</h1>',
+              subject: 'New Location: Come visit me'
+            }
           },
           published: {
-            name: 'Ape',
-            id: 'ape',
-            published: true
+            ape: {
+              html: '<h1>Baltimore Zoo</h1>.',
+              subject: 'Come visit me'
+            }
           }
         }
       },
-      contentPreview: {
-        draft: {
-          ape: {
-            html: '<h1>Southeastern Asia</h1>',
-            subject: 'New Location: Come visit me'
+      sendingDomains: {
+        list: [
+          {
+            domain: 'shared.com',
+            shared_with_subaccounts: true,
+            status: { ownership_verified: true, compliance_status: 'valid' }
+          },
+          {
+            domain: 'masterOnly.com',
+            status: { ownership_verified: true, compliance_status: 'valid' }
+          },
+          {
+            domain: 'assignedToSub.com',
+            subaccount_id: 101,
+            status: { ownership_verified: true, compliance_status: 'valid' }
+          },
+          {
+            domain: 'notvalid.com',
+            status: { ownership_verified: false, compliance_status: 'valid' }
           }
-        },
-        published: {
-          ape: {
-            html: '<h1>Baltimore Zoo</h1>.',
-            subject: 'Come visit me'
-          }
-        }
-      }
-    },
-    sendingDomains: {
-      list: [
-        {
-          domain: 'shared.com',
-          shared_with_subaccounts: true,
-          status: { ownership_verified: true, compliance_status: 'valid' }
-        },
-        {
-          domain: 'masterOnly.com',
-          status: { ownership_verified: true, compliance_status: 'valid' }
-        },
-        {
-          domain: 'assignedToSub.com',
-          subaccount_id: 101,
-          status: { ownership_verified: true, compliance_status: 'valid' }
-        },
-        {
-          domain: 'notvalid.com',
-          status: { ownership_verified: false, compliance_status: 'valid' }
-        }
-      ]
-    },
-    currentUser: {
-      has_subaccounts: true
-    },
-    form: { testform: { values: {}}}
-  };
+        ]
+      },
+      currentUser: {
+        has_subaccounts: true
+      },
+      form: { testform: { values: {}}}
+    };
+  });
 
   describe('Templates by id Selector', () => {
     it('returns template', () => {
@@ -114,18 +118,20 @@ describe('Templates selectors', () => {
     'returns undefined when unknown': { id: 'unknown' }
   });
 
-  cases('.selectDraftTemplatePreview', ({ id }) => {
-    expect(selector.selectDraftTemplatePreview(store, id)).toMatchSnapshot();
+  cases('.selectDraftTemplatePreview', ({ defaultValue, id }) => {
+    expect(selector.selectDraftTemplatePreview(store, id, defaultValue)).toMatchSnapshot();
   }, {
     'returns preview of draft template': { id: 'ape' },
-    'returns undefined when unknown': { id: 'unknown' }
+    'returns undefined when unknown': { id: 'unknown' },
+    'returns default value when unknown': { id: 'unknown', defaultValue: {}}
   });
 
-  cases('.selectPublishedTemplatePreview', ({ id }) => {
-    expect(selector.selectPublishedTemplatePreview(store, id)).toMatchSnapshot();
+  cases('.selectPublishedTemplatePreview', ({ defaultValue, id }) => {
+    expect(selector.selectPublishedTemplatePreview(store, id, defaultValue)).toMatchSnapshot();
   }, {
     'returns preview of draft template': { id: 'ape' },
-    'returns undefined when unknown': { id: 'unknown' }
+    'returns undefined when unknown': { id: 'unknown' },
+    'returns default value when unknown': { id: 'unknown', defaultValue: {}}
   });
 
   describe('cloneTemplate', () => {
@@ -203,6 +209,56 @@ describe('Templates selectors', () => {
     it('should return published templates if no subaccounts exist', () => {
       store.currentUser.has_subaccounts = false;
       expect(selector.selectPublishedTemplatesBySubaccount(store)).toMatchSnapshot();
+    });
+  });
+
+  describe('selectPreviewLineErrors', () => {
+    it('should return an empty ', () => {
+      expect(selector.selectPreviewLineErrors(store)).toEqual([]);
+    });
+
+    it('should return an array of errors', () => {
+      const errors = [
+        { line: 1, message: 'Oh no!' },
+        { line: 2, message: 'Oh no!' }
+      ];
+
+      store.templates.contentPreview.error = { response: { data: { errors }}};
+
+      expect(selector.selectPreviewLineErrors(store)).toEqual(errors);
+    });
+  });
+
+  describe('selectTemplatesForListTable', () => {
+    it('returns template(s) with published version only', () => {
+      expect(selector.selectTemplatesForListTable(store)).toMatchSnapshot();
+    });
+
+    it('returns template(s) with draft version only', () => {
+      store.templates.list = store.templates.list.map((template) => ({ ...template, has_published: false }));
+      store.templates.list[1].has_draft = true;
+      expect(selector.selectTemplatesForListTable(store)).toMatchSnapshot();
+    });
+
+    it('returns template(s) correctly having both published and draft version', () => {
+      store.templates.list[2].has_draft = true;
+      expect(selector.selectTemplatesForListTable(store)).toMatchSnapshot();
+    });
+
+  });
+
+  describe('selectDomainsBySubaccountWithDefault', () => {
+    it('returns verified domains when exist', () => {
+      expect(selector.selectDomainsBySubaccountWithDefault(store, {}).map((dom) => dom.domain)).toEqual(['shared.com', 'masterOnly.com']);
+    });
+
+    it('returns subaccount verified domains when exist', () => {
+      const expectedDomains = ['shared.com', 'assignedToSub.com'];
+      expect(selector.selectDomainsBySubaccountWithDefault(store, { subaccountId: 101 }).map((dom) => dom.domain)).toEqual(expectedDomains);
+    });
+
+    it('returns sandbox domain when no verified sending domain exists', () => {
+      expect(selector.selectDomainsBySubaccountWithDefault({ ...store, sendingDomains: { list: []}}, {}).map((dom) => dom.domain)).toEqual(['sparkpostbox.com']);
     });
   });
 });

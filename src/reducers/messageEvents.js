@@ -1,28 +1,30 @@
 import { formatDocumentation, getEmptyFilters } from 'src/helpers/messageEvents';
 import { getRelativeDates } from 'src/helpers/date';
 import _ from 'lodash';
-import { EVENTS_SEARCH_FILTERS } from 'src/constants';
+import { ALL_EVENTS_FILTERS } from 'src/constants';
 import qs from 'query-string';
 
 const initialState = {
   loading: false,
   historyLoading: false,
   documentationLoading: false,
+  selectedEventLoading: false,
   error: null,
   events: [],
   history: {},
+  selectedEvent: {},
   search: {
     dateOptions: {
       relativeRange: 'hour'
     },
-    recipients: [],
-    events: [],
-    ...getEmptyFilters(EVENTS_SEARCH_FILTERS)
+    ...getEmptyFilters(ALL_EVENTS_FILTERS)
   },
   linkByPage: [],
   cachedResultsByPage: [],
   totalCount: 0,
-  hasMorePagesAvailable: false
+  hasMorePagesAvailable: false,
+  eventsCSV: [],
+  eventsCSVLoading: false
 };
 
 export default (state = initialState, { type, payload, meta, extra }) => {
@@ -45,6 +47,21 @@ export default (state = initialState, { type, payload, meta, extra }) => {
 
     case 'GET_MESSAGE_EVENTS_FAIL':
       return { ...state, loading: false, error: payload };
+
+
+      // Save as CSV
+
+    case 'GET_MESSAGE_EVENTS_CSV_PENDING':
+      return { ...state, eventsCSVLoading: true, error: null };
+
+    case 'GET_MESSAGE_EVENTS_CSV_SUCCESS':
+      return { ...state, eventsCSVLoading: false, eventsCSV: payload };
+
+    case 'GET_MESSAGE_EVENTS_CSV_FAIL':
+      return { ...state, eventsCSVLoading: false, error: payload };
+
+    case 'RESET_MESSAGE_EVENTS_CSV':
+      return { ...state, eventsCSV: []};
 
 
       // Changing Page
@@ -88,6 +105,20 @@ export default (state = initialState, { type, payload, meta, extra }) => {
     case 'GET_MESSAGE_HISTORY_FAIL':
       return { ...state, historyLoading: false, error: payload };
 
+      // Selected Event
+
+    case 'GET_SELECTED_EVENT_PENDING':
+      return { ...state, selectedEventLoading: true, error: null };
+
+    case 'GET_SELECTED_EVENT_SUCCESS':
+      return {
+        ...state,
+        selectedEventLoading: false,
+        selectedEvent: payload[0]
+      };
+
+    case 'GET_SELECTED_EVENT_FAIL':
+      return { ...state, selectedEventLoading: false, error: payload };
 
       // Documentation
 

@@ -51,6 +51,10 @@
   height: 100vh;
   padding-top: rem(56);
   box-shadow: none;
+
+  &.bannerOpen {
+    padding-top: rem(112);
+  }
 }
 
 .List {

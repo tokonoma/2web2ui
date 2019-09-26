@@ -1,0 +1,67 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Page: Alert Details should render Alert Details Page 1`] = `
+<Page
+  breadcrumbAction={
+    Object {
+      "component": [Function],
+      "content": "Back to Alerts",
+      "to": "/alerts",
+    }
+  }
+  empty={Object {}}
+  primaryArea={
+    <React.Fragment>
+      <Button
+        component={[Function]}
+        flat={true}
+        size="default"
+        to="/alerts/create/alert-id"
+      >
+        <ContentCopy
+          className="Icon"
+        />
+        Duplicate
+      </Button>
+      <Button
+        flat={true}
+        onClick={[Function]}
+        size="default"
+      >
+        <Delete
+          className="Icon"
+        />
+        Delete
+      </Button>
+    </React.Fragment>
+  }
+  title="My Alert"
+>
+  <AlertDetails
+    alert={
+      Object {
+        "name": "My Alert",
+      }
+    }
+    hasSubaccounts={true}
+    id="alert-id"
+    subaccountIdToString={[Function]}
+  />
+  <DeleteModal
+    content={
+      <p>
+        The alert "
+        <strong>
+          My Alert
+        </strong>
+        " will be permanently removed. This cannot be undone.
+      </p>
+    }
+    isPending={false}
+    onCancel={[Function]}
+    onDelete={[Function]}
+    open={false}
+    title="Are you sure you want to delete this alert?"
+  />
+</Page>
+`;

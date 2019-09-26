@@ -30,7 +30,8 @@ describe('Action Creator: Billing Create', () => {
     }));
 
     expect(billingActions.syncSubscription).toHaveBeenCalled();
-    expect(accountActions.fetch).toHaveBeenCalledWith(expect.objectContaining({ include: 'usage,billing' }));
+    expect(accountActions.fetch).toHaveBeenCalledWith(expect.objectContaining({ include: 'usage' }));
+    expect(accountActions.getBillingInfo).toHaveBeenCalled();
   };
 
   beforeEach(() => {
@@ -63,6 +64,7 @@ describe('Action Creator: Billing Create', () => {
       }
     }));
     accountActions.fetch = jest.fn(({ meta }) => meta.onSuccess({}));
+    accountActions.getBillingInfo = jest.fn(({ meta }) => meta.onSuccess({}));
     billingHelpers.formatCreateData = jest.fn((a) => a);
     billingHelpers.formatDataForCors = jest.fn((a) => ({ billingData, corsData }));
   });
@@ -70,7 +72,7 @@ describe('Action Creator: Billing Create', () => {
   it('update without a planpicker code', () => {
 
     const thunk = billingCreate(values);
-    accountActions.fetch = jest.fn();
+    accountActions.getBillingInfo = jest.fn();
 
     thunk(dispatch, getState);
 

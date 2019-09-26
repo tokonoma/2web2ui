@@ -99,36 +99,47 @@ exports[`Page: Message Events tests should render page correctly 1`] = `
       previousDisabled={false}
       totalCount={100}
     />
-    <CollectionControls
-      data={
-        Array [
-          Object {
-            "formattedDate": "so-formatted",
-            "friendly_from": "hi@friendly",
-            "rcpt_to": "ron.swanson@pawnee.state.in.us",
-            "type": "delivery",
-          },
-          Object {
-            "formattedDate": "formatted",
-            "friendly_from": "mean@friendly",
-            "rcpt_to": "tom.haverford@pawnee.state.in.us",
-            "type": "injection",
-          },
-        ]
-      }
-      onPerPageChange={[Function]}
-      perPage={25}
-      perPageButtons={
-        Array [
-          10,
-          25,
-          50,
-          100,
-        ]
-      }
-      saveCsv={true}
-      totalCount={100}
-    />
+    <div
+      className="RightAlignedButtons"
+    >
+      <PerPageButtons
+        data={
+          Array [
+            Object {
+              "formattedDate": "so-formatted",
+              "friendly_from": "hi@friendly",
+              "rcpt_to": "ron.swanson@pawnee.state.in.us",
+              "type": "delivery",
+            },
+            Object {
+              "formattedDate": "formatted",
+              "friendly_from": "mean@friendly",
+              "rcpt_to": "tom.haverford@pawnee.state.in.us",
+              "type": "injection",
+            },
+          ]
+        }
+        onPerPageChange={[Function]}
+        perPage={25}
+        perPageButtons={
+          Array [
+            10,
+            25,
+            50,
+            100,
+          ]
+        }
+        saveCsv={true}
+        totalCount={100}
+      />
+      <Button
+        disabled={false}
+        onClick={[Function]}
+        size="default"
+      >
+        Save as CSV
+      </Button>
+    </div>
   </div>
 </Page>
 `;

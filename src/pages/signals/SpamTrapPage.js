@@ -1,5 +1,8 @@
-import React, { Component, Fragment } from 'react';
+/* eslint-disable max-lines */
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { getSpamHits } from 'src/actions/signals';
+import { selectSpamHitsDetails } from 'src/selectors/signals';
 import { Panel, Grid } from '@sparkpost/matchbox';
 import Page from './components/SignalsPage';
 import BarChart from './components/charts/barchart/BarChart';
@@ -7,15 +10,18 @@ import SpamTrapActions from './components/actionContent/SpamTrapActions';
 import TooltipMetric from './components/charts/tooltip/TooltipMetric';
 import DateFilter from './components/filters/DateFilter';
 import { SPAM_TRAP_INFO } from './constants/info';
-import withSpamTrapDetails from './containers/SpamTrapDetailsContainer';
+import withDetails from './containers/withDetails';
+import withDateSelection from './containers/withDateSelection';
 import { Loading } from 'src/components';
 import Callout from 'src/components/callout';
-import OtherChartsHeader from './components/OtherChartsHeader';
+import Legend from './components/charts/legend/Legend';
+import Divider from './components/Divider';
 import Calculation from './components/viewControls/Calculation';
 import ChartHeader from './components/ChartHeader';
 import { formatFullNumber, formatNumber, roundToPlaces } from 'src/helpers/units';
 import moment from 'moment';
 import _ from 'lodash';
+import { spamTrapHitTypesCollection, spamTrapHitTypesByLabel } from './constants/spamTrapHitTypes';
 
 import EngagementRecencyPreview from './components/previews/EngagementRecencyPreview';
 import HealthScorePreview from './components/previews/HealthScorePreview';
@@ -23,38 +29,11 @@ import styles from './DetailsPages.module.scss';
 
 export class SpamTrapPage extends Component {
   state = {
-    selectedDate: null,
     calculation: 'relative'
-  }
-
-  componentDidMount() {
-    const { selected } = this.props;
-
-    if (selected) {
-      this.setState({ selectedDate: selected });
-    }
-  }
-
-  componentDidUpdate(prevProps) {
-    const { data } = this.props;
-    const { selectedDate } = this.state;
-
-    const dataSetChanged = prevProps.data !== data;
-    let selectedDataByDay = _.find(data, ['date', selectedDate]);
-
-    // Select last date in time series
-    if (dataSetChanged && !selectedDataByDay) {
-      selectedDataByDay = _.last(data);
-      this.setState({ selectedDate: selectedDataByDay.date });
-    }
   }
 
   handleCalculationToggle = (value) => {
     this.setState({ calculation: value });
-  }
-
-  handleDateSelect = (node) => {
-    this.setState({ selectedDate: _.get(node, 'payload.date') });
   }
 
   getYAxisProps = () => {
@@ -62,7 +41,7 @@ export class SpamTrapPage extends Component {
     const { calculation } = this.state;
 
     return {
-      tickFormatter: calculation === 'relative' ? (tick) => `${roundToPlaces(tick * 100, 2)}%` : (tick) => formatNumber(tick),
+      tickFormatter: calculation === 'relative' ? (tick) => `${roundToPlaces(tick * 100, 3)}%` : (tick) => formatNumber(tick),
       domain: data.every(({ relative_trap_hits }) => !relative_trap_hits) && calculation === 'relative'
         ? [0, 1] : ['auto', 'auto']
     };
@@ -77,16 +56,31 @@ export class SpamTrapPage extends Component {
   }
 
   getTooltipContent = ({ payload = {}}) => (
-    <Fragment>
-      <TooltipMetric label='Spam Trap Hits' value={formatFullNumber(payload.trap_hits)} />
+    <>
+      {this.state.calculation === 'absolute' ? (
+        <TooltipMetric label='Spam Trap Hits' value={formatFullNumber(payload.trap_hits)} />
+      ) : (
+        <TooltipMetric label='Spam Trap Rate' value={`${roundToPlaces(payload.relative_trap_hits * 100, 4)}%`} />
+      )}
+      {spamTrapHitTypesCollection.map(({ fill, key, label }) => (
+        <TooltipMetric
+          color={fill}
+          key={key}
+          label={label}
+          value={
+            this.state.calculation === 'absolute'
+              ? `${formatFullNumber(payload[key])}`
+              : `${roundToPlaces(payload[`relative_${key}`] * 100, 4)}%`
+          }
+        />
+      ))}
       <TooltipMetric label='Injections' value={formatFullNumber(payload.injections)} />
-      <TooltipMetric label='Spam Trap Rate' value={`${roundToPlaces(payload.relative_trap_hits * 100, 4)}%`} />
-    </Fragment>
+    </>
   )
 
   renderContent = () => {
-    const { data = [], loading, gap, empty, error } = this.props;
-    const { calculation, selectedDate } = this.state;
+    const { data = [], handleDateSelect, loading, gap, empty, error, selectedDate, handleDateHover, resetDateHover, hoveredDate } = this.props;
+    const { calculation } = this.state;
     const selectedSpamTrapHits = _.find(data, ['date', selectedDate]) || {};
     let chartPanel;
 
@@ -121,16 +115,32 @@ export class SpamTrapPage extends Component {
               tooltipContent={SPAM_TRAP_INFO}
             />
             {chartPanel || (
-              <BarChart
-                gap={gap}
-                onClick={this.handleDateSelect}
-                selected={selectedDate}
-                timeSeries={data}
-                tooltipContent={this.getTooltipContent}
-                yKey={calculation === 'absolute' ? 'trap_hits' : 'relative_trap_hits'}
-                yAxisProps={this.getYAxisProps()}
-                xAxisProps={this.getXAxisProps()}
-              />
+              <div className='LiftTooltip'>
+                <BarChart
+                  gap={gap}
+                  onClick={handleDateSelect}
+                  selected={selectedDate}
+                  timeSeries={data}
+                  onMouseOver={handleDateHover}
+                  onMouseOut={resetDateHover}
+                  hovered={hoveredDate}
+                  tooltipContent={this.getTooltipContent}
+                  yKeys={
+                    spamTrapHitTypesCollection
+                      .map(({ fill, key }) => ({
+                        key: calculation === 'relative' ? `relative_${key}` : key,
+                        fill
+                      }))
+                      .reverse()
+                  }
+                  yAxisProps={this.getYAxisProps()}
+                  xAxisProps={this.getXAxisProps()}
+                />
+                <Legend
+                  items={spamTrapHitTypesCollection}
+                  tooltipContent={(label) => spamTrapHitTypesByLabel[label].description}
+                />
+              </div>
             )}
           </Panel>
         </Grid.Column>
@@ -148,14 +158,14 @@ export class SpamTrapPage extends Component {
 
     return (
       <Page
-        breadcrumbAction={{ content: 'Back to Overview', to: '/signals', component: Link }}
-        dimensionPrefix='Spam Traps for'
+        breadcrumbAction={{ content: 'Back to Spam Trap Overview', to: '/signals/spam-traps', component: Link }}
+        title='Spam Traps'
         facet={facet}
         facetId={facetId}
         subaccountId={subaccountId}
-        primaryArea={<DateFilter />}>
+        primaryArea={<DateFilter left />}>
         {this.renderContent()}
-        <OtherChartsHeader facet={facet} facetId={facetId} subaccountId={subaccountId} />
+        <Divider />
         <Grid>
           <Grid.Column xs={12} sm={6}>
             <EngagementRecencyPreview />
@@ -169,4 +179,8 @@ export class SpamTrapPage extends Component {
   }
 }
 
-export default withSpamTrapDetails(SpamTrapPage);
+export default withDetails(
+  withDateSelection(SpamTrapPage),
+  { getSpamHits },
+  selectSpamHitsDetails,
+);

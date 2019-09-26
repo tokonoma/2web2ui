@@ -15,28 +15,37 @@ exports[`Component: RoleRadioGroup should render the RadioGroup 1`] = `
   allowSubaccountAssignment={false}
   allowSuperUser={false}
   clearFields={[MockFunction]}
-  grid={
-    Object {
-      "md": 6,
-      "sm": 12,
-      "xs": 12,
-    }
-  }
   hasSubaccounts={false}
   options={
     Array [
       Object {
         "disabled": false,
-        "helpText": "Has access to all features, including the ability to invite additional users.",
+        "helpText": "All permissions. The only user that can manage users, security, and billing settings.",
         "label": <strong>
           Admin
         </strong>,
         "value": "admin",
       },
       Object {
+        "disabled": false,
+        "helpText": "Setup and development user. Full access to API Keys, and all other email related setup, sending, and reporting features.",
+        "label": <strong>
+          Developer
+        </strong>,
+        "value": "developer",
+      },
+      Object {
+        "disabled": false,
+        "helpText": "Content and deliverability management user. Has access to Templates, Recipients Lists, Suppressions, AB Testing, and all reporting features.",
+        "label": <strong>
+          Templates
+        </strong>,
+        "value": "templates",
+      },
+      Object {
         "children": false,
         "disabled": false,
-        "helpText": "Has access to reporting and read-only access to templates.",
+        "helpText": "Data analytics user. Has access to all reporting features and can view templates. No access to any account or feature settings.",
         "label": <strong>
           Reporting
         </strong>,

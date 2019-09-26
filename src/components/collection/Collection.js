@@ -5,7 +5,6 @@ import qs from 'query-string';
 import _ from 'lodash';
 import { withRouter } from 'react-router-dom';
 import Pagination from './Pagination';
-import { DEFAULT_PER_PAGE_BUTTONS } from 'src/constants';
 import FilterBox from './FilterBox';
 import { objectSortMatch } from 'src/helpers/sortMatch';
 
@@ -104,15 +103,15 @@ export class Collection extends Component {
   }
 
   renderFilterBox() {
-    const { filterBox, rows, perPageButtons = DEFAULT_PER_PAGE_BUTTONS } = this.props;
-    if (filterBox.show && (rows.length > Math.min(...perPageButtons))) {
+    const { filterBox, rows } = this.props;
+    if (filterBox.show) {
       return <FilterBox {...filterBox} rows={rows} onChange={this.debouncedHandleFilterChange} />;
     }
     return null;
   }
 
   renderPagination() {
-    const { rows, perPageButtons, pagination } = this.props;
+    const { rows, perPageButtons, pagination, saveCsv = true } = this.props;
     const { currentPage, perPage, filteredRows } = this.state;
 
     if (!pagination || !currentPage) { return null; }
@@ -125,6 +124,7 @@ export class Collection extends Component {
         perPageButtons={perPageButtons}
         onPageChange={this.handlePageChange}
         onPerPageChange={this.handlePerPageChange}
+        saveCsv={saveCsv}
       />
     );
   }
@@ -137,24 +137,38 @@ export class Collection extends Component {
       rowKeyName = 'id',
       headerComponent: HeaderComponent = NullComponent,
       outerWrapper: OuterWrapper = PassThroughWrapper,
-      bodyWrapper: BodyWrapper = PassThroughWrapper
+      bodyWrapper: BodyWrapper = PassThroughWrapper,
+      children,
+      title
     } = this.props;
 
     if (!rows.length) {
       return null;
     }
 
+    const filterBox = this.renderFilterBox();
+    const collection = (
+      <OuterWrapper>
+        <HeaderComponent />
+        <BodyWrapper>
+          {this.getVisibleRows().map((row, i) => <RowComponent key={`${row[rowKeyName] || 'row'}-${i}`} {...row} />)}
+        </BodyWrapper>
+      </OuterWrapper>
+    );
+    const pagination = this.renderPagination();
+    const heading = <h3>{title}</h3>;
+
     return (
-      <div>
-        {this.renderFilterBox()}
-        <OuterWrapper>
-          <HeaderComponent />
-          <BodyWrapper>
-            {this.getVisibleRows().map((row, i) => <RowComponent key={`${row[rowKeyName] || 'row'}-${i}`} {...row} />)}
-          </BodyWrapper>
-        </OuterWrapper>
-        {this.renderPagination()}
-      </div>
+      typeof(children) === 'function'
+        ? children({ filterBox, collection, heading, pagination })
+        : (
+          <div>
+            {title && heading}
+            {filterBox}
+            {collection}
+            {pagination}
+          </div>
+        )
     );
   }
 }

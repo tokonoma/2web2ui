@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ActionsModal renders hidden modal 1`] = `
+<Modal>
+  <Panel
+    title="Modal Title"
+  >
+    <Panel.Section>
+      Modal Content
+    </Panel.Section>
+    <Panel.Section>
+      <div
+        className="Buttons"
+      >
+        <div>
+          <Button
+            className="ActionButton"
+            key="0"
+            name="action-modal-button"
+            onClick={[Function]}
+            primary={true}
+            size="default"
+          >
+            Do It
+          </Button>
+        </div>
+        <Button
+          name="action-cancel-modal-button"
+          size="default"
+        >
+          Cancel
+        </Button>
+      </div>
+    </Panel.Section>
+  </Panel>
+</Modal>
+`;

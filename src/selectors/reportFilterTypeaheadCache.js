@@ -5,17 +5,17 @@ function reshape(list, type) {
   return list.map((value) => ({ type, value }));
 }
 
-const selectTemplates = ({ templates }) => templates.list;
 const selectSubaccounts = ({ subaccounts }) => subaccounts.list;
 const selectSendingDomains = ({ sendingDomains }) => sendingDomains.list;
 const selectRecipientDomains = ({ metrics }) => metrics.domains;
 const selectCampaigns = ({ metrics }) => metrics.campaigns;
 const selectSendingIps = ({ metrics }) => metrics.sendingIps;
 const selectIpPools = ({ metrics }) => metrics.ipPools;
+const selectTemplates = ({ metrics }) => metrics.templates;
 
 const selectPreparedTemplates = createSelector(
   [selectTemplates],
-  (templates) => templates.map((t) => ({ type: 'Template', value: t.id }))
+  (templates) => reshape(templates, 'Template')
 );
 
 const selectPreparedSubaccounts = createSelector(

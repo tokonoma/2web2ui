@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Signals Engagement Rate by cohort actions component renders 1`] = `
+Array [
+  Object {
+    "content": <React.Fragment>
+      An overall low engagement rate may indicate you emails are being sent to the spam folder. Drill into your Health Score to find the issue.
+    </React.Fragment>,
+    "internal": true,
+    "link": "/signals/health-score/facet/someId",
+    "linkText": "View Health Score",
+    "type": "bad",
+  },
+]
+`;
+
+exports[`Signals Engagement Rate by cohort actions component renders only 3 messages in the correct order 1`] = `
+Array [
+  Object {
+    "content": <React.Fragment>
+      An overall low engagement rate may indicate you emails are being sent to the spam folder. Drill into your Health Score to find the issue.
+    </React.Fragment>,
+    "internal": true,
+    "link": "/signals/health-score/facet/someId",
+    "linkText": "View Health Score",
+    "type": "bad",
+  },
+  Object {
+    "content": <React.Fragment>
+      Many subscribers who previously engaged are no longer engaging. Examine your segmentation and targeting to see how you can send more relevant content to your subscribers.
+    </React.Fragment>,
+    "link": "https://www.sparkpost.com/docs/signals/segmentation/",
+    "type": "bad",
+  },
+  Object {
+    "content": <React.Fragment>
+      Not a lot of your semi-recently engaged recipients are engaging with your emails. This may be a sign you should refresh your content and send to them on a different frequency.
+    </React.Fragment>,
+    "link": "https://www.sparkpost.com/docs/signals/content-refresh/",
+    "type": "warning",
+  },
+]
+`;

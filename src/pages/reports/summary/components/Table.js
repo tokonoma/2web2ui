@@ -3,24 +3,20 @@ import { connect } from 'react-redux';
 import cx from 'classnames';
 
 import { _getTableData } from 'src/actions/summaryChart';
-import { addFilters } from 'src/actions/reportOptions';
 import typeaheadCacheSelector from 'src/selectors/reportFilterTypeaheadCache';
 import { hasSubaccounts } from 'src/selectors/subaccounts';
 
 import { TableCollection, TableHeader, Unit, Loading } from 'src/components';
 import GroupByOption from './GroupByOption';
 import { Empty } from 'src/components';
-import { Panel, UnstyledLink } from '@sparkpost/matchbox';
+import { Panel } from '@sparkpost/matchbox';
 import { GROUP_CONFIG } from './tableConfig';
+import AddFilterLink from '../../components/AddFilterLink';
 import _ from 'lodash';
 
 import styles from './Table.module.scss';
 
 export class Table extends Component {
-
-  handleRowClick = (item) => {
-    this.props.addFilters([item]);
-  }
 
   getColumnHeaders() {
     const { metrics, groupBy } = this.props;
@@ -44,32 +40,29 @@ export class Table extends Component {
     return [primaryCol, ...metricCols];
   }
 
+  getSubaccountFilter = (subaccountId) => {
+    const { typeaheadCache } = this.props;
+
+    if (subaccountId === 0) {
+      return { type: 'Subaccount', value: 'Master Account (ID 0)', id: 0 };
+    }
+
+    const subaccount = _.find(typeaheadCache, { type: 'Subaccount', id: subaccountId });
+    const value = _.get(subaccount, 'value') || `Deleted (ID ${subaccountId})`;
+    return { type: 'Subaccount', value, id: subaccountId };
+  };
+
   getRowData = () => {
-    const { metrics, groupBy, typeaheadCache } = this.props;
+    const { metrics, groupBy } = this.props;
     const group = GROUP_CONFIG[groupBy];
 
     return (row) => {
-      let value = row[group.keyName];
-      let filter = {
-        type: group.label,
-        value
-      };
+      const filterKey = row[group.keyName];
+      const newFilter = (group.label === 'Subaccount')
+        ? this.getSubaccountFilter(filterKey)
+        : { type: group.label, value: filterKey };
 
-      // Matches typeahead filter object for subaccounts
-      if (filter.type === 'Subaccount') {
-        const subaccount = _.find(typeaheadCache, { type: 'Subaccount', id: filter.value });
-        const id = filter.value;
-        value = _.get(subaccount, 'value') || `Deleted (ID ${filter.value})`;
-
-        if (filter.value === 0) {
-          value = 'Master Account (ID 0)';
-        }
-
-        filter = { ...filter, value, id };
-      }
-
-      const primaryCol = groupBy === 'aggregate' ? 'Aggregate Total' : <UnstyledLink onClick={() => this.handleRowClick(filter)}>{value}</UnstyledLink>;
-
+      const primaryCol = groupBy === 'aggregate' ? 'Aggregate Total' : <AddFilterLink newFilter={newFilter} reportType={'summary'} content={newFilter.value}/>;
       const metricCols = metrics.map((metric) => (
         <div className={styles.RightAlign}>
           <Unit value={row[metric.key]} unit={metric.unit}/>
@@ -159,4 +152,4 @@ const mapStateToProps = (state) => ({
   hasSubaccounts: hasSubaccounts(state),
   ...state.summaryChart
 });
-export default connect(mapStateToProps, { _getTableData, addFilters })(Table);
+export default connect(mapStateToProps, { _getTableData })(Table);

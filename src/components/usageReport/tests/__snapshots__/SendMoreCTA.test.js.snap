@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`SendMoreCTA Component renders correctly 1`] = `
-<Connect(AccessControl)
+<AccessControl
   condition={[Function]}
 >
   <p>
@@ -14,7 +14,7 @@ exports[`SendMoreCTA Component renders correctly 1`] = `
         <UnstyledLink
           onClick={[Function]}
         >
-          Verify your email.
+           Verify your email. 
         </UnstyledLink>
       </Case>
       <Case
@@ -35,24 +35,8 @@ exports[`SendMoreCTA Component renders correctly 1`] = `
           Upgrade your account.
         </PageLink>
       </Case>
-      <Case
-        condition={[Function]}
-      >
-        <UnstyledLink
-          onClick={[Function]}
-        >
-          Submit a request
-        </UnstyledLink>
-         to increase your daily sending limit.
-      </Case>
     </Connect(ConditionSwitch)>
      
-    <UnstyledLink
-      external={true}
-      to="https://support.sparkpost.com/customer/portal/articles/2030894"
-    >
-      Learn more about these limits.
-    </UnstyledLink>
   </p>
-</Connect(AccessControl)>
+</AccessControl>
 `;

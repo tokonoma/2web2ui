@@ -1,6 +1,7 @@
 const testConfig = {
   apiBase: 'http://fake-api-test-host.com',
   splashPage: '/dashboard',
+  release: 'test-release',
   smtpAuth: {
     host: 'smtp.sparkmail.com',
     alternativePort: 2525
@@ -39,6 +40,10 @@ const testConfig = {
         path: '/'
       }
     }
+  },
+  tenantId: 'test',
+  brightback: {
+    enabled: false
   }
 };
 

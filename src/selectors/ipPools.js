@@ -1,29 +1,37 @@
 import { createSelector } from 'reselect';
 import _ from 'lodash';
-import { encodeIp } from 'src/helpers/ipNames';
 import { currentPlanCodeSelector } from 'src/selectors/accountBillingInfo';
 import { ENTERPRISE_PLAN_CODES } from 'src/constants';
-const DEFAULT = 'default';
+import { isAdmin } from 'src/helpers/conditions/user';
+const DEFAULT_POOL_ID = 'default';
+
+const currentIpPoolId = (state, props) => props.match.params.poolId;
+const currentSendingIp = (state, props) => props.match.params.ip;
 
 export const getIpPools = (state) => state.ipPools.list;
-const selectCurrentPool = ({ ipPools = {}}) => ipPools.pool || {};
+
+export const selectCurrentPool = createSelector(
+  [getIpPools, currentIpPoolId], (allPools, poolId) => _.find(allPools, { id: poolId }) || {}
+);
 
 export const selectIpsForCurrentPool = createSelector(
   [selectCurrentPool],
-  ({ ips = []}) => ips.map((ip) => ({
-    ...ip,
-    id: encodeIp(ip.external_ip)
-  }))
+  ({ ips = []}) => ips
+);
+
+export const selectIpForCurrentPool = createSelector(
+  [selectCurrentPool, currentSendingIp],
+  ({ ips = []}, sendingIp) => _.find(ips, { external_ip: sendingIp })
 );
 
 export const getDefaultPool = createSelector(
   [getIpPools],
-  (ipPools) => ipPools.find(({ id }) => id === DEFAULT)
+  (ipPools) => ipPools.find(({ id }) => id === DEFAULT_POOL_ID)
 );
 
 export const getNonDefaultIpPools = createSelector(
   [getIpPools],
-  (ipPools) => ipPools.filter(({ id }) => id !== DEFAULT)
+  (ipPools) => ipPools.filter(({ id }) => id !== DEFAULT_POOL_ID)
 );
 
 export const getOrderedIpPools = createSelector(
@@ -32,39 +40,8 @@ export const getOrderedIpPools = createSelector(
     if (!defaultPool) {
       return initialList;
     }
-    return [ defaultPool, ...others ];
+    return [defaultPool, ...others];
   }
-);
-
-/**
- * Grab all IPs for the current pool and return
- * an object where each key is one converted IP
- * whose value is the id of the current Pool
- *
- * This is used to set initial values on a form where the
- * converted IPs are the name of each field and the initial
- * value is the pool that IP is currently assigned to.
- *
- * Note: IPs are converted to make them safe to use as
- * React props, with _ instead of .
- */
-const selectCurrentPoolInitialValues = createSelector(
-  [selectCurrentPool, selectIpsForCurrentPool],
-  (currentPool, ips) => ({
-    name: currentPool.name,
-    signing_domain: currentPool.signing_domain,
-    ...ips.reduce((result, ip) => {
-      result[ip.id] = currentPool.id;
-      return result;
-    }, {})
-  })
-);
-
-const isFormInNewMode = (state, { isNew }) => isNew;
-
-export const selectIpPoolFormInitialValues = createSelector(
-  [selectCurrentPoolInitialValues, isFormInNewMode],
-  (initialValues, isNew) => isNew ? {} : initialValues
 );
 
 /**
@@ -72,9 +49,25 @@ export const selectIpPoolFormInitialValues = createSelector(
  * @return bool
  */
 export const shouldShowIpPurchaseCTA = createSelector(
-  [currentPlanCodeSelector], (currentPlanCode) => !_.includes(ENTERPRISE_PLAN_CODES, currentPlanCode)
+  [currentPlanCodeSelector, isAdmin], (currentPlanCode, admin) => !_.includes(ENTERPRISE_PLAN_CODES, currentPlanCode) && admin
 );
 
 export const selectFirstIpPoolId = createSelector(
   [getIpPools], (ipPools) => _.get(ipPools, '[0].id')
 );
+
+export const selectIpFormInitialValues = createSelector(
+  [selectIpForCurrentPool, selectCurrentPool], (currentIp, pool) => ({
+    auto_warmup_stage: 1,
+    ...currentIp,
+    ip_pool: pool.id
+
+  })
+);
+
+/**
+ * Returns whether overflow pool field is editable or not. If the current pool is an overflow pool for any other pool, overflow pool for current pool is not editable
+ * @return bool
+ */
+export const canEditOverflowPool = createSelector(
+  [getIpPools, selectCurrentPool], (pools, currentPool) => _.every(pools, (pool) => pool.auto_warmup_overflow_pool !== currentPool.id));

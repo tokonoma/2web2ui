@@ -60,18 +60,26 @@ describe('PlanPrice', () => {
   });
 
   it('renders correctly for 30 day free plan', () => {
-    plan.monthly = 0;
-    plan.isFree = true;
-    plan.code = 'free15K-banana';
-    wrapper.setProps({ plan });
+    const free15kPlan = {
+      ...plan,
+      monthly: 0,
+      isFree: true,
+      code: 'free15K-banana'
+    };
+
+    wrapper.setProps({ plan: free15kPlan });
     expect(wrapper).toMatchSnapshot();
   });
 
   it('renders correctly for eternal free plan', () => {
-    plan.monthly = 0;
-    plan.isFree = true;
-    plan.code = 'free500-banana';
-    wrapper.setProps({ plan });
+    const eternalFree = {
+      ...plan,
+      monthly: 0,
+      isFree: true,
+      code: 'free500-banana'
+    };
+
+    wrapper.setProps({ plan: eternalFree });
     expect(wrapper).toMatchSnapshot();
   });
 

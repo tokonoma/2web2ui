@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 export const DEFAULT_REDIRECT_ROUTE = '/landing';
 export const AFTER_JOIN_REDIRECT_ROUTE = '/onboarding/plan';
 export const SIGN_UP_ROUTE = '/join';
@@ -46,7 +47,6 @@ export const LINKS = {
   DAILY_USAGE: 'https://www.sparkpost.com/docs/getting-started/what-counts-daily-monthly-usage',
   LEARN_MORE_TFA: 'https://www.sparkpost.com/docs/my-account-and-profile/enabling-two-factor-authentication',
   ONBOARDING_SENDING: 'https://www.sparkpost.com/docs/getting-started/getting-started-sparkpost/#preparing-your-from-address',
-  SUBMIT_SUPPORT_TICKET: 'https://support.sparkpost.com/customer/portal/emails/new',
   RECAPTCHA_LIB_URL: 'https://www.google.com/recaptcha/api.js',
   DAILY_MONTHLY_QUOTA_LIMIT_DOC: 'https://support.sparkpost.com/customer/portal/articles/2030894',
   GETTING_STARTED_GUIDE: 'https://www.sparkpost.com/docs/getting-started/getting-started-sparkpost',
@@ -56,7 +56,8 @@ export const LINKS = {
   ALERTS_SURVEY: 'https://goo.gl/forms/rnIuTvdVF2xhpKCy2',
   SNIPPET_SUBSTITUTION_REFERENCE: 'https://developers.sparkpost.com/api/substitutions-reference/#header-snippets',
   MANDATORY_TFA: 'https://www.sparkpost.com/docs/my-account-and-profile/enabling-two-factor-authentication/',
-  RECIPIENT_VALIDATION_ACCESS: 'https://www.sparkpost.com/rv-access'
+  RECIPIENT_VALIDATION_ACCESS: 'https://www.sparkpost.com/rv-access',
+  AUTO_IP_WARMUP_SETUP: 'https://www.sparkpost.com/docs/user-guide/automated-ip-warmup/'
 };
 
 export const ENTERPRISE_PLAN_CODES = ['ent1'];
@@ -87,6 +88,7 @@ export const FORMS = {
   EVENTS_SEARCH: 'eventsSearchForm'
 };
 
+//These filters are the searchable filters in the 'more filters' modal on the Events Search page
 export const EVENTS_SEARCH_FILTERS = {
   recipient_domains: { placeholder: 'list of domain parts (e.g., gmail, yahoo.co, yahoo.co.jp, .fr)', label: 'Recipient Domains' },
   from_addresses: { placeholder: 'list of full from addresses (e.g., john@mycompany.com)', label: 'From Addresses' },
@@ -104,9 +106,14 @@ export const EVENTS_SEARCH_FILTERS = {
   ab_tests: { placeholder: 'list of full words in ab test ids (e.g. newsletter, fire-sale)', label: 'AB Test IDs' },
   ab_test_versions: { placeholder: 'list of version numbers; requires AB Test ID filter(e.g. 4)', label: 'AB Test Versions' }
 };
-export const DEFAULT_PER_PAGE_BUTTONS = [10, 25, 50, 100];
 
-export const SUBACCOUNT_REPORTING_ROLE = 'subaccount_reporting';
+export const ALL_EVENTS_FILTERS = {
+  recipients: { placeholder: 'Filter by recipient email address', label: 'Recipients' },
+  events: { label: 'Event' },
+  ...EVENTS_SEARCH_FILTERS
+};
+
+export const DEFAULT_PER_PAGE_BUTTONS = [10, 25, 50, 100];
 
 export const ANALYTICS_CREATE_ACCOUNT = 'create account';
 export const ANALYTICS_ADDON_IP = 'dedicated_ips';
@@ -122,9 +129,41 @@ export const ANALYTICS_WHITELISTED_FORMS = [
   FORMS.JOIN_SENDING_DOMAIN
 ];
 
-export const ROLES = {
-  ADMIN: 'admin',
-  REPORTING: 'reporting',
-  SUBACCOUNT_REPORTING: 'subaccount_reporting',
-  SUPERUSER: 'superuser'
+export const MAILBOX_PROVIDERS = {
+  apple: 'Apple',
+  gmail: 'Gmail',
+  google_apps: 'Google Apps',
+  microsoft: 'Microsoft',
+  verizon_media: 'Verizon Media',
+  yahoo_uk: 'Yahoo UK',
+  us_broadband: 'US Broadband',
+  uk_providers: 'UK Providers',
+  italian_providers: 'Italian Providers',
+  russian_providers: 'Russian Providers',
+  french_providers: 'French Providers',
+  chinese_providers: 'Chinese Providers',
+  german_providers: 'German Providers',
+  canadian_providers: 'Canadian Providers',
+  japanese_providers: 'Japanese Providers',
+  other_european_providers: 'Other European Providers',
+  other: 'Other Providers'
 };
+
+export const PLAN_TIERS = {
+  test: 'Test Account',
+  starter: 'Starter',
+  premier: 'Premier'
+};
+
+export const RECIPIENT_VALIDATION_TIERS = [
+  { volumeMin: 0, volumeMax: 5000, cost: 0.01, displayedCost: '$0.010' },
+  { volumeMin: 5000, volumeMax: 10000, cost: 0.008, displayedCost: '$0.008' },
+  { volumeMin: 10000, volumeMax: 50000, cost: 0.006, displayedCost: '$0.006' },
+  { volumeMin: 50000, volumeMax: 100000, cost: 0.004, displayedCost: '$0.004' },
+  { volumeMin: 100000, volumeMax: 250000, cost: 0.003, displayedCost: '$0.003' },
+  { volumeMin: 250000, volumeMax: 750000, cost: 0.0015, displayedCost: '$0.0015' },
+  { volumeMin: 750000, volumeMax: 1000000, cost: 0.001, displayedCost: '$0.0010' },
+  { volumeMin: 1000000, volumeMax: Infinity, cost: 0.00075, displayedCost: '$0.00075' }
+];
+
+export { ROLES, SUBACCOUNT_ROLES, ROLE_LABELS } from './users';

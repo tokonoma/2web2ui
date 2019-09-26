@@ -62,6 +62,16 @@ Object {
 }
 `;
 
+exports[`getBilling 1`] = `
+Object {
+  "meta": Object {
+    "method": "GET",
+    "url": "/v1/billing",
+  },
+  "type": "GET_BILLING",
+}
+`;
+
 exports[`getPlans 1`] = `
 Object {
   "meta": Object {
@@ -69,5 +79,15 @@ Object {
     "url": "/v1/account/plans",
   },
   "type": "GET_PLANS",
+}
+`;
+
+exports[`getUsage 1`] = `
+Object {
+  "meta": Object {
+    "method": "GET",
+    "url": "/v1/usage",
+  },
+  "type": "GET_USAGE",
 }
 `;

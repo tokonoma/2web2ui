@@ -1,0 +1,29 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.SingleFilter {
+  padding-top: rem(20);
+}
+
+.MetricSelector {
+  padding: rem(15) 0;
+}
+
+.Filters {
+  padding-top: rem(15);
+}
+
+.Evaluator {
+  padding-top: rem(15);
+}
+
+.Notifications {
+  padding-top: rem(15);
+}
+
+.OptionalText {
+  font-weight: normal;
+}
+
+.SubmitButton {
+  margin-top: rem(20);
+}

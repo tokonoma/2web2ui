@@ -1,58 +1,52 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Tabs } from '@sparkpost/matchbox';
 import classnames from 'classnames';
 
+import useTabs from 'src/hooks/useTabs';
 import PreviewFrame from './PreviewFrame';
 import styles from './PreviewPanel.module.scss';
 
-export default class PreviewPanel extends Component {
-  static defaultProps = {
-    html: '',
-    text: '',
-    amp_html: ''
-  }
+const TABS = [
+  { content: 'HTML', key: 'html' },
+  { content: 'Text', key: 'text' },
+  { content: 'AMP HTML', key: 'ampHtml' }
+];
 
-  static propTypes = {
-    html: PropTypes.string,
-    text: PropTypes.string,
-    amp_html: PropTypes.string
-  }
+const PreviewPanel = ({ Frame, ...props }) => {
+  const [selectedTabIndex, tabs] = useTabs(TABS);
+  const selectedTabKey = tabs[selectedTabIndex].key;
 
-  state = {
-    contentType: 'HTML'
-  }
+  // Must wrap text content in <p> to apply style and must be a string for injecting into iframe
+  const content = selectedTabKey === 'text'
+    ? `<p style="white-space: pre-wrap">${props[selectedTabKey]}</p>`
+    : props[selectedTabKey];
 
-  onChange = (event) => {
-    this.setState({ contentType: event.currentTarget.text });
-  }
-
-  render() {
-    const { isAmpLive } = this.props;
-    const tabs = [
-      { content: 'HTML', onClick: this.onChange },
-      { content: 'Text', onClick: this.onChange }
-    ];
-
-    if (isAmpLive) {
-      tabs.push({ content: 'AMP HTML', onClick: this.onChange });
-    }
-
-    const selectedTabIndex = tabs.findIndex(({ content }) => content === this.state.contentType);
-    const contentType = this.state.contentType.toLowerCase().replace(' ', '_');
-
-    // Must wrap text content in <p> to apply style and must be a string for injecting into iframe
-    const content = contentType === 'text'
-      ? `<p style="white-space: pre-wrap">${this.props[contentType]}</p>`
-      : this.props[contentType];
-
-    return (
-      <div className={classnames(styles.PreviewPanel, 'notranslate')}>
-        <Tabs selected={selectedTabIndex} tabs={tabs} />
-        <div className={styles.PreviewPanelWrapper}>
-          <PreviewFrame content={content} key={contentType} />
-        </div>
+  return (
+    <div className={classnames(styles.PreviewPanel, 'notranslate')}>
+      <Tabs selected={selectedTabIndex} tabs={tabs} />
+      <div className={styles.PreviewPanelWrapper}>
+        <Frame
+          content={content}
+          key={selectedTabKey} // must remount frame on content type change
+          strict={selectedTabKey !== 'ampHtml'}
+        />
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
+
+PreviewPanel.defaultProps = {
+  ampHtml: '',
+  html: '',
+  text: '',
+  Frame: PreviewFrame
+};
+
+PreviewPanel.propTypes = {
+  ampHtml: PropTypes.string,
+  html: PropTypes.string,
+  text: PropTypes.string
+};
+
+export default PreviewPanel;

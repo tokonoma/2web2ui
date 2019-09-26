@@ -22,4 +22,6 @@ const mapStateToProps = (state, { condition = accept, wait = true }) => ({
   show: condition(accessConditionState(state))
 });
 
-export default connect(mapStateToProps)(AccessControl);
+const accessControl = connect(mapStateToProps)(AccessControl);
+accessControl.displayName = 'AccessControl';
+export default accessControl;

@@ -58,9 +58,9 @@ describe('Component: SetupSending', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('disables the verification button while submitting', async () => {
+  it('disables the verification button while submitting', () => {
     wrapper.setProps({ verifyDkimLoading: true });
-    expect(wrapper.find('Panel').props().actions).toMatchSnapshot();
+    expect(wrapper.find('SetupInstructionPanel')).toHaveProp('isVerifying', true);
   });
 
   it('should call verifyDkim on click', () => {

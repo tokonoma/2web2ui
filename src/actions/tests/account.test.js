@@ -1,4 +1,4 @@
-import { fetch, getPlans, register, emailRequest } from '../account';
+import { fetch, getPlans, register, emailRequest, getBillingInfo, getUsage } from '../account';
 jest.mock('../helpers/sparkpostApiRequest', () => jest.fn((a) => a));
 
 test('fetch - no params', () => {
@@ -19,6 +19,16 @@ test('fetch with params', () => {
 test('getPlans', () => {
   const getPlansAction = getPlans();
   expect(getPlansAction).toMatchSnapshot();
+});
+
+test('getBilling', () => {
+  const getBillingInfoAction = getBillingInfo();
+  expect(getBillingInfoAction).toMatchSnapshot();
+});
+
+test('getUsage', () => {
+  const getUsageAction = getUsage();
+  expect(getUsageAction).toMatchSnapshot();
 });
 
 describe('Account action creators', () => {

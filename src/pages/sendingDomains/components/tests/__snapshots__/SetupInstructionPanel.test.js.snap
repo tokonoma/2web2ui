@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SetupInstructionPanel renders panel and children 1`] = `
+<Panel
+  actions={
+    Array [
+      Object {
+        "color": "orange",
+        "content": "Verify CNAME Record",
+        "disabled": false,
+        "id": "my-verify-button",
+        "onClick": undefined,
+      },
+    ]
+  }
+  sectioned={true}
+  title={
+    <div>
+      <span
+        className="TitleIcon"
+      >
+        <ErrorIcon />
+      </span>
+      <span>
+        DNS Settings
+      </span>
+    </div>
+  }
+>
+  <p>
+    enter panel contents here...
+  </p>
+</Panel>
+`;

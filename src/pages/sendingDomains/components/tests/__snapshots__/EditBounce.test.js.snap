@@ -106,62 +106,24 @@ exports[`Component: EditBounce does not show root domain warning for 3rd level d
 >
   <Left>
     <p>
-      <strong>
-        To use this domain for bounces
-      </strong>
-      , add this CNAME record to your DNS settings.
-    </p>
-    <p>
-      <em>
-        Note: Bounce domains must be verified via DNS.
-      </em>
+      To use this domain for bounces, connect your domain by setting the required DNS record(s) and verifying the connection.
     </p>
   </Left>
   <Right>
-    <Panel
-      actions={
-        Array [
-          Object {
-            "color": "orange",
-            "content": "Verify CNAME Record",
-            "disabled": false,
-            "onClick": [Function],
+    <Connect(BounceSetupInstructionPanel)
+      domain={
+        Object {
+          "is_default_bounce_domain": false,
+          "status": Object {
+            "cname_status": null,
+            "dkim_status": null,
+            "mx_status": null,
+            "ownership_verified": null,
           },
-        ]
+          "subaccount_id": 100,
+        }
       }
-      sectioned={true}
-      title={
-        <React.Fragment>
-          <ErrorIcon />
-           
-          <span>
-            DNS Settings
-          </span>
-        </React.Fragment>
-      }
-    >
-      <LabelledValue
-        label="Type"
-      >
-        <p>
-          CNAME
-        </p>
-      </LabelledValue>
-      <LabelledValue
-        label="Hostname"
-      >
-        <p>
-          c.b.a.com
-        </p>
-      </LabelledValue>
-      <LabelledValue
-        label="Value"
-      >
-        <p>
-          sparkpostmail.com
-        </p>
-      </LabelledValue>
-    </Panel>
+    />
   </Right>
 </SendingDomainSection>
 `;
@@ -172,15 +134,7 @@ exports[`Component: EditBounce renders not ready correctly 1`] = `
 >
   <Left>
     <p>
-      <strong>
-        To use this domain for bounces
-      </strong>
-      , add this CNAME record to your DNS settings.
-    </p>
-    <p>
-      <em>
-        Note: Bounce domains must be verified via DNS.
-      </em>
+      To use this domain for bounces, connect your domain by setting the required DNS record(s) and verifying the connection.
     </p>
   </Left>
   <Right>
@@ -200,50 +154,20 @@ exports[`Component: EditBounce renders not ready correctly 1`] = `
         Create a new domain now.
       </Link>
     </Banner>
-    <Panel
-      actions={
-        Array [
-          Object {
-            "color": "orange",
-            "content": "Verify CNAME Record",
-            "disabled": false,
-            "onClick": [Function],
+    <Connect(BounceSetupInstructionPanel)
+      domain={
+        Object {
+          "is_default_bounce_domain": false,
+          "status": Object {
+            "cname_status": null,
+            "dkim_status": null,
+            "mx_status": null,
+            "ownership_verified": null,
           },
-        ]
+          "subaccount_id": 100,
+        }
       }
-      sectioned={true}
-      title={
-        <React.Fragment>
-          <ErrorIcon />
-           
-          <span>
-            DNS Settings
-          </span>
-        </React.Fragment>
-      }
-    >
-      <LabelledValue
-        label="Type"
-      >
-        <p>
-          CNAME
-        </p>
-      </LabelledValue>
-      <LabelledValue
-        label="Hostname"
-      >
-        <p>
-          xyz.com
-        </p>
-      </LabelledValue>
-      <LabelledValue
-        label="Value"
-      >
-        <p>
-          sparkpostmail.com
-        </p>
-      </LabelledValue>
-    </Panel>
+    />
   </Right>
 </SendingDomainSection>
 `;
@@ -270,61 +194,15 @@ exports[`Component: EditBounce renders ready correctly 1`] = `
         Create a new domain now.
       </Link>
     </Banner>
-    <Panel
-      actions={
-        Array [
-          Object {
-            "color": "orange",
-            "content": "Re-verify CNAME Record",
-            "disabled": false,
-            "onClick": [Function],
+    <Connect(BounceSetupInstructionPanel)
+      domain={
+        Object {
+          "status": Object {
+            "cname_status": "valid",
           },
-        ]
+        }
       }
-      sectioned={true}
-      title={
-        <React.Fragment>
-          <VerifiedIcon />
-           
-          <span>
-            DNS Settings
-          </span>
-        </React.Fragment>
-      }
-    >
-      <LabelledValue
-        label="Type"
-      >
-        <p>
-          CNAME
-        </p>
-      </LabelledValue>
-      <LabelledValue
-        label="Hostname"
-      >
-        <p>
-          xyz.com
-        </p>
-      </LabelledValue>
-      <LabelledValue
-        label="Value"
-      >
-        <p>
-          sparkpostmail.com
-        </p>
-      </LabelledValue>
-    </Panel>
+    />
   </Right>
 </SendingDomainSection>
-`;
-
-exports[`Component: EditBounce verifyDomain renders loading state correctly 1`] = `
-Array [
-  Object {
-    "color": "orange",
-    "content": "Verifying...",
-    "disabled": true,
-    "onClick": [Function],
-  },
-]
 `;

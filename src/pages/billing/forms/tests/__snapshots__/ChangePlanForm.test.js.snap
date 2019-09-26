@@ -4,29 +4,27 @@ exports[`Form Container: Change Plan should not show plans 1`] = `
 <form>
   <Grid>
     <Grid.Column>
-      <Panel
-        title="Select A Plan"
-      />
-      <Connect(AccessControl)
+      <Panel />
+      <AccessControl
         condition={[Function]}
       >
-        <Panel
-          actions={null}
-          title="Add a Credit Card"
-        >
-          <Panel.Section>
-            <Connect(PaymentForm)
-              formName="changePlan"
-            />
-          </Panel.Section>
-          <Panel.Section>
-            <Connect(BillingAddressForm)
-              countries={Array []}
-              formName="changePlan"
-            />
-          </Panel.Section>
-        </Panel>
-      </Connect(AccessControl)>
+        <CardSection
+          account={
+            Object {
+              "billing": Object {},
+              "subscription": Object {
+                "code": "free",
+                "self_serve": true,
+              },
+            }
+          }
+          canUpdateBillingInfo={false}
+          countries={Array []}
+          handleCardToggle={[Function]}
+          selectedPlan={Object {}}
+          useSavedCC={null}
+        />
+      </AccessControl>
     </Grid.Column>
     <Grid.Column
       md={5}
@@ -49,9 +47,7 @@ exports[`Form Container: Change Plan should render 1`] = `
 <form>
   <Grid>
     <Grid.Column>
-      <Panel
-        title="Select A Plan"
-      >
+      <Panel>
         <_default
           onChange={[Function]}
           plans={
@@ -70,26 +66,26 @@ exports[`Form Container: Change Plan should render 1`] = `
           }
         />
       </Panel>
-      <Connect(AccessControl)
+      <AccessControl
         condition={[Function]}
       >
-        <Panel
-          actions={null}
-          title="Add a Credit Card"
-        >
-          <Panel.Section>
-            <Connect(PaymentForm)
-              formName="changePlan"
-            />
-          </Panel.Section>
-          <Panel.Section>
-            <Connect(BillingAddressForm)
-              countries={Array []}
-              formName="changePlan"
-            />
-          </Panel.Section>
-        </Panel>
-      </Connect(AccessControl)>
+        <CardSection
+          account={
+            Object {
+              "billing": Object {},
+              "subscription": Object {
+                "code": "free",
+                "self_serve": true,
+              },
+            }
+          }
+          canUpdateBillingInfo={false}
+          countries={Array []}
+          handleCardToggle={[Function]}
+          selectedPlan={Object {}}
+          useSavedCC={null}
+        />
+      </AccessControl>
     </Grid.Column>
     <Grid.Column
       md={5}
@@ -108,13 +104,20 @@ exports[`Form Container: Change Plan should render 1`] = `
 </form>
 `;
 
+exports[`Form Container: Change Plan should render error 1`] = `
+<ApiErrorBanner
+  errorDetails="Oh no! It broke."
+  message="We couldn't render the page. Reload to try again."
+  reload={[Function]}
+  status="danger"
+/>
+`;
+
 exports[`Form Container: Change Plan should show saved card 1`] = `
 <form>
   <Grid>
     <Grid.Column>
-      <Panel
-        title="Select A Plan"
-      >
+      <Panel>
         <_default
           onChange={[Function]}
           plans={
@@ -133,28 +136,26 @@ exports[`Form Container: Change Plan should show saved card 1`] = `
           }
         />
       </Panel>
-      <Connect(AccessControl)
+      <AccessControl
         condition={[Function]}
       >
-        <Panel
-          actions={
-            Array [
-              Object {
-                "color": "orange",
-                "content": "Use Another Credit Card",
-                "onClick": [Function],
+        <CardSection
+          account={
+            Object {
+              "billing": Object {},
+              "subscription": Object {
+                "code": "free",
+                "self_serve": true,
               },
-            ]
+            }
           }
-          title="Pay With Saved Payment Method"
-        >
-          <Panel.Section>
-            <CardSummary
-              billing={Object {}}
-            />
-          </Panel.Section>
-        </Panel>
-      </Connect(AccessControl)>
+          canUpdateBillingInfo={true}
+          countries={Array []}
+          handleCardToggle={[Function]}
+          selectedPlan={Object {}}
+          useSavedCC={true}
+        />
+      </AccessControl>
     </Grid.Column>
     <Grid.Column
       md={5}

@@ -1,0 +1,31 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.MetricDisplay {
+  display: inline-block;
+  text-align: left;
+
+  &:not(:last-child) {
+    margin-right: spacing();
+  }
+}
+
+.Label {
+  margin: 0;
+  color: color(gray, 4);
+  font-weight: 400;
+  font-size: font-size(400);
+}
+
+.Value {
+  position: relative;
+  display: inline-block;
+  margin: 0;
+  color: color(gray, 2);
+  font-size: rem(33);
+}
+
+.Icon {
+  position: absolute;
+  top: rem(0);
+  left: 100%;
+}

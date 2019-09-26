@@ -1,0 +1,566 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`generateConfigs returns combined configs 1`] = `
+Object {
+  "app-mtaspc.tst.sparkpost.com": Object {
+    "apiBase": "https://api-mtaspc.tst.sparkpost.com/api",
+    "bounceDomains": Object {
+      "cnameValue": "mtaspc.mail.e.tst.sparkpost.com",
+      "mxValue": "mtaspc.mx.e.tst.sparkpost.com",
+    },
+    "environment": "uat",
+    "featureFlags": Object {
+      "allow_anyone_at_verification": true,
+      "allow_default_signing_domains_for_ip_pools": true,
+      "has_signup": true,
+    },
+    "siftScience": Object {
+      "accountPrefix": "mtaspc-",
+      "id": "88affa8e11",
+    },
+    "smtpAuth": Object {
+      "alternativePort": 2525,
+      "enabled": true,
+      "host": "mtaspc.smtp.e.tst.sparkpost.com",
+      "port": 587,
+      "username": "mtaspc",
+    },
+    "splashPage": "/dashboard",
+    "tenantId": "mtaspc",
+    "trackingDomains": Object {
+      "cnameValue": "mtaspc.et.e.tst.sparkpost.com",
+    },
+  },
+  "app-speuat.tst.sparkpost.com": Object {
+    "apiBase": "https://api-speuat.tst.sparkpost.com/api",
+    "bounceDomains": Object {
+      "cnameValue": "speuat.mail.e.tst.sparkpost.com",
+      "mxValue": "speuat.mx.e.tst.sparkpost.com",
+    },
+    "environment": "uat",
+    "featureFlags": Object {},
+    "smtpAuth": Object {
+      "enabled": true,
+      "host": "speuat.smtp.tst.sparkpost.com",
+      "port": 587,
+      "username": "speuat",
+    },
+    "tenantId": "speuat",
+    "trackingDomains": Object {
+      "cnameValue": "speuat.et.tst.sparkpost.com",
+    },
+  },
+  "app-staging-mtas.sparkpost.com": Object {
+    "apiBase": "https://api-staging-mtas.sparkpost.com/api",
+    "environment": "staging",
+    "featureFlags": Object {
+      "allow_anyone_at_verification": true,
+    },
+    "smtpAuth": Object {
+      "alternativePort": 2525,
+      "enabled": true,
+      "host": "smtp-staging-mtas.sparkpostmail.com",
+      "port": 587,
+      "username": "stagingmtas",
+    },
+    "tenantId": "stagingmtas",
+    "trackingDomains": Object {
+      "cnameValue": "stage-mtas.spgo.io",
+    },
+  },
+  "app-staging-mtas2.sparkpost.com": Object {
+    "apiBase": "https://api-staging-mtas2.sparkpost.com/api",
+    "bounceDomains": Object {
+      "cnameValue": "staging-mtas2.mail.e.sparkpost.com",
+      "mxValue": "staging-mtas2.mx.e.sparkpost.com",
+    },
+    "environment": "staging",
+    "featureFlags": Object {
+      "allow_anyone_at_verification": true,
+    },
+    "smtpAuth": Object {
+      "alternativePort": 2525,
+      "enabled": true,
+      "host": "smtp-staging-mtas2.sparkpostmail.com",
+      "port": 587,
+      "username": "staging-mtas2",
+    },
+    "tenantId": "stagingmtas2",
+    "trackingDomains": Object {
+      "cnameValue": "staging-mtas2.spgo.io",
+    },
+  },
+  "app-staging.sparkpost.com": Object {
+    "apiBase": "https://api-staging.sparkpost.com/api",
+    "crossLinkTenant": "spc",
+    "environment": "staging",
+    "featureFlags": Object {
+      "allow_anyone_at_verification": true,
+      "allow_default_signing_domains_for_ip_pools": true,
+      "has_signup": true,
+    },
+    "gtmId": "GTM-5BCG3R",
+    "siftScience": Object {
+      "id": "88affa8e11",
+    },
+    "smtpAuth": Object {
+      "alternativePort": 2525,
+      "enabled": true,
+      "host": "smtp-staging.sparkpostmail.com",
+      "port": 587,
+      "username": "SMTP_Injection",
+    },
+    "splashPage": "/dashboard",
+    "tenantId": "staging",
+    "trackingDomains": Object {
+      "cnameValue": "stage.spgo.io",
+    },
+  },
+  "app-stagingmtaspc.sparkpost.com": Object {
+    "apiBase": "https://api-stagingmtaspc.sparkpost.com/api",
+    "environment": "staging",
+    "featureFlags": Object {
+      "allow_anyone_at_verification": true,
+      "allow_default_signing_domains_for_ip_pools": true,
+      "has_signup": true,
+    },
+    "siftScience": Object {
+      "accountPrefix": "stagingmtaspc-",
+      "id": "88affa8e11",
+    },
+    "smtpAuth": Object {
+      "alternativePort": 2525,
+      "enabled": true,
+      "port": 587,
+      "username": "stagingmtaspc",
+    },
+    "splashPage": "/dashboard",
+    "tenantId": "stagingmtaspc",
+  },
+  "app-uat.tst.sparkpost.com": Object {
+    "apiBase": "https://api-uat.tst.sparkpost.com/api",
+    "bounceDomains": Object {
+      "cnameValue": "uat-public.mail.e.tst.sparkpost.com",
+      "mxValue": "uat-public.mx.e.tst.sparkpost.com",
+    },
+    "crossLinkTenant": "spceu",
+    "environment": "uat",
+    "featureFlags": Object {
+      "allow_anyone_at_verification": true,
+      "allow_default_signing_domains_for_ip_pools": true,
+      "has_signup": true,
+    },
+    "gtmId": "GTM-P87NNJ4",
+    "siftScience": Object {
+      "id": "88affa8e11",
+    },
+    "smtpAuth": Object {
+      "enabled": true,
+      "host": "smtp.tst.sparkpost",
+      "port": 587,
+      "username": "SMTP_Injection",
+    },
+    "splashPage": "/dashboard",
+    "tenantId": "uat",
+    "trackingDomains": Object {
+      "cnameValue": "spcuat.et.e.tst.sparkpost.com",
+    },
+  },
+  "app-uat2.tst.sparkpost.com": Object {
+    "apiBase": "https://api-uat2.tst.sparkpost.com/api",
+    "bounceDomains": Object {
+      "cnameValue": "uat2public.mail.e.tst.sparkpost.com",
+      "mxValue": "uat2public.mx.e.tst.sparkpost.com",
+    },
+    "environment": "uat",
+    "featureFlags": Object {
+      "allow_anyone_at_verification": true,
+    },
+    "smtpAuth": Object {
+      "enabled": true,
+      "host": "smtp2.tst.sparkpost",
+      "port": 587,
+      "username": "uat2public",
+    },
+    "tenantId": "uat2",
+    "trackingDomains": Object {
+      "cnameValue": "uat2.spgo.io",
+    },
+  },
+  "app-uat3.tst.sparkpost.com": Object {
+    "apiBase": "https://api-uat3.tst.sparkpost.com/api",
+    "bounceDomains": Object {
+      "cnameValue": "uat3.mail.e.tst.sparkpost.com",
+      "mxValue": "uat3.mx.e.tst.sparkpost.com",
+    },
+    "environment": "uat",
+    "featureFlags": Object {
+      "allow_anyone_at_verification": true,
+    },
+    "smtpAuth": Object {
+      "enabled": true,
+      "host": "smtp3.tst.sparkpost",
+      "port": 587,
+      "username": "uat3",
+    },
+    "tenantId": "uat3",
+    "trackingDomains": Object {
+      "cnameValue": "uat3.spgo.io",
+    },
+  },
+  "app-uat4.tst.sparkpost.com": Object {
+    "apiBase": "https://api-uat4.tst.sparkpost.com/api",
+    "bounceDomains": Object {
+      "cnameValue": "uat4.mail.e.tst.sparkpost.com",
+      "mxValue": "uat4.mx.e.tst.sparkpost.com",
+    },
+    "environment": "uat",
+    "featureFlags": Object {
+      "allow_anyone_at_verification": true,
+    },
+    "smtpAuth": Object {
+      "enabled": true,
+      "host": "uat4.smtp.tst.sparkpost.com",
+      "port": 587,
+      "username": "uat4",
+    },
+    "tenantId": "uat4",
+    "trackingDomains": Object {
+      "cnameValue": "uat4.spgo.io",
+    },
+  },
+  "app.eu.sparkpost.com": Object {
+    "apiBase": "https://api.eu.sparkpost.com/api",
+    "bounceDomains": Object {
+      "cnameValue": "eu.sparkpostmail.com",
+      "mxValue": "smtp.eu.sparkpostmail.com",
+    },
+    "brightback": Object {
+      "downgradeToFreeConfig": Object {
+        "cancel_confirmation_url": "/account/billing/plan/change?immediatePlanChange=free500-SPCEU-0419",
+      },
+    },
+    "crossLinkTenant": "spc",
+    "environment": "production",
+    "featureFlags": Object {
+      "allow_anyone_at_verification": true,
+      "allow_default_signing_domains_for_ip_pools": true,
+      "has_signup": true,
+    },
+    "gtmId": "GTM-WN7C84",
+    "siftScience": Object {
+      "accountPrefix": "spceu-",
+      "id": "7c5f68d795",
+    },
+    "smtpAuth": Object {
+      "alternativePort": 2525,
+      "enabled": true,
+      "host": "smtp.eu.sparkpostmail.com",
+      "port": 587,
+      "username": "SMTP_Injection",
+    },
+    "splashPage": "/dashboard",
+    "tenantId": "spceu",
+    "trackingDomains": Object {
+      "cnameValue": "eu.spgo.io",
+    },
+    "zuora": Object {
+      "baseUrl": "https://api.zuora.com/rest/v1",
+    },
+  },
+  "app.sparkpost.com": Object {
+    "apiBase": "https://api.sparkpost.com/api",
+    "bounceDomains": Object {
+      "cnameValue": "sparkpostmail.com",
+      "mxValue": "smtp.sparkpostmail.com",
+    },
+    "crossLinkTenant": "spceu",
+    "environment": "production",
+    "featureFlags": Object {
+      "allow_anyone_at_verification": true,
+      "allow_default_signing_domains_for_ip_pools": true,
+      "has_signup": true,
+    },
+    "gtmId": "GTM-WN7C84",
+    "siftScience": Object {
+      "id": "7c5f68d795",
+    },
+    "smtpAuth": Object {
+      "alternativePort": 2525,
+      "enabled": true,
+      "host": "smtp.sparkpostmail.com",
+      "port": 587,
+      "username": "SMTP_Injection",
+    },
+    "splashPage": "/dashboard",
+    "tenantId": "spc",
+    "trackingDomains": Object {
+      "cnameValue": "spgo.io",
+    },
+    "zuora": Object {
+      "baseUrl": "https://api.zuora.com/rest/v1",
+    },
+  },
+  "balutest.e.sparkpost.com": Object {
+    "bounceDomains": Object {
+      "allowDefault": false,
+    },
+    "environment": "staging",
+    "featureFlags": Object {},
+    "smtpAuth": Object {
+      "enabled": true,
+      "port": 587,
+      "username": "balutest",
+    },
+    "tenantId": "balutest",
+  },
+  "demo.e.sparkpost.com": Object {
+    "environment": "production",
+    "featureFlags": Object {
+      "allow_anyone_at_verification": true,
+      "allow_default_signing_domains_for_ip_pools": true,
+    },
+    "smtpAuth": Object {
+      "enabled": true,
+      "port": 587,
+      "username": "demo",
+    },
+    "tenantId": "demo",
+    "trackingDomains": Object {
+      "cnameValue": "track.demo-t.sparkpostelite.com",
+    },
+  },
+  "mtas4tenant.e.sparkpost.com": Object {
+    "environment": "production",
+    "featureFlags": Object {
+      "allow_anyone_at_verification": true,
+      "allow_default_signing_domains_for_ip_pools": true,
+    },
+    "smtpAuth": Object {
+      "alternativePort": 2525,
+      "enabled": true,
+      "port": 587,
+      "username": "mtas4tenant",
+    },
+    "tenantId": "mtas4tenant",
+  },
+  "phoenix-next-prd.sparkpost.com": Object {
+    "apiBase": "https://api.sparkpost.com/api",
+    "bounceDomains": Object {
+      "cnameValue": "sparkpostmail.com",
+      "mxValue": "smtp.sparkpostmail.com",
+    },
+    "crossLinkTenant": "spceu",
+    "environment": "production",
+    "featureFlags": Object {
+      "allow_anyone_at_verification": true,
+      "allow_default_signing_domains_for_ip_pools": true,
+      "has_signup": true,
+    },
+    "gtmId": "GTM-WN7C84",
+    "siftScience": Object {
+      "id": "7c5f68d795",
+    },
+    "smtpAuth": Object {
+      "alternativePort": 2525,
+      "enabled": true,
+      "host": "smtp.sparkpostmail.com",
+      "port": 587,
+      "username": "SMTP_Injection",
+    },
+    "splashPage": "/dashboard",
+    "tenantId": "spc",
+    "trackingDomains": Object {
+      "cnameValue": "spgo.io",
+    },
+    "zuora": Object {
+      "baseUrl": "https://api.zuora.com/rest/v1",
+    },
+  },
+  "phoenix-next-stg.sparkpost.com": Object {
+    "apiBase": "https://api-staging.sparkpost.com/api",
+    "crossLinkTenant": "spc",
+    "environment": "staging",
+    "featureFlags": Object {
+      "allow_anyone_at_verification": true,
+      "allow_default_signing_domains_for_ip_pools": true,
+      "has_signup": true,
+    },
+    "gtmId": "GTM-5BCG3R",
+    "siftScience": Object {
+      "id": "88affa8e11",
+    },
+    "smtpAuth": Object {
+      "alternativePort": 2525,
+      "enabled": true,
+      "host": "smtp-staging.sparkpostmail.com",
+      "port": 587,
+      "username": "SMTP_Injection",
+    },
+    "splashPage": "/dashboard",
+    "tenantId": "staging",
+    "trackingDomains": Object {
+      "cnameValue": "stage.spgo.io",
+    },
+  },
+  "phoenix-next.tst.sparkpost.com": Object {
+    "apiBase": "https://api-uat.tst.sparkpost.com/api",
+    "bounceDomains": Object {
+      "cnameValue": "uat-public.mail.e.tst.sparkpost.com",
+      "mxValue": "uat-public.mx.e.tst.sparkpost.com",
+    },
+    "crossLinkTenant": "spceu",
+    "environment": "uat",
+    "featureFlags": Object {
+      "allow_anyone_at_verification": true,
+      "allow_default_signing_domains_for_ip_pools": true,
+      "has_signup": true,
+    },
+    "gtmId": "GTM-P87NNJ4",
+    "siftScience": Object {
+      "id": "88affa8e11",
+    },
+    "smtpAuth": Object {
+      "enabled": true,
+      "host": "smtp.tst.sparkpost",
+      "port": 587,
+      "username": "SMTP_Injection",
+    },
+    "splashPage": "/dashboard",
+    "tenantId": "uat",
+    "trackingDomains": Object {
+      "cnameValue": "spcuat.et.e.tst.sparkpost.com",
+    },
+  },
+  "phoenix-origin-prd.sparkpost.com": Object {
+    "apiBase": "https://api.sparkpost.com/api",
+    "bounceDomains": Object {
+      "cnameValue": "sparkpostmail.com",
+      "mxValue": "smtp.sparkpostmail.com",
+    },
+    "crossLinkTenant": "spceu",
+    "environment": "production",
+    "featureFlags": Object {
+      "allow_anyone_at_verification": true,
+      "allow_default_signing_domains_for_ip_pools": true,
+      "has_signup": true,
+    },
+    "gtmId": "GTM-WN7C84",
+    "siftScience": Object {
+      "id": "7c5f68d795",
+    },
+    "smtpAuth": Object {
+      "alternativePort": 2525,
+      "enabled": true,
+      "host": "smtp.sparkpostmail.com",
+      "port": 587,
+      "username": "SMTP_Injection",
+    },
+    "splashPage": "/dashboard",
+    "tenantId": "spc",
+    "trackingDomains": Object {
+      "cnameValue": "spgo.io",
+    },
+    "zuora": Object {
+      "baseUrl": "https://api.zuora.com/rest/v1",
+    },
+  },
+  "phoenix-origin-stg.sparkpost.com": Object {
+    "apiBase": "https://api-staging.sparkpost.com/api",
+    "crossLinkTenant": "spc",
+    "environment": "staging",
+    "featureFlags": Object {
+      "allow_anyone_at_verification": true,
+      "allow_default_signing_domains_for_ip_pools": true,
+      "has_signup": true,
+    },
+    "gtmId": "GTM-5BCG3R",
+    "siftScience": Object {
+      "id": "88affa8e11",
+    },
+    "smtpAuth": Object {
+      "alternativePort": 2525,
+      "enabled": true,
+      "host": "smtp-staging.sparkpostmail.com",
+      "port": 587,
+      "username": "SMTP_Injection",
+    },
+    "splashPage": "/dashboard",
+    "tenantId": "staging",
+    "trackingDomains": Object {
+      "cnameValue": "stage.spgo.io",
+    },
+  },
+  "phoenix-origin.tst.sparkpost.com": Object {
+    "apiBase": "https://api-uat.tst.sparkpost.com/api",
+    "bounceDomains": Object {
+      "cnameValue": "uat-public.mail.e.tst.sparkpost.com",
+      "mxValue": "uat-public.mx.e.tst.sparkpost.com",
+    },
+    "crossLinkTenant": "spceu",
+    "environment": "uat",
+    "featureFlags": Object {
+      "allow_anyone_at_verification": true,
+      "allow_default_signing_domains_for_ip_pools": true,
+      "has_signup": true,
+    },
+    "gtmId": "GTM-P87NNJ4",
+    "siftScience": Object {
+      "id": "88affa8e11",
+    },
+    "smtpAuth": Object {
+      "enabled": true,
+      "host": "smtp.tst.sparkpost",
+      "port": 587,
+      "username": "SMTP_Injection",
+    },
+    "splashPage": "/dashboard",
+    "tenantId": "uat",
+    "trackingDomains": Object {
+      "cnameValue": "spcuat.et.e.tst.sparkpost.com",
+    },
+  },
+  "productionmtas.e.sparkpost.com": Object {
+    "environment": "production",
+    "featureFlags": Object {
+      "allow_anyone_at_verification": true,
+      "allow_default_signing_domains_for_ip_pools": true,
+    },
+    "smtpAuth": Object {
+      "alternativePort": 2525,
+      "enabled": true,
+      "port": 587,
+      "username": "productionmtas",
+    },
+    "tenantId": "productionmtas",
+  },
+  "productionmtas2.e.sparkpost.com": Object {
+    "environment": "production",
+    "featureFlags": Object {
+      "allow_anyone_at_verification": true,
+      "allow_default_signing_domains_for_ip_pools": true,
+    },
+    "smtpAuth": Object {
+      "alternativePort": 2525,
+      "enabled": true,
+      "port": 587,
+      "username": "productionmtas2",
+    },
+    "tenantId": "productionmtas2",
+  },
+  "spestaging.e.sparkpost.com": Object {
+    "environment": "staging",
+    "featureFlags": Object {},
+    "smtpAuth": Object {
+      "enabled": true,
+      "host": "smtp-spestaging42.msyscloud.com",
+      "port": 587,
+      "username": "spestaging",
+    },
+    "tenantId": "spestaging",
+    "trackingDomains": Object {
+      "cnameValue": "click.spestaging42.msyscloud.com",
+    },
+  },
+}
+`;

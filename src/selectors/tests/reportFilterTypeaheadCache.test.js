@@ -6,20 +6,20 @@ describe('Selector: Report Filter Typeahead Cache', () => {
 
   beforeEach(() => {
     testState = {
-      templates: { list: []},
       subaccounts: { list: []},
       sendingDomains: { list: []},
       metrics: {
         campaigns: [],
         domains: [],
         sendingIps: [],
-        ipPools: []
+        ipPools: [],
+        templates: []
       }
     };
   });
 
   it('should reshape the templates', () => {
-    testState.templates.list = [{ id: 1, no: 'includey' }, { id: 2, ignore: 'me' }, { id: 3, hi: 'garbage' }];
+    testState.metrics.templates = [1,2,3];
     expect(selectCache(testState)).toEqual([
       { type: 'Template', value: 1 },
       { type: 'Template', value: 2 },
@@ -80,13 +80,13 @@ describe('Selector: Report Filter Typeahead Cache', () => {
   });
 
   it('should flatten all the caches together', () => {
-    testState.templates.list = [{ id: 1 }, { id: 2 }];
     testState.subaccounts.list = [{ name: 'A', id: 11 }, { name: 'B', id: 12 }];
     testState.sendingDomains.list = [{ domain: 'abc.com' }, { domain: 'xyz.biz' }];
     testState.metrics.domains = ['domain1', 'domain2'];
     testState.metrics.campaigns = ['campaign1', 'campaign2'];
     testState.metrics.sendingIps = ['ip1', 'ip2'];
     testState.metrics.ipPools = ['pool_1', 'pool_2'];
+    testState.metrics.templates = [1, 2];
 
     expect(selectCache(testState)).toHaveLength(14);
   });

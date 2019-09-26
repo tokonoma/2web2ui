@@ -5,6 +5,7 @@ exports[`ImportSnippetLink renders link and closed modal 1`] = `
   <Button
     color="orange"
     flat={true}
+    name="import-snippets-button"
     onClick={[Function]}
     size="default"
   >

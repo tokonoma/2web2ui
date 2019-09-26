@@ -1,14 +1,33 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-
+import { domain } from '../../tests/helpers/domain';
 import { DomainStatus } from '../DomainStatus';
 
-import { domain as domainRecord } from '../../tests/helpers/domain';
+describe('DomainStatus', () => {
+  const subject = (props = {}) => shallow(
+    <DomainStatus
+      domain={domain}
+      onShareDomainChange={() => {}}
+      {...props}
+    />
+  );
 
-describe('DomainStatus component', () => {
-  it('renders correctly', () => {
-    const domain = Object.assign({}, domainRecord);
-    const onChange = jest.fn();
-    expect(shallow(<DomainStatus domain={domain} onShareDomainChange={onChange} />)).toMatchSnapshot();
+  it('renders section', () => {
+    expect(subject()).toMatchSnapshot();
+  });
+
+  it('renders section with auto-verify banner', () => {
+    const wrapper = subject({ hasAutoVerifyEnabled: true });
+    expect(wrapper.find('Banner')).toExist();
+  });
+
+  it('calls onShareDomainChange when access changes', () => {
+    const onShareDomainChange = jest.fn();
+
+    subject({ onShareDomainChange })
+      .find('ShareWithSubaccounts')
+      .simulate('change');
+
+    expect(onShareDomainChange).toHaveBeenCalled();
   });
 });

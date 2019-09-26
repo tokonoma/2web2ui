@@ -1,10 +1,12 @@
 import * as selectors from '../messageEvents';
 
-
 describe('MessageEvents Selectors', () => {
   let props;
   let messageEvents;
+  let messageEventsCSV;
   let messageHistory;
+  let selectedEvent;
+  let formattedEvents;
 
   beforeEach(() => {
     props = {
@@ -29,15 +31,35 @@ describe('MessageEvents Selectors', () => {
       }
     ];
 
-    messageEvents = { events: events };
-    messageHistory = { history: { message_id: events }};
+    formattedEvents = [
+      { ...events[0],
+        formattedDate: 'Nov 9 2017, 12:00am' },
+      { ...events[1],
+        formattedDate: 'Nov 8 2017, 11:00am' }
+    ];
 
+    messageEvents = { events: events };
+    messageEventsCSV = { eventsCSV: events };
+    messageHistory = { history: { message_id: events }};
+    selectedEvent = [
+      {
+        event_id: 'selected_id',
+        foo: 'bar',
+        timestamp: '2017-11-09T00:00'
+      }
+    ];
   });
 
 
   describe('Selectors: Message Events', () => {
     it('returns formatted message event data', () => {
       expect(selectors.selectMessageEvents({ messageEvents })).toMatchSnapshot();
+    });
+  });
+
+  describe('Selectors: Message Events CSV', () => {
+    it('returns formatted message events CSV data', () => {
+      expect(selectors.selectMessageEventsCSV({ messageEvents: messageEventsCSV })).toMatchSnapshot();
     });
   });
 
@@ -49,12 +71,12 @@ describe('MessageEvents Selectors', () => {
 
   describe('Selectors: Initial Event Id', () => {
     it('returns event_id', () => {
-      expect(selectors.selectInitialEventId({ messageEvents: messageHistory }, props)).toMatchSnapshot();
+      expect(selectors.selectInitialEventId({ messageEvents: messageHistory }, props)).toEqual(props.match.params.eventId);
     });
 
     it('returns default event_id', () => {
       props.match.params.eventId = null;
-      expect(selectors.selectInitialEventId({ messageEvents: messageHistory }, props)).toMatchSnapshot();
+      expect(selectors.selectInitialEventId({ messageEvents: messageHistory }, props)).toEqual(formattedEvents[0].event_id);
     });
   });
 
@@ -121,22 +143,11 @@ describe('MessageEvents Selectors', () => {
   describe('getSelectedEventFromMessageHistory', () => {
     it('returns correct event from messageHistory', () => {
       props.match.params.eventId = 'default_id';
-      expect(selectors.getSelectedEventFromMessageHistory({ messageEvents: messageHistory }, props)).toMatchSnapshot();
+      expect(selectors.getSelectedEventFromMessageHistory({ messageEvents: messageHistory }, props)).toEqual(formattedEvents[0]);
     });
 
     it('returns undefined if event does not exist in messageHistory', () => {
       expect(selectors.getSelectedEventFromMessageHistory({ messageEvents: messageHistory }, props)).toBe(undefined);
-    });
-  });
-
-  describe('getSelectedEventFromEventsList', () => {
-    it('returns correct event from events list', () => {
-      props.match.params.eventId = 'default_id';
-      expect(selectors.getSelectedEventFromEventsList({ messageEvents }, props)).toMatchSnapshot();
-    });
-
-    it('returns undefined if event does not exist in messageHistory', () => {
-      expect(selectors.getSelectedEventFromEventsList({ messageEvents }, props)).toBe(undefined);
     });
   });
 
@@ -154,7 +165,7 @@ describe('MessageEvents Selectors', () => {
     let store;
     let props;
     beforeEach(() => {
-      store = { messageEvents: { ...messageHistory, documentation: {}}};
+      store = { messageEvents: { ...messageHistory, selectedEvent, documentation: {}}};
       props = { match: { params: { messageId: 'message_id', eventId: 'default_id' }}};
     });
 
@@ -166,7 +177,6 @@ describe('MessageEvents Selectors', () => {
       props.match.params.messageId = '_noid_';
       expect(selectors.eventPageMSTP()(store, props)).toMatchSnapshot();
     });
-
 
   });
 });

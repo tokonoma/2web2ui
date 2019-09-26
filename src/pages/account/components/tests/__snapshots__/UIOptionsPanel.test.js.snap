@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UIOptionsPanel renders 1`] = `
+<Panel
+  title="Account Options"
+>
+  <Panel.Section>
+    <LabelledValue
+      key="ui-option-hideTerminatedSubaccounts"
+      label="Hide Subaccounts"
+    >
+      <div
+        className="ToggleRow"
+      >
+        <div>
+          Hide terminated subacounts. Resources associated with terminated subaccounts can still be accessed.
+        </div>
+        <div>
+          <Toggle
+            checked={false}
+            id="hideTerminatedSubaccounts"
+            onChange={[Function]}
+          />
+        </div>
+      </div>
+    </LabelledValue>
+  </Panel.Section>
+</Panel>
+`;

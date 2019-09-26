@@ -3,15 +3,15 @@ import { connect } from 'react-redux';
 import _ from 'lodash';
 import { safeRate } from 'src/helpers/math';
 import { refreshBounceReport } from 'src/actions/bounceReport';
-import { addFilters } from 'src/actions/reportOptions';
 import { TableCollection, Empty, LongTextContainer } from 'src/components';
 import { Percent } from 'src/components/formatters';
 import PanelLoading from 'src/components/panelLoading/PanelLoading';
-import { Page, UnstyledLink, Tabs } from '@sparkpost/matchbox';
+import { Page, Tabs } from '@sparkpost/matchbox';
 import ReportOptions from '../components/ReportOptions';
 import BounceChart from './components/BounceChart';
 import MetricsSummary from '../components/MetricsSummary';
 import { mapStateToProps } from 'src/selectors/bounceReport';
+import AddFilterLink from '../components/AddFilterLink';
 
 const columns = [
   { label: 'Reason', width: '45%', sortKey: 'reason' },
@@ -33,7 +33,7 @@ export class BouncePage extends Component {
   }
 
   getRowData = (item) => {
-    const { aggregates = {}, addFilters } = this.props;
+    const { aggregates = {}} = this.props;
     const { reason, domain, bounce_category_name, bounce_class_name, count_bounce, count_admin_bounce } = item;
     // calculate the rate of admin bounces against all bounces
     let numerator = count_bounce;
@@ -46,7 +46,7 @@ export class BouncePage extends Component {
 
     return [
       <LongTextContainer text={reason} />,
-      <UnstyledLink onClick={() => addFilters([{ type: 'Recipient Domain', value: domain }])}>{domain}</UnstyledLink>,
+      <AddFilterLink newFilter={{ type: 'Recipient Domain', value: domain }} reportType={'bounce'} content={domain}/>,
       bounce_category_name,
       bounce_class_name,
       <span>{numerator} <small>(<Percent value={safeRate(numerator, denominator)} />)</small></span>
@@ -162,7 +162,6 @@ export class BouncePage extends Component {
 }
 
 const mapDispatchToProps = {
-  addFilters,
   refreshBounceReport
 };
 

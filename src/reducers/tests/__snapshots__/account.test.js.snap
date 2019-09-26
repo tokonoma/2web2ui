@@ -44,3 +44,58 @@ Object {
   "updateLoading": false,
 }
 `;
+
+exports[`Billing reducer get billing fail 1`] = `
+Object {
+  "billingError": Object {
+    "errors": Array [
+      Object {
+        "message": "Some error occurred",
+      },
+    ],
+  },
+  "billingLoading": false,
+  "createLoading": false,
+  "loading": false,
+  "subscription": Object {},
+  "updateError": null,
+  "updateLoading": false,
+}
+`;
+
+exports[`Billing reducer get billing pending 1`] = `
+Object {
+  "billingLoading": true,
+  "createLoading": false,
+  "loading": false,
+  "subscription": Object {},
+  "updateError": null,
+  "updateLoading": false,
+}
+`;
+
+exports[`Billing reducer get billing success 1`] = `
+Object {
+  "billing": Object {
+    "card": "************0001",
+  },
+  "billingLoading": false,
+  "createLoading": false,
+  "loading": false,
+  "subscription": Object {},
+  "updateError": null,
+  "updateLoading": false,
+}
+`;
+
+exports[`Billing reducer get billing success empty 1`] = `
+Object {
+  "billing": null,
+  "billingLoading": false,
+  "createLoading": false,
+  "loading": false,
+  "subscription": Object {},
+  "updateError": null,
+  "updateLoading": false,
+}
+`;

@@ -6,7 +6,9 @@ export { default as ApiErrorBanner } from './apiErrorBanner/ApiErrorBanner';
 export { default as ApiKeySuccessBanner } from './apiKeyBanner/ApiKeyBanner';
 export { default as BoomerangBanner } from './boomerangBanner/BoomerangBanner';
 export { default as CopyField } from './copyField/CopyField';
+export { default as CopyToClipboard } from './CopyToClipboard/CopyToClipboard';
 export { default as DownloadLink } from './downloadLink/DownloadLink';
+export { default as DisplayDate } from './displayDate/DisplayDate';
 export { default as Empty } from './empty/Empty';
 export { default as FilterDropdown } from './filterDropdown/FilterDropdown';
 export { default as GlobalAlertWrapper } from './globalAlert/GlobalAlertWrapper';
@@ -25,7 +27,6 @@ export { default as StatusTooltipHeader } from './domainStatus/StatusTooltipHead
 export { default as DomainStatusCell } from './domainStatus/DomainStatusCell';
 export { default as CookieConsent } from './cookieConsent/CookieConsent';
 export { default as PageLink } from './pageLink/PageLink';
-
 
 export * from './collection';
 export * from './formatters';

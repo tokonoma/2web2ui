@@ -16,8 +16,10 @@ describe('Page: BillingSummaryPage', () => {
       sendingIps: {
         list: []
       },
+      getBillingInfo: jest.fn(),
       fetchAccount: jest.fn(),
       getPlans: jest.fn(),
+      getUsage: jest.fn(),
       getSendingIps: jest.fn(),
       getInvoices: jest.fn(),
       accountAgeInDays: 5
@@ -36,9 +38,11 @@ describe('Page: BillingSummaryPage', () => {
 
   it('should get plans, sending ips, invoices, and account on mount', () => {
     expect(props.getPlans).toHaveBeenCalledTimes(1);
-    expect(props.fetchAccount).toHaveBeenCalledWith({ include: 'billing' });
+    expect(props.fetchAccount).toHaveBeenCalledTimes(1);
+    expect(props.getBillingInfo).toHaveBeenCalledTimes(1);
     expect(props.getSendingIps).toHaveBeenCalledTimes(1);
     expect(props.getInvoices).toHaveBeenCalledTimes(1);
+    expect(props.getUsage).toHaveBeenCalledTimes(1);
   });
 
 });

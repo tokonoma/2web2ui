@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Selectors: customReports returns sorted custom reports 1`] = `
+Array [
+  Object {
+    "name": "aaa",
+    "url": "test-url",
+  },
+  Object {
+    "name": "zzz",
+    "url": "test-url",
+  },
+]
+`;

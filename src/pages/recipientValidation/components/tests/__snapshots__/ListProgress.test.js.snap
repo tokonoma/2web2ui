@@ -1,0 +1,60 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ListProgress renders status and progress bar 1`] = `
+<FocusContainer
+  className="ListProgressContainer"
+>
+  <h2>
+    big-test.csv
+  </h2>
+  <p>
+    <span>
+      Your list is validating. You can track its progress on the recipient validation 
+    </span>
+    <PageLink
+      to="/recipient-validation"
+    >
+      home page
+    </PageLink>
+    ,
+    <span>
+       we'll let you know when validation is complete and your results are ready.
+    </span>
+  </p>
+  <div
+    className="ListProgress"
+  >
+    <div
+      className="ListProgressStatus"
+    >
+      <strong>
+        Status:
+      </strong>
+       
+      <JobStatusTag
+        status="checking_regex"
+      />
+    </div>
+    <div
+      className="ProgressBar"
+    >
+      <div
+        className="Progress"
+        style={
+          Object {
+            "width": "20%",
+          }
+        }
+      />
+    </div>
+  </div>
+  <Button
+    color="orange"
+    component={[Function]}
+    size="default"
+    to="/recipient-validation"
+  >
+    Validate Another
+  </Button>
+</FocusContainer>
+`;

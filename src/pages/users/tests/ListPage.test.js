@@ -49,6 +49,7 @@ describe('Page: Users List', () => {
   it('should transform row data for the table collection', () => {
     const row = instance.getRowData({
       name: 'test-name',
+      roleLabel: 'Admin',
       username: 'test-username',
       isCurrentUser: false,
       access: 'admin',

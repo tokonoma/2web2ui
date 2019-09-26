@@ -1,6 +1,6 @@
 import React from 'react';
 import { DataTable } from '../DataTable';
-import { shallow, mount } from 'enzyme';
+import { shallow } from 'enzyme';
 
 jest.mock('src/helpers/reports');
 
@@ -42,19 +42,9 @@ describe('Rejection Data Table: ', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  describe('getRowData', () => {
-    it('should render row data properly', () => {
-      const rows = wrapper.instance().getRowData({ reason: 'bad delay', rejection_category_name: 'cat1', count_rejected: 10, domain: 'gmail.com' });
-
-      expect(rows).toMatchSnapshot();
-    });
-
-    it('should filter by domain', () => {
-      const rows = wrapper.instance().getRowData({ reason: 'bad delay', rejection_category_name: 'cat1', count_rejected: 10, domain: 'gmail.com' });
-      const link = mount(rows[1]);
-      link.find('UnstyledLink').simulate('click');
-      expect(props.addFilters).toHaveBeenCalledWith([{ type: 'Recipient Domain', value: 'gmail.com' }]);
-    });
-
+  it('getRowData should render row data properly', () => {
+    const rows = wrapper.instance().getRowData({ reason: 'bad delay', rejection_category_name: 'cat1', count_rejected: 10, domain: 'gmail.com' });
+    expect(rows).toMatchSnapshot();
   });
+
 });

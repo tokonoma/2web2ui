@@ -29,16 +29,8 @@ describe('Save CSV Button', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should map simple collections to papa parse', () => {
-    wrapper.setProps({ saveCsv: true });
-
-    expect(Papa.unparse).toHaveBeenCalledWith([{ 'key': 1 }, { 'key': 2 }, { 'key': 3 }, { 'key': 4 }, { 'key': 5 }]);
-  });
-
-  it('should stringify complex objects', () => {
-    const perPageProps = _.cloneDeep(props);
-    perPageProps.data.push({ key: { subkey: 'value' }}, { key: [1,2,3]});
-    wrapper.setProps(perPageProps);
-    expect(Papa.unparse).toHaveBeenCalledWith([{ 'key': 1 }, { 'key': 2 }, { 'key': 3 }, { 'key': 4 }, { 'key': 5 }, { 'key': '{"subkey":"value"}' }, { 'key': '[1,2,3]' }]);
+  it('should render with given button label', () => {
+    wrapper.setProps({ caption: 'Click Me!' });
+    expect(wrapper.dive().text()).toEqual('Click Me!');
   });
 });

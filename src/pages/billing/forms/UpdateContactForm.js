@@ -19,10 +19,9 @@ export class UpdateContactForm extends Component {
   }
 
   onSubmit = (values) => {
-    const { updateBillingContact, onCancel, showAlert } = this.props;
+    const { updateBillingContact, showAlert } = this.props;
     return updateBillingContact(values).then(() => {
       showAlert({ type: 'success', message: 'Billing Contact Updated' });
-      onCancel();
     });
   }
 

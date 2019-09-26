@@ -1,0 +1,15 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+
+.RightAlignedButtons {
+  @media screen and (min-width: breakpoint(small)) {
+    width: 50%;
+    float: right;
+    text-align: right;
+  }
+}
+
+.Icon {
+  margin-left: 5px;
+  margin-bottom: 3px;
+}

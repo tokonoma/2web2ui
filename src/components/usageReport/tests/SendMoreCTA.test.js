@@ -23,9 +23,12 @@ describe('SendMoreCTA Component', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('toggles support ticket form correctly', () => {
-    wrapper.find('UnstyledLink').at(1).simulate('click');
-    expect(props.openSupportTicketForm).toHaveBeenCalledWith({ issueId: 'daily_limits' });
+  it('renders learn more about sending limits link', () => {
+    wrapper.setProps({ hasSendingLimits: true });
+
+    expect(
+      wrapper.findWhere((node) => node.text() === 'Learn more about these limits.')
+    ).toExist();
   });
 
   describe('resendVerification', () => {

@@ -12,14 +12,15 @@ exports[`SpamTrapOverview current_hits component renders current rate 1`] = `
 />
 `;
 
-exports[`SpamTrapOverview history component renders absolute bar chart 1`] = `
-<BarChartDataCell
-  dataKey="trap_hits"
-  label="Spam Trap Hits"
-  max={200}
-  onClick={[Function]}
-  relative={false}
-/>
+exports[`SpamTrapOverview does not render title 1`] = `
+<div
+  className="Controls"
+>
+  <Calculation
+    initialSelected="relative"
+    onChange={[Function]}
+  />
+</div>
 `;
 
 exports[`SpamTrapOverview history component renders absolute sparkline 1`] = `
@@ -28,16 +29,6 @@ exports[`SpamTrapOverview history component renders absolute sparkline 1`] = `
   label="Spam Trap Hits"
   onClick={[Function]}
   relative={false}
-/>
-`;
-
-exports[`SpamTrapOverview history component renders relative bar chart 1`] = `
-<BarChartDataCell
-  dataKey="relative_trap_hits"
-  label="Spam Trap Hits"
-  max={40}
-  onClick={[Function]}
-  relative={true}
 />
 `;
 
@@ -55,46 +46,11 @@ exports[`SpamTrapOverview renders overview panel with controls and table 1`] = `
   <div
     className="Header"
   >
-    <h5>
-      Spam Trap Monitoring Summary
-    </h5>
-    <div
-      className="Tooltip"
-    >
-      <Tooltip
-        bottom={true}
-        content="
-  The share over time of your total email that has been sent to known spam traps. An
-  excessive rate of spam trap hits is an indicator of poor list procurement and hygiene practices.
-"
-        dark={true}
-        forcePosition={false}
-        horizontalOffset="-1rem"
-        preferredDirection={
-          Object {
-            "bottom": true,
-            "left": false,
-            "right": true,
-            "top": false,
-          }
-        }
-        right={true}
-      >
-        <InfoOutline
-          className="TooltipIcon"
-          size={18}
-        />
-      </Tooltip>
-    </div>
     <div
       className="Controls"
     >
       <Calculation
         initialSelected="relative"
-        onChange={[Function]}
-      />
-      <ChartType
-        initialSelected="line"
         onChange={[Function]}
       />
     </div>

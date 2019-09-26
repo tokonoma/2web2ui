@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import { getEngagementRecency } from 'src/actions/signals';
+import { selectEngagementRecencyDetails } from 'src/selectors/signals';
 import { Panel } from '@sparkpost/matchbox';
 import { PanelLoading, PageLink } from 'src/components';
 import Callout from 'src/components/callout';
 import { ENGAGEMENT_RECENCY_INFO } from '../../constants/info';
-import withEngagementRecencyDetails from '../../containers/EngagementRecencyDetailsContainer';
+import withDetails from '../../containers/withDetails';
 import BarChart from '../charts/barchart/BarChart';
 import ChartHeader from '../ChartHeader';
 import cohorts from '../../constants/cohorts';
@@ -36,7 +38,7 @@ export class EngagementRecencyPreview extends Component {
         margin={{ top: 12, left: 12, right: 0, bottom: 12 }}
         gap={gap}
         timeSeries={data}
-        yKeys={_.keys(cohorts).map((key) => ({ key, ...cohorts[key] })).reverse()}
+        yKeys={_.keys(cohorts).map((key) => ({ key: `c_${key}`, ...cohorts[key] })).reverse()}
         yAxisProps={this.getYAxisProps()}
         xAxisProps={{ hide: true }}
       />
@@ -51,7 +53,7 @@ export class EngagementRecencyPreview extends Component {
     }
 
     return (
-      <PageLink to={`/signals/engagement-recency/${facet}/${facetId}${setSubaccountQuery(subaccountId)}`}>
+      <PageLink to={`/signals/engagement/cohorts/${facet}/${facetId}${setSubaccountQuery(subaccountId)}`}>
         <Panel>
           <Panel.Section>
             <ChartHeader
@@ -69,4 +71,8 @@ export class EngagementRecencyPreview extends Component {
   }
 }
 
-export default withEngagementRecencyDetails(EngagementRecencyPreview);
+export default withDetails(
+  EngagementRecencyPreview,
+  { getEngagementRecency },
+  selectEngagementRecencyDetails
+);

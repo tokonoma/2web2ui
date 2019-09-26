@@ -14,7 +14,6 @@ describe('Signals Page Component', () => {
       pass: 'through',
       facet: 'facet',
       facetId: 'facetId',
-      dimensionPrefix: 'test prefix',
       subaccountId: 22
     };
     helpers.getFriendlyTitle = jest.fn();
@@ -23,11 +22,6 @@ describe('Signals Page Component', () => {
 
   it('renders correctly with title', () => {
     expect(wrapper).toMatchSnapshot();
-    expect(helpers.getFriendlyTitle).toHaveBeenCalledWith({ facet: 'facet', facetId: 'facetId', prefix: 'test prefix', subaccountId: 22 });
-  });
-
-  it('renders with default title', () => {
-    wrapper.setProps({ title: undefined });
-    expect(wrapper).toMatchSnapshot();
+    expect(helpers.getFriendlyTitle).toHaveBeenCalledWith({ facet: 'facet', facetId: 'facetId', subaccountId: 22 });
   });
 });

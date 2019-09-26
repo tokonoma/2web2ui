@@ -16,16 +16,13 @@ export const EditForm = ({
   submitting
 }) => {
 
-  const ssoHelpText = isAccountSingleSignOnEnabled
-    ? <span>Enabling single sign-on will delete this user's password. If they switch back to password-based authentication, they'll need to reset their password on login.</span>
-    : <span>Single sign-on has not been configured for your account. Enable in your <PageLink to="/account/settings">account's settings</PageLink>.</span>;
-
+  const ssoHelpText = <span>Enabling single sign-on will delete this user's password. If they switch back to password-based authentication, they'll need to reset their password on login.</span>;
   const subaccountReportingUser = user.access === ROLES.SUBACCOUNT_REPORTING;
 
   const roleSection = subaccountReportingUser
     ? (<>
         <p> This user has access to reporting features and read-only template access, limited to a single subaccount. Its role can’t be changed. </p>
-        <LabelledValue label="Subaccount">
+        <LabelledValue label="Subaccount" name="subaccountInfo">
           <PageLink to={`/account/subaccounts/${subaccount.id}`}>{subaccount.name}</PageLink> ({subaccount.id})
         </LabelledValue>
       </>)
@@ -42,16 +39,18 @@ export const EditForm = ({
       <Panel.Section>
         {roleSection}
       </Panel.Section>
-      <Panel.Section>
-        <Field
-          component={CheckboxWrapper}
-          disabled={!isAccountSingleSignOnEnabled}
-          helpText={ssoHelpText}
-          label="Enable single sign-on authentication for this user"
-          name="is_sso"
-          type="checkbox"
-        />
-      </Panel.Section>
+      {isAccountSingleSignOnEnabled &&
+        (<Panel.Section>
+          <Field
+            component={CheckboxWrapper}
+            helpText={ssoHelpText}
+            label="Enable single sign-on authentication for this user"
+            name="is_sso"
+            type="checkbox"
+          />
+        </Panel.Section>)
+      }
+
       <Panel.Section>
         <Button primary disabled={submitting} submit>
           {'Update user'}

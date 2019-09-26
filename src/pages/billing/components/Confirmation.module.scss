@@ -4,3 +4,23 @@
   display: block;
   color: color(orange);
 }
+
+.DeprecatedWarning {
+  position: relative;
+  display: flex;
+}
+
+.iconContainer {
+  position: relative;
+  flex: 1 0 0;
+  max-width: 40px;
+}
+
+.icon {
+  color: color(red);
+}
+
+.content {
+  flex: 1 0 0;
+  font-weight: 500;
+}

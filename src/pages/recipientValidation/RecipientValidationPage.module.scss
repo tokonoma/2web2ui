@@ -1,0 +1,21 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.TabPadding {
+  padding: 0 spacing();
+}
+
+.LeadText {
+  max-width: 60%;
+  margin-bottom: 2rem;
+  font-size: font-size(300);
+  line-height: line-height(300);
+}
+
+.modalContainer {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.bodyContainer {
+  padding: 2rem 3rem;
+}

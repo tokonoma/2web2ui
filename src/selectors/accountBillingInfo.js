@@ -13,6 +13,8 @@ const selectIsSelfServeBilling = selectCondition(isSelfServeBilling);
 const selectIsCcFree1 = selectCondition(onPlan('ccfree1'));
 const selectIsFree1 = selectCondition(onPlan('free1'));
 const selectOnZuoraPlan = selectCondition(onZuoraPlan);
+const currentFreePlans = ['free500-1018', 'free15K-1018', 'free500-0419', 'free500-SPCEU-0419'];
+const getRecipientValidationUsage = (state) => _.get(state, 'account.rvUsage.recipient_validation');
 
 export const currentSubscriptionSelector = (state) => state.account.subscription;
 
@@ -77,11 +79,32 @@ export const selectAvailablePlans = createSelector(
 
 export const selectVisiblePlans = createSelector(
   [selectAvailablePlans, selectIsFree1, currentPlanCodeSelector],
-  (plans, isOnLegacyFree1Plan, currentPlan) => plans.filter(({ isFree, status, code }) =>
-    currentPlan === code || //Plan only shows if currently on free15K plan
-      status === 'public' &&
+  (plans, isOnLegacyFree1Plan) => plans.filter(({ isFree, status }) =>
+    status === 'public' &&
       !(isOnLegacyFree1Plan && isFree) //hide new free plans if on legacy free1 plan
   )
+);
+
+export const selectTieredVisiblePlans = createSelector(
+  [selectVisiblePlans],
+  (plans) => {
+    const normalizedPlans = plans.map((plan) => ({
+      ...plan,
+      tier: plan.tier || (currentFreePlans.includes(plan.code) ? 'test' : 'default')
+    }));
+
+    return _.groupBy(normalizedPlans, 'tier');
+  }
+);
+export const selectAccount = (state) => state.account;
+
+export const selectAccountBilling = createSelector(
+  [selectAccount],
+  (account) => ({
+    account,
+    error: account.error || account.billingError,
+    loading: account.loading || account.billingLoading || account.usageLoading
+  })
 );
 
 export const selectBillingInfo = createSelector(
@@ -103,4 +126,9 @@ export const selectBillingInfo = createSelector(
     plans,
     isAWSAccount
   })
+);
+
+export const selectMonthlyRecipientValidationUsage = createSelector(
+  getRecipientValidationUsage,
+  (usage) => _.get(usage, 'month.used', 0)
 );

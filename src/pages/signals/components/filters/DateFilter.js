@@ -1,34 +1,48 @@
 import React from 'react';
-import { Select } from '@sparkpost/matchbox';
+import { FORMATS } from 'src/constants';
+import { getDates } from 'src/helpers/signals';
+import DatePicker from 'src/components/datePicker/DatePicker';
 import withSignalOptions from '../../containers/withSignalOptions';
-import styles from './DateFilter.module.scss';
+import { minDays } from 'src/helpers/validation';
+import moment from 'moment';
 
 const OPTIONS = [
-  { label: 'Last 7 Days', value: '7days' },
-  { label: 'Last 14 Days', value: '14days' },
-  { label: 'Last 30 Days', value: '30days' },
-  { label: 'Last 90 Days', value: '90days' }
+  '7days',
+  '14days',
+  '30days',
+  '90days',
+  'custom'
 ];
 
-export class DateFilter extends React.Component {
-  handleChange = (event) => {
-    const { changeSignalOptions } = this.props;
-    changeSignalOptions({ relativeRange: event.currentTarget.value });
+export function DateFilter({ signalOptions, changeSignalOptions, left, now = new Date() }) {
+
+  // Constructs dates from relative range or custom dates
+  function handleChange(updates) {
+    changeSignalOptions(getDates({ ...updates, now }));
   }
 
-  render() {
-    const { signalOptions: { relativeRange }} = this.props;
-
-    return (
-      <div className={styles.DateFilter}>
-        <Select
-          onChange={this.handleChange}
-          options={OPTIONS}
-          value={relativeRange}
-        />
-      </div>
-    );
-  }
+  return (
+    <DatePicker
+      now={moment(now).subtract(1, 'day').toDate()}
+      from={signalOptions.from}
+      to={signalOptions.to}
+      relativeDateOptions={OPTIONS}
+      relativeRange={signalOptions.relativeRange}
+      onChange={handleChange}
+      dateFieldFormat={FORMATS.DATE}
+      datePickerProps={{
+        disabledDays: {
+          after: moment(now).subtract(1, 'day').toDate(),
+          before: moment(now).subtract(91, 'day').toDate()
+        },
+        fromMonth: moment(now).subtract(91, 'day').toDate()
+      }}
+      roundToPrecision={false}
+      hideManualEntry
+      left={left}
+      validate={minDays(7)}
+    />
+  );
 }
 
 export default withSignalOptions(DateFilter);

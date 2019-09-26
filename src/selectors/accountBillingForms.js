@@ -14,7 +14,7 @@ export const getFirstStateForCountry = createSelector(
 /**
  * Selects initial values for all the forms on account/billing/plan
  */
-export function changePlanInitialValues(state, { planCode } = {}) {
+export function changePlanInitialValues(state, { planCode, promoCode } = {}) {
   const overridePlan = _.find(selectAvailablePlans(state), { code: planCode }); // typically from query string
   const currentPlan = currentPlanSelector(state);
   const firstVisiblePlan = _.first(selectVisiblePlans(state));
@@ -29,7 +29,8 @@ export function changePlanInitialValues(state, { planCode } = {}) {
       lastName: state.currentUser.last_name,
       country: firstCountry,
       state: firstState
-    }
+    },
+    promoCode
   };
 }
 

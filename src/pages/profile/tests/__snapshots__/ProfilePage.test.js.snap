@@ -17,14 +17,14 @@ exports[`ProfilePage renders correctly 1`] = `
       value="ned.stark@winterfell.biz"
     />
   </Panel>
-  <Connect(AccessControl)
+  <AccessControl
     condition={[Function]}
   >
-    <Connect(AccessControl)
+    <AccessControl
       condition={[Function]}
     >
       <Connect(TfaManager) />
-    </Connect(AccessControl)>
+    </AccessControl>
     <Panel
       sectioned={true}
       title="Edit Profile"
@@ -33,7 +33,7 @@ exports[`ProfilePage renders correctly 1`] = `
         onSubmit={[Function]}
       />
     </Panel>
-    <Connect(AccessControl)
+    <AccessControl
       condition={[Function]}
     >
       <Panel
@@ -44,8 +44,8 @@ exports[`ProfilePage renders correctly 1`] = `
           onSubmit={[Function]}
         />
       </Panel>
-    </Connect(AccessControl)>
-  </Connect(AccessControl)>
+    </AccessControl>
+  </AccessControl>
 </Page>
 `;
 
@@ -67,14 +67,14 @@ exports[`ProfilePage renders with verify email banner 1`] = `
       label="Email Address"
     />
   </Panel>
-  <Connect(AccessControl)
+  <AccessControl
     condition={[Function]}
   >
-    <Connect(AccessControl)
+    <AccessControl
       condition={[Function]}
     >
       <Connect(TfaManager) />
-    </Connect(AccessControl)>
+    </AccessControl>
     <Panel
       sectioned={true}
       title="Edit Profile"
@@ -83,7 +83,7 @@ exports[`ProfilePage renders with verify email banner 1`] = `
         onSubmit={[Function]}
       />
     </Panel>
-    <Connect(AccessControl)
+    <AccessControl
       condition={[Function]}
     >
       <Panel
@@ -94,7 +94,7 @@ exports[`ProfilePage renders with verify email banner 1`] = `
           onSubmit={[Function]}
         />
       </Panel>
-    </Connect(AccessControl)>
-  </Connect(AccessControl)>
+    </AccessControl>
+  </AccessControl>
 </Page>
 `;

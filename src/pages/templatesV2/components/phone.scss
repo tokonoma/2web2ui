@@ -1,0 +1,6 @@
+$phone-padding: 15px;
+$phone-screen-height: 667px;
+$phone-screen-width: 375px;
+$phone-height: $phone-screen-height + 40px + 40px + 2px; // screen + padding + border
+$phone-width: $phone-screen-width + 10px + 10px + 2px; // screen + padding + border
+$phone-container-min-height: $phone-height + $phone-padding * 2;

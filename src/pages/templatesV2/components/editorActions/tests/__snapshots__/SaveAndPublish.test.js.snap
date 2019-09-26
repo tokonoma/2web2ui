@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SaveAndPublish renders SaveAndPublish action 1`] = `
+<div
+  className="Foo"
+>
+  <UnstyledLink
+    onClick={[Function]}
+  >
+    <CheckCircleOutline />
+    Save and Publish
+  </UnstyledLink>
+  <ConfirmationModal
+    confirmVerb="Save and Publish"
+    content={
+      <p>
+        Once published, your template will be available for use in email campaigns and A/B tests.
+      </p>
+    }
+    onCancel={[Function]}
+    onConfirm={[Function]}
+    open={false}
+    title="Are you sure you want to publish your template?"
+  />
+</div>
+`;

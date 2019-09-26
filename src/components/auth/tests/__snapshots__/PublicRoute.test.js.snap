@@ -1,14 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Component: PublicRoute renders component 1`] = `
-<Connect(AccessControl)
+<AccessControl
   condition={[MockFunction]}
   redirect="/auth"
   wait={false}
 >
-  <TestComponent
-    path="/join"
-    public={true}
-  />
-</Connect(AccessControl)>
+  <withRouter(ProviderComponent)>
+    <TestComponent
+      path="/join"
+      public={true}
+    />
+  </withRouter(ProviderComponent)>
+</AccessControl>
 `;

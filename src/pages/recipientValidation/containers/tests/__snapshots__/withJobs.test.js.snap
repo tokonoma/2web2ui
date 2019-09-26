@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`withJobs renders wrapped component 1`] = `
+<Container
+  component="div"
+  getList={[Function]}
+  jobs={Array []}
+  jobsLoadingStatus="success"
+>
+  <div
+    jobs={Array []}
+  />
+</Container>
+`;

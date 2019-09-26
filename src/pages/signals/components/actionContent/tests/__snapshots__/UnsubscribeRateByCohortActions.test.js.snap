@@ -1,0 +1,69 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Signals complaints by cohort actions component renders 1`] = `
+Array [
+  Object {
+    "content": <React.Fragment>
+      Doesn't look like you have any unsubscribe issues. Great job!
+    </React.Fragment>,
+    "type": "good",
+  },
+]
+`;
+
+exports[`Signals complaints by cohort actions component renders combination for semi/not/recently engaged cohorts 1`] = `
+Array [
+  Object {
+    "content": <React.Fragment>
+      Many of your 
+      <strong>
+        Recently Engaged and Semi-Recently Engaged
+      </strong>
+       recipients are unsubscribing from your emails. If this continues, you risk damaging your reputation. Refreshing your content and segmenting your recipients can provide a better customer experience and cut down on unsubscribes
+    </React.Fragment>,
+    "link": "https://www.sparkpost.com/docs/signals/content-refresh/",
+    "type": "bad",
+  },
+  Object {
+    "content": <React.Fragment>
+      Some of your 
+      <strong>
+        Not Recently Engaged
+      </strong>
+       recipients are unsubscribing. Refreshing your content and segmenting your recipients can improve your relationships and lead to less unsubscribes.
+    </React.Fragment>,
+    "link": "https://www.sparkpost.com/docs/signals/content-refresh/",
+    "type": "warning",
+  },
+]
+`;
+
+exports[`Signals complaints by cohort actions component renders only 3 messages in the correct order 1`] = `
+Array [
+  Object {
+    "content": <React.Fragment>
+      Your unsubscribe rate is high. A consistently high unsubscribe rate will lead to deliverability issues. Consider refreshing your content and cleaning your lists of unengaged recipients.
+    </React.Fragment>,
+    "link": "https://www.sparkpost.com/docs/signals/list-hygiene/",
+    "type": "bad",
+  },
+  Object {
+    "content": <React.Fragment>
+      Many of your 
+      <strong>
+        Recently Engaged, Semi-Recently Engaged, and Not Recently Engaged
+      </strong>
+       recipients are unsubscribing from your emails. If this continues, you risk damaging your reputation. Refreshing your content and segmenting your recipients can provide a better customer experience and cut down on unsubscribes
+    </React.Fragment>,
+    "link": "https://www.sparkpost.com/docs/signals/content-refresh/",
+    "type": "bad",
+  },
+  Object {
+    "content": <React.Fragment>
+      Many recipients who have never engaged are unsubscribing. Proactively remove these recipients to lower your unsubscribe rate – these are subscribers who haven't expressed interest in your email.
+    </React.Fragment>,
+    "link": "https://www.sparkpost.com/docs/signals/list-hygiene/",
+    "type": "bad",
+  },
+]
+`;

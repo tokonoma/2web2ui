@@ -19,13 +19,12 @@ export class UpdatePaymentForm extends Component {
   }
 
   onSubmit = (values) => {
-    const { billingUpdate, onCancel, showAlert } = this.props;
+    const { billingUpdate, showAlert } = this.props;
 
     const newValues = values.card ? { ...values, card: prepareCardInfo(values.card) } : values;
 
     return billingUpdate(newValues).then(() => {
       showAlert({ type: 'success', message: 'Payment Information Updated' });
-      typeof onCancel === 'function' && onCancel();
     });
   };
 
@@ -48,7 +47,7 @@ export class UpdatePaymentForm extends Component {
           </Panel.Section>
           <Panel.Section>
             <Button type='submit' primary disabled={submitting}>Update Payment Information</Button>
-            <Button onClick={onCancel} className={styles.Cancel}>Cancel</Button>
+            {onCancel && <Button onClick={onCancel} className={styles.Cancel}>Cancel</Button>}
           </Panel.Section>
         </Panel>
       </form>

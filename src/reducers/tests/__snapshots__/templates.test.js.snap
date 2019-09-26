@@ -54,6 +54,19 @@ Object {
 }
 `;
 
+exports[`Template reducer stores preview error 1`] = `
+Object {
+  "byId": Object {},
+  "contentPreview": Object {
+    "draft": Object {},
+    "error": [Error: Oh no!],
+    "published": Object {},
+  },
+  "list": Array [],
+  "listError": null,
+}
+`;
+
 exports[`Template reducer stores preview of draft with obj from 1`] = `
 Object {
   "byId": Object {},
@@ -68,6 +81,7 @@ Object {
         "subject": "Preview of Test Template",
       },
     },
+    "error": undefined,
     "published": Object {},
   },
   "list": Array [],
@@ -89,6 +103,7 @@ Object {
         "subject": "Preview of Test Template",
       },
     },
+    "error": undefined,
     "published": Object {},
   },
   "list": Array [],
@@ -147,5 +162,58 @@ Object {
   "getPublishedLoading": false,
   "list": Array [],
   "listError": null,
+}
+`;
+
+exports[`Template reducer stores updated draft 1`] = `
+Object {
+  "byId": Object {
+    "test-template": Object {
+      "draft": Object {
+        "content": Object {
+          "from": Object {
+            "email": "test@example.com",
+            "name": "",
+          },
+          "html": "<h1>Updated Test Template</h1>",
+          "subject": "Test Template",
+        },
+        "last_update_time": "2019-05-16T02:03:33.254Z",
+      },
+    },
+  },
+  "contentPreview": Object {
+    "draft": Object {},
+    "published": Object {},
+  },
+  "list": Array [],
+  "listError": null,
+  "updating": false,
+}
+`;
+
+exports[`Template reducer updates updating state when update fails 1`] = `
+Object {
+  "byId": Object {},
+  "contentPreview": Object {
+    "draft": Object {},
+    "published": Object {},
+  },
+  "list": Array [],
+  "listError": null,
+  "updating": false,
+}
+`;
+
+exports[`Template reducer updates updating state when update pending 1`] = `
+Object {
+  "byId": Object {},
+  "contentPreview": Object {
+    "draft": Object {},
+    "published": Object {},
+  },
+  "list": Array [],
+  "listError": null,
+  "updating": true,
 }
 `;

@@ -1,6 +1,6 @@
 import { normalizeFromAddress, normalizeTemplateFromAddress } from 'src/helpers/templates';
 
-const initialState = {
+export const initialState = {
   list: [],
   listError: null,
   byId: {},
@@ -10,7 +10,7 @@ const initialState = {
   }
 };
 
-export default (state = initialState, action) => {
+export default (state = initialState, { now = new Date(), ...action }) => {
   switch (action.type) {
     // List
     case 'LIST_TEMPLATES_PENDING':
@@ -59,11 +59,16 @@ export default (state = initialState, action) => {
     case 'GET_TEMPLATE_TEST_DATA':
       return { ...state, testData: action.payload };
 
+    // note, purposely don't clear error on pending action, so errors can be displayed while pending
+    case 'GET_TEMPLATE_PREVIEW_FAIL':
+      return { ...state, contentPreview: { ...state.contentPreview, error: action.payload }};
+
     case 'GET_TEMPLATE_PREVIEW_SUCCESS':
       return {
         ...state,
         contentPreview: {
           ...state.contentPreview,
+          error: undefined,
           [action.meta.context.mode]: {
             ...state.contentPreview[action.meta.context.mode],
             [action.meta.context.id]: {
@@ -73,6 +78,53 @@ export default (state = initialState, action) => {
           }
         }
       };
+
+    case 'UPDATE_TEMPLATE_FAIL':
+      return { ...state, updating: false };
+    case 'UPDATE_TEMPLATE_PENDING':
+      return { ...state, updating: true };
+
+    // note, need to keep template up to date, so editor can compare vs form state to determine
+    //   if form state is dirty
+    // note, don't need normalizeTemplateFromAddress because draft should already be normalized
+    case 'UPDATE_TEMPLATE_SUCCESS': {
+      const { id } = action.meta.context;
+
+      return {
+        ...state,
+        byId: {
+          ...state.byId,
+          [id]: {
+            ...state.byId[id],
+            draft: {
+              ...state.byId[id].draft,
+              ...action.meta.data,
+              // ugh, need to manually set since API doesn't return updated record
+              last_update_time: now.toISOString()
+            }
+          }
+        },
+        updating: false
+      };
+    }
+
+    case 'DELETE_TEMPLATE_PENDING':
+      return { ...state, deletePending: true };
+
+    case 'DELETE_TEMPLATE_FAIL':
+      return { ...state, deletePending: false };
+
+    case 'DELETE_TEMPLATE_SUCCESS':
+      return { ...state, deletePending: false };
+
+    case 'PUBLISH_ACTION_PENDING':
+      return { ...state, publishPending: true };
+
+    case 'PUBLISH_ACTION_SUCCESS':
+      return { ...state, publishPending: false };
+
+    case 'PUBLISH_ACTION_FAIL':
+      return { ...state, publishPending: false };
 
     default:
       return state;

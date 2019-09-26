@@ -8,6 +8,14 @@ describe('ContentEditor', () => {
   let wrapper;
   let props;
 
+  const selectTabByContent = (wrapper, content) => {
+    wrapper
+      .find('Tabs')
+      .prop('tabs')
+      .find((tab) => tab.content === content)
+      .onClick();
+  };
+
   beforeEach(() => {
     wrapper = shallow(<ContentEditor {...props} />);
   });
@@ -28,69 +36,50 @@ describe('ContentEditor', () => {
   });
 
   it('should select tabs', () => {
-    wrapper.find('Tabs').props().tabs[1].onClick();
-    expect(wrapper.state().selectedTab).toBe(1);
+    selectTabByContent(wrapper, 'Text');
+    expect(wrapper.find('Tabs')).toHaveProp('selected', 1);
   });
 
   it('should set field read only correctly', () => {
     wrapper.setProps({ readOnly: true });
-    expect(wrapper.find('Field').props().readOnly).toBe(true);
+    expect(wrapper.find('Field')).toHaveProp('readOnly', true);
 
     // 'Test Data' is always editable
-    wrapper.instance().handleTab(2);
-    wrapper.update();
-    expect(wrapper.find('Field').props().readOnly).toBe(false);
+    selectTabByContent(wrapper, 'Test Data');
+    expect(wrapper.find('Field')).toHaveProp('readOnly', false);
   });
 
   it('should set HTML syntax validation correctly', () => {
-    wrapper.instance().handleTab(0);
-    wrapper.update();
-    expect(wrapper.find('Field').props().name).toBe('content.html');
-    expect(wrapper.find('Field').props().syntaxValidation).toBe(false);
+    selectTabByContent(wrapper, 'HTML');
+    expect(wrapper.find('Field')).toHaveProp('name', 'content.html');
+    expect(wrapper.find('Field')).toHaveProp('syntaxValidation', false);
   });
 
   it('should set Text syntax validation correctly', () => {
-    wrapper.instance().handleTab(1);
-    wrapper.update();
-    expect(wrapper.find('Field').props().name).toBe('content.text');
-    expect(wrapper.find('Field').props().syntaxValidation).toBe(false);
+    selectTabByContent(wrapper, 'Text');
+    expect(wrapper.find('Field')).toHaveProp('name', 'content.text');
+    expect(wrapper.find('Field')).toHaveProp('syntaxValidation', false);
   });
 
   it('should set Test Data syntax validation correctly', () => {
-    wrapper.instance().handleTab(2);
-    wrapper.update();
-    expect(wrapper.find('Field').props().name).toBe('testData');
-    expect(wrapper.find('Field').props().syntaxValidation).toBe(true);
+    selectTabByContent(wrapper, 'Test Data');
+    expect(wrapper.find('Field')).toHaveProp('name', 'testData');
+    expect(wrapper.find('Field')).toHaveProp('syntaxValidation', true);
+  });
+
+  it('should set AMP syntax validation correctly', () => {
+    selectTabByContent(wrapper, 'AMP HTML');
+    expect(wrapper.find('Field')).toHaveProp('name', 'content.amp_html');
+    expect(wrapper.find('Field')).toHaveProp('syntaxValidation', false);
   });
 
   it('should set required content validation correctly for just HTML and Text', () => {
-    expect(wrapper.find('Field').props().validate[0]).toBe(wrapper.instance().requiredHtmlOrText);
-  });
-
-  it('should set required content validation correctly for HTML, Text, and AMP', () => {
-    wrapper.setProps({ isAmpLive: true, contentOnly: true });
     expect(wrapper.find('Field').props().validate[0]).toBe(wrapper.instance().requiredHtmlTextOrAmp);
   });
 
-  describe('when AMP is live', () => {
-    beforeEach(() => {
-      wrapper.setProps({ isAmpLive: true });
-    });
-
-    it('should set syntax validation correctly', () => {
-      wrapper.instance().handleTab(2);
-      wrapper.update();
-      expect(wrapper.find('Field').props().name).toBe('content.amp_html');
-      expect(wrapper.find('Field').props().syntaxValidation).toBe(false);
-    });
-
-    it('should leave test data tab editable when other tabs are read only', () => {
-      wrapper.setProps({ readOnly: true });
-      wrapper.instance().handleTab(3);
-
-      expect(wrapper.find('Field')).toHaveProp('name', 'testData');
-      expect(wrapper.find('Field')).toHaveProp('readOnly', false);
-    });
+  it('should set required content validation correctly for HTML, Text, and AMP', () => {
+    wrapper.setProps({ contentOnly: true });
+    expect(wrapper.find('Field').props().validate[0]).toBe(wrapper.instance().requiredHtmlTextOrAmp);
   });
 
   cases('.normalize', ({ expected, value }) => {
@@ -108,36 +97,6 @@ describe('ContentEditor', () => {
       expected: ' <p>testing</p> ',
       value: ' <p>testing</p> '
     }
-  });
-
-  describe('.requiredHtmlOrText', () => {
-    const subject = (content) => (
-      wrapper.instance().requiredHtmlOrText(undefined, { content })
-    );
-
-    it('returns undefined with html content', () => {
-      expect(subject({ html: '<p>test</p>' })).toBeUndefined();
-    });
-
-    it('returns undefined with text content', () => {
-      expect(subject({ text: 'test' })).toBeUndefined();
-    });
-
-    it('returns undefined with html and text content', () => {
-      expect(subject({ html: '<p>test</p>', text: 'test' })).toBeUndefined();
-    });
-
-    it('returns required validation message', () => {
-      expect(subject({})).toMatch(/required/);
-    });
-
-    it('returns required validation message with whitespace', () => {
-      expect(subject({ html: '     ' })).toMatch(/required/);
-    });
-
-    it('returns required validation message with null', () => {
-      expect(subject({ html: null })).toMatch(/required/);
-    });
   });
 
   describe('.requiredHtmlTextOrAmp', () => {
@@ -167,6 +126,10 @@ describe('ContentEditor', () => {
 
     it('returns required validation message with whitespace', () => {
       expect(subject({ html: '     ' })).toMatch(/required/);
+    });
+
+    it('returns required validation message with null', () => {
+      expect(subject({ html: null })).toMatch(/required/);
     });
   });
 

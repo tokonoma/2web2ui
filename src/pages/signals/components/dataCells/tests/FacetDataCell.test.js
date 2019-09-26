@@ -1,6 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import FacetDataCell from '../FacetDataCell';
+import { MAILBOX_PROVIDERS } from 'src/constants';
 
 describe('FacetDataCell', () => {
   const subject = (props = {}) => shallow(
@@ -34,8 +35,19 @@ describe('FacetDataCell', () => {
       id: 123,
       name: 'Test Subaccount'
     };
+    const wrapper = subject(props);
+    expect(wrapper.find('PageLink').prop('children')).toEqual('Test Subaccount (123)');
+    expect(wrapper).toMatchSnapshot();
+  });
 
-    expect(subject(props)).toMatchSnapshot();
+  it('formats mailbox provider label to friendly value', () => {
+    const props = {
+      facet: 'mb_provider',
+      id: 'other'
+    };
+    const wrapper = subject(props);
+    expect(wrapper.find('PageLink').prop('children')).toEqual(MAILBOX_PROVIDERS.other);
+    expect(wrapper).toMatchSnapshot();
   });
 
   it('adds a class to truncate its contents', () => {

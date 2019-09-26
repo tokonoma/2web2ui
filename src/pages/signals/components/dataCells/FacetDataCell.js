@@ -1,16 +1,11 @@
 import React from 'react';
 import PageLink from 'src/components/pageLink';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
+import { MAILBOX_PROVIDERS } from 'src/constants';
 import styles from './DataCell.module.scss';
 import classnames from 'classnames';
 
 const FacetDataCell = ({ dimension, facet, id, name, subaccountId, truncate }) => {
-  let label = id;
-  let search;
-
-  if (facet === 'sid' && id === 0) {
-    label = 'Master Account';
-  }
 
   if (facet === 'sid' && id === -1) {
     return (
@@ -20,13 +15,19 @@ const FacetDataCell = ({ dimension, facet, id, name, subaccountId, truncate }) =
     );
   }
 
-  if (name) {
-    label = `${name} (${id})`;
+  //This is the default case for the label. The switch statements below are for special cases.
+  let label = (name) ? `${name} (${id})` : id;
+  switch (facet) {
+    case 'sid':
+      if (id === 0) {
+        label = 'Master Account';
+      }
+      break;
+    case 'mb_provider':
+      label = MAILBOX_PROVIDERS[id] || label;
   }
 
-  if (subaccountId >= 0) {
-    search = setSubaccountQuery(subaccountId);
-  }
+  const search = (subaccountId >= 0) ? setSubaccountQuery(subaccountId) : undefined;
 
   return (
     <div className={classnames(styles.PaddedCell, truncate && styles.OverflowCell)}>

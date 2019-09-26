@@ -1,9 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`FacetFilter renders facet select and search input 1`] = `
-<Fragment>
+<Grid.Column
+  lg={4}
+  xl={5}
+>
   <div
-    className="FacetFilter"
+    className="FacetFilter FacetSelected"
   >
     <Select
       onChange={[Function]}
@@ -20,6 +23,10 @@ exports[`FacetFilter renders facet select and search input 1`] = `
           Object {
             "label": "By IP Pool",
             "value": "ip_pool",
+          },
+          Object {
+            "label": "By Mailbox Provider",
+            "value": "mb_provider",
           },
           Object {
             "label": "By Sending Domain",
@@ -29,25 +36,25 @@ exports[`FacetFilter renders facet select and search input 1`] = `
       }
       value="campaign"
     />
-  </div>
-  <div
-    className="FacetFilter"
-  >
     <TextField
+      onBlur={[Function]}
       onChange={[Function]}
       onKeyPress={[Function]}
-      placeholder="Search here"
+      placeholder="Search"
       resize="both"
       suffix={<Search />}
       type="text"
       value=""
     />
   </div>
-</Fragment>
+</Grid.Column>
 `;
 
 exports[`FacetFilter renders only facet select 1`] = `
-<Fragment>
+<Grid.Column
+  lg={3}
+  xl={3}
+>
   <div
     className="FacetFilter"
   >
@@ -68,6 +75,10 @@ exports[`FacetFilter renders only facet select 1`] = `
             "value": "ip_pool",
           },
           Object {
+            "label": "By Mailbox Provider",
+            "value": "mb_provider",
+          },
+          Object {
             "label": "By Sending Domain",
             "value": "sending_domain",
           },
@@ -75,5 +86,5 @@ exports[`FacetFilter renders only facet select 1`] = `
       }
     />
   </div>
-</Fragment>
+</Grid.Column>
 `;

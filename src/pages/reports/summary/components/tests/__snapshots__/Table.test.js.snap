@@ -1,24 +1,24 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Summary Table  should render row data & handle click 1`] = `
+exports[`Summary Table should render group by row data 1`] = `
 Array [
-  <UnstyledLink
-    onClick={[Function]}
-  >
-    <a
-      onClick={[Function]}
-    >
-      Master Account (ID 0)
-    </a>
-  </UnstyledLink>,
+  <Connect(AddFilterLink)
+    content="Master Account (ID 0)"
+    newFilter={
+      Object {
+        "id": 0,
+        "type": "Subaccount",
+        "value": "Master Account (ID 0)",
+      }
+    }
+    reportType="summary"
+  />,
   <div
     className="RightAlign"
   >
     <Unit
       value={123}
-    >
-      123
-    </Unit>
+    />
   </div>,
   <div
     className="RightAlign"
@@ -26,27 +26,25 @@ Array [
     <Unit
       unit="millisecond"
       value={12345}
-    >
-      12,345
-    </Unit>
+    />
   </div>,
-  <UnstyledLink
-    onClick={[Function]}
-  >
-    <a
-      onClick={[Function]}
-    >
-      sub 1 name
-    </a>
-  </UnstyledLink>,
+  <Connect(AddFilterLink)
+    content="sub 1 name"
+    newFilter={
+      Object {
+        "id": 555,
+        "type": "Subaccount",
+        "value": "sub 1 name",
+      }
+    }
+    reportType="summary"
+  />,
   <div
     className="RightAlign"
   >
     <Unit
       value={123}
-    >
-      123
-    </Unit>
+    />
   </div>,
   <div
     className="RightAlign"
@@ -54,27 +52,25 @@ Array [
     <Unit
       unit="millisecond"
       value={12345}
-    >
-      12,345
-    </Unit>
+    />
   </div>,
-  <UnstyledLink
-    onClick={[Function]}
-  >
-    <a
-      onClick={[Function]}
-    >
-      Deleted (ID 1010)
-    </a>
-  </UnstyledLink>,
+  <Connect(AddFilterLink)
+    content="Deleted (ID 1010)"
+    newFilter={
+      Object {
+        "id": 1010,
+        "type": "Subaccount",
+        "value": "Deleted (ID 1010)",
+      }
+    }
+    reportType="summary"
+  />,
   <div
     className="RightAlign"
   >
     <Unit
       value={123}
-    >
-      123
-    </Unit>
+    />
   </div>,
   <div
     className="RightAlign"
@@ -82,14 +78,12 @@ Array [
     <Unit
       unit="millisecond"
       value={12345}
-    >
-      12,345
-    </Unit>
+    />
   </div>,
 ]
 `;
 
-exports[`Summary Table  should render with aggregate data 1`] = `
+exports[`Summary Table should render with aggregate data 1`] = `
 <TableCollection
   defaultSortColumn={null}
   defaultSortDirection="asc"
@@ -107,7 +101,7 @@ exports[`Summary Table  should render with aggregate data 1`] = `
 />
 `;
 
-exports[`Summary Table  should render with data 1`] = `
+exports[`Summary Table should render with data 1`] = `
 <TableCollection
   columns={
     Array [
@@ -162,7 +156,7 @@ exports[`Summary Table  should render with data 1`] = `
 />
 `;
 
-exports[`Summary Table  should render with no data 1`] = `
+exports[`Summary Table should render with no data 1`] = `
 <Panel>
   <Panel.Section>
     <GroupByOption

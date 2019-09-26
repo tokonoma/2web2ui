@@ -1,0 +1,12 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.Grid {
+  align-items: flex-end;
+  margin-bottom: rem(20);
+  margin-top: rem(-15);
+}
+
+.Slider {
+  position: relative;
+  top: rem(19);
+}

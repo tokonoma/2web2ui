@@ -28,7 +28,7 @@ export function searchRecipient({ email, subaccountId } = {}) {
     type: 'SEARCH_SUPPRESSIONS_RECIPIENT',
     meta: {
       method: 'GET',
-      url: `/v1/suppression-list/${email}`,
+      url: `/v1/suppression-list/${encodeURIComponent(email)}`,
       headers: setSubaccountHeader(subaccountId)
     }
   });
@@ -73,7 +73,7 @@ export function deleteSuppression(suppression) {
     type: 'DELETE_SUPPRESSION',
     meta: {
       method: 'DELETE',
-      url: `/v1/suppression-list/${recipient}`,
+      url: `/v1/suppression-list/${encodeURIComponent(recipient)}`,
       headers: setSubaccountHeader(subaccountId),
       data: { type },
       suppression

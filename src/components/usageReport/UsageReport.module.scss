@@ -7,7 +7,7 @@
 
 .Content {
   margin-bottom: rem(9);
-  font-size: rem(24);
+  font-size: font-size(900);
   font-weight: 400;
 }
 
@@ -17,19 +17,18 @@
 
 .Label {
   margin-bottom: 0;
-  font-size: rem(15);
   font-weight: 400;
 }
 
 .ProgressTitle {
   display: inline-block;
-  font-size: rem(15);
+  font-size: font-size(500);
 }
 
 .ProgressSecondary {
   display: inline-block;
   padding-left: rem(9);
   color: color(gray, 4);
-  font-size: rem(14);
+  font-size: font-size(300);
   font-weight: 400;
 }

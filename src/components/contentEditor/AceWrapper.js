@@ -24,6 +24,7 @@ const AceWrapper = ({
     )}
     <AceEditor
       mode={mode}
+      name={input.name}
       value={input.value}
       onChange={input.onChange}
       // AceEditor synthetic event doesn't work with redux-form

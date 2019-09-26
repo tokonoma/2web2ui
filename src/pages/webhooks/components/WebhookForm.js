@@ -14,7 +14,7 @@ import styles from './WebhookForm.module.scss';
 
 const formName = 'webhookForm';
 
-export function EventCheckBoxes({ show, events }) {
+export function EventCheckBoxes({ show, events, disabled }) {
   if (!show) {
     return null;
   }
@@ -28,18 +28,19 @@ export function EventCheckBoxes({ show, events }) {
           name={name}
           helpText={description}
           component={CheckboxWrapper}
+          disabled={disabled}
         />
       ))}
     </div>
   );
 }
 
-export function AuthFields({ authType }) {
+export function AuthFields({ authType, disabled }) {
   if (authType === 'basic') {
-    return <BasicAuthFields />;
+    return <BasicAuthFields disabled={disabled} />;
   }
   if (authType === 'oauth2') {
-    return <OAuth2Fields />;
+    return <OAuth2Fields disabled={disabled} />;
   }
   return null;
 }
@@ -49,42 +50,39 @@ export class WebhookForm extends Component {
   render() {
     const {
       handleSubmit,
-      submitText,
       auth,
       eventListing,
       showEvents,
-      disabled,
       newWebhook,
-      hasSubaccounts
+      hasSubaccounts,
+      pristine,
+      submitting
     } = this.props;
+    const submitText = submitting ? 'Submitting...' : (newWebhook ? 'Create Webhook' : 'Update Webhook');
 
     return (
       <form onSubmit={handleSubmit}>
         <Panel.Section>
-          <NameField />
-          <TargetField />
+          <NameField disabled={submitting} />
+          <TargetField disabled={submitting} />
         </Panel.Section>
-        {hasSubaccounts ? <Panel.Section><SubaccountSection newWebhook={newWebhook} formName={formName} /></Panel.Section> : null}
+        {hasSubaccounts ? <Panel.Section><SubaccountSection newWebhook={newWebhook} formName={formName} disabled={submitting}/></Panel.Section> : null}
         <Panel.Section>
-          <EventsRadioGroup />
-          <EventCheckBoxes show={showEvents} events={eventListing} />
+          <EventsRadioGroup disabled={submitting} />
+          <EventCheckBoxes show={showEvents} events={eventListing} disabled={submitting} />
         </Panel.Section>
         <Panel.Section>
-          <AuthDropDown />
-          <AuthFields authType={auth} />
+          <AuthDropDown disabled={submitting} />
+          <AuthFields authType={auth} disabled={submitting} />
         </Panel.Section>
-        {newWebhook ? null : <Panel.Section><ActiveField /></Panel.Section>}
+        {newWebhook ? null : <Panel.Section><ActiveField disabled={submitting} /></Panel.Section>}
         <Panel.Section>
-          <Button submit primary disabled={disabled}>{submitText}</Button>
+          <Button submit primary disabled={pristine || submitting}>{submitText}</Button>
         </Panel.Section>
       </form>
     );
   }
 }
-
-WebhookForm.defaultProps = {
-  newWebhook: false
-};
 
 const mapStateToProps = (state, props) => {
   const selector = formValueSelector(formName);
@@ -93,8 +91,6 @@ const mapStateToProps = (state, props) => {
 
   return {
     showEvents: eventsRadio === 'select',
-    disabled: props.pristine || props.submitting,
-    submitText: props.submitting ? 'Submitting...' : (props.newWebhook ? 'Create Webhook' : 'Update Webhook'),
     auth,
     hasSubaccounts: hasSubaccounts(state),
     eventListing: selectWebhookEventListing(state),

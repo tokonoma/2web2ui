@@ -12,7 +12,7 @@ jest.mock("../tenants", () => ({
 }));
 
 jest.mock("../constructContent", () => {
-  return function({ alias, host, nextHost, originHost, tenantId, ...config }) {
+  return function({ host, nextHost, originHost, tenantId, ...config }) {
     return {
       host: `${tenantId}.sparkpost.com`,
       apiBase: `http://${tenantId}.sparkpost.com/api`

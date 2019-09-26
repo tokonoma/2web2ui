@@ -16,9 +16,13 @@ export const getTestDataKey = ({ id, username, mode }) => ([ 'tpldata', username
 
 // Shape the content attributes for API
 export const shapeContent = (content = {}) => {
-  if (_.isEmpty(content.reply_to)) {
-    return _.omit(content, 'reply_to');
-  }
+  const shapedContent = {
+    ...content,
+    reply_to: _.isEmpty(content.reply_to) ? undefined : content.reply_to,
+    text: _.isEmpty(content.text) ? undefined : content.text,
+    html: _.isEmpty(content.html) ? undefined : content.html,
+    amp_html: _.isEmpty(content.amp_html) ? undefined : content.amp_html
+  };
 
-  return content;
+  return shapedContent;
 };

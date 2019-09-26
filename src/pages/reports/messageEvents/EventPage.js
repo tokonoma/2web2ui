@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { getMessageHistory, getDocumentation } from 'src/actions/messageEvents';
+import { getMessageHistory, getDocumentation, getSelectedEvent } from 'src/actions/messageEvents';
 import RedirectAndAlert from 'src/components/globalAlert/RedirectAndAlert';
 import { eventPageMSTP } from 'src/selectors/messageEvents';
 import { getDetailsPath } from 'src/helpers/messageEvents';
@@ -32,8 +32,10 @@ export class EventPage extends Component {
   }
 
   handleRefresh = () => {
-    const { messageId, getMessageHistory, isOrphanEvent } = this.props;
-    if (!isOrphanEvent) {
+    const { messageId, getMessageHistory, isOrphanEvent, selectedEventId, getSelectedEvent } = this.props;
+    if (isOrphanEvent) {
+      getSelectedEvent({ eventId: selectedEventId });
+    } else {
       getMessageHistory({ messageId });
     }
   }
@@ -96,4 +98,4 @@ export class EventPage extends Component {
   }
 }
 
-export default connect(eventPageMSTP, { getMessageHistory, getDocumentation })(EventPage);
+export default connect(eventPageMSTP, { getMessageHistory, getDocumentation, getSelectedEvent })(EventPage);
