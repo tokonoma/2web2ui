@@ -1,123 +1,90 @@
-import React, { useEffect, useState } from 'react';
-import { Page, Panel } from '@sparkpost/matchbox';
-import { CursorPaging, PerPageButtons, TableCollection } from 'src/components/collection';
-import Loading from 'src/components/loading';
-import IntegrationPageFilter from './components/IntegrationPageFilter';
-import useRouter from 'src/hooks/useRouter';
-import formatRow from './components/FormatRow';
-import { columns } from './constants/integration';
-import { getLegitBatchStatus, getLegitPageSize } from './helpers/batchStatusFilter';
 import _ from 'lodash';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { Page } from '@sparkpost/matchbox';
+import { CursorPaging, PerPageButtons } from 'src/components/collection';
+import useRouter from 'src/hooks/useRouter';
+import IntegrationCollection from './components/IntegrationCollection';
+import IntegrationPageFilter from './components/IntegrationPageFilter';
+import { getLegitPageSize } from './helpers/batchStatusFilter';
 import styles from './IntegrationPage.module.scss';
 
-const IntegrationPage = ({ getIngestBatchEvents, eventsByPage, totalCount, nextCursor, loadingStatus }) => {
-  const getParams = (requestParams) => {
-    if (_.isEmpty(requestParams)) {
-      return { batchIds: [], batchStatus: []};
-    }
-    return {
-      batchIds: typeof requestParams.batchIds === 'string'
-        ? [requestParams.batchIds]
-        : requestParams.batchIds || [],
-      batchStatus: requestParams.statuses ? typeof requestParams.statuses === 'string'
-        ? getLegitBatchStatus(requestParams.statuses)
-        : [] : []
-    };
-  };
-  const [ page, setPage] = useState(0);
+const IntegrationPage = ({ getIngestBatchEvents, eventsByPage, loadingStatus, nextCursor, totalCount }) => {
   const { requestParams, updateRoute } = useRouter();
-  const [ perPage, setPerPage] = useState(getLegitPageSize(requestParams.perPage)); //should be set to the value in link
+  const [page, setPage] = useState(0);
+  const [perPage, setPerPage] = useState(getLegitPageSize(requestParams.perPage)); //should be set to the value in link
+  const [filters, setFilters] = useState(() => {
+    const { batchIds = [], batchStatus = '' } = requestParams;
 
-  const [ queryParams, setQueryParams] = useState({
-    ...getParams(requestParams)
+    return {
+      batchIds: typeof batchIds === 'object' ? batchIds : [batchIds],
+      batchStatus: typeof batchStatus === 'object' ? batchStatus[0] : batchStatus
+    };
   });
-  const [ retry, setRetry ] = useState(false);
-  const onChangePage = (nextPage) => {
-    setPage(nextPage - 1);
-  };
-  const onChangePageSize = (pageSize) => {
-    setPerPage(pageSize);
-  };
-  const handleFilterParams = (params) => {
-    setQueryParams(params);
-  };
-  const onFirstPage = () => {
-    setPage(0);
-  };
+  const getData = useCallback((updates = {}) => {
+    const nextState = { ...filters, page, perPage, ...updates };
+
+    getIngestBatchEvents({
+      batchIds: nextState.batchIds,
+      cursor: nextState.page === 0 ? undefined : nextCursor,
+      perPage: nextState.perPage,
+      statuses: nextState.batchStatus ? [nextState.batchStatus] : undefined
+    });
+  }, [getIngestBatchEvents, filters, page, perPage, nextCursor]);
   const events = eventsByPage[page];
 
+  // Update url to match state
   useEffect(() => {
-    const getParamsForUpdate = (obj) => ({
-      statuses: obj.batchStatus.length !== 0 ? obj.batchStatus : undefined,
-      batchIds: obj.batchIds.length !== 0 ? obj.batchIds : undefined
+    updateRoute({
+      batchIds: filters.batchIds.length ? filters.batchIds : undefined,
+      batchStatus: filters.batchStatus ? filters.batchStatus : undefined,
+      perPage
     });
-    if (!_.isEqual(queryParams,getParams(requestParams)) || !_.isEqual(perPage, Number(requestParams.perPage))) {
-      setPage(0);
-    }
-    if (!_.isEqual(perPage, Number(requestParams.perPage)) || !_.isEqual(queryParams,getParams(requestParams)) || retry) {
-      setRetry(false);
-      updateRoute({
-        perPage,
-        ...getParamsForUpdate(queryParams)
-      });
-      getIngestBatchEvents({
-        perPage,
-        ...getParamsForUpdate(queryParams),
-        cursor: undefined
-      });
-    }
-  },[getIngestBatchEvents, getParams, perPage, queryParams, requestParams, updateRoute, retry]);
-
-  useEffect(() => {
-    if (!events && loadingStatus !== 'pending' && loadingStatus !== 'fail') {
-      getIngestBatchEvents({
-        perPage,
-        statuses: queryParams.batchStatus.length !== 0 ? queryParams.batchStatus : undefined,
-        batchIds: queryParams.batchIds.length !== 0 ? queryParams.batchIds : undefined,
-        cursor: page === 0 ? undefined : nextCursor
-      });
-    }
-  }, [perPage, nextCursor, getIngestBatchEvents, events, page, queryParams.batchStatus, queryParams.batchIds, loadingStatus]);
-
-  const renderBody = () => {
-    if (loadingStatus === 'pending' || retry) { return <Panel className={styles.LoadingPanel}><Loading/></Panel>; }
-    if (loadingStatus === 'fail') {
-      return <Panel
-        className={styles.ErrorPanel}
-        accent='red'
-        title='Something went wrong' actions={[{ content: 'Retry', onClick: () => setRetry(true) }]}/>;
-    }
-    if (events) {
-      return events.length > 0
-        ? <TableCollection columns={columns} rows={events} getRowData={formatRow} updateQueryString={false} />
-        : <Panel title="No Data Found!"></Panel>;
-    }
-  };
+  }, [updateRoute, filters, perPage]);
 
   return (
     <Page title="Signals Integration">
       <p>Review the health of your Signals integration.</p>
-
       <IntegrationPageFilter
-        key={`${queryParams.batchIds.length}${queryParams.batchStatus.length}`}
         disabled={loadingStatus === 'pending'}
-        onChange={handleFilterParams}
-        initialValues={queryParams}
+        initialValues={filters}
+        onInit={(nextFilters) => {
+          setFilters(nextFilters);
+          setPage(0);
+          getData({ ...nextFilters, page: 0 });
+        }}
+        onChange={(nextFilters) => {
+          setFilters(nextFilters);
+          setPage(0);
+          getData({ ...nextFilters, page: 0 });
+        }}
       />
-      {renderBody()}
+      <IntegrationCollection
+        events={events}
+        loadingStatus={loadingStatus}
+        onRetry={() => { getData(); }}
+      />
       <CursorPaging
-        key={page}
         currentPage={page + 1}
-        handlePageChange={onChangePage}
+        handlePageChange={(nextPage) => {
+          setPage(nextPage - 1);
+
+          if (!eventsByPage[nextPage - 1]) {
+            getData({ page: nextPage - 1 });
+          }
+        }}
         previousDisabled={page === 0}
         nextDisabled={totalCount <= perPage * (page + 1)}
-        handleFirstPage={onFirstPage}
+        handleFirstPage={() => { setPage(0); }}
         perPage={perPage}
         totalCount={totalCount}
       />
       <div className={styles.PerPageContainer}>
         <PerPageButtons
-          onPerPageChange={onChangePageSize}
+          onPerPageChange={(nextPageSize) => {
+            setPage(0);
+            setPerPage(nextPageSize);
+            getData({ page: 0, perPage: nextPageSize });
+          }}
           perPage={perPage}
           totalCount={totalCount}
         />

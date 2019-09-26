@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Grid, Panel, Select, TextField } from '@sparkpost/matchbox';
 import PropTypes from 'prop-types';
 import { onEnter } from 'src/helpers/keyEvents';
@@ -6,11 +6,11 @@ import { stringToArray } from 'src/helpers/string';
 import { batchStatusOptions } from '../constants/integration';
 
 const placeholder = {
-  label: 'Batch Status',
+  label: 'All batch statuses',
   value: ''
 };
 
-const IntegrationPageFilter = ({ disabled, initialValues = {}, onChange }) => {
+const IntegrationPageFilter = ({ disabled, initialValues = {}, onChange, onInit }) => {
   const [batchStatus, setBatchStatus] = useState(() => {
     // Ignore initial batch status when ids are provided
     // note, our API only handles one filter at a time giving preference to batch ids
@@ -25,8 +25,13 @@ const IntegrationPageFilter = ({ disabled, initialValues = {}, onChange }) => {
 
   const handleFieldChange = useCallback(() => {
     const nextBatchIds = stringToArray(batchIds);
+    setBatchStatus(placeholder.value);
     onChange({ batchIds: nextBatchIds, batchStatus: placeholder.value });
   }, [batchIds, onChange]);
+
+  useEffect(() => {
+    onInit({ batchIds: stringToArray(batchIds), batchStatus });
+  }, []);
 
   return (
     <Panel sectioned>
@@ -53,7 +58,6 @@ const IntegrationPageFilter = ({ disabled, initialValues = {}, onChange }) => {
             onKeyPress={onEnter(handleFieldChange)}
             onChange={(event) => {
               setBatchIds(event.currentTarget.value);
-              setBatchStatus(placeholder.value);
             }}
             value={batchIds}
           />
