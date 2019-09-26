@@ -14,13 +14,20 @@ exports[`Page: Single Inbox Placement Test handles errors 1`] = `
 
 exports[`Page: Single Inbox Placement Test renders page correctly with defaults 1`] = `
 <Page
+  breadcrumbAction={
+    Object {
+      "content": "All Inbox Placement Tests",
+      "onClick": [Function],
+    }
+  }
   empty={Object {}}
   primaryArea={
     <StopTest
       onStop={[Function]}
     />
   }
-  title="Inbox Placement | Results"
+  subtitle="Results"
+  title="Inbox Placement"
 >
   <Tabs
     color="orange"

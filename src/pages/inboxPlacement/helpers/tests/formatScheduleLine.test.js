@@ -24,13 +24,13 @@ describe('Promo Code async validator', () => {
   it('should format stopped test', () => {
     status = 'stopped';
     end_time = '2019-08-09T18:30:00-04:00';
-    expect(formatLine(status, start_time, end_time)).toEqual('Sent Aug 09, 2019 at 12:30pm and stopped at Aug 09, 2019 at 6:30pm');
+    expect(formatLine(status, start_time, end_time)).toEqual('Sent Aug 09, 2019 at 12:30pm and Stopped Aug 09, 2019 at 6:30pm');
   });
 
   it('should format completed test', () => {
     status = 'completed';
     end_time = '2019-08-09T20:30:00-04:00';
-    expect(formatLine(status, start_time, end_time)).toEqual('Sent Aug 09, 2019 at 12:30pm and completed at Aug 09, 2019 at 8:30pm');
+    expect(formatLine(status, start_time, end_time)).toEqual('Sent Aug 09, 2019 at 12:30pm and Completed Aug 09, 2019 at 8:30pm');
   });
 
   it('handle error state gracefully where status is unknown', () => {

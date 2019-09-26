@@ -6,7 +6,6 @@ exports[`Component: InfoBlock renders correctly 1`] = `
     className="InfoLabel"
   >
     Foo
-    :
   </span>
   <br />
   <span

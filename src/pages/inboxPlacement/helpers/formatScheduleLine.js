@@ -13,10 +13,10 @@ export default function formatScheduleLine(status, start_time, end_time) {
       return `Sent ${formatted_start_time} and ${getHoursRemaining(start_time)} hours remaining on test`;
     }
     case STATUS.STOPPED: {
-      return `Sent ${formatted_start_time} and stopped at ${formatDateTime(end_time)}`;
+      return `Sent ${formatted_start_time} and Stopped ${formatDateTime(end_time)}`;
     }
     case STATUS.COMPLETED: {
-      return `Sent ${formatted_start_time} and completed at ${formatDateTime(end_time)}`;
+      return `Sent ${formatted_start_time} and Completed ${formatDateTime(end_time)}`;
     }
     default: {
       return `Sent ${formatted_start_time} and test status unknown`;

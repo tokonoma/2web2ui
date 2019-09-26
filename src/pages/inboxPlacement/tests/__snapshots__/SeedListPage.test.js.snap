@@ -21,6 +21,7 @@ exports[`Page: SeedList tests render include download csv button with correct fo
       },
     ]
   }
+  filename="sparkpost-seedlist.csv"
   saveCsv={true}
 />
 `;
@@ -34,7 +35,8 @@ exports[`Page: SeedList tests renders page correctly with defaults 1`] = `
     }
   }
   empty={Object {}}
-  title="Inbox Placement | Start a Test"
+  subtitle="Start a Test"
+  title="Inbox Placement"
 >
   <Panel>
     <Panel.Section>
@@ -60,13 +62,13 @@ exports[`Page: SeedList tests renders page correctly with defaults 1`] = `
           className="Directions"
         >
           Next, set up your campaign. Make sure you are sending to the full list of seed email addresses. For best results, set the 
-          <strong>
+          <code>
             \`X-SP-Inbox-Placement\`
-          </strong>
+          </code>
            header with a unique value such as 
-          <strong>
+          <code>
             "my-first-test"
-          </strong>
+          </code>
           . If you don't, you may run into issues if your have more than one test running with the same subject line.
         </p>
         <p>
@@ -88,6 +90,15 @@ exports[`Page: SeedList tests renders page correctly with defaults 1`] = `
         value=""
       />
       <div>
+        <span
+          className="CopyButton"
+        >
+          <CopyToClipboard
+            label="Copy List"
+            primary={true}
+            value=""
+          />
+        </span>
         <SaveCSVButton
           caption={
             <span>
@@ -96,16 +107,9 @@ exports[`Page: SeedList tests renders page correctly with defaults 1`] = `
             </span>
           }
           data={Array []}
+          filename="sparkpost-seedlist.csv"
           saveCsv={true}
         />
-        <span
-          className="CopyButton"
-        >
-          <CopyToClipboard
-            label="Copy List"
-            value=""
-          />
-        </span>
       </div>
     </Panel.Section>
   </Panel>

@@ -4,7 +4,7 @@ exports[`Component: StopTest renders button if test is running 1`] = `
 <Button
   onClick={[Function]}
   primary={true}
-  size="default"
+  size="large"
 >
   Stop Test
 </Button>

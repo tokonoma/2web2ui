@@ -39,8 +39,7 @@
 .TestName {
   display: flex;
   padding: 0 0 0 1.3rem;
-  margin: 0.2rem 0 0 0;
-  font-size: font-size(200);
+  font-size: font-size(300);
 
   .Divider {
     margin: 0 0.5rem 0 0.5rem;
@@ -50,12 +49,11 @@
 .TestSchedule {
   display: flex;
   padding: 0 0 0 1.2rem;
-  margin: 0.2rem 0 0 0;
-  font-size: font-size(200);
+  font-size: font-size(300);
 }
 
 .ScheduleIcon {
-  padding: 0 0.2rem 0 0;
+  padding: 0 0.2rem 2px 0;
 }
 
 .TooltipWrapper {
@@ -64,7 +62,7 @@
 
 .ColumnHeader {
   margin-bottom: 0;
-  font-size: font-size(200);
+  font-size: font-size(300);
   padding: 0.4rem 0 0.1rem 0;
 }
 
