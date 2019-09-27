@@ -48,14 +48,16 @@ export const ChangePlanForm = ({
         const planVerified = plan.find((x) => x.code === requestParams.code);
         if (planVerified) {
           selectPlan(planVerified);
-          verifyPromoCode({
-            promoCode: requestParams.promo,
-            billingId: planVerified.billingId,
-            meta: {
+          if (requestParams.promo) {
+            verifyPromoCode({
               promoCode: requestParams.promo,
-              showErrorAlert: false
-            }
-          });
+              billingId: planVerified.billingId,
+              meta: {
+                promoCode: requestParams.promo,
+                showErrorAlert: false
+              }
+            });
+          }
         }
       });
     }
