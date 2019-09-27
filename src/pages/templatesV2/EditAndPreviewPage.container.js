@@ -17,7 +17,12 @@ import {
   selectDraftTemplateById,
   selectDraftTemplatePreview,
   selectPreviewLineErrors,
+<<<<<<< HEAD
   selectPublishedTemplateById
+=======
+  selectPublishedTemplate,
+  selectTemplateTestData
+>>>>>>> TR-1374-lemmon-flavor - Incorporate templates actions
 } from 'src/selectors/templates';
 import { EditorContextProvider } from './context/EditorContext';
 import EditAndPreviewPage from './EditAndPreviewPage';
@@ -50,7 +55,8 @@ const mapStateToProps = (state, props) => {
     isDraftUpdating: Boolean(state.templates.updating),
     isDraftPublishing: Boolean(state.templates.publishPending),
     preview: selectDraftTemplatePreview(state, id, {}),
-    previewLineErrors: selectPreviewLineErrors(state)
+    previewLineErrors: selectPreviewLineErrors(state),
+    templateTestData: selectTemplateTestData(state)
   };
 };
 
@@ -65,7 +71,9 @@ const mapDispatchToProps = {
   listDomains,
   listSubaccounts,
   sendPreview,
-  showAlert
+  showAlert,
+  getTestData,
+  setTestData
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditAndPreviewPageContainer);
