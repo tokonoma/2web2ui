@@ -41,5 +41,15 @@ describe('RouterContext', () => {
 
       expect(wrapper.prop('value')).toHaveProperty('requestParams', { id: '123', query: 'abc' });
     });
+
+    it('updates query string', () => {
+      const historyPush = jest.fn();
+      const wrapper = subject({ ...sampleProps, history: { push: historyPush }});
+
+      wrapper.prop('value').updateRoute({ fruit: 'apple', fruits: ['apple', 'orange']});
+
+      expect(historyPush)
+        .toHaveBeenCalledWith('/example/123?fruit=apple&fruits=apple&fruits=orange');
+    });
   });
 });

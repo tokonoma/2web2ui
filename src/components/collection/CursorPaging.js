@@ -7,7 +7,8 @@ export const CursorPaging = ({ currentPage, handlePageChange, previousDisabled, 
   //previousDisabled and nextDisabled are boolean values.
 
   <div className={styles.PageButtons}>
-    <Button className = {styles.RewindButton}
+    <Button className={styles.RewindButton}
+      disabled={currentPage === 1}
       key='rewind'
       onClick={handleFirstPage}
     >

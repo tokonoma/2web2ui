@@ -1,4 +1,4 @@
-import React, { createContext, useMemo } from 'react';
+import React, { createContext, useMemo, useCallback } from 'react';
 import { withRouter } from 'react-router';
 import qs from 'qs';
 
@@ -15,8 +15,13 @@ export const ProviderComponent = ({ children, ...routerProps }) => {
     }
   }), [routerProps]);
 
+  const updateRoute = useCallback((newParams) => {
+    const queryString = qs.stringify(newParams, { arrayFormat: 'repeat' });
+    routerProps.history.push(`${routerProps.location.pathname}?${queryString}`);
+  },[routerProps.history, routerProps.location.pathname]);
+
   return (
-    <RouterContext.Provider value={value}>
+    <RouterContext.Provider value={{ ...value, updateRoute }}>
       {children}
     </RouterContext.Provider>
   );

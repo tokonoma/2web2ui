@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Engagement Report Reducer when failed to get ingest batch events data 1`] = `
+Object {
+  "eventsByPage": Array [],
+  "loadingStatus": "fail",
+  "totalCount": 0,
+}
+`;
+
+exports[`Engagement Report Reducer when pending to get ingest batch events data with cursor 1`] = `
+Object {
+  "eventsByPage": Array [],
+  "loadingStatus": "pending",
+  "totalCount": 0,
+}
+`;
+
+exports[`Engagement Report Reducer when pending to get ingest batch events data with no cursor 1`] = `
+Object {
+  "eventsByPage": Array [],
+  "loadingStatus": "pending",
+  "nextCursor": undefined,
+  "totalCount": 0,
+}
+`;
+
+exports[`Engagement Report Reducer when succeeds to get ingest batch events data 1`] = `
+Object {
+  "eventsByPage": Array [
+    Array [
+      Object {
+        "batch_id": "8c4b19fb-07a2-42cb-84f7-3ab09a8049e0",
+        "error_type": "validation",
+        "expiration_timestamp": "2019-09-29T00:00:00.000Z",
+        "number_duplicates": 0,
+        "number_failed": 1,
+        "number_succeeded": 1,
+        "timestamp": "2019-09-18T20:09:38.000Z",
+        "type": "error",
+      },
+    ],
+  ],
+  "loadingStatus": "success",
+  "nextCursor": "MTU2ODc0MzY1NTAwMCw1NTNkMz",
+  "totalCount": 2,
+}
+`;

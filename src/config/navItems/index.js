@@ -128,6 +128,11 @@ export default [
         to: '/account/smtp'
       },
       {
+        label: 'Signals Integration',
+        to: '/signals/integration',
+        divider: true
+      },
+      {
         label: 'Sending Domains',
         to: '/account/sending-domains',
         divider: true

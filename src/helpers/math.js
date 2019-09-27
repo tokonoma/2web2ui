@@ -1,3 +1,5 @@
+import { coalesce } from './units';
+
 /**
  * Safely divides two numbers, returning 0 for NaN or infinite values
  * @param numerator
@@ -42,3 +44,5 @@ export function lerp(min, max, n) {
 
   return value;
 }
+
+export const sum = (...numbers) => numbers.reduce((acc, number) => acc + coalesce(number, 0), 0);
