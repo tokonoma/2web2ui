@@ -5,6 +5,7 @@ import useEditorContent from '../hooks/useEditorContent';
 import useEditorNavigation from '../hooks/useEditorNavigation';
 import useEditorPreview from '../hooks/useEditorPreview';
 import useEditorTabs from '../hooks/useEditorTabs';
+import useEditorTestData from '../hooks/useEditorTestData';
 
 const EditorContext = createContext();
 
@@ -18,8 +19,9 @@ export const EditorContextProvider = ({ children, value: { getDraft, getPublishe
     () => value,
     useEditorContent,
     useEditorNavigation,
-    useEditorPreview, // must follow useEditorContent
-    useEditorAnnotations, // must follow useEditorContent
+    useEditorTestData,
+    useEditorPreview, // must follow `useEditorContent` and `useEditorTestData`
+    useEditorAnnotations, // must follow `useEditorContent` and `useEditorTestData`
     useEditorTabs
   );
 
