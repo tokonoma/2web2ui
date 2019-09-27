@@ -126,7 +126,7 @@ describe('PoolForm tests', () => {
         }]
       });
 
-      expect(wrapper.find(component).prop('options').includes({ label: 'Shared Pool', value: 'shared pool' })).toBe(false);
+      expect(wrapper.find(component).prop('options').some((option) => option.label === 'Shared Pool' && option.value === 'shared pool')).toBe(false);
     });
 
     it('shows placeholder pool in overflow pool list ', () => {
