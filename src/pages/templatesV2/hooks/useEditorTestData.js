@@ -15,14 +15,22 @@ const useEditorTestData = (props) => {
       id: draft && draft.id,
       mode: isPublishedMode ? 'published' : 'draft'
     });
-  });
+  }, [getTestData, draft, isPublishedMode]);
 
-  useEffect(() => {
-    setTestData(templateTestData);
-  }, [templateTestData]);
+  const getFormattedTestData = () => {
+    try {
+      return JSON.parse(testData);
+    } catch (err) {
+      return {};
+    }
+  };
+
+  // useEffect(() => {
+  //   setTestData(templateTestData);
+  // }, [templateTestData]);
 
   return {
-    rawTestData: JSON.parse(testData) || {},
+    formattedTestData: getFormattedTestData(),
     testData,
     setTestData
   };
