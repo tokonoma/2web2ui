@@ -10,13 +10,13 @@ import { verifyPromoCode, clearPromoCode } from 'src/actions/billing';
 //Actions
 import { getBillingInfo, getPlans } from 'src/actions/account';
 import { getBillingCountries } from 'src/actions/billing';
-
 //Selectors
 import { selectTieredVisiblePlans, currentPlanSelector, getPromoCodeObject } from 'src/selectors/accountBillingInfo';
 import { changePlanInitialValues } from 'src/selectors/accountBillingForms';
+import useRouter from 'src/hooks/useRouter';
+import _ from 'lodash';
 
 const FORMNAME = 'changePlan';
-
 export const ChangePlanForm = ({
   //Redux Props
   plans,
@@ -32,6 +32,7 @@ export const ChangePlanForm = ({
   currentPlan
 }) => {
   const [selectedPlan, selectPlan] = useState(null);
+  const { requestParams } = useRouter();
   // const [useSavedCC, setUseSavedCC] = useState(null);
   useEffect(() => { getBillingCountries(); }, [getBillingCountries]);
   useEffect(() => { getBillingInfo(); }, [getBillingInfo]);
@@ -41,8 +42,24 @@ export const ChangePlanForm = ({
       clearPromoCode();
     }
   },[clearPromoCode, selectedPlan]);
-  //TODO: Implement in AC-986
-  // useEffect(() => { console.log(selectedPlan, promoCode)}, [verifyPromoCode, promoCode, selectedPlan]);
+  useEffect(() => {
+    if (requestParams.code) {
+      _.forEach(plans, (plan) => {
+        const planVerified = plan.find((x) => x.code === requestParams.code);
+        if (planVerified) {
+          selectPlan(planVerified);
+          verifyPromoCode({
+            promoCode: requestParams.promo,
+            billingId: planVerified.billingId,
+            meta: {
+              promoCode: requestParams.promo,
+              showErrorAlert: false
+            }
+          });
+        }
+      });
+    }
+  },[plans, requestParams.code, requestParams.promo, verifyPromoCode]);
 
   const applyPromoCode = (promoCode) => {
     verifyPromoCode({ promoCode , billingId: selectedPlan.billingId, meta: { promoCode, showErrorAlert: false }});
