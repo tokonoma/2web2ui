@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import _ from 'lodash';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { withRouter } from 'react-router-dom';
@@ -19,7 +18,7 @@ export class PoolForm extends Component {
   getOverflowPoolOptions = () => {
     const { pools, pool } = this.props;
 
-    const overflowPools = _.compact(pools.map((currentPool) => {
+    const overflowPools = (pools.map((currentPool) => {
       if (currentPool.auto_warmup_overflow_pool || currentPool.id === pool.id) {
         return null;
       }
@@ -28,7 +27,7 @@ export class PoolForm extends Component {
         label: `${currentPool.name} (${currentPool.id})`,
         value: currentPool.id
       };
-    }));
+    })).filter(Boolean); // See: https://stackoverflow.com/a/32906951
 
     // If the pool has available IPs with auto warmup enabled,
     // render the 'Shared Pool' option in the `<select/>`
