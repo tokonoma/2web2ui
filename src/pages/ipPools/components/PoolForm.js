@@ -32,17 +32,9 @@ export class PoolForm extends Component {
 
     // If the pool has available IPs with auto warmup enabled,
     // render the 'Shared Pool' option in the `<select/>`
-    const getPoolsWithAutoWarmup = () => pools.filter((currentPool) => {
-      if (currentPool.ips) {
-        const ipsWithAutoWarmup = currentPool.ips.filter((ip) => ip.auto_warmup_enabled);
+    const hasPoolsWithAutoWarmup = pools.some(({ ips }) => ips.some((ip) => ip.auto_warmup_enabled));
 
-        if (ipsWithAutoWarmup.length > 0) {
-          return currentPool;
-        }
-      }
-    });
-
-    if (getPoolsWithAutoWarmup().length) {
+    if (hasPoolsWithAutoWarmup) {
       overflowPools.unshift({ label: 'Shared Pool', value: 'shared pool' });
     }
 
