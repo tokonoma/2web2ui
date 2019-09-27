@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Page } from '@sparkpost/matchbox';
 import { CursorPaging, PerPageButtons } from 'src/components/collection';
 import { DEFAULT_PER_PAGE_BUTTONS } from 'src/constants';
@@ -68,16 +68,18 @@ const IntegrationPage = ({ getIngestBatchEvents, eventsByPage, loadingStatus, ne
       />
       <CursorPaging
         currentPage={page + 1}
-        handlePageChange={(nextPage) => {
-          setPage(nextPage - 1);
+        handleFirstPage={() => { setPage(0); }}
+        handlePageChange={(nextPageNumber) => {
+          const nextPage = nextPageNumber - 1;
 
-          if (!eventsByPage[nextPage - 1]) {
-            getData({ page: nextPage - 1 });
+          setPage(nextPage);
+
+          if (!eventsByPage[nextPage]) {
+            getData({ page: nextPage });
           }
         }}
-        previousDisabled={page === 0}
         nextDisabled={totalCount <= perPage * (page + 1)}
-        handleFirstPage={() => { setPage(0); }}
+        previousDisabled={page === 0}
         perPage={perPage}
         totalCount={totalCount}
       />
