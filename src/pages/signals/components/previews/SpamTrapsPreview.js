@@ -29,6 +29,7 @@ export class SpamTrapsPreview extends Component {
       <BarChart
         height={170}
         disableHover
+        isLink
         margin={{ top: 12, left: 12, right: 0, bottom: 12 }}
         gap={gap}
         timeSeries={data}
