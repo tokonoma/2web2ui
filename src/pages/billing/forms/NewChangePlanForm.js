@@ -31,8 +31,9 @@ export const ChangePlanForm = ({
   // },
   currentPlan
 }) => {
-  const [selectedPlan, selectPlan] = useState(null);
-  const { requestParams } = useRouter();
+  const { requestParams: { code, promo } = {}, updateRoute } = useRouter();
+  const allPlans = _.reduce(plans, (result, value) => [...result, ...value], []);
+  const [selectedPlan, selectPlan] = useState(allPlans.find((x) => x.code === code) || null);
   // const [useSavedCC, setUseSavedCC] = useState(null);
   useEffect(() => { getBillingCountries(); }, [getBillingCountries]);
   useEffect(() => { getBillingInfo(); }, [getBillingInfo]);
@@ -43,25 +44,25 @@ export const ChangePlanForm = ({
     }
   },[clearPromoCode, selectedPlan]);
   useEffect(() => {
-    if (requestParams.code) {
-      const allPlans = _.reduce(plans, (result, value) => [...result, ...value], []);
-      const planVerified = allPlans.find((x) => x.code === requestParams.code);
-      if (planVerified) {
-        selectPlan(planVerified);
-        if (requestParams.promo) {
-          verifyPromoCode({
-            promoCode: requestParams.promo,
-            billingId: planVerified.billingId,
-            meta: {
-              promoCode: requestParams.promo,
-              showErrorAlert: false
-            }
-          });
+    if (promo && selectedPlan) {
+      const { billingId } = selectedPlan;
+      verifyPromoCode({
+        promoCode: promo,
+        billingId: billingId,
+        meta: {
+          promoCode: promo,
+          showErrorAlert: false
         }
-      }
+      });
     }
-  },[plans, requestParams.code, requestParams.promo, verifyPromoCode]);
-
+  },[promo, selectedPlan, verifyPromoCode]);
+  useEffect(() => {
+    if (!selectedPlan) { //clears out requestParams when user changes plan
+      updateRoute({
+        undefined
+      });
+    }
+  },[selectedPlan, updateRoute]);
   const applyPromoCode = (promoCode) => {
     verifyPromoCode({ promoCode , billingId: selectedPlan.billingId, meta: { promoCode, showErrorAlert: false }});
   };
