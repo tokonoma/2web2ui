@@ -140,7 +140,7 @@ export function publish(data, subaccountId) {
         meta: {
           method: 'PUT',
           url: `/v1/templates/${id}`,
-          data: { published: true },
+          data: { ...data, published: true },
           headers: setSubaccountHeader(subaccountId)
         }
       }));
