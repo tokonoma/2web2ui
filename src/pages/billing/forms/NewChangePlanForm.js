@@ -7,14 +7,13 @@ import qs from 'query-string';
 import PlanSelectSection, { SelectedPlan } from '../components/PlanSelect';
 import CurrentPlanSection from '../components/CurrentPlanSection';
 import { verifyPromoCode, clearPromoCode } from 'src/actions/billing';
+import useRouter from 'src/hooks/useRouter';
 //Actions
 import { getBillingInfo, getPlans } from 'src/actions/account';
 import { getBillingCountries } from 'src/actions/billing';
 //Selectors
 import { selectTieredVisiblePlans, currentPlanSelector, getPromoCodeObject } from 'src/selectors/accountBillingInfo';
 import { changePlanInitialValues } from 'src/selectors/accountBillingForms';
-import useRouter from 'src/hooks/useRouter';
-import _ from 'lodash';
 
 const FORMNAME = 'changePlan';
 export const ChangePlanForm = ({
@@ -32,16 +31,13 @@ export const ChangePlanForm = ({
   currentPlan
 }) => {
   const { requestParams: { code, promo } = {}, updateRoute } = useRouter();
-  const allPlans = _.reduce(plans, (result, value) => [...result, ...value], []);
+  const allPlans = Object.entries(plans).reduce((acc, curr) => [...curr[1], ...acc],[]);
   const [selectedPlan, selectPlan] = useState(allPlans.find((x) => x.code === code) || null);
   // const [useSavedCC, setUseSavedCC] = useState(null);
   const applyPromoCode = useCallback((promoCode) => {
     const { billingId } = selectedPlan;
     verifyPromoCode({ promoCode , billingId, meta: { promoCode, showErrorAlert: false }});
   },[selectedPlan, verifyPromoCode]);
-  const onSelect = (plan) => {
-    selectPlan(plan);
-  };
   useEffect(() => { getBillingCountries(); }, [getBillingCountries]);
   useEffect(() => { getBillingInfo(); }, [getBillingInfo]);
   useEffect(() => { getPlans(); }, [getPlans]);
@@ -69,7 +65,7 @@ export const ChangePlanForm = ({
             selectedPlan
               ? <SelectedPlan
                 plan={selectedPlan}
-                onChange={onSelect}
+                onChange={selectPlan}
                 promoCodeObj = {promoCodeObj}
                 handlePromoCode = {
                   {
@@ -79,7 +75,7 @@ export const ChangePlanForm = ({
                 }
               />
               : <PlanSelectSection
-                onSelect={onSelect}
+                onSelect={selectPlan}
                 plans={plans}
                 currentPlan={currentPlan}
               />
