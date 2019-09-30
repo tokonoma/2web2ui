@@ -25,7 +25,7 @@ export class WithDateSelection extends Component {
     const { selectedDate } = this.state;
 
     const dataSetChanged = prevProps.data !== data;
-    const selectedDataByDay = _.find(data, ['date', selectedDate]);
+    const selectedDataByDay = data.find(({ date }) => date === selectedDate);
 
 
     if (dataSetChanged && !selectedDataByDay) {

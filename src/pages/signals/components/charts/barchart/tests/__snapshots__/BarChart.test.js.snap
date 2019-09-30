@@ -13,6 +13,7 @@ exports[`BarChart Component renders a normal bar chart correctly 1`] = `
     <ComposedChart
       barCategoryGap={1}
       barGap={4}
+      cursor="default"
       data={
         Array [
           Object {

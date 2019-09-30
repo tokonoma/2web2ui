@@ -86,14 +86,14 @@ describe('BarChart Component', () => {
     expect(wrapper.find({ dataKey: key }).at(0).props().shape(payload).props.opacity).toEqual(1);
   });
 
-  it('renders a pointer cursor on the entire chart if disablehover is true', () => {
-    wrapper.setProps({ disableHover: true });
+  it('renders a pointer cursor on the entire chart if isLink is true', () => {
+    wrapper.setProps({ isLink: true });
     expect(wrapper.find('ComposedChart')).toHaveProp('cursor', 'pointer');
   });
 
-  it('renders a pointer cursor on only the bars if disablehover is false', () => {
-    wrapper.setProps({ disableHover: false });
-    expect(wrapper.find('ComposedChart')).toHaveProp('cursor', undefined);
+  it('renders a pointer cursor on only the bars if isLink is false', () => {
+    wrapper.setProps({ isLink: false });
+    expect(wrapper.find('ComposedChart')).toHaveProp('cursor', 'default');
     expect(wrapper.find('Bar').at(0)).toHaveProp('cursor', 'pointer');
 
   });

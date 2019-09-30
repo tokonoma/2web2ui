@@ -30,7 +30,7 @@ class BarChart extends Component {
       }
       return isActiveDate ? {opacity : 1} : {opacity : .5}
     },
-    (key,isActiveDate,selectedFill) =>`${key}${isActiveDate}${selectedFill}`
+    (key, isActiveDate, selectedFill) =>`${key}${isActiveDate}${selectedFill}`
   );
 
   renderBar = ({ key, selected, hovered, fill, activeFill }) => (
@@ -46,7 +46,7 @@ class BarChart extends Component {
       activeFill={activeFill}
       cursor='pointer'
       shape={(props) => {
-        const selectedFill = (key === 'health_score') ? healthScoreThresholds[props.ranking].barColor : activeFill;
+        const selectedFill = (key === 'health_score' && props.ranking) ? healthScoreThresholds[props.ranking].barColor : activeFill;
         const isActiveDate= (props.date === hovered) || (props.date === selected);
         const selectedStyle = selected ? this.getSelectedStyle(key, isActiveDate, selectedFill) : {};
 
@@ -66,7 +66,7 @@ class BarChart extends Component {
   };
 
   renderBackgrounds = () => {
-    const { onClick, onMouseOver, ykey } = this.props;
+    const { onClick, onMouseOver } = this.props;
 
     return (
       <Bar
@@ -86,7 +86,24 @@ class BarChart extends Component {
   }
 
   render() {
-    const { cartesianGridProps, gap, height, disableHover, margin, timeSeries, tooltipContent, tooltipWidth, width, xAxisRefLines, yAxisRefLines, xKey, xAxisProps, yDomain, yAxisProps } = this.props;
+    const {
+      cartesianGridProps,
+      disableHover,
+      gap,
+      height,
+      isLink,
+      margin,
+      timeSeries,
+      tooltipContent,
+      tooltipWidth,
+      width,
+      xAxisRefLines,
+      yAxisRefLines,
+      xKey,
+      xAxisProps,
+      yDomain,
+      yAxisProps,
+     } = this.props;
 
     return (
       <div className='LiftTooltip' onMouseOut={this.props.onMouseOut}>
@@ -95,7 +112,7 @@ class BarChart extends Component {
             barCategoryGap={gap}
             data={timeSeries}
             margin={margin}
-            cursor={(disableHover) ? 'pointer' : undefined}
+            cursor={(isLink) ? 'pointer' : 'default'}
           >
             {this.renderBackgrounds()}
             <CartesianGrid
@@ -165,8 +182,8 @@ class BarChart extends Component {
 }
 
 BarChart.propTypes = {
-  fill: PropTypes.string,
   activeFill: PropTypes.string,
+  fill: PropTypes.string,
   gap: PropTypes.number,
   onClick: PropTypes.func,
   tooltipContent: PropTypes.func,
@@ -175,12 +192,12 @@ BarChart.propTypes = {
 };
 
 BarChart.defaultProps = {
-  fill: '#B3ECEF',
   activeFill: '#22838A',
+  fill: '#B3ECEF',
   gap: 1,
   height: 250,
-  width: '99%',
   margin: { top: 12, left: 18, right: 0, bottom: 5 },
+  width: '99%',
   xAxisRefLines: [],
   yAxisRefLines: [],
   xKey: 'date',
