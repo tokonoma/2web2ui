@@ -28,7 +28,7 @@ const useEditorPreview = ({
         });
       });
     }
-  }, [getPreview, content, debounceAction, draft.id, draft.subaccount_id, formattedTestData.substitution_data]);
+  }, [getPreview, content, debounceAction, draft.id, draft.subaccount_id, formattedTestData.substitution_data, formattedTestData]);
 
   // clean-up debounced state when unmounted
   useEffect(() => () => { debounceAction.cancel(); }, [debounceAction]);

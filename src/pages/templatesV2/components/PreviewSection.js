@@ -9,7 +9,12 @@ import PreviewContainer from './PreviewContainer';
 import styles from './PreviewSection.module.scss';
 
 const PreviewSection = () => {
-  const { currentTabKey, hasFailedToPreview, preview, previewLineErrors } = useEditorContext();
+  const {
+    currentTabKey,
+    hasFailedToPreview,
+    preview,
+    previewLineErrors
+  } = useEditorContext();
 
   // Must wrap text content in <p> to apply style and must be a string for injecting into iframe
   const content = currentTabKey === 'text'

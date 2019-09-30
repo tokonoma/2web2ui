@@ -30,7 +30,7 @@ const useEditorTestData = (props) => {
   // }, [templateTestData]);
 
   return {
-    formattedTestData: getFormattedTestData(),
+    formattedTestData: getFormattedTestData,
     testData,
     setTestData
   };

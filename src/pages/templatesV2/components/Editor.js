@@ -3,7 +3,7 @@ import AceEditor from 'react-ace';
 import useEditor from '../hooks/useEditor';
 import 'brace/ext/searchbox';
 import 'brace/mode/text';
-import 'brace/theme/chaos';
+import 'brace/theme/tomorrow_night_eighties';
 import styles from './Editor.module.scss';
 
 const Editor = ({
@@ -26,10 +26,10 @@ const Editor = ({
           ...editorProps,
           $blockScrolling: Infinity
         }}
-        fontSize={12}
+        fontSize={14}
         height="100%" // must set height on wrapper
         highlightActiveLine
-        // note, must global import modes
+        // note, must global import modes from https://www.npmjs.com/package/brace
         mode={mode}
         onLoad={setEditor}
         onValidate={setAnnotations}
@@ -42,7 +42,7 @@ const Editor = ({
         }}
         showPrintMargin={false}
         tabSize={2}
-        theme="chaos"
+        theme="tomorrow_night_eighties"
         // note, template endpoint allows null content, but Ace doesn't
         value={value === null ? '' : value}
         width="auto"
