@@ -30,14 +30,14 @@ class CopyToClipboard extends Component {
   }
 
   render() {
-    const { label = 'Copy' } = this.props;
+    const { label = 'Copy', primary } = this.props;
     const { copied } = this.state;
 
     const content = copied ? 'Copied to Clipboard' : 'Copy to Clipboard';
 
     return (
       <Tooltip dark content={content}>
-        <Button name="copy-field-button" onClick={this.handleCopy}>
+        <Button primary={primary} name="copy-field-button" onClick={this.handleCopy}>
           <ContentCopy size={14}/> {label}
         </Button>
       </Tooltip>
