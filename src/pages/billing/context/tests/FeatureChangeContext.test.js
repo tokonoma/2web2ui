@@ -4,20 +4,49 @@ import { FeatureChangeProvider } from '../FeatureChangeContext';
 
 const defaultProps = {
   plans: {
-    'plan-code': {
+    '100K-premier-0519': {
       product: 'messaging',
       plan: 'plan-code'
+    },
+    'sso-0519': {
+      product: 'sso',
+      plan: 'sso-0519'
+    },
+    'subaccounts-0519': {
+      product: 'subaccounts',
+      plan: 'subaccounts-0519',
+      limit: 15
+    },
+    'tfa-required-0519': {
+      product: 'tfa_required',
+      plan: 'tfa-required-0519'
     }
   },
   subscription: {
     products: [
-      { product: 'messaging' }
+      { product: 'messaging', plan: '100K-premier-0519' },
+      {
+        product: 'subaccounts',
+        plan: 'subaccounts-0519',
+        quantity: 10,
+        limit_override: 20
+      },
+      {
+        product: 'sso',
+        plan: 'sso-0519'
+      },
+      {
+        product: 'tfa_required',
+        plan: 'tfa-required-0519'
+      }
     ]
   },
   selectedBundle: {
-    isFree: false,
     plans: [
-      'plan-code'
+      '100K-premier-0519',
+      'sso-0519',
+      'tfa-required-0519',
+      'subaccounts-0519'
     ]
   },
   loading: false,
@@ -51,8 +80,14 @@ describe('FeatureChangeContext', () => {
   });
 
   it('should render acknowledgement for a change in auth', () => {
-    const wrapper = subject();
-    expect(wrapper.prop('value')).toEqual(expect.objectContaining({
-    }));
+    const wrapper = subject({
+      selectedBundle: {
+        plans: [
+          '100K-premier-0519',
+          'subaccounts-0519'
+        ]
+      }
+    });
+    expect(wrapper.prop('value')).toMatchSnapshot();
   });
 });
