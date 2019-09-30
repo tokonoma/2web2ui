@@ -85,18 +85,19 @@ export const FeatureChangeProvider = ({
             };
           }
           return resObject;
-        case 'subaccounts': {
-          const condition = () => Boolean(comparedPlan && quantity <= comparedPlan.limit);
-          if (actions.subaccounts || !condition()) {
-            resObject.subaccounts = {
-              label: 'Subaccounts',
-              description: `Subaccounts quantity needs to be updated. Have ${quantity} ${index}`,
-              condition,
-              action: <Button external to='/account/subaccounts'>Update Status</Button>
-            };
-          }
-          return resObject;
-        }
+        // TODO: Not implemented yet
+        // case 'subaccounts': {
+        //   const condition = () => Boolean(comparedPlan && quantity <= comparedPlan.limit);
+        //   if (actions.subaccounts || !condition()) {
+        //     resObject.subaccounts = {
+        //       label: 'Subaccounts',
+        //       description: `Subaccounts quantity needs to be updated. Have ${quantity} ${index}`,
+        //       condition,
+        //       action: <Button external to='/account/subaccounts'>Update Status</Button>
+        //     };
+        //   }
+        //   return resObject;
+        // }
         case 'messaging':
         default:
           return resObject;
