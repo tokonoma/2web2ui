@@ -64,6 +64,7 @@ export class HealthScorePage extends Component {
     const selectedWeights = _.get(_.find(data, ['date', selectedDate]), 'weights', []);
     const selectedWeightsAreEmpty = selectedWeights.every(({ weight }) => weight === null);
     const dataForSelectedWeight = data.map(({ date, weights }) => ({ date, ..._.find(weights, ['weight_type', selectedComponent]) }));
+    const selectedDataIsZero = dataForSelectedWeight.every(({ weight_value }) => weight_value <= 0);
 
     let panelContent;
 
@@ -162,6 +163,7 @@ export class HealthScorePage extends Component {
                       yAxisProps={{
                         tickFormatter: (tick) => `${roundToPlaces(tick * 100, 3)}%`
                       }}
+                      yDomain={selectedDataIsZero ? [0, 1] : [0, 'auto']}
                       xAxisProps={this.getXAxisProps()}
                     />
                   </Fragment>

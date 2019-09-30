@@ -322,6 +322,12 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
             }
           }
           yAxisRefLines={Array []}
+          yDomain={
+            Array [
+              0,
+              "auto",
+            ]
+          }
           yKey="weight_value"
           yRange={
             Array [
