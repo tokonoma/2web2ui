@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { Grid } from '@sparkpost/matchbox';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -35,9 +35,10 @@ export const ChangePlanForm = ({
   const allPlans = _.reduce(plans, (result, value) => [...result, ...value], []);
   const [selectedPlan, selectPlan] = useState(allPlans.find((x) => x.code === code) || null);
   // const [useSavedCC, setUseSavedCC] = useState(null);
-  const applyPromoCode = (promoCode) => {
-    verifyPromoCode({ promoCode , billingId: selectedPlan.billingId, meta: { promoCode, showErrorAlert: false }});
-  };
+  const applyPromoCode = useCallback((promoCode) => {
+    const { billingId } = selectedPlan;
+    verifyPromoCode({ promoCode , billingId, meta: { promoCode, showErrorAlert: false }});
+  },[selectedPlan, verifyPromoCode]);
   const onSelect = (plan) => {
     selectPlan(plan);
   };
