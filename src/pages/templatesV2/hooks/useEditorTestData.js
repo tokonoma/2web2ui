@@ -9,6 +9,14 @@ const useEditorTestData = (props) => {
   } = props;
   const [testData, setTestData] = useState(templateTestData);
 
+  const getParsedTestData = () => {
+    try {
+      return JSON.parse(testData);
+    } catch (err) {
+      return {};
+    }
+  };
+
   // Update the data store with data stored in `localStorage`
   useEffect(() => {
     getTestData({
@@ -17,20 +25,8 @@ const useEditorTestData = (props) => {
     }).then((res) => setTestData(JSON.stringify(res.payload, null, 1)));
   }, [getTestData, draft, isPublishedMode]);
 
-  const getFormattedTestData = () => {
-    try {
-      return JSON.parse(testData);
-    } catch (err) {
-      return {};
-    }
-  };
-
-  // useEffect(() => {
-  //   setTestData(templateTestData);
-  // }, [templateTestData]);
-
   return {
-    formattedTestData: getFormattedTestData,
+    getParsedTestData,
     testData,
     setTestData
   };
