@@ -2,8 +2,6 @@ import React from 'react';
 import { ChangePlanForm } from '../NewChangePlanForm';
 import { shallow, mount } from 'enzyme';
 import useRouter from 'src/hooks/useRouter';
-// import { verifyPromoCode } from 'src/actions/billing';
-// jest.mock('src/actions/billing');
 jest.mock('src/hooks/useRouter');
 
 describe('Change Plan Form', () => {
@@ -50,7 +48,7 @@ describe('Change Plan Form', () => {
     getBillingCountries: jest.fn(),
     getBillingInfo: jest.fn(),
     clearPromoCode: jest.fn(),
-    verifyPromoCode: jest.fn(() => ({ promoPending: false, promoError: false, selectedPromo: { promoCode: 'THXFISH2' }})),
+    verifyPromoCode: jest.fn(),
     applyPromoCode: jest.fn(),
     billing: {
       promoPending: false,
