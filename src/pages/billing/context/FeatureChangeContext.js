@@ -9,30 +9,33 @@ import SupportTicketLink from 'src/components/supportTicketLink/SupportTicketLin
 
 const FeatureChangeContext = createContext({});
 
-const FeatureChangeProvider = ({
+export const FeatureChangeProvider = ({
   children,
   plans,
   subscription,
-  getSubscription,
   selectedBundle,
-  loading
+  loading,
+  getSubscription
 }) => {
 
+  const [ actions, updateActions ] = useState({});
   const [index, setIndex] = useState(0);//TODO: Remove
+  //State to keep track of features that can't directly be addressed, and are acknowledged by user
+  const [ confirmations, setConfirm ] = useState({});
+  const onConfirm = (key) => { setConfirm({ ...confirmations, [key]: true }); };
 
-  //Rechecks conditions on re-entering tab. Only initializes once
 
-  //TODO: Remove useCallback to remove mock
+  //TODO: Remove index
   const checkConditions = useCallback(() => { getSubscription(index); setIndex(index + 1); }, [index, getSubscription]);
+  //Rechecks conditions on re-entering tab. Only initializes once
   useEffect(() => {
     window.addEventListener('focus', checkConditions);
     return () => {
       window.removeEventListener('focus', checkConditions);
     };
-  }, [checkConditions, index]);
+  }, [checkConditions, index]); //TODO: Remove index
 
-  const [ actions, updateActions ] = useState({});
-
+  //Keys the selected plan by product to make for easier comparison
   const selectedPlansByProduct = useMemo(() => {
     const { plans: selectedPlans } = selectedBundle;
     return selectedPlans.reduce((res, planId) => {
@@ -44,7 +47,9 @@ const FeatureChangeProvider = ({
     }, {});
   }, [plans, selectedBundle]);
 
-  // //Used for finding the features that need to have a proper function
+  // Used for finding the features that need to have a proper function
+  // Inserts into actions if it's got a conflicting issue
+  // Updates if it was already in actions had conflicting issue
   const calculateDifferences = () => {
     const { products: currentProducts } = subscription;
     const diffObject = currentProducts.reduce((resObject, { product, plan, quantity, override }) => {
@@ -101,10 +106,6 @@ const FeatureChangeProvider = ({
   };
 
   useMemo(calculateDifferences, [subscription]);
-
-  //Confirmation state
-  const [ confirmations, setConfirm ] = useState({});
-  const onConfirm = (key) => { setConfirm({ ...confirmations, [key]: true }); };
 
   //Evaluates condition and generates action if condition exists
   const featuresWithActions = useMemo(() => (_.map(actions, ({ action, condition, ...rest }, key) => ({
