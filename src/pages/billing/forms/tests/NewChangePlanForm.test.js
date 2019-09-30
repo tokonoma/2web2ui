@@ -66,6 +66,7 @@ describe('Change Plan Form', () => {
   const subject = (routerState = {}, render = shallow) => {
     useRouter.mockReturnValue({
       requestParams: {},
+      updateRoute: () => {},
       ...routerState
     });
 
