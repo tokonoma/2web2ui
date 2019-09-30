@@ -51,6 +51,7 @@ describe('Change Plan Form', () => {
     getBillingInfo: jest.fn(),
     clearPromoCode: jest.fn(),
     verifyPromoCode: jest.fn(() => ({ promoPending: false, promoError: false, selectedPromo: { promoCode: 'THXFISH2' }})),
+    applyPromoCode: jest.fn(),
     billing: {
       promoPending: false,
       promoError: false,

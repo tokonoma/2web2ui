@@ -35,6 +35,12 @@ export const ChangePlanForm = ({
   const allPlans = _.reduce(plans, (result, value) => [...result, ...value], []);
   const [selectedPlan, selectPlan] = useState(allPlans.find((x) => x.code === code) || null);
   // const [useSavedCC, setUseSavedCC] = useState(null);
+  const applyPromoCode = (promoCode) => {
+    verifyPromoCode({ promoCode , billingId: selectedPlan.billingId, meta: { promoCode, showErrorAlert: false }});
+  };
+  const onSelect = (plan) => {
+    selectPlan(plan);
+  };
   useEffect(() => { getBillingCountries(); }, [getBillingCountries]);
   useEffect(() => { getBillingInfo(); }, [getBillingInfo]);
   useEffect(() => { getPlans(); }, [getPlans]);
@@ -45,30 +51,14 @@ export const ChangePlanForm = ({
   },[clearPromoCode, selectedPlan]);
   useEffect(() => {
     if (promo && selectedPlan) {
-      const { billingId } = selectedPlan;
-      verifyPromoCode({
-        promoCode: promo,
-        billingId: billingId,
-        meta: {
-          promoCode: promo,
-          showErrorAlert: false
-        }
-      });
+      applyPromoCode(promo);
     }
-  },[promo, selectedPlan, verifyPromoCode]);
+  },[applyPromoCode, promo, selectedPlan, verifyPromoCode]);
   useEffect(() => {
     if (!selectedPlan) { //clears out requestParams when user changes plan
-      updateRoute({
-        undefined
-      });
+      updateRoute({ undefined });
     }
   },[selectedPlan, updateRoute]);
-  const applyPromoCode = (promoCode) => {
-    verifyPromoCode({ promoCode , billingId: selectedPlan.billingId, meta: { promoCode, showErrorAlert: false }});
-  };
-  const onSelect = (plan) => {
-    selectPlan(plan);
-  };
 
   return (
     <form>
