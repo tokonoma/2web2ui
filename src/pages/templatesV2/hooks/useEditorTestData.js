@@ -14,7 +14,7 @@ const useEditorTestData = (props) => {
     getTestData({
       id: draft && draft.id,
       mode: isPublishedMode ? 'published' : 'draft'
-    });
+    }).then((res) => setTestData(JSON.stringify(res.payload, null, 1)));
   }, [getTestData, draft, isPublishedMode]);
 
   const getFormattedTestData = () => {
