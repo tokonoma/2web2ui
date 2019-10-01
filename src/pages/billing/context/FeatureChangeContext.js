@@ -6,6 +6,7 @@ import { Button } from '@sparkpost/matchbox';
 import { getSubscription } from 'src/actions/billing';
 import { selectPlansByKey } from 'src/selectors/accountBillingInfo';
 import SupportTicketLink from 'src/components/supportTicketLink/SupportTicketLink';
+import { pluralString } from 'src/helpers/string';
 
 const FeatureChangeContext = createContext({});
 
@@ -58,7 +59,7 @@ export const FeatureChangeProvider = ({
     }
 
     const { products: currentProducts } = subscription;
-    const diffObject = currentProducts.reduce((resObject, { product }) => {
+    const diffObject = currentProducts.reduce((resObject, { product, quantity }) => {
       const comparedPlan = selectedPlansByProduct[product];
       switch (product) {
         case 'dedicated_ip':
@@ -91,19 +92,34 @@ export const FeatureChangeProvider = ({
             };
           }
           return resObject;
-        // TODO: Not implemented yet
-        // case 'subaccounts': {
-        //   const condition = () => Boolean(comparedPlan && quantity <= comparedPlan.limit);
-        //   if (actions.subaccounts || !condition()) {
-        //     resObject.subaccounts = {
-        //       label: 'Subaccounts',
-        //       description: `Subaccounts quantity needs to be updated. Have ${quantity} ${index}`,
-        //       condition,
-        //       action: <Button external to='/account/subaccounts'>Update Status</Button>
-        //     };
-        //   }
-        //   return resObject;
-        // }
+        case 'subaccounts': {
+          const limit = _.get(comparedPlan, 'limit', 0);
+          const condition = Boolean(quantity <= limit);
+          if (actions.subaccounts || !condition) {
+            resObject.subaccounts = {
+              label: 'Subaccounts',
+              description: (
+                <div>
+                  {
+                    limit === 0
+                      ? 'Your new plan doesn\'t include subaccounts.'
+                      : `Your new plan only allows for ${pluralString(limit, 'active subaccount', 'active subaccounts')}.`
+                  }
+                  {!condition &&
+                    <>
+                      <span>Please </span>
+                      <strong>change the status to terminated for {pluralString(quantity - limit, 'subaccount', 'subaccounts')}</strong>
+                      <span> to continue.</span>
+                    </>
+                  }
+                </div>
+              ),
+              condition,
+              action: <Button destructive external to='/account/subaccounts'>Update Status</Button>
+            };
+          }
+          return resObject;
+        }
         case 'messaging':
         default:
           return resObject;
@@ -118,8 +134,8 @@ export const FeatureChangeProvider = ({
   const featuresWithActions = useMemo(() => (_.map(actions, ({ action, condition, ...rest }, key) => ({
     ...rest,
     key,
-    value: condition ? condition() : confirmations[key],
-    action: condition ? action : <Button onClick={() => onConfirm(key)}>Got it</Button>
+    value: condition !== undefined ? condition : confirmations[key],
+    action: condition !== undefined ? action : <Button onClick={() => onConfirm(key)}>Got it</Button>
   }))), [actions, confirmations, onConfirm]);
 
   //Checks if all provided conditions are good
