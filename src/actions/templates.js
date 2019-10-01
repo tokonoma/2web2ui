@@ -126,6 +126,34 @@ export function update(data, subaccountId, params = {}) {
   };
 }
 
+// TODO: Rename once original version is no longer with us
+export function publishV2(data, subaccountId) {
+  return async (dispatch) => {
+    const { id } = data;
+
+    dispatch({ type: 'PUBLISH_ACTION_PENDING' });
+
+    try {
+      await dispatch(update(data, subaccountId));
+
+      await dispatch(sparkpostApiRequest({
+        type: 'PUBLISH_TEMPLATE',
+        meta: {
+          method: 'PUT',
+          url: `/v1/templates/${id}`,
+          data: { ...data, published: true },
+          headers: setSubaccountHeader(subaccountId)
+        }
+      }));
+
+      dispatch({ type: 'PUBLISH_ACTION_SUCCESS' });
+    } catch (err) {
+      dispatch({ type: 'PUBLISH_ACTION_FAIL' });
+    }
+  };
+}
+
+// TODO: Remove once original implementation is no longer with us
 export function publish(data, subaccountId) {
   return async (dispatch) => {
     const { id, testData } = data;

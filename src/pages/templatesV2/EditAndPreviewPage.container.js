@@ -7,6 +7,7 @@ import {
   getPublished,
   update as updateDraft,
   publish as publishDraft,
+  publishV2 as publishDraftV2,
   deleteTemplate,
   create as createTemplate,
   sendPreview
@@ -71,6 +72,7 @@ const mapDispatchToProps = {
   publishDraft,
   getRecipientList,
   updateRecipientList,
+  publishDraftV2,
   listDomains,
   listSubaccounts,
   sendPreview,

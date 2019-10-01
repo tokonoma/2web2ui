@@ -16,10 +16,29 @@ const PreviewSection = () => {
     previewLineErrors
   } = useEditorContext();
 
-  // Must wrap text content in <p> to apply style and must be a string for injecting into iframe
-  const content = currentTabKey === 'text'
-    ? `<p style="white-space: pre-wrap">${preview[currentTabKey]}</p>`
-    : preview[currentTabKey];
+  const getPreviewContent = (tabKey) => {
+    switch (tabKey) {
+      case 'html':
+      case 'amp_html':
+        return preview[tabKey];
+
+      case 'test_data':
+        if (preview.html) {
+          return preview.html;
+        } else if (preview.amp_html) {
+          return preview.amp_html;
+        } else {
+          return preview.text;
+        }
+
+      case 'text':
+        // Must wrap text content in <p> to apply style and must be a string for injecting into iframe
+        return `<p style="white-space: pre-wrap">${preview.text}</p>`;
+
+      default:
+        return '';
+    }
+  };
 
   return (
     <Panel className={styles.PreviewSection}>
@@ -32,7 +51,7 @@ const PreviewSection = () => {
           <>
             <PreviewHeader />
             <PreviewFrame
-              content={content || ''}
+              content={getPreviewContent(currentTabKey)}
               key={currentTabKey} // unmount for each content part
               strict={currentTabKey !== 'amp_html'}
             />

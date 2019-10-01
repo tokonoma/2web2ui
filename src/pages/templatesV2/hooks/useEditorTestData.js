@@ -4,7 +4,6 @@ const useEditorTestData = (props) => {
   const {
     draft,
     templateTestData,
-    isPublishedMode,
     getRecipientList
   } = props;
   const [testData, setTestData] = useState(templateTestData);
@@ -17,7 +16,6 @@ const useEditorTestData = (props) => {
     }
   };
 
-  // Update the data store with data stored in `localStorage`
   useEffect(() => {
     getRecipientList(draft && draft.id, { show_recipients: true })
       .then((res) => {
@@ -33,7 +31,7 @@ const useEditorTestData = (props) => {
 
         setTestData(JSON.stringify({ ...baseTestData, ...retrievedTestData }, null, 1));
       });
-  }, [getRecipientList, draft, isPublishedMode]);
+  }, [getRecipientList, draft]);
 
   return {
     getParsedTestData,
