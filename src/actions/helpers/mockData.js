@@ -144,5 +144,5 @@ export const getMockSubscription = (index = 0) => {
     ]
   }];
 
-  return mockData[index] || mockData[0];
+  return mockData[index] || mockData[2];
 };
