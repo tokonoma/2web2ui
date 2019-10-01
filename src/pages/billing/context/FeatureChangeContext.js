@@ -107,7 +107,7 @@ export const FeatureChangeProvider = ({
                   }
                   {!condition &&
                     <>
-                      <span>Please </span>
+                      <span> Please </span>
                       <strong>change the status to terminated for {pluralString(quantity - limit, 'subaccount', 'subaccounts')}</strong>
                       <span> to continue.</span>
                     </>
