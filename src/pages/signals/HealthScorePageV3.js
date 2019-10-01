@@ -18,7 +18,7 @@ export function HealthScorePageV3(props) {
         <Button
           primary
           component={Link}
-          to='/alerts'
+          to='/alerts/create'
         >
           Create Alert
         </Button>}>

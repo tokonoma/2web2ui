@@ -16,7 +16,7 @@ exports[`Signals Health Score Page V3 renders correctly when receiving data 1`] 
       component={[Function]}
       primary={true}
       size="default"
-      to="/alerts"
+      to="/alerts/create"
     >
       Create Alert
     </Button>
