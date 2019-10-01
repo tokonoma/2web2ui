@@ -50,7 +50,6 @@ describe('Change Plan Form', () => {
       volume: 3,
       billingId: '3'
     },
-    getSubscription: jest.fn(),
     getBundles: jest.fn(),
     getBillingCountries: jest.fn(),
     getBillingInfo: jest.fn(),
@@ -93,7 +92,6 @@ describe('Change Plan Form', () => {
     expect(defaultProps.getBillingCountries).toHaveBeenCalled();
     expect(defaultProps.getBillingInfo).toHaveBeenCalled();
     expect(defaultProps.clearPromoCode).toHaveBeenCalled();
-    expect(defaultProps.getSubscription).toHaveBeenCalled();
   });
 
   it('selects plan and applies promocode if code present in request params', () => {

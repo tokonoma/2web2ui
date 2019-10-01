@@ -19,15 +19,17 @@ export const FeatureChangeProvider = ({
 }) => {
 
   const [ actions, updateActions ] = useState({});
-  const [index, setIndex] = useState(0);//TODO: Remove
   //State to keep track of features that can't directly be addressed, and are acknowledged by user
   const [ confirmations, setConfirm ] = useState({});
   const onConfirm = (key) => { setConfirm({ ...confirmations, [key]: true }); };
 
+  useEffect(() => { getSubscription(); }, [getSubscription]);
 
-  //TODO: Remove index
-  const checkConditions = useCallback(() => { getSubscription(index); setIndex(index + 1); }, [index, getSubscription]);
+
   //Rechecks conditions on re-entering tab. Only initializes once
+  //TODO: Remove index
+  const [index, setIndex] = useState(0);
+  const checkConditions = useCallback(() => { getSubscription(index); setIndex(index + 1); }, [index, getSubscription]);
   useEffect(() => {
     window.addEventListener('focus', checkConditions);
     return () => {
@@ -51,8 +53,12 @@ export const FeatureChangeProvider = ({
   // Inserts into actions if it's got a conflicting issue
   // Updates if it was already in actions had conflicting issue
   const calculateDifferences = () => {
+    if (!subscription) {
+      return;
+    }
+
     const { products: currentProducts } = subscription;
-    const diffObject = currentProducts.reduce((resObject, { product, plan, quantity, override }) => {
+    const diffObject = currentProducts.reduce((resObject, { product }) => {
       const comparedPlan = selectedPlansByProduct[product];
       switch (product) {
         case 'dedicated_ip':
