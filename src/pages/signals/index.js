@@ -2,6 +2,7 @@ import ComplaintsByCohortPage from './ComplaintsByCohortPage';
 import EngagementRateByCohortPage from './EngagementRateByCohortPage';
 import EngagementRecencyPage from './EngagementRecencyPage';
 import HealthScorePage from './HealthScorePage';
+import HealthScorePageV3 from './HealthScorePageV3';
 import SpamTrapPage from './SpamTrapPage';
 import UnsubscribeRateByCohortPage from './UnsubscribeRateByCohortPage';
 import IntegrationPage from './IntegrationPage';
@@ -13,6 +14,7 @@ export default {
   EngagementRateByCohortPage,
   EngagementRecencyPage,
   HealthScorePage,
+  HealthScorePageV3,
   SpamTrapPage,
   UnsubscribeRateByCohortPage,
   IntegrationPage: withIngestBatchEvents(IntegrationPage),

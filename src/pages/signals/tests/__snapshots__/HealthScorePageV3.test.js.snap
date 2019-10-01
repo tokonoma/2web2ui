@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Signals Health Score Page V3 renders correctly when receiving data 1`] = `
+<SignalsPage
+  breadcrumbAction={
+    Object {
+      "component": [Function],
+      "content": "Back to Health Score Overview",
+      "to": "/signals/health-score",
+    }
+  }
+  facet="sending-domain"
+  facetId="test.com"
+  primaryArea={
+    <Button
+      component={[Function]}
+      primary={true}
+      size="default"
+      to="/alerts/create"
+    >
+      Create Alert
+    </Button>
+  }
+  title="Health Score"
+/>
+`;
