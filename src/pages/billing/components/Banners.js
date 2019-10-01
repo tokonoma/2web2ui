@@ -50,12 +50,12 @@ export const PremiumBanner = ({ isAWSAccount }) => (
     ...(isAWSAccount ? awsPremiumAction : premiumAction),
     onClick: () => conversions.trackAddonRequest(ANALYTICS_PREMIUM_SUPPORT)
   }}>
-    <p>Get full-service Technical Account Management with proactive reporting, planning & reviews.</p>
+    <p>Full-service account advocacy with a dedicated Customer Success Manager. Including proactive reporting, planning, and reviews.</p>
     <ul>
       <li>Includes all standard SparkPost features</li>
-      <li>Dedicated Technical Account Manager (TAM)</li>
-      <li>Global ISP relations and mediation</li>
-      <li>Deliverability data analysis and guidance with 250ok</li>
+      <li>Dedicated Customer Success Manager</li>
+      <li>Global ISP support and mediation</li>
+      <li>Deliverability data analysis and guidance with powerful integrated tools</li>
     </ul>
   </Banner>
 );
@@ -70,12 +70,12 @@ export const EnterpriseBanner = () => (
     external: true,
     onClick: () => conversions.trackAddonRequest(ANALYTICS_ENTERPRISE_SUPPORT)
   }}>
-    <p>Enterprise-grade financial guarantees with 99.9% uptime SLA and guaranteed burst rates.</p>
+    <p>Enterprise-grade financial guarantees with 99.9% uptime SLA and guaranteed burst rates, and a dedicated Technical Account Manager.</p>
     <ul>
       <li>Includes all standard SparkPost and Premium features</li>
       <li>Comprehensive uptime SLAs with service credits</li>
-      <li>The industry’s only burst-rate guarantee</li>
-      <li>Support for iOS Universal Links and Android App Links</li>
+      <li>The industry's only burst-rate guarantee</li>
+      <li>Support of iOS Universal Links and Android App Links</li>
     </ul>
   </Banner>
 );
