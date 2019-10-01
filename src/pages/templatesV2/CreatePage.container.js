@@ -4,6 +4,7 @@ import { formValueSelector, reduxForm } from 'redux-form';
 import _ from 'lodash';
 // Actions
 import { create, getDraft } from 'src/actions/templates';
+import { createRecipientList } from 'src/actions/recipientLists';
 import { showAlert } from 'src/actions/globalAlert';
 import { list as listDomains } from 'src/actions/sendingDomains';
 import { selectDefaultTemplateOptions } from 'src/selectors/account';
@@ -31,6 +32,7 @@ const formOptions = {
 
 export default withRouter(connect(mapStateToProps, {
   create,
+  createRecipientList,
   getDraft,
   showAlert,
   listDomains

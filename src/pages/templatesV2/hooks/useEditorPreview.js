@@ -30,7 +30,8 @@ const useEditorPreview = ({
         });
       });
     }
-  }, [getPreview, content, debounceAction, draft.id, draft.subaccount_id, getParsedTestData]);
+  },
+  [getPreview, content, debounceAction, draft.id, draft.subaccount_id, getParsedTestData]);
 
   // clean-up debounced state when unmounted
   useEffect(() => () => { debounceAction.cancel(); }, [debounceAction]);

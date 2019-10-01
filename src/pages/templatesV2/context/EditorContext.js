@@ -13,7 +13,13 @@ const chainHooks = (...hooks) => (
   hooks.reduce((acc, hook) => ({ ...acc, ...hook(acc) }), {})
 );
 
-export const EditorContextProvider = ({ children, value: { getDraft, getPublished, listDomains, listSubaccounts, ...value }}) => {
+export const EditorContextProvider = ({ children, value: {
+  getDraft,
+  getPublished,
+  listDomains,
+  listSubaccounts,
+  ...value
+}}) => {
   const { requestParams } = useRouter();
   const pageValue = chainHooks(
     () => value,
@@ -30,7 +36,16 @@ export const EditorContextProvider = ({ children, value: { getDraft, getPublishe
     getPublished(requestParams.id, requestParams.subaccount);
     listDomains();
     listSubaccounts();
-  }, [listSubaccounts, listDomains, getDraft, getPublished, requestParams.id, requestParams.version, requestParams.subaccount]);
+  },
+  [
+    listSubaccounts,
+    listDomains,
+    getDraft,
+    getPublished,
+    requestParams.id,
+    requestParams.version,
+    requestParams.subaccount
+  ]);
 
   return (
     <EditorContext.Provider value={pageValue}>
