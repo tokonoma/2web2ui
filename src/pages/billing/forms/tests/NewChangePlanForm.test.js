@@ -95,16 +95,10 @@ describe('Change Plan Form', () => {
         promo: 'THXFISH2'
       }
     },mount);
-    expect(wrapper.find('SelectedPlan')).toHaveProp('plan', { code: '1',
-      includesIp: true,
-      monthly: 100,
-      name: 'One',
-      overage: 0.1,
-      volume: 1,
-      billingId: '1' });
+    expect(wrapper.find('SelectedPlan')).toHaveProp('plan', defaultProps.plans.test[0]);
 
     expect(defaultProps.verifyPromoCode).toHaveBeenCalledWith({ promoCode: 'THXFISH2',
-      billingId: '1',
+      billingId: defaultProps.plans.test[0].billingId,
       meta: { promoCode: 'THXFISH2', showErrorAlert: false }});
   });
 });

@@ -31,7 +31,7 @@ export const ChangePlanForm = ({
   currentPlan
 }) => {
   const { requestParams: { code, promo } = {}, updateRoute } = useRouter();
-  const allPlans = Object.entries(plans).reduce((acc, curr) => [...curr[1], ...acc],[]);
+  const allPlans = Object.values(plans).reduce((acc, curr) => [...curr, ...acc],[]);
   const [selectedPlan, selectPlan] = useState(allPlans.find((x) => x.code === code) || null);
   // const [useSavedCC, setUseSavedCC] = useState(null);
   const applyPromoCode = useCallback((promoCode) => {
