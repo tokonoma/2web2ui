@@ -70,11 +70,15 @@ describe('Signals Health Score Page', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('renders weight chart at 100% if data all data is 0', () => {
+  it('renders weight chart at 100% if data all data is 0/undefined', () => {
     const newData = [
       {
         date: '2017-01-01',
         weights: [{ weight_type: 'Hard Bounces', weight: 0.5, weight_value: 0 }]
+      },
+      {
+        date: '2017-01-02',
+        weights: [{ weight_type: 'Hard Bounces', weight: 0.5, weight_value: undefined }]
       }
     ];
     wrapper.setProps({ data: newData });

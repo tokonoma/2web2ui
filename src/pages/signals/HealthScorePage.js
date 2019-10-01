@@ -64,8 +64,7 @@ export class HealthScorePage extends Component {
     const selectedWeights = _.get(_.find(data, ['date', selectedDate]), 'weights', []);
     const selectedWeightsAreEmpty = selectedWeights.every(({ weight }) => weight === null);
     const dataForSelectedWeight = data.map(({ date, weights }) => ({ date, ..._.find(weights, ['weight_type', selectedComponent]) }));
-    const selectedDataIsZero = dataForSelectedWeight.every(({ weight_value }) => weight_value <= 0);
-
+    const selectedDataIsZero = dataForSelectedWeight.every(({ weight_value }) => (!weight_value || weight_value <= 0));
     let panelContent;
 
     if (empty) {
