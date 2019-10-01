@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { Grid } from '@sparkpost/matchbox';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -7,16 +7,15 @@ import qs from 'query-string';
 import PlanSelectSection, { SelectedPlan } from '../components/PlanSelect';
 import CurrentPlanSection from '../components/CurrentPlanSection';
 import { verifyPromoCode, clearPromoCode } from 'src/actions/billing';
+import useRouter from 'src/hooks/useRouter';
 //Actions
 import { getBillingInfo, getPlans } from 'src/actions/account';
 import { getBillingCountries } from 'src/actions/billing';
-
 //Selectors
 import { selectTieredVisiblePlans, currentPlanSelector, getPromoCodeObject } from 'src/selectors/accountBillingInfo';
 import { changePlanInitialValues } from 'src/selectors/accountBillingForms';
 
 const FORMNAME = 'changePlan';
-
 export const ChangePlanForm = ({
   //Redux Props
   plans,
@@ -31,8 +30,14 @@ export const ChangePlanForm = ({
   // },
   currentPlan
 }) => {
-  const [selectedPlan, selectPlan] = useState(null);
+  const { requestParams: { code, promo } = {}, updateRoute } = useRouter();
+  const allPlans = Object.values(plans).reduce((acc, curr) => [...curr, ...acc],[]);
+  const [selectedPlan, selectPlan] = useState(allPlans.find((x) => x.code === code) || null);
   // const [useSavedCC, setUseSavedCC] = useState(null);
+  const applyPromoCode = useCallback((promoCode) => {
+    const { billingId } = selectedPlan;
+    verifyPromoCode({ promoCode , billingId, meta: { promoCode, showErrorAlert: false }});
+  },[selectedPlan, verifyPromoCode]);
   useEffect(() => { getBillingCountries(); }, [getBillingCountries]);
   useEffect(() => { getBillingInfo(); }, [getBillingInfo]);
   useEffect(() => { getPlans(); }, [getPlans]);
@@ -41,15 +46,16 @@ export const ChangePlanForm = ({
       clearPromoCode();
     }
   },[clearPromoCode, selectedPlan]);
-  //TODO: Implement in AC-986
-  // useEffect(() => { console.log(selectedPlan, promoCode)}, [verifyPromoCode, promoCode, selectedPlan]);
-
-  const applyPromoCode = (promoCode) => {
-    verifyPromoCode({ promoCode , billingId: selectedPlan.billingId, meta: { promoCode, showErrorAlert: false }});
-  };
-  const onSelect = (plan) => {
-    selectPlan(plan);
-  };
+  useEffect(() => {
+    if (promo && selectedPlan) {
+      applyPromoCode(promo);
+    }
+  },[applyPromoCode, promo, selectedPlan, verifyPromoCode]);
+  useEffect(() => {
+    if (!selectedPlan) { //clears out requestParams when user changes plan
+      updateRoute({ undefined });
+    }
+  },[selectedPlan, updateRoute]);
 
   return (
     <form>
@@ -59,7 +65,7 @@ export const ChangePlanForm = ({
             selectedPlan
               ? <SelectedPlan
                 plan={selectedPlan}
-                onChange={onSelect}
+                onChange={selectPlan}
                 promoCodeObj = {promoCodeObj}
                 handlePromoCode = {
                   {
@@ -69,7 +75,7 @@ export const ChangePlanForm = ({
                 }
               />
               : <PlanSelectSection
-                onSelect={onSelect}
+                onSelect={selectPlan}
                 plans={plans}
                 currentPlan={currentPlan}
               />
