@@ -3,6 +3,8 @@
 exports[`DuplicateTemplateModal renders with default props and some data from the current draft 1`] = `
 <Fragment>
   <Modal
+    onClose={[MockFunction]}
+    open={false}
     showCloseButton={true}
   >
     <Panel
@@ -10,6 +12,7 @@ exports[`DuplicateTemplateModal renders with default props and some data from th
       sectioned={true}
       title="Duplicate Template"
     >
+       
       <form
         onSubmit={[Function]}
       >
@@ -21,7 +24,7 @@ exports[`DuplicateTemplateModal renders with default props and some data from th
           required={true}
           resize="both"
           type="text"
-          value="My Draft (COPY)"
+          value=""
         />
         <TextField
           id="template-id"
@@ -31,7 +34,7 @@ exports[`DuplicateTemplateModal renders with default props and some data from th
           required={true}
           resize="both"
           type="text"
-          value="my-draft-copy"
+          value=""
         />
         <ButtonWrapper>
           <Button
