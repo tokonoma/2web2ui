@@ -82,7 +82,7 @@ exports[`Change Plan Form should render 1`] = `
             "volume": 3,
           }
         }
-        selectedPlan={null}
+        isPlanSelected={false}
       />
     </Grid.Column>
   </Grid>

@@ -103,7 +103,7 @@ export const ChangePlanForm = ({
           }
         </Grid.Column>
         <Grid.Column xs={4}>
-          <CurrentPlanSection currentPlan={currentPlan} selectedPlan={selectedPlan}/>
+          <CurrentPlanSection currentPlan={currentPlan} isPlanSelected={Boolean(selectedPlan)}/>
         </Grid.Column>
       </Grid>
     </form>

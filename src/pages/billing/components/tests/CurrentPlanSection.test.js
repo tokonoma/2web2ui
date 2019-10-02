@@ -31,7 +31,7 @@ describe('CurrentPlanSection', () => {
         ...defaultProps.currentPlan,
         status: 'deprecated'
       },
-      selectedPlan: {}
+      isPlanSelected: true
     });
     expect(wrapper.find('Warning')).toExist();
   });
