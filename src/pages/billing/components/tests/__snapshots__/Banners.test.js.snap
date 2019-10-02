@@ -14,7 +14,13 @@ exports[`Billing Banners:  Enterprise banner renders 1`] = `
   title="Enterprise"
 >
   <p>
-    Enterprise-grade financial guarantees with 99.9% uptime SLA and guaranteed burst rates.
+    Enterprise-grade financial guarantees with 99.9% uptime 
+    <abbr
+      title="Service Level Agreement"
+    >
+      SLA
+    </abbr>
+     and guaranteed burst rates, and a dedicated Technical Account Manager.
   </p>
   <ul>
     <li>
@@ -24,10 +30,10 @@ exports[`Billing Banners:  Enterprise banner renders 1`] = `
       Comprehensive uptime SLAs with service credits
     </li>
     <li>
-      The industry’s only burst-rate guarantee
+      The industry's only burst-rate guarantee
     </li>
     <li>
-      Support for iOS Universal Links and Android App Links
+      Support of iOS Universal Links and Android App Links
     </li>
   </ul>
 </Banner>
@@ -111,20 +117,26 @@ exports[`Billing Banners:  Premium banner renders 1`] = `
   title="Premium Addon Plan"
 >
   <p>
-    Get full-service Technical Account Management with proactive reporting, planning & reviews.
+    Full-service account advocacy with a dedicated Customer Success Manager. Including proactive reporting, planning, and reviews.
   </p>
   <ul>
     <li>
       Includes all standard SparkPost features
     </li>
     <li>
-      Dedicated Technical Account Manager (TAM)
+      Dedicated Customer Success Manager
     </li>
     <li>
-      Global ISP relations and mediation
+      Global 
+      <abbr
+        title="Internet Service Provider"
+      >
+        ISP
+      </abbr>
+       support and mediation
     </li>
     <li>
-      Deliverability data analysis and guidance with 250ok
+      Deliverability data analysis and guidance with powerful integrated tools
     </li>
   </ul>
 </Banner>
@@ -144,20 +156,26 @@ exports[`Billing Banners:  Premium banner renders correctly for aws users 1`] = 
   title="Premium Addon Plan"
 >
   <p>
-    Get full-service Technical Account Management with proactive reporting, planning & reviews.
+    Full-service account advocacy with a dedicated Customer Success Manager. Including proactive reporting, planning, and reviews.
   </p>
   <ul>
     <li>
       Includes all standard SparkPost features
     </li>
     <li>
-      Dedicated Technical Account Manager (TAM)
+      Dedicated Customer Success Manager
     </li>
     <li>
-      Global ISP relations and mediation
+      Global 
+      <abbr
+        title="Internet Service Provider"
+      >
+        ISP
+      </abbr>
+       support and mediation
     </li>
     <li>
-      Deliverability data analysis and guidance with 250ok
+      Deliverability data analysis and guidance with powerful integrated tools
     </li>
   </ul>
 </Banner>
