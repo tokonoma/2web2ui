@@ -54,7 +54,7 @@ export const PremiumBanner = ({ isAWSAccount }) => (
     <ul>
       <li>Includes all standard SparkPost features</li>
       <li>Dedicated Customer Success Manager</li>
-      <li>Global ISP support and mediation</li>
+      <li>Global <abbr title="Internet Service Provider">ISP</abbr> support and mediation</li>
       <li>Deliverability data analysis and guidance with powerful integrated tools</li>
     </ul>
   </Banner>
@@ -70,7 +70,7 @@ export const EnterpriseBanner = () => (
     external: true,
     onClick: () => conversions.trackAddonRequest(ANALYTICS_ENTERPRISE_SUPPORT)
   }}>
-    <p>Enterprise-grade financial guarantees with 99.9% uptime SLA and guaranteed burst rates, and a dedicated Technical Account Manager.</p>
+    <p>Enterprise-grade financial guarantees with 99.9% uptime <abbr title="Service Level Agreement">SLA</abbr> and guaranteed burst rates, and a dedicated Technical Account Manager.</p>
     <ul>
       <li>Includes all standard SparkPost and Premium features</li>
       <li>Comprehensive uptime SLAs with service credits</li>

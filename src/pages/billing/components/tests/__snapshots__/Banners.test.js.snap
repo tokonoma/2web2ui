@@ -14,7 +14,13 @@ exports[`Billing Banners:  Enterprise banner renders 1`] = `
   title="Enterprise"
 >
   <p>
-    Enterprise-grade financial guarantees with 99.9% uptime SLA and guaranteed burst rates, and a dedicated Technical Account Manager.
+    Enterprise-grade financial guarantees with 99.9% uptime 
+    <abbr
+      title="Service Level Agreement"
+    >
+      SLA
+    </abbr>
+     and guaranteed burst rates, and a dedicated Technical Account Manager.
   </p>
   <ul>
     <li>
@@ -121,7 +127,13 @@ exports[`Billing Banners:  Premium banner renders 1`] = `
       Dedicated Customer Success Manager
     </li>
     <li>
-      Global ISP support and mediation
+      Global 
+      <abbr
+        title="Internet Service Provider"
+      >
+        ISP
+      </abbr>
+       support and mediation
     </li>
     <li>
       Deliverability data analysis and guidance with powerful integrated tools
@@ -154,7 +166,13 @@ exports[`Billing Banners:  Premium banner renders correctly for aws users 1`] = 
       Dedicated Customer Success Manager
     </li>
     <li>
-      Global ISP support and mediation
+      Global 
+      <abbr
+        title="Internet Service Provider"
+      >
+        ISP
+      </abbr>
+       support and mediation
     </li>
     <li>
       Deliverability data analysis and guidance with powerful integrated tools
