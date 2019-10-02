@@ -2,6 +2,7 @@ import { shallow } from 'enzyme';
 import React from 'react';
 import { OnboardingPlanPage as ChoosePlan } from '../ChoosePlan';
 import * as billingHelpers from 'src/helpers/billing';
+import PromoCodeNew from '../../../components/billing/PromoCodeNew';
 
 jest.mock('src/helpers/billing');
 
@@ -52,6 +53,11 @@ describe('ChoosePlan page tests', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  it('should not PromoCode field if plan isFree', () => {
+    wrapper.setProps({ selectedPlan: { isFree: true }});
+    expect(wrapper.find(PromoCodeNew)).toHaveLength(0);
+  });
+
   it('should disable submit and plan picker when submitting', () => {
     wrapper.setProps({ submitting: true });
     expect(wrapper).toMatchSnapshot();
@@ -92,7 +98,7 @@ describe('ChoosePlan page tests', () => {
       expect(props.verifyPromoCode).toHaveBeenCalledWith({
         promoCode: 'test-promo-code',
         billingId: 'test-id',
-        meta: { promoCode: 'test-promo-code' }
+        meta: { promoCode: 'test-promo-code', showErrorAlert: false }
       });
       expect(instance.props.billingCreate).toHaveBeenCalledWith({ ...values, discountId: 'test-discount' });
       expect(instance.props.history.push).toHaveBeenCalledWith('/onboarding/sending-domain');

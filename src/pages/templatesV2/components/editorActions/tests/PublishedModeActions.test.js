@@ -16,6 +16,6 @@ describe('PublishedModeActions', () => {
   };
 
   it('renders published actions', () => {
-    expect(subject()).toMatchSnapshot();
+    expect(subject({ draft: { id: '123', subaccount_id: 'abcd' }})).toMatchSnapshot();
   });
 });

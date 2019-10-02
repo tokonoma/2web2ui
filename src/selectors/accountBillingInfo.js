@@ -7,6 +7,7 @@ const suspendedSelector = (state) => state.account.isSuspendedForBilling;
 const pendingSubscriptionSelector = (state) => state.account.pending_subscription;
 const plansSelector = (state) => state.billing.plans || [];
 const accountBillingSelector = (state) => state.account.billing;
+const accountBilling = (state) => state.billing;
 const selectIsAws = selectCondition(isAws);
 const selectIsCustomBilling = selectCondition(isCustomBilling);
 const selectIsSelfServeBilling = selectCondition(isSelfServeBilling);
@@ -53,6 +54,11 @@ export const canUpdateBillingInfoSelector = createSelector(
     accountBilling && (isOnLegacyCcFreePlan || !currentPlan.isFree)
   )
 );
+/*
+return the promoCode related information from billing
+*/
+export const getPromoCodeObject = createSelector([accountBilling],
+  (billing) => ({ promoError: billing.promoError, promoPending: billing.promoPending, selectedPromo: billing.selectedPromo }));
 
 /**
  * Return true if plan can purchase IP and has billing info (except for aws as it'll be billed outside)

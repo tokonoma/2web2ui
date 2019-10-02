@@ -33,4 +33,9 @@ describe('Save CSV Button', () => {
     wrapper.setProps({ caption: 'Click Me!' });
     expect(wrapper.dive().text()).toEqual('Click Me!');
   });
+
+  it('should render with given download filename', () => {
+    wrapper.setProps({ filename: 'NotAVirus.exe' });
+    expect(wrapper).toHaveProp('download', 'NotAVirus.exe');
+  });
 });

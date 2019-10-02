@@ -14,7 +14,6 @@ import { withRouter } from 'react-router-dom';
 import styles from './TestListPage.module.scss';
 import { STATUS } from './constants/test';
 import { Users } from 'src/components/images';
-import { LINKS } from 'src/constants';
 
 const selectOptions = [
   { value: 'Sort By', label: 'Sort By', disabled: true },
@@ -135,12 +134,7 @@ export class TestListPage extends Component {
         show: !error && tests.length === 0,
         title: 'Find and Fix Inbox Placement Issues',
         image: Users,
-        content: <p>Perform seedlist tests that help you predict how your emails are handled by mailbox providers.</p>,
-        secondaryAction: {
-          content: 'Check out our docs',
-          to: LINKS.API_DOCS,
-          external: true
-        }
+        content: <p>Perform seedlist tests that help you predict how your emails are handled by mailbox providers.</p>
       }}
       title='Inbox Placement'
       primaryAction={{ content: 'Start a Test', to: '/inbox-placement/seedlist', component: Link }}

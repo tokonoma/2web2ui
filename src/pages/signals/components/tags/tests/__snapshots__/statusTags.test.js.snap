@@ -1,0 +1,72 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`StatusTags:  case: 1 1`] = `
+<Tag
+  className="StatusTag"
+>
+  <Warning
+    color="#fa6423"
+  />
+   
+</Tag>
+`;
+
+exports[`StatusTags:  case: 2 1`] = `
+<Tag
+  className="StatusTag"
+>
+  <Warning
+    color="#fa6423"
+  />
+   
+  Validation error
+</Tag>
+`;
+
+exports[`StatusTags:  case: 3 1`] = `
+<Tag
+  className="StatusTag"
+>
+  <Warning
+    color="#fa6423"
+  />
+   
+  System error
+</Tag>
+`;
+
+exports[`StatusTags:  case: 4 1`] = `
+<Tag
+  className="StatusTag"
+>
+  <Warning
+    color="#fa6423"
+  />
+   
+  Decompression error
+</Tag>
+`;
+
+exports[`StatusTags:  case: 5 1`] = `
+<Tag
+  className="StatusTag"
+>
+  <Warning
+    color="#fa6423"
+  />
+   
+  Duplicate batch
+</Tag>
+`;
+
+exports[`StatusTags:  case: 6 1`] = `
+<Tag
+  className="StatusTag"
+>
+  <Warning
+    color="#fa6423"
+  />
+   
+  Empty batch
+</Tag>
+`;

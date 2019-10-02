@@ -20,6 +20,7 @@ exports[`RouterContext ProviderComponent renders a context provider 1`] = `
       "requestParams": Object {
         "id": "123",
       },
+      "updateRoute": [Function],
     }
   }
 >

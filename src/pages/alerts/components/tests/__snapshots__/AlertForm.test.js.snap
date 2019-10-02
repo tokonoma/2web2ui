@@ -129,12 +129,12 @@ exports[`Alert Form Component should render the alert form component correctly 1
               key="slack"
               subtitle={
                 <React.Fragment>
-                  Create a webhook for this alert. 
+                  Integrate this alert with Slack. 
                   <UnstyledLink
                     external={true}
-                    to="https://www.sparkpost.com/docs/user-guide/alerts/#webhook-payload-sample"
+                    to="https://api.slack.com/incoming-webhooks"
                   >
-                    Sample payload
+                    How to create a Slack Incoming webhook
                   </UnstyledLink>
                 </React.Fragment>
               }
@@ -154,12 +154,12 @@ exports[`Alert Form Component should render the alert form component correctly 1
               key="webhook"
               subtitle={
                 <React.Fragment>
-                  Integrate this alert with Slack. 
+                  Create a webhook for this alert. 
                   <UnstyledLink
                     external={true}
-                    to="https://api.slack.com/incoming-webhooks"
+                    to="https://www.sparkpost.com/docs/user-guide/alerts/#webhook-payload-sample"
                   >
-                    How to create a Slack Incoming webhook
+                    Sample payload
                   </UnstyledLink>
                 </React.Fragment>
               }

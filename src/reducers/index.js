@@ -46,6 +46,8 @@ import typeahead from './typeahead';
 import webhooks from './webhooks';
 import websiteAuth from './websiteAuth';
 import inboxPlacement from './inboxPlacement';
+import ingestBatchEvents from './ingestBatchEvents';
+
 
 const appReducer = combineReducers({
   acceptedReport,
@@ -67,6 +69,7 @@ const appReducer = combineReducers({
   form,
   inboxPlacement,
   invoices,
+  ingestBatchEvents,
   ipPools,
   globalAlert,
   metrics,

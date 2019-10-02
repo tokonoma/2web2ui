@@ -2,17 +2,15 @@
 
 exports[`PublishedModeActions renders published actions 1`] = `
 <Button.Group>
-  <_default
+  <Button
     className="Actions"
+    size="default"
+    to="/templatesv2/edit/123/draft/content?subaccount=abcd"
   >
-    <Button
-      size="default"
-    >
-      <strong>
-        Edit Draft
-      </strong>
-    </Button>
-  </_default>
+    <strong>
+      Edit Draft
+    </strong>
+  </Button>
   <div
     className="Actions"
   >
@@ -31,12 +29,16 @@ exports[`PublishedModeActions renders published actions 1`] = `
       <div
         className="ActionsBody"
       >
-        <_default
+        <div
           className="ActionItem"
         >
-          <FileEdit />
-          Edit Draft
-        </_default>
+          <PageLink
+            to="/templatesv2/edit/123/draft/content?subaccount=abcd"
+          >
+            <FileEdit />
+            Edit Draft
+          </PageLink>
+        </div>
       </div>
     </Popover>
   </div>

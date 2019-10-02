@@ -95,25 +95,14 @@ export function getRelativeDates(range, { now = moment().toDate(), roundToPrecis
       break;
 
     case '7days':
-      preciseFrom = moment(now).subtract(7, 'day').toDate();
-      break;
-
     case '10days':
-      preciseFrom = moment(now).subtract(10, 'day').toDate();
-      break;
-
     case '14days':
-      preciseFrom = moment(now).subtract(14, 'day').toDate();
-      break;
-
     case '30days':
-      preciseFrom = moment(now).subtract(30, 'day').toDate();
+    case '90days': {
+      const numberOfDays = parseInt(range.replace('days', ''));
+      preciseFrom = moment(now).subtract(numberOfDays, 'day').toDate();
       break;
-
-    case '90days':
-      preciseFrom = moment(now).subtract(90, 'day').toDate();
-      break;
-
+    }
     case 'custom':
       return { relativeRange: range };
 

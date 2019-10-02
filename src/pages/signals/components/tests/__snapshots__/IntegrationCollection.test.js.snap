@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`IntegrationCollection renders Error 1`] = `
+<Panel
+  accent="red"
+  actions={
+    Array [
+      Object {
+        "content": "Retry",
+        "onClick": undefined,
+      },
+    ]
+  }
+  className="ErrorPanel"
+  title="Something went wrong"
+/>
+`;
+
+exports[`IntegrationCollection renders Loading 1`] = `
+<Panel
+  className="LoadingPanel"
+>
+  <Loading />
+</Panel>
+`;
+
+exports[`IntegrationCollection renders Table 1`] = `
+<TableCollection
+  columns={
+    Array [
+      "Time",
+      "Status",
+      "Events",
+      "Batch ID",
+    ]
+  }
+  defaultSortColumn={null}
+  defaultSortDirection="asc"
+  getRowData={[Function]}
+  rows={
+    Array [
+      Object {
+        "batch_id": "8c4b19fb-07a2-42cb-84f7-3ab09a8049e0",
+        "expiration_timestamp": "2019-09-29T00:00:00.000Z",
+        "number_duplicates": 0,
+        "number_failed": 0,
+        "number_succeeded": 1,
+        "timestamp": "2019-09-18T20:09:38.000Z",
+        "type": "success",
+      },
+    ]
+  }
+  updateQueryString={false}
+/>
+`;
+
+exports[`IntegrationCollection renders no data found 1`] = `
+<Panel
+  title="No Data Found!"
+/>
+`;

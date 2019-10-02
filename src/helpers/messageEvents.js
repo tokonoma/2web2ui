@@ -44,7 +44,7 @@ export function parseSearch(search) {
   }
 
   if (range) {
-    dateOptions = { ...dateOptions, ...getRelativeDates(range) };
+    dateOptions = { ...dateOptions, ...getRelativeDates(range, { roundToPrecision: false }) };
   }
 
   const transformedParams = transformParams(rest);

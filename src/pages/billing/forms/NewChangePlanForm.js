@@ -1,48 +1,61 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { Grid } from '@sparkpost/matchbox';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import qs from 'query-string';
-
-import promoCodeValidate from '../helpers/promoCodeValidate';
 import PlanSelectSection, { SelectedPlan } from '../components/PlanSelect';
 import CurrentPlanSection from '../components/CurrentPlanSection';
-
+import { verifyPromoCode, clearPromoCode } from 'src/actions/billing';
+import useRouter from 'src/hooks/useRouter';
 //Actions
 import { getBillingInfo, getPlans } from 'src/actions/account';
 import { getBillingCountries } from 'src/actions/billing';
-
 //Selectors
-import { selectTieredVisiblePlans, currentPlanSelector } from 'src/selectors/accountBillingInfo';
+import { selectTieredVisiblePlans, currentPlanSelector, getPromoCodeObject } from 'src/selectors/accountBillingInfo';
 import { changePlanInitialValues } from 'src/selectors/accountBillingForms';
 
 const FORMNAME = 'changePlan';
-
 export const ChangePlanForm = ({
   //Redux Props
   plans,
   getBillingInfo,
   getBillingCountries,
   getPlans,
-  // verifyPromoCode,
+  verifyPromoCode,
+  promoCodeObj,
+  clearPromoCode,
   // initialValues: {
   //   promoCode
   // },
   currentPlan
 }) => {
-  const [selectedPlan, selectPlan] = useState(null);
-
+  const { requestParams: { code, promo } = {}, updateRoute } = useRouter();
+  const allPlans = Object.values(plans).reduce((acc, curr) => [...curr, ...acc],[]);
+  const [selectedPlan, selectPlan] = useState(allPlans.find((x) => x.code === code) || null);
   // const [useSavedCC, setUseSavedCC] = useState(null);
+  const applyPromoCode = useCallback((promoCode) => {
+    const { billingId } = selectedPlan;
+    verifyPromoCode({ promoCode , billingId, meta: { promoCode, showErrorAlert: false }});
+  },[selectedPlan, verifyPromoCode]);
   useEffect(() => { getBillingCountries(); }, [getBillingCountries]);
   useEffect(() => { getBillingInfo(); }, [getBillingInfo]);
   useEffect(() => { getPlans(); }, [getPlans]);
-  //TODO: Implement in AC-986
-  // useEffect(() => { console.log(selectedPlan, promoCode)}, [verifyPromoCode, promoCode, selectedPlan]);
-
-  const onSelect = (plan) => {
-    selectPlan(plan);
-  };
+  useEffect(() => {
+    if (!selectedPlan) {
+      clearPromoCode();
+    }
+  },[clearPromoCode, selectedPlan]);
+  useEffect(() => {
+    if (promo && selectedPlan) {
+      applyPromoCode(promo);
+    }
+  },[applyPromoCode, promo, selectedPlan, verifyPromoCode]);
+  useEffect(() => {
+    if (!selectedPlan) { //clears out requestParams when user changes plan
+      updateRoute({ undefined });
+    }
+  },[selectedPlan, updateRoute]);
 
   return (
     <form>
@@ -52,10 +65,17 @@ export const ChangePlanForm = ({
             selectedPlan
               ? <SelectedPlan
                 plan={selectedPlan}
-                onChange={onSelect}
+                onChange={selectPlan}
+                promoCodeObj = {promoCodeObj}
+                handlePromoCode = {
+                  {
+                    applyPromoCode: applyPromoCode,
+                    clearPromoCode: clearPromoCode
+                  }
+                }
               />
               : <PlanSelectSection
-                onSelect={onSelect}
+                onSelect={selectPlan}
                 plans={plans}
                 currentPlan={currentPlan}
               />
@@ -71,26 +91,26 @@ export const ChangePlanForm = ({
 
 const mapStateToProps = (state, props) => {
   const { code: planCode, promo: promoCode } = qs.parse(props.location.search);
-
   return {
     plans: selectTieredVisiblePlans(state),
     initialValues: changePlanInitialValues(state, { planCode, promoCode }),
-    currentPlan: currentPlanSelector(state)
+    currentPlan: currentPlanSelector(state),
+    promoCodeObj: getPromoCodeObject(state)
   };
 };
 
 const mapDispatchToProps = ({
   getBillingInfo,
   getBillingCountries,
-  getPlans
+  getPlans,
+  verifyPromoCode,
+  clearPromoCode
 });
 
 const formOptions = {
   form: FORMNAME,
   enableReinitialize: true,
-  asyncValidate: promoCodeValidate(FORMNAME),
-  asyncChangeFields: ['planpicker'],
-  asyncBlurFields: ['promoCode']
+  asyncChangeFields: ['planpicker']
 };
 
 export default withRouter(

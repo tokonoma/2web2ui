@@ -49,7 +49,7 @@ export class ReportOptions extends Component {
   };
 
   render() {
-    const { customReportsEnabled, typeaheadCache, reportOptions, reportLoading, refreshReportOptions, searchOptions, roundToPrecision } = this.props;
+    const { customReportsEnabled, typeaheadCache, reportOptions, reportLoading, refreshReportOptions, searchOptions } = this.props;
 
     return (
       <Panel>
@@ -63,7 +63,7 @@ export class ReportOptions extends Component {
                   relativeDateOptions={RELATIVE_DATE_OPTIONS}
                   disabled={reportLoading}
                   onChange={refreshReportOptions}
-                  roundToPrecision={roundToPrecision}
+                  roundToPrecision={true}
                 />
               </div>
             </Grid.Column>

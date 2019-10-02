@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Subaccount Field should render the Subaccounts Field component correctly 1`] = `
+exports[`Subaccount Field renders combo box field 1`] = `
 <Field
   component={[Function]}
   defaultSelected={Array []}
@@ -13,10 +13,12 @@ exports[`Subaccount Field should render the Subaccounts Field component correctl
     Array [
       Object {
         "id": -1,
+        "isExclusiveItem": true,
         "name": "Master and all subaccounts",
       },
       Object {
         "id": -2,
+        "isExclusiveItem": true,
         "name": "Any subaccount",
       },
       Object {

@@ -1,7 +1,8 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
+import { act } from 'react-dom/test-utils';
 
-import PlanSelect, { SelectedPlan } from '../PlanSelect';
+import PlanSelect, { SelectedPlan, useModal } from '../PlanSelect';
 
 describe('Plan Select:', () => {
 
@@ -62,6 +63,15 @@ describe('Selected Plan:', () => {
       overage: 0.2,
       volume: 2,
       isFree: true
+    },
+    promoCodeObj: {
+      selectedPromo: {},
+      promoPending: false,
+      promoError: false
+    },
+    handlePromoCode: {
+      applyPromoCode: jest.fn(),
+      clearPromoCode: jest.fn()
     }
   };
 
@@ -74,5 +84,26 @@ describe('Selected Plan:', () => {
 
   it('should render plan price with the plan', () => {
     expect(subject()).toMatchSnapshot();
+  });
+});
+
+describe('useModal:', () => {
+  const TestModal = (props) => {
+    const { isShowing, toggle } = useModal(props.isShowing);
+    return (
+      <div open={isShowing} onClick={toggle} />
+    );
+  };
+  const subject = (isShowing) => mount(
+    <TestModal isShowing={isShowing}/>
+  );
+
+  it('toggles open when clicked', () => {
+    const wrapper = subject(false);
+    act(() => {
+      wrapper.children().props().onClick();
+    });
+    wrapper.update();
+    expect(wrapper.children().props().open).toBe(true);
   });
 });

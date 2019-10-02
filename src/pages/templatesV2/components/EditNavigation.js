@@ -9,7 +9,7 @@ const EditNavigation = ({ primaryArea }) => {
   const { currentNavigationKey, setNavigation } = useEditorContext();
 
   return (
-    <div className={styles.Navigation}>
+    <nav className={styles.Navigation}>
       <div className={styles.NavigationLinks}>
         {links.map(({ key, content }) => (
           <UnstyledLink
@@ -18,6 +18,8 @@ const EditNavigation = ({ primaryArea }) => {
             })}
             key={key}
             onClick={() => { setNavigation(key); }}
+            to="javascript:void(0)"
+            role="button"
           >
             {content}
           </UnstyledLink>
@@ -26,7 +28,7 @@ const EditNavigation = ({ primaryArea }) => {
       <div className={styles.NavigationPrimaryArea}>
         {primaryArea}
       </div>
-    </div>
+    </nav>
   );
 };
 

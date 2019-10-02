@@ -4,7 +4,7 @@ import _ from 'lodash';
 import { Grid, TextField } from '@sparkpost/matchbox';
 import { ArrowForward } from '@sparkpost/matchbox-icons';
 import { formatInputDate, formatInputTime, parseDatetime } from 'src/helpers/date';
-import { getValidDateRange, getPrecision } from 'src/helpers/metrics';
+import { getValidDateRange, getPrecision, getMomentPrecision } from 'src/helpers/metrics';
 import styles from './ManualEntryForm.module.scss';
 
 const DATE_PLACEHOLDER = '1970-01-20';
@@ -83,6 +83,7 @@ export default class ManualEntryForm extends Component {
 
     let precisionLabel = null;
     let precisionLabelValue;
+    let momentPrecision;
     const from = parseDatetime(fromDate, fromTime);
     const to = parseDatetime(toDate, toTime);
 
@@ -91,7 +92,8 @@ export default class ManualEntryForm extends Component {
         // allow for prop-level override of "now" (DI, etc.)
         const { now = moment() } = this.props;
         const { from: validatedFrom, to: validatedTo } = getValidDateRange({ from, to, now, roundToPrecision });
-        precisionLabelValue = _.upperFirst(getPrecision(validatedFrom, validatedTo));
+        precisionLabelValue = getPrecision(validatedFrom, validatedTo);
+        momentPrecision = getMomentPrecision(validatedFrom, validatedTo);
       } catch (e) {
         precisionLabelValue = '';
       }
@@ -116,7 +118,8 @@ export default class ManualEntryForm extends Component {
               label='From Time' labelHidden placeholder={TIME_PLACEHOLDER}
               onChange={this.handleFieldChange}
               onBlur={this.handleBlur}
-              value={fromTime} />
+              value={fromTime}
+              disabled={momentPrecision === 'days'} />
           </Grid.Column>
           <Grid.Column xs={1}>
             <div className={styles.ArrowWrapper}>
@@ -137,7 +140,8 @@ export default class ManualEntryForm extends Component {
               label='To Time' labelHidden placeholder={TIME_PLACEHOLDER}
               onChange={this.handleFieldChange}
               onBlur={this.handleBlur}
-              value={toTime} />
+              value={toTime}
+              disabled={momentPrecision === 'days'} />
           </Grid.Column>
         </Grid>
         {precisionLabel}

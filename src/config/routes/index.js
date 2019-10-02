@@ -42,7 +42,14 @@ import { default as emailVerification } from 'src/components/emailVerification/E
 import SecretBillingPlanOrBillingSummaryPage from '../SecretBillingPlanOrBillingSummaryPage';
 
 import { all, hasGrants, not } from 'src/helpers/conditions';
-import { isAws, isCustomBilling, isEnterprise, isSelfServeBilling } from 'src/helpers/conditions/account';
+import {
+  hasAccountOptionEnabled,
+  isAws,
+  isCustomBilling,
+  isEnterprise,
+  isSelfServeBilling,
+  isAccountUiOptionSet
+} from 'src/helpers/conditions/account';
 import { isAzure, isHeroku, isSubaccountUser } from 'src/helpers/conditions/user';
 import { configEquals, configFlag } from 'src/helpers/conditions/config';
 import App from 'src/components/layout/App';
@@ -268,6 +275,14 @@ const routes = [
     supportDocSearch: 'signals'
   },
   {
+    path: '/signals/health-scoreV3/:facet/:facetId',
+    component: signals.HealthScorePageV3,
+    condition: isAccountUiOptionSet('allow_health_score_v3'),
+    layout: App,
+    title: 'Signals',
+    supportDocSearch: 'signals'
+  },
+  {
     path: '/signals/spam-traps/:facet/:facetId',
     component: signals.SpamTrapPage,
     condition: hasGrants('signals/manage'),
@@ -305,6 +320,14 @@ const routes = [
     condition: hasGrants('signals/manage'),
     layout: App,
     title: 'Signals',
+    supportDocSearch: 'signals'
+  },
+  {
+    path: '/signals/integration',
+    component: signals.IntegrationPage,
+    condition: hasAccountOptionEnabled('allow_events_ingest'),
+    layout: App,
+    title: 'Signals | Integration',
     supportDocSearch: 'signals'
   },
   {

@@ -23,11 +23,11 @@ const TestContent = ({ content, details }) => {
       <h2>{details.subject}</h2>
       <Grid>
         <InfoBlock value={from_address} label='From' columnProps={{ sm: 12, md: 4 }}/>
-        <InfoBlock value={formatBytes(message_size)} label='Raw Message Size:' columnProps={{ sm: 12, md: 4 }}/>
+        <InfoBlock value={formatBytes(message_size)} label='Raw Message Size' columnProps={{ sm: 12, md: 4 }}/>
       </Grid>
     </Panel>
     <Panel>
-      <Tabs selected={selectedTabIndex} tabs={tabs} color='navy' />
+      <Tabs selected={selectedTabIndex} tabs={tabs} color='blue' />
       <Panel.Section>
         <CodeBlock code={content[selectedTabKey] || ''}/>
       </Panel.Section>

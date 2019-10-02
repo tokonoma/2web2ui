@@ -1,6 +1,8 @@
 import { getFriendlyTitle, getDoD, getCaretProps, getDates } from '../signals';
 import cases from 'jest-in-case';
 import thresholds from 'src/pages/signals/constants/healthScoreThresholds';
+import { roundBoundaries } from 'src/helpers/metrics';
+import moment from 'moment';
 
 cases('.getFriendlyTitle', ({ expected, values }) => {
   expect(getFriendlyTitle(values)).toEqual(expected);
@@ -96,13 +98,14 @@ describe('.getCaretProps', () => {
 
 describe('.getDates', () => {
   it('sets relative range', () => {
+    const { from, to } = roundBoundaries(moment('2017-10-02T04:00:00Z'),moment('2017-12-31T05:59:59.999Z'));
     expect(getDates({
       relativeRange: '90days',
       now: '2018-01-01T05:00:00Z'
     })).toEqual({
       relativeRange: '90days',
-      from: new Date('2017-10-02T04:00:00.000Z'),
-      to: new Date('2017-12-31T05:59:59.999Z')
+      from: from.toDate(),
+      to: to.toDate()
     });
   });
 

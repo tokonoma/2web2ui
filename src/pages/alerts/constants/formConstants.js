@@ -76,14 +76,14 @@ export const NOTIFICATION_CHANNEL_DATA = {
   },
   slack: {
     icon: <SlackIcon />,
-    subtitle: webhookSubtitle,
+    subtitle: slackSubtitle,
     fieldProps: {
       placeholder: 'https://hooks.slack.com/services/T00/B00/XX '
     }
   },
   webhook: {
     icon: <WebhookIcon />,
-    subtitle: slackSubtitle,
+    subtitle: webhookSubtitle,
     fieldProps: {
       placeholder: 'https://example.com/webhook-target'
     }

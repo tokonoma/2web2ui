@@ -1,0 +1,144 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FeatureComparisonModal:  ComparisonModal:  should render correctly 1`] = `
+<Modal
+  onClose={[MockFunction]}
+  open={true}
+  showCloseButton={true}
+>
+  <Panel>
+    <div
+      className="FeatureComparisonTable"
+    >
+      <Table>
+        <tbody>
+          <HeaderRow
+            plans={
+              Array [
+                "PLANA",
+                "PLANB",
+                "PLANC",
+              ]
+            }
+          />
+        </tbody>
+      </Table>
+      <Table
+        key="featureGroup1"
+      >
+        <tbody>
+          <GroupHeading
+            colSpan={4}
+            groupName="featureGroup1"
+          />
+          <Row
+            PLANA={true}
+            PLANB="15 days"
+            PLANC="test /n string"
+            featureName="featureA"
+            key="featureA"
+          />
+        </tbody>
+      </Table>
+      <Table
+        key="featureGroup2"
+      >
+        <tbody>
+          <GroupHeading
+            colSpan={4}
+            groupName="featureGroup2"
+          />
+          <Row
+            PLANA={true}
+            PLANB="15 days"
+            PLANC="test /n string"
+            featureName="featureA"
+            key="featureA"
+          />
+        </tbody>
+      </Table>
+    </div>
+  </Panel>
+</Modal>
+`;
+
+exports[`FeatureComparisonModal:  GroupHeading:  should render correctly 1`] = `
+<Table.Row>
+  <Table.HeaderCell
+    className="GroupHeading"
+    colSpan={3}
+  >
+    Standard Features
+  </Table.HeaderCell>
+</Table.Row>
+`;
+
+exports[`FeatureComparisonModal:  HeaderRow: should render correctly 1`] = `
+<Table.Row>
+  <Table.Cell
+    className="FeatureCell"
+  >
+      
+  </Table.Cell>
+  <Table.Cell
+    className="FeatureComparisonCell PlanName"
+    key="PLANA"
+  >
+     
+    PLANA
+     
+  </Table.Cell>
+  <Table.Cell
+    className="FeatureComparisonCell PlanName"
+    key="PLANB"
+  >
+     
+    PLANB
+     
+  </Table.Cell>
+  <Table.Cell
+    className="FeatureComparisonCell PlanName"
+    key="PLANC"
+  >
+     
+    PLANC
+     
+  </Table.Cell>
+</Table.Row>
+`;
+
+exports[`FeatureComparisonModal:  Row:  should render correctly 1`] = `
+<Table.Row>
+  <Table.Cell
+    className="FeatureCell"
+  >
+     
+    Signals Predictive Analytics
+     
+  </Table.Cell>
+  <Table.Cell
+    className="FeatureComparisonCell"
+    key="testAccount"
+  >
+     
+    <Check />
+     
+  </Table.Cell>
+  <Table.Cell
+    className="FeatureComparisonCell"
+    key="starterPlans"
+  >
+     
+    <Check />
+     
+  </Table.Cell>
+  <Table.Cell
+    className="FeatureComparisonCell"
+    key="premierPlans"
+  >
+     
+    <Check />
+     
+  </Table.Cell>
+</Table.Row>
+`;

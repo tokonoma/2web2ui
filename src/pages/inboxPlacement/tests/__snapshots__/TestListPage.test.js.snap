@@ -8,11 +8,6 @@ exports[`Page: Test List renders page correctly with defaults 1`] = `
         Perform seedlist tests that help you predict how your emails are handled by mailbox providers.
       </p>,
       "image": [Function],
-      "secondaryAction": Object {
-        "content": "Check out our docs",
-        "external": true,
-        "to": "https://developers.sparkpost.com/api",
-      },
       "show": true,
       "title": "Find and Fix Inbox Placement Issues",
     }
@@ -85,11 +80,6 @@ exports[`Page: Test List renders page with tests 1`] = `
         Perform seedlist tests that help you predict how your emails are handled by mailbox providers.
       </p>,
       "image": [Function],
-      "secondaryAction": Object {
-        "content": "Check out our docs",
-        "external": true,
-        "to": "https://developers.sparkpost.com/api",
-      },
       "show": false,
       "title": "Find and Fix Inbox Placement Issues",
     }

@@ -1,0 +1,18 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.TooltipDate {
+  border-bottom: 1px solid darken(color(gray, 1), 5);
+  color: color(gray, 10);
+  font-size: rem(15);
+  padding: spacing(small) spacing();
+}
+
+.TooltipIcon {
+  color: color(blue);
+  margin-left: spacing(small);
+  margin-top: -4px;
+}
+
+.TooltipMetrics {
+  padding: spacing(small) spacing();
+}

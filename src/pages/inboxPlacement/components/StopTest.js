@@ -31,7 +31,7 @@ const StopTest = ({ status, onStop, loading }) => {
       confirmVerb='Stop Test'
       cancelVerb='Continue Test'
     />
-    <Button primary onClick={toggleModalVisibility}>Stop Test</Button>
+    <Button primary size='large' onClick={toggleModalVisibility}>Stop Test</Button>
   </>);
 };
 

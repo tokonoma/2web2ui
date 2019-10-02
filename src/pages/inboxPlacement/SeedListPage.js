@@ -40,8 +40,8 @@ export class SeedListPage extends React.Component {
           <hr className={styles.hr}/>
           <p className={styles.Directions}>
             Next, set up your campaign. Make sure you are sending to the full list of seed email addresses.
-            For best results, set the <strong>`X-SP-Inbox-Placement`</strong> header with a unique value such
-            as <strong>"my-first-test"</strong>.
+            For best results, set the <code>`X-SP-Inbox-Placement`</code> header with a unique value such
+            as <code>"my-first-test"</code>.
             If you don't, you may run into issues if your have more than one test running with the same
             subject line.
           </p>
@@ -52,10 +52,10 @@ export class SeedListPage extends React.Component {
         </div>
         <TextField multiline value={seeds.join('\n')} resize="vertical" rows={10} readOnly/>
         <div>
-          <SaveCSVButton data={csvData} saveCsv={true} caption={<span><FileDownload/>Download CSV</span>}/>
           <span className={styles.CopyButton}>
-            <CopyToClipboard value={seeds.join(',')} label='Copy List'/>
+            <CopyToClipboard primary value={seeds.join(',')} label='Copy List'/>
           </span>
+          <SaveCSVButton data={csvData} saveCsv={true} caption={<span><FileDownload/>Download CSV</span>} filename={'sparkpost-seedlist.csv'}/>
         </div>
       </Panel.Section>
     </>);
@@ -74,14 +74,14 @@ export class SeedListPage extends React.Component {
           content: 'Inbox Placement Tests',
           onClick: () => this.props.history.push('/inbox-placement')
         }}
-        title='Inbox Placement | Start a Test'
+        title='Inbox Placement'
+        subtitle='Start a Test'
       >
         <Panel>
           <Panel.Section>
             <h3>Send To These Addresses</h3>
           </Panel.Section>
           {error ? this.renderError() : this.renderContents()}
-
         </Panel>
       </Page>
     );

@@ -20,6 +20,9 @@ exports[`FullPage renders a page 1`] = `
           height={28}
           width={28}
         />
+        <ScreenReaderOnly>
+          Back
+        </ScreenReaderOnly>
       </UnstyledLink>
       <h1
         className="FullPageTitle"

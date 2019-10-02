@@ -68,7 +68,13 @@ export const TestDetailsPage = (props) => {
   }
 
   return (
-    <Page title='Inbox Placement | Results'
+    <Page
+      breadcrumbAction={{
+        content: 'All Inbox Placement Tests',
+        onClick: () => history.push('/inbox-placement')
+      }}
+      title='Inbox Placement'
+      subtitle='Results'
       primaryArea={<StopTest status={(details || {}).status} loading={stopTestLoading} onStop={stopTest} />}
     >
       <Tabs

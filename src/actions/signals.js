@@ -97,20 +97,3 @@ export const getSpamHits = signalsActionCreator({
   dimension: 'spam-hits',
   type: 'GET_SPAM_HITS'
 });
-
-export const getInjections = ({
-  from,
-  to
-}) => sparkpostApiRequest({
-  type: 'GET_INJECTIONS',
-  meta: {
-    method: 'GET',
-    headers: {},
-    url: '/v1/signals/injections',
-    showErrorAlert: false,
-    params: {
-      from: formatInputDate(from),
-      to: formatInputDate(to)
-    }
-  }
-});

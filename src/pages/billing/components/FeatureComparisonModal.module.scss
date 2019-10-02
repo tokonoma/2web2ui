@@ -1,0 +1,48 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.GroupHeading {
+    background: color(gray,9);
+    border-top: 1px solid color(gray,5);
+    border-bottom: 1px solid color(gray,5);
+}
+.FeatureCell {
+    width: 31%;
+    padding-left: 2em;
+    max-height: 40px;
+}
+.FeatureComparisonCell {
+    border-left: 1px solid color(gray,5);
+    width: 23%;
+    text-align: center;
+    max-height: 40px;
+    word-break: break-word;
+    font-size: 120%;
+}
+.FeatureComparisonTable{   
+    table {
+        margin-bottom: 0; // override
+      }
+}
+
+.SmallerFont{
+    font-size: 12px;
+}
+
+.PlanOne {
+    color: rgb(155, 152, 39);
+}
+.PlanTwo {
+    color: rgb(60, 146, 240);
+}
+.PlanThree {
+    color: rgb(250, 100, 35);
+}
+.PlanName{
+    height: 80px;
+    padding: 31px;
+    font-size: 24px;
+    font-weight: 600;
+}
+.NotAvailable{
+    color: color(gray, 5);
+}

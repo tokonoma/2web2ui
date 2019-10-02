@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tooltip renders correctly 1`] = `
+<Popover
+  bottom={true}
+  className="Content"
+  open={false}
+  right={true}
+  sectioned={false}
+  trigger={
+    <span
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <button>
+        Learn More
+      </button>
+    </span>
+  }
+>
+  <div>
+    More
+  </div>
+</Popover>
+`;

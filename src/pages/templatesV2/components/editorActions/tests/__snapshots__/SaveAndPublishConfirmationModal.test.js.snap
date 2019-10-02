@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SaveAndPublishConfirmationModal renders 1`] = `
+<ConfirmationModal
+  confirmVerb="Save and Publish"
+  confirming={false}
+  content={
+    <p>
+      Once published, your template will be available for use in email campaigns and A/B tests.
+    </p>
+  }
+  isPending={false}
+  onCancel={[MockFunction]}
+  onConfirm={[Function]}
+  open={true}
+  title="Are you sure you want to publish your template?"
+/>
+`;

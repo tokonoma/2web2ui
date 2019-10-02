@@ -6,6 +6,7 @@ exports[`CursorPaging should correctly render cursor paging when there is only o
 >
   <Button
     className="RewindButton"
+    disabled={true}
     key="rewind"
     onClick={[MockFunction]}
     size="default"
@@ -43,6 +44,7 @@ exports[`CursorPaging should render cursor paging 1`] = `
 >
   <Button
     className="RewindButton"
+    disabled={false}
     key="rewind"
     onClick={[MockFunction]}
     size="default"

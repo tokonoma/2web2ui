@@ -19,8 +19,10 @@ export class Navigation extends Component {
   };
 
   renderItems() {
-    return this.props.navItems.map((item, key) => {
-      const props = { ...item, toggleMobileNav: this.toggleMobileNav, location: this.props.location, key: key };
+    const { navItems, location } = this.props;
+
+    return navItems.map((item, key) => {
+      const props = { ...item, toggleMobileNav: this.toggleMobileNav, location, key: key };
       return item.children ? <NavGroup {...props} /> : <NavItem {...props} />;
     });
   }

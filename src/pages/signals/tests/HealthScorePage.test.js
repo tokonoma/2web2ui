@@ -60,13 +60,6 @@ describe('Signals Health Score Page', () => {
     expect(wrapper.find('withRouter(Connect(WithDetails(SpamTrapsPreview)))')).not.toContainMatchingElement();
   });
 
-  it('does not render injections chart when faceted by mailbox provider', () => {
-    wrapper.setProps({ facet: 'mb_provider' });
-    wrapper.update();
-    expect(wrapper.find({ title: 'Injections' })).not.toExist();
-    expect(wrapper.find({ yKey: 'injections' })).not.toExist();
-  });
-
   it('renders error correctly', () => {
     wrapper.setProps({ error: { message: 'error message' }});
     expect(wrapper).toMatchSnapshot();
@@ -75,6 +68,21 @@ describe('Signals Health Score Page', () => {
   it('renders empty weights', () => {
     wrapper.setProps({ data: [{ date: '2017-01-01' }]});
     expect(wrapper).toMatchSnapshot();
+  });
+
+  it('renders weight chart at 100% if data all data is 0/undefined', () => {
+    const newData = [
+      {
+        date: '2017-01-01',
+        weights: [{ weight_type: 'Hard Bounces', weight: 0.5, weight_value: 0 }]
+      },
+      {
+        date: '2017-01-02',
+        weights: [{ weight_type: 'Hard Bounces', weight: 0.5, weight_value: undefined }]
+      }
+    ];
+    wrapper.setProps({ data: newData });
+    expect(wrapper.find('BarChart').at(2).prop('yDomain')).toEqual([0, 1]);
   });
 
   it('renders component weights bar height dynamically', () => {

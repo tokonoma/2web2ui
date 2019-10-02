@@ -23,4 +23,17 @@ describe('math helpers', () => {
     });
   });
 
+  describe('sum', () => {
+    it('returns zero by default', () => {
+      expect(mathHelpers.sum()).toEqual(0);
+    });
+
+    it('returns integer', () => {
+      expect(mathHelpers.sum(1, 1)).toEqual(2);
+    });
+
+    it('returns float', () => {
+      expect(mathHelpers.sum(1, .5)).toEqual(1.5);
+    });
+  });
 });

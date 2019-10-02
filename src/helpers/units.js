@@ -1,5 +1,6 @@
 import _ from 'lodash';
 
+export const coalesce = (...values) => values.find((value) => value !== undefined);
 export const isNumber = (value) => isNaN(parseFloat(value)) === false || isFinite(value) === true;
 
 export function roundToPlaces(number, places) {

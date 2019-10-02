@@ -1,62 +1,45 @@
-import { shallow } from 'enzyme';
 import React from 'react';
+import { shallow } from 'enzyme';
 import { SubaccountsField } from '../SubaccountsField';
-import cases from 'jest-in-case';
 
 describe('Subaccount Field', () => {
-  let props;
-  let wrapper;
+  const subject = (props = {}) => shallow(
+    <SubaccountsField
+      disabled={false}
+      listSubaccounts={() => {}}
+      subaccounts={[
+        { id: 1, name: 'My Subacount' }
+      ]}
+      subaccountsFieldValue={[]}
+      {...props}
+    />
+  );
 
-  beforeEach(() => {
-    props = {
-      hasSubaccounts: true,
-      disabled: false,
-      subaccounts: [{ id: 1, name: 'My Subacount' }],
-      subaccountsFieldValue: [],
-      listSubaccounts: jest.fn()
-    };
-
-    wrapper = shallow(<SubaccountsField {...props} />);
+  it('renders combo box field', () => {
+    expect(subject()).toMatchSnapshot();
   });
 
-  it('should render the Subaccounts Field component correctly', () => {
-    expect(wrapper).toMatchSnapshot();
+  it('calls listSubaccounts on mount', () => {
+    const listSubaccounts = jest.fn();
+    subject({ listSubaccounts });
+    expect(listSubaccounts).toHaveBeenCalled();
   });
 
-  it('gets subaccounts when mounted', () => {
-    wrapper = shallow(<SubaccountsField {...props}/>);
-    expect(props.listSubaccounts).toHaveBeenCalled();
+  it('renders combo box field with mapped field values', () => {
+    const wrapper = subject({ subaccountsFieldValue: [0, 1]});
+    expect(wrapper).toHaveProp('defaultSelected', [
+      { id: 0, name: 'Master account' },
+      { id: 1, name: 'My Subacount' }
+    ]);
   });
 
-  describe('correct options should show when', () => {
-    const subaccountCases = {
-      'no subaccounts are selected':
-      {
-        subaccountsFieldValue: [],
-        expectedLength: 4
-      },
-      'Master and all subaccounts is selected': {
-        subaccountsFieldValue: [-1],
-        expectedLength: 0
-      },
-      'Any subaccount is selected': {
-        subaccountsFieldValue: [-2],
-        expectedLength: 0
-      },
-      'master account is selected': {
-        subaccountsFieldValue: [0],
-        expectedLength: 2
-      },
-      'multiple subaccounts are selected': {
-        subaccountsFieldValue: [0,1],
-        expectedLength: 2
-      }
-    };
-
-    cases('options should be correct when', ({ subaccountsFieldValue, expectedLength }) => {
-      wrapper.setProps({ subaccountsFieldValue });
-      expect(wrapper.find({ name: 'subaccounts' }).prop('results')).toHaveLength(expectedLength);
-    }, subaccountCases);
+  it('renders combo box field with unknown field values', () => {
+    const wrapper = subject({ subaccountsFieldValue: [999]});
+    expect(wrapper).toHaveProp('defaultSelected', [{ id: 999, name: 'id:' }]);
   });
 
+  it('renders disabled combo box field', () => {
+    const wrapper = subject({ disabled: true });
+    expect(wrapper).toHaveProp('disabled', true);
+  });
 });

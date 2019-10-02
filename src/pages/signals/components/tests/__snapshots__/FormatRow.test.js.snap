@@ -1,0 +1,69 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FormatRow renders a row 1`] = `
+Array [
+  <DisplayDate
+    formattedDate="Sep 18 2019, 4:09pm"
+    timestamp="2019-09-18T20:09:38.000Z"
+  />,
+  <Fragment>
+    <Status
+      status="success"
+    />
+  </Fragment>,
+  "1",
+  "8c4b19fb-07a2-42cb-84f7-3ab09a8049e0",
+]
+`;
+
+exports[`FormatRow renders a row with validation error 1`] = `
+Array [
+  <DisplayDate
+    formattedDate="Sep 18 2019, 4:09pm"
+    timestamp="2019-09-18T20:09:38.000Z"
+  />,
+  <Fragment>
+    <Status
+      error="validation"
+      status="error"
+    />
+    <Tooltip
+      content={
+        <React.Fragment>
+          <div
+            className="TooltipDate"
+          >
+            Sep 18 2019
+          </div>
+          <div
+            className="TooltipMetrics"
+          >
+            <TooltipMetric
+              color="#8CCA3A"
+              label="Accepted"
+              value="1"
+            />
+            <TooltipMetric
+              color="#DB2F2D"
+              label="Rejected"
+              value="1,234"
+            />
+            <TooltipMetric
+              color="#FA6423"
+              label="Duplicates"
+              value="0"
+            />
+          </div>
+        </React.Fragment>
+      }
+    >
+      <InfoOutline
+        className="TooltipIcon"
+        size={24}
+      />
+    </Tooltip>
+  </Fragment>,
+  "1,235",
+  "8c4b19fb-07a2-42cb-84f7-3ab09a8049e0",
+]
+`;

@@ -26,14 +26,14 @@ exports[`Component: TestContent renders page correctly with defaults 1`] = `
             "sm": 12,
           }
         }
-        label="Raw Message Size:"
+        label="Raw Message Size"
         value="2.52KB"
       />
     </Grid>
   </Panel>
   <Panel>
     <Tabs
-      color="navy"
+      color="blue"
       connectBelow={true}
       selected={0}
       tabs={
