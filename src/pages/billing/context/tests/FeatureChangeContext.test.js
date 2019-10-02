@@ -20,6 +20,12 @@ const defaultProps = {
     'tfa-required-0519': {
       product: 'tfa_required',
       plan: 'tfa-required-0519'
+    },
+    'ip-0519': {
+      product: 'dedicated_ip',
+      plan: 'ip-0519',
+      volume: 1,
+      limit: 4
     }
   },
   subscription: {
@@ -38,6 +44,10 @@ const defaultProps = {
       {
         product: 'tfa_required',
         plan: 'tfa-required-0519'
+      },
+      {
+        product: 'dedicated_ip',
+        plan: 'ip-0519'
       }
     ]
   },
@@ -46,7 +56,8 @@ const defaultProps = {
       '100K-premier-0519',
       'sso-0519',
       'tfa-required-0519',
-      'subaccounts-0519'
+      'subaccounts-0519',
+      'ip-0519'
     ]
   },
   loading: false,
@@ -84,7 +95,22 @@ describe('FeatureChangeContext', () => {
       selectedBundle: {
         plans: [
           '100K-premier-0519',
-          'subaccounts-0519'
+          'subaccounts-0519',
+          'ip-0519'
+        ]
+      }
+    });
+    expect(wrapper.prop('value')).toMatchSnapshot();
+  });
+
+  it('should render acknowledgement for a change in dedicated IPs', () => {
+    const wrapper = subject({
+      selectedBundle: {
+        plans: [
+          '100K-premier-0519',
+          'subaccounts-0519',
+          'sso-0519',
+          'tfa-required-0519'
         ]
       }
     });
