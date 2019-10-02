@@ -26,6 +26,18 @@ describe('EditAndPreviewPage', () => {
     expect(subject({ editorState: { isPublishedMode: true }}).prop('primaryArea')).toMatchSnapshot();
   });
 
+  it('renders the title with the content "(DRAFT)" appended when not in published mode', () => {
+    const wrapper = subject({ editorState: { isPublishedMode: false }});
+
+    expect(wrapper).toHaveProp('title', 'Test Template (DRAFT)');
+  });
+
+  it('does not render with the content "(DRAFT)" appended when in published mode', () => {
+    const wrapper = subject({ editorState: { isPublishedMode: true }});
+
+    expect(wrapper).toHaveProp('title', 'Test Template');
+  });
+
   it('renders loading', () => {
     const wrapper = subject({ editorState: { isDraftLoading: true }});
     expect(wrapper.find('Loading')).toExist();

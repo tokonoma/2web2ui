@@ -46,8 +46,11 @@ describe('SettingsForm', () => {
       .toEqual('The selected subaccount does not have any verified sending domains.');
   });
 
-  it('renders id field disabled', () => {
-    expect(subject().find('[name="id"]').prop('disabled')).toBe(true);
+  it('renders id field disabled and leverages the CopyField component', () => {
+    const wrapper = subject();
+
+    expect(wrapper.find('[name="id"]').prop('disabled')).toBe(true);
+    expect(wrapper.find('CopyField')).toEqual(wrapper.find('[name="id"]'));
   });
 
   describe('Published version', () => {
