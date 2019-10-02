@@ -62,6 +62,12 @@ exports[`PublishedModeActions renders published actions 1`] = `
     <DuplicateTemplateModal
       onClose={[Function]}
       open={false}
+      template={
+        Object {
+          "id": "123",
+          "subaccount_id": "abcd",
+        }
+      }
     />
     <DeleteTemplateModal
       onCancel={[Function]}

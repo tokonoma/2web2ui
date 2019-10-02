@@ -7,8 +7,11 @@ exports[`Template List Components DeleteAction should render correctly 1`] = `
   size="default"
 >
   <Delete
-    size={20}
+    size={16}
   />
+  <ScreenReaderOnly>
+    Delete Template
+  </ScreenReaderOnly>
 </Button>
 `;
 

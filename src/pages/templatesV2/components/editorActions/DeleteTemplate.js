@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { UnstyledLink } from '@sparkpost/matchbox';
 import { Delete } from '@sparkpost/matchbox-icons';
 
@@ -18,6 +19,11 @@ const DeleteTemplate = (props) => {
       </UnstyledLink>
     </div>
   );
+};
+
+DeleteTemplate.propTypes = {
+  onClick: PropTypes.func.isRequired,
+  className: PropTypes.string
 };
 
 export default DeleteTemplate;
