@@ -1,6 +1,6 @@
 import React from 'react';
 import EditorContext from '../../context/EditorContext';
-import SettingsForm from './Form';
+import SettingsForm from './SettingsForm';
 import { isSubaccountUser } from 'src/helpers/conditions/user';
 import { selectCondition } from 'src/selectors/accessConditionState';
 import { hasSubaccounts } from 'src/selectors/subaccounts';

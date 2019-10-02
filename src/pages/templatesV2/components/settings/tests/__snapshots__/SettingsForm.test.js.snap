@@ -29,12 +29,14 @@ exports[`SettingsForm renders without subaccounts 1`] = `
         name="name"
         validate={[Function]}
       />
-      <Field
-        component={[Function]}
+      <CopyField
         disabled={true}
         helpText="A Unique ID for your template, we'll fill this in for you."
+        hideCopy={false}
+        id="template-id-field"
         label="Template ID"
         name="id"
+        value="fake-id"
       />
     </Panel.Section>
     <Panel.Section>
@@ -134,12 +136,6 @@ exports[`SettingsForm renders without subaccounts 1`] = `
       >
         Update Settings
       </Button>
-      <DeleteTemplate
-        afterDelete={[Function]}
-        className="DeleteButton"
-      >
-        Delete Template
-      </DeleteTemplate>
     </Panel.Section>
   </form>
 </Fragment>

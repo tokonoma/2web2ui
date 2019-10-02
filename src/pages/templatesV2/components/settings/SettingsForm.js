@@ -9,7 +9,7 @@ import { TextFieldWrapper } from 'src/components';
 import FromEmailWrapper from '../FromEmailWrapper';
 import CopyField from 'src/components/copyField/CopyField';
 import { required } from 'src/helpers/validation';
-import styles from './Form.module.scss';
+import styles from './SettingsForm.module.scss';
 import { emailOrSubstitution } from '../validation';
 import { routeNamespace } from '../../constants/routes';
 
@@ -66,6 +66,7 @@ export default class SettingsForm extends React.Component {
           />
 
           <CopyField
+            name='id'
             id='template-id-field'
             label='Template ID'
             value={draft.id}

@@ -1,7 +1,7 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 import every from 'lodash/every';
-import SettingsForm from '../Form';
+import SettingsForm from '../SettingsForm';
 
 describe('SettingsForm', () => {
   const subject = (props) => {
@@ -10,6 +10,9 @@ describe('SettingsForm', () => {
         { domain: 'test.com' },
         { domain: 'verified.com' }
       ],
+      draft: {
+        id: 'fake-id'
+      },
       domainsLoading: false,
       hasSubaccounts: false,
       canViewSubaccount: false,
@@ -51,9 +54,10 @@ describe('SettingsForm', () => {
     it('renders with fields disabled', () => {
       const wrapper = subject({ hasSubaccounts: true, canViewSubaccount: true, isPublishedMode: true });
       const fieldProps = wrapper.find('Field').map((field) => field.prop('disabled'));
-      expect(fieldProps.length).toEqual(10);
+      expect(fieldProps.length).toEqual(9);
       expect(every(fieldProps)).toBe(true);
       expect(wrapper.find('SubaccountSection').prop('disabled')).toBe(true);
+      expect(wrapper.find('[name="id"]')).toHaveProp('disabled', true);
     });
 
     it('renders settings intro when draft does not exist', () => {
