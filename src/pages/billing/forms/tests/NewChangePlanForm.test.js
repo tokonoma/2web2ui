@@ -2,7 +2,9 @@ import React from 'react';
 import { ChangePlanForm } from '../NewChangePlanForm';
 import { shallow, mount } from 'enzyme';
 import useRouter from 'src/hooks/useRouter';
+
 jest.mock('src/hooks/useRouter');
+jest.mock('../../context/FeatureChangeContext');
 
 describe('Change Plan Form', () => {
   const defaultProps = {
@@ -17,7 +19,8 @@ describe('Change Plan Form', () => {
           overage: 0.2,
           volume: 2,
           isFree: true
-        }
+        },
+        billingId: 2
       }],
       'starter': [{
         bundle: '3',
@@ -27,7 +30,8 @@ describe('Change Plan Form', () => {
           name: 'Three',
           overage: 0.3,
           volume: 3
-        }
+        },
+        billingId: 3
       }],
       'premier': [{
         bundle: '4',
@@ -38,7 +42,8 @@ describe('Change Plan Form', () => {
           name: 'Four',
           overage: 0.4,
           volume: 4
-        }
+        },
+        billingId: 4
       }]
     },
     currentPlan: {
@@ -48,7 +53,7 @@ describe('Change Plan Form', () => {
       name: 'Three',
       overage: 0.3,
       volume: 3,
-      billingId: '3'
+      billingId: 3
     },
     getBundles: jest.fn(),
     getBillingCountries: jest.fn(),
@@ -97,14 +102,14 @@ describe('Change Plan Form', () => {
   it('selects plan and applies promocode if code present in request params', () => {
     const wrapper = subject({
       requestParams: {
-        code: '1',
+        code: '2',
         promo: 'THXFISH2'
       }
-    },mount);
-    expect(wrapper.find('SelectedPlan')).toHaveProp('plan', defaultProps.plans.test[0]);
+    }, mount);
+    expect(wrapper.find('SelectedPlan')).toHaveProp('bundle', defaultProps.bundles.test[0]);
 
     expect(defaultProps.verifyPromoCode).toHaveBeenCalledWith({ promoCode: 'THXFISH2',
-      billingId: defaultProps.plans.test[0].billingId,
+      billingId: defaultProps.bundles.test[0].billingId,
       meta: { promoCode: 'THXFISH2', showErrorAlert: false }});
   });
 });

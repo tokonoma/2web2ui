@@ -11,6 +11,7 @@ exports[`Change Plan Form should render 1`] = `
           Object {
             "premier": Array [
               Object {
+                "billingId": 4,
                 "bundle": "4",
                 "messaging": Object {
                   "code": "4",
@@ -24,6 +25,7 @@ exports[`Change Plan Form should render 1`] = `
             ],
             "starter": Array [
               Object {
+                "billingId": 3,
                 "bundle": "3",
                 "messaging": Object {
                   "code": "3",
@@ -36,6 +38,7 @@ exports[`Change Plan Form should render 1`] = `
             ],
             "test": Array [
               Object {
+                "billingId": 2,
                 "bundle": "2",
                 "messaging": Object {
                   "code": "2",
@@ -52,6 +55,7 @@ exports[`Change Plan Form should render 1`] = `
         }
         currentPlan={
           Object {
+            "billingId": 3,
             "code": "big-code",
             "monthly": 300,
             "name": "Three",
@@ -69,6 +73,7 @@ exports[`Change Plan Form should render 1`] = `
       <CurrentPlanSection
         currentPlan={
           Object {
+            "billingId": 3,
             "code": "big-code",
             "monthly": 300,
             "name": "Three",

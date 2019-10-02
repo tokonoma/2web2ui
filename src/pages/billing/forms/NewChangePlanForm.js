@@ -37,43 +37,42 @@ export const ChangePlanForm = ({
   // },
 }) => {
   const { requestParams: { code, promo } = {}, updateRoute } = useRouter();
-  const allPlans = Object.values(plans).reduce((acc, curr) => [...curr, ...acc],[]);
-  const [selectedPlan, selectPlan] = useState(allPlans.find((x) => x.code === code) || null);
+  const allBundles = Object.values(bundles).reduce((acc, curr) => [...curr, ...acc],[]);
+  const [selectedBundle, selectBundle] = useState(allBundles.find(({ bundle }) => bundle === code) || null);
+  const onSelect = (plan) => {
+    selectBundle(plan);
+  };
+
+  const isPlanSelected = Boolean(selectedBundle && currentPlan.plan !== selectedBundle.bundle);
+
   // const [useSavedCC, setUseSavedCC] = useState(null);
   const applyPromoCode = useCallback((promoCode) => {
-    const { billingId } = selectedPlan;
+    const { billingId } = selectedBundle;
     verifyPromoCode({ promoCode , billingId, meta: { promoCode, showErrorAlert: false }});
-  },[selectedPlan, verifyPromoCode]);
+  },[selectedBundle, verifyPromoCode]);
   useEffect(() => { getBillingCountries(); }, [getBillingCountries]);
   useEffect(() => { getBillingInfo(); }, [getBillingInfo]);
-  useEffect(() => {
-    if (!selectedPlan) {
-      clearPromoCode();
-    }
-  },[clearPromoCode, selectedPlan]);
-  useEffect(() => {
-    if (promo && selectedPlan) {
-      applyPromoCode(promo);
-    }
-  },[applyPromoCode, promo, selectedPlan, verifyPromoCode]);
-  useEffect(() => {
-    if (!selectedPlan) { //clears out requestParams when user changes plan
-      updateRoute({ undefined });
-    }
-  },[selectedPlan, updateRoute]);
-  const isPlanSelected = !!selectedPlan;
-
   useEffect(() => { getBundles(); }, [getBundles]);
 
-  //TODO: Implement in AC-986
-  // useEffect(() => { console.log(selectedPlan, promoCode)}, [verifyPromoCode, promoCode, selectedPlan]);
+  useEffect(() => {
+    if (!selectedBundle) {
+      clearPromoCode();
+    }
+  },[clearPromoCode, selectedBundle]);
 
-  const applyPromoCode = (promoCode) => {
-    verifyPromoCode({ promoCode , billingId: selectedPlan.billingId, meta: { promoCode, showErrorAlert: false }});
-  };
-  const onSelect = (plan) => {
-    selectPlan(plan);
-  };
+  //Applies promo code if in query param
+  useEffect(() => {
+    if (promo && selectedBundle) {
+      applyPromoCode(promo);
+    }
+  },[applyPromoCode, promo, selectedBundle, verifyPromoCode]);
+
+  //clears out requestParams when user changes plan
+  useEffect(() => {
+    if (!selectedBundle) {
+      updateRoute({ undefined });
+    }
+  },[selectedBundle, updateRoute]);
 
   return (
     <form >
@@ -82,7 +81,7 @@ export const ChangePlanForm = ({
           {
             isPlanSelected
               ? <SelectedPlan
-                bundle={selectedPlan}
+                bundle={selectedBundle}
                 onChange={onSelect}
                 promoCodeObj = {promoCodeObj}
                 handlePromoCode = {
@@ -100,7 +99,7 @@ export const ChangePlanForm = ({
           }
           {
             isPlanSelected && (
-              <FeatureChangeContextProvider selectedBundle={selectedPlan}>
+              <FeatureChangeContextProvider selectedBundle={selectedBundle}>
                 <FeatureChangeSection/>
               </FeatureChangeContextProvider>
             )
