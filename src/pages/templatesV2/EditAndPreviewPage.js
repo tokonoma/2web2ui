@@ -16,8 +16,6 @@ const EditAndPreviewPage = () => {
   const {
     currentNavigationIndex,
     draft,
-    // hasDraft,
-    // hasPublished,
     hasDraftFailedToLoad,
     isDraftLoading,
     isPublishedMode
@@ -40,8 +38,6 @@ const EditAndPreviewPage = () => {
 
   const primaryArea = () => (
     <>
-      {/* {(hasDraft || hasPublished) && <span>Saved</span>} */}
-
       {isPublishedMode && (
         <div className={styles.Status}>
           <span>Published</span>

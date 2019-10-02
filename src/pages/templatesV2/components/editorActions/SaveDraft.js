@@ -9,7 +9,8 @@ const SaveDraft = (props) => {
     draft,
     content,
     updateDraft,
-    showAlert
+    showAlert,
+    setHasSaved
   } = useEditorContext();
 
   const handleClick = useCallback(() => {
@@ -18,10 +19,14 @@ const SaveDraft = (props) => {
     }
 
     updateDraft({ id: draft.id, content }, draft.subaccount_id)
-      .then(() => showAlert({
-        type: 'success',
-        message: 'Draft saved'
-      }));
+      .then(() => {
+        showAlert({
+          type: 'success',
+          message: 'Draft saved'
+        });
+
+        setHasSaved(true);
+      });
   });
 
   return (

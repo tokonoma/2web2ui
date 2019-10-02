@@ -13,14 +13,16 @@ const SaveAndPublishConfirmationModal = (props) => {
   const {
     draft,
     publishDraft,
-    isDraftPublishing
+    isDraftPublishing,
+    setHasSaved
   } = useEditorContext();
   const [hasSuccessRedirect, setSuccessRedirect] = useState(false);
 
   const handleConfirm = useCallback(() => publishDraft(draft, draft.subaccount_id)
     .then(() => {
+      setHasSaved(true);
       setSuccessRedirect(true);
-    }), [draft, publishDraft]);
+    }), [draft, publishDraft, setHasSaved]);
 
   return (
     <>
