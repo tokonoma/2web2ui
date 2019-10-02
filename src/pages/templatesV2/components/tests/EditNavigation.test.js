@@ -35,4 +35,18 @@ describe('EditNavigation', () => {
 
     expect(setNavigation).toHaveBeenCalledWith('settings');
   });
+
+  it('renders a "Saved" when the editor state `hasSaved` is `true`', () => {
+    const wrapper = subject({ editorState: { hasSaved: true }});
+
+    // TODO: Replace with `toHaveTextContent` matcher
+    expect(wrapper.find('SavedIndicator')).toHaveProp('content', 'Saved');
+  });
+
+  it('renders "Unsaved Changes" when the editor state `hasSaved` is `false`', () => {
+    const wrapper = subject({ editorState: { hasSaved: false }});
+
+    // TODO: Replace with `toHaveTextContent` matcher
+    expect(wrapper.find('SavedIndicator')).toHaveProp('content', 'Unsaved Changes');
+  });
 });

@@ -12,6 +12,16 @@ const EditNavigation = ({ primaryArea }) => {
     hasSaved
   } = useEditorContext();
 
+  const SavedIndicator = (props) => (
+    <span className={styles.NavigationSavedIndicator}>
+      <ScreenReaderOnly>Template</ScreenReaderOnly>
+
+      <span>
+        {props.content}
+      </span>
+    </span>
+  );
+
   return (
     <nav className={styles.Navigation}>
       <div className={styles.NavigationLinks}>
@@ -30,13 +40,7 @@ const EditNavigation = ({ primaryArea }) => {
         ))}
       </div>
       <div className={styles.NavigationPrimaryArea}>
-        {(hasSaved) && (
-          <span className={styles.NavigationSavedIndicator}>
-            <ScreenReaderOnly>Template</ScreenReaderOnly>
-
-            <span>Saved</span>
-          </span>
-        )}
+        <SavedIndicator content={hasSaved ? 'Saved' : 'Unsaved Changes'}/>
 
         {primaryArea}
       </div>

@@ -29,6 +29,9 @@ exports[`EditNavigation renders navigation with primary area 1`] = `
   <div
     className="NavigationPrimaryArea"
   >
+    <SavedIndicator
+      content="Unsaved Changes"
+    />
     <button>
       Click Me
     </button>
