@@ -1,6 +1,8 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 import BarChart from '../BarChart';
+import healthScoreThresholds from 'src/pages/signals/constants/healthScoreThresholds';
+
 
 describe('BarChart Component', () => {
   let wrapper;
@@ -35,27 +37,65 @@ describe('BarChart Component', () => {
   });
 
   it('renders a normal bar chart with correct fill for selected/hovered threshold events', () => {
-    wrapper.setProps({ selected: '2011-01-01', yKey: 'health_score', timeSeries: [{ health_score: 75, ranking: 'warning', date: '2011-01-01' }]});
-    const payload = { fill: '#fill', health_score: 75, ranking: 'warning', date: '2011-01-01' };
-    expect(wrapper.find('Bar').at(0).props().shape(payload).props).toMatchSnapshot();
+    const key = 'health_score';
+    wrapper.setProps({ selected: '2011-01-01', yKey: key, timeSeries: [{ [key]: 75, ranking: 'warning', date: '2011-01-01' }]});
+    const payload = { fill: '#fill', [key]: 75, ranking: 'warning', date: '2011-01-01' };
+    expect(wrapper.find({ dataKey: key }).at(0).props().shape(payload).props.fill).toEqual(healthScoreThresholds.warning.barColor);
   });
 
   it('renders a normal bar chart with correct fill for non-selected/hovered threshold events', () => {
-    wrapper.setProps({ selected: undefined, yKey: 'health_score', timeSeries: [{ health_score: 75, ranking: 'warning', date: '2011-01-01' }]});
-    const payload = { fill: '#fill', health_score: 75, ranking: 'warning', date: '2011-01-01' };
-    expect(wrapper.find('Bar').at(0).props().shape(payload).props).toMatchSnapshot();
+    const key = 'health_score';
+    wrapper.setProps({ selected: undefined, yKey: key, timeSeries: [{ [key]: 75, ranking: 'warning', date: '2011-01-01' }]});
+    const payload = { fill: '#fill', [key]: 75, ranking: 'warning', date: '2011-01-01' };
+    expect(wrapper.find({ dataKey: key }).at(0).props().shape(payload).props.fill).toEqual('#fill');
   });
 
   it('renders a normal bar chart with correct fill for selected/hovered non-threshold events', () => {
-    wrapper.setProps({ selected: '2011-01-01', yKey: 'injections', timeSeries: [{ injections: 75, date: '2011-01-01' }]});
-    const payload = { fill: '#fill', injections: 75, ranking: 'warning', date: '2011-01-01' };
-    expect(wrapper.find('Bar').at(0).props().shape(payload).props).toMatchSnapshot();
+    const key = 'injections';
+    wrapper.setProps({ selected: '2011-01-01', yKey: key, timeSeries: [{ [key]: 75, date: '2011-01-01' }]});
+    const payload = { fill: '#fill', [key]: 75, date: '2011-01-01' };
+    expect(wrapper.find({ dataKey: key }).at(0).props().shape(payload).props.fill).toEqual('#activeFill');
   });
 
   it('renders a normal bar chart with correct fill for non-selected/hovered non-threshold events', () => {
-    wrapper.setProps({ selected: undefined, yKey: 'injections', timeSeries: [{ injections: 75, date: '2011-01-01' }]});
-    const payload = { fill: '#fill', injections: 75, ranking: 'warning', date: '2011-01-01' };
-    expect(wrapper.find('Bar').at(0).props().shape(payload).props.fill).toEqual('#fill');
+    const key = 'injections';
+    wrapper.setProps({ selected: undefined, yKey: key, timeSeries: [{ [key]: 75, date: '2011-01-01' }]});
+    const payload = { fill: '#fill', [key]: 75, date: '2011-01-01' };
+    expect(wrapper.find({ dataKey: key }).at(0).props().shape(payload).props.fill).toEqual('#fill');
+  });
+
+  it('renders a normal bar chart with correct fill for non-selected/hovered stacked bar events', () => {
+    const key = 'c_new';
+    wrapper.setProps({ selected: undefined, yKey: key, timeSeries: [{ [key]: 75, date: '2011-01-01' }]});
+    const payload = { fill: '#fill', [key]: 75, date: '2011-01-01' };
+    expect(wrapper.find({ dataKey: key }).at(0).props().shape(payload).props.fill).toEqual('#fill');
+  });
+
+  it('renders a normal bar chart with less opaque fill fo stacked bar events when selected exists for another date', () => {
+    const key = 'c_new';
+    wrapper.setProps({ selected: '2011-01-02', yKey: key, timeSeries: [{ [key]: 75, date: '2011-01-01' },{ [key]: 80, date: '2011-01-02' }]});
+    const payload = { fill: '#fill', [key]: 75, date: '2011-01-01' };
+    expect(wrapper.find({ dataKey: key }).at(0).props().shape(payload).props.fill).toEqual('#fill');
+    expect(wrapper.find({ dataKey: key }).at(0).props().shape(payload).props.opacity).toEqual(.5);
+  });
+
+  it('renders a normal bar chart with correct fill for selected/hovered stacked bar events', () => {
+    const key = 'c_new';
+    wrapper.setProps({ selected: '2011-01-01', yKey: key, timeSeries: [{ [key]: 75, date: '2011-01-01' }]});
+    const payload = { fill: '#fill', [key]: 75, date: '2011-01-01' };
+    expect(wrapper.find({ dataKey: key }).at(0).props().shape(payload).props.opacity).toEqual(1);
+  });
+
+  it('renders a pointer cursor on the entire chart if isLink is true', () => {
+    wrapper.setProps({ isLink: true });
+    expect(wrapper.find('ComposedChart')).toHaveProp('cursor', 'pointer');
+  });
+
+  it('renders a pointer cursor on only the bars if isLink is false', () => {
+    wrapper.setProps({ isLink: false });
+    expect(wrapper.find('ComposedChart')).toHaveProp('cursor', 'default');
+    expect(wrapper.find('Bar').at(0)).toHaveProp('cursor', 'pointer');
+
   });
 
   it('renders a stacked bar chart correctly', () => {
@@ -64,13 +104,7 @@ describe('BarChart Component', () => {
     expect(bars).toMatchSnapshot();
   });
 
-  it('renders background bars with no opacity if unselected', () => {
-    const payload = { payload: { date: '2011-01-01' }, test: 'test' };
-    expect(wrapper.find('Bar').at(0).props().shape(payload)).toMatchSnapshot();
-  });
-
-  it('renders background bars with opacity if selected', () => {
-    wrapper.setProps({ selected: '2011-01-01' });
+  it('renders background bars with no opacity', () => {
     const payload = { payload: { date: '2011-01-01' }, test: 'test' };
     expect(wrapper.find('Bar').at(0).props().shape(payload)).toMatchSnapshot();
   });

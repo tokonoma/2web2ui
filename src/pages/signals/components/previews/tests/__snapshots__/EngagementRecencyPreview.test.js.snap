@@ -22,6 +22,7 @@ exports[`Signals EngagementRecencyPreview Component renders correctly 1`] = `
         fill="#B3ECEF"
         gap={0.5}
         height={170}
+        isLink={true}
         margin={
           Object {
             "bottom": 12,

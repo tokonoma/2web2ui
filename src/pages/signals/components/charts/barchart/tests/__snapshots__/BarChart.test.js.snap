@@ -13,6 +13,7 @@ exports[`BarChart Component renders a normal bar chart correctly 1`] = `
     <ComposedChart
       barCategoryGap={1}
       barGap={4}
+      cursor="default"
       data={
         Array [
           Object {
@@ -200,66 +201,6 @@ exports[`BarChart Component renders a normal bar chart correctly 1`] = `
 </div>
 `;
 
-exports[`BarChart Component renders a normal bar chart with correct fill for non-selected/hovered threshold events 1`] = `
-Object {
-  "animationBegin": 0,
-  "animationDuration": 1500,
-  "animationEasing": "ease",
-  "date": "2011-01-01",
-  "fill": "#fill",
-  "health_score": 75,
-  "height": 0,
-  "isAnimationActive": false,
-  "isUpdateAnimationActive": false,
-  "opacity": 0,
-  "radius": 0,
-  "ranking": "warning",
-  "width": 0,
-  "x": 0,
-  "y": 0,
-}
-`;
-
-exports[`BarChart Component renders a normal bar chart with correct fill for selected/hovered non-threshold events 1`] = `
-Object {
-  "animationBegin": 0,
-  "animationDuration": 1500,
-  "animationEasing": "ease",
-  "date": "2011-01-01",
-  "fill": "#fill",
-  "height": 0,
-  "injections": 75,
-  "isAnimationActive": false,
-  "isUpdateAnimationActive": false,
-  "opacity": 0,
-  "radius": 0,
-  "ranking": "warning",
-  "width": 0,
-  "x": 0,
-  "y": 0,
-}
-`;
-
-exports[`BarChart Component renders a normal bar chart with correct fill for selected/hovered threshold events 1`] = `
-Object {
-  "animationBegin": 0,
-  "animationDuration": 1500,
-  "animationEasing": "ease",
-  "date": "2011-01-01",
-  "fill": "#fill",
-  "health_score": 75,
-  "height": 0,
-  "isAnimationActive": false,
-  "isUpdateAnimationActive": false,
-  "opacity": 0,
-  "radius": 0,
-  "ranking": "warning",
-  "width": 0,
-  "x": 0,
-  "y": 0,
-}
-`;
-
 exports[`BarChart Component renders a stacked bar chart correctly 1`] = `
 Array [
   <Bar
@@ -309,24 +250,7 @@ Array [
 ]
 `;
 
-exports[`BarChart Component renders background bars with no opacity if unselected 1`] = `
-<Rectangle
-  animationBegin={0}
-  animationDuration={1500}
-  animationEasing="ease"
-  height={0}
-  isAnimationActive={false}
-  isUpdateAnimationActive={false}
-  opacity={0}
-  radius={0}
-  test="test"
-  width={0}
-  x={0}
-  y={0}
-/>
-`;
-
-exports[`BarChart Component renders background bars with opacity if selected 1`] = `
+exports[`BarChart Component renders background bars with no opacity 1`] = `
 <Rectangle
   animationBegin={0}
   animationDuration={1500}
