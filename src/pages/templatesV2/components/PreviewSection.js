@@ -51,7 +51,7 @@ const PreviewSection = () => {
           <>
             <PreviewHeader />
             <PreviewFrame
-              content={getPreviewContent(currentTabKey)}
+              content={getPreviewContent(currentTabKey) || ''}
               key={currentTabKey} // unmount for each content part
               strict={currentTabKey !== 'amp_html'}
             />

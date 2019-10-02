@@ -12,7 +12,11 @@ import {
   create as createTemplate,
   sendPreview
 } from 'src/actions/templates';
-import { updateRecipientList, getRecipientList } from 'src/actions/recipientLists';
+import {
+  createRecipientList,
+  updateRecipientList,
+  getRecipientList
+} from 'src/actions/recipientLists';
 import { list as listDomains } from 'src/actions/sendingDomains';
 import { list as listSubaccounts } from 'src/actions/subaccounts';
 import {
@@ -70,6 +74,7 @@ const mapDispatchToProps = {
   createTemplate,
   updateDraft,
   publishDraft,
+  createRecipientList,
   getRecipientList,
   updateRecipientList,
   publishDraftV2,
