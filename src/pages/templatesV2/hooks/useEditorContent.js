@@ -26,6 +26,9 @@ const useEditorContent = ({ draft = {}, published = {}, isPublishedMode }) => {
       setState(activeContent);
     }
 
+    if (isPublishedMode) {
+      setHasSaved(true);
+    }
   }, [draft.content, published.content, isPublishedMode]);
 
   return {

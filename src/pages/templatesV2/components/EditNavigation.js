@@ -9,7 +9,6 @@ const EditNavigation = ({ primaryArea }) => {
   const {
     currentNavigationKey,
     setNavigation,
-    isPublishedMode,
     hasSaved
   } = useEditorContext();
 
@@ -31,7 +30,7 @@ const EditNavigation = ({ primaryArea }) => {
         ))}
       </div>
       <div className={styles.NavigationPrimaryArea}>
-        {(isPublishedMode || hasSaved) && (
+        {(hasSaved) && (
           <span className={styles.NavigationSavedIndicator}>
             <ScreenReaderOnly>Template</ScreenReaderOnly>
 
