@@ -18,13 +18,13 @@ export const getOptions = (state, { now = moment().subtract(1, 'day'), ...option
 });
 
 // Redux store
-export const getSpamHitsData = (state, props) => _.get(state, 'signals.spamHits', {});
-export const getEngagementRecencyData = (state, props) => _.get(state, 'signals.engagementRecency', {});
-export const getEngagementRateByCohortData = (state, props) => _.get(state, 'signals.engagementRateByCohort', {});
-export const getUnsubscribeRateByCohortData = (state, props) => _.get(state, 'signals.unsubscribeRateByCohort', {});
-export const getComplaintsByCohortData = (state, props) => _.get(state, 'signals.complaintsByCohort', {});
-export const getHealthScoreData = (state, props) => _.get(state, 'signals.healthScore', {});
-export const getCurrentHealthScoreData = (state, props) => _.get(state, 'signals.currentHealthScore', {});
+export const getSpamHitsData = (state) => _.get(state, 'signals.spamHits', {});
+export const getEngagementRecencyData = (state) => _.get(state, 'signals.engagementRecency', {});
+export const getEngagementRateByCohortData = (state) => _.get(state, 'signals.engagementRateByCohort', {});
+export const getUnsubscribeRateByCohortData = (state) => _.get(state, 'signals.unsubscribeRateByCohort', {});
+export const getComplaintsByCohortData = (state) => _.get(state, 'signals.complaintsByCohort', {});
+export const getHealthScoreData = (state) => _.get(state, 'signals.healthScore', {});
+export const getCurrentHealthScoreData = (state) => _.get(state, 'signals.currentHealthScore', {});
 
 // Details
 export const selectSpamHitsDetails = createSelector(
@@ -312,6 +312,76 @@ export const selectHealthScoreDetails = createSelector(
   }
 );
 
+const fillHealthScoreColor = _.memoize((rank) => {
+  switch (rank) {
+    case ('danger'):
+      return '#D1E4F4';
+    case ('warning'):
+      return '#91C5FD';
+    case ('good'):
+    default:
+      return '#4194ED';
+  }
+});
+
+export const selectHealthScoreDetailsV3 = createSelector(
+  [getHealthScoreData, selectSpamHitsDetails, getFacetFromParams, getFacetIdFromParams, selectSubaccountIdFromQuery, getOptions],
+  ({ loading, error, data }, { details: spamDetails }, facet, facetId, subaccountId, { from, to }) => {
+    const match = data.find((item) => String(item[facet]) === facetId) || {};
+
+    const history = _.get(match, 'history', []);
+    const normalizedHistory = history.map(({ dt: date, weights, total_injection_count: injections, ...values }) => ({
+      date,
+      weights: _.sortBy(weights, ({ weight }) => parseFloat(weight)),
+      injections,
+      ...values
+    }));
+
+    const filledHistory = fillByDate({
+      dataSet: normalizedHistory,
+      fill: {
+        weights: [
+          { weight_type: 'Hard Bounces', weight: null, weight_value: null },
+          { weight_type: 'Complaints', weight: null, weight_value: null },
+          { weight_type: 'Other bounces', weight: null, weight_value: null },
+          { weight_type: 'Transient Failures', weight: null, weight_value: null },
+          { weight_type: 'Block Bounces', weight: null, weight_value: null },
+          { weight_type: 'List Quality', weight: null, weight_value: null },
+          { weight_type: 'eng cohorts: new, 14-day', weight: null, weight_value: null },
+          { weight_type: 'eng cohorts: unengaged', weight: null, weight_value: null }
+        ],
+        health_score: null,
+        injections: null
+      },
+      from, to
+    });
+
+    // Merge in rankings
+    const mergedHistory = filledHistory.map((healthData) => {
+      const ranking = rankHealthScore(roundToPlaces(healthData.health_score * 100, 1));
+      return ({
+        ranking: ranking,
+        fill: fillHealthScoreColor(ranking),
+        ...healthData
+      });
+    });
+
+    const isEmpty = mergedHistory.every((values) => values.health_score === null);
+
+    return {
+      details: {
+        data: mergedHistory,
+        empty: isEmpty && !loading && !spamDetails.loading,
+        error,
+        loading: loading || spamDetails.loading
+      },
+      facet,
+      facetId,
+      subaccountId
+    };
+  }
+);
+
 export const selectEngagementRecencyOverviewData = createSelector(
   getEngagementRecencyData, getOptions,
   ({ data }, { from, to }) => data.map(({ WoW, ...rowOfData }) => {
@@ -387,7 +457,7 @@ export const selectEngagementRecencyOverview = createSelector(
 
 export const selectHealthScoreOverviewData = createSelector(
   getHealthScoreData, getOptions,
-  ({ data }, { from, to }) => data.map(({ current_health_score, WoW, ...rowOfData }) => {
+  ({ data }, { from, to }) => data.map(({ WoW, ...rowOfData }) => {
     const history = rowOfData.history || [];
     const normalizedHistory = history.map(({ dt: date, health_score, ...values }) => {
       const roundedHealthScore = roundToPlaces(health_score * 100, 1);

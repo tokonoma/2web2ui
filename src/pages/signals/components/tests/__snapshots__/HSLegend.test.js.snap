@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Signals Health Score legend Component renders correctly 1`] = `
+<div
+  className="Legend"
+>
+  <div
+    className="b"
+  >
+    <div
+      className="Desc"
+    >
+      0-55 Bad
+    </div>
+  </div>
+  <div
+    className="w"
+  >
+    <div
+      className="Desc"
+    >
+      55-80 Warning
+    </div>
+  </div>
+  <div
+    className="g"
+  >
+    <div
+      className="Desc"
+    >
+      80+ Good
+    </div>
+  </div>
+</div>
+`;
