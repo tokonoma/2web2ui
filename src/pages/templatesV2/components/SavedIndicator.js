@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { ScreenReaderOnly } from '@sparkpost/matchbox';
 import styles from './SavedIndicator.module.scss';
 
@@ -7,7 +8,7 @@ const SavedIndicator = (props) => {
 
   return (
     <span className={styles.SavedIndicator}>
-      <ScreenReaderOnly>Template</ScreenReaderOnly>
+      <ScreenReaderOnly>Template </ScreenReaderOnly>
 
       {hasSaved && (
         <span className={styles.SavedIndicatorContent}>
@@ -17,11 +18,17 @@ const SavedIndicator = (props) => {
 
       {!hasSaved && (
         <span className={styles.SavedIndicatorContent}>
-          Unsaved Changes
+          <ScreenReaderOnly>has </ScreenReaderOnly>
+
+          <span>Unsaved Changes</span>
         </span>
       )}
     </span>
   );
+};
+
+SavedIndicator.propTypes = {
+  hasSaved: PropTypes.bool.isRequired
 };
 
 export default SavedIndicator;
