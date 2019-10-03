@@ -2,6 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import useEditorContext from '../hooks/useEditorContext';
 import EditAndPreviewPage from '../EditAndPreviewPage';
+import { routeNamespace } from '../constants/routes';
 
 jest.mock('../hooks/useEditorContext');
 
@@ -46,5 +47,17 @@ describe('EditAndPreviewPage', () => {
   it('redirects and alerts when fails to load', () => {
     const wrapper = subject({ editorState: { hasDraftFailedToLoad: true }});
     expect(wrapper.find('RedirectAndAlert')).toExist();
+  });
+
+  it('renders the <Prompt/> message when the editor state has not been saved and the target `pathname` does not match the current starting pattern', () => {
+    const wrapper = subject({ editorState: { hasSaved: false }});
+
+    expect(wrapper.find('Prompt').props().message({ pathname: '/templatesV2' })).toBe('Are you sure you want to leave the page? If you return to the previous page, your work will not be saved.');
+  });
+
+  it('renders does not render the <Prompt/> message when the editor state has not been saved and the target `pathname` does not match the current starting pattern', () => {
+    const wrapper = subject({ editorState: { hasSaved: true }});
+
+    expect(wrapper.find('Prompt').props().message({ pathname: `/${routeNamespace}/edit` })).toBe(true);
   });
 });
