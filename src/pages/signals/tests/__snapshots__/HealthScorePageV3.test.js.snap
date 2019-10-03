@@ -29,7 +29,7 @@ exports[`Signals Health Score Page V3 renders correctly when receiving data 1`] 
         <Grid.Column
           xs={8}
         >
-          <HSMetric
+          <HealthScoreMetric
             score={NaN}
           />
         </Grid.Column>
@@ -39,7 +39,7 @@ exports[`Signals Health Score Page V3 renders correctly when receiving data 1`] 
           <Connect(DateFilter)
             left={true}
           />
-          <HSLegend />
+          <HealthScoreLegend />
         </Grid.Column>
       </Grid>
       <BarChart

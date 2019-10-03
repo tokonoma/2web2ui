@@ -1,7 +1,7 @@
 import React from 'react';
-import styles from './HSLegend.module.scss';
+import styles from './HealthScoreLegend.module.scss';
 
-function HSLegend() {
+function HealthScoreLegend() {
   return (
     <div className={styles.Legend}>
       <div className={styles.b}>
@@ -17,4 +17,4 @@ function HSLegend() {
   );
 }
 
-export default HSLegend;
+export default HealthScoreLegend;

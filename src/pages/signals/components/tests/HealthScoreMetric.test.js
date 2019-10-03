@@ -1,6 +1,6 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import HSMetric from '../HSMetric';
+import HealthScoreMetric from '../HealthScoreMetric';
 
 describe('Signals Health Score Metric Component', () => {
   let wrapper;
@@ -12,7 +12,7 @@ describe('Signals Health Score Metric Component', () => {
       score: 80,
       injections: 100
     };
-    wrapper = shallow(<HSMetric {...props}/>);
+    wrapper = shallow(<HealthScoreMetric {...props}/>);
   });
 
   it('renders correctly', () => {

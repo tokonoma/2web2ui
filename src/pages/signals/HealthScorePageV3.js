@@ -12,9 +12,9 @@ import TooltipMetric from './components/charts/tooltip/TooltipMetric';
 import thresholds from './constants/healthScoreThresholds';
 import { roundToPlaces } from 'src/helpers/units';
 import moment from 'moment';
-import HSMetric from './components/HSMetric';
+import HealthScoreMetric from './components/HealthScoreMetric';
 import DateFilter from './components/filters/DateFilter';
-import HSLegend from './components/HSLegend';
+import HealthScoreLegend from './components/HealthScoreLegend';
 import Callout from 'src/components/callout/Callout';
 import { Loading } from 'src/components';
 
@@ -115,7 +115,7 @@ export function HealthScorePageV3(props) {
           <Grid>
             <Grid.Column xs={8}>
               {!loading && !empty && !error &&
-              <HSMetric
+              <HealthScoreMetric
                 date={scoreMetricDate}
                 injections={injections}
                 score={health_score * 100}
@@ -123,7 +123,7 @@ export function HealthScorePageV3(props) {
             </Grid.Column>
             <Grid.Column xs={4}>
               <DateFilter left />
-              <HSLegend />
+              <HealthScoreLegend />
             </Grid.Column>
           </Grid>
           {renderChart()}

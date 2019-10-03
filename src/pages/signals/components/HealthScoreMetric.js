@@ -2,9 +2,9 @@ import React from 'react';
 import { formatDate } from 'src/helpers/date';
 import { formatNumber, roundToPlaces } from 'src/helpers/units';
 
-import styles from './HSMetric.module.scss';
+import styles from './HealthScoreMetric.module.scss';
 
-function HSMetric({ date, score = 0, injections }) {
+function HealthScoreMetric({ date, score = 0, injections }) {
   return (
     <div className={styles.HSMetric}>
       <div className={styles.Date}>{formatDate(date)}</div>
@@ -14,4 +14,4 @@ function HSMetric({ date, score = 0, injections }) {
   );
 }
 
-export default HSMetric;
+export default HealthScoreMetric;
