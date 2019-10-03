@@ -12,9 +12,7 @@
 
 .b, .w, .g {
   position: relative;
-  // top: -3px;
   height: 10px;
-  background: green;
 }
 
 .b {
@@ -33,7 +31,7 @@
   position: relative;
   top: 13px;
 
-  font-size: rem(12);
+  font-size: font-size(200);
   line-height: 1em;
   color: color(gray, 4);
 }

@@ -1,22 +1,22 @@
 @import '~@sparkpost/matchbox/src/styles/config.scss';
 
 .HSMetric {
-  padding-left: rem(30);
+  padding-left: spacing();
 }
 
 .Date {
-  font-size: rem(12);
+  font-size: font-size(200);
   font-weight: 600;
-  line-height: 1.2em;
+  line-height: 1rem;
 }
 
 .Score {
-  font-size: rem(36);
+  font-size: rem(40);
   margin: 0;
   color: #0B58B0;
 }
 
 .Injections {
-  font-size: rem(12);
+  font-size: font-size(300);
   margin: 0 0 spacing();
 }
