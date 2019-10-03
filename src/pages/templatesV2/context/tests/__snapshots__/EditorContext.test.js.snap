@@ -14,6 +14,7 @@ exports[`EditorContext EditorContextProvider renders children wrapped by a conte
       "currentNavigationKey": "content",
       "currentTabIndex": 0,
       "currentTabKey": "html",
+      "getParsedTestData": [Function],
       "hasSaved": true,
       "previewDevice": "desktop",
       "setContent": [Function],
@@ -21,6 +22,8 @@ exports[`EditorContext EditorContextProvider renders children wrapped by a conte
       "setNavigation": [Function],
       "setPreviewDevice": [Function],
       "setTab": [Function],
+      "setTestData": [Function],
+      "testData": undefined,
     }
   }
 >

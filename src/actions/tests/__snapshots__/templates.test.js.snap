@@ -207,7 +207,12 @@ Array [
   Object {
     "meta": Object {
       "data": Object {
+        "form": "data",
+        "id": "id",
         "published": true,
+        "testData": Object {
+          "test": "data",
+        },
       },
       "headers": Object {},
       "method": "PUT",
