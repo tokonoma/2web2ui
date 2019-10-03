@@ -325,59 +325,21 @@ const fillHealthScoreColor = _.memoize((rank) => {
 });
 
 export const selectHealthScoreDetailsV3 = createSelector(
-  [getHealthScoreData, selectSpamHitsDetails, getFacetFromParams, getFacetIdFromParams, selectSubaccountIdFromQuery, getOptions],
-  ({ loading, error, data }, { details: spamDetails }, facet, facetId, subaccountId, { from, to }) => {
-    const match = data.find((item) => String(item[facet]) === facetId) || {};
+  [selectHealthScoreDetails],
+  ({ details, ...rest }) => {
 
-    const history = _.get(match, 'history', []);
-    const normalizedHistory = history.map(({ dt: date, weights, total_injection_count: injections, ...values }) => ({
-      date,
-      weights: _.sortBy(weights, ({ weight }) => parseFloat(weight)),
-      injections,
-      ...values
+    // Add fill colors
+    const dataWithFill = details.data.map((healthData) => ({
+      fill: fillHealthScoreColor(healthData.ranking),
+      ...healthData
     }));
-
-    const filledHistory = fillByDate({
-      dataSet: normalizedHistory,
-      fill: {
-        weights: [
-          { weight_type: 'Hard Bounces', weight: null, weight_value: null },
-          { weight_type: 'Complaints', weight: null, weight_value: null },
-          { weight_type: 'Other bounces', weight: null, weight_value: null },
-          { weight_type: 'Transient Failures', weight: null, weight_value: null },
-          { weight_type: 'Block Bounces', weight: null, weight_value: null },
-          { weight_type: 'List Quality', weight: null, weight_value: null },
-          { weight_type: 'eng cohorts: new, 14-day', weight: null, weight_value: null },
-          { weight_type: 'eng cohorts: unengaged', weight: null, weight_value: null }
-        ],
-        health_score: null,
-        injections: null
-      },
-      from, to
-    });
-
-    // Merge in rankings
-    const mergedHistory = filledHistory.map((healthData) => {
-      const ranking = rankHealthScore(roundToPlaces(healthData.health_score * 100, 1));
-      return ({
-        ranking: ranking,
-        fill: fillHealthScoreColor(ranking),
-        ...healthData
-      });
-    });
-
-    const isEmpty = mergedHistory.every((values) => values.health_score === null);
 
     return {
       details: {
-        data: mergedHistory,
-        empty: isEmpty && !loading && !spamDetails.loading,
-        error,
-        loading: loading || spamDetails.loading
+        ...details,
+        data: dataWithFill
       },
-      facet,
-      facetId,
-      subaccountId
+      ...rest
     };
   }
 );
