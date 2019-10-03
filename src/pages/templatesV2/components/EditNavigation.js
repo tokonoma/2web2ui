@@ -1,7 +1,8 @@
 import React from 'react';
 import classNames from 'classnames';
-import { UnstyledLink, ScreenReaderOnly } from '@sparkpost/matchbox';
+import { UnstyledLink } from '@sparkpost/matchbox';
 import links from '../constants/editNavigationLinks';
+import SavedIndicator from './SavedIndicator';
 import useEditorContext from '../hooks/useEditorContext';
 import styles from './EditNavigation.module.scss';
 
@@ -11,16 +12,6 @@ const EditNavigation = ({ primaryArea }) => {
     setNavigation,
     hasSaved
   } = useEditorContext();
-
-  const SavedIndicator = (props) => (
-    <span className={styles.NavigationSavedIndicator}>
-      <ScreenReaderOnly>Template</ScreenReaderOnly>
-
-      <span>
-        {props.content}
-      </span>
-    </span>
-  );
 
   return (
     <nav className={styles.Navigation}>
@@ -40,7 +31,7 @@ const EditNavigation = ({ primaryArea }) => {
         ))}
       </div>
       <div className={styles.NavigationPrimaryArea}>
-        <SavedIndicator content={hasSaved ? 'Saved' : 'Unsaved Changes'}/>
+        <SavedIndicator hasSaved={hasSaved}/>
 
         {primaryArea}
       </div>

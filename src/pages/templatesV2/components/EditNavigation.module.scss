@@ -80,12 +80,3 @@
     opacity: 1;
   }
 }
-
-.NavigationSavedIndicator {
-  display: inline-flex;
-  margin-right: spacing();
-  text-transform: uppercase;
-  color: color(gray, 3);
-  font-weight: 300;
-  letter-spacing: 0.0125rem;
-}
