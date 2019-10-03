@@ -434,6 +434,22 @@ describe('Selectors: signals', () => {
     });
   });
 
+  describe('health score detailsV3', () => {
+    it('should select details', () => {
+      expect(selectors.selectHealthScoreDetailsV3(state, props)).toMatchSnapshot();
+    });
+
+    it('should be empty with only fill data when not loading', () => {
+      const stateWhenEmpty = { ...state, signals: { healthScore: { data: [], loading: false }, spamHits: { data: []}}};
+      expect(selectors.selectHealthScoreDetailsV3(stateWhenEmpty, props)).toMatchSnapshot();
+    });
+
+    it('should not be empty when loading', () => {
+      const stateWhenLoading = { ...state, signals: { healthScore: { data: [], loading: true }, spamHits: { data: []}}};
+      expect(selectors.selectHealthScoreDetailsV3(stateWhenLoading, props).details.empty).toBe(false);
+    });
+  });
+
   describe('selected date', () => {
     it('should select date from react router', () => {
       expect(selectors.getSelectedDateFromRouter(state, props)).toMatchSnapshot();

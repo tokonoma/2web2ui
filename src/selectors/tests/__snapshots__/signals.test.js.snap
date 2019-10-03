@@ -1177,6 +1177,713 @@ Object {
 }
 `;
 
+exports[`Selectors: signals health score detailsV3 should be empty with only fill data when not loading 1`] = `
+Object {
+  "details": Object {
+    "data": Array [
+      Object {
+        "date": "2017-12-27",
+        "fill": "#D1E4F4",
+        "health_score": null,
+        "injections": null,
+        "ranking": "danger",
+        "weights": Array [
+          Object {
+            "weight": null,
+            "weight_type": "Hard Bounces",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Complaints",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Other bounces",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Transient Failures",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Block Bounces",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "List Quality",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "eng cohorts: new, 14-day",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "eng cohorts: unengaged",
+            "weight_value": null,
+          },
+        ],
+      },
+      Object {
+        "date": "2017-12-28",
+        "fill": "#D1E4F4",
+        "health_score": null,
+        "injections": null,
+        "ranking": "danger",
+        "weights": Array [
+          Object {
+            "weight": null,
+            "weight_type": "Hard Bounces",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Complaints",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Other bounces",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Transient Failures",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Block Bounces",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "List Quality",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "eng cohorts: new, 14-day",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "eng cohorts: unengaged",
+            "weight_value": null,
+          },
+        ],
+      },
+      Object {
+        "date": "2017-12-29",
+        "fill": "#D1E4F4",
+        "health_score": null,
+        "injections": null,
+        "ranking": "danger",
+        "weights": Array [
+          Object {
+            "weight": null,
+            "weight_type": "Hard Bounces",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Complaints",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Other bounces",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Transient Failures",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Block Bounces",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "List Quality",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "eng cohorts: new, 14-day",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "eng cohorts: unengaged",
+            "weight_value": null,
+          },
+        ],
+      },
+      Object {
+        "date": "2017-12-30",
+        "fill": "#D1E4F4",
+        "health_score": null,
+        "injections": null,
+        "ranking": "danger",
+        "weights": Array [
+          Object {
+            "weight": null,
+            "weight_type": "Hard Bounces",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Complaints",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Other bounces",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Transient Failures",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Block Bounces",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "List Quality",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "eng cohorts: new, 14-day",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "eng cohorts: unengaged",
+            "weight_value": null,
+          },
+        ],
+      },
+      Object {
+        "date": "2017-12-31",
+        "fill": "#D1E4F4",
+        "health_score": null,
+        "injections": null,
+        "ranking": "danger",
+        "weights": Array [
+          Object {
+            "weight": null,
+            "weight_type": "Hard Bounces",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Complaints",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Other bounces",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Transient Failures",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Block Bounces",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "List Quality",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "eng cohorts: new, 14-day",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "eng cohorts: unengaged",
+            "weight_value": null,
+          },
+        ],
+      },
+      Object {
+        "date": "2018-01-01",
+        "fill": "#D1E4F4",
+        "health_score": null,
+        "injections": null,
+        "ranking": "danger",
+        "weights": Array [
+          Object {
+            "weight": null,
+            "weight_type": "Hard Bounces",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Complaints",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Other bounces",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Transient Failures",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Block Bounces",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "List Quality",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "eng cohorts: new, 14-day",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "eng cohorts: unengaged",
+            "weight_value": null,
+          },
+        ],
+      },
+      Object {
+        "date": "2018-01-02",
+        "fill": "#D1E4F4",
+        "health_score": null,
+        "injections": null,
+        "ranking": "danger",
+        "weights": Array [
+          Object {
+            "weight": null,
+            "weight_type": "Hard Bounces",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Complaints",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Other bounces",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Transient Failures",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Block Bounces",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "List Quality",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "eng cohorts: new, 14-day",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "eng cohorts: unengaged",
+            "weight_value": null,
+          },
+        ],
+      },
+      Object {
+        "date": "2018-01-03",
+        "fill": "#D1E4F4",
+        "health_score": null,
+        "injections": null,
+        "ranking": "danger",
+        "weights": Array [
+          Object {
+            "weight": null,
+            "weight_type": "Hard Bounces",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Complaints",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Other bounces",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Transient Failures",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Block Bounces",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "List Quality",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "eng cohorts: new, 14-day",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "eng cohorts: unengaged",
+            "weight_value": null,
+          },
+        ],
+      },
+    ],
+    "empty": true,
+    "error": undefined,
+    "loading": undefined,
+  },
+  "facet": "sending_domain",
+  "facetId": "test.com",
+  "subaccountId": "101",
+}
+`;
+
+exports[`Selectors: signals health score detailsV3 should select details 1`] = `
+Object {
+  "details": Object {
+    "data": Array [
+      Object {
+        "date": "2017-12-27",
+        "fill": "#D1E4F4",
+        "health_score": null,
+        "injections": null,
+        "ranking": "danger",
+        "weights": Array [
+          Object {
+            "weight": null,
+            "weight_type": "Hard Bounces",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Complaints",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Other bounces",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Transient Failures",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Block Bounces",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "List Quality",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "eng cohorts: new, 14-day",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "eng cohorts: unengaged",
+            "weight_value": null,
+          },
+        ],
+      },
+      Object {
+        "date": "2017-12-28",
+        "fill": "#D1E4F4",
+        "health_score": null,
+        "injections": null,
+        "ranking": "danger",
+        "weights": Array [
+          Object {
+            "weight": null,
+            "weight_type": "Hard Bounces",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Complaints",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Other bounces",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Transient Failures",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Block Bounces",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "List Quality",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "eng cohorts: new, 14-day",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "eng cohorts: unengaged",
+            "weight_value": null,
+          },
+        ],
+      },
+      Object {
+        "date": "2017-12-29",
+        "fill": "#D1E4F4",
+        "health_score": null,
+        "injections": null,
+        "ranking": "danger",
+        "weights": Array [
+          Object {
+            "weight": null,
+            "weight_type": "Hard Bounces",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Complaints",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Other bounces",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Transient Failures",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Block Bounces",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "List Quality",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "eng cohorts: new, 14-day",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "eng cohorts: unengaged",
+            "weight_value": null,
+          },
+        ],
+      },
+      Object {
+        "date": "2017-12-30",
+        "fill": "#D1E4F4",
+        "health_score": null,
+        "injections": null,
+        "ranking": "danger",
+        "weights": Array [
+          Object {
+            "weight": null,
+            "weight_type": "Hard Bounces",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Complaints",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Other bounces",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Transient Failures",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Block Bounces",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "List Quality",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "eng cohorts: new, 14-day",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "eng cohorts: unengaged",
+            "weight_value": null,
+          },
+        ],
+      },
+      Object {
+        "date": "2017-12-31",
+        "fill": "#D1E4F4",
+        "health_score": null,
+        "injections": null,
+        "ranking": "danger",
+        "weights": Array [
+          Object {
+            "weight": null,
+            "weight_type": "Hard Bounces",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Complaints",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Other bounces",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Transient Failures",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "Block Bounces",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "List Quality",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "eng cohorts: new, 14-day",
+            "weight_value": null,
+          },
+          Object {
+            "weight": null,
+            "weight_type": "eng cohorts: unengaged",
+            "weight_value": null,
+          },
+        ],
+      },
+      Object {
+        "date": "2018-01-01",
+        "fill": "#91C5FD",
+        "health_score": 0.74321,
+        "injections": 182400,
+        "ranking": "warning",
+        "weights": Array [
+          Object {
+            "weight": -0.1,
+            "weight_type": "Other bounces",
+            "weight_value": 0.5,
+          },
+          Object {
+            "weight": 0.5,
+            "weight_type": "eng cohorts: new, 14-day",
+            "weight_value": 0.5,
+          },
+          Object {
+            "weight": 0.7,
+            "weight_type": "Transient Failures",
+            "weight_value": 0.5,
+          },
+        ],
+      },
+      Object {
+        "date": "2018-01-02",
+        "fill": "#4194ED",
+        "health_score": 0.8,
+        "injections": 12345,
+        "ranking": "good",
+        "weights": Array [],
+      },
+      Object {
+        "date": "2018-01-03",
+        "fill": "#4194ED",
+        "health_score": 0.98,
+        "injections": 35000,
+        "ranking": "good",
+        "weights": Array [],
+      },
+    ],
+    "empty": false,
+    "error": undefined,
+    "loading": false,
+  },
+  "facet": "sending_domain",
+  "facetId": "test.com",
+  "subaccountId": "101",
+}
+`;
+
 exports[`Selectors: signals selectCurrentHealthScoreDashboard returns data 1`] = `
 Object {
   "WoW": -7,
