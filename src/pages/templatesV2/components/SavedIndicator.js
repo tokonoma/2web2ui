@@ -28,7 +28,7 @@ const SavedIndicator = (props) => {
 };
 
 SavedIndicator.propTypes = {
-  hasSaved: PropTypes.bool.isRequired
+  hasSaved: PropTypes.bool
 };
 
 export default SavedIndicator;
