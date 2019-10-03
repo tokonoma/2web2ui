@@ -82,7 +82,13 @@ const EditAndPreviewPage = () => {
 
       <Prompt
         when={!hasSaved}
-        message="Are you sure you want to leave the page? If you return to the previous page, your work will not be saved."
+        message={(location) => {
+          if (location.pathname.startsWith(`/${routeNamespace}/edit`)) {
+            return true;
+          }
+
+          return 'Are you sure you want to leave the page? If you return to the previous page, your work will not be saved.';
+        }}
       />
     </FullPage>
   );
