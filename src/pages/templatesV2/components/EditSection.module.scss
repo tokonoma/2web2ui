@@ -2,6 +2,7 @@
 
 .EditSection {
   border-radius: 2px;
+  overflow: hidden; // Fixes issue with border radius not containing editor background
   margin-bottom: 0; // Overrides styles that are on the `<Card/>`
 }
 
