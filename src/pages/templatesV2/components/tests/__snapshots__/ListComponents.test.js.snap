@@ -15,6 +15,21 @@ exports[`Template List Components DeleteAction should render correctly 1`] = `
 </Button>
 `;
 
+exports[`Template List Components DuplicateAction should render correctly 1`] = `
+<Button
+  flat={true}
+  onClick={[Function]}
+  size="default"
+>
+  <ContentCopy
+    size={16}
+  />
+  <ScreenReaderOnly>
+    Duplicate Template
+  </ScreenReaderOnly>
+</Button>
+`;
+
 exports[`Template List Components LastUpdated should render 1`] = `
 <p
   className="LastUpdated"
