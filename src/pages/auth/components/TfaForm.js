@@ -11,18 +11,18 @@ import { LINKS } from 'src/constants';
 export class TfaForm extends Component {
 
   handleSubmit = ({ code }) => {
-    const { enabled, ...authData } = this.props.tfa;
+    const { _enabled, ...authData } = this.props.tfa;
 
     return this.props.verifyAndLogin({ authData, code }).catch((err) => {
       if (err.response.status === 400) {
         throw new SubmissionError({
-          code: 'The code is invalid'
+          code: 'The code is invalid. Please contact login.issues@sparkpost.com for assistance.'
         });
       }
     });
   }
 
-  render () {
+  render() {
     const { tfaPending, pristine } = this.props;
 
     return (
@@ -50,7 +50,7 @@ export class TfaForm extends Component {
   }
 }
 
-function mapStateToProps ({ tfa }) {
+function mapStateToProps({ tfa }) {
   return {
     tfa,
     tfaPending: tfa.tfaPending,
