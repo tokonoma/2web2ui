@@ -37,12 +37,7 @@ In order to run UI tests, the local development server needs to first be started
 
 To run end-to-end tests locally with the Cypress GUI:
 ```
-npm run test-e2e-gui
-```
-
-To run end-to-end tests headlessly:
-```
-npm run test-e2e-headless
+npm run test-e2e
 ```
 
 **NOTE:** The first time tests are run, the developer is prompted to answer some questions that will then generate an env file that is ignored by source control.
