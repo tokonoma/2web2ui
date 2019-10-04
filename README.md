@@ -22,12 +22,26 @@ Then `npm install` to install deps.
 
 ## Tests
 
-Running the test suite:
+### Unit Tests
+
+To run the unit test suite:
 ```
 npm test
 ```
 **NOTE:** You may need to `brew install watchman` for jest to run in watch mode on OS X.
 https://github.com/facebook/react-native/issues/9309#issuecomment-238966924
+
+### End to End Tests
+
+To run end-to-end tests locally with the Cypress GUI:
+```
+npm run test-e2e-gui
+```
+
+To run end-to-end tests headlessly:
+```
+npm run test-e2e-headless
+```
 
 ## Learning Resources
 
