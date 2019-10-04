@@ -4,6 +4,7 @@ const fs = require('fs-extra');
 const colors = require('colors');
 /* eslint-enable no-unused-vars */
 
+/* eslint-disable no-console */
 const file = './cypress.env.json';
 const CypressEnv = {
   USERNAME: undefined,
@@ -18,7 +19,6 @@ fs.pathExists(file)
     fileExists = exists;
   })
   .then(() => {
-    /* eslint-disable no-console */
     if (fileExists) {
       console.log(`✅  "${file}" already available, skipping setup and launching Cypress`.green);
     } else {
@@ -35,16 +35,10 @@ fs.pathExists(file)
             console.log(`✅  Success! "${file}" written, launching Cypress`.green);
           })
           .catch((err) => {
-            console.log(`Ruh roh. "${file}" was not written successfully`);
+            console.log(`error -> ${err}`.red);
+            console.log(`Ruh roh. "${file}" was not written successfully`.red);
           });
       });
     }
   })
   .finally(() => prompt.stop());
-
-
-
-/* eslint-enable no-console */
-
-
-
