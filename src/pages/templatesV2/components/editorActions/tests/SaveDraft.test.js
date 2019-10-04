@@ -6,11 +6,21 @@ import useEditorContext from '../../../hooks/useEditorContext';
 jest.mock('../../../hooks/useEditorContext');
 
 describe('SaveDraft', () => {
+  const mockUpdateRecipientList = jest.fn();
   const subject = (editorState) => {
     useEditorContext.mockReturnValue({
       draft: { id: 'foo' },
       history: {},
-      ...editorState
+      ...editorState,
+      updateRecipientList: mockUpdateRecipientList,
+      getParsedTestData: jest.fn().mockReturnValue({
+        metadata: {
+          meta: 'data'
+        },
+        substitution_data: {
+          substitution: 'data'
+        }
+      })
     });
 
     return shallow(<SaveDraft className={'Foo'}/>);
