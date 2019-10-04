@@ -13,6 +13,7 @@ describe('CreatePage', () => {
       listDomains={jest.fn()}
       history={{ push: jest.fn() }}
       showAlert={jest.fn()}
+      createRecipientList={jest.fn()}
       {...props}
     />
   );
@@ -54,10 +55,24 @@ describe('CreatePage', () => {
     it('alerts & redirects to edit page', async () => {
       const mockPush = jest.fn();
       const mockAlert = jest.fn();
-      const wrapper = subject({ create: jest.fn(() => Promise.resolve()), history: { push: mockPush }, showAlert: mockAlert });
-      await wrapper.find('form').simulate('submit', { id: 'foo', content: {}});
-      expect(mockPush).toHaveBeenCalledWith('/templatesv2/edit/foo/draft/content');
-      expect(mockAlert).toHaveBeenCalledWith({ type: 'success', message: 'Template Created.' });
+      const createPromise = Promise.resolve();
+      const createRecipientListPromise = Promise.resolve();
+      const wrapper = subject({
+        create: jest.fn(() => createPromise),
+        createRecipientList: jest.fn(() => createRecipientListPromise),
+        history: { push: mockPush }, showAlert: mockAlert
+      });
+
+      wrapper.find('form').simulate('submit', { id: 'foo', content: {}});
+
+      /* eslint-disable arrow-body-style */
+      return createPromise.then(() => {
+        return createRecipientListPromise.then(() => {
+          expect(mockPush).toHaveBeenCalledWith('/templatesv2/edit/foo/draft/content');
+          expect(mockAlert).toHaveBeenCalledWith({ type: 'success', message: 'Template Created.' });
+        });
+      });
+      /* eslint-enable arrow-body-style */
     });
   });
 });
