@@ -1,6 +1,5 @@
 /// <reference types="Cypress" />
 
-/* eslint-disable no-undef */
 describe('The auth view', () => {
   before(() => cy.visit('/'));
 
