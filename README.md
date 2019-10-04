@@ -33,6 +33,8 @@ https://github.com/facebook/react-native/issues/9309#issuecomment-238966924
 
 ### End to End Tests
 
+In order to run UI tests, the local development server needs to first be started. Ideally, [start your development server](#local-development) and in another terminal tab, run one of the following commands:
+
 To run end-to-end tests locally with the Cypress GUI:
 ```
 npm run test-e2e-gui
@@ -42,6 +44,8 @@ To run end-to-end tests headlessly:
 ```
 npm run test-e2e-headless
 ```
+
+**NOTE:** The first time tests are run, the developer is prompted to answer some questions that will then generate an env file that is ignored by source control.
 
 ## Learning Resources
 
