@@ -8,9 +8,9 @@ const useEditorTestData = (props) => {
   } = props;
   const [testData, setTestData] = useState(templateTestData);
 
-  const getParsedTestData = () => {
+  const getParsedTestData = (data) => {
     try {
-      return JSON.parse(testData);
+      return JSON.parse(data);
     } catch (err) {
       return {};
     }

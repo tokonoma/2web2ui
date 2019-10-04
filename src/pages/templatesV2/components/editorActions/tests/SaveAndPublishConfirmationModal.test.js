@@ -1,6 +1,8 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import useEditorContext from '../../../hooks/useEditorContext';
+import { routeNamespace } from '../../../constants/routes';
+import { setSubaccountQuery } from 'src/helpers/subaccounts';
 import SaveAndPublishConfirmationModal from '../SaveAndPublishConfirmationModal';
 
 jest.mock('../../../hooks/useEditorContext');
@@ -12,7 +14,9 @@ describe('SaveAndPublishConfirmationModal', () => {
         id: 'foo'
       },
       isDraftPublishing: false,
-      publishDraft: jest.fn(),
+      publishDraftV2: jest.fn(),
+      getParsedTestData: jest.fn(),
+      updateRecipientList: jest.fn(),
       ...editorState
     });
 
@@ -37,45 +41,62 @@ describe('SaveAndPublishConfirmationModal', () => {
     expect(wrapper.find('ConfirmationModal').props().open).toEqual(false);
   });
 
-  it('publishes content upon confirmation', () => {
-    const publishDraft = jest.fn(() => Promise.resolve());
-    const draft = { id: 'foo', content: { text: 'foo text', html: '<h1>foo html</h1>' }};
-    const wrapper = subject({ publishDraft, setHasSaved: jest.fn(), draft });
-    wrapper.find('ConfirmationModal').prop('onConfirm')(); //invoke attached func
-    expect(publishDraft).toHaveBeenCalledWith(draft, undefined);
-  });
-
-  it('publishes content with subaccount upon confirmation', () => {
-    const publishDraft = jest.fn(() => Promise.resolve());
-    const draft = { id: 'foo', content: { text: 'foo text', html: '<h1>foo html</h1>' }, subaccount_id: 101 };
-    const wrapper = subject({ publishDraft, setHasSaved: jest.fn(), draft });
-    wrapper.find('ConfirmationModal').prop('onConfirm')(); //invoke attached func
-    expect(publishDraft).toHaveBeenCalledWith(draft, 101);
-  });
-
-  it('redirects to published path upon publishing', async () => {
-    const promise = Promise.resolve();
-    const publishDraft = jest.fn(() => promise);
-    const wrapper = subject({ publishDraft, setHasSaved: jest.fn() });
-
+  it('on confirm, 1) calls publishDraftV2, 2) calls updateRecipientList, and 3) redirects to published path upon publishing', async () => {
+    const publishDraftPromise = Promise.resolve();
+    const updateRecipientPromise = Promise.resolve();
+    const testData = {
+      options: {
+        foo: 'bar'
+      },
+      metadata: {
+        meta: 'data'
+      },
+      substitution_data: {
+        substitution: 'data'
+      }
+    };
+    const getParsedTestData = jest.fn();
+    getParsedTestData.mockReturnValue(testData);
+    const publishDraftV2 = jest.fn(() => publishDraftPromise);
+    const updateRecipientList = jest.fn(() => updateRecipientPromise);
+    const draft = { id: 'foo', subaccount_id: 101 };
+    const content = { text: 'foo text', html: '<h1>foo html</h1>' };
+    const wrapper = subject({
+      publishDraftV2,
+      getParsedTestData,
+      updateRecipientList,
+      draft,
+      content
+    });
     wrapper.find('ConfirmationModal').simulate('confirm');
 
-    return promise.then(() => {
-      expect(publishDraft).toHaveBeenCalled();
-      expect(wrapper.find('RedirectAndAlert')).toHaveProp('to', '/templatesv2/edit/foo/published/content');
+    expect(publishDraftV2).toHaveBeenCalledWith(
+      {
+        ...draft,
+        content,
+        options: testData.options
+      },
+      101
+    );
+    expect(updateRecipientList).toHaveBeenCalledWith(
+      {
+        id: draft.id,
+        recipients: [{
+          address: {
+            email: 'placeholder@sparkpost.com'
+          },
+          metadata: testData.metadata,
+          substitution_data: testData.substitution_data
+        }]
+      }
+    );
+
+    /* eslint-disable arrow-body-style */
+    return publishDraftPromise.then(() => {
+      return updateRecipientPromise.then(() => {
+        expect(wrapper.find('RedirectAndAlert')).toHaveProp('to', `/${routeNamespace}/edit/${draft.id}/published/content${setSubaccountQuery(draft.subaccount_id)}`);
+      });
     });
-  });
-
-  it('redirects to published path with subaccount upon publishing', async () => {
-    const promise = Promise.resolve();
-    const publishDraft = jest.fn(() => promise);
-    const wrapper = subject({ publishDraft, setHasSaved: jest.fn(), draft: { id: 'foo', subaccount_id: 101 }});
-
-    wrapper.find('ConfirmationModal').simulate('confirm');
-
-    return promise.then(() => {
-      expect(publishDraft).toHaveBeenCalled();
-      expect(wrapper.find('RedirectAndAlert')).toHaveProp('to', '/templatesv2/edit/foo/published/content?subaccount=101');
-    });
+    /* eslint-enable arrow-body-style */
   });
 });
