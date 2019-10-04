@@ -50,6 +50,13 @@ describe('BarChart Component', () => {
     expect(wrapper.find({ dataKey: key }).at(0).props().shape(payload).props.fill).toEqual('#fill');
   });
 
+  it('renders a normal bar chart with correct fill for selected event but with shouldHighlightSelected set to false', () => {
+    const key = 'health_score';
+    wrapper.setProps({ selected: '2011-01-01', shouldHighlightSelected: false, yKey: key, timeSeries: [{ [key]: 75, ranking: 'warning', date: '2011-01-01' }]});
+    const payload = { fill: '#fill', [key]: 75, ranking: 'warning', date: '2011-01-01' };
+    expect(wrapper.find({ dataKey: key }).at(0).props().shape(payload).props.fill).toEqual('#fill');
+  });
+
   it('renders a normal bar chart with correct fill for selected/hovered non-threshold events', () => {
     const key = 'injections';
     wrapper.setProps({ selected: '2011-01-01', yKey: key, timeSeries: [{ [key]: 75, date: '2011-01-01' }]});
@@ -103,6 +110,19 @@ describe('BarChart Component', () => {
     const bars = wrapper.find('Bar').slice(1);
     expect(bars).toMatchSnapshot();
   });
+
+  it('renders a tooltip when hovered over', () => {
+    const key = 'health_score';
+    wrapper.setProps({ hovered: '2011-01-01', yKey: key, timeSeries: [{ [key]: 75, ranking: 'warning', date: '2011-01-01' }], disableHover: false });
+    expect(wrapper.find('ComposedChart').find('Tooltip')).toExist();
+  });
+
+  it('does not render a tooltip when not hovering over', () => {
+    const key = 'health_score';
+    wrapper.setProps({ hovered: null, yKey: key, timeSeries: [{ [key]: 75, ranking: 'warning', date: '2011-01-01' }], disableHover: false });
+    expect(wrapper.find('ComposedChart').find('Tooltip')).not.toExist();
+  });
+
 
   it('renders background bars with no opacity', () => {
     const payload = { payload: { date: '2011-01-01' }, test: 'test' };

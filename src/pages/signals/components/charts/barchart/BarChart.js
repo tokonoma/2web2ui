@@ -23,17 +23,18 @@ import healthScoreThresholds from '../../../constants/healthScoreThresholds';
  */
 class BarChart extends Component {
 
-  getSelectedStyle = _.memoize((key, isActiveDate, selectedFill) =>
+  getSelectedStyle = _.memoize((key, isActiveDate, ranking, activeFill) =>
     {
+      const selectedFill = (key === 'health_score' && ranking) ? healthScoreThresholds[ranking].barColor : activeFill;
       if (key === 'health_score' || key === 'injections' || key === 'weight_value')  {
        return isActiveDate ? {fill: selectedFill} : {};
       }
       return isActiveDate ? {opacity : 1} : {opacity : .5}
     },
-    (key, isActiveDate, selectedFill) =>`${key}${isActiveDate}${selectedFill}`
+    (key, isActiveDate, ranking, activeFill) =>`${key}${isActiveDate}${ranking}${activeFill}`
   );
 
-  renderBar = ({ key, selected, hovered, fill, activeFill }) => (
+  renderBar = ({ key, selected, hovered, fill, activeFill, shouldHighlightSelected }) => (
     <Bar
       stackId='stack'
       key={key}
@@ -46,23 +47,24 @@ class BarChart extends Component {
       activeFill={activeFill}
       cursor='pointer'
       shape={(props) => {
-        const selectedFill = (key === 'health_score' && props.ranking) ? healthScoreThresholds[props.ranking].barColor : activeFill;
-        const isActiveDate= (props.date === hovered) || (props.date === selected);
-        const selectedStyle = selected ? this.getSelectedStyle(key, isActiveDate, selectedFill) : {};
-
-        return <Rectangle {...props} fill={props.fill} style={{ transition: '0s' }} {...selectedStyle}/>
+        const isActiveDate= (props.date === hovered) || (shouldHighlightSelected && props.date === selected);
+        const selectedStyle =
+          ((selected && shouldHighlightSelected)|| hovered) ?
+          this.getSelectedStyle(key, isActiveDate, props.ranking, activeFill) :
+          {};
+        return <Rectangle {...props} style={{ transition: '0s' }} {...selectedStyle}/>
       }}
     />
   )
 
   renderBars = () => {
-    const { yKeys, yKey, selected, hovered, fill, activeFill } = this.props;
+    const { yKeys, yKey, selected, hovered, fill, activeFill, shouldHighlightSelected } = this.props;
 
     if (yKeys) {
-      return yKeys.map((key) => this.renderBar({...key, selected, hovered}));
+      return yKeys.map((key) => this.renderBar({...key, selected, hovered, shouldHighlightSelected}));
     }
 
-    return this.renderBar({ key: yKey, selected, hovered, fill, activeFill });
+    return this.renderBar({ key: yKey, selected, hovered, fill, activeFill, shouldHighlightSelected });
   };
 
   renderBackgrounds = () => {
@@ -91,6 +93,7 @@ class BarChart extends Component {
       disableHover,
       gap,
       height,
+      hovered,
       isLink,
       margin,
       timeSeries,
@@ -138,7 +141,7 @@ class BarChart extends Component {
               shapeRendering='crispEdges'
               {...xAxisProps}
             />
-            {!disableHover && (
+            {!disableHover && hovered && (
               <Tooltip
                 offset={25}
                 cursor={false}
@@ -197,6 +200,7 @@ BarChart.defaultProps = {
   gap: 1,
   height: 250,
   margin: { top: 12, left: 18, right: 0, bottom: 5 },
+  shouldHighlightSelected: true,
   width: '99%',
   xAxisRefLines: [],
   yAxisRefLines: [],

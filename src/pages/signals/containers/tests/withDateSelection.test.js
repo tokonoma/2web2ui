@@ -1,7 +1,6 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 import { WithDateSelection } from '../withDateSelection';
-// import _ from 'lodash';
 
 describe('Signals Spam Trap Details Container', () => {
   const Component = () => <div>test</div>;
@@ -39,13 +38,22 @@ describe('Signals Spam Trap Details Container', () => {
     const wrapper = subject({ data: [{ date: '2015-01-01' }, { date: '2999-99-99' }]});
     wrapper.prop('handleDateSelect')({ payload: { date: '2015-01-01' }});
     expect(wrapper).toHaveProp('selectedDate', '2015-01-01');
+    expect(wrapper).toHaveProp('shouldHighlightSelected', true);
   });
 
-  it('handles date select for re-selecting the already selected date by defaulting to last date', () => {
+  it('handles date select for un-selecting the already selected date by defaulting to last date', () => {
     const wrapper = subject({ data: [{ date: '2015-01-01' }, { date: '2999-99-99' }]});
     wrapper.setState({ selectedDate: '2015-01-01' });
     wrapper.prop('handleDateSelect')({ payload: { date: '2015-01-01' }});
     expect(wrapper).toHaveProp('selectedDate', '2999-99-99');
+  });
+
+  it('handles date select for un-selecting the already selected date by resetting shouldHighlightSelected & hovered', () => {
+    const wrapper = subject({ data: [{ date: '2015-01-01' }, { date: '2999-99-99' }]});
+    wrapper.setState({ selectedDate: '2015-01-01' });
+    wrapper.prop('handleDateSelect')({ payload: { date: '2015-01-01' }});
+    expect(wrapper).toHaveProp('shouldHighlightSelected', false);
+    expect(wrapper).toHaveProp('hoveredDate', null);
   });
 
   it('handles date hover', () => {
