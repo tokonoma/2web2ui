@@ -95,6 +95,7 @@ exports[`Signals Spam Trap Page renders correctly 1`] = `
             }
             onClick={[MockFunction]}
             selected="2017-01-01"
+            shouldHighlightSelected={true}
             timeSeries={
               Array [
                 Object {

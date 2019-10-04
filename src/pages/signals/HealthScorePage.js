@@ -58,7 +58,7 @@ export class HealthScorePage extends Component {
   }
 
   renderContent = () => {
-    const { data = [], handleDateSelect, handleDateHover, loading, gap, empty, error, selectedDate, hoveredDate, resetDateHover } = this.props;
+    const { data = [], handleDateSelect, handleDateHover, loading, gap, empty, error, selectedDate, hoveredDate, shouldHighlightSelected, resetDateHover } = this.props;
     const { selectedComponent } = this.state;
 
     const selectedWeights = _.get(_.find(data, ['date', selectedDate]), 'weights', []);
@@ -91,12 +91,13 @@ export class HealthScorePage extends Component {
             {panelContent || (
               <Fragment>
                 <BarChart
-                  margin = {newModelMarginsHealthScore}
+                  margin={newModelMarginsHealthScore}
                   gap={gap}
                   onClick={handleDateSelect}
                   onMouseOver={handleDateHover}
                   onMouseOut={resetDateHover}
                   disableHover={false}
+                  shouldHighlightSelected={shouldHighlightSelected}
                   selected={selectedDate}
                   hovered={hoveredDate}
                   timeSeries={data}
@@ -128,6 +129,7 @@ export class HealthScorePage extends Component {
                   onMouseOver={handleDateHover}
                   selected={selectedDate}
                   hovered={hoveredDate}
+                  shouldHighlightSelected={shouldHighlightSelected}
                   onMouseOut={resetDateHover}
                   timeSeries={data}
                   tooltipContent={({ payload = {}}) => (
@@ -151,6 +153,7 @@ export class HealthScorePage extends Component {
                       onMouseOut={resetDateHover}
                       hovered={hoveredDate}
                       selected={selectedDate}
+                      shouldHighlightSelected={shouldHighlightSelected}
                       timeSeries={dataForSelectedWeight}
                       tooltipContent={({ payload = {}}) => (
                         <TooltipMetric

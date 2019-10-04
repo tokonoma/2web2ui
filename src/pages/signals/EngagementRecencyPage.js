@@ -71,7 +71,8 @@ export class EngagementRecencyPage extends Component {
       subaccountId,
       hoveredDate,
       handleDateHover,
-      resetDateHover
+      resetDateHover,
+      shouldHighlightSelected
     } = this.props;
 
     const selectedCohorts = _.find(data, ['date', selectedDate]) || {};
@@ -107,6 +108,7 @@ export class EngagementRecencyPage extends Component {
                   onClick={handleDateSelect}
                   selected={selectedDate}
                   hovered={hoveredDate}
+                  shouldHighlightSelected={shouldHighlightSelected}
                   timeSeries={data}
                   tooltipContent={this.getTooltipContent}
                   tooltipWidth='250px'
