@@ -2,7 +2,7 @@ import { shallow } from 'enzyme';
 import React from 'react';
 import { PoolForm } from '../PoolForm';
 import config from 'src/config';
-import { SPC_TENANT } from 'src/constants';
+import { SPC_TENANT, SPC_EU_TENANT } from 'src/constants';
 jest.mock('src/config');
 
 describe('PoolForm tests', () => {
@@ -119,6 +119,7 @@ describe('PoolForm tests', () => {
     });
 
     it('shows the "Shared Pool" option in the overflow pool list when any of the available pool IPS have auto warmup enabled and the tenant is in SparkPost Cloud EU', () => {
+      config.tenantId = SPC_EU_TENANT;
       wrapper.setProps({
         pools: [{
           name: 'Fake Pool',
