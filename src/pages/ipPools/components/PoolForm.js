@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import _ from 'lodash';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { withRouter } from 'react-router-dom';
@@ -8,6 +7,7 @@ import { SendingDomainTypeaheadWrapper, TextFieldWrapper } from 'src/components'
 import AccessControl from 'src/components/auth/AccessControl';
 import { required } from 'src/helpers/validation';
 import { configFlag } from 'src/helpers/conditions/config';
+import { inSPC, inSPCEU } from 'src/config/tenant';
 import { hasAccountOptionEnabled } from 'src/helpers/conditions/account';
 import { any } from 'src/helpers/conditions';
 import { selectCurrentPool } from 'src/selectors/ipPools';
@@ -19,7 +19,7 @@ export class PoolForm extends Component {
   getOverflowPoolOptions = () => {
     const { pools, pool } = this.props;
 
-    const overflowPools = _.compact(pools.map((currentPool) => {
+    const overflowPools = (pools.map((currentPool) => {
       if (currentPool.auto_warmup_overflow_pool || currentPool.id === pool.id) {
         return null;
       }
@@ -28,9 +28,22 @@ export class PoolForm extends Component {
         label: `${currentPool.name} (${currentPool.id})`,
         value: currentPool.id
       };
-    }));
+    })).filter(Boolean); // See: https://stackoverflow.com/a/32906951
+
+    // If the pool has available IPs with auto warmup enabled,
+    // *and* the user is in SPC or SPCEU,
+    // render the 'Shared Pool' option in the `<select/>`
+    const hasPoolsWithAutoWarmup = pools.some(({ ips }) => ips.some((ip) => ip.auto_warmup_enabled));
+
+    if (hasPoolsWithAutoWarmup && (inSPC() || inSPCEU())) {
+      overflowPools.unshift({
+        label: 'Shared Pool',
+        value: 'shared pool'
+      });
+    }
 
     overflowPools.unshift({ label: 'None', value: '' });
+
     return overflowPools;
   }
 
