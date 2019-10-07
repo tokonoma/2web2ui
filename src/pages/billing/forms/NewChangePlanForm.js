@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback, useRef } from 'react';
 import { Grid } from '@sparkpost/matchbox';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -31,10 +31,6 @@ export const ChangePlanForm = ({
   promoCodeObj,
   clearPromoCode,
   getBundles
-  // verifyPromoCode,
-  // initialValues: {
-  //   promoCode
-  // },
 }) => {
   const { requestParams: { code, promo } = {}, updateRoute } = useRouter();
   const allBundles = Object.values(bundles).reduce((acc, curr) => [...curr, ...acc],[]);
@@ -52,7 +48,8 @@ export const ChangePlanForm = ({
   },[selectedBundle, verifyPromoCode]);
   useEffect(() => { getBillingCountries(); }, [getBillingCountries]);
   useEffect(() => { getBillingInfo(); }, [getBillingInfo]);
-  useEffect(() => { getBundles(); }, [getBundles]);
+  const gotBundles = useRef(false);
+  useEffect(() => { getBundles().then(() => { gotBundles.current = true; }); }, [getBundles]);
 
   useEffect(() => {
     if (!selectedBundle) {
@@ -69,7 +66,7 @@ export const ChangePlanForm = ({
 
   //clears out requestParams when user changes plan
   useEffect(() => {
-    if (!selectedBundle) {
+    if (!selectedBundle && gotBundles) {
       updateRoute({ undefined });
     }
   },[selectedBundle, updateRoute]);

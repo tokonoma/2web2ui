@@ -55,7 +55,7 @@ describe('Change Plan Form', () => {
       volume: 3,
       billingId: 3
     },
-    getBundles: jest.fn(),
+    getBundles: jest.fn(() => Promise.resolve()),
     getBillingCountries: jest.fn(),
     getBillingInfo: jest.fn(),
     clearPromoCode: jest.fn(),
