@@ -15,11 +15,7 @@ const useMultiEmailField = (value = '', emailList = [], error = '') => {
     // Remove the last email from the list when the user deletes
     // and no in progress value is present in the field
     if (e.keyCode === 8 && !multiEmailValue) {
-      setMultiEmailList(multiEmailList.filter((email, index) => {
-        if (index + 1 !== multiEmailList.length) {
-          return email;
-        }
-      }));
+      setMultiEmailList(multiEmailList.filter((email, index) => index + 1 !== multiEmailList.length));
     }
 
     if (e.type === 'blur' || e.keyCode === 32) {
@@ -52,11 +48,9 @@ const useMultiEmailField = (value = '', emailList = [], error = '') => {
   };
 
   const handleMultiEmailRemove = (target) => {
-    setMultiEmailList(multiEmailList.filter((item) => {
-      if (target !== item) {
-        return item;
-      }
-    }));
+    const nextEmailList = multiEmailList.filter((item) => target !== item);
+
+    setMultiEmailList(nextEmailList);
   };
 
   return {
