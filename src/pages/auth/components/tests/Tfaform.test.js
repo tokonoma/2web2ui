@@ -8,7 +8,7 @@ const props = {
   verifyAndLogin: jest.fn(() => Promise.resolve()),
   handleSubmit: jest.fn(),
   error: false,
-  tfa: { enabled: false, name: 'me', test: 'this' }
+  tfa: { _enabled: false, name: 'me', test: 'this' }
 };
 
 let wrapper;
@@ -42,7 +42,7 @@ it('should verify tfa login on submit', () => {
 it('should throw a submission error when verifyAndLogin fails with 4xx error', () => {
   instance.props.verifyAndLogin.mockImplementation(() => Promise.reject({ response: { status: 400 }}));
   return instance.handleSubmit({ code: 'code' }).catch((err) => {
-    expect(err.errors.code).toEqual('The code is invalid');
+    expect(err.errors.code).toEqual('The code is invalid. Please contact login.issues@sparkpost.com for assistance.');
   });
 });
 
