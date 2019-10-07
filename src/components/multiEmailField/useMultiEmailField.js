@@ -7,20 +7,15 @@ const useMultiEmailField = (value = '', emailList = [], error = '') => {
   const [multiEmailList, setMultiEmailList] = useState(emailList);
 
   const handleMultiEmailKeyDownAndBlur = (e) => {
-    // prevent form submission when using the enter key
-    if (e.keyCode === 13) {
-      e.preventDefault();
-    }
-
     // Remove the last email from the list when the user deletes
     // and no in progress value is present in the field
     if (e.keyCode === 8 && !multiEmailValue) {
       setMultiEmailList(multiEmailList.filter((email, index) => index + 1 !== multiEmailList.length));
     }
 
-    if (e.type === 'blur' || e.keyCode === 32) {
+    if (e.type === 'blur' || e.keyCode === 32 || e.keyCode === 13) {
       if (e.type === 'keydown') {
-        e.preventDefault(); // Prevents spaces from being written to the field
+        e.preventDefault(); // Prevents spaces from being written to the field and prevents the enter key from submitting the form
       }
 
       const isValidEmail = isEmailAddress(multiEmailValue);

@@ -45,16 +45,17 @@ const SendTestEmailButton = () => {
 
   const handleModalOpen = () => {
     setModalOpen(true);
-    setModalLoading(true);
+    setFromEmail(content.from.email);
+    setSubject(content.subject);
 
-    // Save the template, then allow the user to send a preview
-    // The preview can be send whether the current draft was successfully saved or not.
-    updateDraft({ id: templateId, content }, subaccountId)
-      .finally(() => {
-        setModalLoading(false);
-        setFromEmail(content.from.email);
-        setSubject(content.subject);
-      });
+    if (!isPublishedMode) {
+      setModalLoading(true);
+
+      // Save the template, then allow the user to send a preview
+      // The preview can be send whether the current draft was successfully saved or not.
+      updateDraft({ id: templateId, content }, subaccountId)
+        .finally(() => setModalLoading(false));
+    }
   };
 
   const handleModalClose = () => {

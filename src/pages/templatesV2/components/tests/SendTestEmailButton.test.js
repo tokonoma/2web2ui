@@ -33,6 +33,7 @@ describe('SendTestEmailButton', () => {
     const sendPreview = jest.fn(() => promise);
     const showAlert = jest.fn(() => promise);
     const wrapper = subject({
+      isPublishedMode: false,
       updateDraft,
       sendPreview,
       showAlert

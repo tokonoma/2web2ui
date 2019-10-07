@@ -75,7 +75,7 @@ describe('MultiEmailField with useMultiEmailField', () => {
       />
     );
   };
-  const subject = (props) => shallow(<MultiEmailFieldWithHook/>);
+  const subject = (props) => shallow(<MultiEmailFieldWithHook {...props}/>);
 
   it('does not submit a form when the user hits the "enter" key', () => {
     const mockPreventDefault = jest.fn();
@@ -152,11 +152,7 @@ describe('MultiEmailField with useMultiEmailField', () => {
     wrapper.simulate('keyDownAndBlur', { type: 'keyDown', keyCode: 32, preventDefault: jest.fn() });
 
     // Invoking `wrapper.props().onRemove()` wasn't triggering the deletion - works when tested manually
-    wrapper
-      .dive()
-      .dive()
-      .find('Tag')
-      .simulate('remove');
+    wrapper.props().removeItem({ target: { value: 'hello@me.com' }});
 
     expect(wrapper).toHaveProp('emailList', []);
   });
