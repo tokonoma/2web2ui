@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`PoolForm tests should render form 1`] = `
+exports[`PoolForm should render form 1`] = `
 <Panel>
   <form
     onSubmit={[MockFunction]}
