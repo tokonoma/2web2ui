@@ -37,6 +37,61 @@ describe('PreviewSection', () => {
       .toHaveProp('content', '<p style="white-space: pre-wrap">Test Example</p>');
   });
 
+  it('sets the "PreviewFrame" content to the html preview when the "currentTabKey" is set to "test_data"', () => {
+    const wrapper = subject({
+      editorState: {
+        currentTabKey: 'test_data',
+        preview: { html: '<h1>Test Example</h1>' }
+      }
+    });
+
+    expect(wrapper.find('PreviewFrame')).toHaveProp('content', '<h1>Test Example</h1>');
+  });
+
+  it('sets the "PreviewFrame" content to the amp HTML preview when the "currentTabKey" is set to "test_data" but no HTML is present', () => {
+    const wrapper = subject({
+      editorState: {
+        currentTabKey: 'test_data',
+        preview: {
+          html: null,
+          amp_html: '<p>AMP HTML</p>'
+        }
+      }
+    });
+
+    expect(wrapper.find('PreviewFrame')).toHaveProp('content', '<p>AMP HTML</p>');
+  });
+
+  it('sets the "PreviewFrame" content to the text preview when the "currentTabKey" is set to "test_data" and the preview does not have HTML or AMP HTML present', () => {
+    const wrapper = subject({
+      editorState: {
+        currentTabKey: 'test_data',
+        preview: {
+          html: null,
+          amp_html: null,
+          text: 'Some text'
+        }
+      }
+    });
+
+    expect(wrapper.find('PreviewFrame')).toHaveProp('content', '<p style="white-space: pre-wrap">Some text</p>');
+  });
+
+  it('sets the "PreviewFrame" content to "" when the "currentTabKey" is set to "test_data" and no HTML, AMP HTML, or text are present in the preview', () => {
+    const wrapper = subject({
+      editorState: {
+        currentTabKey: 'test_data',
+        preview: {
+          html: null,
+          amp_html: null,
+          text: null
+        }
+      }
+    });
+
+    expect(wrapper.find('PreviewFrame')).toHaveProp('content', '');
+  });
+
   it('renders non-strict preview frame for AMP HTML', () => {
     const wrapper = subject({ editorState: { currentTabKey: 'amp_html' }});
     expect(wrapper.find('PreviewFrame')).toHaveProp('strict', false);

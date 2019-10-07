@@ -27,8 +27,10 @@ const PreviewSection = () => {
           return preview.html;
         } else if (preview.amp_html) {
           return preview.amp_html;
+        } else if (preview.text) {
+          return `<p style="white-space: pre-wrap">${preview.text}</p>`;
         } else {
-          return preview.text;
+          return '';
         }
 
       case 'text':
@@ -43,6 +45,7 @@ const PreviewSection = () => {
   return (
     <Panel className={styles.PreviewSection}>
       <PreviewControlBar />
+
       <PreviewContainer>
         {hasFailedToPreview ? (
           // only show full error frame if never able to generate a preview
@@ -50,6 +53,7 @@ const PreviewSection = () => {
         ) : (
           <>
             <PreviewHeader />
+
             <PreviewFrame
               content={getPreviewContent(currentTabKey) || ''}
               key={currentTabKey} // unmount for each content part
