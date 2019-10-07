@@ -2,6 +2,7 @@ import { shallow } from 'enzyme';
 import React from 'react';
 import { PoolForm } from '../PoolForm';
 import config from 'src/config';
+import { SPC_TENANT } from 'src/constants';
 jest.mock('src/config');
 
 describe('PoolForm tests', () => {
@@ -94,7 +95,30 @@ describe('PoolForm tests', () => {
       expect(wrapper.find(component).prop('options')[1]).toEqual({ label: 'Default (default)', value: 'default' });
     });
 
-    it('shows the "Shared Pool" option in the overflow pool list when any of the available pool IPs have auto warmup enabled', () => {
+    it('shows the "Shared Pool" option in the overflow pool list when any of the available pool IPs have auto warmup enabled and the tenant is in SparkPost Cloud', () => {
+      config.tenantId = SPC_TENANT;
+
+      wrapper.setProps({
+        pools: [{
+          name: 'Fake Pool',
+          id: 'fake-pool',
+          ips: [{
+            external_ip: '1.1.1.1'
+          }]
+        }, {
+          name: 'My Pool',
+          id: 'my-pool',
+          ips: [{
+            external_ip: '2.2.2.2.',
+            auto_warmup_enabled: true
+          }]
+        }]
+      });
+
+      expect(wrapper.find(component).prop('options')[1]).toEqual({ label: 'Shared Pool', value: 'shared pool' });
+    });
+
+    it('shows the "Shared Pool" option in the overflow pool list when any of the available pool IPS have auto warmup enabled and the tenant is in SparkPost Cloud EU', () => {
       wrapper.setProps({
         pools: [{
           name: 'Fake Pool',
