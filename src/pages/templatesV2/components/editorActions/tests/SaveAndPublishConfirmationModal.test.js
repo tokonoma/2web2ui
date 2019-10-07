@@ -83,7 +83,7 @@ describe('SaveAndPublishConfirmationModal', () => {
         id: draft.id,
         recipients: [{
           address: {
-            email: 'placeholder@sparkpost.com'
+            email: 'sparkpost_templates_placeholder@sparkpost.com'
           },
           metadata: testData.metadata,
           substitution_data: testData.substitution_data

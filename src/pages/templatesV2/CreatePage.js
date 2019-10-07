@@ -35,7 +35,7 @@ export default class CreatePage extends Component {
       id: templateId,
       recipients: [{
         address: {
-          email: 'placeholder@sparkpost.com'
+          email: 'sparkpost_templates_placeholder@sparkpost.com'
         },
         metadata: {},
         substitution_data: {}

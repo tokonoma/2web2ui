@@ -70,7 +70,7 @@ describe('CreatePage', () => {
         id: formData.id,
         recipients: [{
           address: {
-            email: 'placeholder@sparkpost.com'
+            email: 'sparkpost_templates_placeholder@sparkpost.com'
           },
           metadata: {},
           substitution_data: {}

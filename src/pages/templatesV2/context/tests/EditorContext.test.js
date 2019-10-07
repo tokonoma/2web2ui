@@ -33,14 +33,23 @@ describe('EditorContext', () => {
     it('calls getDraft and getPublished on mount', () => {
       const getDraft = jest.fn();
       const getPublished = jest.fn();
+      const listDomains = jest.fn();
+      const listSubaccounts = jest.fn();
 
       subject({
         render: mount, // for useEffect
-        value: { getDraft, getPublished }
+        value: {
+          getDraft,
+          getPublished,
+          listDomains,
+          listSubaccounts
+        }
       });
 
       expect(getDraft).toHaveBeenCalledWith('test-template', '123');
       expect(getPublished).toHaveBeenCalledWith('test-template', '123');
+      expect(listDomains).toHaveBeenCalled();
+      expect(listSubaccounts).toHaveBeenCalled();
     });
   });
 });
