@@ -5,7 +5,7 @@ import config from 'src/config';
 import { SPC_TENANT, SPC_EU_TENANT } from 'src/constants';
 jest.mock('src/config');
 
-describe('PoolForm tests', () => {
+describe('PoolForm', () => {
   let props;
   let wrapper;
 
