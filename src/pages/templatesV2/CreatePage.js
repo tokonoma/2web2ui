@@ -84,8 +84,15 @@ export default class CreatePage extends Component {
               <CreateForm formName={formName}/>
             </Panel.Section>
           </Panel>
-          <Button type='submit' primary className={styles.NextButton}
-            disabled={submitting || pristine || !valid}>Next</Button>
+
+          <Button
+            type='submit'
+            primary
+            className={styles.NextButton}
+            disabled={submitting || pristine || !valid}
+          >
+            Next
+          </Button>
         </form>
       </Page>
     );
