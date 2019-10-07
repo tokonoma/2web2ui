@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { isEmailAddress } from 'src/helpers/email';
+import _ from 'lodash';
 
 const useMultiEmailField = (value = '', emailList = [], error = '') => {
   const [multiEmailValue, setMultiEmailValue] = useState(value);
@@ -43,7 +44,7 @@ const useMultiEmailField = (value = '', emailList = [], error = '') => {
   };
 
   const handleMultiEmailRemove = (target) => {
-    const nextEmailList = multiEmailList.filter((item) => target !== item);
+    const nextEmailList = multiEmailList.filter((item) => !_.isEqual(target, item));
 
     setMultiEmailList(nextEmailList);
   };
