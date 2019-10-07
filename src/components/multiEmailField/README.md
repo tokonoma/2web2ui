@@ -4,7 +4,7 @@ The `<MultiEmailField/>` is used when the user needs to enter multiple email add
 
 ## Usage
 
-The component is meant for use with the `useMultiEmail` hook. For example:
+The component is meant for use with the `useMultiEmailField` hook. For example:
 
 ```javascript
 import MultiEmailField, { useMultiEmailField } from 'src/components/multiEmailField';

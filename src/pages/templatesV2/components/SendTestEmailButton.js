@@ -38,7 +38,7 @@ const SendTestEmailButton = () => {
   const [fromEmail, setFromEmail] = useState('');
   const [subject, setSubject] = useState('');
 
-  const clearForm = () => {
+  const resetForm = () => {
     setMultiEmailValue('');
     setMultiEmailList([]);
   };
@@ -58,7 +58,7 @@ const SendTestEmailButton = () => {
   };
 
   const handleModalClose = () => {
-    clearForm();
+    resetForm();
     setModalOpen(false);
     setMultiEmailError('');
   };
@@ -83,7 +83,7 @@ const SendTestEmailButton = () => {
         .then(() => {
           setModalLoading(false); // Seems repetitive, but prevents janky loading state from continuing even after success
           setModalOpen(false);
-          clearForm();
+          resetForm();
 
           showAlert({
             type: 'success',
