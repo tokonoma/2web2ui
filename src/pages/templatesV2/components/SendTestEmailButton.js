@@ -68,6 +68,8 @@ const SendTestEmailButton = () => {
 
     if (multiEmailList.length === 0) {
       setMultiEmailError('Please enter a valid email address');
+
+      return;
     } else {
       setModalLoading(true);
     }
@@ -129,7 +131,7 @@ const SendTestEmailButton = () => {
               <form onSubmit={(e) => handleSubmit(e)}>
                 <MultiEmailField
                   id="multi-email-email-to"
-                  label="To:"
+                  label="To"
                   name="emailTo"
                   onChange={(e) => handleMultiEmailChange(e)}
                   onKeyDownAndBlur={(e) => handleMultiEmailKeyDownAndBlur(e)}
@@ -141,7 +143,7 @@ const SendTestEmailButton = () => {
 
                 <TextField
                   id="text-field-test-email-from"
-                  label="From:"
+                  label="From"
                   name="emailFrom"
                   type="email"
                   disabled
@@ -150,7 +152,7 @@ const SendTestEmailButton = () => {
 
                 <TextField
                   id="text-field-test-email-subject"
-                  label="Subject:"
+                  label="Subject"
                   name="emailSubject"
                   type="email"
                   disabled
