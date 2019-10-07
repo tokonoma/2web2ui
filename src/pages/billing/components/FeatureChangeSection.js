@@ -38,23 +38,27 @@ const FeatureChangeSection = () => {
   }
 
   const renderCTA = () => {
-    const Icon = isReady ? CheckCircle : Warning;
-    const description = isReady
-      ? <>
-        <strong>Your features have been updated</strong>
-        <span>, please continue with your plan change.</span>
+    const content = isReady ? (
+        <>
+          <CheckCircle className={cx(styles.FeatureListIcon, styles.success)} />
+          <div name='status-description'>
+            <strong>Your features have been updated</strong>
+            <span>, please continue with your plan change.</span>
+          </div>
+        </>
+    ) : (
+      <>
+        <Warning className={cx(styles.FeatureListIcon, styles.danger)} />
+        <div name='status-description'>
+          <span>Your new plan has additional limits on features you currently use. See the list below to </span>
+          <strong>make the necessary changes before you can change plans.</strong>
+        </div>
       </>
-      : <>
-        <span>Your new plan has additional limits on features you currently use. See the list below to </span>
-        <strong>make the necessary changes before you can change plans.</strong>
-      </>;
+    );
     return (
       <Panel.Section name='feature-change-status'>
         <div className={styles.FeatureListStatus}>
-          <Icon className={cx(styles.FeatureListIcon, isReady ? styles.success : styles.danger)}/>
-          <div name='status-description'>
-            {description}
-          </div>
+          {content}
         </div>
       </Panel.Section>
     );
