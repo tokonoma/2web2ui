@@ -38,18 +38,44 @@ describe('CreatePage', () => {
       expect(subject({ submitting: false, pristine: true, valid: true }).find('Button').prop('disabled')).toBe(true);
       expect(subject({ submitting: false, pristine: false, valid: false }).find('Button').prop('disabled')).toBe(true);
     });
+
     it('renders enabled states correctly', () => {
       expect(subject({ submitting: false, pristine: false, valid: true }).find('Button').prop('disabled')).toBe(false);
     });
   });
 
   describe('handleCreate', () => {
-    it('submits correctly with form data', () => {
+    it('calls "create" and "createRecipientList" with form data when submitting', () => {
       const mockCreate = jest.fn(() => Promise.resolve());
-      const formData = { name: 'Foo', id: 'foo', content: {}};
-      const wrapper = subject({ create: mockCreate, history: { push: jest.fn() }});
+      const mockCreateRecipientList = jest.fn(() => Promise.resolve());
+      const formData = {
+        name: 'Foo',
+        id: 'foo',
+        content: {}
+      };
+      const wrapper = subject({
+        create: mockCreate,
+        createRecipientList: mockCreateRecipientList,
+        history: { push: jest.fn() }
+      });
       wrapper.find('form').simulate('submit', formData);
-      expect(mockCreate).toHaveBeenCalledWith({ ...formData, content: { ...formData.content, text: '' }});
+      expect(mockCreate).toHaveBeenCalledWith({
+        ...formData,
+        content: {
+          ...formData.content,
+          text: ''
+        }
+      });
+      expect(mockCreateRecipientList).toHaveBeenCalledWith({
+        id: formData.id,
+        recipients: [{
+          address: {
+            email: 'placeholder@sparkpost.com'
+          },
+          metadata: {},
+          substitution_data: {}
+        }]
+      });
     });
 
     it('alerts & redirects to edit page', async () => {
