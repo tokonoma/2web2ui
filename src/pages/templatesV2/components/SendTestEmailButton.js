@@ -72,7 +72,7 @@ const SendTestEmailButton = () => {
       setModalLoading(true);
     }
 
-    if (multiEmailList.length && templateId) {
+    if (multiEmailList.length) {
       sendPreview({
         id: templateId,
         subaccountId: subaccountId,
