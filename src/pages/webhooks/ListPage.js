@@ -21,7 +21,7 @@ const filterBoxConfig = {
 
 export class WebhooksList extends Component {
 
-  componentDidMount () {
+  componentDidMount() {
     this.props.listWebhooks();
   }
 
@@ -63,7 +63,7 @@ export class WebhooksList extends Component {
     return row;
   };
 
-  renderError () {
+  renderError() {
     const { error, listWebhooks } = this.props;
     return (
       <ApiErrorBanner
@@ -74,7 +74,7 @@ export class WebhooksList extends Component {
     );
   }
 
-  renderCollection () {
+  renderCollection() {
     const { webhooks } = this.props;
     return (
       <TableCollection
@@ -88,7 +88,7 @@ export class WebhooksList extends Component {
     );
   }
 
-  render () {
+  render() {
     const { loading, error, webhooks } = this.props;
 
     if (loading) {
@@ -111,7 +111,7 @@ export class WebhooksList extends Component {
   }
 }
 
-function mapStateToProps ({ webhooks, ...state }) {
+function mapStateToProps({ webhooks, ...state }) {
   return {
     hasSubaccounts: hasSubaccounts(state),
     webhooks: webhooks.list,
