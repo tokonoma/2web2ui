@@ -13,7 +13,7 @@ describe('Signals', () => {
     it('renders a health score dashboard after navigating to the health score view', () => {
       cy.contains('Health Score').click();
       cy.title().should('include', 'Signals');
-      //cy.title().should('include', 'Health Score'); // NOTE: Commenting out as this is failing - this is a bug!
+      cy.title().should('include', 'Health Score');
       cy.contains('Health Score').should('be.visible');
       cy.url().should('include', 'signals/health-score');
     });
@@ -22,7 +22,7 @@ describe('Signals', () => {
       it('renders the "Spam Trap Monitoring" view', () => {
         cy.contains('Spam Traps').click();
         cy.title().should('include', 'Signals');
-        // cy.title().should('include', 'Spam Traps'); // NOTE: Commenting out as this is failing - this is a bug!
+        cy.title().should('include', 'Spam Traps');
         cy.contains('Spam Trap Monitoring').should('be.visible');
         cy.url().should('include', 'signals/spam-traps');
       });
@@ -32,7 +32,7 @@ describe('Signals', () => {
       it('renders the "Engagement Recency" view', () => {
         cy.contains('Engagement Recency').click();
         cy.title().should('include', 'Signals');
-        // cy.title().should('include', 'Engagement Recency'); // NOTE: Commenting out as this is failing - this is a bug!
+        cy.title().should('include', 'Engagement Recency');
         cy.contains('Engagement Recency').should('be.visible');
         cy.url().should('include', 'signals/engagement');
       });
