@@ -14,7 +14,7 @@ const EditNavigation = ({ primaryArea }) => {
         {links.map(({ key, content }) => (
           <UnstyledLink
             className={classNames(styles.NavigationLink, {
-              [styles.NavigationActiveLink]: key === currentNavigationKey
+              [styles.active]: key === currentNavigationKey
             })}
             key={key}
             onClick={() => { setNavigation(key); }}
