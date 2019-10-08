@@ -66,10 +66,12 @@ export const ChangePlanForm = ({
 
   //clears out requestParams when user changes plan
   useEffect(() => {
-    if (!selectedBundle && gotBundles) {
+    if (!selectedBundle && gotBundles.current) {
       updateRoute({ undefined });
+    } else if (code) {
+      selectBundle(allBundles.find(({ bundle }) => bundle === code));
     }
-  },[selectedBundle, updateRoute]);
+  },[selectedBundle, code, allBundles, updateRoute]);
 
   return (
     <form >
