@@ -57,7 +57,7 @@ const cases = {
   eventsQuery: {
     good: [[{ key: 'reason', value: 'fo*o' }],
       [{ key: 'campaigns', value: 'foo, bar' }]],
-    bad: [[{}],
+    bad: [[{ key: 'reason' }],
       [{ value: 'foo' }]],
     multiArg: true
   },

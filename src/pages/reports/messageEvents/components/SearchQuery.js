@@ -5,7 +5,7 @@ import styles from './SearchForm.module.scss';
 import { Field } from 'redux-form';
 import { getFiltersAsArray } from '../helpers/transformData.js';
 import { SelectWrapper, TextFieldWrapper } from 'src/components/reduxFormWrappers';
-import { required, eventsQuery } from 'src/helpers/validation';
+import { eventsQuery } from 'src/helpers/validation';
 import { EVENTS_SEARCH_FILTERS } from 'src/constants';
 import _ from 'lodash';
 
@@ -41,7 +41,6 @@ export default ({ fields }) => (
               name={`${member}.key`}
               component={SelectWrapper}
               options={getAvailableOptions(fields.getAll(), index)}
-              validate={required}
             />
           </div>
         </Grid.Column>
