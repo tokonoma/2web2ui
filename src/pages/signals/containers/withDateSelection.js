@@ -43,7 +43,9 @@ export class WithDateSelection extends Component {
   handleDateSelect = (node) => {
     const newDate = _.get(node, 'payload.date');
 
-    if (newDate === this.state.selectedDate) {
+    if (newDate === this.state.selectedDate &&
+      this.state.shouldHighlightSelected) { //second condition allows user to select last date when in default state
+
       this.setDefaultSelected();
     } else {
       this.setState({ selectedDate: _.get(node, 'payload.date'), shouldHighlightSelected: true });

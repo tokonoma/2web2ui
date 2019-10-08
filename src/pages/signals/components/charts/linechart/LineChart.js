@@ -45,7 +45,7 @@ class LineChart extends Component {
   }
 
   renderBackgrounds = () => {
-    const { xKey, selected, onClick } = this.props;
+    const { xKey, selected, shouldHighlightSelected, onClick } = this.props;
 
     return (
       <Bar
@@ -56,7 +56,7 @@ class LineChart extends Component {
         onClick={onClick}
         shape={
           ({ payload, background, ...rest }) => (
-            <Rectangle {...rest} {...background} opacity={payload[xKey] === selected ? 0.4 : 0} />
+            <Rectangle {...rest} {...background} opacity={(payload[xKey] === selected && shouldHighlightSelected) ? 0.4 : 0} />
           )
         }
       />

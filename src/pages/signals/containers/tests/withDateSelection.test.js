@@ -43,14 +43,14 @@ describe('Signals Spam Trap Details Container', () => {
 
   it('handles date select for un-selecting the already selected date by defaulting to last date', () => {
     const wrapper = subject({ data: [{ date: '2015-01-01' }, { date: '2999-99-99' }]});
-    wrapper.setState({ selectedDate: '2015-01-01' });
+    wrapper.setState({ selectedDate: '2015-01-01', shouldHighlightSelected: true });
     wrapper.prop('handleDateSelect')({ payload: { date: '2015-01-01' }});
     expect(wrapper).toHaveProp('selectedDate', '2999-99-99');
   });
 
   it('handles date select for un-selecting the already selected date by resetting shouldHighlightSelected & hovered', () => {
     const wrapper = subject({ data: [{ date: '2015-01-01' }, { date: '2999-99-99' }]});
-    wrapper.setState({ selectedDate: '2015-01-01' });
+    wrapper.setState({ selectedDate: '2015-01-01', shouldHighlightSelected: true });
     wrapper.prop('handleDateSelect')({ payload: { date: '2015-01-01' }});
     expect(wrapper).toHaveProp('shouldHighlightSelected', false);
     expect(wrapper).toHaveProp('hoveredDate', null);

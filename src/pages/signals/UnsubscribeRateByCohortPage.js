@@ -1,3 +1,4 @@
+/* eslint max-lines: ["error", 200] */
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { getUnsubscribeRateByCohort, getEngagementRecency } from 'src/actions/signals';
@@ -69,7 +70,17 @@ export class UnsubscribeRateByCohortPage extends Component {
 
   renderContent = () => {
     const {
-      data = [], dataEngRecency = [], facet, facetId, handleDateSelect, loading, empty, error, selectedDate, subaccountId
+      data = [],
+      dataEngRecency = [],
+      facet,
+      facetId,
+      handleDateSelect,
+      loading,
+      empty,
+      error,
+      selectedDate,
+      shouldHighlightSelected,
+      subaccountId
     } = this.props;
     const selectedUnsubscribe = _.find(data, ['date', selectedDate]) || {};
     const selectedEngagementRecency = _.find(dataEngRecency, ['date', selectedDate]) || {};
@@ -103,6 +114,7 @@ export class UnsubscribeRateByCohortPage extends Component {
                   height={300}
                   onClick={handleDateSelect}
                   selected={selectedDate}
+                  shouldHighlightSelected={shouldHighlightSelected}
                   lines={data}
                   tooltipWidth='250px'
                   tooltipContent={this.getTooltipContent}

@@ -1,3 +1,4 @@
+/* eslint max-lines: ["error", 200] */
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { getComplaintsByCohort, getEngagementRecency } from 'src/actions/signals';
@@ -68,7 +69,19 @@ export class ComplaintsByCohortPage extends Component {
   }
 
   renderContent = () => {
-    const { data = [], dataEngRecency = [], facet, facetId, handleDateSelect, loading, empty, error, selectedDate, subaccountId } = this.props;
+    const {
+      data = [],
+      dataEngRecency = [],
+      facet,
+      facetId,
+      handleDateSelect,
+      loading,
+      empty,
+      error,
+      selectedDate,
+      shouldHighlightSelected,
+      subaccountId
+    } = this.props;
     const selectedComplaints = _.find(data, ['date', selectedDate]) || {};
     const selectedEngagementRecency = _.find(dataEngRecency, ['date', selectedDate]) || {};
     let chartPanel;
@@ -100,6 +113,7 @@ export class ComplaintsByCohortPage extends Component {
                   height={300}
                   onClick={handleDateSelect}
                   selected={selectedDate}
+                  shouldHighlightSelected={shouldHighlightSelected}
                   lines={data}
                   tooltipWidth='250px'
                   tooltipContent={this.getTooltipContent}

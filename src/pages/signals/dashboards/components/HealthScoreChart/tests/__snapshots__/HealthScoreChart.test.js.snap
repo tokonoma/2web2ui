@@ -38,7 +38,6 @@ exports[`Signals Health Score Chart renders happy path correctly 1`] = `
       }
       onMouseOut={[Function]}
       onMouseOver={[Function]}
-      selected="2019-03-27"
       shouldHighlightSelected={true}
       timeSeries={
         Array [
