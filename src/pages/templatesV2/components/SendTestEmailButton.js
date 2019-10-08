@@ -71,30 +71,27 @@ const SendTestEmailButton = () => {
       setMultiEmailError('Please enter a valid email address');
 
       return;
-    } else {
-      setModalLoading(true);
     }
 
-    if (multiEmailList.length) {
-      sendPreview({
-        id: templateId,
-        subaccountId: subaccountId,
-        mode: isPublishedMode ? 'published' : 'draft',
-        emails: multiEmailList.map((item) => item.email),
-        from: fromEmail
+    setModalLoading(true);
+    sendPreview({
+      id: templateId,
+      subaccountId: subaccountId,
+      mode: isPublishedMode ? 'published' : 'draft',
+      emails: multiEmailList.map((item) => item.email),
+      from: fromEmail
+    })
+      .then(() => {
+        setModalLoading(false); // Seems repetitive, but prevents janky loading state from continuing even after success
+        setModalOpen(false);
+        resetForm();
+
+        showAlert({
+          type: 'success',
+          message: 'Successfully sent a test email'
+        });
       })
-        .then(() => {
-          setModalLoading(false); // Seems repetitive, but prevents janky loading state from continuing even after success
-          setModalOpen(false);
-          resetForm();
-
-          showAlert({
-            type: 'success',
-            message: 'Successfully sent a test email'
-          });
-        })
-        .finally(() => setModalLoading(false));
-    }
+      .finally(() => setModalLoading(false));
   };
 
   return (
