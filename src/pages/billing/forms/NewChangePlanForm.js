@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback, useRef } from 'react';
-import { Grid } from '@sparkpost/matchbox';
+import { Grid, Button } from '@sparkpost/matchbox';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
@@ -11,7 +11,7 @@ import useRouter from 'src/hooks/useRouter';
 //Actions
 import { getBillingInfo } from 'src/actions/account';
 import FeatureChangeSection from '../components/FeatureChangeSection';
-import { FeatureChangeContextProvider } from '../context/FeatureChangeContext';
+import { FeatureChangeContextProvider, useFeatureChangeContext } from '../context/FeatureChangeContext';
 import { getBillingCountries, getBundles, verifyPromoCode, clearPromoCode } from 'src/actions/billing';
 
 //Selectors
@@ -19,6 +19,17 @@ import { selectTieredVisibleBundles, currentPlanSelector, getPromoCodeObject } f
 import { changePlanInitialValues } from 'src/selectors/accountBillingForms';
 
 const FORMNAME = 'changePlan';
+
+export const SubmitButton = ({ loading }) => { //TODO: Swap to brightback
+
+  const { isReady } = useFeatureChangeContext();
+  return (isReady &&
+    <Button type='submit' disabled={loading} color='orange'>
+      Change Plan
+    </Button>
+  );
+};
+
 export const ChangePlanForm = ({
   //Redux Props
   bundles,
@@ -30,7 +41,8 @@ export const ChangePlanForm = ({
   verifyPromoCode,
   promoCodeObj,
   clearPromoCode,
-  getBundles
+  getBundles,
+  handleSubmit
 }) => {
   const { requestParams: { code, promo } = {}, updateRoute } = useRouter();
   const allBundles = Object.values(bundles).reduce((acc, curr) => [...curr, ...acc],[]);
@@ -73,8 +85,11 @@ export const ChangePlanForm = ({
     }
   },[selectedBundle, code, allBundles, updateRoute]);
 
+  const onSubmit = () => {
+  };
+
   return (
-    <form >
+    <form onSubmit={handleSubmit(onSubmit)}>
       <Grid>
         <Grid.Column xs={8}>
           {
@@ -100,6 +115,7 @@ export const ChangePlanForm = ({
             isPlanSelected && (
               <FeatureChangeContextProvider selectedBundle={selectedBundle}>
                 <FeatureChangeSection/>
+                <SubmitButton handleSubmit={handleSubmit}/>
               </FeatureChangeContextProvider>
             )
           }
