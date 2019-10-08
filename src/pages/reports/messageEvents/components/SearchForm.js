@@ -38,7 +38,7 @@ export class SearchForm extends Component {
 
 const mapStateToProps = (state) => ({
   initialValues: {
-    searchQuery: getSearchQueriesFromFilters(state.messageEvents.search),
+    searchQuery: [...getSearchQueriesFromFilters(state.messageEvents.search), {}],
     ...getBooleanEventsObject(state.messageEvents.search.events)
   },
   eventListing: selectMessageEventListing(state)

@@ -29,7 +29,6 @@ const getPlaceholderText = _.memoize((key) => {
 
 export default ({ fields }) => (
   <Fragment>
-    <Button className = {styles.AddButton} color="blue" flat onClick={() => fields.push({})}> Add Filter<AddCircleOutline className = {styles.Icon}/></Button>
     {fields.map((member, index) => (
       <Grid key={index}>
         <Grid.Column
@@ -70,5 +69,6 @@ export default ({ fields }) => (
         </Grid.Column>
       </Grid>
     ))}
+    <Button className = {styles.AddButton} color="blue" flat onClick={() => fields.push({})}> Add Filter<AddCircleOutline className = {styles.Icon}/></Button>
   </Fragment >
 );

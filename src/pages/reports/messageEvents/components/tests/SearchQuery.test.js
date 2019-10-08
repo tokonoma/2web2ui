@@ -45,12 +45,12 @@ describe('SearchForm', () => {
   });
 
   it('add button works', () => {
-    wrapper.find('Button').first().simulate('click');
+    wrapper.find('Button').last().simulate('click');
     expect(props.fields.push).toHaveBeenCalled();
   });
 
   it('remove button works', () => {
-    wrapper.find('Button').last().simulate('click');
+    wrapper.find('Button').at(2).simulate('click');
     expect(props.fields.remove).toHaveBeenCalledWith(2);
   });
 
