@@ -16,7 +16,7 @@ export default class CreatePage extends Component {
   handleCreate = (values) => {
     const {
       create,
-      createRecipientList,
+      createSnippet,
       history,
       subaccountId,
       showAlert
@@ -30,19 +30,20 @@ export default class CreatePage extends Component {
     };
     const templateId = values.id;
     const createPromise = create(formData);
+    const testDataBase = {
+      options: {},
+      substitution_data: {},
+      metadata: {}
+    };
+
     // This is used as a place to store meta and substitution data temporarily until test data can be stored with a draft
-    const createRecipientListPromise = createRecipientList({
+    const createSnippetPromise = createSnippet({
       id: templateId,
-      recipients: [{
-        address: {
-          email: 'sparkpost_templates_placeholder@sparkpost.com'
-        },
-        metadata: {},
-        substitution_data: {}
-      }]
+      name: 'Templates Test Data',
+      html: JSON.stringify(testDataBase)
     });
 
-    return Promise.all([createPromise, createRecipientListPromise])
+    return Promise.all([createPromise, createSnippetPromise])
       .then(() => {
         showAlert({ type: 'success', message: 'Template Created.' });
         history.push(`/${routeNamespace}/edit/${templateId}/draft/content${setSubaccountQuery(subaccountId)}`);

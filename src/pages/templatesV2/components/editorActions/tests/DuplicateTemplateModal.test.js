@@ -82,6 +82,7 @@ describe('DuplicateTemplateModal', () => {
     expect(wrapper.find('[name="templateId"]').props().error).toEqual('Please enter a unique template ID.');
   });
 
+<<<<<<< HEAD
   it('invokes the `createTemplate` prop on submit, shows an alert, and then invokes the `onClose` prop', () => {
     const promise = Promise.resolve();
     const mockCreateTemplate = jest.fn(() => promise);
@@ -98,11 +99,19 @@ describe('DuplicateTemplateModal', () => {
       },
       shared_with_subaccounts: false
     };
+=======
+  it('invokes "createTemplate" an "createSnippet" with relevant data on submit', () => {
+    const createTemplatePromise = Promise.resolve();
+    const createSnippetPromise = Promise.resolve();
+    const mockCreateTemplate = jest.fn(() => createTemplatePromise);
+    const mockCreateSnippet = jest.fn(() => createSnippetPromise);
+>>>>>>> TR-1374-lemmon-flavor - Replace recipient list implementation with snippets implementation
 
     const wrapper = subject({
       onClose: mockOnClose,
       showAlert: mockShowAlert,
       createTemplate: mockCreateTemplate,
+<<<<<<< HEAD
       template: mockTemplate,
       contentToDuplicate: mockContent
     });
@@ -123,6 +132,34 @@ describe('DuplicateTemplateModal', () => {
       expect(mockShowAlert).toHaveBeenCalledWith({
         type: 'success',
         message: 'Template duplicated.'
+=======
+      createSnippet: mockCreateSnippet
+    });
+
+    wrapper.find('form').simulate('submit');
+
+    /* eslint-disable arrow-body-style */
+    return createTemplatePromise.then(() => {
+      return createSnippetPromise.then(() => {
+        expect(mockCreateTemplate).toHaveBeenCalledWith({
+          name: 'My Draft (COPY)',
+          id: 'my-draft-copy',
+          content: { text: 'my content' },
+          options: { option1: true },
+          shared_with_subaccounts: true
+        });
+
+        expect(mockCreateSnippet).toHaveBeenCalled({
+          id: 'my-draft-copy',
+          recipients: [{
+            address: {
+              email: 'sparkpost_templates_placeholder@sparkpost.com'
+            },
+            metadata: { meta: 'data' },
+            substitution_data: { substitution: 'data' }
+          }]
+        });
+>>>>>>> TR-1374-lemmon-flavor - Replace recipient list implementation with snippets implementation
       });
     });
   });

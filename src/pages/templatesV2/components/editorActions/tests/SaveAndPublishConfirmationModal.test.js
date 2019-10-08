@@ -16,7 +16,7 @@ describe('SaveAndPublishConfirmationModal', () => {
       isDraftPublishing: false,
       publishDraftV2: jest.fn(),
       getParsedTestData: jest.fn(),
-      updateRecipientList: jest.fn(),
+      updateSnippet: jest.fn(),
       ...editorState
     });
 
@@ -41,7 +41,7 @@ describe('SaveAndPublishConfirmationModal', () => {
     expect(wrapper.find('ConfirmationModal').props().open).toEqual(false);
   });
 
-  it('on confirm, 1) calls publishDraftV2, 2) calls updateRecipientList, and 3) redirects to published path upon publishing', async () => {
+  it('on confirm, 1) calls publishDraftV2, 2) calls updateSnippet, and 3) redirects to published path upon publishing', async () => {
     const publishDraftPromise = Promise.resolve();
     const updateRecipientPromise = Promise.resolve();
     const testData = {
@@ -58,13 +58,13 @@ describe('SaveAndPublishConfirmationModal', () => {
     const getParsedTestData = jest.fn();
     getParsedTestData.mockReturnValue(testData);
     const publishDraftV2 = jest.fn(() => publishDraftPromise);
-    const updateRecipientList = jest.fn(() => updateRecipientPromise);
+    const updateSnippet = jest.fn(() => updateRecipientPromise);
     const draft = { id: 'foo', subaccount_id: 101 };
     const content = { text: 'foo text', html: '<h1>foo html</h1>' };
     const wrapper = subject({
       publishDraftV2,
       getParsedTestData,
-      updateRecipientList,
+      updateSnippet,
       draft,
       content
     });
@@ -78,7 +78,7 @@ describe('SaveAndPublishConfirmationModal', () => {
       },
       101
     );
-    expect(updateRecipientList).toHaveBeenCalledWith(
+    expect(updateSnippet).toHaveBeenCalledWith(
       {
         id: draft.id,
         recipients: [{

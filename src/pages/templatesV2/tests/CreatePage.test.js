@@ -13,7 +13,7 @@ describe('CreatePage', () => {
       listDomains={jest.fn()}
       history={{ push: jest.fn() }}
       showAlert={jest.fn()}
-      createRecipientList={jest.fn()}
+      createSnippet={jest.fn()}
       {...props}
     />
   );
@@ -45,9 +45,9 @@ describe('CreatePage', () => {
   });
 
   describe('handleCreate', () => {
-    it('calls "create" and "createRecipientList" with form data when submitting', () => {
+    it('calls "create" and "createSnippet" with form data when submitting', () => {
       const mockCreate = jest.fn(() => Promise.resolve());
-      const mockCreateRecipientList = jest.fn(() => Promise.resolve());
+      const mockCreateSnippet = jest.fn(() => Promise.resolve());
       const formData = {
         name: 'Foo',
         id: 'foo',
@@ -55,7 +55,7 @@ describe('CreatePage', () => {
       };
       const wrapper = subject({
         create: mockCreate,
-        createRecipientList: mockCreateRecipientList,
+        createSnippet: mockCreateSnippet,
         history: { push: jest.fn() }
       });
       wrapper.find('form').simulate('submit', formData);
@@ -66,7 +66,7 @@ describe('CreatePage', () => {
           text: ''
         }
       });
-      expect(mockCreateRecipientList).toHaveBeenCalledWith({
+      expect(mockCreateSnippet).toHaveBeenCalledWith({
         id: formData.id,
         recipients: [{
           address: {
@@ -82,10 +82,10 @@ describe('CreatePage', () => {
       const mockPush = jest.fn();
       const mockAlert = jest.fn();
       const createPromise = Promise.resolve();
-      const createRecipientListPromise = Promise.resolve();
+      const createSnippetPromise = Promise.resolve();
       const wrapper = subject({
         create: jest.fn(() => createPromise),
-        createRecipientList: jest.fn(() => createRecipientListPromise),
+        createSnippet: jest.fn(() => createSnippetPromise),
         history: { push: mockPush }, showAlert: mockAlert
       });
 
@@ -93,7 +93,7 @@ describe('CreatePage', () => {
 
       /* eslint-disable arrow-body-style */
       return createPromise.then(() => {
-        return createRecipientListPromise.then(() => {
+        return createSnippetPromise.then(() => {
           expect(mockPush).toHaveBeenCalledWith('/templatesv2/edit/foo/draft/content');
           expect(mockAlert).toHaveBeenCalledWith({ type: 'success', message: 'Template Created.' });
         });

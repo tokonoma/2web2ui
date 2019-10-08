@@ -17,6 +17,12 @@ import {
   updateRecipientList,
   getRecipientList
 } from 'src/actions/recipientLists';
+import {
+  createSnippet,
+  getSnippet,
+  updateSnippet,
+  deleteSnippet
+} from 'src/actions/snippets';
 import { list as listDomains } from 'src/actions/sendingDomains';
 import { list as listSubaccounts } from 'src/actions/subaccounts';
 import {
@@ -74,9 +80,13 @@ const mapDispatchToProps = {
   createTemplate,
   updateDraft,
   publishDraft,
-  createRecipientList,
-  getRecipientList,
-  updateRecipientList,
+  createRecipientList, // TODO: Remove soon!
+  getRecipientList, // TODO: Remove soon!
+  updateRecipientList, // TODO: Remove soon!
+  createSnippet,
+  getSnippet,
+  updateSnippet,
+  deleteSnippet,
   publishDraftV2,
   listDomains,
   listSubaccounts,
