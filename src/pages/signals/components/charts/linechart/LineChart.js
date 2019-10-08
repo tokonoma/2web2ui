@@ -121,6 +121,7 @@ LineChart.defaultProps = {
   width: '99%',
   lineType: 'linear',
   margin: { top: 12, left: 18, right: 0, bottom: 5 },
+  shouldHighlightSelected: true,
   xKey: 'date',
   yKey: 'value',
   yRange: ['auto', 'auto']

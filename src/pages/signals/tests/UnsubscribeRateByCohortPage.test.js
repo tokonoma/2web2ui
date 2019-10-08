@@ -35,7 +35,8 @@ describe('Signals Unsubscribe Rate Page', () => {
       loading: false,
       empty: false,
       xTicks: [1,2],
-      selectedDate: '2017-01-02'
+      selectedDate: '2017-01-02',
+      shouldHighlightSelected: false
     };
     wrapper = shallow(<UnsubscribeRateByCohortPage {...props}/>);
     wrapper.setProps({ data, dataEngRecency });
