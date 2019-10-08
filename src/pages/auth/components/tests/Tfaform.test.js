@@ -8,7 +8,7 @@ const props = {
   verifyAndLogin: jest.fn(() => Promise.resolve()),
   handleSubmit: jest.fn(),
   error: false,
-  tfa: { _enabled: false, name: 'me', test: 'this' }
+  tfa: { enabled: false, name: 'me', test: 'this' }
 };
 
 let wrapper;

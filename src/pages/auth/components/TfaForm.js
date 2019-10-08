@@ -11,7 +11,7 @@ import { LINKS } from 'src/constants';
 export class TfaForm extends Component {
 
   handleSubmit = ({ code }) => {
-    const { _enabled, ...authData } = this.props.tfa;
+    const { enabled: _enabled, ...authData } = this.props.tfa;
 
     return this.props.verifyAndLogin({ authData, code }).catch((err) => {
       if (err.response.status === 400) {
