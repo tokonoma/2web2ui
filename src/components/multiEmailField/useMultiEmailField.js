@@ -25,7 +25,8 @@ const useMultiEmailField = (value = '', emailList = [], error = '') => {
       if (isValidEmail) {
         setMultiEmailList([...multiEmailList, { email: multiEmailValue }]);
         setMultiEmailValue('');
-        setMultiEmailError('');
+
+        return;
       }
 
       // Throw an error on the field if:
