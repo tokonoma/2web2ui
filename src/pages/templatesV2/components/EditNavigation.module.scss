@@ -12,32 +12,50 @@
 
 .NavigationLink {
   font-size: rem(18);
+  position: relative; // allows absolute positioning within
   color: color(gray, 4); // to match default text
   display: inline-block;
   padding: spacing(large);
+  transition: color 0.2s ease-in-out;
+
+  &:after {
+    content: "";
+    position: absolute;
+    width: 75%;
+    left: 12.5%; // 100% - 75% = 25% - divided by 2 is 12.5% (this centers the pseudo element horizontally!)
+    bottom: 0;
+    height: rem(4);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease-in-out,
+                visibility 0.2s ease-in-out;
+  }
 
   &:hover,
   &:focus {
+    color: color(gray, 2);
+
+    &:after {
+      opacity: 1;
+      visibility: visible;
+      background-color: color(gray, 8);
+    }
+  }
+
+  &.active {
     color: color(orange);
+
+    &:after {
+      opacity: 1;
+      visibility: visible;
+      background-color: color(orange);
+    }
   }
 }
 
 .NavigationActiveLink {
   position: relative; // allows absolute positioning within
   color: color(orange);
-
-  &:after {
-    content: "";
-    display: block;
-    width: 75%;
-    position: absolute;
-    left: 50%;
-    right: 50%;
-    transform: translateX(-50%);
-    bottom: 0;
-    height: rem(4);
-    background-color: color(orange);
-  }
 }
 
 .NavigationPrimaryArea {
