@@ -5,7 +5,12 @@ exports[`Signals Health Score legend Component renders correctly 1`] = `
   className="Legend"
 >
   <div
-    className="b"
+    className="danger"
+    style={
+      Object {
+        "background": "#D1E4F4",
+      }
+    }
   >
     <div
       className="Desc"
@@ -14,7 +19,12 @@ exports[`Signals Health Score legend Component renders correctly 1`] = `
     </div>
   </div>
   <div
-    className="w"
+    className="warning"
+    style={
+      Object {
+        "background": "#91C5FD",
+      }
+    }
   >
     <div
       className="Desc"
@@ -23,7 +33,12 @@ exports[`Signals Health Score legend Component renders correctly 1`] = `
     </div>
   </div>
   <div
-    className="g"
+    className="good"
+    style={
+      Object {
+        "background": "#4194ED",
+      }
+    }
   >
     <div
       className="Desc"

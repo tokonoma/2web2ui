@@ -4,6 +4,7 @@ import { fillByDate } from 'src/helpers/date';
 import { roundToPlaces } from 'src/helpers/units';
 import { getDoD } from 'src/helpers/signals';
 import { selectSubaccountIdFromQuery } from 'src/selectors/subaccounts';
+import { HEALTH_SCORE_COLORS_V3 } from 'src/pages/signals/constants/healthScoreThresholds';
 import _ from 'lodash';
 import moment from 'moment';
 
@@ -312,25 +313,13 @@ export const selectHealthScoreDetails = createSelector(
   }
 );
 
-const fillHealthScoreColor = _.memoize((rank) => {
-  switch (rank) {
-    case ('danger'):
-      return '#D1E4F4';
-    case ('warning'):
-      return '#91C5FD';
-    case ('good'):
-    default:
-      return '#4194ED';
-  }
-});
-
 export const selectHealthScoreDetailsV3 = createSelector(
   [selectHealthScoreDetails],
   ({ details, ...rest }) => {
 
     // Add fill colors
     const dataWithFill = details.data.map((healthData) => ({
-      fill: fillHealthScoreColor(healthData.ranking),
+      fill: HEALTH_SCORE_COLORS_V3[healthData.ranking || 'danger'],
       ...healthData
     }));
 

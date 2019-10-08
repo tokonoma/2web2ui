@@ -10,21 +10,9 @@
   }
 }
 
-.b, .w, .g {
+.danger, .warning, .good {
   position: relative;
   height: 10px;
-}
-
-.b {
-  background: #D1E4F4;
-}
-
-.w {
-  background: #91C5FD;
-}
-
-.g {
-  background: #4194ED;
 }
 
 .Desc {
@@ -33,12 +21,12 @@
 
   font-size: font-size(200);
   line-height: 1em;
-  color: color(gray, 4);
+  color: color(gray, 3);
 }
 
 
 .Label {
-  flex: 0 0 0;
+  flex: 0;
   margin-right: spacing();
   font-size: rem(12);
   font-weight: 600;

@@ -24,13 +24,15 @@ exports[`Signals Health Score Page V3 renders correctly when receiving data 1`] 
   title="Health Score"
 >
   <Panel>
-    <Panel.Section>
+    <Panel.Section
+      aria-hidden="true"
+    >
       <Grid>
         <Grid.Column
           xs={8}
         >
           <HealthScoreMetric
-            score={NaN}
+            score={0}
           />
         </Grid.Column>
         <Grid.Column

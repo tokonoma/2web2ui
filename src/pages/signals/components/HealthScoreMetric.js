@@ -4,7 +4,7 @@ import { formatNumber, roundToPlaces } from 'src/helpers/units';
 
 import styles from './HealthScoreMetric.module.scss';
 
-function HealthScoreMetric({ date, score = 0, injections }) {
+function HealthScoreMetric({ date, score, injections }) {
   return (
     <div className={styles.HSMetric}>
       <div className={styles.Date}>{formatDate(date)}</div>

@@ -93,8 +93,7 @@ export function HealthScorePageV3(props) {
   };
 
   const scoreMetricDate = hoveredDate || selectedDate;
-  const { injections, health_score } = (data.find((dataPoint) => dataPoint.date === scoreMetricDate)) || {};
-
+  const { injections, health_score = 0 } = (data.find((dataPoint) => dataPoint.date === scoreMetricDate)) || {};
   return (
     <Page
       breadcrumbAction={{ content: 'Back to Health Score Overview', to: '/signals/health-score', component: Link }}
@@ -111,7 +110,7 @@ export function HealthScorePageV3(props) {
           Create Alert
         </Button>}>
       <Panel>
-        <Panel.Section>
+        <Panel.Section aria-hidden='true'>
           <Grid>
             <Grid.Column xs={8}>
               {!loading && !empty && !error &&
