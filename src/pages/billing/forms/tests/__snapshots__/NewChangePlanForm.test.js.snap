@@ -7,55 +7,64 @@ exports[`Change Plan Form should render 1`] = `
       xs={8}
     >
       <PlanSelectSection
-        currentPlan={
-          Object {
-            "billingId": "3",
-            "code": "3",
-            "monthly": 300,
-            "name": "Three",
-            "overage": 0.3,
-            "tier": "premier",
-            "volume": 3,
-          }
-        }
-        onSelect={[Function]}
-        plans={
+        bundles={
           Object {
             "premier": Array [
               Object {
-                "billingId": "3",
-                "code": "3",
-                "monthly": 300,
-                "name": "Three",
-                "overage": 0.3,
-                "volume": 3,
+                "billingId": 4,
+                "bundle": "4",
+                "messaging": Object {
+                  "code": "4",
+                  "includesIp": true,
+                  "monthly": 400,
+                  "name": "Four",
+                  "overage": 0.4,
+                  "volume": 4,
+                },
               },
             ],
             "starter": Array [
               Object {
-                "billingId": "2",
-                "code": "2",
-                "includesIp": false,
-                "isFree": true,
-                "monthly": 0,
-                "name": "Two",
-                "overage": 0.2,
-                "volume": 2,
+                "billingId": 3,
+                "bundle": "3",
+                "messaging": Object {
+                  "code": "3",
+                  "monthly": 300,
+                  "name": "Three",
+                  "overage": 0.3,
+                  "volume": 3,
+                },
               },
             ],
             "test": Array [
               Object {
-                "billingId": "1",
-                "code": "1",
-                "includesIp": true,
-                "monthly": 100,
-                "name": "One",
-                "overage": 0.1,
-                "volume": 1,
+                "billingId": 2,
+                "bundle": "2",
+                "messaging": Object {
+                  "code": "2",
+                  "includesIp": false,
+                  "isFree": true,
+                  "monthly": 0,
+                  "name": "Two",
+                  "overage": 0.2,
+                  "volume": 2,
+                },
               },
             ],
           }
         }
+        currentPlan={
+          Object {
+            "billingId": 3,
+            "code": "big-code",
+            "monthly": 300,
+            "name": "Three",
+            "overage": 0.3,
+            "tier": "starter",
+            "volume": 3,
+          }
+        }
+        onSelect={[Function]}
       />
     </Grid.Column>
     <Grid.Column
@@ -64,12 +73,12 @@ exports[`Change Plan Form should render 1`] = `
       <CurrentPlanSection
         currentPlan={
           Object {
-            "billingId": "3",
-            "code": "3",
+            "billingId": 3,
+            "code": "big-code",
             "monthly": 300,
             "name": "Three",
             "overage": 0.3,
-            "tier": "premier",
+            "tier": "starter",
             "volume": 3,
           }
         }

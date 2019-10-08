@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FeatureChangeContext should render acknowledgement for a change in auth 1`] = `
+Object {
+  "features": Array [
+    Object {
+      "action": <Button
+        onClick={[Function]}
+        size="default"
+      >
+        Got it
+      </Button>,
+      "description": "Your new plan no longer allows for single sign-on and multifactor authentication.",
+      "key": "auth",
+      "label": "Authentication and Security",
+      "value": undefined,
+    },
+  ],
+  "isReady": false,
+  "loading": false,
+}
+`;
+
+exports[`FeatureChangeContext should render acknowledgement for a change in dedicated IPs 1`] = `
+Object {
+  "features": Array [
+    Object {
+      "action": <Button
+        onClick={[Function]}
+        size="default"
+      >
+        Got it
+      </Button>,
+      "description": <div>
+        <span>
+          Your new plan doesn't include dedicated IPs. Your current IPs will now be billed at $20/month each, or you can
+        </span>
+        <Connect(SupportTicketLink)
+          issueId="general_issue"
+        >
+          submit a ticket
+        </Connect(SupportTicketLink)>
+        <span>
+          to delete them.
+        </span>
+      </div>,
+      "key": "dedicated_ip",
+      "label": "Dedicated IPs",
+      "value": undefined,
+    },
+  ],
+  "isReady": false,
+  "loading": false,
+}
+`;

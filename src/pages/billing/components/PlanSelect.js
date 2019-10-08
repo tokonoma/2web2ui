@@ -22,7 +22,9 @@ export const useModal = () => {
 };
 
 
-export const SelectedPlan = ({ plan, onChange, promoCodeObj, handlePromoCode }) => {
+export const SelectedPlan = ({ bundle, onChange, promoCodeObj, handlePromoCode }) => {
+  const { messaging: plan } = bundle;
+
   const { isShowing, toggle } = useModal(false);
   const { selectedPromo } = promoCodeObj;
   return (
@@ -71,20 +73,21 @@ export const SelectedPlan = ({ plan, onChange, promoCodeObj, handlePromoCode }) 
 };
 
 
-const PlanSelectSection = ({ plans, currentPlan, onSelect }) => {
+const PlanSelectSection = ({ bundles, currentPlan, onSelect }) => {
   const { isShowing, toggle } = useModal(false);
-  const planList = _.map(PLAN_TIERS, (label, key) => (
+  const planList = _.map(PLAN_TIERS, (label, key) => (bundles[key] &&
     <Panel.Section key={`tier_section_${key}`}>
       <div className={styles.tierLabel}>{label}</div>
       <div className={styles.tierPlans}>
         {
-          plans[key].map((bundle) => {
-            const isCurrentPlan = currentPlan.code === bundle.code;
+          bundles[key].map((bundle) => {
+            const { messaging, bundle: bundleCode } = bundle;
+            const isCurrentPlan = currentPlan.code === bundleCode;
             return (
-              <div className={cx(styles.PlanRow, isCurrentPlan && styles.SelectedPlan)} key={`plan_row_${bundle.code}`}>
+              <div className={cx(styles.PlanRow, isCurrentPlan && styles.SelectedPlan)} key={`plan_row_${bundleCode}`}>
                 <div>
                   {isCurrentPlan && <Check className={styles.CheckIcon}/>}
-                  <PlanPrice showOverage showIp showCsm plan={bundle} />
+                  <PlanPrice showOverage showIp showCsm plan={messaging} />
                 </div>
                 <div>
                   <Button

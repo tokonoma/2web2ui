@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback, useRef } from 'react';
 import { Grid } from '@sparkpost/matchbox';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -6,66 +6,80 @@ import { reduxForm } from 'redux-form';
 import qs from 'query-string';
 import PlanSelectSection, { SelectedPlan } from '../components/PlanSelect';
 import CurrentPlanSection from '../components/CurrentPlanSection';
-import { verifyPromoCode, clearPromoCode } from 'src/actions/billing';
 import useRouter from 'src/hooks/useRouter';
+
 //Actions
-import { getBillingInfo, getPlans } from 'src/actions/account';
-import { getBillingCountries } from 'src/actions/billing';
+import { getBillingInfo } from 'src/actions/account';
+import FeatureChangeSection from '../components/FeatureChangeSection';
+import { FeatureChangeContextProvider } from '../context/FeatureChangeContext';
+import { getBillingCountries, getBundles, verifyPromoCode, clearPromoCode } from 'src/actions/billing';
+
 //Selectors
-import { selectTieredVisiblePlans, currentPlanSelector, getPromoCodeObject } from 'src/selectors/accountBillingInfo';
+import { selectTieredVisibleBundles, currentPlanSelector, getPromoCodeObject } from 'src/selectors/accountBillingInfo';
 import { changePlanInitialValues } from 'src/selectors/accountBillingForms';
 
 const FORMNAME = 'changePlan';
 export const ChangePlanForm = ({
   //Redux Props
-  plans,
+  bundles,
+  currentPlan,
+
+  //Redux Actions
   getBillingInfo,
   getBillingCountries,
-  getPlans,
   verifyPromoCode,
   promoCodeObj,
   clearPromoCode,
-  // initialValues: {
-  //   promoCode
-  // },
-  currentPlan
+  getBundles
 }) => {
   const { requestParams: { code, promo } = {}, updateRoute } = useRouter();
-  const allPlans = Object.values(plans).reduce((acc, curr) => [...curr, ...acc],[]);
-  const [selectedPlan, selectPlan] = useState(allPlans.find((x) => x.code === code) || null);
+  const allBundles = Object.values(bundles).reduce((acc, curr) => [...curr, ...acc],[]);
+  const [selectedBundle, selectBundle] = useState(allBundles.find(({ bundle }) => bundle === code) || null);
+  const onSelect = (plan) => {
+    selectBundle(plan);
+  };
+
+  const isPlanSelected = Boolean(selectedBundle && currentPlan.plan !== selectedBundle.bundle);
+
   // const [useSavedCC, setUseSavedCC] = useState(null);
   const applyPromoCode = useCallback((promoCode) => {
-    const { billingId } = selectedPlan;
+    const { billingId } = selectedBundle;
     verifyPromoCode({ promoCode , billingId, meta: { promoCode, showErrorAlert: false }});
-  },[selectedPlan, verifyPromoCode]);
+  },[selectedBundle, verifyPromoCode]);
   useEffect(() => { getBillingCountries(); }, [getBillingCountries]);
   useEffect(() => { getBillingInfo(); }, [getBillingInfo]);
-  useEffect(() => { getPlans(); }, [getPlans]);
+  const gotBundles = useRef(false);
+  useEffect(() => { getBundles().then(() => { gotBundles.current = true; }); }, [getBundles]);
+
   useEffect(() => {
-    if (!selectedPlan) {
+    if (!selectedBundle) {
       clearPromoCode();
     }
-  },[clearPromoCode, selectedPlan]);
+  },[clearPromoCode, selectedBundle]);
+
+  //Applies promo code if in query param
   useEffect(() => {
-    if (promo && selectedPlan) {
+    if (promo && selectedBundle) {
       applyPromoCode(promo);
     }
-  },[applyPromoCode, promo, selectedPlan, verifyPromoCode]);
+  },[applyPromoCode, promo, selectedBundle, verifyPromoCode]);
+
+  //clears out requestParams when user changes plan
   useEffect(() => {
-    if (!selectedPlan) { //clears out requestParams when user changes plan
+    if (!selectedBundle && gotBundles) {
       updateRoute({ undefined });
     }
-  },[selectedPlan, updateRoute]);
+  },[selectedBundle, updateRoute]);
 
   return (
-    <form>
+    <form >
       <Grid>
         <Grid.Column xs={8}>
           {
-            selectedPlan
+            isPlanSelected
               ? <SelectedPlan
-                plan={selectedPlan}
-                onChange={selectPlan}
+                bundle={selectedBundle}
+                onChange={onSelect}
                 promoCodeObj = {promoCodeObj}
                 handlePromoCode = {
                   {
@@ -75,10 +89,17 @@ export const ChangePlanForm = ({
                 }
               />
               : <PlanSelectSection
-                onSelect={selectPlan}
-                plans={plans}
+                onSelect={onSelect}
+                bundles={bundles}
                 currentPlan={currentPlan}
               />
+          }
+          {
+            isPlanSelected && (
+              <FeatureChangeContextProvider selectedBundle={selectedBundle}>
+                <FeatureChangeSection/>
+              </FeatureChangeContextProvider>
+            )
           }
         </Grid.Column>
         <Grid.Column xs={4}>
@@ -92,7 +113,7 @@ export const ChangePlanForm = ({
 const mapStateToProps = (state, props) => {
   const { code: planCode, promo: promoCode } = qs.parse(props.location.search);
   return {
-    plans: selectTieredVisiblePlans(state),
+    bundles: selectTieredVisibleBundles(state),
     initialValues: changePlanInitialValues(state, { planCode, promoCode }),
     currentPlan: currentPlanSelector(state),
     promoCodeObj: getPromoCodeObject(state)
@@ -102,15 +123,14 @@ const mapStateToProps = (state, props) => {
 const mapDispatchToProps = ({
   getBillingInfo,
   getBillingCountries,
-  getPlans,
   verifyPromoCode,
-  clearPromoCode
+  clearPromoCode,
+  getBundles
 });
 
 const formOptions = {
   form: FORMNAME,
-  enableReinitialize: true,
-  asyncChangeFields: ['planpicker']
+  enableReinitialize: true
 };
 
 export default withRouter(

@@ -1,0 +1,44 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+@import 'src/styles/status-color';
+
+.Feature {
+  display: flex;
+  margin: 1rem;
+
+  .description {
+    margin-right: 2rem;
+    font-size: .9em;
+  }
+
+  & > :first-child {
+    padding-right: 2rem;
+    flex-grow: 1;
+  }
+}
+
+.Label {
+  font-weight: 500;
+}
+
+.FeatureCheckIcon {
+  height: rem(25);
+  width: rem(25);
+}
+
+.FeatureListStatus {
+  display: flex;
+}
+
+.FeatureListIcon {
+  height: rem(30);
+  width: rem(30);
+  margin-right: spacing();
+  
+  &.success {
+    color: status-color(success);
+  }
+
+  &.danger{
+    color: status-color(error);
+  }
+}

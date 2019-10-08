@@ -11,30 +11,39 @@ describe('Plan Select:', () => {
     currentPlan: {
       code: '2'
     },
-    plans: {
+    bundles: {
       'test': [{
-        code: '2',
-        includesIp: false,
-        monthly: 0,
-        name: 'Two',
-        overage: 0.2,
-        volume: 2,
-        isFree: true
+        bundle: '2',
+        messaging: {
+          code: '2',
+          includesIp: false,
+          monthly: 0,
+          name: 'Two',
+          overage: 0.2,
+          volume: 2,
+          isFree: true
+        }
       }],
       'starter': [{
-        code: '3',
-        monthly: 300,
-        name: 'Three',
-        overage: 0.3,
-        volume: 3
+        bundle: '3',
+        messaging: {
+          code: '3',
+          monthly: 300,
+          name: 'Three',
+          overage: 0.3,
+          volume: 3
+        }
       }],
       'premier': [{
-        code: '4',
-        includesIp: true,
-        monthly: 400,
-        name: 'Four',
-        overage: 0.4,
-        volume: 4
+        bundle: '4',
+        messaging: {
+          code: '4',
+          includesIp: true,
+          monthly: 400,
+          name: 'Four',
+          overage: 0.4,
+          volume: 4
+        }
       }]
     }
   };
@@ -54,15 +63,17 @@ describe('Plan Select:', () => {
 describe('Selected Plan:', () => {
   const defaultProps = {
     onChange: jest.fn(),
-    plan: {
-      tier: 'test',
-      code: '2',
-      includesIp: false,
-      monthly: 0,
-      name: 'Two',
-      overage: 0.2,
-      volume: 2,
-      isFree: true
+    bundle: {
+      messaging: {
+        tier: 'test',
+        code: '2',
+        includesIp: false,
+        monthly: 0,
+        name: 'Two',
+        overage: 0.2,
+        volume: 2,
+        isFree: true
+      }
     },
     promoCodeObj: {
       selectedPromo: {},
