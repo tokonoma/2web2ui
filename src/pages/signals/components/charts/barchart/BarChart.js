@@ -189,6 +189,7 @@ BarChart.propTypes = {
   fill: PropTypes.string,
   gap: PropTypes.number,
   onClick: PropTypes.func,
+  shouldHighlightSelected: PropTypes.bool,
   tooltipContent: PropTypes.func,
   tooltipWidth: PropTypes.string,
   yKeys: PropTypes.arrayOf(PropTypes.object)

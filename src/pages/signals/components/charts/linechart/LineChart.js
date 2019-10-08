@@ -110,6 +110,7 @@ class LineChart extends Component {
 LineChart.propTypes = {
   lineType: PropTypes.string,
   onClick: PropTypes.func,
+  shouldHighlightSelected: PropTypes.bool,
   tooltipContent: PropTypes.func,
   tooltipWidth: PropTypes.string,
   yKeys: PropTypes.arrayOf(PropTypes.object)
