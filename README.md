@@ -33,7 +33,7 @@ https://github.com/facebook/react-native/issues/9309#issuecomment-238966924
 
 ### End to End Tests
 
-In order to run UI tests, the local development server needs to first be started. Ideally, [start your development server](#local-development) and in another terminal tab, run one of the following commands, then without stopping the server, run:
+In order to run UI tests, the local development server needs to first be started and running on port 3100. First, [start your development server](#local-development) and in another terminal tab, run the following command:
 ```
 npm run test-e2e
 ```
