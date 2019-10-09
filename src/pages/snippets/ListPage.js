@@ -9,6 +9,9 @@ import { ROLES } from 'src/constants';
 export default class ListPage extends React.Component {
   componentDidMount() {
     this.props.getSnippets();
+    if (this.props.hasSubaccounts) {
+      this.props.listSubaccounts();
+    }
   }
 
   renderError() {
@@ -23,13 +26,14 @@ export default class ListPage extends React.Component {
   }
 
   renderCollection() {
-    const { snippets, hasSubaccounts, canCreate, userAccessLevel } = this.props;
+    const { snippets, hasSubaccounts, subaccounts, canCreate, userAccessLevel } = this.props;
     return (
       <SnippetCollection
         canCreate={canCreate}
         hasSubaccounts={hasSubaccounts}
         canViewSubaccounts={userAccessLevel !== ROLES.SUBACCOUNT_REPORTING}
         snippets={snippets}
+        subaccounts={subaccounts}
       />
     );
   }
