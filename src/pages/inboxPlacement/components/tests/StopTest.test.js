@@ -1,12 +1,17 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import StopTest from '../StopTest';
+import { StopTest } from '../StopTest';
 
 describe('Component: StopTest', () => {
+  const mockStopTest = jest.fn(() => Promise.resolve());
+  const mockReload = jest.fn();
+  const id = 0;
   const subject = ({ ...props }) => {
     const defaults = {
+      id,
       status: 'running',
-      onStop: jest.fn(),
+      stopInboxPlacementTest: mockStopTest,
+      reload: mockReload,
       loading: false
     };
     return shallow(<StopTest {...defaults} {...props}/>);
@@ -44,5 +49,12 @@ describe('Component: StopTest', () => {
     //close modal
     wrapper.find('ConfirmationModal').prop('onCancel')();
     expect(wrapper.find('ConfirmationModal').prop('open')).toBe(false);
+  });
+
+  it('confirming stop test stops the test and reloads the current data', async () => {
+    const wrapper = subject();
+    await wrapper.find('ConfirmationModal').prop('onConfirm')();
+    expect(mockStopTest).toHaveBeenCalledWith(id);
+    expect(mockReload).toHaveBeenCalled();
   });
 });
