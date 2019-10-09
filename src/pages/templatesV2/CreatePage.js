@@ -19,7 +19,9 @@ export default class CreatePage extends Component {
       createSnippet,
       history,
       subaccountId,
-      showAlert
+      showAlert,
+      deleteSnippet,
+      deleteTemplate
     } = this.props;
     const formData = {
       ...values,
@@ -47,6 +49,10 @@ export default class CreatePage extends Component {
       .then(() => {
         showAlert({ type: 'success', message: 'Template Created.' });
         history.push(`/${routeNamespace}/edit/${templateId}/draft/content${setSubaccountQuery(subaccountId)}`);
+      })
+      .catch(() => {
+        deleteTemplate(templateId);
+        deleteSnippet({ id: templateId });
       });
   };
 
