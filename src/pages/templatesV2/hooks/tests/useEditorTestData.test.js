@@ -14,22 +14,21 @@ describe('useEditorTestData', () => {
     const wrapper = useTestWrapper();
 
     expect(useHook(wrapper)).toEqual({
-      getParsedTestData: expect.any(Function),
       testData: undefined,
       setTestData: expect.any(Function)
     });
   });
 
   it('does not call `getRecipientList` when the `draft` is undefined', () => {
-    const getRecipientList = jest.fn();
+    const getSnippet = jest.fn();
     const draft = undefined;
 
     useTestWrapper({
-      getRecipientList,
+      getSnippet,
       draft
     });
 
-    expect(getRecipientList).not.toHaveBeenCalled();
+    expect(getSnippet).not.toHaveBeenCalled();
   });
 
   // TODO: Can't get this to work? The test will pass, but keep getting:
