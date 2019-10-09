@@ -54,8 +54,8 @@ exports[`Signals Health Score Page V3 renders correctly when receiving data 1`] 
           Object {
             "bottom": 5,
             "left": 18,
-            "right": 8,
-            "top": 21,
+            "right": 0,
+            "top": 12,
           }
         }
         timeSeries={Array []}
@@ -67,30 +67,7 @@ exports[`Signals Health Score Page V3 renders correctly when receiving data 1`] 
             "ticks": undefined,
           }
         }
-        xAxisRefLines={
-          Array [
-            Object {
-              "label": Object {
-                "className": "xDividerLabel",
-                "offset": 14,
-                "position": "top",
-                "value": "New",
-              },
-              "stroke": "#d2d2d7",
-              "strokeWidth": 1,
-              "x": "2019-06-07",
-            },
-            Object {
-              "label": Object {
-                "className": "xDividerLabel",
-                "position": "top",
-                "value": "Model",
-              },
-              "strokeWidth": 0,
-              "x": "2019-06-07",
-            },
-          ]
-        }
+        xAxisRefLines={Array []}
         xKey="date"
         yAxisProps={
           Object {

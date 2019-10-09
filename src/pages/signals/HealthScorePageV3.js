@@ -7,7 +7,6 @@ import withDetails from './containers/withDetails';
 import BarChart from './components/charts/barchart/BarChart';
 import withDateSelection from './containers/withDateSelection';
 import { getHealthScore } from 'src/actions/signals';
-import { newModelLine, newModelMarginsHealthScore } from './constants/healthScoreV2';
 import TooltipMetric from './components/charts/tooltip/TooltipMetric';
 import thresholds from './constants/healthScoreThresholds';
 import { roundToPlaces } from 'src/helpers/units';
@@ -42,8 +41,6 @@ export function HealthScorePageV3(props) {
   }),
   [xTicks]);
 
-
-
   const renderChart = () => {
     if (empty) {
       return (<Callout title='No Data Available'>Insufficient data to populate this chart</Callout>);
@@ -62,7 +59,6 @@ export function HealthScorePageV3(props) {
     }
     return (
       <BarChart
-        margin={newModelMarginsHealthScore}
         gap={gap}
         onClick={handleDateSelect}
         onMouseOver={handleDateHover}
@@ -82,7 +78,6 @@ export function HealthScorePageV3(props) {
           { y: 0.80, stroke: thresholds.good.color, strokeWidth: 1 },
           { y: 0.55, stroke: thresholds.danger.color, strokeWidth: 1 }
         ]}
-        xAxisRefLines={newModelLine}
         yKey='health_score'
         yAxisProps={{
           ticks: [0, 0.55, 0.8, 1],
