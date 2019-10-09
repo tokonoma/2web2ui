@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DeleteTemplate renders delete button 1`] = `
+<Fragment>
+  <DeleteModal
+    content={
+      <p>
+        Both the draft and published versions of this template will be deleted.
+      </p>
+    }
+    isPending={false}
+    onCancel={[Function]}
+    onDelete={[Function]}
+    open={false}
+    title="Are you sure you want to delete this template?"
+  />
+  <Button
+    onClick={[Function]}
+    size="default"
+  >
+    Delete
+  </Button>
+</Fragment>
+`;
