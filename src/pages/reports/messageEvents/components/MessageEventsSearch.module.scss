@@ -1,0 +1,11 @@
+.filterTitle {
+  padding-top: .3rem;
+  display: flex;
+  :first-child{
+    flex: 1 0 0;
+  }
+}
+
+.filterButton {
+  padding-left: 1rem;
+}

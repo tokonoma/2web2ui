@@ -86,10 +86,15 @@ export class ShareModal extends Component {
 
   render() {
     const { open } = this.state;
+    const { triggerComponent: TriggerComponent } = this.props;
 
     return (
       <Fragment>
-        <Button id='shareModalButton' disabled={this.props.disabled} fullWidth onClick={this.toggleModal}>Share</Button>
+        {
+          TriggerComponent
+            ? <TriggerComponent id='shareModalButton' disabled={this.props.disabled} onClick={this.toggleModal}/>
+            : <Button id='shareModalButton' disabled={this.props.disabled} fullWidth onClick={this.toggleModal}>Share</Button>
+        }
         <Modal open={open} onClose={this.toggleModal}>
           {open && <WindowEvent event='keydown' handler={this.handleKeydown} />}
           <Panel title='Share this report'>

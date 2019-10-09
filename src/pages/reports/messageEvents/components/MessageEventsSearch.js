@@ -5,7 +5,8 @@ import moment from 'moment';
 import _ from 'lodash';
 import { getMessageEvents, refreshMessageEventsDateRange, updateMessageEventsSearchOptions, addFilters } from 'src/actions/messageEvents';
 import { selectMessageEventsSearchOptions } from 'src/selectors/messageEvents';
-import { Panel, Grid, TextField } from '@sparkpost/matchbox';
+import { Panel, Grid, TextField, UnstyledLink } from '@sparkpost/matchbox';
+import { Share } from '@sparkpost/matchbox-icons';
 import AdvancedFiltersModal from './AdvancedFiltersModal';
 import ActiveFilters from './ActiveFilters';
 import ShareModal from '../../components/ShareModal';
@@ -16,6 +17,7 @@ import { stringToArray } from 'src/helpers/string';
 import { onEnter } from 'src/helpers/keyEvents';
 import { FORMATS, RELATIVE_DATE_OPTIONS, ALL_EVENTS_FILTERS } from 'src/constants';
 import config from 'src/config';
+import styles from './MessageEventsSearch.module.scss';
 
 export class MessageEventsSearch extends Component {
 
@@ -62,6 +64,13 @@ export class MessageEventsSearch extends Component {
     return (
       <Panel>
         <Panel.Section>
+          <div className={styles.filterTitle}>
+            <h3>Filter Events</h3>
+            <ShareModal
+              searchOptions={searchOptions}
+              triggerComponent={(props) => (<UnstyledLink {...props}>Share These Results <Share /></UnstyledLink>)}
+            />
+          </div>
           <Grid>
             <Grid.Column xs={12} md={5} xl={6}>
               <DatePicker
@@ -79,7 +88,7 @@ export class MessageEventsSearch extends Component {
                 }}
               />
             </Grid.Column>
-            <Grid.Column xs={12} md={5}>
+            <Grid.Column>
               <TextField
                 labelHidden
                 placeholder={recipients.placeholder}
@@ -87,12 +96,11 @@ export class MessageEventsSearch extends Component {
                 onKeyDown={onEnter(this.handleRecipientsChange)}
                 onFocus={() => this.setState({ recipientError: null })}
                 error={this.state.recipientError}
-                connectRight={<AdvancedFiltersModal />}
               />
             </Grid.Column>
-            <Grid.Column>
-              <ShareModal disabled={loading} searchOptions={searchOptions} />
-            </Grid.Column>
+            <div className={styles.filterButton}>
+              <AdvancedFiltersModal/>
+            </div>
           </Grid>
         </Panel.Section>
         <ActiveFilters />

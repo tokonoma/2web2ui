@@ -39,7 +39,7 @@ export class AdvancedFiltersModal extends Component {
     const { modalOpen } = this.state;
     return (
       <Fragment>
-        <Button onClick={this.toggleModal}>More Filters</Button>
+        <Button onClick={this.toggleModal}>Add Filters</Button>
         <Modal open={modalOpen} onClose={this.toggleModal}>
           <WindowEvent event='keydown' handler={this.handleKeyDown} />
           <SearchForm handleApply = {this.handleApply} handleCancel = {this.toggleModal} />
