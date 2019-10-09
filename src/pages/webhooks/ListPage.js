@@ -4,7 +4,10 @@ import { Link, withRouter } from 'react-router-dom';
 
 // Actions
 import { listWebhooks } from 'src/actions/webhooks';
-import { setSubaccountQuery } from 'src/helpers/subaccounts';
+import { list as listSubaccounts } from 'src/actions/subaccounts';
+
+// Helpers and selectors
+import { setSubaccountQuery, getSubAccountName } from 'src/helpers/subaccounts';
 import { hasSubaccounts } from 'src/selectors/subaccounts';
 
 // Components
@@ -23,6 +26,9 @@ export class WebhooksList extends Component {
 
   componentDidMount() {
     this.props.listWebhooks();
+    if (hasSubaccounts) {
+      this.props.listSubaccounts();
+    }
   }
 
   getColumns = () => {
@@ -42,7 +48,7 @@ export class WebhooksList extends Component {
   };
 
   getRowData = ({ id, name, target, subaccount_id, last_successful, last_failure }) => {
-    const { hasSubaccounts } = this.props;
+    const { hasSubaccounts, subaccounts } = this.props;
     const nameLink = <Link to={`/webhooks/details/${id}${setSubaccountQuery(subaccount_id)}`}>{name}</Link>;
     const row = [
       nameLink,
@@ -56,7 +62,9 @@ export class WebhooksList extends Component {
         <SubaccountTag
           id={subaccount_id}
           master={subaccount_id === 0}
-          receiveAll={!subaccount_id && subaccount_id !== 0} />
+          receiveAll={!subaccount_id && subaccount_id !== 0}
+          name={getSubAccountName(subaccounts,subaccount_id)}
+        />
       );
     }
 
@@ -116,8 +124,9 @@ function mapStateToProps({ webhooks, ...state }) {
     hasSubaccounts: hasSubaccounts(state),
     webhooks: webhooks.list,
     loading: webhooks.listLoading,
-    error: webhooks.listError
+    error: webhooks.listError,
+    subaccounts: state.subaccounts.list
   };
 }
 
-export default withRouter(connect(mapStateToProps, { listWebhooks })(WebhooksList));
+export default withRouter(connect(mapStateToProps, { listWebhooks, listSubaccounts })(WebhooksList));
