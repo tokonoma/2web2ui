@@ -3,6 +3,17 @@
 exports[`Component: MessageEventsSearch renders correctly 1`] = `
 <Panel>
   <Panel.Section>
+    <div
+      className="filterTitle"
+    >
+      <h3>
+        Filter Events
+      </h3>
+      <withRouter(Connect(ShareModal))
+        searchOptions={Object {}}
+        triggerComponent={[Function]}
+      />
+    </div>
     <Grid>
       <Grid.Column
         md={5}
@@ -48,12 +59,8 @@ exports[`Component: MessageEventsSearch renders correctly 1`] = `
           to={2018-02-15T12:00:00.000Z}
         />
       </Grid.Column>
-      <Grid.Column
-        md={5}
-        xs={12}
-      >
+      <Grid.Column>
         <TextField
-          connectRight={<Connect(AdvancedFiltersModal) />}
           error={null}
           labelHidden={true}
           onBlur={[Function]}
@@ -64,12 +71,11 @@ exports[`Component: MessageEventsSearch renders correctly 1`] = `
           type="text"
         />
       </Grid.Column>
-      <Grid.Column>
-        <withRouter(Connect(ShareModal))
-          disabled={false}
-          searchOptions={Object {}}
-        />
-      </Grid.Column>
+      <div
+        className="filterButton"
+      >
+        <Connect(AdvancedFiltersModal) />
+      </div>
     </Grid>
   </Panel.Section>
   <Connect(ActiveFilters) />

@@ -6,7 +6,7 @@ exports[`Component: AdvancedFiltersModal should render initially and sync to sta
     onClick={[Function]}
     size="default"
   >
-    More Filters
+    Add Filters
   </Button>
   <Modal
     onClose={[Function]}
