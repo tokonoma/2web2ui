@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import { Tag } from '@sparkpost/matchbox';
 import { InsertLink } from '@sparkpost/matchbox-icons';
 
-const SubaccountTag = ({ id, all, receiveAll, master, isDefault }) => {
+const SubaccountTag = ({ id, name, all, receiveAll, master, isDefault }) => {
   let content = null;
   let color = null;
   let defaultContent = null;
 
   if (id) {
-    content = `Subaccount ${id}`;
+    content = name ? `${name} (${id})` : `Subaccount ${id}`;
   }
 
   if (isDefault) {
