@@ -21,9 +21,11 @@ describe('useEditorPreview', () => {
   it('calls getPreview when content changes', () => {
     const getPreview = jest.fn();
     const debounceAction = jest.fn((fn) => fn());
-    const getParsedTestData = jest.fn(() => (
-      { substitution_data: { random: 'data' }}
-    ));
+    const testData = JSON.stringify({
+      substitution_data: {
+        random: 'data'
+      }
+    });
     const content = { html: '<h1>Test Example</h1>' };
     const draft = { id: 'test-template', subaccount_id: 123 };
 
@@ -32,7 +34,7 @@ describe('useEditorPreview', () => {
       debounceAction,
       draft,
       getPreview,
-      getParsedTestData
+      testData
     });
 
     expect(getPreview).toHaveBeenCalledWith({
