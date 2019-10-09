@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Page, Tooltip } from '@sparkpost/matchbox';
-import { InfoOutline } from '@sparkpost/matchbox-icons';
+import { Page } from '@sparkpost/matchbox';
 import { Setup } from 'src/components/images';
 import { listApiKeys, hideNewApiKey } from 'src/actions/api-keys';
 import { Loading, SubaccountTag, TableCollection, ApiErrorBanner, ApiKeySuccessBanner, ShortKeyCode } from 'src/components';
@@ -32,7 +31,7 @@ export class ListPage extends Component {
     this.props.listApiKeys();
   }
 
-  getLabel = ({ canCurrentUserEdit, id, subaccount_id, label, username }) => {
+  getLabel = ({ canCurrentUserEdit, id, subaccount_id, label }) => {
     if (canCurrentUserEdit) {
       return <Link to={`/account/api-keys/edit/${id}${setSubaccountQuery(subaccount_id)}`}>{label}</Link>;
     } else {
@@ -124,8 +123,8 @@ export class ListPage extends Component {
           external: true,
           to: LINKS.API_DOCS
         }}}>
-        { newKey && this.renderBanner() }
-        { error ? this.renderError() : this.renderCollection() }
+        {newKey && this.renderBanner()}
+        {error ? this.renderError() : this.renderCollection()}
       </Page>
     );
   }
