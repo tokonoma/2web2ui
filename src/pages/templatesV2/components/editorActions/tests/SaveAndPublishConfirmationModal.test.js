@@ -44,7 +44,7 @@ describe('SaveAndPublishConfirmationModal', () => {
   it('on confirm, 1) calls publishDraftV2, 2) calls updateSnippet, and 3) redirects to published path upon publishing', async () => {
     const publishDraftPromise = Promise.resolve();
     const updateRecipientPromise = Promise.resolve();
-    const testData = {
+    const testData = JSON.stringify({
       options: {
         foo: 'bar'
       },
@@ -54,19 +54,17 @@ describe('SaveAndPublishConfirmationModal', () => {
       substitution_data: {
         substitution: 'data'
       }
-    };
-    const getParsedTestData = jest.fn();
-    getParsedTestData.mockReturnValue(testData);
+    });
     const publishDraftV2 = jest.fn(() => publishDraftPromise);
     const updateSnippet = jest.fn(() => updateRecipientPromise);
     const draft = { id: 'foo', subaccount_id: 101 };
     const content = { text: 'foo text', html: '<h1>foo html</h1>' };
     const wrapper = subject({
       publishDraftV2,
-      getParsedTestData,
       updateSnippet,
       draft,
-      content
+      content,
+      testData
     });
     wrapper.find('ConfirmationModal').simulate('confirm');
 
@@ -74,22 +72,14 @@ describe('SaveAndPublishConfirmationModal', () => {
       {
         ...draft,
         content,
-        options: testData.options
+        options: JSON.parse(testData).options
       },
       101
     );
-    expect(updateSnippet).toHaveBeenCalledWith(
-      {
-        id: draft.id,
-        recipients: [{
-          address: {
-            email: 'sparkpost_templates_placeholder@sparkpost.com'
-          },
-          metadata: testData.metadata,
-          substitution_data: testData.substitution_data
-        }]
-      }
-    );
+    expect(updateSnippet).toHaveBeenCalledWith({
+      id: draft.id,
+      html: testData
+    });
 
     /* eslint-disable arrow-body-style */
     return publishDraftPromise.then(() => {
