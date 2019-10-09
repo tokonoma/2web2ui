@@ -67,14 +67,9 @@ describe('CreatePage', () => {
         }
       });
       expect(mockCreateSnippet).toHaveBeenCalledWith({
-        id: formData.id,
-        recipients: [{
-          address: {
-            email: 'sparkpost_templates_placeholder@sparkpost.com'
-          },
-          metadata: {},
-          substitution_data: {}
-        }]
+        name: 'Templates Test Data',
+        id: 'foo',
+        html: '{"options":{},"substitution_data":{},"metadata":{}}'
       });
     });
 
