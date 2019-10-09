@@ -3,13 +3,15 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Page } from '@sparkpost/matchbox';
 import { Setup } from 'src/components/images';
+
 import { listApiKeys, hideNewApiKey } from 'src/actions/api-keys';
+import { list as listSubaccounts } from 'src/actions/subaccounts';
+
 import { Loading, SubaccountTag, TableCollection, ApiErrorBanner, ApiKeySuccessBanner, ShortKeyCode } from 'src/components';
 import { filterBoxConfig } from './tableConfig';
 import { selectKeysForAccount } from 'src/selectors/api-keys';
-
 import { hasSubaccounts } from 'src/selectors/subaccounts';
-import { setSubaccountQuery } from 'src/helpers/subaccounts';
+import { setSubaccountQuery, getSubAccountName } from 'src/helpers/subaccounts';
 import { LINKS } from 'src/constants';
 
 const primaryAction = {
@@ -29,6 +31,9 @@ export class ListPage extends Component {
 
   componentDidMount() {
     this.props.listApiKeys();
+    if (hasSubaccounts) {
+      this.props.listSubaccounts();
+    }
   }
 
   getLabel = ({ canCurrentUserEdit, id, subaccount_id, label }) => {
@@ -41,14 +46,14 @@ export class ListPage extends Component {
 
   getRowData = (key) => {
     const { short_key, subaccount_id } = key;
-    const { hasSubaccounts } = this.props;
+    const { hasSubaccounts, subaccounts } = this.props;
     const rowData = [
       this.getLabel(key),
       <ShortKeyCode shortKey={short_key} />
     ];
 
     if (hasSubaccounts) {
-      rowData.push(<SubaccountTag id={subaccount_id} />);
+      rowData.push(<SubaccountTag id={subaccount_id} name={getSubAccountName(subaccounts,subaccount_id)}/>);
     }
 
     return rowData;
@@ -134,6 +139,7 @@ const mapStateToProps = (state) => {
   const { error, newKey, keysLoading } = state.apiKeys;
   return {
     hasSubaccounts: hasSubaccounts(state),
+    subaccounts: state.subaccounts.list,
     keys: selectKeysForAccount(state),
     error,
     newKey,
@@ -141,4 +147,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { listApiKeys, hideNewApiKey })(ListPage);
+export default connect(mapStateToProps, { listApiKeys, listSubaccounts, hideNewApiKey })(ListPage);
