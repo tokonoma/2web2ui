@@ -290,37 +290,3 @@ exports[`LineChart Component renders active dot 1`] = `
   test="test"
 />
 `;
-
-exports[`LineChart Component renders background bars with no opacity if unselected 1`] = `
-<Rectangle
-  animationBegin={0}
-  animationDuration={1500}
-  animationEasing="ease"
-  height={0}
-  isAnimationActive={false}
-  isUpdateAnimationActive={false}
-  opacity={0}
-  radius={0}
-  test="test"
-  width={0}
-  x={0}
-  y={0}
-/>
-`;
-
-exports[`LineChart Component renders background bars with opacity if selected 1`] = `
-<Rectangle
-  animationBegin={0}
-  animationDuration={1500}
-  animationEasing="ease"
-  height={0}
-  isAnimationActive={false}
-  isUpdateAnimationActive={false}
-  opacity={0.4}
-  radius={0}
-  test="test"
-  width={0}
-  x={0}
-  y={0}
-/>
-`;

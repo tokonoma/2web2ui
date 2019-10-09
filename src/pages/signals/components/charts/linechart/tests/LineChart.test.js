@@ -40,13 +40,19 @@ describe('LineChart Component', () => {
 
   it('renders background bars with no opacity if unselected', () => {
     const payload = { payload: { date: '2011-01-01' }, test: 'test' };
-    expect(wrapper.find('Bar').at(0).props().shape(payload)).toMatchSnapshot();
+    expect(wrapper.find('Bar').at(0).props().shape(payload).props.opacity).toEqual(0);
   });
 
-  it('renders background bars with opacity if selected', () => {
-    wrapper.setProps({ selected: '2011-01-01' });
+  it('renders background bars with no opacity if selected but shouldHighlightSelected is false', () => {
+    wrapper.setProps({ selected: '2011-01-01', shouldHighlightSelected: false });
     const payload = { payload: { date: '2011-01-01' }, test: 'test' };
-    expect(wrapper.find('Bar').at(0).props().shape(payload)).toMatchSnapshot();
+    expect(wrapper.find('Bar').at(0).props().shape(payload).props.opacity).toEqual(0);
+  });
+
+  it('renders background bars with opacity if selected & shouldHighlightSelected is true', () => {
+    wrapper.setProps({ selected: '2011-01-01', shouldHighlightSelected: true });
+    const payload = { payload: { date: '2011-01-01' }, test: 'test' };
+    expect(wrapper.find('Bar').at(0).props().shape(payload).props.opacity).toEqual(0.4);
   });
 
   it('renders a dot if selected', () => {

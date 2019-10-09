@@ -25,8 +25,6 @@ export function HealthScoreChart(props) {
 
   const { history = [], loading, error, filters } = props;
   const noData = (history) ? !_.some(getHealthScores()) : true;
-  const lastItem = _.last(history) || {};
-  const selectedDate = _.get(lastItem, 'date', '');
 
   if (loading) {
     return <PanelLoading minHeight='407px' />;
@@ -107,7 +105,6 @@ export function HealthScoreChart(props) {
               gap={getGap()}
               onMouseOver={handleDateHover}
               onMouseOut={() => setHovered({})}
-              selected={selectedDate}
               hovered={hoveredDate}
               timeSeries={history}
               tooltipContent={({ payload = {}}) => (payload.ranking) &&

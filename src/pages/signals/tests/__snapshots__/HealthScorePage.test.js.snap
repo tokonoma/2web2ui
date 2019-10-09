@@ -92,6 +92,7 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
           onClick={[MockFunction]}
           onMouseOver={[MockFunction]}
           selected="2017-01-01"
+          shouldHighlightSelected={true}
           timeSeries={
             Array [
               Object {
@@ -215,6 +216,7 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
           onClick={[MockFunction]}
           onMouseOver={[MockFunction]}
           selected="2017-01-01"
+          shouldHighlightSelected={true}
           timeSeries={
             Array [
               Object {
@@ -293,6 +295,7 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
           onClick={[MockFunction]}
           onMouseOver={[MockFunction]}
           selected="2017-01-01"
+          shouldHighlightSelected={true}
           timeSeries={
             Array [
               Object {
@@ -498,6 +501,7 @@ exports[`Signals Health Score Page renders empty weights 1`] = `
           onClick={[MockFunction]}
           onMouseOver={[MockFunction]}
           selected="2017-01-01"
+          shouldHighlightSelected={true}
           timeSeries={
             Array [
               Object {
@@ -594,6 +598,7 @@ exports[`Signals Health Score Page renders empty weights 1`] = `
           onClick={[MockFunction]}
           onMouseOver={[MockFunction]}
           selected="2017-01-01"
+          shouldHighlightSelected={true}
           timeSeries={
             Array [
               Object {

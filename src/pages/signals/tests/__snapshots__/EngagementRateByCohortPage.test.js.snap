@@ -108,6 +108,7 @@ exports[`Signals Engagement Rate By Cohort Page renders correctly 1`] = `
             }
             onClick={[MockFunction]}
             selected="2017-01-02"
+            shouldHighlightSelected={false}
             stroke="#000"
             tooltipContent={[Function]}
             tooltipWidth="250px"

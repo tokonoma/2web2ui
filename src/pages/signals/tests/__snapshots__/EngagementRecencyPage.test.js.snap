@@ -108,6 +108,7 @@ exports[`Signals Engagement Recency Page renders correctly 1`] = `
             }
             onClick={[MockFunction]}
             selected="2017-01-02"
+            shouldHighlightSelected={true}
             timeSeries={
               Array [
                 Object {

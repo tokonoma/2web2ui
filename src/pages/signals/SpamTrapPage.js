@@ -79,7 +79,7 @@ export class SpamTrapPage extends Component {
   )
 
   renderContent = () => {
-    const { data = [], handleDateSelect, loading, gap, empty, error, selectedDate, handleDateHover, resetDateHover, hoveredDate } = this.props;
+    const { data = [], handleDateSelect, loading, gap, empty, error, selectedDate, handleDateHover, resetDateHover, hoveredDate, shouldHighlightSelected } = this.props;
     const { calculation } = this.state;
     const selectedSpamTrapHits = _.find(data, ['date', selectedDate]) || {};
     let chartPanel;
@@ -124,6 +124,7 @@ export class SpamTrapPage extends Component {
                   onMouseOver={handleDateHover}
                   onMouseOut={resetDateHover}
                   hovered={hoveredDate}
+                  shouldHighlightSelected={shouldHighlightSelected}
                   tooltipContent={this.getTooltipContent}
                   yKeys={
                     spamTrapHitTypesCollection

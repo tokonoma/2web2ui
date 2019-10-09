@@ -126,51 +126,6 @@ exports[`BarChart Component renders a normal bar chart correctly 1`] = `
         width={0}
         xAxisId={0}
       />
-      <Tooltip
-        active={false}
-        animationDuration={400}
-        animationEasing="ease"
-        content={
-          <Tooltip
-            offset={25}
-            width="200px"
-          >
-            [MockFunction]
-          </Tooltip>
-        }
-        contentStyle={Object {}}
-        coordinate={
-          Object {
-            "x": 0,
-            "y": 0,
-          }
-        }
-        cursor={false}
-        cursorStyle={Object {}}
-        filterNull={true}
-        isAnimationActive={false}
-        itemSorter={[Function]}
-        itemStyle={Object {}}
-        labelStyle={Object {}}
-        offset={25}
-        position={
-          Object {
-            "x": 0,
-            "y": 0,
-          }
-        }
-        separator=" : "
-        useTranslate3d={false}
-        viewBox={
-          Object {
-            "x1": 0,
-            "x2": 0,
-            "y1": 0,
-            "y2": 0,
-          }
-        }
-        wrapperStyle={Object {}}
-      />
       <Bar
         activeFill="#activeFill"
         animationBegin={0}

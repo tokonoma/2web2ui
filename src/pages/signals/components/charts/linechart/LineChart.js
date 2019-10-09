@@ -45,7 +45,7 @@ class LineChart extends Component {
   }
 
   renderBackgrounds = () => {
-    const { xKey, selected, onClick } = this.props;
+    const { xKey, selected, shouldHighlightSelected, onClick } = this.props;
 
     return (
       <Bar
@@ -56,7 +56,7 @@ class LineChart extends Component {
         onClick={onClick}
         shape={
           ({ payload, background, ...rest }) => (
-            <Rectangle {...rest} {...background} opacity={payload[xKey] === selected ? 0.4 : 0} />
+            <Rectangle {...rest} {...background} opacity={(payload[xKey] === selected && shouldHighlightSelected) ? 0.4 : 0} />
           )
         }
       />
@@ -110,6 +110,7 @@ class LineChart extends Component {
 LineChart.propTypes = {
   lineType: PropTypes.string,
   onClick: PropTypes.func,
+  shouldHighlightSelected: PropTypes.bool,
   tooltipContent: PropTypes.func,
   tooltipWidth: PropTypes.string,
   yKeys: PropTypes.arrayOf(PropTypes.object)
@@ -121,6 +122,7 @@ LineChart.defaultProps = {
   width: '99%',
   lineType: 'linear',
   margin: { top: 12, left: 18, right: 0, bottom: 5 },
+  shouldHighlightSelected: true,
   xKey: 'date',
   yKey: 'value',
   yRange: ['auto', 'auto']

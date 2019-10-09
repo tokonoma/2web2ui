@@ -5,7 +5,8 @@ import _ from 'lodash';
 export class WithDateSelection extends Component {
   state = {
     selectedDate: null,
-    hoveredDate: null
+    hoveredDate: null,
+    shouldHighlightSelected: false
   }
 
   componentDidMount() {
@@ -36,16 +37,18 @@ export class WithDateSelection extends Component {
   // Select last date in time series
   setDefaultSelected() {
     const lastDataByDay = _.last(this.props.data);
-    this.setState({ selectedDate: lastDataByDay.date });
+    this.setState({ selectedDate: lastDataByDay.date, hoveredDate: null, shouldHighlightSelected: false });
   }
 
   handleDateSelect = (node) => {
     const newDate = _.get(node, 'payload.date');
 
-    if (newDate === this.state.selectedDate) {
+    if (newDate === this.state.selectedDate &&
+      this.state.shouldHighlightSelected) { //second condition allows user to select last date when in default state
+
       this.setDefaultSelected();
     } else {
-      this.setState({ selectedDate: _.get(node, 'payload.date') });
+      this.setState({ selectedDate: _.get(node, 'payload.date'), shouldHighlightSelected: true });
     }
   }
 
@@ -58,11 +61,18 @@ export class WithDateSelection extends Component {
   }
 
   render() {
-    const { component: WrappedComponent, selected, hovered, ...rest } = this.props;
-    const { selectedDate, hoveredDate } = this.state;
+    const { component: WrappedComponent, selected: _selected, hovered: _hovered, ...rest } = this.props;
+    const { selectedDate, hoveredDate, shouldHighlightSelected } = this.state;
 
     return (
-      <WrappedComponent {...rest} selectedDate={selectedDate} hoveredDate={hoveredDate} handleDateSelect={this.handleDateSelect} handleDateHover={this.handleDateHover} resetDateHover={this.resetDateHover}/>
+      <WrappedComponent
+        {...rest}
+        selectedDate={selectedDate}
+        hoveredDate={hoveredDate}
+        shouldHighlightSelected={shouldHighlightSelected}
+        handleDateSelect={this.handleDateSelect}
+        handleDateHover={this.handleDateHover}
+        resetDateHover={this.resetDateHover}/>
     );
   }
 }
