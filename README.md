@@ -22,12 +22,23 @@ Then `npm install` to install deps.
 
 ## Tests
 
-Running the test suite:
+### Unit Tests
+
+To run the unit test suite:
 ```
 npm test
 ```
 **NOTE:** You may need to `brew install watchman` for jest to run in watch mode on OS X.
 https://github.com/facebook/react-native/issues/9309#issuecomment-238966924
+
+### End to End Tests
+
+In order to run UI tests, the local development server needs to first be started and running on port 3100. First, [start your development server](#local-development) and in another terminal tab, run the following command:
+```
+npm run test-e2e
+```
+
+**NOTE:** The first time tests are run, the developer is prompted to answer some questions that will then generate an env file that is ignored by source control.
 
 ## Learning Resources
 

@@ -29,7 +29,7 @@ export class AccountDropdown extends Component {
 
   getItems() {
     const { accountNavItems, dispatch } = this.props;
-    const items = accountNavItems.map(({ action, label, external, condition, icon: Icon, labs, to, ...rest }) => {
+    const items = accountNavItems.map(({ action, label, external, icon: Icon, labs, to, ...rest }) => {
       const labsMarkup = labs
         ? <div className={styles.FloatIcon}><Tag color='blue'>LABS</Tag></div>
         : null;

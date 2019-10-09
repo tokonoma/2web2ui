@@ -5,6 +5,9 @@
 
 # testing
 junit.xml
+/cypress/videos
+/cypress/screenshots
+cypress.env.json
 
 # build report artifacts
 /build-reports

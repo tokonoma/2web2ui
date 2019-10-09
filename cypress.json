@@ -1,0 +1,10 @@
+{
+  "baseUrl": "http://localhost:3100",
+  "blackListHosts": [
+    "*google-analytics.com",
+    "*pendo.io",
+    "*siftscience.com",
+    "*googletagmanager.com"
+  ],
+  "integrationFolder": "cypress/tests"
+}
