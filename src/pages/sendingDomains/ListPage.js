@@ -15,7 +15,7 @@ import VerifyToken from './components/VerifyToken';
 import { LINKS } from 'src/constants';
 
 export class ListPage extends Component {
-  componentDidMount () {
+  componentDidMount() {
     this.props.listDomains();
   }
 
@@ -54,7 +54,7 @@ export class ListPage extends Component {
     return rowData;
   }
 
-  renderCollection () {
+  renderCollection() {
     return (
       <TableCollection
         columns={this.getColumns()}
@@ -72,7 +72,7 @@ export class ListPage extends Component {
     );
   }
 
-  renderError () {
+  renderError() {
     return (
       <ApiErrorBanner
         errorDetails={this.props.listError.message}
@@ -82,7 +82,7 @@ export class ListPage extends Component {
     );
   }
 
-  render () {
+  render() {
     const { listError, listLoading, domains, hasUnverifiedDomains } = this.props;
 
     if (listLoading) {
