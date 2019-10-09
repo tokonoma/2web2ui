@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { list as listDomains } from 'src/actions/sendingDomains';
+import { list as listSubaccounts } from 'src/actions/subaccounts';
+
 import { hasSubaccounts } from 'src/selectors/subaccounts';
 import { hasUnverifiedDomains } from 'src/selectors/sendingDomains';
 import {
@@ -12,11 +14,15 @@ import { Page } from '@sparkpost/matchbox';
 import { Setup } from 'src/components/images';
 import UnverifiedWarningBanner from './components/UnverifiedWarningBanner';
 import VerifyToken from './components/VerifyToken';
+import { getSubAccountName } from 'src/helpers/subaccounts';
 import { LINKS } from 'src/constants';
 
 export class ListPage extends Component {
   componentDidMount() {
     this.props.listDomains();
+    if (hasSubaccounts) {
+      this.props.listSubaccounts();
+    }
   }
 
   getColumns = () => {
@@ -35,7 +41,7 @@ export class ListPage extends Component {
   }
 
   getRowData = (row) => {
-    const { hasSubaccounts } = this.props;
+    const { hasSubaccounts, subaccounts } = this.props;
     const { domain, shared_with_subaccounts, subaccount_id } = row;
 
     const rowData = [
@@ -45,7 +51,7 @@ export class ListPage extends Component {
 
     if (hasSubaccounts) {
       const subaccountCol = subaccount_id || shared_with_subaccounts
-        ? <SubaccountTag all={shared_with_subaccounts} id={subaccount_id} />
+        ? <SubaccountTag all={shared_with_subaccounts} id={subaccount_id} name={getSubAccountName(subaccounts,subaccount_id)}/>
         : null;
 
       rowData.push(subaccountCol);
@@ -123,7 +129,8 @@ const mapStateToProps = (state) => ({
   listError: state.sendingDomains.listError,
   hasSubaccounts: hasSubaccounts(state),
   hasUnverifiedDomains: hasUnverifiedDomains(state),
-  listLoading: state.sendingDomains.listLoading
+  listLoading: state.sendingDomains.listLoading,
+  subaccounts: state.subaccounts.list
 });
 
-export default connect(mapStateToProps, { listDomains })(ListPage);
+export default connect(mapStateToProps, { listDomains, listSubaccounts })(ListPage);
