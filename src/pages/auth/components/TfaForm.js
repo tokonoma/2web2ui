@@ -7,6 +7,8 @@ import { verifyAndLogin } from 'src/actions/tfa';
 
 import { Button, Error, UnstyledLink } from '@sparkpost/matchbox';
 import { LINKS } from 'src/constants';
+import styles from './TfaForm.module.scss';
+
 
 export class TfaForm extends Component {
 
@@ -39,8 +41,9 @@ export class TfaForm extends Component {
             placeholder="123456"
             component={TextFieldWrapper}
             validate={required}
+            style={{ margin: 0 }}
           />
-          {error && <Error wrapper='div' error={error}/>}
+          {error && <Error wrapper='div' error={error} className={styles.TFASubmissionError}/>}
           <Button primary submit disabled={tfaPending || pristine}>
             {tfaPending ? 'Logging In' : 'Log In'}
           </Button>
