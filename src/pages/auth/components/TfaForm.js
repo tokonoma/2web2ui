@@ -14,7 +14,7 @@ export class TfaForm extends Component {
     const { enabled: _enabled, ...authData } = this.props.tfa;
 
     return this.props.verifyAndLogin({ authData, code }).catch((err) => {
-      if (err.response.status === 400) {
+      if (err.response.status === 400 || err.response.status === 403) {
         throw new SubmissionError({
           code: 'The code is invalid. Please contact login.issues@sparkpost.com for assistance.'
         });
