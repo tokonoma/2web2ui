@@ -8,6 +8,7 @@ describe('ListPage', () => {
     <ListPage
       canCreate={true}
       getSnippets={() => {}}
+      listSubaccounts={() => {}}
       hasSubaccounts={true}
       snippets={[{ id: 'example-id', name: 'Example Snippet' }]}
       {...props}
@@ -20,8 +21,10 @@ describe('ListPage', () => {
 
   it('requests snippets when component is mounted', () => {
     const getSnippets = jest.fn();
-    subject({ getSnippets });
+    const listSubaccounts = jest.fn();
+    subject({ getSnippets, listSubaccounts, hasSubaccounts: true });
     expect(getSnippets).toHaveBeenCalled();
+    expect(listSubaccounts).toHaveBeenCalled();
   });
 
   it('renders loading page', () => {
