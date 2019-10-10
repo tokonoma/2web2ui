@@ -105,7 +105,7 @@ export const ChangePlanForm = ({
           }
         </Grid.Column>
         <Grid.Column xs={4}>
-          <CurrentPlanSection currentPlan={currentPlan}/>
+          <CurrentPlanSection currentPlan={currentPlan} isPlanSelected={Boolean(selectedBundle)}/>
         </Grid.Column>
       </Grid>
     </form>
