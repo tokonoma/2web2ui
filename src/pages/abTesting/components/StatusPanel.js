@@ -25,7 +25,7 @@ const VersionSelector = ({ current, latest, id, subaccountId }) => {
   );
 };
 
-export const StatusPanel = ({ test, version, id, subaccountId, latest }) => {
+export const StatusPanel = ({ test, version, id, subaccountId, latest, name: subaccountName }) => {
   let panelActions = null;
 
   if (latest > 1) {
@@ -39,7 +39,7 @@ export const StatusPanel = ({ test, version, id, subaccountId, latest }) => {
           <StatusTag status={test.status} />
         </LabelledValue>
         <LabelledValue label='Test ID' value={id} />
-        {!!subaccountId && <LabelledValue label='Subaccount'><SubaccountTag id={subaccountId} /></LabelledValue>}
+        {!!subaccountId && <LabelledValue label='Subaccount'><SubaccountTag id={subaccountId} name={subaccountName}/></LabelledValue>}
       </Panel.Section>
     </Panel>
   );

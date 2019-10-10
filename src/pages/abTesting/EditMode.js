@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { reduxForm, getFormValues } from 'redux-form';
 import { withRouter } from 'react-router-dom';
+import { list as listSubaccounts } from 'src/actions/subaccounts';
+import { getSubAccountName } from 'src/helpers/subaccounts';
 
 import { showAlert } from 'src/actions/globalAlert';
 import { updateDraft, getAbTest, updateAbTest, scheduleAbTest, rescheduleAbTest } from 'src/actions/abTesting';
@@ -106,7 +108,7 @@ export class EditMode extends Component {
   }
 
   render() {
-    const { breadcrumbAction, test, rescheduling, formValues, submitting, subaccountId } = this.props;
+    const { breadcrumbAction, test, rescheduling, formValues, submitting, subaccounts, subaccountId } = this.props;
 
     return (
       <Page
@@ -120,7 +122,7 @@ export class EditMode extends Component {
             <StatusContent test={test} rescheduling={rescheduling} />
           </Section.Left>
           <Section.Right>
-            <StatusPanel test={test} subaccountId={subaccountId} />
+            <StatusPanel test={test} subaccountId={subaccountId} name={getSubAccountName(subaccounts,subaccountId)}/>
             <StatusFields disabled={submitting} />
           </Section.Right>
         </Section>
@@ -161,6 +163,7 @@ EditMode.propTypes = {
 const mapStateToProps = (state, props) => ({
   formValues: getFormValues(FORM_NAME)(state),
   initialValues: selectEditInitialValues(state, props),
+  subaccounts: state.subaccounts.list,
   rescheduleLoading: state.abTesting.rescheduleLoading
 });
 
@@ -169,4 +172,4 @@ const formOptions = {
   enableReinitialize: true
 };
 
-export default withRouter(connect(mapStateToProps, { listTemplates, updateDraft, getAbTest, updateAbTest, scheduleAbTest, rescheduleAbTest, showAlert })(reduxForm(formOptions)(EditMode)));
+export default withRouter(connect(mapStateToProps, { listSubaccounts, listTemplates, updateDraft, getAbTest, updateAbTest, scheduleAbTest, rescheduleAbTest, showAlert })(reduxForm(formOptions)(EditMode)));
