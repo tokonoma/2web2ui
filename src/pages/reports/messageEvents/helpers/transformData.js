@@ -14,12 +14,7 @@ export function getFiltersFromSearchQueries(searchQueries = []) {
   // Build a single object containing a key for each filter, initialised to an empty array
   const emptyFilters = getEmptyFilters(EVENTS_SEARCH_FILTERS);
   // Collect queries into an array of objects of form {key: value}
-  const queries = searchQueries.reduce((queryArray, { key, value }) => {
-    if (key && value) {
-      queryArray.push({ [key]: stringToArray(value) });
-    }
-    return queryArray;
-  }, []);
+  const queries = searchQueries.map(({ key, value }) => ({ [key]: stringToArray(value) }));
 
   return Object.assign(emptyFilters, ...queries);
 }

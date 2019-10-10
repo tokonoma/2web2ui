@@ -5,6 +5,7 @@ import { WindowEvent, Modal, Button } from '@sparkpost/matchbox';
 import { onEscape } from 'src/helpers/keyEvents';
 import { getFiltersFromSearchQueries } from '../helpers/transformData.js';
 import SearchForm from './SearchForm';
+import _ from 'lodash';
 
 export class AdvancedFiltersModal extends Component {
   state = {
@@ -21,7 +22,8 @@ export class AdvancedFiltersModal extends Component {
 
   handleApply = (values) => {
     const { searchQuery, ...events } = values;
-    const filters = getFiltersFromSearchQueries(searchQuery);
+    const filteredSearchQuery = searchQuery.filter((filter) => !_.isEmpty(filter));
+    const filters = getFiltersFromSearchQueries(filteredSearchQuery);
     const enabledEventsArray = Object.keys(events).filter((key) => Boolean(events[key]));
     this.props.updateMessageEventsSearchOptions({ events: enabledEventsArray, ...filters });
     this.toggleModal();
