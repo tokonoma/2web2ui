@@ -60,3 +60,14 @@ export function getInboxPlacementTestContent(id) {
     }
   });
 }
+
+export function getAllInboxPlacementMessages(id, filters) {
+  return sparkpostApiRequest({
+    type: 'GET_ALL_INBOX_PLACEMENT_MESSAGES',
+    meta: {
+      method: 'GET',
+      url: `/v1/inbox-placement/${id}/messages`,
+      params: filters
+    }
+  });
+}

@@ -59,4 +59,16 @@ describe('Action Creator: Inbox Placement', () => {
       }
     });
   });
+
+  it('makes request to get all messages with filter', async () => {
+    await inboxPlacement.getAllInboxPlacementMessages(1, { 'mailbox-provider': 'sparkpost.com' });
+    expect(sparkpostApiRequest).toHaveBeenCalledWith({
+      type: 'GET_ALL_INBOX_PLACEMENT_MESSAGES',
+      meta: {
+        method: 'GET',
+        url: '/v1/inbox-placement/1/messages',
+        params: { 'mailbox-provider': 'sparkpost.com' }
+      }
+    });
+  });
 });

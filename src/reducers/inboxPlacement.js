@@ -4,7 +4,9 @@ const initialState = {
   seeds: [],
   testsPending: true,
   tests: [],
-  stopTestPending: false
+  stopTestPending: false,
+  placementsByProvider: [],
+  allMessages: []
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -50,6 +52,13 @@ export default (state = initialState, { type, payload }) => {
       return { ...state, getTestContentPending: false, currentTestContent: payload, getTestContentError: null };
     case 'GET_INBOX_PLACEMENT_TEST_CONTENT_FAIL':
       return { ...state, getTestContentPending: false, getTestContentError: payload };
+
+    case 'GET_ALL_INBOX_PLACEMENT_MESSAGES_PENDING':
+      return { ...state, getAllMessagesPending: true, getAllMessagesError: null };
+    case 'GET_ALL_INBOX_PLACEMENT_MESSAGES_SUCCESS':
+      return { ...state, getAllMessagesPending: false, allMessages: payload, getAllMessagesError: null };
+    case 'GET_ALL_INBOX_PLACEMENT_MESSAGES_FAIL':
+      return { ...state, getAllMessagesPending: false, getAllMessagesError: payload };
 
     default:
       return state;
