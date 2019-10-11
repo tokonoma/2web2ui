@@ -279,7 +279,7 @@ const routes = [
     component: signals.HealthScorePageV3,
     condition: isAccountUiOptionSet('allow_health_score_v3'),
     layout: App,
-    title: 'Signals | Health Score',
+    title: 'Health Score | Signals',
     supportDocSearch: 'signals'
   },
   {
