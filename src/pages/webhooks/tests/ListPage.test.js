@@ -5,6 +5,7 @@ import { WebhooksList } from '../ListPage';
 describe('Page: Webhook List', () => {
   const props = {
     listWebhooks: jest.fn(),
+    listSubaccounts: jest.fn(() => []),
     error: null,
     webhooks: [
       {

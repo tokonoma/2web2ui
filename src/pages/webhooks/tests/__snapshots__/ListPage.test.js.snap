@@ -42,6 +42,7 @@ Array [
       id={0}
       isDefault={false}
       master={true}
+      name=""
       receiveAll={false}
     />,
   ],
@@ -60,6 +61,7 @@ Array [
       id={101}
       isDefault={false}
       master={false}
+      name=""
       receiveAll={false}
     />,
   ],
@@ -78,6 +80,7 @@ Array [
       id={null}
       isDefault={false}
       master={false}
+      name=""
       receiveAll={true}
     />,
   ],
