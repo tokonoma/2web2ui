@@ -68,6 +68,7 @@
   &.isActive:not(.hasChildren) {
     color: color(orange);
     font-weight: 500;
+
     .icon {
       fill: color(orange);
     }
