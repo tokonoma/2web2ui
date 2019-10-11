@@ -10,6 +10,7 @@ import { RedirectAndAlert } from 'src/components/globalAlert';
 import Loading from 'src/components/loading';
 import ButtonWrapper from 'src/components/buttonWrapper';
 import { routeNamespace } from '../../constants/routes';
+import styles from './DuplicateTemplateModal.module.scss';
 
 const DuplicateTemplateModal = (props) => {
   const {
@@ -99,7 +100,11 @@ const DuplicateTemplateModal = (props) => {
           title="Duplicate Template"
           sectioned
         >
-          {isLoading && <Loading/>} {/* NOTE: Styles here need updating, and are available in another branch */}
+          {isLoading &&
+            <div className={styles.LoadingWrapper}>
+              <Loading className={styles.Loading}/>
+            </div>
+          }
 
           {!isLoading &&
             <form onSubmit={(e) => handleSubmit(e)}>
