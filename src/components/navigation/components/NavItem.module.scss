@@ -22,10 +22,9 @@
   display: flex;
   padding: rem(9) rem(18);
   color: color(gray, 2);
+
   text-decoration: none;
-  border: 0;
-  background-color: transparent;
-  width: auto;
+  border-bottom: none;
   font-size: font-size(400);
   font-weight: 500;
   line-height: line-height(500);
