@@ -33,6 +33,7 @@
   -moz-osx-font-smoothing: grayscale;
   transition: color 0.15s ease-in-out;
   user-select: none;
+  cursor: pointer;
 
   &.mobile {
     padding: rem(15) rem(18);
@@ -45,21 +46,26 @@
     padding-top: rem(20);
   }
 
-  &:hover {
-    color: color(gray, 0);
-    cursor: pointer;
-    .chevron { fill: color(gray, 1); }
-    .icon { fill: color(gray, 1); }
-  }
-
+  &:hover,
+  &:active,
   &:focus {
     color: color(gray, 0);
+
+    .chevron {
+      fill: color(gray, 1);
+    }
+
+    .icon {
+      fill: color(gray, 1);
+    }
   }
 
   &.isActive:not(.hasChildren) {
     color: color(orange);
     font-weight: 500;
-    .icon { fill: color(orange); }
+    .icon {
+      fill: color(orange);
+    }
   }
 
   &.hasChildren {
