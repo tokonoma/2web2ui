@@ -12,7 +12,6 @@ exports[`DuplicateTemplateModal renders with default props and some data from th
       sectioned={true}
       title="Duplicate Template"
     >
-       
       <form
         onSubmit={[Function]}
       >
