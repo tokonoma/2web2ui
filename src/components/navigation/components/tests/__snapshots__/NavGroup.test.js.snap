@@ -3,8 +3,11 @@
 exports[`NavGroup tests should render children correctly 1`] = `
 <li>
   <a
+    aria-expanded="false"
     className="Link hasChildren"
+    href="javascript:void(0);"
     onClick={[Function]}
+    role="button"
   >
     <span
       className="iconWrapper"
@@ -53,8 +56,11 @@ exports[`NavGroup tests should render children correctly 1`] = `
 exports[`NavGroup tests should render correctly on mobile 1`] = `
 <li>
   <a
+    aria-expanded="false"
     className="Link hasChildren mobile"
+    href="javascript:void(0);"
     onClick={[Function]}
+    role="button"
   >
     <span
       className="iconWrapper"

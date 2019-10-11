@@ -35,10 +35,13 @@ describe('NavGroup tests', () => {
 
   it('should toggle open state when clicking link', () => {
     expect(wrapper.find('a').hasClass('isOpen')).toBe(false);
+    expect(wrapper.find('a')).toHaveProp('aria-expanded', 'false');
     wrapper.children().find('a').simulate('click');
     expect(wrapper.find('a').hasClass('isOpen')).toBe(true);
+    expect(wrapper.find('a')).toHaveProp('aria-expanded', 'true');
     wrapper.children().find('a').simulate('click');
     expect(wrapper.find('a').hasClass('isOpen')).toBe(false);
+    expect(wrapper.find('a')).toHaveProp('aria-expanded', 'false');
   });
 
   it('should be open if any children has matching path', () => {

@@ -41,7 +41,11 @@ const NavItem = (props) => {
 
   return (
     <li>
-      <Link to={to} className={linkClasses} onClick={mobile ? toggleMobileNav : null}>
+      <Link
+        to={to}
+        className={linkClasses}
+        onClick={mobile ? toggleMobileNav : null}
+      >
         {Icon && <span className={styles.iconWrapper}><Icon size={21} className={styles.icon}/></span>}
         <div className={styles.Label}>{label}</div>
         {releaseTag && <div className={styles.releaseTag}>{releaseTag}</div>}

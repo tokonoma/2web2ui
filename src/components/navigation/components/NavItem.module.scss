@@ -22,16 +22,16 @@
   display: flex;
   padding: rem(9) rem(18);
   color: color(gray, 2);
-
   text-decoration: none;
-  border-bottom: none;
+  border: 0;
+  background-color: transparent;
+  width: auto;
   font-size: font-size(400);
   font-weight: 500;
   line-height: line-height(500);
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
   transition: 0.15s;
   user-select: none;
 
