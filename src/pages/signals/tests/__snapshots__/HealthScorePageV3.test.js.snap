@@ -58,6 +58,7 @@ exports[`Signals Health Score Page V3 renders correctly when receiving data 1`] 
             "top": 12,
           }
         }
+        shouldHighlightSelected={true}
         timeSeries={Array []}
         tooltipContent={[Function]}
         width="99%"
