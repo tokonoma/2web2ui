@@ -41,6 +41,7 @@ Array [
     id={101}
     isDefault={false}
     master={false}
+    name=""
     receiveAll={false}
   />,
   <div
