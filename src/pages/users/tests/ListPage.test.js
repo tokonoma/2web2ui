@@ -16,6 +16,7 @@ describe('Page: Users List', () => {
       },
       loading: false,
       listUsers: jest.fn(),
+      listSubaccounts: jest.fn(() => []),
       hasSubaccounts: false,
       users: [
         { name: 'Test User 1', username: 'test-user-1', access: 'admin', email: 'user1@test.com', tfa_enabled: false },
