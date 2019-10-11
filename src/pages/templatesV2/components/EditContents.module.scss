@@ -6,8 +6,7 @@
   grid-template-columns: 1fr;
   grid-gap: spacing();
 
-  // It's a little odd to be using `em` units for a viewport size? I might be missing something
-  @media only screen and (min-width: 60em) {
+  @media (min-width: breakpoint('small')) {
     grid-template-columns: 1fr 1fr;
   }
 }
