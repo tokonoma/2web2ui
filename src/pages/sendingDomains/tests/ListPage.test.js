@@ -38,7 +38,8 @@ describe('Sending Domains List Page', () => {
       hasSubaccounts: false,
       hasUnverifiedDomains: true,
       listLoading: false,
-      listDomains: jest.fn()
+      listDomains: jest.fn(),
+      listSubaccounts: jest.fn(() => [])
     };
 
     wrapper = shallow(<ListPage {...props}/>);
