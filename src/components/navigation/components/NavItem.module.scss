@@ -31,7 +31,7 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  transition: 0.15s;
+  transition: color 0.15s ease-in-out;
   user-select: none;
 
   &.mobile {
