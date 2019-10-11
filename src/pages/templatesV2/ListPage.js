@@ -105,9 +105,9 @@ export default class ListPage extends Component {
       {
         component: (template) => (
           <span className={styles.Actions}>
-            <DeleteAction onClick={() => this.toggleDeleteModal(template)}/>
-
             <DuplicateAction onClick={() => this.toggleDuplicateModal(template)}/>
+
+            <DeleteAction onClick={() => this.toggleDeleteModal(template)}/>
           </span>
         ),
         header: {
