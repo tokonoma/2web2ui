@@ -87,7 +87,7 @@
     "raven-for-redux": "^1.1.1",
     "raven-js": "^3.26.3",
     "react": "^16.8.6",
-    "react-ace": "^6.1.0",
+    "react-ace": "^7.0.5",
     "react-day-picker": "^7.1.10",
     "react-dom": "^16.8.3",
     "react-dropzone": "^7.0.1",
