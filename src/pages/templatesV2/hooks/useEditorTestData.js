@@ -1,31 +1,21 @@
 import { useState, useEffect } from 'react';
 
 const useEditorTestData = (props) => {
-  const {
-    draft,
-    templateTestData,
-    getSnippet
-  } = props;
+  const { draft, templateTestData, getTestDataV2 } = props;
   const [testData, setTestData] = useState(templateTestData);
 
   useEffect(() => {
     if (draft) {
-      // Grab the recipient list to get the test data from the server,
-      // and update the UI with said data once retrieved.
-      getSnippet({ id: draft.id })
-        .then((res) => {
-          // When no values are available, a base data structure is assumed
-          const baseTestData = {
-            substitution_data: {},
-            metadata: {},
-            options: {}
-          };
-          const retrievedTestData = JSON.parse(res.content.html);
+      const retrievedTestData = getTestDataV2({ id: draft.id });
+      const baseTestData = {
+        substitution_data: {},
+        metadata: {},
+        options: {}
+      };
 
-          setTestData(JSON.stringify({ ...baseTestData, ...retrievedTestData }, null, 1));
-        });
+      setTestData(JSON.stringify({ ...baseTestData, ...retrievedTestData }, null, 2));
     }
-  }, [getSnippet, draft]);
+  }, [getTestDataV2, draft]);
 
   return {
     testData,

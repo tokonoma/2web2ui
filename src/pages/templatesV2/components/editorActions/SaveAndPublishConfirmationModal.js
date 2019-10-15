@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import ConfirmationModal from 'src/components/modals/ConfirmationModal';
 import { routeNamespace } from '../../constants/routes';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
@@ -6,24 +6,33 @@ import { RedirectAndAlert } from 'src/components/globalAlert';
 import useEditorContext from '../../hooks/useEditorContext';
 
 const SaveAndPublishConfirmationModal = (props) => {
-  const {
-    open,
-    onCancel
-  } = props;
+  const { open, onCancel } = props;
   const {
     draft,
+    content,
     testData,
     isDraftPublishing,
     setHasSaved,
-    publishDraftV2
+    publishDraftV2,
+    setTestDataV2
   } = useEditorContext();
   const [hasSuccessRedirect, setSuccessRedirect] = useState(false);
 
-  const handleConfirm = useCallback(() => publishDraftV2({ ...draft, testData }, draft.subaccount_id)
-    .then(() => {
-      setHasSaved(true);
-      setSuccessRedirect(true);
-    }), [draft, publishDraftV2, setHasSaved, testData]);
+  const handleConfirm = () => {
+    publishDraftV2({
+      ...draft,
+      content,
+      options: JSON.parse(testData).options
+    }, draft.subaccount_id)
+      .then(() => {
+        setTestDataV2({
+          id: draft.id,
+          data: testData
+        });
+        setHasSaved(true);
+        setSuccessRedirect(true);
+      });
+  };
 
   return (
     <>

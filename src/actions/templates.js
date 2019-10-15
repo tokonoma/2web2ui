@@ -1,5 +1,4 @@
-/* eslint max-lines: ["warn", { "max": 220, "skipComments": true }] */
-// @see discussion for custom lint rule, https://github.com/SparkPost/2web2ui/issues/230
+/* eslint-disable max-lines */
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
 import localforage from 'localforage';
 import config from 'src/config';
@@ -191,6 +190,16 @@ export function deleteTemplate(id, subaccountId) {
   });
 }
 
+export function setTestDataV2({ data, id, mode }) {
+  return (dispatch, getState) => {
+    const username = getState().currentUser.username;
+    const testData = typeof data === 'object' ? JSON.stringify(data) : data;
+
+    return window.localStorage.setItem(getTestDataKey({ id, username, mode }), testData);
+  };
+}
+
+// TODO: Remove after rollout of V2
 export function setTestData({ data, id, mode }) {
   return (dispatch, getState) => {
     const username = getState().currentUser.username;
@@ -199,6 +208,16 @@ export function setTestData({ data, id, mode }) {
   };
 }
 
+export function getTestDataV2({ id, mode }) {
+  return (dispatch, getState) => {
+    const username = getState().currentUser.username;
+    const rawData = window.localStorage.getItem(getTestDataKey({ id, username, mode }));
+
+    return JSON.parse(rawData);
+  };
+}
+
+// TODO: Remove after rollout of V2
 export function getTestData({ id, mode }) {
   return (dispatch, getState) => {
     const username = getState().currentUser.username;

@@ -10,7 +10,9 @@ import {
   publishV2 as publishDraftV2,
   deleteTemplate,
   create as createTemplate,
-  sendPreview
+  sendPreview,
+  setTestDataV2,
+  getTestDataV2
 } from 'src/actions/templates';
 import {
   createRecipientList,
@@ -83,17 +85,17 @@ const mapDispatchToProps = {
   createRecipientList, // TODO: Remove soon!
   getRecipientList, // TODO: Remove soon!
   updateRecipientList, // TODO: Remove soon!
-  createSnippet,
-  getSnippet,
-  updateSnippet,
-  deleteSnippet,
+  createSnippet, // TODO: Remove soon!
+  getSnippet, // TODO: Remove soon!
+  updateSnippet, // TODO: Remove soon!
+  deleteSnippet, // TODO: Remove soon!
   publishDraftV2,
   listDomains,
   listSubaccounts,
   sendPreview,
   showAlert,
-  getTestData,
-  setTestData
+  setTestDataV2,
+  getTestDataV2
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditAndPreviewPageContainer);

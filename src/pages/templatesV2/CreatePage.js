@@ -16,12 +16,10 @@ export default class CreatePage extends Component {
   handleCreate = (values) => {
     const {
       create,
-      createSnippet,
       history,
       subaccountId,
       showAlert,
-      deleteSnippet,
-      deleteTemplate
+      setTestDataV2
     } = this.props;
     const formData = {
       ...values,
@@ -31,28 +29,20 @@ export default class CreatePage extends Component {
       }
     };
     const templateId = values.id;
-    const createPromise = create(formData);
     const testDataBase = {
       options: {},
       substitution_data: {},
       metadata: {}
     };
-
-    // This is used as a place to store meta and substitution data temporarily until test data can be stored with a draft
-    const createSnippetPromise = createSnippet({
-      id: templateId,
-      name: 'Templates Test Data',
-      html: JSON.stringify(testDataBase)
-    });
-
-    return Promise.all([createPromise, createSnippetPromise])
+    create(formData)
       .then(() => {
+        setTestDataV2({
+          id: templateId,
+          data: testDataBase
+        });
+
         showAlert({ type: 'success', message: 'Template Created.' });
         history.push(`/${routeNamespace}/edit/${templateId}/draft/content${setSubaccountQuery(subaccountId)}`);
-      })
-      .catch(() => {
-        deleteTemplate(templateId);
-        deleteSnippet({ id: templateId });
       });
   };
 

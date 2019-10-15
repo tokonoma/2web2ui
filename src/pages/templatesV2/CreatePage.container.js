@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { formValueSelector, reduxForm } from 'redux-form';
 import _ from 'lodash';
 // Actions
-import { create, getDraft } from 'src/actions/templates';
+import { create, getDraft, setTestDataV2 } from 'src/actions/templates';
 import { createSnippet } from 'src/actions/snippets';
 import { showAlert } from 'src/actions/globalAlert';
 import { list as listDomains } from 'src/actions/sendingDomains';
@@ -33,6 +33,7 @@ const formOptions = {
 export default withRouter(connect(mapStateToProps, {
   create,
   createSnippet,
+  setTestDataV2,
   getDraft,
   showAlert,
   listDomains
