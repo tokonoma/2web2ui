@@ -81,7 +81,8 @@ export default [
       {
         label: 'Templates',
         to: '/templatesV2',
-        condition: isAccountUiOptionSet('templatesV2')
+        condition: isAccountUiOptionSet('templatesV2'),
+        tag: 'new'
       },
       {
         label: 'A/B Testing',
