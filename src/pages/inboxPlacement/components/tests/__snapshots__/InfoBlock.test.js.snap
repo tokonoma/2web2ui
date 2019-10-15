@@ -2,16 +2,15 @@
 
 exports[`Component: InfoBlock renders correctly 1`] = `
 <Grid.Column>
-  <span
+  <div
     className="InfoLabel"
   >
     Foo
-  </span>
-  <br />
-  <span
+  </div>
+  <div
     className="InfoValue"
   >
     bar
-  </span>
+  </div>
 </Grid.Column>
 `;
