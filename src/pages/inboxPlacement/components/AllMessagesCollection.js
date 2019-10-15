@@ -39,7 +39,7 @@ const RowComponent = ({ email_address, folder, tab, dkim, spf, dmarc }) => (
     <Table.Cell className={styles.Authentication}>{passFail(dmarc)}</Table.Cell>
   </Table.Row>);
 
-const AllMessagesCollectiom = ({ data = []}) => (
+const AllMessagesCollection = ({ data = []}) => (
   <TableCollection
     rows={data}
     wrapperComponent={WrapperComponent}
@@ -49,4 +49,4 @@ const AllMessagesCollectiom = ({ data = []}) => (
     saveCsv={false}
   />);
 
-export default AllMessagesCollectiom;
+export default AllMessagesCollection;
