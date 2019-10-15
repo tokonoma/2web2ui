@@ -1,6 +1,3 @@
-/* eslint max-lines: ["error", 250] */
-//TODO: Pull out button to another form
-
 import React, { useEffect, useState, useCallback, useRef } from 'react';
 import { Grid, Button } from '@sparkpost/matchbox';
 import { withRouter } from 'react-router-dom';
@@ -14,10 +11,6 @@ import CurrentPlanSection from '../components/CurrentPlanSection';
 import useRouter from 'src/hooks/useRouter';
 import Brightback from 'src/components/brightback/Brightback';
 import config from 'src/config';
-import billingCreate from 'src/actions/billingCreate';
-import billingUpdate from 'src/actions/billingUpdate';
-import * as conversions from 'src/helpers/conversionTracking';
-import { showAlert } from 'src/actions/globalAlert';
 
 //Actions
 import { getBillingInfo, updateSubscription } from 'src/actions/account';
@@ -26,7 +19,7 @@ import { FeatureChangeContextProvider, useFeatureChangeContext } from '../contex
 import { getBillingCountries, getBundles, verifyPromoCode, clearPromoCode } from 'src/actions/billing';
 
 //Selectors
-import { selectTieredVisibleBundles, currentPlanSelector, selectAccountBilling, getPromoCodeObject, prepareCardInfo } from 'src/selectors/accountBillingInfo';
+import { selectTieredVisibleBundles, currentPlanSelector, getPromoCodeObject } from 'src/selectors/accountBillingInfo';
 import { changePlanInitialValues } from 'src/selectors/accountBillingForms';
 
 const FORMNAME = 'changePlan';
@@ -55,8 +48,6 @@ export const ChangePlanForm = ({
   //Redux Props
   bundles,
   currentPlan,
-  billing,
-  account,
 
   //Redux Actions
   getBillingInfo,
@@ -108,37 +99,7 @@ export const ChangePlanForm = ({
     }
   },[selectedBundle, code, allBundles, updateRoute]);
 
-  const onSubmit = (values) => {
-    const oldCode = account.subscription.code;
-    const newCode = selectedBundle.bundle.bundle;
-    const isDowngradeToFree = values.planpicker.isFree;
-    const selectedPromo = billing.selectedPromo;
-    const newValues = values.card && !isDowngradeToFree
-      ? { ...values, card: prepareCardInfo(values.card) }
-      : values;
-    let action = Promise.resolve({});
-    if (!_.isEmpty(selectedPromo) && !isDowngradeToFree) {
-      newValues.promoCode = selectedPromo.promoCode;
-      action = verifyPromoCode({ promoCode: selectedPromo.promoCode , billingId: values.planpicker.billingId, meta: { promoCode: selectedPromo.promoCode }});
-    }
-    return action
-      .then(({ discount_id }) => {
-        newValues.discountId = discount_id;
-        // decides which action to be taken based on
-        // if it's aws account, it already has billing and if you use a saved CC
-        if (this.props.isAws) {
-          return updateSubscription({ code: newCode });
-        } else if (account.billing) {
-          return this.state.useSavedCC || isDowngradeToFree ? updateSubscription({ code: newCode, promoCode: selectedPromo.promoCode }) : billingUpdate(newValues);
-        } else {
-          return billingCreate(newValues); // creates Zuora account
-        }
-      })
-      .then(() => history.push('/account/billing'))
-      .then(() => {
-        conversions.trackPlanChange({ allPlans: billing.plans, oldCode, newCode });
-        return showAlert({ type: 'success', message: 'Subscription Updated' });
-      });
+  const onSubmit = () => {
   };
 
   return (
@@ -183,14 +144,11 @@ export const ChangePlanForm = ({
 
 const mapStateToProps = (state, props) => {
   const { code: planCode, promo: promoCode } = qs.parse(props.location.search);
-  const { account, loading } = selectAccountBilling(state);
   return {
     bundles: selectTieredVisibleBundles(state),
     initialValues: changePlanInitialValues(state, { planCode, promoCode }),
     currentPlan: currentPlanSelector(state),
     promoCodeObj: getPromoCodeObject(state),
-    account,
-    loading,
     billing: state.billing
   };
 };
