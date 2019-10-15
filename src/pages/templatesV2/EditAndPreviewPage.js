@@ -57,13 +57,11 @@ const EditAndPreviewPage = () => {
   );
 
   const title = (draft) => {
-    if (isPublishedMode) {
-      return draft.name;
-    }
-
     if (!isPublishedMode) {
       return `${draft.name} (DRAFT)`;
     }
+
+    return draft.name;
   };
 
   return (
