@@ -1,7 +1,6 @@
 /* eslint-disable max-lines */
 import React, { Component } from 'react';
 import { Page } from '@sparkpost/matchbox';
-
 import { ApiErrorBanner, DeleteModal, Loading, TableCollection } from 'src/components';
 import { Templates } from 'src/components/images';
 import PageLink from 'src/components/pageLink';
@@ -119,7 +118,6 @@ export default class ListPage extends Component {
     ];
 
     return columns.filter((col) => col.visible);
-
   }
 
   renderRow = (columns) => (props) => columns.map(({ component: Component, onClick }) => <Component onClick={onClick} {...props} />);

@@ -95,6 +95,28 @@ describe('ListPage', () => {
     expect(listTemplateFn).toHaveBeenCalled();
   });
 
+  it('shows an alert after duplication and refreshes the list', async () => {
+    const mockShowAlert = jest.fn();
+    const mockListTemplates = jest.fn();
+    const wrapper = subject({
+      showAlert: mockShowAlert,
+      listTemplates: mockListTemplates
+    });
+    wrapper.setState({
+      templateToDuplicate: {
+        name: 'Hello'
+      }
+    });
+
+    await wrapper.find('DuplicateTemplateModal').prop('successCallback')();
+
+    expect(mockShowAlert).toHaveBeenCalledWith({
+      type: 'success',
+      message: 'Template Hello duplicated'
+    });
+    expect(mockListTemplates).toHaveBeenCalled();
+  });
+
   it('does not render column with canModify false', () => {
     const wrapper = subject({ canModify: false });
     const headers = wrapper.find('TableCollection').prop('columns').map(({ label }) => label);
