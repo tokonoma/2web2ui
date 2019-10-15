@@ -1,32 +1,53 @@
+/* eslint max-lines: ["error", 250] */
+//TODO: Pull out button to another form
+
 import React, { useEffect, useState, useCallback, useRef } from 'react';
 import { Grid, Button } from '@sparkpost/matchbox';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import qs from 'query-string';
+import _ from 'lodash';
+
 import PlanSelectSection, { SelectedPlan } from '../components/PlanSelect';
 import CurrentPlanSection from '../components/CurrentPlanSection';
 import useRouter from 'src/hooks/useRouter';
+import Brightback from 'src/components/brightback/Brightback';
+import config from 'src/config';
+import billingCreate from 'src/actions/billingCreate';
+import billingUpdate from 'src/actions/billingUpdate';
+import * as conversions from 'src/helpers/conversionTracking';
+import { showAlert } from 'src/actions/globalAlert';
 
 //Actions
-import { getBillingInfo } from 'src/actions/account';
+import { getBillingInfo, updateSubscription } from 'src/actions/account';
 import FeatureChangeSection from '../components/FeatureChangeSection';
 import { FeatureChangeContextProvider, useFeatureChangeContext } from '../context/FeatureChangeContext';
 import { getBillingCountries, getBundles, verifyPromoCode, clearPromoCode } from 'src/actions/billing';
 
 //Selectors
-import { selectTieredVisibleBundles, currentPlanSelector, getPromoCodeObject } from 'src/selectors/accountBillingInfo';
+import { selectTieredVisibleBundles, currentPlanSelector, selectAccountBilling, getPromoCodeObject, prepareCardInfo } from 'src/selectors/accountBillingInfo';
 import { changePlanInitialValues } from 'src/selectors/accountBillingForms';
 
 const FORMNAME = 'changePlan';
 
 export const SubmitButton = ({ loading }) => { //TODO: Swap to brightback
-
   const { isReady } = useFeatureChangeContext();
   return (isReady &&
-    <Button type='submit' disabled={loading} color='orange'>
-      Change Plan
-    </Button>
+    <Brightback
+      condition={false}
+      config={config.brightback.downgradeToFreeConfig}
+      render={({ enabled, to }) => (
+        <Button
+          type={enabled ? 'button' : 'submit'}
+          to={enabled ? to : null}
+          disabled={loading}
+          color='orange'
+        >
+          Change Plan
+        </Button>
+      )}
+    />
   );
 };
 
@@ -34,6 +55,8 @@ export const ChangePlanForm = ({
   //Redux Props
   bundles,
   currentPlan,
+  billing,
+  account,
 
   //Redux Actions
   getBillingInfo,
@@ -85,7 +108,37 @@ export const ChangePlanForm = ({
     }
   },[selectedBundle, code, allBundles, updateRoute]);
 
-  const onSubmit = () => {
+  const onSubmit = (values) => {
+    const oldCode = account.subscription.code;
+    const newCode = selectedBundle.bundle.bundle;
+    const isDowngradeToFree = values.planpicker.isFree;
+    const selectedPromo = billing.selectedPromo;
+    const newValues = values.card && !isDowngradeToFree
+      ? { ...values, card: prepareCardInfo(values.card) }
+      : values;
+    let action = Promise.resolve({});
+    if (!_.isEmpty(selectedPromo) && !isDowngradeToFree) {
+      newValues.promoCode = selectedPromo.promoCode;
+      action = verifyPromoCode({ promoCode: selectedPromo.promoCode , billingId: values.planpicker.billingId, meta: { promoCode: selectedPromo.promoCode }});
+    }
+    return action
+      .then(({ discount_id }) => {
+        newValues.discountId = discount_id;
+        // decides which action to be taken based on
+        // if it's aws account, it already has billing and if you use a saved CC
+        if (this.props.isAws) {
+          return updateSubscription({ code: newCode });
+        } else if (account.billing) {
+          return this.state.useSavedCC || isDowngradeToFree ? updateSubscription({ code: newCode, promoCode: selectedPromo.promoCode }) : billingUpdate(newValues);
+        } else {
+          return billingCreate(newValues); // creates Zuora account
+        }
+      })
+      .then(() => history.push('/account/billing'))
+      .then(() => {
+        conversions.trackPlanChange({ allPlans: billing.plans, oldCode, newCode });
+        return showAlert({ type: 'success', message: 'Subscription Updated' });
+      });
   };
 
   return (
@@ -130,11 +183,15 @@ export const ChangePlanForm = ({
 
 const mapStateToProps = (state, props) => {
   const { code: planCode, promo: promoCode } = qs.parse(props.location.search);
+  const { account, loading } = selectAccountBilling(state);
   return {
     bundles: selectTieredVisibleBundles(state),
     initialValues: changePlanInitialValues(state, { planCode, promoCode }),
     currentPlan: currentPlanSelector(state),
-    promoCodeObj: getPromoCodeObject(state)
+    promoCodeObj: getPromoCodeObject(state),
+    account,
+    loading,
+    billing: state.billing
   };
 };
 
@@ -143,7 +200,8 @@ const mapDispatchToProps = ({
   getBillingCountries,
   verifyPromoCode,
   clearPromoCode,
-  getBundles
+  getBundles,
+  updateSubscription
 });
 
 const formOptions = {
