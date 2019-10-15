@@ -3,17 +3,6 @@
 exports[`Component: MessageEventsSearch renders correctly 1`] = `
 <Panel>
   <Panel.Section>
-    <div
-      className="filterTitle"
-    >
-      <h3>
-        Filter Events
-      </h3>
-      <withRouter(Connect(ShareModal))
-        searchOptions={Object {}}
-        triggerComponent={[Function]}
-      />
-    </div>
     <Grid>
       <Grid.Column
         md={5}
@@ -72,9 +61,17 @@ exports[`Component: MessageEventsSearch renders correctly 1`] = `
         />
       </Grid.Column>
       <div
-        className="filterButton"
+        className="paddingLeft"
       >
         <Connect(AdvancedFiltersModal) />
+      </div>
+      <div
+        className="paddingLeft"
+      >
+        <withRouter(Connect(ShareModal))
+          disabled={false}
+          searchOptions={Object {}}
+        />
       </div>
     </Grid>
   </Panel.Section>

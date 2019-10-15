@@ -5,8 +5,7 @@ import moment from 'moment';
 import _ from 'lodash';
 import { getMessageEvents, refreshMessageEventsDateRange, updateMessageEventsSearchOptions, addFilters } from 'src/actions/messageEvents';
 import { selectMessageEventsSearchOptions } from 'src/selectors/messageEvents';
-import { Panel, Grid, TextField, UnstyledLink } from '@sparkpost/matchbox';
-import { Share } from '@sparkpost/matchbox-icons';
+import { Panel, Grid, TextField } from '@sparkpost/matchbox';
 import AdvancedFiltersModal from './AdvancedFiltersModal';
 import ActiveFilters from './ActiveFilters';
 import ShareModal from '../../components/ShareModal';
@@ -64,13 +63,6 @@ export class MessageEventsSearch extends Component {
     return (
       <Panel>
         <Panel.Section>
-          <div className={styles.filterTitle}>
-            <h3>Filter Events</h3>
-            <ShareModal
-              searchOptions={searchOptions}
-              triggerComponent={(props) => (<UnstyledLink {...props}>Share These Results <Share /></UnstyledLink>)}
-            />
-          </div>
           <Grid>
             <Grid.Column xs={12} md={5} xl={6}>
               <DatePicker
@@ -98,8 +90,11 @@ export class MessageEventsSearch extends Component {
                 error={this.state.recipientError}
               />
             </Grid.Column>
-            <div className={styles.filterButton}>
+            <div className={styles.paddingLeft}>
               <AdvancedFiltersModal/>
+            </div>
+            <div className={styles.paddingLeft}>
+              <ShareModal disabled={loading} searchOptions={searchOptions} />
             </div>
           </Grid>
         </Panel.Section>
