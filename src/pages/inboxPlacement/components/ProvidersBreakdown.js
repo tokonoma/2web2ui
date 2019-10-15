@@ -4,6 +4,7 @@ import cx from 'classnames';
 import { TableCollection } from 'src/components/collection';
 import { formatPercent } from 'src/helpers/units';
 import styles from './ProvidersBreakdown.module.scss';
+import PageLink from 'src/components/pageLink/PageLink';
 
 export const GroupPercentage = ({ value }) => <span className={styles.GroupValue}>{formatPercent(value * 100)}</span>;
 
@@ -25,7 +26,7 @@ const WrapperComponent = ({ children }) => (<div className={styles.TableWrapper}
 
 const RowComponent = ({ mailbox_provider, placement, authentication }) => (<Table.Row className={styles.DataRow}>
   <Table.Cell className={styles.ProviderCell}>
-    <strong>{mailbox_provider}</strong>
+    <strong><PageLink to={`/inbox-placement/details/${id}/mailbox-providers/${mailbox_provider}`}>{mailbox_provider}</PageLink></strong>
   </Table.Cell>
   <Table.Cell className={styles.Placement}><GroupPercentage value={placement.inbox_pct}/></Table.Cell>
   <Table.Cell className={styles.Placement}><GroupPercentage value={placement.spam_pct}/></Table.Cell>

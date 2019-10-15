@@ -1,0 +1,21 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.Divider {
+  border-right: 1px solid color(gray, 8);
+  padding: 0 0 0 50px;
+}
+.Panel {
+  padding-bottom: 20px;
+}
+
+.Title{
+  position: relative;
+  right: 50px;
+  text-align: center;
+  padding: 20px 10px 10px 10px;
+}
+
+ .Delivery{
+   position: relative;
+   left: 20px;
+}
