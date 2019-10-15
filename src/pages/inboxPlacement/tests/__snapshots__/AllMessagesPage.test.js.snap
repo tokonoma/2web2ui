@@ -37,7 +37,8 @@ exports[`Page: All Inbox Placement Messages Test renders page correctly with def
     </Panel.Section>
     <Grid>
       <Grid.Column
-        md={7}
+        lg={7}
+        md={12}
       >
         <div
           className="Divider"
@@ -47,95 +48,95 @@ exports[`Page: All Inbox Placement Messages Test renders page correctly with def
           >
             Deliverability
           </h5>
-          <div
-            className="Delivery"
-          >
-            <Grid
-              className="Panel"
-            >
-              <InfoBlock
-                columnProps={
-                  Object {
-                    "md": 3,
-                  }
-                }
-                label="Sent"
-                value={100}
-              />
-              <InfoBlock
-                columnProps={
-                  Object {
-                    "md": 3,
-                  }
-                }
-                label="Inbox"
-                value={100}
-              />
-              <InfoBlock
-                columnProps={
-                  Object {
-                    "md": 3,
-                  }
-                }
-                label="Spam"
-                value={0}
-              />
-              <InfoBlock
-                columnProps={
-                  Object {
-                    "md": 3,
-                  }
-                }
-                label="Missing"
-                value={0}
-              />
-            </Grid>
-          </div>
-        </div>
-      </Grid.Column>
-      <Grid.Column
-        md={5}
-      >
-        <div
-          className="Divider"
-        >
-          <h5
-            className="Title"
-          >
-            Authentication
-          </h5>
           <Grid
             className="Panel"
           >
             <InfoBlock
+              className="Deliverability"
               columnProps={
                 Object {
-                  "md": 4,
+                  "md": 3,
                 }
               }
-              label="SPF"
-              value="100%"
+              label="Sent"
+              value={100}
             />
             <InfoBlock
+              className="Deliverability"
               columnProps={
                 Object {
-                  "md": 4,
+                  "md": 3,
                 }
               }
-              label="DKIM"
-              value="100%"
+              label="Inbox"
+              value={100}
             />
             <InfoBlock
+              className="Deliverability"
               columnProps={
                 Object {
-                  "md": 4,
+                  "md": 3,
                 }
               }
-              label="DMARC"
-              value="100%"
+              label="Spam"
+              value={0}
+            />
+            <InfoBlock
+              className="Deliverability"
+              columnProps={
+                Object {
+                  "md": 3,
+                }
+              }
+              label="Missing"
+              value={0}
             />
           </Grid>
         </div>
+      </Grid.Column>
+      <Grid.Column
+        lg={5}
+        md={12}
+      >
+        <h5
+          className="Title"
+        >
+          Authentication
+        </h5>
+        <Grid
+          className="Panel"
+        >
+          <InfoBlock
+            className="Authentication"
+            columnProps={
+              Object {
+                "md": 4,
+              }
+            }
+            label="SPF"
+            value="100%"
+          />
+          <InfoBlock
+            className="Authentication"
+            columnProps={
+              Object {
+                "md": 4,
+              }
+            }
+            label="DKIM"
+            value="100%"
+          />
+          <InfoBlock
+            className="Authentication"
+            columnProps={
+              Object {
+                "md": 4,
+              }
+            }
+            label="DMARC"
+            value="100%"
+          />
+        </Grid>
       </Grid.Column>
     </Grid>
   </Panel>

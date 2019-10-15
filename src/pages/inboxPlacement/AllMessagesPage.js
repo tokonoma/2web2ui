@@ -65,28 +65,24 @@ export const AllMessagesPage = (props) => {
           <h3>Diagnostics</h3>
         </Panel.Section>
         <Grid>
-          <Grid.Column md={7} >
+          <Grid.Column lg={7} md={12}>
             <div className={styles.Divider} >
               <h5 className={styles.Title}>Deliverability</h5>
-              <div className={styles.Delivery} >
-                <Grid className={styles.Panel}>
-                  <InfoBlock value={sent} label='Sent' columnProps={{ md: 3 }}/>
-                  <InfoBlock value={(placement.inbox_pct || 0) * sent} label='Inbox' columnProps={{ md: 3 }}/>
-                  <InfoBlock value={(placement.spam_pct || 0) * sent} label='Spam' columnProps={{ md: 3 }}/>
-                  <InfoBlock value={(placement.missing_pct || 0) * sent} label='Missing' columnProps={{ md: 3 }} />
-                </Grid>
-              </div>
-            </div>
-          </Grid.Column>
-          <Grid.Column md={5}>
-            <div className={styles.Divider} >
-              <h5 className={styles.Title}>Authentication</h5>
               <Grid className={styles.Panel}>
-                <InfoBlock value={formatPercent((authentication.spf_pct || 0) * 100)} label='SPF' columnProps={{ md: 4 }}/>
-                <InfoBlock value={formatPercent((authentication.dkim_pct || 0) * 100)} label='DKIM' columnProps={{ md: 4 }}/>
-                <InfoBlock value={formatPercent((authentication.dmarc_pct || 0) * 100)} label='DMARC' columnProps={{ md: 4 }}/>
+                <InfoBlock value={sent} label='Sent' columnProps={{ md: 3 }} className={styles.Deliverability}/>
+                <InfoBlock value={(placement.inbox_pct || 0) * sent} label='Inbox' columnProps={{ md: 3 }} className={styles.Deliverability}/>
+                <InfoBlock value={(placement.spam_pct || 0) * sent} label='Spam' columnProps={{ md: 3 }} className={styles.Deliverability}/>
+                <InfoBlock value={(placement.missing_pct || 0) * sent} label='Missing' columnProps={{ md: 3 }} className={styles.Deliverability}/>
               </Grid>
             </div>
+          </Grid.Column>
+          <Grid.Column lg={5} md={12}>
+            <h5 className={styles.Title}>Authentication</h5>
+            <Grid className={styles.Panel}>
+              <InfoBlock value={formatPercent((authentication.spf_pct || 0) * 100)} label='SPF' columnProps={{ md: 4 }} className={styles.Authentication}/>
+              <InfoBlock value={formatPercent((authentication.dkim_pct || 0) * 100)} label='DKIM' columnProps={{ md: 4 }} className={styles.Authentication}/>
+              <InfoBlock value={formatPercent((authentication.dmarc_pct || 0) * 100)} label='DMARC' columnProps={{ md: 4 }} className={styles.Authentication}/>
+            </Grid>
           </Grid.Column>
         </Grid>
       </Panel>

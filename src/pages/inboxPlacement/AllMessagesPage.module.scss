@@ -2,20 +2,27 @@
 
 .Divider {
   border-right: 1px solid color(gray, 8);
-  padding: 0 0 0 50px;
 }
 .Panel {
-  padding-bottom: 20px;
+  padding-bottom: 1rem;
 }
 
 .Title{
-  position: relative;
-  right: 50px;
   text-align: center;
-  padding: 20px 10px 10px 10px;
+  padding: rem(20) rem(20) 0 0;
 }
 
- .Delivery{
-   position: relative;
-   left: 20px;
+.Deliverability{
+  line-height: 2rem;
+  font-size: font-size(500);
+  font-weight: 500;
+  padding-left: rem(50);
+}
+
+.Authentication{
+  line-height: 2rem;
+  padding-left: rem(50);
+  font-weight: 500;
+  font-size: font-size(500);
+  @media screen and (min-width: breakpoint(medium)) { padding-left: rem(20); }
 }
