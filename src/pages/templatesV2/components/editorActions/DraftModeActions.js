@@ -13,7 +13,13 @@ import DeleteTemplate from './DeleteTemplate';
 import DeleteTemplateModal from './DeleteTemplateModal';
 
 const DraftModeActions = () => {
-  const { hasPublished, draft, createTemplate } = useEditorContext();
+  const {
+    hasPublished,
+    draft,
+    createTemplate,
+    showAlert,
+    content
+  } = useEditorContext();
 
   // State
   const [isPopoverOpen, setPopoverOpen] = useState(false);
@@ -99,7 +105,9 @@ const DraftModeActions = () => {
           open={isDuplicateModalOpen}
           onClose={handleModalClose}
           template={draft}
+          contentToDuplicate={content}
           createTemplate={createTemplate}
+          showAlert={showAlert}
         />
 
         <DeleteTemplateModal

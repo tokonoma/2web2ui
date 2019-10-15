@@ -6,10 +6,8 @@ import {
   TextField,
   Button
 } from '@sparkpost/matchbox';
-import { RedirectAndAlert } from 'src/components/globalAlert';
 import Loading from 'src/components/loading';
 import ButtonWrapper from 'src/components/buttonWrapper';
-import { routeNamespace } from '../../constants/routes';
 import styles from './DuplicateTemplateModal.module.scss';
 
 const DuplicateTemplateModal = (props) => {
@@ -17,8 +15,10 @@ const DuplicateTemplateModal = (props) => {
     open,
     onClose,
     template,
+    contentToDuplicate, // Separated out from the template itself - this is the WIP content such that the template can be duplicated without first saving
     createTemplate,
-    successCallback
+    successCallback,
+    showAlert
   } = props;
   const initialDraftName = (template && template.name) ? `${template.name} (COPY)` : '';
   const initialDraftId = (template && template.id) ? `${template.id}-copy` : '';
@@ -29,7 +29,6 @@ const DuplicateTemplateModal = (props) => {
   const [hasNameError, setNameError] = useState(false);
   const [hasIdError, setIdError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [hasSuccessRedirect, setSuccessRedirect] = useState(false);
 
   useEffect(() => {
     setDraftName(initialDraftName);
@@ -53,7 +52,7 @@ const DuplicateTemplateModal = (props) => {
       createTemplate({
         name: draftName,
         id: draftId,
-        content: template.content,
+        content: contentToDuplicate,
         options: template.options,
         shared_with_subaccounts: template.shared_with_subaccounts
       })
@@ -61,7 +60,12 @@ const DuplicateTemplateModal = (props) => {
           if (successCallback) {
             successCallback();
           } else {
-            setSuccessRedirect(true);
+            showAlert({
+              type: 'success',
+              message: 'Template duplicated.'
+            });
+
+            onClose();
           }
         })
         .finally(() => setIsLoading(false));
@@ -79,65 +83,53 @@ const DuplicateTemplateModal = (props) => {
   };
 
   return (
-    <>
-      {hasSuccessRedirect &&
-        <RedirectAndAlert
-          to={`/${routeNamespace}`}
-          alert={{
-            type: 'success',
-            message: 'Template duplicated'
-          }}
-        />
-      }
-
-      <Modal
-        open={open}
-        onClose={onClose}
-        showCloseButton={true}
+    <Modal
+      open={open}
+      onClose={onClose}
+      showCloseButton={true}
+    >
+      <Panel
+        accent
+        title="Duplicate Template"
+        sectioned
       >
-        <Panel
-          accent
-          title="Duplicate Template"
-          sectioned
-        >
-          {isLoading &&
-            <div className={styles.LoadingWrapper}>
-              <Loading className={styles.Loading}/>
-            </div>
-          }
+        {isLoading &&
+          <div className={styles.LoadingWrapper}>
+            <Loading className={styles.Loading}/>
+          </div>
+        }
 
-          {!isLoading &&
-            <form onSubmit={(e) => handleSubmit(e)}>
-              <TextField
-                id="template-name"
-                name="templateName"
-                label="Template Name"
-                required // not working as I would expect...
-                value={draftName}
-                error={hasNameError ? 'Please enter a template name.' : undefined}
-                onChange={handleNameChange}
-              />
+        {!isLoading &&
+          <form onSubmit={(e) => handleSubmit(e)}>
+            <TextField
+              id="template-name"
+              name="templateName"
+              label="Template Name"
+              required // not working as I would expect...
+              value={draftName}
+              error={hasNameError ? 'Please enter a template name.' : undefined}
+              onChange={handleNameChange}
+            />
 
-              <TextField
-                id="template-id"
-                name="templateId"
-                label="Template ID"
-                required // not working as I would expect...
-                value={draftId}
-                error={hasIdError ? 'Please enter a unique template ID.' : undefined}
-                onChange={handleIdChange}
-              />
+            <TextField
+              id="template-id"
+              name="templateId"
+              label="Template ID"
+              required // not working as I would expect...
+              value={draftId}
+              error={hasIdError ? 'Please enter a unique template ID.' : undefined}
+              onChange={handleIdChange}
+            />
 
-              <ButtonWrapper>
-                <Button color="orange" submit>
-                  Duplicate
-                </Button>
-              </ButtonWrapper>
-            </form>
-          }
-        </Panel>
-      </Modal>
-    </>
+            <ButtonWrapper>
+              <Button color="orange" submit>
+                Duplicate
+              </Button>
+            </ButtonWrapper>
+          </form>
+        }
+      </Panel>
+    </Modal>
   );
 };
 

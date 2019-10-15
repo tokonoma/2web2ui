@@ -189,7 +189,9 @@ export default class ListPage extends Component {
               onClose={() => this.setState({ showDuplicateModal: false })}
               createTemplate={this.props.createTemplate}
               template={this.state.templateToDuplicate}
+              contentToDuplicate={this.state.templateToDuplicate && this.state.templateToDuplicate.content}
               successCallback={this.handleDuplicateSuccess}
+              showAlert={this.props.showAlert}
             />
           </>
         )}
