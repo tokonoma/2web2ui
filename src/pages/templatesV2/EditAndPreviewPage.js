@@ -38,15 +38,13 @@ const EditAndPreviewPage = () => {
 
   const primaryArea = () => (
     <>
-      {isPublishedMode && (
+      {isPublishedMode ? (
         <div className={styles.Status}>
           <span>Published</span>
 
           <CheckCircle size={17} className={styles.GreenColor} />
         </div>
-      )}
-
-      {!isPublishedMode && (
+      ) : (
         <div className={styles.Status}>
           <span>Draft</span>
 
