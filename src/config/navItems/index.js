@@ -1,5 +1,15 @@
-import { Home, People, Code, List, NotificationsActive, Settings, BarChart } from '@sparkpost/matchbox-icons';
+/* eslint-disable max-lines */
+import {
+  Home,
+  People,
+  Code,
+  List,
+  NotificationsActive,
+  Settings,
+  BarChart
+} from '@sparkpost/matchbox-icons';
 import { hasGrants } from 'src/helpers/conditions';
+import { isAccountUiOptionSet } from 'src/helpers/conditions/account';
 import inboxPlacementNavItems from './inboxPlacement';
 
 export default [
@@ -67,6 +77,11 @@ export default [
       {
         label: 'Templates',
         to: '/templates'
+      },
+      {
+        label: 'Templates',
+        to: '/templatesV2',
+        condition: isAccountUiOptionSet('templatesV2')
       },
       {
         label: 'A/B Testing',
