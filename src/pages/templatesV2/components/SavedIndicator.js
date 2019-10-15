@@ -10,13 +10,11 @@ const SavedIndicator = (props) => {
     <span className={styles.SavedIndicator}>
       <ScreenReaderOnly>Template </ScreenReaderOnly>
 
-      {hasSaved && (
+      {hasSaved ? (
         <span className={styles.SavedIndicatorContent}>
           Saved
         </span>
-      )}
-
-      {!hasSaved && (
+      ) : (
         <span className={styles.SavedIndicatorContent}>
           <ScreenReaderOnly>has </ScreenReaderOnly>
 
