@@ -3,7 +3,7 @@
 exports[`Component: SsoLoginForm renders errors 1`] = `
 <Fragment>
   <Error
-    error="asplode"
+    error="asplode. Please contact login.issues@sparkpost.com for assistance."
   />
   <form>
     <Field

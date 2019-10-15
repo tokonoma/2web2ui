@@ -42,7 +42,7 @@ it('should verify tfa login on submit', () => {
 it('should throw a submission error when verifyAndLogin fails with 4xx error', () => {
   instance.props.verifyAndLogin.mockImplementation(() => Promise.reject({ response: { status: 400 }}));
   return instance.handleSubmit({ code: 'code' }).catch((err) => {
-    expect(err.errors.code).toEqual('The code is invalid');
+    expect(err.errors._error).toEqual('The code is invalid. Please contact login.issues@sparkpost.com for assistance.');
   });
 });
 

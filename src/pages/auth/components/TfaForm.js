@@ -5,25 +5,27 @@ import { required } from 'src/helpers/validation';
 import { TextFieldWrapper } from 'src/components';
 import { verifyAndLogin } from 'src/actions/tfa';
 
-import { Button, UnstyledLink } from '@sparkpost/matchbox';
+import { Button, Error, UnstyledLink } from '@sparkpost/matchbox';
 import { LINKS } from 'src/constants';
+import styles from './TfaForm.module.scss';
+
 
 export class TfaForm extends Component {
 
   handleSubmit = ({ code }) => {
-    const { enabled, ...authData } = this.props.tfa;
+    const { enabled: _enabled, ...authData } = this.props.tfa;
 
     return this.props.verifyAndLogin({ authData, code }).catch((err) => {
-      if (err.response.status === 400) {
+      if (err.response.status === 400 || err.response.status === 403) {
         throw new SubmissionError({
-          code: 'The code is invalid'
+          _error: 'The code is invalid. Please contact login.issues@sparkpost.com for assistance.'
         });
       }
     });
   }
 
-  render () {
-    const { tfaPending, pristine } = this.props;
+  render() {
+    const { tfaPending, pristine, error } = this.props;
 
     return (
       <div>
@@ -40,7 +42,7 @@ export class TfaForm extends Component {
             component={TextFieldWrapper}
             validate={required}
           />
-
+          {error && <Error wrapper='div' error={error} className={styles.TFASubmissionError}/>}
           <Button primary submit disabled={tfaPending || pristine}>
             {tfaPending ? 'Logging In' : 'Log In'}
           </Button>
@@ -50,7 +52,7 @@ export class TfaForm extends Component {
   }
 }
 
-function mapStateToProps ({ tfa }) {
+function mapStateToProps({ tfa }) {
   return {
     tfa,
     tfaPending: tfa.tfaPending,

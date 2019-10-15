@@ -13,7 +13,7 @@ export class SsoLoginForm extends React.Component {
 
     return (
       <React.Fragment>
-        {loginError && <Error error={loginError} />}
+        {loginError && <Error error={`${loginError}. Please contact login.issues@sparkpost.com for assistance.`} />}
         <form onSubmit={handleSubmit}>
           <Field
             autoFocus
