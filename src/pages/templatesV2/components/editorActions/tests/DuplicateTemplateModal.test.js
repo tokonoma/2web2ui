@@ -50,7 +50,7 @@ describe('DuplicateTemplateModal', () => {
     expect(wrapper.find('Modal').props().onClose).toEqual(mockFn);
   });
 
-  it('Renders the default value of the "templateName" `TextField` with the word `(COPY)` appended', () => {
+  it('renders the default value of the "templateName" `TextField` with the word `(COPY)` appended', () => {
     const exampleTemplate = {
       name: 'My Draft',
       id: 'my-draft'
@@ -60,7 +60,7 @@ describe('DuplicateTemplateModal', () => {
     expect(wrapper.find('[name="templateName"]').props().value).toEqual('My Draft (COPY)');
   });
 
-  it('Renders the default value of the "templateId" `TextField` with the word "-copy"', () => {
+  it('renders the default value of the "templateId" `TextField` with the word "-copy"', () => {
     const exampleTemplate = {
       name: 'My Draft',
       id: 'my-draft'
@@ -80,5 +80,50 @@ describe('DuplicateTemplateModal', () => {
 
     expect(wrapper.find('[name="templateName"]').props().error).toEqual('Please enter a template name.');
     expect(wrapper.find('[name="templateId"]').props().error).toEqual('Please enter a unique template ID.');
+  });
+
+  it('invokes the `createTemplate` prop on submit, shows an alert, and then invokes the `onClose` prop', () => {
+    const promise = Promise.resolve();
+    const mockCreateTemplate = jest.fn(() => promise);
+    const mockOnClose = jest.fn();
+    const mockShowAlert = jest.fn();
+    const mockContent = {
+      html: '<p>Some HTML.</p>'
+    };
+    const mockTemplate = {
+      name: 'My template',
+      id: 'my-template',
+      options: {
+        myOption: true
+      },
+      shared_with_subaccounts: false
+    };
+
+    const wrapper = subject({
+      onClose: mockOnClose,
+      showAlert: mockShowAlert,
+      createTemplate: mockCreateTemplate,
+      template: mockTemplate,
+      contentToDuplicate: mockContent
+    });
+
+    wrapper.find('form').simulate('submit', { preventDefault: jest.fn() });
+    expect(wrapper.find('Loading')).toExist();
+
+    expect(mockCreateTemplate).toHaveBeenCalledWith({
+      name: 'My template (COPY)',
+      id: 'my-template-copy',
+      content: mockContent,
+      options: mockTemplate.options,
+      shared_with_subaccounts: mockTemplate.shared_with_subaccounts
+    });
+
+    return promise.then(() => {
+      expect(mockOnClose).toHaveBeenCalled();
+      expect(mockShowAlert).toHaveBeenCalledWith({
+        type: 'success',
+        message: 'Template duplicated.'
+      });
+    });
   });
 });
