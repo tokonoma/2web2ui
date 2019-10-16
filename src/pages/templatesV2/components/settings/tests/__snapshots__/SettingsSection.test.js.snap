@@ -3,14 +3,8 @@
 exports[`SettingsSection renders form 1`] = `
 <Panel
   className="SettingsSection"
+  title="Template Settings"
 >
-  <Panel.Section
-    className="SettingsHeader"
-  >
-    <h2>
-      Template Settings
-    </h2>
-  </Panel.Section>
   <FormContainer />
 </Panel>
 `;

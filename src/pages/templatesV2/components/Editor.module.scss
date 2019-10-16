@@ -4,7 +4,8 @@
 .EditorWrapper {
   height: 90vh; // must match editor wrapper
   min-height: $phone-container-min-height;
-  padding: $phone-padding;
+  padding: $phone-padding 0;
+  background-color: #161616;
 
   :global(.ace_error) {
     background: linear-gradient(to right, #ff594d 5px, transparent 5px) !important;

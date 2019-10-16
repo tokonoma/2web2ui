@@ -1,22 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`EditSettings renders form 1`] = `
-<Grid
+<div
   className="EditSettings"
 >
-  <Grid.Column
-    lg={6}
-    md={12}
-    sm={12}
-  >
-    <SettingsSection />
-  </Grid.Column>
-  <Grid.Column
-    lg={6}
-    md={12}
-    sm={12}
-  >
-    <PreviewSection />
-  </Grid.Column>
-</Grid>
+  <SettingsSection />
+  <PreviewSection />
+</div>
 `;

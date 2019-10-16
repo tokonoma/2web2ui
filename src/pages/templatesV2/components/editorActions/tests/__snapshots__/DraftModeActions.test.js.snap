@@ -21,6 +21,7 @@ exports[`DraftModeActions renders draft actions 1`] = `
       right={true}
       trigger={
         <Button
+          aria-expanded="false"
           onClick={[Function]}
           size="default"
         >
@@ -38,7 +39,7 @@ exports[`DraftModeActions renders draft actions 1`] = `
           className="ActionItem"
           onClick={[Function]}
         />
-        <_default
+        <SaveDraft
           className="ActionItem"
           onClick={[Function]}
         />
@@ -52,10 +53,24 @@ exports[`DraftModeActions renders draft actions 1`] = `
           className="ActionItem"
           onClick={[Function]}
         />
+        <DeleteTemplate
+          className="ActionItem"
+          onClick={[Function]}
+        />
       </div>
     </Popover>
     <DuplicateTemplateModal
       onClose={[Function]}
+      open={false}
+      template={
+        Object {
+          "id": "a-random-id-123",
+          "subaccount_id": "some-subaccount-id",
+        }
+      }
+    />
+    <DeleteTemplateModal
+      onCancel={[Function]}
       open={false}
     />
     <SaveAndPublishConfirmationModal

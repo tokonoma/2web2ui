@@ -2,11 +2,16 @@ import React from 'react';
 import classNames from 'classnames';
 import { UnstyledLink } from '@sparkpost/matchbox';
 import links from '../constants/editNavigationLinks';
+import SavedIndicator from './SavedIndicator';
 import useEditorContext from '../hooks/useEditorContext';
 import styles from './EditNavigation.module.scss';
 
 const EditNavigation = ({ primaryArea }) => {
-  const { currentNavigationKey, setNavigation } = useEditorContext();
+  const {
+    currentNavigationKey,
+    setNavigation,
+    hasSaved
+  } = useEditorContext();
 
   return (
     <nav className={styles.Navigation}>
@@ -26,6 +31,8 @@ const EditNavigation = ({ primaryArea }) => {
         ))}
       </div>
       <div className={styles.NavigationPrimaryArea}>
+        <SavedIndicator hasSaved={hasSaved}/>
+
         {primaryArea}
       </div>
     </nav>

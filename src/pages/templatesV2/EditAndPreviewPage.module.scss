@@ -1,15 +1,22 @@
 @import '~@sparkpost/matchbox/src/styles/config.scss';
 
 .EditorNav {
-  position: fixed;
+  position: sticky;
   width: 100%;
-  top: 50;
-  z-index: 100;
-  border-bottom: 2px solid color(gray, 7);
+  top: rem(56); // Note `top` offset by the exact height of the navigation above found in `FullPage.module.scss`
+  z-index: 50;
+
+  @media (min-width: breakpoint(small)) {
+    position: fixed;
+  }
 }
 
 .MainContent {
-  margin-top: 60px;
+  margin-top: 0;
+
+  @media (min-width: breakpoint(small)) {
+    margin-top: 70px;
+  }
 }
 
 .GreenColor {

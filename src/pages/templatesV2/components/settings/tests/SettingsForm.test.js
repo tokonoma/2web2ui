@@ -1,9 +1,7 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 import every from 'lodash/every';
-import SettingsForm from '../Form';
-
-jest.mock('../../DeleteTemplate');
+import SettingsForm from '../SettingsForm';
 
 describe('SettingsForm', () => {
   const subject = (props) => {
@@ -12,6 +10,9 @@ describe('SettingsForm', () => {
         { domain: 'test.com' },
         { domain: 'verified.com' }
       ],
+      draft: {
+        id: 'fake-id'
+      },
       domainsLoading: false,
       hasSubaccounts: false,
       canViewSubaccount: false,
@@ -45,17 +46,21 @@ describe('SettingsForm', () => {
       .toEqual('The selected subaccount does not have any verified sending domains.');
   });
 
-  it('renders id field disabled', () => {
-    expect(subject().find('[name="id"]').prop('disabled')).toBe(true);
+  it('renders id field disabled and leverages the CopyField component', () => {
+    const wrapper = subject();
+
+    expect(wrapper.find('[name="id"]').prop('disabled')).toBe(true);
+    expect(wrapper.find('CopyField')).toEqual(wrapper.find('[name="id"]'));
   });
 
   describe('Published version', () => {
     it('renders with fields disabled', () => {
       const wrapper = subject({ hasSubaccounts: true, canViewSubaccount: true, isPublishedMode: true });
       const fieldProps = wrapper.find('Field').map((field) => field.prop('disabled'));
-      expect(fieldProps.length).toEqual(10);
+      expect(fieldProps.length).toEqual(9);
       expect(every(fieldProps)).toBe(true);
       expect(wrapper.find('SubaccountSection').prop('disabled')).toBe(true);
+      expect(wrapper.find('[name="id"]')).toHaveProp('disabled', true);
     });
 
     it('renders settings intro when draft does not exist', () => {
@@ -124,20 +129,6 @@ describe('SettingsForm', () => {
       });
       wrapper.find('form').simulate('submit');
       expect(mockUpdateDraft).toHaveBeenCalledWith({ id: 'foo' }, 101);
-    });
-  });
-
-  describe('Delete Template', () => {
-    it('renders delete template', () => {
-      expect(subject().exists('DeleteTemplate')).toBe(true);
-    });
-
-    it('shows alert after delete and redirects', async () => {
-      const mockAlert = jest.fn();
-      const mockHistory = { push: jest.fn() };
-      await subject({ showAlert: mockAlert, history: mockHistory }).find('DeleteTemplate').prop('afterDelete')();
-      expect(mockAlert).toHaveBeenCalledWith({ type: 'success', message: 'Template deleted.' });
-      expect(mockHistory.push).toHaveBeenCalledWith('/templatesv2');
     });
   });
 });

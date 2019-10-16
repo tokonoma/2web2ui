@@ -1,11 +1,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import useEditorContext from '../../../hooks/useEditorContext';
-import useRouter from 'src/hooks/useRouter';
 import SaveAndPublishConfirmationModal from '../SaveAndPublishConfirmationModal';
 
 jest.mock('../../../hooks/useEditorContext');
-jest.mock('src/hooks/useRouter');
 
 describe('SaveAndPublishConfirmationModal', () => {
   const subject = (editorState, history, props) => {
@@ -16,12 +14,6 @@ describe('SaveAndPublishConfirmationModal', () => {
       isDraftPublishing: false,
       publishDraft: jest.fn(),
       ...editorState
-    });
-    useRouter.mockReturnValue({
-      history: {
-        push: jest.fn(),
-        ...history
-      }
     });
 
     return shallow(
@@ -48,7 +40,7 @@ describe('SaveAndPublishConfirmationModal', () => {
   it('publishes content upon confirmation', () => {
     const publishDraft = jest.fn(() => Promise.resolve());
     const draft = { id: 'foo', content: { text: 'foo text', html: '<h1>foo html</h1>' }};
-    const wrapper = subject({ publishDraft, draft });
+    const wrapper = subject({ publishDraft, setHasSaved: jest.fn(), draft });
     wrapper.find('ConfirmationModal').prop('onConfirm')(); //invoke attached func
     expect(publishDraft).toHaveBeenCalledWith(draft, undefined);
   });
@@ -56,7 +48,7 @@ describe('SaveAndPublishConfirmationModal', () => {
   it('publishes content with subaccount upon confirmation', () => {
     const publishDraft = jest.fn(() => Promise.resolve());
     const draft = { id: 'foo', content: { text: 'foo text', html: '<h1>foo html</h1>' }, subaccount_id: 101 };
-    const wrapper = subject({ publishDraft, draft });
+    const wrapper = subject({ publishDraft, setHasSaved: jest.fn(), draft });
     wrapper.find('ConfirmationModal').prop('onConfirm')(); //invoke attached func
     expect(publishDraft).toHaveBeenCalledWith(draft, 101);
   });
@@ -64,28 +56,26 @@ describe('SaveAndPublishConfirmationModal', () => {
   it('redirects to published path upon publishing', async () => {
     const promise = Promise.resolve();
     const publishDraft = jest.fn(() => promise);
-    const wrapper = subject({ publishDraft });
-    const { history } = useRouter();
+    const wrapper = subject({ publishDraft, setHasSaved: jest.fn() });
 
     wrapper.find('ConfirmationModal').simulate('confirm');
 
     return promise.then(() => {
       expect(publishDraft).toHaveBeenCalled();
-      expect(history.push).toHaveBeenCalledWith('/templatesv2/edit/foo/published/content');
+      expect(wrapper.find('RedirectAndAlert')).toHaveProp('to', '/templatesv2/edit/foo/published/content');
     });
   });
 
   it('redirects to published path with subaccount upon publishing', async () => {
     const promise = Promise.resolve();
     const publishDraft = jest.fn(() => promise);
-    const wrapper = subject({ publishDraft, draft: { id: 'foo', subaccount_id: 101 }});
-    const { history } = useRouter();
+    const wrapper = subject({ publishDraft, setHasSaved: jest.fn(), draft: { id: 'foo', subaccount_id: 101 }});
 
     wrapper.find('ConfirmationModal').simulate('confirm');
 
     return promise.then(() => {
       expect(publishDraft).toHaveBeenCalled();
-      expect(history.push).toHaveBeenCalledWith('/templatesv2/edit/foo/published/content?subaccount=101');
+      expect(wrapper.find('RedirectAndAlert')).toHaveProp('to', '/templatesv2/edit/foo/published/content?subaccount=101');
     });
   });
 });

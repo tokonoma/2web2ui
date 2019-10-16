@@ -1,16 +1,15 @@
+/* eslint-disable max-lines */
 import React from 'react';
 import { Field } from 'redux-form';
-
 import { Button, Panel } from '@sparkpost/matchbox';
 import ToggleBlock from 'src/components/toggleBlock/ToggleBlock';
 import SubaccountSection from 'src/components/subaccountSection';
 import { TextFieldWrapper } from 'src/components';
 import FromEmailWrapper from '../FromEmailWrapper';
+import CopyField from 'src/components/copyField/CopyField';
 import { required } from 'src/helpers/validation';
-import styles from './Form.module.scss';
+import styles from './SettingsForm.module.scss';
 import { emailOrSubstitution } from '../validation';
-import DeleteTemplate from '../DeleteTemplate';
-import { routeNamespace } from '../../constants/routes';
 
 export default class SettingsForm extends React.Component {
   updateSettings = (values) => {
@@ -23,12 +22,6 @@ export default class SettingsForm extends React.Component {
 
   parseToggle = (value) => !!value;
 
-  onDelete = () => {
-    const { showAlert, history } = this.props;
-    history.push(`/${routeNamespace}`);
-    showAlert({ message: 'Template deleted.', type: 'success' });
-  };
-
   renderPublishedIntro = () => {
     const { hasDraft } = this.props;
     return (<Panel.Section>
@@ -36,7 +29,19 @@ export default class SettingsForm extends React.Component {
     </Panel.Section>);
   }
   render() {
-    const { handleSubmit, domainsLoading, domains, subaccountId, submitting, pristine, valid, hasSubaccounts, canViewSubaccount, isPublishedMode } = this.props;
+    const {
+      handleSubmit,
+      domainsLoading,
+      domains,
+      subaccountId,
+      submitting,
+      pristine,
+      valid,
+      hasSubaccounts,
+      canViewSubaccount,
+      isPublishedMode,
+      draft
+    } = this.props;
     const canViewSubaccountSection = hasSubaccounts && canViewSubaccount;
     const fromEmailHelpText = !domainsLoading && !domains.length ? (subaccountId ? 'The selected subaccount does not have any verified sending domains.' : 'You do not have any verified sending domains to use.') : null;
 
@@ -52,10 +57,11 @@ export default class SettingsForm extends React.Component {
             validate={required}
           />
 
-          <Field
+          <CopyField
             name='id'
-            component={TextFieldWrapper}
+            id='template-id-field'
             label='Template ID'
+            value={draft.id}
             helpText={'A Unique ID for your template, we\'ll fill this in for you.'}
             disabled={true}
           />
@@ -144,8 +150,6 @@ export default class SettingsForm extends React.Component {
           >
             Update Settings
           </Button>
-
-          <DeleteTemplate className={styles.DeleteButton} afterDelete={this.onDelete}>Delete Template</DeleteTemplate>
         </Panel.Section>
       </form>
     </>);

@@ -21,18 +21,54 @@ describe('SaveDraft', () => {
   });
 
   it('saves draft upon click', () => {
-    const updateDraft = jest.fn();
+    const promise = Promise.resolve();
+    const updateDraft = jest.fn(() => promise);
+    const setHasSaved = jest.fn();
+    const showAlert = jest.fn();
     const content = { text: 'foo text', html: '<h1>foo html</h1>' };
-    const wrapper = subject({ updateDraft, content });
+    const wrapper = subject({
+      updateDraft,
+      content,
+      setHasSaved,
+      showAlert
+    });
+
     wrapper.find('UnstyledLink').simulate('click');
-    expect(updateDraft).toHaveBeenCalledWith({ id: 'foo', content }, undefined);
+
+    return promise.then(() => {
+      expect(updateDraft).toHaveBeenCalledWith({ id: 'foo', content }, undefined);
+      expect(setHasSaved).toHaveBeenCalled();
+      expect(showAlert).toHaveBeenCalled();
+    });
   });
 
   it('saves draft (with subaccount) upon click', () => {
-    const updateDraft = jest.fn();
-    const content = { text: 'foo text', html: '<h1>foo html</h1>' };
-    const wrapper = subject({ updateDraft, content, draft: { id: 'foo', subaccount_id: 1001 }});
+    const promise = Promise.resolve();
+    const updateDraft = jest.fn(() => promise);
+    const setHasSaved = jest.fn();
+    const showAlert = jest.fn();
+    const content = {
+      text: 'foo text',
+      html: '<h1>foo html</h1>'
+    };
+    const draft = {
+      id: 'foo',
+      subaccount_id: 1001
+    };
+    const wrapper = subject({
+      draft,
+      updateDraft,
+      content,
+      setHasSaved,
+      showAlert
+    });
+
     wrapper.find('UnstyledLink').simulate('click');
-    expect(updateDraft).toHaveBeenCalledWith({ id: 'foo', content }, 1001);
+
+    return promise.then(() => {
+      expect(updateDraft).toHaveBeenCalledWith({ id: 'foo', content }, 1001);
+      expect(setHasSaved).toHaveBeenCalled();
+      expect(showAlert).toHaveBeenCalled();
+    });
   });
 });

@@ -9,20 +9,38 @@ import styles from './Actions.module.scss';
 import useEditorContext from '../../hooks/useEditorContext';
 import DuplicateTemplate from './DuplicateTemplate';
 import DuplicateTemplateModal from './DuplicateTemplateModal';
+import DeleteTemplate from './DeleteTemplate';
+import DeleteTemplateModal from './DeleteTemplateModal';
 
 const DraftModeActions = () => {
-  const { hasPublished } = useEditorContext();
+  const {
+    hasPublished,
+    draft,
+    createTemplate,
+    showAlert,
+    content
+  } = useEditorContext();
+
+  // State
   const [isPopoverOpen, setPopoverOpen] = useState(false);
   const [isDuplicateModalOpen, setDuplicateModalOpen] = useState(false);
+  const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
   const [isSaveAndPublishModalOpen, setSaveAndPublishModalOpen] = useState(false);
 
+  // Methods
   const handleModalClose = () => {
     setDuplicateModalOpen(false);
+    setDeleteModalOpen(false);
     setSaveAndPublishModalOpen(false);
   };
 
   const handleDuplicateDraftClick = () => {
     setDuplicateModalOpen(true);
+    setPopoverOpen(false);
+  };
+
+  const handleDeleteTemplateClick = () => {
+    setDeleteModalOpen(true);
     setPopoverOpen(false);
   };
 
@@ -46,7 +64,10 @@ const DraftModeActions = () => {
           open={isPopoverOpen}
           onClose={() => setPopoverOpen(false)}
           trigger={
-            <Button onClick={() => setPopoverOpen(true)}>
+            <Button
+              onClick={() => setPopoverOpen(!isPopoverOpen)}
+              aria-expanded={isPopoverOpen ? 'true' : 'false'}
+            >
               <ArrowDropDown/>
 
               <ScreenReaderOnly>Open Menu</ScreenReaderOnly>
@@ -72,12 +93,26 @@ const DraftModeActions = () => {
               className={styles.ActionItem}
               onClick={handleDuplicateDraftClick}
             />
+
+            <DeleteTemplate
+              className={styles.ActionItem}
+              onClick={handleDeleteTemplateClick}
+            />
           </div>
         </Popover>
 
         <DuplicateTemplateModal
           open={isDuplicateModalOpen}
           onClose={handleModalClose}
+          template={draft}
+          contentToDuplicate={content}
+          createTemplate={createTemplate}
+          showAlert={showAlert}
+        />
+
+        <DeleteTemplateModal
+          open={isDeleteModalOpen}
+          onCancel={handleModalClose}
         />
 
         <SaveAndPublishConfirmationModal

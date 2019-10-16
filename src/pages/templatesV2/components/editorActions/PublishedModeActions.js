@@ -1,16 +1,47 @@
-import React from 'react';
-import { Button, Popover } from '@sparkpost/matchbox';
+import React, { useState } from 'react';
+import { Button, Popover, ScreenReaderOnly } from '@sparkpost/matchbox';
 import { ArrowDropDown, FileEdit } from '@sparkpost/matchbox-icons';
 import PageLink from 'src/components/pageLink';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
 import { routeNamespace } from '../../constants/routes';
 import styles from './Actions.module.scss';
 import useEditorContext from '../../hooks/useEditorContext';
+import DeleteTemplate from './DeleteTemplate';
+import DeleteTemplateModal from './DeleteTemplateModal';
+import DuplicateTemplate from './DuplicateTemplate';
+import DuplicateTemplateModal from './DuplicateTemplateModal';
 
 const PublishedModeActions = () => {
-  const { hasDraft, draft } = useEditorContext();
+  const {
+    hasDraft,
+    draft,
+    createTemplate,
+    showAlert,
+    content
+  } = useEditorContext();
   const draftText = hasDraft ? 'Edit Draft' : 'Save as Draft';
   const editDraftTo = `/${routeNamespace}/edit/${draft.id}/draft/content${setSubaccountQuery(draft.subaccount_id)}`;
+
+  // State
+  const [isPopoverOpen, setPopoverOpen] = useState(false);
+  const [isDuplicateModalOpen, setDuplicateModalOpen] = useState(false);
+  const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
+
+  // Methods
+  const handleModalClose = () => {
+    setDuplicateModalOpen(false);
+    setDeleteModalOpen(false);
+  };
+
+  const handleDeleteTemplateClick = () => {
+    setDeleteModalOpen(true);
+    setPopoverOpen(false);
+  };
+
+  const handleDuplicateDraftClick = () => {
+    setDuplicateModalOpen(true);
+    setPopoverOpen(false);
+  };
 
   return (
     <Button.Group>
@@ -21,7 +52,18 @@ const PublishedModeActions = () => {
       <div className={styles.Actions}>
         <Popover
           left={true}
-          trigger={<Button><ArrowDropDown/></Button>}
+          open={isPopoverOpen}
+          onClose={() => setPopoverOpen(false)}
+          trigger={
+            <Button
+              onClick={() => setPopoverOpen(!isPopoverOpen)}
+              aria-expanded={isPopoverOpen ? 'true' : 'false'}
+            >
+              <ArrowDropDown/>
+
+              <ScreenReaderOnly>Open Menu</ScreenReaderOnly>
+            </Button>
+          }
         >
           <div className={styles.ActionsBody}>
             <div className={styles.ActionItem}>
@@ -31,8 +73,34 @@ const PublishedModeActions = () => {
                 {draftText}
               </PageLink>
             </div>
+
+            <hr className={styles.Divider}/>
+
+            <DuplicateTemplate
+              className={styles.ActionItem}
+              onClick={handleDuplicateDraftClick}
+            />
+
+            <DeleteTemplate
+              className={styles.ActionItem}
+              onClick={handleDeleteTemplateClick}
+            />
           </div>
         </Popover>
+
+        <DuplicateTemplateModal
+          open={isDuplicateModalOpen}
+          onClose={handleModalClose}
+          template={draft}
+          contentToDuplicate={content}
+          createTemplate={createTemplate}
+          showAlert={showAlert}
+        />
+
+        <DeleteTemplateModal
+          open={isDeleteModalOpen}
+          onCancel={handleModalClose}
+        />
       </div>
     </Button.Group>
   );

@@ -35,4 +35,16 @@ describe('EditNavigation', () => {
 
     expect(setNavigation).toHaveBeenCalledWith('settings');
   });
+
+  it('renders a "Saved" when the editor state `hasSaved` is `true`', () => {
+    const wrapper = subject({ editorState: { hasSaved: true }});
+
+    expect(wrapper.find('SavedIndicator')).toHaveProp('hasSaved', true);
+  });
+
+  it('renders "Unsaved Changes" when the editor state `hasSaved` is `false`', () => {
+    const wrapper = subject({ editorState: { hasSaved: false }});
+
+    expect(wrapper.find('SavedIndicator')).toHaveProp('hasSaved', false);
+  });
 });
