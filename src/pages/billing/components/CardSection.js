@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Panel } from '@sparkpost/matchbox';
 import CardSummary from './CardSummary';
 import PaymentForm from '../forms/fields/PaymentForm';
@@ -10,11 +10,12 @@ const CardSection = ({
   countries,
   selectedPlan,
   account,
-  useSavedCC,
   submitting,
-  handleCardToggle,
   canUpdateBillingInfo
 }) => {
+  const [useSavedCC, setUseSavedCC] = useState(true);
+
+  const handleCardToggle = () => setUseSavedCC(!useSavedCC);
 
   if (selectedPlan.isFree) {
     return null; // CC not required on free plans

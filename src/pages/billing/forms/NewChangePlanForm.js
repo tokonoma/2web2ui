@@ -4,32 +4,39 @@ import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import qs from 'query-string';
 import _ from 'lodash';
-
 import PlanSelectSection, { SelectedPlan } from '../components/PlanSelect';
 import CurrentPlanSection from '../components/CurrentPlanSection';
 import useRouter from 'src/hooks/useRouter';
 import SubmitSection from '../components/SubmitSection';
-
+import CardSection from '../components/CardSection';
+import { isAws } from 'src/helpers/conditions/account';
+import { not } from 'src/helpers/conditions';
+import AccessControl from 'src/components/auth/AccessControl';
 //Actions
 import { getBillingInfo } from 'src/actions/account';
 import FeatureChangeSection from '../components/FeatureChangeSection';
 import { FeatureChangeContextProvider } from '../context/FeatureChangeContext';
 import { getBillingCountries, getBundles, verifyPromoCode, clearPromoCode } from 'src/actions/billing';
-
 //Selectors
-import { selectTieredVisibleBundles, selectAvailableBundles, currentPlanSelector, getPromoCodeObject } from 'src/selectors/accountBillingInfo';
+import { selectTieredVisibleBundles, selectAvailableBundles, currentPlanSelector, canUpdateBillingInfoSelector, getPromoCodeObject, selectAccountBilling } from 'src/selectors/accountBillingInfo';
 import { changePlanInitialValues } from 'src/selectors/accountBillingForms';
+import { selectCondition } from 'src/selectors/accessConditionState';
+
 import { Loading } from 'src/components/loading/Loading';
 import styles from './NewChangePlanForm.module.scss';
+
 
 const FORMNAME = 'changePlan';
 
 export const ChangePlanForm = ({
   //Redux Props
+  account,
   bundles,
+  billing,
   currentPlan,
   loading,
   allBundles,
+  canUpdateBillingInfo,
   //Redux Actions
   getBillingInfo,
   getBillingCountries,
@@ -37,12 +44,7 @@ export const ChangePlanForm = ({
   promoCodeObj,
   clearPromoCode,
   getBundles
-
-  //redux-form
-  //handleSubmit
-
 }) => {
-
   useEffect(() => { getBillingCountries(); }, [getBillingCountries]);
   useEffect(() => { getBillingInfo(); }, [getBillingInfo]);
   const gotBundles = useRef(false);
@@ -50,6 +52,7 @@ export const ChangePlanForm = ({
 
   const { requestParams: { code, promo } = {}, updateRoute } = useRouter();
   const [selectedBundle, selectBundle] = useState();
+  const { countries } = billing;
   const onSelect = (plan) => {
     if (!plan) {
       updateRoute({});
@@ -76,9 +79,7 @@ export const ChangePlanForm = ({
 
   //Applies promo code if in query param
   useEffect(() => {
-    if (promo && selectedBundle) {
-      applyPromoCode(promo);
-    }
+    if (promo && selectedBundle) { applyPromoCode(promo); }
   },[applyPromoCode, promo, selectedBundle, verifyPromoCode]);
 
   if (loading) {
@@ -94,7 +95,8 @@ export const ChangePlanForm = ({
         <div className={styles.MainContent}>
           {
             isPlanSelected
-              ? <SelectedPlan
+              ? <>
+              <SelectedPlan
                 bundle={selectedBundle}
                 onChange={onSelect}
                 promoCodeObj = {promoCodeObj}
@@ -105,19 +107,25 @@ export const ChangePlanForm = ({
                   }
                 }
               />
+              <FeatureChangeContextProvider selectedBundle={selectedBundle}>
+                <FeatureChangeSection/>
+                <SubmitSection />
+              </FeatureChangeContextProvider>
+               <AccessControl condition={not(isAws)}>
+                 <CardSection
+                   account={account}
+                   countries={countries}
+                   selectedPlan={selectedBundle}
+                   canUpdateBillingInfo={canUpdateBillingInfo}
+                   submitting={true}
+                 />
+               </AccessControl>
+               </>
               : <PlanSelectSection
                 onSelect={onSelect}
                 bundles={bundles}
                 currentPlan={currentPlan}
               />
-          }
-          {
-            isPlanSelected && (
-              <FeatureChangeContextProvider selectedBundle={selectedBundle}>
-                <FeatureChangeSection/>
-                <SubmitSection />
-              </FeatureChangeContextProvider>
-            )
           }
         </div>
       </div>
@@ -127,11 +135,16 @@ export const ChangePlanForm = ({
 
 const mapStateToProps = (state, props) => {
   const { code: planCode, promo: promoCode } = qs.parse(props.location.search);
+  const { account } = selectAccountBilling(state);
   return {
+    account,
     bundles: selectTieredVisibleBundles(state),
     allBundles: selectAvailableBundles(state),
     initialValues: changePlanInitialValues(state, { planCode, promoCode }),
+    billing: state.billing,
+    canUpdateBillingInfo: canUpdateBillingInfoSelector(state),
     currentPlan: currentPlanSelector(state),
+    isAws: selectCondition(isAws)(state),
     promoCodeObj: getPromoCodeObject(state)
   };
 };
