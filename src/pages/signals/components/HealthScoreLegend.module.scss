@@ -12,12 +12,12 @@
 
 .danger, .warning, .good {
   position: relative;
-  height: 10px;
+  height: rem(10);
 }
 
 .Desc {
   position: relative;
-  top: 13px;
+  top: rem(12);
 
   font-size: font-size(200);
   line-height: 1em;
