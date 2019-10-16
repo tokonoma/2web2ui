@@ -8,10 +8,9 @@ const SaveDraft = (props) => {
   const {
     draft,
     content,
-    updateDraft,
+    updateDraftV2,
     showAlert,
     setHasSaved,
-    setTestDataV2,
     testData
   } = useEditorContext();
 
@@ -20,17 +19,15 @@ const SaveDraft = (props) => {
       onClick();
     }
 
-    updateDraft({ id: draft.id, content }, draft.subaccount_id)
+    updateDraftV2({
+      id: draft.id,
+      content,
+      testData
+    }, draft.subaccount_id)
       .then(() => {
         showAlert({
           type: 'success',
           message: 'Draft saved'
-        });
-
-        setTestDataV2({
-          id: draft.id,
-          data: testData,
-          mode: 'draft'
         });
 
         setHasSaved(true);

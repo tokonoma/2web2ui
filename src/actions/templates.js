@@ -165,7 +165,11 @@ export function updateV2(data, subaccountId, params = {}) {
   const { id, testData, content, ...formData } = data;
 
   return (dispatch) => {
-    dispatch(setTestDataV2({ id, mode: 'draft', data: testData }));
+    dispatch(setTestDataV2({
+      id,
+      mode: 'draft',
+      data: testData
+    }));
 
     return dispatch(sparkpostApiRequest({
       type: 'UPDATE_TEMPLATE',
