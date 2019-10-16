@@ -10,7 +10,9 @@ const SaveDraft = (props) => {
     content,
     updateDraft,
     showAlert,
-    setHasSaved
+    setHasSaved,
+    setTestDataV2,
+    testData
   } = useEditorContext();
 
   const handleClick = useCallback(() => {
@@ -23,6 +25,12 @@ const SaveDraft = (props) => {
         showAlert({
           type: 'success',
           message: 'Draft saved'
+        });
+
+        setTestDataV2({
+          id: draft.id,
+          data: testData,
+          mode: 'draft'
         });
 
         setHasSaved(true);

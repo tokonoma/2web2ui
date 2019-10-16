@@ -15,11 +15,10 @@ export default class CreatePage extends Component {
 
   handleCreate = (values) => {
     const {
-      create,
+      createTemplateV2,
       history,
       subaccountId,
-      showAlert,
-      setTestDataV2
+      showAlert
     } = this.props;
     const formData = {
       ...values,
@@ -34,13 +33,11 @@ export default class CreatePage extends Component {
       substitution_data: {},
       metadata: {}
     };
-    create(formData)
+    createTemplateV2({
+      ...formData,
+      testData: testDataBase
+    })
       .then(() => {
-        setTestDataV2({
-          id: templateId,
-          data: testDataBase
-        });
-
         showAlert({ type: 'success', message: 'Template Created.' });
         history.push(`/${routeNamespace}/edit/${templateId}/draft/content${setSubaccountQuery(subaccountId)}`);
       });

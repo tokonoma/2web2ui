@@ -77,11 +77,46 @@ export function getPublishedAndPreview(id, subaccountId) {
   };
 }
 
+// TODO: Remove once old implementation no longer exists
 export function create(data) {
   const { id, testData, assignTo, subaccount, content, ...formData } = data;
 
   return (dispatch) => {
     dispatch(setTestData({ id, mode: 'draft', data: testData }));
+
+    return dispatch(sparkpostApiRequest({
+      type: 'CREATE_TEMPLATE',
+      meta: {
+        method: 'POST',
+        url: '/v1/templates',
+        headers: setSubaccountHeader(subaccount),
+        data: {
+          ...formData,
+          id,
+          content: shapeContent(content),
+          shared_with_subaccounts: assignTo === 'shared'
+        }
+      }
+    }));
+  };
+}
+
+export function createV2(data) {
+  const {
+    id,
+    testData,
+    assignTo,
+    subaccount,
+    content,
+    ...formData
+  } = data;
+
+  return (dispatch) => {
+    setTestDataV2({
+      id,
+      mode: 'draft',
+      data: testData
+    });
 
     return dispatch(sparkpostApiRequest({
       type: 'CREATE_TEMPLATE',
@@ -216,6 +251,21 @@ export function deleteTemplate(id, subaccountId) {
   });
 }
 
+export function deleteTemplateV2({ id, subaccountId }) {
+  return (dispatch) => {
+    dispatch(deleteTestDataV2({ id }));
+
+    return dispatch(sparkpostApiRequest({
+      type: 'DELETE_TEMPLATE',
+      meta: {
+        method: 'DELETE',
+        url: `/v1/templates/${id}`,
+        headers: setSubaccountHeader(subaccountId)
+      }
+    }));
+  };
+}
+
 export function setTestDataV2({ data, id, mode }) {
   return (dispatch, getState) => {
     const username = getState().currentUser.username;
@@ -225,11 +275,24 @@ export function setTestDataV2({ data, id, mode }) {
   };
 }
 
+export function deleteTestDataV2({ id }) {
+  return (dispatch, getState) => {
+    const username = getState().currentUser.username;
+    const deleteItems = () => {
+      window.localStorage.removeItem(getTestDataKey({ id, username, mode: 'draft' }));
+      window.localStorage.removeItem(getTestDataKey({ id, username, mode: 'published' }));
+    };
+
+    return deleteItems();
+  };
+}
+
 // TODO: Remove after rollout of V2
 export function setTestData({ data, id, mode }) {
   return (dispatch, getState) => {
     const username = getState().currentUser.username;
     const testData = typeof data === 'object' ? JSON.stringify(data) : data;
+
     return localforage.setItem(getTestDataKey({ id, username, mode }), testData).then(() => dispatch({ type: 'SET_TEMPLATE_TEST_DATA' }));
   };
 }

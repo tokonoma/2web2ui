@@ -2,8 +2,11 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { formValueSelector, reduxForm } from 'redux-form';
 import _ from 'lodash';
-// Actions
-import { create, getDraft, setTestDataV2 } from 'src/actions/templates';
+import {
+  createV2 as createTemplateV2,
+  getDraft,
+  setTestDataV2
+} from 'src/actions/templates';
 import { createSnippet } from 'src/actions/snippets';
 import { showAlert } from 'src/actions/globalAlert';
 import { list as listDomains } from 'src/actions/sendingDomains';
@@ -31,7 +34,7 @@ const formOptions = {
 };
 
 export default withRouter(connect(mapStateToProps, {
-  create,
+  createTemplateV2,
   createSnippet,
   setTestDataV2,
   getDraft,

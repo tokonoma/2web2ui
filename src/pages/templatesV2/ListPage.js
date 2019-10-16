@@ -24,13 +24,18 @@ export default class ListPage extends Component {
   }
 
   deleteTemplate = () => {
-    const { deleteTemplate, listTemplates, showAlert } = this.props;
-
+    const {
+      deleteTemplateV2,
+      listTemplates,
+      showAlert
+    } = this.props;
     const { id, name } = this.state.templateToDelete;
-    return deleteTemplate(id)
+
+    return deleteTemplateV2({ id })
       .then(() => {
         showAlert({ type: 'success', message: `Template ${name} deleted` });
         this.toggleDeleteModal();
+
         return listTemplates();
       });
   };

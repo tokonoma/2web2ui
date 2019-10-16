@@ -16,7 +16,7 @@ const DuplicateTemplateModal = (props) => {
     onClose,
     template,
     contentToDuplicate, // Separated out from the template itself - this is the WIP content such that the template can be duplicated without first saving
-    createTemplate,
+    createTemplateV2,
     successCallback,
     showAlert
   } = props;
@@ -49,7 +49,7 @@ const DuplicateTemplateModal = (props) => {
     if (draftName.length && draftId.length) {
       setIsLoading(true);
 
-      createTemplate({
+      createTemplateV2({
         name: draftName,
         id: draftId,
         content: contentToDuplicate,

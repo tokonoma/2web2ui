@@ -28,7 +28,8 @@ const SaveAndPublishConfirmationModal = (props) => {
       .then(() => {
         setTestDataV2({
           id: draft.id,
-          data: testData
+          data: testData,
+          mode: 'published'
         });
         setHasSaved(true);
         setSuccessRedirect(true);

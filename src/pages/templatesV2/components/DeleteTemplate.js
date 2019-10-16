@@ -5,8 +5,7 @@ import { DeleteModal } from 'src/components';
 
 const DeleteTemplate = ({ children, afterDelete, ...rest }) => {
   const {
-    deleteTemplate,
-    deleteSnippet,
+    deleteTemplateV2,
     isDeletePending,
     subaccountId,
     draft
@@ -14,10 +13,12 @@ const DeleteTemplate = ({ children, afterDelete, ...rest }) => {
   const [open, setOpen] = useState(false);
 
   const handleDelete = () => {
-    const deleteTemplatePromise = deleteTemplate(draft.id, subaccountId);
-    const deleteSnippetPromise = deleteSnippet(draft.id, subaccountId);
-
-    Promise.all([deleteTemplatePromise, deleteSnippetPromise]).then(afterDelete);
+    deleteTemplateV2({ id: draft.id, subaccountId })
+      .then(() => {
+        if (afterDelete) {
+          afterDelete;
+        }
+      });
   };
 
   return (
