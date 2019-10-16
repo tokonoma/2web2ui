@@ -24,15 +24,14 @@ export const selectPreviewLineErrors = (state) => (
 export const selectDefaultTestData = () => JSON.stringify(config.templates.testData, null, 2);
 export const selectTemplateTestData = (state) => JSON.stringify(state.templates.testData || config.templates.testData, null, 2);
 
-export const cloneTemplate = (template) => Object.assign({ ...template }, { name: `${template.name} Copy`, id: `${template.id}-copy` });
-
-export const selectClonedTemplate = (state, props) => {
-  const template = selectTemplateById(state, props);
-
-  if (_.get(props, 'match.params.id') && !_.isEmpty(template.draft)) {
-    return cloneTemplate(template.draft);
+export const selectAndCloneDraftById = createSelector(
+  [selectDraftTemplate],
+  (draft) => {
+    if (!_.isEmpty(draft)) {
+      return { ...draft, name: `${draft.name} Copy`, id: `${draft.id}-copy` };
+    }
   }
-};
+);
 
 // Selects sending domains for From Email typeahead
 export const selectDomainsBySubaccount = createSelector(

@@ -8,7 +8,7 @@ import { create, getDraft } from 'src/actions/templates';
 import { showAlert } from 'src/actions/globalAlert';
 
 // Selectors
-import { selectClonedTemplate, selectDefaultTestData } from 'src/selectors/templates';
+import { selectAndCloneDraftById, selectDefaultTestData } from 'src/selectors/templates';
 
 import CreatePage from './CreatePage';
 
@@ -25,7 +25,7 @@ const mapStateToProps = (state, props) => ({
   initialValues: {
     assignTo: 'master',
     testData: selectDefaultTestData(),
-    ...selectClonedTemplate(state, props)
+    ...selectAndCloneDraftById(state, props.match.params.id)
   }
 });
 

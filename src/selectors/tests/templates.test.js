@@ -134,28 +134,13 @@ describe('Templates selectors', () => {
     'returns default value when unknown': { id: 'unknown', defaultValue: {}}
   });
 
-  describe('cloneTemplate', () => {
-    const template = {
-      name: 'Test Template',
-      id: 'test-template',
-      published: false,
-      content: {}
-    };
-
-    it('clones template', () => {
-      expect(selector.cloneTemplate(template)).toMatchSnapshot();
-    });
-  });
-
-  describe('getClonedTemplate', () => {
+  describe('selectAndCloneDraftById', () => {
     it('should clone template if :id exist in state', () => {
-      const props = { match: { params: { id: 'ape' }}};
-      expect(selector.selectClonedTemplate(store, props)).toMatchSnapshot();
+      expect(selector.selectAndCloneDraftById(store, 'ape')).toMatchSnapshot();
     });
 
     it('should not clone template if :id does not exist', () => {
-      const props = { match: { params: { id: 'Nope' }}};
-      expect(selector.selectClonedTemplate(store, props)).toMatchSnapshot();
+      expect(selector.selectAndCloneDraftById(store, 'Nope')).toMatchSnapshot();
     });
   });
 
