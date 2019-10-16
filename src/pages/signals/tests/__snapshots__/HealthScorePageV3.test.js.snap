@@ -24,9 +24,7 @@ exports[`Signals Health Score Page V3 renders correctly when receiving data 1`] 
   title="Health Score"
 >
   <Panel>
-    <Panel.Section
-      aria-hidden="true"
-    >
+    <Panel.Section>
       <Grid>
         <Grid.Column
           xs={8}

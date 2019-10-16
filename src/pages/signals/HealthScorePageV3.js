@@ -105,7 +105,7 @@ export function HealthScorePageV3(props) {
           Create Alert
         </Button>}>
       <Panel>
-        <Panel.Section aria-hidden='true'>
+        <Panel.Section>
           <Grid>
             <Grid.Column xs={8}>
               {!loading && !empty && !error &&
