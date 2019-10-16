@@ -1,7 +1,6 @@
 /* eslint-disable max-lines */
 import React from 'react';
 import { Field } from 'redux-form';
-
 import { Button, Panel } from '@sparkpost/matchbox';
 import ToggleBlock from 'src/components/toggleBlock/ToggleBlock';
 import SubaccountSection from 'src/components/subaccountSection';
@@ -11,7 +10,6 @@ import CopyField from 'src/components/copyField/CopyField';
 import { required } from 'src/helpers/validation';
 import styles from './SettingsForm.module.scss';
 import { emailOrSubstitution } from '../validation';
-import { routeNamespace } from '../../constants/routes';
 
 export default class SettingsForm extends React.Component {
   updateSettings = (values) => {
@@ -23,12 +21,6 @@ export default class SettingsForm extends React.Component {
   };
 
   parseToggle = (value) => !!value;
-
-  onDelete = () => {
-    const { showAlert, history } = this.props;
-    history.push(`/${routeNamespace}`);
-    showAlert({ message: 'Template deleted.', type: 'success' });
-  };
 
   renderPublishedIntro = () => {
     const { hasDraft } = this.props;
