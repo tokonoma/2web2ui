@@ -19,6 +19,9 @@ const SendTestEmailButton = () => {
     sendPreview,
     showAlert,
     subaccountId,
+    testData,
+    parsedTestData,
+    setTestDataV2,
     updateDraft
   } = useEditorContext();
   const {
@@ -53,8 +56,12 @@ const SendTestEmailButton = () => {
 
       // Save the template, then allow the user to send a preview
       // The preview can be send whether the current draft was successfully saved or not.
-      updateDraft({ id: templateId, content }, subaccountId)
-        .finally(() => setModalLoading(false));
+      updateDraft({
+        id: templateId,
+        content,
+        testData: parsedTestData
+      }, subaccountId)
+        .then(() => setModalLoading(false));
     }
   };
 
@@ -74,6 +81,10 @@ const SendTestEmailButton = () => {
     }
 
     setModalLoading(true);
+    setTestDataV2({
+      id: templateId,
+      data: testData
+    });
     sendPreview({
       id: templateId,
       subaccountId: subaccountId,

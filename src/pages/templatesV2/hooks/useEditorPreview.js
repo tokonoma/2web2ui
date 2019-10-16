@@ -12,7 +12,7 @@ const useEditorPreview = ({
   draft = {},
   getPreview,
   debounceAction = debouncer,
-  testData
+  parsedTestData
 }) => {
   const [previewDevice, setPreviewDevice] = useState('desktop');
 
@@ -24,12 +24,18 @@ const useEditorPreview = ({
           content,
           mode: 'draft',
           subaccountId: draft.subaccount_id,
-          substitution_data: JSON.parse(testData).substitution_data
+          substitution_data: parsedTestData.substitution_data
         });
       });
     }
-  },
-  [getPreview, content, debounceAction, draft.id, draft.subaccount_id, testData]);
+  }, [
+    getPreview,
+    content,
+    debounceAction,
+    draft.id,
+    draft.subaccount_id,
+    parsedTestData
+  ]);
 
   // clean-up debounced state when unmounted
   useEffect(() => () => { debounceAction.cancel(); }, [debounceAction]);

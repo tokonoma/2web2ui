@@ -6,6 +6,7 @@ import {
   getPreview,
   getPublished,
   update as updateDraft,
+  updateV2 as updateDraftV2,
   publish as publishDraft,
   publishV2 as publishDraftV2,
   deleteTemplate,
@@ -81,6 +82,7 @@ const mapDispatchToProps = {
   deleteTemplate,
   createTemplate,
   updateDraft,
+  updateDraftV2,
   publishDraft,
   createRecipientList, // TODO: Remove soon!
   getRecipientList, // TODO: Remove soon!

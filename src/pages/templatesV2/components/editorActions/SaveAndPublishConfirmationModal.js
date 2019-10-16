@@ -14,7 +14,8 @@ const SaveAndPublishConfirmationModal = (props) => {
     isDraftPublishing,
     setHasSaved,
     publishDraftV2,
-    setTestDataV2
+    setTestDataV2,
+    parsedTestData
   } = useEditorContext();
   const [hasSuccessRedirect, setSuccessRedirect] = useState(false);
 
@@ -22,7 +23,7 @@ const SaveAndPublishConfirmationModal = (props) => {
     publishDraftV2({
       ...draft,
       content,
-      options: JSON.parse(testData).options
+      options: parsedTestData.options
     }, draft.subaccount_id)
       .then(() => {
         setTestDataV2({

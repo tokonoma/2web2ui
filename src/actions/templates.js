@@ -1,6 +1,6 @@
 /* eslint-disable max-lines */
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
-import localforage from 'localforage';
+import localforage from 'localforage'; // TODO: Remove - and possibly uninstall
 import config from 'src/config';
 import { getTestDataKey, shapeContent } from './helpers/templates';
 import setSubaccountHeader from './helpers/setSubaccountHeader';
@@ -100,11 +100,37 @@ export function create(data) {
   };
 }
 
+// TODO: Remove once original version is no longer with us
 export function update(data, subaccountId, params = {}) {
   const { id, testData, content, ...formData } = data;
 
   return (dispatch) => {
     dispatch(setTestData({ id, mode: 'draft', data: testData }));
+
+    return dispatch(sparkpostApiRequest({
+      type: 'UPDATE_TEMPLATE',
+      meta: {
+        method: 'PUT',
+        url: `/v1/templates/${id}`,
+        data: {
+          ...formData,
+          content: shapeContent(content)
+        },
+        params,
+        headers: setSubaccountHeader(subaccountId),
+        context: {
+          id
+        }
+      }
+    }));
+  };
+}
+
+export function updateV2(data, subaccountId, params = {}) {
+  const { id, testData, content, ...formData } = data;
+
+  return (dispatch) => {
+    dispatch(setTestDataV2({ id, mode: 'draft', data: testData }));
 
     return dispatch(sparkpostApiRequest({
       type: 'UPDATE_TEMPLATE',
@@ -263,6 +289,43 @@ export function sendPreview({ id, mode, emails, from, subaccountId }) {
 
   return async (dispatch) => {
     const { payload: testData = {}} = await dispatch(getTestData({ id, mode }));
+
+    return dispatch(sparkpostApiRequest({
+      type: 'SEND_PREVIEW_TRANSMISSION',
+      meta: {
+        method: 'POST',
+        url: '/v1/transmissions',
+        headers: setSubaccountHeader(subaccountId),
+        data: {
+          ...testData,
+          content: {
+            template_id: id,
+            use_draft_template: mode === 'draft'
+          },
+          options: {
+            ...testData.options,
+            sandbox: /sparkpostbox.com$/i.test(from)
+          },
+          recipients
+        }
+      }
+    }));
+  };
+}
+
+export function sendPreviewV2({ id, mode, emails, from, subaccountId }) {
+  const recipients = emails.map((email) => ({
+    address: { email }
+  }));
+
+  return async (dispatch) => {
+    let testData = getTestDataV2({ id, mode });
+
+    try {
+      testData = JSON.parse(testData);
+    } catch {
+      testData = {};
+    }
 
     return dispatch(sparkpostApiRequest({
       type: 'SEND_PREVIEW_TRANSMISSION',

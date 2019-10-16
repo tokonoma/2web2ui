@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 const useEditorTestData = (props) => {
   const { draft, templateTestData, getTestDataV2 } = props;
   const [testData, setTestData] = useState(templateTestData);
+  const [parsedTestData, setParsedTestData] = useState(undefined);
 
   useEffect(() => {
     if (draft) {
@@ -17,9 +18,18 @@ const useEditorTestData = (props) => {
     }
   }, [getTestDataV2, draft]);
 
+  useEffect(() => {
+    try {
+      setParsedTestData(JSON.parse(testData));
+    } catch {
+      setParsedTestData({});
+    }
+  }, [testData, setParsedTestData]);
+
   return {
     testData,
-    setTestData
+    setTestData,
+    parsedTestData
   };
 };
 
