@@ -57,9 +57,22 @@ const TEST_CASES = {
   },
   'resets State': {
     type: 'RESET_STATE'
+  },
+  'get specific inbox placement test messages pending': {
+    type: 'GET_INBOX_PLACEMENT_MESSAGE_PENDING',
+    meta: { messageId: 101 }
+  },
+  'get specific inbox placement test messages success': {
+    payload: { id: 1, headers: 'fake headers' },
+    type: 'GET_INBOX_PLACEMENT_MESSAGE_SUCCESS',
+    state: { ...initialState, allMessages: [{ id: 1 }]}
+  },
+  'get specific inbox placement test messages fail': {
+    payload: { errors: [ { message: 'Some error occurred' }]},
+    type: 'GET_INBOX_PLACEMENT_MESSAGE_FAIL'
   }
 };
 
-cases('Inbox Placement Reducer', (action) => {
-  expect(inboxPlacementReducer(initialState, action)).toMatchSnapshot();
+cases('Inbox Placement Reducer', ({ payload, type, meta, state }) => {
+  expect(inboxPlacementReducer(state, { payload, type, meta })).toMatchSnapshot();
 }, TEST_CASES);

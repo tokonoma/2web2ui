@@ -80,4 +80,16 @@ describe('Action Creator: Inbox Placement', () => {
       { type: 'RESET_STATE' }
     );
   });
+
+  it('makes request to get a specific message', async () => {
+    await inboxPlacement.getInboxPlacementMessage(1, 101);
+    expect(sparkpostApiRequest).toHaveBeenCalledWith({
+      type: 'GET_INBOX_PLACEMENT_MESSAGE',
+      meta: {
+        method: 'GET',
+        url: '/v1/inbox-placement/1/messages/101',
+        messageId: 101
+      }
+    });
+  });
 });

@@ -1,4 +1,4 @@
-const initialState = {
+export const initialState = {
   currentTestDetails: {},
   seedsPending: false,
   seeds: [],
@@ -6,10 +6,11 @@ const initialState = {
   tests: [],
   stopTestPending: false,
   placementsByProvider: [],
+  getAllMessagesPending: false,
   allMessages: []
 };
 
-export default (state = initialState, { type, payload }) => {
+export default (state = initialState, { type, payload, meta }) => {
   switch (type) {
     case 'LIST_TESTS_PENDING':
       return { ...state, testsPending: true, testsError: null };
@@ -62,6 +63,16 @@ export default (state = initialState, { type, payload }) => {
 
     case 'RESET_STATE':
       return { state: initialState };
+
+    case 'GET_INBOX_PLACEMENT_MESSAGE_PENDING':
+      return { ...state, getMessagePending: meta.messageId, getMessageError: null };
+    case 'GET_INBOX_PLACEMENT_MESSAGE_SUCCESS': {
+      const message = state.allMessages.find(({ id }) => id === payload.id);
+      message.headers = payload.headers;
+      return { ...state, getMessagePending: false, allMessages: state.allMessages, getMessageError: null };
+    }
+    case 'GET_INBOX_PLACEMENT_MESSAGE_FAIL':
+      return { ...state, getMessagePending: false, getMessageError: payload };
 
     default:
       return state;

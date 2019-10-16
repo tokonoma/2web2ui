@@ -78,3 +78,14 @@ export function resetState() {
     type: 'RESET_STATE'
   });
 }
+
+export function getInboxPlacementMessage(testId, messageId) {
+  return sparkpostApiRequest({
+    type: 'GET_INBOX_PLACEMENT_MESSAGE',
+    meta: {
+      method: 'GET',
+      url: `/v1/inbox-placement/${testId}/messages/${messageId}`,
+      messageId: messageId
+    }
+  });
+}
