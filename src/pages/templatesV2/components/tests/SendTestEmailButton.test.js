@@ -32,11 +32,13 @@ describe('SendTestEmailButton', () => {
     const updateDraft = jest.fn(() => promise);
     const sendPreview = jest.fn(() => promise);
     const showAlert = jest.fn(() => promise);
+    const setTestDataV2 = jest.fn(() => promise);
     const wrapper = subject({
       isPublishedMode: false,
       updateDraft,
       sendPreview,
-      showAlert
+      showAlert,
+      setTestDataV2
     });
 
     wrapper.find('[children="Send a Test"]').simulate('click');
@@ -46,7 +48,8 @@ describe('SendTestEmailButton', () => {
       promise,
       updateDraft,
       sendPreview,
-      showAlert
+      showAlert,
+      setTestDataV2
     };
   };
 
