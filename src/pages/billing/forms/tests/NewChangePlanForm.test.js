@@ -70,7 +70,8 @@ describe('Change Plan Form', () => {
       promoPending: false,
       promoError: false,
       selectedPromo: {}
-    }
+    },
+    handleSubmit: jest.fn()
   };
 
   const subject = (routerState = {}, render = shallow) => {

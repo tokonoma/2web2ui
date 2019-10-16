@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback, useRef } from 'react';
-import { Grid, Button } from '@sparkpost/matchbox';
+import { Grid } from '@sparkpost/matchbox';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
@@ -9,45 +9,26 @@ import _ from 'lodash';
 import PlanSelectSection, { SelectedPlan } from '../components/PlanSelect';
 import CurrentPlanSection from '../components/CurrentPlanSection';
 import useRouter from 'src/hooks/useRouter';
-import Brightback from 'src/components/brightback/Brightback';
-import config from 'src/config';
+import SubmitSection from '../components/SubmitSection';
 
 //Actions
-import { getBillingInfo, updateSubscription } from 'src/actions/account';
+import { getBillingInfo } from 'src/actions/account';
 import FeatureChangeSection from '../components/FeatureChangeSection';
-import { FeatureChangeContextProvider, useFeatureChangeContext } from '../context/FeatureChangeContext';
+import { FeatureChangeContextProvider } from '../context/FeatureChangeContext';
 import { getBillingCountries, getBundles, verifyPromoCode, clearPromoCode } from 'src/actions/billing';
 
 //Selectors
 import { selectTieredVisibleBundles, currentPlanSelector, getPromoCodeObject } from 'src/selectors/accountBillingInfo';
 import { changePlanInitialValues } from 'src/selectors/accountBillingForms';
+import { Loading } from 'src/components/loading/Loading';
 
 const FORMNAME = 'changePlan';
-
-export const SubmitButton = ({ loading }) => { //TODO: Swap to brightback
-  const { isReady } = useFeatureChangeContext();
-  return (isReady &&
-    <Brightback
-      condition={false}
-      config={config.brightback.downgradeToFreeConfig}
-      render={({ enabled, to }) => (
-        <Button
-          type={enabled ? 'button' : 'submit'}
-          to={enabled ? to : null}
-          disabled={loading}
-          color='orange'
-        >
-          Change Plan
-        </Button>
-      )}
-    />
-  );
-};
 
 export const ChangePlanForm = ({
   //Redux Props
   bundles,
   currentPlan,
+  loading,
 
   //Redux Actions
   getBillingInfo,
@@ -58,6 +39,7 @@ export const ChangePlanForm = ({
   getBundles,
   handleSubmit
 }) => {
+
   const { requestParams: { code, promo } = {}, updateRoute } = useRouter();
   const allBundles = Object.values(bundles).reduce((acc, curr) => [...curr, ...acc],[]);
   const [selectedBundle, selectBundle] = useState(allBundles.find(({ bundle }) => bundle === code) || null);
@@ -102,6 +84,10 @@ export const ChangePlanForm = ({
   const onSubmit = () => {
   };
 
+  if (loading) {
+    return (<Loading />);
+  }
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Grid>
@@ -129,7 +115,7 @@ export const ChangePlanForm = ({
             isPlanSelected && (
               <FeatureChangeContextProvider selectedBundle={selectedBundle}>
                 <FeatureChangeSection/>
-                <SubmitButton handleSubmit={handleSubmit}/>
+                <SubmitSection />
               </FeatureChangeContextProvider>
             )
           }
@@ -158,8 +144,7 @@ const mapDispatchToProps = ({
   getBillingCountries,
   verifyPromoCode,
   clearPromoCode,
-  getBundles,
-  updateSubscription
+  getBundles
 });
 
 const formOptions = {
