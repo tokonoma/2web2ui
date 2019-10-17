@@ -26,3 +26,9 @@ const thresholds = {
 };
 
 export default thresholds;
+
+export const HEALTH_SCORE_COLORS_V3 = {
+  danger: '#D1E4F4',
+  warning: '#91C5FD',
+  good: '#4194ED'
+};

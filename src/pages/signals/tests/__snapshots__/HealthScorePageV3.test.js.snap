@@ -22,5 +22,86 @@ exports[`Signals Health Score Page V3 renders correctly when receiving data 1`] 
     </Button>
   }
   title="Health Score"
-/>
+>
+  <Panel>
+    <Panel.Section>
+      <Grid>
+        <Grid.Column
+          xs={8}
+        >
+          <HealthScoreMetric
+            score={0}
+          />
+        </Grid.Column>
+        <Grid.Column
+          xs={4}
+        >
+          <Connect(DateFilter)
+            left={true}
+          />
+          <HealthScoreLegend />
+        </Grid.Column>
+      </Grid>
+      <BarChart
+        activeFill="#22838A"
+        disableHover={false}
+        fill="#B3ECEF"
+        gap={1}
+        height={250}
+        margin={
+          Object {
+            "bottom": 5,
+            "left": 18,
+            "right": 0,
+            "top": 12,
+          }
+        }
+        shouldHighlightSelected={true}
+        timeSeries={Array []}
+        tooltipContent={[Function]}
+        width="99%"
+        xAxisProps={
+          Object {
+            "tickFormatter": [Function],
+            "ticks": undefined,
+          }
+        }
+        xAxisRefLines={Array []}
+        xKey="date"
+        yAxisProps={
+          Object {
+            "tickFormatter": [Function],
+            "ticks": Array [
+              0,
+              0.55,
+              0.8,
+              1,
+            ],
+          }
+        }
+        yAxisRefLines={
+          Array [
+            Object {
+              "stroke": "#2CC995",
+              "strokeWidth": 1,
+              "y": 0.8,
+            },
+            Object {
+              "stroke": "#FF594D",
+              "strokeWidth": 1,
+              "y": 0.55,
+            },
+          ]
+        }
+        yKey="health_score"
+        yRange={
+          Array [
+            "auto",
+            "auto",
+          ]
+        }
+      />
+    </Panel.Section>
+  </Panel>
+</SignalsPage>
 `;

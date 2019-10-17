@@ -1,0 +1,33 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.Legend {
+  display: flex;
+  align-items: center;
+  margin: spacing() 0 spacing(large);
+
+  & > * {
+    flex: 1 0 0;
+  }
+}
+
+.danger, .warning, .good {
+  position: relative;
+  height: rem(10);
+}
+
+.Desc {
+  position: relative;
+  top: rem(12);
+
+  font-size: font-size(200);
+  line-height: 1em;
+  color: color(gray, 3);
+}
+
+
+.Label {
+  flex: 0;
+  margin-right: spacing();
+  font-size: rem(12);
+  font-weight: 600;
+}

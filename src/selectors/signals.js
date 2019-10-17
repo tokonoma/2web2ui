@@ -4,6 +4,7 @@ import { fillByDate } from 'src/helpers/date';
 import { roundToPlaces } from 'src/helpers/units';
 import { getDoD } from 'src/helpers/signals';
 import { selectSubaccountIdFromQuery } from 'src/selectors/subaccounts';
+import { HEALTH_SCORE_COLORS_V3 } from 'src/pages/signals/constants/healthScoreThresholds';
 import _ from 'lodash';
 import moment from 'moment';
 
@@ -18,13 +19,13 @@ export const getOptions = (state, { now = moment().subtract(1, 'day'), ...option
 });
 
 // Redux store
-export const getSpamHitsData = (state, props) => _.get(state, 'signals.spamHits', {});
-export const getEngagementRecencyData = (state, props) => _.get(state, 'signals.engagementRecency', {});
-export const getEngagementRateByCohortData = (state, props) => _.get(state, 'signals.engagementRateByCohort', {});
-export const getUnsubscribeRateByCohortData = (state, props) => _.get(state, 'signals.unsubscribeRateByCohort', {});
-export const getComplaintsByCohortData = (state, props) => _.get(state, 'signals.complaintsByCohort', {});
-export const getHealthScoreData = (state, props) => _.get(state, 'signals.healthScore', {});
-export const getCurrentHealthScoreData = (state, props) => _.get(state, 'signals.currentHealthScore', {});
+export const getSpamHitsData = (state) => _.get(state, 'signals.spamHits', {});
+export const getEngagementRecencyData = (state) => _.get(state, 'signals.engagementRecency', {});
+export const getEngagementRateByCohortData = (state) => _.get(state, 'signals.engagementRateByCohort', {});
+export const getUnsubscribeRateByCohortData = (state) => _.get(state, 'signals.unsubscribeRateByCohort', {});
+export const getComplaintsByCohortData = (state) => _.get(state, 'signals.complaintsByCohort', {});
+export const getHealthScoreData = (state) => _.get(state, 'signals.healthScore', {});
+export const getCurrentHealthScoreData = (state) => _.get(state, 'signals.currentHealthScore', {});
 
 // Details
 export const selectSpamHitsDetails = createSelector(
@@ -312,6 +313,26 @@ export const selectHealthScoreDetails = createSelector(
   }
 );
 
+export const selectHealthScoreDetailsV3 = createSelector(
+  [selectHealthScoreDetails],
+  ({ details, ...rest }) => {
+
+    // Add fill colors
+    const dataWithFill = details.data.map((healthData) => ({
+      fill: HEALTH_SCORE_COLORS_V3[healthData.ranking || 'danger'],
+      ...healthData
+    }));
+
+    return {
+      details: {
+        ...details,
+        data: dataWithFill
+      },
+      ...rest
+    };
+  }
+);
+
 export const selectEngagementRecencyOverviewData = createSelector(
   getEngagementRecencyData, getOptions,
   ({ data }, { from, to }) => data.map(({ WoW, ...rowOfData }) => {
@@ -387,7 +408,7 @@ export const selectEngagementRecencyOverview = createSelector(
 
 export const selectHealthScoreOverviewData = createSelector(
   getHealthScoreData, getOptions,
-  ({ data }, { from, to }) => data.map(({ current_health_score, WoW, ...rowOfData }) => {
+  ({ data }, { from, to }) => data.map(({ WoW, ...rowOfData }) => {
     const history = rowOfData.history || [];
     const normalizedHistory = history.map(({ dt: date, health_score, ...values }) => {
       const roundedHealthScore = roundToPlaces(health_score * 100, 1);
