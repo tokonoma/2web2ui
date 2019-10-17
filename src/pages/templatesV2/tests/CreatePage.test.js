@@ -14,6 +14,7 @@ describe('CreatePage', () => {
       history={{ push: jest.fn() }}
       showAlert={jest.fn()}
       createSnippet={jest.fn()}
+      createTemplateV2={jest.fn(() => Promise.resolve())}
       {...props}
     />
   );
@@ -46,30 +47,32 @@ describe('CreatePage', () => {
 
   describe('handleCreate', () => {
     it('calls "create" and "createSnippet" with form data when submitting', () => {
-      const mockCreate = jest.fn(() => Promise.resolve());
-      const mockCreateSnippet = jest.fn(() => Promise.resolve());
+      const promise = Promise.resolve();
+      const mockCreate = jest.fn(() => promise);
       const formData = {
         name: 'Foo',
         id: 'foo',
         content: {}
       };
       const wrapper = subject({
-        create: mockCreate,
-        createSnippet: mockCreateSnippet,
+        createTemplateV2: mockCreate,
         history: { push: jest.fn() }
       });
       wrapper.find('form').simulate('submit', formData);
-      expect(mockCreate).toHaveBeenCalledWith({
-        ...formData,
-        content: {
-          ...formData.content,
-          text: ''
-        }
-      });
-      expect(mockCreateSnippet).toHaveBeenCalledWith({
-        name: 'Templates Test Data',
-        id: 'foo',
-        html: '{"options":{},"substitution_data":{},"metadata":{}}'
+
+      return promise.then(() => {
+        expect(mockCreate).toHaveBeenCalledWith({
+          ...formData,
+          content: {
+            ...formData.content,
+            text: ''
+          },
+          testData: {
+            substitution_data: {},
+            metadata: {},
+            options: {}
+          }
+        });
       });
     });
 
@@ -77,23 +80,17 @@ describe('CreatePage', () => {
       const mockPush = jest.fn();
       const mockAlert = jest.fn();
       const createPromise = Promise.resolve();
-      const createSnippetPromise = Promise.resolve();
       const wrapper = subject({
-        create: jest.fn(() => createPromise),
-        createSnippet: jest.fn(() => createSnippetPromise),
+        createTemplateV2: jest.fn(() => createPromise),
         history: { push: mockPush }, showAlert: mockAlert
       });
 
       wrapper.find('form').simulate('submit', { id: 'foo', content: {}});
 
-      /* eslint-disable arrow-body-style */
       return createPromise.then(() => {
-        return createSnippetPromise.then(() => {
-          expect(mockPush).toHaveBeenCalledWith('/templatesv2/edit/foo/draft/content');
-          expect(mockAlert).toHaveBeenCalledWith({ type: 'success', message: 'Template Created.' });
-        });
+        expect(mockPush).toHaveBeenCalledWith('/templatesv2/edit/foo/draft/content');
+        expect(mockAlert).toHaveBeenCalledWith({ type: 'success', message: 'Template Created.' });
       });
-      /* eslint-enable arrow-body-style */
     });
   });
 });
