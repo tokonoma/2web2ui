@@ -43,7 +43,7 @@ describe('Page: All Inbox Placement Messages Test', () => {
     mount(
       <Router>
         <AllMessagesPage
-          filterType={'mailbox-providers'}
+          filterType={'mailbox-provider'}
           filterName={'gmail.com'}
           status={'completed'}
           messages={[]}

@@ -31,7 +31,7 @@ export const AllMessagesPage = (props) => {
 
   const loadMessages = useCallback(() => {
     const filters = { [filterType]: filterName };
-    filterType === 'mailbox-providers' ? getInboxPlacementByProviders(id) : undefined; //TODO add sending ip request
+    filterType === 'mailbox-provider' ? getInboxPlacementByProviders(id) : undefined; //TODO add sending ip request
     getAllInboxPlacementMessages(id, filters);
   }, [filterName, filterType, getAllInboxPlacementMessages, getInboxPlacementByProviders, id]);
 
@@ -96,7 +96,7 @@ export const AllMessagesPage = (props) => {
 
 function mapStateToProps(state, props) {
   const { id, filterType, filterName } = props.match.params;
-  const result = ((filterType === 'mailbox-providers')
+  const result = ((filterType === 'mailbox-provider')
     ? state.inboxPlacement.placementsByProvider.find(({ mailbox_provider }) => mailbox_provider === filterName)
     : undefined) || //TODO add sending ip
     {};
