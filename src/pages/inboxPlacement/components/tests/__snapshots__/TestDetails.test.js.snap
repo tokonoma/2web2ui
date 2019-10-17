@@ -30,20 +30,36 @@ exports[`Component: TestDetails renders correctly 1`] = `
         />
       </Grid>
     </Panel.Section>
-    <Panel.Section>
-      <Grid>
-        <Grid.Column
-          md={8}
+    <Grid>
+      <Grid.Column
+        md={8}
+      >
+        <div
+          className="FolderPlacementBarChart"
         >
-          <h3>
-            Folder Placement
+          <Panel.Section>
+            <h3>
+              Folder Placement
+            </h3>
+            <FolderPlacementChart
+              placements={Object {}}
+            />
+          </Panel.Section>
+        </div>
+      </Grid.Column>
+      <Grid.Column
+        md={4}
+      >
+        <Panel.Section>
+          <h3
+            className="AuthenticationHeader"
+          >
+            Authentication
           </h3>
-          <FolderPlacementChart
-            placements={Object {}}
-          />
-        </Grid.Column>
-      </Grid>
-    </Panel.Section>
+          <AuthenticationResults />
+        </Panel.Section>
+      </Grid.Column>
+    </Grid>
   </Panel>
   <Panel
     title={
@@ -64,6 +80,26 @@ exports[`Component: TestDetails renders correctly 1`] = `
     <ProvidersBreakdown
       data={Array []}
     />
+  </Panel>
+  <div
+    style={
+      Object {
+        "clear": "both",
+      }
+    }
+  />
+  <Panel
+    title={
+      <h3
+        className="Inline"
+      >
+        Time to Receive Mail
+      </h3>
+    }
+  >
+    <Panel.Section>
+      <TimeToReceiveSection />
+    </Panel.Section>
   </Panel>
 </Fragment>
 `;

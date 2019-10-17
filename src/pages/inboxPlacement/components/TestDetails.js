@@ -6,6 +6,8 @@ import ProvidersBreakdown from './ProvidersBreakdown';
 import { FORMATS } from 'src/constants';
 import InfoBlock from './InfoBlock';
 import styles from './TestDetails.module.scss';
+import TimeToReceiveSection from './TimeToReceiveSection';
+import AuthenticationResults from './AuthenticationResults';
 
 const TestDetails = ({ details, placementsByProvider }) => {
   const placements = details.placement || {};
@@ -30,17 +32,31 @@ const TestDetails = ({ details, placementsByProvider }) => {
           </Grid>
 
         </Panel.Section>
-        <Panel.Section>
-          <Grid>
-            <Grid.Column md={8}>
-              <h3>Folder Placement</h3>
-              <FolderPlacementBarChart placements={placements}/>
-            </Grid.Column>
-          </Grid>
-        </Panel.Section>
+        <Grid>
+          <Grid.Column md={8}>
+            <div className={styles.FolderPlacementBarChart}>
+              <Panel.Section>
+                <h3>Folder Placement</h3>
+                <FolderPlacementBarChart placements={placements}/>
+              </Panel.Section>
+            </div>
+          </Grid.Column>
+          <Grid.Column md={4}>
+            <Panel.Section>
+              <h3 className={styles.AuthenticationHeader}>Authentication</h3>
+              <AuthenticationResults data={details.authentication}/>
+            </Panel.Section>
+          </Grid.Column>
+        </Grid>
       </Panel>
       <Panel title={panelTitle}>
         <ProvidersBreakdown data={placementsByProvider}/>
+      </Panel>
+      <div style={{ clear: 'both' }} />
+      <Panel title={<h3 className={styles.Inline}>Time to Receive Mail</h3>}>
+        <Panel.Section>
+          <TimeToReceiveSection data={details.time_to_receive}/>
+        </Panel.Section>
       </Panel>
     </>
   );
