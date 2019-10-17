@@ -150,7 +150,9 @@ exports[`Page: All Inbox Placement Messages Test renders page correctly with def
   <Panel
     title="Seed Diagnostics"
   >
-    <AllMessagesCollection />
+    <Connect(AllMessagesCollection)
+      testId={0}
+    />
   </Panel>
 </Page>
 `;

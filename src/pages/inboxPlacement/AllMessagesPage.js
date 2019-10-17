@@ -26,7 +26,8 @@ export const AllMessagesPage = ({
   getInboxPlacementByProviders,
   getAllInboxPlacementMessages,
   resetState,
-  StopTestComponent = StopTest
+  StopTestComponent = StopTest,
+  AllMessagesCollectionComponent = AllMessagesCollection
 }) => {
 
   const loadMessages = useCallback(() => {
@@ -100,7 +101,7 @@ export const AllMessagesPage = ({
         </Grid>
       </Panel>
       <Panel title={'Seed Diagnostics'}>
-        <AllMessagesCollection data={messages}/>
+        <AllMessagesCollectionComponent data={messages} testId={id} />
       </Panel>
     </Page>
   );
