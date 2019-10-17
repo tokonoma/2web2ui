@@ -15,6 +15,7 @@ exports[`EditorContext EditorContextProvider renders children wrapped by a conte
       "currentTabIndex": 0,
       "currentTabKey": "html",
       "hasSaved": true,
+      "parsedTestData": undefined,
       "previewDevice": "desktop",
       "setContent": [Function],
       "setHasSaved": [Function],

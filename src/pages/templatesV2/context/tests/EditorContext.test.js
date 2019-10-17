@@ -12,7 +12,13 @@ describe('EditorContext', () => {
 
       return render(
         <EditorContextProvider
-          value={{ getDraft: () => {}, getPublished: () => {}, listDomains: () => {}, listSubaccounts: () => {}, ...value }}
+          value={{
+            getDraft: () => {},
+            getPublished: () => {},
+            listDomains: () => {},
+            listSubaccounts: () => {},
+            ...value
+          }}
         >
           <div>Hello</div>
         </EditorContextProvider>
