@@ -23,7 +23,7 @@ const SaveAndPublishConfirmationModal = (props) => {
     publishDraftV2({
       ...draft,
       content,
-      options: parsedTestData.options
+      options: parsedTestData.options // NOTE FOR REVIEWERS: Not sure if this is the right thing to pass here - could be wrong
     }, draft.subaccount_id)
       .then(() => {
         setTestDataV2({

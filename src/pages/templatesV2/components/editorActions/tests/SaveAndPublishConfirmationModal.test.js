@@ -15,8 +15,13 @@ describe('SaveAndPublishConfirmationModal', () => {
       },
       isDraftPublishing: false,
       publishDraftV2: jest.fn(),
-      getParsedTestData: jest.fn(),
-      updateSnippet: jest.fn(),
+      parsedTestData: {
+        options: {},
+        metadata: {},
+        substitution_data: {}
+      },
+      setTestDataV2: jest.fn(),
+      setHasSaved: jest.fn(),
       ...editorState
     });
 
@@ -41,10 +46,9 @@ describe('SaveAndPublishConfirmationModal', () => {
     expect(wrapper.find('ConfirmationModal').props().open).toEqual(false);
   });
 
-  it('on confirm, 1) calls publishDraftV2, 2) calls updateSnippet, and 3) redirects to published path upon publishing', async () => {
+  it('on confirm, 1) calls publishDraftV2 and 2) redirects to published path upon publishing', async () => {
     const publishDraftPromise = Promise.resolve();
-    const updateRecipientPromise = Promise.resolve();
-    const testData = JSON.stringify({
+    const parsedTestData = {
       options: {
         foo: 'bar'
       },
@@ -54,17 +58,15 @@ describe('SaveAndPublishConfirmationModal', () => {
       substitution_data: {
         substitution: 'data'
       }
-    });
+    };
     const publishDraftV2 = jest.fn(() => publishDraftPromise);
-    const updateSnippet = jest.fn(() => updateRecipientPromise);
     const draft = { id: 'foo', subaccount_id: 101 };
     const content = { text: 'foo text', html: '<h1>foo html</h1>' };
     const wrapper = subject({
       publishDraftV2,
-      updateSnippet,
       draft,
       content,
-      testData
+      parsedTestData
     });
     wrapper.find('ConfirmationModal').simulate('confirm');
 
@@ -72,21 +74,13 @@ describe('SaveAndPublishConfirmationModal', () => {
       {
         ...draft,
         content,
-        options: JSON.parse(testData).options
+        options: parsedTestData.options
       },
       101
     );
-    expect(updateSnippet).toHaveBeenCalledWith({
-      id: draft.id,
-      html: testData
-    });
 
-    /* eslint-disable arrow-body-style */
     return publishDraftPromise.then(() => {
-      return updateRecipientPromise.then(() => {
-        expect(wrapper.find('RedirectAndAlert')).toHaveProp('to', `/${routeNamespace}/edit/${draft.id}/published/content${setSubaccountQuery(draft.subaccount_id)}`);
-      });
+      expect(wrapper.find('RedirectAndAlert')).toHaveProp('to', `/${routeNamespace}/edit/${draft.id}/published/content${setSubaccountQuery(draft.subaccount_id)}`);
     });
-    /* eslint-enable arrow-body-style */
   });
 });
