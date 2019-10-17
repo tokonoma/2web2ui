@@ -17,14 +17,13 @@ describe('SaveDraft', () => {
       substitution: 'data'
     }
   });
-  const mockUpdateSnippet = jest.fn();
   const subject = (editorState) => {
     useEditorContext.mockReturnValue({
       draft: { id: 'foo' },
       history: {},
-      ...editorState,
-      updateSnippet: mockUpdateSnippet,
-      testData
+      testData,
+      updateDraftV2: jest.fn(),
+      ...editorState
     });
 
     return shallow(<SaveDraft className={'Foo'}/>);
@@ -36,12 +35,12 @@ describe('SaveDraft', () => {
 
   it('saves draft upon click', () => {
     const promise = Promise.resolve();
-    const updateDraft = jest.fn(() => promise);
+    const updateDraftV2 = jest.fn(() => promise);
     const setHasSaved = jest.fn();
     const showAlert = jest.fn();
     const content = { text: 'foo text', html: '<h1>foo html</h1>' };
     const wrapper = subject({
-      updateDraft,
+      updateDraftV2,
       content,
       setHasSaved,
       showAlert
@@ -50,7 +49,21 @@ describe('SaveDraft', () => {
     wrapper.find('UnstyledLink').simulate('click');
 
     return promise.then(() => {
-      expect(updateDraft).toHaveBeenCalledWith({ id: 'foo', content }, undefined);
+      expect(updateDraftV2).toHaveBeenCalledWith({
+        content,
+        id: 'foo',
+        testData: JSON.stringify({
+          options: {
+            optionOne: true
+          },
+          metadata: {
+            meta: 'data'
+          },
+          substitution_data: {
+            substitution: 'data'
+          }
+        })
+      }, undefined);
       expect(setHasSaved).toHaveBeenCalled();
       expect(showAlert).toHaveBeenCalled();
     });
@@ -58,7 +71,7 @@ describe('SaveDraft', () => {
 
   it('saves draft (with subaccount) upon click', () => {
     const promise = Promise.resolve();
-    const updateDraft = jest.fn(() => promise);
+    const updateDraftV2 = jest.fn(() => promise);
     const setHasSaved = jest.fn();
     const showAlert = jest.fn();
     const content = {
@@ -71,7 +84,7 @@ describe('SaveDraft', () => {
     };
     const wrapper = subject({
       draft,
-      updateDraft,
+      updateDraftV2,
       content,
       setHasSaved,
       showAlert
@@ -80,7 +93,21 @@ describe('SaveDraft', () => {
     wrapper.find('UnstyledLink').simulate('click');
 
     return promise.then(() => {
-      expect(updateDraft).toHaveBeenCalledWith({ id: 'foo', content }, 1001);
+      expect(updateDraftV2).toHaveBeenCalledWith({
+        content,
+        id: 'foo',
+        testData: JSON.stringify({
+          options: {
+            optionOne: true
+          },
+          metadata: {
+            meta: 'data'
+          },
+          substitution_data: {
+            substitution: 'data'
+          }
+        })
+      }, 1001);
       expect(setHasSaved).toHaveBeenCalled();
       expect(showAlert).toHaveBeenCalled();
     });
