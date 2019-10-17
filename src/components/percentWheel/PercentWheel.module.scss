@@ -1,0 +1,13 @@
+.PercentWheel {
+  position: relative;
+
+  >.value {
+    transform: translate(-50%, -100%);
+    top: 50%;
+    left: 50%;
+    position: absolute;
+  };
+  >.label {
+    text-align: center
+  }
+}
