@@ -16,9 +16,11 @@ const DraftModeActions = () => {
   const {
     hasPublished,
     draft,
-    createTemplate,
+    createTemplateV2,
     showAlert,
-    content
+    content,
+    isPublishedMode,
+    testData
   } = useEditorContext();
 
   // State
@@ -106,8 +108,10 @@ const DraftModeActions = () => {
           onClose={handleModalClose}
           template={draft}
           contentToDuplicate={content}
-          createTemplate={createTemplate}
+          testDataToDuplicate={testData}
+          createTemplate={createTemplateV2}
           showAlert={showAlert}
+          isPublishedMode={isPublishedMode}
         />
 
         <DeleteTemplateModal

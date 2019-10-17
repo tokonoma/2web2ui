@@ -16,7 +16,8 @@ export default class ListPage extends Component {
     showDeleteModal: false,
     showDuplicateModal: false,
     templateToDelete: null,
-    templateToDuplicate: null
+    templateToDuplicate: null,
+    testDataToDuplicate: null
   };
 
   componentDidMount() {
@@ -48,7 +49,7 @@ export default class ListPage extends Component {
   };
 
   toggleDuplicateModal = (template) => {
-    const { getDraft, getPublished } = this.props;
+    const { getDraft, getPublished, getTestDataV2 } = this.props;
     const isPublished = template.published;
 
     if (isPublished) {
@@ -65,6 +66,7 @@ export default class ListPage extends Component {
       .then((res) => {
         this.setState({
           templateToDuplicate: res,
+          testDataToDuplicate: getTestDataV2({ id: res.id, mode: res.published ? 'published' : 'draft' }),
           showDuplicateModal: !this.state.showDuplicateModal
         });
       });
@@ -221,9 +223,11 @@ export default class ListPage extends Component {
               onClose={() => this.setState({ showDuplicateModal: false })}
               createTemplate={this.props.createTemplateV2}
               template={this.state.templateToDuplicate}
-              contentToDuplicate={this.state.templateToDuplicate && this.state.templateToDuplicate.content}
               successCallback={this.handleDuplicateSuccess}
               showAlert={this.props.showAlert}
+              contentToDuplicate={this.state.templateToDuplicate && this.state.templateToDuplicate.content}
+              testDataToDuplicate={this.state.testDataToDuplicate}
+              isPublishedMode={this.state.templateToDuplicate && this.state.templateToDuplicate.published}
             />
           </>
         )}

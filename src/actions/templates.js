@@ -104,19 +104,19 @@ export function create(data) {
 export function createV2(data) {
   const {
     id,
-    testData,
     assignTo,
     subaccount,
     content,
+    testData,
     ...formData
   } = data;
 
   return (dispatch) => {
-    setTestDataV2({
+    dispatch(setTestDataV2({
       id,
       mode: 'draft',
       data: testData
-    });
+    }));
 
     return dispatch(sparkpostApiRequest({
       type: 'CREATE_TEMPLATE',
