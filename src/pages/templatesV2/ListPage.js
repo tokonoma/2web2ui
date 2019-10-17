@@ -140,7 +140,14 @@ export default class ListPage extends Component {
   renderRow = (columns) => (props) => columns.map(({ component: Component, onClick }) => <Component onClick={onClick} {...props} />);
 
   render() {
-    const { canModify, error, listTemplates, loading, templates, deletePending } = this.props;
+    const {
+      canModify,
+      error,
+      listTemplates,
+      loading,
+      templates,
+      deletePending
+    } = this.props;
 
     if (loading) {
       return <Loading/>;
@@ -212,7 +219,7 @@ export default class ListPage extends Component {
             <DuplicateTemplateModal
               open={this.state.showDuplicateModal}
               onClose={() => this.setState({ showDuplicateModal: false })}
-              createTemplate={this.props.createTemplate}
+              createTemplate={this.props.createTemplateV2}
               template={this.state.templateToDuplicate}
               contentToDuplicate={this.state.templateToDuplicate && this.state.templateToDuplicate.content}
               successCallback={this.handleDuplicateSuccess}
