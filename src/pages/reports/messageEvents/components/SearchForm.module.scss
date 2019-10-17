@@ -2,7 +2,8 @@
 
 .CheckBoxGrid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-rows: repeat(9, 1fr);
+  grid-auto-flow: column;
 
   fieldset {
     white-space: normal;
@@ -10,7 +11,7 @@
   }
 
   @media screen and (min-width: breakpoint(medium)) {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: repeat(5, 1fr);
   }
 }
 

@@ -5,7 +5,7 @@ import moment from 'moment';
 import _ from 'lodash';
 import { getMessageEvents, refreshMessageEventsDateRange, updateMessageEventsSearchOptions, addFilters } from 'src/actions/messageEvents';
 import { selectMessageEventsSearchOptions } from 'src/selectors/messageEvents';
-import { Panel, Grid, TextField } from '@sparkpost/matchbox';
+import { Panel, TextField } from '@sparkpost/matchbox';
 import AdvancedFiltersModal from './AdvancedFiltersModal';
 import ActiveFilters from './ActiveFilters';
 import ShareModal from '../../components/ShareModal';
@@ -16,6 +16,7 @@ import { stringToArray } from 'src/helpers/string';
 import { onEnter } from 'src/helpers/keyEvents';
 import { FORMATS, RELATIVE_DATE_OPTIONS, ALL_EVENTS_FILTERS } from 'src/constants';
 import config from 'src/config';
+import styles from './MessageEventsSearch.module.scss';
 
 export class MessageEventsSearch extends Component {
 
@@ -62,8 +63,8 @@ export class MessageEventsSearch extends Component {
     return (
       <Panel>
         <Panel.Section>
-          <Grid>
-            <Grid.Column xs={12} md={5} xl={6}>
+          <div className={styles.Filters}>
+            <div className={styles.DateFilter}>
               <DatePicker
                 {...search.dateOptions}
                 relativeDateOptions={RELATIVE_DATE_OPTIONS}
@@ -78,8 +79,8 @@ export class MessageEventsSearch extends Component {
                   canChangeMonth: false
                 }}
               />
-            </Grid.Column>
-            <Grid.Column xs={12} md={5}>
+            </div>
+            <div className={styles.RecipientFilter}>
               <TextField
                 labelHidden
                 placeholder={recipients.placeholder}
@@ -87,13 +88,15 @@ export class MessageEventsSearch extends Component {
                 onKeyDown={onEnter(this.handleRecipientsChange)}
                 onFocus={() => this.setState({ recipientError: null })}
                 error={this.state.recipientError}
-                connectRight={<AdvancedFiltersModal />}
               />
-            </Grid.Column>
-            <Grid.Column>
+            </div>
+            <div>
+              <AdvancedFiltersModal/>
+            </div>
+            <div>
               <ShareModal disabled={loading} searchOptions={searchOptions} />
-            </Grid.Column>
-          </Grid>
+            </div>
+          </div>
         </Panel.Section>
         <ActiveFilters />
       </Panel>

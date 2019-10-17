@@ -2,18 +2,6 @@
 
 exports[`SearchForm should render correctly with existing filters 1`] = `
 <Fragment>
-  <Button
-    className="AddButton"
-    color="blue"
-    flat={true}
-    onClick={[Function]}
-    size="default"
-  >
-     Add Filter
-    <AddCircleOutline
-      className="Icon"
-    />
-  </Button>
   <Grid
     key="0"
   >
@@ -36,7 +24,6 @@ exports[`SearchForm should render correctly with existing filters 1`] = `
               },
             ]
           }
-          validate={[Function]}
         />
       </div>
     </Grid.Column>
@@ -95,7 +82,6 @@ exports[`SearchForm should render correctly with existing filters 1`] = `
               },
             ]
           }
-          validate={[Function]}
         />
       </div>
     </Grid.Column>
@@ -155,7 +141,6 @@ exports[`SearchForm should render correctly with existing filters 1`] = `
               },
             ]
           }
-          validate={[Function]}
         />
       </div>
     </Grid.Column>
@@ -192,6 +177,18 @@ exports[`SearchForm should render correctly with existing filters 1`] = `
       </p>
     </Grid.Column>
   </Grid>
+  <Button
+    className="AddButton"
+    color="blue"
+    flat={true}
+    onClick={[Function]}
+    size="default"
+  >
+     Add Filter
+    <AddCircleOutline
+      className="Icon"
+    />
+  </Button>
 </Fragment>
 `;
 

@@ -39,10 +39,10 @@ export function recipientEmail(value) {
 }
 
 export function eventsQuery(filter) {
-  if (!filter || !filter.value) {
+  if (!filter.value && filter.key) {
     return 'Required';
   }
-  if (!filter.key) {
+  if (filter.value && !filter.key) {
     return 'Select a Filter';
   }
   return undefined;

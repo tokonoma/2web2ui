@@ -37,10 +37,21 @@ describe('Component: AdvancedFiltersModal', () => {
     expect(props.updateMessageEventsSearchOptions).toHaveBeenCalledWith(params);
   });
 
+  it('should remove empty filters when trying to apply filters', () => {
+    wrapper.setState({ modalOpen: true });
+    wrapper.instance().handleApply({ searchQuery: [{}, { key: 'campaigns', value: 'foo' }], click: true, bounce: false });
+    const params = {
+      ...getEmptyFilters(EVENTS_SEARCH_FILTERS),
+      'campaigns': ['foo'],
+      'events': ['click']
+    };
+    expect(props.updateMessageEventsSearchOptions).toHaveBeenCalledWith(params);
+  });
+
   it('should close the modal when handleApply is called', () => {
     wrapper.setState({ modalOpen: true });
     expect(wrapper.find('Modal').props().open).toEqual(true);
-    wrapper.instance().handleApply({});
+    wrapper.instance().handleApply({ searchQuery: []});
     expect(wrapper.find('Modal').props().open).toEqual(false);
   });
 
