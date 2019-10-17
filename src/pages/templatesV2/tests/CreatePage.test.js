@@ -13,7 +13,6 @@ describe('CreatePage', () => {
       listDomains={jest.fn()}
       history={{ push: jest.fn() }}
       showAlert={jest.fn()}
-      createSnippet={jest.fn()}
       createTemplateV2={jest.fn(() => Promise.resolve())}
       {...props}
     />
@@ -46,7 +45,7 @@ describe('CreatePage', () => {
   });
 
   describe('handleCreate', () => {
-    it('calls "create" and "createSnippet" with form data when submitting', () => {
+    it('calls "create" with form data when submitting', () => {
       const promise = Promise.resolve();
       const mockCreate = jest.fn(() => promise);
       const formData = {
