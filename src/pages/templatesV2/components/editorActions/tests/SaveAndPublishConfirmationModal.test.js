@@ -20,7 +20,6 @@ describe('SaveAndPublishConfirmationModal', () => {
         metadata: {},
         substitution_data: {}
       },
-      setTestDataV2: jest.fn(),
       setHasSaved: jest.fn(),
       ...editorState
     });

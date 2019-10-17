@@ -193,12 +193,13 @@ export function updateV2(data, subaccountId, params = {}) {
 // TODO: Rename once original version is no longer with us
 export function publishV2(data, subaccountId) {
   return async (dispatch) => {
-    const { id } = data;
+    const { id, testData } = data;
 
     dispatch({ type: 'PUBLISH_ACTION_PENDING' });
 
     try {
       await dispatch(update(data, subaccountId));
+      dispatch(setTestDataV2({ id, mode: 'published', data: testData }));
 
       await dispatch(sparkpostApiRequest({
         type: 'PUBLISH_TEMPLATE',
