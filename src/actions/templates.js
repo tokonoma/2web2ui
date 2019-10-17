@@ -307,7 +307,11 @@ export function getTestDataV2({ id, mode }) {
     const username = getState().currentUser.username;
     const rawData = window.localStorage.getItem(getTestDataKey({ id, username, mode }));
 
-    return JSON.parse(rawData);
+    try {
+      return JSON.parse(rawData);
+    } catch {
+      return {};
+    }
   };
 }
 
