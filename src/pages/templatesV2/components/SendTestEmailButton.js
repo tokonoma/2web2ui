@@ -19,9 +19,7 @@ const SendTestEmailButton = () => {
     sendPreviewV2,
     showAlert,
     subaccountId,
-    testData,
     parsedTestData,
-    setTestDataV2,
     updateDraft
   } = useEditorContext();
   const {
@@ -81,10 +79,7 @@ const SendTestEmailButton = () => {
     }
 
     setModalLoading(true);
-    setTestDataV2({
-      id: templateId,
-      data: testData
-    });
+
     sendPreviewV2({
       id: templateId,
       subaccountId: subaccountId,
