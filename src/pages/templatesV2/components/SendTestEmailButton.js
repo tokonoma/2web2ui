@@ -16,7 +16,7 @@ const SendTestEmailButton = () => {
     content,
     isPublishedMode,
     match,
-    sendPreview,
+    sendPreviewV2,
     showAlert,
     subaccountId,
     testData,
@@ -85,7 +85,7 @@ const SendTestEmailButton = () => {
       id: templateId,
       data: testData
     });
-    sendPreview({
+    sendPreviewV2({
       id: templateId,
       subaccountId: subaccountId,
       mode: isPublishedMode ? 'published' : 'draft',

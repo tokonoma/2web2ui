@@ -19,7 +19,7 @@ describe('Action Creator: Templates', () => {
     }
   };
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     localforage.setItem = jest.fn((a) => Promise.resolve(a));
     localforage.getItem = jest.fn(() => Promise.resolve(null));
     templatesHelpers.getTestDataKey = jest.fn(() => 'key');
@@ -57,7 +57,7 @@ describe('Action Creator: Templates', () => {
     expect(mockStore.getActions()).toMatchSnapshot();
   });
 
-  it('should dispatch an update action', async() => {
+  it('should dispatch an update action', async () => {
     const data = {
       id: 'id',
       testData: { test: 'data' },
@@ -68,7 +68,7 @@ describe('Action Creator: Templates', () => {
     expect(_.flatten(dispatchMock.mock.calls)).toMatchSnapshot();
   });
 
-  it('should dispatch a publish action', async() => {
+  it('should dispatch a publish action', async () => {
     const data = {
       id: 'id',
       testData: { test: 'data' },
@@ -79,7 +79,7 @@ describe('Action Creator: Templates', () => {
     expect(_.flatten(dispatchMock.mock.calls)).toMatchSnapshot();
   });
 
-  it('should dispatch a setTestData action', async() => {
+  it('should dispatch a setTestData action', async () => {
     const data = {
       id: 'id',
       data: { test: 'data' },
@@ -89,23 +89,23 @@ describe('Action Creator: Templates', () => {
     expect(mockStore.getActions()).toMatchSnapshot();
   });
 
-  it('should dispatch a getTestData action', async() => {
-    localforage.getItem = jest.fn((a) => Promise.resolve('{ "test": "test" }'));
+  it('should dispatch a getTestData action', async () => {
+    localforage.getItem = jest.fn(() => Promise.resolve('{ "test": "test" }'));
     const data = { id: 'id', mode: 'draft' };
     await mockStore.dispatch(templates.getTestData(data));
     expect(mockStore.getActions()).toMatchSnapshot();
   });
 
   describe('getTestData', () => {
-    it('should handle old test data', async() => {
-      localforage.getItem = jest.fn((a) => Promise.resolve('{"test": "test"}'));
+    it('should handle old test data', async () => {
+      localforage.getItem = jest.fn(() => Promise.resolve('{"test": "test"}'));
       const template = { id: 'id', mode: 'draft' };
       await mockStore.dispatch(templates.getTestData(template));
       expect(mockStore.getActions()).toMatchSnapshot();
     });
 
-    cases('should handle partial test data', async(testRecord) => {
-      localforage.getItem = jest.fn((a) => Promise.resolve(JSON.stringify(testRecord.payload)));
+    cases('should handle partial test data', async (testRecord) => {
+      localforage.getItem = jest.fn(() => Promise.resolve(JSON.stringify(testRecord.payload)));
       const template = { id: 'id', mode: 'draft' };
       await mockStore.dispatch(templates.getTestData(template));
       expect(mockStore.getActions()).toMatchSnapshot();
@@ -117,19 +117,19 @@ describe('Action Creator: Templates', () => {
     ]);
   });
 
-  it('should dispatch getDraft, getTestData, and getPreview actions', async() => {
+  it('should dispatch getDraft, getTestData, and getPreview actions', async () => {
     const action = templates.getDraftAndPreview('test-template');
     await mockStore.dispatch(action);
     expect(mockStore.getActions()).toMatchSnapshot();
   });
 
-  it('should dispatch getPublished, getTestData, and getPreview actions', async() => {
+  it('should dispatch getPublished, getTestData, and getPreview actions', async () => {
     const action = templates.getPublishedAndPreview('test-template');
     await mockStore.dispatch(action);
     expect(mockStore.getActions()).toMatchSnapshot();
   });
 
-  it('should dispatch a getPreview action', async() => {
+  it('should dispatch a getPreview action', async () => {
     const action = templates.getPreview({
       content: {
         html: '<h1>Test Draft</h1>',
@@ -142,7 +142,7 @@ describe('Action Creator: Templates', () => {
     expect(mockStore.getActions()).toMatchSnapshot();
   });
 
-  it('should dispatch getTestData and sendPreview actions', async() => {
+  it('should dispatch getTestData and sendPreview actions', async () => {
     const action = templates.sendPreview({
       emails: ['test@example.com'],
       from: 'test@sparkpostbox.com',

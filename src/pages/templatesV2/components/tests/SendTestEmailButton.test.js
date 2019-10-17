@@ -30,13 +30,13 @@ describe('SendTestEmailButton', () => {
   const openModal = () => {
     const promise = Promise.resolve();
     const updateDraft = jest.fn(() => promise);
-    const sendPreview = jest.fn(() => promise);
+    const sendPreviewV2 = jest.fn(() => promise);
     const showAlert = jest.fn(() => promise);
     const setTestDataV2 = jest.fn(() => promise);
     const wrapper = subject({
       isPublishedMode: false,
       updateDraft,
-      sendPreview,
+      sendPreviewV2,
       showAlert,
       setTestDataV2
     });
@@ -47,7 +47,7 @@ describe('SendTestEmailButton', () => {
       wrapper,
       promise,
       updateDraft,
-      sendPreview,
+      sendPreviewV2,
       showAlert,
       setTestDataV2
     };
@@ -99,11 +99,11 @@ describe('SendTestEmailButton', () => {
       });
     });
 
-    it('invokes the sendPreview function with loading UI, followed by showAlert without the loading UI when there are values in the to email list', () => {
+    it('invokes the sendPreviewV2 function with loading UI, followed by showAlert without the loading UI when there are values in the to email list', () => {
       const {
         promise,
         wrapper,
-        sendPreview,
+        sendPreviewV2,
         showAlert
       } = openModal();
 
@@ -113,7 +113,7 @@ describe('SendTestEmailButton', () => {
         wrapper.find('form').simulate('submit', { preventDefault: jest.fn() });
 
         expect(wrapper.find('Loading')).toExist();
-        expect(sendPreview).toHaveBeenCalled();
+        expect(sendPreviewV2).toHaveBeenCalled();
 
         return promise.then(() => {
           expect(wrapper.find('Loading')).not.toExist();
