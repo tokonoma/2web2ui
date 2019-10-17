@@ -1,11 +1,22 @@
-.filterTitle {
-  padding-top: .3rem;
-  display: flex;
-  :first-child{
-    flex: 1 0 0;
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.Filters {
+  display: grid;
+  grid-column-gap: spacing();
+  grid-row-gap: spacing();
+  grid-template-columns: 1.25fr 1fr auto auto;
+}
+
+.DateFilter {
+  @media only screen and (max-width: breakpoint(medium)) {
+    grid-column-start: 1;
+    grid-column-end: 5;
   }
 }
 
-.paddingLeft {
-  padding-left: 1rem;
+.RecipientFilter {
+  @media only screen and (max-width: breakpoint(medium)) {
+    grid-column-start: 1;
+    grid-column-end: 3;
+  }
 }

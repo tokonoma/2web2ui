@@ -5,7 +5,7 @@ import moment from 'moment';
 import _ from 'lodash';
 import { getMessageEvents, refreshMessageEventsDateRange, updateMessageEventsSearchOptions, addFilters } from 'src/actions/messageEvents';
 import { selectMessageEventsSearchOptions } from 'src/selectors/messageEvents';
-import { Panel, Grid, TextField } from '@sparkpost/matchbox';
+import { Panel, TextField } from '@sparkpost/matchbox';
 import AdvancedFiltersModal from './AdvancedFiltersModal';
 import ActiveFilters from './ActiveFilters';
 import ShareModal from '../../components/ShareModal';
@@ -63,8 +63,8 @@ export class MessageEventsSearch extends Component {
     return (
       <Panel>
         <Panel.Section>
-          <Grid>
-            <Grid.Column xs={12} md={5} xl={6}>
+          <div className={styles.Filters}>
+            <div className={styles.DateFilter}>
               <DatePicker
                 {...search.dateOptions}
                 relativeDateOptions={RELATIVE_DATE_OPTIONS}
@@ -79,8 +79,8 @@ export class MessageEventsSearch extends Component {
                   canChangeMonth: false
                 }}
               />
-            </Grid.Column>
-            <Grid.Column>
+            </div>
+            <div className={styles.RecipientFilter}>
               <TextField
                 labelHidden
                 placeholder={recipients.placeholder}
@@ -89,14 +89,14 @@ export class MessageEventsSearch extends Component {
                 onFocus={() => this.setState({ recipientError: null })}
                 error={this.state.recipientError}
               />
-            </Grid.Column>
-            <div className={styles.paddingLeft}>
+            </div>
+            <div>
               <AdvancedFiltersModal/>
             </div>
-            <div className={styles.paddingLeft}>
+            <div>
               <ShareModal disabled={loading} searchOptions={searchOptions} />
             </div>
-          </Grid>
+          </div>
         </Panel.Section>
         <ActiveFilters />
       </Panel>

@@ -3,11 +3,11 @@
 exports[`Component: MessageEventsSearch renders correctly 1`] = `
 <Panel>
   <Panel.Section>
-    <Grid>
-      <Grid.Column
-        md={5}
-        xl={6}
-        xs={12}
+    <div
+      className="Filters"
+    >
+      <div
+        className="DateFilter"
       >
         <AppDatePicker
           dateFieldFormat="MMM Do h:mma"
@@ -47,8 +47,10 @@ exports[`Component: MessageEventsSearch renders correctly 1`] = `
           roundToPrecision={false}
           to={2018-02-15T12:00:00.000Z}
         />
-      </Grid.Column>
-      <Grid.Column>
+      </div>
+      <div
+        className="RecipientFilter"
+      >
         <TextField
           error={null}
           labelHidden={true}
@@ -59,21 +61,17 @@ exports[`Component: MessageEventsSearch renders correctly 1`] = `
           resize="both"
           type="text"
         />
-      </Grid.Column>
-      <div
-        className="paddingLeft"
-      >
+      </div>
+      <div>
         <Connect(AdvancedFiltersModal) />
       </div>
-      <div
-        className="paddingLeft"
-      >
+      <div>
         <withRouter(Connect(ShareModal))
           disabled={false}
           searchOptions={Object {}}
         />
       </div>
-    </Grid>
+    </div>
   </Panel.Section>
   <Connect(ActiveFilters) />
 </Panel>
