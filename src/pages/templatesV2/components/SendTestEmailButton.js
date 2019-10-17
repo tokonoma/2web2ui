@@ -20,7 +20,7 @@ const SendTestEmailButton = () => {
     showAlert,
     subaccountId,
     parsedTestData,
-    updateDraft
+    updateDraftV2
   } = useEditorContext();
   const {
     handleMultiEmailChange,
@@ -54,7 +54,7 @@ const SendTestEmailButton = () => {
 
       // Save the template, then allow the user to send a preview
       // The preview can be send whether the current draft was successfully saved or not.
-      updateDraft({
+      updateDraftV2({
         id: templateId,
         content,
         testData: parsedTestData

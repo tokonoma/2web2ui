@@ -24,18 +24,19 @@ describe('SendTestEmailButton', () => {
 
     return shallow(<SendTestEmailButton {...props}/>);
   };
+
   const getMultiEmailField = (wrapper) => wrapper.find('[name="emailTo"]');
 
   // Render the subject, open the modal, and return relevant variables for use in test cases
   const openModal = () => {
     const promise = Promise.resolve();
-    const updateDraft = jest.fn(() => promise);
+    const updateDraftV2 = jest.fn(() => promise);
     const sendPreviewV2 = jest.fn(() => promise);
     const showAlert = jest.fn(() => promise);
     const setTestDataV2 = jest.fn(() => promise);
     const wrapper = subject({
       isPublishedMode: false,
-      updateDraft,
+      updateDraftV2,
       sendPreviewV2,
       showAlert,
       setTestDataV2
@@ -46,7 +47,7 @@ describe('SendTestEmailButton', () => {
     return {
       wrapper,
       promise,
-      updateDraft,
+      updateDraftV2,
       sendPreviewV2,
       showAlert,
       setTestDataV2
@@ -54,12 +55,12 @@ describe('SendTestEmailButton', () => {
   };
 
   it('opens the modal and saves the draft when the "Send a Test" button is clicked', () => {
-    const { promise, wrapper, updateDraft } = openModal();
+    const { promise, wrapper, updateDraftV2 } = openModal();
 
     wrapper.find('[children="Send a Test"]').simulate('click');
 
     expect(wrapper.find('Modal')).toHaveProp('open', true);
-    expect(updateDraft).toHaveBeenCalled();
+    expect(updateDraftV2).toHaveBeenCalled();
     expect(wrapper.find('Loading')).toExist();
 
     return promise.then(() => {
