@@ -13,22 +13,7 @@ describe('useEditorTestData', () => {
   it('returns default values', () => {
     const wrapper = useTestWrapper();
 
-    expect(useHook(wrapper)).toEqual({
-      testData: undefined,
-      setTestData: expect.any(Function)
-    });
-  });
-
-  it('does not call `getRecipientList` when the `draft` is undefined', () => {
-    const getSnippet = jest.fn();
-    const draft = undefined;
-
-    useTestWrapper({
-      getSnippet,
-      draft
-    });
-
-    expect(getSnippet).not.toHaveBeenCalled();
+    expect(useHook(wrapper)).toMatchSnapshot();
   });
 
   // TODO: Can't get this to work? The test will pass, but keep getting:
