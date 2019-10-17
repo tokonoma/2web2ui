@@ -78,17 +78,17 @@ describe('ListPage', () => {
 
   it('deletes template upon confirmation', async () => {
     const delFn = jest.fn(() => Promise.resolve());
-    const wrapper = subject({ deleteTemplate: delFn });
+    const wrapper = subject({ deleteTemplateV2: delFn });
     wrapper.setState({ showDeleteModal: true, templateToDelete: { id: 'foo', name: 'Bar' }});
     await wrapper.find('DeleteModal').prop('onDelete')();
-    expect(delFn).toHaveBeenCalledWith('foo');
+    expect(delFn).toHaveBeenCalledWith({ id: 'foo' });
   });
 
   it('shows alert after delete and refreshes list', async () => {
     const delFn = jest.fn(() => Promise.resolve());
     const alertFn = jest.fn();
     const listTemplateFn = jest.fn();
-    const wrapper = subject({ deleteTemplate: delFn, showAlert: alertFn, listTemplates: listTemplateFn });
+    const wrapper = subject({ deleteTemplateV2: delFn, showAlert: alertFn, listTemplates: listTemplateFn });
     wrapper.setState({ showDeleteModal: true, templateToDelete: { id: 'foo', name: 'Bar' }});
     await wrapper.find('DeleteModal').prop('onDelete')();
     expect(alertFn).toHaveBeenCalledWith({ type: 'success', message: 'Template Bar deleted' });
