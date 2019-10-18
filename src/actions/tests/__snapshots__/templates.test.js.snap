@@ -1,5 +1,43 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Action Creator: Templates createV2 dispatches create template with passed in data 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "data": Object {
+        "content": Object {
+          "amp_html": undefined,
+          "html": "<p>Hello world</p>",
+          "reply_to": undefined,
+          "text": undefined,
+        },
+        "id": "my-id",
+        "shared_with_subaccounts": true,
+      },
+      "headers": Object {
+        "x-msys-subaccount": 123,
+      },
+      "method": "POST",
+      "url": "/v1/templates",
+    },
+    "type": "CREATE_TEMPLATE",
+  },
+]
+`;
+
+exports[`Action Creator: Templates deleteTemplateV2 dispatches delete template with the passed in ID and subaccount 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "headers": Object {},
+      "method": "DELETE",
+      "url": "/v1/templates/undefined",
+    },
+    "type": "DELETE_TEMPLATE",
+  },
+]
+`;
+
 exports[`Action Creator: Templates getTestData should handle old test data 1`] = `
 Array [
   Object {
@@ -73,6 +111,63 @@ Array [
       },
     },
     "type": "GET_TEMPLATE_TEST_DATA",
+  },
+]
+`;
+
+exports[`Action Creator: Templates publishV2 dispatches the publish action with passed in data 1`] = `
+Array [
+  Object {
+    "type": "PUBLISH_ACTION_PENDING",
+  },
+  Object {
+    "meta": Object {
+      "context": Object {
+        "id": "foo",
+      },
+      "data": Object {
+        "content": Object {
+          "amp_html": undefined,
+          "html": undefined,
+          "reply_to": undefined,
+          "text": undefined,
+        },
+      },
+      "headers": Object {
+        "x-msys-subaccount": 123,
+      },
+      "method": "PUT",
+      "params": Object {},
+      "url": "/v1/templates/foo",
+    },
+    "type": "UPDATE_TEMPLATE",
+  },
+  Object {
+    "type": "SET_TEMPLATE_TEST_DATA",
+  },
+  Object {
+    "meta": Object {
+      "data": Object {
+        "id": "foo",
+        "published": true,
+        "testData": Object {
+          "metadata": Object {},
+          "options": Object {},
+          "substitution_data": Object {
+            "hello": "world",
+          },
+        },
+      },
+      "headers": Object {
+        "x-msys-subaccount": 123,
+      },
+      "method": "PUT",
+      "url": "/v1/templates/foo",
+    },
+    "type": "PUBLISH_TEMPLATE",
+  },
+  Object {
+    "type": "PUBLISH_ACTION_SUCCESS",
   },
 ]
 `;
@@ -362,6 +457,31 @@ Array [
       "url": "/v1/transmissions",
     },
     "type": "SEND_PREVIEW_TRANSMISSION",
+  },
+]
+`;
+
+exports[`Action Creator: Templates updateV2 dispatches update template with passed in data 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "context": Object {
+        "id": "my-new-id",
+      },
+      "data": Object {
+        "content": Object {
+          "amp_html": undefined,
+          "html": "<p>My new content.</p>",
+          "reply_to": undefined,
+          "text": undefined,
+        },
+      },
+      "headers": Object {},
+      "method": "PUT",
+      "params": Object {},
+      "url": "/v1/templates/my-new-id",
+    },
+    "type": "UPDATE_TEMPLATE",
   },
 ]
 `;
