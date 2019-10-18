@@ -9,7 +9,6 @@ import { PanelLoading, TableCollection, Empty, DeleteModal } from 'src/component
 import { deleteSuppression } from 'src/actions/suppressions';
 import { showAlert } from 'src/actions/globalAlert';
 import Detail from './Detail';
-import { getSubAccountName } from 'src/helpers/subaccounts';
 
 
 export class Results extends Component {
@@ -37,15 +36,15 @@ export class Results extends Component {
   }
 
   getRowData = (row) => {
-    const { recipient, type, source, subaccount_id: subaccountId } = row;
-    const { subaccounts, hasSubaccounts } = this.props;
+    const { recipient, type, source, subaccount_id: subaccountId, subaccount_name } = row;
+    const { hasSubaccounts } = this.props;
     const rowData = [recipient,
       type === 'transactional' ? 'Transactional' : 'Non-transactional',
       source
     ];
 
     if (hasSubaccounts) {
-      rowData.push(<SubaccountTag id={subaccountId} master={!subaccountId} name={getSubAccountName(subaccounts,subaccountId)}/>);
+      rowData.push(<SubaccountTag id={subaccountId} master={!subaccountId} name={subaccount_name}/>);
     }
 
     rowData.push(

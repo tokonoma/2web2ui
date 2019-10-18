@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Selector: suppressions should select suppression list with subaccount_name if subaccount_id is present 1`] = `[Function]`;

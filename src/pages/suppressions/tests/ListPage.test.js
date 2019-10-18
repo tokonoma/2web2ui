@@ -12,7 +12,8 @@ describe('ListPage', () => {
     props = {
       listSubaccounts: jest.fn(() => Promise.resolve()),
       searchRecipient: jest.fn(() => Promise.resolve()),
-      searchSuppressions: jest.fn(() => Promise.resolve())
+      searchSuppressions: jest.fn(() => Promise.resolve()),
+      subaccounts: []
     };
 
     wrapper = shallow(<ListPage {...props} />);
@@ -26,7 +27,7 @@ describe('ListPage', () => {
 
   it('renders correctly with subaccounts', () => {
     const newProps = { ...props, hasSubaccounts: true };
-    wrapper = shallow(<ListPage {...newProps } />);
+    wrapper = shallow(<ListPage {...newProps} />);
     expect(wrapper).toMatchSnapshot();
     expect(props.listSubaccounts).toHaveBeenCalledTimes(1);
   });
