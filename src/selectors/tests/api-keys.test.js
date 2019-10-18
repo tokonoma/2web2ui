@@ -25,7 +25,7 @@ describe('ApiKey Selectors', () => {
       },
       subaccounts: {
         list: [
-          { id: 'subId' }
+          { id: 'subId', name: 'subName' }
         ]
       }
     };

@@ -6,7 +6,6 @@ exports[`SubaccountTableData returns a tag 1`] = `
   id={999}
   isDefault={false}
   master={false}
-  name=""
   receiveAll={false}
 />
 `;

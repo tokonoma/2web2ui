@@ -11,6 +11,7 @@ describe('ListPage', () => {
       listSubaccounts={() => {}}
       hasSubaccounts={true}
       snippets={[{ id: 'example-id', name: 'Example Snippet' }]}
+      subaccounts={[]}
       {...props}
     />
   );

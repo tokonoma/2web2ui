@@ -50,7 +50,7 @@ export default class SnippetCollection extends Component {
   )
 
   render() {
-    const { snippets, subaccounts } = this.props;
+    const { snippets } = this.props;
     const visibleColumns = this.columns.filter(({ visible = () => true }) => visible());
 
     return (
@@ -59,7 +59,7 @@ export default class SnippetCollection extends Component {
           <TableCollection
             columns={visibleColumns.map(({ header }) => header)}
             rows={snippets}
-            getRowData={this.renderRow(visibleColumns, { openDeleteModal, subaccounts })}
+            getRowData={this.renderRow(visibleColumns, { openDeleteModal })}
             defaultSortColumn={this.columns[0].header.sortKey}
             filterBox={filterBoxConfig}
             pagination
