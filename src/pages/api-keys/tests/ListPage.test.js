@@ -14,6 +14,7 @@ describe('Api Keys List Page', () => {
     listApiKeys,
     listSubaccounts,
     hasSubaccounts: false,
+    subaccounts: [],
     keys: [
       {
         id: '123id',

@@ -11,7 +11,7 @@ import { Loading, SubaccountTag, TableCollection, ApiErrorBanner, ApiKeySuccessB
 import { filterBoxConfig } from './tableConfig';
 import { selectKeysForAccount } from 'src/selectors/api-keys';
 import { hasSubaccounts } from 'src/selectors/subaccounts';
-import { setSubaccountQuery, getSubAccountName } from 'src/helpers/subaccounts';
+import { setSubaccountQuery } from 'src/helpers/subaccounts';
 import { LINKS } from 'src/constants';
 
 const primaryAction = {
@@ -31,7 +31,7 @@ export class ListPage extends Component {
 
   componentDidMount() {
     this.props.listApiKeys();
-    if (hasSubaccounts) {
+    if (hasSubaccounts && this.props.subaccounts.length === 0) {
       this.props.listSubaccounts();
     }
   }
@@ -45,15 +45,15 @@ export class ListPage extends Component {
   }
 
   getRowData = (key) => {
-    const { short_key, subaccount_id } = key;
-    const { hasSubaccounts, subaccounts } = this.props;
+    const { short_key, subaccount_id, subaccount_name } = key;
+    const { hasSubaccounts } = this.props;
     const rowData = [
       this.getLabel(key),
       <ShortKeyCode shortKey={short_key} />
     ];
 
     if (hasSubaccounts) {
-      rowData.push(<SubaccountTag id={subaccount_id} name={getSubAccountName(subaccounts,subaccount_id)}/>);
+      rowData.push(<SubaccountTag id={subaccount_id} name={subaccount_name}/>);
     }
 
     return rowData;
