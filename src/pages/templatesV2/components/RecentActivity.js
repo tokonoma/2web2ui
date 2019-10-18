@@ -21,63 +21,61 @@ const RecentActivity = (props) => {
     <>
       <h2>Recent Activity</h2>
 
-      <div className={styles.RecentActivity}>
+      <div className={styles.RecentActivity} role="list">
         {descendingSortedTemplates.map((template, index) => {
           { /* Render only the first four items */ }
           if (index <= 3) {
             return (
-              <Panel
-                className={styles.RecentActivityPanel}
-                accent
-                key={`recent-activity-template-${index}`}
-              >
-                <div className={styles.RecentActivityPanelContent}>
-                  <Panel.Section className={styles.RecentActivityStatus}>
-                    {(template.list_status === 'published' || template.list_status === 'published_with_draft') ? (
-                      <div className={styles.RecentActivityStatus}>
-                        <CheckCircle className={styles.RecentActivityPublishedIcon}/>
+              <div role="listitem" key={`recent-activity-template-${index}`}>
+                <Panel className={styles.RecentActivityPanel} accent>
+                  <div className={styles.RecentActivityPanelContent}>
+                    <Panel.Section className={styles.RecentActivityStatus}>
+                      {(template.list_status === 'published' || template.list_status === 'published_with_draft') ? (
+                        <div className={styles.RecentActivityStatus}>
+                          <CheckCircle className={styles.RecentActivityPublishedIcon}/>
 
-                        <span className={styles.RecentActivityContent}>Published</span>
+                          <span className={styles.RecentActivityContent}>Published</span>
+                        </div>
+                      ) : (
+                        <div className={styles.RecentActivityStatus}>
+                          <FileEdit className={styles.RecentActivityDraftIcon}/>
+
+                          <span className={styles.RecentActivityContent}>Draft</span>
+                        </div>
+                      )}
+                    </Panel.Section>
+
+                    <Panel.Section className={styles.RecentActivitySection}>
+                      <strong>{template.name}</strong>
+                    </Panel.Section>
+
+                    <div className={styles.RecentActivityMeta}>
+                      <div className={styles.RecentActivityDate}>
+                        <div>
+                          <span>Updated&nbsp;</span>
+
+                          <DisplayDate
+                            timestamp={template.last_update_time}
+                            formattedDate={template.last_update_time}
+                          />
+                        </div>
                       </div>
-                    ) : (
-                      <div className={styles.RecentActivityStatus}>
-                        <FileEdit className={styles.RecentActivityDraftIcon}/>
 
-                        <span className={styles.RecentActivityContent}>Draft</span>
-                      </div>
-                    )}
-                  </Panel.Section>
+                      <div className={styles.RecentActivityActions}>
+                        <DuplicateAction
+                          className={styles.RecentActivityAction}
+                          onClick={() => onToggleDuplicateModal(template)}
+                        />
 
-                  <Panel.Section className={styles.RecentActivitySection}>
-                    <strong>{template.name}</strong>
-                  </Panel.Section>
-
-                  <div className={styles.RecentActivityMeta}>
-                    <div className={styles.RecentActivityDate}>
-                      <div>
-                        <span>Updated&nbsp;</span>
-
-                        <DisplayDate
-                          timestamp={template.last_update_time}
-                          formattedDate={template.last_update_time}
+                        <DeleteAction
+                          className={styles.RecentActivityAction}
+                          onClick={() => onToggleDeleteModal(template)}
                         />
                       </div>
                     </div>
-
-                    <div className={styles.RecentActivityActions}>
-                      <DuplicateAction
-                        className={styles.RecentActivityAction}
-                        onClick={() => onToggleDuplicateModal(template)}
-                      />
-
-                      <DeleteAction
-                        className={styles.RecentActivityAction}
-                        onClick={() => onToggleDeleteModal(template)}
-                      />
-                    </div>
                   </div>
-                </div>
-              </Panel>
+                </Panel>
+              </div>
             );
           }
         })}
