@@ -9,10 +9,10 @@ export const passFail = (value) => {
   switch (value) {
     case 'pass':
       return <CheckCircle className={styles.Pass}/>;
-    case 'fail':
-      return <span className={styles.Fail}>Fail</span>;
-    default:
+    case null:
       return '---';
+    default:
+      return <span className={styles.Fail}>{startCase(value)}</span>;
   }
 };
 const HeaderComponent = () => (<thead>

@@ -16,7 +16,13 @@ exports[`Component: AllMessagesCollection helper: passFail function returns corr
 
 exports[`Component: AllMessagesCollection helper: passFail function returns correct value for an input of null 1`] = `"---"`;
 
-exports[`Component: AllMessagesCollection helper: passFail function returns correct value for an input of other results 1`] = `"---"`;
+exports[`Component: AllMessagesCollection helper: passFail function returns correct value for an input of other results 1`] = `
+<span
+  className="Fail"
+>
+  Foofoo
+</span>
+`;
 
 exports[`Component: AllMessagesCollection renders correctly with data 1`] = `
 <TableCollection
