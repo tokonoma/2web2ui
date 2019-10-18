@@ -25,7 +25,7 @@
   align-items: center;
   color: color(gray, 3);
   font-size: rem(14);
-  margin-bottom: spacing();
+  border: 0;
 }
 
 .RecentActivityContent {
@@ -34,16 +34,28 @@
 }
 
 .RecentActivityDate {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
+  // display: flex;
+  // justify-content: space-between;
+  // width: 100%;
 }
 
 .RecentActivityPublishedIcon {
   fill: #44D09E;
 }
 
+.RecentActivityMeta {
+  align-self: flex-end;
+  padding: spacing();
+  display: grid;
+  grid-template-columns: 4fr 1fr;
+}
+
 .RecentActivityMetaContent {
   display: flex;
   align-items: center;
+}
+
+.RecentActivityActions {
+  display: flex;
+  flex-direction: row;
 }

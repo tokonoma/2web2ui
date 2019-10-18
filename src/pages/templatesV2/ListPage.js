@@ -35,23 +35,18 @@ export default class ListPage extends Component {
       });
   };
 
-  toggleDeleteModal = (props) => {
+  toggleDeleteModal = (template) => {
     this.setState({
       showDeleteModal: !this.state.showDeleteModal,
-      templateToDelete: props
+      templateToDelete: template
     });
   };
 
   toggleDuplicateModal = (template) => {
-    const { getDraft } = this.props;
-
-    getDraft(template.id)
-      .then((res) => {
-        this.setState({
-          templateToDuplicate: res,
-          showDuplicateModal: !this.state.showDuplicateModal
-        });
-      });
+    this.setState({
+      showDuplicateModal: !this.state.showDuplicateModal,
+      templateToDuplicate: template
+    });
   }
 
   handleDuplicateSuccess = () => {
@@ -166,6 +161,7 @@ export default class ListPage extends Component {
               <RecentActivity
                 templates={templates}
                 onToggleDeleteModal={this.toggleDeleteModal}
+                onToggleDuplicateModal={this.toggleDuplicateModal}
               />
             }
 
