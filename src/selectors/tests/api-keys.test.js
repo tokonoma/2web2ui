@@ -196,6 +196,11 @@ describe('ApiKey Selectors', () => {
               lol: 'wut'
             }
           ]
+        },
+        subaccounts: {
+          list: [
+            { id: 'subId' }
+          ]
         }
       };
 
