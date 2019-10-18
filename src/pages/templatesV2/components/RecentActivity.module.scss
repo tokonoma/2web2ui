@@ -2,13 +2,9 @@
 
 .RecentActivity {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));;
   grid-gap: spacing();
   margin-bottom: spacing('large');
-
-  @media (min-width: breakpoint('small')) {
-    grid-template-columns: 1fr 1fr;
-  }
 
   @media (min-width: breakpoint('large')) {
     grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -21,7 +17,7 @@
 
 .RecentActivityPanelContent {
   display: grid;
-  grid-template-rows: 0.5fr 1fr 1fr;
+  grid-template-rows: 0.5fr 1fr 0.75fr;
   height: 100%;
 }
 
@@ -50,7 +46,7 @@
 }
 
 .RecentActivityMeta {
-  padding: spacing();
+  padding: 0 spacing();
   display: grid;
   grid-template-columns: 4fr 1fr;
 }
@@ -61,6 +57,11 @@
 }
 
 .RecentActivityActions {
+  align-self: center;
   display: flex;
   flex-direction: row;
+}
+
+.RecentActivityAction {
+  height: spacing();
 }

@@ -56,7 +56,11 @@ export const Status = (rowData) => {
 };
 
 export const DeleteAction = ({ onClick, ...props }) => (
-  <Button flat onClick={() => onClick(props)}>
+  <Button
+    className={styles.Action}
+    flat
+    onClick={() => onClick(props)}
+  >
     <Delete size={16}/>
 
     <ScreenReaderOnly>Delete Template</ScreenReaderOnly>
@@ -64,7 +68,11 @@ export const DeleteAction = ({ onClick, ...props }) => (
 );
 
 export const DuplicateAction = ({ onClick, ...props }) => (
-  <Button flat onClick={() => onClick(props)}>
+  <Button
+    className={styles.Action}
+    flat
+    onClick={() => onClick(props)}
+  >
     <ContentCopy size={16}/>
 
     <ScreenReaderOnly>Duplicate Template</ScreenReaderOnly>
