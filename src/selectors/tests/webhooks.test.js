@@ -1,7 +1,8 @@
 import {
   selectWebhookBatches,
   selectInitialSubaccountValue,
-  getSelectedEvents
+  getSelectedEvents,
+  selectWebhooks
 } from '../webhooks';
 
 describe('Webhooks selectors', () => {
@@ -19,11 +20,21 @@ describe('Webhooks selectors', () => {
           key: 'value'
         }
       ]
+    },
+    subaccounts: {
+      list: [
+        { name: 'sub 1', id: 101 },
+        { name: 'sub 2', id: 501 }
+      ]
     }
   };
 
   test('selectWebhookBatches should add formatted_time and status to batches store', () => {
     expect(selectWebhookBatches(state)).toMatchSnapshot();
+  });
+
+  test('selectWebhooks should have webhooks with subaccount_name if subaccount_id present', () => {
+    expect(selectWebhooks(state)).toMatchSnapshot();
   });
 
   describe('selectInitialSubaccountValue', () => {

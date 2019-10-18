@@ -25,3 +25,5 @@ Array [
   },
 ]
 `;
+
+exports[`Webhooks selectors selectWebhooks should have webhooks with subaccount_name if subaccount_id present 1`] = `Array []`;

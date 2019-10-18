@@ -9,6 +9,9 @@ describe('Users Selectors', () => {
         zebra: { name: 'Zebra', username: 'zebra', access: 'templates' }
       },
       sortKey: 'name'
+    },
+    subaccounts: {
+      list: []
     }
   };
 
