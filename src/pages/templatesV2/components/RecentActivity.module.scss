@@ -1,0 +1,49 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.RecentActivity {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: spacing();
+  margin-bottom: spacing('large');
+
+  @media (min-width: breakpoint('small')) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media (min-width: breakpoint('large')) {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+}
+
+.RecentActivityDate {
+  color: color(gray, 3);
+  font-size: rem(14);
+}
+
+.RecentActivityStatus {
+  display: flex;
+  align-items: center;
+  color: color(gray, 3);
+  font-size: rem(14);
+  margin-bottom: spacing();
+}
+
+.RecentActivityContent {
+  text-transform: uppercase;
+  margin-left: spacing('smaller');
+}
+
+.RecentActivityDate {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.RecentActivityPublishedIcon {
+  fill: #44D09E;
+}
+
+.RecentActivityMetaContent {
+  display: flex;
+  align-items: center;
+}

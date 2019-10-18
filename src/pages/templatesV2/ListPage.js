@@ -5,6 +5,7 @@ import { ApiErrorBanner, DeleteModal, Loading, TableCollection } from 'src/compo
 import { Templates } from 'src/components/images';
 import PageLink from 'src/components/pageLink';
 import { resolveTemplateStatus } from 'src/helpers/templates';
+import RecentActivity from './components/RecentActivity';
 import { DeleteAction, DuplicateAction, LastUpdated, Name, Status } from './components/ListComponents';
 import DuplicateTemplateModal from './components/editorActions/DuplicateTemplateModal';
 import { routeNamespace } from './constants/routes';
@@ -159,6 +160,16 @@ export default class ListPage extends Component {
               by having a set of named templates to reference.
               Building a library of "go-to" templates for recurrent use-cases to reduce workload for your team.
             </p>
+
+            {/* Per UX, only render if there are more than 2 templates available */}
+            {templates.length > 2 &&
+              <RecentActivity
+                templates={templates}
+                onToggleDeleteModal={this.toggleDeleteModal}
+              />
+            }
+
+            <h2>All Templates</h2>
 
             <TableCollection
               columns={columns.map(({ header, key }) => ({ ...header, key }))}
