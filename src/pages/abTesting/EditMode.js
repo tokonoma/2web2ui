@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { reduxForm, getFormValues } from 'redux-form';
 import { withRouter } from 'react-router-dom';
 import { list as listSubaccounts } from 'src/actions/subaccounts';
-import { getSubAccountName } from 'src/helpers/subaccounts';
 
 import { showAlert } from 'src/actions/globalAlert';
 import { updateDraft, getAbTest, updateAbTest, scheduleAbTest, rescheduleAbTest } from 'src/actions/abTesting';
@@ -28,6 +27,9 @@ export class EditMode extends Component {
     // Get templates here for the typeaheads
     // Ensures the list is always up to date
     this.props.listTemplates();
+    if (this.props.subaccounts.length === 0) {
+      this.props.listSubaccounts();
+    }
   }
 
   handleSaveAsDraft = (values) => {
@@ -108,7 +110,7 @@ export class EditMode extends Component {
   }
 
   render() {
-    const { breadcrumbAction, test, rescheduling, formValues, submitting, subaccounts, subaccountId } = this.props;
+    const { breadcrumbAction, test, rescheduling, formValues, submitting, subaccountName, subaccountId } = this.props;
 
     return (
       <Page
@@ -122,7 +124,7 @@ export class EditMode extends Component {
             <StatusContent test={test} rescheduling={rescheduling} />
           </Section.Left>
           <Section.Right>
-            <StatusPanel test={test} subaccountId={subaccountId} name={getSubAccountName(subaccounts,subaccountId)}/>
+            <StatusPanel test={test} subaccountId={subaccountId} name={subaccountName}/>
             <StatusFields disabled={submitting} />
           </Section.Right>
         </Section>
