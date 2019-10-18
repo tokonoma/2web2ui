@@ -15,6 +15,10 @@
   }
 }
 
+.RecentActivityPanel {
+  margin: 0; // Overriding Matchbox defaults
+}
+
 .RecentActivityPanelContent {
   display: grid;
   grid-template-rows: 0.5fr 1fr 1fr;
@@ -22,6 +26,8 @@
 }
 
 .RecentActivityDate {
+  display: flex;
+  align-items: center;
   color: color(gray, 3);
   font-size: rem(14);
 }
@@ -44,7 +50,6 @@
 }
 
 .RecentActivityMeta {
-  align-self: flex-end;
   padding: spacing();
   display: grid;
   grid-template-columns: 4fr 1fr;

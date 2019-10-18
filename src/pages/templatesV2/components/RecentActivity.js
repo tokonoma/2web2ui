@@ -46,12 +46,14 @@ const RecentActivity = (props) => {
 
                   <div className={styles.RecentActivityMeta}>
                     <div className={styles.RecentActivityDate}>
-                      <span>Updated&nbsp;</span>
+                      <div>
+                        <span>Updated&nbsp;</span>
 
-                      <DisplayDate
-                        timestamp={template.last_update_time}
-                        formattedDate={template.last_update_time}
-                      />
+                        <DisplayDate
+                          timestamp={template.last_update_time}
+                          formattedDate={template.last_update_time}
+                        />
+                      </div>
                     </div>
 
                     <div className={styles.RecentActivityActions}>
