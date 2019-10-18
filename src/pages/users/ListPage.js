@@ -12,7 +12,6 @@ import { list as listSubaccounts } from 'src/actions/subaccounts';
 import * as usersActions from 'src/actions/users';
 import { selectUsers } from 'src/selectors/users';
 import { hasSubaccounts } from 'src/selectors/subaccounts';
-import { getSubAccountName } from 'src/helpers/subaccounts';
 import { SubaccountTag, Loading, ApiErrorBanner, DeleteModal, TableCollection, ActionPopover } from 'src/components';
 import User from './components/User';
 
@@ -59,14 +58,14 @@ export class ListPage extends Component {
 
   componentDidMount() {
     this.props.listUsers();
-    if (hasSubaccounts) {
+    if (hasSubaccounts && this.props.subaccounts.length === 0) {
       this.props.listSubaccounts();
     }
   }
 
   // Do not allow current user to change their access/role or delete their account
   getRowData = (user) => {
-    const { hasSubaccounts, isSubAccountReportingLive, subaccounts } = this.props;
+    const { hasSubaccounts, isSubAccountReportingLive } = this.props;
     const data = [
       <User name={user.name} email={user.email} username={user.username} />,
       user.roleLabel,
@@ -75,7 +74,7 @@ export class ListPage extends Component {
       <Actions username={user.username} deletable={!user.isCurrentUser} onDelete={this.handleDeleteRequest} />
     ];
     if (isSubAccountReportingLive && hasSubaccounts) {
-      data.splice(2, 0, user.subaccount_id ? <SubaccountTag id={user.subaccount_id} name={getSubAccountName(subaccounts,user.subaccount_id)}/> : null);
+      data.splice(2, 0, user.subaccount_id ? <SubaccountTag id={user.subaccount_id} name={user.subaccount_name}/> : null);
     }
     return data;
   };
@@ -181,8 +180,8 @@ const mapStateToProps = (state) => ({
   loading: state.users.loading,
   users: selectUsers(state),
   hasSubaccounts: hasSubaccounts(state),
-  isSubAccountReportingLive: hasUiOption('subaccount_reporting')(state),
-  subaccounts: state.subaccounts.list
+  subaccounts: state.subaccounts.list,
+  isSubAccountReportingLive: hasUiOption('subaccount_reporting')(state)
 });
 
 export default connect(mapStateToProps, { ...usersActions, listSubaccounts })(ListPage);
