@@ -1,7 +1,7 @@
 import React from 'react';
 import { Grid } from '@sparkpost/matchbox';
 import PercentWheel from 'src/components/percentWheel';
-import { PERCENT_WHEEL } from '../constants/percentWheel';
+import { PERCENT_WHEEL } from '../constants/graphs';
 
 const TTRM = [
   { key: 'under_3_minutes_pct', label: '0-3 min' },

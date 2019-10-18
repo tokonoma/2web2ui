@@ -2,6 +2,7 @@ import React from 'react';
 import isEmpty from 'lodash/isEmpty';
 import { Bar, BarChart, CartesianGrid, Cell, LabelList, ResponsiveContainer, XAxis, YAxis } from 'recharts';
 import { formatPercent } from 'src/helpers/units';
+import { FOLDER_PLACEMENT_BAR_CHART } from '../constants/graphs';
 import styles from './FolderPlacementBarChart.module.scss';
 
 const FormatFolderNames = ({ y, payload }) => (<g transform={`translate(${0},${y})`}>
@@ -9,18 +10,18 @@ const FormatFolderNames = ({ y, payload }) => (<g transform={`translate(${0},${y
 </g>);
 
 
-const FolderPlacementChart = ({ placements, ...props }) => {
+const FolderPlacementChart = ({ placements }) => {
   if (isEmpty(placements)) {
     return null;
   }
 
   const formattedPlacements = [
     {
-      name: 'Inbox', value: placements.inbox_pct * 100, color: '#50D0D9'
+      name: 'Inbox', value: placements.inbox_pct * 100, color: FOLDER_PLACEMENT_BAR_CHART.inbox.color
     }, {
-      name: 'Spam', value: placements.spam_pct * 100, color: '#0CBAC7'
+      name: 'Spam', value: placements.spam_pct * 100, color: FOLDER_PLACEMENT_BAR_CHART.spam.color
     }, {
-      name: 'Missing', value: placements.missing_pct * 100, color: '#00838C'
+      name: 'Missing', value: placements.missing_pct * 100, color: FOLDER_PLACEMENT_BAR_CHART.missing.color
     }
   ];
 

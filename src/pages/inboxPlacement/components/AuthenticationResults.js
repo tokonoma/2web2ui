@@ -1,7 +1,7 @@
 import React from 'react';
 import PercentWheel from 'src/components/percentWheel';
 import { Grid } from '@sparkpost/matchbox';
-import { PERCENT_WHEEL } from '../constants/percentWheel';
+import { PERCENT_WHEEL } from '../constants/graphs';
 
 const AuthenticationResults = ({ data = {}}) => (
   <Grid>
