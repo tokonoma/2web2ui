@@ -69,8 +69,6 @@ describe('RecentActivity', () => {
     expect(wrapper.find('Panel').length).toBe(4);
   });
 
-
-
   it('invokes the `onToggleDuplicateModal` propr when `DuplicateAction` is clicked', () => {
     const mockToggleDeleteModal = jest.fn();
     const mockToggleDuplicateModal = jest.fn();
