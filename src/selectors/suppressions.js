@@ -4,7 +4,7 @@ import _ from 'lodash';
 import { getSubaccountsIndexedById, getSubaccountName } from './subaccounts';
 
 const selectSuppressionsSearch = (state) => state.suppressions.search;
-const getSuppresionList = (state) => state.suppressions.list;
+const getSuppresionList = (state) => state.suppressions.list || [];
 const selectTypes = createSelector(
   [selectSuppressionsSearch],
   ({ types = []}) => types
