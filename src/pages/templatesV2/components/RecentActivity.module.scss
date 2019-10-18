@@ -15,6 +15,12 @@
   }
 }
 
+.RecentActivityPanelContent {
+  display: grid;
+  grid-template-rows: 0.5fr 1fr 1fr;
+  height: 100%;
+}
+
 .RecentActivityDate {
   color: color(gray, 3);
   font-size: rem(14);
@@ -31,12 +37,6 @@
 .RecentActivityContent {
   text-transform: uppercase;
   margin-left: spacing('smaller');
-}
-
-.RecentActivityDate {
-  // display: flex;
-  // justify-content: space-between;
-  // width: 100%;
 }
 
 .RecentActivityPublishedIcon {

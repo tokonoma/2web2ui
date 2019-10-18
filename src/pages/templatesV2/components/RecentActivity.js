@@ -25,21 +25,19 @@ const RecentActivity = (props) => {
               >
                 <div className={styles.RecentActivityPanelContent}>
                   <Panel.Section className={styles.RecentActivityStatus}>
-                    <div>
-                      {(template.list_status === 'published' || template.list_status === 'published_with_draft') ? (
-                        <div className={styles.RecentActivityStatus}>
-                          <CheckCircle className={styles.RecentActivityPublishedIcon}/>
+                    {(template.list_status === 'published' || template.list_status === 'published_with_draft') ? (
+                      <div className={styles.RecentActivityStatus}>
+                        <CheckCircle className={styles.RecentActivityPublishedIcon}/>
 
-                          <span className={styles.RecentActivityContent}>Published</span>
-                        </div>
-                      ) : (
-                        <div className={styles.RecentActivityStatus}>
-                          <FileEdit className={styles.RecentActivityDraftIcon}/>
+                        <span className={styles.RecentActivityContent}>Published</span>
+                      </div>
+                    ) : (
+                      <div className={styles.RecentActivityStatus}>
+                        <FileEdit className={styles.RecentActivityDraftIcon}/>
 
-                          <span className={styles.RecentActivityContent}>Draft</span>
-                        </div>
-                      )}
-                    </div>
+                        <span className={styles.RecentActivityContent}>Draft</span>
+                      </div>
+                    )}
                   </Panel.Section>
 
                   <Panel.Section className={styles.RecentActivitySection}>
