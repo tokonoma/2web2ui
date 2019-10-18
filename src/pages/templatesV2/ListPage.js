@@ -172,14 +172,11 @@ export default class ListPage extends Component {
               Building a library of "go-to" templates for recurrent use-cases to reduce workload for your team.
             </p>
 
-            {/* Per UX, only render if there are more than 2 templates available */}
-            {templates.length > 2 &&
-              <RecentActivity
-                templates={templates}
-                onToggleDeleteModal={this.toggleDeleteModal}
-                onToggleDuplicateModal={this.toggleDuplicateModal}
-              />
-            }
+            <RecentActivity
+              templates={templates}
+              onToggleDeleteModal={this.toggleDeleteModal}
+              onToggleDuplicateModal={this.toggleDuplicateModal}
+            />
 
             <h2>All Templates</h2>
 

@@ -6,8 +6,16 @@ import { DuplicateAction, DeleteAction } from './ListComponents';
 import styles from './RecentActivity.module.scss';
 
 const RecentActivity = (props) => {
-  const { templates, onToggleDeleteModal, onToggleDuplicateModal } = props;
+  const {
+    templates,
+    onToggleDeleteModal,
+    onToggleDuplicateModal
+  } = props;
   const descendingSortedTemplates = templates.sort((a, b) => new Date(b.last_update_time) - new Date(a.last_update_time));
+
+  if (templates.length < 3) {
+    return;
+  }
 
   return (
     <>
