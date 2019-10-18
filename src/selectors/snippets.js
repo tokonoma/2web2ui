@@ -2,7 +2,7 @@ import { createSelector } from 'reselect';
 import { getSubaccountsIndexedById, getSubaccountName } from './subaccounts';
 import _ from 'lodash';
 
-const getSnippetsItems = (state) => state.snippets.items;
+const getSnippetsItems = (state) => state.snippets.items || [];
 
 
 

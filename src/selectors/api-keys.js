@@ -4,7 +4,7 @@ import { getSubaccountIdFromProps, selectSubaccountIdFromQuery, getSubaccountsIn
 /*
  * generic apiKeys selectors
  */
-const getApiKeys = (state) => state.apiKeys.keys;
+const getApiKeys = (state) => state.apiKeys.keys || [];
 const getGrantsArray = (state) => state.apiKeys.grants;
 const getSubaccountGrantsArray = (state) => state.apiKeys.subaccountGrants;
 export const selectApiKeyId = (state, props) => props.match.params.id;
