@@ -7,6 +7,7 @@ describe('Page: Webhook List', () => {
     listWebhooks: jest.fn(),
     listSubaccounts: jest.fn(() => []),
     error: null,
+    subaccounts: [],
     webhooks: [
       {
         id: 'id',

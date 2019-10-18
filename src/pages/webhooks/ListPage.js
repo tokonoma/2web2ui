@@ -7,8 +7,9 @@ import { listWebhooks } from 'src/actions/webhooks';
 import { list as listSubaccounts } from 'src/actions/subaccounts';
 
 // Helpers and selectors
-import { setSubaccountQuery, getSubAccountName } from 'src/helpers/subaccounts';
+import { setSubaccountQuery } from 'src/helpers/subaccounts';
 import { hasSubaccounts } from 'src/selectors/subaccounts';
+import { selectWebhooks } from 'src/selectors/webhooks';
 
 // Components
 import { Loading, TableCollection, SubaccountTag, ApiErrorBanner } from 'src/components';
@@ -26,7 +27,7 @@ export class WebhooksList extends Component {
 
   componentDidMount() {
     this.props.listWebhooks();
-    if (hasSubaccounts) {
+    if (hasSubaccounts && this.props.subaccounts.length === 0) {
       this.props.listSubaccounts();
     }
   }
@@ -47,8 +48,8 @@ export class WebhooksList extends Component {
     return columns;
   };
 
-  getRowData = ({ id, name, target, subaccount_id, last_successful, last_failure }) => {
-    const { hasSubaccounts, subaccounts } = this.props;
+  getRowData = ({ id, name, target, subaccount_id, last_successful, last_failure, subaccount_name }) => {
+    const { hasSubaccounts } = this.props;
     const nameLink = <Link to={`/webhooks/details/${id}${setSubaccountQuery(subaccount_id)}`}>{name}</Link>;
     const row = [
       nameLink,
@@ -63,7 +64,7 @@ export class WebhooksList extends Component {
           id={subaccount_id}
           master={subaccount_id === 0}
           receiveAll={!subaccount_id && subaccount_id !== 0}
-          name={getSubAccountName(subaccounts,subaccount_id)}
+          name={subaccount_name}
         />
       );
     }
@@ -119,12 +120,12 @@ export class WebhooksList extends Component {
   }
 }
 
-function mapStateToProps({ webhooks, ...state }) {
+function mapStateToProps(state) {
   return {
     hasSubaccounts: hasSubaccounts(state),
-    webhooks: webhooks.list,
-    loading: webhooks.listLoading,
-    error: webhooks.listError,
+    webhooks: selectWebhooks(state),
+    loading: state.webhooks.listLoading,
+    error: state.webhooks.listError,
     subaccounts: state.subaccounts.list
   };
 }
