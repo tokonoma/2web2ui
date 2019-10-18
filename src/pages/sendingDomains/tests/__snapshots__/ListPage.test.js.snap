@@ -185,7 +185,6 @@ Array [
       id={3}
       isDefault={false}
       master={false}
-      name=""
       receiveAll={false}
     />,
   ],

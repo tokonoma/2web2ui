@@ -5,7 +5,7 @@ import { list as listDomains } from 'src/actions/sendingDomains';
 import { list as listSubaccounts } from 'src/actions/subaccounts';
 
 import { hasSubaccounts } from 'src/selectors/subaccounts';
-import { hasUnverifiedDomains } from 'src/selectors/sendingDomains';
+import { hasUnverifiedDomains, selectDomains } from 'src/selectors/sendingDomains';
 import {
   Loading, TableCollection, SubaccountTag, DomainStatusCell, StatusTooltipHeader, ApiErrorBanner,
   PageLink
@@ -14,13 +14,12 @@ import { Page } from '@sparkpost/matchbox';
 import { Setup } from 'src/components/images';
 import UnverifiedWarningBanner from './components/UnverifiedWarningBanner';
 import VerifyToken from './components/VerifyToken';
-import { getSubAccountName } from 'src/helpers/subaccounts';
 import { LINKS } from 'src/constants';
 
 export class ListPage extends Component {
   componentDidMount() {
     this.props.listDomains();
-    if (hasSubaccounts) {
+    if (hasSubaccounts && this.props.subaccounts.length === 0) {
       this.props.listSubaccounts();
     }
   }
@@ -41,8 +40,8 @@ export class ListPage extends Component {
   }
 
   getRowData = (row) => {
-    const { hasSubaccounts, subaccounts } = this.props;
-    const { domain, shared_with_subaccounts, subaccount_id } = row;
+    const { hasSubaccounts } = this.props;
+    const { domain, shared_with_subaccounts, subaccount_id, subaccount_name } = row;
 
     const rowData = [
       <PageLink to={`/account/sending-domains/edit/${domain}`}>{domain}</PageLink>,
@@ -51,7 +50,7 @@ export class ListPage extends Component {
 
     if (hasSubaccounts) {
       const subaccountCol = subaccount_id || shared_with_subaccounts
-        ? <SubaccountTag all={shared_with_subaccounts} id={subaccount_id} name={getSubAccountName(subaccounts,subaccount_id)}/>
+        ? <SubaccountTag all={shared_with_subaccounts} id={subaccount_id} name={subaccount_name}/>
         : null;
 
       rowData.push(subaccountCol);
@@ -125,7 +124,7 @@ export class ListPage extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  domains: state.sendingDomains.list,
+  domains: selectDomains(state),
   listError: state.sendingDomains.listError,
   hasSubaccounts: hasSubaccounts(state),
   hasUnverifiedDomains: hasUnverifiedDomains(state),
