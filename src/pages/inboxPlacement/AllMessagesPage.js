@@ -11,23 +11,22 @@ import InfoBlock from './components/InfoBlock';
 import styles from './AllMessagesPage.module.scss';
 import { formatPercent } from 'src/helpers/units';
 
-export const AllMessagesPage = (props) => {
-  const {
-    history,
-    id,
-    filterType,
-    filterName,
-    messages,
-    loading,
-    status,
-    sent,
-    placement,
-    authentication,
-    error,
-    getInboxPlacementByProviders,
-    getAllInboxPlacementMessages,
-    StopTestComponent = StopTest //This is for unit testing purposes
-  } = props;
+export const AllMessagesPage = ({
+  history,
+  id,
+  filterType,
+  filterName,
+  messages,
+  loading,
+  status,
+  sent,
+  placement,
+  authentication,
+  error,
+  getInboxPlacementByProviders,
+  getAllInboxPlacementMessages,
+  StopTestComponent = StopTest
+}) => {
 
   const loadMessages = useCallback(() => {
     const filters = { [filterType]: filterName };
