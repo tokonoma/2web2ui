@@ -18,6 +18,11 @@ describe('Component: ProvidersBreakdown', () => {
           'inbox_pct': 0,
           'spam_pct': 0,
           'missing_pct': 1
+        },
+        'authentication': {
+          'spf_pct': 0,
+          'dkim_pct': 0,
+          'dmarc_pct': 1
         }
       },
       {
@@ -26,6 +31,11 @@ describe('Component: ProvidersBreakdown', () => {
           'inbox_pct': 0.8,
           'spam_pct': 0.1,
           'missing_pct': 0.1
+        },
+        'authentication': {
+          'spf_pct': 0.8,
+          'dkim_pct': 0.1,
+          'dmarc_pct': 0.1
         }
       }
     ];

@@ -16,9 +16,13 @@
   font-weight: normal;
 }
 
-.Placement {
+.Placement, .Authentication {
   text-align: center;
   font-weight: normal;
+
+  &.divider {
+    border-left: 1px solid color(gray, 8);
+  }
 }
 .GroupValue {
   font-weight: 600;

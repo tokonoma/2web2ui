@@ -7,3 +7,17 @@
 .SeedsCount {
   font-weight: normal;
 }
+
+.FolderPlacementBarChart {
+  border-bottom: 1px solid color(gray, 8);
+  @media screen and (min-width: breakpoint(medium)) {
+    border-right: 1px solid color(gray, 8);
+    border-bottom: none;
+  }
+}
+
+.AuthenticationHeader {
+  @media screen and (min-width: breakpoint(medium)) {
+    text-align: center;
+  }
+}

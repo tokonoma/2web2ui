@@ -19,6 +19,11 @@ exports[`Component: ProvidersBreakdown renders correctly with data 1`] = `
   rows={
     Array [
       Object {
+        "authentication": Object {
+          "dkim_pct": 0,
+          "dmarc_pct": 1,
+          "spf_pct": 0,
+        },
         "mailbox_provider": "dogmail.com",
         "placement": Object {
           "inbox_pct": 0,
@@ -27,6 +32,11 @@ exports[`Component: ProvidersBreakdown renders correctly with data 1`] = `
         },
       },
       Object {
+        "authentication": Object {
+          "dkim_pct": 0.1,
+          "dmarc_pct": 0.1,
+          "spf_pct": 0.8,
+        },
         "mailbox_provider": "doghouseinbox.com",
         "placement": Object {
           "inbox_pct": 0.8,
