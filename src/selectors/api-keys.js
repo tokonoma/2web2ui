@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import { createSelector } from 'reselect';
-import { getSubaccountIdFromProps, selectSubaccountIdFromQuery, getSubaccounts } from './subaccounts';
+import { getSubaccountIdFromProps, selectSubaccountIdFromQuery, getSubaccountsIndexedById, getSubaccountName } from './subaccounts';
 /*
  * generic apiKeys selectors
  */
@@ -11,13 +11,7 @@ export const selectApiKeyId = (state, props) => props.match.params.id;
 const getGrantsLoading = (state) => state.apiKeys.grantsLoading;
 const getSubaccountGrantsLoading = (state) => state.apiKeys.subaccountGrantsLoading;
 const getCurrentUsername = (state) => state.currentUser.username;
-const getSubaccountsIndexedById = (state) => _.keyBy(getSubaccounts(state),
-  function (k) { return k.id ; });
-const getSubaccountName = (subaccounts , subaccount_id) => {
-  if (!subaccount_id) { return null; }
-  return subaccounts[subaccount_id] ? subaccounts[subaccount_id].name : null ;
 
-};
 // Convert grants array to an object keyed by `grant.key`
 export const getGrants = createSelector(getGrantsArray, (grants) =>
   _.keyBy(grants, 'key')
