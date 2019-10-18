@@ -10,8 +10,8 @@ describe('PercentWheel', () => {
     />
   );
 
-  it('should render with data', () => {
-    expect(subject()).toMatchSnapshot();
+  it('should render with no data', () => {
+    expect(subject({ color: '#123456' })).toMatchSnapshot();
   });
 
   it('should render with the correct label and value', () => {

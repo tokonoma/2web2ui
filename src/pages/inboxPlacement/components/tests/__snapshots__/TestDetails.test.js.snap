@@ -32,7 +32,8 @@ exports[`Component: TestDetails renders correctly 1`] = `
     </Panel.Section>
     <Grid>
       <Grid.Column
-        md={8}
+        lg={8}
+        md={12}
       >
         <div
           className="FolderPlacementBarChart"
@@ -48,7 +49,8 @@ exports[`Component: TestDetails renders correctly 1`] = `
         </div>
       </Grid.Column>
       <Grid.Column
-        md={4}
+        lg={4}
+        md={12}
       >
         <Panel.Section>
           <h3
@@ -89,13 +91,7 @@ exports[`Component: TestDetails renders correctly 1`] = `
     }
   />
   <Panel
-    title={
-      <h3
-        className="Inline"
-      >
-        Time to Receive Mail
-      </h3>
-    }
+    title="Time to Receive Mail"
   >
     <Panel.Section>
       <TimeToReceiveSection />

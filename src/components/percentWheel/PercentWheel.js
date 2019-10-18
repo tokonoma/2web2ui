@@ -3,7 +3,7 @@ import { RadialBarChart, RadialBar, ResponsiveContainer, PolarAngleAxis } from '
 import { formatPercent } from 'src/helpers/units';
 import styles from './PercentWheel.module.scss';
 
-const PercentWheel = ({ label, value = 0, size = 100 }) => (
+const PercentWheel = ({ label, value = 0, size = 100, color }) => (
   <div className={styles.PercentWheel}>
     <ResponsiveContainer height={size}>
       <RadialBarChart
@@ -11,7 +11,7 @@ const PercentWheel = ({ label, value = 0, size = 100 }) => (
         endAngle={-270}
         outerRadius='100%'
         innerRadius='70%'
-        data={[{ value, fill: '#0CBAC7' }]}
+        data={[{ value, fill: color }]}
       >
         <PolarAngleAxis
           type="number"

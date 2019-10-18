@@ -30,10 +30,9 @@ const TestDetails = ({ details, placementsByProvider }) => {
               label='Finished'/>
             <InfoBlock value={details.test_name || 'None'} label='Inbox Placement Test Name'/>
           </Grid>
-
         </Panel.Section>
         <Grid>
-          <Grid.Column md={8}>
+          <Grid.Column md={12} lg={8}>
             <div className={styles.FolderPlacementBarChart}>
               <Panel.Section>
                 <h3>Folder Placement</h3>
@@ -41,7 +40,7 @@ const TestDetails = ({ details, placementsByProvider }) => {
               </Panel.Section>
             </div>
           </Grid.Column>
-          <Grid.Column md={4}>
+          <Grid.Column md={12} lg={4}>
             <Panel.Section>
               <h3 className={styles.AuthenticationHeader}>Authentication</h3>
               <AuthenticationResults data={details.authentication}/>
@@ -53,7 +52,7 @@ const TestDetails = ({ details, placementsByProvider }) => {
         <ProvidersBreakdown data={placementsByProvider}/>
       </Panel>
       <div style={{ clear: 'both' }} />
-      <Panel title={<h3 className={styles.Inline}>Time to Receive Mail</h3>}>
+      <Panel title='Time to Receive Mail'>
         <Panel.Section>
           <TimeToReceiveSection data={details.time_to_receive}/>
         </Panel.Section>
