@@ -1,11 +1,12 @@
 import _ from 'lodash';
 import { createSelector } from 'reselect';
 import { ROLE_LABELS } from 'src/constants';
+import { getSubaccounts } from 'src/selectors/subaccounts';
 
 const getUsers = (state) => state.users.entities;
 const getUserId = (state, id) => id;
 const isCurrentUser = ({ currentUser }) => (user) => user.username === currentUser.username;
-const getSubaccounts = (state) => _.keyBy(state.subaccounts.list,
+const getSubaccountsIndexedById = (state) => _.keyBy(getSubaccounts(state),
   function (k) { return k.id ; });
 
 const getSubaccountName = (subaccounts , subaccount_id) => {
@@ -15,7 +16,7 @@ const getSubaccountName = (subaccounts , subaccount_id) => {
 };
 // Get, reduce, enrich, and sort list of users
 export const selectUsers = createSelector(
-  [getUsers, getSubaccounts, isCurrentUser],
+  [getUsers, getSubaccountsIndexedById, isCurrentUser],
   (users, subaccounts ,isCurrentUser) => {
     const userList = Object.values(users);
     const enrichedUserList = userList.map((user) => ({

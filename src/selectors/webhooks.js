@@ -7,7 +7,7 @@ const selectBatches = (state) => state.webhooks.batches;
 const formatStatus = (code) => _.inRange(code, 200, 300) ? 'Success' : 'Fail';
 const getCurrentWebhook = (state) => state.webhooks.webhook || {};
 const getWebhooks = (state) => state.webhooks.list;
-const getSubaccountsIndexedById = (state) => _.keyBy(state.subaccounts.list,
+const getSubaccountsIndexedById = (state) => _.keyBy(getSubaccounts(state),
   function (k) { return k.id ; });
 const getSubaccountName = (subaccounts , subaccount_id) => {
   if (!subaccount_id) { return null; }
