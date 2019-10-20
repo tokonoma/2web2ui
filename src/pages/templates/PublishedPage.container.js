@@ -4,7 +4,7 @@ import { reduxForm } from 'redux-form';
 
 import { getPublished, getTestData, setTestData } from 'src/actions/templates';
 import { hasGrants } from 'src/helpers/conditions';
-import { selectTemplateById, selectTemplateTestData } from 'src/selectors/templates';
+import { selectPublishedTemplateById, selectTemplateTestData } from 'src/selectors/templates';
 import { selectSubaccountIdFromQuery, selectSubaccountFromQuery } from 'src/selectors/subaccounts';
 import { hasSubaccounts } from 'src/selectors/subaccounts';
 import { showAlert } from 'src/actions/globalAlert';
@@ -14,12 +14,11 @@ import PublishedPage from './PublishedPage';
 const FORM_NAME = 'templatePublished';
 
 const mapStateToProps = (state, props) => {
-  const template = selectTemplateById(state, props).published;
+  const template = selectPublishedTemplateById(state, props.match.params.id);
 
   return {
     loading: state.templates.getPublishedLoading,
     getPublishedError: state.templates.getPublishedError,
-    template,
     canModify: hasGrants('templates/modify')(state),
     subaccountId: selectSubaccountIdFromQuery(state, props),
     hasSubaccounts: hasSubaccounts(state),

@@ -64,6 +64,16 @@ describe('Templates selectors', () => {
                 open_tracking: false,
                 transactional: false
               }
+            },
+            published: {
+              id: 'lion',
+              name: 'Lion',
+              published: true,
+              options: {
+                click_tracking: false,
+                open_tracking: false,
+                transactional: false
+              }
             }
           }
         },
@@ -166,20 +176,7 @@ describe('Templates selectors', () => {
   });
 
   describe('selectDraftTemplateById', () => {
-    it('returns draft', () => {
-      expect(selector.selectDraftTemplateById(store, 'ape')).toEqual({
-        id: 'ape',
-        name: 'Ape',
-        options: {
-          click_tracking: true,
-          open_tracking: true,
-          transactional: false
-        },
-        published: false
-      });
-    });
-
-    it('returns draft with default options', () => {
+    it('returns template', () => {
       expect(selector.selectDraftTemplateById(store, 'lion')).toEqual({
         id: 'lion',
         name: 'Lion',
@@ -192,8 +189,53 @@ describe('Templates selectors', () => {
       });
     });
 
-    it('returns undefined when draft is not present', () => {
+    it('returns template with default options', () => {
+      expect(selector.selectDraftTemplateById(store, 'ape')).toEqual({
+        id: 'ape',
+        name: 'Ape',
+        options: {
+          click_tracking: true,
+          open_tracking: true,
+          transactional: false
+        },
+        published: false
+      });
+    });
+
+    it('returns undefined when template is not present', () => {
       expect(selector.selectDraftTemplateById(store, 'unknown')).toBeUndefined();
+    });
+  });
+
+  describe('selectPublishedTemplateById', () => {
+    it('returns template', () => {
+      expect(selector.selectPublishedTemplateById(store, 'lion')).toEqual({
+        id: 'lion',
+        name: 'Lion',
+        options: {
+          click_tracking: false,
+          open_tracking: false,
+          transactional: false
+        },
+        published: true
+      });
+    });
+
+    it('returns template with default options', () => {
+      expect(selector.selectPublishedTemplateById(store, 'ape')).toEqual({
+        id: 'ape',
+        name: 'Ape',
+        options: {
+          click_tracking: true,
+          open_tracking: true,
+          transactional: false
+        },
+        published: true
+      });
+    });
+
+    it('returns undefined when template is not present', () => {
+      expect(selector.selectPublishedTemplateById(store, 'unknown')).toBeUndefined();
     });
   });
 

@@ -16,13 +16,15 @@ export const selectTemplateById = (state, props) => state.templates.byId[props.m
 export const selectDraftTemplate = (state, id) => _.get(state, ['templates', 'byId', id, 'draft']);
 export const selectPublishedTemplate = (state, id) => _.get(state, ['templates', 'byId', id, 'published']);
 
-export const selectDraftTemplateById = createSelector(
-  [getDraftTemplateById, selectDefaultTemplateOptions],
-  (draft, defaultOptions) => {
-    if (!draft) { return; }
-    return { ...draft, options: { ...defaultOptions, ...draft.options }};
+const createTemplateSelector = (getter) => createSelector(
+  [getter, selectDefaultTemplateOptions],
+  (template, defaultOptions) => {
+    if (!template) { return; }
+    return { ...template, options: { ...defaultOptions, ...template.options }};
   }
 );
+export const selectDraftTemplateById = createTemplateSelector(getDraftTemplateById);
+export const selectPublishedTemplateById = createTemplateSelector(getPublishedTemplateById);
 
 export const selectDraftTemplatePreview = (state, id, defaultValue) => (
   state.templates.contentPreview.draft[id] || defaultValue
