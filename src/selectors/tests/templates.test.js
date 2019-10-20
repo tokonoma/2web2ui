@@ -149,20 +149,6 @@ describe('Templates selectors', () => {
     });
   });
 
-  cases('.selectDraftTemplate', ({ id }) => {
-    expect(selector.selectDraftTemplate(store, id)).toMatchSnapshot();
-  }, {
-    'returns draft template': { id: 'ape' },
-    'returns undefined when unknown': { id: 'unknown' }
-  });
-
-  cases('.selectPublishedTemplate', ({ id }) => {
-    expect(selector.selectPublishedTemplate(store, id)).toMatchSnapshot();
-  }, {
-    'returns published template': { id: 'ape' },
-    'returns undefined when unknown': { id: 'unknown' }
-  });
-
   describe('selectDraftTemplateById', () => {
     it('returns template', () => {
       expect(selector.selectDraftTemplateById(store, 'lion')).toEqual({

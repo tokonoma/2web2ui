@@ -1,15 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Templates selectors .selectDraftTemplate returns draft template 1`] = `
-Object {
-  "id": "ape",
-  "name": "Ape",
-  "published": false,
-}
-`;
-
-exports[`Templates selectors .selectDraftTemplate returns undefined when unknown 1`] = `undefined`;
-
 exports[`Templates selectors .selectDraftTemplatePreview returns default value when unknown 1`] = `Object {}`;
 
 exports[`Templates selectors .selectDraftTemplatePreview returns preview of draft template 1`] = `
@@ -20,16 +10,6 @@ Object {
 `;
 
 exports[`Templates selectors .selectDraftTemplatePreview returns undefined when unknown 1`] = `undefined`;
-
-exports[`Templates selectors .selectPublishedTemplate returns published template 1`] = `
-Object {
-  "id": "ape",
-  "name": "Ape",
-  "published": true,
-}
-`;
-
-exports[`Templates selectors .selectPublishedTemplate returns undefined when unknown 1`] = `undefined`;
 
 exports[`Templates selectors .selectPublishedTemplatePreview returns default value when unknown 1`] = `Object {}`;
 
