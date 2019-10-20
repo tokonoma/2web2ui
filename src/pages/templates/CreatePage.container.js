@@ -7,7 +7,7 @@ import _ from 'lodash';
 import { create, getDraft } from 'src/actions/templates';
 import { showAlert } from 'src/actions/globalAlert';
 
-// Selectors
+import { selectDefaultTemplateOptions } from 'src/selectors/accessConditionState';
 import { selectAndCloneDraftById, selectDefaultTestData } from 'src/selectors/templates';
 
 import CreatePage from './CreatePage';
@@ -24,6 +24,7 @@ const mapStateToProps = (state, props) => ({
   formName: FORM_NAME,
   initialValues: {
     assignTo: 'master',
+    options: selectDefaultTemplateOptions(state),
     testData: selectDefaultTestData(),
     ...selectAndCloneDraftById(state, props.match.params.id)
   }

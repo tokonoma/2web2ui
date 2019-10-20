@@ -11,6 +11,21 @@ export const getCurrentAccountPlan = createSelector(
   (account, plans) => plans.find((plan) => plan.code === account.subscription.code) || {}
 );
 
+export const selectDefaultTemplateOptions = createSelector(
+  [getAccount],
+  ({
+    options: {
+      click_tracking,
+      rest_tracking_default,
+      transactional_default
+    }
+  }) => ({
+    click_tracking: click_tracking,
+    open_tracking: rest_tracking_default,
+    transactional: transactional_default
+  })
+);
+
 const selectAccessConditionState = createSelector(
   [getAccount, getUser, getPlans, getCurrentAccountPlan, getACReady],
   (account, currentUser, plans, accountPlan, ready) => ({
@@ -33,4 +48,3 @@ export default selectAccessConditionState;
  */
 
 export const selectCondition = (condition) => createSelector([selectAccessConditionState], condition);
-

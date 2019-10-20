@@ -1,4 +1,7 @@
-import selectAccessCondtionState, { selectCondition } from '../accessConditionState';
+import selectAccessCondtionState, {
+  selectCondition,
+  selectDefaultTemplateOptions
+} from '../accessConditionState';
 
 jest.mock('src/helpers/conditions/account');
 
@@ -10,6 +13,11 @@ describe('Selector: Access Condition State', () => {
   beforeEach(() => {
     testState = {
       account: {
+        options: {
+          click_tracking: true,
+          rest_tracking_default: true,
+          transactional_default: false
+        },
         subscription: {
           code: 'plan2'
         }
@@ -44,4 +52,11 @@ describe('Selector: Access Condition State', () => {
     expect(testCondition).toHaveBeenCalledWith(testAccessConditionState);
   });
 
+  test('returns default template options', () => {
+    expect(selectDefaultTemplateOptions(testState)).toEqual({
+      click_tracking: true,
+      open_tracking: true,
+      transactional: false
+    });
+  });
 });
