@@ -149,18 +149,6 @@ describe('Templates selectors', () => {
     });
   });
 
-  describe('Templates by id Selector', () => {
-    it('returns template', () => {
-      const props = { match: { params: { id: 'Ape' }}};
-      expect(selector.selectTemplateById(store, props)).toMatchSnapshot();
-    });
-
-    it('returns empty draft and published', () => {
-      const props = { match: { params: { id: 'Nope' }}};
-      expect(selector.selectTemplateById(store, props)).toMatchSnapshot();
-    });
-  });
-
   cases('.selectDraftTemplate', ({ id }) => {
     expect(selector.selectDraftTemplate(store, id)).toMatchSnapshot();
   }, {

@@ -42,20 +42,6 @@ Object {
 
 exports[`Templates selectors .selectPublishedTemplatePreview returns undefined when unknown 1`] = `undefined`;
 
-exports[`Templates selectors Templates by id Selector returns empty draft and published 1`] = `
-Object {
-  "draft": Object {},
-  "published": Object {},
-}
-`;
-
-exports[`Templates selectors Templates by id Selector returns template 1`] = `
-Object {
-  "draft": Object {},
-  "published": Object {},
-}
-`;
-
 exports[`Templates selectors selectDefaultTestData should return default test data 1`] = `
 "{
   \\"substitution_data\\": {},
