@@ -5,6 +5,13 @@ describe('Templates selectors', () => {
   let store;
   beforeEach(() => {
     store = {
+      account: { // yuck
+        options: {
+          click_tracking: true,
+          rest_tracking_default: true,
+          transactional_default: false
+        }
+      },
       templates: {
         list: [
           {
@@ -45,6 +52,18 @@ describe('Templates selectors', () => {
               name: 'Ape',
               id: 'ape',
               published: true
+            }
+          },
+          lion: {
+            draft: {
+              id: 'lion',
+              name: 'Lion',
+              published: false,
+              options: {
+                click_tracking: false,
+                open_tracking: false,
+                transactional: false
+              }
             }
           }
         },
@@ -92,6 +111,34 @@ describe('Templates selectors', () => {
     };
   });
 
+  describe('getDraftTemplateById', () => {
+    it('returns draft template', () => {
+      expect(selector.getDraftTemplateById(store, 'ape')).toEqual({
+        name: 'Ape',
+        id: 'ape',
+        published: false
+      });
+    });
+
+    it('returns undefined when not present', () => {
+      expect(selector.getDraftTemplateById(store, 'unknown')).toBeUndefined();
+    });
+  });
+
+  describe('getPublishedTemplateById', () => {
+    it('returns draft template', () => {
+      expect(selector.getPublishedTemplateById(store, 'ape')).toEqual({
+        name: 'Ape',
+        id: 'ape',
+        published: true
+      });
+    });
+
+    it('returns undefined when not present', () => {
+      expect(selector.getPublishedTemplateById(store, 'unknown')).toBeUndefined();
+    });
+  });
+
   describe('Templates by id Selector', () => {
     it('returns template', () => {
       const props = { match: { params: { id: 'Ape' }}};
@@ -118,6 +165,38 @@ describe('Templates selectors', () => {
     'returns undefined when unknown': { id: 'unknown' }
   });
 
+  describe('selectDraftTemplateById', () => {
+    it('returns draft', () => {
+      expect(selector.selectDraftTemplateById(store, 'ape')).toEqual({
+        id: 'ape',
+        name: 'Ape',
+        options: {
+          click_tracking: true,
+          open_tracking: true,
+          transactional: false
+        },
+        published: false
+      });
+    });
+
+    it('returns draft with default options', () => {
+      expect(selector.selectDraftTemplateById(store, 'lion')).toEqual({
+        id: 'lion',
+        name: 'Lion',
+        options: {
+          click_tracking: false,
+          open_tracking: false,
+          transactional: false
+        },
+        published: false
+      });
+    });
+
+    it('returns undefined when draft is not present', () => {
+      expect(selector.selectDraftTemplateById(store, 'unknown')).toBeUndefined();
+    });
+  });
+
   cases('.selectDraftTemplatePreview', ({ defaultValue, id }) => {
     expect(selector.selectDraftTemplatePreview(store, id, defaultValue)).toMatchSnapshot();
   }, {
@@ -135,12 +214,21 @@ describe('Templates selectors', () => {
   });
 
   describe('selectAndCloneDraftById', () => {
-    it('should clone template if :id exist in state', () => {
-      expect(selector.selectAndCloneDraftById(store, 'ape')).toMatchSnapshot();
+    it('returns clone of draft with updated name and id', () => {
+      expect(selector.selectAndCloneDraftById(store, 'ape')).toEqual({
+        id: 'ape-copy',
+        name: 'Ape Copy',
+        options: {
+          click_tracking: true,
+          open_tracking: true,
+          transactional: false
+        },
+        published: false
+      });
     });
 
-    it('should not clone template if :id does not exist', () => {
-      expect(selector.selectAndCloneDraftById(store, 'Nope')).toMatchSnapshot();
+    it('returns undefined when draft is not present', () => {
+      expect(selector.selectAndCloneDraftById(store, 'unknown')).toBeUndefined();
     });
   });
 

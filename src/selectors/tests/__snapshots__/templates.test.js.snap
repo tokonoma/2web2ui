@@ -56,16 +56,6 @@ Object {
 }
 `;
 
-exports[`Templates selectors selectAndCloneDraftById should clone template if :id exist in state 1`] = `
-Object {
-  "id": "ape-copy",
-  "name": "Ape Copy",
-  "published": false,
-}
-`;
-
-exports[`Templates selectors selectAndCloneDraftById should not clone template if :id does not exist 1`] = `undefined`;
-
 exports[`Templates selectors selectDefaultTestData should return default test data 1`] = `
 "{
   \\"substitution_data\\": {},

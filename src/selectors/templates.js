@@ -1,9 +1,13 @@
 import _ from 'lodash';
 import config from 'src/config';
 import { createSelector } from 'reselect';
+import { selectDefaultTemplateOptions } from 'src/selectors/accessConditionState';
 import { getDomains, isVerified } from 'src/selectors/sendingDomains';
 import { hasSubaccounts, selectSubaccountIdFromProps } from 'src/selectors/subaccounts';
 import { filterTemplatesBySubaccount } from 'src/helpers/templates';
+
+export const getDraftTemplateById = (state, id) => _.get(state, ['templates', 'byId', id, 'draft']);
+export const getPublishedTemplateById = (state, id) => _.get(state, ['templates', 'byId', id, 'published']);
 
 export const selectTemplates = (state) => state.templates.list;
 export const selectPublishedTemplates = (state) => _.filter(state.templates.list, (template) => template.has_published);
@@ -11,6 +15,15 @@ export const selectTemplateById = (state, props) => state.templates.byId[props.m
 
 export const selectDraftTemplate = (state, id) => _.get(state, ['templates', 'byId', id, 'draft']);
 export const selectPublishedTemplate = (state, id) => _.get(state, ['templates', 'byId', id, 'published']);
+
+export const selectDraftTemplateById = createSelector(
+  [getDraftTemplateById, selectDefaultTemplateOptions],
+  (draft, defaultOptions) => {
+    if (!draft) { return; }
+    return { ...draft, options: { ...defaultOptions, ...draft.options }};
+  }
+);
+
 export const selectDraftTemplatePreview = (state, id, defaultValue) => (
   state.templates.contentPreview.draft[id] || defaultValue
 );
@@ -25,11 +38,10 @@ export const selectDefaultTestData = () => JSON.stringify(config.templates.testD
 export const selectTemplateTestData = (state) => JSON.stringify(state.templates.testData || config.templates.testData, null, 2);
 
 export const selectAndCloneDraftById = createSelector(
-  [selectDraftTemplate],
+  [selectDraftTemplateById],
   (draft) => {
-    if (!_.isEmpty(draft)) {
-      return { ...draft, name: `${draft.name} Copy`, id: `${draft.id}-copy` };
-    }
+    if (!draft) { return; }
+    return { ...draft, name: `${draft.name} Copy`, id: `${draft.id}-copy` };
   }
 );
 
