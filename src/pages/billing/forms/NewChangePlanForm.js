@@ -37,6 +37,7 @@ export const ChangePlanForm = ({
   loading,
   allBundles,
   canUpdateBillingInfo,
+  submitting,
   //Redux Actions
   getBillingInfo,
   getBillingCountries,
@@ -117,7 +118,7 @@ export const ChangePlanForm = ({
                    countries={countries}
                    selectedPlan={selectedBundle}
                    canUpdateBillingInfo={canUpdateBillingInfo}
-                   submitting={true}
+                   submitting={submitting}
                  />
                </AccessControl>
                </>

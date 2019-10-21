@@ -3,6 +3,7 @@ import { Panel } from '@sparkpost/matchbox';
 import CardSummary from './CardSummary';
 import PaymentForm from '../forms/fields/PaymentForm';
 import BillingAddressForm from '../forms/fields/BillingAddressForm';
+import { useFeatureChangeContext } from '../context/FeatureChangeContext';
 
 const FORMNAME = 'changePlan';
 
@@ -13,10 +14,14 @@ const CardSection = ({
   submitting,
   canUpdateBillingInfo
 }) => {
+  const { isReady } = useFeatureChangeContext();
   const [useSavedCC, setUseSavedCC] = useState(true);
 
   const handleCardToggle = () => setUseSavedCC(!useSavedCC);
 
+  if (!isReady) {
+    return null;
+  }
   if (selectedPlan.isFree) {
     return null; // CC not required on free plans
   }
