@@ -22,8 +22,6 @@ describe('Action Creator: Templates', () => {
   beforeEach(async () => {
     localforage.setItem = jest.fn((a) => Promise.resolve(a));
     localforage.getItem = jest.fn(() => Promise.resolve(null));
-    window.localStorage.setItem = jest.fn();
-    window.localStorage.getItem = jest.fn();
     templatesHelpers.getTestDataKey = jest.fn(() => 'key');
     dispatchMock = jest.fn((a) => Promise.resolve(a));
     mockStore = createMockStore(user);
