@@ -10,7 +10,6 @@ exports[`Component: ProvidersBreakdown SubComponent: GroupPercentage renders per
 
 exports[`Component: ProvidersBreakdown renders correctly with data 1`] = `
 <TableCollection
-  className="ProvidersBreakdownTable"
   defaultSortColumn="placement.inbox_pct"
   defaultSortDirection="desc"
   headerComponent={[Function]}
@@ -53,7 +52,6 @@ exports[`Component: ProvidersBreakdown renders correctly with data 1`] = `
 
 exports[`Component: ProvidersBreakdown renders correctly with no data 1`] = `
 <TableCollection
-  className="ProvidersBreakdownTable"
   defaultSortColumn="placement.inbox_pct"
   defaultSortDirection="desc"
   headerComponent={[Function]}

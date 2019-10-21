@@ -20,11 +20,11 @@ const HeaderComponent = () => (<thead>
   </Table.Row>
 </thead>);
 
-const WrapperComponent = ({ children }) => (<div className={styles.TableWrapper}>
+const WrapperComponent = ({ children }) => (<div>
   <Table>{children}</Table>
 </div>);
 
-const RowComponent = ({ mailbox_provider, placement, authentication }) => (<Table.Row className={styles.DataRow}>
+const RowComponent = ({ id, mailbox_provider, placement, authentication }) => (<Table.Row className={styles.DataRow}>
   <Table.Cell className={styles.ProviderCell}>
     <strong><PageLink to={`/inbox-placement/details/${id}/mailbox-provider/${mailbox_provider}`}>{mailbox_provider}</PageLink></strong>
   </Table.Cell>
@@ -37,7 +37,6 @@ const RowComponent = ({ mailbox_provider, placement, authentication }) => (<Tabl
 </Table.Row>);
 
 const ProvidersBreakdown = ({ data = []}) => (<TableCollection
-  className={styles.ProvidersBreakdownTable}
   rows={data}
   wrapperComponent={WrapperComponent}
   headerComponent={HeaderComponent}
