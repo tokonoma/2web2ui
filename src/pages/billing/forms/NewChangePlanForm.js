@@ -36,8 +36,10 @@ export const ChangePlanForm = ({
   verifyPromoCode,
   promoCodeObj,
   clearPromoCode,
-  getBundles,
-  handleSubmit
+  getBundles
+
+  //redux-form
+  //handleSubmit
 }) => {
 
   const { requestParams: { code, promo } = {}, updateRoute } = useRouter();
@@ -81,15 +83,12 @@ export const ChangePlanForm = ({
     }
   },[selectedBundle, code, allBundles, updateRoute]);
 
-  const onSubmit = () => {
-  };
-
   if (loading) {
-    return (<Loading />);
+    return <Loading />;
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form>
       <Grid>
         <Grid.Column xs={8}>
           {
@@ -134,8 +133,7 @@ const mapStateToProps = (state, props) => {
     bundles: selectTieredVisibleBundles(state),
     initialValues: changePlanInitialValues(state, { planCode, promoCode }),
     currentPlan: currentPlanSelector(state),
-    promoCodeObj: getPromoCodeObject(state),
-    billing: state.billing
+    promoCodeObj: getPromoCodeObject(state)
   };
 };
 

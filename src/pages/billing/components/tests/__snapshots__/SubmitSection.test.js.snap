@@ -1,9 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`SubmitSection:  SubmitButton:  should not use url if not enabled 1`] = `
+exports[`SubmitSection:  SubmitSection:  should not use url if not enabled 1`] = `
 <Button
   color="orange"
-  disabled={false}
   size="default"
   to={null}
   type="submit"
@@ -12,10 +11,9 @@ exports[`SubmitSection:  SubmitButton:  should not use url if not enabled 1`] = 
 </Button>
 `;
 
-exports[`SubmitSection:  SubmitButton:  should render the button 1`] = `
+exports[`SubmitSection:  SubmitSection:  should render the button 1`] = `
 <Button
   color="orange"
-  disabled={false}
   size="default"
   to="url"
   type="button"
