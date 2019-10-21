@@ -148,15 +148,7 @@ Array [
   Object {
     "meta": Object {
       "data": Object {
-        "id": "foo",
         "published": true,
-        "testData": Object {
-          "metadata": Object {},
-          "options": Object {},
-          "substitution_data": Object {
-            "hello": "world",
-          },
-        },
       },
       "headers": Object {
         "x-msys-subaccount": 123,
@@ -302,12 +294,7 @@ Array [
   Object {
     "meta": Object {
       "data": Object {
-        "form": "data",
-        "id": "id",
         "published": true,
-        "testData": Object {
-          "test": "data",
-        },
       },
       "headers": Object {},
       "method": "PUT",

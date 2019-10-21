@@ -231,8 +231,6 @@ describe('Action Creator: Templates', () => {
         },
         metadata: {}
       };
-      // See: https://github.com/facebook/jest/issues/6798#issuecomment-440988627
-      const spy = jest.spyOn(window.localStorage.__proto__, 'setItem');
 
       await mockStore.dispatch(templates.setTestDataV2({
         data,
@@ -240,27 +238,23 @@ describe('Action Creator: Templates', () => {
         mode: 'draft'
       }));
 
-      expect(spy).toHaveBeenCalledWith('key', JSON.stringify(data));
+      expect(window.localStorage.setItem).toHaveBeenCalledWith('key', JSON.stringify(data));
     });
   });
 
   describe('deleteTestDataV2', () => {
     it('removes an item from local storage based on the passed in ID', async () => {
-      const spy = jest.spyOn(window.localStorage.__proto__, 'removeItem');
-
       await mockStore.dispatch(templates.deleteTestDataV2({ id: 'foo' }));
 
-      expect(spy).toHaveBeenCalledWith('key');
+      expect(window.localStorage.removeItem).toHaveBeenCalledWith('key');
     });
   });
 
   describe('getTestDataV2', () => {
     it('retrieves an item from local storage by invoking localStorage.getItem', async () => {
-      const spy = jest.spyOn(window.localStorage.__proto__, 'getItem');
-
       await mockStore.dispatch(templates.getTestDataV2({ id: 'foo', mode: 'draft' }));
 
-      expect(spy).toHaveBeenCalledWith('key');
+      expect(window.localStorage.getItem).toHaveBeenCalledWith('key');
     });
   });
 });
