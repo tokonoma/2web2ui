@@ -91,4 +91,22 @@ describe('Account Selectors', () => {
       expect(subject()).toEqual('this.example.com');
     });
   });
+
+  it('returns default template options', () => {
+    const state = {
+      account: {
+        options: {
+          click_tracking: true,
+          rest_tracking_default: true,
+          transactional_default: false
+        }
+      }
+    };
+
+    expect(accountSelectors.selectDefaultTemplateOptions(state)).toEqual({
+      click_tracking: true,
+      open_tracking: true,
+      transactional: false
+    });
+  });
 });

@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import config from 'src/config';
 import { createSelector } from 'reselect';
-import { selectDefaultTemplateOptions } from 'src/selectors/accessConditionState';
+import { selectDefaultTemplateOptions } from 'src/selectors/account';
 import { getDomains, isVerified } from 'src/selectors/sendingDomains';
 import { hasSubaccounts, selectSubaccountIdFromProps } from 'src/selectors/subaccounts';
 import { filterTemplatesBySubaccount } from 'src/helpers/templates';

@@ -3,6 +3,8 @@ import { hasAccountOptionEnabled } from 'src/helpers/conditions/account';
 import { getCurrentAccountPlan, selectCondition } from 'src/selectors/accessConditionState';
 import getConfig from 'src/helpers/getConfig';
 
+const getAccount = (state) => state.account;
+
 export const hasAutoVerifyEnabledSelector = createSelector(
   getCurrentAccountPlan,
   selectCondition(hasAccountOptionEnabled('auto_verify_domains')),
@@ -15,3 +17,19 @@ export const selectHasAnyoneAtDomainVerificationEnabled = accountOptionWithFallb
 export const selectTrackingDomainCname = accountOptionWithFallback('tracking_domain_cname', 'trackingDomains.cnameValue');
 export const selectAllowDefaultBounceDomains = accountOptionWithFallback('allow_default_bounce_domain', 'bounceDomains.allowDefault');
 export const selectAllSubaccountDefaultBounceDomains = accountOptionWithFallback('allow_subaccount_default_bounce_domain', 'bounceDomains.allowSubaccountDefault');
+
+// note, the default template options derive from account options
+export const selectDefaultTemplateOptions = createSelector(
+  [getAccount],
+  ({
+    options: {
+      click_tracking,
+      rest_tracking_default,
+      transactional_default
+    }
+  }) => ({
+    click_tracking: click_tracking || rest_tracking_default,
+    open_tracking: rest_tracking_default,
+    transactional: transactional_default
+  })
+);
