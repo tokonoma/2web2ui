@@ -26,7 +26,7 @@ const WrapperComponent = ({ children }) => (<div>
 
 const RowComponent = ({ id, mailbox_provider, placement, authentication }) => (<Table.Row className={styles.DataRow}>
   <Table.Cell className={styles.ProviderCell}>
-    <strong><PageLink to={`/inbox-placement/details/${id}/mailbox-provider/${mailbox_provider}`}>{mailbox_provider}</PageLink></strong>
+    <PageLink to={`/inbox-placement/details/${id}/mailbox-provider/${mailbox_provider}`}><strong>{mailbox_provider}</strong></PageLink>
   </Table.Cell>
   <Table.Cell className={styles.Placement}><GroupPercentage value={placement.inbox_pct}/></Table.Cell>
   <Table.Cell className={styles.Placement}><GroupPercentage value={placement.spam_pct}/></Table.Cell>

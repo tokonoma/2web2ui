@@ -52,44 +52,48 @@ exports[`Page: All Inbox Placement Messages Test renders page correctly with def
             className="Panel"
           >
             <InfoBlock
-              className="Deliverability"
               columnProps={
                 Object {
                   "md": 3,
                 }
               }
               label="Sent"
+              labelClassName="DeliverabilityHeader"
               value={100}
+              valueClassName="DeliverabilityValue"
             />
             <InfoBlock
-              className="Deliverability"
               columnProps={
                 Object {
                   "md": 3,
                 }
               }
               label="Inbox"
+              labelClassName="DeliverabilityHeader"
               value={100}
+              valueClassName="DeliverabilityValue"
             />
             <InfoBlock
-              className="Deliverability"
               columnProps={
                 Object {
                   "md": 3,
                 }
               }
               label="Spam"
+              labelClassName="DeliverabilityHeader"
               value={0}
+              valueClassName="DeliverabilityValue"
             />
             <InfoBlock
-              className="Deliverability"
               columnProps={
                 Object {
                   "md": 3,
                 }
               }
               label="Missing"
+              labelClassName="DeliverabilityHeader"
               value={0}
+              valueClassName="DeliverabilityValue"
             />
           </Grid>
         </div>
@@ -107,34 +111,37 @@ exports[`Page: All Inbox Placement Messages Test renders page correctly with def
           className="Panel"
         >
           <InfoBlock
-            className="Authentication"
             columnProps={
               Object {
                 "md": 4,
               }
             }
             label="SPF"
+            labelClassName="AuthenticationHeader"
             value="100%"
+            valueClassName="AuthenticationValue"
           />
           <InfoBlock
-            className="Authentication"
             columnProps={
               Object {
                 "md": 4,
               }
             }
             label="DKIM"
+            labelClassName="AuthenticationHeader"
             value="100%"
+            valueClassName="AuthenticationValue"
           />
           <InfoBlock
-            className="Authentication"
             columnProps={
               Object {
                 "md": 4,
               }
             }
             label="DMARC"
+            labelClassName="AuthenticationHeader"
             value="100%"
+            valueClassName="AuthenticationValue"
           />
         </Grid>
       </Grid.Column>

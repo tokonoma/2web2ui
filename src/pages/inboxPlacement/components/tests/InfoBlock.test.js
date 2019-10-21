@@ -15,8 +15,9 @@ describe('Component: InfoBlock', () => {
   });
 
   it('renders correctly with custom classname', () => {
-    expect(subject({ className: 'cool' }).find('div').first()).toHaveProp('className', 'cool');
-    expect(subject({ className: 'cool' }).find('div').last()).toHaveProp('className', 'cool');
+    const wrapper = subject({ labelClassName: 'foo', valueClassName: 'bar' });
+    expect(wrapper.find('div').first()).toHaveProp('className', 'foo');
+    expect(wrapper.find('div').last()).toHaveProp('className', 'bar');
   });
 
 });

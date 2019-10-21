@@ -49,6 +49,18 @@ export const AllMessagesPage = ({
       alert={{ type: 'error', message: error.message }}/>;
   }
 
+  const deliveribilityStyleProps = {
+    columnProps: { md: 3 },
+    valueClassName: styles.DeliverabilityValue,
+    labelClassName: styles.DeliverabilityHeader
+  };
+
+  const authenticationStyleProps = {
+    columnProps: { md: 4 },
+    valueClassName: styles.AuthenticationValue,
+    labelClassName: styles.AuthenticationHeader
+  };
+
   return (
     <Page
       breadcrumbAction={{
@@ -68,19 +80,19 @@ export const AllMessagesPage = ({
             <div className={styles.Divider} >
               <h5 className={styles.Title}>Deliverability</h5>
               <Grid className={styles.Panel}>
-                <InfoBlock value={sent} label='Sent' columnProps={{ md: 3 }} className={styles.Deliverability}/>
-                <InfoBlock value={(placement.inbox_pct || 0) * sent} label='Inbox' columnProps={{ md: 3 }} className={styles.Deliverability}/>
-                <InfoBlock value={(placement.spam_pct || 0) * sent} label='Spam' columnProps={{ md: 3 }} className={styles.Deliverability}/>
-                <InfoBlock value={(placement.missing_pct || 0) * sent} label='Missing' columnProps={{ md: 3 }} className={styles.Deliverability}/>
+                <InfoBlock value={sent} label='Sent' {...deliveribilityStyleProps}/>
+                <InfoBlock value={(placement.inbox_pct || 0) * sent} label='Inbox' {...deliveribilityStyleProps}/>
+                <InfoBlock value={(placement.spam_pct || 0) * sent} label='Spam' {...deliveribilityStyleProps}/>
+                <InfoBlock value={(placement.missing_pct || 0) * sent} label='Missing' {...deliveribilityStyleProps}/>
               </Grid>
             </div>
           </Grid.Column>
           <Grid.Column lg={5} md={12}>
             <h5 className={styles.Title}>Authentication</h5>
             <Grid className={styles.Panel}>
-              <InfoBlock value={formatPercent((authentication.spf_pct || 0) * 100)} label='SPF' columnProps={{ md: 4 }} className={styles.Authentication}/>
-              <InfoBlock value={formatPercent((authentication.dkim_pct || 0) * 100)} label='DKIM' columnProps={{ md: 4 }} className={styles.Authentication}/>
-              <InfoBlock value={formatPercent((authentication.dmarc_pct || 0) * 100)} label='DMARC' columnProps={{ md: 4 }} className={styles.Authentication}/>
+              <InfoBlock value={formatPercent((authentication.spf_pct || 0) * 100)} label='SPF' {...authenticationStyleProps}/>
+              <InfoBlock value={formatPercent((authentication.dkim_pct || 0) * 100)} label='DKIM' {...authenticationStyleProps}/>
+              <InfoBlock value={formatPercent((authentication.dmarc_pct || 0) * 100)} label='DMARC' {...authenticationStyleProps}/>
             </Grid>
           </Grid.Column>
         </Grid>
@@ -105,7 +117,7 @@ function mapStateToProps(state, props) {
     filterType,
     filterName,
     status: result.status,
-    sent: result.seedlist_count,
+    sent: result.seedlist_count || 0,
     placement: result.placement || {},
     authentication: result.authentication || {},
     stopTestLoading: state.inboxPlacement.stopTestPending,
