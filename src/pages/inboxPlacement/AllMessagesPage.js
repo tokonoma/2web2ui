@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Grid, Page, Panel } from '@sparkpost/matchbox';
 
 import { Loading } from 'src/components';
-import { getInboxPlacementByProviders, getAllInboxPlacementMessages } from 'src/actions/inboxPlacement';
+import { getInboxPlacementByProviders, getAllInboxPlacementMessages, resetState } from 'src/actions/inboxPlacement';
 import { RedirectAndAlert } from 'src/components/globalAlert';
 import StopTest from './components/StopTest';
 import AllMessagesCollection from './components/AllMessagesCollection';
@@ -25,6 +25,7 @@ export const AllMessagesPage = ({
   error,
   getInboxPlacementByProviders,
   getAllInboxPlacementMessages,
+  resetState,
   StopTestComponent = StopTest
 }) => {
 
@@ -36,7 +37,8 @@ export const AllMessagesPage = ({
 
   useEffect(() => {
     loadMessages();
-  }, [id, loadMessages]);
+    return (() => resetState());
+  }, [id, loadMessages, resetState]);
 
 
   if (loading) {
@@ -122,8 +124,9 @@ function mapStateToProps(state, props) {
     authentication: result.authentication || {},
     stopTestLoading: state.inboxPlacement.stopTestPending,
     messages: state.inboxPlacement.allMessages,
-    loading: state.inboxPlacement.getAllMessagesPending
+    loading: state.inboxPlacement.getAllMessagesPending,
+    error: state.inboxPlacement.getAllMessagesError
   };
 }
 
-export default connect(mapStateToProps, { getInboxPlacementByProviders, getAllInboxPlacementMessages })(AllMessagesPage);
+export default connect(mapStateToProps, { getInboxPlacementByProviders, getAllInboxPlacementMessages, resetState })(AllMessagesPage);

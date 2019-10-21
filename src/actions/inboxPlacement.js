@@ -67,7 +67,14 @@ export function getAllInboxPlacementMessages(id, filters) {
     meta: {
       method: 'GET',
       url: `/v1/inbox-placement/${id}/messages`,
-      params: filters
+      params: filters,
+      showErrorAlert: false
     }
+  });
+}
+
+export function resetState() {
+  return (dispatch) => dispatch({
+    type: 'RESET_STATE'
   });
 }

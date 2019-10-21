@@ -67,8 +67,17 @@ describe('Action Creator: Inbox Placement', () => {
       meta: {
         method: 'GET',
         url: '/v1/inbox-placement/1/messages',
-        params: { 'mailbox-provider': 'sparkpost.com' }
+        params: { 'mailbox-provider': 'sparkpost.com' },
+        showErrorAlert: false
       }
     });
+  });
+
+  it('makes request to reset state', () => {
+    const dispatchMock = jest.fn((a) => a);
+    const action = inboxPlacement.resetState()(dispatchMock);
+    expect(action).toEqual(
+      { type: 'RESET_STATE' }
+    );
   });
 });

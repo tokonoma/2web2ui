@@ -36,11 +36,12 @@ describe('Page: All Inbox Placement Messages Test', () => {
     expect(subject()).toMatchSnapshot();
   });
 
-  it('calls getInboxPlacementTest on load', () => {
+  describe('useEffect hook', () => {
+
     const getAllInboxPlacementMessages = jest.fn().mockReturnValue({});
     const getInboxPlacementByProviders = jest.fn().mockReturnValue({});
-
-    mount(
+    const resetState = jest.fn().mockReturnValue({});
+    const subjectMounted = ({ ...props }) => mount(
       <Router>
         <AllMessagesPage
           filterType={'mailbox-provider'}
@@ -52,13 +53,25 @@ describe('Page: All Inbox Placement Messages Test', () => {
           authentication={{}}
           getAllInboxPlacementMessages={getAllInboxPlacementMessages}
           getInboxPlacementByProviders={getInboxPlacementByProviders}
+          resetState={resetState}
           id={101}
           history={{ replace: jest.fn() }}
-          StopTestComponent={StopTest}/>
+          error={null}
+          StopTestComponent={StopTest}
+          {...props}/>
       </Router>);
 
-    expect(getAllInboxPlacementMessages).toHaveBeenCalled();
-    expect(getInboxPlacementByProviders).toHaveBeenCalled();
+    it('calls getInboxPlacementTest on load', () => {
+      subjectMounted();
+      expect(getAllInboxPlacementMessages).toHaveBeenCalled();
+      expect(getInboxPlacementByProviders).toHaveBeenCalled();
+    });
+
+    it('calls resetState on unmount', () => {
+      const wrapper = subjectMounted();
+      wrapper.unmount();
+      expect(resetState).toHaveBeenCalled();
+    });
   });
 
   it('renders loading', () => {

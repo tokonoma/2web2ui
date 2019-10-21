@@ -54,6 +54,9 @@ const TEST_CASES = {
   'get all inbox placement test messages fail': {
     payload: { errors: [ { message: 'Some error occurred' }]},
     type: 'GET_ALL_INBOX_PLACEMENT_MESSAGES_FAIL'
+  },
+  'resets State': {
+    type: 'RESET_STATE'
   }
 };
 

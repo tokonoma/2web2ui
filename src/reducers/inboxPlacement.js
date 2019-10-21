@@ -54,11 +54,14 @@ export default (state = initialState, { type, payload }) => {
       return { ...state, getTestContentPending: false, getTestContentError: payload };
 
     case 'GET_ALL_INBOX_PLACEMENT_MESSAGES_PENDING':
-      return { ...state, getAllMessagesPending: true, getAllMessagesError: null };
+      return { ...state, getAllMessagesPending: true, getAllMessagesError: null, allMessages: []};
     case 'GET_ALL_INBOX_PLACEMENT_MESSAGES_SUCCESS':
       return { ...state, getAllMessagesPending: false, allMessages: payload, getAllMessagesError: null };
     case 'GET_ALL_INBOX_PLACEMENT_MESSAGES_FAIL':
       return { ...state, getAllMessagesPending: false, getAllMessagesError: payload };
+
+    case 'RESET_STATE':
+      return { state: initialState };
 
     default:
       return state;
