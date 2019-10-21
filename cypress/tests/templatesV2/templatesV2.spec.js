@@ -12,14 +12,10 @@
 const editorSelector = '.ace_text-input';
 
 describe('Templates', () => {
-  before(() => {
-    cy.server();
-    cy.route('POST', '/api/v1/utils/content-previewer').as('contentPreviewer');
-    cy.route('POST', '/api/v1/templates/**').as('templatesPost');
-    cy.route('PUT', '/api/v1/templates/**').as('templatesPut');
-    cy.route('GET', '/api/v1/templates/**').as('templatesGet');
-    cy.route('DELETE', '/api/v1/templates/**').as('templatesDelete');
+  const randomID = Math.floor(Math.random() * 10000); // Helps with test flakiness in the event test data already exists
+  const templateTitle = `Cypress Test Template ${randomID}`;
 
+  before(() => {
     cy.login();
     cy.get('nav').within(() => {
       cy.findByText('Content').click();
@@ -27,150 +23,163 @@ describe('Templates', () => {
     });
   });
 
-  describe('end-to-end template creation, editing, duplication, and deletion', () => {
-    const randomID = Math.floor(Math.random() * 10000); // Helps with test flakiness in the event test data already exists
-    const templateTitle = `Cypress Test Template ${randomID}`;
+  beforeEach(() => {
+    cy.server();
+    cy.route('POST', '/api/v1/utils/content-previewer').as('contentPreviewer');
+    cy.route('POST', '/api/v1/templates/**').as('templatesPost');
+    cy.route('PUT', '/api/v1/templates/**').as('templatesPut');
+    cy.route('GET', '/api/v1/templates/**').as('templatesGet');
+    cy.route('DELETE', '/api/v1/templates/**').as('templatesDelete');
+  });
 
-    it('allows creation and editing of a new template', () => {
-      cy.findByText('Create New').click();
+  it('creates a new template after filling out the form on the create view', () => {
+    cy.findByText('Create New').click();
 
-      cy.title().should('include', 'Create');
+    cy.title().should('include', 'Create');
 
-      cy.queryByLabelText('Template Name').type(templateTitle);
-      cy.queryByLabelText('Subject').type('Cypress Test Template');
-      cy.queryByLabelText('From Email').type('nick@');
-      cy.contains('nick@').click();
-      cy.queryByLabelText('From Email').blur(); // NOTE: Button should not be enabled only via blur - this is a UX problem
+    cy.queryByLabelText('Template Name').type(templateTitle);
+    cy.queryByLabelText('Subject').type('Cypress Test Template');
+    cy.queryByLabelText('From Email').type('nick@');
+    cy.contains('nick@').click();
+    cy.queryByLabelText('From Email').blur(); // NOTE: Button should not be enabled only via blur - this is a UX problem
 
-      cy.queryByLabelText('From Email').should('have.value', 'nick@bounce.uat.sparkspam.com');
-      cy.queryByLabelText('Template ID').should('have.value', `cypress-test-template-${randomID}`);
+    cy.queryByLabelText('From Email').should('have.value', 'nick@bounce.uat.sparkspam.com');
+    cy.queryByLabelText('Template ID').should('have.value', `cypress-test-template-${randomID}`);
 
-      cy.findByText('Next').click();
+    cy.findByText('Next').click();
 
-      cy.findByText('Template Created.').should('be.visible');
-      cy.title().should('include', 'Edit Template');
-      cy.findByText(`${templateTitle} (DRAFT)`).should('be.visible');
+    cy.findByText('Template Created.').should('be.visible');
+    cy.title().should('include', 'Edit Template');
+    cy.findByText(`${templateTitle} (DRAFT)`).should('be.visible');
+  });
 
-      const testPreviewContent = (selector, content) => {
-        cy.wait('@contentPreviewer');
+  it('renders preview content in each editor tab with passed in substitution data.', () => {
+    const testPreviewContent = (selector, content) => {
+      cy.wait('@contentPreviewer');
 
-        cy.get('iframe')
-          .then(($iframe) => {
-            const $body = $iframe.contents().find('body');
+      cy.get('iframe')
+        .then(($iframe) => {
+          const $body = $iframe.contents().find('body');
 
-            cy.wrap($body.find(selector))
-              .should('contain', content);
-          });
-      };
+          cy.wrap($body.find(selector))
+            .should('contain', content);
+        });
+    };
 
-      // HTML editing
-      cy.get(editorSelector)
-        .focus()
-        .type('<h1>This is some HTML. Cypress is {{qualifier}}.', { parseSpecialCharSequences: false }); // See: https://docs.cypress.io/api/commands/type.html#Syntax
+    // HTML editing
+    cy.get(editorSelector)
+      .focus()
+      .type('<h1>This is some HTML. Cypress is {{qualifier}}.', { parseSpecialCharSequences: false }); // See: https://docs.cypress.io/api/commands/type.html#Syntax
 
-      testPreviewContent('h1', 'This is some HTML. Cypress is .');
+    testPreviewContent('h1', 'This is some HTML. Cypress is .');
 
-      // AMP editing
-      cy.findByText('AMP HTML').click();
+    // AMP editing
+    cy.findByText('AMP HTML').click();
 
-      cy.get(editorSelector)
-        .focus()
-        .type('<h1>This is some AMP HTML. Cypress is {{qualifier}}.', { parseSpecialCharSequences: false });
+    cy.get(editorSelector)
+      .focus()
+      .type('<h1>This is some AMP HTML. Cypress is {{qualifier}}.', { parseSpecialCharSequences: false });
 
-      testPreviewContent('h1', 'This is some AMP HTML. Cypress is .');
+    testPreviewContent('h1', 'This is some AMP HTML. Cypress is .');
 
-      // Text editing
-      cy.findByText('Text').click();
+    // Text editing
+    cy.findByText('Text').click();
 
-      cy.get(editorSelector)
-        .focus()
-        .type('This is some plain text. Cypress is {{qualifier}}.', { parseSpecialCharSequences: false });
+    cy.get(editorSelector)
+      .focus()
+      .type('This is some plain text. Cypress is {{qualifier}}.', { parseSpecialCharSequences: false });
 
-      testPreviewContent('p', 'This is some plain text. Cypress is .');
+    testPreviewContent('p', 'This is some plain text. Cypress is .');
 
-      // Test Data editing
-      cy.findByText('Test Data').click();
-      const exampleTestData = {
-        options: {},
-        metadata: {},
-        substitution_data: {
-          qualifier: 'excelente'
-        }
-      };
-      const altExampleTestData = {
-        options: {},
-        metadata: {},
-        substitution_data: {
-          qualifier: 'pretty darn great'
-        }
-      };
+    // Test Data editing
+    cy.findByText('Test Data').click();
+    const exampleTestData = {
+      options: {},
+      metadata: {},
+      substitution_data: {
+        qualifier: 'excelente'
+      }
+    };
+    const altExampleTestData = {
+      options: {},
+      metadata: {},
+      substitution_data: {
+        qualifier: 'pretty darn great'
+      }
+    };
 
-      cy.get(editorSelector)
-        .focus()
-        .clear()
-        .type(JSON.stringify(exampleTestData), { parseSpecialCharSequences: false });
+    cy.get(editorSelector)
+      .focus()
+      .clear()
+      .type(JSON.stringify(exampleTestData), { parseSpecialCharSequences: false });
 
-      testPreviewContent('h1', 'This is some HTML. Cypress is excelente.');
+    testPreviewContent('h1', 'This is some HTML. Cypress is excelente.');
 
-      cy.get(editorSelector)
-        .focus()
-        .clear()
-        .type(JSON.stringify(altExampleTestData), { parseSpecialCharSequences: false });
+    cy.get(editorSelector)
+      .focus()
+      .clear()
+      .type(JSON.stringify(altExampleTestData), { parseSpecialCharSequences: false });
 
-      testPreviewContent('h1', 'This is some HTML. Cypress is pretty darn great.');
+    testPreviewContent('h1', 'This is some HTML. Cypress is pretty darn great.');
+  });
 
-      // Saving and publishing the template
-      cy.findByText('Save and Publish').click();
-      cy.get('#modal-portal').within(() => cy.findByText('Save and Publish').click());
+  it('published the template', () => {
+    // Saving and publishing the template
+    cy.findByText('Save and Publish').click();
+    cy.get('#modal-portal').within(() => cy.findByText('Save and Publish').click());
 
-      cy.wait(['@templatesPut','@templatesGet']);
+    cy.wait(['@templatesPut','@templatesGet']);
 
-      cy.findByText('Template published').should('be.visible');
-      cy.get('#alert-portal').within(() => cy.findAllByRole('button').first().click()); // Close the Snackbar component such that other elements are visible to Cypress
+    cy.findByText('Template published').should('be.visible');
+    cy.get('#alert-portal').within(() => cy.findAllByRole('button').first().click()); // Close the Snackbar component such that other elements are visible to Cypress
 
-      cy.findByText('Saved').should('be.visible');
-      cy.findByText('Unsaved Changes').should('not.be.visible');
-      cy.findByText('Edit Draft').should('be.visible');
+    cy.findByText('Saved').should('be.visible');
+    cy.findByText('Unsaved Changes').should('not.be.visible');
+    cy.findByText('Edit Draft').should('be.visible');
 
-      cy.findByText('HTML').click();
+    cy.findByText('HTML').click();
 
-      // Typing in to editor fields is disabled in published mode
-      cy.get(editorSelector)
-        .focus()
-        .type('<p>Some HTML</p>')
-        .should('not.include.value', '<p>Some HTML</p>');
+    // Typing in to editor fields is disabled in published mode
+    cy.get(editorSelector)
+      .focus()
+      .type('<p>Some HTML</p>')
+      .should('not.include.value', '<p>Some HTML</p>');
 
-      cy.findByText('Back').click({ force: true }); // `force` param needed for elements targeted with screen reader only content
+    cy.findByText('Back').click({ force: true }); // `force` param needed for elements targeted with screen reader only content
 
-      cy.findByText(`${templateTitle} (DRAFT)`).should('be.visible');
+    cy.findByText(`${templateTitle} (DRAFT)`).should('be.visible');
+  });
 
-      // Duplicating a template
-      cy.findByText(templateTitle).closest('tr').within(() => {
-        cy.findByText('Duplicate Template').click({ force: true });
-      });
-
-      cy.findByText('Duplicate').click();
-
-      cy.wait('@templatesGet');
-      cy.findByText(`${templateTitle} (COPY)`).should('be.visible');
-
-      // Deleting a template
-      cy.findByText(templateTitle).closest('tr').within(() => {
-        cy.findByText('Delete Template').click({ force: true });
-      });
-
-      cy.findByText('Delete').click();
-
-      cy.wait('@templatesDelete');
-      cy.wait('@templatesGet');
-      cy.findByText(templateTitle).should('not.be.visible');
-
-      // Cleanup
-      cy.findByText(`${templateTitle} (COPY)`).closest('tr').within(() => {
-        cy.findByText('Delete Template').click({ force: true });
-      });
-
-      cy.findByText('Delete').click();
+  it('allows duplication from the list page view', () => {
+    // Duplicating a template
+    cy.findByText(templateTitle).closest('tr').within(() => {
+      cy.findByText('Duplicate Template').click({ force: true });
     });
+
+    cy.findByText('Duplicate').click();
+
+    cy.wait('@templatesGet');
+    cy.findByText(`${templateTitle} (COPY)`).should('be.visible');
+  });
+
+  it('allows deletion from the list page view', () => {
+    // Deleting a template
+    cy.findByText(templateTitle).closest('tr').within(() => {
+      cy.findByText('Delete Template').click({ force: true });
+    });
+
+    cy.findByText('Delete').click();
+
+    cy.wait('@templatesDelete');
+    cy.findByText(templateTitle).should('not.be.visible');
+  });
+
+  it('cleans up test data.', () => {
+    // Cleanup
+    cy.findByText(`${templateTitle} (COPY)`).closest('tr').within(() => {
+      cy.findByText('Delete Template').click({ force: true });
+    });
+
+    cy.findByText('Delete').click();
   });
 });
