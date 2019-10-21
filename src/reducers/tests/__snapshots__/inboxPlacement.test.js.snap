@@ -328,6 +328,7 @@ Object {
   "state": Object {
     "allMessages": Array [],
     "currentTestDetails": Object {},
+    "getAllMessagesPending": false,
     "placementsByProvider": Array [],
     "seeds": Array [],
     "seedsPending": false,
