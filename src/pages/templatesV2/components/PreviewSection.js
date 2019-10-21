@@ -15,31 +15,23 @@ const PreviewSection = () => {
     preview,
     previewLineErrors
   } = useEditorContext();
-
+  const formatTextContent = (textContent) => `<p style="white-space: pre-wrap">${textContent}</p>`;
   const getPreviewContent = (tabKey) => {
-    switch (tabKey) {
-      case 'html':
-      case 'amp_html':
-        return preview[tabKey];
-
-      case 'test_data':
-        if (preview.html) {
-          return preview.html;
-        } else if (preview.amp_html) {
-          return preview.amp_html;
-        } else if (preview.text) {
-          return `<p style="white-space: pre-wrap">${preview.text}</p>`;
-        } else {
-          return '';
-        }
-
-      case 'text':
-        // Must wrap text content in <p> to apply style and must be a string for injecting into iframe
-        return `<p style="white-space: pre-wrap">${preview.text}</p>`;
-
-      default:
-        return '';
+    if (tabKey === 'text') {
+      return formatTextContent(preview.text);
     }
+
+    if (tabKey === 'test_data') {
+      const keyWithContent = ['html', 'amp_html', 'text'].find((key) => preview[key]);
+
+      if (keyWithContent === 'text') {
+        return formatTextContent(preview.text);
+      }
+
+      return preview[keyWithContent];
+    }
+
+    return preview[tabKey];
   };
 
   return (
