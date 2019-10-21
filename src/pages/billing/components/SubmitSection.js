@@ -24,7 +24,7 @@ export const SubmitButton = ({ loading, condition }) => (
 const SubmitSection = () => {
   const { isReady } = useFeatureChangeContext();
   if (!isReady) {
-    return;
+    return null;
   }
 
   return (
