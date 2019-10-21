@@ -206,7 +206,7 @@ export function publishV2(data, subaccountId) {
         meta: {
           method: 'PUT',
           url: `/v1/templates/${id}`,
-          data: { ...data, published: true },
+          data: { published: true },
           headers: setSubaccountHeader(subaccountId)
         }
       }));
@@ -233,7 +233,7 @@ export function publish(data, subaccountId) {
         meta: {
           method: 'PUT',
           url: `/v1/templates/${id}`,
-          data: { ...data, published: true },
+          data: { published: true },
           headers: setSubaccountHeader(subaccountId)
         }
       }));
