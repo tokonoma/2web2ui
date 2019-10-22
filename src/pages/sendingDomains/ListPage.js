@@ -7,7 +7,7 @@ import { list as listSubaccounts } from 'src/actions/subaccounts';
 import { hasSubaccounts } from 'src/selectors/subaccounts';
 import { hasUnverifiedDomains, selectDomains } from 'src/selectors/sendingDomains';
 import {
-  Loading, TableCollection, SubaccountTag, DomainStatusCell, StatusTooltipHeader, ApiErrorBanner,
+  Loading, TableCollection, Subaccount, DomainStatusCell, StatusTooltipHeader, ApiErrorBanner,
   PageLink
 } from 'src/components';
 import { Page } from '@sparkpost/matchbox';
@@ -50,7 +50,7 @@ export class ListPage extends Component {
 
     if (hasSubaccounts) {
       const subaccountCol = subaccount_id || shared_with_subaccounts
-        ? <SubaccountTag all={shared_with_subaccounts} id={subaccount_id} name={subaccount_name}/>
+        ? <Subaccount all={shared_with_subaccounts} id={subaccount_id} name={subaccount_name}/>
         : null;
 
       rowData.push(subaccountCol);

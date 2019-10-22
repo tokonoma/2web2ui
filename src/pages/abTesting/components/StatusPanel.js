@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
 import { selectLatestVersionNumberFromParams, selectIdAndVersionFromParams } from 'src/selectors/abTesting';
-import { LabelledValue, SubaccountTag } from 'src/components';
+import { LabelledValue, Subaccount } from 'src/components';
 import { ActionList, Popover, Panel } from '@sparkpost/matchbox';
 import { ExpandMore } from '@sparkpost/matchbox-icons';
 import StatusTag from './StatusTag';
@@ -39,7 +39,7 @@ export const StatusPanel = ({ test, version, id, subaccountId, latest, name: sub
           <StatusTag status={test.status} />
         </LabelledValue>
         <LabelledValue label='Test ID' value={id} />
-        {!!subaccountId && <LabelledValue label='Subaccount'><SubaccountTag id={subaccountId} name={subaccountName}/></LabelledValue>}
+        {!!subaccountId && <LabelledValue label='Subaccount'><Subaccount id={subaccountId} name={subaccountName}/></LabelledValue>}
       </Panel.Section>
     </Panel>
   );

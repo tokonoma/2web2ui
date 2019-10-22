@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { SubaccountTag } from 'src/components';
+import { Subaccount } from 'src/components';
 import { Button } from '@sparkpost/matchbox';
 import { PanelLoading, TableCollection, Empty, DeleteModal } from 'src/components';
 import { deleteSuppression } from 'src/actions/suppressions';
@@ -44,7 +44,7 @@ export class Results extends Component {
     ];
 
     if (hasSubaccounts) {
-      rowData.push(<SubaccountTag id={subaccountId} master={!subaccountId} name={subaccount_name}/>);
+      rowData.push(<Subaccount id={subaccountId} master={!subaccountId} name={subaccount_name}/>);
     }
 
     rowData.push(

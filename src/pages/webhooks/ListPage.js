@@ -12,7 +12,7 @@ import { hasSubaccounts } from 'src/selectors/subaccounts';
 import { selectWebhooks } from 'src/selectors/webhooks';
 
 // Components
-import { Loading, TableCollection, SubaccountTag, ApiErrorBanner } from 'src/components';
+import { Loading, TableCollection, Subaccount, ApiErrorBanner } from 'src/components';
 import { Page } from '@sparkpost/matchbox';
 import { Setup } from 'src/components/images';
 import { formatDateTime } from 'src/helpers/date';
@@ -60,7 +60,7 @@ export class WebhooksList extends Component {
 
     if (hasSubaccounts) {
       row.push(
-        <SubaccountTag
+        <Subaccount
           id={subaccount_id}
           master={subaccount_id === 0}
           receiveAll={!subaccount_id && subaccount_id !== 0}

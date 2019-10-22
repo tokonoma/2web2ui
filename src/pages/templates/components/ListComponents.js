@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { Popover, Button, ActionList, Tag, Tooltip } from '@sparkpost/matchbox';
 import { MoreHoriz } from '@sparkpost/matchbox-icons';
-import { SubaccountTag } from 'src/components/tags';
+import { Subaccount as SubaccountTag } from 'src/components';
 import { formatDateTime } from 'src/helpers/date';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
 import { resolveTemplateStatus } from 'src/helpers/templates';

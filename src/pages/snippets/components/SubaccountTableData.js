@@ -1,5 +1,5 @@
 import React from 'react';
-import SubaccountTag from 'src/components/tags/SubaccountTag';
+import { Subaccount } from 'src/components';
 
 
 const SubaccountTableData = ({ shared_with_subaccounts, subaccount_id, subaccount_name }) => {
@@ -7,7 +7,7 @@ const SubaccountTableData = ({ shared_with_subaccounts, subaccount_id, subaccoun
     return null;
   }
 
-  return <SubaccountTag all={shared_with_subaccounts} id={subaccount_id} name={subaccount_name}/>;
+  return <Subaccount all={shared_with_subaccounts} id={subaccount_id} name={subaccount_name}/>;
 };
 
 export default SubaccountTableData;

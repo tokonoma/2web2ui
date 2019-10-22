@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { shrinkToFit } from 'src/helpers/string';
 
-const SubaccountTag = ({ id, name, all, receiveAll, master, isDefault }) => {
+const Subaccount = ({ id, name, all, receiveAll, master, isDefault }) => {
   let content = null;
   let defaultContent = null;
 
@@ -33,7 +33,7 @@ const SubaccountTag = ({ id, name, all, receiveAll, master, isDefault }) => {
   return <>{content}{defaultContent}</>;
 };
 
-SubaccountTag.propTypes = {
+Subaccount.propTypes = {
   // 'Subaccount ${id}'
   id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 
@@ -50,7 +50,7 @@ SubaccountTag.propTypes = {
   isDefault: PropTypes.bool
 };
 
-SubaccountTag.defaultProps = {
+Subaccount.defaultProps = {
   id: null,
   all: false,
   master: false,
@@ -58,4 +58,4 @@ SubaccountTag.defaultProps = {
   receiveAll: false
 };
 
-export default SubaccountTag;
+export default Subaccount;

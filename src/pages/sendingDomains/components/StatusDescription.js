@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 
 import { Panel } from '@sparkpost/matchbox';
 
-import { SubaccountTag } from 'src/components/tags';
+import { Subaccount } from 'src/components';
 import { LabelledValue, ReadyFor, StatusTooltipHeader } from 'src/components';
 import StatusLabel from './StatusLabel';
 
@@ -28,7 +28,7 @@ const StatusDescription = ({ domain, readyFor, status }) => {
       subaccount_id &&
         <Panel.Section>
           <LabelledValue label='Subaccount'>
-            <SubaccountTag id={subaccount_id} />
+            <Subaccount id={subaccount_id} />
           </LabelledValue>
         </Panel.Section>
     }

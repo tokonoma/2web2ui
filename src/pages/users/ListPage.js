@@ -12,7 +12,7 @@ import { list as listSubaccounts } from 'src/actions/subaccounts';
 import * as usersActions from 'src/actions/users';
 import { selectUsers } from 'src/selectors/users';
 import { hasSubaccounts } from 'src/selectors/subaccounts';
-import { SubaccountTag, Loading, ApiErrorBanner, DeleteModal, TableCollection, ActionPopover } from 'src/components';
+import { Subaccount, Loading, ApiErrorBanner, DeleteModal, TableCollection, ActionPopover } from 'src/components';
 import User from './components/User';
 
 
@@ -74,7 +74,7 @@ export class ListPage extends Component {
       <Actions username={user.username} deletable={!user.isCurrentUser} onDelete={this.handleDeleteRequest} />
     ];
     if (isSubAccountReportingLive && hasSubaccounts) {
-      data.splice(2, 0, user.subaccount_id ? <SubaccountTag id={user.subaccount_id} name={user.subaccount_name}/> : null);
+      data.splice(2, 0, user.subaccount_id ? <Subaccount id={user.subaccount_id} name={user.subaccount_name}/> : null);
     }
     return data;
   };
