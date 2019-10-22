@@ -14,11 +14,25 @@ import { DEFAULT_REDIRECT_ROUTE } from 'src/constants';
 export class Top extends Component {
   renderMobile = () => (
     <div className={styles.Top} onClick={this.props.open ? this.props.toggleMobileNav : undefined}>
-      <UnstyledLink onClick={!this.props.open ? this.props.toggleMobileNav : undefined} className={styles.Menu} data-id="top-navigation-button">
-        {this.props.open ? <Close size={24}/> : <Menu size={24} />}
+      <UnstyledLink
+        onClick={!this.props.open ? this.props.toggleMobileNav : undefined}
+        className={styles.Menu}
+        to="javascript:void(0);"
+        role="button"
+        aria-expanded={this.props.open}
+        aria-controls="mobile-navigation-wrapper"
+        data-id="top-navigation-button"
+      >
+        {this.props.open ? <Close size={24}/> : <Menu size={24}/>}
+
+        <ScreenReaderOnly>Menu</ScreenReaderOnly>
       </UnstyledLink>
-      <Link to={DEFAULT_REDIRECT_ROUTE} className={styles.MobileLogo}><SparkPost.Logo type='halfWhite' /></Link>
-      <div className={styles.MobileAccountDropdownWrapper}>
+
+      <Link to={DEFAULT_REDIRECT_ROUTE} className={styles.MobileLogo}>
+        <SparkPost.Logo type='halfWhite' />
+      </Link>
+
+      <div className={styles.MobileAccountDropdownWrapper} id="mobile-navigation-wrapper">
         <AccountDropdown />
       </div>
     </div>

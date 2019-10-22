@@ -42,24 +42,10 @@
   flex: 0 0 0;
 }
 
-.Menu {
-  flex: 0 0 0;
-  padding: rem(14) spacing();
-  color: color(gray, 7);
-
-  &:hover {
-    color: color(gray, 10);
-  }
-}
-
+.Menu,
 .SupportButton {
-  cursor: pointer;
-  margin: 0 spacing() 0 0;
-  background: none;
-  border: 0;
-  color: color(gray, 5);
   transition: color 0.15s ease-in-out;
-
+  
   &:hover,
   &:focus {
     color: color(gray, 10);
@@ -68,6 +54,22 @@
   &:focus {
     outline-color: color(gray, 10);
   }
+}
+
+.Menu {
+  flex: 0 0 0;
+  padding: rem(14) spacing();
+  color: color(gray, 7);
+}
+
+
+
+.SupportButton {
+  cursor: pointer;
+  margin: 0 spacing() 0 0;
+  background: none;
+  border: 0;
+  color: color(gray, 5);
 }
 
 .SupportIcon {
