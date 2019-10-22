@@ -30,18 +30,24 @@ describe('SubmitSection: ', () => {
       expect(wrapper.find(Brightback)).not.toExist();
     });
 
-    const getButton = (subject, props = {}) => subject.find(Brightback).prop('render')(props);
+    const getButton = (subject, props = {}) => {
+      const Button = subject.find(Brightback).prop('render');
+      return shallow(<Button {...props} />);
+    };
 
     it('should render the button', () => {
       const wrapper = subject();
       const button = getButton(wrapper, { enabled: true, to: 'url' });
-      expect(button).toMatchSnapshot();
+      expect(button.prop('to')).toEqual('url');
+      expect(button.prop('type')).toEqual('button');
+
     });
 
     it('should not use url if not enabled', () => {
       const wrapper = subject();
       const button = getButton(wrapper, { enabled: false, to: 'url' });
-      expect(button).toMatchSnapshot();
+      expect(button.prop('to')).toEqual(null);
+      expect(button.prop('type')).toEqual('submit');
     });
   });
 });
