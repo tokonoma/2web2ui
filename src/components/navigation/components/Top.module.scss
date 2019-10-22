@@ -52,12 +52,24 @@
   }
 }
 
-.SupportIcon {
+.SupportButton {
   cursor: pointer;
-  fill: color(gray, 5);
   margin: 0 spacing() 0 0;
+  background: none;
+  border: 0;
+  color: color(gray, 5);
+  transition: color 0.15s ease-in-out;
 
-  &:hover {
-    fill: color(gray, 10);
+  &:hover,
+  &:focus {
+    color: color(gray, 10);
   }
+
+  &:focus {
+    outline-color: color(gray, 10);
+  }
+}
+
+.SupportIcon {
+  fill: currentColor;
 }

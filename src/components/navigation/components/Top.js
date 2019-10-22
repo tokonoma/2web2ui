@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { SparkPost } from 'src/components';
 import { WindowSizeContext } from 'src/context/WindowSize';
-import { UnstyledLink } from '@sparkpost/matchbox';
+import { UnstyledLink, ScreenReaderOnly } from '@sparkpost/matchbox';
 import { HelpOutline, Menu, Close } from '@sparkpost/matchbox-icons';
 import { openSupportPanel } from 'src/actions/support';
 import AccountDropdown from './AccountDropdown';
@@ -29,7 +29,13 @@ export class Top extends Component {
       <Link to={DEFAULT_REDIRECT_ROUTE} className={styles.Logo}><SparkPost.Logo type='halfWhite' /></Link>
       <div className={styles.RightSideWrapper}>
         <NotificationCenter />
-        <HelpOutline className={styles.SupportIcon} onClick={this.openSupportPanel} size={22} />
+
+        <button title="Opens a dialog" onClick={this.openSupportPanel} className={styles.SupportButton}>
+          <HelpOutline className={styles.SupportIcon} size={22} />
+
+          <ScreenReaderOnly>Help</ScreenReaderOnly>
+        </button>
+
         <AccountDropdown />
       </div>
     </div>

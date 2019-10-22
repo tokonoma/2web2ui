@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { WindowSizeContext } from 'src/context/WindowSize';
 import { selectAccountNavItems } from 'src/selectors/navItems';
-import { UnstyledLink, Popover, ActionList, Tag } from '@sparkpost/matchbox';
+import { UnstyledLink, Popover, ActionList, Tag, ScreenReaderOnly } from '@sparkpost/matchbox';
 import { ArrowDropDown, Person } from '@sparkpost/matchbox-icons';
 import styles from './AccountDropdown.module.scss';
 
@@ -20,8 +20,16 @@ export class AccountDropdown extends Component {
   renderActivator = () => (
     <WindowSizeContext.Consumer>
       {({ mobile }) => (
-        <UnstyledLink className={styles.Email} onClick={this.toggleDropdown} data-id="account-dropdown-button">
-          {(mobile || !this.props.email) ? <Person size={24} /> : <Fragment>{this.props.email} <ArrowDropDown/></Fragment>}
+        <UnstyledLink
+          className={styles.Email}
+          onClick={this.toggleDropdown}
+          role="button"
+          to="javascript:void(0);"
+          data-id="account-dropdown-button"
+        >
+          {(mobile || !this.props.email) ? <Person size={24}/> : <Fragment>{this.props.email} <ArrowDropDown/></Fragment>}
+
+          <ScreenReaderOnly>&nbsp;Settings</ScreenReaderOnly>
         </UnstyledLink>
       )}
     </WindowSizeContext.Consumer>
