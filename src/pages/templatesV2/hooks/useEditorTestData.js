@@ -8,7 +8,7 @@ const useEditorTestData = (props) => {
     isPublishedMode
   } = props;
   const [testData, setTestData] = useState(templateTestData);
-  const [parsedTestData, setParsedTestData] = useState(undefined);
+  const [parsedTestData, setParsedTestData] = useState({});
 
   useEffect(() => {
     if (draft) {
