@@ -1,18 +1,21 @@
 @import '~@sparkpost/matchbox/src/styles/config.scss';
 
-.IconWrapper {
+.NotificationCenterTrigger {
   display: inline-block;
   padding: 0 spacing();
   margin-right: 2px;
-
   color: color(gray, 5);
-  transition: 0.15s;
-
+  transition: color 0.15s ease-in-out;
   user-select: none;
 
-  &:hover {
+  &:hover,
+  &:focus {
     cursor: pointer;
     color: color(gray, 10);
+  }
+
+  &:focus {
+    outline-color: currentColor;
   }
 }
 

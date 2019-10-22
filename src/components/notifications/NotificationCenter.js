@@ -1,14 +1,40 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Popover, UnstyledLink } from '@sparkpost/matchbox';
+import { Popover, UnstyledLink, ScreenReaderOnly } from '@sparkpost/matchbox';
 import { Notifications, NotificationsUnread } from '@sparkpost/matchbox-icons';
 import Notification from './Notification';
 import * as notificationActions from 'src/actions/notifications';
 import { selectTransformedNotifications, selectUnreadCount } from 'src/selectors/notifications';
 import styles from './NotificationCenter.module.scss';
 
-export class NotificationCenter extends Component {
+const NotificationCenterTrigger = (props) => {
+  const { unreadCount } = props;
+  const hasUnreadNotifications = unreadCount > 0;
 
+  return (
+    <UnstyledLink
+      role="button"
+      to="javascript:void(0);"
+      className={styles.NotificationCenterTrigger}
+    >
+      {hasUnreadNotifications ? (
+        <>
+          <NotificationsUnread className={styles.UnreadIcon} size={22}/>
+
+          <ScreenReaderOnly>{unreadCount} <span>Unread Notifications</span></ScreenReaderOnly>
+        </>
+      ) : (
+        <>
+          <Notifications size={22}/>
+
+          <ScreenReaderOnly>0 Unread Notifications</ScreenReaderOnly>
+        </>
+      )}
+    </UnstyledLink>
+  );
+};
+
+export class NotificationCenter extends Component {
   componentDidMount() {
     this.props.loadNotifications();
   }
@@ -24,15 +50,12 @@ export class NotificationCenter extends Component {
   }
 
   render() {
-    const icon = (this.props.unreadCount > 0)
-      ? <NotificationsUnread className={styles.UnreadIcon} size={22} />
-      : <Notifications size={22} />;
-
     return (
       <Popover
         left
         onClose={this.props.markAllAsRead}
-        trigger={<UnstyledLink className={styles.IconWrapper}>{icon}</UnstyledLink>}>
+        trigger={<NotificationCenterTrigger unreadCount={this.props.unreadCount}/>}
+      >
         <div className={styles.ListWrapper}>
           {this.renderNotificationsList()}
         </div>
