@@ -29,7 +29,7 @@ exports[`StatusDescription component Shallow tests renders subaccount details 1`
     <LabelledValue
       label="Subaccount"
     >
-      <SubaccountTag
+      <Subaccount
         all={false}
         id={101}
         isDefault={false}

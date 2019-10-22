@@ -117,6 +117,10 @@ describe('Templates selectors', () => {
       currentUser: {
         has_subaccounts: true
       },
+      subaccounts: { list: [
+        { name: 'sub 1', id: 101 },
+        { name: 'sub 2', id: 501 }
+      ]},
       form: { testform: { values: {}}}
     };
   });

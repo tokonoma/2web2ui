@@ -266,7 +266,7 @@ Array [
   <ShortKeyCode
     shortKey="ab01"
   />,
-  <SubaccountTag
+  <Subaccount
     all={false}
     id={101}
     isDefault={false}

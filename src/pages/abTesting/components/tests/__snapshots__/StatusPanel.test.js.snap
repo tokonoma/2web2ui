@@ -31,7 +31,7 @@ exports[`Status Panel Component should render 1`] = `
     <LabelledValue
       label="Subaccount"
     >
-      <SubaccountTag
+      <Subaccount
         all={false}
         id={101}
         isDefault={false}

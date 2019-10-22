@@ -549,7 +549,7 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
           className="Tag"
           status="unverified"
         />
-        <SubaccountTag
+        <Subaccount
           all={false}
           className="Tag"
           id={100}
@@ -633,7 +633,7 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
           className="Tag"
           status="blocked"
         />
-        <SubaccountTag
+        <Subaccount
           all={false}
           className="Tag"
           id={100}
@@ -710,7 +710,7 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
           className="Tag"
           status="unverified"
         />
-        <SubaccountTag
+        <Subaccount
           all={false}
           className="Tag"
           id={100}
@@ -796,7 +796,7 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
       <div
         className="TagRow"
       >
-        <SubaccountTag
+        <Subaccount
           all={false}
           className="Tag"
           id={100}
@@ -885,7 +885,7 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
           className="Tag"
           status="unverified"
         />
-        <SubaccountTag
+        <Subaccount
           all={false}
           className="Tag"
           id={100}
@@ -965,7 +965,7 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
       <div
         className="TagRow"
       >
-        <SubaccountTag
+        <Subaccount
           all={false}
           className="Tag"
           id={100}
@@ -1048,7 +1048,7 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
           className="Tag"
           status="pending"
         />
-        <SubaccountTag
+        <Subaccount
           all={false}
           className="Tag"
           id={100}

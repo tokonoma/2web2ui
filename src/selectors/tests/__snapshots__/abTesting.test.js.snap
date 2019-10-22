@@ -33,6 +33,7 @@ Object {
     "sample_size": 50,
     "template_object": Object {
       "id": "template_one",
+      "subaccount_name": null,
     },
   },
   "engagement_timeout": 2,
@@ -45,6 +46,7 @@ Object {
       "sample_size": 50,
       "template_object": Object {
         "id": "template_two",
+        "subaccount_name": null,
       },
     },
   ],
