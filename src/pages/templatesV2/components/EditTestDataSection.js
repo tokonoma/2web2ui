@@ -6,8 +6,7 @@ import Editor from './Editor';
 const EditTestDataSection = () => {
   const {
     setTestData,
-    testData,
-    isPublishedMode
+    testData
   } = useEditorContext();
 
   return (
@@ -16,7 +15,6 @@ const EditTestDataSection = () => {
       name="test-data-editor"
       onChange={(value) => setTestData(value)}
       value={testData}
-      readOnly={isPublishedMode}
     />
   );
 };
