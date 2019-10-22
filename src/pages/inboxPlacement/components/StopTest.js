@@ -1,14 +1,21 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Button } from '@sparkpost/matchbox';
 import ConfirmationModal from 'src/components/modals/ConfirmationModal';
 import { STATUS } from '../constants/test';
+import { connect } from 'react-redux';
+import { stopInboxPlacementTest } from 'src/actions/inboxPlacement';
 
-const StopTest = ({ status, onStop, loading }) => {
+export const StopTest = (props) => {
+  const { status, id, loading, reload, stopInboxPlacementTest } = props;
   const [modalVisible, setModalVisible] = useState(false);
 
   const toggleModalVisibility = () => {
     setModalVisible(!modalVisible);
   };
+
+  const stopTest = useCallback(() => {
+    stopInboxPlacementTest(id).then(reload);
+  }, [id, reload, stopInboxPlacementTest]);
 
   if (status !== STATUS.RUNNING) {
     return null;
@@ -24,7 +31,7 @@ const StopTest = ({ status, onStop, loading }) => {
           stopping.
         </p>
       }
-      onConfirm={onStop}
+      onConfirm={stopTest}
       onCancel={toggleModalVisibility}
       confirming={loading}
       isPending={loading}
@@ -35,4 +42,10 @@ const StopTest = ({ status, onStop, loading }) => {
   </>);
 };
 
-export default StopTest;
+function mapStateToProps(state) {
+  return {
+    loading: state.inboxPlacement.stopTestPending
+  };
+}
+
+export default connect(mapStateToProps, { stopInboxPlacementTest })(StopTest);

@@ -1,0 +1,156 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Page: All Inbox Placement Messages Test handles errors 1`] = `
+<RedirectAndAlert
+  alert={
+    Object {
+      "message": "You dun goofed",
+      "type": "error",
+    }
+  }
+  to="/inbox-placement/details/0"
+/>
+`;
+
+exports[`Page: All Inbox Placement Messages Test renders page correctly with defaults 1`] = `
+<Page
+  breadcrumbAction={
+    Object {
+      "content": "Inbox Placement Results",
+      "onClick": [Function],
+    }
+  }
+  empty={Object {}}
+  primaryArea={
+    <Connect(StopTest)
+      id={0}
+      reload={[Function]}
+    />
+  }
+  title="Inbox Placement"
+>
+  <Panel>
+    <Panel.Section>
+      <h3>
+        Diagnostics
+      </h3>
+    </Panel.Section>
+    <Grid>
+      <Grid.Column
+        lg={7}
+        md={12}
+      >
+        <div
+          className="Divider"
+        >
+          <h5
+            className="Title"
+          >
+            Deliverability
+          </h5>
+          <Grid
+            className="Panel"
+          >
+            <InfoBlock
+              columnProps={
+                Object {
+                  "md": 3,
+                }
+              }
+              label="Sent"
+              labelClassName="DeliverabilityHeader"
+              value={100}
+              valueClassName="DeliverabilityValue"
+            />
+            <InfoBlock
+              columnProps={
+                Object {
+                  "md": 3,
+                }
+              }
+              label="Inbox"
+              labelClassName="DeliverabilityHeader"
+              value={100}
+              valueClassName="DeliverabilityValue"
+            />
+            <InfoBlock
+              columnProps={
+                Object {
+                  "md": 3,
+                }
+              }
+              label="Spam"
+              labelClassName="DeliverabilityHeader"
+              value={0}
+              valueClassName="DeliverabilityValue"
+            />
+            <InfoBlock
+              columnProps={
+                Object {
+                  "md": 3,
+                }
+              }
+              label="Missing"
+              labelClassName="DeliverabilityHeader"
+              value={0}
+              valueClassName="DeliverabilityValue"
+            />
+          </Grid>
+        </div>
+      </Grid.Column>
+      <Grid.Column
+        lg={5}
+        md={12}
+      >
+        <h5
+          className="Title"
+        >
+          Authentication
+        </h5>
+        <Grid
+          className="Panel"
+        >
+          <InfoBlock
+            columnProps={
+              Object {
+                "md": 4,
+              }
+            }
+            label="SPF"
+            labelClassName="AuthenticationHeader"
+            value="100%"
+            valueClassName="AuthenticationValue"
+          />
+          <InfoBlock
+            columnProps={
+              Object {
+                "md": 4,
+              }
+            }
+            label="DKIM"
+            labelClassName="AuthenticationHeader"
+            value="100%"
+            valueClassName="AuthenticationValue"
+          />
+          <InfoBlock
+            columnProps={
+              Object {
+                "md": 4,
+              }
+            }
+            label="DMARC"
+            labelClassName="AuthenticationHeader"
+            value="100%"
+            valueClassName="AuthenticationValue"
+          />
+        </Grid>
+      </Grid.Column>
+    </Grid>
+  </Panel>
+  <Panel
+    title="Seed Diagnostics"
+  >
+    <AllMessagesCollection />
+  </Panel>
+</Page>
+`;

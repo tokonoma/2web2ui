@@ -1,6 +1,8 @@
 import { mount, shallow } from 'enzyme';
 import React from 'react';
 import { TestDetailsPage } from '../TestDetailsPage';
+import { StopTest } from '../components/StopTest';
+
 
 describe('Page: Single Inbox Placement Test', () => {
   const subject = ({ ...props }) => {
@@ -37,7 +39,8 @@ describe('Page: Single Inbox Placement Test', () => {
       getInboxPlacementTestContent={getInboxPlacementTestContent}
       id={101}
       tabIndex={1} //not working nicely with tabIndex=0; TestDetails component
-      history={{ replace: jest.fn() }}/>);
+      history={{ replace: jest.fn() }}
+      StopTestComponent={StopTest}/>);
 
     expect(getInboxPlacementTest).toHaveBeenCalled();
     expect(getInboxPlacementByProviders).toHaveBeenCalled();
@@ -83,6 +86,7 @@ describe('Page: Single Inbox Placement Test', () => {
       getInboxPlacementTest={jest.fn()}
       getInboxPlacementByProviders={jest.fn()}
       getInboxPlacementTestContent={jest.fn()}
+      StopTestComponent={StopTest}
     />);
     wrapper.find('Tab').last().simulate('click');
     expect(mockHistory.replace).toHaveBeenCalled();

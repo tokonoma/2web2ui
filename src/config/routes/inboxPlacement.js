@@ -20,6 +20,14 @@ export default [
     supportDocSearch: 'inbox placement'
   },
   {
+    path: '/inbox-placement/details/:id/:filterType/:filterName',
+    component: inboxPlacement.AllMessagesPage,
+    layout: App,
+    condition: hasGrants('inbox-placement/manage'),
+    title: 'Inbox Placement',
+    supportDocSearch: 'inbox placement'
+  },
+  {
     path: '/inbox-placement',
     component: inboxPlacement.TestListPage,
     layout: App,

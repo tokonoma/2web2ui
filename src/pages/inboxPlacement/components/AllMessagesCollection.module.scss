@@ -1,0 +1,38 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.DataRow {
+  line-height: 0.3;
+  &:last-of-type {
+    border-bottom: 0px;
+  }
+}
+
+.HeaderRow {
+  border-bottom: 0px;
+}
+
+.SeedCell {
+  padding: 1.5rem 0 1.5rem 1rem;
+  width: 40%;
+  font-weight: normal;
+}
+
+.Authentication {
+  padding: 1.5rem 0 1.5rem 0;
+  text-align: center;
+  font-weight: normal;
+}
+
+.HeaderCell{
+  text-align: center;
+  font-size: font-size(400);
+  font-weight: 500;
+}
+
+.Pass {
+  color: color(green);
+}
+
+.Fail {
+  color: color(red);
+}

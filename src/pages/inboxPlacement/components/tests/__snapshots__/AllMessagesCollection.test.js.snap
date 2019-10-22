@@ -1,0 +1,70 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: AllMessagesCollection helper: passFail function returns correct value for an input of Fail 1`] = `
+<span
+  className="Fail"
+>
+  Fail
+</span>
+`;
+
+exports[`Component: AllMessagesCollection helper: passFail function returns correct value for an input of Pass 1`] = `
+<CheckCircle
+  className="Pass"
+/>
+`;
+
+exports[`Component: AllMessagesCollection helper: passFail function returns correct value for an input of null 1`] = `"---"`;
+
+exports[`Component: AllMessagesCollection helper: passFail function returns correct value for an input of other results 1`] = `
+<span
+  className="Fail"
+>
+  Foofoo
+</span>
+`;
+
+exports[`Component: AllMessagesCollection renders correctly with data 1`] = `
+<TableCollection
+  defaultSortColumn={null}
+  defaultSortDirection="asc"
+  headerComponent={[Function]}
+  pagination={true}
+  rowComponent={[Function]}
+  rows={
+    Array [
+      Object {
+        "dkim": "pass",
+        "dmarc": "pass",
+        "email_address": "fido@dogmail.com",
+        "folder": "spam",
+        "spf": "pass",
+        "tab": null,
+      },
+      Object {
+        "dkim": "pass",
+        "dmarc": "fail",
+        "email_address": "sparky@gmail.com",
+        "folder": "inbox",
+        "spf": null,
+        "tab": "promotion",
+      },
+    ]
+  }
+  saveCsv={false}
+  wrapperComponent={[Function]}
+/>
+`;
+
+exports[`Component: AllMessagesCollection renders correctly with no data 1`] = `
+<TableCollection
+  defaultSortColumn={null}
+  defaultSortDirection="asc"
+  headerComponent={[Function]}
+  pagination={true}
+  rowComponent={[Function]}
+  rows={Array []}
+  saveCsv={false}
+  wrapperComponent={[Function]}
+/>
+`;

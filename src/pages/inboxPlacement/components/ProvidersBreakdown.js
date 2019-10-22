@@ -4,6 +4,7 @@ import cx from 'classnames';
 import { TableCollection } from 'src/components/collection';
 import { formatPercent } from 'src/helpers/units';
 import styles from './ProvidersBreakdown.module.scss';
+import PageLink from 'src/components/pageLink/PageLink';
 
 export const GroupPercentage = ({ value }) => <span className={styles.GroupValue}>{formatPercent(value * 100)}</span>;
 
@@ -19,13 +20,13 @@ const HeaderComponent = () => (<thead>
   </Table.Row>
 </thead>);
 
-const WrapperComponent = ({ children }) => (<div className={styles.TableWrapper}>
+const WrapperComponent = ({ children }) => (<div>
   <Table>{children}</Table>
 </div>);
 
-const RowComponent = ({ mailbox_provider, placement, authentication }) => (<Table.Row className={styles.DataRow}>
+const RowComponent = ({ id, mailbox_provider, placement, authentication }) => (<Table.Row className={styles.DataRow}>
   <Table.Cell className={styles.ProviderCell}>
-    <strong>{mailbox_provider}</strong>
+    <PageLink to={`/inbox-placement/details/${id}/mailbox-provider/${mailbox_provider}`}><strong>{mailbox_provider}</strong></PageLink>
   </Table.Cell>
   <Table.Cell className={styles.Placement}><GroupPercentage value={placement.inbox_pct}/></Table.Cell>
   <Table.Cell className={styles.Placement}><GroupPercentage value={placement.spam_pct}/></Table.Cell>
@@ -36,7 +37,6 @@ const RowComponent = ({ mailbox_provider, placement, authentication }) => (<Tabl
 </Table.Row>);
 
 const ProvidersBreakdown = ({ data = []}) => (<TableCollection
-  className={styles.ProvidersBreakdownTable}
   rows={data}
   wrapperComponent={WrapperComponent}
   headerComponent={HeaderComponent}

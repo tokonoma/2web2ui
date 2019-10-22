@@ -1,0 +1,41 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.Divider {
+  border-right: 1px solid color(gray, 8);
+}
+.Panel {
+  padding-bottom: 1rem;
+}
+
+.Title{
+  text-align: center;
+  padding: rem(20) rem(20) 0 0;
+}
+
+.DeliverabilityValue{
+  line-height: 2rem;
+  font-size: font-size(700);
+  font-weight: 500;
+  padding-left: rem(50);
+}
+
+.AuthenticationValue{
+  line-height: 2rem;
+  @media screen and (min-width: breakpoint(medium)) { padding-left: rem(20); }
+  padding-left: rem(50);
+  font-weight: 500;
+  font-size: font-size(700);
+}
+
+.DeliverabilityHeader{
+  font-size: font-size(400);
+  font-weight: 400;
+  padding-left: rem(50);
+}
+
+.AuthenticationHeader{
+  padding-left: rem(50);
+  @media screen and (min-width: breakpoint(medium)) { padding-left: rem(20); }
+  font-weight: 400;
+  font-size: font-size(400);
+}

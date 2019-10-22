@@ -14,4 +14,10 @@ describe('Component: InfoBlock', () => {
     expect(subject({ columnProps: { md: 5 }}).prop('md')).toEqual(5);
   });
 
+  it('renders correctly with custom classname', () => {
+    const wrapper = subject({ labelClassName: 'foo', valueClassName: 'bar' });
+    expect(wrapper.find('div').first()).toHaveProp('className', 'foo');
+    expect(wrapper.find('div').last()).toHaveProp('className', 'bar');
+  });
+
 });
