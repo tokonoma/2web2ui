@@ -30,6 +30,11 @@
   padding: rem(6) spacing() rem(18);
   height: 100%;
   text-align: center;
+  outline-offset: -5px; // insets focus outline to make it visible
+
+  &:focus {
+    outline-color: color(gray, 10);
+  }
 }
 
 .RightSideWrapper, .MobileAccountDropdownWrapper {
@@ -45,7 +50,7 @@
 .Menu,
 .SupportButton {
   transition: color 0.15s ease-in-out;
-  
+
   &:hover,
   &:focus {
     color: color(gray, 10);
@@ -60,9 +65,8 @@
   flex: 0 0 0;
   padding: rem(14) spacing();
   color: color(gray, 7);
+  outline-offset: -5px; // insets focus outline to make it visible
 }
-
-
 
 .SupportButton {
   cursor: pointer;

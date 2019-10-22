@@ -27,9 +27,9 @@ export class AccountDropdown extends Component {
           to="javascript:void(0);"
           data-id="account-dropdown-button"
         >
-          {(mobile || !this.props.email) ? <Person size={24}/> : <Fragment>{this.props.email} <ArrowDropDown/></Fragment>}
+          {(mobile || !this.props.email) ? <Person size={24}/> : <Fragment>{this.props.email}&nbsp;<ArrowDropDown/></Fragment>}
 
-          <ScreenReaderOnly>&nbsp;Settings</ScreenReaderOnly>
+          <ScreenReaderOnly>Settings</ScreenReaderOnly>
         </UnstyledLink>
       )}
     </WindowSizeContext.Consumer>
