@@ -5,10 +5,15 @@ exports[`AccountDropdown activator should render an icon on desktop if email doe
   className="Email"
   data-id="account-dropdown-button"
   onClick={[Function]}
+  role="button"
+  to="javascript:void(0);"
 >
   <Person
     size={24}
   />
+  <ScreenReaderOnly>
+     Settings
+  </ScreenReaderOnly>
 </UnstyledLink>
 `;
 
@@ -17,10 +22,15 @@ exports[`AccountDropdown activator should render an icon on mobile 1`] = `
   className="Email"
   data-id="account-dropdown-button"
   onClick={[Function]}
+  role="button"
+  to="javascript:void(0);"
 >
   <Person
     size={24}
   />
+  <ScreenReaderOnly>
+     Settings
+  </ScreenReaderOnly>
 </UnstyledLink>
 `;
 
@@ -29,10 +39,15 @@ exports[`AccountDropdown activator should render email address on desktop 1`] = 
   className="Email"
   data-id="account-dropdown-button"
   onClick={[Function]}
+  role="button"
+  to="javascript:void(0);"
 >
   test@testing.com
    
   <ArrowDropDown />
+  <ScreenReaderOnly>
+     Settings
+  </ScreenReaderOnly>
 </UnstyledLink>
 `;
 
