@@ -78,6 +78,6 @@ export const Actions = ({ id, subaccount_id, ...rowData }) => {
 
 export const LastUpdated = ({ last_update_time }) => <p className={styles.LastUpdated}>{formatDateTime(last_update_time)}</p>;
 
-export const Subaccount = ({ shared_with_subaccounts, subaccount_id }) => (
-  <SubaccountTag all={shared_with_subaccounts} id={subaccount_id} />
+export const Subaccount = ({ shared_with_subaccounts, subaccount_id, subaccount_name }) => (
+  <SubaccountTag all={shared_with_subaccounts} id={subaccount_id} name={subaccount_name} />
 );
