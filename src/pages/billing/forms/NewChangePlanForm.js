@@ -18,7 +18,7 @@ import { FeatureChangeContextProvider } from '../context/FeatureChangeContext';
 import { getBillingCountries, getBundles, verifyPromoCode, clearPromoCode } from 'src/actions/billing';
 
 //Selectors
-import { selectTieredVisibleBundles, currentPlanSelector, getPromoCodeObject } from 'src/selectors/accountBillingInfo';
+import { selectTieredVisibleBundles, selectAvailableBundles, currentPlanSelector, getPromoCodeObject } from 'src/selectors/accountBillingInfo';
 import { changePlanInitialValues } from 'src/selectors/accountBillingForms';
 import { Loading } from 'src/components/loading/Loading';
 
@@ -29,7 +29,7 @@ export const ChangePlanForm = ({
   bundles,
   currentPlan,
   loading,
-
+  allBundles,
   //Redux Actions
   getBillingInfo,
   getBillingCountries,
@@ -40,8 +40,8 @@ export const ChangePlanForm = ({
 
   //redux-form
   //handleSubmit
+
 }) => {
-  const allBundles = Object.values(bundles).reduce((acc, curr) => [...curr, ...acc],[]);
 
   useEffect(() => { getBillingCountries(); }, [getBillingCountries]);
   useEffect(() => { getBillingInfo(); }, [getBillingInfo]);
@@ -57,10 +57,13 @@ export const ChangePlanForm = ({
     selectBundle(plan);
   };
   useEffect(() => {
-    if (code) {
-      selectBundle(allBundles.find(({ bundle }) => bundle === code));
+    const bundle = allBundles.find(({ bundle }) => bundle === code);
+    if (bundle) {
+      selectBundle(bundle);
+    } else if (!bundle && gotBundles.current) { //Can't find bundle, clears params
+      updateRoute({});
     }
-  }, [ code, allBundles ]);
+  }, [ code, allBundles, updateRoute ]);
   const isPlanSelected = Boolean(selectedBundle && currentPlan.plan !== selectedBundle.bundle);
 
   // const [useSavedCC, setUseSavedCC] = useState(null);
@@ -126,6 +129,7 @@ const mapStateToProps = (state, props) => {
   const { code: planCode, promo: promoCode } = qs.parse(props.location.search);
   return {
     bundles: selectTieredVisibleBundles(state),
+    allBundles: selectAvailableBundles(state),
     initialValues: changePlanInitialValues(state, { planCode, promoCode }),
     currentPlan: currentPlanSelector(state),
     promoCodeObj: getPromoCodeObject(state)
