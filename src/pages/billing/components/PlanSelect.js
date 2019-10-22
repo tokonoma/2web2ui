@@ -23,7 +23,7 @@ export const useModal = () => {
 
 
 export const SelectedPlan = ({ bundle, onChange, promoCodeObj, handlePromoCode }) => {
-  const { messaging: plan } = bundle;
+  const { messaging: plan, tier } = bundle;
 
   const { isShowing, toggle } = useModal(false);
   const { selectedPromo } = promoCodeObj;
@@ -41,7 +41,7 @@ export const SelectedPlan = ({ bundle, onChange, promoCodeObj, handlePromoCode }
       <FeatureComparisonModal open={isShowing} handleClose={toggle} />
       <Panel.Section>
         <div className={styles.SelectedPlan}>
-          <div className={styles.tierLabel}>{PLAN_TIERS[plan.tier]}</div>
+          <div className={styles.tierLabel}>{PLAN_TIERS[tier]}</div>
           <div className={styles.PlanRow}>
             <div>
               <PlanPrice showOverage showIp showCsm plan={plan} selectedPromo={selectedPromo}/>

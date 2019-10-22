@@ -41,14 +41,26 @@ export const ChangePlanForm = ({
   //redux-form
   //handleSubmit
 }) => {
+  const allBundles = Object.values(bundles).reduce((acc, curr) => [...curr, ...acc],[]);
+
+  useEffect(() => { getBillingCountries(); }, [getBillingCountries]);
+  useEffect(() => { getBillingInfo(); }, [getBillingInfo]);
+  const gotBundles = useRef(false);
+  useEffect(() => { getBundles().then(() => { gotBundles.current = true; }); }, [getBundles]);
 
   const { requestParams: { code, promo } = {}, updateRoute } = useRouter();
-  const allBundles = Object.values(bundles).reduce((acc, curr) => [...curr, ...acc],[]);
-  const [selectedBundle, selectBundle] = useState(allBundles.find(({ bundle }) => bundle === code) || null);
+  const [selectedBundle, selectBundle] = useState();
   const onSelect = (plan) => {
+    if (!plan) {
+      updateRoute({});
+    }
     selectBundle(plan);
   };
-
+  useEffect(() => {
+    if (code) {
+      selectBundle(allBundles.find(({ bundle }) => bundle === code));
+    }
+  }, [ code, allBundles ]);
   const isPlanSelected = Boolean(selectedBundle && currentPlan.plan !== selectedBundle.bundle);
 
   // const [useSavedCC, setUseSavedCC] = useState(null);
@@ -56,16 +68,8 @@ export const ChangePlanForm = ({
     const { billingId } = selectedBundle;
     verifyPromoCode({ promoCode , billingId, meta: { promoCode, showErrorAlert: false }});
   },[selectedBundle, verifyPromoCode]);
-  useEffect(() => { getBillingCountries(); }, [getBillingCountries]);
-  useEffect(() => { getBillingInfo(); }, [getBillingInfo]);
-  const gotBundles = useRef(false);
-  useEffect(() => { getBundles().then(() => { gotBundles.current = true; }); }, [getBundles]);
 
-  useEffect(() => {
-    if (!selectedBundle) {
-      clearPromoCode();
-    }
-  },[clearPromoCode, selectedBundle]);
+  useEffect(() => { if (!selectedBundle) { clearPromoCode(); } },[clearPromoCode, selectedBundle]);
 
   //Applies promo code if in query param
   useEffect(() => {
@@ -73,15 +77,6 @@ export const ChangePlanForm = ({
       applyPromoCode(promo);
     }
   },[applyPromoCode, promo, selectedBundle, verifyPromoCode]);
-
-  //clears out requestParams when user changes plan
-  useEffect(() => {
-    if (!selectedBundle && gotBundles.current) {
-      updateRoute({ undefined });
-    } else if (code) {
-      selectBundle(allBundles.find(({ bundle }) => bundle === code));
-    }
-  },[selectedBundle, code, allBundles, updateRoute]);
 
   if (loading) {
     return <Loading />;

@@ -11,22 +11,20 @@ const SubmitSection = ({ brightbackCondition, loading }) => {
   }
 
   return (
-    (
-      <Brightback
-        condition={brightbackCondition}
-        config={config.brightback.downgradeToFreeConfig}
-        render={({ enabled, to }) => (
-          <Button
-            type={enabled ? 'button' : 'submit'}
-            to={enabled ? to : null}
-            disabled={loading}
-            color='orange'
-          >
-            Change Plan
-          </Button>
-        )}
-      />
-    )
+    <Brightback
+      condition={Boolean(brightbackCondition)}
+      config={config.brightback.downgradeToFreeConfig}
+      render={({ enabled, to }) => (
+        <Button
+          type={enabled ? 'button' : 'submit'}
+          to={enabled ? to : null}
+          disabled={loading}
+          color='orange'
+        >
+          Change Plan
+        </Button>
+      )}
+    />
   );
 };
 
