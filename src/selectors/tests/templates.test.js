@@ -5,6 +5,13 @@ describe('Templates selectors', () => {
   let store;
   beforeEach(() => {
     store = {
+      account: { // yuck
+        options: {
+          click_tracking: true,
+          rest_tracking_default: true,
+          transactional_default: false
+        }
+      },
       templates: {
         list: [
           {
@@ -45,6 +52,28 @@ describe('Templates selectors', () => {
               name: 'Ape',
               id: 'ape',
               published: true
+            }
+          },
+          lion: {
+            draft: {
+              id: 'lion',
+              name: 'Lion',
+              published: false,
+              options: {
+                click_tracking: false,
+                open_tracking: false,
+                transactional: false
+              }
+            },
+            published: {
+              id: 'lion',
+              name: 'Lion',
+              published: true,
+              options: {
+                click_tracking: false,
+                open_tracking: false,
+                transactional: false
+              }
             }
           }
         },
@@ -92,30 +121,96 @@ describe('Templates selectors', () => {
     };
   });
 
-  describe('Templates by id Selector', () => {
+  describe('getDraftTemplateById', () => {
+    it('returns draft template', () => {
+      expect(selector.getDraftTemplateById(store, 'ape')).toEqual({
+        name: 'Ape',
+        id: 'ape',
+        published: false
+      });
+    });
+
+    it('returns undefined when not present', () => {
+      expect(selector.getDraftTemplateById(store, 'unknown')).toBeUndefined();
+    });
+  });
+
+  describe('getPublishedTemplateById', () => {
+    it('returns draft template', () => {
+      expect(selector.getPublishedTemplateById(store, 'ape')).toEqual({
+        name: 'Ape',
+        id: 'ape',
+        published: true
+      });
+    });
+
+    it('returns undefined when not present', () => {
+      expect(selector.getPublishedTemplateById(store, 'unknown')).toBeUndefined();
+    });
+  });
+
+  describe('selectDraftTemplateById', () => {
     it('returns template', () => {
-      const props = { match: { params: { id: 'Ape' }}};
-      expect(selector.selectTemplateById(store, props)).toMatchSnapshot();
+      expect(selector.selectDraftTemplateById(store, 'lion')).toEqual({
+        id: 'lion',
+        name: 'Lion',
+        options: {
+          click_tracking: false,
+          open_tracking: false,
+          transactional: false
+        },
+        published: false
+      });
     });
 
-    it('returns empty draft and published', () => {
-      const props = { match: { params: { id: 'Nope' }}};
-      expect(selector.selectTemplateById(store, props)).toMatchSnapshot();
+    it('returns template with default options', () => {
+      expect(selector.selectDraftTemplateById(store, 'ape')).toEqual({
+        id: 'ape',
+        name: 'Ape',
+        options: {
+          click_tracking: true,
+          open_tracking: true,
+          transactional: false
+        },
+        published: false
+      });
+    });
+
+    it('returns undefined when template is not present', () => {
+      expect(selector.selectDraftTemplateById(store, 'unknown')).toBeUndefined();
     });
   });
 
-  cases('.selectDraftTemplate', ({ id }) => {
-    expect(selector.selectDraftTemplate(store, id)).toMatchSnapshot();
-  }, {
-    'returns draft template': { id: 'ape' },
-    'returns undefined when unknown': { id: 'unknown' }
-  });
+  describe('selectPublishedTemplateById', () => {
+    it('returns template', () => {
+      expect(selector.selectPublishedTemplateById(store, 'lion')).toEqual({
+        id: 'lion',
+        name: 'Lion',
+        options: {
+          click_tracking: false,
+          open_tracking: false,
+          transactional: false
+        },
+        published: true
+      });
+    });
 
-  cases('.selectPublishedTemplate', ({ id }) => {
-    expect(selector.selectPublishedTemplate(store, id)).toMatchSnapshot();
-  }, {
-    'returns published template': { id: 'ape' },
-    'returns undefined when unknown': { id: 'unknown' }
+    it('returns template with default options', () => {
+      expect(selector.selectPublishedTemplateById(store, 'ape')).toEqual({
+        id: 'ape',
+        name: 'Ape',
+        options: {
+          click_tracking: true,
+          open_tracking: true,
+          transactional: false
+        },
+        published: true
+      });
+    });
+
+    it('returns undefined when template is not present', () => {
+      expect(selector.selectPublishedTemplateById(store, 'unknown')).toBeUndefined();
+    });
   });
 
   cases('.selectDraftTemplatePreview', ({ defaultValue, id }) => {
@@ -134,28 +229,22 @@ describe('Templates selectors', () => {
     'returns default value when unknown': { id: 'unknown', defaultValue: {}}
   });
 
-  describe('cloneTemplate', () => {
-    const template = {
-      name: 'Test Template',
-      id: 'test-template',
-      published: false,
-      content: {}
-    };
-
-    it('clones template', () => {
-      expect(selector.cloneTemplate(template)).toMatchSnapshot();
-    });
-  });
-
-  describe('getClonedTemplate', () => {
-    it('should clone template if :id exist in state', () => {
-      const props = { match: { params: { id: 'ape' }}};
-      expect(selector.selectClonedTemplate(store, props)).toMatchSnapshot();
+  describe('selectAndCloneDraftById', () => {
+    it('returns clone of draft with updated name and id', () => {
+      expect(selector.selectAndCloneDraftById(store, 'ape')).toEqual({
+        id: 'ape-copy',
+        name: 'Ape Copy',
+        options: {
+          click_tracking: true,
+          open_tracking: true,
+          transactional: false
+        },
+        published: false
+      });
     });
 
-    it('should not clone template if :id does not exist', () => {
-      const props = { match: { params: { id: 'Nope' }}};
-      expect(selector.selectClonedTemplate(store, props)).toMatchSnapshot();
+    it('returns undefined when draft is not present', () => {
+      expect(selector.selectAndCloneDraftById(store, 'unknown')).toBeUndefined();
     });
   });
 

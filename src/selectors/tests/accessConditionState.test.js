@@ -43,5 +43,4 @@ describe('Selector: Access Condition State', () => {
     expect(selectCondition(testCondition)(testState)).toEqual(true);
     expect(testCondition).toHaveBeenCalledWith(testAccessConditionState);
   });
-
 });

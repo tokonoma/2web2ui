@@ -33,4 +33,3 @@ export default selectAccessConditionState;
  */
 
 export const selectCondition = (condition) => createSelector([selectAccessConditionState], condition);
-

@@ -14,10 +14,10 @@ import {
 import { list as listDomains } from 'src/actions/sendingDomains';
 import { list as listSubaccounts } from 'src/actions/subaccounts';
 import {
-  selectDraftTemplate,
+  selectDraftTemplateById,
   selectDraftTemplatePreview,
   selectPreviewLineErrors,
-  selectPublishedTemplate
+  selectPublishedTemplateById
 } from 'src/selectors/templates';
 import { EditorContextProvider } from './context/EditorContext';
 import EditAndPreviewPage from './EditAndPreviewPage';
@@ -30,8 +30,8 @@ const EditAndPreviewPageContainer = (props) => (
 
 const mapStateToProps = (state, props) => {
   const id = props.match.params.id;
-  const draft = selectDraftTemplate(state, id);
-  const published = selectPublishedTemplate(state, id);
+  const draft = selectDraftTemplateById(state, id);
+  const published = selectPublishedTemplateById(state, id);
   const isPublishedMode = props.match.params.version === 'published';
   const draftOrPublished = draft || published;
   const hasDraft = draftOrPublished && draftOrPublished.has_draft;

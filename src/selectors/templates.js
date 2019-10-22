@@ -1,16 +1,27 @@
 import _ from 'lodash';
 import config from 'src/config';
 import { createSelector } from 'reselect';
+import { selectDefaultTemplateOptions } from 'src/selectors/account';
 import { getDomains, isVerified } from 'src/selectors/sendingDomains';
 import { hasSubaccounts, selectSubaccountIdFromProps } from 'src/selectors/subaccounts';
 import { filterTemplatesBySubaccount } from 'src/helpers/templates';
 
+export const getDraftTemplateById = (state, id) => _.get(state, ['templates', 'byId', id, 'draft']);
+export const getPublishedTemplateById = (state, id) => _.get(state, ['templates', 'byId', id, 'published']);
+
 export const selectTemplates = (state) => state.templates.list;
 export const selectPublishedTemplates = (state) => _.filter(state.templates.list, (template) => template.has_published);
-export const selectTemplateById = (state, props) => state.templates.byId[props.match.params.id] || { draft: {}, published: {}};
 
-export const selectDraftTemplate = (state, id) => _.get(state, ['templates', 'byId', id, 'draft']);
-export const selectPublishedTemplate = (state, id) => _.get(state, ['templates', 'byId', id, 'published']);
+const createTemplateSelector = (getter) => createSelector(
+  [getter, selectDefaultTemplateOptions],
+  (template, defaultOptions) => {
+    if (!template) { return; }
+    return { ...template, options: { ...defaultOptions, ...template.options }};
+  }
+);
+export const selectDraftTemplateById = createTemplateSelector(getDraftTemplateById);
+export const selectPublishedTemplateById = createTemplateSelector(getPublishedTemplateById);
+
 export const selectDraftTemplatePreview = (state, id, defaultValue) => (
   state.templates.contentPreview.draft[id] || defaultValue
 );
@@ -24,15 +35,13 @@ export const selectPreviewLineErrors = (state) => (
 export const selectDefaultTestData = () => JSON.stringify(config.templates.testData, null, 2);
 export const selectTemplateTestData = (state) => JSON.stringify(state.templates.testData || config.templates.testData, null, 2);
 
-export const cloneTemplate = (template) => Object.assign({ ...template }, { name: `${template.name} Copy`, id: `${template.id}-copy` });
-
-export const selectClonedTemplate = (state, props) => {
-  const template = selectTemplateById(state, props);
-
-  if (_.get(props, 'match.params.id') && !_.isEmpty(template.draft)) {
-    return cloneTemplate(template.draft);
+export const selectAndCloneDraftById = createSelector(
+  [selectDraftTemplateById],
+  (draft) => {
+    if (!draft) { return; }
+    return { ...draft, name: `${draft.name} Copy`, id: `${draft.id}-copy` };
   }
-};
+);
 
 // Selects sending domains for From Email typeahead
 export const selectDomainsBySubaccount = createSelector(
