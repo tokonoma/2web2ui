@@ -7,7 +7,7 @@ import _ from 'lodash';
 import { create, getDraft } from 'src/actions/templates';
 import { showAlert } from 'src/actions/globalAlert';
 
-import { selectDefaultTemplateOptions } from 'src/selectors/accessConditionState';
+import { selectDefaultTemplateOptions } from 'src/selectors/account';
 import { selectAndCloneDraftById, selectDefaultTestData } from 'src/selectors/templates';
 
 import CreatePage from './CreatePage';

@@ -6,7 +6,7 @@ import _ from 'lodash';
 import { create, getDraft } from 'src/actions/templates';
 import { showAlert } from 'src/actions/globalAlert';
 import { list as listDomains } from 'src/actions/sendingDomains';
-import { selectDefaultTemplateOptions } from 'src/selectors/accessConditionState';
+import { selectDefaultTemplateOptions } from 'src/selectors/account';
 
 import CreatePage from './CreatePage';
 
