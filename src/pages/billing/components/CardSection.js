@@ -14,12 +14,12 @@ const CardSection = ({
   submitting,
   canUpdateBillingInfo
 }) => {
-  const { isReady } = useFeatureChangeContext();
+  const { isReady, loading } = useFeatureChangeContext();
   const [useSavedCC, setUseSavedCC] = useState(true);
 
   const handleCardToggle = () => setUseSavedCC(!useSavedCC);
 
-  if (!isReady) {
+  if (!isReady || loading) {
     return null;
   }
   if (selectedPlan.isFree) {
