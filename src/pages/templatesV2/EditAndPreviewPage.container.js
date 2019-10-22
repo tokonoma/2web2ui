@@ -19,12 +19,8 @@ import {
   selectDraftTemplateById,
   selectDraftTemplatePreview,
   selectPreviewLineErrors,
-<<<<<<< HEAD
-  selectPublishedTemplateById
-=======
-  selectPublishedTemplate,
+  selectPublishedTemplateById,
   selectTemplateTestData
->>>>>>> TR-1374-lemmon-flavor - Incorporate templates actions
 } from 'src/selectors/templates';
 import { EditorContextProvider } from './context/EditorContext';
 import EditAndPreviewPage from './EditAndPreviewPage';
