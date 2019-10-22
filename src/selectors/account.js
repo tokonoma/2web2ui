@@ -28,8 +28,8 @@ export const selectDefaultTemplateOptions = createSelector(
       transactional_default = false
     } = {} // need to be defensive, not all user roles provide access to options
   }) => ({
-    click_tracking: click_tracking || rest_tracking_default || false,
-    open_tracking: rest_tracking_default || false,
-    transactional: transactional_default || false
+    click_tracking: click_tracking || rest_tracking_default,
+    open_tracking: rest_tracking_default,
+    transactional: transactional_default
   })
 );
