@@ -32,7 +32,7 @@ export class Top extends Component {
         <SparkPost.Logo type='halfWhite' />
       </Link>
 
-      <div className={styles.MobileAccountDropdownWrapper} id="mobile-navigation-wrapper">
+      <div className={styles.MobileAccountDropdownWrapper}>
         <AccountDropdown />
       </div>
     </div>
