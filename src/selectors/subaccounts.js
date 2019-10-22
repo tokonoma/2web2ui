@@ -55,8 +55,11 @@ export const selectSubaccountFromId = createSelector(
   (subaccounts, id) => _.find(subaccounts, { id: Number(id) })
 );
 
-export const getSubaccountsIndexedById = (state) => _.keyBy(getSubaccounts(state),
-  function (k) { return k.id ; });
+export const getSubaccountsIndexedById = createSelector(
+  [getSubaccounts],
+  (subaccounts) => _.keyBy(subaccounts,
+    (subaccount) => subaccount.id)
+);
 export const getSubaccountName = (subaccounts , subaccount_id) => {
   if (!subaccount_id) { return null; }
   return subaccounts[subaccount_id] ? subaccounts[subaccount_id].name : null ;
