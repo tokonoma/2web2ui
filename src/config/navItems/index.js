@@ -6,10 +6,11 @@ import {
   List,
   NotificationsActive,
   Settings,
-  BarChart
+  BarChart,
+  GridOff
 } from '@sparkpost/matchbox-icons';
 import { hasGrants } from 'src/helpers/conditions';
-import { isAccountUiOptionSet } from 'src/helpers/conditions/account';
+import { hasAccountOptionEnabled, isAccountUiOptionSet } from 'src/helpers/conditions/account';
 import inboxPlacementNavItems from './inboxPlacement';
 
 export default [
@@ -122,6 +123,13 @@ export default [
     icon: NotificationsActive
   },
   inboxPlacementNavItems,
+  {
+    label: 'Blacklist',
+    to: '/blacklist',
+    tag: 'labs',
+    icon: GridOff,
+    condition: hasAccountOptionEnabled('blacklist_monitors')
+  },
   {
     label: 'Configuration',
     to: '/account',

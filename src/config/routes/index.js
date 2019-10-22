@@ -67,6 +67,7 @@ import {
 import { emailRedirects, emailVerificationRedirect } from './emailRoutes';
 import templateRoutes from './templates';
 import inboxPlacementRoutes from './inboxPlacement';
+import blacklistRoutes from './blacklist';
 
 // See @sparkpost/access for role to grant mappings
 
@@ -789,7 +790,8 @@ const routes = [
     title: 'Logging out...'
   },
   ...templateRoutes,
-  ...inboxPlacementRoutes
+  ...inboxPlacementRoutes,
+  ...blacklistRoutes
 ];
 
 // ensure 404 is always last in routes
