@@ -125,7 +125,7 @@ function mapStateToProps(state, props) {
     stopTestLoading: state.inboxPlacement.stopTestPending,
     messages: state.inboxPlacement.allMessages,
     loading: state.inboxPlacement.getAllMessagesPending,
-    error: state.inboxPlacement.getAllMessagesError
+    error: state.inboxPlacement.getAllMessagesError || state.inboxPlacement.getByProviderError
   };
 }
 

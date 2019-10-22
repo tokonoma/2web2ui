@@ -142,8 +142,8 @@ export class TestListPage extends Component {
     );
   }
 }
-const mapStateToProps = (state, props) => ({
-  tests: state.inboxPlacement.tests,
+const mapStateToProps = (state) => ({
+  tests: state.inboxPlacement.tests || [],
   error: state.inboxPlacement.testsError,
   loading: state.inboxPlacement.testsPending
 });
