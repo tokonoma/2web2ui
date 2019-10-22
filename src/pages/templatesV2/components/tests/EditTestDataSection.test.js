@@ -46,14 +46,4 @@ describe('EditTestDataSection', () => {
 
     expect(mockSetTestData).toHaveBeenCalled();
   });
-
-  it('has a "readOnly" prop value that is controlled by the value of "isPublishedMode"', () => {
-    let wrapper = subject({ isPublishedMode: true });
-
-    expect(wrapper).toHaveProp('readOnly', true);
-
-    wrapper = subject({ isPublishedMode: false });
-
-    expect(wrapper).toHaveProp('readOnly', false);
-  });
 });
