@@ -12,14 +12,15 @@ const CardSection = ({
   selectedPlan,
   account,
   submitting,
-  canUpdateBillingInfo
+  canUpdateBillingInfo,
+  isNewChangePlanForm //TODO: remove this when removing the OldChangePlanForm
 }) => {
   const { isReady, loading } = useFeatureChangeContext();
   const [useSavedCC, setUseSavedCC] = useState(true);
 
   const handleCardToggle = () => setUseSavedCC(!useSavedCC);
 
-  if (!isReady || loading) {
+  if ((!isReady || loading) && isNewChangePlanForm) {
     return null;
   }
   if (selectedPlan.isFree) {

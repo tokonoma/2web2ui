@@ -55,9 +55,7 @@ export const ChangePlanForm = ({
   const [selectedBundle, selectBundle] = useState();
   const { countries } = billing;
   const onSelect = (plan) => {
-    if (!plan) {
-      updateRoute({});
-    }
+    if (!plan) { updateRoute({}); }
     selectBundle(plan);
   };
   useEffect(() => {
@@ -110,17 +108,18 @@ export const ChangePlanForm = ({
               />
               <FeatureChangeContextProvider selectedBundle={selectedBundle}>
                 <FeatureChangeSection/>
+                <AccessControl condition={not(isAws)}>
+                  <CardSection
+                    account={account}
+                    countries={countries}
+                    selectedPlan={selectedBundle}
+                    canUpdateBillingInfo={canUpdateBillingInfo}
+                    submitting={submitting}
+                    isNewChangePlanForm={true} //TODO: remove this when removing the OldChangePlanForm
+                  />
+                </AccessControl>
                 <SubmitSection />
               </FeatureChangeContextProvider>
-               <AccessControl condition={not(isAws)}>
-                 <CardSection
-                   account={account}
-                   countries={countries}
-                   selectedPlan={selectedBundle}
-                   canUpdateBillingInfo={canUpdateBillingInfo}
-                   submitting={submitting}
-                 />
-               </AccessControl>
                </>
               : <PlanSelectSection
                 onSelect={onSelect}
