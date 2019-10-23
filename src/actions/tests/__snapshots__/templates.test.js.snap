@@ -13,6 +13,11 @@ Array [
         },
         "id": "my-id",
         "shared_with_subaccounts": true,
+        "testData": Object {
+          "metadata": Object {},
+          "options": Object {},
+          "substitution_data": Object {},
+        },
       },
       "headers": Object {
         "x-msys-subaccount": 123,
@@ -461,6 +466,12 @@ Array [
           "html": "<p>My new content.</p>",
           "reply_to": undefined,
           "text": undefined,
+        },
+        "testData": Object {
+          "options": Object {},
+          "substitution_data": Object {
+            "foo": "bar",
+          },
         },
       },
       "headers": Object {},
