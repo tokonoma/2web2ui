@@ -150,7 +150,7 @@ export class DetailsPage extends Component {
 
 function mapStateToProps(state, props) {
   const subaccountId = selectSubaccountIdFromQuery(state, props);
-  const subaccount = selectSubaccountFromId(state, Number(selectSubaccountIdFromQuery(state, props)));
+  const subaccount = selectSubaccountFromId(state, subaccountId);
   return {
     test: selectAbTestFromParams(state, props),
     loading: state.abTesting.detailsLoading,
