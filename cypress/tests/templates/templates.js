@@ -127,7 +127,6 @@ describe('Templates', () => {
     });
 
     it('published the template', () => {
-      // Saving and publishing the template
       cy.findByText('Save and Publish').click();
       cy.get('#modal-portal').within(() => cy.findByText('Save and Publish').click());
 
@@ -154,9 +153,10 @@ describe('Templates', () => {
     });
 
     it('allows duplication from the list page view', () => {
-      // Duplicating a template
-      cy.findByText(templateTitle).closest('tr').within(() => {
-        cy.findByText('Duplicate Template').click({ force: true });
+      cy.get('table').within(() => {
+        cy.findByText(templateTitle).closest('tr').within(() => {
+          cy.findByText('Duplicate Template').click({ force: true });
+        });
       });
 
       cy.findByText('Duplicate').click();
@@ -166,9 +166,10 @@ describe('Templates', () => {
     });
 
     it('allows deletion from the list page view', () => {
-      // Deleting a template
-      cy.findByText(templateTitle).closest('tr').within(() => {
-        cy.findByText('Delete Template').click({ force: true });
+      cy.get('table').within(() => {
+        cy.findByText(templateTitle).closest('tr').within(() => {
+          cy.findByText('Delete Template').click({ force: true });
+        });
       });
 
       cy.findByText('Delete').click();
@@ -178,13 +179,13 @@ describe('Templates', () => {
     });
 
     it('cleans up test data.', () => {
-      // Cleanup
-      cy.findByText(`${templateTitle} (COPY)`).closest('tr').within(() => {
-        cy.findByText('Delete Template').click({ force: true });
+      cy.get('table').within(() => {
+        cy.findByText(`${templateTitle} (COPY)`).closest('tr').within(() => {
+          cy.findByText('Delete Template').click({ force: true });
+        });
       });
 
       cy.findByText('Delete').click();
     });
   });
-  })
-  
+});
