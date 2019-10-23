@@ -1,4 +1,5 @@
 import React from 'react';
+import _ from 'lodash';
 import { Panel } from '@sparkpost/matchbox';
 import { FileEdit, CheckCircle } from '@sparkpost/matchbox-icons';
 import { formatDate } from 'src/helpers/date';
@@ -11,7 +12,7 @@ const RecentActivity = (props) => {
     onToggleDeleteModal,
     onToggleDuplicateModal
   } = props;
-  const descendingSortedTemplates = templates.sort((a, b) => new Date(b.last_update_time) - new Date(a.last_update_time));
+  const descendingSortedTemplates = _.orderBy(templates, 'last_update_time', 'desc');
 
   if (templates.length < 3) {
     return;
