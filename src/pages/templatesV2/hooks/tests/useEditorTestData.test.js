@@ -32,53 +32,58 @@ describe('useEditorTestData', () => {
     });
   });
 
-  // TODO: Can't get this to work? The test will pass, but keep getting:
-  /*
-    Cannot log after tests are done. Did you forget to wait for something async in your test?
-    Attempted to log "Error: Warning: An update to %s inside a test was not wrapped in act(...).
-
-    When testing, code that causes React state updates should be wrapped into act(...):
-
-    act(() => {
-      // fire events that update state
+  it('should return merged data when test data is present', () => {
+    const draft = { id: 'test-template' };
+    const preExistingTestData = {
+      substitution_data: { substitution: 'data' },
+      metadata: { meta: 'data' },
+      options: { foo: 'bar' }
+    };
+    const mockGetTestData = () => preExistingTestData;
+    const wrapper = useTestWrapper({
+      draft,
+      getTestDataV2: mockGetTestData
     });
-    // assert on the output
-  */
-  // it('updates test data via `getRecipientList` when the draft state changes', async () => {
-  //   const getRecipientList = jest.fn(() => Promise.resolve({
-  //     recipients: [
-  //       {
-  //         id: 'foo',
-  //         substitution_data: {
-  //           hello: 'world'
-  //         },
-  //         metadata: {
-  //           foo: 'bar'
-  //         }
-  //       }
-  //     ]
-  //   }));
+    const { parsedTestData } = useHook(wrapper);
+    expect(parsedTestData).toEqual(preExistingTestData);
+  });
 
-  //   const wrapper = useTestWrapper({
-  //     getRecipientList,
-  //     draft: {
-  //       options: {
-  //         option: true
-  //       }
-  //     }
-  //   });
+  it('should parse raw test data JSON', async () => {
+    const draft = { id: 'my-template' };
+    const exampleTestData = {
+      substitution_data: { substitution: 'data' },
+      metadata: { meta: 'data' },
+      options: { foo: 'bar' }
+    };
+    const testData = JSON.stringify(exampleTestData);
+    try {
+      const wrapper = await useTestWrapper({
+        draft,
+        testData
+      });
+      const { parsedTestData } = useHook(wrapper);
 
-  //   expect(getRecipientList).toHaveBeenCalled();
-  //   expect(wrapper.testData).toBe({
-  //     substitution_data: {
-  //       hello: 'world'
-  //     },
-  //     metadata: {
-  //       foo: 'bar'
-  //     },
-  //     options: {
-  //       option: true
-  //     }
-  //   });
-  // });
+      expect(parsedTestData).toEqual(exampleTestData);
+    } catch (err) {
+      return err;
+    }
+  });
+
+  it('should return an empty object when parsing fails', async () => {
+    const draft = { id: 'my-template' };
+    const testData = '{"string}';
+
+    try {
+      const wrapper = await useTestWrapper({
+        draft,
+        testData
+      });
+
+      const { parsedTestData } = useHook(wrapper);
+
+      expect(parsedTestData).toEqual({});
+    } catch (err) {
+      return err;
+    }
+  });
 });
