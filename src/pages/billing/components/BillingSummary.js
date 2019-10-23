@@ -77,7 +77,7 @@ export default class BillingSummary extends Component {
 
   render() {
     const { account, currentPlan, canChangePlan, canUpdateBillingInfo, canPurchaseIps, invoices, isAWSAccount, accountAgeInDays, hasRecipientValidation } = this.props;
-    const { rvUsage, pending_cancellation, subscription, billing } = account;
+    const { rvUsage, pending_cancellation, subscription, billing = {}} = account;
     const { show } = this.state;
     const userAllowed = subscription.type === 'default' && !billing.credit_card;
 
