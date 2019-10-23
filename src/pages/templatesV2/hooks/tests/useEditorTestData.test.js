@@ -4,16 +4,32 @@ import { mount } from 'enzyme';
 import useEditorTestData from '../useEditorTestData';
 
 describe('useEditorTestData', () => {
-  const useTestWrapper = (value = {}) => {
-    const TestComponent = () => <div hooked={useEditorTestData(value)} />;
+  const useTestWrapper = (initialProps = {}) => {
+    const props = {
+      getTestDataV2: () => {},
+      ...initialProps
+    };
+    const TestComponent = () => <div hooked={useEditorTestData(props)} />;
+
     return mount(<TestComponent />);
   };
   const useHook = (wrapper) => wrapper.update().children().prop('hooked');
 
   it('returns default values', () => {
     const wrapper = useTestWrapper();
-
     expect(useHook(wrapper)).toMatchSnapshot();
+  });
+
+  it('should hydrate', () => {
+    const draft = { id: 'test-template' };
+    const wrapper = useTestWrapper({ draft });
+    const { parsedTestData } = useHook(wrapper);
+
+    expect(parsedTestData).toEqual({
+      metadata: {},
+      options: {},
+      substitution_data: {}
+    });
   });
 
   // TODO: Can't get this to work? The test will pass, but keep getting:
