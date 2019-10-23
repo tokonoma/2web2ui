@@ -23,10 +23,10 @@ export const selectDefaultTemplateOptions = createSelector(
   [getAccount],
   ({
     options: {
-      click_tracking,
-      rest_tracking_default,
-      transactional_default
-    }
+      click_tracking = true,
+      rest_tracking_default = true,
+      transactional_default = false
+    } = {} // need to be defensive, not all user roles provide access to options
   }) => ({
     click_tracking: click_tracking || rest_tracking_default,
     open_tracking: rest_tracking_default,
