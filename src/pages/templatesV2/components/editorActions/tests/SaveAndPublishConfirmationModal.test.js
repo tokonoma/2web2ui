@@ -47,7 +47,7 @@ describe('SaveAndPublishConfirmationModal', () => {
 
   it('on confirm, 1) calls publishDraftV2 and 2) redirects to published path upon publishing', async () => {
     const publishDraftPromise = Promise.resolve();
-    const testData = JSON.stringify({
+    const parsedTestData = {
       options: {
         foo: 'bar'
       },
@@ -57,7 +57,7 @@ describe('SaveAndPublishConfirmationModal', () => {
       substitution_data: {
         substitution: 'data'
       }
-    });
+    };
     const publishDraftV2 = jest.fn(() => publishDraftPromise);
     const draft = { id: 'foo', subaccount_id: 101 };
     const content = { text: 'foo text', html: '<h1>foo html</h1>' };
@@ -65,7 +65,7 @@ describe('SaveAndPublishConfirmationModal', () => {
       publishDraftV2,
       draft,
       content,
-      testData
+      parsedTestData
     });
     wrapper.find('ConfirmationModal').simulate('confirm');
 
@@ -73,7 +73,7 @@ describe('SaveAndPublishConfirmationModal', () => {
       {
         ...draft,
         content,
-        testData
+        parsedTestData
       },
       101
     );
