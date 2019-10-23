@@ -57,7 +57,7 @@ const SendTestEmailButton = () => {
       updateDraftV2({
         id: templateId,
         content,
-        testData: parsedTestData
+        parsedTestData
       }, subaccountId)
         .then(() => setModalLoading(false));
     }

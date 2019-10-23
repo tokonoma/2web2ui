@@ -35,7 +35,7 @@ export default class CreatePage extends Component {
     };
     createTemplateV2({
       ...formData,
-      testData: testDataBase
+      parsedTestData: testDataBase
     })
       .then(() => {
         showAlert({ type: 'success', message: 'Template Created.' });

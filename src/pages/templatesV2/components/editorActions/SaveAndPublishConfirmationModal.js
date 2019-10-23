@@ -10,7 +10,7 @@ const SaveAndPublishConfirmationModal = (props) => {
   const {
     draft,
     content,
-    testData,
+    parsedTestData,
     isDraftPublishing,
     setHasSaved,
     publishDraftV2
@@ -21,7 +21,7 @@ const SaveAndPublishConfirmationModal = (props) => {
     publishDraftV2({
       ...draft,
       content,
-      testData
+      parsedTestData
     }, draft.subaccount_id)
       .then(() => {
         setHasSaved(true);

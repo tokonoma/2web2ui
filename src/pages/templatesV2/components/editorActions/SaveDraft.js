@@ -11,7 +11,7 @@ const SaveDraft = (props) => {
     updateDraftV2,
     showAlert,
     setHasSaved,
-    testData
+    parsedTestData
   } = useEditorContext();
 
   const handleClick = useCallback(() => {
@@ -22,7 +22,7 @@ const SaveDraft = (props) => {
     updateDraftV2({
       id: draft.id,
       content,
-      testData
+      parsedTestData
     }, draft.subaccount_id)
       .then(() => {
         showAlert({

@@ -107,7 +107,7 @@ export function createV2(data) {
     assignTo,
     subaccount,
     content,
-    testData,
+    parsedTestData,
     ...formData
   } = data;
 
@@ -115,7 +115,7 @@ export function createV2(data) {
     dispatch(setTestDataV2({
       id,
       mode: 'draft',
-      data: testData
+      data: parsedTestData
     }));
 
     return dispatch(sparkpostApiRequest({
@@ -162,13 +162,13 @@ export function update(data, subaccountId, params = {}) {
 }
 
 export function updateV2(data, subaccountId, params = {}) {
-  const { id, testData, content, ...formData } = data;
+  const { id, parsedTestData, content, ...formData } = data;
 
   return (dispatch) => {
     dispatch(setTestDataV2({
       id,
       mode: 'draft',
-      data: testData
+      data: parsedTestData
     }));
 
     return dispatch(sparkpostApiRequest({
@@ -193,13 +193,13 @@ export function updateV2(data, subaccountId, params = {}) {
 // TODO: Rename once original version is no longer with us
 export function publishV2(data, subaccountId) {
   return async (dispatch) => {
-    const { id, testData } = data;
+    const { id, parsedTestData } = data;
 
     dispatch({ type: 'PUBLISH_ACTION_PENDING' });
 
     try {
       await dispatch(update(data, subaccountId));
-      dispatch(setTestDataV2({ id, mode: 'published', data: testData }));
+      dispatch(setTestDataV2({ id, mode: 'published', data: parsedTestData }));
 
       await dispatch(sparkpostApiRequest({
         type: 'PUBLISH_TEMPLATE',
@@ -221,12 +221,12 @@ export function publishV2(data, subaccountId) {
 // TODO: Remove once original implementation is no longer with us
 export function publish(data, subaccountId) {
   return async (dispatch) => {
-    const { id, testData } = data;
+    const { id, parsedTestData } = data;
     dispatch({ type: 'PUBLISH_ACTION_PENDING' });
 
     try { // Save draft first, then publish
       await dispatch(update(data, subaccountId));
-      dispatch(setTestData({ id, mode: 'published', data: testData }));
+      dispatch(setTestData({ id, mode: 'published', data: parsedTestData }));
 
       await dispatch(sparkpostApiRequest({
         type: 'PUBLISH_TEMPLATE',
