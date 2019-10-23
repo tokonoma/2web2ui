@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useCallback, useRef } from 'react';
-import { Grid } from '@sparkpost/matchbox';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
@@ -21,6 +20,7 @@ import { getBillingCountries, getBundles, verifyPromoCode, clearPromoCode } from
 import { selectTieredVisibleBundles, selectAvailableBundles, currentPlanSelector, getPromoCodeObject } from 'src/selectors/accountBillingInfo';
 import { changePlanInitialValues } from 'src/selectors/accountBillingForms';
 import { Loading } from 'src/components/loading/Loading';
+import styles from './NewChangePlanForm.module.scss';
 
 const FORMNAME = 'changePlan';
 
@@ -87,8 +87,11 @@ export const ChangePlanForm = ({
 
   return (
     <form>
-      <Grid>
-        <Grid.Column xs={8}>
+      <div className={styles.ChangePlanForm}>
+        <div className={styles.CurrentPlanSection}>
+          <CurrentPlanSection currentPlan={currentPlan} isPlanSelected={Boolean(selectedBundle)}/>
+        </div>
+        <div className={styles.MainContent}>
           {
             isPlanSelected
               ? <SelectedPlan
@@ -116,11 +119,8 @@ export const ChangePlanForm = ({
               </FeatureChangeContextProvider>
             )
           }
-        </Grid.Column>
-        <Grid.Column xs={4}>
-          <CurrentPlanSection currentPlan={currentPlan} isPlanSelected={Boolean(selectedBundle)}/>
-        </Grid.Column>
-      </Grid>
+        </div>
+      </div>
     </form>
   );
 };

@@ -1,0 +1,33 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.ChangePlanForm {
+  display: grid;
+  grid-gap: spacing();
+  grid-template-columns: 1fr;
+  grid-template-rows: auto auto;
+
+  @media (min-width: breakpoint('large')) {
+    grid-template-columns: 2fr 1fr;
+
+  }
+
+}
+
+.CurrentPlanSection {
+  grid-column: 1;
+  grid-row: 1;
+  @media (min-width: breakpoint('large')) {
+    grid-column: 2;
+    grid-row: 1;
+  }
+}
+
+.MainContent {
+  grid-column: 1;
+  grid-row: 2;
+
+  @media (min-width: breakpoint('large')) {
+    grid-column: 1;
+    grid-row: 1;
+  }
+}
