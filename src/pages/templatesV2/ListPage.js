@@ -5,6 +5,7 @@ import { ApiErrorBanner, DeleteModal, Loading, TableCollection } from 'src/compo
 import { Templates } from 'src/components/images';
 import PageLink from 'src/components/pageLink';
 import { resolveTemplateStatus } from 'src/helpers/templates';
+import RecentActivity from './components/RecentActivity';
 import { DeleteAction, DuplicateAction, LastUpdated, Name, Status } from './components/ListComponents';
 import DuplicateTemplateModal from './components/editorActions/DuplicateTemplateModal';
 import { routeNamespace } from './constants/routes';
@@ -34,17 +35,28 @@ export default class ListPage extends Component {
       });
   };
 
-  toggleDeleteModal = (props) => {
+  toggleDeleteModal = (template) => {
     this.setState({
       showDeleteModal: !this.state.showDeleteModal,
-      templateToDelete: props
+      templateToDelete: template
     });
   };
 
   toggleDuplicateModal = (template) => {
-    const { getDraft } = this.props;
+    const { getDraft, getPublished } = this.props;
+    const isPublished = template.published;
 
-    getDraft(template.id)
+    if (isPublished) {
+      return getPublished(template.id)
+        .then((res) => {
+          this.setState({
+            templateToDuplicate: res,
+            showDuplicateModal: !this.state.showDuplicateModal
+          });
+        });
+    }
+
+    return getDraft(template.id)
       .then((res) => {
         this.setState({
           templateToDuplicate: res,
@@ -159,6 +171,14 @@ export default class ListPage extends Component {
               by having a set of named templates to reference.
               Building a library of "go-to" templates for recurrent use-cases to reduce workload for your team.
             </p>
+
+            <RecentActivity
+              templates={templates}
+              onToggleDeleteModal={this.toggleDeleteModal}
+              onToggleDuplicateModal={this.toggleDuplicateModal}
+            />
+
+            <h2>All Templates</h2>
 
             <TableCollection
               columns={columns.map(({ header, key }) => ({ ...header, key }))}

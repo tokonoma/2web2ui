@@ -26,6 +26,38 @@ exports[`ListPage renders correctly 1`] = `
   >
     Create re-usable templates that allow for dynamic personalized content. Easily communicate with your team by having a set of named templates to reference. Building a library of "go-to" templates for recurrent use-cases to reduce workload for your team.
   </p>
+  <RecentActivity
+    onToggleDeleteModal={[Function]}
+    onToggleDuplicateModal={[Function]}
+    templates={
+      Array [
+        Object {
+          "id": "id1",
+          "last_update_time": "2017-08-10T14:15:16+00:00",
+          "name": "subaccount template",
+          "published": true,
+          "shared_with_subaccounts": false,
+          "subaccount_id": 101,
+        },
+        Object {
+          "id": "id2",
+          "last_update_time": "2017-08-10T14:15:16+00:00",
+          "name": "shared template",
+          "published": false,
+          "shared_with_subaccounts": true,
+        },
+        Object {
+          "id": "id3",
+          "last_update_time": "2017-08-10T14:15:16+00:00",
+          "name": "master template",
+          "published": false,
+        },
+      ]
+    }
+  />
+  <h2>
+    All Templates
+  </h2>
   <TableCollection
     columns={
       Array [
