@@ -391,7 +391,7 @@ export function sendPreviewV2({ id, mode, emails, from, subaccountId }) {
   }));
 
   return async (dispatch) => {
-    const { testData = {}} = await dispatch(getTestDataV2({ id, mode }));
+    const testData = await dispatch(getTestDataV2({ id, mode }));
 
     return dispatch(sparkpostApiRequest({
       type: 'SEND_PREVIEW_TRANSMISSION',
