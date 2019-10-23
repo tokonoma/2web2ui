@@ -162,7 +162,8 @@ describe('Templates', () => {
       cy.findByText('Duplicate').click();
 
       cy.wait('@templatesGet');
-      cy.findByText(`${templateTitle} (COPY)`).should('be.visible');
+
+      cy.findAllByText(`${templateTitle} (COPY)`).should('be.visible');
     });
 
     it('allows deletion from the list page view', () => {
