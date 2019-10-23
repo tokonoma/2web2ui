@@ -25,7 +25,7 @@ const VersionSelector = ({ current, latest, id, subaccountId }) => {
   );
 };
 
-export const StatusPanel = ({ test, version, id, subaccountId, latest, name: subaccountName }) => {
+export const StatusPanel = ({ test, version, id, subaccountId, latest, subaccountName }) => {
   let panelActions = null;
 
   if (latest > 1) {

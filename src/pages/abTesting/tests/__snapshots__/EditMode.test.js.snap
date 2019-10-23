@@ -61,8 +61,8 @@ exports[`Page: A/B Test Edit Mode should render draft status correctly 1`] = `
     </Left>
     <Right>
       <withRouter(Connect(StatusPanel))
-        name={null}
         subaccountId="101"
+        subaccountName={null}
         test={
           Object {
             "default_template": Object {
@@ -177,8 +177,8 @@ exports[`Page: A/B Test Edit Mode should render scheduled status correctly 1`] =
     </Left>
     <Right>
       <withRouter(Connect(StatusPanel))
-        name={null}
         subaccountId="101"
+        subaccountName={null}
         test={
           Object {
             "default_template": Object {

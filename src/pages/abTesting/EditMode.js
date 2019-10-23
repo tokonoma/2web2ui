@@ -124,7 +124,7 @@ export class EditMode extends Component {
             <StatusContent test={test} rescheduling={rescheduling} />
           </Section.Left>
           <Section.Right>
-            <StatusPanel test={test} subaccountId={subaccountId} name={subaccountName}/>
+            <StatusPanel test={test} subaccountId={subaccountId} subaccountName={subaccountName}/>
             <StatusFields disabled={submitting} />
           </Section.Right>
         </Section>
