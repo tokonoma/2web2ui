@@ -6,7 +6,7 @@ import useEditorContext from '../../../hooks/useEditorContext';
 jest.mock('../../../hooks/useEditorContext');
 
 describe('SaveDraft', () => {
-  const testData = JSON.stringify({
+  const parsedTestData = {
     options: {
       optionOne: true
     },
@@ -16,12 +16,12 @@ describe('SaveDraft', () => {
     substitution_data: {
       substitution: 'data'
     }
-  });
+  };
   const subject = (editorState) => {
     useEditorContext.mockReturnValue({
       draft: { id: 'foo' },
       history: {},
-      testData,
+      parsedTestData,
       updateDraftV2: jest.fn(),
       ...editorState
     });
@@ -52,7 +52,7 @@ describe('SaveDraft', () => {
       expect(updateDraftV2).toHaveBeenCalledWith({
         content,
         id: 'foo',
-        testData: JSON.stringify({
+        parsedTestData: {
           options: {
             optionOne: true
           },
@@ -62,7 +62,7 @@ describe('SaveDraft', () => {
           substitution_data: {
             substitution: 'data'
           }
-        })
+        }
       }, undefined);
       expect(setHasSaved).toHaveBeenCalled();
       expect(showAlert).toHaveBeenCalled();
@@ -96,7 +96,7 @@ describe('SaveDraft', () => {
       expect(updateDraftV2).toHaveBeenCalledWith({
         content,
         id: 'foo',
-        testData: JSON.stringify({
+        parsedTestData: {
           options: {
             optionOne: true
           },
@@ -106,7 +106,7 @@ describe('SaveDraft', () => {
           substitution_data: {
             substitution: 'data'
           }
-        })
+        }
       }, 1001);
       expect(setHasSaved).toHaveBeenCalled();
       expect(showAlert).toHaveBeenCalled();
