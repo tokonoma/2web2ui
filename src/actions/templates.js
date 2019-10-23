@@ -308,7 +308,7 @@ export function getTestDataV2({ id, mode }) {
     const rawData = window.localStorage.getItem(getTestDataKey({ id, username, mode }));
 
     try {
-      return JSON.parse(rawData);
+      return JSON.parse(rawData) || {};
     } catch {
       return {};
     }
