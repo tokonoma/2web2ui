@@ -34,8 +34,13 @@ const useEditorTestData = (props) => {
   useEffect(() => {
     try {
       setParsedTestData(JSON.parse(testData));
-    } catch {
-      setParsedTestData({});
+    } catch (err) {
+      // See: https://2ality.com/2017/08/optional-catch-binding.html#use-case%3A-json.parse()
+      if (err instanceof SyntaxError) {
+        setParsedTestData({});
+      } else {
+        throw err;
+      }
     }
   }, [testData, setParsedTestData]);
 
