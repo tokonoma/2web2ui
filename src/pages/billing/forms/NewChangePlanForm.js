@@ -108,7 +108,7 @@ export const ChangePlanForm = ({
               />
               <FeatureChangeContextProvider selectedBundle={selectedBundle}>
                 <FeatureChangeSection/>
-                <AccessControl condition={not(isAws)}>
+                <AccessControl condition={not(isAws)} >
                   <CardSection
                     account={account}
                     countries={countries}
