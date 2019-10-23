@@ -66,7 +66,7 @@ describe('CreatePage', () => {
             ...formData.content,
             text: ''
           },
-          testData: {
+          parsedTestData: {
             substitution_data: {},
             metadata: {},
             options: {}
