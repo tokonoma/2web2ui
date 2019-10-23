@@ -1,7 +1,7 @@
 import React from 'react';
 import { Panel } from '@sparkpost/matchbox';
 import { FileEdit, CheckCircle } from '@sparkpost/matchbox-icons';
-import { DisplayDate } from 'src/components';
+import { formatDate } from 'src/helpers/date';
 import { DuplicateAction, DeleteAction } from './ListComponents';
 import styles from './RecentActivity.module.scss';
 
@@ -54,10 +54,7 @@ const RecentActivity = (props) => {
                         <div>
                           <span>Updated&nbsp;</span>
 
-                          <DisplayDate
-                            timestamp={template.last_update_time}
-                            formattedDate={template.last_update_time}
-                          />
+                          {formatDate(template.last_update_time)}
                         </div>
                       </div>
 
