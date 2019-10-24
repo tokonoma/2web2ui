@@ -2,9 +2,29 @@
 
 exports[`Change Plan Form should render 1`] = `
 <form>
-  <Grid>
-    <Grid.Column
-      xs={8}
+  <div
+    className="ChangePlanForm"
+  >
+    <div
+      className="CurrentPlanSection"
+    >
+      <CurrentPlanSection
+        currentPlan={
+          Object {
+            "billingId": 3,
+            "code": "big-code",
+            "monthly": 300,
+            "name": "Three",
+            "overage": 0.3,
+            "tier": "starter",
+            "volume": 3,
+          }
+        }
+        isPlanSelected={false}
+      />
+    </div>
+    <div
+      className="MainContent"
     >
       <PlanSelectSection
         bundles={
@@ -66,25 +86,7 @@ exports[`Change Plan Form should render 1`] = `
         }
         onSelect={[Function]}
       />
-    </Grid.Column>
-    <Grid.Column
-      xs={4}
-    >
-      <CurrentPlanSection
-        currentPlan={
-          Object {
-            "billingId": 3,
-            "code": "big-code",
-            "monthly": 300,
-            "name": "Three",
-            "overage": 0.3,
-            "tier": "starter",
-            "volume": 3,
-          }
-        }
-        isPlanSelected={false}
-      />
-    </Grid.Column>
-  </Grid>
+    </div>
+  </div>
 </form>
 `;
