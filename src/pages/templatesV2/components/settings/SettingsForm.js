@@ -13,8 +13,19 @@ import { emailOrSubstitution } from '../validation';
 
 export default class SettingsForm extends React.Component {
   updateSettings = (values) => {
-    const { draft, updateDraftV2, subaccountId, showAlert } = this.props;
-    return updateDraftV2({ id: draft.id, ...values }, subaccountId)
+    const {
+      draft,
+      updateDraftV2,
+      parsedTestData,
+      subaccountId,
+      showAlert
+    } = this.props;
+
+    return updateDraftV2({
+      id: draft.id,
+      parsedTestData,
+      ...values
+    }, subaccountId)
       .then(() => {
         showAlert({ type: 'success', message: 'Template settings updated.' });
       });
