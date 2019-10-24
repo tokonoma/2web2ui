@@ -12,20 +12,27 @@ import ButtonWrapper from 'src/components/buttonWrapper';
 import PanelLoading from 'src/components/panelLoading';
 import CopyField from 'src/components/copyField';
 import { slugToFriendly } from 'src/helpers/string';
+import useEditorContext from '../hooks/useEditorContext';
 
 const InsertSnippetModal = (props) => {
-  const {
-    open,
-    loading,
-    onClose,
-    getSnippets
-  } = props;
+  const { open, onClose } = props;
+  const { getSnippets, snippets, areSnippetsLoading } = useEditorContext();
+  const [snippetId, setSnippetId] = useState(undefined);
 
   useEffect(() => {
-    //getSnippets();
-  });
+    if (open) {
+      getSnippets();
+    }
+  }, [open]);
 
-  if (loading) {
+
+  const handleTypeaheadChange = (snippet) => {
+    const snippetId = !snippet ? undefined : snippet.id;
+
+    setSnippetId(snippetId);
+  };
+
+  if (areSnippetsLoading) {
     return <PanelLoading/>;
   }
 
@@ -43,7 +50,8 @@ const InsertSnippetModal = (props) => {
         <form>
           <p>Snippets are a great way to manage sections like headers or footers that are used across multiple templates. Simply edit your snippet, and that change will populate across all your templates.</p>
 
-          {/* <Typeahead
+          <Typeahead
+            label="Find a Snippet"
             disabled={snippets.length === 0}
             helpText={
               snippets.length === 0 ? (
@@ -57,21 +65,20 @@ const InsertSnippetModal = (props) => {
             itemToString={(snippet) => (
               snippet ? `${snippet.name || slugToFriendly(snippet.id)} (${snippet.id})` : ''
             )}
-            label="Snippet"
             name="snippetTypeahead"
-            onChange={this.handleChange}
+            onChange={() => handleTypeaheadChange()}
             placeholder={snippets.length === 0 ? '' : 'Type to search...'}
             renderItem={({ id, name }) => (
               <TypeaheadItem id={id} label={name || slugToFriendly(id)} />
             )}
             results={snippets}
-          /> */}
+          />
 
           <Label id="snippet-copy-field">Snippet Code</Label>
 
           <CopyField
             id="snippet-copy-field"
-            value="A string"
+            value={`{{ render_snippet( "${snippetId || 'example-id'}" ) }}`}
           />
 
           <ButtonWrapper>

@@ -42,6 +42,7 @@ const mapStateToProps = (state, props) => {
   const hasDraft = draftOrPublished && draftOrPublished.has_draft;
   const hasPublished = draftOrPublished && draftOrPublished.has_published;
 
+
   return {
     draft,
     snippets,
@@ -55,6 +56,7 @@ const mapStateToProps = (state, props) => {
     isDeletePending: state.templates.deletePending,
     isDraftUpdating: Boolean(state.templates.updating),
     isDraftPublishing: Boolean(state.templates.publishPending),
+    areSnippetsLoading: Boolean(state.snippets.loading),
     preview: selectDraftTemplatePreview(state, id, {}),
     previewLineErrors: selectPreviewLineErrors(state),
     templateTestData: selectTemplateTestData(state)
