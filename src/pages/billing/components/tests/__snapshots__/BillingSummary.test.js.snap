@@ -71,6 +71,7 @@ exports[`Component: Billing Summary should render correctly for a paid plan 1`] 
     </Panel.Section>
     <DedicatedIpSummarySection
       count={0}
+      isUsageBlocked={false}
       onClick={[Function]}
       plan={
         Object {
@@ -388,6 +389,7 @@ exports[`Component: Billing Summary should render correctly if you can't change 
     </Panel.Section>
     <DedicatedIpSummarySection
       count={0}
+      isUsageBlocked={false}
       onClick={[Function]}
       plan={
         Object {
@@ -516,6 +518,7 @@ exports[`Component: Billing Summary should render correctly if you can't update 
     </Panel.Section>
     <DedicatedIpSummarySection
       count={0}
+      isUsageBlocked={false}
       onClick={[Function]}
       plan={
         Object {
@@ -604,6 +607,7 @@ exports[`Component: Billing Summary should render with IP modal open 1`] = `
     </Panel.Section>
     <DedicatedIpSummarySection
       count={0}
+      isUsageBlocked={false}
       onClick={[Function]}
       plan={
         Object {
@@ -736,6 +740,7 @@ exports[`Component: Billing Summary should render with the billing contact modal
     </Panel.Section>
     <DedicatedIpSummarySection
       count={0}
+      isUsageBlocked={false}
       onClick={[Function]}
       plan={
         Object {
@@ -868,6 +873,7 @@ exports[`Component: Billing Summary should render with the payment info modal op
     </Panel.Section>
     <DedicatedIpSummarySection
       count={0}
+      isUsageBlocked={false}
       onClick={[Function]}
       plan={
         Object {
@@ -1000,6 +1006,7 @@ exports[`Component: Billing Summary should show the invoice history if there are
     </Panel.Section>
     <DedicatedIpSummarySection
       count={0}
+      isUsageBlocked={false}
       onClick={[Function]}
       plan={
         Object {

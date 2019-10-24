@@ -52,13 +52,13 @@ export default class BillingSummary extends Component {
     );
   }
 
-  renderDedicatedIpSummarySection = (userBlocked) => (
+  renderDedicatedIpSummarySection = (isUsageBlocked) => (
     <DedicatedIpSummarySection
       count={this.props.sendingIps.length}
       plan={this.props.currentPlan}
       onClick={this.handleIpModal}
       isAWSAccount={this.props.isAWSAccount}
-      userBlocked={userBlocked}
+      isUsageBlocked={isUsageBlocked}
     />
   );
 
@@ -79,13 +79,13 @@ export default class BillingSummary extends Component {
     const { account, currentPlan, canChangePlan, canUpdateBillingInfo, canPurchaseIps, invoices, isAWSAccount, accountAgeInDays, hasRecipientValidation } = this.props;
     const { rvUsage, pending_cancellation, subscription, billing = {}} = account;
     const { show } = this.state;
-    const userBlocked = subscription.type === 'default' && !billing.credit_card;
+    const isUsageBlocked = billing ? subscription.type === 'default' && !billing.credit_card : false;
 
     const volumeUsed = _.get(rvUsage, 'recipient_validation.month.used', 0);
     const showRecipientValidation = hasRecipientValidation && rvUsage;
 
     const changePlanActions = [];
-    if (!pending_cancellation && canChangePlan && !userBlocked) {
+    if (!pending_cancellation && canChangePlan && !isUsageBlocked) {
       const changePlanLabel = currentPlan.isFree ? 'Upgrade Now' : 'Change Plan';
       changePlanActions.push({ content: changePlanLabel, to: '/account/billing/plan', Component: Link, color: 'orange' });
     }
@@ -100,7 +100,7 @@ export default class BillingSummary extends Component {
               <PlanSummary plan={account.subscription} pendingCancellation={pending_cancellation}/>
             </LabelledValue>
           </Panel.Section>
-          {canPurchaseIps && this.renderDedicatedIpSummarySection(userBlocked)}
+          {canPurchaseIps && this.renderDedicatedIpSummarySection(isUsageBlocked)}
           {showRecipientValidation && this.renderRecipientValidationSection({ rvUsage })}
         </Panel>
 

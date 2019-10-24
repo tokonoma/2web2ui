@@ -8,7 +8,7 @@ import DedicatedIpCost from './DedicatedIpCost';
 
 function noop() {}
 
-export default function DedicatedIpSummarySection({ count = 0, plan = {}, onClick = noop, isAWSAccount, userBlocked }) {
+export default function DedicatedIpSummarySection({ count = 0, plan = {}, onClick = noop, isAWSAccount, isUsageBlocked }) {
   const hasReachedMax = count >= config.sendingIps.maxPerAccount;
   const disabledPurchaseIP = hasReachedMax || plan.isFree;
 
@@ -42,7 +42,7 @@ export default function DedicatedIpSummarySection({ count = 0, plan = {}, onClic
     ? <h6>0</h6>
     : <h6>{count} for <DedicatedIpCost quantity={billableCount} isAWSAccount={isAWSAccount}/></h6>;
 
-  const actions = userBlocked ? [manageIpAction] : [manageIpAction, addOrUpgradeAction];
+  const actions = isUsageBlocked ? [manageIpAction] : [manageIpAction, addOrUpgradeAction];
 
   return (
     <Panel.Section actions={actions}>
