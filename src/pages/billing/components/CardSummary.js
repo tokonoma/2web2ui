@@ -3,7 +3,7 @@ import { CreditCard } from '@sparkpost/matchbox-icons';
 import { LabelledValue } from 'src/components';
 
 const CardSummary = ({ billing, label }) => {
-  if (!billing.credit_card) { return <p>No credit card present.</p>; }
+  if (!billing.credit_card) { return <p>No credit card information present.</p>; }
 
   return (
     <LabelledValue label={label}>

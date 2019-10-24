@@ -52,13 +52,13 @@ export default class BillingSummary extends Component {
     );
   }
 
-  renderDedicatedIpSummarySection = (isUsageBlocked) => (
+  renderDedicatedIpSummarySection = (isTransitioningToSelfServe) => (
     <DedicatedIpSummarySection
       count={this.props.sendingIps.length}
       plan={this.props.currentPlan}
       onClick={this.handleIpModal}
       isAWSAccount={this.props.isAWSAccount}
-      isUsageBlocked={isUsageBlocked}
+      isTransitioningToSelfServe={isTransitioningToSelfServe}
     />
   );
 
@@ -79,13 +79,14 @@ export default class BillingSummary extends Component {
     const { account, currentPlan, canChangePlan, canUpdateBillingInfo, canPurchaseIps, invoices, isAWSAccount, accountAgeInDays, hasRecipientValidation } = this.props;
     const { rvUsage, pending_cancellation, subscription, billing = {}} = account;
     const { show } = this.state;
-    const isUsageBlocked = billing ? subscription.type === 'default' && !billing.credit_card : false;
+    // This is an extreme case to support manually billed accounts while transitioning to self serve
+    const isTransitioningToSelfServe = billing !== null && !billing.credit_card && subscription.type === 'default';
 
     const volumeUsed = _.get(rvUsage, 'recipient_validation.month.used', 0);
     const showRecipientValidation = hasRecipientValidation && rvUsage;
 
     const changePlanActions = [];
-    if (!pending_cancellation && canChangePlan && !isUsageBlocked) {
+    if (!pending_cancellation && canChangePlan && !isTransitioningToSelfServe) {
       const changePlanLabel = currentPlan.isFree ? 'Upgrade Now' : 'Change Plan';
       changePlanActions.push({ content: changePlanLabel, to: '/account/billing/plan', Component: Link, color: 'orange' });
     }
@@ -100,7 +101,7 @@ export default class BillingSummary extends Component {
               <PlanSummary plan={account.subscription} pendingCancellation={pending_cancellation}/>
             </LabelledValue>
           </Panel.Section>
-          {canPurchaseIps && this.renderDedicatedIpSummarySection(isUsageBlocked)}
+          {canPurchaseIps && this.renderDedicatedIpSummarySection(isTransitioningToSelfServe)}
           {showRecipientValidation && this.renderRecipientValidationSection({ rvUsage })}
         </Panel>
 
