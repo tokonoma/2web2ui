@@ -96,29 +96,25 @@ describe('ListPage', () => {
   });
 
   it('invokes `getPublished()` when the template is in published mode when toggling the duplicate modal', () => {
-    const mockGetPublished = jest.fn(() => Promise.resolve());
-    const mockGetDraft = jest.fn(() => Promise.resolve());
+    const mockGetPublished = jest.fn(() => Promise.resolve({ id: 'foo' }));
     const wrapper = subject({
       getPublished: mockGetPublished,
-      getDraft: mockGetDraft
+      getTestDataV2: jest.fn()
     });
 
     wrapper.instance().toggleDuplicateModal({ published: true });
     expect(mockGetPublished).toHaveBeenCalled();
-    expect(mockGetDraft).not.toHaveBeenCalled();
   });
 
   it('invokes `getDraft()` when the template is NOT in published mode when toggling the duplicate modal', () => {
-    const mockGetPublished = jest.fn(() => Promise.resolve());
-    const mockGetDraft = jest.fn(() => Promise.resolve());
+    const mockGetDraft = jest.fn(() => Promise.resolve({ id: 'foo' }));
     const wrapper = subject({
-      getPublished: mockGetPublished,
-      getDraft: mockGetDraft
+      getDraft: mockGetDraft,
+      getTestDataV2: jest.fn()
     });
 
     wrapper.instance().toggleDuplicateModal({ published: false });
     expect(mockGetDraft).toHaveBeenCalled();
-    expect(mockGetPublished).not.toHaveBeenCalled();
   });
 
   it('shows an alert after duplication and refreshes the list', async () => {
