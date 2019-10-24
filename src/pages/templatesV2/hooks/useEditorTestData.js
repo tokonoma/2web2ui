@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import _ from 'lodash';
 
 const useEditorTestData = (props) => {
   const {
@@ -32,16 +33,21 @@ const useEditorTestData = (props) => {
   }, [draft, getTestDataV2, isPublishedMode]);
 
   useEffect(() => {
+    let results;
+
     try {
-      setParsedTestData(JSON.parse(testData));
+      results = JSON.parse(testData);
     } catch (err) {
       // See: https://2ality.com/2017/08/optional-catch-binding.html#use-case%3A-json.parse()
       if (err instanceof SyntaxError) {
-        setParsedTestData({});
+        results = {};
       } else {
         throw err;
       }
     }
+    const nextParsedTestData = _.pick(results, ['metadata', 'options', 'substitution_data']);
+
+    setParsedTestData(nextParsedTestData);
   }, [testData, setParsedTestData]);
 
   return {
