@@ -57,6 +57,7 @@ export default class ListPage extends Component {
         .then((res) => {
           this.setState({
             templateToDuplicate: res,
+            testDataToDuplicate: getTestDataV2({ id: res.id, mode: 'published' }),
             showDuplicateModal: !this.state.showDuplicateModal
           });
         });
@@ -66,7 +67,7 @@ export default class ListPage extends Component {
       .then((res) => {
         this.setState({
           templateToDuplicate: res,
-          testDataToDuplicate: getTestDataV2({ id: res.id, mode: res.published ? 'published' : 'draft' }),
+          testDataToDuplicate: getTestDataV2({ id: res.id, mode: 'draft' }),
           showDuplicateModal: !this.state.showDuplicateModal
         });
       });
