@@ -6,12 +6,24 @@
   margin-bottom: 0; // Overrides styles that are on the `<Card/>`
 }
 
-.TabsWrapper > div {
-  box-shadow: none;
-  height: 50px; // to match preview control bar
+.TabsWrapper {
+  display: flex;
+  justify-content: space-between;
+
+  > div {
+    box-shadow: none;
+    height: 50px; // to match preview control bar and tabs
+
+    > a {
+      display: inline-flex;
+      align-items: center;
+      height: 100%;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+  }
 }
 
-.TabsWrapper > div > a {
+.MoreButton {
   height: 100%;
-  padding-bottom: 0;
 }
