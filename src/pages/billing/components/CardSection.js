@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Panel } from '@sparkpost/matchbox';
 import CardSummary from './CardSummary';
 import PaymentForm from '../forms/fields/PaymentForm';
@@ -13,12 +13,12 @@ const CardSection = ({
   account,
   submitting,
   canUpdateBillingInfo,
+  useSavedCC,
+  handleCardToggle,
   isNewChangePlanForm //TODO: remove this when removing the OldChangePlanForm
 }) => {
   const { isReady, loading } = useFeatureChangeContext();
-  const [useSavedCC, setUseSavedCC] = useState(true);
 
-  const handleCardToggle = () => setUseSavedCC(!useSavedCC);
 
   if ((!isReady || loading) && isNewChangePlanForm) {
     return null;

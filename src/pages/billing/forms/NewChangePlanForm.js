@@ -54,17 +54,16 @@ export const ChangePlanForm = ({
   const { requestParams: { code, promo } = {}, updateRoute } = useRouter();
   const [selectedBundle, selectBundle] = useState();
   const { countries } = billing;
+  const [useSavedCC, setUseSavedCC] = useState(true);
+
+  const handleCardToggle = () => setUseSavedCC(!useSavedCC);
   const onSelect = (plan) => {
     if (!plan) { updateRoute({}); }
     selectBundle(plan);
   };
   useEffect(() => {
     const bundle = allBundles.find(({ bundle }) => bundle === code);
-    if (bundle) {
-      selectBundle(bundle);
-    } else if (!bundle && gotBundles.current) { //Can't find bundle, clears params
-      updateRoute({});
-    }
+    if (bundle) { selectBundle(bundle); } else if (!bundle && gotBundles.current) { updateRoute({}); } //Can't find bundle, clears params
   }, [ code, allBundles, updateRoute ]);
   const isPlanSelected = Boolean(selectedBundle && currentPlan.plan !== selectedBundle.bundle);
 
@@ -81,9 +80,7 @@ export const ChangePlanForm = ({
     if (promo && selectedBundle) { applyPromoCode(promo); }
   },[applyPromoCode, promo, selectedBundle, verifyPromoCode]);
 
-  if (loading) {
-    return <Loading />;
-  }
+  if (loading) { return <Loading />; }
 
   return (
     <form>
@@ -116,6 +113,8 @@ export const ChangePlanForm = ({
                     canUpdateBillingInfo={canUpdateBillingInfo}
                     submitting={submitting}
                     isNewChangePlanForm={true} //TODO: remove this when removing the OldChangePlanForm
+                    useSavedCC={useSavedCC}
+                    handleCardToggle={handleCardToggle}
                   />
                 </AccessControl>
                 <SubmitSection />
