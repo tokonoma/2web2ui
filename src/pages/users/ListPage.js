@@ -8,13 +8,13 @@ import TimeAgo from 'react-timeago';
 import { Users } from 'src/components/images';
 import PageLink from 'src/components/pageLink/PageLink';
 import { hasUiOption } from 'src/helpers/conditions/account';
-
+import { list as listSubaccounts } from 'src/actions/subaccounts';
 import * as usersActions from 'src/actions/users';
 import { selectUsers } from 'src/selectors/users';
 import { hasSubaccounts } from 'src/selectors/subaccounts';
-
-import { SubaccountTag, Loading, ApiErrorBanner, DeleteModal, TableCollection, ActionPopover } from 'src/components';
+import { Subaccount, Loading, ApiErrorBanner, DeleteModal, TableCollection, ActionPopover } from 'src/components';
 import User from './components/User';
+
 
 const COLUMNS = [
   { label: 'User', sortKey: 'name' },
@@ -58,6 +58,9 @@ export class ListPage extends Component {
 
   componentDidMount() {
     this.props.listUsers();
+    if (hasSubaccounts && this.props.subaccounts.length === 0) {
+      this.props.listSubaccounts();
+    }
   }
 
   // Do not allow current user to change their access/role or delete their account
@@ -71,7 +74,7 @@ export class ListPage extends Component {
       <Actions username={user.username} deletable={!user.isCurrentUser} onDelete={this.handleDeleteRequest} />
     ];
     if (isSubAccountReportingLive && hasSubaccounts) {
-      data.splice(2, 0, user.subaccount_id ? <SubaccountTag id={user.subaccount_id} /> : null);
+      data.splice(2, 0, user.subaccount_id ? <Subaccount id={user.subaccount_id} name={user.subaccount_name}/> : null);
     }
     return data;
   };
@@ -177,7 +180,8 @@ const mapStateToProps = (state) => ({
   loading: state.users.loading,
   users: selectUsers(state),
   hasSubaccounts: hasSubaccounts(state),
+  subaccounts: state.subaccounts.list,
   isSubAccountReportingLive: hasUiOption('subaccount_reporting')(state)
 });
 
-export default connect(mapStateToProps, usersActions)(ListPage);
+export default connect(mapStateToProps, { ...usersActions, listSubaccounts })(ListPage);

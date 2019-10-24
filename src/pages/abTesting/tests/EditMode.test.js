@@ -12,6 +12,8 @@ describe('Page: A/B Test Edit Mode', () => {
   beforeEach(() => {
     props = {
       subaccountId: '101',
+      subaccounts: [],
+      subaccountName: null,
       test: {
         id: 'id-1',
         version: 1,
@@ -25,6 +27,7 @@ describe('Page: A/B Test Edit Mode', () => {
       getAbTest: jest.fn(),
       showAlert: jest.fn(),
       listTemplates: jest.fn(),
+      listSubaccounts: jest.fn(),
       updateDraft: jest.fn(() => Promise.resolve()),
       updateAbTest: jest.fn(() => Promise.resolve()),
       scheduleAbTest: jest.fn(() => Promise.resolve()),

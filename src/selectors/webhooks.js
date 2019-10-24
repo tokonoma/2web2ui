@@ -2,11 +2,12 @@ import { getSubaccounts, selectSubaccountIdFromQuery } from 'src/selectors/subac
 import { createSelector } from 'reselect';
 import { formatDateTime } from 'src/helpers/date';
 import _ from 'lodash';
+import { getSubaccountsIndexedById, getSubaccountName } from './subaccounts';
 
 const selectBatches = (state) => state.webhooks.batches;
 const formatStatus = (code) => _.inRange(code, 200, 300) ? 'Success' : 'Fail';
 const getCurrentWebhook = (state) => state.webhooks.webhook || {};
-
+const getWebhooks = (state) => state.webhooks.list || [];
 export const selectWebhookBatches = (state) => {
   const batches = selectBatches(state);
 
@@ -17,6 +18,12 @@ export const selectWebhookBatches = (state) => {
   }));
 };
 
+
+export const selectWebhooks = createSelector(
+  [getWebhooks, getSubaccountsIndexedById],
+  (webhooks,subaccounts) => webhooks.map((webhook) => ({ ...webhook,
+    'subaccount_name': getSubaccountName(subaccounts, webhook.subaccount_id) }))
+);
 
 /*
  * Selects subaccount object from qp

@@ -27,6 +27,7 @@ export { default as StatusTooltipHeader } from './domainStatus/StatusTooltipHead
 export { default as DomainStatusCell } from './domainStatus/DomainStatusCell';
 export { default as CookieConsent } from './cookieConsent/CookieConsent';
 export { default as PageLink } from './pageLink/PageLink';
+export { default as Subaccount } from './labels/Subaccount';
 
 export * from './collection';
 export * from './formatters';

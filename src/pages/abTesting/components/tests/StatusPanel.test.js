@@ -28,7 +28,7 @@ describe('Status Panel Component', () => {
 
   it('should not render subaccount tag if test is not assigned to subaccount', () => {
     wrapper.setProps({ subaccountId: 0 });
-    expect(wrapper.find('SubaccountTag')).toHaveLength(0);
+    expect(wrapper.find('Subaccount')).toHaveLength(0);
   });
 
   it('should not render version selector if latest version is 1', () => {

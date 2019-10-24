@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Snippets Selector selects snippets with subaccountName if subaccount_id is present 1`] = `
+Array [
+  Object {
+    "created_at": "2019-10-08T19:45:22.288Z",
+    "id": "this-is-a-brand-new-template",
+    "name": "Templates Test Data",
+    "shared_with_subaccounts": false,
+    "subaccount_id": "subId",
+    "subaccount_name": "subName",
+  },
+]
+`;

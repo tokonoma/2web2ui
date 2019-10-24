@@ -1,16 +1,19 @@
-import { selectSearchInitialValues } from '../suppressions';
+import { selectSearchInitialValues, selectSuppresionsList } from '../suppressions';
 
 describe('Selector: suppressions', () => {
+  const store = {
+    suppressions: {
+      search: {
+        types: ['typeA', 'typeB', 'typeC'],
+        sources: ['source1', 'source2']
+      }
+    },
+    subaccounts: {
+      list: []
+    }
+  };
 
   it('should select initial values for the suppressions search form', () => {
-    const store = {
-      suppressions: {
-        search: {
-          types: ['typeA', 'typeB', 'typeC'],
-          sources: ['source1', 'source2']
-        }
-      }
-    };
     expect(selectSearchInitialValues(store)).toEqual({
       types: {
         typeA: true,
@@ -22,6 +25,10 @@ describe('Selector: suppressions', () => {
         source2: true
       }
     });
+  });
+
+  it('should select suppression list with subaccount_name if subaccount_id is present', () => {
+    expect(selectSuppresionsList).toMatchSnapshot();
   });
 
 });

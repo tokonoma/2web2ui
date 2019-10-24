@@ -8,6 +8,7 @@ import { hasSubaccounts } from 'src/selectors/subaccounts';
 import SuppressionSearch from './components/SuppressionSearch';
 import EmailSearch from './components/EmailSearch';
 import Results from './components/Results';
+import { selectSuppresionsList } from 'src/selectors/suppressions';
 
 const tabs = [
   {
@@ -29,7 +30,7 @@ export class ListPage extends Component {
 
   componentDidMount() {
     const { hasSubaccounts, listSubaccounts } = this.props;
-    if (hasSubaccounts) {
+    if (hasSubaccounts && this.props.subaccounts.length === 0) {
       listSubaccounts();
     }
   }
@@ -68,10 +69,10 @@ export class ListPage extends Component {
 }
 
 const mapStateToProps = (state) => {
-  const { listLoading, list, deleting } = state.suppressions;
+  const { listLoading, deleting } = state.suppressions;
   return {
     loading: listLoading,
-    list,
+    list: selectSuppresionsList(state),
     hasSubaccounts: hasSubaccounts(state),
     subaccounts: state.subaccounts.list,
     deleting

@@ -9,6 +9,9 @@ import { ROLES } from 'src/constants';
 export default class ListPage extends React.Component {
   componentDidMount() {
     this.props.getSnippets();
+    if (this.props.hasSubaccounts && this.props.subaccounts.length === 0) {
+      this.props.listSubaccounts();
+    }
   }
 
   renderError() {

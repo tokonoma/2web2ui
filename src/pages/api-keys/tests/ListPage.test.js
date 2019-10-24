@@ -4,6 +4,7 @@ import { ListPage } from '../ListPage';
 
 const hideNewApiKey = jest.fn();
 const listApiKeys = jest.fn(() => []);
+const listSubaccounts = jest.fn(() => []);
 
 describe('Api Keys List Page', () => {
   const props = {
@@ -11,7 +12,9 @@ describe('Api Keys List Page', () => {
     error: null,
     hideNewApiKey,
     listApiKeys,
+    listSubaccounts,
     hasSubaccounts: false,
+    subaccounts: [],
     keys: [
       {
         id: '123id',

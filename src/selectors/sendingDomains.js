@@ -1,6 +1,7 @@
 import { createSelector } from 'reselect';
 import { resolveReadyFor } from 'src/helpers/domains';
 import _ from 'lodash';
+import { getSubaccountsIndexedById, getSubaccountName } from './subaccounts';
 
 export const isDkimVerified = (domain) => domain.status.dkim_status === 'valid';
 export const isVerified = (domain) => domain.status.ownership_verified && domain.status.compliance_status === 'valid';
@@ -10,6 +11,7 @@ export const isNotBlocked = (domain) => domain.status.compliance_status !== 'blo
 export const getDomains = (state) => state.sendingDomains.list;
 export const getDomain = (state) => state.sendingDomains.domain;
 const selectSubaccountFromProps = (state, props) => _.get(props, 'id', null);
+
 
 export const selectDomain = createSelector(
   [getDomain],
@@ -48,4 +50,12 @@ export const selectSendingDomainsForSubaccount = createSelector(
 export const selectNotBlockedDomains = createSelector(
   [getDomains],
   (domains) => _.filter(domains, isNotBlocked)
+);
+
+export const selectDomains = createSelector(
+  [getDomains, getSubaccountsIndexedById],
+  (domains, subaccounts) => domains.map((domain) => ({
+    ...domain,
+    subaccount_name: getSubaccountName(subaccounts,domain['subaccount_id'])
+  }))
 );

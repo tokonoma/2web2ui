@@ -4,8 +4,9 @@ import { connect } from 'react-redux';
 import { Panel, Grid, Button, Tag } from '@sparkpost/matchbox';
 import { Refresh } from '@sparkpost/matchbox-icons';
 import { listTrackingDomains, updateTrackingDomain, deleteTrackingDomain, verifyTrackingDomain } from 'src/actions/trackingDomains';
+import { Subaccount } from 'src/components';
 import { DeleteModal, ConfirmationModal } from 'src/components/modals';
-import { DomainStatusTag, SubaccountTag } from 'src/components/tags';
+import { DomainStatusTag } from 'src/components/tags';
 import styles from './TrackingDomainRow.module.scss';
 import _ from 'lodash';
 
@@ -115,7 +116,7 @@ export class TrackingDomainRow extends Component {
             <div className={styles.TagRow}>
               {status !== 'verified' && <DomainStatusTag className={styles.Tag} status={status} />}
               {isDefault && !subaccountId && <IsDefaultTag/>}
-              {subaccountId && <SubaccountTag className={styles.Tag} id={subaccountId} isDefault={!!subaccountId && isDefault}/>}
+              {subaccountId && <Subaccount className={styles.Tag} id={subaccountId} isDefault={!!subaccountId && isDefault}/>}
             </div>
           </Grid.Column>
           <Grid.Column xs={12} md={3}>

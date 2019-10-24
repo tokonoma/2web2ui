@@ -5,11 +5,19 @@ import { selectDefaultTemplateOptions } from 'src/selectors/account';
 import { getDomains, isVerified } from 'src/selectors/sendingDomains';
 import { hasSubaccounts, selectSubaccountIdFromProps } from 'src/selectors/subaccounts';
 import { filterTemplatesBySubaccount } from 'src/helpers/templates';
+import { getSubaccountsIndexedById, getSubaccountName } from './subaccounts';
 
 export const getDraftTemplateById = (state, id) => _.get(state, ['templates', 'byId', id, 'draft']);
 export const getPublishedTemplateById = (state, id) => _.get(state, ['templates', 'byId', id, 'published']);
 
-export const selectTemplates = (state) => state.templates.list;
+export const getTemplates = (state) => state.templates.list;
+export const selectTemplates = createSelector(
+  [getTemplates, getSubaccountsIndexedById],
+  (templates, subaccounts) => templates.map((template) => ({
+    ...template,
+    subaccount_name: getSubaccountName(subaccounts,template['subaccount_id'])
+  }))
+);
 export const selectPublishedTemplates = (state) => _.filter(state.templates.list, (template) => template.has_published);
 
 const createTemplateSelector = (getter) => createSelector(

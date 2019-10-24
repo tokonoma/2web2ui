@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { list as listDomains } from 'src/actions/sendingDomains';
+import { list as listSubaccounts } from 'src/actions/subaccounts';
+
 import { hasSubaccounts } from 'src/selectors/subaccounts';
-import { hasUnverifiedDomains } from 'src/selectors/sendingDomains';
+import { hasUnverifiedDomains, selectDomains } from 'src/selectors/sendingDomains';
 import {
-  Loading, TableCollection, SubaccountTag, DomainStatusCell, StatusTooltipHeader, ApiErrorBanner,
+  Loading, TableCollection, Subaccount, DomainStatusCell, StatusTooltipHeader, ApiErrorBanner,
   PageLink
 } from 'src/components';
 import { Page } from '@sparkpost/matchbox';
@@ -15,8 +17,11 @@ import VerifyToken from './components/VerifyToken';
 import { LINKS } from 'src/constants';
 
 export class ListPage extends Component {
-  componentDidMount () {
+  componentDidMount() {
     this.props.listDomains();
+    if (hasSubaccounts && this.props.subaccounts.length === 0) {
+      this.props.listSubaccounts();
+    }
   }
 
   getColumns = () => {
@@ -36,7 +41,7 @@ export class ListPage extends Component {
 
   getRowData = (row) => {
     const { hasSubaccounts } = this.props;
-    const { domain, shared_with_subaccounts, subaccount_id } = row;
+    const { domain, shared_with_subaccounts, subaccount_id, subaccount_name } = row;
 
     const rowData = [
       <PageLink to={`/account/sending-domains/edit/${domain}`}>{domain}</PageLink>,
@@ -45,7 +50,7 @@ export class ListPage extends Component {
 
     if (hasSubaccounts) {
       const subaccountCol = subaccount_id || shared_with_subaccounts
-        ? <SubaccountTag all={shared_with_subaccounts} id={subaccount_id} />
+        ? <Subaccount all={shared_with_subaccounts} id={subaccount_id} name={subaccount_name}/>
         : null;
 
       rowData.push(subaccountCol);
@@ -54,7 +59,7 @@ export class ListPage extends Component {
     return rowData;
   }
 
-  renderCollection () {
+  renderCollection() {
     return (
       <TableCollection
         columns={this.getColumns()}
@@ -72,7 +77,7 @@ export class ListPage extends Component {
     );
   }
 
-  renderError () {
+  renderError() {
     return (
       <ApiErrorBanner
         errorDetails={this.props.listError.message}
@@ -82,7 +87,7 @@ export class ListPage extends Component {
     );
   }
 
-  render () {
+  render() {
     const { listError, listLoading, domains, hasUnverifiedDomains } = this.props;
 
     if (listLoading) {
@@ -119,11 +124,12 @@ export class ListPage extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  domains: state.sendingDomains.list,
+  domains: selectDomains(state),
   listError: state.sendingDomains.listError,
   hasSubaccounts: hasSubaccounts(state),
   hasUnverifiedDomains: hasUnverifiedDomains(state),
-  listLoading: state.sendingDomains.listLoading
+  listLoading: state.sendingDomains.listLoading,
+  subaccounts: state.subaccounts.list
 });
 
-export default connect(mapStateToProps, { listDomains })(ListPage);
+export default connect(mapStateToProps, { listDomains, listSubaccounts })(ListPage);

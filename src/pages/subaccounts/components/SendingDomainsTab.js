@@ -54,7 +54,7 @@ export class SendingDomainsTab extends Component {
 
     return (
       <Panel>
-        { showEmpty
+        {showEmpty
           ? this.renderEmpty()
           : this.renderCollection()
         }

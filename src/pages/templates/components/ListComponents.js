@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { Popover, Button, ActionList, Tag, Tooltip } from '@sparkpost/matchbox';
 import { MoreHoriz } from '@sparkpost/matchbox-icons';
-import { SubaccountTag } from 'src/components/tags';
+import { Subaccount as SubaccountTag } from 'src/components';
 import { formatDateTime } from 'src/helpers/date';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
 import { resolveTemplateStatus } from 'src/helpers/templates';
@@ -78,6 +78,6 @@ export const Actions = ({ id, subaccount_id, ...rowData }) => {
 
 export const LastUpdated = ({ last_update_time }) => <p className={styles.LastUpdated}>{formatDateTime(last_update_time)}</p>;
 
-export const Subaccount = ({ shared_with_subaccounts, subaccount_id }) => (
-  <SubaccountTag all={shared_with_subaccounts} id={subaccount_id} />
+export const Subaccount = ({ shared_with_subaccounts, subaccount_id, subaccount_name }) => (
+  <SubaccountTag all={shared_with_subaccounts} id={subaccount_id} name={subaccount_name} />
 );

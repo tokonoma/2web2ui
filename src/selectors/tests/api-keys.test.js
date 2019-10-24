@@ -25,7 +25,7 @@ describe('ApiKey Selectors', () => {
       },
       subaccounts: {
         list: [
-          { id: 'subId' }
+          { id: 'subId', name: 'subName' }
         ]
       }
     };
@@ -195,6 +195,11 @@ describe('ApiKey Selectors', () => {
               // no username and no subaccount_id (should never happen but should produce false if so)
               lol: 'wut'
             }
+          ]
+        },
+        subaccounts: {
+          list: [
+            { id: 'subId' }
           ]
         }
       };

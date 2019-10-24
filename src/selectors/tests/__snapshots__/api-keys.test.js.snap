@@ -59,19 +59,23 @@ exports[`ApiKey Selectors selectKeysForAccount should return a list of keys with
 Array [
   Object {
     "canCurrentUserEdit": true,
+    "subaccount_name": null,
     "username": "abc",
   },
   Object {
     "canCurrentUserEdit": false,
+    "subaccount_name": null,
     "username": "other",
   },
   Object {
     "canCurrentUserEdit": true,
     "subaccount_id": 123,
+    "subaccount_name": null,
   },
   Object {
     "canCurrentUserEdit": false,
     "lol": "wut",
+    "subaccount_name": null,
   },
 ]
 `;

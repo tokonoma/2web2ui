@@ -180,7 +180,7 @@ Array [
         }
       }
     />,
-    <SubaccountTag
+    <Subaccount
       all={false}
       id={3}
       isDefault={false}

@@ -1,4 +1,4 @@
-import { selectVerifiedDomains, selectReadyForBounce, selectDkimVerifiedDomains, hasUnverifiedDomains, selectDomain, selectNotBlockedDomains } from '../sendingDomains';
+import { selectVerifiedDomains, selectReadyForBounce, selectDkimVerifiedDomains, hasUnverifiedDomains, selectDomain, selectNotBlockedDomains, selectDomains } from '../sendingDomains';
 
 describe('Selectors: sendingDomains', () => {
   let state;
@@ -52,8 +52,16 @@ describe('Selectors: sendingDomains', () => {
             }
           }
         ]
+      },
+      subaccounts: {
+        list: []
       }
     };
+  });
+
+  it('should return domains with subaccount_name if subaccount_id is present', () => {
+    expect(selectDomains(state)).toMatchSnapshot();
+
   });
 
   it('should append DKIM keys to domain object', () => {

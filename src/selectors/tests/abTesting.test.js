@@ -44,7 +44,11 @@ describe('Selectors: abTesting', () => {
       },
       templates: {
         list: [{ id: 'template_one' }, { id: 'template_two' }]
-      }
+      },
+      subaccounts: { list: [
+        { name: 'sub 1', id: 101 },
+        { name: 'sub 2', id: 501 }
+      ]}
     };
 
     props = {

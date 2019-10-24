@@ -71,7 +71,7 @@ export class ViewMode extends Component {
   }
 
   render() {
-    const { breadcrumbAction, test, subaccountId, updateDraftPending } = this.props;
+    const { breadcrumbAction, test, subaccountId, subaccountName, updateDraftPending } = this.props;
     const { name } = this.props.test;
 
     return (
@@ -86,7 +86,7 @@ export class ViewMode extends Component {
             <StatusContent test={test} />
           </Section.Left>
           <Section.Right>
-            <StatusPanel test={test} subaccountId={subaccountId} />
+            <StatusPanel test={test} subaccountId={subaccountId} subaccountName={subaccountName}/>
             <StatusView test={test} />
           </Section.Right>
         </Section>

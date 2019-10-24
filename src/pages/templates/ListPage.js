@@ -9,7 +9,13 @@ import { Actions, LastUpdated, Name, Status, Subaccount } from './components/Lis
 
 export default class ListPage extends Component {
   componentDidMount() {
-    this.props.listTemplates();
+    const { hasSubaccounts, listSubaccounts, listTemplates } = this.props;
+
+    listTemplates();
+
+    if (hasSubaccounts && this.props.subaccounts.length === 0) {
+      listSubaccounts();
+    }
   }
 
   columns = [

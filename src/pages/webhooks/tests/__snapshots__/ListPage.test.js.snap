@@ -37,7 +37,7 @@ Array [
     "go here",
     "Feb 8 2018, 10:20am",
     "Jan 8 2018, 10:20am",
-    <SubaccountTag
+    <Subaccount
       all={false}
       id={0}
       isDefault={false}
@@ -55,7 +55,7 @@ Array [
     "go there",
     "Feb 8 2018, 10:20am",
     null,
-    <SubaccountTag
+    <Subaccount
       all={false}
       id={101}
       isDefault={false}
@@ -73,7 +73,7 @@ Array [
     "go nowhere",
     null,
     "Jan 8 2018, 10:20am",
-    <SubaccountTag
+    <Subaccount
       all={false}
       id={null}
       isDefault={false}

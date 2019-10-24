@@ -10,6 +10,8 @@ describe('ListPage', () => {
       canModify={true}
       hasSubaccounts={false}
       listTemplates={() => {}}
+      listSubaccounts={() => {}}
+      subaccounts={[]}
       loading={false}
       templates={[
         {

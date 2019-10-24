@@ -130,4 +130,17 @@ describe('Subaccount selectors', () => {
       expect(selector.selectSubaccountFromQuery(state, props)).toEqual({ name: 'sub 2', id: 501 });
     });
   });
+
+  describe('getSubaccountsIndexedById' , () => {
+    it('should return the subaccounts indexed by id', () => {
+      const state = { subaccounts: { list: [
+        { name: 'sub 1', id: 101 },
+        { name: 'sub 2', id: 501 }
+      ]}};
+
+      expect(selector.getSubaccountsIndexedById(state)).toEqual({ 101: { name: 'sub 1', id: 101 },
+        501: { name: 'sub 2', id: 501 }});
+
+    });
+  });
 });

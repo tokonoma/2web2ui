@@ -227,7 +227,7 @@ exports[`Template List Components Status should render unpublished changes 1`] =
 `;
 
 exports[`Template List Components Subaccount should render 1`] = `
-<SubaccountTag
+<Subaccount
   all={false}
   id={123}
   isDefault={false}

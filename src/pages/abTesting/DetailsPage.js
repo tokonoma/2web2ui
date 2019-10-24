@@ -12,6 +12,7 @@ import RedirectAndAlert from 'src/components/globalAlert/RedirectAndAlert';
 import EditMode from './EditMode';
 import ViewMode from './ViewMode';
 import _ from 'lodash';
+import { selectSubaccountFromId } from '../../selectors/subaccounts';
 
 /**
  * Details Page
@@ -83,7 +84,7 @@ export class DetailsPage extends Component {
   // Actions & other props we want to share with both Edit and View mode
   getSharedProps = () => {
     const { status } = this.props.test;
-    const { test, subaccountId, rescheduling } = this.props;
+    const { test, subaccountId, subaccountName, rescheduling } = this.props;
 
     return {
       breadcrumbAction: { content: 'Back to A/B Tests', component: Link, to: '/ab-testing' },
@@ -98,6 +99,7 @@ export class DetailsPage extends Component {
       },
       test,
       subaccountId,
+      subaccountName,
       rescheduling
     };
   };
@@ -147,6 +149,8 @@ export class DetailsPage extends Component {
 }
 
 function mapStateToProps(state, props) {
+  const subaccountId = selectSubaccountIdFromQuery(state, props);
+  const subaccount = selectSubaccountFromId(state, subaccountId);
   return {
     test: selectAbTestFromParams(state, props),
     loading: state.abTesting.detailsLoading,
@@ -154,7 +158,8 @@ function mapStateToProps(state, props) {
     cancelPending: state.abTesting.cancelPending,
     error: state.abTesting.detailsError,
     ...selectIdAndVersionFromParams(state, props),
-    subaccountId: selectSubaccountIdFromQuery(state, props),
+    subaccountId,
+    subaccountName: subaccount ? subaccount.name : null,
     rescheduling: _.get(props, 'location.state.rescheduling')
   };
 }

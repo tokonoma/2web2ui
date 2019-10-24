@@ -1,20 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Tag } from '@sparkpost/matchbox';
-import { InsertLink } from '@sparkpost/matchbox-icons';
+import { shrinkToFit } from 'src/helpers/string';
 
-const SubaccountTag = ({ id, all, receiveAll, master, isDefault }) => {
+const Subaccount = ({ id, name, all, receiveAll, master, isDefault }) => {
   let content = null;
-  let color = null;
   let defaultContent = null;
 
   if (id) {
-    content = `Subaccount ${id}`;
+    content = name ? `${shrinkToFit(name,12)} (${id})` : `Subaccount ${id}`;
   }
 
   if (isDefault) {
     defaultContent = ' (Default)';
-    color = 'orange';
   }
 
   if (all) {
@@ -33,10 +30,10 @@ const SubaccountTag = ({ id, all, receiveAll, master, isDefault }) => {
     return null;
   }
 
-  return <Tag color={color}><InsertLink size={15} /> {content}{defaultContent}</Tag>;
+  return <>{content}{defaultContent}</>;
 };
 
-SubaccountTag.propTypes = {
+Subaccount.propTypes = {
   // 'Subaccount ${id}'
   id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 
@@ -53,7 +50,7 @@ SubaccountTag.propTypes = {
   isDefault: PropTypes.bool
 };
 
-SubaccountTag.defaultProps = {
+Subaccount.defaultProps = {
   id: null,
   all: false,
   master: false,
@@ -61,4 +58,4 @@ SubaccountTag.defaultProps = {
   receiveAll: false
 };
 
-export default SubaccountTag;
+export default Subaccount;

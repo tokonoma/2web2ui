@@ -7,6 +7,7 @@ Array [
     "isCurrentUser": false,
     "name": "Ape",
     "roleLabel": "access",
+    "subaccount_name": null,
     "username": "ape",
   },
   Object {
@@ -14,6 +15,7 @@ Array [
     "isCurrentUser": true,
     "name": "Zebra",
     "roleLabel": "Templates",
+    "subaccount_name": null,
     "username": "zebra",
   },
 ]
