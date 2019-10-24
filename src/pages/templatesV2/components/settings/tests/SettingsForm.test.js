@@ -109,7 +109,7 @@ describe('SettingsForm', () => {
       const wrapper = subject({
         valid: true,
         pristine: false,
-        updateDraft: mockUpdateDraft,
+        updateDraftV2: mockUpdateDraft,
         draft: { id: 'foo' },
         showAlert: mockAlert
       });
@@ -123,7 +123,7 @@ describe('SettingsForm', () => {
       const wrapper = subject({
         valid: true,
         pristine: false,
-        updateDraft: mockUpdateDraft,
+        updateDraftV2: mockUpdateDraft,
         draft: { id: 'foo' },
         subaccountId: 101
       });
