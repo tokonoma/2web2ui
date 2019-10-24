@@ -90,6 +90,9 @@ describe('DuplicateTemplateModal', () => {
     const mockContent = {
       html: '<p>Some HTML.</p>'
     };
+    const mockTestData = {
+      some: 'data'
+    };
     const mockTemplate = {
       name: 'My template',
       id: 'my-template',
@@ -104,6 +107,7 @@ describe('DuplicateTemplateModal', () => {
       showAlert: mockShowAlert,
       createTemplate: mockCreateTemplate,
       template: mockTemplate,
+      testDataToDuplicate: mockTestData,
       contentToDuplicate: mockContent
     });
 
@@ -115,6 +119,7 @@ describe('DuplicateTemplateModal', () => {
       id: 'my-template-copy',
       content: mockContent,
       options: mockTemplate.options,
+      parsedTestData: mockTestData,
       shared_with_subaccounts: mockTemplate.shared_with_subaccounts
     });
 
