@@ -105,16 +105,20 @@ describe('SettingsForm', () => {
 
     it('updates settings', async () => {
       const mockUpdateDraft = jest.fn(() => Promise.resolve());
+      const parsedTestData = {
+        some: 'data'
+      };
       const mockAlert = jest.fn();
       const wrapper = subject({
         valid: true,
         pristine: false,
         updateDraftV2: mockUpdateDraft,
+        parsedTestData,
         draft: { id: 'foo' },
         showAlert: mockAlert
       });
       await wrapper.find('form').simulate('submit');
-      expect(mockUpdateDraft).toHaveBeenCalledWith({ id: 'foo' }, undefined);
+      expect(mockUpdateDraft).toHaveBeenCalledWith({ id: 'foo', parsedTestData }, undefined);
       expect(mockAlert).toHaveBeenCalledWith({ type: 'success', message: 'Template settings updated.' });
     });
 
