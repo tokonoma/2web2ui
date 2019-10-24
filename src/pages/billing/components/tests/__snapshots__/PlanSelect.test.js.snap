@@ -203,7 +203,6 @@ exports[`Selected Plan: should render plan price with the plan 1`] = `
                 "monthly": 0,
                 "name": "Two",
                 "overage": 0.2,
-                "tier": "test",
                 "volume": 2,
               }
             }

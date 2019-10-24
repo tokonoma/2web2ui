@@ -64,8 +64,8 @@ describe('Selected Plan:', () => {
   const defaultProps = {
     onChange: jest.fn(),
     bundle: {
+      tier: 'test',
       messaging: {
-        tier: 'test',
         code: '2',
         includesIp: false,
         monthly: 0,

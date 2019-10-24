@@ -46,6 +46,21 @@ describe('Change Plan Form', () => {
         billingId: 4
       }]
     },
+    allBundles: [
+      {
+        bundle: '2',
+        messaging: {
+          code: '2',
+          includesIp: false,
+          monthly: 0,
+          name: 'Two',
+          overage: 0.2,
+          volume: 2,
+          isFree: true
+        },
+        billingId: 2
+      }
+    ],
     currentPlan: {
       tier: 'starter',
       code: 'big-code',
@@ -70,7 +85,8 @@ describe('Change Plan Form', () => {
       promoPending: false,
       promoError: false,
       selectedPromo: {}
-    }
+    },
+    handleSubmit: jest.fn()
   };
 
   const subject = (routerState = {}, render = shallow) => {
