@@ -34,14 +34,13 @@ const EditAndPreviewPageContainer = (props) => (
 
 const mapStateToProps = (state, props) => {
   const id = props.match.params.id;
-  const { snippets } = state;
   const draft = selectDraftTemplateById(state, id);
   const published = selectPublishedTemplateById(state, id);
   const isPublishedMode = props.match.params.version === 'published';
   const draftOrPublished = draft || published;
   const hasDraft = draftOrPublished && draftOrPublished.has_draft;
   const hasPublished = draftOrPublished && draftOrPublished.has_published;
-
+  const snippets = state.snippets.items;
 
   return {
     draft,
@@ -76,7 +75,8 @@ const mapDispatchToProps = {
   listSubaccounts,
   showAlert,
   setTestDataV2,
-  getTestDataV2
+  getTestDataV2,
+  getSnippets
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditAndPreviewPageContainer);
