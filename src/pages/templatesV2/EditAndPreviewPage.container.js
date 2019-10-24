@@ -13,6 +13,7 @@ import {
   setTestDataV2,
   getTestDataV2
 } from 'src/actions/templates';
+import { getSnippets } from 'src/actions/snippets';
 import { list as listDomains } from 'src/actions/sendingDomains';
 import { list as listSubaccounts } from 'src/actions/subaccounts';
 import {
@@ -33,6 +34,7 @@ const EditAndPreviewPageContainer = (props) => (
 
 const mapStateToProps = (state, props) => {
   const id = props.match.params.id;
+  const { snippets } = state;
   const draft = selectDraftTemplateById(state, id);
   const published = selectPublishedTemplateById(state, id);
   const isPublishedMode = props.match.params.version === 'published';
@@ -42,6 +44,7 @@ const mapStateToProps = (state, props) => {
 
   return {
     draft,
+    snippets,
     published,
     isPublishedMode,
     hasDraft,

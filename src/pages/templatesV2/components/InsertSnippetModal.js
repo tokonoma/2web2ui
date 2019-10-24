@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Modal,
   Panel,
@@ -14,7 +14,16 @@ import CopyField from 'src/components/copyField';
 import { slugToFriendly } from 'src/helpers/string';
 
 const InsertSnippetModal = (props) => {
-  const { open, loading, onClose } = props;
+  const {
+    open,
+    loading,
+    onClose,
+    getSnippets
+  } = props;
+
+  useEffect(() => {
+    //getSnippets();
+  });
 
   if (loading) {
     return <PanelLoading/>;
