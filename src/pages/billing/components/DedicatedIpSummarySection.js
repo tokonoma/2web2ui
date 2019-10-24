@@ -16,10 +16,9 @@ export default function DedicatedIpSummarySection({ count = 0, plan = {}, onClic
   const actions = [
     { content: 'Manage Your IPs',
       to: '/account/ip-pools',
-      disabled: count <= 0,
       Component: Link,
       color: 'orange',
-      visible: !(count <= 0)
+      visible: count > 0
     },
     plan.canPurchaseIps
       ? { content: 'Add Dedicated IPs',
