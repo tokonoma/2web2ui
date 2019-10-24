@@ -1,7 +1,6 @@
-/* eslint max-lines: ["warn", { "max": 220, "skipComments": true }] */
-// @see discussion for custom lint rule, https://github.com/SparkPost/2web2ui/issues/230
+/* eslint-disable max-lines */
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
-import localforage from 'localforage';
+import localforage from 'localforage'; // TODO: Remove - and possibly uninstall
 import config from 'src/config';
 import { getTestDataKey, shapeContent } from './helpers/templates';
 import setSubaccountHeader from './helpers/setSubaccountHeader';
@@ -78,6 +77,7 @@ export function getPublishedAndPreview(id, subaccountId) {
   };
 }
 
+// TODO: Remove once old implementation no longer exists
 export function create(data) {
   const { id, testData, assignTo, subaccount, content, ...formData } = data;
 
@@ -101,6 +101,41 @@ export function create(data) {
   };
 }
 
+export function createV2(data) {
+  const {
+    id,
+    assignTo,
+    subaccount,
+    content,
+    parsedTestData,
+    ...formData
+  } = data;
+
+  return (dispatch) => {
+    dispatch(setTestDataV2({
+      id,
+      mode: 'draft',
+      data: parsedTestData
+    }));
+
+    return dispatch(sparkpostApiRequest({
+      type: 'CREATE_TEMPLATE',
+      meta: {
+        method: 'POST',
+        url: '/v1/templates',
+        headers: setSubaccountHeader(subaccount),
+        data: {
+          ...formData,
+          id,
+          content: shapeContent(content),
+          shared_with_subaccounts: assignTo === 'shared'
+        }
+      }
+    }));
+  };
+}
+
+// TODO: Remove once original version is no longer with us
 export function update(data, subaccountId, params = {}) {
   const { id, testData, content, ...formData } = data;
 
@@ -126,14 +161,72 @@ export function update(data, subaccountId, params = {}) {
   };
 }
 
+export function updateV2(data, subaccountId, params = {}) {
+  const { id, parsedTestData, content, ...formData } = data;
+
+  return (dispatch) => {
+    dispatch(setTestDataV2({
+      id,
+      mode: 'draft',
+      data: parsedTestData
+    }));
+
+    return dispatch(sparkpostApiRequest({
+      type: 'UPDATE_TEMPLATE',
+      meta: {
+        method: 'PUT',
+        url: `/v1/templates/${id}`,
+        data: {
+          ...formData,
+          content: shapeContent(content)
+        },
+        params,
+        headers: setSubaccountHeader(subaccountId),
+        context: {
+          id
+        }
+      }
+    }));
+  };
+}
+
+// TODO: Rename once original version is no longer with us
+export function publishV2(data, subaccountId) {
+  return async (dispatch) => {
+    const { id, parsedTestData } = data;
+
+    dispatch({ type: 'PUBLISH_ACTION_PENDING' });
+
+    try {
+      await dispatch(update(data, subaccountId));
+      dispatch(setTestDataV2({ id, mode: 'published', data: parsedTestData }));
+
+      await dispatch(sparkpostApiRequest({
+        type: 'PUBLISH_TEMPLATE',
+        meta: {
+          method: 'PUT',
+          url: `/v1/templates/${id}`,
+          data: { published: true },
+          headers: setSubaccountHeader(subaccountId)
+        }
+      }));
+
+      dispatch({ type: 'PUBLISH_ACTION_SUCCESS' });
+    } catch (err) {
+      dispatch({ type: 'PUBLISH_ACTION_FAIL' });
+    }
+  };
+}
+
+// TODO: Remove once original implementation is no longer with us
 export function publish(data, subaccountId) {
   return async (dispatch) => {
-    const { id, testData } = data;
+    const { id, parsedTestData } = data;
     dispatch({ type: 'PUBLISH_ACTION_PENDING' });
 
     try { // Save draft first, then publish
       await dispatch(update(data, subaccountId));
-      dispatch(setTestData({ id, mode: 'published', data: testData }));
+      dispatch(setTestData({ id, mode: 'published', data: parsedTestData }));
 
       await dispatch(sparkpostApiRequest({
         type: 'PUBLISH_TEMPLATE',
@@ -163,14 +256,66 @@ export function deleteTemplate(id, subaccountId) {
   });
 }
 
+export function deleteTemplateV2({ id, subaccountId }) {
+  return (dispatch) => {
+    dispatch(deleteTestDataV2({ id }));
+
+    return dispatch(sparkpostApiRequest({
+      type: 'DELETE_TEMPLATE',
+      meta: {
+        method: 'DELETE',
+        url: `/v1/templates/${id}`,
+        headers: setSubaccountHeader(subaccountId)
+      }
+    }));
+  };
+}
+
+export function setTestDataV2({ data, id, mode }) {
+  return (dispatch, getState) => {
+    const username = getState().currentUser.username;
+    const testData = typeof data === 'object' ? JSON.stringify(data) : data;
+
+    return window.localStorage.setItem(getTestDataKey({ id, username, mode }), testData);
+  };
+}
+
+export function deleteTestDataV2({ id }) {
+  return (dispatch, getState) => {
+    const username = getState().currentUser.username;
+    const deleteItems = () => {
+      window.localStorage.removeItem(getTestDataKey({ id, username, mode: 'draft' }));
+      window.localStorage.removeItem(getTestDataKey({ id, username, mode: 'published' }));
+    };
+
+    return deleteItems();
+  };
+}
+
+// TODO: Remove after rollout of V2
 export function setTestData({ data, id, mode }) {
   return (dispatch, getState) => {
     const username = getState().currentUser.username;
     const testData = typeof data === 'object' ? JSON.stringify(data) : data;
+
     return localforage.setItem(getTestDataKey({ id, username, mode }), testData).then(() => dispatch({ type: 'SET_TEMPLATE_TEST_DATA' }));
   };
 }
 
+export function getTestDataV2({ id, mode }) {
+  return (dispatch, getState) => {
+    const username = getState().currentUser.username;
+    const rawData = window.localStorage.getItem(getTestDataKey({ id, username, mode }));
+
+    try {
+      return JSON.parse(rawData) || {};
+    } catch {
+      return {};
+    }
+  };
+}
+
+// TODO: Remove after rollout of V2
 export function getTestData({ id, mode }) {
   return (dispatch, getState) => {
     const username = getState().currentUser.username;
@@ -216,6 +361,37 @@ export function sendPreview({ id, mode, emails, from, subaccountId }) {
 
   return async (dispatch) => {
     const { payload: testData = {}} = await dispatch(getTestData({ id, mode }));
+
+    return dispatch(sparkpostApiRequest({
+      type: 'SEND_PREVIEW_TRANSMISSION',
+      meta: {
+        method: 'POST',
+        url: '/v1/transmissions',
+        headers: setSubaccountHeader(subaccountId),
+        data: {
+          ...testData,
+          content: {
+            template_id: id,
+            use_draft_template: mode === 'draft'
+          },
+          options: {
+            ...testData.options,
+            sandbox: /sparkpostbox.com$/i.test(from)
+          },
+          recipients
+        }
+      }
+    }));
+  };
+}
+
+export function sendPreviewV2({ id, mode, emails, from, subaccountId }) {
+  const recipients = emails.map((email) => ({
+    address: { email }
+  }));
+
+  return async (dispatch) => {
+    const testData = await dispatch(getTestDataV2({ id, mode }));
 
     return dispatch(sparkpostApiRequest({
       type: 'SEND_PREVIEW_TRANSMISSION',

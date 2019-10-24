@@ -15,12 +15,15 @@ exports[`EditorContext EditorContextProvider renders children wrapped by a conte
       "currentTabIndex": 0,
       "currentTabKey": "html",
       "hasSaved": true,
+      "parsedTestData": Object {},
       "previewDevice": "desktop",
       "setContent": [Function],
       "setHasSaved": [Function],
       "setNavigation": [Function],
       "setPreviewDevice": [Function],
       "setTab": [Function],
+      "setTestData": [Function],
+      "testData": undefined,
     }
   }
 >

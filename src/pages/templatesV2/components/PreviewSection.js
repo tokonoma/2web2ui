@@ -9,16 +9,35 @@ import PreviewContainer from './PreviewContainer';
 import styles from './PreviewSection.module.scss';
 
 const PreviewSection = () => {
-  const { currentTabKey, hasFailedToPreview, preview, previewLineErrors } = useEditorContext();
+  const {
+    currentTabKey,
+    hasFailedToPreview,
+    preview,
+    previewLineErrors
+  } = useEditorContext();
+  const formatTextContent = (textContent) => `<p style="white-space: pre-wrap">${textContent}</p>`;
+  const getPreviewContent = (tabKey) => {
+    if (tabKey === 'text') {
+      return formatTextContent(preview.text);
+    }
 
-  // Must wrap text content in <p> to apply style and must be a string for injecting into iframe
-  const content = currentTabKey === 'text'
-    ? `<p style="white-space: pre-wrap">${preview[currentTabKey]}</p>`
-    : preview[currentTabKey];
+    if (tabKey === 'test_data') {
+      const keyWithContent = ['html', 'amp_html', 'text'].find((key) => preview[key]);
+
+      if (keyWithContent === 'text') {
+        return formatTextContent(preview.text);
+      }
+
+      return preview[keyWithContent];
+    }
+
+    return preview[tabKey];
+  };
 
   return (
     <Panel className={styles.PreviewSection}>
       <PreviewControlBar />
+
       <PreviewContainer>
         {hasFailedToPreview ? (
           // only show full error frame if never able to generate a preview
@@ -26,8 +45,9 @@ const PreviewSection = () => {
         ) : (
           <>
             <PreviewHeader />
+
             <PreviewFrame
-              content={content || ''}
+              content={getPreviewContent(currentTabKey) || ''}
               key={currentTabKey} // unmount for each content part
               strict={currentTabKey !== 'amp_html'}
             />

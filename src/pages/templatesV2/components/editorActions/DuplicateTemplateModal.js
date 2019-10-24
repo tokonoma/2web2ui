@@ -16,6 +16,7 @@ const DuplicateTemplateModal = (props) => {
     onClose,
     template,
     contentToDuplicate, // Separated out from the template itself - this is the WIP content such that the template can be duplicated without first saving
+    testDataToDuplicate,
     createTemplate,
     successCallback,
     showAlert
@@ -53,6 +54,7 @@ const DuplicateTemplateModal = (props) => {
         name: draftName,
         id: draftId,
         content: contentToDuplicate,
+        testData: testDataToDuplicate,
         options: template.options,
         shared_with_subaccounts: template.shared_with_subaccounts
       })

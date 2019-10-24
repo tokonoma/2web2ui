@@ -141,11 +141,13 @@ exports[`ListPage renders correctly 1`] = `
   />
   <DuplicateTemplateModal
     contentToDuplicate={null}
+    isPublishedMode={null}
     onClose={[Function]}
     open={false}
     showAlert={[MockFunction]}
     successCallback={[Function]}
     template={null}
+    testDataToDuplicate={null}
   />
 </Page>
 `;

@@ -57,3 +57,12 @@ Object.defineProperty(global.window.location, 'assign', { value: jest.fn(), conf
 process.on('unhandledRejection', (reason) => {
   console.log(reason);
 });
+
+const mockLocalStorage = {
+  clear: jest.fn(),
+  getItem: jest.fn(),
+  removeItem: jest.fn(),
+  setItem: jest.fn()
+};
+
+Object.defineProperty(global.window, 'localStorage', { value: mockLocalStorage });

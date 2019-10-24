@@ -24,19 +24,22 @@ describe('SendTestEmailButton', () => {
 
     return shallow(<SendTestEmailButton {...props}/>);
   };
+
   const getMultiEmailField = (wrapper) => wrapper.find('[name="emailTo"]');
 
   // Render the subject, open the modal, and return relevant variables for use in test cases
   const openModal = () => {
     const promise = Promise.resolve();
-    const updateDraft = jest.fn(() => promise);
-    const sendPreview = jest.fn(() => promise);
+    const updateDraftV2 = jest.fn(() => promise);
+    const sendPreviewV2 = jest.fn(() => promise);
     const showAlert = jest.fn(() => promise);
+    const setTestDataV2 = jest.fn(() => promise);
     const wrapper = subject({
       isPublishedMode: false,
-      updateDraft,
-      sendPreview,
-      showAlert
+      updateDraftV2,
+      sendPreviewV2,
+      showAlert,
+      setTestDataV2
     });
 
     wrapper.find('[children="Send a Test"]').simulate('click');
@@ -44,19 +47,20 @@ describe('SendTestEmailButton', () => {
     return {
       wrapper,
       promise,
-      updateDraft,
-      sendPreview,
-      showAlert
+      updateDraftV2,
+      sendPreviewV2,
+      showAlert,
+      setTestDataV2
     };
   };
 
   it('opens the modal and saves the draft when the "Send a Test" button is clicked', () => {
-    const { promise, wrapper, updateDraft } = openModal();
+    const { promise, wrapper, updateDraftV2 } = openModal();
 
     wrapper.find('[children="Send a Test"]').simulate('click');
 
     expect(wrapper.find('Modal')).toHaveProp('open', true);
-    expect(updateDraft).toHaveBeenCalled();
+    expect(updateDraftV2).toHaveBeenCalled();
     expect(wrapper.find('Loading')).toExist();
 
     return promise.then(() => {
@@ -96,11 +100,11 @@ describe('SendTestEmailButton', () => {
       });
     });
 
-    it('invokes the sendPreview function with loading UI, followed by showAlert without the loading UI when there are values in the to email list', () => {
+    it('invokes the sendPreviewV2 function with loading UI, followed by showAlert without the loading UI when there are values in the to email list', () => {
       const {
         promise,
         wrapper,
-        sendPreview,
+        sendPreviewV2,
         showAlert
       } = openModal();
 
@@ -110,7 +114,7 @@ describe('SendTestEmailButton', () => {
         wrapper.find('form').simulate('submit', { preventDefault: jest.fn() });
 
         expect(wrapper.find('Loading')).toExist();
-        expect(sendPreview).toHaveBeenCalled();
+        expect(sendPreviewV2).toHaveBeenCalled();
 
         return promise.then(() => {
           expect(wrapper.find('Loading')).not.toExist();

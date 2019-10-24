@@ -5,11 +5,13 @@ import {
   getDraft,
   getPreview,
   getPublished,
-  update as updateDraft,
-  publish as publishDraft,
-  deleteTemplate,
-  create as createTemplate,
-  sendPreview
+  updateV2 as updateDraftV2,
+  publishV2 as publishDraftV2,
+  deleteTemplateV2,
+  createV2 as createTemplateV2,
+  sendPreviewV2,
+  setTestDataV2,
+  getTestDataV2
 } from 'src/actions/templates';
 import { list as listDomains } from 'src/actions/sendingDomains';
 import { list as listSubaccounts } from 'src/actions/subaccounts';
@@ -17,7 +19,8 @@ import {
   selectDraftTemplateById,
   selectDraftTemplatePreview,
   selectPreviewLineErrors,
-  selectPublishedTemplateById
+  selectPublishedTemplateById,
+  selectTemplateTestData
 } from 'src/selectors/templates';
 import { EditorContextProvider } from './context/EditorContext';
 import EditAndPreviewPage from './EditAndPreviewPage';
@@ -50,7 +53,8 @@ const mapStateToProps = (state, props) => {
     isDraftUpdating: Boolean(state.templates.updating),
     isDraftPublishing: Boolean(state.templates.publishPending),
     preview: selectDraftTemplatePreview(state, id, {}),
-    previewLineErrors: selectPreviewLineErrors(state)
+    previewLineErrors: selectPreviewLineErrors(state),
+    templateTestData: selectTemplateTestData(state)
   };
 };
 
@@ -58,14 +62,16 @@ const mapDispatchToProps = {
   getDraft,
   getPreview,
   getPublished,
-  deleteTemplate,
-  createTemplate,
-  updateDraft,
-  publishDraft,
+  deleteTemplateV2,
+  createTemplateV2,
+  updateDraftV2,
+  publishDraftV2,
+  sendPreviewV2,
   listDomains,
   listSubaccounts,
-  sendPreview,
-  showAlert
+  showAlert,
+  setTestDataV2,
+  getTestDataV2
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditAndPreviewPageContainer);

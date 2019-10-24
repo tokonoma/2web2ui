@@ -15,9 +15,11 @@ const PublishedModeActions = () => {
   const {
     hasDraft,
     draft,
-    createTemplate,
+    createTemplateV2,
     showAlert,
-    content
+    content,
+    isPublishedMode,
+    testData
   } = useEditorContext();
   const draftText = hasDraft ? 'Edit Draft' : 'Save as Draft';
   const editDraftTo = `/${routeNamespace}/edit/${draft.id}/draft/content${setSubaccountQuery(draft.subaccount_id)}`;
@@ -93,8 +95,10 @@ const PublishedModeActions = () => {
           onClose={handleModalClose}
           template={draft}
           contentToDuplicate={content}
-          createTemplate={createTemplate}
+          testDataToDuplicate={testData}
+          createTemplate={createTemplateV2}
           showAlert={showAlert}
+          isPublishedMode={isPublishedMode}
         />
 
         <DeleteTemplateModal

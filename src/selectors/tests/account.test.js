@@ -103,4 +103,18 @@ describe('Account Selectors', () => {
       transactional: false
     });
   });
+
+  it('it returns default template options even when the options are not returned', () => {
+    const state = {
+      account: {
+        options: {}
+      }
+    };
+
+    expect(accountSelectors.selectDefaultTemplateOptions(state)).toEqual({
+      click_tracking: true,
+      open_tracking: true,
+      transactional: false
+    });
+  });
 });

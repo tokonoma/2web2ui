@@ -1,6 +1,13 @@
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { deleteTemplate, create as createTemplate, listTemplates, getDraft, getPublished } from 'src/actions/templates';
+import {
+  getTestDataV2,
+  deleteTemplateV2,
+  createV2 as createTemplateV2,
+  listTemplates,
+  getDraft,
+  getPublished
+} from 'src/actions/templates';
 import { hasGrants } from 'src/helpers/conditions';
 import { selectTemplatesForListTable } from 'src/selectors/templates';
 import { hasSubaccounts } from 'src/selectors/subaccounts';
@@ -24,9 +31,10 @@ function mapStateToProps(state) {
 
 const mapDispatchToProps = {
   listTemplates,
-  deleteTemplate,
+  deleteTemplateV2,
   showAlert,
-  createTemplate,
+  createTemplateV2,
+  getTestDataV2,
   getDraft,
   getPublished
 };

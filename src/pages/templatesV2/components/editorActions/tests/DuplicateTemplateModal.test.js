@@ -70,8 +70,8 @@ describe('DuplicateTemplateModal', () => {
     expect(wrapper.find('[name="templateId"]').props().value).toEqual('my-draft-copy');
   });
 
-  it('Renders with an error message if the user does not type in a value for the draft name or for draft ID', () => {
-    const wrapper = subject({ template: { name: null }});
+  it('renders with an error message if the user does not type in a value for the draft name or for draft ID', () => {
+    const wrapper = subject({ draft: { name: null }});
     wrapper.find('form').simulate('submit', {
       preventDefault: jest.fn(),
       templateName: '',

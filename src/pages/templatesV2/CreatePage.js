@@ -14,18 +14,44 @@ export default class CreatePage extends Component {
   }
 
   handleCreate = (values) => {
-    const { create, history, subaccountId, showAlert } = this.props;
-    const formData = { ...values, content: { ...values.content, text: '' }}; //add some content to avoid api validation error
-
-    return create(formData)
+    const {
+      createTemplateV2,
+      history,
+      subaccountId,
+      showAlert
+    } = this.props;
+    const formData = {
+      ...values,
+      content: {
+        ...values.content,
+        text: '' // add some content to avoid api validation error
+      }
+    };
+    const templateId = values.id;
+    const testDataBase = {
+      options: {},
+      substitution_data: {},
+      metadata: {}
+    };
+    createTemplateV2({
+      ...formData,
+      parsedTestData: testDataBase
+    })
       .then(() => {
         showAlert({ type: 'success', message: 'Template Created.' });
-        history.push(`/${routeNamespace}/edit/${values.id}/draft/content${setSubaccountQuery(subaccountId)}`);
+        history.push(`/${routeNamespace}/edit/${templateId}/draft/content${setSubaccountQuery(subaccountId)}`);
       });
   };
 
   render() {
-    const { handleSubmit, submitting, pristine, valid, loading, formName } = this.props;
+    const {
+      handleSubmit,
+      submitting,
+      pristine,
+      valid,
+      loading,
+      formName
+    } = this.props;
 
     if (loading) {
       return <Loading/>;
@@ -52,8 +78,15 @@ export default class CreatePage extends Component {
               <CreateForm formName={formName}/>
             </Panel.Section>
           </Panel>
-          <Button type='submit' primary className={styles.NextButton}
-            disabled={submitting || pristine || !valid}>Next</Button>
+
+          <Button
+            type='submit'
+            primary
+            className={styles.NextButton}
+            disabled={submitting || pristine || !valid}
+          >
+            Next
+          </Button>
         </form>
       </Page>
     );

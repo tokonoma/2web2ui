@@ -115,6 +115,7 @@
     "@babel/core": "7.1.6",
     "@storybook/addon-actions": "^5.0.1",
     "@storybook/react": "^5.0.1",
+    "@testing-library/cypress": "^5.0.2",
     "autoprefixer": "^9.0.0",
     "babel-eslint": "^9.0.0",
     "babel-jest": "24.9.0",

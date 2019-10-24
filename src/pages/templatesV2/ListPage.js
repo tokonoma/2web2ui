@@ -16,7 +16,8 @@ export default class ListPage extends Component {
     showDeleteModal: false,
     showDuplicateModal: false,
     templateToDelete: null,
-    templateToDuplicate: null
+    templateToDuplicate: null,
+    testDataToDuplicate: null
   };
 
   componentDidMount() {
@@ -24,13 +25,18 @@ export default class ListPage extends Component {
   }
 
   deleteTemplate = () => {
-    const { deleteTemplate, listTemplates, showAlert } = this.props;
-
+    const {
+      deleteTemplateV2,
+      listTemplates,
+      showAlert
+    } = this.props;
     const { id, name } = this.state.templateToDelete;
-    return deleteTemplate(id)
+
+    return deleteTemplateV2({ id })
       .then(() => {
         showAlert({ type: 'success', message: `Template ${name} deleted` });
         this.toggleDeleteModal();
+
         return listTemplates();
       });
   };
@@ -43,7 +49,7 @@ export default class ListPage extends Component {
   };
 
   toggleDuplicateModal = (template) => {
-    const { getDraft, getPublished } = this.props;
+    const { getDraft, getPublished, getTestDataV2 } = this.props;
     const isPublished = template.published;
 
     if (isPublished) {
@@ -60,6 +66,7 @@ export default class ListPage extends Component {
       .then((res) => {
         this.setState({
           templateToDuplicate: res,
+          testDataToDuplicate: getTestDataV2({ id: res.id, mode: res.published ? 'published' : 'draft' }),
           showDuplicateModal: !this.state.showDuplicateModal
         });
       });
@@ -135,7 +142,14 @@ export default class ListPage extends Component {
   renderRow = (columns) => (props) => columns.map(({ component: Component, onClick }) => <Component onClick={onClick} {...props} />);
 
   render() {
-    const { canModify, error, listTemplates, loading, templates, deletePending } = this.props;
+    const {
+      canModify,
+      error,
+      listTemplates,
+      loading,
+      templates,
+      deletePending
+    } = this.props;
 
     if (loading) {
       return <Loading/>;
@@ -207,11 +221,13 @@ export default class ListPage extends Component {
             <DuplicateTemplateModal
               open={this.state.showDuplicateModal}
               onClose={() => this.setState({ showDuplicateModal: false })}
-              createTemplate={this.props.createTemplate}
+              createTemplate={this.props.createTemplateV2}
               template={this.state.templateToDuplicate}
-              contentToDuplicate={this.state.templateToDuplicate && this.state.templateToDuplicate.content}
               successCallback={this.handleDuplicateSuccess}
               showAlert={this.props.showAlert}
+              contentToDuplicate={this.state.templateToDuplicate && this.state.templateToDuplicate.content}
+              testDataToDuplicate={this.state.testDataToDuplicate}
+              isPublishedMode={this.state.templateToDuplicate && this.state.templateToDuplicate.published}
             />
           </>
         )}
