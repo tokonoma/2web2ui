@@ -6,13 +6,26 @@ import {
   TextField,
   Button
 } from '@sparkpost/matchbox';
-import Loading from 'src/components/loading';
 import ButtonWrapper from 'src/components/buttonWrapper';
-import styles from './DuplicateTemplateModal.module.scss';
+import PanelLoading from 'src/components/panelLoading';
+
+const ModalWrapper = (props) => {
+  const { open, onClose, children } = props;
+
+  return (
+    <Modal
+      open={open}
+      onClose={onClose}
+      showCloseButton={true}
+    >
+      {children}
+    </Modal>
+  );
+};
 
 const DuplicateTemplateModal = (props) => {
   const {
-    open,
+    // open,
     onClose,
     template,
     contentToDuplicate, // Separated out from the template itself - this is the WIP content such that the template can be duplicated without first saving
@@ -84,54 +97,50 @@ const DuplicateTemplateModal = (props) => {
     setDraftId(e.target.value);
   };
 
+  if (isLoading) {
+    return (
+      <ModalWrapper>
+        <PanelLoading/>
+      </ModalWrapper>
+    );
+  }
+
   return (
-    <Modal
-      open={open}
-      onClose={onClose}
-      showCloseButton={true}
-    >
+    <ModalWrapper>
       <Panel
         accent
         title="Duplicate Template"
         sectioned
       >
-        {isLoading &&
-          <div className={styles.LoadingWrapper}>
-            <Loading className={styles.Loading}/>
-          </div>
-        }
+        <form onSubmit={(e) => handleSubmit(e)}>
+          <TextField
+            id="template-name"
+            name="templateName"
+            label="Template Name"
+            required // not working as I would expect...
+            value={draftName}
+            error={hasNameError ? 'Please enter a template name.' : undefined}
+            onChange={handleNameChange}
+          />
 
-        {!isLoading &&
-          <form onSubmit={(e) => handleSubmit(e)}>
-            <TextField
-              id="template-name"
-              name="templateName"
-              label="Template Name"
-              required // not working as I would expect...
-              value={draftName}
-              error={hasNameError ? 'Please enter a template name.' : undefined}
-              onChange={handleNameChange}
-            />
+          <TextField
+            id="template-id"
+            name="templateId"
+            label="Template ID"
+            required // not working as I would expect...
+            value={draftId}
+            error={hasIdError ? 'Please enter a unique template ID.' : undefined}
+            onChange={handleIdChange}
+          />
 
-            <TextField
-              id="template-id"
-              name="templateId"
-              label="Template ID"
-              required // not working as I would expect...
-              value={draftId}
-              error={hasIdError ? 'Please enter a unique template ID.' : undefined}
-              onChange={handleIdChange}
-            />
-
-            <ButtonWrapper>
-              <Button color="orange" submit>
-                Duplicate
-              </Button>
-            </ButtonWrapper>
-          </form>
-        }
+          <ButtonWrapper>
+            <Button color="orange" submit>
+              Duplicate
+            </Button>
+          </ButtonWrapper>
+        </form>
       </Panel>
-    </Modal>
+    </ModalWrapper>
   );
 };
 
