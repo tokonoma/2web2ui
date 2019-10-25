@@ -4,7 +4,13 @@ import DuplicateTemplateModal from '../DuplicateTemplateModal';
 
 describe('DuplicateTemplateModal', () => {
   const mockFn = jest.fn();
-  const subject = (props) => shallow(<DuplicateTemplateModal onClose={mockFn} open={false} {...props}/>);
+  const subject = (props) => shallow(
+    <DuplicateTemplateModal
+      isLoading={false}
+      onClose={mockFn}
+      open={false}
+      {...props}
+    />);
 
   it('renders with default props and some data from the current draft', () => {
     const wrapper = subject();
@@ -17,6 +23,12 @@ describe('DuplicateTemplateModal', () => {
     const modalProps = wrapper.find('ModalWrapper').props();
 
     expect(modalProps.showCloseButton).toBe(true);
+  });
+
+  it('renders the loading state when "isLoading" is true', () => {
+    const wrapper = subject({ isLoading: true, open: true });
+
+    expect(wrapper.find('PanelLoading')).toExist();
   });
 
   it('has a `Panel` component with the title "Duplicate Template"', () => {

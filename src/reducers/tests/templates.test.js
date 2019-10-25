@@ -112,8 +112,28 @@ describe('template publishing', () => {
     }
   };
 
-  cases('Template reducer', ({ state, match, ...action }) => {
+  cases('Template reducer', ({ match, ...action }) => {
     expect(templatesReducer({}, action)).toEqual(match); //passing empty state to assert just return value
   }, testCases);
+});
 
+describe('template creating', () => {
+  const testCases = {
+    'pending state is true while pending': {
+      type: 'CREATE_TEMPLATE_PENDING',
+      match: { createPending: true }
+    },
+    'pending state is false on success': {
+      type: 'CREATE_TEMPLATE_SUCCESS',
+      match: { createPending: false }
+    },
+    'pending state is false on failure': {
+      type: 'CREATE_TEMPLATE_FAIL',
+      match: { createPending: false }
+    }
+  };
+
+  cases('Template reducer create', ({ match, ...action }) => {
+    expect(templatesReducer({}, action)).toEqual(match); //passing empty state to assert just return value
+  }, testCases);
 });
