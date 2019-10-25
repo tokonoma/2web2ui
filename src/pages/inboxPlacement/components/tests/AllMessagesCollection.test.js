@@ -73,7 +73,7 @@ describe('Component: AllMessagesCollection', () => {
     const mountedSubject = ({ ...props }) => mount(<Router><AllMessagesCollection {...defaultProps} {...props}/></Router>);
     const click = (id, wrapper) => {
       const row = wrapper.find('Collection').find('TableBody').findWhere((n) => n.name() === 'RowComponent' && n.prop('id') === id);
-      row.find('UnstyledLink').simulate('click');
+      row.find('Button').simulate('click');
     };
 
     it('dispatches the getMessage action when the open link is clicked', () => {

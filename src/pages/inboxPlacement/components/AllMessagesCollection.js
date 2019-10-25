@@ -2,7 +2,7 @@ import React, { useState, useCallback } from 'react';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
 
-import { Table, CodeBlock, UnstyledLink } from '@sparkpost/matchbox';
+import { Button, CodeBlock, Table } from '@sparkpost/matchbox';
 import { TableCollection } from 'src/components/collection';
 import styles from './AllMessagesCollection.module.scss';
 import startCase from 'lodash/startCase';
@@ -51,36 +51,40 @@ export const AllMessagesCollection = ({ data = [], getInboxPlacementMessage, tes
     return setOpenHeaders([...openHeaders, messageId]);
   });
 
-  const RowComponent = ({ email_address, folder, tab, dkim, spf, dmarc, id: messageId, headers }) => (
-  <>
-    <Table.Row className={classnames(styles.DataRow, openHeaders.includes(messageId) && styles.NoBottomBorder)}>
-      <Table.Cell className={styles.SeedCell}>
-        <h4>{email_address}</h4>
-        <strong>{startCase(folder)}</strong> {tab && (` | ${startCase(tab)} Folder`)}
-      </Table.Cell>
-      <Table.Cell className={styles.Authentication}>{passFail(spf)}</Table.Cell>
-      <Table.Cell className={styles.Authentication}>{passFail(dkim)}</Table.Cell>
-      <Table.Cell className={styles.Authentication}>{passFail(dmarc)}</Table.Cell>
-      <Table.Cell className={classnames(styles.Authentication, !openHeaders.includes(messageId) && styles.LeftBorder)}>
-        <UnstyledLink onClick={() => handleClick(messageId)}>
-          {loading === messageId
-            ? <LoadingSVG size='XSmall'/>
-            : openHeaders.includes(messageId)
-              ? 'Close'
-              : 'Open'
-          }
-        </UnstyledLink>
-      </Table.Cell>
-    </Table.Row>
-    {openHeaders.includes(messageId) && loading !== messageId && (
-      <Table.Row>
-        <Table.Cell colSpan={5}>
-          <CodeBlock height={200} code={headers || ''}/>
-        </Table.Cell>
-      </Table.Row>
-    )}
-  </>
-  );
+  const RowComponent = ({ email_address, folder, tab, dkim, spf, dmarc, id: messageId, headers }) => {
+    const isHeaderRowOpen = openHeaders.includes(messageId);
+    const isHeaderRowLoading = loading === messageId;
+
+    return (
+      <>
+        <Table.Row className={classnames(styles.DataRow, openHeaders.includes(messageId) && styles.NoBottomBorder)}>
+          <Table.Cell className={styles.SeedCell}>
+            <h4>{email_address}</h4>
+            <strong>{startCase(folder)}</strong> {tab && (` | ${startCase(tab)} Folder`)}
+          </Table.Cell>
+          <Table.Cell className={styles.Authentication}>{passFail(spf)}</Table.Cell>
+          <Table.Cell className={styles.Authentication}>{passFail(dkim)}</Table.Cell>
+          <Table.Cell className={styles.Authentication}>{passFail(dmarc)}</Table.Cell>
+          <Table.Cell className={classnames(styles.Authentication, !isHeaderRowOpen && styles.LeftBorder)}>
+            {isHeaderRowLoading ? (
+              <LoadingSVG size='XSmall'/>
+            ) : (
+              <Button flat onClick={() => handleClick(messageId)}>
+                {isHeaderRowOpen ? 'Close' : 'View'}
+              </Button>
+            )}
+          </Table.Cell>
+        </Table.Row>
+        {isHeaderRowOpen && !isHeaderRowLoading && (
+          <Table.Row>
+            <Table.Cell colSpan={5}>
+              <CodeBlock height={200} code={headers || ''}/>
+            </Table.Cell>
+          </Table.Row>
+        )}
+      </>
+    );
+  };
 
   return (
     <TableCollection
