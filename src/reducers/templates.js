@@ -126,6 +126,13 @@ export default (state = initialState, { now = new Date(), ...action }) => {
     case 'PUBLISH_ACTION_FAIL':
       return { ...state, publishPending: false };
 
+    case 'CREATE_TEMPLATE_PENDING':
+      return { ...state, createPending: true };
+
+    case 'CREATE_TEMPLATE_SUCCESS':
+    case 'CREATE_TEMPLATE_FAIL':
+      return { ...state, createPending: false };
+
     default:
       return state;
   }

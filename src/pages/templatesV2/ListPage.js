@@ -229,6 +229,7 @@ export default class ListPage extends Component {
               contentToDuplicate={this.state.templateToDuplicate && this.state.templateToDuplicate.content}
               testDataToDuplicate={this.state.testDataToDuplicate}
               isPublishedMode={this.state.templateToDuplicate && this.state.templateToDuplicate.published}
+              isLoading={this.props.isCreatePending}
             />
           </>
         )}

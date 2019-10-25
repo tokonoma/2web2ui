@@ -25,15 +25,17 @@ const ModalWrapper = (props) => {
 
 const DuplicateTemplateModal = (props) => {
   const {
-    // open,
+    open,
     onClose,
     template,
     contentToDuplicate, // Separated out from the template itself - this is the WIP content such that the template can be duplicated without first saving
     testDataToDuplicate,
     createTemplate,
     successCallback,
-    showAlert
+    showAlert,
+    isLoading
   } = props;
+  const modalProps = { open, onClose };
   const initialDraftName = (template && template.name) ? `${template.name} (COPY)` : '';
   const initialDraftId = (template && template.id) ? `${template.id}-copy` : '';
 
@@ -42,7 +44,6 @@ const DuplicateTemplateModal = (props) => {
   const [draftId, setDraftId] = useState(initialDraftId);
   const [hasNameError, setNameError] = useState(false);
   const [hasIdError, setIdError] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     setDraftName(initialDraftName);
@@ -61,8 +62,6 @@ const DuplicateTemplateModal = (props) => {
     }
 
     if (draftName.length && draftId.length) {
-      setIsLoading(true);
-
       createTemplate({
         name: draftName,
         id: draftId,
@@ -82,8 +81,7 @@ const DuplicateTemplateModal = (props) => {
 
             onClose();
           }
-        })
-        .finally(() => setIsLoading(false));
+        });
     }
   };
 
@@ -99,14 +97,14 @@ const DuplicateTemplateModal = (props) => {
 
   if (isLoading) {
     return (
-      <ModalWrapper>
+      <ModalWrapper {...modalProps}>
         <PanelLoading/>
       </ModalWrapper>
     );
   }
 
   return (
-    <ModalWrapper>
+    <ModalWrapper {...modalProps}>
       <Panel
         accent
         title="Duplicate Template"

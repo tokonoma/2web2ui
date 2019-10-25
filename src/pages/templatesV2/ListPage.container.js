@@ -22,10 +22,11 @@ function mapStateToProps(state) {
     templates,
     hasSubaccounts: hasSubaccounts(state),
     userAccessLevel: state.currentUser.access_level,
-    loading: state.templates.listLoading,
+    loading: Boolean(state.templates.listLoading),
     error: state.templates.listError,
     canModify,
-    deletePending: state.templates.deletePending
+    deletePending: Boolean(state.templates.deletePending),
+    isCreatePending: Boolean(state.templates.createPending)
   };
 }
 

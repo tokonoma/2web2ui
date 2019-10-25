@@ -20,7 +20,8 @@ const DraftModeActions = () => {
     showAlert,
     content,
     isPublishedMode,
-    testData
+    testData,
+    isCreatePending
   } = useEditorContext();
 
   // State
@@ -112,6 +113,7 @@ const DraftModeActions = () => {
           createTemplate={createTemplateV2}
           showAlert={showAlert}
           isPublishedMode={isPublishedMode}
+          isLoading={isCreatePending}
         />
 
         <DeleteTemplateModal
