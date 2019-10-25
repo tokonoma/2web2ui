@@ -6,7 +6,6 @@ export const initialState = {
   tests: [],
   stopTestPending: false,
   placementsByProvider: [],
-  getAllMessagesPending: false,
   allMessages: []
 };
 
