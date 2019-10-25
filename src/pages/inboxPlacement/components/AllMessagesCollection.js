@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
 
@@ -38,7 +38,7 @@ const WrapperComponent = ({ children }) => (
 export const AllMessagesCollection = ({ data = [], getInboxPlacementMessage, testId, loading }) => {
   const [openHeaders, setOpenHeaders] = useState([]);
 
-  const handleClick = useCallback((messageId) => {
+  const handleClick = (messageId) => {
     if (openHeaders.includes(messageId)) {
       const updatedOpenHeaders = openHeaders.filter((id) => id !== messageId);
       return setOpenHeaders(updatedOpenHeaders);
@@ -49,7 +49,7 @@ export const AllMessagesCollection = ({ data = [], getInboxPlacementMessage, tes
     }
 
     return setOpenHeaders([...openHeaders, messageId]);
-  });
+  };
 
   const RowComponent = ({ email_address, folder, tab, dkim, spf, dmarc, id: messageId, headers }) => {
     const isHeaderRowOpen = openHeaders.includes(messageId);
