@@ -65,7 +65,7 @@ export default (state = initialState, { type, payload, meta }) => {
       return { state: initialState };
 
     case 'GET_INBOX_PLACEMENT_MESSAGE_PENDING':
-      return { ...state, getMessagePending: meta.messageId, getMessageError: null };
+      return { ...state, getMessagePending: meta.context.messageId, getMessageError: null };
     case 'GET_INBOX_PLACEMENT_MESSAGE_SUCCESS': {
       const message = state.allMessages.find(({ id }) => id === payload.id);
       message.headers = payload.headers;

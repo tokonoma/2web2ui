@@ -85,7 +85,9 @@ export function getInboxPlacementMessage(testId, messageId) {
     meta: {
       method: 'GET',
       url: `/v1/inbox-placement/${testId}/messages/${messageId}`,
-      messageId: messageId
+      context: {
+        messageId
+      }
     }
   });
 }

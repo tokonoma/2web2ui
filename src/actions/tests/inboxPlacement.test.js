@@ -88,7 +88,9 @@ describe('Action Creator: Inbox Placement', () => {
       meta: {
         method: 'GET',
         url: '/v1/inbox-placement/1/messages/101',
-        messageId: 101
+        context: {
+          messageId: 101
+        }
       }
     });
   });

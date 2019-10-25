@@ -60,7 +60,7 @@ const TEST_CASES = {
   },
   'get specific inbox placement test messages pending': {
     type: 'GET_INBOX_PLACEMENT_MESSAGE_PENDING',
-    meta: { messageId: 101 }
+    meta: { context: { messageId: 101 }}
   },
   'get specific inbox placement test messages success': {
     payload: { id: 1, headers: 'fake headers' },
