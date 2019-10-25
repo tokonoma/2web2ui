@@ -10,13 +10,18 @@ import ButtonWrapper from 'src/components/buttonWrapper';
 import PanelLoading from 'src/components/panelLoading';
 
 const ModalWrapper = (props) => {
-  const { open, onClose, children } = props;
+  const {
+    open,
+    onClose,
+    showCloseButton,
+    children
+  } = props;
 
   return (
     <Modal
       open={open}
       onClose={onClose}
-      showCloseButton={true}
+      showCloseButton={showCloseButton}
     >
       {children}
     </Modal>
@@ -35,7 +40,11 @@ const DuplicateTemplateModal = (props) => {
     showAlert,
     isLoading
   } = props;
-  const modalProps = { open, onClose };
+  const modalProps = {
+    open,
+    onClose,
+    showCloseButton: true
+  };
   const initialDraftName = (template && template.name) ? `${template.name} (COPY)` : '';
   const initialDraftId = (template && template.id) ? `${template.id}-copy` : '';
 
