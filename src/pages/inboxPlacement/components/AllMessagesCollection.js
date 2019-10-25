@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
 
-import { Button, CodeBlock, Table } from '@sparkpost/matchbox';
+import { Button, CodeBlock, ScreenReaderOnly, Table } from '@sparkpost/matchbox';
 import { TableCollection } from 'src/components/collection';
 import styles from './AllMessagesCollection.module.scss';
 import startCase from 'lodash/startCase';
@@ -22,7 +22,9 @@ export const passFail = (value) => {
 };
 const HeaderComponent = () => (<thead>
   <Table.Row className={styles.HeaderRow}>
-    <Table.HeaderCell className={styles.HeaderCell}></Table.HeaderCell>
+    <Table.HeaderCell className={styles.HeaderCell}>
+      <ScreenReaderOnly>Message Email Address</ScreenReaderOnly>
+    </Table.HeaderCell>
     <Table.HeaderCell className={styles.HeaderCell}>SPF</Table.HeaderCell>
     <Table.HeaderCell className={styles.HeaderCell}>DKIM</Table.HeaderCell>
     <Table.HeaderCell className={styles.HeaderCell}>DMARC</Table.HeaderCell>
@@ -67,9 +69,9 @@ export const AllMessagesCollection = ({ data = [], getInboxPlacementMessage, tes
           <Table.Cell className={styles.Authentication}>{passFail(dmarc)}</Table.Cell>
           <Table.Cell className={classnames(styles.Authentication, !isHeaderRowOpen && styles.LeftBorder)}>
             {isHeaderRowLoading ? (
-              <LoadingSVG size='XSmall'/>
+              <LoadingSVG label="Loading" size='XSmall'/>
             ) : (
-              <Button flat onClick={() => handleClick(messageId)}>
+              <Button flat onClick={() => handleClick(messageId)} aria-expanded={isHeaderRowOpen}>
                 {isHeaderRowOpen ? 'Close' : 'View'}
               </Button>
             )}
