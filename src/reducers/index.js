@@ -11,6 +11,7 @@ import apiKeys from './api-keys';
 import auth from './auth';
 import billing from './billing';
 import bounceReport from './bounceReport';
+import blacklist from './blacklist';
 import brightback from './brightback';
 import cookieConsent from './cookieConsent';
 import delayReport from './delayReport';
@@ -50,28 +51,28 @@ import ingestBatchEvents from './ingestBatchEvents';
 
 
 const appReducer = combineReducers({
+  abTesting,
   acceptedReport,
   accessControlReady,
   account,
   accountSingleSignOn,
   alerts,
+  apiKeys,
   auth,
   billing,
+  blacklist,
   bounceReport,
   brightback,
   cookieConsent,
+  currentUser,
   delayReport,
   engagementReport,
-  rejectionReport,
-  abTesting,
-  apiKeys,
-  currentUser,
+  globalAlert,
   form,
   inboxPlacement,
   invoices,
   ingestBatchEvents,
   ipPools,
-  globalAlert,
   metrics,
   messageEvents,
   notifications,
@@ -79,6 +80,7 @@ const appReducer = combineReducers({
   reportOptions,
   recipientLists,
   recipientValidation,
+  rejectionReport,
   sendingDomains,
   sendingIps,
   signalOptions,
