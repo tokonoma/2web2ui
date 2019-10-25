@@ -33,9 +33,12 @@ export const EditorContextProvider = ({ children, value: {
 
   useEffect(() => {
     getDraft(requestParams.id, requestParams.subaccount);
-    getPublished(requestParams.id, requestParams.subaccount);
     listDomains();
     listSubaccounts();
+
+    if (requestParams.version === 'published') {
+      getPublished(requestParams.id, requestParams.subaccount);
+    }
   },
   [
     listSubaccounts,

@@ -7,8 +7,14 @@ jest.mock('src/hooks/useRouter');
 
 describe('EditorContext', () => {
   describe('EditorContextProvider', () => {
-    const subject = ({ render = shallow, value = {}} = {}) => {
-      useRouter.mockReturnValue({ requestParams: { id: 'test-template', subaccount: '123' }});
+    const subject = ({ render = shallow, value = {}, routerParams = {}} = {}) => {
+      useRouter.mockReturnValue({
+        requestParams: {
+          id: 'test-template',
+          subaccount: '123',
+          ...routerParams
+        }
+      });
 
       return render(
         <EditorContextProvider
@@ -36,7 +42,7 @@ describe('EditorContext', () => {
       expect(wrapper).toHaveProp('value', expect.objectContaining(value));
     });
 
-    it('calls getDraft and getPublished on mount', () => {
+    it('calls getDraft, listDomains, and listSubaccounts on mount', () => {
       const getDraft = jest.fn();
       const getPublished = jest.fn();
       const listDomains = jest.fn();
@@ -53,9 +59,31 @@ describe('EditorContext', () => {
       });
 
       expect(getDraft).toHaveBeenCalledWith('test-template', '123');
-      expect(getPublished).toHaveBeenCalledWith('test-template', '123');
+      expect(getPublished).not.toHaveBeenCalled();
       expect(listDomains).toHaveBeenCalled();
       expect(listSubaccounts).toHaveBeenCalled();
+    });
+
+    it('calls getPublished when the route param version is "published"', () => {
+      const getDraft = jest.fn();
+      const getPublished = jest.fn();
+      const listDomains = jest.fn();
+      const listSubaccounts = jest.fn();
+
+      subject({
+        render: mount,
+        value: {
+          getDraft,
+          getPublished,
+          listDomains,
+          listSubaccounts
+        },
+        routerParams: {
+          version: 'published'
+        }
+      });
+
+      expect(getPublished).toHaveBeenCalledWith('test-template', '123');
     });
   });
 });
