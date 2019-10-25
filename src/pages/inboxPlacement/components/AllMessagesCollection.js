@@ -72,12 +72,13 @@ export const AllMessagesCollection = ({ data = [], getInboxPlacementMessage, tes
         </UnstyledLink>
       </Table.Cell>
     </Table.Row>
-    {openHeaders.includes(messageId) && loading !== messageId &&
-    <Table.Row>
-      <Table.Cell className={styles.NoPadding}>
-        <CodeBlock className={styles.MessageHeaders} height={200} code={headers || ''}/>
-      </Table.Cell>
-    </Table.Row>}
+    {openHeaders.includes(messageId) && loading !== messageId && (
+      <Table.Row>
+        <Table.Cell colSpan={5}>
+          <CodeBlock height={200} code={headers || ''}/>
+        </Table.Cell>
+      </Table.Row>
+    )}
   </>
   );
 
@@ -99,5 +100,3 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps, { getInboxPlacementMessage })(AllMessagesCollection);
-
-
