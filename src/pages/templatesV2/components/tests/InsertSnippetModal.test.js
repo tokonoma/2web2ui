@@ -102,6 +102,11 @@ describe('InsertSnippetModal', () => {
   });
 
   it('updates the "CopyField" value onChange of the "TypeAhead"', () => {
+    const useEffect = jest.spyOn(React, 'useEffect');
+
+    const mockUseEffect = () => {
+      useEffect.mockImplementationOnce((f) => f());
+    };
     const mySnippet = {
       created_at: '2019-03-20T11:57:43.544Z',
       id: 'this-is-a-fake-snippet-2',
@@ -117,9 +122,13 @@ describe('InsertSnippetModal', () => {
     expect(wrapper.find('CopyField').props().value).toEqual('{{ render_snippet( "example-id" ) }}');
 
     wrapper.find('Typeahead').simulate('change', mySnippet);
+    mockUseEffect();
 
     // Test currently not working due to Enzyme limitation.
     // See: https://github.com/airbnb/enzyme/issues/2086
+    // Could also be resolved by using `react-testing-library`,
+    // though this first requires updating our React version:
+    // https://testing-library.com/docs/react-testing-library/intro
     // expect(wrapper.find('CopyField').props().value).toEqual(`{{ render_snippet( "${mySnippet.id}" ) }}`);
   });
 
