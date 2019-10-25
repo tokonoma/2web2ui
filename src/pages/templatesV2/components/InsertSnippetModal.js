@@ -17,7 +17,12 @@ import useEditorContext from '../hooks/useEditorContext';
 
 const InsertSnippetModal = (props) => {
   const { open, onClose } = props;
-  const { getSnippets, snippets, areSnippetsLoading } = useEditorContext();
+  const {
+    getSnippets,
+    snippets,
+    areSnippetsLoading,
+    showAlert
+  } = useEditorContext();
   const renderSnippetCode = (snippetId) => `{{ render_snippet( "${snippetId || 'example-id'}" ) }}`
   const [snippetId, setSnippetId] = useState(undefined);
   const [copyFieldValue, setCopyFieldValue] = useState(renderSnippetCode());
@@ -40,9 +45,14 @@ const InsertSnippetModal = (props) => {
     setSnippetId(snippetId);
   };
 
-  const handleCopyClick = () => {
+  const handleSubmit = () => {
     copy(copyFieldValue);
-  }
+    showAlert({
+      type: 'success',
+      message: 'Snippet copied'
+    });
+    onClose();
+  };
 
   return (
     <Modal
@@ -54,7 +64,7 @@ const InsertSnippetModal = (props) => {
         <PanelLoading/>
       ) : (
         <Panel title="Add a snippet" accent sectioned>
-          <form>
+          <form onSubmit={handleSubmit}>
             <p>Snippets are a great way to manage sections like headers or footers that are used across multiple templates. Simply edit your snippet, and that change will populate across all your templates.</p>
 
             <Typeahead
@@ -63,15 +73,13 @@ const InsertSnippetModal = (props) => {
               helpText={
                 snippets.length === 0 ? (
                   <span>
-                    You have not created a snippet. {
-                      <PageLink to="/snippets/create">Create your first snippet</PageLink>
-                    }
+                    You have not created a snippet.
+
+                    <PageLink to="/snippets/create">Create your first snippet</PageLink>
                   </span>
                 ) : ''
               }
-              itemToString={(snippet) => (
-                snippet ? `${snippet.name || slugToFriendly(snippet.id)} (${snippet.id})` : ''
-              )}
+              itemToString={(snippet) => snippet ? `${snippet.name || slugToFriendly(snippet.id)} (${snippet.id})` : ''}
               name="snippetTypeahead"
               onChange={handleTypeaheadChange}
               placeholder={snippets.length === 0 ? '' : 'Type to search...'}
@@ -89,7 +97,7 @@ const InsertSnippetModal = (props) => {
             />
 
             <ButtonWrapper>
-              <Button color="orange" onClick={handleCopyClick}>
+              <Button color="orange" onClick={handleSubmit}>
                 Copy Code
               </Button>
             </ButtonWrapper>
