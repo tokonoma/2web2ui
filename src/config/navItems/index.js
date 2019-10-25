@@ -10,7 +10,7 @@ import {
   GridOff
 } from '@sparkpost/matchbox-icons';
 import { hasGrants } from 'src/helpers/conditions';
-import { hasAccountOptionEnabled, isAccountUiOptionSet } from 'src/helpers/conditions/account';
+import { isAccountUiOptionSet } from 'src/helpers/conditions/account';
 import inboxPlacementNavItems from './inboxPlacement';
 
 export default [
@@ -127,8 +127,7 @@ export default [
     label: 'Blacklist',
     to: '/blacklist',
     tag: 'labs',
-    icon: GridOff,
-    condition: hasAccountOptionEnabled('blacklist_monitors')
+    icon: GridOff
   },
   {
     label: 'Configuration',
