@@ -27,7 +27,8 @@ describe('Page: All Inbox Placement Messages Test', () => {
       error: false,
       history: {
         replace: jest.fn()
-      }
+      },
+      messages: []
     };
 
     return shallow(<AllMessagesPage {...defaults} {...props} />);
@@ -93,4 +94,3 @@ describe('Page: All Inbox Placement Messages Test', () => {
     expect(wrapper.find('Page')).not.toExist();
   });
 });
-

@@ -151,6 +151,7 @@ exports[`Page: All Inbox Placement Messages Test renders page correctly with def
     title="Seed Diagnostics"
   >
     <Connect(AllMessagesCollection)
+      data={Array []}
       testId={0}
     />
   </Panel>
