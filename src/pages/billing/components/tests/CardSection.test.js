@@ -6,15 +6,21 @@ import { useFeatureChangeContext } from 'src/pages/billing/context/FeatureChange
 jest.mock('src/pages/billing/context/FeatureChangeContext');
 
 describe('CardSection',() => {
-  const subject = (props) => {
+  const defaultContextState = {
+    isReady: true,
+    loading: false
+  };
+  const subject = (props = {}, contextState = {}) => {
     useFeatureChangeContext.mockReturnValue({
-      isReady: true,
-      loading: false
+      ...defaultContextState,
+      ...contextState
     });
     const defaultProps = {
       countries: [],
       currentPlan: {},
       selectedPlan: {},
+      useSavedCC: true,
+      handleCardToggle: jest.fn(),
       account: {
         billing: {}
       }
@@ -26,13 +32,26 @@ describe('CardSection',() => {
     const wrapper = subject({ selectedPlan: { isFree: true }});
     expect(wrapper.type()).toBe(null);
   });
-
-
   it('should render payment form if no billing info', () => {
     const wrapper = subject({ account: {}});
     expect(wrapper.find('CardSummary')).not.toExist();
     expect(wrapper.find('Connect(PaymentForm)')).toExist();
   });
-
+  it('should handle toggle', () => {
+    const wrapper = subject({ canUpdateBillingInfo: true });
+    expect(wrapper.find('CardSummary')).toExist();
+    expect(wrapper.find('Connect(PaymentForm)')).not.toExist();
+    wrapper.setProps({ useSavedCC: false });
+    expect(wrapper.find('CardSummary')).not.toExist();
+    expect(wrapper.find('Connect(PaymentForm)')).toExist();
+  });
+  it('should render nothing if context state is not ready and changePlanForrm is new', () => {
+    const wrapper = subject({ isNewChangePlanForm: true }, { isReady: false });
+    expect(wrapper.find('Panel')).not.toExist();
+  });
+  it('should render nothing if context state is loading and changePlanForrm is new', () => {
+    const wrapper = subject({ isNewChangePlanForm: true }, { loading: true, isNewChangePlanForm: true });
+    expect(wrapper.find('Panel')).not.toExist();
+  });
 });
 

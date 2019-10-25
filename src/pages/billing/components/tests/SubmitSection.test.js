@@ -30,6 +30,11 @@ describe('SubmitSection: ', () => {
       expect(wrapper.find(Brightback)).not.toExist();
     });
 
+    it('should render nothing if context state is loading', () => {
+      const wrapper = subject({}, { loading: true });
+      expect(wrapper.find(Brightback)).not.toExist();
+    });
+
     const getButton = (subject, props = {}) => {
       const Button = subject.find(Brightback).prop('render');
       return shallow(<Button {...props} />);

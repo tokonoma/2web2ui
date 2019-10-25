@@ -5,8 +5,8 @@ import { Button } from '@sparkpost/matchbox';
 import { useFeatureChangeContext } from '../context/FeatureChangeContext';
 
 const SubmitSection = ({ brightbackCondition, loading }) => {
-  const { isReady } = useFeatureChangeContext();
-  if (!isReady) {
+  const { isReady, loading: featureSectionLoading } = useFeatureChangeContext();
+  if (!isReady || featureSectionLoading) {
     return null;
   }
 
