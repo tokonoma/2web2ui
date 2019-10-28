@@ -36,7 +36,12 @@ const SaveDraft = (props) => {
 
   return (
     <div className={className}>
-      <UnstyledLink onClick={handleClick} to="javascript:void(0);" role="button">
+      <UnstyledLink
+        onClick={handleClick}
+        to="javascript:void(0);"
+        role="button"
+        data-id="action-save-draft"
+      >
         <FileEdit/>
 
         <span>Save Draft</span>

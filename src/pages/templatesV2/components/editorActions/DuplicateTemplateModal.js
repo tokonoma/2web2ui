@@ -128,6 +128,7 @@ const DuplicateTemplateModal = (props) => {
             value={draftName}
             error={hasNameError ? 'Please enter a template name.' : undefined}
             onChange={handleNameChange}
+            data-id="textfield-template-name"
           />
 
           <TextField
@@ -138,10 +139,15 @@ const DuplicateTemplateModal = (props) => {
             value={draftId}
             error={hasIdError ? 'Please enter a unique template ID.' : undefined}
             onChange={handleIdChange}
+            data-id="textfield-template-id"
           />
 
           <ButtonWrapper>
-            <Button color="orange" submit>
+            <Button
+              color="orange"
+              submit
+              data-id="button-duplicate"
+            >
               Duplicate
             </Button>
           </ButtonWrapper>

@@ -61,6 +61,7 @@ const PublishedModeActions = () => {
             <Button
               onClick={() => setPopoverOpen(!isPopoverOpen)}
               aria-expanded={isPopoverOpen ? 'true' : 'false'}
+              data-id="popover-editor-actions"
             >
               <ArrowDropDown/>
 

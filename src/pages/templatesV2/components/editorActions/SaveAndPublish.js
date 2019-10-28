@@ -15,6 +15,7 @@ const SaveAndPublish = (props) => {
         <Button
           onClick={onClick}
           title="Opens a dialog"
+          data-id="action-save-and-publish"
         >
           {children}
         </Button>
@@ -26,6 +27,7 @@ const SaveAndPublish = (props) => {
           role="button"
           to="javascript:void(0);"
           title="Opens a dialog"
+          data-id="action-save-and-publish"
         >
           <CheckCircleOutline/>
 
