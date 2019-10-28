@@ -46,6 +46,7 @@ const InsertSnippetModal = (props) => {
   useEffect(() => {
     if (open) {
       getSnippets();
+      setCopyFieldValue(renderSnippetCode()); // Reset to default snippet
     }
   }, [open]);
 
