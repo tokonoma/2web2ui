@@ -74,10 +74,7 @@ export const AllMessagesPage = ({
       subtitle={filterName}
       primaryArea={<StopTestComponent status={status} id={id} reload={loadMessages} />}
     >
-      <Panel>
-        <Panel.Section>
-          <h3>Diagnostics</h3>
-        </Panel.Section>
+      <Panel title="Diagnostics">
         <Grid>
           <Grid.Column lg={7} md={12}>
             <div className={styles.Divider} >
@@ -100,7 +97,7 @@ export const AllMessagesPage = ({
           </Grid.Column>
         </Grid>
       </Panel>
-      <Panel title={'Seed Diagnostics'}>
+      <Panel title="Seed Diagnostics">
         <AllMessagesCollectionComponent data={messages} testId={id} />
       </Panel>
     </Page>

@@ -29,12 +29,9 @@ exports[`Page: All Inbox Placement Messages Test renders page correctly with def
   }
   title="Inbox Placement"
 >
-  <Panel>
-    <Panel.Section>
-      <h3>
-        Diagnostics
-      </h3>
-    </Panel.Section>
+  <Panel
+    title="Diagnostics"
+  >
     <Grid>
       <Grid.Column
         lg={7}
