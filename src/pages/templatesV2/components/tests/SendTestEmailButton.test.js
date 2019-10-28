@@ -69,10 +69,10 @@ describe('SendTestEmailButton', () => {
 
     expect(wrapper.find('Modal')).toHaveProp('open', true);
     expect(updateDraftV2).toHaveBeenCalled();
-    expect(wrapper.find('Loading')).toExist();
+    expect(wrapper.find('PanelLoading')).toExist();
 
     return promise.then(() => {
-      expect(wrapper.find('Loading')).not.toExist();
+      expect(wrapper.find('PanelLoading')).not.toExist();
       expect(setHasSaved).toHaveBeenCalled();
       expect(wrapper.find('[name="emailFrom"]')).toExist();
       expect(wrapper.find('[name="emailSubject"]')).toExist();
@@ -91,7 +91,7 @@ describe('SendTestEmailButton', () => {
 
       wrapper.find('form').simulate('submit', { preventDefault: jest.fn() }); // Used to trigger error rendering through premature form submission
 
-      expect(wrapper.find('Loading')).not.toExist();
+      expect(wrapper.find('PanelLoading')).not.toExist();
       expect(emailToField).toHaveProp('value', '');
       expect(emailToField).toHaveProp('emailList', []);
       expect(emailToField).toHaveProp('error', '');
@@ -122,11 +122,11 @@ describe('SendTestEmailButton', () => {
         getMultiEmailField(wrapper).simulate('keyDownAndBlur', { keyCode: 32, preventDefault: jest.fn() });
         wrapper.find('form').simulate('submit', { preventDefault: jest.fn() });
 
-        expect(wrapper.find('Loading')).toExist();
+        expect(wrapper.find('PanelLoading')).toExist();
         expect(sendPreviewV2).toHaveBeenCalled();
 
         return promise.then(() => {
-          expect(wrapper.find('Loading')).not.toExist();
+          expect(wrapper.find('PanelLoading')).not.toExist();
           expect(wrapper.find('Modal')).toHaveProp('open', false);
           expect(showAlert).toHaveBeenCalled();
           expect(getMultiEmailField(wrapper)).toHaveProp('value', '');
@@ -143,10 +143,10 @@ describe('SendTestEmailButton', () => {
         getMultiEmailField(wrapper).simulate('keyDownAndBlur', { keyCode: 32, preventDefault: jest.fn() });
         wrapper.find('form').simulate('submit', { preventDefault: jest.fn() });
 
-        expect(wrapper.find('Loading')).toExist();
+        expect(wrapper.find('PanelLoading')).toExist();
 
         return promise.finally(() => {
-          expect(wrapper.find('Loading')).not.toExist();
+          expect(wrapper.find('PanelLoading')).not.toExist();
         });
       });
     });
