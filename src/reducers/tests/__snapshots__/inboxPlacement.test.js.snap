@@ -310,15 +310,13 @@ Object {
 
 exports[`Inbox Placement Reducer resets State 1`] = `
 Object {
-  "state": Object {
-    "allMessages": Array [],
-    "currentTestDetails": Object {},
-    "placementsByProvider": Array [],
-    "seeds": Array [],
-    "seedsPending": false,
-    "stopTestPending": false,
-    "tests": Array [],
-    "testsPending": true,
-  },
+  "allMessages": Array [],
+  "currentTestDetails": Object {},
+  "placementsByProvider": Array [],
+  "seeds": Array [],
+  "seedsPending": false,
+  "stopTestPending": false,
+  "tests": Array [],
+  "testsPending": true,
 }
 `;

@@ -61,7 +61,7 @@ export default (state = initialState, { type, payload, meta }) => {
       return { ...state, getAllMessagesPending: false, getAllMessagesError: payload };
 
     case 'RESET_STATE':
-      return { state: initialState };
+      return initialState;
 
     case 'GET_INBOX_PLACEMENT_MESSAGE_PENDING':
       return { ...state, getMessagePending: meta.context.messageId, getMessageError: null };
