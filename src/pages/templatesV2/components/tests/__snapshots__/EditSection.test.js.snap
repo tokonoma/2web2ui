@@ -33,7 +33,44 @@ exports[`EditSection renders tabs and section 1`] = `
         ]
       }
     />
+    <Popover
+      bottom={true}
+      left={true}
+      onClose={[Function]}
+      open={false}
+      right={true}
+      trigger={
+        <Button
+          className="MoreButton"
+          flat={true}
+          onClick={[Function]}
+          size="default"
+        >
+          <MoreVert />
+          <ScreenReaderOnly>
+            More
+          </ScreenReaderOnly>
+        </Button>
+      }
+    >
+      <ActionList
+        actions={
+          Array [
+            Object {
+              "content": "Insert Snippet",
+              "onClick": [Function],
+            },
+          ]
+        }
+        groupByKey="section"
+      />
+    </Popover>
   </div>
   <EditHtmlSection />
+  <InsertSnippetModal
+    loading={false}
+    onClose={[Function]}
+    open={false}
+  />
 </Panel>
 `;
