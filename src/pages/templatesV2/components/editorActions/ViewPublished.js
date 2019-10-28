@@ -17,7 +17,9 @@ export default ({ className }) => {
         onClick={() => history.push(publishedPath)}
         data-id="action-view-published"
       >
-        <RemoveRedEye/>View Published
+        <RemoveRedEye/>
+
+        <span>View Published</span>
       </UnstyledLink>
     </div>
   );
