@@ -39,6 +39,7 @@ const EditSection = () => {
         <Popover
           left
           open={isPopoverOpen}
+          onClose={() => setPopoverOpen(false)}
           trigger={
             <Button
               flat
