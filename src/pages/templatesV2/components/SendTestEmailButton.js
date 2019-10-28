@@ -20,7 +20,8 @@ const SendTestEmailButton = () => {
     showAlert,
     subaccountId,
     parsedTestData,
-    updateDraftV2
+    updateDraftV2,
+    setHasSaved
   } = useEditorContext();
   const {
     handleMultiEmailChange,
@@ -59,7 +60,10 @@ const SendTestEmailButton = () => {
         content,
         parsedTestData
       }, subaccountId)
-        .then(() => setModalLoading(false));
+        .then(() => {
+          setModalLoading(false);
+          setHasSaved(true);
+        });
     }
   };
 

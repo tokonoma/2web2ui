@@ -34,12 +34,14 @@ describe('SendTestEmailButton', () => {
     const sendPreviewV2 = jest.fn(() => promise);
     const showAlert = jest.fn(() => promise);
     const setTestDataV2 = jest.fn(() => promise);
+    const setHasSaved = jest.fn();
     const wrapper = subject({
       isPublishedMode: false,
       updateDraftV2,
       sendPreviewV2,
       showAlert,
-      setTestDataV2
+      setTestDataV2,
+      setHasSaved
     });
 
     wrapper.find('[children="Send a Test"]').simulate('click');
@@ -50,12 +52,18 @@ describe('SendTestEmailButton', () => {
       updateDraftV2,
       sendPreviewV2,
       showAlert,
-      setTestDataV2
+      setTestDataV2,
+      setHasSaved
     };
   };
 
   it('opens the modal and saves the draft when the "Send a Test" button is clicked', () => {
-    const { promise, wrapper, updateDraftV2 } = openModal();
+    const {
+      promise,
+      wrapper,
+      updateDraftV2,
+      setHasSaved
+    } = openModal();
 
     wrapper.find('[children="Send a Test"]').simulate('click');
 
@@ -65,6 +73,7 @@ describe('SendTestEmailButton', () => {
 
     return promise.then(() => {
       expect(wrapper.find('Loading')).not.toExist();
+      expect(setHasSaved).toHaveBeenCalled();
       expect(wrapper.find('[name="emailFrom"]')).toExist();
       expect(wrapper.find('[name="emailSubject"]')).toExist();
     });
