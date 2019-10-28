@@ -3,6 +3,7 @@ import { Panel } from '@sparkpost/matchbox';
 import CardSummary from './CardSummary';
 import PaymentForm from '../forms/fields/PaymentForm';
 import BillingAddressForm from '../forms/fields/BillingAddressForm';
+import { useFeatureChangeContext } from '../context/FeatureChangeContext';
 
 const FORMNAME = 'changePlan';
 
@@ -10,12 +11,18 @@ const CardSection = ({
   countries,
   selectedPlan,
   account,
-  useSavedCC,
   submitting,
+  canUpdateBillingInfo,
+  useSavedCC,
   handleCardToggle,
-  canUpdateBillingInfo
+  isNewChangePlanForm //TODO: remove this when removing the OldChangePlanForm
 }) => {
+  const { isReady, loading } = useFeatureChangeContext();
 
+
+  if ((!isReady || loading) && isNewChangePlanForm) {
+    return null;
+  }
   if (selectedPlan.isFree) {
     return null; // CC not required on free plans
   }
