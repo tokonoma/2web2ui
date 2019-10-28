@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import AceEditor from 'react-ace';
 import useEditor from '../hooks/useEditor';
 import 'brace/ext/searchbox';
@@ -12,14 +13,16 @@ const Editor = ({
   mode = 'text',
   setOptions = {},
   value = '',
+  readOnly,
   ...props
 }) => {
   const { setAnnotations, setEditor } = useEditor({ inlineErrors });
 
   return (
-    <div className={styles.EditorWrapper}>
+    <div className={classNames(styles.EditorWrapper, readOnly && styles.ReadOnly)}>
       <AceEditor
         {...props}
+        readOnly={readOnly}
         annotations={[]} // do not use, see useEditor
         cursorStart={1}
         editorProps={{

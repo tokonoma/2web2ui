@@ -11,4 +11,13 @@
     background: linear-gradient(to right, #ff594d 5px, transparent 5px) !important;
     color: inherit !important;
   }
+
+  &.ReadOnly {
+    opacity: 0.75;
+  }
+
+  &.ReadOnly,
+  &.ReadOnly :global(.ace_content) {
+    cursor: not-allowed;
+  }
 }
