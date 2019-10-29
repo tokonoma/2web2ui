@@ -12,12 +12,15 @@
     color: inherit !important;
   }
 
-  &.ReadOnly {
-    opacity: 0.75;
-  }
-
   &.ReadOnly,
   &.ReadOnly :global(.ace_content) {
     cursor: not-allowed;
+    user-select: none;
+  }
+
+   // Visually hide the cursor when in read only mode
+  &.ReadOnly :global(.ace_cursor) {
+    opacity: 0;
+    visibility: hidden;
   }
 }

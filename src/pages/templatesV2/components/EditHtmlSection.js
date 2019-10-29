@@ -13,6 +13,15 @@ const EditHtmlSection = () => {
       onChange={(value) => { setContent({ html: value }); }}
       value={content.html}
       readOnly={isPublishedMode}
+      editorProps={{
+        $cursor: {
+          element: {
+            style: {
+              opacity: 0
+            }
+          }
+        }
+      }}
     />
   );
 };
