@@ -5,6 +5,7 @@ import { Grid, Page, Panel } from '@sparkpost/matchbox';
 import { Loading } from 'src/components';
 import { getInboxPlacementByProviders, getAllInboxPlacementMessages, resetState } from 'src/actions/inboxPlacement';
 import { RedirectAndAlert } from 'src/components/globalAlert';
+import PageLink from 'src/components/pageLink';
 import StopTest from './components/StopTest';
 import AllMessagesCollection from './components/AllMessagesCollection';
 import InfoBlock from './components/InfoBlock';
@@ -12,7 +13,6 @@ import styles from './AllMessagesPage.module.scss';
 import { formatPercent } from 'src/helpers/units';
 
 export const AllMessagesPage = ({
-  history,
   id,
   filterType,
   filterName,
@@ -29,7 +29,6 @@ export const AllMessagesPage = ({
   StopTestComponent = StopTest,
   AllMessagesCollectionComponent = AllMessagesCollection
 }) => {
-
   const loadMessages = useCallback(() => {
     const filters = { [filterType]: filterName };
     filterType === 'mailbox-provider' ? getInboxPlacementByProviders(id) : undefined; //TODO add sending ip request
@@ -40,7 +39,6 @@ export const AllMessagesPage = ({
     loadMessages();
     return (() => resetState());
   }, [id, loadMessages, resetState]);
-
 
   if (loading) {
     return <Loading/>;
@@ -67,8 +65,9 @@ export const AllMessagesPage = ({
   return (
     <Page
       breadcrumbAction={{
+        component: PageLink,
         content: 'Inbox Placement Results',
-        onClick: () => history.push(`/inbox-placement/details/${id}`)
+        to: `/inbox-placement/details/${id}`
       }}
       title='Inbox Placement'
       subtitle={filterName}

@@ -16,8 +16,9 @@ exports[`Page: All Inbox Placement Messages Test renders page correctly with def
 <Page
   breadcrumbAction={
     Object {
+      "component": [Function],
       "content": "Inbox Placement Results",
-      "onClick": [Function],
+      "to": "/inbox-placement/details/0",
     }
   }
   empty={Object {}}
