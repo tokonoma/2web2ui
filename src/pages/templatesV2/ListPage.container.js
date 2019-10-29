@@ -25,7 +25,7 @@ function mapStateToProps(state) {
     loading: Boolean(state.templates.listLoading),
     error: state.templates.listError,
     canModify,
-    deletePending: Boolean(state.templates.deletePending),
+    isDeletePending: Boolean(state.templates.deletePending),
     isCreatePending: Boolean(state.templates.createPending)
   };
 }

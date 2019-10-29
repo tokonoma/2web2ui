@@ -8,7 +8,7 @@ describe('ListPage', () => {
     <ListPage
       canModify={true}
       hasSubaccounts={false}
-      deletePending={false}
+      isDeletePending={false}
       showAlert={jest.fn()}
       listTemplates={jest.fn()}
       loading={false}
