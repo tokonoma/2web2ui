@@ -74,7 +74,7 @@ export const AllMessagesCollection = ({ data = [], getInboxPlacementMessage, mes
               <LoadingSVG label="Loading" size='XSmall'/>
             ) : (
               <Button flat onClick={() => handleClick(messageId)} aria-expanded={isHeaderRowOpen}>
-                {isHeaderRowOpen ? 'View' : 'View'}
+                {isHeaderRowOpen ? 'Close' : 'View'}
               </Button>
             )}
           </Table.Cell>
