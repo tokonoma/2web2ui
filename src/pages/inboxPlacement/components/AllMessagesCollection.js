@@ -37,29 +37,31 @@ const WrapperComponent = ({ children }) => (
 );
 
 
-export const AllMessagesCollection = ({ data = [], getInboxPlacementMessage, testId, loading }) => {
+export const AllMessagesCollection = ({ data = [], getInboxPlacementMessage, messagesById, testId }) => {
   const [openHeaders, setOpenHeaders] = useState([]);
 
   const handleClick = (messageId) => {
+    const message = messagesById[messageId] || {};
+
     if (openHeaders.includes(messageId)) {
       const updatedOpenHeaders = openHeaders.filter((id) => id !== messageId);
       return setOpenHeaders(updatedOpenHeaders);
     }
 
-    if (data.find(({ id, headers }) => id === messageId && !headers)) {
+    if (message.status !== 'loaded') {
       getInboxPlacementMessage(testId, messageId);
     }
 
     return setOpenHeaders([...openHeaders, messageId]);
   };
 
-  const RowComponent = ({ email_address, folder, tab, dkim, spf, dmarc, id: messageId, headers }) => {
-    const isHeaderRowOpen = openHeaders.includes(messageId);
-    const isHeaderRowLoading = loading === messageId;
+  const RowComponent = ({ email_address, folder, tab, dkim, spf, dmarc, id: messageId }) => {
+    const message = messagesById[messageId] || {};
+    const isHeaderRowOpen = openHeaders.includes(messageId) && message.status === 'loaded';
 
     return (
       <>
-        <Table.Row className={classnames(styles.DataRow, openHeaders.includes(messageId) && styles.NoBottomBorder)}>
+        <Table.Row className={classnames(styles.DataRow, isHeaderRowOpen && styles.NoBottomBorder)}>
           <Table.Cell className={styles.SeedCell}>
             <h4>{email_address}</h4>
             <strong>{startCase(folder)}</strong> {tab && (` | ${startCase(tab)} Folder`)}
@@ -68,19 +70,19 @@ export const AllMessagesCollection = ({ data = [], getInboxPlacementMessage, tes
           <Table.Cell className={styles.Authentication}>{passFail(dkim)}</Table.Cell>
           <Table.Cell className={styles.Authentication}>{passFail(dmarc)}</Table.Cell>
           <Table.Cell className={classnames(styles.Authentication, !isHeaderRowOpen && styles.LeftBorder)}>
-            {isHeaderRowLoading ? (
+            {message.status === 'loading' ? (
               <LoadingSVG label="Loading" size='XSmall'/>
             ) : (
               <Button flat onClick={() => handleClick(messageId)} aria-expanded={isHeaderRowOpen}>
-                {isHeaderRowOpen ? 'Close' : 'View'}
+                {isHeaderRowOpen ? 'View' : 'View'}
               </Button>
             )}
           </Table.Cell>
         </Table.Row>
-        {isHeaderRowOpen && !isHeaderRowLoading && (
+        {isHeaderRowOpen && (
           <Table.Row>
             <Table.Cell colSpan={5}>
-              <CodeBlock height={200} code={headers || ''}/>
+              <CodeBlock height={200} code={message.headers || ''}/>
             </Table.Cell>
           </Table.Row>
         )}
@@ -99,10 +101,8 @@ export const AllMessagesCollection = ({ data = [], getInboxPlacementMessage, tes
     />);
 };
 
-function mapStateToProps(state) {
-  return {
-    loading: state.inboxPlacement.getMessagePending
-  };
-}
+const mapStateToProps = (state) => ({
+  messagesById: state.inboxPlacement.messagesById
+});
 
 export default connect(mapStateToProps, { getInboxPlacementMessage })(AllMessagesCollection);

@@ -6,7 +6,8 @@ export const initialState = {
   tests: [],
   stopTestPending: false,
   placementsByProvider: [],
-  allMessages: []
+  allMessages: [],
+  messagesById: {}
 };
 
 export default (state = initialState, { type, payload, meta }) => {
@@ -54,7 +55,13 @@ export default (state = initialState, { type, payload, meta }) => {
       return { ...state, getTestContentPending: false, getTestContentError: payload };
 
     case 'GET_ALL_INBOX_PLACEMENT_MESSAGES_PENDING':
-      return { ...state, getAllMessagesPending: true, getAllMessagesError: null, allMessages: []};
+      return {
+        ...state,
+        allMessages: [],
+        getAllMessagesError: null,
+        getAllMessagesPending: true,
+        messagesById: {} // need to reset
+      };
     case 'GET_ALL_INBOX_PLACEMENT_MESSAGES_SUCCESS':
       return { ...state, getAllMessagesPending: false, allMessages: payload, getAllMessagesError: null };
     case 'GET_ALL_INBOX_PLACEMENT_MESSAGES_FAIL':
@@ -64,14 +71,38 @@ export default (state = initialState, { type, payload, meta }) => {
       return initialState;
 
     case 'GET_INBOX_PLACEMENT_MESSAGE_PENDING':
-      return { ...state, getMessagePending: meta.context.messageId, getMessageError: null };
-    case 'GET_INBOX_PLACEMENT_MESSAGE_SUCCESS': {
-      const message = state.allMessages.find(({ id }) => id === payload.id);
-      message.headers = payload.headers;
-      return { ...state, getMessagePending: false, allMessages: state.allMessages, getMessageError: null };
-    }
+      return {
+        ...state,
+        messagesById: {
+          ...state.messagesById,
+          [meta.context.messageId]: {
+            status: 'loading'
+          }
+        }
+      };
+
+    case 'GET_INBOX_PLACEMENT_MESSAGE_SUCCESS':
+      return {
+        ...state,
+        messagesById: {
+          ...state.messagesById,
+          [meta.context.messageId]: {
+            ...payload,
+            status: 'loaded'
+          }
+        }
+      };
+
     case 'GET_INBOX_PLACEMENT_MESSAGE_FAIL':
-      return { ...state, getMessagePending: false, getMessageError: payload };
+      return {
+        ...state,
+        messagesById: {
+          ...state.messagesById,
+          [meta.context.messageId]: {
+            status: 'error'
+          }
+        }
+      };
 
     default:
       return state;

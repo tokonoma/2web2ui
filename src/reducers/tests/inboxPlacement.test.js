@@ -63,12 +63,13 @@ const TEST_CASES = {
     meta: { context: { messageId: 101 }}
   },
   'get specific inbox placement test messages success': {
-    payload: { id: 1, headers: 'fake headers' },
     type: 'GET_INBOX_PLACEMENT_MESSAGE_SUCCESS',
+    meta: { context: { messageId: 1 }},
+    payload: { id: 1, headers: 'fake headers' },
     state: { ...initialState, allMessages: [{ id: 1 }]}
   },
   'get specific inbox placement test messages fail': {
-    payload: { errors: [ { message: 'Some error occurred' }]},
+    meta: { context: { messageId: 101 }},
     type: 'GET_INBOX_PLACEMENT_MESSAGE_FAIL'
   }
 };
