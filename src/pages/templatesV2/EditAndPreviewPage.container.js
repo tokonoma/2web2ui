@@ -13,6 +13,7 @@ import {
   setTestDataV2,
   getTestDataV2
 } from 'src/actions/templates';
+import { getSnippets } from 'src/actions/snippets';
 import { list as listDomains } from 'src/actions/sendingDomains';
 import { list as listSubaccounts } from 'src/actions/subaccounts';
 import {
@@ -39,9 +40,11 @@ const mapStateToProps = (state, props) => {
   const draftOrPublished = draft || published;
   const hasDraft = draftOrPublished && draftOrPublished.has_draft;
   const hasPublished = draftOrPublished && draftOrPublished.has_published;
+  const snippets = state.snippets.items;
 
   return {
     draft,
+    snippets,
     published,
     isPublishedMode,
     hasDraft,
@@ -52,6 +55,7 @@ const mapStateToProps = (state, props) => {
     isDeletePending: state.templates.deletePending,
     isDraftUpdating: Boolean(state.templates.updating),
     isDraftPublishing: Boolean(state.templates.publishPending),
+    areSnippetsLoading: Boolean(state.snippets.loading),
     preview: selectDraftTemplatePreview(state, id, {}),
     previewLineErrors: selectPreviewLineErrors(state),
     templateTestData: selectTemplateTestData(state)
@@ -71,7 +75,8 @@ const mapDispatchToProps = {
   listSubaccounts,
   showAlert,
   setTestDataV2,
-  getTestDataV2
+  getTestDataV2,
+  getSnippets
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditAndPreviewPageContainer);
