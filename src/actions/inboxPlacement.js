@@ -75,7 +75,7 @@ export function getAllInboxPlacementMessages(id, filters) {
 
 export function resetState() {
   return (dispatch) => dispatch({
-    type: 'RESET_STATE'
+    type: 'RESET_INBOX_PLACEMENT'
   });
 }
 

@@ -60,7 +60,7 @@ export default (state = initialState, { type, payload, meta }) => {
     case 'GET_ALL_INBOX_PLACEMENT_MESSAGES_FAIL':
       return { ...state, getAllMessagesPending: false, getAllMessagesError: payload };
 
-    case 'RESET_STATE':
+    case 'RESET_INBOX_PLACEMENT':
       return initialState;
 
     case 'GET_INBOX_PLACEMENT_MESSAGE_PENDING':
