@@ -37,6 +37,10 @@ describe('CancellationPanel', () => {
     expect(getButton({ enabled: true, to: bbUrl }).prop('to')).toEqual(bbUrl);
   });
 
+  it('cancellation button is destructive variant', () => {
+    expect(getButton().prop('destructive')).toBeTruthy();
+  });
+
   it('refresh button renews account and retrieves new account state', async () => {
     const renewAccount = jest.fn(() => Promise.resolve());
     const showAlert = jest.fn();
