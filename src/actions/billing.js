@@ -5,7 +5,7 @@ import { list as getSendingIps } from './sendingIps';
 import { isAws } from 'src/helpers/conditions/account';
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
 import zuoraRequest from 'src/actions/helpers/zuoraRequest';
-import { MOCK_BUNDLES, getMockSubscription } from './helpers/mockData';
+import { MOCK_BUNDLES, MOCK_PLANS } from './helpers/mockData';
 import mockThunk from './helpers/mockThunk'; //TODO: Remove
 
 export function syncSubscription({ meta = {}} = {}) {
@@ -185,27 +185,29 @@ export function getBillingCountries() {
 }
 
 export function getBundles() {
-  //TODO: Replace with sparkpostApiRequest
   return mockThunk({
     type: 'GET_BUNDLES',
     meta: {
       method: 'GET',
       url: '/v1/billing/bundles'
-    }
-  }, { data: MOCK_BUNDLES } //TODO: Delete mock response
-  );
+    }}, { data: MOCK_BUNDLES, delay: 1500 }); //TODO: Delete mock response
 }
 
-export function getSubscription(index) {
-
-  const mockData = getMockSubscription(index);
-  //TODO: Replace with sparkpostApiRequest
+export function getPlans() {
   return mockThunk({
+    type: 'GET_NEW_PLANS',
+    meta: {
+      method: 'GET',
+      url: '/v1/billing/plans'
+    }}, { data: MOCK_PLANS, delay: 1000 }); //TODO: Delete mock plans
+}
+
+export function getSubscription() {
+  return sparkpostApiRequest({
     type: 'GET_SUBSCRIPTION',
     meta: {
       method: 'GET',
       url: '/v1/billing/subscription'
     }
-  }, { data: mockData, delay: 500 }//TODO: Delete mock response
-  );
+  });
 }
