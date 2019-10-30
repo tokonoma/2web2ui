@@ -14,7 +14,7 @@ describe('CancellationPanel', () => {
     fetchAccount = {() => {}}
     {...props}/>);
 
-  const getButton = ({ wrapper = subject(), enabled = false, to = '' }) => wrapper
+  const getButton = ({ wrapper = subject(), enabled = false, to = '' } = {}) => wrapper
     .find(Brightback)
     .renderProp('render')({ enabled, to });
 
