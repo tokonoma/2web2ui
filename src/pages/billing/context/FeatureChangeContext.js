@@ -28,15 +28,13 @@ export const FeatureChangeProvider = ({
 
 
   //Rechecks conditions on re-entering tab. Only initializes once
-  //TODO: Remove index
-  const [index, setIndex] = useState(0);
-  const checkConditions = useCallback(() => { getSubscription(index); setIndex(index + 1); }, [index, getSubscription]);
+  const checkConditions = useCallback(() => { getSubscription(); }, [getSubscription]);
   useEffect(() => {
     window.addEventListener('focus', checkConditions);
     return () => {
       window.removeEventListener('focus', checkConditions);
     };
-  }, [checkConditions, index]); //TODO: Remove index
+  }, [checkConditions]);
 
   //Keys the selected plan by product to make for easier comparison
   const selectedPlansByProduct = useMemo(() => {
