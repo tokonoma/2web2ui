@@ -75,6 +75,19 @@ export function getAllInboxPlacementMessages(id, filters) {
 
 export function resetState() {
   return (dispatch) => dispatch({
-    type: 'RESET_STATE'
+    type: 'RESET_INBOX_PLACEMENT'
+  });
+}
+
+export function getInboxPlacementMessage(testId, messageId) {
+  return sparkpostApiRequest({
+    type: 'GET_INBOX_PLACEMENT_MESSAGE',
+    meta: {
+      method: 'GET',
+      url: `/v1/inbox-placement/${testId}/messages/${messageId}`,
+      context: {
+        messageId
+      }
+    }
   });
 }

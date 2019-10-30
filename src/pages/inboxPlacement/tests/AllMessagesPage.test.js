@@ -2,6 +2,7 @@ import { mount, shallow } from 'enzyme';
 import React from 'react';
 import { AllMessagesPage } from '../AllMessagesPage';
 import { StopTest } from '../components/StopTest';
+import { AllMessagesCollection } from '../components/AllMessagesCollection';
 import { BrowserRouter as Router } from 'react-router-dom';
 
 
@@ -26,7 +27,8 @@ describe('Page: All Inbox Placement Messages Test', () => {
       error: false,
       history: {
         replace: jest.fn()
-      }
+      },
+      messages: []
     };
 
     return shallow(<AllMessagesPage {...defaults} {...props} />);
@@ -58,6 +60,7 @@ describe('Page: All Inbox Placement Messages Test', () => {
           history={{ replace: jest.fn() }}
           error={null}
           StopTestComponent={StopTest}
+          AllMessagesCollectionComponent={AllMessagesCollection}
           {...props}/>
       </Router>);
 
@@ -91,4 +94,3 @@ describe('Page: All Inbox Placement Messages Test', () => {
     expect(wrapper.find('Page')).not.toExist();
   });
 });
-

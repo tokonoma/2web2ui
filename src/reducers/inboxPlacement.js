@@ -1,4 +1,4 @@
-const initialState = {
+export const initialState = {
   currentTestDetails: {},
   seedsPending: false,
   seeds: [],
@@ -6,10 +6,11 @@ const initialState = {
   tests: [],
   stopTestPending: false,
   placementsByProvider: [],
-  allMessages: []
+  allMessages: [],
+  messagesById: {}
 };
 
-export default (state = initialState, { type, payload }) => {
+export default (state = initialState, { type, payload, meta }) => {
   switch (type) {
     case 'LIST_TESTS_PENDING':
       return { ...state, testsPending: true, testsError: null };
@@ -54,14 +55,54 @@ export default (state = initialState, { type, payload }) => {
       return { ...state, getTestContentPending: false, getTestContentError: payload };
 
     case 'GET_ALL_INBOX_PLACEMENT_MESSAGES_PENDING':
-      return { ...state, getAllMessagesPending: true, getAllMessagesError: null, allMessages: []};
+      return {
+        ...state,
+        allMessages: [],
+        getAllMessagesError: null,
+        getAllMessagesPending: true,
+        messagesById: {} // need to reset
+      };
     case 'GET_ALL_INBOX_PLACEMENT_MESSAGES_SUCCESS':
       return { ...state, getAllMessagesPending: false, allMessages: payload, getAllMessagesError: null };
     case 'GET_ALL_INBOX_PLACEMENT_MESSAGES_FAIL':
       return { ...state, getAllMessagesPending: false, getAllMessagesError: payload };
 
-    case 'RESET_STATE':
-      return { state: initialState };
+    case 'RESET_INBOX_PLACEMENT':
+      return initialState;
+
+    case 'GET_INBOX_PLACEMENT_MESSAGE_PENDING':
+      return {
+        ...state,
+        messagesById: {
+          ...state.messagesById,
+          [meta.context.messageId]: {
+            status: 'loading'
+          }
+        }
+      };
+
+    case 'GET_INBOX_PLACEMENT_MESSAGE_SUCCESS':
+      return {
+        ...state,
+        messagesById: {
+          ...state.messagesById,
+          [meta.context.messageId]: {
+            ...payload,
+            status: 'loaded'
+          }
+        }
+      };
+
+    case 'GET_INBOX_PLACEMENT_MESSAGE_FAIL':
+      return {
+        ...state,
+        messagesById: {
+          ...state.messagesById,
+          [meta.context.messageId]: {
+            status: 'error'
+          }
+        }
+      };
 
     default:
       return state;

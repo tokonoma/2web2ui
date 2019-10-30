@@ -16,8 +16,9 @@ exports[`Page: All Inbox Placement Messages Test renders page correctly with def
 <Page
   breadcrumbAction={
     Object {
+      "component": [Function],
       "content": "Inbox Placement Results",
-      "onClick": [Function],
+      "to": "/inbox-placement/details/0",
     }
   }
   empty={Object {}}
@@ -29,12 +30,9 @@ exports[`Page: All Inbox Placement Messages Test renders page correctly with def
   }
   title="Inbox Placement"
 >
-  <Panel>
-    <Panel.Section>
-      <h3>
-        Diagnostics
-      </h3>
-    </Panel.Section>
+  <Panel
+    title="Diagnostics"
+  >
     <Grid>
       <Grid.Column
         lg={7}
@@ -150,7 +148,10 @@ exports[`Page: All Inbox Placement Messages Test renders page correctly with def
   <Panel
     title="Seed Diagnostics"
   >
-    <AllMessagesCollection />
+    <Connect(AllMessagesCollection)
+      data={Array []}
+      testId={0}
+    />
   </Panel>
 </Page>
 `;

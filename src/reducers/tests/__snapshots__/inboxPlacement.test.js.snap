@@ -12,6 +12,7 @@ Object {
     ],
   },
   "getAllMessagesPending": false,
+  "messagesById": Object {},
   "placementsByProvider": Array [],
   "seeds": Array [],
   "seedsPending": false,
@@ -27,6 +28,7 @@ Object {
   "currentTestDetails": Object {},
   "getAllMessagesError": null,
   "getAllMessagesPending": true,
+  "messagesById": Object {},
   "placementsByProvider": Array [],
   "seeds": Array [],
   "seedsPending": false,
@@ -44,6 +46,7 @@ Object {
   "currentTestDetails": Object {},
   "getAllMessagesError": null,
   "getAllMessagesPending": false,
+  "messagesById": Object {},
   "placementsByProvider": Array [],
   "seeds": Array [],
   "seedsPending": false,
@@ -59,6 +62,7 @@ Object {
   "currentTestDetails": Object {},
   "getTestContentError": null,
   "getTestContentPending": true,
+  "messagesById": Object {},
   "placementsByProvider": Array [],
   "seeds": Array [],
   "seedsPending": false,
@@ -80,6 +84,7 @@ Object {
     ],
   },
   "getTestContentPending": false,
+  "messagesById": Object {},
   "placementsByProvider": Array [],
   "seeds": Array [],
   "seedsPending": false,
@@ -98,6 +103,67 @@ Object {
   "currentTestDetails": Object {},
   "getTestContentError": null,
   "getTestContentPending": false,
+  "messagesById": Object {},
+  "placementsByProvider": Array [],
+  "seeds": Array [],
+  "seedsPending": false,
+  "stopTestPending": false,
+  "tests": Array [],
+  "testsPending": true,
+}
+`;
+
+exports[`Inbox Placement Reducer get specific inbox placement test messages fail 1`] = `
+Object {
+  "allMessages": Array [],
+  "currentTestDetails": Object {},
+  "messagesById": Object {
+    "101": Object {
+      "status": "error",
+    },
+  },
+  "placementsByProvider": Array [],
+  "seeds": Array [],
+  "seedsPending": false,
+  "stopTestPending": false,
+  "tests": Array [],
+  "testsPending": true,
+}
+`;
+
+exports[`Inbox Placement Reducer get specific inbox placement test messages pending 1`] = `
+Object {
+  "allMessages": Array [],
+  "currentTestDetails": Object {},
+  "messagesById": Object {
+    "101": Object {
+      "status": "loading",
+    },
+  },
+  "placementsByProvider": Array [],
+  "seeds": Array [],
+  "seedsPending": false,
+  "stopTestPending": false,
+  "tests": Array [],
+  "testsPending": true,
+}
+`;
+
+exports[`Inbox Placement Reducer get specific inbox placement test messages success 1`] = `
+Object {
+  "allMessages": Array [
+    Object {
+      "id": 1,
+    },
+  ],
+  "currentTestDetails": Object {},
+  "messagesById": Object {
+    "1": Object {
+      "headers": "fake headers",
+      "id": 1,
+      "status": "loaded",
+    },
+  },
   "placementsByProvider": Array [],
   "seeds": Array [],
   "seedsPending": false,
@@ -113,6 +179,7 @@ Object {
   "currentTestDetails": Object {},
   "getTestError": null,
   "getTestPending": true,
+  "messagesById": Object {},
   "placementsByProvider": Array [],
   "seeds": Array [],
   "seedsPending": false,
@@ -134,6 +201,7 @@ Object {
     ],
   },
   "getTestPending": false,
+  "messagesById": Object {},
   "placementsByProvider": Array [],
   "seeds": Array [],
   "seedsPending": false,
@@ -151,6 +219,7 @@ Object {
   },
   "getTestError": null,
   "getTestPending": false,
+  "messagesById": Object {},
   "placementsByProvider": Array [],
   "seeds": Array [],
   "seedsPending": false,
@@ -164,6 +233,7 @@ exports[`Inbox Placement Reducer list seeds fail 1`] = `
 Object {
   "allMessages": Array [],
   "currentTestDetails": Object {},
+  "messagesById": Object {},
   "placementsByProvider": Array [],
   "seeds": Array [],
   "seedsError": undefined,
@@ -178,6 +248,7 @@ exports[`Inbox Placement Reducer list seeds pending 1`] = `
 Object {
   "allMessages": Array [],
   "currentTestDetails": Object {},
+  "messagesById": Object {},
   "placementsByProvider": Array [],
   "seeds": Array [],
   "seedsError": null,
@@ -192,6 +263,7 @@ exports[`Inbox Placement Reducer list seeds success 1`] = `
 Object {
   "allMessages": Array [],
   "currentTestDetails": Object {},
+  "messagesById": Object {},
   "placementsByProvider": Array [],
   "seeds": undefined,
   "seedsError": null,
@@ -206,6 +278,7 @@ exports[`Inbox Placement Reducer list tests fail 1`] = `
 Object {
   "allMessages": Array [],
   "currentTestDetails": Object {},
+  "messagesById": Object {},
   "placementsByProvider": Array [],
   "seeds": Array [],
   "seedsPending": false,
@@ -226,6 +299,7 @@ exports[`Inbox Placement Reducer list tests pending 1`] = `
 Object {
   "allMessages": Array [],
   "currentTestDetails": Object {},
+  "messagesById": Object {},
   "placementsByProvider": Array [],
   "seeds": Array [],
   "seedsPending": false,
@@ -240,6 +314,7 @@ exports[`Inbox Placement Reducer list tests success 1`] = `
 Object {
   "allMessages": Array [],
   "currentTestDetails": Object {},
+  "messagesById": Object {},
   "placementsByProvider": Array [],
   "seeds": Array [],
   "seedsPending": false,
@@ -254,15 +329,14 @@ Object {
 
 exports[`Inbox Placement Reducer resets State 1`] = `
 Object {
-  "state": Object {
-    "allMessages": Array [],
-    "currentTestDetails": Object {},
-    "placementsByProvider": Array [],
-    "seeds": Array [],
-    "seedsPending": false,
-    "stopTestPending": false,
-    "tests": Array [],
-    "testsPending": true,
-  },
+  "allMessages": Array [],
+  "currentTestDetails": Object {},
+  "messagesById": Object {},
+  "placementsByProvider": Array [],
+  "seeds": Array [],
+  "seedsPending": false,
+  "stopTestPending": false,
+  "tests": Array [],
+  "testsPending": true,
 }
 `;

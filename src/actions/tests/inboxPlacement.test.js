@@ -14,6 +14,7 @@ describe('Action Creator: Inbox Placement', () => {
       }
     });
   });
+
   it('it makes request to list tests', async () => {
     await inboxPlacement.listTests();
     expect(sparkpostApiRequest).toHaveBeenCalledWith({
@@ -77,7 +78,21 @@ describe('Action Creator: Inbox Placement', () => {
     const dispatchMock = jest.fn((a) => a);
     const action = inboxPlacement.resetState()(dispatchMock);
     expect(action).toEqual(
-      { type: 'RESET_STATE' }
+      { type: 'RESET_INBOX_PLACEMENT' }
     );
+  });
+
+  it('makes request to get a specific message', async () => {
+    await inboxPlacement.getInboxPlacementMessage(1, 101);
+    expect(sparkpostApiRequest).toHaveBeenCalledWith({
+      type: 'GET_INBOX_PLACEMENT_MESSAGE',
+      meta: {
+        method: 'GET',
+        url: '/v1/inbox-placement/1/messages/101',
+        context: {
+          messageId: 101
+        }
+      }
+    });
   });
 });
