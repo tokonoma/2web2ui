@@ -57,6 +57,7 @@ export const Status = (rowData) => {
 
 export const DeleteAction = ({ onClick, ...props }) => (
   <Button
+    {...props}
     className={styles.Action}
     flat
     onClick={() => onClick(props)}
@@ -69,6 +70,7 @@ export const DeleteAction = ({ onClick, ...props }) => (
 
 export const DuplicateAction = ({ onClick, ...props }) => (
   <Button
+    {...props}
     className={styles.Action}
     flat
     onClick={() => onClick(props)}

@@ -63,11 +63,13 @@ const RecentActivity = (props) => {
                         <DuplicateAction
                           className={styles.RecentActivityAction}
                           onClick={() => onToggleDuplicateModal(template)}
+                          data-id="recent-activity-button-duplicate"
                         />
 
                         <DeleteAction
                           className={styles.RecentActivityAction}
                           onClick={() => onToggleDeleteModal(template)}
+                          data-id="recent-activity-button-delete"
                         />
                       </div>
                     </div>
