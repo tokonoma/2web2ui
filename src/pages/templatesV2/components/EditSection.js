@@ -45,6 +45,7 @@ const EditSection = () => {
               flat
               className={styles.MoreButton}
               onClick={() => setPopoverOpen(!isPopoverOpen)}
+              data-id="popover-trigger-more"
             >
               <MoreVert/>
 
