@@ -12,7 +12,7 @@ exports[`AccountDropdown activator should render an icon on desktop if email doe
     size={24}
   />
   <ScreenReaderOnly>
-     Settings
+    Settings
   </ScreenReaderOnly>
 </UnstyledLink>
 `;
@@ -29,7 +29,7 @@ exports[`AccountDropdown activator should render an icon on mobile 1`] = `
     size={24}
   />
   <ScreenReaderOnly>
-     Settings
+    Settings
   </ScreenReaderOnly>
 </UnstyledLink>
 `;
@@ -43,10 +43,10 @@ exports[`AccountDropdown activator should render email address on desktop 1`] = 
   to="javascript:void(0);"
 >
   test@testing.com
-   
+   
   <ArrowDropDown />
   <ScreenReaderOnly>
-     Settings
+    Settings
   </ScreenReaderOnly>
 </UnstyledLink>
 `;
