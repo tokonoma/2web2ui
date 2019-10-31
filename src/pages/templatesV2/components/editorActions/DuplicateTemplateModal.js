@@ -102,7 +102,7 @@ const DuplicateTemplateModal = (props) => {
   if (isLoading) {
     return (
       <ModalWrapper {...modalProps}>
-        <PanelLoading minHeight={'300px'}/>
+        <PanelLoading minHeight={'325px'}/>
       </ModalWrapper>
     );
   }
