@@ -4,6 +4,8 @@ exports[`PublishedModeActions renders published actions 1`] = `
 <Button.Group>
   <Button
     className="Actions"
+    data-id="button-edit-draft"
+    role="button"
     size="default"
     to="/templatesv2/edit/123/draft/content?subaccount=abcd"
   >
@@ -23,6 +25,7 @@ exports[`PublishedModeActions renders published actions 1`] = `
       trigger={
         <Button
           aria-expanded="false"
+          data-id="popover-trigger-editor-actions"
           onClick={[Function]}
           size="default"
         >
@@ -40,6 +43,8 @@ exports[`PublishedModeActions renders published actions 1`] = `
           className="ActionItem"
         >
           <PageLink
+            data-id="action-edit-draft"
+            role="button"
             to="/templatesv2/edit/123/draft/content?subaccount=abcd"
           >
             <FileEdit />

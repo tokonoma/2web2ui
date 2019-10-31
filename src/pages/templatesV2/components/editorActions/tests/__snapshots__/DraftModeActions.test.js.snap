@@ -22,6 +22,7 @@ exports[`DraftModeActions renders draft actions 1`] = `
       trigger={
         <Button
           aria-expanded="false"
+          data-id="popover-actions-trigger"
           onClick={[Function]}
           size="default"
         >

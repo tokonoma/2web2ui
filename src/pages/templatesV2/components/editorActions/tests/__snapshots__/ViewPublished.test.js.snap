@@ -5,10 +5,14 @@ exports[`ViewPublished renders ViewPublished action 1`] = `
   className="Foo"
 >
   <UnstyledLink
+    data-id="action-view-published"
     onClick={[Function]}
+    to="javascript:void(0);"
   >
     <RemoveRedEye />
-    View Published
+    <span>
+      View Published
+    </span>
   </UnstyledLink>
 </div>
 `;
