@@ -7,10 +7,9 @@ exports[`RecipientListForm defaults to create mode 1`] = `
       <Panel.Section>
         <Field
           component={[Function]}
-          label="Label"
+          label="Name"
           name="name"
           placeholder="My favorite recipients"
-          required={true}
           validate={
             Array [
               [Function],
@@ -20,10 +19,9 @@ exports[`RecipientListForm defaults to create mode 1`] = `
         />
         <Field
           component={[Function]}
-          label="Identifier"
+          label="ID"
           name="id"
           placeholder="my-favorite-recipients"
-          required={true}
           validate={
             Array [
               [Function],
@@ -58,7 +56,6 @@ exports[`RecipientListForm defaults to create mode 1`] = `
           }
           label="Upload a CSV file of recipients"
           name="csv"
-          required={true}
           validate={
             Array [
               [Function],
@@ -103,10 +100,9 @@ exports[`RecipientListForm renders CSV errors 1`] = `
       <Panel.Section>
         <Field
           component={[Function]}
-          label="Label"
+          label="Name"
           name="name"
           placeholder="My favorite recipients"
-          required={true}
           validate={
             Array [
               [Function],
@@ -116,10 +112,9 @@ exports[`RecipientListForm renders CSV errors 1`] = `
         />
         <Field
           component={[Function]}
-          label="Identifier"
+          label="ID"
           name="id"
           placeholder="my-favorite-recipients"
-          required={true}
           validate={
             Array [
               [Function],
@@ -154,7 +149,6 @@ exports[`RecipientListForm renders CSV errors 1`] = `
           }
           label="Upload a CSV file of recipients"
           name="csv"
-          required={true}
           validate={
             Array [
               [Function],
@@ -186,10 +180,9 @@ exports[`RecipientListForm renders correctly in create mode 1`] = `
       <Panel.Section>
         <Field
           component={[Function]}
-          label="Label"
+          label="Name"
           name="name"
           placeholder="My favorite recipients"
-          required={true}
           validate={
             Array [
               [Function],
@@ -199,10 +192,9 @@ exports[`RecipientListForm renders correctly in create mode 1`] = `
         />
         <Field
           component={[Function]}
-          label="Identifier"
+          label="ID"
           name="id"
           placeholder="my-favorite-recipients"
-          required={true}
           validate={
             Array [
               [Function],
@@ -237,7 +229,6 @@ exports[`RecipientListForm renders correctly in create mode 1`] = `
           }
           label="Upload a CSV file of recipients"
           name="csv"
-          required={true}
           validate={
             Array [
               [Function],
@@ -269,10 +260,9 @@ exports[`RecipientListForm renders correctly in edit mode 1`] = `
       <Panel.Section>
         <Field
           component={[Function]}
-          label="Label"
+          label="Name"
           name="name"
           placeholder="My favorite recipients"
-          required={true}
           validate={
             Array [
               [Function],
@@ -307,7 +297,6 @@ exports[`RecipientListForm renders correctly in edit mode 1`] = `
           }
           label="Optional: Upload a CSV file of recipients to replace the existing recipients in this list"
           name="csv"
-          required={true}
           validate={
             Array [
               [Function],
@@ -339,10 +328,9 @@ exports[`RecipientListForm should disable form elements on submit 1`] = `
         <Field
           component={[Function]}
           disabled={true}
-          label="Label"
+          label="Name"
           name="name"
           placeholder="My favorite recipients"
-          required={true}
           validate={
             Array [
               [Function],
@@ -353,10 +341,9 @@ exports[`RecipientListForm should disable form elements on submit 1`] = `
         <Field
           component={[Function]}
           disabled={true}
-          label="Identifier"
+          label="ID"
           name="id"
           placeholder="my-favorite-recipients"
-          required={true}
           validate={
             Array [
               [Function],
@@ -393,7 +380,6 @@ exports[`RecipientListForm should disable form elements on submit 1`] = `
           }
           label="Upload a CSV file of recipients"
           name="csv"
-          required={true}
           validate={
             Array [
               [Function],
