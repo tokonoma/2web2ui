@@ -59,7 +59,7 @@ exports[`EditSection renders tabs and section 1`] = `
           onClick={[Function]}
           size="default"
         >
-          <MoreVert />
+          <MoreHoriz />
           <ScreenReaderOnly>
             More
           </ScreenReaderOnly>
