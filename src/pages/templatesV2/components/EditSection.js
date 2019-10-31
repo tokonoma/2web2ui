@@ -58,7 +58,10 @@ const EditSection = () => {
               [
                 {
                   content: 'Insert Snippet',
-                  onClick: () => handleInsertSnippetClick()
+                  onClick: () => handleInsertSnippetClick(),
+                  role: 'button',
+                  href: 'javascript:void(0);',
+                  'data-id': 'popover-action-insert-snippet'
                 }
               ]
             }
