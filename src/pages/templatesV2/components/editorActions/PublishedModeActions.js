@@ -76,7 +76,11 @@ const PublishedModeActions = () => {
         >
           <div className={styles.ActionsBody}>
             <div className={styles.ActionItem}>
-              <PageLink to={editDraftTo}>
+              <PageLink
+                to={editDraftTo}
+                data-id="action-edit-draft"
+                role="button"
+              >
                 <FileEdit/>
 
                 {draftText}
