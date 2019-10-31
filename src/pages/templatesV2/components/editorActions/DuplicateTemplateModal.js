@@ -6,9 +6,27 @@ import {
   TextField,
   Button
 } from '@sparkpost/matchbox';
-import Loading from 'src/components/loading';
 import ButtonWrapper from 'src/components/buttonWrapper';
-import styles from './DuplicateTemplateModal.module.scss';
+import PanelLoading from 'src/components/panelLoading';
+
+const ModalWrapper = (props) => {
+  const {
+    open,
+    onClose,
+    showCloseButton,
+    children
+  } = props;
+
+  return (
+    <Modal
+      open={open}
+      onClose={onClose}
+      showCloseButton={showCloseButton}
+    >
+      {children}
+    </Modal>
+  );
+};
 
 const DuplicateTemplateModal = (props) => {
   const {
@@ -19,8 +37,14 @@ const DuplicateTemplateModal = (props) => {
     testDataToDuplicate,
     createTemplate,
     successCallback,
-    showAlert
+    showAlert,
+    isLoading
   } = props;
+  const modalProps = {
+    open,
+    onClose,
+    showCloseButton: true
+  };
   const initialDraftName = (template && template.name) ? `${template.name} (COPY)` : '';
   const initialDraftId = (template && template.id) ? `${template.id}-copy` : '';
 
@@ -29,7 +53,6 @@ const DuplicateTemplateModal = (props) => {
   const [draftId, setDraftId] = useState(initialDraftId);
   const [hasNameError, setNameError] = useState(false);
   const [hasIdError, setIdError] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     setDraftName(initialDraftName);
@@ -48,8 +71,6 @@ const DuplicateTemplateModal = (props) => {
     }
 
     if (draftName.length && draftId.length) {
-      setIsLoading(true);
-
       createTemplate({
         name: draftName,
         id: draftId,
@@ -69,8 +90,7 @@ const DuplicateTemplateModal = (props) => {
 
             onClose();
           }
-        })
-        .finally(() => setIsLoading(false));
+        });
     }
   };
 
@@ -84,54 +104,50 @@ const DuplicateTemplateModal = (props) => {
     setDraftId(e.target.value);
   };
 
+  if (isLoading) {
+    return (
+      <ModalWrapper {...modalProps}>
+        <PanelLoading minHeight={'300px'}/>
+      </ModalWrapper>
+    );
+  }
+
   return (
-    <Modal
-      open={open}
-      onClose={onClose}
-      showCloseButton={true}
-    >
+    <ModalWrapper {...modalProps}>
       <Panel
         accent
         title="Duplicate Template"
         sectioned
       >
-        {isLoading &&
-          <div className={styles.LoadingWrapper}>
-            <Loading className={styles.Loading}/>
-          </div>
-        }
+        <form onSubmit={(e) => handleSubmit(e)}>
+          <TextField
+            id="template-name"
+            name="templateName"
+            label="Template Name"
+            required // not working as I would expect...
+            value={draftName}
+            error={hasNameError ? 'Please enter a template name.' : undefined}
+            onChange={handleNameChange}
+          />
 
-        {!isLoading &&
-          <form onSubmit={(e) => handleSubmit(e)}>
-            <TextField
-              id="template-name"
-              name="templateName"
-              label="Template Name"
-              required // not working as I would expect...
-              value={draftName}
-              error={hasNameError ? 'Please enter a template name.' : undefined}
-              onChange={handleNameChange}
-            />
+          <TextField
+            id="template-id"
+            name="templateId"
+            label="Template ID"
+            required // not working as I would expect...
+            value={draftId}
+            error={hasIdError ? 'Please enter a unique template ID.' : undefined}
+            onChange={handleIdChange}
+          />
 
-            <TextField
-              id="template-id"
-              name="templateId"
-              label="Template ID"
-              required // not working as I would expect...
-              value={draftId}
-              error={hasIdError ? 'Please enter a unique template ID.' : undefined}
-              onChange={handleIdChange}
-            />
-
-            <ButtonWrapper>
-              <Button color="orange" submit>
-                Duplicate
-              </Button>
-            </ButtonWrapper>
-          </form>
-        }
+          <ButtonWrapper>
+            <Button color="orange" submit>
+              Duplicate
+            </Button>
+          </ButtonWrapper>
+        </form>
       </Panel>
-    </Modal>
+    </ModalWrapper>
   );
 };
 

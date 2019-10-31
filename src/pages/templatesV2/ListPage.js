@@ -149,7 +149,7 @@ export default class ListPage extends Component {
       listTemplates,
       loading,
       templates,
-      deletePending
+      isDeletePending
     } = this.props;
 
     if (loading) {
@@ -216,7 +216,7 @@ export default class ListPage extends Component {
               content={<p>Both the draft and published versions of this template will be deleted.</p>}
               onCancel={this.toggleDeleteModal}
               onDelete={this.deleteTemplate}
-              isPending={deletePending}
+              isPending={isDeletePending}
             />
 
             <DuplicateTemplateModal
@@ -229,6 +229,7 @@ export default class ListPage extends Component {
               contentToDuplicate={this.state.templateToDuplicate && this.state.templateToDuplicate.content}
               testDataToDuplicate={this.state.testDataToDuplicate}
               isPublishedMode={this.state.templateToDuplicate && this.state.templateToDuplicate.published}
+              isLoading={this.props.isCreatePending}
             />
           </>
         )}

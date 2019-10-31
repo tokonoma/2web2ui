@@ -56,6 +56,7 @@ const mapStateToProps = (state, props) => {
     isDraftUpdating: Boolean(state.templates.updating),
     isDraftPublishing: Boolean(state.templates.publishPending),
     areSnippetsLoading: Boolean(state.snippets.loading),
+    isCreatePending: Boolean(state.templates.createPending),
     preview: selectDraftTemplatePreview(state, id, {}),
     previewLineErrors: selectPreviewLineErrors(state),
     templateTestData: selectTemplateTestData(state)

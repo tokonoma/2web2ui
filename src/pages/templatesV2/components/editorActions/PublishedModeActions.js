@@ -19,7 +19,8 @@ const PublishedModeActions = () => {
     showAlert,
     content,
     isPublishedMode,
-    testData
+    testData,
+    isCreatePending
   } = useEditorContext();
   const draftText = hasDraft ? 'Edit Draft' : 'Save as Draft';
   const editDraftTo = `/${routeNamespace}/edit/${draft.id}/draft/content${setSubaccountQuery(draft.subaccount_id)}`;
@@ -99,6 +100,7 @@ const PublishedModeActions = () => {
           createTemplate={createTemplateV2}
           showAlert={showAlert}
           isPublishedMode={isPublishedMode}
+          isLoading={isCreatePending}
         />
 
         <DeleteTemplateModal

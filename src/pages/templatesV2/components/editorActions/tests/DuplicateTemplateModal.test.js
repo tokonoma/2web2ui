@@ -4,7 +4,13 @@ import DuplicateTemplateModal from '../DuplicateTemplateModal';
 
 describe('DuplicateTemplateModal', () => {
   const mockFn = jest.fn();
-  const subject = (props) => shallow(<DuplicateTemplateModal onClose={mockFn} open={false} {...props}/>);
+  const subject = (props) => shallow(
+    <DuplicateTemplateModal
+      isLoading={false}
+      onClose={mockFn}
+      open={false}
+      {...props}
+    />);
 
   it('renders with default props and some data from the current draft', () => {
     const wrapper = subject();
@@ -14,9 +20,15 @@ describe('DuplicateTemplateModal', () => {
 
   it('has a close button', () => {
     const wrapper = subject();
-    const modalProps = wrapper.find('Modal').props();
+    const modalProps = wrapper.find('ModalWrapper').props();
 
     expect(modalProps.showCloseButton).toBe(true);
+  });
+
+  it('renders the loading state when "isLoading" is true', () => {
+    const wrapper = subject({ isLoading: true, open: true });
+
+    expect(wrapper.find('PanelLoading')).toExist();
   });
 
   it('has a `Panel` component with the title "Duplicate Template"', () => {
@@ -40,14 +52,14 @@ describe('DuplicateTemplateModal', () => {
   it('determines the child Modal component `open` prop value via the `open` prop', () => {
     const wrapper = subject({ open: true });
 
-    expect(wrapper.find('Modal').props().open).toEqual(true);
+    expect(wrapper.find('ModalWrapper').props().open).toEqual(true);
   });
 
   it('determines the child Modal component `onClose` prop value via the `onClose` prop', () => {
     const mockFn = jest.fn();
     const wrapper = subject({ onClose: mockFn });
 
-    expect(wrapper.find('Modal').props().onClose).toEqual(mockFn);
+    expect(wrapper.find('ModalWrapper').props().onClose).toEqual(mockFn);
   });
 
   it('renders the default value of the "templateName" `TextField` with the word `(COPY)` appended', () => {
@@ -112,7 +124,6 @@ describe('DuplicateTemplateModal', () => {
     });
 
     wrapper.find('form').simulate('submit', { preventDefault: jest.fn() });
-    expect(wrapper.find('Loading')).toExist();
 
     expect(mockCreateTemplate).toHaveBeenCalledWith({
       name: 'My template (COPY)',
