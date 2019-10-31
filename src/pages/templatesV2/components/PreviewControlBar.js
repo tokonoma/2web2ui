@@ -18,6 +18,7 @@ const PreviewControlBar = () => {
           onClick={() => setPreviewDevice('desktop')}
           to="javascript:void(0);"
           role="button"
+          data-id="button-desktop-preview"
         >
           <DesktopWindows size={24} />
 
@@ -30,6 +31,7 @@ const PreviewControlBar = () => {
           onClick={() => setPreviewDevice('mobile')}
           to="javascript:void(0);"
           role="button"
+          data-id="button-mobile-preview"
         >
           <PhoneAndroid size={24} />
 

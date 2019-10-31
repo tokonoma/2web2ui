@@ -108,6 +108,7 @@ const SendTestEmailButton = () => {
         size="small"
         title="Opens a dialog"
         onClick={handleModalOpen}
+        data-id="button-send-a-test"
       >
         Send a Test
       </Button>
@@ -152,6 +153,7 @@ const SendTestEmailButton = () => {
                   type="email"
                   disabled
                   value={fromEmail}
+                  data-id="textfield-from-email"
                 />
 
                 <TextField
@@ -161,11 +163,13 @@ const SendTestEmailButton = () => {
                   type="email"
                   disabled
                   value={subject}
+                  data-id="textfield-email-subject"
                 />
 
                 <Button
                   color="orange"
                   type="submit"
+                  data-id="button-send-email"
                 >
                   Send Email
                 </Button>

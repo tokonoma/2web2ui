@@ -15,6 +15,7 @@ exports[`DuplicateTemplateModal renders with default props and some data from th
       onSubmit={[Function]}
     >
       <TextField
+        data-id="textfield-template-name"
         id="template-name"
         label="Template Name"
         name="templateName"
@@ -25,6 +26,7 @@ exports[`DuplicateTemplateModal renders with default props and some data from th
         value=""
       />
       <TextField
+        data-id="textfield-template-id"
         id="template-id"
         label="Template ID"
         name="templateId"
@@ -37,6 +39,7 @@ exports[`DuplicateTemplateModal renders with default props and some data from th
       <ButtonWrapper>
         <Button
           color="orange"
+          data-id="button-duplicate"
           size="default"
           submit={true}
         >

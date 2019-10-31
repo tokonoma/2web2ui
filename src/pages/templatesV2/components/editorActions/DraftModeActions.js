@@ -70,6 +70,7 @@ const DraftModeActions = () => {
             <Button
               onClick={() => setPopoverOpen(!isPopoverOpen)}
               aria-expanded={isPopoverOpen ? 'true' : 'false'}
+              data-id="popover-actions-trigger"
             >
               <ArrowDropDown/>
 

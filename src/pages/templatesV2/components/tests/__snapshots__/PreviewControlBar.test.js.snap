@@ -9,6 +9,7 @@ exports[`PreviewControlBar renders control bar 1`] = `
   >
     <UnstyledLink
       className="PreviewDeviceButton active"
+      data-id="button-desktop-preview"
       id="preview-content-desktop-button"
       onClick={[Function]}
       role="button"
@@ -23,6 +24,7 @@ exports[`PreviewControlBar renders control bar 1`] = `
     </UnstyledLink>
     <UnstyledLink
       className="PreviewDeviceButton"
+      data-id="button-mobile-preview"
       id="preview-content-mobile-button"
       onClick={[Function]}
       role="button"

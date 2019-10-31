@@ -5,6 +5,7 @@ exports[`SaveDraft renders save draft action 1`] = `
   className="Foo"
 >
   <UnstyledLink
+    data-id="action-save-draft"
     onClick={[Function]}
     role="button"
     to="javascript:void(0);"

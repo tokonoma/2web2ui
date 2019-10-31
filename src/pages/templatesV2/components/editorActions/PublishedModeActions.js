@@ -48,7 +48,12 @@ const PublishedModeActions = () => {
 
   return (
     <Button.Group>
-      <Button to={editDraftTo} className={styles.Actions}>
+      <Button
+        to={editDraftTo}
+        className={styles.Actions}
+        role="button"
+        data-id="button-edit-draft"
+      >
         <strong>{draftText}</strong>
       </Button>
 
@@ -61,6 +66,7 @@ const PublishedModeActions = () => {
             <Button
               onClick={() => setPopoverOpen(!isPopoverOpen)}
               aria-expanded={isPopoverOpen ? 'true' : 'false'}
+              data-id="popover-trigger-editor-actions"
             >
               <ArrowDropDown/>
 
@@ -70,7 +76,11 @@ const PublishedModeActions = () => {
         >
           <div className={styles.ActionsBody}>
             <div className={styles.ActionItem}>
-              <PageLink to={editDraftTo}>
+              <PageLink
+                to={editDraftTo}
+                data-id="action-edit-draft"
+                role="button"
+              >
                 <FileEdit/>
 
                 {draftText}

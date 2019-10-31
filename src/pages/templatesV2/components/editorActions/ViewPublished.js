@@ -10,10 +10,17 @@ export default ({ className }) => {
 
   const publishedPath = `/${routeNamespace}/edit/${draft.id}/published/content${setSubaccountQuery(draft.subaccount_id)}`;
 
-  return (<div className={className}>
-    <UnstyledLink onClick={() => history.push(publishedPath)}>
-      <RemoveRedEye/>View Published
-    </UnstyledLink>
-  </div>);
+  return (
+    <div className={className}>
+      <UnstyledLink
+        to="javascript:void(0);"
+        onClick={() => history.push(publishedPath)}
+        data-id="action-view-published"
+      >
+        <RemoveRedEye/>
 
+        <span>View Published</span>
+      </UnstyledLink>
+    </div>
+  );
 };

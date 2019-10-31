@@ -16,19 +16,31 @@ exports[`EditSection renders tabs and section 1`] = `
         Array [
           Object {
             "content": "HTML",
+            "data-id": "tab-html",
             "key": "html",
+            "role": "button",
+            "to": "javascript:void(0);",
           },
           Object {
             "content": "AMP HTML",
+            "data-id": "tab-amp-html",
             "key": "amp_html",
+            "role": "button",
+            "to": "javascript:void(0);",
           },
           Object {
             "content": "Text",
+            "data-id": "tab-text",
             "key": "text",
+            "role": "button",
+            "to": "javascript:void(0);",
           },
           Object {
             "content": "Test Data",
+            "data-id": "tab-test-data",
             "key": "test_data",
+            "role": "button",
+            "to": "javascript:void(0);",
           },
         ]
       }
@@ -42,6 +54,7 @@ exports[`EditSection renders tabs and section 1`] = `
       trigger={
         <Button
           className="MoreButton"
+          data-id="popover-trigger-more"
           flat={true}
           onClick={[Function]}
           size="default"
@@ -58,7 +71,10 @@ exports[`EditSection renders tabs and section 1`] = `
           Array [
             Object {
               "content": "Insert Snippet",
+              "data-id": "popover-action-insert-snippet",
+              "href": "javascript:void(0);",
               "onClick": [Function],
+              "role": "button",
             },
           ]
         }

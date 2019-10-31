@@ -25,6 +25,7 @@ const EditNavigation = ({ primaryArea }) => {
             onClick={() => { setNavigation(key); }}
             to="javascript:void(0)"
             role="button"
+            data-id={`subnav-link-${key}`}
           >
             {content}
           </UnstyledLink>
