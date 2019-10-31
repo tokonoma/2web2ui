@@ -48,7 +48,12 @@ const PublishedModeActions = () => {
 
   return (
     <Button.Group>
-      <Button to={editDraftTo} className={styles.Actions}>
+      <Button
+        to={editDraftTo}
+        className={styles.Actions}
+        role="button"
+        data-id="button-edit-draft"
+      >
         <strong>{draftText}</strong>
       </Button>
 
