@@ -2,6 +2,7 @@
 
 exports[`ImportSnippetPanel renders loading panel 1`] = `
 <PanelLoading
+  accent={false}
   minHeight="400px"
 />
 `;

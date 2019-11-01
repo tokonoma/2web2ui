@@ -86,6 +86,7 @@ exports[`SendingDomainsTab should show empty message when 0 domains exist 1`] = 
 
 exports[`SendingDomainsTab should show panel loading while loading domains 1`] = `
 <PanelLoading
+  accent={false}
   minHeight="400px"
 />
 `;

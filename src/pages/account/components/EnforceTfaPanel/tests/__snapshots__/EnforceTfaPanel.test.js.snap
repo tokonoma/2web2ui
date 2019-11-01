@@ -74,6 +74,7 @@ exports[`Component: EnforceTfaPanel renders fully after loading 1`] = `
 
 exports[`Component: EnforceTfaPanel renders loading state 1`] = `
 <PanelLoading
+  accent={false}
   minHeight="400px"
 />
 `;

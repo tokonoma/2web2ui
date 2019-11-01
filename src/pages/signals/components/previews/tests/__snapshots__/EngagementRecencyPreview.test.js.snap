@@ -172,6 +172,7 @@ exports[`Signals EngagementRecencyPreview Component renders error correctly 1`] 
 
 exports[`Signals EngagementRecencyPreview Component renders loading correctly 1`] = `
 <PanelLoading
+  accent={false}
   minHeight="170px"
 />
 `;

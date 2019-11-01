@@ -115,6 +115,7 @@ exports[`EnableTfaModal tests should show a message about 0 codes 1`] = `
 
 exports[`EnableTfaModal tests should show panel loading while status unknown 1`] = `
 <PanelLoading
+  accent={false}
   minHeight="100px"
 />
 `;

@@ -52,13 +52,14 @@ export default class ListPage extends Component {
     const { getDraft, getPublished, getTestDataV2 } = this.props;
     const isPublished = template.published;
 
+    this.setState({ showDuplicateModal: true });
+
     if (isPublished) {
       return getPublished(template.id)
         .then((res) => {
           this.setState({
             templateToDuplicate: res,
-            testDataToDuplicate: getTestDataV2({ id: res.id, mode: 'published' }),
-            showDuplicateModal: !this.state.showDuplicateModal
+            testDataToDuplicate: getTestDataV2({ id: res.id, mode: 'published' })
           });
         });
     }
@@ -67,8 +68,7 @@ export default class ListPage extends Component {
       .then((res) => {
         this.setState({
           templateToDuplicate: res,
-          testDataToDuplicate: getTestDataV2({ id: res.id, mode: 'draft' }),
-          showDuplicateModal: !this.state.showDuplicateModal
+          testDataToDuplicate: getTestDataV2({ id: res.id, mode: 'draft' })
         });
       });
   }
@@ -155,7 +155,10 @@ export default class ListPage extends Component {
       listTemplates,
       loading,
       templates,
-      isDeletePending
+      isDeletePending,
+      isCreatePending,
+      isDraftPending,
+      isPublishedPending
     } = this.props;
 
     if (loading) {
@@ -235,7 +238,7 @@ export default class ListPage extends Component {
               contentToDuplicate={this.state.templateToDuplicate && this.state.templateToDuplicate.content}
               testDataToDuplicate={this.state.testDataToDuplicate}
               isPublishedMode={this.state.templateToDuplicate && this.state.templateToDuplicate.published}
-              isLoading={this.props.isCreatePending}
+              isLoading={isDraftPending || isPublishedPending || isCreatePending}
             />
           </>
         )}

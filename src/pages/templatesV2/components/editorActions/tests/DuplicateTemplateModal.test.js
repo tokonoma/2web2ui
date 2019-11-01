@@ -20,9 +20,9 @@ describe('DuplicateTemplateModal', () => {
 
   it('has a close button', () => {
     const wrapper = subject();
-    const modalProps = wrapper.find('ModalWrapper').props();
+    const { showCloseButton } = wrapper.find('ModalWrapper').dive().props();
 
-    expect(modalProps.showCloseButton).toBe(true);
+    expect(showCloseButton).toBe(true);
   });
 
   it('renders the loading state when "isLoading" is true', () => {

@@ -2,6 +2,7 @@
 
 exports[`Panel Loading render 1`] = `
 <Panel
+  accent={false}
   className="Loading"
   style={
     Object {

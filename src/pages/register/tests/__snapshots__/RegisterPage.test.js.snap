@@ -42,6 +42,7 @@ exports[`Page: RegisterPage loading 1`] = `
     title="Set Password"
   >
     <PanelLoading
+      accent={false}
       minHeight="400px"
     />
   </Panel>

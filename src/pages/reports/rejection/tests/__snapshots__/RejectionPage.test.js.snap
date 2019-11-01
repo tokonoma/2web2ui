@@ -23,6 +23,7 @@ exports[`RejectionPage:  renders correctly when loading 1`] = `
   </Connect(MetricsSummary)>
   <hr />
   <PanelLoading
+    accent={false}
     minHeight="400px"
   />
 </Page>
@@ -37,6 +38,7 @@ exports[`RejectionPage:  renders loading pannel when aggregates are still loadin
     reportLoading={false}
   />
   <PanelLoading
+    accent={false}
     minHeight="115px"
   />
   <hr />

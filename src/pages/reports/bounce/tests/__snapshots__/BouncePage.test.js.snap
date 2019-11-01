@@ -10,6 +10,7 @@ exports[`BouncePage:  should display loading panel on top level metrics when agg
     searchOptions={Object {}}
   />
   <PanelLoading
+    accent={false}
     minHeight="115px"
   />
   <Tabs
@@ -569,6 +570,7 @@ exports[`BouncePage:  should show loading panel when table is loading 1`] = `
   />
   <hr />
   <PanelLoading
+    accent={false}
     minHeight="400px"
   />
 </Page>

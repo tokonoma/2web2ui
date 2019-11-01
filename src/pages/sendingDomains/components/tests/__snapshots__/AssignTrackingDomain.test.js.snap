@@ -176,6 +176,7 @@ exports[`Component: AssignTrackingDomain form should render panel loading compon
   </Left>
   <Right>
     <PanelLoading
+      accent={false}
       minHeight="400px"
     />
   </Right>

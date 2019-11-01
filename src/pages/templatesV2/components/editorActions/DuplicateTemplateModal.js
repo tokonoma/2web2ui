@@ -13,7 +13,6 @@ const ModalWrapper = (props) => {
   const {
     open,
     onClose,
-    showCloseButton,
     children
   } = props;
 
@@ -21,7 +20,7 @@ const ModalWrapper = (props) => {
     <Modal
       open={open}
       onClose={onClose}
-      showCloseButton={showCloseButton}
+      showCloseButton={true}
     >
       {children}
     </Modal>
@@ -40,11 +39,7 @@ const DuplicateTemplateModal = (props) => {
     showAlert,
     isLoading
   } = props;
-  const modalProps = {
-    open,
-    onClose,
-    showCloseButton: true
-  };
+  const modalProps = { open, onClose };
   const initialDraftName = (template && template.name) ? `${template.name} (COPY)` : '';
   const initialDraftId = (template && template.id) ? `${template.id}-copy` : '';
 
@@ -107,7 +102,7 @@ const DuplicateTemplateModal = (props) => {
   if (isLoading) {
     return (
       <ModalWrapper {...modalProps}>
-        <PanelLoading minHeight={'300px'}/>
+        <PanelLoading accent minHeight='330px'/>
       </ModalWrapper>
     );
   }
