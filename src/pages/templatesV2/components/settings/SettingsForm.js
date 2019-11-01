@@ -18,8 +18,11 @@ export default class SettingsForm extends React.Component {
       updateDraftV2,
       parsedTestData,
       subaccountId,
-      showAlert
+      showAlert,
+      content
     } = this.props;
+
+    values.content = content;
 
     return updateDraftV2({
       id: draft.id,
