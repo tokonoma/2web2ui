@@ -22,12 +22,11 @@ export default class SettingsForm extends React.Component {
       content
     } = this.props;
 
-    values.content = content;
-
     return updateDraftV2({
       id: draft.id,
       parsedTestData,
-      ...values
+      ...values,
+      content
     }, subaccountId)
       .then(() => {
         showAlert({ type: 'success', message: 'Template settings updated.' });
