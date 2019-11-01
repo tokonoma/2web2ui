@@ -2,6 +2,7 @@
 
 exports[`EditTab Render loading 1`] = `
 <PanelLoading
+  accent={false}
   minHeight="400px"
 />
 `;

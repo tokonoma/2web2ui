@@ -129,6 +129,7 @@ exports[`Signals HealthScorePreview Component renders error correctly 1`] = `
 
 exports[`Signals HealthScorePreview Component renders loading correctly 1`] = `
 <PanelLoading
+  accent={false}
   minHeight="170px"
 />
 `;

@@ -2,6 +2,7 @@
 
 exports[`UsageReport Component should render null without props 1`] = `
 <PanelLoading
+  accent={false}
   minHeight="400px"
 />
 `;

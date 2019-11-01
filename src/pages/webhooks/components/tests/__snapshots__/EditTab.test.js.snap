@@ -22,6 +22,7 @@ exports[`Webhooks EditTab should render correctly 1`] = `
 
 exports[`Webhooks EditTab should render loading 1`] = `
 <PanelLoading
+  accent={false}
   minHeight="400px"
 />
 `;

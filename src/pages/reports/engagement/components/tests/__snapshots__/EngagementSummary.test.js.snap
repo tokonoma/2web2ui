@@ -2,6 +2,7 @@
 
 exports[`EngagementSummary renders loading panel 1`] = `
 <PanelLoading
+  accent={false}
   minHeight="115px"
 />
 `;

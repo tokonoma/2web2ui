@@ -142,6 +142,7 @@ exports[`Signals SpamTrapsPreview Component renders error correctly 1`] = `
 
 exports[`Signals SpamTrapsPreview Component renders loading correctly 1`] = `
 <PanelLoading
+  accent={false}
   minHeight="170px"
 />
 `;

@@ -217,6 +217,7 @@ exports[`Results renders correctly on initial loading 1`] = `
 
 exports[`Results renders correctly when list is loading 1`] = `
 <PanelLoading
+  accent={false}
   minHeight="400px"
 />
 `;

@@ -67,6 +67,7 @@ exports[`DelayPage:  should show loading indicator when loading table 1`] = `
     title="Delayed Messages"
   >
     <PanelLoading
+      accent={false}
       minHeight="400px"
     />
   </Panel>
@@ -80,6 +81,7 @@ exports[`DelayPage:  should show loading panel when aggregates are still loading
 >
   <withRouter(Connect(ReportOptions)) />
   <PanelLoading
+    accent={false}
     minHeight="115px"
   />
   <Panel

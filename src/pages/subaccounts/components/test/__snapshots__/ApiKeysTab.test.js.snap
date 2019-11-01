@@ -27,6 +27,7 @@ exports[`ApiKeysTab empty 1`] = `
 
 exports[`ApiKeysTab loading 1`] = `
 <PanelLoading
+  accent={false}
   minHeight="400px"
 />
 `;

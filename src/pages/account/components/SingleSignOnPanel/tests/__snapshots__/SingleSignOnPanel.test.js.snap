@@ -15,6 +15,7 @@ exports[`SingleSignOnPanel renders with panel loading 1`] = `
   title="Single Sign-On"
 >
   <PanelLoading
+    accent={false}
     minHeight="130px"
   />
 </Panel>

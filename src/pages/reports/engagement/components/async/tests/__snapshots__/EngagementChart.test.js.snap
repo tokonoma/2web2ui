@@ -198,6 +198,7 @@ exports[`EngagementChart renders engagement chart 1`] = `
 
 exports[`EngagementChart renders loading 1`] = `
 <PanelLoading
+  accent={false}
   minHeight="400px"
 />
 `;

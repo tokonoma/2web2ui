@@ -78,6 +78,7 @@ exports[`Webhook Component: Batch Status Tab should show button text as Refreshi
     </Button>
   </Panel.Section>
   <PanelLoading
+    accent={false}
     minHeight="400px"
   />
 </Panel>
