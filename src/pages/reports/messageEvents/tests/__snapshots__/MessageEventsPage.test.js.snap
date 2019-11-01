@@ -26,6 +26,7 @@ exports[`Page: Message Events tests should only render loading component while l
 >
   <withRouter(Connect(MessageEventsSearch)) />
   <PanelLoading
+    accent={false}
     minHeight="400px"
   />
 </Page>
