@@ -157,8 +157,8 @@ export default class ListPage extends Component {
       templates,
       isDeletePending,
       isCreatePending,
-      draftPending,
-      publishedPending
+      isDraftPending,
+      isPublishedPending
     } = this.props;
 
     if (loading) {
@@ -238,7 +238,7 @@ export default class ListPage extends Component {
               contentToDuplicate={this.state.templateToDuplicate && this.state.templateToDuplicate.content}
               testDataToDuplicate={this.state.testDataToDuplicate}
               isPublishedMode={this.state.templateToDuplicate && this.state.templateToDuplicate.published}
-              isLoading={draftPending || publishedPending || isCreatePending}
+              isLoading={isDraftPending || isPublishedPending || isCreatePending}
             />
           </>
         )}

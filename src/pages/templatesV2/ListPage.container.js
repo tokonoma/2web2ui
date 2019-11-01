@@ -27,8 +27,8 @@ function mapStateToProps(state) {
     canModify,
     isDeletePending: Boolean(state.templates.deletePending),
     isCreatePending: Boolean(state.templates.createPending),
-    draftPending: Boolean(state.templates.getDraftLoading),
-    publishedPending: Boolean(state.templates.getPublishedLoading)
+    isDraftPending: Boolean(state.templates.getDraftLoading),
+    isPublishedPending: Boolean(state.templates.getPublishedLoading)
   };
 }
 
