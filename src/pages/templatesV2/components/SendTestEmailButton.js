@@ -6,10 +6,10 @@ import {
   Modal,
   TextField
 } from '@sparkpost/matchbox';
-import Loading from 'src/components/loading';
+import PanelLoading from 'src/components/panelLoading';
+import ButtonWrapper from 'src/components/buttonWrapper';
 import MultiEmailField, { useMultiEmailField } from 'src/components/multiEmailField';
 import useEditorContext from '../hooks/useEditorContext';
-import styles from './SendTestEmailButton.module.scss';
 
 const SendTestEmailButton = () => {
   const {
@@ -20,7 +20,8 @@ const SendTestEmailButton = () => {
     showAlert,
     subaccountId,
     parsedTestData,
-    updateDraftV2
+    updateDraftV2,
+    setHasSaved
   } = useEditorContext();
   const {
     handleMultiEmailChange,
@@ -59,7 +60,10 @@ const SendTestEmailButton = () => {
         content,
         parsedTestData
       }, subaccountId)
-        .then(() => setModalLoading(false));
+        .then(() => {
+          setModalLoading(false);
+          setHasSaved(true);
+        });
     }
   };
 
@@ -118,54 +122,50 @@ const SendTestEmailButton = () => {
         showCloseButton={true}
         onClose={handleModalClose}
       >
-        <Panel
-          accent
-          title="Send a Test"
-          sectioned
-        >
-          {isModalLoading &&
-            <div className={styles.LoadingWrapper}>
-              <Loading className={styles.Loading}/>
-            </div>
-          }
+        {isModalLoading && <PanelLoading/>}
 
-          {!isModalLoading &&
-            <>
-              <p>Verify your email renders as expected in the inbox by sending a quick test.</p>
+        {!isModalLoading &&
+          <Panel
+            accent
+            title="Send a Test"
+            sectioned
+          >
+            <p>Verify your email renders as expected in the inbox by sending a quick test.</p>
 
-              <form onSubmit={(e) => handleSubmit(e)}>
-                <MultiEmailField
-                  id="multi-email-email-to"
-                  label="To"
-                  name="emailTo"
-                  onChange={(e) => handleMultiEmailChange(e)}
-                  onKeyDownAndBlur={(e) => handleMultiEmailKeyDownAndBlur(e)}
-                  onRemoveEmail={handleMultiEmailRemove}
-                  error={multiEmailError}
-                  value={multiEmailValue}
-                  emailList={multiEmailList}
-                />
+            <form onSubmit={handleSubmit}>
+              <MultiEmailField
+                id="multi-email-email-to"
+                label="To"
+                name="emailTo"
+                onChange={(e) => handleMultiEmailChange(e)}
+                onKeyDownAndBlur={(e) => handleMultiEmailKeyDownAndBlur(e)}
+                onRemoveEmail={handleMultiEmailRemove}
+                error={multiEmailError}
+                value={multiEmailValue}
+                emailList={multiEmailList}
+              />
 
-                <TextField
-                  id="text-field-test-email-from"
-                  label="From"
-                  name="emailFrom"
-                  type="email"
-                  disabled
-                  value={fromEmail}
-                  data-id="textfield-from-email"
-                />
+              <TextField
+                id="text-field-test-email-from"
+                label="From"
+                name="emailFrom"
+                type="email"
+                disabled
+                value={fromEmail}
+                data-id="textfield-from-email"
+              />
 
-                <TextField
-                  id="text-field-test-email-subject"
-                  label="Subject"
-                  name="emailSubject"
-                  type="email"
-                  disabled
-                  value={subject}
-                  data-id="textfield-email-subject"
-                />
+              <TextField
+                id="text-field-test-email-subject"
+                label="Subject"
+                name="emailSubject"
+                type="email"
+                disabled
+                value={subject}
+                data-id="textfield-from-email"
+              />
 
+              <ButtonWrapper>
                 <Button
                   color="orange"
                   type="submit"
@@ -173,10 +173,10 @@ const SendTestEmailButton = () => {
                 >
                   Send Email
                 </Button>
-              </form>
-            </>
-          }
-        </Panel>
+              </ButtonWrapper>
+            </form>
+          </Panel>
+        }
       </Modal>
     </>
   );
