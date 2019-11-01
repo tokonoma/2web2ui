@@ -73,7 +73,7 @@ const InsertSnippetModal = (props) => {
   if (areSnippetsLoading) {
     return (
       <ModalWrapper {...modalProps}>
-        <PanelLoading/>
+        <PanelLoading accent/>
       </ModalWrapper>
     )
   }
