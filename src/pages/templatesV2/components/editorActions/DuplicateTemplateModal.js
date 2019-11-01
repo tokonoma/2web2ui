@@ -102,7 +102,7 @@ const DuplicateTemplateModal = (props) => {
   if (isLoading) {
     return (
       <ModalWrapper {...modalProps}>
-        <PanelLoading minHeight={'325px'}/>
+        <PanelLoading accent minHeight='330px'/>
       </ModalWrapper>
     );
   }
