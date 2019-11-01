@@ -4,7 +4,6 @@ exports[`DuplicateTemplateModal renders with default props and some data from th
 <ModalWrapper
   onClose={[MockFunction]}
   open={false}
-  showCloseButton={true}
 >
   <Panel
     accent={true}
