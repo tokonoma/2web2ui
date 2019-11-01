@@ -6,23 +6,35 @@ import EditSection from '../EditSection';
 jest.mock('../../hooks/useEditorContext');
 
 describe('EditSection', () => {
-  const subject = ({ tabState }) => {
-    useEditorContext.mockReturnValue(tabState);
+  const subject = (editorState) => {
+    useEditorContext.mockReturnValue(editorState);
     return shallow(<EditSection />);
   };
 
   it('renders tabs and section', () => {
-    const wrapper = subject({ tabState: { currentTabIndex: 0 }});
+    const wrapper = subject({ currentTabIndex: 0 });
     expect(wrapper).toMatchSnapshot();
   });
 
   it('sets tab on select', () => {
     const setTab = jest.fn();
-    const wrapper = subject({ tabState: { currentTabIndex: 0, setTab }});
+    const wrapper = subject({ currentTabIndex: 0, setTab });
 
     wrapper.find('Tabs').simulate('select', 1);
 
     expect(setTab).toHaveBeenCalledWith(1);
+  });
+
+  it('renders a "Read Only" tag in published mode for the "HTML", "AMP HTML", and "Text" tabs', () => {
+    const wrapper = subject({ currentTabIndex: 0, isPublishedMode: true });
+
+    expect(wrapper).toHaveTextContent('Read Only');
+  });
+
+  it('does not render a "Read Only" tag in published mode for the "Test Data" tab', () => {
+    const wrapper = subject({ currentTabIndex: 3, isPublishedMode: true });
+
+    expect(wrapper).not.toHaveTextContent('Read Only');
   });
 
   describe('the Popover', () => {
@@ -36,7 +48,7 @@ describe('EditSection', () => {
     };
 
     it('1) opens when using the trigger onClick and 2) closes when using the Popover onClose', () => {
-      const wrapper = subject({ tabState: { currentTabIndex: 0 }});
+      const wrapper = subject({ currentTabIndex: 0 });
 
       openPopover(wrapper);
 
@@ -48,7 +60,7 @@ describe('EditSection', () => {
     });
 
     it('opens the insert snippet modal via the "Insert Snippet" action and closes via the modal `onClose` prop', () => {
-      const wrapper = subject({ tabState: { currentTabIndex: 0 }});
+      const wrapper = subject({ currentTabIndex: 0 });
 
       openPopover(wrapper);
 
@@ -62,6 +74,15 @@ describe('EditSection', () => {
       wrapper.find('InsertSnippetModal').simulate('close');
 
       expect(wrapper.find('InsertSnippetModal')).toHaveProp('open', false);
+    });
+
+    it('does not render when not in published mode', () => {
+      const wrapper = subject({
+        currentTabIndex: 0,
+        isPublishedMode: true
+      });
+
+      expect(wrapper.find('Popover')).not.toExist();
     });
   });
 });
