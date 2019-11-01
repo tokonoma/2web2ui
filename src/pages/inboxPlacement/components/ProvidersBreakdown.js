@@ -10,7 +10,8 @@ export const GroupPercentage = ({ value }) => <span className={styles.GroupValue
 
 const HeaderComponent = () => (<thead>
   <Table.Row className={styles.HeaderRow}>
-    <Table.HeaderCell className={styles.ProviderCell}>Mailbox Provider</Table.HeaderCell>
+    <Table.HeaderCell className={styles.MailboxProviderCell}>Mailbox Provider</Table.HeaderCell>
+    <Table.HeaderCell className={styles.RegionCell}>Region</Table.HeaderCell>
     <Table.HeaderCell className={styles.Placement}>Inbox</Table.HeaderCell>
     <Table.HeaderCell className={styles.Placement}>Spam</Table.HeaderCell>
     <Table.HeaderCell className={styles.Placement}>Missing</Table.HeaderCell>
@@ -24,9 +25,12 @@ const WrapperComponent = ({ children }) => (<div>
   <Table>{children}</Table>
 </div>);
 
-const RowComponent = ({ id, mailbox_provider, placement, authentication }) => (<Table.Row className={styles.DataRow}>
-  <Table.Cell className={styles.ProviderCell}>
+const RowComponent = ({ id, mailbox_provider, region, placement, authentication }) => (<Table.Row className={styles.DataRow}>
+  <Table.Cell className={styles.MailboxProviderCell}>
     <PageLink to={`/inbox-placement/details/${id}/mailbox-provider/${mailbox_provider}`}><strong>{mailbox_provider}</strong></PageLink>
+  </Table.Cell>
+  <Table.Cell className={styles.RegionCell}>
+    {region}
   </Table.Cell>
   <Table.Cell className={styles.Placement}><GroupPercentage value={placement.inbox_pct}/></Table.Cell>
   <Table.Cell className={styles.Placement}><GroupPercentage value={placement.spam_pct}/></Table.Cell>
