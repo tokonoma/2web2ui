@@ -79,8 +79,22 @@ exports[`Component: TestDetails renders correctly 1`] = `
       </React.Fragment>
     }
   >
+    <div
+      className="PlacementFilter"
+    >
+      <Select
+        onChange={[Function]}
+        options={
+          Array [
+            "Provider",
+            "Region",
+          ]
+        }
+      />
+    </div>
     <ProvidersBreakdown
       data={Array []}
+      type="Provider"
     />
   </Panel>
   <div

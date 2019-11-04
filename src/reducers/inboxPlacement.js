@@ -6,6 +6,7 @@ export const initialState = {
   tests: [],
   stopTestPending: false,
   placementsByProvider: [],
+  placementsByRegion: [],
   allMessages: [],
   messagesById: {}
 };
@@ -46,6 +47,13 @@ export default (state = initialState, { type, payload, meta }) => {
       return { ...state, getByProviderPending: false, placementsByProvider: payload, getByProviderError: null };
     case 'GET_INBOX_PLACEMENT_TEST_BY_PROVIDER_FAIL':
       return { ...state, getByProviderPending: false, getByProviderError: payload };
+
+    case 'GET_INDEX_PLACEMENT_TEST_BY_REGION_PENDING':
+      return { ...state, getByRegionPending: true, getByRegionError: null };
+    case 'GET_INDEX_PLACEMENT_TEST_BY_REGION_SUCCESS':
+      return { ...state, getByRegionPending: false, placementsByRegion: payload, getByRegionError: null };
+    case 'GET_INDEX_PLACEMENT_TEST_BY_REGION_FAIL':
+      return { ...state, getByRegionPending: false, getByRegionError: payload };
 
     case 'GET_INBOX_PLACEMENT_TEST_CONTENT_PENDING':
       return { ...state, getTestContentPending: true, getTestContentError: null };
