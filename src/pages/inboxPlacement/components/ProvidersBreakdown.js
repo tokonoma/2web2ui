@@ -5,6 +5,7 @@ import { TableCollection } from 'src/components/collection';
 import { formatPercent } from 'src/helpers/units';
 import styles from './ProvidersBreakdown.module.scss';
 import PageLink from 'src/components/pageLink/PageLink';
+import _ from 'lodash';
 
 export const GroupPercentage = ({ value }) => <span className={styles.GroupValue}>{formatPercent(value * 100)}</span>;
 
@@ -30,7 +31,7 @@ export const RowComponent = ({ id, mailbox_provider, region, placement, authenti
     <PageLink to={`/inbox-placement/details/${id}/mailbox-provider/${mailbox_provider}`}><strong>{mailbox_provider}</strong></PageLink>
   </Table.Cell>
   <Table.Cell className={styles.RegionCell}>
-    {region}
+    {_.startCase(region)}
   </Table.Cell>
   <Table.Cell className={styles.Placement}><GroupPercentage value={placement.inbox_pct}/></Table.Cell>
   <Table.Cell className={styles.Placement}><GroupPercentage value={placement.spam_pct}/></Table.Cell>

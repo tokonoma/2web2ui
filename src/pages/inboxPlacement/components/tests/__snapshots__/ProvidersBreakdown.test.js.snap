@@ -67,7 +67,7 @@ exports[`Component: ProvidersBreakdown RowComponent renders correctly 1`] = `
   <Table.Cell
     className="RegionCell"
   >
-    north america
+    North America
   </Table.Cell>
   <Table.Cell
     className="Placement"
