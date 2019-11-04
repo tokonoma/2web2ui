@@ -24,6 +24,13 @@
   }
 }
 
-.MoreButton {
+.MoreButton,
+.TagWrapper {
   height: 100%;
+}
+
+.TagWrapper {
+  display: flex;
+  align-items: center;
+  padding: 0 spacing();
 }

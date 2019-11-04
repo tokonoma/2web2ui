@@ -5,19 +5,24 @@ import {
   Button,
   Popover,
   ActionList,
-  ScreenReaderOnly
+  ScreenReaderOnly,
+  Tag
 } from '@sparkpost/matchbox';
-import { MoreVert } from '@sparkpost/matchbox-icons';
+import { MoreHoriz } from '@sparkpost/matchbox-icons';
 import tabs from '../constants/editTabs';
 import InsertSnippetModal from './InsertSnippetModal';
 import useEditorContext from '../hooks/useEditorContext';
 import styles from './EditSection.module.scss';
 
 const EditSection = () => {
-  const { currentTabIndex, setTab } = useEditorContext();
+  const { currentTabIndex, setTab, isPublishedMode } = useEditorContext();
   const [isPopoverOpen, setPopoverOpen] = useState(false);
   const [isSnippetModalOpen, setSnippetModalOpen] = useState(false);
-  const TabComponent = tabs[currentTabIndex].render;
+
+  const currentTab = tabs[currentTabIndex];
+  const TabComponent = currentTab.render;
+  const hasReadOnlyTag = isPublishedMode && (currentTab.key === 'html' || currentTab.key === 'amp_html' || currentTab.key === 'text');
+  const hasPopover = !isPublishedMode;
 
   const handleInsertSnippetClick = () => {
     setPopoverOpen(false);
@@ -36,37 +41,47 @@ const EditSection = () => {
         />
         {/* eslint-enable no-unused-vars */}
 
-        <Popover
-          left
-          open={isPopoverOpen}
-          onClose={() => setPopoverOpen(false)}
-          trigger={
-            <Button
-              flat
-              className={styles.MoreButton}
-              onClick={() => setPopoverOpen(!isPopoverOpen)}
-              data-id="popover-trigger-more"
-            >
-              <MoreVert/>
+        {hasReadOnlyTag &&
+          <div className={styles.TagWrapper}>
+            <Tag color="yellow">
+              <span>Read Only</span>
+            </Tag>
+          </div>
+        }
 
-              <ScreenReaderOnly>More</ScreenReaderOnly>
-            </Button>
-          }
-        >
-          <ActionList
-            actions={
-              [
-                {
-                  content: 'Insert Snippet',
-                  onClick: () => handleInsertSnippetClick(),
-                  role: 'button',
-                  href: 'javascript:void(0);',
-                  'data-id': 'popover-action-insert-snippet'
-                }
-              ]
+        {hasPopover &&
+          <Popover
+            left
+            open={isPopoverOpen}
+            onClose={() => setPopoverOpen(false)}
+            trigger={
+              <Button
+                flat
+                className={styles.MoreButton}
+                onClick={() => setPopoverOpen(!isPopoverOpen)}
+                data-id="popover-trigger-more"
+              >
+                <MoreHoriz/>
+
+                <ScreenReaderOnly>More</ScreenReaderOnly>
+              </Button>
             }
-          />
-        </Popover>
+          >
+            <ActionList
+              actions={
+                [
+                  {
+                    content: 'Insert Snippet',
+                    onClick: () => handleInsertSnippetClick(),
+                    role: 'button',
+                    href: 'javascript:void(0);',
+                    'data-id': 'popover-action-insert-snippet'
+                  }
+                ]
+              }
+            />
+          </Popover>
+        }
       </div>
 
       <TabComponent />
