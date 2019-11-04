@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import { format } from 'date-fns';
-import { Grid, Panel, Select } from '@sparkpost/matchbox';
+import { Grid, Panel, Select, TextField } from '@sparkpost/matchbox';
+import _ from 'lodash';
 import FolderPlacementBarChart from './FolderPlacementBarChart';
 import ProvidersBreakdown from './ProvidersBreakdown';
 import { FORMATS } from 'src/constants';
@@ -8,6 +9,7 @@ import InfoBlock from './InfoBlock';
 import styles from './TestDetails.module.scss';
 import TimeToReceiveSection from './TimeToReceiveSection';
 import AuthenticationResults from './AuthenticationResults';
+import { Search } from '@sparkpost/matchbox-icons';
 
 export const PLACEMENT_FILTER_TYPES = Object.freeze({
   'PROVIDER': 'Provider',
@@ -17,6 +19,11 @@ const PLACEMENTS_BY_OPTIONS = Object.values(PLACEMENT_FILTER_TYPES);
 
 const TestDetails = ({ details, placementsByProvider, placementsByRegion }) => {
   const [placementsByFilterIndex, setPlacementsByFilterIndex] = useState(0);
+  const [searchPlacements, setSearchPlacements] = useState('');
+
+  const onSearchChange = useCallback((e) => {
+    setSearchPlacements(e.target.value);
+  }, []);
 
   const onFilterChange = useCallback((e) => {
     const foundIndex = PLACEMENTS_BY_OPTIONS.findIndex((option) => option === e.target.value);
@@ -27,13 +34,28 @@ const TestDetails = ({ details, placementsByProvider, placementsByRegion }) => {
 
   const breakdownType = PLACEMENTS_BY_OPTIONS[placementsByFilterIndex];
   let breakdownData = [];
+  let textFieldPlaceholder = '';
   switch (breakdownType) {
     case PLACEMENT_FILTER_TYPES.REGION:
       breakdownData = placementsByRegion;
+      textFieldPlaceholder = 'Region';
       break;
     default:
       breakdownData = placementsByProvider;
+      textFieldPlaceholder = 'Mailbox Provider or Region';
       break;
+  }
+
+  if (searchPlacements) {
+    const searchRegex = new RegExp(_.escapeRegExp(searchPlacements), 'i');
+    switch (breakdownType) {
+      case PLACEMENT_FILTER_TYPES.REGION:
+        breakdownData = breakdownData.filter((item) => item.region.match(searchRegex));
+        break;
+      default:
+        breakdownData = breakdownData.filter((item) => item.region.match(searchRegex) || item.mailbox_provider.match(searchRegex));
+        break;
+    }
   }
 
   const panelTitle = (<>
@@ -73,8 +95,13 @@ const TestDetails = ({ details, placementsByProvider, placementsByRegion }) => {
         </Grid>
       </Panel>
       <Panel title={panelTitle}>
-        <div className={styles.PlacementFilter}>
-          <Select options={PLACEMENTS_BY_OPTIONS} onChange={onFilterChange} />
+        <div className={styles.PlacementFilterContainer}>
+          <div className={styles.PlacementFilterSelect}>
+            <Select options={PLACEMENTS_BY_OPTIONS} onChange={onFilterChange} />
+          </div>
+          <div className={styles.PlacementFilterTextField}>
+            <TextField suffix={<Search />} onChange={onSearchChange} placeholder={textFieldPlaceholder} />
+          </div>
         </div>
         <ProvidersBreakdown type={breakdownType} data={breakdownData} />
       </Panel>

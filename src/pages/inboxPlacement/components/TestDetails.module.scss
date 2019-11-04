@@ -22,7 +22,16 @@
   }
 }
 
-.PlacementFilter {
+.PlacementFilterContainer {
   padding: spacing(base);
+  display: flex;
+}
+
+.PlacementFilterSelect {
   max-width: 200px;
+}
+
+.PlacementFilterTextField {
+  flex: 1;
+  margin-left: spacing(base);
 }
