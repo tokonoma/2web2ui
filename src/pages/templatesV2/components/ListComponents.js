@@ -34,25 +34,32 @@ export const Name = ({ list_name: name, id, subaccount_id, ...rowData }) => {
 };
 
 export const Status = (rowData) => {
-  const listStatus = rowData.list_status;
-
+  const { list_status } = rowData;
   const PublishedIcon = <CheckCircle className={styles.PublishedIconColor}/>;
 
-  if (listStatus === 'published') {
-    return <Tag className={styles.published}>{PublishedIcon} Published</Tag>;
+  if (list_status === 'published') {
+    return (
+      <Tag className={styles.published}>
+        {PublishedIcon}&nbsp;<span>Published</span>
+      </Tag>
+    );
   }
 
-  if (listStatus === 'published_with_draft') {
+  if (list_status === 'published_with_draft') {
     return (
       <Tooltip dark content='Contains unpublished changes'>
         <Tag className={styles.PublishedWithChanges}>
-          {PublishedIcon} Published
+          {PublishedIcon}&nbsp;<span>Published</span>
         </Tag>
       </Tooltip>
     );
   }
 
-  return <Tag><Edit/> Draft</Tag>;
+  return (
+    <Tag>
+      <Edit/>&nbsp;<span>Draft</span>
+    </Tag>
+  );
 };
 
 export const DeleteAction = ({ onClick, ...props }) => (

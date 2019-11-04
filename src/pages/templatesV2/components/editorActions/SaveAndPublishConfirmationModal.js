@@ -19,7 +19,7 @@ const SaveAndPublishConfirmationModal = (props) => {
 
   const handleConfirm = () => {
     publishDraftV2({
-      ...draft,
+      id: draft.id,
       content,
       parsedTestData
     }, draft.subaccount_id)
