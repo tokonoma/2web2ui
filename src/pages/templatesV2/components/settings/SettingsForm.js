@@ -12,23 +12,28 @@ import styles from './SettingsForm.module.scss';
 import { emailOrSubstitution } from '../validation';
 
 export default class SettingsForm extends React.Component {
-  updateSettings = (values) => {
+  updateSettings = (values = {}) => {
     const {
       draft,
       updateDraftV2,
       parsedTestData,
       subaccountId,
       showAlert,
-      content
+      content,
+      setHasSaved
     } = this.props;
+
+    const { text , html } = content;
+
+    values.content = { ...values.content , text, html };
 
     return updateDraftV2({
       id: draft.id,
       parsedTestData,
-      ...values,
-      content
+      ...values
     }, subaccountId)
       .then(() => {
+        setHasSaved(true);
         showAlert({ type: 'success', message: 'Template settings updated.' });
       });
   };
