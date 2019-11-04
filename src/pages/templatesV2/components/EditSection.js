@@ -139,9 +139,9 @@ const EditSection = () => {
 
       <ConfirmationModal
         open={isAMPModalOpen}
-        title='Are you sure you want to insert the AMP boilerplate?'
+        title='Are you sure you want to insert the AMP Email Boilerplate?'
         content={<p>Any existing markup in the AMP tab will be lost.</p>}
-        confirmVerb='Insert AMP Boilerplate'
+        confirmVerb='Insert'
         onCancel={() => setAMPModalOpen(false)}
         onConfirm={handleAMPConfirmClick}
       />
