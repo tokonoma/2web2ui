@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Page, Tabs } from '@sparkpost/matchbox';
 
 import { Loading } from 'src/components';
-import { getInboxPlacementTest, getInboxPlacementByProviders, getInboxPlacementTestContent } from 'src/actions/inboxPlacement';
+import { getInboxPlacementTest, getInboxPlacementByProviders, getInboxPlacementByRegion, getInboxPlacementTestContent } from 'src/actions/inboxPlacement';
 import TestDetails from './components/TestDetails';
 import TestContent from './components/TestContent';
 import useTabs from 'src/hooks/useTabs';
@@ -18,10 +18,12 @@ export const TestDetailsPage = (props) => {
     loading,
     details,
     placementsByProvider,
+    placementsByRegion,
     content,
     error,
     getInboxPlacementTest,
     getInboxPlacementByProviders,
+    getInboxPlacementByRegion,
     getInboxPlacementTestContent,
     StopTestComponent = StopTest //This is for unit test purposes
   } = props;
@@ -32,7 +34,8 @@ export const TestDetailsPage = (props) => {
     getInboxPlacementTest(id);
     getInboxPlacementByProviders(id);
     getInboxPlacementTestContent(id);
-  }, [getInboxPlacementTest, getInboxPlacementByProviders, getInboxPlacementTestContent, id]);
+    getInboxPlacementByRegion(id);
+  }, [getInboxPlacementTest, getInboxPlacementByProviders, getInboxPlacementTestContent, getInboxPlacementByRegion, id]);
 
   useEffect(() => {
     loadTestData();
@@ -48,7 +51,7 @@ export const TestDetailsPage = (props) => {
       case 'content':
         return <TestContent content={content} details={details}/>;
       default:
-        return <TestDetails details={details} placementsByProvider={placementsByProvider}/>;
+        return <TestDetails details={details} placementsByProvider={placementsByProvider} placementsByRegion={placementsByRegion}/>;
     }
   };
 
@@ -98,8 +101,9 @@ function mapStateToProps(state, props) {
     error: state.inboxPlacement.getTestError || state.inboxPlacement.getByProviderError || state.inboxPlacement.getTestContentError,
     details: state.inboxPlacement.currentTestDetails,
     placementsByProvider: state.inboxPlacement.placementsByProvider || [],
+    placementsByRegion: state.inboxPlacement.placementsByRegion || [],
     content: state.inboxPlacement.currentTestContent || {}
   };
 }
 
-export default connect(mapStateToProps, { getInboxPlacementTest, getInboxPlacementByProviders, getInboxPlacementTestContent })(TestDetailsPage);
+export default connect(mapStateToProps, { getInboxPlacementTest, getInboxPlacementByProviders, getInboxPlacementByRegion, getInboxPlacementTestContent })(TestDetailsPage);
