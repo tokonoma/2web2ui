@@ -1,4 +1,5 @@
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
+import { PLACEMENT_FILTER_TYPES } from 'src/pages/inboxPlacement/constants/types';
 
 export function listTests() {
   return sparkpostApiRequest({
@@ -29,22 +30,15 @@ export const getInboxPlacementTest = (id) => sparkpostApiRequest({
   }
 });
 
-export const getInboxPlacementByProviders = (id) => sparkpostApiRequest({
-  type: 'GET_INBOX_PLACEMENT_TEST_BY_PROVIDER',
-  meta: {
-    method: 'GET',
-    url: `/v1/inbox-placement/${id}/mailbox-provider`,
-    meta: {
-      testId: id
-    }
-  }
-});
+export const getInboxPlacementByProviders = (id) => getInboxPlacementData(id, PLACEMENT_FILTER_TYPES.MAILBOX_PROVIDER, 'GET_INBOX_PLACEMENT_TEST_BY_MAILBOX-PROVIDERS');
 
-export const getInboxPlacementByRegion = (id) => sparkpostApiRequest({
-  type: 'GET_INBOX_PLACEMENT_TEST_BY_REGION',
+export const getInboxPlacementByRegions = (id) => getInboxPlacementData(id, PLACEMENT_FILTER_TYPES.REGION, 'GET_INBOX_PLACEMENT_TEST_BY_REGIONS');
+
+export const getInboxPlacementData = (id, type, action) => sparkpostApiRequest({
+  type: action,
   meta: {
     method: 'GET',
-    url: `/v1/inbox-placement/${id}/region`,
+    url: `/v1/inbox-placement/${id}/${type}`,
     meta: {
       testId: id
     }

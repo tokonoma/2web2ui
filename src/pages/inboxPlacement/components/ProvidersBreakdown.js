@@ -6,13 +6,13 @@ import { TableCollection } from 'src/components/collection';
 import { formatPercent } from 'src/helpers/units';
 import styles from './ProvidersBreakdown.module.scss';
 import PageLink from 'src/components/pageLink/PageLink';
-import { PLACEMENT_FILTER_TYPES } from './TestDetails';
+import { PLACEMENT_FILTER_TYPES } from '../constants/types';
 
 export const GroupPercentage = ({ value }) => <span className={styles.GroupValue}>{formatPercent(value * 100)}</span>;
 
-const HeaderComponent = ({ headerName }) => (<thead>
+const HeaderComponent = () => (<thead>
   <Table.Row className={styles.HeaderRow}>
-    <Table.HeaderCell className={styles.ProviderCell}>{headerName}</Table.HeaderCell>
+    <Table.HeaderCell className={styles.ProviderCell}></Table.HeaderCell>
     <Table.HeaderCell className={styles.Placement}>Inbox</Table.HeaderCell>
     <Table.HeaderCell className={styles.Placement}>Spam</Table.HeaderCell>
     <Table.HeaderCell className={styles.Placement}>Missing</Table.HeaderCell>
@@ -21,10 +21,6 @@ const HeaderComponent = ({ headerName }) => (<thead>
     <Table.HeaderCell className={styles.Authentication}>DMARC</Table.HeaderCell>
   </Table.Row>
 </thead>);
-
-const getHeaderWrapper = _.memoize((type) => (
-  () => <HeaderComponent headerName={`Mailbox ${type}`} />
-));
 
 const WrapperComponent = ({ children }) => (<div>
   <Table>{children}</Table>
@@ -59,7 +55,7 @@ const ProvidersBreakdown = ({ data = [], type }) => (
   <TableCollection
     rows={data}
     wrapperComponent={WrapperComponent}
-    headerComponent={getHeaderWrapper(type)}
+    headerComponent={HeaderComponent}
     rowComponent={getRowWrapper(type)}
     pagination={true}
     defaultSortColumn='placement.inbox_pct'

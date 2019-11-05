@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow, mount } from 'enzyme';
 
 import ProvidersBreakdown, { GroupPercentage } from '../ProvidersBreakdown';
-import { PLACEMENT_FILTER_TYPES } from '../TestDetails';
+import { PLACEMENT_FILTER_TYPES } from '../../constants/types';
 import { BrowserRouter as Router } from 'react-router-dom';
 
 describe('Component: ProvidersBreakdown', () => {
@@ -145,7 +145,7 @@ describe('Component: ProvidersBreakdown', () => {
         }
       }
     ];
-    const wrapper = mountedSubject({ data, type: PLACEMENT_FILTER_TYPES.PROVIDER });
+    const wrapper = mountedSubject({ data, type: PLACEMENT_FILTER_TYPES.MAILBOX_PROVIDER });
     expect(wrapper).toHaveTextContent('doghouseinbox.com');
   });
 

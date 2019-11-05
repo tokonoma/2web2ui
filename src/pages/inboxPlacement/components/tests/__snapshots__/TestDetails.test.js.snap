@@ -86,15 +86,21 @@ exports[`Component: TestDetails renders correctly 1`] = `
         onChange={[Function]}
         options={
           Array [
-            "Provider",
-            "Region",
+            Object {
+              "label": "Mailbox Provider",
+              "value": "mailbox-provider",
+            },
+            Object {
+              "label": "Region",
+              "value": "region",
+            },
           ]
         }
       />
     </div>
     <ProvidersBreakdown
       data={Array []}
-      type="Provider"
+      type="mailbox-provider"
     />
   </Panel>
   <div

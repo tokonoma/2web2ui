@@ -41,18 +41,18 @@ export default (state = initialState, { type, payload, meta }) => {
     case 'STOP_INBOX_PLACEMENT_TEST_FAIL':
       return { ...state, stopTestPending: false, stopTestError: payload };
 
-    case 'GET_INBOX_PLACEMENT_TEST_BY_PROVIDER_PENDING':
+    case 'GET_INBOX_PLACEMENT_TEST_BY_MAILBOX-PROVIDERS_PENDING':
       return { ...state, getByProviderPending: true, getByProviderError: null };
-    case 'GET_INBOX_PLACEMENT_TEST_BY_PROVIDER_SUCCESS':
+    case 'GET_INBOX_PLACEMENT_TEST_BY_MAILBOX-PROVIDERS_SUCCESS':
       return { ...state, getByProviderPending: false, placementsByProvider: payload, getByProviderError: null };
-    case 'GET_INBOX_PLACEMENT_TEST_BY_PROVIDER_FAIL':
+    case 'GET_INBOX_PLACEMENT_TEST_BY_MAILBOX-PROVIDERS_FAIL':
       return { ...state, getByProviderPending: false, getByProviderError: payload };
 
-    case 'GET_INBOX_PLACEMENT_TEST_BY_REGION_PENDING':
+    case 'GET_INBOX_PLACEMENT_TEST_BY_REGIONS_PENDING':
       return { ...state, getByRegionPending: true, getByRegionError: null };
-    case 'GET_INBOX_PLACEMENT_TEST_BY_REGION_SUCCESS':
+    case 'GET_INBOX_PLACEMENT_TEST_BY_REGIONS_SUCCESS':
       return { ...state, getByRegionPending: false, placementsByRegion: payload, getByRegionError: null };
-    case 'GET_INBOX_PLACEMENT_TEST_BY_REGION_FAIL':
+    case 'GET_INBOX_PLACEMENT_TEST_BY_REGIONS_FAIL':
       return { ...state, getByRegionPending: false, getByRegionError: payload };
 
     case 'GET_INBOX_PLACEMENT_TEST_CONTENT_PENDING':
