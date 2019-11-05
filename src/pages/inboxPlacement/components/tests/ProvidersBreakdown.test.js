@@ -1,9 +1,41 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import ProvidersBreakdown, { GroupPercentage } from '../ProvidersBreakdown';
+import ProvidersBreakdown, { GroupPercentage, HeaderComponent, RowComponent } from '../ProvidersBreakdown';
 
 describe('Component: ProvidersBreakdown', () => {
+
+  const data = [
+    {
+      mailbox_provider: 'dogmail.com',
+      region: 'north america',
+      placement: {
+        inbox_pct: 0,
+        spam_pct: 0,
+        missing_pct: 1
+      },
+      authentication: {
+        spf_pct: 0,
+        dkim_pct: 0,
+        dmarc_pct: 1
+      }
+    },
+    {
+      mailbox_provider: 'doghouseinbox.com',
+      region: 'europe',
+      placement: {
+        inbox_pct: 0.8,
+        spam_pct: 0.1,
+        missing_pct: 0.1
+      },
+      authentication: {
+        spf_pct: 0.8,
+        dkim_pct: 0.1,
+        dmarc_pct: 0.1
+      }
+    }
+  ];
+
   const subject = ({ ...props }) => shallow(<ProvidersBreakdown data={[]} {...props}/>);
 
   it('renders correctly with no data', () => {
@@ -11,41 +43,33 @@ describe('Component: ProvidersBreakdown', () => {
   });
 
   it('renders correctly with data', () => {
-    const data = [
-      {
-        'mailbox_provider': 'dogmail.com',
-        'placement': {
-          'inbox_pct': 0,
-          'spam_pct': 0,
-          'missing_pct': 1
-        },
-        'authentication': {
-          'spf_pct': 0,
-          'dkim_pct': 0,
-          'dmarc_pct': 1
-        }
-      },
-      {
-        'mailbox_provider': 'doghouseinbox.com',
-        'placement': {
-          'inbox_pct': 0.8,
-          'spam_pct': 0.1,
-          'missing_pct': 0.1
-        },
-        'authentication': {
-          'spf_pct': 0.8,
-          'dkim_pct': 0.1,
-          'dmarc_pct': 0.1
-        }
-      }
-    ];
-
     expect(subject({ data })).toMatchSnapshot();
   });
+
 
   describe('SubComponent: GroupPercentage', () => {
     it('renders percentage correctly', () => {
       expect(shallow(<GroupPercentage value={0.2}/>)).toMatchSnapshot();
+    });
+  });
+
+  describe('RowComponent', () => {
+    const { mailbox_provider, region, placement, authentication } = data[0];
+    it('renders correctly', () => {
+      expect(shallow(
+        <RowComponent
+          id={1}
+          mailbox_provider={mailbox_provider}
+          region={region}
+          placement={placement}
+          authentication={authentication}
+        />)).toMatchSnapshot();
+    });
+  });
+
+  describe('HeaderComponent', () => {
+    it('renders correctly', () => {
+      expect(shallow(<HeaderComponent/>)).toMatchSnapshot();
     });
   });
 

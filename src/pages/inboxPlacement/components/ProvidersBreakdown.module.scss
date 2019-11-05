@@ -10,9 +10,15 @@
   border-bottom: 0px;
 }
 
-.ProviderCell {
+.MailboxProviderCell {
+  width: 20%;
+  font-weight: normal;
+}
+
+.RegionCell {
   border-right: 1px solid color(gray, 8);
-  width: 40%;
+  width: 15%;
+  word-break: normal;
   font-weight: normal;
 }
 
