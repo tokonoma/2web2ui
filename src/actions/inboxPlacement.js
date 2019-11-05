@@ -30,7 +30,7 @@ export const getInboxPlacementTest = (id) => sparkpostApiRequest({
   }
 });
 
-export const getInboxPlacementByProviders = (id) => getInboxPlacementData(id, PLACEMENT_FILTER_TYPES.MAILBOX_PROVIDER, 'GET_INBOX_PLACEMENT_TEST_BY_MAILBOX-PROVIDERS');
+export const getInboxPlacementByProviders = (id) => getInboxPlacementData(id, PLACEMENT_FILTER_TYPES.MAILBOX_PROVIDER, 'GET_INBOX_PLACEMENT_TEST_BY_MAILBOX_PROVIDERS');
 
 export const getInboxPlacementByRegions = (id) => getInboxPlacementData(id, PLACEMENT_FILTER_TYPES.REGION, 'GET_INBOX_PLACEMENT_TEST_BY_REGIONS');
 
