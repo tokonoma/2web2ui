@@ -75,7 +75,7 @@ export class CancellationPanel extends React.Component {
             config={config.brightback.cancelConfig}
             condition={true}
             render={({ to, enabled }) => (
-              <Button color='orange' to={enabled ? to : ACCOUNT_CANCEL_LINK} component={enabled ? null : Link}>Cancel Account</Button>
+              <Button destructive to={enabled ? to : ACCOUNT_CANCEL_LINK} component={enabled ? null : Link}>Cancel Account</Button>
             )}
           />
         </div>
