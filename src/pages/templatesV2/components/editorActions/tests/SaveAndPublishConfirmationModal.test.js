@@ -71,7 +71,7 @@ describe('SaveAndPublishConfirmationModal', () => {
 
     expect(publishDraftV2).toHaveBeenCalledWith(
       {
-        ...draft,
+        id: draft.id,
         content,
         parsedTestData
       },
