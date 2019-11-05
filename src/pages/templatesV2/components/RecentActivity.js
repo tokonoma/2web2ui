@@ -15,7 +15,7 @@ const RecentActivity = (props) => {
   const descendingSortedTemplates = _.orderBy(templates, 'last_update_time', 'desc');
 
   if (templates.length < 3) {
-    return;
+    return null;
   }
 
   return (

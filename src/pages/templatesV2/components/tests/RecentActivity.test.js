@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import RecentActivity from '../RecentActivity';
 
 describe('RecentActivity', () => {
@@ -21,13 +21,25 @@ describe('RecentActivity', () => {
     last_update_time: '2019-10-18T17:30:49+00:00',
     list_status: 'draft'
   };
-  const subject = (props) => shallow(
-    <RecentActivity
-      onToggleDeleteModal={jest.fn()}
-      onToggleDuplicateModal={jest.fn()}
-      {...props}
-    />
-  );
+  const subject = (props, isShallow = true) => {
+    if (isShallow) {
+      return shallow(
+        <RecentActivity
+          onToggleDeleteModal={jest.fn()}
+          onToggleDuplicateModal={jest.fn()}
+          {...props}
+        />
+      );
+    }
+
+    return mount(
+      <RecentActivity
+        onToggleDeleteModal={jest.fn()}
+        onToggleDuplicateModal={jest.fn()}
+        {...props}
+      />
+    );
+  };
 
   it('renders an empty fragment when fewer than 2 templates are present', () => {
     const wrapper = subject({
@@ -35,7 +47,7 @@ describe('RecentActivity', () => {
         publishedTemplate,
         draftTemplate
       ]
-    });
+    }, false);
 
     expect(wrapper).not.toHaveTextContent('Recent Activity');
   });
