@@ -10,12 +10,9 @@ import styles from './TestDetails.module.scss';
 import TimeToReceiveSection from './TimeToReceiveSection';
 import AuthenticationResults from './AuthenticationResults';
 import { Search } from '@sparkpost/matchbox-icons';
+import { PLACEMENT_FILTER_TYPES, PLACEMENT_FILTER_LABELS } from '../constants/types';
 
-export const PLACEMENT_FILTER_TYPES = Object.freeze({
-  'PROVIDER': 'Provider',
-  'REGION': 'Region'
-});
-const PLACEMENTS_BY_OPTIONS = Object.values(PLACEMENT_FILTER_TYPES);
+const PLACEMENTS_TYPE_OPTIONS = Object.values(PLACEMENT_FILTER_TYPES).map((type) => ({ label: PLACEMENT_FILTER_LABELS[type], value: type }));
 
 const TestDetails = ({ details, placementsByProvider, placementsByRegion }) => {
   const [placementsByFilterIndex, setPlacementsByFilterIndex] = useState(0);
@@ -26,13 +23,13 @@ const TestDetails = ({ details, placementsByProvider, placementsByRegion }) => {
   }, []);
 
   const onFilterChange = useCallback((e) => {
-    const foundIndex = PLACEMENTS_BY_OPTIONS.findIndex((option) => option === e.target.value);
+    const foundIndex = PLACEMENTS_TYPE_OPTIONS.findIndex((option) => option.value === e.target.value);
     setPlacementsByFilterIndex(foundIndex !== -1 ? foundIndex : 0);
   }, []);
 
   const placements = details.placement || {};
 
-  const breakdownType = PLACEMENTS_BY_OPTIONS[placementsByFilterIndex];
+  const breakdownType = PLACEMENTS_TYPE_OPTIONS[placementsByFilterIndex].value;
   let breakdownData = [];
   let textFieldPlaceholder = '';
   switch (breakdownType) {
@@ -97,7 +94,7 @@ const TestDetails = ({ details, placementsByProvider, placementsByRegion }) => {
       <Panel title={panelTitle}>
         <div className={styles.PlacementFilterContainer}>
           <div className={styles.PlacementFilterSelect}>
-            <Select options={PLACEMENTS_BY_OPTIONS} onChange={onFilterChange} />
+            <Select options={PLACEMENTS_TYPE_OPTIONS} onChange={onFilterChange} />
           </div>
           <div className={styles.PlacementFilterTextField}>
             <TextField suffix={<Search />} onChange={onSearchChange} placeholder={textFieldPlaceholder} />

@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { Page, Tabs } from '@sparkpost/matchbox';
 
 import { Loading } from 'src/components';
-import { getInboxPlacementTest, getInboxPlacementByProviders, getInboxPlacementByRegion, getInboxPlacementTestContent } from 'src/actions/inboxPlacement';
+import { getInboxPlacementTest, getInboxPlacementByProviders, getInboxPlacementByRegions, getInboxPlacementTestContent } from 'src/actions/inboxPlacement';
+import { selectTestDetailsPageError, selectTestDetailsPageLoading } from 'src/selectors/inboxPlacement';
 import TestDetails from './components/TestDetails';
 import TestContent from './components/TestContent';
 import useTabs from 'src/hooks/useTabs';
@@ -23,7 +24,7 @@ export const TestDetailsPage = (props) => {
     error,
     getInboxPlacementTest,
     getInboxPlacementByProviders,
-    getInboxPlacementByRegion,
+    getInboxPlacementByRegions,
     getInboxPlacementTestContent,
     StopTestComponent = StopTest //This is for unit test purposes
   } = props;
@@ -34,8 +35,8 @@ export const TestDetailsPage = (props) => {
     getInboxPlacementTest(id);
     getInboxPlacementByProviders(id);
     getInboxPlacementTestContent(id);
-    getInboxPlacementByRegion(id);
-  }, [getInboxPlacementTest, getInboxPlacementByProviders, getInboxPlacementTestContent, getInboxPlacementByRegion, id]);
+    getInboxPlacementByRegions(id);
+  }, [getInboxPlacementTest, getInboxPlacementByProviders, getInboxPlacementTestContent, getInboxPlacementByRegions, id]);
 
   useEffect(() => {
     loadTestData();
@@ -97,8 +98,8 @@ function mapStateToProps(state, props) {
   return {
     tabIndex: currentTabIndex > 0 ? currentTabIndex : 0,
     id,
-    loading: state.inboxPlacement.getTestPending || state.inboxPlacement.getByProviderPending || state.inboxPlacement.getTestContentPending,
-    error: state.inboxPlacement.getTestError || state.inboxPlacement.getByProviderError || state.inboxPlacement.getTestContentError,
+    loading: selectTestDetailsPageLoading(state),
+    error: selectTestDetailsPageError(state),
     details: state.inboxPlacement.currentTestDetails,
     placementsByProvider: state.inboxPlacement.placementsByProvider || [],
     placementsByRegion: state.inboxPlacement.placementsByRegion || [],
@@ -106,4 +107,4 @@ function mapStateToProps(state, props) {
   };
 }
 
-export default connect(mapStateToProps, { getInboxPlacementTest, getInboxPlacementByProviders, getInboxPlacementByRegion, getInboxPlacementTestContent })(TestDetailsPage);
+export default connect(mapStateToProps, { getInboxPlacementTest, getInboxPlacementByProviders, getInboxPlacementByRegions, getInboxPlacementTestContent })(TestDetailsPage);
