@@ -16,9 +16,17 @@ describe('SettingsForm', () => {
       domainsLoading: false,
       hasSubaccounts: false,
       canViewSubaccount: false,
+      content: {
+        html: '<p>Hello</p>',
+        text: ''
+      },
+      values: {
+        content: {}
+      },
       isPublishedMode: false,
       handleSubmit: jest.fn((func) => func),
-      showAlert: jest.fn()
+      showAlert: jest.fn(),
+      setHasSaved: jest.fn()
     };
 
     return shallow(<SettingsForm {...defaultProps} {...props} />);
@@ -109,17 +117,24 @@ describe('SettingsForm', () => {
         some: 'data'
       };
       const mockAlert = jest.fn();
+      const mockSetHasSaved = jest.fn();
       const wrapper = subject({
         valid: true,
         pristine: false,
         updateDraftV2: mockUpdateDraft,
         parsedTestData,
         draft: { id: 'foo' },
-        showAlert: mockAlert
+        showAlert: mockAlert,
+        setHasSaved: mockSetHasSaved
       });
       await wrapper.find('form').simulate('submit');
-      expect(mockUpdateDraft).toHaveBeenCalledWith({ id: 'foo', parsedTestData }, undefined);
+      expect(mockUpdateDraft).toHaveBeenCalledWith({ id: 'foo', parsedTestData,
+        content: {
+          'html': '<p>Hello</p>',
+          'text': ''
+        }}, undefined);
       expect(mockAlert).toHaveBeenCalledWith({ type: 'success', message: 'Template settings updated.' });
+      expect(mockSetHasSaved).toHaveBeenCalledWith(true);
     });
 
     it('updates settings with subaccount', () => {
@@ -132,7 +147,10 @@ describe('SettingsForm', () => {
         subaccountId: 101
       });
       wrapper.find('form').simulate('submit');
-      expect(mockUpdateDraft).toHaveBeenCalledWith({ id: 'foo' }, 101);
+      expect(mockUpdateDraft).toHaveBeenCalledWith({ id: 'foo', content: {
+        'html': '<p>Hello</p>',
+        'text': ''
+      }}, 101);
     });
   });
 });
