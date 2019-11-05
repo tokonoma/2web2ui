@@ -7,7 +7,18 @@ import VerifyEmailBanner from 'src/components/verifyEmailBanner/VerifyEmailBanne
 import { FreePlanWarningBanner } from 'src/pages/billing/components/Banners';
 import { hasGrants } from 'src/helpers/conditions';
 import { AccessControl } from 'src/components/auth';
+import { isAccountUiOptionSet } from 'src/helpers/conditions/account';
+
 export class DashboardPage extends Component {
+
+  displayTutorial = (isMessageOnboardingSet) => {
+    if (isMessageOnboardingSet) { return null; }
+
+    return <AccessControl condition={hasGrants('api_keys/manage', 'templates/modify', 'sending_domains/manage')}>
+      <Tutorial {...this.props} />
+    </AccessControl>;
+
+  }
 
   render() {
     const { accountAgeInDays, currentUser, account } = this.props;
@@ -21,9 +32,7 @@ export class DashboardPage extends Component {
         )}
         <FreePlanWarningBanner account={account} accountAgeInDays={accountAgeInDays} ageRangeStart={16}/>
         <UsageReport/>
-        <AccessControl condition={hasGrants('api_keys/manage', 'templates/modify', 'sending_domains/manage')}>
-          <Tutorial {...this.props} />
-        </AccessControl>
+        {this.displayTutorial(isAccountUiOptionSet('messaging_onboarding'))}
       </Page>
     );
   }
