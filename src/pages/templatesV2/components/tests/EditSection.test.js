@@ -84,5 +84,25 @@ describe('EditSection', () => {
 
       expect(wrapper.find('Popover')).not.toExist();
     });
+
+    it('opens the insert amp confirmation modal via the "Insert AMP Boilerplate" action', () => {
+      const wrapper = subject({
+        currentTabIndex: 1,
+        currentTabKey: 'amp_html'
+      });
+
+      openPopover(wrapper);
+
+      const insertAMPAction = wrapper.find('ActionList').props().actions.filter((item) => item.content === 'Insert AMP Boilerplate')[0];
+
+      insertAMPAction.onClick();
+
+      expect(wrapper.find('ConfirmationModal')).toHaveProp('open', true);
+      expect(wrapper.find('Popover')).toHaveProp('open', false);
+
+      wrapper.find('ConfirmationModal').simulate('cancel');
+
+      expect(wrapper.find('ConfirmationModal')).toHaveProp('open', false);
+    });
   });
 });
