@@ -1,5 +1,175 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Component: ProvidersBreakdown HeaderComponent renders correctly 1`] = `
+<thead>
+  <Table.Row
+    className="HeaderRow"
+  >
+    <Table.HeaderCell
+      className="MailboxProviderCell"
+    />
+    <Table.HeaderCell
+      className="RegionCell"
+    >
+      Region
+    </Table.HeaderCell>
+    <Table.HeaderCell
+      className="Placement"
+    >
+      Inbox
+    </Table.HeaderCell>
+    <Table.HeaderCell
+      className="Placement"
+    >
+      Spam
+    </Table.HeaderCell>
+    <Table.HeaderCell
+      className="Placement"
+    >
+      Missing
+    </Table.HeaderCell>
+    <Table.HeaderCell
+      className="Authentication divider"
+    >
+      SPF
+    </Table.HeaderCell>
+    <Table.HeaderCell
+      className="Authentication"
+    >
+      DKIM
+    </Table.HeaderCell>
+    <Table.HeaderCell
+      className="Authentication"
+    >
+      DMARC
+    </Table.HeaderCell>
+  </Table.Row>
+</thead>
+`;
+
+exports[`Component: ProvidersBreakdown RowComponent renders mailbox provider correctly 1`] = `
+<Table.Row
+  className="DataRow"
+>
+  <Table.Cell
+    className="MailboxProviderCell"
+    data-id="table-cell-provider-1"
+  >
+    <PageLink
+      to="/inbox-placement/details/1/mailbox-provider/dogmail.com"
+    >
+      <strong>
+        dogmail.com
+      </strong>
+    </PageLink>
+  </Table.Cell>
+  <Table.Cell
+    className="RegionCell"
+  >
+    North America
+  </Table.Cell>
+  <Table.Cell
+    className="Placement"
+  >
+    <GroupPercentage
+      value={0}
+    />
+  </Table.Cell>
+  <Table.Cell
+    className="Placement"
+  >
+    <GroupPercentage
+      value={0}
+    />
+  </Table.Cell>
+  <Table.Cell
+    className="Placement"
+  >
+    <GroupPercentage
+      value={1}
+    />
+  </Table.Cell>
+  <Table.Cell
+    className="Authentication divider"
+  >
+    <GroupPercentage
+      value={0}
+    />
+  </Table.Cell>
+  <Table.Cell
+    className="Authentication"
+  >
+    <GroupPercentage
+      value={0}
+    />
+  </Table.Cell>
+  <Table.Cell
+    className="Authentication"
+  >
+    <GroupPercentage
+      value={1}
+    />
+  </Table.Cell>
+</Table.Row>
+`;
+
+exports[`Component: ProvidersBreakdown RowComponent renders region correctly 1`] = `
+<Table.Row
+  className="DataRow"
+>
+  <Table.Cell
+    className="MailboxProviderCell"
+    data-id="table-cell-provider-1"
+  >
+    <strong>
+      North America
+    </strong>
+  </Table.Cell>
+  <Table.Cell
+    className="Placement"
+  >
+    <GroupPercentage
+      value={0}
+    />
+  </Table.Cell>
+  <Table.Cell
+    className="Placement"
+  >
+    <GroupPercentage
+      value={0}
+    />
+  </Table.Cell>
+  <Table.Cell
+    className="Placement"
+  >
+    <GroupPercentage
+      value={1}
+    />
+  </Table.Cell>
+  <Table.Cell
+    className="Authentication divider"
+  >
+    <GroupPercentage
+      value={0}
+    />
+  </Table.Cell>
+  <Table.Cell
+    className="Authentication"
+  >
+    <GroupPercentage
+      value={0}
+    />
+  </Table.Cell>
+  <Table.Cell
+    className="Authentication"
+  >
+    <GroupPercentage
+      value={1}
+    />
+  </Table.Cell>
+</Table.Row>
+`;
+
 exports[`Component: ProvidersBreakdown SubComponent: GroupPercentage renders percentage correctly 1`] = `
 <span
   className="GroupValue"

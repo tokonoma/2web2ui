@@ -10,9 +10,10 @@ import { PLACEMENT_FILTER_TYPES } from '../constants/types';
 
 export const GroupPercentage = ({ value }) => <span className={styles.GroupValue}>{formatPercent(value * 100)}</span>;
 
-const HeaderComponent = () => (<thead>
+export const HeaderComponent = ({ type }) => (<thead>
   <Table.Row className={styles.HeaderRow}>
-    <Table.HeaderCell className={styles.ProviderCell}></Table.HeaderCell>
+    <Table.HeaderCell className={styles.MailboxProviderCell}></Table.HeaderCell>
+    {type !== PLACEMENT_FILTER_TYPES.REGION && <Table.HeaderCell className={styles.RegionCell}>Region</Table.HeaderCell>}
     <Table.HeaderCell className={styles.Placement}>Inbox</Table.HeaderCell>
     <Table.HeaderCell className={styles.Placement}>Spam</Table.HeaderCell>
     <Table.HeaderCell className={styles.Placement}>Missing</Table.HeaderCell>
@@ -21,6 +22,10 @@ const HeaderComponent = () => (<thead>
     <Table.HeaderCell className={styles.Authentication}>DMARC</Table.HeaderCell>
   </Table.Row>
 </thead>);
+
+const getHeaderWrapper = _.memoize((type) => (
+  (props) => <HeaderComponent {...props} type={type} />
+));
 
 const WrapperComponent = ({ children }) => (<div>
   <Table>{children}</Table>
@@ -35,10 +40,13 @@ const getProviderCellByType = (type, { id, mailbox_provider, region }) => {
   }
 };
 
-const RowComponent = ({ id, mailbox_provider, placement, authentication, type, region }) => (<Table.Row className={styles.DataRow}>
-  <Table.Cell className={styles.ProviderCell} data-id={`table-cell-provider-${id}`}>
+export const RowComponent = ({ id, mailbox_provider, placement, authentication, type, region }) => (<Table.Row className={styles.DataRow}>
+  <Table.Cell className={styles.MailboxProviderCell} data-id={`table-cell-provider-${id}`}>
     {getProviderCellByType(type, { id, mailbox_provider, region })}
   </Table.Cell>
+  {type !== PLACEMENT_FILTER_TYPES.REGION && <Table.Cell className={styles.RegionCell}>
+    {_.startCase(region)}
+  </Table.Cell>}
   <Table.Cell className={styles.Placement}><GroupPercentage value={placement.inbox_pct}/></Table.Cell>
   <Table.Cell className={styles.Placement}><GroupPercentage value={placement.spam_pct}/></Table.Cell>
   <Table.Cell className={styles.Placement}><GroupPercentage value={placement.missing_pct}/></Table.Cell>
@@ -55,7 +63,7 @@ const ProvidersBreakdown = ({ data = [], type }) => (
   <TableCollection
     rows={data}
     wrapperComponent={WrapperComponent}
-    headerComponent={HeaderComponent}
+    headerComponent={getHeaderWrapper(type)}
     rowComponent={getRowWrapper(type)}
     pagination={true}
     defaultSortColumn='placement.inbox_pct'

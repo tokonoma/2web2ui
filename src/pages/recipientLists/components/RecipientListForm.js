@@ -68,28 +68,26 @@ export class RecipientListForm extends Component {
     }
 
     return <div>
-      { error && this.renderCsvErrors() }
+      {error && this.renderCsvErrors()}
       <form onSubmit={handleSubmit(this.preSubmit)}>
         <Panel>
           <Panel.Section>
             <Field
               name='name'
-              label='Label'
+              label='Name'
               placeholder='My favorite recipients'
               validate={[required, maxLength(64)]}
               disabled={submitting}
               component={TextFieldWrapper}
-              required
             />
-            { ! editMode && <Field
+            {!editMode && <Field
               name='id'
-              label='Identifier'
+              label='ID'
               placeholder='my-favorite-recipients'
               validate={[required, maxLength(64)]}
               disabled={submitting}
               component={TextFieldWrapper}
-              required
-            /> }
+            />}
             <Field
               name='description'
               label='Description'
@@ -112,7 +110,6 @@ export class RecipientListForm extends Component {
               label={uploadHint}
               name="csv"
               validate={uploadValidators}
-              required
             />
           </Panel.Section>
           <Panel.Section>

@@ -14,7 +14,7 @@ describe('CancellationPanel', () => {
     fetchAccount = {() => {}}
     {...props}/>);
 
-  const getButton = ({ wrapper = subject(), enabled = false, to = '' }) => wrapper
+  const getButton = ({ wrapper = subject(), enabled = false, to = '' } = {}) => wrapper
     .find(Brightback)
     .renderProp('render')({ enabled, to });
 
@@ -35,6 +35,10 @@ describe('CancellationPanel', () => {
   it('cancellation button goes to brightback when enabled', () => {
     const bbUrl = 'https://brightback.url';
     expect(getButton({ enabled: true, to: bbUrl }).prop('to')).toEqual(bbUrl);
+  });
+
+  it('cancellation button is destructive variant', () => {
+    expect(getButton().prop('destructive')).toBeTruthy();
   });
 
   it('refresh button renews account and retrieves new account state', async () => {
