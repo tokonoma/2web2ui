@@ -41,7 +41,7 @@ export const getInboxPlacementByProviders = (id) => sparkpostApiRequest({
 });
 
 export const getInboxPlacementByRegion = (id) => sparkpostApiRequest({
-  type: 'GET_INDEX_PLACEMENT_TEST_BY_REGION',
+  type: 'GET_INBOX_PLACEMENT_TEST_BY_REGION',
   meta: {
     method: 'GET',
     url: `/v1/inbox-placement/${id}/region`,

@@ -48,11 +48,11 @@ export default (state = initialState, { type, payload, meta }) => {
     case 'GET_INBOX_PLACEMENT_TEST_BY_PROVIDER_FAIL':
       return { ...state, getByProviderPending: false, getByProviderError: payload };
 
-    case 'GET_INDEX_PLACEMENT_TEST_BY_REGION_PENDING':
+    case 'GET_INBOX_PLACEMENT_TEST_BY_REGION_PENDING':
       return { ...state, getByRegionPending: true, getByRegionError: null };
-    case 'GET_INDEX_PLACEMENT_TEST_BY_REGION_SUCCESS':
+    case 'GET_INBOX_PLACEMENT_TEST_BY_REGION_SUCCESS':
       return { ...state, getByRegionPending: false, placementsByRegion: payload, getByRegionError: null };
-    case 'GET_INDEX_PLACEMENT_TEST_BY_REGION_FAIL':
+    case 'GET_INBOX_PLACEMENT_TEST_BY_REGION_FAIL':
       return { ...state, getByRegionPending: false, getByRegionError: payload };
 
     case 'GET_INBOX_PLACEMENT_TEST_CONTENT_PENDING':
