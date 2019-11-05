@@ -23,9 +23,9 @@ export default class SettingsForm extends React.Component {
       setHasSaved
     } = this.props;
 
-    const { text , html } = content;
+    const { subject: _subject, from: _from, reply_to: _reply_to, ...rest } = content; //content object has updated values for html, text etc, provided by useEditorContext
 
-    values.content = { ...values.content , text, html };
+    values.content = { ...values.content , ...rest };
 
     return updateDraftV2({
       id: draft.id,
