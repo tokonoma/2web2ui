@@ -80,23 +80,38 @@ exports[`Component: TestDetails renders correctly 1`] = `
     }
   >
     <div
-      className="PlacementFilter"
+      className="PlacementFilterContainer"
     >
-      <Select
-        onChange={[Function]}
-        options={
-          Array [
-            Object {
-              "label": "Mailbox Provider",
-              "value": "mailbox-provider",
-            },
-            Object {
-              "label": "Region",
-              "value": "region",
-            },
-          ]
-        }
-      />
+      <div
+        className="PlacementFilterSelect"
+      >
+        <Select
+          onChange={[Function]}
+          options={
+            Array [
+              Object {
+                "label": "Mailbox Provider",
+                "value": "mailbox-provider",
+              },
+              Object {
+                "label": "Region",
+                "value": "region",
+              },
+            ]
+          }
+        />
+      </div>
+      <div
+        className="PlacementFilterTextField"
+      >
+        <TextField
+          onChange={[Function]}
+          placeholder="Mailbox Provider or Region"
+          resize="both"
+          suffix={<Search />}
+          type="text"
+        />
+      </div>
     </div>
     <ProvidersBreakdown
       data={Array []}
