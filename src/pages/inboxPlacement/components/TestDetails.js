@@ -13,16 +13,14 @@ import { PLACEMENT_FILTER_TYPES, PLACEMENT_FILTER_LABELS } from '../constants/ty
 const PLACEMENTS_TYPE_OPTIONS = Object.values(PLACEMENT_FILTER_TYPES).map((type) => ({ label: PLACEMENT_FILTER_LABELS[type], value: type }));
 
 const TestDetails = ({ details, placementsByProvider, placementsByRegion }) => {
-  const [placementsByFilterIndex, setPlacementsByFilterIndex] = useState(0);
+  const [breakdownType, setBreakdownType] = useState(PLACEMENTS_TYPE_OPTIONS[0].value);
 
   const onFilterChange = useCallback((e) => {
-    const foundIndex = PLACEMENTS_TYPE_OPTIONS.findIndex((option) => option.value === e.target.value);
-    setPlacementsByFilterIndex(foundIndex !== -1 ? foundIndex : 0);
+    setBreakdownType(e.target.value);
   }, []);
 
   const placements = details.placement || {};
 
-  const breakdownType = PLACEMENTS_TYPE_OPTIONS[placementsByFilterIndex].value;
   let breakdownData = [];
   switch (breakdownType) {
     case PLACEMENT_FILTER_TYPES.REGION:
