@@ -75,6 +75,7 @@ exports[`EditSection renders tabs and section 1`] = `
               "href": "javascript:void(0);",
               "onClick": [Function],
               "role": "button",
+              "title": "Opens a dialog",
             },
           ]
         }
@@ -87,6 +88,18 @@ exports[`EditSection renders tabs and section 1`] = `
     loading={false}
     onClose={[Function]}
     open={false}
+  />
+  <ConfirmationModal
+    confirmVerb="Insert"
+    content={
+      <p>
+        Any existing markup in the AMP tab will be lost.
+      </p>
+    }
+    onCancel={[Function]}
+    onConfirm={[Function]}
+    open={false}
+    title="Are you sure you want to insert the AMP Email Boilerplate?"
   />
 </Panel>
 `;
