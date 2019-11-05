@@ -1,12 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Component: ProvidersBreakdown HeaderComponent renders correctly 1`] = `
+exports[`Component: PlacementBreakdown HeaderComponent renders correctly 1`] = `
 <thead>
   <Table.Row
     className="HeaderRow"
   >
     <Table.HeaderCell
-      className="MailboxProviderCell"
+      className="PlacementNameCell"
     />
     <Table.HeaderCell
       className="RegionCell"
@@ -47,13 +47,12 @@ exports[`Component: ProvidersBreakdown HeaderComponent renders correctly 1`] = `
 </thead>
 `;
 
-exports[`Component: ProvidersBreakdown RowComponent renders mailbox provider correctly 1`] = `
+exports[`Component: PlacementBreakdown RowComponent renders mailbox provider correctly 1`] = `
 <Table.Row
   className="DataRow"
 >
   <Table.Cell
-    className="MailboxProviderCell"
-    data-id="table-cell-provider-1"
+    className="PlacementNameCell"
   >
     <PageLink
       to="/inbox-placement/details/1/mailbox-provider/dogmail.com"
@@ -113,13 +112,12 @@ exports[`Component: ProvidersBreakdown RowComponent renders mailbox provider cor
 </Table.Row>
 `;
 
-exports[`Component: ProvidersBreakdown RowComponent renders region correctly 1`] = `
+exports[`Component: PlacementBreakdown RowComponent renders region correctly 1`] = `
 <Table.Row
   className="DataRow"
 >
   <Table.Cell
-    className="MailboxProviderCell"
-    data-id="table-cell-provider-1"
+    className="PlacementNameCell"
   >
     <strong>
       North America
@@ -170,7 +168,7 @@ exports[`Component: ProvidersBreakdown RowComponent renders region correctly 1`]
 </Table.Row>
 `;
 
-exports[`Component: ProvidersBreakdown SubComponent: GroupPercentage renders percentage correctly 1`] = `
+exports[`Component: PlacementBreakdown SubComponent: GroupPercentage renders percentage correctly 1`] = `
 <span
   className="GroupValue"
 >
@@ -178,7 +176,7 @@ exports[`Component: ProvidersBreakdown SubComponent: GroupPercentage renders per
 </span>
 `;
 
-exports[`Component: ProvidersBreakdown matches snapshot with provider data 1`] = `
+exports[`Component: PlacementBreakdown matches snapshot with provider data 1`] = `
 <TableCollection
   defaultSortColumn="placement.inbox_pct"
   defaultSortDirection="desc"
@@ -220,49 +218,7 @@ exports[`Component: ProvidersBreakdown matches snapshot with provider data 1`] =
 />
 `;
 
-exports[`Component: ProvidersBreakdown matches snapshot with region data 1`] = `
-<TableCollection
-  defaultSortColumn="placement.inbox_pct"
-  defaultSortDirection="desc"
-  headerComponent={[Function]}
-  pagination={true}
-  rowComponent={[Function]}
-  rows={
-    Array [
-      Object {
-        "authentication": Object {
-          "dkim_pct": 0,
-          "dmarc_pct": 1,
-          "spf_pct": 0,
-        },
-        "placement": Object {
-          "inbox_pct": 0,
-          "missing_pct": 1,
-          "spam_pct": 0,
-        },
-        "region": "north america",
-      },
-      Object {
-        "authentication": Object {
-          "dkim_pct": 0.1,
-          "dmarc_pct": 0.1,
-          "spf_pct": 0.8,
-        },
-        "placement": Object {
-          "inbox_pct": 0.8,
-          "missing_pct": 0.1,
-          "spam_pct": 0.1,
-        },
-        "region": "europe",
-      },
-    ]
-  }
-  saveCsv={false}
-  wrapperComponent={[Function]}
-/>
-`;
-
-exports[`Component: ProvidersBreakdown renders correctly with no data 1`] = `
+exports[`Component: PlacementBreakdown renders correctly with no data 1`] = `
 <TableCollection
   defaultSortColumn="placement.inbox_pct"
   defaultSortDirection="desc"

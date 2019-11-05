@@ -113,7 +113,7 @@ exports[`Component: TestDetails renders correctly 1`] = `
         />
       </div>
     </div>
-    <ProvidersBreakdown
+    <PlacementBreakdown
       data={Array []}
       type="mailbox-provider"
     />

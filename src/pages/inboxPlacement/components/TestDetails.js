@@ -3,7 +3,7 @@ import { format } from 'date-fns';
 import { Grid, Panel, Select, TextField } from '@sparkpost/matchbox';
 import _ from 'lodash';
 import FolderPlacementBarChart from './FolderPlacementBarChart';
-import ProvidersBreakdown from './ProvidersBreakdown';
+import PlacementBreakdown from './PlacementBreakdown';
 import { FORMATS } from 'src/constants';
 import InfoBlock from './InfoBlock';
 import styles from './TestDetails.module.scss';
@@ -15,7 +15,7 @@ import { PLACEMENT_FILTER_TYPES, PLACEMENT_FILTER_LABELS } from '../constants/ty
 const PLACEMENTS_TYPE_OPTIONS = Object.values(PLACEMENT_FILTER_TYPES).map((type) => ({ label: PLACEMENT_FILTER_LABELS[type], value: type }));
 
 const TestDetails = ({ details, placementsByProvider, placementsByRegion }) => {
-  const [placementsByFilterIndex, setPlacementsByFilterIndex] = useState(0);
+  const [breakdownType, setBreakdownType] = useState(PLACEMENTS_TYPE_OPTIONS[0].value);
   const [searchPlacements, setSearchPlacements] = useState('');
 
   const onSearchChange = useCallback((e) => {
@@ -23,13 +23,11 @@ const TestDetails = ({ details, placementsByProvider, placementsByRegion }) => {
   }, []);
 
   const onFilterChange = useCallback((e) => {
-    const foundIndex = PLACEMENTS_TYPE_OPTIONS.findIndex((option) => option.value === e.target.value);
-    setPlacementsByFilterIndex(foundIndex !== -1 ? foundIndex : 0);
+    setBreakdownType(e.target.value);
   }, []);
 
   const placements = details.placement || {};
 
-  const breakdownType = PLACEMENTS_TYPE_OPTIONS[placementsByFilterIndex].value;
   let breakdownData = [];
   let textFieldPlaceholder = '';
   switch (breakdownType) {
@@ -100,7 +98,7 @@ const TestDetails = ({ details, placementsByProvider, placementsByRegion }) => {
             <TextField suffix={<Search />} onChange={onSearchChange} placeholder={textFieldPlaceholder} />
           </div>
         </div>
-        <ProvidersBreakdown type={breakdownType} data={breakdownData} />
+        <PlacementBreakdown type={breakdownType} data={breakdownData} />
       </Panel>
       <div style={{ clear: 'both' }} />
       <Panel title='Time to Receive Mail'>

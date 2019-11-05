@@ -4,7 +4,7 @@ import cx from 'classnames';
 import _ from 'lodash';
 import { TableCollection } from 'src/components/collection';
 import { formatPercent } from 'src/helpers/units';
-import styles from './ProvidersBreakdown.module.scss';
+import styles from './PlacementBreakdown.module.scss';
 import PageLink from 'src/components/pageLink/PageLink';
 import { PLACEMENT_FILTER_TYPES } from '../constants/types';
 
@@ -12,7 +12,7 @@ export const GroupPercentage = ({ value }) => <span className={styles.GroupValue
 
 export const HeaderComponent = ({ type }) => (<thead>
   <Table.Row className={styles.HeaderRow}>
-    <Table.HeaderCell className={styles.MailboxProviderCell}></Table.HeaderCell>
+    <Table.HeaderCell className={styles.PlacementNameCell}></Table.HeaderCell>
     {type !== PLACEMENT_FILTER_TYPES.REGION && <Table.HeaderCell className={styles.RegionCell}>Region</Table.HeaderCell>}
     <Table.HeaderCell className={styles.Placement}>Inbox</Table.HeaderCell>
     <Table.HeaderCell className={styles.Placement}>Spam</Table.HeaderCell>
@@ -31,7 +31,7 @@ const WrapperComponent = ({ children }) => (<div>
   <Table>{children}</Table>
 </div>);
 
-const getProviderCellByType = (type, { id, mailbox_provider, region }) => {
+const getPlacementNameByType = (type, { id, mailbox_provider, region }) => {
   switch (type) {
     case PLACEMENT_FILTER_TYPES.REGION:
       return <strong>{_.startCase(region)}</strong>;
@@ -41,8 +41,8 @@ const getProviderCellByType = (type, { id, mailbox_provider, region }) => {
 };
 
 export const RowComponent = ({ id, mailbox_provider, placement, authentication, type, region }) => (<Table.Row className={styles.DataRow}>
-  <Table.Cell className={styles.MailboxProviderCell} data-id={`table-cell-provider-${id}`}>
-    {getProviderCellByType(type, { id, mailbox_provider, region })}
+  <Table.Cell className={styles.PlacementNameCell}>
+    {getPlacementNameByType(type, { id, mailbox_provider, region })}
   </Table.Cell>
   {type !== PLACEMENT_FILTER_TYPES.REGION && <Table.Cell className={styles.RegionCell}>
     {_.startCase(region)}
@@ -59,7 +59,7 @@ const getRowWrapper = _.memoize((type) => (
   (props) => <RowComponent {...props} type={type} />
 ));
 
-const ProvidersBreakdown = ({ data = [], type }) => (
+const PlacementBreakdown = ({ data = [], type }) => (
   <TableCollection
     rows={data}
     wrapperComponent={WrapperComponent}
@@ -72,4 +72,4 @@ const ProvidersBreakdown = ({ data = [], type }) => (
   />
 );
 
-export default ProvidersBreakdown;
+export default PlacementBreakdown;

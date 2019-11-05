@@ -2,9 +2,9 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import { PLACEMENT_FILTER_TYPES } from '../../constants/types';
-import ProvidersBreakdown, { GroupPercentage, HeaderComponent, RowComponent } from '../ProvidersBreakdown';
+import PlacementBreakdown, { GroupPercentage, HeaderComponent, RowComponent } from '../PlacementBreakdown';
 
-describe('Component: ProvidersBreakdown', () => {
+describe('Component: PlacementBreakdown', () => {
 
   const data = [
     {
@@ -37,7 +37,7 @@ describe('Component: ProvidersBreakdown', () => {
     }
   ];
 
-  const subject = ({ ...props }) => shallow(<ProvidersBreakdown data={[]} {...props}/>);
+  const subject = ({ ...props }) => shallow(<PlacementBreakdown data={[]} {...props}/>);
 
   it('renders correctly with no data', () => {
     expect(subject()).toMatchSnapshot();
@@ -76,38 +76,6 @@ describe('Component: ProvidersBreakdown', () => {
     expect(subject({ data })).toMatchSnapshot();
   });
 
-  it('matches snapshot with region data', () => {
-    const data = [
-      {
-        'region': 'north america',
-        'placement': {
-          'inbox_pct': 0,
-          'spam_pct': 0,
-          'missing_pct': 1
-        },
-        'authentication': {
-          'spf_pct': 0,
-          'dkim_pct': 0,
-          'dmarc_pct': 1
-        }
-      },
-      {
-        'region': 'europe',
-        'placement': {
-          'inbox_pct': 0.8,
-          'spam_pct': 0.1,
-          'missing_pct': 0.1
-        },
-        'authentication': {
-          'spf_pct': 0.8,
-          'dkim_pct': 0.1,
-          'dmarc_pct': 0.1
-        }
-      }
-    ];
-    expect(subject({ data, type: PLACEMENT_FILTER_TYPES.REGION })).toMatchSnapshot();
-  });
-
   describe('SubComponent: GroupPercentage', () => {
     it('renders percentage correctly', () => {
       expect(shallow(<GroupPercentage value={0.2}/>)).toMatchSnapshot();
@@ -120,7 +88,8 @@ describe('Component: ProvidersBreakdown', () => {
       expect(shallow(
         <RowComponent
           id={1}
-          mailbox_provider={mailbox_provider}
+          // This is undefined because PLACEMENT_FILTER_TYPES.REGION doesn't have a mailbox_provider in its data
+          mailbox_provider={undefined}
           region={region}
           type={PLACEMENT_FILTER_TYPES.REGION}
           placement={placement}

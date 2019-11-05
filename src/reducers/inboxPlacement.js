@@ -41,11 +41,11 @@ export default (state = initialState, { type, payload, meta }) => {
     case 'STOP_INBOX_PLACEMENT_TEST_FAIL':
       return { ...state, stopTestPending: false, stopTestError: payload };
 
-    case 'GET_INBOX_PLACEMENT_TEST_BY_MAILBOX-PROVIDERS_PENDING':
+    case 'GET_INBOX_PLACEMENT_TEST_BY_MAILBOX_PROVIDERS_PENDING':
       return { ...state, getByProviderPending: true, getByProviderError: null };
-    case 'GET_INBOX_PLACEMENT_TEST_BY_MAILBOX-PROVIDERS_SUCCESS':
+    case 'GET_INBOX_PLACEMENT_TEST_BY_MAILBOX_PROVIDERS_SUCCESS':
       return { ...state, getByProviderPending: false, placementsByProvider: payload, getByProviderError: null };
-    case 'GET_INBOX_PLACEMENT_TEST_BY_MAILBOX-PROVIDERS_FAIL':
+    case 'GET_INBOX_PLACEMENT_TEST_BY_MAILBOX_PROVIDERS_FAIL':
       return { ...state, getByProviderPending: false, getByProviderError: payload };
 
     case 'GET_INBOX_PLACEMENT_TEST_BY_REGIONS_PENDING':
