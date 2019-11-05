@@ -35,11 +35,11 @@ const TestDetails = ({ details, placementsByProvider, placementsByRegion }) => {
   switch (breakdownType) {
     case PLACEMENT_FILTER_TYPES.REGION:
       breakdownData = placementsByRegion;
-      textFieldPlaceholder = 'Region';
+      textFieldPlaceholder = PLACEMENT_FILTER_LABELS[breakdownType];
       break;
     default:
       breakdownData = placementsByProvider;
-      textFieldPlaceholder = 'Mailbox Provider or Region';
+      textFieldPlaceholder = `${PLACEMENT_FILTER_LABELS[PLACEMENT_FILTER_TYPES.MAILBOX_PROVIDER]} or ${PLACEMENT_FILTER_LABELS[PLACEMENT_FILTER_TYPES.REGION]}`;
       break;
   }
 
