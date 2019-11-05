@@ -64,8 +64,12 @@ describe('Templates', () => {
           .then(($iframe) => {
             const $body = $iframe.contents().find('body');
 
-            cy.wrap($body.find(selector))
-              .should('contain', content);
+            if (selector.length) {
+              cy.wrap($body.find(selector))
+                .should('contain', content);
+            } else {
+              cy.wrap($body).should('contain', content);
+            }
           });
       };
 
@@ -84,6 +88,13 @@ describe('Templates', () => {
         .type('<h1>This is some AMP HTML. Cypress is {{qualifier}}.', { parseSpecialCharSequences: false });
 
       testPreviewContent('h1', 'This is some AMP HTML. Cypress is .');
+
+      cy.get('[data-id="popover-trigger-more"]').click();
+      cy.findByText('Insert AMP Boilerplate').click();
+      cy.findByText('Are you sure you want to insert the AMP Email Boilerplate?').should('be.visible');
+      cy.findByText('Insert').click();
+
+      testPreviewContent('', 'Hello, world');
 
       // Text editing
       cy.findByText('Text').click();
