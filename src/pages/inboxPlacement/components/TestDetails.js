@@ -2,7 +2,7 @@ import React, { useState, useCallback } from 'react';
 import { format } from 'date-fns';
 import { Grid, Panel, Select } from '@sparkpost/matchbox';
 import FolderPlacementBarChart from './FolderPlacementBarChart';
-import ProvidersBreakdown from './ProvidersBreakdown';
+import PlacementBreakdown from './PlacementBreakdown';
 import { FORMATS } from 'src/constants';
 import InfoBlock from './InfoBlock';
 import styles from './TestDetails.module.scss';
@@ -73,7 +73,7 @@ const TestDetails = ({ details, placementsByProvider, placementsByRegion }) => {
         <div className={styles.PlacementFilter}>
           <Select options={PLACEMENTS_TYPE_OPTIONS} onChange={onFilterChange} />
         </div>
-        <ProvidersBreakdown type={breakdownType} data={breakdownData} />
+        <PlacementBreakdown type={breakdownType} data={breakdownData} />
       </Panel>
       <div style={{ clear: 'both' }} />
       <Panel title='Time to Receive Mail'>

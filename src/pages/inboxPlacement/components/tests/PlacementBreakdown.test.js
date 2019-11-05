@@ -2,9 +2,9 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import { PLACEMENT_FILTER_TYPES } from '../../constants/types';
-import ProvidersBreakdown, { GroupPercentage, HeaderComponent, RowComponent } from '../ProvidersBreakdown';
+import PlacementBreakdown, { GroupPercentage, HeaderComponent, RowComponent } from '../PlacementBreakdown';
 
-describe('Component: ProvidersBreakdown', () => {
+describe('Component: PlacementBreakdown', () => {
 
   const data = [
     {
@@ -37,7 +37,7 @@ describe('Component: ProvidersBreakdown', () => {
     }
   ];
 
-  const subject = ({ ...props }) => shallow(<ProvidersBreakdown data={[]} {...props}/>);
+  const subject = ({ ...props }) => shallow(<PlacementBreakdown data={[]} {...props}/>);
 
   it('renders correctly with no data', () => {
     expect(subject()).toMatchSnapshot();

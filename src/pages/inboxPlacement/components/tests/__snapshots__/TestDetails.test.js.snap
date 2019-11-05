@@ -98,7 +98,7 @@ exports[`Component: TestDetails renders correctly 1`] = `
         }
       />
     </div>
-    <ProvidersBreakdown
+    <PlacementBreakdown
       data={Array []}
       type="mailbox-provider"
     />

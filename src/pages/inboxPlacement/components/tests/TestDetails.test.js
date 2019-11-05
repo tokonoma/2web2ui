@@ -44,6 +44,6 @@ describe('Component: TestDetails', () => {
       }
     ];
 
-    expect(subject({ placementsByProvider }).find('ProvidersBreakdown').prop('data')).toEqual(placementsByProvider);
+    expect(subject({ placementsByProvider }).find('PlacementBreakdown').prop('data')).toEqual(placementsByProvider);
   });
 });
