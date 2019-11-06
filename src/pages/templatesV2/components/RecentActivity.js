@@ -3,7 +3,10 @@ import _ from 'lodash';
 import { Panel } from '@sparkpost/matchbox';
 import { FileEdit, CheckCircle } from '@sparkpost/matchbox-icons';
 import { formatDate } from 'src/helpers/date';
+import { setSubaccountQuery } from 'src/helpers/subaccounts';
+import PageLink from 'src/components/pageLink';
 import { DuplicateAction, DeleteAction } from './ListComponents';
+import { routeNamespace } from '../constants/routes';
 import styles from './RecentActivity.module.scss';
 
 const RecentActivity = (props) => {
@@ -24,6 +27,8 @@ const RecentActivity = (props) => {
 
       <div className={styles.RecentActivity} role="list">
         {descendingSortedTemplates.map((template, index) => {
+          const version = template.list_status === 'draft' ? 'draft' : 'published';
+
           { /* Render only the first four items */ }
           if (index <= 3) {
             return (
@@ -47,7 +52,11 @@ const RecentActivity = (props) => {
                     </Panel.Section>
 
                     <Panel.Section className={styles.RecentActivitySection}>
-                      <strong>{template.name}</strong>
+                      <strong>
+                        <PageLink to={`/${routeNamespace}/edit/${template.id}/${version}/content${setSubaccountQuery(template.subaccount_id)}`}>
+                          {template.name}
+                        </PageLink>
+                      </strong>
                     </Panel.Section>
 
                     <div className={styles.RecentActivityMeta}>
