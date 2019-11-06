@@ -60,7 +60,7 @@ exports[`Page: Alerts List should render happy path 1`] = `
     Use alerts to be notified when important changes occur in your Health Score, bounce rates, and email usage.
   </p>
   <h3>
-    Recent Alerts
+    Recent Incidents
   </h3>
   <Grid>
     <Grid.Column
@@ -86,38 +86,31 @@ exports[`Page: Alerts List should render happy path 1`] = `
           <h3>
             my alert 1
           </h3>
+          <div
+            className="MetricsTag"
+          >
+            <Tag>
+              Health Score
+            </Tag>
+          </div>
         </Panel.Section>
         <Panel.Section
           className="Footer"
         >
-          <Tooltip
-            bottom={true}
-            content="View Details"
-            dark={true}
-            forcePosition={false}
-            horizontalOffset="-8px"
-            preferredDirection={
-              Object {
-                "bottom": true,
-                "left": false,
-                "right": true,
-                "top": false,
-              }
-            }
-            right={true}
-            width="100px"
+          <Button
+            color="blue"
+            component={[Function]}
+            flat={true}
+            size="default"
+            to="/alerts/details/id-1"
           >
-            <Button
-              component={[Function]}
-              flat={true}
-              size="default"
-              to="/alerts/details/id-1"
-            >
-              <RemoveRedEye
-                className="Icon"
-              />
-            </Button>
-          </Tooltip>
+            <span>
+              View Details
+            </span>
+            <RemoveRedEye
+              className="Icon"
+            />
+          </Button>
         </Panel.Section>
       </Panel>
     </Grid.Column>
@@ -144,38 +137,31 @@ exports[`Page: Alerts List should render happy path 1`] = `
           <h3>
             my alert 3
           </h3>
+          <div
+            className="MetricsTag"
+          >
+            <Tag>
+              Monthly Sending Limit
+            </Tag>
+          </div>
         </Panel.Section>
         <Panel.Section
           className="Footer"
         >
-          <Tooltip
-            bottom={true}
-            content="View Details"
-            dark={true}
-            forcePosition={false}
-            horizontalOffset="-8px"
-            preferredDirection={
-              Object {
-                "bottom": true,
-                "left": false,
-                "right": true,
-                "top": false,
-              }
-            }
-            right={true}
-            width="100px"
+          <Button
+            color="blue"
+            component={[Function]}
+            flat={true}
+            size="default"
+            to="/alerts/details/id-3"
           >
-            <Button
-              component={[Function]}
-              flat={true}
-              size="default"
-              to="/alerts/details/id-3"
-            >
-              <RemoveRedEye
-                className="Icon"
-              />
-            </Button>
-          </Tooltip>
+            <span>
+              View Details
+            </span>
+            <RemoveRedEye
+              className="Icon"
+            />
+          </Button>
         </Panel.Section>
       </Panel>
     </Grid.Column>
