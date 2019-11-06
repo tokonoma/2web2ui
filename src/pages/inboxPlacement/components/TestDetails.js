@@ -18,9 +18,9 @@ const TestDetails = ({ details, placementsByProvider, placementsByRegion }) => {
   const [breakdownType, setBreakdownType] = useState(PLACEMENTS_TYPE_OPTIONS[0].value);
   const [searchPlacements, setSearchPlacements] = useState('');
 
-  const onSearchChange = useCallback((e) => {
-    setSearchPlacements(e.target.value);
-  }, []);
+  const debouncedSetSearchPlacements = useCallback(_.debounce((placements) => setSearchPlacements(placements), 300), []);
+
+  const onSearchChange = useCallback((e) => debouncedSetSearchPlacements(e.target.value), [debouncedSetSearchPlacements]);
 
   const onFilterChange = useCallback((e) => {
     setBreakdownType(e.target.value);
