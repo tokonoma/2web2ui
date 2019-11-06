@@ -34,9 +34,15 @@ const WrapperComponent = ({ children }) => (<div>
 const getPlacementNameByType = (type, { id, mailbox_provider, region }) => {
   switch (type) {
     case PLACEMENT_FILTER_TYPES.REGION:
-      return <strong>{_.startCase(region)}</strong>;
+      return (
+        <PageLink to={`/inbox-placement/details/${id}/${PLACEMENT_FILTER_TYPES.REGION}/${region}`}>
+          <strong>{_.startCase(region)}</strong>
+        </PageLink>);
     default:
-      return <PageLink to={`/inbox-placement/details/${id}/mailbox-provider/${mailbox_provider}`}><strong>{mailbox_provider}</strong></PageLink>;
+      return (
+        <PageLink to={`/inbox-placement/details/${id}/${PLACEMENT_FILTER_TYPES.MAILBOX_PROVIDER}/${mailbox_provider}`}>
+          <strong>{mailbox_provider}</strong>
+        </PageLink>);
   }
 };
 

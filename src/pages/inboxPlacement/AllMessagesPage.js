@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Grid, Page, Panel } from '@sparkpost/matchbox';
 
 import { Loading } from 'src/components';
-import { getInboxPlacementByProviders, getAllInboxPlacementMessages, resetState } from 'src/actions/inboxPlacement';
+import { getInboxPlacementByProviders, getInboxPlacementByRegions, getAllInboxPlacementMessages, resetState } from 'src/actions/inboxPlacement';
 import { RedirectAndAlert } from 'src/components/globalAlert';
 import PageLink from 'src/components/pageLink';
 import StopTest from './components/StopTest';
@@ -11,6 +11,7 @@ import AllMessagesCollection from './components/AllMessagesCollection';
 import InfoBlock from './components/InfoBlock';
 import styles from './AllMessagesPage.module.scss';
 import { formatPercent } from 'src/helpers/units';
+import { PLACEMENT_FILTER_TYPES } from './constants/types';
 
 export const AllMessagesPage = ({
   id,
@@ -24,16 +25,32 @@ export const AllMessagesPage = ({
   authentication,
   error,
   getInboxPlacementByProviders,
+  getInboxPlacementByRegions,
   getAllInboxPlacementMessages,
   resetState,
   StopTestComponent = StopTest,
   AllMessagesCollectionComponent = AllMessagesCollection
 }) => {
+
   const loadMessages = useCallback(() => {
-    const filters = { [filterType]: filterName };
-    filterType === 'mailbox-provider' ? getInboxPlacementByProviders(id) : undefined; //TODO add sending ip request
+    //Will be useful for SA-1033
+    const filterTypeToQueryParamMap = {
+      [PLACEMENT_FILTER_TYPES.MAILBOX_PROVIDER]: 'mailbox-provider',
+      [PLACEMENT_FILTER_TYPES.REGION]: 'regions'
+    };
+    const filters = { [filterTypeToQueryParamMap[filterType]]: filterName };
+
+    switch (filterType) {
+      case PLACEMENT_FILTER_TYPES.MAILBOX_PROVIDER:
+        getInboxPlacementByProviders(id);
+        break;
+      case PLACEMENT_FILTER_TYPES.REGION:
+        getInboxPlacementByRegions(id);
+        break;
+      default:
+    }
     getAllInboxPlacementMessages(id, filters);
-  }, [filterName, filterType, getAllInboxPlacementMessages, getInboxPlacementByProviders, id]);
+  }, [filterName, filterType, getAllInboxPlacementMessages, getInboxPlacementByProviders, getInboxPlacementByRegions, id]);
 
   useEffect(() => {
     loadMessages();
@@ -106,10 +123,17 @@ export const AllMessagesPage = ({
 
 function mapStateToProps(state, props) {
   const { id, filterType, filterName } = props.match.params;
-  const result = ((filterType === 'mailbox-provider')
-    ? state.inboxPlacement.placementsByProvider.find(({ mailbox_provider }) => mailbox_provider === filterName)
-    : undefined) || //TODO add sending ip
-    {};
+  //Runs an inline function that returns a value from a switch statement
+  const result = (() => {
+    switch (filterType) {
+      case PLACEMENT_FILTER_TYPES.MAILBOX_PROVIDER:
+        return state.inboxPlacement.placementsByProvider.find(({ mailbox_provider }) => mailbox_provider === filterName);
+      case PLACEMENT_FILTER_TYPES.REGION:
+        return state.inboxPlacement.placementsByRegion.find(({ region }) => region === filterName);
+      default:
+        return {};
+    }
+  })() || {};
 
   return {
     id,
@@ -126,4 +150,4 @@ function mapStateToProps(state, props) {
   };
 }
 
-export default connect(mapStateToProps, { getInboxPlacementByProviders, getAllInboxPlacementMessages, resetState })(AllMessagesPage);
+export default connect(mapStateToProps, { getInboxPlacementByProviders, getInboxPlacementByRegions, getAllInboxPlacementMessages, resetState })(AllMessagesPage);

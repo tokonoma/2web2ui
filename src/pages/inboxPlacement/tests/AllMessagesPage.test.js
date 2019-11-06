@@ -4,6 +4,8 @@ import { AllMessagesPage } from '../AllMessagesPage';
 import { StopTest } from '../components/StopTest';
 import { AllMessagesCollection } from '../components/AllMessagesCollection';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { PLACEMENT_FILTER_TYPES } from '../constants/types';
+
 
 
 describe('Page: All Inbox Placement Messages Test', () => {
@@ -11,6 +13,7 @@ describe('Page: All Inbox Placement Messages Test', () => {
     const defaults = {
       getAllInboxPlacementMessages: jest.fn(),
       getInboxPlacementByProviders: jest.fn(),
+      getInboxPlacementByRegions: jest.fn(),
       id: 0,
       loading: false,
       sent: 100,
@@ -42,11 +45,12 @@ describe('Page: All Inbox Placement Messages Test', () => {
 
     const getAllInboxPlacementMessages = jest.fn().mockReturnValue({});
     const getInboxPlacementByProviders = jest.fn().mockReturnValue({});
+    const getInboxPlacementByRegions = jest.fn().mockReturnValue({});
     const resetState = jest.fn().mockReturnValue({});
     const subjectMounted = ({ ...props }) => mount(
       <Router>
         <AllMessagesPage
-          filterType={'mailbox-provider'}
+          filterType={PLACEMENT_FILTER_TYPES.MAILBOX_PROVIDER}
           filterName={'gmail.com'}
           status={'completed'}
           messages={[]}
@@ -55,6 +59,7 @@ describe('Page: All Inbox Placement Messages Test', () => {
           authentication={{}}
           getAllInboxPlacementMessages={getAllInboxPlacementMessages}
           getInboxPlacementByProviders={getInboxPlacementByProviders}
+          getInboxPlacementByRegions={getInboxPlacementByRegions}
           resetState={resetState}
           id={101}
           history={{ replace: jest.fn() }}
@@ -64,10 +69,16 @@ describe('Page: All Inbox Placement Messages Test', () => {
           {...props}/>
       </Router>);
 
-    it('calls getInboxPlacementTest on load', () => {
+    it('calls getInboxPlacementTest & getInboxPlacementByProviders on load for mailbox-providers', () => {
       subjectMounted();
       expect(getAllInboxPlacementMessages).toHaveBeenCalled();
       expect(getInboxPlacementByProviders).toHaveBeenCalled();
+    });
+
+    it('calls getInboxPlacementTest & getInboxPlacementByRegions on load for mailbox-providers', () => {
+      subjectMounted({ filterType: PLACEMENT_FILTER_TYPES.REGION, filterName: 'europe' });
+      expect(getAllInboxPlacementMessages).toHaveBeenCalled();
+      expect(getInboxPlacementByRegions).toHaveBeenCalled();
     });
 
     it('calls resetState on unmount', () => {
