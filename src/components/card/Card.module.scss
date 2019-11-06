@@ -1,0 +1,25 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.CardGroup{
+    display: flex;
+}
+
+.CardContainer{
+    flex-grow :1;
+    border-radius: 10px;
+    border: 1px solid color(gray,5);
+    padding: 10px;
+    margin-left: 10px;
+}
+.CardTitle{
+    display: block;
+    color: color(gray,3);
+    font-weight: 600;
+    font-size: 18px;
+}
+.CardContent{
+    display: block;
+    max-width: 450px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
