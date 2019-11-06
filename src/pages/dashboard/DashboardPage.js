@@ -11,13 +11,23 @@ import { isAccountUiOptionSet } from 'src/helpers/conditions/account';
 import { GettingStartedGuide } from './components/GettingStartedGuide';
 
 export class DashboardPage extends Component {
+  state = {
+    isGuideAtBottom: false
+  }
+  moveGuideAtBottom = () => {
+    this.setState({ isGuideAtBottom: true });
+  }
 
-  displayTutorial = (isMessageOnboardingSet) => {
-    if (isMessageOnboardingSet) { return <GettingStartedGuide/>; }
+  displayGuideAndReport = (isMessageOnboardingSet) => {
+    if (isMessageOnboardingSet) {
+      if (this.state.isGuideAtBottom) { return <><UsageReport/><GettingStartedGuide isGuideAtBottom={this.state.isGuideAtBottom} /></>; }
+      return <><GettingStartedGuide isGuideAtBottom={this.state.isGuideAtBottom} moveGuideAtBottom={this.moveGuideAtBottom}/><UsageReport/></>;
+    }
 
-    return <AccessControl condition={hasGrants('api_keys/manage', 'templates/modify', 'sending_domains/manage')}>
-      <Tutorial {...this.props} />
-    </AccessControl>;
+    return <><UsageReport/>
+     <AccessControl condition={hasGrants('api_keys/manage', 'templates/modify', 'sending_domains/manage')}>
+       <Tutorial {...this.props} />
+     </AccessControl> </>;
 
   }
 
@@ -32,8 +42,7 @@ export class DashboardPage extends Component {
           <VerifyEmailBanner verifying={currentUser.verifyingEmail} />
         )}
         <FreePlanWarningBanner account={account} accountAgeInDays={accountAgeInDays} ageRangeStart={16}/>
-        <UsageReport/>
-        {this.displayTutorial(isAccountUiOptionSet('messaging_onboarding'))}
+        {this.displayGuideAndReport(isAccountUiOptionSet('messaging_onboarding'))}
       </Page>
     );
   }
