@@ -41,7 +41,7 @@ describe('RecentActivity', () => {
     );
   };
 
-  it('renders an empty fragment when fewer than 2 templates are present', () => {
+  it('renders an empty fragment when fewer than 2 templates are present', function () {
     const wrapper = subject({
       templates: [
         publishedTemplate,
@@ -52,7 +52,7 @@ describe('RecentActivity', () => {
     expect(wrapper).not.toHaveTextContent('Recent Activity');
   });
 
-  it('renders when there are more than 2 templates', () => {
+  it('renders a list of templates with relevant links when there are more than 2 templates', function () {
     const wrapper = subject({
       templates: [
         publishedWithDraftTemplate,
@@ -63,11 +63,14 @@ describe('RecentActivity', () => {
 
     expect(wrapper).toHaveTextContent('Recent Activity');
     expect(wrapper).toHaveTextContent(publishedWithDraftTemplate.name);
+    expect(wrapper.find('PageLink').at(0)).toHaveProp('to', `/templatesv2/edit/${publishedWithDraftTemplate.id}/published/content`);
     expect(wrapper).toHaveTextContent(publishedTemplate.name);
+    expect(wrapper.find('PageLink').at(1)).toHaveProp('to', `/templatesv2/edit/${publishedTemplate.id}/published/content`);
     expect(wrapper).toHaveTextContent(draftTemplate.name);
+    expect(wrapper.find('PageLink').at(2)).toHaveProp('to', `/templatesv2/edit/${draftTemplate.id}/draft/content`);
   });
 
-  it('renders a maximum of four templates when more than four are present', () => {
+  it('renders a maximum of four templates when more than four are present', function () {
     const wrapper = subject({
       templates: [
         publishedWithDraftTemplate,
@@ -81,7 +84,7 @@ describe('RecentActivity', () => {
     expect(wrapper.find('Panel').length).toBe(4);
   });
 
-  it('invokes the `onToggleDuplicateModal` propr when `DuplicateAction` is clicked', () => {
+  it('invokes the `onToggleDuplicateModal` propr when `DuplicateAction` is clicked', function () {
     const mockToggleDeleteModal = jest.fn();
     const mockToggleDuplicateModal = jest.fn();
 
