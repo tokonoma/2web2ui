@@ -1,4 +1,5 @@
 import React from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
 import { shallow, mount } from 'enzyme';
 import RecentActivity from '../RecentActivity';
 
@@ -33,11 +34,13 @@ describe('RecentActivity', () => {
     }
 
     return mount(
-      <RecentActivity
-        onToggleDeleteModal={jest.fn()}
-        onToggleDuplicateModal={jest.fn()}
-        {...props}
-      />
+      <Router>
+        <RecentActivity
+          onToggleDeleteModal={jest.fn()}
+          onToggleDuplicateModal={jest.fn()}
+          {...props}
+        />
+      </Router>
     );
   };
 
@@ -52,7 +55,7 @@ describe('RecentActivity', () => {
     expect(wrapper).not.toHaveTextContent('Recent Activity');
   });
 
-  it('renders when there are more than 2 templates', () => {
+  it('renders a list of templates with relevant links when there are more than 2 templates', () => {
     const wrapper = subject({
       templates: [
         publishedWithDraftTemplate,
@@ -63,8 +66,11 @@ describe('RecentActivity', () => {
 
     expect(wrapper).toHaveTextContent('Recent Activity');
     expect(wrapper).toHaveTextContent(publishedWithDraftTemplate.name);
+    expect(wrapper.find('PageLink').at(0)).toHaveProp('to', `/templatesv2/edit/${publishedWithDraftTemplate.id}/published/content`);
     expect(wrapper).toHaveTextContent(publishedTemplate.name);
+    expect(wrapper.find('PageLink').at(1)).toHaveProp('to', `/templatesv2/edit/${publishedTemplate.id}/published/content`);
     expect(wrapper).toHaveTextContent(draftTemplate.name);
+    expect(wrapper.find('PageLink').at(2)).toHaveProp('to', `/templatesv2/edit/${draftTemplate.id}/draft/content`);
   });
 
   it('renders a maximum of four templates when more than four are present', () => {
