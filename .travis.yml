@@ -1,12 +1,37 @@
 language: node_js
+
 node_js:
   - "10.8"
+
+addons:
+  apt:
+    packages:
+      - libgconf-2-4 # Required package for Cypress, see https://docs.cypress.io/guides/guides/continuous-integration.html#Travis
+
 cache:
   directories:
     - build # shows bundle size diff per file/chunk
     - "$HOME/.npm" # to avoid fetching modules from npm every time
+    - "$HOME/.cache"
+
 before_install: npm install -g greenkeeper-lockfile@1
+
 install: npm ci --loglevel http
-before_script: greenkeeper-lockfile-update
-script: npm run travis
-after_script: greenkeeper-lockfile-upload
+
+# Unit tests and end-to-end tests run in parallel to save time.
+# As end to end tests grow in size and duration, it may make sense to remove
+# this, and instead run unit tests and then run end-to-end tests.
+jobs:
+  include:
+    - stage: test
+      name: "Unit Testing"
+      script: npm run test-ci
+    - stage: test
+      name: "Verify Build and End to End Testing"
+      script:
+        - npm run build
+        - npm run test-e2e-ci
+
+after_script:
+  - greenkeeper-lockfile-upload
+  - npm run coveralls || 0
