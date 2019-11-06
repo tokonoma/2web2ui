@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Grid, Page, Panel, Tooltip } from '@sparkpost/matchbox';
+import { Button, Grid, Page, Panel, Tag } from '@sparkpost/matchbox';
 import { RemoveRedEye } from '@sparkpost/matchbox-icons';
 import { ApiErrorBanner, DeleteModal, Loading, DisplayDate } from 'src/components';
 import { Templates } from 'src/components/images';
@@ -8,6 +8,7 @@ import AlertCollection from './components/AlertCollection';
 import withAlertsList from './containers/ListPage.container';
 import styles from './ListPage.module.scss';
 import _ from 'lodash';
+import { METRICS } from './constants/formConstants';
 
 export class ListPage extends Component {
   state = {
@@ -57,7 +58,7 @@ export class ListPage extends Component {
 
     return (
       <>
-        <h3>Recent Alerts</h3>
+        <h3>Recent Incidents</h3>
         <Grid>
           {recentlyTriggeredAlerts.map((alert) => (
             <Grid.Column
@@ -71,11 +72,12 @@ export class ListPage extends Component {
                     <DisplayDate timestamp={alert.last_triggered_timestamp} formattedDate={alert.last_triggered_formatted} />
                   </div>
                   <h3>{alert.name}</h3>
+                  <div className={styles.MetricsTag}>
+                    <Tag>{METRICS[alert.metric]}</Tag>
+                  </div>
                 </Panel.Section>
                 <Panel.Section className = {styles.Footer}>
-                  <Tooltip dark content='View Details' width='100px' horizontalOffset='-8px'>
-                    <Button flat component={Link} to = {`/alerts/details/${alert.id}`}><RemoveRedEye className = {styles.Icon}/></Button>
-                  </Tooltip>
+                  <Button flat color="blue" component={Link} to={`/alerts/details/${alert.id}`}><span>View Details</span><RemoveRedEye className={styles.Icon}/></Button>
                 </Panel.Section>
               </Panel>
             </Grid.Column>))}
