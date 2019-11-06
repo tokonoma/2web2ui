@@ -3,6 +3,7 @@ import { shallow } from 'enzyme';
 import TestDetails from '../TestDetails';
 import { PLACEMENT_FILTER_TYPES } from '../../constants/types';
 
+jest.mock('lodash/debounce', () => jest.fn((fn) => fn));
 jest.mock('date-fns', () => ({ format: jest.fn().mockReturnValue('Jul 8th 2019 11:49am') }));
 
 describe('Component: TestDetails', () => {
