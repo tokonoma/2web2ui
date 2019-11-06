@@ -9,7 +9,7 @@ describe('PublishedModeActions', () => {
   const subject = (editorState) => {
     useEditorContext.mockReturnValue({
       hasDraft: true,
-      draft: {
+      template: {
         id: 'a-random-id-123',
         subaccount_id: 'some-subaccount-id'
       },
@@ -20,7 +20,7 @@ describe('PublishedModeActions', () => {
   };
 
   it('renders published actions', () => {
-    expect(subject({ draft: { id: '123', subaccount_id: 'abcd' }})).toMatchSnapshot();
+    expect(subject({ template: { id: '123', subaccount_id: 'abcd' }})).toMatchSnapshot();
   });
 
   describe('the DuplicateTemplateModal', () => {

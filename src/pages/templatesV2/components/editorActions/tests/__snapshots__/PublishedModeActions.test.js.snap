@@ -48,7 +48,9 @@ exports[`PublishedModeActions renders published actions 1`] = `
             to="/templatesv2/edit/123/draft/content?subaccount=abcd"
           >
             <FileEdit />
-            Edit Draft
+            <span>
+              Edit Draft
+            </span>
           </PageLink>
         </div>
         <hr

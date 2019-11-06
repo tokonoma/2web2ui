@@ -13,8 +13,7 @@ import DuplicateTemplateModal from './DuplicateTemplateModal';
 
 const PublishedModeActions = () => {
   const {
-    hasDraft,
-    draft,
+    template,
     createTemplateV2,
     showAlert,
     content,
@@ -22,8 +21,7 @@ const PublishedModeActions = () => {
     testData,
     isCreatePending
   } = useEditorContext();
-  const draftText = hasDraft ? 'Edit Draft' : 'Save as Draft';
-  const editDraftTo = `/${routeNamespace}/edit/${draft.id}/draft/content${setSubaccountQuery(draft.subaccount_id)}`;
+  const editDraftTo = `/${routeNamespace}/edit/${template.id}/draft/content${setSubaccountQuery(template.subaccount_id)}`;
 
   // State
   const [isPopoverOpen, setPopoverOpen] = useState(false);
@@ -54,7 +52,7 @@ const PublishedModeActions = () => {
         role="button"
         data-id="button-edit-draft"
       >
-        <strong>{draftText}</strong>
+        <strong>Edit Draft</strong>
       </Button>
 
       <div className={styles.Actions}>
@@ -83,7 +81,7 @@ const PublishedModeActions = () => {
               >
                 <FileEdit/>
 
-                {draftText}
+                <span>Edit Draft</span>
               </PageLink>
             </div>
 
@@ -104,7 +102,7 @@ const PublishedModeActions = () => {
         <DuplicateTemplateModal
           open={isDuplicateModalOpen}
           onClose={handleModalClose}
-          template={draft}
+          template={template}
           contentToDuplicate={content}
           testDataToDuplicate={testData}
           createTemplate={createTemplateV2}

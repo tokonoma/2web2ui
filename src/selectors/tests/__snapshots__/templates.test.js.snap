@@ -205,6 +205,15 @@ Array [
 exports[`Templates selectors selectTemplatesForListTable returns template(s) correctly having both published and draft version 1`] = `
 Array [
   Object {
+    "has_published": false,
+    "list_name": "unpublished",
+    "list_status": "draft",
+    "name": "unpublished",
+    "shared_with_subaccounts": false,
+    "subaccount_id": 101,
+    "subaccount_name": "sub 1",
+  },
+  Object {
     "has_published": true,
     "list_name": "publishedSubaccount",
     "list_status": "published",
@@ -214,21 +223,19 @@ Array [
     "subaccount_name": "sub 1",
   },
   Object {
-    "has_draft": true,
     "has_published": true,
-    "list_name": "publishedMaster",
-    "list_status": "published_with_draft",
-    "name": "publishedMaster",
-    "published": true,
+    "list_name": "publishedSubaccount (DRAFT)",
+    "list_status": "draft",
+    "name": "publishedSubaccount",
     "shared_with_subaccounts": false,
-    "subaccount_id": 0,
-    "subaccount_name": null,
+    "subaccount_id": 101,
+    "subaccount_name": "sub 1",
   },
   Object {
     "has_draft": true,
     "has_published": true,
-    "list_name": "publishedMaster (DRAFT)",
-    "list_status": "draft",
+    "list_name": "publishedMaster",
+    "list_status": "published",
     "name": "publishedMaster",
     "published": true,
     "shared_with_subaccounts": false,
@@ -244,11 +251,29 @@ Array [
     "subaccount_id": 0,
     "subaccount_name": null,
   },
+  Object {
+    "has_published": true,
+    "list_name": "publishedShared (DRAFT)",
+    "list_status": "draft",
+    "name": "publishedShared",
+    "shared_with_subaccounts": true,
+    "subaccount_id": 0,
+    "subaccount_name": null,
+  },
 ]
 `;
 
 exports[`Templates selectors selectTemplatesForListTable returns template(s) with draft version only 1`] = `
 Array [
+  Object {
+    "has_published": false,
+    "list_name": "unpublished",
+    "list_status": "draft",
+    "name": "unpublished",
+    "shared_with_subaccounts": false,
+    "subaccount_id": 101,
+    "subaccount_name": "sub 1",
+  },
   Object {
     "has_draft": true,
     "has_published": false,
@@ -259,15 +284,42 @@ Array [
     "subaccount_id": 101,
     "subaccount_name": "sub 1",
   },
+  Object {
+    "has_published": false,
+    "list_name": "publishedShared",
+    "list_status": "draft",
+    "name": "publishedShared",
+    "shared_with_subaccounts": true,
+    "subaccount_id": 0,
+    "subaccount_name": null,
+  },
 ]
 `;
 
 exports[`Templates selectors selectTemplatesForListTable returns template(s) with published version only 1`] = `
 Array [
   Object {
+    "has_published": false,
+    "list_name": "unpublished",
+    "list_status": "draft",
+    "name": "unpublished",
+    "shared_with_subaccounts": false,
+    "subaccount_id": 101,
+    "subaccount_name": "sub 1",
+  },
+  Object {
     "has_published": true,
     "list_name": "publishedSubaccount",
     "list_status": "published",
+    "name": "publishedSubaccount",
+    "shared_with_subaccounts": false,
+    "subaccount_id": 101,
+    "subaccount_name": "sub 1",
+  },
+  Object {
+    "has_published": true,
+    "list_name": "publishedSubaccount (DRAFT)",
+    "list_status": "draft",
     "name": "publishedSubaccount",
     "shared_with_subaccounts": false,
     "subaccount_id": 101,
@@ -287,6 +339,15 @@ Array [
     "has_published": true,
     "list_name": "publishedShared",
     "list_status": "published",
+    "name": "publishedShared",
+    "shared_with_subaccounts": true,
+    "subaccount_id": 0,
+    "subaccount_name": null,
+  },
+  Object {
+    "has_published": true,
+    "list_name": "publishedShared (DRAFT)",
+    "list_status": "draft",
     "name": "publishedShared",
     "shared_with_subaccounts": true,
     "subaccount_id": 0,

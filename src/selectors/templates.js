@@ -103,14 +103,24 @@ export const selectTemplatesForListTable = createSelector(
   [selectTemplates], (templates) => {
     const templatesForListing = [];
     templates.forEach((template) => {
+      const isPublished = template.published;
       const hasPublished = template.has_published;
       const hasDraft = template.has_draft;
 
       if (hasPublished) {
-        templatesForListing.push({ ...template, list_name: template.name, list_status: hasDraft ? 'published_with_draft' : 'published' });
+        templatesForListing.push({
+          ...template,
+          list_name: template.name,
+          list_status: (hasDraft && !isPublished) ? 'published_with_draft' : 'published'
+        });
       }
-      if (hasDraft) {
-        templatesForListing.push({ ...template, list_name: hasPublished ? `${template.name} (DRAFT)` : template.name, list_status: 'draft' });
+
+      if (!isPublished) {
+        templatesForListing.push({
+          ...template,
+          list_name: hasPublished ? `${template.name} (DRAFT)` : template.name,
+          list_status: 'draft'
+        });
       }
     });
     return templatesForListing;

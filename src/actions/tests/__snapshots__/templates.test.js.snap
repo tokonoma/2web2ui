@@ -137,6 +137,13 @@ Array [
           "reply_to": undefined,
           "text": undefined,
         },
+        "testData": Object {
+          "metadata": Object {},
+          "options": Object {},
+          "substitution_data": Object {
+            "hello": "world",
+          },
+        },
       },
       "headers": Object {
         "x-msys-subaccount": 123,
@@ -146,9 +153,6 @@ Array [
       "url": "/v1/templates/foo",
     },
     "type": "UPDATE_TEMPLATE",
-  },
-  Object {
-    "type": "SET_TEMPLATE_TEST_DATA",
   },
   Object {
     "meta": Object {

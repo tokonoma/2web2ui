@@ -37,15 +37,16 @@ const mapStateToProps = (state, props) => {
   const draft = selectDraftTemplateById(state, id);
   const published = selectPublishedTemplateById(state, id);
   const isPublishedMode = props.match.params.version === 'published';
-  const draftOrPublished = draft || published;
-  const hasDraft = draftOrPublished && draftOrPublished.has_draft;
-  const hasPublished = draftOrPublished && draftOrPublished.has_published;
+  const template = draft || published;
+  const hasDraft = template && template.has_draft;
+  const hasPublished = template && template.has_published;
   const snippets = state.snippets.items;
 
   return {
     draft,
-    snippets,
     published,
+    template,
+    snippets,
     isPublishedMode,
     hasDraft,
     hasPublished,
@@ -65,8 +66,8 @@ const mapStateToProps = (state, props) => {
 
 const mapDispatchToProps = {
   getDraft,
-  getPreview,
   getPublished,
+  getPreview,
   deleteTemplateV2,
   createTemplateV2,
   updateDraftV2,

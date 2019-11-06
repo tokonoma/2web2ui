@@ -60,7 +60,10 @@ exports[`Template List Components Name should render 1`] = `
 exports[`Template List Components Status should render draft 1`] = `
 <Tag>
   <Edit />
-   Draft
+   
+  <span>
+    Draft
+  </span>
 </Tag>
 `;
 
@@ -71,7 +74,10 @@ exports[`Template List Components Status should render published 1`] = `
   <CheckCircle
     className="PublishedIconColor"
   />
-   Published
+   
+  <span>
+    Published
+  </span>
 </Tag>
 `;
 
@@ -98,7 +104,10 @@ exports[`Template List Components Status should render unpublished changes 1`] =
     <CheckCircle
       className="PublishedIconColor"
     />
-     Published
+     
+    <span>
+      Published
+    </span>
   </Tag>
 </Tooltip>
 `;

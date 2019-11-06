@@ -198,7 +198,7 @@ export function publishV2(data, subaccountId) {
     dispatch({ type: 'PUBLISH_ACTION_PENDING' });
 
     try {
-      await dispatch(update(data, subaccountId));
+      await dispatch(updateV2(data, subaccountId));
       dispatch(setTestDataV2({ id, mode: 'published', data: parsedTestData }));
 
       await dispatch(sparkpostApiRequest({
