@@ -4,6 +4,7 @@ import { ArrowDownward, Send } from '@sparkpost/matchbox-icons';
 import { Card, CardTitle, CardContent, CardActions } from 'src/components';
 import CardGroup from 'src/components/card/CardGroup';
 import ButtonWrapper from 'src/components/buttonWrapper';
+
 export const GettingStartedGuide = ({ isGuideAtBottom, moveGuideAtBottom }) => {
   const actions = isGuideAtBottom ? null : [{
     content: <span> Move to Bottom <ArrowDownward size='20'/> </span>,
