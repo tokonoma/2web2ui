@@ -81,4 +81,98 @@ describe('Component: TestDetails', () => {
     wrapper.find('Select').simulate('change', { target: { value: PLACEMENT_FILTER_TYPES.MAILBOX_PROVIDER }});
     expect(wrapper.find('PlacementBreakdown').prop('data')).toEqual(placementsByProvider);
   });
+
+  it('changes placement data when using search bar on providers list', () => {
+    const dogmail = {
+      'mailbox_provider': 'dogmail.net',
+      'region': 'north america',
+      'placement': {
+        'inbox_pct': 0,
+        'spam_pct': 0,
+        'missing_pct': 1
+      }
+    };
+    const gmail = {
+      'mailbox_provider': 'gmail.com',
+      'region': 'europe',
+      'placement': {
+        'inbox_pct': 0,
+        'spam_pct': 0,
+        'missing_pct': 1
+      }
+    };
+    const hotmail = {
+      'mailbox_provider': 'hotmail.com',
+      'region': 'global',
+      'placement': {
+        'inbox_pct': 0,
+        'spam_pct': 0,
+        'missing_pct': 1
+      }
+    };
+    const placementsByProvider = [dogmail, gmail, hotmail];
+
+    const wrapper = subject({ placementsByProvider });
+
+    // Match one result
+    wrapper.find('TextField').simulate('change', { target: { value: 'net' }});
+    expect(wrapper.find('PlacementBreakdown').prop('data')).toEqual([dogmail]);
+
+    // Match more than one result
+    wrapper.find('TextField').simulate('change', { target: { value: 'gmail' }});
+    expect(wrapper.find('PlacementBreakdown').prop('data')).toEqual([dogmail, gmail]);
+
+    // No results
+    wrapper.find('TextField').simulate('change', { target: { value: 'this wont match anything' }});
+    expect(wrapper.find('PlacementBreakdown').prop('data')).toEqual([]);
+
+    // Search by case insensitive region match
+    wrapper.find('TextField').simulate('change', { target: { value: 'america' }});
+    expect(wrapper.find('PlacementBreakdown').prop('data')).toEqual([dogmail]);
+  });
+
+  it('changes placement data when using search bar on regions list', () => {
+    const northAmerica = {
+      'region': 'north america',
+      'placement': {
+        'inbox_pct': 0,
+        'spam_pct': 0,
+        'missing_pct': 1
+      }
+    };
+    const southAmerica = {
+      'region': 'south america',
+      'placement': {
+        'inbox_pct': 0,
+        'spam_pct': 0,
+        'missing_pct': 1
+      }
+    };
+    const europe = {
+      'region': 'europe',
+      'placement': {
+        'inbox_pct': 0,
+        'spam_pct': 0,
+        'missing_pct': 1
+      }
+    };
+    const placementsByRegion = [northAmerica, southAmerica, europe];
+
+    const wrapper = subject({ placementsByRegion });
+
+    // Change to Region list
+    wrapper.find('Select').simulate('change', { target: { value: PLACEMENT_FILTER_TYPES.REGION }});
+
+    // Match one result
+    wrapper.find('TextField').simulate('change', { target: { value: 'north' }});
+    expect(wrapper.find('PlacementBreakdown').prop('data')).toEqual([northAmerica]);
+
+    // Match more than one result
+    wrapper.find('TextField').simulate('change', { target: { value: 'america' }});
+    expect(wrapper.find('PlacementBreakdown').prop('data')).toEqual([northAmerica, southAmerica]);
+
+    // No results
+    wrapper.find('TextField').simulate('change', { target: { value: 'this wont match anything' }});
+    expect(wrapper.find('PlacementBreakdown').prop('data')).toEqual([]);
+  });
 });
