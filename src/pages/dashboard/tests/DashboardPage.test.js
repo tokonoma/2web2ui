@@ -23,7 +23,10 @@ describe('Page: Dashboard tests', () => {
     hasSuppressions: true,
     accountAgeInWeeks: 0,
     verifyingEmail: false,
-    accountAgeInDays: 15
+    accountAgeInDays: 15,
+    isMessageOnboardingSet: false,
+    isGuideAtBottom: false,
+    updateAccount: jest.fn()
   };
 
   let wrapper;
