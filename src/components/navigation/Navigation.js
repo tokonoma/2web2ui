@@ -18,17 +18,17 @@ export class Navigation extends Component {
     open: false
   };
 
-  renderItems() {
+  renderItems({ mobile }) {
     const { navItems, location } = this.props;
 
     return navItems.map((item, key) => {
-      const props = { ...item, toggleMobileNav: this.toggleMobileNav, location, key: key };
+      const props = { ...item, toggleMobileNav: this.toggleMobileNav, location, key: key, mobile };
       return item.children ? <NavGroup {...props} /> : <NavItem {...props} />;
     });
   }
 
   toggleMobileNav = () => {
-    this.setState({ open: !this.state.open });
+    this.setState(({ open: isOpen }) => ({ open: !isOpen }));
   };
 
   renderNav = ({ mobile }) => {
@@ -49,7 +49,7 @@ export class Navigation extends Component {
           <nav className={navClasses}>
             <div className={wrapperClasses}>
               <ul className={listClasses}>
-                {this.renderItems()}
+                {this.renderItems({ mobile })}
               </ul>
             </div>
           </nav>
