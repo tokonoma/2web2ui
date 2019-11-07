@@ -1,15 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Component: ProvidersBreakdown HeaderComponent renders correctly 1`] = `
+exports[`Component: PlacementBreakdown HeaderComponent renders correctly 1`] = `
 <thead>
   <Table.Row
     className="HeaderRow"
   >
     <Table.HeaderCell
-      className="MailboxProviderCell"
-    >
-      Mailbox Provider
-    </Table.HeaderCell>
+      className="PlacementNameCell"
+    />
     <Table.HeaderCell
       className="RegionCell"
     >
@@ -49,12 +47,12 @@ exports[`Component: ProvidersBreakdown HeaderComponent renders correctly 1`] = `
 </thead>
 `;
 
-exports[`Component: ProvidersBreakdown RowComponent renders correctly 1`] = `
+exports[`Component: PlacementBreakdown RowComponent renders mailbox provider correctly 1`] = `
 <Table.Row
   className="DataRow"
 >
   <Table.Cell
-    className="MailboxProviderCell"
+    className="PlacementNameCell"
   >
     <PageLink
       to="/inbox-placement/details/1/mailbox-provider/dogmail.com"
@@ -114,7 +112,63 @@ exports[`Component: ProvidersBreakdown RowComponent renders correctly 1`] = `
 </Table.Row>
 `;
 
-exports[`Component: ProvidersBreakdown SubComponent: GroupPercentage renders percentage correctly 1`] = `
+exports[`Component: PlacementBreakdown RowComponent renders region correctly 1`] = `
+<Table.Row
+  className="DataRow"
+>
+  <Table.Cell
+    className="PlacementNameCell"
+  >
+    <strong>
+      North America
+    </strong>
+  </Table.Cell>
+  <Table.Cell
+    className="Placement"
+  >
+    <GroupPercentage
+      value={0}
+    />
+  </Table.Cell>
+  <Table.Cell
+    className="Placement"
+  >
+    <GroupPercentage
+      value={0}
+    />
+  </Table.Cell>
+  <Table.Cell
+    className="Placement"
+  >
+    <GroupPercentage
+      value={1}
+    />
+  </Table.Cell>
+  <Table.Cell
+    className="Authentication divider"
+  >
+    <GroupPercentage
+      value={0}
+    />
+  </Table.Cell>
+  <Table.Cell
+    className="Authentication"
+  >
+    <GroupPercentage
+      value={0}
+    />
+  </Table.Cell>
+  <Table.Cell
+    className="Authentication"
+  >
+    <GroupPercentage
+      value={1}
+    />
+  </Table.Cell>
+</Table.Row>
+`;
+
+exports[`Component: PlacementBreakdown SubComponent: GroupPercentage renders percentage correctly 1`] = `
 <span
   className="GroupValue"
 >
@@ -122,7 +176,7 @@ exports[`Component: ProvidersBreakdown SubComponent: GroupPercentage renders per
 </span>
 `;
 
-exports[`Component: ProvidersBreakdown renders correctly with data 1`] = `
+exports[`Component: PlacementBreakdown matches snapshot with provider data 1`] = `
 <TableCollection
   defaultSortColumn="placement.inbox_pct"
   defaultSortDirection="desc"
@@ -143,7 +197,6 @@ exports[`Component: ProvidersBreakdown renders correctly with data 1`] = `
           "missing_pct": 1,
           "spam_pct": 0,
         },
-        "region": "north america",
       },
       Object {
         "authentication": Object {
@@ -157,7 +210,6 @@ exports[`Component: ProvidersBreakdown renders correctly with data 1`] = `
           "missing_pct": 0.1,
           "spam_pct": 0.1,
         },
-        "region": "europe",
       },
     ]
   }
@@ -166,7 +218,7 @@ exports[`Component: ProvidersBreakdown renders correctly with data 1`] = `
 />
 `;
 
-exports[`Component: ProvidersBreakdown renders correctly with no data 1`] = `
+exports[`Component: PlacementBreakdown renders correctly with no data 1`] = `
 <TableCollection
   defaultSortColumn="placement.inbox_pct"
   defaultSortDirection="desc"

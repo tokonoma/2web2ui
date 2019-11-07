@@ -1,16 +1,35 @@
-import React from 'react';
+import React, { useState, useCallback } from 'react';
 import { format } from 'date-fns';
-import { Grid, Panel } from '@sparkpost/matchbox';
+import { Grid, Panel, Select } from '@sparkpost/matchbox';
 import FolderPlacementBarChart from './FolderPlacementBarChart';
-import ProvidersBreakdown from './ProvidersBreakdown';
+import PlacementBreakdown from './PlacementBreakdown';
 import { FORMATS } from 'src/constants';
 import InfoBlock from './InfoBlock';
 import styles from './TestDetails.module.scss';
 import TimeToReceiveSection from './TimeToReceiveSection';
 import AuthenticationResults from './AuthenticationResults';
+import { PLACEMENT_FILTER_TYPES, PLACEMENT_FILTER_LABELS } from '../constants/types';
 
-const TestDetails = ({ details, placementsByProvider }) => {
+const PLACEMENTS_TYPE_OPTIONS = Object.values(PLACEMENT_FILTER_TYPES).map((type) => ({ label: PLACEMENT_FILTER_LABELS[type], value: type }));
+
+const TestDetails = ({ details, placementsByProvider, placementsByRegion }) => {
+  const [breakdownType, setBreakdownType] = useState(PLACEMENTS_TYPE_OPTIONS[0].value);
+
+  const onFilterChange = useCallback((e) => {
+    setBreakdownType(e.target.value);
+  }, []);
+
   const placements = details.placement || {};
+
+  let breakdownData = [];
+  switch (breakdownType) {
+    case PLACEMENT_FILTER_TYPES.REGION:
+      breakdownData = placementsByRegion;
+      break;
+    default:
+      breakdownData = placementsByProvider;
+      break;
+  }
 
   const panelTitle = (<>
     <h3 className={styles.Inline}>Placement Breakdown</h3>
@@ -49,7 +68,10 @@ const TestDetails = ({ details, placementsByProvider }) => {
         </Grid>
       </Panel>
       <Panel title={panelTitle}>
-        <ProvidersBreakdown data={placementsByProvider}/>
+        <div className={styles.PlacementFilter}>
+          <Select options={PLACEMENTS_TYPE_OPTIONS} onChange={onFilterChange} />
+        </div>
+        <PlacementBreakdown type={breakdownType} data={breakdownData} />
       </Panel>
       <div style={{ clear: 'both' }} />
       <Panel title='Time to Receive Mail'>

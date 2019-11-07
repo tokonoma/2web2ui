@@ -29,6 +29,7 @@ describe('Page: Single Inbox Placement Test', () => {
   it('calls getInboxPlacementTest on load', () => {
     const getInboxPlacementTest = jest.fn().mockReturnValue({});
     const getInboxPlacementByProviders = jest.fn().mockReturnValue({});
+    const getInboxPlacementByRegions = jest.fn().mockReturnValue({});
     const getInboxPlacementTestContent = jest.fn().mockReturnValue({});
 
     mount(<TestDetailsPage
@@ -36,6 +37,7 @@ describe('Page: Single Inbox Placement Test', () => {
       content={{}}
       getInboxPlacementTest={getInboxPlacementTest}
       getInboxPlacementByProviders={getInboxPlacementByProviders}
+      getInboxPlacementByRegions={getInboxPlacementByRegions}
       getInboxPlacementTestContent={getInboxPlacementTestContent}
       id={101}
       tabIndex={1} //not working nicely with tabIndex=0; TestDetails component
@@ -85,6 +87,7 @@ describe('Page: Single Inbox Placement Test', () => {
       history={mockHistory}
       getInboxPlacementTest={jest.fn()}
       getInboxPlacementByProviders={jest.fn()}
+      getInboxPlacementByRegions={jest.fn()}
       getInboxPlacementTestContent={jest.fn()}
       StopTestComponent={StopTest}
     />);

@@ -79,8 +79,28 @@ exports[`Component: TestDetails renders correctly 1`] = `
       </React.Fragment>
     }
   >
-    <ProvidersBreakdown
+    <div
+      className="PlacementFilter"
+    >
+      <Select
+        onChange={[Function]}
+        options={
+          Array [
+            Object {
+              "label": "Mailbox Provider",
+              "value": "mailbox-provider",
+            },
+            Object {
+              "label": "Region",
+              "value": "region",
+            },
+          ]
+        }
+      />
+    </div>
+    <PlacementBreakdown
       data={Array []}
+      type="mailbox-provider"
     />
   </Panel>
   <div
