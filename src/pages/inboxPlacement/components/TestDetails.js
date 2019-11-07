@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import { format } from 'date-fns';
-import { Grid, Panel, Select, TextField } from '@sparkpost/matchbox';
+import { Grid, Panel, Select, TextField, Label, ScreenReaderOnly } from '@sparkpost/matchbox';
 import _ from 'lodash';
 import FolderPlacementBarChart from './FolderPlacementBarChart';
 import PlacementBreakdown from './PlacementBreakdown';
@@ -92,13 +92,19 @@ const TestDetails = ({ details, placementsByProvider, placementsByRegion }) => {
       <Panel title={panelTitle}>
         <div className={styles.PlacementFilterContainer}>
           <div className={styles.PlacementFilterSelect}>
-            <Select options={PLACEMENTS_TYPE_OPTIONS} onChange={onFilterChange} />
+            <ScreenReaderOnly>
+              <Label id="select-placement-type">Placement Type</Label>
+            </ScreenReaderOnly>
+            <Select id="select-placement-type" data-id="select-placement-type" options={PLACEMENTS_TYPE_OPTIONS} onChange={onFilterChange}/>
           </div>
           <div className={styles.PlacementFilterTextField}>
-            <TextField suffix={<Search />} onChange={onSearchChange} placeholder={textFieldPlaceholder} />
+            <ScreenReaderOnly>
+              <Label id="textfield-placement-search">{`Search by ${textFieldPlaceholder}`}</Label>
+            </ScreenReaderOnly>
+            <TextField id="textfield-placement-search" data-id="text-field-placement-search" suffix={<Search />} onChange={onSearchChange} placeholder={textFieldPlaceholder} />
           </div>
         </div>
-        <PlacementBreakdown type={breakdownType} data={breakdownData} />
+        <PlacementBreakdown data-id="placement-breakdown-table" type={breakdownType} data={breakdownData} />
       </Panel>
       <div style={{ clear: 'both' }} />
       <Panel title='Time to Receive Mail'>

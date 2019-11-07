@@ -24,14 +24,21 @@
 
 .PlacementFilterContainer {
   padding: spacing(base);
-  display: flex;
+  @media screen and (min-width: breakpoint(smaller)) {
+    display: flex;
+  }
 }
 
 .PlacementFilterSelect {
-  max-width: 200px;
+  @media screen and (min-width: breakpoint(smaller)) {
+    max-width: 200px;
+  }
 }
 
 .PlacementFilterTextField {
   flex: 1;
-  margin-left: spacing(base);
+  margin-top: spacing(base);
+  @media screen and (min-width: breakpoint(smaller)) {
+    margin: 0 0 0 spacing(base);
+  }
 }

@@ -20,6 +20,10 @@ describe('Component: TestDetails', () => {
     return shallow(<TestDetails {...defaults} {...props} />);
   };
 
+  const searchFieldSelector = '[data-id="text-field-placement-search"]';
+  const placementTypeSelectSelector = '[data-id="select-placement-type"]';
+  const placementBreakdownSelector = '[data-id="placement-breakdown-table"]';
+
   it('renders correctly', () => {
     expect(subject()).toMatchSnapshot();
   });
@@ -46,7 +50,7 @@ describe('Component: TestDetails', () => {
       }
     ];
 
-    expect(subject({ placementsByProvider }).find('PlacementBreakdown').prop('data')).toEqual(placementsByProvider);
+    expect(subject({ placementsByProvider }).find(placementBreakdownSelector).prop('data')).toEqual(placementsByProvider);
   });
 
   it('changes placement data when changing select', () => {
@@ -72,15 +76,15 @@ describe('Component: TestDetails', () => {
     ];
     const wrapper = subject({ placementsByProvider, placementsByRegion });
     // Default data
-    expect(wrapper.find('PlacementBreakdown').prop('data')).toEqual(placementsByProvider);
+    expect(wrapper.find(placementBreakdownSelector).prop('data')).toEqual(placementsByProvider);
 
     // Change to Region Filter
-    wrapper.find('Select').simulate('change', { target: { value: PLACEMENT_FILTER_TYPES.REGION }});
-    expect(wrapper.find('PlacementBreakdown').prop('data')).toEqual(placementsByRegion);
+    wrapper.find(placementTypeSelectSelector).simulate('change', { target: { value: PLACEMENT_FILTER_TYPES.REGION }});
+    expect(wrapper.find(placementBreakdownSelector).prop('data')).toEqual(placementsByRegion);
 
     // Change back to Mailbox Provider filter
-    wrapper.find('Select').simulate('change', { target: { value: PLACEMENT_FILTER_TYPES.MAILBOX_PROVIDER }});
-    expect(wrapper.find('PlacementBreakdown').prop('data')).toEqual(placementsByProvider);
+    wrapper.find(placementTypeSelectSelector).simulate('change', { target: { value: PLACEMENT_FILTER_TYPES.MAILBOX_PROVIDER }});
+    expect(wrapper.find(placementBreakdownSelector).prop('data')).toEqual(placementsByProvider);
   });
 
   it('changes placement data when using search bar on providers list', () => {
@@ -116,20 +120,20 @@ describe('Component: TestDetails', () => {
     const wrapper = subject({ placementsByProvider });
 
     // Match one result
-    wrapper.find('TextField').simulate('change', { target: { value: 'net' }});
-    expect(wrapper.find('PlacementBreakdown').prop('data')).toEqual([dogmail]);
+    wrapper.find(searchFieldSelector).simulate('change', { target: { value: 'net' }});
+    expect(wrapper.find(placementBreakdownSelector).prop('data')).toEqual([dogmail]);
 
     // Match more than one result
-    wrapper.find('TextField').simulate('change', { target: { value: 'gmail' }});
-    expect(wrapper.find('PlacementBreakdown').prop('data')).toEqual([dogmail, gmail]);
+    wrapper.find(searchFieldSelector).simulate('change', { target: { value: 'gmail' }});
+    expect(wrapper.find(placementBreakdownSelector).prop('data')).toEqual([dogmail, gmail]);
 
     // No results
-    wrapper.find('TextField').simulate('change', { target: { value: 'this wont match anything' }});
-    expect(wrapper.find('PlacementBreakdown').prop('data')).toEqual([]);
+    wrapper.find(searchFieldSelector).simulate('change', { target: { value: 'this wont match anything' }});
+    expect(wrapper.find(placementBreakdownSelector).prop('data')).toEqual([]);
 
     // Search by case insensitive region match
-    wrapper.find('TextField').simulate('change', { target: { value: 'america' }});
-    expect(wrapper.find('PlacementBreakdown').prop('data')).toEqual([dogmail]);
+    wrapper.find(searchFieldSelector).simulate('change', { target: { value: 'america' }});
+    expect(wrapper.find(placementBreakdownSelector).prop('data')).toEqual([dogmail]);
   });
 
   it('changes placement data when using search bar on regions list', () => {
@@ -162,18 +166,18 @@ describe('Component: TestDetails', () => {
     const wrapper = subject({ placementsByRegion });
 
     // Change to Region list
-    wrapper.find('Select').simulate('change', { target: { value: PLACEMENT_FILTER_TYPES.REGION }});
+    wrapper.find(placementTypeSelectSelector).simulate('change', { target: { value: PLACEMENT_FILTER_TYPES.REGION }});
 
     // Match one result
-    wrapper.find('TextField').simulate('change', { target: { value: 'north' }});
-    expect(wrapper.find('PlacementBreakdown').prop('data')).toEqual([northAmerica]);
+    wrapper.find(searchFieldSelector).simulate('change', { target: { value: 'north' }});
+    expect(wrapper.find(placementBreakdownSelector).prop('data')).toEqual([northAmerica]);
 
     // Match more than one result
-    wrapper.find('TextField').simulate('change', { target: { value: 'america' }});
-    expect(wrapper.find('PlacementBreakdown').prop('data')).toEqual([northAmerica, southAmerica]);
+    wrapper.find(searchFieldSelector).simulate('change', { target: { value: 'america' }});
+    expect(wrapper.find(placementBreakdownSelector).prop('data')).toEqual([northAmerica, southAmerica]);
 
     // No results
-    wrapper.find('TextField').simulate('change', { target: { value: 'this wont match anything' }});
-    expect(wrapper.find('PlacementBreakdown').prop('data')).toEqual([]);
+    wrapper.find(searchFieldSelector).simulate('change', { target: { value: 'this wont match anything' }});
+    expect(wrapper.find(placementBreakdownSelector).prop('data')).toEqual([]);
   });
 });
