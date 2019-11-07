@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Grid, Page, Panel, Tag } from '@sparkpost/matchbox';
-import { RemoveRedEye } from '@sparkpost/matchbox-icons';
+import { Grid, Page, Panel, Tag } from '@sparkpost/matchbox';
 import { ApiErrorBanner, DeleteModal, Loading, DisplayDate } from 'src/components';
 import { Templates } from 'src/components/images';
 import AlertCollection from './components/AlertCollection';
@@ -67,17 +66,12 @@ export class ListPage extends Component {
               lg={3}
               key = {alert.id}>
               <Panel accent>
-                <Panel.Section className = {styles.LastTriggeredCard}>
-                  <div className = {styles.LastTriggeredTime} >
-                    <DisplayDate timestamp={alert.last_triggered_timestamp} formattedDate={alert.last_triggered_formatted} />
-                  </div>
-                  <h3>{alert.name}</h3>
-                  <div className={styles.MetricsTag}>
-                    <Tag>{METRICS[alert.metric]}</Tag>
-                  </div>
+                <Panel.Section className={styles.LastTriggeredCard}>
+                  <Link className={styles.AlertName} to={`/alerts/details/${alert.id}`}><strong data-id="link-alert-name">{alert.name}</strong></Link>
+                  <Tag>{METRICS[alert.metric]}</Tag>
                 </Panel.Section>
                 <Panel.Section className = {styles.Footer}>
-                  <Button flat color="blue" component={Link} to={`/alerts/details/${alert.id}`}><span>View Details</span><RemoveRedEye className={styles.Icon}/></Button>
+                  <DisplayDate timestamp={alert.last_triggered_timestamp} formattedDate={alert.last_triggered_formatted} />
                 </Panel.Section>
               </Panel>
             </Grid.Column>))}

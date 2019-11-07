@@ -75,42 +75,28 @@ exports[`Page: Alerts List should render happy path 1`] = `
         <Panel.Section
           className="LastTriggeredCard"
         >
-          <div
-            className="LastTriggeredTime"
+          <Link
+            className="AlertName"
+            replace={false}
+            to="/alerts/details/id-1"
           >
-            <DisplayDate
-              formattedDate="Jun 15 2019, 10:48am"
-              timestamp={1560610080000}
-            />
-          </div>
-          <h3>
-            my alert 1
-          </h3>
-          <div
-            className="MetricsTag"
-          >
-            <Tag>
-              Health Score
-            </Tag>
-          </div>
+            <strong
+              data-id="link-alert-name"
+            >
+              my alert 1
+            </strong>
+          </Link>
+          <Tag>
+            Health Score
+          </Tag>
         </Panel.Section>
         <Panel.Section
           className="Footer"
         >
-          <Button
-            color="blue"
-            component={[Function]}
-            flat={true}
-            size="default"
-            to="/alerts/details/id-1"
-          >
-            <span>
-              View Details
-            </span>
-            <RemoveRedEye
-              className="Icon"
-            />
-          </Button>
+          <DisplayDate
+            formattedDate="Jun 15 2019, 10:48am"
+            timestamp={1560610080000}
+          />
         </Panel.Section>
       </Panel>
     </Grid.Column>
@@ -126,42 +112,28 @@ exports[`Page: Alerts List should render happy path 1`] = `
         <Panel.Section
           className="LastTriggeredCard"
         >
-          <div
-            className="LastTriggeredTime"
+          <Link
+            className="AlertName"
+            replace={false}
+            to="/alerts/details/id-3"
           >
-            <DisplayDate
-              formattedDate="Jun 5 2019, 10:48am"
-              timestamp={1559746080000}
-            />
-          </div>
-          <h3>
-            my alert 3
-          </h3>
-          <div
-            className="MetricsTag"
-          >
-            <Tag>
-              Monthly Sending Limit
-            </Tag>
-          </div>
+            <strong
+              data-id="link-alert-name"
+            >
+              my alert 3
+            </strong>
+          </Link>
+          <Tag>
+            Monthly Sending Limit
+          </Tag>
         </Panel.Section>
         <Panel.Section
           className="Footer"
         >
-          <Button
-            color="blue"
-            component={[Function]}
-            flat={true}
-            size="default"
-            to="/alerts/details/id-3"
-          >
-            <span>
-              View Details
-            </span>
-            <RemoveRedEye
-              className="Icon"
-            />
-          </Button>
+          <DisplayDate
+            formattedDate="Jun 5 2019, 10:48am"
+            timestamp={1559746080000}
+          />
         </Panel.Section>
       </Panel>
     </Grid.Column>
