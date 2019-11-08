@@ -18,6 +18,15 @@
   }
 }
 
+.Logo,
+.MobileLogo {
+  outline-offset: -5px; // insets focus outline to make it visible
+
+  &:focus {
+    outline-color: color(gray, 10);
+  }
+}
+
 .Logo {
   flex: 0 0 0;
   padding: rem(9) spacing() rem(15);
@@ -31,11 +40,6 @@
   padding: rem(6) spacing() rem(18);
   height: 100%;
   text-align: center;
-  outline-offset: -5px; // insets focus outline to make it visible
-
-  &:focus {
-    outline-color: color(gray, 10);
-  }
 }
 
 .RightSideWrapper, .MobileAccountDropdownWrapper {
