@@ -85,7 +85,7 @@ export class PlanPicker extends Component {
         <div className={cx(styles.PlanContainer)}>
           {PLAN_TIERS[selectedItem.tier] && <div className={cx(styles.DropdownLabel)}>{PLAN_TIERS[selectedItem.tier]}</div>}
           <Plan {...triggerProps} className={triggerClasses} planPriceProps={planPriceProps}/>
-          <input {...getInputProps()} ref={(input) => this.input = input} className={styles.Input} />
+          <input {...getInputProps()} ref={(input) => this.input = input} className={styles.Input} readOnly />
           <div className={listClasses}>{items}</div>
         </div>
         <div className={cx(styles.TierPlansInfo)}>

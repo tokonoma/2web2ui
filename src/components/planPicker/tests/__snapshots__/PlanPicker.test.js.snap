@@ -48,6 +48,7 @@ exports[`Plan Picker:  Render Function renders 1`] = `
     />
     <input
       className="Input"
+      readOnly={true}
     />
     <div
       className="List"
