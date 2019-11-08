@@ -1,4 +1,5 @@
 @import '~@sparkpost/matchbox/src/styles/config.scss';
+@import 'src/styles/resets';
 
 .Top {
   position: fixed;
@@ -49,6 +50,7 @@
 
 .Menu,
 .SupportButton {
+  @include button-reset();
   transition: color 0.15s ease-in-out;
 
   &:hover,
@@ -69,10 +71,7 @@
 }
 
 .SupportButton {
-  cursor: pointer;
-  margin: 0 spacing() 0 0;
-  background: none;
-  border: 0;
+  margin-right: spacing();
   color: color(gray, 5);
 }
 

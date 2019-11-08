@@ -1,6 +1,8 @@
 @import '~@sparkpost/matchbox/src/styles/config.scss';
+@import 'src/styles/resets';
 
 .Email {
+  @include button-reset();
   display: inline-block;
   vertical-align: middle;
   line-height: line-height(400);

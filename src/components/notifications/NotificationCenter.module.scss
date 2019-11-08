@@ -1,9 +1,10 @@
 @import '~@sparkpost/matchbox/src/styles/config.scss';
+@import 'src/styles/resets';
 
 .NotificationCenterTrigger {
+  @include button-reset();
   display: inline-block;
-  padding: 0 spacing();
-  margin-right: 2px;
+  margin-right: spacing();
   color: color(gray, 5);
   transition: color 0.15s ease-in-out;
   user-select: none;
