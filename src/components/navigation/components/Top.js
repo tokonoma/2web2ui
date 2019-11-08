@@ -20,8 +20,7 @@ export class Top extends Component {
         to="javascript:void(0);"
         role="button"
         aria-expanded={this.props.open}
-        aria-controls="mobile-navigation-wrapper"
-        data-id="top-navigation-button"
+        data-id="nav-button-mobilemenu"
       >
         {this.props.open ? <Close size={24}/> : <Menu size={24}/>}
 
@@ -40,11 +39,14 @@ export class Top extends Component {
 
   renderDesktop = () => (
     <div className={styles.Top}>
-      <Link to={DEFAULT_REDIRECT_ROUTE} className={styles.Logo}><SparkPost.Logo type='halfWhite' /></Link>
+      <Link to={DEFAULT_REDIRECT_ROUTE} className={styles.Logo}>
+        <SparkPost.Logo type='halfWhite' />
+      </Link>
+
       <div className={styles.RightSideWrapper}>
         <NotificationCenter />
 
-        <button title="Opens a dialog" onClick={this.openSupportPanel} className={styles.SupportButton}>
+        <button title="Opens a dialog" onClick={this.openSupportPanel} className={styles.SupportButton} data-id="nav-button-help">
           <HelpOutline className={styles.SupportIcon} size={22} />
 
           <ScreenReaderOnly>Help</ScreenReaderOnly>

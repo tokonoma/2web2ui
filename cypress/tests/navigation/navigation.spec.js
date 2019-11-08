@@ -6,7 +6,7 @@ describe('Mobile Navigation', () => {
   });
 
   const accountDropdownSelector = '[data-id="account-dropdown-button"]';
-  const navigationButtonSelector = '[data-id="top-navigation-button"]';
+  const navigationButtonSelector = '[data-id="nav-button-mobilemenu"]';
   const navigationListSelector = '[data-id="navigation-list"]';
   const accountDropdownListSelector = '[data-id="account-dropdown-list"]';
 

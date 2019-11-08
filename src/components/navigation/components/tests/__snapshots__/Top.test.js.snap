@@ -6,10 +6,9 @@ exports[`Top should render close icon when open 1`] = `
   onClick={[MockFunction]}
 >
   <UnstyledLink
-    aria-controls="mobile-navigation-wrapper"
     aria-expanded={true}
     className="Menu"
-    data-id="top-navigation-button"
+    data-id="nav-button-mobilemenu"
     role="button"
     to="javascript:void(0);"
   >
@@ -56,6 +55,7 @@ exports[`Top should render correctly on desktop 1`] = `
     <Connect(NotificationCenter) />
     <button
       className="SupportButton"
+      data-id="nav-button-help"
       onClick={[Function]}
       title="Opens a dialog"
     >
@@ -77,10 +77,9 @@ exports[`Top should render correctly on mobile 1`] = `
   className="Top"
 >
   <UnstyledLink
-    aria-controls="mobile-navigation-wrapper"
     aria-expanded={false}
     className="Menu"
-    data-id="top-navigation-button"
+    data-id="nav-button-mobilemenu"
     onClick={[MockFunction]}
     role="button"
     to="javascript:void(0);"
