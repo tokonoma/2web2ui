@@ -25,7 +25,7 @@ export class Top extends Component {
         <ScreenReaderOnly>Menu</ScreenReaderOnly>
       </button>
 
-      <Link to={DEFAULT_REDIRECT_ROUTE} className={styles.MobileLogo}>
+      <Link to={DEFAULT_REDIRECT_ROUTE} className={styles.MobileLogo} data-id="nav-link-mobilelogo">
         <SparkPost.Logo type='halfWhite' />
       </Link>
 
@@ -37,7 +37,7 @@ export class Top extends Component {
 
   renderDesktop = () => (
     <div className={styles.Top}>
-      <Link to={DEFAULT_REDIRECT_ROUTE} className={styles.Logo}>
+      <Link to={DEFAULT_REDIRECT_ROUTE} className={styles.Logo} data-id="nav-link-logo">
         <SparkPost.Logo type='halfWhite' />
       </Link>
 
