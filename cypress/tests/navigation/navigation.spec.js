@@ -5,7 +5,7 @@ describe('Mobile Navigation', () => {
     cy.viewport(500, 1000);
   });
 
-  const accountDropdownSelector = '[data-id="account-dropdown-button"]';
+  const accountDropdownSelector = '[data-id="nav-button-accounts"]';
   const navigationButtonSelector = '[data-id="nav-button-mobilemenu"]';
   const navigationListSelector = '[data-id="navigation-list"]';
   const accountDropdownListSelector = '[data-id="account-dropdown-list"]';
