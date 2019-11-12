@@ -28,6 +28,7 @@ exports[`Page: All Inbox Placement Messages Test renders page correctly with def
       reload={[Function]}
     />
   }
+  subtitle="gmail"
   title="Inbox Placement"
 >
   <Panel

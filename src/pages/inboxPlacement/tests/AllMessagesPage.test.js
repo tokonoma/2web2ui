@@ -11,6 +11,8 @@ import { PLACEMENT_FILTER_TYPES } from '../constants/types';
 describe('Page: All Inbox Placement Messages Test', () => {
   const subject = ({ ...props }) => {
     const defaults = {
+      filterType: PLACEMENT_FILTER_TYPES.MAILBOX_PROVIDER,
+      filterName: 'gmail',
       getAllInboxPlacementMessages: jest.fn(),
       getInboxPlacementByProviders: jest.fn(),
       getInboxPlacementByRegions: jest.fn(),

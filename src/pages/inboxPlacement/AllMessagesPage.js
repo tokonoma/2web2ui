@@ -1,7 +1,6 @@
 import React, { useEffect, useCallback } from 'react';
 import { connect } from 'react-redux';
 import { Grid, Page, Panel } from '@sparkpost/matchbox';
-import _ from 'lodash';
 
 import { Loading } from 'src/components';
 import { getInboxPlacementByProviders, getInboxPlacementByRegions, getAllInboxPlacementMessages, resetState } from 'src/actions/inboxPlacement';
@@ -14,6 +13,7 @@ import styles from './AllMessagesPage.module.scss';
 import { formatPercent } from 'src/helpers/units';
 import { PLACEMENT_FILTER_TYPES } from './constants/types';
 import { selectSinglePlacementResult } from 'src/selectors/inboxPlacement';
+import formatFilterName from './helpers/formatFilterName';
 
 export const AllMessagesPage = ({
   id,
@@ -89,7 +89,7 @@ export const AllMessagesPage = ({
         to: `/inbox-placement/details/${id}`
       }}
       title='Inbox Placement'
-      subtitle={(filterType === PLACEMENT_FILTER_TYPES.REGION) ? _.startCase(filterName) : filterName}
+      subtitle={formatFilterName(filterType, filterName)}
       primaryArea={<StopTestComponent status={status} id={id} reload={loadMessages} />}
     >
       <Panel title="Diagnostics">
