@@ -55,7 +55,7 @@ class FromEmail extends Component {
   }, 300);
 
   render() {
-    const { domains, value, ...inputProps } = this.props;
+    const { value, ...inputProps } = this.props;
     const { matches } = this.state;
 
     return (

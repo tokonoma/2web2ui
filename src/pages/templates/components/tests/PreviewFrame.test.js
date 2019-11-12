@@ -14,7 +14,7 @@ describe('PreviewFrame', () => {
 
       // Mock setting iframe ref
       // @note Tried mocking contentWindow with jsdom, but didn't provide add value, so removed dep
-      setRef = (iframe) => {
+      setRef = () => {
         this.iframe = {
           contentDocument: {
             close: jest.fn(),
