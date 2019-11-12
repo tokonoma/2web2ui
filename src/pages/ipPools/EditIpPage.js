@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Page } from '@sparkpost/matchbox';
 import _ from 'lodash';
-
 import { ApiErrorBanner, Loading } from 'src/components';
 import IpForm from './components/IpForm';
 import { showAlert } from 'src/actions/globalAlert';
@@ -42,26 +41,8 @@ export class EditIpPage extends Component {
     this.loadDependentData();
   }
 
-  renderError() {
-    const { error } = this.props;
-    return <ApiErrorBanner
-      errorDetails={error.message}
-      message="Sorry, we seem to have had some trouble loading your IP data."
-      reload={this.loadDependentData}
-    />;
-  }
-
-  renderForm() {
-    const { error } = this.props;
-    if (error) {
-      return this.renderError();
-    }
-
-    return <IpForm onSubmit={this.onUpdateIp}/>;
-  }
-
   render() {
-    const { loading, pool, ip } = this.props;
+    const { loading, pool, ip, error } = this.props;
 
     if (loading || _.isEmpty(pool) || _.isEmpty(ip)) {
       return <Loading/>;
@@ -78,7 +59,15 @@ export class EditIpPage extends Component {
         title={`Sending IP: ${ip.external_ip}`}
         breadcrumbAction={breadcrumbAction}
       >
-        {this.renderForm()}
+        {error &&
+          <ApiErrorBanner
+            errorDetails={error.message}
+            message="Sorry, we seem to have had some trouble loading your IP data."
+            reload={this.loadDependentData}
+          />
+        }
+
+        {!error && <IpForm onSubmit={this.onUpdateIp}/>}
       </Page>
     );
   }
