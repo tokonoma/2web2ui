@@ -36,12 +36,15 @@ export class DashboardPage extends Component {
 
   displayGuideAndReport = () => {
     const { isGuideAtBottom } = this.state;
+    const usageReport = <UsageReport/>;
+    const gettingStartedGuide = <GettingStartedGuide isGuideAtBottom={isGuideAtBottom} moveGuideAtBottom={this.moveGuideAtBottom} />;
     if (this.props.isMessageOnboardingSet) {
-      if (isGuideAtBottom) { return <><UsageReport/><GettingStartedGuide isGuideAtBottom={isGuideAtBottom} /></>; }
-      return <><GettingStartedGuide isGuideAtBottom={isGuideAtBottom} moveGuideAtBottom={this.moveGuideAtBottom}/><UsageReport/></>;
+      if (isGuideAtBottom) { return <>{usageReport}{gettingStartedGuide}</>; }
+      return <>{gettingStartedGuide}{usageReport}</>;
     }
 
-    return <><UsageReport/>
+    return <>
+    {usageReport}
      <AccessControl condition={hasGrants('api_keys/manage', 'templates/modify', 'sending_domains/manage')}>
        <Tutorial {...this.props} />
      </AccessControl> </>;
