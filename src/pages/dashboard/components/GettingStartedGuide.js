@@ -16,7 +16,6 @@ export const GettingStartedGuide = ({ isGuideAtBottom, moveGuideAtBottom }) => {
   const renderStep = () => {
     switch (stepName) {
       case 'Features':
-      default:
         return <Grid>
           <Grid.Column xs={12}>
             <Card>
@@ -30,6 +29,34 @@ export const GettingStartedGuide = ({ isGuideAtBottom, moveGuideAtBottom }) => {
             </Card>
           </Grid.Column>
         </Grid>;
+      case 'Sending':
+        return <>
+        <h2 style={{ textAlign: 'center', fontColor: 'gray' }}>Where Would You Like to Begin?</h2>
+        <Grid>
+          <Grid.Column xs={12} md={6}>
+            <Card textAlign='center'>
+              <CardContent>Send you first email in one click and dive right into what SparkPost can do for your email strategy</CardContent>
+              <CardActions>
+                <ButtonWrapper>
+                  <Button color='orange' onClick={() => setStepName('Show Me SparkPost')}>Show Me SparkPost</Button>
+                </ButtonWrapper>
+              </CardActions>
+            </Card>
+          </Grid.Column>
+          <Grid.Column xs={12} md={6}>
+            <Card textAlign='center'>
+              <CardContent>Ready to integrate via SMTP or API?We'll get you set up ASAP so you can start building with SparkPost</CardContent>
+              <CardActions>
+                <ButtonWrapper>
+                  <Button color='orange' onClick={() => setStepName('Let\'s Code')}>Let's Code</Button>
+                </ButtonWrapper>
+              </CardActions>
+            </Card>
+          </Grid.Column>
+        </Grid>
+         </>;
+      default:
+        null;
     }
   };
   return <>
