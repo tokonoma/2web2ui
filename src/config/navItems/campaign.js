@@ -4,7 +4,7 @@ import { isAccountUiOptionSet } from 'src/helpers/conditions/account';
 const campaignNavItems = [
   {
     label: 'Templates',
-    to: '/templatesv2'
+    to: '/templates'
   },
   {
     label: 'A/B Testing',
