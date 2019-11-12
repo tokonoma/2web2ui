@@ -5,6 +5,7 @@ import { Page } from '@sparkpost/matchbox';
 import _ from 'lodash';
 import { ApiErrorBanner, Loading } from 'src/components';
 import IpForm from './components/IpForm';
+import IpFormV2 from './components/IpFormV2';
 import { showAlert } from 'src/actions/globalAlert';
 import { listPools, updatePool } from 'src/actions/ipPools';
 import { updateSendingIp } from 'src/actions/sendingIps';
@@ -66,6 +67,8 @@ export class EditIpPage extends Component {
         }
 
         {!error && <IpForm onSubmit={this.onUpdateIp}/>}
+
+        {!error && <IpFormV2 onSubmit={this.onUpdateIp}/>}
       </Page>
     );
   }

@@ -16,7 +16,6 @@ import {
   selectIpFormInitialValues
 } from 'src/selectors/ipPools';
 
-
 export class IpForm extends Component {
   state = {
     confirmationModal: false

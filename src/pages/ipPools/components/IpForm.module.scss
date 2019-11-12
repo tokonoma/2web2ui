@@ -1,0 +1,25 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.MaxWidthSM {
+  max-width: 325px;
+}
+
+.MaxWidthMD {
+  max-width: 600px;
+}
+
+.FieldGroup {
+  margin-bottom: spacing('large');
+}
+
+.RadioParagraph {
+  margin-bottom: 0;
+}
+
+.WarmupDocLink {
+  margin-top: spacing('small');
+}
+
+.BannerParagraph {
+  margin: spacing() 0 0 0;
+}
