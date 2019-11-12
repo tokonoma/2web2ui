@@ -23,7 +23,7 @@ describe('Template List Components', () => {
 
     it('should navigate to published page if template is published', () => {
       wrapper.setProps({ list_status: 'published' });
-      expect(wrapper.find('Link').props().to).toEqual('/templatesv2/edit/id-123/published/content?subaccount=123');
+      expect(wrapper.find('Link').props().to).toEqual('/templates/edit/id-123/published/content?subaccount=123');
     });
   });
 

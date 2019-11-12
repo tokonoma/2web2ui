@@ -47,7 +47,7 @@ exports[`Template List Components Name should render 1`] = `
   >
     <Link
       replace={false}
-      to="/templatesv2/edit/id-123/draft/content?subaccount=123"
+      to="/templates/edit/id-123/draft/content?subaccount=123"
     >
       <strong>
         template name
