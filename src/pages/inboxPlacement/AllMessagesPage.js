@@ -13,6 +13,7 @@ import InfoBlock from './components/InfoBlock';
 import styles from './AllMessagesPage.module.scss';
 import { formatPercent } from 'src/helpers/units';
 import { PLACEMENT_FILTER_TYPES } from './constants/types';
+import { selectSinglePlacementResult } from 'src/selectors/inboxPlacement';
 
 export const AllMessagesPage = ({
   id,
@@ -124,26 +125,20 @@ export const AllMessagesPage = ({
 
 function mapStateToProps(state, props) {
   const { id, filterType, filterName } = props.match.params;
-  //Runs an inline function that returns a value from a switch statement
-  const result = (() => {
-    switch (filterType) {
-      case PLACEMENT_FILTER_TYPES.MAILBOX_PROVIDER:
-        return state.inboxPlacement.placementsByProvider.find(({ mailbox_provider }) => mailbox_provider === filterName);
-      case PLACEMENT_FILTER_TYPES.REGION:
-        return state.inboxPlacement.placementsByRegion.find(({ region }) => region === filterName);
-      default:
-        return {};
-    }
-  })() || {};
+  const {
+    status,
+    seedlist_count = 0,
+    placement = {},
+    authentication = {}} = selectSinglePlacementResult(state, props) || {};
 
   return {
     id,
     filterType,
     filterName,
-    status: result.status,
-    sent: result.seedlist_count || 0,
-    placement: result.placement || {},
-    authentication: result.authentication || {},
+    status,
+    sent: seedlist_count,
+    placement,
+    authentication,
     stopTestLoading: state.inboxPlacement.stopTestPending,
     messages: state.inboxPlacement.allMessages,
     loading: state.inboxPlacement.getAllMessagesPending,
