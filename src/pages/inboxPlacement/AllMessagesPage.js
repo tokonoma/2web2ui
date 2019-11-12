@@ -1,6 +1,7 @@
 import React, { useEffect, useCallback } from 'react';
 import { connect } from 'react-redux';
 import { Grid, Page, Panel } from '@sparkpost/matchbox';
+import _ from 'lodash';
 
 import { Loading } from 'src/components';
 import { getInboxPlacementByProviders, getInboxPlacementByRegions, getAllInboxPlacementMessages, resetState } from 'src/actions/inboxPlacement';
@@ -87,7 +88,7 @@ export const AllMessagesPage = ({
         to: `/inbox-placement/details/${id}`
       }}
       title='Inbox Placement'
-      subtitle={filterName}
+      subtitle={(filterType === PLACEMENT_FILTER_TYPES.REGION) ? _.startCase(filterName) : filterName}
       primaryArea={<StopTestComponent status={status} id={id} reload={loadMessages} />}
     >
       <Panel title="Diagnostics">
