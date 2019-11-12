@@ -80,26 +80,60 @@ exports[`Component: TestDetails renders correctly 1`] = `
     }
   >
     <div
-      className="PlacementFilter"
+      className="PlacementFilterContainer"
     >
-      <Select
-        onChange={[Function]}
-        options={
-          Array [
-            Object {
-              "label": "Mailbox Provider",
-              "value": "mailbox-provider",
-            },
-            Object {
-              "label": "Region",
-              "value": "region",
-            },
-          ]
-        }
-      />
+      <div
+        className="PlacementFilterSelect"
+      >
+        <ScreenReaderOnly>
+          <Label
+            id="select-placement-type"
+          >
+            Placement Type
+          </Label>
+        </ScreenReaderOnly>
+        <Select
+          data-id="select-placement-type"
+          id="select-placement-type"
+          onChange={[Function]}
+          options={
+            Array [
+              Object {
+                "label": "Mailbox Provider",
+                "value": "mailbox-provider",
+              },
+              Object {
+                "label": "Region",
+                "value": "region",
+              },
+            ]
+          }
+        />
+      </div>
+      <div
+        className="PlacementFilterTextField"
+      >
+        <ScreenReaderOnly>
+          <Label
+            id="textfield-placement-search"
+          >
+            Search by Mailbox Provider or Region
+          </Label>
+        </ScreenReaderOnly>
+        <TextField
+          data-id="text-field-placement-search"
+          id="textfield-placement-search"
+          onChange={[Function]}
+          placeholder="Mailbox Provider or Region"
+          resize="both"
+          suffix={<Search />}
+          type="text"
+        />
+      </div>
     </div>
     <PlacementBreakdown
       data={Array []}
+      data-id="placement-breakdown-table"
       type="mailbox-provider"
     />
   </Panel>

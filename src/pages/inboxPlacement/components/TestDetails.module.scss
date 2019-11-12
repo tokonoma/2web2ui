@@ -22,7 +22,23 @@
   }
 }
 
-.PlacementFilter {
+.PlacementFilterContainer {
   padding: spacing(base);
-  max-width: 200px;
+  @media screen and (min-width: breakpoint(smaller)) {
+    display: flex;
+  }
+}
+
+.PlacementFilterSelect {
+  @media screen and (min-width: breakpoint(smaller)) {
+    max-width: 200px;
+  }
+}
+
+.PlacementFilterTextField {
+  flex: 1;
+  margin-top: spacing(base);
+  @media screen and (min-width: breakpoint(smaller)) {
+    margin: 0 0 0 spacing(base);
+  }
 }
