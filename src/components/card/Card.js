@@ -16,4 +16,4 @@ export const CardGroup = ({ children }) => <div className={styles.CardGroup}>
   {children}
 </div>;
 
-export const CardTitle = ({ children }) => (<div className={styles.CardTitle}>{children}</div>);
+export const CardTitle = ({ children }) => (<div className={styles.CardTitle} role="heading" aria-level="3" >{children}</div>);
