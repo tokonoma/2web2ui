@@ -48,16 +48,14 @@ export class EditIpPage extends Component {
       return <Loading/>;
     }
 
-    const breadcrumbAction = {
-      content: pool.name,
-      Component: Link,
-      to: `/account/ip-pools/edit/${pool.id}`
-    };
-
     return (
       <Page
         title={`Sending IP: ${ip.external_ip}`}
-        breadcrumbAction={breadcrumbAction}
+        breadcrumbAction={{
+          content: pool.name,
+          Component: Link,
+          to: `/account/ip-pools/edit/${pool.id}`
+        }}
       >
         {error &&
           <ApiErrorBanner
