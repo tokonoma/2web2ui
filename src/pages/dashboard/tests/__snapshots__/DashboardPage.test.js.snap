@@ -127,6 +127,7 @@ exports[`Page: Dashboard tests should move the guide to bottom or top based on i
   <Connect(UsageReport) />
   <GettingStartedGuide
     isGuideAtBottom={true}
+    moveGuideAtBottom={[Function]}
   />
 </Page>
 `;
