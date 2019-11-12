@@ -12,7 +12,7 @@ describe('DisplayDate Component', () => {
       formattedDate: 'YYYY/MM/DD HH:mm'
     };
     const wrapper = shallow(<DisplayDate {...props} />);
-    expect(wrapper).toMatchSnapshot();
+    expect(wrapper.find('TimeAgo').prop('date')).toEqual(props.timestamp);
   });
 
   it('should render formattedDate', () => {
@@ -21,7 +21,16 @@ describe('DisplayDate Component', () => {
       formattedDate: 'YYYY/MM/DD HH:mm'
     };
     const wrapper = shallow(<DisplayDate {...props} />);
-    expect(wrapper).toMatchSnapshot();
+    expect(wrapper.text()).toEqual('YYYY/MM/DD HH:mm');
   });
 
+  it('should render formattedDate when external condition provided', () => {
+    const props = {
+      timestamp: '2017-11-17T15:08:00.000+00:00',
+      formattedDate: 'YYYY/MM/DD HH:mm',
+      showFullDate: true
+    };
+    const wrapper = shallow(<DisplayDate {...props} />);
+    expect(wrapper.text()).toEqual('YYYY/MM/DD HH:mm');
+  });
 });
