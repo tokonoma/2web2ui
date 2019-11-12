@@ -1,9 +1,9 @@
 import React from 'react';
 import styles from './Card.module.scss';
-import cx from 'classnames';
+import classNames from 'classnames';
 
 export const Card = ({ children, textAlign }) => (
-  <div className={cx(styles.CardContainer, styles[textAlign])}>
+  <div className={classNames(styles.CardContainer, styles[textAlign])}>
     {children}
   </div>
 );
