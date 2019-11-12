@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Panel, Button } from '@sparkpost/matchbox';
+import { Panel, Button, Grid } from '@sparkpost/matchbox';
 import { ArrowDownward, Send } from '@sparkpost/matchbox-icons';
-import { Card, CardTitle, CardContent, CardActions, CardGroup } from 'src/components';
+import { Card, CardTitle, CardContent, CardActions } from 'src/components';
 import ButtonWrapper from 'src/components/buttonWrapper';
+import styles from './GettingStartedGuide.module.scss';
 
 export const GettingStartedGuide = ({ isGuideAtBottom, moveGuideAtBottom }) => {
   const actions = isGuideAtBottom ? null : [{
@@ -16,17 +17,19 @@ export const GettingStartedGuide = ({ isGuideAtBottom, moveGuideAtBottom }) => {
     switch (stepName) {
       case 'Features':
       default:
-        return <CardGroup>
-          <Card>
-            <CardTitle><Send size='20' style={{ transform: 'rotate(-45deg)', verticalAlign: '5%' }}/>   &nbsp;Sending with Sparkpost</CardTitle>
-            <CardContent>Learn how to send emails, integrate our API into your code, and make the most of our powerful analytics.</CardContent>
-            <CardActions>
-              <ButtonWrapper>
-                <Button color='orange' onClick={() => setStepName('Start Sending')}>Start Sending</Button>
-              </ButtonWrapper>
-            </CardActions>
-          </Card>
-        </CardGroup>;
+        return <Grid>
+          <Grid.Column xs={12}>
+            <Card>
+              <CardTitle><Send size='20' className={styles.SendIcon}/>   &nbsp;Sending with Sparkpost</CardTitle>
+              <CardContent>Learn how to send emails, integrate our API into your code, and make the most of our powerful analytics.</CardContent>
+              <CardActions>
+                <ButtonWrapper>
+                  <Button color='orange' onClick={() => setStepName('Sending')}>Start Sending</Button>
+                </ButtonWrapper>
+              </CardActions>
+            </Card>
+          </Grid.Column>
+        </Grid>;
     }
   };
   return <>

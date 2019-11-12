@@ -9,7 +9,6 @@
     border-radius: 5px;
     border: 1px solid color(gray,5);
     padding: 15px;
-    margin-right: 10px;
 }
 .CardTitle{
     display: block;
@@ -20,8 +19,8 @@
 .CardContent{
     display: inline-block;
     max-width: 450px;
-    margin-top: 10px;
-    margin-bottom: 20px;
+    margin-top: spacing('small')*2;
+    margin-bottom: spacing('larger');
     font-size: font-size(500);
 }
 

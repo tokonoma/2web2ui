@@ -1,2 +1,2 @@
-export { CardGroup, Card, CardTitle, CardContent, CardActions } from './Card';
+export { Card, CardTitle, CardContent, CardActions } from './Card';
 
