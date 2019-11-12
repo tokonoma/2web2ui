@@ -2,12 +2,16 @@
 
 exports[`Page: Message Events tests getRowData renders correctly 1`] = `
 Array [
-  <DisplayDate
-    formattedDate="formatted"
-  />,
   "Injection",
+  <div
+    className="MessageSubject"
+  />,
   "tom.haverford@pawnee.state.in.us",
   "mean@friendly",
+  <DisplayDate
+    formattedDate="formatted"
+    showFullDate={false}
+  />,
   <ViewDetailsButton
     event_id="456xyz"
     formattedDate="formatted"
@@ -57,16 +61,19 @@ exports[`Page: Message Events tests should render page correctly 1`] = `
       columns={
         Array [
           Object {
-            "label": "Time",
+            "label": "Event",
           },
           Object {
-            "label": "Event",
+            "label": "Subject",
           },
           Object {
             "label": "Recipient",
           },
           Object {
             "label": "From Address",
+          },
+          Object {
+            "label": "Time",
           },
           null,
         ]
@@ -80,12 +87,14 @@ exports[`Page: Message Events tests should render page correctly 1`] = `
             "formattedDate": "so-formatted",
             "friendly_from": "hi@friendly",
             "rcpt_to": "ron.swanson@pawnee.state.in.us",
+            "subject": "Cool",
             "type": "delivery",
           },
           Object {
             "formattedDate": "formatted",
             "friendly_from": "mean@friendly",
             "rcpt_to": "tom.haverford@pawnee.state.in.us",
+            "subject": "More Title",
             "type": "injection",
           },
         ]
@@ -110,12 +119,14 @@ exports[`Page: Message Events tests should render page correctly 1`] = `
               "formattedDate": "so-formatted",
               "friendly_from": "hi@friendly",
               "rcpt_to": "ron.swanson@pawnee.state.in.us",
+              "subject": "Cool",
               "type": "delivery",
             },
             Object {
               "formattedDate": "formatted",
               "friendly_from": "mean@friendly",
               "rcpt_to": "tom.haverford@pawnee.state.in.us",
+              "subject": "More Title",
               "type": "injection",
             },
           ]
