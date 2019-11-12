@@ -190,12 +190,6 @@ export default class ListPage extends Component {
           />
         ) : (
           <>
-            <p className={styles.LeadText}>
-              Create re-usable templates that allow for dynamic personalized content. Easily communicate with your team
-              by having a set of named templates to reference.
-              Building a library of "go-to" templates for recurrent use-cases to reduce workload for your team.
-            </p>
-
             <RecentActivity
               templates={templates}
               onToggleDeleteModal={this.toggleDeleteModal}
