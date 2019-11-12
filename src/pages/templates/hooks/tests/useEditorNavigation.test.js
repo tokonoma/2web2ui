@@ -63,22 +63,22 @@ describe('useEditorNavigation', () => {
 
     it('redirects when link is clicked (draft)', () => {
       subject(useTestWrapper(routeState()));
-      expect(historyPush).toHaveBeenCalledWith('/templatesv2/edit/test-template/draft/settings');
+      expect(historyPush).toHaveBeenCalledWith('/templates/edit/test-template/draft/settings');
     });
 
     it('redirects with subaccount id (draft)', () => {
       subject(useTestWrapper(routeState({ subaccount: 102 })));
-      expect(historyPush).toHaveBeenCalledWith('/templatesv2/edit/test-template/draft/settings?subaccount=102');
+      expect(historyPush).toHaveBeenCalledWith('/templates/edit/test-template/draft/settings?subaccount=102');
     });
 
     it('redirects when link is clicked (published)', () => {
       subject(useTestWrapper(routeState({ version: 'published' })));
-      expect(historyPush).toHaveBeenCalledWith('/templatesv2/edit/test-template/published/settings');
+      expect(historyPush).toHaveBeenCalledWith('/templates/edit/test-template/published/settings');
     });
 
     it('redirects with subaccount id (published)', () => {
       subject(useTestWrapper(routeState({ version: 'published', subaccount: 102 })));
-      expect(historyPush).toHaveBeenCalledWith('/templatesv2/edit/test-template/published/settings?subaccount=102');
+      expect(historyPush).toHaveBeenCalledWith('/templates/edit/test-template/published/settings?subaccount=102');
     });
   });
 });

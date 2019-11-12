@@ -1,4 +1,4 @@
-import { templates, templatesV2 } from 'src/pages';
+import { templates } from 'src/pages';
 import { hasGrants } from '../../helpers/conditions';
 import App from '../../components/layout/App';
 import Fullscreen from 'src/components/layout/Fullscreen';
@@ -22,7 +22,7 @@ const templatesRoutes = [
   },
   {
     path: '/templates/edit/:id/:version?/:navKey?',
-    component: templatesV2.EditAndPreviewPage,
+    component: templates.EditAndPreviewPage,
     condition: hasGrants('templates/view'),
     layout: Fullscreen,
     title: 'Edit Template',

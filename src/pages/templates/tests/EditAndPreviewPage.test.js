@@ -52,7 +52,7 @@ describe('EditAndPreviewPage', () => {
   it('renders the <Prompt/> message when the editor state has not been saved and the target `pathname` does not match the current starting pattern', () => {
     const wrapper = subject({ editorState: { hasSaved: false }});
 
-    expect(wrapper.find('Prompt').props().message({ pathname: '/templatesV2' })).toBe('Are you sure you want to leave the page? If you return to the previous page, your work will not be saved.');
+    expect(wrapper.find('Prompt').props().message({ pathname: '/templates' })).toBe('Are you sure you want to leave the page? If you return to the previous page, your work will not be saved.');
   });
 
   it('renders does not render the <Prompt/> message when the editor state has not been saved and the target `pathname` does not match the current starting pattern', () => {

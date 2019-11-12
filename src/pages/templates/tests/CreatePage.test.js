@@ -87,7 +87,7 @@ describe('CreatePage', () => {
       wrapper.find('form').simulate('submit', { id: 'foo', content: {}});
 
       return createPromise.then(() => {
-        expect(mockPush).toHaveBeenCalledWith('/templatesv2/edit/foo/draft/content');
+        expect(mockPush).toHaveBeenCalledWith('/templates/edit/foo/draft/content');
         expect(mockAlert).toHaveBeenCalledWith({ type: 'success', message: 'Template Created.' });
       });
     });

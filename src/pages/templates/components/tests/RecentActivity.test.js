@@ -63,11 +63,11 @@ describe('RecentActivity', () => {
 
     expect(wrapper).toHaveTextContent('Recent Activity');
     expect(wrapper).toHaveTextContent(publishedWithDraftTemplate.name);
-    expect(wrapper.find('PageLink').at(0)).toHaveProp('to', `/templatesv2/edit/${publishedWithDraftTemplate.id}/published/content`);
+    expect(wrapper.find('PageLink').at(0)).toHaveProp('to', `/templates/edit/${publishedWithDraftTemplate.id}/published/content`);
     expect(wrapper).toHaveTextContent(publishedTemplate.name);
-    expect(wrapper.find('PageLink').at(1)).toHaveProp('to', `/templatesv2/edit/${publishedTemplate.id}/published/content`);
+    expect(wrapper.find('PageLink').at(1)).toHaveProp('to', `/templates/edit/${publishedTemplate.id}/published/content`);
     expect(wrapper).toHaveTextContent(draftTemplate.name);
-    expect(wrapper.find('PageLink').at(2)).toHaveProp('to', `/templatesv2/edit/${draftTemplate.id}/draft/content`);
+    expect(wrapper.find('PageLink').at(2)).toHaveProp('to', `/templates/edit/${draftTemplate.id}/draft/content`);
   });
 
   it('renders a maximum of four templates when more than four are present', function () {
