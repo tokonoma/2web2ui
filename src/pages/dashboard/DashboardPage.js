@@ -25,7 +25,8 @@ export class DashboardPage extends Component {
     const updateGuide = {
       options: {
         ui: {
-          isGuideAtBottom: true
+          isGuideAtBottom: true,
+          messaging_onboarding: true
         }
       }
     };

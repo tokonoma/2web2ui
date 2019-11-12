@@ -1,5 +1,5 @@
-export { default as CardGroup } from './CardGroup';
-export { default as Card } from './Card';
-export { default as CardTitle } from './CardTitle';
-export { default as CardContent } from './CardContent';
-export { default as CardActions } from './CardActions';
+export { CardGroup } from './Card';
+export { Card } from './Card';
+export { CardTitle } from './Card';
+export { CardContent } from './Card';
+export { CardActions } from './Card';

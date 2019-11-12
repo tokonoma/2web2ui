@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { Panel, Button } from '@sparkpost/matchbox';
 import { ArrowDownward, Send } from '@sparkpost/matchbox-icons';
-import { Card, CardTitle, CardContent, CardActions } from 'src/components';
-import CardGroup from 'src/components/card/CardGroup';
+import { Card, CardTitle, CardContent, CardActions, CardGroup } from 'src/components';
 import ButtonWrapper from 'src/components/buttonWrapper';
 
 export const GettingStartedGuide = ({ isGuideAtBottom, moveGuideAtBottom }) => {
