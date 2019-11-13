@@ -64,10 +64,10 @@ describe('Page: Dashboard tests', () => {
   it('should move the guide to bottom or top based on isGuideAtBottom', () => {
     wrapper.setState({ isGuideAtBottom: true });
     wrapper.setProps({ isMessageOnboardingSet: true, isGuideAtBottom: true });
-    expect(wrapper).toMatchSnapshot();
+    expect(wrapper.find('Page').children().last()).toContainExactlyOneMatchingElement('GettingStartedGuide');
     wrapper.setState({ isGuideAtBottom: false });
     wrapper.setProps({ isMessageOnboardingSet: true, isGuideAtBottom: false });
-    expect(wrapper).toMatchSnapshot();
+    expect(wrapper.find('Page').children().last()).not.toContainExactlyOneMatchingElement('GettingStartedGuide');
 
   });
 });

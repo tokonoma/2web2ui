@@ -106,58 +106,6 @@ exports[`Page: Dashboard tests should display upgrade CTA when account is free a
 </Page>
 `;
 
-exports[`Page: Dashboard tests should move the guide to bottom or top based on isGuideAtBottom 1`] = `
-<Page
-  empty={Object {}}
-  title="Dashboard"
->
-  <FreePlanWarningBanner
-    account={
-      Object {
-        "created": 2018-05-15T12:00:00.000Z,
-        "status": "active",
-        "subscription": Object {
-          "code": "paid",
-        },
-      }
-    }
-    accountAgeInDays={15}
-    ageRangeStart={16}
-  />
-  <Connect(UsageReport) />
-  <GettingStartedGuide
-    isGuideAtBottom={true}
-    moveGuideAtBottom={[Function]}
-  />
-</Page>
-`;
-
-exports[`Page: Dashboard tests should move the guide to bottom or top based on isGuideAtBottom 2`] = `
-<Page
-  empty={Object {}}
-  title="Dashboard"
->
-  <FreePlanWarningBanner
-    account={
-      Object {
-        "created": 2018-05-15T12:00:00.000Z,
-        "status": "active",
-        "subscription": Object {
-          "code": "paid",
-        },
-      }
-    }
-    accountAgeInDays={15}
-    ageRangeStart={16}
-  />
-  <GettingStartedGuide
-    isGuideAtBottom={false}
-    moveGuideAtBottom={[Function]}
-  />
-  <Connect(UsageReport) />
-</Page>
-`;
-
 exports[`Page: Dashboard tests should render import suppression list when 0 suppressions and new account 1`] = `
 <Page
   empty={Object {}}
