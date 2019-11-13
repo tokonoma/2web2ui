@@ -35,7 +35,7 @@ export const GettingStartedGuide = ({ isGuideAtBottom, moveGuideAtBottom }) => {
         <Grid>
           <Grid.Column xs={12} md={6}>
             <Card textAlign='center'>
-              <CardContent>Send you first email in one click and dive right into what SparkPost can do for your email strategy</CardContent>
+              <CardContent>Send your first email in one click and dive right into what SparkPost can do for your email strategy</CardContent>
               <CardActions>
                 <ButtonWrapper>
                   <Button color='orange' onClick={() => setStepName('Show Me SparkPost')}>Show Me SparkPost</Button>
