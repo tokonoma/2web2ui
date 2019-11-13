@@ -4,9 +4,10 @@ import classNames from 'classnames';
 import { connect } from 'react-redux';
 import { Field, formValueSelector, getFormValues, reduxForm, submit } from 'redux-form';
 import { withRouter } from 'react-router-dom';
-import { Button, Banner, Panel, Label } from '@sparkpost/matchbox';
+import { Button, Panel, Label } from '@sparkpost/matchbox';
 import { SelectWrapper, RadioGroup } from 'src/components/reduxFormWrappers';
 import { ConfirmationModal } from 'src/components';
+import { Card, CardTitle, CardContent } from 'src/components/card';
 import ExternalLink from 'src/components/externalLink';
 import ButtonWrapper from 'src/components/buttonWrapper';
 import {
@@ -92,9 +93,13 @@ const IpFormV2 = (props) => {
 
           {/* eslint-disable no-restricted-syntax */}
           <div className={styles.MaxWidthMD}>
-            <Banner title="Engagement Based IP Warmup">
-              <p className={styles.BannerParagraph}>This feature exists for accounts with a <abbr title="Customer Success Manager">CSM</abbr> or dedicated <abbr title="Technical Account Manager">TAM</abbr>. We will automatically bind highly engaged traffic to your cold IP to give it the best chance of warming up. To learn more, <ExternalLink to="https://www.sparkpost.com/docs/user-guide/automated-ip-warmup/">click here</ExternalLink>.</p>
-            </Banner>
+            <Card>
+              <CardTitle>Engagement Based IP Warmup</CardTitle>
+
+              <CardContent>
+                <p className={styles.CardParagraph}>This feature exists for accounts with a <abbr title="Customer Success Manager">CSM</abbr> or dedicated <abbr title="Technical Account Manager">TAM</abbr>. We will automatically bind highly engaged traffic to your cold IP to give it the best chance of warming up. To learn more, <ExternalLink to="https://www.sparkpost.com/docs/user-guide/automated-ip-warmup/">click here</ExternalLink>.</p>
+              </CardContent>
+            </Card>
           </div>
           {/* eslint-enable no-restricted-syntax */}
         </Panel.Section>

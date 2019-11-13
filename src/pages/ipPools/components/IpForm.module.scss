@@ -12,14 +12,11 @@
   margin-bottom: spacing('large');
 }
 
-.RadioParagraph {
+.RadioParagraph,
+.CardParagraph {
   margin-bottom: 0;
 }
 
 .WarmupDocLink {
   margin-top: spacing('small');
-}
-
-.BannerParagraph {
-  margin: spacing() 0 0 0;
 }
