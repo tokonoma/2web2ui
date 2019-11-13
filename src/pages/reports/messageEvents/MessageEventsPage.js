@@ -93,9 +93,9 @@ export class MessageEventsPage extends Component {
     const { timestamp, formattedDate, type, friendly_from, rcpt_to, subject } = rowData;
     return [
       snakeToFriendly(type),
-      <div className={styles.MessageSubject}>{subject}</div>,
-      rcpt_to,
-      friendly_from,
+      <div className={styles.MessageAttribute}>{subject}</div>,
+      <div className={styles.MessageAttribute}>{rcpt_to}</div>,
+      <div className={styles.MessageAttribute}>{friendly_from}</div>,
       <DisplayDate timestamp={timestamp} formattedDate={formattedDate} diffTime={59} diffScale='seconds'/>,
       <ViewDetailsButton {...rowData} />
     ];

@@ -4,10 +4,18 @@ exports[`Page: Message Events tests getRowData renders correctly 1`] = `
 Array [
   "Injection",
   <div
-    className="MessageSubject"
+    className="MessageAttribute"
   />,
-  "tom.haverford@pawnee.state.in.us",
-  "mean@friendly",
+  <div
+    className="MessageAttribute"
+  >
+    tom.haverford@pawnee.state.in.us
+  </div>,
+  <div
+    className="MessageAttribute"
+  >
+    mean@friendly
+  </div>,
   <DisplayDate
     diffScale="seconds"
     diffTime={59}
