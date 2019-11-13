@@ -15,7 +15,7 @@ export default class SettingsForm extends React.Component {
   updateSettings = (values = {}) => {
     const {
       draft,
-      updateDraftV2,
+      updateDraft,
       parsedTestData,
       subaccountId,
       showAlert,
@@ -27,7 +27,7 @@ export default class SettingsForm extends React.Component {
 
     values.content = { ...values.content , ...rest };
 
-    return updateDraftV2({
+    return updateDraft({
       id: draft.id,
       parsedTestData,
       ...values

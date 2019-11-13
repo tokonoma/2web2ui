@@ -8,7 +8,7 @@ const SaveDraft = (props) => {
   const {
     draft,
     content,
-    updateDraftV2,
+    updateDraft,
     showAlert,
     setHasSaved,
     parsedTestData
@@ -19,7 +19,7 @@ const SaveDraft = (props) => {
       onClick();
     }
 
-    updateDraftV2({
+    updateDraft({
       id: draft.id,
       content,
       parsedTestData

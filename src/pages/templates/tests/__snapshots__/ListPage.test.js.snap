@@ -16,16 +16,11 @@ exports[`ListPage renders correctly 1`] = `
     Object {
       "Component": [Function],
       "content": "Create New",
-      "to": "templatesv2/create",
+      "to": "templates/create",
     }
   }
   title="Templates"
 >
-  <p
-    className="LeadText"
-  >
-    Create re-usable templates that allow for dynamic personalized content. Easily communicate with your team by having a set of named templates to reference. Building a library of "go-to" templates for recurrent use-cases to reduce workload for your team.
-  </p>
   <RecentActivity
     onToggleDeleteModal={[Function]}
     onToggleDuplicateModal={[Function]}

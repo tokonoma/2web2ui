@@ -6,7 +6,7 @@ exports[`CreatePage renders correctly 1`] = `
     Object {
       "Component": [Function],
       "content": "Templates",
-      "to": "/templatesv2",
+      "to": "/templates",
     }
   }
   empty={Object {}}

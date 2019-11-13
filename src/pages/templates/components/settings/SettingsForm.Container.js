@@ -8,7 +8,7 @@ import { not } from 'src/helpers/conditions';
 import { selectDomainsBySubaccount } from 'src/selectors/templates';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { updateV2 as updateTemplate } from 'src/actions/templates';
+import { update as updateTemplate } from 'src/actions/templates';
 import { reduxForm } from 'redux-form';
 import { showAlert } from 'src/actions/globalAlert';
 import { selectSubaccountFromQuery } from '../../../../selectors/subaccounts';

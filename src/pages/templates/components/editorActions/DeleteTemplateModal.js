@@ -7,14 +7,14 @@ import { routeNamespace } from '../../constants/routes';
 const DeleteTemplateModal = (props) => {
   const { open, onCancel } = props;
   const {
-    deleteTemplateV2,
+    deleteTemplate,
     isDeletePending,
     subaccountId,
     draft
   } = useEditorContext();
   const [hasSuccessRedirect, setSuccessRedirect] = useState(false);
   const handleDelete = () => {
-    deleteTemplateV2({ id: draft.id, subaccountId })
+    deleteTemplate({ id: draft.id, subaccountId })
       .then(() => setSuccessRedirect(true));
   };
 

@@ -7,7 +7,7 @@ exports[`PublishedModeActions renders published actions 1`] = `
     data-id="button-edit-draft"
     role="button"
     size="default"
-    to="/templatesv2/edit/123/draft/content?subaccount=abcd"
+    to="/templates/edit/123/draft/content?subaccount=abcd"
   >
     <strong>
       Edit Draft
@@ -45,7 +45,7 @@ exports[`PublishedModeActions renders published actions 1`] = `
           <PageLink
             data-id="action-edit-draft"
             role="button"
-            to="/templatesv2/edit/123/draft/content?subaccount=abcd"
+            to="/templates/edit/123/draft/content?subaccount=abcd"
           >
             <FileEdit />
             <span>

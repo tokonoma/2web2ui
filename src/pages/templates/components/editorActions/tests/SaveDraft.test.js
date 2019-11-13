@@ -22,7 +22,7 @@ describe('SaveDraft', () => {
       draft: { id: 'foo' },
       history: {},
       parsedTestData,
-      updateDraftV2: jest.fn(),
+      updateDraft: jest.fn(),
       ...editorState
     });
 
@@ -35,12 +35,12 @@ describe('SaveDraft', () => {
 
   it('saves draft upon click', () => {
     const promise = Promise.resolve();
-    const updateDraftV2 = jest.fn(() => promise);
+    const updateDraft = jest.fn(() => promise);
     const setHasSaved = jest.fn();
     const showAlert = jest.fn();
     const content = { text: 'foo text', html: '<h1>foo html</h1>' };
     const wrapper = subject({
-      updateDraftV2,
+      updateDraft,
       content,
       setHasSaved,
       showAlert
@@ -49,7 +49,7 @@ describe('SaveDraft', () => {
     wrapper.find('UnstyledLink').simulate('click');
 
     return promise.then(() => {
-      expect(updateDraftV2).toHaveBeenCalledWith({
+      expect(updateDraft).toHaveBeenCalledWith({
         content,
         id: 'foo',
         parsedTestData: {
@@ -71,7 +71,7 @@ describe('SaveDraft', () => {
 
   it('saves draft (with subaccount) upon click', () => {
     const promise = Promise.resolve();
-    const updateDraftV2 = jest.fn(() => promise);
+    const updateDraft = jest.fn(() => promise);
     const setHasSaved = jest.fn();
     const showAlert = jest.fn();
     const content = {
@@ -84,7 +84,7 @@ describe('SaveDraft', () => {
     };
     const wrapper = subject({
       draft,
-      updateDraftV2,
+      updateDraft,
       content,
       setHasSaved,
       showAlert
@@ -93,7 +93,7 @@ describe('SaveDraft', () => {
     wrapper.find('UnstyledLink').simulate('click');
 
     return promise.then(() => {
-      expect(updateDraftV2).toHaveBeenCalledWith({
+      expect(updateDraft).toHaveBeenCalledWith({
         content,
         id: 'foo',
         parsedTestData: {

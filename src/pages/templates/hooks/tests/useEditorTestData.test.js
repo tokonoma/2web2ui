@@ -6,7 +6,7 @@ import useEditorTestData from '../useEditorTestData';
 describe('useEditorTestData', () => {
   const useTestWrapper = (initialProps = {}) => {
     const props = {
-      getTestDataV2: () => {},
+      getTestData: () => {},
       ...initialProps
     };
     const TestComponent = () => <div hooked={useEditorTestData(props)} />;
@@ -42,7 +42,7 @@ describe('useEditorTestData', () => {
     const mockGetTestData = () => preExistingTestData;
     const wrapper = useTestWrapper({
       draft,
-      getTestDataV2: mockGetTestData
+      getTestData: mockGetTestData
     });
     const { parsedTestData } = useHook(wrapper);
     expect(parsedTestData).toEqual(preExistingTestData);

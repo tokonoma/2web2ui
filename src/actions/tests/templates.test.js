@@ -37,7 +37,7 @@ describe('Action Creator: Templates', () => {
   });
 
   it('should dispatch a delete action', () => {
-    mockStore.dispatch(templates.deleteTemplateV2({ id: 'three' }));
+    mockStore.dispatch(templates.deleteTemplate({ id: 'three' }));
     expect(mockStore.getActions()).toMatchSnapshot();
   });
 
@@ -47,7 +47,7 @@ describe('Action Creator: Templates', () => {
       parsedTestData: { test: 'data' },
       form: 'data'
     };
-    mockStore.dispatch(templates.createV2(data));
+    mockStore.dispatch(templates.create(data));
     expect(mockStore.getActions()).toMatchSnapshot();
   });
 
@@ -57,7 +57,7 @@ describe('Action Creator: Templates', () => {
       parsedTestData: { test: 'data' },
       form: 'data'
     };
-    const thunk = templates.updateV2(data);
+    const thunk = templates.update(data);
     await thunk(dispatchMock);
     expect(_.flatten(dispatchMock.mock.calls)).toMatchSnapshot();
   });
@@ -68,7 +68,7 @@ describe('Action Creator: Templates', () => {
       parsedTestData: { test: 'data' },
       form: 'data'
     };
-    const thunk = templates.publishV2(data);
+    const thunk = templates.publish(data);
     await thunk(dispatchMock);
     expect(_.flatten(dispatchMock.mock.calls)).toMatchSnapshot();
   });
@@ -87,7 +87,7 @@ describe('Action Creator: Templates', () => {
   });
 
   it('should dispatch getTestData and sendPreview actions', async () => {
-    const action = templates.sendPreviewV2({
+    const action = templates.sendPreview({
       emails: ['test@example.com'],
       from: 'test@sparkpostbox.com',
       id: 'test-template',
@@ -97,9 +97,9 @@ describe('Action Creator: Templates', () => {
     expect(mockStore.getActions()).toMatchSnapshot();
   });
 
-  describe('createV2', () => {
+  describe('create', () => {
     it('dispatches create template with passed in data', async () => {
-      const action = templates.createV2({
+      const action = templates.create({
         id: 'my-id',
         assignTo: 'shared',
         subaccount: 123,
@@ -118,9 +118,9 @@ describe('Action Creator: Templates', () => {
     });
   });
 
-  describe('updateV2', () => {
+  describe('update', () => {
     it('dispatches update template with passed in data', async () => {
-      const action = templates.updateV2({
+      const action = templates.update({
         id: 'my-new-id',
         content: {
           html: '<p>My new content.</p>'
@@ -138,7 +138,7 @@ describe('Action Creator: Templates', () => {
     });
   });
 
-  describe('publishV2', () => {
+  describe('publish', () => {
     it('dispatches the publish action with passed in data', async () => {
       const data = {
         id: 'foo',
@@ -150,23 +150,23 @@ describe('Action Creator: Templates', () => {
           metadata: {}
         }
       };
-      const action = templates.publishV2(data, 123);
+      const action = templates.publish(data, 123);
 
       await mockStore.dispatch(action);
       expect(mockStore.getActions()).toMatchSnapshot();
     });
   });
 
-  describe('deleteTemplateV2', () => {
+  describe('deleteTemplate', () => {
     it('dispatches delete template with the passed in ID and subaccount', async () => {
-      const action = templates.deleteTemplateV2('foo', 123);
+      const action = templates.deleteTemplate('foo', 123);
 
       await mockStore.dispatch(action);
       expect(mockStore.getActions()).toMatchSnapshot();
     });
   });
 
-  describe('setTestDataV2', () => {
+  describe('setTestData', () => {
     it('updates local storage with passed in data by invoking localStorage.setItem', async () => {
       const data = {
         options: {},
@@ -176,7 +176,7 @@ describe('Action Creator: Templates', () => {
         metadata: {}
       };
 
-      await mockStore.dispatch(templates.setTestDataV2({
+      await mockStore.dispatch(templates.setTestData({
         data,
         id: 'foo',
         mode: 'draft'
@@ -186,17 +186,17 @@ describe('Action Creator: Templates', () => {
     });
   });
 
-  describe('deleteTestDataV2', () => {
+  describe('deleteTestData', () => {
     it('removes an item from local storage based on the passed in ID', async () => {
-      await mockStore.dispatch(templates.deleteTestDataV2({ id: 'foo' }));
+      await mockStore.dispatch(templates.deleteTestData({ id: 'foo' }));
 
       expect(window.localStorage.removeItem).toHaveBeenCalledWith('key');
     });
   });
 
-  describe('getTestDataV2', () => {
+  describe('getTestData', () => {
     it('retrieves an item from local storage by invoking localStorage.getItem', async () => {
-      await mockStore.dispatch(templates.getTestDataV2({ id: 'foo', mode: 'draft' }));
+      await mockStore.dispatch(templates.getTestData({ id: 'foo', mode: 'draft' }));
 
       expect(window.localStorage.getItem).toHaveBeenCalledWith('key');
     });

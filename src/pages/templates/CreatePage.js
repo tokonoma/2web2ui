@@ -15,7 +15,7 @@ export default class CreatePage extends Component {
 
   handleCreate = (values) => {
     const {
-      createTemplateV2,
+      createTemplate,
       history,
       subaccountId,
       showAlert
@@ -33,7 +33,7 @@ export default class CreatePage extends Component {
       substitution_data: {},
       metadata: {}
     };
-    createTemplateV2({
+    createTemplate({
       ...formData,
       parsedTestData: testDataBase
     })

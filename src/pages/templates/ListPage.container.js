@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import {
-  getTestDataV2,
-  deleteTemplateV2,
-  createV2 as createTemplateV2,
+  getTestData,
+  deleteTemplate,
+  create as createTemplate,
   listTemplates,
   getDraft,
   getPublished
@@ -34,10 +34,10 @@ function mapStateToProps(state) {
 
 const mapDispatchToProps = {
   listTemplates,
-  deleteTemplateV2,
+  deleteTemplate,
   showAlert,
-  createTemplateV2,
-  getTestDataV2,
+  createTemplate,
+  getTestData,
   getDraft,
   getPublished
 };

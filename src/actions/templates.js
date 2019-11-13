@@ -55,7 +55,7 @@ export function getPublished(id, subaccountId) {
   });
 }
 
-export function createV2(data) {
+export function create(data) {
   const {
     id,
     assignTo,
@@ -66,7 +66,7 @@ export function createV2(data) {
   } = data;
 
   return (dispatch) => {
-    dispatch(setTestDataV2({
+    dispatch(setTestData({
       id,
       mode: 'draft',
       data: parsedTestData
@@ -89,11 +89,11 @@ export function createV2(data) {
   };
 }
 
-export function updateV2(data, subaccountId, params = {}) {
+export function update(data, subaccountId, params = {}) {
   const { id, parsedTestData, content, ...formData } = data;
 
   return (dispatch) => {
-    dispatch(setTestDataV2({
+    dispatch(setTestData({
       id,
       mode: 'draft',
       data: parsedTestData
@@ -118,15 +118,15 @@ export function updateV2(data, subaccountId, params = {}) {
   };
 }
 
-export function publishV2(data, subaccountId) {
+export function publish(data, subaccountId) {
   return async (dispatch) => {
     const { id, parsedTestData } = data;
 
     dispatch({ type: 'PUBLISH_ACTION_PENDING' });
 
     try {
-      await dispatch(updateV2(data, subaccountId));
-      dispatch(setTestDataV2({ id, mode: 'published', data: parsedTestData }));
+      await dispatch(update(data, subaccountId));
+      dispatch(setTestData({ id, mode: 'published', data: parsedTestData }));
 
       await dispatch(sparkpostApiRequest({
         type: 'PUBLISH_TEMPLATE',
@@ -145,9 +145,9 @@ export function publishV2(data, subaccountId) {
   };
 }
 
-export function deleteTemplateV2({ id, subaccountId }) {
+export function deleteTemplate({ id, subaccountId }) {
   return (dispatch) => {
-    dispatch(deleteTestDataV2({ id }));
+    dispatch(deleteTestData({ id }));
 
     return dispatch(sparkpostApiRequest({
       type: 'DELETE_TEMPLATE',
@@ -160,7 +160,7 @@ export function deleteTemplateV2({ id, subaccountId }) {
   };
 }
 
-export function setTestDataV2({ data, id, mode }) {
+export function setTestData({ data, id, mode }) {
   return (dispatch, getState) => {
     const username = getState().currentUser.username;
     const testData = typeof data === 'object' ? JSON.stringify(data) : data;
@@ -169,7 +169,7 @@ export function setTestDataV2({ data, id, mode }) {
   };
 }
 
-export function deleteTestDataV2({ id }) {
+export function deleteTestData({ id }) {
   return (dispatch, getState) => {
     const username = getState().currentUser.username;
     const deleteItems = () => {
@@ -181,7 +181,7 @@ export function deleteTestDataV2({ id }) {
   };
 }
 
-export function getTestDataV2({ id, mode }) {
+export function getTestData({ id, mode }) {
   return (dispatch, getState) => {
     const username = getState().currentUser.username;
     const rawData = window.localStorage.getItem(getTestDataKey({ id, username, mode }));
@@ -194,13 +194,13 @@ export function getTestDataV2({ id, mode }) {
   };
 }
 
-export function sendPreviewV2({ id, mode, emails, from, subaccountId }) {
+export function sendPreview({ id, mode, emails, from, subaccountId }) {
   const recipients = emails.map((email) => ({
     address: { email }
   }));
 
   return async (dispatch) => {
-    const testData = await dispatch(getTestDataV2({ id, mode }));
+    const testData = await dispatch(getTestData({ id, mode }));
 
     return dispatch(sparkpostApiRequest({
       type: 'SEND_PREVIEW_TRANSMISSION',

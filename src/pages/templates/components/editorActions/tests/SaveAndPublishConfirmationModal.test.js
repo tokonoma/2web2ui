@@ -14,7 +14,7 @@ describe('SaveAndPublishConfirmationModal', () => {
         id: 'foo'
       },
       isDraftPublishing: false,
-      publishDraftV2: jest.fn(),
+      publishDraft: jest.fn(),
       parsedTestData: {
         options: {},
         metadata: {},
@@ -45,7 +45,7 @@ describe('SaveAndPublishConfirmationModal', () => {
     expect(wrapper.find('ConfirmationModal').props().open).toEqual(false);
   });
 
-  it('on confirm, 1) calls publishDraftV2 and 2) redirects to published path upon publishing', async () => {
+  it('on confirm, 1) calls publishDraft and 2) redirects to published path upon publishing', async () => {
     const publishDraftPromise = Promise.resolve();
     const parsedTestData = {
       options: {
@@ -58,18 +58,18 @@ describe('SaveAndPublishConfirmationModal', () => {
         substitution: 'data'
       }
     };
-    const publishDraftV2 = jest.fn(() => publishDraftPromise);
+    const publishDraft = jest.fn(() => publishDraftPromise);
     const draft = { id: 'foo', subaccount_id: 101 };
     const content = { text: 'foo text', html: '<h1>foo html</h1>' };
     const wrapper = subject({
-      publishDraftV2,
+      publishDraft,
       draft,
       content,
       parsedTestData
     });
     wrapper.find('ConfirmationModal').simulate('confirm');
 
-    expect(publishDraftV2).toHaveBeenCalledWith(
+    expect(publishDraft).toHaveBeenCalledWith(
       {
         id: draft.id,
         content,

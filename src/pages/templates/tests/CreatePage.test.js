@@ -13,7 +13,7 @@ describe('CreatePage', () => {
       listDomains={jest.fn()}
       history={{ push: jest.fn() }}
       showAlert={jest.fn()}
-      createTemplateV2={jest.fn(() => Promise.resolve())}
+      createTemplate={jest.fn(() => Promise.resolve())}
       {...props}
     />
   );
@@ -54,7 +54,7 @@ describe('CreatePage', () => {
         content: {}
       };
       const wrapper = subject({
-        createTemplateV2: mockCreate,
+        createTemplate: mockCreate,
         history: { push: jest.fn() }
       });
       wrapper.find('form').simulate('submit', formData);
@@ -80,7 +80,7 @@ describe('CreatePage', () => {
       const mockAlert = jest.fn();
       const createPromise = Promise.resolve();
       const wrapper = subject({
-        createTemplateV2: jest.fn(() => createPromise),
+        createTemplate: jest.fn(() => createPromise),
         history: { push: mockPush }, showAlert: mockAlert
       });
 

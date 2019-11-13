@@ -3,9 +3,9 @@ import { withRouter } from 'react-router-dom';
 import { formValueSelector, reduxForm } from 'redux-form';
 import _ from 'lodash';
 import {
-  createV2 as createTemplateV2,
+  create as createTemplate,
   getDraft,
-  setTestDataV2
+  setTestData
 } from 'src/actions/templates';
 import { showAlert } from 'src/actions/globalAlert';
 import { list as listDomains } from 'src/actions/sendingDomains';
@@ -33,8 +33,8 @@ const formOptions = {
 };
 
 export default withRouter(connect(mapStateToProps, {
-  createTemplateV2,
-  setTestDataV2,
+  createTemplate,
+  setTestData,
   getDraft,
   showAlert,
   listDomains

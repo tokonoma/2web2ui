@@ -14,7 +14,7 @@ import DuplicateTemplateModal from './DuplicateTemplateModal';
 const PublishedModeActions = () => {
   const {
     template,
-    createTemplateV2,
+    createTemplate,
     showAlert,
     content,
     isPublishedMode,
@@ -105,7 +105,7 @@ const PublishedModeActions = () => {
           template={template}
           contentToDuplicate={content}
           testDataToDuplicate={testData}
-          createTemplate={createTemplateV2}
+          createTemplate={createTemplate}
           showAlert={showAlert}
           isPublishedMode={isPublishedMode}
           isLoading={isCreatePending}

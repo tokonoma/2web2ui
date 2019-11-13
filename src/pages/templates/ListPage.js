@@ -26,13 +26,13 @@ export default class ListPage extends Component {
 
   deleteTemplate = () => {
     const {
-      deleteTemplateV2,
+      deleteTemplate,
       listTemplates,
       showAlert
     } = this.props;
     const { id, name } = this.state.templateToDelete;
 
-    return deleteTemplateV2({ id })
+    return deleteTemplate({ id })
       .then(() => {
         showAlert({ type: 'success', message: `Template ${name} deleted` });
         this.toggleDeleteModal();
@@ -49,7 +49,7 @@ export default class ListPage extends Component {
   };
 
   toggleDuplicateModal = (template) => {
-    const { getDraft, getPublished, getTestDataV2 } = this.props;
+    const { getDraft, getPublished, getTestData } = this.props;
     const isPublished = template.published;
 
     this.setState({ showDuplicateModal: true });
@@ -59,7 +59,7 @@ export default class ListPage extends Component {
         .then((res) => {
           this.setState({
             templateToDuplicate: res,
-            testDataToDuplicate: getTestDataV2({ id: res.id, mode: 'published' })
+            testDataToDuplicate: getTestData({ id: res.id, mode: 'published' })
           });
         });
     }
@@ -68,7 +68,7 @@ export default class ListPage extends Component {
       .then((res) => {
         this.setState({
           templateToDuplicate: res,
-          testDataToDuplicate: getTestDataV2({ id: res.id, mode: 'draft' })
+          testDataToDuplicate: getTestData({ id: res.id, mode: 'draft' })
         });
       });
   }
@@ -225,7 +225,7 @@ export default class ListPage extends Component {
             <DuplicateTemplateModal
               open={this.state.showDuplicateModal}
               onClose={() => this.setState({ showDuplicateModal: false })}
-              createTemplate={this.props.createTemplateV2}
+              createTemplate={this.props.createTemplate}
               template={this.state.templateToDuplicate}
               successCallback={this.handleDuplicateSuccess}
               showAlert={this.props.showAlert}

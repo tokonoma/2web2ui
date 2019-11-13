@@ -13,12 +13,12 @@ const SaveAndPublishConfirmationModal = (props) => {
     parsedTestData,
     isDraftPublishing,
     setHasSaved,
-    publishDraftV2
+    publishDraft
   } = useEditorContext();
   const [hasSuccessRedirect, setSuccessRedirect] = useState(false);
 
   const handleConfirm = () => {
-    publishDraftV2({
+    publishDraft({
       id: draft.id,
       content,
       parsedTestData

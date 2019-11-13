@@ -30,17 +30,17 @@ describe('SendTestEmailButton', () => {
   // Render the subject, open the modal, and return relevant variables for use in test cases
   const openModal = () => {
     const promise = Promise.resolve();
-    const updateDraftV2 = jest.fn(() => promise);
-    const sendPreviewV2 = jest.fn(() => promise);
+    const updateDraft = jest.fn(() => promise);
+    const sendPreview = jest.fn(() => promise);
     const showAlert = jest.fn(() => promise);
-    const setTestDataV2 = jest.fn(() => promise);
+    const setTestData = jest.fn(() => promise);
     const setHasSaved = jest.fn();
     const wrapper = subject({
       isPublishedMode: false,
-      updateDraftV2,
-      sendPreviewV2,
+      updateDraft,
+      sendPreview,
       showAlert,
-      setTestDataV2,
+      setTestData,
       setHasSaved
     });
 
@@ -49,10 +49,10 @@ describe('SendTestEmailButton', () => {
     return {
       wrapper,
       promise,
-      updateDraftV2,
-      sendPreviewV2,
+      updateDraft,
+      sendPreview,
       showAlert,
-      setTestDataV2,
+      setTestData,
       setHasSaved
     };
   };
@@ -61,14 +61,14 @@ describe('SendTestEmailButton', () => {
     const {
       promise,
       wrapper,
-      updateDraftV2,
+      updateDraft,
       setHasSaved
     } = openModal();
 
     wrapper.find('[children="Send a Test"]').simulate('click');
 
     expect(wrapper.find('Modal')).toHaveProp('open', true);
-    expect(updateDraftV2).toHaveBeenCalled();
+    expect(updateDraft).toHaveBeenCalled();
     expect(wrapper.find('PanelLoading')).toExist();
 
     return promise.then(() => {
@@ -109,11 +109,11 @@ describe('SendTestEmailButton', () => {
       });
     });
 
-    it('invokes the sendPreviewV2 function with loading UI, followed by showAlert without the loading UI when there are values in the to email list', () => {
+    it('invokes the sendPreview function with loading UI, followed by showAlert without the loading UI when there are values in the to email list', () => {
       const {
         promise,
         wrapper,
-        sendPreviewV2,
+        sendPreview,
         showAlert
       } = openModal();
 
@@ -123,7 +123,7 @@ describe('SendTestEmailButton', () => {
         wrapper.find('form').simulate('submit', { preventDefault: jest.fn() });
 
         expect(wrapper.find('PanelLoading')).toExist();
-        expect(sendPreviewV2).toHaveBeenCalled();
+        expect(sendPreview).toHaveBeenCalled();
 
         return promise.then(() => {
           expect(wrapper.find('PanelLoading')).not.toExist();

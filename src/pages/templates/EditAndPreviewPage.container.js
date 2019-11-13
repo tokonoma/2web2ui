@@ -5,13 +5,13 @@ import {
   getDraft,
   getPreview,
   getPublished,
-  updateV2 as updateDraftV2,
-  publishV2 as publishDraftV2,
-  deleteTemplateV2,
-  createV2 as createTemplateV2,
-  sendPreviewV2,
-  setTestDataV2,
-  getTestDataV2
+  update as updateDraft,
+  publish as publishDraft,
+  deleteTemplate,
+  create as createTemplate,
+  sendPreview,
+  setTestData,
+  getTestData
 } from 'src/actions/templates';
 import { getSnippets } from 'src/actions/snippets';
 import { list as listDomains } from 'src/actions/sendingDomains';
@@ -68,16 +68,16 @@ const mapDispatchToProps = {
   getDraft,
   getPublished,
   getPreview,
-  deleteTemplateV2,
-  createTemplateV2,
-  updateDraftV2,
-  publishDraftV2,
-  sendPreviewV2,
+  deleteTemplate,
+  createTemplate,
+  updateDraft,
+  publishDraft,
+  sendPreview,
   listDomains,
   listSubaccounts,
   showAlert,
-  setTestDataV2,
-  getTestDataV2,
+  setTestData,
+  getTestData,
   getSnippets
 };
 

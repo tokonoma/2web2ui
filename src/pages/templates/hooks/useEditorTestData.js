@@ -5,7 +5,7 @@ const useEditorTestData = (props) => {
   const {
     draft,
     templateTestData,
-    getTestDataV2,
+    getTestData,
     isPublishedMode
   } = props;
   const [testData, setTestData] = useState(templateTestData);
@@ -24,13 +24,13 @@ const useEditorTestData = (props) => {
       // data base is available as guidance.
       setTestData(JSON.stringify({
         ...baseTestData,
-        ...getTestDataV2({
+        ...getTestData({
           id: draft.id,
           mode: isPublishedMode ? 'published' : 'draft'
         })
       }, null, 2));
     }
-  }, [draft, getTestDataV2, isPublishedMode]);
+  }, [draft, getTestData, isPublishedMode]);
 
   useEffect(() => {
     let results;

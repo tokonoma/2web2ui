@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Action Creator: Templates createV2 dispatches create template with passed in data 1`] = `
+exports[`Action Creator: Templates create dispatches create template with passed in data 1`] = `
 Array [
   Object {
     "meta": Object {
@@ -30,7 +30,7 @@ Array [
 ]
 `;
 
-exports[`Action Creator: Templates deleteTemplateV2 dispatches delete template with the passed in ID and subaccount 1`] = `
+exports[`Action Creator: Templates deleteTemplate dispatches delete template with the passed in ID and subaccount 1`] = `
 Array [
   Object {
     "meta": Object {
@@ -43,7 +43,7 @@ Array [
 ]
 `;
 
-exports[`Action Creator: Templates publishV2 dispatches the publish action with passed in data 1`] = `
+exports[`Action Creator: Templates publish dispatches the publish action with passed in data 1`] = `
 Array [
   Object {
     "type": "PUBLISH_ACTION_PENDING",
@@ -281,7 +281,7 @@ Array [
 ]
 `;
 
-exports[`Action Creator: Templates updateV2 dispatches update template with passed in data 1`] = `
+exports[`Action Creator: Templates update dispatches update template with passed in data 1`] = `
 Array [
   Object {
     "meta": Object {

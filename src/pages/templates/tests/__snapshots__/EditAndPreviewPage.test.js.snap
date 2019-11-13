@@ -2,7 +2,7 @@
 
 exports[`EditAndPreviewPage renders a page 1`] = `
 <FullPage
-  breadcrumbRedirectsTo="/templatesv2"
+  breadcrumbRedirectsTo="/templates"
   primaryArea={
     <React.Fragment>
       <div

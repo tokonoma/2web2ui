@@ -16,7 +16,7 @@ const DraftModeActions = () => {
   const {
     hasPublished,
     draft,
-    createTemplateV2,
+    createTemplate,
     showAlert,
     content,
     isPublishedMode,
@@ -111,7 +111,7 @@ const DraftModeActions = () => {
           template={draft}
           contentToDuplicate={content}
           testDataToDuplicate={testData}
-          createTemplate={createTemplateV2}
+          createTemplate={createTemplate}
           showAlert={showAlert}
           isPublishedMode={isPublishedMode}
           isLoading={isCreatePending}
