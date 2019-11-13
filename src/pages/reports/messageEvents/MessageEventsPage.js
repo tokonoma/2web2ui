@@ -18,10 +18,11 @@ const errorMsg = 'Sorry, we seem to have had some trouble loading your message e
 const emptyMessage = 'There are no message events for your current query';
 
 const columns = [
-  { label: 'Time' },
   { label: 'Event' },
+  { label: 'Subject' },
   { label: 'Recipient' },
   { label: 'From Address' },
+  { label: 'Time' },
   null
 ];
 
@@ -89,12 +90,13 @@ export class MessageEventsPage extends Component {
   }
 
   getRowData = (rowData) => {
-    const { timestamp, formattedDate, type, friendly_from, rcpt_to } = rowData;
+    const { timestamp, formattedDate, type, friendly_from, rcpt_to, subject } = rowData;
     return [
-      <DisplayDate timestamp={timestamp} formattedDate={formattedDate} />,
       snakeToFriendly(type),
+      <div className={styles.MessageSubject}>{subject}</div>,
       rcpt_to,
       friendly_from,
+      <DisplayDate timestamp={timestamp} formattedDate={formattedDate} diffTime={59} diffScale='seconds'/>,
       <ViewDetailsButton {...rowData} />
     ];
   }

@@ -23,13 +23,15 @@ describe('Page: Message Events tests', () => {
         formattedDate: 'so-formatted',
         type: 'delivery',
         friendly_from: 'hi@friendly',
-        rcpt_to: 'ron.swanson@pawnee.state.in.us'
+        rcpt_to: 'ron.swanson@pawnee.state.in.us',
+        subject: 'Cool'
       },
       {
         formattedDate: 'formatted',
         type: 'injection',
         friendly_from: 'mean@friendly',
-        rcpt_to: 'tom.haverford@pawnee.state.in.us'
+        rcpt_to: 'tom.haverford@pawnee.state.in.us',
+        subject: 'More Title'
       }
     ],
     history: {
