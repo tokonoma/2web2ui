@@ -160,7 +160,7 @@ describe('Templates', () => {
 
       cy.findByText('Back').click({ force: true }); // `force` param needed for elements targeted with screen reader only content
 
-      cy.findByText(`${templateTitle} (DRAFT)`).should('be.visible');
+      cy.findAllByText(templateTitle).should('be.visible');
     });
 
     it('allows duplication from the list page view', () => {
