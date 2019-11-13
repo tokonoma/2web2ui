@@ -18,6 +18,8 @@ import {
 } from 'src/selectors/ipPools';
 import styles from './IpForm.module.scss';
 
+const formName = 'ipForm';
+
 const IpFormV2 = (props) => {
   const {
     ip,
@@ -37,7 +39,20 @@ const IpFormV2 = (props) => {
 
   const handleConfirmClick = () => {
     setConfirmationModalOpen(false);
-    submitForm();
+    submit(formName);
+  };
+
+  const handleUpdateSendingIPClick = () => {
+    const isEnabling = isAutoWarmupEnabled && !ip.auto_warmup_enabled;
+    const isDisabling = !isAutoWarmupEnabled && ip.auto_warmup_enabled;
+
+    if (isEnabling || isDisabling) {
+      setConfirmationModalOpen(true);
+
+      return false;
+    }
+
+    return submit(formName);
   };
 
   return (
@@ -106,7 +121,7 @@ const IpFormV2 = (props) => {
 
         <Panel.Section>
           <ButtonWrapper>
-            <Button primary disabled={submitting || pristine}>
+            <Button primary disabled={submitting || pristine} onClick={handleUpdateSendingIPClick}>
               Update Sending IP
             </Button>
           </ButtonWrapper>
@@ -131,7 +146,6 @@ const IpFormV2 = (props) => {
   );
 };
 
-const formName = 'ipForm';
 const valueSelector = formValueSelector(formName);
 const mapStateToProps = (state, props) => ({
   pool: selectCurrentPool(state, props),
