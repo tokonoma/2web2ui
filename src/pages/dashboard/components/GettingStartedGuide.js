@@ -21,7 +21,7 @@ export const GettingStartedGuide = ({ isGuideAtBottom, moveGuideAtBottom }) => {
           <Grid.Column xs={12}>
             <Card>
               <CardTitle><Send size='20' className={styles.SendIcon}/>   &nbsp;Sending with Sparkpost</CardTitle>
-              <CardContent>Learn how to send emails, integrate our API into your code, and make the most of our powerful analytics.</CardContent>
+              <CardContent><p className={styles.FeaturesCardContent}>Learn how to send emails, integrate our API into your code, and make the most of our powerful analytics.</p></CardContent>
               <CardActions>
                 <ButtonWrapper>
                   <Button color='orange' onClick={() => setStepName('Sending')}>Start Sending</Button>
