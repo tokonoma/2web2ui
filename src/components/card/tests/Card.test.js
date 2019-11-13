@@ -9,7 +9,7 @@ describe('Card', () => {
   });
   it('should render a CardContent correctly', () => {
     const wrapper = shallow(<CardContent />);
-    expect(wrapper.find('p')).toHaveLength(1);
+    expect(wrapper.find('div')).toHaveLength(1);
   });
   it('should render a CardTitle correctly', () => {
     const wrapper = shallow(<CardTitle />);
