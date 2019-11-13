@@ -1,4 +1,7 @@
-import { selectReferenceSeed, selectTestDetailsPageError, selectTestDetailsPageLoading } from '../inboxPlacement';
+import { selectReferenceSeed,
+  selectTestDetailsPageError,
+  selectTestDetailsPageLoading,
+  selectSinglePlacementResult } from '../inboxPlacement';
 
 describe('Selectors: Inbox Placement', () => {
   describe('selectReferenceSeed', () => {
@@ -84,6 +87,35 @@ describe('Selectors: Inbox Placement', () => {
       state.inboxPlacement.getByRegionPending = true;
       state.inboxPlacement.getTestContentPending = true;
       expect(selectTestDetailsPageLoading(state)).toBe(true);
+    });
+  });
+
+  describe('selectSinglePlacementResult', () => {
+    let state;
+    beforeEach(() => {
+      state = {
+        inboxPlacement: {
+          placementsByProvider: [
+            { id: 0,
+              mailbox_provider: 'gmail',
+              region: 'north america' }
+          ],
+          placementsByRegion: [
+            { id: 0,
+              region: 'europe' }
+          ]
+        }
+      };
+    });
+
+    it('returns mailbox provider', () => {
+      const props = { match: { params: { filterType: 'mailbox-provider', filterName: 'gmail' }}};
+      expect(selectSinglePlacementResult(state, props)).toEqual(state.inboxPlacement.placementsByProvider[0]);
+    });
+
+    it('returns region', () => {
+      const props = { match: { params: { filterType: 'region', filterName: 'europe' }}};
+      expect(selectSinglePlacementResult(state, props)).toEqual(state.inboxPlacement.placementsByRegion[0]);
     });
   });
 });

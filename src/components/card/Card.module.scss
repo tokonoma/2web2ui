@@ -1,0 +1,33 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+
+
+.CardContainer{
+    border-radius: 5px;
+    border: 1px solid color(gray,5);
+    padding: 15px;
+}
+.CardTitle{
+    display: block;
+    color: color(gray,3);
+    font-weight: 600;
+    font-size: font-size(500);
+}
+.CardContent{
+    display: inline-block;
+    margin-top: spacing('small')*2;
+    margin-bottom: spacing('larger');
+    font-size: font-size(500);
+}
+
+.right {
+    text-align: right;
+}
+
+.center {
+    text-align: center;
+}
+
+.left {
+    text-align: left;
+}

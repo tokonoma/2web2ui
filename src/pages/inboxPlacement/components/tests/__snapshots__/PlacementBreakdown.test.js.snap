@@ -119,9 +119,13 @@ exports[`Component: PlacementBreakdown RowComponent renders region correctly 1`]
   <Table.Cell
     className="PlacementNameCell"
   >
-    <strong>
-      North America
-    </strong>
+    <PageLink
+      to="/inbox-placement/details/1/region/north america"
+    >
+      <strong>
+        North America
+      </strong>
+    </PageLink>
   </Table.Cell>
   <Table.Cell
     className="Placement"
