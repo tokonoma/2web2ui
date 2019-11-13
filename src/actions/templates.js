@@ -25,16 +25,6 @@ export function getDraft(id, subaccountId) {
   });
 }
 
-export function getDraftAndPreview(id, subaccountId) {
-  return async (dispatch) => {
-    const { content } = await dispatch(getDraft(id, subaccountId));
-    const { payload = {}} = await dispatch(getTestDataV2({ id, mode: 'draft' }));
-    const substitution_data = payload.substitution_data || {};
-
-    return dispatch(getPreview({ content, id, mode: 'draft', substitution_data, subaccountId }));
-  };
-}
-
 // @todo Switch to the newer preview endpoint
 // @see https://github.com/SparkPost/sparkpost-admin-api-documentation/blob/master/services/content_previewer_api.md#preview-inline-content-post
 // @see https://github.com/SparkPost/sparkpost-api-documentation/blob/master/services/templates.md#preview-templatesidpreviewdraft
@@ -63,16 +53,6 @@ export function getPublished(id, subaccountId) {
       showErrorAlert: false
     }
   });
-}
-
-export function getPublishedAndPreview(id, subaccountId) {
-  return async (dispatch) => {
-    const { content } = await dispatch(getPublished(id, subaccountId));
-    const { payload = {}} = await dispatch(getTestDataV2({ id, mode: 'published' }));
-    const substitution_data = payload.substitution_data || {};
-
-    return dispatch(getPreview({ content, id, mode: 'published', substitution_data, subaccountId }));
-  };
 }
 
 export function createV2(data) {
