@@ -78,8 +78,8 @@ describe('Page: Alerts List', () => {
     const { recentlyTriggeredAlerts } = props;
     const panel = wrapper.find('Panel');
     expect(panel).toHaveLength(2);
-    expect(panel.first().find('h3').prop('children')).toEqual(recentlyTriggeredAlerts[0].name);
-    expect(panel.last().find('h3').prop('children')).toEqual(recentlyTriggeredAlerts[1].name);
+    expect(panel.first().find('[data-id="link-alert-name"]').text()).toEqual(recentlyTriggeredAlerts[0].name);
+    expect(panel.last().find('[data-id="link-alert-name"]').text()).toEqual(recentlyTriggeredAlerts[1].name);
   });
 
   it('should toggle delete modal', () => {
