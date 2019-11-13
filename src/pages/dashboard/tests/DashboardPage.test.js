@@ -23,7 +23,11 @@ describe('Page: Dashboard tests', () => {
     hasSuppressions: true,
     accountAgeInWeeks: 0,
     verifyingEmail: false,
-    accountAgeInDays: 15
+    accountAgeInDays: 15,
+    isMessageOnboardingSet: false,
+    isGuideAtBottom: false,
+    updateAccount: jest.fn(),
+    moveGuideAtBottom: jest.fn()
   };
 
   let wrapper;
@@ -50,5 +54,20 @@ describe('Page: Dashboard tests', () => {
   it('should display upgrade CTA when account is free and active', () => {
     wrapper.setProps({ account: { subscription: { code: 'free' }, status: 'active' }});
     expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render the new guide when message_onboarding flag is set', () => {
+    wrapper.setProps({ isMessageOnboardingSet: true });
+    expect(wrapper.find('GettingStartedGuide')).toExist();
+  });
+
+  it('should move the guide to bottom or top based on isGuideAtBottom', () => {
+    wrapper.setState({ isGuideAtBottom: true });
+    wrapper.setProps({ isMessageOnboardingSet: true, isGuideAtBottom: true });
+    expect(wrapper.find('Page').children().last()).toContainExactlyOneMatchingElement('GettingStartedGuide');
+    wrapper.setState({ isGuideAtBottom: false });
+    wrapper.setProps({ isMessageOnboardingSet: true, isGuideAtBottom: false });
+    expect(wrapper.find('Page').children().last()).not.toContainExactlyOneMatchingElement('GettingStartedGuide');
+
   });
 });
