@@ -12,7 +12,6 @@ import { selectMessageEvents, selectMessageEventsCSV } from 'src/selectors/messa
 import { formatToCsv, download } from 'src/helpers/downloading';
 import { DEFAULT_PER_PAGE_BUTTONS } from 'src/constants';
 import _ from 'lodash';
-import { differenceInSeconds } from 'date-fns';
 import styles from './MessageEventsPage.module.scss';
 
 const errorMsg = 'Sorry, we seem to have had some trouble loading your message events.';
@@ -97,7 +96,7 @@ export class MessageEventsPage extends Component {
       <div className={styles.MessageSubject}>{subject}</div>,
       rcpt_to,
       friendly_from,
-      <DisplayDate timestamp={timestamp} formattedDate={formattedDate} showFullDate={differenceInSeconds(Date.now(), timestamp) > 59}/>,
+      <DisplayDate timestamp={timestamp} formattedDate={formattedDate} diffTime={59} diffScale='seconds'/>,
       <ViewDetailsButton {...rowData} />
     ];
   }

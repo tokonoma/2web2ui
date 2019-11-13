@@ -9,8 +9,9 @@ Array [
   "tom.haverford@pawnee.state.in.us",
   "mean@friendly",
   <DisplayDate
+    diffScale="seconds"
+    diffTime={59}
     formattedDate="formatted"
-    showFullDate={false}
   />,
   <ViewDetailsButton
     event_id="456xyz"

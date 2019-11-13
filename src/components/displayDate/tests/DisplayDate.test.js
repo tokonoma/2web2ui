@@ -28,7 +28,8 @@ describe('DisplayDate Component', () => {
     const props = {
       timestamp: '2017-11-17T15:08:00.000+00:00',
       formattedDate: 'YYYY/MM/DD HH:mm',
-      showFullDate: true
+      diffScale: 'minutes',
+      diffTime: '59'
     };
     const wrapper = shallow(<DisplayDate {...props} />);
     expect(wrapper.text()).toEqual('YYYY/MM/DD HH:mm');
