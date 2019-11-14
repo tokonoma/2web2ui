@@ -48,7 +48,7 @@ export class Navigation extends Component {
           )}
           <nav className={navClasses}>
             <div className={wrapperClasses}>
-              <ul className={listClasses}>
+              <ul className={listClasses} data-id='navigation-list'>
                 {this.renderItems({ mobile })}
               </ul>
             </div>

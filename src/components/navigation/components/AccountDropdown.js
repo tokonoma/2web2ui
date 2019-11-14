@@ -20,8 +20,8 @@ export class AccountDropdown extends Component {
   renderActivator = () => (
     <WindowSizeContext.Consumer>
       {({ mobile }) => (
-        <UnstyledLink className={styles.Email} onClick={this.toggleDropdown}>
-          {(mobile || !this.props.email) ? <Person size={24}/> : <Fragment>{this.props.email} <ArrowDropDown/></Fragment>}
+        <UnstyledLink className={styles.Email} onClick={this.toggleDropdown} data-id="account-dropdown-link">
+          {(mobile || !this.props.email) ? <Person size={24} /> : <Fragment>{this.props.email} <ArrowDropDown/></Fragment>}
         </UnstyledLink>
       )}
     </WindowSizeContext.Consumer>
@@ -60,6 +60,7 @@ export class AccountDropdown extends Component {
           className={styles.AccountList}
           onClick={this.toggleDropdown}
           actions={this.getItems()}
+          data-id="account-dropdown-list"
         />
       </Popover>
     );
