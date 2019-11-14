@@ -22,6 +22,15 @@ export function getSeedList() {
   });
 }
 
+export const getInboxPlacementTrends = (queryParams) => sparkpostApiRequest({
+  type: 'GET_INBOX_PLACEMENT_TRENDS',
+  meta: {
+    method: 'GET',
+    url: '/v1/inbox-placement/message-trends',
+    params: queryParams
+  }
+});
+
 export const getInboxPlacementTest = (id) => sparkpostApiRequest({
   type: 'GET_INBOX_PLACEMENT_TEST',
   meta: {

@@ -20,6 +20,7 @@ Object {
   "stopTestPending": false,
   "tests": Array [],
   "testsPending": true,
+  "trends": Array [],
 }
 `;
 
@@ -37,6 +38,7 @@ Object {
   "stopTestPending": false,
   "tests": Array [],
   "testsPending": true,
+  "trends": Array [],
 }
 `;
 
@@ -56,6 +58,71 @@ Object {
   "stopTestPending": false,
   "tests": Array [],
   "testsPending": true,
+  "trends": Array [],
+}
+`;
+
+exports[`Inbox Placement Reducer get inbox placement trends fail 1`] = `
+Object {
+  "allMessages": Array [],
+  "currentTestDetails": Object {},
+  "getTrendsError": Object {
+    "errors": Array [
+      Object {
+        "message": "Some error occurred",
+      },
+    ],
+  },
+  "getTrendsPending": false,
+  "messagesById": Object {},
+  "placementsByProvider": Array [],
+  "placementsByRegion": Array [],
+  "seeds": Array [],
+  "seedsPending": false,
+  "stopTestPending": false,
+  "tests": Array [],
+  "testsPending": true,
+  "trends": Array [],
+}
+`;
+
+exports[`Inbox Placement Reducer get inbox placement trends pending 1`] = `
+Object {
+  "allMessages": Array [],
+  "currentTestDetails": Object {},
+  "getTrendsError": null,
+  "getTrendsPending": true,
+  "messagesById": Object {},
+  "placementsByProvider": Array [],
+  "placementsByRegion": Array [],
+  "seeds": Array [],
+  "seedsPending": false,
+  "stopTestPending": false,
+  "tests": Array [],
+  "testsPending": true,
+  "trends": Array [],
+}
+`;
+
+exports[`Inbox Placement Reducer get inbox placement trends success 1`] = `
+Object {
+  "allMessages": Array [],
+  "currentTestDetails": Object {},
+  "getTrendsError": null,
+  "getTrendsPending": false,
+  "messagesById": Object {},
+  "placementsByProvider": Array [],
+  "placementsByRegion": Array [],
+  "seeds": Array [],
+  "seedsPending": false,
+  "stopTestPending": false,
+  "tests": Array [],
+  "testsPending": true,
+  "trends": Array [
+    Object {
+      "fakeData": true,
+    },
+  ],
 }
 `;
 
@@ -73,6 +140,7 @@ Object {
   "stopTestPending": false,
   "tests": Array [],
   "testsPending": true,
+  "trends": Array [],
 }
 `;
 
@@ -96,6 +164,7 @@ Object {
   "stopTestPending": false,
   "tests": Array [],
   "testsPending": true,
+  "trends": Array [],
 }
 `;
 
@@ -116,6 +185,7 @@ Object {
   "stopTestPending": false,
   "tests": Array [],
   "testsPending": true,
+  "trends": Array [],
 }
 `;
 
@@ -135,6 +205,7 @@ Object {
   "stopTestPending": false,
   "tests": Array [],
   "testsPending": true,
+  "trends": Array [],
 }
 `;
 
@@ -154,6 +225,7 @@ Object {
   "stopTestPending": false,
   "tests": Array [],
   "testsPending": true,
+  "trends": Array [],
 }
 `;
 
@@ -179,6 +251,7 @@ Object {
   "stopTestPending": false,
   "tests": Array [],
   "testsPending": true,
+  "trends": Array [],
 }
 `;
 
@@ -196,6 +269,7 @@ Object {
   "stopTestPending": false,
   "tests": Array [],
   "testsPending": true,
+  "trends": Array [],
 }
 `;
 
@@ -219,6 +293,7 @@ Object {
   "stopTestPending": false,
   "tests": Array [],
   "testsPending": true,
+  "trends": Array [],
 }
 `;
 
@@ -238,6 +313,7 @@ Object {
   "stopTestPending": false,
   "tests": Array [],
   "testsPending": true,
+  "trends": Array [],
 }
 `;
 
@@ -254,6 +330,7 @@ Object {
   "stopTestPending": false,
   "tests": Array [],
   "testsPending": true,
+  "trends": Array [],
 }
 `;
 
@@ -270,6 +347,7 @@ Object {
   "stopTestPending": false,
   "tests": Array [],
   "testsPending": true,
+  "trends": Array [],
 }
 `;
 
@@ -286,6 +364,7 @@ Object {
   "stopTestPending": false,
   "tests": Array [],
   "testsPending": true,
+  "trends": Array [],
 }
 `;
 
@@ -308,6 +387,7 @@ Object {
     ],
   },
   "testsPending": false,
+  "trends": Array [],
 }
 `;
 
@@ -324,6 +404,7 @@ Object {
   "tests": Array [],
   "testsError": null,
   "testsPending": true,
+  "trends": Array [],
 }
 `;
 
@@ -342,6 +423,7 @@ Object {
   },
   "testsError": null,
   "testsPending": false,
+  "trends": Array [],
 }
 `;
 
@@ -357,5 +439,6 @@ Object {
   "stopTestPending": false,
   "tests": Array [],
   "testsPending": true,
+  "trends": Array [],
 }
 `;
