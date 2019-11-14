@@ -17,20 +17,24 @@ exports[`Navigation should render on desktop 1`] = `
       >
         <ul
           className="List"
+          data-id="navigation-list"
         >
           <NavItem
             key="0"
             location="/foo/bar"
+            mobile={false}
             toggleMobileNav={[Function]}
           />
           <NavItem
             key="1"
             location="/foo/bar"
+            mobile={false}
             toggleMobileNav={[Function]}
           />
           <NavItem
             key="2"
             location="/foo/bar"
+            mobile={false}
             toggleMobileNav={[Function]}
           />
         </ul>
@@ -61,20 +65,24 @@ exports[`Navigation should render on mobile 1`] = `
       >
         <ul
           className="List mobile"
+          data-id="navigation-list"
         >
           <NavItem
             key="0"
             location="/foo/bar"
+            mobile={true}
             toggleMobileNav={[Function]}
           />
           <NavItem
             key="1"
             location="/foo/bar"
+            mobile={true}
             toggleMobileNav={[Function]}
           />
           <NavItem
             key="2"
             location="/foo/bar"
+            mobile={true}
             toggleMobileNav={[Function]}
           />
         </ul>
