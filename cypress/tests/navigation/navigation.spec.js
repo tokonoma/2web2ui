@@ -5,8 +5,8 @@ describe('Mobile Navigation', () => {
     cy.viewport(500, 1000);
   });
 
-  const accountDropdownSelector = '[data-id="account-dropdown-link"]';
-  const navigationButtonSelector = '[data-id="top-navigation-link"]';
+  const accountDropdownSelector = '[data-id="account-dropdown-button"]';
+  const navigationButtonSelector = '[data-id="top-navigation-button"]';
   const navigationListSelector = '[data-id="navigation-list"]';
   const accountDropdownListSelector = '[data-id="account-dropdown-list"]';
 
@@ -18,37 +18,37 @@ describe('Mobile Navigation', () => {
   const assertAccountMenuIsVisible = () => cy.get(accountDropdownListSelector).should('be.visible');
   const assertAccountMenuIsNotVisible = () => cy.get(accountDropdownListSelector).should('not.be.visible');
 
-  it('opens mobile navigation when clicking on the hamburger icon', () => {
+  it('opens when clicking on the hamburger icon', () => {
     cy.login();
     openNavigation();
     assertNavigationIsVisible();
   });
 
-  it('navigation stays open after clicking menu item with child', () => {
+  it('stays open after clicking menu item with child', () => {
     clickMenuItem('Signals Analytics');
     assertNavigationIsVisible();
     cy.contains('Bounce').should('be.visible');
   });
 
-  it('navigation closes after clicking child menu item', () => {
+  it('closes after clicking child menu item', () => {
     clickMenuItem('Bounce');
     assertNavigationIsNotVisible();
   });
 
-  it('navigation closes after clicking top level menu item with no children', () => {
+  it('closes after clicking top level menu item with no children', () => {
     openNavigation();
     clickMenuItem('Events');
     assertNavigationIsNotVisible();
   });
 
-  it('navigation closes after opening admin menu', () => {
+  it('closes after opening admin menu', () => {
     openNavigation();
     openAccountMenu();
     assertNavigationIsNotVisible();
     assertAccountMenuIsVisible();
   });
 
-  it('admin menu closes after opening navigation', () => {
+  it('causes admin menu to close after opening', () => {
     openAccountMenu();
     openNavigation();
     assertNavigationIsVisible();

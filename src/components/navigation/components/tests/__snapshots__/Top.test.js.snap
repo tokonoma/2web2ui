@@ -7,7 +7,7 @@ exports[`Top should render close icon when open 1`] = `
 >
   <UnstyledLink
     className="Menu"
-    data-id="top-navigation-link"
+    data-id="top-navigation-button"
   >
     <Close
       size={24}
@@ -63,7 +63,7 @@ exports[`Top should render correctly on mobile 1`] = `
 >
   <UnstyledLink
     className="Menu"
-    data-id="top-navigation-link"
+    data-id="top-navigation-button"
     onClick={[MockFunction]}
   >
     <Menu
