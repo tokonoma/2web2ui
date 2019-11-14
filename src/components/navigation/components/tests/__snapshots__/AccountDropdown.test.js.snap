@@ -3,6 +3,7 @@
 exports[`AccountDropdown activator should render an icon on desktop if email doesnt exist 1`] = `
 <UnstyledLink
   className="Email"
+  data-id="account-dropdown-link"
   onClick={[Function]}
 >
   <Person
@@ -14,6 +15,7 @@ exports[`AccountDropdown activator should render an icon on desktop if email doe
 exports[`AccountDropdown activator should render an icon on mobile 1`] = `
 <UnstyledLink
   className="Email"
+  data-id="account-dropdown-link"
   onClick={[Function]}
 >
   <Person
@@ -25,6 +27,7 @@ exports[`AccountDropdown activator should render an icon on mobile 1`] = `
 exports[`AccountDropdown activator should render email address on desktop 1`] = `
 <UnstyledLink
   className="Email"
+  data-id="account-dropdown-link"
   onClick={[Function]}
 >
   test@testing.com
@@ -106,6 +109,7 @@ exports[`AccountDropdown should render correctly 1`] = `
       ]
     }
     className="AccountList"
+    data-id="account-dropdown-list"
     groupByKey="section"
     onClick={[Function]}
   />

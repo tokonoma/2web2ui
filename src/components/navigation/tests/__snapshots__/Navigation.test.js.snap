@@ -17,6 +17,7 @@ exports[`Navigation should render on desktop 1`] = `
       >
         <ul
           className="List"
+          data-id="navigation-list"
         >
           <NavItem
             key="0"
@@ -64,6 +65,7 @@ exports[`Navigation should render on mobile 1`] = `
       >
         <ul
           className="List mobile"
+          data-id="navigation-list"
         >
           <NavItem
             key="0"
