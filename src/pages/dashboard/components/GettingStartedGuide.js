@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Panel, Button, Grid } from '@sparkpost/matchbox';
 import { ArrowDownward, Send } from '@sparkpost/matchbox-icons';
 import { Card, CardTitle, CardContent, CardActions } from 'src/components';
@@ -13,12 +13,16 @@ export const GettingStartedGuide = ({ isGuideAtBottom, moveGuideAtBottom }) => {
   }];
   //stepName could be Features,Sending,Show Me Sparkpost, Let's Code
   const [stepName, setStepName] = useState('Features');
+  const guideHeadingRef = useRef(null);
+  useEffect(() => {
+    if (guideHeadingRef.current) { guideHeadingRef.current.focus(); }
+  }, [stepName]);
   const renderStep = () => {
     switch (stepName) {
       case 'Features':
         return <Grid>
-          <Grid.Column xs={12}>
-            <Card>
+          <Grid.Column xs={12} >
+            <Card >
               <CardTitle><Send size='20' className={styles.SendIcon}/>   &nbsp;Sending with Sparkpost</CardTitle>
               <CardContent><p className={styles.FeaturesCardContent}>Learn how to send emails, integrate our API into your code, and make the most of our powerful analytics.</p></CardContent>
               <CardActions>
@@ -31,9 +35,9 @@ export const GettingStartedGuide = ({ isGuideAtBottom, moveGuideAtBottom }) => {
         </Grid>;
       case 'Sending':
         return <>
-        <h2 className={styles.SendingStepHeading}>Where Would You Like to Begin?</h2>
+        <p className={styles.SendingStepHeading} role="heading" aria-level="4" ref={guideHeadingRef} tabIndex={-1}>Where Would You Like to Begin?</p>
         <Grid>
-          <Grid.Column xs={12} md={6}>
+          <Grid.Column xs={12} md={6} >
             <Card textAlign='center'>
               <CardContent><p className={styles.FeaturesCardContent}>Send your first email in one click and dive right into what SparkPost can do for your email strategy </p></CardContent>
               <CardActions>

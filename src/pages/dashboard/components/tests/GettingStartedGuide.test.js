@@ -21,8 +21,7 @@ describe('GettingStartedGuide', () => {
     const instance = subject();
     instance.find('Button').simulate('click');
     expect(instance.find('Card')).toHaveLength(2);
-    instance.find('Button').forEach((button) => {
-      expect(['Show Me SparkPost', 'Let\'s Code'].findIndex((x) => x === button.children().text()) !== -1).toBeTruthy();
-    });
+    expect(instance).toHaveTextContent('Show Me SparkPost');
+    expect(instance).toHaveTextContent('Let&#39;s Code');
   });
 });
