@@ -81,7 +81,7 @@
     "moment": "^2.20.1",
     "papaparse": "^4.3.6",
     "payment": "^2.3.0",
-    "print-js": "^1.0.31",
+    "print-js": "^1.0.62",
     "prop-types": "^15.7.2",
     "qs": "^6.6.0",
     "query-string": "^6.2.0",
