@@ -1,9 +1,11 @@
 import { createSelector } from 'reselect';
 import endsWith from 'lodash/endsWith';
 import { PLACEMENT_FILTER_TYPES } from '../pages/inboxPlacement/constants/types';
+import { fillByDate } from 'src/helpers/date';
+import moment from 'moment';
 
 export const getSeeds = (state) => state.inboxPlacement.seeds;
-
+export const getTrends = (state) => state.inboxPlacement.trends;
 const getFilters = (state,props) => props.match.params;
 const getInboxPlacementByMailbox = (state) => state.inboxPlacement.placementsByProvider;
 const getInboxPlacementByRegion = (state) => state.inboxPlacement.placementsByRegion;
@@ -34,3 +36,34 @@ export const selectSinglePlacementResult = createSelector(
     }
   });
 
+export const selectTrends = createSelector(
+  [getTrends],
+  (trends) => {
+    if (trends.length === 0) {
+      return [];
+    }
+
+    const normalizedHistory = trends.map(({ date, folders, total_messages }) => ({
+      date,
+      totalMessages: total_messages,
+      inbox: folders.inbox_pct,
+      spam: folders.spam_pct,
+      missing: folders.missing_pct
+    }));
+
+    const filledHistory = fillByDate({
+      dataSet: normalizedHistory,
+      fill: {
+        totalMessages: null,
+        inbox: null,
+        spam: null,
+        missing: null
+      },
+      //TODO Use dates from date selector/redux store
+      from: moment().subtract(30, 'd'),
+      to: moment().add(1, 'd')
+    });
+
+    return filledHistory;
+  }
+);
