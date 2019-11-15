@@ -1,0 +1,10 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.BoldInline{
+  display: inline;
+}
+
+.paddedCell {
+  padding: spacing(small) spacing();
+  text-align: right;
+}
