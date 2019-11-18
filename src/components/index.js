@@ -28,6 +28,7 @@ export { default as DomainStatusCell } from './domainStatus/DomainStatusCell';
 export { default as CookieConsent } from './cookieConsent/CookieConsent';
 export { default as PageLink } from './pageLink/PageLink';
 export { default as Subaccount } from './labels/Subaccount';
+export { default as IconButton } from './iconButton';
 
 export * from './collection';
 export * from './formatters';

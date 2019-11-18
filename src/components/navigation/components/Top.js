@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { SparkPost } from 'src/components';
+import { SparkPost, IconButton } from 'src/components';
 import { WindowSizeContext } from 'src/context/WindowSize';
 import { ScreenReaderOnly } from '@sparkpost/matchbox';
 import { HelpOutline, Menu, Close } from '@sparkpost/matchbox-icons';
@@ -44,11 +44,15 @@ export class Top extends Component {
       <div className={styles.RightSideWrapper}>
         <NotificationCenter />
 
-        <button title="Opens a dialog" onClick={this.openSupportPanel} className={styles.SupportButton} data-id="nav-button-help">
+        <IconButton
+          title="Opens a dialog"
+          onClick={this.openSupportPanel}
+          className={styles.SupportButton}
+          data-id="nav-button-help"
+          screenReaderLabel="Help"
+        >
           <HelpOutline className={styles.SupportIcon} size={22} />
-
-          <ScreenReaderOnly>Help</ScreenReaderOnly>
-        </button>
+        </IconButton>
 
         <AccountDropdown />
       </div>

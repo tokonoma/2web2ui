@@ -1,9 +1,7 @@
 @import '~@sparkpost/matchbox/src/styles/config.scss';
-@import 'src/styles/resets';
 
 .NotificationCenterTrigger {
-  @include button-reset();
-  display: inline-block;
+  transform: translateY(3px); // Hacky - used to vertically center the button inside the popover trigger that comes from Matchbox
   margin-right: spacing();
   color: color(gray, 5);
   transition: color 0.15s ease-in-out;

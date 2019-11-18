@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Popover, ScreenReaderOnly } from '@sparkpost/matchbox';
+import { Popover } from '@sparkpost/matchbox';
 import { Notifications, NotificationsUnread } from '@sparkpost/matchbox-icons';
 import Notification from './Notification';
+import { IconButton } from 'src/components';
 import * as notificationActions from 'src/actions/notifications';
 import { selectTransformedNotifications, selectUnreadCount } from 'src/selectors/notifications';
 import styles from './NotificationCenter.module.scss';
@@ -12,21 +13,16 @@ const NotificationCenterTrigger = (props) => {
   const hasUnreadNotifications = unreadCount > 0;
 
   return (
-    <button className={styles.NotificationCenterTrigger}>
+    <IconButton
+      className={styles.NotificationCenterTrigger}
+      screenReaderLabel={hasUnreadNotifications ? `${unreadCount} Unread Notifications` : '0 Unread Notifications'}
+    >
       {hasUnreadNotifications ? (
-        <>
-          <NotificationsUnread className={styles.UnreadIcon} size={22}/>
-
-          <ScreenReaderOnly>{unreadCount} <span>Unread Notifications</span></ScreenReaderOnly>
-        </>
+        <NotificationsUnread className={styles.UnreadIcon} size={22}/>
       ) : (
-        <>
-          <Notifications size={22}/>
-
-          <ScreenReaderOnly>0 Unread Notifications</ScreenReaderOnly>
-        </>
+        <Notifications size={22}/>
       )}
-    </button>
+    </IconButton>
   );
 };
 

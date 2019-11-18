@@ -1,5 +1,4 @@
 @import '~@sparkpost/matchbox/src/styles/config.scss';
-@import 'src/styles/resets';
 
 .Top {
   position: fixed;
@@ -42,10 +41,15 @@
   text-align: center;
 }
 
-.RightSideWrapper, .MobileAccountDropdownWrapper {
+.RightSideWrapper,
+.MobileAccountDropdownWrapper {
   flex: 1 0 0;
-  text-align: right;
   padding: rem(14) spacing();
+}
+
+.RightSideWrapper {
+  display: flex;
+  justify-content: flex-end;
 }
 
 .MobileAccountDropdownWrapper {
@@ -54,7 +58,6 @@
 
 .Menu,
 .SupportButton {
-  @include button-reset();
   transition: color 0.15s ease-in-out;
 
   &:hover,
