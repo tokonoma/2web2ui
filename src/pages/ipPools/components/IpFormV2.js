@@ -27,6 +27,7 @@ const IpFormV2 = (props) => {
     pools,
     isAutoWarmupEnabled,
     handleSubmit,
+    submit,
     submitting,
     pristine
   } = props;
@@ -76,12 +77,15 @@ const IpFormV2 = (props) => {
             />
           </div>
 
-          <div className={styles.FieldGroup}>
+          <fieldset className={styles.FieldGroup}>
             <Label>Auto IP Warmup</Label> {/* NOTE: This *should* be a `<legend>` inside of a `<fieldset>` */}
 
             <Field
               name="auto_warmup_enabled"
               component={RadioGroup}
+              type="radio"
+              parse={(val) => val === 'true' ? true : false}
+              value={isAutoWarmupEnabled ? 'true' : 'false'}
               options={[
                 {
                   label: <strong>Auto IP Warmup</strong>,
@@ -104,7 +108,7 @@ const IpFormV2 = (props) => {
               ]}
               disabled={submitting}
             />
-          </div>
+          </fieldset>
 
           {/* eslint-disable no-restricted-syntax */}
           <div className={styles.MaxWidthMD}>
