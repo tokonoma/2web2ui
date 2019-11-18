@@ -167,7 +167,7 @@ export function formatCardTypes(cards) {
 export function getPlanPrice(plan) {
   const pricingInterval = _.has(plan, 'hourly') ? 'hourly' : 'monthly';
   const intervalShortName = pricingInterval === 'hourly' ? 'hr' : 'mo';
-  return { intervalShort: intervalShortName, intervalLong: pricingInterval, price: plan[pricingInterval] };
+  return { intervalShort: intervalShortName, intervalLong: pricingInterval, price: plan[pricingInterval] || plan.price };
 }
 
 export function prepareCardInfo({ expCombined, ...cardInfo }) {
@@ -182,6 +182,6 @@ export function prepareCardInfo({ expCombined, ...cardInfo }) {
 }
 
 export function stripImmediatePlanChange(search) {
-  const { immediatePlanChange, ...options } = qs.parse(search);
+  const { immediatePlanChange: _immediatePlanChange, ...options } = qs.parse(search);
   return qs.stringify(options);
 }
