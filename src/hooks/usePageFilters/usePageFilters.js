@@ -17,10 +17,24 @@ const reducer = (state, action) => {
   }
 };
 
+const cleanReducer = (state, action) => cleanFilterState(reducer(state, action));
+
+const cleanFilterState = (filters) => Object.keys(filters).reduce((clean, key) => {
+  if (filters[key] !== undefined) {
+    clean[key] = filters[key];
+  }
+  return clean;
+}, {});
+
+/**
+ * Maintains state of page filters based on the URL.
+ * Use `updateFilters` to pass an object of filters that will be propagated into the URL
+ * Setting a key to undefined in the `updateFilters` object will remove it from the state
+ */
 const usePageFilters = () => {
   const { requestParams = {}, updateRoute } = useRouter();
   const defaultFilters = useRef(requestParams);
-  const [filters, dispatch] = useReducer(reducer, defaultFilters.current);
+  const [filters, dispatch] = useReducer(cleanReducer, defaultFilters.current);
 
   const updateFilters = useCallback((filters) => dispatch({ type: PAGE_FILTER_ACTIONS.SPREAD, payload: filters }), []);
   const resetFilters = useCallback(() => dispatch({ type: PAGE_FILTER_ACTIONS.RESET, payload: defaultFilters.current }), []);
@@ -30,7 +44,7 @@ const usePageFilters = () => {
     updateRoute(filters);
   }, [filters]);
 
-  return [filters, updateFilters, resetFilters];
+  return { filters, updateFilters, resetFilters };
 };
 
 export default usePageFilters;

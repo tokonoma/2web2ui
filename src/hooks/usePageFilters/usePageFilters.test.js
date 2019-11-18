@@ -26,7 +26,7 @@ describe('usePageFilters', () => {
       requestParams: initQueryObject,
       updateRoute
     });
-    const [filters, updateFilters, resetFilters] = usePageFilters();
+    const { filters, updateFilters, resetFilters } = usePageFilters();
 
     getUpdateFilters(updateFilters);
     getFilters(filters);
@@ -35,11 +35,11 @@ describe('usePageFilters', () => {
     return null;
   };
 
-  const subject = (
+  const subject = ({
     getFilters = defaultFunc,
     getUpdateFilters = defaultFunc,
     getResetFilters = defaultFunc
-  ) => mount(
+  }) => mount(
     <MockComponent
       getFilters={getFilters}
       getUpdateFilters={getUpdateFilters}
@@ -50,7 +50,7 @@ describe('usePageFilters', () => {
   it('hydrates filters on mount', () => {
     let filters;
     const getFilters = (f) => filters = f;
-    subject(getFilters);
+    subject({ getFilters });
     expect(filters).toEqual(initQueryObject);
   });
 
@@ -59,10 +59,21 @@ describe('usePageFilters', () => {
     const getFilters = (f) => filters = f;
     let updateFunc;
     const getUpdateFilters = (f) => updateFunc = f;
-    subject(getFilters, getUpdateFilters);
+    subject({ getFilters, getUpdateFilters });
     act(() => updateFunc({ page: 1 }));
     expect(updateRoute).toHaveBeenCalledWith(updatedQueryObject);
     expect(filters).toEqual(updatedQueryObject);
+  });
+
+  it('clears filters that are set to undefined', () => {
+    let filters;
+    const getFilters = (f) => filters = f;
+    let updateFunc;
+    const getUpdateFilters = (f) => updateFunc = f;
+    subject({ getFilters, getUpdateFilters });
+    act(() => updateFunc({ offset: undefined, page: 5 }));
+    expect(filters.offset).toBeUndefined();
+    expect(filters.page).toBe(5);
   });
 
   it('resets filters and url when reset function is called', () => {
@@ -72,7 +83,7 @@ describe('usePageFilters', () => {
     const getUpdateFilters = (f) => updateFunc = f;
     let resetFunc;
     const getResetFilters = (f) => resetFunc = f;
-    subject(getFilters, getUpdateFilters, getResetFilters);
+    subject({ getFilters, getUpdateFilters, getResetFilters });
     act(() => updateFunc({ page: 1, foo: ['bar', 'baz']}));
     act(() => resetFunc());
     expect(filters).toEqual(initQueryObject);
