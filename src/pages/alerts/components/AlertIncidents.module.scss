@@ -1,10 +1,14 @@
 @import '~@sparkpost/matchbox/src/styles/config.scss';
 
 .BoldInline{
-  display: inline;
+  display: inline-block;
 }
 
 .paddedCell {
   padding: spacing(small) spacing();
   text-align: right;
+}
+
+.IncidentFilters {
+  max-width: 25vw;
 }
