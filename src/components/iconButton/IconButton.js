@@ -35,7 +35,7 @@ IconButton.propTypes = {
   screenReaderLabel: PropTypes.string.isRequired,
   className: PropTypes.string,
   title: PropTypes.string,
-  ['data-id']: PropTypes.string
+  'data-id': PropTypes.string
 };
 
 export default IconButton;
