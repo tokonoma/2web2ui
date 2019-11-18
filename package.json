@@ -24,8 +24,8 @@
     "coveralls": "cat ./build-reports/lcov.info | coveralls",
     "lint": "node node_modules/eslint/bin/eslint.js src",
     "lintfix": "npm run lint -- --fix",
-    "storybook-dev": "start-storybook -p 9001 -c .storybook",
-    "storybook-build": "build-storybook -c .storybook -o .out",
+    "storybook-dev": "start-storybook -p 9001 -c .storybook --docs",
+    "storybook-build": "build-storybook -c .storybook -o .out --docs",
     "travis": "npm run test-ci && npm run build && (npm run coveralls || exit 0)"
   },
   "husky": {

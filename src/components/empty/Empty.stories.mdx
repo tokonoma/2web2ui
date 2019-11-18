@@ -1,0 +1,30 @@
+import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
+import Empty from './Empty';
+
+<Meta title="Panels|Empty" component={Empty}/>
+
+# Empty
+
+Use the `<Empty/>` component for empty `<Panel/>` component states.
+
+## Props
+
+<Props of={Empty}/>
+
+## Examples
+
+### Default
+
+<Preview>
+  <Story name="default">
+    <Empty title="IP Pools" message="No IP pools found."/>
+  </Story>
+</Preview>
+
+### With No Title
+
+<Preview>
+  <Story name="with no title">
+    <Empty message="No IP pools found."/>
+  </Story>
+</Preview>
