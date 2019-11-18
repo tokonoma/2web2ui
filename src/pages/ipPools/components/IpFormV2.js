@@ -20,7 +20,7 @@ import styles from './IpForm.module.scss';
 
 const formName = 'ipForm';
 
-const IpFormV2 = (props) => {
+export const IpFormV2 = (props) => {
   const {
     ip,
     pool,
@@ -126,7 +126,7 @@ const IpFormV2 = (props) => {
         <Panel.Section>
           <ButtonWrapper>
             <Button primary disabled={submitting || pristine} onClick={handleUpdateSendingIPClick}>
-              Update Sending IP
+              {submitting ? 'Saving' : 'Update Sending IP'}
             </Button>
           </ButtonWrapper>
         </Panel.Section>
