@@ -3,7 +3,6 @@ import { fetch as fetchAccount, getBillingInfo } from './account';
 import { list as getSendingIps } from './sendingIps';
 import { isAws, isAccountUiOptionSet } from 'src/helpers/conditions/account';
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
-import zuoraRequest from 'src/actions/helpers/zuoraRequest';
 
 /**
  * Updates plan
@@ -143,19 +142,6 @@ export function cors({ meta = {}, context, data = {} }) {
   });
 }
 
-export function updateCreditCard({ data, token, signature, meta = {} }) {
-  return zuoraRequest({
-    type: 'ZUORA_UPDATE_CC',
-    meta: {
-      method: 'POST',
-      url: '/payment-methods/credit-cards',
-      data,
-      headers: { token, signature },
-      ...meta,
-    },
-  });
-}
-
 export function addDedicatedIps({ ip_pool, isAwsAccount, quantity }) {
   const url = isAwsAccount
     ? '/v1/account/aws-marketplace/add-ons/dedicated_ips'
@@ -175,19 +161,6 @@ export function addDedicatedIps({ ip_pool, isAwsAccount, quantity }) {
   return dispatch => dispatch(sparkpostApiRequest(action)).then(() => dispatch(getSendingIps())); // refresh list
 }
 
-export function createZuoraAccount({ data, token, signature, meta = {} }) {
-  return zuoraRequest({
-    type: 'ZUORA_CREATE',
-    meta: {
-      method: 'POST',
-      url: '/accounts',
-      data,
-      headers: { token, signature },
-      ...meta,
-    },
-  });
-}
-
 /**
  * Gets countries for billing forms
  */
@@ -200,36 +173,6 @@ export function getBillingCountries() {
       params: {
         filter: 'billing',
       },
-    },
-  });
-}
-
-export function getBundles() {
-  return sparkpostApiRequest({
-    type: 'GET_BUNDLES',
-    meta: {
-      method: 'GET',
-      url: '/v1/billing/bundles',
-    },
-  });
-}
-
-export function getPlans() {
-  return sparkpostApiRequest({
-    type: 'GET_NEW_PLANS',
-    meta: {
-      method: 'GET',
-      url: '/v1/billing/plans',
-    },
-  });
-}
-
-export function getSubscription() {
-  return sparkpostApiRequest({
-    type: 'GET_SUBSCRIPTION',
-    meta: {
-      method: 'GET',
-      url: '/v1/billing/subscription',
     },
   });
 }
