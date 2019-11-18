@@ -1,6 +1,9 @@
 import React from 'react';
 import { Banner } from '@sparkpost/matchbox';
+import { Modal } from 'src/components';
+import PageLink from 'src/components/pageLink/PageLink';
 import SupportTicketLink from 'src/components/supportTicketLink/SupportTicketLink';
+import UpdatePaymentForm from '../forms/UpdatePaymentForm';
 
 /**
  * Renders plan information for non-self-serve users
@@ -41,17 +44,35 @@ const ManuallyBilledBanner = ({
     );
   }
 
+  const action = onZuoraPlan
+    ? {
+      Component: PageLink,
+      content: 'Enable Automatic Billing',
+      to: '/account/billing/enable-automatic'
+    }
+    : null;
   return (
-    <Banner
-      status="info"
-      title={title}
-    >
-      <p>
-        To make changes to your plan or billing information, please {
-          <SupportTicketLink issueId="general_issue">submit a support ticket</SupportTicketLink>
-        }.
-      </p>
-    </Banner>
+    <>
+      <Banner
+        status="info"
+        title={title}
+        action={action}
+      >
+        <p>
+          To make changes to your plan or billing information, please {
+            <SupportTicketLink issueId="general_issue">submit a support ticket</SupportTicketLink>
+          }.
+        </p>
+        {onZuoraPlan && (
+          <p>
+            Enable automatic billing to self-manage your plan and add-ons.
+          </p>
+        )}
+      </Banner>
+      <Modal>
+        <UpdatePaymentForm />
+      </Modal>
+    </>
   );
 };
 
