@@ -2,6 +2,7 @@ import React from 'react';
 import { Panel, Table, Tag } from '@sparkpost/matchbox';
 import { TableCollection, Empty } from 'src/components';
 import { METRICS, FILTERS_FRIENDLY_NAMES } from '../constants/formConstants';
+import { MAILBOX_PROVIDERS } from 'src/constants';
 import { getEvaluatorOptions } from '../helpers/alertForm';
 import { roundToPlaces } from 'src/helpers/units';
 import moment from 'moment';
@@ -27,40 +28,47 @@ const AlertIncidents = ({ incidents = [], alert, subaccountIdToString }) => {
 
 
     const renderTags = () => {
-      const { subaccount_id, ...rest } = filters;
 
-      const subaccountTag = subaccount_id &&
-      <span key='subaccounts'>
-        <h6 className={styles.BoldInline}>Subaccounts</h6>
-        &nbsp;
-        <Tag>{subaccountIdToString(subaccount_id)}</Tag>
-      </span>;
-
-      const otherTags = _.map(rest, (value, key) => {
+      const filterTags = _.map(filters, (value, key) => {
         const finalValue = value === 'NULL' ? null : value;
+        const getTagValue = (value) => {
+          switch (key) {
+            case 'subaccount_id':
+              return subaccountIdToString(value);
+            case 'mailbox_provider':
+              return MAILBOX_PROVIDERS[value];
+            default:
+              return value;
+          }
+        };
+
         return (
           finalValue &&
           <span key={key}>
-            <h6 className={styles.BoldInline}>{FILTERS_FRIENDLY_NAMES[key]}</h6>
+            <strong className={styles.BoldInline}>{FILTERS_FRIENDLY_NAMES[key]}</strong>
             &nbsp;
-            <Tag>{finalValue}</Tag>
+            <Tag>{getTagValue(finalValue)}</Tag>
           </span>
         );
       });
 
-      return (
-        [
-          subaccountTag,
-          otherTags.length > 0 ? ' and ' : null,
-          ...otherTags
-        ]
-      );
+      const joinTags = filterTags.reduce((acc, tag) => {
+        if (!acc) {
+          return [tag];
+        }
+        if (!tag) {
+          return acc;
+        }
+        return [...acc, <span key={'join_and'}> and </span>, tag];
+      }, null);
+
+      return joinTags;
     };
 
     return [
       <div>{formatDateTime(first_fired)}</div>,
       <div>{status === 'Active' ? <Tag color='yellow'>Active</Tag> : formatDateTime(last_fired)}</div>,
-      <div>{renderTags()}</div>,
+      <div className={styles.IncidentFilters}>{renderTags()}</div>,
       <div className={styles.paddedCell}>{roundToPlaces(triggered_value, 3)}{suffix}</div>
     ];
   };

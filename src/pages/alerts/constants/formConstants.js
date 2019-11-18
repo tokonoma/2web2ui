@@ -17,7 +17,8 @@ export const FILTERS_FRIENDLY_NAMES = {
   ip_pool: 'IP Pool',
   mailbox_provider: 'Mailbox Provider',
   sending_domain: 'Sending Domain',
-  sending_ip: 'Sending IP'
+  sending_ip: 'Sending IP',
+  subaccount_id: 'Subaccounts'
 };
 
 export const RECOMMENDED_METRIC_VALUE = {
