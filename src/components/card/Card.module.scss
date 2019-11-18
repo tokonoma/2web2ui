@@ -3,8 +3,7 @@
 .CardContainer {
   border-radius: 5px;
   border: 1px solid color(gray,5);
-  padding: 15px;
-  margin-top: spacing('small')
+  padding: spacing();
 }
 
 .CardTitle {
