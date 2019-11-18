@@ -1,0 +1,32 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.Item {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.Legend {
+  margin-top: rem(3);
+  margin-left: spacing(larger);
+}
+.Border {
+  border-style: solid;
+  border-color: black;
+  border-width: 1px;
+}
+.Label {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: spacing(large);
+  font-weight: 400;
+}
+
+.Fill {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: rem(9);
+  margin-top: -1px;
+  height: 12px;
+  width: 12px;
+  border-radius: border-radius();
+}
