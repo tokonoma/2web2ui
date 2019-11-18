@@ -43,7 +43,7 @@ describe('EnableAutomaticBillingForm', () => {
 
   it('creates billing, redirects, and shows alert on submit', async () => {
     const props = {
-      billingCreate: jest.fn(() => Promise.resolve()),
+      billingUpdate: jest.fn(() => Promise.resolve()),
       history: { push: jest.fn() },
       showAlert: jest.fn()
     };
@@ -61,7 +61,7 @@ describe('EnableAutomaticBillingForm', () => {
     await wrapper.instance().onSubmit(values);
 
     expect(billingHelpers.prepareCardInfo).toHaveBeenCalledWith(values.card);
-    expect(props.billingCreate).toHaveBeenCalledWith({ ...values, card: preparedCardInfo });
+    expect(props.billingUpdate).toHaveBeenCalledWith({ ...values, card: preparedCardInfo });
     expect(props.history.push).toHaveBeenCalledWith('/account/billing');
     expect(props.showAlert).toHaveBeenCalledWith(expect.objectContaining({ type: 'success' }));
   });

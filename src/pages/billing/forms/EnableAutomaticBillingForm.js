@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import { withRouter } from 'react-router-dom';
 import { Button, Grid, Panel } from '@sparkpost/matchbox';
-import { getBillingCountries } from 'src/actions/billing';
-import billingCreate from 'src/actions/billingCreate';
+import { getBillingCountries, updateBillingSubscription } from 'src/actions/billing';
+import billingUpdate from 'src/actions/billingUpdate';
 import { showAlert } from 'src/actions/globalAlert';
 import { Loading } from 'src/components/loading/Loading';
 import { prepareCardInfo } from 'src/helpers/billing';
@@ -22,13 +22,16 @@ export class EnableAutomaticBillingForm extends React.Component {
   }
 
   onSubmit = (values) => {
-    const { billingCreate, history, showAlert } = this.props;
+    const { billingUpdate, history, showAlert } = this.props;
 
-    return billingCreate({ ...values, card: prepareCardInfo(values.card) })
-      .then(() => {
-        history.push('/account/billing');
-        showAlert({ type: 'success', message: 'Automatic Billing Enabled' });
-      });
+    return billingUpdate({ ...values, card: prepareCardInfo(values.card) })
+      .then(() => updateBillingSubscription({
+        type: 'active'
+      })).then(
+        () => {
+          history.push('/account/billing');
+          showAlert({ type: 'success', message: 'Automatic Billing Enabled' });
+        });
   };
 
   render() {
@@ -95,7 +98,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchtoProps = {
-  billingCreate,
+  billingUpdate,
   getBillingCountries,
   showAlert
 };
