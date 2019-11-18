@@ -1,0 +1,35 @@
+import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
+import Callout from './Callout';
+
+<Meta title="Misc|Callout" component={Callout}/>
+
+# Callout
+
+## Props
+
+<Props of={Callout}/>
+
+## Examples
+
+### Default
+
+<Preview>
+  <Story name="default">
+    <Callout title="My Callout">
+      This is content inside a Callout that renders inside a paragraph tag.
+    </Callout>
+  </Story>
+</Preview>
+
+## Usage
+
+```js
+import React from 'react';
+import Callout from 'src/components/callout';
+
+const MyComponent = () => (
+  <Callout title="My Callout" height="300px">
+    This is content inside a Callout that renders inside a paragraph tag.
+  </Callout>
+);
+```
