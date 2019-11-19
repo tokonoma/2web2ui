@@ -5,18 +5,16 @@ exports[`Top should render close icon when open 1`] = `
   className="Top"
   onClick={[MockFunction]}
 >
-  <button
-    aria-expanded={true}
+  <IconButton
+    aria-expanded="true"
     className="Menu"
     data-id="nav-button-mobilemenu"
+    screenReaderLabel="Menu"
   >
     <Close
       size={24}
     />
-    <ScreenReaderOnly>
-      Menu
-    </ScreenReaderOnly>
-  </button>
+  </IconButton>
   <Link
     className="MobileLogo"
     data-id="nav-link-mobilelogo"
@@ -74,19 +72,17 @@ exports[`Top should render correctly on mobile 1`] = `
 <div
   className="Top"
 >
-  <button
-    aria-expanded={false}
+  <IconButton
+    aria-expanded="false"
     className="Menu"
     data-id="nav-button-mobilemenu"
     onClick={[MockFunction]}
+    screenReaderLabel="Menu"
   >
     <Menu
       size={24}
     />
-    <ScreenReaderOnly>
-      Menu
-    </ScreenReaderOnly>
-  </button>
+  </IconButton>
   <Link
     className="MobileLogo"
     data-id="nav-link-mobilelogo"

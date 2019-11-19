@@ -33,8 +33,8 @@ const IconButton = (props) => {
 };
 
 IconButton.propTypes = {
-  onClick: PropTypes.func.isRequired,
   screenReaderLabel: PropTypes.string.isRequired,
+  onClick: PropTypes.func,
   className: PropTypes.string,
   title: PropTypes.string,
   disabled: PropTypes.bool,

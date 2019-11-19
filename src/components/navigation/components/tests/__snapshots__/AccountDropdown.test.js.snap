@@ -3,11 +3,7 @@
 exports[`AccountDropdown activator should render an icon on desktop if email doesnt exist 1`] = `
 <button
   className="Email"
-<<<<<<< HEAD
-  data-id="account-dropdown-button"
-=======
   data-id="nav-button-accounts"
->>>>>>> FE-726 - Update out of date AccountDropdown tests
   onClick={[Function]}
 >
   <Person
@@ -22,11 +18,7 @@ exports[`AccountDropdown activator should render an icon on desktop if email doe
 exports[`AccountDropdown activator should render an icon on mobile 1`] = `
 <button
   className="Email"
-<<<<<<< HEAD
-  data-id="account-dropdown-button"
-=======
   data-id="nav-button-accounts"
->>>>>>> FE-726 - Update out of date AccountDropdown tests
   onClick={[Function]}
 >
   <Person
@@ -41,11 +33,7 @@ exports[`AccountDropdown activator should render an icon on mobile 1`] = `
 exports[`AccountDropdown activator should render email address on desktop 1`] = `
 <button
   className="Email"
-<<<<<<< HEAD
-  data-id="account-dropdown-button"
-=======
   data-id="nav-button-accounts"
->>>>>>> FE-726 - Update out of date AccountDropdown tests
   onClick={[Function]}
 >
   test@testing.com
