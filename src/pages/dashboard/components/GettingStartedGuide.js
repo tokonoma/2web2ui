@@ -4,8 +4,15 @@ import { ArrowDownward, Send } from '@sparkpost/matchbox-icons';
 import { Card, CardTitle, CardContent, CardActions } from 'src/components';
 import ButtonWrapper from 'src/components/buttonWrapper';
 import styles from './GettingStartedGuide.module.scss';
+import { BreadCrumbs, BreadCrumbsItem } from '../../../components';
 
 export const GettingStartedGuide = ({ isGuideAtBottom, moveGuideAtBottom }) => {
+  const breadCrumbsItems = {
+    'Features': ['Features'],
+    'Sending': ['Features', 'Sending'],
+    'Show Me SparkPost': ['Features', 'Sending', 'Show Me SparkPost'],
+    'Let\'s Code': ['Features', 'Sending', 'Let\'s Code']
+  };
   const actions = isGuideAtBottom ? null : [{
     content: <span> Move to Bottom <ArrowDownward size='20'/> </span>,
     color: 'blue',
@@ -67,7 +74,14 @@ export const GettingStartedGuide = ({ isGuideAtBottom, moveGuideAtBottom }) => {
   };
   return <>
         <Panel title='Getting Started' actions={actions} sectioned >
-          <p><strong> Features</strong> </p>
+          <BreadCrumbs>
+            {breadCrumbsItems[stepName].map((item) => (
+              <BreadCrumbsItem
+                key={item}
+                onClick={() => setStepName(item)}
+                active={stepName === item}>{item}</BreadCrumbsItem>
+            ))}
+          </BreadCrumbs>
           {renderStep()}
         </Panel>
         </>;

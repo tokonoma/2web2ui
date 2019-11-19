@@ -29,6 +29,7 @@ export { default as CookieConsent } from './cookieConsent/CookieConsent';
 export { default as PageLink } from './pageLink/PageLink';
 export { default as Subaccount } from './labels/Subaccount';
 
+export * from './breadcrumbs';
 export * from './collection';
 export * from './formatters';
 export * from './loading/Loading';
