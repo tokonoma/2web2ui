@@ -53,20 +53,18 @@ exports[`Top should render correctly on desktop 1`] = `
     className="RightSideWrapper"
   >
     <Connect(NotificationCenter) />
-    <button
+    <IconButton
       className="SupportButton"
       data-id="nav-button-help"
       onClick={[Function]}
+      screenReaderLabel="Help"
       title="Opens a dialog"
     >
       <HelpOutline
         className="SupportIcon"
         size={22}
       />
-      <ScreenReaderOnly>
-        Help
-      </ScreenReaderOnly>
-    </button>
+    </IconButton>
     <Connect(AccountDropdown) />
   </div>
 </div>
