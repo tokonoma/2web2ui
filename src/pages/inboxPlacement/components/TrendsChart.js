@@ -12,7 +12,7 @@ import { getInboxPlacementTrends } from 'src/actions/inboxPlacement';
 import { formatInputDate } from 'src/helpers/date';
 import { selectTrends } from 'src/selectors/inboxPlacement';
 import Callout from 'src/components/callout';
-import { PanelLoading } from '../../../components';
+import { PanelLoading } from 'src/components';
 
 const yKeys = [
   {

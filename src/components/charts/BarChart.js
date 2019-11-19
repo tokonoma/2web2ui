@@ -108,19 +108,20 @@ export const BarChart = (props) => {
             />
           )
         )}
-        {hasBackgroundBars && (<Bar
-          cursor='pointer'
-          dataKey='noKey'
-          stackId='stack'
-          isAnimationActive={false}
-          onClick={onClick}
-          onMouseOver={onMouseOver}
-          shape={
-            ({ payload, background, ...rest }) => (
-              <Rectangle {...rest} {...background} opacity={0} />
-            )
-          }
-        />)}
+        {hasBackgroundBars && (
+          <Bar
+            cursor='pointer'
+            dataKey='noKey'
+            stackId='stack'
+            isAnimationActive={false}
+            onClick={onClick}
+            onMouseOver={onMouseOver}
+            shape={
+              ({ payload, background, ...rest }) => (
+                <Rectangle {...rest} {...background} opacity={0} />
+              )
+            }
+          />)}
         {children}
       </ComposedChart>
     </ResponsiveContainer>
