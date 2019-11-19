@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Page } from '@sparkpost/matchbox';
 import _ from 'lodash';
 import { ApiErrorBanner, Loading } from 'src/components';
-import IpForm from './components/IpFormV2';
+import IpForm from './components/IpForm';
 import { showAlert } from 'src/actions/globalAlert';
 import { listPools, updatePool } from 'src/actions/ipPools';
 import { updateSendingIp } from 'src/actions/sendingIps';
