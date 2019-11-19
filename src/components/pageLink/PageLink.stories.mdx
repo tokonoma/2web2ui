@@ -1,0 +1,32 @@
+import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
+import { BrowserRouter as Router } from 'react-router-dom';
+import PageLink from './PageLink';
+
+<Meta title="Links|PageLink" component={PageLink}/>
+
+# PageLink
+
+The `<PageLink/>` is a simple wrapper for the `<UnstyledLink/>` component. Using this component instead of `<UnstyledLink/>` allows app developers to manage a single point of entry for the Matchbox component.
+
+## Props
+
+<props of={PageLink}/>
+
+## Examples
+
+### Default
+
+<Preview>
+  <Router>
+    <PageLink to="https://sparkpost.com">SparkPost.com</PageLink>
+  </Router>
+</Preview>
+
+## Usage
+
+```js
+import React from 'react';
+import PageLink from 'src/components/pageLink';
+
+const MyComponent = () => <PageLink to="https://sparkpost.com">SparkPost.com</PageLink>;
+```
