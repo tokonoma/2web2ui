@@ -35,7 +35,7 @@ describe('Page: Alert Details', () => {
   });
 
   it('should attempt to load incidents', () => {
-    wrapper - shallow(<DetailsPage {...props} />);
+    wrapper = shallow(<DetailsPage {...props} />);
     expect(props.getIncidents).toHaveBeenCalledWith({ id: 'alert-id' });
   });
 
