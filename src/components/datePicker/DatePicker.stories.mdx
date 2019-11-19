@@ -16,24 +16,22 @@ A text field paired with a `<select>` that allows users to select date ranges.
 ### Default
 
 <Preview>
-  <Story name="default">
-    <DatePicker
-      relativeDateOptions={[
-        'hour',
-        'day',
-        '7days',
-        '30days',
-        '90days',
-        'custom'
-      ]}
-      relativeRange="hour"
-      from={new Date()}
-      to={new Date()}
-      disabled={false}
-      onChange={() => console.log('change!')}
-      roundToPrecision={true}
-    />
-  </Story>
+  <DatePicker
+    relativeDateOptions={[
+      'hour',
+      'day',
+      '7days',
+      '30days',
+      '90days',
+      'custom'
+    ]}
+    relativeRange="hour"
+    from={new Date()}
+    to={new Date()}
+    disabled={false}
+    onChange={() => console.log('change!')}
+    roundToPrecision={true}
+  />
 </Preview>
 
 ## Usage
