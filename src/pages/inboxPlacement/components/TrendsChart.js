@@ -4,7 +4,6 @@ import { Bar, Rectangle } from 'recharts';
 import moment from 'moment';
 
 import BarChart from 'src/components/charts/BarChart';
-import 'src/pages/signals/components/charts/barchart/BarChart.scss';
 import Legend from 'src/components/charts/Legend';
 import { roundToPlaces } from 'src/helpers/units';
 import TooltipMetric from 'src/pages/signals/components/charts/tooltip/TooltipMetric';
@@ -124,17 +123,18 @@ export const TrendsChart = (props) => {
         )
         : (
           <>
-            <div style={{ float: 'right' }}>
+            {/*float:right does't work for some reason. Causes tooltip to not show when hovering bottom of chart*/}
+            <div style={{ display: 'flex', 'justify-content': 'flex-end' }}>
               <Legend items={legend}/>
             </div>
-            <div onMouseOut={resetDateHover}>
+            <div className='LiftTooltip' onMouseOut={resetDateHover}>
               <BarChart
                 gap={1}
                 onMouseOver={handleDateHover}
                 hovered={hoveredDate}
                 tooltipContent={getTooltipContent}
                 timeSeries={trends}
-                tooltipWidth='250px'
+                tooltipWidth='130px'
                 yAxisProps={yAxisProps}
                 xAxisProps={xAxisProps}
                 margin={{ top: 12, left: 18, right: 0, bottom: 25 }}
