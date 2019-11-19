@@ -28,7 +28,7 @@ import styles from './IpForm.module.scss';
 
 const formName = 'ipForm';
 
-export const IpFormV2 = (props) => {
+export const IpForm = (props) => {
   const {
     ip,
     pool,
@@ -193,6 +193,6 @@ const formOptions = {
   enableReinitialize: true
 };
 
-const connectedForm = withRouter(connect(mapStateToProps, { submit })(reduxForm(formOptions)(IpFormV2)));
+const connectedForm = withRouter(connect(mapStateToProps, { submit })(reduxForm(formOptions)(IpForm)));
 connectedForm.displayName = 'IpForm';
 export default connectedForm;
