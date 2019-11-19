@@ -12,8 +12,10 @@ const NotificationCenterTrigger = (props) => {
   const { unreadCount } = props;
   const hasUnreadNotifications = unreadCount > 0;
 
+  // `onClick` is a required prop, but the click handled is handled by the Popover component
   return (
     <IconButton
+      onClick={(e) => e.preventDefault()}
       className={styles.NotificationCenterTrigger}
       screenReaderLabel={hasUnreadNotifications ? `${unreadCount} Unread Notifications` : '0 Unread Notifications'}
     >
