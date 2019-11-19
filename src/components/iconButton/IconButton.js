@@ -21,7 +21,7 @@ const IconButton = (props) => {
       className={classNames(styles.IconButton, className)}
       onClick={onClick}
       title={title}
-      disabled={disabled}
+      disabled={disabled ? 'disabled' : null}
       data-id={dataId}
       aria-expanded={ariaExpanded}
     >
@@ -37,6 +37,7 @@ IconButton.propTypes = {
   screenReaderLabel: PropTypes.string.isRequired,
   className: PropTypes.string,
   title: PropTypes.string,
+  disabled: PropTypes.bool,
   'data-id': PropTypes.string,
   'aria-expanded': PropTypes.oneOf([ 'true', 'false' ])
 };
