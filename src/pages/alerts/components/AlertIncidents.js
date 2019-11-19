@@ -20,12 +20,10 @@ const AlertIncidents = ({ incidents = [], alert, subaccountIdToString }) => {
     { label: 'Triggered', sortKey: 'first_fired' },
     { label: 'Resolved', sortKey: 'last_fired' },
     { label: 'For' },
-    { label: METRICS[metric], sortKey: 'triggered_value', width: '20%' }
+    { label: METRICS[metric], sortKey: 'triggered_value', className: styles.rightAlign }
   ];
 
-  const getRowData = (props) => {
-    const { first_fired, last_fired, status, triggered_value, filters } = props;
-
+  const getRowData = ({ first_fired, last_fired, status, triggered_value, filters }) => {
 
     const renderTags = () => {
 
@@ -69,16 +67,12 @@ const AlertIncidents = ({ incidents = [], alert, subaccountIdToString }) => {
       <div>{formatDateTime(first_fired)}</div>,
       <div>{status === 'Active' ? <Tag color='yellow'>Active</Tag> : formatDateTime(last_fired)}</div>,
       <div className={styles.IncidentFilters}>{renderTags()}</div>,
-      <div className={styles.paddedCell}>{roundToPlaces(triggered_value, 3)}{suffix}</div>
+      <div className={styles.rightAlign}>{roundToPlaces(triggered_value, 3)}{suffix}</div>
     ];
   };
 
   const TableWrapper = (props) => (
-    <>
-      <div>
-        <Table>{props.children}</Table>
-      </div>
-    </>
+    <Table>{props.children}</Table>
   );
 
   return (

@@ -32,7 +32,11 @@ describe('Alert Details Component', () => {
       last_fired: '2019-08-06T21:00:00.000Z',
       status: 'Active',
       triggered_value: 30,
-      filters: {}
+      filters: {
+        subaccount_id: 3,
+        mailbox_provider: 'gmail',
+        sending_ip: '1.1.1.1'
+      }
     }
   ];
 
@@ -55,6 +59,21 @@ describe('Alert Details Component', () => {
 
   it('renders table with an incident', () => {
     expect(subject().find('TableCollection')).toExist();
+  });
+
+  it('properly renders rows', () => {
+    const getRowData = subject().find('TableCollection').prop('getRowData');
+    expect(getRowData(incidents[0])).toMatchSnapshot();
+  });
+
+  it('renders the active status tag', () => {
+    const getRowData = subject().find('TableCollection').prop('getRowData');
+    expect(shallow(getRowData(incidents[1])[1]).find('Tag')).toExist();
+  });
+
+  it('renders tags', () => {
+    const getRowData = subject().find('TableCollection').prop('getRowData');
+    expect(getRowData(incidents[1])[2]).toMatchSnapshot();
   });
 
 });
