@@ -105,26 +105,6 @@ exports[`BarChart Component renders a normal bar chart correctly 1`] = `
     />
     0
     0
-    <Bar
-      animationBegin={0}
-      animationDuration={400}
-      animationEasing="ease"
-      cursor="pointer"
-      data={Array []}
-      dataKey="noKey"
-      hide={false}
-      isAnimationActive={false}
-      layout="vertical"
-      legendType="rect"
-      minPointSize={0}
-      onAnimationEnd={[Function]}
-      onAnimationStart={[Function]}
-      onClick={[MockFunction]}
-      shape={[Function]}
-      stackId="stack"
-      xAxisId={0}
-      yAxisId={0}
-    />
   </ComposedChart>
 </ResponsiveContainer>
 `;

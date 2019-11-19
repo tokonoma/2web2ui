@@ -1,13 +1,13 @@
 import { useState } from 'react';
-import _ from 'lodash';
 
 const useDateHover = (initialDate = '') => {
   const [hoveredDate, setHoveredDate] = useState(initialDate);
 
   const handleDateHover = (node) => {
+    const { payload: { date, totalMessages } = {}} = node;
     //Do not set hovered if no data exists
-    if (node.value.some((value) => value !== 0)) {
-      setHoveredDate(_.get(node, 'payload.date'));
+    if (totalMessages) {
+      setHoveredDate(date);
     } else {
       setHoveredDate('');
     }

@@ -42,6 +42,7 @@ exports[`Inbox Placement Trends Chart renders happy path correctly 1`] = `
       activeFill="#22838A"
       fill="#B3ECEF"
       gap={1}
+      hasBackgroundBars={false}
       height={250}
       hovered=""
       margin={

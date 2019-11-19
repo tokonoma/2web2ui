@@ -130,14 +130,15 @@ export const TrendsChart = (props) => {
             <div className='LiftTooltip' onMouseOut={resetDateHover}>
               <BarChart
                 gap={1}
-                onMouseOver={handleDateHover}
+                hasBackgroundBars={false}
                 hovered={hoveredDate}
+                onMouseOver={handleDateHover}
+                margin={{ top: 12, left: 18, right: 0, bottom: 25 }}
                 tooltipContent={getTooltipContent}
                 timeSeries={trends}
                 tooltipWidth='130px'
                 yAxisProps={yAxisProps}
                 xAxisProps={xAxisProps}
-                margin={{ top: 12, left: 18, right: 0, bottom: 25 }}
               >
                 {renderBars}
               </BarChart>

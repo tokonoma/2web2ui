@@ -55,7 +55,7 @@ describe('Inbox Placement Trends Chart', () => {
     const getShapeFn = (hoveredDate) => {
       const wrapper = subject();
       const changeHovered = wrapper.find('Bar').first().prop('onMouseOver');
-      changeHovered({ payload: { date: hoveredDate }, value: [1, 2, 3]});
+      changeHovered({ payload: { date: hoveredDate, totalMessages: 10 }});
       wrapper.update();
 
       return wrapper.find('Bar').first().prop('shape');

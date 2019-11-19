@@ -18,7 +18,7 @@ describe('useDateHover', () => {
   );
 
   it('sets hovered state when there is valid data', () => {
-    const node = { payload: { date: '2019-11-11' }, value: [1,2,3]};
+    const node = { payload: { date: '2019-11-11', totalMessages: 10 }};
     const wrapper = subject({ node });
     expect(wrapper.children()).toHaveProp('name', '');
     act(() => {
@@ -29,7 +29,7 @@ describe('useDateHover', () => {
   });
 
   it('does not set hovered state when there is no valid data', () => {
-    const node = { payload: { date: '2019-11-11' }, value: [0,0,0]};
+    const node = { payload: { date: '2019-11-11' }, totalMessages: null };
     const wrapper = subject({ node });
     expect(wrapper.children()).toHaveProp('name', '');
     act(() => {

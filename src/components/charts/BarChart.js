@@ -1,4 +1,4 @@
-/* eslint-disable no-unused-vars */
+/* eslint-disable */
 import React from 'react';
 import {
   Bar,
@@ -22,6 +22,7 @@ export const BarChart = (props) => {
     cartesianGridProps,
     disableHover,
     gap,
+    hasBackgroundBars,
     height,
     hovered,
     isLink,
@@ -107,7 +108,7 @@ export const BarChart = (props) => {
             />
           )
         )}
-        <Bar
+        {hasBackgroundBars && (<Bar
           cursor='pointer'
           dataKey='noKey'
           stackId='stack'
@@ -119,7 +120,7 @@ export const BarChart = (props) => {
               <Rectangle {...rest} {...background} opacity={0} />
             )
           }
-        />
+        />)}
         {children}
       </ComposedChart>
     </ResponsiveContainer>
@@ -129,6 +130,7 @@ BarChart.propTypes = {
   activeFill: PropTypes.string,
   fill: PropTypes.string,
   gap: PropTypes.number,
+  hasBackgroundBars: PropTypes.bool,
   onClick: PropTypes.func,
   shouldHighlightSelected: PropTypes.bool,
   tooltipContent: PropTypes.func,
@@ -140,6 +142,7 @@ BarChart.defaultProps = {
   activeFill: '#22838A',
   fill: '#B3ECEF',
   gap: 1,
+  hasBackgroundBars: false,
   height: 250,
   margin: { top: 12, left: 18, right: 0, bottom: 0 },
   shouldHighlightSelected: true,
