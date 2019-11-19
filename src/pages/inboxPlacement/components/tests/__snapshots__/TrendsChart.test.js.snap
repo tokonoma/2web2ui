@@ -6,7 +6,7 @@ exports[`Inbox Placement Trends Chart renders happy path correctly 1`] = `
     style={
       Object {
         "display": "flex",
-        "justify-content": "flex-end",
+        "justifyContent": "flex-end",
       }
     }
   >

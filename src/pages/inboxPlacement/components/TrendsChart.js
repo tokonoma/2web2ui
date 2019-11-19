@@ -124,7 +124,7 @@ export const TrendsChart = (props) => {
         : (
           <>
             {/*float:right does't work for some reason. Causes tooltip to not show when hovering bottom of chart*/}
-            <div style={{ display: 'flex', 'justify-content': 'flex-end' }}>
+            <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
               <Legend items={legend}/>
             </div>
             <div className='LiftTooltip' onMouseOut={resetDateHover}>
