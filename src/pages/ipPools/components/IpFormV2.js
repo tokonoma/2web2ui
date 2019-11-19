@@ -130,7 +130,7 @@ export const IpFormV2 = (props) => {
               <CardTitle>Engagement Based IP Warmup</CardTitle>
 
               <CardContent>
-                <p className={styles.CardParagraph}>This feature exists for accounts with a <abbr title="Customer Success Manager">CSM</abbr> or dedicated <abbr title="Technical Account Manager">TAM</abbr>. We will automatically bind highly engaged traffic to your cold IP to give it the best chance of warming up. To learn more, <ExternalLink to="https://www.sparkpost.com/docs/user-guide/automated-ip-warmup/">click here</ExternalLink>.</p>
+                <p className={styles.CardParagraph}>This feature exists for accounts with a <abbr title="Customer Success Manager">CSM</abbr> or dedicated <abbr title="Technical Account Manager">TAM</abbr>. We will automatically bind highly engaged traffic to your cold IP to give it the best chance of warming up.</p>
               </CardContent>
             </Card>
           </div>
