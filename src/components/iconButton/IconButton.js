@@ -12,7 +12,8 @@ const IconButton = (props) => {
     title,
     children,
     disabled,
-    'data-id': dataId
+    'data-id': dataId,
+    'aria-expanded': ariaExpanded
   } = props;
 
   return (
@@ -22,6 +23,7 @@ const IconButton = (props) => {
       title={title}
       disabled={disabled}
       data-id={dataId}
+      aria-expanded={ariaExpanded}
     >
       {children}
 
@@ -35,7 +37,8 @@ IconButton.propTypes = {
   screenReaderLabel: PropTypes.string.isRequired,
   className: PropTypes.string,
   title: PropTypes.string,
-  'data-id': PropTypes.string
+  'data-id': PropTypes.string,
+  'aria-expanded': PropTypes.oneOf([ 'true', 'false' ])
 };
 
 export default IconButton;

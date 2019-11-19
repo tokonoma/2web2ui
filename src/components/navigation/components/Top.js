@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { SparkPost, IconButton } from 'src/components';
 import { WindowSizeContext } from 'src/context/WindowSize';
-import { ScreenReaderOnly } from '@sparkpost/matchbox';
 import { HelpOutline, Menu, Close } from '@sparkpost/matchbox-icons';
 import { openSupportPanel } from 'src/actions/support';
 import AccountDropdown from './AccountDropdown';
@@ -14,16 +13,15 @@ import { DEFAULT_REDIRECT_ROUTE } from 'src/constants';
 export class Top extends Component {
   renderMobile = () => (
     <div className={styles.Top} onClick={this.props.open ? this.props.toggleMobileNav : undefined}>
-      <button
+      <IconButton
         onClick={!this.props.open ? this.props.toggleMobileNav : undefined}
         className={styles.Menu}
-        aria-expanded={this.props.open}
+        aria-expanded={this.props.open === true ? 'true' : 'false'}
         data-id="nav-button-mobilemenu"
+        screenReaderLabel="Menu"
       >
         {this.props.open ? <Close size={24}/> : <Menu size={24}/>}
-
-        <ScreenReaderOnly>Menu</ScreenReaderOnly>
-      </button>
+      </IconButton>
 
       <Link to={DEFAULT_REDIRECT_ROUTE} className={styles.MobileLogo} data-id="nav-link-mobilelogo">
         <SparkPost.Logo type='halfWhite' />
