@@ -8,9 +8,15 @@
   max-width: 600px;
 }
 
-.FieldGroup {
+.FieldGroup,
+.Card {
   margin-bottom: spacing('large');
+}
+
+.RadioGroup {
+  margin-bottom: spacing('small');
   border: 0;
+  padding-left: 0;
 }
 
 .RadioParagraph,

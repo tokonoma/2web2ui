@@ -1,8 +1,15 @@
-/* eslint-disable */
-import React, { useState, useEffect } from 'react';
+/* eslint-disable max-lines */
+import React, { useState } from 'react';
+import _ from 'lodash';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
-import { Field, formValueSelector, getFormValues, reduxForm, submit } from 'redux-form';
+import {
+  Field,
+  formValueSelector,
+  getFormValues,
+  reduxForm,
+  submit
+} from 'redux-form';
 import { withRouter } from 'react-router-dom';
 import { Button, Panel, Label } from '@sparkpost/matchbox';
 import { SelectWrapper, RadioGroup } from 'src/components/reduxFormWrappers';
@@ -16,6 +23,7 @@ import {
   selectIpForCurrentPool,
   selectIpFormInitialValues
 } from 'src/selectors/ipPools';
+import { IP_WARMUP_STAGES } from '../constants';
 import styles from './IpForm.module.scss';
 
 const formName = 'ipForm';
@@ -36,6 +44,12 @@ export const IpFormV2 = (props) => {
   const reAssignPoolsOptions = pools.map((currentPool) => ({
     value: currentPool.id,
     label: (currentPool.id === pool.id) ? '-- Select a new pool --' : `${currentPool.name} (${currentPool.id})`
+  }));
+
+  const stageOptions = IP_WARMUP_STAGES.map((stage) => ({
+    label: `${stage.name} (Volume: ${stage.volume})`,
+    value: stage.id,
+    disabled: stage.id > (ip.auto_warmup_stage || 1)
   }));
 
   const handleConfirmClick = () => {
@@ -77,7 +91,7 @@ export const IpFormV2 = (props) => {
             />
           </div>
 
-          <fieldset className={styles.FieldGroup}>
+          <fieldset className={styles.RadioGroup}>
             <Label>Auto IP Warmup</Label> {/* NOTE: This *should* be a `<legend>` inside of a `<fieldset>` */}
 
             <Field
@@ -111,7 +125,7 @@ export const IpFormV2 = (props) => {
           </fieldset>
 
           {/* eslint-disable no-restricted-syntax */}
-          <div className={styles.MaxWidthMD}>
+          <div className={classNames(styles.MaxWidthMD, styles.Card)}>
             <Card>
               <CardTitle>Engagement Based IP Warmup</CardTitle>
 
@@ -121,6 +135,20 @@ export const IpFormV2 = (props) => {
             </Card>
           </div>
           {/* eslint-enable no-restricted-syntax */}
+
+          {isAutoWarmupEnabled &&
+            <div className={classNames(styles.MaxWidthSM, styles.FieldGroup)}>
+              <Field
+                label="Warmup Stage"
+                name='auto_warmup_stage'
+                component={SelectWrapper}
+                options={stageOptions}
+                parse={_.toInteger}
+                helpText="You can select a previous stage but can not select an advanced stage."
+                disabled={submitting}
+              />
+            </div>
+          }
         </Panel.Section>
 
         <Panel.Section>
