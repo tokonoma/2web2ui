@@ -76,6 +76,18 @@ describe('Edit IP form', () => {
     expect(wrapper.find('[name="auto_warmup_enabled"]')).toHaveProp('value', 'false');
   });
 
+  it('renders the "Warmup Stage" <select> when auto IP warmup is enabled', () => {
+    const wrapper = subject({ isAutoWarmupEnabled: true });
+
+    expect(wrapper).toHaveTextContent('Warmup Stage');
+  });
+
+  it('does not render the "Warmup Stage" <select> when auto IP warmup is not enabled', () => {
+    const wrapper = subject({ isAutoWarmupEnabled: false });
+
+    expect(wrapper).not.toHaveTextContent('Warmup Stage');
+  });
+
   it('opens the confirmation modal when clicking the "Update Sending IP" button when the state of auto warmup enabling is changed from its initial state', () => {
     let wrapper = subject({ isAutoWarmupEnabled: true, ip: { auto_warmup_enabled: false }});
 
