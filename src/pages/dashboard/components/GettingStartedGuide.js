@@ -5,6 +5,7 @@ import { Card, CardTitle, CardContent, CardActions } from 'src/components';
 import ButtonWrapper from 'src/components/buttonWrapper';
 import styles from './GettingStartedGuide.module.scss';
 import { BreadCrumbs, BreadCrumbsItem } from 'src/components';
+import { GuideListItem, GuideListItemTitle, GuideListItemDescription } from './GuideListItem';
 
 export const GettingStartedGuide = ({ isGuideAtBottom, moveGuideAtBottom }) => {
   const breadCrumbsItems = {
@@ -67,6 +68,10 @@ export const GettingStartedGuide = ({ isGuideAtBottom, moveGuideAtBottom }) => {
         </Grid>
          </>;
       case 'Show Me SparkPost':
+        return <GuideListItem action={{ name: 'Send Test Email', onClick: () => {} }}>
+          <GuideListItemTitle> Send a Test Email</GuideListItemTitle>
+          <GuideListItemDescription>Send a test email using our starter template.</GuideListItemDescription>
+        </GuideListItem>;
       case 'Let\'s Code':
       default:
         null;
