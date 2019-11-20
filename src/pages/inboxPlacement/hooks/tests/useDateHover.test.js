@@ -18,7 +18,7 @@ describe('useDateHover', () => {
   );
 
   it('sets hovered state when there is valid data', () => {
-    const node = { payload: { date: '2019-11-11', totalMessages: 10 }};
+    const node = { payload: { date: '2019-11-11' }};
     const wrapper = subject({ node });
     expect(wrapper.children()).toHaveProp('name', '');
     act(() => {
@@ -26,17 +26,6 @@ describe('useDateHover', () => {
     });
     wrapper.update();
     expect(wrapper.children()).toHaveProp('name', '2019-11-11');
-  });
-
-  it('does not set hovered state when there is no valid data', () => {
-    const node = { payload: { date: '2019-11-11' }, totalMessages: null };
-    const wrapper = subject({ node });
-    expect(wrapper.children()).toHaveProp('name', '');
-    act(() => {
-      wrapper.children().props().onClick();
-    });
-    wrapper.update();
-    expect(wrapper.children()).toHaveProp('name', '');
   });
 
   it('resets hovered date when mouse out', () => {
