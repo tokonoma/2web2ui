@@ -21,7 +21,7 @@ export default class BackupCodesModal extends Component {
     }
   }
 
-  componentWillUnmount() {
+  UNSAFE_componentWillUnmount() {
     this.props.clearCodes();
   }
 
@@ -46,7 +46,7 @@ export default class BackupCodesModal extends Component {
       return (
         <div>
           <Button type='submit' disabled={pending} primary onClick={this.generateCodes}>
-            { pending ? 'Generating...' : 'Generate' }
+            {pending ? 'Generating...' : 'Generate'}
           </Button>
           <Button onClick={onClose} className={styles.Cancel}>Cancel</Button>
         </div>
@@ -70,26 +70,25 @@ export default class BackupCodesModal extends Component {
         <Panel title='Generate Two-factor Backup Codes' accent>
           <form onSubmit={(e) => e.preventDefault()}>
             <Panel.Section>
-              { !generatedCodes && hasCodes && <Banner status="warning" >
+              {!generatedCodes && hasCodes && <Banner status="warning" >
                 Clicking Generate will overwrite your existing {activeCount} active backup codes.
-              </Banner> }
+              </Banner>}
               <p>Keep these single-use backup codes somewhere safe but accessible.
                 They can be used if your authentication app is unavailable (<span role="img" aria-label="phone in toilet emojis">📱  ➡︎🚽</span> , etc).
               </p>
               <Grid>
                 <Grid.Column xs={12} md={6}>
-                  { !generatedCodes && <TextField required type='password' onChange={this.handleInputChange} placeholder='Password' value={this.state.password} error={(this.state.showErrors && error) ? 'Incorrect Password' : ''} /> }
-                  { generatedCodes && <BackupCodesView codes={codes} /> }
+                  {!generatedCodes && <TextField required type='password' onChange={this.handleInputChange} placeholder='Password' value={this.state.password} error={(this.state.showErrors && error) ? 'Incorrect Password' : ''} />}
+                  {generatedCodes && <BackupCodesView codes={codes} />}
                 </Grid.Column>
               </Grid>
             </Panel.Section>
             <Panel.Section>
-              { this.renderButtons() }
+              {this.renderButtons()}
             </Panel.Section>
           </form>
         </Panel>
       </Modal>
     );
-
   }
 }

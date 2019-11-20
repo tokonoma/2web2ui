@@ -37,7 +37,7 @@ export class Typeahead extends Component {
     }
   }
 
-  componentWillUnmount() {
+  UNSAFE_componentWillUnmount() {
     this.updateMatches.cancel();
   }
 

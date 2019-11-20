@@ -20,7 +20,7 @@ export class TrackingDomainRow extends Component {
     defaultModalOpen: false
   }
 
-  componentWillUnmount() {
+  UNSAFE_componentWillUnmount() {
     this.setState({
       deleteModalOpen: false,
       defaultModalOpen: false

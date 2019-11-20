@@ -18,7 +18,7 @@ export default class EditPage extends React.Component {
     this.props.getSnippet({ id, subaccountId });
   }
 
-  componentWillUnmount() {
+  UNSAFE_componentWillUnmount() {
     this.props.clearSnippet();
   }
 

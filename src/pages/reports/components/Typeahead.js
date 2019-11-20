@@ -26,7 +26,7 @@ export class Typeahead extends Component {
     pattern: null
   };
 
-  componentWillUnmount() {
+  UNSAFE_componentWillUnmount() {
     this.updateLookAhead.cancel();
   }
 
@@ -87,7 +87,6 @@ export class Typeahead extends Component {
     getInputProps,
     getItemProps,
     isOpen,
-    inputValue,
     selectedItem,
     highlightedIndex,
     clearSelection

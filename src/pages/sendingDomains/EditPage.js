@@ -75,7 +75,7 @@ export class EditPage extends Component {
     this.props.getDomain(this.props.match.params.id);
   }
 
-  componentWillUnmount() {
+  UNSAFE_componentWillUnmount() {
     this.props.clearSendingDomain();
   }
 

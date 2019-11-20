@@ -17,13 +17,13 @@ export class AutoKeyGenerator extends Component {
     this.createKey();
   }
 
-  componentWillUnmount() {
+  UNSAFE_componentWillUnmount() {
     this.props.hideNewApiKey();
   }
 
   createKey = () => {
     const { createApiKey, history } = this.props;
-    return createApiKey(keyDefaults).catch((err) => { history.push('/dashboard'); });
+    return createApiKey(keyDefaults).catch(() => { history.push('/dashboard'); });
   }
 
   render() {

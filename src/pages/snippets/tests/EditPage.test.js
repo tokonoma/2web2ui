@@ -65,7 +65,7 @@ describe('EditPage', () => {
     const clearSnippet = jest.fn();
     const wrapper = subject({ clearSnippet });
 
-    wrapper.instance().componentWillUnmount();
+    wrapper.instance().UNSAFE_componentWillUnmount();
     expect(clearSnippet).toHaveBeenCalled();
   });
 

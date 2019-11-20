@@ -42,7 +42,7 @@ describe('CreatePage', () => {
     const clearSnippet = jest.fn();
     const wrapper = subject({ clearSnippet });
 
-    wrapper.instance().componentWillUnmount();
+    wrapper.instance().UNSAFE_componentWillUnmount();
 
     expect(clearSnippet).toHaveBeenCalled();
   });
@@ -59,7 +59,7 @@ describe('CreatePage', () => {
   });
 
   describe('.submitSnippet', () => {
-    cases('succeeds', ({ name, ...values }) => {
+    cases('succeeds', ({ ...values }) => {
       const createSnippet = jest.fn(() => Promise.resolve());
       const historyPush = jest.fn();
       const wrapper = subject({ createSnippet, history: { push: historyPush }});

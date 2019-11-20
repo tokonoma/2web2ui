@@ -25,7 +25,7 @@ export class ListPage extends Component {
   state = { copied: false };
 
   // only want to show the new key after a create
-  componentWillUnmount() {
+  UNSAFE_componentWillUnmount() {
     this.props.hideNewApiKey();
   }
 

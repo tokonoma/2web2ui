@@ -50,7 +50,7 @@ export class DetailsPage extends Component {
   }
 
   // only want to show the new key after a create
-  componentWillUnmount() {
+  UNSAFE_componentWillUnmount() {
     this.props.clearSubaccount();
     this.props.hideNewApiKey();
   }

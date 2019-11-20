@@ -73,9 +73,9 @@ describe('Component: BackupCodesModal', () => {
 
   });
 
-  describe('componentWillUnmount tests', () => {
+  describe('UNSAFE_componentWillUnmount tests', () => {
     it('should clear codes on unmount', () => {
-      instance.componentWillUnmount();
+      instance.UNSAFE_componentWillUnmount();
       expect(instance.props.clearCodes).toHaveBeenCalled();
     });
   });

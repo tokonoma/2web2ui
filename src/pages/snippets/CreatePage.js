@@ -20,7 +20,7 @@ export default class CreatePage extends React.Component {
     }
   }
 
-  componentWillUnmount() {
+  UNSAFE_componentWillUnmount() {
     this.props.clearSnippet(); // loaded for duplicate
   }
 
