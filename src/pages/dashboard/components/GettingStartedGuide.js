@@ -4,7 +4,7 @@ import { ArrowDownward, Send } from '@sparkpost/matchbox-icons';
 import { Card, CardTitle, CardContent, CardActions } from 'src/components';
 import ButtonWrapper from 'src/components/buttonWrapper';
 import styles from './GettingStartedGuide.module.scss';
-import { BreadCrumbs, BreadCrumbsItem } from '../../../components';
+import { BreadCrumbs, BreadCrumbsItem } from 'src/components';
 
 export const GettingStartedGuide = ({ isGuideAtBottom, moveGuideAtBottom }) => {
   const breadCrumbsItems = {
