@@ -5,6 +5,7 @@
     "phantomjs": true
   },
   "rules": {
+    "id-length": "off",
     "block-spacing": [
       "error",
       "always"
