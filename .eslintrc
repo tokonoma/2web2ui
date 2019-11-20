@@ -2,63 +2,11 @@
   "parser": "babel-eslint",
   "env": {
     "browser": true,
-    "phantomjs": true
+    "jest": true
   },
   "rules": {
-    "block-spacing": [
-      "error",
-      "always"
-    ],
-    "complexity": "off",
-    "react/jsx-no-bind": "off",
-    "space-before-function-paren": ["error", {
-      "anonymous": "always",
-      "named": "never",
-      "asyncArrow": "always"
-    }],
-    "max-lines": [
-      "error",
-      {
-        "max": 150,
-        "skipComments": true,
-        "skipBlankLines": true
-      }
-    ],
-    "object-curly-spacing": [
-      "error",
-      "always",
-      {
-        "arraysInObjects": false,
-        "objectsInObjects": false
-      }
-    ],
-    "one-var": [
-      "error",
-      "never"
-    ],
-    "operator-linebreak": [
-      "error",
-      "after",
-      {
-        "overrides": {
-          "?": "before",
-          ":": "before"
-        }
-      }
-    ],
-    "lodash/chaining": [
-      "error",
-      "never"
-    ],
-    "react/jsx-curly-spacing": [
-      "error",
-      {
-        "when": "never",
-        "children": true
-      }
-    ],
-    "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "warn",
+    "lodash/chaining": ["error", "never"],
+    "lodash/import-scope": ["error", "full"],
     "no-restricted-syntax": [
       "warn",
       {
@@ -67,28 +15,18 @@
       }
     ],
     "no-unused-vars": [
-      "error", 
+      "error",
       {
-        "varsIgnorePattern": "^_" ,
+        "varsIgnorePattern": "^_",
+        "ignoreRestSiblings": true
       }
     ]
   },
   "extends": [
     "react-app",
-    "sparkpost",
-    "plugin:jest/recommended"
+    "plugin:lodash/recommended",
+    "plugin:jest/recommended",
+    "plugin:prettier/recommended"
   ],
-  "plugins": [
-    "lodash",
-    "jest",
-    "react-hooks"
-  ],
-  "overrides": [
-    {
-      "files": ["*.test.js"],
-      "rules": {
-        "max-lines": "off"
-      }
-    }
-  ]
+  "plugins": ["prettier"]
 }
