@@ -9,10 +9,7 @@ import moment from 'moment';
 import './LineChart.scss';
 
 const identity = (a) => a;
-
-function orderDesc(a, b) {
-  return b.value - a.value;
-}
+const orderDesc = (a) => -a.value;
 
 export default class SpLineChart extends React.Component {
   renderLines() {
