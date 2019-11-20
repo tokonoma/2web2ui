@@ -24,4 +24,23 @@ describe('GettingStartedGuide', () => {
     expect(instance).toHaveTextContent('Show Me SparkPost');
     expect(instance).toHaveTextContent('Let&#39;s Code');
   });
+
+  it('should render the corresponding step when breadcrumb is clicked', () => {
+
+    const instance = subject();
+    instance.find('Button').simulate('click');
+    instance.find({ children: 'Show Me SparkPost' }).simulate('click');
+    instance.find('BreadCrumbsItem').at(1).simulate('click');
+    expect(instance).toHaveTextContent('Show Me SparkPost');
+    expect(instance).toHaveTextContent('Let&#39;s Code');
+
+  });
+
+  it('should render the BreadCrumbItem as active corresponding to the Step', () => {
+    const instance = subject();
+    instance.find('Button').simulate('click');
+    instance.find({ children: 'Show Me SparkPost' }).simulate('click');
+    expect(instance.find({ active: true })).toHaveTextContent('Show Me SparkPost');
+
+  });
 });
