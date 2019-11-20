@@ -61,7 +61,6 @@ describe('BarChart Component', () => {
     const wrapper = subject({ isLink: false, hasBackgroundBars: true });
     expect(wrapper.find('ComposedChart')).toHaveProp('cursor', 'default');
     expect(wrapper.find('Bar').at(0)).toHaveProp('cursor', 'pointer');
-
   });
 
   it('renders a stacked bar chart correctly', () => {
@@ -71,8 +70,7 @@ describe('BarChart Component', () => {
   });
 
   it('renders a tooltip when hovered over', () => {
-    const key = 'health_score';
-    const wrapper = subject({ hovered: '2011-01-01', yKey: key, timeSeries: [{ [key]: 75, ranking: 'warning', date: '2011-01-01' }], disableHover: false });
+    const wrapper = subject({ hovered: '2011-01-01', disableHover: false });
     expect(wrapper.find('ComposedChart').find('Tooltip')).toExist();
   });
 
