@@ -6,6 +6,8 @@
   },
   "rules": {
     "id-length": "off",
+    "new-cap": "off",
+    "mocha/no-mocha-arrows": "off",
     "block-spacing": [
       "error",
       "always"

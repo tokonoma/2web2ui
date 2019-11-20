@@ -7,7 +7,7 @@ import { DEFAULT_REDIRECT_ROUTE, AUTH_ROUTE } from 'src/constants';
 
 export class SSOPage extends Component {
 
-  componentWillMount () {
+  UNSAFE_componentWillMount() {
     const params = qs.parse(this.props.location.search);
 
     const token = params.ad || params.token; // 'token' for azure, 'ad' for saml/heroku
@@ -35,7 +35,7 @@ export class SSOPage extends Component {
     }
   }
 
-  render () {
+  render() {
     return null;
   }
 }

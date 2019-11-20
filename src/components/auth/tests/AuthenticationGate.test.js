@@ -43,9 +43,9 @@ describe('Component: AuthenticationGate', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  describe('componentWillMount', () => {
+  describe('UNSAFE_componentWillMount', () => {
     it('logins and get grants if auth cookie exists', () => {
-      wrapper.instance().componentWillMount();
+      wrapper.instance().UNSAFE_componentWillMount();
       expect(authCookie.get).toHaveBeenCalledTimes(1);
       expect(props.login).toHaveBeenCalledTimes(1);
       expect(props.login).toHaveBeenCalledWith({ authData: cookie });
@@ -55,7 +55,7 @@ describe('Component: AuthenticationGate', () => {
 
     it('does not login if when cookie not found', () => {
       authCookie.get.mockReturnValue(null);
-      wrapper.instance().componentWillMount();
+      wrapper.instance().UNSAFE_componentWillMount();
       expect(authCookie.get).toHaveBeenCalledTimes(1);
       expect(props.login).toHaveBeenCalledTimes(0);
       expect(props.getGrantsFromCookie).toHaveBeenCalledTimes(0);
@@ -64,7 +64,7 @@ describe('Component: AuthenticationGate', () => {
     it('does not login if already logged in', () => {
       wrapper.setProps({ auth: { token: 'foo', loggedIn: true }});
 
-      wrapper.instance().componentWillMount();
+      wrapper.instance().UNSAFE_componentWillMount();
       expect(authCookie.get).toHaveBeenCalledTimes(0);
       expect(props.login).toHaveBeenCalledTimes(0);
       expect(props.getGrantsFromCookie).toHaveBeenCalledTimes(0);
@@ -84,10 +84,12 @@ describe('Component: AuthenticationGate', () => {
       expect(wrapper.instance().props.history.push).not.toHaveBeenCalled();
     });
 
-    it('should dispatch a logout action if account terminated', async () => {
+    /* eslint-disable prefer-arrow-callback,func-names */
+    it('should dispatch a logout action if account terminated', async function () {
       wrapper.setProps({ account: { status: 'terminated' }});
       wrapper.instance().componentDidUpdate({ account: { status: 'active' }, auth: {}});
       expect(wrapper.instance().props.logout).toHaveBeenCalled();
     });
+    /* eslint-enable prefer-arrow-callback,func-names */
   });
 });

@@ -9,7 +9,7 @@ const METRICS_LIST = _.sortBy(list, ['label']);
 const MAX_METRICS = 5;
 
 export default class MetricsModal extends Component {
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.syncPropsToState(this.props);
   }
 
@@ -79,7 +79,7 @@ export default class MetricsModal extends Component {
         <Panel>
           <Panel.Section>
             <h5>Select up to 5 metrics</h5>
-            <div>{ this.renderMetrics() }</div>
+            <div>{this.renderMetrics()}</div>
           </Panel.Section>
           <Panel.Section>
             <Button onClick={this.handleApply} primary className={styles.Apply} disabled={!selectedCount}>Apply Metrics</Button>

@@ -8,7 +8,7 @@ import { logout } from 'src/actions/auth';
 import { AUTH_ROUTE, SSO_AUTH_ROUTE } from 'src/constants';
 
 export class AuthenticationGate extends Component {
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     const { auth } = this.props;
 
     if (auth.loggedIn && auth.token) {
