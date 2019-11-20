@@ -16,6 +16,6 @@ describe('BreadCrumbs', () => {
 
   it('should not render > after the last breadCrumb ' , () => {
     const instance = subject();
-    expect(instance.find('div').children().last().text()).not.toBe('>');
+    expect(instance.find('div').at(0).children().last()).not.toBe('>');
   });
 });

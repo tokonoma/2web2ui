@@ -5,10 +5,18 @@
 }
 
 .BreadCrumbItem{
-  font-weight: 600;
+  font-weight: 500;
+  font-size: font-size(600);
   cursor: pointer;
 }
 
+.Arrow{
+  display: inline-block;
+  font-size: font-size(900);
+  transform: translateY(3px);
+  color: color(gray,4);
+}
+
 .BreadCrumbContainer{
-  padding: 0 spacing(small) spacing(large) 0
+  padding: 0 spacing(small) spacing(large) 0;
 }
