@@ -38,14 +38,14 @@ export const FeatureChangeProvider = ({
 
   //Keys the selected plan by product to make for easier comparison
   const selectedPlansByProduct = useMemo(() => {
-    const { plans: selectedPlans } = selectedBundle;
-    return selectedPlans.reduce((res, planId) => {
-      const plan = plans[planId];
-      return {
+
+    const { products } = selectedBundle;
+    return products.reduce((res, { product, plan: planId }) => (
+      {
         ...res,
-        [plan.product]: plan
-      };
-    }, {});
+        [product]: plans[planId]
+      }
+    ), {});
   }, [plans, selectedBundle]);
 
   // Used for finding the features that need to have a proper function
@@ -57,8 +57,10 @@ export const FeatureChangeProvider = ({
     }
 
     const { products: currentProducts } = subscription;
+
     const diffObject = currentProducts.reduce((resObject, { product, quantity }) => {
       const comparedPlan = selectedPlansByProduct[product];
+
       switch (product) {
         case 'dedicated_ip':
           if (actions.dedicated_ip || !comparedPlan) {
