@@ -30,7 +30,7 @@ describe('Alert Details Component', () => {
     {
       first_fired: '2019-08-06T21:00:00.000Z',
       last_fired: '2019-08-06T21:00:00.000Z',
-      status: 'Active',
+      status: 'Open',
       triggered_value: 30,
       filters: {
         subaccount_id: 3,
