@@ -11,8 +11,8 @@ import {
   XAxis,
   YAxis
 } from 'recharts';
-import TooltipWrapper from 'src/pages/signals/components/charts/tooltip/Tooltip';
-import 'src/pages/signals/components/charts/barchart/BarChart.scss';
+import TooltipWrapper from 'src/components/charts/Tooltip';
+import styles from './BarChart.scss';
 
 import _ from 'lodash';
 import PropTypes from 'prop-types';
@@ -43,7 +43,7 @@ export const BarChart = (props) => {
   } = props;
 
   return (
-    <ResponsiveContainer height={height} width={width} className='SignalsBarChart'>
+    <ResponsiveContainer height={height} width={width} className={styles.BarChart}>
       <ComposedChart
         barCategoryGap={gap}
         data={timeSeries}

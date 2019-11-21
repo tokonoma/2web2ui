@@ -7,7 +7,7 @@ import withDetails from './containers/withDetails';
 import BarChart from './components/charts/barchart/BarChart';
 import withDateSelection from './containers/withDateSelection';
 import { getHealthScore } from 'src/actions/signals';
-import TooltipMetric from './components/charts/tooltip/TooltipMetric';
+import TooltipMetric from 'src/components/charts/TooltipMetric';
 import thresholds from './constants/healthScoreThresholds';
 import { roundToPlaces } from 'src/helpers/units';
 import moment from 'moment';

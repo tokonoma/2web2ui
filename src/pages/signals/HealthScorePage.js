@@ -8,7 +8,7 @@ import Page from './components/SignalsPage';
 import BarChart from './components/charts/barchart/BarChart';
 import DivergingBar from './components/charts/divergingBar/DivergingBar';
 import HealthScoreActions from './components/actionContent/HealthScoreActions';
-import TooltipMetric from './components/charts/tooltip/TooltipMetric';
+import TooltipMetric from 'src/components/charts/TooltipMetric';
 import DateFilter from './components/filters/DateFilter';
 import { HEALTH_SCORE_INFO, HEALTH_SCORE_COMPONENT_INFO, INJECTIONS_INFO, HEALTH_SCORE_COMPONENTS } from './constants/info';
 import withDetails from './containers/withDetails';

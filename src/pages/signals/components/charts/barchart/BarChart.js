@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { ResponsiveContainer, ComposedChart, ReferenceLine, Bar, Tooltip, XAxis, YAxis, CartesianGrid, Rectangle } from 'recharts';
-import TooltipWrapper from '../tooltip/Tooltip';
+import TooltipWrapper from 'src/components/charts/Tooltip';
 import './BarChart.scss';
 import _ from 'lodash';
 import healthScoreThresholds from '../../../constants/healthScoreThresholds';

@@ -6,7 +6,7 @@ import moment from 'moment';
 import BarChart from 'src/components/charts/BarChart';
 import Legend from 'src/components/charts/Legend';
 import { roundToPlaces } from 'src/helpers/units';
-import TooltipMetric from 'src/pages/signals/components/charts/tooltip/TooltipMetric';
+import TooltipMetric from 'src/components/charts/TooltipMetric';
 import useDateHover from 'src/pages/inboxPlacement/hooks/useDateHover';
 import { getInboxPlacementTrends } from 'src/actions/inboxPlacement';
 import { formatInputDate } from 'src/helpers/date';

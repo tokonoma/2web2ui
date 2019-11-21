@@ -5,7 +5,7 @@ import Tooltip from 'src/components/tooltip';
 import { formatDate, formatDateTime } from 'src/helpers/date';
 import { sum } from 'src/helpers/math';
 import { coalesce, formatFullNumber } from 'src/helpers/units';
-import TooltipMetric from './charts/tooltip/TooltipMetric';
+import TooltipMetric from 'src/components/charts/TooltipMetric';
 import Status from './tags/statusTags';
 import styles from './FormatRow.module.scss';
 
