@@ -31,13 +31,18 @@ const cleanFilterState = (filters) => Object.keys(filters).reduce((clean, key) =
  * Use `updateFilters` to pass an object of filters that will be propagated into the URL
  * Setting a key to undefined in the `updateFilters` object will remove it from the state
  */
-const usePageFilters = () => {
+const usePageFilters = (callback) => {
   const { requestParams = {}, updateRoute } = useRouter();
-  const defaultFilters = useRef(requestParams);
+  const defaultFilters = useRef((callback && callback(requestParams)) || requestParams);
   const [filters, dispatch] = useReducer(cleanReducer, defaultFilters.current);
 
-  const updateFilters = useCallback((filters) => dispatch({ type: PAGE_FILTER_ACTIONS.SPREAD, payload: filters }), []);
-  const resetFilters = useCallback(() => dispatch({ type: PAGE_FILTER_ACTIONS.RESET, payload: defaultFilters.current }), []);
+  const updateFilters = useCallback((filters) => (
+    dispatch({ type: PAGE_FILTER_ACTIONS.SPREAD, payload: filters })
+  ), []);
+
+  const resetFilters = useCallback(() => (
+    dispatch({ type: PAGE_FILTER_ACTIONS.RESET, payload: defaultFilters.current })
+  ), []);
 
   // When filters change, update the URL
   useEffectAfterMounting(() => {
