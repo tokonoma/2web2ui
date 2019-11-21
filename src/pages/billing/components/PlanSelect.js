@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Panel, Button } from '@sparkpost/matchbox';
 import { Check, ViewModule } from '@sparkpost/matchbox-icons';
 import { PLAN_TIERS } from 'src/constants';
@@ -74,13 +74,18 @@ export const SelectedPlan = ({ bundle, onChange, promoCodeObj, handlePromoCode }
 
 
 const PlanSelectSection = ({ bundles, currentPlan, onSelect }) => {
+
+  const bundlesByTier = useMemo(() =>
+    _.groupBy(bundles, 'tier')
+  , [bundles]);
+
   const { isShowing, toggle } = useModal(false);
-  const planList = _.map(PLAN_TIERS, (label, key) => (bundles[key] &&
+  const planList = _.map(PLAN_TIERS, (label, key) => (bundlesByTier[key] &&
     <Panel.Section key={`tier_section_${key}`}>
       <div className={styles.tierLabel}>{label}</div>
       <div className={styles.tierPlans}>
         {
-          bundles[key].map((bundle) => {
+          bundlesByTier[key].map((bundle) => {
             const { messaging, bundle: bundleCode } = bundle;
             const isCurrentPlan = currentPlan.code === bundleCode;
             return (
@@ -93,7 +98,7 @@ const PlanSelectSection = ({ bundles, currentPlan, onSelect }) => {
                   <Button
                     className={styles.selectButton}
                     disabled={isCurrentPlan}
-                    onClick={() => onSelect(bundle)}
+                    onClick={() => onSelect(bundleCode)}
                     size='small'>
                       Select
                   </Button>

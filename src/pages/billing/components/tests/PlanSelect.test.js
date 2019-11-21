@@ -11,9 +11,10 @@ describe('Plan Select:', () => {
     currentPlan: {
       code: '2'
     },
-    bundles: {
-      'test': [{
+    bundles: [
+      {
         bundle: '2',
+        tier: 'test',
         messaging: {
           code: '2',
           includesIp: false,
@@ -23,9 +24,10 @@ describe('Plan Select:', () => {
           volume: 2,
           isFree: true
         }
-      }],
-      'starter': [{
+      },
+      {
         bundle: '3',
+        tier: 'starter',
         messaging: {
           code: '3',
           monthly: 300,
@@ -33,9 +35,10 @@ describe('Plan Select:', () => {
           overage: 0.3,
           volume: 3
         }
-      }],
-      'premier': [{
+      },
+      {
         bundle: '4',
+        tier: 'premier',
         messaging: {
           code: '4',
           includesIp: true,
@@ -44,8 +47,8 @@ describe('Plan Select:', () => {
           overage: 0.4,
           volume: 4
         }
-      }]
-    }
+      }
+    ]
   };
 
   const subject = (props) => shallow(
