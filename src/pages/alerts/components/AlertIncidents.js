@@ -1,6 +1,7 @@
 import React from 'react';
 import { Panel, Table, Tag } from '@sparkpost/matchbox';
 import { TableCollection, Empty } from 'src/components';
+import { FORMATS } from 'src/constants';
 import { METRICS, FILTERS_FRIENDLY_NAMES } from '../constants/formConstants';
 import { MAILBOX_PROVIDERS } from 'src/constants';
 import { getEvaluatorOptions } from '../helpers/alertForm';
@@ -9,7 +10,7 @@ import moment from 'moment';
 import _ from 'lodash';
 import styles from './AlertIncidents.module.scss';
 
-const formatDateTime = (timestamp) => moment(timestamp).format('MMM DD, YYYY [at] h:mma');
+const formatDateTime = (timestamp) => moment(timestamp).format(FORMATS.LONG_DATETIME_ALT);
 
 const AlertIncidents = ({ incidents = [], alert, subaccountIdToString }) => {
 
