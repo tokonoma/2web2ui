@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect } from 'react';
+import React, { createContext, useContext, useEffect, useMemo } from 'react';
 import _ from 'lodash';
 
 const ChangePlanContext = createContext({});
@@ -12,6 +12,8 @@ export const ChangePlanProvider = ({
   getPlans,
 
   //Redux props
+  loading,
+  rawPlans: plans,
   ...value
 }) => {
   useEffect(() => { getBillingCountries(); }, [getBillingCountries]);
@@ -19,8 +21,15 @@ export const ChangePlanProvider = ({
   useEffect(() => { getBundles(); }, [getBundles]);
   useEffect(() => { getPlans(); }, [getPlans]);
 
+  const plansByKey = useMemo(() => _.keyBy(plans, 'plan'), [plans]);
+  // const availableBundles = useMemo(() => {
+  //   return bundles;
+  // });
+
   const contextValue = {
-    ...value
+    ...value,
+    loading,
+    plans: plansByKey
   };
   return (
     <ChangePlanContext.Provider value={contextValue}>
