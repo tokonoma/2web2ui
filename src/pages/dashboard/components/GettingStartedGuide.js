@@ -28,59 +28,84 @@ export const GettingStartedGuide = ({ isGuideAtBottom, moveGuideAtBottom }) => {
   const renderStep = () => {
     switch (stepName) {
       case 'Features':
-        return <Grid>
-          <Grid.Column xs={12} >
-            <Card >
-              <CardTitle><Send size='20' className={styles.SendIcon}/>   &nbsp;Sending with Sparkpost</CardTitle>
-              <CardContent><p className={styles.FeaturesCardContent}>Learn how to send emails, integrate our API into your code, and make the most of our powerful analytics.</p></CardContent>
-              <CardActions>
-                <ButtonWrapper>
-                  <Button color='orange' onClick={() => setStepName('Sending')}>Start Sending</Button>
-                </ButtonWrapper>
-              </CardActions>
-            </Card>
-          </Grid.Column>
-        </Grid>;
+        return <Panel.Section>
+          <Grid>
+            <Grid.Column xs={12} >
+              <Card >
+                <CardTitle><Send size='20' className={styles.SendIcon}/>   &nbsp;Sending with Sparkpost</CardTitle>
+                <CardContent><p className={styles.FeaturesCardContent}>Learn how to send emails, integrate our API into your code, and make the most of our powerful analytics.</p></CardContent>
+                <CardActions>
+                  <ButtonWrapper>
+                    <Button color='orange' onClick={() => setStepName('Sending')}>Start Sending</Button>
+                  </ButtonWrapper>
+                </CardActions>
+              </Card>
+            </Grid.Column>
+          </Grid>
+        </Panel.Section>
+        ;
       case 'Sending':
-        return <>
-        <p className={styles.SendingStepHeading} role="heading" aria-level="4" ref={guideHeadingRef} tabIndex={-1}>Where Would You Like to Begin?</p>
-        <Grid>
-          <Grid.Column xs={12} md={6} >
-            <Card textAlign='center'>
-              <CardContent><p className={styles.FeaturesCardContent}>Send your first email in one click and dive right into what SparkPost can do for your email strategy </p></CardContent>
-              <CardActions>
-                <ButtonWrapper>
-                  <Button color='orange' onClick={() => setStepName('Show Me SparkPost')} className={styles.SendingStepButtons}>Show Me SparkPost</Button>
-                </ButtonWrapper>
-              </CardActions>
-            </Card>
-          </Grid.Column>
-          <Grid.Column xs={12} md={6}>
-            <Card textAlign='center'>
-              <CardContent><p className={styles.FeaturesCardContent}>Ready to integrate via SMTP or API? We'll get you set up ASAP so you can start building with SparkPost</p></CardContent>
-              <CardActions>
-                <ButtonWrapper>
-                  <Button color='orange' onClick={() => setStepName('Let\'s Code')} className={styles.SendingStepButtons}>Let's Code</Button>
-                </ButtonWrapper>
-              </CardActions>
-            </Card>
-          </Grid.Column>
-        </Grid>
-         </>;
+        return <Panel.Section>
+          <p className={styles.SendingStepHeading} role="heading" aria-level="4" ref={guideHeadingRef} tabIndex={-1}>Where Would You Like to Begin?</p>
+          <Grid>
+            <Grid.Column xs={12} md={6} >
+              <Card textAlign='center'>
+                <CardContent><p className={styles.FeaturesCardContent}>Send your first email in one click and dive right into what SparkPost can do for your email strategy </p></CardContent>
+                <CardActions>
+                  <ButtonWrapper>
+                    <Button color='orange' onClick={() => setStepName('Show Me SparkPost')} className={styles.SendingStepButtons}>Show Me SparkPost</Button>
+                  </ButtonWrapper>
+                </CardActions>
+              </Card>
+            </Grid.Column>
+            <Grid.Column xs={12} md={6}>
+              <Card textAlign='center'>
+                <CardContent><p className={styles.FeaturesCardContent}>Ready to integrate via SMTP or API? We'll get you set up ASAP so you can start building with SparkPost</p></CardContent>
+                <CardActions>
+                  <ButtonWrapper>
+                    <Button color='orange' onClick={() => setStepName('Let\'s Code')} className={styles.SendingStepButtons}>Let's Code</Button>
+                  </ButtonWrapper>
+                </CardActions>
+              </Card>
+            </Grid.Column>
+          </Grid>
+        </Panel.Section>;
       case 'Show Me SparkPost':
-        return <GuideListItem action={{ name: 'Send Test Email', onClick: () => {} }} >
-          <GuideListItemTitle>
+        return <>
+        <Panel.Section>
+          <GuideListItem action={{ name: 'Send Test Email', onClick: () => {} }} >
+            <GuideListItemTitle>
             Send a Test Email
-          </GuideListItemTitle>
-          <GuideListItemDescription>Send a test email using our starter template.</GuideListItemDescription>
-        </GuideListItem>;
+            </GuideListItemTitle>
+            <GuideListItemDescription>Send a test email using our starter template.</GuideListItemDescription>
+          </GuideListItem>
+        </Panel.Section>
+        <Panel.Section>
+          <GuideListItem action={{ name: 'Explore Analytics', onClick: () => {} }} >
+            <GuideListItemTitle>
+            Explore Analytics
+            </GuideListItemTitle>
+            <GuideListItemDescription>Get acquainted with our powerful analytics to make the most of your sending strategy.</GuideListItemDescription>
+          </GuideListItem>
+        </Panel.Section>
+          <Panel.Section>
+            <GuideListItem action={{ name: 'Invite a Collaborator', onClick: () => {} }} >
+              <GuideListItemTitle>
+            Invite Your Team
+              </GuideListItemTitle>
+              <GuideListItemDescription>{'Need help integrating? Pass the ball on to someone else to finish setting up this account.'}<br/>
+                {'Or you can '}<a href='#'>setup email sending now</a>
+              </GuideListItemDescription>
+            </GuideListItem>
+          </Panel.Section>
+        </>;
       case 'Let\'s Code':
       default:
         null;
     }
   };
   return <>
-        <Panel title='Getting Started' actions={actions} sectioned >
+        <Panel title='Getting Started' actions={actions} >
           <BreadCrumbs>
             {breadCrumbsItems[stepName].map((item) => (
               <BreadCrumbsItem
