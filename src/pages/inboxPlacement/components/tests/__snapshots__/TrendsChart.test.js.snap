@@ -48,9 +48,9 @@ exports[`Inbox Placement Trends Chart renders happy path correctly 1`] = `
       margin={
         Object {
           "bottom": 25,
-          "left": 18,
-          "right": 0,
-          "top": 12,
+          "left": 30,
+          "right": 10,
+          "top": 10,
         }
       }
       onMouseOver={[Function]}
@@ -74,7 +74,7 @@ exports[`Inbox Placement Trends Chart renders happy path correctly 1`] = `
         ]
       }
       tooltipContent={[Function]}
-      tooltipWidth="130px"
+      tooltipWidth="150px"
       width="99%"
       xAxisProps={
         Object {
@@ -122,7 +122,7 @@ exports[`Inbox Placement Trends Chart renders happy path correctly 1`] = `
         key="missing"
         layout="vertical"
         legendType="rect"
-        minPointSize={1}
+        minPointSize={0}
         onAnimationEnd={[Function]}
         onAnimationStart={[Function]}
         onMouseOver={[Function]}
@@ -144,7 +144,7 @@ exports[`Inbox Placement Trends Chart renders happy path correctly 1`] = `
         key="spam"
         layout="vertical"
         legendType="rect"
-        minPointSize={1}
+        minPointSize={0}
         onAnimationEnd={[Function]}
         onAnimationStart={[Function]}
         onMouseOver={[Function]}
@@ -166,7 +166,7 @@ exports[`Inbox Placement Trends Chart renders happy path correctly 1`] = `
         key="inbox"
         layout="vertical"
         legendType="rect"
-        minPointSize={1}
+        minPointSize={0}
         onAnimationEnd={[Function]}
         onAnimationStart={[Function]}
         onMouseOver={[Function]}

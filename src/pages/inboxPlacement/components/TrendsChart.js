@@ -45,7 +45,7 @@ const yAxisProps = {
 const getTooltipContent = ({ payload = {}}) => (
   <>
     <TooltipMetric
-      label={'Total'}
+      label={'Total Messages'}
       value={payload.totalMessages}
     />
     {yKeys.map(({ fill, label, key }) =>
@@ -94,7 +94,7 @@ export const TrendsChart = (props) => {
       onMouseOver={handleDateHover}
       fill={fill}
       isAnimationActive={false}
-      minPointSize={1}
+      minPointSize={0}
       cursor='pointer'
       shape={barShape}
     />));
@@ -133,10 +133,10 @@ export const TrendsChart = (props) => {
                 hasBackgroundBars={false}
                 hovered={hoveredDate}
                 onMouseOver={handleDateHover}
-                margin={{ top: 12, left: 18, right: 0, bottom: 25 }}
+                margin={{ top: 10, left: 30, right: 10, bottom: 25 }}
                 tooltipContent={getTooltipContent}
                 timeSeries={trends}
-                tooltipWidth='130px'
+                tooltipWidth='150px'
                 yAxisProps={yAxisProps}
                 xAxisProps={xAxisProps}
               >
