@@ -1,73 +1,95 @@
-import { shallow } from 'enzyme';
 import React from 'react';
+import { shallow } from 'enzyme';
 
 import CreatePage from '../CreatePage';
 
-let wrapper;
-let props;
+describe('CreatePage', () => {
+  const subject = (props = {}) => shallow(
+    <CreatePage
+      loading={false}
+      submitting={false}
+      pristine={true}
+      handleSubmit={(handler) => handler}
+      listDomains={jest.fn()}
+      history={{ push: jest.fn() }}
+      showAlert={jest.fn()}
+      createTemplate={jest.fn(() => Promise.resolve())}
+      {...props}
+    />
+  );
 
-describe('Template CreatePage', () => {
-  beforeEach(() => {
-    props = {
-      id: null,
-      cloneId: null,
-      loading: false,
-      template: {
-        draft: {}
-      },
-      getDraft: jest.fn(() => Promise.resolve()),
-      match: {
-        params: {}
-      },
-      handleSubmit: jest.fn(),
-      history: {
-        push: jest.fn()
-      },
-      showAlert: jest.fn(),
-      formName: 'templateCreate'
-    };
+  it('renders correctly', () => {
+    expect(subject()).toMatchSnapshot();
   });
 
-  describe('New Template', () => {
-    beforeEach(() => {
-      wrapper = shallow(<CreatePage {...props} />);
+  it('renders correctly on loading', () => {
+    expect(subject({ loading: true }).find('Loading')).toExist();
+  });
+
+  it('loads domains on load', () => {
+    const mockListDomains = jest.fn();
+    subject({ listDomains: mockListDomains });
+    expect(mockListDomains).toHaveBeenCalledTimes(1);
+  });
+
+  describe('Submit button', () => {
+    it('renders disable states correctly', () => {
+      expect(subject({ submitting: true, pristine: false, valid: true }).find('Button').prop('disabled')).toBe(true);
+      expect(subject({ submitting: false, pristine: true, valid: true }).find('Button').prop('disabled')).toBe(true);
+      expect(subject({ submitting: false, pristine: false, valid: false }).find('Button').prop('disabled')).toBe(true);
     });
 
-    it('should render correctly', () => {
-      expect(wrapper).toMatchSnapshot();
-    });
-
-    it('should render loading correctly', () => {
-      wrapper.setProps({ loading: true });
-      expect(wrapper.find('Loading')).toHaveLength(1);
-    });
-
-    it('should not call getDraft (load template)', () => {
-      expect(props.getDraft).not.toHaveBeenCalled();
-    });
-
-    it('should handle create', async() => {
-      const createSuccess = jest.fn((a) => Promise.resolve(a));
-      wrapper.setProps({ id: 'id', create: createSuccess });
-      await wrapper.instance().handleCreate('values');
-      expect(createSuccess).toHaveBeenCalledWith('values');
-      expect(props.history.push).toHaveBeenCalledWith('/templates/edit/id');
+    it('renders enabled states correctly', () => {
+      expect(subject({ submitting: false, pristine: false, valid: true }).find('Button').prop('disabled')).toBe(false);
     });
   });
 
-  describe('Duplicate Template', () => {
-    beforeEach(() => {
-      props.match.params.id = 100;
-      props.cloneId = 101;
-      wrapper = shallow(<CreatePage {...props} />);
+  describe('handleCreate', () => {
+    it('calls "create" with form data when submitting', () => {
+      const promise = Promise.resolve();
+      const mockCreate = jest.fn(() => promise);
+      const formData = {
+        name: 'Foo',
+        id: 'foo',
+        content: {}
+      };
+      const wrapper = subject({
+        createTemplate: mockCreate,
+        history: { push: jest.fn() }
+      });
+      wrapper.find('form').simulate('submit', formData);
+
+      return promise.then(() => {
+        expect(mockCreate).toHaveBeenCalledWith({
+          ...formData,
+          content: {
+            ...formData.content,
+            text: ''
+          },
+          parsedTestData: {
+            substitution_data: {},
+            metadata: {},
+            options: {}
+          }
+        });
+      });
     });
 
-    it('should render correctly', () => {
-      expect(wrapper).toMatchSnapshot();
-    });
+    it('alerts & redirects to edit page', async () => {
+      const mockPush = jest.fn();
+      const mockAlert = jest.fn();
+      const createPromise = Promise.resolve();
+      const wrapper = subject({
+        createTemplate: jest.fn(() => createPromise),
+        history: { push: mockPush }, showAlert: mockAlert
+      });
 
-    it('should not call getDraft (load template)', () => {
-      expect(props.getDraft).toHaveBeenCalled();
+      wrapper.find('form').simulate('submit', { id: 'foo', content: {}});
+
+      return createPromise.then(() => {
+        expect(mockPush).toHaveBeenCalledWith('/templates/edit/foo/draft/content');
+        expect(mockAlert).toHaveBeenCalledWith({ type: 'success', message: 'Template Created.' });
+      });
     });
   });
 });

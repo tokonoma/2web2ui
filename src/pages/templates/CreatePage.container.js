@@ -1,38 +1,41 @@
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { reduxForm, formValueSelector } from 'redux-form';
+import { formValueSelector, reduxForm } from 'redux-form';
 import _ from 'lodash';
-
-// Actions
-import { create, getDraft } from 'src/actions/templates';
+import {
+  create as createTemplate,
+  getDraft,
+  setTestData
+} from 'src/actions/templates';
 import { showAlert } from 'src/actions/globalAlert';
-
+import { list as listDomains } from 'src/actions/sendingDomains';
 import { selectDefaultTemplateOptions } from 'src/selectors/account';
-import { selectAndCloneDraftById, selectDefaultTestData } from 'src/selectors/templates';
 
 import CreatePage from './CreatePage';
 
-const FORM_NAME = 'templateCreate';
+const formName = 'templateCreate';
+const selector = formValueSelector(formName);
 
-const selector = formValueSelector(FORM_NAME);
-
-const mapStateToProps = (state, props) => ({
+const mapStateToProps = (state) => ({
   id: selector(state, 'id'),
   loading: state.templates.getDraftLoading,
-  cloneId: props.match.params.id, // ID of the template it's cloning from
   subaccountId: _.get(selector(state, 'subaccount'), 'id'),
-  formName: FORM_NAME,
+  formName: formName,
   initialValues: {
     assignTo: 'master',
-    options: selectDefaultTemplateOptions(state),
-    testData: selectDefaultTestData(),
-    ...selectAndCloneDraftById(state, props.match.params.id)
+    options: selectDefaultTemplateOptions(state) // not visible to users, but needed
   }
 });
 
 const formOptions = {
-  form: FORM_NAME,
+  form: formName,
   enableReinitialize: true // required to update initial values from redux state
 };
 
-export default withRouter(connect(mapStateToProps, { create, getDraft, showAlert })(reduxForm(formOptions)(CreatePage)));
+export default withRouter(connect(mapStateToProps, {
+  createTemplate,
+  setTestData,
+  getDraft,
+  showAlert,
+  listDomains
+})(reduxForm(formOptions)(CreatePage)));

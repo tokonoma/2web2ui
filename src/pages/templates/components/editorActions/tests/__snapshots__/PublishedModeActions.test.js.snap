@@ -1,0 +1,85 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PublishedModeActions renders published actions 1`] = `
+<Button.Group>
+  <Button
+    className="Actions"
+    data-id="button-edit-draft"
+    role="button"
+    size="default"
+    to="/templates/edit/123/draft/content?subaccount=abcd"
+  >
+    <strong>
+      Edit Draft
+    </strong>
+  </Button>
+  <div
+    className="Actions"
+  >
+    <Popover
+      bottom={true}
+      left={true}
+      onClose={[Function]}
+      open={false}
+      right={true}
+      trigger={
+        <Button
+          aria-expanded="false"
+          data-id="popover-trigger-editor-actions"
+          onClick={[Function]}
+          size="default"
+        >
+          <ArrowDropDown />
+          <ScreenReaderOnly>
+            Open Menu
+          </ScreenReaderOnly>
+        </Button>
+      }
+    >
+      <div
+        className="ActionsBody"
+      >
+        <div
+          className="ActionItem"
+        >
+          <PageLink
+            data-id="action-edit-draft"
+            role="button"
+            to="/templates/edit/123/draft/content?subaccount=abcd"
+          >
+            <FileEdit />
+            <span>
+              Edit Draft
+            </span>
+          </PageLink>
+        </div>
+        <hr
+          className="Divider"
+        />
+        <DuplicateTemplate
+          className="ActionItem"
+          onClick={[Function]}
+        />
+        <DeleteTemplate
+          className="ActionItem"
+          onClick={[Function]}
+        />
+      </div>
+    </Popover>
+    <DuplicateTemplateModal
+      onClose={[Function]}
+      open={false}
+      template={
+        Object {
+          "id": "123",
+          "subaccount_id": "abcd",
+        }
+      }
+    />
+    <DeleteTemplateModal
+      onCancel={[Function]}
+      open={false}
+    />
+  </div>
+</Button.Group>
+`;
