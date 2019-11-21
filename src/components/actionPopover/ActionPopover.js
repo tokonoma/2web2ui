@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Popover, Button, ActionList } from '@sparkpost/matchbox';
 import { MoreHoriz } from '@sparkpost/matchbox-icons';
 
@@ -9,5 +10,9 @@ const ActionPopover = ({ actions }) => (
     </Popover>
   </div>
 );
+
+ActionPopover.propTypes = {
+  actions: PropTypes.array
+};
 
 export default ActionPopover;

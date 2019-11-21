@@ -24,7 +24,8 @@
     "coveralls": "cat ./build-reports/lcov.info | coveralls",
     "lint": "node node_modules/eslint/bin/eslint.js src",
     "lintfix": "npm run lint -- --fix",
-    "storybook": "start-storybook -p 9001 -c .storybook",
+    "storybook-dev": "start-storybook -p 9001 -c .storybook --docs",
+    "storybook-build": "build-storybook -c .storybook -o .out --docs",
     "travis": "npm run test-ci && npm run build && (npm run coveralls || exit 0)"
   },
   "husky": {
@@ -113,8 +114,10 @@
   },
   "devDependencies": {
     "@babel/core": "7.1.6",
-    "@storybook/addon-actions": "^5.0.1",
-    "@storybook/react": "^5.0.1",
+    "@storybook/addon-docs": "^5.2.6",
+    "@storybook/addon-links": "^5.2.6",
+    "@storybook/addons": "^5.2.6",
+    "@storybook/react": "^5.2.6",
     "@testing-library/cypress": "^5.0.2",
     "autoprefixer": "^9.0.0",
     "babel-eslint": "^9.0.0",

@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import styles from './FocusContainer.module.scss';
 
@@ -18,6 +19,10 @@ const FocusContainer = ({ className, ...props }) => {
       tabIndex="-1"
     />
   );
+};
+
+FocusContainer.propTypes = {
+  className: PropTypes.string
 };
 
 export default FocusContainer;

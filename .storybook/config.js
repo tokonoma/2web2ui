@@ -3,10 +3,8 @@ import { configure } from '@storybook/react';
 import '../src/critical.scss';
 import '../src/index.scss';
 
-const req = require.context('../stories', true, /.stories.js$/);
+configure([
+  require.context('../src', false, /Intro\.stories\.mdx/),
+  require.context('../src', true, /\.stories\.(js|mdx)$/)
+], module);
 
-function loadStories() {
-  req.keys().forEach(filename => req(filename));
-}
-
-configure(loadStories, module);

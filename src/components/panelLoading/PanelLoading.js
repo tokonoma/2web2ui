@@ -1,7 +1,8 @@
 import React from 'react';
-import styles from './PanelLoading.module.scss';
+import PropTypes from 'prop-types';
 import { Panel } from '@sparkpost/matchbox';
 import { Loading } from 'src/components/loading/Loading';
+import styles from './PanelLoading.module.scss';
 
 const PanelLoading = (props) => {
   const { minHeight, accent } = props;
@@ -15,6 +16,11 @@ const PanelLoading = (props) => {
       <Loading />
     </Panel>
   );
+};
+
+PanelLoading.propTypes = {
+  minHeight: PropTypes.string,
+  accent: PropTypes.bool
 };
 
 PanelLoading.defaultProps = {

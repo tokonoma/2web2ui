@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styles from './Callout.module.scss';
 
 const Callout = ({ children, height = '220px', title }) => (
@@ -9,5 +10,11 @@ const Callout = ({ children, height = '220px', title }) => (
     </div>
   </div>
 );
+
+Callout.propTypes = {
+  title: PropTypes.string,
+  children: PropTypes.node,
+  height: PropTypes.string
+};
 
 export default Callout;

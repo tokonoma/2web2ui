@@ -24,17 +24,26 @@ describe('Top', () => {
   });
 
   it('should toggle nav', () => {
-    consumer.children({ mobile: true }).find('UnstyledLink').simulate('click');
+    consumer
+      .children({ mobile: true })
+      .find('[data-id="nav-button-mobilemenu"]')
+      .simulate('click');
+
     expect(props.toggleMobileNav).toHaveBeenCalled();
   });
 
   it('should render close icon when open', () => {
     consumer.component.setProps({ open: true });
+
     expect(consumer.children({ mobile: true })).toMatchSnapshot();
   });
 
   it('should call openSupportPanel when help icon is clicked', () => {
-    consumer.children().find('HelpOutline').simulate('click');
+    consumer
+      .children()
+      .find('[data-id="nav-button-help"]')
+      .simulate('click');
+
     expect(props.openSupportPanel).toHaveBeenCalled();
   });
 });
