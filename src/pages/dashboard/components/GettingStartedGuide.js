@@ -25,10 +25,20 @@ export const GettingStartedGuide = ({ isGuideAtBottom, moveGuideAtBottom }) => {
   useEffect(() => {
     if (guideHeadingRef.current) { guideHeadingRef.current.focus(); }
   }, [stepName]);
+  const renderBreadCrumbs = () => (<BreadCrumbs>
+    {breadCrumbsItems[stepName].map((item) => (
+      <BreadCrumbsItem
+        key={item}
+        onClick={() => setStepName(item)}
+        active={stepName === item}>{item}</BreadCrumbsItem>
+    ))}
+  </BreadCrumbs>);
+
   const renderStep = () => {
     switch (stepName) {
       case 'Features':
         return <Panel.Section>
+          {renderBreadCrumbs()}
           <Grid>
             <Grid.Column xs={12} >
               <Card >
@@ -42,10 +52,12 @@ export const GettingStartedGuide = ({ isGuideAtBottom, moveGuideAtBottom }) => {
               </Card>
             </Grid.Column>
           </Grid>
-        </Panel.Section>
-        ;
+        </Panel.Section>;
+
+
       case 'Sending':
         return <Panel.Section>
+          {renderBreadCrumbs()}
           <p className={styles.SendingStepHeading} role="heading" aria-level="4" ref={guideHeadingRef} tabIndex={-1}>Where Would You Like to Begin?</p>
           <Grid>
             <Grid.Column xs={12} md={6} >
@@ -72,14 +84,15 @@ export const GettingStartedGuide = ({ isGuideAtBottom, moveGuideAtBottom }) => {
         </Panel.Section>;
       case 'Show Me SparkPost':
         return <>
-        <Panel.Section>
-          <GuideListItem action={{ name: 'Send Test Email', onClick: () => {} }} >
-            <GuideListItemTitle>
+         <Panel.Section>
+           {renderBreadCrumbs()}
+           <GuideListItem action={{ name: 'Send Test Email', onClick: () => {} }} >
+             <GuideListItemTitle>
             Send a Test Email
-            </GuideListItemTitle>
-            <GuideListItemDescription>Send a test email using our starter template.</GuideListItemDescription>
-          </GuideListItem>
-        </Panel.Section>
+             </GuideListItemTitle>
+             <GuideListItemDescription>Send a test email using our starter template.</GuideListItemDescription>
+           </GuideListItem>
+         </Panel.Section>
         <Panel.Section>
           <GuideListItem action={{ name: 'Explore Analytics', onClick: () => {} }} >
             <GuideListItemTitle>
@@ -97,8 +110,7 @@ export const GettingStartedGuide = ({ isGuideAtBottom, moveGuideAtBottom }) => {
                 {'Or you can '}<a href='#'>setup email sending now</a>
               </GuideListItemDescription>
             </GuideListItem>
-          </Panel.Section>
-        </>;
+          </Panel.Section></>;
       case 'Let\'s Code':
       default:
         null;
@@ -106,14 +118,6 @@ export const GettingStartedGuide = ({ isGuideAtBottom, moveGuideAtBottom }) => {
   };
   return <>
         <Panel title='Getting Started' actions={actions} >
-          <BreadCrumbs>
-            {breadCrumbsItems[stepName].map((item) => (
-              <BreadCrumbsItem
-                key={item}
-                onClick={() => setStepName(item)}
-                active={stepName === item}>{item}</BreadCrumbsItem>
-            ))}
-          </BreadCrumbs>
           {renderStep()}
         </Panel>
         </>;
