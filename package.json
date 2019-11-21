@@ -119,6 +119,8 @@
     "@storybook/addons": "^5.2.6",
     "@storybook/react": "^5.2.6",
     "@testing-library/cypress": "^5.0.2",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
     "autoprefixer": "^9.0.0",
     "babel-eslint": "^9.0.0",
     "babel-jest": "24.9.0",

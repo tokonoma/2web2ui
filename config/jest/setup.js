@@ -3,6 +3,7 @@
 import raf from './tempPolyfills';
 import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
+import '@testing-library/jest-dom/extend-expect';
 import * as matchers from './matchers';
 import setupPortals from 'src/__testHelpers__/setupPortals';
 
@@ -32,6 +33,23 @@ jest.mock('src/components/notifications/staticMarkdownNotifications', () => [
 ]);
 
 setupPortals();
+
+// this is just a little hack to silence a warning that we'll get until we
+// upgrade to 16.9: https://github.com/facebook/react/pull/14853
+const originalError = console.error;
+
+beforeAll(() => {
+  console.error = (...args) => {
+    if (/Warning.*not wrapped in act/.test(args[0])) {
+      return;
+    }
+    originalError.call(console, ...args);
+  };
+});
+
+afterAll(() => {
+  console.error = originalError;
+});
 
 beforeEach(() => {
   // Verifies that at least one assertion is called during a test
