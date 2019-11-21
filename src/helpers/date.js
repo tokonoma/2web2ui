@@ -135,8 +135,8 @@ export function formatTime(time, FORMAT = config.timeFormat) {
   return moment(time).format(FORMAT);
 }
 
-export function formatDateTime(datetime) {
-  return `${formatDate(datetime)}, ${formatTime(datetime)}`;
+export function formatDateTime(datetime, FORMAT) {
+  return FORMAT ? moment(datetime).format(FORMAT) : `${formatDate(datetime)}, ${formatTime(datetime)}`;
 }
 
 // format as ISO 8601 timestamp to match SP API

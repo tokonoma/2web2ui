@@ -2,6 +2,7 @@ import React from 'react';
 import { Panel, Table, Tag } from '@sparkpost/matchbox';
 import { TableCollection, Empty } from 'src/components';
 import { FORMATS } from 'src/constants';
+import { formatDateTime } from 'src/helpers/date';
 import { METRICS, FILTERS_FRIENDLY_NAMES } from '../constants/formConstants';
 import { MAILBOX_PROVIDERS } from 'src/constants';
 import { getEvaluatorOptions } from '../helpers/alertForm';
@@ -9,8 +10,6 @@ import { roundToPlaces } from 'src/helpers/units';
 import moment from 'moment';
 import _ from 'lodash';
 import styles from './AlertIncidents.module.scss';
-
-const formatDateTime = (timestamp) => moment(timestamp).format(FORMATS.LONG_DATETIME_ALT);
 
 const AlertIncidents = ({ incidents = [], alert, subaccountIdToString }) => {
 
@@ -66,7 +65,7 @@ const AlertIncidents = ({ incidents = [], alert, subaccountIdToString }) => {
 
     return [
       <div>{formatDateTime(first_fired)}</div>,
-      <div>{status === 'Open' ? <Tag color='yellow'>Active</Tag> : formatDateTime(moment(last_fired).add(45, 'minutes'))}</div>,
+      <div>{status === 'Open' ? <Tag color='yellow'>Active</Tag> : formatDateTime(moment(last_fired).add(45, 'minutes'), FORMATS.LONG_DATETIME_ALT)}</div>,
       <div className={styles.IncidentFilters}>{renderTags()}</div>,
       <div className={styles.rightAlign}>{roundToPlaces(triggered_value, 3)}{suffix}</div>
     ];
