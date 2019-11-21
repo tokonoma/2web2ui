@@ -5,6 +5,7 @@ import { Delete, ContentCopy } from '@sparkpost/matchbox-icons';
 import { DeleteModal, Loading } from 'src/components';
 import withAlert from './containers/DetailsPage.container';
 import { AlertDetails } from './components/AlertDetails';
+import AlertIncidents from './components/AlertIncidents';
 import RedirectAndAlert from 'src/components/globalAlert/RedirectAndAlert';
 import styles from './DetailsPage.module.scss';
 import _ from 'lodash';
@@ -15,8 +16,9 @@ export class DetailsPage extends Component {
   };
 
   componentDidMount() {
-    const { id, getAlert, hasSubaccounts, listSubaccounts } = this.props;
+    const { id, getAlert, hasSubaccounts, listSubaccounts, getIncidents } = this.props;
     getAlert({ id });
+    getIncidents({ id });
     if (hasSubaccounts) {
       listSubaccounts();
     }
@@ -54,7 +56,7 @@ export class DetailsPage extends Component {
   };
 
   render() {
-    const { loading, deletePending, alert = {}, error, id, hasSubaccounts } = this.props;
+    const { loading, deletePending, alert = {}, error, id, hasSubaccounts, incidents } = this.props;
     const { isDeleteModalOpen } = this.state;
     const { name } = alert;
 
@@ -83,6 +85,11 @@ export class DetailsPage extends Component {
         {!_.isEmpty(alert) &&
           <AlertDetails alert={alert} id={id} subaccountIdToString={this.subaccountIdToString} hasSubaccounts={hasSubaccounts}/>
         }
+        <AlertIncidents
+          alert={alert}
+          incidents={incidents}
+          subaccountIdToString={this.subaccountIdToString}
+        />
         <DeleteModal
           open={isDeleteModalOpen}
           title='Are you sure you want to delete this alert?'

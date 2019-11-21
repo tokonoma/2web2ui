@@ -66,3 +66,14 @@ export function getAlert({ id }) {
     }
   });
 }
+
+export function getIncidents({ id }) {
+  return sparkpostApiRequest({
+    type: 'GET_ALERT_INCIDENTS',
+    meta: {
+      method: 'GET',
+      url: `/v1/alerts/${id}/incidents`,
+      showErrorAlert: false
+    }
+  });
+}

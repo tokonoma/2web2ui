@@ -1,0 +1,97 @@
+import React from 'react';
+import { Panel, Table, Tag } from '@sparkpost/matchbox';
+import { TableCollection, Empty } from 'src/components';
+import { FORMATS } from 'src/constants';
+import { formatDateTime } from 'src/helpers/date';
+import { METRICS, FILTERS_FRIENDLY_NAMES } from '../constants/formConstants';
+import { MAILBOX_PROVIDERS } from 'src/constants';
+import { getEvaluatorOptions } from '../helpers/alertForm';
+import { roundToPlaces } from 'src/helpers/units';
+import moment from 'moment';
+import _ from 'lodash';
+import styles from './AlertIncidents.module.scss';
+
+const AlertIncidents = ({ incidents = [], alert, subaccountIdToString }) => {
+
+  const { metric, source } = alert;
+  const { suffix } = getEvaluatorOptions(metric, source);
+
+  const columns = [
+    { label: 'Triggered', sortKey: 'first_fired' },
+    { label: 'Resolved', sortKey: 'last_fired' },
+    { label: 'For' },
+    { label: METRICS[metric], sortKey: 'triggered_value', className: styles.rightAlign }
+  ];
+
+  const getRowData = ({ first_fired, last_fired, status, triggered_value, filters }) => {
+
+    const renderTags = () => {
+
+      const filterTags = _.map(filters, (value, key) => {
+        const finalValue = value === 'NULL' ? null : value;
+        const getTagValue = (value) => {
+          switch (key) {
+            case 'subaccount_id':
+              return subaccountIdToString(value);
+            case 'mailbox_provider':
+              return MAILBOX_PROVIDERS[value];
+            default:
+              return value;
+          }
+        };
+
+        return (
+          finalValue &&
+          <span key={key}>
+            <strong className={styles.BoldInline}>{FILTERS_FRIENDLY_NAMES[key]}</strong>
+            &nbsp;
+            <Tag>{getTagValue(finalValue)}</Tag>
+          </span>
+        );
+      });
+
+      const joinTags = filterTags.reduce((acc, tag) => {
+        if (!acc) {
+          return [tag];
+        }
+        if (!tag) {
+          return acc;
+        }
+        return [...acc, <span key={'join_and'}> and </span>, tag];
+      }, null);
+
+      return joinTags;
+    };
+
+    return [
+      <div>{formatDateTime(first_fired, FORMATS.LONG_DATETIME_ALT)}</div>,
+      <div>{status === 'Open' ? <Tag color='yellow'>Active</Tag> : formatDateTime(moment(last_fired).add(45, 'minutes'), FORMATS.LONG_DATETIME_ALT)}</div>,
+      <div className={styles.IncidentFilters}>{renderTags()}</div>,
+      <div className={styles.rightAlign}>{roundToPlaces(triggered_value, 3)}{suffix}</div>
+    ];
+  };
+
+  const TableWrapper = (props) => (
+    <Table>{props.children}</Table>
+  );
+
+  return (
+    <Panel title='Alert Incidents'>
+      {incidents.length <= 0
+        ? <Empty message='No incidents'/>
+        : <TableCollection
+          wrapperComponent={TableWrapper}
+          rows={incidents}
+          columns={columns}
+          getRowData={getRowData}
+          pagination
+          defaultSortColumn='first_fired'
+          defaultSortDirection='desc'
+        />
+      }
+
+    </Panel>
+  );
+};
+
+export default AlertIncidents;

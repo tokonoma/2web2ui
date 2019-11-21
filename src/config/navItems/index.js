@@ -119,7 +119,6 @@ export default [
   {
     label: 'Alerts',
     to: '/alerts',
-    tag: 'new',
     icon: NotificationsActive
   },
   inboxPlacementNavItems,
