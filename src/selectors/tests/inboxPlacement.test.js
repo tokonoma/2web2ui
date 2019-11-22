@@ -105,6 +105,10 @@ describe('Selectors: Inbox Placement', () => {
           placementsByRegion: [
             { id: 0,
               region: 'europe' }
+          ],
+          placementsBySendingIp: [
+            { id: 0,
+              sending_ip: '101.101' }
           ]
         }
       };
@@ -118,6 +122,11 @@ describe('Selectors: Inbox Placement', () => {
     it('returns region', () => {
       const props = { match: { params: { filterType: 'region', filterName: 'europe' }}};
       expect(selectSinglePlacementResult(state, props)).toEqual(state.inboxPlacement.placementsByRegion[0]);
+    });
+
+    it('returns sending ip', () => {
+      const props = { match: { params: { filterType: 'sending-ip', filterName: '101.101' }}};
+      expect(selectSinglePlacementResult(state, props)).toEqual(state.inboxPlacement.placementsBySendingIp[0]);
     });
   });
 
