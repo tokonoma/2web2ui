@@ -5,15 +5,15 @@ import { FileEdit, CheckCircle } from '@sparkpost/matchbox-icons';
 import { formatDate } from 'src/helpers/date';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
 import PageLink from 'src/components/pageLink';
-import { DuplicateAction, DeleteAction } from './ListComponents';
+import { DeleteAction } from './ListComponents';
 import { routeNamespace } from '../constants/routes';
 import styles from './RecentActivity.module.scss';
 
 const RecentActivity = (props) => {
   const {
     templates,
-    onToggleDeleteModal,
-    onToggleDuplicateModal
+    onToggleDeleteModal
+    // onToggleDuplicateModal // TODO - re-introduce when backend discrepancy between list and templates endpoints can be addressed
   } = props;
   const descendingSortedTemplates = _.orderBy(templates, 'last_update_time', 'desc');
 
@@ -69,11 +69,12 @@ const RecentActivity = (props) => {
                       </div>
 
                       <div className={styles.RecentActivityActions}>
-                        <DuplicateAction
+                        {/* TODO: Re-introduce this action when backend issue can address issue with discrepancy b/t templates and list endpoints */}
+                        {/* <DuplicateAction
                           className={styles.RecentActivityAction}
                           onClick={() => onToggleDuplicateModal(template)}
                           data-id="recent-activity-button-duplicate"
-                        />
+                        /> */}
 
                         <DeleteAction
                           className={styles.RecentActivityAction}

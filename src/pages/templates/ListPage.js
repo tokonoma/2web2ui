@@ -6,7 +6,7 @@ import { Templates } from 'src/components/images';
 import PageLink from 'src/components/pageLink';
 import { resolveTemplateStatus } from 'src/helpers/templates';
 import RecentActivity from './components/RecentActivity';
-import { DeleteAction, DuplicateAction, LastUpdated, Name, Status } from './components/ListComponents';
+import { DeleteAction, LastUpdated, Name, Status } from './components/ListComponents';
 import DuplicateTemplateModal from './components/editorActions/DuplicateTemplateModal';
 import { routeNamespace } from './constants/routes';
 import styles from './ListPage.module.scss';
@@ -124,10 +124,11 @@ export default class ListPage extends Component {
       {
         component: (template) => (
           <span className={styles.Actions}>
-            <DuplicateAction
+            {/* TODO - reintroduce when backend discrepancy can be addressed between list and templates endpoints */}
+            {/* <DuplicateAction
               onClick={() => this.toggleDuplicateModal(template)}
               data-id="table-button-duplicate"
-            />
+            /> */}
 
             <DeleteAction
               onClick={() => this.toggleDeleteModal(template)}
