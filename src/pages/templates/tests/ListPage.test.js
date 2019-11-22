@@ -102,8 +102,8 @@ describe('ListPage', () => {
       getTestData: jest.fn()
     });
 
-    wrapper.instance().toggleDuplicateModal({ published: true });
-    expect(mockGetPublished).toHaveBeenCalled();
+    wrapper.instance().toggleDuplicateModal({ published: true, id: 'foo', subaccount_id: 'bar' });
+    expect(mockGetPublished).toHaveBeenCalledWith('foo', 'bar');
   });
 
   it('invokes `getDraft()` when the template is NOT in published mode when toggling the duplicate modal', () => {
@@ -113,8 +113,8 @@ describe('ListPage', () => {
       getTestData: jest.fn()
     });
 
-    wrapper.instance().toggleDuplicateModal({ published: false });
-    expect(mockGetDraft).toHaveBeenCalled();
+    wrapper.instance().toggleDuplicateModal({ published: false, id: 'foo', subaccount_id: 'bar' });
+    expect(mockGetDraft).toHaveBeenCalledWith('foo', 'bar');
   });
 
   it('shows an alert after duplication and refreshes the list', async () => {
