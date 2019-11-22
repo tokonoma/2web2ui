@@ -6,7 +6,7 @@ import { Templates } from 'src/components/images';
 import PageLink from 'src/components/pageLink';
 import { resolveTemplateStatus } from 'src/helpers/templates';
 import RecentActivity from './components/RecentActivity';
-import { DuplicateAction, DeleteAction, LastUpdated, Name, Status } from './components/ListComponents';
+import { DeleteAction, DuplicateAction, LastUpdated, Name, Status } from './components/ListComponents';
 import DuplicateTemplateModal from './components/editorActions/DuplicateTemplateModal';
 import { routeNamespace } from './constants/routes';
 import styles from './ListPage.module.scss';
