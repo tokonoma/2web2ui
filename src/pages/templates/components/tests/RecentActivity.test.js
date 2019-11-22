@@ -84,25 +84,26 @@ describe('RecentActivity', () => {
     expect(wrapper.find('Panel').length).toBe(4);
   });
 
-  it('invokes the `onToggleDuplicateModal` propr when `DuplicateAction` is clicked', function () {
-    const mockToggleDeleteModal = jest.fn();
-    const mockToggleDuplicateModal = jest.fn();
+  // TODO - reintroduce when duplicating templates is reintroduced on the list page
+  // it('invokes the `onToggleDuplicateModal` propr when `DuplicateAction` is clicked', function () {
+  //   const mockToggleDeleteModal = jest.fn();
+  //   const mockToggleDuplicateModal = jest.fn();
 
-    const wrapper = subject({
-      templates: [
-        publishedWithDraftTemplate,
-        publishedTemplate,
-        draftTemplate,
-        draftTemplate
-      ],
-      onToggleDeleteModal: mockToggleDeleteModal,
-      onToggleDuplicateModal: mockToggleDuplicateModal
-    });
+  //   const wrapper = subject({
+  //     templates: [
+  //       publishedWithDraftTemplate,
+  //       publishedTemplate,
+  //       draftTemplate,
+  //       draftTemplate
+  //     ],
+  //     onToggleDeleteModal: mockToggleDeleteModal,
+  //     onToggleDuplicateModal: mockToggleDuplicateModal
+  //   });
 
-    wrapper.find('DuplicateAction').first().simulate('click');
-    wrapper.find('DeleteAction').first().simulate('click');
+  //   wrapper.find('DuplicateAction').first().simulate('click');
+  //   wrapper.find('DeleteAction').first().simulate('click');
 
-    expect(mockToggleDeleteModal).toHaveBeenCalled();
-    expect(mockToggleDuplicateModal).toHaveBeenCalled();
-  });
+  //   expect(mockToggleDeleteModal).toHaveBeenCalled();
+  //   expect(mockToggleDuplicateModal).toHaveBeenCalled();
+  // });
 });
