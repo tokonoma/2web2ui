@@ -17,14 +17,14 @@ export default class SettingsForm extends React.Component {
       draft,
       updateDraft,
       parsedTestData,
-      subaccountId,
+      template,
       showAlert,
       content,
       setHasSaved
     } = this.props;
 
     const { subject: _subject, from: _from, reply_to: _reply_to, ...rest } = content; //content object has updated values for html, text etc, provided by useEditorContext
-
+    const subaccountId = template.subaccount_id;
     values.content = { ...values.content , ...rest };
 
     return updateDraft({
@@ -60,6 +60,7 @@ export default class SettingsForm extends React.Component {
       isPublishedMode,
       draft
     } = this.props;
+
     const canViewSubaccountSection = hasSubaccounts && canViewSubaccount;
     const fromEmailHelpText = !domainsLoading && !domains.length ? (subaccountId ? 'The selected subaccount does not have any verified sending domains.' : 'You do not have any verified sending domains to use.') : null;
 
