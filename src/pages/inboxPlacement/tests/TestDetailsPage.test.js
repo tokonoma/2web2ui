@@ -8,7 +8,8 @@ describe('Page: Single Inbox Placement Test', () => {
   const subject = ({ ...props }) => {
     const defaults = {
       getInboxPlacementTest: jest.fn(),
-      getInboxPlacementByProviders: jest.fn(),
+      getInboxPlacementByProvider: jest.fn(),
+      getInboxPlacementByRegion: jest.fn(),
       getInboxPlacementTestContent: jest.fn(),
       tabIndex: 0,
       id: 0,
@@ -28,16 +29,16 @@ describe('Page: Single Inbox Placement Test', () => {
 
   it('calls getInboxPlacementTest on load', () => {
     const getInboxPlacementTest = jest.fn().mockReturnValue({});
-    const getInboxPlacementByProviders = jest.fn().mockReturnValue({});
-    const getInboxPlacementByRegions = jest.fn().mockReturnValue({});
+    const getInboxPlacementByProvider = jest.fn().mockReturnValue({});
+    const getInboxPlacementByRegion = jest.fn().mockReturnValue({});
     const getInboxPlacementTestContent = jest.fn().mockReturnValue({});
 
     mount(<TestDetailsPage
       details={{}}
       content={{}}
       getInboxPlacementTest={getInboxPlacementTest}
-      getInboxPlacementByProviders={getInboxPlacementByProviders}
-      getInboxPlacementByRegions={getInboxPlacementByRegions}
+      getInboxPlacementByProvider={getInboxPlacementByProvider}
+      getInboxPlacementByRegion={getInboxPlacementByRegion}
       getInboxPlacementTestContent={getInboxPlacementTestContent}
       id={101}
       tabIndex={1} //not working nicely with tabIndex=0; TestDetails component
@@ -45,7 +46,7 @@ describe('Page: Single Inbox Placement Test', () => {
       StopTestComponent={StopTest}/>);
 
     expect(getInboxPlacementTest).toHaveBeenCalled();
-    expect(getInboxPlacementByProviders).toHaveBeenCalled();
+    expect(getInboxPlacementByProvider).toHaveBeenCalled();
     expect(getInboxPlacementTestContent).toHaveBeenCalled();
   });
 
@@ -86,8 +87,8 @@ describe('Page: Single Inbox Placement Test', () => {
       content={{}}
       history={mockHistory}
       getInboxPlacementTest={jest.fn()}
-      getInboxPlacementByProviders={jest.fn()}
-      getInboxPlacementByRegions={jest.fn()}
+      getInboxPlacementByProvider={jest.fn()}
+      getInboxPlacementByRegion={jest.fn()}
       getInboxPlacementTestContent={jest.fn()}
       StopTestComponent={StopTest}
     />);
