@@ -6,7 +6,7 @@ import { Templates } from 'src/components/images';
 import PageLink from 'src/components/pageLink';
 import { resolveTemplateStatus } from 'src/helpers/templates';
 import RecentActivity from './components/RecentActivity';
-import { DeleteAction, LastUpdated, Name, Status } from './components/ListComponents';
+import { DuplicateAction, DeleteAction, LastUpdated, Name, Status } from './components/ListComponents';
 import DuplicateTemplateModal from './components/editorActions/DuplicateTemplateModal';
 import { routeNamespace } from './constants/routes';
 import styles from './ListPage.module.scss';
@@ -55,7 +55,7 @@ export default class ListPage extends Component {
     this.setState({ showDuplicateModal: true });
 
     if (isPublished) {
-      return getPublished(template.id)
+      return getPublished(template.id, template.subaccount_id)
         .then((res) => {
           this.setState({
             templateToDuplicate: res,
@@ -64,7 +64,7 @@ export default class ListPage extends Component {
         });
     }
 
-    return getDraft(template.id)
+    return getDraft(template.id, template.subaccount_id)
       .then((res) => {
         this.setState({
           templateToDuplicate: res,
@@ -124,11 +124,10 @@ export default class ListPage extends Component {
       {
         component: (template) => (
           <span className={styles.Actions}>
-            {/* TODO - reintroduce when backend discrepancy can be addressed between list and templates endpoints */}
-            {/* <DuplicateAction
+            <DuplicateAction
               onClick={() => this.toggleDuplicateModal(template)}
               data-id="table-button-duplicate"
-            /> */}
+            />
 
             <DeleteAction
               onClick={() => this.toggleDeleteModal(template)}
