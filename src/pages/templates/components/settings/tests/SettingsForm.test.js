@@ -123,16 +123,18 @@ describe('SettingsForm', () => {
         pristine: false,
         updateDraft: mockUpdateDraft,
         parsedTestData,
-        draft: { id: 'foo' },
+        draft: { id: 'foo', subaccount_id: 123 },
         showAlert: mockAlert,
         setHasSaved: mockSetHasSaved
       });
       await wrapper.find('form').simulate('submit');
-      expect(mockUpdateDraft).toHaveBeenCalledWith({ id: 'foo', parsedTestData,
+      expect(mockUpdateDraft).toHaveBeenCalledWith({
+        id: 'foo',
+        parsedTestData,
         content: {
           'html': '<p>Hello</p>',
           'text': ''
-        }}, undefined);
+        }}, 123);
       expect(mockAlert).toHaveBeenCalledWith({ type: 'success', message: 'Template settings updated.' });
       expect(mockSetHasSaved).toHaveBeenCalledWith(true);
     });
@@ -143,14 +145,15 @@ describe('SettingsForm', () => {
         valid: true,
         pristine: false,
         updateDraft: mockUpdateDraft,
-        draft: { id: 'foo' },
-        subaccountId: 101
+        draft: { id: 'foo', subaccount_id: 123 }
       });
       wrapper.find('form').simulate('submit');
-      expect(mockUpdateDraft).toHaveBeenCalledWith({ id: 'foo', content: {
-        'html': '<p>Hello</p>',
-        'text': ''
-      }}, 101);
+      expect(mockUpdateDraft).toHaveBeenCalledWith({
+        id: 'foo',
+        content: {
+          'html': '<p>Hello</p>',
+          'text': ''
+        }}, 123);
     });
   });
 });

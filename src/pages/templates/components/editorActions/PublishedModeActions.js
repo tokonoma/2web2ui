@@ -14,6 +14,7 @@ import DuplicateTemplateModal from './DuplicateTemplateModal';
 const PublishedModeActions = () => {
   const {
     template,
+    published,
     createTemplate,
     showAlert,
     content,
@@ -102,7 +103,7 @@ const PublishedModeActions = () => {
         <DuplicateTemplateModal
           open={isDuplicateModalOpen}
           onClose={handleModalClose}
-          template={template}
+          template={published}
           contentToDuplicate={content}
           testDataToDuplicate={testData}
           createTemplate={createTemplate}

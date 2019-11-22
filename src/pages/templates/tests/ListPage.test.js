@@ -79,9 +79,9 @@ describe('ListPage', () => {
   it('deletes template upon confirmation', async () => {
     const delFn = jest.fn(() => Promise.resolve());
     const wrapper = subject({ deleteTemplate: delFn });
-    wrapper.setState({ showDeleteModal: true, templateToDelete: { id: 'foo', name: 'Bar' }});
+    wrapper.setState({ showDeleteModal: true, templateToDelete: { id: 'foo', name: 'Bar', subaccount_id: 123 }});
     await wrapper.find('DeleteModal').prop('onDelete')();
-    expect(delFn).toHaveBeenCalledWith({ id: 'foo' });
+    expect(delFn).toHaveBeenCalledWith({ id: 'foo', subaccountId: 123 });
   });
 
   it('shows alert after delete and refreshes list', async () => {
@@ -102,8 +102,8 @@ describe('ListPage', () => {
       getTestData: jest.fn()
     });
 
-    wrapper.instance().toggleDuplicateModal({ published: true });
-    expect(mockGetPublished).toHaveBeenCalled();
+    wrapper.instance().toggleDuplicateModal({ published: true, id: 'foo', subaccount_id: 'bar' });
+    expect(mockGetPublished).toHaveBeenCalledWith('foo', 'bar');
   });
 
   it('invokes `getDraft()` when the template is NOT in published mode when toggling the duplicate modal', () => {
@@ -113,8 +113,8 @@ describe('ListPage', () => {
       getTestData: jest.fn()
     });
 
-    wrapper.instance().toggleDuplicateModal({ published: false });
-    expect(mockGetDraft).toHaveBeenCalled();
+    wrapper.instance().toggleDuplicateModal({ published: false, id: 'foo', subaccount_id: 'bar' });
+    expect(mockGetDraft).toHaveBeenCalledWith('foo', 'bar');
   });
 
   it('shows an alert after duplication and refreshes the list', async () => {

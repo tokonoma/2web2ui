@@ -9,12 +9,11 @@ const DeleteTemplateModal = (props) => {
   const {
     deleteTemplate,
     isDeletePending,
-    subaccountId,
-    draft
+    template
   } = useEditorContext();
   const [hasSuccessRedirect, setSuccessRedirect] = useState(false);
   const handleDelete = () => {
-    deleteTemplate({ id: draft.id, subaccountId })
+    deleteTemplate({ id: template.id, subaccountId: template.subaccount_id })
       .then(() => setSuccessRedirect(true));
   };
 

@@ -19,6 +19,9 @@ describe('SendTestEmailButton', () => {
           id: '123456'
         }
       },
+      template: {
+        subaccount_id: '123'
+      },
       ...editorState
     });
 
@@ -115,7 +118,7 @@ describe('SendTestEmailButton', () => {
         wrapper,
         sendPreview,
         showAlert
-      } = openModal();
+      } = openModal({ template: { subaccount_id: '123' }});
 
       return promise.then(() => {
         getMultiEmailField(wrapper).simulate('change', { target: { value: 'hello@me.com' }});
@@ -123,7 +126,8 @@ describe('SendTestEmailButton', () => {
         wrapper.find('form').simulate('submit', { preventDefault: jest.fn() });
 
         expect(wrapper.find('PanelLoading')).toExist();
-        expect(sendPreview).toHaveBeenCalled();
+        // The subaccount ID is passed with preview requests as well
+        expect(sendPreview).toHaveBeenCalledWith({ 'emails': ['hello@me.com'], 'from': undefined, 'id': '123456', 'mode': 'draft', 'subaccountId': '123' });
 
         return promise.then(() => {
           expect(wrapper.find('PanelLoading')).not.toExist();

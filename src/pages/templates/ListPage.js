@@ -30,9 +30,9 @@ export default class ListPage extends Component {
       listTemplates,
       showAlert
     } = this.props;
-    const { id, name } = this.state.templateToDelete;
+    const { id, name, subaccount_id } = this.state.templateToDelete;
 
-    return deleteTemplate({ id })
+    return deleteTemplate({ id, subaccountId: subaccount_id })
       .then(() => {
         showAlert({ type: 'success', message: `Template ${name} deleted` });
         this.toggleDeleteModal();
@@ -55,7 +55,7 @@ export default class ListPage extends Component {
     this.setState({ showDuplicateModal: true });
 
     if (isPublished) {
-      return getPublished(template.id)
+      return getPublished(template.id, template.subaccount_id)
         .then((res) => {
           this.setState({
             templateToDuplicate: res,
@@ -64,7 +64,7 @@ export default class ListPage extends Component {
         });
     }
 
-    return getDraft(template.id)
+    return getDraft(template.id, template.subaccount_id)
       .then((res) => {
         this.setState({
           templateToDuplicate: res,

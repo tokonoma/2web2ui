@@ -45,7 +45,8 @@ describe('Action Creator: Templates', () => {
     const data = {
       id: 'id',
       parsedTestData: { test: 'data' },
-      form: 'data'
+      form: 'data',
+      sharedWithSubaccounts: false
     };
     mockStore.dispatch(templates.create(data));
     expect(mockStore.getActions()).toMatchSnapshot();
@@ -101,7 +102,6 @@ describe('Action Creator: Templates', () => {
     it('dispatches create template with passed in data', async () => {
       const action = templates.create({
         id: 'my-id',
-        assignTo: 'shared',
         subaccount: 123,
         content: {
           html: '<p>Hello world</p>'
@@ -110,7 +110,8 @@ describe('Action Creator: Templates', () => {
           substitution_data: {},
           options: {},
           metadata: {}
-        }
+        },
+        sharedWithSubaccounts: true
       });
 
       await mockStore.dispatch(action);

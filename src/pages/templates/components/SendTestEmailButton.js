@@ -17,8 +17,8 @@ const SendTestEmailButton = () => {
     isPublishedMode,
     match,
     sendPreview,
+    template,
     showAlert,
-    subaccountId,
     parsedTestData,
     updateDraft,
     setHasSaved
@@ -35,6 +35,7 @@ const SendTestEmailButton = () => {
     multiEmailError
   } = useMultiEmailField();
   const templateId = match.params.id;
+  const subaccountId = template.subaccount_id;
   const [isModalOpen, setModalOpen] = useState(false);
   const [isModalLoading, setModalLoading] = useState(false);
   const [fromEmail, setFromEmail] = useState('');
