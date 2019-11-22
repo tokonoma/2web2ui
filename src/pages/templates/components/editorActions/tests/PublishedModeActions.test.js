@@ -20,7 +20,7 @@ describe('PublishedModeActions', () => {
   };
 
   it('renders published actions', () => {
-    expect(subject({ template: { id: '123', subaccount_id: 'abcd' }})).toMatchSnapshot();
+    expect(subject({ published: { id: '123', subaccount_id: 'abcd' }})).toMatchSnapshot();
   });
 
   describe('the DuplicateTemplateModal', () => {
