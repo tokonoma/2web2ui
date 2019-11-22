@@ -15,10 +15,26 @@ expect.extend(matchers); // register custom matchers
 
 Enzyme.configure({ adapter: new Adapter() });
 
-// Fail tests on any warning
-console.error = (message) => {
+// this is just a little hack to silence a warning that we'll get until we
+// upgrade to 16.9: https://github.com/facebook/react/pull/14853
+const originalError = console.error = (message) => {
+  // Fail tests on any warning
   throw new Error(message);
 };
+
+beforeAll(() => {
+  console.error = (...args) => {
+    if (/Warning.*not wrapped in act/.test(args[0])) {
+      return;
+    }
+
+    originalError.call(console, ...args);
+  };
+});
+
+afterAll(() => {
+  console.error = originalError;
+});
 
 // mock out a file that uses require.context under the hood
 jest.mock('src/components/notifications/staticMarkdownNotifications', () => [
@@ -34,22 +50,6 @@ jest.mock('src/components/notifications/staticMarkdownNotifications', () => [
 
 setupPortals();
 
-// this is just a little hack to silence a warning that we'll get until we
-// upgrade to 16.9: https://github.com/facebook/react/pull/14853
-const originalError = console.error;
-
-beforeAll(() => {
-  console.error = (...args) => {
-    if (/Warning.*not wrapped in act/.test(args[0])) {
-      return;
-    }
-    originalError.call(console, ...args);
-  };
-});
-
-afterAll(() => {
-  console.error = originalError;
-});
 
 beforeEach(() => {
   // Verifies that at least one assertion is called during a test
