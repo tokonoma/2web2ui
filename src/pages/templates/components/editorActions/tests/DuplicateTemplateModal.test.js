@@ -111,7 +111,8 @@ describe('DuplicateTemplateModal', () => {
       options: {
         myOption: true
       },
-      shared_with_subaccounts: false
+      shared_with_subaccounts: false,
+      subaccount_id: 123
     };
 
     const wrapper = subject({
@@ -131,7 +132,8 @@ describe('DuplicateTemplateModal', () => {
       content: mockContent,
       options: mockTemplate.options,
       parsedTestData: mockTestData,
-      shared_with_subaccounts: mockTemplate.shared_with_subaccounts
+      shared_with_subaccounts: mockTemplate.shared_with_subaccounts,
+      subaccount: mockTemplate.subaccount_id
     });
 
     return promise.then(() => {
