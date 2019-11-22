@@ -12,6 +12,7 @@ const PanelLoading = (props) => {
       className={styles.Loading}
       style={{ minHeight }}
       accent={accent}
+      data-id="panel-loading"
     >
       <Loading />
     </Panel>

@@ -122,6 +122,7 @@ const SendTestEmailButton = () => {
         open={isModalOpen}
         showCloseButton={true}
         onClose={handleModalClose}
+        data-id="send-test-email-modal"
       >
         {isModalLoading && <PanelLoading/>}
 
@@ -133,7 +134,7 @@ const SendTestEmailButton = () => {
           >
             <p>Verify your email renders as expected in the inbox by sending a quick test.</p>
 
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} data-id="send-test-email-form">
               <MultiEmailField
                 id="multi-email-email-to"
                 label="To"

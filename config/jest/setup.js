@@ -4,6 +4,7 @@ import raf from './tempPolyfills';
 import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import '@testing-library/jest-dom/extend-expect';
+import { configure } from '@testing-library/react';
 import * as matchers from './matchers';
 import setupPortals from 'src/__testHelpers__/setupPortals';
 
@@ -14,6 +15,11 @@ import 'jest-enzyme';
 expect.extend(matchers); // register custom matchers
 
 Enzyme.configure({ adapter: new Adapter() });
+
+// React testing library configuration
+configure({
+  testIdAttribute: 'data-id' // Overriding the default test ID used by `getByTestId` matcher - `data-testid` isn't used so we can also use these attributes for analytics tagging
+});
 
 // this is just a little hack to silence a warning that we'll get until we
 // upgrade to 16.9: https://github.com/facebook/react/pull/14853
