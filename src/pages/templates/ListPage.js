@@ -30,9 +30,9 @@ export default class ListPage extends Component {
       listTemplates,
       showAlert
     } = this.props;
-    const { id, name } = this.state.templateToDelete;
+    const { id, name, subaccount_id } = this.state.templateToDelete;
 
-    return deleteTemplate({ id })
+    return deleteTemplate({ id, subaccountId: subaccount_id })
       .then(() => {
         showAlert({ type: 'success', message: `Template ${name} deleted` });
         this.toggleDeleteModal();
