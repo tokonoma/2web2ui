@@ -7,7 +7,7 @@ import styles from './GettingStartedGuide.module.scss';
 import { BreadCrumbs, BreadCrumbsItem } from 'src/components';
 import { GuideListItem, GuideListItemTitle, GuideListItemDescription } from './GuideListItem';
 
-export const GettingStartedGuide = ({ isGuideAtBottom, moveGuideAtBottom }) => {
+export const GettingStartedGuide = ({ isGuideAtBottom, moveGuideAtBottom, storeStepName, stepName: storedStepName }) => {
   const breadCrumbsItems = {
     'Features': ['Features'],
     'Sending': ['Features', 'Sending'],
@@ -20,7 +20,7 @@ export const GettingStartedGuide = ({ isGuideAtBottom, moveGuideAtBottom }) => {
     onClick: moveGuideAtBottom
   }];
   //stepName could be Features,Sending,Show Me Sparkpost, Let's Code
-  const [stepName, setStepName] = useState('Features');
+  const [stepName, setStepName] = useState(storedStepName || 'Features');
   const guideHeadingRef = useRef(null);
   useEffect(() => {
     if (guideHeadingRef.current) { guideHeadingRef.current.focus(); }
@@ -34,6 +34,11 @@ export const GettingStartedGuide = ({ isGuideAtBottom, moveGuideAtBottom }) => {
     ))}
   </BreadCrumbs>);
 
+  const setAndStoreStepName = (stepName) => {
+    storeStepName(stepName);
+    setStepName(stepName);
+  };
+
   const renderStep = () => {
     switch (stepName) {
       case 'Features':
@@ -46,7 +51,7 @@ export const GettingStartedGuide = ({ isGuideAtBottom, moveGuideAtBottom }) => {
                 <CardContent><p className={styles.FeaturesCardContent}>Learn how to send emails, integrate our API into your code, and make the most of our powerful analytics.</p></CardContent>
                 <CardActions>
                   <ButtonWrapper>
-                    <Button color='orange' onClick={() => setStepName('Sending')}>Start Sending</Button>
+                    <Button color='orange' onClick={() => setAndStoreStepName('Sending')}>Start Sending</Button>
                   </ButtonWrapper>
                 </CardActions>
               </Card>
@@ -65,7 +70,7 @@ export const GettingStartedGuide = ({ isGuideAtBottom, moveGuideAtBottom }) => {
                 <CardContent><p className={styles.FeaturesCardContent}>Send your first email in one click and dive right into what SparkPost can do for your email strategy </p></CardContent>
                 <CardActions>
                   <ButtonWrapper>
-                    <Button color='orange' onClick={() => setStepName('Show Me SparkPost')} className={styles.SendingStepButtons}>Show Me SparkPost</Button>
+                    <Button color='orange' onClick={() => setAndStoreStepName('Show Me SparkPost')} className={styles.SendingStepButtons}>Show Me SparkPost</Button>
                   </ButtonWrapper>
                 </CardActions>
               </Card>
@@ -75,7 +80,7 @@ export const GettingStartedGuide = ({ isGuideAtBottom, moveGuideAtBottom }) => {
                 <CardContent><p className={styles.FeaturesCardContent}>Ready to integrate via SMTP or API? We'll get you set up ASAP so you can start building with SparkPost</p></CardContent>
                 <CardActions>
                   <ButtonWrapper>
-                    <Button color='orange' onClick={() => setStepName('Let\'s Code')} className={styles.SendingStepButtons}>Let's Code</Button>
+                    <Button color='orange' onClick={() => setAndStoreStepName('Let\'s Code')} className={styles.SendingStepButtons}>Let's Code</Button>
                   </ButtonWrapper>
                 </CardActions>
               </Card>
