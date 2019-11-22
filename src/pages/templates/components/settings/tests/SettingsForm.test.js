@@ -123,8 +123,7 @@ describe('SettingsForm', () => {
         pristine: false,
         updateDraft: mockUpdateDraft,
         parsedTestData,
-        draft: { id: 'foo' },
-        template: { subaccount_id: 123 },
+        draft: { id: 'foo', subaccount_id: 123 },
         showAlert: mockAlert,
         setHasSaved: mockSetHasSaved
       });
@@ -146,8 +145,7 @@ describe('SettingsForm', () => {
         valid: true,
         pristine: false,
         updateDraft: mockUpdateDraft,
-        draft: { id: 'foo' },
-        template: { subaccount_id: 123 }
+        draft: { id: 'foo', subaccount_id: 123 }
       });
       wrapper.find('form').simulate('submit');
       expect(mockUpdateDraft).toHaveBeenCalledWith({
