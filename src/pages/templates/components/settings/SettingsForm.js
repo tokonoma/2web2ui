@@ -17,14 +17,13 @@ export default class SettingsForm extends React.Component {
       draft,
       updateDraft,
       parsedTestData,
-      template,
       showAlert,
       content,
       setHasSaved
     } = this.props;
 
     const { subject: _subject, from: _from, reply_to: _reply_to, ...rest } = content; //content object has updated values for html, text etc, provided by useEditorContext
-    const subaccountId = template.subaccount_id;
+    const subaccountId = draft.subaccount_id;
     values.content = { ...values.content , ...rest };
 
     return updateDraft({
