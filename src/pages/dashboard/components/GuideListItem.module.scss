@@ -1,4 +1,6 @@
 @import '~@sparkpost/matchbox/src/styles/config.scss';
+@import 'src/styles/status-color';
+
 
 .CheckBoxContainer { 
   width: 40px;
@@ -22,7 +24,7 @@
 }
 
 .CheckCircleIcon{
-  color: green;
+  color: status-color(success);
 }
 
 .GuideListItem{
