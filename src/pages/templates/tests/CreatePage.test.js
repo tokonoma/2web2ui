@@ -51,7 +51,8 @@ describe('CreatePage', () => {
       const formData = {
         name: 'Foo',
         id: 'foo',
-        content: {}
+        content: {},
+        assignTo: 'shared'
       };
       const wrapper = subject({
         createTemplate: mockCreate,
@@ -70,7 +71,41 @@ describe('CreatePage', () => {
             substitution_data: {},
             metadata: {},
             options: {}
-          }
+          },
+          sharedWithSubaccounts: true
+        });
+      });
+    });
+
+    it('does now call create with "sharedWithSubaccounts" when the template is not assign to "shared"', () => {
+      const promise = Promise.resolve();
+      const mockCreate = jest.fn(() => promise);
+      const formData = {
+        name: 'Foo',
+        id: 'foo',
+        content: {},
+        assignTo: 'not "shared"'
+      };
+      const wrapper = subject({
+        createTemplate: mockCreate,
+        history: { push: jest.fn() }
+      });
+
+      wrapper.find('form').simulate('submit', formData);
+
+      return promise.then(() => {
+        expect(mockCreate).toHaveBeenCalledWith({
+          ...formData,
+          content: {
+            ...formData.content,
+            text: ''
+          },
+          parsedTestData: {
+            substitution_data: {},
+            metadata: {},
+            options: {}
+          },
+          sharedWithSubaccounts: false
         });
       });
     });

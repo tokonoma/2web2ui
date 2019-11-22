@@ -132,7 +132,7 @@ describe('DuplicateTemplateModal', () => {
       content: mockContent,
       options: mockTemplate.options,
       parsedTestData: mockTestData,
-      shared_with_subaccounts: mockTemplate.shared_with_subaccounts,
+      sharedWithSubaccounts: mockTemplate.shared_with_subaccounts,
       subaccount: mockTemplate.subaccount_id
     });
 
