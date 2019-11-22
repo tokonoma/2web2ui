@@ -69,6 +69,7 @@ const DuplicateTemplateModal = (props) => {
       createTemplate({
         name: draftName,
         id: draftId,
+        subaccount: template.subaccount_id,
         content: contentToDuplicate,
         parsedTestData: testDataToDuplicate,
         options: template.options,
