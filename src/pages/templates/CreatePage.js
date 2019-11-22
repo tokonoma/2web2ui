@@ -35,6 +35,7 @@ export default class CreatePage extends Component {
     };
     createTemplate({
       ...formData,
+      sharedWithSubaccounts: formData.assignTo === 'shared',
       parsedTestData: testDataBase
     })
       .then(() => {

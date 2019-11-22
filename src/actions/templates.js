@@ -58,7 +58,7 @@ export function getPublished(id, subaccountId) {
 export function create(data) {
   const {
     id,
-    assignTo,
+    sharedWithSubaccounts,
     subaccount,
     content,
     parsedTestData,
@@ -82,7 +82,7 @@ export function create(data) {
           ...formData,
           id,
           content: shapeContent(content),
-          shared_with_subaccounts: assignTo === 'shared'
+          shared_with_subaccounts: sharedWithSubaccounts
         }
       }
     }));

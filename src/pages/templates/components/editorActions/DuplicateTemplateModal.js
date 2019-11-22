@@ -70,10 +70,10 @@ const DuplicateTemplateModal = (props) => {
         name: draftName,
         id: draftId,
         subaccount: template.subaccount_id,
+        sharedWithSubaccounts: template.shared_with_subaccounts,
         content: contentToDuplicate,
         parsedTestData: testDataToDuplicate,
-        options: template.options,
-        shared_with_subaccounts: template.shared_with_subaccounts
+        options: template.options
       })
         .then(() => {
           if (successCallback) {
