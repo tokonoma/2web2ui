@@ -7,7 +7,8 @@ import { ArrowDownward } from '@sparkpost/matchbox-icons';
 describe('GettingStartedGuide', () => {
   const defaultProps = {
     isGuideAtBottom: false,
-    moveGuideAtBottom: jest.fn()
+    moveGuideAtBottom: jest.fn(),
+    storeStepName: jest.fn()
   };
 
   const subject = (props) => (shallow(<GettingStartedGuide {...defaultProps} {...props} />));
