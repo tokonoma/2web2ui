@@ -36,31 +36,31 @@ describe('SendTestEmailButton', () => {
 
   it('opens the modal in the loading state and saves the draft when the "Send a Test" button is clicked', () => {
     const mockUpdateDraft = jest.fn(() => Promise.resolve());
-    const { getByText, getByTestId } = subject({
+    const { getByText, queryByTestId } = subject({
       updateDraft: mockUpdateDraft
     });
 
     userEvent.click(getByText('Send a Test'));
 
     expect(mockUpdateDraft).toHaveBeenCalled();
-    expect(getByTestId('panel-loading')).toBeInTheDocument();
+    expect(queryByTestId('panel-loading')).toBeInTheDocument();
   });
 
   it('opens the modal and resolves the loading state after the draft is updated, rendering the form', () => {
     const promise = Promise.resolve();
     const mockUpdateDraft = jest.fn(() => promise);
-    const { getByText, getByLabelText, queryByTestId } = subject({
+    const { queryByText, queryByLabelText, queryByTestId } = subject({
       updateDraft: mockUpdateDraft
     });
 
-    userEvent.click(getByText('Send a Test'));
+    userEvent.click(queryByText('Send a Test'));
 
     return promise.then(() => {
       expect(queryByTestId('panel-loading')).not.toBeInTheDocument();
-      expect(getByLabelText('To')).toBeInTheDocument();
-      expect(getByLabelText('From')).toBeInTheDocument();
-      expect(getByLabelText('Subject')).toBeInTheDocument();
-      expect(getByText('Send Email')).toBeInTheDocument();
+      expect(queryByLabelText('To')).toBeInTheDocument();
+      expect(queryByLabelText('From')).toBeInTheDocument();
+      expect(queryByLabelText('Subject')).toBeInTheDocument();
+      expect(queryByText('Send Email')).toBeInTheDocument();
     });
   });
 
@@ -72,7 +72,7 @@ describe('SendTestEmailButton', () => {
     return Promise.resolve().then(async () => {
       userEvent.click(getByText('Send Email'));
 
-      expect(getByText('Please enter a valid email address')).toBeInTheDocument();
+      expect(queryByText('Please enter a valid email address')).toBeInTheDocument();
 
       userEvent.click(queryByText('Close'));
 
@@ -93,7 +93,7 @@ describe('SendTestEmailButton', () => {
         getByText,
         queryByText,
         getByLabelText,
-        getByTestId
+        queryByTestId
       } = subject({
         sendPreview: mockSendPreview,
         showAlert: mockShowAlert,
@@ -109,7 +109,7 @@ describe('SendTestEmailButton', () => {
         expect(queryByText('toEmail@sparkpost.com')).toBeInTheDocument(); // The email address is stored in the DOM instead of the `value` attribute
         userEvent.click(getByText('Send Email'));
 
-        expect(getByTestId('panel-loading')).toBeInTheDocument();
+        expect(queryByTestId('panel-loading')).toBeInTheDocument();
         expect(mockSendPreview).toHaveBeenCalledWith({
           id: '123456',
           mode: 'draft',
