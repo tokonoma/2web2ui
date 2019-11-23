@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, cleanup, fireEvent } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import useEditorContext from '../../hooks/useEditorContext';
 import SendTestEmailButton from '../SendTestEmailButton';
@@ -7,8 +7,6 @@ import SendTestEmailButton from '../SendTestEmailButton';
 jest.mock('../../hooks/useEditorContext');
 
 describe('SendTestEmailButton', () => {
-  afterEach(() => cleanup());
-
   const subject = (editorState, props) => {
     useEditorContext.mockReturnValue({
       content: {
