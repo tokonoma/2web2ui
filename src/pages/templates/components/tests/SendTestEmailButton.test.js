@@ -24,6 +24,9 @@ describe('SendTestEmailButton', () => {
           id: '123456'
         }
       },
+      template: {
+        subaccount_id: 123
+      },
       isPublishedMode: false,
       updateDraft: jest.fn(() => Promise.resolve()),
       setHasSaved: jest.fn(),
@@ -114,7 +117,7 @@ describe('SendTestEmailButton', () => {
           mode: 'draft',
           emails: ['toEmail@sparkpost.com'],
           from: 'nick@bounce.uat.sparkpost.com',
-          subaccountId: undefined
+          subaccountId: 123
         });
 
         return sendPreviewPromise.then(() => {
