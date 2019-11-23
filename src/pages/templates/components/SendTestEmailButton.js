@@ -134,7 +134,7 @@ const SendTestEmailButton = () => {
           >
             <p>Verify your email renders as expected in the inbox by sending a quick test.</p>
 
-            <form onSubmit={handleSubmit} data-id="send-test-email-form">
+            <form onSubmit={handleSubmit}>
               <MultiEmailField
                 id="multi-email-email-to"
                 label="To"
