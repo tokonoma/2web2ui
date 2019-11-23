@@ -114,7 +114,6 @@ describe('SendTestEmailButton', () => {
           mode: 'draft',
           emails: ['toEmail@sparkpost.com'],
           from: 'nick@bounce.uat.sparkpost.com',
-          subject: 'Mock Subject',
           subaccountId: undefined
         });
 
