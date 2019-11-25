@@ -99,7 +99,7 @@ export const GettingStartedGuide = ({ isGuideAtBottom, moveGuideAtBottom, storeS
            </GuideListItem>
          </Panel.Section>
         <Panel.Section>
-          <GuideListItem action={{ name: 'Explore Analytics', onClick: () => {} }} itemCompleted={true}>
+          <GuideListItem action={{ name: 'Explore Analytics', onClick: () => {} }}>
             <GuideListItemTitle>
             Explore Analytics
             </GuideListItemTitle>
