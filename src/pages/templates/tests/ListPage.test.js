@@ -1,6 +1,5 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { ROLES } from 'src/constants';
 
 import ListPage from '../ListPage';
 
@@ -9,9 +8,9 @@ describe('ListPage', () => {
     <ListPage
       canModify={true}
       hasSubaccounts={false}
-      listTemplates={() => {}}
-      listSubaccounts={() => {}}
-      subaccounts={[]}
+      isDeletePending={false}
+      showAlert={jest.fn()}
+      listTemplates={jest.fn()}
       loading={false}
       templates={[
         {
@@ -65,25 +64,85 @@ describe('ListPage', () => {
     expect(wrapper.find('Loading')).toExist();
   });
 
-  describe('renders columns', () => {
-    it('with all columns', () => {
-      const wrapper = subject({ hasSubaccounts: true });
-      expect(wrapper.find('TableCollection').prop('columns')).toMatchSnapshot();
+  it('renders delete modal visible', () => {
+    const wrapper = subject();
+    wrapper.setState({ showDeleteModal: true });
+    expect(wrapper.find('DeleteModal').prop('open')).toBe(true);
+  });
+
+  it('renders delete modal hidden', () => {
+    const wrapper = subject();
+    wrapper.setState({ showDeleteModal: false });
+    expect(wrapper.find('DeleteModal').prop('open')).toBe(false);
+  });
+
+  it('deletes template upon confirmation', async () => {
+    const delFn = jest.fn(() => Promise.resolve());
+    const wrapper = subject({ deleteTemplate: delFn });
+    wrapper.setState({ showDeleteModal: true, templateToDelete: { id: 'foo', name: 'Bar', subaccount_id: 123 }});
+    await wrapper.find('DeleteModal').prop('onDelete')();
+    expect(delFn).toHaveBeenCalledWith({ id: 'foo', subaccountId: 123 });
+  });
+
+  it('shows alert after delete and refreshes list', async () => {
+    const delFn = jest.fn(() => Promise.resolve());
+    const alertFn = jest.fn();
+    const listTemplateFn = jest.fn();
+    const wrapper = subject({ deleteTemplate: delFn, showAlert: alertFn, listTemplates: listTemplateFn });
+    wrapper.setState({ showDeleteModal: true, templateToDelete: { id: 'foo', name: 'Bar' }});
+    await wrapper.find('DeleteModal').prop('onDelete')();
+    expect(alertFn).toHaveBeenCalledWith({ type: 'success', message: 'Template Bar deleted' });
+    expect(listTemplateFn).toHaveBeenCalled();
+  });
+
+  it('invokes `getPublished()` when the template is in published mode when toggling the duplicate modal', () => {
+    const mockGetPublished = jest.fn(() => Promise.resolve({ id: 'foo' }));
+    const wrapper = subject({
+      getPublished: mockGetPublished,
+      getTestData: jest.fn()
     });
 
-    it('without subaccount column for reporting users', () => {
-      const wrapper = subject({ hasSubaccounts: true, userAccessLevel: ROLES.SUBACCOUNT_REPORTING });
-      const columns = wrapper.find('TableCollection').prop('columns');
+    wrapper.instance().toggleDuplicateModal({ published: true, id: 'foo', subaccount_id: 'bar' });
+    expect(mockGetPublished).toHaveBeenCalledWith('foo', 'bar');
+  });
 
-      expect(columns.find((column) => column && column.label === 'Subaccount')).toBeUndefined();
+  it('invokes `getDraft()` when the template is NOT in published mode when toggling the duplicate modal', () => {
+    const mockGetDraft = jest.fn(() => Promise.resolve({ id: 'foo' }));
+    const wrapper = subject({
+      getDraft: mockGetDraft,
+      getTestData: jest.fn()
     });
 
-    it('without subaccount column for account without subaccounts', () => {
-      const wrapper = subject({ hasSubaccounts: false });
-      const columns = wrapper.find('TableCollection').prop('columns');
+    wrapper.instance().toggleDuplicateModal({ published: false, id: 'foo', subaccount_id: 'bar' });
+    expect(mockGetDraft).toHaveBeenCalledWith('foo', 'bar');
+  });
 
-      expect(columns.find((column) => column && column.label === 'Subaccount')).toBeUndefined();
+  it('shows an alert after duplication and refreshes the list', async () => {
+    const mockShowAlert = jest.fn();
+    const mockListTemplates = jest.fn();
+    const wrapper = subject({
+      showAlert: mockShowAlert,
+      listTemplates: mockListTemplates
     });
+    wrapper.setState({
+      templateToDuplicate: {
+        name: 'Hello'
+      }
+    });
+
+    await wrapper.find('DuplicateTemplateModal').prop('successCallback')();
+
+    expect(mockShowAlert).toHaveBeenCalledWith({
+      type: 'success',
+      message: 'Template Hello duplicated'
+    });
+    expect(mockListTemplates).toHaveBeenCalled();
+  });
+
+  it('does not render column with canModify false', () => {
+    const wrapper = subject({ canModify: false });
+    const headers = wrapper.find('TableCollection').prop('columns').map(({ label }) => label);
+    expect(headers).toEqual(['Template Name', 'Status', 'Last Updated']);
   });
 
   describe('renders error banner', () => {
@@ -101,31 +160,6 @@ describe('ListPage', () => {
       });
 
       expect(wrapper.find('ApiErrorBanner')).toHaveProp('reload', listTemplates);
-    });
-  });
-
-  describe('renders rows', () => {
-    const renderRows = (props = {}) => {
-      const wrapper = subject(props);
-      const getRowData = wrapper.find('TableCollection').prop('getRowData');
-      const rows = wrapper.find('TableCollection').prop('rows');
-
-      return rows.map(getRowData);
-    };
-
-    it('with all columns', () => {
-      const rows = renderRows({ hasSubaccounts: true });
-      expect(rows).toMatchSnapshot();
-    });
-
-    it('without subaccount column for reporting users', () => {
-      const rows = renderRows({ hasSubaccounts: true, userAccessLevel: ROLES.SUBACCOUNT_REPORTING });
-      expect(rows[0]).toHaveLength(4);
-    });
-
-    it('without subaccount column for account without subaccounts', () => {
-      const rows = renderRows({ hasSubaccounts: false });
-      expect(rows[0]).toHaveLength(4);
     });
   });
 });

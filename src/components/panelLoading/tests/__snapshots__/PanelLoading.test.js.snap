@@ -4,6 +4,7 @@ exports[`Panel Loading render 1`] = `
 <Panel
   accent={false}
   className="Loading"
+  data-id="panel-loading"
   style={
     Object {
       "minHeight": "400px",

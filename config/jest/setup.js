@@ -3,6 +3,8 @@
 import raf from './tempPolyfills';
 import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
+import '@testing-library/jest-dom/extend-expect';
+import { configure } from '@testing-library/react';
 import * as matchers from './matchers';
 import setupPortals from 'src/__testHelpers__/setupPortals';
 
@@ -14,10 +16,33 @@ expect.extend(matchers); // register custom matchers
 
 Enzyme.configure({ adapter: new Adapter() });
 
-// Fail tests on any warning
-console.error = (message) => {
+// React testing library configuration
+configure({
+  testIdAttribute: 'data-id' // Overriding the default test ID used by `getByTestId` matcher - `data-testid` isn't used so we can also use these attributes for analytics tagging
+});
+
+// this is just a little hack to silence a warning that we'll get with React Testing Library get
+//  until we upgrade to React 16.9. See:
+// 1. https://github.com/facebook/react/pull/14853
+// 2. and from the official React Testing Library docs https://github.com/testing-library/react-testing-library#suppressing-unnecessary-warnings-on-react-dom-168
+const originalError = console.error = (message) => {
+  // Fail tests on any warning
   throw new Error(message);
 };
+
+beforeAll(() => {
+  console.error = (...args) => {
+    if (/Warning.*not wrapped in act/.test(args[0])) {
+      return;
+    }
+
+    originalError.call(console, ...args);
+  };
+});
+
+afterAll(() => {
+  console.error = originalError;
+});
 
 // mock out a file that uses require.context under the hood
 jest.mock('src/components/notifications/staticMarkdownNotifications', () => [
@@ -32,6 +57,7 @@ jest.mock('src/components/notifications/staticMarkdownNotifications', () => [
 ]);
 
 setupPortals();
+
 
 beforeEach(() => {
   // Verifies that at least one assertion is called during a test

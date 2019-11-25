@@ -87,7 +87,7 @@ describe('AccountDropdown', () => {
     });
 
     it('should toggle dropdown on click', () => {
-      consumer.children().find('UnstyledLink').simulate('click');
+      consumer.children().find('[data-id="nav-button-accounts"]').simulate('click');
       expect(wrapper).toHaveState({ open: true });
     });
   });

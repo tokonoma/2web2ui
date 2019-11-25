@@ -1,0 +1,55 @@
+import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
+import { Panel } from '@sparkpost/matchbox';
+import PanelLoading from './PanelLoading';
+
+<Meta title="Panels|Loading" component={PanelLoading}/>
+
+# Panel Loading
+
+Use the `<PanelLoading/>` component to create a loading state within a `<Panel/>` container. This is particularly useful within `<Modal/>` components.
+
+## Props
+
+<Props of={PanelLoading}/>
+
+## Examples
+
+### Default
+
+<Preview>
+  <Story name="default">
+    <Panel>
+      <PanelLoading/>
+    </Panel>
+  </Story>
+</Preview>
+
+### With an Accent
+
+<Story name="with an accent">
+  <Panel>
+    <PanelLoading accent/>
+  </Panel>
+</Story>
+
+### With a Shorter Min Height
+
+<Story name="with a shorter min height">
+  <Panel>
+    <PanelLoading minHeight="200px"/>
+  </Panel>
+</Story>
+
+## Usage
+
+```js
+import React from 'react';
+import { Panel } from '@sparkpost/matchbox';
+import { PanelLoading } from 'src/components';
+
+const MyComponent = () => (
+  <Panel>
+    <PanelLoading accent/>
+  </Panel>
+)
+```

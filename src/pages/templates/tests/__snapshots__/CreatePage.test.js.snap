@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Template CreatePage Duplicate Template should render correctly 1`] = `
+exports[`CreatePage renders correctly 1`] = `
 <Page
   breadcrumbAction={
     Object {
@@ -10,76 +10,30 @@ exports[`Template CreatePage Duplicate Template should render correctly 1`] = `
     }
   }
   empty={Object {}}
-  primaryAction={
-    Object {
-      "content": "Save Template",
-      "disabled": undefined,
-      "onClick": undefined,
-    }
-  }
-  title="Duplicate Template"
+  title="Create New Template"
 >
-  <Grid>
-    <Grid.Column
-      lg={4}
-      xs={12}
+  <p
+    className="LeadText"
+  >
+    To get started, first provide some basic details about your new template before adding in content.
+  </p>
+  <form
+    onSubmit={[Function]}
+  >
+    <Panel>
+      <Panel.Section>
+        <TemplateCreateForm />
+      </Panel.Section>
+    </Panel>
+    <Button
+      className="NextButton"
+      disabled={true}
+      primary={true}
+      size="default"
+      type="submit"
     >
-      <Connect(Form)
-        name="templateCreate"
-        newTemplate={true}
-      />
-    </Grid.Column>
-    <Grid.Column
-      lg={8}
-      xs={12}
-    >
-      <ContentEditor
-        action={<ImportSnippetLink />}
-        contentOnly={true}
-      />
-    </Grid.Column>
-  </Grid>
-</Page>
-`;
-
-exports[`Template CreatePage New Template should render correctly 1`] = `
-<Page
-  breadcrumbAction={
-    Object {
-      "Component": [Function],
-      "content": "Templates",
-      "to": "/templates",
-    }
-  }
-  empty={Object {}}
-  primaryAction={
-    Object {
-      "content": "Save Template",
-      "disabled": undefined,
-      "onClick": undefined,
-    }
-  }
-  title="New Template"
->
-  <Grid>
-    <Grid.Column
-      lg={4}
-      xs={12}
-    >
-      <Connect(Form)
-        name="templateCreate"
-        newTemplate={true}
-      />
-    </Grid.Column>
-    <Grid.Column
-      lg={8}
-      xs={12}
-    >
-      <ContentEditor
-        action={<ImportSnippetLink />}
-        contentOnly={true}
-      />
-    </Grid.Column>
-  </Grid>
+      Next
+    </Button>
+  </form>
 </Page>
 `;

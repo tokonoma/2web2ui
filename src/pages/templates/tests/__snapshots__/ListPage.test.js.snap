@@ -1,27 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ListPage renders columns with all columns 1`] = `
-Array [
-  Object {
-    "label": "Name",
-    "sortKey": "name",
-  },
-  Object {
-    "label": "Status",
-    "sortKey": [Function],
-  },
-  Object {
-    "label": "Subaccount",
-    "sortKey": [Function],
-  },
-  Object {
-    "label": "Last Updated",
-    "sortKey": "last_update_time",
-  },
-  null,
-]
-`;
-
 exports[`ListPage renders correctly 1`] = `
 <Page
   empty={
@@ -37,28 +15,66 @@ exports[`ListPage renders correctly 1`] = `
   primaryAction={
     Object {
       "Component": [Function],
-      "content": "Create Template",
-      "to": "/templates/create",
+      "content": "Create New",
+      "to": "templates/create",
     }
   }
   title="Templates"
 >
+  <RecentActivity
+    onToggleDeleteModal={[Function]}
+    onToggleDuplicateModal={[Function]}
+    templates={
+      Array [
+        Object {
+          "id": "id1",
+          "last_update_time": "2017-08-10T14:15:16+00:00",
+          "name": "subaccount template",
+          "published": true,
+          "shared_with_subaccounts": false,
+          "subaccount_id": 101,
+        },
+        Object {
+          "id": "id2",
+          "last_update_time": "2017-08-10T14:15:16+00:00",
+          "name": "shared template",
+          "published": false,
+          "shared_with_subaccounts": true,
+        },
+        Object {
+          "id": "id3",
+          "last_update_time": "2017-08-10T14:15:16+00:00",
+          "name": "master template",
+          "published": false,
+        },
+      ]
+    }
+  />
+  <h2>
+    All Templates
+  </h2>
   <TableCollection
     columns={
       Array [
         Object {
-          "label": "Name",
-          "sortKey": "name",
+          "key": "list_name",
+          "label": "Template Name",
+          "sortKey": "list_name",
         },
         Object {
+          "key": "status",
           "label": "Status",
           "sortKey": [Function],
         },
         Object {
+          "key": "lastupdated",
           "label": "Last Updated",
           "sortKey": "last_update_time",
         },
-        null,
+        Object {
+          "key": "actions",
+          "width": 20,
+        },
       ]
     }
     defaultSortColumn="last_update_time"
@@ -104,122 +120,29 @@ exports[`ListPage renders correctly 1`] = `
         },
       ]
     }
+    saveCsv={false}
+  />
+  <DeleteModal
+    content={
+      <p>
+        Both the draft and published versions of this template will be deleted.
+      </p>
+    }
+    isPending={false}
+    onCancel={[Function]}
+    onDelete={[Function]}
+    open={false}
+    title="Are you sure you want to delete this template?"
+  />
+  <DuplicateTemplateModal
+    contentToDuplicate={null}
+    isPublishedMode={null}
+    onClose={[Function]}
+    open={false}
+    showAlert={[MockFunction]}
+    successCallback={[Function]}
+    template={null}
+    testDataToDuplicate={null}
   />
 </Page>
-`;
-
-exports[`ListPage renders rows with all columns 1`] = `
-Array [
-  Array [
-    <Name
-      id="id1"
-      last_update_time="2017-08-10T14:15:16+00:00"
-      name="subaccount template"
-      published={true}
-      shared_with_subaccounts={false}
-      subaccount_id={101}
-    />,
-    <Status
-      id="id1"
-      last_update_time="2017-08-10T14:15:16+00:00"
-      name="subaccount template"
-      published={true}
-      shared_with_subaccounts={false}
-      subaccount_id={101}
-    />,
-    <Subaccount
-      id="id1"
-      last_update_time="2017-08-10T14:15:16+00:00"
-      name="subaccount template"
-      published={true}
-      shared_with_subaccounts={false}
-      subaccount_id={101}
-    />,
-    <LastUpdated
-      id="id1"
-      last_update_time="2017-08-10T14:15:16+00:00"
-      name="subaccount template"
-      published={true}
-      shared_with_subaccounts={false}
-      subaccount_id={101}
-    />,
-    <Actions
-      id="id1"
-      last_update_time="2017-08-10T14:15:16+00:00"
-      name="subaccount template"
-      published={true}
-      shared_with_subaccounts={false}
-      subaccount_id={101}
-    />,
-  ],
-  Array [
-    <Name
-      id="id2"
-      last_update_time="2017-08-10T14:15:16+00:00"
-      name="shared template"
-      published={false}
-      shared_with_subaccounts={true}
-    />,
-    <Status
-      id="id2"
-      last_update_time="2017-08-10T14:15:16+00:00"
-      name="shared template"
-      published={false}
-      shared_with_subaccounts={true}
-    />,
-    <Subaccount
-      id="id2"
-      last_update_time="2017-08-10T14:15:16+00:00"
-      name="shared template"
-      published={false}
-      shared_with_subaccounts={true}
-    />,
-    <LastUpdated
-      id="id2"
-      last_update_time="2017-08-10T14:15:16+00:00"
-      name="shared template"
-      published={false}
-      shared_with_subaccounts={true}
-    />,
-    <Actions
-      id="id2"
-      last_update_time="2017-08-10T14:15:16+00:00"
-      name="shared template"
-      published={false}
-      shared_with_subaccounts={true}
-    />,
-  ],
-  Array [
-    <Name
-      id="id3"
-      last_update_time="2017-08-10T14:15:16+00:00"
-      name="master template"
-      published={false}
-    />,
-    <Status
-      id="id3"
-      last_update_time="2017-08-10T14:15:16+00:00"
-      name="master template"
-      published={false}
-    />,
-    <Subaccount
-      id="id3"
-      last_update_time="2017-08-10T14:15:16+00:00"
-      name="master template"
-      published={false}
-    />,
-    <LastUpdated
-      id="id3"
-      last_update_time="2017-08-10T14:15:16+00:00"
-      name="master template"
-      published={false}
-    />,
-    <Actions
-      id="id3"
-      last_update_time="2017-08-10T14:15:16+00:00"
-      name="master template"
-      published={false}
-    />,
-  ],
-]
 `;

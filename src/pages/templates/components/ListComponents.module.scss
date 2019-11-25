@@ -1,4 +1,5 @@
 @import '~@sparkpost/matchbox/src/styles/config.scss';
+@import 'src/styles/status-color';
 
 .Name {
   margin-bottom: 0;
@@ -16,4 +17,18 @@
 
 .PublishedWithChanges {
   font-style: italic;
+  white-space: nowrap;
+}
+
+.published {
+  white-space: nowrap;
+}
+
+.PublishedIconColor {
+  color: status-color('success');
+}
+
+.Action {
+  padding: spacing('small');
+  display: inline-flex;
 }

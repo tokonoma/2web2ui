@@ -26,7 +26,8 @@
     "react-app",
     "plugin:lodash/recommended",
     "plugin:jest/recommended",
-    "plugin:prettier/recommended"
+    "plugin:prettier/recommended",
+    "plugin:testing-library/recommended"
   ],
   "plugins": ["prettier"]
 }

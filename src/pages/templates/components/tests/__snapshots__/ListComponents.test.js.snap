@@ -1,156 +1,35 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Template List Components Actions should render correct actions when not published 1`] = `
-<div
-  style={
-    Object {
-      "textAlign": "right",
-    }
-  }
+exports[`Template List Components DeleteAction should render correctly 1`] = `
+<Button
+  className="Action"
+  flat={true}
+  onClick={[Function]}
+  size="default"
 >
-  <Popover
-    bottom={true}
-    left={true}
-    right={true}
-    trigger={
-      <Button
-        flat={true}
-        size="default"
-      >
-        <MoreHoriz
-          size={20}
-        />
-      </Button>
-    }
-  >
-    <ActionList
-      actions={
-        Array [
-          Object {
-            "component": [Function],
-            "content": "Edit",
-            "to": "/templates/edit/10?subaccount=101",
-          },
-          Object {
-            "component": [Function],
-            "content": "Preview",
-            "to": "/templates/preview/10?subaccount=101",
-            "visible": true,
-          },
-          Object {
-            "component": [Function],
-            "content": "Preview",
-            "to": "/templates/preview/10/published?subaccount=101",
-            "visible": false,
-          },
-        ]
-      }
-      groupByKey="section"
-    />
-  </Popover>
-</div>
+  <Delete
+    size={16}
+  />
+  <ScreenReaderOnly>
+    Delete Template
+  </ScreenReaderOnly>
+</Button>
 `;
 
-exports[`Template List Components Actions should render correct actions when published 1`] = `
-<div
-  style={
-    Object {
-      "textAlign": "right",
-    }
-  }
+exports[`Template List Components DuplicateAction should render correctly 1`] = `
+<Button
+  className="Action"
+  flat={true}
+  onClick={[Function]}
+  size="default"
 >
-  <Popover
-    bottom={true}
-    left={true}
-    right={true}
-    trigger={
-      <Button
-        flat={true}
-        size="default"
-      >
-        <MoreHoriz
-          size={20}
-        />
-      </Button>
-    }
-  >
-    <ActionList
-      actions={
-        Array [
-          Object {
-            "component": [Function],
-            "content": "Edit",
-            "to": "/templates/edit/10?subaccount=101",
-          },
-          Object {
-            "component": [Function],
-            "content": "Preview",
-            "to": "/templates/preview/10?subaccount=101",
-            "visible": false,
-          },
-          Object {
-            "component": [Function],
-            "content": "Preview",
-            "to": "/templates/preview/10/published?subaccount=101",
-            "visible": true,
-          },
-        ]
-      }
-      groupByKey="section"
-    />
-  </Popover>
-</div>
-`;
-
-exports[`Template List Components Actions should render correct actions with unpublished changes 1`] = `
-<div
-  style={
-    Object {
-      "textAlign": "right",
-    }
-  }
->
-  <Popover
-    bottom={true}
-    left={true}
-    right={true}
-    trigger={
-      <Button
-        flat={true}
-        size="default"
-      >
-        <MoreHoriz
-          size={20}
-        />
-      </Button>
-    }
-  >
-    <ActionList
-      actions={
-        Array [
-          Object {
-            "component": [Function],
-            "content": "Edit Saved Draft",
-            "to": "/templates/edit/10?subaccount=101",
-          },
-          Object {
-            "component": [Function],
-            "content": "Preview Saved Draft",
-            "to": "/templates/preview/10?subaccount=101",
-            "visible": true,
-          },
-          Object {
-            "component": [Function],
-            "content": "Preview Published",
-            "to": "/templates/preview/10/published?subaccount=101",
-            "visible": true,
-          },
-        ]
-      }
-      groupByKey="section"
-    />
-  </Popover>
-</div>
+  <ContentCopy
+    size={16}
+  />
+  <ScreenReaderOnly>
+    Duplicate Template
+  </ScreenReaderOnly>
+</Button>
 `;
 
 exports[`Template List Components LastUpdated should render 1`] = `
@@ -168,35 +47,37 @@ exports[`Template List Components Name should render 1`] = `
   >
     <Link
       replace={false}
-      to="/templates/edit/id-123?subaccount=123"
+      to="/templates/edit/id-123/draft/content?subaccount=123"
     >
       <strong>
         template name
       </strong>
     </Link>
   </p>
-  <p
-    className="Id"
-  >
-    <em>
-      ID: 
-      id-123
-    </em>
-  </p>
 </Fragment>
 `;
 
 exports[`Template List Components Status should render draft 1`] = `
 <Tag>
-  Draft
+  <Edit />
+   
+  <span>
+    Draft
+  </span>
 </Tag>
 `;
 
 exports[`Template List Components Status should render published 1`] = `
 <Tag
-  color="blue"
+  className="published"
 >
-  Published
+  <CheckCircle
+    className="PublishedIconColor"
+  />
+   
+  <span>
+    Published
+  </span>
 </Tag>
 `;
 
@@ -219,19 +100,14 @@ exports[`Template List Components Status should render unpublished changes 1`] =
 >
   <Tag
     className="PublishedWithChanges"
-    color="blue"
   >
-    • Published
+    <CheckCircle
+      className="PublishedIconColor"
+    />
+     
+    <span>
+      Published
+    </span>
   </Tag>
 </Tooltip>
-`;
-
-exports[`Template List Components Subaccount should render 1`] = `
-<Subaccount
-  all={false}
-  id={123}
-  isDefault={false}
-  master={false}
-  receiveAll={false}
-/>
 `;

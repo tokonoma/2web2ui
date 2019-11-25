@@ -5,12 +5,14 @@ import { DetailsPage } from '../DetailsPage';
 describe('Page: Alert Details', () => {
   const props = {
     getAlert: jest.fn(),
+    getIncidents: jest.fn(),
     deleteAlert: jest.fn(() => Promise.resolve()),
     showUIAlert: jest.fn(),
     hasSubaccounts: true,
     listSubaccounts: jest.fn(() => Promise.resolve()),
     subaccounts: [{ id: 1, name: 'My Subaccount' }],
     alert: { name: 'My Alert' },
+    incidents: [],
     loading: false,
     id: 'alert-id',
     deletePending: false,
@@ -30,6 +32,11 @@ describe('Page: Alert Details', () => {
   it('should get subaccounts on mount', () => {
     wrapper = shallow(<DetailsPage {...props} />);
     expect(props.listSubaccounts).toHaveBeenCalled();
+  });
+
+  it('should attempt to load incidents', () => {
+    wrapper = shallow(<DetailsPage {...props} />);
+    expect(props.getIncidents).toHaveBeenCalledWith({ id: 'alert-id' });
   });
 
   it('should render loading component when loading data', () => {

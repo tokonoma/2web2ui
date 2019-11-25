@@ -73,13 +73,13 @@ describe('Page: All Inbox Placement Messages Test', () => {
 
     it('calls getInboxPlacementTest & getInboxPlacementByProviders on load for mailbox-providers', () => {
       subjectMounted();
-      expect(getAllInboxPlacementMessages).toHaveBeenCalled();
+      expect(getAllInboxPlacementMessages).toHaveBeenCalledWith(101, { mailbox_providers: 'gmail.com' });
       expect(getInboxPlacementByProviders).toHaveBeenCalled();
     });
 
     it('calls getInboxPlacementTest & getInboxPlacementByRegions on load for mailbox-providers', () => {
       subjectMounted({ filterType: PLACEMENT_FILTER_TYPES.REGION, filterName: 'europe' });
-      expect(getAllInboxPlacementMessages).toHaveBeenCalled();
+      expect(getAllInboxPlacementMessages).toHaveBeenCalledWith(101, { regions: 'europe' });
       expect(getInboxPlacementByRegions).toHaveBeenCalled();
     });
 

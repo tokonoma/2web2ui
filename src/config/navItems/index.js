@@ -10,7 +10,6 @@ import {
   GridOff
 } from '@sparkpost/matchbox-icons';
 import { hasGrants } from 'src/helpers/conditions';
-import { isAccountUiOptionSet } from 'src/helpers/conditions/account';
 import inboxPlacementNavItems from './inboxPlacement';
 
 export default [
@@ -77,12 +76,7 @@ export default [
     children: [
       {
         label: 'Templates',
-        to: '/templates'
-      },
-      {
-        label: 'Templates',
-        to: '/templatesV2',
-        condition: isAccountUiOptionSet('templatesV2'),
+        to: '/templates',
         tag: 'new'
       },
       {
@@ -119,7 +113,6 @@ export default [
   {
     label: 'Alerts',
     to: '/alerts',
-    tag: 'new',
     icon: NotificationsActive
   },
   inboxPlacementNavItems,

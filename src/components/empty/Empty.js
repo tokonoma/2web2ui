@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Panel } from '@sparkpost/matchbox';
 
 import styles from './Empty.module.scss';
@@ -14,5 +15,10 @@ class Empty extends Component {
     );
   }
 }
+
+Empty.propTypes = {
+  title: PropTypes.string,
+  message: PropTypes.string
+};
 
 export default Empty;

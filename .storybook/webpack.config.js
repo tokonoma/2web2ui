@@ -4,6 +4,7 @@ const paths = require('../config/paths');
 
 const sassRegex = /\.(scss|sass)$/;
 const sassModuleRegex = /\.module\.(scss|sass)$/;
+const mdxRegex = /\.(.mdx)$/;
 
 module.exports = {
   resolve: {

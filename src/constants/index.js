@@ -20,6 +20,7 @@ export const FORMATS = {
 
   DATETIME: 'MMM Do h:mma',
   LONG_DATETIME: 'MMM Do YYYY h:mma',
+  LONG_DATETIME_ALT: 'MMM DD, YYYY [at] h:mma',
 
   INPUT_DATES: ['YYYY-MM-DD'],
   INPUT_TIMES: ['h:mma', 'H:mm', 'H:mma'],
