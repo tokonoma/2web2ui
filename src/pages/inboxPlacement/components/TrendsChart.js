@@ -53,7 +53,7 @@ const getTooltipContent = ({ payload = {}}) => (
         key={key}
         color={fill}
         label={label}
-        value={`${payload[key] * 100}%`}
+        value={`${(payload[key] * 100).toFixed(0)}%`}
       />).reverse()}
 
   </>
