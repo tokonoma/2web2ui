@@ -26,6 +26,13 @@ describe('GettingStartedGuide', () => {
     expect(instance).toHaveTextContent('Let&#39;s Code');
   });
 
+  it('should store the stepName when any CardAction Button is clicked' , () => {
+    const instance = subject();
+    instance.find('CardActions').find('Button').at(0).simulate('click');
+    expect(defaultProps.storeStepName).toHaveBeenCalled();
+
+  });
+
   it('should render the corresponding step when breadcrumb is clicked', () => {
 
     const instance = subject();

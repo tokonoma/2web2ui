@@ -11,7 +11,7 @@ import { FreePlanWarningBanner } from 'src/pages/billing/components/Banners';
 import { hasGrants } from 'src/helpers/conditions';
 import { isAccountUiOptionSet, getAccountUiOptionValue } from 'src/helpers/conditions/account';
 /* actions */
-import { update as updateAccount } from 'src/actions/account';
+import { setAccountOption } from 'src/actions/account';
 
 
 export class DashboardPage extends Component {
@@ -22,29 +22,12 @@ export class DashboardPage extends Component {
     this.setState({ isGuideAtBottom: this.props.isGuideAtBottom });
   }
   moveGuideAtBottom = () => {
-    const updateGuide = {
-      options: {
-        ui: {
-          isGuideAtBottom: true,
-          messaging_onboarding: true
-        }
-      }
-    };
     this.setState({ isGuideAtBottom: true });
-    this.props.updateAccount(updateGuide);
+    this.props.setAccountOption('isGuideAtBottom', true);
   }
 
   storeStepName = (stepName) => {
-    const updateStepName = {
-      options: {
-        ui: {
-          isGuideAtBottom: this.state.isGuideAtBottom,
-          stepName: stepName,
-          messaging_onboarding: true
-        }
-      }
-    };
-    this.props.updateAccount(updateStepName);
+    this.props.setAccountOption('stepName', stepName);
   }
 
   displayGuideAndReport = () => {
@@ -93,4 +76,4 @@ const mapStateToProps = (state) => ({
   stepName: getAccountUiOptionValue('stepName')(state)
 });
 
-export default (connect(mapStateToProps, { updateAccount })(DashboardPage));
+export default (connect(mapStateToProps, { setAccountOption })(DashboardPage));

@@ -14,7 +14,7 @@ export const GuideListItem = ({ itemCompleted, children, action: { name, onClick
     </Grid.Column>
     <Grid.Column md={3} xs={12}>
       <div className={styles.ListActionContainer}>
-        <Button onClick={onClick} color={(!itemCompleted && 'orange') || null}> {name} </Button>
+        <Button onClick={onClick} color={(!itemCompleted && 'orange') || null} outline={itemCompleted}> {name} </Button>
       </div>
     </Grid.Column>
   </Grid>

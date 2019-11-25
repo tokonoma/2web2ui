@@ -13,6 +13,8 @@
 
 .ListItemContainer{
   float: left;
+  padding-top: spacing(small);
+  padding-left: spacing(small);
   @media screen and (min-width: breakpoint(smaller)) {
     height: 100%;
     max-width: 450px;

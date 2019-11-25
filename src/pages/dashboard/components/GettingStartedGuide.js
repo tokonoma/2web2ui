@@ -29,7 +29,7 @@ export const GettingStartedGuide = ({ isGuideAtBottom, moveGuideAtBottom, storeS
     {breadCrumbsItems[stepName].map((item) => (
       <BreadCrumbsItem
         key={item}
-        onClick={() => setStepName(item)}
+        onClick={() => setAndStoreStepName(item)}
         active={stepName === item}>{item}</BreadCrumbsItem>
     ))}
   </BreadCrumbs>);
@@ -121,9 +121,8 @@ export const GettingStartedGuide = ({ isGuideAtBottom, moveGuideAtBottom, storeS
         null;
     }
   };
-  return <>
-        <Panel title='Getting Started' actions={actions} >
-          {renderStep()}
-        </Panel>
-        </>;
+  return <Panel title='Getting Started' actions={actions} >
+    {renderStep()}
+  </Panel>
+  ;
 };
