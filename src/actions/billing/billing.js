@@ -30,11 +30,25 @@ export function updateCreditCard({ data, token, signature, meta = {}}) {
   });
 }
 
+export function cors({ meta = {}, context, data = {}}) {
+  const type = `CORS_${context.toUpperCase().replace('-', '_')}`;
+  return sparkpostApiRequest({
+    type,
+    meta: {
+      method: 'POST',
+      url: '/v1/billing/cors-data',
+      params: { context },
+      data,
+      ...meta
+    }
+  });
+}
+
 export function updateBillingSubscription(data) {
   return sparkpostApiRequest({
     type: 'UPDATE_BILLING_SUBSCRIPTION',
     meta: {
-      method: 'GET',
+      method: 'PUT',
       url: '/v1/billing/subscription',
       data
     }

@@ -4,6 +4,7 @@ import { reduxForm } from 'redux-form';
 import { withRouter } from 'react-router-dom';
 import { Button, Grid, Panel } from '@sparkpost/matchbox';
 import { getBillingCountries, updateBillingSubscription } from 'src/actions/billing';
+import { fetch as fetchAccount } from 'src/actions/account';
 import billingUpdate from 'src/actions/billingUpdate';
 import { showAlert } from 'src/actions/globalAlert';
 import { Loading } from 'src/components/loading/Loading';
@@ -22,12 +23,14 @@ export class EnableAutomaticBillingForm extends React.Component {
   }
 
   onSubmit = (values) => {
-    const { billingUpdate, history, showAlert } = this.props;
+    const { billingUpdate, history, showAlert, fetchAccount } = this.props;
 
     return billingUpdate({ ...values, card: prepareCardInfo(values.card) })
       .then(() => updateBillingSubscription({
         type: 'active'
       })).then(
+        () => fetchAccount()
+      ).then(
         () => {
           history.push('/account/billing');
           showAlert({ type: 'success', message: 'Automatic Billing Enabled' });
@@ -100,7 +103,8 @@ const mapStateToProps = (state) => {
 const mapDispatchtoProps = {
   billingUpdate,
   getBillingCountries,
-  showAlert
+  showAlert,
+  fetchAccount
 };
 
 export default (
