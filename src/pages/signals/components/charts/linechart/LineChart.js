@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { ResponsiveContainer, ComposedChart, Bar, Dot, Line, Tooltip, XAxis, YAxis, CartesianGrid, Rectangle } from 'recharts';
-import TooltipWrapper from '../tooltip/Tooltip';
+import TooltipWrapper from 'src/components/charts/Tooltip';
 
 class LineChart extends Component {
   renderDot = (fill) => ({ payload, ...dot }) => {

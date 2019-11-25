@@ -4,6 +4,7 @@ export const initialState = {
   seeds: [],
   testsPending: true,
   tests: [],
+  trends: [],
   stopTestPending: false,
   placementsByProvider: [],
   placementsByRegion: [],
@@ -33,6 +34,13 @@ export default (state = initialState, { type, payload, meta }) => {
       return { ...state, getTestPending: false, currentTestDetails: payload, getTestError: null };
     case 'GET_INBOX_PLACEMENT_TEST_FAIL':
       return { ...state, getTestPending: false, getTestError: payload };
+
+    case 'GET_INBOX_PLACEMENT_TRENDS_PENDING':
+      return { ...state, getTrendsPending: true, getTrendsError: null };
+    case 'GET_INBOX_PLACEMENT_TRENDS_SUCCESS':
+      return { ...state, getTrendsPending: false, trends: payload, getTrendsError: null };
+    case 'GET_INBOX_PLACEMENT_TRENDS_FAIL':
+      return { ...state, getTrendsPending: false, getTrendsError: payload };
 
     case 'STOP_INBOX_PLACEMENT_TEST_PENDING':
       return { ...state, stopTestPending: true, stopTestError: null };

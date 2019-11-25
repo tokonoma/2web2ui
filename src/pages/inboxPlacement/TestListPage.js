@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Page, Table, Tooltip } from '@sparkpost/matchbox';
+import { Page, Panel, Table, Tooltip } from '@sparkpost/matchbox';
 import { Schedule } from '@sparkpost/matchbox-icons';
 import { ApiErrorBanner, Loading, PageLink } from 'src/components';
 import formatScheduleLine from './helpers/formatScheduleLine';
@@ -14,6 +14,7 @@ import { withRouter } from 'react-router-dom';
 import styles from './TestListPage.module.scss';
 import { STATUS } from './constants/test';
 import { Users } from 'src/components/images';
+import TrendsChart from './components/TrendsChart';
 
 const selectOptions = [
   { value: 'Sort By', label: 'Sort By', disabled: true },
@@ -106,7 +107,10 @@ export class TestListPage extends Component {
         <p className={styles.Description}>
           An Inbox Placement Test can tell you if you are actually landing in the recipients inbox. We can provide insight into what mailbox providers are doing with your email.
         </p>
-        {this.renderCollection()}
+        <Panel title={'Inbox Placement Trends'} >
+          <TrendsChart/>
+          {this.renderCollection()}
+        </Panel>
         </>
     );
   }

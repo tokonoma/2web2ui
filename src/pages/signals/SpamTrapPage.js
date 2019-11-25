@@ -7,7 +7,7 @@ import { Panel, Grid } from '@sparkpost/matchbox';
 import Page from './components/SignalsPage';
 import BarChart from './components/charts/barchart/BarChart';
 import SpamTrapActions from './components/actionContent/SpamTrapActions';
-import TooltipMetric from './components/charts/tooltip/TooltipMetric';
+import TooltipMetric from 'src/components/charts/TooltipMetric';
 import DateFilter from './components/filters/DateFilter';
 import { SPAM_TRAP_INFO } from './constants/info';
 import withDetails from './containers/withDetails';
