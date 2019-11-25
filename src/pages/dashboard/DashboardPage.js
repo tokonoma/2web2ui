@@ -9,7 +9,7 @@ import VerifyEmailBanner from 'src/components/verifyEmailBanner/VerifyEmailBanne
 import { FreePlanWarningBanner } from 'src/pages/billing/components/Banners';
 /* helpers */
 import { hasGrants } from 'src/helpers/conditions';
-import { isAccountUiOptionSet, accountUiOption } from 'src/helpers/conditions/account';
+import { isAccountUiOptionSet, getAccountUiOptionValue } from 'src/helpers/conditions/account';
 /* actions */
 import { update as updateAccount } from 'src/actions/account';
 
@@ -90,7 +90,7 @@ export class DashboardPage extends Component {
 const mapStateToProps = (state) => ({
   isMessageOnboardingSet: isAccountUiOptionSet('messaging_onboarding')(state),
   isGuideAtBottom: isAccountUiOptionSet('isGuideAtBottom')(state),
-  stepName: accountUiOption('stepName')(state)
+  stepName: getAccountUiOptionValue('stepName')(state)
 });
 
 export default (connect(mapStateToProps, { updateAccount })(DashboardPage));

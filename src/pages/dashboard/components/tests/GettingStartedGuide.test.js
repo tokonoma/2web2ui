@@ -42,6 +42,12 @@ describe('GettingStartedGuide', () => {
     instance.find('Button').simulate('click');
     instance.find({ children: 'Show Me SparkPost' }).simulate('click');
     expect(instance.find({ active: true })).toHaveTextContent('Show Me SparkPost');
+  });
 
+  it('should render three list items when on step "Show Me SparkPost" ', () => {
+    const instance = subject();
+    instance.find('Button').simulate('click');
+    instance.find({ children: 'Show Me SparkPost' }).simulate('click');
+    expect(instance.find('GuideListItem')).toHaveLength(3);
   });
 });
