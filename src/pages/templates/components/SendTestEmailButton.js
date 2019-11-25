@@ -122,6 +122,7 @@ const SendTestEmailButton = () => {
         open={isModalOpen}
         showCloseButton={true}
         onClose={handleModalClose}
+        data-id="send-test-email-modal"
       >
         {isModalLoading && <PanelLoading/>}
 
