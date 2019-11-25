@@ -158,5 +158,33 @@ describe('SendTestEmailButton', () => {
         });
       });
     });
+
+    it('invokes the set test data action (without updating the template otherwise) when the template is in published mode', () => {
+      const mockSetTestData = jest.fn();
+      const mockUpdateDraft = jest.fn();
+      const mockParsedTestData = {
+        options: {},
+        substitution_data: {
+          foo: 'bar'
+        },
+        metadata: {}
+      };
+
+      const { getByText } = subject({
+        isPublishedMode: true,
+        updateDraft: mockUpdateDraft,
+        parsedTestData: mockParsedTestData,
+        setTestDataAction: mockSetTestData
+      });
+
+      userEvent.click(getByText('Send a Test'));
+
+      expect(mockUpdateDraft).not.toHaveBeenCalled();
+      expect(mockSetTestData).toHaveBeenCalledWith({
+        id: '123456',
+        mode: 'published',
+        data: mockParsedTestData
+      });
+    });
   });
 });
