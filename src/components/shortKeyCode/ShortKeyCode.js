@@ -1,7 +1,7 @@
 import React from 'react';
 
 const ShortKeyCode = ({ shortKey }) => (
-  <code>{shortKey}••••••••</code>
+  <>{shortKey}••••••••</>
 );
 
 export default ShortKeyCode;
