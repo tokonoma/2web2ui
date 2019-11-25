@@ -9,9 +9,9 @@ import VerifyEmailBanner from 'src/components/verifyEmailBanner/VerifyEmailBanne
 import { FreePlanWarningBanner } from 'src/pages/billing/components/Banners';
 /* helpers */
 import { hasGrants } from 'src/helpers/conditions';
-import { isAccountUiOptionSet } from 'src/helpers/conditions/account';
+import { isAccountUiOptionSet, getAccountUiOptionValue } from 'src/helpers/conditions/account';
 /* actions */
-import { update as updateAccount } from 'src/actions/account';
+import { setAccountOption } from 'src/actions/account';
 
 
 export class DashboardPage extends Component {
@@ -22,22 +22,25 @@ export class DashboardPage extends Component {
     this.setState({ isGuideAtBottom: this.props.isGuideAtBottom });
   }
   moveGuideAtBottom = () => {
-    const updateGuide = {
-      options: {
-        ui: {
-          isGuideAtBottom: true,
-          messaging_onboarding: true
-        }
-      }
-    };
     this.setState({ isGuideAtBottom: true });
-    this.props.updateAccount(updateGuide);
+    this.props.setAccountOption('isGuideAtBottom', true);
+  }
+
+  storeStepName = (stepName) => {
+    this.props.setAccountOption('stepName', stepName);
   }
 
   displayGuideAndReport = () => {
     const { isGuideAtBottom } = this.state;
     const usageReport = <UsageReport/>;
-    const gettingStartedGuide = <GettingStartedGuide isGuideAtBottom={isGuideAtBottom} moveGuideAtBottom={this.moveGuideAtBottom} />;
+    const gettingStartedGuide = <GettingStartedGuide
+      isGuideAtBottom={isGuideAtBottom}
+      moveGuideAtBottom={this.moveGuideAtBottom}
+      storeStepName={this.storeStepName}
+      stepName={this.props.stepName}
+    />;
+
+
     if (this.props.isMessageOnboardingSet) {
       if (isGuideAtBottom) { return <>{usageReport}{gettingStartedGuide}</>; }
       return <>{gettingStartedGuide}{usageReport}</>;
@@ -69,7 +72,8 @@ export class DashboardPage extends Component {
 }
 const mapStateToProps = (state) => ({
   isMessageOnboardingSet: isAccountUiOptionSet('messaging_onboarding')(state),
-  isGuideAtBottom: isAccountUiOptionSet('isGuideAtBottom')(state)
+  isGuideAtBottom: isAccountUiOptionSet('isGuideAtBottom')(state),
+  stepName: getAccountUiOptionValue('stepName')(state)
 });
 
-export default (connect(mapStateToProps, { updateAccount })(DashboardPage));
+export default (connect(mapStateToProps, { setAccountOption })(DashboardPage));

@@ -7,7 +7,8 @@ import { ArrowDownward } from '@sparkpost/matchbox-icons';
 describe('GettingStartedGuide', () => {
   const defaultProps = {
     isGuideAtBottom: false,
-    moveGuideAtBottom: jest.fn()
+    moveGuideAtBottom: jest.fn(),
+    storeStepName: jest.fn()
   };
 
   const subject = (props) => (shallow(<GettingStartedGuide {...defaultProps} {...props} />));
@@ -23,6 +24,13 @@ describe('GettingStartedGuide', () => {
     expect(instance.find('Card')).toHaveLength(2);
     expect(instance).toHaveTextContent('Show Me SparkPost');
     expect(instance).toHaveTextContent('Let&#39;s Code');
+  });
+
+  it('should store the stepName when any CardAction Button is clicked' , () => {
+    const instance = subject();
+    instance.find('CardActions').find('Button').at(0).simulate('click');
+    expect(defaultProps.storeStepName).toHaveBeenCalled();
+
   });
 
   it('should render the corresponding step when breadcrumb is clicked', () => {
@@ -41,6 +49,12 @@ describe('GettingStartedGuide', () => {
     instance.find('Button').simulate('click');
     instance.find({ children: 'Show Me SparkPost' }).simulate('click');
     expect(instance.find({ active: true })).toHaveTextContent('Show Me SparkPost');
+  });
 
+  it('should render three list items when on step "Show Me SparkPost" ', () => {
+    const instance = subject();
+    instance.find('Button').simulate('click');
+    instance.find({ children: 'Show Me SparkPost' }).simulate('click');
+    expect(instance.find('GuideListItem')).toHaveLength(3);
   });
 });
