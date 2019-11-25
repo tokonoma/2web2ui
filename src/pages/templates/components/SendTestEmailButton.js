@@ -19,6 +19,7 @@ const SendTestEmailButton = () => {
     sendPreview,
     template,
     showAlert,
+    setTestDataAction,
     parsedTestData,
     updateDraft,
     setHasSaved
@@ -65,6 +66,14 @@ const SendTestEmailButton = () => {
           setModalLoading(false);
           setHasSaved(true);
         });
+    }
+
+    if (isPublishedMode) {
+      setTestDataAction({
+        id: templateId,
+        mode: 'published',
+        data: parsedTestData
+      });
     }
   };
 
