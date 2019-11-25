@@ -15,11 +15,12 @@ import { hasSubaccounts } from 'src/selectors/subaccounts';
 import { Subaccount, Loading, ApiErrorBanner, DeleteModal, TableCollection, ActionPopover } from 'src/components';
 import User from './components/User';
 
+const tfaColumnLabel = <abbr title='Two Factor Authentication'>2FA</abbr>;
 
 const COLUMNS = [
   { label: 'User', sortKey: 'name' },
   { label: 'Role', sortKey: 'roleLabel' },
-  { label: 'Two Factor Auth', sortKey: 'tfa_enabled' },
+  { label: tfaColumnLabel, sortKey: 'tfa_enabled' },
   { label: 'Last Login', sortKey: 'last_login' },
   null
 ];
@@ -28,7 +29,7 @@ const SUB_COLUMN = [
   { label: 'User', sortKey: 'name', width: '40%' },
   { label: 'Role', sortKey: 'roleLabel', width: '11%' },
   { label: 'Subaccount', sortKey: 'subaccount_id', width: '15%' },
-  { label: 'Two Factor Auth', sortKey: 'tfa_enabled', width: '8%' },
+  { label: tfaColumnLabel, sortKey: 'tfa_enabled', width: '10%' },
   { label: 'Last Login', sortKey: 'last_login', width: '14%' },
   null
 ];

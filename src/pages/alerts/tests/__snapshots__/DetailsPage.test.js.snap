@@ -47,6 +47,15 @@ exports[`Page: Alert Details should render Alert Details Page 1`] = `
     id="alert-id"
     subaccountIdToString={[Function]}
   />
+  <AlertIncidents
+    alert={
+      Object {
+        "name": "My Alert",
+      }
+    }
+    incidents={Array []}
+    subaccountIdToString={[Function]}
+  />
   <DeleteModal
     content={
       <p>

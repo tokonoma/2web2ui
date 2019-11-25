@@ -1,0 +1,67 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Alert Details Component properly renders rows 1`] = `
+Array [
+  <div>
+    Aug 06, 2019 at 5:00pm
+  </div>,
+  <div>
+    Aug 06, 2019 at 5:45pm
+  </div>,
+  <div
+    className="IncidentFilters"
+  />,
+  <div
+    className="rightAlign"
+  >
+    30
+    %
+  </div>,
+]
+`;
+
+exports[`Alert Details Component renders tags 1`] = `
+<div
+  className="IncidentFilters"
+>
+  <span>
+    <strong
+      className="BoldInline"
+    >
+      Subaccounts
+    </strong>
+     
+    <Tag>
+      3
+    </Tag>
+  </span>
+  <span>
+     and 
+  </span>
+  <span>
+    <strong
+      className="BoldInline"
+    >
+      Mailbox Provider
+    </strong>
+     
+    <Tag>
+      Gmail
+    </Tag>
+  </span>
+  <span>
+     and 
+  </span>
+  <span>
+    <strong
+      className="BoldInline"
+    >
+      Sending IP
+    </strong>
+     
+    <Tag>
+      1.1.1.1
+    </Tag>
+  </span>
+</div>
+`;

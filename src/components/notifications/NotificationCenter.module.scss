@@ -1,18 +1,20 @@
 @import '~@sparkpost/matchbox/src/styles/config.scss';
 
-.IconWrapper {
-  display: inline-block;
-  padding: 0 spacing();
-  margin-right: 2px;
-
+.NotificationCenterTrigger {
+  transform: translateY(3px); // Hacky - used to vertically center the button inside the popover trigger that comes from Matchbox
+  margin-right: spacing();
   color: color(gray, 5);
-  transition: 0.15s;
-
+  transition: color 0.15s ease-in-out;
   user-select: none;
 
-  &:hover {
+  &:hover,
+  &:focus {
     cursor: pointer;
     color: color(gray, 10);
+  }
+
+  &:focus {
+    outline-color: currentColor;
   }
 }
 

@@ -1,39 +1,48 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`AccountDropdown activator should render an icon on desktop if email doesnt exist 1`] = `
-<UnstyledLink
+<button
   className="Email"
-  data-id="account-dropdown-button"
+  data-id="nav-button-accounts"
   onClick={[Function]}
 >
   <Person
     size={24}
   />
-</UnstyledLink>
+  <ScreenReaderOnly>
+    Settings
+  </ScreenReaderOnly>
+</button>
 `;
 
 exports[`AccountDropdown activator should render an icon on mobile 1`] = `
-<UnstyledLink
+<button
   className="Email"
-  data-id="account-dropdown-button"
+  data-id="nav-button-accounts"
   onClick={[Function]}
 >
   <Person
     size={24}
   />
-</UnstyledLink>
+  <ScreenReaderOnly>
+    Settings
+  </ScreenReaderOnly>
+</button>
 `;
 
 exports[`AccountDropdown activator should render email address on desktop 1`] = `
-<UnstyledLink
+<button
   className="Email"
-  data-id="account-dropdown-button"
+  data-id="nav-button-accounts"
   onClick={[Function]}
 >
   test@testing.com
-   
+   
   <ArrowDropDown />
-</UnstyledLink>
+  <ScreenReaderOnly>
+    Settings
+  </ScreenReaderOnly>
+</button>
 `;
 
 exports[`AccountDropdown should render correctly 1`] = `

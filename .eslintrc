@@ -76,12 +76,14 @@
   "extends": [
     "react-app",
     "sparkpost",
-    "plugin:jest/recommended"
+    "plugin:jest/recommended",
+    "plugin:testing-library/recommended"
   ],
   "plugins": [
     "lodash",
     "jest",
-    "react-hooks"
+    "react-hooks",
+    "testing-library"
   ],
   "overrides": [
     {

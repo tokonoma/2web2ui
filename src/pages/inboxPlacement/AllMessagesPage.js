@@ -35,9 +35,8 @@ export const AllMessagesPage = ({
 }) => {
 
   const loadMessages = useCallback(() => {
-    //Will be useful for SA-1033
     const filterTypeToQueryParamMap = {
-      [PLACEMENT_FILTER_TYPES.MAILBOX_PROVIDER]: 'mailbox-provider',
+      [PLACEMENT_FILTER_TYPES.MAILBOX_PROVIDER]: 'mailbox_providers',
       [PLACEMENT_FILTER_TYPES.REGION]: 'regions'
     };
     const filters = { [filterTypeToQueryParamMap[filterType]]: filterName };
@@ -69,7 +68,7 @@ export const AllMessagesPage = ({
       alert={{ type: 'error', message: error.message }}/>;
   }
 
-  const deliveribilityStyleProps = {
+  const deliverabilityStyleProps = {
     columnProps: { md: 3 },
     valueClassName: styles.DeliverabilityValue,
     labelClassName: styles.DeliverabilityHeader
@@ -98,10 +97,10 @@ export const AllMessagesPage = ({
             <div className={styles.Divider} >
               <h5 className={styles.Title}>Deliverability</h5>
               <Grid className={styles.Panel}>
-                <InfoBlock value={sent} label='Sent' {...deliveribilityStyleProps}/>
-                <InfoBlock value={(placement.inbox_pct || 0) * sent} label='Inbox' {...deliveribilityStyleProps}/>
-                <InfoBlock value={(placement.spam_pct || 0) * sent} label='Spam' {...deliveribilityStyleProps}/>
-                <InfoBlock value={(placement.missing_pct || 0) * sent} label='Missing' {...deliveribilityStyleProps}/>
+                <InfoBlock value={sent} label='Sent' {...deliverabilityStyleProps}/>
+                <InfoBlock value={(placement.inbox_pct || 0) * sent} label='Inbox' {...deliverabilityStyleProps}/>
+                <InfoBlock value={(placement.spam_pct || 0) * sent} label='Spam' {...deliverabilityStyleProps}/>
+                <InfoBlock value={(placement.missing_pct || 0) * sent} label='Missing' {...deliverabilityStyleProps}/>
               </Grid>
             </div>
           </Grid.Column>

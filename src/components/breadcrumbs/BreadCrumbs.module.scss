@@ -1,0 +1,22 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.InActiveItem{
+  color: color(gray,4);
+}
+
+.BreadCrumbItem{
+  font-weight: 500;
+  font-size: font-size(500);
+  cursor: pointer;
+}
+
+.Arrow{
+  display: inline-block;
+  font-size: font-size(900);
+  transform: translateY(3px);
+  color: color(gray,4);
+}
+
+.BreadCrumbContainer{
+  padding: 0 spacing(small) spacing(large) 0;
+}

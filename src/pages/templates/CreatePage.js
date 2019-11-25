@@ -1,62 +1,94 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-
 // Components
-import ContentEditor from 'src/components/contentEditor';
-import Form from './components/containers/Form.container';
-import { Page, Grid } from '@sparkpost/matchbox';
+import { Button, Page, Panel } from '@sparkpost/matchbox';
 import { Loading } from 'src/components';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
-import ImportSnippetLink from './components/ImportSnippetLink';
+import styles from './CreatePage.module.scss';
+import CreateForm from './components/create/CreateForm';
+import { routeNamespace } from './constants/routes';
 
 export default class CreatePage extends Component {
   componentDidMount() {
-    if (this.props.cloneId) {
-      const { getDraft } = this.props;
-      return getDraft(this.props.cloneId);
-    }
+    this.props.listDomains();
   }
 
   handleCreate = (values) => {
-    const { create, id, history, subaccountId } = this.props;
-
-    return create(values)
-      .then(() => history.push(`/templates/edit/${id}${setSubaccountQuery(subaccountId)}`));
-  }
+    const {
+      createTemplate,
+      history,
+      subaccountId,
+      showAlert
+    } = this.props;
+    const formData = {
+      ...values,
+      content: {
+        ...values.content,
+        text: '' // add some content to avoid api validation error
+      }
+    };
+    const templateId = values.id;
+    const testDataBase = {
+      options: {},
+      substitution_data: {},
+      metadata: {}
+    };
+    createTemplate({
+      ...formData,
+      sharedWithSubaccounts: formData.assignTo === 'shared',
+      parsedTestData: testDataBase
+    })
+      .then(() => {
+        showAlert({ type: 'success', message: 'Template Created.' });
+        history.push(`/${routeNamespace}/edit/${templateId}/draft/content${setSubaccountQuery(subaccountId)}`);
+      });
+  };
 
   render() {
-    const { cloneId, handleSubmit, submitting, loading, formName, subaccountId } = this.props;
+    const {
+      handleSubmit,
+      submitting,
+      pristine,
+      valid,
+      loading,
+      formName
+    } = this.props;
 
     if (loading) {
-      return <Loading />;
+      return <Loading/>;
     }
-
-    const primaryAction = {
-      content: 'Save Template',
-      onClick: handleSubmit(this.handleCreate),
-      disabled: submitting
-    };
 
     const backAction = {
       content: 'Templates',
       Component: Link,
-      to: '/templates'
+      to: `/${routeNamespace}`
     };
 
     return (
       <Page
-        primaryAction={primaryAction}
         breadcrumbAction={backAction}
-        title={cloneId ? 'Duplicate Template' : 'New Template'}
+        title='Create New Template'
       >
-        <Grid>
-          <Grid.Column xs={12} lg={4}>
-            <Form newTemplate name={formName} subaccountId={subaccountId}/>
-          </Grid.Column>
-          <Grid.Column xs={12} lg={8}>
-            <ContentEditor action={<ImportSnippetLink />} contentOnly={true} />
-          </Grid.Column>
-        </Grid>
+        <p className={styles.LeadText}>
+          To get started, first provide some basic details about your new template before adding in content.
+        </p>
+
+        <form onSubmit={handleSubmit(this.handleCreate)}>
+          <Panel>
+            <Panel.Section>
+              <CreateForm formName={formName}/>
+            </Panel.Section>
+          </Panel>
+
+          <Button
+            type='submit'
+            primary
+            className={styles.NextButton}
+            disabled={submitting || pristine || !valid}
+          >
+            Next
+          </Button>
+        </form>
       </Page>
     );
   }

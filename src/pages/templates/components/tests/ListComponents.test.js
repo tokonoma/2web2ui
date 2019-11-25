@@ -1,13 +1,19 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import { Name, Actions, Status, LastUpdated, Subaccount } from '../ListComponents';
+import {
+  DeleteAction,
+  DuplicateAction,
+  LastUpdated,
+  Name,
+  Status
+} from '../ListComponents';
 
 describe('Template List Components', () => {
   let wrapper;
 
   describe('Name', () => {
     beforeEach(() => {
-      const props = { name: 'template name', id: 'id-123', subaccount_id: 123 };
+      const props = { name: 'template name', list_name: 'template name', id: 'id-123', subaccount_id: 123, list_status: 'draft' };
       wrapper = shallow(<Name {...props} />);
     });
 
@@ -16,49 +22,64 @@ describe('Template List Components', () => {
     });
 
     it('should navigate to published page if template is published', () => {
-      wrapper.setProps({ published: true });
-      expect(wrapper.find('Link').props().to).toEqual('/templates/edit/id-123/published?subaccount=123');
+      wrapper.setProps({ list_status: 'published' });
+      expect(wrapper.find('Link').props().to).toEqual('/templates/edit/id-123/published/content?subaccount=123');
     });
   });
 
   describe('Status', () => {
     it('should render published', () => {
-      expect(shallow(<Status published={true} has_draft={true} has_published={true} />)).toMatchSnapshot();
+      expect(shallow(<Status list_status='published'/>)).toMatchSnapshot();
     });
 
     it('should render draft', () => {
-      expect(shallow(<Status published={false} has_draft={true} has_published={false} />)).toMatchSnapshot();
+      expect(shallow(<Status list_status='draft'/>)).toMatchSnapshot();
     });
 
     it('should render unpublished changes', () => {
-      expect(shallow(<Status published={false} has_draft={true} has_published={true} />)).toMatchSnapshot();
+      expect(shallow(<Status list_status='published_with_draft'/>)).toMatchSnapshot();
     });
   });
 
-  describe('Actions', () => {
-    it('should render correct actions when published', () => {
-      expect(shallow(<Actions id={10} subaccount_id={101} published={true} has_draft={true} has_published={true} />)).toMatchSnapshot();
+  describe('DeleteAction', () => {
+    it('should render correctly', () => {
+      expect(shallow(<DeleteAction/>)).toMatchSnapshot();
     });
 
-    it('should render correct actions when not published', () => {
-      expect(shallow(<Actions id={10} subaccount_id={101} published={false} has_draft={true} has_published={false} />)).toMatchSnapshot();
-    });
-
-    it('should render correct actions with unpublished changes', () => {
-      expect(shallow(<Actions id={10} subaccount_id={101} published={false} has_draft={true} has_published={true} />)).toMatchSnapshot();
+    it('should invoke function passed in to `onClick` prop when clicked with other passed in props', () => {
+      const mockFn = jest.fn();
+      const props = {
+        onClick: mockFn,
+        name: 'Foo',
+        id: 'bar'
+      };
+      const wrapper = shallow(<DeleteAction {...props} />);
+      wrapper.find('Button').simulate('click');
+      expect(mockFn).toHaveBeenCalledWith({ id: 'bar', name: 'Foo' });
     });
   });
 
   describe('LastUpdated', () => {
     it('should render', () => {
-      expect(shallow(<LastUpdated last_update_time='2017-08-10T14:15:16+00:00' />)).toMatchSnapshot();
+      expect(shallow(<LastUpdated last_update_time='2017-08-10T14:15:16+00:00'/>)).toMatchSnapshot();
     });
   });
 
-  describe('Subaccount', () => {
-    it('should render', () => {
-      const wrapper = shallow(<Subaccount shared_with_subaccounts={false} subaccount_id={123} />);
-      expect(wrapper).toMatchSnapshot();
+  describe('DuplicateAction', () => {
+    it('should render correctly', () => {
+      expect(shallow(<DuplicateAction/>)).toMatchSnapshot();
+    });
+
+    it('should invoke function passed in to `onClick` prop when clicked with other passed in props', () => {
+      const mockFn = jest.fn();
+      const props = {
+        onClick: mockFn,
+        name: 'Foo',
+        id: 'bar'
+      };
+      const wrapper = shallow(<DuplicateAction {...props} />);
+      wrapper.find('Button').simulate('click');
+      expect(mockFn).toHaveBeenCalledWith({ id: 'bar', name: 'Foo' });
     });
   });
 });

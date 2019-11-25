@@ -17,6 +17,15 @@
   }
 }
 
+.Logo,
+.MobileLogo {
+  outline-offset: -5px; // insets focus outline to make it visible
+
+  &:focus {
+    outline-color: color(gray, 10);
+  }
+}
+
 .Logo {
   flex: 0 0 0;
   padding: rem(9) spacing() rem(15);
@@ -32,32 +41,47 @@
   text-align: center;
 }
 
-.RightSideWrapper, .MobileAccountDropdownWrapper {
+.RightSideWrapper,
+.MobileAccountDropdownWrapper {
   flex: 1 0 0;
-  text-align: right;
   padding: rem(14) spacing();
+}
+
+.RightSideWrapper {
+  display: flex;
+  justify-content: flex-end;
 }
 
 .MobileAccountDropdownWrapper {
   flex: 0 0 0;
 }
 
+.Menu,
+.SupportButton {
+  transition: color 0.15s ease-in-out;
+
+  &:hover,
+  &:focus {
+    color: color(gray, 10);
+  }
+
+  &:focus {
+    outline-color: color(gray, 10);
+  }
+}
+
 .Menu {
   flex: 0 0 0;
   padding: rem(14) spacing();
   color: color(gray, 7);
+  outline-offset: -5px; // insets focus outline to make it visible
+}
 
-  &:hover {
-    color: color(gray, 10);
-  }
+.SupportButton {
+  margin-right: spacing();
+  color: color(gray, 5);
 }
 
 .SupportIcon {
-  cursor: pointer;
-  fill: color(gray, 5);
-  margin: 0 spacing() 0 0;
-
-  &:hover {
-    fill: color(gray, 10);
-  }
+  fill: currentColor;
 }

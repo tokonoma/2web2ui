@@ -1,26 +1,45 @@
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { listTemplates } from 'src/actions/templates';
-import { list as listSubaccounts } from 'src/actions/subaccounts';
+import {
+  getTestData,
+  deleteTemplate,
+  create as createTemplate,
+  listTemplates,
+  getDraft,
+  getPublished
+} from 'src/actions/templates';
 import { hasGrants } from 'src/helpers/conditions';
-import { selectTemplates } from 'src/selectors/templates';
+import { selectTemplatesForListTable } from 'src/selectors/templates';
 import { hasSubaccounts } from 'src/selectors/subaccounts';
-
+import { showAlert } from '../../actions/globalAlert';
 import ListPage from './ListPage';
 
 function mapStateToProps(state) {
-  const templates = selectTemplates(state);
+  const templates = selectTemplatesForListTable(state);
   const canModify = hasGrants('templates/modify')(state);
 
   return {
     templates,
     hasSubaccounts: hasSubaccounts(state),
-    subaccounts: state.subaccounts.list,
     userAccessLevel: state.currentUser.access_level,
-    loading: state.templates.listLoading,
+    loading: Boolean(state.templates.listLoading),
     error: state.templates.listError,
-    canModify
+    canModify,
+    isDeletePending: Boolean(state.templates.deletePending),
+    isCreatePending: Boolean(state.templates.createPending),
+    isDraftPending: Boolean(state.templates.getDraftLoading),
+    isPublishedPending: Boolean(state.templates.getPublishedLoading)
   };
 }
 
-export default withRouter(connect(mapStateToProps, { listTemplates, listSubaccounts })(ListPage));
+const mapDispatchToProps = {
+  listTemplates,
+  deleteTemplate,
+  showAlert,
+  createTemplate,
+  getTestData,
+  getDraft,
+  getPublished
+};
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ListPage));

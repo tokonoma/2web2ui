@@ -1,14 +1,34 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Popover, UnstyledLink } from '@sparkpost/matchbox';
+import { Popover } from '@sparkpost/matchbox';
 import { Notifications, NotificationsUnread } from '@sparkpost/matchbox-icons';
 import Notification from './Notification';
+import { IconButton } from 'src/components';
 import * as notificationActions from 'src/actions/notifications';
 import { selectTransformedNotifications, selectUnreadCount } from 'src/selectors/notifications';
 import styles from './NotificationCenter.module.scss';
 
-export class NotificationCenter extends Component {
+const NotificationCenterTrigger = (props) => {
+  const { unreadCount } = props;
+  const hasUnreadNotifications = unreadCount > 0;
 
+  // `onClick` is a required prop, but the click handled is handled by the Popover component
+  return (
+    <IconButton
+      onClick={(e) => e.preventDefault()}
+      className={styles.NotificationCenterTrigger}
+      screenReaderLabel={hasUnreadNotifications ? `${unreadCount} Unread Notifications` : '0 Unread Notifications'}
+    >
+      {hasUnreadNotifications ? (
+        <NotificationsUnread className={styles.UnreadIcon} size={22}/>
+      ) : (
+        <Notifications size={22}/>
+      )}
+    </IconButton>
+  );
+};
+
+export class NotificationCenter extends Component {
   componentDidMount() {
     this.props.loadNotifications();
   }
@@ -24,15 +44,12 @@ export class NotificationCenter extends Component {
   }
 
   render() {
-    const icon = (this.props.unreadCount > 0)
-      ? <NotificationsUnread className={styles.UnreadIcon} size={22} />
-      : <Notifications size={22} />;
-
     return (
       <Popover
         left
         onClose={this.props.markAllAsRead}
-        trigger={<UnstyledLink className={styles.IconWrapper}>{icon}</UnstyledLink>}>
+        trigger={<NotificationCenterTrigger unreadCount={this.props.unreadCount}/>}
+      >
         <div className={styles.ListWrapper}>
           {this.renderNotificationsList()}
         </div>

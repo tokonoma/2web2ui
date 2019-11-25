@@ -57,7 +57,11 @@ exports[`Page: Users List should render correctly by default 1`] = `
             "sortKey": "roleLabel",
           },
           Object {
-            "label": "Two Factor Auth",
+            "label": <abbr
+              title="Two Factor Authentication"
+            >
+              2FA
+            </abbr>,
             "sortKey": "tfa_enabled",
           },
           Object {
@@ -219,7 +223,11 @@ exports[`Page: Users List should show a delete modal 1`] = `
             "sortKey": "roleLabel",
           },
           Object {
-            "label": "Two Factor Auth",
+            "label": <abbr
+              title="Two Factor Authentication"
+            >
+              2FA
+            </abbr>,
             "sortKey": "tfa_enabled",
           },
           Object {
