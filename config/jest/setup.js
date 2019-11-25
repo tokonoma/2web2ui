@@ -21,8 +21,10 @@ configure({
   testIdAttribute: 'data-id' // Overriding the default test ID used by `getByTestId` matcher - `data-testid` isn't used so we can also use these attributes for analytics tagging
 });
 
-// this is just a little hack to silence a warning that we'll get until we
-// upgrade to 16.9: https://github.com/facebook/react/pull/14853
+// this is just a little hack to silence a warning that we'll get with React Testing Library get
+//  until we upgrade to React 16.9. See:
+// 1. https://github.com/facebook/react/pull/14853
+// 2. and from the official React Testing Library docs https://github.com/testing-library/react-testing-library#suppressing-unnecessary-warnings-on-react-dom-168
 const originalError = console.error = (message) => {
   // Fail tests on any warning
   throw new Error(message);
