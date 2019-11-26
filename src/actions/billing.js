@@ -1,7 +1,7 @@
 /* eslint max-lines: ["error", 215] */
 import { formatContactData } from 'src/helpers/billing';
-import { fetch as fetchAccount, getBillingInfo } from '../account';
-import { list as getSendingIps } from '../sendingIps';
+import { fetch as fetchAccount, getBillingInfo } from './account';
+import { list as getSendingIps } from './sendingIps';
 import { isAws } from 'src/helpers/conditions/account';
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
 import zuoraRequest from 'src/actions/helpers/zuoraRequest';
@@ -30,6 +30,32 @@ export function updateSubscription({ code, bundle = code, promoCode, meta = {}})
       }
     })
   );
+}
+
+export function syncSubscription({ meta = {}} = {}) {
+  return sparkpostApiRequest({
+    type: 'SYNC_SUBSCRIPTION',
+    meta: {
+      method: 'POST',
+      url: '/v1/account/subscription/check',
+      ...meta
+    }
+  });
+}
+
+
+/**
+ * attempts to collect payments (like when payment method is updated) to make sure pending payments are charged
+ */
+export function collectPayments({ meta = {}}) {
+  return sparkpostApiRequest({
+    type: 'COLLECT_PAYMENTS',
+    meta: {
+      method: 'POST',
+      url: '/v1/account/billing/collect',
+      ...meta
+    }
+  });
 }
 
 /**
@@ -138,20 +164,6 @@ export function createZuoraAccount({ data, token, signature, meta = {}}) {
       url: '/accounts',
       data,
       headers: { token, signature },
-      ...meta
-    }
-  });
-}
-
-/**
- * attempts to collect payments (like when payment method is updated) to make sure pending payments are charged
- */
-export function collectPayments({ meta = {}}) {
-  return sparkpostApiRequest({
-    type: 'COLLECT_PAYMENTS',
-    meta: {
-      method: 'POST',
-      url: '/v1/account/billing/collect',
       ...meta
     }
   });
