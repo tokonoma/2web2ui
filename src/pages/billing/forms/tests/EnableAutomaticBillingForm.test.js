@@ -44,6 +44,7 @@ describe('EnableAutomaticBillingForm', () => {
   it('creates billing, redirects, and shows alert on submit', async () => {
     const props = {
       billingUpdate: jest.fn(() => Promise.resolve()),
+      fetchAccount: jest.fn(() => Promise.resolve()),
       history: { push: jest.fn() },
       showAlert: jest.fn()
     };
