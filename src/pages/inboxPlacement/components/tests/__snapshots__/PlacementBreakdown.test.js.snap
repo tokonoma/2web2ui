@@ -47,131 +47,6 @@ exports[`Component: PlacementBreakdown HeaderComponent renders correctly 1`] = `
 </thead>
 `;
 
-exports[`Component: PlacementBreakdown RowComponent renders mailbox provider correctly 1`] = `
-<Table.Row
-  className="DataRow"
->
-  <Table.Cell
-    className="PlacementNameCell"
-  >
-    <PageLink
-      to="/inbox-placement/details/1/mailbox-provider/dogmail.com"
-    >
-      <strong>
-        dogmail.com
-      </strong>
-    </PageLink>
-  </Table.Cell>
-  <Table.Cell
-    className="RegionCell"
-  >
-    North America
-  </Table.Cell>
-  <Table.Cell
-    className="Placement"
-  >
-    <GroupPercentage
-      value={0}
-    />
-  </Table.Cell>
-  <Table.Cell
-    className="Placement"
-  >
-    <GroupPercentage
-      value={0}
-    />
-  </Table.Cell>
-  <Table.Cell
-    className="Placement"
-  >
-    <GroupPercentage
-      value={1}
-    />
-  </Table.Cell>
-  <Table.Cell
-    className="Authentication divider"
-  >
-    <GroupPercentage
-      value={0}
-    />
-  </Table.Cell>
-  <Table.Cell
-    className="Authentication"
-  >
-    <GroupPercentage
-      value={0}
-    />
-  </Table.Cell>
-  <Table.Cell
-    className="Authentication"
-  >
-    <GroupPercentage
-      value={1}
-    />
-  </Table.Cell>
-</Table.Row>
-`;
-
-exports[`Component: PlacementBreakdown RowComponent renders region correctly 1`] = `
-<Table.Row
-  className="DataRow"
->
-  <Table.Cell
-    className="PlacementNameCell"
-  >
-    <PageLink
-      to="/inbox-placement/details/1/region/north america"
-    >
-      <strong>
-        North America
-      </strong>
-    </PageLink>
-  </Table.Cell>
-  <Table.Cell
-    className="Placement"
-  >
-    <GroupPercentage
-      value={0}
-    />
-  </Table.Cell>
-  <Table.Cell
-    className="Placement"
-  >
-    <GroupPercentage
-      value={0}
-    />
-  </Table.Cell>
-  <Table.Cell
-    className="Placement"
-  >
-    <GroupPercentage
-      value={1}
-    />
-  </Table.Cell>
-  <Table.Cell
-    className="Authentication divider"
-  >
-    <GroupPercentage
-      value={0}
-    />
-  </Table.Cell>
-  <Table.Cell
-    className="Authentication"
-  >
-    <GroupPercentage
-      value={0}
-    />
-  </Table.Cell>
-  <Table.Cell
-    className="Authentication"
-  >
-    <GroupPercentage
-      value={1}
-    />
-  </Table.Cell>
-</Table.Row>
-`;
-
 exports[`Component: PlacementBreakdown SubComponent: GroupPercentage renders percentage correctly 1`] = `
 <span
   className="GroupValue"
@@ -201,6 +76,8 @@ exports[`Component: PlacementBreakdown matches snapshot with provider data 1`] =
           "missing_pct": 1,
           "spam_pct": 0,
         },
+        "region": "north america",
+        "sending_ip": "101.101",
       },
       Object {
         "authentication": Object {
@@ -214,6 +91,8 @@ exports[`Component: PlacementBreakdown matches snapshot with provider data 1`] =
           "missing_pct": 0.1,
           "spam_pct": 0.1,
         },
+        "region": "europe",
+        "sending_ip": "101.102",
       },
     ]
   }
