@@ -7,49 +7,43 @@ import { RedirectAndAlert } from 'src/components/globalAlert';
 import { routeNamespace } from '../../constants/routes';
 import styles from './DeleteTemplateModal.module.scss';
 
-const DeleteTemplateModal = (props) => {
-  const {
-    open,
-    onClose,
-    template,
-    deleteTemplate,
-    isLoading,
-    successCallback
-  } = props;
+const DeleteTemplateModal = props => {
+  const { open, onClose, template, deleteTemplate, isLoading, successCallback } = props;
   const [hasSuccessRedirect, setSuccessRedirect] = useState(false);
   const handleDelete = () => {
-    deleteTemplate({ id: template.id, subaccountId: template.subaccount_id })
-      .then(() => {
-        if (successCallback) {
-          successCallback();
-        } else {
-          setSuccessRedirect(true);
-        }
-      });
+    deleteTemplate({ id: template.id, subaccountId: template.subaccount_id }).then(() => {
+      if (successCallback) {
+        successCallback();
+      } else {
+        setSuccessRedirect(true);
+      }
+    });
   };
 
   return (
     <>
-      {hasSuccessRedirect &&
+      {hasSuccessRedirect && (
         <RedirectAndAlert
           to={`/${routeNamespace}`}
           alert={{
             type: 'success',
-            message: 'Template deleted'
+            message: 'Template deleted',
           }}
         />
-      }
+      )}
 
-      <Modal
-        open={open}
-        showCloseButton
-        onClose={onClose}
-      >
-        {isLoading ? <PanelLoading minHeight="190px"/> : (
+      <Modal open={open} showCloseButton onClose={onClose}>
+        {isLoading ? (
+          <PanelLoading minHeight="190px" />
+        ) : (
           <Panel title="Are you sure you want to delete your template?">
             <Panel.Section>
               {/* The <span>s are used here to avoid the bare JSX string problem */}
-              <p><span>If so, the </span><strong className={styles.WarningText}>published version and any drafts</strong><span> will all be deleted.</span></p>
+              <p>
+                <span>If so, the </span>
+                <strong className={styles.WarningText}>published version and any drafts</strong>
+                <span> will all be deleted.</span>
+              </p>
 
               <ButtonWrapper>
                 <Button destructive onClick={handleDelete}>
@@ -74,7 +68,7 @@ DeleteTemplateModal.propTypes = {
   template: PropTypes.object,
   deleteTemplate: PropTypes.func,
   isLoading: PropTypes.bool,
-  successCallback: PropTypes.func
+  successCallback: PropTypes.func,
 };
 
 export default DeleteTemplateModal;

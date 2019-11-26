@@ -7,10 +7,10 @@ import renderWithRedux from 'src/__testHelpers__/renderWithRedux';
 jest.mock('../../../../../../src/components/globalAlert'); // Mocks `RedirectAndAlert` component
 
 describe('DeleteTemplateModal', () => {
-  const subject = (props) => {
+  const subject = props => {
     const initialState = {
       alerts: [],
-      showBanner: true
+      showBanner: true,
     };
 
     return renderWithRedux({
@@ -22,13 +22,13 @@ describe('DeleteTemplateModal', () => {
             open={true}
             template={{
               id: 'hello',
-              subaccount_id: 'world'
+              subaccount_id: 'world',
             }}
             isLoading={false}
             {...props}
           />
         </Router>
-      )
+      ),
     });
   };
 
