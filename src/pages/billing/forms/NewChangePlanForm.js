@@ -90,15 +90,22 @@ export const ChangePlanForm = ({
     const newCode = selectedBundleCode;
     const isDowngradeToFree = selectedBundle.price <= 0;
     const { selectedPromo } = promoCodeObj;
+    const billingId = _.get(selectedBundle, 'messaging.billing_id');
 
-    const newValues = values.card && !isDowngradeToFree
+    const cardValues = values.card && !isDowngradeToFree
       ? { ...values, card: prepareCardInfo(values.card) }
       : values;
+
+    const newValues = {
+      ...cardValues,
+      bundle: newCode,
+      billingId
+    };
     let action = Promise.resolve({});
 
     if (!_.isEmpty(selectedPromo) && !isDowngradeToFree) {
       newValues.promoCode = selectedPromo.promoCode;
-      action = verifyPromoCode({ promoCode: selectedPromo.promoCode , billingId: _.get(selectedBundle, 'messaging.billing_id'), meta: { promoCode: selectedPromo.promoCode }});
+      action = verifyPromoCode({ promoCode: selectedPromo.promoCode , billingId, meta: { promoCode: selectedPromo.promoCode }});
     }
     return action
       .then(({ discount_id }) => {

@@ -22,8 +22,7 @@ export function updateSubscription({ code, bundle = code, promoCode, meta = {}})
         url: isAws(getState()) ? '/v1/account/aws-marketplace/subscription' : '/v1/billing/subscription/bundle',
         data: {
           promo_code: promoCode,
-          code,
-          bundle
+          [isAws(getState()) ? 'code' : 'bundle']: code || bundle
         },
         ...meta,
         onSuccess: meta.onSuccess ? meta.onSuccess : fetchAccountAction
@@ -115,7 +114,7 @@ export function cors({ meta = {}, context, data = {}}) {
     type,
     meta: {
       method: 'POST',
-      url: '/v1/account/cors-data',
+      url: '/v1/billing/cors-data',
       params: { context },
       data,
       ...meta

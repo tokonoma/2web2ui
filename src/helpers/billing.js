@@ -5,7 +5,7 @@ import Payment from 'payment';
 import qs from 'query-string';
 
 export function formatDataForCors(values) {
-  const { email, planpicker, card, billingAddress, discountId } = values;
+  const { email, planpicker, card, billingAddress, discountId, billingId } = values;
 
   // For CORS Endpoint + sift
   const corsData = {
@@ -24,7 +24,7 @@ export function formatDataForCors(values) {
 
   // For Zuora
   const billingData = {
-    billingId: planpicker.billingId,
+    billingId: planpicker.billingId || billingId,
     billToContact: {
       firstName: billingAddress.firstName,
       lastName: billingAddress.lastName,
