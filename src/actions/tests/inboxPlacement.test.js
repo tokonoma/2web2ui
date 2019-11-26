@@ -27,6 +27,39 @@ describe('Action Creator: Inbox Placement', () => {
     });
   });
 
+  it('it makes request to list tests by mailbox provider', async () => {
+    await inboxPlacement.getInboxPlacementByProvider(101);
+    expect(sparkpostApiRequest).toHaveBeenCalledWith({
+      type: 'GET_INBOX_PLACEMENT_TESTS_BY_MAILBOX_PROVIDER',
+      meta: {
+        method: 'GET',
+        url: '/v1/inbox-placement/101/mailbox-provider'
+      }
+    });
+  });
+
+  it('it makes request to list tests by region', async () => {
+    await inboxPlacement.getInboxPlacementByRegion(101);
+    expect(sparkpostApiRequest).toHaveBeenCalledWith({
+      type: 'GET_INBOX_PLACEMENT_TESTS_BY_REGION',
+      meta: {
+        method: 'GET',
+        url: '/v1/inbox-placement/101/region'
+      }
+    });
+  });
+
+  it('it makes request to list tests by sending ip', async () => {
+    await inboxPlacement.getInboxPlacementBySendingIp(101);
+    expect(sparkpostApiRequest).toHaveBeenCalledWith({
+      type: 'GET_INBOX_PLACEMENT_TESTS_BY_SENDING_IP',
+      meta: {
+        method: 'GET',
+        url: '/v1/inbox-placement/101/sending-ip'
+      }
+    });
+  });
+
   it('it makes request to get trends', async () => {
     await inboxPlacement.getInboxPlacementTrends({ myparams: 'foo' });
     expect(sparkpostApiRequest).toHaveBeenCalledWith({

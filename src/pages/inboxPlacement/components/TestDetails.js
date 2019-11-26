@@ -2,6 +2,7 @@ import React, { useState, useCallback } from 'react';
 import { format } from 'date-fns';
 import { Grid, Panel, Select, TextField, Label, ScreenReaderOnly } from '@sparkpost/matchbox';
 import _ from 'lodash';
+
 import FolderPlacementBarChart from './FolderPlacementBarChart';
 import PlacementBreakdown from './PlacementBreakdown';
 import { FORMATS } from 'src/constants';
@@ -12,7 +13,9 @@ import AuthenticationResults from './AuthenticationResults';
 import { Search } from '@sparkpost/matchbox-icons';
 import { PLACEMENT_FILTER_TYPES, PLACEMENT_FILTER_LABELS } from '../constants/types';
 
-const PLACEMENTS_TYPE_OPTIONS = Object.values(PLACEMENT_FILTER_TYPES).map((type) => ({ label: PLACEMENT_FILTER_LABELS[type], value: type }));
+//TODO remove in SA-1078
+const { SENDING_IP: _SendingIP, ...placementsMinusSendingIp } = PLACEMENT_FILTER_TYPES;
+const PLACEMENTS_TYPE_OPTIONS = Object.values(placementsMinusSendingIp).map((type) => ({ label: PLACEMENT_FILTER_LABELS[type], value: type }));
 
 const TestDetails = ({ details, placementsByProvider, placementsByRegion }) => {
   const [breakdownType, setBreakdownType] = useState(PLACEMENTS_TYPE_OPTIONS[0].value);

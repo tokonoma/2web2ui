@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Page, Tabs } from '@sparkpost/matchbox';
 
 import { Loading } from 'src/components';
-import { getInboxPlacementTest, getInboxPlacementByProviders, getInboxPlacementByRegions, getInboxPlacementTestContent } from 'src/actions/inboxPlacement';
+import { getInboxPlacementTest, getInboxPlacementByProvider, getInboxPlacementByRegion, getInboxPlacementTestContent } from 'src/actions/inboxPlacement';
 import { selectTestDetailsPageError, selectTestDetailsPageLoading } from 'src/selectors/inboxPlacement';
 import TestDetails from './components/TestDetails';
 import TestContent from './components/TestContent';
@@ -23,8 +23,8 @@ export const TestDetailsPage = (props) => {
     content,
     error,
     getInboxPlacementTest,
-    getInboxPlacementByProviders,
-    getInboxPlacementByRegions,
+    getInboxPlacementByProvider,
+    getInboxPlacementByRegion,
     getInboxPlacementTestContent,
     StopTestComponent = StopTest //This is for unit test purposes
   } = props;
@@ -33,10 +33,10 @@ export const TestDetailsPage = (props) => {
 
   const loadTestData = useCallback(() => {
     getInboxPlacementTest(id);
-    getInboxPlacementByProviders(id);
+    getInboxPlacementByProvider(id);
     getInboxPlacementTestContent(id);
-    getInboxPlacementByRegions(id);
-  }, [getInboxPlacementTest, getInboxPlacementByProviders, getInboxPlacementTestContent, getInboxPlacementByRegions, id]);
+    getInboxPlacementByRegion(id);
+  }, [getInboxPlacementTest, getInboxPlacementByProvider, getInboxPlacementTestContent, getInboxPlacementByRegion, id]);
 
   useEffect(() => {
     loadTestData();
@@ -107,4 +107,11 @@ function mapStateToProps(state, props) {
   };
 }
 
-export default connect(mapStateToProps, { getInboxPlacementTest, getInboxPlacementByProviders, getInboxPlacementByRegions, getInboxPlacementTestContent })(TestDetailsPage);
+const mapDispatchToProps = {
+  getInboxPlacementTest,
+  getInboxPlacementByProvider,
+  getInboxPlacementByRegion,
+  getInboxPlacementTestContent
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TestDetailsPage);

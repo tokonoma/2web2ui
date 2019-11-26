@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Grid, Page, Panel } from '@sparkpost/matchbox';
 
 import { Loading } from 'src/components';
-import { getInboxPlacementByProviders, getInboxPlacementByRegions, getAllInboxPlacementMessages, resetState } from 'src/actions/inboxPlacement';
+import { getInboxPlacementByProvider, getInboxPlacementByRegion, getInboxPlacementBySendingIp, getAllInboxPlacementMessages, resetState } from 'src/actions/inboxPlacement';
 import { RedirectAndAlert } from 'src/components/globalAlert';
 import PageLink from 'src/components/pageLink';
 import StopTest from './components/StopTest';
@@ -26,8 +26,9 @@ export const AllMessagesPage = ({
   placement,
   authentication,
   error,
-  getInboxPlacementByProviders,
-  getInboxPlacementByRegions,
+  getInboxPlacementByProvider,
+  getInboxPlacementByRegion,
+  getInboxPlacementBySendingIp,
   getAllInboxPlacementMessages,
   resetState,
   StopTestComponent = StopTest,
@@ -37,21 +38,25 @@ export const AllMessagesPage = ({
   const loadMessages = useCallback(() => {
     const filterTypeToQueryParamMap = {
       [PLACEMENT_FILTER_TYPES.MAILBOX_PROVIDER]: 'mailbox_providers',
-      [PLACEMENT_FILTER_TYPES.REGION]: 'regions'
+      [PLACEMENT_FILTER_TYPES.REGION]: 'regions',
+      [PLACEMENT_FILTER_TYPES.SENDING_IP]: 'sending_ips'
     };
     const filters = { [filterTypeToQueryParamMap[filterType]]: filterName };
 
     switch (filterType) {
       case PLACEMENT_FILTER_TYPES.MAILBOX_PROVIDER:
-        getInboxPlacementByProviders(id);
+        getInboxPlacementByProvider(id);
         break;
       case PLACEMENT_FILTER_TYPES.REGION:
-        getInboxPlacementByRegions(id);
+        getInboxPlacementByRegion(id);
+        break;
+      case PLACEMENT_FILTER_TYPES.SENDING_IP:
+        getInboxPlacementBySendingIp(id);
         break;
       default:
     }
     getAllInboxPlacementMessages(id, filters);
-  }, [filterName, filterType, getAllInboxPlacementMessages, getInboxPlacementByProviders, getInboxPlacementByRegions, id]);
+  }, [filterName, filterType, getAllInboxPlacementMessages, getInboxPlacementByProvider, getInboxPlacementByRegion, getInboxPlacementBySendingIp, id]);
 
   useEffect(() => {
     loadMessages();
@@ -145,4 +150,4 @@ function mapStateToProps(state, props) {
   };
 }
 
-export default connect(mapStateToProps, { getInboxPlacementByProviders, getInboxPlacementByRegions, getAllInboxPlacementMessages, resetState })(AllMessagesPage);
+export default connect(mapStateToProps, { getInboxPlacementByProvider, getInboxPlacementByRegion, getInboxPlacementBySendingIp, getAllInboxPlacementMessages, resetState })(AllMessagesPage);
