@@ -73,7 +73,7 @@ export const FeatureChangeProvider = ({
                     Your current IPs will now be billed at $20/month each, or you can
                   </span>
                   <SupportTicketLink issueId="general_issue">
-                     submit a ticket
+                     &nbsp;submit a ticket&nbsp;
                   </SupportTicketLink>
                   <span>
                      to delete them.
