@@ -58,6 +58,8 @@ export const ChangePlanForm = ({
   const [selectedBundleCode, selectBundle] = useState(code);
   const bundlesByCode = useMemo(() => _.keyBy(bundles, 'bundle'), [bundles]);
   const selectedBundle = bundlesByCode[selectedBundleCode];
+  const isDowngradeToFree = _.get(selectedBundle, 'messaging.price') <= 0;
+
   const onSelect = (bundle) => {
     if (!bundle) {
       clearPromoCode();
@@ -88,7 +90,6 @@ export const ChangePlanForm = ({
   const onSubmit = (values) => {
     const { isAws } = restProps;
     const newCode = selectedBundleCode;
-    const isDowngradeToFree = selectedBundle.price <= 0;
     const { selectedPromo } = promoCodeObj;
     const billingId = _.get(selectedBundle, 'messaging.billing_id');
 
@@ -178,6 +179,7 @@ export const ChangePlanForm = ({
                   loading={submitting}
                   selectedBundle={selectedBundle}
                   account={account}
+                  brightbackCondition={isDowngradeToFree}
                 />
               </FeatureChangeContextProvider>
                </>

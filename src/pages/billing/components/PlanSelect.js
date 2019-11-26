@@ -24,6 +24,7 @@ export const useModal = () => {
 
 export const SelectedPlan = ({ bundle, onChange, promoCodeObj, handlePromoCode }) => {
   const { messaging: plan, tier } = bundle;
+  const { price } = plan;
 
   const { isShowing, toggle } = useModal(false);
   const { selectedPromo } = promoCodeObj;
@@ -59,15 +60,18 @@ export const SelectedPlan = ({ bundle, onChange, promoCodeObj, handlePromoCode }
           </div>
         </div>
       </Panel.Section>
-      <Panel.Section>
-        <div className={styles.PlanRow}>
-          <PromoCodeNew
-            key={selectedPromo.promoCode || 'promocode'}
-            promoCodeObj ={promoCodeObj}
-            handlePromoCode ={handlePromoCode}
-          />
-        </div>
-      </Panel.Section>
+      {price > 0 &&
+        <Panel.Section>
+          <div className={styles.PlanRow}>
+            <PromoCodeNew
+              key={selectedPromo.promoCode || 'promocode'}
+              promoCodeObj ={promoCodeObj}
+              handlePromoCode ={handlePromoCode}
+            />
+          </div>
+        </Panel.Section>
+      }
+
     </Panel>
   );
 };
