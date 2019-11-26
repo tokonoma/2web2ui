@@ -1,23 +1,31 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { Modal, Panel, Button } from '@sparkpost/matchbox';
 import ButtonWrapper from 'src/components/buttonWrapper';
 import PanelLoading from 'src/components/panelLoading';
-import useEditorContext from '../../hooks/useEditorContext';
 import { RedirectAndAlert } from 'src/components/globalAlert';
 import { routeNamespace } from '../../constants/routes';
 import styles from './DeleteTemplateModal.module.scss';
 
 const DeleteTemplateModal = (props) => {
-  const { open, onCancel } = props;
   const {
+    open,
+    onClose,
+    template,
     deleteTemplate,
-    isDeletePending,
-    template
-  } = useEditorContext();
+    isLoading,
+    successCallback
+  } = props;
   const [hasSuccessRedirect, setSuccessRedirect] = useState(false);
   const handleDelete = () => {
     deleteTemplate({ id: template.id, subaccountId: template.subaccount_id })
-      .then(() => setSuccessRedirect(true));
+      .then(() => {
+        if (successCallback) {
+          successCallback();
+        } else {
+          setSuccessRedirect(true);
+        }
+      });
   };
 
   return (
@@ -35,27 +43,20 @@ const DeleteTemplateModal = (props) => {
       <Modal
         open={open}
         showCloseButton
-        onClose={onCancel}
+        onClose={onClose}
       >
-        {isDeletePending && <PanelLoading/>}
-
-        {!isDeletePending && (
+        {isLoading ? <PanelLoading minHeight="190px"/> : (
           <Panel title="Are you sure you want to delete your template?">
             <Panel.Section>
-              <p>If so, the <strong className={styles.WarningText}>published version and any drafts</strong> will all be deleted.</p>
+              {/* The <span>s are used here to avoid the bare JSX string problem */}
+              <p><span>If so, the </span><strong className={styles.WarningText}>published version and any drafts</strong><span> will all be deleted.</span></p>
 
               <ButtonWrapper>
-                <Button
-                  destructive
-                  onClick={handleDelete}
-                >
+                <Button destructive onClick={handleDelete}>
                   Delete All Versions
                 </Button>
 
-                <Button
-                  className={styles.CancelButton}
-                  onClick={onCancel}
-                >
+                <Button className={styles.CancelButton} onClick={onClose}>
                   Keep Editing
                 </Button>
               </ButtonWrapper>
@@ -65,6 +66,15 @@ const DeleteTemplateModal = (props) => {
       </Modal>
     </>
   );
+};
+
+DeleteTemplateModal.propTypes = {
+  open: PropTypes.bool,
+  onClose: PropTypes.func,
+  template: PropTypes.object,
+  deleteTemplate: PropTypes.func,
+  isLoading: PropTypes.bool,
+  successCallback: PropTypes.func
 };
 
 export default DeleteTemplateModal;

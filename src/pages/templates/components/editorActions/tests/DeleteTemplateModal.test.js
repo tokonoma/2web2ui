@@ -2,22 +2,12 @@ import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
 import DeleteTemplateModal from '../DeleteTemplateModal';
-import useEditorContext from '../../../hooks/useEditorContext';
 import globalAlert from 'src/reducers/globalAlert';
 import renderWithRedux from 'src/__testHelpers__/renderWithRedux';
-jest.mock('../../../hooks/useEditorContext');
 jest.mock('../../../../../../src/components/globalAlert'); // Mocks `RedirectAndAlert` component
 
 describe('DeleteTemplateModal', () => {
-  const subject = (editorContext) => {
-    useEditorContext.mockReturnValue({
-      isDeletePending: false,
-      template: {
-        id: 'hello',
-        subaccount_id: 'world'
-      },
-      ...editorContext
-    });
+  const subject = (props) => {
     const initialState = {
       alerts: [],
       showBanner: true
@@ -28,7 +18,15 @@ describe('DeleteTemplateModal', () => {
       initialState,
       component: (
         <Router>
-          <DeleteTemplateModal/>
+          <DeleteTemplateModal
+            open={true}
+            template={{
+              id: 'hello',
+              subaccount_id: 'world'
+            }}
+            isLoading={false}
+            {...props}
+          />
         </Router>
       )
     });
