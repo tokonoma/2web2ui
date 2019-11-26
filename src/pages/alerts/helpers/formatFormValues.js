@@ -55,7 +55,7 @@ export default function formatFormValues(values) {
   const webhook = (values.webhook || '').trim();
 
   if (emails) {
-    channels.emails = multilineStringToArray(emails);
+    channels.emails = [...new Set(multilineStringToArray(emails))];
   }
 
   if (slack) {

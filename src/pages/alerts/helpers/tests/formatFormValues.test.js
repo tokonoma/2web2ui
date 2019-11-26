@@ -90,6 +90,22 @@ const testCases =
             webhook: { target: 'target2' }
           }
         }
+      },
+      'with duplicate email addresses': {
+        formData: { ...formData,
+          channels: {
+            email: [...emailAsArray, ...Array(5).fill(emailAsArray[0])]
+          },
+          slack: 'target1',
+          webhook: 'target2' },
+        apiData: {
+          ...apiData,
+          channels: {
+            emails: emailAsArray,
+            slack: { target: 'target1' },
+            webhook: { target: 'target2' }
+          }
+        }
       }
     };
 

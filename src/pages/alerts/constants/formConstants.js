@@ -65,12 +65,14 @@ const slackSubtitle = <Fragment>
   <UnstyledLink external to={'https://api.slack.com/incoming-webhooks'}>How to create a Slack Incoming webhook</UnstyledLink>
 </Fragment>;
 
+const countEmails = (emails) => emails.length <= 10;
+
 export const NOTIFICATION_CHANNEL_DATA = {
   emails: {
     icon: <EmailIcon />,
     subtitle: 'Receive notifications through email. One address per line. Up to 10 addresses.',
     fieldProps: {
-      validate: ifStringPresent(emails),
+      validate: [ifStringPresent(emails), countEmails],
       placeholder: 'example@email.com',
       multiline: true
     }
