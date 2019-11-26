@@ -1,4 +1,4 @@
-/* eslint max-lines: ["error", 200] */
+/* eslint max-lines: ["error", 250] */
 import React, { useEffect, useState, useCallback, useMemo } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -36,10 +36,10 @@ const FORMNAME = 'changePlan';
 export const ChangePlanForm = ({
   //redux form
   handleSubmit,
+  submitting,
   //Redux Props
   currentPlan,
   canUpdateBillingInfo,
-  submitting,
   history,
   //Redux Actions
   verifyPromoCode,
@@ -48,7 +48,8 @@ export const ChangePlanForm = ({
   updateSubscription,
   billingUpdate,
   billingCreate,
-  showAlert
+  showAlert,
+  ...restProps
 }) => {
   const { billingCountries, account, bundles, loading, error } = useChangePlanContext();
 
@@ -65,8 +66,13 @@ export const ChangePlanForm = ({
     selectBundle(bundle);
   };
 
-  const [useSavedCC, setUseSavedCC] = useState(false);
+  const [useSavedCC, setUseSavedCC] = useState(null);
   const handleCardToggle = () => setUseSavedCC(!useSavedCC);
+  useEffect(() => {
+    if (canUpdateBillingInfo && useSavedCC === null) {
+      setUseSavedCC(true);
+    }
+  }, [canUpdateBillingInfo, useSavedCC]);
 
   const isPlanSelected = Boolean(selectedBundle && currentPlan.plan !== selectedBundle.bundle);
 
@@ -79,16 +85,17 @@ export const ChangePlanForm = ({
   useEffect(() => {
     if (promo && selectedBundle) { applyPromoCode(promo); }
   },[applyPromoCode, promo, selectedBundle, verifyPromoCode]);
-
   const onSubmit = (values) => {
+    const { isAws } = restProps;
     const newCode = selectedBundleCode;
     const isDowngradeToFree = selectedBundle.price <= 0;
-    const selectedPromo = promoCodeObj;
+    const { selectedPromo } = promoCodeObj;
 
     const newValues = values.card && !isDowngradeToFree
       ? { ...values, card: prepareCardInfo(values.card) }
       : values;
     let action = Promise.resolve({});
+
     if (!_.isEmpty(selectedPromo) && !isDowngradeToFree) {
       newValues.promoCode = selectedPromo.promoCode;
       action = verifyPromoCode({ promoCode: selectedPromo.promoCode , billingId: _.get(selectedBundle, 'messaging.billing_id'), meta: { promoCode: selectedPromo.promoCode }});
@@ -98,7 +105,7 @@ export const ChangePlanForm = ({
         newValues.discountId = discount_id;
         // decides which action to be taken based on
         // if it's aws account, it already has billing and if you use a saved CC
-        if (this.props.isAws) {
+        if (isAws) {
           return updateSubscription({ bundle: newCode });
         } else if (account.billing) {
           return useSavedCC || isDowngradeToFree ? updateSubscription({ bundle: newCode, promoCode: selectedPromo.promoCode }) : billingUpdate(newValues);
@@ -138,8 +145,8 @@ export const ChangePlanForm = ({
               <SelectedPlan
                 bundle={selectedBundle}
                 onChange={onSelect}
-                promoCodeObj = {promoCodeObj}
-                handlePromoCode = {
+                promoCodeObj={promoCodeObj}
+                handlePromoCode={
                   {
                     applyPromoCode: applyPromoCode,
                     clearPromoCode: clearPromoCode
@@ -160,7 +167,11 @@ export const ChangePlanForm = ({
                     handleCardToggle={handleCardToggle}
                   />
                 </AccessControl>
-                <SubmitSection />
+                <SubmitSection
+                  loading={submitting}
+                  selectedBundle={selectedBundle}
+                  account={account}
+                />
               </FeatureChangeContextProvider>
                </>
               : <PlanSelectSection
