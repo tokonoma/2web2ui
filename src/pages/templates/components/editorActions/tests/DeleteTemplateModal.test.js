@@ -35,11 +35,9 @@ describe('DeleteTemplateModal', () => {
   it('invokes "deleteTemplate" when clicking "Delete All Versions"', () => {
     const mockDeleteTemplate = jest.fn(() => Promise.resolve());
 
-    const { getByText, debug } = subject({ deleteTemplate: mockDeleteTemplate });
+    const { getByText } = subject({ deleteTemplate: mockDeleteTemplate });
 
     userEvent.click(getByText('Delete All Versions'));
-
-    debug();
 
     expect(mockDeleteTemplate).toHaveBeenCalledWith({ id: 'hello', subaccountId: 'world' });
   });
