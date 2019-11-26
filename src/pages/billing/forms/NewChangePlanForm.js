@@ -77,9 +77,8 @@ export const ChangePlanForm = ({
   }, [canUpdateBillingInfo, useSavedCC]);
 
   const isPlanSelected = Boolean(selectedBundle && currentPlan.plan !== selectedBundle.bundle);
-
   const applyPromoCode = useCallback((promoCode) => {
-    const { billingId } = selectedBundle;
+    const { billing_id: billingId } = selectedBundle.messaging;
     verifyPromoCode({ promoCode , billingId, meta: { promoCode, showErrorAlert: false }});
   },[selectedBundle, verifyPromoCode]);
 

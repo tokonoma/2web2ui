@@ -22,9 +22,9 @@ describe('Change Plan Form', () => {
           name: 'Two',
           overage: 0.2,
           volume: 2,
-          isFree: true
-        },
-        billingId: 2
+          isFree: true,
+          billingId: 2
+        }
       },
       {
         bundle: '3',
@@ -34,9 +34,9 @@ describe('Change Plan Form', () => {
           monthly: 300,
           name: 'Three',
           overage: 0.3,
-          volume: 3
-        },
-        billingId: 3
+          volume: 3,
+          billingId: 3
+        }
       },
       {
         bundle: '4',
@@ -47,9 +47,9 @@ describe('Change Plan Form', () => {
           monthly: 400,
           name: 'Four',
           overage: 0.4,
-          volume: 4
-        },
-        billingId: 4
+          volume: 4,
+          billingId: 4
+        }
       }]
   };
   const defaultProps = {

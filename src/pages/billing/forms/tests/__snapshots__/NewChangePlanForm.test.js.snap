@@ -30,9 +30,9 @@ exports[`Change Plan Form should render 1`] = `
         bundles={
           Array [
             Object {
-              "billingId": 2,
               "bundle": "2",
               "messaging": Object {
+                "billingId": 2,
                 "code": "2",
                 "includesIp": false,
                 "isFree": true,
@@ -44,9 +44,9 @@ exports[`Change Plan Form should render 1`] = `
               "tier": "test",
             },
             Object {
-              "billingId": 3,
               "bundle": "3",
               "messaging": Object {
+                "billingId": 3,
                 "code": "3",
                 "monthly": 300,
                 "name": "Three",
@@ -56,9 +56,9 @@ exports[`Change Plan Form should render 1`] = `
               "tier": "starter",
             },
             Object {
-              "billingId": 4,
               "bundle": "4",
               "messaging": Object {
+                "billingId": 4,
                 "code": "4",
                 "includesIp": true,
                 "monthly": 400,
