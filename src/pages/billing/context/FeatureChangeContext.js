@@ -6,7 +6,7 @@ import { Button } from '@sparkpost/matchbox';
 import { getSubscription } from 'src/actions/billing';
 import { selectPlansByKey } from 'src/selectors/accountBillingInfo';
 import SupportTicketLink from 'src/components/supportTicketLink/SupportTicketLink';
-import { pluralString } from 'src/helpers/string';
+// import { pluralString } from 'src/helpers/string';
 
 const FeatureChangeContext = createContext({});
 
@@ -58,7 +58,7 @@ export const FeatureChangeProvider = ({
 
     const { products: currentProducts } = subscription;
 
-    const diffObject = currentProducts.reduce((resObject, { product, quantity }) => {
+    const diffObject = currentProducts.reduce((resObject, { product }) => {
       const comparedPlan = selectedPlansByProduct[product];
 
       switch (product) {
@@ -92,34 +92,34 @@ export const FeatureChangeProvider = ({
             };
           }
           return resObject;
-        case 'subaccounts': {
-          const limit = _.get(comparedPlan, 'limit', 0);
-          const condition = Boolean(quantity <= limit);
-          if (actions.subaccounts || !condition) {
-            resObject.subaccounts = {
-              label: 'Subaccounts',
-              description: (
-                <div>
-                  {
-                    limit === 0
-                      ? 'Your new plan doesn\'t include subaccounts.'
-                      : `Your new plan only allows for ${pluralString(limit, 'active subaccount', 'active subaccounts')}.`
-                  }
-                  {!condition &&
-                    <>
-                      <span> Please </span>
-                      <strong>change the status to terminated for {pluralString(quantity - limit, 'subaccount', 'subaccounts')}</strong>
-                      <span> to continue.</span>
-                    </>
-                  }
-                </div>
-              ),
-              condition,
-              action: <Button destructive external to='/account/subaccounts'>Update Status</Button>
-            };
-          }
-          return resObject;
-        }
+        // case 'subaccounts': {
+        //   const limit = _.get(comparedPlan, 'limit', 0);
+        //   const condition = Boolean(quantity <= limit);
+        //   if (actions.subaccounts || !condition) {
+        //     resObject.subaccounts = {
+        //       label: 'Subaccounts',
+        //       description: (
+        //         <div>
+        //           {
+        //             limit === 0
+        //               ? 'Your new plan doesn\'t include subaccounts.'
+        //               : `Your new plan only allows for ${pluralString(limit, 'active subaccount', 'active subaccounts')}.`
+        //           }
+        //           {!condition &&
+        //             <>
+        //               <span> Please </span>
+        //               <strong>change the status to terminated for {pluralString(quantity - limit, 'subaccount', 'subaccounts')}</strong>
+        //               <span> to continue.</span>
+        //             </>
+        //           }
+        //         </div>
+        //       ),
+        //       condition,
+        //       action: <Button destructive external to='/account/subaccounts'>Update Status</Button>
+        //     };
+        //   }
+        //   return resObject;
+        // }
         case 'messaging':
         default:
           return resObject;
