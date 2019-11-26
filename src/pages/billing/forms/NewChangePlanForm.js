@@ -16,12 +16,14 @@ import AccessControl from 'src/components/auth/AccessControl';
 
 import FeatureChangeSection from '../components/FeatureChangeSection';
 import { FeatureChangeContextProvider } from '../context/FeatureChangeContext';
-import { verifyPromoCode, clearPromoCode } from 'src/actions/billing';
+import { verifyPromoCode, clearPromoCode, updateSubscription } from 'src/actions/billing';
+import billingCreate from 'src/actions/billingCreate';
+import billingUpdate from 'src/actions/billingUpdate';
+import { showAlert } from 'src/actions/globalAlert';
 //Selectors
 import { currentPlanSelector, canUpdateBillingInfoSelector, getPromoCodeObject } from 'src/selectors/accountBillingInfo';
 import { changePlanInitialValues } from 'src/selectors/accountBillingForms';
 import { selectCondition } from 'src/selectors/accessConditionState';
-import * as conversions from 'src/helpers/conversionTracking';
 
 import { ApiErrorBanner } from 'src/components';
 import { Loading } from 'src/components/loading/Loading';
@@ -38,10 +40,15 @@ export const ChangePlanForm = ({
   currentPlan,
   canUpdateBillingInfo,
   submitting,
+  history,
   //Redux Actions
   verifyPromoCode,
   promoCodeObj,
-  clearPromoCode
+  clearPromoCode,
+  updateSubscription,
+  billingUpdate,
+  billingCreate,
+  showAlert
 }) => {
   const { billingCountries, account, bundles, loading, error } = useChangePlanContext();
 
@@ -74,18 +81,17 @@ export const ChangePlanForm = ({
   },[applyPromoCode, promo, selectedBundle, verifyPromoCode]);
 
   const onSubmit = (values) => {
-    const { billing, updateSubscription, billingCreate, billingUpdate, showAlert, history, verifyPromoCode } = this.props;
-    const oldCode = account.subscription.code;
     const newCode = selectedBundleCode;
     const isDowngradeToFree = selectedBundle.price <= 0;
-    const selectedPromo = billing.selectedPromo;
+    const selectedPromo = promoCodeObj;
+
     const newValues = values.card && !isDowngradeToFree
       ? { ...values, card: prepareCardInfo(values.card) }
       : values;
     let action = Promise.resolve({});
     if (!_.isEmpty(selectedPromo) && !isDowngradeToFree) {
       newValues.promoCode = selectedPromo.promoCode;
-      action = verifyPromoCode({ promoCode: selectedPromo.promoCode , billingId: values.planpicker.billingId, meta: { promoCode: selectedPromo.promoCode }});
+      action = verifyPromoCode({ promoCode: selectedPromo.promoCode , billingId: _.get(selectedBundle, 'messaging.billing_id'), meta: { promoCode: selectedPromo.promoCode }});
     }
     return action
       .then(({ discount_id }) => {
@@ -95,16 +101,13 @@ export const ChangePlanForm = ({
         if (this.props.isAws) {
           return updateSubscription({ bundle: newCode });
         } else if (account.billing) {
-          return this.state.useSavedCC || isDowngradeToFree ? updateSubscription({ bundle: newCode, promoCode: selectedPromo.promoCode }) : billingUpdate(newValues);
+          return useSavedCC || isDowngradeToFree ? updateSubscription({ bundle: newCode, promoCode: selectedPromo.promoCode }) : billingUpdate(newValues);
         } else {
           return billingCreate(newValues); // creates Zuora account
         }
       })
       .then(() => history.push('/account/billing'))
-      .then(() => {
-        conversions.trackPlanChange({ allPlans: billing.plans, oldCode, newCode });
-        return showAlert({ type: 'success', message: 'Subscription Updated' });
-      });
+      .then(() => showAlert({ type: 'success', message: 'Subscription Updated' }));
   };
 
   if (error) {
@@ -189,7 +192,7 @@ const formOptions = {
 };
 
 export default withRouter(
-  connect(mapStateToProps, { verifyPromoCode, clearPromoCode })(
+  connect(mapStateToProps, { verifyPromoCode, clearPromoCode, updateSubscription, billingUpdate, billingCreate, showAlert })(
     reduxForm(formOptions)(ChangePlanForm)
   )
 );
