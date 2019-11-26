@@ -12,7 +12,8 @@ import {
   hasOnlineSupport,
   hasUiOption,
   isAccountUiOptionSet,
-  hasAccountOptionEnabled
+  hasAccountOptionEnabled,
+  getAccountUiOptionValue
 } from '../account';
 
 import cases from 'jest-in-case';
@@ -270,4 +271,25 @@ describe('Condition: hasAccountOptionEnabled', () => {
     state.account.options = null;
     expect(hasAccountOptionEnabled('auto_verify_domains')(state)).toEqual(false);
   });
+});
+
+
+describe('Condition: getAccountUiOptionValue', () => {
+  let state;
+
+  beforeEach(() => {
+    state = {
+      account: {
+        options: {
+          ui: {
+            stepName: 'Sending'
+          }
+        }
+      }
+    };
+  });
+  it('should return the value of the ui option', () => {
+    expect(getAccountUiOptionValue('stepName')(state)).toEqual('Sending');
+  });
+
 });

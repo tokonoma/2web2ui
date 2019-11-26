@@ -13,7 +13,7 @@ import Legend from './components/charts/legend/Legend';
 import Divider from './components/Divider';
 import Page from './components/SignalsPage';
 import Tabs from './components/engagement/Tabs';
-import TooltipMetric from './components/charts/tooltip/TooltipMetric';
+import TooltipMetric from 'src/components/charts/TooltipMetric';
 import withDetails from './containers/withDetails';
 import withDateSelection from './containers/withDateSelection';
 import { ENGAGEMENT_RECENCY_COHORTS, ENGAGEMENT_RECENCY_INFO } from './constants/info';

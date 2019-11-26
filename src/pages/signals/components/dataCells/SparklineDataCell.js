@@ -4,7 +4,7 @@ import { Dot } from 'recharts';
 import { formatPrecisePercent } from 'src/helpers/units';
 import colorMapByRank from '../../constants/colorMapByRank';
 import Sparkline from '../charts/sparkline/Sparkline';
-import TooltipMetric from '../charts/tooltip/TooltipMetric';
+import TooltipMetric from 'src/components/charts/TooltipMetric';
 import EmptyDataCell from './EmptyDataCell';
 
 const StyledDot = (props) => (

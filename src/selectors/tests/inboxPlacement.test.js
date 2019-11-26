@@ -1,7 +1,9 @@
 import { selectReferenceSeed,
   selectTestDetailsPageError,
   selectTestDetailsPageLoading,
-  selectSinglePlacementResult } from '../inboxPlacement';
+  selectSinglePlacementResult,
+  selectTrends } from '../inboxPlacement';
+import moment from 'moment';
 
 describe('Selectors: Inbox Placement', () => {
   describe('selectReferenceSeed', () => {
@@ -116,6 +118,59 @@ describe('Selectors: Inbox Placement', () => {
     it('returns region', () => {
       const props = { match: { params: { filterType: 'region', filterName: 'europe' }}};
       expect(selectSinglePlacementResult(state, props)).toEqual(state.inboxPlacement.placementsByRegion[0]);
+    });
+  });
+
+  describe('selectTrends', () => {
+    moment.tz.setDefault('America/New_York');
+    const date = moment(new Date('2019-11-11T12:00:00Z'));
+    Date.now = jest.fn(() => date);
+
+    afterAll(() => {
+      moment.tz.setDefault();
+    });
+
+    it('returns empty array if there is no trends data', () => {
+      const state = {
+        inboxPlacement: {
+          trends: []
+        }
+      };
+      expect(selectTrends(state)).toEqual([]);
+    });
+
+    it('returns trends array filled out with missing dates', () => {
+      const state = {
+        inboxPlacement: {
+          trends: [{
+            date: '2019-11-11',
+            folders: {
+              inbox_pct: .8,
+              spam_pct: .25,
+              missing_pct: .05
+            },
+            total_messages: 10
+          }]
+        }
+      };
+      const expectedNormalized = {
+        date: '2019-11-11',
+        inbox: .8,
+        spam: .25,
+        missing: .05,
+        totalMessages: 10
+      };
+      const expectedFill = {
+        date: '2019-10-12',
+        inbox: null,
+        spam: null,
+        missing: null,
+        totalMessages: null
+      };
+      const result = selectTrends(state);
+      expect(result).toHaveLength(31);
+      expect(result[30]).toEqual(expectedNormalized);
+      expect(result[0]).toEqual(expectedFill);
     });
   });
 });

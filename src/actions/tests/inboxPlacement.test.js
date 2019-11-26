@@ -27,6 +27,18 @@ describe('Action Creator: Inbox Placement', () => {
     });
   });
 
+  it('it makes request to get trends', async () => {
+    await inboxPlacement.getInboxPlacementTrends({ myparams: 'foo' });
+    expect(sparkpostApiRequest).toHaveBeenCalledWith({
+      type: 'GET_INBOX_PLACEMENT_TRENDS',
+      meta: {
+        method: 'GET',
+        url: '/v1/inbox-placement/message-trends',
+        params: { myparams: 'foo' }
+      }
+    });
+  });
+
   it('makes request to get single inbox placement test', async () => {
     await inboxPlacement.getInboxPlacementTest(1);
     expect(sparkpostApiRequest).toHaveBeenCalledWith({

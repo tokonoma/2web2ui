@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { ResponsiveContainer, LineChart, Line, Tooltip, YAxis } from 'recharts';
-import TooltipWrapper from '../tooltip/Tooltip';
+import TooltipWrapper from 'src/components/charts/Tooltip';
 
 /**
  * Sparkline
