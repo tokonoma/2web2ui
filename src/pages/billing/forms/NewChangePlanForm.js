@@ -76,7 +76,7 @@ export const ChangePlanForm = ({
   const onSubmit = (values) => {
     const { billing, updateSubscription, billingCreate, billingUpdate, showAlert, history, verifyPromoCode } = this.props;
     const oldCode = account.subscription.code;
-    const newCode = values.planpicker.code;
+    const newCode = selectedBundleCode;
     const isDowngradeToFree = selectedBundle.price <= 0;
     const selectedPromo = billing.selectedPromo;
     const newValues = values.card && !isDowngradeToFree
@@ -93,9 +93,9 @@ export const ChangePlanForm = ({
         // decides which action to be taken based on
         // if it's aws account, it already has billing and if you use a saved CC
         if (this.props.isAws) {
-          return updateSubscription({ code: newCode });
+          return updateSubscription({ bundle: newCode });
         } else if (account.billing) {
-          return this.state.useSavedCC || isDowngradeToFree ? updateSubscription({ code: newCode, promoCode: selectedPromo.promoCode }) : billingUpdate(newValues);
+          return this.state.useSavedCC || isDowngradeToFree ? updateSubscription({ bundle: newCode, promoCode: selectedPromo.promoCode }) : billingUpdate(newValues);
         } else {
           return billingCreate(newValues); // creates Zuora account
         }

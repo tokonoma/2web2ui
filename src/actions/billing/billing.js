@@ -1,27 +1,17 @@
 /* eslint max-lines: ["error", 215] */
 import { formatContactData } from 'src/helpers/billing';
-import { fetch as fetchAccount, getBillingInfo } from './account';
-import { list as getSendingIps } from './sendingIps';
+import { fetch as fetchAccount, getBillingInfo } from '../account';
+import { list as getSendingIps } from '../sendingIps';
 import { isAws } from 'src/helpers/conditions/account';
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
 import zuoraRequest from 'src/actions/helpers/zuoraRequest';
-
-export function syncSubscription({ meta = {}} = {}) {
-  return sparkpostApiRequest({
-    type: 'SYNC_SUBSCRIPTION',
-    meta: {
-      method: 'POST',
-      url: '/v1/account/subscription/check',
-      ...meta
-    }
-  });
-}
 
 /**
  * Updates plan
  * @param {string} code
  */
-export function updateSubscription({ code, promoCode, meta = {}}) {
+export function updateSubscription({ code, bundle = code, promoCode, meta = {}}) {
+
   const getBillingAction = () => getBillingInfo();
   const fetchAccountAction = () => fetchAccount({ include: 'usage', meta: { onSuccess: getBillingAction }});
   return (dispatch, getState) => dispatch(
@@ -29,10 +19,11 @@ export function updateSubscription({ code, promoCode, meta = {}}) {
       type: 'UPDATE_SUBSCRIPTION',
       meta: {
         method: 'PUT',
-        url: isAws(getState()) ? '/v1/account/aws-marketplace/subscription' : '/v1/account/subscription',
+        url: isAws(getState()) ? '/v1/account/aws-marketplace/subscription' : '/v1/billing/subscription/bundle',
         data: {
           promo_code: promoCode,
-          code
+          code,
+          bundle
         },
         ...meta,
         onSuccess: meta.onSuccess ? meta.onSuccess : fetchAccountAction
