@@ -32,7 +32,7 @@ exports[`Change Plan Form should render 1`] = `
             Object {
               "bundle": "2",
               "messaging": Object {
-                "billingId": 2,
+                "billing_id": 2,
                 "code": "2",
                 "includesIp": false,
                 "isFree": true,
@@ -46,7 +46,7 @@ exports[`Change Plan Form should render 1`] = `
             Object {
               "bundle": "3",
               "messaging": Object {
-                "billingId": 3,
+                "billing_id": 3,
                 "code": "3",
                 "monthly": 300,
                 "name": "Three",
@@ -58,7 +58,7 @@ exports[`Change Plan Form should render 1`] = `
             Object {
               "bundle": "4",
               "messaging": Object {
-                "billingId": 4,
+                "billing_id": 4,
                 "code": "4",
                 "includesIp": true,
                 "monthly": 400,

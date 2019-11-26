@@ -23,7 +23,7 @@ describe('Change Plan Form', () => {
           overage: 0.2,
           volume: 2,
           isFree: true,
-          billingId: 2
+          billing_id: 2
         }
       },
       {
@@ -35,7 +35,7 @@ describe('Change Plan Form', () => {
           name: 'Three',
           overage: 0.3,
           volume: 3,
-          billingId: 3
+          billing_id: 3
         }
       },
       {
@@ -48,7 +48,7 @@ describe('Change Plan Form', () => {
           name: 'Four',
           overage: 0.4,
           volume: 4,
-          billingId: 4
+          billing_id: 4
         }
       }]
   };
@@ -111,7 +111,7 @@ describe('Change Plan Form', () => {
     expect(wrapper.find('SelectedPlan')).toHaveProp('bundle', defaultContext.bundles[0]);
 
     expect(defaultProps.verifyPromoCode).toHaveBeenCalledWith({ promoCode: 'THXFISH2',
-      billingId: defaultContext.bundles[0].billingId,
+      billingId: defaultContext.bundles[0].messaging.billing_id,
       meta: { promoCode: 'THXFISH2', showErrorAlert: false }});
   });
 });

@@ -78,8 +78,10 @@ export const ChangePlanForm = ({
 
   const isPlanSelected = Boolean(selectedBundle && currentPlan.plan !== selectedBundle.bundle);
   const applyPromoCode = useCallback((promoCode) => {
-    const { billing_id: billingId } = selectedBundle.messaging;
-    verifyPromoCode({ promoCode , billingId, meta: { promoCode, showErrorAlert: false }});
+    const billingId = _.get(selectedBundle, 'messaging.billing_id');
+    if (billingId) {
+      verifyPromoCode({ promoCode , billingId, meta: { promoCode, showErrorAlert: false }});
+    }
   },[selectedBundle, verifyPromoCode]);
 
   //Applies promo code if in query param
