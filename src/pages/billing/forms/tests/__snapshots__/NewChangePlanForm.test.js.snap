@@ -28,50 +28,47 @@ exports[`Change Plan Form should render 1`] = `
     >
       <PlanSelectSection
         bundles={
-          Object {
-            "premier": Array [
-              Object {
-                "billingId": 4,
-                "bundle": "4",
-                "messaging": Object {
-                  "code": "4",
-                  "includesIp": true,
-                  "monthly": 400,
-                  "name": "Four",
-                  "overage": 0.4,
-                  "volume": 4,
-                },
+          Array [
+            Object {
+              "billingId": 2,
+              "bundle": "2",
+              "messaging": Object {
+                "code": "2",
+                "includesIp": false,
+                "isFree": true,
+                "monthly": 0,
+                "name": "Two",
+                "overage": 0.2,
+                "volume": 2,
               },
-            ],
-            "starter": Array [
-              Object {
-                "billingId": 3,
-                "bundle": "3",
-                "messaging": Object {
-                  "code": "3",
-                  "monthly": 300,
-                  "name": "Three",
-                  "overage": 0.3,
-                  "volume": 3,
-                },
+              "tier": "test",
+            },
+            Object {
+              "billingId": 3,
+              "bundle": "3",
+              "messaging": Object {
+                "code": "3",
+                "monthly": 300,
+                "name": "Three",
+                "overage": 0.3,
+                "volume": 3,
               },
-            ],
-            "test": Array [
-              Object {
-                "billingId": 2,
-                "bundle": "2",
-                "messaging": Object {
-                  "code": "2",
-                  "includesIp": false,
-                  "isFree": true,
-                  "monthly": 0,
-                  "name": "Two",
-                  "overage": 0.2,
-                  "volume": 2,
-                },
+              "tier": "starter",
+            },
+            Object {
+              "billingId": 4,
+              "bundle": "4",
+              "messaging": Object {
+                "code": "4",
+                "includesIp": true,
+                "monthly": 400,
+                "name": "Four",
+                "overage": 0.4,
+                "volume": 4,
               },
-            ],
-          }
+              "tier": "premier",
+            },
+          ]
         }
         currentPlan={
           Object {

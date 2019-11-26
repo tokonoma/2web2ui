@@ -2,15 +2,19 @@ import React from 'react';
 import { ChangePlanForm } from '../NewChangePlanForm';
 import { shallow, mount } from 'enzyme';
 import useRouter from 'src/hooks/useRouter';
+import { useChangePlanContext } from '../../context/ChangePlanContext';
 
 jest.mock('src/hooks/useRouter');
 jest.mock('../../context/FeatureChangeContext');
+jest.mock('../../context/ChangePlanContext');
 
 describe('Change Plan Form', () => {
-  const defaultProps = {
-    bundles: {
-      'test': [{
+
+  const defaultContext = {
+    bundles:
+      [{
         bundle: '2',
+        tier: 'test',
         messaging: {
           code: '2',
           includesIp: false,
@@ -21,9 +25,10 @@ describe('Change Plan Form', () => {
           isFree: true
         },
         billingId: 2
-      }],
-      'starter': [{
+      },
+      {
         bundle: '3',
+        tier: 'starter',
         messaging: {
           code: '3',
           monthly: 300,
@@ -32,9 +37,10 @@ describe('Change Plan Form', () => {
           volume: 3
         },
         billingId: 3
-      }],
-      'premier': [{
+      },
+      {
         bundle: '4',
+        tier: 'premier',
         messaging: {
           code: '4',
           includesIp: true,
@@ -45,22 +51,8 @@ describe('Change Plan Form', () => {
         },
         billingId: 4
       }]
-    },
-    allBundles: [
-      {
-        bundle: '2',
-        messaging: {
-          code: '2',
-          includesIp: false,
-          monthly: 0,
-          name: 'Two',
-          overage: 0.2,
-          volume: 2,
-          isFree: true
-        },
-        billingId: 2
-      }
-    ],
+  };
+  const defaultProps = {
     currentPlan: {
       tier: 'starter',
       code: 'big-code',
@@ -70,9 +62,6 @@ describe('Change Plan Form', () => {
       volume: 3,
       billingId: 3
     },
-    getBundles: jest.fn(() => Promise.resolve()),
-    getBillingCountries: jest.fn(),
-    getBillingInfo: jest.fn(),
     clearPromoCode: jest.fn(),
     verifyPromoCode: jest.fn(),
     applyPromoCode: jest.fn(),
@@ -89,11 +78,16 @@ describe('Change Plan Form', () => {
     handleSubmit: jest.fn()
   };
 
-  const subject = (routerState = {}, render = shallow) => {
+  const subject = (routerState = {}, render = shallow, context = {}) => {
     useRouter.mockReturnValue({
       requestParams: {},
       updateRoute: () => {},
       ...routerState
+    });
+
+    useChangePlanContext.mockReturnValue({
+      ...defaultContext,
+      ...context
     });
 
     return render(
@@ -107,14 +101,6 @@ describe('Change Plan Form', () => {
     expect(subject()).toMatchSnapshot();
   });
 
-  it('should call functions on initial render', () => {
-    subject({}, mount);
-    expect(defaultProps.getBundles).toHaveBeenCalled();
-    expect(defaultProps.getBillingCountries).toHaveBeenCalled();
-    expect(defaultProps.getBillingInfo).toHaveBeenCalled();
-    expect(defaultProps.clearPromoCode).toHaveBeenCalled();
-  });
-
   it('selects plan and applies promocode if code present in request params', () => {
     const wrapper = subject({
       requestParams: {
@@ -122,10 +108,10 @@ describe('Change Plan Form', () => {
         promo: 'THXFISH2'
       }
     }, mount);
-    expect(wrapper.find('SelectedPlan')).toHaveProp('bundle', defaultProps.bundles.test[0]);
+    expect(wrapper.find('SelectedPlan')).toHaveProp('bundle', defaultContext.bundles[0]);
 
     expect(defaultProps.verifyPromoCode).toHaveBeenCalledWith({ promoCode: 'THXFISH2',
-      billingId: defaultProps.bundles.test[0].billingId,
+      billingId: defaultContext.bundles[0].billingId,
       meta: { promoCode: 'THXFISH2', showErrorAlert: false }});
   });
 });
