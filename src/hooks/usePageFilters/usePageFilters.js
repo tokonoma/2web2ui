@@ -17,11 +17,16 @@ const reducer = (state, action) => {
   }
 };
 
-const cleanReducer = (state, action) => cleanFilterState(reducer(state, action));
+const noValidation = () => true;
 
-const cleanFilterState = (filters) => Object.keys(filters).reduce((clean, key) => {
-  if (filters[key] !== undefined) {
-    clean[key] = filters[key];
+const cleanFilterState = (filters, whitelist) => Object.keys(filters).reduce((clean, key) => {
+  if (whitelist[key]) {
+    const { validate = noValidation, defaultValue = '' } = whitelist[key];
+    if (!validate(filters[key])) {
+      clean[key] = defaultValue;
+    } else {
+      clean[key] = filters[key];
+    }
   }
   return clean;
 }, {});
@@ -29,11 +34,24 @@ const cleanFilterState = (filters) => Object.keys(filters).reduce((clean, key) =
 /**
  * Maintains state of page filters based on the URL.
  * Use `updateFilters` to pass an object of filters that will be propagated into the URL
- * Setting a key to undefined in the `updateFilters` object will remove it from the state
+ *
+ * `whitelist` param is an object where the keys are the possible filter names and the value for each key is an object
+ * with a `validate` function and a `defaultValue` for the filter.
+ *
+ * ex.
+ * ```
+ * {
+ *   page: {
+ *     validate: val => !isNaN(val) && val > 0 && val < 10,
+ *     defaultValue: 1
+ *   }
+ * }
+ * ```
  */
-const usePageFilters = () => {
+const usePageFilters = (whitelist) => {
   const { requestParams = {}, updateRoute } = useRouter();
   const defaultFilters = useRef(requestParams);
+  const cleanReducer = useCallback((state, action) => cleanFilterState(reducer(state, action), whitelist), [whitelist]);
   const [filters, dispatch] = useReducer(cleanReducer, defaultFilters.current);
 
   const updateFilters = useCallback((filters) => dispatch({ type: PAGE_FILTER_ACTIONS.SPREAD, payload: filters }), []);
