@@ -194,7 +194,7 @@
     "sass-loader": "7.1.0",
     "semver": "^5.5.0",
     "start-server-and-test": "^1.10.0",
-    "style-loader": "0.23.1",
+    "style-loader": "1.0.1",
     "stylelint": "^12.0.0",
     "stylelint-config-prettier": "^6.0.0",
     "stylelint-prettier": "^1.1.1",
