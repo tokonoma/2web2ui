@@ -75,7 +75,7 @@ Array [
         "context": "create-account",
       },
       "responseType": "json",
-      "url": "/v1/account/cors-data",
+      "url": "/v1/billing/cors-data",
     },
   ],
   Array [
