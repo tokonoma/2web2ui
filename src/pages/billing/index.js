@@ -1,5 +1,5 @@
 import SummaryPage from './SummaryPage';
-import ChangePlanPage from './ChangePlanPage.container';
+import ChangePlanPage from './ChangePlanPage';
 import EnableAutomaticBillingPage from './EnableAutomaticBillingPage';
 import ImmediateChangePlanPage from './ImmediateChangePlanPage';
 

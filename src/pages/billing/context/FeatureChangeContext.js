@@ -6,7 +6,7 @@ import { Button } from '@sparkpost/matchbox';
 import { getSubscription } from 'src/actions/billing';
 import { selectPlansByKey } from 'src/selectors/accountBillingInfo';
 import SupportTicketLink from 'src/components/supportTicketLink/SupportTicketLink';
-// import { pluralString } from 'src/helpers/string';
+import { pluralString } from 'src/helpers/string';
 
 const FeatureChangeContext = createContext({});
 
@@ -28,24 +28,26 @@ export const FeatureChangeProvider = ({
 
 
   //Rechecks conditions on re-entering tab. Only initializes once
-  const checkConditions = useCallback(() => { getSubscription(); }, [getSubscription]);
+  //TODO: Remove index
+  const [index, setIndex] = useState(0);
+  const checkConditions = useCallback(() => { getSubscription(index); setIndex(index + 1); }, [index, getSubscription]);
   useEffect(() => {
     window.addEventListener('focus', checkConditions);
     return () => {
       window.removeEventListener('focus', checkConditions);
     };
-  }, [checkConditions]);
+  }, [checkConditions, index]); //TODO: Remove index
 
   //Keys the selected plan by product to make for easier comparison
   const selectedPlansByProduct = useMemo(() => {
-
-    const { products } = selectedBundle;
-    return products.reduce((res, { product, plan: planId }) => (
-      {
+    const { plans: selectedPlans } = selectedBundle;
+    return selectedPlans.reduce((res, planId) => {
+      const plan = plans[planId];
+      return {
         ...res,
-        [product]: plans[planId]
-      }
-    ), {});
+        [plan.product]: plan
+      };
+    }, {});
   }, [plans, selectedBundle]);
 
   // Used for finding the features that need to have a proper function
@@ -57,10 +59,8 @@ export const FeatureChangeProvider = ({
     }
 
     const { products: currentProducts } = subscription;
-
-    const diffObject = currentProducts.reduce((resObject, { product }) => {
+    const diffObject = currentProducts.reduce((resObject, { product, quantity }) => {
       const comparedPlan = selectedPlansByProduct[product];
-
       switch (product) {
         case 'dedicated_ip':
           if (actions.dedicated_ip || !comparedPlan) {
@@ -73,7 +73,7 @@ export const FeatureChangeProvider = ({
                     Your current IPs will now be billed at $20/month each, or you can
                   </span>
                   <SupportTicketLink issueId="general_issue">
-                     &nbsp;submit a ticket&nbsp;
+                     submit a ticket
                   </SupportTicketLink>
                   <span>
                      to delete them.
@@ -92,34 +92,34 @@ export const FeatureChangeProvider = ({
             };
           }
           return resObject;
-        // case 'subaccounts': {
-        //   const limit = _.get(comparedPlan, 'limit', 0);
-        //   const condition = Boolean(quantity <= limit);
-        //   if (actions.subaccounts || !condition) {
-        //     resObject.subaccounts = {
-        //       label: 'Subaccounts',
-        //       description: (
-        //         <div>
-        //           {
-        //             limit === 0
-        //               ? 'Your new plan doesn\'t include subaccounts.'
-        //               : `Your new plan only allows for ${pluralString(limit, 'active subaccount', 'active subaccounts')}.`
-        //           }
-        //           {!condition &&
-        //             <>
-        //               <span> Please </span>
-        //               <strong>change the status to terminated for {pluralString(quantity - limit, 'subaccount', 'subaccounts')}</strong>
-        //               <span> to continue.</span>
-        //             </>
-        //           }
-        //         </div>
-        //       ),
-        //       condition,
-        //       action: <Button destructive external to='/account/subaccounts'>Update Status</Button>
-        //     };
-        //   }
-        //   return resObject;
-        // }
+        case 'subaccounts': {
+          const limit = _.get(comparedPlan, 'limit', 0);
+          const condition = Boolean(quantity <= limit);
+          if (actions.subaccounts || !condition) {
+            resObject.subaccounts = {
+              label: 'Subaccounts',
+              description: (
+                <div>
+                  {
+                    limit === 0
+                      ? 'Your new plan doesn\'t include subaccounts.'
+                      : `Your new plan only allows for ${pluralString(limit, 'active subaccount', 'active subaccounts')}.`
+                  }
+                  {!condition &&
+                    <>
+                      <span> Please </span>
+                      <strong>change the status to terminated for {pluralString(quantity - limit, 'subaccount', 'subaccounts')}</strong>
+                      <span> to continue.</span>
+                    </>
+                  }
+                </div>
+              ),
+              condition,
+              action: <Button destructive external to='/account/subaccounts'>Update Status</Button>
+            };
+          }
+          return resObject;
+        }
         case 'messaging':
         default:
           return resObject;

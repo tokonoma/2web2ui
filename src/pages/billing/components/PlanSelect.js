@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { Panel, Button } from '@sparkpost/matchbox';
 import { Check, ViewModule } from '@sparkpost/matchbox-icons';
 import { PLAN_TIERS } from 'src/constants';
@@ -24,7 +24,6 @@ export const useModal = () => {
 
 export const SelectedPlan = ({ bundle, onChange, promoCodeObj, handlePromoCode }) => {
   const { messaging: plan, tier } = bundle;
-  const { price } = plan;
 
   const { isShowing, toggle } = useModal(false);
   const { selectedPromo } = promoCodeObj;
@@ -60,36 +59,28 @@ export const SelectedPlan = ({ bundle, onChange, promoCodeObj, handlePromoCode }
           </div>
         </div>
       </Panel.Section>
-      {price > 0 &&
-        <Panel.Section>
-          <div className={styles.PlanRow}>
-            <PromoCodeNew
-              key={selectedPromo.promoCode || 'promocode'}
-              promoCodeObj ={promoCodeObj}
-              handlePromoCode ={handlePromoCode}
-            />
-          </div>
-        </Panel.Section>
-      }
-
+      <Panel.Section>
+        <div className={styles.PlanRow}>
+          <PromoCodeNew
+            key={selectedPromo.promoCode || 'promocode'}
+            promoCodeObj ={promoCodeObj}
+            handlePromoCode ={handlePromoCode}
+          />
+        </div>
+      </Panel.Section>
     </Panel>
   );
 };
 
 
 const PlanSelectSection = ({ bundles, currentPlan, onSelect }) => {
-
-  const bundlesByTier = useMemo(() =>
-    _.groupBy(bundles, 'tier')
-  , [bundles]);
-
   const { isShowing, toggle } = useModal(false);
-  const planList = _.map(PLAN_TIERS, (label, key) => (bundlesByTier[key] &&
+  const planList = _.map(PLAN_TIERS, (label, key) => (bundles[key] &&
     <Panel.Section key={`tier_section_${key}`}>
       <div className={styles.tierLabel}>{label}</div>
       <div className={styles.tierPlans}>
         {
-          bundlesByTier[key].map((bundle) => {
+          bundles[key].map((bundle) => {
             const { messaging, bundle: bundleCode } = bundle;
             const isCurrentPlan = currentPlan.code === bundleCode;
             return (
@@ -102,7 +93,7 @@ const PlanSelectSection = ({ bundles, currentPlan, onSelect }) => {
                   <Button
                     className={styles.selectButton}
                     disabled={isCurrentPlan}
-                    onClick={() => onSelect(bundleCode)}
+                    onClick={() => onSelect(bundle)}
                     size='small'>
                       Select
                   </Button>

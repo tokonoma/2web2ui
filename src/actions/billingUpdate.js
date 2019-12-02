@@ -15,8 +15,8 @@ export default function billingUpdate(values) {
     const corsUpdateBilling = ({ meta }) => (
       cors({ context: 'update-billing', meta })
     );
-    const maybeUpdateSubscription = ({ meta }) => values.planpicker || values.bundle
-      ? updateSubscription({ bundle: values.bundle, code: values.planpicker.code, promoCode: values.promoCode, meta })
+    const maybeUpdateSubscription = ({ meta }) => values.planpicker
+      ? updateSubscription({ code: values.planpicker.code, promoCode: values.promoCode, meta })
       : meta.onSuccess({ meta }); // bypass
     const updateZuoraCC = ({ meta, results: { accountKey, token, signature }}) => (
       updateCreditCard({ data: formatUpdateData({ ...values, accountKey }), signature, token, meta })

@@ -11,44 +11,41 @@ describe('Plan Select:', () => {
     currentPlan: {
       code: '2'
     },
-    bundles: [
-      {
+    bundles: {
+      'test': [{
         bundle: '2',
-        tier: 'test',
         messaging: {
           code: '2',
           includesIp: false,
-          price: 0,
+          monthly: 0,
           name: 'Two',
           overage: 0.2,
           volume: 2,
           isFree: true
         }
-      },
-      {
+      }],
+      'starter': [{
         bundle: '3',
-        tier: 'starter',
         messaging: {
           code: '3',
-          price: 300,
+          monthly: 300,
           name: 'Three',
           overage: 0.3,
           volume: 3
         }
-      },
-      {
+      }],
+      'premier': [{
         bundle: '4',
-        tier: 'premier',
         messaging: {
           code: '4',
           includesIp: true,
-          price: 400,
+          monthly: 400,
           name: 'Four',
           overage: 0.4,
           volume: 4
         }
-      }
-    ]
+      }]
+    }
   };
 
   const subject = (props) => shallow(
@@ -71,7 +68,7 @@ describe('Selected Plan:', () => {
       messaging: {
         code: '2',
         includesIp: false,
-        price: 0,
+        monthly: 0,
         name: 'Two',
         overage: 0.2,
         volume: 2,
@@ -98,19 +95,6 @@ describe('Selected Plan:', () => {
 
   it('should render plan price with the plan', () => {
     expect(subject()).toMatchSnapshot();
-  });
-
-  it('should render promo code if price is not 0', () => {
-    const wrapper = subject({
-      bundle: {
-        ...defaultProps.bundle,
-        messaging: {
-          ...defaultProps.bundle.messaging,
-          price: 3
-        }
-      }
-    });
-    expect(wrapper.find('PromoCodeNew')).toExist();
   });
 });
 

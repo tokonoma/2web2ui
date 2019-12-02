@@ -99,7 +99,7 @@ Array [
         "context": "update-billing",
       },
       "responseType": "json",
-      "url": "/v1/billing/cors-data",
+      "url": "/v1/account/cors-data",
     },
   ],
   Array [

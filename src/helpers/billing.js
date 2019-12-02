@@ -5,7 +5,7 @@ import Payment from 'payment';
 import qs from 'query-string';
 
 export function formatDataForCors(values) {
-  const { email, planpicker, card, billingAddress, discountId, billingId } = values;
+  const { email, planpicker, card, billingAddress, discountId } = values;
 
   // For CORS Endpoint + sift
   const corsData = {
@@ -24,7 +24,7 @@ export function formatDataForCors(values) {
 
   // For Zuora
   const billingData = {
-    billingId: planpicker.billingId || billingId,
+    billingId: planpicker.billingId,
     billToContact: {
       firstName: billingAddress.firstName,
       lastName: billingAddress.lastName,
@@ -167,7 +167,7 @@ export function formatCardTypes(cards) {
 export function getPlanPrice(plan) {
   const pricingInterval = _.has(plan, 'hourly') ? 'hourly' : 'monthly';
   const intervalShortName = pricingInterval === 'hourly' ? 'hr' : 'mo';
-  return { intervalShort: intervalShortName, intervalLong: pricingInterval, price: plan.price || plan[pricingInterval] };
+  return { intervalShort: intervalShortName, intervalLong: pricingInterval, price: plan[pricingInterval] };
 }
 
 export function prepareCardInfo({ expCombined, ...cardInfo }) {
@@ -182,6 +182,6 @@ export function prepareCardInfo({ expCombined, ...cardInfo }) {
 }
 
 export function stripImmediatePlanChange(search) {
-  const { immediatePlanChange: _immediatePlanChange, ...options } = qs.parse(search);
+  const { immediatePlanChange, ...options } = qs.parse(search);
   return qs.stringify(options);
 }

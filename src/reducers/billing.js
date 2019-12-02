@@ -47,18 +47,9 @@ export default (state = initialState, action) => {
       return { ...state, bundlesLoading: true, bundlesError: null };
 
     case 'GET_BUNDLES_SUCCESS':
-      return { ...state, bundlesLoading: false, bundles: action.payload };
+      return { ...state, bundlesLoading: false, bundles: action.payload.bundles, bundlePlans: action.payload.plans };
 
     case 'GET_BUNDLES_FAIL':
-      return { ...state, bundlesLoading: false, bundlesError: action.payload };
-
-    case 'GET_NEW_PLANS_PENDING':
-      return { ...state, bundlesLoading: true, bundlesError: null };
-
-    case 'GET_NEW_PLANS_SUCCESS':
-      return { ...state, bundlesLoading: false, bundlePlans: action.payload };
-
-    case 'GET_NEW_PLANS_FAIL':
       return { ...state, bundlesLoading: false, bundlesError: action.payload };
 
     case 'GET_SUBSCRIPTION_PENDING':

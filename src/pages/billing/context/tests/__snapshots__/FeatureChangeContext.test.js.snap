@@ -38,7 +38,7 @@ Object {
         <Connect(SupportTicketLink)
           issueId="general_issue"
         >
-           submit a ticket 
+          submit a ticket
         </Connect(SupportTicketLink)>
         <span>
           to delete them.
