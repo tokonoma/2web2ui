@@ -139,6 +139,10 @@ export function formatDateTime(datetime, FORMAT) {
   return FORMAT ? moment(datetime).format(FORMAT) : `${formatDate(datetime)}, ${formatTime(datetime)}`;
 }
 
+export function formatDateTimeWithAt(datetime, FORMAT) {
+  return FORMAT ? moment(datetime).format(FORMAT) : `${formatDate(datetime)} at ${formatTime(datetime)}`;
+}
+
 // format as ISO 8601 timestamp to match SP API
 export const formatApiTimestamp = (time) => moment.utc(time).format();
 export const formatInputDate = (date) => moment(date).format(FORMATS.SHORT_DATE);

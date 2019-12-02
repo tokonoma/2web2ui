@@ -10,6 +10,7 @@ import {
   formatDate,
   formatTime,
   formatDateTime,
+  formatDateTimeWithAt,
   isSameDate,
   getLocalTimezone,
   formatApiTimestamp,
@@ -170,6 +171,10 @@ describe('Date helpers', () => {
 
     it('should format a date-time consistently', () => {
       expect(formatDateTime(testDate)).toEqual('Oct 15 2017, 8:55am');
+    });
+
+    it('should format a date-time consistently using at', () => {
+      expect(formatDateTimeWithAt(testDate)).toEqual('Oct 15 2017 at 8:55am');
     });
   });
 
