@@ -62,7 +62,7 @@ const SignupModal = () => {
   const { location } = useRouter();
   const [isModalOpen, setModalOpen] = useState(_.get(location, 'state.fromOnboarding', false));
   return (
-    <Modal open={isModalOpen}>
+    <Modal open={isModalOpen} data-id="signup-modal">
       <Panel className={styles.modalContainer}>
         <div className={styles.CloseButton}>
           <Button onClick={() => setModalOpen(false)} flat>
