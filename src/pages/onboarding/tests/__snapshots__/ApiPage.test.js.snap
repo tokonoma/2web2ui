@@ -44,7 +44,14 @@ exports[`ApiPage should render 1`] = `
     </Panel.Section>
     <Panel.Section>
       <SkipLink
-        to="/dashboard"
+        to={
+          Object {
+            "pathname": "/dashboard",
+            "state": Object {
+              "fromOnboarding": true,
+            },
+          }
+        }
       >
         Continue to dashboard
       </SkipLink>
