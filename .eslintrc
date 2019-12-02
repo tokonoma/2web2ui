@@ -5,7 +5,13 @@
     "jest": true
   },
   "rules": {
+    // doesn't work with jest-in-case
+    "jest/no-standalone-expect": "off",
+
     "lodash/chaining": ["error", "never"],
+
+    // allow `import debounce from 'lodash/debounce';` for easy mocking
+    "lodash/import-scope": "off",
 
     // All of the following "lodash/*" rules are lodash's "Preference over Native"
     // We prefer native functions over lodash in most cases to reduce proneness to
