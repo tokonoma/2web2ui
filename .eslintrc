@@ -6,7 +6,25 @@
   },
   "rules": {
     "lodash/chaining": ["error", "never"],
-    "lodash/import-scope": ["error", "full"],
+
+    // All of the following "lodash/*" rules are lodash's "Preference over Native"
+    // We prefer native functions over lodash in most cases to reduce proneness to
+    // masking errors (_.map will still work if the array is null, etc.)
+    "lodash/prefer-constant": "off",
+    "lodash/prefer-get": "off",
+    "lodash/prefer-includes": "off",
+    "lodash/prefer-is-nil": "off",
+    "lodash/prefer-lodash-chain": "off",
+    "lodash/prefer-lodash-method": "off",
+    "lodash/prefer-lodash-typecheck": "off",
+    "lodash/prefer-matches": "off",
+    "lodash/prefer-noop": "off",
+    "lodash/prefer-over-quantifier": "off",
+    "lodash/prefer-some": "off",
+    "lodash/prefer-startswith": "off",
+    "lodash/prefer-times": "off",
+
+    // Custom rule for i18n
     "no-restricted-syntax": [
       "warn",
       {
@@ -24,10 +42,10 @@
   },
   "extends": [
     "react-app",
-    "plugin:lodash/recommended",
+    "plugin:lodash/canonical",
     "plugin:jest/recommended",
     "plugin:prettier/recommended",
     "plugin:testing-library/recommended"
   ],
-  "plugins": ["prettier"]
+  "plugins": ["testing-library", "jest", "lodash", "prettier"]
 }
