@@ -22,9 +22,6 @@ export const ChangePlanProvider = ({
   useEffect(() => { getPlans(); }, [getPlans]);
 
   const plansByKey = useMemo(() => _.keyBy(plans, 'plan'), [plans]);
-  // const availableBundles = useMemo(() => {
-  //   return bundles;
-  // });
 
   const contextValue = {
     ...value,
