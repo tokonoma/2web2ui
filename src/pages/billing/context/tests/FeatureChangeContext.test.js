@@ -30,7 +30,10 @@ const defaultProps = {
   },
   subscription: {
     products: [
-      { product: 'messaging', plan: '100K-premier-0519' },
+      {
+        product: 'messaging',
+        plan: '100K-premier-0519'
+      },
       {
         product: 'subaccounts',
         plan: 'subaccounts-0519',
@@ -52,12 +55,12 @@ const defaultProps = {
     ]
   },
   selectedBundle: {
-    plans: [
-      '100K-premier-0519',
-      'sso-0519',
-      'tfa-required-0519',
-      'subaccounts-0519',
-      'ip-0519'
+    products: [
+      { product: 'messaging', plan: '100K-premier-0519' },
+      { product: 'sso', plan: 'sso-0519' },
+      { product: 'tfa_required', plan: 'tfa-required-0519' },
+      { product: 'subaccounts', plan: 'subaccounts-0519' },
+      { product: 'dedicated_ip', plan: 'ip-0519' }
     ]
   },
   loading: false,
@@ -93,10 +96,10 @@ describe('FeatureChangeContext', () => {
   it('should render acknowledgement for a change in auth', () => {
     const wrapper = subject({
       selectedBundle: {
-        plans: [
-          '100K-premier-0519',
-          'subaccounts-0519',
-          'ip-0519'
+        products: [
+          { product: 'messaging', plan: '100K-premier-0519' },
+          { product: 'subaccounts', plan: 'subaccounts-0519' },
+          { product: 'dedicated_ip', plan: 'ip-0519' }
         ]
       }
     });
@@ -106,11 +109,11 @@ describe('FeatureChangeContext', () => {
   it('should render acknowledgement for a change in dedicated IPs', () => {
     const wrapper = subject({
       selectedBundle: {
-        plans: [
-          '100K-premier-0519',
-          'subaccounts-0519',
-          'sso-0519',
-          'tfa-required-0519'
+        products: [
+          { product: 'messaging', plan: '100K-premier-0519' },
+          { product: 'sso', plan: 'sso-0519' },
+          { product: 'tfa_required', plan: 'tfa-required-0519' },
+          { product: 'subaccounts', plan: 'subaccounts-0519' }
         ]
       }
     });

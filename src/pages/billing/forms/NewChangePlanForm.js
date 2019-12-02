@@ -1,4 +1,5 @@
-import React, { useEffect, useState, useCallback, useRef } from 'react';
+/* eslint max-lines: ["error", 250] */
+import React, { useEffect, useState, useCallback, useMemo } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
@@ -12,78 +13,136 @@ import CardSection from '../components/CardSection';
 import { isAws } from 'src/helpers/conditions/account';
 import { not } from 'src/helpers/conditions';
 import AccessControl from 'src/components/auth/AccessControl';
-//Actions
-import { getBillingInfo } from 'src/actions/account';
+
 import FeatureChangeSection from '../components/FeatureChangeSection';
 import { FeatureChangeContextProvider } from '../context/FeatureChangeContext';
-import { getBillingCountries, getBundles, verifyPromoCode, clearPromoCode } from 'src/actions/billing';
+import { verifyPromoCode, clearPromoCode, updateSubscription } from 'src/actions/billing';
+import billingCreate from 'src/actions/billingCreate';
+import billingUpdate from 'src/actions/billingUpdate';
+import { showAlert } from 'src/actions/globalAlert';
 //Selectors
-import { selectTieredVisibleBundles, selectAvailableBundles, currentPlanSelector, canUpdateBillingInfoSelector, getPromoCodeObject, selectAccountBilling } from 'src/selectors/accountBillingInfo';
+import { currentPlanSelector, canUpdateBillingInfoSelector, getPromoCodeObject } from 'src/selectors/accountBillingInfo';
 import { changePlanInitialValues } from 'src/selectors/accountBillingForms';
 import { selectCondition } from 'src/selectors/accessConditionState';
 
+import { ApiErrorBanner } from 'src/components';
 import { Loading } from 'src/components/loading/Loading';
 import styles from './NewChangePlanForm.module.scss';
-
+import { useChangePlanContext } from '../context/ChangePlanContext';
+import { prepareCardInfo } from 'src/helpers/billing';
 
 const FORMNAME = 'changePlan';
 
 export const ChangePlanForm = ({
-  //Redux Props
-  account,
-  bundles,
-  billing,
-  currentPlan,
-  loading,
-  allBundles,
-  canUpdateBillingInfo,
+  //redux form
+  handleSubmit,
   submitting,
+  //Redux Props
+  currentPlan,
+  canUpdateBillingInfo,
+  history,
   //Redux Actions
-  getBillingInfo,
-  getBillingCountries,
   verifyPromoCode,
   promoCodeObj,
   clearPromoCode,
-  getBundles
+  updateSubscription,
+  billingUpdate,
+  billingCreate,
+  showAlert,
+  ...restProps
 }) => {
-  useEffect(() => { getBillingCountries(); }, [getBillingCountries]);
-  useEffect(() => { getBillingInfo(); }, [getBillingInfo]);
-  const gotBundles = useRef(false);
-  useEffect(() => { getBundles().then(() => { gotBundles.current = true; }); }, [getBundles]);
+  const { billingCountries, account, bundles, loading, error } = useChangePlanContext();
 
   const { requestParams: { code, promo } = {}, updateRoute } = useRouter();
-  const [selectedBundle, selectBundle] = useState();
-  const { countries } = billing;
-  const [useSavedCC, setUseSavedCC] = useState(true);
 
-  const handleCardToggle = () => setUseSavedCC(!useSavedCC);
-  const onSelect = (plan) => {
-    if (!plan) { updateRoute({}); }
-    selectBundle(plan);
+  const [selectedBundleCode, selectBundle] = useState(code);
+  const bundlesByCode = useMemo(() => _.keyBy(bundles, 'bundle'), [bundles]);
+  const selectedBundle = bundlesByCode[selectedBundleCode];
+  const isDowngradeToFree = _.get(selectedBundle, 'messaging.price') <= 0;
+
+  const onSelect = (bundle) => {
+    if (!bundle) {
+      clearPromoCode();
+      updateRoute({});
+    }
+    selectBundle(bundle);
   };
+
+  const [useSavedCC, setUseSavedCC] = useState(null);
+  const handleCardToggle = () => setUseSavedCC(!useSavedCC);
   useEffect(() => {
-    const bundle = allBundles.find(({ bundle }) => bundle === code);
-    if (bundle) { selectBundle(bundle); } else if (!bundle && gotBundles.current) { updateRoute({}); } //Can't find bundle, clears params
-  }, [ code, allBundles, updateRoute ]);
+    if (canUpdateBillingInfo && useSavedCC === null) {
+      setUseSavedCC(true);
+    }
+  }, [canUpdateBillingInfo, useSavedCC]);
+
   const isPlanSelected = Boolean(selectedBundle && currentPlan.plan !== selectedBundle.bundle);
-
-  // const [useSavedCC, setUseSavedCC] = useState(null);
   const applyPromoCode = useCallback((promoCode) => {
-    const { billingId } = selectedBundle;
-    verifyPromoCode({ promoCode , billingId, meta: { promoCode, showErrorAlert: false }});
+    const billingId = _.get(selectedBundle, 'messaging.billing_id');
+    if (billingId) {
+      verifyPromoCode({ promoCode , billingId, meta: { promoCode, showErrorAlert: false }});
+    }
   },[selectedBundle, verifyPromoCode]);
-
-  useEffect(() => { if (!selectedBundle) { clearPromoCode(); } },[clearPromoCode, selectedBundle]);
 
   //Applies promo code if in query param
   useEffect(() => {
     if (promo && selectedBundle) { applyPromoCode(promo); }
   },[applyPromoCode, promo, selectedBundle, verifyPromoCode]);
+  const onSubmit = (values) => {
+    const { isAws } = restProps;
+    const newCode = selectedBundleCode;
+    const { selectedPromo } = promoCodeObj;
+    const billingId = _.get(selectedBundle, 'messaging.billing_id');
 
-  if (loading) { return <Loading />; }
+    const cardValues = values.card && !isDowngradeToFree
+      ? { ...values, card: prepareCardInfo(values.card) }
+      : values;
+
+    const newValues = {
+      ...cardValues,
+      bundle: newCode,
+      billingId
+    };
+    let action = Promise.resolve({});
+
+    if (!_.isEmpty(selectedPromo) && !isDowngradeToFree) {
+      newValues.promoCode = selectedPromo.promoCode;
+      action = verifyPromoCode({ promoCode: selectedPromo.promoCode , billingId, meta: { promoCode: selectedPromo.promoCode }});
+    }
+    return action
+      .then(({ discount_id }) => {
+        newValues.discountId = discount_id;
+        // decides which action to be taken based on
+        // if it's aws account, it already has billing and if you use a saved CC
+        if (isAws) {
+          return updateSubscription({ bundle: newCode });
+        } else if (account.billing) {
+          return useSavedCC || isDowngradeToFree ? updateSubscription({ bundle: newCode, promoCode: selectedPromo.promoCode }) : billingUpdate(newValues);
+        } else {
+          return billingCreate(newValues); // creates Zuora account
+        }
+      })
+      .then(() => history.push('/account/billing'))
+      .then(() => showAlert({ type: 'success', message: 'Subscription Updated' }));
+  };
+
+  if (error) {
+    return (
+      <ApiErrorBanner
+        status='danger'
+        message="We couldn't render the page. Reload to try again."
+        reload={() => location.reload()}
+        errorDetails={error.message}
+      />
+    );
+  }
+
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
-    <form>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <div className={styles.ChangePlanForm}>
         <div className={styles.CurrentPlanSection}>
           <CurrentPlanSection currentPlan={currentPlan} isPlanSelected={Boolean(selectedBundle)}/>
@@ -95,8 +154,8 @@ export const ChangePlanForm = ({
               <SelectedPlan
                 bundle={selectedBundle}
                 onChange={onSelect}
-                promoCodeObj = {promoCodeObj}
-                handlePromoCode = {
+                promoCodeObj={promoCodeObj}
+                handlePromoCode={
                   {
                     applyPromoCode: applyPromoCode,
                     clearPromoCode: clearPromoCode
@@ -108,7 +167,7 @@ export const ChangePlanForm = ({
                 <AccessControl condition={not(isAws)} >
                   <CardSection
                     account={account}
-                    countries={countries}
+                    countries={billingCountries}
                     selectedPlan={selectedBundle}
                     canUpdateBillingInfo={canUpdateBillingInfo}
                     submitting={submitting}
@@ -117,7 +176,12 @@ export const ChangePlanForm = ({
                     handleCardToggle={handleCardToggle}
                   />
                 </AccessControl>
-                <SubmitSection />
+                <SubmitSection
+                  loading={submitting}
+                  selectedBundle={selectedBundle}
+                  account={account}
+                  brightbackCondition={isDowngradeToFree}
+                />
               </FeatureChangeContextProvider>
                </>
               : <PlanSelectSection
@@ -134,13 +198,8 @@ export const ChangePlanForm = ({
 
 const mapStateToProps = (state, props) => {
   const { code: planCode, promo: promoCode } = qs.parse(props.location.search);
-  const { account } = selectAccountBilling(state);
   return {
-    account,
-    bundles: selectTieredVisibleBundles(state),
-    allBundles: selectAvailableBundles(state),
     initialValues: changePlanInitialValues(state, { planCode, promoCode }),
-    billing: state.billing,
     canUpdateBillingInfo: canUpdateBillingInfoSelector(state),
     currentPlan: currentPlanSelector(state),
     isAws: selectCondition(isAws)(state),
@@ -148,21 +207,13 @@ const mapStateToProps = (state, props) => {
   };
 };
 
-const mapDispatchToProps = ({
-  getBillingInfo,
-  getBillingCountries,
-  verifyPromoCode,
-  clearPromoCode,
-  getBundles
-});
-
 const formOptions = {
   form: FORMNAME,
   enableReinitialize: true
 };
 
 export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(
+  connect(mapStateToProps, { verifyPromoCode, clearPromoCode, updateSubscription, billingUpdate, billingCreate, showAlert })(
     reduxForm(formOptions)(ChangePlanForm)
   )
 );

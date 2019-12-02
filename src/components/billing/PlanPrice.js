@@ -12,7 +12,7 @@ const PlanPrice = ({ plan, showOverage = false, showIp = false, showCsm = false,
 
   const priceInfo = getPlanPrice(plan);
 
-  const overage = plan.isFree ? 'Full-featured developer account' : plan.overage ? `$${plan.overage.toFixed(2)}/ thousand extra emails. ` : null;
+  const overage = plan.price <= 0 || plan.isFree ? 'Full-featured developer account' : plan.overage ? `$${plan.overage.toFixed(2)}/ thousand extra emails. ` : null;
 
   const ip = plan.includesIp
     ? 'First dedicated IP address is free'

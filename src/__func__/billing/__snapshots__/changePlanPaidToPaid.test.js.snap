@@ -55,7 +55,7 @@ Array [
   Array [
     Object {
       "data": Object {
-        "code": "large",
+        "bundle": "large",
         "promo_code": undefined,
       },
       "headers": Object {
@@ -64,7 +64,7 @@ Array [
       "method": "put",
       "params": undefined,
       "responseType": "json",
-      "url": "/v1/account/subscription",
+      "url": "/v1/billing/subscription/bundle",
     },
   ],
   Array [
