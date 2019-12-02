@@ -1,10 +1,11 @@
-import { useCallback, useReducer, useRef } from 'react';
+import { useCallback, useReducer, useRef, useEffect } from 'react';
+import _ from 'lodash';
 import useRouter from 'src/hooks/useRouter';
 import useEffectAfterMounting from '../useEffectAfterMounting';
 
 const PAGE_FILTER_ACTIONS = {
-  'RESET': 'reset',
-  'SPREAD': 'spread'
+  RESET: 'reset',
+  SPREAD: 'spread',
 };
 
 const reducer = (state, action) => {
@@ -19,17 +20,28 @@ const reducer = (state, action) => {
 
 const noValidation = () => true;
 
-const cleanFilterState = (filters, whitelist) => Object.keys(filters).reduce((clean, key) => {
-  if (whitelist[key]) {
-    const { validate = noValidation, defaultValue = '' } = whitelist[key];
-    if (!validate(filters[key])) {
-      clean[key] = defaultValue;
-    } else {
-      clean[key] = filters[key];
+const cleanFilterState = (filters, whitelist) => {
+  const validatedFilters = Object.keys(filters).reduce((clean, key) => {
+    if (whitelist[key]) {
+      const { validate = noValidation, defaultValue = '' } = whitelist[key];
+      if (!validate(filters[key])) {
+        clean[key] = defaultValue;
+      } else {
+        clean[key] = filters[key];
+      }
     }
-  }
-  return clean;
-}, {});
+    return clean;
+  }, {});
+
+  // Add missing keys from whitelist into filters
+  Object.keys(whitelist).forEach(filter => {
+    if (!validatedFilters[filter]) {
+      validatedFilters[filter] = whitelist[filter].defaultValue;
+    }
+  });
+
+  return validatedFilters;
+};
 
 /**
  * Maintains state of page filters based on the URL.
@@ -48,19 +60,33 @@ const cleanFilterState = (filters, whitelist) => Object.keys(filters).reduce((cl
  * }
  * ```
  */
-const usePageFilters = (whitelist) => {
+const usePageFilters = whitelist => {
   const { requestParams = {}, updateRoute } = useRouter();
   const defaultFilters = useRef(requestParams);
-  const cleanReducer = useCallback((state, action) => cleanFilterState(reducer(state, action), whitelist), [whitelist]);
+  const cleanReducer = useCallback(
+    (state, action) => cleanFilterState(reducer(state, action), whitelist),
+    [whitelist],
+  );
   const [filters, dispatch] = useReducer(cleanReducer, defaultFilters.current);
 
-  const updateFilters = useCallback((filters) => dispatch({ type: PAGE_FILTER_ACTIONS.SPREAD, payload: filters }), []);
-  const resetFilters = useCallback(() => dispatch({ type: PAGE_FILTER_ACTIONS.RESET, payload: defaultFilters.current }), []);
+  const updateFilters = useCallback(
+    filters => dispatch({ type: PAGE_FILTER_ACTIONS.SPREAD, payload: filters }),
+    [],
+  );
+  const resetFilters = useCallback(
+    () => dispatch({ type: PAGE_FILTER_ACTIONS.RESET, payload: defaultFilters.current }),
+    [],
+  );
+
+  // On mount, validate route filters and update them in the route if they are missing
+  useEffect(() => {
+    updateFilters(filters);
+  }, [filters, updateFilters]);
 
   // When filters change, update the URL
   useEffectAfterMounting(() => {
     updateRoute(filters);
-  }, [filters]);
+  }, filters);
 
   return { filters, updateFilters, resetFilters };
 };

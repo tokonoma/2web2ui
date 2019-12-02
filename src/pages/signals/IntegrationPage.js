@@ -1,96 +1,143 @@
 import _ from 'lodash';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback } from 'react';
 import { Page } from '@sparkpost/matchbox';
 import { CursorPaging, PerPageButtons } from 'src/components/collection';
 import { DEFAULT_PER_PAGE_BUTTONS } from 'src/constants';
-import useRouter from 'src/hooks/useRouter';
 import IntegrationCollection from './components/IntegrationCollection';
 import IntegrationPageFilter from './components/IntegrationPageFilter';
+import usePageFilters from 'src/hooks/usePageFilters';
 import styles from './IntegrationPage.module.scss';
 
-const IntegrationPage = ({ getIngestBatchEvents, eventsByPage, loadingStatus, nextCursor, totalCount }) => {
-  const { requestParams, updateRoute } = useRouter();
-  const [page, setPage] = useState(0);
-  const [perPage, setPerPage] = useState(() => {
-    const { perPage = 10 } = requestParams;
-    return DEFAULT_PER_PAGE_BUTTONS.find((num) => num === perPage) || 10;
-  });
-  const [filters, setFilters] = useState(() => {
-    const { batchIds = [], batchStatus = '' } = requestParams;
+const IntegrationPage = ({
+  getIngestBatchEvents,
+  eventsByPage,
+  loadingStatus,
+  nextCursor,
+  totalCount,
+}) => {
+  // const { filters, updateFilters } = usePageFilters(requestParams => {
+  //   const { perPage = 10 } = requestParams;
+  //   const { batchIds = [], batchStatus = '' } = requestParams;
 
-    return {
-      batchIds: typeof batchIds === 'object' ? batchIds : [batchIds],
-      batchStatus: typeof batchStatus === 'object' ? batchStatus[0] : batchStatus
-    };
-  });
-  const getData = useCallback((updates = {}) => {
-    const nextState = { ...filters, page, perPage, ...updates };
+  //   return {
+  //     batchIds: typeof batchIds === 'object' ? batchIds : [batchIds],
+  //     batchStatus: typeof batchStatus === 'object' ? batchStatus[0] : batchStatus,
+  //     page: 0,
+  //     perPage: DEFAULT_PER_PAGE_BUTTONS.find(num => num === perPage) || 10,
+  //   };
+  // });
 
+  const { filters, updateFilters } = usePageFilters({
+    batchIds: {
+      validate: Array.isArray,
+      defaultValue: [],
+    },
+    batchStatus: {
+      validate: () => true,
+      defaultValue: '',
+    },
+    page: {
+      validate: page => !isNaN(page) && parseInt(page, 10) >= 0,
+      defaultValue: 0,
+    },
+    perPage: {
+      validate: perPage =>
+        !isNaN(perPage) &&
+        DEFAULT_PER_PAGE_BUTTONS.find(num => num === parseInt(perPage, 10)) !== undefined,
+      defaultValue: 10,
+    },
+  });
+
+  // const { requestParams, updateRoute } = useRouter();
+  // const [page, setPage] = useState(0);
+  // const [perPage, setPerPage] = useState(() => {
+  //   const { perPage = 10 } = requestParams;
+  //   return ;
+  // });
+  // const [filters, setFilters] = useState(() => {
+  //   const { batchIds = [], batchStatus = '' } = requestParams;
+  //
+  //   return {
+  //     batchIds: typeof batchIds === 'object' ? batchIds : [batchIds],
+  //     batchStatus: typeof batchStatus === 'object' ? batchStatus[0] : batchStatus
+  //   };
+  // });
+  const getData = useCallback(() => {
     getIngestBatchEvents({
-      batchIds: nextState.batchIds,
-      cursor: nextState.page === 0 ? undefined : nextCursor,
-      perPage: nextState.perPage,
-      statuses: nextState.batchStatus ? [nextState.batchStatus] : undefined
+      batchIds: filters.batchIds,
+      cursor: filters.page === 0 ? undefined : nextCursor,
+      perPage: filters.perPage,
+      statuses: filters.batchStatus ? [filters.batchStatus] : undefined,
     });
-  }, [getIngestBatchEvents, filters, page, perPage, nextCursor]);
-  const events = eventsByPage[page];
+  }, [
+    filters.batchIds,
+    filters.batchStatus,
+    filters.page,
+    filters.perPage,
+    getIngestBatchEvents,
+    nextCursor,
+  ]);
+  const events = eventsByPage[filters.page];
 
   // Update url to match state
-  useEffect(() => {
-    updateRoute({
-      batchIds: filters.batchIds.length ? filters.batchIds : undefined,
-      batchStatus: filters.batchStatus ? filters.batchStatus : undefined,
-      perPage
-    });
-  }, [updateRoute, filters, perPage]);
+  // useEffect(() => {
+  //   updateRoute({
+  //     batchIds: filters.batchIds.length ? filters.batchIds : undefined,
+  //     batchStatus: filters.batchStatus ? filters.batchStatus : undefined,
+  //     perPage
+  //   });
+  // }, [updateRoute, filters, perPage]);
+
+  const intPageFilters = { batchIds: filters.batchIds, batchStatus: filters.batchStatus };
 
   return (
     <Page title="Signals Integration">
       <p>Review the health of your Signals integration.</p>
       <IntegrationPageFilter
         disabled={loadingStatus === 'pending'}
-        initialValues={filters}
-        onInit={(nextFilters) => {
-          setFilters(nextFilters);
-          setPage(0);
-          getData({ ...nextFilters, page: 0 });
-        }}
-        onChange={(nextFilters) => {
-          setFilters(nextFilters);
-          setPage(0);
-          getData({ ...nextFilters, page: 0 });
+        initialValues={intPageFilters}
+        onInit={getData}
+        onChange={values => {
+          updateFilters({ ...values, page: 0 });
+          getData();
         }}
       />
       <IntegrationCollection
         events={events}
         loadingStatus={loadingStatus}
-        onRetry={() => { getData(); }}
+        onRetry={() => {
+          getData();
+        }}
       />
       <CursorPaging
-        currentPage={page + 1}
-        handleFirstPage={() => { setPage(0); }}
-        handlePageChange={(nextPageNumber) => {
+        currentPage={filters.page + 1}
+        handleFirstPage={() => {
+          updateFilters({ page: 0 });
+        }}
+        handlePageChange={nextPageNumber => {
           const nextPage = nextPageNumber - 1;
+          const nextFilters = { page: nextPage };
 
-          setPage(nextPage);
+          updateFilters(nextFilters);
 
           if (!eventsByPage[nextPage]) {
-            getData({ page: nextPage });
+            getData(nextFilters);
           }
         }}
-        nextDisabled={totalCount <= perPage * (page + 1)}
-        previousDisabled={page === 0}
-        perPage={perPage}
+        nextDisabled={totalCount <= filters.perPage * (filters.page + 1)}
+        previousDisabled={filters.page === 0}
+        perPage={filters.perPage}
         totalCount={totalCount}
       />
       <div className={styles.PerPageContainer}>
         <PerPageButtons
-          onPerPageChange={(nextPageSize) => {
-            setPage(0);
-            setPerPage(nextPageSize);
-            getData({ page: 0, perPage: nextPageSize });
+          onPerPageChange={nextPageSize => {
+            const nextFilters = { page: 0, perPage: nextPageSize };
+
+            updateFilters(nextFilters);
+            getData(nextFilters);
           }}
-          perPage={perPage}
+          perPage={filters.perPage}
           totalCount={totalCount}
         />
       </div>
