@@ -171,7 +171,7 @@
     "jest": "24.9.0",
     "jest-enzyme": "^7.0.0",
     "jest-in-case": "^1.0.2",
-    "jest-junit": "^6.2.1",
+    "jest-junit": "^10.0.0",
     "lint-staged": "^8.0.4",
     "mdx-loader": "^1.1.0",
     "mdxc": "^1.1.1",
