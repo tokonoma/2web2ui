@@ -1,11 +1,6 @@
 /* eslint-disable max-lines */
 import React, { useState } from 'react';
-import {
-  Button,
-  Panel,
-  Modal,
-  TextField
-} from '@sparkpost/matchbox';
+import { Button, Panel, Modal, TextField } from '@sparkpost/matchbox';
 import PanelLoading from 'src/components/panelLoading';
 import ButtonWrapper from 'src/components/buttonWrapper';
 import MultiEmailField, { useMultiEmailField } from 'src/components/multiEmailField';
@@ -15,14 +10,13 @@ const SendTestEmailButton = () => {
   const {
     content,
     isPublishedMode,
-    match,
     sendPreview,
     template,
     showAlert,
     setTestDataAction,
     parsedTestData,
     updateDraft,
-    setHasSaved
+    setHasSaved,
   } = useEditorContext();
   const {
     handleMultiEmailChange,
@@ -33,10 +27,8 @@ const SendTestEmailButton = () => {
     setMultiEmailList,
     multiEmailValue,
     multiEmailList,
-    multiEmailError
+    multiEmailError,
   } = useMultiEmailField();
-  const templateId = match.params.id;
-  const subaccountId = template.subaccount_id;
   const [isModalOpen, setModalOpen] = useState(false);
   const [isModalLoading, setModalLoading] = useState(false);
   const [fromEmail, setFromEmail] = useState('');
@@ -57,15 +49,21 @@ const SendTestEmailButton = () => {
 
       // Save the template, then allow the user to send a preview
       // The preview can be send whether the current draft was successfully saved or not.
-      updateDraft({
-        id: templateId,
-        content,
-        parsedTestData
-      }, subaccountId)
-        .then(() => {
-          setModalLoading(false);
-          setHasSaved(true);
-        });
+      updateDraft(
+        {
+          id: template.id,
+          name: template.name,
+          description: template.description,
+          content,
+          options: template.options,
+          shared_with_subaccounts: template.shared_with_subaccounts,
+          parsedTestData,
+        },
+        template.subaccount_id,
+      ).then(() => {
+        setModalLoading(false);
+        setHasSaved(true);
+      });
     }
 
     if (isPublishedMode) {
@@ -83,7 +81,7 @@ const SendTestEmailButton = () => {
     setMultiEmailError('');
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
 
     if (multiEmailList.length === 0) {
@@ -95,11 +93,11 @@ const SendTestEmailButton = () => {
     setModalLoading(true);
 
     sendPreview({
-      id: templateId,
-      subaccountId: subaccountId,
+      id: template.id,
+      subaccountId: template.subaccount_id,
       mode: isPublishedMode ? 'published' : 'draft',
-      emails: multiEmailList.map((item) => item.email),
-      from: fromEmail
+      emails: multiEmailList.map(item => item.email),
+      from: fromEmail,
     })
       .then(() => {
         setModalLoading(false); // Seems repetitive, but prevents janky loading state from continuing even after success
@@ -108,7 +106,7 @@ const SendTestEmailButton = () => {
 
         showAlert({
           type: 'success',
-          message: 'Successfully sent a test email'
+          message: 'Successfully sent a test email',
         });
       })
       .finally(() => setModalLoading(false));
@@ -133,14 +131,10 @@ const SendTestEmailButton = () => {
         onClose={handleModalClose}
         data-id="send-test-email-modal"
       >
-        {isModalLoading && <PanelLoading/>}
+        {isModalLoading && <PanelLoading />}
 
-        {!isModalLoading &&
-          <Panel
-            accent
-            title="Send a Test"
-            sectioned
-          >
+        {!isModalLoading && (
+          <Panel accent title="Send a Test" sectioned>
             <p>Verify your email renders as expected in the inbox by sending a quick test.</p>
 
             <form onSubmit={handleSubmit}>
@@ -148,8 +142,8 @@ const SendTestEmailButton = () => {
                 id="multi-email-email-to"
                 label="To"
                 name="emailTo"
-                onChange={(e) => handleMultiEmailChange(e)}
-                onKeyDownAndBlur={(e) => handleMultiEmailKeyDownAndBlur(e)}
+                onChange={e => handleMultiEmailChange(e)}
+                onKeyDownAndBlur={e => handleMultiEmailKeyDownAndBlur(e)}
                 onRemoveEmail={handleMultiEmailRemove}
                 error={multiEmailError}
                 value={multiEmailValue}
@@ -177,17 +171,13 @@ const SendTestEmailButton = () => {
               />
 
               <ButtonWrapper>
-                <Button
-                  color="orange"
-                  type="submit"
-                  data-id="button-send-email"
-                >
+                <Button color="orange" type="submit" data-id="button-send-email">
                   Send Email
                 </Button>
               </ButtonWrapper>
             </form>
           </Panel>
-        }
+        )}
       </Modal>
     </>
   );
