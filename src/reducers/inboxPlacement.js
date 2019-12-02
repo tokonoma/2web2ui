@@ -10,7 +10,7 @@ export const initialState = {
   placementsByRegion: [],
   placementsBySendingIp: [],
   allMessages: [],
-  messagesById: {}
+  messagesById: {},
 };
 
 export default (state = initialState, { type, payload, meta }) => {
@@ -53,28 +53,48 @@ export default (state = initialState, { type, payload, meta }) => {
     case 'GET_INBOX_PLACEMENT_TESTS_BY_MAILBOX_PROVIDER_PENDING':
       return { ...state, getByProviderPending: true, getByProviderError: null };
     case 'GET_INBOX_PLACEMENT_TESTS_BY_MAILBOX_PROVIDER_SUCCESS':
-      return { ...state, getByProviderPending: false, placementsByProvider: payload, getByProviderError: null };
+      return {
+        ...state,
+        getByProviderPending: false,
+        placementsByProvider: payload,
+        getByProviderError: null,
+      };
     case 'GET_INBOX_PLACEMENT_TESTS_BY_MAILBOX_PROVIDER_FAIL':
       return { ...state, getByProviderPending: false, getByProviderError: payload };
 
     case 'GET_INBOX_PLACEMENT_TESTS_BY_REGION_PENDING':
       return { ...state, getByRegionPending: true, getByRegionError: null };
     case 'GET_INBOX_PLACEMENT_TESTS_BY_REGION_SUCCESS':
-      return { ...state, getByRegionPending: false, placementsByRegion: payload, getByRegionError: null };
+      return {
+        ...state,
+        getByRegionPending: false,
+        placementsByRegion: payload,
+        getByRegionError: null,
+      };
     case 'GET_INBOX_PLACEMENT_TESTS_BY_REGION_FAIL':
       return { ...state, getByRegionPending: false, getByRegionError: payload };
 
     case 'GET_INBOX_PLACEMENT_TESTS_BY_SENDING_IP_PENDING':
       return { ...state, getBySendingIpPending: true, getBySendingIpError: null };
     case 'GET_INBOX_PLACEMENT_TESTS_BY_SENDING_IP_SUCCESS':
-      return { ...state, getBySendingIpPending: false, placementsBySendingIp: payload, getBySendingIpError: null };
+      return {
+        ...state,
+        getBySendingIpPending: false,
+        placementsBySendingIp: payload.filter(test => test.sending_ip), //Due to API bug some tests return null sending ip
+        getBySendingIpError: null,
+      };
     case 'GET_INBOX_PLACEMENT_TESTS_BY_SENDING_IP_FAIL':
       return { ...state, getBySendingIpPending: false, getBySendingIpError: payload };
 
     case 'GET_INBOX_PLACEMENT_TEST_CONTENT_PENDING':
       return { ...state, getTestContentPending: true, getTestContentError: null };
     case 'GET_INBOX_PLACEMENT_TEST_CONTENT_SUCCESS':
-      return { ...state, getTestContentPending: false, currentTestContent: payload, getTestContentError: null };
+      return {
+        ...state,
+        getTestContentPending: false,
+        currentTestContent: payload,
+        getTestContentError: null,
+      };
     case 'GET_INBOX_PLACEMENT_TEST_CONTENT_FAIL':
       return { ...state, getTestContentPending: false, getTestContentError: payload };
 
@@ -84,10 +104,15 @@ export default (state = initialState, { type, payload, meta }) => {
         allMessages: [],
         getAllMessagesError: null,
         getAllMessagesPending: true,
-        messagesById: {} // need to reset
+        messagesById: {}, // need to reset
       };
     case 'GET_ALL_INBOX_PLACEMENT_MESSAGES_SUCCESS':
-      return { ...state, getAllMessagesPending: false, allMessages: payload, getAllMessagesError: null };
+      return {
+        ...state,
+        getAllMessagesPending: false,
+        allMessages: payload,
+        getAllMessagesError: null,
+      };
     case 'GET_ALL_INBOX_PLACEMENT_MESSAGES_FAIL':
       return { ...state, getAllMessagesPending: false, getAllMessagesError: payload };
 
@@ -100,9 +125,9 @@ export default (state = initialState, { type, payload, meta }) => {
         messagesById: {
           ...state.messagesById,
           [meta.context.messageId]: {
-            status: 'loading'
-          }
-        }
+            status: 'loading',
+          },
+        },
       };
 
     case 'GET_INBOX_PLACEMENT_MESSAGE_SUCCESS':
@@ -112,9 +137,9 @@ export default (state = initialState, { type, payload, meta }) => {
           ...state.messagesById,
           [meta.context.messageId]: {
             ...payload,
-            status: 'loaded'
-          }
-        }
+            status: 'loaded',
+          },
+        },
       };
 
     case 'GET_INBOX_PLACEMENT_MESSAGE_FAIL':
@@ -123,9 +148,9 @@ export default (state = initialState, { type, payload, meta }) => {
         messagesById: {
           ...state.messagesById,
           [meta.context.messageId]: {
-            status: 'error'
-          }
-        }
+            status: 'error',
+          },
+        },
       };
 
     default:
