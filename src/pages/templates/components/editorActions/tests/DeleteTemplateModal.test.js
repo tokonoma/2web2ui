@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 import DeleteTemplateModal from '../DeleteTemplateModal';
 import globalAlert from 'src/reducers/globalAlert';
 import renderWithRedux from 'src/__testHelpers__/renderWithRedux';
-jest.mock('../../../../../../src/components/globalAlert'); // Mocks `RedirectAndAlert` component
+jest.mock('src/components/globalAlert'); // Mocks `RedirectAndAlert` component
 
 describe('DeleteTemplateModal', () => {
   const subject = props => {
