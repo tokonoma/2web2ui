@@ -34,10 +34,6 @@ export function emails(str) {
   return message;
 }
 
-export function countEmails(str) {
-  return multilineStringToArray(str);
-}
-
 export function emailLocal(value) {
   return isEmailLocalPart(value) ? undefined : 'Invalid Email';
 }
