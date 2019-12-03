@@ -193,6 +193,7 @@ describe('SettingsForm', () => {
       expect(updateDraft).toHaveBeenCalledWith(
         expect.objectContaining({
           id: 'test-template-for-123',
+          shared_with_subaccounts: undefined,
         }),
         123,
       );

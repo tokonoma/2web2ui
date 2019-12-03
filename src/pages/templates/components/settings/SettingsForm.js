@@ -31,7 +31,7 @@ export default class SettingsForm extends React.Component {
         content: { ...values.content, amp_html, html, text },
         options: values.options,
         // this value is only editable and present when template is not assigned to a subaccount
-        shared_with_subaccounts: draft.subaccount_id ? false : values.shared_with_subaccounts,
+        shared_with_subaccounts: draft.subaccount_id ? undefined : values.shared_with_subaccounts,
         parsedTestData,
       },
       draft.subaccount_id, // not in form and not allowed to change
