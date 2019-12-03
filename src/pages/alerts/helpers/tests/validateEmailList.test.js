@@ -13,7 +13,7 @@ test('invalid, none valid', () => {
 });
 
 test('that no more than 10 email addresses have been entered', () => {
-  const tooManyEmails = [...Array(11).keys()].map((x) => `jane.doe${x}@gmail.com`).join(', '); //.map((x) => `jane.doe${x}@gmail.com`).join(',');
+  const tooManyEmails = [...Array(11).keys()].map((x) => `jane.doe${x}@gmail.com`).join(', ');
   expect(validateEmailList(tooManyEmails)).toEqual('Email Address list can only contain a maximum of 10 emails');
 });
 
