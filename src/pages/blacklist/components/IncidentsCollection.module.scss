@@ -1,0 +1,10 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.FilterBox {
+  padding: 1rem 1rem spacing(smaller);
+}
+
+.Resource {
+  font-size: font-size(600);
+  font-weight: 600;
+}
