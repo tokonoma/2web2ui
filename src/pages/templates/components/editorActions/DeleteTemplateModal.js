@@ -51,7 +51,7 @@ const DeleteTemplateModal = props => {
                 </Button>
 
                 <Button className={styles.CancelButton} onClick={onClose}>
-                  Keep Editing
+                  Cancel
                 </Button>
               </ButtonWrapper>
             </Panel.Section>
