@@ -12,6 +12,7 @@ export const GettingStartedGuide = ({
   stepName: storedStepName,
   history,
   setAccountOption,
+  ...rest
 }) => {
   const breadCrumbsItems = {
     Features: ['Features'],
@@ -19,6 +20,8 @@ export const GettingStartedGuide = ({
     'Show Me SparkPost': ['Features', 'Sending', 'Show Me SparkPost'],
     "Let's Code": ['Features', 'Sending', "Let's Code"],
   };
+
+  const { sendTestEmail } = rest;
 
   const actions = isGuideAtBottom
     ? null
@@ -59,6 +62,14 @@ export const GettingStartedGuide = ({
   const setAndStoreStepName = stepName => {
     setAccountOption('stepName', stepName);
     setStepName(stepName);
+  };
+  const handleAction = action => {
+    switch (action) {
+      case 'Send Test Email':
+        setAccountOption('sendTestEmail', true);
+        history.push('/templates');
+        break;
+    }
   };
 
   const renderStep = () => {
@@ -159,10 +170,9 @@ export const GettingStartedGuide = ({
               <GuideListItem
                 action={{
                   name: 'Send Test Email',
-                  onClick: () => {
-                    history.push('/templates');
-                  },
+                  onClick: () => handleAction('Send Test Email'),
                 }}
+                itemCompleted={sendTestEmail}
               >
                 <GuideListItemTitle>Send a Test Email</GuideListItemTitle>
                 <GuideListItemDescription>

@@ -75,6 +75,7 @@ const mapStateToProps = state => ({
   isMessageOnboardingSet: isAccountUiOptionSet('messaging_onboarding')(state),
   isGuideAtBottom: isAccountUiOptionSet('isGuideAtBottom')(state),
   stepName: getAccountUiOptionValue('stepName')(state),
+  sendTestEmail: isAccountUiOptionSet('sendTestEmail')(state),
 });
 
 export default connect(mapStateToProps, { setAccountOption })(DashboardPage);
