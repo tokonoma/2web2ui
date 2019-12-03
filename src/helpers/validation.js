@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import _ from 'lodash';
 import { formatBytes } from 'src/helpers/units';
 import { getDuration } from 'src/helpers/date';
@@ -24,10 +25,17 @@ export function email(value) {
 
 export function emails(str) {
   const values = multilineStringToArray(str);
+  let message = undefined;
+  if (values.length <= 0 || !values.every(isEmailAddress)) {
+    message = 'Must be a comma separated list of valid Email Addresses';
+  } else if (values.length >= 10) {
+    message = 'Must contain less than 10 emails';
+  }
+  return message;
+}
 
-  return values.length && values.every(isEmailAddress)
-    ? undefined
-    : 'Must be a comma separated list of valid Email Addresses';
+export function countEmails(str) {
+  return multilineStringToArray(str);
 }
 
 export function emailLocal(value) {
