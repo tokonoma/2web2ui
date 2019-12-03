@@ -198,6 +198,13 @@ describe('SettingsForm', () => {
       );
     });
 
+    it('reports have has completed', async () => {
+      const setHasSaved = jest.fn();
+      await submitForm({ setHasSaved });
+
+      expect(setHasSaved).toHaveBeenCalledWith(true);
+    });
+
     it('alerts on success', async () => {
       const showAlert = jest.fn();
       await submitForm({ showAlert });
