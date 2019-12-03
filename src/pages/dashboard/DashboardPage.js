@@ -15,34 +15,13 @@ import { isAccountUiOptionSet, getAccountUiOptionValue } from 'src/helpers/condi
 import { setAccountOption } from 'src/actions/account';
 
 export class DashboardPage extends Component {
-  state = {
-    isGuideAtBottom: false,
-  };
-  componentDidMount() {
-    this.setState({ isGuideAtBottom: this.props.isGuideAtBottom });
-  }
-  moveGuideAtBottom = () => {
-    this.setState({ isGuideAtBottom: true });
-    this.props.setAccountOption('isGuideAtBottom', true);
-  };
-
-  storeStepName = stepName => {
-    this.props.setAccountOption('stepName', stepName);
-  };
-
   displayGuideAndReport = () => {
-    const { isGuideAtBottom } = this.state;
     const usageReport = <UsageReport />;
-    const gettingStartedGuide = (
-      <GettingStartedGuide
-        isGuideAtBottom={isGuideAtBottom}
-        moveGuideAtBottom={this.moveGuideAtBottom}
-        storeStepName={this.storeStepName}
-        stepName={this.props.stepName}
-      />
-    );
+    const gettingStartedGuide = <GettingStartedGuide {...this.props} />;
 
-    if (this.props.isMessageOnboardingSet) {
+    const { isMessageOnboardingSet, isGuideAtBottom } = this.props;
+
+    if (isMessageOnboardingSet) {
       if (isGuideAtBottom) {
         return (
           <>
