@@ -79,6 +79,8 @@ describe('GettingStartedGuide', () => {
       .at(0)
       .prop('action')
       .onClick();
-    expect(defaultProps.history.push).toHaveBeenCalledWith('/templates');
+    expect(defaultProps.history.push).toHaveBeenCalledWith(
+      '/templates?pendo=6RgwDLtUU5Ynp20auFvU9Qjbpqg',
+    );
   });
 });
