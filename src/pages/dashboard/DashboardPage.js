@@ -74,7 +74,7 @@ export class DashboardPage extends Component {
 const mapStateToProps = state => ({
   isMessageOnboardingSet: isAccountUiOptionSet('messaging_onboarding')(state),
   isGuideAtBottom: isAccountUiOptionSet('isGuideAtBottom')(state),
-  stepName: getAccountUiOptionValue('stepName')(state),
+  activeGuideStep: getAccountUiOptionValue('active_guide_step')(state),
   sendTestEmail: isAccountUiOptionSet('sendTestEmail')(state),
 });
 

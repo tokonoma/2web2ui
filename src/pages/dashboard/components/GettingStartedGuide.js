@@ -9,7 +9,7 @@ import { GuideListItem, GuideListItemTitle, GuideListItemDescription } from './G
 
 export const GettingStartedGuide = ({
   isGuideAtBottom,
-  stepName: storedStepName,
+  onboardingActiveStep,
   history,
   setAccountOption,
   ...rest
@@ -38,7 +38,7 @@ export const GettingStartedGuide = ({
         },
       ];
   //stepName could be Features,Sending,Show Me Sparkpost, Let's Code
-  const [stepName, setStepName] = useState(storedStepName || 'Features');
+  const [stepName, setStepName] = useState(onboardingActiveStep || 'Features');
   const guideHeadingRef = useRef(null);
   useEffect(() => {
     if (guideHeadingRef.current) {
@@ -59,9 +59,9 @@ export const GettingStartedGuide = ({
     </BreadCrumbs>
   );
 
-  const setAndStoreStepName = stepName => {
-    setAccountOption('stepName', stepName);
-    setStepName(stepName);
+  const setAndStoreStepName = onboarding_active_step => {
+    setAccountOption('onboarding_active_step', onboarding_active_step);
+    setStepName(onboarding_active_step);
   };
   const handleAction = action => {
     switch (action) {
