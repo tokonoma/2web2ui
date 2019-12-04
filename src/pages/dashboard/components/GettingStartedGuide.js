@@ -21,8 +21,6 @@ export const GettingStartedGuide = ({ onboarding = {}, history, setAccountOption
     setAccountOption('onboarding', { ...onboarding, ...obj });
   };
 
-  const { sendTestEmail } = rest;
-
   const actions = isGuideAtBottom
     ? null
     : [
@@ -68,14 +66,6 @@ export const GettingStartedGuide = ({ onboarding = {}, history, setAccountOption
       case 'Send Test Email':
         setOnboardingAccountOption({ send_test_email_completed: true });
         history.push(`/templates?pendo=${GUIDE_IDS.SEND_TEST_EMAIL}`);
-        break;
-    }
-  };
-  const handleAction = action => {
-    switch (action) {
-      case 'Send Test Email':
-        setAccountOption('sendTestEmail', true);
-        history.push('/templates?pendo=6RgwDLtUU5Ynp20auFvU9Qjbpqg');
         break;
     }
   };
