@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Grid, Panel, Select, TextField } from '@sparkpost/matchbox';
 import PropTypes from 'prop-types';
 import { onEnter } from 'src/helpers/keyEvents';
@@ -7,10 +7,10 @@ import { batchStatusOptions } from '../constants/integration';
 
 const placeholder = {
   label: 'All batch statuses',
-  value: ''
+  value: '',
 };
 
-const IntegrationPageFilter = ({ disabled, initialValues = {}, onChange, onInit }) => {
+const IntegrationPageFilter = ({ disabled, initialValues = {}, onChange }) => {
   const [batchStatus, setBatchStatus] = useState(() => {
     // Ignore initial batch status when ids are provided
     // note, our API only handles one filter at a time giving preference to batch ids
@@ -18,7 +18,7 @@ const IntegrationPageFilter = ({ disabled, initialValues = {}, onChange, onInit 
       return placeholder.value;
     }
 
-    const option = batchStatusOptions.find((option) => option.value === initialValues.batchStatus);
+    const option = batchStatusOptions.find(option => option.value === initialValues.batchStatus);
     return option ? option.value : placeholder.value;
   });
   const [batchIds, setBatchIds] = useState(() => (initialValues.batchIds || []).join(', '));
@@ -28,10 +28,6 @@ const IntegrationPageFilter = ({ disabled, initialValues = {}, onChange, onInit 
     setBatchStatus(placeholder.value);
     onChange({ batchIds: nextBatchIds, batchStatus: placeholder.value });
   }, [batchIds, onChange]);
-
-  useEffect(() => {
-    onInit({ batchIds: stringToArray(batchIds), batchStatus });
-  }, []);
 
   return (
     <Panel sectioned>
@@ -51,12 +47,12 @@ const IntegrationPageFilter = ({ disabled, initialValues = {}, onChange, onInit 
         <Grid.Column xs={12} md={8}>
           <TextField
             labelHidden
-            name='batchIds'
+            name="batchIds"
             placeholder="Filter by batch ID"
             disabled={disabled}
             onBlur={handleFieldChange}
             onKeyPress={onEnter(handleFieldChange)}
-            onChange={(event) => {
+            onChange={event => {
               setBatchIds(event.currentTarget.value);
             }}
             value={batchIds}
@@ -64,17 +60,16 @@ const IntegrationPageFilter = ({ disabled, initialValues = {}, onChange, onInit 
         </Grid.Column>
       </Grid>
     </Panel>
-  )
-  ;
+  );
 };
 
 IntegrationPageFilter.propTypes = {
   disabled: PropTypes.bool,
   initialValues: PropTypes.shape({
-    batchIds: PropTypes.arr,
-    batchStatus: PropTypes.string
+    batchIds: PropTypes.array,
+    batchStatus: PropTypes.string,
   }),
-  onChange: PropTypes.func.isRequired
+  onChange: PropTypes.func.isRequired,
 };
 
 export default IntegrationPageFilter;
