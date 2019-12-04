@@ -4,7 +4,7 @@ import { GettingStartedGuide } from '../GettingStartedGuide';
 
 describe('GettingStartedGuide', () => {
   const defaultProps = {
-    isGuideAtBottom: false,
+    onboarding: { isGuideAtBottom: false },
     history: {
       push: jest.fn(),
     },
@@ -15,12 +15,12 @@ describe('GettingStartedGuide', () => {
 
   it('should render correctly when guide is at bottom or when guide is at top', () => {
     expect(
-      subject({ isGuideAtBottom: true })
+      subject({ onboarding: { isGuideAtBottom: true } })
         .find('Panel')
         .prop('actions'),
     ).toBe(null);
     expect(
-      subject({ isGuideAtBottom: false })
+      subject({ onboarding: { isGuideAtBottom: false } })
         .find('Panel')
         .prop('actions'),
     ).not.toBe(null);

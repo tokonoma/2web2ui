@@ -41,11 +41,11 @@ exports[`Page: Dashboard tests should correctly render page when user is not ver
         }
       }
       hasSuppressions={true}
-      isGuideAtBottom={false}
       isMessageOnboardingSet={false}
       listApiKeys={[MockFunction]}
       listSendingDomains={[MockFunction]}
       moveGuideAtBottom={[MockFunction]}
+      onboarding={Object {}}
       updateAccount={[MockFunction]}
       verifyingEmail={false}
     />
@@ -93,11 +93,11 @@ exports[`Page: Dashboard tests should display upgrade CTA when account is free a
         }
       }
       hasSuppressions={true}
-      isGuideAtBottom={false}
       isMessageOnboardingSet={false}
       listApiKeys={[MockFunction]}
       listSendingDomains={[MockFunction]}
       moveGuideAtBottom={[MockFunction]}
+      onboarding={Object {}}
       updateAccount={[MockFunction]}
       verifyingEmail={false}
     />
@@ -147,11 +147,11 @@ exports[`Page: Dashboard tests should render import suppression list when 0 supp
         }
       }
       hasSuppressions={false}
-      isGuideAtBottom={false}
       isMessageOnboardingSet={false}
       listApiKeys={[MockFunction]}
       listSendingDomains={[MockFunction]}
       moveGuideAtBottom={[MockFunction]}
+      onboarding={Object {}}
       updateAccount={[MockFunction]}
       verifyingEmail={false}
     />
@@ -201,11 +201,11 @@ exports[`Page: Dashboard tests should render page correctly with defaults 1`] = 
         }
       }
       hasSuppressions={true}
-      isGuideAtBottom={false}
       isMessageOnboardingSet={false}
       listApiKeys={[MockFunction]}
       listSendingDomains={[MockFunction]}
       moveGuideAtBottom={[MockFunction]}
+      onboarding={Object {}}
       updateAccount={[MockFunction]}
       verifyingEmail={false}
     />
