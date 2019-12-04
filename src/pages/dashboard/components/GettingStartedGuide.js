@@ -164,13 +164,26 @@ export const GettingStartedGuide = ({ onboarding = {}, history, setAccountOption
           <>
             <Panel.Section>
               {renderBreadCrumbs()}
-              <CheckListItem
-                {...LETS_CODE_LIST['Add Sending Domain']}
+              <GuideListItem
+                action={{
+                  name: 'Add Sending Domain',
+                  onClick: () => handleAction('Add Sending Domain'),
+                }}
                 itemCompleted={add_sending_domain_completed}
-              />
+              >
+                <GuideListItemTitle>Add a Sending Domain</GuideListItemTitle>
+                <GuideListItemDescription>
+                  You'll need to add a sending domain in order to start sending emails.
+                </GuideListItemDescription>
+              </GuideListItem>
             </Panel.Section>
             <Panel.Section>
-              <CheckListItem {...LETS_CODE_LIST['Generate API Key']} />
+              <GuideListItem action={{ name: 'Generate API Key', onClick: () => {} }}>
+                <GuideListItemTitle>Generate an API Key</GuideListItemTitle>
+                <GuideListItemDescription>
+                  An API key is required to use our APIs within your app.
+                </GuideListItemDescription>
+              </GuideListItem>
             </Panel.Section>
           </>
         );
