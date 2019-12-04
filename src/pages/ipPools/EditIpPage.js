@@ -41,6 +41,29 @@ export class EditIpPage extends Component {
     this.loadDependentData();
   }
 
+<<<<<<< HEAD
+=======
+  renderError() {
+    const { error } = this.props;
+    return (
+      <ApiErrorBanner
+        errorDetails={error.message}
+        message="Sorry, we seem to have had some trouble loading your IP data."
+        reload={this.loadDependentData}
+      />
+    );
+  }
+
+  renderForm() {
+    const { error } = this.props;
+    if (error) {
+      return this.renderError();
+    }
+
+    return <IpForm onSubmit={this.onUpdateIp} />;
+  }
+
+>>>>>>> SD-1264 - Reformat file with Prettier
   render() {
     const { loading, pool, ip, error } = this.props;
 
@@ -48,6 +71,7 @@ export class EditIpPage extends Component {
       return <Loading />;
     }
 
+<<<<<<< HEAD
     return (
       <Page
         title={`Sending IP: ${ip.external_ip}`}
@@ -66,6 +90,17 @@ export class EditIpPage extends Component {
         ) : (
           <IpForm onSubmit={this.onUpdateIp} />
         )}
+=======
+    const breadcrumbAction = {
+      content: pool.name,
+      Component: Link,
+      to: `/account/ip-pools/edit/${pool.id}`,
+    };
+
+    return (
+      <Page title={`Sending IP: ${ip.external_ip}`} breadcrumbAction={breadcrumbAction}>
+        {this.renderForm()}
+>>>>>>> SD-1264 - Reformat file with Prettier
       </Page>
     );
   }
