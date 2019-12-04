@@ -60,23 +60,23 @@ describe('Templates', () => {
       const testPreviewContent = (selector, content) => {
         cy.wait('@contentPreviewer');
 
-        cy.get('iframe')
-          .then(($iframe) => {
-            const $body = $iframe.contents().find('body');
+        cy.get('iframe').then($iframe => {
+          const $body = $iframe.contents().find('body');
 
-            if (selector.length) {
-              cy.wrap($body.find(selector))
-                .should('contain', content);
-            } else {
-              cy.wrap($body).should('contain', content);
-            }
-          });
+          if (selector.length) {
+            cy.wrap($body.find(selector)).should('contain', content);
+          } else {
+            cy.wrap($body).should('contain', content);
+          }
+        });
       };
 
       // HTML editing
       cy.get(editorSelector)
         .focus()
-        .type('<h1>This is some HTML. Cypress is {{qualifier}}.', { parseSpecialCharSequences: false }); // See: https://docs.cypress.io/api/commands/type.html#Syntax
+        .type('<h1>This is some HTML. Cypress is {{qualifier}}.', {
+          parseSpecialCharSequences: false,
+        }); // See: https://docs.cypress.io/api/commands/type.html#Syntax
 
       testPreviewContent('h1', 'This is some HTML. Cypress is .');
 
@@ -85,13 +85,17 @@ describe('Templates', () => {
 
       cy.get(editorSelector)
         .focus()
-        .type('<h1>This is some AMP HTML. Cypress is {{qualifier}}.', { parseSpecialCharSequences: false });
+        .type('<h1>This is some AMP HTML. Cypress is {{qualifier}}.', {
+          parseSpecialCharSequences: false,
+        });
 
       testPreviewContent('h1', 'This is some AMP HTML. Cypress is .');
 
       cy.get('[data-id="popover-trigger-more"]').click();
       cy.findByText('Insert AMP Boilerplate').click();
-      cy.findByText('Are you sure you want to insert the AMP Email Boilerplate?').should('be.visible');
+      cy.findByText('Are you sure you want to insert the AMP Email Boilerplate?').should(
+        'be.visible',
+      );
       cy.findByText('Insert').click();
 
       testPreviewContent('', 'Hello, world');
@@ -101,7 +105,9 @@ describe('Templates', () => {
 
       cy.get(editorSelector)
         .focus()
-        .type('This is some plain text. Cypress is {{qualifier}}.', { parseSpecialCharSequences: false });
+        .type('This is some plain text. Cypress is {{qualifier}}.', {
+          parseSpecialCharSequences: false,
+        });
 
       testPreviewContent('p', 'This is some plain text. Cypress is .');
 
@@ -111,15 +117,15 @@ describe('Templates', () => {
         options: {},
         metadata: {},
         substitution_data: {
-          qualifier: 'excelente'
-        }
+          qualifier: 'excelente',
+        },
       };
       const altExampleTestData = {
         options: {},
         metadata: {},
         substitution_data: {
-          qualifier: 'pretty darn great'
-        }
+          qualifier: 'pretty darn great',
+        },
       };
 
       cy.get(editorSelector)
@@ -141,10 +147,15 @@ describe('Templates', () => {
       cy.findByText('Save and Publish').click();
       cy.get('#modal-portal').within(() => cy.findByText('Save and Publish').click());
 
-      cy.wait(['@templatesPut','@templatesGet']);
+      cy.wait(['@templatesPut', '@templatesGet']);
 
       cy.findByText('Template published').should('be.visible');
-      cy.get('#alert-portal').within(() => cy.findAllByRole('button').first().click()); // Close the Snackbar component such that other elements are visible to Cypress
+      cy.get('#alert-portal').within(() =>
+        cy
+          .findAllByRole('button')
+          .first()
+          .click(),
+      ); // Close the Snackbar component such that other elements are visible to Cypress
 
       cy.findByText('Saved').should('be.visible');
       cy.findByText('Unsaved Changes').should('not.be.visible');
@@ -165,9 +176,11 @@ describe('Templates', () => {
 
     it('allows duplication from the list page view', () => {
       cy.get('table').within(() => {
-        cy.findByText(templateTitle).closest('tr').within(() => {
-          cy.findByText('Duplicate Template').click({ force: true });
-        });
+        cy.findByText(templateTitle)
+          .closest('tr')
+          .within(() => {
+            cy.findByText('Duplicate Template').click({ force: true });
+          });
       });
 
       cy.findByText('Duplicate').click();
@@ -179,12 +192,14 @@ describe('Templates', () => {
 
     it('allows deletion from the list page view', () => {
       cy.get('table').within(() => {
-        cy.findByText(templateTitle).closest('tr').within(() => {
-          cy.findByText('Delete Template').click({ force: true });
-        });
+        cy.findByText(templateTitle)
+          .closest('tr')
+          .within(() => {
+            cy.findByText('Delete Template').click({ force: true });
+          });
       });
 
-      cy.findByText('Delete').click();
+      cy.findByText('Delete All Versions').click();
 
       cy.wait('@templatesDelete');
       cy.findByText(templateTitle).should('not.be.visible');
@@ -192,12 +207,14 @@ describe('Templates', () => {
 
     it('cleans up test data.', () => {
       cy.get('table').within(() => {
-        cy.findByText(`${templateTitle} (COPY)`).closest('tr').within(() => {
-          cy.findByText('Delete Template').click({ force: true });
-        });
+        cy.findByText(`${templateTitle} (COPY)`)
+          .closest('tr')
+          .within(() => {
+            cy.findByText('Delete Template').click({ force: true });
+          });
       });
 
-      cy.findByText('Delete').click();
+      cy.findByText('Delete All Versions').click();
     });
   });
 });

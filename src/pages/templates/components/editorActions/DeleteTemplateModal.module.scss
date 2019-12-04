@@ -1,0 +1,9 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.WarningText {
+  color: color(red, base);
+}
+
+.CancelButton {
+  margin-left: spacing();
+}

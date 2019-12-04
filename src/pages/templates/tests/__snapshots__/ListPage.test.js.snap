@@ -122,17 +122,12 @@ exports[`ListPage renders correctly 1`] = `
     }
     saveCsv={false}
   />
-  <DeleteModal
-    content={
-      <p>
-        Both the draft and published versions of this template will be deleted.
-      </p>
-    }
-    isPending={false}
-    onCancel={[Function]}
-    onDelete={[Function]}
+  <DeleteTemplateModal
+    isLoading={false}
+    onClose={[Function]}
     open={false}
-    title="Are you sure you want to delete this template?"
+    successCallback={[Function]}
+    template={null}
   />
   <DuplicateTemplateModal
     contentToDuplicate={null}
