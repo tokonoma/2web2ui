@@ -16,6 +16,7 @@ export const GettingStartedGuide = ({ onboarding = {}, history, setAccountOption
     send_test_email_completed,
     explore_analytics_completed,
     invite_collaborator_completed,
+    add_sending_domain_completed,
   } = onboarding;
 
   const setOnboardingAccountOption = (obj = {}) => {
@@ -236,7 +237,33 @@ export const GettingStartedGuide = ({ onboarding = {}, history, setAccountOption
           </>
         );
       case "Let's Code":
-        return <Panel.Section>{renderBreadCrumbs()}</Panel.Section>;
+        return (
+          <>
+            <Panel.Section>
+              {renderBreadCrumbs()}
+              <GuideListItem
+                action={{
+                  name: 'Add Sending Domain',
+                  onClick: () => handleAction('Add Sending Domain'),
+                }}
+                itemCompleted={add_sending_domain_completed}
+              >
+                <GuideListItemTitle>Add a Sending Domain</GuideListItemTitle>
+                <GuideListItemDescription>
+                  You'll need to add a sending domain in order to start sending emails.
+                </GuideListItemDescription>
+              </GuideListItem>
+            </Panel.Section>
+            <Panel.Section>
+              <GuideListItem action={{ name: 'Generate API Key', onClick: () => {} }}>
+                <GuideListItemTitle>Generate an API Key</GuideListItemTitle>
+                <GuideListItemDescription>
+                  An API key is required to use our APIs within your app.
+                </GuideListItemDescription>
+              </GuideListItem>
+            </Panel.Section>
+          </>
+        );
       default:
         return null;
     }
