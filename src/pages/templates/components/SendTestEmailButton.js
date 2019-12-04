@@ -68,9 +68,9 @@ const SendTestEmailButton = () => {
 
     if (isPublishedMode) {
       setTestDataAction({
-        id: templateId,
+        id: template.id,
         mode: 'published',
-        data: parsedTestData
+        data: parsedTestData,
       });
     }
   };
