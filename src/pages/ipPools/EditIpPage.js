@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Page } from '@sparkpost/matchbox';
+import { Page, Panel } from '@sparkpost/matchbox';
 import _ from 'lodash';
 import { ApiErrorBanner, Loading } from 'src/components';
 import IpForm from './components/IpForm';
+import DeliveryHistoryLineChart from './components/DeliveryHistoryLineChart';
 import { showAlert } from 'src/actions/globalAlert';
 import { listPools, updatePool } from 'src/actions/ipPools';
+import { fetchDeliveriesBySendingIps } from 'src/actions/metrics';
 import { updateSendingIp } from 'src/actions/sendingIps';
 import { selectCurrentPool, selectIpForCurrentPool } from 'src/selectors/ipPools';
 
@@ -35,35 +37,16 @@ export class EditIpPage extends Component {
 
   loadDependentData = () => {
     this.props.listPools();
+    this.props.fetchDeliveriesBySendingIps({
+      from: '2010-12-03T08:00',
+      metrics: 'count_delivered',
+    });
   };
 
   componentDidMount() {
     this.loadDependentData();
   }
 
-<<<<<<< HEAD
-=======
-  renderError() {
-    const { error } = this.props;
-    return (
-      <ApiErrorBanner
-        errorDetails={error.message}
-        message="Sorry, we seem to have had some trouble loading your IP data."
-        reload={this.loadDependentData}
-      />
-    );
-  }
-
-  renderForm() {
-    const { error } = this.props;
-    if (error) {
-      return this.renderError();
-    }
-
-    return <IpForm onSubmit={this.onUpdateIp} />;
-  }
-
->>>>>>> SD-1264 - Reformat file with Prettier
   render() {
     const { loading, pool, ip, error } = this.props;
 
@@ -71,7 +54,6 @@ export class EditIpPage extends Component {
       return <Loading />;
     }
 
-<<<<<<< HEAD
     return (
       <Page
         title={`Sending IP: ${ip.external_ip}`}
@@ -88,19 +70,16 @@ export class EditIpPage extends Component {
             reload={this.loadDependentData}
           />
         ) : (
-          <IpForm onSubmit={this.onUpdateIp} />
-        )}
-=======
-    const breadcrumbAction = {
-      content: pool.name,
-      Component: Link,
-      to: `/account/ip-pools/edit/${pool.id}`,
-    };
+          <>
+            <IpForm onSubmit={this.onUpdateIp} />
 
-    return (
-      <Page title={`Sending IP: ${ip.external_ip}`} breadcrumbAction={breadcrumbAction}>
-        {this.renderForm()}
->>>>>>> SD-1264 - Reformat file with Prettier
+            <Panel title="Delivery History">
+              <Panel.Section>
+                <DeliveryHistoryLineChart ip={ip} />
+              </Panel.Section>
+            </Panel>
+          </>
+        )}
       </Page>
     );
   }
@@ -120,6 +99,7 @@ const mapStateToProps = (state, props) => {
 export default connect(mapStateToProps, {
   updatePool,
   listPools,
+  fetchDeliveriesBySendingIps,
   updateSendingIp,
   showAlert,
 })(EditIpPage);

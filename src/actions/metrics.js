@@ -5,8 +5,8 @@ export function fetch({ type = 'FETCH_METRICS', path, params = {}, context }) {
     method: 'GET',
     url: `/v1/metrics/${path}`,
     params: {
-      ...params
-    }
+      ...params,
+    },
   };
 
   if (context) {
@@ -15,7 +15,7 @@ export function fetch({ type = 'FETCH_METRICS', path, params = {}, context }) {
 
   return sparkpostApiRequest({
     type,
-    meta
+    meta,
   });
 }
 
@@ -32,6 +32,7 @@ export function fetchMetricsCampaigns(params = {}) {
 }
 
 export function fetchMetricsSendingIps(params = {}) {
+  console.log('fetch!');
   const type = 'FETCH_METRICS_SENDING_IPS';
   const path = 'sending-ips';
   return fetch({ type, path, params });
@@ -91,5 +92,11 @@ export function fetchDelayReasonsByDomain(params) {
 export function fetchDeliveriesByAttempt(params = {}) {
   const type = 'FETCH_METRICS_DELIVERIES_BY_ATTEMPT';
   const path = 'deliverability/attempt';
+  return fetch({ type, path, params });
+}
+
+export function fetchDeliveriesBySendingIps(params = {}) {
+  const type = 'FETCH_METRICS_DELIVERIES_BY_SENDING_IPS';
+  const path = 'deliverability/sending-ip';
   return fetch({ type, path, params });
 }
