@@ -6,24 +6,20 @@ import ButtonWrapper from 'src/components/buttonWrapper';
 import styles from './GettingStartedGuide.module.scss';
 import { BreadCrumbs, BreadCrumbsItem } from 'src/components';
 import { GuideListItem, GuideListItemTitle, GuideListItemDescription } from './GuideListItem';
+import { GUIDE_IDS } from '../constants';
 
-export const GettingStartedGuide = ({
-  onboarding = {},
-  // isGuideAtBottom,
-  onboardingActiveStep,
-  history,
-  setAccountOption,
-  ...rest
-}) => {
+export const GettingStartedGuide = ({ onboarding = {}, history, setAccountOption }) => {
   const breadCrumbsItems = {
     Features: ['Features'],
     Sending: ['Features', 'Sending'],
     'Show Me SparkPost': ['Features', 'Sending', 'Show Me SparkPost'],
     "Let's Code": ['Features', 'Sending', "Let's Code"],
   };
-  const { isGuideAtBottom = false } = onboarding;
+  const { isGuideAtBottom = false, active_step, send_test_email_completed } = onboarding;
 
-  const { sendTestEmail } = rest;
+  const setOnboardingAccountOption = (obj = {}) => {
+    setAccountOption('onboarding', { ...onboarding, ...obj });
+  };
 
   const actions = isGuideAtBottom
     ? null
@@ -36,12 +32,11 @@ export const GettingStartedGuide = ({
             </span>
           ),
           color: 'blue',
-          onClick: () =>
-            setAccountOption('onboarding', { ...onboarding, ...{ isGuideAtBottom: true } }),
+          onClick: () => setOnboardingAccountOption({ isGuideAtBottom: true }),
         },
       ];
   //stepName could be Features,Sending,Show Me Sparkpost, Let's Code
-  const [stepName, setStepName] = useState(onboardingActiveStep || 'Features');
+  const [stepName, setStepName] = useState(active_step || 'Features');
   const guideHeadingRef = useRef(null);
   useEffect(() => {
     if (guideHeadingRef.current) {
@@ -62,15 +57,15 @@ export const GettingStartedGuide = ({
     </BreadCrumbs>
   );
 
-  const setAndStoreStepName = onboarding_active_step => {
-    setAccountOption('onboarding_active_step', onboarding_active_step);
-    setStepName(onboarding_active_step);
+  const setAndStoreStepName = active_step => {
+    setOnboardingAccountOption({ active_step: active_step });
+    setStepName(active_step);
   };
   const handleAction = action => {
     switch (action) {
       case 'Send Test Email':
-        setAccountOption('sendTestEmail', true);
-        history.push('/templates?pendo=6RgwDLtUU5Ynp20auFvU9Qjbpqg');
+        setOnboardingAccountOption({ send_test_email_completed: true });
+        history.push(`/templates?pendo=${GUIDE_IDS.SEND_TEST_EMAIL}`);
         break;
     }
   };
@@ -175,7 +170,7 @@ export const GettingStartedGuide = ({
                   name: 'Send Test Email',
                   onClick: () => handleAction('Send Test Email'),
                 }}
-                itemCompleted={sendTestEmail}
+                itemCompleted={send_test_email_completed}
               >
                 <GuideListItemTitle>Send a Test Email</GuideListItemTitle>
                 <GuideListItemDescription>
