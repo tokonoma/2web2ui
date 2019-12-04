@@ -75,7 +75,7 @@ export const GettingStartedGuide = ({ onboarding = {}, history, setAccountOption
     switch (action) {
       case 'Send Test Email':
         setAccountOption('sendTestEmail', true);
-        history.push('/templates');
+        history.push('/templates?pendo=6RgwDLtUU5Ynp20auFvU9Qjbpqg');
         break;
     }
   };
