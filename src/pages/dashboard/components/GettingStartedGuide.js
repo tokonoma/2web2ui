@@ -7,6 +7,7 @@ import styles from './GettingStartedGuide.module.scss';
 import { BreadCrumbs, BreadCrumbsItem } from 'src/components';
 import { GuideListItem, GuideListItemTitle, GuideListItemDescription } from './GuideListItem';
 import { GUIDE_IDS } from '../constants';
+import { UnstyledLink } from '@sparkpost/matchbox';
 
 export const GettingStartedGuide = ({ onboarding = {}, history, setAccountOption }) => {
   const breadCrumbsItems = {
@@ -15,7 +16,12 @@ export const GettingStartedGuide = ({ onboarding = {}, history, setAccountOption
     'Show Me SparkPost': ['Features', 'Sending', 'Show Me SparkPost'],
     "Let's Code": ['Features', 'Sending', "Let's Code"],
   };
-  const { isGuideAtBottom = false, active_step, send_test_email_completed } = onboarding;
+  const {
+    isGuideAtBottom = false,
+    active_step,
+    send_test_email_completed,
+    explore_analytics_completed,
+  } = onboarding;
 
   const setOnboardingAccountOption = (obj = {}) => {
     setAccountOption('onboarding', obj);
@@ -66,6 +72,12 @@ export const GettingStartedGuide = ({ onboarding = {}, history, setAccountOption
         setOnboardingAccountOption({ send_test_email_completed: true });
         history.push(`/templates?pendo=${GUIDE_IDS.SEND_TEST_EMAIL}`);
         break;
+
+      case 'Explore Analytics':
+        setOnboardingAccountOption({ explore_analytics_completed: true });
+        history.push('/account/users');
+        break;
+
       default:
         break;
     }
@@ -180,7 +192,13 @@ export const GettingStartedGuide = ({ onboarding = {}, history, setAccountOption
               </GuideListItem>
             </Panel.Section>
             <Panel.Section>
-              <GuideListItem action={{ name: 'Explore Analytics', onClick: () => {} }}>
+              <GuideListItem
+                action={{
+                  name: 'Explore Analytics',
+                  onClick: () => handleAction('Explore Analytics'),
+                }}
+                itemCompleted={explore_analytics_completed}
+              >
                 <GuideListItemTitle>Explore Analytics</GuideListItemTitle>
                 <GuideListItemDescription>
                   Get acquainted with our powerful analytics to make the most of your sending
@@ -197,13 +215,21 @@ export const GettingStartedGuide = ({ onboarding = {}, history, setAccountOption
                   }
                   <br />
                   {'Or you can '}
-                  <a href="#">setup email sending now</a>
+                  <UnstyledLink
+                    onClick={() => {
+                      setAndStoreStepName("Let's Code");
+                      setOnboardingAccountOption({ explore_analytics_completed: true });
+                    }}
+                  >
+                    setup email sending now
+                  </UnstyledLink>
                 </GuideListItemDescription>
               </GuideListItem>
             </Panel.Section>
           </>
         );
       case "Let's Code":
+        return <Panel.Section>{renderBreadCrumbs()}</Panel.Section>;
       default:
         return null;
     }
