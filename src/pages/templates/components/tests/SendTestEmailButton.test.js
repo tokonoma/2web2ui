@@ -11,33 +11,29 @@ describe('SendTestEmailButton', () => {
     useEditorContext.mockReturnValue({
       content: {
         from: {
-          email: 'nick@bounce.uat.sparkpost.com'
+          email: 'nick@bounce.uat.sparkpost.com',
         },
         subject: 'Mock Subject',
         text: 'Here is some text',
-        html: '<p>Here is some HTML'
-      },
-      match: {
-        params: {
-          id: '123456'
-        }
+        html: '<p>Here is some HTML',
       },
       template: {
-        subaccount_id: 123
+        id: '123456',
+        subaccount_id: 123,
       },
       isPublishedMode: false,
       updateDraft: jest.fn(() => Promise.resolve()),
       setHasSaved: jest.fn(),
-      ...editorState
+      ...editorState,
     });
 
-    return render(<SendTestEmailButton {...props}/>);
+    return render(<SendTestEmailButton {...props} />);
   };
 
   it('opens the modal in the loading state and saves the draft when the "Send a Test" button is clicked', () => {
     const mockUpdateDraft = jest.fn(() => Promise.resolve());
     const { getByText, queryByTestId } = subject({
-      updateDraft: mockUpdateDraft
+      updateDraft: mockUpdateDraft,
     });
 
     userEvent.click(getByText('Send a Test'));
@@ -50,7 +46,7 @@ describe('SendTestEmailButton', () => {
     const promise = Promise.resolve();
     const mockUpdateDraft = jest.fn(() => promise);
     const { queryByText, queryByLabelText, queryByTestId } = subject({
-      updateDraft: mockUpdateDraft
+      updateDraft: mockUpdateDraft,
     });
 
     userEvent.click(queryByText('Send a Test'));
@@ -89,15 +85,10 @@ describe('SendTestEmailButton', () => {
       const mockSendPreview = jest.fn(() => sendPreviewPromise);
       const mockUpdateDraft = jest.fn(() => updateDraftPromise);
       const mockShowAlert = jest.fn();
-      const {
-        getByText,
-        queryByText,
-        getByLabelText,
-        queryByTestId
-      } = subject({
+      const { getByText, queryByText, getByLabelText, queryByTestId } = subject({
         sendPreview: mockSendPreview,
         showAlert: mockShowAlert,
-        updateDraft: mockUpdateDraft
+        updateDraft: mockUpdateDraft,
       });
 
       userEvent.click(getByText('Send a Test'));
@@ -115,13 +106,13 @@ describe('SendTestEmailButton', () => {
           mode: 'draft',
           emails: ['toEmail@sparkpost.com'],
           from: 'nick@bounce.uat.sparkpost.com',
-          subaccountId: 123
+          subaccountId: 123,
         });
 
         return sendPreviewPromise.then(() => {
           expect(mockShowAlert).toHaveBeenCalledWith({
             type: 'success',
-            message: 'Successfully sent a test email'
+            message: 'Successfully sent a test email',
           });
         });
       });
@@ -133,14 +124,10 @@ describe('SendTestEmailButton', () => {
       const mockSendPreview = jest.fn(() => sendPreviewPromise);
       const mockUpdateDraft = jest.fn(() => updateDraftPromise);
       const mockShowAlert = jest.fn();
-      const {
-        getByText,
-        getByLabelText,
-        queryByTestId
-      } = subject({
+      const { getByText, getByLabelText, queryByTestId } = subject({
         sendPreview: mockSendPreview,
         showAlert: mockShowAlert,
-        updateDraft: mockUpdateDraft
+        updateDraft: mockUpdateDraft,
       });
 
       userEvent.click(getByText('Send a Test'));
