@@ -1,6 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { GettingStartedGuide } from '../GettingStartedGuide';
+import { GUIDE_IDS } from '../../constants';
 
 describe('GettingStartedGuide', () => {
   const defaultProps = {
@@ -80,7 +81,7 @@ describe('GettingStartedGuide', () => {
       .prop('action')
       .onClick();
     expect(defaultProps.history.push).toHaveBeenCalledWith(
-      '/templates?pendo=6RgwDLtUU5Ynp20auFvU9Qjbpqg',
+      `/templates?pendo=${GUIDE_IDS.SEND_TEST_EMAIL}`,
     );
   });
 });
