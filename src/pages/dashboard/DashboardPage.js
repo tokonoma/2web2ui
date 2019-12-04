@@ -19,7 +19,7 @@ export class DashboardPage extends Component {
     const usageReport = <UsageReport />;
     const gettingStartedGuide = <GettingStartedGuide {...this.props} />;
 
-    const { isMessageOnboardingSet, isGuideAtBottom } = this.props;
+    const { isMessageOnboardingSet, onboarding: { isGuideAtBottom } = {} } = this.props;
 
     if (isMessageOnboardingSet) {
       if (isGuideAtBottom) {
@@ -73,7 +73,7 @@ export class DashboardPage extends Component {
 }
 const mapStateToProps = state => ({
   isMessageOnboardingSet: isAccountUiOptionSet('messaging_onboarding')(state),
-  isGuideAtBottom: isAccountUiOptionSet('isGuideAtBottom')(state),
+  onboarding: getAccountUiOptionValue('onboarding')(state),
   activeGuideStep: getAccountUiOptionValue('active_guide_step')(state),
   sendTestEmail: isAccountUiOptionSet('sendTestEmail')(state),
 });

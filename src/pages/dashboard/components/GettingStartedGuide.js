@@ -8,7 +8,8 @@ import { BreadCrumbs, BreadCrumbsItem } from 'src/components';
 import { GuideListItem, GuideListItemTitle, GuideListItemDescription } from './GuideListItem';
 
 export const GettingStartedGuide = ({
-  isGuideAtBottom,
+  onboarding = {},
+  // isGuideAtBottom,
   onboardingActiveStep,
   history,
   setAccountOption,
@@ -20,6 +21,7 @@ export const GettingStartedGuide = ({
     'Show Me SparkPost': ['Features', 'Sending', 'Show Me SparkPost'],
     "Let's Code": ['Features', 'Sending', "Let's Code"],
   };
+  const { isGuideAtBottom = false } = onboarding;
 
   const { sendTestEmail } = rest;
 
@@ -34,7 +36,8 @@ export const GettingStartedGuide = ({
             </span>
           ),
           color: 'blue',
-          onClick: () => setAccountOption('isGuideAtBottom', true),
+          onClick: () =>
+            setAccountOption('onboarding', { ...onboarding, ...{ isGuideAtBottom: true } }),
         },
       ];
   //stepName could be Features,Sending,Show Me Sparkpost, Let's Code
