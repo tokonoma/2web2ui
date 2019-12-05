@@ -45,7 +45,7 @@ const IntegrationPage = ({
   totalCount,
 }) => {
   const { filters, prevFilters, updateFilters } = usePageFilters(filterWhitelist);
-  console.log(filters, prevFilters);
+
   const getData = useCallback(() => {
     getIngestBatchEvents({
       batchIds: filters.batchIds,
@@ -61,7 +61,8 @@ const IntegrationPage = ({
     if (!events || !_.isEqual(_.omit(prevFilters, 'page'), _.omit(filters, 'page'))) {
       getData();
     }
-  }, [events, filters, getData, prevFilters]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filters]);
 
   return (
     <Page title="Signals Integration">
