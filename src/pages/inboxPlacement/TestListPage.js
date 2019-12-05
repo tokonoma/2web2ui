@@ -21,69 +21,83 @@ const selectOptions = [
   { value: 'start_time', label: 'Start Time' },
   { value: 'placement.inbox_pct', label: 'Inbox' },
   { value: 'placement.spam_pct', label: 'Spam' },
-  { value: 'placement.missing_pct', label: 'Missing' }
+  { value: 'placement.missing_pct', label: 'Missing' },
 ];
 
 const filterBoxConfig = {
   show: true,
   itemToStringKeys: ['subject', 'test_name', 'from_address'],
   placeholder: 'Search By: Subject, Placement Name, From Address',
-  wrapper: (props) => (
-    <div className = {styles.FilterBox}>
-      {props}
-    </div>)
+  wrapper: props => <div className={styles.FilterBox}>{props}</div>,
 };
 
-const FilterSortCollectionRow = ({ id, status, subject, test_name, from_address, start_time, end_time, placement }) => (
-  [
-    <Table.Row
-      key={id}
-      className={styles.TableRow}
-      rowData={[
-        <div className={styles.TabbedCellBody}>
-          <div className={styles.SubjectContainer}>
-            <div className={styles.TooltipWrapper}>
-              <Tooltip
-                disabled={status === STATUS.COMPLETED}
-                width={'5.8rem'}
-                horizontalOffset={'-1.35rem'}
-                content={getStatusProps(status).tooltip}
-                dark
-                top
-              >
-                <Dot backgroundColor={getStatusProps(status).fill}/>
-              </Tooltip>
-            </div>
-            <div className={styles.Subject}>
-              <PageLink to={`/inbox-placement/details/${id}`}>
-                <strong>{subject}</strong>
-              </PageLink>
-            </div>
-            <div className={styles.TestName}>
-              {test_name && (
-                <>
-                  <strong>{test_name}</strong>
-                  <strong className={styles.Divider}>{'|'}</strong>
-                </>
-              )}
-              <span>{from_address}</span>
-            </div>
-            <div className={styles.TestSchedule}>
-              <span><Schedule className={styles.ScheduleIcon}/></span>
-              <span>{formatScheduleLine(status, start_time, end_time)}</span>
-            </div>
+const FilterSortCollectionRow = ({
+  id,
+  status,
+  subject,
+  test_name,
+  from_address,
+  start_time,
+  end_time,
+  placement,
+}) => [
+  <Table.Row
+    key={id}
+    className={styles.TableRow}
+    rowData={[
+      <div className={styles.TabbedCellBody}>
+        <div className={styles.SubjectContainer}>
+          <div className={styles.TooltipWrapper}>
+            <Tooltip
+              disabled={status === STATUS.COMPLETED}
+              width={'5.8rem'}
+              horizontalOffset={'-1.35rem'}
+              content={getStatusProps(status).tooltip}
+              dark
+              top
+            >
+              <Dot backgroundColor={getStatusProps(status).fill} />
+            </Tooltip>
           </div>
-        </div>,
-        <div><p className={styles.ColumnHeader}>Inbox</p><h1 className={styles.ColumnValue}>{formatPercentage(placement.inbox_pct)}</h1></div>,
-        <div><p className={styles.ColumnHeader}>Spam</p><h1 className={styles.ColumnValue}>{formatPercentage(placement.spam_pct)}</h1></div>,
-        <div><p className={styles.ColumnHeader}>Missing</p><h1 className={styles.ColumnValue}>{formatPercentage(placement.missing_pct)}</h1></div>
-      ]}
-    />
-  ]
-);
+          <div className={styles.Subject}>
+            <PageLink to={`/inbox-placement/details/${id}`}>
+              <strong>{subject}</strong>
+            </PageLink>
+          </div>
+          <div className={styles.TestName}>
+            {test_name && (
+              <>
+                <strong>{test_name}</strong>
+                <strong className={styles.Divider}>{'|'}</strong>
+              </>
+            )}
+            <span>{from_address}</span>
+          </div>
+          <div className={styles.TestSchedule}>
+            <span>
+              <Schedule className={styles.ScheduleIcon} />
+            </span>
+            <span>{formatScheduleLine(status, start_time, end_time)}</span>
+          </div>
+        </div>
+      </div>,
+      <div>
+        <p className={styles.ColumnHeader}>Inbox</p>
+        <h1 className={styles.ColumnValue}>{formatPercentage(placement.inbox_pct)}</h1>
+      </div>,
+      <div>
+        <p className={styles.ColumnHeader}>Spam</p>
+        <h1 className={styles.ColumnValue}>{formatPercentage(placement.spam_pct)}</h1>
+      </div>,
+      <div>
+        <p className={styles.ColumnHeader}>Missing</p>
+        <h1 className={styles.ColumnValue}>{formatPercentage(placement.missing_pct)}</h1>
+      </div>,
+    ]}
+  />,
+];
 
 export class TestListPage extends Component {
-
   componentDidMount() {
     this.props.listTests();
   }
@@ -105,13 +119,14 @@ export class TestListPage extends Component {
     return (
       <>
         <p className={styles.Description}>
-          An Inbox Placement Test can tell you if you are actually landing in the recipients inbox. We can provide insight into what mailbox providers are doing with your email.
+          An Inbox Placement Test can tell you if you are actually landing in the recipients inbox.
+          We can provide insight into what mailbox providers are doing with your email.
         </p>
-        <Panel title={'Inbox Placement Trends'} >
-          <TrendsChart/>
+        <Panel title={'Inbox Placement Trends'}>
+          <TrendsChart />
           {this.renderCollection()}
         </Panel>
-        </>
+      </>
     );
   }
 
@@ -133,23 +148,35 @@ export class TestListPage extends Component {
       return <Loading />;
     }
 
-    return (<Page
-      empty={{
-        show: !error && tests.length === 0,
-        title: 'Find and Fix Inbox Placement Issues',
-        image: Users,
-        content: <p>Perform seedlist tests that help you predict how your emails are handled by mailbox providers.</p>
-      }}
-      title='Inbox Placement'
-      primaryAction={{ content: 'Start a Test', to: '/inbox-placement/seedlist', component: Link }}
-    >{error ? this.renderError() : this.renderPage()}</Page>
+    return (
+      <Page
+        empty={{
+          show: !error && tests.length === 0,
+          title: 'Find and Fix Inbox Placement Issues',
+          image: Users,
+          content: (
+            <p>
+              Perform seedlist tests that help you predict how your emails are handled by mailbox
+              providers.
+            </p>
+          ),
+        }}
+        title="Inbox Placement"
+        primaryAction={{
+          content: 'Start a Test',
+          to: '/inbox-placement/seedlist',
+          component: Link,
+        }}
+      >
+        {error ? this.renderError() : this.renderPage()}
+      </Page>
     );
   }
 }
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   tests: state.inboxPlacement.tests || [],
   error: state.inboxPlacement.testsError,
-  loading: state.inboxPlacement.testsPending
+  loading: state.inboxPlacement.testsPending,
 });
 
 export default withRouter(connect(mapStateToProps, { listTests })(TestListPage));
