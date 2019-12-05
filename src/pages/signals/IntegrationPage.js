@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { Page } from '@sparkpost/matchbox';
 import { CursorPaging, PerPageButtons } from 'src/components/collection';
 import { DEFAULT_PER_PAGE_BUTTONS } from 'src/constants';
@@ -15,6 +15,7 @@ const validateBatchStatus = val => batchStatusOptionValues.includes(val);
 const validateBatchIds = val => Array.isArray(val);
 const validatePerPage = val =>
   !isNaN(val) && DEFAULT_PER_PAGE_BUTTONS.find(num => num === parseInt(val, 10)) !== undefined;
+const validatePage = val => !isNaN(val) && val >= 0;
 
 const filterWhitelist = {
   batchIds: {
@@ -29,6 +30,11 @@ const filterWhitelist = {
     validate: validatePerPage,
     defaultValue: 10,
   },
+  page: {
+    validate: validatePage,
+    defaultValue: 0,
+    excludeFromRoute: true,
+  },
 };
 
 const IntegrationPage = ({
@@ -38,23 +44,24 @@ const IntegrationPage = ({
   nextCursor,
   totalCount,
 }) => {
-  const { filters, updateFilters } = usePageFilters(filterWhitelist);
-  const [page, setPage] = useState(0);
+  const { filters, prevFilters, updateFilters } = usePageFilters(filterWhitelist);
+  console.log(filters, prevFilters);
   const getData = useCallback(() => {
     getIngestBatchEvents({
       batchIds: filters.batchIds,
-      cursor: page === 0 ? undefined : nextCursor,
+      cursor: filters.page === 0 ? undefined : nextCursor,
       perPage: filters.perPage,
       statuses: filters.batchStatus ? [filters.batchStatus] : undefined,
     });
-  }, [getIngestBatchEvents, filters, page, nextCursor]);
-  const events = eventsByPage[page];
+  }, [getIngestBatchEvents, filters, nextCursor]);
+
+  const events = eventsByPage[filters.page];
 
   useEffect(() => {
-    if (!eventsByPage[page]) {
+    if (!events || !_.isEqual(_.omit(prevFilters, 'page'), _.omit(filters, 'page'))) {
       getData();
     }
-  }, [page, filters, eventsByPage, getData]);
+  }, [events, filters, getData, prevFilters]);
 
   return (
     <Page title="Signals Integration">
@@ -63,8 +70,7 @@ const IntegrationPage = ({
         disabled={loadingStatus === 'pending'}
         initialValues={filters}
         onChange={nextFilters => {
-          setPage(0);
-          updateFilters({ ...nextFilters });
+          updateFilters({ ...nextFilters, page: 0 });
         }}
       />
       <IntegrationCollection
@@ -75,23 +81,22 @@ const IntegrationPage = ({
         }}
       />
       <CursorPaging
-        currentPage={page + 1}
+        currentPage={filters.page + 1}
         handleFirstPage={() => {
-          setPage(0);
+          updateFilters({ page: 0 });
         }}
         handlePageChange={nextPageNumber => {
-          setPage(nextPageNumber - 1);
+          updateFilters({ page: nextPageNumber - 1 });
         }}
-        nextDisabled={totalCount <= filters.perPage * (page + 1)}
-        previousDisabled={page === 0}
+        nextDisabled={totalCount <= filters.perPage * (filters.page + 1)}
+        previousDisabled={filters.page === 0}
         perPage={filters.perPage}
         totalCount={totalCount}
       />
       <div className={styles.PerPageContainer}>
         <PerPageButtons
           onPerPageChange={nextPageSize => {
-            setPage(0);
-            updateFilters({ perPage: nextPageSize });
+            updateFilters({ perPage: nextPageSize, page: 0 });
           }}
           perPage={filters.perPage}
           totalCount={totalCount}
