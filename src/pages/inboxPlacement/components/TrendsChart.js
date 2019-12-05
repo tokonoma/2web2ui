@@ -9,7 +9,6 @@ import { roundToPlaces } from 'src/helpers/units';
 import TooltipMetric from 'src/components/charts/TooltipMetric';
 import useDateHover from 'src/pages/inboxPlacement/hooks/useDateHover';
 import { getInboxPlacementTrends } from 'src/actions/inboxPlacement';
-import { formatInputDate } from 'src/helpers/date';
 import { selectTrends } from 'src/selectors/inboxPlacement';
 import Callout from 'src/components/callout';
 import { PanelLoading } from 'src/components';
@@ -63,18 +62,19 @@ const getTooltipContent = ({ payload = {} }) => (
 
 export const TrendsChart = props => {
   const [hoveredDate, handleDateHover, resetDateHover] = useDateHover();
-  const { getInboxPlacementTrends, trends, hasNoData, loading, error } = props;
+  const { getInboxPlacementTrends, trends, hasNoData, loading, error, filters = {} } = props;
 
   useEffect(() => {
+    const { from, to } = filters;
     getInboxPlacementTrends({
-      //TODO use filters and dates from date selector/redux
-      from: formatInputDate(moment().subtract(30, 'd')),
-      to: formatInputDate(Date.now()),
+      from,
+      to,
     });
-  }, [getInboxPlacementTrends]);
-
+  }, [getInboxPlacementTrends, filters]);
+  console.warn(trends);
   const xAxisProps = useMemo(() => {
     const interval = Math.floor(trends.length / 10);
+    console.warn('Interval', interval);
     const xTicks = trends.filter((value, index) => index % interval === 0).map(({ date }) => date);
     return {
       ticks: xTicks,
@@ -150,8 +150,8 @@ export const TrendsChart = props => {
   );
 };
 
-const mapStateToProps = state => {
-  const trends = selectTrends(state);
+const mapStateToProps = (state, ownProps) => {
+  const trends = selectTrends(state, ownProps);
 
   return {
     error: state.inboxPlacement.getTrendsError,

@@ -1,5 +1,6 @@
 import React, { useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
+import moment from 'moment';
 import { Page, Panel, Table, Tooltip } from '@sparkpost/matchbox';
 import { Schedule } from '@sparkpost/matchbox-icons';
 import { ApiErrorBanner, Loading, PageLink } from 'src/components';
@@ -15,6 +16,8 @@ import styles from './TestListPage.module.scss';
 import { STATUS } from './constants/test';
 import { Users } from 'src/components/images';
 import TrendsChart from './components/TrendsChart';
+import usePageFilters from 'src/hooks/usePageFilters';
+import { formatInputDate } from 'src/helpers/date';
 
 const selectOptions = [
   { value: 'Sort By', label: 'Sort By', disabled: true },
@@ -97,7 +100,31 @@ const FilterSortCollectionRow = ({
   />,
 ];
 
+const validateFrom = val => moment(val).isValid();
+const validateTo = val => moment(val).isValid();
+const normalizeDate = val => formatInputDate(val);
+
+const now = Date.now();
+
+const whitelistFilters = {
+  from: {
+    validate: validateFrom,
+    normalize: normalizeDate,
+    defaultValue: formatInputDate(moment(now).subtract(30, 'd')),
+  },
+  to: {
+    validate: validateTo,
+    normalize: normalizeDate,
+    defaultValue: formatInputDate(now),
+  },
+  tags: {
+    defaultValue: [],
+  },
+};
+
 const TestListPage = ({ tests, error, loading, listTests }) => {
+  const { filters } = usePageFilters(whitelistFilters);
+
   useEffect(() => {
     listTests();
   }, [listTests]);
@@ -124,12 +151,12 @@ const TestListPage = ({ tests, error, loading, listTests }) => {
           We can provide insight into what mailbox providers are doing with your email.
         </p>
         <Panel title={'Inbox Placement Trends'}>
-          <TrendsChart />
+          <TrendsChart filters={filters} />
           {renderCollection()}
         </Panel>
       </>
     ),
-    [renderCollection],
+    [filters, renderCollection],
   );
 
   const renderError = useCallback(

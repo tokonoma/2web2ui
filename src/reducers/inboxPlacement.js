@@ -38,8 +38,9 @@ export default (state = initialState, { type, payload, meta }) => {
 
     case 'GET_INBOX_PLACEMENT_TRENDS_PENDING':
       return { ...state, getTrendsPending: true, getTrendsError: null };
-    case 'GET_INBOX_PLACEMENT_TRENDS_SUCCESS':
+    case 'GET_INBOX_PLACEMENT_TRENDS_SUCCESS': {
       return { ...state, getTrendsPending: false, trends: payload, getTrendsError: null };
+    }
     case 'GET_INBOX_PLACEMENT_TRENDS_FAIL':
       return { ...state, getTrendsPending: false, getTrendsError: payload };
 
