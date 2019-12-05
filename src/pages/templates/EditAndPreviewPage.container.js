@@ -10,7 +10,7 @@ import {
   deleteTemplate,
   create as createTemplate,
   sendPreview,
-  setTestData,
+  setTestData as setTestDataAction, // A method to update the editor content is also called `setTestData` - this method updates
   getTestData
 } from 'src/actions/templates';
 import { getSnippets } from 'src/actions/snippets';
@@ -76,7 +76,7 @@ const mapDispatchToProps = {
   listDomains,
   listSubaccounts,
   showAlert,
-  setTestData,
+  setTestDataAction,
   getTestData,
   getSnippets
 };

@@ -5,7 +5,7 @@ import { setSubaccountQuery } from 'src/helpers/subaccounts';
 import { RedirectAndAlert } from 'src/components/globalAlert';
 import useEditorContext from '../../hooks/useEditorContext';
 
-const SaveAndPublishConfirmationModal = (props) => {
+const SaveAndPublishConfirmationModal = props => {
   const { open, onCancel } = props;
   const {
     draft,
@@ -13,41 +13,54 @@ const SaveAndPublishConfirmationModal = (props) => {
     parsedTestData,
     isDraftPublishing,
     setHasSaved,
-    publishDraft
+    publishDraft,
   } = useEditorContext();
   const [hasSuccessRedirect, setSuccessRedirect] = useState(false);
 
   const handleConfirm = () => {
-    publishDraft({
-      id: draft.id,
-      content,
-      parsedTestData
-    }, draft.subaccount_id)
-      .then(() => {
-        setHasSaved(true);
-        setSuccessRedirect(true);
-      });
+    publishDraft(
+      {
+        id: draft.id,
+        name: draft.name,
+        description: draft.description,
+        content,
+        options: draft.options,
+        shared_with_subaccounts: draft.shared_with_subaccounts,
+        parsedTestData,
+      },
+      draft.subaccount_id,
+    ).then(() => {
+      setHasSaved(true);
+      setSuccessRedirect(true);
+    });
   };
 
   return (
     <>
-      {hasSuccessRedirect &&
+      {hasSuccessRedirect && (
         <RedirectAndAlert
-          to={`/${routeNamespace}/edit/${draft.id}/published/content${setSubaccountQuery(draft.subaccount_id)}`}
+          to={`/${routeNamespace}/edit/${draft.id}/published/content${setSubaccountQuery(
+            draft.subaccount_id,
+          )}`}
           alert={{
             type: 'success',
-            message: 'Template published'
+            message: 'Template published',
           }}
         />
-      }
+      )}
 
       <ConfirmationModal
-        title='Are you sure you want to publish your template?'
-        content={<p>Once published, your template will be available for use in email campaigns and A/B tests.</p>}
+        title="Are you sure you want to publish your template?"
+        content={
+          <p>
+            Once published, your template will be available for use in email campaigns and A/B
+            tests.
+          </p>
+        }
         confirming={isDraftPublishing}
         isPending={isDraftPublishing}
         open={open}
-        confirmVerb='Save and Publish'
+        confirmVerb="Save and Publish"
         onCancel={onCancel}
         onConfirm={handleConfirm}
       />
@@ -56,4 +69,3 @@ const SaveAndPublishConfirmationModal = (props) => {
 };
 
 export default SaveAndPublishConfirmationModal;
-

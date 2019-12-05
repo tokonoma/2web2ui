@@ -7,13 +7,15 @@ export const formatFilterName = (filterType, filterName) => {
       return formatRegion(filterName);
     case PLACEMENT_FILTER_TYPES.MAILBOX_PROVIDER:
       return formatMailboxProvider(filterName);
+    case PLACEMENT_FILTER_TYPES.SENDING_IP:
+      return filterName;
     default:
       return '';
   }
 };
 
-const formatMailboxProvider = (name) => name;
+const formatMailboxProvider = name => name;
 
-const formatRegion = (name) => _.startCase(name);
+export const formatRegion = name => _.startCase(name);
 
 export default formatFilterName;

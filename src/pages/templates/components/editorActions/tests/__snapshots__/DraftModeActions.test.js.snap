@@ -71,8 +71,14 @@ exports[`DraftModeActions renders draft actions 1`] = `
       }
     />
     <DeleteTemplateModal
-      onCancel={[Function]}
+      onClose={[Function]}
       open={false}
+      template={
+        Object {
+          "id": "a-random-id-123",
+          "subaccount_id": "some-subaccount-id",
+        }
+      }
     />
     <SaveAndPublishConfirmationModal
       onCancel={[Function]}

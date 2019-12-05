@@ -77,8 +77,14 @@ exports[`PublishedModeActions renders published actions 1`] = `
       }
     />
     <DeleteTemplateModal
-      onCancel={[Function]}
+      onClose={[Function]}
       open={false}
+      template={
+        Object {
+          "id": "123",
+          "subaccount_id": "abcd",
+        }
+      }
     />
   </div>
 </Button.Group>

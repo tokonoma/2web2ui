@@ -67,30 +67,32 @@ describe('ListPage', () => {
   it('renders delete modal visible', () => {
     const wrapper = subject();
     wrapper.setState({ showDeleteModal: true });
-    expect(wrapper.find('DeleteModal').prop('open')).toBe(true);
+    expect(wrapper.find('DeleteTemplateModal').prop('open')).toBe(true);
   });
 
   it('renders delete modal hidden', () => {
     const wrapper = subject();
     wrapper.setState({ showDeleteModal: false });
-    expect(wrapper.find('DeleteModal').prop('open')).toBe(false);
+    expect(wrapper.find('DeleteTemplateModal').prop('open')).toBe(false);
   });
 
   it('deletes template upon confirmation', async () => {
     const delFn = jest.fn(() => Promise.resolve());
     const wrapper = subject({ deleteTemplate: delFn });
     wrapper.setState({ showDeleteModal: true, templateToDelete: { id: 'foo', name: 'Bar', subaccount_id: 123 }});
-    await wrapper.find('DeleteModal').prop('onDelete')();
-    expect(delFn).toHaveBeenCalledWith({ id: 'foo', subaccountId: 123 });
+    await wrapper.find('DeleteTemplateModal').prop('deleteTemplate')();
+    expect(delFn).toHaveBeenCalled();
   });
 
   it('shows alert after delete and refreshes list', async () => {
-    const delFn = jest.fn(() => Promise.resolve());
     const alertFn = jest.fn();
     const listTemplateFn = jest.fn();
-    const wrapper = subject({ deleteTemplate: delFn, showAlert: alertFn, listTemplates: listTemplateFn });
+    const wrapper = subject({
+      showAlert: alertFn,
+      listTemplates: listTemplateFn
+    });
     wrapper.setState({ showDeleteModal: true, templateToDelete: { id: 'foo', name: 'Bar' }});
-    await wrapper.find('DeleteModal').prop('onDelete')();
+    await wrapper.find('DeleteTemplateModal').prop('successCallback')();
     expect(alertFn).toHaveBeenCalledWith({ type: 'success', message: 'Template Bar deleted' });
     expect(listTemplateFn).toHaveBeenCalled();
   });

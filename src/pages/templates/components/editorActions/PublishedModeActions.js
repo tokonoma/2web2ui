@@ -16,11 +16,13 @@ const PublishedModeActions = () => {
     template,
     published,
     createTemplate,
+    deleteTemplate,
     showAlert,
     content,
     isPublishedMode,
     testData,
-    isCreatePending
+    isCreatePending,
+    isDeletePending
   } = useEditorContext();
   const editDraftTo = `/${routeNamespace}/edit/${template.id}/draft/content${setSubaccountQuery(template.subaccount_id)}`;
 
@@ -114,7 +116,10 @@ const PublishedModeActions = () => {
 
         <DeleteTemplateModal
           open={isDeleteModalOpen}
-          onCancel={handleModalClose}
+          onClose={handleModalClose}
+          template={published}
+          isLoading={isDeletePending}
+          deleteTemplate={deleteTemplate}
         />
       </div>
     </Button.Group>

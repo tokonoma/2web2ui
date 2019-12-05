@@ -1,32 +1,31 @@
 import { shallow } from 'enzyme';
 import React from 'react';
+import cases from 'jest-in-case';
 import every from 'lodash/every';
 import SettingsForm from '../SettingsForm';
 
 describe('SettingsForm', () => {
-  const subject = (props) => {
+  const subject = props => {
     const defaultProps = {
-      domains: [
-        { domain: 'test.com' },
-        { domain: 'verified.com' }
-      ],
+      domains: [{ domain: 'test.com' }, { domain: 'verified.com' }],
       draft: {
-        id: 'fake-id'
+        id: 'fake-id',
       },
       domainsLoading: false,
       hasSubaccounts: false,
       canViewSubaccount: false,
       content: {
         html: '<p>Hello</p>',
-        text: ''
+        text: '',
       },
       values: {
-        content: {}
+        content: {},
+        name: 'Test Template',
       },
       isPublishedMode: false,
-      handleSubmit: jest.fn((func) => func),
+      handleSubmit: jest.fn(func => func),
       showAlert: jest.fn(),
-      setHasSaved: jest.fn()
+      setHasSaved: jest.fn(),
     };
 
     return shallow(<SettingsForm {...defaultProps} {...props} />);
@@ -39,19 +38,23 @@ describe('SettingsForm', () => {
   });
 
   it('renders with subaccounts', () => {
-    expect(subject({ hasSubaccounts: true, canViewSubaccount: true }).exists('SubaccountSection')).toBe(true);
+    expect(
+      subject({ hasSubaccounts: true, canViewSubaccount: true }).exists('SubaccountSection'),
+    ).toBe(true);
   });
 
   it('renders From Email help text with no verified domains', () => {
-    const wrapper = subject({ domains: []});
-    expect(wrapper.find('[name="content.from.email"]').prop('helpText'))
-      .toEqual('You do not have any verified sending domains to use.');
+    const wrapper = subject({ domains: [] });
+    expect(wrapper.find('[name="content.from.email"]').prop('helpText')).toEqual(
+      'You do not have any verified sending domains to use.',
+    );
   });
 
   it('renders From Email help text with no verified domains for subaccount', () => {
-    const wrapper = subject({ subaccountId: 101, domains: []});
-    expect(wrapper.find('[name="content.from.email"]').prop('helpText'))
-      .toEqual('The selected subaccount does not have any verified sending domains.');
+    const wrapper = subject({ subaccountId: 101, domains: [] });
+    expect(wrapper.find('[name="content.from.email"]').prop('helpText')).toEqual(
+      'The selected subaccount does not have any verified sending domains.',
+    );
   });
 
   it('renders id field disabled and leverages the CopyField component', () => {
@@ -63,8 +66,12 @@ describe('SettingsForm', () => {
 
   describe('Published version', () => {
     it('renders with fields disabled', () => {
-      const wrapper = subject({ hasSubaccounts: true, canViewSubaccount: true, isPublishedMode: true });
-      const fieldProps = wrapper.find('Field').map((field) => field.prop('disabled'));
+      const wrapper = subject({
+        hasSubaccounts: true,
+        canViewSubaccount: true,
+        isPublishedMode: true,
+      });
+      const fieldProps = wrapper.find('Field').map(field => field.prop('disabled'));
       expect(fieldProps.length).toEqual(9);
       expect(every(fieldProps)).toBe(true);
       expect(wrapper.find('SubaccountSection').prop('disabled')).toBe(true);
@@ -72,11 +79,15 @@ describe('SettingsForm', () => {
     });
 
     it('renders settings intro when draft does not exist', () => {
-      expect(subject({ hasDraft: false, isPublishedMode: true }).find('[className="SettingsIntro"]')).toMatchSnapshot();
+      expect(
+        subject({ hasDraft: false, isPublishedMode: true }).find('[className="SettingsIntro"]'),
+      ).toMatchSnapshot();
     });
 
     it('renders settings intro when draft exists', () => {
-      expect(subject({ hasDraft: true, isPublishedMode: true }).find('[className="SettingsIntro"]')).toMatchSnapshot();
+      expect(
+        subject({ hasDraft: true, isPublishedMode: true }).find('[className="SettingsIntro"]'),
+      ).toMatchSnapshot();
     });
   });
 
@@ -90,70 +101,119 @@ describe('SettingsForm', () => {
     });
   });
 
-  describe('form submission', () => {
-    it('renders submit button disabled', () => {
-      const buttonSelector = 'Button[type="submit"]';
-
-      expect(subject({
-        submitting: false,
-        valid: false,
-        pristine: true
-      }).find(buttonSelector).prop('disabled')).toBe(true);
-      expect(subject({
-        submitting: false,
-        valid: false,
-        pristine: false
-      }).find(buttonSelector).prop('disabled')).toBe(true);
-      expect(subject({
+  cases(
+    'disables submit button',
+    ({ name, ...props }) => {
+      const wrapper = subject({ valid: true, ...props });
+      expect(wrapper.find('Button[type="submit"]')).toHaveProp('disabled', true);
+    },
+    {
+      'when submitting': {
         submitting: true,
-        valid: true,
-        pristine: false
-      }).find(buttonSelector).prop('disabled')).toBe(true);
-    });
+      },
+      'when pristine': {
+        pristine: true,
+      },
+      'when invalid': {
+        valid: false,
+      },
+      'when in publish mode': {
+        isPublishedMode: true,
+      },
+    },
+  );
 
-    it('updates settings', async () => {
-      const mockUpdateDraft = jest.fn(() => Promise.resolve());
-      const parsedTestData = {
-        some: 'data'
+  describe('when form is submitted', () => {
+    const submitForm = async (props = {}, values = {}) => {
+      const wrapper = subject({
+        parsedTestData: {
+          name: 'Bob Bell',
+        },
+        pristine: false,
+        setHasSaved: () => {},
+        showAlert: () => {},
+        updateDraft: () => Promise.resolve(),
+        valid: true,
+        ...props,
+      });
+
+      await wrapper.find('form').simulate('submit', {
+        description: '',
+        options: { click_tracking: true, open_tracking: true, transactional: true },
+        ...values,
+        content: { text: '', ...values.content },
+      });
+
+      return wrapper;
+    };
+
+    it('requests setting update', async () => {
+      const draft = { id: 'test-template' };
+      const content = { html: 'Hello {{name}}', text: 'Hello {{name}}' };
+      const values = {
+        name: 'Test Template',
+        description: 'This is only a test',
+        shared_with_subaccounts: true,
+        content: {
+          from: { email: 'bob@bell.com' },
+        },
       };
-      const mockAlert = jest.fn();
-      const mockSetHasSaved = jest.fn();
-      const wrapper = subject({
-        valid: true,
-        pristine: false,
-        updateDraft: mockUpdateDraft,
-        parsedTestData,
-        draft: { id: 'foo', subaccount_id: 123 },
-        showAlert: mockAlert,
-        setHasSaved: mockSetHasSaved
-      });
-      await wrapper.find('form').simulate('submit');
-      expect(mockUpdateDraft).toHaveBeenCalledWith({
-        id: 'foo',
-        parsedTestData,
-        content: {
-          'html': '<p>Hello</p>',
-          'text': ''
-        }}, 123);
-      expect(mockAlert).toHaveBeenCalledWith({ type: 'success', message: 'Template settings updated.' });
-      expect(mockSetHasSaved).toHaveBeenCalledWith(true);
+      const updateDraft = jest.fn(() => Promise.resolve());
+      await submitForm({ content, draft, updateDraft }, values);
+
+      expect(updateDraft).toHaveBeenCalledWith(
+        {
+          id: 'test-template',
+          name: 'Test Template',
+          description: 'This is only a test',
+          content: {
+            amp_html: undefined,
+            html: 'Hello {{name}}',
+            text: 'Hello {{name}}',
+            from: { email: 'bob@bell.com' },
+          },
+          options: { click_tracking: true, open_tracking: true, transactional: true },
+          shared_with_subaccounts: true,
+          parsedTestData: {
+            name: 'Bob Bell',
+          },
+        },
+        undefined,
+      );
     });
 
-    it('updates settings with subaccount', () => {
-      const mockUpdateDraft = jest.fn(() => Promise.resolve());
-      const wrapper = subject({
-        valid: true,
-        pristine: false,
-        updateDraft: mockUpdateDraft,
-        draft: { id: 'foo', subaccount_id: 123 }
+    it('requests setting update for template assinged to subaccount', async () => {
+      const draft = {
+        id: 'test-template-for-123',
+        subaccount_id: 123,
+      };
+      const updateDraft = jest.fn(() => Promise.resolve());
+      await submitForm({ draft, updateDraft });
+
+      expect(updateDraft).toHaveBeenCalledWith(
+        expect.objectContaining({
+          id: 'test-template-for-123',
+          shared_with_subaccounts: undefined,
+        }),
+        123,
+      );
+    });
+
+    it('reports have has completed', async () => {
+      const setHasSaved = jest.fn();
+      await submitForm({ setHasSaved });
+
+      expect(setHasSaved).toHaveBeenCalledWith(true);
+    });
+
+    it('alerts on success', async () => {
+      const showAlert = jest.fn();
+      await submitForm({ showAlert });
+
+      expect(showAlert).toHaveBeenCalledWith({
+        type: 'success',
+        message: 'Template settings updated.',
       });
-      wrapper.find('form').simulate('submit');
-      expect(mockUpdateDraft).toHaveBeenCalledWith({
-        id: 'foo',
-        content: {
-          'html': '<p>Hello</p>',
-          'text': ''
-        }}, 123);
     });
   });
 });

@@ -73,9 +73,9 @@ describe('DraftModeActions', () => {
       expect(wrapper.find('Popover')).toHaveProp('open', false);
     });
 
-    it('sets the `open` prop to `false` when invoking the `onCancel` prop', () => {
+    it('sets the `open` prop to `false` when invoking the `onClose` prop', () => {
       wrapper.find('DeleteTemplate').simulate('click');
-      wrapper.find('DeleteTemplateModal').prop('onCancel')();
+      wrapper.find('DeleteTemplateModal').prop('onClose')();
 
       expect(wrapper.find('DeleteTemplateModal')).toHaveProp('open', false);
     });
