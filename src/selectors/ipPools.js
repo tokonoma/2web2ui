@@ -8,30 +8,27 @@ const DEFAULT_POOL_ID = 'default';
 const currentIpPoolId = (state, props) => props.match.params.poolId;
 const currentSendingIp = (state, props) => props.match.params.ip;
 
-export const getIpPools = (state) => state.ipPools.list;
+export const getIpPools = state => state.ipPools.list;
+export const getIpDeliveryTimeSeries = state => state.metrics.results;
 
 export const selectCurrentPool = createSelector(
-  [getIpPools, currentIpPoolId], (allPools, poolId) => _.find(allPools, { id: poolId }) || {}
+  [getIpPools, currentIpPoolId],
+  (allPools, poolId) => _.find(allPools, { id: poolId }) || {},
 );
 
-export const selectIpsForCurrentPool = createSelector(
-  [selectCurrentPool],
-  ({ ips = []}) => ips
-);
+export const selectIpsForCurrentPool = createSelector([selectCurrentPool], ({ ips = [] }) => ips);
 
 export const selectIpForCurrentPool = createSelector(
   [selectCurrentPool, currentSendingIp],
-  ({ ips = []}, sendingIp) => _.find(ips, { external_ip: sendingIp })
+  ({ ips = [] }, sendingIp) => _.find(ips, { external_ip: sendingIp }),
 );
 
-export const getDefaultPool = createSelector(
-  [getIpPools],
-  (ipPools) => ipPools.find(({ id }) => id === DEFAULT_POOL_ID)
+export const getDefaultPool = createSelector([getIpPools], ipPools =>
+  ipPools.find(({ id }) => id === DEFAULT_POOL_ID),
 );
 
-export const getNonDefaultIpPools = createSelector(
-  [getIpPools],
-  (ipPools) => ipPools.filter(({ id }) => id !== DEFAULT_POOL_ID)
+export const getNonDefaultIpPools = createSelector([getIpPools], ipPools =>
+  ipPools.filter(({ id }) => id !== DEFAULT_POOL_ID),
 );
 
 export const getOrderedIpPools = createSelector(
@@ -41,7 +38,7 @@ export const getOrderedIpPools = createSelector(
       return initialList;
     }
     return [defaultPool, ...others];
-  }
+  },
 );
 
 /**
@@ -49,20 +46,34 @@ export const getOrderedIpPools = createSelector(
  * @return bool
  */
 export const shouldShowIpPurchaseCTA = createSelector(
-  [currentPlanCodeSelector, isAdmin], (currentPlanCode, admin) => !_.includes(ENTERPRISE_PLAN_CODES, currentPlanCode) && admin
+  [currentPlanCodeSelector, isAdmin],
+  (currentPlanCode, admin) => !_.includes(ENTERPRISE_PLAN_CODES, currentPlanCode) && admin,
 );
 
-export const selectFirstIpPoolId = createSelector(
-  [getIpPools], (ipPools) => _.get(ipPools, '[0].id')
+export const selectFirstIpPoolId = createSelector([getIpPools], ipPools =>
+  _.get(ipPools, '[0].id'),
 );
 
 export const selectIpFormInitialValues = createSelector(
-  [selectIpForCurrentPool, selectCurrentPool], (currentIp, pool) => ({
+  [selectIpForCurrentPool, selectCurrentPool],
+  (currentIp, pool) => ({
     auto_warmup_stage: 1,
     ...currentIp,
-    ip_pool: pool.id
+    ip_pool: pool.id,
+  }),
+);
 
-  })
+export const selectIpDeliveryHistory = createSelector(
+  [getIpDeliveryTimeSeries],
+  items =>
+    items
+      .map(item => {
+        return {
+          date: item.ts,
+          deliveries: item.count_delivered,
+        };
+      })
+      .filter((item, index) => index !== 0), // The API returns two results for the first date, so we are removing that first result
 );
 
 /**
@@ -70,4 +81,6 @@ export const selectIpFormInitialValues = createSelector(
  * @return bool
  */
 export const canEditOverflowPool = createSelector(
-  [getIpPools, selectCurrentPool], (pools, currentPool) => _.every(pools, (pool) => pool.auto_warmup_overflow_pool !== currentPool.id));
+  [getIpPools, selectCurrentPool],
+  (pools, currentPool) => _.every(pools, pool => pool.auto_warmup_overflow_pool !== currentPool.id),
+);

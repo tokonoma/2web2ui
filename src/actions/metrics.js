@@ -94,9 +94,3 @@ export function fetchDeliveriesByAttempt(params = {}) {
   const path = 'deliverability/attempt';
   return fetch({ type, path, params });
 }
-
-export function fetchDeliveriesBySendingIps(params = {}) {
-  const type = 'FETCH_METRICS_DELIVERIES_BY_SENDING_IPS';
-  const path = 'deliverability/sending-ip';
-  return fetch({ type, path, params });
-}

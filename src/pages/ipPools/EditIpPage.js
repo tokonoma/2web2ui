@@ -6,11 +6,18 @@ import _ from 'lodash';
 import { ApiErrorBanner, Loading } from 'src/components';
 import IpForm from './components/IpForm';
 import DeliveryHistoryLineChart from './components/DeliveryHistoryLineChart';
+import PanelLoading from 'src/components/panelLoading';
 import { showAlert } from 'src/actions/globalAlert';
+import { getRelativeDates } from 'src/helpers/date';
 import { listPools, updatePool } from 'src/actions/ipPools';
-import { fetchDeliveriesBySendingIps } from 'src/actions/metrics';
+import { getTimeSeries } from 'src/actions/metrics';
 import { updateSendingIp } from 'src/actions/sendingIps';
-import { selectCurrentPool, selectIpForCurrentPool } from 'src/selectors/ipPools';
+import {
+  selectCurrentPool,
+  selectIpForCurrentPool,
+  selectIpDeliveryHistory,
+} from 'src/selectors/ipPools';
+import styles from './EditIpPage.module.scss';
 
 export class EditIpPage extends Component {
   onUpdateIp = values => {
@@ -35,13 +42,22 @@ export class EditIpPage extends Component {
       .then(this.loadDependentData);
   };
 
-  loadDependentData = () => {
-    this.props.listPools();
-    this.props.fetchDeliveriesBySendingIps({
-      from: '2010-12-03T08:00',
-      metrics: 'count_delivered',
+  loadDependentData() {
+    this.props.listPools().then(() => {
+      const { ip } = this.props;
+      const { from, to } = getRelativeDates('10days', { roundToPrecision: false });
+
+      if (ip) {
+        this.props.getTimeSeries({
+          from,
+          to,
+          precision: 'day',
+          metrics: 'count_delivered',
+          sending_ips: ip.external_ip,
+        });
+      }
     });
-  };
+  }
 
   componentDidMount() {
     this.loadDependentData();
@@ -49,6 +65,7 @@ export class EditIpPage extends Component {
 
   render() {
     const { loading, pool, ip, error } = this.props;
+    const isChartLoading = this.props.chartLoading;
 
     if (loading || _.isEmpty(pool) || _.isEmpty(ip)) {
       return <Loading />;
@@ -74,7 +91,9 @@ export class EditIpPage extends Component {
             <IpForm onSubmit={this.onUpdateIp} />
 
             <Panel title="Delivery History">
-              <Panel.Section>
+              <Panel.Section className={styles.LineChartSection}>
+                <h3>Last 10 Days</h3>
+
                 <DeliveryHistoryLineChart ip={ip} />
               </Panel.Section>
             </Panel>
@@ -87,11 +106,14 @@ export class EditIpPage extends Component {
 
 const mapStateToProps = (state, props) => {
   const { listLoading, listError } = state.ipPools;
+  const { pending: metricsPending } = state.metrics;
 
   return {
     ip: selectIpForCurrentPool(state, props),
     pool: selectCurrentPool(state, props),
+    deliveryHistory: selectIpDeliveryHistory(state, props),
     loading: listLoading,
+    chartLoading: metricsPending,
     error: listError,
   };
 };
@@ -99,7 +121,7 @@ const mapStateToProps = (state, props) => {
 export default connect(mapStateToProps, {
   updatePool,
   listPools,
-  fetchDeliveriesBySendingIps,
+  getTimeSeries,
   updateSendingIp,
   showAlert,
 })(EditIpPage);

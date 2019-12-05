@@ -9,57 +9,19 @@ import {
   ResponsiveContainer,
   CartesianGrid,
 } from 'recharts';
+import { getLineChartFormatters } from 'src/helpers/chart';
 import { formatNumber } from 'src/helpers/units';
 
-const DeliveryHistoryLineChart = () => {
-  const mockData = [
-    {
-      delivered_messages: 1000,
-      date: '8/01',
-    },
-    {
-      delivered_messages: 2000,
-      date: '08/02',
-    },
-    {
-      delivered_messages: 3000,
-      date: '08/03',
-    },
-    {
-      delivered_messages: 4000,
-      date: '08/04',
-    },
-    {
-      delivered_messages: 5000,
-      date: '08/05',
-    },
-    {
-      delivered_messages: 6000,
-      date: '08/06',
-    },
-    {
-      delivered_messages: 7000,
-      date: '08/07',
-    },
-    {
-      delivered_messages: 8000,
-      date: '08/08',
-    },
-    {
-      delivered_messages: 9000,
-      date: '08/09',
-    },
-    {
-      delivered_messages: 10000,
-      date: '08/10',
-    },
-  ];
+const DeliveryHistoryLineChart = props => {
+  const { data } = props;
+  console.log(getLineChartFormatters('day'));
+  const { xTickFormatter, tooltipLabelFormatter } = getLineChartFormatters('day');
 
   return (
-    <ResponsiveContainer height={350} width={'95%'}>
-      <LineChart data={mockData}>
+    <ResponsiveContainer height={350} width={'100%'}>
+      <LineChart data={data}>
         <YAxis
-          dataKey="delivered_messages"
+          dataKey="deliveries"
           tickLine={false}
           scale="linear"
           width={66}
@@ -69,17 +31,24 @@ const DeliveryHistoryLineChart = () => {
           <Label value="Volume" angle={-90} position="insideLeft" opacity={0.5} fontSize={16} />
         </YAxis>
 
-        <XAxis dataKey="date" tickLine={false} padding={{ left: 25 }} height={66} stroke="#55555a">
+        <XAxis
+          dataKey="date"
+          tickLine={false}
+          padding={{ left: 25 }}
+          height={66}
+          stroke="#55555a"
+          tickFormatter={xTickFormatter}
+        >
           <Label value="Date" offset={15} position="insideBottom" opacity={0.5} fontSize={16} />
         </XAxis>
 
-        <Tooltip />
+        <Tooltip labelFormatter={tooltipLabelFormatter} />
 
         <Line
           type="monotone"
           stroke="#2693C3"
           strokeWidth={2}
-          dataKey="delivered_messages"
+          dataKey="deliveries"
           dot={{ r: 3, strokeWidth: 1 }}
         />
 
