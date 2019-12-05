@@ -14,7 +14,6 @@ import { formatNumber } from 'src/helpers/units';
 
 const DeliveryHistoryLineChart = props => {
   const { data } = props;
-  console.log(getLineChartFormatters('day'));
   const { xTickFormatter, tooltipLabelFormatter } = getLineChartFormatters('day');
 
   return (
