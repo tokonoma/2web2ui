@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { Page, Panel, Table, Tooltip } from '@sparkpost/matchbox';
 import { Schedule } from '@sparkpost/matchbox-icons';
@@ -97,26 +97,27 @@ const FilterSortCollectionRow = ({
   />,
 ];
 
-export class TestListPage extends Component {
-  componentDidMount() {
-    this.props.listTests();
-  }
+const TestListPage = ({ tests, error, loading, listTests }) => {
+  useEffect(() => {
+    listTests();
+  }, [listTests]);
 
-  renderCollection() {
-    return (
+  const renderCollection = useCallback(
+    () => (
       <FilterSortCollection
         title={'Tests'}
         selectOptions={selectOptions}
         filterBoxConfig={filterBoxConfig}
         defaultSortColumn={'start_time'}
-        rows={this.props.tests}
+        rows={tests}
         rowComponent={FilterSortCollectionRow}
       />
-    );
-  }
+    ),
+    [tests],
+  );
 
-  renderPage() {
-    return (
+  const renderPage = useCallback(
+    () => (
       <>
         <p className={styles.Description}>
           An Inbox Placement Test can tell you if you are actually landing in the recipients inbox.
@@ -124,55 +125,53 @@ export class TestListPage extends Component {
         </p>
         <Panel title={'Inbox Placement Trends'}>
           <TrendsChart />
-          {this.renderCollection()}
+          {renderCollection()}
         </Panel>
       </>
-    );
-  }
+    ),
+    [renderCollection],
+  );
 
-  renderError() {
-    const { error, listTests } = this.props;
-    return (
+  const renderError = useCallback(
+    () => (
       <ApiErrorBanner
         message={'Sorry, we seem to have had some trouble loading your tests.'}
         errorDetails={error.message}
         reload={listTests}
       />
-    );
+    ),
+    [error, listTests],
+  );
+
+  if (loading) {
+    return <Loading />;
   }
 
-  render() {
-    const { tests, error, loading } = this.props;
+  return (
+    <Page
+      empty={{
+        show: !error && tests.length === 0,
+        title: 'Find and Fix Inbox Placement Issues',
+        image: Users,
+        content: (
+          <p>
+            Perform seedlist tests that help you predict how your emails are handled by mailbox
+            providers.
+          </p>
+        ),
+      }}
+      title="Inbox Placement"
+      primaryAction={{
+        content: 'Start a Test',
+        to: '/inbox-placement/seedlist',
+        component: Link,
+      }}
+    >
+      {error ? renderError() : renderPage()}
+    </Page>
+  );
+};
 
-    if (loading) {
-      return <Loading />;
-    }
-
-    return (
-      <Page
-        empty={{
-          show: !error && tests.length === 0,
-          title: 'Find and Fix Inbox Placement Issues',
-          image: Users,
-          content: (
-            <p>
-              Perform seedlist tests that help you predict how your emails are handled by mailbox
-              providers.
-            </p>
-          ),
-        }}
-        title="Inbox Placement"
-        primaryAction={{
-          content: 'Start a Test',
-          to: '/inbox-placement/seedlist',
-          component: Link,
-        }}
-      >
-        {error ? this.renderError() : this.renderPage()}
-      </Page>
-    );
-  }
-}
 const mapStateToProps = state => ({
   tests: state.inboxPlacement.tests || [],
   error: state.inboxPlacement.testsError,
