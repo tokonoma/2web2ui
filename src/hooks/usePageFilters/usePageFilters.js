@@ -72,7 +72,9 @@ const omitFiltersExcludedFromRoute = (filters, whitelist) => {
  *
  * @param {object} whitelist - keys are the possible filter names and the value
  *        for each key is an object with a `validate` function, a `defaultValue` for the filter,
- *        and an optional `excludeFromRoute` to exclude the parameter from being included in the route
+ *        an optional `excludeFromRoute` to exclude the parameter from being included in the route,
+ *        and an optional `normalize` function to convert the string/array value from requestParams
+ *        before the validation occurs
  *
  * @return {UsePageFilterReturn}
  *         The `filters`, `prevFilters`, `updateFilters`, and `resetFilters` in an object
@@ -81,8 +83,9 @@ const omitFiltersExcludedFromRoute = (filters, whitelist) => {
  * const { filters, prevFilters, updateFilters, resetFilters } = usePageFilters({
  *   page: {
  *     validate: val => !isNaN(val) && val > 0 && val < 10,
+ *     normalize: val => val * 1, // Convert from string to number
  *     defaultValue: 0,
- *     excludeFromRoute: false
+ *     excludeFromRoute: false,
  *   }
  * });
  */
