@@ -106,6 +106,10 @@ exports[`Component: TestDetails renders correctly 1`] = `
                 "label": "Region",
                 "value": "region",
               },
+              Object {
+                "label": "Sending IP",
+                "value": "sending-ip",
+              },
             ]
           }
         />

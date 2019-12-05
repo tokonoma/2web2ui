@@ -39,18 +39,17 @@ export const getInboxPlacementTest = (id) => sparkpostApiRequest({
   }
 });
 
-export const getInboxPlacementByProviders = (id) => getInboxPlacementData(id, PLACEMENT_FILTER_TYPES.MAILBOX_PROVIDER, 'GET_INBOX_PLACEMENT_TEST_BY_MAILBOX_PROVIDERS');
+export const getInboxPlacementByProvider = (id) => getInboxPlacementData(id, PLACEMENT_FILTER_TYPES.MAILBOX_PROVIDER, 'GET_INBOX_PLACEMENT_TESTS_BY_MAILBOX_PROVIDER');
 
-export const getInboxPlacementByRegions = (id) => getInboxPlacementData(id, PLACEMENT_FILTER_TYPES.REGION, 'GET_INBOX_PLACEMENT_TEST_BY_REGIONS');
+export const getInboxPlacementByRegion = (id) => getInboxPlacementData(id, PLACEMENT_FILTER_TYPES.REGION, 'GET_INBOX_PLACEMENT_TESTS_BY_REGION');
+
+export const getInboxPlacementBySendingIp = (id) => getInboxPlacementData(id, PLACEMENT_FILTER_TYPES.SENDING_IP, 'GET_INBOX_PLACEMENT_TESTS_BY_SENDING_IP');
 
 export const getInboxPlacementData = (id, type, action) => sparkpostApiRequest({
   type: action,
   meta: {
     method: 'GET',
-    url: `/v1/inbox-placement/${id}/${type}`,
-    meta: {
-      testId: id
-    }
+    url: `/v1/inbox-placement/${id}/${type}`
   }
 });
 

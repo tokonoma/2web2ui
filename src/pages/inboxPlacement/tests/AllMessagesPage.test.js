@@ -14,8 +14,9 @@ describe('Page: All Inbox Placement Messages Test', () => {
       filterType: PLACEMENT_FILTER_TYPES.MAILBOX_PROVIDER,
       filterName: 'gmail',
       getAllInboxPlacementMessages: jest.fn(),
-      getInboxPlacementByProviders: jest.fn(),
-      getInboxPlacementByRegions: jest.fn(),
+      getInboxPlacementByProvider: jest.fn(),
+      getInboxPlacementByRegion: jest.fn(),
+      getInboxPlacementBySendingIp: jest.fn(),
       id: 0,
       loading: false,
       sent: 100,
@@ -46,8 +47,9 @@ describe('Page: All Inbox Placement Messages Test', () => {
   describe('useEffect hook', () => {
 
     const getAllInboxPlacementMessages = jest.fn().mockReturnValue({});
-    const getInboxPlacementByProviders = jest.fn().mockReturnValue({});
-    const getInboxPlacementByRegions = jest.fn().mockReturnValue({});
+    const getInboxPlacementByProvider = jest.fn().mockReturnValue({});
+    const getInboxPlacementByRegion = jest.fn().mockReturnValue({});
+    const getInboxPlacementBySendingIp = jest.fn().mockReturnValue({});
     const resetState = jest.fn().mockReturnValue({});
     const subjectMounted = ({ ...props }) => mount(
       <Router>
@@ -60,8 +62,9 @@ describe('Page: All Inbox Placement Messages Test', () => {
           placement={{}}
           authentication={{}}
           getAllInboxPlacementMessages={getAllInboxPlacementMessages}
-          getInboxPlacementByProviders={getInboxPlacementByProviders}
-          getInboxPlacementByRegions={getInboxPlacementByRegions}
+          getInboxPlacementByProvider={getInboxPlacementByProvider}
+          getInboxPlacementByRegion={getInboxPlacementByRegion}
+          getInboxPlacementBySendingIp={getInboxPlacementBySendingIp}
           resetState={resetState}
           id={101}
           history={{ replace: jest.fn() }}
@@ -71,16 +74,22 @@ describe('Page: All Inbox Placement Messages Test', () => {
           {...props}/>
       </Router>);
 
-    it('calls getInboxPlacementTest & getInboxPlacementByProviders on load for mailbox-providers', () => {
+    it('calls getInboxPlacementTest & getInboxPlacementByMailboxProvider on load for mailbox-providers', () => {
       subjectMounted();
       expect(getAllInboxPlacementMessages).toHaveBeenCalledWith(101, { mailbox_providers: 'gmail.com' });
-      expect(getInboxPlacementByProviders).toHaveBeenCalled();
+      expect(getInboxPlacementByProvider).toHaveBeenCalled();
     });
 
-    it('calls getInboxPlacementTest & getInboxPlacementByRegions on load for mailbox-providers', () => {
+    it('calls getInboxPlacementTest & getInboxPlacementByRegion on load for regions', () => {
       subjectMounted({ filterType: PLACEMENT_FILTER_TYPES.REGION, filterName: 'europe' });
       expect(getAllInboxPlacementMessages).toHaveBeenCalledWith(101, { regions: 'europe' });
-      expect(getInboxPlacementByRegions).toHaveBeenCalled();
+      expect(getInboxPlacementByRegion).toHaveBeenCalled();
+    });
+
+    it('calls getInboxPlacementTest & getInboxPlacementBySendingUp on load for sending ip', () => {
+      subjectMounted({ filterType: PLACEMENT_FILTER_TYPES.SENDING_IP, filterName: '101.101' });
+      expect(getAllInboxPlacementMessages).toHaveBeenCalledWith(101, { sending_ips: '101.101' });
+      expect(getInboxPlacementBySendingIp).toHaveBeenCalled();
     });
 
     it('calls resetState on unmount', () => {
