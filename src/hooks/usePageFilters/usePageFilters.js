@@ -1,7 +1,6 @@
 import { useCallback, useReducer, useRef, useEffect } from 'react';
 import _ from 'lodash';
 import useRouter from 'src/hooks/useRouter';
-import { isArray } from 'util';
 
 const PAGE_FILTER_ACTIONS = {
   RESET: 'reset',
@@ -19,28 +18,22 @@ const reducer = (state, action) => {
 };
 
 const noValidation = () => true;
+const noNormalization = val => val;
 
-const cleanFilterState = (filters, whitelist) => {
-  const validatedFilters = Object.keys(filters).reduce((validated, key) => {
+const normalizeFilterState = (filters, whitelist) => {
+  const validatedAndNormalizedFilters = Object.keys(filters).reduce((validated, key) => {
     if (whitelist[key]) {
-      switch (true) {
-        // convert numeric values
-        case !isNaN(filters[key]):
-          validated[key] = filters[key] * 1;
-          break;
-        // If it's an array, convert numeric values
-        case isArray(filters[key]):
-          validated[key] = filters[key].map(val => (!isNaN(val) ? val * 1 : val));
-          break;
-        // Just take the string value
-        default:
-          validated[key] = filters[key];
-          break;
-      }
-      const { validate = noValidation, defaultValue = '' } = whitelist[key];
-
-      // Validate this value and all of its dependencies
-      if (!validate(validated[key])) {
+      const { validate = noValidation, normalize = noNormalization, defaultValue = '' } = whitelist[
+        key
+      ];
+      try {
+        const normalized = normalize(filters[key]);
+        if (!validate(normalized)) {
+          validated[key] = defaultValue;
+        } else {
+          validated[key] = normalized;
+        }
+      } catch (e) {
         validated[key] = defaultValue;
       }
     }
@@ -49,17 +42,17 @@ const cleanFilterState = (filters, whitelist) => {
 
   // Add missing keys from whitelist into filters
   Object.keys(whitelist).forEach(filter => {
-    if (!validatedFilters[filter]) {
-      validatedFilters[filter] = whitelist[filter].defaultValue;
+    if (!validatedAndNormalizedFilters[filter]) {
+      validatedAndNormalizedFilters[filter] = whitelist[filter].defaultValue;
     }
   });
 
-  return validatedFilters;
+  return validatedAndNormalizedFilters;
 };
 
 const omitFiltersExcludedFromRoute = (filters, whitelist) => {
   return Object.keys(filters).reduce((routeFilters, current) => {
-    if (!whitelist[current].excludeFromRoute) {
+    if (whitelist[current] && !whitelist[current].excludeFromRoute) {
       routeFilters[current] = filters[current];
     }
     return routeFilters;
@@ -96,7 +89,7 @@ const omitFiltersExcludedFromRoute = (filters, whitelist) => {
 const usePageFilters = whitelist => {
   const { requestParams = {}, updateRoute } = useRouter();
   const defaultFilters = useRef(
-    cleanFilterState(omitFiltersExcludedFromRoute(requestParams, whitelist), whitelist),
+    normalizeFilterState(omitFiltersExcludedFromRoute(requestParams, whitelist), whitelist),
   );
 
   const cleanReducer = useCallback(
@@ -104,7 +97,7 @@ const usePageFilters = whitelist => {
       const { filters } = state;
       return {
         prevFilters: filters,
-        filters: cleanFilterState(reducer(filters, action), whitelist),
+        filters: normalizeFilterState(reducer(filters, action), whitelist),
       };
     },
     [whitelist],

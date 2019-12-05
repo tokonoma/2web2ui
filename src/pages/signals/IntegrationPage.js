@@ -17,6 +17,8 @@ const validatePerPage = val =>
   !isNaN(val) && DEFAULT_PER_PAGE_BUTTONS.find(num => num === parseInt(val, 10)) !== undefined;
 const validatePage = val => !isNaN(val) && val >= 0;
 
+const normalizeNumber = val => val * 1;
+
 const filterWhitelist = {
   batchIds: {
     validate: validateBatchIds,
@@ -29,11 +31,13 @@ const filterWhitelist = {
   perPage: {
     validate: validatePerPage,
     defaultValue: 10,
+    normalize: normalizeNumber,
   },
   page: {
     validate: validatePage,
     defaultValue: 0,
     excludeFromRoute: true,
+    normalize: normalizeNumber,
   },
 };
 
