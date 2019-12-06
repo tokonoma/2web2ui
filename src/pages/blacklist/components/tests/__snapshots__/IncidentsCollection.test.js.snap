@@ -19,11 +19,11 @@ exports[`Blacklist Component: IncidentsCollection renders page correctly 1`] = `
     Object {
       "exampleModifiers": Array [
         "resource",
-        "blacklist_code",
+        "blacklist_name",
       ],
       "itemToStringKeys": Array [
         "resource",
-        "blacklist_code",
+        "blacklist_name",
       ],
       "show": true,
       "wrapper": [Function],
@@ -34,7 +34,7 @@ exports[`Blacklist Component: IncidentsCollection renders page correctly 1`] = `
   rows={
     Array [
       Object {
-        "blacklist_code": "spammy mcspamface",
+        "blacklist_name": "spammy mcspamface",
         "id": 1,
         "occurred_at_formatted": "Dec 3 2019 at 10:00am",
         "occurred_at_timestamp": 123456789,
@@ -51,20 +51,25 @@ exports[`Blacklist Component: IncidentsCollection renders page correctly 1`] = `
 
 exports[`Blacklist Component: IncidentsCollection renders the rows correctly 1`] = `
 Array [
-  <React.Fragment>
+  <div
+    className="Details"
+  >
     <PageLink
-      className="Resource"
       to="/"
     >
       101.101
     </PageLink>
-    <h4>
+    <div>
       spammy mcspamface
-    </h4>
-  </React.Fragment>,
-  <DisplayDate
-    formattedDate="Dec 3 2019 at 10:00am"
-    timestamp={123456789}
-  />,
+    </div>
+  </div>,
+  <div
+    className="Listing"
+  >
+    <DisplayDate
+      formattedDate="Dec 3 2019 at 10:00am"
+      timestamp={123456789}
+    />
+  </div>,
 ]
 `;
