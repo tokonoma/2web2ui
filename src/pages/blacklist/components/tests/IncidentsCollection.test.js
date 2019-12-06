@@ -7,7 +7,7 @@ describe('Blacklist Component: IncidentsCollection', () => {
     {
       id: 1,
       resource: '101.101',
-      blacklist_code: 'spammy mcspamface',
+      blacklist_name: 'spammy mcspamface',
       occurred_at_formatted: 'Dec 3 2019 at 10:00am',
       occurred_at_timestamp: 123456789,
     },

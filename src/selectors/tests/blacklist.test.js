@@ -9,7 +9,7 @@ describe('Blacklist Selectors: ', () => {
       {
         id: 'id-1',
         resource: true,
-        blacklist_code: 'spamhaus-sbl',
+        blacklist_name: 'spamhaus-sbl',
         occurred_at: '2019-07-23T12:48:00.000Z',
       },
     ];

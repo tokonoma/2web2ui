@@ -6,8 +6,8 @@ import styles from './IncidentsCollection.module.scss';
 
 const filterBoxConfig = {
   show: true,
-  exampleModifiers: ['resource', 'blacklist_code'],
-  itemToStringKeys: ['resource', 'blacklist_code'],
+  exampleModifiers: ['resource', 'blacklist_name'],
+  itemToStringKeys: ['resource', 'blacklist_name'],
   wrapper: props => <div className={styles.FilterBox}>{props}</div>,
 };
 
@@ -16,7 +16,7 @@ const columns = [{ label: 'Details' }, { label: 'Listed', sortKey: 'occurred_at'
 const getRowData = ({
   id: _id, //use this to link to details page and remove alias
   resource,
-  blacklist_code,
+  blacklist_name,
   occurred_at_formatted,
   occurred_at_timestamp,
 }) => {
@@ -25,7 +25,7 @@ const getRowData = ({
       <PageLink to={`/`} /*TODO link to details page*/ className={styles.Resource}>
         {resource}
       </PageLink>
-      <h4>{blacklist_code}</h4>
+      <h4>{blacklist_name}</h4>
     </>,
     <DisplayDate timestamp={occurred_at_timestamp} formattedDate={occurred_at_formatted} />,
   ];
