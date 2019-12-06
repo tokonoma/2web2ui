@@ -72,7 +72,7 @@ export class DashboardPage extends Component {
   };
 
   render() {
-    const { accountAgeInDays, currentUser, account } = this.props;
+    const { accountAgeInDays, currentUser, account, isMessageOnboardingSet } = this.props;
 
     //Shows banner if within 14 days of plan to downgrade
 
@@ -81,7 +81,7 @@ export class DashboardPage extends Component {
         {currentUser.email_verified === false && (
           <VerifyEmailBanner verifying={currentUser.verifyingEmail} />
         )}
-        <SignupModal />
+        {isMessageOnboardingSet && <SignupModal />}
         <FreePlanWarningBanner
           account={account}
           accountAgeInDays={accountAgeInDays}
