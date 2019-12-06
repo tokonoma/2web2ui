@@ -1,7 +1,7 @@
 import { formatContactData } from 'src/helpers/billing';
 import { fetch as fetchAccount, getBillingInfo } from './account';
 import { list as getSendingIps } from './sendingIps';
-import { isAws } from 'src/helpers/conditions/account';
+import { isAws, isAccountUiOptionSet } from 'src/helpers/conditions/account';
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
 import zuoraRequest from 'src/actions/helpers/zuoraRequest';
 
@@ -9,53 +9,47 @@ import zuoraRequest from 'src/actions/helpers/zuoraRequest';
  * Updates plan
  * @param {string} code
  */
-export function updateSubscription({ code, promoCode, meta = {} }) {
+export function updateSubscription({ code, bundle = code, promoCode, meta = {} }) {
   const getBillingAction = () => getBillingInfo();
   const fetchAccountAction = () =>
     fetchAccount({ include: 'usage', meta: { onSuccess: getBillingAction } });
-  return (dispatch, getState) =>
-    dispatch(
-      sparkpostApiRequest({
-        type: 'UPDATE_SUBSCRIPTION',
-        meta: {
-          method: 'PUT',
-          url: isAws(getState())
-            ? '/v1/account/aws-marketplace/subscription'
-            : '/v1/account/subscription',
-          data: {
-            promo_code: promoCode,
-            code,
-          },
-          ...meta,
-          onSuccess: meta.onSuccess ? meta.onSuccess : fetchAccountAction,
-        },
-      }),
-    );
-}
 
-//TODO: Replace current updatesubscription with new action
-export function updateSubscriptionNew({ code, bundle = code, promoCode, meta = {} }) {
-  const getBillingAction = () => getBillingInfo();
-  const fetchAccountAction = () =>
-    fetchAccount({ include: 'usage', meta: { onSuccess: getBillingAction } });
   return (dispatch, getState) =>
-    dispatch(
-      sparkpostApiRequest({
-        type: 'UPDATE_SUBSCRIPTION',
-        meta: {
-          method: 'PUT',
-          url: isAws(getState())
-            ? '/v1/account/aws-marketplace/subscription'
-            : '/v1/billing/subscription',
-          data: {
-            promo_code: promoCode,
-            [isAws(getState()) ? 'code' : 'bundle']: code || bundle,
-          },
-          ...meta,
-          onSuccess: meta.onSuccess ? meta.onSuccess : fetchAccountAction,
-        },
-      }),
-    );
+    isAccountUiOptionSet('account_feature_limits')(getState()) //TODO: Remove this + first action
+      ? dispatch(
+          sparkpostApiRequest({
+            type: 'UPDATE_SUBSCRIPTION',
+            meta: {
+              method: 'PUT',
+              url: isAws(getState())
+                ? '/v1/account/aws-marketplace/subscription'
+                : '/v1/billing/subscription/bundle',
+              data: {
+                promo_code: promoCode,
+                [isAws(getState()) ? 'code' : 'bundle']: code || bundle,
+              },
+              ...meta,
+              onSuccess: meta.onSuccess ? meta.onSuccess : fetchAccountAction,
+            },
+          }),
+        )
+      : dispatch(
+          sparkpostApiRequest({
+            type: 'UPDATE_SUBSCRIPTION',
+            meta: {
+              method: 'PUT',
+              url: isAws(getState())
+                ? '/v1/account/aws-marketplace/subscription'
+                : '/v1/account/subscription',
+              data: {
+                promo_code: promoCode,
+                code,
+              },
+              ...meta,
+              onSuccess: meta.onSuccess ? meta.onSuccess : fetchAccountAction,
+            },
+          }),
+        );
 }
 
 export function syncSubscription({ meta = {} } = {}) {

@@ -16,11 +16,7 @@ import AccessControl from 'src/components/auth/AccessControl';
 
 import FeatureChangeSection from '../components/FeatureChangeSection';
 import { FeatureChangeContextProvider } from '../context/FeatureChangeContext';
-import {
-  verifyPromoCode,
-  clearPromoCode,
-  updateSubscriptionNew as updateSubscription,
-} from 'src/actions/billing';
+import { verifyPromoCode, clearPromoCode, updateSubscription } from 'src/actions/billing';
 import billingCreate from 'src/actions/billingCreate';
 import billingUpdate from 'src/actions/billingUpdate';
 import { showAlert } from 'src/actions/globalAlert';
