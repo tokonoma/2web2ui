@@ -7,25 +7,24 @@ import { selectAvailableBundles, selectAccountBilling } from 'src/selectors/acco
 import { isAccountUiOptionSet } from 'src/helpers/conditions/account';
 import { connect } from 'react-redux';
 
-const ChangePlanPageContainer = ({ newChangePlan, ...props }) => (
+const ChangePlanPageContainer = ({ newChangePlan, ...props }) =>
   newChangePlan ? ( //TODO: Remove conditional check after replacing changeplanform
     <ChangePlanProvider {...props}>
       <ChangePlanPage />
     </ChangePlanProvider>
   ) : (
     <ChangePlanPage />
-  )
-);
+  );
 
 const mapDispatchToProps = {
   getSubscription,
   getBundles,
   getPlans,
   getBillingInfo,
-  getBillingCountries
+  getBillingCountries,
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   const { account, loading: accountLoading } = selectAccountBilling(state);
   const { countriesLoading, plansLoading, bundlesLoading } = state.billing;
   return {
@@ -35,7 +34,7 @@ const mapStateToProps = (state) => {
     loading: countriesLoading || plansLoading || bundlesLoading || accountLoading,
     billingCountries: state.billing.countries,
     account,
-    newChangePlan: isAccountUiOptionSet('account_feature_limits')(state)
+    newChangePlan: isAccountUiOptionSet('account_feature_limits')(state),
   };
 };
 
