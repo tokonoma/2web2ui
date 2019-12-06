@@ -17,6 +17,16 @@ const reducer = (state, action) => {
   }
 };
 
+const flattenParameters = obj =>
+  Object.keys(obj).reduce((acc, curr) => {
+    if (_.isPlainObject(obj[curr])) {
+      return { ...acc, ...obj[curr] };
+    } else {
+      acc[curr] = obj[curr];
+    }
+    return acc;
+  }, {});
+
 const noValidation = () => true;
 const noNormalization = val => val;
 
@@ -121,7 +131,7 @@ const usePageFilters = whitelist => {
 
   useEffect(() => {
     const nonRouteFilters = omitFiltersExcludedFromRoute(filters, whitelist);
-    updateRoute(nonRouteFilters);
+    updateRoute(flattenParameters(nonRouteFilters));
   }, [updateRoute, filters, whitelist]);
 
   return { filters, prevFilters, updateFilters, resetFilters };
