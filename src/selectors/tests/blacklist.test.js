@@ -17,7 +17,7 @@ describe('Blacklist Selectors: ', () => {
     formattedIncidents = [
       {
         ...incidents[0],
-        occurred_at_formatted: 'Jul 23 2019 at 8:48am',
+        occurred_at_formatted: 'Jul 23 2019, 8:48am',
         occurred_at_timestamp: 1563886080000,
       },
     ];
