@@ -163,11 +163,11 @@ describe('plan selector', () => {
   beforeEach(() => {
     state = {
       account: {
-        subscription: { self_serve: true },
+        subscription: {},
         billing: {},
       },
       billing: {
-        subscription: {},
+        subscription: { type: 'active' },
         plans: [
           { code: 'pub', status: 'public' },
           { code: 'pub-free', status: 'public', tier: 'test', isFree: true },
