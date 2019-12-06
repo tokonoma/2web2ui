@@ -13,21 +13,15 @@ const filterBoxConfig = {
 
 const columns = [{ label: 'Details' }, { label: 'Listed', sortKey: 'occurred_at' }];
 
-const getRowData = ({
-  id: _id, //use this to link to details page and remove alias
-  resource,
-  blacklist_name,
-  occurred_at_formatted,
-  occurred_at_timestamp,
-}) => {
+const getRowData = ({ resource, blacklist_name, occurred_at_formatted, occurred_at_timestamp }) => {
   return [
-    <>
-      <PageLink to={`/`} /*TODO link to details page*/ className={styles.Resource}>
-        {resource}
-      </PageLink>
-      <h4>{blacklist_name}</h4>
-    </>,
-    <DisplayDate timestamp={occurred_at_timestamp} formattedDate={occurred_at_formatted} />,
+    <div className={styles.Details}>
+      <PageLink to={`/`} /*TODO link to details page*/>{resource}</PageLink>
+      <div>{blacklist_name}</div>
+    </div>,
+    <div className={styles.Listing}>
+      <DisplayDate timestamp={occurred_at_timestamp} formattedDate={occurred_at_formatted} />
+    </div>,
   ];
 };
 
