@@ -17,11 +17,13 @@ const DraftModeActions = () => {
     hasPublished,
     draft,
     createTemplate,
+    deleteTemplate,
     showAlert,
     content,
     isPublishedMode,
     testData,
-    isCreatePending
+    isCreatePending,
+    isDeletePending
   } = useEditorContext();
 
   // State
@@ -119,7 +121,10 @@ const DraftModeActions = () => {
 
         <DeleteTemplateModal
           open={isDeleteModalOpen}
-          onCancel={handleModalClose}
+          onClose={handleModalClose}
+          template={draft}
+          isLoading={isDeletePending}
+          deleteTemplate={deleteTemplate}
         />
 
         <SaveAndPublishConfirmationModal

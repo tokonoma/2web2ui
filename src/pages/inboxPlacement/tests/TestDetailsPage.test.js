@@ -3,20 +3,21 @@ import React from 'react';
 import { TestDetailsPage } from '../TestDetailsPage';
 import { StopTest } from '../components/StopTest';
 
-
 describe('Page: Single Inbox Placement Test', () => {
   const subject = ({ ...props }) => {
     const defaults = {
       getInboxPlacementTest: jest.fn(),
-      getInboxPlacementByProviders: jest.fn(),
+      getInboxPlacementByProvider: jest.fn(),
+      getInboxPlacementByRegion: jest.fn(),
+      getInboxPlacementBySendingIp: jest.fn(),
       getInboxPlacementTestContent: jest.fn(),
       tabIndex: 0,
       id: 0,
       loading: false,
       error: false,
       history: {
-        replace: jest.fn()
-      }
+        replace: jest.fn(),
+      },
     };
 
     return shallow(<TestDetailsPage {...defaults} {...props} />);
@@ -28,24 +29,31 @@ describe('Page: Single Inbox Placement Test', () => {
 
   it('calls getInboxPlacementTest on load', () => {
     const getInboxPlacementTest = jest.fn().mockReturnValue({});
-    const getInboxPlacementByProviders = jest.fn().mockReturnValue({});
-    const getInboxPlacementByRegions = jest.fn().mockReturnValue({});
+    const getInboxPlacementByProvider = jest.fn().mockReturnValue({});
+    const getInboxPlacementByRegion = jest.fn().mockReturnValue({});
+    const getInboxPlacementBySendingIp = jest.fn().mockReturnValue({});
     const getInboxPlacementTestContent = jest.fn().mockReturnValue({});
 
-    mount(<TestDetailsPage
-      details={{}}
-      content={{}}
-      getInboxPlacementTest={getInboxPlacementTest}
-      getInboxPlacementByProviders={getInboxPlacementByProviders}
-      getInboxPlacementByRegions={getInboxPlacementByRegions}
-      getInboxPlacementTestContent={getInboxPlacementTestContent}
-      id={101}
-      tabIndex={1} //not working nicely with tabIndex=0; TestDetails component
-      history={{ replace: jest.fn() }}
-      StopTestComponent={StopTest}/>);
+    mount(
+      <TestDetailsPage
+        details={{}}
+        content={{}}
+        getInboxPlacementTest={getInboxPlacementTest}
+        getInboxPlacementByProvider={getInboxPlacementByProvider}
+        getInboxPlacementByRegion={getInboxPlacementByRegion}
+        getInboxPlacementBySendingIp={getInboxPlacementBySendingIp}
+        getInboxPlacementTestContent={getInboxPlacementTestContent}
+        id={101}
+        tabIndex={1} //not working nicely with tabIndex=0; TestDetails component
+        history={{ replace: jest.fn() }}
+        StopTestComponent={StopTest}
+      />,
+    );
 
     expect(getInboxPlacementTest).toHaveBeenCalled();
-    expect(getInboxPlacementByProviders).toHaveBeenCalled();
+    expect(getInboxPlacementByProvider).toHaveBeenCalled();
+    expect(getInboxPlacementByRegion).toHaveBeenCalled();
+    expect(getInboxPlacementBySendingIp).toHaveBeenCalled();
     expect(getInboxPlacementTestContent).toHaveBeenCalled();
   });
 
@@ -59,8 +67,8 @@ describe('Page: Single Inbox Placement Test', () => {
     const wrapper = subject();
     wrapper.setProps({
       error: {
-        message: 'You dun goofed'
-      }
+        message: 'You dun goofed',
+      },
     });
     expect(wrapper.find('RedirectAndAlert')).toMatchSnapshot();
     expect(wrapper.find('Page')).not.toExist();
@@ -81,18 +89,24 @@ describe('Page: Single Inbox Placement Test', () => {
 
   it('updates URL when tabs change', () => {
     const mockHistory = { replace: jest.fn() };
-    const wrapper = mount(<TestDetailsPage tabIndex={1}
-      details={{}}
-      content={{}}
-      history={mockHistory}
-      getInboxPlacementTest={jest.fn()}
-      getInboxPlacementByProviders={jest.fn()}
-      getInboxPlacementByRegions={jest.fn()}
-      getInboxPlacementTestContent={jest.fn()}
-      StopTestComponent={StopTest}
-    />);
-    wrapper.find('Tab').last().simulate('click');
+    const wrapper = mount(
+      <TestDetailsPage
+        tabIndex={1}
+        details={{}}
+        content={{}}
+        history={mockHistory}
+        getInboxPlacementTest={jest.fn()}
+        getInboxPlacementByProvider={jest.fn()}
+        getInboxPlacementByRegion={jest.fn()}
+        getInboxPlacementBySendingIp={jest.fn()}
+        getInboxPlacementTestContent={jest.fn()}
+        StopTestComponent={StopTest}
+      />,
+    );
+    wrapper
+      .find('Tab')
+      .last()
+      .simulate('click');
     expect(mockHistory.replace).toHaveBeenCalled();
   });
 });
-

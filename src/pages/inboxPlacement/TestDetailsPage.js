@@ -3,15 +3,24 @@ import { connect } from 'react-redux';
 import { Page, Tabs } from '@sparkpost/matchbox';
 
 import { Loading } from 'src/components';
-import { getInboxPlacementTest, getInboxPlacementByProviders, getInboxPlacementByRegions, getInboxPlacementTestContent } from 'src/actions/inboxPlacement';
-import { selectTestDetailsPageError, selectTestDetailsPageLoading } from 'src/selectors/inboxPlacement';
+import {
+  getInboxPlacementTest,
+  getInboxPlacementByProvider,
+  getInboxPlacementByRegion,
+  getInboxPlacementBySendingIp,
+  getInboxPlacementTestContent,
+} from 'src/actions/inboxPlacement';
+import {
+  selectTestDetailsPageError,
+  selectTestDetailsPageLoading,
+} from 'src/selectors/inboxPlacement';
 import TestDetails from './components/TestDetails';
 import TestContent from './components/TestContent';
 import useTabs from 'src/hooks/useTabs';
 import { RedirectAndAlert } from 'src/components/globalAlert';
 import StopTest from './components/StopTest';
 
-export const TestDetailsPage = (props) => {
+export const TestDetailsPage = props => {
   const {
     history,
     id,
@@ -20,23 +29,33 @@ export const TestDetailsPage = (props) => {
     details,
     placementsByProvider,
     placementsByRegion,
+    placementsBySendingIp,
     content,
     error,
     getInboxPlacementTest,
-    getInboxPlacementByProviders,
-    getInboxPlacementByRegions,
+    getInboxPlacementByProvider,
+    getInboxPlacementByRegion,
+    getInboxPlacementBySendingIp,
     getInboxPlacementTestContent,
-    StopTestComponent = StopTest //This is for unit test purposes
+    StopTestComponent = StopTest, //This is for unit test purposes
   } = props;
 
   const [selectedTabIndex, tabs] = useTabs(TABS, tabIndex);
 
   const loadTestData = useCallback(() => {
     getInboxPlacementTest(id);
-    getInboxPlacementByProviders(id);
+    getInboxPlacementByProvider(id);
     getInboxPlacementTestContent(id);
-    getInboxPlacementByRegions(id);
-  }, [getInboxPlacementTest, getInboxPlacementByProviders, getInboxPlacementTestContent, getInboxPlacementByRegions, id]);
+    getInboxPlacementByRegion(id);
+    getInboxPlacementBySendingIp(id);
+  }, [
+    getInboxPlacementTest,
+    getInboxPlacementByProvider,
+    getInboxPlacementTestContent,
+    getInboxPlacementByRegion,
+    getInboxPlacementBySendingIp,
+    id,
+  ]);
 
   useEffect(() => {
     loadTestData();
@@ -50,37 +69,42 @@ export const TestDetailsPage = (props) => {
     const selectedTabKey = tabs[selectedTabIndex].key;
     switch (selectedTabKey) {
       case 'content':
-        return <TestContent content={content} details={details}/>;
+        return <TestContent content={content} details={details} />;
       default:
-        return <TestDetails details={details} placementsByProvider={placementsByProvider} placementsByRegion={placementsByRegion}/>;
+        return (
+          <TestDetails
+            details={details}
+            placementsByProvider={placementsByProvider}
+            placementsByRegion={placementsByRegion}
+            placementsBySendingIp={placementsBySendingIp}
+          />
+        );
     }
   };
 
   if (loading) {
-    return <Loading/>;
+    return <Loading />;
   }
 
   if (error) {
-    return <RedirectAndAlert
-      to='/inbox-placement'
-      alert={{ type: 'error', message: error.message }}/>;
+    return (
+      <RedirectAndAlert to="/inbox-placement" alert={{ type: 'error', message: error.message }} />
+    );
   }
 
   return (
     <Page
       breadcrumbAction={{
         content: 'All Inbox Placement Tests',
-        onClick: () => history.push('/inbox-placement')
+        onClick: () => history.push('/inbox-placement'),
       }}
-      title='Inbox Placement'
-      subtitle='Results'
-      primaryArea={<StopTestComponent status={(details || {}).status} id={id} reload={loadTestData} />}
+      title="Inbox Placement"
+      subtitle="Results"
+      primaryArea={
+        <StopTestComponent status={(details || {}).status} id={id} reload={loadTestData} />
+      }
     >
-      <Tabs
-        selected={selectedTabIndex}
-        connectBelow={true}
-        tabs={tabs}
-      />
+      <Tabs selected={selectedTabIndex} connectBelow={true} tabs={tabs} />
       {renderTabContent(selectedTabIndex)}
     </Page>
   );
@@ -88,7 +112,7 @@ export const TestDetailsPage = (props) => {
 
 const TABS = [
   { content: 'Details', key: 'details' },
-  { content: 'Content', key: 'content' }
+  { content: 'Content', key: 'content' },
 ];
 
 function mapStateToProps(state, props) {
@@ -103,8 +127,17 @@ function mapStateToProps(state, props) {
     details: state.inboxPlacement.currentTestDetails,
     placementsByProvider: state.inboxPlacement.placementsByProvider || [],
     placementsByRegion: state.inboxPlacement.placementsByRegion || [],
-    content: state.inboxPlacement.currentTestContent || {}
+    placementsBySendingIp: state.inboxPlacement.placementsBySendingIp || [],
+    content: state.inboxPlacement.currentTestContent || {},
   };
 }
 
-export default connect(mapStateToProps, { getInboxPlacementTest, getInboxPlacementByProviders, getInboxPlacementByRegions, getInboxPlacementTestContent })(TestDetailsPage);
+const mapDispatchToProps = {
+  getInboxPlacementTest,
+  getInboxPlacementByProvider,
+  getInboxPlacementByRegion,
+  getInboxPlacementBySendingIp,
+  getInboxPlacementTestContent,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TestDetailsPage);

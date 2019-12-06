@@ -3,7 +3,7 @@ import { FileEdit } from '@sparkpost/matchbox-icons';
 import useEditorContext from '../../hooks/useEditorContext';
 import { UnstyledLink } from '@sparkpost/matchbox';
 
-const SaveDraft = (props) => {
+const SaveDraft = props => {
   const { className, onClick } = props;
   const {
     draft,
@@ -11,7 +11,7 @@ const SaveDraft = (props) => {
     updateDraft,
     showAlert,
     setHasSaved,
-    parsedTestData
+    parsedTestData,
   } = useEditorContext();
 
   const handleClick = useCallback(() => {
@@ -19,19 +19,21 @@ const SaveDraft = (props) => {
       onClick();
     }
 
-    updateDraft({
-      id: draft.id,
-      content,
-      parsedTestData
-    }, draft.subaccount_id)
-      .then(() => {
-        showAlert({
-          type: 'success',
-          message: 'Draft saved'
-        });
-
-        setHasSaved(true);
-      });
+    updateDraft(
+      {
+        id: draft.id,
+        name: draft.name,
+        description: draft.description,
+        content,
+        options: draft.options,
+        shared_with_subaccounts: draft.shared_with_subaccounts,
+        parsedTestData,
+      },
+      draft.subaccount_id,
+    ).then(() => {
+      showAlert({ type: 'success', message: 'Draft saved' });
+      setHasSaved(true);
+    });
   });
 
   return (
@@ -42,7 +44,7 @@ const SaveDraft = (props) => {
         role="button"
         data-id="action-save-draft"
       >
-        <FileEdit/>
+        <FileEdit />
 
         <span>Save Draft</span>
       </UnstyledLink>

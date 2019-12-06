@@ -2,63 +2,35 @@
   "parser": "babel-eslint",
   "env": {
     "browser": true,
-    "phantomjs": true
+    "jest": true
   },
   "rules": {
-    "block-spacing": [
-      "error",
-      "always"
-    ],
-    "complexity": "off",
-    "react/jsx-no-bind": "off",
-    "space-before-function-paren": ["error", {
-      "anonymous": "always",
-      "named": "never",
-      "asyncArrow": "always"
-    }],
-    "max-lines": [
-      "error",
-      {
-        "max": 150,
-        "skipComments": true,
-        "skipBlankLines": true
-      }
-    ],
-    "object-curly-spacing": [
-      "error",
-      "always",
-      {
-        "arraysInObjects": false,
-        "objectsInObjects": false
-      }
-    ],
-    "one-var": [
-      "error",
-      "never"
-    ],
-    "operator-linebreak": [
-      "error",
-      "after",
-      {
-        "overrides": {
-          "?": "before",
-          ":": "before"
-        }
-      }
-    ],
-    "lodash/chaining": [
-      "error",
-      "never"
-    ],
-    "react/jsx-curly-spacing": [
-      "error",
-      {
-        "when": "never",
-        "children": true
-      }
-    ],
-    "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "warn",
+    // doesn't work with jest-in-case
+    "jest/no-standalone-expect": "off",
+
+    "lodash/chaining": ["error", "never"],
+
+    // allow `import debounce from 'lodash/debounce';` for easy mocking
+    "lodash/import-scope": "off",
+
+    // All of the following "lodash/*" rules are lodash's "Preference over Native"
+    // We prefer native functions over lodash in most cases to reduce proneness to
+    // masking errors (_.map will still work if the array is null, etc.)
+    "lodash/prefer-constant": "off",
+    "lodash/prefer-get": "off",
+    "lodash/prefer-includes": "off",
+    "lodash/prefer-is-nil": "off",
+    "lodash/prefer-lodash-chain": "off",
+    "lodash/prefer-lodash-method": "off",
+    "lodash/prefer-lodash-typecheck": "off",
+    "lodash/prefer-matches": "off",
+    "lodash/prefer-noop": "off",
+    "lodash/prefer-over-quantifier": "off",
+    "lodash/prefer-some": "off",
+    "lodash/prefer-startswith": "off",
+    "lodash/prefer-times": "off",
+
+    // Custom rule for i18n
     "no-restricted-syntax": [
       "warn",
       {
@@ -67,30 +39,19 @@
       }
     ],
     "no-unused-vars": [
-      "error", 
+      "error",
       {
-        "varsIgnorePattern": "^_" ,
+        "varsIgnorePattern": "^_",
+        "ignoreRestSiblings": true
       }
     ]
   },
   "extends": [
     "react-app",
-    "sparkpost",
+    "plugin:lodash/canonical",
     "plugin:jest/recommended",
+    "plugin:prettier/recommended",
     "plugin:testing-library/recommended"
   ],
-  "plugins": [
-    "lodash",
-    "jest",
-    "react-hooks",
-    "testing-library"
-  ],
-  "overrides": [
-    {
-      "files": ["*.test.js"],
-      "rules": {
-        "max-lines": "off"
-      }
-    }
-  ]
+  "plugins": ["testing-library", "jest", "lodash", "prettier"]
 }

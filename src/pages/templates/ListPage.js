@@ -1,13 +1,14 @@
 /* eslint-disable max-lines */
 import React, { Component } from 'react';
 import { Page } from '@sparkpost/matchbox';
-import { ApiErrorBanner, DeleteModal, Loading, TableCollection } from 'src/components';
+import { ApiErrorBanner, Loading, TableCollection } from 'src/components';
 import { Templates } from 'src/components/images';
 import PageLink from 'src/components/pageLink';
 import { resolveTemplateStatus } from 'src/helpers/templates';
 import RecentActivity from './components/RecentActivity';
 import { DeleteAction, DuplicateAction, LastUpdated, Name, Status } from './components/ListComponents';
 import DuplicateTemplateModal from './components/editorActions/DuplicateTemplateModal';
+import DeleteTemplateModal from './components/editorActions/DeleteTemplateModal';
 import { routeNamespace } from './constants/routes';
 import styles from './ListPage.module.scss';
 
@@ -23,23 +24,6 @@ export default class ListPage extends Component {
   componentDidMount() {
     this.props.listTemplates();
   }
-
-  deleteTemplate = () => {
-    const {
-      deleteTemplate,
-      listTemplates,
-      showAlert
-    } = this.props;
-    const { id, name, subaccount_id } = this.state.templateToDelete;
-
-    return deleteTemplate({ id, subaccountId: subaccount_id })
-      .then(() => {
-        showAlert({ type: 'success', message: `Template ${name} deleted` });
-        this.toggleDeleteModal();
-
-        return listTemplates();
-      });
-  };
 
   toggleDeleteModal = (template) => {
     this.setState({
@@ -82,6 +66,20 @@ export default class ListPage extends Component {
     showAlert({
       type: 'success',
       message: `Template ${template.name} duplicated`
+    });
+
+    return listTemplates();
+  };
+
+  handleDeleteSuccess = () => {
+    const { listTemplates, showAlert } = this.props;
+    const template = this.state.templateToDelete;
+
+    this.toggleDeleteModal();
+
+    showAlert({
+      type: 'success',
+      message: `Template ${template.name} deleted`
     });
 
     return listTemplates();
@@ -213,13 +211,13 @@ export default class ListPage extends Component {
               saveCsv={false}
             />
 
-            <DeleteModal
+            <DeleteTemplateModal
               open={this.state.showDeleteModal}
-              title="Are you sure you want to delete this template?"
-              content={<p>Both the draft and published versions of this template will be deleted.</p>}
-              onCancel={this.toggleDeleteModal}
-              onDelete={this.deleteTemplate}
-              isPending={isDeletePending}
+              onClose={this.toggleDeleteModal}
+              template={this.state.templateToDelete}
+              deleteTemplate={this.props.deleteTemplate}
+              successCallback={this.handleDeleteSuccess}
+              isLoading={isDeletePending}
             />
 
             <DuplicateTemplateModal
