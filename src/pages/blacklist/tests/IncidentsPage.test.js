@@ -1,7 +1,13 @@
-import { shallow, mount } from 'enzyme';
+import { render } from '@testing-library/react';
+
 import React from 'react';
 import { IncidentsPage } from '../IncidentsPage';
-import { BrowserRouter as Router } from 'react-router-dom';
+import IncidentsCollection from '../components/IncidentsCollection';
+
+jest.mock('react-router-dom');
+const { Redirect } = require('react-router-dom');
+jest.mock('../components/IncidentsCollection');
+IncidentsCollection.mockImplementation(() => <div></div>);
 
 describe('IncidentsPage', () => {
   const incidents = [
@@ -21,39 +27,10 @@ describe('IncidentsPage', () => {
     },
   ];
 
+  const mockListMonitors = jest.fn();
+  const mockListIncidents = jest.fn();
+
   const subject = ({ ...props }) => {
-    const defaults = {
-      incidents: incidents,
-      monitors: monitors,
-      error: null,
-      loading: null,
-    };
-    return shallow(<IncidentsPage {...defaults} {...props} />);
-  };
-
-  it('renders page correctly', () => {
-    const wrapper = subject();
-    expect(wrapper).toMatchSnapshot();
-  });
-
-  it('renders loading when loading', () => {
-    const wrapper = subject({ loading: true });
-    expect(wrapper.find('Loading')).toExist();
-  });
-
-  it('renders error banner when an error occurs', () => {
-    const wrapper = subject({ error: { message: 'an error occurred' } });
-    expect(wrapper.find('ApiErrorBanner')).toExist();
-  });
-
-  it('renders redirect to watchlist when monitored resources exist but no incidents', () => {
-    const wrapper = subject({ incidents: [] });
-    expect(wrapper.find('Redirect')).toExist();
-  });
-
-  it('loads monitors and incidents when page starts rendering', () => {
-    const mockListMonitors = jest.fn();
-    const mockListIncidents = jest.fn();
     const defaults = {
       incidents: incidents,
       monitors: monitors,
@@ -62,11 +39,39 @@ describe('IncidentsPage', () => {
       listMonitors: mockListMonitors,
       listIncidents: mockListIncidents,
     };
-    mount(
-      <Router>
-        <IncidentsPage {...defaults} />
-      </Router>,
+    return render(<IncidentsPage {...defaults} {...props} />);
+  };
+
+  it('renders loading component when loading data', () => {
+    const { queryByTestId } = subject({ loading: true });
+
+    expect(queryByTestId('loading')).toBeInTheDocument();
+  });
+
+  it('renders error banner when an error occurs', () => {
+    const { queryByTestId } = subject({ error: { message: 'an error occurred' } });
+    //Can't search for the text because it is initially hidden
+    expect(queryByTestId('error-banner')).toBeInTheDocument();
+  });
+
+  it('renders Incidents Collection when correct data exists', () => {
+    const { queryByTestId } = subject();
+    expect(queryByTestId('incidents-table')).toBeInTheDocument();
+  });
+
+  it('redirect to watchlist when monitored resources exist but no incidents', () => {
+    subject({ incidents: [] });
+    expect(Redirect).toHaveBeenCalledTimes(1);
+    const callArguments = Redirect.mock.calls[0];
+    expect(callArguments).toContainEqual(
+      expect.objectContaining({
+        to: '/dashboard',
+      }),
     );
+  });
+
+  it('loads monitors and incidents when page starts rendering', () => {
+    subject();
     expect(mockListMonitors).toHaveBeenCalled();
     expect(mockListIncidents).toHaveBeenCalled();
   });

@@ -19,27 +19,30 @@ export const IncidentsPage = props => {
 
   if (error) {
     return (
-      <ApiErrorBanner
-        message={'Sorry, we seem to have had some trouble loading your blacklist incidents.'}
-        errorDetails={error.message}
-        reload={() => {
-          listMonitors();
-          listIncidents();
-        }}
-      />
+      <div data-id={'error-banner'}>
+        <ApiErrorBanner
+          message={'Sorry, we seem to have had some trouble loading your blacklist incidents.'}
+          errorDetails={error.message}
+          reload={() => {
+            listMonitors();
+            listIncidents();
+          }}
+        />
+      </div>
     );
   }
 
   if (loading) {
-    return <Loading />;
+    return (
+      <div data-id="loading">
+        <Loading />
+      </div>
+    );
   }
 
-  const renderContent = () => {
-    if (monitors.length > 0 && incidents.length === 0) {
-      return <Redirect to="/" />; //TODO redirect to watchlist page
-    }
-    return <IncidentsCollection incidents={incidents} />;
-  };
+  if (monitors.length > 0 && incidents.length === 0) {
+    return <Redirect to="/dashboard" />; //TODO redirect to watchlist page
+  }
 
   return (
     <Page
@@ -53,7 +56,9 @@ export const IncidentsPage = props => {
       title="Blacklist Incidents"
       primaryAction={{ content: 'View Watch List', to: '/blacklist', component: Link }}
     >
-      {renderContent()}
+      <div data-id={'incidents-table'}>
+        <IncidentsCollection incidents={incidents} />
+      </div>
     </Page>
   );
 };
