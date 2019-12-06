@@ -1,4 +1,3 @@
-/* eslint max-lines: ["error", 215] */
 import { formatContactData } from 'src/helpers/billing';
 import { fetch as fetchAccount, getBillingInfo } from './account';
 import { list as getSendingIps } from './sendingIps';
@@ -10,50 +9,77 @@ import zuoraRequest from 'src/actions/helpers/zuoraRequest';
  * Updates plan
  * @param {string} code
  */
-export function updateSubscription({ code, bundle = code, promoCode, meta = {}}) {
-
+export function updateSubscription({ code, promoCode, meta = {} }) {
   const getBillingAction = () => getBillingInfo();
-  const fetchAccountAction = () => fetchAccount({ include: 'usage', meta: { onSuccess: getBillingAction }});
-  return (dispatch, getState) => dispatch(
-    sparkpostApiRequest({
-      type: 'UPDATE_SUBSCRIPTION',
-      meta: {
-        method: 'PUT',
-        url: isAws(getState()) ? '/v1/account/aws-marketplace/subscription' : '/v1/billing/subscription/bundle',
-        data: {
-          promo_code: promoCode,
-          [isAws(getState()) ? 'code' : 'bundle']: code || bundle
+  const fetchAccountAction = () =>
+    fetchAccount({ include: 'usage', meta: { onSuccess: getBillingAction } });
+  return (dispatch, getState) =>
+    dispatch(
+      sparkpostApiRequest({
+        type: 'UPDATE_SUBSCRIPTION',
+        meta: {
+          method: 'PUT',
+          url: isAws(getState())
+            ? '/v1/account/aws-marketplace/subscription'
+            : '/v1/account/subscription',
+          data: {
+            promo_code: promoCode,
+            code,
+          },
+          ...meta,
+          onSuccess: meta.onSuccess ? meta.onSuccess : fetchAccountAction,
         },
-        ...meta,
-        onSuccess: meta.onSuccess ? meta.onSuccess : fetchAccountAction
-      }
-    })
-  );
+      }),
+    );
 }
 
-export function syncSubscription({ meta = {}} = {}) {
+//TODO: Replace current updatesubscription with new action
+export function updateSubscriptionNew({ code, bundle = code, promoCode, meta = {} }) {
+  const getBillingAction = () => getBillingInfo();
+  const fetchAccountAction = () =>
+    fetchAccount({ include: 'usage', meta: { onSuccess: getBillingAction } });
+  return (dispatch, getState) =>
+    dispatch(
+      sparkpostApiRequest({
+        type: 'UPDATE_SUBSCRIPTION',
+        meta: {
+          method: 'PUT',
+          url: isAws(getState())
+            ? '/v1/account/aws-marketplace/subscription'
+            : '/v1/billing/subscription',
+          data: {
+            promo_code: promoCode,
+            [isAws(getState()) ? 'code' : 'bundle']: code || bundle,
+          },
+          ...meta,
+          onSuccess: meta.onSuccess ? meta.onSuccess : fetchAccountAction,
+        },
+      }),
+    );
+}
+
+export function syncSubscription({ meta = {} } = {}) {
   return sparkpostApiRequest({
     type: 'SYNC_SUBSCRIPTION',
     meta: {
       method: 'POST',
       url: '/v1/account/subscription/check',
-      ...meta
-    }
+      ...meta,
+    },
   });
 }
-
 
 /**
  * attempts to collect payments (like when payment method is updated) to make sure pending payments are charged
  */
-export function collectPayments({ meta = {}}) {
+export function collectPayments({ meta = {} }) {
   return sparkpostApiRequest({
     type: 'COLLECT_PAYMENTS',
     meta: {
       method: 'POST',
       url: '/v1/account/billing/collect',
-      ...meta
-    }
+      ...meta,
+    },
   });
 }
 
@@ -67,40 +93,41 @@ export function updateBillingContact(data) {
     meta: {
       method: 'PUT',
       url: '/v1/account/billing',
-      data: formatContactData(data)
-    }
+      data: formatContactData(data),
+    },
   });
 
-  return (dispatch) => dispatch(action)
-    .then(() => dispatch(fetchAccount({ include: 'usage' })))
-    .then(() => dispatch(getBillingInfo()));
+  return dispatch =>
+    dispatch(action)
+      .then(() => dispatch(fetchAccount({ include: 'usage' })))
+      .then(() => dispatch(getBillingInfo()));
 }
 
-export function verifyPromoCode({ promoCode, billingId, meta = {}}) {
+export function verifyPromoCode({ promoCode, billingId, meta = {} }) {
   return sparkpostApiRequest({
     type: 'VERIFY_PROMO_CODE',
     meta: {
       method: 'GET',
       url: `v1/account/subscription/promo-codes/${promoCode}`,
       params: {
-        billing_id: billingId
+        billing_id: billingId,
       },
-      ...meta
-    }
+      ...meta,
+    },
   });
 }
 
-export function consumePromoCode({ promoCode, billingId, meta = {}}) {
+export function consumePromoCode({ promoCode, billingId, meta = {} }) {
   return sparkpostApiRequest({
     type: 'CONSUME_PROMO_CODE',
     meta: {
       method: 'POST',
       url: `v1/account/subscription/promo-codes/${promoCode}`,
       params: {
-        billing_id: billingId
+        billing_id: billingId,
       },
-      ...meta
-    }
+      ...meta,
+    },
   });
 }
 
@@ -108,7 +135,7 @@ export function clearPromoCode() {
   return { type: 'REMOVE_ACTIVE_PROMO' };
 }
 
-export function cors({ meta = {}, context, data = {}}) {
+export function cors({ meta = {}, context, data = {} }) {
   const type = `CORS_${context.toUpperCase().replace('-', '_')}`;
   return sparkpostApiRequest({
     type,
@@ -117,12 +144,12 @@ export function cors({ meta = {}, context, data = {}}) {
       url: '/v1/billing/cors-data',
       params: { context },
       data,
-      ...meta
-    }
+      ...meta,
+    },
   });
 }
 
-export function updateCreditCard({ data, token, signature, meta = {}}) {
+export function updateCreditCard({ data, token, signature, meta = {} }) {
   return zuoraRequest({
     type: 'ZUORA_UPDATE_CC',
     meta: {
@@ -130,8 +157,8 @@ export function updateCreditCard({ data, token, signature, meta = {}}) {
       url: '/payment-methods/credit-cards',
       data,
       headers: { token, signature },
-      ...meta
-    }
+      ...meta,
+    },
   });
 }
 
@@ -146,16 +173,15 @@ export function addDedicatedIps({ ip_pool, isAwsAccount, quantity }) {
       url,
       data: {
         ip_pool,
-        quantity: parseInt(quantity)
-      }
-    }
+        quantity: parseInt(quantity),
+      },
+    },
   };
 
-  return (dispatch) => dispatch(sparkpostApiRequest(action))
-    .then(() => dispatch(getSendingIps())); // refresh list
+  return dispatch => dispatch(sparkpostApiRequest(action)).then(() => dispatch(getSendingIps())); // refresh list
 }
 
-export function createZuoraAccount({ data, token, signature, meta = {}}) {
+export function createZuoraAccount({ data, token, signature, meta = {} }) {
   return zuoraRequest({
     type: 'ZUORA_CREATE',
     meta: {
@@ -163,8 +189,8 @@ export function createZuoraAccount({ data, token, signature, meta = {}}) {
       url: '/accounts',
       data,
       headers: { token, signature },
-      ...meta
-    }
+      ...meta,
+    },
   });
 }
 
@@ -178,9 +204,9 @@ export function getBillingCountries() {
       method: 'GET',
       url: '/v1/account/countries',
       params: {
-        filter: 'billing'
-      }
-    }
+        filter: 'billing',
+      },
+    },
   });
 }
 
@@ -189,8 +215,9 @@ export function getBundles() {
     type: 'GET_BUNDLES',
     meta: {
       method: 'GET',
-      url: '/v1/billing/bundles'
-    }});
+      url: '/v1/billing/bundles',
+    },
+  });
 }
 
 export function getPlans() {
@@ -198,8 +225,9 @@ export function getPlans() {
     type: 'GET_NEW_PLANS',
     meta: {
       method: 'GET',
-      url: '/v1/billing/plans'
-    }});
+      url: '/v1/billing/plans',
+    },
+  });
 }
 
 export function getSubscription() {
@@ -207,7 +235,7 @@ export function getSubscription() {
     type: 'GET_SUBSCRIPTION',
     meta: {
       method: 'GET',
-      url: '/v1/billing/subscription'
-    }
+      url: '/v1/billing/subscription',
+    },
   });
 }
