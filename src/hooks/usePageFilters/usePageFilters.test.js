@@ -6,16 +6,48 @@ import usePageFilters from '../usePageFilters';
 
 jest.mock('src/hooks/useRouter');
 
-const initQueryObject = {
-  offset: 25,
-  foo: ['a', 'b', 'c'],
-  page: 1,
+const whitelist = {
+  foo: {
+    validate: Array.isArray,
+    defaultValue: ['a', 'b', 'c'],
+  },
+  page: {
+    validate: page => !isNaN(page) && page >= 0,
+    defaultValue: 1,
+    normalize: val => val * 1,
+  },
+  object: {
+    validate: ({ a, b }) => {
+      return a <= b;
+    },
+    defaultValue: {
+      a: 1,
+      b: 3,
+    },
+  },
+  test: {
+    defaultValue: 5,
+    excludeFromRoute: true,
+    validate: val => val === 5,
+    normalize: val => val * 1,
+  },
 };
 
-const updatedQueryObject = {
-  offset: 25,
+const initFilterObject = {
   foo: ['a', 'b', 'c'],
-  page: 2,
+  page: 1,
+  object: {
+    a: 1,
+    b: 3,
+  },
+  test: 5,
+};
+
+const initRouteObject = {
+  foo: ['a', 'b', 'c'],
+  page: 1,
+  a: 1,
+  b: 3,
 };
 
 const defaultFunc = () => {};
@@ -24,23 +56,10 @@ describe('usePageFilters', () => {
   const updateRoute = jest.fn();
   const MockComponent = ({ getFilters, getUpdateFilters, getResetFilters }) => {
     useRouter.mockReturnValue({
-      requestParams: initQueryObject,
+      requestParams: initFilterObject,
       updateRoute,
     });
-    const { filters, updateFilters, resetFilters } = usePageFilters({
-      foo: {
-        validate: Array.isArray,
-        defaultValue: ['a', 'b', 'c'],
-      },
-      offset: {
-        validate: offset => !isNaN(offset) && offset >= 0,
-        defaultValue: 25,
-      },
-      page: {
-        validate: page => !isNaN(page) && page >= 0,
-        defaultValue: 1,
-      },
-    });
+    const { filters, updateFilters, resetFilters } = usePageFilters(whitelist);
 
     getUpdateFilters(updateFilters);
     getFilters(filters);
@@ -66,7 +85,7 @@ describe('usePageFilters', () => {
     let filters;
     const getFilters = f => (filters = f);
     subject({ getFilters });
-    expect(filters).toEqual(initQueryObject);
+    expect(filters).toEqual(initFilterObject);
   });
 
   it('updates filters and url when using update function', () => {
@@ -76,8 +95,26 @@ describe('usePageFilters', () => {
     const getUpdateFilters = f => (updateFunc = f);
     subject({ getFilters, getUpdateFilters });
     act(() => updateFunc({ page: 2 }));
-    expect(updateRoute).toHaveBeenCalledWith(updatedQueryObject);
-    expect(filters).toEqual(updatedQueryObject);
+
+    const expectedRoute = {
+      foo: ['a', 'b', 'c'],
+      page: 2,
+      a: 1,
+      b: 3,
+    };
+
+    const expectedFilters = {
+      foo: ['a', 'b', 'c'],
+      page: 2,
+      object: {
+        a: 1,
+        b: 3,
+      },
+      test: 5,
+    };
+
+    expect(updateRoute).toHaveBeenCalledWith(expectedRoute);
+    expect(filters).toEqual(expectedFilters);
   });
 
   it("doesn't update invalid filters and url when using update function", () => {
@@ -87,8 +124,8 @@ describe('usePageFilters', () => {
     const getUpdateFilters = f => (updateFunc = f);
     subject({ getFilters, getUpdateFilters });
     act(() => updateFunc({ page: 'abcdefg' }));
-    expect(updateRoute).toHaveBeenCalledWith(initQueryObject);
-    expect(filters).toEqual(initQueryObject);
+    expect(updateRoute).toHaveBeenCalledWith(initRouteObject);
+    expect(filters).toEqual(initFilterObject);
   });
 
   it('resets filters and url when reset function is called', () => {
@@ -101,7 +138,7 @@ describe('usePageFilters', () => {
     subject({ getFilters, getUpdateFilters, getResetFilters });
     act(() => updateFunc({ page: 1, foo: ['bar', 'baz'] }));
     act(() => resetFunc());
-    expect(filters).toEqual(initQueryObject);
-    expect(updateRoute).toHaveBeenCalledWith(initQueryObject);
+    expect(filters).toEqual(initFilterObject);
+    expect(updateRoute).toHaveBeenCalledWith(initRouteObject);
   });
 });
