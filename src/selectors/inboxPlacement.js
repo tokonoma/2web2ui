@@ -66,6 +66,8 @@ export const selectTrends = createSelector([getTrends], ({ trends, filters = {} 
     return [];
   }
 
+  const { dateRange: { from, to } = {} } = filters;
+
   const normalizedHistory = trends.map(({ date, folders, total_messages }) => ({
     date,
     totalMessages: total_messages,
@@ -82,8 +84,8 @@ export const selectTrends = createSelector([getTrends], ({ trends, filters = {} 
       spam: null,
       missing: null,
     },
-    from: filters.from,
-    to: filters.to,
+    from,
+    to,
   });
 
   return filledHistory;

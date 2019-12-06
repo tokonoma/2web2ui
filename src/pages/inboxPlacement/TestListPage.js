@@ -100,22 +100,25 @@ const FilterSortCollectionRow = ({
   />,
 ];
 
-const validateFrom = val => moment(val).isValid();
-const validateTo = val => moment(val).isValid();
-const normalizeDate = val => formatInputDate(val);
+const normalizeDateRange = ({ from, to }) => ({
+  from: formatInputDate(from),
+  to: formatInputDate(to),
+});
 
 const now = Date.now();
 
 const whitelistFilters = {
-  from: {
-    validate: validateFrom,
-    normalize: normalizeDate,
-    defaultValue: formatInputDate(moment(now).subtract(30, 'd')),
-  },
-  to: {
-    validate: validateTo,
-    normalize: normalizeDate,
-    defaultValue: formatInputDate(now),
+  dateRange: {
+    defaultValue: {
+      from: formatInputDate(moment(now).subtract(30, 'd')),
+      to: formatInputDate(now),
+    },
+    validate: ({ from, to }) => {
+      const momentFrom = moment(from);
+      const momentTo = moment(to);
+      return momentFrom.isValid() && momentTo.isValid() && momentFrom.isBefore(momentTo);
+    },
+    normalize: normalizeDateRange,
   },
   tags: {
     defaultValue: [],

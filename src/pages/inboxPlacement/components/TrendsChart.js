@@ -65,7 +65,9 @@ export const TrendsChart = props => {
   const { getInboxPlacementTrends, trends, hasNoData, loading, error, filters = {} } = props;
 
   useEffect(() => {
-    const { from, to } = filters;
+    const {
+      dateRange: { from, to },
+    } = filters;
     getInboxPlacementTrends({
       from,
       to,
