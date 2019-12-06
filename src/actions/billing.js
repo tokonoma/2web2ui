@@ -1,6 +1,6 @@
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
 import zuoraRequest from 'src/actions/helpers/zuoraRequest';
-import { MOCK_BUNDLES, getMockSubscription } from './helpers/mockData';
+import { MOCK_BUNDLES } from './helpers/mockData';
 import mockThunk from './helpers/mockThunk'; //TODO: Remove\
 import { list as getSendingIps } from './sendingIps';
 import { fetch as fetchAccount, getBillingInfo } from './account';
@@ -72,19 +72,14 @@ export function getBundles() {
   );
 }
 
-export function getSubscription(index) {
-  const mockData = getMockSubscription(index);
-  //TODO: Replace with sparkpostApiRequest
-  return mockThunk(
-    {
-      type: 'GET_SUBSCRIPTION',
-      meta: {
-        method: 'GET',
-        url: '/v1/billing/subscription',
-      },
+export function getSubscription() {
+  return sparkpostApiRequest({
+    type: 'GET_SUBSCRIPTION',
+    meta: {
+      method: 'GET',
+      url: '/v1/billing/subscription',
     },
-    { data: mockData, delay: 500 }, //TODO: Delete mock response
-  );
+  });
 }
 
 export function syncSubscription({ meta = {} } = {}) {
