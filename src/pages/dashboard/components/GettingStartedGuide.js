@@ -18,7 +18,7 @@ export const GettingStartedGuide = ({ onboarding = {}, history, setAccountOption
   const { isGuideAtBottom = false, active_step, send_test_email_completed } = onboarding;
 
   const setOnboardingAccountOption = (obj = {}) => {
-    setAccountOption('onboarding', { ...onboarding, ...obj });
+    setAccountOption('onboarding', obj);
   };
 
   const actions = isGuideAtBottom

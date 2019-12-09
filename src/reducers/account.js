@@ -5,7 +5,7 @@ export const initialState = {
   loading: false,
   subscription: {},
   updateLoading: false,
-  createLoading: false
+  createLoading: false,
 };
 
 export default (state = initialState, { type, meta, payload }) => {
@@ -46,9 +46,13 @@ export default (state = initialState, { type, meta, payload }) => {
       return { ...state, updateLoading: true, updateError: null };
 
     case 'SET_ACCOUNT_OPTION_SUCCESS': {
-      const { options = {}} = state; //Spread other account options
-      const { ui = {}} = options; //Spread other account UI options
-      return { ...state, updateLoading: false, options: { ...options, ui: { ...ui, ...meta.data.options.ui }}};
+      const { options = {} } = state; //Spread other account options
+      const { ui = {} } = options; //Spread other account UI options
+      return {
+        ...state,
+        updateLoading: false,
+        options: { ...options, ui: _.merge(ui, meta.data.options.ui) },
+      };
     }
 
     case 'SET_ACCOUNT_OPTION_FAIL':
