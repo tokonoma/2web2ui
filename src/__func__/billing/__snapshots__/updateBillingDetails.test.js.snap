@@ -23,6 +23,18 @@ Array [
       "method": "get",
       "params": undefined,
       "responseType": "json",
+      "url": "/v1/billing/subscription",
+    },
+  ],
+  Array [
+    Object {
+      "data": undefined,
+      "headers": Object {
+        "Authorization": "mock-access-token",
+      },
+      "method": "get",
+      "params": undefined,
+      "responseType": "json",
       "url": "/v1/billing",
     },
   ],
@@ -99,7 +111,7 @@ Array [
         "context": "update-billing",
       },
       "responseType": "json",
-      "url": "/v1/account/cors-data",
+      "url": "/v1/billing/cors-data",
     },
   ],
   Array [
