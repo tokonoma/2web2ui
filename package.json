@@ -124,7 +124,7 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
-    "@typescript-eslint/eslint-plugin": "^2.8.0",
+    "@typescript-eslint/eslint-plugin": "2.10.0",
     "@typescript-eslint/parser": "^2.8.0",
     "autoprefixer": "^9.0.0",
     "babel-eslint": "^10.0.3",
