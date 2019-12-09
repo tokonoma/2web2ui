@@ -11,7 +11,7 @@ import { updateSendingIp } from 'src/actions/sendingIps';
 import { selectCurrentPool, selectIpForCurrentPool } from 'src/selectors/ipPools';
 
 export class EditIpPage extends Component {
-  onUpdateIp = (values) => {
+  onUpdateIp = values => {
     const { updateSendingIp, ip, showAlert, history } = this.props;
 
     if (!values.auto_warmup_enabled) {
@@ -27,7 +27,7 @@ export class EditIpPage extends Component {
         }
         showAlert({
           type: 'success',
-          message: `Updated IP ${ip.external_ip}.`
+          message: `Updated IP ${ip.external_ip}.`,
         });
       })
       .then(this.loadDependentData);
@@ -45,7 +45,7 @@ export class EditIpPage extends Component {
     const { loading, pool, ip, error } = this.props;
 
     if (loading || _.isEmpty(pool) || _.isEmpty(ip)) {
-      return <Loading/>;
+      return <Loading />;
     }
 
     return (
@@ -54,18 +54,18 @@ export class EditIpPage extends Component {
         breadcrumbAction={{
           content: pool.name,
           Component: Link,
-          to: `/account/ip-pools/edit/${pool.id}`
+          to: `/account/ip-pools/edit/${pool.id}`,
         }}
       >
-        {error &&
+        {error && (
           <ApiErrorBanner
             errorDetails={error.message}
             message="Sorry, we seem to have had some trouble loading your IP data."
             reload={this.loadDependentData}
           />
-        }
+        )}
 
-        {!error && <IpForm onSubmit={this.onUpdateIp}/>}
+        {!error && <IpForm onSubmit={this.onUpdateIp} />}
       </Page>
     );
   }
@@ -78,7 +78,7 @@ const mapStateToProps = (state, props) => {
     ip: selectIpForCurrentPool(state, props),
     pool: selectCurrentPool(state, props),
     loading: listLoading,
-    error: listError
+    error: listError,
   };
 };
 
@@ -86,5 +86,5 @@ export default connect(mapStateToProps, {
   updatePool,
   listPools,
   updateSendingIp,
-  showAlert
+  showAlert,
 })(EditIpPage);
