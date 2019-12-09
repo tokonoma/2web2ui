@@ -51,7 +51,7 @@ describe('Edit IP form', () => {
   it('renders the button content as "Update Sending IP" while the form is not submitting', () => {
     const wrapper = subject();
 
-    expect(wrapper).toHaveTextContent('Update Sending IP');
+    expect(wrapper.find('Button')).toHaveTextContent('Update Sending IP');
   });
 
   it('submits passed in data when the <form> is submitted', () => {
@@ -94,7 +94,9 @@ describe('Edit IP form', () => {
     wrapper.find('Button').simulate('click');
 
     expect(wrapper.find('ConfirmationModal')).toHaveProp('open', true);
-    expect(wrapper).toHaveTextContent('Are you sure you want to enable Auto IP Warmup?');
+    expect(wrapper.find('ConfirmationModal')).toHaveTextContent(
+      'Are you sure you want to enable Auto IP Warmup?',
+    );
 
     wrapper = subject({ isAutoWarmupEnabled: false, ip: { auto_warmup_enabled: true } });
 
