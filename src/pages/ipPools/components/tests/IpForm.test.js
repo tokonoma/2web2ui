@@ -3,35 +3,35 @@ import { shallow } from 'enzyme';
 import { IpForm } from '../IpForm';
 
 describe('Edit IP form', () => {
-  const subject = (props) => {
+  const subject = props => {
     const defaultProps = {
       handleSubmit: jest.fn(),
       onSubmit: jest.fn(),
       submit: jest.fn(),
       submitting: false,
       ip: {
-        hostname: 'abcd.com'
+        hostname: 'abcd.com',
       },
       pools: [],
       pool: null,
-      isAutoWarmupEnabled: true
+      isAutoWarmupEnabled: true,
     };
     const mergedProps = Object.assign({}, defaultProps, props);
 
-    return shallow(<IpForm {...mergedProps}/>);
+    return shallow(<IpForm {...mergedProps} />);
   };
 
   it('disables form submission and interaction when submitting', () => {
     const wrapper = subject({ submitting: true });
 
     expect(wrapper.find('Button')).toHaveProp('disabled', true);
-    wrapper.find('Field').forEach((el) => {
+    wrapper.find('Field').forEach(el => {
       expect(el).toHaveProp('disabled', true);
     });
   });
 
   it('renders the IP hostname', () => {
-    const wrapper = subject({ ip: { hostname: 'my-mock-hostname.com' }});
+    const wrapper = subject({ ip: { hostname: 'my-mock-hostname.com' } });
 
     expect(wrapper).toHaveTextContent('my-mock-hostname.com');
   });
@@ -89,14 +89,14 @@ describe('Edit IP form', () => {
   });
 
   it('opens the confirmation modal when clicking the "Update Sending IP" button when the state of auto warmup enabling is changed from its initial state', () => {
-    let wrapper = subject({ isAutoWarmupEnabled: true, ip: { auto_warmup_enabled: false }});
+    let wrapper = subject({ isAutoWarmupEnabled: true, ip: { auto_warmup_enabled: false } });
 
     wrapper.find('Button').simulate('click');
 
     expect(wrapper.find('ConfirmationModal')).toHaveProp('open', true);
     expect(wrapper).toHaveTextContent('Are you sure you want to enable Auto IP Warmup?');
 
-    wrapper = subject({ isAutoWarmupEnabled: false, ip: { auto_warmup_enabled: true }});
+    wrapper = subject({ isAutoWarmupEnabled: false, ip: { auto_warmup_enabled: true } });
 
     wrapper.find('Button').simulate('click');
 
@@ -105,7 +105,7 @@ describe('Edit IP form', () => {
   });
 
   it('does not open the confirmation modal when the state of auto warmup enabling remains unchanged', () => {
-    const wrapper = subject({ isAutoWarmupEnabled: true, ip: { auto_warmup_enabled: true }});
+    const wrapper = subject({ isAutoWarmupEnabled: true, ip: { auto_warmup_enabled: true } });
 
     wrapper.find('Button').simulate('click');
 
