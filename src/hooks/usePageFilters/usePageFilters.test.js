@@ -2,7 +2,7 @@ import React from 'react';
 import { mount } from 'enzyme';
 import { act } from 'react-dom/test-utils';
 import useRouter from '../useRouter';
-import usePageFilters from '../usePageFilters';
+import usePageFilters, { flattenParameters, unflattenParameters } from '../usePageFilters';
 
 jest.mock('src/hooks/useRouter');
 
@@ -51,6 +51,47 @@ const initRouteObject = {
 };
 
 const defaultFunc = () => {};
+
+describe('flattenParameters', () => {
+  it('flattens an object', () => {
+    const flattened = flattenParameters({
+      foo: ['a', 'b', 'c'],
+      page: 1,
+      object: {
+        a: 1,
+        b: 3,
+      },
+    });
+    expect(flattened).toEqual({
+      foo: ['a', 'b', 'c'],
+      page: 1,
+      a: 1,
+      b: 3,
+    });
+  });
+});
+
+describe('unflattenParameters', () => {
+  it('unflattens an object based on a whitelist', () => {
+    const unflattened = unflattenParameters(
+      {
+        foo: ['a', 'b', 'c'],
+        page: 1,
+        a: 1,
+        b: 3,
+      },
+      whitelist,
+    );
+    expect(unflattened).toEqual({
+      foo: ['a', 'b', 'c'],
+      page: 1,
+      object: {
+        a: 1,
+        b: 3,
+      },
+    });
+  });
+});
 
 describe('usePageFilters', () => {
   const updateRoute = jest.fn();
