@@ -20,7 +20,7 @@ export const GettingStartedGuide = ({ onboarding = {}, history, setAccountOption
     isGuideAtBottom = false,
     active_step,
     send_test_email_completed,
-    explore_analytics_completed,
+    invite_collaborator_completed,
   } = onboarding;
 
   const setOnboardingAccountOption = (obj = {}) => {
@@ -72,12 +72,10 @@ export const GettingStartedGuide = ({ onboarding = {}, history, setAccountOption
         setOnboardingAccountOption({ send_test_email_completed: true });
         history.push(`/templates?pendo=${GUIDE_IDS.SEND_TEST_EMAIL}`);
         break;
-
-      case 'Explore Analytics':
-        setOnboardingAccountOption({ explore_analytics_completed: true });
+      case 'Invite a Collaborator':
+        setOnboardingAccountOption({ invite_collaborator_completed: true });
         history.push('/account/users');
         break;
-
       default:
         break;
     }
@@ -195,9 +193,8 @@ export const GettingStartedGuide = ({ onboarding = {}, history, setAccountOption
               <GuideListItem
                 action={{
                   name: 'Explore Analytics',
-                  onClick: () => handleAction('Explore Analytics'),
+                  onClick: () => {},
                 }}
-                itemCompleted={explore_analytics_completed}
               >
                 <GuideListItemTitle>Explore Analytics</GuideListItemTitle>
                 <GuideListItemDescription>
@@ -207,7 +204,13 @@ export const GettingStartedGuide = ({ onboarding = {}, history, setAccountOption
               </GuideListItem>
             </Panel.Section>
             <Panel.Section>
-              <GuideListItem action={{ name: 'Invite a Collaborator', onClick: () => {} }}>
+              <GuideListItem
+                action={{
+                  name: 'Invite a Collaborator',
+                  onClick: () => handleAction('Invite a Collaborator'),
+                }}
+                itemCompleted={invite_collaborator_completed}
+              >
                 <GuideListItemTitle>Invite Your Team</GuideListItemTitle>
                 <GuideListItemDescription>
                   {
@@ -218,7 +221,7 @@ export const GettingStartedGuide = ({ onboarding = {}, history, setAccountOption
                   <UnstyledLink
                     onClick={() => {
                       setAndStoreStepName("Let's Code");
-                      setOnboardingAccountOption({ explore_analytics_completed: true });
+                      setOnboardingAccountOption({ invite_collaborator_completed: true });
                     }}
                   >
                     setup email sending now
