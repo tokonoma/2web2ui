@@ -23,7 +23,6 @@ import invoices from './invoices';
 import ipPools from './ipPools';
 import messageEvents from './messageEvents';
 import metrics from './metrics';
-import notifications from './notifications';
 import passwordReset from './passwordReset';
 import recipientLists from './recipientLists';
 import recipientValidation from './recipientValidation';
@@ -48,7 +47,6 @@ import webhooks from './webhooks';
 import websiteAuth from './websiteAuth';
 import inboxPlacement from './inboxPlacement';
 import ingestBatchEvents from './ingestBatchEvents';
-
 
 const appReducer = combineReducers({
   abTesting,
@@ -75,7 +73,6 @@ const appReducer = combineReducers({
   ipPools,
   metrics,
   messageEvents,
-  notifications,
   passwordReset,
   reportOptions,
   recipientLists,
@@ -98,7 +95,7 @@ const appReducer = combineReducers({
   typeahead,
   users,
   webhooks,
-  websiteAuth
+  websiteAuth,
 });
 
 /**
