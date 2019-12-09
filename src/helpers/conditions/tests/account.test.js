@@ -206,7 +206,7 @@ describe('Condition: isUiOptionSet', () => {
         defaultVal: true,
         result: true,
       },
-      // Default used iff option is missing
+      // Default used if option is missing
       'Default: true=true': { options: {}, defaultVal: true, result: true },
       'Default: false=false': { options: {}, defaultVal: false, result: false },
     },
