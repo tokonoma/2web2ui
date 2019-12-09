@@ -15,12 +15,12 @@ const dateFormat = date => format(date, 'MMM DD, YYYY');
  * @prop account Account state from redux store
  */
 export const PendingPlanBanner = ({ account, subscription }) => {
-  const { pending_downgrades = [] } = subscription;
-  if (!account.pending_subscription && pending_downgrades.length === 0) {
+  const pendingDowngrades = _.get(subscription, 'pending_downgrades', []);
+  if (!account.pending_subscription && pendingDowngrades.length === 0) {
     return null;
   }
 
-  if (pending_downgrades.length > 0) {
+  if (pendingDowngrades.length > 0) {
     return (
       <Banner status="info" title="Pending Plan Change">
         <p>

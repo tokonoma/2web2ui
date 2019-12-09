@@ -14,7 +14,8 @@ exports[`Billing Banners:  Enterprise banner renders 1`] = `
   title="Enterprise"
 >
   <p>
-    Enterprise-grade financial guarantees with 99.9% uptime 
+    Enterprise-grade financial guarantees with 99.9% uptime
+     
     <abbr
       title="Service Level Agreement"
     >
@@ -45,7 +46,8 @@ exports[`Billing Banners:  Free Plan Downgrade warning banner renders 1`] = `
   title="Free Plan Downgrade"
 >
   <p>
-    Your plan will automatically downgrade to 500 emails/month in 
+    Your plan will automatically downgrade to 500 emails/month in
+     
     15 days
     . 
     <Link
@@ -54,7 +56,8 @@ exports[`Billing Banners:  Free Plan Downgrade warning banner renders 1`] = `
     >
       Upgrade your plan
     </Link>
-     to keep or increase your sending limits.
+     
+    to keep or increase your sending limits.
   </p>
 </Banner>
 `;
@@ -65,7 +68,8 @@ exports[`Billing Banners:  Free Plan Downgrade warning banner renders correct te
   title="Free Plan Downgrade"
 >
   <p>
-    Your plan will automatically downgrade to 500 emails/month in 
+    Your plan will automatically downgrade to 500 emails/month in
+     
     1 day
     . 
     <Link
@@ -74,7 +78,8 @@ exports[`Billing Banners:  Free Plan Downgrade warning banner renders correct te
     >
       Upgrade your plan
     </Link>
-     to keep or increase your sending limits.
+     
+    to keep or increase your sending limits.
   </p>
 </Banner>
 `;
@@ -96,7 +101,8 @@ exports[`Billing Banners:  PendingPlanBanner should render with pending_subscrip
 >
   <p>
     You're scheduled to switch to the 
-     plan on 
+     plan on
+     
     Oct 05, 2020
     , and can't update your plan until that switch happens.
   </p>
