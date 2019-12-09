@@ -50,7 +50,6 @@ exports[`Top should render correctly on desktop 1`] = `
   <div
     className="RightSideWrapper"
   >
-    <Connect(NotificationCenter) />
     <IconButton
       className="SupportButton"
       data-id="nav-button-help"
