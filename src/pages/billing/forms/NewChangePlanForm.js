@@ -139,6 +139,7 @@ export const ChangePlanForm = ({
           return billingCreate(newValues); // creates Zuora account
         }
       })
+      .then(() => clearPromoCode()) //TODO: Consolidate state of promocode between redux form and hook on PromoCodeNew
       .then(() => history.push('/account/billing'))
       .then(() => showAlert({ type: 'success', message: 'Subscription Updated' }));
   };
