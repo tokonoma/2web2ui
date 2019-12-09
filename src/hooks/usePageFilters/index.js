@@ -1,1 +1,1 @@
-export { default } from './usePageFilters';
+export { default, unflattenParameters, flattenParameters } from './usePageFilters';

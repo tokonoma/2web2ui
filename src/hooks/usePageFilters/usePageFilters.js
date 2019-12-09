@@ -17,7 +17,8 @@ const reducer = (state, action) => {
   }
 };
 
-const flattenParameters = obj =>
+// Exported to test
+export const flattenParameters = obj =>
   Object.keys(obj).reduce((acc, curr) => {
     if (_.isPlainObject(obj[curr])) {
       return { ...acc, ...obj[curr] };
@@ -25,6 +26,20 @@ const flattenParameters = obj =>
       acc[curr] = obj[curr];
     }
     return acc;
+  }, {});
+
+// Exported to test
+export const unflattenParameters = (filters, whitelist) =>
+  Object.keys(whitelist).reduce((unflattened, parameter) => {
+    if (_.isPlainObject(whitelist[parameter].defaultValue)) {
+      unflattened[parameter] = Object.keys(whitelist[parameter].defaultValue).reduce((acc, val) => {
+        acc[val] = filters[val];
+        return acc;
+      }, {});
+    } else {
+      unflattened[parameter] = filters[parameter];
+    }
+    return unflattened;
   }, {});
 
 const noValidation = () => true;
@@ -38,7 +53,7 @@ const normalizeFilterState = (filters, whitelist) => {
       ];
       try {
         const normalized = normalize(filters[key]);
-        if (!validate(normalized)) {
+        if (!validate(normalized, filters)) {
           validated[key] = defaultValue;
         } else {
           validated[key] = normalized;
@@ -100,24 +115,27 @@ const omitFiltersExcludedFromRoute = (filters, whitelist) => {
  * });
  */
 const usePageFilters = whitelist => {
-  const { requestParams = {}, updateRoute } = useRouter();
+  const { requestParams, updateRoute } = useRouter();
   const defaultFilters = useRef(
-    normalizeFilterState(omitFiltersExcludedFromRoute(requestParams, whitelist), whitelist),
+    Object.keys(whitelist).reduce((acc, key) => {
+      acc[key] = whitelist[key].defaultValue;
+      return acc;
+    }, {}),
   );
 
-  const cleanReducer = useCallback(
-    (state, action) => {
-      const { filters } = state;
-      return {
-        prevFilters: filters,
-        filters: normalizeFilterState(reducer(filters, action), whitelist),
-      };
-    },
-    [whitelist],
-  );
+  const cleanReducer = (state, action) => {
+    const { filters } = state;
+    return {
+      prevFilters: filters,
+      filters: normalizeFilterState(reducer(filters, action), whitelist),
+    };
+  };
 
   const [{ filters, prevFilters }, dispatch] = useReducer(cleanReducer, {
-    filters: defaultFilters.current,
+    filters: normalizeFilterState(
+      omitFiltersExcludedFromRoute(unflattenParameters(requestParams, whitelist), whitelist),
+      whitelist,
+    ),
   });
 
   const updateFilters = useCallback(
