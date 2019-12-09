@@ -54,10 +54,10 @@ export const IpForm = props => {
   };
 
   const handleUpdateSendingIPClick = () => {
-    const isEnabling = isAutoWarmupEnabled && !ip.auto_warmup_enabled;
-    const isDisabling = !isAutoWarmupEnabled && ip.auto_warmup_enabled;
+    const userIsEnablingAutoWarmup = isAutoWarmupEnabled && !ip.auto_warmup_enabled;
+    const userIsDisablingAutoWarmup = !isAutoWarmupEnabled && ip.auto_warmup_enabled;
 
-    if (isEnabling || isDisabling) {
+    if (userIsEnablingAutoWarmup || userIsDisablingAutoWarmup) {
       setConfirmationModalOpen(true);
 
       return false;
