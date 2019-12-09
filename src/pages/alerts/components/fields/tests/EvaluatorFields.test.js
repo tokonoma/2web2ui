@@ -15,7 +15,7 @@ describe('Evaluator Fields Component', () => {
       change: jest.fn(),
       value: 50,
       source: 'raw',
-      operator: 'gt'
+      operator: 'gt',
     };
 
     wrapper = shallow(<EvaluatorFields {...props} />);
@@ -40,23 +40,22 @@ describe('Evaluator Fields Component', () => {
     expect(wrapper.find({ name: 'operator' })).not.toExist();
   });
 
-  describe('slider length with', () => {
+  it('renders week over week metric without operator field', () => {
+    wrapper.setProps({ source: 'week_over_week' });
+    expect(wrapper).not.toHaveTextContent('Comparison');
+  });
 
-    const formCases = {
-      'no operator size': {
-        prop: { source: 'week_over_week' },
-        length: 7
-      },
-      'no source nor operator size': {
-        prop: { metric: 'monthly_sending_limit' },
-        length: 10
-      }
-    };
+  it('renders week over week metric without operator field and grows slider size', () => {
+    wrapper.setProps({ source: 'week_over_week' });
+    expect(wrapper).not.toHaveTextContent('Comparison');
+    expect(wrapper.children().at(1)).toHaveProp('md', 7);
+  });
 
-    cases('should be the correct size', ({ prop, length }) => {
-      wrapper.setProps(prop);
-      expect(wrapper.find({ id: 'sliderColumn' }).prop('md')).toEqual(length);
-    }, formCases);
+  it('renders monthly sending limit without source and operator fields and grows slider size', () => {
+    wrapper.setProps({ metric: 'monthly_sending_limit' });
+    expect(wrapper).not.toHaveTextContent('Evaluated');
+    expect(wrapper).not.toHaveTextContent('Comparison');
+    expect(wrapper.children().at(0)).toHaveProp('md', 10);
   });
 
   it('changes value field value when slider value changes', () => {
@@ -71,32 +70,35 @@ describe('Evaluator Fields Component', () => {
   });
 
   it('changes operator to gt when selecting WOW or DOD', () => {
-    wrapper.find({ name: 'source' }).simulate('change', { target: { value: 'week_over_week' }});
+    wrapper.find({ name: 'source' }).simulate('change', { target: { value: 'week_over_week' } });
     expect(props.change).toHaveBeenCalledWith(FORM_NAME, 'operator', 'gt');
   });
 
-
-  describe('slider recommended tick changes with',() => {
+  describe('slider recommended tick changes with', () => {
     const formCases = {
       'metric change': {
         prop: { metric: 'block_bounce_rate' },
-        recommendedValue: 20
+        recommendedValue: 20,
       },
       'operator change': {
         prop: { metric: 'health_score', source: 'raw', operator: 'gt' },
-        recommendedValue: 70
+        recommendedValue: 70,
       },
       'source change': {
         prop: { metric: 'health_score', source: 'week_over_week' },
-        recommendedValue: 10
-      }
+        recommendedValue: 10,
+      },
     };
 
-    cases('should be correct tick', ({ prop, recommendedValue }) => {
-      wrapper.setProps(prop);
-      expect(wrapper.find({ id: 'slider' }).prop('ticks')).toMatchObject({ [recommendedValue]: 'Recommended' });
-    }, formCases);
-
-
+    cases(
+      'should be correct tick',
+      ({ prop, recommendedValue }) => {
+        wrapper.setProps(prop);
+        expect(wrapper.find({ id: 'slider' }).prop('ticks')).toMatchObject({
+          [recommendedValue]: 'Recommended',
+        });
+      },
+      formCases,
+    );
   });
 });

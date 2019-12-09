@@ -61,7 +61,6 @@ exports[`Evaluator Fields Component renders correctly 1`] = `
     />
   </Grid.Column>
   <Grid.Column
-    id="sliderColumn"
     md={5}
     sm={12}
   >
