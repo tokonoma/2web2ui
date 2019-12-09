@@ -57,15 +57,15 @@ export class EditIpPage extends Component {
           to: `/account/ip-pools/edit/${pool.id}`,
         }}
       >
-        {error && (
+        {error ? (
           <ApiErrorBanner
             errorDetails={error.message}
             message="Sorry, we seem to have had some trouble loading your IP data."
             reload={this.loadDependentData}
           />
+        ) : (
+          <IpForm onSubmit={this.onUpdateIp} />
         )}
-
-        {!error && <IpForm onSubmit={this.onUpdateIp} />}
       </Page>
     );
   }
