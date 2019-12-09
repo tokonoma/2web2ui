@@ -1,9 +1,7 @@
 import React from 'react';
 import { Banner } from '@sparkpost/matchbox';
-import { Modal } from 'src/components';
 import PageLink from 'src/components/pageLink/PageLink';
 import SupportTicketLink from 'src/components/supportTicketLink/SupportTicketLink';
-import UpdatePaymentForm from '../forms/UpdatePaymentForm';
 
 /**
  * Renders plan information for non-self-serve users
@@ -17,10 +15,10 @@ const ManuallyBilledBanner = ({
       period = 'month',
       plan_volume: planVolume,
       plan_volume_per_period: planVolumePerPeriod,
-      recurring_charge: recurringCharge
-    }
+      recurring_charge: recurringCharge,
+    },
   },
-  onZuoraPlan
+  onZuoraPlan,
 }) => {
   const localePlanVolume = (planVolumePerPeriod || planVolume).toLocaleString();
   const title = `
@@ -36,9 +34,8 @@ const ManuallyBilledBanner = ({
         title={`Your current plan is being transitioned to a ${subscriptionName} plan`}
       >
         <p>
-          If your account should not be transitioned, please {
-            <SupportTicketLink issueId="general_issue">submit a support ticket</SupportTicketLink>
-          }.
+          If your account should not be transitioned, please{' '}
+          {<SupportTicketLink issueId="general_issue">submit a support ticket</SupportTicketLink>}.
         </p>
       </Banner>
     );
@@ -46,32 +43,20 @@ const ManuallyBilledBanner = ({
 
   const action = onZuoraPlan
     ? {
-      Component: PageLink,
-      content: 'Enable Automatic Billing',
-      to: '/account/billing/enable-automatic'
-    }
+        Component: PageLink,
+        content: 'Enable Automatic Billing',
+        to: '/account/billing/enable-automatic',
+      }
     : null;
   return (
     <>
-      <Banner
-        status="info"
-        title={title}
-        action={action}
-      >
+      <Banner status="info" title={title} action={action}>
         <p>
-          To make changes to your plan or billing information, please {
-            <SupportTicketLink issueId="general_issue">submit a support ticket</SupportTicketLink>
-          }.
+          To make changes to your plan or billing information, please{' '}
+          {<SupportTicketLink issueId="general_issue">submit a support ticket</SupportTicketLink>}.
         </p>
-        {onZuoraPlan && (
-          <p>
-            Enable automatic billing to self-manage your plan and add-ons.
-          </p>
-        )}
+        {onZuoraPlan && <p>Enable automatic billing to self-manage your plan and add-ons.</p>}
       </Banner>
-      <Modal>
-        <UpdatePaymentForm />
-      </Modal>
     </>
   );
 };

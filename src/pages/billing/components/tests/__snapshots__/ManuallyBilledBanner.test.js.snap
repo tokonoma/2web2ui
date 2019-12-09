@@ -16,7 +16,8 @@ exports[`ManuallyBilledBanner renders banner 1`] = `
   "
   >
     <p>
-      To make changes to your plan or billing information, please 
+      To make changes to your plan or billing information, please
+       
       <Connect(SupportTicketLink)
         issueId="general_issue"
       >
@@ -28,9 +29,6 @@ exports[`ManuallyBilledBanner renders banner 1`] = `
       Enable automatic billing to self-manage your plan and add-ons.
     </p>
   </Banner>
-  <Modal>
-    <Connect(ReduxForm) />
-  </Modal>
 </Fragment>
 `;
 
@@ -50,7 +48,8 @@ exports[`ManuallyBilledBanner with custom subscription and plan in Zuora 1`] = `
   "
   >
     <p>
-      To make changes to your plan or billing information, please 
+      To make changes to your plan or billing information, please
+       
       <Connect(SupportTicketLink)
         issueId="general_issue"
       >
@@ -62,9 +61,6 @@ exports[`ManuallyBilledBanner with custom subscription and plan in Zuora 1`] = `
       Enable automatic billing to self-manage your plan and add-ons.
     </p>
   </Banner>
-  <Modal>
-    <Connect(ReduxForm) />
-  </Modal>
 </Fragment>
 `;
 
@@ -78,7 +74,8 @@ exports[`ManuallyBilledBanner with custom subscription, plan not in Zuora 1`] = 
   "
   >
     <p>
-      To make changes to your plan or billing information, please 
+      To make changes to your plan or billing information, please
+       
       <Connect(SupportTicketLink)
         issueId="general_issue"
       >
@@ -87,9 +84,6 @@ exports[`ManuallyBilledBanner with custom subscription, plan not in Zuora 1`] = 
       .
     </p>
   </Banner>
-  <Modal>
-    <Connect(ReduxForm) />
-  </Modal>
 </Fragment>
 `;
 
@@ -99,7 +93,8 @@ exports[`ManuallyBilledBanner with transitioning custom subscription when charge
   title="Your current plan is being transitioned to a Custom plan"
 >
   <p>
-    If your account should not be transitioned, please 
+    If your account should not be transitioned, please
+     
     <Connect(SupportTicketLink)
       issueId="general_issue"
     >
@@ -116,7 +111,8 @@ exports[`ManuallyBilledBanner with transitioning custom subscription when volume
   title="Your current plan is being transitioned to a Custom plan"
 >
   <p>
-    If your account should not be transitioned, please 
+    If your account should not be transitioned, please
+     
     <Connect(SupportTicketLink)
       issueId="general_issue"
     >
