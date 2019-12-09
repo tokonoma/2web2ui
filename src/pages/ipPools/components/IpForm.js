@@ -71,8 +71,9 @@ export const IpForm = props => {
       <form onSubmit={handleSubmit}>
         <Panel.Section>
           <div className={styles.FieldGroup}>
-            <Label>Hostname</Label>{' '}
             {/* NOTE: This should not be using the HTML <label> element - just a <div> with the same styles. This is a limitation of the existing component */}
+            <Label>Hostname</Label>
+
             <p>{ip.hostname}</p>
           </div>
 
@@ -88,8 +89,9 @@ export const IpForm = props => {
           </div>
 
           <fieldset className={styles.RadioGroup}>
-            <Label>Auto IP Warmup</Label>{' '}
             {/* NOTE: This *should* be a `<legend>` inside of a `<fieldset>` */}
+            <Label>Auto IP Warmup</Label>
+
             <Field
               name="auto_warmup_enabled"
               component={RadioGroup}
