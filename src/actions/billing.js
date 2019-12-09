@@ -129,6 +129,7 @@ export function clearPromoCode() {
   return { type: 'REMOVE_ACTIVE_PROMO' };
 }
 
+// Used to get cors information to make requests to Zuora
 export function cors({ meta = {}, context, data = {} }) {
   const type = `CORS_${context.toUpperCase().replace('-', '_')}`;
   return sparkpostApiRequest({
