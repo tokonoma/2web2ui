@@ -1,15 +1,8 @@
-/* eslint-disable max-lines */
 import React, { useState } from 'react';
 import _ from 'lodash';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
-import {
-  Field,
-  formValueSelector,
-  getFormValues,
-  reduxForm,
-  submit
-} from 'redux-form';
+import { Field, formValueSelector, getFormValues, reduxForm, submit } from 'redux-form';
 import { withRouter } from 'react-router-dom';
 import { Button, Panel, Label } from '@sparkpost/matchbox';
 import { SelectWrapper, RadioGroup } from 'src/components/reduxFormWrappers';
@@ -21,14 +14,14 @@ import {
   getIpPools,
   selectCurrentPool,
   selectIpForCurrentPool,
-  selectIpFormInitialValues
+  selectIpFormInitialValues,
 } from 'src/selectors/ipPools';
 import { IP_WARMUP_STAGES } from '../constants';
 import styles from './IpForm.module.scss';
 
 const formName = 'ipForm';
 
-export const IpForm = (props) => {
+export const IpForm = props => {
   const {
     ip,
     pool,
@@ -37,19 +30,22 @@ export const IpForm = (props) => {
     handleSubmit,
     submit,
     submitting,
-    pristine
+    pristine,
   } = props;
   const [isConfirmationModalOpen, setConfirmationModalOpen] = useState(false);
 
-  const reAssignPoolsOptions = pools.map((currentPool) => ({
+  const reAssignPoolsOptions = pools.map(currentPool => ({
     value: currentPool.id,
-    label: (currentPool.id === pool.id) ? '-- Select a new pool --' : `${currentPool.name} (${currentPool.id})`
+    label:
+      currentPool.id === pool.id
+        ? '-- Select a new pool --'
+        : `${currentPool.name} (${currentPool.id})`,
   }));
 
-  const stageOptions = IP_WARMUP_STAGES.map((stage) => ({
+  const stageOptions = IP_WARMUP_STAGES.map(stage => ({
     label: `${stage.name} (Volume: ${stage.volume})`,
     value: stage.id,
-    disabled: stage.id > (ip.auto_warmup_stage || 1)
+    disabled: stage.id > (ip.auto_warmup_stage || 1),
   }));
 
   const handleConfirmClick = () => {
@@ -75,8 +71,8 @@ export const IpForm = (props) => {
       <form onSubmit={handleSubmit}>
         <Panel.Section>
           <div className={styles.FieldGroup}>
-            <Label>Hostname</Label> {/* NOTE: This should not be using the HTML <label> element - just a <div> with the same styles. This is a limitation of the existing component */}
-
+            <Label>Hostname</Label>{' '}
+            {/* NOTE: This should not be using the HTML <label> element - just a <div> with the same styles. This is a limitation of the existing component */}
             <p>{ip.hostname}</p>
           </div>
 
@@ -92,13 +88,13 @@ export const IpForm = (props) => {
           </div>
 
           <fieldset className={styles.RadioGroup}>
-            <Label>Auto IP Warmup</Label> {/* NOTE: This *should* be a `<legend>` inside of a `<fieldset>` */}
-
+            <Label>Auto IP Warmup</Label>{' '}
+            {/* NOTE: This *should* be a `<legend>` inside of a `<fieldset>` */}
             <Field
               name="auto_warmup_enabled"
               component={RadioGroup}
               type="radio"
-              parse={(val) => val === 'true' ? true : false}
+              parse={val => (val === 'true' ? true : false)}
               value={isAutoWarmupEnabled ? 'true' : 'false'}
               options={[
                 {
@@ -106,19 +102,32 @@ export const IpForm = (props) => {
                   value: 'true',
                   helpText: (
                     <div className={styles.MaxWidthMD}>
-                      <p className={styles.RadioParagraph}>Standard warmup involves gradually increasing the amount of traffic to the gold IP each day based on a pre-determined schedule. Traffic exceeding the daily limit will be directed to other IPs in the same pool and then to the overflow pool you designate.</p>
+                      <p className={styles.RadioParagraph}>
+                        Standard warmup involves gradually increasing the amount of traffic to the
+                        gold IP each day based on a pre-determined schedule. Traffic exceeding the
+                        daily limit will be directed to other IPs in the same pool and then to the
+                        overflow pool you designate.
+                      </p>
 
                       <div className={styles.WarmupDocLink}>
-                        <ExternalLink to="https://www.sparkpost.com/docs/user-guide/automated-ip-warmup/">Warmup Documentation</ExternalLink>
+                        <ExternalLink to="https://www.sparkpost.com/docs/user-guide/automated-ip-warmup/">
+                          Warmup Documentation
+                        </ExternalLink>
                       </div>
                     </div>
-                  )
+                  ),
                 },
                 {
                   label: <strong>Do Not Throttle for Warmup</strong>,
                   value: 'false',
-                  helpText: <p className={classNames(styles.RadioParagraph, styles.MaxWidthMD)}>This IP will not be throttled for the purposes of IP warmup. Use this option if your IP is already warm or if you're planning to use your own warmup methods.</p>
-                }
+                  helpText: (
+                    <p className={classNames(styles.RadioParagraph, styles.MaxWidthMD)}>
+                      This IP will not be throttled for the purposes of IP warmup. Use this option
+                      if your IP is already warm or if you're planning to use your own warmup
+                      methods.
+                    </p>
+                  ),
+                },
               ]}
               disabled={submitting}
             />
@@ -130,17 +139,22 @@ export const IpForm = (props) => {
               <CardTitle>Engagement Based IP Warmup</CardTitle>
 
               <CardContent>
-                <p className={styles.CardParagraph}>This feature exists for accounts with a <abbr title="Customer Success Manager">CSM</abbr> or dedicated <abbr title="Technical Account Manager">TAM</abbr>. We will automatically bind highly engaged traffic to your cold IP to give it the best chance of warming up.</p>
+                <p className={styles.CardParagraph}>
+                  This feature exists for accounts with a{' '}
+                  <abbr title="Customer Success Manager">CSM</abbr> or dedicated{' '}
+                  <abbr title="Technical Account Manager">TAM</abbr>. We will automatically bind
+                  highly engaged traffic to your cold IP to give it the best chance of warming up.
+                </p>
               </CardContent>
             </Card>
           </div>
           {/* eslint-enable no-restricted-syntax */}
 
-          {isAutoWarmupEnabled &&
+          {isAutoWarmupEnabled && (
             <div className={classNames(styles.MaxWidthSM, styles.FieldGroup)}>
               <Field
                 label="Warmup Stage"
-                name='auto_warmup_stage'
+                name="auto_warmup_stage"
                 component={SelectWrapper}
                 options={stageOptions}
                 parse={_.toInteger}
@@ -148,7 +162,7 @@ export const IpForm = (props) => {
                 disabled={submitting}
               />
             </div>
-          }
+          )}
         </Panel.Section>
 
         <Panel.Section>
@@ -162,17 +176,31 @@ export const IpForm = (props) => {
 
       <ConfirmationModal
         open={isConfirmationModalOpen}
-        title={`Are you sure you want to ${isAutoWarmupEnabled ? 'enable' : 'disable'} Auto IP Warmup?`}
+        title={`Are you sure you want to ${
+          isAutoWarmupEnabled ? 'enable' : 'disable'
+        } Auto IP Warmup?`}
         content={
           isAutoWarmupEnabled ? (
-            <p>Enabling Auto IP Warmup will limit the amount of traffic that you can send over this IP based on the warmup stage. Remaining traffic will be distributed amongst other IPs in the same pool or the designated overflow pool.</p>
+            <p>
+              Enabling Auto IP Warmup will limit the amount of traffic that you can send over this
+              IP based on the warmup stage. Remaining traffic will be distributed amongst other IPs
+              in the same pool or the designated overflow pool.
+            </p>
           ) : (
-            <p>Disabling Auto IP Warmup will remove the volume restrictions from this IP. If this IP is not properly warmed, this can have negative consequences on your deliverability and sender reputation.</p>
+            <p>
+              Disabling Auto IP Warmup will remove the volume restrictions from this IP. If this IP
+              is not properly warmed, this can have negative consequences on your deliverability and
+              sender reputation.
+            </p>
           )
         }
         onCancel={() => setConfirmationModalOpen(false)}
         onConfirm={handleConfirmClick}
-        confirmVerb={isAutoWarmupEnabled ? 'Yes, I want to turn ON Auto IP Warmup' : 'Yes, I want to turn OFF Auto IP Warmup'}
+        confirmVerb={
+          isAutoWarmupEnabled
+            ? 'Yes, I want to turn ON Auto IP Warmup'
+            : 'Yes, I want to turn OFF Auto IP Warmup'
+        }
       />
     </Panel>
   );
@@ -185,14 +213,16 @@ const mapStateToProps = (state, props) => ({
   pools: getIpPools(state, props),
   initialValues: selectIpFormInitialValues(state, props),
   isAutoWarmupEnabled: valueSelector(state, 'auto_warmup_enabled'),
-  formValues: getFormValues(formName)(state)
+  formValues: getFormValues(formName)(state),
 });
 
 const formOptions = {
   form: formName,
-  enableReinitialize: true
+  enableReinitialize: true,
 };
 
-const connectedForm = withRouter(connect(mapStateToProps, { submit })(reduxForm(formOptions)(IpForm)));
+const connectedForm = withRouter(
+  connect(mapStateToProps, { submit })(reduxForm(formOptions)(IpForm)),
+);
 connectedForm.displayName = 'IpForm';
 export default connectedForm;
