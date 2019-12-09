@@ -1,6 +1,7 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 import cases from 'jest-in-case';
+import { Grid } from '@sparkpost/matchbox';
 import { EvaluatorFields } from '../EvaluatorFields';
 import { FORM_NAME } from '../../../constants/formConstants';
 
@@ -48,14 +49,14 @@ describe('Evaluator Fields Component', () => {
   it('renders week over week metric without operator field and grows slider size', () => {
     wrapper.setProps({ source: 'week_over_week' });
     expect(wrapper).not.toHaveTextContent('Comparison');
-    expect(wrapper.children().at(1)).toHaveProp('md', 7);
+    expect(wrapper.find(Grid.Column).at(1)).toHaveProp('md', 7);
   });
 
   it('renders monthly sending limit without source and operator fields and grows slider size', () => {
     wrapper.setProps({ metric: 'monthly_sending_limit' });
     expect(wrapper).not.toHaveTextContent('Evaluated');
     expect(wrapper).not.toHaveTextContent('Comparison');
-    expect(wrapper.children().at(0)).toHaveProp('md', 10);
+    expect(wrapper.find(Grid.Column).at(0)).toHaveProp('md', 10);
   });
 
   it('changes value field value when slider value changes', () => {

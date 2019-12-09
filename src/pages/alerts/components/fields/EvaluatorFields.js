@@ -51,59 +51,64 @@ export const EvaluatorFields = ({
     10 - (sourceOptions.length > 1 ? 3 : 0) - (operatorOptions.length > 1 ? 2 : 0);
 
   return (
-    <Grid className={styles.Grid}>
-      {sourceOptions.length > 1 && (
-        <Grid.Column sm={12} md={3}>
-          <Label>Evaluated</Label>
-          <Field
-            name="source"
-            component={SelectWrapper}
-            disabled={disabled}
-            options={sourceOptions}
-            onChange={handleSourceChange}
-          />
+    <div data-id={`alertEvaluator-${metric}`}>
+      <Grid className={styles.Grid}>
+        {sourceOptions.length > 1 && (
+          <Grid.Column sm={12} md={3}>
+            <Label id="alertEvaluatorSource">Evaluated</Label>
+            <Field
+              id="alertEvaluatorSource"
+              name="source"
+              component={SelectWrapper}
+              disabled={disabled}
+              options={sourceOptions}
+              onChange={handleSourceChange}
+            />
+          </Grid.Column>
+        )}
+        {operatorOptions.length > 1 && (
+          <Grid.Column sm={12} md={2}>
+            <Label id="alertEvaluatorOperator">Comparison</Label>
+            <Field
+              id="alertEvaluatorOperator"
+              name="operator"
+              component={SelectWrapper}
+              disabled={disabled}
+              options={operatorOptions}
+              onChange={setValueOnOperatorChange}
+            />
+          </Grid.Column>
+        )}
+        <Grid.Column sm={12} md={sliderLength}>
+          <div className={styles.Slider}>
+            <Label id="alertEvaluatorValue">{sliderProps.label}</Label>
+            <Slider
+              id="slider"
+              value={value}
+              key={sliderLength}
+              max={sliderProps.max || 100}
+              min={sliderProps.min || 0}
+              onChange={changeValueField}
+              precision={sliderProps.precision || 0}
+              ticks={recommendedMetricValue && { [recommendedMetricValue]: 'Recommended' }}
+            />
+          </div>
         </Grid.Column>
-      )}
-      {operatorOptions.length > 1 && (
         <Grid.Column sm={12} md={2}>
-          <Label>Comparison</Label>
           <Field
-            name="operator"
-            component={SelectWrapper}
+            id="alertEvaluatorValue"
+            name="value"
+            component={TextFieldWrapper}
             disabled={disabled}
-            options={operatorOptions}
-            onChange={setValueOnOperatorChange}
+            suffix={suffix}
+            validate={numberBetweenInclusive(sliderProps.min || 0, sliderProps.max || 100)}
+            normalize={Math.abs}
+            type="number"
+            align="right"
           />
         </Grid.Column>
-      )}
-      <Grid.Column sm={12} md={sliderLength}>
-        <div className={styles.Slider}>
-          <Label>{sliderProps.label}</Label>
-          <Slider
-            id="slider"
-            value={value}
-            key={sliderLength}
-            max={sliderProps.max || 100}
-            min={sliderProps.min || 0}
-            onChange={changeValueField}
-            precision={sliderProps.precision || 0}
-            ticks={recommendedMetricValue && { [recommendedMetricValue]: 'Recommended' }}
-          />
-        </div>
-      </Grid.Column>
-      <Grid.Column sm={12} md={2}>
-        <Field
-          name="value"
-          component={TextFieldWrapper}
-          disabled={disabled}
-          suffix={suffix}
-          validate={numberBetweenInclusive(sliderProps.min || 0, sliderProps.max || 100)}
-          normalize={Math.abs}
-          type="number"
-          align="right"
-        />
-      </Grid.Column>
-    </Grid>
+      </Grid>
+    </div>
   );
 };
 
