@@ -27,8 +27,7 @@ export const GettingStartedGuide = ({ onboarding = {}, history, setAccountOption
         {
           content: (
             <span>
-              {' '}
-              Move to Bottom <ArrowDownward size="20" />{' '}
+              {`Move to Bottom`} <ArrowDownward size="20" />{' '}
             </span>
           ),
           color: 'blue',
@@ -67,6 +66,8 @@ export const GettingStartedGuide = ({ onboarding = {}, history, setAccountOption
         setOnboardingAccountOption({ send_test_email_completed: true });
         history.push(`/templates?pendo=${GUIDE_IDS.SEND_TEST_EMAIL}`);
         break;
+      default:
+        break;
     }
   };
 
@@ -80,7 +81,7 @@ export const GettingStartedGuide = ({ onboarding = {}, history, setAccountOption
               <Grid.Column xs={12}>
                 <Card>
                   <CardTitle>
-                    <Send size="20" className={styles.SendIcon} /> &nbsp;Sending with Sparkpost
+                    <Send size="20" className={styles.SendIcon} /> &nbsp;{`Sending with Sparkpost`}
                   </CardTitle>
                   <CardContent>
                     <p className={styles.FeaturesCardContent}>
@@ -119,8 +120,8 @@ export const GettingStartedGuide = ({ onboarding = {}, history, setAccountOption
                 <Card textAlign="center">
                   <CardContent>
                     <p className={styles.FeaturesCardContent}>
-                      Send your first email in one click and dive right into what SparkPost can do
-                      for your email strategy{' '}
+                      {`Send your first email in one click and dive right into what SparkPost can do
+                      for your email strategy`}
                     </p>
                   </CardContent>
                   <CardActions>
