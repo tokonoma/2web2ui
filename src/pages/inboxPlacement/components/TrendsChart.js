@@ -12,6 +12,7 @@ import { getInboxPlacementTrends } from 'src/actions/inboxPlacement';
 import { selectTrends } from 'src/selectors/inboxPlacement';
 import Callout from 'src/components/callout';
 import { PanelLoading } from 'src/components';
+import { formatApiDate } from 'src/helpers/date';
 
 const yKeys = [
   {
@@ -69,14 +70,13 @@ export const TrendsChart = props => {
       dateRange: { from, to },
     } = filters;
     getInboxPlacementTrends({
-      from,
-      to,
+      from: formatApiDate(from),
+      to: formatApiDate(to),
     });
   }, [getInboxPlacementTrends, filters]);
-  console.warn(trends);
+
   const xAxisProps = useMemo(() => {
     const interval = Math.floor(trends.length / 10);
-    console.warn('Interval', interval);
     const xTicks = trends.filter((value, index) => index % interval === 0).map(({ date }) => date);
     return {
       ticks: xTicks,

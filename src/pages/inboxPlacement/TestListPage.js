@@ -17,7 +17,9 @@ import { STATUS } from './constants/test';
 import { Users } from 'src/components/images';
 import TrendsChart from './components/TrendsChart';
 import usePageFilters from 'src/hooks/usePageFilters';
-import { formatInputDate } from 'src/helpers/date';
+import TrendsFilters from './components/TrendsFilters';
+import { formatApiTimestamp } from 'src/helpers/date';
+import { RELATIVE_DATE_OPTIONS } from './constants/filters';
 
 const selectOptions = [
   { value: 'Sort By', label: 'Sort By', disabled: true },
@@ -101,8 +103,8 @@ const FilterSortCollectionRow = ({
 ];
 
 const normalizeDateRange = ({ from, to }) => ({
-  from: formatInputDate(from),
-  to: formatInputDate(to),
+  from,
+  to,
 });
 
 const now = Date.now();
@@ -110,15 +112,20 @@ const now = Date.now();
 const whitelistFilters = {
   dateRange: {
     defaultValue: {
-      from: formatInputDate(moment(now).subtract(30, 'd')),
-      to: formatInputDate(now),
+      from: formatApiTimestamp(moment(now).subtract(30, 'd')),
+      to: formatApiTimestamp(now),
     },
     validate: ({ from, to }) => {
-      const momentFrom = moment(from);
-      const momentTo = moment(to);
+      const momentFrom = moment.utc(from);
+      const momentTo = moment.utc(to);
       return momentFrom.isValid() && momentTo.isValid() && momentFrom.isBefore(momentTo);
     },
     normalize: normalizeDateRange,
+  },
+  range: {
+    defaultValue: '30days',
+    excludeFromRoute: true,
+    validate: range => RELATIVE_DATE_OPTIONS.includes(range),
   },
   tags: {
     defaultValue: [],
@@ -126,7 +133,7 @@ const whitelistFilters = {
 };
 
 const TestListPage = ({ tests, error, loading, listTests }) => {
-  const { filters } = usePageFilters(whitelistFilters);
+  const { filters, updateFilters } = usePageFilters(whitelistFilters);
 
   useEffect(() => {
     listTests();
@@ -154,12 +161,13 @@ const TestListPage = ({ tests, error, loading, listTests }) => {
           We can provide insight into what mailbox providers are doing with your email.
         </p>
         <Panel title={'Inbox Placement Trends'}>
+          <TrendsFilters filters={filters} updateFilters={updateFilters} />
           <TrendsChart filters={filters} />
           {renderCollection()}
         </Panel>
       </>
     ),
-    [filters, renderCollection],
+    [filters, renderCollection, updateFilters],
   );
 
   const renderError = useCallback(
