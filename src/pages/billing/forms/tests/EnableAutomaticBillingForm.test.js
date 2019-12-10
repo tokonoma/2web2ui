@@ -6,19 +6,24 @@ import { EnableAutomaticBillingForm } from '../EnableAutomaticBillingForm';
 jest.mock('src/helpers/billing');
 
 describe('EnableAutomaticBillingForm', () => {
-  const subject = (props = {}) =>
-    shallow(
-      <EnableAutomaticBillingForm
-        billingCountries={[{ value: 'US', label: 'United States' }]}
-        currentPlan={{
-          plan_volume_per_period: 15000,
-          period: 'year',
-        }}
-        handleSubmit={handler => handler}
-        getBillingCountries={() => undefined}
-        {...props}
-      />,
-    );
+  const subject = (props = {}) => shallow(
+    <EnableAutomaticBillingForm
+      billingCountries={[
+        { value: 'US', label: 'United States' }
+      ]}
+      currentPlan={{
+        plan_volume_per_period: 15000,
+        period: 'year'
+      }}
+      handleSubmit={(handler) => handler}
+      getBillingCountries={() => (undefined)}
+      {...props}
+    />
+  );
+
+  it('renders form', () => {
+    expect(subject()).toMatchSnapshot();
+  });
 
   it('calls getBillingCountries on mount', () => {
     const getBillingCountries = jest.fn();
@@ -28,34 +33,27 @@ describe('EnableAutomaticBillingForm', () => {
 
   it('renders loading panel', () => {
     const wrapper = subject({ loading: true });
-    expect(wrapper.find('Loading')).toExist();
+    expect(wrapper).toMatchSnapshot();
   });
 
   it('renders form disabled', () => {
     const wrapper = subject({ submitting: true });
-    expect(
-      wrapper
-        .find('Button')
-        .render()
-        .text(),
-    ).toEqual('Loading...');
+    expect(wrapper).toMatchSnapshot();
   });
 
   it('creates billing, redirects, and shows alert on submit', async () => {
     const props = {
-      billingUpdate: jest.fn(() => Promise.resolve()),
-      updateBillingSubscription: jest.fn(() => Promise.resolve()),
-      getSubscription: jest.fn(() => Promise.resolve()),
+      billingCreate: jest.fn(() => Promise.resolve()),
       history: { push: jest.fn() },
-      showAlert: jest.fn(),
+      showAlert: jest.fn()
     };
     const wrapper = subject(props);
     const values = {
       billingAddress: {
         state: 'MD',
-        zip: 21046,
+        zip: 21046
       },
-      card: Symbol('card-info'),
+      card: Symbol('card-info')
     };
     const preparedCardInfo = Symbol('prepared-card-info');
     billingHelpers.prepareCardInfo = jest.fn(() => preparedCardInfo);
@@ -63,7 +61,7 @@ describe('EnableAutomaticBillingForm', () => {
     await wrapper.instance().onSubmit(values);
 
     expect(billingHelpers.prepareCardInfo).toHaveBeenCalledWith(values.card);
-    expect(props.billingUpdate).toHaveBeenCalledWith({ ...values, card: preparedCardInfo });
+    expect(props.billingCreate).toHaveBeenCalledWith({ ...values, card: preparedCardInfo });
     expect(props.history.push).toHaveBeenCalledWith('/account/billing');
     expect(props.showAlert).toHaveBeenCalledWith(expect.objectContaining({ type: 'success' }));
   });
