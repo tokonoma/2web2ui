@@ -16,20 +16,30 @@ const SliderFieldWrapper = ({
   suffix = '',
   ticks,
 }) => {
-  const [state, setState] = React.useState(value);
+  const cleanAndClamp = React.useCallback(
+    value => {
+      const roundedValue = roundToPlaces(value || min, precision);
+      return clamp(roundedValue, min, max);
+    },
+    [max, min, precision],
+  );
+  const [internalValue, setInternalValue] = React.useState(() => cleanAndClamp(value));
 
   // listen for changes to value
   React.useEffect(() => {
-    setState(value);
-  }, [value]);
+    const nextValue = cleanAndClamp(value);
+    setInternalValue(nextValue);
+  }, [cleanAndClamp, value]);
 
   return (
     <div>
-      {label && <Label id={id}>{label}</Label>}
+      <Label id={id}>{label}</Label>
       <div className={styles.SliderTextContainer}>
         <div className={styles.SliderItem}>
           <Slider
             id={`${id}Slider`}
+            data-id={`${id}Slider`}
+            aria-controls={id}
             disabled={disabled}
             max={max}
             min={min}
@@ -46,19 +56,16 @@ const SliderFieldWrapper = ({
             align="right"
             disabled={disabled}
             onBlur={event => {
-              const roundedValue = roundToPlaces(event.target.value || min, precision);
-              // clamp value to min or max value if not between
-              const nextValue = clamp(roundedValue, min, max);
-
-              setState(nextValue); // set next value just in case it was formatted or clamped
+              const nextValue = cleanAndClamp(event.target.value);
+              setInternalValue(nextValue); // set next value just in case it was formatted or clamped
               onChange(nextValue);
             }}
             onChange={event => {
-              setState(event.target.value);
+              setInternalValue(event.target.value);
             }}
             type="number"
             suffix={suffix}
-            value={state}
+            value={internalValue}
           />
         </div>
       </div>
