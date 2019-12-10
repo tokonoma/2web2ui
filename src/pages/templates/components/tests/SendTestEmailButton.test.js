@@ -98,7 +98,7 @@ describe('SendTestEmailButton', () => {
         // Hit the enter key to add the email address to the list of values
         fireEvent.keyDown(queryByLabelText('To'), { preventDefault: jest.fn(), keyCode: 13 });
         expect(queryByText('toEmail@sparkpost.com')).toBeInTheDocument(); // The email address is stored in the DOM instead of the `value` attribute
-        expect(queryByLabelText('From')).RTLtoHaveValue('nick@bounce.uat.sparkpost.com');
+        expect(queryByLabelText('From')).toHaveValue('nick@bounce.uat.sparkpost.com');
         userEvent.click(getByText('Send Email'));
 
         expect(queryByTestId('panel-loading')).toBeInTheDocument();

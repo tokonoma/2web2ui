@@ -2,6 +2,7 @@
 import raf from './tempPolyfills';
 import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
+import '@testing-library/jest-dom/extend-expect'; // Provides Testing Library matchers
 import { configure } from '@testing-library/react';
 import * as matchers from './matchers';
 import setupPortals from 'src/__testHelpers__/setupPortals';
