@@ -77,7 +77,7 @@ export class EnableAutomaticBillingForm extends React.Component {
               </Panel.Section>
               <Panel.Section>
                 <Button disabled={submitting} fullWidth primary type="submit">
-                  Enable Automatic Billing
+                  {submitting ? 'Loading...' : 'Enable Automatic Billing'}
                 </Button>
               </Panel.Section>
             </Panel>

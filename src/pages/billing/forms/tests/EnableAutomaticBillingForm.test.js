@@ -20,10 +20,6 @@ describe('EnableAutomaticBillingForm', () => {
       />,
     );
 
-  it('renders form', () => {
-    expect(subject()).toMatchSnapshot();
-  });
-
   it('calls getBillingCountries on mount', () => {
     const getBillingCountries = jest.fn();
     subject({ getBillingCountries });
@@ -32,12 +28,17 @@ describe('EnableAutomaticBillingForm', () => {
 
   it('renders loading panel', () => {
     const wrapper = subject({ loading: true });
-    expect(wrapper).toMatchSnapshot();
+    expect(wrapper.find('Loading')).toExist();
   });
 
   it('renders form disabled', () => {
     const wrapper = subject({ submitting: true });
-    expect(wrapper).toMatchSnapshot();
+    expect(
+      wrapper
+        .find('Button')
+        .render()
+        .text(),
+    ).toEqual('Loading...');
   });
 
   it('creates billing, redirects, and shows alert on submit', async () => {
