@@ -62,7 +62,7 @@ const metricToFormSpecMap = {
       { fieldName: 'subaccounts', fieldValue: [] },
       { fieldName: 'source', fieldValue: 'raw' },
       { fieldName: 'operator', fieldValue: 'lt' },
-      { fieldName: 'value', fieldValue: '100000' },
+      { fieldName: 'value', fieldValue: 100000 },
     ],
   },
 };

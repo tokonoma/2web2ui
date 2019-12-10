@@ -7,7 +7,6 @@ import SubaccountField from '../../components/fields/SubaccountsField';
 import FilterFields from '../../components/fields/FilterFields';
 import EvaluatorFields from '../../components/fields/EvaluatorFields';
 
-
 describe('Alert Form Component', () => {
   let props;
   let wrapper;
@@ -25,7 +24,7 @@ describe('Alert Form Component', () => {
       change: jest.fn(),
       formMeta: {},
       formErrors: {},
-      isNewAlert: true
+      isNewAlert: true,
     };
 
     wrapper = shallow(<AlertForm {...props} />);
@@ -41,8 +40,8 @@ describe('Alert Form Component', () => {
   });
 
   it('should reset form values when changing metric', () => {
-    wrapper.find({ name: 'metric' }).simulate('change', { target: { value: 'block_bounce_rate' }});
-    expect(wrapper.instance().props.change).toHaveBeenCalledTimes(7);//4 filters + 3 default values ;
+    wrapper.find({ name: 'metric' }).simulate('change', { target: { value: 'block_bounce_rate' } });
+    expect(wrapper.instance().props.change).toHaveBeenCalledTimes(7); //4 filters + 3 default values ;
   });
 
   it('should show filters when metric has filters', () => {
@@ -53,7 +52,9 @@ describe('Alert Form Component', () => {
   });
 
   it('should not show filters when metric has no filters', () => {
-    jest.spyOn(alertFormHelper, 'getFormSpec').mockImplementationOnce(() => ({ hasFilters: false }));
+    jest
+      .spyOn(alertFormHelper, 'getFormSpec')
+      .mockImplementationOnce(() => ({ hasFilters: false }));
     wrapper = shallow(<AlertForm {...props} />);
     expect(wrapper.find(SubaccountField)).not.toExist();
     expect(wrapper.find(FilterFields)).not.toExist();
@@ -77,18 +78,32 @@ describe('Alert Form Component', () => {
   });
 
   it('should show error when every notification channel is empty', () => {
-    const formMeta = { emails: { touched: true }};
+    const formMeta = { emails: { touched: true } };
     const formErrors = { emails: 'At least one notification channel must not be empty' };
     wrapper.setProps({ formMeta, formErrors });
     expect(wrapper.find('Error')).toExist();
   });
 
-  describe('submit button', () => {
+  it('should show injection count metric option', () => {
+    expect(wrapper.find('Field[name="metric"]').prop('options')).not.toContainEqual({
+      label: 'Injection Count',
+      value: 'injection_count',
+    });
+  });
 
+  it('should not show injection count metric option', () => {
+    wrapper.setProps({ isNewAlert: true, allowInjectionAlerts: true });
+    expect(wrapper.find('Field[name="metric"]').prop('options')).toContainEqual({
+      label: 'Injection Count',
+      value: 'injection_count',
+    });
+  });
+
+  describe('submit button', () => {
     const defaultFormState = {
       pristine: false,
       submitting: false,
-      isDuplicate: false
+      isDuplicate: false,
     };
 
     it('should disable submit button when form is pristine', () => {
