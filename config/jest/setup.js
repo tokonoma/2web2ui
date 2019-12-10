@@ -44,17 +44,6 @@ afterAll(() => {
   console.error = originalError;
 });
 
-// mock out a file that uses require.context under the hood
-jest.mock('src/components/notifications/staticMarkdownNotifications', () => [
-  {
-    component: function () {},
-    meta: { title: 'Some notification', type: 'info' }
-  },
-  {
-    component: function () {},
-    meta: { type: 'notice' }
-  }
-]);
 
 setupPortals();
 

@@ -6,24 +6,37 @@ import { LINKS } from 'src/constants';
 import { pluralString } from 'src/helpers/string';
 import * as conversions from 'src/helpers/conversionTracking';
 import { ANALYTICS_PREMIUM_SUPPORT, ANALYTICS_ENTERPRISE_SUPPORT } from 'src/constants';
+import _ from 'lodash';
 
-const dateFormat = (date) => format(date, 'MMM DD, YYYY');
+const dateFormat = date => format(date, 'MMM DD, YYYY');
 
 /**
  * Renders pending plan change information
  * @prop account Account state from redux store
  */
-export const PendingPlanBanner = ({ account }) => {
-  if (!account.pending_subscription) {
+export const PendingPlanBanner = ({ account, subscription }) => {
+  const pendingDowngrades = _.get(subscription, 'pending_downgrades', []);
+  if (!account.pending_subscription && pendingDowngrades.length === 0) {
     return null;
   }
 
+  if (pendingDowngrades.length > 0) {
+    return (
+      <Banner status="info" title="Pending Plan Change">
+        <p>
+          You're scheduled for a pending downgrade and can't update your plan until that switch
+          happens.
+        </p>
+      </Banner>
+    );
+  }
+
   return (
-    <Banner status='info' title='Pending Plan Change' >
+    <Banner status="info" title="Pending Plan Change">
       <p>
-        You're scheduled to switch to the {account.pending_subscription.name} plan
-        on {dateFormat(account.pending_subscription.effective_date)}, and can't update your plan
-        until that switch happens.
+        You're scheduled to switch to the {account.pending_subscription.name} plan on{' '}
+        {dateFormat(account.pending_subscription.effective_date)}, and can't update your plan until
+        that switch happens.
       </p>
     </Banner>
   );
@@ -36,25 +49,33 @@ export const PendingPlanBanner = ({ account }) => {
 const premiumAction = {
   content: 'Contact Us',
   to: LINKS.PREMIUM_SUPPORT,
-  external: true
+  external: true,
 };
 
 const awsPremiumAction = {
   content: 'Request Premium Support',
   component: Link,
-  to: '/support/aws-premium'
+  to: '/support/aws-premium',
 };
 
 export const PremiumBanner = ({ isAWSAccount }) => (
-  <Banner title='Premium Addon Plan' action={{
-    ...(isAWSAccount ? awsPremiumAction : premiumAction),
-    onClick: () => conversions.trackAddonRequest(ANALYTICS_PREMIUM_SUPPORT)
-  }}>
-    <p>Full-service account advocacy with a dedicated Customer Success Manager. Including proactive reporting, planning, and reviews.</p>
+  <Banner
+    title="Premium Addon Plan"
+    action={{
+      ...(isAWSAccount ? awsPremiumAction : premiumAction),
+      onClick: () => conversions.trackAddonRequest(ANALYTICS_PREMIUM_SUPPORT),
+    }}
+  >
+    <p>
+      Full-service account advocacy with a dedicated Customer Success Manager. Including proactive
+      reporting, planning, and reviews.
+    </p>
     <ul>
       <li>Includes all standard SparkPost features</li>
       <li>Dedicated Customer Success Manager</li>
-      <li>Global <abbr title="Internet Service Provider">ISP</abbr> support and mediation</li>
+      <li>
+        Global <abbr title="Internet Service Provider">ISP</abbr> support and mediation
+      </li>
       <li>Deliverability data analysis and guidance with powerful integrated tools</li>
     </ul>
   </Banner>
@@ -64,13 +85,20 @@ export const PremiumBanner = ({ isAWSAccount }) => (
  * Enterprise CTA
  */
 export const EnterpriseBanner = () => (
-  <Banner title='Enterprise' action={{
-    content: 'Contact Us',
-    to: LINKS.ENTERPRISE_SUPPORT,
-    external: true,
-    onClick: () => conversions.trackAddonRequest(ANALYTICS_ENTERPRISE_SUPPORT)
-  }}>
-    <p>Enterprise-grade financial guarantees with 99.9% uptime <abbr title="Service Level Agreement">SLA</abbr> and guaranteed burst rates, and a dedicated Technical Account Manager.</p>
+  <Banner
+    title="Enterprise"
+    action={{
+      content: 'Contact Us',
+      to: LINKS.ENTERPRISE_SUPPORT,
+      external: true,
+      onClick: () => conversions.trackAddonRequest(ANALYTICS_ENTERPRISE_SUPPORT),
+    }}
+  >
+    <p>
+      Enterprise-grade financial guarantees with 99.9% uptime{' '}
+      <abbr title="Service Level Agreement">SLA</abbr> and guaranteed burst rates, and a dedicated
+      Technical Account Manager.
+    </p>
     <ul>
       <li>Includes all standard SparkPost and Premium features</li>
       <li>Comprehensive uptime SLAs with service credits</li>
@@ -80,7 +108,12 @@ export const EnterpriseBanner = () => (
   </Banner>
 );
 
-export const FreePlanWarningBanner = ({ account = {}, accountAgeInDays = 0, ageRangeStart = 0, ageRangeEnd = 30 }) => {
+export const FreePlanWarningBanner = ({
+  account = {},
+  accountAgeInDays = 0,
+  ageRangeStart = 0,
+  ageRangeEnd = 30,
+}) => {
   const { subscription = {}, pending_subscription } = account;
   if (pending_subscription || !subscription.code.includes('free15K')) {
     return null;
@@ -97,11 +130,11 @@ export const FreePlanWarningBanner = ({ account = {}, accountAgeInDays = 0, ageR
   const daysLeft = Math.floor(ageRangeEnd - accountAgeInDays) + 1;
 
   return (
-    <Banner status='warning' title='Free Plan Downgrade'>
+    <Banner status="warning" title="Free Plan Downgrade">
       <p>
-        Your plan will automatically downgrade to 500 emails/month
-        in {pluralString(daysLeft, 'day')}. <Link to='/account/billing/plan'>Upgrade your plan</Link> to
-        keep or increase your sending limits.
+        Your plan will automatically downgrade to 500 emails/month in{' '}
+        {pluralString(daysLeft, 'day')}. <Link to="/account/billing/plan">Upgrade your plan</Link>{' '}
+        to keep or increase your sending limits.
       </p>
     </Banner>
   );

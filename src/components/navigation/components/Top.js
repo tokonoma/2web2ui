@@ -6,7 +6,6 @@ import { WindowSizeContext } from 'src/context/WindowSize';
 import { HelpOutline, Menu, Close } from '@sparkpost/matchbox-icons';
 import { openSupportPanel } from 'src/actions/support';
 import AccountDropdown from './AccountDropdown';
-import NotificationCenter from 'src/components/notifications/NotificationCenter';
 import styles from './Top.module.scss';
 import { DEFAULT_REDIRECT_ROUTE } from 'src/constants';
 
@@ -20,11 +19,11 @@ export class Top extends Component {
         data-id="nav-button-mobilemenu"
         screenReaderLabel="Menu"
       >
-        {this.props.open ? <Close size={24}/> : <Menu size={24}/>}
+        {this.props.open ? <Close size={24} /> : <Menu size={24} />}
       </IconButton>
 
       <Link to={DEFAULT_REDIRECT_ROUTE} className={styles.MobileLogo} data-id="nav-link-mobilelogo">
-        <SparkPost.Logo type='halfWhite' />
+        <SparkPost.Logo type="halfWhite" />
       </Link>
 
       <div className={styles.MobileAccountDropdownWrapper}>
@@ -36,12 +35,10 @@ export class Top extends Component {
   renderDesktop = () => (
     <div className={styles.Top}>
       <Link to={DEFAULT_REDIRECT_ROUTE} className={styles.Logo} data-id="nav-link-logo">
-        <SparkPost.Logo type='halfWhite' />
+        <SparkPost.Logo type="halfWhite" />
       </Link>
 
       <div className={styles.RightSideWrapper}>
-        <NotificationCenter />
-
         <IconButton
           title="Opens a dialog"
           onClick={this.openSupportPanel}
@@ -57,11 +54,15 @@ export class Top extends Component {
     </div>
   );
 
-  openSupportPanel = () => { this.props.openSupportPanel(); }
+  openSupportPanel = () => {
+    this.props.openSupportPanel();
+  };
 
   render() {
     return (
-      <WindowSizeContext.Consumer children={({ mobile }) => mobile ? this.renderMobile() : this.renderDesktop()} />
+      <WindowSizeContext.Consumer
+        children={({ mobile }) => (mobile ? this.renderMobile() : this.renderDesktop())}
+      />
     );
   }
 }
