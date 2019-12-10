@@ -32,7 +32,7 @@ describe('SliderFieldWrapper', () => {
     wrapper.update(); // because simulate didn't work
 
     expect(onChange).toHaveBeenCalledWith(55.6);
-    expect(wrapper.find('TextField')).toHaveProp('value', 55.6);
+    expect(wrapper.find('TextField')).toHaveValue(55.6);
   });
 
   it('rerenders with raw input value', () => {
@@ -42,20 +42,20 @@ describe('SliderFieldWrapper', () => {
     wrapper.find('TextField').prop('onChange')({ target: { value: invalidValue } });
     wrapper.update(); // because simulate didn't work
 
-    expect(wrapper.find('Slider')).toHaveProp('value', undefined);
-    expect(wrapper.find('TextField')).toHaveProp('value', invalidValue);
+    expect(wrapper.find('Slider')).toHaveValue(undefined);
+    expect(wrapper.find('TextField')).toHaveValue(invalidValue);
   });
 
   it('rerenders when value is updated', () => {
     const wrapper = subject({ input: { value: 45 } });
 
-    expect(wrapper.find('Slider')).toHaveProp('value', 45);
-    expect(wrapper.find('TextField')).toHaveProp('value', 45);
+    expect(wrapper.find('Slider')).toHaveValue(45);
+    expect(wrapper.find('TextField')).toHaveValue(45);
 
     wrapper.setProps({ input: { value: 79 }, onChange: jest.fn() });
     wrapper.update();
 
-    expect(wrapper.find('Slider')).toHaveProp('value', 79);
-    expect(wrapper.find('TextField')).toHaveProp('value', 79);
+    expect(wrapper.find('Slider')).toHaveValue(79);
+    expect(wrapper.find('TextField')).toHaveValue(79);
   });
 });
