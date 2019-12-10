@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Page } from '@sparkpost/matchbox';
 import _ from 'lodash';
+
 import { ApiErrorBanner, Loading } from 'src/components';
 import IpForm from './components/IpForm';
 import { showAlert } from 'src/actions/globalAlert';
@@ -11,7 +12,7 @@ import { updateSendingIp } from 'src/actions/sendingIps';
 import { selectCurrentPool, selectIpForCurrentPool } from 'src/selectors/ipPools';
 
 export class EditIpPage extends Component {
-  onUpdateIp = values => {
+  onUpdateIp = (values) => {
     const { updateSendingIp, ip, showAlert, history } = this.props;
 
     if (!values.auto_warmup_enabled) {
@@ -27,7 +28,7 @@ export class EditIpPage extends Component {
         }
         showAlert({
           type: 'success',
-          message: `Updated IP ${ip.external_ip}.`,
+          message: `Updated IP ${ip.external_ip}.`
         });
       })
       .then(this.loadDependentData);
@@ -41,31 +42,43 @@ export class EditIpPage extends Component {
     this.loadDependentData();
   }
 
+  renderError() {
+    const { error } = this.props;
+    return <ApiErrorBanner
+      errorDetails={error.message}
+      message="Sorry, we seem to have had some trouble loading your IP data."
+      reload={this.loadDependentData}
+    />;
+  }
+
+  renderForm() {
+    const { error } = this.props;
+    if (error) {
+      return this.renderError();
+    }
+
+    return <IpForm onSubmit={this.onUpdateIp}/>;
+  }
+
   render() {
-    const { loading, pool, ip, error } = this.props;
+    const { loading, pool, ip } = this.props;
 
     if (loading || _.isEmpty(pool) || _.isEmpty(ip)) {
-      return <Loading />;
+      return <Loading/>;
     }
+
+    const breadcrumbAction = {
+      content: pool.name,
+      Component: Link,
+      to: `/account/ip-pools/edit/${pool.id}`
+    };
 
     return (
       <Page
         title={`Sending IP: ${ip.external_ip}`}
-        breadcrumbAction={{
-          content: pool.name,
-          Component: Link,
-          to: `/account/ip-pools/edit/${pool.id}`,
-        }}
+        breadcrumbAction={breadcrumbAction}
       >
-        {error ? (
-          <ApiErrorBanner
-            errorDetails={error.message}
-            message="Sorry, we seem to have had some trouble loading your IP data."
-            reload={this.loadDependentData}
-          />
-        ) : (
-          <IpForm onSubmit={this.onUpdateIp} />
-        )}
+        {this.renderForm()}
       </Page>
     );
   }
@@ -78,7 +91,7 @@ const mapStateToProps = (state, props) => {
     ip: selectIpForCurrentPool(state, props),
     pool: selectCurrentPool(state, props),
     loading: listLoading,
-    error: listError,
+    error: listError
   };
 };
 
@@ -86,5 +99,5 @@ export default connect(mapStateToProps, {
   updatePool,
   listPools,
   updateSendingIp,
-  showAlert,
+  showAlert
 })(EditIpPage);
