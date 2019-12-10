@@ -1,5 +1,5 @@
-// This was created for Moment, but could be used for any object with a isValid method
-const toBeValid = received => {
+// This was created for Moment, but could be used for any object with a [isValid](https://momentjs.com/docs/#/parsing/is-valid/) method
+const toBeValidMomentDate = received => {
   if (received && received.isValid && received.isValid()) {
     return {
       message: () => `expected ${received} not to be valid`,
@@ -13,4 +13,4 @@ const toBeValid = received => {
   };
 };
 
-export default toBeValid;
+export default toBeValidMomentDate;
