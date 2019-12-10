@@ -84,4 +84,30 @@ describe('GettingStartedGuide', () => {
       `/templates?pendo=${GUIDE_IDS.SEND_TEST_EMAIL}`,
     );
   });
+
+  it('should navigate to users page when Invite a Collaborator is clicked', () => {
+    const instance = subject();
+    instance.find('Button').simulate('click');
+    instance.find({ children: 'Show Me SparkPost' }).simulate('click');
+    instance
+      .find('GuideListItem')
+      .at(2)
+      .prop('action')
+      .onClick();
+    expect(defaultProps.history.push).toHaveBeenCalledWith(`/account/users`);
+  });
+
+  it('should mark Invite a Collaborator list item as completed when the the corresponding button is clicked', () => {
+    const instance = subject();
+    instance.find('Button').simulate('click');
+    instance.find({ children: 'Show Me SparkPost' }).simulate('click');
+    instance
+      .find('GuideListItem')
+      .at(2)
+      .prop('action')
+      .onClick();
+    expect(defaultProps.setAccountOption).toHaveBeenCalledWith('onboarding', {
+      invite_collaborator_completed: true,
+    });
+  });
 });
