@@ -1,0 +1,15 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.SliderTextContainer {
+  display: flex;
+  margin-bottom: 1rem;
+}
+
+.SliderItem {
+  flex-grow: 1;
+  padding-right: spacing();
+}
+
+.TextItem {
+  width: 25%;
+}

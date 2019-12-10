@@ -9,6 +9,20 @@ describe('math helpers', () => {
     expect(mathHelpers.safeDivide(5, 0)).toEqual(0);
   });
 
+  describe('clamp', () => {
+    it('should return value when between min and max', () => {
+      expect(mathHelpers.clamp(50, 0, 100)).toEqual(50);
+    });
+
+    it('should return min', () => {
+      expect(mathHelpers.clamp(-1, 0, 100)).toEqual(0);
+    });
+
+    it('should return max', () => {
+      expect(mathHelpers.clamp(101, 0, 100)).toEqual(100);
+    });
+  });
+
   describe('linear interpolation', () => {
     it('should return an interpolated number', () => {
       expect(mathHelpers.lerp(-10, 30, 0.5)).toEqual(10);
@@ -33,7 +47,7 @@ describe('math helpers', () => {
     });
 
     it('returns float', () => {
-      expect(mathHelpers.sum(1, .5)).toEqual(1.5);
+      expect(mathHelpers.sum(1, 0.5)).toEqual(1.5);
     });
   });
 });

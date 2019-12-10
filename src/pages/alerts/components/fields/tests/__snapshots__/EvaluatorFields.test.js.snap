@@ -4,9 +4,7 @@ exports[`Evaluator Fields Component renders correctly 1`] = `
 <div
   data-id="alertEvaluator-health_score"
 >
-  <Grid
-    className="Grid"
-  >
+  <Grid>
     <Grid.Column
       md={3}
       sm={12}
@@ -70,47 +68,24 @@ exports[`Evaluator Fields Component renders correctly 1`] = `
       />
     </Grid.Column>
     <Grid.Column
-      md={5}
-      sm={12}
-    >
-      <div
-        className="Slider"
-      >
-        <Label
-          id="alertEvaluatorValue"
-        >
-          Score
-        </Label>
-        <Slider
-          defaultValue={0}
-          id="slider"
-          key="5"
-          max={100}
-          min={0}
-          onChange={[Function]}
-          precision={1}
-          ticks={
-            Object {
-              "70": "Recommended",
-            }
-          }
-          value={50}
-        />
-      </div>
-    </Grid.Column>
-    <Grid.Column
-      md={2}
+      md={7}
       sm={12}
     >
       <Field
-        align="right"
         component={[Function]}
         disabled={false}
         id="alertEvaluatorValue"
+        label="Score"
+        max={100}
+        min={0}
         name="value"
-        normalize={[Function]}
+        precision={1}
         suffix=""
-        type="number"
+        ticks={
+          Object {
+            "70": "Recommended",
+          }
+        }
         validate={[Function]}
       />
     </Grid.Column>
