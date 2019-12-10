@@ -18,28 +18,32 @@ export const IncidentsPage = props => {
     listIncidents();
   }, [listMonitors, listIncidents]);
 
-  if (error) {
-    return (
-      <div data-id="error-banner">
-        <ApiErrorBanner
-          message={'Sorry, we seem to have had some trouble loading your blacklist incidents.'}
-          errorDetails={error.message}
-          reload={() => {
-            listMonitors();
-            listIncidents();
-          }}
-        />
-      </div>
-    );
-  }
-
   if (loading) {
     return <Loading />;
   }
 
-  if (monitors.length > 0 && incidents.length === 0) {
+  if (!error && monitors.length > 0 && incidents.length === 0) {
     return <Redirect to="/dashboard" />; //TODO redirect to watchlist page
   }
+
+  const renderContent = () => {
+    if (error) {
+      return (
+        <div data-id="error-banner">
+          <ApiErrorBanner
+            message={'Sorry, we seem to have had some trouble loading your blacklist incidents.'}
+            errorDetails={error.message}
+            reload={() => {
+              listMonitors();
+              listIncidents();
+            }}
+          />
+        </div>
+      );
+    }
+
+    return <IncidentsCollection incidents={incidents} />;
+  };
 
   return (
     <Page
@@ -63,7 +67,7 @@ export const IncidentsPage = props => {
           Monitor blacklists for your domains and IPs so you know when your deliverability will be
           affected.
         </div>
-        <IncidentsCollection incidents={incidents} />
+        {renderContent()}
       </div>
     </Page>
   );
