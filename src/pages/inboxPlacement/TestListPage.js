@@ -167,7 +167,10 @@ const TestListPage = ({ tests, error, loading, listTests }) => {
           We can provide insight into what mailbox providers are doing with your email.
         </p>
         <Panel title={'Inbox Placement Trends'}>
-          <TrendsFilters filters={filters} updateFilters={updateFilters} />
+          <Panel.Section>
+            <TrendsFilters filters={filters} updateFilters={updateFilters} />
+          </Panel.Section>
+
           <TrendsChart filters={filters} />
           {renderCollection()}
         </Panel>

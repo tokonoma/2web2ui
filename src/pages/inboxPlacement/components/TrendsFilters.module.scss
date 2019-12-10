@@ -1,29 +1,15 @@
 @import '~@sparkpost/matchbox/src/styles/config.scss';
 
-.DatePicker {
-  margin: spacing();
-  @media screen and (min-width: breakpoint(medium)) {
-    margin-right: 0;
-  }
-}
-
 .SearchFilter {
-  margin: spacing();
-
-  @media screen and (min-width: breakpoint(medium)) {
-    margin-left: 0;
-  }
-
   @media screen and (max-width: breakpoint(medium)) {
-    margin-top: 0;
+    margin-top: spacing();
   }
 }
 
 .TagContainer {
-  margin: spacing();
-  margin-top: 0;
+  margin-top: spacing();
 }
 
 .TagWrapper {
-  margin: 0 spacing(small);
+  margin: spacing(small);
 }
