@@ -89,7 +89,11 @@ describe('Edit IP form', () => {
   });
 
   it('opens the confirmation modal when clicking the "Update Sending IP" button when the state of auto warmup enabling is changed from its initial state', () => {
-    let wrapper = subject({ isAutoWarmupEnabled: true, ip: { auto_warmup_enabled: false } });
+    let wrapper = subject({
+      isAutoWarmupDirty: true,
+      isAutoWarmupEnabled: true,
+      ip: { auto_warmup_enabled: false },
+    });
 
     wrapper.find('Button').simulate('click');
 
@@ -98,7 +102,11 @@ describe('Edit IP form', () => {
       'Are you sure you want to enable Auto IP Warmup?',
     );
 
-    wrapper = subject({ isAutoWarmupEnabled: false, ip: { auto_warmup_enabled: true } });
+    wrapper = subject({
+      isAutoWarmupDirty: true,
+      isAutoWarmupEnabled: false,
+      ip: { auto_warmup_enabled: true },
+    });
 
     wrapper.find('Button').simulate('click');
 

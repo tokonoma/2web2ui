@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import _ from 'lodash';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
-import { Field, formValueSelector, getFormValues, reduxForm, submit } from 'redux-form';
+import { Field, formValueSelector, getFormValues, reduxForm, submit, isDirty } from 'redux-form';
 import { withRouter } from 'react-router-dom';
 import { Button, Panel, Label } from '@sparkpost/matchbox';
 import { SelectWrapper, RadioGroup } from 'src/components/reduxFormWrappers';
@@ -19,14 +19,13 @@ import {
 import { IP_WARMUP_STAGES } from '../constants';
 import styles from './IpForm.module.scss';
 
-const formName = 'ipForm';
-
 export const IpForm = props => {
   const {
     ip,
     pool,
     pools,
     isAutoWarmupEnabled,
+    isAutoWarmupDirty,
     handleSubmit,
     submit,
     submitting,
@@ -54,10 +53,7 @@ export const IpForm = props => {
   };
 
   const handleUpdateSendingIPClick = () => {
-    const userIsEnablingAutoWarmup = isAutoWarmupEnabled && !ip.auto_warmup_enabled;
-    const userIsDisablingAutoWarmup = !isAutoWarmupEnabled && ip.auto_warmup_enabled;
-
-    if (userIsEnablingAutoWarmup || userIsDisablingAutoWarmup) {
+    if (isAutoWarmupDirty) {
       setConfirmationModalOpen(true);
 
       return false;
@@ -208,6 +204,7 @@ export const IpForm = props => {
   );
 };
 
+const formName = 'ipForm';
 const valueSelector = formValueSelector(formName);
 const mapStateToProps = (state, props) => ({
   pool: selectCurrentPool(state, props),
@@ -215,6 +212,7 @@ const mapStateToProps = (state, props) => ({
   pools: getIpPools(state, props),
   initialValues: selectIpFormInitialValues(state, props),
   isAutoWarmupEnabled: valueSelector(state, 'auto_warmup_enabled'),
+  isAutoWarmupDirty: isDirty(formName)(state, 'auto_warmup_enabled'),
   formValues: getFormValues(formName)(state),
 });
 
