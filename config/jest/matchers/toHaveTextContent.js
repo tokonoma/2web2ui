@@ -3,7 +3,7 @@ import { toHaveTextContent as testingLibraryToHaveTextContent } from '@testing-l
 export default function toHaveTextContent(received, expectedContent) {
   try {
     // Using `.apply` necessary so that the Testing Library .toHaveValue had access to a valid value for `this`
-    testingLibraryToHaveTextContent.apply(this, [HTMLElement, expectedContent]);
+    return testingLibraryToHaveTextContent.apply(this, [HTMLElement, expectedContent]);
   } catch {
     const text = received.debug && received.debug();
 
