@@ -3,7 +3,7 @@ const toHaveTextContent = (received, expectedContent) => {
 
   return {
     message: () => `expected component to have content "${expectedContent}"`,
-    pass: RegExp(expectedContent).test(text)
+    pass: RegExp(expectedContent).test(text),
   };
 };
 
