@@ -20,7 +20,7 @@ export const IncidentsPage = props => {
 
   if (error) {
     return (
-      <div data-id={'error-banner'}>
+      <div data-id="error-banner">
         <ApiErrorBanner
           message={'Sorry, we seem to have had some trouble loading your blacklist incidents.'}
           errorDetails={error.message}
@@ -58,7 +58,7 @@ export const IncidentsPage = props => {
       title="Blacklist Incidents"
       primaryAction={{ content: 'View Watch List', to: '/blacklist', component: Link }}
     >
-      <div data-id={'incidents-table'}>
+      <div data-id="incidents-table">
         <div className={styles.Description}>
           Monitor blacklists for your domains and IPs so you know when your deliverability will be
           affected.

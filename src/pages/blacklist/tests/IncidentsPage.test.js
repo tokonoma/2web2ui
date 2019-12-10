@@ -52,7 +52,7 @@ describe('IncidentsPage', () => {
   });
 
   it('renders error banner when an error occurs', () => {
-    const { queryByTestId } = subject({ error: { message: 'an error occurred' } });
+    const { queryByTestId } = subject({ error: { message: 'You dun goofed' } });
     //Can't search for the text because it is initially hidden
     expect(queryByTestId('error-banner')).toBeInTheDocument();
   });

@@ -1,5 +1,6 @@
-import { shallow } from 'enzyme';
 import React from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { render } from '@testing-library/react';
 import IncidentsCollection from '../IncidentsCollection';
 
 describe('Blacklist Component: IncidentsCollection', () => {
@@ -15,18 +16,17 @@ describe('Blacklist Component: IncidentsCollection', () => {
   const subject = ({ ...props }) => {
     const defaults = { incidents };
 
-    return shallow(<IncidentsCollection {...defaults} {...props} />);
+    return render(
+      <Router>
+        <IncidentsCollection {...defaults} {...props} />
+      </Router>,
+    );
   };
 
-  it('renders page correctly', () => {
-    const wrapper = subject();
-    expect(wrapper).toMatchSnapshot();
-  });
-
   it('renders the rows correctly', () => {
-    const wrapper = subject();
-    const rowFn = wrapper.props().getRowData;
-    const rowWrapper = rowFn(incidents[0]);
-    expect(rowWrapper).toMatchSnapshot();
+    const { queryByText } = subject();
+    expect(queryByText('101.101')).toBeInTheDocument();
+    expect(queryByText('spammy mcspamface')).toBeInTheDocument();
+    expect(queryByText('Dec 3 2019 at 10:00am')).toBeInTheDocument();
   });
 });
