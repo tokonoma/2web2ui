@@ -1,11 +1,10 @@
 import { render } from '@testing-library/react';
-
 import React from 'react';
+import { MemoryRouter, Route, Switch } from 'react-router-dom';
+
 import { IncidentsPage } from '../IncidentsPage';
 import IncidentsCollection from '../components/IncidentsCollection';
 
-jest.mock('react-router-dom');
-const { Redirect } = require('react-router-dom');
 jest.mock('../components/IncidentsCollection');
 IncidentsCollection.mockImplementation(() => <div></div>);
 
@@ -39,7 +38,11 @@ describe('IncidentsPage', () => {
       listMonitors: mockListMonitors,
       listIncidents: mockListIncidents,
     };
-    return render(<IncidentsPage {...defaults} {...props} />);
+    return render(
+      <MemoryRouter>
+        <IncidentsPage {...defaults} {...props} />
+      </MemoryRouter>,
+    );
   };
 
   it('renders loading component when loading data', () => {
@@ -60,14 +63,23 @@ describe('IncidentsPage', () => {
   });
 
   it('redirect to watchlist when monitored resources exist but no incidents', () => {
-    subject({ incidents: [] });
-    expect(Redirect).toHaveBeenCalledTimes(1);
-    const callArguments = Redirect.mock.calls[0];
-    expect(callArguments).toContainEqual(
-      expect.objectContaining({
-        to: '/dashboard',
-      }),
+    const props = {
+      incidents: [],
+      monitors: monitors,
+      error: null,
+      loading: null,
+      listMonitors: mockListMonitors,
+      listIncidents: mockListIncidents,
+    };
+    const { queryByText } = render(
+      <MemoryRouter initialEntries={['/blacklist']} initialIndex={0}>
+        <Switch>
+          <Route path="/dashboard" render={() => <div>Redirected Page</div>} />
+          <Route path="/blacklist" render={() => <IncidentsPage {...props} />} />
+        </Switch>
+      </MemoryRouter>,
     );
+    expect(queryByText('Redirected Page')).toBeInTheDocument();
   });
 
   it('loads monitors and incidents when page starts rendering', () => {
