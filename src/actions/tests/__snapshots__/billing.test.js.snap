@@ -102,7 +102,7 @@ Array [
       "params": Object {
         "context": "some-context",
       },
-      "url": "/v1/account/cors-data",
+      "url": "/v1/billing/cors-data",
       "word": "up",
     },
     "type": "CORS_SOME_CONTEXT",

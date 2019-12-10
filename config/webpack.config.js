@@ -453,18 +453,6 @@ module.exports = function(webpackEnv) {
               ),
               sideEffects: true
             },
-            /**
-             * MDX is a tool that converts Markdown files to React components. This
-             * loader uses MDX to create Page objects for Markdown files. As it
-             * produces ES2015, the result is then passed through babel.
-             */
-            {
-              test: /\.mdx?$/,
-              use: [
-                'babel-loader',
-                'mdx-loader'
-              ]
-            },
             // "file" loader makes sure those assets get served by WebpackDevServer.
             // When you `import` an asset, you get its (virtual) filename.
             // In production, they would get copied to the `build` folder.

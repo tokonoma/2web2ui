@@ -7,21 +7,24 @@ import Steps from './components/Steps';
 import SkipLink from './components/SkipLink';
 
 const SmtpPage = () => (
-  <AutoKeyGenerator render={
-    ({ apiKey }) => (
+  <AutoKeyGenerator
+    render={({ apiKey }) => (
       <Fragment>
         <CenteredLogo />
-        <Panel accent title='SMTP Integration'>
+        <Panel accent title="SMTP Integration">
           <Panel.Section>
             <SmtpDetails apiKey={apiKey} />
           </Panel.Section>
           <Panel.Section>
-            <SkipLink to='/dashboard'>Continue to dashboard</SkipLink>
+            <SkipLink to={{ pathname: '/dashboard', state: { fromOnboarding: true } }}>
+              Continue to dashboard
+            </SkipLink>
           </Panel.Section>
           <Steps />
         </Panel>
       </Fragment>
-    )} />
+    )}
+  />
 );
 
 export default SmtpPage;

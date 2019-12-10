@@ -8,26 +8,26 @@ describe('Page: Dashboard tests', () => {
 
   const props = {
     currentUser: {
-      email_verified: true
+      email_verified: true,
     },
     checkSuppression: jest.fn(() => []),
     listSendingDomains: jest.fn(() => []),
     listApiKeys: jest.fn(() => []),
     account: {
       subscription: {
-        code: 'paid'
+        code: 'paid',
       },
       status: 'active',
-      created: mockDate
+      created: mockDate,
     },
     hasSuppressions: true,
     accountAgeInWeeks: 0,
     verifyingEmail: false,
     accountAgeInDays: 15,
     isMessageOnboardingSet: false,
-    isGuideAtBottom: false,
+    onboarding: {},
     updateAccount: jest.fn(),
-    moveGuideAtBottom: jest.fn()
+    moveGuideAtBottom: jest.fn(),
   };
 
   let wrapper;
@@ -42,7 +42,7 @@ describe('Page: Dashboard tests', () => {
   });
 
   it('should correctly render page when user is not verified', () => {
-    wrapper.setProps({ currentUser: { email_verfied: false }});
+    wrapper.setProps({ currentUser: { email_verfied: false } });
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -52,22 +52,30 @@ describe('Page: Dashboard tests', () => {
   });
 
   it('should display upgrade CTA when account is free and active', () => {
-    wrapper.setProps({ account: { subscription: { code: 'free' }, status: 'active' }});
+    wrapper.setProps({ account: { subscription: { code: 'free' }, status: 'active' } });
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should render the new guide when message_onboarding flag is set', () => {
     wrapper.setProps({ isMessageOnboardingSet: true });
     expect(wrapper.find('GettingStartedGuide')).toExist();
+    expect(wrapper.find('SignupModal')).toExist();
   });
 
   it('should move the guide to bottom or top based on isGuideAtBottom', () => {
-    wrapper.setState({ isGuideAtBottom: true });
-    wrapper.setProps({ isMessageOnboardingSet: true, isGuideAtBottom: true });
-    expect(wrapper.find('Page').children().last()).toContainExactlyOneMatchingElement('GettingStartedGuide');
-    wrapper.setState({ isGuideAtBottom: false });
-    wrapper.setProps({ isMessageOnboardingSet: true, isGuideAtBottom: false });
-    expect(wrapper.find('Page').children().last()).not.toContainExactlyOneMatchingElement('GettingStartedGuide');
-
+    wrapper.setProps({ isMessageOnboardingSet: true, onboarding: { isGuideAtBottom: true } });
+    expect(
+      wrapper
+        .find('Page')
+        .children()
+        .last(),
+    ).toContainExactlyOneMatchingElement('GettingStartedGuide');
+    wrapper.setProps({ isMessageOnboardingSet: true, onboarding: { isGuideAtBottom: false } });
+    expect(
+      wrapper
+        .find('Page')
+        .children()
+        .last(),
+    ).not.toContainExactlyOneMatchingElement('GettingStartedGuide');
   });
 });

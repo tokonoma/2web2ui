@@ -596,8 +596,7 @@ const routes = [
     component: billing.EnableAutomaticBillingPage,
     condition: all(
       hasGrants('account/manage'),
-      not(isSelfServeBilling),
-      isCustomBilling
+      not(isSelfServeBilling)
     ),
     layout: App,
     title: 'Billing | Enable Automatic Billing',
