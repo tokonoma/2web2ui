@@ -5,13 +5,16 @@ jest.mock('src/actions/helpers/sparkpostApiRequest', () => jest.fn(a => a));
 
 describe('Action Creator: Blacklist', () => {
   it('it makes request to list incidents', async () => {
-    await blacklist.listIncidents();
+    await blacklist.listIncidents('2019-12-01T10:10');
     expect(sparkpostApiRequest).toHaveBeenCalledWith({
       type: 'LIST_INCIDENTS',
       meta: {
         method: 'GET',
         url: '/v1/blacklist-monitors/incidents',
         showErrorAlert: false,
+        params: {
+          from: '2019-12-01T10:10',
+        },
       },
     });
   });
