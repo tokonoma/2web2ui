@@ -5,7 +5,7 @@ import { Button, Grid } from '@sparkpost/matchbox';
 import styles from './GettingStartedGuide.module.scss';
 import { SENDING_STEP_LIST } from '../constants';
 
-export const SendingStepListItem = ({ setAndStoreStepName, name, content }) => (
+const SendingStepListItem = ({ setAndStoreStepName, name, content }) => (
   <Grid.Column xs={12} md={6} key={name}>
     <Card textAlign="center">
       <CardContent>

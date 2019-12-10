@@ -146,10 +146,7 @@ export const GettingStartedGuide = ({ onboarding = {}, history, setAccountOption
               />
             </Panel.Section>
             <Panel.Section>
-              <CheckListItem
-                {...SHOW_ME_SPARKPOST_LIST['Explore Analytics']}
-                itemCompleted={explore_analytics_completed}
-              />
+              <CheckListItem {...SHOW_ME_SPARKPOST_LIST['Explore Analytics']} />
             </Panel.Section>
             <Panel.Section>
               <CheckListItem
@@ -164,26 +161,13 @@ export const GettingStartedGuide = ({ onboarding = {}, history, setAccountOption
           <>
             <Panel.Section>
               {renderBreadCrumbs()}
-              <GuideListItem
-                action={{
-                  name: 'Add Sending Domain',
-                  onClick: () => handleAction('Add Sending Domain'),
-                }}
+              <CheckListItem
+                {...LETS_CODE_LIST['Add Sending Domain']}
                 itemCompleted={add_sending_domain_completed}
-              >
-                <GuideListItemTitle>Add a Sending Domain</GuideListItemTitle>
-                <GuideListItemDescription>
-                  You'll need to add a sending domain in order to start sending emails.
-                </GuideListItemDescription>
-              </GuideListItem>
+              />
             </Panel.Section>
             <Panel.Section>
-              <GuideListItem action={{ name: 'Generate API Key', onClick: () => {} }}>
-                <GuideListItemTitle>Generate an API Key</GuideListItemTitle>
-                <GuideListItemDescription>
-                  An API key is required to use our APIs within your app.
-                </GuideListItemDescription>
-              </GuideListItem>
+              <CheckListItem {...LETS_CODE_LIST['Generate API Key']} />
             </Panel.Section>
           </>
         );
@@ -200,7 +184,7 @@ export const GettingStartedGuide = ({ onboarding = {}, history, setAccountOption
       itemCompleted={itemCompleted}
     >
       <GuideListItemTitle>{title}</GuideListItemTitle>
-      <GuideListItemDescription>{getDescription(name) || description}</GuideListItemDescription>
+      <GuideListItemDescription>{description}</GuideListItemDescription>
     </GuideListItem>
   );
   return (
