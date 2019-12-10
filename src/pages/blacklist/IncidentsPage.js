@@ -42,7 +42,11 @@ export const IncidentsPage = props => {
       );
     }
 
-    return <IncidentsCollection incidents={incidents} />;
+    return (
+      <div data-id="incidents-table">
+        <IncidentsCollection incidents={incidents} />;
+      </div>
+    );
   };
 
   return (
@@ -62,13 +66,11 @@ export const IncidentsPage = props => {
       title="Blacklist Incidents"
       primaryAction={{ content: 'View Watch List', to: '/blacklist', component: Link }}
     >
-      <div data-id="incidents-table">
-        <div className={styles.Description}>
-          Monitor blacklists for your domains and IPs so you know when your deliverability will be
-          affected.
-        </div>
-        {renderContent()}
-      </div>
+      <p className={styles.Description}>
+        Monitor blacklists for your domains and IPs so you know when your deliverability will be
+        affected.
+      </p>
+      {renderContent()}
     </Page>
   );
 };
