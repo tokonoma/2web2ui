@@ -5,3 +5,10 @@ export const RELATIVE_DATE_RANGE_OPTIONS_MAP = {
   30: '30days',
   90: '90days',
 };
+
+export const TAG_LABELS = {
+  from_domains: 'Domain',
+  mailbox_providers: 'Mailbox Provider',
+  regions: 'Region',
+  sending_ips: 'IP',
+};

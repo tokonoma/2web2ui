@@ -1,7 +1,7 @@
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
 import * as inboxPlacement from '../inboxPlacement';
 
-jest.mock('src/actions/helpers/sparkpostApiRequest', () => jest.fn((a) => a));
+jest.mock('src/actions/helpers/sparkpostApiRequest', () => jest.fn(a => a));
 
 describe('Action Creator: Inbox Placement', () => {
   it('it makes request to seed', async () => {
@@ -10,8 +10,8 @@ describe('Action Creator: Inbox Placement', () => {
       type: 'GET_SEEDS',
       meta: {
         method: 'GET',
-        url: '/v1/inbox-placement/seeds'
-      }
+        url: '/v1/inbox-placement/seeds',
+      },
     });
   });
 
@@ -22,8 +22,8 @@ describe('Action Creator: Inbox Placement', () => {
       meta: {
         method: 'GET',
         url: '/v1/inbox-placement',
-        showErrorAlert: false
-      }
+        showErrorAlert: false,
+      },
     });
   });
 
@@ -33,8 +33,8 @@ describe('Action Creator: Inbox Placement', () => {
       type: 'GET_INBOX_PLACEMENT_TESTS_BY_MAILBOX_PROVIDER',
       meta: {
         method: 'GET',
-        url: '/v1/inbox-placement/101/mailbox-provider'
-      }
+        url: '/v1/inbox-placement/101/mailbox-provider',
+      },
     });
   });
 
@@ -44,8 +44,8 @@ describe('Action Creator: Inbox Placement', () => {
       type: 'GET_INBOX_PLACEMENT_TESTS_BY_REGION',
       meta: {
         method: 'GET',
-        url: '/v1/inbox-placement/101/region'
-      }
+        url: '/v1/inbox-placement/101/region',
+      },
     });
   });
 
@@ -55,8 +55,8 @@ describe('Action Creator: Inbox Placement', () => {
       type: 'GET_INBOX_PLACEMENT_TESTS_BY_SENDING_IP',
       meta: {
         method: 'GET',
-        url: '/v1/inbox-placement/101/sending-ip'
-      }
+        url: '/v1/inbox-placement/101/sending-ip',
+      },
     });
   });
 
@@ -67,8 +67,20 @@ describe('Action Creator: Inbox Placement', () => {
       meta: {
         method: 'GET',
         url: '/v1/inbox-placement/message-trends',
-        params: { myparams: 'foo' }
-      }
+        params: { myparams: 'foo' },
+      },
+    });
+  });
+
+  it('it makes request to get trends filter values', async () => {
+    await inboxPlacement.getInboxPlacementTrendsFilterValues({ myparams: 'foo' });
+    expect(sparkpostApiRequest).toHaveBeenCalledWith({
+      type: 'GET_INBOX_PLACEMENT_TRENDS_FILTER_VALUES',
+      meta: {
+        method: 'GET',
+        url: '/v1/inbox-placement/message-trends',
+        params: { myparams: 'foo' },
+      },
     });
   });
 
@@ -78,8 +90,8 @@ describe('Action Creator: Inbox Placement', () => {
       type: 'GET_INBOX_PLACEMENT_TEST',
       meta: {
         method: 'GET',
-        url: '/v1/inbox-placement/1'
-      }
+        url: '/v1/inbox-placement/1',
+      },
     });
   });
 
@@ -89,8 +101,8 @@ describe('Action Creator: Inbox Placement', () => {
       type: 'GET_INBOX_PLACEMENT_TEST_CONTENT',
       meta: {
         method: 'GET',
-        url: '/v1/inbox-placement/1/content'
-      }
+        url: '/v1/inbox-placement/1/content',
+      },
     });
   });
 
@@ -101,8 +113,8 @@ describe('Action Creator: Inbox Placement', () => {
       meta: {
         method: 'PUT',
         url: '/v1/inbox-placement/1',
-        data: { status: 'stopped' }
-      }
+        data: { status: 'stopped' },
+      },
     });
   });
 
@@ -114,17 +126,15 @@ describe('Action Creator: Inbox Placement', () => {
         method: 'GET',
         url: '/v1/inbox-placement/1/messages',
         params: { 'mailbox-provider': 'sparkpost.com' },
-        showErrorAlert: false
-      }
+        showErrorAlert: false,
+      },
     });
   });
 
   it('makes request to reset state', () => {
-    const dispatchMock = jest.fn((a) => a);
+    const dispatchMock = jest.fn(a => a);
     const action = inboxPlacement.resetState()(dispatchMock);
-    expect(action).toEqual(
-      { type: 'RESET_INBOX_PLACEMENT' }
-    );
+    expect(action).toEqual({ type: 'RESET_INBOX_PLACEMENT' });
   });
 
   it('makes request to get a specific message', async () => {
@@ -135,9 +145,9 @@ describe('Action Creator: Inbox Placement', () => {
         method: 'GET',
         url: '/v1/inbox-placement/1/messages/101',
         context: {
-          messageId: 101
-        }
-      }
+          messageId: 101,
+        },
+      },
     });
   });
 });
