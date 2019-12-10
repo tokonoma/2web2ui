@@ -10,10 +10,13 @@ const PreviewControlBar = () => {
   const { previewDevice, setPreviewDevice } = useEditorContext();
 
   return (
-    <div className={styles.PreviewControlBar}>
+    <div className={styles.PreviewControlBar} data-id="preview-contol-bar">
       <div className={styles.PreviewDeviceToggle}>
         <UnstyledLink
-          className={classNames(styles.PreviewDeviceButton, previewDevice === 'desktop' && styles.active)}
+          className={classNames(
+            styles.PreviewDeviceButton,
+            previewDevice === 'desktop' && styles.active,
+          )}
           id="preview-content-desktop-button"
           onClick={() => setPreviewDevice('desktop')}
           to="javascript:void(0);"
@@ -26,7 +29,10 @@ const PreviewControlBar = () => {
         </UnstyledLink>
 
         <UnstyledLink
-          className={classNames(styles.PreviewDeviceButton, previewDevice === 'mobile' && styles.active)}
+          className={classNames(
+            styles.PreviewDeviceButton,
+            previewDevice === 'mobile' && styles.active,
+          )}
           id="preview-content-mobile-button"
           onClick={() => setPreviewDevice('mobile')}
           to="javascript:void(0);"
@@ -40,7 +46,7 @@ const PreviewControlBar = () => {
       </div>
 
       <div>
-        <SendTestEmailButton/>
+        <SendTestEmailButton />
       </div>
     </div>
   );

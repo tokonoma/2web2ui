@@ -1,17 +1,18 @@
 import * as billingInfo from '../accountBillingInfo';
+import _ from 'lodash';
 
 describe('Selector: current plan', () => {
   let state;
 
   beforeEach(() => {
     state = {
-      account: { subscription: { code: 'qwe' }},
+      account: { subscription: { code: 'qwe' } },
       billing: {
         plans: [
           { status: 'public', code: '123' },
-          { status: 'private', code: 'qwe' }
-        ]
-      }
+          { status: 'private', code: 'qwe' },
+        ],
+      },
     };
   });
 
@@ -30,15 +31,15 @@ describe('Selector: can update billing info', () => {
 
   beforeEach(() => {
     state = {
-      account: { subscription: { code: 'paid' }, billing: {}},
+      account: { subscription: { code: 'paid' }, billing: {} },
       billing: {
         plans: [
           { status: 'public', code: '123' },
           { status: 'public', code: 'paid', isFree: false },
           { status: 'public', code: 'free', isFree: true },
-          { status: 'public', code: 'ccfree1', isFree: true }
-        ]
-      }
+          { status: 'public', code: 'ccfree1', isFree: true },
+        ],
+      },
     };
   });
 
@@ -60,7 +61,7 @@ describe('Selector: can update billing info', () => {
 describe('Selector: can change plan', () => {
   it('should return false with a suspension', () => {
     const state = {
-      account: { isSuspendedForBilling: true }
+      account: { isSuspendedForBilling: true },
     };
 
     expect(billingInfo.canChangePlanSelector(state)).toEqual(false);
@@ -68,7 +69,7 @@ describe('Selector: can change plan', () => {
 
   it('should return false with a pending plan change', () => {
     const state = {
-      account: { pending_subscription: {}}
+      account: { pending_subscription: {} },
     };
 
     expect(billingInfo.canChangePlanSelector(state)).toEqual(false);
@@ -78,9 +79,9 @@ describe('Selector: can change plan', () => {
     const state = {
       account: {
         subscription: {
-          custom: true
-        }
-      }
+          custom: true,
+        },
+      },
     };
 
     expect(billingInfo.canChangePlanSelector(state)).toEqual(false);
@@ -91,7 +92,7 @@ describe('currentPlanCodeSelector: can select plan code', () => {
   let state;
   beforeEach(() => {
     state = {
-      account: { subscription: { code: 'qwe' }}
+      account: { subscription: { code: 'qwe' } },
     };
   });
 
@@ -101,16 +102,15 @@ describe('currentPlanCodeSelector: can select plan code', () => {
 });
 
 describe('selectBillingInfo', () => {
-
   it('returns the combined billing info state', () => {
     const state = {
-      account: { subscription: { code: 'qwe' }, billing: {}},
+      account: { subscription: { code: 'qwe' }, billing: {} },
       billing: {
         plans: [
           { status: 'public', code: '123' },
-          { status: 'public', code: 'qwe', isFree: false }
-        ]
-      }
+          { status: 'public', code: 'qwe', isFree: false },
+        ],
+      },
     };
 
     expect(Object.keys(billingInfo.selectBillingInfo(state))).toEqual([
@@ -120,10 +120,9 @@ describe('selectBillingInfo', () => {
       'currentPlan',
       'onZuoraPlan',
       'plans',
-      'isAWSAccount'
+      'isAWSAccount',
     ]);
   });
-
 });
 
 describe('canPurchaseIps', () => {
@@ -132,14 +131,14 @@ describe('canPurchaseIps', () => {
     state = {
       account: {
         subscription: { code: 'paid1' },
-        billing: {}
+        billing: {},
       },
       billing: {
         plans: [
           { status: 'public', code: '123', isFree: true },
-          { status: 'public', code: 'paid1', isFree: false, canPurchaseIps: true }
-        ]
-      }
+          { status: 'public', code: 'paid1', isFree: false, canPurchaseIps: true },
+        ],
+      },
     };
   });
 
@@ -165,10 +164,11 @@ describe('plan selector', () => {
   beforeEach(() => {
     state = {
       account: {
-        subscription: { self_serve: true },
-        billing: {}
+        subscription: {},
+        billing: {},
       },
       billing: {
+        subscription: { type: 'active' },
         plans: [
           { code: 'pub', status: 'public' },
           { code: 'pub-free', status: 'public', tier: 'test', isFree: true },
@@ -178,41 +178,49 @@ describe('plan selector', () => {
           { code: 'sec-aws', status: 'secret', awsMarketplace: true },
           { code: 'starter', status: 'public', tier: 'starter' },
           { code: 'premier', status: 'public', tier: 'premier' },
-          { code: 'free500-0419', status: 'public', isFree: true }
-        ]
-      }
+          { code: 'free500-0419', status: 'public', isFree: true },
+        ],
+      },
     };
   });
 
   describe('selectAvailablePlans', () => {
     it('should return active plans', () => {
-      expect(billingInfo.selectAvailablePlans(state)).toMatchSnapshot();
+      const plans = billingInfo.selectAvailablePlans(state);
+      expect(_.every(plans, ({ awsMarketplace }) => !awsMarketplace)).toBeTruthy();
     });
 
     it('should return active paid plans', () => {
-      state.account.subscription.self_serve = false;
-      expect(billingInfo.selectAvailablePlans(state)).toMatchSnapshot();
+      state.billing.subscription.type = 'manual';
+      const plans = billingInfo.selectAvailablePlans(state);
+      expect(_.every(plans, ({ isFree }) => !isFree)).toBeTruthy();
     });
 
     it('should return active AWS plans', () => {
       state.account.subscription.type = 'aws';
-      expect(billingInfo.selectAvailablePlans(state)).toMatchSnapshot();
+      const plans = billingInfo.selectAvailablePlans(state);
+      expect(_.every(plans, ({ awsMarketplace }) => awsMarketplace)).toBeTruthy();
     });
   });
 
   describe('selectVisiblePlans', () => {
     it('should return public plans', () => {
-      expect(billingInfo.selectVisiblePlans(state)).toMatchSnapshot();
+      const plans = billingInfo.selectVisiblePlans(state);
+      expect(_.every(plans, ({ status }) => status === 'public')).toBeTruthy();
     });
 
     it('should return public paid plans', () => {
-      state.account.subscription.self_serve = false;
-      expect(billingInfo.selectVisiblePlans(state)).toMatchSnapshot();
+      state.billing.subscription.type = 'manual';
+      const plans = billingInfo.selectVisiblePlans(state);
+      expect(_.every(plans, ({ status, isFree }) => !isFree && status === 'public')).toBeTruthy();
     });
 
     it('should return public AWS plans', () => {
       state.account.subscription.type = 'aws';
-      expect(billingInfo.selectVisiblePlans(state)).toMatchSnapshot();
+      const plans = billingInfo.selectVisiblePlans(state);
+      expect(
+        _.every(plans, ({ status, awsMarketplace }) => status === 'public' && awsMarketplace),
+      ).toBeTruthy();
     });
   });
 
@@ -233,11 +241,11 @@ describe('plan selector', () => {
           rvUsage: {
             recipient_validation: {
               month: {
-                used: 999
-              }
-            }
-          }
-        }
+                used: 999,
+              },
+            },
+          },
+        },
       };
 
       expect(billingInfo.selectMonthlyRecipientValidationUsage(state)).toEqual(999);

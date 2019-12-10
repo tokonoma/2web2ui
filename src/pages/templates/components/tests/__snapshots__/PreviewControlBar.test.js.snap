@@ -3,6 +3,7 @@
 exports[`PreviewControlBar renders control bar 1`] = `
 <div
   className="PreviewControlBar"
+  data-id="preview-contol-bar"
 >
   <div
     className="PreviewDeviceToggle"

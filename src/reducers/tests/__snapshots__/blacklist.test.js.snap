@@ -1,0 +1,77 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BlackList Reducer list incidents fail 1`] = `
+Object {
+  "incidents": Array [],
+  "incidentsError": Object {
+    "errors": Array [
+      Object {
+        "message": "Some error occurred",
+      },
+    ],
+  },
+  "incidentsPending": false,
+  "monitors": Array [],
+  "monitorsPending": false,
+}
+`;
+
+exports[`BlackList Reducer list incidents pending 1`] = `
+Object {
+  "incidents": Array [],
+  "incidentsError": null,
+  "incidentsPending": true,
+  "monitors": Array [],
+  "monitorsPending": false,
+}
+`;
+
+exports[`BlackList Reducer list incidents success 1`] = `
+Object {
+  "incidents": Object {
+    "fakeData": true,
+  },
+  "incidentsError": null,
+  "incidentsPending": false,
+  "monitors": Array [],
+  "monitorsPending": false,
+}
+`;
+
+exports[`BlackList Reducer list monitors fail 1`] = `
+Object {
+  "incidents": Array [],
+  "incidentsPending": false,
+  "monitors": Array [],
+  "monitorsError": Object {
+    "errors": Array [
+      Object {
+        "message": "Some error occurred",
+      },
+    ],
+  },
+  "monitorsPending": false,
+}
+`;
+
+exports[`BlackList Reducer list monitors pending 1`] = `
+Object {
+  "incidents": Array [],
+  "incidentsPending": false,
+  "monitors": Array [],
+  "monitorsError": null,
+  "monitorsPending": true,
+}
+`;
+
+exports[`BlackList Reducer list monitors success 1`] = `
+Object {
+  "incidents": Array [],
+  "incidentsPending": false,
+  "monitors": Object {
+    "fakeData": true,
+  },
+  "monitorsError": null,
+  "monitorsPending": false,
+}
+`;
