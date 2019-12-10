@@ -8,6 +8,7 @@ import { ApiErrorBanner, Loading } from 'src/components';
 import { listMonitors, listIncidents } from 'src/actions/blacklist';
 import { selectIncidentsList } from 'src/selectors/blacklist';
 import IncidentsCollection from './components/IncidentsCollection';
+import styles from './IncidentsPage.module.scss';
 
 export const IncidentsPage = props => {
   const { loading, error, listMonitors, listIncidents, monitors, incidents } = props;
@@ -50,13 +51,22 @@ export const IncidentsPage = props => {
         show: monitors.length === 0,
         title: 'Blacklist Reports',
         image: Users,
-        content: <p>Lorem Ipsum</p>,
+        content: (
+          <p>
+            Monitor blacklists for your domains and IPs so you know when your deliverability will be
+            affected.
+          </p>
+        ),
         primaryAction: { content: 'Add to Watch List', to: '/blacklist', component: Link },
       }}
       title="Blacklist Incidents"
       primaryAction={{ content: 'View Watch List', to: '/blacklist', component: Link }}
     >
       <div data-id={'incidents-table'}>
+        <div className={styles.Description}>
+          Monitor blacklists for your domains and IPs so you know when your deliverability will be
+          affected.
+        </div>
         <IncidentsCollection incidents={incidents} />
       </div>
     </Page>
