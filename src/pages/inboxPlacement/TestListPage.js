@@ -102,11 +102,6 @@ const FilterSortCollectionRow = ({
   />,
 ];
 
-const normalizeDateRange = ({ from, to }) => ({
-  from,
-  to,
-});
-
 const now = Date.now();
 
 const whitelistFilters = {
@@ -120,7 +115,6 @@ const whitelistFilters = {
       const momentTo = moment.utc(to);
       return momentFrom.isValid() && momentTo.isValid() && momentFrom.isBefore(momentTo);
     },
-    normalize: normalizeDateRange,
   },
   range: {
     defaultValue: '30days',
@@ -128,7 +122,19 @@ const whitelistFilters = {
     validate: range => RELATIVE_DATE_OPTIONS.includes(range),
   },
   tags: {
-    defaultValue: [],
+    defaultValue: {
+      from_domains: '',
+      mailbox_providers: '',
+      regions: '',
+      sending_ips: '',
+    },
+    normalize: val =>
+      Object.keys(val).reduce((acc, curr) => {
+        if (val[curr]) {
+          acc[curr] = val[curr];
+        }
+        return acc;
+      }, {}),
   },
 };
 

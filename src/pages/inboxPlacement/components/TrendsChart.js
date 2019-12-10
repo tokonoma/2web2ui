@@ -68,10 +68,18 @@ export const TrendsChart = props => {
   useEffect(() => {
     const {
       dateRange: { from, to },
+      tags,
     } = filters;
+
     getInboxPlacementTrends({
       from: formatApiDate(from),
       to: formatApiDate(to),
+      ...Object.keys(tags).reduce((acc, curr) => {
+        if (tags[curr]) {
+          acc[curr] = tags[curr];
+        }
+        return acc;
+      }, {}),
     });
   }, [getInboxPlacementTrends, filters]);
 
