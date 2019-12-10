@@ -34,11 +34,7 @@ export const IncidentsPage = props => {
   }
 
   if (loading) {
-    return (
-      <div data-id="loading">
-        <Loading />
-      </div>
-    );
+    return <Loading />;
   }
 
   if (monitors.length > 0 && incidents.length === 0) {
