@@ -18,6 +18,11 @@ import withAlertForm from './AlertForm.container';
 // Helpers & Validation
 import { maxLength, required } from 'src/helpers/validation';
 
+const metricOptions = [
+  { value: '', label: 'Select Metric', disabled: true },
+  ...Object.keys(METRICS).map(key => ({ label: METRICS[key], value: key })),
+];
+
 export class AlertForm extends Component {
   resetFormValues = event => {
     const { change, isNewAlert, isDuplicate } = this.props;
@@ -80,14 +85,7 @@ export class AlertForm extends Component {
     const formSpec = getFormSpec(metric);
     const channelsError = this.isNotificationChannelsEmpty(formMeta, formErrors);
 
-    const metricsOptions = [
-      { value: '', label: 'Select Metric', disabled: true },
-      ...Object.keys(METRICS).reduce((options, key) => {
-        return [...options, { label: METRICS[key], value: key }];
-      }, []),
-    ];
-
-    const visibleMetricOptions = metricsOptions.filter(option => {
+    const visibleMetricOptions = metricOptions.filter(option => {
       if (isNewAlert && option.value === 'injection_count' && !allowInjectionAlerts) {
         return false;
       }
