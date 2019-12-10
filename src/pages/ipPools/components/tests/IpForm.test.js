@@ -1,124 +1,132 @@
-import React from 'react';
 import { shallow } from 'enzyme';
+import React from 'react';
 import { IpForm } from '../IpForm';
+import * as constants from '../../constants';
 
-describe('Edit IP form', () => {
-  const subject = props => {
-    const defaultProps = {
+describe('IP Form tests', () => {
+  let props;
+  let wrapper;
+
+  beforeEach(() => {
+    constants.IP_WARMUP_STAGES = [
+      { name: 'Stage 1', id: 1, volume: 200 },
+      { name: 'Stage 2', id: 2, volume: 500 },
+      { name: 'Stage 3', id: 3, volume: 1000 }
+    ];
+
+    props = {
       handleSubmit: jest.fn(),
       onSubmit: jest.fn(),
-      submit: jest.fn(),
       submitting: false,
       ip: {
-        hostname: 'abcd.com',
+        hostname: 'abcd.com'
       },
       pools: [],
       pool: null,
+      change: jest.fn(),
       isAutoWarmupEnabled: true,
+      submit: jest.fn()
     };
-    const mergedProps = Object.assign({}, defaultProps, props);
 
-    return shallow(<IpForm {...mergedProps} />);
-  };
-
-  it('disables form submission and interaction when submitting', () => {
-    const wrapper = subject({ submitting: true });
-
-    expect(wrapper.find('Button')).toHaveProp('disabled', true);
-    wrapper.find('Field').forEach(el => {
-      expect(el).toHaveProp('disabled', true);
-    });
+    wrapper = shallow(<IpForm {...props} />);
   });
 
-  it('renders the IP hostname', () => {
-    const wrapper = subject({ ip: { hostname: 'my-mock-hostname.com' } });
-
-    expect(wrapper).toHaveTextContent('my-mock-hostname.com');
+  it('should render form', () => {
+    expect(wrapper).toMatchSnapshot();
   });
 
-  it('renders the "Engagement Based IP Warmup" section', () => {
-    const wrapper = subject();
-
-    expect(wrapper).toHaveTextContent('Engagement Based IP Warmup');
+  it('disables field when submitting', () => {
+    wrapper.setProps({ submitting: true });
+    expect(wrapper.find('Field[name="ip_pool"]').prop('disabled')).toBe(true);
   });
 
-  it('renders the button content as "Saving" while the form is submitting', () => {
-    const wrapper = subject({ submitting: true });
-
-    expect(wrapper.find('Button')).toHaveTextContent('Saving');
+  it('changes button texts to saving while submitting', () => {
+    wrapper.setProps({ submitting: true });
+    expect(wrapper.find('Button').shallow().text()).toEqual('Saving');
   });
 
-  it('renders the button content as "Update Sending IP" while the form is not submitting', () => {
-    const wrapper = subject();
-
-    expect(wrapper.find('Button')).toHaveTextContent('Update Sending IP');
-  });
-
-  it('submits passed in data when the <form> is submitted', () => {
-    const mockHandleSubmit = jest.fn();
-    const wrapper = subject({ handleSubmit: mockHandleSubmit });
-    const formData = { ip_pool: 'abc', auto_warmup_enabled: true };
-
+  it('invokes onSubmit on submit button click', () => {
+    const formData = { ip_pool: 'abc', auto_warmup_enabled: true, auto_warmup_stage: 1 };
     wrapper.find('form').simulate('submit', formData);
-
-    expect(mockHandleSubmit).toHaveBeenCalledWith(formData);
+    expect(props.handleSubmit).toHaveBeenCalledWith(formData);
   });
 
-  it('renders "Auto IP Warmup" with "true" checked when auto warmup is enabled', () => {
-    const wrapper = subject({ isAutoWarmupEnabled: true });
-
-    expect(wrapper.find('[name="auto_warmup_enabled"]')).toHaveProp('value', 'true');
+  it('disables submit button when saving', () => {
+    wrapper.setProps({ submitting: true });
+    expect(wrapper.find('Button').prop('disabled')).toBe(true);
   });
 
-  it('renders "Auto IP Warmup" with "false" checked when auto warmup is not enabled', () => {
-    const wrapper = subject({ isAutoWarmupEnabled: false });
-
-    expect(wrapper.find('[name="auto_warmup_enabled"]')).toHaveProp('value', 'false');
+  it('changes submit button text when saving', () => {
+    wrapper.setProps({ submitting: true });
+    expect(wrapper.find('Button').shallow().text()).toEqual('Saving');
   });
 
-  it('renders the "Warmup Stage" <select> when auto IP warmup is enabled', () => {
-    const wrapper = subject({ isAutoWarmupEnabled: true });
-
-    expect(wrapper).toHaveTextContent('Warmup Stage');
-  });
-
-  it('does not render the "Warmup Stage" <select> when auto IP warmup is not enabled', () => {
-    const wrapper = subject({ isAutoWarmupEnabled: false });
-
-    expect(wrapper).not.toHaveTextContent('Warmup Stage');
-  });
-
-  it('opens the confirmation modal when clicking the "Update Sending IP" button when the state of auto warmup enabling is changed from its initial state', () => {
-    let wrapper = subject({
-      isAutoWarmupDirty: true,
-      isAutoWarmupEnabled: true,
-      ip: { auto_warmup_enabled: false },
+  describe('auto_warmup_enabled', () => {
+    it('shows confirmation modal on submit to enable ip auto warmup', () => {
+      wrapper.setProps({ isAutoWarmupEnabled: true });
+      wrapper.find('Button').simulate('click');
+      expect(wrapper.find('ConfirmationModal')).toMatchSnapshot();
     });
 
-    wrapper.find('Button').simulate('click');
-
-    expect(wrapper.find('ConfirmationModal')).toHaveProp('open', true);
-    expect(wrapper.find('ConfirmationModal')).toHaveTextContent(
-      'Are you sure you want to enable Auto IP Warmup?',
-    );
-
-    wrapper = subject({
-      isAutoWarmupDirty: true,
-      isAutoWarmupEnabled: false,
-      ip: { auto_warmup_enabled: true },
+    it('shows confirmation modal on submit to disable ip auto warmup', () => {
+      wrapper.setProps({ ip: { auto_warmup_enabled: true }, isAutoWarmupEnabled: false });
+      wrapper.find('Button').simulate('click');
+      expect(wrapper.find('ConfirmationModal')).toMatchSnapshot();
     });
 
-    wrapper.find('Button').simulate('click');
+    it('invokes submit form upon enabling confirmed', () => {
+      wrapper.setProps({ isAutoWarmupEnabled: true, formValues: { auto_warmup_enabled: true }});
+      wrapper.setState({ confirmationModal: true });
+      wrapper.find('ConfirmationModal').prop('onConfirm')();
+      expect(props.submit).toHaveBeenCalledWith('ipForm');
+    });
 
-    expect(wrapper).toHaveTextContent('Are you sure you want to disable Auto IP Warmup?');
-    expect(wrapper.find('ConfirmationModal')).toHaveProp('open', true);
+    it('invokes submit form upon disabling confirmed', () => {
+      wrapper.setProps({ isAutoWarmupEnabled: false, formValues: { auto_warmup_enabled: false }});
+      wrapper.setState({ confirmationModal: true });
+      wrapper.find('ConfirmationModal').prop('onConfirm')();
+      expect(props.submit).toHaveBeenCalledWith('ipForm');
+    });
+
+    it('does not submit form if modal is cancelled', () => {
+      wrapper.setProps({ isAutoWarmupEnabled: false, formValues: { auto_warmup_enabled: false }});
+      wrapper.setState({ confirmationModal: true });
+      wrapper.find('ConfirmationModal').prop('onCancel')();
+      expect(props.submit).not.toHaveBeenCalled();
+    });
   });
 
-  it('does not open the confirmation modal when the state of auto warmup enabling remains unchanged', () => {
-    const wrapper = subject({ isAutoWarmupEnabled: true, ip: { auto_warmup_enabled: true } });
+  describe('auto_warmup_stage', () => {
+    let componentSelector;
+    beforeEach(() => {
+      componentSelector = 'Field[name="auto_warmup_stage"]';
+    });
 
-    wrapper.find('Button').simulate('click');
+    it('renders auto_warmup_stage when ip warmup is enabled', () => {
+      wrapper.setProps({ isAutoWarmupEnabled: true });
+      expect(wrapper.find(componentSelector)).toExist();
+    });
 
-    expect(wrapper.find('ConfirmationModal')).toHaveProp('open', false);
+    it('does not render when ip warmup is not enabled', () => {
+      wrapper.setProps({ isAutoWarmupEnabled: false });
+      expect(wrapper.find(componentSelector)).not.toExist();
+    });
+
+    it('disables stages beyond current stage', () => {
+      wrapper.setProps({ isAutoWarmupEnabled: true, ip: { auto_warmup_stage: 2 }});
+      expect(wrapper.find(componentSelector).prop('options')).toMatchSnapshot();
+    });
+
+    it('makes only stage 1 selectable from options upon enabling', () => {
+      wrapper.setProps({ isAutoWarmupEnabled: true });
+      const options = wrapper.find(componentSelector).prop('options');
+      expect(options.map((option) => option.disabled)).toEqual([false, true, true]);
+    });
+
+    it('casts stage to integer', () => {
+      wrapper.setProps({ isAutoWarmupEnabled: true });
+      expect(wrapper.find(componentSelector).prop('parse')('1')).toEqual(1);
+    });
   });
+
 });
