@@ -45,7 +45,7 @@ describe('Edit IP form', () => {
   it('renders the button content as "Saving" while the form is submitting', () => {
     const wrapper = subject({ submitting: true });
 
-    expect(wrapper).toHaveTextContent('Saving');
+    expect(wrapper.find('Button')).toHaveTextContent('Saving');
   });
 
   it('renders the button content as "Update Sending IP" while the form is not submitting', () => {
