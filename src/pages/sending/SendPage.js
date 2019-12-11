@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Page, Panel } from '@sparkpost/matchbox';
 import { reduxForm, Field } from 'redux-form';
 import { connect } from 'react-redux';
@@ -12,9 +12,13 @@ import {
 import { getRecipientList } from 'src/actions/recipientLists';
 import { sendEmail } from 'src/actions/templates';
 import { required } from 'src/helpers/validation';
+import Fireworks from './components/Fireworks';
 import ThatWasEasyButton from 'src/components/thatWasEasyButton/ThatWasEasyButton';
 
 const SendPage = ({ getRecipientList, sendEmail, handleSubmit, loading }) => {
+  /* eslint-disable no-unused-vars */
+  const [hasFireworks, setHasFireworks] = useState(true);
+  /* eslint-enable no-unused-vars */
   const onSubmit = ({ recipientList, template, campaignId, ippool }) => {
     const { id: ipPool } = ippool;
     const { id: rlID } = recipientList;
@@ -26,6 +30,8 @@ const SendPage = ({ getRecipientList, sendEmail, handleSubmit, loading }) => {
 
   return (
     <Page title="Send an Email">
+      {hasFireworks && <Fireworks size="400" repetitions={2} />}
+
       <form onSubmit={handleSubmit(onSubmit)}>
         <Panel>
           <Panel.Section>
