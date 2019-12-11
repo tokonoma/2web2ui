@@ -36,7 +36,8 @@ export class AlertForm extends Component {
     defaultFieldValues.forEach(({ fieldName, fieldValue }) => {
       change(fieldName, fieldValue);
     });
-    if (isNewAlert && !isDuplicate) {
+
+    if (defaultRecommendedValue && isNewAlert && !isDuplicate) {
       change('value', defaultRecommendedValue);
     }
   };
