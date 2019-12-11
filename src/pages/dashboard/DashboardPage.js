@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Page } from '@sparkpost/matchbox';
+import { Page, Button } from '@sparkpost/matchbox';
 import { UsageReport } from 'src/components';
 import { AccessControl } from 'src/components/auth';
 import Tutorial from './components/Tutorial';
@@ -13,8 +13,13 @@ import { hasGrants } from 'src/helpers/conditions';
 import { isAccountUiOptionSet, getAccountUiOptionValue } from 'src/helpers/conditions/account';
 /* actions */
 import { setAccountOption } from 'src/actions/account';
+import { DraggableModal } from '../../components/draggableModal/DraggableModal';
 
 export class DashboardPage extends Component {
+  state = {
+    modal1: false,
+    modal2: false,
+  };
   displayGuideAndReport = () => {
     const usageReport = <UsageReport />;
     const gettingStartedGuide = <GettingStartedGuide {...this.props} />;
@@ -60,6 +65,18 @@ export class DashboardPage extends Component {
         {currentUser.email_verified === false && (
           <VerifyEmailBanner verifying={currentUser.verifyingEmail} />
         )}
+        <Button onClick={() => this.setState({ modal1: !this.state.modal1 })}>Modal1</Button>
+        <Button onClick={() => this.setState({ modal2: !this.state.modal2 })}>Modal2</Button>
+
+        <DraggableModal
+          open={this.state.modal1}
+          handleToggle={() => this.setState({ modal1: false })}
+        />
+        <DraggableModal
+          open={this.state.modal2}
+          handleToggle={() => this.setState({ modal2: false })}
+        />
+
         {isMessageOnboardingSet && <SignupModal />}
         <FreePlanWarningBanner
           account={account}
