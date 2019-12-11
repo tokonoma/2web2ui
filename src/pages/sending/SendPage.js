@@ -20,7 +20,7 @@ const SendPage = ({ getRecipientList, sendEmail, handleSubmit, loading }) => {
     const { id: rlID } = recipientList;
     const { id: templateID } = template;
     return getRecipientList(rlID, { show_recipients: true }).then(({ recipients }) => {
-      //return sendEmail({ id: templateId, emails: recipients, campaignId, ipPool: });
+      return sendEmail({ id: templateID, emails: recipients, campaignId, ipPool: ipPool });
     });
   };
 
