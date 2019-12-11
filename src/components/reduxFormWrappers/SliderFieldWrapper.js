@@ -17,8 +17,8 @@ const SliderFieldWrapper = ({
   ticks,
 }) => {
   const cleanAndClamp = React.useCallback(
-    value => {
-      const roundedValue = roundToPlaces(value || min, precision);
+    rawValue => {
+      const roundedValue = roundToPlaces(rawValue || min, precision);
       return clamp(roundedValue, min, max);
     },
     [max, min, precision],
