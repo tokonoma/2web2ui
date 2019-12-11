@@ -3,13 +3,27 @@ import classNames from 'classnames';
 import styles from './ThatWasEasyButton.module.scss';
 
 const ThatWasEasyButton = props => {
-  const { onClick, className } = props;
+  const { onClick, className, isDisabled, isLoading } = props;
 
   return (
     <div className={classNames(styles.ThatWasEasyButton, className)}>
-      <button onClick={onClick} className={styles.ThatWasEasyButtonButton} type="submit">
+      <button
+        onClick={onClick}
+        className={classNames(
+          styles.ThatWasEasyButtonButton,
+          isDisabled && styles.isDisabled,
+          isLoading && styles.isLoading,
+        )}
+        type="submit"
+      >
         <span className={styles.ThatWasEasyButtonHighlight} role="presentation"></span>
-        <span className={styles.ThatWasEasyButtonContent}>easy</span>
+        {isLoading ? (
+          <div className={styles.ThatWasEasyButtonLoader} aria-label="loading">
+            <span className={styles.ThatWasEasyButtonLoaderSub}></span>
+          </div>
+        ) : (
+          <span className={styles.ThatWasEasyButtonContent}>easy</span>
+        )}
       </button>
     </div>
   );
