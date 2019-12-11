@@ -47,6 +47,7 @@ import webhooks from './webhooks';
 import websiteAuth from './websiteAuth';
 import inboxPlacement from './inboxPlacement';
 import ingestBatchEvents from './ingestBatchEvents';
+import delegatedDomains from './delegatedDomains';
 
 const appReducer = combineReducers({
   abTesting,
@@ -96,6 +97,7 @@ const appReducer = combineReducers({
   users,
   webhooks,
   websiteAuth,
+  delegatedDomains,
 });
 
 /**
