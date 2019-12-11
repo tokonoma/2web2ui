@@ -1,10 +1,11 @@
 import React from 'react';
+import { TextField } from '@sparkpost/matchbox';
 
 const SingleDatePicker = ({ onChange }) => (
   <div style={{ marginTop: 15 }}>
     <label htmlFor="date">Send Date</label>
     <br />
-    <input id="date" style={{ lineHeight: '1.5rem' }} onChange={onChange} type="datetime-local" />
+    <TextField id="date" style={{ resize: 'none' }} onChange={onChange} type="datetime-local" />
   </div>
 );
 

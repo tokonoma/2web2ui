@@ -99,7 +99,7 @@ const SendPage = ({ sendEmail, handleSubmit, loading, showAlert, sendLater }) =>
                 helpText={'Uses default IP pool if none selected'}
               />
             </div>
-            <div style={{ marginTop: 20 }}>
+            <div style={{ marginTop: 20, maxWidth: 600 }}>
               <Field
                 name="sendLater"
                 label="Send at a later time?"
