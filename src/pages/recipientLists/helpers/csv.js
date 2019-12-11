@@ -1,6 +1,27 @@
 import Papa from 'papaparse';
+import _ from 'lodash';
 
 // Adapted minimally from parseRecipientList() in webui/src/app/recipients/recipients-controller.js
+
+const renameJsonKeys = field => {
+  Object.entries(field).forEach(([key, value]) => {
+    delete field[key];
+    field[key.split(':').pop()] = value;
+  });
+  return field;
+};
+
+const buildJsonKeys = row => {
+  const newFields = {};
+  newFields.substitution_data = renameJsonKeys(
+    _.pickBy(row, (val, key) => _.startsWith(key, 'substitution_data')),
+  );
+  newFields.metadata = renameJsonKeys(_.pickBy(row, (val, key) => _.startsWith(key, 'metadata')));
+  newFields.tags = _.compact(_.values(_.pickBy(row, (val, key) => _.startsWith(key, 'tags'))));
+
+  return newFields;
+};
+
 const parseRawRecords = (results, resolve, reject) => {
   const mapped = [];
   const errors = [];
@@ -45,6 +66,20 @@ const parseRawRecords = (results, resolve, reject) => {
       out.address.name = datum.name;
     }
 
+    const generatedData = buildJsonKeys(datum);
+
+    if (generatedData.substitution_data) {
+      out.substitution_data = generatedData.substitution_data;
+    }
+
+    if (generatedData.metadata) {
+      out.metadata = generatedData.metadata;
+    }
+
+    if (generatedData.substitution_data) {
+      out.tags = generatedData.tags;
+    }
+
     if (preErrorCount === errors.length) {
       mapped.push(out);
     }
@@ -57,13 +92,14 @@ const parseRawRecords = (results, resolve, reject) => {
   return reject(errors);
 };
 
-const parseRecipientListCsv = (file) => new Promise((resolve, reject) => {
-  Papa.parse(file, {
-    header: true,
-    skipEmptyLines: true,
-    complete: (result) => parseRawRecords(result, resolve, reject),
-    error: () => reject(['Unable to read your file'])
+const parseRecipientListCsv = file =>
+  new Promise((resolve, reject) => {
+    Papa.parse(file, {
+      header: true,
+      skipEmptyLines: true,
+      complete: result => parseRawRecords(result, resolve, reject),
+      error: () => reject(['Unable to read your file']),
+    });
   });
-});
 
 export default parseRecipientListCsv;
