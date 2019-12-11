@@ -6,6 +6,7 @@ import EventPage from './messageEvents/EventPage';
 import MessageEventsPage from './messageEvents/MessageEventsPage';
 import RejectionPage from './rejection/RejectionPage';
 import SummaryPage from './summary/SummaryPage';
+import HackathonPage from './hackathon/HackathonPage';
 
 export default {
   AcceptedPage,
@@ -15,5 +16,6 @@ export default {
   EventPage,
   MessageEventsPage,
   RejectionPage,
-  SummaryPage
+  SummaryPage,
+  HackathonPage,
 };
