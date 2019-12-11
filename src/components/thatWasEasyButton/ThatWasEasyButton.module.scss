@@ -1,0 +1,74 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+$easy-peasy-red: rgb(210, 75, 55);
+$easy-peasy-red-light: scale-color($easy-peasy-red, $lightness: 10%);
+$easy-peasy-red-dark: scale-color($easy-peasy-red, $lightness: -20%);
+$easy-peasy-silver: rgb(175, 175, 175);
+$easy-peasy-silver-dark: scale-color($easy-peasy-silver, $lightness: -33%);
+$element-size: 10rem;
+$base-padding: 0.7rem;
+
+.ThatWasEasyButton {
+  width: $element-size;
+  height: $element-size;
+  background: radial-gradient(
+    circle at center,
+    $easy-peasy-silver,
+    scale-color($easy-peasy-silver, $lightness: 50%)
+  );
+  padding: $base-padding;
+  border: 0.125rem solid rgba($easy-peasy-silver, 0.125);
+  box-shadow: 0 ($base-padding / 2) $base-padding 0 rgba(#000, 0.1);
+}
+
+.ThatWasEasyButton,
+.ThatWasEasyButtonButton {
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ThatWasEasyButtonButton {
+  position: relative;
+  background-color: $easy-peasy-red;
+  border: 0;
+  outline: none;
+  box-shadow: inset 0 -#{$base-padding / 1.5} 0 0 $easy-peasy-red-dark;
+  height: 100%;
+  width: 100%;
+  transition: background-color 0.33s ease-in-out, box-shadow 0.1s linear, transform 0.1s linear;
+
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: $easy-peasy-red-light;
+  }
+
+  &:active {
+    box-shadow: inset 0 -#{$base-padding / 5} 0 0 $easy-peasy-red-dark;
+    transform: translateY($base-padding / 5);
+  }
+}
+
+.ThatWasEasyButtonContent {
+  color: #fff;
+  font-weight: 700;
+  letter-spacing: 0.015rem;
+  font-size: 3.5em;
+  font-family: 'Helvetica';
+  text-shadow: 0 0 0.75rem $easy-peasy-red-dark;
+  transform: rotate(-12deg) translateY(-5px);
+}
+
+.ThatWasEasyButtonHighlight {
+  display: block;
+  background: linear-gradient(15deg, rgba(#fff, 0.15), transparent);
+  position: absolute;
+  top: $base-padding / 2;
+  left: $base-padding;
+  width: 70%;
+  height: 70%;
+  border-radius: 50%;
+  z-index: 5;
+}
