@@ -20,9 +20,18 @@ export default [
     icon: Home,
   },
   {
-    label: 'EZSend',
-    to: '/send',
+    label: 'Transmissions',
     icon: Email,
+    children: [
+      {
+        label: 'EZSend',
+        to: '/send',
+      },
+      {
+        label: 'Outbox',
+        to: '/outbox',
+      },
+    ],
   },
   {
     label: 'Signals Analytics',

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Page, Panel, Expandable, UnstyledLink } from '@sparkpost/matchbox';
+import { Page, Panel, Expandable, UnstyledLink, Button } from '@sparkpost/matchbox';
 import { Code } from '@sparkpost/matchbox-icons';
 import { reduxForm, Field, formValueSelector } from 'redux-form';
 import { connect } from 'react-redux';
@@ -20,7 +20,7 @@ import ThatWasEasyButton from 'src/components/thatWasEasyButton/ThatWasEasyButto
 import SingleDatePicker from './components/SingleDatePicker';
 import { showAlert } from 'src/actions/globalAlert';
 
-const SendPage = ({ sendEmail, handleSubmit, loading, showAlert, sendLater }) => {
+const SendPage = ({ sendEmail, handleSubmit, loading, showAlert, sendLater, doesntLikeFun }) => {
   const [start_time, setStartTime] = useState(null);
   const [hasFireworks, setHasFireworks] = useState(false);
   const [requestBody, setRequestBody] = useState();
@@ -41,26 +41,61 @@ const SendPage = ({ sendEmail, handleSubmit, loading, showAlert, sendLater }) =>
     if (ippool && ippool.id) {
       options.ip_pool = ippool.id;
     }
-    return sendEmail({ id: templateID, recipients, campaignId, options }).then(() => {
-      setRequestBody({
+    return sendEmail({ id: templateID, recipients, campaignId, options }).then(res => {
+      const request = {
         campaign_id: campaignId,
         content: { template_id: templateID },
         options,
         recipients,
-      });
-      setHasFireworks(true);
+      };
+      setRequestBody(request);
+
+      const outbox = localStorage.getItem('outbox');
+      const fullOutbox = outbox ? JSON.parse(outbox) : [];
+      localStorage.setItem(
+        'outbox',
+        JSON.stringify(
+          fullOutbox.concat([
+            {
+              id: res.id,
+              sendTime: start_time || new Date(),
+              template,
+              recipientList,
+              ipPool: ippool,
+            },
+          ]),
+        ),
+      );
+
+      if (!doesntLikeFun) {
+        setHasFireworks(true);
+      }
       showAlert({
         type: 'success',
-        message: 'EZSent!',
+        message: doesntLikeFun ? 'Sent I guess.' : 'EZSent!',
       });
     });
   };
 
   return (
     <Page title="Send an Email">
-      {hasFireworks && <Fireworks size="400" repetitions={2} />}
+      {hasFireworks && !doesntLikeFun && <Fireworks size="400" repetitions={2} />}
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Panel title="Configuration">
+        <Field
+          name="doesntLikeFun"
+          label="I don't like fun."
+          type="checkbox"
+          component={CheckboxWrapper}
+        />
+        <Panel
+          title="Configuration"
+          style={{
+            backgroundImage:
+              doesntLikeFun &&
+              requestBody &&
+              'url("https://blackxknite.files.wordpress.com/2017/03/lameasaurus.jpg?w=552")',
+          }}
+        >
           <Panel.Section>
             <h6>Basic</h6>
             <div style={{ maxWidth: 600 }}>
@@ -116,7 +151,11 @@ const SendPage = ({ sendEmail, handleSubmit, loading, showAlert, sendLater }) =>
             </div>
           </Panel.Section>
           <Panel.Section>
-            <ThatWasEasyButton style={{ margin: 20 }} isLoading={loading} />
+            {doesntLikeFun ? (
+              <Button type="submit">Boring Send</Button>
+            ) : (
+              <ThatWasEasyButton style={{ margin: 20 }} isLoading={loading} />
+            )}
           </Panel.Section>
         </Panel>
       </form>
@@ -147,6 +186,7 @@ const formOptions = { form: 'SEND_FORM', enableReinitialize: true };
 const MSTP = state => ({
   loading: state.recipientLists.currentLoading || state.templates.sendPending,
   sendLater: formValueSelector('SEND_FORM')(state, 'sendLater'),
+  doesntLikeFun: formValueSelector('SEND_FORM')(state, 'doesntLikeFun'),
 });
 const MDTP = {
   sendEmail,
