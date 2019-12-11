@@ -22,7 +22,6 @@ export class TemplateTypeahead extends Component {
 
   render() {
     const { hasTemplates } = this.props;
-    console.log(this.props.results);
     return (
       <Typeahead
         renderItem={item => <Item id={item.id} />}

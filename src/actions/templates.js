@@ -232,11 +232,7 @@ export function sendPreview({ id, mode, emails, from, subaccountId }) {
   };
 }
 
-export function sendEmail({ id, emails, campaignId, ipPool }) {
-  const recipients = emails.map(({ address }) => ({
-    address: { email: address },
-  }));
-
+export function sendEmail({ id, recipients, campaignId, options }) {
   return dispatch => {
     // const testData = await dispatch(getTestData({ id, mode }));
 
@@ -250,11 +246,9 @@ export function sendEmail({ id, emails, campaignId, ipPool }) {
             content: {
               template_id: id,
             },
-            recipients,
+            recipients: recipients.map(({ return_path, ...recipient }) => recipient),
             campaign_id: campaignId,
-            options: {
-              ip_pool: ipPool,
-            },
+            options,
           },
         },
       }),

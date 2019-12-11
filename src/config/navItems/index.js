@@ -20,7 +20,7 @@ export default [
     icon: Home,
   },
   {
-    label: 'Big Send',
+    label: 'EZSend',
     to: '/send',
     icon: Email,
   },
