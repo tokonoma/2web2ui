@@ -32,9 +32,9 @@ import {
   TfaPage,
   trackingDomains,
   users,
-  webhooks
+  webhooks,
 } from 'src/pages';
-
+import SendPage from 'src/pages/sending/SendPage';
 import LogoutPage from 'src/pages/logout/LogoutPage';
 
 import onboarding from 'src/pages/onboarding';
@@ -48,7 +48,7 @@ import {
   isCustomBilling,
   isEnterprise,
   isSelfServeBilling,
-  isAccountUiOptionSet
+  isAccountUiOptionSet,
 } from 'src/helpers/conditions/account';
 import { isAzure, isHeroku, isSubaccountUser } from 'src/helpers/conditions/user';
 import { configEquals, configFlag } from 'src/helpers/conditions/config';
@@ -61,7 +61,7 @@ import {
   ENABLE_TFA_AUTH_ROUTE,
   SIGN_UP_ROUTE,
   SSO_AUTH_ROUTE,
-  TFA_ROUTE
+  TFA_ROUTE,
 } from 'src/constants';
 //route modules
 import { emailRedirects, emailVerificationRedirect } from './emailRoutes';
@@ -75,50 +75,50 @@ const routes = [
   {
     path: '/',
     public: true,
-    redirect: AUTH_ROUTE
+    redirect: AUTH_ROUTE,
   },
   {
     path: AUTH_ROUTE,
     public: true,
     component: AuthPage,
-    title: 'Log In'
+    title: 'Log In',
   },
   {
     path: TFA_ROUTE,
     public: true,
     component: TfaPage,
-    title: 'Two-factor Authentication'
+    title: 'Two-factor Authentication',
   },
   {
     path: SSO_AUTH_ROUTE,
     public: true,
     component: SsoAuthPage,
-    title: 'SSO Log In'
+    title: 'SSO Log In',
   },
   {
     path: '/sso',
     public: true,
     component: SSOPage,
-    title: 'Single Sign-On'
+    title: 'Single Sign-On',
   },
   {
     path: ENABLE_TFA_AUTH_ROUTE,
     public: true,
     component: EnableTfaPage,
     layout: LargeForm,
-    title: 'Enable TFA'
+    title: 'Enable TFA',
   },
   {
     path: '/register',
     public: true,
     forceLogout: true,
     component: RegisterPage,
-    title: 'Finish Your Registration'
+    title: 'Finish Your Registration',
   },
   {
     path: '/sign-up',
     public: true,
-    redirect: SIGN_UP_ROUTE
+    redirect: SIGN_UP_ROUTE,
   },
   {
     path: SIGN_UP_ROUTE,
@@ -126,21 +126,21 @@ const routes = [
     forceLogout: true,
     component: JoinPage,
     condition: configFlag('featureFlags.has_signup'),
-    title: 'Join'
+    title: 'Join',
   },
   {
     path: '/forgot-password',
     public: true,
     forceLogout: true,
     component: passwordReset.ForgotPasswordPage,
-    title: 'Reset Password'
+    title: 'Reset Password',
   },
   {
     path: '/reset-password/:token',
     public: true,
     forceLogout: true,
     component: passwordReset.ResetPasswordPage,
-    title: 'Choose a New Password'
+    title: 'Choose a New Password',
   },
 
   /**
@@ -156,7 +156,7 @@ const routes = [
     component: DefaultRedirect,
     layout: App,
     condition: () => true, // this route MUST be accessible to all logged-in app users
-    title: 'Loading...'
+    title: 'Loading...',
   },
 
   /**
@@ -172,76 +172,82 @@ const routes = [
     title: 'Dashboard',
     condition: all(
       not(isSubaccountUser),
-      configEquals('splashPage', '/dashboard') // want to hide if not a splash page https://jira.int.messagesystems.com/browse/FAD-6046
+      configEquals('splashPage', '/dashboard'), // want to hide if not a splash page https://jira.int.messagesystems.com/browse/FAD-6046
     ),
     // TODO: implement some kind of blockedRoutes check that runs on every route so we can
     // hide routes based on config, account/user settings, etc. without having to mess
     // around with grants in the web UI keys
-    supportDocSearch: 'started'
+    supportDocSearch: 'started',
+  },
+  {
+    path: '/send',
+    component: SendPage,
+    layout: App,
+    title: 'Send Email',
   },
   {
     path: '/reports',
-    redirect: '/reports/summary'
+    redirect: '/reports/summary',
   },
   {
     path: '/reports/summary',
     component: reports.SummaryPage,
     layout: App,
     title: 'Summary Report',
-    supportDocSearch: 'reporting'
+    supportDocSearch: 'reporting',
   },
   {
     path: '/reports/bounce',
     component: reports.BouncePage,
     layout: App,
     title: 'Bounce Report',
-    supportDocSearch: 'bounce'
+    supportDocSearch: 'bounce',
   },
   {
     path: '/reports/rejections',
     component: reports.RejectionPage,
     layout: App,
     title: 'Rejection Report',
-    supportDocSearch: 'reject'
+    supportDocSearch: 'reject',
   },
   {
     path: '/reports/accepted',
     component: reports.AcceptedPage,
     layout: App,
     title: 'Accepted Report',
-    supportDocSearch: 'accept'
+    supportDocSearch: 'accept',
   },
   {
     path: '/reports/delayed',
     component: reports.DelayPage,
     layout: App,
     title: 'Delayed Report',
-    supportDocSearch: 'delay'
+    supportDocSearch: 'delay',
   },
   {
     path: '/reports/engagement',
     component: reports.EngagementPage,
     layout: App,
     title: 'Engagement Report',
-    supportDocSearch: 'engagement'
+    supportDocSearch: 'engagement',
   },
   {
     path: '/reports/message-events',
     component: reports.MessageEventsPage,
     layout: App,
     title: 'Events Search Report',
-    supportDocSearch: 'event'
+    supportDocSearch: 'event',
   },
   {
     path: '/reports/message-events/details/:messageId/:eventId?',
     component: reports.EventPage,
     layout: App,
     title: 'Message History',
-    supportDocSearch: 'event'
+    supportDocSearch: 'event',
   },
   {
     path: '/signals',
-    redirect: '/signals/health-score'
+    redirect: '/signals/health-score',
   },
   {
     path: '/signals/health-score',
@@ -249,7 +255,7 @@ const routes = [
     condition: hasGrants('signals/manage'),
     layout: App,
     title: 'Signals',
-    supportDocSearch: 'signals'
+    supportDocSearch: 'signals',
   },
   {
     path: '/signals/spam-traps',
@@ -257,7 +263,7 @@ const routes = [
     condition: hasGrants('signals/manage'),
     layout: App,
     title: 'Signals',
-    supportDocSearch: 'signals'
+    supportDocSearch: 'signals',
   },
   {
     path: '/signals/engagement',
@@ -265,7 +271,7 @@ const routes = [
     condition: hasGrants('signals/manage'),
     layout: App,
     title: 'Signals',
-    supportDocSearch: 'signals'
+    supportDocSearch: 'signals',
   },
   {
     path: '/signals/health-score/:facet/:facetId',
@@ -273,7 +279,7 @@ const routes = [
     condition: hasGrants('signals/manage'),
     layout: App,
     title: 'Signals',
-    supportDocSearch: 'signals'
+    supportDocSearch: 'signals',
   },
   {
     path: '/signals/health-scoreV3/:facet/:facetId',
@@ -281,7 +287,7 @@ const routes = [
     condition: isAccountUiOptionSet('allow_health_score_v3'),
     layout: App,
     title: 'Health Score | Signals',
-    supportDocSearch: 'signals'
+    supportDocSearch: 'signals',
   },
   {
     path: '/signals/spam-traps/:facet/:facetId',
@@ -289,7 +295,7 @@ const routes = [
     condition: hasGrants('signals/manage'),
     layout: App,
     title: 'Signals',
-    supportDocSearch: 'signals'
+    supportDocSearch: 'signals',
   },
   {
     path: '/signals/engagement/cohorts/:facet/:facetId',
@@ -297,7 +303,7 @@ const routes = [
     condition: hasGrants('signals/manage'),
     layout: App,
     title: 'Signals',
-    supportDocSearch: 'signals'
+    supportDocSearch: 'signals',
   },
   {
     path: '/signals/engagement/engagement-rate/:facet/:facetId',
@@ -305,7 +311,7 @@ const routes = [
     condition: hasGrants('signals/manage'),
     layout: App,
     title: 'Signals',
-    supportDocSearch: 'signals'
+    supportDocSearch: 'signals',
   },
   {
     path: '/signals/engagement/unsubscribes/:facet/:facetId',
@@ -313,7 +319,7 @@ const routes = [
     condition: hasGrants('signals/manage'),
     layout: App,
     title: 'Signals',
-    supportDocSearch: 'signals'
+    supportDocSearch: 'signals',
   },
   {
     path: '/signals/engagement/complaints/:facet/:facetId',
@@ -321,7 +327,7 @@ const routes = [
     condition: hasGrants('signals/manage'),
     layout: App,
     title: 'Signals',
-    supportDocSearch: 'signals'
+    supportDocSearch: 'signals',
   },
   {
     path: '/signals/integration',
@@ -329,17 +335,17 @@ const routes = [
     condition: hasAccountOptionEnabled('allow_events_ingest'),
     layout: App,
     title: 'Signals | Integration',
-    supportDocSearch: 'signals'
+    supportDocSearch: 'signals',
   },
   {
     path: '/account/security',
-    redirect: '/account/profile'
+    redirect: '/account/profile',
   },
   {
     path: '/account/email-verification/:token',
     component: emailVerification,
     title: 'Verify Your Email',
-    supportDocSearch: 'verification'
+    supportDocSearch: 'verification',
   },
   {
     path: '/account/subaccounts',
@@ -347,7 +353,7 @@ const routes = [
     condition: hasGrants('subaccount/manage', 'api_keys/manage', 'sending_domains/manage'),
     layout: App,
     title: 'Subaccounts',
-    supportDocSearch: 'subaccout'
+    supportDocSearch: 'subaccout',
   },
   {
     path: '/account/subaccounts/create',
@@ -355,7 +361,7 @@ const routes = [
     condition: hasGrants('subaccount/manage', 'api_keys/manage', 'sending_domains/manage'),
     layout: App,
     title: 'New Subaccount',
-    supportDocSearch: 'subaccout'
+    supportDocSearch: 'subaccout',
   },
   {
     path: '/account/subaccounts/:id',
@@ -364,7 +370,7 @@ const routes = [
     layout: App,
     title: 'Subaccount Details',
     exact: false,
-    supportDocSearch: 'subaccout'
+    supportDocSearch: 'subaccout',
   },
   {
     path: '/account/users',
@@ -372,7 +378,7 @@ const routes = [
     condition: hasGrants('users/manage'),
     layout: App,
     title: 'Users',
-    supportDocSearch: 'user'
+    supportDocSearch: 'user',
   },
   {
     path: '/account/users/create',
@@ -380,7 +386,7 @@ const routes = [
     condition: hasGrants('users/manage'),
     layout: App,
     title: 'Invite User',
-    supportDocSearch: 'user'
+    supportDocSearch: 'user',
   },
   {
     path: '/account/users/edit/:id',
@@ -388,7 +394,7 @@ const routes = [
     condition: hasGrants('users/manage'),
     layout: App,
     title: 'Edit User',
-    supportDocSearch: 'user'
+    supportDocSearch: 'user',
   },
   {
     path: '/snippets',
@@ -396,7 +402,7 @@ const routes = [
     condition: hasGrants('templates/view'),
     layout: App,
     title: 'Snippets',
-    supportDocSearch: 'snippet'
+    supportDocSearch: 'snippet',
   },
   {
     path: '/snippets/create',
@@ -404,7 +410,7 @@ const routes = [
     condition: hasGrants('templates/modify'),
     layout: App,
     title: 'New Snippet',
-    supportDocSearch: 'snippet'
+    supportDocSearch: 'snippet',
   },
   {
     path: '/snippets/edit/:id',
@@ -412,7 +418,7 @@ const routes = [
     condition: hasGrants('templates/view'),
     layout: App,
     title: 'Edit Snippet',
-    supportDocSearch: 'snippet'
+    supportDocSearch: 'snippet',
   },
 
   {
@@ -421,7 +427,7 @@ const routes = [
     condition: hasGrants('recipient_lists/manage'),
     layout: App,
     title: 'Recipient Lists',
-    supportDocSearch: 'recipient list'
+    supportDocSearch: 'recipient list',
   },
   {
     path: '/lists/recipient-lists/create',
@@ -429,7 +435,7 @@ const routes = [
     condition: hasGrants('recipient_lists/manage'),
     layout: App,
     title: 'New Recipient List',
-    supportDocSearch: 'recipient list'
+    supportDocSearch: 'recipient list',
   },
   {
     path: '/lists/recipient-lists/edit/:id',
@@ -437,7 +443,7 @@ const routes = [
     condition: hasGrants('recipient_lists/manage'),
     layout: App,
     title: 'Edit Recipient List',
-    supportDocSearch: 'recipient list'
+    supportDocSearch: 'recipient list',
   },
   {
     path: '/lists/suppressions',
@@ -445,7 +451,7 @@ const routes = [
     condition: hasGrants('suppression_lists/manage'),
     layout: App,
     title: 'Suppression List',
-    supportDocSearch: 'suppression list'
+    supportDocSearch: 'suppression list',
   },
   {
     path: '/lists/suppressions/create',
@@ -453,7 +459,7 @@ const routes = [
     condition: hasGrants('suppression_lists/manage'),
     layout: App,
     title: 'New Suppression',
-    supportDocSearch: 'suppression list'
+    supportDocSearch: 'suppression list',
   },
   {
     path: '/webhooks',
@@ -461,7 +467,7 @@ const routes = [
     condition: hasGrants('webhooks/view'),
     layout: App,
     title: 'Webhooks',
-    supportDocSearch: 'webhook'
+    supportDocSearch: 'webhook',
   },
   {
     path: '/webhooks/create',
@@ -469,7 +475,7 @@ const routes = [
     condition: hasGrants('webhooks/modify'),
     layout: App,
     title: 'New Webhook',
-    supportDocSearch: 'webhook'
+    supportDocSearch: 'webhook',
   },
   {
     path: '/webhooks/details/:id',
@@ -478,7 +484,7 @@ const routes = [
     layout: App,
     title: 'Webhook Details',
     exact: false,
-    supportDocSearch: 'webhook'
+    supportDocSearch: 'webhook',
   },
   {
     path: '/account/api-keys',
@@ -486,7 +492,7 @@ const routes = [
     condition: hasGrants('api_keys/manage'),
     layout: App,
     title: 'API Keys',
-    supportDocSearch: 'api key'
+    supportDocSearch: 'api key',
   },
   {
     path: '/account/api-keys/create',
@@ -494,7 +500,7 @@ const routes = [
     condition: hasGrants('api_keys/manage'),
     layout: App,
     title: 'New API Key',
-    supportDocSearch: 'api key'
+    supportDocSearch: 'api key',
   },
   {
     path: '/account/api-keys/edit/:id',
@@ -502,7 +508,7 @@ const routes = [
     condition: hasGrants('api_keys/manage'),
     layout: App,
     title: 'Edit API Key',
-    supportDocSearch: 'api key'
+    supportDocSearch: 'api key',
   },
   {
     path: '/account/api-keys/view/:id',
@@ -510,7 +516,7 @@ const routes = [
     condition: hasGrants('api_keys/manage'),
     layout: App,
     title: 'View API Key',
-    supportDocSearch: 'api key'
+    supportDocSearch: 'api key',
   },
   {
     path: '/account/tracking-domains',
@@ -518,7 +524,7 @@ const routes = [
     condition: hasGrants('tracking_domains/manage'),
     layout: App,
     title: 'Tracking Domains',
-    supportDocSearch: 'tracking domain'
+    supportDocSearch: 'tracking domain',
   },
   {
     path: '/account/tracking-domains/create',
@@ -526,7 +532,7 @@ const routes = [
     condition: hasGrants('tracking_domains/manage'),
     layout: App,
     title: 'New Tracking Domain',
-    supportDocSearch: 'tracking domain'
+    supportDocSearch: 'tracking domain',
   },
   {
     path: '/account/settings',
@@ -534,14 +540,14 @@ const routes = [
     condition: hasGrants('users/manage'),
     layout: App,
     title: 'Account settings',
-    supportDocSearch: 'account settings'
+    supportDocSearch: 'account settings',
   },
   {
     path: '/account/cancel',
     component: ImmediateCancelAccountPage,
     condition: all(hasGrants('account/manage'), not(isEnterprise), not(isHeroku), not(isAzure)),
     layout: App,
-    title: 'Account | Cancellation In Progress'
+    title: 'Account | Cancellation In Progress',
   },
   {
     path: '/account/profile',
@@ -549,7 +555,7 @@ const routes = [
     condition: hasGrants('users/self-manage'),
     layout: App,
     title: 'My Profile',
-    supportDocSearch: 'account profile'
+    supportDocSearch: 'account profile',
   },
   {
     path: '/account/sending-domains',
@@ -557,7 +563,7 @@ const routes = [
     condition: hasGrants('sending_domains/manage'),
     layout: App,
     title: 'Sending Domains',
-    supportDocSearch: 'sending domain'
+    supportDocSearch: 'sending domain',
   },
   {
     path: '/account/sending-domains/create',
@@ -565,7 +571,7 @@ const routes = [
     condition: hasGrants('sending_domains/manage'),
     layout: App,
     title: 'New Sending Domain',
-    supportDocSearch: 'sending domain'
+    supportDocSearch: 'sending domain',
   },
   {
     path: '/account/sending-domains/edit/:id',
@@ -573,7 +579,7 @@ const routes = [
     condition: hasGrants('sending_domains/manage'),
     layout: App,
     title: 'Edit Sending Domain',
-    supportDocSearch: 'sending domain'
+    supportDocSearch: 'sending domain',
   },
   {
     path: '/account/smtp',
@@ -581,7 +587,7 @@ const routes = [
     condition: hasGrants('api_keys/manage'),
     layout: App,
     title: 'SMTP Settings',
-    supportDocSearch: 'smtp'
+    supportDocSearch: 'smtp',
   },
   {
     path: '/account/billing',
@@ -589,19 +595,15 @@ const routes = [
     condition: all(hasGrants('account/manage'), not(isEnterprise), not(isHeroku), not(isAzure)),
     layout: App,
     title: 'Billing',
-    supportDocSearch: 'billing'
+    supportDocSearch: 'billing',
   },
   {
     path: '/account/billing/enable-automatic',
     component: billing.EnableAutomaticBillingPage,
-    condition: all(
-      hasGrants('account/manage'),
-      not(isSelfServeBilling),
-      isCustomBilling
-    ),
+    condition: all(hasGrants('account/manage'), not(isSelfServeBilling), isCustomBilling),
     layout: App,
     title: 'Billing | Enable Automatic Billing',
-    supportDocSearch: 'upgrade account'
+    supportDocSearch: 'upgrade account',
   },
   {
     path: '/account/billing/plan',
@@ -611,11 +613,11 @@ const routes = [
       not(isEnterprise),
       not(isHeroku),
       not(isAzure),
-      not(isCustomBilling)
+      not(isCustomBilling),
     ),
     layout: App,
     title: 'Billing | Change My Plan',
-    supportDocSearch: 'upgrade account'
+    supportDocSearch: 'upgrade account',
   },
   {
     path: '/account/billing/plan/change',
@@ -623,7 +625,7 @@ const routes = [
     condition: all(hasGrants('account/manage'), not(isEnterprise), not(isHeroku), not(isAzure)),
     layout: App,
     title: 'Billing | Plan Change In Progress',
-    supportDocSearch: 'upgrade account'
+    supportDocSearch: 'upgrade account',
   },
   {
     path: '/account/ip-pools',
@@ -631,7 +633,7 @@ const routes = [
     condition: hasGrants('ip_pools/manage'),
     layout: App,
     title: 'IP Pools',
-    supportDocSearch: 'ip pool'
+    supportDocSearch: 'ip pool',
   },
   {
     path: '/account/ip-pools/create',
@@ -639,7 +641,7 @@ const routes = [
     condition: hasGrants('ip_pools/manage'),
     layout: App,
     title: 'New IP Pool',
-    supportDocSearch: 'ip pool'
+    supportDocSearch: 'ip pool',
   },
   {
     path: '/account/ip-pools/edit/:poolId',
@@ -647,7 +649,7 @@ const routes = [
     condition: hasGrants('ip_pools/manage'),
     layout: App,
     title: 'Edit IP Pool',
-    supportDocSearch: 'ip pool'
+    supportDocSearch: 'ip pool',
   },
   {
     path: '/account/ip-pools/edit/:poolId/:ip',
@@ -655,7 +657,7 @@ const routes = [
     condition: hasGrants('ip_pools/manage'),
     layout: App,
     title: 'Edit IP',
-    supportDocSearch: 'ip pool'
+    supportDocSearch: 'ip pool',
   },
   {
     path: '/ab-testing',
@@ -663,7 +665,7 @@ const routes = [
     condition: hasGrants('ab-testing/manage'),
     layout: App,
     title: 'A/B Testing',
-    supportDocsSearch: 'A/B test'
+    supportDocsSearch: 'A/B test',
   },
   {
     path: '/ab-testing/create',
@@ -671,7 +673,7 @@ const routes = [
     condition: hasGrants('ab-testing/manage'),
     layout: App,
     title: 'Create A/B Test',
-    supportDocsSearch: 'A/B test'
+    supportDocsSearch: 'A/B test',
   },
   {
     path: '/ab-testing/:id/:version',
@@ -679,7 +681,7 @@ const routes = [
     condition: hasGrants('ab-testing/manage'),
     layout: App,
     title: 'A/B Testing',
-    supportDocsSearch: 'A/B test'
+    supportDocsSearch: 'A/B test',
   },
   {
     path: '/alerts',
@@ -687,7 +689,7 @@ const routes = [
     condition: hasGrants('alerts/manage'),
     layout: App,
     title: 'Alerts',
-    supportDocsSearch: 'Alerts'
+    supportDocsSearch: 'Alerts',
   },
   {
     path: '/alerts/details/:id',
@@ -695,7 +697,7 @@ const routes = [
     condition: hasGrants('alerts/manage'),
     layout: App,
     title: 'View Details',
-    supportDocsSearch: 'Alerts'
+    supportDocsSearch: 'Alerts',
   },
   {
     path: '/alerts/create/:id?',
@@ -703,7 +705,7 @@ const routes = [
     condition: hasGrants('alerts/manage'),
     layout: App,
     title: 'Create Alert',
-    supportDocsSearch: 'Alerts'
+    supportDocsSearch: 'Alerts',
   },
   {
     path: '/alerts/edit/:id',
@@ -711,46 +713,46 @@ const routes = [
     condition: hasGrants('alerts/manage'),
     layout: App,
     title: 'Edit Alert',
-    supportDocsSearch: 'Alerts'
+    supportDocsSearch: 'Alerts',
   },
   {
     path: '/onboarding/plan',
     component: onboarding.ChoosePlan,
     condition: configFlag('featureFlags.has_signup'),
     title: 'Onboarding | Choose Your Plan',
-    supportDocSearch: 'upgrade account'
+    supportDocSearch: 'upgrade account',
   },
   {
     path: '/onboarding/sending-domain',
     component: onboarding.SendingDomainPage,
     condition: configFlag('featureFlags.has_signup'),
     title: 'Onboarding | Create a Sending Domain',
-    supportDocSearch: 'sending domain'
+    supportDocSearch: 'sending domain',
   },
   {
     path: '/onboarding/email',
     component: onboarding.SmtpOrApiPage,
     condition: configFlag('featureFlags.has_signup'),
     title: 'Onboarding | REST and SMTP',
-    supportDocSearch: 'smtp'
+    supportDocSearch: 'smtp',
   },
   {
     path: '/onboarding/email/smtp',
     component: onboarding.SmtpPage,
     condition: configFlag('featureFlags.has_signup'),
     title: 'Onboarding | Send a Test Email (SMTP)',
-    supportDocSearch: 'smtp'
+    supportDocSearch: 'smtp',
   },
   {
     path: '/onboarding/email/api',
     component: onboarding.ApiPage,
     condition: configFlag('featureFlags.has_signup'),
     title: 'Onboarding | Send a Test Email (REST)',
-    supportDocSearch: 'smtp'
+    supportDocSearch: 'smtp',
   },
   {
     path: '/recipient-validation',
-    redirect: '/recipient-validation/list'
+    redirect: '/recipient-validation/list',
   },
   {
     path: '/recipient-validation/single/:email',
@@ -758,7 +760,7 @@ const routes = [
     condition: hasGrants('recipient-validation/manage'),
     layout: App,
     title: 'Recipient Validation | Results',
-    supportDocsSearch: 'Recipient Validation'
+    supportDocsSearch: 'Recipient Validation',
   },
   {
     path: '/recipient-validation/list/:listId',
@@ -766,7 +768,7 @@ const routes = [
     condition: hasGrants('recipient-validation/manage'),
     layout: App,
     title: 'Recipient Validation | List',
-    supportDocsSearch: 'Recipient Validation'
+    supportDocsSearch: 'Recipient Validation',
   },
   {
     path: '/recipient-validation/:category',
@@ -774,7 +776,7 @@ const routes = [
     condition: hasGrants('recipient-validation/manage'), // must manual keep in sync with nav item
     layout: App,
     title: 'Recipient Validation',
-    supportDocsSearch: 'Recipient Validation'
+    supportDocsSearch: 'Recipient Validation',
   },
   {
     path: '/support/aws-premium',
@@ -782,16 +784,16 @@ const routes = [
     condition: isAws,
     title: 'Support | Request Premium Support',
     layout: App,
-    supportDocSearch: 'upgrade plan'
+    supportDocSearch: 'upgrade plan',
   },
   {
     path: '/logout',
     component: LogoutPage,
-    title: 'Logging out...'
+    title: 'Logging out...',
   },
   ...templateRoutes,
   ...inboxPlacementRoutes,
-  ...blacklistRoutes
+  ...blacklistRoutes,
 ];
 
 // ensure 404 is always last in routes
@@ -799,7 +801,7 @@ routes.push({
   path: '*',
   component: PageNotFound,
   layout: App,
-  title: 'Page Not Found'
+  title: 'Page Not Found',
 });
 
 export default routes;
