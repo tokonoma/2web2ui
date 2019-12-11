@@ -6,8 +6,8 @@ export const initialState = {
   byId: {},
   contentPreview: {
     draft: {},
-    published: {}
-  }
+    published: {},
+  },
 };
 
 export default (state = initialState, { now = new Date(), ...action }) => {
@@ -31,9 +31,12 @@ export default (state = initialState, { now = new Date(), ...action }) => {
         ...state,
         byId: {
           ...state.byId,
-          [action.payload.id]: { ...state.byId[action.payload.id], draft: normalizeTemplateFromAddress(action.payload) }
+          [action.payload.id]: {
+            ...state.byId[action.payload.id],
+            draft: normalizeTemplateFromAddress(action.payload),
+          },
         },
-        getDraftLoading: false
+        getDraftLoading: false,
       };
 
     case 'GET_DRAFT_TEMPLATE_FAIL':
@@ -48,9 +51,12 @@ export default (state = initialState, { now = new Date(), ...action }) => {
         ...state,
         byId: {
           ...state.byId,
-          [action.payload.id]: { ...state.byId[action.payload.id], published: normalizeTemplateFromAddress(action.payload) }
+          [action.payload.id]: {
+            ...state.byId[action.payload.id],
+            published: normalizeTemplateFromAddress(action.payload),
+          },
         },
-        getPublishedLoading: false
+        getPublishedLoading: false,
       };
 
     case 'GET_PUBLISHED_TEMPLATE_FAIL':
@@ -61,7 +67,7 @@ export default (state = initialState, { now = new Date(), ...action }) => {
 
     // note, purposely don't clear error on pending action, so errors can be displayed while pending
     case 'GET_TEMPLATE_PREVIEW_FAIL':
-      return { ...state, contentPreview: { ...state.contentPreview, error: action.payload }};
+      return { ...state, contentPreview: { ...state.contentPreview, error: action.payload } };
 
     case 'GET_TEMPLATE_PREVIEW_SUCCESS':
       return {
@@ -73,10 +79,10 @@ export default (state = initialState, { now = new Date(), ...action }) => {
             ...state.contentPreview[action.meta.context.mode],
             [action.meta.context.id]: {
               ...action.payload,
-              from: normalizeFromAddress(action.payload.from)
-            }
-          }
-        }
+              from: normalizeFromAddress(action.payload.from),
+            },
+          },
+        },
       };
 
     case 'UPDATE_TEMPLATE_FAIL':
@@ -100,11 +106,11 @@ export default (state = initialState, { now = new Date(), ...action }) => {
               ...state.byId[id].draft,
               ...action.meta.data,
               // ugh, need to manually set since API doesn't return updated record
-              last_update_time: now.toISOString()
-            }
-          }
+              last_update_time: now.toISOString(),
+            },
+          },
         },
-        updating: false
+        updating: false,
       };
     }
 
@@ -132,6 +138,12 @@ export default (state = initialState, { now = new Date(), ...action }) => {
     case 'CREATE_TEMPLATE_SUCCESS':
     case 'CREATE_TEMPLATE_FAIL':
       return { ...state, createPending: false };
+
+    case 'SEND_EMAIL_PENDING':
+      return { ...state, sendPending: true };
+    case 'SEND_EMAIL_SUCCESS':
+    case 'SEND_EMAIL_FAIL':
+      return { ...state, sendPending: false };
 
     default:
       return state;
