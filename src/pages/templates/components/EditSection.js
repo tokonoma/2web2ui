@@ -105,7 +105,10 @@ const EditSection = () => {
   };
 
   const handleHtmlConvertConfirmClick = () => {
-    const nextText = htmlToText.fromString(content.html, { uppercaseHeadings: false });
+    const nextText = htmlToText.fromString(content.html, {
+      uppercaseHeadings: false,
+      ignoreImage: true,
+    });
     setHtmlToTextModalOpen(false);
     setContent({
       ...content,
