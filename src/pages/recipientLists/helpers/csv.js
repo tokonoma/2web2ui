@@ -14,10 +14,10 @@ const renameJsonKeys = field => {
 const buildJsonKeys = row => {
   const newFields = {};
   newFields.substitution_data = renameJsonKeys(
-    _.pickBy(row, (val, key) => _.startsWith(key, 'substitution_data')),
+    _.pickBy(row, (val, key) => _.startsWith(key, 'substitution_data:')),
   );
-  newFields.metadata = renameJsonKeys(_.pickBy(row, (val, key) => _.startsWith(key, 'metadata')));
-  newFields.tags = _.compact(_.values(_.pickBy(row, (val, key) => _.startsWith(key, 'tags'))));
+  newFields.metadata = renameJsonKeys(_.pickBy(row, (val, key) => _.startsWith(key, 'metadata:')));
+  newFields.tags = _.compact(_.values(_.pickBy(row, (val, key) => _.startsWith(key, 'tags:'))));
 
   return newFields;
 };
@@ -68,15 +68,15 @@ const parseRawRecords = (results, resolve, reject) => {
 
     const generatedData = buildJsonKeys(datum);
 
-    if (generatedData.substitution_data) {
+    if (!datum.substitution_data && generatedData.substitution_data) {
       out.substitution_data = generatedData.substitution_data;
     }
 
-    if (generatedData.metadata) {
+    if (!datum.metadata && generatedData.metadata) {
       out.metadata = generatedData.metadata;
     }
 
-    if (generatedData.substitution_data) {
+    if (!datum.tags && generatedData.substitution_data) {
       out.tags = generatedData.tags;
     }
 
