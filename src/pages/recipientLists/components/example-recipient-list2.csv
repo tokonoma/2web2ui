@@ -1,0 +1,3 @@
+email,name,return_path,metadata:foo,metadata:bar,substitution_data:member,substitution_data:region,tags:1,tags:2
+recipient@example.com,Example Recipient,reply@example.com,something,else,Platinum,US,test,example
+recipient2@example.com,Jake,reply@example.com,something,else,Platinum,US,,
