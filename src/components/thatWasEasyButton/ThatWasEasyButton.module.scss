@@ -57,12 +57,18 @@ $base-padding: 0.7rem;
   }
 }
 
+.isDisabled,
+.isLoading {
+  pointer-events: none;
+}
+
 .isLoading {
   cursor: wait;
 }
 
 .isDisabled {
   cursor: not-allowed;
+  opacity: 0.66;
 }
 
 .ThatWasEasyButtonContent {

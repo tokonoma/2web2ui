@@ -11,8 +11,8 @@ const ThatWasEasyButton = props => {
         onClick={onClick}
         className={classNames(
           styles.ThatWasEasyButtonButton,
-          isDisabled ? styles.isDisabled : null,
-          isLoading ? styles.isLoading : null,
+          isDisabled && styles.isDisabled,
+          isLoading && styles.isLoading,
         )}
         type="submit"
       >
