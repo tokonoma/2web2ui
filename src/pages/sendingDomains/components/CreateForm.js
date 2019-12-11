@@ -35,7 +35,7 @@ export class CreateForm extends Component {
         <Panel.Section>
           <Field
             component={CheckboxWrapper}
-            label="Do you want us to be your DNS daddy?"
+            label="Do you want us to be handle your DNS?"
             name="delegated"
           />
         </Panel.Section>
