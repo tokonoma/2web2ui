@@ -56,7 +56,12 @@ const SendPage = ({ getRecipientList, sendEmail, handleSubmit, loading }) => {
           <Panel.Section>
             <h6>Options</h6>
             <div style={{ maxWidth: 600 }}>
-              <Field name="ippool" label="IP Pool" component={IpPoolTypeaheadWrapper} />
+              <Field
+                name="ippool"
+                label="IP Pool"
+                component={IpPoolTypeaheadWrapper}
+                helpText={'Uses default IP pool if none selected'}
+              />
             </div>
             <div style={{ marginTop: 20 }}>
               <ThatWasEasyButton isLoading={loading} />
