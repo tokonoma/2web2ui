@@ -246,7 +246,7 @@ export function sendEmail({ id, recipients, campaignId, options }) {
             content: {
               template_id: id,
             },
-            recipients: recipients.map(({ return_path, ...recipient }) => recipient),
+            recipients,
             campaign_id: campaignId,
             options,
           },

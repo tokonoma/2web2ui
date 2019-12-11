@@ -19,13 +19,13 @@ export const TypeaheadItem = ({ id, label }) => (
 export class Typeahead extends Component {
   static defaultProps = {
     name: 'subaccount',
-    results: []
-  }
+    results: [],
+  };
 
   state = {
     inputValue: '',
-    matches: []
-  }
+    matches: [],
+  };
 
   componentDidMount() {
     this.updateMatches(this.state.inputValue);
@@ -42,19 +42,19 @@ export class Typeahead extends Component {
   }
 
   // note, sorting large result lists can be expensive
-  updateMatches = debounce((inputValue) => {
-    const { itemToString, maxNumberOfResults = 100, results = []} = this.props;
+  updateMatches = debounce(inputValue => {
+    const { itemToString, maxNumberOfResults = 100, results = [] } = this.props;
     const matches = inputValue ? sortMatch(results, inputValue, itemToString) : results;
 
     this.setState({ inputValue, matches: matches.slice(0, maxNumberOfResults) });
-  }, 300)
+  }, 300);
 
   handleStateChange = (changes, downshift) => {
     // Highlights first item in list by default
     if (!downshift.highlightedIndex) {
       downshift.setHighlightedIndex(0);
     }
-  }
+  };
 
   typeaheadFn = ({
     clearSelection,
@@ -63,7 +63,7 @@ export class Typeahead extends Component {
     highlightedIndex,
     isOpen,
     openMenu,
-    selectedItem
+    selectedItem,
   }) => {
     const {
       disabled,
@@ -73,20 +73,23 @@ export class Typeahead extends Component {
       label,
       maxHeight = 300,
       name,
-      placeholder = (isOpen ? 'Type to search' : 'None'),
-      renderItem
+      placeholder = isOpen ? 'Type to search' : 'None',
+      renderItem,
+      required,
     } = this.props;
     const { matches } = this.state;
-    const items = matches.map((item, index) => getItemProps({
-      content: renderItem ? renderItem(item) : <div className={styles.Item}>{item}</div>,
-      highlighted: highlightedIndex === index,
-      index,
-      item
-    }));
+    const items = matches.map((item, index) =>
+      getItemProps({
+        content: renderItem ? renderItem(item) : <div className={styles.Item}>{item}</div>,
+        highlighted: highlightedIndex === index,
+        index,
+        item,
+      }),
+    );
 
     const listClasses = cx('List', {
       open: isOpen && !selectedItem && matches.length,
-      hasHelp: !!helpText
+      hasHelp: !!helpText,
     });
 
     const textFieldProps = getInputProps({
@@ -98,8 +101,9 @@ export class Typeahead extends Component {
       name,
       placeholder,
       helpText,
-      error: (!isOpen && error) ? error : null,
-      errorInLabel
+      required,
+      error: !isOpen && error ? error : null,
+      errorInLabel,
     });
 
     textFieldProps['data-lpignore'] = true;
