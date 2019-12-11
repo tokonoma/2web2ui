@@ -3,10 +3,10 @@ import classNames from 'classnames';
 import styles from './ThatWasEasyButton.module.scss';
 
 const ThatWasEasyButton = props => {
-  const { onClick, className, isDisabled, isLoading } = props;
+  const { onClick, className, isDisabled, isLoading, style } = props;
 
   return (
-    <div className={classNames(styles.ThatWasEasyButton, className)}>
+    <div style={style} className={classNames(styles.ThatWasEasyButton, className)}>
       <button
         onClick={onClick}
         className={classNames(

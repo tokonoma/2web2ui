@@ -105,7 +105,7 @@ const SendPage = ({ getRecipientList, sendEmail, handleSubmit, loading, showAler
             </div>
 
             <div style={{ marginTop: 20 }}>
-              <ThatWasEasyButton isLoading={loading} />
+              <ThatWasEasyButton style={{ margin: 20 }} isLoading={loading} />
             </div>
           </Panel.Section>
         </Panel>
