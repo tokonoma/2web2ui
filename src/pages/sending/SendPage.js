@@ -69,7 +69,7 @@ const SendPage = ({ getRecipientList, sendEmail, handleSubmit, loading }) => {
                 helpText={'Uses default IP pool if none selected'}
               />
             </div>
-            <div style={{ marginTop: 20 }}>
+            <div>
               <ThatWasEasyButton style={{ margin: 20 }} isLoading={loading} />
             </div>
           </Panel.Section>
