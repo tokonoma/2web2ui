@@ -22,7 +22,7 @@ const ThatWasEasyButton = props => {
             <span className={styles.ThatWasEasyButtonLoaderSub}></span>
           </div>
         ) : (
-          <span className={styles.ThatWasEasyButtonContent}>easy</span>
+          <span className={styles.ThatWasEasyButtonContent}>send</span>
         )}
       </button>
     </div>

@@ -23,8 +23,8 @@ $base-padding: 0.7rem;
     scale-color($easy-peasy-silver, $lightness: 50%)
   );
   padding: $base-padding;
-  border: 0.125rem solid rgba($easy-peasy-silver, 0.125);
-  box-shadow: 0 ($base-padding / 2) $base-padding 0 rgba(#000, 0.1);
+  border: 0.125rem solid rgba($easy-peasy-silver, 0.25);
+  box-shadow: 0 ($base-padding / 2) $base-padding -8px rgba(#000, 0.33);
 }
 
 .ThatWasEasyButton,
@@ -40,14 +40,15 @@ $base-padding: 0.7rem;
   background-color: $easy-peasy-red;
   border: 0;
   outline: none;
-  box-shadow: inset 0 -#{$base-padding / 1.5} 0 0 $easy-peasy-red-dark;
+  border: ($base-padding / 6) solid $easy-peasy-red-dark;
+  box-shadow: inset 0 -#{$base-padding / 1.5} 0 0 $easy-peasy-red-dark,
+    0 $base-padding / 2 $base-padding / 2 -#{$base-padding / 3} rgba(#000, 0.25);
   height: 100%;
   width: 100%;
   transition: background-color 0.33s ease-in-out, box-shadow 0.1s linear, transform 0.1s linear;
 
   &:hover,
-  &:focus,
-  &:active {
+  &:focus {
     background-color: $easy-peasy-red-light;
   }
 
@@ -74,16 +75,15 @@ $base-padding: 0.7rem;
 .ThatWasEasyButtonContent {
   color: #fff;
   font-weight: 700;
-  letter-spacing: 0.015rem;
-  font-size: 3.5em;
+  font-size: 3.25em;
   font-family: 'Helvetica';
-  text-shadow: 0 0 0.75rem $easy-peasy-red-dark;
+  text-shadow: 0 0.0125em 0.125em $easy-peasy-red-dark;
   transform: rotate(-12deg) translateY(-5px);
 }
 
 .ThatWasEasyButtonHighlight {
   display: block;
-  background: linear-gradient(15deg, rgba(#fff, 0.15), transparent);
+  background: linear-gradient(15deg, transparent, rgba(#fff, 0.25));
   position: absolute;
   top: $base-padding / 2;
   left: $base-padding;
@@ -91,6 +91,10 @@ $base-padding: 0.7rem;
   height: 70%;
   border-radius: 50%;
   z-index: 5;
+  top: 0%;
+  left: 12.5%;
+  width: 75%;
+  height: 75%;
 }
 
 .ThatWasEasyButtonLoader {
