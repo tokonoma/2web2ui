@@ -1,7 +1,7 @@
 import React from 'react';
 import Draggable from 'react-draggable';
 
-export const DraggableModal = ({ open, handleToggle }) => {
+export const DraggableModal = ({ open, handleToggle, children }) => {
   return (
     <Draggable>
       {open ? (
@@ -24,6 +24,7 @@ export const DraggableModal = ({ open, handleToggle }) => {
             {' '}
             X{' '}
           </button>
+          {children}
         </div>
       ) : (
         <div />

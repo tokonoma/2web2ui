@@ -13,7 +13,6 @@ import { hasGrants } from 'src/helpers/conditions';
 import { isAccountUiOptionSet, getAccountUiOptionValue } from 'src/helpers/conditions/account';
 /* actions */
 import { setAccountOption } from 'src/actions/account';
-import { DraggableModal } from '../../components/draggableModal/DraggableModal';
 
 export class DashboardPage extends Component {
   state = {
@@ -67,15 +66,6 @@ export class DashboardPage extends Component {
         )}
         <Button onClick={() => this.setState({ modal1: !this.state.modal1 })}>Modal1</Button>
         <Button onClick={() => this.setState({ modal2: !this.state.modal2 })}>Modal2</Button>
-
-        <DraggableModal
-          open={this.state.modal1}
-          handleToggle={() => this.setState({ modal1: false })}
-        />
-        <DraggableModal
-          open={this.state.modal2}
-          handleToggle={() => this.setState({ modal2: false })}
-        />
 
         {isMessageOnboardingSet && <SignupModal />}
         <FreePlanWarningBanner
