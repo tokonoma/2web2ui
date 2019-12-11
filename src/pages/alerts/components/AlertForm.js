@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import { Field, Form } from 'redux-form';
 // Components
@@ -6,7 +7,7 @@ import { TextFieldWrapper, SelectWrapper } from 'src/components';
 import FilterFields from './fields/FilterFields';
 import EvaluatorFields from './fields/EvaluatorFields';
 import SubaccountField from './fields/SubaccountsField';
-import { getFormSpec, capitalizeFirstLetter } from '../helpers/alertForm';
+import { getFormSpec } from '../helpers/alertForm';
 import {
   METRICS,
   REALTIME_FILTERS,
@@ -44,7 +45,7 @@ export class AlertForm extends Component {
     NOTIFICATION_CHANNELS.map(channel => (
       <Expandable
         icon={NOTIFICATION_CHANNEL_DATA[channel].icon}
-        title={capitalizeFirstLetter(channel)}
+        title={_.upperFirst(channel)}
         id={channel}
         subtitle={NOTIFICATION_CHANNEL_DATA[channel].subtitle}
         key={channel}
