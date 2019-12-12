@@ -53,9 +53,17 @@ const DelegatedDomainPage = ({ delegatedDomain, getDomain, updateDomainRecords }
   //   external: true,
   // };
 
+  const update = () => {
+    if (!delegatedDomain) {
+      return;
+    }
+
+    updateDomainRecords(delegatedDomain.domain, delegatedDomain.records);
+  };
+
   return (
     <Page title="Delgated Sending Domains">
-      {/* action={action} */}
+      <button onClick={update}>Update</button>
       <Banner status="info" title="We'll be your DNS daddy, but here's the deal...">
         <h5 style={{ marginTop: 15, marginBottom: 0 }}>Records we manage:</h5>
         <p style={{ margin: 0 }}>A IP</p>
