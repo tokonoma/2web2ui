@@ -4,10 +4,11 @@ import { Page, Panel, Table, Button } from '@sparkpost/matchbox';
 import { TableCollection, Empty, Loading } from 'src/components';
 import { formatDateTime } from 'src/helpers/date';
 import { connect } from 'react-redux';
-import { listScheduled } from 'src/actions/transmissions';
+import { listScheduled, deleteScheduled } from 'src/actions/transmissions';
+import { showAlert } from 'src/actions/globalAlert';
 
 const ScheduledPage = props => {
-  const { scheduled, loading, listScheduled } = props;
+  const { scheduled, loading, listScheduled, showAlert, deleteScheduled } = props;
   const TableWrapper = props => <Table>{props.children}</Table>;
 
   const columns = [
@@ -29,6 +30,7 @@ const ScheduledPage = props => {
       label: 'Scheduled Time',
       sortKey: 'start_time',
     },
+    null,
   ];
 
   const capitalizeFirstLetter = string => {
@@ -42,6 +44,16 @@ const ScheduledPage = props => {
     wrapper: props => <div>{props}</div>,
   };
 
+  const handleCancelClick = id => {
+    deleteScheduled(id).then(() => {
+      showAlert({
+        type: 'success',
+        message: `Transmission ${id} canceled`,
+      });
+      listScheduled();
+    });
+  };
+
   useEffect(() => {
     listScheduled();
   }, [listScheduled]);
@@ -53,6 +65,13 @@ const ScheduledPage = props => {
       <div>{description}</div>,
       <div>{capitalizeFirstLetter(state)}</div>,
       <div>{formatDateTime(send_time)}</div>,
+      <>
+        {state !== 'Canceled' && state !== 'Success' && (
+          <Button destructive onClick={() => handleCancelClick(id)}>
+            Cancel
+          </Button>
+        )}
+      </>,
     ];
   };
 
@@ -72,7 +91,7 @@ const ScheduledPage = props => {
           getRowData={getRowData}
           pagination
           filterBox={filterBoxConfig}
-          defaultSortColumn="campaignId"
+          defaultSortColumn="start_time"
           defaultSortDirection="desc"
         >
           {({ filterBox, collection, pagination }) => (
@@ -99,6 +118,8 @@ const MSTP = state => {
 
 const MDTP = {
   listScheduled,
+  deleteScheduled,
+  showAlert,
 };
 
 export default connect(MSTP, MDTP)(ScheduledPage);

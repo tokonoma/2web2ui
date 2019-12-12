@@ -9,3 +9,13 @@ export function listScheduled() {
     },
   });
 }
+
+export function deleteScheduled(id) {
+  return sparkpostApiRequest({
+    type: 'DELETE_SCHEDULED',
+    meta: {
+      method: 'DELETE',
+      url: `/v1/transmissions/${id}`,
+    },
+  });
+}

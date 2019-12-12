@@ -16,6 +16,18 @@ export default (state = initialState, action) => {
       };
     case 'LIST_SCHEDULED_FAIL':
       return { ...state, scheduledError: action.payload, scheduledLoading: false };
+
+    case 'DELETE_SCHEDULED_PENDING':
+      return { ...state, scheduledLoading: true, scheduledError: null };
+    case 'DELETE_SCHEDULED_SUCCESS':
+      return {
+        ...state,
+        scheduledLoading: false,
+        scheduledError: false,
+      };
+    case 'DELETE_SCHEDULED_FAIL':
+      return { ...state, scheduledError: action.payload };
+
     default:
       return state;
   }
