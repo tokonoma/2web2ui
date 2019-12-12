@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import { listScheduled } from 'src/actions/transmissions';
 
 const ScheduledPage = props => {
-  const { scheduled, loading, error, listScheduled } = props;
+  const { scheduled, loading, listScheduled } = props;
   const TableWrapper = props => <Table>{props.children}</Table>;
 
   const columns = [
@@ -85,9 +85,8 @@ const ScheduledPage = props => {
 };
 
 const MSTP = state => {
-  console.log('state.transmissions', state.transmissions);
   return {
-    loading: state.transmissions.scheduledListLoading,
+    loading: state.transmissions.scheduledLoading,
     error: state.transmissions.scheduledListError,
     scheduled: state.transmissions.scheduledList,
   };

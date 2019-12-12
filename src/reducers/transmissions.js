@@ -1,5 +1,6 @@
 export const initialState = {
   scheduledList: [],
+  scheduledLoading: false,
 };
 
 export default (state = initialState, action) => {
