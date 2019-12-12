@@ -29,25 +29,26 @@ const FormContainer = () => {
       'action-xhr': actionXHR || 'https://example.com/xhr',
     };
 
-    const fieldsForGenerator = [
-      {
-        type: formState.grouptype,
-        name: formState.grouplabel,
-        fields: Object.keys(fields).reduce((acc, idx) => {
-          const { label, value, checked } = fields[idx];
-          acc.push({
+    const allFields = Object.keys(fields).map(key => {
+      const { grouptype, grouplabel, labelnValues } = fields[key];
+      return {
+        type: grouptype,
+        name: grouplabel,
+        fields: Object.keys(labelnValues).map(key => {
+          const { label, value } = labelnValues[key];
+          return {
             label,
             id: value,
             value,
-            checked,
-          });
-          return acc;
-        }, []),
-      },
-    ];
+            checked: false,
+          };
+        }),
+      };
+    });
+
     setCode(
       generator.getForm({
-        fields: fieldsForGenerator,
+        fields: allFields,
         formAttributes,
         error: errorMessage,
         success: successMessage,

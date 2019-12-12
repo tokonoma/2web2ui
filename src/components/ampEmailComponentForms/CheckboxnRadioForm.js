@@ -99,14 +99,14 @@ const CheckboxnRadioForm = ({ number, addtoState }) => {
           id={`radio-buttons-${number}`}
           label="Radio Buttons"
           name={`typeofgroup-${number}`}
-          value={'Radio'}
+          value={'radio'}
           onChange={e => onRadioChange('grouptype', e)}
         />
         <Radio
           id="checkbox-group"
           label="Checkbox Group"
           name="typeofgroup"
-          value={`typeofgroup-${number}`}
+          value={`checkbox`}
           onChange={e => onRadioChange('grouptype', e)}
         />
       </Radio.Group>
