@@ -58,13 +58,13 @@ const ScheduledPage = props => {
     listScheduled();
   }, [listScheduled]);
 
-  const getRowData = ({ content, id, campaign_id, description, state, send_time }) => {
+  const getRowData = ({ content, id, campaign_id, description, state, start_time }) => {
     return [
       <div>{campaign_id}</div>,
       <div>{content.template_id}</div>,
       <div>{description}</div>,
       <div>{capitalizeFirstLetter(state)}</div>,
-      <div>{formatDateTime(send_time)}</div>,
+      <div>{formatDateTime(start_time)}</div>,
       <>
         {state !== 'Canceled' && state !== 'Success' && (
           <Button destructive onClick={() => handleCancelClick(id)}>
