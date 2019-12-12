@@ -102,15 +102,7 @@ const SendPage = ({
           component={CheckboxWrapper}
         />
 
-        <Panel
-          title="Configure a Transmission"
-          style={{
-            backgroundImage:
-              doesntLikeFun &&
-              requestBody &&
-              'url("https://blackxknite.files.wordpress.com/2017/03/lameasaurus.jpg?w=552")',
-          }}
-        >
+        <Panel title="Configure a Transmission">
           <div className={styles.Layout}>
             <div>
               <Panel.Section>
@@ -186,6 +178,12 @@ const SendPage = ({
             ) : (
               <ThatWasEasyButton style={{ margin: '0px 20px' }} isLoading={loading} />
             )}
+            {doesntLikeFun && requestBody && (
+              <img
+                src={'https://blackxknite.files.wordpress.com/2017/03/lameasaurus.jpg?w=552'}
+                style={{ float: 'right' }}
+              />
+            )}
           </Panel.Section>
         </Panel>
       </form>
@@ -194,7 +192,7 @@ const SendPage = ({
           <Expandable id="code-expandable" title="See how we did this" icon={<Code size={30} />}>
             <div style={{ marginBottom: 15 }}>
               We used the information you provided to send an email through our{' '}
-              <UnstyledLink to={'https://developers.sparkpost.com/api/transmissions/'}>
+              <UnstyledLink external to={'https://developers.sparkpost.com/api/transmissions/'}>
                 Transmissions API
               </UnstyledLink>
               . Here is the API call we put together:
