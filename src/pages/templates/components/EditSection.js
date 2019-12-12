@@ -15,6 +15,7 @@ import InsertSnippetModal from './InsertSnippetModal';
 import useEditorContext from '../hooks/useEditorContext';
 import styles from './EditSection.module.scss';
 import { DraggableModal } from '../../../components/draggableModal/DraggableModal';
+import CheckboxnRadioForm from '../../../components/ampEmailComponentForms/CheckboxnRadioForm';
 
 const EditSection = () => {
   const {
@@ -26,6 +27,7 @@ const EditSection = () => {
     isPublishedMode,
   } = useEditorContext();
   const [isPopoverOpen, setPopoverOpen] = useState(false);
+  const [isPopoverOpen2, setPopoverOpen2] = useState(false);
   const [isSnippetModalOpen, setSnippetModalOpen] = useState(false);
   const [isAMPModalOpen, setAMPModalOpen] = useState(false);
   const [accordianModal, setAccordianModal] = useState(false);
@@ -111,13 +113,13 @@ const EditSection = () => {
             <div>
               <Popover
                 left
-                open={isPopoverOpen}
-                onClose={() => setPopoverOpen(false)}
+                open={isPopoverOpen2}
+                onClose={() => setPopoverOpen2(false)}
                 trigger={
                   <Button
                     flat
                     className={styles.MoreButton}
-                    onClick={() => setPopoverOpen(!isPopoverOpen)}
+                    onClick={() => setPopoverOpen2(true)}
                     data-id="popover-trigger-more"
                   >
                     AMP Components <ArrowDropDown />
@@ -171,7 +173,7 @@ const EditSection = () => {
               open={checkorRadioModal}
               handleToggle={() => setCheckorRadioModal(false)}
             >
-              Checkbox/Radio
+              <CheckboxnRadioForm />
             </DraggableModal>
             <DraggableModal
               open={formContainerModal}

@@ -17,9 +17,13 @@ const Editor = ({
   ...props
 }) => {
   const { setAnnotations, setEditor } = useEditor({ inlineErrors });
-
   return (
-    <div className={classNames(styles.EditorWrapper, readOnly && styles.ReadOnly)}>
+    <div
+      className={classNames(
+        !props.type ? styles.EditorWrapper : styles.ForDraggableModal,
+        readOnly && styles.ReadOnly,
+      )}
+    >
       <AceEditor
         {...props}
         readOnly={readOnly}
@@ -27,10 +31,10 @@ const Editor = ({
         cursorStart={1}
         editorProps={{
           ...editorProps,
-          $blockScrolling: Infinity
+          $blockScrolling: Infinity,
         }}
         fontSize={14}
-        height="100%" // must set height on wrapper
+        height={'100%'} // must set height on wrapper
         highlightActiveLine
         // note, must global import modes from https://www.npmjs.com/package/brace
         mode={mode}
@@ -41,7 +45,7 @@ const Editor = ({
           // see, https://github.com/securingsincity/react-ace/issues/275
           useWorker: false,
           ...setOptions,
-          displayIndentGuides: false
+          displayIndentGuides: false,
         }}
         showPrintMargin={false}
         tabSize={2}
