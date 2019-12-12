@@ -17,13 +17,9 @@ const DelegatedDomainPage = ({ delegatedDomain, getDomain, updateDomainRecords }
   }, [getDomain, id]);
 
   function getDataRows() {
-    console.log('getDataRows', delegatedDomain);
-
     if (!delegatedDomain) {
       return null;
     }
-
-    console.log('delegatedDomain', delegatedDomain);
 
     return delegatedDomain.records.map((item, index) => {
       return (
