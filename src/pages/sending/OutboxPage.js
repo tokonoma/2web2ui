@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useEffect } from 'react';
 import { Page, Panel, Table, Button } from '@sparkpost/matchbox';
 import { TableCollection, Empty } from 'src/components';
 import { Link } from 'react-router-dom';
@@ -7,8 +7,13 @@ import { connect } from 'react-redux';
 import { getAccountUiOptionValue } from 'src/helpers/conditions/account';
 import { fetch as fetchAccount } from 'src/actions/account';
 import moment from 'moment';
+import { Loading } from 'src/components/loading/Loading';
 
-const OutboxPage = ({ outbox: allOutbox }) => {
+const OutboxPage = ({ outbox: allOutbox, loading, fetchAccount }) => {
+  useEffect(() => {
+    fetchAccount();
+  }, [fetchAccount]);
+
   const TableWrapper = props => <Table>{props.children}</Table>;
 
   const outbox = useMemo(() => {
@@ -64,6 +69,11 @@ const OutboxPage = ({ outbox: allOutbox }) => {
       </Button>,
     ];
   };
+
+  if (loading) {
+    return <Loading />;
+  }
+
   return (
     <Page title="Outbox">
       {outbox.length <= 0 ? (
@@ -95,6 +105,7 @@ const OutboxPage = ({ outbox: allOutbox }) => {
 export default connect(
   state => ({
     outbox: getAccountUiOptionValue('hackathon_outbox')(state) || [],
+    loading: state.account.loading,
   }),
   { fetchAccount },
 )(OutboxPage);
