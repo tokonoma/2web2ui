@@ -15,7 +15,9 @@ import InsertSnippetModal from './InsertSnippetModal';
 import useEditorContext from '../hooks/useEditorContext';
 import styles from './EditSection.module.scss';
 import { DraggableModal } from '../../../components/draggableModal/DraggableModal';
-import CheckboxnRadioForm from '../../../components/ampEmailComponentForms/CheckboxnRadioForm';
+// import CheckboxnRadioForm from '../../../components/ampEmailComponentForms/CheckboxnRadioForm';
+import ImageForm from '../../../components/ampEmailComponentForms/ImageForm';
+import FormContainer from '../../../components/ampEmailComponentForms/FormContainer';
 
 const EditSection = () => {
   const {
@@ -34,7 +36,7 @@ const EditSection = () => {
   const [imageModal, setImageModal] = useState(false);
   const [timeAgoModal, setTimeAgoModal] = useState(false);
   const [formContainerModal, setFormContainerModal] = useState(false);
-  const [checkorRadioModal, setCheckorRadioModal] = useState(false);
+  // const [checkorRadioModal, setCheckorRadioModal] = useState(false);
   const currentTab = tabs[currentTabIndex];
   const TabComponent = currentTab.render;
   const hasReadOnlyTag =
@@ -140,12 +142,12 @@ const EditSection = () => {
                         setImageModal(true);
                       },
                     },
-                    {
-                      content: 'Checkbox/Radio Buttons',
-                      onClick: () => {
-                        setCheckorRadioModal(true);
-                      },
-                    },
+                    // {
+                    //   content: 'Checkbox/Radio Buttons',
+                    //   onClick: () => {
+                    //     setCheckorRadioModal(true);
+                    //   },
+                    // },
                     {
                       content: 'Form Container',
                       onClick: () => {
@@ -167,19 +169,19 @@ const EditSection = () => {
               Accordian
             </DraggableModal>
             <DraggableModal open={imageModal} handleToggle={() => setImageModal(false)}>
-              Image
+              <ImageForm />
             </DraggableModal>
-            <DraggableModal
+            {/* <DraggableModal
               open={checkorRadioModal}
               handleToggle={() => setCheckorRadioModal(false)}
             >
               <CheckboxnRadioForm />
-            </DraggableModal>
+            </DraggableModal> */}
             <DraggableModal
               open={formContainerModal}
               handleToggle={() => setFormContainerModal(false)}
             >
-              Form Container
+              <FormContainer />
             </DraggableModal>
             <DraggableModal open={timeAgoModal} handleToggle={() => setTimeAgoModal(false)}>
               Time Ago

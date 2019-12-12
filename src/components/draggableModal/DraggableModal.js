@@ -9,7 +9,7 @@ export const DraggableModal = ({ open, handleToggle, children }) => {
           style={{
             position: 'fixed',
             background: 'white',
-            minHeight: '500px',
+            minHeight: '900px',
             width: '500px',
             zIndex: 999,
             padding: '10px',
