@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React, { useEffect } from 'react';
 import { Page, Panel, Table, Button } from '@sparkpost/matchbox';
-import { TableCollection, Empty } from 'src/components';
+import { TableCollection, Empty, Loading } from 'src/components';
 import { formatDateTime } from 'src/helpers/date';
 import { connect } from 'react-redux';
 import { listScheduled } from 'src/actions/transmissions';
@@ -27,23 +27,37 @@ const ScheduledPage = props => {
     },
   ];
 
+  const capitalizeFirstLetter = string => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  };
+
+  const filterBoxConfig = {
+    show: true,
+    exampleModifiers: ['campaign_id'],
+    itemToStringKeys: ['campaign_id'],
+    wrapper: props => <div>{props}</div>,
+  };
+
   useEffect(() => {
-    console.log('boo');
     listScheduled();
   }, [listScheduled]);
 
-  const getRowData = ({ content, id, campaignId: campaignId, description, state }) => {
+  const getRowData = ({ content, id, campaign_id, description, state }) => {
     return [
-      <div>{campaignId}</div>,
-      <div>{content.id}</div>,
+      <div>{campaign_id}</div>,
+      <div>{content.template_id}</div>,
       <div>{description}</div>,
-      <div>{state}</div>,
+      <div>{capitalizeFirstLetter(state)}</div>,
     ];
   };
 
+  if (loading) {
+    return <Loading />;
+  }
+
   return (
     <Page title="Scheduled Transmissions">
-      {scheduled.length <= 0 ? (
+      {scheduled.length === 0 ? (
         <Empty message="No scheduled transmissions" />
       ) : (
         <TableCollection
@@ -52,9 +66,18 @@ const ScheduledPage = props => {
           columns={columns}
           getRowData={getRowData}
           pagination
+          filterBox={filterBoxConfig}
           defaultSortColumn="campaignId"
           defaultSortDirection="desc"
-        />
+        >
+          {({ filterBox, collection, pagination }) => (
+            <>
+              <Panel sectioned>{filterBox}</Panel>
+              <Panel>{collection}</Panel>
+              {pagination}
+            </>
+          )}
+        </TableCollection>
       )}
       <Panel></Panel>
     </Page>
