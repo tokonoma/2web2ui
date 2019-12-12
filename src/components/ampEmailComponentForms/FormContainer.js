@@ -1,37 +1,59 @@
 import React, { useState } from 'react';
+import generator from 'amp-email-generator';
 import { TextField, Button, Select } from '@sparkpost/matchbox';
 import _ from 'lodash';
 import ButtonWrapper from 'src/components/buttonWrapper';
 import Editor from '../../pages/templates/components/Editor';
 import CheckboxnRadioForm from './CheckboxnRadioForm';
-const ampHTML = `<amp-selector layout="container"
-class="sample-selector"
-multiple>
-<amp-img src="/static/samples/img/landscape_sea_300x199.jpg"
-  width="90"
-  height="60"
-  option="1"></amp-img>
-<amp-img src="/static/samples/img/landscape_desert_300x200.jpg"
-  width="90"
-  height="60"
-  option="2"></amp-img>
-<amp-img src="/static/samples/img/landscape_ship_300x200.jpg"
-  width="90"
-  height="60"
-  option="3"></amp-img>
-<amp-img src="/static/samples/img/landscape_village_300x200.jpg"
-  width="90"
-  height="60"
-  option="4"></amp-img>
-</amp-selector>`;
+
 const FormContainer = () => {
-  const [formState, setFormState] = useState({ fields: {} });
+  const [formState, setFormState] = useState({ fields: [], target: '_blank', action: 'GET' });
   const [code, setCode] = useState(null);
   const [fieldcount, setFieldCount] = useState(0);
   const [addField, setAddField] = useState(false);
   const [allFields, setAllFields] = useState([]);
+  console.warn(formState);
   const onFormSubmit = () => {
-    setCode(ampHTML);
+    const {
+      target,
+      action,
+      actionXHR,
+      fields,
+      errorMessage,
+      successMessage,
+      submitLabel,
+    } = formState;
+    const formAttributes = {
+      target,
+      action,
+      'action-xhr': actionXHR || 'https://example.com/xhr',
+    };
+
+    const fieldsForGenerator = [
+      {
+        type: formState.grouptype,
+        name: formState.grouplabel,
+        fields: Object.keys(fields).reduce((acc, idx) => {
+          const { label, value, checked } = fields[idx];
+          acc.push({
+            label,
+            id: value,
+            value,
+            checked,
+          });
+          return acc;
+        }, []),
+      },
+    ];
+    setCode(
+      generator.getForm({
+        fields: fieldsForGenerator,
+        formAttributes,
+        error: errorMessage,
+        success: successMessage,
+        submitLabel,
+      }).html,
+    );
   };
   const copycode = () => {
     var copyText = document.getElementById('amp-input');
@@ -71,8 +93,18 @@ const FormContainer = () => {
       </p>
       {!code && (
         <form>
-          <TextField label="Target" placeholder={'Target'} value={'_blank'} />
-          <Select id="id" label="Select an option" options={['GET', 'POST']} />
+          <Select
+            label="Target"
+            placeholder={'Target'}
+            options={['_blank', '_top']}
+            onChange={e => setFormState({ ...formState, ...{ target: e.target.value } })}
+          />
+          <Select
+            id="id"
+            label="Select an Action"
+            options={['GET', 'POST']}
+            onChange={e => setFormState({ ...formState, ...{ action: e.target.value } })}
+          />
           <TextField
             label="action-xhr"
             placeholder={'Action-XHR'}
@@ -120,11 +152,11 @@ const FormContainer = () => {
             mode="html"
             name="amp-content"
             onChange={() => {}}
-            value={ampHTML}
+            value={code}
             readOnly={true}
             type={true}
           />
-          <input type="text" value={ampHTML} id="amp-input" style={{}} />
+          <input type="text" value={code} id="amp-input" style={{}} />
         </div>
       )}
     </>
