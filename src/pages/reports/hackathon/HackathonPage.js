@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Page, Slider, Tabs } from '@sparkpost/matchbox';
+import { Page, Slider, Tabs, Select } from '@sparkpost/matchbox';
 import { Loading } from 'src/components';
 import { Users } from 'src/components/images';
 import GoogleMapReact from 'google-map-react';
@@ -16,16 +16,29 @@ const TABS = [
   { content: 'Deliverability-Inbox', key: 'inbox' },
   /* { content: 'Deliverability-Spam', key: 'spam' }, */
 ];
-const CAMPAIGN_IDS = [
-  'p1368: c899446: t1263502: DoorDash Giftcards 12 / 09 1st email | Batc',
-  'p1368: c915151: t1285463: DD x Stride OEP 2019 All Dx',
-  'p1368: c48773: t1225645: Order Confirmation | Trigger | Cx | HQ Oth',
-  'p1368: c48773: t1232045: Order Confirmation | Trigger | Cx | HQ Oth',
-  'p1368: c872264: t1225459:20191128_ToS_CCPA_Workflow',
-  'p1368: c899427: t1263470: DashPass Upsell Reminder - Promo | Trigge',
-  'p1368: c899428: t1263471: DashPass Upsell Reminder - No Promo | Tri',
-  'p1368: c861014: t1209396: Order Confirmation | Trigger | Cx | HQ Ot',
-  'p1368: c911330: t1280202:20191204_Android_Force_Upgrade',
+const CAMPAIGN_OPTIONS = [
+  {
+    value: 'p1368:c48773:t1225645:Order Confirmation | Trigger | Cx | HQ Oth',
+    label: 'Order Confirmation',
+  },
+  {
+    value: 'p1368:c899446:t1263502:DoorDash Giftcards 12/09 1st email | Batc',
+    label: 'DoorDash Giftcards 12/09 1st email',
+  },
+  { value: 'p1368:c915151:t1285463:DD x Stride OEP 2019 All Dx', label: 'DD x Stride OEP 2019' },
+  { value: 'p1368:c872264:t1225459:20191128_ToS_CCPA_Workflow', label: 'ToS CCPA Workflow' },
+  {
+    value: 'p1368:c899427:t1263470:DashPass Upsell Reminder - Promo | Trigge',
+    label: 'DashPass Upsell Reminder -Promo',
+  },
+  {
+    value: 'p1368:c899428:t1263471:DashPass Upsell Reminder - No Promo | Tri',
+    label: 'DashPass Upsell Reminder -No Promo',
+  },
+  {
+    value: 'p1368:c911330:t1280202:20191204_Android_Force_Upgrade',
+    label: 'Android Force Upgrade',
+  },
 ];
 
 export const HackathonPage = ({
@@ -41,13 +54,16 @@ export const HackathonPage = ({
   const [endTime, setEndTime] = useState(0);
   const [startTime, setStartTime] = useState(0);
   const [copyOfData, setCopyOfData] = useState([]);
+  const [campaignId, setCampaignId] = useState(
+    'p1368:c48773:t1232045:Order Confirmation | Trigger | Cx | HQ Oth',
+  );
 
   let sliderSlices = {};
 
   useEffect(() => {
-    getHackathonDataPartDeux();
-    getHackathonData(TABS[selectedTabIndex].key);
-  }, [getHackathonData, getHackathonDataPartDeux, selectedTabIndex]);
+    getHackathonDataPartDeux(campaignId);
+    getHackathonData(TABS[selectedTabIndex].key, campaignId);
+  }, [getHackathonData, getHackathonDataPartDeux, selectedTabIndex, campaignId]);
 
   useEffect(() => {
     if (data.length > 0) {
@@ -160,6 +176,12 @@ export const HackathonPage = ({
       }}
       title="Whiz Bang Pow"
     >
+      <Select
+        id="id"
+        label="Select a campaign"
+        options={CAMPAIGN_OPTIONS}
+        onChange={e => setCampaignId(e.currentTarget.value)}
+      />
       <strong>
         {'Campaign Inbox: '}
         {vol ? ((dataDeux.inbox / vol) * 100).toFixed(2) + '%' : 'N/A'}
