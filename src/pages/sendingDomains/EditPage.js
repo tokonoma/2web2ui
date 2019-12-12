@@ -6,9 +6,10 @@ import { hasAutoVerifyEnabledSelector } from 'src/selectors/account';
 import { selectDomain } from 'src/selectors/sendingDomains';
 import {
   get as getDomain,
+  getInboxTracker,
   remove as deleteDomain,
   update as updateDomain,
-  clearSendingDomain
+  clearSendingDomain,
 } from 'src/actions/sendingDomains';
 import { showAlert } from 'src/actions/globalAlert';
 import { Loading, DeleteModal } from 'src/components';
@@ -23,12 +24,12 @@ import { DomainStatus } from './components/DomainStatus';
 const breadcrumbAction = {
   content: 'Sending Domains',
   Component: Link,
-  to: '/account/sending-domains'
+  to: '/account/sending-domains',
 };
 
 export class EditPage extends Component {
   state = {
-    showDelete: false
+    showDelete: false,
   };
 
   toggleDelete = () => this.setState({ showDelete: !this.state.showDelete });
@@ -36,8 +37,8 @@ export class EditPage extends Component {
   secondaryActions = [
     {
       content: 'Delete',
-      onClick: this.toggleDelete
-    }
+      onClick: this.toggleDelete,
+    },
   ];
 
   afterDelete = () => {
@@ -49,30 +50,30 @@ export class EditPage extends Component {
     const {
       domain: { id, subaccount_id: subaccount },
       deleteDomain,
-      showAlert
+      showAlert,
     } = this.props;
 
-    return deleteDomain({ id, subaccount })
-      .then(() => {
-        showAlert({
-          type: 'success',
-          message: `Domain ${id} deleted.`
-        });
-        this.afterDelete();
+    return deleteDomain({ id, subaccount }).then(() => {
+      showAlert({
+        type: 'success',
+        message: `Domain ${id} deleted.`,
       });
+      this.afterDelete();
+    });
   };
 
   shareDomainChange = () => {
     const {
       domain: { id, shared_with_subaccounts, subaccount_id: subaccount },
-      updateDomain
+      updateDomain,
     } = this.props;
 
     return updateDomain({ id, subaccount, shared_with_subaccounts: !shared_with_subaccounts });
-  }
+  };
 
   componentDidMount() {
     this.props.getDomain(this.props.match.params.id);
+    this.props.getInboxTracker(this.props.match.params.id);
   }
 
   componentWillUnmount() {
@@ -80,7 +81,15 @@ export class EditPage extends Component {
   }
 
   render() {
-    const { domain, error, hasAutoVerifyEnabled, loading, match: { params: { id }}} = this.props;
+    const {
+      domain,
+      error,
+      hasAutoVerifyEnabled,
+      loading,
+      match: {
+        params: { id },
+      },
+    } = this.props;
 
     if (error) {
       return (
@@ -113,7 +122,7 @@ export class EditPage extends Component {
         </div>
         <DeleteModal
           open={this.state.showDelete}
-          title='Are you sure you want to delete this sending domain?'
+          title="Are you sure you want to delete this sending domain?"
           content={<p>Any future transmission that uses this domain will be rejected.</p>}
           onCancel={this.toggleDelete}
           onDelete={this.deleteDomain}
@@ -123,20 +132,20 @@ export class EditPage extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   hasAutoVerifyEnabled: hasAutoVerifyEnabledSelector(state),
   domain: selectDomain(state),
   error: state.sendingDomains.getError,
-  loading: state.sendingDomains.getLoading
+  loading: state.sendingDomains.getLoading,
 });
-
 
 const mapDispatchToProps = {
   clearSendingDomain,
   getDomain,
+  getInboxTracker,
   deleteDomain,
   updateDomain,
-  showAlert
+  showAlert,
 };
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(EditPage));
