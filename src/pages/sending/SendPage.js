@@ -25,7 +25,8 @@ const SendPage = ({ sendEmail, handleSubmit, loading, showAlert, sendLater, does
   const [hasFireworks, setHasFireworks] = useState(false);
   const [requestBody, setRequestBody] = useState();
 
-  const onSubmit = ({ recipientList, template, campaignId, ippool }) => {
+  const onSubmit = ({ recipientList, description, template, campaignId, ippool }) => {
+    console.log('description', description);
     const { id: templateID } = template;
     const options = {};
 
@@ -41,11 +42,12 @@ const SendPage = ({ sendEmail, handleSubmit, loading, showAlert, sendLater, does
     if (ippool && ippool.id) {
       options.ip_pool = ippool.id;
     }
-    return sendEmail({ id: templateID, recipients, campaignId, options }).then(res => {
+    return sendEmail({ id: templateID, description, recipients, campaignId, options }).then(res => {
       const request = {
         campaign_id: campaignId,
         content: { template_id: templateID },
         options,
+        description,
         recipients,
       };
       setRequestBody(request);
@@ -88,7 +90,7 @@ const SendPage = ({ sendEmail, handleSubmit, loading, showAlert, sendLater, does
           component={CheckboxWrapper}
         />
         <Panel
-          title="Configuration"
+          title="Configure a Transmission"
           style={{
             backgroundImage:
               doesntLikeFun &&
@@ -106,6 +108,7 @@ const SendPage = ({ sendEmail, handleSubmit, loading, showAlert, sendLater, does
                 validate={required}
                 required
               />
+              <Field name="description" label="Description" component={TextFieldWrapper} />
               <Field
                 name="recipientList"
                 label="Recipient List"

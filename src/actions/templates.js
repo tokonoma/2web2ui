@@ -232,7 +232,7 @@ export function sendPreview({ id, mode, emails, from, subaccountId }) {
   };
 }
 
-export function sendEmail({ id, recipients, campaignId, options }) {
+export function sendEmail({ id, recipients, description, campaignId, options }) {
   return dispatch => {
     // const testData = await dispatch(getTestData({ id, mode }));
 
@@ -248,6 +248,7 @@ export function sendEmail({ id, recipients, campaignId, options }) {
             },
             recipients,
             campaign_id: campaignId,
+            description,
             options,
           },
         },
