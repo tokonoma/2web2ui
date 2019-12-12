@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Page, Panel, Table, Button } from '@sparkpost/matchbox';
 import { TableCollection, Empty } from 'src/components';
 import { Link } from 'react-router-dom';
@@ -6,9 +6,16 @@ import { formatDateTime } from 'src/helpers/date';
 import { connect } from 'react-redux';
 import { getAccountUiOptionValue } from 'src/helpers/conditions/account';
 import { fetch as fetchAccount } from 'src/actions/account';
+import moment from 'moment';
 
-const OutboxPage = ({ outbox }) => {
+const OutboxPage = ({ outbox: allOutbox }) => {
   const TableWrapper = props => <Table>{props.children}</Table>;
+
+  const outbox = useMemo(() => {
+    return allOutbox.filter(({ sendTime }) => {
+      return moment(sendTime).isBefore(moment.now());
+    });
+  }, [allOutbox]);
 
   const columns = [
     { label: 'Campaign ID', sortKey: 'campaignId' },
@@ -22,7 +29,7 @@ const OutboxPage = ({ outbox }) => {
 
   const filterBoxConfig = {
     show: true,
-    exampleModifiers: ['name'],
+    exampleModifiers: ['campaignId', 'description'],
     itemToStringKeys: [
       'campaignId',
       'template',
@@ -59,22 +66,28 @@ const OutboxPage = ({ outbox }) => {
   };
   return (
     <Page title="Outbox">
-      <Panel>
-        {outbox.length <= 0 ? (
-          <Empty message="No messages" />
-        ) : (
-          <TableCollection
-            wrapperComponent={TableWrapper}
-            rows={outbox}
-            columns={columns}
-            getRowData={getRowData}
-            pagination
-            filterBox={filterBoxConfig}
-            defaultSortColumn="sendTime"
-            defaultSortDirection="desc"
-          />
-        )}
-      </Panel>
+      {outbox.length <= 0 ? (
+        <Empty message="No messages" />
+      ) : (
+        <TableCollection
+          wrapperComponent={TableWrapper}
+          rows={outbox}
+          columns={columns}
+          getRowData={getRowData}
+          pagination
+          filterBox={filterBoxConfig}
+          defaultSortColumn="sendTime"
+          defaultSortDirection="desc"
+        >
+          {({ filterBox, collection, pagination }) => (
+            <>
+              <Panel sectioned>{filterBox}</Panel>
+              <Panel>{collection}</Panel>
+              {pagination}
+            </>
+          )}
+        </TableCollection>
+      )}
     </Page>
   );
 };
