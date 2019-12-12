@@ -1,0 +1,10 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.Layout {
+  display: grid;
+  grid-template-columns: 1fr;
+
+  @media (min-width: breakpoint(medium)) {
+    grid-template-columns: 4fr 3fr;
+  }
+}

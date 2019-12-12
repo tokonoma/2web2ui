@@ -19,6 +19,7 @@ import Fireworks from './components/Fireworks';
 import ThatWasEasyButton from 'src/components/thatWasEasyButton/ThatWasEasyButton';
 import SingleDatePicker from './components/SingleDatePicker';
 import { showAlert } from 'src/actions/globalAlert';
+import styles from './SendPage.module.scss';
 
 const SendPage = ({ sendEmail, handleSubmit, loading, showAlert, sendLater, doesntLikeFun }) => {
   const [start_time, setStartTime] = useState(null);
@@ -88,8 +89,9 @@ const SendPage = ({ sendEmail, handleSubmit, loading, showAlert, sendLater, does
           type="checkbox"
           component={CheckboxWrapper}
         />
+
         <Panel
-          title="Configure Transmission"
+          title="Configure a Transmission"
           style={{
             backgroundImage:
               doesntLikeFun &&
@@ -97,65 +99,75 @@ const SendPage = ({ sendEmail, handleSubmit, loading, showAlert, sendLater, does
               'url("https://blackxknite.files.wordpress.com/2017/03/lameasaurus.jpg?w=552")',
           }}
         >
-          <Panel.Section>
-            <h6 role="heading" level="3">
-              Basic Settings
-            </h6>
-            <div style={{ maxWidth: 600 }}>
-              <Field
-                name="campaignId"
-                label="Campaign ID"
-                component={TextFieldWrapper}
-                validate={required}
-                required
-              />
-              <Field name="description" label="Description" component={TextFieldWrapper} />
-              <Field
-                name="recipientList"
-                label="Recipient List"
-                placeholder="Type to search"
-                component={RecipientListTypeaheadWrapper}
-                validate={required}
-                required
-              />
-              <Field
-                name="template"
-                label="Template"
-                placeholder="Type to search"
-                component={TemplateTypeaheadWrapper}
-                validate={required}
-                required
-              />
+          <div className={styles.Layout}>
+            <div>
+              <Panel.Section>
+                <h6 role="heading" level="3">
+                  Basic Settings
+                </h6>
+                <div style={{ maxWidth: 600 }}>
+                  <Field
+                    name="campaignId"
+                    label="Campaign ID"
+                    component={TextFieldWrapper}
+                    validate={required}
+                    required
+                  />
+                  <Field name="description" label="Description" component={TextFieldWrapper} />
+                  <Field
+                    name="recipientList"
+                    label="Recipient List"
+                    placeholder="Type to search"
+                    component={RecipientListTypeaheadWrapper}
+                    validate={required}
+                    required
+                  />
+                  <Field
+                    name="template"
+                    label="Template"
+                    placeholder="Type to search"
+                    component={TemplateTypeaheadWrapper}
+                    validate={required}
+                    required
+                  />
+                </div>
+              </Panel.Section>
             </div>
-          </Panel.Section>
-          <Panel.Section>
-            <h6 role="heading" level="3">
-              Advanced Settings
-            </h6>
-            <div style={{ maxWidth: 600 }}>
-              <Field
-                name="ippool"
-                label="IP Pool"
-                component={IpPoolTypeaheadWrapper}
-                helpText={'Uses default IP pool if none selected'}
-              />
+
+            <div>
+              <Panel.Section style={{ paddingLeft: 0 }}>
+                <h6 role="heading" level="3">
+                  Advanced Settings
+                </h6>
+                <div style={{ maxWidth: 600 }}>
+                  <Field
+                    name="ippool"
+                    label="IP Pool"
+                    component={IpPoolTypeaheadWrapper}
+                    helpText={'Uses default IP pool if none selected'}
+                  />
+                </div>
+                <div style={{ marginTop: 20, maxWidth: 600 }}>
+                  <Field
+                    name="sendLater"
+                    label="Send at a later time?"
+                    type="checkbox"
+                    component={CheckboxWrapper}
+                  />
+                  {sendLater ? (
+                    <SingleDatePicker
+                      onChange={e => {
+                        setStartTime(new Date(e.target.value));
+                      }}
+                    />
+                  ) : null}
+                </div>
+              </Panel.Section>
             </div>
-            <div style={{ marginTop: 20, maxWidth: 600 }}>
-              <Field
-                name="sendLater"
-                label="Send at a later time?"
-                type="checkbox"
-                component={CheckboxWrapper}
-              />
-              {sendLater ? (
-                <SingleDatePicker
-                  onChange={e => {
-                    setStartTime(new Date(e.target.value));
-                  }}
-                />
-              ) : null}
-            </div>
-          </Panel.Section>
+          </div>
+
+          <Panel.Section></Panel.Section>
+
           <Panel.Section>
             {doesntLikeFun ? (
               <Button type="submit">Boring Send</Button>
