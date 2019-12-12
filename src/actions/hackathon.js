@@ -20,3 +20,19 @@ export function getHackathonData(
     },
   });
 }
+
+export function getHackathonDataPartDeux(
+  campaignId = 'p1368:c48773:t1232045:Order Confirmation | Trigger | Cx | HQ Oth',
+) {
+  return sparkpostApiRequestMock({
+    type: 'HACK_DEUX',
+    meta: {
+      method: 'GET',
+      url: `/inbox_spam_perc`,
+      params: {
+        Authorization: '',
+        campaignId,
+      },
+    },
+  });
+}
