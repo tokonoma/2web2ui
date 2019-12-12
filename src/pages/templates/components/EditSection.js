@@ -18,6 +18,8 @@ import { DraggableModal } from '../../../components/draggableModal/DraggableModa
 // import CheckboxnRadioForm from '../../../components/ampEmailComponentForms/CheckboxnRadioForm';
 import ImageForm from '../../../components/ampEmailComponentForms/ImageForm';
 import FormContainer from '../../../components/ampEmailComponentForms/FormContainer';
+import TimeagoForm from 'src/components/ampEmailComponentForms/TimeagoForm';
+import AccordionForm from 'src/components/ampEmailComponentForms/AccordionForm';
 
 const EditSection = () => {
   const {
@@ -57,6 +59,7 @@ const EditSection = () => {
     <script async custom-element="amp-form" src="https://cdn.ampproject.org/v0/amp-form-0.1.js"></script>
     <script async custom-element="amp-accordion" src="https://cdn.ampproject.org/v0/amp-accordion-0.1.js"></script>
     <script async custom-element="amp-timeago" src="https://cdn.ampproject.org/v0/amp-timeago-0.1.js"></script>
+    <script async custom-element="amp-bind" src="https://cdn.ampproject.org/v0/amp-bind-0.1.js"></script>
   </head>
   <body>
     Hello, world.
@@ -169,7 +172,7 @@ const EditSection = () => {
             </div>
 
             <DraggableModal open={accordianModal} handleToggle={() => setAccordianModal(false)}>
-              Accordian
+              <AccordionForm />
             </DraggableModal>
             <DraggableModal open={imageModal} handleToggle={() => setImageModal(false)}>
               <ImageForm />
@@ -187,7 +190,7 @@ const EditSection = () => {
               <FormContainer />
             </DraggableModal>
             <DraggableModal open={timeAgoModal} handleToggle={() => setTimeAgoModal(false)}>
-              Time Ago
+              <TimeagoForm />
             </DraggableModal>
           </>
         )}
