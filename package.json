@@ -69,6 +69,7 @@
     "@sparkpost/boomerang": "^1.0.6",
     "@sparkpost/matchbox": "^3.8.0",
     "@sparkpost/matchbox-icons": "^1.2.1",
+    "amp-email-generator": "^0.9.0",
     "axios": "^0.18.0",
     "bowser": "2.1.2",
     "classnames": "^2.2.5",
