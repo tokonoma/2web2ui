@@ -19,6 +19,7 @@ import engagementReport from './engagementReport';
 import rejectionReport from './rejectionReport';
 import currentUser from './currentUser';
 import globalAlert from './globalAlert';
+import hackathon from './hackathon';
 import invoices from './invoices';
 import ipPools from './ipPools';
 import messageEvents from './messageEvents';
@@ -67,6 +68,7 @@ const appReducer = combineReducers({
   engagementReport,
   globalAlert,
   form,
+  hackathon,
   inboxPlacement,
   invoices,
   ingestBatchEvents,
