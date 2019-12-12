@@ -25,6 +25,10 @@ const ScheduledPage = props => {
       label: 'Status',
       sortKey: 'state',
     },
+    {
+      label: 'Scheduled Time',
+      sortKey: 'start_time',
+    },
   ];
 
   const capitalizeFirstLetter = string => {
@@ -42,12 +46,13 @@ const ScheduledPage = props => {
     listScheduled();
   }, [listScheduled]);
 
-  const getRowData = ({ content, id, campaign_id, description, state }) => {
+  const getRowData = ({ content, id, campaign_id, description, state, send_time }) => {
     return [
       <div>{campaign_id}</div>,
       <div>{content.template_id}</div>,
       <div>{description}</div>,
       <div>{capitalizeFirstLetter(state)}</div>,
+      <div>{formatDateTime(send_time)}</div>,
     ];
   };
 
