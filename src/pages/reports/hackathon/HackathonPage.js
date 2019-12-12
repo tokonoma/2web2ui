@@ -7,14 +7,13 @@ import connect from 'react-redux/es/connect/connect';
 import useTabs from '../../../hooks/useTabs/useTabs';
 import moment from 'moment';
 
-const DISPLAY_TIME = 500;
+const DISPLAY_TIME = 100;
 
 const TABS = [
   { content: 'Delivery', key: 'delivery' },
-  { content: 'Opens', key: 'opens' },
-  { content: 'Clicks', key: 'clicks' },
-  { content: 'Deliverability-Inbox', key: 'd12-inbox' },
-  { content: 'Deliverability-Spam', key: 'd12-spam' },
+  { content: 'Opens', key: 'open' },
+  { content: 'Deliverability-Inbox', key: 'inbox' },
+  { content: 'Deliverability-Spam', key: 'spam' },
 ];
 
 export const HackathonPage = ({ getHackathonData, data = [] }) => {
@@ -23,18 +22,28 @@ export const HackathonPage = ({ getHackathonData, data = [] }) => {
   const [time, setTime] = useState(null);
   const [endTime, setEndTime] = useState(0);
   const [startTime, setStartTime] = useState(0);
+  const [copyOfData, setCopyOfData] = useState([]);
 
-  let sliderSlices = [];
+  let sliderSlices = {};
 
   useEffect(() => {
-    getHackathonData();
+    getHackathonData(TABS[selectedTabIndex].key);
   }, [getHackathonData, selectedTabIndex]);
 
   useEffect(() => {
     if (data.length > 0) {
+      setCopyOfData(data);
       setTime(moment(data[0].eventTime));
-      setStartTime(moment(data[0].eventTime).unix());
-      setEndTime(moment(data.slice(-1)[0].eventTime).unix());
+      setStartTime(
+        moment(data[0].eventTime)
+          .startOf('days')
+          .unix(),
+      );
+      setEndTime(
+        moment(data[data.length - 1].eventTime)
+          .startOf('days')
+          .unix(),
+      );
       setMapPoints([]);
     }
   }, [data]);
@@ -42,11 +51,21 @@ export const HackathonPage = ({ getHackathonData, data = [] }) => {
   useEffect(() => {
     const startMappingDataPoints = lastTime => {
       const addMapPoint = () => {
-        const end = moment(lastTime.toDate()).add(1, 'hours');
-        const start = moment(lastTime.toDate()).subtract(6, 'hours');
-        const newMapPoints = data.filter(d => {
-          return moment(d.eventTime).isBetween(start, end);
-        });
+        const useThisLastTimeHere = lastTime.toDate();
+        const end = moment(useThisLastTimeHere);
+        end.add(1, 'hours');
+
+        var i = 0;
+        let newMapPoints = Object.assign([], mapPoints);
+        while (i < copyOfData.length) {
+          if (moment(copyOfData[i].eventTime).isBefore(end)) {
+            newMapPoints.push(copyOfData.shift());
+          } else {
+            break;
+          }
+          i++;
+        }
+
         setMapPoints(newMapPoints);
         setTime(end);
       };
@@ -54,12 +73,13 @@ export const HackathonPage = ({ getHackathonData, data = [] }) => {
         requestAnimationFrame(addMapPoint);
       }, DISPLAY_TIME);
     };
+
     if (time && time.unix() < endTime) {
-      //console.log('time', time.unix(), endTime, time.unix() < endTime);
-      //const lastTime = mapPoints.length ? mapPoints.slice(-1)[0].eventTime : addHours(startDate, 6);
       startMappingDataPoints(time);
     }
-  }, [time, endTime, data]);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [time]);
 
   if (data.length > 0 && endTime && startTime) {
     const numOfDays = moment.unix(endTime).diff(moment.unix(startTime), 'days');
@@ -67,6 +87,7 @@ export const HackathonPage = ({ getHackathonData, data = [] }) => {
       const tickTime = moment
         .unix(startTime)
         .add(i, 'day')
+        .startOf('days')
         .format('YYYY-MM-DD');
       sliderTicks[(100 / numOfDays) * i] = tickTime;
       return sliderTicks;
@@ -77,9 +98,7 @@ export const HackathonPage = ({ getHackathonData, data = [] }) => {
   const apiKey = { key: '' };
 
   const heatMapData = {
-    positions: mapPoints.map(({ longitude, latitude, eventTime }) => {
-      return { lng: longitude, lat: latitude, eventTime };
-    }),
+    positions: mapPoints,
     options: {
       radius: 10,
       opacity: 0.6,
@@ -90,6 +109,7 @@ export const HackathonPage = ({ getHackathonData, data = [] }) => {
     lng: -98.579527,
   };
   const zoom = 1;
+  const currentTimeOnSlider = time ? ((time.unix() - startTime) / (endTime - startTime)) * 100 : 0;
 
   return (
     <Page
@@ -113,13 +133,8 @@ export const HackathonPage = ({ getHackathonData, data = [] }) => {
           onChildMouseLeave={() => {}}
         ></GoogleMapReact>
       </div>
-      <Slider
-        disabled
-        min={0}
-        max={100}
-        ticks={sliderSlices}
-        value={time ? ((time.unix() - startTime) / (endTime - startTime)) * 100 : 0}
-      />
+      <strong>{moment(time || 0).format('YYYY-MM-DD HH:mm')}</strong>
+      <Slider disabled min={0} max={100} ticks={sliderSlices} value={currentTimeOnSlider} />
     </Page>
   );
 };
