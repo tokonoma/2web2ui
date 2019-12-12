@@ -1,7 +1,18 @@
-const delegatedDomainsReducer = (state = [], action) => {
+const delegatedDomainsReducer = (state = {}, action) => {
   switch (action.type) {
-    case 'LIST_DELEGATED_DOMAINS_SUCCESS': {
-      return action.payload.results;
+    case 'GET_DELEGATED_DOMAIN_SUCCESS': {
+      return {
+        ...state,
+        [action.context.domain]: action.payload.results,
+      };
+    }
+
+    case 'UPDATE_DELEGATED_DOMAIN_RECORDS_SUCCESS': {
+      return state;
+      // ...state,
+      // [action.context.domain]: {
+      //   action.data
+      // };
     }
   }
 

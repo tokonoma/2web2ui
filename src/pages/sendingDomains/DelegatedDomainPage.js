@@ -2,17 +2,19 @@ import React from 'react';
 import './hack.css';
 import { Button, TextField, Select, Panel } from '@sparkpost/matchbox';
 import { connect } from 'react-redux';
-import { list } from 'src/actions/delegatedDomains';
+import * as actions from 'src/actions/delegatedDomains';
 import { Page } from '@sparkpost/matchbox';
 import { Banner } from '@sparkpost/matchbox';
 import useRouter from 'src/hooks/useRouter';
 
-const DelegatedDomainPage = ({ delegatedDomains, list }) => {
-  const { requestParams: { id } = {} } = useRouter();
+const DelegatedDomainPage = ({ delegatedDomain, getDomain, updateDomainRecords }) => {
+  const {
+    requestParams: { id },
+  } = useRouter();
+
   React.useEffect(() => {
-    list(id);
-  }, [id, list]);
-  console.log(delegatedDomains);
+    getDomain(id);
+  }, [getDomain, id]);
 
   const mockData = {
     results: [
@@ -145,7 +147,11 @@ const DelegatedDomainPage = ({ delegatedDomains, list }) => {
   );
 };
 
+const mSTP = (state, props) => {
+  return {
+    delegatedDomain: state.delegatedDomain[props.match.id],
+  };
+};
+
 // export default DelegatedDomainPage;
-export default connect(state => ({ delegatedDomains: state.delegatedDomains }), { list })(
-  DelegatedDomainPage,
-);
+export default connect(mSTP, actions)(DelegatedDomainPage);
