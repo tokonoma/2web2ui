@@ -51,7 +51,7 @@ const ValuenLabel = ({ onChange, index }) => {
     </Grid>
   );
 };
-const CheckboxnRadioForm = () => {
+const CheckboxnRadioForm = ({ number, addtoState }) => {
   const [formState, setFormState] = useState({
     grouplabel: '',
     labelnValues: { 0: { label: '', value: '' } },
@@ -64,10 +64,15 @@ const CheckboxnRadioForm = () => {
       ...formState,
       labelnValues: _.merge(formState.labelnValues, { [index]: values }),
     });
+    addtoState(number, {
+      ...formState,
+      labelnValues: _.merge(formState.labelnValues, { [index]: values }),
+    });
   };
 
   const onRadioChange = (label, e = {}) => {
     setFormState({ ...formState, ...{ [label]: e.target.value } });
+    addtoState(number, { ...formState, ...{ [label]: e.target.value } });
   };
 
   // const onFormSubmit = () => {
@@ -84,16 +89,16 @@ const CheckboxnRadioForm = () => {
   return (
     <form>
       <TextField
-        id="group-label"
+        id={`group-label-${number}`}
         label="Label for the group"
         placeholder={'Group'}
         onChange={e => setFormState({ ...formState, ...{ grouplabel: e.target.value } })}
       />
-      <Radio.Group label="Choose the type">
+      <Radio.Group label="Choose the type" key={number}>
         <Radio
-          id="radio-buttons"
+          id={`radio-buttons-${number}`}
           label="Radio Buttons"
-          name="typeofgroup"
+          name={`typeofgroup-${number}`}
           value={'Radio'}
           onChange={e => onRadioChange('grouptype', e)}
         />
@@ -101,24 +106,8 @@ const CheckboxnRadioForm = () => {
           id="checkbox-group"
           label="Checkbox Group"
           name="typeofgroup"
-          value={'Checkbox'}
+          value={`typeofgroup-${number}`}
           onChange={e => onRadioChange('grouptype', e)}
-        />
-      </Radio.Group>
-      <Radio.Group label="Choose color">
-        <Radio
-          id="#3352FF"
-          label={'primary'}
-          name="color"
-          value={'#3352FF'}
-          onChange={e => onRadioChange('color', e)}
-        />
-        <Radio
-          id="#FF3352"
-          label={'secondary'}
-          name="color"
-          value={'#FF3352'}
-          onChange={e => onRadioChange('color', e)}
         />
       </Radio.Group>
       {[...Array(count).keys()].map(x => (

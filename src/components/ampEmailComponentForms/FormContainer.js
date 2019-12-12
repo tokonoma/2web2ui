@@ -25,14 +25,14 @@ multiple>
   option="4"></amp-img>
 </amp-selector>`;
 const FormContainer = () => {
-  const [formState, setFormState] = useState({ fields: [] });
+  const [formState, setFormState] = useState({ fields: {} });
   const [code, setCode] = useState(null);
+  const [fieldcount, setFieldCount] = useState(0);
   const [addField, setAddField] = useState(false);
   const [allFields, setAllFields] = useState([]);
   const onFormSubmit = () => {
     setCode(ampHTML);
   };
-
   const copycode = () => {
     var copyText = document.getElementById('amp-input');
     copyText.select();
@@ -40,16 +40,19 @@ const FormContainer = () => {
     document.execCommand('copy');
   };
 
-  const addtoState = state => {
+  const addtoState = (number, state) => {
     const prevField = formState.fields;
-    prevField.push(state);
-    setFormState({ ...formState, prevField });
+
+    setFormState({ ...formState, ...{ fields: { ...prevField, ...{ [number]: state } } } });
   };
 
   const handleAddField = type => {
     switch (type) {
       case 'Checkbox/Radio':
-        setAllFields([...allFields, <CheckboxnRadioForm onChange={addtoState} />]);
+        setAllFields([
+          ...allFields,
+          <CheckboxnRadioForm addtoState={addtoState} number={fieldcount} />,
+        ]);
         break;
       case 'TextField':
         setAllFields([...allFields, <TextField />]);
@@ -99,6 +102,7 @@ const FormContainer = () => {
               options={['Select a type', 'TextField', 'Checkbox/Radio']}
               onChange={e => {
                 setAddField(false);
+                setFieldCount(fieldcount + 1);
                 handleAddField(e.target.value);
               }}
             />
