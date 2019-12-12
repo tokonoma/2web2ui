@@ -24,8 +24,8 @@ export class TemplateTypeahead extends Component {
     const { hasTemplates } = this.props;
     return (
       <Typeahead
-        renderItem={item => <Item id={item.id} />}
-        itemToString={item => (item ? item.id : '')}
+        renderItem={item => <Item id={item.name || item.id} />}
+        itemToString={item => (item ? item.name || item.id : '')}
         label="Template"
         disabled={!hasTemplates}
         {...this.props}

@@ -41,7 +41,7 @@ $base-padding: 0.7rem;
   border: 0;
   outline: none;
   border: ($base-padding / 6) solid $easy-peasy-red-dark;
-  box-shadow: inset 0 -#{$base-padding / 1.5} 0 0 $easy-peasy-red-dark,
+  box-shadow: inset 0 -#{$base-padding / 1.75} 0 0 $easy-peasy-red-dark,
     0 $base-padding / 2 $base-padding / 2 -#{$base-padding / 3} rgba(#000, 0.25);
   height: 100%;
   width: 100%;

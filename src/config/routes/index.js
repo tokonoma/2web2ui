@@ -35,6 +35,8 @@ import {
   webhooks,
 } from 'src/pages';
 import SendPage from 'src/pages/sending/SendPage';
+import OutboxPage from 'src/pages/sending/OutboxPage';
+
 import LogoutPage from 'src/pages/logout/LogoutPage';
 
 import onboarding from 'src/pages/onboarding';
@@ -182,6 +184,12 @@ const routes = [
   {
     path: '/send',
     component: SendPage,
+    layout: App,
+    title: 'Send Email',
+  },
+  {
+    path: '/outbox',
+    component: OutboxPage,
     layout: App,
     title: 'Send Email',
   },
