@@ -71,7 +71,7 @@ const EditSection = () => {
       title: 'Opens a dialog',
       'data-id': 'popover-action-insert-amp-boilerplate',
     },
-    currentTabKey === 'html' && {
+    (currentTabKey === 'html' || currentTabKey === 'text') && {
       content: 'Convert HTML to Text',
       onClick: () => handleConvertHTMLtoTextClick(),
       role: 'button',
