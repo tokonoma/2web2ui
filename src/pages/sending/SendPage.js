@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Page, Panel, Expandable, UnstyledLink, Button } from '@sparkpost/matchbox';
 import { Code } from '@sparkpost/matchbox-icons';
 import { reduxForm, Field, formValueSelector } from 'redux-form';
@@ -20,11 +20,27 @@ import ThatWasEasyButton from 'src/components/thatWasEasyButton/ThatWasEasyButto
 import SingleDatePicker from './components/SingleDatePicker';
 import { showAlert } from 'src/actions/globalAlert';
 import styles from './SendPage.module.scss';
+import { setAccountOption, fetch as fetchAccount } from 'src/actions/account';
+import { getAccountUiOptionValue } from 'src/helpers/conditions/account';
 
-const SendPage = ({ sendEmail, handleSubmit, loading, showAlert, sendLater, doesntLikeFun }) => {
+const SendPage = ({
+  sendEmail,
+  handleSubmit,
+  loading,
+  showAlert,
+  sendLater,
+  doesntLikeFun,
+  setAccountOption,
+  outbox,
+  fetchAccount,
+}) => {
   const [start_time, setStartTime] = useState(null);
   const [hasFireworks, setHasFireworks] = useState(false);
   const [requestBody, setRequestBody] = useState();
+
+  useEffect(() => {
+    fetchAccount();
+  }, [fetchAccount]);
 
   const onSubmit = ({ recipientList, description, template, campaignId, ippool }) => {
     const { id: templateID } = template;
@@ -52,22 +68,18 @@ const SendPage = ({ sendEmail, handleSubmit, loading, showAlert, sendLater, does
       };
       setRequestBody(request);
 
-      const outbox = localStorage.getItem('outbox');
-      const fullOutbox = outbox ? JSON.parse(outbox) : [];
-      localStorage.setItem(
-        'outbox',
-        JSON.stringify(
-          fullOutbox.concat([
-            {
-              id: res.id,
-              sendTime: start_time || new Date(),
-              template,
-              recipientList,
-              ipPool: ippool,
-            },
-          ]),
-        ),
-      );
+      const newOutbox = outbox.concat([
+        {
+          campaignId,
+          id: res.id,
+          sendTime: start_time || new Date(),
+          template,
+          recipientList,
+          ipPool: ippool,
+          description,
+        },
+      ]);
+      setAccountOption('hackathon_outbox', newOutbox).then(() => fetchAccount());
 
       if (!doesntLikeFun) {
         setHasFireworks(true);
@@ -205,9 +217,12 @@ const MSTP = state => ({
   loading: state.recipientLists.currentLoading || state.templates.sendPending,
   sendLater: formValueSelector('SEND_FORM')(state, 'sendLater'),
   doesntLikeFun: formValueSelector('SEND_FORM')(state, 'doesntLikeFun'),
+  outbox: getAccountUiOptionValue('hackathon_outbox')(state) || [],
 });
 const MDTP = {
   sendEmail,
   showAlert,
+  setAccountOption,
+  fetchAccount,
 };
 export default connect(MSTP, MDTP)(reduxForm(formOptions)(SendPage));
