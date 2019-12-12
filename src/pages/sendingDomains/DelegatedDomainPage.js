@@ -149,7 +149,7 @@ const DelegatedDomainPage = ({ delegatedDomain, getDomain, updateDomainRecords }
 
 const mSTP = (state, props) => {
   return {
-    delegatedDomain: state.delegatedDomain[props.match.id],
+    delegatedDomain: state.delegatedDomains[props.match.id],
   };
 };
 
