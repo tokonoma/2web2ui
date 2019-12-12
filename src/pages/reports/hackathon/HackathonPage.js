@@ -2,14 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { Page, Slider, Tabs } from '@sparkpost/matchbox';
 import { Users } from 'src/components/images';
 import GoogleMapReact from 'google-map-react';
-import { subHours, addHours, subDays, startOfDay, differenceInHours, format } from 'date-fns';
 import { getHackathonData } from 'src/actions/hackathon';
 import connect from 'react-redux/es/connect/connect';
 import useTabs from '../../../hooks/useTabs/useTabs';
+import moment from 'moment';
 
 const DISPLAY_TIME = 500;
-const END_DATE = startOfDay(new Date());
-const START_DATE = subDays(END_DATE, 4);
 
 const TABS = [
   { content: 'Delivery', key: 'delivery' },
@@ -22,8 +20,10 @@ const TABS = [
 export const HackathonPage = ({ getHackathonData, data = [] }) => {
   const [mapPoints, setMapPoints] = useState([]);
   const [selectedTabIndex, tabs] = useTabs(TABS, 0);
-  let startDate = START_DATE;
-  let endDate = END_DATE;
+  const [time, setTime] = useState(null);
+  const [endTime, setEndTime] = useState(0);
+  const [startTime, setStartTime] = useState(0);
+
   let sliderSlices = [];
 
   useEffect(() => {
@@ -32,21 +32,23 @@ export const HackathonPage = ({ getHackathonData, data = [] }) => {
 
   useEffect(() => {
     if (data.length > 0) {
-      console.log(data);
-
+      setTime(moment(data[0].eventTime));
+      setStartTime((moment(data[0].eventTime)).unix());
+      setEndTime((moment(data.slice(-1)[0].eventTime)).unix());
       setMapPoints([]);
     }
   }, [data]);
 
-  const startMappingDataPoints = (allTheData = [], lastTime) => {
+  const startMappingDataPoints = (lastTime) => {
     const addMapPoint = () => {
-      const newMapPoints = allTheData.filter(d => {
-        return (
-          new Date(d.eventTime) >= subHours(lastTime, 6) &&
-          new Date(d.eventTime) < addHours(lastTime, 1)
-        );
+      const end = moment((lastTime).add(6, 'hours').toDate());
+      const start = moment((lastTime).subtract(6, 'hours').toDate());
+      const newMapPoints = data.filter(d => {
+        return (moment(d.eventTime).isBetween(start, end));
       });
       setMapPoints(newMapPoints);
+      const newTime =  moment((lastTime).add(6, 'hours').toDate());
+      setTime(newTime);
     };
     setTimeout(() => {
       requestAnimationFrame(addMapPoint);
@@ -54,23 +56,22 @@ export const HackathonPage = ({ getHackathonData, data = [] }) => {
   };
 
   useEffect(() => {
-    if (data.length > 0) {
-      const lastTime = mapPoints.length ? mapPoints.slice(-1)[0].eventTime : addHours(startDate, 6);
-      startMappingDataPoints(data, lastTime);
+    if(time && time.unix() < endTime) {
+      //console.log('time', time.unix(), endTime, time.unix() < endTime);
+      //const lastTime = mapPoints.length ? mapPoints.slice(-1)[0].eventTime : addHours(startDate, 6);
+      startMappingDataPoints(time);
     }
-  }, [mapPoints, data, startDate]);
+  }, [time, endTime]);
 
-  if (data.length > 0) {
-    startDate = new Date(data[0].eventTime);
-    endDate = new Date(data.slice(-1)[0].eventTime);
+  if (data.length > 0 && endTime && startTime) {
 
-    sliderSlices = [...Array(7)].reduce((sliderTicks, tick, i) => {
-      const chunks = differenceInHours(endDate, startDate) / 7;
-      const curr = addHours(startDate, chunks * i);
-      sliderTicks[Number(curr) - Number(startDate)] = format(curr, 'YYYY-MM-DD');
+    const numOfDays = moment.unix(endTime).diff(moment.unix(startTime), 'days');
+    sliderSlices = [...Array(numOfDays)].reduce((sliderTicks, tick, i) => {
+      const tickTime = moment.unix(startTime).add(i, 'day').format('YYYY-MM-DD');
+      sliderTicks[100/numOfDays*i] = tickTime;
       return sliderTicks;
     }, {});
-    sliderSlices[Number(endDate) - Number(startDate)] = format(endDate, 'YYYY-MM-DD');
+    sliderSlices[100] = moment.unix(endTime).format('YYYY-MM-DD');
   }
 
   const apiKey = { key: '' };
@@ -89,7 +90,6 @@ export const HackathonPage = ({ getHackathonData, data = [] }) => {
     lng: -98.579527,
   };
   const zoom = 1;
-  const currentTime = heatMapData.positions.length && heatMapData.positions.slice(-1)[0].eventTime;
 
   return (
     <Page
@@ -114,11 +114,10 @@ export const HackathonPage = ({ getHackathonData, data = [] }) => {
         ></GoogleMapReact>
       </div>
       <Slider
-        disabled
         min={0}
-        max={Number(endDate) - Number(startDate)}
+        max={100}
         ticks={sliderSlices}
-        value={Number(new Date(currentTime || startDate)) - Number(startDate)}
+        value={time? ((time.unix()-startTime)/(endTime-startTime)*100): 0}
       />
     </Page>
   );
