@@ -16,66 +16,16 @@ const DelegatedDomainPage = ({ delegatedDomain, getDomain, updateDomainRecords }
     getDomain(id);
   }, [getDomain, id]);
 
-  const mockData = {
-    results: [
-      {
-        domain: 'foo.com',
-        records: [
-          {
-            type: 'NS',
-            name: 'foo.com.',
-            ttl: 172800,
-            data: 'ns-1536.awsdns-00.co.uk',
-          },
-          {
-            type: 'NS',
-            name: 'foo.com.',
-            ttl: 172800,
-            data: 'ns-1536.awsdns-00.co.uk',
-          },
-          {
-            type: 'NS',
-            name: 'foo.com.',
-            ttl: 172800,
-            data: 'ns-1536.awsdns-00.co.uk',
-          },
-          {
-            type: 'NS',
-            name: 'foo.com.',
-            ttl: 172800,
-            data: 'ns-1536.awsdns-00.co.uk',
-          },
-          {
-            type: 'A',
-            name: 'www.foo.com.',
-            ttl: 3600,
-            data: '1.2.3.4',
-          },
-          {
-            type: 'A',
-            name: 'www.foo.com.',
-            ttl: 3600,
-            data: '5.6.7.8',
-          },
-          {
-            type: 'A',
-            name: 'www.foo.com.',
-            ttl: 3600,
-            data: '4.3.2.1',
-          },
-          {
-            type: 'A',
-            name: 'www.foo.com.',
-            ttl: 3600,
-            data: '8.7.6.5',
-          },
-        ],
-      },
-    ],
-  };
-
   function getDataRows() {
-    return mockData.results[0].records.map((item, index) => {
+    console.log('getDataRows', delegatedDomain);
+
+    if (!delegatedDomain) {
+      return null;
+    }
+
+    console.log('delegatedDomain', delegatedDomain);
+
+    return delegatedDomain.records.map((item, index) => {
       return (
         <tr key={item.name + item.type + index}>
           <td>{item.name}</td>
@@ -149,7 +99,7 @@ const DelegatedDomainPage = ({ delegatedDomain, getDomain, updateDomainRecords }
 
 const mSTP = (state, props) => {
   return {
-    delegatedDomain: state.delegatedDomains[props.match.id],
+    delegatedDomain: state.delegatedDomains[props.match.params.id],
   };
 };
 
