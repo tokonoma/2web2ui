@@ -135,7 +135,7 @@ const SendPage = ({ sendEmail, handleSubmit, loading, showAlert, sendLater, does
             </div>
 
             <div>
-              <Panel.Section style={{ paddingLeft: 0 }}>
+              <Panel.Section className={styles.LayoutColumn2}>
                 <h6 role="heading" level="3">
                   Advanced Settings
                 </h6>
