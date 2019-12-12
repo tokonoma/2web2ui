@@ -36,6 +36,7 @@ import {
 } from 'src/pages';
 import SendPage from 'src/pages/sending/SendPage';
 import OutboxPage from 'src/pages/sending/OutboxPage';
+import ScheduledPage from 'src/pages/sending/ScheduledPage';
 
 import LogoutPage from 'src/pages/logout/LogoutPage';
 
@@ -191,7 +192,13 @@ const routes = [
     path: '/outbox',
     component: OutboxPage,
     layout: App,
-    title: 'Send Email',
+    title: 'Outbox',
+  },
+  {
+    path: '/scheduled-transmissions',
+    component: ScheduledPage,
+    layout: App,
+    title: 'Scheduled Transmissions',
   },
   {
     path: '/reports',
