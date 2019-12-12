@@ -31,6 +31,10 @@ export default [
         label: 'Outbox',
         to: '/outbox',
       },
+      {
+        label: 'Scheduled',
+        to: '/scheduled-transmissions',
+      },
     ],
   },
   {
