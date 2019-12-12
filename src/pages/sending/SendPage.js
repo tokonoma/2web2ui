@@ -26,7 +26,6 @@ const SendPage = ({ sendEmail, handleSubmit, loading, showAlert, sendLater, does
   const [requestBody, setRequestBody] = useState();
 
   const onSubmit = ({ recipientList, description, template, campaignId, ippool }) => {
-    console.log('description', description);
     const { id: templateID } = template;
     const options = {};
 
@@ -90,7 +89,7 @@ const SendPage = ({ sendEmail, handleSubmit, loading, showAlert, sendLater, does
           component={CheckboxWrapper}
         />
         <Panel
-          title="Configure a Transmission"
+          title="Configure Transmission"
           style={{
             backgroundImage:
               doesntLikeFun &&
@@ -99,7 +98,9 @@ const SendPage = ({ sendEmail, handleSubmit, loading, showAlert, sendLater, does
           }}
         >
           <Panel.Section>
-            <h6>Basic</h6>
+            <h6 role="heading" level="3">
+              Basic Settings
+            </h6>
             <div style={{ maxWidth: 600 }}>
               <Field
                 name="campaignId"
@@ -128,7 +129,9 @@ const SendPage = ({ sendEmail, handleSubmit, loading, showAlert, sendLater, does
             </div>
           </Panel.Section>
           <Panel.Section>
-            <h6>Advanced</h6>
+            <h6 role="heading" level="3">
+              Advanced Settings
+            </h6>
             <div style={{ maxWidth: 600 }}>
               <Field
                 name="ippool"
