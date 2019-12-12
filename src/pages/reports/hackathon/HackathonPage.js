@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Page, Slider, Tabs } from '@sparkpost/matchbox';
+import { Loading } from 'src/components';
 import { Users } from 'src/components/images';
 import GoogleMapReact from 'google-map-react';
 import { getHackathonData, getHackathonDataPartDeux } from 'src/actions/hackathon';
@@ -13,7 +14,7 @@ const TABS = [
   { content: 'Delivery', key: 'delivery' },
   { content: 'Opens', key: 'open' },
   { content: 'Deliverability-Inbox', key: 'inbox' },
-  { content: 'Deliverability-Spam', key: 'spam' },
+  /* { content: 'Deliverability-Spam', key: 'spam' }, */
 ];
 const CAMPAIGN_IDS = [
   'p1368: c899446: t1263502: DoorDash Giftcards 12 / 09 1st email | Batc',
@@ -32,6 +33,7 @@ export const HackathonPage = ({
   getHackathonDataPartDeux,
   data = [],
   dataDeux = { inbox: 0, spam: 0 },
+  loading,
 }) => {
   const [mapPoints, setMapPoints] = useState([]);
   const [selectedTabIndex, tabs] = useTabs(TABS, 0);
@@ -79,7 +81,7 @@ export const HackathonPage = ({
         const end = moment(useThisLastTimeHere);
         end.add(1, 'hours');
         const start = moment(useThisLastTimeHere);
-        start.subtract(6, 'hours');
+        start.subtract(2, 'hours');
 
         var i = 0;
         let newMapPoints = Object.assign([], mapPoints);
@@ -111,9 +113,6 @@ export const HackathonPage = ({
 
     if (time && time.unix() < endTime) {
       startMappingDataPoints(time);
-    } else if (time && endTime) {
-      setCopyOfData(Object.assign([], data));
-      setTime(moment(data[0].eventTime));
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -148,7 +147,7 @@ export const HackathonPage = ({
   };
   const zoom = 1;
   const currentTimeOnSlider = time ? ((time.unix() - startTime) / (endTime - startTime)) * 100 : 0;
-  const fromTime = moment(time ? time : 0).subtract(6, 'hours');
+  const fromTime = moment(time ? time : 0).subtract(3, 'hours');
   const toTime = moment(time ? time : 0);
   const vol = dataDeux.inbox + dataDeux.spam;
 
@@ -161,21 +160,15 @@ export const HackathonPage = ({
       }}
       title="Whiz Bang Pow"
     >
-      <div>
-        <strong>
-          {'Total Messages: '}
-          {data.length}
-        </strong>
-      </div>
       <strong>
         {'Campaign Inbox: '}
         {vol ? ((dataDeux.inbox / vol) * 100).toFixed(2) + '%' : 'N/A'}
         {', Sample Volume: '}
         {vol}
       </strong>
-
       <Tabs selected={selectedTabIndex} connectBelow={true} tabs={tabs} />
-      <div style={{ height: '75vh', width: '100%' }}>
+
+      <div style={{ height: '60vh', width: '100%' }}>
         <GoogleMapReact
           bootstrapURLKeys={apiKey}
           heatmapLibrary={true}
@@ -187,11 +180,23 @@ export const HackathonPage = ({
           onChildMouseLeave={() => {}}
         ></GoogleMapReact>
       </div>
-      <strong>
-        {'Currently viewing: '}
-        {fromTime.format('YYYY-MM-DD HH:mm')} - {toTime.format('YYYY-MM-DD HH:mm')}
-      </strong>
-      <Slider disabled min={0} max={100} ticks={sliderSlices} value={currentTimeOnSlider} />
+      {loading ? (
+        <Loading />
+      ) : (
+        <div>
+          <div>
+            <strong>
+              {'Total Messages: '}
+              {data.length}
+            </strong>
+          </div>
+          <strong>
+            {'Currently viewing (UTC): '}
+            {fromTime.format('YYYY-MM-DD HH:mm')} - {toTime.format('YYYY-MM-DD HH:mm')}
+          </strong>
+          <Slider disabled min={0} max={100} ticks={sliderSlices} value={currentTimeOnSlider} />
+        </div>
+      )}
     </Page>
   );
 };
@@ -199,6 +204,7 @@ export const HackathonPage = ({
 const mapStateToProps = state => ({
   data: state.hackathon.hacks,
   dataDeux: state.hackathon.hacksDeux,
+  loading: state.hackathon.loadingHacks,
 });
 
 export default connect(mapStateToProps, { getHackathonData, getHackathonDataPartDeux })(
