@@ -7,7 +7,7 @@ import connect from 'react-redux/es/connect/connect';
 import useTabs from '../../../hooks/useTabs/useTabs';
 import moment from 'moment';
 
-const DISPLAY_TIME = 100;
+const DISPLAY_TIME = 500;
 
 const TABS = [
   { content: 'Delivery', key: 'delivery' },
@@ -33,6 +33,13 @@ export const HackathonPage = ({ getHackathonData, data = [] }) => {
   useEffect(() => {
     if (data.length > 0) {
       setCopyOfData(data);
+      // HACKATHON 2019!!!!
+      let timeoutId = setTimeout(() => ({}));
+      while (timeoutId > 0) {
+        clearTimeout(timeoutId);
+        timeoutId--;
+      }
+
       setTime(moment(data[0].eventTime));
       setStartTime(
         moment(data[0].eventTime)
@@ -54,9 +61,20 @@ export const HackathonPage = ({ getHackathonData, data = [] }) => {
         const useThisLastTimeHere = lastTime.toDate();
         const end = moment(useThisLastTimeHere);
         end.add(1, 'hours');
+        const start = moment(useThisLastTimeHere);
+        start.subtract(6, 'hours');
 
         var i = 0;
         let newMapPoints = Object.assign([], mapPoints);
+        while (i < newMapPoints.length) {
+          if (moment(newMapPoints[i].eventTime).isBefore(start)) {
+            newMapPoints.shift();
+          } else {
+            break;
+          }
+          i++;
+        }
+
         while (i < copyOfData.length) {
           if (moment(copyOfData[i].eventTime).isBefore(end)) {
             newMapPoints.push(copyOfData.shift());
@@ -110,6 +128,8 @@ export const HackathonPage = ({ getHackathonData, data = [] }) => {
   };
   const zoom = 1;
   const currentTimeOnSlider = time ? ((time.unix() - startTime) / (endTime - startTime)) * 100 : 0;
+  const fromTime = moment(time ? time : 0).subtract(6, 'hours');
+  const toTime = moment(time ? time : 0);
 
   return (
     <Page
@@ -133,7 +153,10 @@ export const HackathonPage = ({ getHackathonData, data = [] }) => {
           onChildMouseLeave={() => {}}
         ></GoogleMapReact>
       </div>
-      <strong>{moment(time || 0).format('YYYY-MM-DD HH:mm')}</strong>
+      <strong>
+        Currently viewing: {fromTime.format('YYYY-MM-DD HH:mm')} -{' '}
+        {toTime.format('YYYY-MM-DD HH:mm')}
+      </strong>
       <Slider disabled min={0} max={100} ticks={sliderSlices} value={currentTimeOnSlider} />
     </Page>
   );
