@@ -11,13 +11,14 @@ import {
 } from 'recharts';
 import { getLineChartFormatters } from 'src/helpers/chart';
 import { formatNumber } from 'src/helpers/units';
+import styles from './DeliveryHistoryLineChart.module.scss';
 
 const DeliveryHistoryLineChart = props => {
   const { data } = props;
   const { xTickFormatter, tooltipLabelFormatter } = getLineChartFormatters('day');
 
   return (
-    <div className="sp-linechart-wrapper">
+    <div className={styles.ChartWrapper}>
       <ResponsiveContainer height={350} width={'100%'}>
         <LineChart data={data}>
           <YAxis

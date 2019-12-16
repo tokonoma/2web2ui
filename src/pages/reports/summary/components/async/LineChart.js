@@ -4,11 +4,20 @@
 */
 
 import React from 'react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, ReferenceLine } from 'recharts';
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+  ReferenceLine,
+} from 'recharts';
 import moment from 'moment';
-import './LineChart.scss';
+import styles from './LineChart.module.scss';
 
-const identity = (a) => a;
+const identity = a => a;
 
 function orderDesc(a, b) {
   return b.value - a.value;
@@ -16,23 +25,23 @@ function orderDesc(a, b) {
 
 export default class SpLineChart extends React.Component {
   renderLines() {
-    const { lines = []} = this.props;
-    return lines.map((line) => {
+    const { lines = [] } = this.props;
+    return lines.map(line => {
       const lineProps = {
         strokeWidth: 2,
         animationDuration: 400,
         activeDot: { r: 6 },
         dot: false,
         type: 'linear',
-        ...line
+        ...line,
       };
       return <Line {...lineProps} />;
     });
   }
 
   renderReferenceLines() {
-    const { referenceLines = []} = this.props;
-    return referenceLines.map((props) => <ReferenceLine {...props} />);
+    const { referenceLines = [] } = this.props;
+    return referenceLines.map(props => <ReferenceLine {...props} />);
   }
 
   // Manually generates X axis ticks
@@ -48,7 +57,6 @@ export default class SpLineChart extends React.Component {
         }
         return acc;
       }, []);
-
     }
 
     // Show ticks every 15 minutes
@@ -85,40 +93,43 @@ export default class SpLineChart extends React.Component {
       tooltipLabelFormatter = identity,
       tooltipValueFormatter = identity,
       showXAxis,
-      yLabel
+      yLabel,
     } = this.props;
 
     return (
-      <div className='sp-linechart-wrapper'>
-        <ResponsiveContainer width='99%' height={170 + (30 * lines.length)}>
+      <div className={styles.ChartWrapper}>
+        <ResponsiveContainer width="99%" height={170 + 30 * lines.length}>
           <LineChart data={data} syncId={syncId}>
-            <CartesianGrid vertical={false} strokeDasharray="4 1"/>
+            <CartesianGrid vertical={false} strokeDasharray="4 1" />
             <XAxis
               tickFormatter={xTickFormatter}
               ticks={this.getXTicks()}
-              dataKey='ts'
-              scale='auto'
-              interval='preserveEnd'
+              dataKey="ts"
+              scale="auto"
+              interval="preserveEnd"
               height={30}
-              hide={!showXAxis} />
+              hide={!showXAxis}
+            />
             <YAxis
               tickFormatter={yTickFormatter}
               tickLine={false}
-              interval='preserveStartEnd'
+              interval="preserveStartEnd"
               padding={{ top: 8, bottom: 8 }}
               width={60}
               scale={yScale}
-              domain={['dataMin', 'dataMax']} />
+              domain={['dataMin', 'dataMax']}
+            />
             <Tooltip
               isAnimationActive={false}
               labelFormatter={tooltipLabelFormatter}
               formatter={tooltipValueFormatter}
-              itemSorter={orderDesc} />
+              itemSorter={orderDesc}
+            />
             {this.renderReferenceLines()}
             {this.renderLines()}
           </LineChart>
         </ResponsiveContainer>
-        <span className='sp-linechart-yLabel'>{yLabel}</span>
+        <span className="sp-linechart-yLabel">{yLabel}</span>
       </div>
     );
   }
