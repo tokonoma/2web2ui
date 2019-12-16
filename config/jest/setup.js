@@ -1,9 +1,8 @@
 /* eslint-disable no-unused-vars, no-console */
-
 import raf from './tempPolyfills';
 import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import '@testing-library/jest-dom/extend-expect';
+import '@testing-library/jest-dom/extend-expect'; // Provides Testing Library matchers
 import { configure } from '@testing-library/react';
 import * as matchers from './matchers';
 import setupPortals from 'src/__testHelpers__/setupPortals';
@@ -18,17 +17,17 @@ Enzyme.configure({ adapter: new Adapter() });
 
 // React testing library configuration
 configure({
-  testIdAttribute: 'data-id' // Overriding the default test ID used by `getByTestId` matcher - `data-testid` isn't used so we can also use these attributes for analytics tagging
+  testIdAttribute: 'data-id', // Overriding the default test ID used by `getByTestId` matcher - `data-testid` isn't used so we can also use these attributes for analytics tagging
 });
 
 // this is just a little hack to silence a warning that we'll get with React Testing Library get
 //  until we upgrade to React 16.9. See:
 // 1. https://github.com/facebook/react/pull/14853
 // 2. and from the official React Testing Library docs https://github.com/testing-library/react-testing-library#suppressing-unnecessary-warnings-on-react-dom-168
-const originalError = console.error = (message) => {
+const originalError = (console.error = message => {
   // Fail tests on any warning
   throw new Error(message);
-};
+});
 
 beforeAll(() => {
   console.error = (...args) => {
@@ -44,9 +43,7 @@ afterAll(() => {
   console.error = originalError;
 });
 
-
 setupPortals();
-
 
 beforeEach(() => {
   // Verifies that at least one assertion is called during a test
@@ -69,7 +66,7 @@ Object.defineProperty(global.window.location, 'assign', { value: jest.fn(), conf
 
 // Show a stack track for unhandled rejections to help
 // track them down.
-process.on('unhandledRejection', (reason) => {
+process.on('unhandledRejection', reason => {
   console.log(reason);
 });
 
@@ -77,7 +74,7 @@ const mockLocalStorage = {
   clear: jest.fn(),
   getItem: jest.fn(),
   removeItem: jest.fn(),
-  setItem: jest.fn()
+  setItem: jest.fn(),
 };
 
 Object.defineProperty(global.window, 'localStorage', { value: mockLocalStorage });

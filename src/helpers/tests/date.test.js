@@ -18,7 +18,7 @@ import {
   parseDate,
   parseTime,
   parseDatetime,
-  toMilliseconds
+  toMilliseconds,
 } from '../date';
 import { roundBoundaries } from '../metrics';
 import cases from 'jest-in-case';
@@ -73,41 +73,79 @@ describe('Date helpers', () => {
   });
 
   describe('getRelativeDates', () => {
-
-    cases('calculations', ({ range, roundToPrecision, subtractArgs }) => {
-      const date = moment(new Date('2017-12-17T12:00:00'));
-      Date.now = jest.fn(() => date);
-      const { from, to, relativeRange } = getRelativeDates(range, { roundToPrecision });
-      let expectedFrom = moment(date.toDate()).subtract(...subtractArgs);
-      let expectedTo = date;
-      if (roundToPrecision) {
-        const rounded = roundBoundaries(expectedFrom, expectedTo);
-        expectedFrom = rounded.from;
-        expectedTo = rounded.to;
-      }
-      expect(to).toEqual(expectedTo.toDate());
-      expect(from).toEqual(expectedFrom.toDate());
-      expect(relativeRange).toEqual(range);
-    }, {
-      'for an hour ago': { range: 'hour', subtractArgs: [1, 'hours'], roundToPrecision: false },
-      'for a day ago': { range: 'day', subtractArgs: [1, 'days'], roundToPrecision: false },
-      'for a week ago': { range: '7days', subtractArgs: [7, 'days'], roundToPrecision: false },
-      'for 10 days ago': { range: '10days', subtractArgs: [10, 'days'], roundToPrecision: false },
-      'for two weeks ago': { range: '14days', subtractArgs: [14, 'days'], roundToPrecision: false },
-      'for a month': { range: '30days', subtractArgs: [30, 'days'], roundToPrecision: false },
-      'for a quarter ago': { range: '90days', subtractArgs: [90, 'days'], roundToPrecision: false },
-      'for an hour ago rounded': { range: 'hour', subtractArgs: [1, 'hours'], roundToPrecision: true },
-      'for a day ago rounded': { range: 'day', subtractArgs: [1, 'days'], roundToPrecision: true },
-      'for a week ago rounded': { range: '7days', subtractArgs: [7, 'days'], roundToPrecision: true },
-      'for 10 days ago rounded': { range: '10days', subtractArgs: [10, 'days'], roundToPrecision: true },
-      'for a month rounded': { range: '30days', subtractArgs: [30, 'days'], roundToPrecision: true },
-      'for a quarter ago rounded': { range: '90days', subtractArgs: [90, 'days'], roundToPrecision: true }
-    });
+    cases(
+      'calculations',
+      ({ range, roundToPrecision, subtractArgs }) => {
+        const date = moment(new Date('2017-12-17T12:00:00'));
+        Date.now = jest.fn(() => date);
+        const { from, to, relativeRange } = getRelativeDates(range, { roundToPrecision });
+        let expectedFrom = moment(date.toDate()).subtract(...subtractArgs);
+        let expectedTo = date;
+        if (roundToPrecision) {
+          const rounded = roundBoundaries(expectedFrom, expectedTo);
+          expectedFrom = rounded.from;
+          expectedTo = rounded.to;
+        }
+        expect(to).toEqual(expectedTo.toDate());
+        expect(from).toEqual(expectedFrom.toDate());
+        expect(relativeRange).toEqual(range);
+      },
+      {
+        'for an hour ago': { range: 'hour', subtractArgs: [1, 'hours'], roundToPrecision: false },
+        'for a day ago': { range: 'day', subtractArgs: [1, 'days'], roundToPrecision: false },
+        'for a week ago': { range: '7days', subtractArgs: [7, 'days'], roundToPrecision: false },
+        'for 10 days ago': { range: '10days', subtractArgs: [10, 'days'], roundToPrecision: false },
+        'for two weeks ago': {
+          range: '14days',
+          subtractArgs: [14, 'days'],
+          roundToPrecision: false,
+        },
+        'for a month': { range: '30days', subtractArgs: [30, 'days'], roundToPrecision: false },
+        'for a quarter ago': {
+          range: '90days',
+          subtractArgs: [90, 'days'],
+          roundToPrecision: false,
+        },
+        'for an hour ago rounded': {
+          range: 'hour',
+          subtractArgs: [1, 'hours'],
+          roundToPrecision: true,
+        },
+        'for a day ago rounded': {
+          range: 'day',
+          subtractArgs: [1, 'days'],
+          roundToPrecision: true,
+        },
+        'for a week ago rounded': {
+          range: '7days',
+          subtractArgs: [7, 'days'],
+          roundToPrecision: true,
+        },
+        'for 10 days ago rounded': {
+          range: '10days',
+          subtractArgs: [10, 'days'],
+          roundToPrecision: true,
+        },
+        'for a month rounded': {
+          range: '30days',
+          subtractArgs: [30, 'days'],
+          roundToPrecision: true,
+        },
+        'for a quarter ago rounded': {
+          range: '90days',
+          subtractArgs: [90, 'days'],
+          roundToPrecision: true,
+        },
+      },
+    );
 
     it('should default to rounding the range', () => {
       const date = moment(new Date('2017-12-17T12:00:00'));
       Date.now = jest.fn(() => date);
-      const { from: expectedFrom, to: expectedTo } = roundBoundaries(moment(date.toDate()).subtract(7, 'days'), date);
+      const { from: expectedFrom, to: expectedTo } = roundBoundaries(
+        moment(date.toDate()).subtract(7, 'days'),
+        date,
+      );
       const { from, to, relativeRange } = getRelativeDates('7days');
 
       expect(to).toEqual(expectedTo.toDate());
@@ -125,22 +163,21 @@ describe('Date helpers', () => {
     });
 
     it('should throw an error if range is unknown', () => {
-      expect(() => getRelativeDates('invalid-like-whoa')).toThrow('Tried to calculate a relative date range with an invalid range value: invalid-like-whoa');
+      expect(() => getRelativeDates('invalid-like-whoa')).toThrow(
+        'Tried to calculate a relative date range with an invalid range value: invalid-like-whoa',
+      );
     });
-
   });
 
   describe('getRelativeDateOptions', () => {
-
     it('should get a set of date range options', () => {
       const options = getRelativeDateOptions(['hour', 'day', 'custom']);
       expect(options).toEqual([
         { value: 'hour', label: expect.any(String) },
         { value: 'day', label: expect.any(String) },
-        { value: 'custom', label: expect.any(String) }
+        { value: 'custom', label: expect.any(String) },
       ]);
     });
-
   });
 
   describe('date formatting', () => {
@@ -174,7 +211,6 @@ describe('Date helpers', () => {
   });
 
   describe('getLocalTimezone', () => {
-
     it('should return UTC if Intl is not defined', () => {
       delete global.Intl;
       expect(getLocalTimezone()).toEqual('UTC');
@@ -188,7 +224,7 @@ describe('Date helpers', () => {
     it('should return UTC if resolvedOptions is not a function', () => {
       const dtfMock = jest.fn(() => ({}));
       global.Intl = {
-        DateTimeFormat: dtfMock
+        DateTimeFormat: dtfMock,
       };
 
       expect(getLocalTimezone()).toEqual('UTC');
@@ -198,10 +234,10 @@ describe('Date helpers', () => {
     it('should return the timezone', () => {
       const optionsMock = jest.fn(() => ({ timeZone: 'Cool/Story' }));
       const dtfMock = jest.fn(() => ({
-        resolvedOptions: optionsMock
+        resolvedOptions: optionsMock,
       }));
       global.Intl = {
-        DateTimeFormat: dtfMock
+        DateTimeFormat: dtfMock,
       };
       expect(getLocalTimezone()).toEqual('Cool/Story');
       expect(dtfMock).toHaveBeenCalledTimes(1);
@@ -233,67 +269,67 @@ describe('Date helpers', () => {
 
   describe('parseDate', () => {
     it('returns invalid date for undefined', () => {
-      expect(parseDate()).not.toBeValid();
+      expect(parseDate()).not.toBeValidMomentDate();
     });
 
     it('returns invalid date for empty string', () => {
-      expect(parseDate('')).not.toBeValid();
+      expect(parseDate('')).not.toBeValidMomentDate();
     });
 
     it('returns invalid date', () => {
-      expect(parseDate('04-17-2018')).not.toBeValid();
+      expect(parseDate('04-17-2018')).not.toBeValidMomentDate();
     });
 
     it('returns valid date for ISO-8601 date strings', () => {
-      expect(parseDate('2018-04-17')).toBeValid();
+      expect(parseDate('2018-04-17')).toBeValidMomentDate();
     });
   });
 
   describe('parseTime', () => {
     it('returns invalid time for undefined', () => {
-      expect(parseTime()).not.toBeValid();
+      expect(parseTime()).not.toBeValidMomentDate();
     });
 
     it('returns invalid time for empty string', () => {
-      expect(parseTime('')).not.toBeValid();
+      expect(parseTime('')).not.toBeValidMomentDate();
     });
 
     it('returns valid time for zero-hour', () => {
-      expect(parseTime('00:00')).toBeValid();
+      expect(parseTime('00:00')).toBeValidMomentDate();
     });
 
     it('returns valid time for 12-hour time', () => {
-      expect(parseTime('12:00am')).toBeValid();
+      expect(parseTime('12:00am')).toBeValidMomentDate();
     });
 
     it('returns valid time for 24-hour time', () => {
-      expect(parseTime('14:00')).toBeValid();
+      expect(parseTime('14:00')).toBeValidMomentDate();
     });
 
     it('returns valid time for 24-hour with am/pm', () => {
-      expect(parseTime('14:00am')).toBeValid();
+      expect(parseTime('14:00am')).toBeValidMomentDate();
     });
   });
 
   describe('parseDatetime', () => {
     it('returns invalid date time for undefined', () => {
-      expect(parseDatetime()).not.toBeValid();
+      expect(parseDatetime()).not.toBeValidMomentDate();
     });
 
     it('returns invalid date time for empty string', () => {
-      expect(parseDatetime('')).not.toBeValid();
+      expect(parseDatetime('')).not.toBeValidMomentDate();
     });
 
     it('returns valid date time for 12-hour time', () => {
-      expect(parseDatetime('2018-01-01 12:00am')).toBeValid();
+      expect(parseDatetime('2018-01-01 12:00am')).toBeValidMomentDate();
     });
 
     it('returns valid time for 24-hour time', () => {
-      expect(parseDatetime('2018-01-01 14:00')).toBeValid();
+      expect(parseDatetime('2018-01-01 14:00')).toBeValidMomentDate();
     });
 
     it('returns valid time for 24-hour with am/pm', () => {
-      expect(parseDatetime('2018-01-01 14:00am')).toBeValid();
+      expect(parseDatetime('2018-01-01 14:00am')).toBeValidMomentDate();
     });
   });
 
@@ -303,7 +339,9 @@ describe('Date helpers', () => {
     });
 
     it('returns the duration between two dates in days', () => {
-      expect(getDuration({ from: '2017-12-18T00:00:00', to: '2017-12-19T00:00:00' }, 'days')).toEqual(1);
+      expect(
+        getDuration({ from: '2017-12-18T00:00:00', to: '2017-12-19T00:00:00' }, 'days'),
+      ).toEqual(1);
     });
   });
 
@@ -312,7 +350,7 @@ describe('Date helpers', () => {
       const dates = { to: '2018-02-03T04:20:00-04:00', from: '2018-01-26T04:20:00-04:00' };
       const dataSet = [
         { date: '2018-02-02', value: 234 },
-        { date: '2018-01-30', value: 123 }
+        { date: '2018-01-30', value: 123 },
       ];
       const fill = { value: null };
 
@@ -322,11 +360,9 @@ describe('Date helpers', () => {
 
   describe('getDateTicks', () => {
     it('returns an array of start, end and middle days', () => {
-      expect(getDateTicks({ to: '2018-05-25T04:20:00-04:00', from: '2018-05-01T04:20:00-04:00' })).toEqual([
-        '2018-05-01',
-        '2018-05-13',
-        '2018-05-25'
-      ]);
+      expect(
+        getDateTicks({ to: '2018-05-25T04:20:00-04:00', from: '2018-05-01T04:20:00-04:00' }),
+      ).toEqual(['2018-05-01', '2018-05-13', '2018-05-25']);
     });
   });
 

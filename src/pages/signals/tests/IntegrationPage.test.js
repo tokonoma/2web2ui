@@ -7,11 +7,18 @@ import IntegrationPage from '../IntegrationPage';
 jest.mock('src/hooks/useRouter');
 
 describe('IntegrationPage', () => {
+  const defaultFilters = {
+    page: 0,
+    perPage: 10,
+    batchStatus: '',
+    batchIds: [],
+  };
+
   const subject = ({ routerState = {}, ...props } = {}) => {
     useRouter.mockReturnValue({
       requestParams: {},
       updateRoute: () => {},
-      ...routerState
+      ...routerState,
     });
 
     return mount(
@@ -21,7 +28,7 @@ describe('IntegrationPage', () => {
         loadingStatus="success"
         totalCount={0}
         {...props}
-      />
+      />,
     );
   };
 
@@ -30,39 +37,22 @@ describe('IntegrationPage', () => {
     expect(wrapper.find('IntegrationPageFilter')).toHaveProp('disabled', true);
   });
 
-  it('hydrates filters with batch id', () => {
-    const wrapper = subject({
-      routerState: {
-        requestParams: {
-          batchIds: '8c4b19fb-07a2-42cb-84f7-3ab09a8049e0'
-        }
-      }
-    });
-
-    expect(wrapper.find('IntegrationPageFilter')).toHaveProp('initialValues', {
-      batchIds: ['8c4b19fb-07a2-42cb-84f7-3ab09a8049e0'],
-      batchStatus: ''
-    });
-  });
-
   it('hydrates filters with batch ids', () => {
     const wrapper = subject({
       routerState: {
         requestParams: {
           batchIds: [
             '8c4b19fb-07a2-42cb-84f7-3ab09a8049e0',
-            '8c4b19fb-07a2-42cb-84f7-3ab09a8049e1'
-          ]
-        }
-      }
+            '8c4b19fb-07a2-42cb-84f7-3ab09a8049e1',
+          ],
+        },
+      },
     });
 
     expect(wrapper.find('IntegrationPageFilter')).toHaveProp('initialValues', {
-      batchIds: [
-        '8c4b19fb-07a2-42cb-84f7-3ab09a8049e0',
-        '8c4b19fb-07a2-42cb-84f7-3ab09a8049e1'
-      ],
-      batchStatus: ''
+      ...defaultFilters,
+      batchIds: ['8c4b19fb-07a2-42cb-84f7-3ab09a8049e0', '8c4b19fb-07a2-42cb-84f7-3ab09a8049e1'],
+      batchStatus: '',
     });
   });
 
@@ -70,66 +60,15 @@ describe('IntegrationPage', () => {
     const wrapper = subject({
       routerState: {
         requestParams: {
-          batchStatus: 'success'
-        }
-      }
+          batchStatus: 'success',
+        },
+      },
     });
 
     expect(wrapper.find('IntegrationPageFilter')).toHaveProp('initialValues', {
+      ...defaultFilters,
       batchIds: [],
-      batchStatus: 'success'
-    });
-  });
-
-  it('hydrates filters with first batch status', () => {
-    const wrapper = subject({
-      routerState: {
-        requestParams: {
-          batchStatus: [
-            'validation',
-            'success'
-          ]
-        }
-      }
-    });
-
-    expect(wrapper.find('IntegrationPageFilter')).toHaveProp('initialValues', {
-      batchIds: [],
-      batchStatus: 'validation'
-    });
-  });
-
-  it('updates query string params when filters change', () => {
-    const updateRoute = jest.fn();
-    const wrapper = subject({ routerState: { updateRoute }});
-    const nextFilters = {
-      batchIds: ['8c4b19fb-07a2-42cb-84f7-3ab09a8049e0'],
-      batchStatus: 'success'
-    };
-
-    act(() => {
-      wrapper.find('IntegrationPageFilter').prop('onChange')(nextFilters);
-    });
-
-    wrapper.update();
-
-    expect(updateRoute).toHaveBeenCalledWith({ ...nextFilters, perPage: 10 });
-  });
-
-  it('updates query string params when per page changes', () => {
-    const updateRoute = jest.fn();
-    const wrapper = subject({ routerState: { updateRoute }});
-
-    act(() => {
-      wrapper.find('PerPageButtons').prop('onPerPageChange')(25);
-    });
-
-    wrapper.update();
-
-    expect(updateRoute).toHaveBeenCalledWith({
-      batchIds: undefined,
-      batchStatus: undefined,
-      perPage: 25
+      batchStatus: 'success',
     });
   });
 
@@ -137,7 +76,7 @@ describe('IntegrationPage', () => {
     const wrapper = subject({ totalCount: 9 }); // assuming perPage default is 10
     expect(wrapper.find('CursorPaging')).toHaveProp({
       currentPage: 1,
-      nextDisabled: true
+      nextDisabled: true,
     });
   });
 
@@ -145,7 +84,7 @@ describe('IntegrationPage', () => {
     const wrapper = subject({ totalCount: 11 }); // assuming perPage default is 10
     expect(wrapper.find('CursorPaging')).toHaveProp({
       currentPage: 1,
-      nextDisabled: false
+      nextDisabled: false,
     });
   });
 
@@ -153,28 +92,23 @@ describe('IntegrationPage', () => {
     const wrapper = subject();
     expect(wrapper.find('CursorPaging')).toHaveProp({
       currentPage: 1,
-      previousDisabled: true
+      previousDisabled: true,
     });
   });
 
   it('requests data when page filters initialize', () => {
     const getIngestBatchEvents = jest.fn();
     const wrapper = subject({ getIngestBatchEvents });
-    const nextFilters = { batchIds: [], batchStatus: 'success' };
-
-    act(() => {
-      wrapper.find('IntegrationPageFilter').prop('onInit')(nextFilters);
-    });
 
     wrapper.update();
 
-    expect(wrapper.find('IntegrationPageFilter')).toHaveProp('initialValues', nextFilters);
+    expect(wrapper.find('IntegrationPageFilter')).toHaveProp('initialValues', defaultFilters);
     expect(wrapper.find('CursorPaging')).toHaveProp('currentPage', 1);
     expect(getIngestBatchEvents).toHaveBeenCalledWith({
       batchIds: [],
       cursor: undefined,
       perPage: 10,
-      statuses: ['success']
+      statuses: undefined,
     });
   });
 
@@ -193,7 +127,7 @@ describe('IntegrationPage', () => {
       batchIds: [],
       cursor: undefined,
       perPage: 10,
-      statuses: undefined
+      statuses: undefined,
     });
   });
 
@@ -212,7 +146,7 @@ describe('IntegrationPage', () => {
       batchIds: [],
       cursor: 'ABCDEFC',
       perPage: 10,
-      statuses: undefined
+      statuses: undefined,
     });
   });
 
@@ -221,7 +155,7 @@ describe('IntegrationPage', () => {
     const wrapper = subject({
       eventsByPage: [[]], // not real, but simulates cached data for first page
       getIngestBatchEvents,
-      nextCursor: 'ABCDEFC'
+      nextCursor: 'ABCDEFC',
     });
 
     act(() => {
@@ -261,7 +195,7 @@ describe('IntegrationPage', () => {
       batchIds: [],
       cursor: undefined,
       perPage: 25,
-      statuses: undefined
+      statuses: undefined,
     });
   });
 });

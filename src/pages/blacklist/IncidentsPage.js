@@ -1,30 +1,84 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Page } from '@sparkpost/matchbox';
 import { Users } from 'src/components/images';
-import { Link } from 'react-router-dom';
-import { Loading } from 'src/components';
+import { Link, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-export const IncidentsPage = (props) => {
+import { ApiErrorBanner, Loading } from 'src/components';
+import { listMonitors, listIncidents } from 'src/actions/blacklist';
+import { selectIncidentsList } from 'src/selectors/blacklist';
+import IncidentsCollection from './components/IncidentsCollection';
+import styles from './IncidentsPage.module.scss';
 
-  const { loading } = props;
+export const IncidentsPage = props => {
+  const { loading, error, listMonitors, listIncidents, monitors, incidents } = props;
+
+  useEffect(() => {
+    listMonitors();
+    listIncidents();
+  }, [listMonitors, listIncidents]);
 
   if (loading) {
-    return <Loading/>;
+    return <Loading />;
   }
+
+  if (!error && monitors.length > 0 && incidents.length === 0) {
+    return <Redirect to="/dashboard" />; //TODO redirect to watchlist page
+  }
+
+  const renderContent = () => {
+    if (error) {
+      return (
+        <div data-id="error-banner">
+          <ApiErrorBanner
+            message={'Sorry, we seem to have had some trouble loading your blacklist incidents.'}
+            errorDetails={error.message}
+            reload={() => {
+              listMonitors();
+              listIncidents();
+            }}
+          />
+        </div>
+      );
+    }
+
+    return (
+      <div data-id="incidents-table">
+        <IncidentsCollection incidents={incidents} />
+      </div>
+    );
+  };
 
   return (
     <Page
       empty={{
-        show: true,
+        show: monitors.length === 0,
         title: 'Blacklist Reports',
         image: Users,
-        content: <p>Loren Ipsum</p>
+        content: (
+          <p>
+            Monitor blacklists for your domains and IPs so you know when your deliverability will be
+            affected.
+          </p>
+        ),
+        primaryAction: { content: 'Add to Watch List', to: '/blacklist', component: Link },
       }}
-      title='Blacklist'
-      primaryAction={{ content: 'Add to Watch List', to: '/blacklist', component: Link }}
+      title="Blacklist Incidents"
+      primaryAction={{ content: 'View Watch List', to: '/blacklist', component: Link }}
     >
+      <p className={styles.Description}>
+        Monitor blacklists for your domains and IPs so you know when your deliverability will be
+        affected.
+      </p>
+      {renderContent()}
     </Page>
   );
-
 };
-export default (IncidentsPage);
+
+const mapStateToProps = state => ({
+  incidents: selectIncidentsList(state),
+  monitors: state.blacklist.monitors,
+  error: state.blacklist.incidentsError || state.blacklist.monitorsError,
+  loading: state.blacklist.incidentsPending || state.blacklist.monitorsPending,
+});
+export default connect(mapStateToProps, { listMonitors, listIncidents })(IncidentsPage);
