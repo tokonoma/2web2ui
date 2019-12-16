@@ -15,7 +15,12 @@ export const GettingStartedGuide = ({ onboarding = {}, history, setAccountOption
     'Show Me SparkPost': ['Features', 'Sending', 'Show Me SparkPost'],
     "Let's Code": ['Features', 'Sending', "Let's Code"],
   };
-  const { isGuideAtBottom = false, active_step, send_test_email_completed } = onboarding;
+  const {
+    isGuideAtBottom = false,
+    active_step,
+    send_test_email_completed,
+    explore_analytics_completed,
+  } = onboarding;
 
   const setOnboardingAccountOption = (obj = {}) => {
     setAccountOption('onboarding', obj);
@@ -65,6 +70,10 @@ export const GettingStartedGuide = ({ onboarding = {}, history, setAccountOption
       case 'Send Test Email':
         setOnboardingAccountOption({ send_test_email_completed: true });
         history.push(`/templates?pendo=${GUIDE_IDS.SEND_TEST_EMAIL}`);
+        break;
+      case 'Explore Analytics':
+        setOnboardingAccountOption({ explore_analytics_completed: true });
+        history.push(`/reports/summary?pendo=${GUIDE_IDS.EXPLORE_ANALYTICS}`);
         break;
       default:
         break;
@@ -180,7 +189,13 @@ export const GettingStartedGuide = ({ onboarding = {}, history, setAccountOption
               </GuideListItem>
             </Panel.Section>
             <Panel.Section>
-              <GuideListItem action={{ name: 'Explore Analytics', onClick: () => {} }}>
+              <GuideListItem
+                action={{
+                  name: 'Explore Analytics',
+                  onClick: () => handleAction('Explore Analytics'),
+                }}
+                itemCompleted={explore_analytics_completed}
+              >
                 <GuideListItemTitle>Explore Analytics</GuideListItemTitle>
                 <GuideListItemDescription>
                   Get acquainted with our powerful analytics to make the most of your sending
