@@ -53,9 +53,7 @@ describe('GettingStartedGuide', () => {
   });
 
   it('should render the corresponding step when breadcrumb is clicked', () => {
-    const instance = subject();
-    instance.find('Button').simulate('click');
-    instance.find({ children: 'Show Me SparkPost' }).simulate('click');
+    const instance = guideOnSecondStep('Show Me SparkPost');
     instance
       .find('BreadCrumbsItem')
       .at(1)
