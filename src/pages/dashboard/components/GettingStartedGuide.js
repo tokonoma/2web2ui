@@ -6,16 +6,10 @@ import ButtonWrapper from 'src/components/buttonWrapper';
 import styles from './GettingStartedGuide.module.scss';
 import { BreadCrumbs, BreadCrumbsItem } from 'src/components';
 import { GuideListItem, GuideListItemTitle, GuideListItemDescription } from './GuideListItem';
-import { GUIDE_IDS } from '../constants';
+import { GUIDE_IDS, BREADCRUMB_ITEMS } from '../constants';
 import { UnstyledLink } from '@sparkpost/matchbox';
 
 export const GettingStartedGuide = ({ onboarding = {}, history, setAccountOption }) => {
-  const breadCrumbsItems = {
-    Features: ['Features'],
-    Sending: ['Features', 'Sending'],
-    'Show Me SparkPost': ['Features', 'Sending', 'Show Me SparkPost'],
-    "Let's Code": ['Features', 'Sending', "Let's Code"],
-  };
   const {
     isGuideAtBottom = false,
     active_step,
@@ -50,7 +44,7 @@ export const GettingStartedGuide = ({ onboarding = {}, history, setAccountOption
   }, [stepName]);
   const renderBreadCrumbs = () => (
     <BreadCrumbs>
-      {breadCrumbsItems[stepName].map(item => (
+      {BREADCRUMB_ITEMS[stepName].map(item => (
         <BreadCrumbsItem
           key={item}
           onClick={() => setAndStoreStepName(item)}
