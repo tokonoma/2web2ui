@@ -6,7 +6,6 @@ import _ from 'lodash';
 import { ApiErrorBanner, Loading } from 'src/components';
 import IpForm from './components/IpForm';
 import DeliveryHistoryLineChart from './components/DeliveryHistoryLineChart';
-import PanelLoading from 'src/components/panelLoading';
 import { showAlert } from 'src/actions/globalAlert';
 import { getRelativeDates } from 'src/helpers/date';
 import { listPools, updatePool } from 'src/actions/ipPools';
@@ -64,8 +63,7 @@ export class EditIpPage extends Component {
   }
 
   render() {
-    const { loading, pool, ip, error } = this.props;
-    const isChartLoading = this.props.chartLoading;
+    const { loading, pool, ip, error, deliveryHistory } = this.props;
 
     if (loading || _.isEmpty(pool) || _.isEmpty(ip)) {
       return <Loading />;
@@ -90,13 +88,15 @@ export class EditIpPage extends Component {
           <>
             <IpForm onSubmit={this.onUpdateIp} />
 
-            <Panel title="Delivery History">
-              <Panel.Section className={styles.LineChartSection}>
-                <h3>Last 10 Days</h3>
+            {!_.isEmpty(deliveryHistory) && (
+              <Panel title="Delivery History">
+                <Panel.Section className={styles.LineChartSection}>
+                  <h3>Last 10 Days</h3>
 
-                <DeliveryHistoryLineChart ip={ip} />
-              </Panel.Section>
-            </Panel>
+                  <DeliveryHistoryLineChart data={deliveryHistory} />
+                </Panel.Section>
+              </Panel>
+            )}
           </>
         )}
       </Page>
@@ -106,15 +106,14 @@ export class EditIpPage extends Component {
 
 const mapStateToProps = (state, props) => {
   const { listLoading, listError } = state.ipPools;
-  const { pending: metricsPending } = state.metrics;
+  const { pending: metricsLoading, error: metricsError } = state.metrics;
 
   return {
     ip: selectIpForCurrentPool(state, props),
     pool: selectCurrentPool(state, props),
     deliveryHistory: selectIpDeliveryHistory(state, props),
-    loading: listLoading,
-    chartLoading: metricsPending,
-    error: listError,
+    loading: listLoading || metricsLoading,
+    error: listError || metricsError,
   };
 };
 
