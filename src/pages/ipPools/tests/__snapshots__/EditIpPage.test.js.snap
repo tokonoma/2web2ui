@@ -15,6 +15,9 @@ exports[`IP Edit Page renders correctly 1`] = `
   <IpForm
     onSubmit={[Function]}
   />
+  <DeliveryHistoryPanel
+    handleReloadAfterError={[Function]}
+  />
 </Page>
 `;
 

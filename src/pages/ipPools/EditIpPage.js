@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Page, Panel } from '@sparkpost/matchbox';
@@ -19,9 +19,22 @@ import {
 } from 'src/selectors/ipPools';
 import styles from './EditIpPage.module.scss';
 
-export class EditIpPage extends Component {
-  onUpdateIp = values => {
-    const { updateSendingIp, ip, showAlert, history } = this.props;
+export function EditIpPage(props) {
+  const {
+    updateSendingIp,
+    ip,
+    listPools,
+    getTimeSeries,
+    pageLoading,
+    pool,
+    pageError,
+    chartLoading,
+    chartError,
+    deliveryHistory,
+  } = props;
+
+  const handleSubmit = values => {
+    const { ip, history, showAlert } = props;
 
     if (!values.auto_warmup_enabled) {
       delete values.auto_warmup_stage;
@@ -31,85 +44,71 @@ export class EditIpPage extends Component {
 
     return updateSendingIp(ip.external_ip, values)
       .then(() => {
-        if (reAssignedPool) {
-          history.replace(`/account/ip-pools/edit/${values.ip_pool}/${ip.external_ip}`);
-        }
         showAlert({
           type: 'success',
           message: `Updated IP ${ip.external_ip}.`,
         });
+
+        if (reAssignedPool) {
+          history.push(`/account/ip-pools/edit/${values.ip_pool}/${ip.external_ip}`);
+        }
       })
-      .then(this.loadDependentData);
+      .then(() => listPools());
   };
 
-  loadDependentData() {
-    this.props.listPools().then(() => {
-      const { ip } = this.props;
-      const { from, to } = getRelativeDates('10days', { roundToPrecision: false });
+  useEffect(() => {
+    listPools();
+  }, [listPools]);
 
-      if (ip) {
-        this.props.getTimeSeries({
-          from,
-          to,
-          precision: 'day',
-          metrics: 'count_delivered',
-          sending_ips: ip.external_ip,
-        });
-      }
-    });
-  }
+  useEffect(() => {
+    const { from, to } = getRelativeDates('10days', { roundToPrecision: false });
 
-  componentDidMount() {
-    this.loadDependentData();
-  }
-
-  render() {
-    const {
-      pageLoading,
-      chartLoading,
-      pool,
-      ip,
-      pageError,
-      chartError,
-      deliveryHistory,
-    } = this.props;
-
-    if (pageLoading || _.isEmpty(pool) || _.isEmpty(ip)) {
-      return <Loading />;
+    if (ip) {
+      getTimeSeries({
+        from,
+        to,
+        precision: 'day',
+        metrics: 'count_delivered',
+        sending_ips: ip.external_ip,
+      });
     }
+  }, [ip, getTimeSeries]);
 
-    return (
-      <Page
-        title={`Sending IP: ${ip.external_ip}`}
-        breadcrumbAction={{
-          content: pool.name,
-          Component: Link,
-          to: `/account/ip-pools/edit/${pool.id}`,
-        }}
-      >
-        {pageError ? (
-          <IpErrorBanner details={pageError.message} reload={this.loadDependentData} />
-        ) : (
-          <>
-            <IpForm onSubmit={this.onUpdateIp} />
-
-            <DeliveryHistoryPanel
-              error={chartError}
-              isLoading={chartLoading}
-              chartData={deliveryHistory}
-              handleReloadAfterError={this.loadDependentData}
-            />
-          </>
-        )}
-      </Page>
-    );
+  if (pageLoading || _.isEmpty(pool) || _.isEmpty(ip)) {
+    return <Loading />;
   }
+
+  return (
+    <Page
+      title={`Sending IP: ${ip.external_ip}`}
+      breadcrumbAction={{
+        content: pool.name,
+        Component: Link,
+        to: `/account/ip-pools/edit/${pool.id}`,
+      }}
+    >
+      {pageError ? (
+        <IpErrorBanner details={pageError.message} handleReload={listPools} />
+      ) : (
+        <>
+          <IpForm onSubmit={handleSubmit} />
+
+          <DeliveryHistoryPanel
+            error={chartError}
+            isLoading={chartLoading}
+            chartData={deliveryHistory}
+            handleReloadAfterError={listPools}
+          />
+        </>
+      )}
+    </Page>
+  );
 }
 
-function IpErrorBanner({ error, handleReload }) {
+function IpErrorBanner({ details, handleReload }) {
   return (
     <ApiErrorBanner
-      errorDetails={error.message}
+      errorDetails={details}
       message="Sorry, we seem to have had some trouble loading your IP data."
       reload={handleReload}
     />
@@ -124,15 +123,19 @@ function DeliveryHistoryPanel({ isLoading, error, chartData, handleReloadAfterEr
   return (
     <>
       {error ? (
-        <IpErrorBanner details={error.message} reload={handleReloadAfterError} />
+        <IpErrorBanner details={error.message} handleReload={handleReloadAfterError} />
       ) : (
-        <Panel title="Delivery History">
-          <Panel.Section className={styles.LineChartSection}>
-            <h3>Last 10 Days</h3>
+        <>
+          {!_.isEmpty(chartData) && (
+            <Panel title="Delivery History">
+              <Panel.Section className={styles.LineChartSection}>
+                <h3>Last 10 Days</h3>
 
-            <DeliveryHistoryLineChart data={chartData} />
-          </Panel.Section>
-        </Panel>
+                <DeliveryHistoryLineChart data={chartData} />
+              </Panel.Section>
+            </Panel>
+          )}
+        </>
       )}
     </>
   );
