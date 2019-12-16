@@ -88,11 +88,7 @@ export class EditIpPage extends Component {
         }}
       >
         {pageError ? (
-          <ApiErrorBanner
-            errorDetails={pageError.message}
-            message="Sorry, we seem to have had some trouble loading your IP data."
-            reload={this.loadDependentData}
-          />
+          <IpErrorBanner details={pageError.message} reload={this.loadDependentData} />
         ) : (
           <>
             <IpForm onSubmit={this.onUpdateIp} />
@@ -101,6 +97,7 @@ export class EditIpPage extends Component {
               error={chartError}
               isLoading={chartLoading}
               chartData={deliveryHistory}
+              handleReloadAfterError={this.loadDependentData}
             />
           </>
         )}
@@ -109,7 +106,17 @@ export class EditIpPage extends Component {
   }
 }
 
-function DeliveryHistoryPanel({ isLoading, error, chartData }) {
+function IpErrorBanner({ error, handleReload }) {
+  return (
+    <ApiErrorBanner
+      errorDetails={error.message}
+      message="Sorry, we seem to have had some trouble loading your IP data."
+      reload={handleReload}
+    />
+  );
+}
+
+function DeliveryHistoryPanel({ isLoading, error, chartData, handleReloadAfterError }) {
   if (isLoading) {
     return <PanelLoading />;
   }
@@ -117,11 +124,7 @@ function DeliveryHistoryPanel({ isLoading, error, chartData }) {
   return (
     <>
       {error ? (
-        <ApiErrorBanner
-          errorDetails={error.message}
-          message="Sorry, we seem to have had some trouble loading your IP data."
-          reload={this.loadDependentData}
-        />
+        <IpErrorBanner details={error.message} reload={handleReloadAfterError} />
       ) : (
         <Panel title="Delivery History">
           <Panel.Section className={styles.LineChartSection}>
