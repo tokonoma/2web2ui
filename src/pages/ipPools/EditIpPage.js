@@ -19,36 +19,6 @@ import {
 } from 'src/selectors/ipPools';
 import styles from './EditIpPage.module.scss';
 
-const DeliveryHistoryPanel = props => {
-  const { isLoading, error, chartData } = props;
-
-  return (
-    <>
-      {isLoading ? (
-        <PanelLoading />
-      ) : (
-        <>
-          {error ? (
-            <ApiErrorBanner
-              errorDetails={error.message}
-              message="Sorry, we seem to have had some trouble loading your IP data."
-              reload={this.loadDependentData}
-            />
-          ) : (
-            <Panel title="Delivery History">
-              <Panel.Section className={styles.LineChartSection}>
-                <h3>Last 10 Days</h3>
-
-                <DeliveryHistoryLineChart data={chartData} />
-              </Panel.Section>
-            </Panel>
-          )}
-        </>
-      )}
-    </>
-  );
-};
-
 export class EditIpPage extends Component {
   onUpdateIp = values => {
     const { updateSendingIp, ip, showAlert, history } = this.props;
@@ -137,6 +107,32 @@ export class EditIpPage extends Component {
       </Page>
     );
   }
+}
+
+function DeliveryHistoryPanel({ isLoading, error, chartData }) {
+  if (isLoading) {
+    return <PanelLoading />;
+  }
+
+  return (
+    <>
+      {error ? (
+        <ApiErrorBanner
+          errorDetails={error.message}
+          message="Sorry, we seem to have had some trouble loading your IP data."
+          reload={this.loadDependentData}
+        />
+      ) : (
+        <Panel title="Delivery History">
+          <Panel.Section className={styles.LineChartSection}>
+            <h3>Last 10 Days</h3>
+
+            <DeliveryHistoryLineChart data={chartData} />
+          </Panel.Section>
+        </Panel>
+      )}
+    </>
+  );
 }
 
 const mapStateToProps = (state, props) => {
