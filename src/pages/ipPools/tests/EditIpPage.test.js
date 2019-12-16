@@ -120,4 +120,42 @@ describe('IP Edit Page', () => {
 
     expect(mockListPools).toHaveBeenCalledTimes(2);
   });
+
+  it('renders an error for delivery history via the `chartError` prop that has a reload button that invokes `listPools` when clicked', () => {
+    const mockListPools = jest.fn(() => Promise.resolve());
+    const { queryByText } = subject({
+      chartError: { message: 'A chart error' },
+      listPools: mockListPools,
+    });
+
+    userEvent.click(queryByText('Show Error Details'));
+
+    expect(queryByText('A chart error')).toBeInTheDocument();
+
+    userEvent.click(queryByText('Try Again'));
+
+    expect(mockListPools).toHaveBeenCalled();
+  });
+
+  it('renders the delivery history section in a loading state controlled via the `chartLoading` prop', () => {
+    const { queryByTestId } = subject({ chartLoading: true });
+
+    expect(queryByTestId('panel-loading')).toBeInTheDocument();
+  });
+
+  it('renders a line chart when data is passed in via the `deliveryHistory` prop', () => {
+    const { queryByTestId, queryByText } = subject({
+      deliveryHistory: [{ deliveries: 123, date: '10/11/12' }],
+    });
+
+    expect(queryByTestId('delivery-history-line-chart')).toBeInTheDocument();
+    expect(queryByText('Delivery History')).toBeInTheDocument();
+  });
+
+  it('does not render a line chart when empty data is passed in via the `deliveryHistory` prop', () => {
+    const { queryByTestId, queryByText } = subject({ deliveryHistory: [] });
+
+    expect(queryByTestId('delivery-history-line-chart')).not.toBeInTheDocument();
+    expect(queryByText('Delivery History')).not.toBeInTheDocument();
+  });
 });

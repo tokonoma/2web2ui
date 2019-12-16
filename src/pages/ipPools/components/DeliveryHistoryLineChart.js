@@ -18,7 +18,7 @@ const DeliveryHistoryLineChart = props => {
   const { xTickFormatter, tooltipLabelFormatter } = getLineChartFormatters('day');
 
   return (
-    <div className={styles.ChartWrapper}>
+    <div className={styles.ChartWrapper} data-id="delivery-history-line-chart">
       <ResponsiveContainer height={350} width={'100%'}>
         <LineChart data={data}>
           <YAxis
