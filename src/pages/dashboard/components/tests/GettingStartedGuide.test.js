@@ -14,6 +14,13 @@ describe('GettingStartedGuide', () => {
 
   const subject = props => shallow(<GettingStartedGuide {...defaultProps} {...props} />);
 
+  const guideOnSecondStep = buttonName => {
+    const instance = subject();
+    instance.find('Button').simulate('click');
+    instance.find({ children: buttonName }).simulate('click');
+    return instance;
+  };
+
   it('should render correctly when guide is at bottom or when guide is at top', () => {
     expect(
       subject({ onboarding: { isGuideAtBottom: true } })
@@ -58,23 +65,17 @@ describe('GettingStartedGuide', () => {
   });
 
   it('should render the BreadCrumbItem as active corresponding to the Step', () => {
-    const instance = subject();
-    instance.find('Button').simulate('click');
-    instance.find({ children: 'Show Me SparkPost' }).simulate('click');
+    const instance = guideOnSecondStep('Show Me SparkPost');
     expect(instance.find({ active: true })).toHaveTextContent('Show Me SparkPost');
   });
 
   it('should render three list items when on step "Show Me SparkPost" ', () => {
-    const instance = subject();
-    instance.find('Button').simulate('click');
-    instance.find({ children: 'Show Me SparkPost' }).simulate('click');
+    const instance = guideOnSecondStep('Show Me SparkPost');
     expect(instance.find('GuideListItem')).toHaveLength(3);
   });
 
   it('should navigate to templates page when Send a Test Email button is clicked', () => {
-    const instance = subject();
-    instance.find('Button').simulate('click');
-    instance.find({ children: 'Show Me SparkPost' }).simulate('click');
+    const instance = guideOnSecondStep('Show Me SparkPost');
     instance
       .find('GuideListItem')
       .at(0)
@@ -86,9 +87,7 @@ describe('GettingStartedGuide', () => {
   });
 
   it('should navigate to users page when Invite a Collaborator is clicked', () => {
-    const instance = subject();
-    instance.find('Button').simulate('click');
-    instance.find({ children: 'Show Me SparkPost' }).simulate('click');
+    const instance = guideOnSecondStep('Show Me SparkPost');
     instance
       .find('GuideListItem')
       .at(2)
@@ -98,9 +97,7 @@ describe('GettingStartedGuide', () => {
   });
 
   it('should mark Invite a Collaborator list item as completed when the the corresponding button is clicked', () => {
-    const instance = subject();
-    instance.find('Button').simulate('click');
-    instance.find({ children: 'Show Me SparkPost' }).simulate('click');
+    const instance = guideOnSecondStep('Show Me SparkPost');
     instance
       .find('GuideListItem')
       .at(2)
