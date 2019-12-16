@@ -269,67 +269,67 @@ describe('Date helpers', () => {
 
   describe('parseDate', () => {
     it('returns invalid date for undefined', () => {
-      expect(parseDate()).not.toBeValid();
+      expect(parseDate()).not.toBeValidMomentDate();
     });
 
     it('returns invalid date for empty string', () => {
-      expect(parseDate('')).not.toBeValid();
+      expect(parseDate('')).not.toBeValidMomentDate();
     });
 
     it('returns invalid date', () => {
-      expect(parseDate('04-17-2018')).not.toBeValid();
+      expect(parseDate('04-17-2018')).not.toBeValidMomentDate();
     });
 
     it('returns valid date for ISO-8601 date strings', () => {
-      expect(parseDate('2018-04-17')).toBeValid();
+      expect(parseDate('2018-04-17')).toBeValidMomentDate();
     });
   });
 
   describe('parseTime', () => {
     it('returns invalid time for undefined', () => {
-      expect(parseTime()).not.toBeValid();
+      expect(parseTime()).not.toBeValidMomentDate();
     });
 
     it('returns invalid time for empty string', () => {
-      expect(parseTime('')).not.toBeValid();
+      expect(parseTime('')).not.toBeValidMomentDate();
     });
 
     it('returns valid time for zero-hour', () => {
-      expect(parseTime('00:00')).toBeValid();
+      expect(parseTime('00:00')).toBeValidMomentDate();
     });
 
     it('returns valid time for 12-hour time', () => {
-      expect(parseTime('12:00am')).toBeValid();
+      expect(parseTime('12:00am')).toBeValidMomentDate();
     });
 
     it('returns valid time for 24-hour time', () => {
-      expect(parseTime('14:00')).toBeValid();
+      expect(parseTime('14:00')).toBeValidMomentDate();
     });
 
     it('returns valid time for 24-hour with am/pm', () => {
-      expect(parseTime('14:00am')).toBeValid();
+      expect(parseTime('14:00am')).toBeValidMomentDate();
     });
   });
 
   describe('parseDatetime', () => {
     it('returns invalid date time for undefined', () => {
-      expect(parseDatetime()).not.toBeValid();
+      expect(parseDatetime()).not.toBeValidMomentDate();
     });
 
     it('returns invalid date time for empty string', () => {
-      expect(parseDatetime('')).not.toBeValid();
+      expect(parseDatetime('')).not.toBeValidMomentDate();
     });
 
     it('returns valid date time for 12-hour time', () => {
-      expect(parseDatetime('2018-01-01 12:00am')).toBeValid();
+      expect(parseDatetime('2018-01-01 12:00am')).toBeValidMomentDate();
     });
 
     it('returns valid time for 24-hour time', () => {
-      expect(parseDatetime('2018-01-01 14:00')).toBeValid();
+      expect(parseDatetime('2018-01-01 14:00')).toBeValidMomentDate();
     });
 
     it('returns valid time for 24-hour with am/pm', () => {
-      expect(parseDatetime('2018-01-01 14:00am')).toBeValid();
+      expect(parseDatetime('2018-01-01 14:00am')).toBeValidMomentDate();
     });
   });
 

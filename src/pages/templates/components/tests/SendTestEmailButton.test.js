@@ -85,7 +85,7 @@ describe('SendTestEmailButton', () => {
       const mockSendPreview = jest.fn(() => sendPreviewPromise);
       const mockUpdateDraft = jest.fn(() => updateDraftPromise);
       const mockShowAlert = jest.fn();
-      const { getByText, queryByText, getByLabelText, queryByTestId } = subject({
+      const { getByText, queryByText, queryByLabelText, queryByTestId } = subject({
         sendPreview: mockSendPreview,
         showAlert: mockShowAlert,
         updateDraft: mockUpdateDraft,
@@ -94,10 +94,11 @@ describe('SendTestEmailButton', () => {
       userEvent.click(getByText('Send a Test'));
 
       return updateDraftPromise.then(() => {
-        userEvent.type(getByLabelText('To'), 'toEmail@sparkpost.com');
+        userEvent.type(queryByLabelText('To'), 'toEmail@sparkpost.com');
         // Hit the enter key to add the email address to the list of values
-        fireEvent.keyDown(getByLabelText('To'), { preventDefault: jest.fn(), keyCode: 13 });
+        fireEvent.keyDown(queryByLabelText('To'), { preventDefault: jest.fn(), keyCode: 13 });
         expect(queryByText('toEmail@sparkpost.com')).toBeInTheDocument(); // The email address is stored in the DOM instead of the `value` attribute
+        expect(queryByLabelText('From')).toHaveValue('nick@bounce.uat.sparkpost.com');
         userEvent.click(getByText('Send Email'));
 
         expect(queryByTestId('panel-loading')).toBeInTheDocument();
@@ -152,16 +153,16 @@ describe('SendTestEmailButton', () => {
       const mockParsedTestData = {
         options: {},
         substitution_data: {
-          foo: 'bar'
+          foo: 'bar',
         },
-        metadata: {}
+        metadata: {},
       };
 
       const { getByText } = subject({
         isPublishedMode: true,
         updateDraft: mockUpdateDraft,
         parsedTestData: mockParsedTestData,
-        setTestDataAction: mockSetTestData
+        setTestDataAction: mockSetTestData,
       });
 
       userEvent.click(getByText('Send a Test'));
@@ -170,7 +171,7 @@ describe('SendTestEmailButton', () => {
       expect(mockSetTestData).toHaveBeenCalledWith({
         id: '123456',
         mode: 'published',
-        data: mockParsedTestData
+        data: mockParsedTestData,
       });
     });
   });

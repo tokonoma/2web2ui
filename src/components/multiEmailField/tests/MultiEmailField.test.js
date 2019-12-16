@@ -4,16 +4,8 @@ import MultiEmailField from '../MultiEmailField';
 import useMultiEmailField from '../useMultiEmailField';
 
 describe('MultiEmailField', () => {
-  const subject = (props) => (
-    shallow(
-      <MultiEmailField
-        id="multi-email-email-to"
-        label="To:"
-        name="emailTo"
-        {...props}
-      />
-    )
-  );
+  const subject = props =>
+    shallow(<MultiEmailField id="multi-email-email-to" label="To:" name="emailTo" {...props} />);
 
   it('renders', () => {
     const wrapper = subject();
@@ -44,20 +36,20 @@ describe('MultiEmailField', () => {
     const wrapper = subject();
 
     expect(wrapper).toHaveProp('selectedItems', []);
-    expect(wrapper).toHaveProp('value', '');
+    expect(wrapper).toHaveValue('');
     expect(wrapper).toHaveProp('error', '');
   });
 });
 
 describe('MultiEmailField with useMultiEmailField', () => {
-  const MultiEmailFieldWithHook = (props) => {
+  const MultiEmailFieldWithHook = props => {
     const {
       handleMultiEmailChange,
       handleMultiEmailKeyDownAndBlur,
       handleMultiEmailRemove,
       multiEmailValue,
       multiEmailList,
-      multiEmailError
+      multiEmailError,
     } = useMultiEmailField();
 
     return (
@@ -65,8 +57,8 @@ describe('MultiEmailField with useMultiEmailField', () => {
         id="multi-email-email-to"
         label="To:"
         name="emailTo"
-        onChange={(e) => handleMultiEmailChange(e)}
-        onKeyDownAndBlur={(e) => handleMultiEmailKeyDownAndBlur(e)}
+        onChange={e => handleMultiEmailChange(e)}
+        onKeyDownAndBlur={e => handleMultiEmailKeyDownAndBlur(e)}
         onRemoveEmail={handleMultiEmailRemove}
         error={multiEmailError}
         value={multiEmailValue}
@@ -75,12 +67,16 @@ describe('MultiEmailField with useMultiEmailField', () => {
       />
     );
   };
-  const subject = (props) => shallow(<MultiEmailFieldWithHook {...props}/>);
+  const subject = props => shallow(<MultiEmailFieldWithHook {...props} />);
 
   it('does not submit a form when the user hits the "enter" key', () => {
     const mockPreventDefault = jest.fn();
 
-    subject().simulate('keyDownAndBlur', { keyCode: 13, type: 'keydown', preventDefault: mockPreventDefault });
+    subject().simulate('keyDownAndBlur', {
+      keyCode: 13,
+      type: 'keydown',
+      preventDefault: mockPreventDefault,
+    });
 
     expect(mockPreventDefault).toHaveBeenCalled();
   });
@@ -89,38 +85,42 @@ describe('MultiEmailField with useMultiEmailField', () => {
     const mockPreventDefault = jest.fn();
     const wrapper = subject();
 
-    wrapper.simulate('keyDownAndBlur', { keyCode: 32, type: 'keydown', preventDefault: mockPreventDefault });
+    wrapper.simulate('keyDownAndBlur', {
+      keyCode: 32,
+      type: 'keydown',
+      preventDefault: mockPreventDefault,
+    });
     expect(mockPreventDefault).toHaveBeenCalled();
-    expect(wrapper).not.toHaveProp('value', ' ');
+    expect(wrapper).not.toHaveValue(' ');
   });
 
   it('updates the `emailList` prop, clears the `value` prop a valid email address and hits the space bar or tab key', () => {
     const wrapper = subject();
 
     // Adding a selected item via the spacebar
-    wrapper.simulate('change', { target: { value: 'hello@me.com' }});
+    wrapper.simulate('change', { target: { value: 'hello@me.com' } });
 
-    expect(wrapper).toHaveProp('value', 'hello@me.com');
+    expect(wrapper).toHaveValue('hello@me.com');
 
     wrapper.simulate('keyDownAndBlur', { keyCode: 32, preventDefault: jest.fn() });
 
-    expect(wrapper).not.toHaveProp('value', 'hello@me.com');
-    expect(wrapper).toHaveProp('emailList', [ { email: 'hello@me.com' } ]);
+    expect(wrapper).not.toHaveValue('hello@me.com');
+    expect(wrapper).toHaveProp('emailList', [{ email: 'hello@me.com' }]);
   });
 
   it('updates the `error` prop when the user enters an invalid email and hits the spacebar or blurs the field', () => {
     const wrapper = subject();
 
-    wrapper.simulate('change', { target: { value: 'invalidEmail' }});
+    wrapper.simulate('change', { target: { value: 'invalidEmail' } });
     wrapper.simulate('keyDownAndBlur', { keyCode: 32, preventDefault: jest.fn() });
 
     expect(wrapper).toHaveProp('error', 'Please enter a valid email address');
 
-    wrapper.simulate('change', { target: { value: '' }}); // Clear the error
+    wrapper.simulate('change', { target: { value: '' } }); // Clear the error
 
     expect(wrapper).toHaveProp('error', '');
 
-    wrapper.simulate('change', { target: { value: 'invalidEmailAgain' }});
+    wrapper.simulate('change', { target: { value: 'invalidEmailAgain' } });
     wrapper.simulate('keyDownAndBlur', { type: 'blur' });
 
     expect(wrapper).toHaveProp('error', 'Please enter a valid email address');
@@ -128,17 +128,17 @@ describe('MultiEmailField with useMultiEmailField', () => {
   it('removes the last item in the `emailList` array when the user uses the backspace key', () => {
     const wrapper = subject();
 
-    wrapper.simulate('change', { target: { value: 'hello@me.com' }});
+    wrapper.simulate('change', { target: { value: 'hello@me.com' } });
     wrapper.simulate('keyDownAndBlur', { keyCode: 32, preventDefault: jest.fn() });
 
-    expect(wrapper).toHaveProp('emailList', [ { email: 'hello@me.com' } ]);
+    expect(wrapper).toHaveProp('emailList', [{ email: 'hello@me.com' }]);
 
-    wrapper.simulate('change', { target: { value: 'hello@you.com' }});
+    wrapper.simulate('change', { target: { value: 'hello@you.com' } });
     wrapper.simulate('keyDownAndBlur', { keyCode: 32, preventDefault: jest.fn() });
 
     wrapper.simulate('keyDownAndBlur', { keyCode: 8, preventDefault: jest.fn() });
 
-    expect(wrapper).toHaveProp('emailList', [ { email: 'hello@me.com' } ]);
+    expect(wrapper).toHaveProp('emailList', [{ email: 'hello@me.com' }]);
 
     wrapper.simulate('keyDownAndBlur', { keyCode: 8, preventDefault: jest.fn() });
 
@@ -148,7 +148,7 @@ describe('MultiEmailField with useMultiEmailField', () => {
   it('removes an item from the `emailList` prop when `removeItem` is invoked', () => {
     const wrapper = subject();
 
-    wrapper.simulate('change', { target: { value: 'hello@me.com' }});
+    wrapper.simulate('change', { target: { value: 'hello@me.com' } });
     wrapper.simulate('keyDownAndBlur', { type: 'keyDown', keyCode: 32, preventDefault: jest.fn() });
 
     // Invoking `wrapper.props().onRemove()` wasn't triggering the deletion - works when tested manually
@@ -158,5 +158,3 @@ describe('MultiEmailField with useMultiEmailField', () => {
     expect(wrapper).toHaveProp('emailList', []);
   });
 });
-
-

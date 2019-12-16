@@ -44,7 +44,7 @@ export const IncidentsPage = props => {
 
     return (
       <div data-id="incidents-table">
-        <IncidentsCollection incidents={incidents} />;
+        <IncidentsCollection incidents={incidents} />
       </div>
     );
   };

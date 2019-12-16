@@ -3,15 +3,12 @@ import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import { withRouter } from 'react-router-dom';
 import { Button, Grid, Panel } from '@sparkpost/matchbox';
-import {
-  getBillingCountries,
-  updateBillingSubscription,
-  getSubscription,
-} from 'src/actions/billing';
-import billingUpdate from 'src/actions/billingUpdate';
+import { getBillingCountries } from 'src/actions/billing';
+import billingCreate from 'src/actions/billingCreate';
 import { showAlert } from 'src/actions/globalAlert';
 import { Loading } from 'src/components/loading/Loading';
 import { prepareCardInfo } from 'src/helpers/billing';
+import { currentPlanSelector } from 'src/selectors/accountBillingInfo';
 import { getFirstCountry, getFirstStateForCountry } from 'src/selectors/accountBillingForms';
 import PlanSummary from '../components/PlanSummary';
 import BillingAddressForm from './fields/BillingAddressForm';
@@ -24,22 +21,10 @@ export class EnableAutomaticBillingForm extends React.Component {
     this.props.getBillingCountries();
   }
 
-  onSubmit = values => {
-    const {
-      billingUpdate,
-      history,
-      showAlert,
-      getSubscription,
-      updateBillingSubscription,
-    } = this.props;
+  onSubmit = (values) => {
+    const { billingCreate, history, showAlert } = this.props;
 
-    return billingUpdate({ ...values, card: prepareCardInfo(values.card) })
-      .then(() =>
-        updateBillingSubscription({
-          type: 'active',
-        }),
-      )
-      .then(() => getSubscription())
+    return billingCreate({ ...values, card: prepareCardInfo(values.card) })
       .then(() => {
         history.push('/account/billing');
         showAlert({ type: 'success', message: 'Automatic Billing Enabled' });
@@ -77,7 +62,7 @@ export class EnableAutomaticBillingForm extends React.Component {
               </Panel.Section>
               <Panel.Section>
                 <Button disabled={submitting} fullWidth primary type="submit">
-                  {submitting ? 'Loading...' : 'Enable Automatic Billing'}
+                  Enable Automatic Billing
                 </Button>
               </Panel.Section>
             </Panel>
@@ -88,8 +73,9 @@ export class EnableAutomaticBillingForm extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   const country = getFirstCountry(state);
+  const currentPlan = currentPlanSelector(state);
 
   return {
     billingCountries: state.billing.countries,
@@ -100,24 +86,24 @@ const mapStateToProps = state => {
         firstName: state.currentUser.first_name, // for billingCreate
         lastName: state.currentUser.last_name, // for billingCreate
         state: getFirstStateForCountry(state, country),
-        country,
+        country
       },
+      planpicker: currentPlan // for billingCreate
     },
-    loading: state.billing.plansLoading,
+    loading: state.billing.plansLoading
   };
 };
 
 const mapDispatchtoProps = {
-  billingUpdate,
+  billingCreate,
   getBillingCountries,
-  showAlert,
-  getSubscription,
-  updateBillingSubscription,
+  showAlert
 };
 
-export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchtoProps,
-  )(reduxForm({ form: FORMNAME, enableReinitialize: true })(EnableAutomaticBillingForm)),
+export default (
+  withRouter(
+    connect(mapStateToProps, mapDispatchtoProps)(
+      reduxForm({ form: FORMNAME, enableReinitialize: true })(EnableAutomaticBillingForm)
+    )
+  )
 );
