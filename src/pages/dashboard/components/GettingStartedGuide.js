@@ -6,16 +6,16 @@ import ButtonWrapper from 'src/components/buttonWrapper';
 import styles from './GettingStartedGuide.module.scss';
 import { BreadCrumbs, BreadCrumbsItem } from 'src/components';
 import { GuideListItem, GuideListItemTitle, GuideListItemDescription } from './GuideListItem';
-import { GUIDE_IDS } from '../constants';
+import { GUIDE_IDS, BREADCRUMB_ITEMS } from '../constants';
+import { UnstyledLink } from '@sparkpost/matchbox';
 
 export const GettingStartedGuide = ({ onboarding = {}, history, setAccountOption }) => {
-  const breadCrumbsItems = {
-    Features: ['Features'],
-    Sending: ['Features', 'Sending'],
-    'Show Me SparkPost': ['Features', 'Sending', 'Show Me SparkPost'],
-    "Let's Code": ['Features', 'Sending', "Let's Code"],
-  };
-  const { isGuideAtBottom = false, active_step, send_test_email_completed } = onboarding;
+  const {
+    isGuideAtBottom = false,
+    active_step,
+    send_test_email_completed,
+    invite_collaborator_completed,
+  } = onboarding;
 
   const setOnboardingAccountOption = (obj = {}) => {
     setAccountOption('onboarding', obj);
@@ -44,7 +44,7 @@ export const GettingStartedGuide = ({ onboarding = {}, history, setAccountOption
   }, [stepName]);
   const renderBreadCrumbs = () => (
     <BreadCrumbs>
-      {breadCrumbsItems[stepName].map(item => (
+      {BREADCRUMB_ITEMS[stepName].map(item => (
         <BreadCrumbsItem
           key={item}
           onClick={() => setAndStoreStepName(item)}
@@ -65,6 +65,10 @@ export const GettingStartedGuide = ({ onboarding = {}, history, setAccountOption
       case 'Send Test Email':
         setOnboardingAccountOption({ send_test_email_completed: true });
         history.push(`/templates?pendo=${GUIDE_IDS.SEND_TEST_EMAIL}`);
+        break;
+      case 'Invite a Collaborator':
+        setOnboardingAccountOption({ invite_collaborator_completed: true });
+        history.push('/account/users');
         break;
       default:
         break;
@@ -180,7 +184,12 @@ export const GettingStartedGuide = ({ onboarding = {}, history, setAccountOption
               </GuideListItem>
             </Panel.Section>
             <Panel.Section>
-              <GuideListItem action={{ name: 'Explore Analytics', onClick: () => {} }}>
+              <GuideListItem
+                action={{
+                  name: 'Explore Analytics',
+                  onClick: () => {},
+                }}
+              >
                 <GuideListItemTitle>Explore Analytics</GuideListItemTitle>
                 <GuideListItemDescription>
                   Get acquainted with our powerful analytics to make the most of your sending
@@ -189,7 +198,13 @@ export const GettingStartedGuide = ({ onboarding = {}, history, setAccountOption
               </GuideListItem>
             </Panel.Section>
             <Panel.Section>
-              <GuideListItem action={{ name: 'Invite a Collaborator', onClick: () => {} }}>
+              <GuideListItem
+                action={{
+                  name: 'Invite a Collaborator',
+                  onClick: () => handleAction('Invite a Collaborator'),
+                }}
+                itemCompleted={invite_collaborator_completed}
+              >
                 <GuideListItemTitle>Invite Your Team</GuideListItemTitle>
                 <GuideListItemDescription>
                   {
@@ -197,13 +212,21 @@ export const GettingStartedGuide = ({ onboarding = {}, history, setAccountOption
                   }
                   <br />
                   {'Or you can '}
-                  <a href="#">setup email sending now</a>
+                  <UnstyledLink
+                    onClick={() => {
+                      setAndStoreStepName("Let's Code");
+                      setOnboardingAccountOption({ invite_collaborator_completed: true });
+                    }}
+                  >
+                    setup email sending now
+                  </UnstyledLink>
                 </GuideListItemDescription>
               </GuideListItem>
             </Panel.Section>
           </>
         );
       case "Let's Code":
+        return <Panel.Section>{renderBreadCrumbs()}</Panel.Section>;
       default:
         return null;
     }
