@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { Page, Panel } from '@sparkpost/matchbox';
 import _ from 'lodash';
 import { ApiErrorBanner, Loading } from 'src/components';
+import PanelLoading from 'src/components/panelLoading';
 import IpForm from './components/IpForm';
 import DeliveryHistoryLineChart from './components/DeliveryHistoryLineChart';
 import { showAlert } from 'src/actions/globalAlert';
@@ -63,9 +64,9 @@ export class EditIpPage extends Component {
   }
 
   render() {
-    const { loading, pool, ip, error, deliveryHistory } = this.props;
+    const { pageLoading, chartLoading, pool, ip, pageError, chartError, chartData } = this.props;
 
-    if (loading || _.isEmpty(pool) || _.isEmpty(ip)) {
+    if (pageLoading || _.isEmpty(pool) || _.isEmpty(ip)) {
       return <Loading />;
     }
 
@@ -78,9 +79,9 @@ export class EditIpPage extends Component {
           to: `/account/ip-pools/edit/${pool.id}`,
         }}
       >
-        {error ? (
+        {pageError ? (
           <ApiErrorBanner
-            errorDetails={error.message}
+            errorDetails={pageError.message}
             message="Sorry, we seem to have had some trouble loading your IP data."
             reload={this.loadDependentData}
           />
@@ -88,14 +89,26 @@ export class EditIpPage extends Component {
           <>
             <IpForm onSubmit={this.onUpdateIp} />
 
-            {!_.isEmpty(deliveryHistory) && (
-              <Panel title="Delivery History">
-                <Panel.Section className={styles.LineChartSection}>
-                  <h3>Last 10 Days</h3>
+            {chartLoading ? (
+              <PanelLoading />
+            ) : (
+              <>
+                {chartError ? (
+                  <ApiErrorBanner
+                    errorDetails={pageError.message}
+                    message="Sorry, we seem to have had some trouble loading your IP data."
+                    reload={this.loadDependentData}
+                  />
+                ) : (
+                  <Panel title="Delivery History">
+                    <Panel.Section className={styles.LineChartSection}>
+                      <h3>Last 10 Days</h3>
 
-                  <DeliveryHistoryLineChart data={deliveryHistory} />
-                </Panel.Section>
-              </Panel>
+                      <DeliveryHistoryLineChart data={chartData} />
+                    </Panel.Section>
+                  </Panel>
+                )}
+              </>
             )}
           </>
         )}
@@ -111,9 +124,11 @@ const mapStateToProps = (state, props) => {
   return {
     ip: selectIpForCurrentPool(state, props),
     pool: selectCurrentPool(state, props),
-    deliveryHistory: selectIpDeliveryHistory(state, props),
-    loading: listLoading || metricsLoading,
-    error: listError || metricsError,
+    chartData: selectIpDeliveryHistory(state, props),
+    pageLoading: listLoading,
+    pageError: listError,
+    chartError: metricsError,
+    chartLoading: metricsLoading,
   };
 };
 
