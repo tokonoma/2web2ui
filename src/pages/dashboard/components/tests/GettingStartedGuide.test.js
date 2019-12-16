@@ -84,4 +84,18 @@ describe('GettingStartedGuide', () => {
       `/templates?pendo=${GUIDE_IDS.SEND_TEST_EMAIL}`,
     );
   });
+
+  it('should navigate to summary report when Exlplore Analytics button is clicked', () => {
+    const instance = subject();
+    instance.find('Button').simulate('click');
+    instance.find({ children: 'Show Me SparkPost' }).simulate('click');
+    instance
+      .find('GuideListItem')
+      .at(1)
+      .prop('action')
+      .onClick();
+    expect(defaultProps.history.push).toHaveBeenCalledWith(
+      `/reports/summary?pendo=${GUIDE_IDS.EXPLORE_ANALYTICS}`,
+    );
+  });
 });
