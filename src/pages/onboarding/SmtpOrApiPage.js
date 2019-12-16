@@ -9,35 +9,36 @@ import SkipLink from './components/SkipLink';
 const SmtpOrApiPage = () => (
   <Fragment>
     <CenteredLogo />
-    <Panel accent title='Sending Your First Email'>
+    <Panel accent title="Sending Your First Email">
       <Panel.Section>
         <p>How will you send email with us?</p>
         <Grid>
           <Grid.Column xs={12} md={6}>
             <OptionTile
-              to='/onboarding/email/smtp'
+              to="/onboarding/email/smtp"
               wrapper={Link}
-              label='SMTP'
-              content='Set up your own mail server to send through our SMTP relay service.'
+              label="SMTP"
+              content="Set up your own mail server to send through our SMTP relay service."
             />
           </Grid.Column>
           <Grid.Column xs={12} md={6}>
             <OptionTile
-              to='/onboarding/email/api'
+              to="/onboarding/email/api"
               wrapper={Link}
-              label='REST API'
-              content='Use our powerful REST API to send email via simple HTTP requests'
+              label="REST API"
+              content="Use our powerful REST API to send email via simple HTTP requests"
             />
           </Grid.Column>
         </Grid>
       </Panel.Section>
       <Panel.Section>
-        <SkipLink to='/dashboard'>Continue to dashboard</SkipLink>
+        <SkipLink to={{ pathname: '/dashboard', state: { fromOnboarding: true } }}>
+          Continue to dashboard
+        </SkipLink>
       </Panel.Section>
       <Steps />
     </Panel>
   </Fragment>
 );
-
 
 export default SmtpOrApiPage;

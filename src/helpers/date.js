@@ -11,7 +11,7 @@ export const relativeDateOptions = [
   { value: '14days', label: 'Last 14 Days' },
   { value: '30days', label: 'Last 30 Days' },
   { value: '90days', label: 'Last 90 Days' },
-  { value: 'custom', label: 'Custom' }
+  { value: 'custom', label: 'Custom' },
 ];
 
 export const relativeDateOptionsIndexed = relativeDateOptions.reduce((result, { value, label }) => {
@@ -19,7 +19,8 @@ export const relativeDateOptionsIndexed = relativeDateOptions.reduce((result, { 
   return result;
 }, {});
 
-export const getRelativeDateOptions = (ranges) => relativeDateOptions.filter((item) => ranges.includes(item.value));
+export const getRelativeDateOptions = ranges =>
+  relativeDateOptions.filter(item => ranges.includes(item.value));
 
 /**
  * Takes a date string and returns the end of that day (11:59PM)
@@ -57,7 +58,7 @@ export function getNextHour(date) {
 }
 
 export function isSameDate(a, b) {
-  return (a instanceof Date) && (b instanceof Date) && (a.getTime() === b.getTime());
+  return a instanceof Date && b instanceof Date && a.getTime() === b.getTime();
 }
 
 /**
@@ -87,11 +88,15 @@ export function getRelativeDates(range, { now = moment().toDate(), roundToPrecis
 
   switch (range) {
     case 'hour':
-      preciseFrom = moment(now).subtract(1, 'hour').toDate();
+      preciseFrom = moment(now)
+        .subtract(1, 'hour')
+        .toDate();
       break;
 
     case 'day':
-      preciseFrom = moment(now).subtract(1, 'day').toDate();
+      preciseFrom = moment(now)
+        .subtract(1, 'day')
+        .toDate();
       break;
 
     case '7days':
@@ -100,7 +105,9 @@ export function getRelativeDates(range, { now = moment().toDate(), roundToPrecis
     case '30days':
     case '90days': {
       const numberOfDays = parseInt(range.replace('days', ''));
-      preciseFrom = moment(now).subtract(numberOfDays, 'day').toDate();
+      preciseFrom = moment(now)
+        .subtract(numberOfDays, 'day')
+        .toDate();
       break;
     }
     case 'custom':
@@ -108,7 +115,9 @@ export function getRelativeDates(range, { now = moment().toDate(), roundToPrecis
 
     default: {
       if (range) {
-        throw new Error(`Tried to calculate a relative date range with an invalid range value: ${range}`);
+        throw new Error(
+          `Tried to calculate a relative date range with an invalid range value: ${range}`,
+        );
       }
       return {};
     }
@@ -136,15 +145,17 @@ export function formatTime(time, FORMAT = config.timeFormat) {
 }
 
 export function formatDateTime(datetime, FORMAT) {
-  return FORMAT ? moment(datetime).format(FORMAT) : `${formatDate(datetime)}, ${formatTime(datetime)}`;
+  return FORMAT
+    ? moment(datetime).format(FORMAT)
+    : `${formatDate(datetime)}, ${formatTime(datetime)}`;
 }
 
 // format as ISO 8601 timestamp to match SP API
-export const formatApiTimestamp = (time) => moment.utc(time).format();
-export const formatInputDate = (date) => moment(date).format(FORMATS.SHORT_DATE);
-export const formatInputTime = (time) => moment(time).format(FORMATS.TIME);
-export const parseDate = (str) => moment(str, FORMATS.INPUT_DATES, true);
-export const parseTime = (str) => moment(str, FORMATS.INPUT_TIMES, true);
+export const formatApiTimestamp = time => moment.utc(time).format();
+export const formatInputDate = date => moment(date).format(FORMATS.SHORT_DATE);
+export const formatInputTime = time => moment(time).format(FORMATS.TIME);
+export const parseDate = str => moment(str, FORMATS.INPUT_DATES, true);
+export const parseTime = str => moment(str, FORMATS.INPUT_TIMES, true);
 export const parseDatetime = (...args) => moment(args.join(' '), FORMATS.INPUT_DATETIMES, true);
 
 export const fillByDate = ({ dataSet, fill = {}, from, to } = {}) => {
@@ -174,12 +185,8 @@ export function getDateTicks({ to, from }) {
   const diff = moment(to).diff(from, 'days');
   const middle = moment(from).add(diff / 2, 'days');
 
-  return [
-    formatInputDate(from),
-    formatInputDate(middle),
-    formatInputDate(to)
-  ];
+  return [formatInputDate(from), formatInputDate(middle), formatInputDate(to)];
 }
 
 // see, https://momentjs.com/docs/#/parsing/unix-timestamp-milliseconds/
-export const toMilliseconds = (seconds) => seconds * 1000;
+export const toMilliseconds = seconds => seconds * 1000;
