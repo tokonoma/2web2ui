@@ -7,7 +7,6 @@ import styles from './NavItem.module.scss';
 const TAGS = {
   beta: { label: 'BETA' },
   new: { color: 'blue', label: 'NEW' },
-  labs: { label: 'LABS' },
   preview: { label: 'PREVIEW' },
 };
 

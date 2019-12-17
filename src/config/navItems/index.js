@@ -86,7 +86,6 @@ export default [
       {
         label: 'Snippets',
         to: '/snippets',
-        tag: 'labs',
       },
     ],
   },

@@ -147,3 +147,35 @@ exports[`NavItem tests should render a link with new tag 1`] = `
   </Link>
 </li>
 `;
+
+exports[`NavItem tests should render a link with preview tag 1`] = `
+<li>
+  <Link
+    className="Link"
+    onClick={null}
+    replace={false}
+    to="/to"
+  >
+    <span
+      className="iconWrapper"
+    >
+      <Mail
+        className="icon"
+        size={21}
+      />
+    </span>
+    <div
+      className="Label"
+    >
+      label
+    </div>
+    <div
+      className="releaseTag"
+    >
+      <Tag>
+        PREVIEW
+      </Tag>
+    </div>
+  </Link>
+</li>
+`;
