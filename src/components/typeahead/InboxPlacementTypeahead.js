@@ -20,7 +20,7 @@ const Item = ({ value, type }) => (
   </div>
 );
 
-const InboxPlacementTypeahead = ({
+export const InboxPlacementTypeahead = ({
   filters,
   trendsFilterValues,
   trendsFilterValuesloading,

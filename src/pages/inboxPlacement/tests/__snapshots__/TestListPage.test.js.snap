@@ -42,6 +42,7 @@ exports[`Page: Test List renders page correctly with defaults 1`] = `
           }
         }
         updateFilters={[Function]}
+        validateDate={[Function]}
       />
     </Panel.Section>
     <Connect(TrendsChart)
@@ -145,6 +146,7 @@ exports[`Page: Test List renders page with tests 1`] = `
           }
         }
         updateFilters={[Function]}
+        validateDate={[Function]}
       />
     </Panel.Section>
     <Connect(TrendsChart)

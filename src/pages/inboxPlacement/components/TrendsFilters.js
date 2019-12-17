@@ -61,7 +61,7 @@ const TrendsFilters = ({ filters = {}, updateFilters, validateDate }) => {
     [tags, updateFilters],
   );
 
-  const handleFilterAdd = (item, downshift) => {
+  const handleFilterAdd = (item, downshift = {}) => {
     if (item) {
       const currentFilter = tags[item.type];
       downshift.clearSelection();
