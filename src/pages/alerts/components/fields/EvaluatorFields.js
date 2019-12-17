@@ -14,6 +14,7 @@ export const EvaluatorFields = ({
   operator,
   disabled,
   change,
+  isNewAlert,
   shouldUpdateRecommendation,
 }) => {
   const handleSourceChange = event => {
@@ -54,7 +55,7 @@ export const EvaluatorFields = ({
               id="alertEvaluatorSource"
               name="source"
               component={SelectWrapper}
-              disabled={disabled}
+              disabled={disabled || !isNewAlert}
               options={sourceOptions}
               onChange={handleSourceChange}
             />
