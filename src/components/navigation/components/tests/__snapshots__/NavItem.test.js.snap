@@ -82,38 +82,6 @@ exports[`NavItem tests should render a link with beta tag 1`] = `
 </li>
 `;
 
-exports[`NavItem tests should render a link with labs tag 1`] = `
-<li>
-  <Link
-    className="Link"
-    onClick={null}
-    replace={false}
-    to="/to"
-  >
-    <span
-      className="iconWrapper"
-    >
-      <Mail
-        className="icon"
-        size={21}
-      />
-    </span>
-    <div
-      className="Label"
-    >
-      label
-    </div>
-    <div
-      className="releaseTag"
-    >
-      <Tag>
-        LABS
-      </Tag>
-    </div>
-  </Link>
-</li>
-`;
-
 exports[`NavItem tests should render a link with new tag 1`] = `
 <li>
   <Link
