@@ -26,13 +26,14 @@ export const GettingStartedGuide = ({
     send_test_email_completed,
     explore_analytics_completed,
     invite_collaborator_completed,
-    add_sending_domain_completed,
+    add_sending_domain_completed = rest.hasSendingDomain,
   } = onboarding;
 
   const setOnboardingAccountOption = (obj = {}) => {
     setAccountOption('onboarding', obj);
   };
 
+  //TODO: set isGuideAtBottom to true if all the CheckLists are completed.
   const actions = isGuideAtBottom
     ? null
     : [
@@ -92,6 +93,10 @@ export const GettingStartedGuide = ({
         break;
       case 'Generate API Key':
         history.push('/account/api-keys');
+        break;
+      case 'Add Sending Domain':
+        setOnboardingAccountOption({ add_sending_domain_completed: true });
+        history.push(`/account/sending-domains?=${GUIDE_IDS.ADD_SENDING_DOMAIN}`);
         break;
       default:
         break;

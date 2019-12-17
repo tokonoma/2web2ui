@@ -15,6 +15,9 @@ import { isAccountUiOptionSet, getAccountUiOptionValue } from 'src/helpers/condi
 import { setAccountOption } from 'src/actions/account';
 
 export class DashboardPage extends Component {
+  componentDidMount() {
+    this.props.listSendingDomains();
+  }
   displayGuideAndReport = () => {
     const usageReport = <UsageReport />;
     const gettingStartedGuide = <GettingStartedGuide {...this.props} />;

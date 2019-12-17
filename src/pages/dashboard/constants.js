@@ -1,6 +1,7 @@
 export const GUIDE_IDS = {
   SEND_TEST_EMAIL: '6RgwDLtUU5Ynp20auFvU9Qjbpqg',
   EXPLORE_ANALYTICS: 'LHGQClYKBmD_OI1t9oj-DE8mcOY',
+  ADD_SENDING_DOMAIN: '',
 };
 
 export const BREADCRUMB_ITEMS = {

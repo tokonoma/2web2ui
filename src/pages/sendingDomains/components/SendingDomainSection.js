@@ -21,12 +21,13 @@ export class SendingDomainSection extends Component {
     const { title, children } = this.props;
 
     return (
-      <div className={styles.SendingDomainSection}>
-        <hr className={styles.Hr}/>
+      <div
+        className={styles.SendingDomainSection}
+        data-id={`sending-domain-${title.toLowerCase().replace(/\s/g, '-')}`}
+      >
+        <hr className={styles.Hr} />
         <h3>{title}</h3>
-        <Grid>
-          {children}
-        </Grid>
+        <Grid>{children}</Grid>
       </div>
     );
   }
