@@ -1,12 +1,12 @@
 import { shallow } from 'enzyme';
 import React from 'react';
+import cases from 'jest-in-case';
 import { AlertForm } from '../AlertForm';
 import { DEFAULT_FORM_VALUES } from '../../constants/formConstants';
 import * as alertFormHelper from '../../helpers/alertForm';
 import SubaccountField from '../../components/fields/SubaccountsField';
 import FilterFields from '../../components/fields/FilterFields';
 import EvaluatorFields from '../../components/fields/EvaluatorFields';
-
 
 describe('Alert Form Component', () => {
   let props;
@@ -25,7 +25,11 @@ describe('Alert Form Component', () => {
       change: jest.fn(),
       formMeta: {},
       formErrors: {},
-      isNewAlert: true
+      isNewAlert: true,
+      initialValues: {},
+      featureFlaggedAlerts: {
+        injection_count: false,
+      },
     };
 
     wrapper = shallow(<AlertForm {...props} />);
@@ -41,8 +45,8 @@ describe('Alert Form Component', () => {
   });
 
   it('should reset form values when changing metric', () => {
-    wrapper.find({ name: 'metric' }).simulate('change', { target: { value: 'block_bounce_rate' }});
-    expect(wrapper.instance().props.change).toHaveBeenCalledTimes(7);//4 filters + 3 default values ;
+    wrapper.find({ name: 'metric' }).simulate('change', { target: { value: 'block_bounce_rate' } });
+    expect(wrapper.instance().props.change).toHaveBeenCalledTimes(7); //4 filters + 3 default values ;
   });
 
   it('should show filters when metric has filters', () => {
@@ -53,7 +57,9 @@ describe('Alert Form Component', () => {
   });
 
   it('should not show filters when metric has no filters', () => {
-    jest.spyOn(alertFormHelper, 'getFormSpec').mockImplementationOnce(() => ({ hasFilters: false }));
+    jest
+      .spyOn(alertFormHelper, 'getFormSpec')
+      .mockImplementationOnce(() => ({ hasFilters: false }));
     wrapper = shallow(<AlertForm {...props} />);
     expect(wrapper.find(SubaccountField)).not.toExist();
     expect(wrapper.find(FilterFields)).not.toExist();
@@ -77,18 +83,66 @@ describe('Alert Form Component', () => {
   });
 
   it('should show error when every notification channel is empty', () => {
-    const formMeta = { emails: { touched: true }};
+    const formMeta = { emails: { touched: true } };
     const formErrors = { emails: 'At least one notification channel must not be empty' };
     wrapper.setProps({ formMeta, formErrors });
     expect(wrapper.find('Error')).toExist();
   });
 
-  describe('submit button', () => {
+  cases(
+    'metric options',
+    ({ name, ...props }) => {
+      wrapper.setProps(props);
+      let assertion = expect(wrapper.find('Field[name="metric"]').prop('options'));
 
+      if (/should hide/.test(name)) {
+        assertion = assertion.not;
+      }
+
+      assertion.toContainEqual({ label: 'Health Score', value: 'health_score' });
+    },
+    {
+      'should show unflagged metric': {
+        featureFlaggedAlerts: {},
+      },
+      'should hide metric on create form when flag is disabled': {
+        featureFlaggedAlerts: { health_score: false },
+        isDuplicate: false,
+        isNewAlert: true,
+      },
+      'should show metric on create form when flag is enabled': {
+        featureFlaggedAlerts: { health_score: true },
+        isDuplicate: false,
+        isNewAlert: true,
+      },
+      'should hide metric on edit form when flag is disabled and editing unflagged metric': {
+        featureFlaggedAlerts: { health_score: false },
+        initialValues: { metric: 'something_else' },
+        isNewAlert: false,
+      },
+      'should show metric on edit form when flag is disabled and editing flagged metric': {
+        featureFlaggedAlerts: { health_score: false },
+        initialValues: { metric: 'health_score' },
+        isNewAlert: false,
+      },
+      'should show metric on edit form when flag is enabled and editing unflagged metric': {
+        featureFlaggedAlerts: { health_score: true },
+        initialValues: { metric: 'something_else' },
+        isNewAlert: false,
+      },
+      'should show metric on edit form when flag is enabled and editing flagged metric': {
+        featureFlaggedAlerts: { health_score: true },
+        initialValues: { metric: 'health_score' },
+        isNewAlert: false,
+      },
+    },
+  );
+
+  describe('submit button', () => {
     const defaultFormState = {
       pristine: false,
       submitting: false,
-      isDuplicate: false
+      isDuplicate: false,
     };
 
     it('should disable submit button when form is pristine', () => {

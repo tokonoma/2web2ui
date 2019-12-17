@@ -1,7 +1,6 @@
 import * as alertsSelectors from '../alerts';
 import cases from 'jest-in-case';
 
-
 describe('Alerts Selectors: ', () => {
   let alerts;
   let formattedAlerts;
@@ -13,40 +12,40 @@ describe('Alerts Selectors: ', () => {
         muted: true,
         name: 'my alert 1',
         metric: 'monthly_sending_limit',
-        last_triggered: null
+        last_triggered: null,
       },
       {
         id: 'id-2',
         muted: false,
         name: 'my alert 2',
         metric: 'monthly_sending_limit',
-        last_triggered: '2019-06-05T14:48:00.000Z'
+        last_triggered: '2019-06-05T14:48:00.000Z',
       },
       {
         id: 'id-3',
         muted: true,
         name: 'my alert 3',
         metric: 'health_score',
-        last_triggered: '2019-06-15T14:48:00.000Z'
-      }
+        last_triggered: '2019-06-15T14:48:00.000Z',
+      },
     ];
 
     formattedAlerts = [
       {
         ...list[0],
         last_triggered_formatted: null,
-        last_triggered_timestamp: 0
+        last_triggered_timestamp: 0,
       },
       {
         ...list[1],
         last_triggered_formatted: 'Jun 5 2019, 10:48am',
-        last_triggered_timestamp: 1559746080000
+        last_triggered_timestamp: 1559746080000,
       },
       {
         ...list[2],
         last_triggered_formatted: 'Jun 15 2019, 10:48am',
-        last_triggered_timestamp: 1560610080000
-      }
+        last_triggered_timestamp: 1560610080000,
+      },
     ];
 
     alerts = { list };
@@ -61,7 +60,6 @@ describe('Alerts Selectors: ', () => {
   });
 
   describe('getInitialValues', () => {
-
     const formData = {
       name: 'foo',
       metric: 'health_score',
@@ -69,14 +67,14 @@ describe('Alerts Selectors: ', () => {
       sending_ip: [],
       mailbox_provider: [],
       sending_domain: [],
-      single_filter: { filter_type: 'none', filter_values: []},
+      single_filter: { filter_type: 'none', filter_values: [] },
       emails: 'sparky@sparkpost.com, test@foo.com',
       slack: '',
       webhook: '',
       source: 'raw',
       operator: 'lt',
       value: 80,
-      muted: false
+      muted: false,
     };
 
     const apiData = {
@@ -84,55 +82,67 @@ describe('Alerts Selectors: ', () => {
       metric: 'health_score',
       subaccounts: [-1],
       filters: [],
-      channels: { emails: ['sparky@sparkpost.com', 'test@foo.com']},
+      channels: { emails: ['sparky@sparkpost.com', 'test@foo.com'] },
       threshold_evaluator: {
         source: 'raw',
         operator: 'lt',
-        value: 80
+        value: 80,
       },
-      muted: false
+      muted: false,
     };
 
-    const testCases =
-    {
+    const testCases = {
       'master and all subaccounts': {
         formData: { ...formData },
-        apiData: { ...apiData }
+        apiData: { ...apiData },
       },
       'any subaccount': {
-        formData: { ...formData, subaccounts: [-2]},
-        apiData: { ...apiData, subaccounts: undefined, any_subaccount: true }
+        formData: { ...formData, subaccounts: [-2] },
+        apiData: { ...apiData, subaccounts: undefined, any_subaccount: true },
       },
       'select subaccounts': {
-        formData: { ...formData, subaccounts: [0,1]},
-        apiData: { ...apiData, subaccounts: [0,1]}
+        formData: { ...formData, subaccounts: [0, 1] },
+        apiData: { ...apiData, subaccounts: [0, 1] },
       },
       'single filter': {
-        formData: { ...formData, single_filter: { filter_type: 'mailbox_provider', filter_values: ['a']}},
-        apiData: { ...apiData, filters: [{ filter_type: 'mailbox_provider', filter_values: ['a']}]}
+        formData: {
+          ...formData,
+          single_filter: { filter_type: 'mailbox_provider', filter_values: ['a'] },
+        },
+        apiData: {
+          ...apiData,
+          filters: [{ filter_type: 'mailbox_provider', filter_values: ['a'] }],
+        },
       },
       'single filter with no facet selected': {
-        formData: { ...formData, single_filter: { filter_type: 'none', filter_values: []}},
-        apiData: { ...apiData }
+        formData: { ...formData, single_filter: { filter_type: 'none', filter_values: [] } },
+        apiData: { ...apiData },
       },
       'only sending Ip': {
-        formData: { ...formData, metric: 'block_bounce_rate', sending_ip: ['a','b']},
+        formData: { ...formData, metric: 'block_bounce_rate', sending_ip: ['a', 'b'] },
         apiData: {
           ...apiData,
           metric: 'block_bounce_rate',
-          filters: [{ filter_type: 'sending_ip', filter_values: ['a','b']}]}
+          filters: [{ filter_type: 'sending_ip', filter_values: ['a', 'b'] }],
+        },
       },
       'sending Ip, mailbox provider, and sending domain': {
-        formData: { ...formData, metric: 'block_bounce_rate', sending_ip: ['a'], mailbox_provider: ['b'], sending_domain: ['c']},
+        formData: {
+          ...formData,
+          metric: 'block_bounce_rate',
+          sending_ip: ['a'],
+          mailbox_provider: ['b'],
+          sending_domain: ['c'],
+        },
         apiData: {
           ...apiData,
           metric: 'block_bounce_rate',
           filters: [
-            { filter_type: 'sending_ip', filter_values: ['a']},
-            { filter_type: 'mailbox_provider', filter_values: ['b']},
-            { filter_type: 'sending_domain', filter_values: ['c']}
-          ]
-        }
+            { filter_type: 'sending_ip', filter_values: ['a'] },
+            { filter_type: 'mailbox_provider', filter_values: ['b'] },
+            { filter_type: 'sending_domain', filter_values: ['c'] },
+          ],
+        },
       },
       'with slack and webhook channels': {
         formData: { ...formData, slack: 'target1', webhook: 'target2' },
@@ -141,21 +151,48 @@ describe('Alerts Selectors: ', () => {
           channels: {
             emails: ['sparky@sparkpost.com', 'test@foo.com'],
             slack: { target: 'target1' },
-            webhook: { target: 'target2' }
-          }
-        }
-      }
+            webhook: { target: 'target2' },
+          },
+        },
+      },
     };
 
-    cases('should correctly transform the data for', ({ formData, apiData }) => {
-      expect(alertsSelectors.selectAlertFormValues({ alerts: { alert: apiData }}, { isDuplicate: false })).toEqual(formData);
-    }, testCases);
+    cases(
+      'should correctly transform the data for',
+      ({ formData, apiData }) => {
+        expect(
+          alertsSelectors.selectAlertFormValues(
+            { alerts: { alert: apiData } },
+            { isDuplicate: false },
+          ),
+        ).toEqual(formData);
+      },
+      testCases,
+    );
 
     it('append (Duplicate) for duplicate alerts', () => {
       const inputAlert = { ...apiData, name: 'OG alert' };
       const expected = { ...formData, name: 'OG alert Copy' };
-      expect(alertsSelectors.selectAlertFormValues({ alerts: { alert: inputAlert }}, { isDuplicate: true })).
-        toEqual(expected);
+      expect(
+        alertsSelectors.selectAlertFormValues(
+          { alerts: { alert: inputAlert } },
+          { isDuplicate: true },
+        ),
+      ).toEqual(expected);
     });
+  });
+
+  it('returns feature flagged metrics', () => {
+    const state = {
+      account: {
+        options: {
+          ui: {
+            allow_injection_alerts: true,
+          },
+        },
+      },
+    };
+
+    expect(alertsSelectors.selectFeatureFlaggedAlerts(state)).toEqual({ injection_count: true });
   });
 });
