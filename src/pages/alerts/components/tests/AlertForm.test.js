@@ -1,5 +1,6 @@
 import { shallow } from 'enzyme';
 import React from 'react';
+import cases from 'jest-in-case';
 import { AlertForm } from '../AlertForm';
 import { DEFAULT_FORM_VALUES } from '../../constants/formConstants';
 import * as alertFormHelper from '../../helpers/alertForm';
@@ -25,6 +26,8 @@ describe('Alert Form Component', () => {
       formMeta: {},
       formErrors: {},
       isNewAlert: true,
+      initialValues: {},
+      featureFlaggedAlerts: {},
     };
 
     wrapper = shallow(<AlertForm {...props} />);
@@ -84,20 +87,54 @@ describe('Alert Form Component', () => {
     expect(wrapper.find('Error')).toExist();
   });
 
-  it('should show injection count metric option', () => {
-    expect(wrapper.find('Field[name="metric"]').prop('options')).not.toContainEqual({
-      label: 'Injection Count',
-      value: 'injection_count',
-    });
-  });
+  cases(
+    'metric options',
+    ({ name, ...props }) => {
+      wrapper.setProps(props);
+      let assertion = expect(wrapper.find('Field[name="metric"]').prop('options'));
 
-  it('should not show injection count metric option', () => {
-    wrapper.setProps({ isNewAlert: true, allowInjectionAlerts: true });
-    expect(wrapper.find('Field[name="metric"]').prop('options')).toContainEqual({
-      label: 'Injection Count',
-      value: 'injection_count',
-    });
-  });
+      if (/should hide/.test(name)) {
+        assertion = assertion.not;
+      }
+
+      assertion.toContainEqual({ label: 'Health Score', value: 'health_score' });
+    },
+    {
+      'should show unflagged metric': {
+        featureFlaggedAlerts: {},
+      },
+      'should hide metric on create form when flag is disabled': {
+        featureFlaggedAlerts: { health_score: false },
+        isDuplicate: false,
+        isNewAlert: true,
+      },
+      'should show metric on create form when flag is enabled': {
+        featureFlaggedAlerts: { health_score: true },
+        isDuplicate: false,
+        isNewAlert: true,
+      },
+      'should hide metric on edit form when flag is disabled and editing unflagged metric': {
+        featureFlaggedAlerts: { health_score: false },
+        initialValues: { metric: 'something_else' },
+        isNewAlert: false,
+      },
+      'should show metric on edit form when flag is disabled and editing flagged metric': {
+        featureFlaggedAlerts: { health_score: false },
+        initialValues: { metric: 'health_score' },
+        isNewAlert: false,
+      },
+      'should show metric on edit form when flag is enabled and editing unflagged metric': {
+        featureFlaggedAlerts: { health_score: true },
+        initialValues: { metric: 'something_else' },
+        isNewAlert: false,
+      },
+      'should show metric on edit form when flag is enabled and editing flagged metric': {
+        featureFlaggedAlerts: { health_score: true },
+        initialValues: { metric: 'health_score' },
+        isNewAlert: false,
+      },
+    },
+  );
 
   describe('submit button', () => {
     const defaultFormState = {

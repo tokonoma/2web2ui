@@ -70,7 +70,7 @@ export class AlertForm extends Component {
 
   render() {
     const {
-      allowInjectionAlerts,
+      featureFlaggedAlerts,
       pristine,
       submitting,
       metric,
@@ -80,6 +80,7 @@ export class AlertForm extends Component {
       formMeta,
       isNewAlert,
       isDuplicate,
+      initialValues,
     } = this.props;
 
     const submitText = submitting ? 'Submitting...' : isNewAlert ? 'Create Alert' : 'Update Alert';
@@ -88,7 +89,22 @@ export class AlertForm extends Component {
     const channelsError = this.isNotificationChannelsEmpty(formMeta, formErrors);
 
     const visibleMetricOptions = metricOptions.filter(option => {
-      if (isNewAlert && option.value === 'injection_count' && !allowInjectionAlerts) {
+      // show all metrics when feature flag is not defined
+      if (!featureFlaggedAlerts.hasOwnProperty(option.value)) {
+        return true;
+      }
+
+      // hide metric on create form when flag is disabled
+      if (isNewAlert && !isDuplicate && !featureFlaggedAlerts[option.value]) {
+        return false;
+      }
+
+      // hide metric on edit and duplicate forms when metric is a flagged metric or flag is disabled
+      if (
+        (!isNewAlert || isDuplicate) &&
+        initialValues.metric !== option.value &&
+        !featureFlaggedAlerts[option.value]
+      ) {
         return false;
       }
 

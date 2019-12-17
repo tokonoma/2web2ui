@@ -3,10 +3,8 @@ import { reduxForm, formValueSelector, getFormSyncErrors, getFormMeta } from 're
 import { withRouter } from 'react-router-dom';
 import { DEFAULT_FORM_VALUES, FORM_NAME } from '../constants/formConstants';
 import validateForm from '../helpers/validateForm';
-import { isAccountUiOptionSet } from 'src/helpers/conditions/account';
-import { selectCondition } from 'src/selectors/accessConditionState';
 import { hasSubaccounts } from 'src/selectors/subaccounts';
-import { selectAlertFormValues } from 'src/selectors/alerts';
+import { selectAlertFormValues, selectFeatureFlaggedAlerts } from 'src/selectors/alerts';
 
 export default function withAlertForm(WrappedComponent) {
   const mapStateToProps = (state, props) => {
@@ -14,7 +12,7 @@ export default function withAlertForm(WrappedComponent) {
     const { isDuplicate, isNewAlert } = props;
 
     return {
-      allowInjectionAlerts: selectCondition(isAccountUiOptionSet('allow_injection_alerts'))(state),
+      featureFlaggedAlerts: selectFeatureFlaggedAlerts(state),
       formErrors: getFormSyncErrors(FORM_NAME)(state),
       formMeta: getFormMeta(FORM_NAME)(state),
       hasSubaccounts: hasSubaccounts(state),
