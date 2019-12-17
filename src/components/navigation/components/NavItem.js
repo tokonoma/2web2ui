@@ -7,21 +7,12 @@ import styles from './NavItem.module.scss';
 const TAGS = {
   beta: { label: 'BETA' },
   new: { color: 'blue', label: 'NEW' },
-  labs: { label: 'LABS' }
+  labs: { label: 'LABS' },
+  preview: { label: 'PREVIEW' },
 };
 
-
-const NavItem = (props) => {
-  const {
-    divider,
-    icon: Icon,
-    label,
-    tag,
-    to,
-    toggleMobileNav,
-    mobile,
-    location
-  } = props;
+const NavItem = props => {
+  const { divider, icon: Icon, label, tag, to, toggleMobileNav, mobile, location } = props;
 
   const active = location.pathname.includes(to);
 
@@ -29,7 +20,7 @@ const NavItem = (props) => {
     styles.Link,
     active && styles.isActive,
     mobile && styles.mobile,
-    divider && styles.divider
+    divider && styles.divider,
   );
 
   let releaseTag;
@@ -41,12 +32,12 @@ const NavItem = (props) => {
 
   return (
     <li>
-      <Link
-        to={to}
-        className={linkClasses}
-        onClick={mobile ? toggleMobileNav : null}
-      >
-        {Icon && <span className={styles.iconWrapper}><Icon size={21} className={styles.icon}/></span>}
+      <Link to={to} className={linkClasses} onClick={mobile ? toggleMobileNav : null}>
+        {Icon && (
+          <span className={styles.iconWrapper}>
+            <Icon size={21} className={styles.icon} />
+          </span>
+        )}
         <div className={styles.Label}>{label}</div>
         {releaseTag && <div className={styles.releaseTag}>{releaseTag}</div>}
       </Link>

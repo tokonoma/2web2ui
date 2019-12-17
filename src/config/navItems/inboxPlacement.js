@@ -4,7 +4,7 @@ import { hasAccountOptionEnabled } from 'src/helpers/conditions/account';
 export default {
   label: 'Inbox Placement',
   to: '/inbox-placement',
-  tag: 'labs',
+  tag: 'preview',
   icon: Inbox,
-  condition: hasAccountOptionEnabled('inbox_placement')
+  condition: hasAccountOptionEnabled('inbox_placement'),
 };
