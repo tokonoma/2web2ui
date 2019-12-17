@@ -73,9 +73,10 @@ const DeliveryHistoryLineChart = ({ data }) => {
           </thead>
 
           <tbody>
-            {data.map(row => (
-              <tr>
-                <td>{formatDate(row.date)}</td>
+            {data.map((row, index) => (
+              <tr key={`screen-reader-table-row-${index}`}>
+                {/* Warning was being thrown by moment without converting the string to a Date */}
+                <td>{formatDate(new Date(row.date))}</td>
 
                 <td>{row.deliveries}</td>
               </tr>

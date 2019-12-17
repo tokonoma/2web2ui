@@ -149,6 +149,7 @@ describe('IP Edit Page', () => {
     });
 
     expect(queryByTestId('delivery-history-line-chart')).toBeInTheDocument();
+    expect(queryByTestId('delivery-history-line-chart')).toHaveAttribute('aria-hidden', 'true');
     expect(queryByText('Delivery History')).toBeInTheDocument();
   });
 
