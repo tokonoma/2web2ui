@@ -1,7 +1,7 @@
 import { toHaveStyle as testingLibraryToHaveStyle } from '@testing-library/jest-dom';
 import { toHaveStyle as enzymeToHaveStyle } from 'enzyme-matchers';
 
-export default function toHaveStyle(element, expectedStyle, expectedStyleKey) {
+export default function toHaveStyle(element, expectedStyleKey, expectedStyle) {
   const isEnzymeObject =
     element &&
     (element.constructor.name === 'ShallowWrapper' || element.constructor.name === 'ReactWrapper');
@@ -23,6 +23,10 @@ export default function toHaveStyle(element, expectedStyle, expectedStyleKey) {
   }
 
   if (isHTMLElement) {
+    // Renaming argument to avoid confusion - the first argument in the Enzyme vs. React Testing Library implementation
+    // are distinct enough that it could introduce confusion.
+    const expectedStyle = expectedStyleKey;
+
     // Using `.apply` necessary so that the Testing Library .toHaveStyle had access to a valid value for `this`
     return testingLibraryToHaveStyle.apply(this, [element, expectedStyle]);
   }

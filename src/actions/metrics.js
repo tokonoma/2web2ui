@@ -32,7 +32,6 @@ export function fetchMetricsCampaigns(params = {}) {
 }
 
 export function fetchMetricsSendingIps(params = {}) {
-  console.log('fetch!');
   const type = 'FETCH_METRICS_SENDING_IPS';
   const path = 'sending-ips';
   return fetch({ type, path, params });

@@ -16,11 +16,11 @@ exports[`Billing Banners:  Enterprise banner renders 1`] = `
   <p>
     Enterprise-grade financial guarantees with 99.9% uptime
      
-    <abbr
+    <Abbreviation
       title="Service Level Agreement"
     >
       SLA
-    </abbr>
+    </Abbreviation>
      and guaranteed burst rates, and a dedicated Technical Account Manager.
   </p>
   <ul>
@@ -134,11 +134,11 @@ exports[`Billing Banners:  Premium banner renders 1`] = `
     </li>
     <li>
       Global 
-      <abbr
+      <Abbreviation
         title="Internet Service Provider"
       >
         ISP
-      </abbr>
+      </Abbreviation>
        support and mediation
     </li>
     <li>
@@ -173,11 +173,11 @@ exports[`Billing Banners:  Premium banner renders correctly for aws users 1`] = 
     </li>
     <li>
       Global 
-      <abbr
+      <Abbreviation
         title="Internet Service Provider"
       >
         ISP
-      </abbr>
+      </Abbreviation>
        support and mediation
     </li>
     <li>
