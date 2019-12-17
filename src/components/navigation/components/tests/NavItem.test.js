@@ -11,7 +11,7 @@ describe('NavItem tests', () => {
       to: '/to',
       icon: 'Mail',
       label: 'label',
-      location: { pathname: 'to' }
+      location: { pathname: 'to' },
     };
     wrapper = shallow(<NavItem {...props} />);
   });
@@ -25,8 +25,8 @@ describe('NavItem tests', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should render a link with labs tag', () => {
-    wrapper.setProps({ tag: 'labs' });
+  it('should render a link with preview tag', () => {
+    wrapper.setProps({ tag: 'preview' });
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -39,7 +39,10 @@ describe('NavItem tests', () => {
     const toggle = jest.fn();
     wrapper.setProps({ toggleMobileNav: toggle, mobile: true });
     expect(wrapper).toMatchSnapshot();
-    wrapper.children().find('Link').simulate('click');
+    wrapper
+      .children()
+      .find('Link')
+      .simulate('click');
     expect(toggle).toHaveBeenCalledTimes(1);
   });
 });

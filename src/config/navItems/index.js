@@ -7,7 +7,7 @@ import {
   NotificationsActive,
   Settings,
   BarChart,
-  GridOff
+  GridOff,
 } from '@sparkpost/matchbox-icons';
 import { hasGrants } from 'src/helpers/conditions';
 import inboxPlacementNavItems from './inboxPlacement';
@@ -16,7 +16,7 @@ export default [
   {
     label: 'Dashboard',
     to: '/dashboard',
-    icon: Home
+    icon: Home,
   },
   {
     label: 'Signals Analytics',
@@ -25,48 +25,48 @@ export default [
     children: [
       {
         label: 'Summary',
-        to: '/reports/summary'
+        to: '/reports/summary',
       },
       {
         label: 'Bounce',
-        to: '/reports/bounce'
+        to: '/reports/bounce',
       },
       {
         label: 'Rejections',
-        to: '/reports/rejections'
+        to: '/reports/rejections',
       },
       {
         label: 'Accepted',
-        to: '/reports/accepted'
+        to: '/reports/accepted',
       },
       {
         label: 'Delayed',
-        to: '/reports/delayed'
+        to: '/reports/delayed',
       },
       {
         label: 'Health Score',
         to: '/signals/health-score',
-        divider: true
+        divider: true,
       },
       {
         label: 'Spam Traps',
-        to: '/signals/spam-traps'
+        to: '/signals/spam-traps',
       },
       {
         label: 'Engagement Recency',
         to: '/signals/engagement',
-        divider: true
+        divider: true,
       },
       {
         label: 'Engagement',
-        to: '/reports/engagement'
-      }
-    ]
+        to: '/reports/engagement',
+      },
+    ],
   },
   {
     label: 'Events',
     to: '/reports/message-events',
-    icon: List
+    icon: List,
   },
   {
     label: 'Content',
@@ -77,18 +77,17 @@ export default [
       {
         label: 'Templates',
         to: '/templates',
-        tag: 'new'
+        tag: 'new',
       },
       {
         label: 'A/B Testing',
-        to: '/ab-testing'
+        to: '/ab-testing',
       },
       {
         label: 'Snippets',
         to: '/snippets',
-        tag: 'labs'
-      }
-    ]
+      },
+    ],
   },
   {
     label: 'Recipients',
@@ -98,29 +97,29 @@ export default [
       {
         label: 'Recipient Validation',
         to: '/recipient-validation/list',
-        condition: hasGrants('recipient-validation/manage')
+        condition: hasGrants('recipient-validation/manage'),
       },
       {
         label: 'Recipient Lists',
-        to: '/lists/recipient-lists'
+        to: '/lists/recipient-lists',
       },
       {
         label: 'Suppressions',
-        to: '/lists/suppressions'
-      }
-    ]
+        to: '/lists/suppressions',
+      },
+    ],
   },
   {
     label: 'Alerts',
     to: '/alerts',
-    icon: NotificationsActive
+    icon: NotificationsActive,
   },
   inboxPlacementNavItems,
   {
     label: 'Blacklist',
     to: '/blacklist',
-    tag: 'labs',
-    icon: GridOff
+    tag: 'preview',
+    icon: GridOff,
   },
   {
     label: 'Configuration',
@@ -129,39 +128,39 @@ export default [
     children: [
       {
         label: 'Webhooks',
-        to: '/webhooks'
+        to: '/webhooks',
       },
       {
         label: 'IP Pools',
-        to: '/account/ip-pools'
+        to: '/account/ip-pools',
       },
       {
         label: 'API Keys',
-        to: '/account/api-keys'
+        to: '/account/api-keys',
       },
       {
         label: 'SMTP Settings',
-        to: '/account/smtp'
+        to: '/account/smtp',
       },
       {
         label: 'Signals Integration',
         to: '/signals/integration',
-        divider: true
+        divider: true,
       },
       {
         label: 'Sending Domains',
         to: '/account/sending-domains',
-        divider: true
+        divider: true,
       },
       {
         label: 'Tracking Domains',
-        to: '/account/tracking-domains'
+        to: '/account/tracking-domains',
       },
       {
         label: 'Subaccounts',
         to: '/account/subaccounts',
-        divider: true
-      }
-    ]
-  }
+        divider: true,
+      },
+    ],
+  },
 ];
