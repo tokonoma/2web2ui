@@ -98,7 +98,6 @@ describe('GettingStartedGuide', () => {
       invite_collaborator_completed: true,
     });
   });
-
   it("should render two list items when on step Let's Code ", () => {
     const instance = subject({ onboarding: { active_step: "Let's Code" } });
     expect(instance.find('CheckListItem')).toHaveLength(2);

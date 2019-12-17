@@ -184,7 +184,7 @@ export const GettingStartedGuide = ({ onboarding = {}, history, setAccountOption
       itemCompleted={itemCompleted}
     >
       <GuideListItemTitle>{title}</GuideListItemTitle>
-      <GuideListItemDescription>{description}</GuideListItemDescription>
+      <GuideListItemDescription>{getDescription(name) || description}</GuideListItemDescription>
     </GuideListItem>
   );
   return (
