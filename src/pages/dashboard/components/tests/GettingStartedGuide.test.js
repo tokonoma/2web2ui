@@ -98,6 +98,8 @@ describe('GettingStartedGuide', () => {
       .prop('action')
       .onClick();
     expect(defaultProps.history.push).toHaveBeenCalledWith(`/reports/summary`);
+    expect(window.pendo.showGuideById).toHaveBeenCalledWith(GUIDE_IDS.EXPLORE_ANALYTICS);
+    expect(window.pendo.onGuideAdvanced).toHaveBeenCalledWith(1);
   });
 
   it('should navigate to users page when Invite a Collaborator is clicked', () => {

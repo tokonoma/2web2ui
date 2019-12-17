@@ -71,8 +71,9 @@ export const GettingStartedGuide = ({ onboarding = {}, history, setAccountOption
         setOnboardingAccountOption({ explore_analytics_completed: true });
         if (window.pendo.showGuideById(GUIDE_IDS.EXPLORE_ANALYTICS)) {
           window.pendo.onGuideAdvanced(1);
-          history.push(`/reports/summary`);
         }
+        history.push(`/reports/summary`);
+
         break;
       case 'Invite a Collaborator':
         setOnboardingAccountOption({ invite_collaborator_completed: true });
