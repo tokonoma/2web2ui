@@ -74,7 +74,7 @@ describe('IncidentsPage', () => {
     const { queryByText } = render(
       <MemoryRouter initialEntries={['/blacklist']} initialIndex={0}>
         <Switch>
-          <Route path="/dashboard" render={() => <div>Redirected Page</div>} />
+          <Route path="/blacklist/watchlist" render={() => <div>Redirected Page</div>} />
           <Route path="/blacklist" render={() => <IncidentsPage {...props} />} />
         </Switch>
       </MemoryRouter>,
