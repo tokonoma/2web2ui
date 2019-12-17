@@ -12,7 +12,7 @@ import {
   TAG_LABELS,
 } from '../constants/filters';
 
-const TrendsFilters = ({ filters = {}, updateFilters }) => {
+const TrendsFilters = ({ filters = {}, updateFilters, validateDate }) => {
   const { dateRange: { from, to } = {}, range, tags } = filters;
 
   // If the "to" is the current time, use the correct relative range option
@@ -84,6 +84,7 @@ const TrendsFilters = ({ filters = {}, updateFilters }) => {
             from={new Date(from)}
             to={new Date(to)}
             disabled={false}
+            validate={validateDate}
             onChange={({ from, to, relativeRange }) => {
               if (from === undefined && to === undefined) {
                 const relativeDates = getRelativeDates(relativeRange);

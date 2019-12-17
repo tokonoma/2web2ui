@@ -102,6 +102,15 @@ const FilterSortCollectionRow = ({
   />,
 ];
 
+const validateDate = ({ from, to }) => {
+  const momentFrom = moment(from);
+  const momentTo = moment(to);
+  if (momentTo.diff(momentFrom, 'days') < 7) {
+    return 'Select a range of at least 7 days';
+  }
+  return false;
+};
+
 const now = Date.now();
 
 const whitelistFilters = {
@@ -113,7 +122,12 @@ const whitelistFilters = {
     validate: ({ from, to }) => {
       const momentFrom = moment.utc(from);
       const momentTo = moment.utc(to);
-      return momentFrom.isValid() && momentTo.isValid() && momentFrom.isBefore(momentTo);
+      return (
+        momentFrom.isValid() &&
+        momentTo.isValid() &&
+        momentFrom.isBefore(momentTo) &&
+        momentTo.diff(momentFrom, 'days') >= 7
+      );
     },
   },
   range: {
@@ -168,7 +182,11 @@ export const TestListPage = ({ tests, error, loading, listTests }) => {
         </p>
         <Panel title={'Inbox Placement Trends'}>
           <Panel.Section>
-            <TrendsFilters filters={filters} updateFilters={updateFilters} />
+            <TrendsFilters
+              filters={filters}
+              updateFilters={updateFilters}
+              validateDate={validateDate}
+            />
           </Panel.Section>
 
           <TrendsChart filters={filters} />
