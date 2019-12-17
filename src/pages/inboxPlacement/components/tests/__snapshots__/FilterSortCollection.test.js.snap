@@ -1,98 +1,58 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`FilterSortCollection Component renders renders with props 1`] = `
-<Router
-  history={
+<withRouter(Collection)
+  bodyWrapper={[Function]}
+  defaultPerPage={10}
+  filterBox={
     Object {
-      "action": "POP",
-      "block": [Function],
-      "createHref": [Function],
-      "go": [Function],
-      "goBack": [Function],
-      "goForward": [Function],
-      "length": 1,
-      "listen": [Function],
-      "location": Object {
-        "hash": "",
-        "pathname": "/",
-        "search": "",
-        "state": undefined,
-      },
-      "push": [Function],
-      "replace": [Function],
+      "itemToStringKeys": Array [
+        "fruit",
+        "vegetable",
+      ],
+      "placeholder": "Search By: Fruit, Vegetable",
+      "show": true,
+      "wrapper": [Function],
     }
   }
->
-  <FilterSortCollection
-    defaultSortColumn="fruit"
-    filterBoxConfig={
+  headerComponent={[Function]}
+  outerWrapper={[Function]}
+  pagination={true}
+  rowComponent={[Function]}
+  rows={
+    Array [
       Object {
-        "itemToStringKeys": Array [
-          "fruit",
-          "vegetable",
-        ],
-        "placeholder": "Search By: Fruit, Vegetable",
-        "show": true,
-        "wrapper": [Function],
-      }
-    }
-    rowComponent={[Function]}
-    rows={
-      Array [
-        Object {
-          "fruit": "apple",
-          "vegetable": "celery",
-        },
-        Object {
-          "fruit": "banana",
-          "vegetable": "artichoke",
-        },
-        Object {
-          "fruit": "cherry",
-          "vegetable": "broccoli",
-        },
-      ]
-    }
-    selectOptions={
-      Array [
-        Object {
-          "label": "Fruit",
-          "value": "fruit",
-        },
-        Object {
-          "label": "Vegetable",
-          "value": "vegetable",
-        },
-      ]
-    }
-    title="Menu"
-  />
-</Router>
+        "fruit": "cherry",
+        "vegetable": "broccoli",
+      },
+      Object {
+        "fruit": "banana",
+        "vegetable": "artichoke",
+      },
+      Object {
+        "fruit": "apple",
+        "vegetable": "celery",
+      },
+    ]
+  }
+  saveCsv={true}
+  sortColumn="fruit"
+>
+  <Component />
+</withRouter(Collection)>
 `;
 
 exports[`FilterSortCollection Component renders renders without props 1`] = `
-<Router
-  history={
-    Object {
-      "action": "POP",
-      "block": [Function],
-      "createHref": [Function],
-      "go": [Function],
-      "goBack": [Function],
-      "goForward": [Function],
-      "length": 1,
-      "listen": [Function],
-      "location": Object {
-        "hash": "",
-        "pathname": "/",
-        "search": "",
-        "state": undefined,
-      },
-      "push": [Function],
-      "replace": [Function],
-    }
-  }
+<withRouter(Collection)
+  bodyWrapper={[Function]}
+  defaultPerPage={10}
+  headerComponent={[Function]}
+  outerWrapper={[Function]}
+  pagination={true}
+  rowComponent={[Function]}
+  rows={Array []}
+  saveCsv={true}
 >
-  <FilterSortCollection />
-</Router>
+  <Component />
+</withRouter(Collection)>
 `;
