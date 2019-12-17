@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { LINKS } from 'src/constants';
 import { pluralString } from 'src/helpers/string';
 import * as conversions from 'src/helpers/conversionTracking';
+import { Abbreviation } from 'src/components';
 import { ANALYTICS_PREMIUM_SUPPORT, ANALYTICS_ENTERPRISE_SUPPORT } from 'src/constants';
 import _ from 'lodash';
 
@@ -74,7 +75,8 @@ export const PremiumBanner = ({ isAWSAccount }) => (
       <li>Includes all standard SparkPost features</li>
       <li>Dedicated Customer Success Manager</li>
       <li>
-        Global <abbr title="Internet Service Provider">ISP</abbr> support and mediation
+        Global <Abbreviation title="Internet Service Provider">ISP</Abbreviation> support and
+        mediation
       </li>
       <li>Deliverability data analysis and guidance with powerful integrated tools</li>
     </ul>
@@ -96,8 +98,8 @@ export const EnterpriseBanner = () => (
   >
     <p>
       Enterprise-grade financial guarantees with 99.9% uptime{' '}
-      <abbr title="Service Level Agreement">SLA</abbr> and guaranteed burst rates, and a dedicated
-      Technical Account Manager.
+      <Abbreviation title="Service Level Agreement">SLA</Abbreviation> and guaranteed burst rates,
+      and a dedicated Technical Account Manager.
     </p>
     <ul>
       <li>Includes all standard SparkPost and Premium features</li>
