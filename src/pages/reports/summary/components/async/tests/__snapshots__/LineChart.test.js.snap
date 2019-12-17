@@ -2,7 +2,7 @@
 
 exports[`LineChart should render 1`] = `
 <div
-  className="sp-linechart-wrapper"
+  className="ChartWrapper"
 >
   <ResponsiveContainer
     debounce={0}
