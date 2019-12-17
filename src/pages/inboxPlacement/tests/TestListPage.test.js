@@ -1,27 +1,47 @@
 import { shallow } from 'enzyme';
 import React from 'react';
+import moment from 'moment';
 import { tests } from './mockTests';
+import useRouter from 'src/hooks/useRouter';
 
 import { TestListPage } from '../TestListPage';
 
+jest.mock('src/hooks/useRouter');
+
 describe('Page: Test List', () => {
+  const now = moment.utc(new Date('2019-08-10T12:30:00-04:00'));
+  Date.now = jest.fn(() => now);
   const subject = ({ ...props }) => {
+    const from = moment(now).subtract(30, 'd');
+    const to = now;
+    useRouter.mockReturnValue({
+      requestParams: {
+        from,
+        to,
+      },
+      updateRoute: jest.fn(),
+    });
     const defaults = {
       testsError: false,
       testsPending: false,
       tests: [],
-      listTests: jest.fn()
+      listTests: jest.fn(),
+      filters: {
+        dateRange: {
+          from,
+          to,
+        },
+        tags: {},
+      },
     };
 
     return shallow(<TestListPage {...defaults} {...props} />);
   };
 
   it('renders page correctly with defaults', () => {
-    const mockListTests = jest.fn();
-    const wrapper = subject({ listTests: mockListTests });
+    const wrapper = subject();
 
     expect(wrapper).toMatchSnapshot();
-    expect(mockListTests).toHaveBeenCalled();
   });
 
   it('renders page with tests', () => {
@@ -30,7 +50,7 @@ describe('Page: Test List', () => {
   });
 
   it('renders empty landing page when there are no tests', () => {
-    const wrapper = subject({ tests: []});
+    const wrapper = subject({ tests: [] });
     expect(wrapper.find('Page').prop('empty')).toHaveProperty('show', true);
   });
 
@@ -45,7 +65,7 @@ describe('Page: Test List', () => {
   });
 
   describe('Test Name:', () => {
-    const renderFirstColumn = (props) => {
+    const renderFirstColumn = props => {
       const wrapper = subject();
       const Rows = wrapper.find('FilterSortCollection').prop('rowComponent');
       const Row = () => shallow(<Rows {...tests[0]} {...props} />).prop('rowData');

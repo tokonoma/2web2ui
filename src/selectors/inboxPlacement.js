@@ -4,7 +4,7 @@ import { PLACEMENT_FILTER_TYPES } from '../pages/inboxPlacement/constants/types'
 import { fillByDate } from 'src/helpers/date';
 
 export const getSeeds = state => state.inboxPlacement.seeds;
-export const getTrends = (state, { filters }) => ({
+export const getTrends = (state, { filters } = {}) => ({
   trends: state.inboxPlacement.trends,
   filters,
 });

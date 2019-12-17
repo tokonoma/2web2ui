@@ -78,7 +78,7 @@ describe('Action Creator: Inbox Placement', () => {
       type: 'GET_INBOX_PLACEMENT_TRENDS_FILTER_VALUES',
       meta: {
         method: 'GET',
-        url: '/v1/inbox-placement/message-trends',
+        url: '/v1/inbox-placement/message-trends/filter-values',
         params: { myparams: 'foo' },
       },
     });

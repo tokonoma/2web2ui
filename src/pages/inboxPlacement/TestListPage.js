@@ -138,7 +138,7 @@ const whitelistFilters = {
   },
 };
 
-const TestListPage = ({ tests, error, loading, listTests }) => {
+export const TestListPage = ({ tests, error, loading, listTests }) => {
   const { filters, updateFilters } = usePageFilters(whitelistFilters);
 
   useEffect(() => {
