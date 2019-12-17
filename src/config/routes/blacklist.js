@@ -11,6 +11,14 @@ export default [
     supportDocSearch: 'blacklist',
   },
   {
+    path: '/blacklist/watchlist',
+    component: blacklist.WatchedPage,
+    layout: App,
+    condition: hasAccountOptionEnabled('blacklist_monitors'),
+    title: 'Watched Monitors',
+    supportDocSearch: 'blacklist',
+  },
+  {
     path: '/blacklist/watchlist/add',
     component: blacklist.WatchlistAddPage,
     condition: hasAccountOptionEnabled('blacklist_monitors'),
@@ -19,3 +27,4 @@ export default [
     supportDocSearch: 'blacklist',
   },
 ];
+
