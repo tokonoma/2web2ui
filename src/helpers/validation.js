@@ -9,6 +9,8 @@ import isURL from 'validator/lib/isURL';
 import Payment from 'payment';
 import moment from 'moment';
 
+export const MAXIMUM_EMAILS_ALLOWED = 10;
+
 // validation gate to only check valiation if string is present
 export const ifStringPresent = validator => (str = '') =>
   str.trim() === '' ? undefined : validator(str);
@@ -24,13 +26,29 @@ export function email(value) {
 export function emails(str) {
   const values = multilineStringToArray(str);
   let message = undefined;
+  const tooManyEmails = maxItems(MAXIMUM_EMAILS_ALLOWED)(str);
+
   if (values.length <= 0 || !values.every(isEmailAddress)) {
     message = 'Must be a comma separated list of valid Email Addresses';
-  } else if (values.length >= 10) {
-    message = 'Must contain less than 10 emails';
+  } else if (tooManyEmails) {
+    message = 'Email Address list can only contain a maximum of 10 emails';
   }
   return message;
 }
+
+/**
+ * Determines if a list of comma delimited strings has a length no larger than the max value
+ *
+ * @param {String} str comma delimited string
+ * @param {Number} max maximum length allowed for validation
+ * @returns {(String|undefined)} undefined if the length is less than max, otherwise returns an error string
+ */
+
+export const maxItems = max => str => {
+  return _.isString(str) && [...new Set(multilineStringToArray(str))].length > max
+    ? `Must contain no more than ${max} items`
+    : undefined;
+};
 
 export function emailLocal(value) {
   return isEmailLocalPart(value) ? undefined : 'Invalid Email';
