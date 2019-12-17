@@ -122,6 +122,7 @@ describe('GettingStartedGuide', () => {
     expect(defaultProps.setAccountOption).toHaveBeenCalledWith('onboarding', {
       invite_collaborator_completed: true,
     });
+  });
   it("should render two list items when on step Let's Code ", () => {
     const instance = subject();
     instance.find('Button').simulate('click');

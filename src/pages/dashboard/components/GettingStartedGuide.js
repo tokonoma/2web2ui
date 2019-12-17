@@ -85,6 +85,29 @@ export const GettingStartedGuide = ({ onboarding = {}, history, setAccountOption
     }
   };
 
+  const getDescription = checklist_name => {
+    if (checklist_name === 'Invite a Collaborator')
+      return (
+        <>
+          {
+            'Need help integrating? Pass the ball on to someone else to finish setting up this account.'
+          }
+          <br />
+          {'Or you can '}
+          <UnstyledLink
+            onClick={() => {
+              setAndStoreStepName("Let's Code");
+              setOnboardingAccountOption({ invite_collaborator_completed: true });
+            }}
+          >
+            setup email sending now
+          </UnstyledLink>
+        </>
+      );
+
+    return null;
+  };
+
   const renderStep = () => {
     switch (stepName) {
       case 'Features':
@@ -129,30 +152,10 @@ export const GettingStartedGuide = ({ onboarding = {}, history, setAccountOption
               />
             </Panel.Section>
             <Panel.Section>
-              <GuideListItem
-                action={{
-                  name: 'Invite a Collaborator',
-                  onClick: () => handleAction('Invite a Collaborator'),
-                }}
+              <CheckListItem
+                {...SHOW_ME_SPARKPOST_LIST['Invite a Collaborator']}
                 itemCompleted={invite_collaborator_completed}
-              >
-                <GuideListItemTitle>Invite Your Team</GuideListItemTitle>
-                <GuideListItemDescription>
-                  {
-                    'Need help integrating? Pass the ball on to someone else to finish setting up this account.'
-                  }
-                  <br />
-                  {'Or you can '}
-                  <UnstyledLink
-                    onClick={() => {
-                      setAndStoreStepName("Let's Code");
-                      setOnboardingAccountOption({ invite_collaborator_completed: true });
-                    }}
-                  >
-                    setup email sending now
-                  </UnstyledLink>
-                </GuideListItemDescription>
-              </GuideListItem>
+              />
             </Panel.Section>
           </>
         );
@@ -184,7 +187,7 @@ export const GettingStartedGuide = ({ onboarding = {}, history, setAccountOption
       itemCompleted={itemCompleted}
     >
       <GuideListItemTitle>{title}</GuideListItemTitle>
-      <GuideListItemDescription>{description}</GuideListItemDescription>
+      <GuideListItemDescription>{getDescription(name) || description}</GuideListItemDescription>
     </GuideListItem>
   );
   return (

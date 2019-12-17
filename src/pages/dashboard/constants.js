@@ -47,4 +47,9 @@ export const SHOW_ME_SPARKPOST_LIST = {
     description:
       'Get acquainted with our powerful analytics to make the most of your sending strategy.',
   },
+  'Invite a Collaborator': {
+    name: 'Invite a Collaborator',
+    title: 'Invite Your Team',
+    description: '',
+  },
 };
