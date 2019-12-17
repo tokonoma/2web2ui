@@ -102,4 +102,20 @@ describe('GettingStartedGuide', () => {
     const instance = subject({ onboarding: { active_step: "Let's Code" } });
     expect(instance.find('CheckListItem')).toHaveLength(2);
   });
+
+  it("should route to API key page from Let's Code list", () => {
+    const instance = subject(
+      {
+        onboarding: { active_step: "Let's Code" },
+        hasApiKeysForSending: true,
+      },
+      mount,
+    );
+    instance
+      .find('GuideListItem')
+      .at(1)
+      .prop('action')
+      .onClick();
+    expect(defaultProps.history.push).toHaveBeenCalledWith('/account/api-keys');
+  });
 });
