@@ -27,7 +27,9 @@ describe('Alert Form Component', () => {
       formErrors: {},
       isNewAlert: true,
       initialValues: {},
-      featureFlaggedAlerts: {},
+      featureFlaggedAlerts: {
+        injection_count: false,
+      },
     };
 
     wrapper = shallow(<AlertForm {...props} />);
