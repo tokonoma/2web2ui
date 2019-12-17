@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import { GettingStartedGuide } from '../GettingStartedGuide';
 import { GUIDE_IDS } from '../../constants';
 
@@ -17,14 +17,8 @@ describe('GettingStartedGuide', () => {
     setAccountOption: jest.fn(),
   };
 
-  const subject = props => shallow(<GettingStartedGuide {...defaultProps} {...props} />);
-
-  const guideOnSecondStep = buttonName => {
-    const instance = subject();
-    instance.find('Button').simulate('click');
-    instance.find({ children: buttonName }).simulate('click');
-    return instance;
-  };
+  const subject = (props, func = shallow) =>
+    func(<GettingStartedGuide {...defaultProps} {...props} />);
 
   it('should render correctly when guide is at bottom or when guide is at top', () => {
     expect(
@@ -39,46 +33,27 @@ describe('GettingStartedGuide', () => {
     ).not.toBe(null);
   });
 
-  it('should render Sending Step when Start Sending Button is clicked', () => {
-    const instance = subject();
-    instance.find('Button').simulate('click');
-    expect(instance.find('Card')).toHaveLength(2);
-    expect(instance).toHaveTextContent('Show Me SparkPost');
-    expect(instance).toHaveTextContent('Let&#39;s Code');
-  });
-
-  it('should store the stepName when any CardAction Button is clicked', () => {
-    const instance = subject();
-    instance
-      .find('CardActions')
-      .find('Button')
-      .at(0)
-      .simulate('click');
-    expect(defaultProps.setAccountOption).toHaveBeenCalled();
-  });
-
   it('should render the corresponding step when breadcrumb is clicked', () => {
-    const instance = guideOnSecondStep('Show Me SparkPost');
+    const instance = subject({ onboarding: { active_step: 'Show Me SparkPost' } });
     instance
       .find('BreadCrumbsItem')
       .at(1)
       .simulate('click');
-    expect(instance).toHaveTextContent('Show Me SparkPost');
-    expect(instance).toHaveTextContent('Let&#39;s Code');
+    expect(instance.find('SendingStepList')).toHaveLength(1);
   });
 
   it('should render the BreadCrumbItem as active corresponding to the Step', () => {
-    const instance = guideOnSecondStep('Show Me SparkPost');
+    const instance = subject({ onboarding: { active_step: 'Show Me SparkPost' } });
     expect(instance.find({ active: true })).toHaveTextContent('Show Me SparkPost');
   });
 
   it('should render three list items when on step "Show Me SparkPost" ', () => {
-    const instance = guideOnSecondStep('Show Me SparkPost');
-    expect(instance.find('GuideListItem')).toHaveLength(3);
+    const instance = subject({ onboarding: { active_step: 'Show Me SparkPost' } });
+    expect(instance.find('CheckListItem')).toHaveLength(3);
   });
 
   it('should navigate to templates page when Send a Test Email button is clicked', () => {
-    const instance = guideOnSecondStep('Show Me SparkPost');
+    const instance = subject({ onboarding: { active_step: 'Show Me SparkPost' } }, mount);
     instance
       .find('GuideListItem')
       .at(0)
@@ -103,7 +78,7 @@ describe('GettingStartedGuide', () => {
   });
 
   it('should navigate to users page when Invite a Collaborator is clicked', () => {
-    const instance = guideOnSecondStep('Show Me SparkPost');
+    const instance = subject({ onboarding: { active_step: 'Show Me SparkPost' } }, mount);
     instance
       .find('GuideListItem')
       .at(2)
@@ -113,7 +88,7 @@ describe('GettingStartedGuide', () => {
   });
 
   it('should mark Invite a Collaborator list item as completed when the the corresponding button is clicked', () => {
-    const instance = guideOnSecondStep('Show Me SparkPost');
+    const instance = subject({ onboarding: { active_step: 'Show Me SparkPost' } }, mount);
     instance
       .find('GuideListItem')
       .at(2)
@@ -123,10 +98,9 @@ describe('GettingStartedGuide', () => {
       invite_collaborator_completed: true,
     });
   });
+
   it("should render two list items when on step Let's Code ", () => {
-    const instance = subject();
-    instance.find('Button').simulate('click');
-    instance.find({ children: "Let's Code" }).simulate('click');
-    expect(instance.find('GuideListItem')).toHaveLength(2);
+    const instance = subject({ onboarding: { active_step: "Let's Code" } });
+    expect(instance.find('CheckListItem')).toHaveLength(2);
   });
 });
