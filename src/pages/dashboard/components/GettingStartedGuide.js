@@ -13,6 +13,7 @@ export const GettingStartedGuide = ({
   onboarding = {},
   history,
   setAccountOption,
+  hasSendingDomains,
   hasApiKeysForSending,
   listApiKeys,
 }) => {
@@ -26,7 +27,6 @@ export const GettingStartedGuide = ({
     send_test_email_completed,
     explore_analytics_completed,
     invite_collaborator_completed,
-    add_sending_domain_completed = rest.hasSendingDomain,
   } = onboarding;
 
   const setOnboardingAccountOption = (obj = {}) => {
@@ -95,8 +95,7 @@ export const GettingStartedGuide = ({
         history.push('/account/api-keys');
         break;
       case 'Add Sending Domain':
-        setOnboardingAccountOption({ add_sending_domain_completed: true });
-        history.push(`/account/sending-domains?=${GUIDE_IDS.ADD_SENDING_DOMAIN}`);
+        history.push(`/account/sending-domains`);
         break;
       default:
         break;
@@ -184,7 +183,7 @@ export const GettingStartedGuide = ({
               {renderBreadCrumbs()}
               <CheckListItem
                 {...LETS_CODE_LIST['Add Sending Domain']}
-                itemCompleted={add_sending_domain_completed}
+                itemCompleted={hasSendingDomains}
               />
             </Panel.Section>
             <Panel.Section>
