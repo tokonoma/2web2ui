@@ -7,3 +7,4 @@ export { default as TemplateTypeaheadWrapper } from './TemplateTypeaheadWrapper'
 export { default as TextFieldWrapper } from './TextFieldWrapper';
 export { default as DatePickerWrapper } from './DatePickerWrapper';
 export { default as ComboBoxTypeaheadWrapper } from './ComboBoxTypeaheadWrapper';
+export { default as SliderFieldWrapper } from './SliderFieldWrapper';

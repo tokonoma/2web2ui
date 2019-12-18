@@ -84,7 +84,8 @@ exports[`Alert Form Component should render the alert form component correctly 1
           >
             <label>
               <h5>
-                Filtered by 
+                Filtered by
+                 
                 <small
                   className="OptionalText"
                 >

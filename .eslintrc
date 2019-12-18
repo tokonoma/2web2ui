@@ -10,6 +10,9 @@
 
     "lodash/chaining": ["error", "never"],
 
+    // could result in unwanted result (e.g. _.get(obj, [a,b]) is not same as _.get(obj, `${a}${b}`))
+    "lodash/path-style": "off",
+
     // allow `import debounce from 'lodash/debounce';` for easy mocking
     "lodash/import-scope": "off",
 

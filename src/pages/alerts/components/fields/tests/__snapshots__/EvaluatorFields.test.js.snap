@@ -1,107 +1,94 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Evaluator Fields Component renders correctly 1`] = `
-<Grid
-  className="Grid"
+<div
+  data-id="alertEvaluator-health_score"
 >
-  <Grid.Column
-    md={3}
-    sm={12}
-  >
-    <Label>
-      Evaluated
-    </Label>
-    <Field
-      component={[Function]}
-      disabled={false}
-      name="source"
-      onChange={[Function]}
-      options={
-        Array [
-          Object {
-            "label": "Score",
-            "value": "raw",
-          },
-          Object {
-            "label": "Week over Week",
-            "value": "week_over_week",
-          },
-          Object {
-            "label": "Day over Day",
-            "value": "day_over_day",
-          },
-        ]
-      }
-    />
-  </Grid.Column>
-  <Grid.Column
-    md={2}
-    sm={12}
-  >
-    <Label>
-      Comparison
-    </Label>
-    <Field
-      component={[Function]}
-      disabled={false}
-      name="operator"
-      onChange={[Function]}
-      options={
-        Array [
-          Object {
-            "label": "Below",
-            "value": "lt",
-          },
-          Object {
-            "label": "Above",
-            "value": "gt",
-          },
-        ]
-      }
-    />
-  </Grid.Column>
-  <Grid.Column
-    id="sliderColumn"
-    md={5}
-    sm={12}
-  >
-    <div
-      className="Slider"
+  <Grid>
+    <Grid.Column
+      md={3}
+      sm={12}
     >
-      <Label>
-        Score
+      <Label
+        id="alertEvaluatorSource"
+      >
+        Evaluated
       </Label>
-      <Slider
-        defaultValue={0}
-        id="slider"
-        key="5"
+      <Field
+        component={[Function]}
+        disabled={false}
+        id="alertEvaluatorSource"
+        name="source"
+        onChange={[Function]}
+        options={
+          Array [
+            Object {
+              "label": "Score",
+              "value": "raw",
+            },
+            Object {
+              "label": "Week over Week",
+              "value": "week_over_week",
+            },
+            Object {
+              "label": "Day over Day",
+              "value": "day_over_day",
+            },
+          ]
+        }
+      />
+    </Grid.Column>
+    <Grid.Column
+      md={2}
+      sm={12}
+    >
+      <Label
+        id="alertEvaluatorOperator"
+      >
+        Comparison
+      </Label>
+      <Field
+        component={[Function]}
+        disabled={false}
+        id="alertEvaluatorOperator"
+        name="operator"
+        onChange={[Function]}
+        options={
+          Array [
+            Object {
+              "label": "Below",
+              "value": "lt",
+            },
+            Object {
+              "label": "Above",
+              "value": "gt",
+            },
+          ]
+        }
+      />
+    </Grid.Column>
+    <Grid.Column
+      md={7}
+      sm={12}
+    >
+      <Field
+        component={[Function]}
+        disabled={false}
+        id="alertEvaluatorValue"
+        label="Score"
         max={100}
         min={0}
-        onChange={[Function]}
+        name="value"
         precision={1}
+        suffix=""
         ticks={
           Object {
             "70": "Recommended",
           }
         }
-        value={50}
+        validate={[Function]}
       />
-    </div>
-  </Grid.Column>
-  <Grid.Column
-    md={2}
-    sm={12}
-  >
-    <Field
-      align="right"
-      component={[Function]}
-      disabled={false}
-      name="value"
-      normalize={[Function]}
-      suffix=""
-      type="number"
-      validate={[Function]}
-    />
-  </Grid.Column>
-</Grid>
+    </Grid.Column>
+  </Grid>
+</div>
 `;
