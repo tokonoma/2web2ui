@@ -65,7 +65,7 @@ describe('GettingStartedGuide', () => {
   });
 
   it('should navigate to summary report when Exlplore Analytics button is clicked', () => {
-    const instance = guideOnSecondStep('Show Me SparkPost');
+    const instance = subject({ onboarding: { active_step: 'Show Me SparkPost' } }, mount);
 
     instance
       .find('GuideListItem')
