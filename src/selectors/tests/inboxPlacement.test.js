@@ -1,8 +1,10 @@
-import { selectReferenceSeed,
+import {
+  selectReferenceSeed,
   selectTestDetailsPageError,
   selectTestDetailsPageLoading,
   selectSinglePlacementResult,
-  selectTrends } from '../inboxPlacement';
+  selectTrends,
+} from '../inboxPlacement';
 import moment from 'moment';
 
 describe('Selectors: Inbox Placement', () => {
@@ -11,12 +13,8 @@ describe('Selectors: Inbox Placement', () => {
     beforeEach(() => {
       state = {
         inboxPlacement: {
-          seeds: [
-            'foo@bar.com',
-            'abc@xyz.com',
-            'refSeed@seed.sparkpost.com'
-          ]
-        }
+          seeds: ['foo@bar.com', 'abc@xyz.com', 'refSeed@seed.sparkpost.com'],
+        },
       };
     });
 
@@ -38,8 +36,8 @@ describe('Selectors: Inbox Placement', () => {
           getTestError: false,
           getByProviderError: false,
           getByRegionError: false,
-          getTestContentError: false
-        }
+          getTestContentError: false,
+        },
       };
     });
 
@@ -69,8 +67,8 @@ describe('Selectors: Inbox Placement', () => {
           getTestPending: false,
           getByProviderPending: false,
           getByRegionPending: false,
-          getTestContentPending: false
-        }
+          getTestContentPending: false,
+        },
       };
     });
 
@@ -97,36 +95,32 @@ describe('Selectors: Inbox Placement', () => {
     beforeEach(() => {
       state = {
         inboxPlacement: {
-          placementsByProvider: [
-            { id: 0,
-              mailbox_provider: 'gmail',
-              region: 'north america' }
-          ],
-          placementsByRegion: [
-            { id: 0,
-              region: 'europe' }
-          ],
-          placementsBySendingIp: [
-            { id: 0,
-              sending_ip: '101.101' }
-          ]
-        }
+          placementsByProvider: [{ id: 0, mailbox_provider: 'gmail', region: 'north america' }],
+          placementsByRegion: [{ id: 0, region: 'europe' }],
+          placementsBySendingIp: [{ id: 0, sending_ip: '101.101' }],
+        },
       };
     });
 
     it('returns mailbox provider', () => {
-      const props = { match: { params: { filterType: 'mailbox-provider', filterName: 'gmail' }}};
-      expect(selectSinglePlacementResult(state, props)).toEqual(state.inboxPlacement.placementsByProvider[0]);
+      const props = { match: { params: { filterType: 'mailbox-provider', filterName: 'gmail' } } };
+      expect(selectSinglePlacementResult(state, props)).toEqual(
+        state.inboxPlacement.placementsByProvider[0],
+      );
     });
 
     it('returns region', () => {
-      const props = { match: { params: { filterType: 'region', filterName: 'europe' }}};
-      expect(selectSinglePlacementResult(state, props)).toEqual(state.inboxPlacement.placementsByRegion[0]);
+      const props = { match: { params: { filterType: 'region', filterName: 'europe' } } };
+      expect(selectSinglePlacementResult(state, props)).toEqual(
+        state.inboxPlacement.placementsByRegion[0],
+      );
     });
 
     it('returns sending ip', () => {
-      const props = { match: { params: { filterType: 'sending-ip', filterName: '101.101' }}};
-      expect(selectSinglePlacementResult(state, props)).toEqual(state.inboxPlacement.placementsBySendingIp[0]);
+      const props = { match: { params: { filterType: 'sending-ip', filterName: '101.101' } } };
+      expect(selectSinglePlacementResult(state, props)).toEqual(
+        state.inboxPlacement.placementsBySendingIp[0],
+      );
     });
   });
 
@@ -142,8 +136,8 @@ describe('Selectors: Inbox Placement', () => {
     it('returns empty array if there is no trends data', () => {
       const state = {
         inboxPlacement: {
-          trends: []
-        }
+          trends: [],
+        },
       };
       expect(selectTrends(state)).toEqual([]);
     });
@@ -151,32 +145,37 @@ describe('Selectors: Inbox Placement', () => {
     it('returns trends array filled out with missing dates', () => {
       const state = {
         inboxPlacement: {
-          trends: [{
-            date: '2019-11-11',
-            folders: {
-              inbox_pct: .8,
-              spam_pct: .25,
-              missing_pct: .05
+          trends: [
+            {
+              date: '2019-11-11',
+              folders: {
+                inbox_pct: 0.8,
+                spam_pct: 0.25,
+                missing_pct: 0.05,
+              },
+              total_messages: 10,
             },
-            total_messages: 10
-          }]
-        }
+          ],
+        },
+      };
+      const props = {
+        filters: { dateRange: { from: '2019-10-12', to: '2019-11-12' } },
       };
       const expectedNormalized = {
         date: '2019-11-11',
-        inbox: .8,
-        spam: .25,
-        missing: .05,
-        totalMessages: 10
+        inbox: 0.8,
+        spam: 0.25,
+        missing: 0.05,
+        totalMessages: 10,
       };
       const expectedFill = {
         date: '2019-10-12',
         inbox: null,
         spam: null,
         missing: null,
-        totalMessages: null
+        totalMessages: null,
       };
-      const result = selectTrends(state);
+      const result = selectTrends(state, props);
       expect(result).toHaveLength(31);
       expect(result[30]).toEqual(expectedNormalized);
       expect(result[0]).toEqual(expectedFill);

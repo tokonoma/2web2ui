@@ -90,6 +90,74 @@ Object {
 }
 `;
 
+exports[`Inbox Placement Reducer get inbox placement trends filter values fail 1`] = `
+Object {
+  "allMessages": Array [],
+  "currentTestDetails": Object {},
+  "getTrendsFilterValuesError": Object {
+    "errors": Array [
+      Object {
+        "message": "Some error occurred",
+      },
+    ],
+  },
+  "getTrendsFilterValuesPending": false,
+  "messagesById": Object {},
+  "placementsByProvider": Array [],
+  "placementsByRegion": Array [],
+  "placementsBySendingIp": Array [],
+  "seeds": Array [],
+  "seedsPending": false,
+  "stopTestPending": false,
+  "tests": Array [],
+  "testsPending": true,
+  "trends": Array [],
+}
+`;
+
+exports[`Inbox Placement Reducer get inbox placement trends filter values pending 1`] = `
+Object {
+  "allMessages": Array [],
+  "currentTestDetails": Object {},
+  "getTrendsFilterValuesError": null,
+  "getTrendsFilterValuesPending": true,
+  "messagesById": Object {},
+  "placementsByProvider": Array [],
+  "placementsByRegion": Array [],
+  "placementsBySendingIp": Array [],
+  "seeds": Array [],
+  "seedsPending": false,
+  "stopTestPending": false,
+  "tests": Array [],
+  "testsPending": true,
+  "trends": Array [],
+}
+`;
+
+exports[`Inbox Placement Reducer get inbox placement trends filter values success 1`] = `
+Object {
+  "allMessages": Array [],
+  "currentTestDetails": Object {},
+  "getTrendsFilterValuesError": null,
+  "getTrendsFilterValuesPending": false,
+  "messagesById": Object {},
+  "placementsByProvider": Array [],
+  "placementsByRegion": Array [],
+  "placementsBySendingIp": Array [],
+  "seeds": Array [],
+  "seedsPending": false,
+  "stopTestPending": false,
+  "tests": Array [],
+  "testsPending": true,
+  "trends": Array [],
+  "trendsFilterValues": Array [
+    Object {
+      "fakeData": true,
+    },
+  ],
+}
+`;
+
 exports[`Inbox Placement Reducer get inbox placement trends pending 1`] = `
 Object {
   "allMessages": Array [],

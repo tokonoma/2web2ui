@@ -1,0 +1,15 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.SearchFilter {
+  @media screen and (max-width: breakpoint(medium)) {
+    margin-top: spacing();
+  }
+}
+
+.TagContainer {
+  margin-top: spacing();
+}
+
+.TagWrapper {
+  margin: spacing(small);
+}

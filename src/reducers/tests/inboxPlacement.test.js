@@ -3,88 +3,103 @@ import inboxPlacementReducer, { initialState } from '../inboxPlacement';
 
 const TEST_CASES = {
   'list tests pending': {
-    type: 'LIST_TESTS_PENDING'
+    type: 'LIST_TESTS_PENDING',
   },
   'list tests success': {
     payload: { fakeData: true },
-    type: 'LIST_TESTS_SUCCESS'
+    type: 'LIST_TESTS_SUCCESS',
   },
   'list tests fail': {
-    payload: { errors: [ { message: 'Some error occurred' }]},
-    type: 'LIST_TESTS_FAIL'
+    payload: { errors: [{ message: 'Some error occurred' }] },
+    type: 'LIST_TESTS_FAIL',
   },
   'list seeds pending': {
-    type: 'GET_SEEDS_PENDING'
+    type: 'GET_SEEDS_PENDING',
   },
   'list seeds success': {
-    type: 'GET_SEEDS_SUCCESS'
+    type: 'GET_SEEDS_SUCCESS',
   },
   'list seeds fail': {
-    type: 'GET_SEEDS_FAIL'
+    type: 'GET_SEEDS_FAIL',
   },
   'get specific inbox placement test pending': {
-    type: 'GET_INBOX_PLACEMENT_TEST_PENDING'
+    type: 'GET_INBOX_PLACEMENT_TEST_PENDING',
   },
   'get specific inbox placement test success': {
     payload: { fakeData: true },
-    type: 'GET_INBOX_PLACEMENT_TEST_SUCCESS'
+    type: 'GET_INBOX_PLACEMENT_TEST_SUCCESS',
   },
   'get specific inbox placement test pending fail': {
-    payload: { errors: [ { message: 'Some error occurred' }]},
-    type: 'GET_INBOX_PLACEMENT_TEST_FAIL'
+    payload: { errors: [{ message: 'Some error occurred' }] },
+    type: 'GET_INBOX_PLACEMENT_TEST_FAIL',
   },
   'get inbox placement trends pending': {
-    type: 'GET_INBOX_PLACEMENT_TRENDS_PENDING'
+    type: 'GET_INBOX_PLACEMENT_TRENDS_PENDING',
   },
   'get inbox placement trends success': {
     payload: [{ fakeData: true }],
-    type: 'GET_INBOX_PLACEMENT_TRENDS_SUCCESS'
+    type: 'GET_INBOX_PLACEMENT_TRENDS_SUCCESS',
   },
   'get inbox placement trends fail': {
-    payload: { errors: [ { message: 'Some error occurred' }]},
-    type: 'GET_INBOX_PLACEMENT_TRENDS_FAIL'
+    payload: { errors: [{ message: 'Some error occurred' }] },
+    type: 'GET_INBOX_PLACEMENT_TRENDS_FAIL',
+  },
+  'get inbox placement trends filter values pending': {
+    type: 'GET_INBOX_PLACEMENT_TRENDS_FILTER_VALUES_PENDING',
+  },
+  'get inbox placement trends filter values success': {
+    payload: [{ fakeData: true }],
+    type: 'GET_INBOX_PLACEMENT_TRENDS_FILTER_VALUES_SUCCESS',
+  },
+  'get inbox placement trends filter values fail': {
+    payload: { errors: [{ message: 'Some error occurred' }] },
+    type: 'GET_INBOX_PLACEMENT_TRENDS_FILTER_VALUES_FAIL',
   },
   'get specific inbox placement test content pending': {
-    type: 'GET_INBOX_PLACEMENT_TEST_CONTENT_PENDING'
+    type: 'GET_INBOX_PLACEMENT_TEST_CONTENT_PENDING',
   },
   'get specific inbox placement test content success': {
     payload: { fakeData: true },
-    type: 'GET_INBOX_PLACEMENT_TEST_CONTENT_SUCCESS'
+    type: 'GET_INBOX_PLACEMENT_TEST_CONTENT_SUCCESS',
   },
   'get specific inbox placement test content pending fail': {
-    payload: { errors: [ { message: 'Some error occurred' }]},
-    type: 'GET_INBOX_PLACEMENT_TEST_CONTENT_FAIL'
+    payload: { errors: [{ message: 'Some error occurred' }] },
+    type: 'GET_INBOX_PLACEMENT_TEST_CONTENT_FAIL',
   },
   'get all inbox placement test messages pending': {
-    type: 'GET_ALL_INBOX_PLACEMENT_MESSAGES_PENDING'
+    type: 'GET_ALL_INBOX_PLACEMENT_MESSAGES_PENDING',
   },
   'get all inbox placement test messages success': {
     payload: { fakeData: true },
-    type: 'GET_ALL_INBOX_PLACEMENT_MESSAGES_SUCCESS'
+    type: 'GET_ALL_INBOX_PLACEMENT_MESSAGES_SUCCESS',
   },
   'get all inbox placement test messages fail': {
-    payload: { errors: [ { message: 'Some error occurred' }]},
-    type: 'GET_ALL_INBOX_PLACEMENT_MESSAGES_FAIL'
+    payload: { errors: [{ message: 'Some error occurred' }] },
+    type: 'GET_ALL_INBOX_PLACEMENT_MESSAGES_FAIL',
   },
   'resets State': {
-    type: 'RESET_STATE'
+    type: 'RESET_STATE',
   },
   'get specific inbox placement test messages pending': {
     type: 'GET_INBOX_PLACEMENT_MESSAGE_PENDING',
-    meta: { context: { messageId: 101 }}
+    meta: { context: { messageId: 101 } },
   },
   'get specific inbox placement test messages success': {
     type: 'GET_INBOX_PLACEMENT_MESSAGE_SUCCESS',
-    meta: { context: { messageId: 1 }},
+    meta: { context: { messageId: 1 } },
     payload: { id: 1, headers: 'fake headers' },
-    state: { ...initialState, allMessages: [{ id: 1 }]}
+    state: { ...initialState, allMessages: [{ id: 1 }] },
   },
   'get specific inbox placement test messages fail': {
-    meta: { context: { messageId: 101 }},
-    type: 'GET_INBOX_PLACEMENT_MESSAGE_FAIL'
-  }
+    meta: { context: { messageId: 101 } },
+    type: 'GET_INBOX_PLACEMENT_MESSAGE_FAIL',
+  },
 };
 
-cases('Inbox Placement Reducer', ({ payload, type, meta, state }) => {
-  expect(inboxPlacementReducer(state, { payload, type, meta })).toMatchSnapshot();
-}, TEST_CASES);
+cases(
+  'Inbox Placement Reducer',
+  ({ payload, type, meta, state }) => {
+    expect(inboxPlacementReducer(state, { payload, type, meta })).toMatchSnapshot();
+  },
+  TEST_CASES,
+);
