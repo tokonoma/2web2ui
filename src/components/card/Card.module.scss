@@ -2,20 +2,20 @@
 
 .CardContainer {
   border-radius: 5px;
-  border: 1px solid color(gray,5);
+  border: 1px solid color(gray, 5);
   padding: spacing();
 }
 
 .CardTitle {
   display: block;
-  color: color(gray,3);
+  color: color(gray, 3);
   font-weight: 600;
   font-size: font-size(500);
 }
 
 .CardContent {
   display: inline-block;
-  margin-top: spacing('small')*2;
+  margin-top: spacing('small') * 2;
   margin-bottom: spacing('small');
   font-size: font-size(500);
 }

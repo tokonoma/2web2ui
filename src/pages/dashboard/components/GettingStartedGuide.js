@@ -14,6 +14,7 @@ export const GettingStartedGuide = ({ onboarding = {}, history, setAccountOption
     isGuideAtBottom = false,
     active_step,
     send_test_email_completed,
+    explore_analytics_completed,
     invite_collaborator_completed,
   } = onboarding;
 
@@ -65,6 +66,14 @@ export const GettingStartedGuide = ({ onboarding = {}, history, setAccountOption
       case 'Send Test Email':
         setOnboardingAccountOption({ send_test_email_completed: true });
         history.push(`/templates?pendo=${GUIDE_IDS.SEND_TEST_EMAIL}`);
+        break;
+      case 'Explore Analytics':
+        setOnboardingAccountOption({ explore_analytics_completed: true });
+        if (window.pendo.showGuideById(GUIDE_IDS.EXPLORE_ANALYTICS)) {
+          window.pendo.onGuideAdvanced(1);
+        }
+        history.push(`/reports/summary`);
+
         break;
       case 'Invite a Collaborator':
         setOnboardingAccountOption({ invite_collaborator_completed: true });
@@ -187,8 +196,9 @@ export const GettingStartedGuide = ({ onboarding = {}, history, setAccountOption
               <GuideListItem
                 action={{
                   name: 'Explore Analytics',
-                  onClick: () => {},
+                  onClick: () => handleAction('Explore Analytics'),
                 }}
+                itemCompleted={explore_analytics_completed}
               >
                 <GuideListItemTitle>Explore Analytics</GuideListItemTitle>
                 <GuideListItemDescription>

@@ -4,6 +4,11 @@ import { GettingStartedGuide } from '../GettingStartedGuide';
 import { GUIDE_IDS } from '../../constants';
 
 describe('GettingStartedGuide', () => {
+  window.pendo = {
+    showGuideById: jest.fn(() => true),
+    onGuideAdvanced: jest.fn(),
+  };
+
   const defaultProps = {
     onboarding: { isGuideAtBottom: false },
     history: {
@@ -82,6 +87,19 @@ describe('GettingStartedGuide', () => {
     expect(defaultProps.history.push).toHaveBeenCalledWith(
       `/templates?pendo=${GUIDE_IDS.SEND_TEST_EMAIL}`,
     );
+  });
+
+  it('should navigate to summary report when Exlplore Analytics button is clicked', () => {
+    const instance = guideOnSecondStep('Show Me SparkPost');
+
+    instance
+      .find('GuideListItem')
+      .at(1)
+      .prop('action')
+      .onClick();
+    expect(defaultProps.history.push).toHaveBeenCalledWith(`/reports/summary`);
+    expect(window.pendo.showGuideById).toHaveBeenCalledWith(GUIDE_IDS.EXPLORE_ANALYTICS);
+    expect(window.pendo.onGuideAdvanced).toHaveBeenCalledWith(1);
   });
 
   it('should navigate to users page when Invite a Collaborator is clicked', () => {
