@@ -45,13 +45,18 @@ const DeliveryHistoryLineChart = ({ data }) => {
               <Label value="Date" offset={15} position="insideBottom" opacity={0.5} fontSize={16} />
             </XAxis>
 
-            <Tooltip labelFormatter={tooltipLabelFormatter} />
+            <Tooltip
+              labelFormatter={tooltipLabelFormatter}
+              isAnimationActive={false}
+              // content={<DeliveryHistoryTooltip />}
+            />
 
             <Line
               type="monotone"
               stroke="#2693C3"
               strokeWidth={2}
               dataKey="deliveries"
+              name="Deliveries"
               dot={{ r: 3, strokeWidth: 1 }}
             />
 
