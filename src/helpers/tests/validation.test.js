@@ -196,6 +196,7 @@ const memoizedCases = {
     bad: [[7, { from: '2018-01-01', to: '2017-12-31' }]],
   },
 };
+const generate = count => [...Array(count).keys()].join(',');
 
 describe('Validation helpers', () => {
   Object.keys(cases).forEach(caseName => {
@@ -258,25 +259,31 @@ describe('ifStringPresent', () => {
   });
 });
 
-describe('maxItems', () => {
-  const generate = count => [...Array(count).keys()].join(',');
-  const maxAllowed = 10;
-  it('returns undefined with an undefined string', () => {
-    expect(validations.maxItems(10)(undefined)).toBeUndefined();
-  });
+describe('noDuplicateItems', () => {
+  const items = generate(5);
   it('returns undefined with an empty string', () => {
-    expect(validations.maxItems(10)('')).toBeUndefined();
+    expect(validations.noDuplicateItems(items)).toBeUndefined();
+  });
+
+  it('returns an error with duplicate items', () => {
+    const duplicates = 'duplicate, duplicate, duplicate, notduplicate';
+    expect(validations.noDuplicateItems(duplicates)).toMatch(/Can\'t contain duplicate items/);
+  });
+});
+
+describe('maxItems', () => {
+  const maxAllowed = 10;
+  it('returns undefined with an empty string', () => {
+    expect(validations.maxItems(maxAllowed)('')).toBeUndefined();
   });
 
   it('returns undefined when under the maximum size', () => {
     const emails = generate(5);
-
     expect(validations.maxItems(maxAllowed)(emails)).toBeUndefined();
   });
 
   it('return an error message when the length is above the maximum value', () => {
     const emails = generate(11);
-
     expect(validations.maxItems(maxAllowed)(emails)).toMatch(/Must contain no more than/);
   });
 });

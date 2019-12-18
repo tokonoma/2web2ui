@@ -25,15 +25,9 @@ export function email(value) {
 
 export function emails(str) {
   const values = multilineStringToArray(str);
-  let message = undefined;
-  const tooManyEmails = maxItems(MAXIMUM_EMAILS_ALLOWED)(str);
-
-  if (values.length <= 0 || !values.every(isEmailAddress)) {
-    message = 'Must be a comma separated list of valid Email Addresses';
-  } else if (tooManyEmails) {
-    message = 'Email Address list can only contain a maximum of 10 emails';
-  }
-  return message;
+  return values.length && values.every(isEmailAddress)
+    ? undefined
+    : 'Must be a comma separated list of valid email addresses';
 }
 
 /**
@@ -43,11 +37,15 @@ export function emails(str) {
  * @param {Number} max maximum length allowed for validation
  * @returns {(String|undefined)} undefined if the length is less than max, otherwise returns an error string
  */
-
 export const maxItems = max => str => {
-  return _.isString(str) && [...new Set(multilineStringToArray(str))].length > max
-    ? `Must contain no more than ${max} items`
-    : undefined;
+  const values = multilineStringToArray(str);
+  return values.length > max ? `Must contain no more than ${max} items` : undefined;
+};
+
+export const noDuplicateItems = str => {
+  const values = multilineStringToArray(str);
+  const dedupedValues = [...new Set(values)];
+  return values.length !== dedupedValues.length ? "Can't contain duplicate items" : undefined;
 };
 
 export function emailLocal(value) {
