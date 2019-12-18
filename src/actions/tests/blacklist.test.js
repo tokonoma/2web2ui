@@ -19,6 +19,21 @@ describe('Action Creator: Blacklist', () => {
     });
   });
 
+  it('makes a request to create monitor', async () => {
+    await blacklist.createMonitor('192.168.0.1');
+    expect(sparkpostApiRequest).toHaveBeenCalledWith({
+      type: 'CREATE_MONITOR',
+      meta: {
+        method: 'GET',
+        url: '/v1/blacklist-monitors/incidents',
+        showErrorAlert: false,
+        params: {
+          resource: '192.168.0.1',
+        },
+      },
+    });
+  });
+
   it('it makes request to list monitors', async () => {
     await blacklist.listMonitors();
     expect(sparkpostApiRequest).toHaveBeenCalledWith({

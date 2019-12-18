@@ -11,6 +11,20 @@ export function listMonitors() {
   });
 }
 
+export function createMonitor(resource) {
+  return sparkpostApiRequest({
+    type: 'CREATE_MONITOR',
+    meta: {
+      method: 'POST',
+      url: '/v1/blacklist-monitors',
+      showErrorAlert: false,
+      data: {
+        resource,
+      },
+    },
+  });
+}
+
 export function listIncidents(from = '2019-01-01') {
   //TODO replace with datepicker date
   return sparkpostApiRequest({

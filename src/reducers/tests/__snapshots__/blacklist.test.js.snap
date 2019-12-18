@@ -1,5 +1,44 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`BlackList Reducer create monitor fail 1`] = `
+Object {
+  "createMonitorError": Object {
+    "errors": Array [
+      Object {
+        "message": "Some error occurred",
+      },
+    ],
+  },
+  "createMonitorPending": false,
+  "incidents": Array [],
+  "incidentsPending": false,
+  "monitors": Array [],
+  "monitorsPending": false,
+}
+`;
+
+exports[`BlackList Reducer create monitor pending 1`] = `
+Object {
+  "createMonitorError": null,
+  "createMonitorPending": true,
+  "incidents": Array [],
+  "incidentsPending": false,
+  "monitors": Array [],
+  "monitorsPending": false,
+}
+`;
+
+exports[`BlackList Reducer create monitor success 1`] = `
+Object {
+  "createMonitorError": null,
+  "createMonitorPending": false,
+  "incidents": Array [],
+  "incidentsPending": false,
+  "monitors": Array [],
+  "monitorsPending": false,
+}
+`;
+
 exports[`BlackList Reducer list incidents fail 1`] = `
 Object {
   "incidents": Array [],

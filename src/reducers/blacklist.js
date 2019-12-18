@@ -20,6 +20,13 @@ export default (state = initialState, { type, payload }) => {
       return { ...state, incidentsPending: false, incidentsError: payload };
     case 'LIST_INCIDENTS_SUCCESS':
       return { ...state, incidents: payload, incidentsPending: false, incidentsError: null };
+
+    case 'CREATE_MONITOR_PENDING':
+      return { ...state, createMonitorPending: true, createMonitorError: null };
+    case 'CREATE_MONITOR_FAIL':
+      return { ...state, createMonitorPending: false, createMonitorError: payload };
+    case 'CREATE_MONITOR_SUCCESS':
+      return { ...state, createMonitorPending: false, createMonitorError: null };
     default:
       return state;
   }

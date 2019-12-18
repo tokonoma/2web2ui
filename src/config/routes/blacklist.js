@@ -8,7 +8,14 @@ export default [
     layout: App,
     condition: hasAccountOptionEnabled('blacklist_monitors'),
     title: 'Blacklist Incidents',
-    supportDocSearch: 'blacklist'
-  }
+    supportDocSearch: 'blacklist',
+  },
+  {
+    path: '/blacklist/watchlist/create',
+    component: blacklist.MonitorResourcePage,
+    condition: hasAccountOptionEnabled('blacklist_monitors'),
+    layout: App,
+    title: 'Add to Watch List',
+    supportDocSearch: 'blacklist',
+  },
 ];
-
