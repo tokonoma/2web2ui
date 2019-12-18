@@ -34,7 +34,7 @@ export function EditIpPage(props) {
   } = props;
 
   const handleSubmit = values => {
-    const { ip, history, showAlert } = props;
+    const { history, showAlert } = props;
 
     if (!values.auto_warmup_enabled) {
       delete values.auto_warmup_stage;
