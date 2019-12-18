@@ -1,112 +1,162 @@
-import { shallow } from 'enzyme';
 import React from 'react';
-import _ from 'lodash';
+import { render, fireEvent } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { BrowserRouter as Router } from 'react-router-dom';
 import { EditIpPage } from '../EditIpPage';
+jest.mock('../components/IpForm');
+
+// Mocking IP form implementation - testing Redux Form components
+// with React Testing Library (as of the time of writing)
+// isn't working as expected
 
 describe('IP Edit Page', () => {
-  let props;
-  let wrapper;
-
-  beforeEach(() => {
-    props = {
-      listPools: jest.fn(),
+  const subject = props => {
+    const defaultProps = {
+      listPools: jest.fn(() => Promise.resolve()),
+      getTimeSeries: jest.fn(() => Promise.resolve()),
       pool: { name: 'My Pool', id: 'my-pool' },
       loading: false,
-      ip: { external_ip: '1.1.1.1', ip_pool: 'foo' },
-      updateSendingIp: jest.fn(() => Promise.resolve()),
+      ip: { external_ip: '1.1.1.1', ip_pool: 'foo', auto_warmup_stage: 10 },
+      updateSendingIp: jest.fn(),
       showAlert: jest.fn(),
       match: {
         params: {
-          id: 'my-pool'
-        }
+          id: 'my-pool',
+        },
       },
       history: {
-        replace: jest.fn()
-      }
+        replace: jest.fn(),
+      },
     };
+    const mergedProps = Object.assign({}, defaultProps, props);
 
-    wrapper = shallow(<EditIpPage {...props} />);
-  });
-
-  it('renders correctly', () => {
-    expect(wrapper).toMatchSnapshot();
-  });
+    // Router needed to use <Link/> component inside
+    return render(
+      <Router>
+        <EditIpPage {...mergedProps} />
+      </Router>,
+    );
+  };
 
   it('loads data after mount', () => {
-    expect(props.listPools).toHaveBeenCalledTimes(1);
+    const mockListPools = jest.fn(() => Promise.resolve());
+    subject({ listPools: mockListPools });
+
+    expect(mockListPools).toHaveBeenCalled();
   });
 
-  it('renders loader when loading is true', () => {
-    wrapper.setProps({ loading: true });
-    expect(wrapper.exists('Loading')).toBe(true);
-    expect(wrapper.exists('Page')).toBe(false);
+  it('renders a loader when and no page `pageLoading` is true', () => {
+    const { queryByTestId, queryByText } = subject({ pageLoading: true });
+
+    expect(queryByTestId('loading')).toBeInTheDocument();
+    expect(queryByText('Sending IP: 1.1.1.1')).not.toBeInTheDocument();
   });
 
-  it('renders loader when no pool', () => {
-    wrapper.setProps({ pool: null });
-    expect(wrapper.exists('Loading')).toBe(true);
-    expect(wrapper.exists('Page')).toBe(false);
+  it('renders a loader and not the page when no pool is present', () => {
+    const { queryByTestId, queryByText } = subject({ pool: null });
+
+    expect(queryByTestId('loading')).toBeInTheDocument();
+    expect(queryByText('Sending IP: 1.1.1.1')).not.toBeInTheDocument();
   });
 
-  it('renders loader when no ip', () => {
-    wrapper.setProps({ ip: null });
-    expect(wrapper.exists('Loading')).toBe(true);
-    expect(wrapper.exists('Page')).toBe(false);
+  it('renders a loader not the page when no ip is present', () => {
+    const { queryByTestId, queryByText } = subject({ ip: null });
+
+    expect(queryByTestId('loading')).toBeInTheDocument();
+    expect(queryByText('Sending IP: 1.1.1.1')).not.toBeInTheDocument();
   });
 
-  it('invokes updateSendingIp function upon submitting the ip form', () => {
-    wrapper.find('IpForm').simulate('submit', {});
-    expect(props.updateSendingIp).toHaveBeenCalled();
-  });
-
-  it('renders error banner', () => {
-    const err = new Error('API Failed');
-    wrapper.setProps({ error: err });
-    expect(wrapper.exists('ApiErrorBanner')).toBe(true);
-    expect(wrapper.find('ApiErrorBanner')).toMatchSnapshot();
-  });
-
-  it('reloads data on upon clicking on reload button on error banner', () => {
-    const err = new Error('API Failed');
-    wrapper.setProps({ error: err });
-    props.listPools.mockClear();
-    wrapper.find('ApiErrorBanner').prop('reload')();
-    expect(props.listPools).toHaveBeenCalledTimes(1);
-  });
-
-  describe('onUpdateIp', () => {
-    let ipData;
-    beforeEach(() => {
-      ipData = { ip_pool: 'foo', auto_warmup_enabled: true, auto_warmup_stage: 2 };
+  it('invokes `updateSendingIp` on on submit, invokes `showAlert`, invokes `history.push` when the ip pool value has been re-assigned, and then invokes `listPools`', () => {
+    const promise = Promise.resolve();
+    const mockUpdateSendingIp = jest.fn(() => promise);
+    const mockListPools = jest.fn(() => Promise.resolve());
+    const mockPush = jest.fn();
+    const mockShowAlert = jest.fn();
+    const stubbedIp = {
+      external_ip: 'foobar',
+      ip_pool: 'a',
+    };
+    const { queryByTestId } = subject({
+      updateSendingIp: mockUpdateSendingIp,
+      ip: stubbedIp,
+      listPools: mockListPools,
+      history: {
+        push: mockPush,
+      },
+      showAlert: mockShowAlert,
     });
 
-    it('updates ip with ip pool data', async () => {
-      await wrapper.instance().onUpdateIp(ipData);
-      expect(props.updateSendingIp).toHaveBeenCalledWith('1.1.1.1', ipData);
-      expect(props.showAlert).toHaveBeenCalledTimes(1);
-      expect(props.history.replace).not.toHaveBeenCalled();
+    fireEvent.submit(queryByTestId('mock-ip-form'), { ip_pool: 'b' });
+
+    expect(mockUpdateSendingIp).toHaveBeenCalled();
+
+    return promise.then(() => {
+      expect(mockShowAlert).toHaveBeenCalled();
+      expect(mockListPools).toHaveBeenCalled();
+      expect(mockPush).toHaveBeenCalled();
+    });
+  });
+
+  it('renders a page-level error banner controlled by the `pageError` prop', () => {
+    const { queryByText } = subject({ pageError: { message: 'API Failed' } });
+
+    expect(
+      queryByText('Sorry, we seem to have had some trouble loading your IP data.'),
+    ).toBeInTheDocument();
+
+    userEvent.click(queryByText('Show Error Details'));
+
+    expect(queryByText('API Failed')).toBeInTheDocument();
+  });
+
+  it('reloads data upon clicking the reload button on the page level error banner', () => {
+    const mockListPools = jest.fn(() => Promise.resolve());
+    const { queryByText } = subject({
+      pageError: { message: 'This is a page error' },
+      listPools: mockListPools,
     });
 
-    it('removes auto_warmup_stage if ip warmup is not enabled', async () => {
-      ipData.auto_warmup_enabled = false;
-      await wrapper.instance().onUpdateIp(ipData);
-      expect(props.updateSendingIp).toHaveBeenCalledWith('1.1.1.1', _.omit(ipData, 'auto_warmup_stage'));
-      expect(props.showAlert).toHaveBeenCalledTimes(1);
+    userEvent.click(queryByText('Try Again'));
+
+    expect(mockListPools).toHaveBeenCalledTimes(2);
+  });
+
+  it('renders an error for delivery history via the `chartError` prop that has a reload button that invokes `listPools` when clicked', () => {
+    const mockListPools = jest.fn(() => Promise.resolve());
+    const { queryByText } = subject({
+      chartError: { message: 'A chart error' },
+      listPools: mockListPools,
     });
 
-    it('throws on error', async () => {
-      const err = new Error('API Failed');
-      props.updateSendingIp.mockReturnValue(Promise.reject(err));
-      await expect(wrapper.instance().onUpdateIp(ipData)).rejects.toThrow(err);
-      expect(props.updateSendingIp).toHaveBeenCalledWith('1.1.1.1', ipData);
-      expect(props.showAlert).toHaveBeenCalledTimes(0);
+    userEvent.click(queryByText('Show Error Details'));
+
+    expect(queryByText('A chart error')).toBeInTheDocument();
+
+    userEvent.click(queryByText('Try Again'));
+
+    expect(mockListPools).toHaveBeenCalled();
+  });
+
+  it('renders the delivery history section in a loading state controlled via the `chartLoading` prop', () => {
+    const { queryByTestId } = subject({ chartLoading: true });
+
+    expect(queryByTestId('panel-loading')).toBeInTheDocument();
+  });
+
+  it('renders a line chart when data is passed in via the `deliveryHistory` prop', () => {
+    const { queryByTestId, queryByText } = subject({
+      deliveryHistory: [{ deliveries: 123, date: '10/11/12' }],
     });
 
-    it('redirects to new pool if ip reassigned', async () => {
-      const updatedIpData = { ...ipData, ip_pool: 'bar' };
-      await wrapper.instance().onUpdateIp(updatedIpData);
-      expect(props.updateSendingIp).toHaveBeenCalledWith('1.1.1.1', updatedIpData);
-      expect(props.history.replace).toHaveBeenCalledWith('/account/ip-pools/edit/bar/1.1.1.1');
-    });
+    expect(queryByTestId('delivery-history-line-chart')).toBeInTheDocument();
+    expect(queryByTestId('delivery-history-line-chart')).toHaveAttribute('aria-hidden', 'true');
+    expect(queryByText('Delivery History')).toBeInTheDocument();
+  });
+
+  it('does not render a line chart when empty data is passed in via the `deliveryHistory` prop', () => {
+    const { queryByTestId, queryByText } = subject({ deliveryHistory: [] });
+
+    expect(queryByTestId('delivery-history-line-chart')).not.toBeInTheDocument();
+    expect(queryByText('Delivery History')).not.toBeInTheDocument();
   });
 });

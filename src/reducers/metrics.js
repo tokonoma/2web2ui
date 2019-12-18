@@ -6,7 +6,7 @@ const initialState = {
   campaigns: [],
   sendingIps: [],
   ipPools: [],
-  templates: []
+  templates: [],
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -36,7 +36,13 @@ export default (state = initialState, { type, payload }) => {
       return { ...state, templates: payload.templates.sort() };
 
     case 'UPDATE_METRICS_FROM_CACHE': {
-      const { domains, campaigns, 'sending-ips': sendingIps, 'ip-pools': ipPools, templates } = payload;
+      const {
+        domains,
+        campaigns,
+        'sending-ips': sendingIps,
+        'ip-pools': ipPools,
+        templates,
+      } = payload;
       return { ...state, domains, campaigns, sendingIps, ipPools, templates };
     }
 

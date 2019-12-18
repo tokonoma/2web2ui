@@ -12,17 +12,25 @@ import { list as listSubaccounts } from 'src/actions/subaccounts';
 import * as usersActions from 'src/actions/users';
 import { selectUsers } from 'src/selectors/users';
 import { hasSubaccounts } from 'src/selectors/subaccounts';
-import { Subaccount, Loading, ApiErrorBanner, DeleteModal, TableCollection, ActionPopover } from 'src/components';
+import {
+  Subaccount,
+  Loading,
+  ApiErrorBanner,
+  DeleteModal,
+  TableCollection,
+  ActionPopover,
+} from 'src/components';
 import User from './components/User';
+import { Abbreviation } from 'src/components';
 
-const tfaColumnLabel = <abbr title='Two Factor Authentication'>2FA</abbr>;
+const tfaColumnLabel = <Abbreviation title="Two Factor Authentication">2FA</Abbreviation>;
 
 const COLUMNS = [
   { label: 'User', sortKey: 'name' },
   { label: 'Role', sortKey: 'roleLabel' },
   { label: tfaColumnLabel, sortKey: 'tfa_enabled' },
   { label: 'Last Login', sortKey: 'last_login' },
-  null
+  null,
 ];
 
 const SUB_COLUMN = [
@@ -31,11 +39,11 @@ const SUB_COLUMN = [
   { label: 'Subaccount', sortKey: 'subaccount_id', width: '15%' },
   { label: tfaColumnLabel, sortKey: 'tfa_enabled', width: '10%' },
   { label: 'Last Login', sortKey: 'last_login', width: '14%' },
-  null
+  null,
 ];
 
 export const Actions = ({ username, deletable, onDelete }) => {
-  const actions = [ { content: 'Edit', to: `/account/users/edit/${username}`, component: Link } ];
+  const actions = [{ content: 'Edit', to: `/account/users/edit/${username}`, component: Link }];
   if (deletable) {
     actions.push({ content: 'Delete', onClick: () => onDelete(username) });
   }
@@ -45,13 +53,13 @@ export const Actions = ({ username, deletable, onDelete }) => {
 Actions.displayName = 'Actions';
 
 const DEFAULT_STATE = {
-  userToDelete: {}
+  userToDelete: {},
 };
 
 const primaryAction = {
   content: 'Invite User',
   Component: Link,
-  to: '/account/users/create'
+  to: '/account/users/create',
 };
 
 export class ListPage extends Component {
@@ -65,22 +73,34 @@ export class ListPage extends Component {
   }
 
   // Do not allow current user to change their access/role or delete their account
-  getRowData = (user) => {
+  getRowData = user => {
     const { hasSubaccounts, isSubAccountReportingLive } = this.props;
     const data = [
       <User name={user.name} email={user.email} username={user.username} />,
       user.roleLabel,
       user.tfa_enabled ? <Tag color={'blue'}>Enabled</Tag> : <Tag>Disabled</Tag>,
       user.last_login ? <TimeAgo date={user.last_login} live={false} /> : 'Never',
-      <Actions username={user.username} deletable={!user.isCurrentUser} onDelete={this.handleDeleteRequest} />
+      <Actions
+        username={user.username}
+        deletable={!user.isCurrentUser}
+        onDelete={this.handleDeleteRequest}
+      />,
     ];
     if (isSubAccountReportingLive && hasSubaccounts) {
-      data.splice(2, 0, user.subaccount_id ? <Subaccount id={user.subaccount_id} name={user.subaccount_name}/> : null);
+      data.splice(
+        2,
+        0,
+        user.subaccount_id ? (
+          <Subaccount id={user.subaccount_id} name={user.subaccount_name} />
+        ) : null,
+      );
     }
     return data;
   };
 
-  handleCancel = () => { this.setState(DEFAULT_STATE); };
+  handleCancel = () => {
+    this.setState(DEFAULT_STATE);
+  };
 
   handleDelete = () => {
     const { userToDelete } = this.state;
@@ -90,8 +110,8 @@ export class ListPage extends Component {
     });
   };
 
-  handleDeleteRequest = (username) => {
-    const user = fp.find((user) => user.username === username)(this.props.users);
+  handleDeleteRequest = username => {
+    const user = fp.find(user => user.username === username)(this.props.users);
     this.setState({ userToDelete: user });
   };
 
@@ -118,7 +138,16 @@ export class ListPage extends Component {
         onDelete={this.handleDelete}
         onCancel={this.handleCancel}
         open={isOpen}
-        content={<p><span>User "</span><span>{name}</span><span>" will no longer be able to log in or access this SparkPost account. All API keys associated with this user will be transferred to you.</span></p>}
+        content={
+          <p>
+            <span>User "</span>
+            <span>{name}</span>
+            <span>
+              " will no longer be able to log in or access this SparkPost account. All API keys
+              associated with this user will be transferred to you.
+            </span>
+          </p>
+        }
         title="Are you sure you want to delete this user?"
       />
     );
@@ -138,9 +167,9 @@ export class ListPage extends Component {
             show: true,
             keyMap: { role: 'roleLabel' },
             exampleModifiers: ['name', 'email', 'role'],
-            itemToStringKeys: ['username', 'name', 'email']
+            itemToStringKeys: ['username', 'name', 'email'],
           }}
-          defaultSortColumn='name'
+          defaultSortColumn="name"
         />
         {this.renderDeleteModal()}
       </div>
@@ -166,23 +195,24 @@ export class ListPage extends Component {
           secondaryAction: {
             Component: PageLink,
             content: 'Edit your user account',
-            to: `/account/users/edit/${currentUser.username}`
-          }
-        }}>
+            to: `/account/users/edit/${currentUser.username}`,
+          },
+        }}
+      >
         {error ? this.renderError() : this.renderPage()}
       </Page>
     );
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   currentUser: state.currentUser,
   error: state.users.error,
   loading: state.users.loading,
   users: selectUsers(state),
   hasSubaccounts: hasSubaccounts(state),
   subaccounts: state.subaccounts.list,
-  isSubAccountReportingLive: hasUiOption('subaccount_reporting')(state)
+  isSubAccountReportingLive: hasUiOption('subaccount_reporting')(state),
 });
 
 export default connect(mapStateToProps, { ...usersActions, listSubaccounts })(ListPage);
