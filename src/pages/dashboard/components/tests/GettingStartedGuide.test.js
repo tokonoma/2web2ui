@@ -16,6 +16,7 @@ describe('GettingStartedGuide', () => {
     },
     listApiKeys: jest.fn(),
     setAccountOption: jest.fn(),
+    listSendingDomains: jest.fn(),
   };
 
   const subject = (props, func = shallow) =>
