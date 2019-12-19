@@ -77,6 +77,7 @@ export const WatchlistAddPage = ({
           <TextField
             id="watchlist-item-input"
             label="Add IP or Sending Domain"
+            placeholder="10.20.30.40 or email.example.com"
             onChange={onChange}
             error={errorMessage}
             value={resource}
