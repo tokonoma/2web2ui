@@ -25,11 +25,15 @@ export const BreadCrumbsItem = ({ children, active, onClick }) => (
 );
 
 BreadCrumbs.propTypes = {
-  children: PropTypes.element,
+  children: PropTypes.arrayOf(
+    PropTypes.shape({
+      BreadCrumbItem: PropTypes.func,
+    }),
+  ),
 };
 
 BreadCrumbsItem.propTypes = {
-  children: PropTypes.element,
+  children: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
   active: PropTypes.bool,
   onClick: PropTypes.func,
 };
