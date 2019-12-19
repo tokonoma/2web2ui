@@ -19,13 +19,15 @@
   text-align: center;
   cursor: pointer;
 
-  &:hover {
+  &:hover,
+  &:focus-within {
     border-color: color(gray, 5);
     border-style: solid;
   }
 }
 
-.DropzoneActive, .DropzoneActive:hover {
+.DropzoneActive,
+.DropzoneActive:hover {
   border-color: color(blue, light);
   border-style: solid;
   box-shadow: 0 0 0 1px color(blue, light);
