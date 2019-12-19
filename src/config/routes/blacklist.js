@@ -11,8 +11,8 @@ export default [
     supportDocSearch: 'blacklist',
   },
   {
-    path: '/blacklist/watchlist/create',
-    component: blacklist.MonitorResourcePage,
+    path: '/blacklist/watchlist/add',
+    component: blacklist.WatchlistAddPage,
     condition: hasAccountOptionEnabled('blacklist_monitors'),
     layout: App,
     title: 'Add to Watch List',

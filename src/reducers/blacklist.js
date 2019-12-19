@@ -21,12 +21,12 @@ export default (state = initialState, { type, payload }) => {
     case 'LIST_INCIDENTS_SUCCESS':
       return { ...state, incidents: payload, incidentsPending: false, incidentsError: null };
 
-    case 'CREATE_MONITOR_PENDING':
-      return { ...state, createMonitorPending: true, createMonitorError: null };
-    case 'CREATE_MONITOR_FAIL':
-      return { ...state, createMonitorPending: false, createMonitorError: payload };
-    case 'CREATE_MONITOR_SUCCESS':
-      return { ...state, createMonitorPending: false, createMonitorError: null };
+    case 'ADD_WATCHLIST_PENDING':
+      return { ...state, watchlistAddPending: true, watchlistAddError: null };
+    case 'ADD_WATCHLIST_FAIL':
+      return { ...state, watchlistAddPending: false, watchlistAddError: payload };
+    case 'ADD_WATCHLIST_SUCCESS':
+      return { ...state, watchlistAddPending: false, watchlistAddError: null };
     default:
       return state;
   }

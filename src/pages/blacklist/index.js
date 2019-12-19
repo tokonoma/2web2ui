@@ -1,7 +1,7 @@
 import IncidentsPage from './IncidentsPage';
-import MonitorResourcePage from './MonitorResourcePage';
+import WatchlistAddPage from './WatchlistAddPage';
 
 export default {
   IncidentsPage,
-  MonitorResourcePage,
+  WatchlistAddPage,
 };
