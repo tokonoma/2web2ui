@@ -7,6 +7,7 @@ import _ from 'lodash';
 import { Panel, Banner, Button, Error } from '@sparkpost/matchbox';
 import { DownloadLink, TextFieldWrapper } from 'src/components';
 import { required, maxLength } from 'src/helpers/validation';
+import { formatBytes } from 'src/helpers/units';
 
 import FileFieldWrapper from 'src/components/reduxFormWrappers/FileFieldWrapper';
 
@@ -146,23 +147,17 @@ export class RecipientListForm extends Component {
 const asyncValidate = async ({ csv, ...values }) => {
   if (!csv) return;
 
-  const roundToTwoDecimalPlaces = number => Math.round(number * 100) / 100;
-
   const recipients = await parseRecipientListCsv(csv);
   const JSONpayload = JSON.stringify({ ...values, recipients });
   const m = encodeURIComponent(JSONpayload).match(/%[89ABab]/g); // See: https://stackoverflow.com/questions/5515869/string-length-in-bytes-in-javascript/5515960#5515960
   const payloadSizeInBytes = JSONpayload.length + (m ? m.length : 0);
-  const payloadSizeInMegabytes = payloadSizeInBytes / 1000000;
-  const maxSizeInMegabytes = config.maxRecipListUploadSizeBytes / 1000000;
 
   if (payloadSizeInBytes > config.maxRecipListUploadSizeBytes) {
     /* eslint-disable no-throw-literal */
     throw {
-      csv: `Upload size ${roundToTwoDecimalPlaces(
-        payloadSizeInMegabytes,
-      )}MB exceeds the max limit of ${roundToTwoDecimalPlaces(
-        maxSizeInMegabytes,
-      )}MB. Please upload a smaller file.`,
+      csv: `Upload size ${formatBytes(payloadSizeInBytes)} exceeds the max limit of ${formatBytes(
+        config.maxRecipListUploadSizeBytes,
+      )}. Please upload a smaller file.`,
     };
     /* eslint-enable no-throw-literal */
   }
