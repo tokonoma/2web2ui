@@ -13,12 +13,12 @@ export const SENDING_STEP_LIST = {
   'Show Me SparkPost': {
     name: 'Show Me SparkPost',
     content:
-      'Send your first email in one click and dive right into what SparkPost can do for your email strategy',
+      'Send your first email in one click and dive right into what SparkPost can do for your email strategy.',
   },
   "Let's Code": {
     name: "Let's Code",
     content:
-      "Ready to integrate via SMTP or API? We'll get you set up ASAP so you can start building with SparkPost",
+      "Ready to integrate via SMTP or API? We'll get you set up ASAP so you can start building with SparkPost.",
   },
 };
 
@@ -32,6 +32,12 @@ export const LETS_CODE_LIST = {
     name: 'Generate API Key',
     title: 'Generate an API Key',
     description: 'An API key is required to use our APIs within your app.',
+  },
+  'View Developer Docs': {
+    name: 'View Developer Docs',
+    title: 'Check out the Documentation',
+    description:
+      'Visit our developer docs for all the details on our API and SMTP powered delivery.',
   },
 };
 

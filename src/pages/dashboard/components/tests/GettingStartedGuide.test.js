@@ -101,6 +101,25 @@ describe('GettingStartedGuide', () => {
 
   it("should render two list items when on step Let's Code ", () => {
     const instance = subject({ onboarding: { active_step: "Let's Code" } });
-    expect(instance.find('CheckListItem')).toHaveLength(2);
+    expect(instance.find('CheckListItem')).toHaveLength(3);
+  });
+
+  it('should have an external link to developer docs', () => {
+    const instance = subject({ onboarding: { active_step: "Let's Code" } }, mount);
+
+    instance
+      .find('GuideListItem')
+      .at(2)
+      .prop('action')
+      .onClick();
+
+    expect(defaultProps.setAccountOption).toHaveBeenCalledWith('onboarding', {
+      view_developer_docs_completed: true,
+    });
+
+    expect(instance.find('Button[data-id="View Developer Docs"]')).toHaveProp(
+      'to',
+      'https://developers.sparkpost.com/api',
+    );
   });
 });

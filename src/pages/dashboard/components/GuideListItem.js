@@ -2,7 +2,7 @@ import React from 'react';
 import { RadioButtonUnchecked, CheckCircleOutline } from '@sparkpost/matchbox-icons';
 import { Button, Grid } from '@sparkpost/matchbox';
 import styles from './GuideListItem.module.scss';
-export const GuideListItem = ({ itemCompleted, children, action: { name, onClick } }) => (
+export const GuideListItem = ({ itemCompleted, children, action: { name, onClick, ...rest } }) => (
   <Grid>
     <Grid.Column md={9} xs={12}>
       <div className={styles.CheckBoxContainer}>
@@ -21,6 +21,7 @@ export const GuideListItem = ({ itemCompleted, children, action: { name, onClick
           color={(!itemCompleted && 'orange') || null}
           outline={itemCompleted}
           data-id={name}
+          {...rest}
         >
           {' '}
           {name}{' '}
