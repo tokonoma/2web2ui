@@ -38,10 +38,24 @@ export default (state = initialState, { type, payload, meta }) => {
 
     case 'GET_INBOX_PLACEMENT_TRENDS_PENDING':
       return { ...state, getTrendsPending: true, getTrendsError: null };
-    case 'GET_INBOX_PLACEMENT_TRENDS_SUCCESS':
+    case 'GET_INBOX_PLACEMENT_TRENDS_SUCCESS': {
       return { ...state, getTrendsPending: false, trends: payload, getTrendsError: null };
+    }
     case 'GET_INBOX_PLACEMENT_TRENDS_FAIL':
       return { ...state, getTrendsPending: false, getTrendsError: payload };
+
+    case 'GET_INBOX_PLACEMENT_TRENDS_FILTER_VALUES_PENDING':
+      return { ...state, getTrendsFilterValuesPending: true, getTrendsFilterValuesError: null };
+    case 'GET_INBOX_PLACEMENT_TRENDS_FILTER_VALUES_SUCCESS': {
+      return {
+        ...state,
+        getTrendsFilterValuesPending: false,
+        trendsFilterValues: payload,
+        getTrendsFilterValuesError: null,
+      };
+    }
+    case 'GET_INBOX_PLACEMENT_TRENDS_FILTER_VALUES_FAIL':
+      return { ...state, getTrendsFilterValuesPending: false, getTrendsFilterValuesError: payload };
 
     case 'STOP_INBOX_PLACEMENT_TEST_PENDING':
       return { ...state, stopTestPending: true, stopTestError: null };

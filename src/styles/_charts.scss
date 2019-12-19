@@ -1,6 +1,6 @@
 @import '~@sparkpost/matchbox/src/styles/config.scss';
 
-.sp-linechart-wrapper {
+@mixin line-chart() {
   position: relative;
   margin-bottom: rem(30);
   transform: translate(10px, 0);
@@ -10,38 +10,35 @@
   }
 
   // Tick label
-  .recharts-text.recharts-cartesian-axis-tick-value {
+  :global .recharts-text.recharts-cartesian-axis-tick-value {
     fill: color(gray, 5);
     font-size: 13px;
     font-weight: 500;
   }
 
-  .xAxis {
+  :global .xAxis {
     .recharts-text.recharts-cartesian-axis-tick-value {
       transform: translate(0, 6px);
     }
   }
 
-  .yAxis {
+  :global .yAxis {
     .recharts-text.recharts-cartesian-axis-tick-value {
       transform: translate(-2px, 0);
     }
   }
 
-  .sp-linechart-yLabel {
+  :global .sp-linechart-yLabel {
     position: absolute;
     top: 50%;
     transform: rotate(-90deg) translate(0, -3px);
     transform-origin: 0;
 
     color: color(gray, 4);
-    font-size: 13px
+    font-size: 13px;
   }
 
-  .recharts-line > path {}
-  .recharts-line-dots {}
-
-  .recharts-cartesian-grid-horizontal line {
+  :global .recharts-cartesian-grid-horizontal line {
     stroke: color(gray, 8);
     &:last-child {
       stroke: color(gray, 7);
@@ -49,22 +46,22 @@
     }
   }
 
-  .recharts-cartesian-axis-line {
+  :global .recharts-cartesian-axis-line {
     stroke: color(gray, 7);
   }
 
-  .recharts-cartesian-axis-tick-line {
+  :global .recharts-cartesian-axis-tick-line {
     stroke: color(gray, 8);
     stroke-width: 1;
   }
 
-  .recharts-reference-line line {
+  :global .recharts-reference-line line {
     stroke: color(gray, 8);
     stroke-width: 1;
   }
 
   // Tooltip
-  .recharts-tooltip-wrapper {
+  :global .recharts-tooltip-wrapper {
     .recharts-default-tooltip {
       background: #fff !important; // fuck cssinjs
       box-shadow: shadow(deep) !important;
@@ -79,13 +76,14 @@
         margin-bottom: rem(9) !important;
       }
       .recharts-tooltip-item-list {
-         .recharts-tooltip-item {
-           font-size: rem(13) !important;
-           margin: 0 !important;
-           padding: 0 !important;
-           position: relative;
+        .recharts-tooltip-item {
+          font-size: rem(13) !important;
+          margin: 0 !important;
+          padding: 0 !important;
+          position: relative;
 
-          .recharts-tooltip-item-name {}
+          .recharts-tooltip-item-name {
+          }
           .recharts-tooltip-item-separator {
             padding-right: rem(55);
           }
@@ -94,33 +92,35 @@
             position: absolute;
             right: 0;
           }
-          .recharts-tooltip-item-unit {}
+          .recharts-tooltip-item-unit {
+          }
         }
-       }
+      }
     }
   }
 
-  .recharts-legend-wrapper {
+  :global .recharts-legend-wrapper {
     margin-left: rem(30);
     padding-top: rem(11);
     padding-bottom: rem(0);
   }
 
-  .recharts-legend-item-text {
+  :global .recharts-legend-item-text {
     display: inline-block;
     vertical-align: middle;
     padding: rem(0) rem(15) rem(24) rem(6);
     font-size: rem(13);
   }
-  .recharts-legend-item .recharts-surface {
+
+  :global .recharts-legend-item .recharts-surface {
     margin-top: rem(-24);
   }
 
-  .recharts-tooltip-cursor {
+  :global .recharts-tooltip-cursor {
     stroke: color(gray, 5) !important;
   }
 
-  .recharts-responsive-container {
+  :global .recharts-responsive-container {
     position: relative;
   }
 }

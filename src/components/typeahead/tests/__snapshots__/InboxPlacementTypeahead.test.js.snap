@@ -1,0 +1,185 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Inbox Placement Typeahead Matches snapshot test with default filters available 1`] = `
+<InboxPlacementTypeahead
+  filters={
+    Object {
+      "dateRange": Object {
+        "from": "2019-07-11T16:30:00.000Z",
+        "to": "2019-08-10T16:30:00.000Z",
+      },
+      "tags": Object {},
+    }
+  }
+  getInboxPlacementTrendsFilterValues={
+    [MockFunction] {
+      "calls": Array [
+        Array [
+          Object {
+            "from": "2019-07-11",
+            "to": "2019-08-10",
+          },
+        ],
+      ],
+      "results": undefined,
+    }
+  }
+  onChange={[MockFunction]}
+  trendsFilterValues={
+    Object {
+      "from_domains": Array [
+        "test.com",
+      ],
+      "mailbox_providers": Array [
+        "provider",
+      ],
+      "regions": Array [
+        "north",
+      ],
+      "sending_ips": Array [
+        "123.456.1.1",
+      ],
+    }
+  }
+>
+  <Typeahead
+    errorInLabel={false}
+    itemToString={[Function]}
+    name="inbox-placement-typeahead"
+    onChange={[MockFunction]}
+    placeholder="Filter by Domain, IP, Mailbox Provider and Region"
+    renderItem={[Function]}
+    results={
+      Array [
+        Object {
+          "type": "from_domains",
+          "value": "test.com",
+        },
+        Object {
+          "type": "mailbox_providers",
+          "value": "provider",
+        },
+        Object {
+          "type": "regions",
+          "value": "north",
+        },
+        Object {
+          "type": "sending_ips",
+          "value": "123.456.1.1",
+        },
+      ]
+    }
+    selectedItem=""
+  >
+    <Downshift
+      defaultHighlightedIndex={null}
+      defaultIsOpen={false}
+      environment={[Window]}
+      getA11yStatusMessage={[Function]}
+      itemToString={[Function]}
+      onChange={[MockFunction]}
+      onInputValueChange={[Function]}
+      onOuterClick={[Function]}
+      onSelect={[Function]}
+      onStateChange={[Function]}
+      onUserAction={[Function]}
+      scrollIntoView={[Function]}
+      selectedItem=""
+      selectedItemChanged={[Function]}
+      stateReducer={[Function]}
+      suppressRefError={false}
+    >
+      <div
+        aria-expanded={false}
+        aria-haspopup="listbox"
+        aria-labelledby="downshift-0-label"
+        aria-owns={null}
+        className="Typeahead"
+        role="combobox"
+      >
+        <ActionList
+          actions={Array []}
+          className="List"
+          groupByKey="section"
+          maxHeight={300}
+        >
+          <div
+            className="List"
+            style={
+              Object {
+                "maxHeight": 300,
+              }
+            }
+          />
+        </ActionList>
+        <TextField
+          aria-activedescendant={null}
+          aria-autocomplete="list"
+          aria-controls={null}
+          aria-labelledby="downshift-0-label"
+          autoComplete="off"
+          connectRight={null}
+          data-lpignore={true}
+          error={null}
+          errorInLabel={false}
+          id="inbox-placement-typeahead"
+          name="inbox-placement-typeahead"
+          onBlur={[Function]}
+          onChange={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          placeholder="Filter by Domain, IP, Mailbox Provider and Region"
+          readOnly={false}
+          resize="both"
+          type="text"
+          value=""
+        >
+          <fieldset
+            className="Lt_Bp"
+          >
+            <Connect
+              right={null}
+            >
+              <div
+                className="Lj_Ll"
+              >
+                <div
+                  className="Lj_Ln"
+                >
+                  <input
+                    aria-activedescendant={null}
+                    aria-autocomplete="list"
+                    aria-controls={null}
+                    aria-labelledby="downshift-0-label"
+                    autoComplete="off"
+                    className="Lt_Av"
+                    data-lpignore={true}
+                    id="inbox-placement-typeahead"
+                    name="inbox-placement-typeahead"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    onFocus={[Function]}
+                    onKeyDown={[Function]}
+                    placeholder="Filter by Domain, IP, Mailbox Provider and Region"
+                    readOnly={false}
+                    style={
+                      Object {
+                        "paddingLeft": undefined,
+                        "paddingRight": undefined,
+                        "resize": "both",
+                        "textAlign": undefined,
+                      }
+                    }
+                    type="text"
+                    value=""
+                  />
+                </div>
+              </div>
+            </Connect>
+          </fieldset>
+        </TextField>
+      </div>
+    </Downshift>
+  </Typeahead>
+</InboxPlacementTypeahead>
+`;

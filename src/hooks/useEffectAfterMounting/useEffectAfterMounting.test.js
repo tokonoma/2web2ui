@@ -3,16 +3,15 @@ import { mount } from 'enzyme';
 import useEffectAfterMounting from '../useEffectAfterMounting';
 
 describe('useEffectAfterMounting', () => {
-  const MockComponent = (props) => {
+  const MockComponent = props => {
     useEffectAfterMounting(() => {
       props.callback();
     }, [props.callback]);
     return null;
   };
 
-  const subject = (callback, cleanup = () => {}) => mount(
-    <MockComponent callback={callback} cleanup={cleanup} />
-  );
+  const subject = (callback, cleanup = () => {}) =>
+    mount(<MockComponent callback={callback} cleanup={cleanup} />);
 
   it('does not call callback on mount', () => {
     const callback = jest.fn();

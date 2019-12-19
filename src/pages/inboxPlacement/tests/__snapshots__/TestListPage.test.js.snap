@@ -29,7 +29,34 @@ exports[`Page: Test List renders page correctly with defaults 1`] = `
   <Panel
     title="Inbox Placement Trends"
   >
-    <Connect(TrendsChart) />
+    <Panel.Section>
+      <TrendsFilters
+        filters={
+          Object {
+            "dateRange": Object {
+              "from": "2019-07-11T16:30:00.000Z",
+              "to": "2019-08-10T16:30:00.000Z",
+            },
+            "range": "30days",
+            "tags": Object {},
+          }
+        }
+        updateFilters={[Function]}
+        validateDate={[Function]}
+      />
+    </Panel.Section>
+    <Connect(TrendsChart)
+      filters={
+        Object {
+          "dateRange": Object {
+            "from": "2019-07-11T16:30:00.000Z",
+            "to": "2019-08-10T16:30:00.000Z",
+          },
+          "range": "30days",
+          "tags": Object {},
+        }
+      }
+    />
     <FilterSortCollection
       defaultSortColumn="start_time"
       filterBoxConfig={
@@ -106,7 +133,34 @@ exports[`Page: Test List renders page with tests 1`] = `
   <Panel
     title="Inbox Placement Trends"
   >
-    <Connect(TrendsChart) />
+    <Panel.Section>
+      <TrendsFilters
+        filters={
+          Object {
+            "dateRange": Object {
+              "from": "2019-07-11T16:30:00.000Z",
+              "to": "2019-08-10T16:30:00.000Z",
+            },
+            "range": "30days",
+            "tags": Object {},
+          }
+        }
+        updateFilters={[Function]}
+        validateDate={[Function]}
+      />
+    </Panel.Section>
+    <Connect(TrendsChart)
+      filters={
+        Object {
+          "dateRange": Object {
+            "from": "2019-07-11T16:30:00.000Z",
+            "to": "2019-08-10T16:30:00.000Z",
+          },
+          "range": "30days",
+          "tags": Object {},
+        }
+      }
+    />
     <FilterSortCollection
       defaultSortColumn="start_time"
       filterBoxConfig={

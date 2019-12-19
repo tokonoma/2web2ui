@@ -1,0 +1,7 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+// Increasing specificity to override styles on `abbr[title]`
+.Abbreviation.Abbreviation {
+  border-bottom: 1px dashed currentColor;
+  text-decoration: none;
+}

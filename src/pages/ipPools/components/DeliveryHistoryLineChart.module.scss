@@ -1,0 +1,6 @@
+@import 'src/styles/charts.scss';
+
+.ChartWrapper {
+  @include line-chart();
+  margin-bottom: 0;
+}

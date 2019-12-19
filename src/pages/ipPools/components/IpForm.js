@@ -6,7 +6,7 @@ import { Field, formValueSelector, getFormValues, reduxForm, submit, isDirty } f
 import { withRouter } from 'react-router-dom';
 import { Button, Panel, Label } from '@sparkpost/matchbox';
 import { SelectWrapper, RadioGroup } from 'src/components/reduxFormWrappers';
-import { ConfirmationModal } from 'src/components';
+import { ConfirmationModal, Abbreviation } from 'src/components';
 import { Card, CardTitle, CardContent } from 'src/components/card';
 import ExternalLink from 'src/components/externalLink';
 import ButtonWrapper from 'src/components/buttonWrapper';
@@ -139,9 +139,10 @@ export const IpForm = props => {
               <CardContent>
                 <p className={styles.CardParagraph}>
                   This feature exists for accounts with a{' '}
-                  <abbr title="Customer Success Manager">CSM</abbr> or dedicated{' '}
-                  <abbr title="Technical Account Manager">TAM</abbr>. We will automatically bind
-                  highly engaged traffic to your cold IP to give it the best chance of warming up.
+                  <Abbreviation title="Customer Success Manager">CSM</Abbreviation> or dedicated{' '}
+                  <Abbreviation title="Technical Account Manager">TAM</Abbreviation>. We will
+                  automatically bind highly engaged traffic to your cold IP to give it the best
+                  chance of warming up.
                 </p>
               </CardContent>
             </Card>

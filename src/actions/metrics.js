@@ -5,8 +5,8 @@ export function fetch({ type = 'FETCH_METRICS', path, params = {}, context }) {
     method: 'GET',
     url: `/v1/metrics/${path}`,
     params: {
-      ...params
-    }
+      ...params,
+    },
   };
 
   if (context) {
@@ -15,7 +15,7 @@ export function fetch({ type = 'FETCH_METRICS', path, params = {}, context }) {
 
   return sparkpostApiRequest({
     type,
-    meta
+    meta,
   });
 }
 

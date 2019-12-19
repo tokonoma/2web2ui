@@ -1,20 +1,22 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Panel, Button, Grid } from '@sparkpost/matchbox';
-import { ArrowDownward, Send } from '@sparkpost/matchbox-icons';
-import { Card, CardTitle, CardContent, CardActions } from 'src/components';
-import ButtonWrapper from 'src/components/buttonWrapper';
+import { Panel } from '@sparkpost/matchbox';
+import { ArrowDownward } from '@sparkpost/matchbox-icons';
 import styles from './GettingStartedGuide.module.scss';
 import { BreadCrumbs, BreadCrumbsItem } from 'src/components';
 import { GuideListItem, GuideListItemTitle, GuideListItemDescription } from './GuideListItem';
-import { GUIDE_IDS, BREADCRUMB_ITEMS } from '../constants';
+import { GUIDE_IDS, LETS_CODE_LIST, SHOW_ME_SPARKPOST_LIST, BREADCRUMB_ITEMS } from '../constants';
 import { UnstyledLink } from '@sparkpost/matchbox';
+import SendingStepList from './SendingStepList';
+import FeatureStepList from './FeaturesStepList';
 
 export const GettingStartedGuide = ({ onboarding = {}, history, setAccountOption }) => {
   const {
     isGuideAtBottom = false,
     active_step,
     send_test_email_completed,
+    explore_analytics_completed,
     invite_collaborator_completed,
+    add_sending_domain_completed,
   } = onboarding;
 
   const setOnboardingAccountOption = (obj = {}) => {
@@ -66,6 +68,14 @@ export const GettingStartedGuide = ({ onboarding = {}, history, setAccountOption
         setOnboardingAccountOption({ send_test_email_completed: true });
         history.push(`/templates?pendo=${GUIDE_IDS.SEND_TEST_EMAIL}`);
         break;
+      case 'Explore Analytics':
+        setOnboardingAccountOption({ explore_analytics_completed: true });
+        if (window.pendo.showGuideById(GUIDE_IDS.EXPLORE_ANALYTICS)) {
+          window.pendo.onGuideAdvanced(1);
+        }
+        history.push(`/reports/summary`);
+
+        break;
       case 'Invite a Collaborator':
         setOnboardingAccountOption({ invite_collaborator_completed: true });
         history.push('/account/users');
@@ -75,34 +85,36 @@ export const GettingStartedGuide = ({ onboarding = {}, history, setAccountOption
     }
   };
 
+  const getDescription = checklist_name => {
+    if (checklist_name === 'Invite a Collaborator')
+      return (
+        <>
+          {
+            'Need help integrating? Pass the ball on to someone else to finish setting up this account.'
+          }
+          <br />
+          {'Or you can '}
+          <UnstyledLink
+            onClick={() => {
+              setAndStoreStepName("Let's Code");
+              setOnboardingAccountOption({ invite_collaborator_completed: true });
+            }}
+          >
+            setup email sending now
+          </UnstyledLink>
+        </>
+      );
+
+    return null;
+  };
+
   const renderStep = () => {
     switch (stepName) {
       case 'Features':
         return (
           <Panel.Section>
             {renderBreadCrumbs()}
-            <Grid>
-              <Grid.Column xs={12}>
-                <Card>
-                  <CardTitle>
-                    <Send size="20" className={styles.SendIcon} /> &nbsp;{`Sending with Sparkpost`}
-                  </CardTitle>
-                  <CardContent>
-                    <p className={styles.FeaturesCardContent}>
-                      Learn how to send emails, integrate our API into your code, and make the most
-                      of our powerful analytics.
-                    </p>
-                  </CardContent>
-                  <CardActions>
-                    <ButtonWrapper>
-                      <Button color="orange" onClick={() => setAndStoreStepName('Sending')}>
-                        Start Sending
-                      </Button>
-                    </ButtonWrapper>
-                  </CardActions>
-                </Card>
-              </Grid.Column>
-            </Grid>
+            <FeatureStepList setAndStoreStepName={setAndStoreStepName} />
           </Panel.Section>
         );
 
@@ -119,118 +131,65 @@ export const GettingStartedGuide = ({ onboarding = {}, history, setAccountOption
             >
               Where Would You Like to Begin?
             </p>
-            <Grid>
-              <Grid.Column xs={12} md={6}>
-                <Card textAlign="center">
-                  <CardContent>
-                    <p className={styles.FeaturesCardContent}>
-                      {`Send your first email in one click and dive right into what SparkPost can do
-                      for your email strategy`}
-                    </p>
-                  </CardContent>
-                  <CardActions>
-                    <ButtonWrapper>
-                      <Button
-                        color="orange"
-                        onClick={() => setAndStoreStepName('Show Me SparkPost')}
-                        className={styles.SendingStepButtons}
-                      >
-                        Show Me SparkPost
-                      </Button>
-                    </ButtonWrapper>
-                  </CardActions>
-                </Card>
-              </Grid.Column>
-              <Grid.Column xs={12} md={6}>
-                <Card textAlign="center">
-                  <CardContent>
-                    <p className={styles.FeaturesCardContent}>
-                      Ready to integrate via SMTP or API? We'll get you set up ASAP so you can start
-                      building with SparkPost
-                    </p>
-                  </CardContent>
-                  <CardActions>
-                    <ButtonWrapper>
-                      <Button
-                        color="orange"
-                        onClick={() => setAndStoreStepName("Let's Code")}
-                        className={styles.SendingStepButtons}
-                      >
-                        Let's Code
-                      </Button>
-                    </ButtonWrapper>
-                  </CardActions>
-                </Card>
-              </Grid.Column>
-            </Grid>
+            <SendingStepList setAndStoreStepName={setAndStoreStepName} />
           </Panel.Section>
         );
+
       case 'Show Me SparkPost':
         return (
           <>
             <Panel.Section>
               {renderBreadCrumbs()}
-              <GuideListItem
-                action={{
-                  name: 'Send Test Email',
-                  onClick: () => handleAction('Send Test Email'),
-                }}
+              <CheckListItem
+                {...SHOW_ME_SPARKPOST_LIST['Send Test Email']}
                 itemCompleted={send_test_email_completed}
-              >
-                <GuideListItemTitle>Send a Test Email</GuideListItemTitle>
-                <GuideListItemDescription>
-                  Send a test email using our starter template.
-                </GuideListItemDescription>
-              </GuideListItem>
+              />
             </Panel.Section>
             <Panel.Section>
-              <GuideListItem
-                action={{
-                  name: 'Explore Analytics',
-                  onClick: () => {},
-                }}
-              >
-                <GuideListItemTitle>Explore Analytics</GuideListItemTitle>
-                <GuideListItemDescription>
-                  Get acquainted with our powerful analytics to make the most of your sending
-                  strategy.
-                </GuideListItemDescription>
-              </GuideListItem>
+              <CheckListItem
+                {...SHOW_ME_SPARKPOST_LIST['Explore Analytics']}
+                itemCompleted={explore_analytics_completed}
+              />
             </Panel.Section>
             <Panel.Section>
-              <GuideListItem
-                action={{
-                  name: 'Invite a Collaborator',
-                  onClick: () => handleAction('Invite a Collaborator'),
-                }}
+              <CheckListItem
+                {...SHOW_ME_SPARKPOST_LIST['Invite a Collaborator']}
                 itemCompleted={invite_collaborator_completed}
-              >
-                <GuideListItemTitle>Invite Your Team</GuideListItemTitle>
-                <GuideListItemDescription>
-                  {
-                    'Need help integrating? Pass the ball on to someone else to finish setting up this account.'
-                  }
-                  <br />
-                  {'Or you can '}
-                  <UnstyledLink
-                    onClick={() => {
-                      setAndStoreStepName("Let's Code");
-                      setOnboardingAccountOption({ invite_collaborator_completed: true });
-                    }}
-                  >
-                    setup email sending now
-                  </UnstyledLink>
-                </GuideListItemDescription>
-              </GuideListItem>
+              />
             </Panel.Section>
           </>
         );
       case "Let's Code":
-        return <Panel.Section>{renderBreadCrumbs()}</Panel.Section>;
+        return (
+          <>
+            <Panel.Section>
+              {renderBreadCrumbs()}
+              <CheckListItem
+                {...LETS_CODE_LIST['Add Sending Domain']}
+                itemCompleted={add_sending_domain_completed}
+              />
+            </Panel.Section>
+            <Panel.Section>
+              <CheckListItem {...LETS_CODE_LIST['Generate API Key']} />
+            </Panel.Section>
+          </>
+        );
       default:
         return null;
     }
   };
+  const CheckListItem = ({ name, title, description, itemCompleted }) => (
+    <GuideListItem
+      action={{
+        name: name,
+        onClick: () => handleAction(name),
+      }}
+      itemCompleted={itemCompleted}
+    >
+      <GuideListItemTitle>{title}</GuideListItemTitle>
+      <GuideListItemDescription>{getDescription(name) || description}</GuideListItemDescription>
+    </GuideListItem>
+  );
   return (
     <Panel title="Getting Started" actions={actions}>
       {renderStep()}

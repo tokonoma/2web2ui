@@ -31,6 +31,7 @@ export { default as Subaccount } from './labels/Subaccount';
 export { default as ButtonWrapper } from './buttonWrapper';
 export { default as IconButton } from './iconButton';
 export { default as MultiEmailField } from './multiEmailField';
+export { default as Abbreviation } from './abbreviation';
 
 export * from './breadcrumbs';
 export * from './collection';

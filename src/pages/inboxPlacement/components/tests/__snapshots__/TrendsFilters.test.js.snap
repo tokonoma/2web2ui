@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Inbox Placement Trends Filters Matches snapshot test with default filters available 1`] = `
+<Grid>
+  <Grid.Column
+    lg={6}
+    xs={12}
+  >
+    <div
+      className="DatePicker"
+    >
+      <AppDatePicker
+        disabled={false}
+        from={2019-07-11T16:30:00.000Z}
+        onChange={[Function]}
+        preventFuture={true}
+        relativeDateOptions={
+          Array [
+            "7days",
+            "30days",
+            "90days",
+            "custom",
+          ]
+        }
+        roundToPrecision={true}
+        to={2019-08-10T16:30:00.000Z}
+        validate={[MockFunction]}
+      />
+    </div>
+  </Grid.Column>
+  <Grid.Column
+    lg={6}
+    xs={12}
+  >
+    <div
+      className="SearchFilter"
+    >
+      <Connect(InboxPlacementTypeahead)
+        filters={
+          Object {
+            "dateRange": Object {
+              "from": "2019-07-11T16:30:00.000Z",
+              "to": "2019-08-10T16:30:00.000Z",
+            },
+            "tags": Object {},
+          }
+        }
+        onChange={[Function]}
+      />
+    </div>
+  </Grid.Column>
+</Grid>
+`;
