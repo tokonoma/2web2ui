@@ -14,6 +14,7 @@ describe('GettingStartedGuide', () => {
     history: {
       push: jest.fn(),
     },
+    listApiKeys: jest.fn(),
     setAccountOption: jest.fn(),
   };
 

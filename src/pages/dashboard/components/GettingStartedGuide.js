@@ -14,7 +14,12 @@ export const GettingStartedGuide = ({
   history,
   setAccountOption,
   hasApiKeysForSending,
+  listApiKeys,
 }) => {
+  useEffect(() => {
+    listApiKeys({ id: 0 });
+  }, [listApiKeys]);
+
   const {
     isGuideAtBottom = false,
     active_step,
@@ -154,7 +159,10 @@ export const GettingStartedGuide = ({
               />
             </Panel.Section>
             <Panel.Section>
-              <CheckListItem {...SHOW_ME_SPARKPOST_LIST['Explore Analytics']} />
+              <CheckListItem
+                {...SHOW_ME_SPARKPOST_LIST['Explore Analytics']}
+                itemCompleted={explore_analytics_completed}
+              />
             </Panel.Section>
             <Panel.Section>
               <CheckListItem
