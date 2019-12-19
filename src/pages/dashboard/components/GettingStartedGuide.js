@@ -9,7 +9,17 @@ import { UnstyledLink } from '@sparkpost/matchbox';
 import SendingStepList from './SendingStepList';
 import FeatureStepList from './FeaturesStepList';
 
-export const GettingStartedGuide = ({ onboarding = {}, history, setAccountOption }) => {
+export const GettingStartedGuide = ({
+  onboarding = {},
+  history,
+  setAccountOption,
+  hasApiKeysForSending,
+  listApiKeys,
+}) => {
+  useEffect(() => {
+    listApiKeys({ id: 0 });
+  }, [listApiKeys]);
+
   const {
     isGuideAtBottom = false,
     active_step,
@@ -79,6 +89,9 @@ export const GettingStartedGuide = ({ onboarding = {}, history, setAccountOption
       case 'Invite a Collaborator':
         setOnboardingAccountOption({ invite_collaborator_completed: true });
         history.push('/account/users');
+        break;
+      case 'Generate API Key':
+        history.push('/account/api-keys');
         break;
       default:
         break;
@@ -170,7 +183,10 @@ export const GettingStartedGuide = ({ onboarding = {}, history, setAccountOption
               />
             </Panel.Section>
             <Panel.Section>
-              <CheckListItem {...LETS_CODE_LIST['Generate API Key']} />
+              <CheckListItem
+                {...LETS_CODE_LIST['Generate API Key']}
+                itemCompleted={hasApiKeysForSending}
+              />
             </Panel.Section>
           </>
         );
