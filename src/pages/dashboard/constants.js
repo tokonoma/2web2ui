@@ -35,7 +35,7 @@ export const LETS_CODE_LIST = {
   },
   'View Developer Docs': {
     name: 'View Developer Docs',
-    title: 'Check out the Documentation',
+    title: 'Check Out the Documentation',
     description:
       'Visit our developer docs for all the details on our API and SMTP powered delivery.',
   },
