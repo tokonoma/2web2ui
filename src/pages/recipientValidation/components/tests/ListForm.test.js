@@ -48,7 +48,7 @@ describe('ListForm', () => {
   });
 
   it('should not submit csv when over size limit', () => {
-    wrapper.setProps({ ...props, file: { size: 20000001 } });
+    wrapper.setProps({ ...props, file: { size: 20971521 } });
     expect(props.uploadList).not.toHaveBeenCalled();
   });
 
