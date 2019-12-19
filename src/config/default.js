@@ -56,7 +56,7 @@ const config = identifier => ({
     cookieName: 'heroku-nav-data',
   },
   maxUploadSizeBytes: 20000000,
-  maxRecipVerifUploadSizeBytes: 20000000,
+  maxRecipVerifUploadSizeBytes: 20971520,
   metricsPrecisionMap: [
     { time: 60, value: '1min', format: 'ha' },
     { time: 60 * 2, value: '5min', format: 'ha' },
