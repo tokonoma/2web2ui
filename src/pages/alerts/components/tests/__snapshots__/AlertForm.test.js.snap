@@ -120,7 +120,13 @@ exports[`Alert Form Component should render the alert form component correctly 1
                 multiline={true}
                 name="emails"
                 placeholder="example@email.com"
-                validate={[Function]}
+                validate={
+                  Array [
+                    [Function],
+                    [Function],
+                    [Function],
+                  ]
+                }
               />
             </Expandable>
             <Expandable
