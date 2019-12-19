@@ -107,17 +107,5 @@ Array [
       "url": "/v1/api-keys",
     },
   ],
-  Array [
-    Object {
-      "data": undefined,
-      "headers": Object {
-        "Authorization": "mock-access-token",
-      },
-      "method": "get",
-      "params": undefined,
-      "responseType": "json",
-      "url": "/v1/sending-domains",
-    },
-  ],
 ]
 `;

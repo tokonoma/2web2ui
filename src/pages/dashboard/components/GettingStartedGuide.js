@@ -16,10 +16,14 @@ export const GettingStartedGuide = ({
   hasSendingDomains,
   hasApiKeysForSending,
   listApiKeys,
+  listSendingDomains,
 }) => {
   useEffect(() => {
     listApiKeys({ id: 0 });
   }, [listApiKeys]);
+  useEffect(() => {
+    listSendingDomains();
+  }, [listSendingDomains]);
 
   const {
     isGuideAtBottom = false,
