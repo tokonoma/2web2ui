@@ -14,6 +14,7 @@ describe('GettingStartedGuide', () => {
     history: {
       push: jest.fn(),
     },
+    listApiKeys: jest.fn(),
     setAccountOption: jest.fn(),
   };
 
@@ -98,7 +99,6 @@ describe('GettingStartedGuide', () => {
       invite_collaborator_completed: true,
     });
   });
-
   it("should render two list items when on step Let's Code ", () => {
     const instance = subject({ onboarding: { active_step: "Let's Code" } });
     expect(instance.find('CheckListItem')).toHaveLength(3);
@@ -121,5 +121,21 @@ describe('GettingStartedGuide', () => {
       'to',
       'https://developers.sparkpost.com/api',
     );
+  });
+
+  it("should route to API key page from Let's Code list", () => {
+    const instance = subject(
+      {
+        onboarding: { active_step: "Let's Code" },
+        hasApiKeysForSending: true,
+      },
+      mount,
+    );
+    instance
+      .find('GuideListItem')
+      .at(1)
+      .prop('action')
+      .onClick();
+    expect(defaultProps.history.push).toHaveBeenCalledWith('/account/api-keys');
   });
 });
