@@ -123,6 +123,8 @@ exports[`Alert Form Component should render the alert form component correctly 1
                 validate={
                   Array [
                     [Function],
+                    [Function],
+                    [Function],
                   ]
                 }
               />
