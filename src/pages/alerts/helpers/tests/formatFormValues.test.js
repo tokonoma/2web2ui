@@ -11,14 +11,14 @@ const formData = {
   sending_ip: [],
   mailbox_provider: [],
   sending_domain: [],
-  single_filter: { filter_type: 'none', filter_values: []},
+  single_filter: { filter_type: 'none', filter_values: [] },
   source: 'raw',
   operator: 'lt',
   value: 80,
   emails,
   slack: '',
   webhook: '',
-  muted: false
+  muted: false,
 };
 
 const apiData = {
@@ -29,89 +29,85 @@ const apiData = {
   threshold_evaluator: {
     source: 'raw',
     operator: 'lt',
-    value: 80
+    value: 80,
   },
   channels: { emails: emailAsArray },
-  muted: false
+  muted: false,
 };
 
-const testCases =
-    {
-      'master and all subaccounts': {
-        formData: { ...formData },
-        apiData: { ...apiData }
+const testCases = {
+  'master and all subaccounts': {
+    formData: { ...formData },
+    apiData: { ...apiData },
+  },
+  'any subaccount': {
+    formData: { ...formData, subaccounts: [-2] },
+    apiData: { ...apiData, subaccounts: undefined, any_subaccount: true },
+  },
+  'defaults empty subaccount to -1': {
+    formData: { ...formData, subaccounts: [] },
+    apiData: { ...apiData, subaccounts: [-1], any_subaccount: undefined },
+  },
+  'select subaccounts': {
+    formData: { ...formData, subaccounts: [0, 1] },
+    apiData: { ...apiData, subaccounts: [0, 1] },
+  },
+  'single filter': {
+    formData: {
+      ...formData,
+      single_filter: { filter_type: 'mailbox_provider', filter_values: ['a'] },
+    },
+    apiData: { ...apiData, filters: [{ filter_type: 'mailbox_provider', filter_values: ['a'] }] },
+  },
+  'single filter with no facet selected': {
+    formData: { ...formData, single_filter: { filter_type: 'none', filter_values: [] } },
+    apiData: { ...apiData },
+  },
+  'only sending Ip': {
+    formData: { ...formData, metric: 'block_bounce_rate', sending_ip: ['a', 'b'] },
+    apiData: {
+      ...apiData,
+      metric: 'block_bounce_rate',
+      filters: [{ filter_type: 'sending_ip', filter_values: ['a', 'b'] }],
+    },
+  },
+  'sending Ip, mailbox provider, and sending domain': {
+    formData: {
+      ...formData,
+      metric: 'block_bounce_rate',
+      sending_ip: ['a'],
+      mailbox_provider: ['b'],
+      sending_domain: ['c'],
+    },
+    apiData: {
+      ...apiData,
+      metric: 'block_bounce_rate',
+      filters: [
+        { filter_type: 'sending_ip', filter_values: ['a'] },
+        { filter_type: 'mailbox_provider', filter_values: ['b'] },
+        { filter_type: 'sending_domain', filter_values: ['c'] },
+      ],
+    },
+  },
+  'with slack and webhook channels': {
+    formData: { ...formData, slack: 'target1', webhook: 'target2' },
+    apiData: {
+      ...apiData,
+      channels: {
+        emails: emailAsArray,
+        slack: { target: 'target1' },
+        webhook: { target: 'target2' },
       },
-      'any subaccount': {
-        formData: { ...formData, subaccounts: [-2]},
-        apiData: { ...apiData, subaccounts: undefined, any_subaccount: true }
-      },
-      'defaults empty subaccount to -1': {
-        formData: { ...formData, subaccounts: []},
-        apiData: { ...apiData, subaccounts: [-1], any_subaccount: undefined }
-      },
-      'select subaccounts': {
-        formData: { ...formData, subaccounts: [0,1]},
-        apiData: { ...apiData, subaccounts: [0,1]}
-      },
-      'single filter': {
-        formData: { ...formData, single_filter: { filter_type: 'mailbox_provider', filter_values: ['a']}},
-        apiData: { ...apiData, filters: [{ filter_type: 'mailbox_provider', filter_values: ['a']}]}
-      },
-      'single filter with no facet selected': {
-        formData: { ...formData, single_filter: { filter_type: 'none', filter_values: []}},
-        apiData: { ...apiData }
-      },
-      'only sending Ip': {
-        formData: { ...formData, metric: 'block_bounce_rate', sending_ip: ['a','b']},
-        apiData: {
-          ...apiData,
-          metric: 'block_bounce_rate',
-          filters: [{ filter_type: 'sending_ip', filter_values: ['a','b']}]}
-      },
-      'sending Ip, mailbox provider, and sending domain': {
-        formData: { ...formData, metric: 'block_bounce_rate', sending_ip: ['a'], mailbox_provider: ['b'], sending_domain: ['c']},
-        apiData: {
-          ...apiData,
-          metric: 'block_bounce_rate',
-          filters: [
-            { filter_type: 'sending_ip', filter_values: ['a']},
-            { filter_type: 'mailbox_provider', filter_values: ['b']},
-            { filter_type: 'sending_domain', filter_values: ['c']}
-          ]
-        }
-      },
-      'with slack and webhook channels': {
-        formData: { ...formData, slack: 'target1', webhook: 'target2' },
-        apiData: {
-          ...apiData,
-          channels: {
-            emails: emailAsArray,
-            slack: { target: 'target1' },
-            webhook: { target: 'target2' }
-          }
-        }
-      },
-      'with duplicate email addresses': {
-        formData: { ...formData,
-          channels: {
-            email: [...emailAsArray, ...Array(5).fill(emailAsArray[0])]
-          },
-          slack: 'target1',
-          webhook: 'target2' },
-        apiData: {
-          ...apiData,
-          channels: {
-            emails: emailAsArray,
-            slack: { target: 'target1' },
-            webhook: { target: 'target2' }
-          }
-        }
-      }
-    };
+    },
+  },
+};
 
 describe('formatFormValues', () => {
-  cases('should correctly transform the data for', ({ formData, apiData }) => {
-    expect(formatFormValues(formData)).toEqual(apiData);
-  }, testCases);
+  cases(
+    'should correctly transform the data for',
+    ({ formData, apiData }) => {
+      expect(formatFormValues(formData)).toEqual(apiData);
+    },
+    testCases,
+  );
 });
-

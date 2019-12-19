@@ -12,10 +12,11 @@ export default function formatFormValues(values) {
     'mailbox_provider',
     'sending_domain',
     'single_filter',
-    ...NOTIFICATION_CHANNELS];
+    ...NOTIFICATION_CHANNELS,
+  ];
   const { metric, value, source, operator, single_filter, subaccounts } = values;
 
-  const any_subaccount = (subaccounts.length === 1 && subaccounts[0] === -2) ? true : undefined;
+  const any_subaccount = subaccounts.length === 1 && subaccounts[0] === -2 ? true : undefined;
 
   //If subaccounts is empty, default to '-1'
   if (subaccounts.length === 0) {
@@ -31,22 +32,23 @@ export default function formatFormValues(values) {
    */
   const { filterType } = getFormSpec(metric);
   const getFiltersMap = {
-    single: (() => single_filter.filter_type === 'none' ? [] : [single_filter]),
-    multi: (() => REALTIME_FILTERS.map((filter) => (
-      values[filter].length > 0 &&
-          {
+    single: () => (single_filter.filter_type === 'none' ? [] : [single_filter]),
+    multi: () =>
+      REALTIME_FILTERS.map(
+        filter =>
+          values[filter].length > 0 && {
             filter_type: filter,
-            filter_values: values[filter]
-          })).filter(Boolean)
-    ),
-    default: (() => [])
+            filter_values: values[filter],
+          },
+      ).filter(Boolean),
+    default: () => [],
   };
   const filters = (getFiltersMap[filterType] || getFiltersMap.default)();
 
   const threshold_evaluator = {
     operator,
     source,
-    value
+    value,
   };
 
   const channels = {};
@@ -55,7 +57,7 @@ export default function formatFormValues(values) {
   const webhook = (values.webhook || '').trim();
 
   if (emails) {
-    channels.emails = [...new Set(multilineStringToArray(emails))];
+    channels.emails = multilineStringToArray(emails);
   }
 
   if (slack) {
@@ -71,7 +73,7 @@ export default function formatFormValues(values) {
     any_subaccount,
     filters,
     threshold_evaluator,
-    channels
+    channels,
   };
 
   return _.omit({ ...values, ...keysToChange }, keysToOmit);
