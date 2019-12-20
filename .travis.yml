@@ -21,14 +21,14 @@ before_script: greenkeeper-lockfile-update
 
 jobs:
   include:
-    - stage: test
+    - stage: test-and-build
       name: 'Unit Testing'
       script: npm run test-ci
-    - stage: test
+    - stage: test-and-build
       name: 'Integration Testing'
       script:
         - npm run test-integration-ci
-    - stage: build
+    - stage: test-and-build
       name: 'Verify Build'
       script:
         - npm run build
