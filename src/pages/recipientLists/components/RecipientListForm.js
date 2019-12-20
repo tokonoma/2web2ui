@@ -70,6 +70,8 @@ export class RecipientListForm extends Component {
       asyncValidate,
     } = this.props;
 
+    console.log('this.props', this.props);
+
     const submitDisabled = pristine || !valid || submitting;
 
     let actionText = 'Create';
