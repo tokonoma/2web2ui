@@ -28,5 +28,9 @@ jobs:
       name: 'Integration Testing'
       script:
         - npm run test-integration-ci
+    - stage: build
+      name: 'Verify Build'
+      script:
+        - npm run build
 
 after_script: greenkeeper-lockfile-upload
