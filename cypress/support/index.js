@@ -13,8 +13,8 @@
 // https://on.cypress.io/configuration
 // ***********************************************************
 
-// Import commands.js using ES2015 syntax:
-import './commands'
+import './commands';
 
-// Alternatively you can use CommonJS syntax:
-// require('./commands')
+Cypress.Cookies.defaults({
+  whitelist: ['__ssid', 'auth'], // Preserves signed-in state between route changes
+});

@@ -1,0 +1,8 @@
+{
+  "results": {
+    "key": "this-is-a-fake-api-key",
+    "short_key": "123f",
+    "label": "Send Email Key (auto-generated)",
+    "link": { "href": "/api/v1/api-keys/mock-url-to-api-key" }
+  }
+}

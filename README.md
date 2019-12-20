@@ -18,9 +18,12 @@ Then `npm install` to install deps.
 
 ## Local development
 
-`npm start` will start a dev server backed by api.sparkpost.test with live reload on
+`npm start` will start a dev server backed by api.sparkpost.test with live reload on <<<<<<< HEAD
 http://localhost:3100/ and http://app.sparkpost.test. Additionally, a Storybook dev server will
-start that provides supporting component documentation.
+start that provides supporting component documentation. ======= http://localhost:3100/ and
+http://app.sparkpost.test
+
+> > > > > > > FE-716 - Add distinct integration tests, set up Travis CI to run said tests
 
 ## Tests
 
@@ -47,6 +50,33 @@ npm run test-e2e
 
 **NOTE:** The first time tests are run, the developer is prompted to answer some questions that will
 then generate an env file that is ignored by source control.
+
+To run end-to-end tests in headless mode:
+
+```
+npm run test-e2e-headless
+```
+
+### Integration Testing
+
+Integration tests run in real browser, however, largely use
+[fixtures](https://docs.cypress.io/api/commands/fixture.html) instead of true network requests. For
+clear definitions with regards to the different types of automated testing, try reading
+[Static vs Unit vs Integration vs E2E Testing for Frontend Apps](https://kentcdodds.com/blog/unit-vs-integration-vs-e2e-tests)
+by Kent C. Dodds.
+
+```
+npm run test-integration
+```
+
+To run the integration tests in headless mode:
+
+```
+npm run test-integration-headless
+```
+
+**NOTE:** The first time _either_ end-to-end or integration tests are run, the developer is prompted
+to answer some questions that will then generate an env file that is ignored by source control.
 
 ## Learning Resources
 

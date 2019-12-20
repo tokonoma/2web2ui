@@ -28,40 +28,40 @@ const { recaptcha } = config;
  * verifyCallback: this is triggered upon user completes recaptcha challenge successfuly. we pass the data we've received
  */
 
-
 export class JoinForm extends Component {
   state = {
     reCaptchaReady: false,
     reCaptchaInstance: null,
-    recaptcha_response: null
+    recaptcha_response: null,
   };
 
   reCaptchaLoaded = () => {
     this.setState({ reCaptchaReady: true });
   };
 
-  onSubmit = (formValues) => this.props.onSubmit({ ...formValues, recaptcha_response: this.state.recaptcha_response, recaptcha_type: 'invisible' })
+  onSubmit = formValues => {
+    this.props.onSubmit({
+      ...formValues,
+      recaptcha_response: this.state.recaptcha_response,
+      recaptcha_type: 'invisible',
+    });
+  };
 
-  recaptchaVerifyCallback = (response) => {
+  recaptchaVerifyCallback = response => {
     this.state.reCaptchaInstance.reset();
     this.setState({ recaptcha_response: response }, this.props.handleSubmit(this.onSubmit));
   };
 
   executeRecaptcha = () => this.state.reCaptchaInstance.execute();
 
-  linkRecaptcha = (instance) => {
+  linkRecaptcha = instance => {
     if (!this.state.reCaptchaInstance) {
       this.setState({ reCaptchaInstance: instance });
     }
   };
 
   render() {
-    const {
-      loading,
-      pristine,
-      invalid,
-      submitting
-    } = this.props;
+    const { loading, pristine, invalid, submitting } = this.props;
 
     const { reCaptchaReady } = this.state;
 
@@ -72,72 +72,76 @@ export class JoinForm extends Component {
         <Grid className={styles.spacer}>
           <Grid.Column xs={12} md={6} lg={6}>
             <Field
-              name='first_name'
+              name="first_name"
               component={TextFieldWrapper}
-              label='First Name'
-              autoComplete='given-name'
+              label="First Name"
+              autoComplete="given-name"
               validate={required}
               disabled={pending}
-              placeholder='Leslie'
+              placeholder="Leslie"
             />
           </Grid.Column>
           <Grid.Column xs={12} md={6} lg={6}>
             <Field
-              name='last_name'
+              name="last_name"
               component={TextFieldWrapper}
-              label='Last Name'
-              autoComplete='family-name'
+              label="Last Name"
+              autoComplete="family-name"
               validate={required}
               disabled={pending}
-              placeholder='Knope'
+              placeholder="Knope"
             />
           </Grid.Column>
         </Grid>
         <Field
-          name='email'
+          name="email"
           component={TextFieldWrapper}
-          label='Email'
+          label="Email"
           validate={[required, email]}
           disabled={pending}
-          autoComplete='username email'
-          placeholder='leslie.knope@pawnee.indiana.state.us.gov'
+          autoComplete="username email"
+          placeholder="leslie.knope@pawnee.indiana.state.us.gov"
         />
         <Field
-          name='password'
+          name="password"
           component={TextFieldWrapper}
-          label='Password'
+          label="Password"
           validate={[required, minLength(8), endsWithWhitespace]}
           disabled={!reCaptchaReady || loading}
-          type='password'
-          autoComplete='new-password'
-          placeholder='••••••••••'
+          type="password"
+          autoComplete="new-password"
+          placeholder="••••••••••"
         />
 
         <Checkbox.Group>
           <Field
-            name='email_opt_in'
-            id='email_opt_in'
+            name="email_opt_in"
+            id="email_opt_in"
             component={CheckboxWrapper}
             disabled={pending}
-            type='checkbox'
+            type="checkbox"
             label={<span>I'm happy to receive marketing email from SparkPost</span>}
           />
 
           <Field
             name="tou_accepted"
-            id='tou_accepted'
+            id="tou_accepted"
             component={CheckboxWrapper}
             type="checkbox"
             disabled={pending}
             validate={required}
-            label={<span>I agree to SparkPost's <UnstyledLink to={LINKS.TOU} external>Terms of Use</UnstyledLink></span>}
+            label={
+              <span>
+                I agree to SparkPost's{' '}
+                <UnstyledLink to={LINKS.TOU} external>
+                  Terms of Use
+                </UnstyledLink>
+              </span>
+            }
           />
         </Checkbox.Group>
 
-        <Button primary
-          disabled={pending || pristine || invalid}
-          onClick={this.executeRecaptcha}
-        >
+        <Button primary disabled={pending || pristine || invalid} onClick={this.executeRecaptcha}>
           {loading ? 'Loading' : 'Create Account'}
         </Button>
 
@@ -145,23 +149,22 @@ export class JoinForm extends Component {
           ref={this.linkRecaptcha}
           sitekey={recaptcha.invisibleKey}
           size="invisible"
-          render='explicit'
+          render="explicit"
           onloadCallback={this.reCaptchaLoaded}
           verifyCallback={this.recaptchaVerifyCallback}
         />
-
       </form>
     );
   }
 }
 
-const mapStateToProps = (state, props) => ({
+const mapStateToProps = state => ({
   initialValues: {
     tou_accepted: false,
-    email_opt_in: false
+    email_opt_in: false,
   },
   loading: state.account.createLoading || state.auth.loginPending,
-  formValues: getFormValues(FORMS.JOIN)(state)
+  formValues: getFormValues(FORMS.JOIN)(state),
 });
 
 const RegisterAccountForm = reduxForm({ form: FORMS.JOIN })(JoinForm);

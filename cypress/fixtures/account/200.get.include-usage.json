@@ -1,0 +1,43 @@
+{
+  "results": {
+    "anniversary_date": "2019-12-17T08:00:00.000Z",
+    "company_name": null,
+    "country_code": "",
+    "created": "2019-12-17T19:22:36.246Z",
+    "customer_id": 279309,
+    "service_level": "standard",
+    "status": "active",
+    "status_reason_category": "",
+    "status_updated": "2019-12-17T19:22:36.246Z",
+    "tfa_required": false,
+    "updated": "2019-12-17T19:42:53.189Z",
+    "subscription": {
+      "code": "50K-starter-0519",
+      "name": "50K Starter",
+      "plan_volume": 50000,
+      "period": "month",
+      "recurring_charge": 20,
+      "overage": 1,
+      "self_serve": true,
+      "type": "default"
+    },
+    "options": {},
+    "support": { "phone": false, "online": true },
+    "usage": {
+      "timestamp": "2019-12-17T19:42:00.000Z",
+      "day": {
+        "limit": 1000,
+        "used": 0,
+        "start": "2019-12-16T19:45:00.000Z",
+        "end": "2019-12-17T19:45:00.000Z"
+      },
+      "month": {
+        "limit": 150000,
+        "used": 0,
+        "start": "2019-12-17T08:00:00.000Z",
+        "end": "2020-01-17T08:00:00.000Z"
+      },
+      "sandbox": { "limit": 5, "used": 0 }
+    }
+  }
+}

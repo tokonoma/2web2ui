@@ -1,12 +1,32 @@
 language: node_js
 node_js:
-  - "10.8"
+  - '10.8'
+
+addons:
+  apt:
+    packages:
+      - libgconf-2-4 # Required to run Cypress
+
 cache:
   directories:
     - build # shows bundle size diff per file/chunk
-    - "$HOME/.npm" # to avoid fetching modules from npm every time
+    - '$HOME/.npm' # to avoid fetching modules from npm every time
+    - ~/.cache # for caching the (rather large) Cypress binary
+
 before_install: npm install -g greenkeeper-lockfile@1
+
 install: npm ci --loglevel http
+
 before_script: greenkeeper-lockfile-update
-script: npm run travis
+
+jobs:
+  include:
+    - stage: test
+      name: 'Unit Testing'
+      script: npm run test-ci
+    - stage: test
+      name: 'Integration Testing'
+      script:
+        - npm run test-integration-ci
+
 after_script: greenkeeper-lockfile-upload
