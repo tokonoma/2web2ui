@@ -16,6 +16,7 @@ describe('GettingStartedGuide', () => {
     },
     listApiKeys: jest.fn(),
     setAccountOption: jest.fn(),
+    listSendingDomains: jest.fn(),
   };
 
   const subject = (props, func = shallow) =>
@@ -65,7 +66,7 @@ describe('GettingStartedGuide', () => {
     );
   });
 
-  it('should navigate to summary report when Exlplore Analytics button is clicked', () => {
+  it('should navigate to summary report when Explore Analytics button is clicked', () => {
     const instance = subject({ onboarding: { active_step: 'Show Me SparkPost' } }, mount);
 
     instance
@@ -118,5 +119,20 @@ describe('GettingStartedGuide', () => {
       .prop('action')
       .onClick();
     expect(defaultProps.history.push).toHaveBeenCalledWith('/account/api-keys');
+  });
+  it('should navigate to sending domains page when Add Sending Domain is clicked', () => {
+    const instance = subject({ onboarding: { active_step: "Let's Code" } }, mount);
+    instance
+      .find('GuideListItem')
+      .at(0)
+      .prop('action')
+      .onClick();
+    expect(defaultProps.history.push).toHaveBeenCalledWith(`/account/sending-domains`);
+  });
+  it('should mark checklist completed when the user has sending domains setup', () => {
+    const instance = subject({
+      onboarding: { active_step: "Let's Code", hasSendingDomains: true },
+    });
+    expect(instance.find({ name: 'Add Sending Domain' }).props('itemCompleted')).toBeTruthy();
   });
 });

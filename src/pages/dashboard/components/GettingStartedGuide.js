@@ -13,12 +13,17 @@ export const GettingStartedGuide = ({
   onboarding = {},
   history,
   setAccountOption,
+  hasSendingDomains,
   hasApiKeysForSending,
   listApiKeys,
+  listSendingDomains,
 }) => {
   useEffect(() => {
     listApiKeys({ id: 0 });
   }, [listApiKeys]);
+  useEffect(() => {
+    listSendingDomains();
+  }, [listSendingDomains]);
 
   const {
     isGuideAtBottom = false,
@@ -26,13 +31,13 @@ export const GettingStartedGuide = ({
     send_test_email_completed,
     explore_analytics_completed,
     invite_collaborator_completed,
-    add_sending_domain_completed,
   } = onboarding;
 
   const setOnboardingAccountOption = (obj = {}) => {
     setAccountOption('onboarding', obj);
   };
 
+  //TODO: set isGuideAtBottom to true if all the CheckLists are completed.
   const actions = isGuideAtBottom
     ? null
     : [
@@ -92,6 +97,9 @@ export const GettingStartedGuide = ({
         break;
       case 'Generate API Key':
         history.push('/account/api-keys');
+        break;
+      case 'Add Sending Domain':
+        history.push(`/account/sending-domains`);
         break;
       default:
         break;
@@ -179,7 +187,7 @@ export const GettingStartedGuide = ({
               {renderBreadCrumbs()}
               <CheckListItem
                 {...LETS_CODE_LIST['Add Sending Domain']}
-                itemCompleted={add_sending_domain_completed}
+                itemCompleted={hasSendingDomains}
               />
             </Panel.Section>
             <Panel.Section>
