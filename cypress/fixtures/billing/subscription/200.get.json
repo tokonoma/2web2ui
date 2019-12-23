@@ -1,0 +1,17 @@
+{
+  "results": {
+  "bill_cycle_day": 5,
+  "pending_downgrades": [],
+  "products": [
+    {
+      "plan": "50K-starter-0519",
+      "product": "messaging"
+    },
+    {
+      "plan": "online-support",
+      "product": "online_support"
+    }
+  ],
+  "type": "active"
+}
+}
