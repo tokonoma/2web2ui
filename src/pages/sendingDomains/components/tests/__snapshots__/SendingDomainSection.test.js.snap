@@ -31,6 +31,7 @@ exports[`Component: SendingDomainSection should render Right section 1`] = `
 exports[`Component: SendingDomainSection should render sending domain section 1`] = `
 <div
   className="SendingDomainSection"
+  data-id="sending-domain-title"
 >
   <hr
     className="Hr"
