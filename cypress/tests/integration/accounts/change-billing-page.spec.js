@@ -37,21 +37,25 @@ describe('Billing Page', () => {
       response: '@billingPlansGet',
     });
 
-    cy.server();
-    cy.fixture('brightback/deliverability/200.post.json').as('deliverabilityGet');
-    cy.route({
-      method: 'GET',
-      url:
-        '/api/v1/deliverability?metrics=count_sent,count_unique_confirmed_opened_approx,count_accepted&precision=day&from=2019-12-16T17:04&to=2019-12-23T17:04&delimiter=,&timezone=America%2FNew_York',
-      response: '@deliverabilityGet',
-    });
-
     cy.visit('/account/billing/plan');
   });
 
   it('on downgrading plan renders section with changes to features', () => {
+    cy.server();
+    cy.fixture('metrics/deliverability/200.get.json').as('deliverabilityGet');
+    cy.route({
+      method: 'GET',
+      url: '/api/v1/metrics/deliverability**/**',
+      response: '@deliverabilityGet',
+    });
+    cy.server();
+    cy.fixture('metrics/precancel/200.post.json').as('precancelPost');
+    cy.route({
+      method: 'POST',
+      url: 'https://app.brightback.com/precancel',
+      response: '@precancelPost',
+    });
     cy.get('[data-id=select-plan-free500-0419]').click();
-
-    // cy.contains('include', 'Changes to Features');
+    cy.findAllByText('Changes to Features').should('exist');
   });
 });
