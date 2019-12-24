@@ -8,7 +8,7 @@
   },
   "engineStrict": true,
   "scripts": {
-    "start": "nf start --port 3100",
+    "start": "FORCE_COLOR=true nf start --port 3100",
     "start-app": "REACT_APP_VERSION=local-$USER-$(git rev-parse HEAD) node scripts/start.js",
     "build": "node scripts/build.js",
     "serve": "http-server build -p 3100 --silent",
@@ -23,7 +23,7 @@
     "test-e2e-headless-ci": "npm run test-e2e-headless -- --config baseUrl=http://127.0.0.1:3100",
     "test-e2e-ci": "start-server-and-test serve http://127.0.0.1:3100 test-e2e-headless-ci",
     "coveralls": "cat ./build-reports/lcov.info | coveralls",
-    "storybook-dev": "start-storybook --port 9001 --config-dir .storybook --docs --quiet",
+    "storybook-dev": "start-storybook --port 3101 --config-dir .storybook --docs --quiet",
     "storybook-build": "build-storybook --config-dir .storybook --output-dir .out --docs",
     "travis": "npm run test-ci && npm run build && (npm run coveralls || exit 0)"
   },
