@@ -1,4 +1,5 @@
 import * as billingInfo from '../accountBillingInfo';
+import _ from 'lodash';
 
 describe('Selector: current plan', () => {
   let state;
@@ -167,6 +168,7 @@ describe('plan selector', () => {
         billing: {},
       },
       billing: {
+        subscription: { type: 'active' },
         plans: [
           { code: 'pub', status: 'public' },
           { code: 'pub-free', status: 'public', tier: 'test', isFree: true },
@@ -184,33 +186,41 @@ describe('plan selector', () => {
 
   describe('selectAvailablePlans', () => {
     it('should return active plans', () => {
-      expect(billingInfo.selectAvailablePlans(state)).toMatchSnapshot();
+      const plans = billingInfo.selectAvailablePlans(state);
+      expect(_.every(plans, ({ awsMarketplace }) => !awsMarketplace)).toBeTruthy();
     });
 
     it('should return active paid plans', () => {
-      state.account.subscription.self_serve = false;
-      expect(billingInfo.selectAvailablePlans(state)).toMatchSnapshot();
+      state.billing.subscription.type = 'manual';
+      const plans = billingInfo.selectAvailablePlans(state);
+      expect(_.every(plans, ({ isFree }) => !isFree)).toBeTruthy();
     });
 
     it('should return active AWS plans', () => {
       state.account.subscription.type = 'aws';
-      expect(billingInfo.selectAvailablePlans(state)).toMatchSnapshot();
+      const plans = billingInfo.selectAvailablePlans(state);
+      expect(_.every(plans, ({ awsMarketplace }) => awsMarketplace)).toBeTruthy();
     });
   });
 
   describe('selectVisiblePlans', () => {
     it('should return public plans', () => {
-      expect(billingInfo.selectVisiblePlans(state)).toMatchSnapshot();
+      const plans = billingInfo.selectVisiblePlans(state);
+      expect(_.every(plans, ({ status }) => status === 'public')).toBeTruthy();
     });
 
     it('should return public paid plans', () => {
-      state.account.subscription.self_serve = false;
-      expect(billingInfo.selectVisiblePlans(state)).toMatchSnapshot();
+      state.billing.subscription.type = 'manual';
+      const plans = billingInfo.selectVisiblePlans(state);
+      expect(_.every(plans, ({ status, isFree }) => !isFree && status === 'public')).toBeTruthy();
     });
 
     it('should return public AWS plans', () => {
       state.account.subscription.type = 'aws';
-      expect(billingInfo.selectVisiblePlans(state)).toMatchSnapshot();
+      const plans = billingInfo.selectVisiblePlans(state);
+      expect(
+        _.every(plans, ({ status, awsMarketplace }) => status === 'public' && awsMarketplace),
+      ).toBeTruthy();
     });
   });
 
