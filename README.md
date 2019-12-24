@@ -19,7 +19,8 @@ Then `npm install` to install deps.
 ## Local development
 
 `npm start` will start a dev server backed by api.sparkpost.test with live reload on
-http://localhost:3100/ and http://app.sparkpost.test
+http://localhost:3100/ and http://app.sparkpost.test. Additionally, a Storybook dev server will
+start that provides supporting component documentation.
 
 ## Tests
 
