@@ -61,9 +61,6 @@ export const WatchedPage = props => {
       title="Watched IPs and Domains"
       primaryArea={
         <>
-          <Button color="orange" outline className={styles.Buttons} to="/alerts/create">
-            Create Alert
-          </Button>
           <Button primary className={styles.Buttons}>
             Add IP or Sending Domain
           </Button>
