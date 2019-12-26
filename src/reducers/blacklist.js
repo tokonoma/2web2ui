@@ -20,6 +20,13 @@ export default (state = initialState, { type, payload }) => {
       return { ...state, incidentsPending: false, incidentsError: payload };
     case 'LIST_INCIDENTS_SUCCESS':
       return { ...state, incidents: payload, incidentsPending: false, incidentsError: null };
+
+    case 'ADD_WATCHLIST_PENDING':
+      return { ...state, watchlistAddPending: true, watchlistAddError: null };
+    case 'ADD_WATCHLIST_FAIL':
+      return { ...state, watchlistAddPending: false, watchlistAddError: payload };
+    case 'ADD_WATCHLIST_SUCCESS':
+      return { ...state, watchlistAddPending: false, watchlistAddError: null };
     default:
       return state;
   }

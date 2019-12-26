@@ -11,6 +11,24 @@ export function listMonitors() {
   });
 }
 
+export function watchlistAdd(resource) {
+  try {
+    return sparkpostApiRequest({
+      type: 'ADD_WATCHLIST',
+      meta: {
+        method: 'POST',
+        url: '/v1/blacklist-monitors',
+        showErrorAlert: false,
+        data: {
+          resource,
+        },
+      },
+    });
+  } catch (err) {
+    return Promise.reject(err);
+  }
+}
+
 export function listIncidents(from = '2019-01-01') {
   //TODO replace with datepicker date
   return sparkpostApiRequest({

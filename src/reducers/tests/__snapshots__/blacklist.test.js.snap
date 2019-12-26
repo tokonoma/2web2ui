@@ -1,5 +1,44 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`BlackList Reducer add watchlist fail 1`] = `
+Object {
+  "incidents": Array [],
+  "incidentsPending": false,
+  "monitors": Array [],
+  "monitorsPending": false,
+  "watchlistAddError": Object {
+    "errors": Array [
+      Object {
+        "message": "Some error occurred",
+      },
+    ],
+  },
+  "watchlistAddPending": false,
+}
+`;
+
+exports[`BlackList Reducer add watchlist pending 1`] = `
+Object {
+  "incidents": Array [],
+  "incidentsPending": false,
+  "monitors": Array [],
+  "monitorsPending": false,
+  "watchlistAddError": null,
+  "watchlistAddPending": true,
+}
+`;
+
+exports[`BlackList Reducer add watchlist success 1`] = `
+Object {
+  "incidents": Array [],
+  "incidentsPending": false,
+  "monitors": Array [],
+  "monitorsPending": false,
+  "watchlistAddError": null,
+  "watchlistAddPending": false,
+}
+`;
+
 exports[`BlackList Reducer list incidents fail 1`] = `
 Object {
   "incidents": Array [],

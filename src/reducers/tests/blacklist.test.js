@@ -24,6 +24,17 @@ const TEST_CASES = {
     payload: { errors: [{ message: 'Some error occurred' }] },
     type: 'LIST_MONITORS_FAIL',
   },
+  'add watchlist pending': {
+    type: 'ADD_WATCHLIST_PENDING',
+  },
+  'add watchlist success': {
+    payload: { fakeData: true },
+    type: 'ADD_WATCHLIST_SUCCESS',
+  },
+  'add watchlist fail': {
+    payload: { errors: [{ message: 'Some error occurred' }] },
+    type: 'ADD_WATCHLIST_FAIL',
+  },
 };
 
 cases(
