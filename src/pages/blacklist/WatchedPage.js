@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Page } from '@sparkpost/matchbox';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { ApiErrorBanner, Loading } from 'src/components';
@@ -54,7 +55,12 @@ export const WatchedPage = props => {
       title="Watched IPs and Domains"
       primaryArea={
         <>
-          <Button primary className={styles.Buttons}>
+          <Button
+            primary
+            component={Link}
+            to={`/blacklist/watchlist/add`}
+            className={styles.Buttons}
+          >
             Add IP or Sending Domain
           </Button>
         </>
