@@ -9,18 +9,18 @@ describe('ListForm', () => {
 
   beforeEach(() => {
     formValuesWithCsv = {
-      csv: 'email,foo@address.com\nbar@address.com\n'
+      csv: 'email,foo@address.com\nbar@address.com\n',
     };
 
     props = {
-      handleSubmit: jest.fn((a) => () => a(formValuesWithCsv)),
+      handleSubmit: jest.fn(a => () => a(formValuesWithCsv)),
       history: {
-        push: jest.fn()
+        push: jest.fn(),
       },
       uploadList: jest.fn(() => Promise.resolve({ list_id: 'A1C1_D1C1' })),
       reset: jest.fn(),
       showAlert: jest.fn(),
-      resetUploadError: jest.fn()
+      resetUploadError: jest.fn(),
     };
 
     wrapper = shallow(<ListForm {...props} />);
@@ -32,7 +32,7 @@ describe('ListForm', () => {
   });
 
   it('should submit csv', async () => {
-    wrapper.setProps({ ...props, file: { size: 45, name: 'test.csv' }});
+    wrapper.setProps({ ...props, file: { size: 45, name: 'test.csv' } });
 
     const csvUpload = props.uploadList.mock.calls[0][0];
     await expect(props.uploadList).toHaveBeenCalledTimes(1);
@@ -42,18 +42,18 @@ describe('ListForm', () => {
     expect(props.reset).toHaveBeenCalledWith('recipientValidationListForm');
     expect(props.showAlert).toHaveBeenCalledWith({
       type: 'success',
-      message: 'Recipients Uploaded'
+      message: 'Recipients Uploaded',
     });
     expect(props.history.push).toHaveBeenCalledWith('/recipient-validation/list/A1C1_D1C1');
   });
 
   it('should not submit csv when over size limit', () => {
-    wrapper.setProps({ ...props, file: { size: 200000001 }});
+    wrapper.setProps({ ...props, file: { size: 20971521 } });
     expect(props.uploadList).not.toHaveBeenCalled();
   });
 
   it('should not submit if not type csv or txt', () => {
-    wrapper.setProps({ ...props, file: { name: 'thing.doc' }});
+    wrapper.setProps({ ...props, file: { name: 'thing.doc' } });
     expect(props.uploadList).not.toHaveBeenCalled();
   });
 

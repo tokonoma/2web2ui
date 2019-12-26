@@ -9,20 +9,35 @@ import { UnstyledLink } from '@sparkpost/matchbox';
 import SendingStepList from './SendingStepList';
 import FeatureStepList from './FeaturesStepList';
 
-export const GettingStartedGuide = ({ onboarding = {}, history, setAccountOption }) => {
+export const GettingStartedGuide = ({
+  onboarding = {},
+  history,
+  setAccountOption,
+  hasSendingDomains,
+  hasApiKeysForSending,
+  listApiKeys,
+  listSendingDomains,
+}) => {
+  useEffect(() => {
+    listApiKeys({ id: 0 });
+  }, [listApiKeys]);
+  useEffect(() => {
+    listSendingDomains();
+  }, [listSendingDomains]);
+
   const {
     isGuideAtBottom = false,
     active_step,
     send_test_email_completed,
     explore_analytics_completed,
     invite_collaborator_completed,
-    add_sending_domain_completed,
   } = onboarding;
 
   const setOnboardingAccountOption = (obj = {}) => {
     setAccountOption('onboarding', obj);
   };
 
+  //TODO: set isGuideAtBottom to true if all the CheckLists are completed.
   const actions = isGuideAtBottom
     ? null
     : [
@@ -79,6 +94,12 @@ export const GettingStartedGuide = ({ onboarding = {}, history, setAccountOption
       case 'Invite a Collaborator':
         setOnboardingAccountOption({ invite_collaborator_completed: true });
         history.push('/account/users');
+        break;
+      case 'Generate API Key':
+        history.push('/account/api-keys');
+        break;
+      case 'Add Sending Domain':
+        history.push(`/account/sending-domains`);
         break;
       default:
         break;
@@ -166,11 +187,14 @@ export const GettingStartedGuide = ({ onboarding = {}, history, setAccountOption
               {renderBreadCrumbs()}
               <CheckListItem
                 {...LETS_CODE_LIST['Add Sending Domain']}
-                itemCompleted={add_sending_domain_completed}
+                itemCompleted={hasSendingDomains}
               />
             </Panel.Section>
             <Panel.Section>
-              <CheckListItem {...LETS_CODE_LIST['Generate API Key']} />
+              <CheckListItem
+                {...LETS_CODE_LIST['Generate API Key']}
+                itemCompleted={hasApiKeysForSending}
+              />
             </Panel.Section>
           </>
         );

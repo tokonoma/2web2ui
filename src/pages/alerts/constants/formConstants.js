@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { EmailIcon, SlackIcon, WebhookIcon } from 'src/components/icons';
-import { emails, ifStringPresent } from 'src/helpers/validation';
+import { emails, ifStringPresent, maxItems, noDuplicateItems } from 'src/helpers/validation';
 import { UnstyledLink } from '@sparkpost/matchbox';
 export const FORM_NAME = 'alertForm';
 
@@ -83,7 +83,11 @@ export const NOTIFICATION_CHANNEL_DATA = {
     icon: <EmailIcon />,
     subtitle: 'Receive notifications through email. One address per line. Up to 10 addresses.',
     fieldProps: {
-      validate: ifStringPresent(emails),
+      validate: [
+        ifStringPresent(emails),
+        ifStringPresent(maxItems(10)),
+        ifStringPresent(noDuplicateItems),
+      ],
       placeholder: 'example@email.com',
       multiline: true,
     },
