@@ -1,17 +1,17 @@
 import React, { useEffect } from 'react';
 import { Page } from '@sparkpost/matchbox';
-import { Users } from 'src/components/images';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { ApiErrorBanner, Loading } from 'src/components';
 import { listMonitors, listIncidents } from 'src/actions/blacklist';
 import { selectIncidentsList } from 'src/selectors/blacklist';
 import IncidentsCollection from './components/IncidentsCollection';
+import NoIncidentsBanner from './components/NoIncidentsBanner';
 import styles from './IncidentsPage.module.scss';
 
 export const IncidentsPage = props => {
-  const { loading, error, listMonitors, listIncidents, monitors, incidents } = props;
+  const { loading, error, listMonitors, listIncidents, incidents } = props;
 
   useEffect(() => {
     listMonitors();
@@ -20,10 +20,6 @@ export const IncidentsPage = props => {
 
   if (loading) {
     return <Loading />;
-  }
-
-  if (!error && monitors.length > 0 && incidents.length === 0) {
-    return <Redirect to="/dashboard" />; //TODO redirect to watchlist page
   }
 
   const renderContent = () => {
@@ -44,6 +40,7 @@ export const IncidentsPage = props => {
 
     return (
       <div data-id="incidents-table">
+        {incidents.length === 0 ? <NoIncidentsBanner /> : null}
         <IncidentsCollection incidents={incidents} />
       </div>
     );
@@ -51,20 +48,8 @@ export const IncidentsPage = props => {
 
   return (
     <Page
-      empty={{
-        show: monitors.length === 0,
-        title: 'Blacklist Reports',
-        image: Users,
-        content: (
-          <p>
-            Monitor blacklists for your domains and IPs so you know when your deliverability will be
-            affected.
-          </p>
-        ),
-        primaryAction: { content: 'Add to Watch List', to: '/blacklist', component: Link },
-      }}
       title="Blacklist Incidents"
-      primaryAction={{ content: 'View Watch List', to: '/blacklist', component: Link }}
+      primaryAction={{ content: 'View Watchlist', to: '/blacklist/watchlist', component: Link }}
     >
       <p className={styles.Description}>
         Monitor blacklists for your domains and IPs so you know when your deliverability will be

@@ -1,0 +1,11 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.NoResults {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  > div {
+    margin: spacing(large);
+    margin-top: 0;
+  }
+}

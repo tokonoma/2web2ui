@@ -1,0 +1,14 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.DetailGroup {
+  display: flex;
+  flex-direction: column;
+
+  .Value {
+    margin-top: spacing(small);
+  }
+}
+
+.EngagementButton {
+  margin-top: spacing();
+}

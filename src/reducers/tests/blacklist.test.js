@@ -13,6 +13,39 @@ const TEST_CASES = {
     payload: { errors: [{ message: 'Some error occurred' }] },
     type: 'LIST_INCIDENTS_FAIL',
   },
+  'get incident pending': {
+    type: 'GET_INCIDENT_PENDING',
+  },
+  'get incident success': {
+    payload: { fakeData: true },
+    type: 'GET_INCIDENT_SUCCESS',
+  },
+  'get incident fail': {
+    payload: { errors: [{ message: 'Some error occurred' }] },
+    type: 'GET_INCIDENT_FAIL',
+  },
+  'list incidents for resource pending': {
+    type: 'LIST_INCIDENTS_FOR_RESOURCE_PENDING',
+  },
+  'list incidents for resource success': {
+    payload: { fakeData: true },
+    type: 'LIST_INCIDENTS_FOR_RESOURCE_SUCCESS',
+  },
+  'list incidents for resource fail': {
+    payload: { errors: [{ message: 'Some error occurred' }] },
+    type: 'LIST_INCIDENTS_FOR_RESOURCE_FAIL',
+  },
+  'list incidents for blacklist pending': {
+    type: 'LIST_INCIDENTS_FOR_BLACKLIST_PENDING',
+  },
+  'list incidents for blacklist success': {
+    payload: { fakeData: true },
+    type: 'LIST_INCIDENTS_FOR_BLACKLIST_SUCCESS',
+  },
+  'list incidents for blacklist fail': {
+    payload: { errors: [{ message: 'Some error occurred' }] },
+    type: 'LIST_INCIDENTS_FOR_BLACKLIST_FAIL',
+  },
   'list monitors pending': {
     type: 'LIST_MONITORS_PENDING',
   },

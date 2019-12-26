@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table, Panel } from '@sparkpost/matchbox';
+import { Table, Panel, Tag } from '@sparkpost/matchbox';
 
 import { TableCollection, PageLink, DisplayDate } from 'src/components';
 import styles from './IncidentsCollection.module.scss';
@@ -11,16 +11,35 @@ const filterBoxConfig = {
   wrapper: props => <div className={styles.FilterBox}>{props}</div>,
 };
 
-const columns = [{ label: 'Details' }, { label: 'Listed', sortKey: 'occurred_at' }];
+const columns = [
+  { label: 'Details' },
+  { label: 'Listed', sortKey: 'occurred_at' },
+  { label: 'Resolved' },
+];
 
-const getRowData = ({ resource, blacklist_name, occurred_at_formatted, occurred_at_timestamp }) => {
+const getRowData = ({
+  resource,
+  id,
+  blacklist_name,
+  occurred_at_formatted,
+  occurred_at_timestamp,
+  resolved_at_timestamp,
+  resolved_at_formatted,
+}) => {
   return [
     <div className={styles.Details}>
-      <PageLink to={`/`} /*TODO link to details page*/>{resource}</PageLink>
+      <PageLink to={`/blacklist/incidents/${id}`}>{resource}</PageLink>
       <div>{blacklist_name}</div>
     </div>,
     <div className={styles.Listing}>
       <DisplayDate timestamp={occurred_at_timestamp} formattedDate={occurred_at_formatted} />
+    </div>,
+    <div className={styles.Listing}>
+      {!resolved_at_formatted ? (
+        <Tag color="yellow">Active</Tag>
+      ) : (
+        <DisplayDate timestamp={resolved_at_timestamp} formattedDate={resolved_at_formatted} />
+      )}
     </div>,
   ];
 };
