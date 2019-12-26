@@ -56,16 +56,16 @@ describe('WatchedPage', () => {
   });
 
   it('renders congratulations banner when no current blacklistings', () => {
-    const wrapper = shallowSubject({ hasBlacklisted: false });
-    expect(wrapper.find({ 'data-id': 'congrats-banner' })).toExist();
+    const { queryByTestId } = renderSubject({ hasBlacklisted: false });
+    expect(queryByTestId('congrats-banner')).toBeInTheDocument();
   });
 
   it('Congrats Banner onDismiss correctly closes the banner', () => {
     const wrapper = shallowSubject({ hasBlacklisted: false });
-    const bannerWrapper = wrapper.find('Banner');
+    const bannerWrapper = wrapper.find('CongratsBanner');
     expect(bannerWrapper).toExist();
     bannerWrapper.prop('onDismiss')();
-    const bannerWrapperAfterDismiss = wrapper.find('Banner');
+    const bannerWrapperAfterDismiss = wrapper.find('CongratsBanner');
     expect(bannerWrapperAfterDismiss).not.toExist();
   });
 

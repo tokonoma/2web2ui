@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Page, Banner } from '@sparkpost/matchbox';
+import { Button, Page } from '@sparkpost/matchbox';
 import { connect } from 'react-redux';
 
 import { ApiErrorBanner, Loading } from 'src/components';
 import { selectBlacklistedCount } from 'src/selectors/blacklist';
 import { listMonitors } from 'src/actions/blacklist';
 import MonitorsCollection from './components/MonitorsCollection';
+import CongratsBanner from './components/CongratsBanner';
 import styles from './WatchedPage.module.scss';
 
 export const WatchedPage = props => {
@@ -39,15 +40,7 @@ export const WatchedPage = props => {
     return (
       <>
         {showCongrats && !hasBlacklisted && (
-          <div data-id="congrats-banner">
-            <Banner
-              title="Congratulations! You are not currently on a Blacklist"
-              status="success"
-              onDismiss={() => setShowCongrats(false)}
-            >
-              No blacklist issues detected. Keep up the great work!
-            </Banner>
-          </div>
+          <CongratsBanner onDismiss={() => setShowCongrats(false)} />
         )}
         <div data-id="monitors-table">
           <MonitorsCollection monitors={monitors} />
