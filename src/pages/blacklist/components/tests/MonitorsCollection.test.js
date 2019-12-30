@@ -3,7 +3,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { render } from '@testing-library/react';
 import MonitorssCollection from '../MonitorsCollection';
 
-describe('Blacklist Component: IncidentsCollection', () => {
+describe('Blacklist Component: MonitorsCollection', () => {
   const monitors = [
     {
       resource: '1.2.3.4',
