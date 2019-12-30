@@ -8,9 +8,9 @@ import { selectBlacklistedCount } from 'src/selectors/blacklist';
 import { listMonitors } from 'src/actions/blacklist';
 import MonitorsCollection from './components/MonitorsCollection';
 import CongratsBanner from './components/CongratsBanner';
-import styles from './WatchedPage.module.scss';
+import styles from './WatchListPage.module.scss';
 
-export const WatchedPage = props => {
+export const WatchListPage = props => {
   const { loading, listMonitors, monitors, hasBlacklisted, error } = props;
 
   const [showCongrats, setShowCongrats] = useState(true);
@@ -81,4 +81,4 @@ const mapStateToProps = state => ({
   error: state.blacklist.monitorsError,
   loading: state.blacklist.monitorsPending,
 });
-export default connect(mapStateToProps, { listMonitors })(WatchedPage);
+export default connect(mapStateToProps, { listMonitors })(WatchListPage);

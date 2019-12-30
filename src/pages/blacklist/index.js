@@ -1,9 +1,9 @@
 import IncidentsPage from './IncidentsPage';
-import WatchedPage from './WatchedPage';
+import WatchListPage from './WatchListPage';
 import WatchlistAddPage from './WatchlistAddPage';
 
 export default {
   IncidentsPage,
-  WatchedPage,
+  WatchListPage,
   WatchlistAddPage,
 };
