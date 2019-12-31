@@ -2,9 +2,13 @@
 
 exports[`BlackList Reducer add watchlist fail 1`] = `
 Object {
+  "deleteMonitorError": null,
+  "deleteMonitorPending": false,
   "incidents": Array [],
+  "incidentsError": null,
   "incidentsPending": false,
   "monitors": Array [],
+  "monitorsError": null,
   "monitorsPending": false,
   "watchlistAddError": Object {
     "errors": Array [
@@ -19,9 +23,13 @@ Object {
 
 exports[`BlackList Reducer add watchlist pending 1`] = `
 Object {
+  "deleteMonitorError": null,
+  "deleteMonitorPending": false,
   "incidents": Array [],
+  "incidentsError": null,
   "incidentsPending": false,
   "monitors": Array [],
+  "monitorsError": null,
   "monitorsPending": false,
   "watchlistAddError": null,
   "watchlistAddPending": true,
@@ -30,17 +38,55 @@ Object {
 
 exports[`BlackList Reducer add watchlist success 1`] = `
 Object {
+  "deleteMonitorError": null,
+  "deleteMonitorPending": false,
   "incidents": Array [],
+  "incidentsError": null,
   "incidentsPending": false,
   "monitors": Array [],
+  "monitorsError": null,
   "monitorsPending": false,
   "watchlistAddError": null,
   "watchlistAddPending": false,
 }
 `;
 
+exports[`BlackList Reducer delete monitor fail 1`] = `
+Object {
+  "deleteMonitorError": Object {
+    "errors": Array [
+      Object {
+        "message": "Some error occurred",
+      },
+    ],
+  },
+  "deleteMonitorPending": false,
+  "incidents": Array [],
+  "incidentsError": null,
+  "incidentsPending": false,
+  "monitors": Array [],
+  "monitorsError": null,
+  "monitorsPending": false,
+}
+`;
+
+exports[`BlackList Reducer delete monitor pending 1`] = `
+Object {
+  "deleteMonitorError": null,
+  "deleteMonitorPending": true,
+  "incidents": Array [],
+  "incidentsError": null,
+  "incidentsPending": false,
+  "monitors": Array [],
+  "monitorsError": null,
+  "monitorsPending": false,
+}
+`;
+
 exports[`BlackList Reducer list incidents fail 1`] = `
 Object {
+  "deleteMonitorError": null,
+  "deleteMonitorPending": false,
   "incidents": Array [],
   "incidentsError": Object {
     "errors": Array [
@@ -51,35 +97,45 @@ Object {
   },
   "incidentsPending": false,
   "monitors": Array [],
+  "monitorsError": null,
   "monitorsPending": false,
 }
 `;
 
 exports[`BlackList Reducer list incidents pending 1`] = `
 Object {
+  "deleteMonitorError": null,
+  "deleteMonitorPending": false,
   "incidents": Array [],
   "incidentsError": null,
   "incidentsPending": true,
   "monitors": Array [],
+  "monitorsError": null,
   "monitorsPending": false,
 }
 `;
 
 exports[`BlackList Reducer list incidents success 1`] = `
 Object {
+  "deleteMonitorError": null,
+  "deleteMonitorPending": false,
   "incidents": Object {
     "fakeData": true,
   },
   "incidentsError": null,
   "incidentsPending": false,
   "monitors": Array [],
+  "monitorsError": null,
   "monitorsPending": false,
 }
 `;
 
 exports[`BlackList Reducer list monitors fail 1`] = `
 Object {
+  "deleteMonitorError": null,
+  "deleteMonitorPending": false,
   "incidents": Array [],
+  "incidentsError": null,
   "incidentsPending": false,
   "monitors": Array [],
   "monitorsError": Object {
@@ -95,7 +151,10 @@ Object {
 
 exports[`BlackList Reducer list monitors pending 1`] = `
 Object {
+  "deleteMonitorError": null,
+  "deleteMonitorPending": false,
   "incidents": Array [],
+  "incidentsError": null,
   "incidentsPending": false,
   "monitors": Array [],
   "monitorsError": null,
@@ -105,7 +164,10 @@ Object {
 
 exports[`BlackList Reducer list monitors success 1`] = `
 Object {
+  "deleteMonitorError": null,
+  "deleteMonitorPending": false,
   "incidents": Array [],
+  "incidentsError": null,
   "incidentsPending": false,
   "monitors": Object {
     "fakeData": true,

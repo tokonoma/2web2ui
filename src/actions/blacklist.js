@@ -29,6 +29,17 @@ export function watchlistAdd(resource) {
   }
 }
 
+export function deleteMonitor(resource) {
+  return sparkpostApiRequest({
+    type: 'DELETE_MONITOR',
+    meta: {
+      method: 'DELETE',
+      url: `/v1/blacklist-monitors/${resource}`,
+      resource,
+    },
+  });
+}
+
 export function listIncidents(from = '2019-01-01') {
   //TODO replace with datepicker date
   return sparkpostApiRequest({
