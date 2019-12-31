@@ -4,12 +4,34 @@
   "pending_downgrades": [],
   "products": [
     {
-      "plan": "50K-starter-0519",
+      "plan": "250K-premier-0519",
       "product": "messaging"
+    },
+    {
+      "plan": "subaccounts-premier",
+      "product": "subaccounts",
+      "limit": 15
+    },
+    {
+      "plan": "sso",
+      "product": "sso"
+    },
+    {
+      "plan": "tfa-required",
+      "product": "tfa_required"
+    },
+    {
+      "plan": "phone-support",
+      "product": "phone_support"
     },
     {
       "plan": "online-support",
       "product": "online_support"
+    },
+    {
+      "plan": "ip-0519",
+      "product": "dedicated_ip",
+      "limit": 4
     }
   ],
   "type": "active"
