@@ -10,24 +10,32 @@ import SignupModal from './components/SignupModal';
 import { getAccountUiOptionValue } from 'src/helpers/conditions/account';
 /* actions */
 import { setAccountOption } from 'src/actions/account';
+import SuppressionBanner from './components/SuppressionBanner';
 
 export class DashboardPage extends Component {
+  componentDidMount() {
+    this.props.checkSuppression();
+  }
   displayGuideAndReport = () => {
+    const { onboarding: { isGuideAtBottom } = {}, accountAgeInWeeks, hasSuppressions } = this.props;
     const usageReport = <UsageReport />;
     const gettingStartedGuide = <GettingStartedGuide {...this.props} />;
-
-    const { onboarding: { isGuideAtBottom } = {} } = this.props;
+    const suppresionBanner = (
+      <SuppressionBanner accountAgeInWeeks={accountAgeInWeeks} hasSuppressions={hasSuppressions} />
+    );
 
     if (isGuideAtBottom) {
       return (
         <>
           {usageReport}
+          {suppresionBanner}
           {gettingStartedGuide}
         </>
       );
     }
     return (
       <>
+        {suppresionBanner}
         {gettingStartedGuide}
         {usageReport}
       </>
