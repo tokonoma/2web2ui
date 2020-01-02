@@ -18,12 +18,10 @@ Then `npm install` to install deps.
 
 ## Local development
 
-`npm start` will start a dev server backed by api.sparkpost.test with live reload on <<<<<<< HEAD
+`npm start` will start a dev server backed by api.sparkpost.test with live reload on
 http://localhost:3100/ and http://app.sparkpost.test. Additionally, a Storybook dev server will
 start that provides supporting component documentation. ======= http://localhost:3100/ and
 http://app.sparkpost.test
-
-> > > > > > > FE-716 - Add distinct integration tests, set up Travis CI to run said tests
 
 ## Tests
 
