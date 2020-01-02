@@ -1,3 +1,6 @@
+import React from 'react';
+import { Abbreviation } from 'src/components';
+
 export const GUIDE_IDS = {
   SEND_TEST_EMAIL: '6RgwDLtUU5Ynp20auFvU9Qjbpqg',
   EXPLORE_ANALYTICS: 'LHGQClYKBmD_OI1t9oj-DE8mcOY',
@@ -36,8 +39,13 @@ export const LETS_CODE_LIST = {
   'View Developer Docs': {
     name: 'View Developer Docs',
     title: 'Check Out the Documentation',
-    description:
-      'Visit our developer docs for all the details on our API and SMTP powered delivery.',
+    description: (
+      <span>
+        Visit our developer docs for all the details on our{' '}
+        <Abbreviation title="Application Programming Interface">API</Abbreviation> and{' '}
+        <Abbreviation title="Simple Mail Transfer Protocol">SMTP</Abbreviation> powered delivery.
+      </span>
+    ),
   },
 };
 
