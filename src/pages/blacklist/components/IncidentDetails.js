@@ -2,7 +2,7 @@ import React from 'react';
 import { Grid, Tag, Button } from '@sparkpost/matchbox';
 import { formatDate } from 'src/helpers/date';
 import moment from 'moment';
-import { Link } from '@sparkpost/matchbox-icons';
+import { PageLink } from 'src/components';
 import styles from './IncidentDetails.module.scss';
 export default ({
   resourceName,
@@ -40,9 +40,9 @@ export default ({
           <span>{`No historical incidents for ${resourceName} on ${blacklistName}`}</span>
         ) : null}
         {historicalIncidents.map(({ id, occurred_at_formatted, resolved_at_formatted }) => (
-          <Link to={`/blacklist/incidents/${id}`}>
+          <PageLink to={`/blacklist/incidents/${id}`}>
             {`Listed ${occurred_at_formatted} | Resolved ${resolved_at_formatted}`}
-          </Link>
+          </PageLink>
         ))}
       </div>
     </Grid.Column>

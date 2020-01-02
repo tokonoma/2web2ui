@@ -74,7 +74,7 @@ export const IncidentDetailsPage = ({
           <Grid.Column lg={6} xs={12}>
             <Panel>
               <RelatedIncidents
-                incident={incident}
+                incident={{ ...incident, id }}
                 incidents={incidentsForBlacklist}
                 type="blacklist"
                 header={`Recent ${blacklist_name} Incidents`}
@@ -84,7 +84,7 @@ export const IncidentDetailsPage = ({
           <Grid.Column lg={6} xs={12}>
             <Panel>
               <RelatedIncidents
-                incident={incident}
+                incident={{ ...incident, id }}
                 incidents={incidentsForResource}
                 header={`Recent ${resource} Incidents`}
               />

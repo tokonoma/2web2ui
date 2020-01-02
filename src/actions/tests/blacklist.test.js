@@ -40,6 +40,7 @@ describe('Action Creator: Blacklist', () => {
         url: `/v1/blacklist-monitors/123.123.123.1/incidents`,
         showErrorAlert: false,
         params: {
+          from: '2019-01-01',
           limit: 3,
         },
       },
@@ -55,6 +56,7 @@ describe('Action Creator: Blacklist', () => {
         url: `/v1/blacklist-monitors/incidents`,
         showErrorAlert: false,
         params: {
+          from: '2019-01-01',
           blacklists: 'spamhaus',
           limit: 3,
         },

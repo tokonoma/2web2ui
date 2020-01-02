@@ -39,6 +39,48 @@ Object {
 }
 `;
 
+exports[`BlackList Reducer get incident fail 1`] = `
+Object {
+  "incidentError": Object {
+    "errors": Array [
+      Object {
+        "message": "Some error occurred",
+      },
+    ],
+  },
+  "incidentPending": false,
+  "incidents": Array [],
+  "incidentsPending": false,
+  "monitors": Array [],
+  "monitorsPending": false,
+}
+`;
+
+exports[`BlackList Reducer get incident pending 1`] = `
+Object {
+  "incidentError": null,
+  "incidentPending": true,
+  "incidents": Array [],
+  "incidentsPending": false,
+  "monitors": Array [],
+  "monitorsPending": false,
+}
+`;
+
+exports[`BlackList Reducer get incident success 1`] = `
+Object {
+  "incident": Object {
+    "fakeData": true,
+  },
+  "incidentError": null,
+  "incidentPending": false,
+  "incidents": Array [],
+  "incidentsPending": false,
+  "monitors": Array [],
+  "monitorsPending": false,
+}
+`;
+
 exports[`BlackList Reducer list incidents fail 1`] = `
 Object {
   "incidents": Array [],
@@ -49,6 +91,90 @@ Object {
       },
     ],
   },
+  "incidentsPending": false,
+  "monitors": Array [],
+  "monitorsPending": false,
+}
+`;
+
+exports[`BlackList Reducer list incidents for blacklist fail 1`] = `
+Object {
+  "incidents": Array [],
+  "incidentsForBlacklistError": Object {
+    "errors": Array [
+      Object {
+        "message": "Some error occurred",
+      },
+    ],
+  },
+  "incidentsForBlacklistPending": false,
+  "incidentsPending": false,
+  "monitors": Array [],
+  "monitorsPending": false,
+}
+`;
+
+exports[`BlackList Reducer list incidents for blacklist pending 1`] = `
+Object {
+  "incidents": Array [],
+  "incidentsForBlacklistError": null,
+  "incidentsForBlacklistPending": true,
+  "incidentsPending": false,
+  "monitors": Array [],
+  "monitorsPending": false,
+}
+`;
+
+exports[`BlackList Reducer list incidents for blacklist success 1`] = `
+Object {
+  "incidents": Array [],
+  "incidentsForBlacklist": Object {
+    "fakeData": true,
+  },
+  "incidentsForBlacklistError": null,
+  "incidentsForBlacklistPending": false,
+  "incidentsPending": false,
+  "monitors": Array [],
+  "monitorsPending": false,
+}
+`;
+
+exports[`BlackList Reducer list incidents for resource fail 1`] = `
+Object {
+  "incidents": Array [],
+  "incidentsForResourceError": Object {
+    "errors": Array [
+      Object {
+        "message": "Some error occurred",
+      },
+    ],
+  },
+  "incidentsForResourcePending": false,
+  "incidentsPending": false,
+  "monitors": Array [],
+  "monitorsPending": false,
+}
+`;
+
+exports[`BlackList Reducer list incidents for resource pending 1`] = `
+Object {
+  "incidents": Array [],
+  "incidentsForResourceError": null,
+  "incidentsForResourcePending": true,
+  "incidentsPending": false,
+  "monitors": Array [],
+  "monitorsPending": false,
+}
+`;
+
+exports[`BlackList Reducer list incidents for resource success 1`] = `
+Object {
+  "incidents": Array [],
+  "incidentsForResource": Object {
+    "fakeData": true,
+  },
+  "incidentsForResourceError": null,
+  "incidentsForResourcePending": false,
   "incidentsPending": false,
   "monitors": Array [],
   "monitorsPending": false,

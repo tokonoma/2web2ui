@@ -1,6 +1,7 @@
 import React from 'react';
-import { Table } from '@sparkpost/matchbox';
+import { Table, Tag } from '@sparkpost/matchbox';
 import { AccessTime } from '@sparkpost/matchbox-icons';
+import { PageLink } from 'src/components';
 import styles from './RelatedIncidents.module.scss';
 
 export default ({ incident, incidents = [], header = '', type = '' }) => (
@@ -12,22 +13,26 @@ export default ({ incident, incidents = [], header = '', type = '' }) => (
           {incidents.length > 0 ? <Table.HeaderCell>Resolved</Table.HeaderCell> : null}
         </Table.Row>
 
-        {incidents.map(incident => (
-          <Table.Row>
-            <Table.Cell>
-              <div>
-                <span>{type === 'blacklist' ? incident.resource : incident.blacklist_name}</span>
+        {incidents
+          .filter(i => i.id !== incident.id)
+          .map(incident => (
+            <Table.Row>
+              <Table.Cell>
                 <div>
-                  <AccessTime />
-                  <span>{`Listed ${incident.occurred_at_formatted}`}</span>
+                  <PageLink to={`/blacklist/incidents/${incident.id}`}>
+                    {type === 'blacklist' ? incident.resource : incident.blacklist_name}
+                  </PageLink>
+                  <div>
+                    <AccessTime />
+                    <span>{`Listed ${incident.occurred_at_formatted}`}</span>
+                  </div>
                 </div>
-              </div>
-            </Table.Cell>
-            <Table.Cell>
-              <span>{incident.resolved_at_formatted}</span>
-            </Table.Cell>
-          </Table.Row>
-        ))}
+              </Table.Cell>
+              <Table.Cell>
+                <span>{incident.resolved_at_formatted || <Tag color="yellow">Active</Tag>}</span>
+              </Table.Cell>
+            </Table.Row>
+          ))}
       </tbody>
     </Table>
     {incidents.length === 0 ? (

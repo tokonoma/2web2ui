@@ -55,7 +55,7 @@ export function getIncident(incidentId) {
   });
 }
 
-export function listIncidentsForResource(resource, from = '2019-01-01', limit = 3) {
+export function listIncidentsForResource(resource, from = '2019-01-01', limit = 4) {
   return sparkpostApiRequest({
     type: 'LIST_INCIDENTS_FOR_RESOURCE',
     meta: {
@@ -70,7 +70,7 @@ export function listIncidentsForResource(resource, from = '2019-01-01', limit = 
   });
 }
 
-export function listIncidentsForBlacklist(blacklist, from = '2019-01-01', limit = 3) {
+export function listIncidentsForBlacklist(blacklist, from = '2019-01-01', limit = 4) {
   return sparkpostApiRequest({
     type: 'LIST_INCIDENTS_FOR_BLACKLIST',
     meta: {
