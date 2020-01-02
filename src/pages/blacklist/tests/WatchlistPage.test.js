@@ -3,9 +3,9 @@ import { render } from '@testing-library/react';
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 
-import { WatchListPage } from '../WatchListPage';
+import { WatchlistPage } from '../WatchlistPage';
 
-describe('WatchListPage', () => {
+describe('WatchlistPage', () => {
   const monitors = [
     {
       resource: '101.101',
@@ -29,7 +29,7 @@ describe('WatchListPage', () => {
     };
     return render(
       <MemoryRouter>
-        <WatchListPage {...defaults} {...props} />
+        <WatchlistPage {...defaults} {...props} />
       </MemoryRouter>,
     );
   };
@@ -42,7 +42,7 @@ describe('WatchListPage', () => {
       listMonitors: mockListMonitors,
       hasBlacklisted: true,
     };
-    return shallow(<WatchListPage {...defaults} {...props} />);
+    return shallow(<WatchlistPage {...defaults} {...props} />);
   };
 
   it('renders loading component when loading data', () => {

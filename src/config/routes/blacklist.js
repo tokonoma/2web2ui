@@ -12,7 +12,7 @@ export default [
   },
   {
     path: '/blacklist/watchlist',
-    component: blacklist.WatchListPage,
+    component: blacklist.WatchlistPage,
     layout: App,
     condition: hasAccountOptionEnabled('blacklist_monitors'),
     title: 'Watched Monitors',
