@@ -20,15 +20,33 @@ describe('Mobile Navigation', () => {
   const navigationListSelector = '[data-id="navigation-list"]';
   const accountDropdownListSelector = '[data-id="account-dropdown-list"]';
 
-  const clickMenuItem = menuItemName => cy.contains(menuItemName).click();
-  const openNavigation = () => cy.get(navigationButtonSelector).click();
-  const openAccountMenu = () => cy.get(accountDropdownSelector).click();
-  const assertNavigationIsVisible = () => cy.get(navigationListSelector).should('be.visible');
-  const assertNavigationIsNotVisible = () =>
+  function clickMenuItem(menuItemName) {
+    cy.contains(menuItemName).click();
+  }
+
+  function openNavigation() {
+    cy.get(navigationButtonSelector).click();
+  }
+
+  function openAccountMenu() {
+    cy.get(accountDropdownSelector).click();
+  }
+
+  function assertNavigationIsVisible() {
+    cy.get(navigationListSelector).should('be.visible');
+  }
+
+  function assertNavigationIsNotVisible() {
     cy.get(navigationListSelector).should('not.be.visible');
-  const assertAccountMenuIsVisible = () => cy.get(accountDropdownListSelector).should('be.visible');
-  const assertAccountMenuIsNotVisible = () =>
+  }
+
+  function assertAccountMenuIsVisible() {
+    cy.get(accountDropdownListSelector).should('be.visible');
+  }
+
+  function assertAccountMenuIsNotVisible() {
     cy.get(accountDropdownListSelector).should('not.be.visible');
+  }
 
   it('opens when clicking on the hamburger icon', () => {
     openNavigation();
