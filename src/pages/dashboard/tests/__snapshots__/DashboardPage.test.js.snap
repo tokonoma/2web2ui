@@ -19,6 +19,10 @@ exports[`Page: Dashboard tests should correctly render page when user is not ver
     accountAgeInDays={15}
     ageRangeStart={16}
   />
+  <SuppressionBanner
+    accountAgeInWeeks={0}
+    hasSuppressions={true}
+  />
   <GettingStartedGuide
     account={
       Object {
@@ -31,7 +35,14 @@ exports[`Page: Dashboard tests should correctly render page when user is not ver
     }
     accountAgeInDays={15}
     accountAgeInWeeks={0}
-    checkSuppression={[MockFunction]}
+    checkSuppression={
+      [MockFunction] {
+        "calls": Array [
+          Array [],
+        ],
+        "results": undefined,
+      }
+    }
     currentUser={
       Object {
         "email_verfied": false,
@@ -68,6 +79,10 @@ exports[`Page: Dashboard tests should display upgrade CTA when account is free a
     accountAgeInDays={15}
     ageRangeStart={16}
   />
+  <SuppressionBanner
+    accountAgeInWeeks={0}
+    hasSuppressions={true}
+  />
   <GettingStartedGuide
     account={
       Object {
@@ -79,7 +94,14 @@ exports[`Page: Dashboard tests should display upgrade CTA when account is free a
     }
     accountAgeInDays={15}
     accountAgeInWeeks={0}
-    checkSuppression={[MockFunction]}
+    checkSuppression={
+      [MockFunction] {
+        "calls": Array [
+          Array [],
+        ],
+        "results": undefined,
+      }
+    }
     currentUser={
       Object {
         "email_verified": true,
@@ -117,6 +139,10 @@ exports[`Page: Dashboard tests should render import suppression list when 0 supp
     accountAgeInDays={15}
     ageRangeStart={16}
   />
+  <SuppressionBanner
+    accountAgeInWeeks={40}
+    hasSuppressions={false}
+  />
   <GettingStartedGuide
     account={
       Object {
@@ -129,7 +155,14 @@ exports[`Page: Dashboard tests should render import suppression list when 0 supp
     }
     accountAgeInDays={15}
     accountAgeInWeeks={40}
-    checkSuppression={[MockFunction]}
+    checkSuppression={
+      [MockFunction] {
+        "calls": Array [
+          Array [],
+        ],
+        "results": undefined,
+      }
+    }
     currentUser={
       Object {
         "email_verified": true,
@@ -167,6 +200,10 @@ exports[`Page: Dashboard tests should render page correctly with defaults 1`] = 
     accountAgeInDays={15}
     ageRangeStart={16}
   />
+  <SuppressionBanner
+    accountAgeInWeeks={0}
+    hasSuppressions={true}
+  />
   <GettingStartedGuide
     account={
       Object {
@@ -179,7 +216,14 @@ exports[`Page: Dashboard tests should render page correctly with defaults 1`] = 
     }
     accountAgeInDays={15}
     accountAgeInWeeks={0}
-    checkSuppression={[MockFunction]}
+    checkSuppression={
+      [MockFunction] {
+        "calls": Array [
+          Array [],
+        ],
+        "results": undefined,
+      }
+    }
     currentUser={
       Object {
         "email_verified": true,
