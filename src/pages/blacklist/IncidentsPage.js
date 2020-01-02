@@ -23,7 +23,7 @@ export const IncidentsPage = props => {
   }
 
   if (!error && monitors.length > 0 && incidents.length === 0) {
-    return <Redirect to="/dashboard" />; //TODO redirect to watchlist page
+    return <Redirect to="/blacklist/watchlist" />;
   }
 
   const renderContent = () => {
@@ -64,7 +64,7 @@ export const IncidentsPage = props => {
         primaryAction: { content: 'Add to Watch List', to: '/blacklist', component: Link },
       }}
       title="Blacklist Incidents"
-      primaryAction={{ content: 'View Watch List', to: '/blacklist', component: Link }}
+      primaryAction={{ content: 'View Watch List', to: '/blacklist/watchlist', component: Link }}
     >
       <p className={styles.Description}>
         Monitor blacklists for your domains and IPs so you know when your deliverability will be

@@ -1,0 +1,20 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.NameDetails {
+  font-size: font-size(500);
+  font-weight: 600;
+}
+
+.ListingDetails {
+  font-size: font-size(500);
+  font-weight: 600;
+  text-align: right;
+}
+
+.Delete {
+  text-align: right;
+}
+
+.Icon {
+  fill: color(gray, 5);
+}
