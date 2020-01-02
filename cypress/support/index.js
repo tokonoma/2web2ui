@@ -16,5 +16,5 @@
 import './commands';
 
 Cypress.Cookies.defaults({
-  whitelist: ['__ssid', 'auth'], // Preserves signed-in state between route changes
+  whitelist: ['website_auth', '__ssid', 'auth'], // Preserves signed-in state between route changes
 });
