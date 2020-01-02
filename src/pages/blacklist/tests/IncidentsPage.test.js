@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 import React from 'react';
-import { MemoryRouter } from 'react-router-dom';
+import { MemoryRouter, Switch, Route } from 'react-router-dom';
 
 import { IncidentsPage } from '../IncidentsPage';
 import IncidentsCollection from '../components/IncidentsCollection';
@@ -60,6 +60,26 @@ describe('IncidentsPage', () => {
   it('renders Incidents Collection when correct data exists', () => {
     const { queryByTestId } = subject();
     expect(queryByTestId('incidents-table')).toBeInTheDocument();
+  });
+
+  it('redirect to watchlist when monitored resources exist but no incidents', () => {
+    const props = {
+      incidents: [],
+      monitors: monitors,
+      error: null,
+      loading: null,
+      listMonitors: mockListMonitors,
+      listIncidents: mockListIncidents,
+    };
+    const { queryByText } = render(
+      <MemoryRouter initialEntries={['/blacklist']} initialIndex={0}>
+        <Switch>
+          <Route path="/blacklist/watchlist" render={() => <div>Redirected Page</div>} />
+          <Route path="/blacklist" render={() => <IncidentsPage {...props} />} />
+        </Switch>
+      </MemoryRouter>,
+    );
+    expect(queryByText('Redirected Page')).toBeInTheDocument();
   });
 
   it('loads monitors and incidents when page starts rendering', () => {

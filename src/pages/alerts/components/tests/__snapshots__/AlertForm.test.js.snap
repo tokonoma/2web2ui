@@ -36,6 +36,7 @@ exports[`Alert Form Component should render the alert form component correctly 1
             </label>
             <Field
               component={[Function]}
+              disabled={false}
               name="metric"
               onChange={[Function]}
               options={
@@ -75,6 +76,7 @@ exports[`Alert Form Component should render the alert form component correctly 1
           >
             <Connect(EvaluatorFields)
               disabled={false}
+              isNewAlert={true}
               key="health_score"
               shouldUpdateRecommendation={true}
             />

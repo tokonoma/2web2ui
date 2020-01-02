@@ -10,46 +10,46 @@ describe('FilterSortCollection Component', () => {
   const vegetables = ['artichoke', 'broccoli', 'celery'];
   const props = {
     title: 'Menu',
-    selectOptions: [{ value: 'fruit', label: 'Fruit' },
-      { value: 'vegetable', label: 'Vegetable' }],
+    selectOptions: [
+      { value: 'fruit', label: 'Fruit' },
+      { value: 'vegetable', label: 'Vegetable' },
+    ],
     filterBoxConfig: {
       show: true,
       itemToStringKeys: ['fruit', 'vegetable'],
       placeholder: 'Search By: Fruit, Vegetable',
-      wrapper: (props) => (
-        <div>
-          {props}
-        </div>)
+      wrapper: props => <div>{props}</div>,
     },
     defaultSortColumn: 'fruit',
-    rows: [{
-      fruit: fruits[0],
-      vegetable: vegetables[2]
-    }, {
-      fruit: fruits[1],
-      vegetable: vegetables[0]
-    }, {
-      fruit: fruits[2],
-      vegetable: vegetables[1]
-    }],
-    rowComponent: ({ fruit, vegetable }, iterator) => ([
+    rows: [
+      {
+        fruit: fruits[0],
+        vegetable: vegetables[2],
+      },
+      {
+        fruit: fruits[1],
+        vegetable: vegetables[0],
+      },
+      {
+        fruit: fruits[2],
+        vegetable: vegetables[1],
+      },
+    ],
+    rowComponent: ({ fruit, vegetable }, iterator) => [
       <Table.Row
         key={iterator}
-        rowData={[<div>
-          <p>{fruit}</p>
-          <p>{vegetable}</p>
-        </div>]}
-      />
-    ])
+        rowData={[
+          <div>
+            <p>{fruit}</p>
+            <p>{vegetable}</p>
+          </div>,
+        ]}
+      />,
+    ],
   };
 
   describe('renders', () => {
-
-    const subject = (props = {}) => shallow(
-      <Router>
-        <FilterSortCollection {...props}/>
-      </Router>
-    );
+    const subject = (props = {}) => shallow(<FilterSortCollection {...props} />);
 
     it('renders without props', () => {
       expect(subject()).toMatchSnapshot();
@@ -58,15 +58,22 @@ describe('FilterSortCollection Component', () => {
     it('renders with props', () => {
       expect(subject({ ...props })).toMatchSnapshot();
     });
+
+    it('renders with header', () => {
+      const propsWithHeaderColumns = { ...props, columns: ['fruit', 'vegetables'] };
+      const headerWrapper = shallow(subject(propsWithHeaderColumns).prop('headerComponent')());
+      expect(headerWrapper).toHaveTextContent('fruit');
+      expect(headerWrapper).toHaveTextContent('vegetables');
+    });
   });
 
   describe('sorts', () => {
-
-    const subject = (props = {}) => mount(
-      <Router>
-        <FilterSortCollection {...props}/>
-      </Router>
-    );
+    const subject = (props = {}) =>
+      mount(
+        <Router>
+          <FilterSortCollection {...props} />
+        </Router>,
+      );
 
     it('sorts default sort column (fruits) values in default descending order', () => {
       const wrapper = subject({ ...props });

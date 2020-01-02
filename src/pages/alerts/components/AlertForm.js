@@ -132,6 +132,7 @@ export class AlertForm extends Component {
                     options={visibleMetricOptions}
                     onChange={this.resetFormValues}
                     validate={required}
+                    disabled={submitting || !isNewAlert}
                   />
                 </div>
                 {metric !== '' && (
@@ -140,6 +141,7 @@ export class AlertForm extends Component {
                       key={metric}
                       disabled={submitting}
                       shouldUpdateRecommendation={isNewAlert && !isDuplicate}
+                      isNewAlert={isNewAlert}
                     />
                   </div>
                 )}

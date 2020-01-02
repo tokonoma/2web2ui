@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Page } from '@sparkpost/matchbox';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { ApiErrorBanner, Loading } from 'src/components';
@@ -11,7 +11,7 @@ import NoIncidentsBanner from './components/NoIncidentsBanner';
 import styles from './IncidentsPage.module.scss';
 
 export const IncidentsPage = props => {
-  const { loading, error, listMonitors, listIncidents, incidents } = props;
+  const { loading, error, listMonitors, listIncidents, monitors, incidents } = props;
 
   useEffect(() => {
     listMonitors();
@@ -20,6 +20,10 @@ export const IncidentsPage = props => {
 
   if (loading) {
     return <Loading />;
+  }
+
+  if (!error && monitors.length > 0 && incidents.length === 0) {
+    return <Redirect to="/blacklist/watchlist" />;
   }
 
   const renderContent = () => {

@@ -7,7 +7,7 @@ import { ApiErrorBanner, Loading, PageLink } from 'src/components';
 import formatScheduleLine from './helpers/formatScheduleLine';
 import getStatusProps from './helpers/getStatusProps';
 import formatPercentage from './helpers/formatPercentage';
-import FilterSortCollection from './components/FilterSortCollection';
+import FilterSortCollection from 'src/components/collection/FilterSortCollection';
 import Dot from './components/Dot';
 import { connect } from 'react-redux';
 import { listTests } from 'src/actions/inboxPlacement';

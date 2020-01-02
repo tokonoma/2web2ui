@@ -1,0 +1,58 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FilterSortCollection Component renders renders with props 1`] = `
+<withRouter(Collection)
+  bodyWrapper={[Function]}
+  defaultPerPage={10}
+  filterBox={
+    Object {
+      "itemToStringKeys": Array [
+        "fruit",
+        "vegetable",
+      ],
+      "placeholder": "Search By: Fruit, Vegetable",
+      "show": true,
+      "wrapper": [Function],
+    }
+  }
+  headerComponent={[Function]}
+  outerWrapper={[Function]}
+  pagination={true}
+  rowComponent={[Function]}
+  rows={
+    Array [
+      Object {
+        "fruit": "cherry",
+        "vegetable": "broccoli",
+      },
+      Object {
+        "fruit": "banana",
+        "vegetable": "artichoke",
+      },
+      Object {
+        "fruit": "apple",
+        "vegetable": "celery",
+      },
+    ]
+  }
+  saveCsv={true}
+  sortColumn="fruit"
+>
+  <Component />
+</withRouter(Collection)>
+`;
+
+exports[`FilterSortCollection Component renders renders without props 1`] = `
+<withRouter(Collection)
+  bodyWrapper={[Function]}
+  defaultPerPage={10}
+  headerComponent={[Function]}
+  outerWrapper={[Function]}
+  pagination={true}
+  rowComponent={[Function]}
+  rows={Array []}
+  saveCsv={true}
+>
+  <Component />
+</withRouter(Collection)>
+`;

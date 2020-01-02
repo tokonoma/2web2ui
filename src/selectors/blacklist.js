@@ -5,6 +5,7 @@ import moment from 'moment';
 const getIncident = state => state.blacklist.incident || {};
 
 const getIncidents = state => state.blacklist.incidents;
+const getMonitors = state => state.blacklist.monitors;
 
 const getIncidentsForResource = state => state.blacklist.incidentsForResource || [];
 
@@ -41,4 +42,11 @@ export const selectRelatedIncidentsForBlacklist = createSelector(
       .filter(incident => incident.id !== currentIncident.id)
       .map(incident => enrichIncident(incident))
       .slice(0, 3),
+);
+
+export const selectBlacklistedCount = createSelector([getMonitors], monitors =>
+  monitors.reduce(
+    (totalBlacklistCount, monitor) => totalBlacklistCount + monitor.active_listing_count,
+    0,
+  ),
 );
