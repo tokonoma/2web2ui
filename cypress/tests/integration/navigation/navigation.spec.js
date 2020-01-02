@@ -5,6 +5,14 @@ describe('Mobile Navigation', () => {
     cy.viewport(500, 1000);
     cy.stubAuth();
     cy.login({ isStubbed: true });
+    /*
+      Wait is included to wait for window resize event as mobile navigation
+      is controlled via window resize events instead of CSS. Ideally, CSS media
+      queries could be used to show and hide the two version of the navigation
+      to improve performance and reduce the likelihood of unusual
+      application states
+    */
+    cy.wait(500);
   });
 
   const accountDropdownSelector = '[data-id="nav-button-accounts"]';
@@ -12,9 +20,9 @@ describe('Mobile Navigation', () => {
   const navigationListSelector = '[data-id="navigation-list"]';
   const accountDropdownListSelector = '[data-id="account-dropdown-list"]';
 
-  const clickMenuItem = menuItemName => cy.contains(menuItemName).click({ force: true });
-  const openNavigation = () => cy.get(navigationButtonSelector).click({ force: true });
-  const openAccountMenu = () => cy.get(accountDropdownSelector).click({ force: true });
+  const clickMenuItem = menuItemName => cy.contains(menuItemName).click();
+  const openNavigation = () => cy.get(navigationButtonSelector).click();
+  const openAccountMenu = () => cy.get(accountDropdownSelector).click();
   const assertNavigationIsVisible = () => cy.get(navigationListSelector).should('be.visible');
   const assertNavigationIsNotVisible = () =>
     cy.get(navigationListSelector).should('not.be.visible');
