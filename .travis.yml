@@ -27,6 +27,8 @@ jobs:
     - stage: test-and-build
       name: 'Integration Testing'
       script:
+        - cd ~/.cache
+        - ls -al
         - npm run test-integration-ci
 
 after_script: greenkeeper-lockfile-upload
