@@ -56,6 +56,5 @@ export const SHOW_ME_SPARKPOST_LIST = {
   'Invite a Collaborator': {
     name: 'Invite a Collaborator',
     title: 'Invite Your Team',
-    description: '',
   },
 };
