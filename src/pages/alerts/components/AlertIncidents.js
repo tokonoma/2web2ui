@@ -3,7 +3,7 @@ import { Panel, Table, Tag } from '@sparkpost/matchbox';
 import { TableCollection, Empty } from 'src/components';
 import { FORMATS } from 'src/constants';
 import { formatDateTime } from 'src/helpers/date';
-import { METRICS, FILTERS_FRIENDLY_NAMES } from '../constants/formConstants';
+import { METRICS, FILTERS_FRIENDLY_NAMES, SOURCE_FRIENDLY_NAMES } from '../constants/formConstants';
 import { MAILBOX_PROVIDERS } from 'src/constants';
 import { getEvaluatorOptions } from '../helpers/alertForm';
 import { roundToPlaces } from 'src/helpers/units';
@@ -12,24 +12,27 @@ import _ from 'lodash';
 import styles from './AlertIncidents.module.scss';
 
 const AlertIncidents = ({ incidents = [], alert, subaccountIdToString }) => {
-
-  const { metric, source } = alert;
+  const { metric, threshold_evaluator = {} } = alert;
+  const { source } = threshold_evaluator;
   const { suffix } = getEvaluatorOptions(metric, source);
 
   const columns = [
-    { label: 'Triggered', sortKey: 'first_fired' },
-    { label: 'Resolved', sortKey: 'last_fired' },
-    { label: 'For' },
-    { label: METRICS[metric], sortKey: 'triggered_value', className: styles.rightAlign }
+    { label: 'Triggered', sortKey: 'first_fired', key: 'alert_incident_header_triggered' },
+    { label: 'Resolved', sortKey: 'last_fired', key: 'alert_incident_header_status' },
+    { label: 'For', key: 'alert_incident_header_filters' },
+    {
+      label: metric === 'health_score' ? SOURCE_FRIENDLY_NAMES[source] : METRICS[metric],
+      sortKey: 'triggered_value',
+      className: styles.rightAlign,
+      key: 'alert_incident_header_label',
+    },
   ];
 
   const getRowData = ({ first_fired, last_fired, status, triggered_value, filters }) => {
-
     const renderTags = () => {
-
       const filterTags = _.map(filters, (value, key) => {
         const finalValue = value === 'NULL' ? null : value;
-        const getTagValue = (value) => {
+        const getTagValue = value => {
           switch (key) {
             case 'subaccount_id':
               return subaccountIdToString(value);
@@ -41,12 +44,13 @@ const AlertIncidents = ({ incidents = [], alert, subaccountIdToString }) => {
         };
 
         return (
-          finalValue &&
-          <span key={key}>
-            <strong className={styles.BoldInline}>{FILTERS_FRIENDLY_NAMES[key]}</strong>
-            &nbsp;
-            <Tag>{getTagValue(finalValue)}</Tag>
-          </span>
+          finalValue && (
+            <span key={key}>
+              <strong className={styles.BoldInline}>{FILTERS_FRIENDLY_NAMES[key]}</strong>
+              &nbsp;
+              <Tag>{getTagValue(finalValue)}</Tag>
+            </span>
+          )
         );
       });
 
@@ -64,32 +68,41 @@ const AlertIncidents = ({ incidents = [], alert, subaccountIdToString }) => {
     };
 
     return [
-      <div>{formatDateTime(first_fired, FORMATS.LONG_DATETIME_ALT)}</div>,
-      <div>{status === 'Open' ? <Tag color='yellow'>Active</Tag> : formatDateTime(moment(last_fired).add(45, 'minutes'), FORMATS.LONG_DATETIME_ALT)}</div>,
-      <div className={styles.IncidentFilters}>{renderTags()}</div>,
-      <div className={styles.rightAlign}>{roundToPlaces(triggered_value, 3)}{suffix}</div>
+      <div key="alert_incident_date">{formatDateTime(first_fired, FORMATS.LONG_DATETIME_ALT)}</div>,
+      <div key="alert_incident_status">
+        {status === 'Open' ? (
+          <Tag color="yellow">Active</Tag>
+        ) : (
+          formatDateTime(moment(last_fired).add(45, 'minutes'), FORMATS.LONG_DATETIME_ALT)
+        )}
+      </div>,
+      <div key="alert_incident_filters" className={styles.IncidentFilters}>
+        {renderTags()}
+      </div>,
+      <div key="alert_incident_value" className={styles.rightAlign}>
+        {roundToPlaces(triggered_value, 1)}
+        {suffix}
+      </div>,
     ];
   };
 
-  const TableWrapper = (props) => (
-    <Table>{props.children}</Table>
-  );
+  const TableWrapper = props => <Table>{props.children}</Table>;
 
   return (
-    <Panel title='Alert Incidents'>
-      {incidents.length <= 0
-        ? <Empty message='No incidents'/>
-        : <TableCollection
+    <Panel title="Alert Incidents">
+      {incidents.length <= 0 ? (
+        <Empty message="No incidents" />
+      ) : (
+        <TableCollection
           wrapperComponent={TableWrapper}
           rows={incidents}
           columns={columns}
           getRowData={getRowData}
           pagination
-          defaultSortColumn='first_fired'
-          defaultSortDirection='desc'
+          defaultSortColumn="first_fired"
+          defaultSortDirection="desc"
         />
-      }
-
+      )}
     </Panel>
   );
 };

@@ -16,7 +16,7 @@ exports[`Evaluator Fields Component renders correctly 1`] = `
       </Label>
       <Field
         component={[Function]}
-        disabled={false}
+        disabled={true}
         id="alertEvaluatorSource"
         name="source"
         onChange={[Function]}
