@@ -2,15 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Page } from '@sparkpost/matchbox';
 import { UsageReport } from 'src/components';
-import { AccessControl } from 'src/components/auth';
-import Tutorial from './components/Tutorial';
 import { GettingStartedGuide } from './components/GettingStartedGuide';
 import VerifyEmailBanner from 'src/components/verifyEmailBanner/VerifyEmailBanner';
 import { FreePlanWarningBanner } from 'src/pages/billing/components/Banners';
 import SignupModal from './components/SignupModal';
 /* helpers */
-import { hasGrants } from 'src/helpers/conditions';
-import { isAccountUiOptionSet, getAccountUiOptionValue } from 'src/helpers/conditions/account';
+import { getAccountUiOptionValue } from 'src/helpers/conditions/account';
 /* actions */
 import { setAccountOption } from 'src/actions/account';
 
@@ -19,39 +16,26 @@ export class DashboardPage extends Component {
     const usageReport = <UsageReport />;
     const gettingStartedGuide = <GettingStartedGuide {...this.props} />;
 
-    const { isMessageOnboardingSet, onboarding: { isGuideAtBottom } = {} } = this.props;
+    const { onboarding: { isGuideAtBottom } = {} } = this.props;
 
-    if (isMessageOnboardingSet) {
-      if (isGuideAtBottom) {
-        return (
-          <>
-            {usageReport}
-            {gettingStartedGuide}
-          </>
-        );
-      }
+    if (isGuideAtBottom) {
       return (
         <>
-          {gettingStartedGuide}
           {usageReport}
+          {gettingStartedGuide}
         </>
       );
     }
-
     return (
       <>
+        {gettingStartedGuide}
         {usageReport}
-        <AccessControl
-          condition={hasGrants('api_keys/manage', 'templates/modify', 'sending_domains/manage')}
-        >
-          <Tutorial {...this.props} />
-        </AccessControl>{' '}
       </>
     );
   };
 
   render() {
-    const { accountAgeInDays, currentUser, account, isMessageOnboardingSet } = this.props;
+    const { accountAgeInDays, currentUser, account } = this.props;
 
     //Shows banner if within 14 days of plan to downgrade
 
@@ -60,7 +44,7 @@ export class DashboardPage extends Component {
         {currentUser.email_verified === false && (
           <VerifyEmailBanner verifying={currentUser.verifyingEmail} />
         )}
-        {isMessageOnboardingSet && <SignupModal />}
+        <SignupModal />
         <FreePlanWarningBanner
           account={account}
           accountAgeInDays={accountAgeInDays}
@@ -72,7 +56,6 @@ export class DashboardPage extends Component {
   }
 }
 const mapStateToProps = state => ({
-  isMessageOnboardingSet: isAccountUiOptionSet('messaging_onboarding')(state),
   onboarding: getAccountUiOptionValue('onboarding')(state),
 });
 

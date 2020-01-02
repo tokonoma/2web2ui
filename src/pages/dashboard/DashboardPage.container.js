@@ -7,7 +7,7 @@ import { checkSuppression } from 'src/actions/suppressions';
 import { list as listSendingDomains } from 'src/actions/sendingDomains';
 import { listApiKeys } from 'src/actions/api-keys';
 
-import { selectAccountAgeInWeeks , selectAccountAgeInDays } from 'src/selectors/accountAge';
+import { selectAccountAgeInWeeks, selectAccountAgeInDays } from 'src/selectors/accountAge';
 import { selectVerifiedDomains, selectNotBlockedDomains } from 'src/selectors/sendingDomains';
 import { selectApiKeysForSending } from 'src/selectors/api-keys';
 
@@ -27,8 +27,13 @@ function mapStateToProps(state) {
     hasSendingDomains: notBlockedDomains.length > 0,
     hasVerifiedDomains: verifiedDomains.length > 0,
     hasApiKeysForSending: apiKeysForSending.length > 0,
-    hasSentThisMonth: _.get(state, 'account.usage.month.used', 0) > 0
+    hasSentThisMonth: _.get(state, 'account.usage.month.used', 0) > 0,
   };
 }
 
-export default connect(mapStateToProps, { fetchAccount, checkSuppression, listSendingDomains, listApiKeys })(DashboardPage);
+export default connect(mapStateToProps, {
+  fetchAccount,
+  checkSuppression,
+  listSendingDomains,
+  listApiKeys,
+})(DashboardPage);
