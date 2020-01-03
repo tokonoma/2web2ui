@@ -35,7 +35,7 @@ const sparkpostRequest = requestHelperFactory({
       type: types.SUCCESS,
       meta,
       payload: results,
-      extra: { links, total_count }
+      extra: { links, total_count },
     });
 
     return meta.onSuccess ? dispatch(meta.onSuccess({ results })) : results;
@@ -45,7 +45,7 @@ const sparkpostRequest = requestHelperFactory({
     // sparkpost axios instance, so all sparkpost API errors look the same
     // (even those that don't use this helper because the request is not authenticated)
     const apiError = new SparkpostApiError(err);
-    const { message, response = {}} = apiError;
+    const { message, response = {} } = apiError;
     const { auth } = getState();
     const { retries = 0, showErrorAlert = true } = meta;
 
@@ -64,26 +64,27 @@ const sparkpostRequest = requestHelperFactory({
       refreshTokensUsed.add(auth.refreshToken);
 
       // call API for a new token
-      return useRefreshToken(auth.refreshToken)// eslint-disable-line react-hooks/rules-of-hooks
+      return (
+        useRefreshToken(auth.refreshToken) // eslint-disable-line react-hooks/rules-of-hooks
+          // dispatch a refresh action to save new token results in cookie and store
+          .then(({ data } = {}) => dispatch(refresh(data.access_token, auth.refreshToken)))
 
-        // dispatch a refresh action to save new token results in cookie and store
-        .then(({ data } = {}) => dispatch(refresh(data.access_token, auth.refreshToken)))
-
-        // dispatch the original action again, now that we have a new token ...
-        // if anything in this refresh flow blew up, log out
-        .then(
-          // refresh token request succeeded
-          () => {
-            refreshing = false;
-            return dispatch(sparkpostRequest(action));
-          },
-          // refresh token request failed
-          (err) => {
-            refreshing = false;
-            dispatch(logout());
-            throw err;
-          }
-        );
+          // dispatch the original action again, now that we have a new token ...
+          // if anything in this refresh flow blew up, log out
+          .then(
+            // refresh token request succeeded
+            () => {
+              refreshing = false;
+              return dispatch(sparkpostRequest(action));
+            },
+            // refresh token request failed
+            err => {
+              refreshing = false;
+              dispatch(logout());
+              throw err;
+            },
+          )
+      );
     }
 
     // Re-fetch the account to see if suspended or terminated (handled in AuthenticationGate)
@@ -99,26 +100,31 @@ const sparkpostRequest = requestHelperFactory({
     dispatch({
       type: types.FAIL,
       payload: { error: apiError, message, response },
-      meta
+      meta,
     });
 
     // Don't show alerts for 404s on GET. Otherwise show alerts on request.
     const get404 = response.status === 404 && action.meta.method === 'GET';
+
     if (!get404 && showErrorAlert) {
       dispatch(
         showAlert({
           type: 'error',
           message: 'Something went wrong.',
-          details: message
-        }));
+          details:
+            response.status === 413
+              ? 'File size larger than the server allows. Try again.'
+              : message,
+        }),
+      );
     }
 
     // TODO: Remove this once we unchain all actions
     throw apiError;
-  }
+  },
 });
 
-export default (action) => (dispatch) => {
+export default action => dispatch => {
   // check for refreshing and exit early, otherwise call factory-made function
   if (refreshing) {
     return redispatchAfterRefresh(action, dispatch);
