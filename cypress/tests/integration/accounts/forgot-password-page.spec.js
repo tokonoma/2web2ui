@@ -3,7 +3,6 @@
 describe('The "Reset Your Password" view', () => {
   beforeEach(() => {
     cy.server();
-    cy.viewport(1000, 1000);
     cy.visit('/forgot-password');
     cy.fixture('forgot-password-post.json').then(json => {
       cy.route({
