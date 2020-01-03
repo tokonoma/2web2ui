@@ -4,7 +4,7 @@ import { Page, Panel, Button, Grid, UnstyledLink } from '@sparkpost/matchbox';
 import styles from './SingleResult.module.scss';
 import { withRouter, Link } from 'react-router-dom';
 import CodeBlock from './components/CodeBlock';
-import { WarningIcon, SuccessIcon, ErrorIcon } from './components/icons';
+import { WarningIcon, SuccessIcon, ErrorIcon, QuestionIcon } from './components/icons';
 import {
   ROLE_TOOLTIP,
   DISPOSABLE_TOOLTIP,
@@ -30,9 +30,11 @@ const valueResponse = value =>
   );
 
 const ICONS = {
-  undeliverable: <ErrorIcon />,
   valid: <SuccessIcon />,
+  neutral: <QuestionIcon />,
   risky: <WarningIcon />,
+  undeliverable: <ErrorIcon />,
+  typo: <ErrorIcon />,
 };
 
 export class SingleResult extends Component {
@@ -79,7 +81,7 @@ export class SingleResult extends Component {
 
   renderResult = () => {
     const { singleResults = {} } = this.props;
-    const { valid, result = valid ? 'valid' : 'undeliverable' } = singleResults;
+    const { result } = singleResults;
 
     return (
       <div className={styles.Result}>
