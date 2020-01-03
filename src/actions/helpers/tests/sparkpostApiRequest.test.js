@@ -241,6 +241,7 @@ describe('Helper: SparkPost API Request', () => {
         });
 
         /* eslint-disable jest/no-try-expect */
+        // NOTE: This probably can be re-worked - will think on it
         try {
           await mockStore.dispatch(sparkpostApiRequest({ type: 'TEST_MAX_RETRIES', meta: {} }));
         } catch (err) {
