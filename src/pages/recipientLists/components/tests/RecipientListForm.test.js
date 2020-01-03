@@ -1,6 +1,8 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { RecipientListForm } from '../RecipientListForm';
+import { RecipientListForm, asyncValidate } from '../RecipientListForm';
+import getConfig from 'src/helpers/getConfig';
+jest.mock('src/helpers/getConfig');
 
 describe('RecipientListForm', () => {
   let props;
@@ -80,5 +82,24 @@ describe('RecipientListForm', () => {
     const wrapper = shallow(<RecipientListForm onSubmit={onSubmit} {...props} />);
     expect(onSubmit).not.toHaveBeenCalled();
     return expect(wrapper.instance().preSubmit(formValuesWithCsv)).rejects.toMatchSnapshot();
+  });
+
+  describe('the asyncValidate function', () => {
+    it('throws an error when the passed in CSV size is higher than the max recipient list config size', async () => {
+      const mockCSV = new File(['ab'], 'mock.csv');
+      getConfig.mockReturnValue(16); // Mocking the config value for max upload size - instead of 12 MB, just 1 byte for testing purposes
+
+      await expect(asyncValidate({ csv: mockCSV })).rejects.toStrictEqual({
+        csv: 'Upload size 17B exceeds the max limit of 16B. Please upload a smaller file.',
+      });
+    });
+
+    it('does not throw an error when the passed in CSV size is lower than the max recipient list config size', async () => {
+      const mockCSV = new File(['ab'], 'mock.csv');
+      getConfig.mockReturnValue(18); // Mocking the config value for max upload size - instead of 12 MB, just 1 byte for testing purposes
+
+      // No error is returned if the file size is within the configuration limit
+      await expect(asyncValidate({ csv: mockCSV })).resolves.toBe(undefined);
+    });
   });
 });
