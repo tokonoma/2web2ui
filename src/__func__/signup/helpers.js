@@ -5,7 +5,7 @@ import config from 'src/config';
 
 jest.mock('react-recaptcha', () => MockRecaptcha);
 
-export const freePlanPredicate = (plan) => /free/.test(plan.code);
+export const freePlanPredicate = plan => /free/.test(plan.code);
 
 class SignupFlow {
   constructor() {
@@ -27,7 +27,7 @@ class SignupFlow {
       { name: 'email', value: 'test-username@example.com' },
       { name: 'password', value: 'test-password' },
       { name: 'tou_accepted', value: true, type: 'checkbox' },
-      { name: 'email_opt_in', value: optIn, type: 'checkbox' }
+      { name: 'email_opt_in', value: optIn, type: 'checkbox' },
     ]);
     await this.page.simulate('button', 'click');
   }
@@ -51,13 +51,8 @@ class SignupFlow {
 
       { type: 'select', name: 'billingAddress.country', value: 'US' },
       { type: 'select', name: 'billingAddress.state', value: 'MD' },
-      { name: 'billingAddress.zip', value: '12345' }
+      { name: 'billingAddress.zip', value: '12345' },
     ]);
-  }
-
-  async fillSendingDomainForm() {
-    this.formFiller({ name: 'domain', value: 'test.example.com' });
-    await this.page.simulate('form', 'submit');
   }
 }
 
