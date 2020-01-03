@@ -15,8 +15,7 @@ describe('The "Reset Your Password" view', () => {
 
   it('renders the heading, username or email address field, and reset password button', () => {
     cy.findByText('Reset Your Password').should('be.visible');
-    cy.findByLabelText('Username or email address').should('be.visible');
-    cy.findByText('Reset Password');
+    cy.title().should('include', 'Reset Password');
   });
 
   it('renders a success message when clicking "Reset Password"', () => {
