@@ -1,4 +1,3 @@
-// /* eslint-disable jest/no-try-expect */
 import sparkpostApiRequest, { refreshing, refreshTokensUsed } from '../sparkpostApiRequest';
 import SparkpostApiError from '../sparkpostApiError';
 import { createMockStore } from 'src/__testHelpers__/mockStore';
@@ -240,45 +239,39 @@ describe('Helper: SparkPost API Request', () => {
           return { type: 'REFRESH' };
         });
 
-        /* eslint-disable jest/no-try-expect */
-        // NOTE: This probably can be re-worked - will think on it
-        try {
-          await mockStore.dispatch(sparkpostApiRequest({ type: 'TEST_MAX_RETRIES', meta: {} }));
-        } catch (err) {
-          expect(httpHelpersMock.useRefreshToken).toHaveBeenCalledTimes(3);
-          expect(httpHelpersMock.useRefreshToken).toHaveBeenCalledWith('REFRESH_1');
-          expect(authMock.refresh).toHaveBeenCalledWith('NEW_TOKEN', 'REFRESH_1');
-          expect(mockStore.getActions()).toMatchSnapshot();
-        }
-        /* eslint-enable jest/no-try-expect */
+        return mockStore
+          .dispatch(sparkpostApiRequest({ type: 'TEST_MAX_RETRIES', meta: {} }))
+          .catch(() => {
+            expect(httpHelpersMock.useRefreshToken).toHaveBeenCalledTimes(3);
+            expect(httpHelpersMock.useRefreshToken).toHaveBeenCalledWith('REFRESH_1');
+            expect(authMock.refresh).toHaveBeenCalledWith('NEW_TOKEN', 'REFRESH_1');
+            expect(mockStore.getActions()).toMatchSnapshot();
+          });
       });
 
       it('should only retry once with the same token', async () => {
-        try {
-          await mockStore.dispatch(
-            sparkpostApiRequest({ type: 'TEST_ONE_RETRY_PER_TOKEN', meta: {} }),
-          );
-        } catch (err) {
-          /* eslint-disable jest/no-try-expect */
-          expect(httpHelpersMock.useRefreshToken).toHaveBeenCalledTimes(1);
-          expect(mockStore.getActions()).toMatchSnapshot();
-          /* eslint-enable jest/no-try-expect */
-        }
+        return mockStore
+          .dispatch(sparkpostApiRequest({ type: 'TEST_ONE_RETRY_PER_TOKEN', meta: {} }))
+          .catch(() => {
+            expect(httpHelpersMock.useRefreshToken).toHaveBeenCalledTimes(1);
+            expect(mockStore.getActions()).toMatchSnapshot();
+          });
       });
 
       it('should log out if refresh fails', async () => {
         const refreshErr = new Error();
         httpHelpersMock.useRefreshToken = jest.fn(() => Promise.reject(refreshErr));
 
-        try {
-          await mockStore.dispatch(sparkpostApiRequest({ type: 'TEST_REFRESH_FAILED', meta: {} }));
-        } catch (err) {
-          /* eslint-disable jest/no-try-expect */
-          expect(refreshing).toEqual(false);
-          expect(err).toBe(refreshErr);
-          expect(authMock.logout).toHaveBeenCalledTimes(1);
-          /* eslint-enable jest/no-try-expect */
-        }
+        await expect(
+          mockStore.dispatch(sparkpostApiRequest({ type: 'TEST_REFRESH_FAILED', meta: {} })),
+        ).rejects.toThrow(refreshErr);
+
+        return mockStore
+          .dispatch(sparkpostApiRequest({ type: 'TEST_REFRESH_FAILED', meta: {} }))
+          .catch(() => {
+            expect(refreshing).toEqual(false);
+            expect(authMock.logout).toHaveBeenCalledTimes(2); // Called twice due to earlier check for the refresh error
+          });
       });
     });
   });
