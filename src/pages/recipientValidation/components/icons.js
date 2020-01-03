@@ -30,7 +30,7 @@ export const SuccessIcon = () => (
   </svg>
 );
 
-export const InfoIcon = () => (
+export const QuestionIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="100"
