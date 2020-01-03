@@ -6,13 +6,11 @@ import _ from 'lodash';
 
 import { Panel, Banner, Button, Error } from '@sparkpost/matchbox';
 import { DownloadLink, TextFieldWrapper } from 'src/components';
-import { required, maxLength, maxFileSize } from 'src/helpers/validation';
+import { required, maxLength } from 'src/helpers/validation';
 
 import FileFieldWrapper from 'src/components/reduxFormWrappers/FileFieldWrapper';
 
 import parseRecipientListCsv from '../helpers/csv';
-
-import config from 'src/config';
 
 import exampleRecipientListPath from './example-recipient-list.csv';
 
@@ -65,7 +63,7 @@ export class RecipientListForm extends Component {
 
     let actionText = 'Create';
     let uploadHint = 'Upload a CSV file of recipients';
-    let uploadValidators = [required, maxFileSize(config.maxRecipListUploadSizeBytes)];
+    let uploadValidators = [required];
 
     if (editMode) {
       actionText = 'Update';
