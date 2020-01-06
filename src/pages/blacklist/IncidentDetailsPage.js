@@ -75,7 +75,7 @@ export const IncidentDetailsPage = ({
       <>
         <Panel sectioned>
           {historicalIncidentsPending ? (
-            <PanelLoading minHeight={150} />
+            <PanelLoading minHeight={'150'} />
           ) : (
             <IncidentDetails
               resourceName={resource}
