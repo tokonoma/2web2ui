@@ -98,4 +98,10 @@ describe('The recipient validation page', () => {
       .should('contain', 'error.csv')
       .should('contain', 'Validation Error');
   });
+
+  it('renders pricing information when clicking on the "See Pricing" button', () => {
+    cy.findByText('See Pricing').click();
+
+    cy.findByText('How was this calculated?').should('be.visible');
+  });
 });
