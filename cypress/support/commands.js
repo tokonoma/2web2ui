@@ -108,3 +108,32 @@ Cypress.Commands.add('stubAuth', () => {
     response: '@sendingDomainsGet',
   }).as('stubbedSendingDomains');
 });
+
+/**
+ * Used to concisely stub network requests within Cypress integration tests
+ *
+ * @param {string} method - the method of the HTTP request being stubbed (https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods). Defaults to `GET`.
+ * @param {number} statusCode - the HTTP response status code. Defaults to `200`.
+ * @param {string} method - the URL of the request that will be intercepted
+ * @param {string} method - the path of the relevant fixture. See: https://docs.cypress.io/api/commands/fixture.html
+ * @param {string} method - the name of the alias used for the passed in fixture
+ */
+
+Cypress.Commands.add(
+  'stubRequest',
+  (
+    { method = 'GET', statusCode = 200, url, fixture, fixtureAlias = 'stubbedRequest' },
+    callback,
+  ) => {
+    cy.server();
+    cy.fixture(fixture).as(fixtureAlias);
+    cy.route({
+      method,
+      url,
+      status: statusCode,
+      response: `@${fixtureAlias}`,
+    });
+
+    if (callback) callback();
+  },
+);
