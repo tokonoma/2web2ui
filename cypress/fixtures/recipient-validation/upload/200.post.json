@@ -1,7 +1,7 @@
 {
   "results": {
     "message": "Successfully uploaded recipient list.",
-    "list_id": "abc",
+    "list_id": "fake-list",
     "uploaded_file": "/path/to/uploaded/file",
     "batch_status": "queued_for_batch",
     "complete": false,
