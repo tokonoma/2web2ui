@@ -24,7 +24,7 @@ export const FeaturesStepList = () => {
       <Grid.Column xs={12} key={`Start Sending`}>
         <Card>
           <CardTitle>
-            <Send size="20" className={styles.SendIcon} /> &nbsp;{`Sending with Sparkpost`}
+            <Send size="20" className={styles.SendIcon} /> &nbsp;{`Sending with SparkPost`}
           </CardTitle>
           <CardContent>
             <p className={styles.FeaturesCardContent}>

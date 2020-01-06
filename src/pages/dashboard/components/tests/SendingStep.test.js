@@ -1,10 +1,24 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { SendingStepList, SendingStepListItem } from '../SendingStep';
+import SendingStep, { SendingStepList, SendingStepListItem } from '../SendingStep';
 import { SENDING_STEP_LIST } from 'src/pages/dashboard/constants';
 import { useGuideContext } from '../GettingStartedGuide';
 
 jest.mock('../GettingStartedGuide');
+
+describe('SendingStep', () => {
+  useGuideContext.mockReturnValue({ stepName: 'Sending', setAndStoreStepName: jest.fn() });
+  const subject = (func = shallow) => {
+    return func(<SendingStep />);
+  };
+  it('should contain GuideBreadCrumbs', () => {
+    expect(subject().find('GuideBreadCrumbs')).toHaveLength(1);
+  });
+
+  it('should contain SendingStepList', () => {
+    expect(subject().find('SendingStepList')).toHaveLength(1);
+  });
+});
 
 describe('SendingStepList', () => {
   const subject = (func = shallow) => {
