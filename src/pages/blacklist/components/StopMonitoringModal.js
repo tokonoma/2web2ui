@@ -25,12 +25,9 @@ export const StopMonitoringModal = ({
   };
   const renderContent = () => {
     return (
-      <>
-        <h4>Explanation Text</h4>
-        <Button className={styles.Confirm} disabled={isPending} onClick={confirmAction} primary>
-          Stop Monitoring
-        </Button>
-      </>
+      <Button className={styles.Confirm} disabled={isPending} onClick={confirmAction} primary>
+        Stop Monitoring
+      </Button>
     );
   };
 

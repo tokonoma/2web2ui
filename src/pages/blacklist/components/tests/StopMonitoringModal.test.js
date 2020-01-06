@@ -19,7 +19,6 @@ describe('Stop Monitoring Modal', () => {
 
     expect(queryByText('Stop Monitoring sparkpost.io')).toBeInTheDocument();
     expect(queryByText('Stop Monitoring')).toBeInTheDocument();
-    expect(queryByText('Explanation Text')).toBeInTheDocument();
   });
 
   it('upon clicking the confirm button, deletes the resource, shows alert, and closes the modal', async () => {
