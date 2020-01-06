@@ -31,6 +31,7 @@ export const GettingStartedGuide = ({
     send_test_email_completed,
     explore_analytics_completed,
     invite_collaborator_completed,
+    view_developer_docs_completed,
   } = onboarding;
 
   const setOnboardingAccountOption = (obj = {}) => {
@@ -94,6 +95,9 @@ export const GettingStartedGuide = ({
       case 'Invite a Collaborator':
         setOnboardingAccountOption({ invite_collaborator_completed: true });
         history.push('/account/users');
+        break;
+      case 'View Developer Docs':
+        setOnboardingAccountOption({ view_developer_docs_completed: true });
         break;
       case 'Generate API Key':
         history.push('/account/api-keys');
@@ -196,17 +200,28 @@ export const GettingStartedGuide = ({
                 itemCompleted={hasApiKeysForSending}
               />
             </Panel.Section>
+            <Panel.Section>
+              <CheckListItem
+                {...LETS_CODE_LIST['View Developer Docs']}
+                itemCompleted={view_developer_docs_completed}
+                action={{
+                  to: 'https://developers.sparkpost.com/api',
+                  external: true,
+                }}
+              />
+            </Panel.Section>
           </>
         );
       default:
         return null;
     }
   };
-  const CheckListItem = ({ name, title, description, itemCompleted }) => (
+  const CheckListItem = ({ name, title, description, itemCompleted, action = {} }) => (
     <GuideListItem
       action={{
         name: name,
         onClick: () => handleAction(name),
+        ...action,
       }}
       itemCompleted={itemCompleted}
     >
