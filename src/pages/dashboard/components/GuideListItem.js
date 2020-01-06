@@ -1,33 +1,35 @@
 import React from 'react';
 import { RadioButtonUnchecked, CheckCircleOutline } from '@sparkpost/matchbox-icons';
-import { Button, Grid } from '@sparkpost/matchbox';
+import { Button } from '@sparkpost/matchbox';
 import styles from './GuideListItem.module.scss';
-export const GuideListItem = ({ itemCompleted, children, action: { name, onClick } }) => (
-  <Grid>
-    <Grid.Column md={9} xs={12}>
-      <div className={styles.CheckBoxContainer}>
-        {itemCompleted ? (
-          <CheckCircleOutline size={36} className={styles.CheckCircleIcon} />
-        ) : (
-          <RadioButtonUnchecked size={36} />
-        )}
-      </div>
-      <div className={styles.ListItemContainer}>{children}</div>
-    </Grid.Column>
-    <Grid.Column md={3} xs={12}>
-      <div className={styles.ListActionContainer}>
-        <Button
-          onClick={onClick}
-          color={(!itemCompleted && 'orange') || null}
-          outline={itemCompleted}
-          data-id={name}
-        >
-          {' '}
-          {name}{' '}
-        </Button>
-      </div>
-    </Grid.Column>
-  </Grid>
+export const GuideListItem = ({
+  itemCompleted,
+  children,
+  action: { name, onClick, to, external },
+}) => (
+  <div className={styles.GuideListItemContainer}>
+    <div className={styles.CheckBoxContainer}>
+      {itemCompleted ? (
+        <CheckCircleOutline size={36} className={styles.CheckCircleIcon} />
+      ) : (
+        <RadioButtonUnchecked size={36} />
+      )}
+    </div>
+    <div className={styles.ListItemContainer}>{children}</div>
+    <div className={styles.ListActionContainer}>
+      <Button
+        onClick={onClick}
+        color={(!itemCompleted && 'orange') || null}
+        outline={itemCompleted}
+        data-id={name}
+        to={to}
+        external={external}
+      >
+        {' '}
+        {name}{' '}
+      </Button>
+    </div>
+  </div>
 );
 
 export const GuideListItemTitle = ({ children }) => (

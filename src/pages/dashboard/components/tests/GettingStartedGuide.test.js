@@ -1,5 +1,7 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { shallow } from 'enzyme';
+import { render } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { GettingStartedGuide } from '../GettingStartedGuide';
 import { GUIDE_IDS } from '../../constants';
 
@@ -19,24 +21,24 @@ describe('GettingStartedGuide', () => {
     listSendingDomains: jest.fn(),
   };
 
-  const subject = (props, func = shallow) =>
-    func(<GettingStartedGuide {...defaultProps} {...props} />);
+  const subject = (props, renderFn = render) =>
+    renderFn(<GettingStartedGuide {...defaultProps} {...props} />);
 
   it('should render correctly when guide is at bottom or when guide is at top', () => {
     expect(
-      subject({ onboarding: { isGuideAtBottom: true } })
+      subject({ onboarding: { isGuideAtBottom: true } }, shallow)
         .find('Panel')
         .prop('actions'),
     ).toBe(null);
     expect(
-      subject({ onboarding: { isGuideAtBottom: false } })
+      subject({ onboarding: { isGuideAtBottom: false } }, shallow)
         .find('Panel')
         .prop('actions'),
     ).not.toBe(null);
   });
 
   it('should render the corresponding step when breadcrumb is clicked', () => {
-    const instance = subject({ onboarding: { active_step: 'Show Me SparkPost' } });
+    const instance = subject({ onboarding: { active_step: 'Show Me SparkPost' } }, shallow);
     instance
       .find('BreadCrumbsItem')
       .at(1)
@@ -45,94 +47,76 @@ describe('GettingStartedGuide', () => {
   });
 
   it('should render the BreadCrumbItem as active corresponding to the Step', () => {
-    const instance = subject({ onboarding: { active_step: 'Show Me SparkPost' } });
-    expect(instance.find({ active: true })).toHaveTextContent('Show Me SparkPost');
+    const { queryByText } = subject({ onboarding: { active_step: 'Show Me SparkPost' } });
+    expect(queryByText('Show Me SparkPost')).toBeInTheDocument();
   });
 
   it('should render three list items when on step "Show Me SparkPost" ', () => {
-    const instance = subject({ onboarding: { active_step: 'Show Me SparkPost' } });
+    const instance = subject({ onboarding: { active_step: 'Show Me SparkPost' } }, shallow);
     expect(instance.find('CheckListItem')).toHaveLength(3);
   });
 
   it('should navigate to templates page when Send a Test Email button is clicked', () => {
-    const instance = subject({ onboarding: { active_step: 'Show Me SparkPost' } }, mount);
-    instance
-      .find('GuideListItem')
-      .at(0)
-      .prop('action')
-      .onClick();
+    const { queryByText } = subject({ onboarding: { active_step: 'Show Me SparkPost' } });
+    userEvent.click(queryByText('Send Test Email'));
     expect(defaultProps.history.push).toHaveBeenCalledWith(
       `/templates?pendo=${GUIDE_IDS.SEND_TEST_EMAIL}`,
     );
   });
 
   it('should navigate to summary report when Explore Analytics button is clicked', () => {
-    const instance = subject({ onboarding: { active_step: 'Show Me SparkPost' } }, mount);
+    const { getAllByText } = subject({ onboarding: { active_step: 'Show Me SparkPost' } });
+    userEvent.click(getAllByText('Explore Analytics')[1]);
 
-    instance
-      .find('GuideListItem')
-      .at(1)
-      .prop('action')
-      .onClick();
     expect(defaultProps.history.push).toHaveBeenCalledWith(`/reports/summary`);
     expect(window.pendo.showGuideById).toHaveBeenCalledWith(GUIDE_IDS.EXPLORE_ANALYTICS);
     expect(window.pendo.onGuideAdvanced).toHaveBeenCalledWith(1);
   });
 
   it('should navigate to users page when Invite a Collaborator is clicked', () => {
-    const instance = subject({ onboarding: { active_step: 'Show Me SparkPost' } }, mount);
-    instance
-      .find('GuideListItem')
-      .at(2)
-      .prop('action')
-      .onClick();
+    const { queryByText } = subject({ onboarding: { active_step: 'Show Me SparkPost' } });
+    userEvent.click(queryByText('Invite a Collaborator'));
     expect(defaultProps.history.push).toHaveBeenCalledWith(`/account/users`);
-  });
-
-  it('should mark Invite a Collaborator list item as completed when the the corresponding button is clicked', () => {
-    const instance = subject({ onboarding: { active_step: 'Show Me SparkPost' } }, mount);
-    instance
-      .find('GuideListItem')
-      .at(2)
-      .prop('action')
-      .onClick();
     expect(defaultProps.setAccountOption).toHaveBeenCalledWith('onboarding', {
       invite_collaborator_completed: true,
     });
   });
+
   it("should render two list items when on step Let's Code ", () => {
-    const instance = subject({ onboarding: { active_step: "Let's Code" } });
-    expect(instance.find('CheckListItem')).toHaveLength(2);
+    const instance = subject({ onboarding: { active_step: "Let's Code" } }, shallow);
+    expect(instance.find('CheckListItem')).toHaveLength(3);
+  });
+
+  it('should have an external link to developer docs', () => {
+    const { queryByText } = subject({ onboarding: { active_step: "Let's Code" } });
+    userEvent.click(queryByText('View Developer Docs'));
+    expect(defaultProps.setAccountOption).toHaveBeenCalledWith('onboarding', {
+      view_developer_docs_completed: true,
+    });
   });
 
   it("should route to API key page from Let's Code list", () => {
-    const instance = subject(
-      {
-        onboarding: { active_step: "Let's Code" },
-        hasApiKeysForSending: true,
-      },
-      mount,
-    );
-    instance
-      .find('GuideListItem')
-      .at(1)
-      .prop('action')
-      .onClick();
+    const { queryByText } = subject({
+      onboarding: { active_step: "Let's Code" },
+      hasApiKeysForSending: true,
+    });
+    userEvent.click(queryByText('Generate API Key'));
     expect(defaultProps.history.push).toHaveBeenCalledWith('/account/api-keys');
   });
+
   it('should navigate to sending domains page when Add Sending Domain is clicked', () => {
-    const instance = subject({ onboarding: { active_step: "Let's Code" } }, mount);
-    instance
-      .find('GuideListItem')
-      .at(0)
-      .prop('action')
-      .onClick();
+    const { queryByText } = subject({ onboarding: { active_step: "Let's Code" } });
+    userEvent.click(queryByText('Add Sending Domain'));
     expect(defaultProps.history.push).toHaveBeenCalledWith(`/account/sending-domains`);
   });
+
   it('should mark checklist completed when the user has sending domains setup', () => {
-    const instance = subject({
-      onboarding: { active_step: "Let's Code", hasSendingDomains: true },
-    });
+    const instance = subject(
+      {
+        onboarding: { active_step: "Let's Code", hasSendingDomains: true },
+      },
+      shallow,
+    );
     expect(instance.find({ name: 'Add Sending Domain' }).props('itemCompleted')).toBeTruthy();
   });
 });

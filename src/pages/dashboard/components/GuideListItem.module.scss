@@ -1,38 +1,39 @@
 @import '~@sparkpost/matchbox/src/styles/config.scss';
 @import 'src/styles/status-color';
 
+.GuideListItemContainer {
+  display: flex;
+}
 
-.CheckBoxContainer { 
+.CheckBoxContainer {
   width: 40px;
-  float: left;
   max-height: 40px;
   @media screen and (min-width: breakpoint(smaller)) {
     height: 100%;
   }
 }
 
-.ListItemContainer{
-  float: left;
+.ListItemContainer {
   padding-top: spacing(small);
   padding-left: spacing(small);
+  flex-grow: 1;
   @media screen and (min-width: breakpoint(smaller)) {
     height: 100%;
   }
 }
 
-.ListActionContainer{
+.ListActionContainer {
   float: right;
 }
 
-.CheckCircleIcon{
+.CheckCircleIcon {
   color: status-color(success);
 }
 
-.GuideListItem{
+.GuideListItem {
   font-weight: 600;
 }
 
-.GuideListItemDescription{
+.GuideListItemDescription {
   padding-top: 10px;
-
 }
