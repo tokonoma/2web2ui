@@ -5,7 +5,8 @@
     "*.storage.googleapis.com",
     "*pendo.io",
     "*siftscience.com",
-    "*googletagmanager.com"
+    "*googletagmanager.com",
+    "*sentry.io"
   ],
   "viewportWidth": 1280,
   "viewportHeight": 800
