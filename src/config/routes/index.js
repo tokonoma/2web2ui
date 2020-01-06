@@ -725,7 +725,7 @@ const routes = [
     component: SingleResultPage,
     condition: hasGrants('recipient-validation/manage'),
     layout: App,
-    title: 'Recipient Validation | Results',
+    title: 'Results | Recipient Validation',
     supportDocsSearch: 'Recipient Validation',
   },
   {
@@ -733,7 +733,7 @@ const routes = [
     component: UploadedListPage,
     condition: hasGrants('recipient-validation/manage'),
     layout: App,
-    title: 'Recipient Validation | List',
+    title: 'List | Recipient Validation',
     supportDocsSearch: 'Recipient Validation',
   },
   {
