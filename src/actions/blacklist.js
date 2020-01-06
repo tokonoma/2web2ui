@@ -60,9 +60,10 @@ export function listIncidentsForResource(resource, from = '2019-01-01', limit = 
     type: 'LIST_INCIDENTS_FOR_RESOURCE',
     meta: {
       method: 'GET',
-      url: `/v1/blacklist-monitors/${resource}/incidents`,
+      url: `/v1/blacklist-monitors/incidents`,
       showErrorAlert: false,
       params: {
+        resources: resource,
         limit,
         from,
       },

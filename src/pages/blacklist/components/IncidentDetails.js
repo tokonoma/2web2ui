@@ -1,6 +1,7 @@
 import React from 'react';
 import { Grid, Tag, Button } from '@sparkpost/matchbox';
 import { formatDate } from 'src/helpers/date';
+import { domainRegex } from 'src/helpers/regex';
 import cx from 'classnames';
 import moment from 'moment';
 import { PageLink } from 'src/components';
@@ -55,7 +56,9 @@ export default ({
         to={`/reports/summary?from=${moment
           .utc(listedTimestamp)
           .subtract('7', 'days')
-          .format()}&to=${moment.utc().format()}&range=custom&`}
+          .format()}&to=${moment.utc().format()}&range=custom&filters=${
+          resourceName.match(domainRegex) ? 'Sending Domain' : 'Sending IP'
+        }:${resourceName}`}
       >
         View Engagement
       </Button>

@@ -37,9 +37,10 @@ describe('Action Creator: Blacklist', () => {
       type: 'LIST_INCIDENTS_FOR_RESOURCE',
       meta: {
         method: 'GET',
-        url: `/v1/blacklist-monitors/123.123.123.1/incidents`,
+        url: `/v1/blacklist-monitors/incidents`,
         showErrorAlert: false,
         params: {
+          resources: '123.123.123.1',
           from: '2019-01-01',
           limit: 4,
         },

@@ -53,8 +53,13 @@ export const IncidentDetailsPage = ({
     return <Loading />;
   }
 
-  const { blacklist_name, resource, days_listed, resolved_at_timestamp, occurred_at_timestamp } =
-    incident || {};
+  const {
+    blacklist_name = '',
+    resource = '',
+    days_listed,
+    resolved_at_timestamp,
+    occurred_at_timestamp,
+  } = incident || {};
 
   const renderContent = () => {
     if (error) {
