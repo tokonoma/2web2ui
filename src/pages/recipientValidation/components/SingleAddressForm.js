@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Field, reduxForm } from 'redux-form';
-import { Button, Panel } from '@sparkpost/matchbox';
+import { Button, Panel, Label } from '@sparkpost/matchbox';
 import { TextFieldWrapper } from 'src/components';
 import { required, email, maxLength } from 'src/helpers/validation';
 import { singleAddress } from 'src/actions/recipientValidation';
@@ -10,23 +10,30 @@ import styles from './SingleAddressForm.module.scss';
 
 const formName = 'singleAddressForm';
 export class SingleAddressForm extends Component {
-
-  singleAddressForm = (values) => this.props.history.push(`/recipient-validation/single/${values.address}`)
+  singleAddressForm = values =>
+    this.props.history.push(`/recipient-validation/single/${values.address}`);
 
   render() {
     const { valid, pristine, submitting, handleSubmit } = this.props;
     const submitDisabled = pristine || !valid || submitting;
-    const buttonContent = (submitting) ? 'Validating...' : 'Validate';
+    const buttonContent = submitting ? 'Validating...' : 'Validate';
 
     return (
       <Panel.Section>
         <form onSubmit={handleSubmit(this.singleAddressForm)}>
           <div className={styles.Header}>Validate a Single Address</div>
-          <p className={styles.Subheader}>Enter the email address below you would like to validate.</p>
+          <p className={styles.Subheader}>
+            Enter the email address below you would like to validate.
+          </p>
           <div className={styles.Field}>
+            <Label className={styles.FieldLabel} id="email-address-field">
+              Email Address
+            </Label>
+
             <Field
+              id="email-address-field"
               style={{ height: '3.2rem', paddingLeft: '1.5em', fontSize: '.9em' }}
-              name='address'
+              name="address"
               component={TextFieldWrapper}
               placeholder={'harry.potter@hogwarts.edu'}
               validate={[required, email, maxLength(254)]}
@@ -34,14 +41,15 @@ export class SingleAddressForm extends Component {
             />
           </div>
           <div className={styles.Submit}>
-            <Button size='large' fullWidth primary submit disabled={submitDisabled}>{buttonContent}</Button>
+            <Button size="large" fullWidth primary submit disabled={submitDisabled}>
+              {buttonContent}
+            </Button>
           </div>
         </form>
       </Panel.Section>
     );
   }
 }
-
 
 const WrappedForm = reduxForm({ form: formName })(SingleAddressForm);
 
