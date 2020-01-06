@@ -85,7 +85,8 @@ exports[`JoinForm render disables form when loading 1`] = `
       id="tou_accepted"
       label={
         <span>
-          I agree to SparkPost's 
+          I agree to SparkPost's
+           
           <UnstyledLink
             external={true}
             to="https://www.sparkpost.com/policies/tou"
@@ -211,7 +212,8 @@ exports[`JoinForm render disables form when recaptcha is not loaded 1`] = `
       id="tou_accepted"
       label={
         <span>
-          I agree to SparkPost's 
+          I agree to SparkPost's
+           
           <UnstyledLink
             external={true}
             to="https://www.sparkpost.com/policies/tou"
@@ -337,7 +339,8 @@ exports[`JoinForm render enables form correctly 1`] = `
       id="tou_accepted"
       label={
         <span>
-          I agree to SparkPost's 
+          I agree to SparkPost's
+           
           <UnstyledLink
             external={true}
             to="https://www.sparkpost.com/policies/tou"

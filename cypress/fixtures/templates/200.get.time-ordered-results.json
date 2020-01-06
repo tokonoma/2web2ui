@@ -1,0 +1,36 @@
+{
+  "results": [
+    {
+      "id": "stubbed-template-1",
+      "name": "August 11th",
+      "published": false,
+      "description": "",
+      "has_draft": true,
+      "has_published": false,
+      "last_update_time": "2019-08-11T12:12:12+00:00",
+      "shared_with_subaccount": true
+    },
+    {
+      "id": "stubbed-template-2",
+      "name": "August 12th",
+      "published": false,
+      "description": "Daily roundup email.",
+      "has_draft": true,
+      "has_published": false,
+      "last_use": "2018-05-08T14:49:03+00:00",
+      "last_update_time": "2019-08-12T12:12:12+00:00",
+      "shared_with_subaccount": true
+    },
+    {
+      "id": "stubbed-template-3",
+      "name": "August 13th",
+      "published": false,
+      "description": "Daily roundup email.",
+      "has_draft": true,
+      "has_published": false,
+      "last_use": "2018-05-08T14:49:03+00:00",
+      "last_update_time": "2019-08-13T12:12:12+00:00",
+      "shared_with_subaccount": true
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "results": [
+    {
+      "id": "a",
+      "name": "A",
+      "published": false,
+      "description": "",
+      "has_draft": true,
+      "has_published": false,
+      "last_update_time": "2019-08-11T12:12:12+00:00",
+      "shared_with_subaccount": true
+    },
+    {
+      "id": "b",
+      "name": "B",
+      "published": false,
+      "description": "Daily roundup email.",
+      "has_draft": true,
+      "has_published": false,
+      "last_use": "2018-05-08T14:49:03+00:00",
+      "last_update_time": "2018-02-10T14:15:16+00:00",
+      "shared_with_subaccount": true
+    },
+    {
+      "id": "c",
+      "name": "C",
+      "published": false,
+      "description": "Daily roundup email.",
+      "has_draft": true,
+      "has_published": false,
+      "last_use": "2018-05-08T14:49:03+00:00",
+      "last_update_time": "2018-02-10T14:15:16+00:00",
+      "shared_with_subaccount": true
+    }
+  ]
+}

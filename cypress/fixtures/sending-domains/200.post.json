@@ -1,0 +1,12 @@
+{
+  "results": {
+    "message": "Successfully Created domain.",
+    "dkim": {
+      "public": "ABCD",
+      "selector": "scph1219",
+      "headers": "from:to:subject:date",
+      "signing_domain": "example.com"
+    },
+    "domain": "example.com"
+  }
+}

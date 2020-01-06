@@ -7,31 +7,38 @@ const PromoCodeNew = ({ promoCodeObj, handlePromoCode }) => {
   const { applyPromoCode, clearPromoCode } = handlePromoCode;
   const { promoError, promoPending, selectedPromo } = promoCodeObj;
   const [promoCode, setPromoCode] = useState(selectedPromo.promoCode || '');
-  const handleChange = (event) => {
+  const handleChange = event => {
     setPromoCode(event.target.value);
   };
   const handleClick = () => {
     applyPromoCode(promoCode);
   };
-  const renderActionButton = (condition) => {
+  const renderActionButton = condition => {
     if (condition) {
       return <Button onClick={clearPromoCode}>Remove</Button>;
     }
-    return <Button onClick={handleClick} disabled={promoPending}>Apply</Button>;
+    return (
+      <Button onClick={handleClick} disabled={promoPending}>
+        Apply
+      </Button>
+    );
   };
-  const renderLoading = (condition) => condition ? <LoadingSVG size="XSmall"/> : null;
+  const renderLoading = condition => (condition ? <LoadingSVG size="XSmall" /> : null);
   const isDisabled = () => promoPending || _.has(selectedPromo, 'promoCode');
-  const displayErrorMessage = () => promoError ? promoError.message : '';
-  return <TextField
-    name="promo"
-    label="Promo Code"
-    disabled={isDisabled()}
-    connectRight={renderActionButton(selectedPromo.promoCode)}
-    onChange={handleChange}
-    suffix={renderLoading(promoPending)}
-    error={displayErrorMessage()}
-    defaultValue={selectedPromo.promoCode || ''}
-  />;
+  const displayErrorMessage = () => (promoError ? promoError.message : '');
+  return (
+    <TextField
+      id="promo-code"
+      name="promo"
+      label="Promo Code"
+      disabled={isDisabled()}
+      connectRight={renderActionButton(selectedPromo.promoCode)}
+      onChange={handleChange}
+      suffix={renderLoading(promoPending)}
+      error={displayErrorMessage()}
+      defaultValue={selectedPromo.promoCode || ''}
+    />
+  );
 };
 
 export default PromoCodeNew;

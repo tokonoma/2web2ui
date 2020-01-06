@@ -36,6 +36,7 @@ exports[`renders correctly 1`] = `
       name="rememberMe"
     />
     <Button
+      data-id="button-log-in"
       disabled={false}
       primary={true}
       size="default"
@@ -83,6 +84,7 @@ exports[`renders correctly when logging in 1`] = `
       name="rememberMe"
     />
     <Button
+      data-id="button-log-in"
       disabled={true}
       primary={true}
       size="default"
@@ -141,6 +143,7 @@ exports[`renders errors 1`] = `
       name="rememberMe"
     />
     <Button
+      data-id="button-log-in"
       disabled={false}
       primary={true}
       size="default"

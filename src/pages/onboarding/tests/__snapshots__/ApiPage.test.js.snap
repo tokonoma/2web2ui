@@ -11,6 +11,7 @@ exports[`ApiPage should render 1`] = `
       <CopyField
         helpText="For security, we'll never display this full key again. Make sure you copy it somewhere safe!"
         hideCopy={false}
+        id="api-key-copy-field"
         label="Your API Key"
         value="123456789"
       />

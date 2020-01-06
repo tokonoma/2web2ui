@@ -14,6 +14,7 @@ const ApiPage = () => (
         <Panel accent title="REST API Integration">
           <Panel.Section>
             <CopyField
+              id="api-key-copy-field"
               value={apiKey}
               label="Your API Key"
               helpText={
