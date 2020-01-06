@@ -156,65 +156,6 @@
     {
       "billingId": "123",
       "canPurchaseIps": true,
-      "code": "1M-premier-0519",
-      "hasOnlineSupport": true,
-      "hasPhoneSupport": true,
-      "includesIp": true,
-      "monthly": 525,
-      "name": "1M Premier",
-      "overage": 0.55,
-      "status": "public",
-      "tier": "premier",
-      "volume": 1000000,
-      "quotas": {
-        "daily": 1000,
-        "monthly": 3000000
-      }
-    },
-    {
-      "billingId": "123",
-      "canPurchaseIps": true,
-      "code": "2.5M-0817",
-      "discountEnds": "2017-09-17T00:00",
-      "discountId": "123",
-      "discountPrice": 630,
-      "hasOnlineSupport": true,
-      "hasPhoneSupport": true,
-      "includesIp": true,
-      "monthly": 899,
-      "name": "2.5M",
-      "overage": 0.4,
-      "status": "secret",
-      "volume": 2500000,
-      "quotas": {
-        "daily": 1000,
-        "monthly": 7500000
-      }
-    },
-    {
-      "billingId": "123",
-      "canPurchaseIps": true,
-      "code": "5M-0817",
-      "discountEnds": "2017-09-17T00:00",
-      "discountId": "123",
-      "discountPrice": 1049,
-      "hasOnlineSupport": true,
-      "hasPhoneSupport": true,
-      "includesCsm": true,
-      "includesIp": true,
-      "monthly": 1549,
-      "name": "5M",
-      "overage": 0.3,
-      "status": "secret",
-      "volume": 5000000,
-      "quotas": {
-        "daily": 1000,
-        "monthly": 12500000
-      }
-    },
-    {
-      "billingId": "123",
-      "canPurchaseIps": true,
       "code": "10M-0817",
       "discountEnds": "2017-09-17T00:00",
       "discountId": "123",
@@ -355,66 +296,6 @@
       "volume": 400000000,
       "quotas": {
         "daily": 16000000
-      }
-    },
-    {
-      "billingId": "123",
-      "canPurchaseIps": true,
-      "code": "500M-0817",
-      "discountEnds": "2017-09-17T00:00",
-      "discountId": "123",
-      "discountPrice": 23625,
-      "hasOnlineSupport": true,
-      "hasPhoneSupport": true,
-      "includesCsm": true,
-      "includesIp": true,
-      "monthly": 24750,
-      "name": "500M",
-      "overage": 0.07,
-      "status": "secret",
-      "volume": 500000000,
-      "quotas": {
-        "daily": 20000000
-      }
-    },
-    {
-      "billingId": "123",
-      "canPurchaseIps": true,
-      "code": "1B-0817",
-      "discountEnds": "2017-09-17T00:00",
-      "discountId": "123",
-      "discountPrice": 46725,
-      "hasOnlineSupport": true,
-      "hasPhoneSupport": true,
-      "includesCsm": true,
-      "includesIp": true,
-      "monthly": 48950,
-      "name": "1B",
-      "overage": 0.07,
-      "status": "secret",
-      "volume": 1000000000,
-      "quotas": {
-        "daily": 20000000
-      }
-    },
-    {
-      "billingId": "123",
-      "canPurchaseIps": true,
-      "code": "2B-0817",
-      "discountEnds": "2017-09-17T00:00",
-      "discountId": "123",
-      "discountPrice": 92400,
-      "hasOnlineSupport": true,
-      "hasPhoneSupport": true,
-      "includesCsm": true,
-      "includesIp": true,
-      "monthly": 96800,
-      "name": "2B",
-      "overage": 0.07,
-      "status": "secret",
-      "volume": 2000000000,
-      "quotas": {
-        "daily": 40000000
       }
     }
   ]
