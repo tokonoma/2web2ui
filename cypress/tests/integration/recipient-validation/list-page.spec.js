@@ -148,5 +148,30 @@ describe('The recipient validation page', () => {
         'https://developers.sparkpost.com/api/recipient-validation/',
       );
     });
+
+    it('renders the single address validation form when the user clicks on "Single Address"', () => {
+      cy.findByText('Single Address').click();
+      cy.findByText('Validate a Single Address').should('be.visible');
+    });
+
+    it('re-directs the user to the single address validation results page when the user enters a single email address for validation', () => {
+      const fakeEmail = 'fake-email@sparkpost.com';
+
+      stubRequest({
+        method: 'GET',
+        url: `/api/v1/recipient-validation/single/${fakeEmail}`,
+        fixture: 'recipient-validation/single/fake-email/200.get.valid-result.json',
+      });
+
+      cy.findByText('Single Address').click();
+      cy.findByLabelText('Email Address').type(fakeEmail);
+      cy.findByText('Validate').click();
+    });
+
+    it('renders the list validation form when the user clicks on "List"', () => {
+      cy.findByText('Single Address').click(); // Have to click to another tab then back to the current active tab to successfully activate it
+      cy.findByText('List').click();
+      cy.findByText('Drag and drop your list here').should('be.visible');
+    });
   });
 });
