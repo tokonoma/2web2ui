@@ -81,6 +81,48 @@ Object {
 }
 `;
 
+exports[`BlackList Reducer list historical incidents fail 1`] = `
+Object {
+  "historicalIncidentsError": Object {
+    "errors": Array [
+      Object {
+        "message": "Some error occurred",
+      },
+    ],
+  },
+  "historicalIncidentsPending": false,
+  "incidents": Array [],
+  "incidentsPending": false,
+  "monitors": Array [],
+  "monitorsPending": false,
+}
+`;
+
+exports[`BlackList Reducer list historical incidents pending 1`] = `
+Object {
+  "historicalIncidentsError": null,
+  "historicalIncidentsPending": true,
+  "incidents": Array [],
+  "incidentsPending": false,
+  "monitors": Array [],
+  "monitorsPending": false,
+}
+`;
+
+exports[`BlackList Reducer list historical incidents success 1`] = `
+Object {
+  "historicalIncidents": Object {
+    "fakeData": true,
+  },
+  "historicalIncidentsError": null,
+  "historicalIncidentsPending": false,
+  "incidents": Array [],
+  "incidentsPending": false,
+  "monitors": Array [],
+  "monitorsPending": false,
+}
+`;
+
 exports[`BlackList Reducer list incidents fail 1`] = `
 Object {
   "incidents": Array [],

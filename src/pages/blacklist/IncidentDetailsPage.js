@@ -3,16 +3,18 @@ import { Page, Panel, Grid } from '@sparkpost/matchbox';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { ApiErrorBanner, Loading } from 'src/components';
+import { ApiErrorBanner, Loading, Empty, PanelLoading } from 'src/components';
 import {
   getIncident,
   listIncidentsForResource,
   listIncidentsForBlacklist,
+  listHistoricalResolvedIncidents,
 } from 'src/actions/blacklist';
 import {
   selectIncident,
   selectRelatedIncidentsForResource,
   selectRelatedIncidentsForBlacklist,
+  selectHistoricalIncidents,
 } from 'src/selectors/blacklist';
 import IncidentDetails from './components/IncidentDetails';
 import RelatedIncidents from './components/RelatedIncidents';
@@ -21,19 +23,31 @@ export const IncidentDetailsPage = ({
   id,
   error,
   loading,
+  historicalIncidents,
   incident,
   incidentsForBlacklist,
   incidentsForResource,
   getIncident,
   listIncidentsForResource,
   listIncidentsForBlacklist,
+  listHistoricalResolvedIncidents,
+  incidentsForResourcePending,
+  incidentsForBlacklistPending,
+  historicalIncidentsPending,
 }) => {
   useEffect(() => {
     getIncident(id).then(incident => {
       listIncidentsForResource(incident.resource);
       listIncidentsForBlacklist(incident.blacklist_name);
+      listHistoricalResolvedIncidents(incident.blacklist_name, incident.resource);
     });
-  }, [getIncident, id, listIncidentsForBlacklist, listIncidentsForResource]);
+  }, [
+    getIncident,
+    id,
+    listIncidentsForBlacklist,
+    listIncidentsForResource,
+    listHistoricalResolvedIncidents,
+  ]);
 
   if (loading) {
     return <Loading />;
@@ -60,35 +74,51 @@ export const IncidentDetailsPage = ({
     return (
       <>
         <Panel sectioned>
-          <IncidentDetails
-            resourceName={resource}
-            blacklistName={blacklist_name}
-            listedTimestamp={occurred_at_timestamp}
-            resolvedTimestamp={resolved_at_timestamp}
-            daysListed={days_listed}
-            historicalIncidents={[]}
-          />
+          {historicalIncidentsPending ? (
+            <PanelLoading minHeight={150} />
+          ) : (
+            <IncidentDetails
+              resourceName={resource}
+              blacklistName={blacklist_name}
+              listedTimestamp={occurred_at_timestamp}
+              resolvedTimestamp={resolved_at_timestamp}
+              daysListed={days_listed}
+              historicalIncidents={historicalIncidents}
+            />
+          )}
         </Panel>
 
         <Grid>
           <Grid.Column lg={6} xs={12}>
-            <Panel>
-              <RelatedIncidents
-                incident={{ ...incident, id }}
-                incidents={incidentsForBlacklist}
-                type="blacklist"
-                header={`Recent ${blacklist_name} Incidents`}
-              />
-            </Panel>
+            {incidentsForBlacklistPending ? (
+              <PanelLoading />
+            ) : incidentsForBlacklist.length ? (
+              <Panel>
+                <RelatedIncidents
+                  incident={{ ...incident, id }}
+                  incidents={incidentsForBlacklist}
+                  type="blacklist"
+                  header={`Recent ${blacklist_name} Incidents`}
+                />
+              </Panel>
+            ) : (
+              <Empty message={`No Recent ${blacklist_name} incidents`} />
+            )}
           </Grid.Column>
           <Grid.Column lg={6} xs={12}>
-            <Panel>
-              <RelatedIncidents
-                incident={{ ...incident, id }}
-                incidents={incidentsForResource}
-                header={`Recent ${resource} Incidents`}
-              />
-            </Panel>
+            {incidentsForResourcePending ? (
+              <PanelLoading />
+            ) : incidentsForResource.length ? (
+              <Panel>
+                <RelatedIncidents
+                  incident={{ ...incident, id }}
+                  incidents={incidentsForResource}
+                  header={`Recent ${resource} Incidents`}
+                />
+              </Panel>
+            ) : (
+              <Empty message={`No Recent ${resource} incidents`} />
+            )}
           </Grid.Column>
         </Grid>
       </>
@@ -112,10 +142,17 @@ export const IncidentDetailsPage = ({
 const mapStateToProps = (state, props) => {
   const { id } = props.match.params;
   return {
+    historicalIncidents: selectHistoricalIncidents(state),
+    historicalIncidentsPending: state.blacklist.historicalIncidentsPending,
+    historicalIncidentsError: state.blacklist.historicalIncidentsError,
     id,
     incident: selectIncident(state),
     incidentsForResource: selectRelatedIncidentsForResource(state),
+    incidentsForResourcePending: state.blacklist.incidentsForResourcePending,
+    incidentsForResourceError: state.blacklist.incidentsForResourceError,
     incidentsForBlacklist: selectRelatedIncidentsForBlacklist(state),
+    incidentsForBlacklistPending: state.blacklist.incidentsForBlacklistPending,
+    incidentsForBlacklistError: state.blacklist.incidentsForBlacklistError,
     error: state.blacklist.incidentError,
     loading: state.blacklist.incidentPending,
   };
@@ -124,4 +161,5 @@ export default connect(mapStateToProps, {
   getIncident,
   listIncidentsForResource,
   listIncidentsForBlacklist,
+  listHistoricalResolvedIncidents,
 })(IncidentDetailsPage);

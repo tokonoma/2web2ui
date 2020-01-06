@@ -11,6 +11,8 @@ const getIncidentsForResource = state => state.blacklist.incidentsForResource ||
 
 const getIncidentsForBlacklist = state => state.blacklist.incidentsForBlacklist || [];
 
+const getHistoricalIncidents = state => state.blacklist.historicalIncidents || [];
+
 const enrichIncident = incident => ({
   ...incident,
   occurred_at_timestamp: incident.occurred_at ? Date.parse(incident.occurred_at) : 0,
@@ -42,6 +44,15 @@ export const selectRelatedIncidentsForBlacklist = createSelector(
       .filter(incident => incident.id !== currentIncident.id)
       .map(incident => enrichIncident(incident))
       .slice(0, 3),
+);
+
+export const selectHistoricalIncidents = createSelector(
+  [getHistoricalIncidents, getIncident],
+  (incidents, currentIncident) =>
+    incidents
+      .filter(incident => incident.id !== currentIncident.id)
+      .map(incident => enrichIncident(incident))
+      .slice(0, 6),
 );
 
 export const selectBlacklistedCount = createSelector([getMonitors], monitors =>

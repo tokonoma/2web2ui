@@ -118,18 +118,8 @@ export default [
   {
     label: 'Blacklist',
     icon: GridOff,
-    children: [
-      {
-        label: 'Incidents',
-        to: '/blacklist/incidents',
-        tag: 'preview',
-      },
-      {
-        label: 'Watchlist',
-        to: '/blacklist/watchlist',
-        tag: 'preview',
-      },
-    ],
+    tag: 'preview',
+    to: '/blacklist/incidents',
   },
   {
     label: 'Configuration',

@@ -46,6 +46,17 @@ const TEST_CASES = {
     payload: { errors: [{ message: 'Some error occurred' }] },
     type: 'LIST_INCIDENTS_FOR_BLACKLIST_FAIL',
   },
+  'list historical incidents pending': {
+    type: 'LIST_HISTORICAL_INCIDENTS_PENDING',
+  },
+  'list historical incidents success': {
+    payload: { fakeData: true },
+    type: 'LIST_HISTORICAL_INCIDENTS_SUCCESS',
+  },
+  'list historical incidents fail': {
+    payload: { errors: [{ message: 'Some error occurred' }] },
+    type: 'LIST_HISTORICAL_INCIDENTS_FAIL',
+  },
   'list monitors pending': {
     type: 'LIST_MONITORS_PENDING',
   },

@@ -4,43 +4,36 @@ import { AccessTime } from '@sparkpost/matchbox-icons';
 import { PageLink } from 'src/components';
 import styles from './RelatedIncidents.module.scss';
 
-export default ({ incident, incidents = [], header = '', type = '' }) => (
-  <>
-    <Table>
-      <tbody>
-        <Table.Row>
-          <Table.HeaderCell>{header}</Table.HeaderCell>
-          {incidents.length > 0 ? <Table.HeaderCell>Resolved</Table.HeaderCell> : null}
-        </Table.Row>
+export default ({ incidents = [], header = '', type = '' }) => (
+  <Table>
+    <tbody>
+      <Table.Row>
+        <Table.HeaderCell>{header}</Table.HeaderCell>
+        {incidents.length > 0 ? <Table.HeaderCell>Resolved</Table.HeaderCell> : null}
+      </Table.Row>
 
-        {incidents
-          .filter(i => i.id !== incident.id)
-          .map(incident => (
-            <Table.Row>
-              <Table.Cell>
-                <div>
-                  <PageLink to={`/blacklist/incidents/${incident.id}`}>
-                    {type === 'blacklist' ? incident.resource : incident.blacklist_name}
-                  </PageLink>
-                  <div>
-                    <AccessTime />
-                    <span>{`Listed ${incident.occurred_at_formatted}`}</span>
-                  </div>
-                </div>
-              </Table.Cell>
-              <Table.Cell>
-                <span>{incident.resolved_at_formatted || <Tag color="yellow">Active</Tag>}</span>
-              </Table.Cell>
-            </Table.Row>
-          ))}
-      </tbody>
-    </Table>
-    {incidents.length === 0 ? (
-      <div align="justify" className={styles.NoResults}>
-        <div>{`No Recent ${
-          type === 'blacklist' ? incident.blacklist_name : incident.resource
-        } incidents`}</div>
-      </div>
-    ) : null}
-  </>
+      {incidents.map(incident => (
+        <Table.Row className={styles.Table} key={incident.id}>
+          <Table.Cell>
+            <div>
+              <PageLink to={`/blacklist/incidents/${incident.id}`}>
+                <strong>
+                  {type === 'blacklist' ? incident.resource : incident.blacklist_name}
+                </strong>
+              </PageLink>
+              <div>
+                <AccessTime className={styles.TimeIcon} />
+                <span>{`Listed ${incident.occurred_at_formatted}`}</span>
+              </div>
+            </div>
+          </Table.Cell>
+          <Table.Cell>
+            <div className={styles.Resolved}>
+              {incident.resolved_at_formatted || <Tag color="yellow">Active</Tag>}
+            </div>
+          </Table.Cell>
+        </Table.Row>
+      ))}
+    </tbody>
+  </Table>
 );

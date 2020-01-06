@@ -41,7 +41,7 @@ describe('Action Creator: Blacklist', () => {
         showErrorAlert: false,
         params: {
           from: '2019-01-01',
-          limit: 3,
+          limit: 4,
         },
       },
     });
@@ -58,7 +58,25 @@ describe('Action Creator: Blacklist', () => {
         params: {
           from: '2019-01-01',
           blacklists: 'spamhaus',
-          limit: 3,
+          limit: 4,
+        },
+      },
+    });
+  });
+
+  it('it makes request to list historical incidents for a specific resource and blacklist', async () => {
+    await blacklist.listHistoricalResolvedIncidents('spamhaus', '123.123.123.1');
+    expect(sparkpostApiRequest).toHaveBeenCalledWith({
+      type: 'LIST_HISTORICAL_INCIDENTS',
+      meta: {
+        method: 'GET',
+        url: `/v1/blacklist-monitors/123.123.123.1/incidents`,
+        showErrorAlert: false,
+        params: {
+          from: '2019-01-01',
+          blacklists: 'spamhaus',
+          limit: 7,
+          status: 'resolved',
         },
       },
     });

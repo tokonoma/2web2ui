@@ -3,7 +3,7 @@
 .DetailGroup {
   display: flex;
   flex-direction: column;
-
+  font-size: font-size(300);
   .Value {
     margin-top: spacing(small);
   }
@@ -11,4 +11,10 @@
 
 .EngagementButton {
   margin-top: spacing();
+}
+
+.HistoricalIncidents {
+  @media screen and (max-width: breakpoint(medium)) {
+    margin-top: spacing();
+  }
 }

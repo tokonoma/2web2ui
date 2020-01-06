@@ -52,6 +52,18 @@ export default (state = initialState, { type, payload }) => {
         incidentsForBlacklistError: null,
       };
 
+    case 'LIST_HISTORICAL_INCIDENTS_PENDING':
+      return { ...state, historicalIncidentsPending: true, historicalIncidentsError: null };
+    case 'LIST_HISTORICAL_INCIDENTS_FAIL':
+      return { ...state, historicalIncidentsPending: false, historicalIncidentsError: payload };
+    case 'LIST_HISTORICAL_INCIDENTS_SUCCESS':
+      return {
+        ...state,
+        historicalIncidents: payload,
+        historicalIncidentsPending: false,
+        historicalIncidentsError: null,
+      };
+
     case 'ADD_WATCHLIST_PENDING':
       return { ...state, watchlistAddPending: true, watchlistAddError: null };
     case 'ADD_WATCHLIST_FAIL':

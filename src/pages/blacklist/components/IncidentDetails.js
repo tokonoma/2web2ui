@@ -1,6 +1,7 @@
 import React from 'react';
 import { Grid, Tag, Button } from '@sparkpost/matchbox';
 import { formatDate } from 'src/helpers/date';
+import cx from 'classnames';
 import moment from 'moment';
 import { PageLink } from 'src/components';
 import styles from './IncidentDetails.module.scss';
@@ -13,13 +14,13 @@ export default ({
   historicalIncidents,
 }) => (
   <Grid>
-    <Grid.Column lg={2} xs={4}>
+    <Grid.Column lg={2} md={4}>
       <div className={styles.DetailGroup}>
         <strong>Date Listed</strong>
         <span className={styles.Value}>{formatDate(listedTimestamp)}</span>
       </div>
     </Grid.Column>
-    <Grid.Column lg={2} xs={4}>
+    <Grid.Column lg={2} md={4}>
       <div className={styles.DetailGroup}>
         <strong>Date Resolved</strong>
         <span className={styles.Value}>
@@ -27,14 +28,14 @@ export default ({
         </span>
       </div>
     </Grid.Column>
-    <Grid.Column lg={2} xs={4}>
+    <Grid.Column lg={2} md={4}>
       <div className={styles.DetailGroup}>
         <strong>Days Listed</strong>
         <span className={styles.Value}>{daysListed}</span>
       </div>
     </Grid.Column>
-    <Grid.Column lgOffset={1} lg={5} xs={12}>
-      <div className={styles.DetailGroup}>
+    <Grid.Column xl={5} xlOffset={1} lg={6} xs={12}>
+      <div className={cx(styles.DetailGroup, styles.HistoricalIncidents)}>
         <strong>Historical Incidents</strong>
         {historicalIncidents.length === 0 ? (
           <span>{`No historical incidents for ${resourceName} on ${blacklistName}`}</span>
@@ -48,6 +49,7 @@ export default ({
     </Grid.Column>
     <Grid.Column xs={12}>
       <Button
+        size="small"
         color="orange"
         className={styles.EngagementButton}
         to={`/reports/summary?from=${moment

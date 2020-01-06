@@ -85,3 +85,25 @@ export function listIncidentsForBlacklist(blacklist, from = '2019-01-01', limit 
     },
   });
 }
+
+export function listHistoricalResolvedIncidents(
+  blacklist,
+  resource,
+  from = '2019-01-01',
+  limit = 7,
+) {
+  return sparkpostApiRequest({
+    type: 'LIST_HISTORICAL_INCIDENTS',
+    meta: {
+      method: 'GET',
+      url: `/v1/blacklist-monitors/${resource}/incidents`,
+      showErrorAlert: false,
+      params: {
+        blacklists: blacklist,
+        limit,
+        from,
+        status: 'resolved',
+      },
+    },
+  });
+}

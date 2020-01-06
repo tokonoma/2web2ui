@@ -27,7 +27,7 @@ describe('Blacklist Selectors: ', () => {
         occurred_at_timestamp: 1563886080000,
         resolved_at_formatted: null,
         resolved_at_timestamp: 0,
-        days_listed: 157,
+        days_listed: 156,
       },
     ];
 
