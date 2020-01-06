@@ -23,6 +23,6 @@ describe('SendMoreCTA Component', () => {
   it('renders learn more about sending limits link', () => {
     wrapper.setProps({ hasSendingLimits: true });
 
-    expect(wrapper.findWhere(node => node.text() === 'Learn more about these limits.')).toExist();
+    expect(wrapper).toHaveTextContent('Learn more about these limits.');
   });
 });
