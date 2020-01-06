@@ -1,14 +1,16 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import SendingStepList, { SendingStepListItem } from '../SendingStepList';
+import { SendingStepList, SendingStepListItem } from '../SendingStep';
 import { SENDING_STEP_LIST } from 'src/pages/dashboard/constants';
+import { useGuideContext } from '../GettingStartedGuide';
+
+jest.mock('../GettingStartedGuide');
 
 describe('SendingStepList', () => {
-  const defaultProps = {
-    setAndStoreStepName: jest.fn(),
+  const subject = (func = shallow) => {
+    useGuideContext.mockReturnValue({ setAndStoreStepName: jest.fn() });
+    return func(<SendingStepList />);
   };
-
-  const subject = (props, func = shallow) => func(<SendingStepList {...defaultProps} {...props} />);
 
   it('Sending Step contains two items', () => {
     const instance = subject();
