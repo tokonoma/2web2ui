@@ -3,7 +3,7 @@ import { Panel } from '@sparkpost/matchbox';
 import GuideBreadCrumbs from './GuideBreadCrumbs';
 import { Card, CardTitle, CardContent, CardActions } from 'src/components';
 import { Send } from '@sparkpost/matchbox-icons';
-import styles from './GettingStartedGuide.module.scss';
+import styles from './FeaturesStep.module.scss';
 import ButtonWrapper from 'src/components/buttonWrapper';
 import { Button, Grid } from '@sparkpost/matchbox';
 import { useGuideContext } from './GettingStartedGuide';

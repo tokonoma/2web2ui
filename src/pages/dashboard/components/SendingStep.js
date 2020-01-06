@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import GuideBreadCrumbs from './GuideBreadCrumbs';
 import { Panel } from '@sparkpost/matchbox';
-import styles from './GettingStartedGuide.module.scss';
+import styles from './SendingStep.module.scss';
 import { useGuideContext } from './GettingStartedGuide';
 import { Card, CardContent, CardActions } from 'src/components';
 import ButtonWrapper from 'src/components/buttonWrapper';
