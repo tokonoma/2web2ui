@@ -111,10 +111,7 @@ const sparkpostRequest = requestHelperFactory({
         showAlert({
           type: 'error',
           message: 'Something went wrong.',
-          details:
-            response.status === 413
-              ? 'File size larger than the server allows. Try again.'
-              : message,
+          details: response.status === 413 ? 'File size larger than the server allows.' : message,
         }),
       );
     }

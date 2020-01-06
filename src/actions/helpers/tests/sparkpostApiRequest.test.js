@@ -134,7 +134,7 @@ describe('Helper: SparkPost API Request', () => {
       expect(globalAlertMock.showAlert).toHaveBeenCalledWith({
         type: 'error',
         message: 'Something went wrong.',
-        details: 'File size larger than the server allows. Try again.',
+        details: 'File size larger than the server allows.',
       });
     });
 
