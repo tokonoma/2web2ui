@@ -56,7 +56,14 @@ export default ({
         to={`/reports/summary?from=${moment
           .utc(listedTimestamp)
           .subtract('7', 'days')
-          .format()}&to=${moment.utc().format()}&range=custom&filters=${
+          .format()}&to=${
+          resolvedTimestamp
+            ? moment
+                .utc(resolvedTimestamp)
+                .add('7', 'days')
+                .format()
+            : moment.utc().format()
+        }&range=custom&filters=${
           resourceName.match(domainRegex) ? 'Sending Domain' : 'Sending IP'
         }:${resourceName}`}
       >
