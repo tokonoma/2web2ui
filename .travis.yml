@@ -10,7 +10,6 @@ addons:
 cache:
   directories:
     - build # shows bundle size diff per file/chunk
-    - '$HOME/.npm' # to avoid fetching modules from npm every time
     - '$HOME/.cache/Cypress' # for caching the (rather large) Cypress binary
 
 before_install: npm install -g greenkeeper-lockfile@1
