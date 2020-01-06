@@ -104,4 +104,18 @@ describe('The recipient validation page', () => {
 
     cy.findByText('How was this calculated?').should('be.visible');
   });
+
+  it('uploads stuff', () => {
+    stubRequest({
+      method: 'POST',
+      url: '/api/v1/recipient-validation/upload',
+      fixture: 'recipient-validation/upload/200.post.json',
+    });
+
+    const exampleCSV = 'recipient-validation/example.csv';
+
+    cy.fixture(exampleCSV).then(fileContent => {
+      cy.get('[name="csv"]').upload({ fileContent, fileName: 'example.csv', mimeType: 'text/csv' });
+    });
+  });
 });

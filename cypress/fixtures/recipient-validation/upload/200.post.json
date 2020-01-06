@@ -1,0 +1,13 @@
+{
+  "results": {
+    "message": "Successfully uploaded recipient list.",
+    "list_id": "abc",
+    "uploaded_file": "/path/to/uploaded/file",
+    "batch_status": "queued_for_batch",
+    "complete": false,
+    "original_filename": "example.csv",
+    "address_count": 2,
+    "customer_id": 123,
+    "uploaded_timestamp": 1578327971
+  }
+}
