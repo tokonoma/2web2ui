@@ -4,7 +4,6 @@ import { Page, Panel, Button, Grid, UnstyledLink } from '@sparkpost/matchbox';
 import styles from './SingleResult.module.scss';
 import { withRouter, Link } from 'react-router-dom';
 import CodeBlock from './components/CodeBlock';
-import { WarningIcon, SuccessIcon, ErrorIcon, QuestionIcon } from './components/icons';
 import {
   ROLE_TOOLTIP,
   DISPOSABLE_TOOLTIP,
@@ -28,14 +27,6 @@ const valueResponse = value =>
   ) : (
     <span className={styles.greenBoolean}>No</span>
   );
-
-const ICONS = {
-  valid: <SuccessIcon />,
-  neutral: <QuestionIcon />,
-  risky: <WarningIcon />,
-  undeliverable: <ErrorIcon />,
-  typo: <ErrorIcon />,
-};
 
 export class SingleResult extends Component {
   componentDidMount() {
@@ -85,7 +76,6 @@ export class SingleResult extends Component {
 
     return (
       <div className={styles.Result}>
-        <div style={{ marginRight: '15px' }}>{ICONS[result]}</div>
         <div>
           <div style={{ marginBottom: '20px', fontWeight: 600 }}>Status:</div>
           <div style={{ textTransform: 'capitalize', fontSize: '2.8em', fontWeight: 550 }}>
@@ -99,7 +89,6 @@ export class SingleResult extends Component {
   renderCodeBlock = () => {
     const { singleResults = {} } = this.props;
     const { result, valid, reason, is_role, is_disposable, is_free, did_you_mean } = singleResults;
-
     return (
       <small className={styles.blue}>
         {'{'}
