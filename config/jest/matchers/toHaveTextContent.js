@@ -1,11 +1,10 @@
 import { toHaveTextContent as testingLibraryToHaveTextContent } from '@testing-library/jest-dom';
 
-export default function toHaveTextContent(received, expectedContent) {
+export default function toHaveTextContent(elementOrReceived, expectedContent) {
   try {
-    // Using `.apply` necessary so that the Testing Library .toHaveValue had access to a valid value for `this`
-    return testingLibraryToHaveTextContent.apply(this, [HTMLElement, expectedContent]);
+    return testingLibraryToHaveTextContent.apply(this, [elementOrReceived, expectedContent]);
   } catch {
-    const text = received.debug && received.debug();
+    const text = elementOrReceived.debug && elementOrReceived.debug();
 
     return {
       message: () => `expected component to have content "${expectedContent}"`,
