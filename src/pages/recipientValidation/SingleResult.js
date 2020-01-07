@@ -18,16 +18,6 @@ import Tooltip from './components/Tooltip';
 
 const SINGLE_RV_LINK = '/recipient-validation/single';
 
-const Tab = () => <span className={styles.tab} />;
-const White = ({ children }) => <span className={styles.white}>{children}</span>;
-
-const ValueResponse = props =>
-  props.value ? (
-    <span className={styles.redBoolean}>Yes</span>
-  ) : (
-    <span className={styles.greenBoolean}>No</span>
-  );
-
 export class SingleResult extends Component {
   componentDidMount() {
     const { address, singleAddress, history, showAlert } = this.props;
@@ -103,45 +93,45 @@ export class SingleResult extends Component {
       <small className={styles.blue}>
         {'{'}
         <br />
-        <Tab />
+        <TabCharacter />
         "results": {'{'}
         <br />
         {result && (
           <>
-            <Tab />
-            <Tab />
-            "result": "<White>{result}</White>",
+            <TabCharacter />
+            <TabCharacter />
+            "result": "<WhiteText>{result}</WhiteText>",
             <br />
           </>
         )}
-        <Tab />
-        <Tab />
-        "valid": <White>{valid.toString()}</White>,<br />
+        <TabCharacter />
+        <TabCharacter />
+        "valid": <WhiteText>{valid.toString()}</WhiteText>,<br />
         {reason && (
           <>
-            <Tab />
-            <Tab />
-            "reason": "<White>{reason}</White>",
+            <TabCharacter />
+            <TabCharacter />
+            "reason": "<WhiteText>{reason}</WhiteText>",
             <br />
           </>
         )}
-        <Tab />
-        <Tab />
-        "is_role": <White>{is_role.toString()}</White>,<br />
-        <Tab />
-        <Tab />
-        "is_disposable": <White>{is_disposable.toString()}</White>,<br />
-        <Tab />
-        <Tab />
-        "is_free": <White>{is_free.toString()}</White>,<br />
+        <TabCharacter />
+        <TabCharacter />
+        "is_role": <WhiteText>{is_role.toString()}</WhiteText>,<br />
+        <TabCharacter />
+        <TabCharacter />
+        "is_disposable": <WhiteText>{is_disposable.toString()}</WhiteText>,<br />
+        <TabCharacter />
+        <TabCharacter />
+        "is_free": <WhiteText>{is_free.toString()}</WhiteText>,<br />
         {did_you_mean && (
           <>
-            <Tab />
-            <Tab />
-            "did_you_mean": "<White>{did_you_mean.toString()}</White>"<br />
+            <TabCharacter />
+            <TabCharacter />
+            "did_you_mean": "<WhiteText>{did_you_mean.toString()}</WhiteText>"<br />
           </>
         )}
-        <Tab />
+        <TabCharacter />
         {'}'}
         <br />
         {'}'}
@@ -184,7 +174,7 @@ export class SingleResult extends Component {
                 <div style={{ padding: '2rem' }}>
                   <div className={styles.apiHeader}>Raw API Response</div>
                   <p className={styles.ApiDescription}>
-                    <White>
+                    <WhiteText>
                       The following raw API results outline the reasons for your email's validation
                       status. Learn how to
                       <UnstyledLink
@@ -196,7 +186,7 @@ export class SingleResult extends Component {
                         integrate with Recipient Validation{' '}
                       </UnstyledLink>{' '}
                       in your product.
-                    </White>
+                    </WhiteText>
                   </p>
                   <pre>{this.renderCodeBlock()}</pre>
                 </div>
@@ -207,6 +197,22 @@ export class SingleResult extends Component {
       </Page>
     );
   }
+}
+
+function TabCharacter() {
+  return <span className={styles.tab} />;
+}
+
+function WhiteText({ children }) {
+  return <span className={styles.white}>{children}</span>;
+}
+
+function ValueResponse({ value }) {
+  return value ? (
+    <span className={styles.redBoolean}>Yes</span>
+  ) : (
+    <span className={styles.greenBoolean}>No</span>
+  );
 }
 
 const mapStateToProps = ({ recipientValidation }, { match }) => ({
