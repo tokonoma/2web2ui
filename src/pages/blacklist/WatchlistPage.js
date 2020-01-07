@@ -7,6 +7,7 @@ import { ApiErrorBanner, Loading } from 'src/components';
 import { selectBlacklistedCount } from 'src/selectors/blacklist';
 import { listMonitors } from 'src/actions/blacklist';
 import MonitorsCollection from './components/MonitorsCollection';
+import StopMonitoringModal from './components/StopMonitoringModal';
 import CongratsBanner from './components/CongratsBanner';
 import styles from './WatchlistPage.module.scss';
 
@@ -14,6 +15,9 @@ export const WatchlistPage = props => {
   const { loading, listMonitors, monitors, hasBlacklisted, error } = props;
 
   const [showCongrats, setShowCongrats] = useState(true);
+  const [monitorToDelete, setMonitorToDelete] = useState(null);
+
+  const closeModal = () => setMonitorToDelete(null);
 
   useEffect(() => {
     listMonitors();
@@ -44,7 +48,7 @@ export const WatchlistPage = props => {
           <CongratsBanner onDismiss={() => setShowCongrats(false)} />
         )}
         <div data-id="monitors-table">
-          <MonitorsCollection monitors={monitors} />
+          <MonitorsCollection monitors={monitors} handleDelete={setMonitorToDelete} />
         </div>
       </>
     );
@@ -71,6 +75,7 @@ export const WatchlistPage = props => {
         affected.
       </p>
       {renderContent()}
+      <StopMonitoringModal monitorToDelete={monitorToDelete} closeModal={closeModal} />
     </Page>
   );
 };
