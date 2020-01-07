@@ -35,7 +35,7 @@ export default function CheckListItem({ name, title, description, action = {} })
         </>
       );
 
-    return null;
+    return description;
   };
   const itemCompleted = {
     'Add Sending Domain': hasSendingDomains,
@@ -60,7 +60,7 @@ export default function CheckListItem({ name, title, description, action = {} })
       itemCompleted={itemCompleted[name]}
     >
       <GuideListItemTitle>{title}</GuideListItemTitle>
-      <GuideListItemDescription>{getDescription(name) || description}</GuideListItemDescription>
+      <GuideListItemDescription>{getDescription(name)}</GuideListItemDescription>
     </GuideListItem>
   );
 }
