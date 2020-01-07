@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-syntax */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Page, Panel, Button, Grid, UnstyledLink } from '@sparkpost/matchbox';
@@ -21,6 +22,7 @@ const SINGLE_RV_LINK = '/recipient-validation/single';
 export class SingleResult extends Component {
   componentDidMount() {
     const { address, singleAddress, history, showAlert } = this.props;
+
     singleAddress(address).catch(({ message }) => {
       showAlert({ message, type: 'error' });
       history.push(SINGLE_RV_LINK);
@@ -78,7 +80,10 @@ export class SingleResult extends Component {
       <div className={styles.Result}>
         <div>
           <div style={{ marginBottom: '20px', fontWeight: 600 }}>Status:</div>
-          <div style={{ textTransform: 'capitalize', fontSize: '2.8em', fontWeight: 550 }}>
+          <div
+            data-id="validation-result-status"
+            style={{ textTransform: 'capitalize', fontSize: '2.8em', fontWeight: 550 }}
+          >
             {result}
           </div>
         </div>
@@ -208,10 +213,13 @@ function WhiteText({ children }) {
 }
 
 function ValueResponse({ value }) {
-  return value ? (
-    <span className={styles.redBoolean}>Yes</span>
-  ) : (
-    <span className={styles.greenBoolean}>No</span>
+  return (
+    <span
+      data-id="validation-result-value"
+      className={value ? styles.redBoolean : styles.greenBoolean}
+    >
+      {value ? 'Yes' : 'No'}
+    </span>
   );
 }
 
