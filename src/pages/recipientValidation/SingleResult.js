@@ -21,8 +21,8 @@ const SINGLE_RV_LINK = '/recipient-validation/single';
 const Tab = () => <span className={styles.tab} />;
 const White = ({ children }) => <span className={styles.white}>{children}</span>;
 
-const valueResponse = value =>
-  value ? (
+const ValueResponse = props =>
+  props.value ? (
     <span className={styles.redBoolean}>Yes</span>
   ) : (
     <span className={styles.greenBoolean}>No</span>
@@ -48,24 +48,34 @@ export class SingleResult extends Component {
             <h6 className={styles.tableKey}>
               Did you mean <Tooltip content={DID_YOU_MEAN_TOOLTIP} />
             </h6>
+
             <span>{did_you_mean}</span>
+
             <hr />
           </>
         )}
+
         <h6 className={styles.tableKey}>
           Role-based <Tooltip content={ROLE_TOOLTIP} />
         </h6>
-        {valueResponse(is_role)}
+
+        <ValueResponse value={is_role} />
+
         <hr />
+
         <h6 className={styles.tableKey}>
           Disposable <Tooltip content={DISPOSABLE_TOOLTIP} />
         </h6>
-        {valueResponse(is_disposable)}
+
+        <ValueResponse value={is_disposable} />
+
         <hr />
+
         <h6 className={styles.tableKey}>
           Free <Tooltip content={FREE_TOOLTIP} />
         </h6>
-        {valueResponse(is_free)}
+
+        <ValueResponse value={is_free} />
       </div>
     );
   };
