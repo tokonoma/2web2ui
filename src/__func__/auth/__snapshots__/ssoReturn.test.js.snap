@@ -58,31 +58,6 @@ Array [
       "data": undefined,
       "headers": Object {
         "Authorization": "mock-access-token",
-        "x-msys-subaccount": 0,
-      },
-      "method": "get",
-      "params": undefined,
-      "responseType": "json",
-      "url": "/v1/api-keys",
-    },
-  ],
-  Array [
-    Object {
-      "data": undefined,
-      "headers": Object {
-        "Authorization": "mock-access-token",
-      },
-      "method": "get",
-      "params": undefined,
-      "responseType": "json",
-      "url": "/v1/sending-domains",
-    },
-  ],
-  Array [
-    Object {
-      "data": undefined,
-      "headers": Object {
-        "Authorization": "mock-access-token",
       },
       "method": "get",
       "params": Object {
@@ -105,6 +80,31 @@ Array [
       },
       "responseType": "json",
       "url": "/v1/suppression-list",
+    },
+  ],
+  Array [
+    Object {
+      "data": undefined,
+      "headers": Object {
+        "Authorization": "mock-access-token",
+        "x-msys-subaccount": 0,
+      },
+      "method": "get",
+      "params": undefined,
+      "responseType": "json",
+      "url": "/v1/api-keys",
+    },
+  ],
+  Array [
+    Object {
+      "data": undefined,
+      "headers": Object {
+        "Authorization": "mock-access-token",
+      },
+      "method": "get",
+      "params": undefined,
+      "responseType": "json",
+      "url": "/v1/sending-domains",
     },
   ],
 ]

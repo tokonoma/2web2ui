@@ -13,21 +13,53 @@ import { setAccountOption } from 'src/actions/account';
 import SuppressionBanner from './components/SuppressionBanner';
 
 export function DashboardPage(props) {
-  const { accountAgeInDays, currentUser, account, checkSuppression } = props;
+  const {
+    accountAgeInDays,
+    currentUser,
+    account,
+    checkSuppression,
+    listApiKeys,
+    listSendingDomains,
+  } = props;
 
   useEffect(() => {
     checkSuppression();
   }, [checkSuppression]);
+  useEffect(() => {
+    listApiKeys({ id: 0 });
+  }, [listApiKeys]);
+  useEffect(() => {
+    listSendingDomains();
+  }, [listSendingDomains]);
 
   const displayGuideAndReport = () => {
-    const { onboarding: { isGuideAtBottom } = {}, accountAgeInWeeks, hasSuppressions } = props;
+    const {
+      onboarding: {
+        isGuideAtBottom,
+        send_test_email_completed,
+        explore_analytics_completed,
+        invite_collaborator_completed,
+        view_developer_docs_completed,
+      } = {},
+      accountAgeInWeeks,
+      hasSuppressions,
+      hasSendingDomains,
+      hasApiKeysForSending,
+    } = props;
     const usageReport = <UsageReport />;
     const gettingStartedGuide = <GettingStartedGuide {...props} />;
     const suppresionBanner = (
       <SuppressionBanner accountAgeInWeeks={accountAgeInWeeks} hasSuppressions={hasSuppressions} />
     );
+    const areAllGuidesCompleted =
+      send_test_email_completed &&
+      explore_analytics_completed &&
+      invite_collaborator_completed &&
+      view_developer_docs_completed &&
+      hasSendingDomains &&
+      hasApiKeysForSending;
 
-    if (isGuideAtBottom) {
+    if (isGuideAtBottom || areAllGuidesCompleted) {
       return (
         <>
           {usageReport}

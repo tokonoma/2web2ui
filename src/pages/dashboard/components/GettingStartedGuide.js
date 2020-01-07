@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createContext, useContext } from 'react';
+import React, { useState, createContext, useContext } from 'react';
 import { Panel } from '@sparkpost/matchbox';
 import { ArrowDownward } from '@sparkpost/matchbox-icons';
 import { GUIDE_IDS } from '../constants';
@@ -16,16 +16,7 @@ export const GettingStartedGuide = ({
   setAccountOption,
   hasSendingDomains,
   hasApiKeysForSending,
-  listApiKeys,
-  listSendingDomains,
 }) => {
-  useEffect(() => {
-    listApiKeys({ id: 0 });
-  }, [listApiKeys]);
-  useEffect(() => {
-    listSendingDomains();
-  }, [listSendingDomains]);
-
   const {
     isGuideAtBottom = false,
     active_step,
@@ -35,24 +26,33 @@ export const GettingStartedGuide = ({
     view_developer_docs_completed,
   } = onboarding;
 
+  const areAllGuidesCompleted =
+    send_test_email_completed &&
+    explore_analytics_completed &&
+    invite_collaborator_completed &&
+    view_developer_docs_completed &&
+    hasSendingDomains &&
+    hasApiKeysForSending;
+
   const setOnboardingAccountOption = (obj = {}) => {
     setAccountOption('onboarding', obj);
   };
 
   //TODO: set isGuideAtBottom to true if all the CheckLists are completed.
-  const actions = isGuideAtBottom
-    ? null
-    : [
-        {
-          content: (
-            <span>
-              {`Move to Bottom`} <ArrowDownward size="20" />{' '}
-            </span>
-          ),
-          color: 'blue',
-          onClick: () => setOnboardingAccountOption({ isGuideAtBottom: true }),
-        },
-      ];
+  const actions =
+    isGuideAtBottom || areAllGuidesCompleted
+      ? null
+      : [
+          {
+            content: (
+              <span>
+                {`Move to Bottom`} <ArrowDownward size="20" />{' '}
+              </span>
+            ),
+            color: 'blue',
+            onClick: () => setOnboardingAccountOption({ isGuideAtBottom: true }),
+          },
+        ];
   //stepName could be Features,Sending,Show Me Sparkpost, Let's Code
   const [stepName, setStepName] = useState(active_step || 'Features');
   const setAndStoreStepName = active_step => {
