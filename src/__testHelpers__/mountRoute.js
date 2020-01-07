@@ -18,7 +18,6 @@ const forceUpdate = async wrapper => {
 };
 
 const simulate = async (wrapper, selector, eventName) => {
-  // console.log(wrapper.find(selector).debug());
   wrapper.find(selector).simulate(eventName);
   await forceUpdate(wrapper);
 };
