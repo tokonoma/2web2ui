@@ -4,6 +4,9 @@
   border-radius: 5px;
   border: 1px solid color(gray, 5);
   padding: spacing();
+  @media screen and (max-width: breakpoint(small)) {
+    margin-top: 10px;
+  }
 }
 
 .CardTitle {

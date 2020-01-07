@@ -55,7 +55,6 @@ exports[`ChoosePlan page tests should disable submit and plan picker when submit
             Updating Subscription...
           </Button>
         </Panel.Section>
-        <withRouter(Steps) />
       </Panel>
     </Grid.Column>
   </Grid>
@@ -117,7 +116,6 @@ exports[`ChoosePlan page tests should render correctly 1`] = `
             Get Started
           </Button>
         </Panel.Section>
-        <withRouter(Steps) />
       </Panel>
     </Grid.Column>
   </Grid>
@@ -164,7 +162,6 @@ exports[`ChoosePlan page tests should show free bullets when isFree is selected 
             Get Started
           </Button>
         </Panel.Section>
-        <withRouter(Steps) />
       </Panel>
     </Grid.Column>
   </Grid>

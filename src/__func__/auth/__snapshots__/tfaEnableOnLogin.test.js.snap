@@ -147,11 +147,12 @@ Array [
       "data": undefined,
       "headers": Object {
         "Authorization": "mock-access-token",
+        "x-msys-subaccount": 0,
       },
       "method": "get",
       "params": undefined,
       "responseType": "json",
-      "url": "/v1/sending-domains",
+      "url": "/v1/api-keys",
     },
   ],
   Array [
@@ -159,12 +160,11 @@ Array [
       "data": undefined,
       "headers": Object {
         "Authorization": "mock-access-token",
-        "x-msys-subaccount": 0,
       },
       "method": "get",
       "params": undefined,
       "responseType": "json",
-      "url": "/v1/api-keys",
+      "url": "/v1/sending-domains",
     },
   ],
 ]

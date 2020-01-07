@@ -38,12 +38,9 @@ describe('GettingStartedGuide', () => {
   });
 
   it('should render the corresponding step when breadcrumb is clicked', () => {
-    const instance = subject({ onboarding: { active_step: 'Show Me SparkPost' } }, shallow);
-    instance
-      .find('BreadCrumbsItem')
-      .at(1)
-      .simulate('click');
-    expect(instance.find('SendingStepList')).toHaveLength(1);
+    const { queryByText } = subject({ onboarding: { active_step: 'Show Me SparkPost' } });
+    userEvent.click(queryByText('Sending'));
+    expect(queryByText('Where Would You Like to Begin?')).toBeInTheDocument(1);
   });
 
   it('should render the BreadCrumbItem as active corresponding to the Step', () => {
@@ -51,9 +48,9 @@ describe('GettingStartedGuide', () => {
     expect(queryByText('Show Me SparkPost')).toBeInTheDocument();
   });
 
-  it('should render three list items when on step "Show Me SparkPost" ', () => {
+  it('should render ShowMeSparkpostStep when on step "Show Me SparkPost" ', () => {
     const instance = subject({ onboarding: { active_step: 'Show Me SparkPost' } }, shallow);
-    expect(instance.find('CheckListItem')).toHaveLength(3);
+    expect(instance.find('ShowMeSparkpostStep')).toHaveLength(1);
   });
 
   it('should navigate to templates page when Send a Test Email button is clicked', () => {
@@ -82,9 +79,9 @@ describe('GettingStartedGuide', () => {
     });
   });
 
-  it("should render two list items when on step Let's Code ", () => {
+  it("should render LetsCodeStep when on step Let's Code ", () => {
     const instance = subject({ onboarding: { active_step: "Let's Code" } }, shallow);
-    expect(instance.find('CheckListItem')).toHaveLength(3);
+    expect(instance.find('LetsCodeStep')).toHaveLength(1);
   });
 
   it('should have an external link to developer docs', () => {
@@ -108,15 +105,5 @@ describe('GettingStartedGuide', () => {
     const { queryByText } = subject({ onboarding: { active_step: "Let's Code" } });
     userEvent.click(queryByText('Add Sending Domain'));
     expect(defaultProps.history.push).toHaveBeenCalledWith(`/account/sending-domains`);
-  });
-
-  it('should mark checklist completed when the user has sending domains setup', () => {
-    const instance = subject(
-      {
-        onboarding: { active_step: "Let's Code", hasSendingDomains: true },
-      },
-      shallow,
-    );
-    expect(instance.find({ name: 'Add Sending Domain' }).props('itemCompleted')).toBeTruthy();
   });
 });

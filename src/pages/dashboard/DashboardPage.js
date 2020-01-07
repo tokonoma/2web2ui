@@ -1,78 +1,100 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Page } from '@sparkpost/matchbox';
 import { UsageReport } from 'src/components';
-import { AccessControl } from 'src/components/auth';
-import Tutorial from './components/Tutorial';
 import { GettingStartedGuide } from './components/GettingStartedGuide';
 import VerifyEmailBanner from 'src/components/verifyEmailBanner/VerifyEmailBanner';
 import { FreePlanWarningBanner } from 'src/pages/billing/components/Banners';
 import SignupModal from './components/SignupModal';
 /* helpers */
-import { hasGrants } from 'src/helpers/conditions';
-import { isAccountUiOptionSet, getAccountUiOptionValue } from 'src/helpers/conditions/account';
+import { getAccountUiOptionValue } from 'src/helpers/conditions/account';
 /* actions */
 import { setAccountOption } from 'src/actions/account';
+import SuppressionBanner from './components/SuppressionBanner';
 
-export class DashboardPage extends Component {
-  displayGuideAndReport = () => {
+export function DashboardPage(props) {
+  const {
+    accountAgeInDays,
+    currentUser,
+    account,
+    checkSuppression,
+    listApiKeys,
+    listSendingDomains,
+  } = props;
+
+  useEffect(() => {
+    checkSuppression();
+  }, [checkSuppression]);
+  useEffect(() => {
+    listApiKeys({ id: 0 });
+  }, [listApiKeys]);
+  useEffect(() => {
+    listSendingDomains();
+  }, [listSendingDomains]);
+
+  const displayGuideAndReport = () => {
+    const {
+      onboarding: {
+        isGuideAtBottom,
+        send_test_email_completed,
+        explore_analytics_completed,
+        invite_collaborator_completed,
+        view_developer_docs_completed,
+      } = {},
+      accountAgeInWeeks,
+      hasSuppressions,
+      hasSendingDomains,
+      hasApiKeysForSending,
+    } = props;
     const usageReport = <UsageReport />;
-    const gettingStartedGuide = <GettingStartedGuide {...this.props} />;
+    const gettingStartedGuide = <GettingStartedGuide {...props} />;
+    const suppresionBanner = (
+      <SuppressionBanner accountAgeInWeeks={accountAgeInWeeks} hasSuppressions={hasSuppressions} />
+    );
+    const areAllGuidesCompleted =
+      send_test_email_completed &&
+      explore_analytics_completed &&
+      invite_collaborator_completed &&
+      view_developer_docs_completed &&
+      hasSendingDomains &&
+      hasApiKeysForSending;
 
-    const { isMessageOnboardingSet, onboarding: { isGuideAtBottom } = {} } = this.props;
-
-    if (isMessageOnboardingSet) {
-      if (isGuideAtBottom) {
-        return (
-          <>
-            {usageReport}
-            {gettingStartedGuide}
-          </>
-        );
-      }
+    if (isGuideAtBottom || areAllGuidesCompleted) {
       return (
         <>
-          {gettingStartedGuide}
           {usageReport}
+          {suppresionBanner}
+          {gettingStartedGuide}
         </>
       );
     }
-
     return (
       <>
+        {suppresionBanner}
+        {gettingStartedGuide}
         {usageReport}
-        <AccessControl
-          condition={hasGrants('api_keys/manage', 'templates/modify', 'sending_domains/manage')}
-        >
-          <Tutorial {...this.props} />
-        </AccessControl>{' '}
       </>
     );
   };
 
-  render() {
-    const { accountAgeInDays, currentUser, account, isMessageOnboardingSet } = this.props;
+  //Shows banner if within 14 days of plan to downgrade
 
-    //Shows banner if within 14 days of plan to downgrade
-
-    return (
-      <Page title="Dashboard">
-        {currentUser.email_verified === false && (
-          <VerifyEmailBanner verifying={currentUser.verifyingEmail} />
-        )}
-        {isMessageOnboardingSet && <SignupModal />}
-        <FreePlanWarningBanner
-          account={account}
-          accountAgeInDays={accountAgeInDays}
-          ageRangeStart={16}
-        />
-        {this.displayGuideAndReport()}
-      </Page>
-    );
-  }
+  return (
+    <Page title="Dashboard">
+      {currentUser.email_verified === false && (
+        <VerifyEmailBanner verifying={currentUser.verifyingEmail} />
+      )}
+      <SignupModal />
+      <FreePlanWarningBanner
+        account={account}
+        accountAgeInDays={accountAgeInDays}
+        ageRangeStart={16}
+      />
+      {displayGuideAndReport()}
+    </Page>
+  );
 }
 const mapStateToProps = state => ({
-  isMessageOnboardingSet: isAccountUiOptionSet('messaging_onboarding')(state),
   onboarding: getAccountUiOptionValue('onboarding')(state),
 });
 

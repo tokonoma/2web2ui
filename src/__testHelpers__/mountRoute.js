@@ -12,7 +12,7 @@ import { initializeAccessControl } from 'src/actions/accessControl';
 
 import asyncFlush from 'src/__testHelpers__/asyncFlush';
 
-const forceUpdate = async (wrapper) => {
+const forceUpdate = async wrapper => {
   await asyncFlush();
   wrapper.update();
 };
@@ -22,7 +22,7 @@ const simulate = async (wrapper, selector, eventName) => {
   await forceUpdate(wrapper);
 };
 
-const currentLocation = (wrapper) => wrapper.find('MemoryRouter Router').prop('history').location;
+const currentLocation = wrapper => wrapper.find('MemoryRouter Router').prop('history').location;
 
 /** Bring up the app with in-memory routing on enzyme/jsdom.
  * @param {string} route - the app route to load (see src/config/routes.js)
@@ -31,7 +31,10 @@ const currentLocation = (wrapper) => wrapper.find('MemoryRouter Router').prop('h
  * @param {boolean} options.clearApiAfterAuth - clear out the mock axios instance after auth?
  * @returns {Promise<WrappedApp>} an Enzyme wrapper containing the app
  */
-export default async function mountRoute(route, { authenticated = true, clearApiAfterAuth = true } = {}) {
+export default async function mountRoute(
+  route,
+  { authenticated = true, clearApiAfterAuth = true } = {},
+) {
   const store = configureStore();
 
   // Note: axios#create() is mocked and now returns the same object on every call
@@ -51,7 +54,7 @@ export default async function mountRoute(route, { authenticated = true, clearApi
   const wrapper = mount(
     <Provider store={store}>
       <App RouterComponent={Router} />
-    </Provider>
+    </Provider>,
   );
 
   await asyncFlush();
@@ -76,6 +79,6 @@ export default async function mountRoute(route, { authenticated = true, clearApi
     forceUpdate: (...rest) => forceUpdate(wrapper, ...rest),
     mockApiCalls: axiosMock.mock.calls,
     axiosMock,
-    store
+    store,
   };
 }

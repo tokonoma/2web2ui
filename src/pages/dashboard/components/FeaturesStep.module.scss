@@ -1,0 +1,11 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.SendIcon {
+  transform: rotate(-45deg);
+  vertical-align: 5%;
+}
+
+.FeaturesCardContent {
+  max-width: 450px;
+  margin: 0;
+}
