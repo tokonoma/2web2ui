@@ -1,7 +1,8 @@
 @import '~@sparkpost/matchbox/src/styles/config.scss';
 
 .Heading,
-.ApiHeading {
+.ApiHeading.ApiHeading {
+  font-size: 1rem;
   margin-bottom: 2rem;
 }
 
@@ -12,7 +13,7 @@
 
 .ResultValue {
   text-transform: capitalize;
-  font-size: 1.75rem;
+  font-size: 1.66rem;
   font-weight: 550;
 }
 
@@ -35,8 +36,9 @@
   margin-bottom: 2rem;
 }
 
-.blue {
-  color: #8fc4fe;
+.CodeSnippet {
+  color: color(blue, 'light');
+  font-size: 0.75rem;
 }
 
 .WhiteText {

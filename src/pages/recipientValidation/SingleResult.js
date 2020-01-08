@@ -72,59 +72,6 @@ export class SingleResult extends Component {
     );
   };
 
-  renderCodeBlock = () => {
-    const { singleResults = {} } = this.props;
-    const { result, valid, reason, is_role, is_disposable, is_free, did_you_mean } = singleResults;
-    return (
-      <small className={styles.blue}>
-        {'{'}
-        <br />
-        <TabCharacter />
-        "results": {'{'}
-        <br />
-        {result && (
-          <>
-            <TabCharacter />
-            <TabCharacter />
-            "result": "<WhiteText>{result}</WhiteText>",
-            <br />
-          </>
-        )}
-        <TabCharacter />
-        <TabCharacter />
-        "valid": <WhiteText>{valid.toString()}</WhiteText>,<br />
-        {reason && (
-          <>
-            <TabCharacter />
-            <TabCharacter />
-            "reason": "<WhiteText>{reason}</WhiteText>",
-            <br />
-          </>
-        )}
-        <TabCharacter />
-        <TabCharacter />
-        "is_role": <WhiteText>{is_role.toString()}</WhiteText>,<br />
-        <TabCharacter />
-        <TabCharacter />
-        "is_disposable": <WhiteText>{is_disposable.toString()}</WhiteText>,<br />
-        <TabCharacter />
-        <TabCharacter />
-        "is_free": <WhiteText>{is_free.toString()}</WhiteText>,<br />
-        {did_you_mean && (
-          <>
-            <TabCharacter />
-            <TabCharacter />
-            "did_you_mean": "<WhiteText>{did_you_mean.toString()}</WhiteText>"<br />
-          </>
-        )}
-        <TabCharacter />
-        {'}'}
-        <br />
-        {'}'}
-      </small>
-    );
-  };
-
   render() {
     const { singleResults = {}, loading } = this.props;
 
@@ -179,7 +126,8 @@ export class SingleResult extends Component {
                       &nbsp;in your product.
                     </WhiteText>
                   </p>
-                  <pre>{this.renderCodeBlock()}</pre>
+
+                  <ResultCodeBlock data={singleResults} />
                 </div>
               </CodeBlock>
             </Grid.Column>
@@ -211,6 +159,59 @@ function Result({ children }) {
         {children}
       </div>
     </div>
+  );
+}
+
+function ResultCodeBlock({ data }) {
+  const { result, valid, reason, is_role, is_disposable, is_free, did_you_mean } = data;
+
+  return (
+    <pre className={styles.CodeSnippet}>
+      {'{'}
+      <br />
+      <TabCharacter />
+      "results": {'{'}
+      <br />
+      {result && (
+        <>
+          <TabCharacter />
+          <TabCharacter />
+          "result": "<WhiteText>{result}</WhiteText>",
+          <br />
+        </>
+      )}
+      <TabCharacter />
+      <TabCharacter />
+      "valid": <WhiteText>{valid.toString()}</WhiteText>,<br />
+      {reason && (
+        <>
+          <TabCharacter />
+          <TabCharacter />
+          "reason": "<WhiteText>{reason}</WhiteText>",
+          <br />
+        </>
+      )}
+      <TabCharacter />
+      <TabCharacter />
+      "is_role": <WhiteText>{is_role.toString()}</WhiteText>,<br />
+      <TabCharacter />
+      <TabCharacter />
+      "is_disposable": <WhiteText>{is_disposable.toString()}</WhiteText>,<br />
+      <TabCharacter />
+      <TabCharacter />
+      "is_free": <WhiteText>{is_free.toString()}</WhiteText>,<br />
+      {did_you_mean && (
+        <>
+          <TabCharacter />
+          <TabCharacter />
+          "did_you_mean": "<WhiteText>{did_you_mean.toString()}</WhiteText>"<br />
+        </>
+      )}
+      <TabCharacter />
+      {'}'}
+      <br />
+      {'}'}
+    </pre>
   );
 }
 
