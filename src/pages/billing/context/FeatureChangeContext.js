@@ -5,7 +5,6 @@ import { Button } from '@sparkpost/matchbox';
 
 import { getSubscription } from 'src/actions/billing';
 import { selectPlansByKey } from 'src/selectors/accountBillingInfo';
-import SupportTicketLink from 'src/components/supportTicketLink/SupportTicketLink';
 // import { pluralString } from 'src/helpers/string';
 
 const FeatureChangeContext = createContext({});
@@ -16,19 +15,23 @@ export const FeatureChangeProvider = ({
   subscription,
   selectedBundle,
   loading,
-  getSubscription
+  getSubscription,
 }) => {
-
-  const [ actions, updateActions ] = useState({});
+  const [actions, updateActions] = useState({});
   //State to keep track of features that can't directly be addressed, and are acknowledged by user
-  const [ confirmations, setConfirm ] = useState({});
-  const onConfirm = (key) => { setConfirm({ ...confirmations, [key]: true }); };
+  const [confirmations, setConfirm] = useState({});
+  const onConfirm = key => {
+    setConfirm({ ...confirmations, [key]: true });
+  };
 
-  useEffect(() => { getSubscription(); }, [getSubscription]);
-
+  useEffect(() => {
+    getSubscription();
+  }, [getSubscription]);
 
   //Rechecks conditions on re-entering tab. Only initializes once
-  const checkConditions = useCallback(() => { getSubscription(); }, [getSubscription]);
+  const checkConditions = useCallback(() => {
+    getSubscription();
+  }, [getSubscription]);
   useEffect(() => {
     window.addEventListener('focus', checkConditions);
     return () => {
@@ -38,14 +41,14 @@ export const FeatureChangeProvider = ({
 
   //Keys the selected plan by product to make for easier comparison
   const selectedPlansByProduct = useMemo(() => {
-
     const { products } = selectedBundle;
-    return products.reduce((res, { product, plan: planId }) => (
-      {
+    return products.reduce(
+      (res, { product, plan: planId }) => ({
         ...res,
-        [product]: plans[planId]
-      }
-    ), {});
+        [product]: plans[planId],
+      }),
+      {},
+    );
   }, [plans, selectedBundle]);
 
   // Used for finding the features that need to have a proper function
@@ -69,17 +72,11 @@ export const FeatureChangeProvider = ({
               description: (
                 <div>
                   <span>
-                    Your new plan doesn't include dedicated IPs.
-                    Your current IPs will now be billed at $20/month each, or you can
-                  </span>
-                  <SupportTicketLink issueId="general_issue">
-                     &nbsp;submit a ticket&nbsp;
-                  </SupportTicketLink>
-                  <span>
-                     to delete them.
+                    {`Your new plan doesn't include dedicated IPs. 
+                    Your current IP(s) will be removed at the end of your current billing cycle.`}
                   </span>
                 </div>
-              )
+              ),
             };
           }
           return resObject;
@@ -88,7 +85,8 @@ export const FeatureChangeProvider = ({
           if (actions.auth || !comparedPlan) {
             resObject.auth = {
               label: 'Authentication and Security',
-              description: 'Your new plan no longer allows for single sign-on and multifactor authentication.'
+              description:
+                'Your new plan no longer allows for single sign-on and multifactor authentication.',
             };
           }
           return resObject;
@@ -131,34 +129,37 @@ export const FeatureChangeProvider = ({
   useMemo(calculateDifferences, [subscription]);
 
   //Evaluates condition and generates action if condition exists
-  const featuresWithActions = useMemo(() => (_.map(actions, ({ action, condition, ...rest }, key) => ({
-    ...rest,
-    key,
-    value: condition !== undefined ? condition : confirmations[key],
-    action: condition !== undefined ? action : <Button onClick={() => onConfirm(key)}>Got it</Button>
-  }))), [actions, confirmations, onConfirm]);
+  const featuresWithActions = useMemo(
+    () =>
+      _.map(actions, ({ action, condition, ...rest }, key) => ({
+        ...rest,
+        key,
+        value: condition !== undefined ? condition : confirmations[key],
+        action:
+          condition !== undefined ? action : <Button onClick={() => onConfirm(key)}>Got it</Button>,
+      })),
+    [actions, confirmations, onConfirm],
+  );
 
   //Checks if all provided conditions are good
   const value = {
     isReady: _.every(featuresWithActions, 'value'),
     features: featuresWithActions,
-    loading
+    loading,
   };
 
-  return (
-    <FeatureChangeContext.Provider value={value}>
-      {children}
-    </FeatureChangeContext.Provider>
-  );
+  return <FeatureChangeContext.Provider value={value}>{children}</FeatureChangeContext.Provider>;
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   plans: selectPlansByKey(state),
   subscription: state.billing.subscription,
-  loading: state.billing.loading
+  loading: state.billing.loading,
 });
 
-export const FeatureChangeContextProvider = connect(mapStateToProps, { getSubscription })(FeatureChangeProvider);
+export const FeatureChangeContextProvider = connect(mapStateToProps, { getSubscription })(
+  FeatureChangeProvider,
+);
 
 export const useFeatureChangeContext = () => useContext(FeatureChangeContext);
 
