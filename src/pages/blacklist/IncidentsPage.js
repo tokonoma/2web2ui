@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { ApiErrorBanner, Loading } from 'src/components';
+import { Users } from 'src/components/images';
 import { listMonitors, listIncidents } from 'src/actions/blacklist';
 import { selectIncidentsList } from 'src/selectors/blacklist';
 import IncidentsCollection from './components/IncidentsCollection';
@@ -11,7 +12,7 @@ import styles from './IncidentsPage.module.scss';
 import CongratsBanner from './components/CongratsBanner';
 
 export const IncidentsPage = props => {
-  const { loading, error, listMonitors, listIncidents, incidents } = props;
+  const { loading, error, listMonitors, listIncidents, monitors, incidents } = props;
 
   useEffect(() => {
     listMonitors();
@@ -53,8 +54,23 @@ export const IncidentsPage = props => {
 
   return (
     <Page
+      empty={{
+        show: monitors.length === 0,
+        title: 'Blacklist Reports',
+        image: Users,
+        content: (
+          <p>
+            Monitor blacklists for your domains and IPs so you know when your deliverability will be
+            affected.
+          </p>
+        ),
+      }}
       title="Blacklist Incidents"
-      primaryAction={{ content: 'View Watchlist', to: '/blacklist/watchlist', component: Link }}
+      primaryAction={{
+        content: 'Add to Watchlist',
+        to: '/blacklist/watchlist/add',
+        component: Link,
+      }}
     >
       <p className={styles.Description}>
         Monitor blacklists for your domains and IPs so you know when your deliverability will be
