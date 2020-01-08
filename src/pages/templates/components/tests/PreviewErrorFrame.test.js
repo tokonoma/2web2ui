@@ -31,6 +31,16 @@ describe('PreviewErrorFrame', () => {
     expect(queryByText(DEFAULT_DESCRIPTION)).toBeInTheDocument();
   });
 
+  it('renders only the "description" field when the "code" is not "3000"', () => {
+    const { queryByText } = render(
+      <PreviewErrorFrame errors={[{ code: '12', description: 'mock description' }]} />,
+    );
+
+    expect(queryByText(/mock description/)).toBeInTheDocument();
+    expect(queryByText(DEFAULT_HEADING)).toBeInTheDocument();
+    expect(queryByText(DEFAULT_DESCRIPTION)).toBeInTheDocument();
+  });
+
   it('renders default content when no "code" or "description" field are present', () => {
     const { queryByText } = render(<PreviewErrorFrame errors={[]} />);
 

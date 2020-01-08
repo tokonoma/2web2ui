@@ -4,7 +4,8 @@ import styles from './PreviewErrorFrame.module.scss';
 
 /* eslint-disable no-restricted-syntax */
 const PreviewErrorFrame = ({ errors }) => {
-  const error = (errors ? errors[0] : {}) || {};
+  // instability of the data leads to some funky logic - checking that the errors array exists, and defaulting to an empty object if either the first index or the array doesn't exist
+  const error = errors ? errors[0] || {} : {};
   const { message, description, line, part, code } = error;
 
   return (
