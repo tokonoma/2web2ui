@@ -6,7 +6,13 @@
 
 .Result {
   display: flex;
-  margin-bottom: 2rem;
+  margin-bottom: spacing('large');
+}
+
+.ResultValue {
+  text-transform: capitalize;
+  font-size: 1.75rem;
+  font-weight: 550;
 }
 
 .tab {

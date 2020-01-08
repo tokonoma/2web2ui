@@ -1,7 +1,7 @@
 /* eslint-disable no-restricted-syntax */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Page, Panel, Button, Grid, UnstyledLink } from '@sparkpost/matchbox';
+import { ScreenReaderOnly, Page, Panel, Button, Grid, UnstyledLink } from '@sparkpost/matchbox';
 import styles from './SingleResult.module.scss';
 import { withRouter, Link } from 'react-router-dom';
 import CodeBlock from './components/CodeBlock';
@@ -212,15 +212,10 @@ function ValueResponse({ value }) {
 function Result({ children }) {
   return (
     <div className={styles.Result}>
-      <div>
-        <div style={{ marginBottom: '20px', fontWeight: 600 }}>Status:</div>
+      <ScreenReaderOnly>Status:</ScreenReaderOnly>
 
-        <div
-          data-id="validation-result-status"
-          style={{ textTransform: 'capitalize', fontSize: '2.8em', fontWeight: 550 }}
-        >
-          {children}
-        </div>
+      <div className={styles.ResultValue} data-id="validation-result-status">
+        {children}
       </div>
     </div>
   );
