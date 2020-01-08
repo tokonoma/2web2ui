@@ -15,12 +15,12 @@
 
 .apiHeader {
   margin-bottom: 2rem;
-  font-size: 1rem;   
+  font-size: 1rem;
 }
 
 .tableKey {
   width: 10rem;
-  display: inline-block; 
+  display: inline-block;
 }
 
 .table {
@@ -29,7 +29,7 @@
 }
 
 .greenBoolean {
-  color: #44D09E;
+  color: #44d09e;
   font-weight: 500;
   text-transform: uppercase;
 }
@@ -41,7 +41,7 @@
 }
 
 .blue {
-  color: #8FC4FE;
+  color: #8fc4fe;
 }
 
 .white {
@@ -57,4 +57,8 @@
   margin-bottom: 1.5rem;
   line-height: 1.5em;
   padding: 1rem;
+}
+
+.SubSection {
+  padding: spacing('large');
 }

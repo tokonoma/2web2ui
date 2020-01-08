@@ -72,25 +72,6 @@ export class SingleResult extends Component {
     );
   };
 
-  renderResult = () => {
-    const { singleResults = {} } = this.props;
-    const { result } = singleResults;
-
-    return (
-      <div className={styles.Result}>
-        <div>
-          <div style={{ marginBottom: '20px', fontWeight: 600 }}>Status:</div>
-          <div
-            data-id="validation-result-status"
-            style={{ textTransform: 'capitalize', fontSize: '2.8em', fontWeight: 550 }}
-          >
-            {result}
-          </div>
-        </div>
-      </div>
-    );
-  };
-
   renderCodeBlock = () => {
     const { singleResults = {} } = this.props;
     const { result, valid, reason, is_role, is_disposable, is_free, did_you_mean } = singleResults;
@@ -162,21 +143,26 @@ export class SingleResult extends Component {
         <Panel>
           <Grid>
             <Grid.Column xs={12} md={7}>
-              <div style={{ padding: '2rem 2rem 3rem' }}>
+              <div className={styles.SubSection}>
                 <h2 className={styles.Header}>{email}</h2>
-                {this.renderResult()}
-                {this.resultTable()}
+
+                <Result>{result}</Result>
+
                 <p className={styles.Paragraph} name="result-description">
                   {RESULT_DESCRIPTIONS[result]}
                 </p>
+
+                {this.resultTable()}
+
                 <Button component={Link} color="orange" to={SINGLE_RV_LINK}>
                   Validate Another
                 </Button>
               </div>
             </Grid.Column>
+
             <Grid.Column xs={12} md={5}>
               <CodeBlock preformatted>
-                <div style={{ padding: '2rem' }}>
+                <div className={styles.SubSection}>
                   <div className={styles.apiHeader}>Raw API Response</div>
                   <p className={styles.ApiDescription}>
                     <WhiteText>
@@ -220,6 +206,23 @@ function ValueResponse({ value }) {
     >
       {value ? 'Yes' : 'No'}
     </span>
+  );
+}
+
+function Result({ children }) {
+  return (
+    <div className={styles.Result}>
+      <div>
+        <div style={{ marginBottom: '20px', fontWeight: 600 }}>Status:</div>
+
+        <div
+          data-id="validation-result-status"
+          style={{ textTransform: 'capitalize', fontSize: '2.8em', fontWeight: 550 }}
+        >
+          {children}
+        </div>
+      </div>
+    </div>
   );
 }
 
