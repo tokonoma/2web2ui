@@ -17,10 +17,9 @@ export const useModal = () => {
   }
   return {
     isShowing,
-    toggle
+    toggle,
   };
 };
-
 
 export const SelectedPlan = ({ bundle, onChange, promoCodeObj, handlePromoCode }) => {
   const { messaging: plan, tier } = bundle;
@@ -33,10 +32,14 @@ export const SelectedPlan = ({ bundle, onChange, promoCodeObj, handlePromoCode }
       title="Your New Plan"
       actions={[
         {
-          content: (<span>Compare Features <ViewModule /></span>),
+          content: (
+            <span>
+              Compare Features <ViewModule />
+            </span>
+          ),
           onClick: toggle,
-          color: 'orange'
-        }
+          color: 'orange',
+        },
       ]}
     >
       <FeatureComparisonModal open={isShowing} handleClose={toggle} />
@@ -45,83 +48,96 @@ export const SelectedPlan = ({ bundle, onChange, promoCodeObj, handlePromoCode }
           <div className={styles.tierLabel}>{PLAN_TIERS[tier]}</div>
           <div className={styles.PlanRow}>
             <div>
-              <PlanPrice showOverage showIp showCsm plan={plan} selectedPromo={selectedPromo}/>
+              <PlanPrice showOverage showIp showCsm plan={plan} selectedPromo={selectedPromo} />
             </div>
             <div>
-              <Button
-                onClick={() => onChange()}
-                size="small"
-                flat
-                color="orange"
-              >
+              <Button onClick={() => onChange()} size="small" flat color="orange">
                 Change
               </Button>
             </div>
           </div>
         </div>
       </Panel.Section>
-      {price > 0 &&
+      {price > 0 && (
         <Panel.Section>
           <div className={styles.PlanRow}>
             <PromoCodeNew
               key={selectedPromo.promoCode || 'promocode'}
-              promoCodeObj ={promoCodeObj}
-              handlePromoCode ={handlePromoCode}
+              promoCodeObj={promoCodeObj}
+              handlePromoCode={handlePromoCode}
             />
           </div>
         </Panel.Section>
-      }
-
+      )}
     </Panel>
   );
 };
 
-
 const PlanSelectSection = ({ bundles, currentPlan, onSelect }) => {
-
-  const bundlesByTier = useMemo(() =>
-    _.groupBy(bundles, 'tier')
-  , [bundles]);
-
+  const publicBundlesByTier = useMemo(
+    () =>
+      _.groupBy(
+        bundles.filter(x => x.status !== 'secret'),
+        'tier',
+      ),
+    [bundles],
+  );
   const { isShowing, toggle } = useModal(false);
-  const planList = _.map(PLAN_TIERS, (label, key) => (bundlesByTier[key] &&
-    <Panel.Section key={`tier_section_${key}`}>
-      <div className={styles.tierLabel}>{label}</div>
-      <div className={styles.tierPlans}>
-        {
-          bundlesByTier[key].map((bundle) => {
-            const { messaging, bundle: bundleCode } = bundle;
-            const isCurrentPlan = currentPlan.code === bundleCode;
-            return (
-              <div className={cx(styles.PlanRow, isCurrentPlan && styles.SelectedPlan)} key={`plan_row_${bundleCode}`}>
-                <div>
-                  {isCurrentPlan && <Check className={styles.CheckIcon}/>}
-                  <PlanPrice showOverage showIp showCsm plan={messaging} />
-                </div>
-                <div>
-                  <Button
-                    className={styles.selectButton}
-                    disabled={isCurrentPlan}
-                    onClick={() => onSelect(bundleCode)}
-                    size='small'>
+  const planList = _.map(
+    PLAN_TIERS,
+    (label, key) =>
+      publicBundlesByTier[key] && (
+        <Panel.Section key={`tier_section_${key}`}>
+          <div className={styles.tierLabel}>{label}</div>
+          <div className={styles.tierPlans}>
+            {publicBundlesByTier[key].map(bundle => {
+              const { messaging, bundle: bundleCode } = bundle;
+              const isCurrentPlan = currentPlan.code === bundleCode;
+              return (
+                <div
+                  className={cx(styles.PlanRow, isCurrentPlan && styles.SelectedPlan)}
+                  key={`plan_row_${bundleCode}`}
+                >
+                  <div>
+                    {isCurrentPlan && <Check className={styles.CheckIcon} />}
+                    <PlanPrice showOverage showIp showCsm plan={messaging} />
+                  </div>
+                  <div>
+                    <Button
+                      className={styles.selectButton}
+                      disabled={isCurrentPlan}
+                      onClick={() => onSelect(bundleCode)}
+                      size="small"
+                    >
                       Select
-                  </Button>
+                    </Button>
+                  </div>
                 </div>
-              </div>
-            );
-          })
-        }
-      </div>
-    </Panel.Section>
-  ));
+              );
+            })}
+          </div>
+        </Panel.Section>
+      ),
+  );
 
-  return <Panel title="Select a Plan"
-    actions={[{
-      content: <span>Compare Features <ViewModule /></span>, onClick: toggle, color: 'orange' }]}>
-    <FeatureComparisonModal open={isShowing} handleClose={toggle} />
-    {planList}
-  </Panel>;
-}
-;
-
+  return (
+    <Panel
+      title="Select a Plan"
+      actions={[
+        {
+          content: (
+            <span>
+              Compare Features <ViewModule />
+            </span>
+          ),
+          onClick: toggle,
+          color: 'orange',
+        },
+      ]}
+    >
+      <FeatureComparisonModal open={isShowing} handleClose={toggle} />
+      {planList}
+    </Panel>
+  );
+};
 export default PlanSelectSection;
