@@ -4,7 +4,7 @@ import styles from './PreviewErrorFrame.module.scss';
 
 /* eslint-disable no-restricted-syntax */
 const PreviewErrorFrame = ({ errors }) => {
-  const error = errors[0];
+  const error = (errors ? errors[0] : {}) || {};
   const { message, description, line, part, code } = error;
 
   return (
@@ -13,21 +13,19 @@ const PreviewErrorFrame = ({ errors }) => {
 
       <h2>Oh no! An Error Occurred</h2>
 
-      {/* Defensively checking the error object's structure */}
-      {['code', 'description'].every(key => key in error) && (
+      {/* See https://www.sparkpost.com/docs/tech-resources/extended-error-codes/ */}
+      {code === '3000' ? (
         <>
-          {/* See https://www.sparkpost.com/docs/tech-resources/extended-error-codes/ */}
-          {['message', 'line', 'part'].every(key => key in error) && code === '3000' ? (
-            <>
-              <p>
-                We are unable to load your template preview due to a {message} on line {line} of
-                your {part}.
-              </p>
-            </>
-          ) : (
-            <p>{description}</p>
+          {/* Defensively checking the error object's structure */}
+          {['message', 'line', 'part'].every(key => key in error) && (
+            <p>
+              We are unable to load your template preview due to a {message} on line {line} of your{' '}
+              {part}.
+            </p>
           )}
         </>
+      ) : (
+        <>{error.hasOwnProperty('description') && <p>{description}</p>}</>
       )}
 
       <p>
