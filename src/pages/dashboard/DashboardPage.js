@@ -9,6 +9,8 @@ import SignupModal from './components/SignupModal';
 import { hasGrants } from 'src/helpers/conditions';
 /* helpers */
 import { getAccountUiOptionValue } from 'src/helpers/conditions/account';
+import { isAdmin } from 'src/helpers/conditions/user';
+
 /* actions */
 import { setAccountOption } from 'src/actions/account';
 import SuppressionBanner from './components/SuppressionBanner';
@@ -117,6 +119,7 @@ const mapStateToProps = state => ({
   canManageKeys: hasGrants('api_keys/manage')(state),
   canManageSendingDomains: hasGrants('sending_domains/manage')(state),
   canGetSupressions: hasGrants('suppression_lists/manage')(state),
+  isAdmin: isAdmin(state),
 });
 
 export default connect(mapStateToProps, { setAccountOption })(DashboardPage);

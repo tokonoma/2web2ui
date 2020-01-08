@@ -19,6 +19,7 @@ describe('GettingStartedGuide', () => {
     listApiKeys: jest.fn(),
     setAccountOption: jest.fn(),
     listSendingDomains: jest.fn(),
+    isAdmin: true,
   };
 
   const subject = (props, renderFn = render) =>
