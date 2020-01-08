@@ -67,8 +67,8 @@ export const IncidentsPage = props => {
       }}
       title="Blacklist Incidents"
       primaryAction={{
-        content: 'Add to Watchlist',
-        to: '/blacklist/watchlist/add',
+        content: monitors.length === 0 ? 'Add to Watchlist' : 'View Watchlist',
+        to: monitors.length === 0 ? '/blacklist/watchlist/add' : '/blacklist/watchlist',
         component: Link,
       }}
     >
