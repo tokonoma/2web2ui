@@ -40,12 +40,14 @@ export default ({
         <strong>Historical Incidents</strong>
         {historicalIncidents.length === 0 ? (
           <span>{`No historical incidents for ${resourceName} on ${blacklistName}`}</span>
-        ) : null}
-        {historicalIncidents.map(({ id, occurred_at_formatted, resolved_at_formatted }) => (
-          <PageLink to={`/blacklist/incidents/${id}`} key={id}>
-            {`Listed ${occurred_at_formatted} | Resolved ${resolved_at_formatted}`}
-          </PageLink>
-        ))}
+        ) : (
+          historicalIncidents.map(({ id, occurred_at_formatted, resolved_at_formatted }) => (
+            <PageLink to={`/blacklist/incidents/${id}`} key={id}>
+              {`Listed ${occurred_at_formatted} | Resolved ${resolved_at_formatted}`}
+            </PageLink>
+          ))
+        )}
+        {}
       </div>
     </Grid.Column>
     <Grid.Column xs={12}>

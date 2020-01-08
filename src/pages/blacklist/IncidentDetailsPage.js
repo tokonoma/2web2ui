@@ -34,6 +34,9 @@ export const IncidentDetailsPage = ({
   incidentsForResourcePending,
   incidentsForBlacklistPending,
   historicalIncidentsPending,
+  incidentsForBlacklistError,
+  historicalIncidentsError,
+  incidentsForResourceError,
 }) => {
   useEffect(() => {
     getIncident(id).then(incident => {
@@ -62,14 +65,23 @@ export const IncidentDetailsPage = ({
   } = incident || {};
 
   const renderContent = () => {
-    if (error) {
+    if (
+      error ||
+      incidentsForBlacklistError ||
+      historicalIncidentsError ||
+      incidentsForResourceError
+    ) {
       return (
         <div data-id="error-banner">
           <ApiErrorBanner
             message={'Sorry, we seem to have had some trouble loading your blacklist incidents.'}
             errorDetails={error.message}
             reload={() => {
-              getIncident(id);
+              getIncident(id).then(incident => {
+                listIncidentsForResource(incident.resource);
+                listIncidentsForBlacklist(incident.blacklist_name);
+                listHistoricalResolvedIncidents(incident.blacklist_name, incident.resource);
+              });
             }}
           />
         </div>

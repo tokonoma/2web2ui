@@ -41,12 +41,12 @@ export const IncidentsPage = props => {
 
     return (
       <div data-id="incidents-table">
-        {incidents.length === 0 ? (
+        {incidents.length === 0 && (
           <CongratsBanner
             title="Congratulations! You are not currently on a Blacklist."
             content="There are no incidents reported for items on your watchlist"
           />
-        ) : null}
+        )}
         <IncidentsCollection incidents={incidents} />
       </div>
     );

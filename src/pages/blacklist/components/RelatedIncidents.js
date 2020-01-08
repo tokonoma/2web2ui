@@ -9,7 +9,7 @@ export default ({ incidents = [], header = '', type = '' }) => (
     <tbody>
       <Table.Row>
         <Table.HeaderCell>{header}</Table.HeaderCell>
-        {incidents.length > 0 ? <Table.HeaderCell>Resolved</Table.HeaderCell> : null}
+        {incidents.length > 0 && <Table.HeaderCell>Resolved</Table.HeaderCell>}
       </Table.Row>
 
       {incidents.map(incident => (
