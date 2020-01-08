@@ -144,7 +144,7 @@ export class SingleResult extends Component {
           <Grid>
             <Grid.Column xs={12} md={7}>
               <div className={styles.SubSection}>
-                <h2 className={styles.Header}>{email}</h2>
+                <h2 className={styles.Heading}>{email}</h2>
 
                 <Result>{result}</Result>
 
@@ -163,20 +163,20 @@ export class SingleResult extends Component {
             <Grid.Column xs={12} md={5}>
               <CodeBlock preformatted>
                 <div className={styles.SubSection}>
-                  <div className={styles.apiHeader}>Raw API Response</div>
+                  <h3 className={styles.ApiHeading}>Raw API Response</h3>
+
                   <p className={styles.ApiDescription}>
                     <WhiteText>
                       The following raw API results outline the reasons for your email's validation
-                      status. Learn how to
+                      status. Learn how to&nbsp;
                       <UnstyledLink
                         external
                         to="https://developers.sparkpost.com/api/recipient-validation/"
-                        style={{ color: 'white', fontWeight: '800' }}
+                        className={styles.ApiDescriptionLink}
                       >
-                        {' '}
-                        integrate with Recipient Validation{' '}
-                      </UnstyledLink>{' '}
-                      in your product.
+                        integrate with Recipient Validation
+                      </UnstyledLink>
+                      &nbsp;in your product.
                     </WhiteText>
                   </p>
                   <pre>{this.renderCodeBlock()}</pre>
@@ -191,22 +191,15 @@ export class SingleResult extends Component {
 }
 
 function TabCharacter() {
-  return <span className={styles.tab} />;
+  return <span className={styles.TabCharacter} />;
 }
 
 function WhiteText({ children }) {
-  return <span className={styles.white}>{children}</span>;
+  return <span className={styles.WhiteText}>{children}</span>;
 }
 
 function ValueResponse({ value }) {
-  return (
-    <span
-      data-id="validation-result-value"
-      className={value ? styles.redBoolean : styles.greenBoolean}
-    >
-      {value ? 'Yes' : 'No'}
-    </span>
-  );
+  return <span data-id="validation-result-value">{value ? 'Yes' : 'No'}</span>;
 }
 
 function Result({ children }) {

@@ -1,6 +1,7 @@
 @import '~@sparkpost/matchbox/src/styles/config.scss';
 
-.Header {
+.Heading,
+.ApiHeading {
   margin-bottom: 2rem;
 }
 
@@ -15,13 +16,13 @@
   font-weight: 550;
 }
 
-.tab {
+.TabCharacter {
   padding-left: 1em;
 }
 
-.apiHeader {
-  margin-bottom: 2rem;
+.ApiHeading {
   font-size: 1rem;
+  color: color(gray, 10);
 }
 
 .tableKey {
@@ -34,23 +35,11 @@
   margin-bottom: 2rem;
 }
 
-.greenBoolean {
-  color: #44d09e;
-  font-weight: 500;
-  text-transform: uppercase;
-}
-
-.redBoolean {
-  color: color(red);
-  font-weight: 500;
-  text-transform: uppercase;
-}
-
 .blue {
   color: #8fc4fe;
 }
 
-.white {
+.WhiteText {
   color: color(gray, 9);
 }
 
@@ -62,7 +51,12 @@
 .ApiDescription {
   margin-bottom: 1.5rem;
   line-height: 1.5em;
-  padding: 1rem;
+}
+
+// Specificity waaaars 💣💥
+.ApiDescriptionLink.ApiDescriptionLink {
+  color: #fff;
+  text-decoration: underline;
 }
 
 .SubSection {
