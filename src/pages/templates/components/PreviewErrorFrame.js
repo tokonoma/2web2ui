@@ -15,19 +15,14 @@ const PreviewErrorFrame = ({ errors }) => {
       <h2>Oh no! An Error Occurred</h2>
 
       {/* See https://www.sparkpost.com/docs/tech-resources/extended-error-codes/ */}
-      {code === '3000' ? (
-        <>
-          {/* Defensively checking the error object's structure */}
-          {['message', 'line', 'part'].every(key => key in error) && (
+      {code === '3000'
+        ? ['message', 'line', 'part'].every(key => key in error) && (
             <p>
               We are unable to load your template preview due to a {message} on line {line} of your{' '}
               {part}.
             </p>
-          )}
-        </>
-      ) : (
-        <>{error.hasOwnProperty('description') && <p>{description}</p>}</>
-      )}
+          )
+        : error.hasOwnProperty('description') && <p>{description}</p>}
 
       <p>
         If you notice this happens often, check your substitution data or code syntax as these are
