@@ -1,9 +1,11 @@
 import { shallow } from 'enzyme';
-import { render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 
 import { WatchlistPage } from '../WatchlistPage';
+
+jest.mock('../components/StopMonitoringModal', () => () => 'My Delete Modal');
 
 describe('WatchlistPage', () => {
   const monitors = [
@@ -72,6 +74,12 @@ describe('WatchlistPage', () => {
   it('renders Monitors Collection when correct data exists', () => {
     const wrapper = shallowSubject();
     expect(wrapper.find({ 'data-id': 'monitors-table' })).toExist();
+  });
+
+  it('renders delete modal when trying to delete a resource', () => {
+    const { queryByText } = renderSubject();
+    fireEvent.click(queryByText('Stop Monitoring'));
+    expect(queryByText('My Delete Modal')).toBeInTheDocument();
   });
 
   it('loads monitors when page starts rendering', () => {

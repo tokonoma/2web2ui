@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { Panel, Grid, Button } from '@sparkpost/matchbox';
 import { showAlert } from 'src/actions/globalAlert';
 import { CenteredLogo, Loading, PlanPicker } from 'src/components';
-import Steps from './components/Steps';
 import { getPlans } from 'src/actions/account';
 import { getBillingCountries, verifyPromoCode, clearPromoCode } from 'src/actions/billing';
 import billingCreate from 'src/actions/billingCreate';
@@ -18,7 +17,7 @@ import PromoCodeNew from '../../components/billing/PromoCodeNew';
 import { FORMS } from 'src/constants';
 import CreditCardSection from './components/CreditCardSection';
 
-const NEXT_STEP = '/onboarding/sending-domain';
+const NEXT_STEP = '/dashboard';
 
 export class OnboardingPlanPage extends Component {
   componentDidMount() {
@@ -32,20 +31,21 @@ export class OnboardingPlanPage extends Component {
     // if we can't get plans or countries form is useless
     // they can pick plan later from billing
     if (!prevProps.hasError && hasError) {
-      history.push(NEXT_STEP);
+      history.push(NEXT_STEP, { fromOnboarding: true });
     }
   }
 
-  onSubmit = (values) => {
+  onSubmit = values => {
     const { billingCreate, showAlert, history, billing, verifyPromoCode } = this.props;
     const selectedPromo = billing.selectedPromo;
-    const newValues = values.card && !values.planpicker.isFree
-      ? { ...values, card: prepareCardInfo(values.card) }
-      : values;
+    const newValues =
+      values.card && !values.planpicker.isFree
+        ? { ...values, card: prepareCardInfo(values.card) }
+        : values;
 
     // no billing updates needed since they are still on free plan
     if (newValues.planpicker.isFree) {
-      history.push(NEXT_STEP);
+      history.push(NEXT_STEP, { fromOnboarding: true });
       return;
     }
 
@@ -53,7 +53,11 @@ export class OnboardingPlanPage extends Component {
     if (selectedPromo.promoCode && !values.planpicker.isFree) {
       const { promoCode } = selectedPromo;
       newValues.promoCode = promoCode;
-      action = verifyPromoCode({ promoCode, billingId: values.planpicker.billingId, meta: { promoCode, showErrorAlert: false }});
+      action = verifyPromoCode({
+        promoCode,
+        billingId: values.planpicker.billingId,
+        meta: { promoCode, showErrorAlert: false },
+      });
     }
 
     // Note: billingCreate will update the subscription if the account is AWS
@@ -62,33 +66,36 @@ export class OnboardingPlanPage extends Component {
         newValues.discountId = discount_id;
         return billingCreate(newValues);
       })
-      .then(() => history.push(NEXT_STEP))
+      .then(() => history.push(NEXT_STEP, { fromOnboarding: true }))
       .then(() => showAlert({ type: 'success', message: 'Added your plan' }));
   };
 
-
-  applyPromoCode = (promoCode) => {
+  applyPromoCode = promoCode => {
     const { verifyPromoCode } = this.props;
-    verifyPromoCode({ promoCode , billingId: this.props.selectedPlan.billingId, meta: { promoCode, showErrorAlert: false }});
-  }
+    verifyPromoCode({
+      promoCode,
+      billingId: this.props.selectedPlan.billingId,
+      meta: { promoCode, showErrorAlert: false },
+    });
+  };
 
-  onPlanSelect = (e) => {
+  onPlanSelect = e => {
     const { currentPlan, clearPromoCode } = this.props;
     if (currentPlan !== e.code) {
       clearPromoCode();
     }
-  }
+  };
   render() {
     const { loading, plans, submitting, selectedPlan = {}, billing, clearPromoCode } = this.props;
     const { selectedPromo = {}, promoError, promoPending } = billing;
     const promoCodeObj = {
       selectedPromo: selectedPromo,
       promoError: promoError,
-      promoPending: promoPending
+      promoPending: promoPending,
     };
     const handlePromoCode = {
       applyPromoCode: this.applyPromoCode,
-      clearPromoCode: clearPromoCode
+      clearPromoCode: clearPromoCode,
     };
     if (loading) {
       return <Loading />;
@@ -103,22 +110,39 @@ export class OnboardingPlanPage extends Component {
         <Grid>
           <Grid.Column>
             <Panel>
-              <PlanPicker selectedPromo={selectedPromo} disabled={disableSubmit} plans={plans} onChange={this.onPlanSelect}/>
+              <PlanPicker
+                selectedPromo={selectedPromo}
+                disabled={disableSubmit}
+                plans={plans}
+                onChange={this.onPlanSelect}
+              />
               <AccessControl condition={not(isAws)}>
-                {!selectedPlan.isFree &&
-                <Panel.Section>
-                  <PromoCodeNew
-                    key={selectedPromo.promoCode || 'promocode'}
-                    promoCodeObj ={promoCodeObj}
-                    handlePromoCode ={handlePromoCode}
-                  />
-                </Panel.Section>}
-                <CreditCardSection billing={billing} submitting={submitting} isPlanFree={selectedPlan.isFree}/>
+                {!selectedPlan.isFree && (
+                  <Panel.Section>
+                    <PromoCodeNew
+                      key={selectedPromo.promoCode || 'promocode'}
+                      promoCodeObj={promoCodeObj}
+                      handlePromoCode={handlePromoCode}
+                    />
+                  </Panel.Section>
+                )}
+                <CreditCardSection
+                  billing={billing}
+                  submitting={submitting}
+                  isPlanFree={selectedPlan.isFree}
+                />
               </AccessControl>
               <Panel.Section>
-                <Button disabled={disableSubmit} primary={true} type='submit' size='large' fullWidth={true}>{buttonText}</Button>
+                <Button
+                  disabled={disableSubmit}
+                  primary={true}
+                  type="submit"
+                  size="large"
+                  fullWidth={true}
+                >
+                  {buttonText}
+                </Button>
               </Panel.Section>
-              <Steps />
             </Panel>
           </Grid.Column>
         </Grid>
@@ -127,9 +151,19 @@ export class OnboardingPlanPage extends Component {
   }
 }
 
-const formOptions = { form: FORMS.JOIN_PLAN, enableReinitialize: true, asyncValidate: promoCodeValidate(FORMS.JOIN_PLAN), asyncChangeFields: ['planpicker'], asyncBlurFields: ['promoCode']};
+const formOptions = {
+  form: FORMS.JOIN_PLAN,
+  enableReinitialize: true,
+  asyncValidate: promoCodeValidate(FORMS.JOIN_PLAN),
+  asyncChangeFields: ['planpicker'],
+  asyncBlurFields: ['promoCode'],
+};
 
-export default connect(
-  choosePlanMSTP(FORMS.JOIN_PLAN),
-  { billingCreate, showAlert, getPlans, getBillingCountries, verifyPromoCode, clearPromoCode }
-)(reduxForm(formOptions)(OnboardingPlanPage));
+export default connect(choosePlanMSTP(FORMS.JOIN_PLAN), {
+  billingCreate,
+  showAlert,
+  getPlans,
+  getBillingCountries,
+  verifyPromoCode,
+  clearPromoCode,
+})(reduxForm(formOptions)(OnboardingPlanPage));

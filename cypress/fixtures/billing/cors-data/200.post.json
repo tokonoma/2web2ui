@@ -1,0 +1,10 @@
+{
+  "results": {
+    "signature": "fake_signature",
+    "token": "fake_token",
+    "name": "Customer 279309",
+    "accountNumber": "12345",
+    "crmId": null,
+    "contractEffectiveDate": "2019-12-17"
+  }
+}

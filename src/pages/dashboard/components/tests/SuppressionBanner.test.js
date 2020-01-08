@@ -6,7 +6,7 @@ import SuppressionBanner from '../SuppressionBanner';
 describe('Component: Suppression Banner', () => {
   const props = {
     accountAgeInWeeks: 10,
-    hasSuppressions: false
+    hasSuppressions: false,
   };
 
   let wrapper;
@@ -23,5 +23,4 @@ describe('Component: Suppression Banner', () => {
     wrapper.setProps({ accountAgeInWeeks: 0 });
     expect(wrapper).toMatchSnapshot();
   });
-
 });

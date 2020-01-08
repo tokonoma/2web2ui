@@ -79,6 +79,13 @@ const TEST_CASES = {
     payload: { errors: [{ message: 'Some error occurred' }] },
     type: 'ADD_WATCHLIST_FAIL',
   },
+  'delete monitor pending': {
+    type: 'DELETE_MONITOR_PENDING',
+  },
+  'delete monitor fail': {
+    payload: { errors: [{ message: 'Some error occurred' }] },
+    type: 'DELETE_MONITOR_FAIL',
+  },
 };
 
 cases(
@@ -88,3 +95,14 @@ cases(
   },
   TEST_CASES,
 );
+
+it('BlackList Reducer delete monitor success deletes the resource from redux store list', () => {
+  const state = { ...initialState, monitors: [{ resource: '101.101' }, { resource: '101.102' }] };
+  const action = {
+    type: 'DELETE_MONITOR_SUCCESS',
+    meta: {
+      resource: '101.101',
+    },
+  };
+  expect(blacklistReducer(state, action).monitors).toEqual([{ resource: '101.102' }]);
+});

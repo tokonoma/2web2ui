@@ -19,18 +19,18 @@ describe('ChoosePlan page tests', () => {
     showAlert: jest.fn(),
     verifyPromoCode: jest.fn(() => Promise.resolve({ discount_id: 'test-discount' })),
     history: {
-      push: jest.fn()
+      push: jest.fn(),
     },
     loading: false,
     billing: { countries: [], selectedPromo: {}, promoPending: false },
     plans: [],
-    submitting: false
+    submitting: false,
   };
 
   beforeEach(() => {
-    wrapper = shallow(<ChoosePlan {...props}/>);
+    wrapper = shallow(<ChoosePlan {...props} />);
     instance = wrapper.instance();
-    billingHelpers.prepareCardInfo = jest.fn((a) => a);
+    billingHelpers.prepareCardInfo = jest.fn(a => a);
   });
 
   it('should render correctly', () => {
@@ -45,16 +45,18 @@ describe('ChoosePlan page tests', () => {
 
   it('should redirect to next step when api calls fail', () => {
     wrapper.setProps({ hasError: true });
-    expect(instance.props.history.push).toHaveBeenCalledWith('/onboarding/sending-domain');
+    expect(instance.props.history.push).toHaveBeenCalledWith('/dashboard', {
+      fromOnboarding: true,
+    });
   });
 
   it('should show free bullets when isFree is selected', () => {
-    wrapper.setProps({ selectedPlan: { isFree: true }});
+    wrapper.setProps({ selectedPlan: { isFree: true } });
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should not PromoCode field if plan isFree', () => {
-    wrapper.setProps({ selectedPlan: { isFree: true }});
+    wrapper.setProps({ selectedPlan: { isFree: true } });
     expect(wrapper.find(PromoCodeNew)).toHaveLength(0);
   });
 
@@ -65,21 +67,26 @@ describe('ChoosePlan page tests', () => {
 
   describe('onSubmit tests', () => {
     it('should not need valid cc info for a free plan selection', async () => {
-      await instance.onSubmit({ planpicker: { code: 'free', isFree: true }});
+      await instance.onSubmit({ planpicker: { code: 'free', isFree: true } });
       expect(billingHelpers.prepareCardInfo).not.toHaveBeenCalled();
     });
 
     it('should prepare cc info for a paid plan selection', async () => {
       await instance.onSubmit({
         planpicker: { code: 'paid' },
-        card: { number: '411', name: 'Captain Moneybags' }
+        card: { number: '411', name: 'Captain Moneybags' },
       });
-      expect(billingHelpers.prepareCardInfo).toHaveBeenCalledWith({ number: '411', name: 'Captain Moneybags' });
+      expect(billingHelpers.prepareCardInfo).toHaveBeenCalledWith({
+        number: '411',
+        name: 'Captain Moneybags',
+      });
     });
 
     it('should go to next page if plan is free, no-op', async () => {
-      await instance.onSubmit({ planpicker: { isFree: true }});
-      expect(instance.props.history.push).toHaveBeenCalledWith('/onboarding/sending-domain');
+      await instance.onSubmit({ planpicker: { isFree: true } });
+      expect(instance.props.history.push).toHaveBeenCalledWith('/dashboard', {
+        fromOnboarding: true,
+      });
       expect(instance.props.billingCreate).not.toHaveBeenCalled();
     });
 
@@ -87,29 +94,56 @@ describe('ChoosePlan page tests', () => {
       const values = { planpicker: { isFree: false }, key: 'value', card: 'card info' };
       await instance.onSubmit(values);
       expect(instance.props.billingCreate).toHaveBeenCalledWith(values);
-      expect(instance.props.history.push).toHaveBeenCalledWith('/onboarding/sending-domain');
-      expect(instance.props.showAlert).toHaveBeenCalledWith({ type: 'success', message: 'Added your plan' });
+      expect(instance.props.history.push).toHaveBeenCalledWith('/dashboard', {
+        fromOnboarding: true,
+      });
+      expect(instance.props.showAlert).toHaveBeenCalledWith({
+        type: 'success',
+        message: 'Added your plan',
+      });
     });
 
     it('should call verify of promo code before rest of submission flow if available', async () => {
-      const values = { planpicker: { isFree: false, billingId: 'test-id' }, key: 'value', card: 'card info', promoCode: 'test-promo-code' };
-      wrapper.setProps({ billing: { ...props.billing, selectedPromo: { promoCode: 'test-promo-code' }}});
+      const values = {
+        planpicker: { isFree: false, billingId: 'test-id' },
+        key: 'value',
+        card: 'card info',
+        promoCode: 'test-promo-code',
+      };
+      wrapper.setProps({
+        billing: { ...props.billing, selectedPromo: { promoCode: 'test-promo-code' } },
+      });
       await instance.onSubmit(values);
       expect(props.verifyPromoCode).toHaveBeenCalledWith({
         promoCode: 'test-promo-code',
         billingId: 'test-id',
-        meta: { promoCode: 'test-promo-code', showErrorAlert: false }
+        meta: { promoCode: 'test-promo-code', showErrorAlert: false },
       });
-      expect(instance.props.billingCreate).toHaveBeenCalledWith({ ...values, discountId: 'test-discount' });
-      expect(instance.props.history.push).toHaveBeenCalledWith('/onboarding/sending-domain');
-      expect(instance.props.showAlert).toHaveBeenCalledWith({ type: 'success', message: 'Added your plan' });
+      expect(instance.props.billingCreate).toHaveBeenCalledWith({
+        ...values,
+        discountId: 'test-discount',
+      });
+      expect(instance.props.history.push).toHaveBeenCalledWith('/dashboard', {
+        fromOnboarding: true,
+      });
+      expect(instance.props.showAlert).toHaveBeenCalledWith({
+        type: 'success',
+        message: 'Added your plan',
+      });
     });
 
     it('should throw error if promo code validation fails', async () => {
       expect.assertions(2);
-      const values = { planpicker: { isFree: false, billingId: 'test-id' }, key: 'value', card: 'card info' };
+      const values = {
+        planpicker: { isFree: false, billingId: 'test-id' },
+        key: 'value',
+        card: 'card info',
+      };
       const verifyPromoCode = jest.fn(() => Promise.reject());
-      wrapper.setProps({ billing: { ...props.billing, selectedPromo: { promoCode: 'test-promo-code' }}, verifyPromoCode });
+      wrapper.setProps({
+        billing: { ...props.billing, selectedPromo: { promoCode: 'test-promo-code' } },
+        verifyPromoCode,
+      });
       return instance.onSubmit(values).catch(() => {
         expect(props.billingCreate).not.toHaveBeenCalled();
         expect(props.history.push).not.toHaveBeenCalled();
@@ -118,9 +152,16 @@ describe('ChoosePlan page tests', () => {
 
     it('should throw error if billing creation fails', async () => {
       expect.assertions(2);
-      const values = { planpicker: { isFree: false, billingId: 'test-id' }, key: 'value', card: 'card info' };
+      const values = {
+        planpicker: { isFree: false, billingId: 'test-id' },
+        key: 'value',
+        card: 'card info',
+      };
       const billingCreate = jest.fn(() => Promise.reject());
-      wrapper.setProps({ billing: { ...props.billing, selectedPromo: { promoCode: 'test-promo-code' }}, billingCreate });
+      wrapper.setProps({
+        billing: { ...props.billing, selectedPromo: { promoCode: 'test-promo-code' } },
+        billingCreate,
+      });
       return instance.onSubmit(values).catch(() => {
         expect(props.billingCreate).not.toHaveBeenCalled();
         expect(props.history.push).not.toHaveBeenCalled();

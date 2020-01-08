@@ -39,6 +39,38 @@ Object {
 }
 `;
 
+exports[`BlackList Reducer delete monitor fail 1`] = `
+Object {
+  "deleteMonitorError": Object {
+    "errors": Array [
+      Object {
+        "message": "Some error occurred",
+      },
+    ],
+  },
+  "deleteMonitorPending": false,
+  "incidents": Array [],
+  "incidentsError": null,
+  "incidentsPending": false,
+  "monitors": Array [],
+  "monitorsError": null,
+  "monitorsPending": false,
+}
+`;
+
+exports[`BlackList Reducer delete monitor pending 1`] = `
+Object {
+  "deleteMonitorError": null,
+  "deleteMonitorPending": true,
+  "incidents": Array [],
+  "incidentsError": null,
+  "incidentsPending": false,
+  "monitors": Array [],
+  "monitorsError": null,
+  "monitorsPending": false,
+}
+`;
+
 exports[`BlackList Reducer get incident fail 1`] = `
 Object {
   "incidentError": Object {

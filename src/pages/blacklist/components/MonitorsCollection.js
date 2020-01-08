@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Button } from '@sparkpost/matchbox';
 
 import { PageLink } from 'src/components';
@@ -28,21 +28,27 @@ const columns = [
   { label: '', width: '20%' },
 ];
 
-const getRowData = ({ resource, active_listing_count, total_listing_count }) => {
-  return [
-    <div className={styles.NameDetails}>
-      <PageLink to={`/`} /*TODO link to ?*/>{resource}</PageLink>
-    </div>,
-    <div className={styles.ListingDetails}>{active_listing_count}</div>,
-    <div className={styles.ListingDetails}>{total_listing_count}</div>,
-    <div className={styles.Delete}>
-      <Button outline>Stop Monitoring</Button>
-    </div>,
-  ];
-};
-
 export const MonitorsCollection = props => {
-  const { monitors } = props;
+  const { monitors, handleDelete } = props;
+
+  const getRowData = useCallback(
+    ({ resource, active_listing_count, total_listing_count }) => {
+      return [
+        <div className={styles.NameDetails}>
+          <PageLink to={`/`} /*TODO link to ?*/>{resource}</PageLink>
+        </div>,
+        <div className={styles.ListingDetails}>{active_listing_count}</div>,
+        <div className={styles.ListingDetails}>{total_listing_count}</div>,
+        <div className={styles.Delete}>
+          <Button outline onClick={() => handleDelete(resource)}>
+            Stop Monitoring
+          </Button>
+        </div>,
+      ];
+    },
+    [handleDelete],
+  );
+
   return (
     <FilterSortCollection
       columns={columns}

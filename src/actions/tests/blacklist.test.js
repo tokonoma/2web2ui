@@ -109,4 +109,16 @@ describe('Action Creator: Blacklist', () => {
       },
     });
   });
+
+  it('it makes request to delete monitor', async () => {
+    await blacklist.deleteMonitor('test');
+    expect(sparkpostApiRequest).toHaveBeenCalledWith({
+      type: 'DELETE_MONITOR',
+      meta: {
+        method: 'DELETE',
+        url: '/v1/blacklist-monitors/test',
+        resource: 'test',
+      },
+    });
+  });
 });

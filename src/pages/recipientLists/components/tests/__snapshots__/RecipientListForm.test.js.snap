@@ -45,20 +45,21 @@ exports[`RecipientListForm defaults to create mode 1`] = `
           fileType="csv"
           helpText={
             <span>
-              You can download a 
+              You can download a
+               
               <DownloadLink
                 href="example-recipient-list.csv"
               >
                 CSV template here
               </DownloadLink>
-               to use when formatting your recipient list for upload.
+               
+              to use when formatting your recipient list for upload.
             </span>
           }
           label="Upload a CSV file of recipients"
           name="csv"
           validate={
             Array [
-              [Function],
               [Function],
             ]
           }
@@ -138,20 +139,21 @@ exports[`RecipientListForm renders CSV errors 1`] = `
           fileType="csv"
           helpText={
             <span>
-              You can download a 
+              You can download a
+               
               <DownloadLink
                 href="example-recipient-list.csv"
               >
                 CSV template here
               </DownloadLink>
-               to use when formatting your recipient list for upload.
+               
+              to use when formatting your recipient list for upload.
             </span>
           }
           label="Upload a CSV file of recipients"
           name="csv"
           validate={
             Array [
-              [Function],
               [Function],
             ]
           }
@@ -218,20 +220,21 @@ exports[`RecipientListForm renders correctly in create mode 1`] = `
           fileType="csv"
           helpText={
             <span>
-              You can download a 
+              You can download a
+               
               <DownloadLink
                 href="example-recipient-list.csv"
               >
                 CSV template here
               </DownloadLink>
-               to use when formatting your recipient list for upload.
+               
+              to use when formatting your recipient list for upload.
             </span>
           }
           label="Upload a CSV file of recipients"
           name="csv"
           validate={
             Array [
-              [Function],
               [Function],
             ]
           }
@@ -286,22 +289,20 @@ exports[`RecipientListForm renders correctly in edit mode 1`] = `
           fileType="csv"
           helpText={
             <span>
-              You can download a 
+              You can download a
+               
               <DownloadLink
                 href="example-recipient-list.csv"
               >
                 CSV template here
               </DownloadLink>
-               to use when formatting your recipient list for upload.
+               
+              to use when formatting your recipient list for upload.
             </span>
           }
           label="Optional: Upload a CSV file of recipients to replace the existing recipients in this list"
           name="csv"
-          validate={
-            Array [
-              [Function],
-            ]
-          }
+          validate={Array []}
         />
       </Panel.Section>
       <Panel.Section>
@@ -369,20 +370,21 @@ exports[`RecipientListForm should disable form elements on submit 1`] = `
           fileType="csv"
           helpText={
             <span>
-              You can download a 
+              You can download a
+               
               <DownloadLink
                 href="example-recipient-list.csv"
               >
                 CSV template here
               </DownloadLink>
-               to use when formatting your recipient list for upload.
+               
+              to use when formatting your recipient list for upload.
             </span>
           }
           label="Upload a CSV file of recipients"
           name="csv"
           validate={
             Array [
-              [Function],
               [Function],
             ]
           }

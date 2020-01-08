@@ -1,11 +1,15 @@
 export const initialState = {
   monitorsPending: false,
   monitors: [],
+  monitorsError: null,
   incidentsPending: false,
   incidents: [],
+  incidentsError: null,
+  deleteMonitorPending: false,
+  deleteMonitorError: null,
 };
 
-export default (state = initialState, { type, payload }) => {
+export default (state = initialState, { type, payload, meta }) => {
   switch (type) {
     case 'LIST_MONITORS_PENDING':
       return { ...state, monitorsPending: true, monitorsError: null };
@@ -70,6 +74,18 @@ export default (state = initialState, { type, payload }) => {
       return { ...state, watchlistAddPending: false, watchlistAddError: payload };
     case 'ADD_WATCHLIST_SUCCESS':
       return { ...state, watchlistAddPending: false, watchlistAddError: null };
+
+    case 'DELETE_MONITOR_PENDING':
+      return { ...state, deleteMonitorPending: true, deleteMonitorError: null };
+    case 'DELETE_MONITOR_FAIL':
+      return { ...state, deleteMonitorPending: false, deleteMonitorError: payload };
+    case 'DELETE_MONITOR_SUCCESS':
+      return {
+        ...state,
+        deleteMonitorPending: false,
+        deleteMonitorError: null,
+        monitors: state.monitors.filter(a => a.resource !== meta.resource),
+      };
     default:
       return state;
   }

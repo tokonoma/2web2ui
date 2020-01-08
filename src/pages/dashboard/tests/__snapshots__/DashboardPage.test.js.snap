@@ -5,6 +5,7 @@ exports[`Page: Dashboard tests should correctly render page when user is not ver
   empty={Object {}}
   title="Dashboard"
 >
+  <SignupModal />
   <FreePlanWarningBanner
     account={
       Object {
@@ -18,39 +19,38 @@ exports[`Page: Dashboard tests should correctly render page when user is not ver
     accountAgeInDays={15}
     ageRangeStart={16}
   />
+  <SuppressionBanner
+    accountAgeInWeeks={0}
+    hasSuppressions={true}
+  />
+  <GettingStartedGuide
+    account={
+      Object {
+        "created": 2018-05-15T12:00:00.000Z,
+        "status": "active",
+        "subscription": Object {
+          "code": "paid",
+        },
+      }
+    }
+    accountAgeInDays={15}
+    accountAgeInWeeks={0}
+    checkSuppression={[MockFunction]}
+    currentUser={
+      Object {
+        "email_verfied": false,
+      }
+    }
+    hasSuppressions={true}
+    isMessageOnboardingSet={false}
+    listApiKeys={[MockFunction]}
+    listSendingDomains={[MockFunction]}
+    moveGuideAtBottom={[MockFunction]}
+    onboarding={Object {}}
+    updateAccount={[MockFunction]}
+    verifyingEmail={false}
+  />
   <Connect(UsageReport) />
-  <AccessControl
-    condition={[Function]}
-  >
-    <Tutorial
-      account={
-        Object {
-          "created": 2018-05-15T12:00:00.000Z,
-          "status": "active",
-          "subscription": Object {
-            "code": "paid",
-          },
-        }
-      }
-      accountAgeInDays={15}
-      accountAgeInWeeks={0}
-      checkSuppression={[MockFunction]}
-      currentUser={
-        Object {
-          "email_verfied": false,
-        }
-      }
-      hasSuppressions={true}
-      isMessageOnboardingSet={false}
-      listApiKeys={[MockFunction]}
-      listSendingDomains={[MockFunction]}
-      moveGuideAtBottom={[MockFunction]}
-      onboarding={Object {}}
-      updateAccount={[MockFunction]}
-      verifyingEmail={false}
-    />
-  </AccessControl>
-   
 </Page>
 `;
 
@@ -59,6 +59,7 @@ exports[`Page: Dashboard tests should display upgrade CTA when account is free a
   empty={Object {}}
   title="Dashboard"
 >
+  <SignupModal />
   <FreePlanWarningBanner
     account={
       Object {
@@ -71,38 +72,37 @@ exports[`Page: Dashboard tests should display upgrade CTA when account is free a
     accountAgeInDays={15}
     ageRangeStart={16}
   />
+  <SuppressionBanner
+    accountAgeInWeeks={0}
+    hasSuppressions={true}
+  />
+  <GettingStartedGuide
+    account={
+      Object {
+        "status": "active",
+        "subscription": Object {
+          "code": "free",
+        },
+      }
+    }
+    accountAgeInDays={15}
+    accountAgeInWeeks={0}
+    checkSuppression={[MockFunction]}
+    currentUser={
+      Object {
+        "email_verified": true,
+      }
+    }
+    hasSuppressions={true}
+    isMessageOnboardingSet={false}
+    listApiKeys={[MockFunction]}
+    listSendingDomains={[MockFunction]}
+    moveGuideAtBottom={[MockFunction]}
+    onboarding={Object {}}
+    updateAccount={[MockFunction]}
+    verifyingEmail={false}
+  />
   <Connect(UsageReport) />
-  <AccessControl
-    condition={[Function]}
-  >
-    <Tutorial
-      account={
-        Object {
-          "status": "active",
-          "subscription": Object {
-            "code": "free",
-          },
-        }
-      }
-      accountAgeInDays={15}
-      accountAgeInWeeks={0}
-      checkSuppression={[MockFunction]}
-      currentUser={
-        Object {
-          "email_verified": true,
-        }
-      }
-      hasSuppressions={true}
-      isMessageOnboardingSet={false}
-      listApiKeys={[MockFunction]}
-      listSendingDomains={[MockFunction]}
-      moveGuideAtBottom={[MockFunction]}
-      onboarding={Object {}}
-      updateAccount={[MockFunction]}
-      verifyingEmail={false}
-    />
-  </AccessControl>
-   
 </Page>
 `;
 
@@ -111,6 +111,7 @@ exports[`Page: Dashboard tests should render import suppression list when 0 supp
   empty={Object {}}
   title="Dashboard"
 >
+  <SignupModal />
   <FreePlanWarningBanner
     account={
       Object {
@@ -124,39 +125,38 @@ exports[`Page: Dashboard tests should render import suppression list when 0 supp
     accountAgeInDays={15}
     ageRangeStart={16}
   />
+  <SuppressionBanner
+    accountAgeInWeeks={40}
+    hasSuppressions={false}
+  />
+  <GettingStartedGuide
+    account={
+      Object {
+        "created": 2018-05-15T12:00:00.000Z,
+        "status": "active",
+        "subscription": Object {
+          "code": "paid",
+        },
+      }
+    }
+    accountAgeInDays={15}
+    accountAgeInWeeks={40}
+    checkSuppression={[MockFunction]}
+    currentUser={
+      Object {
+        "email_verified": true,
+      }
+    }
+    hasSuppressions={false}
+    isMessageOnboardingSet={false}
+    listApiKeys={[MockFunction]}
+    listSendingDomains={[MockFunction]}
+    moveGuideAtBottom={[MockFunction]}
+    onboarding={Object {}}
+    updateAccount={[MockFunction]}
+    verifyingEmail={false}
+  />
   <Connect(UsageReport) />
-  <AccessControl
-    condition={[Function]}
-  >
-    <Tutorial
-      account={
-        Object {
-          "created": 2018-05-15T12:00:00.000Z,
-          "status": "active",
-          "subscription": Object {
-            "code": "paid",
-          },
-        }
-      }
-      accountAgeInDays={15}
-      accountAgeInWeeks={40}
-      checkSuppression={[MockFunction]}
-      currentUser={
-        Object {
-          "email_verified": true,
-        }
-      }
-      hasSuppressions={false}
-      isMessageOnboardingSet={false}
-      listApiKeys={[MockFunction]}
-      listSendingDomains={[MockFunction]}
-      moveGuideAtBottom={[MockFunction]}
-      onboarding={Object {}}
-      updateAccount={[MockFunction]}
-      verifyingEmail={false}
-    />
-  </AccessControl>
-   
 </Page>
 `;
 
@@ -165,6 +165,7 @@ exports[`Page: Dashboard tests should render page correctly with defaults 1`] = 
   empty={Object {}}
   title="Dashboard"
 >
+  <SignupModal />
   <FreePlanWarningBanner
     account={
       Object {
@@ -178,38 +179,37 @@ exports[`Page: Dashboard tests should render page correctly with defaults 1`] = 
     accountAgeInDays={15}
     ageRangeStart={16}
   />
+  <SuppressionBanner
+    accountAgeInWeeks={0}
+    hasSuppressions={true}
+  />
+  <GettingStartedGuide
+    account={
+      Object {
+        "created": 2018-05-15T12:00:00.000Z,
+        "status": "active",
+        "subscription": Object {
+          "code": "paid",
+        },
+      }
+    }
+    accountAgeInDays={15}
+    accountAgeInWeeks={0}
+    checkSuppression={[MockFunction]}
+    currentUser={
+      Object {
+        "email_verified": true,
+      }
+    }
+    hasSuppressions={true}
+    isMessageOnboardingSet={false}
+    listApiKeys={[MockFunction]}
+    listSendingDomains={[MockFunction]}
+    moveGuideAtBottom={[MockFunction]}
+    onboarding={Object {}}
+    updateAccount={[MockFunction]}
+    verifyingEmail={false}
+  />
   <Connect(UsageReport) />
-  <AccessControl
-    condition={[Function]}
-  >
-    <Tutorial
-      account={
-        Object {
-          "created": 2018-05-15T12:00:00.000Z,
-          "status": "active",
-          "subscription": Object {
-            "code": "paid",
-          },
-        }
-      }
-      accountAgeInDays={15}
-      accountAgeInWeeks={0}
-      checkSuppression={[MockFunction]}
-      currentUser={
-        Object {
-          "email_verified": true,
-        }
-      }
-      hasSuppressions={true}
-      isMessageOnboardingSet={false}
-      listApiKeys={[MockFunction]}
-      listSendingDomains={[MockFunction]}
-      moveGuideAtBottom={[MockFunction]}
-      onboarding={Object {}}
-      updateAccount={[MockFunction]}
-      verifyingEmail={false}
-    />
-  </AccessControl>
-   
 </Page>
 `;

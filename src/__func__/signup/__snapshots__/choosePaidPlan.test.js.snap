@@ -249,5 +249,59 @@ Array [
       "url": "/v1/billing",
     },
   ],
+  Array [
+    Object {
+      "data": undefined,
+      "headers": Object {
+        "Authorization": "mock-access-token",
+      },
+      "method": "get",
+      "params": Object {
+        "include": "usage",
+      },
+      "responseType": "json",
+      "url": "/v1/account",
+    },
+  ],
+  Array [
+    Object {
+      "data": undefined,
+      "headers": Object {
+        "Authorization": "mock-access-token",
+      },
+      "method": "get",
+      "params": Object {
+        "limit": 1,
+        "sources": "Manually Added",
+      },
+      "responseType": "json",
+      "url": "/v1/suppression-list",
+    },
+  ],
+  Array [
+    Object {
+      "data": undefined,
+      "headers": Object {
+        "Authorization": "mock-access-token",
+        "x-msys-subaccount": 0,
+      },
+      "method": "get",
+      "params": undefined,
+      "responseType": "json",
+      "url": "/v1/api-keys",
+    },
+  ],
+  Array [
+    Object {
+      "data": undefined,
+      "headers": Object {
+        "Authorization": "mock-access-token",
+      },
+      "method": "get",
+      "params": undefined,
+      "responseType": "json",
+      "url": "/v1/sending-domains",
+    },
+  ],
 ]
 `;
