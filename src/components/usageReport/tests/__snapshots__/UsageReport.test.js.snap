@@ -39,7 +39,7 @@ exports[`UsageReport Component should render with overages 1`] = `
       content="2,000"
       label="Daily Limit"
     />
-    <Connect(SendMoreCTA)
+    <SendMoreCTA
       hasSendingLimits={true}
     />
   </Panel.Section>
@@ -105,7 +105,7 @@ exports[`UsageReport Component should render with regular usage 1`] = `
       content="2,000"
       label="Daily Limit"
     />
-    <Connect(SendMoreCTA)
+    <SendMoreCTA
       hasSendingLimits={true}
     />
   </Panel.Section>

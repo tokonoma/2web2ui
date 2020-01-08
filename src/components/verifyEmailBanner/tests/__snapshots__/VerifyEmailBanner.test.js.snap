@@ -12,7 +12,7 @@ exports[`Component: Verify Email Banner should show default email banner 1`] = `
   title="Verify your email address"
 >
   <p>
-    Please click the link in the email we sent you to verify your email address and unlock higher daily sending limits.
+    Please click the link in the email we sent you to verify your email address.
   </p>
 </Banner>
 `;
@@ -29,7 +29,7 @@ exports[`Component: Verify Email Banner should show sending sending content 1`] 
   title="Verify your email address"
 >
   <p>
-    Please click the link in the email we sent you to verify your email address and unlock higher daily sending limits.
+    Please click the link in the email we sent you to verify your email address.
   </p>
 </Banner>
 `;
