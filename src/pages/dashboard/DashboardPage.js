@@ -6,6 +6,7 @@ import { GettingStartedGuide } from './components/GettingStartedGuide';
 import VerifyEmailBanner from 'src/components/verifyEmailBanner/VerifyEmailBanner';
 import { FreePlanWarningBanner } from 'src/pages/billing/components/Banners';
 import SignupModal from './components/SignupModal';
+import { hasGrants } from 'src/helpers/conditions';
 /* helpers */
 import { getAccountUiOptionValue } from 'src/helpers/conditions/account';
 /* actions */
@@ -20,17 +21,28 @@ export function DashboardPage(props) {
     checkSuppression,
     listApiKeys,
     listSendingDomains,
+    canGetSupressions,
+    canManageKeys,
+    canManageSendingDomains,
   } = props;
 
   useEffect(() => {
-    checkSuppression();
-  }, [checkSuppression]);
+    if (canGetSupressions) {
+      checkSuppression();
+    }
+  }, [checkSuppression, canGetSupressions]);
+
   useEffect(() => {
-    listApiKeys({ id: 0 });
-  }, [listApiKeys]);
+    if (canManageKeys) {
+      listApiKeys({ id: 0 });
+    }
+  }, [listApiKeys, canManageKeys]);
+
   useEffect(() => {
-    listSendingDomains();
-  }, [listSendingDomains]);
+    if (canManageSendingDomains) {
+      listSendingDomains();
+    }
+  }, [listSendingDomains, canManageSendingDomains]);
 
   const displayGuideAndReport = () => {
     const {
@@ -45,9 +57,15 @@ export function DashboardPage(props) {
       hasSuppressions,
       hasSendingDomains,
       hasApiKeysForSending,
+      canGetSupressions,
+      canManageKeys,
+      canManageSendingDomains,
     } = props;
     const usageReport = <UsageReport />;
-    const gettingStartedGuide = <GettingStartedGuide {...props} />;
+    const gettingStartedGuide =
+      canGetSupressions && canManageKeys && canManageSendingDomains ? (
+        <GettingStartedGuide {...props} />
+      ) : null;
     const suppresionBanner = (
       <SuppressionBanner accountAgeInWeeks={accountAgeInWeeks} hasSuppressions={hasSuppressions} />
     );
@@ -96,6 +114,9 @@ export function DashboardPage(props) {
 }
 const mapStateToProps = state => ({
   onboarding: getAccountUiOptionValue('onboarding')(state),
+  canManageKeys: hasGrants('api_keys/manage')(state),
+  canManageSendingDomains: hasGrants('sending_domains/manage')(state),
+  canGetSupressions: hasGrants('suppression_lists/manage')(state),
 });
 
 export default connect(mapStateToProps, { setAccountOption })(DashboardPage);

@@ -28,6 +28,9 @@ describe('Page: Dashboard tests', () => {
     onboarding: {},
     updateAccount: jest.fn(),
     moveGuideAtBottom: jest.fn(),
+    canGetSupressions: true,
+    canManageKeys: true,
+    canManageSendingDomains: true,
   };
 
   let wrapper;
