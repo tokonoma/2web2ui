@@ -3,8 +3,8 @@ import { render } from '@testing-library/react';
 import PreviewErrorFrame from '../PreviewErrorFrame';
 
 describe('PreviewErrorFrame', () => {
-  const defaultHeading = 'Oh no! An Error Occurred';
-  const defaultDescription =
+  const DEFAULT_HEADING = 'Oh no! An Error Occurred';
+  const DEFAULT_DESCRIPTION =
     'If you notice this happens often, check your substitution data or code syntax as these are frequent causes of preview errors.';
 
   it('renders an error with the line number and part when the error code returns with "3000"', () => {
@@ -17,8 +17,8 @@ describe('PreviewErrorFrame', () => {
     expect(queryByText(/mock message/)).toBeInTheDocument();
     expect(queryByText(/mock part/)).toBeInTheDocument();
     expect(queryByText(/line 2/)).toBeInTheDocument();
-    expect(queryByText(defaultHeading)).toBeInTheDocument();
-    expect(queryByText(defaultDescription)).toBeInTheDocument();
+    expect(queryByText(DEFAULT_HEADING)).toBeInTheDocument();
+    expect(queryByText(DEFAULT_DESCRIPTION)).toBeInTheDocument();
   });
 
   it('renders only the "description" field when the "message", "line", and "part" fields are not present', () => {
@@ -27,21 +27,21 @@ describe('PreviewErrorFrame', () => {
     );
 
     expect(queryByText(/mock description/)).toBeInTheDocument();
-    expect(queryByText(defaultHeading)).toBeInTheDocument();
-    expect(queryByText(defaultDescription)).toBeInTheDocument();
+    expect(queryByText(DEFAULT_HEADING)).toBeInTheDocument();
+    expect(queryByText(DEFAULT_DESCRIPTION)).toBeInTheDocument();
   });
 
   it('renders default content when no "code" or "description" field are present', () => {
     const { queryByText } = render(<PreviewErrorFrame errors={[]} />);
 
-    expect(queryByText(defaultHeading)).toBeInTheDocument();
-    expect(queryByText(defaultDescription)).toBeInTheDocument();
+    expect(queryByText(DEFAULT_HEADING)).toBeInTheDocument();
+    expect(queryByText(DEFAULT_DESCRIPTION)).toBeInTheDocument();
   });
 
   it('renders default content when passed in errors are undefined', () => {
     const { queryByText } = render(<PreviewErrorFrame errors={undefined} />);
 
-    expect(queryByText(defaultHeading)).toBeInTheDocument();
-    expect(queryByText(defaultDescription)).toBeInTheDocument();
+    expect(queryByText(DEFAULT_HEADING)).toBeInTheDocument();
+    expect(queryByText(DEFAULT_DESCRIPTION)).toBeInTheDocument();
   });
 });
