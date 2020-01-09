@@ -1,7 +1,17 @@
 @import '~@sparkpost/matchbox/src/styles/config.scss';
 
 .FilterBox {
-  padding: spacing() spacing() spacing(smaller);
+  padding: spacing() spacing() spacing(smaller) 0;
+  @media screen and (max-width: breakpoint(medium)) {
+    padding-left: spacing();
+  }
+}
+
+.DatePicker {
+  padding: spacing() 0 spacing(smaller) spacing();
+  @media screen and (max-width: breakpoint(medium)) {
+    padding-right: spacing();
+  }
 }
 
 .Details {
@@ -13,4 +23,11 @@
 .Listing {
   margin-bottom: spacing(larger);
   margin-top: 0;
+}
+
+.Center {
+  @include text-style-heading;
+  text-align: center;
+  padding: rem(100) 0;
+  color: color(gray, 6);
 }

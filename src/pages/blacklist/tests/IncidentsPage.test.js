@@ -4,9 +4,14 @@ import { MemoryRouter } from 'react-router-dom';
 
 import { IncidentsPage } from '../IncidentsPage';
 import IncidentsCollection from '../components/IncidentsCollection';
+import userEvent from '@testing-library/user-event';
 
 jest.mock('../components/IncidentsCollection');
-IncidentsCollection.mockImplementation(() => <div></div>);
+IncidentsCollection.mockImplementation(({ updateDateRange }) => (
+  <button onClick={() => updateDateRange({ to: '123', from: '234', range: '567' })}>
+    Update DatePicker
+  </button>
+));
 
 describe('IncidentsPage', () => {
   const incidents = [
@@ -30,6 +35,9 @@ describe('IncidentsPage', () => {
   const mockListIncidents = jest.fn();
 
   const subject = ({ ...props }) => {
+    const now = new Date('2019-12-18T04:20:00-04:00');
+    Date.now = jest.fn(() => now);
+
     const defaults = {
       incidents: incidents,
       monitors: monitors,
@@ -65,6 +73,12 @@ describe('IncidentsPage', () => {
   it('loads monitors and incidents when page starts rendering', () => {
     subject();
     expect(mockListMonitors).toHaveBeenCalled();
+    expect(mockListIncidents).toHaveBeenCalled();
+  });
+
+  it('reloads incidents when datepicker updates', () => {
+    const { queryByText } = subject();
+    userEvent.click(queryByText('Update DatePicker'));
     expect(mockListIncidents).toHaveBeenCalled();
   });
 });
