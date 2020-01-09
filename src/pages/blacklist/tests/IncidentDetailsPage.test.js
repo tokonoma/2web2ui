@@ -9,10 +9,10 @@ jest.mock('react-router-dom');
 Link.mockImplementation(() => 'breadcrumb link');
 
 jest.mock('../components/IncidentDetails');
-IncidentDetails.mockImplementation(() => <div data-id="incident-details"></div>);
+IncidentDetails.mockImplementation(() => <div className="mock-incident-details"></div>);
 
 jest.mock('../components/RelatedIncidents');
-RelatedIncidents.mockImplementation(() => <div data-id="related-incidents"> </div>);
+RelatedIncidents.mockImplementation(() => <div className="mock-related-incidents"></div>);
 
 const mockIncident = {
   id: '123',
@@ -101,6 +101,7 @@ describe('IncidentDetailsPage', () => {
 
     wrapper.update();
 
-    expect(wrapper).toMatchSnapshot();
+    expect(wrapper.find('.mock-related-incidents')).toHaveLength(2);
+    expect(wrapper.find('.mock-incident-details')).toHaveLength(1);
   });
 });
