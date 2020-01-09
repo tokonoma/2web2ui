@@ -95,7 +95,7 @@ describe('The recipient validation /list route', () => {
     cy.stubRequest({
       method: 'GET',
       url: '/api/v1/recipient-validation/job/fake-list',
-      fixture: 'recipient-validation/job/fake-list/200.get.json',
+      fixture: 'recipient-validation/job/fake-list/200.get.success.json',
     });
 
     cy.stubRequest({
