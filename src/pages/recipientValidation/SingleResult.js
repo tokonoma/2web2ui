@@ -1,5 +1,5 @@
 /* eslint-disable no-restricted-syntax */
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { ScreenReaderOnly, Page, Panel, Button, Grid, UnstyledLink } from '@sparkpost/matchbox';
 import styles from './SingleResult.module.scss';
@@ -19,81 +19,75 @@ import Tooltip from './components/Tooltip';
 
 const SINGLE_RV_LINK = '/recipient-validation/single';
 
-export class SingleResult extends Component {
-  componentDidMount() {
-    const { address, singleAddress, history, showAlert } = this.props;
+export function SingleResult(props) {
+  const { singleResults = {}, loading, address, history, showAlert, singleAddress } = props;
 
+  useEffect(() => {
     singleAddress(address).catch(({ message }) => {
       showAlert({ message, type: 'error' });
       history.push(SINGLE_RV_LINK);
     });
+  }, [address, history, showAlert, singleAddress]);
+
+  if (!singleResults || loading) {
+    return <Loading />;
   }
 
-  render() {
-    const { singleResults = {}, loading } = this.props;
+  const { email, result } = singleResults;
+  const resultDescription = RESULT_DESCRIPTIONS[result];
 
-    if (!singleResults || loading) {
-      return <Loading />;
-    }
+  return (
+    <Page
+      title="Recipient Validation"
+      subtitle="Results"
+      breadcrumbAction={{ content: 'Back', to: SINGLE_RV_LINK, component: Link }}
+    >
+      <Panel>
+        <Grid>
+          <Grid.Column xs={12} md={7}>
+            <div className={styles.SubSection}>
+              <h2 className={styles.Heading}>{email}</h2>
 
-    const { email, result } = singleResults;
-    const resultDescription = RESULT_DESCRIPTIONS[result];
+              <Result>{result}</Result>
 
-    return (
-      <Page
-        title="Recipient Validation"
-        subtitle="Results"
-        breadcrumbAction={{ content: 'Back', to: SINGLE_RV_LINK, component: Link }}
-      >
-        <Panel>
-          <Grid>
-            <Grid.Column xs={12} md={7}>
+              {resultDescription && <p className={styles.ResultDescription}>{resultDescription}</p>}
+
+              <ResultList data={singleResults} />
+
+              <Button component={Link} color="orange" to={SINGLE_RV_LINK}>
+                Validate Another
+              </Button>
+            </div>
+          </Grid.Column>
+
+          <Grid.Column xs={12} md={5}>
+            <CodeBlock preformatted>
               <div className={styles.SubSection}>
-                <h2 className={styles.Heading}>{email}</h2>
+                <h3 className={styles.ApiHeading}>Raw API Response</h3>
 
-                <Result>{result}</Result>
+                <p className={styles.ApiDescription}>
+                  <WhiteText>
+                    The following raw API results outline the reasons for your email's validation
+                    status. Learn how to&nbsp;
+                    <UnstyledLink
+                      external
+                      to="https://developers.sparkpost.com/api/recipient-validation/"
+                      className={styles.ApiDescriptionLink}
+                    >
+                      integrate with Recipient Validation
+                    </UnstyledLink>
+                    &nbsp;in your product.
+                  </WhiteText>
+                </p>
 
-                {resultDescription && (
-                  <p className={styles.ResultDescription}>{resultDescription}</p>
-                )}
-
-                <ResultList data={singleResults} />
-
-                <Button component={Link} color="orange" to={SINGLE_RV_LINK}>
-                  Validate Another
-                </Button>
+                <ResultCodeBlock data={singleResults} />
               </div>
-            </Grid.Column>
-
-            <Grid.Column xs={12} md={5}>
-              <CodeBlock preformatted>
-                <div className={styles.SubSection}>
-                  <h3 className={styles.ApiHeading}>Raw API Response</h3>
-
-                  <p className={styles.ApiDescription}>
-                    <WhiteText>
-                      The following raw API results outline the reasons for your email's validation
-                      status. Learn how to&nbsp;
-                      <UnstyledLink
-                        external
-                        to="https://developers.sparkpost.com/api/recipient-validation/"
-                        className={styles.ApiDescriptionLink}
-                      >
-                        integrate with Recipient Validation
-                      </UnstyledLink>
-                      &nbsp;in your product.
-                    </WhiteText>
-                  </p>
-
-                  <ResultCodeBlock data={singleResults} />
-                </div>
-              </CodeBlock>
-            </Grid.Column>
-          </Grid>
-        </Panel>
-      </Page>
-    );
-  }
+            </CodeBlock>
+          </Grid.Column>
+        </Grid>
+      </Panel>
+    </Page>
+  );
 }
 
 function TabCharacter() {
