@@ -8,10 +8,6 @@ jest.mock('src/helpers/getConfig');
 describe('Visual Website Optimizer', () => {
   const subject = () => shallow(<VisualWebsiteOptimizer />);
 
-  beforeEach(() => {
-    getConfig.mockReset();
-  });
-
   it('does not add the script when the vwo config is enabled: false', () => {
     getConfig.mockReturnValue(false);
     const wrapper = subject();
