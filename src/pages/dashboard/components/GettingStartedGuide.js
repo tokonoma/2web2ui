@@ -16,6 +16,7 @@ export const GettingStartedGuide = ({
   setAccountOption,
   hasSendingDomains,
   hasApiKeysForSending,
+  isAdmin,
 }) => {
   const {
     isGuideAtBottom = false,
@@ -35,7 +36,9 @@ export const GettingStartedGuide = ({
     hasApiKeysForSending;
 
   const setOnboardingAccountOption = (obj = {}) => {
-    setAccountOption('onboarding', obj);
+    if (isAdmin) {
+      setAccountOption('onboarding', obj);
+    }
   };
 
   //TODO: set isGuideAtBottom to true if all the CheckLists are completed.

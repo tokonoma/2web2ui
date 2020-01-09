@@ -11,15 +11,6 @@ exports[`SendMoreCTA Component renders correctly 1`] = `
       <Case
         condition={[Function]}
       >
-        <UnstyledLink
-          onClick={[Function]}
-        >
-           Verify your email. 
-        </UnstyledLink>
-      </Case>
-      <Case
-        condition={[Function]}
-      >
         <PageLink
           to="/account/billing"
         >

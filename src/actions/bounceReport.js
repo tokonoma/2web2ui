@@ -1,31 +1,49 @@
-import { fetchDeliverability, fetchBounceClassifications, fetchBounceReasonsByDomain } from 'src/actions/metrics';
-import { getQueryFromOptions } from 'src/helpers/metrics';
+import {
+  fetchDeliverability,
+  fetchBounceClassifications,
+  fetchBounceReasonsByDomain,
+} from 'src/actions/metrics';
+import { getMetricsFromKeys, getQueryFromOptions } from 'src/helpers/metrics';
+
+const ADMIN_REASON_METRICS = getMetricsFromKeys(['count_admin_bounce']);
+const CLASSIFICATION_METRICS = getMetricsFromKeys(['count_bounce', 'count_admin_bounce']);
+const DELIVERABILITY_METRICS = getMetricsFromKeys([
+  'count_sent',
+  'count_bounce',
+  'count_inband_bounce',
+  'count_outofband_bounce',
+  'count_admin_bounce',
+  'count_targeted',
+]);
+const REASON_METRICS = getMetricsFromKeys(['count_bounce']);
 
 export function refreshBounceReport(updates = {}) {
-  return (dispatch) => {
-    const params = getQueryFromOptions(updates);
-
+  return dispatch => {
     // get new data
     return Promise.all([
-      dispatch(fetchDeliverability({
-        type: 'GET_BOUNCE_REPORT_AGGREGATES',
-        params: {
-          ...params,
-          metrics: 'count_sent,count_bounce,count_inband_bounce,count_outofband_bounce,count_admin_bounce,count_targeted'
-        }
-      })),
-      dispatch(fetchBounceClassifications({
-        ...params,
-        metrics: 'count_bounce,count_admin_bounce'
-      })),
-      dispatch(fetchBounceReasonsByDomain({
-        ...params,
-        metrics: 'count_bounce'
-      }, 'FETCH_METRICS_BOUNCE_REASONS_BY_DOMAIN')),
-      dispatch(fetchBounceReasonsByDomain({
-        ...params,
-        metrics: 'count_admin_bounce'
-      }, 'FETCH_METRICS_ADMIN_BOUNCE_REASONS_BY_DOMAIN'))
+      dispatch(
+        fetchDeliverability({
+          type: 'GET_BOUNCE_REPORT_AGGREGATES',
+          params: getQueryFromOptions({ ...updates, metrics: DELIVERABILITY_METRICS }),
+        }),
+      ),
+      dispatch(
+        fetchBounceClassifications(
+          getQueryFromOptions({ ...updates, metrics: CLASSIFICATION_METRICS }),
+        ),
+      ),
+      dispatch(
+        fetchBounceReasonsByDomain(
+          getQueryFromOptions({ ...updates, metrics: REASON_METRICS }),
+          'FETCH_METRICS_BOUNCE_REASONS_BY_DOMAIN',
+        ),
+      ),
+      dispatch(
+        fetchBounceReasonsByDomain(
+          getQueryFromOptions({ ...updates, metrics: ADMIN_REASON_METRICS }),
+          'FETCH_METRICS_ADMIN_BOUNCE_REASONS_BY_DOMAIN',
+        ),
+      ),
     ]);
   };
 }
