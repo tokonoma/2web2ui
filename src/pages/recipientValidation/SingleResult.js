@@ -29,49 +29,6 @@ export class SingleResult extends Component {
     });
   }
 
-  resultTable = () => {
-    const { singleResults = {} } = this.props;
-    const { is_role, is_disposable, is_free, did_you_mean } = singleResults;
-
-    return (
-      <div className={styles.ResultsTable}>
-        {did_you_mean && (
-          <div className={styles.ResultsTableRow}>
-            <span className={styles.ResultsTableKey}>
-              Did you mean <Tooltip content={DID_YOU_MEAN_TOOLTIP} />
-            </span>
-
-            <span>{did_you_mean}</span>
-          </div>
-        )}
-
-        <div className={styles.ResultsTableRow}>
-          <span className={styles.ResultsTableKey}>
-            Role-based <Tooltip content={ROLE_TOOLTIP} />
-          </span>
-
-          <ValueResponse value={is_role} />
-        </div>
-
-        <div className={styles.ResultsTableRow}>
-          <span className={styles.ResultsTableKey}>
-            Disposable <Tooltip content={DISPOSABLE_TOOLTIP} />
-          </span>
-
-          <ValueResponse value={is_disposable} />
-        </div>
-
-        <div className={styles.ResultsTableRow}>
-          <span className={styles.ResultsTableKey}>
-            Free <Tooltip content={FREE_TOOLTIP} />
-          </span>
-
-          <ValueResponse value={is_free} />
-        </div>
-      </div>
-    );
-  };
-
   render() {
     const { singleResults = {}, loading } = this.props;
 
@@ -100,7 +57,7 @@ export class SingleResult extends Component {
                   <p className={styles.ResultDescription}>{resultDescription}</p>
                 )}
 
-                {this.resultTable()}
+                <ResultTable data={singleResults} />
 
                 <Button component={Link} color="orange" to={SINGLE_RV_LINK}>
                   Validate Another
@@ -213,6 +170,48 @@ function ResultCodeBlock({ data }) {
       <br />
       {'}'}
     </pre>
+  );
+}
+
+function ResultTable({ data }) {
+  const { is_role, is_disposable, is_free, did_you_mean } = data;
+
+  return (
+    <div className={styles.ResultsTable}>
+      {did_you_mean && (
+        <div className={styles.ResultsTableRow}>
+          <span className={styles.ResultsTableKey}>
+            Did you mean <Tooltip content={DID_YOU_MEAN_TOOLTIP} />
+          </span>
+
+          <span>{did_you_mean}</span>
+        </div>
+      )}
+
+      <div className={styles.ResultsTableRow}>
+        <span className={styles.ResultsTableKey}>
+          Role-based <Tooltip content={ROLE_TOOLTIP} />
+        </span>
+
+        <ValueResponse value={is_role} />
+      </div>
+
+      <div className={styles.ResultsTableRow}>
+        <span className={styles.ResultsTableKey}>
+          Disposable <Tooltip content={DISPOSABLE_TOOLTIP} />
+        </span>
+
+        <ValueResponse value={is_disposable} />
+      </div>
+
+      <div className={styles.ResultsTableRow}>
+        <span className={styles.ResultsTableKey}>
+          Free <Tooltip content={FREE_TOOLTIP} />
+        </span>
+
+        <ValueResponse value={is_free} />
+      </div>
+    </div>
   );
 }
 
