@@ -733,7 +733,7 @@ const routes = [
     component: UploadedListPage,
     condition: hasGrants('recipient-validation/manage'),
     layout: App,
-    title: 'List | Recipient Validation',
+    title: 'Validation Status | List | Recipient Validation',
     supportDocsSearch: 'Recipient Validation',
   },
   {
