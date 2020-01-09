@@ -1,6 +1,7 @@
 import React from 'react';
 import { AuthenticationGate, SuspensionAlerts } from 'src/components/auth';
 import { CookieConsent, GlobalAlertWrapper, BoomerangBanner, SiftScience } from 'src/components';
+import VisualWebsiteOptimizer from './components/vwo/VisualWebsiteOptimizer';
 import Poll from 'src/context/Poll';
 import Support from 'src/components/support/Support';
 import GoogleTagManager from 'src/components/googleTagManager/GoogleTagManager';
@@ -19,7 +20,7 @@ const reloadApp = () => {
 };
 
 const App = ({ RouterComponent = BrowserRouter }) => (
-  <ErrorBoundary onCtaClick={reloadApp} ctaLabel='Reload Page'>
+  <ErrorBoundary onCtaClick={reloadApp} ctaLabel="Reload Page">
     <Poll>
       <RouterComponent>
         <div>
@@ -27,6 +28,7 @@ const App = ({ RouterComponent = BrowserRouter }) => (
           <BoomerangBanner />
           {config.gtmId && <GoogleTagManager id={config.gtmId} />}
           <Pendo />
+          <VisualWebsiteOptimizer />
           <AuthenticationGate />
           <SuspensionAlerts />
           <CookieConsent />
