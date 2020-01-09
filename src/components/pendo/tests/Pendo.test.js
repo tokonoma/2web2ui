@@ -5,19 +5,23 @@ import { Pendo } from '../Pendo';
 describe('Component: Pendo', () => {
   beforeEach(() => {
     window.pendo = {
-      initialize: jest.fn()
+      initialize: jest.fn(),
     };
   });
 
-  const subject = (props) => shallow(<Pendo
-    accessControlReady={false}
-    accountId={999999}
-    accountPlanCode='1meellion'
-    accountSvcLevel='enterprise'
-    username='fredo-mcgurk'
-    userAccessLevel='admin'
-    {...props}
-  />);
+  const subject = props =>
+    shallow(
+      <Pendo
+        accessControlReady={false}
+        accountCreatedAt="2014-12-30T17:43:18.954Z"
+        accountId={999999}
+        accountPlanCode="1meellion"
+        accountSvcLevel="enterprise"
+        username="fredo-mcgurk"
+        userAccessLevel="admin"
+        {...props}
+      />,
+    );
 
   it('should initialise Pendo', () => {
     const wrapper = subject();
@@ -33,7 +37,7 @@ describe('Component: Pendo', () => {
     expect(window.pendo.initialize).toHaveBeenCalledTimes(1);
   });
 
-  it('...iff pendo is available', () => {
+  it('...iff pendo is available', async () => {
     delete window.pendo;
     const wrapper = subject();
     const update = new Promise((resolve, reject) => {
@@ -44,7 +48,7 @@ describe('Component: Pendo', () => {
         reject(e);
       }
     });
-    expect(update).resolves.toBe(true);
+    await expect(update).resolves.toBe(true);
   });
 
   it('...after access control is ready', () => {

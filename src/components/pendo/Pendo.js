@@ -5,11 +5,19 @@ import { usernameSelector } from 'src/selectors/currentUser';
 import config from 'src/config';
 
 export class Pendo extends React.Component {
-  state = {}
+  state = {};
 
   componentDidUpdate() {
     const { initialised } = this.state;
-    const { accessControlReady, accountId, accountSvcLevel, accountPlanCode, username, userAccessLevel } = this.props;
+    const {
+      accessControlReady,
+      accountCreatedAt,
+      accountId,
+      accountSvcLevel,
+      accountPlanCode,
+      username,
+      userAccessLevel,
+    } = this.props;
     const pendo = window.pendo;
     const { tenantId, release } = config;
 
@@ -33,13 +41,14 @@ export class Pendo extends React.Component {
         id: `${tenantId}_${accountId}`,
         tenant: tenantId,
         plan: accountPlanCode,
-        serviceLevel: accountSvcLevel
+        serviceLevel: accountSvcLevel,
+        accountCreatedAt,
       },
       visitor: {
         id: `${tenantId}_${accountId}_${username}`,
         accessLevel: userAccessLevel,
-        release
-      }
+        release,
+      },
     });
 
     this.setState({ initialised: true });
@@ -50,13 +59,14 @@ export class Pendo extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   accessControlReady: state.accessControlReady,
+  accountCreatedAt: state.account.created,
   accountId: state.account.customer_id,
   accountPlanCode: currentPlanCodeSelector(state),
   accountSvcLevel: state.account.service_level,
   username: usernameSelector(state),
-  userAccessLevel: state.currentUser.access_level
+  userAccessLevel: state.currentUser.access_level,
 });
 
 export default connect(mapStateToProps)(Pendo);
