@@ -165,6 +165,18 @@ Array [
       "method": "post",
       "params": undefined,
       "responseType": "json",
+      "url": "/v1/billing/subscription/check",
+    },
+  ],
+  Array [
+    Object {
+      "data": undefined,
+      "headers": Object {
+        "Authorization": "mock-access-token",
+      },
+      "method": "post",
+      "params": undefined,
+      "responseType": "json",
       "url": "/v1/account/billing/collect",
     },
   ],

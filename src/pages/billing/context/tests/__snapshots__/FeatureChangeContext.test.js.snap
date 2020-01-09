@@ -33,15 +33,8 @@ Object {
       </Button>,
       "description": <div>
         <span>
-          Your new plan doesn't include dedicated IPs. Your current IPs will now be billed at $20/month each, or you can
-        </span>
-        <Connect(SupportTicketLink)
-          issueId="general_issue"
-        >
-           submit a ticket 
-        </Connect(SupportTicketLink)>
-        <span>
-          to delete them.
+          Your new plan doesn't include dedicated IPs. 
+                    Your current IP(s) will be removed at the end of your current billing cycle.
         </span>
       </div>,
       "key": "dedicated_ip",

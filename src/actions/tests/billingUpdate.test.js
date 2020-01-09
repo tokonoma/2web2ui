@@ -11,21 +11,24 @@ describe('Action Creator: Billing Update', () => {
   let dispatch;
 
   beforeEach(() => {
-    dispatch = jest.fn((a) => a);
-    billingActions.cors = jest.fn(({ meta }) => meta.onSuccess({
-      results: {
-        accountKey: 'account-key',
-        signature: 'TEST_SIGNATURE',
-        token: 'TEST_TOKEN'
-      }
-    }));
+    dispatch = jest.fn(a => a);
+    billingActions.cors = jest.fn(({ meta }) =>
+      meta.onSuccess({
+        results: {
+          accountKey: 'account-key',
+          signature: 'TEST_SIGNATURE',
+          token: 'TEST_TOKEN',
+        },
+      }),
+    );
     billingActions.updateCreditCard = jest.fn(({ meta }) => meta.onSuccess({}));
     billingActions.updateSubscription = jest.fn(({ meta }) => meta.onSuccess({}));
     billingActions.syncSubscription = jest.fn(({ meta }) => meta.onSuccess({}));
+    billingActions.syncBillingSubscription = jest.fn(({ meta }) => meta.onSuccess({}));
     billingActions.collectPayments = jest.fn(({ meta }) => meta.onSuccess({}));
     accountActions.fetch = jest.fn(({ meta }) => meta.onSuccess({}));
     accountActions.getBillingInfo = jest.fn();
-    billingHelpers.formatUpdateData = jest.fn((a) => a);
+    billingHelpers.formatUpdateData = jest.fn(a => a);
   });
 
   it('update without a planpicker code', () => {
@@ -34,50 +37,65 @@ describe('Action Creator: Billing Update', () => {
 
     thunk(dispatch);
 
-    expect(billingActions.cors).toHaveBeenCalledWith(expect.objectContaining({
-      context: 'update-billing'
-    }));
-    expect(billingActions.updateCreditCard).toHaveBeenCalledWith(expect.objectContaining({
-      data: {
-        accountKey: 'account-key'
-      },
-      signature: 'TEST_SIGNATURE',
-      token: 'TEST_TOKEN'
-    }));
+    expect(billingActions.cors).toHaveBeenCalledWith(
+      expect.objectContaining({
+        context: 'update-billing',
+      }),
+    );
+    expect(billingActions.updateCreditCard).toHaveBeenCalledWith(
+      expect.objectContaining({
+        data: {
+          accountKey: 'account-key',
+        },
+        signature: 'TEST_SIGNATURE',
+        token: 'TEST_TOKEN',
+      }),
+    );
     expect(billingActions.updateSubscription).not.toHaveBeenCalled();
     expect(billingActions.syncSubscription).toHaveBeenCalled();
+    expect(billingActions.syncBillingSubscription).toHaveBeenCalled();
     expect(billingActions.collectPayments).toHaveBeenCalled();
-    expect(accountActions.fetch).toHaveBeenCalledWith(expect.objectContaining({ include: 'usage' }));
+    expect(accountActions.fetch).toHaveBeenCalledWith(
+      expect.objectContaining({ include: 'usage' }),
+    );
     expect(accountActions.getBillingInfo).toHaveBeenCalled();
   });
 
   it('update with a planpicker code', () => {
     const values = {
       planpicker: {
-        code: 'plan-code'
-      }
+        code: 'plan-code',
+      },
     };
     const thunk = billingUpdate(values);
 
     thunk(dispatch);
 
-    expect(billingActions.cors).toHaveBeenCalledWith(expect.objectContaining({
-      context: 'update-billing'
-    }));
-    expect(billingActions.updateCreditCard).toHaveBeenCalledWith(expect.objectContaining({
-      data: {
-        accountKey: 'account-key',
-        ...values
-      },
-      signature: 'TEST_SIGNATURE',
-      token: 'TEST_TOKEN'
-    }));
-    expect(billingActions.updateSubscription).toHaveBeenCalledWith(expect.objectContaining({
-      code: 'plan-code'
-    }));
+    expect(billingActions.cors).toHaveBeenCalledWith(
+      expect.objectContaining({
+        context: 'update-billing',
+      }),
+    );
+    expect(billingActions.updateCreditCard).toHaveBeenCalledWith(
+      expect.objectContaining({
+        data: {
+          accountKey: 'account-key',
+          ...values,
+        },
+        signature: 'TEST_SIGNATURE',
+        token: 'TEST_TOKEN',
+      }),
+    );
+    expect(billingActions.updateSubscription).toHaveBeenCalledWith(
+      expect.objectContaining({
+        code: 'plan-code',
+      }),
+    );
     expect(billingActions.syncSubscription).toHaveBeenCalled();
     expect(billingActions.collectPayments).toHaveBeenCalled();
-    expect(accountActions.fetch).toHaveBeenCalledWith(expect.objectContaining({ include: 'usage' }));
+    expect(accountActions.fetch).toHaveBeenCalledWith(
+      expect.objectContaining({ include: 'usage' }),
+    );
     expect(accountActions.getBillingInfo).toHaveBeenCalled();
   });
 });
