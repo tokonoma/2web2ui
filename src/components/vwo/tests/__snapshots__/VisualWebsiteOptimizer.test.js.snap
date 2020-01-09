@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Visual Website Optimizer adds the script when the vwo config is enabled: true 1`] = `
+<HelmetWrapper
+  defer={true}
+  encodeSpecialCharacters={true}
+>
+  <script
+    src="https://dev.visualwebsiteoptimizer.com/lib/461565.js"
+  />
+</HelmetWrapper>
+`;
+
+exports[`Visual Website Optimizer does not add the script when the vwo config is enabled: false 1`] = `""`;
