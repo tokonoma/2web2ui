@@ -14,7 +14,11 @@
 .ResultValue {
   text-transform: capitalize;
   font-size: 1.66rem;
-  font-weight: 550;
+  font-weight: 500;
+}
+
+.ResultDescription {
+  margin-bottom: spacing('larger');
 }
 
 .TabCharacter {
@@ -26,14 +30,39 @@
   color: color(gray, 10);
 }
 
-.tableKey {
-  width: 10rem;
-  display: inline-block;
+.ApiDescription {
+  margin-bottom: spacing('large');
+  line-height: 1.5em;
 }
 
-.table {
+// Specificity waaaars 💣💥
+.ApiDescriptionLink.ApiDescriptionLink {
+  color: #fff;
+  text-decoration: underline;
+}
+
+.ResultsTable {
   max-width: 400px;
-  margin-bottom: 2rem;
+  width: 100%;
+  margin-bottom: spacing('larger');
+}
+
+.ResultsTableRow {
+  width: 100%;
+  display: grid;
+  align-items: center;
+  grid-template-columns: 1fr 1fr;
+  padding: spacing() 0;
+
+  + .ResultsTableRow {
+    border-top: 1px solid color(gray, 7);
+  }
+}
+
+.ResultsTableKey {
+  display: inline-flex;
+  align-items: center;
+  margin: 0;
 }
 
 .CodeSnippet {
@@ -43,22 +72,6 @@
 
 .WhiteText {
   color: color(gray, 9);
-}
-
-.Paragraph {
-  line-height: 1.5em;
-  margin-bottom: 2.5rem;
-}
-
-.ApiDescription {
-  margin-bottom: 1.5rem;
-  line-height: 1.5em;
-}
-
-// Specificity waaaars 💣💥
-.ApiDescriptionLink.ApiDescriptionLink {
-  color: #fff;
-  text-decoration: underline;
 }
 
 .SubSection {

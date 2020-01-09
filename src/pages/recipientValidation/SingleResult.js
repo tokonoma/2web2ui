@@ -34,40 +34,40 @@ export class SingleResult extends Component {
     const { is_role, is_disposable, is_free, did_you_mean } = singleResults;
 
     return (
-      <div className={styles.table}>
+      <div className={styles.ResultsTable}>
         {did_you_mean && (
-          <>
-            <h6 className={styles.tableKey}>
+          <div className={styles.ResultsTableRow}>
+            <h6 className={styles.ResultsTableKey}>
               Did you mean <Tooltip content={DID_YOU_MEAN_TOOLTIP} />
             </h6>
 
             <span>{did_you_mean}</span>
-
-            <hr />
-          </>
+          </div>
         )}
 
-        <h6 className={styles.tableKey}>
-          Role-based <Tooltip content={ROLE_TOOLTIP} />
-        </h6>
+        <div className={styles.ResultsTableRow}>
+          <h6 className={styles.ResultsTableKey}>
+            Role-based <Tooltip content={ROLE_TOOLTIP} />
+          </h6>
 
-        <ValueResponse value={is_role} />
+          <ValueResponse value={is_role} />
+        </div>
 
-        <hr />
+        <div className={styles.ResultsTableRow}>
+          <h6 className={styles.ResultsTableKey}>
+            Disposable <Tooltip content={DISPOSABLE_TOOLTIP} />
+          </h6>
 
-        <h6 className={styles.tableKey}>
-          Disposable <Tooltip content={DISPOSABLE_TOOLTIP} />
-        </h6>
+          <ValueResponse value={is_disposable} />
+        </div>
 
-        <ValueResponse value={is_disposable} />
+        <div className={styles.ResultsTableRow}>
+          <h6 className={styles.ResultsTableKey}>
+            Free <Tooltip content={FREE_TOOLTIP} />
+          </h6>
 
-        <hr />
-
-        <h6 className={styles.tableKey}>
-          Free <Tooltip content={FREE_TOOLTIP} />
-        </h6>
-
-        <ValueResponse value={is_free} />
+          <ValueResponse value={is_free} />
+        </div>
       </div>
     );
   };
@@ -95,9 +95,7 @@ export class SingleResult extends Component {
 
                 <Result>{result}</Result>
 
-                <p className={styles.Paragraph} name="result-description">
-                  {RESULT_DESCRIPTIONS[result]}
-                </p>
+                <p className={styles.ResultDescription}>{RESULT_DESCRIPTIONS[result]}</p>
 
                 {this.resultTable()}
 
