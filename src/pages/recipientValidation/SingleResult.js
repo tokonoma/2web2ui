@@ -37,34 +37,34 @@ export class SingleResult extends Component {
       <div className={styles.ResultsTable}>
         {did_you_mean && (
           <div className={styles.ResultsTableRow}>
-            <h6 className={styles.ResultsTableKey}>
+            <span className={styles.ResultsTableKey}>
               Did you mean <Tooltip content={DID_YOU_MEAN_TOOLTIP} />
-            </h6>
+            </span>
 
             <span>{did_you_mean}</span>
           </div>
         )}
 
         <div className={styles.ResultsTableRow}>
-          <h6 className={styles.ResultsTableKey}>
+          <span className={styles.ResultsTableKey}>
             Role-based <Tooltip content={ROLE_TOOLTIP} />
-          </h6>
+          </span>
 
           <ValueResponse value={is_role} />
         </div>
 
         <div className={styles.ResultsTableRow}>
-          <h6 className={styles.ResultsTableKey}>
+          <span className={styles.ResultsTableKey}>
             Disposable <Tooltip content={DISPOSABLE_TOOLTIP} />
-          </h6>
+          </span>
 
           <ValueResponse value={is_disposable} />
         </div>
 
         <div className={styles.ResultsTableRow}>
-          <h6 className={styles.ResultsTableKey}>
+          <span className={styles.ResultsTableKey}>
             Free <Tooltip content={FREE_TOOLTIP} />
-          </h6>
+          </span>
 
           <ValueResponse value={is_free} />
         </div>
