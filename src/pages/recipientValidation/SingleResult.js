@@ -33,7 +33,7 @@ export function SingleResult(props) {
     return <Loading />;
   }
 
-  const { email, result } = singleResults;
+  const { email, result, reason } = singleResults;
   const resultDescription = RESULT_DESCRIPTIONS[result];
 
   return (
@@ -48,7 +48,7 @@ export function SingleResult(props) {
             <div className={styles.SubSection}>
               <h2 className={styles.Heading}>{email}</h2>
 
-              <Result>{result}</Result>
+              {(result || reason) && <Result>{result ? result : reason}</Result>}
 
               {resultDescription && <p className={styles.ResultDescription}>{resultDescription}</p>}
 

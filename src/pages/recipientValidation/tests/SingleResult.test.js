@@ -186,4 +186,31 @@ describe('SingleResult', () => {
 
     expect(queryByText('Recipient Validation')).toBeInTheDocument();
   });
+
+  it('renders the provided "reason" when no "result" is present', () => {
+    const { queryAllByText } = subject({
+      singleResults: {
+        valid: false,
+        is_role: true,
+        is_disposable: true,
+        is_free: false,
+        reason: 'Mock Reason',
+      },
+    });
+
+    expect(queryAllByText('Mock Reason')).toHaveLength(2);
+  });
+
+  it('renders without crashing when no "result" or "reason" are returned', () => {
+    const { queryByText } = subject({
+      singleResults: {
+        valid: false,
+        is_role: true,
+        is_disposable: true,
+        is_free: false,
+      },
+    });
+
+    expect(queryByText('Recipient Validation')).toBeInTheDocument();
+  });
 });
