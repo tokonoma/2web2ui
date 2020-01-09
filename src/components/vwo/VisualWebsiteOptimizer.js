@@ -1,9 +1,9 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import config from 'src/config';
+import getConfig from 'src/helpers/getConfig';
 
 export default () => {
-  const { vwo: { enabled = false } = {} } = config;
+  const enabled = getConfig('vwo.enabled') || false;
   if (enabled) {
     return (
       <Helmet>
