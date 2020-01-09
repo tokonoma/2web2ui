@@ -40,8 +40,7 @@ export function deleteMonitor(resource) {
   });
 }
 
-export function listIncidents(from = '2019-01-01') {
-  //TODO replace with datepicker date
+export function listIncidents(from, to) {
   return sparkpostApiRequest({
     type: 'LIST_INCIDENTS',
     meta: {
@@ -50,6 +49,7 @@ export function listIncidents(from = '2019-01-01') {
       showErrorAlert: false,
       params: {
         from,
+        to,
       },
     },
   });
