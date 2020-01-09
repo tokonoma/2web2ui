@@ -57,7 +57,7 @@ export class SingleResult extends Component {
                   <p className={styles.ResultDescription}>{resultDescription}</p>
                 )}
 
-                <ResultTable data={singleResults} />
+                <ResultList data={singleResults} />
 
                 <Button component={Link} color="orange" to={SINGLE_RV_LINK}>
                   Validate Another
@@ -104,24 +104,66 @@ function WhiteText({ children }) {
   return <span className={styles.WhiteText}>{children}</span>;
 }
 
-function TableRow({ children }) {
+function ResultList({ data }) {
+  const { is_role, is_disposable, is_free, did_you_mean } = data;
+
   return (
-    <div className={styles.ResultsTableRow} role="listitem">
+    <div className={styles.ResultList} role="list">
+      {did_you_mean && (
+        <ResultListItem>
+          <ResultListKey>
+            Did you mean <Tooltip content={DID_YOU_MEAN_TOOLTIP} />
+          </ResultListKey>
+
+          <span>{did_you_mean}</span>
+        </ResultListItem>
+      )}
+
+      <ResultListItem>
+        <ResultListKey>
+          Role-based <Tooltip content={ROLE_TOOLTIP} />
+        </ResultListKey>
+
+        <ResultListValue value={is_role} />
+      </ResultListItem>
+
+      <ResultListItem>
+        <ResultListKey>
+          Disposable <Tooltip content={DISPOSABLE_TOOLTIP} />
+        </ResultListKey>
+
+        <ResultListValue value={is_disposable} />
+      </ResultListItem>
+
+      <ResultListItem>
+        <ResultListKey>
+          Free <Tooltip content={FREE_TOOLTIP} />
+        </ResultListKey>
+
+        <ResultListValue value={is_free} />
+      </ResultListItem>
+    </div>
+  );
+}
+
+function ResultListItem({ children }) {
+  return (
+    <div className={styles.ResultListItem} role="listitem">
       {children}
     </div>
   );
 }
 
-function TableKey({ children }) {
+function ResultListKey({ children }) {
   return (
-    <span className={styles.ResultsTableKey}>
+    <span className={styles.ResultListKey}>
       {children}
       <ScreenReaderOnly>:</ScreenReaderOnly>
     </span>
   );
 }
 
-function TableValue({ value }) {
+function ResultListValue({ value }) {
   return <span>{value ? 'Yes' : 'No'}</span>;
 }
 
@@ -187,48 +229,6 @@ function ResultCodeBlock({ data }) {
       <br />
       {'}'}
     </pre>
-  );
-}
-
-function ResultTable({ data }) {
-  const { is_role, is_disposable, is_free, did_you_mean } = data;
-
-  return (
-    <div className={styles.ResultsTable} role="list">
-      {did_you_mean && (
-        <TableRow>
-          <TableKey>
-            Did you mean <Tooltip content={DID_YOU_MEAN_TOOLTIP} />
-          </TableKey>
-
-          <span>{did_you_mean}</span>
-        </TableRow>
-      )}
-
-      <TableRow>
-        <TableKey>
-          Role-based <Tooltip content={ROLE_TOOLTIP} />
-        </TableKey>
-
-        <TableValue value={is_role} />
-      </TableRow>
-
-      <TableRow>
-        <TableKey>
-          Disposable <Tooltip content={DISPOSABLE_TOOLTIP} />
-        </TableKey>
-
-        <TableValue value={is_disposable} />
-      </TableRow>
-
-      <TableRow>
-        <TableKey>
-          Free <Tooltip content={FREE_TOOLTIP} />
-        </TableKey>
-
-        <TableValue value={is_free} />
-      </TableRow>
-    </div>
   );
 }
 
