@@ -33,8 +33,9 @@ export function SingleResult(props) {
     return <Loading />;
   }
 
-  const { email, result, reason } = singleResults;
-  const resultDescription = RESULT_DESCRIPTIONS[result];
+  const { email, result } = singleResults;
+  const calculatedResult = result ? result : 'undeliverable';
+  const resultDescription = RESULT_DESCRIPTIONS[calculatedResult];
 
   return (
     <Page
@@ -48,7 +49,7 @@ export function SingleResult(props) {
             <div className={styles.SubSection}>
               <h2 className={styles.Heading}>{email}</h2>
 
-              {(result || reason) && <Result>{result ? result : reason}</Result>}
+              <Result>{calculatedResult}</Result>
 
               {resultDescription && <p className={styles.ResultDescription}>{resultDescription}</p>}
 

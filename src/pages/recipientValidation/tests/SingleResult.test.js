@@ -187,8 +187,8 @@ describe('SingleResult', () => {
     expect(queryByText('Recipient Validation')).toBeInTheDocument();
   });
 
-  it('renders the provided "reason" when no "result" is present', () => {
-    const { queryAllByText } = subject({
+  it('renders the provided "Undeliverable" when no "result" is present', () => {
+    const { queryByText } = subject({
       singleResults: {
         valid: false,
         is_role: true,
@@ -198,7 +198,8 @@ describe('SingleResult', () => {
       },
     });
 
-    expect(queryAllByText('Mock Reason')).toHaveLength(2);
+    expect(queryByText('Mock Reason')).toBeInTheDocument();
+    expect(queryByText('undeliverable')).toBeInTheDocument();
   });
 
   it('renders without crashing when no "result" or "reason" are returned', () => {
