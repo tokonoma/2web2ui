@@ -63,6 +63,17 @@ export function syncSubscription({ meta = {} } = {}) {
   });
 }
 
+export function syncBillingSubscription({ meta = {} } = {}) {
+  return sparkpostApiRequest({
+    type: 'SYNC_BILLING_SUBSCRIPTION',
+    meta: {
+      method: 'POST',
+      url: '/v1/billing/subscription/check',
+      ...meta,
+    },
+  });
+}
+
 /**
  * attempts to collect payments (like when payment method is updated) to make sure pending payments are charged
  */
