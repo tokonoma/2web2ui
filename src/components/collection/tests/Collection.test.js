@@ -7,7 +7,6 @@ import * as sorters from 'src/helpers/sortMatch';
 import delay from 'src/__testHelpers__/delay';
 
 describe('Component: Collection', () => {
-
   let props;
   let pushStub;
 
@@ -27,17 +26,22 @@ describe('Component: Collection', () => {
       perPageButtons: [10, 50],
       location: {
         pathname: '/some/path',
-        search: '?some=search&other=string'
+        search: '?some=search&other=string',
       },
       history: {
-        push: pushStub
-      }
+        push: pushStub,
+      },
     };
   });
 
-  it('should render null if there are no rows', () => {
+  it('should render null if there are no rows and no EmptyComponent', () => {
     const wrapper = shallow(<Collection {...props} />);
     expect(wrapper.equals(null)).toEqual(true);
+  });
+
+  it('should render EmptyComponent if there are no rows and EmptyComponent exists', () => {
+    const wrapper = shallow(<Collection {...props} emptyComponent={() => ''} />);
+    expect(wrapper.find('emptyComponent')).toExist();
   });
 
   it('should render correctly with basic props', () => {
@@ -50,16 +54,22 @@ describe('Component: Collection', () => {
 
   it('should render with custom wrappers', () => {
     addRows(3);
-    props.outerWrapper = function CustomOuterWrapper(props) { return props.children; };
-    props.bodyWrapper = function CustomBodyWrapper(props) { return props.children; };
+    props.outerWrapper = function CustomOuterWrapper(props) {
+      return props.children;
+    };
+    props.bodyWrapper = function CustomBodyWrapper(props) {
+      return props.children;
+    };
     expect(shallow(<Collection {...props} />)).toMatchSnapshot();
   });
 
   it('should use custom render function when child is a render function', () => {
     addRows(3);
-    const renderFn = (renderProps) => (
+    const renderFn = renderProps => (
       <>
-        {Object.keys(renderProps).map((key) => <div key={key}>{renderProps[key]}</div>)}
+        {Object.keys(renderProps).map(key => (
+          <div key={key}>{renderProps[key]}</div>
+        ))}
       </>
     );
     const wrapper = shallow(<Collection {...props} children={renderFn} />);
@@ -99,7 +109,6 @@ describe('Component: Collection', () => {
   });
 
   describe('state changes', () => {
-
     let wrapper;
     let instance;
     let updateQueryStringSpy;
@@ -222,7 +231,5 @@ describe('Component: Collection', () => {
       instance.maybeUpdateQueryString();
       expect(pushStub).toHaveBeenCalledWith('some-pathname?other=cool&page=1&perPage=10');
     });
-
   });
-
 });

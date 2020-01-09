@@ -8,9 +8,10 @@ import Pagination from './Pagination';
 import FilterBox from './FilterBox';
 import { objectSortMatch } from 'src/helpers/sortMatch';
 
-const PassThroughWrapper = (props) => props.children;
+const PassThroughWrapper = props => props.children;
 const NullComponent = () => null;
-const objectValuesToString = (keys) => (item) => (keys || Object.keys(item)).map((key) => item[key]).join(' ');
+const objectValuesToString = keys => item =>
+  (keys || Object.keys(item)).map(key => item[key]).join(' ');
 
 export class Collection extends Component {
   state = {};
@@ -18,15 +19,15 @@ export class Collection extends Component {
   static defaultProps = {
     defaultPerPage: 25,
     filterBox: {
-      show: false
-    }
-  }
+      show: false,
+    },
+  };
 
   componentDidMount() {
     const { defaultPerPage, location } = this.props;
     this.setState({
       perPage: defaultPerPage,
-      currentPage: Number(qs.parse(location.search).page) || 1
+      currentPage: Number(qs.parse(location.search).page) || 1,
     });
   }
 
@@ -38,22 +39,22 @@ export class Collection extends Component {
     }
   }
 
-  handlePageChange = (index) => {
+  handlePageChange = index => {
     const currentPage = index + 1;
     this.setState({ currentPage }, this.maybeUpdateQueryString);
-  }
+  };
 
-  handlePerPageChange = (perPage) => {
+  handlePerPageChange = perPage => {
     this.setState({ perPage, currentPage: 1 }, this.maybeUpdateQueryString);
-  }
+  };
 
-  handleFilterChange = (pattern) => {
+  handleFilterChange = pattern => {
     const { rows, filterBox, sortColumn, sortDirection } = this.props;
     const { keyMap, itemToStringKeys, matchThreshold } = filterBox;
     const update = {
       currentPage: 1,
       filteredRows: null,
-      pattern
+      pattern,
     };
 
     if (pattern) {
@@ -62,7 +63,7 @@ export class Collection extends Component {
         pattern,
         getter: objectValuesToString(itemToStringKeys),
         keyMap,
-        matchThreshold
+        matchThreshold,
       });
 
       // Ultimately respect the sort column, if present
@@ -114,7 +115,9 @@ export class Collection extends Component {
     const { rows, perPageButtons, pagination, saveCsv = true } = this.props;
     const { currentPage, perPage, filteredRows } = this.state;
 
-    if (!pagination || !currentPage) { return null; }
+    if (!pagination || !currentPage) {
+      return null;
+    }
 
     return (
       <Pagination
@@ -129,7 +132,6 @@ export class Collection extends Component {
     );
   }
 
-
   render() {
     const {
       rows,
@@ -139,11 +141,12 @@ export class Collection extends Component {
       outerWrapper: OuterWrapper = PassThroughWrapper,
       bodyWrapper: BodyWrapper = PassThroughWrapper,
       children,
-      title
+      title,
+      emptyComponent: EmptyComponent,
     } = this.props;
 
     if (!rows.length) {
-      return null;
+      return EmptyComponent ? <EmptyComponent /> : null;
     }
 
     const filterBox = this.renderFilterBox();
@@ -151,24 +154,24 @@ export class Collection extends Component {
       <OuterWrapper>
         <HeaderComponent />
         <BodyWrapper>
-          {this.getVisibleRows().map((row, i) => <RowComponent key={`${row[rowKeyName] || 'row'}-${i}`} {...row} />)}
+          {this.getVisibleRows().map((row, i) => (
+            <RowComponent key={`${row[rowKeyName] || 'row'}-${i}`} {...row} />
+          ))}
         </BodyWrapper>
       </OuterWrapper>
     );
     const pagination = this.renderPagination();
     const heading = <h3>{title}</h3>;
 
-    return (
-      typeof(children) === 'function'
-        ? children({ filterBox, collection, heading, pagination })
-        : (
-          <div>
-            {title && heading}
-            {filterBox}
-            {collection}
-            {pagination}
-          </div>
-        )
+    return typeof children === 'function' ? (
+      children({ filterBox, collection, heading, pagination })
+    ) : (
+      <div>
+        {title && heading}
+        {filterBox}
+        {collection}
+        {pagination}
+      </div>
     );
   }
 }
