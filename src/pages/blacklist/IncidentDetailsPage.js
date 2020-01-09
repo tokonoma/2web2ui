@@ -81,6 +81,43 @@ export const IncidentDetailsPage = ({
       );
     }
 
+    const renderRelatedIncidentsForBlacklist = () => {
+      if (incidentsForBlacklistPending) {
+        return <PanelLoading />;
+      }
+      if (!incidentsForBlacklist.length) {
+        return <Empty message={`No Recent ${blacklist_name} incidents`} />;
+      }
+      return (
+        <Panel>
+          <RelatedIncidents
+            incident={{ ...incident, id }}
+            incidents={incidentsForBlacklist}
+            type="blacklist"
+            header={`Recent ${blacklist_name} Incidents`}
+          />
+        </Panel>
+      );
+    };
+
+    const renderRelatedIncidentsForResource = () => {
+      if (incidentsForResourcePending) {
+        return <PanelLoading />;
+      }
+      if (!incidentsForResource.length) {
+        return <Empty message={`No Recent ${resource} incidents`} />;
+      }
+      return (
+        <Panel>
+          <RelatedIncidents
+            incident={{ ...incident, id }}
+            incidents={incidentsForResource}
+            header={`Recent ${resource} Incidents`}
+          />
+        </Panel>
+      );
+    };
+
     return (
       <>
         {historicalIncidentsPending ? (
@@ -100,35 +137,10 @@ export const IncidentDetailsPage = ({
 
         <Grid>
           <Grid.Column lg={6} xs={12}>
-            {incidentsForBlacklistPending ? (
-              <PanelLoading />
-            ) : incidentsForBlacklist.length ? (
-              <Panel>
-                <RelatedIncidents
-                  incident={{ ...incident, id }}
-                  incidents={incidentsForBlacklist}
-                  type="blacklist"
-                  header={`Recent ${blacklist_name} Incidents`}
-                />
-              </Panel>
-            ) : (
-              <Empty message={`No Recent ${blacklist_name} incidents`} />
-            )}
+            {renderRelatedIncidentsForBlacklist()}
           </Grid.Column>
           <Grid.Column lg={6} xs={12}>
-            {incidentsForResourcePending ? (
-              <PanelLoading />
-            ) : incidentsForResource.length ? (
-              <Panel>
-                <RelatedIncidents
-                  incident={{ ...incident, id }}
-                  incidents={incidentsForResource}
-                  header={`Recent ${resource} Incidents`}
-                />
-              </Panel>
-            ) : (
-              <Empty message={`No Recent ${resource} incidents`} />
-            )}
+            {renderRelatedIncidentsForResource()}
           </Grid.Column>
         </Grid>
       </>
