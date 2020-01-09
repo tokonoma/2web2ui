@@ -104,8 +104,25 @@ function WhiteText({ children }) {
   return <span className={styles.WhiteText}>{children}</span>;
 }
 
-function ValueResponse({ value }) {
-  return <span data-id="validation-result-value">{value ? 'Yes' : 'No'}</span>;
+function TableRow({ children }) {
+  return (
+    <div className={styles.ResultsTableRow} role="listitem">
+      {children}
+    </div>
+  );
+}
+
+function TableKey({ children }) {
+  return (
+    <span className={styles.ResultsTableKey}>
+      {children}
+      <ScreenReaderOnly>:</ScreenReaderOnly>
+    </span>
+  );
+}
+
+function TableValue({ value }) {
+  return <span>{value ? 'Yes' : 'No'}</span>;
 }
 
 function Result({ children }) {
@@ -177,40 +194,40 @@ function ResultTable({ data }) {
   const { is_role, is_disposable, is_free, did_you_mean } = data;
 
   return (
-    <div className={styles.ResultsTable}>
+    <div className={styles.ResultsTable} role="list">
       {did_you_mean && (
-        <div className={styles.ResultsTableRow}>
-          <span className={styles.ResultsTableKey}>
+        <TableRow>
+          <TableKey>
             Did you mean <Tooltip content={DID_YOU_MEAN_TOOLTIP} />
-          </span>
+          </TableKey>
 
           <span>{did_you_mean}</span>
-        </div>
+        </TableRow>
       )}
 
-      <div className={styles.ResultsTableRow}>
-        <span className={styles.ResultsTableKey}>
+      <TableRow>
+        <TableKey>
           Role-based <Tooltip content={ROLE_TOOLTIP} />
-        </span>
+        </TableKey>
 
-        <ValueResponse value={is_role} />
-      </div>
+        <TableValue value={is_role} />
+      </TableRow>
 
-      <div className={styles.ResultsTableRow}>
-        <span className={styles.ResultsTableKey}>
+      <TableRow>
+        <TableKey>
           Disposable <Tooltip content={DISPOSABLE_TOOLTIP} />
-        </span>
+        </TableKey>
 
-        <ValueResponse value={is_disposable} />
-      </div>
+        <TableValue value={is_disposable} />
+      </TableRow>
 
-      <div className={styles.ResultsTableRow}>
-        <span className={styles.ResultsTableKey}>
+      <TableRow>
+        <TableKey>
           Free <Tooltip content={FREE_TOOLTIP} />
-        </span>
+        </TableKey>
 
-        <ValueResponse value={is_free} />
-      </div>
+        <TableValue value={is_free} />
+      </TableRow>
     </div>
   );
 }
