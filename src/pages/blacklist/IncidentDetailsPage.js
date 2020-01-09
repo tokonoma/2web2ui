@@ -15,6 +15,7 @@ import {
   selectRelatedIncidentsForResource,
   selectRelatedIncidentsForBlacklist,
   selectHistoricalIncidents,
+  selectDetailsPageError,
 } from 'src/selectors/blacklist';
 import IncidentDetails from './components/IncidentDetails';
 import RelatedIncidents from './components/RelatedIncidents';
@@ -34,9 +35,6 @@ export const IncidentDetailsPage = ({
   incidentsForResourcePending,
   incidentsForBlacklistPending,
   historicalIncidentsPending,
-  incidentsForBlacklistError,
-  historicalIncidentsError,
-  incidentsForResourceError,
 }) => {
   useEffect(() => {
     getIncident(id).then(incident => {
@@ -65,12 +63,7 @@ export const IncidentDetailsPage = ({
   } = incident || {};
 
   const renderContent = () => {
-    if (
-      error ||
-      incidentsForBlacklistError ||
-      historicalIncidentsError ||
-      incidentsForResourceError
-    ) {
+    if (error) {
       return (
         <div data-id="error-banner">
           <ApiErrorBanner
@@ -90,10 +83,10 @@ export const IncidentDetailsPage = ({
 
     return (
       <>
-        <Panel sectioned>
-          {historicalIncidentsPending ? (
-            <PanelLoading minHeight={'150'} />
-          ) : (
+        {historicalIncidentsPending ? (
+          <PanelLoading minHeight={'150px'} />
+        ) : (
+          <Panel sectioned>
             <IncidentDetails
               resourceName={resource}
               blacklistName={blacklist_name}
@@ -102,8 +95,8 @@ export const IncidentDetailsPage = ({
               daysListed={days_listed}
               historicalIncidents={historicalIncidents}
             />
-          )}
-        </Panel>
+          </Panel>
+        )}
 
         <Grid>
           <Grid.Column lg={6} xs={12}>
@@ -161,16 +154,13 @@ const mapStateToProps = (state, props) => {
   return {
     historicalIncidents: selectHistoricalIncidents(state),
     historicalIncidentsPending: state.blacklist.historicalIncidentsPending,
-    historicalIncidentsError: state.blacklist.historicalIncidentsError,
     id,
     incident: selectIncident(state),
     incidentsForResource: selectRelatedIncidentsForResource(state),
     incidentsForResourcePending: state.blacklist.incidentsForResourcePending,
-    incidentsForResourceError: state.blacklist.incidentsForResourceError,
     incidentsForBlacklist: selectRelatedIncidentsForBlacklist(state),
     incidentsForBlacklistPending: state.blacklist.incidentsForBlacklistPending,
-    incidentsForBlacklistError: state.blacklist.incidentsForBlacklistError,
-    error: state.blacklist.incidentError,
+    error: selectDetailsPageError(state),
     loading: state.blacklist.incidentPending,
   };
 };

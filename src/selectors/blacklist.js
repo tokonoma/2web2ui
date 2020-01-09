@@ -13,6 +13,14 @@ const getIncidentsForBlacklist = state => state.blacklist.incidentsForBlacklist 
 
 const getHistoricalIncidents = state => state.blacklist.historicalIncidents || [];
 
+const getIncidentError = state => state.blacklist.incidentError || false;
+
+const getIncidentsForResourceError = state => state.blacklist.incidentsForResourceError || false;
+
+const getHistoricalIncidentsError = state => state.blacklist.historicalIncidentsError || false;
+
+const getIncidentsForBlacklistError = state => state.blacklist.incidentsForBlacklistError || false;
+
 const enrichIncident = incident => ({
   ...incident,
   occurred_at_timestamp: incident.occurred_at ? Date.parse(incident.occurred_at) : 0,
@@ -53,6 +61,30 @@ export const selectHistoricalIncidents = createSelector(
       .filter(incident => incident.id !== currentIncident.id)
       .map(incident => enrichIncident(incident))
       .slice(0, 6),
+);
+
+export const selectDetailsPageError = createSelector(
+  [
+    getIncidentError,
+    getIncidentsForResourceError,
+    getIncidentsForBlacklistError,
+    getHistoricalIncidentsError,
+  ],
+  (incidentError, resourceError, blacklistError, historicalError) => {
+    // Return the first error object we find
+    switch (true) {
+      case incidentError !== false:
+        return incidentError;
+      case resourceError !== false:
+        return resourceError;
+      case blacklistError !== false:
+        return blacklistError;
+      case historicalError !== false:
+        return historicalError;
+      default:
+        return false;
+    }
+  },
 );
 
 export const selectBlacklistedCount = createSelector([getMonitors], monitors =>

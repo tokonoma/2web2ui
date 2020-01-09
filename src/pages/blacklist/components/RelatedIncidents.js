@@ -27,7 +27,7 @@ export default ({ incidents = [], header = '', type = '' }) => (
               </div>
             </div>
           </Table.Cell>
-          <Table.Cell>
+          <Table.Cell className={styles.ResolvedCell}>
             <div className={styles.Resolved}>
               {incident.resolved_at_formatted || <Tag color="yellow">Active</Tag>}
             </div>

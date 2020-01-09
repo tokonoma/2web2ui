@@ -251,4 +251,59 @@ describe('Blacklist Selectors: ', () => {
       }),
     ).toHaveLength(6);
   });
+
+  it('selectDetailsPageError returns the incident error before other error types', () => {
+    const incidentError = { error: 'incident' };
+    const resourceError = { error: 'resource' };
+    expect(
+      blacklistSelectors.selectDetailsPageError({
+        blacklist: { incidentError, incidentsForResourceError: resourceError },
+      }),
+    ).toEqual(incidentError);
+  });
+
+  it('selectDetailsPageError returns the first error it finds after incident error is not there', () => {
+    const incidentsForResourceError = { error: 'resource' };
+    const incidentsForBlacklistError = { error: 'blacklist' };
+    const historicalIncidentsError = { error: 'historical' };
+    expect(
+      blacklistSelectors.selectDetailsPageError({
+        blacklist: {
+          incidentsForBlacklistError,
+          incidentsForResourceError,
+          historicalIncidentsError,
+        },
+      }),
+    ).toEqual(incidentsForResourceError);
+  });
+
+  it('selectDetailsPageError returns the first error it finds after incident error is not there - 2', () => {
+    const incidentsForResourceError = false;
+    const incidentsForBlacklistError = { error: 'blacklist' };
+    const historicalIncidentsError = { error: 'historical' };
+    expect(
+      blacklistSelectors.selectDetailsPageError({
+        blacklist: {
+          incidentsForBlacklistError,
+          incidentsForResourceError,
+          historicalIncidentsError,
+        },
+      }),
+    ).toEqual(incidentsForBlacklistError);
+  });
+
+  it('selectDetailsPageError returns the first error it finds after incident error is not there - 3', () => {
+    const incidentsForResourceError = false;
+    const incidentsForBlacklistError = false;
+    const historicalIncidentsError = { error: 'historical' };
+    expect(
+      blacklistSelectors.selectDetailsPageError({
+        blacklist: {
+          incidentsForBlacklistError,
+          incidentsForResourceError,
+          historicalIncidentsError,
+        },
+      }),
+    ).toEqual(historicalIncidentsError);
+  });
 });
