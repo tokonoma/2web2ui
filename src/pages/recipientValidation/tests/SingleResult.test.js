@@ -172,4 +172,18 @@ describe('SingleResult', () => {
       ),
     ).toBeInTheDocument();
   });
+
+  it('does renders without crashing when the "result" field does not match a valid description', () => {
+    const { queryByText } = subject({
+      singleResults: {
+        valid: true,
+        is_role: true,
+        is_disposable: false,
+        is_free: true,
+        result: 'not-a-real-result',
+      },
+    });
+
+    expect(queryByText('Recipient Validation')).toBeInTheDocument();
+  });
 });

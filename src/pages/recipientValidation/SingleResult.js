@@ -80,6 +80,7 @@ export class SingleResult extends Component {
     }
 
     const { email, result } = singleResults;
+    const resultDescription = RESULT_DESCRIPTIONS[result];
 
     return (
       <Page
@@ -95,7 +96,9 @@ export class SingleResult extends Component {
 
                 <Result>{result}</Result>
 
-                <p className={styles.ResultDescription}>{RESULT_DESCRIPTIONS[result]}</p>
+                {resultDescription && (
+                  <p className={styles.ResultDescription}>{resultDescription}</p>
+                )}
 
                 {this.resultTable()}
 
