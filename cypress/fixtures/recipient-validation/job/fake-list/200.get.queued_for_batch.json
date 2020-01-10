@@ -7,7 +7,7 @@
     "upload_timestamp": 1578327971,
     "batch_status": "queued_for_batch",
     "address_count": 2,
-    "original_filename": "example.csv",
+    "original_filename": "fake-list.csv",
     "uploaded_file": "/path/to/uploaded/file"
   }
 }

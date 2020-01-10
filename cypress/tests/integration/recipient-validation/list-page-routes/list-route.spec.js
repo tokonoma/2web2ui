@@ -85,7 +85,7 @@ describe('The recipient validation /list route', () => {
       .should('contain', 'Validation Error');
   });
 
-  it('accepts an uploaded CSV and re-directs the user to a view describing the volume and price of the validation', () => {
+  it.only('accepts an uploaded CSV and re-directs the user to a view describing the volume and price of the validation', () => {
     cy.stubRequest({
       method: 'POST',
       url: '/api/v1/recipient-validation/upload',
@@ -93,9 +93,14 @@ describe('The recipient validation /list route', () => {
     });
 
     cy.stubRequest({
+      url: '/api/v1/recipient-validation/list',
+      fixture: 'recipient-validation/list/200.get.json',
+    });
+
+    cy.stubRequest({
       method: 'GET',
       url: '/api/v1/recipient-validation/job/fake-list',
-      fixture: 'recipient-validation/job/fake-list/200.get.success.json',
+      fixture: 'recipient-validation/job/fake-list/200.get.queued_for_batch.json',
     });
 
     cy.stubRequest({
@@ -106,12 +111,16 @@ describe('The recipient validation /list route', () => {
 
     cy.visit('/recipient-validation/list');
 
-    const exampleCSV = 'recipient-validation/example.csv';
+    const exampleCSV = 'recipient-validation/fake-list.csv';
 
     cy.fixture(exampleCSV).then(fileContent => {
-      cy.get('[name="csv"]').upload({ fileContent, fileName: 'example.csv', mimeType: 'text/csv' });
+      cy.get('[name="csv"]').upload({
+        fileContent,
+        fileName: 'fake-list.csv',
+        mimeType: 'text/csv',
+      });
 
-      cy.findByText('example.csv').should('be.visible');
+      cy.findByText('fake-list.csv').should('be.visible');
       cy.get('[data-id="recipient-list-address-count"]').should('contain', '2');
       cy.findByText('$0.02').should('be.visible');
       cy.findByText('Validate').should('be.visible');
