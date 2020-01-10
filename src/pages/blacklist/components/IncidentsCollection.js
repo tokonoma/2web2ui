@@ -19,7 +19,7 @@ const filterBoxConfig = {
 const columns = [
   { label: 'Details' },
   { label: 'Listed', sortKey: 'occurred_at' },
-  { label: 'Resolved' },
+  { label: 'Resolved', sortKey: 'resolved_at' },
 ];
 
 const getRowData = ({
