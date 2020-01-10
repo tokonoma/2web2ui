@@ -18,8 +18,15 @@ exports[`SingleAddressForm renders correctly 1`] = `
     <div
       className="Field"
     >
+      <Label
+        className="FieldLabel"
+        id="email-address-field"
+      >
+        Email Address
+      </Label>
       <Field
         component={[Function]}
+        id="email-address-field"
         name="address"
         normalize={[Function]}
         placeholder="harry.potter@hogwarts.edu"
