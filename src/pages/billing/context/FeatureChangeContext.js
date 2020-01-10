@@ -86,38 +86,10 @@ export const FeatureChangeProvider = ({
             resObject.auth = {
               label: 'Authentication and Security',
               description:
-                'Your new plan no longer allows for single sign-on and multifactor authentication.',
+                'Your new plan no longer allows for single sign-on and account-wide requirement of two-factor authentication.',
             };
           }
           return resObject;
-        // case 'subaccounts': {
-        //   const limit = _.get(comparedPlan, 'limit', 0);
-        //   const condition = Boolean(quantity <= limit);
-        //   if (actions.subaccounts || !condition) {
-        //     resObject.subaccounts = {
-        //       label: 'Subaccounts',
-        //       description: (
-        //         <div>
-        //           {
-        //             limit === 0
-        //               ? 'Your new plan doesn\'t include subaccounts.'
-        //               : `Your new plan only allows for ${pluralString(limit, 'active subaccount', 'active subaccounts')}.`
-        //           }
-        //           {!condition &&
-        //             <>
-        //               <span> Please </span>
-        //               <strong>change the status to terminated for {pluralString(quantity - limit, 'subaccount', 'subaccounts')}</strong>
-        //               <span> to continue.</span>
-        //             </>
-        //           }
-        //         </div>
-        //       ),
-        //       condition,
-        //       action: <Button destructive external to='/account/subaccounts'>Update Status</Button>
-        //     };
-        //   }
-        //   return resObject;
-        // }
         case 'messaging':
         default:
           return resObject;
