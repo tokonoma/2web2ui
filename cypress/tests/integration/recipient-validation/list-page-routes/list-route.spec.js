@@ -145,7 +145,7 @@ describe('The recipient validation /list route', () => {
 
     cy.visit(ROUTE_URL);
 
-    const exampleCSV = 'recipient-validation/example.csv';
+    const exampleCSV = 'recipient-validation/fake-file.csv';
 
     cy.fixture(exampleCSV).then(fileContent => {
       cy.get('[name="csv"]').upload({ fileContent, fileName: 'example.csv', mimeType: 'text/csv' });
