@@ -1,0 +1,11 @@
+{
+  "results": {
+    "message": "Successfully triggered validation check",
+    "list_id": "fake-list",
+    "batch_status": "batch_triggered",
+    "customerId": 123,
+    "complete": false,
+    "triggered_timestamp": 1578666383,
+    "original_filename": "fake-list.csv"
+  }
+}

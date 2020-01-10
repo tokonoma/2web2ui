@@ -1,5 +1,7 @@
 /// <reference types="Cypress" />
 
+const ROUTE_URL = '/recipient-validation/list';
+
 describe('The recipient validation /list route', () => {
   beforeEach(() => {
     cy.stubAuth();
@@ -7,7 +9,7 @@ describe('The recipient validation /list route', () => {
   });
 
   it('renders a relevant heading', () => {
-    cy.visit('/recipient-validation/list');
+    cy.visit(ROUTE_URL);
 
     cy.findByText('Drag and drop your list here').should('be.visible');
   });
@@ -18,7 +20,7 @@ describe('The recipient validation /list route', () => {
       fixture: 'recipient-validation/list/200.get.json',
     });
 
-    cy.visit('/recipient-validation/list');
+    cy.visit(ROUTE_URL);
 
     cy.get('tbody tr')
       .eq(0)
@@ -85,7 +87,7 @@ describe('The recipient validation /list route', () => {
       .should('contain', 'Validation Error');
   });
 
-  it.only('accepts an uploaded CSV and re-directs the user to a view describing the volume and price of the validation', () => {
+  it('accepts an uploaded CSV and re-directs the user to a view describing the volume and price of the validation', () => {
     cy.stubRequest({
       method: 'POST',
       url: '/api/v1/recipient-validation/upload',
@@ -109,7 +111,7 @@ describe('The recipient validation /list route', () => {
       fixture: 'usage/200.get.json',
     });
 
-    cy.visit('/recipient-validation/list');
+    cy.visit(ROUTE_URL);
 
     const exampleCSV = 'recipient-validation/fake-list.csv';
 
@@ -141,7 +143,7 @@ describe('The recipient validation /list route', () => {
       fixture: 'recipient-validation/upload/400.post.json',
     });
 
-    cy.visit('/recipient-validation/list');
+    cy.visit(ROUTE_URL);
 
     const exampleCSV = 'recipient-validation/example.csv';
 
@@ -159,7 +161,7 @@ describe('The recipient validation /list route', () => {
       fixture: 'recipient-validation/list/400.get.json',
     });
 
-    cy.visit('/recipient-validation/list');
+    cy.visit(ROUTE_URL);
 
     cy.findByText('Something went wrong.');
   });

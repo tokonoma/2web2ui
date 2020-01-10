@@ -121,7 +121,14 @@ Cypress.Commands.add('stubAuth', () => {
 
 Cypress.Commands.add(
   'stubRequest',
-  ({ method = 'GET', statusCode = 200, url, fixture, fixtureAlias = 'stubbedRequest' }) => {
+  ({
+    onRequest,
+    method = 'GET',
+    statusCode = 200,
+    url,
+    fixture,
+    fixtureAlias = 'stubbedRequest',
+  }) => {
     cy.server();
     cy.fixture(fixture).as(fixtureAlias);
     cy.route({
@@ -129,6 +136,7 @@ Cypress.Commands.add(
       url,
       status: statusCode,
       response: `@${fixtureAlias}`,
+      onRequest,
     });
   },
 );
