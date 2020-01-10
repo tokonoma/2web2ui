@@ -54,3 +54,68 @@ export function listIncidents(from = '2019-01-01') {
     },
   });
 }
+
+export function getIncident(incidentId) {
+  return sparkpostApiRequest({
+    type: 'GET_INCIDENT',
+    meta: {
+      method: 'GET',
+      url: `/v1/blacklist-monitors/incidents/${incidentId}`,
+      showErrorAlert: false,
+    },
+  });
+}
+
+export function listIncidentsForResource(resource, from = '2019-01-01', limit = 4) {
+  return sparkpostApiRequest({
+    type: 'LIST_INCIDENTS_FOR_RESOURCE',
+    meta: {
+      method: 'GET',
+      url: `/v1/blacklist-monitors/incidents`,
+      showErrorAlert: false,
+      params: {
+        resources: resource,
+        limit,
+        from,
+      },
+    },
+  });
+}
+
+export function listIncidentsForBlacklist(blacklist, from = '2019-01-01', limit = 4) {
+  return sparkpostApiRequest({
+    type: 'LIST_INCIDENTS_FOR_BLACKLIST',
+    meta: {
+      method: 'GET',
+      url: `/v1/blacklist-monitors/incidents`,
+      showErrorAlert: false,
+      params: {
+        blacklists: blacklist,
+        limit,
+        from,
+      },
+    },
+  });
+}
+
+export function listHistoricalResolvedIncidents(
+  blacklist,
+  resource,
+  from = '2019-01-01',
+  limit = 7,
+) {
+  return sparkpostApiRequest({
+    type: 'LIST_HISTORICAL_INCIDENTS',
+    meta: {
+      method: 'GET',
+      url: `/v1/blacklist-monitors/${resource}/incidents`,
+      showErrorAlert: false,
+      params: {
+        blacklists: blacklist,
+        limit,
+        from,
+        status: 'resolved',
+      },
+    },
+  });
+}

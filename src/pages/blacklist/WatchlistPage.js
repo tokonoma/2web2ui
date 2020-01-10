@@ -57,6 +57,11 @@ export const WatchlistPage = props => {
   return (
     <Page
       title="Watched IPs and Domains"
+      breadcrumbAction={{
+        content: 'Blacklist Incidents',
+        to: '/blacklist/incidents',
+        component: Link,
+      }}
       primaryArea={
         <>
           <Button

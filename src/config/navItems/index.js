@@ -117,9 +117,9 @@ export default [
   inboxPlacementNavItems,
   {
     label: 'Blacklist',
-    to: '/blacklist',
-    tag: 'preview',
     icon: GridOff,
+    tag: 'preview',
+    to: '/blacklist/incidents',
   },
   {
     label: 'Configuration',

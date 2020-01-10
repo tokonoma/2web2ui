@@ -1,0 +1,28 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.NoResults {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  > div {
+    margin: spacing(large);
+    margin-top: 0;
+  }
+}
+
+.TimeIcon {
+  margin-right: spacing(small);
+}
+
+.Resolved {
+  margin-bottom: spacing(larger);
+  margin-top: 0;
+}
+
+.ResolvedCell {
+  width: 40%;
+}
+
+.Table {
+  font-size: font-size(300);
+}

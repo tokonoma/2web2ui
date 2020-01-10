@@ -19,6 +19,70 @@ describe('Action Creator: Blacklist', () => {
     });
   });
 
+  it('it makes request to get a specific incident', async () => {
+    await blacklist.getIncident('abc123');
+    expect(sparkpostApiRequest).toHaveBeenCalledWith({
+      type: 'GET_INCIDENT',
+      meta: {
+        method: 'GET',
+        url: `/v1/blacklist-monitors/incidents/abc123`,
+        showErrorAlert: false,
+      },
+    });
+  });
+
+  it('it makes request to get list incidents for a specific resource', async () => {
+    await blacklist.listIncidentsForResource('123.123.123.1');
+    expect(sparkpostApiRequest).toHaveBeenCalledWith({
+      type: 'LIST_INCIDENTS_FOR_RESOURCE',
+      meta: {
+        method: 'GET',
+        url: `/v1/blacklist-monitors/incidents`,
+        showErrorAlert: false,
+        params: {
+          resources: '123.123.123.1',
+          from: '2019-01-01',
+          limit: 4,
+        },
+      },
+    });
+  });
+
+  it('it makes request to list incidents for a specific blacklist', async () => {
+    await blacklist.listIncidentsForBlacklist('spamhaus');
+    expect(sparkpostApiRequest).toHaveBeenCalledWith({
+      type: 'LIST_INCIDENTS_FOR_BLACKLIST',
+      meta: {
+        method: 'GET',
+        url: `/v1/blacklist-monitors/incidents`,
+        showErrorAlert: false,
+        params: {
+          from: '2019-01-01',
+          blacklists: 'spamhaus',
+          limit: 4,
+        },
+      },
+    });
+  });
+
+  it('it makes request to list historical incidents for a specific resource and blacklist', async () => {
+    await blacklist.listHistoricalResolvedIncidents('spamhaus', '123.123.123.1');
+    expect(sparkpostApiRequest).toHaveBeenCalledWith({
+      type: 'LIST_HISTORICAL_INCIDENTS',
+      meta: {
+        method: 'GET',
+        url: `/v1/blacklist-monitors/123.123.123.1/incidents`,
+        showErrorAlert: false,
+        params: {
+          from: '2019-01-01',
+          blacklists: 'spamhaus',
+          limit: 7,
+          status: 'resolved',
+        },
+      },
+    });
+  });
+
   it('makes a request to add watchlist resource', async () => {
     await blacklist.watchlistAdd('192.168.0.1');
     expect(sparkpostApiRequest).toHaveBeenCalledWith({
