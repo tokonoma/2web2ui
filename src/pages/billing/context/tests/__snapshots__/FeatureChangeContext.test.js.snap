@@ -10,7 +10,7 @@ Object {
       >
         Got it
       </Button>,
-      "description": "Your new plan no longer allows for single sign-on and multifactor authentication.",
+      "description": "Your new plan no longer allows for single sign-on and account-wide requirement of two-factor authentication.",
       "key": "auth",
       "label": "Authentication and Security",
       "value": undefined,
