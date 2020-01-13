@@ -6,6 +6,7 @@ import { PendingPlanBanner } from './components/Banners';
 import OldChangePlanForm from './forms/ChangePlanForm'; //TODO: Replace in AC-991
 import { canChangePlanSelector } from 'src/selectors/accountBillingInfo';
 import NewChangePlanForm from './forms/NewChangePlanForm';
+import { isAccountUiOptionSet } from 'src/helpers/conditions/account';
 
 export class ChangePlanPage extends Component {
   render() {
@@ -27,7 +28,7 @@ const mapStateToProps = state => ({
   account: state.account,
   subscription: state.billing.subscription || {},
   canChangePlan: canChangePlanSelector(state),
-  newChangePlan: true, //isAccountUiOptionSet('account_feature_limits')(state)
+  newChangePlan: isAccountUiOptionSet('account_feature_limits')(state),
 });
 
 export default connect(mapStateToProps)(ChangePlanPage);

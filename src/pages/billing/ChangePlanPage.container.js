@@ -5,6 +5,7 @@ import { getBillingInfo } from 'src/actions/account';
 import { getSubscription, getBundles, getPlans, getBillingCountries } from 'src/actions/billing';
 import { selectAvailableBundles, selectAccountBilling } from 'src/selectors/accountBillingInfo';
 import { connect } from 'react-redux';
+import { isAccountUiOptionSet } from 'src/helpers/conditions/account';
 
 const ChangePlanPageContainer = ({ newChangePlan, ...props }) =>
   newChangePlan ? ( //TODO: Remove conditional check after replacing changeplanform
@@ -33,7 +34,7 @@ const mapStateToProps = state => {
     loading: countriesLoading || plansLoading || bundlesLoading || accountLoading,
     billingCountries: state.billing.countries,
     account,
-    newChangePlan: true, //isAccountUiOptionSet('account_feature_limits')(state)
+    newChangePlan: isAccountUiOptionSet('account_feature_limits')(state),
   };
 };
 
