@@ -1,7 +1,7 @@
 {
   "results": {
     "message": "Account created, welcome to SparkPost!",
-    "customer_id": 107,
-    "username": "appteam"
+    "customer_id": 123,
+    "username": "fake-username"
   }
 }

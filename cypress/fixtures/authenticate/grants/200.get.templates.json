@@ -1,0 +1,73 @@
+{
+  "results": [
+    {
+      "key": "metrics/view"
+    },
+    {
+      "key": "message_events/view"
+    },
+    {
+      "key": "templates/view"
+    },
+    {
+      "key": "templates/modify"
+    },
+    {
+      "key": "templates/preview"
+    },
+    {
+      "key": "transmissions/view"
+    },
+    {
+      "key": "recipient_lists/manage"
+    },
+    {
+      "key": "tracking_domains/view"
+    },
+    {
+      "key": "sending_domains/view"
+    },
+    {
+      "key": "suppression_lists/manage"
+    },
+    {
+      "key": "users/self-manage"
+    },
+    {
+      "key": "grants/view"
+    },
+    {
+      "key": "account/view"
+    },
+    {
+      "key": "usage/view"
+    },
+    {
+      "key": "subaccount/view"
+    },
+    {
+      "key": "ip_pools/view"
+    },
+    {
+      "key": "messaging-tools/manage"
+    },
+    {
+      "key": "ab-testing/manage"
+    },
+    {
+      "key": "alerts/manage"
+    },
+    {
+      "key": "alerts/view"
+    },
+    {
+      "key": "signals/view"
+    },
+    {
+      "key": "signals/manage"
+    },
+    {
+      "key": "support/manage"
+    }
+  ]
+}

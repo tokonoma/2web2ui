@@ -1,10 +1,10 @@
 {
   "results": {
     "anniversary_date": "2019-12-09T08:00:00.000Z",
-    "company_name": "cfs test",
+    "company_name": "Fake Company",
     "country_code": "US",
     "created": "2014-12-30T17:43:18.954Z",
-    "customer_id": 107,
+    "customer_id": 123,
     "service_level": "standard",
     "status": "active",
     "status_reason_category": "200.02",
@@ -39,9 +39,7 @@
           "send_test_email_completed": true,
           "isGuideAtBottom": true
         },
-        "recipientValidationV2": false,
         "account_feature_limits": true,
-        "recipient_validation": false,
         "feature_signals_v2": true,
         "Send Test Email": null,
         "spamTrapHitsByType": true,

@@ -1,0 +1,100 @@
+{
+  "results": [
+    {
+      "key": "metrics/view"
+    },
+    {
+      "key": "message_events/view"
+    },
+    {
+      "key": "webhooks/view"
+    },
+    {
+      "key": "webhooks/modify"
+    },
+    {
+      "key": "templates/view"
+    },
+    {
+      "key": "templates/modify"
+    },
+    {
+      "key": "templates/preview"
+    },
+    {
+      "key": "transmissions/view"
+    },
+    {
+      "key": "transmissions/modify"
+    },
+    {
+      "key": "recipient_lists/manage"
+    },
+    {
+      "key": "tracking_domains/view"
+    },
+    {
+      "key": "tracking_domains/manage"
+    },
+    {
+      "key": "sending_domains/manage"
+    },
+    {
+      "key": "suppression_lists/manage"
+    },
+    {
+      "key": "relay_webhooks/view"
+    },
+    {
+      "key": "relay_webhooks/modify"
+    },
+    {
+      "key": "users/self-manage"
+    },
+    {
+      "key": "grants/view"
+    },
+    {
+      "key": "api_keys/manage"
+    },
+    {
+      "key": "account/view"
+    },
+    {
+      "key": "usage/view"
+    },
+    {
+      "key": "subaccount/manage"
+    },
+    {
+      "key": "subaccount/view"
+    },
+    {
+      "key": "ip_pools/manage"
+    },
+    {
+      "key": "ip_pools/view"
+    },
+    {
+      "key": "messaging-tools/manage"
+    },
+    {
+      "key": "ab-testing/manage"
+    },
+    {
+      "key": "alerts/manage"
+    },
+    {
+      "key": "alerts/view"
+    },
+    {
+      "key": "signals/view"
+    },
+    {
+      "key": "signals/manage"
+    },
+    {
+      "key": "support/manage"
+    }
+  ]
+}
