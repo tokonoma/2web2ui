@@ -10,7 +10,7 @@ export class EnforceTFAPanel extends React.Component {
   state = {
     updating: false,
     enableModal: false,
-    disableModal: false
+    disableModal: false,
   };
 
   componentDidMount() {
@@ -19,16 +19,19 @@ export class EnforceTFAPanel extends React.Component {
   }
 
   toggleTfaRequired = () => {
-    const { tfaRequired } = this.props;
+    const { tfaRequired, planTier } = this.props;
+    const starterPlanAndTfaRequiredNotInSync = planTier === 'starter' && tfaRequired;
 
-    if (tfaRequired) {
+    const currentToggleState = starterPlanAndTfaRequiredNotInSync ? false : tfaRequired;
+
+    if (currentToggleState) {
       this.setState({ disableModal: true });
     } else {
       this.setState({ enableModal: true });
     }
   };
 
-  setTfaRequired = (value) => {
+  setTfaRequired = value => {
     const { tfaEnabled, showAlert } = this.props;
     this.props.updateAccount({ tfa_required: value }).then(() => {
       if (value && !tfaEnabled) {
@@ -43,13 +46,13 @@ export class EnforceTFAPanel extends React.Component {
   onCancel = () =>
     this.setState({
       enableModal: false,
-      disableModal: false
+      disableModal: false,
     });
 
   render() {
-    const { loading, tfaRequired, tfaUpdatePending, ssoEnabled } = this.props;
+    const { loading, tfaRequired, tfaUpdatePending, ssoEnabled, planTier } = this.props;
     const { enableModal, disableModal } = this.state;
-
+    const starterPlanAndTfaRequiredNotInSync = planTier === 'starter' && tfaRequired;
     if (loading) {
       return <PanelLoading />;
     }
@@ -62,8 +65,8 @@ export class EnforceTFAPanel extends React.Component {
             color: 'orange',
             content: 'Learn more',
             component: ExternalLink,
-            to: LINKS.MANDATORY_TFA
-          }
+            to: LINKS.MANDATORY_TFA,
+          },
         ]}
       >
         {ssoEnabled && (
@@ -73,7 +76,11 @@ export class EnforceTFAPanel extends React.Component {
             </p>
           </Panel.Section>
         )}
-        <TogglePanel readOnly={ssoEnabled} tfaRequired={tfaRequired} toggleTfaRequired={this.toggleTfaRequired} />
+        <TogglePanel
+          readOnly={ssoEnabled}
+          tfaRequired={starterPlanAndTfaRequiredNotInSync ? false : tfaRequired}
+          toggleTfaRequired={this.toggleTfaRequired}
+        />
         <ConfirmationModal
           open={enableModal}
           confirming={tfaUpdatePending}
@@ -93,7 +100,8 @@ export class EnforceTFAPanel extends React.Component {
                   informing them of this change.
                 </li>
                 <li>
-                  If <em>you</em> don't have two-factor authentication enabled, you will be logged out.
+                  If <em>you</em> don't have two-factor authentication enabled, you will be logged
+                  out.
                 </li>
               </ul>
             </React.Fragment>

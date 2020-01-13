@@ -4,7 +4,6 @@ import { ChangePlanProvider } from './context/ChangePlanContext';
 import { getBillingInfo } from 'src/actions/account';
 import { getSubscription, getBundles, getPlans, getBillingCountries } from 'src/actions/billing';
 import { selectAvailableBundles, selectAccountBilling } from 'src/selectors/accountBillingInfo';
-import { isAccountUiOptionSet } from 'src/helpers/conditions/account';
 import { connect } from 'react-redux';
 
 const ChangePlanPageContainer = ({ newChangePlan, ...props }) =>
@@ -34,7 +33,7 @@ const mapStateToProps = state => {
     loading: countriesLoading || plansLoading || bundlesLoading || accountLoading,
     billingCountries: state.billing.countries,
     account,
-    newChangePlan: isAccountUiOptionSet('account_feature_limits')(state),
+    newChangePlan: true,
   };
 };
 
