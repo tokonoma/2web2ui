@@ -56,8 +56,7 @@ describe('Billing Page', () => {
     });
   });
 
-  //downgrading, starter  => free plan
-  it('on changing plan renders section with changes to features', () => {
+  const selectAFreePlan = () => {
     stubRequest({
       url: '/api/v1/billing/subscription',
       fixture: 'billing/subscription/200.get.json',
@@ -65,18 +64,16 @@ describe('Billing Page', () => {
     });
     cy.visit('/account/billing/plan');
     cy.get('[data-id=select-plan-free500-0419]').click();
+  };
+  //downgrading, starter  => free plan
+  it('on changing plan renders section with changes to features', () => {
+    selectAFreePlan();
     cy.findAllByText('Changes to Features').should('exist');
   });
 
   //downgrading, starter  => free plan
   it('Change plan button is displayed only when all the "features have been updated" ', () => {
-    stubRequest({
-      url: '/api/v1/billing/subscription',
-      fixture: 'billing/subscription/200.get.json',
-      fixtureName: 'subscriptionGet',
-    });
-    cy.visit('/account/billing/plan');
-    cy.get('[data-id=select-plan-free500-0419]').click();
+    selectAFreePlan();
     cy.get('body').then($body => {
       if ($body.text().includes('features have been updated')) {
         cy.get('a[type=button]')
@@ -89,13 +86,7 @@ describe('Billing Page', () => {
   //downgrading, starter  => free plan
   //redirects to brightback page
   it('redirects to brightback page on downgrading to free plan', () => {
-    stubRequest({
-      url: '/api/v1/billing/subscription',
-      fixture: 'billing/subscription/200.get.json',
-      fixtureName: 'subscriptionGet',
-    });
-    cy.visit('/account/billing/plan');
-    cy.get('[data-id=select-plan-free500-0419]').click();
+    selectAFreePlan();
     cy.get('body').then($body => {
       if ($body.text().includes('Got it')) {
         cy.get('button')
