@@ -4,8 +4,8 @@ import { ChangePlanProvider } from './context/ChangePlanContext';
 import { getBillingInfo } from 'src/actions/account';
 import { getSubscription, getBundles, getPlans, getBillingCountries } from 'src/actions/billing';
 import { selectAvailableBundles, selectAccountBilling } from 'src/selectors/accountBillingInfo';
-import { connect } from 'react-redux';
 import { isAccountUiOptionSet } from 'src/helpers/conditions/account';
+import { connect } from 'react-redux';
 
 const ChangePlanPageContainer = ({ newChangePlan, ...props }) =>
   newChangePlan ? ( //TODO: Remove conditional check after replacing changeplanform

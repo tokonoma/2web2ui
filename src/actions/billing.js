@@ -15,7 +15,7 @@ export function updateSubscription({ code, bundle = code, promoCode, meta = {} }
     fetchAccount({ include: 'usage', meta: { onSuccess: getBillingAction } });
 
   return (dispatch, getState) =>
-    isAccountUiOptionSet('account_feature_limits')(getState()) //,TODO: Remove this + first action
+    isAccountUiOptionSet('account_feature_limits')(getState()) //TODO: Remove this + first action
       ? dispatch(
           sparkpostApiRequest({
             type: 'UPDATE_SUBSCRIPTION',
