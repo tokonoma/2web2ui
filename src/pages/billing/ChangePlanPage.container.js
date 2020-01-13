@@ -33,7 +33,7 @@ const mapStateToProps = state => {
     loading: countriesLoading || plansLoading || bundlesLoading || accountLoading,
     billingCountries: state.billing.countries,
     account,
-    newChangePlan: true,
+    newChangePlan: true, //isAccountUiOptionSet('account_feature_limits')(state)
   };
 };
 

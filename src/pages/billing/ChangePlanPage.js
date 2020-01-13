@@ -27,7 +27,7 @@ const mapStateToProps = state => ({
   account: state.account,
   subscription: state.billing.subscription || {},
   canChangePlan: canChangePlanSelector(state),
-  newChangePlan: true,
+  newChangePlan: true, //isAccountUiOptionSet('account_feature_limits')(state)
 });
 
 export default connect(mapStateToProps)(ChangePlanPage);

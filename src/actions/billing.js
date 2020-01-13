@@ -1,7 +1,7 @@
 import { formatContactData } from 'src/helpers/billing';
 import { fetch as fetchAccount, getBillingInfo } from './account';
 import { list as getSendingIps } from './sendingIps';
-import { isAws, isAccountUiOptionSet } from 'src/helpers/conditions/account';
+import { isAws } from 'src/helpers/conditions/account';
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
 import zuoraRequest from 'src/actions/helpers/zuoraRequest';
 
@@ -15,7 +15,7 @@ export function updateSubscription({ code, bundle = code, promoCode, meta = {} }
     fetchAccount({ include: 'usage', meta: { onSuccess: getBillingAction } });
 
   return (dispatch, getState) =>
-    isAccountUiOptionSet('account_feature_limits')(getState()) //TODO: Remove this + first action
+    true //isAccountUiOptionSet('account_feature_limits')(getState()) ,TODO: Remove this + first action
       ? dispatch(
           sparkpostApiRequest({
             type: 'UPDATE_SUBSCRIPTION',
