@@ -27,7 +27,7 @@ describe('The recipient validation single result page', () => {
 
     cy.visit('/recipient-validation/single/fake-email@sparkpost.com');
 
-    cy.get('[data-id="validation-result"]').within(() => {
+    cy.get('[data-id="validation-result-status"]').within(() => {
       cy.findByText('valid').should('be.visible'); // Though rendered as "Valid", the text is transformed to be capitalized using CSS
     });
 
@@ -44,7 +44,7 @@ describe('The recipient validation single result page', () => {
 
     cy.visit('/recipient-validation/single/fake-email@sparkpost.com');
 
-    cy.get('[data-id="validation-result"]').within(() => {
+    cy.get('[data-id="validation-result-status"]').within(() => {
       cy.findByText('risky').should('be.visible'); // Though rendered as "Risky", the text is transformed to be capitalized using CSS
     });
   });
@@ -57,7 +57,7 @@ describe('The recipient validation single result page', () => {
 
     cy.visit('/recipient-validation/single/fake-email@sparkpost.com');
 
-    cy.get('[data-id="validation-result"]').within(() => {
+    cy.get('[data-id="validation-result-status"]').within(() => {
       cy.findByText('undeliverable').should('be.visible'); // Though rendered as "undeliverable", the text is transformed to be capitalized using CSS
     });
   });
