@@ -11,27 +11,25 @@ import JobStatusTag from './JobStatusTag';
 export const JobsTableCollection = ({ jobs }) => {
   const columns = [
     {
-      dataCellComponent: ({ filename }) => (
-        <JobFileName filename={filename} />
-      ),
+      dataCellComponent: ({ filename }) => <JobFileName filename={filename} />,
       header: {
         label: 'File Name',
-        sortKey: 'filename'
-      }
+        sortKey: 'filename',
+      },
     },
     {
       dataCellComponent: ({ uploadedAt }) => formatDateTime(uploadedAt),
       header: {
         label: 'Date Uploaded',
-        sortKey: 'uploadedAt'
-      }
+        sortKey: 'uploadedAt',
+      },
     },
     {
       dataCellComponent: ({ status }) => <JobStatusTag status={status} />,
       header: {
         label: 'Status',
-        sortKey: 'status'
-      }
+        sortKey: 'status',
+      },
     },
     {
       dataCellComponent: ({ addressCount, status }) => (
@@ -39,26 +37,21 @@ export const JobsTableCollection = ({ jobs }) => {
       ),
       header: {
         label: 'Total',
-        sortKey: 'addressCount'
-      }
+        sortKey: 'addressCount',
+      },
     },
     {
       dataCellComponent: ({ rejectedUrl, status, jobId }) => (
-        <JobActionLink
-          fileHref={rejectedUrl}
-          status={status}
-          jobId={jobId}
-        />
+        <JobActionLink fileHref={rejectedUrl} status={status} jobId={jobId} />
       ),
       header: {
-        label: 'Actions'
-      }
-    }
+        label: 'Actions',
+      },
+    },
   ];
 
-  const renderRow = (columns) => (props) => (
-    columns.map(({ dataCellComponent: DataCellComponent }) => <DataCellComponent {...props} />)
-  );
+  const renderRow = columns => props =>
+    columns.map(({ dataCellComponent: DataCellComponent }) => <DataCellComponent {...props} />);
 
   return (
     <TableCollection
@@ -73,9 +66,7 @@ export const JobsTableCollection = ({ jobs }) => {
       {({ collection, filterBox, heading, pagination }) => (
         <>
           <Panel>
-            <Panel.Section>
-              {heading}
-            </Panel.Section>
+            <Panel.Section>{heading}</Panel.Section>
             {filterBox}
             {collection}
           </Panel>
