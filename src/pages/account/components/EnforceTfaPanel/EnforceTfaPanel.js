@@ -10,7 +10,7 @@ export class EnforceTFAPanel extends React.Component {
   state = {
     updating: false,
     enableModal: false,
-    disableModal: false
+    disableModal: false,
   };
 
   componentDidMount() {
@@ -28,7 +28,7 @@ export class EnforceTFAPanel extends React.Component {
     }
   };
 
-  setTfaRequired = (value) => {
+  setTfaRequired = value => {
     const { tfaEnabled, showAlert } = this.props;
     this.props.updateAccount({ tfa_required: value }).then(() => {
       if (value && !tfaEnabled) {
@@ -43,7 +43,7 @@ export class EnforceTFAPanel extends React.Component {
   onCancel = () =>
     this.setState({
       enableModal: false,
-      disableModal: false
+      disableModal: false,
     });
 
   render() {
@@ -62,8 +62,8 @@ export class EnforceTFAPanel extends React.Component {
             color: 'orange',
             content: 'Learn more',
             component: ExternalLink,
-            to: LINKS.MANDATORY_TFA
-          }
+            to: LINKS.MANDATORY_TFA,
+          },
         ]}
       >
         {ssoEnabled && (
@@ -73,7 +73,11 @@ export class EnforceTFAPanel extends React.Component {
             </p>
           </Panel.Section>
         )}
-        <TogglePanel readOnly={ssoEnabled} tfaRequired={tfaRequired} toggleTfaRequired={this.toggleTfaRequired} />
+        <TogglePanel
+          readOnly={ssoEnabled}
+          tfaRequired={tfaRequired}
+          toggleTfaRequired={this.toggleTfaRequired}
+        />
         <ConfirmationModal
           open={enableModal}
           confirming={tfaUpdatePending}
@@ -93,7 +97,8 @@ export class EnforceTFAPanel extends React.Component {
                   informing them of this change.
                 </li>
                 <li>
-                  If <em>you</em> don't have two-factor authentication enabled, you will be logged out.
+                  If <em>you</em> don't have two-factor authentication enabled, you will be logged
+                  out.
                 </li>
               </ul>
             </React.Fragment>

@@ -3,7 +3,7 @@ import { showAlert } from 'src/actions/globalAlert';
 
 import {
   getAccountSingleSignOnDetails,
-  updateAccountSingleSignOn
+  updateAccountSingleSignOn,
 } from 'src/actions/accountSingleSignOn';
 
 import { getTfaStatus } from 'src/actions/tfa';
@@ -13,14 +13,21 @@ import { logout } from 'src/actions/auth';
 import { update as updateAccount } from 'src/actions/account';
 
 import EnforceTfaPanel from './EnforceTfaPanel';
+import { getPlanTierByPlanCode } from 'src/selectors/accountBillingInfo';
 
-const mapStateToProps = ({ accountSingleSignOn, account, tfa }) => ({
-  loading: accountSingleSignOn.loading || tfa.enabled === null,
-  ssoEnabled: accountSingleSignOn.enabled,
-  tfaRequired: account.tfa_required,
-  tfaUpdatePending: account.updateLoading,
-  tfaEnabled: tfa.enabled
-});
+const mapStateToProps = state => {
+  const { accountSingleSignOn, account, tfa } = state;
+  return {
+    loading: accountSingleSignOn.loading || tfa.enabled === null,
+    ssoEnabled: accountSingleSignOn.enabled,
+    tfaRequired:
+      getPlanTierByPlanCode(state) === 'starter' && account.tfa_required
+        ? false
+        : account.tfa_required,
+    tfaUpdatePending: account.updateLoading,
+    tfaEnabled: tfa.enabled,
+  };
+};
 
 const mapDispatchToProps = {
   getAccountSingleSignOnDetails,
@@ -28,7 +35,7 @@ const mapDispatchToProps = {
   updateAccountSingleSignOn,
   updateAccount,
   logout,
-  showAlert
+  showAlert,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(EnforceTfaPanel);
