@@ -5,10 +5,6 @@ import { ScreenReaderOnly, Page, Panel, Button, Grid, UnstyledLink } from '@spar
 import styles from './SingleResult.module.scss';
 import { withRouter, Link } from 'react-router-dom';
 import CodeBlock from './components/CodeBlock';
-<<<<<<< HEAD
-=======
-import { WarningIcon, SuccessIcon, ErrorIcon } from './components/icons';
->>>>>>> FE-786 - Add some tests for the single result view
 import {
   ROLE_TOOLTIP,
   DISPOSABLE_TOOLTIP,
