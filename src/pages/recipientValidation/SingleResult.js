@@ -24,7 +24,20 @@ export function SingleResult(props) {
 
   useEffect(() => {
     singleAddress(address).catch(({ message }) => {
-      showAlert({ message, type: 'error' });
+      // When receiving the 'Usage limit exceeded' error, render a link in the alert details with a way to contact sales
+      showAlert({
+        type: 'error',
+        message,
+        details:
+          message === 'Usage limit exceeded' ? (
+            <UnstyledLink external to="https://sparkpost.com/sales">
+              Contact sales
+            </UnstyledLink>
+          ) : (
+            undefined
+          ),
+      });
+
       history.push(SINGLE_RV_LINK);
     });
   }, [address, history, showAlert, singleAddress]);
