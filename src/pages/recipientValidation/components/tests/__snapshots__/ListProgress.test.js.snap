@@ -9,7 +9,8 @@ exports[`ListProgress renders status and progress bar 1`] = `
   </h2>
   <p>
     <span>
-      Your list is validating. You can track its progress on the recipient validation 
+      Your list is validating. You can track its progress on the recipient validation
+       
     </span>
     <PageLink
       to="/recipient-validation"

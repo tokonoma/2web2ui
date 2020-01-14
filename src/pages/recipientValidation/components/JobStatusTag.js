@@ -9,6 +9,11 @@ const statusProps = {
     icon: Error,
     message: 'Validation Error',
   },
+  usage_limit_reached: {
+    className: styles.Failed,
+    icon: Error,
+    message: 'Validation Error',
+  },
   success: {
     className: styles.Complete,
     icon: CheckCircle,

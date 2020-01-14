@@ -22,7 +22,7 @@ const BATCH_STATUS = [
   'performing_free_email',
   'performing_did_you_mean',
   'uploading_results_to_s3',
-  'success'
+  'success',
 ];
 
 export const ListProgress = ({
@@ -30,32 +30,36 @@ export const ListProgress = ({
   job: { filename, jobId, status },
   showAlert,
   startPolling,
-  stopPolling
+  stopPolling,
 }) => {
-  const percentage = BATCH_STATUS.findIndex((batchStatus) => batchStatus === status) / (BATCH_STATUS.length - 1);
+  const percentage =
+    BATCH_STATUS.findIndex(batchStatus => batchStatus === status) / (BATCH_STATUS.length - 1);
   const formattedPercentage = lerp(0, 100, percentage);
 
   React.useEffect(() => {
     startPolling({
       key: jobId,
-      action: () => (
+      action: () =>
         getJobStatus(jobId)
-          .then((nextJob) => {
+          .then(({ batch_status }) => {
             // This needs to live on after this component is unmounted
-            if (nextJob.batch_status === 'error' || nextJob.batch_status === 'success') {
+            if (
+              batch_status === 'usage_limit_exceeded' ||
+              batch_status === 'error' ||
+              batch_status === 'success'
+            ) {
               stopPolling(jobId);
               showAlert({
-                type: nextJob.batch_status,
+                type: batch_status === 'success' ? 'success' : 'error',
                 message: `Validation of ${filename} recipient list has completed`,
-                dedupeId: jobId
+                dedupeId: jobId,
               });
             }
           })
           .catch(() => {
             stopPolling(jobId);
-          })
-      ),
-      interval: 5000
+          }),
+      interval: 5000,
     });
   }, [filename, getJobStatus, jobId, showAlert, startPolling, stopPolling]);
 
@@ -63,7 +67,9 @@ export const ListProgress = ({
     <FocusContainer className={styles.ListProgressContainer}>
       <h2>{filename}</h2>
       <p>
-        <span>Your list is validating. You can track its progress on the recipient validation </span>
+        <span>
+          Your list is validating. You can track its progress on the recipient validation{' '}
+        </span>
         <PageLink to="/recipient-validation">home page</PageLink>,
         <span> we'll let you know when validation is complete and your results are ready.</span>
       </p>
@@ -78,9 +84,13 @@ export const ListProgress = ({
           </div>
         )}
       </div>
-      <Button color='orange' component={PageLink} to="/recipient-validation">Validate Another</Button>
+      <Button color="orange" component={PageLink} to="/recipient-validation">
+        Validate Another
+      </Button>
     </FocusContainer>
   );
 };
 
-export default connect(undefined, { getJobStatus, showAlert })(withContext(PollContext, ListProgress));
+export default connect(undefined, { getJobStatus, showAlert })(
+  withContext(PollContext, ListProgress),
+);
