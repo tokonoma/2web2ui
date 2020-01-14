@@ -3,28 +3,27 @@ import { Tag } from '@sparkpost/matchbox';
 import { Error, CheckCircle, Cached, CloudUpload } from '@sparkpost/matchbox-icons';
 import styles from './JobStatusTag.module.scss';
 
-
 const statusProps = {
   error: {
     className: styles.Failed,
     icon: Error,
-    message: 'Validation Error'
+    message: 'Validation Error',
   },
   success: {
     className: styles.Complete,
     icon: CheckCircle,
-    message: 'Complete'
+    message: 'Complete',
   },
   queued_for_batch: {
     className: styles.Ready,
     icon: CloudUpload,
-    message: 'Ready to validate'
+    message: 'Ready to validate',
   },
   loading: {
     className: styles.Loading,
     icon: Cached,
-    message: 'Processing'
-  }
+    message: 'Processing',
+  },
 };
 
 const JobStatusTag = ({ status }) => {
@@ -33,7 +32,8 @@ const JobStatusTag = ({ status }) => {
   return (
     <Tag>
       <span className={className}>
-        <Icon />&nbsp;
+        <Icon />
+        &nbsp;
       </span>
       <span>{message}</span>
     </Tag>
