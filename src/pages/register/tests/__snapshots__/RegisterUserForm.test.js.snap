@@ -30,7 +30,8 @@ exports[`render 1`] = `
   />
   <p>
     <small>
-      By joining, you agree to SparkPost's 
+      By joining, you agree to SparkPost's
+       
       <UnstyledLink
         external={true}
         to="https://www.sparkpost.com/policies/tou"
@@ -80,7 +81,8 @@ exports[`submitting 1`] = `
   />
   <p>
     <small>
-      By joining, you agree to SparkPost's 
+      By joining, you agree to SparkPost's
+       
       <UnstyledLink
         external={true}
         to="https://www.sparkpost.com/policies/tou"
