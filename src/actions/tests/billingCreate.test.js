@@ -18,59 +18,67 @@ describe('Action Creator: Billing Create', () => {
   let getState;
 
   const checkBillingCreationSteps = () => {
-    expect(billingActions.cors).toHaveBeenCalledWith(expect.objectContaining({
-      context: 'create-account',
-      data: corsData
-    }));
+    expect(billingActions.cors).toHaveBeenCalledWith(
+      expect.objectContaining({
+        context: 'create-account',
+        data: corsData,
+      }),
+    );
 
-    expect(billingActions.createZuoraAccount).toHaveBeenCalledWith(expect.objectContaining({
-      data: billingData,
-      signature: 'TEST_SIGNATURE',
-      token: 'TEST_TOKEN'
-    }));
+    expect(billingActions.createZuoraAccount).toHaveBeenCalledWith(
+      expect.objectContaining({
+        data: billingData,
+        signature: 'TEST_SIGNATURE',
+        token: 'TEST_TOKEN',
+      }),
+    );
 
     expect(billingActions.syncSubscription).toHaveBeenCalled();
-    expect(accountActions.fetch).toHaveBeenCalledWith(expect.objectContaining({ include: 'usage' }));
+    expect(accountActions.fetch).toHaveBeenCalledWith(
+      expect.objectContaining({ include: 'usage' }),
+    );
     expect(accountActions.getBillingInfo).toHaveBeenCalled();
   };
 
   beforeEach(() => {
     values = {};
     currentUser = {
-      email: 'test@example.com'
+      email: 'test@example.com',
     };
     corsData = {
-      email: 'test@example.com'
+      email: 'test@example.com',
     };
     billingData = {
       billingId: 'test-billing-id',
       billToContact: {},
       creditCard: {
-        cardNumber: '1111222233334444'
+        cardNumber: '1111222233334444',
       },
-      invoiceCollect: true
+      invoiceCollect: true,
     };
     getState = () => ({ currentUser });
-    dispatch = jest.fn((a) => a);
+    dispatch = jest.fn(a => a);
     accountConditions.isAws = jest.fn(() => false);
     accountConditions.isCustomBilling = jest.fn(() => false);
     billingActions.createZuoraAccount = jest.fn(({ meta }) => meta.onSuccess({}));
     billingActions.syncSubscription = jest.fn(({ meta }) => meta.onSuccess({}));
+    billingActions.syncBillingSubscription = jest.fn(({ meta }) => meta.onSuccess({}));
     billingActions.consumePromoCode = jest.fn(({ meta }) => meta.onSuccess({}));
-    billingActions.cors = jest.fn(({ meta }) => meta.onSuccess({
-      results: {
-        signature: 'TEST_SIGNATURE',
-        token: 'TEST_TOKEN'
-      }
-    }));
+    billingActions.cors = jest.fn(({ meta }) =>
+      meta.onSuccess({
+        results: {
+          signature: 'TEST_SIGNATURE',
+          token: 'TEST_TOKEN',
+        },
+      }),
+    );
     accountActions.fetch = jest.fn(({ meta }) => meta.onSuccess({}));
     accountActions.getBillingInfo = jest.fn(({ meta }) => meta.onSuccess({}));
-    billingHelpers.formatCreateData = jest.fn((a) => a);
-    billingHelpers.formatDataForCors = jest.fn((a) => ({ billingData, corsData }));
+    billingHelpers.formatCreateData = jest.fn(a => a);
+    billingHelpers.formatDataForCors = jest.fn(() => ({ billingData, corsData }));
   });
 
   it('update without a planpicker code', () => {
-
     const thunk = billingCreate(values);
     accountActions.getBillingInfo = jest.fn();
 
@@ -82,7 +90,7 @@ describe('Action Creator: Billing Create', () => {
 
   it('update subscription for AWS users', () => {
     const state = jest.fn();
-    const values = { planpicker: { code: 'plan-code' }};
+    const values = { planpicker: { code: 'plan-code' } };
     const thunk = billingCreate(values);
 
     accountConditions.isAws = jest.fn(() => true);
@@ -101,9 +109,11 @@ describe('Action Creator: Billing Create', () => {
 
     thunk(dispatch, getState);
     checkBillingCreationSteps();
-    expect(billingActions.consumePromoCode).toHaveBeenCalledWith(expect.objectContaining({
-      promoCode: 'test-promo-code',
-      billingId: 'test-billing-id'
-    }));
+    expect(billingActions.consumePromoCode).toHaveBeenCalledWith(
+      expect.objectContaining({
+        promoCode: 'test-promo-code',
+        billingId: 'test-billing-id',
+      }),
+    );
   });
 });

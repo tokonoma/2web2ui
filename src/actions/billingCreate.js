@@ -2,7 +2,14 @@ import { isAws, isCustomBilling } from 'src/helpers/conditions/account';
 import { formatCreateData, formatDataForCors } from 'src/helpers/billing';
 import { fetch as fetchAccount, getBillingInfo } from './account';
 import chainActions from 'src/actions/helpers/chainActions';
-import { cors, createZuoraAccount, syncSubscription, updateSubscription, consumePromoCode } from './billing';
+import {
+  cors,
+  createZuoraAccount,
+  syncBillingSubscription,
+  syncSubscription,
+  updateSubscription,
+  consumePromoCode,
+} from './billing';
 
 export default function billingCreate(values) {
   return (dispatch, getState) => {
@@ -15,7 +22,8 @@ export default function billingCreate(values) {
     const { corsData, billingData } = formatDataForCors(values);
 
     // action creator wrappers for chaining as callbacks
-    const corsCreateBilling = ({ meta }) => cors({ meta, context: 'create-account', data: corsData });
+    const corsCreateBilling = ({ meta }) =>
+      cors({ meta, context: 'create-account', data: corsData });
     const fetchUsage = ({ meta }) => fetchAccount({ include: 'usage', meta });
     const fetchBillingInfo = ({ meta }) => getBillingInfo({ meta });
     const constructZuoraAccount = ({ results: { signature, token, ...results }, meta }) => {
@@ -28,9 +36,17 @@ export default function billingCreate(values) {
       return createZuoraAccount({ data, token, signature, meta });
     };
 
-    const actions = [corsCreateBilling, constructZuoraAccount, syncSubscription, fetchUsage, fetchBillingInfo];
+    const actions = [
+      corsCreateBilling,
+      constructZuoraAccount,
+      syncSubscription,
+      syncBillingSubscription,
+      fetchUsage,
+      fetchBillingInfo,
+    ];
     if (values.promoCode) {
-      const consumePromo = ({ meta }) => consumePromoCode({ meta, promoCode: values.promoCode, billingId: billingData.billingId });
+      const consumePromo = ({ meta }) =>
+        consumePromoCode({ meta, promoCode: values.promoCode, billingId: billingData.billingId });
       actions.push(consumePromo);
     }
     return dispatch(chainActions(...actions)());

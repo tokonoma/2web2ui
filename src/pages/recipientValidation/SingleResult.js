@@ -1,11 +1,17 @@
-import React, { Component } from 'react';
+/* eslint-disable no-restricted-syntax */
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Page, Panel, Button, Grid, UnstyledLink } from '@sparkpost/matchbox';
+import { ScreenReaderOnly, Page, Panel, Button, Grid, UnstyledLink } from '@sparkpost/matchbox';
 import styles from './SingleResult.module.scss';
 import { withRouter, Link } from 'react-router-dom';
 import CodeBlock from './components/CodeBlock';
-import { WarningIcon, SuccessIcon, ErrorIcon } from './components/icons';
-import { ROLE_TOOLTIP, DISPOSABLE_TOOLTIP, FREE_TOOLTIP, DID_YOU_MEAN_TOOLTIP, RESULT_DESCRIPTIONS } from './constants';
+import {
+  ROLE_TOOLTIP,
+  DISPOSABLE_TOOLTIP,
+  FREE_TOOLTIP,
+  DID_YOU_MEAN_TOOLTIP,
+  RESULT_DESCRIPTIONS,
+} from './constants';
 import { singleAddress } from 'src/actions/recipientValidation';
 import { showAlert } from 'src/actions/globalAlert';
 import Loading from 'src/components/loading';
@@ -13,155 +19,218 @@ import Tooltip from './components/Tooltip';
 
 const SINGLE_RV_LINK = '/recipient-validation/single';
 
-const Tab = () => (<span className={styles.tab} />);
-const White = ({ children }) => (<span className={styles.white} >{children}</span>);
+export function SingleResult(props) {
+  const { singleResults = {}, loading, address, history, showAlert, singleAddress } = props;
 
-const valueResponse = (value) => value ? (
-  <span className={styles.redBoolean}>Yes</span>
-) : (
-  <span className={styles.greenBoolean}>No</span>
-);
-
-const ICONS = {
-  undeliverable: <ErrorIcon />,
-  valid: <SuccessIcon />,
-  risky: <WarningIcon />
-};
-
-export class SingleResult extends Component {
-
-  componentDidMount() {
-    const { address, singleAddress, history, showAlert } = this.props;
+  useEffect(() => {
     singleAddress(address).catch(({ message }) => {
       showAlert({ message, type: 'error' });
       history.push(SINGLE_RV_LINK);
     });
+  }, [address, history, showAlert, singleAddress]);
+
+  if (!singleResults || loading) {
+    return <Loading />;
   }
 
-  resultTable = () => {
-    const { singleResults = {}} = this.props;
-    const { is_role, is_disposable, is_free, did_you_mean } = singleResults;
+  const { email, result } = singleResults;
+  const calculatedResult = result ? result : 'undeliverable';
+  const resultDescription = RESULT_DESCRIPTIONS[calculatedResult];
 
-    return (
-      <div className={styles.table}>
-        {did_you_mean &&
-          <>
-            <h6 className={styles.tableKey}>Did you mean <Tooltip content={DID_YOU_MEAN_TOOLTIP}/></h6>
-            <span>{did_you_mean}</span>
-            <hr />
-          </>}
-        <h6 className={styles.tableKey}>Role-based <Tooltip content={ROLE_TOOLTIP}/></h6>
-        {valueResponse(is_role)}
-        <hr />
-        <h6 className={styles.tableKey}>Disposable <Tooltip content={DISPOSABLE_TOOLTIP}/></h6>
-        {valueResponse(is_disposable)}
-        <hr />
-        <h6 className={styles.tableKey}>Free <Tooltip content={FREE_TOOLTIP}/></h6>
-        {valueResponse(is_free)}
-      </div>
-    );
-  }
+  return (
+    <Page
+      title="Recipient Validation"
+      subtitle="Results"
+      breadcrumbAction={{ content: 'Back', to: SINGLE_RV_LINK, component: Link }}
+    >
+      <Panel>
+        <Grid>
+          <Grid.Column xs={12} md={7}>
+            <div className={styles.SubSection}>
+              <h2 className={styles.Heading}>{email}</h2>
 
-  renderResult = () => {
-    const { singleResults = {}} = this.props;
-    const { valid, result = valid ? 'valid' : 'undeliverable' } = singleResults;
+              <Result>{calculatedResult}</Result>
 
-    return (
-      <div className={styles.Result}>
-        <div style={{ marginRight: '15px' }}>
-          {ICONS[result]}
-        </div>
-        <div>
-          <div style={{ marginBottom: '20px', fontWeight: 600 }}>Status:</div>
-          <div style={{ textTransform: 'capitalize', fontSize: '2.8em', fontWeight: 550 }}>{result}</div>
-        </div>
-      </div>
-    );
-  };
+              {resultDescription && <p className={styles.ResultDescription}>{resultDescription}</p>}
 
-  renderCodeBlock = () => {
-    const { singleResults = {}} = this.props;
-    const { result, valid, reason, is_role, is_disposable, is_free, did_you_mean } = singleResults;
+              <ResultList data={singleResults} />
 
-    return (
-      <small className={styles.blue}>
-        {'{'}<br/>
-        <Tab />"results": {'{'}<br/>
-        {result && <><Tab /><Tab />"result": "<White>{result}</White>",<br/></>}
-        <Tab /><Tab />"valid": <White>{valid.toString()}</White>,<br/>
-        {reason && <><Tab /><Tab />"reason": "<White>{reason}</White>",<br/></>}
-        <Tab /><Tab />"is_role": <White>{is_role.toString()}</White>,<br/>
-        <Tab /><Tab />"is_disposable": <White>{is_disposable.toString()}</White>,<br/>
-        <Tab /><Tab />"is_free": <White>{is_free.toString()}</White>,<br/>
-        {did_you_mean && <><Tab /><Tab />"did_you_mean": "<White>{did_you_mean.toString()}</White>"<br/></>}
-        <Tab />{'}'}<br/>
-        {'}'}
-      </small>
-    );
-  }
+              <Button component={Link} color="orange" to={SINGLE_RV_LINK}>
+                Validate Another
+              </Button>
+            </div>
+          </Grid.Column>
 
+          <Grid.Column xs={12} md={5}>
+            <CodeBlock preformatted>
+              <div className={styles.SubSection}>
+                <h3 className={styles.ApiHeading}>Raw API Response</h3>
 
-  render() {
-    const { singleResults = {}, loading } = this.props;
-
-    if (!singleResults || loading) {
-      return (<Loading />);
-    }
-
-    const { email, result } = singleResults;
-
-    return (
-      <Page
-        title='Recipient Validation'
-        subtitle='Results'
-        breadcrumbAction={{ content: 'Back', to: SINGLE_RV_LINK, component: Link }}
-      >
-        <Panel>
-          <Grid>
-            <Grid.Column xs={12} md={7}>
-              <div style={{ padding: '2rem 2rem 3rem' }}>
-                <h2 className={styles.Header}>{email}</h2>
-                {this.renderResult()}
-                {this.resultTable()}
-                <p className={styles.Paragraph} name="result-description">
-                  {RESULT_DESCRIPTIONS[result]}
+                <p className={styles.ApiDescription}>
+                  <WhiteText>
+                    The following raw API results outline the reasons for your email's validation
+                    status. Learn how to&nbsp;
+                    <UnstyledLink
+                      external
+                      to="https://developers.sparkpost.com/api/recipient-validation/"
+                      className={styles.ApiDescriptionLink}
+                    >
+                      integrate with Recipient Validation
+                    </UnstyledLink>
+                    &nbsp;in your product.
+                  </WhiteText>
                 </p>
-                <Button component={Link} color='orange' to={SINGLE_RV_LINK}>Validate Another</Button>
+
+                <ResultCodeBlock data={singleResults} />
               </div>
-            </Grid.Column>
-            <Grid.Column xs={12} md={5}>
-              <CodeBlock
-                preformatted
-              >
-                <div style={{ padding: '2rem' }}>
-                  <div className={styles.apiHeader}>Raw API Response</div>
-                  <p className={styles.ApiDescription}>
-                    <White>
-                      The following raw API results outline the reasons for your email's validation status. Learn how to
-                      <UnstyledLink
-                        external
-                        to='https://developers.sparkpost.com/api/recipient-validation/'
-                        style={{ color: 'white', fontWeight: '800' }}
-                      > integrate with Recipient Validation </UnstyledLink> in your product.
-                    </White>
-                  </p>
-                  <pre>
-                    {this.renderCodeBlock()}
-                  </pre>
-                </div>
-              </CodeBlock>
-            </Grid.Column>
-          </Grid>
-        </Panel>
-      </Page>
-    );
-  }
+            </CodeBlock>
+          </Grid.Column>
+        </Grid>
+      </Panel>
+    </Page>
+  );
+}
+
+function TabCharacter() {
+  return <span className={styles.TabCharacter} />;
+}
+
+function WhiteText({ children }) {
+  return <span className={styles.WhiteText}>{children}</span>;
+}
+
+function ResultList({ data }) {
+  const { is_role, is_disposable, is_free, did_you_mean } = data;
+
+  return (
+    <div className={styles.ResultList} role="list">
+      {did_you_mean && (
+        <ResultListItem>
+          <ResultListKey>
+            Did you mean <Tooltip content={DID_YOU_MEAN_TOOLTIP} />
+          </ResultListKey>
+
+          <span>{did_you_mean}</span>
+        </ResultListItem>
+      )}
+
+      <ResultListItem>
+        <ResultListKey>
+          Role-based <Tooltip content={ROLE_TOOLTIP} />
+        </ResultListKey>
+
+        <ResultListValue value={is_role} />
+      </ResultListItem>
+
+      <ResultListItem>
+        <ResultListKey>
+          Disposable <Tooltip content={DISPOSABLE_TOOLTIP} />
+        </ResultListKey>
+
+        <ResultListValue value={is_disposable} />
+      </ResultListItem>
+
+      <ResultListItem>
+        <ResultListKey>
+          Free <Tooltip content={FREE_TOOLTIP} />
+        </ResultListKey>
+
+        <ResultListValue value={is_free} />
+      </ResultListItem>
+    </div>
+  );
+}
+
+function ResultListItem({ children }) {
+  return (
+    <div className={styles.ResultListItem} role="listitem">
+      {children}
+    </div>
+  );
+}
+
+function ResultListKey({ children }) {
+  return (
+    <span className={styles.ResultListKey}>
+      {children}
+      <ScreenReaderOnly>:</ScreenReaderOnly>
+    </span>
+  );
+}
+
+function ResultListValue({ value }) {
+  return <span>{value ? 'Yes' : 'No'}</span>;
+}
+
+function Result({ children }) {
+  return (
+    <div className={styles.Result}>
+      <ScreenReaderOnly>Status:</ScreenReaderOnly>
+
+      <div className={styles.ResultValue} data-id="validation-result-status">
+        {children}
+      </div>
+    </div>
+  );
+}
+
+function ResultCodeBlock({ data }) {
+  const { result, valid, reason, is_role, is_disposable, is_free, did_you_mean } = data;
+
+  return (
+    <pre className={styles.CodeSnippet}>
+      {'{'}
+      <br />
+      <TabCharacter />
+      "results": {'{'}
+      <br />
+      {result && (
+        <>
+          <TabCharacter />
+          <TabCharacter />
+          "result": "<WhiteText>{result}</WhiteText>",
+          <br />
+        </>
+      )}
+      <TabCharacter />
+      <TabCharacter />
+      "valid": <WhiteText>{valid.toString()}</WhiteText>,<br />
+      {reason && (
+        <>
+          <TabCharacter />
+          <TabCharacter />
+          "reason": "<WhiteText>{reason}</WhiteText>",
+          <br />
+        </>
+      )}
+      <TabCharacter />
+      <TabCharacter />
+      "is_role": <WhiteText>{is_role.toString()}</WhiteText>,<br />
+      <TabCharacter />
+      <TabCharacter />
+      "is_disposable": <WhiteText>{is_disposable.toString()}</WhiteText>,<br />
+      <TabCharacter />
+      <TabCharacter />
+      "is_free": <WhiteText>{is_free.toString()}</WhiteText>,<br />
+      {did_you_mean && (
+        <>
+          <TabCharacter />
+          <TabCharacter />
+          "did_you_mean": "<WhiteText>{did_you_mean.toString()}</WhiteText>"<br />
+        </>
+      )}
+      <TabCharacter />
+      {'}'}
+      <br />
+      {'}'}
+    </pre>
+  );
 }
 
 const mapStateToProps = ({ recipientValidation }, { match }) => ({
   singleResults: recipientValidation.singleResults,
   loading: recipientValidation.loading,
-  address: match.params.email
+  address: match.params.email,
 });
 
 export default withRouter(connect(mapStateToProps, { singleAddress, showAlert })(SingleResult));
