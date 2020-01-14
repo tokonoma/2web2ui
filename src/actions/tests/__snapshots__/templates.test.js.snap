@@ -271,7 +271,6 @@ Array [
             },
           },
         ],
-        "test": "data",
       },
       "headers": Object {},
       "method": "POST",
