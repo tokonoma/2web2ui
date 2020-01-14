@@ -21,13 +21,18 @@ const getHistoricalIncidentsError = state => state.blacklist.historicalIncidents
 
 const getIncidentsForBlacklistError = state => state.blacklist.incidentsForBlacklistError || false;
 
+const getDaysListed = (resolvedDate, occurredDate) => {
+  const resolvedMoment = resolvedDate === null ? moment() : moment(resolvedDate);
+  return resolvedMoment.diff(moment(occurredDate), 'days') || 1;
+};
+
 const enrichIncident = incident => ({
   ...incident,
   occurred_at_timestamp: incident.occurred_at ? Date.parse(incident.occurred_at) : 0,
   occurred_at_formatted: incident.occurred_at ? formatDateTime(incident.occurred_at) : null,
   resolved_at_timestamp: incident.resolved_at ? Date.parse(incident.resolved_at) : 0,
   resolved_at_formatted: incident.resolved_at ? formatDateTime(incident.resolved_at) : null,
-  days_listed: moment().diff(moment(incident.occurred_at), 'days'),
+  days_listed: getDaysListed(incident.resolved_at, incident.occurred_at),
 });
 
 export const selectIncident = createSelector([getIncident], incident => enrichIncident(incident));

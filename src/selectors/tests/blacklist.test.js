@@ -49,6 +49,41 @@ describe('Blacklist Selectors: ', () => {
     );
   });
 
+  it('selectIncident returns formatted incident for active incident', () => {
+    expect(blacklistSelectors.selectIncident({ blacklist: { incident: incidents[0] } })).toEqual(
+      formattedIncidents[0],
+    );
+  });
+
+  it('selectIncident returns formatted incident with resolved date', () => {
+    const resolvedIncident = {
+      ...incidents[0],
+      resolved_at: '2019-07-25T12:48:00.000Z',
+    };
+
+    const formattedResolvedIncident = {
+      ...formattedIncidents[0],
+      resolved_at: '2019-07-25T12:48:00.000Z',
+      resolved_at_formatted: 'Jul 25 2019, 8:48am',
+      resolved_at_timestamp: 1564058880000,
+      days_listed: 2,
+    };
+
+    expect(
+      blacklistSelectors.selectIncident({ blacklist: { incident: resolvedIncident } }),
+    ).toEqual(formattedResolvedIncident);
+  });
+
+  it('selectIncident returns formatted incident with listed length < 1 day as 1 day', () => {
+    const resolvedZeroDayIncident = {
+      ...incidents[0],
+      resolved_at: '2019-07-23T12:49:00.000Z',
+    };
+    expect(
+      blacklistSelectors.selectIncident({ blacklist: { incident: resolvedZeroDayIncident } }),
+    ).toHaveProperty('days_listed', 1);
+  });
+
   it('selectBlacklistedCount returns total number of resources blacklisted', () => {
     expect(blacklistSelectors.selectBlacklistedCount({ blacklist: { monitors } })).toEqual(2);
   });
