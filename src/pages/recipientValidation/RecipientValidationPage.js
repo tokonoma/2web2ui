@@ -17,13 +17,13 @@ import styles from './RecipientValidationPage.module.scss';
 const tabs = [
   { content: <span className={styles.TabPadding}>List</span>, key: 'list' },
   { content: 'Single Address', key: 'single' },
-  { content: 'API Integration', key: 'api' }
+  { content: 'API Integration', key: 'api' },
 ];
 
 export class RecipientValidationPage extends Component {
   state = {
     selectedTab: this.props.tab || 0,
-    showPriceModal: false
+    showPriceModal: false,
   };
 
   handleTabs(tabIdx) {
@@ -33,7 +33,7 @@ export class RecipientValidationPage extends Component {
     this.setState({ selectedTab: tabIdx });
   }
 
-  renderTabContent = (tabId) => {
+  renderTabContent = tabId => {
     switch (tabId) {
       case 0:
         return <ListForm />;
@@ -42,15 +42,12 @@ export class RecipientValidationPage extends Component {
       case 2:
         return <ApiDetails />;
     }
-  }
+  };
 
   handleModal = (showPriceModal = false) => this.setState({ showPriceModal });
 
   renderRVPriceModal = () => (
-    <Panel
-      className={styles.modalContainer}
-      accent
-    >
+    <Panel className={styles.modalContainer} accent>
       <div style={{ float: 'right' }}>
         <Button onClick={() => this.handleModal(false)} flat>
           <Close />
@@ -61,8 +58,8 @@ export class RecipientValidationPage extends Component {
         <RecipientValidationPriceTable
           cellProps={{
             style: {
-              padding: '8px 0'
-            }
+              padding: '8px 0',
+            },
           }}
         />
       </div>
@@ -74,23 +71,30 @@ export class RecipientValidationPage extends Component {
 
     return (
       <Page
-        title='Recipient Validation'
-        primaryArea={<Button size='large' onClick={() => this.handleModal(true)}>See Pricing</Button>}>
+        title="Recipient Validation"
+        primaryArea={
+          <Button size="large" onClick={() => this.handleModal(true)}>
+            See Pricing
+          </Button>
+        }
+      >
         <p className={styles.LeadText}>
           Recipient Validation is an easy, efficient way to verify that email addresses are valid
-          before you send. We run each address through a series of checks to catch many common problems,
-          including syntax errors and non-existent mailboxes, to drive better deliverability, cut down on
-          fraud, and capture every opportunity.
+          before you send. We run each address through a series of checks to catch many common
+          problems, including syntax errors and non-existent mailboxes, to drive better
+          deliverability, cut down on fraud, and capture every opportunity.
         </p>
+
         <Tabs
           selected={selectedTab}
           connectBelow={true}
           tabs={tabs.map(({ content }, idx) => ({ content, onClick: () => this.handleTabs(idx) }))}
         />
-        <Panel>
-          {this.renderTabContent(selectedTab)}
-        </Panel>
+
+        <Panel>{this.renderTabContent(selectedTab)}</Panel>
+
         {selectedTab === 0 && <JobsTableCollection />}
+
         <Modal open={showPriceModal} onClose={() => this.handleModal(false)}>
           {this.renderRVPriceModal()}
         </Modal>
@@ -105,7 +109,7 @@ export class RecipientValidationPage extends Component {
           {this.renderRecipientValidation()}
         </Case>
         <Case condition={defaultCase}>
-          <RVDisabledPage/>
+          <RVDisabledPage />
         </Case>
       </ConditionSwitch>
     );
@@ -113,7 +117,7 @@ export class RecipientValidationPage extends Component {
 }
 
 const mapStateToProps = (state, props) => ({
-  tab: tabs.findIndex(({ key }) => key === props.match.params.category) || 0
+  tab: tabs.findIndex(({ key }) => key === props.match.params.category) || 0,
 });
 
 export default withRouter(connect(mapStateToProps)(RecipientValidationPage));
