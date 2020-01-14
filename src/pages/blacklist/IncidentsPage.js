@@ -1,12 +1,14 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Page } from '@sparkpost/matchbox';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import moment from 'moment';
 
 import { ApiErrorBanner, Loading } from 'src/components';
 import { Users } from 'src/components/images';
 import { listMonitors, listIncidents } from 'src/actions/blacklist';
 import { selectIncidentsList } from 'src/selectors/blacklist';
+import { getRelativeDates } from 'src/helpers/date';
 import IncidentsCollection from './components/IncidentsCollection';
 import styles from './IncidentsPage.module.scss';
 import CongratsBanner from './components/CongratsBanner';
@@ -14,10 +16,41 @@ import CongratsBanner from './components/CongratsBanner';
 export const IncidentsPage = props => {
   const { loading, error, listMonitors, listIncidents, monitors, incidents } = props;
 
+  const currentDateTime = new Date();
+  const [to, setTo] = useState(currentDateTime);
+  const [from, setFrom] = useState(
+    moment(currentDateTime)
+      .subtract(30, 'days')
+      .toDate(),
+  );
+  const [relativeRange, setRelativeRange] = useState('30days');
+
+  const updateDateRange = ({ from, to, relativeRange }) => {
+    if (to && from && relativeRange) {
+      setTo(to);
+      setFrom(from);
+      setRelativeRange(relativeRange);
+    } else {
+      const dateRangeFromRelativeDate = getRelativeDates(relativeRange);
+      setTo(dateRangeFromRelativeDate.to);
+      setFrom(dateRangeFromRelativeDate.from);
+      setRelativeRange(dateRangeFromRelativeDate.relativeRange);
+    }
+  };
+
+  const dateOptions = {
+    to,
+    from,
+    relativeRange,
+  };
+
   useEffect(() => {
     listMonitors();
-    listIncidents();
-  }, [listMonitors, listIncidents]);
+  }, [listMonitors]);
+
+  useEffect(() => {
+    listIncidents(from, to);
+  }, [from, to, listIncidents]);
 
   if (loading) {
     return <Loading />;
@@ -47,7 +80,11 @@ export const IncidentsPage = props => {
             content="There are no incidents reported for items on your watchlist"
           />
         )}
-        <IncidentsCollection incidents={incidents} />
+        <IncidentsCollection
+          incidents={incidents}
+          dateOptions={dateOptions}
+          updateDateRange={updateDateRange}
+        />
       </div>
     );
   };
