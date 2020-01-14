@@ -165,7 +165,7 @@ export const getPlanTierByPlanCode = createSelector(
   [plansSelector, currentSubscriptionSelector],
   (plans, currentSubscription) => {
     const plan = _.find(plans, { code: currentSubscription.code });
-    return plan.tier;
+    return plan.tier || '';
   },
 );
 

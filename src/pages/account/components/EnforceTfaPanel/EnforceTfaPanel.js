@@ -19,12 +19,9 @@ export class EnforceTFAPanel extends React.Component {
   }
 
   toggleTfaRequired = () => {
-    const { tfaRequired, planTier } = this.props;
-    const starterPlanAndTfaRequiredNotInSync = planTier === 'starter' && tfaRequired;
+    const { tfaRequired } = this.props;
 
-    const currentToggleState = starterPlanAndTfaRequiredNotInSync ? false : tfaRequired;
-
-    if (currentToggleState) {
+    if (tfaRequired) {
       this.setState({ disableModal: true });
     } else {
       this.setState({ enableModal: true });
@@ -50,9 +47,9 @@ export class EnforceTFAPanel extends React.Component {
     });
 
   render() {
-    const { loading, tfaRequired, tfaUpdatePending, ssoEnabled, planTier } = this.props;
+    const { loading, tfaRequired, tfaUpdatePending, ssoEnabled } = this.props;
     const { enableModal, disableModal } = this.state;
-    const starterPlanAndTfaRequiredNotInSync = planTier === 'starter' && tfaRequired;
+
     if (loading) {
       return <PanelLoading />;
     }
@@ -78,7 +75,7 @@ export class EnforceTFAPanel extends React.Component {
         )}
         <TogglePanel
           readOnly={ssoEnabled}
-          tfaRequired={starterPlanAndTfaRequiredNotInSync ? false : tfaRequired}
+          tfaRequired={tfaRequired}
           toggleTfaRequired={this.toggleTfaRequired}
         />
         <ConfirmationModal

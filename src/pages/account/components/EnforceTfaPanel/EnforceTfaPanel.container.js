@@ -20,8 +20,10 @@ const mapStateToProps = state => {
   return {
     loading: accountSingleSignOn.loading || tfa.enabled === null,
     ssoEnabled: accountSingleSignOn.enabled,
-    tfaRequired: account.tfa_required,
-    planTier: getPlanTierByPlanCode(state),
+    tfaRequired:
+      getPlanTierByPlanCode(state) === 'starter' && account.tfa_required
+        ? false
+        : account.tfa_required,
     tfaUpdatePending: account.updateLoading,
     tfaEnabled: tfa.enabled,
   };
