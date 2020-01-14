@@ -8,10 +8,10 @@ import { required, minLength } from 'src/helpers/validation';
 import { TextFieldWrapper } from 'src/components';
 
 export class PasswordForm extends Component {
-  validatePasswords = (value) => {
+  validatePasswords = value => {
     const { currentPassword } = this.props;
     return value === currentPassword ? 'New Password is same as Current Password' : undefined;
-  }
+  };
 
   render() {
     const { pristine, submitting, handleSubmit, currentPassword, newPassword } = this.props;
@@ -21,24 +21,33 @@ export class PasswordForm extends Component {
         <Field
           type="password"
           autoComplete="current-password"
-          name='currentPassword'
+          name="currentPassword"
           component={TextFieldWrapper}
-          id='currentPassword'
-          label='Current Password'
+          id="currentPassword"
+          label="Current Password"
           validate={required}
         />
 
         <Field
           type="password"
           autoComplete="new-password"
-          name='newPassword'
-          id='newPassword'
-          label='New Password'
+          name="newPassword"
+          id="newPassword"
+          label="New Password"
           component={TextFieldWrapper}
-          validate={[required, minLength(8), this.validatePasswords]}
+          validate={[required, minLength(12), this.validatePasswords]}
         />
 
-        <Button submit disabled={submitting || pristine || !currentPassword || !newPassword || (currentPassword === newPassword)}>
+        <Button
+          submit
+          disabled={
+            submitting ||
+            pristine ||
+            !currentPassword ||
+            !newPassword ||
+            currentPassword === newPassword
+          }
+        >
           {submitting ? 'Updating Password' : 'Update Password'}
         </Button>
       </form>
@@ -48,14 +57,14 @@ export class PasswordForm extends Component {
 
 const selector = formValueSelector('passwordForm');
 
-const mapStateToProps = (state, props) => ({
+const mapStateToProps = state => ({
   currentPassword: selector(state, 'currentPassword'),
-  newPassword: selector(state, 'newPassword')
+  newPassword: selector(state, 'newPassword'),
 });
 
 const formOptions = {
   form: 'passwordForm',
-  enableReinitialize: true // required to update initial values from redux state
+  enableReinitialize: true, // required to update initial values from redux state
 };
 
 // breaks if you do reduxForm first
