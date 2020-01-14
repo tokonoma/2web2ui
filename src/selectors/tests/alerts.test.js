@@ -186,6 +186,7 @@ describe('Alerts Selectors: ', () => {
     const state = {
       account: {
         options: {
+          blacklist_monitors: true,
           ui: {
             allow_injection_alerts: true,
           },
@@ -193,6 +194,9 @@ describe('Alerts Selectors: ', () => {
       },
     };
 
-    expect(alertsSelectors.selectFeatureFlaggedAlerts(state)).toEqual({ injection_count: true });
+    expect(alertsSelectors.selectFeatureFlaggedAlerts(state)).toEqual({
+      blacklist: true,
+      injection_count: true,
+    });
   });
 });

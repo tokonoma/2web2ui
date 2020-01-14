@@ -4,7 +4,7 @@ import { formatDateTime } from '../helpers/date';
 import { getFormSpec } from 'src/pages/alerts/helpers/alertForm';
 import { DEFAULT_FORM_VALUES } from 'src/pages/alerts/constants/formConstants';
 import { tagAsCopy } from 'src/helpers/string';
-import { isAccountUiOptionSet } from 'src/helpers/conditions/account';
+import { hasAccountOptionEnabled, isAccountUiOptionSet } from 'src/helpers/conditions/account';
 import { selectCondition } from 'src/selectors/accessConditionState';
 
 const getAlertsList = state => state.alerts.list;
@@ -87,7 +87,8 @@ export const selectAlertFormValues = createSelector(
 export const selectFeatureFlaggedAlerts = createSelector(
   [
     selectCondition(isAccountUiOptionSet('allow_injection_alerts')),
+    selectCondition(hasAccountOptionEnabled('blacklist_monitors')),
     // add more alert metric feature flags here
   ],
-  injection_count => ({ injection_count }),
+  (injection_count, blacklist) => ({ blacklist, injection_count }),
 );
