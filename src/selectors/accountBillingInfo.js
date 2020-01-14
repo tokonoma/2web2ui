@@ -1,3 +1,4 @@
+/* eslint-disable lodash/prefer-immutable-method */
 import { createSelector } from 'reselect';
 import _ from 'lodash';
 import {
@@ -159,6 +160,14 @@ export const selectAccountBilling = createSelector([selectAccount], account => (
   error: account.error || account.billingError,
   loading: account.loading || account.billingLoading || account.usageLoading,
 }));
+
+export const getPlanTierByPlanCode = createSelector(
+  [plansSelector, currentSubscriptionSelector],
+  (plans, currentSubscription) => {
+    const plan = _.find(plans, { code: currentSubscription.code });
+    return plan.tier || '';
+  },
+);
 
 export const selectBillingInfo = createSelector(
   [
