@@ -18,7 +18,7 @@ const EditAndPreviewPage = () => {
     hasDraftFailedToLoad,
     isDraftLoading,
     isPublishedMode,
-    hasSaved
+    hasSaved,
   } = useEditorContext();
   const Contents = links[currentNavigationIndex].render;
   const PrimaryArea = links[currentNavigationIndex].renderPrimaryArea;
@@ -45,7 +45,7 @@ const EditAndPreviewPage = () => {
           <CheckCircle size={17} className={styles.GreenColor} />
         </div>
       ) : (
-        <div className={styles.Status}>
+        <div className={styles.Status} data-id="template-status">
           <span>Draft</span>
 
           <FileEdit size={17} />
@@ -54,7 +54,7 @@ const EditAndPreviewPage = () => {
     </>
   );
 
-  const title = (draft) => {
+  const title = draft => {
     if (!isPublishedMode) {
       return `${draft.name} (DRAFT)`;
     }
@@ -69,16 +69,16 @@ const EditAndPreviewPage = () => {
       primaryArea={primaryArea()}
     >
       <div className={styles.EditorNav}>
-        <EditNavigation primaryArea={<PrimaryArea/>}/>
+        <EditNavigation primaryArea={<PrimaryArea />} />
       </div>
 
       <div className={styles.MainContent}>
-        <Contents/>
+        <Contents />
       </div>
 
       <Prompt
         when={!hasSaved}
-        message={(location) => {
+        message={location => {
           if (location.pathname.startsWith(`/${routeNamespace}/edit`)) {
             return true;
           }
