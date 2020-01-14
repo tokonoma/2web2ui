@@ -22,10 +22,8 @@ const getHistoricalIncidentsError = state => state.blacklist.historicalIncidents
 const getIncidentsForBlacklistError = state => state.blacklist.incidentsForBlacklistError || false;
 
 const getDaysListed = (resolvedDate, occurredDate) => {
-  const daysListed = resolvedDate
-    ? moment(resolvedDate).diff(moment(occurredDate), 'days')
-    : moment().diff(moment(occurredDate), 'days');
-  return daysListed || 1;
+  const resolvedMoment = resolvedDate === null ? moment() : moment(resolvedDate);
+  return resolvedMoment.diff(moment(occurredDate), 'days') || 1;
 };
 
 const enrichIncident = incident => ({
