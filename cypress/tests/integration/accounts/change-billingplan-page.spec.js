@@ -87,14 +87,9 @@ describe('Billing Page', () => {
   //redirects to brightback page
   it('redirects to brightback page on downgrading to free plan', () => {
     selectAFreePlan();
-    cy.get('body').then($body => {
-      if ($body.text().includes('Got it')) {
-        cy.get('button')
-          .contains('Got it')
-          .first()
-          .click();
-      }
-    });
+    cy.findAllByText('Got it')
+      .first()
+      .click();
     cy.get('a[type=button]')
       .contains('Change Plan')
       .click();
@@ -104,10 +99,22 @@ describe('Billing Page', () => {
   //downgrading, premier => starter plan
   it('redirects to billing page', () => {
     stubRequest({
+      url: '/api/v1/account',
+      fixture: 'account/200.get.starter-plan.json',
+      fixtureName: 'subscriptionGet',
+    });
+    stubRequest({
       url: '/api/v1/billing/subscription',
       fixture: 'billing/subscription/200.get.premier-plan.json',
       fixtureName: 'subscriptionPremierGet',
     });
     cy.visit('/account/billing/plan');
+    cy.get('[data-id=select-plan-50K-starter-0519]').click();
+    cy.findAllByText('Got it')
+      .first()
+      .click();
+    cy.findAllByText('Got it')
+      .last()
+      .click();
   });
 });
