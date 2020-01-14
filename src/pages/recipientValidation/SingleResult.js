@@ -23,13 +23,14 @@ export function SingleResult(props) {
   const { singleResults = {}, loading, address, history, showAlert, singleAddress } = props;
 
   useEffect(() => {
-    singleAddress(address).catch(({ message }) => {
+    singleAddress(address).catch(({ response, message }) => {
+      const { status } = response;
       // When receiving the 'Usage limit exceeded' error, render a link in the alert details with a way to contact sales
       showAlert({
         type: 'error',
         message,
         details:
-          message === 'Usage limit exceeded' ? (
+          status === 400 ? (
             <UnstyledLink external to="https://sparkpost.com/sales">
               Contact sales
             </UnstyledLink>
@@ -207,7 +208,7 @@ function ResultCodeBlock({ data }) {
       )}
       <TabCharacter />
       <TabCharacter />
-      "valid": <WhiteText>{valid.toString()}</WhiteText>,<br />
+      "valid": <WhiteText>{valid && valid.toString()}</WhiteText>,<br />
       {reason && (
         <>
           <TabCharacter />
@@ -218,13 +219,13 @@ function ResultCodeBlock({ data }) {
       )}
       <TabCharacter />
       <TabCharacter />
-      "is_role": <WhiteText>{is_role.toString()}</WhiteText>,<br />
+      "is_role": <WhiteText>{is_role && is_role.toString()}</WhiteText>,<br />
       <TabCharacter />
       <TabCharacter />
-      "is_disposable": <WhiteText>{is_disposable.toString()}</WhiteText>,<br />
+      "is_disposable": <WhiteText>{is_disposable && is_disposable.toString()}</WhiteText>,<br />
       <TabCharacter />
       <TabCharacter />
-      "is_free": <WhiteText>{is_free.toString()}</WhiteText>,<br />
+      "is_free": <WhiteText>{is_free && is_free.toString()}</WhiteText>,<br />
       {did_you_mean && (
         <>
           <TabCharacter />
