@@ -1,16 +1,6 @@
 /// <reference types="Cypress" />
 
-function stubRequest({ method, statusCode = 200, url = '/api/v1/templates', fixture }) {
-  cy.server();
-  cy.fixture(fixture).as('templateReq');
-  cy.route({
-    method,
-    url,
-    status: statusCode,
-    response: '@templateReq',
-  });
-  cy.visit('/templates');
-}
+const TEMPLATES_API_URL = '/api/v1/templates';
 
 describe('The templates list page', () => {
   beforeEach(() => {
@@ -24,10 +14,12 @@ describe('The templates list page', () => {
   });
 
   it('renders an empty state when no templates are returned with a "Create New" button', () => {
-    stubRequest({
-      method: 'GET',
+    cy.stubRequest({
+      url: TEMPLATES_API_URL,
       fixture: 'templates/200.get.no-results.json',
     });
+
+    cy.visit('/templates');
 
     cy.findByText('Manage your email templates').should('be.visible');
     cy.findByText('Create New').click();
@@ -36,10 +28,12 @@ describe('The templates list page', () => {
   });
 
   it('it does not render the "Recent Activity" section when fewer than three template results are returned', () => {
-    stubRequest({
-      method: 'GET',
+    cy.stubRequest({
+      url: TEMPLATES_API_URL,
       fixture: 'templates/200.get.2-results.json',
     });
+
+    cy.visit('/templates');
 
     cy.findByText('Stubbed Template 1').should('be.visible');
     cy.findByText('Stubbed Template 2').should('be.visible');
@@ -47,10 +41,12 @@ describe('The templates list page', () => {
   });
 
   it('renders "Recent Activity" when three or more template results are returned', () => {
-    stubRequest({
-      method: 'GET',
+    cy.stubRequest({
+      url: TEMPLATES_API_URL,
       fixture: 'templates/200.get.3-results.json',
     });
+
+    cy.visit('/templates');
 
     cy.findByText('Recent Activity').should('be.visible');
     cy.findAllByText('Stubbed Template 1')
@@ -62,16 +58,17 @@ describe('The templates list page', () => {
   });
 
   it('renders "Recent Activity" results with a duplicate action', () => {
-    stubRequest({
-      method: 'GET',
+    cy.stubRequest({
+      url: TEMPLATES_API_URL,
       fixture: 'templates/200.get.3-results.json',
     });
 
-    stubRequest({
-      method: 'GET',
+    cy.stubRequest({
       url: '/api/v1/templates/stubbed-template-1',
       fixture: 'templates/stubbed-template-1/200.get.json',
     });
+
+    cy.visit('/templates');
 
     cy.get('[data-id="recent-activity-button-duplicate"]')
       .first()
@@ -82,10 +79,12 @@ describe('The templates list page', () => {
   });
 
   it('renders "Recent Activity" results with a delete action', () => {
-    stubRequest({
-      method: 'GET',
+    cy.stubRequest({
+      url: TEMPLATES_API_URL,
       fixture: 'templates/200.get.3-results.json',
     });
+
+    cy.visit('/templates');
 
     cy.get('[data-id="recent-activity-button-delete"]')
       .first()
@@ -95,10 +94,12 @@ describe('The templates list page', () => {
   });
 
   it('has a table that sorts by "Template Name" alphabetically"', () => {
-    stubRequest({
-      method: 'GET',
+    cy.stubRequest({
+      url: TEMPLATES_API_URL,
       fixture: 'templates/200.get.alphabetical-results.json',
     });
+
+    cy.visit('/templates');
 
     // Sorts by ascending
     cy.findByText('Template Name').click();
@@ -132,10 +133,12 @@ describe('The templates list page', () => {
   });
 
   it('has a table that sorts by "Status" alphabetically', () => {
-    stubRequest({
-      method: 'GET',
+    cy.stubRequest({
+      url: TEMPLATES_API_URL,
       fixture: 'templates/200.get.published-and-draft-results.json',
     });
+
+    cy.visit('/templates');
 
     cy.findByText('Status').click();
 
@@ -175,10 +178,12 @@ describe('The templates list page', () => {
   });
 
   it('has a table "Last Updated" in ascending and descending order by date', () => {
-    stubRequest({
-      method: 'GET',
+    cy.stubRequest({
+      url: TEMPLATES_API_URL,
       fixture: 'templates/200.get.time-ordered-results.json',
     });
+
+    cy.visit('/templates');
 
     cy.findByText('Last Updated').click();
 
@@ -210,22 +215,23 @@ describe('The templates list page', () => {
   });
 
   it('has table rows with a duplicate action that duplicates a template', () => {
-    stubRequest({
-      method: 'GET',
+    cy.stubRequest({
+      url: TEMPLATES_API_URL,
       fixture: 'templates/200.get.3-results.json',
     });
 
-    stubRequest({
-      method: 'GET',
+    cy.stubRequest({
       url: '/api/v1/templates/stubbed-template-1',
       fixture: 'templates/stubbed-template-1/200.get.json',
     });
 
-    stubRequest({
+    cy.stubRequest({
       method: 'POST',
-      url: '/api/v1/templates',
+      url: TEMPLATES_API_URL,
       fixture: 'templates/200.post.create.json',
     });
+
+    cy.visit('/templates');
 
     cy.get('[data-id="table-button-duplicate"]')
       .first()
@@ -240,12 +246,12 @@ describe('The templates list page', () => {
   });
 
   it('has table rows with a delete action that deletes a template', () => {
-    stubRequest({
-      method: 'GET',
+    cy.stubRequest({
+      url: TEMPLATES_API_URL,
       fixture: 'templates/200.get.3-results.json',
     });
 
-    stubRequest({
+    cy.stubRequest({
       method: 'DELETE',
       url: '/api/v1/templates/stubbed-template-1',
       fixture: 'templates/stubbed-template-1/200.delete.json',
@@ -263,8 +269,8 @@ describe('The templates list page', () => {
   });
 
   it('filters results by name', () => {
-    stubRequest({
-      method: 'GET',
+    cy.stubRequest({
+      url: TEMPLATES_API_URL,
       fixture: 'templates/200.get.3-results.json',
     });
 
@@ -307,6 +313,8 @@ describe('The templates list page', () => {
   });
 
   it('has a "Create New" button that navigates to the template creation page', () => {
+    cy.visit('/templates');
+
     cy.findByText('Create New').click();
 
     cy.title().should('include', 'Create New Template');
