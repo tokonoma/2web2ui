@@ -3,7 +3,7 @@
 exports[`JobStatusTag renders a loading tag 1`] = `
 <Tag>
   <span
-    className="Loading"
+    className="JobStatusTagContent Loading"
   >
     <Cached />
      
@@ -17,7 +17,7 @@ exports[`JobStatusTag renders a loading tag 1`] = `
 exports[`JobStatusTag renders a ready tag 1`] = `
 <Tag>
   <span
-    className="Ready"
+    className="JobStatusTagContent Ready"
   >
     <CloudUpload />
      
@@ -31,7 +31,7 @@ exports[`JobStatusTag renders a ready tag 1`] = `
 exports[`JobStatusTag renders a success tag 1`] = `
 <Tag>
   <span
-    className="Complete"
+    className="JobStatusTagContent Complete"
   >
     <CheckCircle />
      
@@ -45,7 +45,7 @@ exports[`JobStatusTag renders a success tag 1`] = `
 exports[`JobStatusTag renders an error tag 1`] = `
 <Tag>
   <span
-    className="Failed"
+    className="JobStatusTagContent Failed"
   >
     <Error />
      
