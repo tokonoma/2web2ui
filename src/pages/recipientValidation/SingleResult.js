@@ -23,7 +23,7 @@ export function SingleResult(props) {
   const { singleResults = {}, loading, address, history, showAlert, singleAddress } = props;
 
   useEffect(() => {
-    singleAddress(address).catch(({ response, message }) => {
+    singleAddress(address).catch(({ response = {}, message }) => {
       const { status } = response;
       // When receiving the 'Usage limit exceeded' error, render a link in the alert details with a way to contact sales
       showAlert({
