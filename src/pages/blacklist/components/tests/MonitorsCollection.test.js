@@ -36,4 +36,10 @@ describe('Blacklist Component: MonitorsCollection', () => {
     expect(queryByText('Current Blacklistings')).toBeInTheDocument();
     expect(queryByText('Historic Blacklistings')).toBeInTheDocument();
   });
+
+  it('links each item to the incidents page filtered by the resource', () => {
+    const { queryByText } = subject();
+    const anchor = queryByText('1.2.3.4');
+    expect(anchor.getAttribute('href')).toBe('/blacklist/incidents?search=1.2.3.4');
+  });
 });

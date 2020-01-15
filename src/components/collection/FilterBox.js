@@ -1,12 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Label, ScreenReaderOnly, TextField, Panel } from '@sparkpost/matchbox';
 import { Search } from '@sparkpost/matchbox-icons';
 import { getRandomExampleSearch } from './helpers/exampleSearch';
 import styles from './FilterBox.module.scss';
 
 export default function CollectionFilterBox(props) {
-  const { placeholder, wrapper, onChange } = props;
+  const { placeholder, wrapper, onChange, onBlur, defaultValue } = props;
   const placeholderText = placeholder || `Filter results e.g. ${getRandomExampleSearch(props)}`;
+
+  // If there is a defaultValue for filter box, call onChange with defaultValue
+  useEffect(() => {
+    if (defaultValue && onChange) {
+      onChange(defaultValue);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const text = (
     <>
       <Label id="collection-filter-box" className={styles.FilterBoxLabel}>
@@ -19,6 +28,8 @@ export default function CollectionFilterBox(props) {
         suffix={<Search />}
         placeholder={placeholderText}
         onChange={e => onChange(e.target.value)}
+        onBlur={e => onBlur(e.target.value)}
+        defaultValue={defaultValue}
       />
     </>
   );

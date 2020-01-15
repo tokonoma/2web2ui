@@ -35,7 +35,7 @@ export const MonitorsCollection = props => {
     ({ resource, active_listing_count, total_listing_count }) => {
       return [
         <div className={styles.NameDetails}>
-          <PageLink to={`/`} /*TODO link to ?*/>{resource}</PageLink>
+          <PageLink to={`/blacklist/incidents?search=${resource}`}>{resource}</PageLink>
         </div>,
         <div className={styles.ListingDetails}>{active_listing_count}</div>,
         <div className={styles.ListingDetails}>{total_listing_count}</div>,
