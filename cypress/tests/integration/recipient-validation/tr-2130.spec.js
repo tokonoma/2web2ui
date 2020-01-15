@@ -21,7 +21,9 @@ describe('TR-2130', () => {
 
     cy.wait('@getValidation');
 
-    cy.queryAllByText('View Details')
+    cy.findByText('Usage limit exceeded');
+
+    cy.findAllByText('View Details')
       .last()
       .click();
 
