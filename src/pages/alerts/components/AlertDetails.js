@@ -159,19 +159,20 @@ export const AlertDetails = ({ alert, id, subaccountIdToString, hasSubaccounts }
 
   const detailsMap = [
     { label: 'Metric:', render: () => <h6>{METRICS[metric]}</h6> },
-    { label: 'Condition:', render: () => renderEvaluated() },
-    { label: 'Filtered By:', render: () => renderFilteredBy() },
-    { label: 'Notify:', render: () => renderNotify() },
+    { label: 'Condition:', render: renderEvaluated },
+    { label: 'Filtered By:', render: renderFilteredBy },
+    { label: 'Notify:', render: renderNotify },
     { label: 'Mute:', render: () => <AlertToggle muted={muted} id={id} /> },
   ];
 
   const renderAlertDetails = () =>
     detailsMap.map(({ label, render }, i) => {
       const renderedValue = render();
-      //Don't show rows with empty values (should only be applicable to filters)
+
       if (!renderedValue) {
         return null;
       }
+
       return (
         <Panel.Section key={i}>
           <LabelledValue label={label}>{renderedValue}</LabelledValue>

@@ -39,10 +39,10 @@ export default function formatFormValues(values) {
     multi: () =>
       filterOptions
         .map(
-          option =>
-            values[option.value].length > 0 && {
-              filter_type: option.value,
-              filter_values: values[option.value],
+          ({ value: filter_type }) =>
+            values[filter_type].length > 0 && {
+              filter_type,
+              filter_values: values[filter_type],
             },
         )
         .filter(Boolean),
