@@ -1,7 +1,12 @@
 /// <reference types="Cypress" />
 
 const templateId = 'stubbed-template-1';
+const editorSelector = '.ace_text-input';
 const APP_URL = `/templates/edit/${templateId}/draft/content`;
+
+function openTemplateSettings() {
+  cy.findByText('Open Menu').click({ force: true }); // The content is visually hidden (intentionally!), so `force: true` is needed here
+}
 
 describe('The templates edit draft page', () => {
   beforeEach(() => {
@@ -21,6 +26,12 @@ describe('The templates edit draft page', () => {
     cy.stubRequest({
       url: '/api/v1/templates/stubbed-template-1',
       fixture: 'templates/stubbed-template-1/200.get.json',
+    });
+
+    cy.stubRequest({
+      method: 'POST',
+      url: '/api/v1/utils/content-previewer',
+      fixture: 'utils/content-previewer/200.post.json',
     });
   });
 
@@ -102,7 +113,7 @@ describe('The templates edit draft page', () => {
 
       cy.findAllByText('Save and Publish').should('have.length', 1);
 
-      cy.findByText('Open Menu').click({ force: true }); // The content is visually hidden (intentionally!), so `force: true` is needed here
+      openTemplateSettings();
 
       cy.findAllByText('Save and Publish').should('have.length', 2);
       cy.findByText('Save Draft').should('be.visible');
@@ -147,26 +158,94 @@ describe('The templates edit draft page', () => {
 
         cy.visit(APP_URL);
 
-        cy.findByText('Open Menu').click({ force: true }); // The content is visually hidden (intentionally!), so `force: true` is needed here
+        openTemplateSettings();
 
         cy.findByText('Save Draft').click();
 
         cy.findByText('Draft saved').should('be.visible');
       });
 
-      it('updates the state of the draft to "Saved" after an unsaved change has been made to the template content', () => {});
+      it('updates the state of the draft to "Saved" after an unsaved change has been made to the template content', () => {
+        cy.stubRequest({
+          method: 'PUT',
+          url: '/api/v1/templates/stubbed-template-1',
+          fixture: 'templates/stubbed-template-1/200.put.json',
+        });
+
+        cy.visit(APP_URL);
+
+        cy.get(editorSelector)
+          .focus()
+          .type('<h1>Hello, world.</h1>');
+
+        cy.findByText('Unsaved Changes').should('be.visible');
+
+        openTemplateSettings();
+
+        cy.findByText('Save Draft').click();
+
+        cy.findByText('Saved').should('exist'); // Overlapped by the snackbar UI, so we can't use `should.be.visible` here
+      });
     });
 
     describe('"Duplicate" button', () => {
-      it('renders a confirmation modal when clicked with default values "<TEMPLATE NAME> (COPY)" and "<template-id>-copy" in their respective fields', () => {});
+      it('renders a confirmation modal when clicked with default values "<TEMPLATE NAME> (COPY)" and "<template-id>-copy" in their respective fields', () => {
+        cy.visit(APP_URL);
 
-      it('renders a success message when the user confirms duplication', () => {});
+        openTemplateSettings();
+
+        cy.findByText('Duplicate').click();
+
+        cy.findByText('Duplicate Template').should('be.visible');
+        cy.findByLabelText('Template Name *').should('have.value', 'Stubbed Template 1 (COPY)');
+        cy.findByLabelText('Template ID *').should('have.value', 'stubbed-template-1-copy');
+      });
+
+      it('renders a success message when the user confirms duplication', () => {
+        cy.stubRequest({
+          method: 'POST',
+          url: '/api/v1/templates',
+          fixture: 'templates/200.post.create.json',
+        });
+
+        cy.visit(APP_URL);
+
+        openTemplateSettings();
+
+        cy.findByText('Duplicate').click();
+        cy.findByText('Duplicate').click(); // Duplicate confirmation button inside the modal
+
+        cy.findByText('Template duplicated.').should('be.visible');
+      });
     });
 
     describe('"Delete" button', () => {
-      it('renders a confirmation modal when clicked', () => {});
+      it('renders a confirmation modal when clicked', () => {
+        openTemplateSettings();
 
-      it('renders a success message and redirects the user to the list page when the deletion is confirmed', () => {});
+        cy.findByText('Delete').click();
+
+        cy.findByText('Are you sure you want to delete your template?').should('be.visible');
+        cy.findByText('Delete All Versions').should('be.visible');
+        cy.findByText('Cancel').should('be.visible');
+      });
+
+      it('renders a success message and redirects the user to the list page when the deletion is confirmed', () => {
+        cy.stubRequest({
+          method: 'DELETE',
+          url: `/api/v1/templates/${templateId}`,
+          fixture: 'templates/stubbed-template-1/200.delete.json',
+        });
+
+        cy.visit(APP_URL);
+
+        openTemplateSettings();
+
+        cy.findByText('Delete').click();
+        cy.findByText('Delete All Versions').click();
+
+        cy.findByText('Template deleted').should('be.visible');
+      });
     });
   });
 

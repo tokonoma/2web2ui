@@ -1,7 +1,9 @@
 {
   "results": {
     "subject": "Test Template",
-    "from": { "email": "nick@bounce.uat.sparkspam.com" },
-    "text": ""
+    "from": { "email": "fake-user@bounce.uat.sparkspam.com" },
+    "text": "This is some text content.",
+    "html": "<h1>This is some HTML content</h1>",
+    "amp_html": "<h1>This is some AMP HTML content</h1>"
   }
 }
