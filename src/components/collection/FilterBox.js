@@ -28,7 +28,7 @@ export default function CollectionFilterBox(props) {
         suffix={<Search />}
         placeholder={placeholderText}
         onChange={e => onChange(e.target.value)}
-        onBlur={e => onBlur(e.target.value)}
+        onBlur={e => onBlur && onBlur(e.target.value)}
         defaultValue={defaultValue}
       />
     </>
