@@ -1,4 +1,7 @@
 export const initialState = {
+  blacklistsPending: false,
+  blacklists: [],
+  blacklistsError: null,
   monitorsPending: false,
   monitors: [],
   monitorsError: null,
@@ -11,6 +14,13 @@ export const initialState = {
 
 export default (state = initialState, { type, payload, meta }) => {
   switch (type) {
+    case 'LIST_BLACKLISTS_PENDING':
+      return { ...state, blacklistsPending: true, blacklistsError: null };
+    case 'LIST_BLACKLISTS_FAIL':
+      return { ...state, blacklistsPending: false, blacklistsError: payload };
+    case 'LIST_BLACKLISTS_SUCCESS':
+      return { ...state, blacklists: payload, blacklistsPending: false, blacklistsError: null };
+
     case 'LIST_MONITORS_PENDING':
       return { ...state, monitorsPending: true, monitorsError: null };
     case 'LIST_MONITORS_FAIL':

@@ -121,4 +121,15 @@ describe('Action Creator: Blacklist', () => {
       },
     });
   });
+
+  it('it makes request to list blacklists', async () => {
+    await blacklist.listBlacklists();
+    expect(sparkpostApiRequest).toHaveBeenCalledWith({
+      type: 'LIST_BLACKLISTS',
+      meta: {
+        method: 'GET',
+        url: '/v1/blacklist-monitors/blacklists',
+      },
+    });
+  });
 });
