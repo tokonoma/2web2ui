@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
-import CollectionFilterBox from '../Filterbox';
+import CollectionFilterBox from '../FilterBox';
 
 describe('CollectionFilterBox', () => {
   const subject = (props = {}) => render(<CollectionFilterBox {...props} />);
