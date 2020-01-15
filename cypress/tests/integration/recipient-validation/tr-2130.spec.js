@@ -28,5 +28,28 @@ describe('TR-2130', () => {
     cy.findByText('Contact sales').should('have.attr', 'href', 'https://sparkpost.com/sales');
   });
 
-  it('redirects the user to the list page and shows the validated list in an error state if the batch status returns "usage_limit_exceeded"', () => {});
+  it('it renders a "Validation Error" and an alert with "Usage Limit Exceeded" if the batch status on the list page is "usage_limit_exceeded"', () => {
+    cy.server();
+    cy.fixture('recipient-validation/list/400.get.usage-limit-exceeded.json').as('RVFixture');
+    cy.route({
+      url: '/api/v1/recipient-validation/job/fake-list',
+      response: '@RVFixture',
+    }).as('getValidation');
+
+    cy.visit('/recipient-validation/list/fake-list');
+
+    cy.wait('@getValidation');
+
+    cy.queryByText('Validation Error').should('be.visible');
+
+    cy.wait(5000); // Wait for the polling interval as defined on the list progress component
+
+    cy.findByText('Usage limit exceeded').should('be.visible');
+
+    cy.findByText('View Details')
+      .last()
+      .click();
+
+    cy.findByText('Contact sales').should('have.attr', 'href', 'https://sparkpost.com/sales');
+  });
 });

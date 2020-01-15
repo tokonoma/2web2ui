@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import { Tag } from '@sparkpost/matchbox';
 import { Error, CheckCircle, Cached, CloudUpload } from '@sparkpost/matchbox-icons';
 import styles from './JobStatusTag.module.scss';
@@ -9,7 +10,7 @@ const statusProps = {
     icon: Error,
     message: 'Validation Error',
   },
-  usage_limit_reached: {
+  usage_limit_exceeded: {
     className: styles.Failed,
     icon: Error,
     message: 'Validation Error',
@@ -36,7 +37,7 @@ const JobStatusTag = ({ status }) => {
 
   return (
     <Tag>
-      <span className={className}>
+      <span className={classNames(styles.JobStatusTagContent, className)}>
         <Icon />
         &nbsp;
       </span>

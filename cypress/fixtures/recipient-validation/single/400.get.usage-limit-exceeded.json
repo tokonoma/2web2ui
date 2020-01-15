@@ -1,5 +1,1 @@
-{
-  "errors": {
-    "message": "Usage limit exceeded"
-  }
-}
+{ "errors": [{ "message": "Usage limit exceeded" }] }

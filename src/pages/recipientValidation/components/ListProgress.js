@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Button } from '@sparkpost/matchbox';
+import { Button, UnstyledLink } from '@sparkpost/matchbox';
 import { getJobStatus } from 'src/actions/recipientValidation';
 import FocusContainer from 'src/components/focusContainer';
 import PageLink from 'src/components/pageLink';
@@ -23,6 +23,7 @@ const BATCH_STATUS = [
   'performing_did_you_mean',
   'uploading_results_to_s3',
   'success',
+  'usage_limit_exceeded',
 ];
 
 export const ListProgress = ({
@@ -48,12 +49,24 @@ export const ListProgress = ({
               batch_status === 'error' ||
               batch_status === 'success'
             ) {
-              stopPolling(jobId);
               showAlert({
                 type: batch_status === 'success' ? 'success' : 'error',
-                message: `Validation of ${filename} recipient list has completed`,
+                message:
+                  batch_status === 'usage_limit_exceeded'
+                    ? 'Usage limit exceeded'
+                    : `Validation of ${filename} recipient list has completed`,
                 dedupeId: jobId,
+                details:
+                  batch_status === 'usage_limit_exceeded' ? (
+                    <UnstyledLink external to="https://sparkpost.com/sales">
+                      Contact sales
+                    </UnstyledLink>
+                  ) : (
+                    undefined
+                  ),
               });
+
+              stopPolling(jobId);
             }
           })
           .catch(() => {
