@@ -16,13 +16,14 @@ import { prepareCardInfo } from 'src/helpers/billing';
 import PromoCodeNew from '../../components/billing/PromoCodeNew';
 import { FORMS } from 'src/constants';
 import CreditCardSection from './components/CreditCardSection';
-
+import { getSubscription } from 'src/actions/billing';
 const NEXT_STEP = '/dashboard';
 
 export class OnboardingPlanPage extends Component {
   componentDidMount() {
     this.props.getPlans();
     this.props.getBillingCountries();
+    this.props.getSubscription();
   }
 
   componentDidUpdate(prevProps) {
@@ -166,4 +167,5 @@ export default connect(choosePlanMSTP(FORMS.JOIN_PLAN), {
   getBillingCountries,
   verifyPromoCode,
   clearPromoCode,
+  getSubscription,
 })(reduxForm(formOptions)(OnboardingPlanPage));
