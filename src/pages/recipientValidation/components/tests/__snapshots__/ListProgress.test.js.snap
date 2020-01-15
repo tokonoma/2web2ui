@@ -43,7 +43,7 @@ exports[`ListProgress renders status and progress bar 1`] = `
         className="Progress"
         style={
           Object {
-            "width": "20%",
+            "width": "18.181818181818183%",
           }
         }
       />

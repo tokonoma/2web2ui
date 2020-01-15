@@ -77,26 +77,6 @@ describe('ListProgress', () => {
     subject({ getJobStatus, showAlert, startPolling, stopPolling });
   });
 
-  it('stops polling and shows an error alert when validation return as "usage_limit_exceeded"', done => {
-    const getJobStatus = jest.fn(() => Promise.resolve({ batch_status: 'usage_limit_exceeded' }));
-    const showAlert = jest.fn();
-    const stopPolling = jest.fn();
-
-    const startPolling = jest.fn(async ({ action }) => {
-      await action();
-      expect(getJobStatus).toHaveBeenCalledWith('A1C1_D1C1');
-      expect(stopPolling).toHaveBeenCalledWith('A1C1_D1C1');
-      expect(showAlert).toHaveBeenCalledWith({
-        type: 'error',
-        message: 'Validation of big-test.csv recipient list has completed',
-        dedupeId: 'A1C1_D1C1',
-      });
-      done();
-    });
-
-    subject({ getJobStatus, showAlert, startPolling, stopPolling });
-  });
-
   it('stops polling when validation explodes', done => {
     const getJobStatus = jest.fn(() => Promise.reject());
     const showAlert = jest.fn(() => done());
