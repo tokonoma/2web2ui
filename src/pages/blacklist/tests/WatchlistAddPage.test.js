@@ -4,7 +4,7 @@ import { MemoryRouter } from 'react-router-dom';
 
 import { WatchlistAddPage } from '../WatchlistAddPage';
 
-const ipOrSendingDomainText = 'Add IP or Sending Domain';
+const ipOrSendingDomainText = 'IP or Sending Domain';
 const saveText = 'Save';
 const saveAndContinueText = 'Save and Add Another';
 

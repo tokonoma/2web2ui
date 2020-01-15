@@ -32,7 +32,9 @@ export const WatchlistPage = props => {
       return (
         <div data-id="error-banner">
           <ApiErrorBanner
-            message={'Sorry, we seem to have had some trouble loading your blacklist monitors.'}
+            message={
+              'Sorry, we seem to have had some trouble loading your watched IPs and domains.'
+            }
             errorDetails={error.message}
             reload={() => {
               listMonitors();
@@ -58,7 +60,7 @@ export const WatchlistPage = props => {
     <Page
       title="Watched IPs and Domains"
       breadcrumbAction={{
-        content: 'Blacklist Incidents',
+        content: 'Blacklisting Incidents',
         to: '/blacklist/incidents',
         component: Link,
       }}
@@ -76,8 +78,8 @@ export const WatchlistPage = props => {
       }
     >
       <p className={styles.Description}>
-        Monitor blacklists for your domains and IPs so you know when your deliverability will be
-        affected.
+        Below are your watched IP addresses and domains. Select any one below to learn more or make
+        updates.
       </p>
       {renderContent()}
       <StopMonitoringModal monitorToDelete={monitorToDelete} closeModal={closeModal} />

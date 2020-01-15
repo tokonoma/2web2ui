@@ -76,8 +76,8 @@ export const WatchlistAddPage = ({
         <form onSubmit={handleSubmit}>
           <TextField
             id="watchlist-item-input"
-            label="Add IP or Sending Domain"
-            placeholder="10.20.30.40 or email.example.com"
+            label="IP or Sending Domain"
+            placeholder="Add any IPs or domains you want to keep an eye on"
             onChange={onChange}
             error={errorMessage}
             value={resource}

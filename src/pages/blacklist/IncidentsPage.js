@@ -97,8 +97,8 @@ export const IncidentsPage = props => {
         image: Users,
         content: (
           <p>
-            Monitor blacklists for your domains and IPs so you know when your deliverability will be
-            affected.
+            Keep an eye on your Domains and IPs and maintain a healthy sender reputation and improve
+            your deliverability
           </p>
         ),
       }}
@@ -110,8 +110,8 @@ export const IncidentsPage = props => {
       }}
     >
       <p className={styles.Description}>
-        Monitor blacklists for your domains and IPs so you know when your deliverability will be
-        affected.
+        Check the current status of blacklists and learn more about what actions you can take to
+        remedy and prevent future blacklisting.
       </p>
       {renderContent()}
     </Page>

@@ -18,6 +18,11 @@ describe('Stop Monitoring Modal', () => {
     const { queryByText } = subject();
 
     expect(queryByText('Stop Monitoring sparkpost.io')).toBeInTheDocument();
+    expect(
+      queryByText(
+        "Removing this IP from your watchlist means you won't get notified of changes, but don't worry you can always add it again later.",
+      ),
+    ).toBeInTheDocument();
     expect(queryByText('Stop Monitoring')).toBeInTheDocument();
   });
 

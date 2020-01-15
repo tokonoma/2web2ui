@@ -25,9 +25,15 @@ export const StopMonitoringModal = ({
   };
   const renderContent = () => {
     return (
-      <Button className={styles.Confirm} disabled={isPending} onClick={confirmAction} primary>
-        Stop Monitoring
-      </Button>
+      <>
+        <p>
+          Removing this IP from your watchlist means you won't get notified of changes, but don't
+          worry you can always add it again later.
+        </p>
+        <Button className={styles.Confirm} disabled={isPending} onClick={confirmAction} primary>
+          Stop Monitoring
+        </Button>
+      </>
     );
   };
 
