@@ -12,7 +12,7 @@ import _ from 'lodash';
 
 export class DetailsPage extends Component {
   state = {
-    isDeleteModalOpen: false
+    isDeleteModalOpen: false,
   };
 
   componentDidMount() {
@@ -43,7 +43,7 @@ export class DetailsPage extends Component {
     });
   };
 
-  subaccountIdToString= (id) => {
+  subaccountIdToString = id => {
     const { subaccounts } = this.props;
     if (id === -1) {
       return 'Master and all subaccounts';
@@ -51,7 +51,7 @@ export class DetailsPage extends Component {
     if (id === 0) {
       return 'Master account';
     }
-    const matchedSubaccount = subaccounts.find((subaccount) => subaccount.id === id) || {};
+    const matchedSubaccount = subaccounts.find(subaccount => subaccount.id === id) || {};
     return `${matchedSubaccount.name} (${matchedSubaccount.id})`;
   };
 
@@ -61,39 +61,54 @@ export class DetailsPage extends Component {
     const { name } = alert;
 
     if (loading) {
-      return <Loading/>;
+      return <Loading />;
     }
 
     if (error) {
-      return (
-        <RedirectAndAlert
-          to='/alerts'
-          alert={{ type: 'error', message: error.message }}
-        />
-      );
+      return <RedirectAndAlert to="/alerts" alert={{ type: 'error', message: error.message }} />;
     }
+
     return (
       <Page
         title={name || 'Alert'}
         breadcrumbAction={{ content: 'Back to Alerts', to: '/alerts', component: Link }}
         primaryArea={
           <>
-          <Button flat component={Link} to={`/alerts/create/${id}`}><ContentCopy className={styles.Icon}/>Duplicate</Button>
-          <Button flat onClick={this.openDeleteModal}><Delete className={styles.Icon}/>Delete</Button>
-          </>}
-      >
-        {!_.isEmpty(alert) &&
-          <AlertDetails alert={alert} id={id} subaccountIdToString={this.subaccountIdToString} hasSubaccounts={hasSubaccounts}/>
+            <Button flat component={Link} to={`/alerts/create/${id}`}>
+              <ContentCopy className={styles.Icon} />
+              Duplicate
+            </Button>
+            <Button flat onClick={this.openDeleteModal}>
+              <Delete className={styles.Icon} />
+              Delete
+            </Button>
+          </>
         }
-        <AlertIncidents
-          alert={alert}
-          incidents={incidents}
-          subaccountIdToString={this.subaccountIdToString}
-        />
+      >
+        {!_.isEmpty(alert) && (
+          <AlertDetails
+            alert={alert}
+            id={id}
+            subaccountIdToString={this.subaccountIdToString}
+            hasSubaccounts={hasSubaccounts}
+          />
+        )}
+        {alert.metric !== 'blacklist' && (
+          <AlertIncidents
+            alert={alert}
+            incidents={incidents}
+            subaccountIdToString={this.subaccountIdToString}
+          />
+        )}
         <DeleteModal
           open={isDeleteModalOpen}
-          title='Are you sure you want to delete this alert?'
-          content={<p>The alert "<strong>{name}</strong>" will be permanently removed. This cannot be undone.</p>}
+          title="Are you sure you want to delete this alert?"
+          content={
+            <p>
+              The alert "<strong>{name}</strong>" will be permanently removed. This cannot be
+              undone.
+            </p>
+          }
           onDelete={this.handleDelete}
           onCancel={this.closeDeleteModal}
           isPending={deletePending}
