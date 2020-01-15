@@ -43,7 +43,6 @@ describe('Action Creator: Blacklist', () => {
         params: {
           resources: '123.123.123.1',
           from: '2019-01-01',
-          limit: 4,
         },
       },
     });
@@ -60,7 +59,6 @@ describe('Action Creator: Blacklist', () => {
         params: {
           from: '2019-01-01',
           blacklists: 'spamhaus',
-          limit: 4,
         },
       },
     });
