@@ -96,9 +96,9 @@ export const IncidentsCollection = props => {
       filterBox={{
         show: true,
         exampleModifiers: ['resource', 'blacklist_name'],
+        initialValue: search,
         itemToStringKeys: ['resource', 'blacklist_name'],
         wrapper: props => <div className={styles.FilterBox}>{props}</div>,
-        defaultValue: search,
         onBlur: value => updateTextField(value),
       }}
       defaultSortColumn="occurred_at"
