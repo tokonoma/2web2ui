@@ -71,18 +71,67 @@ describe('The templates edit draft page', () => {
         });
     });
 
-    it('renders a success message when the user changes a value in the form and then clicks the "Update Settings" button', () => {});
+    it('renders a success message when the user changes a value in the form and then clicks the "Update Settings" button', () => {
+      cy.stubRequest({
+        method: 'PUT',
+        url: '/api/v1/templates/stubbed-template-1',
+        fixture: 'templates/stubbed-template-1/200.post.json',
+      });
+
+      cy.visit(APP_URL);
+
+      cy.findByText('Template Settings').click();
+
+      cy.findByLabelText('Template Name').type('Making Some Changes');
+
+      cy.findByText('Update Settings').click();
+
+      cy.findByText('Template settings updated.').should('be.visible');
+    });
   });
 
   describe('template actions', () => {
-    it('renders with a "Save and Publish" button', () => {});
+    it('renders with a "Save and Publish" button', () => {
+      cy.visit(APP_URL);
 
-    it('renders a popover with "Save and Publish", "Save Draft", "Duplicate", and "Delete" buttons when clicked', () => {});
+      cy.findByText('Save and Publish').should('be.visible');
+    });
+
+    it('renders a popover with "Save and Publish", "Save Draft", "Duplicate", and "Delete" buttons when clicked', () => {
+      cy.visit(APP_URL);
+
+      cy.findAllByText('Save and Publish').should('have.length', 1);
+
+      cy.findByText('Open Menu').click({ force: true }); // The content is visually hidden, so `force: true` is needed here
+
+      cy.findAllByText('Save and Publish').should('have.length', 2);
+      cy.findByText('Save Draft').should('be.visible');
+      cy.findByText('Duplicate').should('be.visible');
+      cy.findByText('Delete').should('be.visible');
+    });
 
     describe('"Save and Publish" button', () => {
-      it('renders a confirmation modal when clicked', () => {});
+      it('renders a confirmation modal when clicked', () => {
+        cy.visit(APP_URL);
 
-      it('redirects to the published view and renders a success message when confirmed', () => {});
+        cy.findByText('Save and Publish').click();
+
+        cy.get('#modal-portal').within(() => {
+          cy.findByText('Are you sure you want to publish your template?').should('be.visible');
+          cy.findByText('Save and Publish').should('be.visible');
+          cy.findByText('Cancel').should('be.visible');
+        });
+      });
+
+      it.only('redirects to the published view and renders a success message when confirmed', () => {
+        cy.visit(APP_URL);
+
+        cy.findByText('Save and Publish').click();
+
+        cy.get('#modal-portal').within(() => {
+          cy.findAllByText('Save and Publish').click();
+        });
+      });
     });
 
     describe('"Save Draft" button', () => {
