@@ -75,7 +75,7 @@ describe('The templates edit draft page', () => {
       cy.stubRequest({
         method: 'PUT',
         url: '/api/v1/templates/stubbed-template-1',
-        fixture: 'templates/stubbed-template-1/200.post.json',
+        fixture: 'templates/stubbed-template-1/200.put.json',
       });
 
       cy.visit(APP_URL);
@@ -102,7 +102,7 @@ describe('The templates edit draft page', () => {
 
       cy.findAllByText('Save and Publish').should('have.length', 1);
 
-      cy.findByText('Open Menu').click({ force: true }); // The content is visually hidden, so `force: true` is needed here
+      cy.findByText('Open Menu').click({ force: true }); // The content is visually hidden (intentionally!), so `force: true` is needed here
 
       cy.findAllByText('Save and Publish').should('have.length', 2);
       cy.findByText('Save Draft').should('be.visible');
@@ -123,7 +123,7 @@ describe('The templates edit draft page', () => {
         });
       });
 
-      it.only('redirects to the published view and renders a success message when confirmed', () => {
+      it('redirects to the published view and renders a success message when confirmed', () => {
         cy.visit(APP_URL);
 
         cy.findByText('Save and Publish').click();
@@ -131,11 +131,28 @@ describe('The templates edit draft page', () => {
         cy.get('#modal-portal').within(() => {
           cy.findAllByText('Save and Publish').click();
         });
+
+        cy.findByText('Template published').should('be.visible');
+        cy.url().should('include', 'published');
       });
     });
 
     describe('"Save Draft" button', () => {
-      it('renders a success message when clicked', () => {});
+      it('renders a success message when clicked and updates the state of the draft to "Saved"', () => {
+        cy.stubRequest({
+          method: 'PUT',
+          url: '/api/v1/templates/stubbed-template-1',
+          fixture: 'templates/stubbed-template-1/200.put.json',
+        });
+
+        cy.visit(APP_URL);
+
+        cy.findByText('Open Menu').click({ force: true }); // The content is visually hidden (intentionally!), so `force: true` is needed here
+
+        cy.findByText('Save Draft').click();
+
+        cy.findByText('Draft saved').should('be.visible');
+      });
 
       it('updates the state of the draft to "Saved" after an unsaved change has been made to the template content', () => {});
     });
