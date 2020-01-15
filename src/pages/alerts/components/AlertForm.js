@@ -135,7 +135,7 @@ export class AlertForm extends Component {
                     disabled={submitting || !isNewAlert}
                   />
                 </div>
-                {metric !== '' && (
+                {metric !== '' && !formSpec.hideEvaluator && (
                   <div className={styles.Evaluator}>
                     <EvaluatorFields
                       key={metric}
@@ -155,7 +155,9 @@ export class AlertForm extends Component {
                         </small>
                       </h5>
                     </label>
-                    {hasSubaccounts && <SubaccountField disabled={submitting} />}
+                    {!formSpec.hideSubaccountFilter && hasSubaccounts && (
+                      <SubaccountField disabled={submitting} />
+                    )}
                     <FilterFields disabled={submitting} />
                   </div>
                 )}

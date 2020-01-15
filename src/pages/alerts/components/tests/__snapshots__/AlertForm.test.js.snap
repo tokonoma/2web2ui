@@ -66,6 +66,10 @@ exports[`Alert Form Component should render the alert form component correctly 1
                     "label": "Soft Bounce Rate",
                     "value": "soft_bounce_rate",
                   },
+                  Object {
+                    "label": "Blacklists",
+                    "value": "blacklist",
+                  },
                 ]
               }
               validate={[Function]}
