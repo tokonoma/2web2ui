@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { render } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 import IncidentsCollection from '../IncidentsCollection';
 
 describe('Blacklist Component: IncidentsCollection', () => {
@@ -43,5 +43,25 @@ describe('Blacklist Component: IncidentsCollection', () => {
     const { queryByText } = subject({ incidents: [] });
     expect(queryByText('There are no incidents for your date range selection')).toBeInTheDocument();
     expect(queryByText('Last 7 Days')).toBeInTheDocument();
+  });
+
+  it('displays the search text in the text field', () => {
+    const { queryByDisplayValue } = subject({ search: 'test-search' });
+    expect(queryByDisplayValue('test-search')).toBeInTheDocument();
+  });
+
+  it('calls the updateTextField on blur of the search input', () => {
+    const mockUpdateTextField = jest.fn();
+    const { queryByDisplayValue } = subject({
+      search: 'test-search',
+      updateTextField: mockUpdateTextField,
+    });
+    const target = queryByDisplayValue('test-search');
+    fireEvent.change(target, {
+      target: { value: 'new-test-search' },
+    });
+
+    fireEvent.blur(target);
+    expect(mockUpdateTextField).toBeCalledWith('new-test-search');
   });
 });

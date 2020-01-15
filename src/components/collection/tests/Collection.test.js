@@ -231,5 +231,12 @@ describe('Component: Collection', () => {
       instance.maybeUpdateQueryString();
       expect(pushStub).toHaveBeenCalledWith('some-pathname?other=cool&page=1&perPage=10');
     });
+
+    it('should hydrate filter box with initial value', () => {
+      props.filterBox = { show: true, initialValue: 'example search' };
+      addRows(3);
+      setupCollection();
+      expect(wrapper.find('CollectionFilterBox')).toHaveProp('initialValue', 'example search');
+    });
   });
 });

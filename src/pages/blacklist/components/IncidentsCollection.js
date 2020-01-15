@@ -9,13 +9,6 @@ import DatePicker from 'src/components/datePicker/DatePicker';
 
 const RELATIVE_DATE_OPTIONS = ['day', '7days', '30days', '90days', 'custom'];
 
-const filterBoxConfig = {
-  show: true,
-  exampleModifiers: ['resource', 'blacklist_name'],
-  itemToStringKeys: ['resource', 'blacklist_name'],
-  wrapper: props => <div className={styles.FilterBox}>{props}</div>,
-};
-
 const columns = [
   { label: 'Details' },
   { label: 'Listed', sortKey: 'occurred_at' },
@@ -58,7 +51,7 @@ const TableWrapper = props => (
 );
 
 export const IncidentsCollection = props => {
-  const { incidents, dateOptions, updateDateRange } = props;
+  const { incidents, dateOptions, updateDateRange, search, updateTextField } = props;
 
   const renderHeader = ({ textFieldComponent }) => (
     <Grid>
@@ -100,7 +93,14 @@ export const IncidentsCollection = props => {
       rows={incidents}
       getRowData={getRowData}
       pagination={true}
-      filterBox={filterBoxConfig}
+      filterBox={{
+        show: true,
+        exampleModifiers: ['resource', 'blacklist_name'],
+        initialValue: search,
+        itemToStringKeys: ['resource', 'blacklist_name'],
+        wrapper: props => <div className={styles.FilterBox}>{props}</div>,
+        onBlur: value => updateTextField(value),
+      }}
       defaultSortColumn="occurred_at"
       defaultSortDirection="desc"
       saveCsv={false}

@@ -9,9 +9,14 @@ import { Users } from 'src/components/images';
 import { listMonitors, listIncidents } from 'src/actions/blacklist';
 import { selectIncidentsList } from 'src/selectors/blacklist';
 import { getRelativeDates } from 'src/helpers/date';
+import usePageFilters from 'src/hooks/usePageFilters';
 import IncidentsCollection from './components/IncidentsCollection';
 import styles from './IncidentsPage.module.scss';
 import CongratsBanner from './components/CongratsBanner';
+
+const filterWhitelist = {
+  search: {},
+};
 
 export const IncidentsPage = props => {
   const { loading, error, listMonitors, listIncidents, monitors, incidents } = props;
@@ -35,6 +40,16 @@ export const IncidentsPage = props => {
       setTo(dateRangeFromRelativeDate.to);
       setFrom(dateRangeFromRelativeDate.from);
       setRelativeRange(dateRangeFromRelativeDate.relativeRange);
+    }
+  };
+
+  const { filters, updateFilters } = usePageFilters(filterWhitelist);
+
+  const updateTextField = newSearch => {
+    if (filters.search !== newSearch) {
+      updateFilters({
+        search: newSearch,
+      });
     }
   };
 
@@ -84,6 +99,8 @@ export const IncidentsPage = props => {
           incidents={incidents}
           dateOptions={dateOptions}
           updateDateRange={updateDateRange}
+          updateTextField={updateTextField}
+          search={filters.search}
         />
       </div>
     );

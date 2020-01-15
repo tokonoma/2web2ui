@@ -24,11 +24,16 @@ export class Collection extends Component {
   };
 
   componentDidMount() {
-    const { defaultPerPage, location } = this.props;
+    const { defaultPerPage, filterBox, location } = this.props;
+
     this.setState({
       perPage: defaultPerPage,
       currentPage: Number(qs.parse(location.search).page) || 1,
     });
+
+    if (filterBox.show && filterBox.initialValue) {
+      this.handleFilterChange(filterBox.initialValue);
+    }
   }
 
   componentDidUpdate(prevProps) {
@@ -105,9 +110,11 @@ export class Collection extends Component {
 
   renderFilterBox() {
     const { filterBox, rows } = this.props;
+
     if (filterBox.show) {
       return <FilterBox {...filterBox} rows={rows} onChange={this.debouncedHandleFilterChange} />;
     }
+
     return null;
   }
 

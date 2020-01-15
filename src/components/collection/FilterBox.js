@@ -5,8 +5,9 @@ import { getRandomExampleSearch } from './helpers/exampleSearch';
 import styles from './FilterBox.module.scss';
 
 export default function CollectionFilterBox(props) {
-  const { placeholder, wrapper, onChange } = props;
+  const { initialValue, placeholder, wrapper, onChange, onBlur = () => {} } = props;
   const placeholderText = placeholder || `Filter results e.g. ${getRandomExampleSearch(props)}`;
+
   const text = (
     <>
       <Label id="collection-filter-box" className={styles.FilterBoxLabel}>
@@ -19,6 +20,8 @@ export default function CollectionFilterBox(props) {
         suffix={<Search />}
         placeholder={placeholderText}
         onChange={e => onChange(e.target.value)}
+        onBlur={e => onBlur(e.target.value)}
+        defaultValue={initialValue}
       />
     </>
   );

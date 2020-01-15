@@ -75,7 +75,7 @@ export function getIncident(incidentId) {
   });
 }
 
-export function listIncidentsForResource(resource, from = '2019-01-01', limit = 4) {
+export function listIncidentsForResource(resource, from = '2019-01-01') {
   return sparkpostApiRequest({
     type: 'LIST_INCIDENTS_FOR_RESOURCE',
     meta: {
@@ -84,14 +84,13 @@ export function listIncidentsForResource(resource, from = '2019-01-01', limit = 
       showErrorAlert: false,
       params: {
         resources: resource,
-        limit,
         from,
       },
     },
   });
 }
 
-export function listIncidentsForBlacklist(blacklist, from = '2019-01-01', limit = 4) {
+export function listIncidentsForBlacklist(blacklist, from = '2019-01-01') {
   return sparkpostApiRequest({
     type: 'LIST_INCIDENTS_FOR_BLACKLIST',
     meta: {
@@ -100,7 +99,6 @@ export function listIncidentsForBlacklist(blacklist, from = '2019-01-01', limit 
       showErrorAlert: false,
       params: {
         blacklists: blacklist,
-        limit,
         from,
       },
     },

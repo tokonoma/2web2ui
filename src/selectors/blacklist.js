@@ -45,7 +45,11 @@ export const selectRelatedIncidentsForResource = createSelector(
   [getIncidentsForResource, getIncident],
   (incidents, currentIncident) =>
     incidents
-      .filter(incident => incident.id !== currentIncident.id)
+      .filter(
+        incident =>
+          incident.id !== currentIncident.id &&
+          incident.blacklist_name !== currentIncident.blacklist_name,
+      )
       .map(incident => enrichIncident(incident))
       .slice(0, 3),
 );
@@ -54,7 +58,10 @@ export const selectRelatedIncidentsForBlacklist = createSelector(
   [getIncidentsForBlacklist, getIncident],
   (incidents, currentIncident) =>
     incidents
-      .filter(incident => incident.id !== currentIncident.id)
+      .filter(
+        incident =>
+          incident.id !== currentIncident.id && incident.resource !== currentIncident.resource,
+      )
       .map(incident => enrichIncident(incident))
       .slice(0, 3),
 );
