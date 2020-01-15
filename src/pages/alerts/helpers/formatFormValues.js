@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { REALTIME_FILTERS, NOTIFICATION_CHANNELS } from '../constants/formConstants';
+import { NOTIFICATION_CHANNELS } from '../constants/formConstants';
 import { getFormSpec } from './alertForm';
 import { multilineStringToArray } from 'src/helpers/string';
 
@@ -10,6 +10,8 @@ export default function formatFormValues(values) {
     'operator',
     'sending_ip',
     'mailbox_provider',
+    'provider',
+    'resource',
     'sending_domain',
     'single_filter',
     ...NOTIFICATION_CHANNELS,
@@ -30,26 +32,23 @@ export default function formatFormValues(values) {
   For multi: Loops through the realtime filters and adds the filters that have values.
   By default, return an empty array.
    */
-  const { filterType } = getFormSpec(metric);
+  const { filterOptions, filterType, hideEvaluator } = getFormSpec(metric);
+
   const getFiltersMap = {
     single: () => (single_filter.filter_type === 'none' ? [] : [single_filter]),
     multi: () =>
-      REALTIME_FILTERS.map(
-        filter =>
-          values[filter].length > 0 && {
-            filter_type: filter,
-            filter_values: values[filter],
-          },
-      ).filter(Boolean),
+      filterOptions
+        .map(
+          ({ value: filter_type }) =>
+            values[filter_type].length > 0 && {
+              filter_type,
+              filter_values: values[filter_type],
+            },
+        )
+        .filter(Boolean),
     default: () => [],
   };
   const filters = (getFiltersMap[filterType] || getFiltersMap.default)();
-
-  const threshold_evaluator = {
-    operator,
-    source,
-    value,
-  };
 
   const channels = {};
   const emails = (values.emails || '').trim();
@@ -72,7 +71,7 @@ export default function formatFormValues(values) {
     subaccounts: any_subaccount ? undefined : subaccounts,
     any_subaccount,
     filters,
-    threshold_evaluator,
+    threshold_evaluator: hideEvaluator ? {} : { operator, source, value },
     channels,
   };
 

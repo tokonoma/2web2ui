@@ -16,7 +16,7 @@ describe('Page: Alert Details', () => {
     loading: false,
     id: 'alert-id',
     deletePending: false,
-    history: { push: jest.fn() }
+    history: { push: jest.fn() },
   };
 
   let wrapper;
@@ -46,7 +46,7 @@ describe('Page: Alert Details', () => {
   });
 
   it('should redirect to List page if fails to load', () => {
-    wrapper.setProps({ error: { message: 'this failed' }});
+    wrapper.setProps({ error: { message: 'this failed' } });
     expect(wrapper.find('RedirectAndAlert')).toHaveLength(1);
     expect(wrapper.find('Page')).not.toExist();
   });
@@ -59,7 +59,12 @@ describe('Page: Alert Details', () => {
 
   it('should toggle delete modal upon clicking delete Button', () => {
     expect(wrapper).toHaveState('isDeleteModalOpen', false);
-    wrapper.find('Page').dive().find('Button').at(1).simulate('click');
+    wrapper
+      .find('Page')
+      .dive()
+      .find('Button')
+      .at(1)
+      .simulate('click');
     expect(wrapper.find('DeleteModal').prop('open')).toEqual(true);
   });
 
@@ -67,5 +72,10 @@ describe('Page: Alert Details', () => {
     await wrapper.instance().handleDelete();
     expect(props.deleteAlert).toHaveBeenCalledWith({ id: 'alert-id' });
     expect(props.showUIAlert).toHaveBeenCalled();
+  });
+
+  it('should not display alert incidents for blacklist alerts', () => {
+    wrapper.setProps({ alert: { name: 'My Blacklist Alert', metric: 'blacklist' } });
+    expect(wrapper.find('AlertIncidents')).not.toExist();
   });
 });

@@ -86,6 +86,17 @@ const TEST_CASES = {
     payload: { errors: [{ message: 'Some error occurred' }] },
     type: 'DELETE_MONITOR_FAIL',
   },
+  'list blacklists pending': {
+    type: 'LIST_BLACKLISTS_PENDING',
+  },
+  'list blacklists success': {
+    payload: { fakeData: true },
+    type: 'LIST_BLACKLISTS_SUCCESS',
+  },
+  'list blacklists fail': {
+    payload: { errors: [{ message: 'Some error occurred' }] },
+    type: 'LIST_BLACKLISTS_FAIL',
+  },
 };
 
 cases(

@@ -1,5 +1,14 @@
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
 
+export const listBlacklists = () =>
+  sparkpostApiRequest({
+    type: 'LIST_BLACKLISTS',
+    meta: {
+      method: 'GET',
+      url: '/v1/blacklist-monitors/blacklists',
+    },
+  });
+
 export function listMonitors() {
   return sparkpostApiRequest({
     type: 'LIST_MONITORS',

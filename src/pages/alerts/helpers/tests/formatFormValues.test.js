@@ -100,6 +100,38 @@ const testCases = {
       },
     },
   },
+  'for blacklist alert': {
+    formData: {
+      name: 'foo',
+      metric: 'blacklist',
+      subaccounts: [], // default
+      provider: ['abuseat.org', 'new.spam.dnsbl.sorbs.net'],
+      resource: ['1.2.3.4', 'example.com'],
+      emails,
+      slack: '',
+      webhook: '',
+      muted: false,
+    },
+    apiData: {
+      name: 'foo',
+      metric: 'blacklist',
+      any_subaccount: undefined,
+      subaccounts: [-1],
+      filters: [
+        {
+          filter_type: 'provider',
+          filter_values: ['abuseat.org', 'new.spam.dnsbl.sorbs.net'],
+        },
+        {
+          filter_type: 'resource',
+          filter_values: ['1.2.3.4', 'example.com'],
+        },
+      ],
+      threshold_evaluator: {},
+      channels: { emails: emailAsArray },
+      muted: false,
+    },
+  },
 };
 
 describe('formatFormValues', () => {
