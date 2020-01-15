@@ -47,7 +47,6 @@ import {
   isAws,
   isCustomBilling,
   isEnterprise,
-  isSelfServeBilling,
   isAccountUiOptionSet,
 } from 'src/helpers/conditions/account';
 import { isAzure, isHeroku, isSubaccountUser } from 'src/helpers/conditions/user';
@@ -594,7 +593,7 @@ const routes = [
   {
     path: '/account/billing/enable-automatic',
     component: billing.EnableAutomaticBillingPage,
-    condition: all(hasGrants('account/manage'), not(isSelfServeBilling), isCustomBilling),
+    condition: all(hasGrants('account/manage')),
     layout: App,
     title: 'Billing | Enable Automatic Billing',
     supportDocSearch: 'upgrade account',
