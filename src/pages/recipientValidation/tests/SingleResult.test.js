@@ -2,7 +2,6 @@ import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { render } from '@testing-library/react';
 import { SingleResult } from '../SingleResult';
-import { UnstyledLink } from '@sparkpost/matchbox';
 
 describe('SingleResult', () => {
   const subject = props => {
@@ -55,31 +54,6 @@ describe('SingleResult', () => {
       expect(mockShowAlert).toHaveBeenCalledWith({
         message: 'Mock error message',
         type: 'error',
-      });
-      expect(mockPush).toHaveBeenCalledWith('/recipient-validation/single');
-    });
-  });
-
-  it('should redirect and show specific error content when the "Usage limit exceeded" error is received', () => {
-    const promise = Promise.reject({ message: 'Usage limit exceeded' });
-    const mockShowAlert = jest.fn();
-    const mockPush = jest.fn();
-    const mockHistory = { push: mockPush };
-    subject({
-      showAlert: mockShowAlert,
-      history: mockHistory,
-      singleAddress: jest.fn(() => promise),
-    });
-
-    return promise.catch(() => {
-      expect(mockShowAlert).toHaveBeenCalledWith({
-        type: 'error',
-        message: 'Usage limit exceeded',
-        details: (
-          <UnstyledLink external to="https://sparkpost.com/sales">
-            Contact sales
-          </UnstyledLink>
-        ),
       });
       expect(mockPush).toHaveBeenCalledWith('/recipient-validation/single');
     });
