@@ -7,7 +7,7 @@ import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { selectCondition } from 'src/selectors/accessConditionState';
 import { getSubscription } from 'src/actions/billing';
-function EnableAutomaticBillingPage({ subscription, isSelfServeBilling, getSubscription }) {
+export function EnableAutomaticBillingPage({ subscription, isSelfServeBilling, getSubscription }) {
   useEffect(() => {
     getSubscription();
   }, [getSubscription]);

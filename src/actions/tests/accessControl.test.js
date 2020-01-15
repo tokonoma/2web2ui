@@ -22,7 +22,7 @@ describe('Action: Initialize Access Control', () => {
     expect(getPlans).toHaveBeenCalledWith({ meta });
     expect(getCurrentUser).toHaveBeenCalledWith({ meta });
     expect(getGrants).toHaveBeenCalledWith({ role: 'EQUISAPIEN', meta });
-    expect(dispatchMock).toHaveBeenCalledTimes(6);
+    expect(dispatchMock).toHaveBeenCalledTimes(5);
     expect(dispatchMock).toHaveBeenLastCalledWith({
       type: 'ACCESS_CONTROL_READY',
     });
