@@ -4,7 +4,7 @@ import { Banner } from '@sparkpost/matchbox';
 const CongratsBanner = ({
   onDismiss,
   title = 'Congratulations! You are not currently on a Blacklist',
-  content = 'No blacklist issues detected. Keep up the great work!',
+  content = 'Nice work keeping your sending reputation squeaky clean!',
 }) => {
   return (
     <div data-id="congrats-banner">
