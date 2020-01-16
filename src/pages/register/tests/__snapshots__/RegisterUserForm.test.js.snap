@@ -17,7 +17,7 @@ exports[`render 1`] = `
     component={[Function]}
     data-lpignore={true}
     disabled={false}
-    helpText="Passwords must be at least 8 characters long."
+    helpText="Passwords must be at least 12 characters long."
     label="Password"
     name="password"
     type="password"
@@ -30,7 +30,8 @@ exports[`render 1`] = `
   />
   <p>
     <small>
-      By joining, you agree to SparkPost's 
+      By joining, you agree to SparkPost's
+       
       <UnstyledLink
         external={true}
         to="https://www.sparkpost.com/policies/tou"
@@ -67,7 +68,7 @@ exports[`submitting 1`] = `
     component={[Function]}
     data-lpignore={true}
     disabled={true}
-    helpText="Passwords must be at least 8 characters long."
+    helpText="Passwords must be at least 12 characters long."
     label="Password"
     name="password"
     type="password"
@@ -80,7 +81,8 @@ exports[`submitting 1`] = `
   />
   <p>
     <small>
-      By joining, you agree to SparkPost's 
+      By joining, you agree to SparkPost's
+       
       <UnstyledLink
         external={true}
         to="https://www.sparkpost.com/policies/tou"

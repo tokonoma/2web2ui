@@ -106,11 +106,11 @@ export class JoinForm extends Component {
           name="password"
           component={TextFieldWrapper}
           label="Password"
-          validate={[required, minLength(8), endsWithWhitespace]}
+          validate={[required, minLength(12), endsWithWhitespace]}
           disabled={!reCaptchaReady || loading}
           type="password"
           autoComplete="new-password"
-          placeholder="••••••••••"
+          placeholder="••••••••••••"
         />
 
         <Checkbox.Group>
