@@ -19,9 +19,6 @@ describe('Selector: Access Condition State', () => {
           { code: 'plan2', name: 'Plan 2' },
           { code: 'plan3', name: 'Plan 3' },
         ],
-        subscription: {
-          type: 'active',
-        },
       },
       currentUser: {},
       accessControlReady: false,
