@@ -222,6 +222,8 @@ describe('SingleResult', () => {
         is_role: true,
         is_disposable: true,
         is_free: false,
+        reason: 'fake reason',
+        did_you_mean: 'fake-email@gmail.com',
       },
     });
 
@@ -231,6 +233,12 @@ describe('SingleResult', () => {
       normalizeWhitespace: true,
     });
     expect(queryByTestId('is_free-value')).toHaveTextContent('false', {
+      normalizeWhitespace: true,
+    });
+    expect(queryByTestId('reason-value')).toHaveTextContent('fake reason', {
+      normalizeWhitespace: true,
+    });
+    expect(queryByTestId('did_you_mean-value')).toHaveTextContent('fake-email@gmail.com', {
       normalizeWhitespace: true,
     });
   });

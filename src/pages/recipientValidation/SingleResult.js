@@ -216,7 +216,7 @@ function ResultCodeBlock({ data }) {
       )}
       <TabCharacter />
       <TabCharacter />
-      "valid": <WhiteText data-id="valid-value">{valid && valid.toString()}</WhiteText>,<br />
+      "valid": <WhiteText data-id="valid-value">{valid.toString()}</WhiteText>,<br />
       {reason && (
         <>
           <TabCharacter />
@@ -227,18 +227,16 @@ function ResultCodeBlock({ data }) {
       )}
       <TabCharacter />
       <TabCharacter />
-      "is_role": <WhiteText data-id="is_role-value">{is_role && is_role.toString()}</WhiteText>,
+      "is_role": <WhiteText data-id="is_role-value">{is_role.toString()}</WhiteText>,
       <br />
       <TabCharacter />
       <TabCharacter />
       "is_disposable":{' '}
-      <WhiteText data-id="is_disposable-value">
-        {is_disposable && is_disposable.toString()}
-      </WhiteText>
+      <WhiteText data-id="is_disposable-value">{is_disposable.toString()}</WhiteText>
       ,<br />
       <TabCharacter />
       <TabCharacter />
-      "is_free": <WhiteText data-id="is_free-value">{is_free && is_free.toString()}</WhiteText>,
+      "is_free": <WhiteText data-id="is_free-value">{is_free.toString()}</WhiteText>,
       <br />
       {did_you_mean && (
         <>
