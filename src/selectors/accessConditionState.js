@@ -3,7 +3,6 @@ import _ from 'lodash';
 
 const getAccount = state => state.account;
 const getUser = state => state.currentUser;
-const getSubscription = state => _.get(state, 'billing.subscription', {});
 const getPlans = state => _.get(state, 'billing.plans', []);
 const getACReady = state => state.accessControlReady;
 
@@ -13,10 +12,9 @@ export const getCurrentAccountPlan = createSelector(
 );
 
 const selectAccessConditionState = createSelector(
-  [getAccount, getSubscription, getUser, getPlans, getCurrentAccountPlan, getACReady],
+  [getAccount, getUser, getPlans, getCurrentAccountPlan, getACReady],
   (account, subscription, currentUser, plans, accountPlan, ready) => ({
     account,
-    subscription,
     currentUser,
     plans,
     accountPlan,
