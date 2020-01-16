@@ -21,7 +21,7 @@ export class UploadedListPage extends Component {
   handleSubmit = () => {
     const { listId, triggerJob } = this.props;
     triggerJob(listId);
-  }
+  };
 
   render() {
     const { job, jobLoadingStatus, listId } = this.props;
@@ -31,7 +31,7 @@ export class UploadedListPage extends Component {
         <RedirectAndAlert
           alert={{
             message: `Unable to find list ${listId}`,
-            type: 'error'
+            type: 'error',
           }}
           to="/recipient-validation"
         />
@@ -44,7 +44,7 @@ export class UploadedListPage extends Component {
 
     return (
       <Page
-        title='Recipient Validation'
+        title="Recipient Validation"
         breadcrumbAction={{ content: 'Back', component: PageLink, to: '/recipient-validation' }}
       >
         <Panel>
@@ -55,12 +55,17 @@ export class UploadedListPage extends Component {
               <strong>{formatTime(job.updatedAt)}</strong>
             </div>
           </Panel.Section>
+
           <Panel.Section>
-            {job.status === 'queued_for_batch' && <UploadedListForm job={job} onSubmit={this.handleSubmit} />}
+            {job.status === 'queued_for_batch' && (
+              <UploadedListForm job={job} onSubmit={this.handleSubmit} />
+            )}
 
-            {job.status === 'error' && <ListError/>}
+            {job.status === 'error' && <ListError />}
 
-            {(job.status !== 'queued_for_batch' && job.status !== 'error') && <ListProgress job={job} />}
+            {job.status !== 'queued_for_batch' && job.status !== 'error' && (
+              <ListProgress job={job} />
+            )}
           </Panel.Section>
         </Panel>
       </Page>
@@ -74,7 +79,7 @@ const mapStateToProps = (state, props) => {
   return {
     listId,
     job: selectRecipientValidationJobById(state, listId),
-    jobLoadingStatus: state.recipientValidation.jobLoadingStatus[listId]
+    jobLoadingStatus: state.recipientValidation.jobLoadingStatus[listId],
   };
 };
 

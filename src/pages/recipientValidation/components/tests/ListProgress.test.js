@@ -2,23 +2,25 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { ListProgress } from '../ListProgress';
 
+/* eslint-disable jest/no-test-callback */
 describe('ListProgress', () => {
-  const subject = (props = {}) => shallow(
-    <ListProgress
-      getJobStatus={() => {}}
-      job={{
-        filename: 'big-test.csv',
-        jobId: 'A1C1_D1C1',
-        status: 'checking_regex'
-      }}
-      startPolling={() => {}}
-      stopPolling={() => {}}
-      {...props}
-    />
-  );
+  const subject = (props = {}) =>
+    shallow(
+      <ListProgress
+        getJobStatus={() => {}}
+        job={{
+          filename: 'big-test.csv',
+          jobId: 'A1C1_D1C1',
+          status: 'checking_regex',
+        }}
+        startPolling={() => {}}
+        stopPolling={() => {}}
+        {...props}
+      />,
+    );
 
   beforeEach(() => {
-    React.useEffect = jest.fn((effect) => effect());
+    React.useEffect = jest.fn(effect => effect());
   });
 
   it('renders status and progress bar', () => {
@@ -29,7 +31,7 @@ describe('ListProgress', () => {
     const errorJob = {
       filename: 'big-test.csv',
       jobId: 'A1C1_D1C1',
-      status: 'error'
+      status: 'error',
     };
     const wrapper = subject({ job: errorJob });
 
@@ -44,7 +46,9 @@ describe('ListProgress', () => {
 
   it('keeps polling if in progress', () => {
     const getJobStatus = jest.fn(() => Promise.resolve({ batch_status: 'performing_mx_lookup' }));
-    const startPolling = jest.fn(({ action }) => { action(); });
+    const startPolling = jest.fn(({ action }) => {
+      action();
+    });
     const stopPolling = jest.fn();
 
     subject({ getJobStatus, startPolling, stopPolling });
@@ -53,9 +57,11 @@ describe('ListProgress', () => {
     expect(stopPolling).not.toHaveBeenCalled();
   });
 
-  it('stops polling and alerts when validation is complete', (done) => {
+  it('stops polling and alerts when validation is complete', done => {
     const getJobStatus = jest.fn(() => Promise.resolve({ batch_status: 'success' }));
     const showAlert = jest.fn();
+    const stopPolling = jest.fn();
+
     const startPolling = jest.fn(async ({ action }) => {
       await action();
       expect(getJobStatus).toHaveBeenCalledWith('A1C1_D1C1');
@@ -63,16 +69,15 @@ describe('ListProgress', () => {
       expect(showAlert).toHaveBeenCalledWith({
         type: 'success',
         message: 'Validation of big-test.csv recipient list has completed',
-        dedupeId: 'A1C1_D1C1'
+        dedupeId: 'A1C1_D1C1',
       });
       done();
     });
-    const stopPolling = jest.fn();
 
     subject({ getJobStatus, showAlert, startPolling, stopPolling });
   });
 
-  it('stops polling when validation explodes', (done) => {
+  it('stops polling when validation explodes', done => {
     const getJobStatus = jest.fn(() => Promise.reject());
     const showAlert = jest.fn(() => done());
     const startPolling = jest.fn(async ({ action }) => {

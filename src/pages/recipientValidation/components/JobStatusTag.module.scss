@@ -1,5 +1,11 @@
 @import 'src/styles/status-color';
 
+.JobStatusTagContent {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
 .Complete {
   color: status-color('success');
 }
