@@ -220,7 +220,7 @@ describe('SingleResult', () => {
       singleResults: {
         valid: false,
         is_role: false,
-        is_disposabl: false,
+        is_disposable: false,
         is_free: false,
         reason: 'fake reason',
         did_you_mean: 'fake-email@gmail.com',
