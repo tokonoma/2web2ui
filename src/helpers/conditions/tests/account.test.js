@@ -115,22 +115,36 @@ describe('Conditon: hasStatusReasonCategory', () => {
 
 describe('Condition: isSelfServeBilling', () => {
   it('should return false with undefined subscription', () => {
-    const subscription = {};
-    expect(isSelfServeBilling({ subscription })).toEqual(false);
+    const account = {};
+    expect(isSelfServeBilling({ account })).toEqual(false);
+  });
+
+  it('should return false with empty subscription', () => {
+    const account = {
+      subscription: {},
+    };
+
+    expect(isSelfServeBilling({ account })).toEqual(false);
   });
 
   it('should return false with manual subscription', () => {
-    const subscription = {
-      type: 'manual',
+    const account = {
+      subscription: {
+        self_serve: false,
+      },
     };
-    expect(isSelfServeBilling({ subscription })).toEqual(false);
+
+    expect(isSelfServeBilling({ account })).toEqual(false);
   });
 
   it('should return true with self serve subscription', () => {
-    const subscription = {
-      type: 'active',
+    const account = {
+      subscription: {
+        self_serve: true,
+      },
     };
-    expect(isSelfServeBilling({ subscription })).toEqual(true);
+
+    expect(isSelfServeBilling({ account })).toEqual(true);
   });
 });
 
@@ -206,7 +220,7 @@ describe('Condition: isUiOptionSet', () => {
         defaultVal: true,
         result: true,
       },
-      // Default used if option is missing
+      // Default used iff option is missing
       'Default: true=true': { options: {}, defaultVal: true, result: true },
       'Default: false=false': { options: {}, defaultVal: false, result: false },
     },
