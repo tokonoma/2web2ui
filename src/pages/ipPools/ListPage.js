@@ -11,7 +11,6 @@ import { openSupportTicketForm } from 'src/actions/support';
 import { not } from 'src/helpers/conditions';
 import { selectCondition } from 'src/selectors/accessConditionState';
 import { isSelfServeBilling } from 'src/helpers/conditions/account';
-import { getSubscription } from 'src/actions/billing';
 
 const columns = [
   { label: 'Name', sortKey: 'name' },
@@ -26,7 +25,6 @@ export const getRowData = ({ id, name, ips }) => {
 
 export class IpPoolsList extends Component {
   componentDidMount() {
-    this.props.getSubscription();
     this.props.listPools();
   }
 
@@ -115,6 +113,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { listPools, getSubscription, openSupportTicketForm })(
-  IpPoolsList,
-);
+export default connect(mapStateToProps, { listPools, openSupportTicketForm })(IpPoolsList);
