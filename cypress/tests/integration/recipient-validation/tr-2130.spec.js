@@ -9,7 +9,7 @@ describe('TR-2130', () => {
 
   it('renders an error on the single validation page when the server returns a 400 error with the message "Validation limit exceeded"', () => {
     cy.server();
-    cy.fixture('recipient-validation/single/400.get.usage-limit-exceeded.json').as('RVFixture');
+    cy.fixture('recipient-validation/single/420.get.usage-limit-exceeded.json').as('RVFixture');
     cy.route({
       method: 'GET',
       status: 420,
@@ -21,7 +21,7 @@ describe('TR-2130', () => {
 
     cy.wait('@getValidation');
 
-    cy.findByText('Validation limit exceeded');
+    cy.findByText('Validation limit exceeded').should('be.visible');
 
     cy.findAllByText('View Details')
       .last()
@@ -34,9 +34,26 @@ describe('TR-2130', () => {
     cy.findByText('I need help with...').should('be.visible');
   });
 
+  it('renders generic error messages directly from the server if the status code is not "420"', () => {
+    cy.server();
+    cy.fixture('recipient-validation/single/400.get.json').as('RVFixture');
+    cy.route({
+      method: 'GET',
+      status: 400,
+      url: '/api/v1/recipient-validation/single/fake-email@gmail.com',
+      response: '@RVFixture',
+    }).as('getValidation');
+
+    cy.visit('/recipient-validation/single/fake-email@gmail.com');
+
+    cy.wait('@getValidation');
+
+    cy.findByText('This is an error').should('be.visible');
+  });
+
   it('it renders a "Validation Error" and an alert with "Validation Limit Exceeded" if the batch status on the list page is "usage_limit_exceeded"', () => {
     cy.server();
-    cy.fixture('recipient-validation/list/400.get.usage-limit-exceeded.json').as('RVFixture');
+    cy.fixture('recipient-validation/list/200.get.usage-limit-exceeded.json').as('RVFixture');
     cy.route({
       url: '/api/v1/recipient-validation/job/fake-list',
       response: '@RVFixture',

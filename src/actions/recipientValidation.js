@@ -6,8 +6,8 @@ export function uploadList(data) {
     meta: {
       method: 'POST',
       url: 'v1/recipient-validation/upload',
-      data
-    }
+      data,
+    },
   });
 }
 
@@ -16,8 +16,8 @@ export function getList() {
     type: 'GET_JOB_LIST',
     meta: {
       method: 'GET',
-      url: 'v1/recipient-validation/list'
-    }
+      url: 'v1/recipient-validation/list',
+    },
   });
 }
 
@@ -27,8 +27,8 @@ export function triggerJob(id) {
     meta: {
       method: 'POST',
       url: `v1/recipient-validation/trigger/${id}`,
-      context: { id }
-    }
+      context: { id },
+    },
   });
 }
 
@@ -38,8 +38,9 @@ export function singleAddress(address) {
     meta: {
       method: 'GET',
       url: `v1/recipient-validation/single/${address}`,
-      email: address
-    }
+      email: address,
+      showErrorAlert: false,
+    },
   });
 }
 
@@ -49,13 +50,13 @@ export function getJobStatus(id) {
     meta: {
       method: 'GET',
       url: `v1/recipient-validation/job/${id}`,
-      context: { id }
-    }
+      context: { id },
+    },
   });
 }
 
 export function resetUploadError() {
   return {
-    type: 'RESET_RECIPIENT_VALIDATION_FAIL'
+    type: 'RESET_RECIPIENT_VALIDATION_FAIL',
   };
 }
