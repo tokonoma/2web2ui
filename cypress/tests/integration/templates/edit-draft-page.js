@@ -2,7 +2,7 @@
 
 const templateId = 'stubbed-template-1';
 const editorSelector = '.ace_text-input';
-const APP_URL = `/templates/edit/${templateId}/draft/content`;
+const PAGE_URL = `/templates/edit/${templateId}/draft/content`;
 
 function openTemplateSettings() {
   cy.findByText('Open Menu').click({ force: true }); // The content is visually hidden (intentionally!), so `force: true` is needed here
@@ -36,13 +36,13 @@ describe('The templates edit draft page', () => {
   });
 
   it('renders the template title with "(DRAFT)"', () => {
-    cy.visit(APP_URL);
+    cy.visit(PAGE_URL);
 
     cy.findByText('Stubbed Template 1 (DRAFT)');
   });
 
   it('renders the status in the header as "DRAFT"', () => {
-    cy.visit(APP_URL);
+    cy.visit(PAGE_URL);
 
     cy.get('[data-id="template-status"]').within(() => {
       cy.queryByText('Draft').should('be.visible'); // Note - content is capitalized with CSS, so the markup is not "DRAFT"
@@ -51,7 +51,7 @@ describe('The templates edit draft page', () => {
 
   describe('template settings', () => {
     it('renders form elements with pre-populated values', () => {
-      cy.visit(APP_URL);
+      cy.visit(PAGE_URL);
 
       cy.findByText('Template Settings').click();
 
@@ -89,7 +89,7 @@ describe('The templates edit draft page', () => {
         fixture: 'templates/stubbed-template-1/200.put.json',
       });
 
-      cy.visit(APP_URL);
+      cy.visit(PAGE_URL);
 
       cy.findByText('Template Settings').click();
 
@@ -103,13 +103,13 @@ describe('The templates edit draft page', () => {
 
   describe('template actions', () => {
     it('renders with a "Save and Publish" button', () => {
-      cy.visit(APP_URL);
+      cy.visit(PAGE_URL);
 
       cy.findByText('Save and Publish').should('be.visible');
     });
 
     it('renders a popover with "Save and Publish", "Save Draft", "Duplicate", and "Delete" buttons when clicked', () => {
-      cy.visit(APP_URL);
+      cy.visit(PAGE_URL);
 
       cy.findAllByText('Save and Publish').should('have.length', 1);
 
@@ -123,7 +123,7 @@ describe('The templates edit draft page', () => {
 
     describe('"Save and Publish" button', () => {
       it('renders a confirmation modal when clicked', () => {
-        cy.visit(APP_URL);
+        cy.visit(PAGE_URL);
 
         cy.findByText('Save and Publish').click();
 
@@ -135,7 +135,7 @@ describe('The templates edit draft page', () => {
       });
 
       it('redirects to the published view and renders a success message when confirmed', () => {
-        cy.visit(APP_URL);
+        cy.visit(PAGE_URL);
 
         cy.findByText('Save and Publish').click();
 
@@ -156,7 +156,7 @@ describe('The templates edit draft page', () => {
           fixture: 'templates/stubbed-template-1/200.put.json',
         });
 
-        cy.visit(APP_URL);
+        cy.visit(PAGE_URL);
 
         openTemplateSettings();
 
@@ -172,7 +172,7 @@ describe('The templates edit draft page', () => {
           fixture: 'templates/stubbed-template-1/200.put.json',
         });
 
-        cy.visit(APP_URL);
+        cy.visit(PAGE_URL);
 
         cy.get(editorSelector)
           .focus()
@@ -190,7 +190,7 @@ describe('The templates edit draft page', () => {
 
     describe('"Duplicate" button', () => {
       it('renders a confirmation modal when clicked with default values "<TEMPLATE NAME> (COPY)" and "<template-id>-copy" in their respective fields', () => {
-        cy.visit(APP_URL);
+        cy.visit(PAGE_URL);
 
         openTemplateSettings();
 
@@ -208,7 +208,7 @@ describe('The templates edit draft page', () => {
           fixture: 'templates/200.post.create.json',
         });
 
-        cy.visit(APP_URL);
+        cy.visit(PAGE_URL);
 
         openTemplateSettings();
 
@@ -237,7 +237,7 @@ describe('The templates edit draft page', () => {
           fixture: 'templates/stubbed-template-1/200.delete.json',
         });
 
-        cy.visit(APP_URL);
+        cy.visit(PAGE_URL);
 
         openTemplateSettings();
 
@@ -250,29 +250,140 @@ describe('The templates edit draft page', () => {
   });
 
   describe('code editor', () => {
-    it('allows text entry in the HTML, AMP HTML, Text, and Test Data tabs', () => {});
+    it('renders the values of the HTML, AMP HTML, and Text tabs from the stored template', () => {
+      cy.visit(PAGE_URL);
 
-    it('renders the template preview when the user stops typing in the "HTML" field', () => {});
+      cy.findByText('HTML!').should('be.visible');
 
-    it('renders the template preview when the user stops typing in the "AMP HTML" field', () => {});
+      cy.findByText('AMP HTML').click();
 
-    it('renders the template preview when the user stops typing in the "Text" field', () => {});
+      cy.findByText('AMP HTML!').should('be.visible');
 
-    it('renders the template preview when the user stops typing in the "TestData" field', () => {});
+      cy.findByText('Text').click();
+
+      cy.findByText('This is some text').should('be.visible');
+    });
+
+    it('allows text entry in the HTML, AMP HTML, Text, and Test Data tabs', () => {
+      const typeInEditor = content => {
+        cy.get(editorSelector)
+          .focus()
+          .clear()
+          .type(content)
+          .blur();
+      };
+
+      cy.visit(PAGE_URL);
+
+      typeInEditor('<h1>Hello, HTML');
+
+      cy.findByText('Hello, HTML').should('be.visible'); // Can't check for full HTML as the markup is split between several containing `<span>s`
+
+      cy.findByText('AMP HTML').click();
+
+      typeInEditor('<h1>Hello, AMP HTML');
+
+      cy.findByText('Hello, AMP HTML').should('be.visible');
+
+      cy.findByText('Text').click();
+
+      typeInEditor('Hello, text');
+
+      cy.findByText('Hello, text').should('be.visible');
+
+      cy.findByText('Test Data').click();
+
+      typeInEditor('Hello, test data');
+
+      cy.findByText('Hello, test data').should('be.visible');
+    });
 
     describe('the editor actions popover', () => {
-      it('renders the "Insert Snippet" button when opened', () => {});
+      it('renders the insert snippet modal when clicking on the "Insert Snippet" button', () => {
+        cy.stubRequest({
+          url: '/api/labs/snippets',
+          fixture: 'snippets/200.get.json',
+        });
 
-      it('renders the insert snippet modal when clicking on the "Insert Snippet" button', () => {});
+        cy.visit(PAGE_URL);
 
-      it('renders the "Insert AMP Boilerplate" button when opened', () => {});
+        cy.findByText('More').click({ force: true });
 
-      it('renders a warning modal when the "Insert AMP Boilerplate" button is clicked, which allows the user to replace the content of the "AMP HTML" tab with the starter boilerplate', () => {});
+        cy.findByText('Insert Snippet').click();
+
+        cy.findByText('Add a snippet').should('be.visible');
+
+        cy.findByLabelText('Find a Snippet').focus();
+        cy.findByText('Snippet 1').should('be.visible');
+        cy.findByText('this-is-a-snippet-1').should('be.visible');
+        cy.findByText('Snippet 2').should('be.visible');
+        cy.findByText('this-is-a-snippet-2').should('be.visible');
+        cy.findByText('Snippet 3').should('be.visible');
+        cy.findByText('this-is-a-snippet-3').should('be.visible');
+        cy.findByLabelText('Find a Snippet')
+          .focus()
+          .blur();
+
+        cy.findByLabelText('Snippet Code').should(
+          'have.value',
+          '{{ render_snippet( "example-id" ) }}',
+        );
+
+        // Testing the copying behavior prevents Cypress tests from running as it opens a browser confirmation dialog
+        // See: https://github.com/cypress-io/cypress/issues/2851
+        // cy.findByText('Copy Code').click();
+        // cy.findByText('Snippet copied').should('be.visible');
+        // cy.findByText('Add a snippet').should('not.be.visible');
+      });
+
+      it('renders the "Insert AMP Boilerplate" button when opened', () => {
+        cy.visit(PAGE_URL);
+
+        cy.findByText('AMP HTML').click();
+        cy.findByText('More').click({ force: true });
+
+        cy.findByText('Insert AMP Boilerplate').should('be.visible');
+
+        cy.findByText('HTML').click();
+        cy.findByText('More').click({ force: true });
+
+        cy.findByText('Insert AMP Boilerplate').should('not.be.visible');
+
+        cy.findByText('Text').click();
+        cy.findByText('More').click({ force: true });
+
+        cy.findByText('Insert AMP Boilerplate').should('not.be.visible');
+
+        cy.findByText('Test Data').click();
+        cy.findByText('More').click({ force: true });
+
+        cy.findByText('Insert AMP Boilerplate').should('not.be.visible');
+      });
+
+      it('renders a warning modal when the "Insert AMP Boilerplate" button is clicked, which allows the user to replace the content of the "AMP HTML" tab with the starter boilerplate', () => {
+        cy.visit(PAGE_URL);
+
+        cy.findByText('AMP HTML').click();
+        cy.findByText('AMP HTML!').should('be.visible');
+        cy.findByText('4email').should('not.be.visible');
+        cy.findByText('More').click({ force: true });
+        cy.findByText('Insert AMP Boilerplate').click();
+
+        cy.findByText('Are you sure you want to insert the AMP Email Boilerplate?').should(
+          'be.visible',
+        );
+        cy.findByText('Insert').click();
+        cy.findByText('AMP HTML!').should('not.be.visible');
+        cy.findByText('4email').should('be.visible');
+      });
     });
   });
 
   describe('preview panel', () => {
-    it('allows the user to toggle between a desktop and mobile preview', () => {});
+    it('allows the user to toggle between a desktop and mobile preview', () => {
+      // cy.visit(PAGE_URL);
+      // cy.findByText('Mobile Preview').click({ force: true });
+    });
 
     it("renders the relevant content according to the user's current selected tab", () => {});
 
