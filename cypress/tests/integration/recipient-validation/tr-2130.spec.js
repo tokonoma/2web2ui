@@ -5,6 +5,7 @@ describe('TR-2130', () => {
   beforeEach(() => {
     cy.stubAuth();
     cy.login({ isStubbed: true });
+    cy.visit('/');
   });
 
   it('renders an error on the single validation page when the server returns a 400 error with the message "Validation limit exceeded"', () => {
