@@ -219,8 +219,8 @@ describe('SingleResult', () => {
     const { queryByTestId } = subject({
       singleResults: {
         valid: false,
-        is_role: true,
-        is_disposable: true,
+        is_role: false,
+        is_disposabl: false,
         is_free: false,
         reason: 'fake reason',
         did_you_mean: 'fake-email@gmail.com',
@@ -228,8 +228,10 @@ describe('SingleResult', () => {
     });
 
     expect(queryByTestId('valid-value')).toHaveTextContent('false', { normalizeWhitespace: true });
-    expect(queryByTestId('is_role-value')).toHaveTextContent('true', { normalizeWhitespace: true });
-    expect(queryByTestId('is_disposable-value')).toHaveTextContent('true', {
+    expect(queryByTestId('is_role-value')).toHaveTextContent('false', {
+      normalizeWhitespace: true,
+    });
+    expect(queryByTestId('is_disposable-value')).toHaveTextContent('false', {
       normalizeWhitespace: true,
     });
     expect(queryByTestId('is_free-value')).toHaveTextContent('false', {
