@@ -127,7 +127,8 @@ Cypress.Commands.add(
     statusCode = 200,
     url,
     fixture,
-    fixtureAlias = 'stubbedRequest',
+    fixtureAlias = 'requestAlias',
+    requestAlias = 'stubbedRequest',
   }) => {
     cy.server();
     cy.fixture(fixture).as(fixtureAlias);
@@ -137,6 +138,6 @@ Cypress.Commands.add(
       status: statusCode,
       response: `@${fixtureAlias}`,
       onRequest,
-    });
+    }).as(requestAlias);
   },
 );

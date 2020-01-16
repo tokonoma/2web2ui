@@ -402,8 +402,17 @@ describe('The templates edit draft page', () => {
       cy.get('[data-id="preview-desktop"]').should('be.visible');
     });
 
-    it.only("renders the relevant content according to the user's current selected tab", () => {
+    it("renders the relevant content according to the user's current selected tab", () => {
+      cy.stubRequest({
+        method: 'POST',
+        url: '/api/v1/utils/content-previewer',
+        fixture: 'utils/content-previewer/200.post.json',
+        requestAlias: 'previewRequest',
+      });
+
       cy.visit(PAGE_URL);
+
+      cy.wait('@previewRequest');
 
       testPreviewContent({
         selector: 'h1',
@@ -428,15 +437,49 @@ describe('The templates edit draft page', () => {
 
       testPreviewContent({
         selector: 'h1',
+        content: 'This is some HTML content',
+      });
+    });
+
+    it('prioritizes rendering AMP HTML content over text when the "Test Data" tab is selected when no HTML is available', () => {
+      cy.stubRequest({
+        method: 'POST',
+        url: '/api/v1/utils/content-previewer',
+        fixture: 'utils/content-previewer/200.post.no-html.json',
+        requestAlias: 'previewRequest',
+      });
+
+      cy.visit(PAGE_URL);
+
+      cy.wait('@previewRequest');
+
+      cy.findByText('Test Data').click();
+
+      testPreviewContent({
+        selector: 'h1',
         content: 'This is some AMP HTML content',
       });
     });
 
-    it('prioritizes rendering HTML content over AMP HTML and text when the "Test Data" tab is selected', () => {});
+    it.only('renders text content when neither HTML no AMP HTML content are returned when the "Test Data" tab is selected', () => {
+      cy.stubRequest({
+        method: 'POST',
+        url: '/api/v1/utils/content-previewer',
+        fixture: 'utils/content-previewer/200.post.no-amp-or-html.json',
+        requestAlias: 'previewRequest',
+      });
 
-    it('prioritizes rendering AMP HTML content over text when the "Test Data" tab is selected', () => {});
+      cy.visit(PAGE_URL);
 
-    it('renders text content when neither HTML no AMP HTML content are returned when the "Test Data" tab is selected', () => {});
+      cy.wait('@previewRequest');
+
+      cy.findByText('Test Data').click();
+
+      testPreviewContent({
+        selector: 'p',
+        content: 'This is some text content.',
+      });
+    });
 
     it('renders a "Send a Test" button that opens a modal for sending preview emails', () => {});
 
