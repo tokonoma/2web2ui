@@ -57,9 +57,12 @@ export const ListProgress = ({
                 dedupeId: jobId,
                 details:
                   batch_status === 'usage_limit_exceeded' ? (
-                    <UnstyledLink external to="https://sparkpost.com/sales">
-                      Contact sales
-                    </UnstyledLink>
+                    <>
+                      <UnstyledLink to="/dashboard?supportTicket=true&supportIssue=general_issue">
+                        Submit a ticket
+                      </UnstyledLink>
+                      &nbsp;to request an increase.
+                    </>
                   ) : (
                     undefined
                   ),

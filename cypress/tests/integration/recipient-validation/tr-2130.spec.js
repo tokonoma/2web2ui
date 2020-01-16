@@ -27,7 +27,11 @@ describe('TR-2130', () => {
       .last()
       .click();
 
-    cy.findByText('Contact sales').should('have.attr', 'href', 'https://sparkpost.com/sales');
+    cy.findByText('Submit a ticket')
+      .should('have.attr', 'href', '/dashboard?supportTicket=true&supportIssue=general_issue')
+      .click();
+
+    cy.findByText('I need help with...').should('be.visible');
   });
 
   it('it renders a "Validation Error" and an alert with "Usage Limit Exceeded" if the batch status on the list page is "usage_limit_exceeded"', () => {
@@ -52,6 +56,10 @@ describe('TR-2130', () => {
       .last()
       .click();
 
-    cy.findByText('Contact sales').should('have.attr', 'href', 'https://sparkpost.com/sales');
+    cy.findByText('Submit a ticket')
+      .should('have.attr', 'href', '/dashboard?supportTicket=true&supportIssue=general_issue')
+      .click();
+
+    cy.findByText('I need help with...').should('be.visible');
   });
 });
