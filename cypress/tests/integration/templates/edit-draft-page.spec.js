@@ -461,7 +461,7 @@ describe('The templates edit draft page', () => {
       });
     });
 
-    it.only('renders text content when neither HTML no AMP HTML content are returned when the "Test Data" tab is selected', () => {
+    it('renders text content when neither HTML no AMP HTML content are returned when the "Test Data" tab is selected', () => {
       cy.stubRequest({
         method: 'POST',
         url: '/api/v1/utils/content-previewer',
@@ -481,7 +481,47 @@ describe('The templates edit draft page', () => {
       });
     });
 
-    it('renders a "Send a Test" button that opens a modal for sending preview emails', () => {});
+    it('renders a "Send a Test" button that opens a modal for sending preview emails', () => {
+      cy.stubRequest({
+        method: 'PUT',
+        url: '/api/v1/templates/stubbed-template-1',
+        fixture: 'templates/stubbed-template-1/200.put.json',
+      });
+
+      cy.visit(PAGE_URL);
+
+      cy.findByText('Send a Test').click();
+
+      cy.findByText(
+        'Verify your email renders as expected in the inbox by sending a quick test.',
+      ).should('be.visible');
+      cy.findByLabelText('From').should('have.value', 'fake-user@bounce.uat.sparkspam.com');
+      cy.findByLabelText('Subject').should('have.value', 'Stubbed Template 1');
+    });
+
+    it('renders a success message when the user sends a test preview email', () => {
+      cy.stubRequest({
+        method: 'PUT',
+        url: '/api/v1/templates/stubbed-template-1',
+        fixture: 'templates/stubbed-template-1/200.put.json',
+      });
+
+      cy.stubRequest({
+        method: 'POST',
+        url: '/api/v1/transmissions',
+        fixture: 'transmissions/200.post.json',
+      });
+
+      cy.visit(PAGE_URL);
+
+      cy.findByText('Send a Test').click();
+
+      cy.findByLabelText('To').type('fake-email@gmail.com');
+
+      cy.findByText('Send Email').click();
+
+      cy.findByText('Successfully sent a test email').should('be.visible');
+    });
 
     it('renders an syntax error with the relevant line number when the custom status code is "3000"', () => {});
 
