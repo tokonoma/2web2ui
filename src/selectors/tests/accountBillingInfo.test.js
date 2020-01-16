@@ -1,5 +1,4 @@
 import * as billingInfo from '../accountBillingInfo';
-import _ from 'lodash';
 
 describe('Selector: current plan', () => {
   let state;
@@ -168,7 +167,6 @@ describe('plan selector', () => {
         billing: {},
       },
       billing: {
-        subscription: { type: 'active' },
         plans: [
           { code: 'pub', status: 'public' },
           { code: 'pub-free', status: 'public', tier: 'test', isFree: true },
@@ -186,41 +184,33 @@ describe('plan selector', () => {
 
   describe('selectAvailablePlans', () => {
     it('should return active plans', () => {
-      const plans = billingInfo.selectAvailablePlans(state);
-      expect(_.every(plans, ({ awsMarketplace }) => !awsMarketplace)).toBeTruthy();
+      expect(billingInfo.selectAvailablePlans(state)).toMatchSnapshot();
     });
 
     it('should return active paid plans', () => {
-      state.billing.subscription.type = 'manual';
-      const plans = billingInfo.selectAvailablePlans(state);
-      expect(_.every(plans, ({ isFree }) => !isFree)).toBeTruthy();
+      state.account.subscription.self_serve = false;
+      expect(billingInfo.selectAvailablePlans(state)).toMatchSnapshot();
     });
 
     it('should return active AWS plans', () => {
       state.account.subscription.type = 'aws';
-      const plans = billingInfo.selectAvailablePlans(state);
-      expect(_.every(plans, ({ awsMarketplace }) => awsMarketplace)).toBeTruthy();
+      expect(billingInfo.selectAvailablePlans(state)).toMatchSnapshot();
     });
   });
 
   describe('selectVisiblePlans', () => {
     it('should return public plans', () => {
-      const plans = billingInfo.selectVisiblePlans(state);
-      expect(_.every(plans, ({ status }) => status === 'public')).toBeTruthy();
+      expect(billingInfo.selectVisiblePlans(state)).toMatchSnapshot();
     });
 
     it('should return public paid plans', () => {
-      state.billing.subscription.type = 'manual';
-      const plans = billingInfo.selectVisiblePlans(state);
-      expect(_.every(plans, ({ status, isFree }) => !isFree && status === 'public')).toBeTruthy();
+      state.account.subscription.self_serve = false;
+      expect(billingInfo.selectVisiblePlans(state)).toMatchSnapshot();
     });
 
     it('should return public AWS plans', () => {
       state.account.subscription.type = 'aws';
-      const plans = billingInfo.selectVisiblePlans(state);
-      expect(
-        _.every(plans, ({ status, awsMarketplace }) => status === 'public' && awsMarketplace),
-      ).toBeTruthy();
+      expect(billingInfo.selectVisiblePlans(state)).toMatchSnapshot();
     });
   });
 
