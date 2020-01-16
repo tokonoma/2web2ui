@@ -23,7 +23,6 @@ const BATCH_STATUS = [
   'performing_did_you_mean',
   'uploading_results_to_s3',
   'success',
-  'usage_limit_exceeded',
 ];
 
 export const ListProgress = ({
