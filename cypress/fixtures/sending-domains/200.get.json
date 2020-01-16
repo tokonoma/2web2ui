@@ -1,0 +1,21 @@
+{
+  "results": [
+    {
+      "creation_time": "2017-08-03T22:25:37+00:00",
+      "shared_with_subaccounts": false,
+      "status": {
+        "mx_status": "unverified",
+        "spf_status": "unverified",
+        "cname_status": "valid",
+        "ownership_verified": true,
+        "abuse_at_status": "unverified",
+        "compliance_status": "valid",
+        "verification_mailbox_status": "unverified",
+        "dkim_status": "invalid",
+        "postmaster_at_status": "unverified"
+      },
+      "domain": "bounce.uat.sparkspam.com",
+      "is_default_bounce_domain": true
+    }
+  ]
+}
