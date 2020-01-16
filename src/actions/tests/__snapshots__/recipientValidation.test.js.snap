@@ -35,6 +35,7 @@ Array [
         "address": "foo@bar.com",
       },
       "method": "GET",
+      "showErrorAlert": false,
       "url": "v1/recipient-validation/single/[object Object]",
     },
     "type": "SINGLE_RECIPIENT_VALIDATION",
