@@ -380,9 +380,14 @@ describe('The templates edit draft page', () => {
   });
 
   describe('preview panel', () => {
-    it('allows the user to toggle between a desktop and mobile preview', () => {
-      // cy.visit(PAGE_URL);
-      // cy.findByText('Mobile Preview').click({ force: true });
+    it.only('allows the user to toggle between a desktop and mobile preview', () => {
+      cy.visit(PAGE_URL);
+
+      cy.findByText('Mobile Preview').click({ force: true });
+      cy.get('[data-id="preview-mobile-phone"]').should('be.visible');
+
+      cy.findByText('Desktop Preview').click({ force: true });
+      cy.get('[data-id="preview-desktop"]').should('be.visible');
     });
 
     it("renders the relevant content according to the user's current selected tab", () => {});
