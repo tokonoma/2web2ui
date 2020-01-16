@@ -7,7 +7,7 @@ describe('TR-2130', () => {
     cy.login({ isStubbed: true });
   });
 
-  it('renders an error on the single validation page when the server returns a 400 error with the message "Usage limit exceeded"', () => {
+  it('renders an error on the single validation page when the server returns a 400 error with the message "Validation limit exceeded"', () => {
     cy.server();
     cy.fixture('recipient-validation/single/400.get.usage-limit-exceeded.json').as('RVFixture');
     cy.route({
@@ -21,7 +21,7 @@ describe('TR-2130', () => {
 
     cy.wait('@getValidation');
 
-    cy.findByText('Usage limit exceeded');
+    cy.findByText('Validation limit exceeded');
 
     cy.findAllByText('View Details')
       .last()
@@ -34,7 +34,7 @@ describe('TR-2130', () => {
     cy.findByText('I need help with...').should('be.visible');
   });
 
-  it('it renders a "Validation Error" and an alert with "Usage Limit Exceeded" if the batch status on the list page is "usage_limit_exceeded"', () => {
+  it('it renders a "Validation Error" and an alert with "Validation Limit Exceeded" if the batch status on the list page is "usage_limit_exceeded"', () => {
     cy.server();
     cy.fixture('recipient-validation/list/400.get.usage-limit-exceeded.json').as('RVFixture');
     cy.route({
@@ -50,7 +50,7 @@ describe('TR-2130', () => {
 
     cy.wait(5000); // Wait for the polling interval as defined on the list progress component
 
-    cy.findByText('Usage limit exceeded').should('be.visible');
+    cy.findByText('Validation limit exceeded').should('be.visible');
 
     cy.findByText('View Details')
       .last()
