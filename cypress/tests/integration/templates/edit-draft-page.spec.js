@@ -8,6 +8,18 @@ function openTemplateSettings() {
   cy.findByText('Open Menu').click({ force: true }); // The content is visually hidden (intentionally!), so `force: true` is needed here
 }
 
+function testPreviewContent({ selector, content }) {
+  cy.get('iframe').then($iframe => {
+    const $body = $iframe.contents().find('body');
+
+    if (selector.length) {
+      cy.wrap($body.find(selector)).should('contain', content);
+    } else {
+      cy.wrap($body).should('contain', content);
+    }
+  });
+}
+
 describe('The templates edit draft page', () => {
   beforeEach(() => {
     cy.stubAuth();
@@ -380,7 +392,7 @@ describe('The templates edit draft page', () => {
   });
 
   describe('preview panel', () => {
-    it.only('allows the user to toggle between a desktop and mobile preview', () => {
+    it('allows the user to toggle between a desktop and mobile preview', () => {
       cy.visit(PAGE_URL);
 
       cy.findByText('Mobile Preview').click({ force: true });
@@ -390,7 +402,35 @@ describe('The templates edit draft page', () => {
       cy.get('[data-id="preview-desktop"]').should('be.visible');
     });
 
-    it("renders the relevant content according to the user's current selected tab", () => {});
+    it.only("renders the relevant content according to the user's current selected tab", () => {
+      cy.visit(PAGE_URL);
+
+      testPreviewContent({
+        selector: 'h1',
+        content: 'This is some HTML content',
+      });
+
+      cy.findByText('AMP HTML').click();
+
+      testPreviewContent({
+        selector: 'h1',
+        content: 'This is some AMP HTML content',
+      });
+
+      cy.findByText('Text').click();
+
+      testPreviewContent({
+        selector: 'p',
+        content: 'This is some text content.',
+      });
+
+      cy.findByText('Test Data').click();
+
+      testPreviewContent({
+        selector: 'h1',
+        content: 'This is some AMP HTML content',
+      });
+    });
 
     it('prioritizes rendering HTML content over AMP HTML and text when the "Test Data" tab is selected', () => {});
 
