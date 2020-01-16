@@ -25,10 +25,7 @@ export function SingleResult(props) {
   useEffect(() => {
     singleAddress(address).catch(({ response = {}, message }) => {
       const { status } = response;
-      console.log('status', status);
-      console.log('message', message);
       const isUsageError = status === 420;
-      console.log('isUsageError', isUsageError);
 
       // When receiving the 'Usage limit exceeded' error, render a link in the alert details with a way to contact sales
       showAlert({
