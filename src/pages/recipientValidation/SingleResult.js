@@ -25,18 +25,22 @@ export function SingleResult(props) {
   useEffect(() => {
     singleAddress(address).catch(({ response = {}, message }) => {
       const { status } = response;
+      const isUsageError = status === 420;
+
       // When receiving the 'Usage limit exceeded' error, render a link in the alert details with a way to contact sales
       showAlert({
         type: 'error',
-        message,
-        details:
-          status === 400 ? (
-            <UnstyledLink external to="https://sparkpost.com/sales">
-              Contact sales
+        message: isUsageError ? 'Validation limit exceeded' : message,
+        details: isUsageError ? (
+          <>
+            <UnstyledLink to="?supportTicket=true&supportIssue=general_issue">
+              Submit a ticket
             </UnstyledLink>
-          ) : (
-            undefined
-          ),
+            &nbsp;to request an increase.
+          </>
+        ) : (
+          undefined
+        ),
       });
 
       history.push(SINGLE_RV_LINK);

@@ -68,6 +68,9 @@ Cypress.Commands.add('stubAuth', () => {
   cy.fixture('account/200.get.json').as('accountGet');
   cy.fixture('account/plans/200.get.json').as('plansGet');
   cy.fixture('authenticate/grants/200.get.json').as('grantsGet');
+  cy.fixture('suppression-list/200.get.json').as('suppressionsGet');
+  cy.fixture('api-keys/200.get.json').as('apiKeysGet');
+  cy.fixture('sending-domains/200.get.json').as('sendingDomainsGet');
 
   cy.route({
     method: 'POST',
@@ -105,4 +108,22 @@ Cypress.Commands.add('stubAuth', () => {
     status: 200,
     response: '@grantsGet',
   }).as('stubbedGrantsRequest');
+  cy.route({
+    method: 'GET',
+    url: '/api/v1/suppression-list*',
+    status: 200,
+    response: '@suppressionsGet',
+  }).as('stubbedSuppressionsGet');
+  cy.route({
+    method: 'GET',
+    url: '/api/v1/api-keys',
+    status: 200,
+    response: '@apiKeysGet',
+  }).as('stubbedApiKeysGet');
+  cy.route({
+    method: 'GET',
+    url: '/api/v1/sending-domains',
+    status: 200,
+    response: '@sendingDomainsGet',
+  }).as('stubbedSendingDomains');
 });

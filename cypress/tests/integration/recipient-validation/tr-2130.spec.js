@@ -5,11 +5,39 @@ describe('TR-2130', () => {
   beforeEach(() => {
     cy.stubAuth();
     cy.login({ isStubbed: true });
+    cy.visit('/');
   });
 
-  it('renders an error on the single validation page when the server returns a 400 error with the message "Usage limit exceeded"', () => {
+  it('renders an error on the single validation page when the server returns a 400 error with the message "Validation limit exceeded"', () => {
     cy.server();
-    cy.fixture('recipient-validation/single/400.get.usage-limit-exceeded.json').as('RVFixture');
+    cy.fixture('recipient-validation/single/420.get.usage-limit-exceeded.json').as('RVFixture');
+    cy.route({
+      method: 'GET',
+      status: 420,
+      url: '/api/v1/recipient-validation/single/fake-email@gmail.com',
+      response: '@RVFixture',
+    }).as('getValidation');
+
+    cy.visit('/recipient-validation/single/fake-email@gmail.com');
+
+    cy.wait('@getValidation');
+
+    cy.findByText('Validation limit exceeded').should('be.visible');
+
+    cy.findAllByText('View Details')
+      .last()
+      .click();
+
+    cy.findByText('Submit a ticket')
+      .should('have.attr', 'href', '?supportTicket=true&supportIssue=general_issue')
+      .click();
+
+    cy.findByText('I need help with...').should('be.visible');
+  });
+
+  it('renders generic error messages directly from the server if the status code is not "420"', () => {
+    cy.server();
+    cy.fixture('recipient-validation/single/400.get.json').as('RVFixture');
     cy.route({
       method: 'GET',
       status: 400,
@@ -21,18 +49,12 @@ describe('TR-2130', () => {
 
     cy.wait('@getValidation');
 
-    cy.findByText('Usage limit exceeded');
-
-    cy.findAllByText('View Details')
-      .last()
-      .click();
-
-    cy.findByText('Contact sales').should('have.attr', 'href', 'https://sparkpost.com/sales');
+    cy.findByText('This is an error').should('be.visible');
   });
 
-  it('it renders a "Validation Error" and an alert with "Usage Limit Exceeded" if the batch status on the list page is "usage_limit_exceeded"', () => {
+  it('it renders a "Validation Error" and an alert with "Validation Limit Exceeded" if the batch status on the list page is "usage_limit_exceeded"', () => {
     cy.server();
-    cy.fixture('recipient-validation/list/400.get.usage-limit-exceeded.json').as('RVFixture');
+    cy.fixture('recipient-validation/list/200.get.usage-limit-exceeded.json').as('RVFixture');
     cy.route({
       url: '/api/v1/recipient-validation/job/fake-list',
       response: '@RVFixture',
@@ -46,12 +68,16 @@ describe('TR-2130', () => {
 
     cy.wait(5000); // Wait for the polling interval as defined on the list progress component
 
-    cy.findByText('Usage limit exceeded').should('be.visible');
+    cy.findByText('Validation limit exceeded').should('be.visible');
 
     cy.findByText('View Details')
       .last()
       .click();
 
-    cy.findByText('Contact sales').should('have.attr', 'href', 'https://sparkpost.com/sales');
+    cy.findByText('Submit a ticket')
+      .should('have.attr', 'href', '?supportTicket=true&supportIssue=general_issue')
+      .click();
+
+    cy.findByText('I need help with...').should('be.visible');
   });
 });

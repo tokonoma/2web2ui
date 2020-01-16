@@ -52,14 +52,17 @@ export const ListProgress = ({
                 type: batch_status === 'success' ? 'success' : 'error',
                 message:
                   batch_status === 'usage_limit_exceeded'
-                    ? 'Usage limit exceeded'
+                    ? 'Validation limit exceeded'
                     : `Validation of ${filename} recipient list has completed`,
                 dedupeId: jobId,
                 details:
                   batch_status === 'usage_limit_exceeded' ? (
-                    <UnstyledLink external to="https://sparkpost.com/sales">
-                      Contact sales
-                    </UnstyledLink>
+                    <>
+                      <UnstyledLink to="?supportTicket=true&supportIssue=general_issue">
+                        Submit a ticket
+                      </UnstyledLink>
+                      &nbsp;to request an increase.
+                    </>
                   ) : (
                     undefined
                   ),
