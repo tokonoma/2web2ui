@@ -28,7 +28,7 @@ describe('TR-2130', () => {
       .click();
 
     cy.findByText('Submit a ticket')
-      .should('have.attr', 'href', '/dashboard?supportTicket=true&supportIssue=general_issue')
+      .should('have.attr', 'href', '?supportTicket=true&supportIssue=general_issue')
       .click();
 
     cy.findByText('I need help with...').should('be.visible');
@@ -57,7 +57,7 @@ describe('TR-2130', () => {
       .click();
 
     cy.findByText('Submit a ticket')
-      .should('have.attr', 'href', '/dashboard?supportTicket=true&supportIssue=general_issue')
+      .should('have.attr', 'href', '?supportTicket=true&supportIssue=general_issue')
       .click();
 
     cy.findByText('I need help with...').should('be.visible');

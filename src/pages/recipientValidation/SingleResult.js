@@ -33,7 +33,7 @@ export function SingleResult(props) {
         message: isUsageError ? 'Validation limit exceeded' : message,
         details: isUsageError ? (
           <>
-            <UnstyledLink to="/dashboard?supportTicket=true&supportIssue=general_issue">
+            <UnstyledLink to="?supportTicket=true&supportIssue=general_issue">
               Submit a ticket
             </UnstyledLink>
             &nbsp;to request an increase.

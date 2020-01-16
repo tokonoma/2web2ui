@@ -58,7 +58,7 @@ export const ListProgress = ({
                 details:
                   batch_status === 'usage_limit_exceeded' ? (
                     <>
-                      <UnstyledLink to="/dashboard?supportTicket=true&supportIssue=general_issue">
+                      <UnstyledLink to="?supportTicket=true&supportIssue=general_issue">
                         Submit a ticket
                       </UnstyledLink>
                       &nbsp;to request an increase.
