@@ -30,7 +30,7 @@ export function SingleResult(props) {
         type: 'error',
         message,
         details:
-          status === 400 ? (
+          status === 420 ? (
             <UnstyledLink external to="https://sparkpost.com/sales">
               Contact sales
             </UnstyledLink>

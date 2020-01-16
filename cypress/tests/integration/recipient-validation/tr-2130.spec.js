@@ -12,7 +12,7 @@ describe('TR-2130', () => {
     cy.fixture('recipient-validation/single/400.get.usage-limit-exceeded.json').as('RVFixture');
     cy.route({
       method: 'GET',
-      status: 400,
+      status: 420,
       url: '/api/v1/recipient-validation/single/fake-email@gmail.com',
       response: '@RVFixture',
     }).as('getValidation');
