@@ -63,6 +63,20 @@ describe('The templates edit draft page', () => {
     });
   });
 
+  it('redirects to the list page if the template fails to load', () => {
+    cy.stubRequest({
+      statusCode: 400,
+      url: '/api/v1/templates/stubbed-template-1*',
+      fixture: 'templates/stubbed-template-1/400.get.json',
+    });
+
+    cy.visit(PAGE_URL);
+
+    cy.findByText('Unable to load template').should('be.visible');
+    cy.findByText('Templates').should('be.visible');
+    cy.findByText('Stubbed Template 1').should('not.be.visible');
+  });
+
   describe('template settings', () => {
     it('renders form elements with pre-populated values', () => {
       cy.visit(PAGE_URL);
@@ -263,7 +277,7 @@ describe('The templates edit draft page', () => {
     });
   });
 
-  describe('code editor', () => {
+  describe('the code editor in draft mode', () => {
     it('renders the values of the HTML, AMP HTML, and Text tabs from the stored template', () => {
       cy.visit(PAGE_URL);
 
