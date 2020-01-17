@@ -163,6 +163,17 @@ describe('The templates edit draft page', () => {
       });
 
       it('redirects to the published view and renders a success message when confirmed', () => {
+        cy.stubRequest({
+          method: 'PUT',
+          url: `/api/v1/templates/${TEMPLATE_ID}`,
+          fixture: 'templates/stubbed-template-1/200.put.json',
+        });
+
+        cy.stubRequest({
+          url: `/api/v1/templates/${TEMPLATE_ID}?draft=false`,
+          fixture: 'templates/stubbed-template-1/200.get.published.json',
+        });
+
         cy.visit(PAGE_URL);
 
         cy.findByText('Save and Publish').click();
