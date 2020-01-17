@@ -13,7 +13,7 @@ describe('The templates list page', () => {
     cy.title().should('include', 'Templates');
   });
 
-  it.only('renders an error message when an error occurs when fetching templates and then allows the user to re-request template data within the message', () => {
+  it('renders an error message when an error occurs when fetching templates and then allows the user to re-request template data within the message', () => {
     cy.stubRequest({
       statusCode: 400,
       url: TEMPLATES_API_URL,
