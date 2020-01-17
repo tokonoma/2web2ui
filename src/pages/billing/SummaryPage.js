@@ -34,11 +34,11 @@ export class BillingSummaryPage extends Component {
     getInvoices();
     getUsage();
   }
-  // componentDidUpdate(prevProps) {
-  //   if (this.props.billingInfo !== prevProps.billingInfo) {
-  //     getSubscription();
-  //   }
-  // }
+  componentDidUpdate(prevProps) {
+    if (this.props.billingInfo !== prevProps.billingInfo) {
+      getSubscription();
+    }
+  }
   renderBillingSummary = () => {
     const {
       account,
