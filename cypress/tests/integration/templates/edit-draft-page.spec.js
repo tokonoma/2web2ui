@@ -229,7 +229,7 @@ describe('The templates edit draft page', () => {
         cy.findByLabelText('Template ID *').should('have.value', 'stubbed-template-1-copy');
       });
 
-      it('renders a success message when the user confirms duplication', () => {
+      it.only('renders a success message when the user confirms duplication', () => {
         cy.stubRequest({
           method: 'POST',
           url: '/api/v1/templates',

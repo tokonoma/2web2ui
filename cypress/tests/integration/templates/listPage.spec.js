@@ -13,6 +13,34 @@ describe('The templates list page', () => {
     cy.title().should('include', 'Templates');
   });
 
+  it.only('renders an error message when an error occurs when fetching templates and then allows the user to re-request template data within the message', () => {
+    cy.stubRequest({
+      statusCode: 400,
+      url: TEMPLATES_API_URL,
+      fixture: 'templates/400.get.json',
+    });
+
+    cy.visit('/templates');
+
+    cy.findByText('An error occurred').should('be.visible');
+    cy.findByText('Show Error Details').click();
+    cy.findByText('Error!').should('be.visible');
+    cy.findByText('Hide Error Details').click();
+    cy.findByText('Error!').should('not.be.visible');
+
+    cy.stubRequest({
+      url: TEMPLATES_API_URL,
+      fixture: 'templates/200.get.3-results.json',
+    });
+
+    cy.findByText('Try Again').click();
+
+    cy.findByText('Recent Activity').should('be.visible');
+    cy.findAllByText('Stubbed Template 1').should('have.length', 2);
+    cy.findAllByText('Stubbed Template 2').should('have.length', 2);
+    cy.findAllByText('Stubbed Template 3').should('have.length', 2);
+  });
+
   it('renders an empty state when no templates are returned with a "Create New" button', () => {
     cy.stubRequest({
       url: TEMPLATES_API_URL,
