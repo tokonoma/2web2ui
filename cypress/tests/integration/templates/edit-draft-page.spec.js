@@ -245,6 +245,28 @@ describe('The templates edit draft page', () => {
 
         cy.findByText('Template duplicated.').should('be.visible');
       });
+
+      it('renders an error message if the duplication fails on confirmation', () => {
+        cy.stubRequest({
+          method: 'POST',
+          statusCode: 400,
+          url: '/api/v1/templates',
+          fixture: 'templates/400.post.create.json',
+        });
+
+        cy.visit(PAGE_URL);
+
+        openTemplateSettings();
+
+        cy.findByText('Duplicate').click();
+        cy.findByText('Duplicate').click(); // Duplicate confirmation button inside the modal
+
+        cy.findByText('Something went wrong.').should('be.visible');
+
+        // And the UI persists prior to throwing the error
+        cy.findByLabelText('Template Name *').should('be.visible');
+        cy.findByLabelText('Template ID *').should('be.visible');
+      });
     });
 
     describe('"Delete" button', () => {
@@ -273,6 +295,25 @@ describe('The templates edit draft page', () => {
         cy.findByText('Delete All Versions').click();
 
         cy.findByText('Template deleted').should('be.visible');
+      });
+
+      it('renders an error message if the deletion fails on confirmation', () => {
+        cy.stubRequest({
+          method: 'DELETE',
+          statusCode: 400,
+          url: `/api/v1/templates/${TEMPLATE_ID}`,
+          fixture: 'templates/stubbed-template-1/400.delete.json',
+        });
+
+        cy.visit(PAGE_URL);
+
+        openTemplateSettings();
+
+        cy.findByText('Delete').click();
+        cy.findByText('Delete All Versions').click();
+
+        cy.findByText('Something went wrong.').should('be.visible');
+        cy.findByText('Are you sure you want to delete your template?').should('be.visible'); // The modal remains open
       });
     });
   });
