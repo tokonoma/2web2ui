@@ -168,6 +168,28 @@ describe('The templates published template page', () => {
 
         cy.findByText('Template duplicated.').should('be.visible');
       });
+
+      it('renders an error message if the duplication fails on confirmation', () => {
+        cy.stubRequest({
+          method: 'POST',
+          statusCode: 400,
+          url: '/api/v1/templates',
+          fixture: 'templates/400.post.create.json',
+        });
+
+        cy.visit(PAGE_URL);
+
+        openTemplateSettings();
+
+        cy.findByText('Duplicate').click();
+        cy.findByText('Duplicate').click(); // Duplicate confirmation button inside the modal
+
+        cy.findByText('Something went wrong.').should('be.visible');
+
+        // And the UI persists prior to throwing the error
+        cy.findByLabelText('Template Name *').should('be.visible');
+        cy.findByLabelText('Template ID *').should('be.visible');
+      });
     });
 
     describe('"Delete" button', () => {
