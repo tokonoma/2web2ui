@@ -30,9 +30,18 @@ describe('The templates published template page', () => {
     });
   });
 
+  it('renders the status in the header as "PUBLISHED"', () => {
+    cy.visit(PAGE_URL);
+
+    cy.get('[data-id="template-status"]').within(() => {
+      cy.queryByText('Published').should('be.visible'); // Note - content is capitalized with CSS, so the markup is not "DRAFT"
+    });
+  });
+
   describe('the editor in published mode', () => {
     function checkForReadOnly() {
       cy.findByText('Read Only').should('be.visible');
+      cy.findByText('More').should('not.be.visible'); // Checks that menu is not available on each tab
 
       cy.get(EDITOR_SELECTOR)
         .focus()

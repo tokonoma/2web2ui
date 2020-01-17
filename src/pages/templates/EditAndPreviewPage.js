@@ -39,7 +39,7 @@ const EditAndPreviewPage = () => {
   const primaryArea = () => (
     <>
       {isPublishedMode ? (
-        <div className={styles.Status}>
+        <div className={styles.Status} data-id="template-status">
           <span>Published</span>
 
           <CheckCircle size={17} className={styles.GreenColor} />
