@@ -1,8 +1,9 @@
 /// <reference types="Cypress" />
 
-const templateId = 'stubbed-template-1';
-const editorSelector = '.ace_text-input';
-const PAGE_URL = `/templates/edit/${templateId}/draft/content`;
+// Configuration
+const TEMPLATE_ID = 'stubbed-template-1';
+const EDITOR_SELECTOR = '.ace_text-input';
+const PAGE_URL = `/templates/edit/${TEMPLATE_ID}/draft/content`;
 const DEFAULT_PREVIEW_ERROR_HEADING = 'Oh no! An Error Occurred';
 const DEFAULT_PREVIEW_ERROR_DESCRIPTION =
   'If you notice this happens often, check your substitution data or code syntax as these are frequent causes of preview errors.';
@@ -189,7 +190,7 @@ describe('The templates edit draft page', () => {
 
         cy.visit(PAGE_URL);
 
-        cy.get(editorSelector)
+        cy.get(EDITOR_SELECTOR)
           .focus()
           .type('<h1>Hello, world.</h1>');
 
@@ -248,7 +249,7 @@ describe('The templates edit draft page', () => {
       it('renders a success message and redirects the user to the list page when the deletion is confirmed', () => {
         cy.stubRequest({
           method: 'DELETE',
-          url: `/api/v1/templates/${templateId}`,
+          url: `/api/v1/templates/${TEMPLATE_ID}`,
           fixture: 'templates/stubbed-template-1/200.delete.json',
         });
 
@@ -281,7 +282,7 @@ describe('The templates edit draft page', () => {
 
     it('allows text entry in the HTML, AMP HTML, Text, and Test Data tabs', () => {
       const typeInEditor = content => {
-        cy.get(editorSelector)
+        cy.get(EDITOR_SELECTOR)
           .focus()
           .clear()
           .type(content)
