@@ -1,0 +1,26 @@
+{
+  "results": {
+    "id": "stubbed-template-1",
+    "name": "Stubbed Template 1",
+    "description": "This is a description",
+    "published": true,
+    "options": {
+      "click_tracking": true,
+      "transactional": false,
+      "open_tracking": true
+    },
+    "shared_with_subaccounts": false,
+    "last_update_time": "2019-11-26T17:14:37+00:00",
+    "has_published": true,
+    "has_draft": true,
+    "content": {
+      "subject": "Stubbed Template 1",
+      "from": {
+        "email": "fake-user@bounce.uat.sparkspam.com"
+      },
+      "text": "This is some text",
+      "html": "<h1>HTML!</h1>",
+      "amp_html": "AMP HTML!"
+    }
+  }
+}

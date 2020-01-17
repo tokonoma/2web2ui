@@ -4,6 +4,9 @@
 // https://on.cypress.io/custom-commands
 // ***********************************************
 
+// type definitions for Cypress object "cy"
+/// <reference types="cypress" />
+
 import '@testing-library/cypress/add-commands';
 import 'cypress-file-upload';
 

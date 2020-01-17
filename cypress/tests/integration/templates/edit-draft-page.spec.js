@@ -1,5 +1,3 @@
-/// <reference types="Cypress" />
-
 // Configuration
 const TEMPLATE_ID = 'stubbed-template-1';
 const EDITOR_SELECTOR = '.ace_text-input';
