@@ -1,0 +1,9 @@
+{
+  "errors": [
+    {
+      "message": "This is an error message",
+      "description": "This is an error description",
+      "code": "12"
+    }
+  ]
+}

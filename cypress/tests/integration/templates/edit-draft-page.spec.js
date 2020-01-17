@@ -3,6 +3,9 @@
 const templateId = 'stubbed-template-1';
 const editorSelector = '.ace_text-input';
 const PAGE_URL = `/templates/edit/${templateId}/draft/content`;
+const DEFAULT_PREVIEW_ERROR_HEADING = 'Oh no! An Error Occurred';
+const DEFAULT_PREVIEW_ERROR_DESCRIPTION =
+  'If you notice this happens often, check your substitution data or code syntax as these are frequent causes of preview errors.';
 
 function openTemplateSettings() {
   cy.findByText('Open Menu').click({ force: true }); // The content is visually hidden (intentionally!), so `force: true` is needed here
@@ -523,8 +526,53 @@ describe('The templates edit draft page', () => {
       cy.findByText('Successfully sent a test email').should('be.visible');
     });
 
-    it('renders an syntax error with the relevant line number when the custom status code is "3000"', () => {});
+    describe('preview error handling', () => {
+      function beforeSteps({ fixture }) {
+        cy.stubRequest({
+          method: 'POST',
+          statusCode: 422,
+          url: '/api/v1/utils/content-previewer',
+          fixture,
+          requestAlias: 'previewRequest',
+        });
 
-    it('renders an error and its description if the custom status code is not "3000"', () => {});
+        cy.visit(PAGE_URL);
+
+        cy.wait('@previewRequest');
+      }
+
+      it('renders an syntax error with the relevant line number when the custom status code is "3000"', () => {
+        beforeSteps({ fixture: 'utils/content-previewer/422.post.code-3000.json' });
+
+        cy.findByText(DEFAULT_PREVIEW_ERROR_HEADING).should('be.visible');
+        cy.findByText(
+          'We are unable to load your template preview due to a substitution language syntax error in template content on line 1 of your html.',
+        ).should('be.visible');
+        cy.findByText(DEFAULT_PREVIEW_ERROR_DESCRIPTION).should('be.visible');
+      });
+
+      it('renders a syntax error without line number information if that information is not returned by the server', () => {
+        beforeSteps({ fixture: 'utils/content-previewer/422.post.code-3000-no-line.json' });
+
+        cy.findByText(DEFAULT_PREVIEW_ERROR_HEADING).should('be.visible');
+        cy.findByText('This is an error description').should('not.be.visible');
+        cy.findByText(DEFAULT_PREVIEW_ERROR_DESCRIPTION).should('be.visible');
+      });
+
+      it('renders an error and its description if the custom status code is not "3000"', () => {
+        beforeSteps({ fixture: 'utils/content-previewer/422.post.json' });
+
+        cy.findByText(DEFAULT_PREVIEW_ERROR_HEADING).should('be.visible');
+        cy.findByText('This is an error description').should('be.visible');
+        cy.findByText(DEFAULT_PREVIEW_ERROR_DESCRIPTION).should('be.visible');
+      });
+
+      it('renders the default heading and description when no error code or description are returned from the server', () => {
+        beforeSteps({ fixture: 'utils/content-previewer/422.post.no-code-or-description.json' });
+
+        cy.findByText(DEFAULT_PREVIEW_ERROR_HEADING).should('be.visible');
+        cy.findByText(DEFAULT_PREVIEW_ERROR_DESCRIPTION).should('be.visible');
+      });
+    });
   });
 });
