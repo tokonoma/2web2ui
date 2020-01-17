@@ -168,5 +168,34 @@ describe('The recipient validation list progress page', () => {
 
       cy.findByText('Processing').should('be.visible');
     });
+
+    it('it renders a "Validation Error" and an alert with "Validation Limit Exceeded" if the batch status on the list page is "usage_limit_exceeded"', () => {
+      cy.server();
+      cy.fixture('recipient-validation/list/200.get.usage-limit-exceeded.json').as('RVFixture');
+      cy.route({
+        url: '/api/v1/recipient-validation/job/fake-list',
+        response: '@RVFixture',
+      }).as('getValidation');
+
+      cy.visit('/recipient-validation/list/fake-list');
+
+      cy.wait('@getValidation');
+
+      cy.queryByText('Validation Error').should('be.visible');
+
+      cy.wait(5000); // Wait for the polling interval as defined on the list progress component
+
+      cy.findByText('Validation limit exceeded').should('be.visible');
+
+      cy.findByText('View Details')
+        .last()
+        .click();
+
+      cy.findByText('Submit a ticket')
+        .should('have.attr', 'href', '?supportTicket=true&supportIssue=general_issue')
+        .click();
+
+      cy.findByText('I need help with...').should('be.visible');
+    });
   });
 });

@@ -104,17 +104,47 @@ describe('The recipient validation single result page', () => {
     );
   });
 
-  it('renders an error and redirects if the request for validation fails', () => {
-    cy.stubRequest({
-      url: SINGLE_RESULT_URL,
-      statusCode: 400,
-      fixture: '/recipient-validation/single/fake-email/400.get.json',
-    });
+  it('renders generic error messages directly from the server if the status code is not "420"', () => {
+    cy.server();
+    cy.fixture('recipient-validation/single/400.get.json').as('RVFixture');
+    cy.route({
+      method: 'GET',
+      status: 400,
+      url: '/api/v1/recipient-validation/single/fake-email@gmail.com',
+      response: '@RVFixture',
+    }).as('getValidation');
 
-    cy.visit('/recipient-validation/single/fake-email@sparkpost.com');
+    cy.visit('/recipient-validation/single/fake-email@gmail.com');
 
-    cy.findByText('Request failed with status code 400').should('be.visible');
-    cy.title().should('eq', 'Recipient Validation | SparkPost');
-    cy.findByText('Validate a Single Address').should('be.visible');
+    cy.wait('@getValidation');
+
+    cy.findByText('This is an error').should('be.visible');
+  });
+
+  it('renders an error on the single validation page when the server returns a 400 error with the message "Validation limit exceeded"', () => {
+    cy.server();
+    cy.fixture('recipient-validation/single/420.get.usage-limit-exceeded.json').as('RVFixture');
+    cy.route({
+      method: 'GET',
+      status: 420,
+      url: '/api/v1/recipient-validation/single/fake-email@gmail.com',
+      response: '@RVFixture',
+    }).as('getValidation');
+
+    cy.visit('/recipient-validation/single/fake-email@gmail.com');
+
+    cy.wait('@getValidation');
+
+    cy.findByText('Validation limit exceeded').should('be.visible');
+
+    cy.findAllByText('View Details')
+      .last()
+      .click();
+
+    cy.findByText('Submit a ticket')
+      .should('have.attr', 'href', '?supportTicket=true&supportIssue=general_issue')
+      .click();
+
+    cy.findByText('I need help with...').should('be.visible');
   });
 });
