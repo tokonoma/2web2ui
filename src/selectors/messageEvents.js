@@ -3,83 +3,88 @@ import { formatDateTime } from 'src/helpers/date';
 import moment from 'moment';
 import { createSelector, createStructuredSelector } from 'reselect';
 
-const getMessageEvents = (state) => state.messageEvents.events;
-const getMessageEventsCSV = (state) => state.messageEvents.eventsCSV;
-const getMessageHistory = (state) => state.messageEvents.history;
-const getSingleSelectedEvent = (state) => state.messageEvents.selectedEvent;
+const getMessageEvents = state => state.messageEvents.events;
+const getMessageEventsCSV = state => state.messageEvents.eventsCSV;
+const getMessageHistory = state => state.messageEvents.history;
+const getSingleSelectedEvent = state => state.messageEvents.selectedEvent;
 export const getMessageIdParam = (state, props) => props.match.params.messageId;
 const getEventIdParam = (state, props) => props.match.params.eventId;
 
-const appendFormattedDate = (event) => ({
+const appendFormattedDate = event => ({
   ...event,
-  formattedDate: formatDateTime(event.timestamp)
+  formattedDate: formatDateTime(event.timestamp),
 });
 
-export const selectMessageEvents = createSelector(
-  [ getMessageEvents ],
-  (events) => _.map(events, appendFormattedDate)
+export const selectMessageEvents = createSelector([getMessageEvents], events =>
+  _.map(events, appendFormattedDate),
 );
 
-export const selectMessageEventsCSV = createSelector(
-  [ getMessageEventsCSV ],
-  (events) => _.map(events, appendFormattedDate)
+export const selectMessageEventsCSV = createSelector([getMessageEventsCSV], events =>
+  _.map(events, appendFormattedDate),
 );
 
 export const selectMessageHistory = createSelector(
   [getMessageHistory, getMessageIdParam],
-  (history, id) => _.map(history[id], appendFormattedDate)
+  (history, id) => _.map(history[id], appendFormattedDate),
 );
 
 export const selectInitialEventId = createSelector(
   [selectMessageHistory, getEventIdParam],
-  (messageHistory, selectedEventId) => selectedEventId || _.get(messageHistory[0], 'event_id')
+  (messageHistory, selectedEventId) => selectedEventId || _.get(messageHistory[0], 'event_id'),
 );
 
-const selectMessageEventsDateOptions = (state) => ({
-  from: moment(_.get(state, 'messageEvents.search.dateOptions.from')).utc().format(),
-  to: moment(_.get(state, 'messageEvents.search.dateOptions.to')).utc().format(),
-  range: _.get(state, 'messageEvents.search.dateOptions.relativeRange')
+const selectMessageEventsDateOptions = state => ({
+  from: moment(_.get(state, 'messageEvents.search.dateOptions.from'))
+    .utc()
+    .format(),
+  to: moment(_.get(state, 'messageEvents.search.dateOptions.to'))
+    .utc()
+    .format(),
+  range: _.get(state, 'messageEvents.search.dateOptions.relativeRange'),
 });
 
-const selectSearch = (state) => _.omit(state.messageEvents.search, ['dateOptions']);
+const selectSearch = state => _.omit(state.messageEvents.search, ['dateOptions']);
 
 /**
  * Converts reportOptions for url sharing for message events
  */
 export const selectMessageEventsSearchOptions = createSelector(
   [selectMessageEventsDateOptions, selectSearch],
-  (dates, search) => ({ ...dates, ...search })
+  (dates, search) => ({ ...dates, ...search }),
 );
 
 export const isMessageHistoryEmpty = createSelector(
   [getMessageHistory, getMessageIdParam],
-  (history, id) => _.get(history, id, []).length === 0
+  (history, id) => _.get(history, id, []).length === 0,
 );
 
 export const getSelectedEventFromMessageHistory = createSelector(
   [selectMessageHistory, getEventIdParam],
-  (messageHistory, eventId) => _.find(messageHistory, (event) => event.event_id === eventId)
+  (messageHistory, eventId) => _.find(messageHistory, ['event_id', eventId]),
 );
 
 //whether the event is without a message_id (defaulted to _noid_)
-const isOrphanEvent = createSelector(
-  [getMessageIdParam], (messageId) => messageId === '_noid_'
-);
+const isOrphanEvent = createSelector([getMessageIdParam], messageId => messageId === '_noid_');
 
 const getSelectedEvent = createSelector(
-  [isOrphanEvent, getSingleSelectedEvent, getSelectedEventFromMessageHistory], (isOrphanEvent, selectedEvent, eventFromMessageHistory) => isOrphanEvent ? selectedEvent : eventFromMessageHistory
+  [isOrphanEvent, getSingleSelectedEvent, getSelectedEventFromMessageHistory],
+  (isOrphanEvent, selectedEvent, eventFromMessageHistory) =>
+    isOrphanEvent ? selectedEvent : eventFromMessageHistory,
 );
 
-export const eventPageMSTP = (state, props) => createStructuredSelector({
-  isMessageHistoryEmpty: isMessageHistoryEmpty,
-  isOrphanEvent: isOrphanEvent,
-  loading: (state) => !!(state.messageEvents.historyLoading ||
-    state.messageEvents.documentationLoading ||
-    state.messageEvents.selectedEventLoading),
-  messageHistory: selectMessageHistory,
-  messageId: getMessageIdParam,
-  documentation: (state) => state.messageEvents.documentation,
-  selectedEventId: selectInitialEventId,
-  selectedEvent: getSelectedEvent
-});
-
+export const eventPageMSTP = () =>
+  createStructuredSelector({
+    isMessageHistoryEmpty: isMessageHistoryEmpty,
+    isOrphanEvent: isOrphanEvent,
+    loading: state =>
+      !!(
+        state.messageEvents.historyLoading ||
+        state.messageEvents.documentationLoading ||
+        state.messageEvents.selectedEventLoading
+      ),
+    messageHistory: selectMessageHistory,
+    messageId: getMessageIdParam,
+    documentation: state => state.messageEvents.documentation,
+    selectedEventId: selectInitialEventId,
+    selectedEvent: getSelectedEvent,
+  });
