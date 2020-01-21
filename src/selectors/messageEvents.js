@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { formatDateTime } from 'src/helpers/date';
+import { formatDateTime, formatDateTimeWithoutYear } from 'src/helpers/date';
 import moment from 'moment';
 import { createSelector, createStructuredSelector } from 'reselect';
 
@@ -15,8 +15,13 @@ const appendFormattedDate = event => ({
   formattedDate: formatDateTime(event.timestamp),
 });
 
+const appendFormattedDateWithoutYear = event => ({
+  ...event,
+  formattedDate: formatDateTimeWithoutYear(event.timestamp),
+});
+
 export const selectMessageEvents = createSelector([getMessageEvents], events =>
-  _.map(events, appendFormattedDate),
+  _.map(events, appendFormattedDateWithoutYear),
 );
 
 export const selectMessageEventsCSV = createSelector([getMessageEventsCSV], events =>
