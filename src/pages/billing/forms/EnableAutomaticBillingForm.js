@@ -10,8 +10,8 @@ import { Loading } from 'src/components/loading/Loading';
 import { prepareCardInfo } from 'src/helpers/billing';
 import { getFirstCountry, getFirstStateForCountry } from 'src/selectors/accountBillingForms';
 import PlanSummary from '../components/PlanSummary';
-import BillingAddressForm from './fields/BillingAddressForm';
-import PaymentForm from './fields/PaymentForm';
+import BillingAddressForm from 'src/components/billing/BillingAddressForm';
+import PaymentForm from 'src/components/billing/PaymentForm';
 
 const FORMNAME = 'enableAutomaticBilling';
 
