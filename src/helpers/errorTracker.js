@@ -19,7 +19,7 @@ const BLACKLIST = new Set([
   '@@redux-form/UPDATE_SYNC_ERRORS',
   '@@redux-form/INITIALIZE',
   '@@redux-form/STOP_SUBMIT',
-  '@@redux-form/SET_SUBMIT_FAILED'
+  '@@redux-form/SET_SUBMIT_FAILED',
 ]);
 
 /**
@@ -46,7 +46,10 @@ export function breadcrumbCallback(crumb) {
 function filterURL(url) {
   const filters = [
     { re: /\/reset-password\/.*$/, replacement: '/reset-password/[FILTERED]' },
-    { re: /\/account\/email-verification\/.*$/, replacement: '/account/email-verification/[FILTERED]' }
+    {
+      re: /\/account\/email-verification\/.*$/,
+      replacement: '/account/email-verification/[FILTERED]',
+    },
   ];
 
   if (!url) {
@@ -69,7 +72,7 @@ function filterUrlFromKeyIn(obj, key) {
   }
   return {
     ...obj,
-    [key]: filterURL(obj[key])
+    [key]: filterURL(obj[key]),
   };
 }
 
@@ -87,7 +90,7 @@ function filterRequest(request) {
 
   return {
     ...urlFiltered,
-    headers
+    headers,
   };
 }
 
@@ -108,23 +111,26 @@ export function getEnricherOrDieTryin(store, currentWindow) {
 
     return {
       ...data,
-      extra: { // extra data that doesn't need to be searchable
+      extra: {
+        // extra data that doesn't need to be searchable
         ...data.extra,
         isApiError: apiError,
         isChunkFailure: chunkFailure,
-        isSupportedBrowser
+        isSupportedBrowser,
       },
       request,
-      level: !fromOurBundle || apiError || chunkFailure || !isSupportedBrowser ? 'warning' : 'error',
-      tags: { // all tags can be easily searched and sent in Slack notifications
+      level:
+        !fromOurBundle || apiError || chunkFailure || !isSupportedBrowser ? 'warning' : 'error',
+      tags: {
+        // all tags can be easily searched and sent in Slack notifications
         ...data.tags,
         customer: _.get(user, 'customer'),
         // This <html> property should be set by us and updated when page is translated
         documentLanguage: _.get(currentWindow, 'document.documentElement.lang', 'unknown'),
         navigatorLanguage: _.get(currentWindow, 'navigator.language', 'unknown'),
-        source: fromOurBundle ? '2web2ui' : 'unknown'
+        source: fromOurBundle ? '2web2ui' : 'unknown',
       },
-      user
+      user,
     };
   };
 }
@@ -163,7 +169,6 @@ export function isChunkFailure(data) {
 // The purpose of this helper is to provide a common interface for reporting errors
 // with the expectation that the current service will change in the future.
 class ErrorTracker {
-
   /**
    * The service must be configured before it can be used
    * @param {object} store - the Redux store for additional context
@@ -173,14 +178,16 @@ class ErrorTracker {
     const { release, sentry, tenantId } = config;
 
     // Silently ignore installation if Sentry configuration is not provided
-    if (!sentry) { return; }
+    if (!sentry) {
+      return;
+    }
 
     const dsn = `https://${sentry.publicKey}@sentry.io/${sentry.projectId}`;
     const options = {
       breadcrumbCallback,
       dataCallback: getEnricherOrDieTryin(store, window),
       release,
-      tags: { tenant: tenantId }
+      tags: { tenant: tenantId },
     };
 
     Raven.config(dsn, options).install();
@@ -205,7 +212,9 @@ class ErrorTracker {
    */
   report(logger, error, extra = {}) {
     // Silently ignore if Sentry is not setup
-    if (!Raven.isSetup()) { return; }
+    if (!Raven.isSetup()) {
+      return;
+    }
     Raven.captureException(error, { logger, extra });
   }
 }
