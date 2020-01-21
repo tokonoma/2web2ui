@@ -33,19 +33,13 @@ describe('EnableAutomaticBillingForm', () => {
 
   it('renders form disabled', () => {
     const wrapper = subject({ submitting: true });
-    expect(
-      wrapper
-        .find('Button')
-        .render()
-        .text(),
-    ).toEqual('Loading...');
+    expect(wrapper.find('Button')).toHaveTextContent('Loading...');
   });
 
   it('creates billing, redirects, and shows alert on submit', async () => {
     const props = {
       billingUpdate: jest.fn(() => Promise.resolve()),
       updateBillingSubscription: jest.fn(() => Promise.resolve()),
-      getSubscription: jest.fn(() => Promise.resolve()),
       history: { push: jest.fn() },
       showAlert: jest.fn(),
     };
@@ -64,6 +58,7 @@ describe('EnableAutomaticBillingForm', () => {
 
     expect(billingHelpers.prepareCardInfo).toHaveBeenCalledWith(values.card);
     expect(props.billingUpdate).toHaveBeenCalledWith({ ...values, card: preparedCardInfo });
+    expect(props.updateBillingSubscription).toHaveBeenCalled();
     expect(props.history.push).toHaveBeenCalledWith('/account/billing');
     expect(props.showAlert).toHaveBeenCalledWith(expect.objectContaining({ type: 'success' }));
   });

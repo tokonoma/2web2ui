@@ -15,7 +15,7 @@ exports[`Page: BillingSummaryPage should render correctly when not loading 1`] =
         }
       }
       condition={[Function]}
-      key="0"
+      key="suspended-billing"
     />
     <ManuallyBilledBanner
       account={
@@ -24,7 +24,7 @@ exports[`Page: BillingSummaryPage should render correctly when not loading 1`] =
         }
       }
       condition={[Function]}
-      key="1"
+      key="manually-billed-banner"
       onZuoraPlan={true}
     />
     <BillingSummary
@@ -35,7 +35,7 @@ exports[`Page: BillingSummaryPage should render correctly when not loading 1`] =
       }
       accountAgeInDays={5}
       condition={[Function]}
-      key="3"
+      key="billing-summary"
       onZuoraPlan={true}
       sendingIps={
         Object {

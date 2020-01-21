@@ -30,7 +30,6 @@ describe('Selector: Access Condition State', () => {
       accountPlan: testState.billing.plans[1],
       plans: testState.billing.plans,
       ready: false,
-      subscription: testState.billing.subscription,
     };
   });
 

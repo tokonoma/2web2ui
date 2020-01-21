@@ -13,7 +13,6 @@ import BillingSummary from './components/BillingSummary';
 import ManuallyBilledBanner from './components/ManuallyBilledBanner';
 import SuspendedForBilling from './components/SuspendedForBilling';
 import { list as getInvoices } from 'src/actions/invoices';
-import _ from 'lodash';
 import { isBillingSubscriptionSelfServe } from 'src/helpers/conditions/account';
 export class BillingSummaryPage extends Component {
   componentDidMount() {
@@ -50,14 +49,18 @@ export class BillingSummaryPage extends Component {
       subscription,
     } = this.props;
     const suspendedBilling = (
-      <SuspendedForBilling condition={isSuspendedForBilling} account={account} key={0} />
+      <SuspendedForBilling
+        condition={isSuspendedForBilling}
+        account={account}
+        key={'suspended-billing'}
+      />
     );
     const manuallyBilledBanner = (
       <ManuallyBilledBanner
         account={account}
         onZuoraPlan={billingInfo.onZuoraPlan}
         condition={defaultCase}
-        key={1}
+        key={'manually-billed-banner'}
       />
     );
     const billingSummary = (
@@ -70,7 +73,7 @@ export class BillingSummaryPage extends Component {
         invoices={invoices}
         sendingIps={sendingIps}
         accountAgeInDays={accountAgeInDays}
-        key={3}
+        key={'billing-summary'}
       />
     );
     if (!isBillingSubscriptionSelfServe(billingInfo))

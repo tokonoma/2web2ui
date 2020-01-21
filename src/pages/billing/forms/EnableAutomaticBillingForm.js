@@ -3,11 +3,7 @@ import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import { withRouter } from 'react-router-dom';
 import { Button, Grid, Panel } from '@sparkpost/matchbox';
-import {
-  getBillingCountries,
-  updateBillingSubscription,
-  getSubscription,
-} from 'src/actions/billing';
+import { getBillingCountries, updateBillingSubscription } from 'src/actions/billing';
 import billingUpdate from 'src/actions/billingUpdate';
 import { showAlert } from 'src/actions/globalAlert';
 import { Loading } from 'src/components/loading/Loading';
@@ -25,13 +21,7 @@ export class EnableAutomaticBillingForm extends React.Component {
   }
 
   onSubmit = values => {
-    const {
-      billingUpdate,
-      history,
-      showAlert,
-      getSubscription,
-      updateBillingSubscription,
-    } = this.props;
+    const { billingUpdate, history, showAlert, updateBillingSubscription } = this.props;
 
     return billingUpdate({ ...values, card: prepareCardInfo(values.card) })
       .then(() =>
@@ -39,7 +29,6 @@ export class EnableAutomaticBillingForm extends React.Component {
           type: 'active',
         }),
       )
-      .then(() => getSubscription())
       .then(() => {
         history.push('/account/billing');
         showAlert({ type: 'success', message: 'Automatic Billing Enabled' });
@@ -111,7 +100,6 @@ const mapDispatchtoProps = {
   billingUpdate,
   getBillingCountries,
   showAlert,
-  getSubscription,
   updateBillingSubscription,
 };
 
