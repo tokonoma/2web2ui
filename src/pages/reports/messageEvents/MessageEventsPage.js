@@ -3,11 +3,23 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { snakeToFriendly } from 'src/helpers/string';
 import { Button, Page } from '@sparkpost/matchbox';
-import { PanelLoading, TableCollection, CursorPaging, PerPageButtons, ApiErrorBanner, Empty } from 'src/components';
+import {
+  PanelLoading,
+  TableCollection,
+  CursorPaging,
+  PerPageButtons,
+  ApiErrorBanner,
+  Empty,
+} from 'src/components';
 import DisplayDate from 'src/components/displayDate/DisplayDate';
 import MessageEventsSearch from './components/MessageEventsSearch';
 import ViewDetailsButton from './components/ViewDetailsButton';
-import { getMessageEvents, changePage, getMessageEventsCSV, clearCSV } from 'src/actions/messageEvents';
+import {
+  getMessageEvents,
+  changePage,
+  getMessageEventsCSV,
+  clearCSV,
+} from 'src/actions/messageEvents';
 import { selectMessageEvents, selectMessageEventsCSV } from 'src/selectors/messageEvents';
 import { formatToCsv, download } from 'src/helpers/downloading';
 import { DEFAULT_PER_PAGE_BUTTONS } from 'src/constants';
@@ -23,15 +35,14 @@ const columns = [
   { label: 'Recipient' },
   { label: 'From Address' },
   { label: 'Time' },
-  null
+  null,
 ];
 
 export class MessageEventsPage extends Component {
-
   state = {
     currentPage: 1,
-    perPage: 25
-  }
+    perPage: 25,
+  };
 
   componentDidUpdate(prevProps) {
     const { search, getMessageEvents, eventsCSV } = this.props;
@@ -54,17 +65,17 @@ export class MessageEventsPage extends Component {
     clearCSV();
   };
 
-  handlePageChange = (currentPage) => {
+  handlePageChange = currentPage => {
     this.setState({ currentPage });
     const { changePage } = this.props;
     return changePage(currentPage);
-  }
+  };
 
-  handlePerPageChange = (perPage) => {
+  handlePerPageChange = perPage => {
     const { search, getMessageEvents } = this.props;
     this.setState({ perPage, currentPage: 1 });
     getMessageEvents({ perPage, ...search });
-  }
+  };
 
   //Reload the first page w/ api call, NOT from cache
   handleFirstPage = () => {
@@ -72,34 +83,39 @@ export class MessageEventsPage extends Component {
     const { perPage } = this.state;
     this.setState({ currentPage: 1 });
     getMessageEvents({ perPage, ...search });
-  }
+  };
 
   isPreviousDisabled = () => {
     const { currentPage } = this.state;
     return currentPage <= 1;
-  }
+  };
 
   isNextDisabled = () => {
     const { hasMorePagesAvailable } = this.props;
     return !hasMorePagesAvailable;
-  }
+  };
 
   getCSV = () => {
     const { search, getMessageEventsCSV } = this.props;
     getMessageEventsCSV(search);
-  }
+  };
 
-  getRowData = (rowData) => {
+  getRowData = rowData => {
     const { timestamp, formattedDate, type, friendly_from, rcpt_to, subject } = rowData;
     return [
       snakeToFriendly(type),
       <div className={styles.MessageSubject}>{subject}</div>,
       rcpt_to,
       friendly_from,
-      <DisplayDate timestamp={timestamp} formattedDate={formattedDate} diffTime={59} diffScale='seconds'/>,
-      <ViewDetailsButton {...rowData} />
+      <DisplayDate
+        timestamp={timestamp}
+        formattedDate={formattedDate}
+        diffTime={59}
+        diffScale="seconds"
+      />,
+      <ViewDetailsButton {...rowData} />,
     ];
-  }
+  };
 
   renderError() {
     const { error, getMessageEvents, search } = this.props;
@@ -120,41 +136,41 @@ export class MessageEventsPage extends Component {
       return <PanelLoading />;
     }
 
-    const content = empty
-      ? <Empty message={emptyMessage} />
-      : (
-        <div>
-          <TableCollection
-            columns={columns}
-            rows={events}
-            getRowData={this.getRowData}
-            defaultSortColumn='timestamp'
-            defaultSortDirection='desc'
-          />
-          <CursorPaging
-            currentPage={currentPage}
-            handlePageChange = {this.handlePageChange}
-            previousDisabled={this.isPreviousDisabled()}
-            nextDisabled={this.isNextDisabled()}
-            handleFirstPage={this.handleFirstPage}
-            perPage={perPage}
+    const content = empty ? (
+      <Empty message={emptyMessage} />
+    ) : (
+      <div>
+        <TableCollection
+          columns={columns}
+          rows={events}
+          getRowData={this.getRowData}
+          defaultSortColumn="timestamp"
+          defaultSortDirection="desc"
+        />
+        <CursorPaging
+          currentPage={currentPage}
+          handlePageChange={this.handlePageChange}
+          previousDisabled={this.isPreviousDisabled()}
+          nextDisabled={this.isNextDisabled()}
+          handleFirstPage={this.handleFirstPage}
+          perPage={perPage}
+          totalCount={totalCount}
+        />
+        <div className={styles.RightAlignedButtons}>
+          <PerPageButtons
             totalCount={totalCount}
+            data={events}
+            onPerPageChange={this.handlePerPageChange}
+            perPageButtons={DEFAULT_PER_PAGE_BUTTONS}
+            perPage={perPage}
+            saveCsv={true}
           />
-          <div className={styles.RightAlignedButtons}>
-            <PerPageButtons
-              totalCount={totalCount}
-              data={events}
-              onPerPageChange={this.handlePerPageChange}
-              perPageButtons={DEFAULT_PER_PAGE_BUTTONS}
-              perPage={perPage}
-              saveCsv={true}
-            />
-            <Button onClick={this.getCSV} disabled={eventsCSVLoading}>
-              {(eventsCSVLoading) ? 'Saving CSV...' : 'Save as CSV'}
-            </Button>
-          </div>
+          <Button onClick={this.getCSV} disabled={eventsCSVLoading}>
+            {eventsCSVLoading ? 'Saving CSV...' : 'Save as CSV'}
+          </Button>
         </div>
-      );
+      </div>
+    );
 
     return content;
   }
@@ -163,20 +179,26 @@ export class MessageEventsPage extends Component {
     const { error } = this.props;
 
     return (
-      <Page title='Events Search'>
+      <Page title="Events Search">
         <MessageEventsSearch />
         {error ? this.renderError() : this.renderCollection()}
       </Page>
     );
   }
-
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   const events = selectMessageEvents(state);
   const eventsCSV = selectMessageEventsCSV(state);
   const { messageEvents } = state;
-  const { loading, error, search, totalCount, hasMorePagesAvailable, eventsCSVLoading } = messageEvents;
+  const {
+    loading,
+    error,
+    search,
+    totalCount,
+    hasMorePagesAvailable,
+    eventsCSVLoading,
+  } = messageEvents;
   return {
     events: events,
     loading,
@@ -186,8 +208,13 @@ const mapStateToProps = (state) => {
     totalCount,
     hasMorePagesAvailable,
     eventsCSV,
-    eventsCSVLoading
+    eventsCSVLoading,
   };
 };
 
-export default connect(mapStateToProps, { getMessageEvents, getMessageEventsCSV, changePage, clearCSV })(MessageEventsPage);
+export default connect(mapStateToProps, {
+  getMessageEvents,
+  getMessageEventsCSV,
+  changePage,
+  clearCSV,
+})(MessageEventsPage);
