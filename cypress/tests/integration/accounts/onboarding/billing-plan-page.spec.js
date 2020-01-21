@@ -137,10 +137,14 @@ describe('The billing plan page', () => {
           fixture: 'account/subscription/promo-codes/400.get.json',
           url: '/api/v1/account/subscription/promo-codes/*',
           statusCode: 400,
+          alias: 'invalidPromoCode',
         });
 
         cy.findByLabelText('Promo Code').type('abc');
         cy.findByText('Apply').click();
+
+        cy.wait('@invalidPromoCodeRequest');
+
         cy.queryByText('Invalid promo code').should('be.visible');
       });
 
@@ -149,9 +153,13 @@ describe('The billing plan page', () => {
           url: '/api/v1/account/subscription/promo-codes/*',
           fixture: 'account/subscription/promo-codes/404.get.json',
           statusCode: 404,
+          alias: 'resourceNotFound',
         });
 
         cy.findByText('Apply').click();
+
+        cy.wait('@resourceNotFoundRequest');
+
         cy.queryByText('Resource could not be found');
       });
 

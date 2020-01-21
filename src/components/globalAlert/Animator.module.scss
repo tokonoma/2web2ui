@@ -2,23 +2,26 @@
 
 .Animator {
   display: block;
-
   transform: translate(20px, 0);
+  visibility: hidden;
   opacity: 0;
-  transition: 0.2s cubic-bezier(0,0,.5,1.5);
+  transition: 0.2s cubic-bezier(0, 0, 0.5, 1.5);
 }
 
 .entered {
   transform: translate(0, 0);
+  visibility: visible;
   opacity: 1;
 }
 
-.exiting, .exited {
+.exiting,
+.exited {
   transform: translate(20px, 0);
   opacity: 0;
 }
 
 .exited {
   height: 0 !important;
+  visibility: hidden;
   pointer-events: none;
 }
