@@ -214,4 +214,34 @@ describe('SingleResult', () => {
 
     expect(queryByText('Recipient Validation')).toBeInTheDocument();
   });
+
+  it('renders the relevant API response value in the "Raw API Response" portion of the view', () => {
+    const { queryByTestId } = subject({
+      singleResults: {
+        valid: false,
+        is_role: false,
+        is_disposable: false,
+        is_free: false,
+        reason: 'fake reason',
+        did_you_mean: 'fake-email@gmail.com',
+      },
+    });
+
+    expect(queryByTestId('valid-value')).toHaveTextContent('false', { normalizeWhitespace: true });
+    expect(queryByTestId('is_role-value')).toHaveTextContent('false', {
+      normalizeWhitespace: true,
+    });
+    expect(queryByTestId('is_disposable-value')).toHaveTextContent('false', {
+      normalizeWhitespace: true,
+    });
+    expect(queryByTestId('is_free-value')).toHaveTextContent('false', {
+      normalizeWhitespace: true,
+    });
+    expect(queryByTestId('reason-value')).toHaveTextContent('fake reason', {
+      normalizeWhitespace: true,
+    });
+    expect(queryByTestId('did_you_mean-value')).toHaveTextContent('fake-email@gmail.com', {
+      normalizeWhitespace: true,
+    });
+  });
 });

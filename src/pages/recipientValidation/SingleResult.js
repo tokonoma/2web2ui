@@ -113,8 +113,12 @@ function TabCharacter() {
   return <span className={styles.TabCharacter} />;
 }
 
-function WhiteText({ children }) {
-  return <span className={styles.WhiteText}>{children}</span>;
+function WhiteText(props) {
+  return (
+    <span className={styles.WhiteText} data-id={props['data-id']}>
+      {props.children}
+    </span>
+  );
 }
 
 function ResultList({ data }) {
@@ -206,35 +210,40 @@ function ResultCodeBlock({ data }) {
         <>
           <TabCharacter />
           <TabCharacter />
-          "result": "<WhiteText>{result}</WhiteText>",
+          "result": "<WhiteText data-id="result-value">{result}</WhiteText>",
           <br />
         </>
       )}
       <TabCharacter />
       <TabCharacter />
-      "valid": <WhiteText>{valid && valid.toString()}</WhiteText>,<br />
+      "valid": <WhiteText data-id="valid-value">{valid.toString()}</WhiteText>,<br />
       {reason && (
         <>
           <TabCharacter />
           <TabCharacter />
-          "reason": "<WhiteText>{reason}</WhiteText>",
+          "reason": "<WhiteText data-id="reason-value">{reason}</WhiteText>",
           <br />
         </>
       )}
       <TabCharacter />
       <TabCharacter />
-      "is_role": <WhiteText>{is_role && is_role.toString()}</WhiteText>,<br />
+      "is_role": <WhiteText data-id="is_role-value">{is_role.toString()}</WhiteText>,
+      <br />
       <TabCharacter />
       <TabCharacter />
-      "is_disposable": <WhiteText>{is_disposable && is_disposable.toString()}</WhiteText>,<br />
+      "is_disposable":{' '}
+      <WhiteText data-id="is_disposable-value">{is_disposable.toString()}</WhiteText>
+      ,<br />
       <TabCharacter />
       <TabCharacter />
-      "is_free": <WhiteText>{is_free && is_free.toString()}</WhiteText>,<br />
+      "is_free": <WhiteText data-id="is_free-value">{is_free.toString()}</WhiteText>,
+      <br />
       {did_you_mean && (
         <>
           <TabCharacter />
           <TabCharacter />
-          "did_you_mean": "<WhiteText>{did_you_mean.toString()}</WhiteText>"<br />
+          "did_you_mean": "
+          <WhiteText data-id="did_you_mean-value">{did_you_mean.toString()}</WhiteText>"<br />
         </>
       )}
       <TabCharacter />
