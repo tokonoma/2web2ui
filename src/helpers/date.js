@@ -151,7 +151,7 @@ export function formatDateTime(datetime, FORMAT) {
 }
 
 export function formatDateTimeWithoutYear(datetime) {
-  return moment(datetime).format(`${config.dateFormatWithoutYear}, ${config.timeFormat}`);
+  return formatDateTime(datetime, `${config.dateFormatWithoutYear}, ${config.timeFormat}`);
 }
 
 // format as ISO 8601 timestamp to match SP API
