@@ -185,6 +185,33 @@ describe('The templates edit draft page', () => {
         cy.findByText('Template published').should('be.visible');
         cy.url().should('include', 'published');
       });
+
+      // TODO: This test caught a but with the error handling - file a ticket
+      // it('renders an error message when the template fails to publish', () => {
+      //   cy.stubRequest({
+      //     method: 'PUT',
+      //     statusCode: 400,
+      //     url: `/api/v1/templates/${TEMPLATE_ID}`,
+      //     fixture: 'templates/stubbed-template-1/400.put.json',
+      //   });
+
+      //   cy.stubRequest({
+      //     statusCode: 400,
+      //     url: `/api/v1/templates/${TEMPLATE_ID}?draft=false`,
+      //     fixture: 'templates/stubbed-template-1/400.get.json',
+      //   });
+
+      //   cy.visit(PAGE_URL);
+
+      //   cy.findByText('Save and Publish').click();
+
+      //   cy.get('#modal-portal').within(() => {
+      //     cy.findAllByText('Save and Publish').click();
+      //   });
+
+      //   cy.findByText('Something went wrong.').should('be.visible');
+      //   cy.findByText('Template published').should('not.be.visible');
+      // });
     });
 
     describe('"Save Draft" button', () => {
