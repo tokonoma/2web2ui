@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { Banner } from '@sparkpost/matchbox';
-import UpdatePaymentForm from 'src/components/billing/UpdatePaymentForm';
+import UpdatePaymentForm from 'src/pages/billing/forms/UpdatePaymentForm';
 import SupportTicketLink from 'src/components/supportTicketLink/SupportTicketLink';
 
 export default function SuspendedForBilling({ account }) {
