@@ -12,7 +12,6 @@ import ListError from './components/ListError';
 import ListProgress from './components/ListProgress';
 import UploadedListForm from './components/UploadedListForm';
 import styles from './UploadedListPage.module.scss';
-import { AddPaymentMethod } from './components/AddPaymentMethod';
 import { isAccountUiOptionSet } from 'src/helpers/conditions/account';
 
 import ValidateSection from './components/ValidateSection';
@@ -80,12 +79,7 @@ export class UploadedListPage extends Component {
             )}
           </Panel.Section>
         </Panel>
-        {isStandAloneRVSet &&
-          (!credit_card ? (
-            <AddPaymentMethod />
-          ) : (
-            <ValidateSection credit_card={credit_card} handleSubmit={() => {}} />
-          ))}
+        {isStandAloneRVSet && <ValidateSection credit_card={credit_card} handleSubmit={() => {}} />}
       </Page>
     );
   }

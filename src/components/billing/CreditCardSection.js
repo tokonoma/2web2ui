@@ -3,7 +3,7 @@ import { Panel } from '@sparkpost/matchbox';
 import { CreditCard } from '@sparkpost/matchbox-icons';
 import { LabelledValue } from 'src/components';
 import { PaymentForm } from './PaymentForm';
-import { BillingAddressForm } from './BillingAddressForm';
+import BillingAddressForm from './BillingAddressForm';
 import { connect } from 'react-redux';
 import { getBillingCountries } from 'src/actions/billing';
 
