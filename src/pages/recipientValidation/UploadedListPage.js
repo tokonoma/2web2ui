@@ -79,7 +79,9 @@ export class UploadedListPage extends Component {
             )}
           </Panel.Section>
         </Panel>
-        {isStandAloneRVSet && <ValidateSection credit_card={credit_card} handleSubmit={() => {}} />}
+        {isStandAloneRVSet && (
+          <ValidateSection credit_card={credit_card} handleValidate={() => {}} />
+        )}
       </Page>
     );
   }

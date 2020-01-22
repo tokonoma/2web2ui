@@ -8,9 +8,12 @@ import { updatePaymentInitialValues } from 'src/selectors/accountBillingForms';
 
 const FORMNAME = FORMS.RV_ADDPAYMENTFORM;
 
-function ValidateSection({ handleSubmit, credit_card }) {
+function ValidateSection({ handleSubmit, credit_card, handleValidate }) {
+  const onSubmit = () => {
+    handleValidate();
+  };
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <CreditCardSection credit_card={credit_card} onClick={() => {}} formname={FORMNAME} />
       <Button color="orange" type="submit">
         {/* functionality to validate to be added in AC-1196 and AC-1197*/}
