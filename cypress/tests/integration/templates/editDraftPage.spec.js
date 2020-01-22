@@ -271,7 +271,7 @@ describe('The templates edit draft page', () => {
         cy.stubRequest({
           method: 'POST',
           url: '/api/v1/templates',
-          fixture: 'templates/200.post.create.json',
+          fixture: 'templates/200.post.json',
         });
 
         cy.visit(PAGE_URL);
@@ -289,7 +289,7 @@ describe('The templates edit draft page', () => {
           method: 'POST',
           statusCode: 400,
           url: '/api/v1/templates',
-          fixture: 'templates/400.post.create.json',
+          fixture: 'templates/400.post.json',
         });
 
         cy.visit(PAGE_URL);
