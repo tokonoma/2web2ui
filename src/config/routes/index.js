@@ -594,7 +594,7 @@ const routes = [
   {
     path: '/account/billing/enable-automatic',
     component: billing.EnableAutomaticBillingPage,
-    condition: all(hasGrants('account/manage'), not(isSelfServeBilling), isCustomBilling),
+    condition: all(hasGrants('account/manage'), not(isSelfServeBilling)),
     layout: App,
     title: 'Billing | Enable Automatic Billing',
     supportDocSearch: 'upgrade account',

@@ -3,7 +3,6 @@ import selectAccessCondtionState, { selectCondition } from '../accessConditionSt
 jest.mock('src/helpers/conditions/account');
 
 describe('Selector: Access Condition State', () => {
-
   let testState;
   let testAccessConditionState;
 
@@ -11,18 +10,18 @@ describe('Selector: Access Condition State', () => {
     testState = {
       account: {
         subscription: {
-          code: 'plan2'
-        }
+          code: 'plan2',
+        },
       },
       billing: {
         plans: [
           { code: 'plan1', name: 'Plan 1' },
           { code: 'plan2', name: 'Plan 2' },
-          { code: 'plan3', name: 'Plan 3' }
-        ]
+          { code: 'plan3', name: 'Plan 3' },
+        ],
       },
       currentUser: {},
-      accessControlReady: false
+      accessControlReady: false,
     };
 
     testAccessConditionState = {
@@ -30,7 +29,7 @@ describe('Selector: Access Condition State', () => {
       currentUser: testState.currentUser,
       accountPlan: testState.billing.plans[1],
       plans: testState.billing.plans,
-      ready: false
+      ready: false,
     };
   });
 

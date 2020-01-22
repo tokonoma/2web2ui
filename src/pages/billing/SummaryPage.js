@@ -6,19 +6,14 @@ import { list as getSendingIps } from 'src/actions/sendingIps';
 import { selectBillingInfo, selectAccountBilling } from 'src/selectors/accountBillingInfo';
 import { selectAccountAgeInDays } from 'src/selectors/accountAge';
 import ConditionSwitch, { defaultCase } from 'src/components/auth/ConditionSwitch';
-import { not } from 'src/helpers/conditions';
 import { getSubscription } from 'src/actions/billing';
-import {
-  isSuspendedForBilling,
-  isSelfServeBilling,
-  hasAccountOptionEnabled,
-} from 'src/helpers/conditions/account';
+import { isSuspendedForBilling, hasAccountOptionEnabled } from 'src/helpers/conditions/account';
 import { Loading } from 'src/components';
 import BillingSummary from './components/BillingSummary';
 import ManuallyBilledBanner from './components/ManuallyBilledBanner';
 import SuspendedForBilling from './components/SuspendedForBilling';
 import { list as getInvoices } from 'src/actions/invoices';
-
+import { isBillingSubscriptionSelfServe } from 'src/helpers/conditions/account';
 export class BillingSummaryPage extends Component {
   componentDidMount() {
     const {
@@ -38,10 +33,13 @@ export class BillingSummaryPage extends Component {
     getInvoices();
     getUsage();
   }
-
-  render() {
+  componentDidUpdate(prevProps) {
+    if (this.props.billingInfo !== prevProps.billingInfo) {
+      getSubscription();
+    }
+  }
+  renderBillingSummary = () => {
     const {
-      loading,
       account,
       billingInfo,
       sendingIps,
@@ -50,39 +48,52 @@ export class BillingSummaryPage extends Component {
       hasRecipientValidation,
       subscription,
     } = this.props;
-
+    const suspendedBilling = (
+      <SuspendedForBilling
+        condition={isSuspendedForBilling}
+        account={account}
+        key={'suspended-billing'}
+      />
+    );
+    const manuallyBilledBanner = (
+      <ManuallyBilledBanner
+        account={account}
+        onZuoraPlan={billingInfo.onZuoraPlan}
+        condition={defaultCase}
+        key={'manually-billed-banner'}
+      />
+    );
+    const billingSummary = (
+      <BillingSummary
+        condition={defaultCase}
+        hasRecipientValidation={hasRecipientValidation}
+        account={account}
+        subscription={subscription}
+        {...billingInfo}
+        invoices={invoices}
+        sendingIps={sendingIps}
+        accountAgeInDays={accountAgeInDays}
+        key={'billing-summary'}
+      />
+    );
+    if (!isBillingSubscriptionSelfServe(billingInfo))
+      return [suspendedBilling, manuallyBilledBanner, billingSummary];
+    return [suspendedBilling, billingSummary];
+  };
+  render() {
+    const { loading } = this.props;
     if (loading) {
       return <Loading />;
     }
-
     return (
       <Page title="Billing">
-        <ConditionSwitch>
-          <SuspendedForBilling condition={isSuspendedForBilling} account={account} />
-          <ManuallyBilledBanner
-            condition={not(isSelfServeBilling)}
-            account={account}
-            onZuoraPlan={billingInfo.onZuoraPlan}
-          />
-          <BillingSummary
-            condition={defaultCase}
-            hasRecipientValidation={hasRecipientValidation}
-            account={account}
-            subscription={subscription}
-            {...billingInfo}
-            invoices={invoices}
-            sendingIps={sendingIps}
-            accountAgeInDays={accountAgeInDays}
-          />
-        </ConditionSwitch>
+        <ConditionSwitch>{this.renderBillingSummary()}</ConditionSwitch>
       </Page>
     );
   }
 }
-
 const mapStateToProps = state => {
   const { loading, account } = selectAccountBilling(state);
-
   return {
     loading: loading || state.billing.plansLoading || !state.account.subscription,
     account,
@@ -94,7 +105,6 @@ const mapStateToProps = state => {
     hasRecipientValidation: hasAccountOptionEnabled('recipient_validation')(state),
   };
 };
-
 export default connect(mapStateToProps, {
   getInvoices,
   getSendingIps,

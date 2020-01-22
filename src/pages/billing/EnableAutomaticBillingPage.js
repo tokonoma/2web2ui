@@ -8,7 +8,7 @@ const EnableAutomaticBillingPage = () => (
     breadcrumbAction={{
       Component: PageLink,
       content: 'Back to billing',
-      to: '/account/billing'
+      to: '/account/billing',
     }}
   >
     <EnableAutomaticBillingForm />

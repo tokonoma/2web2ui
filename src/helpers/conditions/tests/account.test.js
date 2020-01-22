@@ -13,36 +13,35 @@ import {
   hasUiOption,
   isAccountUiOptionSet,
   hasAccountOptionEnabled,
-  getAccountUiOptionValue
+  getAccountUiOptionValue,
 } from '../account';
 
 import cases from 'jest-in-case';
 
 test('Condition: onPlan', () => {
   const condition = onPlan('p1');
-  expect(condition({ accountPlan: { code: 'p1' }})).toEqual(true);
-  expect(condition({ accountPlan: { code: 'p2' }})).toEqual(false);
+  expect(condition({ accountPlan: { code: 'p1' } })).toEqual(true);
+  expect(condition({ accountPlan: { code: 'p2' } })).toEqual(false);
 });
 
 test('Condition: onZuoraPlan', () => {
-  expect(onZuoraPlan({ accountPlan: { billingId: 'uuuiiiiid' }})).toEqual(true);
-  expect(onZuoraPlan({ accountPlan: {}})).toEqual(false);
+  expect(onZuoraPlan({ accountPlan: { billingId: 'uuuiiiiid' } })).toEqual(true);
+  expect(onZuoraPlan({ accountPlan: {} })).toEqual(false);
 });
 
 test('Condition: onPlanWithStatus', () => {
   const condition = onPlanWithStatus('deprecated');
-  expect(condition({ accountPlan: { status: 'deprecated' }})).toEqual(true);
-  expect(condition({ accountPlan: { status: 'bananas' }})).toEqual(false);
+  expect(condition({ accountPlan: { status: 'deprecated' } })).toEqual(true);
+  expect(condition({ accountPlan: { status: 'bananas' } })).toEqual(false);
 });
 
 test('Condition: onServiceLevel', () => {
   const condition = onServiceLevel('other');
-  expect(condition({ account: { service_level: 'other' }})).toEqual(true);
-  expect(condition({ account: { service_level: 'standard' }})).toEqual(false);
+  expect(condition({ account: { service_level: 'other' } })).toEqual(true);
+  expect(condition({ account: { service_level: 'standard' } })).toEqual(false);
 });
 
 describe('Condition: isEnterprise', () => {
-
   let condition;
   let state;
   beforeEach(() => {
@@ -51,10 +50,10 @@ describe('Condition: isEnterprise', () => {
       plans: [],
       account: {
         subscription: {
-          code: 'abc1'
+          code: 'abc1',
         },
-        service_level: 'whatev'
-      }
+        service_level: 'whatev',
+      },
     };
     condition = isEnterprise;
   });
@@ -72,11 +71,9 @@ describe('Condition: isEnterprise', () => {
   it('should return a function that returns false if not on ent1 plan OR enterprise service level', () => {
     expect(condition(state)).toEqual(false);
   });
-
 });
 
 describe('Condition: isSuspendedForBilling', () => {
-
   it('should return true if account is suspended and category is 100.01', () => {
     const account = { status: 'suspended', status_reason_category: '100.01' };
     expect(isSuspendedForBilling({ account })).toEqual(true);
@@ -91,21 +88,17 @@ describe('Condition: isSuspendedForBilling', () => {
     const account = { status: 'suspended', status_reason_category: '200.01' };
     expect(isSuspendedForBilling({ account })).toEqual(false);
   });
-
 });
 
 describe('Condition: hasStatus', () => {
-
   it('should return a function that returns whether the account has the given status', () => {
     const account = { status: 'active' };
     expect(hasStatus('active')({ account })).toEqual(true);
     expect(hasStatus('suspended')({ account })).toEqual(false);
   });
-
 });
 
 describe('Conditon: hasStatusReasonCategory', () => {
-
   it('should return a function that returns whether the account has the given status reason category', () => {
     const account = { status_reason_category: '100.01' };
     expect(hasStatusReasonCategory('100.01')({ account })).toEqual(true);
@@ -118,7 +111,6 @@ describe('Conditon: hasStatusReasonCategory', () => {
     account.status_reason_category = null;
     expect(hasStatusReasonCategory('100.01')({ account })).toEqual(false);
   });
-
 });
 
 describe('Condition: isSelfServeBilling', () => {
@@ -129,7 +121,7 @@ describe('Condition: isSelfServeBilling', () => {
 
   it('should return false with empty subscription', () => {
     const account = {
-      subscription: {}
+      subscription: {},
     };
 
     expect(isSelfServeBilling({ account })).toEqual(false);
@@ -138,8 +130,8 @@ describe('Condition: isSelfServeBilling', () => {
   it('should return false with manual subscription', () => {
     const account = {
       subscription: {
-        self_serve: false
-      }
+        self_serve: false,
+      },
     };
 
     expect(isSelfServeBilling({ account })).toEqual(false);
@@ -148,8 +140,8 @@ describe('Condition: isSelfServeBilling', () => {
   it('should return true with self serve subscription', () => {
     const account = {
       subscription: {
-        self_serve: true
-      }
+        self_serve: true,
+      },
     };
 
     expect(isSelfServeBilling({ account })).toEqual(true);
@@ -161,9 +153,9 @@ describe('Condition: hasOnlineSupport', () => {
     const state = {
       account: {
         support: {
-          online: true
-        }
-      }
+          online: true,
+        },
+      },
     };
 
     expect(hasOnlineSupport(state)).toEqual(true);
@@ -180,9 +172,9 @@ describe('Condition: hasUiOption', () => {
     const state = {
       account: {
         options: {
-          ui: { iceCream: 'vanilla' }
-        }
-      }
+          ui: { iceCream: 'vanilla' },
+        },
+      },
     };
     expect(hasUiOption('iceCream')(state)).toEqual(true);
   });
@@ -191,28 +183,48 @@ describe('Condition: hasUiOption', () => {
     const state = {
       account: {
         options: {
-          ui: {}
-        }
-      }
+          ui: {},
+        },
+      },
     };
     expect(hasUiOption('iceCream')(state)).toEqual(false);
   });
 });
 
 describe('Condition: isUiOptionSet', () => {
-  cases('isUiOptionSet', (opts) => {
-    const state = { account: { options: { ui: opts.options }}};
-    expect(isAccountUiOptionSet('option', opts.defaultVal)(state)).toEqual(opts.result);
-  }, {
-    // Account option takes precedence
-    'Account option precedence: false/false=false': { options: { option: false }, defaultVal: false, result: false },
-    'Account option precedence: true/false=true': { options: { option: true }, defaultVal: false, result: true },
-    'Account option precedence: false/true=false': { options: { option: false }, defaultVal: true, result: false },
-    'Account option precedence: true/true=true': { options: { option: true }, defaultVal: true, result: true },
-    // Default used iff option is missing
-    'Default: true=true': { options: {}, defaultVal: true, result: true },
-    'Default: false=false': { options: {}, defaultVal: false, result: false }
-  });
+  cases(
+    'isUiOptionSet',
+    opts => {
+      const state = { account: { options: { ui: opts.options } } };
+      expect(isAccountUiOptionSet('option', opts.defaultVal)(state)).toEqual(opts.result);
+    },
+    {
+      // Account option takes precedence
+      'Account option precedence: false/false=false': {
+        options: { option: false },
+        defaultVal: false,
+        result: false,
+      },
+      'Account option precedence: true/false=true': {
+        options: { option: true },
+        defaultVal: false,
+        result: true,
+      },
+      'Account option precedence: false/true=false': {
+        options: { option: false },
+        defaultVal: true,
+        result: false,
+      },
+      'Account option precedence: true/true=true': {
+        options: { option: true },
+        defaultVal: true,
+        result: true,
+      },
+      // Default used iff option is missing
+      'Default: true=true': { options: {}, defaultVal: true, result: true },
+      'Default: false=false': { options: {}, defaultVal: false, result: false },
+    },
+  );
 });
 
 describe('Condition: isCustomBilling', () => {
@@ -220,9 +232,9 @@ describe('Condition: isCustomBilling', () => {
     const state = {
       account: {
         subscription: {
-          custom: false
-        }
-      }
+          custom: false,
+        },
+      },
     };
 
     expect(isCustomBilling(state)).toEqual(false);
@@ -232,9 +244,9 @@ describe('Condition: isCustomBilling', () => {
     const state = {
       account: {
         subscription: {
-          custom: true
-        }
-      }
+          custom: true,
+        },
+      },
     };
 
     expect(isCustomBilling(state)).toEqual(true);
@@ -249,9 +261,9 @@ describe('Condition: hasAccountOptionEnabled', () => {
       account: {
         options: {
           auto_verify_domains: true,
-          auto_verify_tracking_domains: false
-        }
-      }
+          auto_verify_tracking_domains: false,
+        },
+      },
     };
   });
 
@@ -273,7 +285,6 @@ describe('Condition: hasAccountOptionEnabled', () => {
   });
 });
 
-
 describe('Condition: getAccountUiOptionValue', () => {
   let state;
 
@@ -282,14 +293,13 @@ describe('Condition: getAccountUiOptionValue', () => {
       account: {
         options: {
           ui: {
-            stepName: 'Sending'
-          }
-        }
-      }
+            stepName: 'Sending',
+          },
+        },
+      },
     };
   });
   it('should return the value of the ui option', () => {
     expect(getAccountUiOptionValue('stepName')(state)).toEqual('Sending');
   });
-
 });

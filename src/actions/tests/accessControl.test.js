@@ -15,7 +15,7 @@ describe('Action: Initialize Access Control', () => {
   });
 
   it('should initialize access control with a series of calls', async () => {
-    const dispatchMock = jest.fn((a) => a);
+    const dispatchMock = jest.fn(a => a);
     await initializeAccessControl()(dispatchMock);
 
     expect(fetchAccount).toHaveBeenCalledWith({ meta });
@@ -24,8 +24,7 @@ describe('Action: Initialize Access Control', () => {
     expect(getGrants).toHaveBeenCalledWith({ role: 'EQUISAPIEN', meta });
     expect(dispatchMock).toHaveBeenCalledTimes(5);
     expect(dispatchMock).toHaveBeenLastCalledWith({
-      type: 'ACCESS_CONTROL_READY'
+      type: 'ACCESS_CONTROL_READY',
     });
   });
-
 });

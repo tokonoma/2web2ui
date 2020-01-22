@@ -12,6 +12,10 @@ export const hasStatusReasonCategory = category => ({ account }) =>
 export const isSuspendedForBilling = all(hasStatus('suspended'), hasStatusReasonCategory('100.01'));
 export const subscriptionSelfServeIsTrue = ({ account }) =>
   _.get(account, 'subscription.self_serve', false);
+const SELF_SERVE_ACCOUNT_TYPES = ['active', 'inactive', 'none'];
+export const isBillingSubscriptionSelfServe = ({ subscription }) => {
+  return _.includes(SELF_SERVE_ACCOUNT_TYPES, _.get(subscription, 'type'));
+};
 export const isAws = ({ account }) => _.get(account, 'subscription.type') === 'aws';
 export const isCustomBilling = ({ account }) => _.get(account, 'subscription.custom', false);
 export const isSelfServeBilling = any(subscriptionSelfServeIsTrue, isAws);
