@@ -1,0 +1,125 @@
+{
+  "results": [
+    {
+      "list_id": "ab",
+      "customer_id": 123,
+      "address_count": 2,
+      "original_filename": "success.csv",
+      "triggered_timestamp": 1578067868,
+      "complete": true,
+      "batch_status": "success",
+      "upload_timestamp": 1578067866,
+      "uploaded_file": "/path/to/uploaded/file"
+    },
+    {
+      "list_id": "cd",
+      "customer_id": 123,
+      "address_count": 2,
+      "original_filename": "reading-upload-file.csv",
+      "triggered_timestamp": 1578067868,
+      "complete": false,
+      "batch_status": "reading_upload_file",
+      "upload_timestamp": 1578067866,
+      "uploaded_file": "/path/to/uploaded/file"
+    },
+    {
+      "list_id": "ef",
+      "customer_id": 123,
+      "address_count": 2,
+      "original_filename": "checking-regex.csv",
+      "triggered_timestamp": 1578067868,
+      "complete": false,
+      "batch_status": "checking_regex",
+      "upload_timestamp": 1578067866,
+      "uploaded_file": "/path/to/uploaded/file"
+    },
+    {
+      "list_id": "gh",
+      "customer_id": 123,
+      "address_count": 2,
+      "original_filename": "performing-mx-lookup.csv",
+      "triggered_timestamp": 1578067868,
+      "complete": false,
+      "batch_status": "performing_mx_lookup",
+      "upload_timestamp": 1578067866,
+      "uploaded_file": "/path/to/uploaded/file"
+    },
+    {
+      "list_id": "ij",
+      "customer_id": 123,
+      "address_count": 2,
+      "original_filename": "performing-decay-scoring.csv",
+      "triggered_timestamp": 1578067868,
+      "complete": false,
+      "batch_status": "performing_decay_scoring",
+      "upload_timestamp": 1578067866,
+      "uploaded_file": "/path/to/uploaded/file"
+    },
+    {
+      "list_id": "kl",
+      "customer_id": 123,
+      "address_count": 2,
+      "original_filename": "performing-role-based-lookup.csv",
+      "triggered_timestamp": 1578067868,
+      "complete": false,
+      "batch_status": "performing_role_based_lookup",
+      "upload_timestamp": 1578067866,
+      "uploaded_file": "/path/to/uploaded/file"
+    },
+    {
+      "list_id": "mn",
+      "customer_id": 123,
+      "address_count": 2,
+      "original_filename": "performing-disposable-domain.csv",
+      "triggered_timestamp": 1578067868,
+      "complete": false,
+      "batch_status": "performing_disposable_domain",
+      "upload_timestamp": 1578067866,
+      "uploaded_file": "/path/to/uploaded/file"
+    },
+    {
+      "list_id": "op",
+      "customer_id": 123,
+      "address_count": 2,
+      "original_filename": "performing-free-email.csv",
+      "triggered_timestamp": 1578067868,
+      "complete": false,
+      "batch_status": "performing_free_email",
+      "upload_timestamp": 1578067866,
+      "uploaded_file": "/path/to/uploaded/file"
+    },
+    {
+      "list_id": "qr",
+      "customer_id": 123,
+      "address_count": 2,
+      "original_filename": "performing-did-you-mean.csv",
+      "triggered_timestamp": 1578067868,
+      "complete": false,
+      "batch_status": "performing_did_you_mean",
+      "upload_timestamp": 1578067866,
+      "uploaded_file": "/path/to/uploaded/file"
+    },
+    {
+      "list_id": "st",
+      "customer_id": 123,
+      "address_count": 2,
+      "original_filename": "uploading-results-to-s3.csv",
+      "triggered_timestamp": 1578067868,
+      "complete": false,
+      "batch_status": "uploading_results_to_s3",
+      "upload_timestamp": 1578067866,
+      "uploaded_file": "/path/to/uploaded/file"
+    },
+    {
+      "list_id": "uv",
+      "customer_id": 123,
+      "address_count": 2,
+      "original_filename": "error.csv",
+      "triggered_timestamp": 1578067868,
+      "complete": false,
+      "batch_status": "error",
+      "upload_timestamp": 1578067866,
+      "uploaded_file": "/path/to/uploaded/file"
+    }
+  ]
+}

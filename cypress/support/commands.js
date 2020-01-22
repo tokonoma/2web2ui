@@ -1,30 +1,11 @@
 // ***********************************************
-// This example commands.js shows you how to
-// create various custom commands and overwrite
-// existing commands.
-//
 // For more comprehensive examples of custom
 // commands please read more here:
 // https://on.cypress.io/custom-commands
 // ***********************************************
-//
-//
-// -- This is a parent command --
-// Cypress.Commands.add("login", (email, password) => { ... })
-//
-//
-// -- This is a child command --
-// Cypress.Commands.add("drag", { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add("dismiss", { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This is will overwrite an existing command --
-// Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
 import '@testing-library/cypress/add-commands';
+import 'cypress-file-upload';
 
 /**
  * Used to authenticate with Cypress
@@ -127,3 +108,35 @@ Cypress.Commands.add('stubAuth', () => {
     response: '@sendingDomainsGet',
   }).as('stubbedSendingDomains');
 });
+
+/**
+ * Used to concisely stub network requests within Cypress integration tests
+ *
+ * @param {string} method - the method of the HTTP request being stubbed (https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods). Defaults to `GET`.
+ * @param {number} statusCode - the HTTP response status code. Defaults to `200`.
+ * @param {string} method - the URL of the request that will be intercepted
+ * @param {string} method - the path of the relevant fixture. See: https://docs.cypress.io/api/commands/fixture.html
+ * @param {string} method - the name of the alias used for the passed in fixture
+ */
+
+Cypress.Commands.add(
+  'stubRequest',
+  ({
+    onRequest,
+    method = 'GET',
+    statusCode = 200,
+    url,
+    fixture,
+    fixtureAlias = 'stubbedRequest',
+  }) => {
+    cy.server();
+    cy.fixture(fixture).as(fixtureAlias);
+    cy.route({
+      method,
+      url,
+      status: statusCode,
+      response: `@${fixtureAlias}`,
+      onRequest,
+    });
+  },
+);

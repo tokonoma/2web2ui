@@ -12,7 +12,7 @@ import { withRouter } from 'react-router-dom';
 const formName = 'recipientValidationListForm';
 
 export class ListForm extends Component {
-  handleUpload = (fields) => {
+  handleUpload = fields => {
     const { history, reset, showAlert, uploadList } = this.props;
     const form_data = new FormData();
 
@@ -25,14 +25,15 @@ export class ListForm extends Component {
       showAlert({ type: 'success', message: 'Recipients Uploaded' });
       history.push(`/recipient-validation/list/${list_id}`);
     });
-  }
+  };
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate() {
     const { file, handleSubmit, listError, resetUploadError } = this.props;
 
     // Redux form validation does not run in the same render cycle after Field's onChange,
     // thus checking props.valid would not work here *shakes fist*
-    const valid = !maxFileSize(config.maxRecipVerifUploadSizeBytes)(file) && !fileExtension('csv', 'txt')(file);
+    const valid =
+      !maxFileSize(config.maxRecipVerifUploadSizeBytes)(file) && !fileExtension('csv', 'txt')(file);
 
     if (file && valid && !listError) {
       handleSubmit(this.handleUpload)();
@@ -50,12 +51,13 @@ export class ListForm extends Component {
         <form>
           <Field
             component={FileUploadWrapper}
-            name='csv'
+            name="csv"
             validate={[
               maxFileSize(config.maxRecipVerifUploadSizeBytes),
-              fileExtension('csv', 'txt')
+              fileExtension('csv', 'txt'),
             ]}
             uploading={this.props.uploading}
+            data-id="recipient-list-dropzone"
           />
         </form>
       </Panel.Section>
@@ -65,14 +67,16 @@ export class ListForm extends Component {
 
 const WrappedForm = reduxForm({ form: formName })(ListForm);
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   const selector = formValueSelector(formName);
 
   return {
     file: selector(state, 'csv'),
     listError: state.recipientValidation.listError,
-    uploading: state.recipientValidation.uploadLoading
+    uploading: state.recipientValidation.uploadLoading,
   };
 };
 
-export default withRouter(connect(mapStateToProps, { uploadList, showAlert, resetUploadError })(WrappedForm));
+export default withRouter(
+  connect(mapStateToProps, { uploadList, showAlert, resetUploadError })(WrappedForm),
+);
