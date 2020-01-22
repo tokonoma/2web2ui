@@ -24,16 +24,10 @@ export const FORMATS = {
 
   INPUT_DATES: ['YYYY-MM-DD'],
   INPUT_TIMES: ['h:mma', 'H:mm', 'H:mma'],
-  INPUT_DATETIMES: ['YYYY-MM-DD h:mma', 'YYYY-MM-DD H:mm', 'YYYY-MM-DD H:mma']
+  INPUT_DATETIMES: ['YYYY-MM-DD h:mma', 'YYYY-MM-DD H:mm', 'YYYY-MM-DD H:mma'],
 };
 
-export const RELATIVE_DATE_OPTIONS = [
-  'hour',
-  'day',
-  '7days',
-  '10days',
-  'custom'
-];
+export const RELATIVE_DATE_OPTIONS = ['hour', 'day', '7days', '10days', 'custom'];
 
 export const LINKS = {
   SPC_EU_URL: 'https://app.eu.sparkpost.com',
@@ -47,15 +41,19 @@ export const LINKS = {
   AB_TESTING_API: 'https://developers.sparkpost.com/api/ab-testing.html',
   SUBACCOUNTS_API: 'https://developers.sparkpost.com/api/subaccounts.html',
   TOU: 'https://www.sparkpost.com/policies/tou',
-  DOMAIN_VERIFICATION: 'https://www.sparkpost.com/docs/tech-resources/enabling-multiple-custom-tracking-domains',
+  DOMAIN_VERIFICATION:
+    'https://www.sparkpost.com/docs/tech-resources/enabling-multiple-custom-tracking-domains',
   SENDING_REQS: 'https://www.sparkpost.com/docs/getting-started/requirements-for-sending-domains',
   SENDING_SETUP: 'https://www.sparkpost.com/docs/getting-started/setting-up-domains/',
-  SUPPRESSION_MIGRATION: 'https://www.sparkpost.com/docs/getting-started/getting-started-sparkpost/#important-coming-from-other-email-services',
+  SUPPRESSION_MIGRATION:
+    'https://www.sparkpost.com/docs/getting-started/getting-started-sparkpost/#important-coming-from-other-email-services',
   TFA_BACKUP_CODES: 'https://support.sparkpost.com/customer/portal/articles/1948449',
   IP_WARM_UP: 'https://support.sparkpost.com/customer/portal/articles/1972209-ip-warm-up-overview',
   DAILY_USAGE: 'https://www.sparkpost.com/docs/getting-started/what-counts-daily-monthly-usage',
-  LEARN_MORE_TFA: 'https://www.sparkpost.com/docs/my-account-and-profile/enabling-two-factor-authentication',
-  ONBOARDING_SENDING: 'https://www.sparkpost.com/docs/getting-started/getting-started-sparkpost/#preparing-your-from-address',
+  LEARN_MORE_TFA:
+    'https://www.sparkpost.com/docs/my-account-and-profile/enabling-two-factor-authentication',
+  ONBOARDING_SENDING:
+    'https://www.sparkpost.com/docs/getting-started/getting-started-sparkpost/#preparing-your-from-address',
   RECAPTCHA_LIB_URL: 'https://www.google.com/recaptcha/api.js',
   DAILY_MONTHLY_QUOTA_LIMIT_DOC: 'https://support.sparkpost.com/customer/portal/articles/2030894',
   GETTING_STARTED_GUIDE: 'https://www.sparkpost.com/docs/getting-started/getting-started-sparkpost',
@@ -63,10 +61,12 @@ export const LINKS = {
   SSO_GUIDE: 'https://www.sparkpost.com/docs/my-account-and-profile/sso',
   ALERTS_DOCS: 'https://developers.sparkpost.com/api/alerts/#alerts-post-create-an-alert',
   ALERTS_SURVEY: 'https://goo.gl/forms/rnIuTvdVF2xhpKCy2',
-  SNIPPET_SUBSTITUTION_REFERENCE: 'https://developers.sparkpost.com/api/substitutions-reference/#header-snippets',
-  MANDATORY_TFA: 'https://www.sparkpost.com/docs/my-account-and-profile/enabling-two-factor-authentication/',
+  SNIPPET_SUBSTITUTION_REFERENCE:
+    'https://developers.sparkpost.com/api/substitutions-reference/#header-snippets',
+  MANDATORY_TFA:
+    'https://www.sparkpost.com/docs/my-account-and-profile/enabling-two-factor-authentication/',
   RECIPIENT_VALIDATION_ACCESS: 'https://www.sparkpost.com/rv-access',
-  AUTO_IP_WARMUP_SETUP: 'https://www.sparkpost.com/docs/user-guide/automated-ip-warmup/'
+  AUTO_IP_WARMUP_SETUP: 'https://www.sparkpost.com/docs/user-guide/automated-ip-warmup/',
 };
 
 export const ENTERPRISE_PLAN_CODES = ['ent1'];
@@ -80,7 +80,7 @@ export const SPC_TENANT = 'spc';
 
 export const CROSS_LINK_MAP = {
   [SPC_TENANT]: { label: '', url: LINKS.SPC_US_URL },
-  [SPC_EU_TENANT]: { label: 'EU', url: LINKS.SPC_EU_URL }
+  [SPC_EU_TENANT]: { label: 'EU', url: LINKS.SPC_EU_URL },
 };
 
 export const TYPEAHEAD_LIMIT = 100;
@@ -94,32 +94,72 @@ export const FORMS = {
   JOIN_SENDING_DOMAIN: 'joinSendingDomainForm',
   INVITE_USER: 'userInviteForm',
   EDIT_USER: 'userEditForm',
-  EVENTS_SEARCH: 'eventsSearchForm'
+  EVENTS_SEARCH: 'eventsSearchForm',
+  RV_ADDPAYMENTFORM: 'rvAddPaymentForm',
 };
 
 //These filters are the searchable filters in the 'more filters' modal on the Events Search page
 export const EVENTS_SEARCH_FILTERS = {
-  recipient_domains: { placeholder: 'list of domain parts (e.g., gmail, yahoo.co, yahoo.co.jp, .fr)', label: 'Recipient Domains' },
-  from_addresses: { placeholder: 'list of full from addresses (e.g., john@mycompany.com)', label: 'From Addresses' },
-  sending_domains: { placeholder: 'list of domain parts (e.g., joespizza, marketing.joespizza)', label: 'Sending Domains' },
-  subjects: { placeholder: 'list of full words (e.g. happy birthday, christmas)', label: 'Subjects' },
-  bounce_classes: { placeholder: 'list of bounce classification codes (e.g. 10, 30)', label: 'Bounce Classes' },
-  reasons: { placeholder: 'list of full words in raw reasons (e.g. 5.4.7, IP, Mail rejected)', label: 'Reasons' },
-  campaigns: { placeholder: 'list of full words in campaign ids (e.g. newsletter, fire-sale)', label: 'Campaign IDs' },
-  templates: { placeholder: 'list of full words in template ids (e.g. newsletter, fire-sale)', label: 'Template IDs' },
+  recipient_domains: {
+    placeholder: 'list of domain parts (e.g., gmail, yahoo.co, yahoo.co.jp, .fr)',
+    label: 'Recipient Domains',
+  },
+  from_addresses: {
+    placeholder: 'list of full from addresses (e.g., john@mycompany.com)',
+    label: 'From Addresses',
+  },
+  sending_domains: {
+    placeholder: 'list of domain parts (e.g., joespizza, marketing.joespizza)',
+    label: 'Sending Domains',
+  },
+  subjects: {
+    placeholder: 'list of full words (e.g. happy birthday, christmas)',
+    label: 'Subjects',
+  },
+  bounce_classes: {
+    placeholder: 'list of bounce classification codes (e.g. 10, 30)',
+    label: 'Bounce Classes',
+  },
+  reasons: {
+    placeholder: 'list of full words in raw reasons (e.g. 5.4.7, IP, Mail rejected)',
+    label: 'Reasons',
+  },
+  campaigns: {
+    placeholder: 'list of full words in campaign ids (e.g. newsletter, fire-sale)',
+    label: 'Campaign IDs',
+  },
+  templates: {
+    placeholder: 'list of full words in template ids (e.g. newsletter, fire-sale)',
+    label: 'Template IDs',
+  },
   sending_ips: { placeholder: 'list of ip addresses (e.g., 10.0.0.4.25)', label: 'Sending IPs' },
-  ip_pools: { placeholder: 'list of full words in ip pool id (e.g billing, administrative)', label: 'IP Pools' },
+  ip_pools: {
+    placeholder: 'list of full words in ip pool id (e.g billing, administrative)',
+    label: 'IP Pools',
+  },
   subaccounts: { placeholder: 'list of subaccount ids (e.g. 346, 823)', label: 'Subaccount IDs' },
-  messages: { placeholder: 'list of message ids (e.g. 00129004225c33cc4c45)', label: 'Message IDs' },
-  transmissions: { placeholder: 'list of transmission ids (e.g. 337221619334066426)', label: 'Transmissions IDs' },
-  ab_tests: { placeholder: 'list of full words in ab test ids (e.g. newsletter, fire-sale)', label: 'AB Test IDs' },
-  ab_test_versions: { placeholder: 'list of version numbers; requires AB Test ID filter(e.g. 4)', label: 'AB Test Versions' }
+  messages: {
+    placeholder: 'list of message ids (e.g. 00129004225c33cc4c45)',
+    label: 'Message IDs',
+  },
+  transmissions: {
+    placeholder: 'list of transmission ids (e.g. 337221619334066426)',
+    label: 'Transmissions IDs',
+  },
+  ab_tests: {
+    placeholder: 'list of full words in ab test ids (e.g. newsletter, fire-sale)',
+    label: 'AB Test IDs',
+  },
+  ab_test_versions: {
+    placeholder: 'list of version numbers; requires AB Test ID filter(e.g. 4)',
+    label: 'AB Test Versions',
+  },
 };
 
 export const ALL_EVENTS_FILTERS = {
   recipients: { placeholder: 'Filter by recipient email address', label: 'Recipients' },
   events: { label: 'Event' },
-  ...EVENTS_SEARCH_FILTERS
+  ...EVENTS_SEARCH_FILTERS,
 };
 
 export const DEFAULT_PER_PAGE_BUTTONS = [10, 25, 50, 100];
@@ -135,7 +175,7 @@ export const ANALYTICS_WHITELISTED_FORMS = [
   FORMS.LOGIN,
   FORMS.JOIN,
   FORMS.JOIN_PLAN,
-  FORMS.JOIN_SENDING_DOMAIN
+  FORMS.JOIN_SENDING_DOMAIN,
 ];
 
 export const MAILBOX_PROVIDERS = {
@@ -155,13 +195,13 @@ export const MAILBOX_PROVIDERS = {
   canadian_providers: 'Canadian Providers',
   japanese_providers: 'Japanese Providers',
   other_european_providers: 'Other European Providers',
-  other: 'Other Providers'
+  other: 'Other Providers',
 };
 
 export const PLAN_TIERS = {
   test: 'Test Account',
   starter: 'Starter',
-  premier: 'Premier'
+  premier: 'Premier',
 };
 
 export const RECIPIENT_VALIDATION_TIERS = [
@@ -172,7 +212,7 @@ export const RECIPIENT_VALIDATION_TIERS = [
   { volumeMin: 100000, volumeMax: 250000, cost: 0.003, displayedCost: '$0.003' },
   { volumeMin: 250000, volumeMax: 750000, cost: 0.0015, displayedCost: '$0.0015' },
   { volumeMin: 750000, volumeMax: 1000000, cost: 0.001, displayedCost: '$0.0010' },
-  { volumeMin: 1000000, volumeMax: Infinity, cost: 0.00075, displayedCost: '$0.00075' }
+  { volumeMin: 1000000, volumeMax: Infinity, cost: 0.00075, displayedCost: '$0.00075' },
 ];
 
 export { ROLES, SUBACCOUNT_ROLES, ROLE_LABELS } from './users';

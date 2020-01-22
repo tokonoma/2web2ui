@@ -37,7 +37,6 @@ export class BillingAddressForm extends Component {
 
   componentDidUpdate({ countryValue: prevCountry }) {
     const { countryValue, change, formName, firstState } = this.props;
-    console.log(countryValue, formName);
 
     // Handles billingAddress.state field mutation when country changes
     if (prevCountry !== countryValue) {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Page, Panel, Button } from '@sparkpost/matchbox';
+import { Page, Panel } from '@sparkpost/matchbox';
 import { connect } from 'react-redux';
 import { formatDate, formatTime } from 'src/helpers/date';
 import { getJobStatus, triggerJob } from 'src/actions/recipientValidation';
@@ -14,10 +14,9 @@ import UploadedListForm from './components/UploadedListForm';
 import styles from './UploadedListPage.module.scss';
 import { AddPaymentMethod } from './components/AddPaymentMethod';
 import { isAccountUiOptionSet } from 'src/helpers/conditions/account';
-import CreditCardSection from 'src/components/billing/CreditCardSection';
-import { reduxForm } from 'redux-form';
 
-const FORMNAME = 'AddPaymentRV';
+import ValidateSection from './components/ValidateSection';
+
 export class UploadedListPage extends Component {
   componentDidMount() {
     const { getJobStatus, listId, getBillingInfo } = this.props;
@@ -85,13 +84,7 @@ export class UploadedListPage extends Component {
           (!credit_card ? (
             <AddPaymentMethod />
           ) : (
-            <>
-              <CreditCardSection credit_card={credit_card} onClick={() => {}} formname={FORMNAME} />
-              <Button color="orange" onClick={() => {}}>
-                {/* functionality to validate to be added in AC-1196 and AC-1197*/}
-                Validate
-              </Button>
-            </>
+            <ValidateSection credit_card={credit_card} handleSubmit={() => {}} />
           ))}
       </Page>
     );
@@ -110,8 +103,6 @@ const mapStateToProps = (state, props) => {
   };
 };
 
-const formOptions = { form: FORMNAME, enableReinitialize: true };
-
 export default connect(mapStateToProps, { getJobStatus, triggerJob, getBillingInfo })(
-  reduxForm(formOptions)(UploadedListPage),
+  UploadedListPage,
 );
