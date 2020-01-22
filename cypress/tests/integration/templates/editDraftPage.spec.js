@@ -185,7 +185,7 @@ describe('The templates edit draft page', () => {
         cy.url().should('include', 'published');
       });
 
-      // TODO: This test caught a but with the error handling - file a ticket
+      // TODO: This test caught a bug with the error handling - a ticket should be filed to address
       // it('renders an error message when the template fails to publish', () => {
       //   cy.stubRequest({
       //     method: 'PUT',
