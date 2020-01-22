@@ -2,6 +2,9 @@
   "rules": {
     "no-undef": "off",
     "jest/expect-expect": "off",
+    // Within the `.then()` or `.catch()` block of a Cypress promise,
+    // sometimes only another browser interaction occurs rather than an assertion.
+    // Docs for the rule: https://github.com/jest-community/eslint-plugin-jest/blob/master/docs/rules/valid-expect-in-promise.md
     "jest/valid-expect-in-promise": "off"
   }
 }
