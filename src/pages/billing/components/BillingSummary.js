@@ -13,7 +13,7 @@ import UpdateContactForm from '../forms/UpdateContactForm';
 import AddIps from '../forms/AddIps';
 import DedicatedIpSummarySection from './DedicatedIpSummarySection';
 import InvoiceHistory from './InvoiceHistory';
-import CardSummary from './CardSummary';
+import CardSummary from '../../../components/billing/CardSummary';
 import PlanSummary from './PlanSummary';
 import RecipientValidationModal from './RecipientValidationModal';
 import { formatFullNumber } from 'src/helpers/units';

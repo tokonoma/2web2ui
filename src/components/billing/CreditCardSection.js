@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Panel } from '@sparkpost/matchbox';
-import { CreditCard } from '@sparkpost/matchbox-icons';
-import { LabelledValue } from 'src/components';
 import { PaymentForm } from './PaymentForm';
 import BillingAddressForm from './BillingAddressForm';
 import { connect } from 'react-redux';
 import { getBillingCountries } from 'src/actions/billing';
+import CardSummary from './CardSummary';
 
 function CreditCardSection({
   onClick,
@@ -60,23 +59,3 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps, { getBillingCountries })(CreditCardSection);
-
-const CardSummary = ({ credit_card, label }) => {
-  if (!credit_card) {
-    return <p>No credit card information present.</p>;
-  }
-
-  return (
-    <LabelledValue label={label}>
-      <h6>
-        <strong>
-          <CreditCard size={16} /> {credit_card.type} ····{' '}
-          {credit_card.number.substr(credit_card.number.length - 4)}
-        </strong>
-      </h6>
-      <p>
-        Expires {credit_card.expiration_month}/{credit_card.expiration_year}
-      </p>
-    </LabelledValue>
-  );
-};

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Panel } from '@sparkpost/matchbox';
-import CardSummary from './CardSummary';
+import CardSummary from 'src/components/billing/CardSummary';
 import PaymentForm from 'src/components/billing/PaymentForm';
 import BillingAddressForm from 'src/components/billing/BillingAddressForm';
 import { useFeatureChangeContext } from '../context/FeatureChangeContext';
@@ -35,7 +35,7 @@ const CardSection = ({
         ]}
       >
         <Panel.Section>
-          <CardSummary billing={account.billing} />
+          <CardSummary billing={account.billing.credit_card} />
         </Panel.Section>
       </Panel>
     );
