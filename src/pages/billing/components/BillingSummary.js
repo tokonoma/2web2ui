@@ -8,7 +8,7 @@ import {
   PendingPlanBanner,
   FreePlanWarningBanner,
 } from './Banners';
-import UpdatePaymentForm from 'src/pages/billing/forms/UpdatePaymentForm';
+import UpdatePaymentForm from '../forms/UpdatePaymentForm';
 import UpdateContactForm from '../forms/UpdateContactForm';
 import AddIps from '../forms/AddIps';
 import DedicatedIpSummarySection from './DedicatedIpSummarySection';
