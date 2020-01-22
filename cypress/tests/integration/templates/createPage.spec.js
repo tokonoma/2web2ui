@@ -26,6 +26,16 @@ describe('The create template page', () => {
     cy.findByText('Create New Template').should('be.visible');
   });
 
+  it('has a link back to the templates list page', () => {
+    cy.visit(PAGE_URL);
+
+    // Need to grab `<main>` to not grab the duplicated element "Templates" that is in the navigation.
+    // This should remain relatively stable as the `<nav>` and `<main>` elements are inherently distinct
+    cy.get('main').within(() => {
+      cy.findByText('Templates').should('have.attr', 'href', '/templates');
+    });
+  });
+
   it('renders the "Subaccount" field with selectable subaccounts when the user selects "Assign to Subaccount"', () => {
     cy.stubRequest({
       url: '/api/v1/subaccounts',
