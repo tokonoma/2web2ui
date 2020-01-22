@@ -3,6 +3,7 @@
 exports[`PreviewContainer renders desktop container 1`] = `
 <div
   className="PreviewContainer"
+  data-id="preview-desktop"
 >
   <div
     className="PreviewScreen notranslate"
@@ -17,6 +18,7 @@ exports[`PreviewContainer renders desktop container 1`] = `
 exports[`PreviewContainer renders mobile container 1`] = `
 <div
   className="PreviewMobileContainer notranslate"
+  data-id="preview-mobile-phone"
 >
   <div
     className="PreviewMobilePhone"

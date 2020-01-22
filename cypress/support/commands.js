@@ -4,6 +4,9 @@
 // https://on.cypress.io/custom-commands
 // ***********************************************
 
+// type definitions for Cypress object "cy"
+/// <reference types="cypress" />
+
 import '@testing-library/cypress/add-commands';
 import 'cypress-file-upload';
 
@@ -127,7 +130,8 @@ Cypress.Commands.add(
     statusCode = 200,
     url,
     fixture,
-    fixtureAlias = 'stubbedRequest',
+    fixtureAlias = 'requestAlias',
+    requestAlias = 'stubbedRequest',
   }) => {
     cy.server();
     cy.fixture(fixture).as(fixtureAlias);
@@ -137,6 +141,6 @@ Cypress.Commands.add(
       status: statusCode,
       response: `@${fixtureAlias}`,
       onRequest,
-    });
+    }).as(requestAlias);
   },
 );

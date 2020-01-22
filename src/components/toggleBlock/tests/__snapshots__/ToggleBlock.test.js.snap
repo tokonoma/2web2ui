@@ -3,6 +3,7 @@
 exports[`ToggleBlock should render 1`] = `
 <div
   className="ToggleBlock"
+  data-id="toggle-block"
 >
   <Grid>
     <Grid.Column
