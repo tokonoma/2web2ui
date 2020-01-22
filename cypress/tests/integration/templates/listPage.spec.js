@@ -1,6 +1,5 @@
-/// <reference types="Cypress" />
-
 const TEMPLATES_API_URL = '/api/v1/templates';
+const PAGE_URL = '/templates';
 
 describe('The templates list page', () => {
   beforeEach(() => {
@@ -9,7 +8,7 @@ describe('The templates list page', () => {
   });
 
   it('has a relevant page title', () => {
-    cy.visit('/templates');
+    cy.visit(PAGE_URL);
     cy.title().should('include', 'Templates');
   });
 
@@ -20,7 +19,7 @@ describe('The templates list page', () => {
       fixture: 'templates/400.get.json',
     });
 
-    cy.visit('/templates');
+    cy.visit(PAGE_URL);
 
     cy.findByText('An error occurred').should('be.visible');
     cy.findByText('Show Error Details').click();
@@ -47,7 +46,7 @@ describe('The templates list page', () => {
       fixture: 'templates/200.get.no-results.json',
     });
 
-    cy.visit('/templates');
+    cy.visit(PAGE_URL);
 
     cy.findByText('Manage your email templates').should('be.visible');
     cy.findByText('Create New').click();
@@ -61,7 +60,7 @@ describe('The templates list page', () => {
       fixture: 'templates/200.get.2-results.json',
     });
 
-    cy.visit('/templates');
+    cy.visit(PAGE_URL);
 
     cy.findByText('Stubbed Template 1').should('be.visible');
     cy.findByText('Stubbed Template 2').should('be.visible');
@@ -74,7 +73,7 @@ describe('The templates list page', () => {
       fixture: 'templates/200.get.3-results.json',
     });
 
-    cy.visit('/templates');
+    cy.visit(PAGE_URL);
 
     cy.findByText('Recent Activity').should('be.visible');
     cy.findAllByText('Stubbed Template 1')
@@ -96,7 +95,7 @@ describe('The templates list page', () => {
       fixture: 'templates/stubbed-template-1/200.get.json',
     });
 
-    cy.visit('/templates');
+    cy.visit(PAGE_URL);
 
     cy.get('[data-id="recent-activity-button-duplicate"]')
       .first()
@@ -112,7 +111,7 @@ describe('The templates list page', () => {
       fixture: 'templates/200.get.3-results.json',
     });
 
-    cy.visit('/templates');
+    cy.visit(PAGE_URL);
 
     cy.get('[data-id="recent-activity-button-delete"]')
       .first()
@@ -127,7 +126,7 @@ describe('The templates list page', () => {
       fixture: 'templates/200.get.alphabetical-results.json',
     });
 
-    cy.visit('/templates');
+    cy.visit(PAGE_URL);
 
     // Sorts by ascending
     cy.findByText('Template Name').click();
@@ -166,7 +165,7 @@ describe('The templates list page', () => {
       fixture: 'templates/200.get.published-and-draft-results.json',
     });
 
-    cy.visit('/templates');
+    cy.visit(PAGE_URL);
 
     cy.findByText('Status').click();
 
@@ -211,7 +210,7 @@ describe('The templates list page', () => {
       fixture: 'templates/200.get.time-ordered-results.json',
     });
 
-    cy.visit('/templates');
+    cy.visit(PAGE_URL);
 
     cy.findByText('Last Updated').click();
 
@@ -256,10 +255,10 @@ describe('The templates list page', () => {
     cy.stubRequest({
       method: 'POST',
       url: TEMPLATES_API_URL,
-      fixture: 'templates/200.post.create.json',
+      fixture: 'templates/200.post.json',
     });
 
-    cy.visit('/templates');
+    cy.visit(PAGE_URL);
 
     cy.get('[data-id="table-button-duplicate"]')
       .first()
@@ -285,6 +284,8 @@ describe('The templates list page', () => {
       fixture: 'templates/stubbed-template-1/200.delete.json',
     });
 
+    cy.visit(PAGE_URL);
+
     cy.get('[data-id="table-button-delete"]')
       .first()
       .click();
@@ -301,6 +302,8 @@ describe('The templates list page', () => {
       url: TEMPLATES_API_URL,
       fixture: 'templates/200.get.3-results.json',
     });
+
+    cy.visit(PAGE_URL);
 
     cy.findByLabelText('Filter By')
       .clear()
@@ -341,7 +344,7 @@ describe('The templates list page', () => {
   });
 
   it('has a "Create New" button that navigates to the template creation page', () => {
-    cy.visit('/templates');
+    cy.visit(PAGE_URL);
 
     cy.findByText('Create New').click();
 

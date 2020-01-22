@@ -1,4 +1,3 @@
-// Configuration
 const TEMPLATE_ID = 'stubbed-template-1';
 const EDITOR_SELECTOR = '.ace_text-input';
 const PAGE_URL = `/templates/edit/${TEMPLATE_ID}/published/content`;
