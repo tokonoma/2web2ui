@@ -76,4 +76,19 @@ describe('The recipient validation list confirmation page', () => {
 
     cy.findByText('fake-list.csv').should('be.visible');
   });
+
+  it('has a "How was this calculated?" link that opens a modal', () => {
+    cy.stubRequest({
+      url: '/api/v1/recipient-validation/job/fake-list',
+      fixture: 'recipient-validation/job/fake-list/200.get.queued_for_batch.json',
+    });
+
+    cy.visit(PAGE_URL);
+
+    cy.findByText('How was this calculated?').click();
+
+    cy.findAllByText('How was this calculated?').should('have.length', 2);
+    cy.findByText('Number of Emails').should('be.visible');
+    cy.findByText('Cost').should('be.visible');
+  });
 });
