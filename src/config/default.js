@@ -129,6 +129,7 @@ const config = identifier => ({
     cnameValue: `${identifier}.et.e.sparkpost.com`,
   },
   dateFormat: 'MMM D YYYY',
+  dateFormatWithoutYear: 'MMM D',
   timeFormat: 'h:mma',
   messageEvents: {
     retentionPeriodDays: 10,

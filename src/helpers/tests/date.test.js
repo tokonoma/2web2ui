@@ -19,6 +19,7 @@ import {
   parseTime,
   parseDatetime,
   toMilliseconds,
+  formatDateTimeWithoutYear,
 } from '../date';
 import { roundBoundaries } from '../metrics';
 import cases from 'jest-in-case';
@@ -207,6 +208,10 @@ describe('Date helpers', () => {
 
     it('should format a date-time consistently', () => {
       expect(formatDateTime(testDate)).toEqual('Oct 15 2017, 8:55am');
+    });
+
+    it('should format a date-time without year consistently', () => {
+      expect(formatDateTimeWithoutYear(testDate)).toEqual('Oct 15, 8:55am');
     });
   });
 
