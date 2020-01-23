@@ -71,7 +71,7 @@ const getTooltipLabelFormatter = _.memoize(precisionType => {
 function getLineChartFormatters(precision) {
   const formatters = {};
   const precisionType = getPrecisionType(precision);
-  console.log(precisionType);
+
   formatters.xTickFormatter = getTimeTickFormatter(precisionType);
   formatters.tooltipLabelFormatter = getTooltipLabelFormatter(precisionType);
 
