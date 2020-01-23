@@ -35,7 +35,7 @@ const CardSection = ({
         ]}
       >
         <Panel.Section>
-          <CardSummary billing={account.billing.credit_card} />
+          <CardSummary credit_card={account.billing.credit_card} />
         </Panel.Section>
       </Panel>
     );

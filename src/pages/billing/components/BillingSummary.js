@@ -13,7 +13,7 @@ import UpdateContactForm from '../forms/UpdateContactForm';
 import AddIps from '../forms/AddIps';
 import DedicatedIpSummarySection from './DedicatedIpSummarySection';
 import InvoiceHistory from './InvoiceHistory';
-import CardSummary from '../../../components/billing/CardSummary';
+import CardSummary from 'src/components/billing/CardSummary';
 import PlanSummary from './PlanSummary';
 import RecipientValidationModal from './RecipientValidationModal';
 import { formatFullNumber } from 'src/helpers/units';
@@ -53,7 +53,7 @@ export default class BillingSummary extends Component {
             },
           ]}
         >
-          <CardSummary label="Credit Card" billing={billing} />
+          <CardSummary label="Credit Card" credit_card={billing.credit_card} />
         </Panel.Section>
         <Panel.Section
           actions={[
