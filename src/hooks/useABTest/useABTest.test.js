@@ -1,4 +1,5 @@
 import React from 'react';
+import { shallow } from 'enzyme';
 import { render, queryByText } from '@testing-library/react';
 import { hash } from './hash';
 import useABTest from './useABTest';
@@ -67,5 +68,25 @@ describe('useABTest', () => {
       testName: 'Test 1',
       variantName: 'VariantA',
     });
+  });
+
+  it("throws an error if the test doesn't have a test name", () => {
+    expect(() => {
+      shallow(<MockComponent />);
+    }).toThrowError('useABTest requires a string testName');
+  });
+
+  it("throws an error if the test doesn't have a uid", () => {
+    expect(() => {
+      shallow(<MockComponent testName="Test" />);
+    }).toThrowError(
+      'useABTest requires a uid to be set. Without it, the first variant will always be chosen',
+    );
+  });
+
+  it("throws an error if the test doesn't have a function for onVariantLoad", () => {
+    expect(() => {
+      shallow(<MockComponent testName="Test" uid="123" onVariantLoad="abc" />);
+    }).toThrowError('useABTest requires that if onVariantLoad is passed, it must be a function');
   });
 });
