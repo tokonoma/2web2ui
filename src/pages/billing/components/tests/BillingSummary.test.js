@@ -8,7 +8,6 @@ jest.mock('../../forms/UpdateContactForm', () => function UpdateContactForm() {}
 jest.mock('../../forms/AddIps', () => function AddIpsForm() {});
 
 describe('Component: Billing Summary', () => {
-
   let wrapper;
   let props;
 
@@ -17,25 +16,26 @@ describe('Component: Billing Summary', () => {
       account: {
         billing: {},
         subscription: {
-          plan_volume: 15000
+          plan_volume: 15000,
         },
-        rvUsage: { // TODO: Rename to usage upon consolidation
+        rvUsage: {
+          // TODO: Rename to usage upon consolidation
           recipient_validation: {
             month: { used: 123123 },
-            timestamp: '2019-06-10T00:00:00.000Z'
-          }
+            timestamp: '2019-06-10T00:00:00.000Z',
+          },
         },
-        cancelLoading: false
+        cancelLoading: false,
       },
       currentPlan: {
-        isFree: true
+        isFree: true,
       },
       canChangePlan: true,
       canUpdateBillingInfo: true,
       canPurchaseIps: true,
       sendingIps: [],
       invoices: [],
-      accountAgeInDays: 5
+      accountAgeInDays: 5,
     };
     wrapper = shallow(<BillingSummary {...props} />);
   });
@@ -48,31 +48,31 @@ describe('Component: Billing Summary', () => {
   it('should render correctly for a paid plan', () => {
     wrapper.setProps({
       currentPlan: {
-        isFree: false
+        isFree: false,
       },
       canPurchaseIps: true,
-      canUpdateBillingInfo: true
+      canUpdateBillingInfo: true,
     });
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should render correctly if you can\'t change your plan', () => {
+  it("should render correctly if you can't change your plan", () => {
     wrapper.setProps({
-      canChangePlan: false
+      canChangePlan: false,
     });
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should render correctly if you can\'t update your billing info', () => {
+  it("should render correctly if you can't update your billing info", () => {
     wrapper.setProps({
-      canUpdateBillingInfo: false
+      canUpdateBillingInfo: false,
     });
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should render correctly if you can\'t buy IPs', () => {
+  it("should render correctly if you can't buy IPs", () => {
     wrapper.setProps({
-      canPurchaseIps: false
+      canPurchaseIps: false,
     });
     expect(wrapper).toMatchSnapshot();
   });
@@ -96,7 +96,7 @@ describe('Component: Billing Summary', () => {
   });
 
   it('should show the invoice history if there are invoices', () => {
-    wrapper.setProps({ invoices: ['an invoice', 'another invoice']});
+    wrapper.setProps({ invoices: ['an invoice', 'another invoice'] });
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -104,5 +104,4 @@ describe('Component: Billing Summary', () => {
     wrapper.setProps({ hasRecipientValidation: true });
     expect(wrapper.find('LabelledValue[label="Recipient Validation"]')).toExist();
   });
-
 });

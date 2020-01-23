@@ -95,7 +95,6 @@ exports[`Component: Billing Summary should render correctly for a paid plan 1`] 
       }
     >
       <CardSummary
-        billing={Object {}}
         label="Credit Card"
       />
     </Panel.Section>
@@ -293,7 +292,6 @@ exports[`Component: Billing Summary should render correctly if you can't buy IPs
       }
     >
       <CardSummary
-        billing={Object {}}
         label="Credit Card"
       />
     </Panel.Section>
@@ -413,7 +411,6 @@ exports[`Component: Billing Summary should render correctly if you can't change 
       }
     >
       <CardSummary
-        billing={Object {}}
         label="Credit Card"
       />
     </Panel.Section>
@@ -631,7 +628,6 @@ exports[`Component: Billing Summary should render with IP modal open 1`] = `
       }
     >
       <CardSummary
-        billing={Object {}}
         label="Credit Card"
       />
     </Panel.Section>
@@ -764,7 +760,6 @@ exports[`Component: Billing Summary should render with the billing contact modal
       }
     >
       <CardSummary
-        billing={Object {}}
         label="Credit Card"
       />
     </Panel.Section>
@@ -897,7 +892,6 @@ exports[`Component: Billing Summary should render with the payment info modal op
       }
     >
       <CardSummary
-        billing={Object {}}
         label="Credit Card"
       />
     </Panel.Section>
@@ -1030,7 +1024,6 @@ exports[`Component: Billing Summary should show the invoice history if there are
       }
     >
       <CardSummary
-        billing={Object {}}
         label="Credit Card"
       />
     </Panel.Section>

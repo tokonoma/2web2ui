@@ -1,25 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Panel } from '@sparkpost/matchbox';
 import { PaymentForm } from './PaymentForm';
 import BillingAddressForm from './BillingAddressForm';
-import { connect } from 'react-redux';
-import { getBillingCountries } from 'src/actions/billing';
 import CardSummary from './CardSummary';
 
 function CreditCardSection({
-  onClick,
+  handleCardToggle,
   credit_card,
   formname: FORMNAME,
   submitting = false,
   countries = [],
-  getBillingCountries,
 }) {
-  useEffect(() => {
-    getBillingCountries();
-  }, [getBillingCountries]);
   const handleUseAnotherCC = () => {
     setUseAnotherCC(!useAnotherCC);
-    onClick();
+    handleCardToggle(!useAnotherCC);
   };
   const savedPaymentAction = credit_card
     ? [{ content: 'Use Saved Payment Method', onClick: handleUseAnotherCC, color: 'orange' }]
@@ -52,10 +46,4 @@ function CreditCardSection({
   );
 }
 
-const mapStateToProps = state => {
-  return {
-    countries: state.billing.countries,
-  };
-};
-
-export default connect(mapStateToProps, { getBillingCountries })(CreditCardSection);
+export default CreditCardSection;
