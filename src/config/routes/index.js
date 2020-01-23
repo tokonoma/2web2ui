@@ -594,7 +594,7 @@ const routes = [
   {
     path: '/account/billing/enable-automatic',
     component: billing.EnableAutomaticBillingPage,
-    condition: all(hasGrants('account/manage'), not(isSelfServeBilling), isCustomBilling),
+    condition: all(hasGrants('account/manage'), not(isSelfServeBilling)),
     layout: App,
     title: 'Billing | Enable Automatic Billing',
     supportDocSearch: 'upgrade account',
@@ -725,7 +725,7 @@ const routes = [
     component: SingleResultPage,
     condition: hasGrants('recipient-validation/manage'),
     layout: App,
-    title: 'Recipient Validation | Results',
+    title: 'Results | Recipient Validation',
     supportDocsSearch: 'Recipient Validation',
   },
   {
@@ -733,7 +733,7 @@ const routes = [
     component: UploadedListPage,
     condition: hasGrants('recipient-validation/manage'),
     layout: App,
-    title: 'Recipient Validation | List',
+    title: 'Validation Status | List | Recipient Validation',
     supportDocsSearch: 'Recipient Validation',
   },
   {

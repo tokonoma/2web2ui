@@ -4,12 +4,10 @@ import { Toggle, Grid } from '@sparkpost/matchbox';
 import styles from './ToggleBlock.module.scss';
 
 const ToggleBlock = ({ input, meta, label, helpText, ...rest }) => {
-  const helpMarkup = helpText
-    ? <div className={styles.Help}>{helpText}</div>
-    : null;
+  const helpMarkup = helpText ? <div className={styles.Help}>{helpText}</div> : null;
 
   return (
-    <div className={styles.ToggleBlock}>
+    <div className={styles.ToggleBlock} data-id="toggle-block">
       <Grid>
         <Grid.Column xs={8}>
           <label className={styles.Label}>{label}</label>

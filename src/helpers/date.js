@@ -150,6 +150,10 @@ export function formatDateTime(datetime, FORMAT) {
     : `${formatDate(datetime)}, ${formatTime(datetime)}`;
 }
 
+export function formatDateTimeWithoutYear(datetime) {
+  return formatDateTime(datetime, `${config.dateFormatWithoutYear}, ${config.timeFormat}`);
+}
+
 // format as ISO 8601 timestamp to match SP API
 export const formatApiTimestamp = time => moment.utc(time).format();
 export const formatApiDate = date => moment.utc(date).format(FORMATS.SHORT_DATE);

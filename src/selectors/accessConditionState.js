@@ -1,14 +1,14 @@
 import { createSelector } from 'reselect';
 import _ from 'lodash';
 
-const getAccount = (state) => state.account;
-const getUser = (state) => state.currentUser;
-const getPlans = (state) => _.get(state, 'billing.plans', []);
-const getACReady = (state) => state.accessControlReady;
+const getAccount = state => state.account;
+const getUser = state => state.currentUser;
+const getPlans = state => _.get(state, 'billing.plans', []);
+const getACReady = state => state.accessControlReady;
 
 export const getCurrentAccountPlan = createSelector(
   [getAccount, getPlans],
-  (account, plans) => plans.find((plan) => plan.code === account.subscription.code) || {}
+  (account, plans) => plans.find(plan => plan.code === account.subscription.code) || {},
 );
 
 const selectAccessConditionState = createSelector(
@@ -18,8 +18,8 @@ const selectAccessConditionState = createSelector(
     currentUser,
     plans,
     accountPlan,
-    ready
-  })
+    ready,
+  }),
 );
 
 export default selectAccessConditionState;
@@ -32,4 +32,4 @@ export default selectAccessConditionState;
  * the condition helper will be given the correct state to accurately return its boolean value.
  */
 
-export const selectCondition = (condition) => createSelector([selectAccessConditionState], condition);
+export const selectCondition = condition => createSelector([selectAccessConditionState], condition);

@@ -1,0 +1,8 @@
+{
+  "results": {
+    "subject": "Test Template",
+    "from": { "email": "fake-user@bounce.uat.sparkspam.com" },
+    "text": "This is some text content.",
+    "amp_html": "<h1>This is some AMP HTML content</h1>"
+  }
+}

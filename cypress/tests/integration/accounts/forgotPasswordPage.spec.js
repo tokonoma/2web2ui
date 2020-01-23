@@ -4,7 +4,7 @@ describe('The "Reset Your Password" view', () => {
   beforeEach(() => {
     cy.server();
     cy.visit('/forgot-password');
-    cy.fixture('forgot-password-post.json').then(json => {
+    cy.fixture('users/password/forgot/200.post.json').then(json => {
       cy.route({
         method: 'POST',
         url: '/api/v1/users/password/forgot',

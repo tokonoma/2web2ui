@@ -5,11 +5,11 @@
 }
 
 .validIcon {
-  color: color(green)
+  color: color(green);
 }
 
 .invalidIcon {
-  color: color(red)
+  color: color(red);
 }
 
 .IconWrapper {
@@ -20,7 +20,7 @@
 
 .Paragraph {
   margin-bottom: 0;
-  padding-left: rem(40)
+  padding-left: rem(40);
 }
 
 .Validity {
@@ -48,3 +48,6 @@
   margin: 3em auto;
 }
 
+.FieldLabel {
+  @include visually-hidden();
+}

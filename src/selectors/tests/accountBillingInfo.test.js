@@ -120,6 +120,7 @@ describe('selectBillingInfo', () => {
       'onZuoraPlan',
       'plans',
       'isAWSAccount',
+      'subscription',
     ]);
   });
 });

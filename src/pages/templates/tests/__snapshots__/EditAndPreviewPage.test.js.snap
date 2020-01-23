@@ -7,6 +7,7 @@ exports[`EditAndPreviewPage renders a page 1`] = `
     <React.Fragment>
       <div
         className="Status"
+        data-id="template-status"
       >
         <span>
           Draft
@@ -42,6 +43,7 @@ exports[`EditAndPreviewPage renders a page in published mode 1`] = `
 <React.Fragment>
   <div
     className="Status"
+    data-id="template-status"
   >
     <span>
       Published

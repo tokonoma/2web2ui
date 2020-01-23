@@ -1,0 +1,11 @@
+{
+  "list_id": "fake-list",
+  "customer_id": 123,
+  "address_count": 2,
+  "original_filename": "fake-list.csv",
+  "triggered_timestamp": 1578067868,
+  "complete": false,
+  "batch_status": "performing_free_email",
+  "upload_timestamp": 1578067866,
+  "uploaded_file": "/path/to/uploaded/file"
+}

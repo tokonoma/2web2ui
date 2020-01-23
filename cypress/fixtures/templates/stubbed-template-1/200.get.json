@@ -16,10 +16,10 @@
     "content": {
       "subject": "Stubbed Template 1",
       "from": {
-        "email": "nick@bounce.uat.sparkspam.com"
+        "email": "fake-user@bounce.uat.sparkspam.com"
       },
       "text": "This is some text",
-      "html": "<h1>HTML</h1>",
+      "html": "<h1>HTML!</h1>",
       "amp_html": "AMP HTML!"
     }
   }
