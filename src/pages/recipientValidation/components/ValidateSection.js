@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { FORMS } from 'src/constants';
 import { reduxForm } from 'redux-form';
 import { updatePaymentInitialValues } from 'src/selectors/accountBillingForms';
+import { selectAccountManuallyBilled } from 'src/selectors/accountBillingInfo';
 import { getBillingCountries } from 'src/actions/billing';
 
 const FORMNAME = FORMS.RV_ADDPAYMENTFORM;
@@ -15,6 +16,7 @@ function ValidateSection({
   handleValidate,
   billingCountries,
   getBillingCountries,
+  isManuallyBilled,
 }) {
   const onSubmit = () => {
     handleValidate();
@@ -22,6 +24,17 @@ function ValidateSection({
   useEffect(() => {
     getBillingCountries();
   }, [getBillingCountries]);
+  if (isManuallyBilled) {
+    return (
+      <Button
+        external
+        primary
+        to="https://www.sparkpost.com/recipient-validation/#recipient-validation-form"
+      >
+        Contact Sales
+      </Button>
+    );
+  }
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <CreditCardSection
@@ -43,6 +56,7 @@ const mapStateToProps = state => {
   return {
     initialValues: updatePaymentInitialValues(state),
     billingCountries: state.billing.countries,
+    isManuallyBilled: selectAccountManuallyBilled(state),
   };
 };
 

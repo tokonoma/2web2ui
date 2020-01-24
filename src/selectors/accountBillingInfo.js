@@ -7,6 +7,7 @@ import {
   isSelfServeBilling,
   onPlan,
   onZuoraPlan,
+  isManuallyBilled,
 } from 'src/helpers/conditions/account';
 import { selectCondition } from './accessConditionState';
 
@@ -25,6 +26,7 @@ const selectIsSelfServeBilling = selectCondition(isSelfServeBilling);
 const selectIsCcFree1 = selectCondition(onPlan('ccfree1'));
 const selectIsFree1 = selectCondition(onPlan('free1'));
 const selectOnZuoraPlan = selectCondition(onZuoraPlan);
+const selectIsManuallyBilled = selectCondition(isManuallyBilled);
 const selectBillingSubscription = state => state.billing.subscription || {};
 const currentFreePlans = ['free500-1018', 'free15K-1018', 'free500-0419', 'free500-SPCEU-0419'];
 const getRecipientValidationUsage = state => _.get(state, 'account.rvUsage.recipient_validation');
@@ -205,4 +207,9 @@ export const selectBillingInfo = createSelector(
 export const selectMonthlyRecipientValidationUsage = createSelector(
   getRecipientValidationUsage,
   usage => _.get(usage, 'month.used', 0),
+);
+
+export const selectAccountManuallyBilled = createSelector(
+  [selectIsManuallyBilled],
+  isManuallyBilled => isManuallyBilled,
 );
