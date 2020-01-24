@@ -15,6 +15,10 @@ describe('The recipient validation list progress page', () => {
       url: API_URL,
       fixture: `${FIXTURE_BASE_URL}/200.get.success.json`,
     });
+    cy.stubRequest({
+      url: '/api/v1/billing',
+      fixture: 'billing/200.get.json',
+    });
 
     cy.visit(APP_URL);
 
@@ -25,6 +29,10 @@ describe('The recipient validation list progress page', () => {
     cy.stubRequest({
       url: API_URL,
       fixture: `${FIXTURE_BASE_URL}/200.get.success.json`,
+    });
+    cy.stubRequest({
+      url: '/api/v1/billing',
+      fixture: 'billing/200.get.json',
     });
 
     cy.visit(APP_URL);
@@ -37,6 +45,10 @@ describe('The recipient validation list progress page', () => {
       statusCode: 404,
       url: API_URL,
       fixture: `${FIXTURE_BASE_URL}/404.get.json`,
+    });
+    cy.stubRequest({
+      url: '/api/v1/billing',
+      fixture: 'billing/200.get.json',
     });
 
     cy.visit(APP_URL);
@@ -51,6 +63,10 @@ describe('The recipient validation list progress page', () => {
       url: API_URL,
       fixture: `${FIXTURE_BASE_URL}/200.get.success.json`,
     });
+    cy.stubRequest({
+      url: '/api/v1/billing',
+      fixture: 'billing/200.get.json',
+    });
 
     cy.visit(APP_URL);
 
@@ -61,6 +77,10 @@ describe('The recipient validation list progress page', () => {
     cy.stubRequest({
       url: API_URL,
       fixture: `${FIXTURE_BASE_URL}/200.get.error.json`,
+    });
+    cy.stubRequest({
+      url: '/api/v1/billing',
+      fixture: 'billing/200.get.json',
     });
 
     cy.visit(APP_URL);
@@ -75,6 +95,10 @@ describe('The recipient validation list progress page', () => {
         url: API_URL,
         fixture: `${FIXTURE_BASE_URL}/200.get.batch_triggered.json`,
       });
+      cy.stubRequest({
+        url: '/api/v1/billing',
+        fixture: 'billing/200.get.json',
+      });
 
       cy.visit(APP_URL);
 
@@ -85,6 +109,10 @@ describe('The recipient validation list progress page', () => {
       cy.stubRequest({
         url: API_URL,
         fixture: `${FIXTURE_BASE_URL}/200.get.checking_regex.json`,
+      });
+      cy.stubRequest({
+        url: '/api/v1/billing',
+        fixture: 'billing/200.get.json',
       });
 
       cy.visit(APP_URL);
@@ -97,6 +125,10 @@ describe('The recipient validation list progress page', () => {
         url: API_URL,
         fixture: `${FIXTURE_BASE_URL}/200.get.performing_decay_scoring.json`,
       });
+      cy.stubRequest({
+        url: '/api/v1/billing',
+        fixture: 'billing/200.get.json',
+      });
 
       cy.visit(APP_URL);
 
@@ -107,6 +139,10 @@ describe('The recipient validation list progress page', () => {
       cy.stubRequest({
         url: API_URL,
         fixture: `${FIXTURE_BASE_URL}/200.get.performing_did_you_mean.json`,
+      });
+      cy.stubRequest({
+        url: '/api/v1/billing',
+        fixture: 'billing/200.get.json',
       });
 
       cy.visit(APP_URL);
@@ -119,6 +155,10 @@ describe('The recipient validation list progress page', () => {
         url: API_URL,
         fixture: `${FIXTURE_BASE_URL}/200.get.performing_free_email.json`,
       });
+      cy.stubRequest({
+        url: '/api/v1/billing',
+        fixture: 'billing/200.get.json',
+      });
 
       cy.visit(APP_URL);
 
@@ -129,6 +169,10 @@ describe('The recipient validation list progress page', () => {
       cy.stubRequest({
         url: API_URL,
         fixture: `${FIXTURE_BASE_URL}/200.get.performing_mx_lookup.json`,
+      });
+      cy.stubRequest({
+        url: '/api/v1/billing',
+        fixture: 'billing/200.get.json',
       });
 
       cy.visit(APP_URL);
@@ -141,6 +185,10 @@ describe('The recipient validation list progress page', () => {
         url: API_URL,
         fixture: `${FIXTURE_BASE_URL}/200.get.performing_role_based_lookup.json`,
       });
+      cy.stubRequest({
+        url: '/api/v1/billing',
+        fixture: 'billing/200.get.json',
+      });
 
       cy.visit(APP_URL);
 
@@ -151,6 +199,10 @@ describe('The recipient validation list progress page', () => {
       cy.stubRequest({
         url: API_URL,
         fixture: `${FIXTURE_BASE_URL}/200.get.reading_upload_file.json`,
+      });
+      cy.stubRequest({
+        url: '/api/v1/billing',
+        fixture: 'billing/200.get.json',
       });
 
       cy.visit(APP_URL);
@@ -163,6 +215,10 @@ describe('The recipient validation list progress page', () => {
         url: API_URL,
         fixture: `${FIXTURE_BASE_URL}/200.get.uploading_results_to_s3.json`,
       });
+      cy.stubRequest({
+        url: '/api/v1/billing',
+        fixture: 'billing/200.get.json',
+      });
 
       cy.visit(APP_URL);
 
@@ -171,6 +227,10 @@ describe('The recipient validation list progress page', () => {
 
     it('it renders a "Validation Error" and an alert with "Validation Limit Exceeded" if the batch status on the list page is "usage_limit_exceeded"', () => {
       cy.server();
+      cy.stubRequest({
+        url: '/api/v1/billing',
+        fixture: 'billing/200.get.json',
+      });
       cy.fixture('recipient-validation/list/200.get.usage-limit-exceeded.json').as('RVFixture');
       cy.route({
         url: '/api/v1/recipient-validation/job/fake-list',
