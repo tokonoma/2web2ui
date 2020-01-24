@@ -14,11 +14,13 @@ describe('Page: Recipient Email Verification', () => {
   beforeEach(() => {
     props = {
       history: {
-        replace: jest.fn()
-      }
+        replace: jest.fn(),
+      },
+      getBillingInfo: jest.fn(),
+      billing: {},
     };
 
-    wrapper = shallow(<RecipientValidationPage {...props}/>);
+    wrapper = shallow(<RecipientValidationPage {...props} />);
     instance = wrapper.instance();
   });
 
