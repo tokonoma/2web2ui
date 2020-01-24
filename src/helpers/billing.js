@@ -16,10 +16,10 @@ export function formatDataForCors(values) {
     zip_code: billingAddress.zip,
     bin: card.number.slice(0, 6),
     last_four: card.number.slice(-4),
-    plan_id: planpicker.billingId,
+    plan_id: planpicker.billingId || billingId,
     address1: null,
     address2: null,
-    city: null
+    city: null,
   };
 
   // For Zuora
@@ -31,7 +31,7 @@ export function formatDataForCors(values) {
       workEmail: email,
       country: billingAddress.country,
       state: billingAddress.state,
-      zipCode: billingAddress.zip
+      zipCode: billingAddress.zip,
     },
     creditCard: {
       cardType: card.type,
@@ -45,10 +45,10 @@ export function formatDataForCors(values) {
         addressLine1: null,
         addressLine2: null,
         city: null,
-        country: billingAddress.country // must send country so gateway knows which AVS rules to apply
-      }
+        country: billingAddress.country, // must send country so gateway knows which AVS rules to apply
+      },
     },
-    discountId
+    discountId,
   };
   return { corsData, billingData };
 }
@@ -66,13 +66,13 @@ export function formatUpdateData({ accountKey, billingAddress, card }) {
       state,
       addressLine1: null,
       addressLine2: null,
-      city: null
+      city: null,
     },
     creditCardNumber: card.number.replace(/\W/g, ''),
     expirationMonth: card.expMonth,
     expirationYear: card.expYear,
     securityCode,
-    creditCardType: card.type
+    creditCardType: card.type,
   };
 }
 
@@ -85,7 +85,7 @@ export function formatCreateData({
   billingId,
   creditCard,
   billToContact,
-  invoiceCollect = true
+  invoiceCollect = true,
 }) {
   const formatted = {
     accountNumber,
@@ -97,12 +97,11 @@ export function formatCreateData({
     subscription: {
       contractEffectiveDate,
       subscribeToRatePlans: [{ productRatePlanId: billingId }],
-      termType: 'EVERGREEN'
+      termType: 'EVERGREEN',
     },
     creditCard,
-    billToContact
+    billToContact,
   };
-
 
   if (discountId) {
     formatted.subscription.subscribeToRatePlans.push({ productRatePlanId: discountId });
@@ -118,25 +117,26 @@ export function formatContactData({ billingContact }) {
     last_name: billingContact.lastName,
     country_code: billingContact.country,
     zip_code: billingContact.zip,
-    state: billingContact.state
+    state: billingContact.state,
   };
 }
 
 // Formats countries before storing in state
 export function formatCountries(countries) {
+  /* eslint-disable lodash/prefer-immutable-method */
   const ordered = _.flatten([
     _.remove(countries, { code: 'US' }),
     _.remove(countries, { code: 'GB' }),
     _.remove(countries, { code: 'CA' }),
-    countries
+    countries,
   ]);
 
-  return ordered.map((country) => formatForSelect(country));
+  return ordered.map(country => formatForSelect(country));
 }
 
 function formatForSelect({ code, name, states }) {
   if (states) {
-    return { value: code, label: name, states: states.map((state) => formatForSelect(state)) };
+    return { value: code, label: name, states: states.map(state => formatForSelect(state)) };
   }
   return { value: code, label: name };
 }
@@ -157,17 +157,20 @@ export function getZipLabel(country) {
  * Reshapes type strings from what the payment lib provides to a format our api accepts
  */
 export function formatCardTypes(cards) {
-  return cards.map((card) => {
+  return cards.map(card => {
     const type = _.find(config.cardTypes, { paymentFormat: card.type });
     return { ...card, type: type ? type.apiFormat : card.type };
   });
 }
 
-
 export function getPlanPrice(plan) {
   const pricingInterval = _.has(plan, 'hourly') ? 'hourly' : 'monthly';
   const intervalShortName = pricingInterval === 'hourly' ? 'hr' : 'mo';
-  return { intervalShort: intervalShortName, intervalLong: pricingInterval, price: plan.price || plan[pricingInterval] };
+  return {
+    intervalShort: intervalShortName,
+    intervalLong: pricingInterval,
+    price: plan.price || plan[pricingInterval],
+  };
 }
 
 export function prepareCardInfo({ expCombined, ...cardInfo }) {
@@ -177,7 +180,7 @@ export function prepareCardInfo({ expCombined, ...cardInfo }) {
     ...cardInfo,
     type: Payment.fns.cardType(cardInfo.number),
     expMonth: expiryInfo.month,
-    expYear: expiryInfo.year
+    expYear: expiryInfo.year,
   };
 }
 
