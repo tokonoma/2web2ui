@@ -7,6 +7,7 @@ import { TextFieldWrapper } from 'src/components';
 import { required, email, maxLength } from 'src/helpers/validation';
 import { singleAddress } from 'src/actions/recipientValidation';
 import styles from './SingleAddressForm.module.scss';
+import { isAccountUiOptionSet } from 'src/helpers/conditions/account';
 
 const formName = 'singleAddressForm';
 export class SingleAddressForm extends Component {
@@ -25,7 +26,7 @@ export class SingleAddressForm extends Component {
           <p className={styles.Subheader}>
             Enter the email address below you would like to validate.
           </p>
-          <div className={styles.Field}>
+          <div className={!this.props.isStandAloneRVSet ? styles.Field : styles.FieldSRV}>
             <Label className={styles.FieldLabel} id="email-address-field">
               Email Address
             </Label>
@@ -40,17 +41,25 @@ export class SingleAddressForm extends Component {
               normalize={(value = '') => value.trim()}
             />
           </div>
-          <div className={styles.Submit}>
-            <Button size="large" fullWidth primary submit disabled={submitDisabled}>
-              {buttonContent}
-            </Button>
-          </div>
+          {!this.props.isStandAloneRVSet && (
+            <div className={styles.Submit}>
+              <Button size="large" fullWidth primary submit disabled={submitDisabled}>
+                {buttonContent}
+              </Button>
+            </div>
+          )}
         </form>
       </Panel.Section>
     );
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    isStandAloneRVSet: isAccountUiOptionSet('standalone_rv')(state),
+  };
+};
+
 const WrappedForm = reduxForm({ form: formName })(SingleAddressForm);
 
-export default withRouter(connect(null, { singleAddress })(WrappedForm));
+export default withRouter(connect(mapStateToProps, { singleAddress })(WrappedForm));
