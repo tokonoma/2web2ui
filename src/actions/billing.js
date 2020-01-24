@@ -26,7 +26,7 @@ export function updateSubscription({ code, bundle = code, promoCode, meta = {} }
                 : '/v1/billing/subscription/bundle',
               data: {
                 promo_code: promoCode,
-                [isAws(getState()) ? 'code' : 'bundle']: code || bundle,
+                [isAws(getState()) ? 'code' : 'bundle']: bundle,
               },
               ...meta,
               onSuccess: meta.onSuccess ? meta.onSuccess : fetchAccountAction,
