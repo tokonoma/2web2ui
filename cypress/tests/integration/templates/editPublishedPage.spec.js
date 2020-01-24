@@ -51,7 +51,8 @@ describe('The templates published template page', () => {
     cy.visit(PAGE_URL);
 
     cy.findByText('Unable to load template').should('be.visible');
-    cy.findByText('Templates').should('be.visible');
+    cy.title().should('eq', 'Templates | SparkPost');
+    cy.findAllByText('Templates').should('have.length', 2); // Both the nav item and the heading
     cy.findByText('Stubbed Template 1').should('not.be.visible');
   });
 

@@ -1,0 +1,37 @@
+{
+  "results": [
+    {
+      "key": "metrics/view"
+    },
+    {
+      "key": "message_events/view"
+    },
+    {
+      "key": "templates/view"
+    },
+    {
+      "key": "templates/preview"
+    },
+    {
+      "key": "sending_domains/view"
+    },
+    {
+      "key": "users/self-manage"
+    },
+    {
+      "key": "grants/view"
+    },
+    {
+      "key": "account/view"
+    },
+    {
+      "key": "subaccount/view"
+    },
+    {
+      "key": "signals/view"
+    },
+    {
+      "key": "signals/manage"
+    }
+  ]
+}

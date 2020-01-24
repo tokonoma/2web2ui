@@ -51,7 +51,7 @@ Cypress.Commands.add('stubAuth', () => {
   cy.fixture('users/200.get.json').as('usersGet');
   cy.fixture('account/200.get.json').as('accountGet');
   cy.fixture('account/plans/200.get.json').as('plansGet');
-  cy.fixture('authenticate/grants/200.get.json').as('grantsGet');
+  cy.fixture('authenticate/grants/200.get.admin.json').as('grantsGet');
   cy.fixture('suppression-list/200.get.json').as('suppressionsGet');
   cy.fixture('api-keys/200.get.json').as('apiKeysGet');
   cy.fixture('sending-domains/200.get.json').as('sendingDomainsGet');
@@ -61,7 +61,7 @@ Cypress.Commands.add('stubAuth', () => {
     url: '/api/v1/authenticate',
     status: 200,
     response: '@authenticatePost',
-  }).as('stubbedTwoFactorRequest');
+  }).as('stubbedAuthenticateRequest');
   cy.route({
     method: 'GET',
     url: `/api/v1/users/${Cypress.env('USERNAME')}/two-factor`,
@@ -121,7 +121,6 @@ Cypress.Commands.add('stubAuth', () => {
  * @param {string} method - the path of the relevant fixture. See: https://docs.cypress.io/api/commands/fixture.html
  * @param {string} method - the name of the alias used for the passed in fixture
  */
-
 Cypress.Commands.add(
   'stubRequest',
   ({
@@ -144,3 +143,17 @@ Cypress.Commands.add(
     }).as(requestAlias);
   },
 );
+
+/**
+ * Used to check for link visibility with a certain `href` attribute value
+ *
+ * @param {string} content - The content within the link - if the content is broken up by multiple DOM elements, this may not work well
+ * @param {string} href - The expected value of the `href` attribute present on the link
+ *
+ */
+Cypress.Commands.add('assertLink', ({ content, href }) => {
+  cy.queryByText(content)
+    .should('be.visible')
+    .closest('a')
+    .should('have.attr', 'href', href);
+});
