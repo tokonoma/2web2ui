@@ -7,6 +7,7 @@ import { resolveOnCondition } from 'src/helpers/promise';
 import _ from 'lodash';
 import { sparkpost as sparkpostAxios } from 'src/helpers/axiosInstances';
 import SparkpostApiError from './sparkpostApiError';
+import ErrorTracker from 'src/helpers/errorTracker';
 
 const maxRefreshRetries = 3;
 export const refreshTokensUsed = new Set();
@@ -117,7 +118,7 @@ const sparkpostRequest = requestHelperFactory({
     }
 
     // TODO: Remove this once we unchain all actions
-    throw apiError;
+    ErrorTracker.addRequestContextAndThrow(types.FAIL, response, apiError);
   },
 });
 

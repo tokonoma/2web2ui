@@ -217,6 +217,15 @@ class ErrorTracker {
     }
     Raven.captureException(error, { logger, extra });
   }
+
+  addRequestContextAndThrow(reduxActionType, response = {}, error) {
+    if (!Raven.isSetup()) {
+      return;
+    }
+    Raven.context({ tags: { reduxActionType, httpResponseStatus: response.status || 0 } }, () => {
+      throw error;
+    });
+  }
 }
 
 // Export a constructed instance to avoid the need to call `new` everywhere

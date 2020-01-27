@@ -1,45 +1,46 @@
 import axios from 'axios';
+import ErrorTracker from 'src/helpers/errorTracker';
 
-function defaultOnSuccess({ types, response, dispatch, meta, action }) {
+function defaultOnSuccess({ types, response, dispatch, meta }) {
   dispatch({
     type: types.SUCCESS,
     payload: response,
-    meta
+    meta,
   });
 
   return response;
 }
 
 function defaultOnFail({ types, err, dispatch, meta }) {
-  const { message, response = {}} = err;
+  const { message, response = {} } = err;
 
   dispatch({
     type: types.FAIL,
     payload: { message, response },
-    meta
+    meta,
   });
 
-  throw err;
+  ErrorTracker.addRequestContextAndThrow(types.FAIL, response, err);
 }
 
 export default function requestFactory({
   request = axios,
   onSuccess = defaultOnSuccess,
   onFail = defaultOnFail,
-  transformHttpOptions = (opts) => opts
+  transformHttpOptions = opts => opts,
 } = {}) {
-  return (action) => (dispatch, getState) => {
+  return action => (dispatch, getState) => {
     const { type = 'NO_TYPE_DEFINED', meta } = action;
     const { url, method = 'get', params, headers, data, responseType = 'json' } = meta;
     const types = {
       PENDING: `${type}_PENDING`,
       SUCCESS: `${type}_SUCCESS`,
-      FAIL: `${type}_FAIL`
+      FAIL: `${type}_FAIL`,
     };
 
     dispatch({
       type: types.PENDING,
-      meta
+      meta,
     });
 
     const httpOptions = {
@@ -48,18 +49,17 @@ export default function requestFactory({
       url,
       params,
       headers,
-      data
+      data,
     };
 
     const transformedHttpOptions = transformHttpOptions(httpOptions, getState);
 
-    return request(transformedHttpOptions)
-      .then(
-        // request succeeded, we only get here if the request returned a 2xx status code
-        (response) => onSuccess({ types, response, dispatch, meta, action, getState }),
+    return request(transformedHttpOptions).then(
+      // request succeeded, we only get here if the request returned a 2xx status code
+      response => onSuccess({ types, response, dispatch, meta, action, getState }),
 
-        // request failed (remember to throw err in your onFail)
-        (err) => onFail({ types, err, dispatch, meta, action, getState })
-      );
+      // request failed (remember to throw err in your onFail)
+      err => onFail({ types, err, dispatch, meta, action, getState }),
+    );
   };
 }
