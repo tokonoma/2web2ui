@@ -6,7 +6,7 @@ import CreditCardSection from '../CreditCardSection';
 describe('CreditCardSection', () => {
   const defaultProps = {
     handleCardToggle: jest.fn(),
-    credit_card: {
+    creditCard: {
       type: 'Visa',
       number: '12345678',
       expiration_month: '04',
@@ -23,7 +23,7 @@ describe('CreditCardSection', () => {
     expect(instance.queryByText('Expires 04/2022')).toBeInTheDocument();
   });
   it('should render credit card form when credit_card is not present', () => {
-    const instance = subject(shallow, { credit_card: null });
+    const instance = subject(shallow, { creditCard: null });
     expect(instance.find('PaymentForm')).toHaveLength(1);
     expect(instance.find('Connect(BillingAddressForm)')).toHaveLength(1);
   });
