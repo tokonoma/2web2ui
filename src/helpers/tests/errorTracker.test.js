@@ -1,6 +1,10 @@
 import cases from 'jest-in-case';
 import ErrorTracker, {
-  breadcrumbCallback, getEnricherOrDieTryin, isApiError, isErrorFromOurBundle, isChunkFailure
+  breadcrumbCallback,
+  getEnricherOrDieTryin,
+  isApiError,
+  isErrorFromOurBundle,
+  isChunkFailure,
 } from '../errorTracker';
 import mockBowser from 'bowser';
 import * as mockRaven from 'raven-js';
@@ -19,143 +23,150 @@ describe('.breadcrumbCallback', () => {
   });
 });
 
-cases('.getEnricherOrDieTryin', ({ currentWindow = {}, data = {}, state = {}}) => {
-  mockBowser.getParser = jest.fn((userAgent) => ({
-    satisfies: jest.fn(() => {
-      // return undefined like bowser when browser is unsupported
-      // see, https://github.com/lancedikson/bowser/blob/700732f7b3f490cb61f9f4d34142d0a9ea5a38d3/index.d.ts#L177
-      if (userAgent === 'unsupported') { return; }
-      return true;
-    })
-  }));
-
-  const getState = jest.fn(() => state);
-  const enrich = getEnricherOrDieTryin({ getState }, currentWindow);
-
-  expect(enrich({ logger: 'test', ...data })).toMatchSnapshot();
-}, {
-  'by default': {},
-  'with current user': {
-    state: {
-      currentUser: {
-        id: 123, // should be ignored
-        access_level: 'admin',
-        customer: 123,
-        username: 'test-user'
-      }
-    }
-  },
-  'with document language': {
-    currentWindow: {
-      document: {
-        documentElement: { lang: 'af' }
-      }
-    }
-  },
-  'with navigator language': {
-    currentWindow: {
-      navigator: { language: 'en-US' }
-    }
-  },
-  'with tags': {
-    data: {
-      tags: { tenant: 'test' }
-    }
-  },
-  'with error from our bundle': {
-    data: {
-      exception: {
-        values: [{
-          stacktrace: {
-            frames: [
-              { filename: 'sparkpost.com/static/js/bundle.js', function: 'test' }
-            ]
-          }
-        }]
-      }
-    }
-  },
-  'with api error': {
-    data: {
-      exception: {
-        values: [
-          { type: 'SparkpostApiError' }
-        ]
-      }
-    }
-  },
-  'with chunk loading error': {
-    data: {
-      exception: {
-        values: [
-          { value: 'Loading chunk 4 failed.' }
-        ]
-      }
-    }
-  },
-  'with unsupported browser': {
-    currentWindow: {
-      navigator: { userAgent: 'unsupported' }
-    }
-  },
-  'with password reset token': {
-    data: {
-      request: {
-        url: 'https://not-a-real-tenant.example.com/reset-password/long-secret-reset-token'
-      }
-    }
-  },
-  'with email verification token': {
-    data: {
-      request: {
-        url: 'https://not-a-real-tenant.example.com/account/email-verification/long-verification-token'
-      }
-    }
-  },
-  'with other request fields': {
-    data: {
-      request: {
-        url: 'https://not-a-real-tenant.example.com/nice-route',
-        headers: {
-          Referer: 'https://not-a-real-tenant.example.com/nice-route',
-          'User-Agent': 'Probably not Mozilla really'
+cases(
+  '.getEnricherOrDieTryin',
+  ({ currentWindow = {}, data = {}, state = {} }) => {
+    mockBowser.getParser = jest.fn(userAgent => ({
+      satisfies: jest.fn(() => {
+        // return undefined like bowser when browser is unsupported
+        // see, https://github.com/lancedikson/bowser/blob/700732f7b3f490cb61f9f4d34142d0a9ea5a38d3/index.d.ts#L177
+        if (userAgent === 'unsupported') {
+          return;
         }
-      }
-    }
+        return true;
+      }),
+    }));
+
+    const getState = jest.fn(() => state);
+    const enrich = getEnricherOrDieTryin({ getState }, currentWindow);
+
+    expect(enrich({ logger: 'test', ...data })).toMatchSnapshot();
   },
-  'with referer header': {
-    data: {
-      request: {
-        url: 'https://not-a-real-tenant.example.com/account/email-verification/long-verification-token',
-        headers: {
-          Referer: 'https://not-a-real-tenant.example.com/account/email-verification/long-verification-token',
-          'User-Agent': 'Probably not Mozilla really'
-        }
-      }
-    }
+  {
+    'by default': {},
+    'with current user': {
+      state: {
+        currentUser: {
+          id: 123, // should be ignored
+          access_level: 'admin',
+          customer: 123,
+          username: 'test-user',
+        },
+      },
+    },
+    'with document language': {
+      currentWindow: {
+        document: {
+          documentElement: { lang: 'af' },
+        },
+      },
+    },
+    'with navigator language': {
+      currentWindow: {
+        navigator: { language: 'en-US' },
+      },
+    },
+    'with tags': {
+      data: {
+        tags: { tenant: 'test' },
+      },
+    },
+    'with error from our bundle': {
+      data: {
+        exception: {
+          values: [
+            {
+              stacktrace: {
+                frames: [{ filename: 'sparkpost.com/static/js/bundle.js', function: 'test' }],
+              },
+            },
+          ],
+        },
+      },
+    },
+    'with api error': {
+      data: {
+        exception: {
+          values: [{ type: 'SparkpostApiError' }],
+        },
+      },
+    },
+    'with chunk loading error': {
+      data: {
+        exception: {
+          values: [{ value: 'Loading chunk 4 failed.' }],
+        },
+      },
+    },
+    'with unsupported browser': {
+      currentWindow: {
+        navigator: { userAgent: 'unsupported' },
+      },
+    },
+    'with password reset token': {
+      data: {
+        request: {
+          url: 'https://not-a-real-tenant.example.com/reset-password/long-secret-reset-token',
+        },
+      },
+    },
+    'with email verification token': {
+      data: {
+        request: {
+          url:
+            'https://not-a-real-tenant.example.com/account/email-verification/long-verification-token',
+        },
+      },
+    },
+    'with other request fields': {
+      data: {
+        request: {
+          url: 'https://not-a-real-tenant.example.com/nice-route',
+          headers: {
+            Referer: 'https://not-a-real-tenant.example.com/nice-route',
+            'User-Agent': 'Probably not Mozilla really',
+          },
+        },
+      },
+    },
+    'with referer header': {
+      data: {
+        request: {
+          url:
+            'https://not-a-real-tenant.example.com/account/email-verification/long-verification-token',
+          headers: {
+            Referer:
+              'https://not-a-real-tenant.example.com/account/email-verification/long-verification-token',
+            'User-Agent': 'Probably not Mozilla really',
+          },
+        },
+      },
+    },
+    'without headers': {
+      data: {
+        request: {
+          url: 'https://not-a-real-tenant.example.com/nice-route',
+        },
+      },
+    },
+    'without request object': {
+      data: {
+        otherField: 'blue',
+      },
+    },
   },
-  'without headers': {
-    data: {
-      request: {
-        url: 'https://not-a-real-tenant.example.com/nice-route'
-      }
-    }
-  },
-  'without request object': {
-    data: {
-      otherField: 'blue'
-    }
-  }
-});
+);
 
 describe('.isApiError', () => {
   it('returns true with SparkpostApiError', () => {
     const data = {
       exception: {
-        values: [{
-          type: 'SparkpostApiError'
-        }]
-      }
+        values: [
+          {
+            type: 'SparkpostApiError',
+          },
+        ],
+      },
     };
 
     expect(isApiError(data)).toEqual(true);
@@ -164,10 +175,12 @@ describe('.isApiError', () => {
   it('returns true with ZuoraApiError', () => {
     const data = {
       exception: {
-        values: [{
-          type: 'ZuoraApiError'
-        }]
-      }
+        values: [
+          {
+            type: 'ZuoraApiError',
+          },
+        ],
+      },
     };
 
     expect(isApiError(data)).toEqual(true);
@@ -176,10 +189,12 @@ describe('.isApiError', () => {
   it('returns false with TypeError', () => {
     const data = {
       exception: {
-        values: [{
-          type: 'TypeError'
-        }]
-      }
+        values: [
+          {
+            type: 'TypeError',
+          },
+        ],
+      },
     };
 
     expect(isApiError(data)).toEqual(false);
@@ -190,10 +205,12 @@ describe('.isChunkFailure', () => {
   it('returns true with a chunk loading error', () => {
     const data = {
       exception: {
-        values: [{
-          value: 'Loading chunk 5 failed.'
-        }]
-      }
+        values: [
+          {
+            value: 'Loading chunk 5 failed.',
+          },
+        ],
+      },
     };
 
     expect(isChunkFailure(data)).toEqual(true);
@@ -202,10 +219,12 @@ describe('.isChunkFailure', () => {
   it('returns false with another error', () => {
     const data = {
       exception: {
-        values: [{
-          value: 'Network Error'
-        }]
-      }
+        values: [
+          {
+            value: 'Network Error',
+          },
+        ],
+      },
     };
 
     expect(isChunkFailure(data)).toEqual(false);
@@ -216,14 +235,16 @@ describe('.isErrorFromOurBundle', () => {
   it('returns true with error from our bundle', () => {
     const data = {
       exception: {
-        values: [{
-          stacktrace: {
-            frames: [
-              { filename: 'https://app.sparkpost.com/static/js/bundle.js', function: 'render' }
-            ]
-          }
-        }]
-      }
+        values: [
+          {
+            stacktrace: {
+              frames: [
+                { filename: 'https://app.sparkpost.com/static/js/bundle.js', function: 'render' },
+              ],
+            },
+          },
+        ],
+      },
     };
 
     expect(isErrorFromOurBundle(data)).toEqual(true);
@@ -232,14 +253,19 @@ describe('.isErrorFromOurBundle', () => {
   it('returns true with error from our bundle when running locally', () => {
     const data = {
       exception: {
-        values: [{
-          stacktrace: {
-            frames: [
-              { filename: 'http://app.sparkpost.test/4.a0803f8355f692de1382.hot-update.js', function: 'render' }
-            ]
-          }
-        }]
-      }
+        values: [
+          {
+            stacktrace: {
+              frames: [
+                {
+                  filename: 'http://app.sparkpost.test/4.a0803f8355f692de1382.hot-update.js',
+                  function: 'render',
+                },
+              ],
+            },
+          },
+        ],
+      },
     };
 
     expect(isErrorFromOurBundle(data)).toEqual(true);
@@ -248,15 +274,17 @@ describe('.isErrorFromOurBundle', () => {
   it('returns true with error from a native function called from our bundle', () => {
     const data = {
       exception: {
-        values: [{
-          stacktrace: {
-            frames: [
-              { filename: 'https://app.sparkpost.com/static/js/bundle.js', function: 'render' },
-              { filename: '<anonymous>', function: 'Object.stringify' }
-            ]
-          }
-        }]
-      }
+        values: [
+          {
+            stacktrace: {
+              frames: [
+                { filename: 'https://app.sparkpost.com/static/js/bundle.js', function: 'render' },
+                { filename: '<anonymous>', function: 'Object.stringify' },
+              ],
+            },
+          },
+        ],
+      },
     };
 
     expect(isErrorFromOurBundle(data)).toEqual(true);
@@ -265,14 +293,19 @@ describe('.isErrorFromOurBundle', () => {
   it('returns false with error from other source', () => {
     const data = {
       exception: {
-        values: [{
-          stacktrace: {
-            frames: [
-              { filename: 'chrome-extension://klkagjiegnnaknmfkmkbnjpmifplpiak/bull.js', function: 'steal' }
-            ]
-          }
-        }]
-      }
+        values: [
+          {
+            stacktrace: {
+              frames: [
+                {
+                  filename: 'chrome-extension://klkagjiegnnaknmfkmkbnjpmifplpiak/bull.js',
+                  function: 'steal',
+                },
+              ],
+            },
+          },
+        ],
+      },
     };
 
     expect(isErrorFromOurBundle(data)).toEqual(false);
@@ -281,15 +314,23 @@ describe('.isErrorFromOurBundle', () => {
   it('ignores raven-js frames and returns false with error from other source', () => {
     const data = {
       exception: {
-        values: [{
-          stacktrace: {
-            frames: [
-              { filename: 'https://app.sparkpost.com/static/js/bundle.js', function: 'HTMLDocument.wrapped' },
-              { filename: 'chrome-extension://klkagjiegnnaknmfkmkbnjpmifplpiak/bull.js', function: 'steal' }
-            ]
-          }
-        }]
-      }
+        values: [
+          {
+            stacktrace: {
+              frames: [
+                {
+                  filename: 'https://app.sparkpost.com/static/js/bundle.js',
+                  function: 'HTMLDocument.wrapped',
+                },
+                {
+                  filename: 'chrome-extension://klkagjiegnnaknmfkmkbnjpmifplpiak/bull.js',
+                  function: 'steal',
+                },
+              ],
+            },
+          },
+        ],
+      },
     };
 
     expect(isErrorFromOurBundle(data)).toEqual(false);
@@ -298,8 +339,8 @@ describe('.isErrorFromOurBundle', () => {
   it('returns false with exceptionless error', () => {
     const data = {
       exception: {
-        values: []
-      }
+        values: [],
+      },
     };
 
     expect(isErrorFromOurBundle(data)).toEqual(false);
@@ -327,8 +368,65 @@ describe('.install', () => {
   });
 
   it('installs error tracking service with configuration', () => {
-    ErrorTracker.install({ sentry: {}}, store);
+    ErrorTracker.install({ sentry: {} }, store);
     expect(config).toHaveBeenCalled();
+  });
+});
+
+describe('.addRequestContextAndThrow', () => {
+  let captureException;
+  let context;
+  let isSetup;
+  const error = new Error('Oh no!');
+
+  beforeEach(() => {
+    captureException = jest.spyOn(mockRaven, 'captureException');
+    context = jest.spyOn(mockRaven, 'context');
+    isSetup = jest.spyOn(mockRaven, 'isSetup');
+  });
+
+  afterEach(() => {
+    captureException.mockRestore();
+    context.mockRestore();
+    isSetup.mockRestore();
+  });
+
+  it('does nothing when not setup', () => {
+    isSetup.mockReturnValue(false);
+    ErrorTracker.addRequestContextAndThrow({ test: 'abc', abc: 'test' }, error);
+    expect(captureException).not.toHaveBeenCalled();
+  });
+
+  it('adds tags to the context when throwing', () => {
+    isSetup.mockReturnValue(true);
+    const mockResponse = {
+      status: 404,
+    };
+    ErrorTracker.addRequestContextAndThrow('MOCK_REDUX_ACTION', mockResponse, error);
+    expect(context).toHaveBeenCalledWith(
+      {
+        tags: {
+          reduxActionType: 'MOCK_REDUX_ACTION',
+          httpResponseStatus: 404,
+        },
+      },
+      expect.any(Function),
+    );
+  });
+
+  it('adds tags to the context when throwing and uses a 0 response status when no response is given', () => {
+    isSetup.mockReturnValue(true);
+    const mockResponse = {};
+    ErrorTracker.addRequestContextAndThrow('MOCK_REDUX_ACTION', mockResponse, error);
+    expect(context).toHaveBeenCalledWith(
+      {
+        tags: {
+          reduxActionType: 'MOCK_REDUX_ACTION',
+          httpResponseStatus: 0,
+        },
+      },
+      expect.any(Function),
+    );
   });
 });
 
@@ -356,11 +454,14 @@ describe('.report', () => {
   it('sends error when setup', () => {
     isSetup.mockReturnValue(true);
     ErrorTracker.report('test-logger', error);
-    expect(captureException).toHaveBeenCalledWith(error, { logger: 'test-logger', extra: {}});
+    expect(captureException).toHaveBeenCalledWith(error, { logger: 'test-logger', extra: {} });
   });
 
   it('sends extra data', () => {
     ErrorTracker.report('test-logger', error, { foo: 'bar' });
-    expect(captureException).toHaveBeenCalledWith(error, { logger: 'test-logger', extra: { foo: 'bar' }});
+    expect(captureException).toHaveBeenCalledWith(error, {
+      logger: 'test-logger',
+      extra: { foo: 'bar' },
+    });
   });
 });
