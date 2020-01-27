@@ -3,129 +3,111 @@ export const FEATURE_COMPARISON = {
     'Signals Predictive Analytics': {
       'Test Account': true,
       'Starter Plans': true,
-      'Premier Plans': true
+      'Premier Plans': true,
     },
     'Spam Trap Monitoring': {
       'Test Account': true,
       'Starter Plans': true,
-      'Premier Plans': true
+      'Premier Plans': true,
     },
-    'Engagement Insights':	{
+    'Engagement Insights': {
       'Test Account': true,
       'Starter Plans': true,
-      'Premier Plans': true
+      'Premier Plans': true,
     },
-    'Sending Domains':	{
+    'Sending Domains': {
       'Test Account': true,
       'Starter Plans': '10',
-      'Premier Plans': '50'
+      'Premier Plans': '50',
     },
-    'Bounce Domains':	{
+    'Bounce Domains': {
       'Test Account': true,
       'Starter Plans': '10',
-      'Premier Plans': '50'
+      'Premier Plans': '50',
     },
-    'Tracking Domains':	{
+    'Tracking Domains': {
       'Test Account': true,
       'Starter Plans': '5',
-      'Premier Plans': '25'
+      'Premier Plans': '25',
     },
-    'Searchable Email Event Data':	{
-      'Test Account': '10 days',
-      'Starter Plans': '5 days',
-      'Premier Plans': '10 days'
-
-    }
+    'Searchable Email Event Data': {
+      'Test Account': true,
+      'Starter Plans': true,
+      'Premier Plans': true,
+    },
   },
   'Advanced Settings': {
-    'Scheduled Sending':	{
+    'Scheduled Sending': {
       'Test Account': '30 days',
       'Starter Plans': '3 days',
-      'Premier Plans': '30 days'
+      'Premier Plans': '30 days',
     },
-    'Custom Webhooks':	{
+    'Custom Webhooks': {
       'Test Account': true,
       'Starter Plans': '2',
-      'Premier Plans': '5'
+      'Premier Plans': '5',
     },
-    'Inbound Email Webhooks':	{
+    'Inbound Email Webhooks': {
       'Test Account': true,
-      'Starter Plans': false ,
-      'Premier Plans': true
+      'Starter Plans': false,
+      'Premier Plans': true,
     },
-    'Real Time Alerts':	{
+    'Real Time Alerts': {
       'Test Account': true,
-      'Starter Plans': false ,
-      'Premier Plans': true
-
+      'Starter Plans': false,
+      'Premier Plans': true,
     },
-    'Dedicated IP Address':	{
+    'Dedicated IP Address': {
       'Test Account': false,
-      'Starter Plans': false ,
-      'Premier Plans': '1 \n with the option to buy more'
+      'Starter Plans': false,
+      'Premier Plans': '1 \n with the option to buy more',
     },
-    'IP Pools':	{ 'Test Account': false,
-      'Starter Plans': false ,
-      'Premier Plans': true },
-    'Automated IP Warmup':	{ 'Test Account': false,
-      'Starter Plans': false ,
-      'Premier Plans': true }
+    'IP Pools': { 'Test Account': false, 'Starter Plans': false, 'Premier Plans': true },
+    'Automated IP Warmup': { 'Test Account': false, 'Starter Plans': false, 'Premier Plans': true },
   },
   'Content and Recipients': {
-    'Advanced Templates':	{ 'Test Account': true,
-      'Starter Plans': '10' ,
-      'Premier Plans': true },
-    'Snippets':	{ 'Test Account': true,
-      'Starter Plans': '10' ,
-      'Premier Plans': true },
-    'Dynamic AMP Emails':	{ 'Test Account': true,
-      'Starter Plans': true ,
-      'Premier Plans': true },
-    'AB Testing':	{
+    'Advanced Templates': { 'Test Account': true, 'Starter Plans': '10', 'Premier Plans': true },
+    Snippets: { 'Test Account': true, 'Starter Plans': '10', 'Premier Plans': true },
+    'Dynamic AMP Emails': { 'Test Account': true, 'Starter Plans': true, 'Premier Plans': true },
+    'AB Testing': {
       'Test Account': true,
-      'Starter Plans': false ,
-      'Premier Plans': '10'
+      'Starter Plans': false,
+      'Premier Plans': '10',
     },
     'Recipient Lists': {
       'Test Account': true,
-      'Starter Plans': '10' ,
-      'Premier Plans': true }
+      'Starter Plans': '10',
+      'Premier Plans': true,
+    },
   },
   'Account Management and Support': {
-    'Subaccounts': {
+    Subaccounts: {
       'Test Account': true,
-      'Starter Plans': false ,
-      'Premier Plans': '15 Active'
+      'Starter Plans': false,
+      'Premier Plans': '15 Active',
     },
-    'Online Support':	{
+    'Online Support': {
       'Test Account': '30 days',
-      'Starter Plans': true ,
-      'Premier Plans': true
+      'Starter Plans': true,
+      'Premier Plans': true,
     },
-    'Phone Support':	{ 'Test Account': false,
-      'Starter Plans': false ,
-      'Premier Plans': true },
-    'Customer support manager (CSM)':	{
+    'Phone Support': { 'Test Account': false, 'Starter Plans': false, 'Premier Plans': true },
+    'Customer support manager (CSM)': {
       'Test Account': false,
-      'Starter Plans': false ,
-      'Premier Plans': 'Above 5M plans only'
+      'Starter Plans': false,
+      'Premier Plans': 'Above 5M plans only',
     },
-    'Single Sign-On':	{
+    'Single Sign-On': {
       'Test Account': true,
-      'Starter Plans': false ,
-      'Premier Plans': true
+      'Starter Plans': false,
+      'Premier Plans': true,
     },
-    'Advanced Security Features':	{
+    'Advanced Security Features': {
       'Test Account': true,
-      'Starter Plans': false ,
-      'Premier Plans': true
-    }
-  }
-
+      'Starter Plans': false,
+      'Premier Plans': true,
+    },
+  },
 };
 
-export const PLANS = [
-  'Test Account',
-  'Starter Plans',
-  'Premier Plans'
-];
+export const PLANS = ['Test Account', 'Starter Plans', 'Premier Plans'];
