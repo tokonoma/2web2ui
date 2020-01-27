@@ -1,7 +1,13 @@
 import factory from '../requestHelperFactory';
+import ErrorTracker from 'src/helpers/errorTracker';
+
+jest.mock('src/helpers/errorTracker');
+
+ErrorTracker.addRequestContextAndThrow = jest.fn((type, response, err) => {
+  throw err;
+});
 
 describe('Helper: Request Helper Factory', () => {
-
   it('should return a function', () => {
     expect(factory()).toBeInstanceOf(Function);
   });
@@ -12,7 +18,6 @@ describe('Helper: Request Helper Factory', () => {
   });
 
   describe('returned thunk action creator', () => {
-
     let dispatchMock;
     let getStateMock;
     let onSuccessMock;
@@ -43,10 +48,10 @@ describe('Helper: Request Helper Factory', () => {
     it('should dispatch a default success event', () => {
       const request = factory({
         request: requestMock,
-        transformHttpOptions: transformHttpOptionsMock
+        transformHttpOptions: transformHttpOptionsMock,
       });
 
-      return request(action)(dispatchMock, getStateMock).then((result) => {
+      return request(action)(dispatchMock, getStateMock).then(() => {
         expect(dispatchMock).toHaveBeenCalledTimes(2);
 
         const pendingAction = dispatchMock.mock.calls[0][0];
@@ -69,30 +74,29 @@ describe('Helper: Request Helper Factory', () => {
       requestMock = jest.fn(() => Promise.reject(err));
 
       const request = factory({
-        request: requestMock
+        request: requestMock,
       });
 
       expect.hasAssertions();
-      return request(action)(dispatchMock, getStateMock)
-        .catch((err) => {
-          expect(dispatchMock).toHaveBeenCalledTimes(2);
+      return request(action)(dispatchMock, getStateMock).catch(err => {
+        expect(dispatchMock).toHaveBeenCalledTimes(2);
 
-          const pendingAction = dispatchMock.mock.calls[0][0];
-          expect(pendingAction.type).toEqual('TEST_PENDING');
-          expect(pendingAction.meta).toBe(meta);
+        const pendingAction = dispatchMock.mock.calls[0][0];
+        expect(pendingAction.type).toEqual('TEST_PENDING');
+        expect(pendingAction.meta).toBe(meta);
 
-          const failAction = dispatchMock.mock.calls[1][0];
-          expect(failAction.type).toEqual('TEST_FAIL');
-          expect(failAction.payload).toEqual({ message: err.message, response });
-          expect(failAction.meta).toBe(meta);
-        });
+        const failAction = dispatchMock.mock.calls[1][0];
+        expect(failAction.type).toEqual('TEST_FAIL');
+        expect(failAction.payload).toEqual({ message: err.message, response });
+        expect(failAction.meta).toBe(meta);
+      });
     });
 
     it('should run custom success handler', () => {
       const request = factory({
         request: requestMock,
         onSuccess: onSuccessMock,
-        onFail: onFailMock
+        onFail: onFailMock,
       });
 
       return request(action)(dispatchMock, getStateMock).then(() => {
@@ -113,24 +117,20 @@ describe('Helper: Request Helper Factory', () => {
 
       const request = factory({
         request: requestMock,
-        onFail: onFailMock
+        onFail: onFailMock,
       });
 
       expect.hasAssertions();
 
-      return request(action)(dispatchMock, getStateMock)
-        .catch((err) => {
-          expect(dispatchMock).toHaveBeenCalledTimes(1);
-          expect(onFailMock).toHaveBeenCalledTimes(1);
-          expect(onSuccessMock).not.toHaveBeenCalled();
+      return request(action)(dispatchMock, getStateMock).catch(() => {
+        expect(dispatchMock).toHaveBeenCalledTimes(1);
+        expect(onFailMock).toHaveBeenCalledTimes(1);
+        expect(onSuccessMock).not.toHaveBeenCalled();
 
-          const pendingAction = dispatchMock.mock.calls[0][0];
-          expect(pendingAction.type).toEqual('TEST_PENDING');
-          expect(pendingAction.meta).toBe(meta);
-        });
+        const pendingAction = dispatchMock.mock.calls[0][0];
+        expect(pendingAction.type).toEqual('TEST_PENDING');
+        expect(pendingAction.meta).toBe(meta);
+      });
     });
-
   });
-
-
 });
