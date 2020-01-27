@@ -25,7 +25,7 @@ const CardSection = ({
   return (
     <CreditCardSection
       handleCardToggle={handleCardToggle}
-      credit_card={billing && billing.credit_card}
+      creditCard={billing && billing.credit_card}
       formname={FORMNAME}
       submitting={submitting}
       countries={countries}

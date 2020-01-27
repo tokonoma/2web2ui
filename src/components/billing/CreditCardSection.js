@@ -6,7 +6,7 @@ import CardSummary from './CardSummary';
 
 function CreditCardSection({
   handleCardToggle,
-  credit_card,
+  creditCard: credit_card,
   formname: FORMNAME,
   submitting = false,
   countries = [],

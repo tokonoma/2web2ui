@@ -38,7 +38,7 @@ function ValidateSection({
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <CreditCardSection
-        credit_card={credit_card}
+        creditCard={credit_card}
         handleCardToggle={() => {}}
         formname={FORMNAME}
         countries={billingCountries || []}
