@@ -72,7 +72,7 @@
     "@sparkpost/matchbox": "^3.8.0",
     "@sparkpost/matchbox-icons": "^1.2.1",
     "axios": "^0.18.0",
-    "bowser": "2.1.2",
+    "bowser": "2.9.0",
     "classnames": "^2.2.5",
     "color": "^3.0.0",
     "copy-to-clipboard": "^3.0.8",
