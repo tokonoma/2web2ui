@@ -39,5 +39,6 @@ describe('Helper: Zuora API Request', () => {
     );
 
     await expect(mockStore.dispatch(zuoraRequest(action))).rejects.toThrow();
+    expect(mockStore.getActions()).toMatchSnapshot();
   });
 });

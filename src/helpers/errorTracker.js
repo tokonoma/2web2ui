@@ -220,7 +220,7 @@ class ErrorTracker {
 
   addRequestContextAndThrow(reduxActionType, response = {}, error) {
     if (!Raven.isSetup()) {
-      return;
+      throw error;
     }
     Raven.context({ tags: { reduxActionType, httpResponseStatus: response.status || 0 } }, () => {
       throw error;

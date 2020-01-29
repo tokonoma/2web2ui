@@ -3,11 +3,11 @@ import ErrorTracker from 'src/helpers/errorTracker';
 
 jest.mock('src/helpers/errorTracker');
 
-ErrorTracker.addRequestContextAndThrow = jest.fn((type, response, err) => {
-  throw err;
-});
-
 describe('Helper: Request Helper Factory', () => {
+  ErrorTracker.addRequestContextAndThrow = jest.fn((type, response, err) => {
+    throw err;
+  });
+
   it('should return a function', () => {
     expect(factory()).toBeInstanceOf(Function);
   });
@@ -65,6 +65,7 @@ describe('Helper: Request Helper Factory', () => {
 
         expect(requestMock).toHaveBeenCalled();
         expect(transformHttpOptionsMock).toHaveBeenCalled();
+        expect(ErrorTracker.addRequestContextAndThrow).not.toHaveBeenCalled();
       });
     });
 
@@ -89,6 +90,7 @@ describe('Helper: Request Helper Factory', () => {
         expect(failAction.type).toEqual('TEST_FAIL');
         expect(failAction.payload).toEqual({ message: err.message, response });
         expect(failAction.meta).toBe(meta);
+        expect(ErrorTracker.addRequestContextAndThrow).toHaveBeenCalled();
       });
     });
 

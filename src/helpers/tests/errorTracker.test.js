@@ -374,27 +374,26 @@ describe('.install', () => {
 });
 
 describe('.addRequestContextAndThrow', () => {
-  let captureException;
   let context;
   let isSetup;
   const error = new Error('Oh no!');
 
   beforeEach(() => {
-    captureException = jest.spyOn(mockRaven, 'captureException');
     context = jest.spyOn(mockRaven, 'context');
     isSetup = jest.spyOn(mockRaven, 'isSetup');
   });
 
   afterEach(() => {
-    captureException.mockRestore();
     context.mockRestore();
     isSetup.mockRestore();
   });
 
-  it('does nothing when not setup', () => {
+  it('simply throws the error when Raven is not configured', () => {
     isSetup.mockReturnValue(false);
-    ErrorTracker.addRequestContextAndThrow({ test: 'abc', abc: 'test' }, error);
-    expect(captureException).not.toHaveBeenCalled();
+    expect(() =>
+      ErrorTracker.addRequestContextAndThrow({ test: 'abc', abc: 'test' }, error),
+    ).toThrow();
+    expect(context).not.toHaveBeenCalled();
   });
 
   it('adds tags to the context when throwing', () => {
