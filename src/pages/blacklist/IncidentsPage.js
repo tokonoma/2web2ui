@@ -12,7 +12,6 @@ import { getRelativeDates } from 'src/helpers/date';
 import usePageFilters from 'src/hooks/usePageFilters';
 import IncidentsCollection from './components/IncidentsCollection';
 import styles from './IncidentsPage.module.scss';
-import CongratsBanner from './components/CongratsBanner';
 
 const filterWhitelist = {
   search: {},
@@ -89,12 +88,6 @@ export const IncidentsPage = props => {
 
     return (
       <div data-id="incidents-table">
-        {incidents.length === 0 && (
-          <CongratsBanner
-            title="Congratulations! You are not currently on a Blacklist."
-            content="There are no incidents reported for items on your watchlist"
-          />
-        )}
         <IncidentsCollection
           incidents={incidents}
           dateOptions={dateOptions}
