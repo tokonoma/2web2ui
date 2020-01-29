@@ -6,12 +6,18 @@ import * as authMock from 'src/actions/auth';
 import * as globalAlertMock from 'src/actions/globalAlert';
 import * as httpHelpersMock from 'src/helpers/http';
 import * as accountActions from 'src/actions/account';
+import ErrorTracker from 'src/helpers/errorTracker';
 
 jest.mock('src/helpers/axiosInstances');
 jest.mock('src/actions/auth');
 jest.mock('src/actions/globalAlert');
 jest.mock('src/actions/account');
 jest.mock('src/helpers/http');
+jest.mock('src/helpers/errorTracker');
+
+ErrorTracker.addRequestContextAndThrow = jest.fn((type, response, err) => {
+  throw err;
+});
 
 describe('Helper: SparkPost API Request', () => {
   let meta;
