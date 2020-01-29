@@ -74,16 +74,6 @@ describe('Component: DatePicker', () => {
     expect(wrapper.find('ManualEntryForm')).not.toExist();
   });
 
-  it('should disable submit button when selecting date', () => {
-    wrapper.setState({ selecting: true });
-    expect(
-      wrapper
-        .find('Button')
-        .first()
-        .prop('disabled'),
-    ).toEqual(true);
-  });
-
   describe('syncTimeToState', () => {
     const before = { from: 'unchanged', to: 'unchanged' };
     const after = { from: new Date(), to: new Date() };
@@ -230,7 +220,7 @@ describe('Component: DatePicker', () => {
       expect(wrapper.state('selecting')).toEqual(true);
     });
 
-    it('should handle a day click whith a validation error', () => {
+    it('should handle a day click with a validation error', () => {
       const validate = jest.fn(() => 'error oh no');
       const mockSelected = {};
       const mockClicked = {};
@@ -403,16 +393,18 @@ describe('Component: DatePicker', () => {
     });
 
     it('should not do anything with a validation error', () => {
+      const validate = jest.fn(() => 'error oh no');
       const mockSelected = { a: 1, b: 2, c: 3 };
+      wrapper.setProps({ validate });
       wrapper.setState({
         showDatePicker: true,
         selecting: true,
         selected: mockSelected,
-        validationError: 'oh no',
       });
       instance.handleSubmit();
       expect(wrapper.state('showDatePicker')).toEqual(true);
-      expect(wrapper.state('selecting')).toEqual(true);
+      expect(wrapper.find('Popover')).toHaveProp('open', true);
+      expect(validate).toHaveBeenCalled();
       expect(props.onChange).not.toHaveBeenCalled();
     });
   });

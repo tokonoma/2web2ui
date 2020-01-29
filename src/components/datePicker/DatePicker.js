@@ -136,7 +136,11 @@ export default class AppDatePicker extends Component {
   };
 
   handleSubmit = () => {
-    if (this.state.validationError) {
+    const { validate } = this.props;
+
+    const validationError = validate && validate(this.state.selected);
+    if (validationError) {
+      this.setState({ validationError });
       return;
     }
 
@@ -239,12 +243,7 @@ export default class AppDatePicker extends Component {
           />
         )}
 
-        <Button
-          primary
-          onClick={this.handleSubmit}
-          disabled={this.state.selecting}
-          className={styles.Apply}
-        >
+        <Button primary onClick={this.handleSubmit} className={styles.Apply}>
           Apply
         </Button>
         <Button onClick={this.cancelDatePicker}>Cancel</Button>
