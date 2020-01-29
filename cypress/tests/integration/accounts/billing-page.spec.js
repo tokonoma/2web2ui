@@ -85,7 +85,7 @@ describe('Billing Page', () => {
       fixtureName: 'subscriptionPendingDowngradeGet',
     });
     cy.visit('/account/billing');
-    cy.findByText('Pending Plan Change');
+    cy.findByText('Pending Plan Change').should('be.visible');
   });
 
   it('redirects to Change My Plan page when Change Plan button is clicked', () => {
