@@ -11,7 +11,7 @@ import { hasAccountOptionEnabled } from 'src/helpers/conditions/account';
 import RVDisabledPage from './components/RVDisabledPage';
 import ConditionSwitch, { Case, defaultCase } from 'src/components/auth/ConditionSwitch';
 import RecipientValidationPriceTable from './components/RecipientValidationPriceTable';
-
+import { isAccountUiOptionSet } from 'src/helpers/conditions/account';
 import styles from './RecipientValidationPage.module.scss';
 
 const tabs = [
@@ -103,7 +103,7 @@ export class RecipientValidationPage extends Component {
   };
 
   render() {
-    return (
+    return !this.props.isStandAloneRVSet ? (
       <ConditionSwitch>
         <Case condition={hasAccountOptionEnabled('recipient_validation')}>
           {this.renderRecipientValidation()}
@@ -112,12 +112,15 @@ export class RecipientValidationPage extends Component {
           <RVDisabledPage />
         </Case>
       </ConditionSwitch>
+    ) : (
+      this.renderRecipientValidation()
     );
   }
 }
 
 const mapStateToProps = (state, props) => ({
   tab: tabs.findIndex(({ key }) => key === props.match.params.category) || 0,
+  isStandAloneRVSet: isAccountUiOptionSet('standalone_rv')(state),
 });
 
 export default withRouter(connect(mapStateToProps)(RecipientValidationPage));

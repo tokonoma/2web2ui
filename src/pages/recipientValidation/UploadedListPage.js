@@ -3,6 +3,7 @@ import { Page, Panel } from '@sparkpost/matchbox';
 import { connect } from 'react-redux';
 import { formatDate, formatTime } from 'src/helpers/date';
 import { getJobStatus, triggerJob } from 'src/actions/recipientValidation';
+import { getBillingInfo } from 'src/actions/account';
 import Loading from 'src/components/loading';
 import PageLink from 'src/components/pageLink/PageLink';
 import { RedirectAndAlert } from 'src/components/globalAlert';
@@ -11,11 +12,15 @@ import ListError from './components/ListError';
 import ListProgress from './components/ListProgress';
 import UploadedListForm from './components/UploadedListForm';
 import styles from './UploadedListPage.module.scss';
+import { isAccountUiOptionSet } from 'src/helpers/conditions/account';
+
+import ValidateSection from './components/ValidateSection';
 
 export class UploadedListPage extends Component {
   componentDidMount() {
-    const { getJobStatus, listId } = this.props;
+    const { getJobStatus, listId, getBillingInfo } = this.props;
     getJobStatus(listId);
+    getBillingInfo();
   }
 
   handleSubmit = () => {
@@ -24,7 +29,13 @@ export class UploadedListPage extends Component {
   };
 
   render() {
-    const { job, jobLoadingStatus, listId } = this.props;
+    const {
+      job,
+      jobLoadingStatus,
+      listId,
+      isStandAloneRVSet,
+      billing: { credit_card },
+    } = this.props;
 
     if (!job && jobLoadingStatus === 'fail') {
       return (
@@ -68,6 +79,9 @@ export class UploadedListPage extends Component {
             )}
           </Panel.Section>
         </Panel>
+        {isStandAloneRVSet && (
+          <ValidateSection credit_card={credit_card} handleValidate={() => {}} />
+        )}
       </Page>
     );
   }
@@ -80,7 +94,11 @@ const mapStateToProps = (state, props) => {
     listId,
     job: selectRecipientValidationJobById(state, listId),
     jobLoadingStatus: state.recipientValidation.jobLoadingStatus[listId],
+    isStandAloneRVSet: isAccountUiOptionSet('standalone_rv')(state),
+    billing: state.account.billing || {},
   };
 };
 
-export default connect(mapStateToProps, { getJobStatus, triggerJob })(UploadedListPage);
+export default connect(mapStateToProps, { getJobStatus, triggerJob, getBillingInfo })(
+  UploadedListPage,
+);

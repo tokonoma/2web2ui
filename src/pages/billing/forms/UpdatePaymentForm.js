@@ -7,9 +7,9 @@ import { showAlert } from 'src/actions/globalAlert';
 import { updatePaymentInitialValues } from 'src/selectors/accountBillingForms';
 import { prepareCardInfo } from 'src/helpers/billing';
 import { Panel, Button } from '@sparkpost/matchbox';
-import PaymentForm from './fields/PaymentForm';
-import BillingAddressForm from './fields/BillingAddressForm';
-import styles from './Forms.module.scss';
+import PaymentForm from 'src/components/billing/PaymentForm';
+import BillingAddressForm from 'src/components/billing/BillingAddressForm';
+import styles from './UpdatePaymentForm.module.scss';
 
 const FORMNAME = 'updatePayment';
 
@@ -18,7 +18,7 @@ export class UpdatePaymentForm extends Component {
     this.props.getBillingCountries();
   }
 
-  onSubmit = (values) => {
+  onSubmit = values => {
     const { billingUpdate, showAlert } = this.props;
 
     const newValues = values.card ? { ...values, card: prepareCardInfo(values.card) } : values;
@@ -33,21 +33,26 @@ export class UpdatePaymentForm extends Component {
 
     return (
       <form onSubmit={handleSubmit(this.onSubmit)}>
-        <Panel title='Update Payment Information'>
+        <Panel title="Update Payment Information">
           <Panel.Section>
-            <PaymentForm
-              formName={FORMNAME}
-              disabled={submitting} />
+            <PaymentForm formName={FORMNAME} disabled={submitting} />
           </Panel.Section>
           <Panel.Section>
             <BillingAddressForm
               formName={FORMNAME}
               disabled={submitting}
-              countries={this.props.billing.countries} />
+              countries={this.props.billing.countries}
+            />
           </Panel.Section>
           <Panel.Section>
-            <Button type='submit' primary disabled={submitting}>Update Payment Information</Button>
-            {onCancel && <Button onClick={onCancel} className={styles.Cancel}>Cancel</Button>}
+            <Button type="submit" primary disabled={submitting}>
+              Update Payment Information
+            </Button>
+            {onCancel && (
+              <Button onClick={onCancel} className={styles.Cancel}>
+                Cancel
+              </Button>
+            )}
           </Panel.Section>
         </Panel>
       </form>
@@ -55,11 +60,14 @@ export class UpdatePaymentForm extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   billing: state.billing,
-  initialValues: updatePaymentInitialValues(state)
+  initialValues: updatePaymentInitialValues(state),
 });
 
 const mapDispatchtoProps = { getBillingCountries, billingUpdate, showAlert };
 const formOptions = { form: FORMNAME, enableReinitialize: true };
-export default connect(mapStateToProps, mapDispatchtoProps)(reduxForm(formOptions)(UpdatePaymentForm));
+export default connect(
+  mapStateToProps,
+  mapDispatchtoProps,
+)(reduxForm(formOptions)(UpdatePaymentForm));

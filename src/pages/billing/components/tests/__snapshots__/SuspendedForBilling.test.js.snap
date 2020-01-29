@@ -12,13 +12,15 @@ exports[`Component: SuspendedForBilling should render correctly 1`] = `
       . To reactivate your account and pay your outstanding balance due, please update your payment information below.
     </p>
     <p>
-      If this is incorrect, please 
+      If this is incorrect, please
+       
       <Connect(SupportTicketLink)
         issueId="general_billing"
       >
         submit a support ticket
       </Connect(SupportTicketLink)>
-       and let us know why.
+       
+      and let us know why.
     </p>
   </Banner>
   <UpdatePaymentForm />

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Panel } from '@sparkpost/matchbox';
-import PaymentForm from 'src/pages/billing/forms/fields/PaymentForm';
-import BillingAddressForm from 'src/pages/billing/forms/fields/BillingAddressForm';
+import PaymentForm from 'src/components/billing/PaymentForm';
+import BillingAddressForm from 'src/components/billing/BillingAddressForm';
 import { FORMS } from 'src/constants';
 
 const CreditCardSection = ({ billing, submitting, isPlanFree }) => {

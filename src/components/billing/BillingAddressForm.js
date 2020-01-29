@@ -9,7 +9,7 @@ import { required } from 'src/helpers/validation';
 import { getZipLabel } from 'src/helpers/billing';
 import { getFirstStateForCountry } from 'src/selectors/accountBillingForms';
 
-import styles from './Fields.module.scss';
+import styles from './BillingAddressForm.module.scss';
 import _ from 'lodash';
 
 /**
@@ -22,8 +22,8 @@ import _ from 'lodash';
  */
 export class BillingAddressForm extends Component {
   state = {
-    showName: true
-  }
+    showName: true,
+  };
 
   componentDidMount() {
     const { firstName, lastName } = this.props;
@@ -53,26 +53,27 @@ export class BillingAddressForm extends Component {
   render() {
     const { countries = [], countryValue, disabled } = this.props;
 
-    const stateOrProvince = countries.length && (countryValue === 'US' || countryValue === 'CA')
-      ? <Grid.Column xs={6}>
-        <Field
-          label={countryValue === 'US' ? 'State' : 'Province'}
-          name='billingAddress.state'
-          placeholder={`Select a ${countryValue === 'US' ? 'State' : 'Province'}`}
-          component={SelectWrapper}
-          options={_.find(countries, { value: countryValue }).states}
-          validate={required}
-          disabled={disabled}
-        />
-      </Grid.Column>
-      : null;
-
-    const nameFields = this.state.showName
-      ? <Grid className={styles.spacer}>
+    const stateOrProvince =
+      countries.length && (countryValue === 'US' || countryValue === 'CA') ? (
         <Grid.Column xs={6}>
           <Field
-            label='First Name'
-            name='billingAddress.firstName'
+            label={countryValue === 'US' ? 'State' : 'Province'}
+            name="billingAddress.state"
+            placeholder={`Select a ${countryValue === 'US' ? 'State' : 'Province'}`}
+            component={SelectWrapper}
+            options={_.find(countries, { value: countryValue }).states}
+            validate={required}
+            disabled={disabled}
+          />
+        </Grid.Column>
+      ) : null;
+
+    const nameFields = this.state.showName ? (
+      <Grid className={styles.spacer}>
+        <Grid.Column xs={6}>
+          <Field
+            label="First Name"
+            name="billingAddress.firstName"
             component={TextFieldWrapper}
             validate={required}
             disabled={disabled}
@@ -80,24 +81,26 @@ export class BillingAddressForm extends Component {
         </Grid.Column>
         <Grid.Column xs={6}>
           <Field
-            label='Last Name'
-            name='billingAddress.lastName'
+            label="Last Name"
+            name="billingAddress.lastName"
             component={TextFieldWrapper}
             validate={required}
             disabled={disabled}
           />
         </Grid.Column>
       </Grid>
-      : null;
+    ) : null;
 
     return (
       <div>
-        <p><small>Billing Address</small></p>
+        <p>
+          <small>Billing Address</small>
+        </p>
         {nameFields}
         <Field
-          label='Country'
-          name='billingAddress.country'
-          placeholder='Select a country'
+          label="Country"
+          name="billingAddress.country"
+          placeholder="Select a country"
           component={SelectWrapper}
           options={countries}
           validate={required}
@@ -108,7 +111,7 @@ export class BillingAddressForm extends Component {
           <Grid.Column xs={6}>
             <Field
               label={getZipLabel(countryValue)}
-              name='billingAddress.zip'
+              name="billingAddress.zip"
               component={TextFieldWrapper}
               validate={required}
               disabled={disabled}
@@ -121,12 +124,14 @@ export class BillingAddressForm extends Component {
 }
 
 BillingAddressForm.propTypes = {
-  countries: PropTypes.arrayOf(PropTypes.shape({
-    value: PropTypes.string.isRequired,
-    label: PropTypes.string.isRequired
-  })),
+  countries: PropTypes.arrayOf(
+    PropTypes.shape({
+      value: PropTypes.string.isRequired,
+      label: PropTypes.string.isRequired,
+    }),
+  ),
   countryValue: PropTypes.string,
-  formName: PropTypes.string.isRequired
+  formName: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state, { formName }) => {
@@ -138,7 +143,7 @@ const mapStateToProps = (state, { formName }) => {
     countryValue,
     firstName: selector(state, 'billingAddress.firstName'),
     lastName: selector(state, 'billingAddress.lastName'),
-    firstState: getFirstStateForCountry(state, countryValue)
+    firstState: getFirstStateForCountry(state, countryValue),
   };
 };
 export default connect(mapStateToProps, { change })(BillingAddressForm);
