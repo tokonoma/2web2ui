@@ -349,17 +349,10 @@ describe('.isErrorFromOurBundle', () => {
 
 describe('.install', () => {
   let config;
-  let install;
   const store = jest.fn();
 
   beforeEach(() => {
     config = jest.spyOn(mockRaven, 'config').mockReturnThis();
-    install = jest.spyOn(mockRaven, 'install');
-  });
-
-  afterEach(() => {
-    config.mockRestore();
-    install.mockRestore();
   });
 
   it('does nothing when not configured', () => {
@@ -381,11 +374,6 @@ describe('.addRequestContextAndThrow', () => {
   beforeEach(() => {
     context = jest.spyOn(mockRaven, 'context');
     isSetup = jest.spyOn(mockRaven, 'isSetup');
-  });
-
-  afterEach(() => {
-    context.mockRestore();
-    isSetup.mockRestore();
   });
 
   it('simply throws the error when Raven is not configured', () => {
@@ -437,11 +425,6 @@ describe('.report', () => {
   beforeEach(() => {
     captureException = jest.spyOn(mockRaven, 'captureException');
     isSetup = jest.spyOn(mockRaven, 'isSetup');
-  });
-
-  afterEach(() => {
-    captureException.mockRestore();
-    isSetup.mockRestore();
   });
 
   it('does nothing when not setup', () => {
