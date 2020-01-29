@@ -94,6 +94,7 @@ describe('Billing Page', () => {
     cy.findAllByText('Got it')
       .first()
       .click();
+    cy.wait(15000);
     cy.get('a[type=button]')
       .contains('Change Plan')
       .click();
