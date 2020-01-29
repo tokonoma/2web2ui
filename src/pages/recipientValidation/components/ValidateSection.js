@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { FORMS } from 'src/constants';
 import { reduxForm } from 'redux-form';
 import { updatePaymentInitialValues } from 'src/selectors/accountBillingForms';
-import { selectAccountManuallyBilled } from 'src/selectors/accountBillingInfo';
+import { selectIsSelfServeBilling } from 'src/selectors/accountBillingInfo';
 import { getBillingCountries } from 'src/actions/billing';
 
 const FORMNAME = FORMS.RV_ADDPAYMENTFORM;
@@ -56,7 +56,7 @@ const mapStateToProps = state => {
   return {
     initialValues: updatePaymentInitialValues(state),
     billingCountries: state.billing.countries,
-    isManuallyBilled: selectAccountManuallyBilled(state),
+    isManuallyBilled: !selectIsSelfServeBilling(state),
   };
 };
 
