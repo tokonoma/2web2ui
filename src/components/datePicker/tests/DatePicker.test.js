@@ -402,7 +402,7 @@ describe('Component: DatePicker', () => {
         selected: mockSelected,
       });
       instance.handleSubmit();
-      expect(wrapper.state('showDatePicker')).toEqual(true);
+      expect(wrapper.state('selecting')).toEqual(true);
       expect(wrapper.find('Popover')).toHaveProp('open', true);
       expect(validate).toHaveBeenCalled();
       expect(props.onChange).not.toHaveBeenCalled();
