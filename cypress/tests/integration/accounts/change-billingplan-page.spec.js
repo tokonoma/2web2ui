@@ -95,6 +95,7 @@ describe('Billing Page', () => {
       .first()
       .click();
     cy.findAllByText('Change Plan').click();
+    cy.wait(15000);
     cy.url().should('include', 'brightback');
   });
 
