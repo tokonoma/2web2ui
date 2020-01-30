@@ -87,18 +87,6 @@ describe('Billing Page', () => {
     });
   });
 
-  //downgrading, starter  => free plan
-  //redirects to brightback page
-  it('redirects to brightback page on downgrading to free plan', () => {
-    selectAFreePlan();
-    cy.findAllByText('Got it')
-      .first()
-      .click();
-    cy.findAllByText('Change Plan').click();
-    cy.wait(15000);
-    cy.url().should('include', 'brightback');
-  });
-
   //downgrading, premier => starter plan
   it('redirects to billing page', () => {
     stubRequest({
