@@ -177,6 +177,7 @@ export const ChangePlanForm = ({
                   clearPromoCode: clearPromoCode,
                 }}
               />
+              {useSavedCC ? 'TRUE' : 'FALSE'}
               <FeatureChangeContextProvider selectedBundle={selectedBundle}>
                 <FeatureChangeSection />
                 {!isDowngradeToFree && (
@@ -188,7 +189,7 @@ export const ChangePlanForm = ({
                       canUpdateBillingInfo={canUpdateBillingInfo}
                       submitting={submitting}
                       isNewChangePlanForm={true} //TODO: remove this when removing the OldChangePlanForm
-                      useSavedCC={useSavedCC}
+                      defaultToggleState={!useSavedCC}
                       handleCardToggle={handleCardToggle}
                     />
                   </AccessControl>

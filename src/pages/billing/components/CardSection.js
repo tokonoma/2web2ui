@@ -10,6 +10,7 @@ const CardSection = ({
   account,
   submitting,
   handleCardToggle,
+  defaultToggleState,
   isNewChangePlanForm, //TODO: remove this when removing the OldChangePlanForm
 }) => {
   const { isReady, loading } = useFeatureChangeContext();
@@ -29,6 +30,7 @@ const CardSection = ({
       formname={FORMNAME}
       submitting={submitting}
       countries={countries}
+      defaultToggleState={defaultToggleState}
     />
   );
 };
