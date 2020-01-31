@@ -88,4 +88,16 @@ describe('The events details page', () => {
     cy.queryByText('fake-sender@yahoo.com').should('not.be.visible');
     cy.queryByText('Mock Subject 1').should('not.be.visible');
   });
+
+  it('re-renders the event details when clicking on a row within the "Message History" table', () => {
+    cy.visit(`${PAGE_BASE_URL}/mock-message-id-1/1234`);
+
+    cy.get('table').within(() => cy.findByText('Delivery').click());
+
+    cy.findByText('Mock Subject 2').should('be.visible');
+
+    cy.get('table').within(() => cy.findByText('Injection').click());
+
+    cy.findByText('Mock Subject 1').should('be.visible');
+  });
 });
