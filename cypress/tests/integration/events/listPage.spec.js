@@ -19,7 +19,7 @@ describe('The events page', () => {
   it('has a relevant page title', () => {
     cy.visit(PAGE_URL);
 
-    cy.title().should('include', 'Events Search');
+    cy.title().should('include', 'Events Search | Events');
     cy.findByText('Events Search').should('be.visible');
   });
 
