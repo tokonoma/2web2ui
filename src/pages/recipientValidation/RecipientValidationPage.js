@@ -46,7 +46,7 @@ export class RecipientValidationPage extends Component {
       case 1:
         return <SingleAddressForm />;
       case 2:
-        return <ApiDetails />;
+        return <ApiDetails isStandAloneRVSet={this.props.isStandAloneRVSet} />;
     }
   };
 
@@ -106,6 +106,13 @@ export class RecipientValidationPage extends Component {
           <ValidateSection credit_card={billing.credit_card} handleValidate={() => {}} />
         )}
 
+        {selectedTab === 2 && isStandAloneRVSet && (
+          <ValidateSection
+            credit_card={billing.credit_card}
+            handleValidate={() => {}}
+            submitButtonName={'Create API Key'}
+          />
+        )}
         <Modal open={showPriceModal} onClose={() => this.handleModal(false)}>
           {this.renderRVPriceModal()}
         </Modal>
