@@ -10,7 +10,7 @@ function CreditCardSection({
   formname: FORMNAME,
   submitting = false,
   countries = [],
-  defaultToggleState,
+  defaultToggleState = false,
 }) {
   const handleUseAnotherCC = () => {
     setUseAnotherCC(!useAnotherCC);
