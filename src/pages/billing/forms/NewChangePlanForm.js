@@ -177,7 +177,6 @@ export const ChangePlanForm = ({
                   clearPromoCode: clearPromoCode,
                 }}
               />
-              {useSavedCC ? 'TRUE' : 'FALSE'}
               <FeatureChangeContextProvider selectedBundle={selectedBundle}>
                 <FeatureChangeSection />
                 {!isDowngradeToFree && (
