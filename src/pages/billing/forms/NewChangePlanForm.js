@@ -188,7 +188,7 @@ export const ChangePlanForm = ({
                       canUpdateBillingInfo={canUpdateBillingInfo}
                       submitting={submitting}
                       isNewChangePlanForm={true} //TODO: remove this when removing the OldChangePlanForm
-                      useSavedCC={useSavedCC}
+                      defaultToggleState={!useSavedCC}
                       handleCardToggle={handleCardToggle}
                     />
                   </AccessControl>
