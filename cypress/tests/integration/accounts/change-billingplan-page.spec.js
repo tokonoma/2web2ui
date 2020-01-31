@@ -1,66 +1,47 @@
 /// <reference types="Cypress" />
 
-function stubRequest({ method = 'GET', statusCode = 200, url, fixture, fixtureName }) {
-  cy.server();
-  cy.fixture(fixture).as(fixtureName);
-  cy.route({
-    method,
-    url,
-    status: statusCode,
-    response: `@${fixtureName}`,
-  });
-}
-
 describe('Billing Page', () => {
   beforeEach(() => {
     cy.stubAuth();
     cy.login({ isStubbed: true });
 
-    cy.server();
-    cy.fixture('billing/200.get.json').as('billingGet');
-    cy.route({
-      method: 'GET',
+    cy.stubRequest({
       url: '/api/v1/billing',
-      response: '@billingGet',
+      fixture: 'billing/200.get.json',
+      fixtureAlias: 'billingGet',
     });
 
-    cy.server();
-    cy.fixture('billing/bundles/200.get.json').as('bundlesGet');
-    cy.route({
-      method: 'GET',
+    cy.stubRequest({
       url: '/api/v1/billing/bundles',
-      response: '@bundlesGet',
+      fixture: 'billing/bundles/200.get.json',
+      fixtureAlias: 'bundlesGet',
     });
 
-    cy.server();
-    cy.fixture('billing/plans/200.get.json').as('billingPlansGet');
-    cy.route({
-      method: 'GET',
+    cy.stubRequest({
       url: '/api/v1/billing/plans',
-      response: '@billingPlansGet',
+      fixture: 'billing/plans/200.get.json',
+      fixtureAlias: 'billingPlansGet',
     });
 
-    cy.server();
-    cy.fixture('metrics/deliverability/200.get.json').as('deliverabilityGet');
-    cy.route({
-      method: 'GET',
+    cy.stubRequest({
       url: '/api/v1/metrics/deliverability**/**',
-      response: '@deliverabilityGet',
+      fixture: 'metrics/deliverability/200.get.json',
+      fixtureAlias: 'deliverabilityGet',
     });
-    cy.server();
-    cy.fixture('metrics/precancel/200.post.json').as('precancelPost');
-    cy.route({
+
+    cy.stubRequest({
       method: 'POST',
       url: 'https://app.brightback.com/precancel',
-      response: '@precancelPost',
+      fixture: 'metrics/precancel/200.post.json',
+      fixtureAlias: 'precancelPost',
     });
   });
 
   const selectAFreePlan = () => {
-    stubRequest({
+    cy.stubRequest({
       url: '/api/v1/billing/subscription',
       fixture: 'billing/subscription/200.get.json',
-      fixtureName: 'subscriptionGet',
+      fixtureAlias: 'subscriptionGet',
     });
     cy.visit('/account/billing/plan');
     cy.get('[data-id=select-plan-free500-0419]').click();
@@ -89,15 +70,15 @@ describe('Billing Page', () => {
 
   //downgrading, premier => starter plan
   it('redirects to billing page', () => {
-    stubRequest({
+    cy.stubRequest({
       url: '/api/v1/account',
       fixture: 'account/200.get.starter-plan.json',
-      fixtureName: 'subscriptionGet',
+      fixtureAlias: 'subscriptionGet',
     });
-    stubRequest({
+    cy.stubRequest({
       url: '/api/v1/billing/subscription',
       fixture: 'billing/subscription/200.get.premier-plan.json',
-      fixtureName: 'subscriptionPremierGet',
+      fixtureAlias: 'subscriptionPremierGet',
     });
     cy.visit('/account/billing/plan');
     cy.get('[data-id=select-plan-50K-starter-0519]').click();
