@@ -71,7 +71,6 @@ describe('The events page', () => {
     cy.queryByText('An error occurred').should('not.be.visible');
   });
 
-  // TODO: Left off here
   it('renders the "Share this report" modal when clicking on the "Share" button', () => {
     cy.visit(PAGE_URL);
 
@@ -92,11 +91,14 @@ describe('The events page', () => {
       cy.stubRequest({
         url: '/api/v1/events/message*',
         fixture: 'events/message/200.get.different-results.json',
+        requestAlias: 'eventsRequest',
       });
 
       cy.findByLabelText('Filter by Recipient Email Address')
         .type('hello@gmail.com')
         .blur();
+
+      cy.wait('@eventsRequest');
 
       cy.findByText('Recipients: hello@gmail.com').should('be.visible');
       cy.findByText('Clear All Filters').should('be.visible');
@@ -267,7 +269,6 @@ describe('The events page', () => {
           cy.findByText('fake-recipient@hotmail.com').should('be.visible');
           cy.findByText('fake-sender@hotmail.com').should('be.visible');
           cy.findByText('Injection').should('be.visible');
-          cy.findByText('Jan 30, 2:42pm').should('be.visible');
         });
 
       cy.get('tbody tr')
@@ -277,7 +278,6 @@ describe('The events page', () => {
           cy.findByText('Mock Subject 2').should('be.visible');
           cy.findByText('fake-recipient@gmail.com').should('be.visible');
           cy.findByText('fake-sender@hotmail.com').should('be.visible');
-          cy.findByText('Jan 30, 2:42pm').should('be.visible');
         });
     });
 
