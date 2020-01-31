@@ -2,17 +2,25 @@
 
 exports[`Page: Message Events tests getRowData renders correctly 1`] = `
 Array [
-  "Injection",
+  <div
+    className="WordWrap"
+  >
+    Injection
+  </div>,
   <div
     className="MessageSubject"
   />,
   "tom.haverford@pawnee.state.in.us",
   "mean@friendly",
-  <DisplayDate
-    diffScale="seconds"
-    diffTime={59}
-    formattedDate="formatted"
-  />,
+  <div
+    className="WordWrap"
+  >
+    <DisplayDate
+      diffScale="seconds"
+      diffTime={59}
+      formattedDate="formatted"
+    />
+  </div>,
   <ViewDetailsButton
     event_id="456xyz"
     formattedDate="formatted"

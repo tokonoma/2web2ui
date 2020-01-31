@@ -103,16 +103,18 @@ export class MessageEventsPage extends Component {
   getRowData = rowData => {
     const { timestamp, formattedDate, type, friendly_from, rcpt_to, subject } = rowData;
     return [
-      snakeToFriendly(type),
+      <div className={styles.WordWrap}>{snakeToFriendly(type)}</div>,
       <div className={styles.MessageSubject}>{subject}</div>,
       rcpt_to,
       friendly_from,
-      <DisplayDate
-        timestamp={timestamp}
-        formattedDate={formattedDate}
-        diffTime={59}
-        diffScale="seconds"
-      />,
+      <div className={styles.WordWrap}>
+        <DisplayDate
+          timestamp={timestamp}
+          formattedDate={formattedDate}
+          diffTime={59}
+          diffScale="seconds"
+        />
+      </div>,
       <ViewDetailsButton {...rowData} />,
     ];
   };
