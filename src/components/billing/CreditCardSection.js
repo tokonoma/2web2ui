@@ -20,7 +20,7 @@ function CreditCardSection({
     ? [{ content: 'Use Saved Payment Method', onClick: handleUseAnotherCC, color: 'orange' }]
     : null;
 
-  const [useAnotherCC, setUseAnotherCC] = useState(defaultToggleState || false);
+  const [useAnotherCC, setUseAnotherCC] = useState(Boolean(defaultToggleState));
 
   if (!credit_card || useAnotherCC)
     return (
