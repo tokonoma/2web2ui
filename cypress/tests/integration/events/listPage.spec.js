@@ -243,6 +243,24 @@ describe('The events page', () => {
         cy.findByText('These are different results').should('be.visible'); // The new results are visible...
         cy.queryByText('fake-recipient@hotmail.com').should('not.be.visible'); // ...and the old results are not!
       });
+
+      it.only('removes all filters when clicking "Clear All Filters"', () => {
+        cy.findByLabelText('AMP Click').check({ force: true });
+        cy.findByLabelText('Out of Band').check({ force: true });
+        cy.findByLabelText('Filter By').select('Recipient Domains');
+        cy.findByLabelText('Filter').type('gmail.com');
+        cy.findByText('Apply Filters').click();
+
+        cy.findByText('Event: Amp Click').should('be.visible');
+        cy.findByText('Event: Out Of Band').should('be.visible');
+        cy.findByText('Recipient Domains: gmail.com').should('be.visible');
+
+        cy.findByText('Clear All Filters').click();
+
+        cy.queryByText('Event: Amp Click').should('not.be.visible');
+        cy.queryByText('Event: Out Of Band').should('not.be.visible');
+        cy.queryByText('Recipient Domains: gmail.com').should('not.be.visible');
+      });
     });
   });
 
