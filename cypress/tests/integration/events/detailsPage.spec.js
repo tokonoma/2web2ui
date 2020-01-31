@@ -2,8 +2,8 @@ const PAGE_BASE_URL = '/reports/message-events/details';
 
 describe('The events details page', () => {
   beforeEach(() => {
-    cy.stubAuth({ isStubbed: true });
-    cy.login();
+    cy.stubAuth();
+    cy.login({ isStubbed: true });
 
     cy.stubRequest({
       url: '/api/v1/events/message*',
