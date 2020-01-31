@@ -100,8 +100,8 @@ describe('The events page', () => {
 
       cy.findByText('Recipients: hello@gmail.com').should('be.visible');
       cy.findByText('Clear All Filters').should('be.visible');
-      cy.findByText('different-recipient@hotmail.com').should('be.visible');
-      cy.queryByText('fake-recipient@hotmail.com').should('not.be.visible');
+      cy.findByText('different-recipient@hotmail.com').should('be.visible'); // The new results are visible...
+      cy.queryByText('fake-recipient@hotmail.com').should('not.be.visible'); // ...and the old results are not!
     });
 
     it('renders an invalid email address in the recipient email address filter when an invalid email is entered', () => {
@@ -162,26 +162,135 @@ describe('The events page', () => {
     });
 
     describe('the "Advanced Filters" modal', () => {
+      const selectLabel = 'Filter By';
+      const textFieldLabel = 'Filter';
+
       beforeEach(() => {
         cy.visit(PAGE_URL);
         cy.findByText('Add Filters').click();
       });
 
-      it('renders documentation about each event type when hovering over a check box label', () => {});
+      it('renders documentation about each event type when hovering over a check box label', () => {
+        // NOTE: Rendering of these tooltips is a little unusual as Cypress does not have a .hover()
+        // that actually simulates user behavior. This means using the `mousover` event actually
+        // triggers a technically impossible application state when a real user is in control vs.
+        // simulated events
+        cy.findByText('Delay').trigger('mouseover');
 
-      it('allows the addition and removal of other filters via the "Add Filter" and "Remove" buttons', () => {});
+        cy.findByText('Remote MTA has temporarily rejected a message.').should('be.visible');
 
-      it('closes the modal when clicking "Cancel"', () => {});
+        cy.findByText('SMS Status').trigger('mouseover');
 
-      it('applies filters when clicking "Apply Filters" by re-requesting events data', () => {});
+        cy.findByText('SMPP/SMS message produced a status log output');
+      });
+
+      it('allows the addition and removal of other filters via the "Add Filter" and "Remove" buttons', () => {
+        cy.findAllByLabelText(selectLabel).should('have.length', 1);
+        cy.findAllByLabelText(textFieldLabel).should('have.length', 1);
+
+        cy.findByText('Add Filter').click();
+
+        cy.findAllByLabelText(selectLabel).should('have.length', 2);
+        cy.findAllByLabelText(textFieldLabel).should('have.length', 2);
+
+        cy.findAllByText('Remove')
+          .first()
+          .click();
+
+        cy.findAllByLabelText(selectLabel).should('have.length', 1);
+        cy.findAllByLabelText(textFieldLabel).should('have.length', 1);
+
+        cy.findByText('Remove').click();
+
+        cy.findByLabelText(selectLabel).should('not.be.visible');
+        cy.findByLabelText(textFieldLabel).should('not.be.visible');
+      });
+
+      it('closes the modal when clicking "Cancel"', () => {
+        cy.findByText('Cancel').click();
+
+        cy.findByText('Advanced Filters').should('not.be.visible');
+      });
+
+      it('closes the modal and applies filters when clicking "Apply Filters" by re-requesting events data', () => {
+        // `force` shouldn't be necessary, but due to component markup it is - Hibana component redesign may make this unnecessary
+        cy.findByLabelText('AMP Click').check({ force: true });
+        cy.findByLabelText('Out of Band').check({ force: true });
+        cy.findByLabelText('Filter By').select('Recipient Domains');
+        cy.findByLabelText('Filter').type('gmail.com');
+        cy.findByText('Add Filter').click();
+        cy.findAllByLabelText('Filter By')
+          .last()
+          .select('Subjects');
+        cy.findAllByLabelText('Filter')
+          .last()
+          .type('Happy Birthday');
+
+        cy.stubRequest({
+          url: '/api/v1/events/message*',
+          fixture: 'events/message/200.get.different-results.json',
+        });
+
+        cy.findByText('Apply Filters').click();
+
+        cy.findByText('Advanced Filters').should('not.be.visible');
+        cy.findByText('Event: Amp Click').should('be.visible');
+        cy.findByText('Event: Out Of Band').should('be.visible');
+        cy.findByText('Recipient Domains: gmail.com').should('be.visible');
+        cy.findByText('Subjects: Happy Birthday').should('be.visible');
+        cy.findByText('These are different results').should('be.visible'); // The new results are visible...
+        cy.queryByText('fake-recipient@hotmail.com').should('not.be.visible'); // ...and the old results are not!
+      });
     });
   });
 
   describe('the events table', () => {
-    it('renders with a "View Details" button that links to the detail page for this event', () => {});
+    it('renders with a "View Details" button that links to the detail page for this event', () => {
+      cy.visit(PAGE_URL);
 
-    it('renders the "Event", "Subject", "Recipient", "From Address", and event "Time" for each event', () => {});
+      cy.findAllByText('View Details')
+        .first()
+        .should('have.attr', 'href', '/reports/message-events/details/mock-message-id-1/1234');
 
-    it('renders the empty state when no events are returned', () => {});
+      cy.findAllByText('View Details')
+        .last()
+        .should('have.attr', 'href', '/reports/message-events/details/mock-message-id-2/5678');
+    });
+
+    it('renders the "Event", "Subject", "Recipient", "From Address", and event "Time" for each event', () => {
+      cy.visit(PAGE_URL);
+
+      cy.get('tbody tr')
+        .first()
+        .within(() => {
+          cy.findByText('Mock Subject 1').should('be.visible');
+          cy.findByText('fake-recipient@hotmail.com').should('be.visible');
+          cy.findByText('fake-sender@hotmail.com').should('be.visible');
+          cy.findByText('Injection').should('be.visible');
+          cy.findByText('Jan 30, 2:42pm').should('be.visible');
+        });
+
+      cy.get('tbody tr')
+        .last()
+        .within(() => {
+          cy.findByText('Delivery').should('be.visible');
+          cy.findByText('Mock Subject 2').should('be.visible');
+          cy.findByText('fake-recipient@gmail.com').should('be.visible');
+          cy.findByText('fake-sender@hotmail.com').should('be.visible');
+          cy.findByText('Jan 30, 2:42pm').should('be.visible');
+        });
+    });
+
+    it('renders the empty state when no events are returned', () => {
+      cy.stubRequest({
+        url: '/api/v1/events/message*',
+        fixture: 'events/message/200.get.no-results.json',
+      });
+
+      cy.visit(PAGE_URL);
+
+      cy.findByText('There are no message events for your current query').should('be.visible');
+      cy.get('table').should('not.be.visible');
+    });
   });
 });
