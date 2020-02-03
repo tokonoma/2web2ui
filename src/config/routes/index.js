@@ -723,7 +723,7 @@ const routes = [
   {
     path: '/recipient-validation/single/:email',
     component: SingleResultPage,
-    condition: hasGrants('recipient-validation/manage'),
+    condition: hasGrants('recipient-validation/preview'),
     layout: App,
     title: 'Results | Recipient Validation',
     supportDocsSearch: 'Recipient Validation',
@@ -731,7 +731,7 @@ const routes = [
   {
     path: '/recipient-validation/list/:listId',
     component: UploadedListPage,
-    condition: hasGrants('recipient-validation/manage'),
+    condition: hasGrants('recipient-validation/preview'),
     layout: App,
     title: 'Validation Status | List | Recipient Validation',
     supportDocsSearch: 'Recipient Validation',
@@ -739,7 +739,7 @@ const routes = [
   {
     path: '/recipient-validation/:category',
     component: RecipientValidationPage,
-    condition: hasGrants('recipient-validation/manage'), // must manual keep in sync with nav item
+    condition: hasGrants('recipient-validation/preview'), // must manual keep in sync with nav item
     layout: App,
     title: 'Recipient Validation',
     supportDocsSearch: 'Recipient Validation',
