@@ -15,7 +15,7 @@ function Gauge({ score = 0, threshold = {} }) {
   }, [score]);
 
   return (
-    <div className={styles.GaugeSvgContainer}>
+    <div className={styles.GaugeSvgContainer} data-id="health-score-gauge">
       <svg width="100%" height={210} viewBox="0 0 100 100">
         <path
           className={styles.Red}
@@ -57,10 +57,11 @@ function Gauge({ score = 0, threshold = {} }) {
         <path
           className={styles.Needle}
           style={{ transform: rotation }}
+          data-id="health-score-gauge-needle"
           d="M78.4 63S51.5 61.2 50 61.2s-2.8 1.3-2.8 2.8c0 1.5 1.3 2.8 2.8 2.8S78.4 63 78.4 63z"
         />
       </svg>
-      <h4 className={styles.Score} style={{ color: threshold.color }}>
+      <h4 className={styles.Score} style={{ color: threshold.color }} data-id="health-score">
         {roundToPlaces(score, 1).toFixed(1)}
       </h4>
     </div>

@@ -6,23 +6,35 @@ const thresholds = {
     color: '#FF594D',
     barColor: '#FF594D',
     icon: ErrorOutline,
-    condition: (n) => n < 55,
-    description: <>A Health score below 55 is considered to be <strong>bad</strong>.</>
+    condition: n => n < 55,
+    description: (
+      <span data-id="health-score-below-55-description">
+        A Health score below 55 is considered to be <strong>bad</strong>.
+      </span>
+    ),
   },
   warning: {
     color: '#E6B400',
     barColor: '#FFDA00',
     icon: ErrorOutline,
-    condition: (n) => n < 80 && n >= 55,
-    description: <>A Health score below 80 <strong>needs improvement</strong>.</>
+    condition: n => n < 80 && n >= 55,
+    description: (
+      <span data-id="health-score-below-80-description">
+        A Health score below 80 <strong>needs improvement</strong>.
+      </span>
+    ),
   },
   good: {
     color: '#2CC995',
     barColor: '#2CC995',
     icon: CheckCircleOutline,
-    condition: (n) => n >= 80,
-    description: <>A Health score above 80 is considered to be <strong>good</strong>.</>
-  }
+    condition: n => n >= 80,
+    description: (
+      <span data-id="health-score-above-80-description">
+        A Health score above 80 is considered to be <strong>good</strong>.
+      </span>
+    ),
+  },
 };
 
 export default thresholds;
@@ -30,5 +42,5 @@ export default thresholds;
 export const HEALTH_SCORE_COLORS_V3 = {
   danger: '#D1E4F4',
   warning: '#91C5FD',
-  good: '#4194ED'
+  good: '#4194ED',
 };

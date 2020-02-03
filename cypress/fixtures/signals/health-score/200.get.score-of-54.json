@@ -1,0 +1,18 @@
+{
+  "results": {
+    "total_count": 1,
+    "data": [
+      {
+        "sid": -1,
+        "current_health_score": "0.54",
+        "history": [
+          {
+            "dt": "2020-02-02",
+            "health_score": "0.54",
+            "weights": []
+          }
+        ]
+      }
+    ]
+  }
+}
