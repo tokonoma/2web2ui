@@ -39,11 +39,37 @@ describe('Page: Recipient Email Verification', () => {
     expect(wrapper.find(ApiDetails)).toExist();
   });
 
+  it('getBillingInfo is called when Recipient Validation Page mounts', () => {
+    wrapper.setState({ selectedTab: 1 });
+    expect(props.getBillingInfo).toHaveBeenCalled();
+  });
+
   describe('handleTabs', () => {
     it('changes selected tab correctly', () => {
       expect(wrapper.state().selectedTab).toEqual(0);
       instance.handleTabs(1);
       expect(wrapper.state().selectedTab).toEqual(1);
+    });
+  });
+
+  describe('when isStandAloneRVSet is true', () => {
+    let subject, defaultProps;
+    beforeEach(() => {
+      defaultProps = {
+        history: {
+          replace: jest.fn(),
+        },
+        getBillingInfo: jest.fn(),
+        billing: {},
+        isStandAloneRVSet: true,
+      };
+      subject = props => shallow(<RecipientValidationPage {...defaultProps} {...props} />);
+    });
+
+    it('when billingLoading is true ValidateSection is not rendered', () => {
+      const instance = subject({ billingLoading: true });
+      instance.setState({ selectedTab: 1 });
+      expect(instance.find('ValidateSection')).not.toExist();
     });
   });
 });

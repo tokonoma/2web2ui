@@ -8,26 +8,28 @@ import { required, email, maxLength } from 'src/helpers/validation';
 import { singleAddress } from 'src/actions/recipientValidation';
 import styles from './SingleAddressForm.module.scss';
 import { isAccountUiOptionSet } from 'src/helpers/conditions/account';
+import classNames from 'classnames';
 
 const formName = 'singleAddressForm';
 export class SingleAddressForm extends Component {
   singleAddressForm = values =>
     this.props.history.push(`/recipient-validation/single/${values.address}`);
 
-  getClassName = className => (!this.props.isStandAloneRVSet ? className : className + 'SRV');
   render() {
-    const { valid, pristine, submitting, handleSubmit } = this.props;
+    const { valid, pristine, submitting, handleSubmit, isStandAloneRVSet } = this.props;
     const submitDisabled = pristine || !valid || submitting;
     const buttonContent = submitting ? 'Validating...' : 'Validate';
 
     return (
       <Panel.Section>
         <form onSubmit={handleSubmit(this.singleAddressForm)}>
-          <div className={styles[this.getClassName('Header')]}>Validate a Single Address</div>
-          <p className={styles[this.getClassName('Subheader')]}>
+          <div className={classNames(styles.Header, isStandAloneRVSet && styles.HeaderSRV)}>
+            Validate a Single Address
+          </div>
+          <p className={classNames(styles.Subheader, isStandAloneRVSet && styles.SubheaderSRV)}>
             Enter the email address below you would like to validate.
           </p>
-          <div className={styles[this.getClassName('Field')]}>
+          <div className={classNames(styles.Field, isStandAloneRVSet && styles.FieldSRV)}>
             <Label className={styles.FieldLabel} id="email-address-field">
               Email Address
             </Label>
@@ -35,7 +37,7 @@ export class SingleAddressForm extends Component {
             <Field
               id="email-address-field"
               style={
-                !this.props.isStandAloneRVSet && {
+                !isStandAloneRVSet && {
                   height: '3.2rem',
                   paddingLeft: '1.5em',
                   fontSize: '.9em',
@@ -48,7 +50,7 @@ export class SingleAddressForm extends Component {
               normalize={(value = '') => value.trim()}
             />
           </div>
-          {!this.props.isStandAloneRVSet && (
+          {!isStandAloneRVSet && (
             <div className={styles.Submit}>
               <Button size="large" fullWidth primary submit disabled={submitDisabled}>
                 {buttonContent}
