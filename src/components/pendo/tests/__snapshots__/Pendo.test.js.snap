@@ -8,6 +8,8 @@ Array [
       "id": "test_999999",
       "plan": "1meellion",
       "serviceLevel": "enterprise",
+      "status": "active",
+      "statusReason": undefined,
       "tenant": "test",
     },
     "visitor": Object {
