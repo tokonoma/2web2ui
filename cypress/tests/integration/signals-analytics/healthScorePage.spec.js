@@ -154,12 +154,73 @@ describe('The health score page', () => {
   });
 
   describe('the subaccount table', () => {
-    beforeEach(() => cy.visit(PAGE_URL));
+    beforeEach(() => {
+      cy.stubRequest({
+        url: API_URL,
+        fixture: 'signals/health-score/200.get.with-subaccounts.json',
+        requestAlias: 'getHealthScore',
+      });
 
-    it('renders by default with "Master & All Subaccounts" and "No Breakdown" selected', () => {});
+      cy.visit(PAGE_URL);
 
-    it('renders each subaccount along with the current health score for that subaccount', () => {});
+      cy.wait('@getHealthScore');
+    });
 
-    it('allows alphabetical sorting by "Subaccount", "Current Score, and "Current Injections"', () => {});
+    it('renders by default with "Master & All Subaccounts" and "No Breakdown" selected', () => {
+      // TODO: Why isn't the master account rendering?
+    });
+
+    it('renders each subaccount along with the current health score for that subaccount', () => {
+      cy.get('tbody tr')
+        .eq(0)
+        .within(() => {
+          cy.findByText('Fake Subaccount 1 (101)').should('be.visible');
+          cy.findByText('10').should('be.visible'); // Current score
+          cy.findByText('15').should('be.visible'); // Average score
+        });
+
+      cy.get('tbody tr')
+        .eq(1)
+        .within(() => {
+          cy.findByText('Fake Subaccount 2 (102)').should('be.visible');
+          cy.findByText('20').should('be.visible'); // Current score
+          cy.findByText('25').should('be.visible'); // Average score
+        });
+
+      cy.get('tbody tr')
+        .eq(2)
+        .within(() => {
+          cy.findByText('Fake Subaccount 3 (103)').should('be.visible');
+          cy.findByText('30').should('be.visible'); // Current score
+          cy.findByText('35').should('be.visible'); // Average score
+        });
+    });
+
+    describe('sorting re-rerequests health score data', () => {
+      beforeEach(() => {
+        cy.stubRequest({
+          url: API_URL,
+          fixture: 'signals/health-score/200.get.no-results.json',
+        });
+      });
+
+      it('re-requests data when clicking on "Subaccount"', () => {
+        cy.findByText('Subaccount').click();
+
+        cy.findByText('No Data Available').should('be.visible');
+      });
+
+      it('re-requests data when clicking on "Current Score"', () => {
+        cy.findByText('Current Score').click();
+
+        cy.findByText('No Data Available').should('be.visible');
+      });
+
+      it('re-requests data when clicking on "Current Injections"', () => {
+        cy.findByText('Current Injections').click();
+
+        cy.findByText('No Data Available').should('be.visible');
+      });
+    });
   });
 });
