@@ -4,11 +4,13 @@ import SearchQuery from '../SearchQuery';
 
 jest.mock('src/constants', () => ({
   EVENTS_SEARCH_FILTERS: {
-    recipient_domains: { placeholder: 'Insert recipient domains placeholder', label: 'Recipient Domains' },
-    subjects: { placeholder: 'Insert subjects placeholder', label: 'Subjects' }
-  }
+    recipient_domains: {
+      placeholder: 'Insert recipient domains placeholder',
+      label: 'Recipient Domains',
+    },
+    subjects: { placeholder: 'Insert subjects placeholder', label: 'Subjects' },
+  },
 }));
-
 
 describe('SearchForm', () => {
   let props;
@@ -16,21 +18,27 @@ describe('SearchForm', () => {
   let filters;
 
   //Copied from redux-forms with minor changes
-  const map = jest.fn((callback) => (filters).map(function (item, index) {
-    return callback(`${'searchQuery' + '['}${index}]`, index);
-  }));
+  const map = jest.fn(callback =>
+    filters.map(function(item, index) {
+      return callback(`${'searchQuery' + '['}${index}]`, index);
+    }),
+  );
 
   beforeEach(() => {
     props = {
       fields: {
         map,
         getAll: jest.fn(() => filters),
-        get: jest.fn((index) => filters[index]),
+        get: jest.fn(index => filters[index]),
         push: jest.fn(),
-        remove: jest.fn()
-      }
+        remove: jest.fn(),
+      },
     };
-    filters = [{ key: 'recipient_domains', value: 'foo' }, { key: 'subjects', value: 'bar' }, { key: '', value: '' } ];
+    filters = [
+      { key: 'recipient_domains', value: 'foo' },
+      { key: 'subjects', value: 'bar' },
+      { key: '', value: '' },
+    ];
     wrapper = shallow(<SearchQuery {...props} />);
   });
 
@@ -43,15 +51,4 @@ describe('SearchForm', () => {
   it('should render correctly with existing filters', () => {
     expect(wrapper).toMatchSnapshot();
   });
-
-  it('add button works', () => {
-    wrapper.find('Button').last().simulate('click');
-    expect(props.fields.push).toHaveBeenCalled();
-  });
-
-  it('remove button works', () => {
-    wrapper.find('Button').at(2).simulate('click');
-    expect(props.fields.remove).toHaveBeenCalledWith(2);
-  });
-
 });

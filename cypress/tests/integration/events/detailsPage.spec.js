@@ -100,4 +100,17 @@ describe('The events details page', () => {
 
     cy.findByText('Mock Subject 1').should('be.visible');
   });
+
+  it('does not render the "Message History" table when there is no history for an event', () => {
+    cy.stubRequest({
+      url: '/api/v1/events/message*',
+      fixture: 'events/message/200.get.1-result.json',
+    });
+
+    cy.visit(`${PAGE_BASE_URL}/_noid_/1234`); // When no messsage ID exists, the route looks like this, and renders the alternate view
+
+    cy.queryByText('Message History').should('not.be.visible');
+    cy.queryByText('Message:').should('not.be.visible'); // No message ID heading is rendered
+    cy.findByText('Event: 1234').should('be.visible');
+  });
 });

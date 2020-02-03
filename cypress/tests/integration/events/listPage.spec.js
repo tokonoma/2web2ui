@@ -244,7 +244,7 @@ describe('The events page', () => {
         cy.queryByText('fake-recipient@hotmail.com').should('not.be.visible'); // ...and the old results are not!
       });
 
-      it.only('removes all filters when clicking "Clear All Filters"', () => {
+      it('removes all filters when clicking "Clear All Filters"', () => {
         cy.findByLabelText('AMP Click').check({ force: true });
         cy.findByLabelText('Out of Band').check({ force: true });
         cy.findByLabelText('Filter By').select('Recipient Domains');
