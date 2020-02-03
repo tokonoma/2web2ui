@@ -14,6 +14,7 @@ export class SingleAddressForm extends Component {
   singleAddressForm = values =>
     this.props.history.push(`/recipient-validation/single/${values.address}`);
 
+  getClassName = className => (!this.props.isStandAloneRVSet ? className : className + 'SRV');
   render() {
     const { valid, pristine, submitting, handleSubmit } = this.props;
     const submitDisabled = pristine || !valid || submitting;
@@ -22,18 +23,18 @@ export class SingleAddressForm extends Component {
     return (
       <Panel.Section>
         <form onSubmit={handleSubmit(this.singleAddressForm)}>
-          <div className={styles.Header}>Validate a Single Address</div>
-          <p className={styles.Subheader}>
+          <div className={styles[this.getClassName('Header')]}>Validate a Single Address</div>
+          <p className={styles[this.getClassName('Subheader')]}>
             Enter the email address below you would like to validate.
           </p>
-          <div className={!this.props.isStandAloneRVSet ? styles.Field : styles.FieldSRV}>
+          <div className={styles[this.getClassName('Field')]}>
             <Label className={styles.FieldLabel} id="email-address-field">
               Email Address
             </Label>
 
             <Field
               id="email-address-field"
-              style={{ height: '3.2rem', paddingLeft: '1.5em', fontSize: '.9em' }}
+              style={styles[this.getClassName('EmailAddressFieldSRV')]}
               name="address"
               component={TextFieldWrapper}
               placeholder={'harry.potter@hogwarts.edu'}

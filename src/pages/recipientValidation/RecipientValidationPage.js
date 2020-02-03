@@ -74,7 +74,7 @@ export class RecipientValidationPage extends Component {
 
   renderRecipientValidation = () => {
     const { selectedTab, showPriceModal } = this.state;
-    const { isStandAloneRVSet, billing } = this.props;
+    const { isStandAloneRVSet, billing, billingLoading } = this.props;
 
     return (
       <Page
@@ -102,7 +102,7 @@ export class RecipientValidationPage extends Component {
 
         {selectedTab === 0 && <JobsTableCollection />}
 
-        {selectedTab === 1 && isStandAloneRVSet && (
+        {selectedTab === 1 && isStandAloneRVSet && !billingLoading && (
           <ValidateSection credit_card={billing.credit_card} handleValidate={() => {}} />
         )}
 
@@ -133,6 +133,7 @@ const mapStateToProps = (state, props) => ({
   tab: tabs.findIndex(({ key }) => key === props.match.params.category) || 0,
   isStandAloneRVSet: isAccountUiOptionSet('standalone_rv')(state),
   billing: state.account.billing || {},
+  billingLoading: state.account.billingLoading,
 });
 
 export default withRouter(connect(mapStateToProps, { getBillingInfo })(RecipientValidationPage));
