@@ -23,17 +23,13 @@ const getTimeTickFormatter = _.memoize(precisionType => {
   const format = tickFormat => tick => moment(tick).format(tickFormat);
   switch (precisionType) {
     case 'hour':
-    case 'hours':
       return format('h:mma');
 
     case 'day':
-    case 'days':
     case 'week':
-    case 'weeks':
       return format('MMM Do');
 
     case 'month':
-    case 'months':
       return format('MMM');
 
     default:
@@ -45,22 +41,12 @@ const getTooltipLabelFormatter = _.memoize(precisionType => {
   const format = labelFormat => label => moment(label).format(labelFormat);
   switch (precisionType) {
     case 'hour':
-    case 'hours':
       return format('MMM Do [at] LT');
 
     case 'day':
-    case 'days':
       return format('MMMM Do');
 
-    case 'week':
-    case 'weeks':
-      return label => {
-        const endDate = moment(label).add(6, 'days');
-        return `${moment(label).format('MMM Do')} - ${endDate.format('MMM Do')}`;
-      };
-
     case 'month':
-    case 'months':
       return format('MMMM YYYY');
 
     default:
@@ -68,12 +54,29 @@ const getTooltipLabelFormatter = _.memoize(precisionType => {
   }
 });
 
-function getLineChartFormatters(precision) {
+const getWeekPrecisionFormatter = to => {
+  return label => {
+    const format = momentTime => momentTime.format('MMM Do');
+    const startDate = format(moment(label));
+
+    //If it's the last date, make the end date the to date; else, make the to date the next Saturday
+    if (moment(label).isSame(moment(to).weekday(0), 'day')) {
+      return `${startDate} - ${format(moment(to))}`;
+    }
+
+    return `${startDate} - ${format(moment(label).weekday(6))}`;
+  };
+};
+
+function getLineChartFormatters(precision, to = moment()) {
   const formatters = {};
   const precisionType = getPrecisionType(precision);
 
   formatters.xTickFormatter = getTimeTickFormatter(precisionType);
-  formatters.tooltipLabelFormatter = getTooltipLabelFormatter(precisionType);
+  formatters.tooltipLabelFormatter =
+    precisionType === 'week' //Can't put in case;switch in getToolTipLabelFormatter b/c memoization
+      ? getWeekPrecisionFormatter(to)
+      : getTooltipLabelFormatter(precisionType);
 
   return formatters;
 }
@@ -84,6 +87,7 @@ export {
   getDayLines,
   getTimeTickFormatter,
   getTooltipLabelFormatter,
+  getWeekPrecisionFormatter,
   getLineChartFormatters,
   formatYAxisPercent,
 };

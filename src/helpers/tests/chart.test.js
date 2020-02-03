@@ -2,6 +2,7 @@ import {
   getDayLines,
   getTimeTickFormatter,
   getTooltipLabelFormatter,
+  getWeekPrecisionFormatter,
   getLineChartFormatters,
   formatYAxisPercent,
 } from '../chart';
@@ -92,9 +93,27 @@ describe('Helper: chart', () => {
     });
   });
 
+  describe('getWeekPrecisionFormatter', () => {
+    const sunday = '2017-06-11T12:00';
+
+    it('should format a "weekly" label', () => {
+      const to = '2017-06-20T12:00';
+      const format = getWeekPrecisionFormatter(to);
+      const formatted = format(getDate(16, sunday));
+      expect(formatted).toEqual('Jun 11th - Jun 17th');
+    });
+
+    it('should format a "weekly" label for an ending date', () => {
+      const to = '2017-06-15T12:00';
+      const format = getWeekPrecisionFormatter(to);
+      const formatted = format(getDate(0, sunday));
+      expect(formatted).toEqual('Jun 11th - Jun 15th');
+    });
+  });
+
   describe('getTooltipLabelFormatter', () => {
     it('should format an "hourly" label', () => {
-      const format = getTooltipLabelFormatter('hours');
+      const format = getTooltipLabelFormatter('hour');
       const formatted = format(getDate(16));
       expect(formatted).toEqual('Jun 15th at 4:00 PM');
     });
@@ -105,12 +124,6 @@ describe('Helper: chart', () => {
       expect(formatted).toEqual('June 15th');
     });
 
-    it('should format a "weekly" label', () => {
-      const format = getTooltipLabelFormatter('week');
-      const formatted = format(getDate(16));
-      expect(formatted).toEqual('Jun 15th - Jun 21st');
-    });
-
     it('should format a "monthly" label', () => {
       const format = getTooltipLabelFormatter('month');
       const formatted = format(getDate(16));
@@ -118,9 +131,9 @@ describe('Helper: chart', () => {
     });
 
     it('should memoize', () => {
-      const a = getTooltipLabelFormatter('hours');
-      const b = getTooltipLabelFormatter('hours');
-      const c = getTooltipLabelFormatter('days');
+      const a = getTooltipLabelFormatter('hour');
+      const b = getTooltipLabelFormatter('hour');
+      const c = getTooltipLabelFormatter('day');
 
       expect(a).toBe(b);
       expect(a).not.toBe(c);
@@ -128,7 +141,7 @@ describe('Helper: chart', () => {
   });
 
   describe('getLineChartFormatters', () => {
-    metrics.getPrecisionType = jest.fn(() => 'hours');
+    metrics.getPrecisionType = jest.fn(() => 'hour');
     expect(getLineChartFormatters()).toEqual({
       xTickFormatter: expect.any(Function),
       tooltipLabelFormatter: expect.any(Function),
