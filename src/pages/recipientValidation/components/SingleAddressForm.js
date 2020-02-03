@@ -7,6 +7,8 @@ import { TextFieldWrapper } from 'src/components';
 import { required, email, maxLength } from 'src/helpers/validation';
 import { singleAddress } from 'src/actions/recipientValidation';
 import styles from './SingleAddressForm.module.scss';
+import { isAccountUiOptionSet } from 'src/helpers/conditions/account';
+import classNames from 'classnames';
 
 const formName = 'singleAddressForm';
 export class SingleAddressForm extends Component {
@@ -14,25 +16,33 @@ export class SingleAddressForm extends Component {
     this.props.history.push(`/recipient-validation/single/${values.address}`);
 
   render() {
-    const { valid, pristine, submitting, handleSubmit } = this.props;
+    const { valid, pristine, submitting, handleSubmit, isStandAloneRVSet } = this.props;
     const submitDisabled = pristine || !valid || submitting;
     const buttonContent = submitting ? 'Validating...' : 'Validate';
 
     return (
       <Panel.Section>
         <form onSubmit={handleSubmit(this.singleAddressForm)}>
-          <div className={styles.Header}>Validate a Single Address</div>
-          <p className={styles.Subheader}>
+          <div className={classNames(styles.Header, isStandAloneRVSet && styles.HeaderSRV)}>
+            Validate a Single Address
+          </div>
+          <p className={classNames(styles.Subheader, isStandAloneRVSet && styles.SubheaderSRV)}>
             Enter the email address below you would like to validate.
           </p>
-          <div className={styles.Field}>
+          <div className={classNames(styles.Field, isStandAloneRVSet && styles.FieldSRV)}>
             <Label className={styles.FieldLabel} id="email-address-field">
               Email Address
             </Label>
 
             <Field
               id="email-address-field"
-              style={{ height: '3.2rem', paddingLeft: '1.5em', fontSize: '.9em' }}
+              style={
+                !isStandAloneRVSet && {
+                  height: '3.2rem',
+                  paddingLeft: '1.5em',
+                  fontSize: '.9em',
+                }
+              }
               name="address"
               component={TextFieldWrapper}
               placeholder={'harry.potter@hogwarts.edu'}
@@ -40,17 +50,25 @@ export class SingleAddressForm extends Component {
               normalize={(value = '') => value.trim()}
             />
           </div>
-          <div className={styles.Submit}>
-            <Button size="large" fullWidth primary submit disabled={submitDisabled}>
-              {buttonContent}
-            </Button>
-          </div>
+          {!isStandAloneRVSet && (
+            <div className={styles.Submit}>
+              <Button size="large" fullWidth primary submit disabled={submitDisabled}>
+                {buttonContent}
+              </Button>
+            </div>
+          )}
         </form>
       </Panel.Section>
     );
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    isStandAloneRVSet: isAccountUiOptionSet('standalone_rv')(state),
+  };
+};
+
 const WrappedForm = reduxForm({ form: formName })(SingleAddressForm);
 
-export default withRouter(connect(null, { singleAddress })(WrappedForm));
+export default withRouter(connect(mapStateToProps, { singleAddress })(WrappedForm));
