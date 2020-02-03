@@ -1,0 +1,71 @@
+{
+  "results": {
+    "bill_cycle_day": 2,
+    "pending_downgrades": [
+      {
+        "product": "subaccounts",
+        "effective_date": "2020-01-02T08:00:00.000Z",
+        "type": "remove_product"
+      },
+      {
+        "product": "sso",
+        "effective_date": "2020-01-02T08:00:00.000Z",
+        "type": "remove_product"
+      },
+      {
+        "product": "tfa_required",
+        "effective_date": "2020-01-02T08:00:00.000Z",
+        "type": "remove_product"
+      },
+      {
+        "product": "phone_support",
+        "effective_date": "2020-01-02T08:00:00.000Z",
+        "type": "remove_product"
+      },
+      {
+        "product": "dedicated_ip",
+        "effective_date": "2020-01-02T00:00:00.000Z",
+        "type": "remove_product"
+      },
+      {
+        "product": "messaging",
+        "effective_date": "2020-01-02T00:00:00.000Z",
+        "type": "change_plan",
+        "plan": "50K-starter-0519"
+      }
+    ],
+    "products": [
+      {
+        "plan": "250K-premier-0519",
+        "product": "messaging"
+      },
+      {
+        "plan": "subaccounts-premier",
+        "product": "subaccounts",
+        "limit": 15
+      },
+      {
+        "plan": "sso",
+        "product": "sso"
+      },
+      {
+        "plan": "tfa-required",
+        "product": "tfa_required"
+      },
+      {
+        "plan": "phone-support",
+        "product": "phone_support"
+      },
+      {
+        "plan": "online-support",
+        "product": "online_support"
+      },
+      {
+        "plan": "ip-0519",
+        "product": "dedicated_ip",
+        "limit": 4
+      }
+    ],
+    "type": "active"
+  }
+}

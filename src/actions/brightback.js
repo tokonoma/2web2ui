@@ -4,23 +4,30 @@ import { getRelativeDates } from 'src/helpers/date';
 import { safeRate } from 'src/helpers/math';
 import { getMetricsFromKeys, getQueryFromOptions } from 'src/helpers/metrics';
 
-const METRICS = getMetricsFromKeys(['count_sent', 'count_unique_confirmed_opened_approx', 'count_accepted']);
+const METRICS = getMetricsFromKeys([
+  'count_sent',
+  'count_unique_confirmed_opened_approx',
+  'count_accepted',
+]);
 
 export function prepBrightback(accountDetails) {
-  return (dispatch) => dispatch(loadPrerequisiteMetrics())
-    .then(([{
-      count_sent = 0,
-      count_unique_confirmed_opened_approx = 0,
-      count_accepted = 1
-    }]) => dispatch(precancel({
-      custom: {
-        activity: {
-          emails: count_sent,
-          open_rate: Math.round(safeRate(count_unique_confirmed_opened_approx, count_accepted))
-        }
-      },
-      ...accountDetails
-    })));
+  return dispatch =>
+    dispatch(loadPrerequisiteMetrics()).then(
+      ([{ count_sent = 0, count_unique_confirmed_opened_approx = 0, count_accepted = 1 }]) =>
+        dispatch(
+          precancel({
+            custom: {
+              activity: {
+                emails: count_sent,
+                open_rate: Math.round(
+                  safeRate(count_unique_confirmed_opened_approx, count_accepted),
+                ),
+              },
+            },
+            ...accountDetails,
+          }),
+        ),
+    );
 }
 
 export function loadPrerequisiteMetrics() {
@@ -32,8 +39,8 @@ export function loadPrerequisiteMetrics() {
       method: 'GET',
       url: '/v1/metrics/deliverability',
       params: metricsRequest,
-      showErrorAlert: false
-    }
+      showErrorAlert: false,
+    },
   });
 }
 
@@ -44,7 +51,7 @@ export function precancel(data) {
       method: 'POST',
       url: '/precancel',
       data,
-      showErrorAlert: false
-    }
+      showErrorAlert: false,
+    },
   });
 }
