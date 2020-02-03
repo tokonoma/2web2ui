@@ -97,7 +97,7 @@ export default [
       {
         label: 'Recipient Validation',
         to: '/recipient-validation/list',
-        condition: hasGrants('recipient-validation/manage'),
+        condition: hasGrants('recipient-validation/preview'),
       },
       {
         label: 'Recipient Lists',
