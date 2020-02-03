@@ -81,8 +81,16 @@ export function CurrentHealthGauge(props) {
           </>
         )}
         <div className={styles.Metrics}>
-          <MetricDisplay label="WoW Change" {...getMetricProps('WoW')} />
-          <MetricDisplay label="DoD Change" {...getMetricProps('current_DoD')} />
+          <MetricDisplay
+            data-id="health-score-wow-change"
+            label="WoW Change"
+            {...getMetricProps('WoW')}
+          />
+          <MetricDisplay
+            data-id="health-score-dod-change"
+            label="DoD Change"
+            {...getMetricProps('current_DoD')}
+          />
         </div>
       </div>
     </Panel>
