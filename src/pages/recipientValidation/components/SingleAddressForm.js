@@ -36,9 +36,9 @@ export class SingleAddressForm extends Component {
               id="email-address-field"
               style={
                 !this.props.isStandAloneRVSet && {
-                  height: '3.22rem',
+                  height: '3.2rem',
                   paddingLeft: '1.5em',
-                  fontSize: '0.9em',
+                  fontSize: '.9em',
                 }
               }
               name="address"
