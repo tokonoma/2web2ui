@@ -1,7 +1,13 @@
 /* eslint-disable max-lines */
 import React, { Component } from 'react';
 import { subMonths, format } from 'date-fns';
-import { getStartOfDay, getEndOfDay, getRelativeDateOptions, getNextHour, isSameDate } from 'src/helpers/date';
+import {
+  getStartOfDay,
+  getEndOfDay,
+  getRelativeDateOptions,
+  getNextHour,
+  isSameDate,
+} from 'src/helpers/date';
 import { roundBoundaries } from 'src/helpers/metrics';
 import { Button, TextField, Select, Popover, WindowEvent, Error } from '@sparkpost/matchbox';
 import DateSelector from 'src/components/dateSelector/DateSelector';
@@ -11,14 +17,13 @@ import styles from './DatePicker.module.scss';
 import PropTypes from 'prop-types';
 
 export default class AppDatePicker extends Component {
-
   DATE_FORMAT = FORMATS.LONG_DATETIME;
   state = {
     showDatePicker: false,
     selecting: false,
-    selected: { },
-    validationError: null
-  }
+    selected: {},
+    validationError: null,
+  };
 
   componentDidMount() {
     this.syncTimeToState(this.props);
@@ -32,11 +37,11 @@ export default class AppDatePicker extends Component {
 
   // Sets local state from reportOptions redux state - need to separate to handle pre-apply state
   syncTimeToState = ({ from, to }) => {
-    this.setState({ selected: { from, to }});
-  }
+    this.setState({ selected: { from, to } });
+  };
 
   // Closes popover on escape, submits on enter
-  handleKeyDown = (e) => {
+  handleKeyDown = e => {
     if (!this.state.showDatePicker) {
       return;
     }
@@ -48,29 +53,32 @@ export default class AppDatePicker extends Component {
     if (!this.state.selecting && e.key === 'Enter') {
       this.handleSubmit();
     }
-  }
+  };
 
   handleDayKeyDown = (day, modifiers, e) => {
     this.handleKeyDown(e);
     e.stopPropagation();
-  }
+  };
 
   cancelDatePicker = () => {
     this.syncTimeToState(this.props);
     this.setState({ showDatePicker: false });
-  }
+  };
 
   showDatePicker = () => {
     this.setState({ showDatePicker: true });
-  }
+  };
 
-  handleDayClick = (clicked) => {
+  handleDayClick = clicked => {
     const { selecting, selected } = this.state;
     const { validate } = this.props;
 
     const dates = selecting
       ? selected
-      : { from: this.fromFormatter(clicked), to: getEndOfDay(clicked, { preventFuture: this.props.preventFuture }) };
+      : {
+          from: this.fromFormatter(clicked),
+          to: getEndOfDay(clicked, { preventFuture: this.props.preventFuture }),
+        };
 
     const validationError = validate && validate(dates);
 
@@ -83,17 +91,17 @@ export default class AppDatePicker extends Component {
       selected: dates,
       beforeSelected: dates,
       selecting: !selecting,
-      validationError: null
+      validationError: null,
     });
-  }
+  };
 
-  handleDayHover = (hovered) => {
+  handleDayHover = hovered => {
     const { selecting } = this.state;
 
     if (selecting) {
-      this.setState({ selected: { ...this.getOrderedRange(hovered) }});
+      this.setState({ selected: { ...this.getOrderedRange(hovered) } });
     }
-  }
+  };
 
   getOrderedRange(newDate) {
     let { from, to } = this.state.beforeSelected;
@@ -112,7 +120,7 @@ export default class AppDatePicker extends Component {
     return { from, to };
   }
 
-  handleSelectRange = (e) => {
+  handleSelectRange = e => {
     const value = e.currentTarget.value;
 
     if (value === 'custom') {
@@ -121,35 +129,43 @@ export default class AppDatePicker extends Component {
       this.setState({ showDatePicker: false });
       this.props.onChange({ relativeRange: value });
     }
-  }
+  };
 
   handleFormDates = ({ from, to }, callback) => {
-    this.setState({ selected: { from, to }}, () => callback());
-  }
+    this.setState({ selected: { from, to } }, () => callback());
+  };
 
   handleSubmit = () => {
-    if (this.state.validationError) {
+    const { validate } = this.props;
+
+    const validationError = validate && validate(this.state.selected);
+    if (validationError) {
+      this.setState({ validationError });
       return;
     }
 
     this.setState({ showDatePicker: false, selecting: false, validationError: null });
     this.props.onChange({ ...this.state.selected, relativeRange: 'custom' });
-  }
+  };
 
   handleTextUpdate = () => {
     if (this.props.onBlur) {
       this.props.onBlur();
     }
-  }
+  };
 
-  fromFormatter = (fromDate) => {
+  fromFormatter = fromDate => {
     const isDateToday = isSameDate(getStartOfDay(fromDate), getStartOfDay(new Date()));
-    const formatter = (this.props.fromSelectsNextHour && isDateToday) ? getNextHour : getStartOfDay;
+    const formatter = this.props.fromSelectsNextHour && isDateToday ? getNextHour : getStartOfDay;
     return formatter(fromDate);
-  }
+  };
 
   render() {
-    const { selected: { from, to }, showDatePicker, validationError } = this.state;
+    const {
+      selected: { from, to },
+      showDatePicker,
+      validationError,
+    } = this.state;
     const selectedRange = showDatePicker ? 'custom' : this.props.relativeRange;
 
     // allow for prop-level override of "now" (DI, etc.)
@@ -165,37 +181,41 @@ export default class AppDatePicker extends Component {
       showPresets = true,
       error,
       left,
-      hideManualEntry
+      hideManualEntry,
     } = this.props;
     const dateFormat = dateFieldFormat || this.DATE_FORMAT;
 
-    const rangeSelect = showPresets
-      ? <Select
+    const rangeSelect = showPresets ? (
+      <Select
         options={getRelativeDateOptions(relativeDateOptions)}
         onChange={this.handleSelectRange}
         value={selectedRange}
-        disabled={disabled} />
-      : null;
+        disabled={disabled}
+      />
+    ) : null;
 
-    const dateField = <TextField
-      onClick={this.showDatePicker}
-      connectLeft={rangeSelect}
-      value={`${format(from, dateFormat)} – ${format(to, dateFormat)}`}
-      readOnly
-      onBlur={this.handleTextUpdate}
-      error={error}
-      disabled={disabled}
-      {...textFieldProps} />;
+    const dateField = (
+      <TextField
+        onClick={this.showDatePicker}
+        connectLeft={rangeSelect}
+        value={`${format(from, dateFormat)} – ${format(to, dateFormat)}`}
+        readOnly
+        onBlur={this.handleTextUpdate}
+        error={error}
+        disabled={disabled}
+        {...textFieldProps}
+      />
+    );
 
     return (
       <Popover
-        wrapper='div'
+        wrapper="div"
         className={styles.Popover}
         trigger={dateField}
         onClose={this.cancelDatePicker}
         open={this.state.showDatePicker}
-        left={left} >
-
+        left={left}
+      >
         <DateSelector
           numberOfMonths={2}
           fixedWeeks
@@ -223,14 +243,16 @@ export default class AppDatePicker extends Component {
           />
         )}
 
-        <Button primary onClick={this.handleSubmit} className={styles.Apply}>Apply</Button>
+        <Button primary onClick={this.handleSubmit} className={styles.Apply}>
+          Apply
+        </Button>
         <Button onClick={this.cancelDatePicker}>Cancel</Button>
         {validationError && (
           <span className={styles.Error}>
-            <Error wrapper='span' error={validationError}></Error>
+            <Error wrapper="span" error={validationError}></Error>
           </span>
         )}
-        <WindowEvent event='keydown' handler={this.handleKeyDown} />
+        <WindowEvent event="keydown" handler={this.handleKeyDown} />
       </Popover>
     );
   }
@@ -248,10 +270,10 @@ AppDatePicker.propTypes = {
   dateFieldFormat: PropTypes.string,
   disabled: PropTypes.bool,
   showPresets: PropTypes.bool,
-  hideManualEntry: PropTypes.bool
+  hideManualEntry: PropTypes.bool,
 };
 
 AppDatePicker.defaultProps = {
   roundToPrecision: false,
-  preventFuture: true
+  preventFuture: true,
 };

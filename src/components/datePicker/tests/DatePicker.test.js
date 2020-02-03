@@ -13,7 +13,6 @@ jest.mock('react-dom');
 jest.mock('date-fns');
 
 describe('Component: DatePicker', () => {
-
   let wrapper;
   let instance;
   let props;
@@ -32,23 +31,26 @@ describe('Component: DatePicker', () => {
       onBlur: jest.fn(),
       now: mockNow,
       disabled: false,
-      roundToPrecision: true
+      roundToPrecision: true,
     };
 
     dateHelpers.getStartOfDay = jest.fn(() => 'start-of-day');
     dateHelpers.getNextHour = jest.fn(() => 'next-hour');
     dateHelpers.getEndOfDay = jest.fn(() => 'end-of-day');
     dateHelpers.isSameDate = jest.fn(() => false);
-    metricsHelpers.roundBoundaries = jest.fn(() => ({ from: moment(mockFrom), to: moment(mockNow) }));
+    metricsHelpers.roundBoundaries = jest.fn(() => ({
+      from: moment(mockFrom),
+      to: moment(mockNow),
+    }));
     dateHelpers.getRelativeDateOptions = jest.fn(() => [1, 2, 3]);
-    datefns.format = jest.fn((a,b) => b);
-    datefns.subMonths = jest.fn((a) => a);
+    datefns.format = jest.fn((a, b) => b);
+    datefns.subMonths = jest.fn(a => a);
 
     wrapper = shallow(<DatePicker {...props} />);
     instance = wrapper.instance();
 
     // spy on all instance methods
-    _.functions(instance).forEach((f) => jest.spyOn(instance, f));
+    _.functions(instance).forEach(f => jest.spyOn(instance, f));
   });
 
   it('should render ok by default', () => {
@@ -73,7 +75,6 @@ describe('Component: DatePicker', () => {
   });
 
   describe('syncTimeToState', () => {
-
     const before = { from: 'unchanged', to: 'unchanged' };
     const after = { from: new Date(), to: new Date() };
 
@@ -85,17 +86,15 @@ describe('Component: DatePicker', () => {
       expect(wrapper.state('selected')).toEqual(after);
     });
 
-    it('shouldn\'t sync the state when from and to aren\'t changed', () => {
+    it("shouldn't sync the state when from and to aren't changed", () => {
       wrapper.setState({ selected: before });
       wrapper.setProps({ other: 'stuff' });
       expect(instance.syncTimeToState).not.toHaveBeenCalled();
       expect(wrapper.state('selected')).toEqual(before);
     });
-
   });
 
   describe('handleKeyDown', () => {
-
     const ESCAPE = { key: 'Escape' };
     const ENTER = { key: 'Enter' };
 
@@ -130,11 +129,9 @@ describe('Component: DatePicker', () => {
       expect(instance.handleSubmit).not.toHaveBeenCalled();
       expect(wrapper.state('showDatePicker')).toEqual(true);
     });
-
   });
 
   describe('handleDayKeyDown', () => {
-
     it('should stop propagation on a day key down event', () => {
       const e = { stopPropagation: jest.fn() };
       const x = '';
@@ -142,7 +139,6 @@ describe('Component: DatePicker', () => {
       expect(instance.handleKeyDown).toHaveBeenCalledWith(e);
       expect(e.stopPropagation).toHaveBeenCalledTimes(1);
     });
-
   });
 
   describe('handleTextUpdate', () => {
@@ -159,28 +155,23 @@ describe('Component: DatePicker', () => {
   });
 
   describe('cancelDatePicker', () => {
-
     it('should sync props and close date picker', () => {
       wrapper.setState({ showDatePicker: true });
       instance.cancelDatePicker();
       expect(instance.syncTimeToState).toHaveBeenCalledWith(instance.props);
       expect(wrapper.state('showDatePicker')).toEqual(false);
     });
-
   });
 
   describe('showDatePicker', () => {
-
     it('should set date picker state', () => {
       wrapper.setState({ showDatePicker: false });
       instance.showDatePicker();
       expect(wrapper.state('showDatePicker')).toEqual(true);
     });
-
   });
 
   describe('handleDayClick', () => {
-
     it('should handle a day click while selecting', () => {
       const mockSelected = {};
       wrapper.setState({ selecting: true, selected: mockSelected, beforeSelected: null });
@@ -229,7 +220,7 @@ describe('Component: DatePicker', () => {
       expect(wrapper.state('selecting')).toEqual(true);
     });
 
-    it('should handle a day click whith a validation error', () => {
+    it('should handle a day click with a validation error', () => {
       const validate = jest.fn(() => 'error oh no');
       const mockSelected = {};
       const mockClicked = {};
@@ -244,11 +235,9 @@ describe('Component: DatePicker', () => {
       expect(validate).toHaveBeenCalledWith(mockNewSelected);
       expect(wrapper.state('selecting')).toEqual(true);
     });
-
   });
 
   describe('handleDayHover', () => {
-
     it('should handle a day hover while selecting', () => {
       const mockOrderedRange = { from: 'from', to: 'to' };
       const mockHovered = {};
@@ -272,17 +261,15 @@ describe('Component: DatePicker', () => {
       expect(instance.getOrderedRange).not.toHaveBeenCalled();
       expect(wrapper.state('selected')).toEqual(mockSelected);
     });
-
   });
 
   describe('getOrderedRange', () => {
-
     it('should return correct range when new date is between from and to', () => {
       const from = new Date('2018-01-01');
       const newDate = new Date('2018-01-02');
       const to = new Date('2018-01-03');
 
-      wrapper.setState({ beforeSelected: { from, to }});
+      wrapper.setState({ beforeSelected: { from, to } });
       const range = instance.getOrderedRange(newDate);
 
       expect(dateHelpers.getEndOfDay).toHaveBeenCalledWith(newDate, { preventFuture: true });
@@ -296,7 +283,7 @@ describe('Component: DatePicker', () => {
       const from = new Date('2018-01-02');
       const to = new Date('2018-01-03');
 
-      wrapper.setState({ beforeSelected: { from, to }});
+      wrapper.setState({ beforeSelected: { from, to } });
       const range = instance.getOrderedRange(newDate);
 
       expect(dateHelpers.getEndOfDay).not.toHaveBeenCalled();
@@ -314,7 +301,7 @@ describe('Component: DatePicker', () => {
       dateHelpers.isSameDate = jest.fn(() => true);
 
       wrapper.setProps({ fromSelectsNextHour: true });
-      wrapper.setState({ beforeSelected: { from, to }});
+      wrapper.setState({ beforeSelected: { from, to } });
       const range = instance.getOrderedRange(newDate);
 
       expect(dateHelpers.getEndOfDay).not.toHaveBeenCalled();
@@ -329,7 +316,7 @@ describe('Component: DatePicker', () => {
       const to = new Date('2018-01-02');
       const newDate = new Date('2018-01-03');
 
-      wrapper.setState({ beforeSelected: { from, to }});
+      wrapper.setState({ beforeSelected: { from, to } });
       const range = instance.getOrderedRange(newDate);
 
       expect(dateHelpers.getEndOfDay).toHaveBeenCalledWith(newDate, { preventFuture: true });
@@ -343,7 +330,7 @@ describe('Component: DatePicker', () => {
       const newDate = new Date('2018-01-01');
       const to = new Date('2018-01-03');
 
-      wrapper.setState({ beforeSelected: { from, to }});
+      wrapper.setState({ beforeSelected: { from, to } });
       const range = instance.getOrderedRange(newDate);
 
       expect(dateHelpers.getEndOfDay).toHaveBeenCalledWith(newDate, { preventFuture: true });
@@ -351,7 +338,6 @@ describe('Component: DatePicker', () => {
       expect(metricsHelpers.roundBoundaries).toHaveBeenCalledWith(from, 'end-of-day');
       expect(range).toEqual({ from: moment(mockFrom).toDate(), to: moment(mockNow).toDate() });
     });
-
   });
 
   describe('handleSelectRange', () => {
@@ -359,7 +345,7 @@ describe('Component: DatePicker', () => {
 
     beforeEach(() => {
       e = {
-        currentTarget: {}
+        currentTarget: {},
       };
     });
 
@@ -378,11 +364,9 @@ describe('Component: DatePicker', () => {
       expect(wrapper.state('showDatePicker')).toEqual(false);
       expect(props.onChange).toHaveBeenCalledWith({ relativeRange: 'lasagna' });
     });
-
   });
 
   describe('handleFormDates', () => {
-
     it('should use a date field format if provided', () => {
       wrapper.setProps({ dateFieldFormat: 'YYYY-MM h' });
       expect(wrapper.find('Popover').props().trigger).toMatchSnapshot();
@@ -396,11 +380,9 @@ describe('Component: DatePicker', () => {
       expect(wrapper.state('selected')).toEqual(mockSelected);
       expect(mockCallback).toHaveBeenCalledTimes(1);
     });
-
   });
 
   describe('handleSubmit', () => {
-
     it('should reset some state and refresh', () => {
       const mockSelected = { a: 1, b: 2, c: 3 };
       wrapper.setState({ showDatePicker: true, selecting: true, selected: mockSelected });
@@ -411,18 +393,23 @@ describe('Component: DatePicker', () => {
     });
 
     it('should not do anything with a validation error', () => {
+      const validate = jest.fn(() => 'error oh no');
       const mockSelected = { a: 1, b: 2, c: 3 };
-      wrapper.setState({ showDatePicker: true, selecting: true, selected: mockSelected, validationError: 'oh no' });
+      wrapper.setProps({ validate });
+      wrapper.setState({
+        showDatePicker: true,
+        selecting: true,
+        selected: mockSelected,
+      });
       instance.handleSubmit();
-      expect(wrapper.state('showDatePicker')).toEqual(true);
       expect(wrapper.state('selecting')).toEqual(true);
+      expect(wrapper.find('Popover')).toHaveProp('open', true);
+      expect(validate).toHaveBeenCalled();
       expect(props.onChange).not.toHaveBeenCalled();
     });
-
   });
 
   describe('fromFormatter', () => {
-
     it('should format from date with getNextHour', () => {
       dateHelpers.isSameDate = jest.fn(() => true);
       wrapper.setProps({ fromSelectsNextHour: true });
@@ -447,5 +434,4 @@ describe('Component: DatePicker', () => {
       expect(dateHelpers.getStartOfDay).toHaveBeenCalledTimes(3);
     });
   });
-
 });
