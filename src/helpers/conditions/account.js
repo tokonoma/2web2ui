@@ -17,6 +17,7 @@ export const isBillingSubscriptionSelfServe = ({ subscription }) => {
   return _.includes(SELF_SERVE_ACCOUNT_TYPES, _.get(subscription, 'type'));
 };
 export const isAws = ({ account }) => _.get(account, 'subscription.type') === 'aws';
+export const isManuallyBilled = ({ account }) => _.get(account, 'subscription.type') === 'manual';
 export const isCustomBilling = ({ account }) => _.get(account, 'subscription.custom', false);
 export const isSelfServeBilling = any(subscriptionSelfServeIsTrue, isAws);
 export const hasOnlineSupport = ({ account }) => _.get(account, 'support.online', false);

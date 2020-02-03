@@ -1,0 +1,18 @@
+{
+  "first_name": "Test",
+  "last_name": "User",
+  "address1": null,
+  "address2": null,
+  "city": null,
+  "state": "MD",
+  "country_code": "US",
+  "zip_code": "20740",
+  "email": "test.user@sparkpost.com",
+  "credit_card": {
+    "id": "1",
+    "type": "Visa",
+    "number": "************1111",
+    "expiration_month": 9,
+    "expiration_year": 2099
+  }
+}

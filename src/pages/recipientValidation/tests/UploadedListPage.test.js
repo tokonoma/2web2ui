@@ -3,20 +3,23 @@ import { shallow } from 'enzyme';
 import { UploadedListPage } from '../UploadedListPage';
 
 describe('UploadedListPage', () => {
-  const subject = (props = {}) => shallow(
-    <UploadedListPage
-      getJobStatus={() => {}}
-      listId="A1C1_D1C1"
-      job={{
-        jobId: 'A1C1_D1C1',
-        status: 'success',
-        updatedAt: '1997-11-21T15:55:06Z'
-      }}
-      jobLoadingStatus="success"
-      triggerJob={() => {}}
-      {...props}
-    />
-  );
+  const subject = (props = {}) =>
+    shallow(
+      <UploadedListPage
+        getJobStatus={() => {}}
+        getBillingInfo={() => {}}
+        listId="A1C1_D1C1"
+        job={{
+          jobId: 'A1C1_D1C1',
+          status: 'success',
+          updatedAt: '1997-11-21T15:55:06Z',
+        }}
+        jobLoadingStatus="success"
+        triggerJob={() => {}}
+        billing={{}}
+        {...props}
+      />,
+    );
 
   it('renders with list progress', () => {
     expect(subject()).toMatchSnapshot();
@@ -43,25 +46,24 @@ describe('UploadedListPage', () => {
       job: {
         jobId: 'A1C1_D1C1',
         status: 'error',
-        updatedAt: '1997-11-21T15:55:06Z'
-      }
+        updatedAt: '1997-11-21T15:55:06Z',
+      },
     });
 
     expect(wrapper).toMatchSnapshot();
   });
 
   describe('when job is queued', () => {
-    const queuedSubject = (props = {}) => (
+    const queuedSubject = (props = {}) =>
       subject({
         job: {
           jobId: 'B1C1_D1C1',
           status: 'queued_for_batch',
-          updatedAt: '1997-11-21T15:55:06Z'
+          updatedAt: '1997-11-21T15:55:06Z',
         },
         listId: 'B1C1_D1C1',
-        ...props
-      })
-    );
+        ...props,
+      });
 
     it('render with upload form when job is queued', () => {
       const wrapper = queuedSubject();
@@ -75,6 +77,12 @@ describe('UploadedListPage', () => {
       wrapper.find('Connect(UploadedListForm)').simulate('submit');
 
       expect(triggerJob).toHaveBeenCalledWith('B1C1_D1C1');
+    });
+  });
+
+  describe('when standaloneRV flag is set', () => {
+    it('render a ValidateSection', () => {
+      expect(subject({ isStandAloneRVSet: true }).find('Connect(ReduxForm)')).toHaveLength(1);
     });
   });
 });

@@ -18,7 +18,6 @@ import { formatCardTypes } from 'src/helpers/billing';
  * card.securityCode
  */
 export class PaymentForm extends Component {
-
   componentDidMount() {
     const types = Payment.getCardArray();
     // Formats strings for our api (the ones we accept)
@@ -45,18 +44,20 @@ export class PaymentForm extends Component {
     const { disabled } = this.props;
     return (
       <div>
-        <p><small>Credit Card</small></p>
+        <p>
+          <small>Credit Card</small>
+        </p>
         <Field
-          label='Credit Card Number'
-          name='card.number'
-          ref={(input) => this.cc = input}
+          label="Credit Card Number"
+          name="card.number"
+          ref={input => (this.cc = input)}
           component={TextFieldWrapper}
           validate={[required, this.validateType]}
           disabled={disabled}
         />
         <Field
-          label='Cardholder Name'
-          name='card.name'
+          label="Cardholder Name"
+          name="card.name"
           component={TextFieldWrapper}
           validate={required}
           disabled={disabled}
@@ -64,10 +65,10 @@ export class PaymentForm extends Component {
         <Grid>
           <Grid.Column xs={6}>
             <Field
-              label='Expiration Date'
-              name='card.expCombined'
-              ref={(input) => this.expiry = input}
-              placeholder='MM / YY'
+              label="Expiration Date"
+              name="card.expCombined"
+              ref={input => (this.expiry = input)}
+              placeholder="MM / YY"
               component={TextFieldWrapper}
               validate={[required, cardExpiry]}
               disabled={disabled}
@@ -75,10 +76,10 @@ export class PaymentForm extends Component {
           </Grid.Column>
           <Grid.Column xs={6}>
             <Field
-              label='Security Code'
-              name='card.securityCode'
-              ref={(input) => this.cvc = input}
-              placeholder='CVV/CVC'
+              label="Security Code"
+              name="card.securityCode"
+              ref={input => (this.cvc = input)}
+              placeholder="CVV/CVC"
               component={TextFieldWrapper}
               validate={required}
               disabled={disabled}

@@ -9,11 +9,11 @@ describe('Billing Address Form:', () => {
     formName: 'form-name',
     countryValue: 'GG',
     countries: [
-      { value: 'US', label: 'USOFA', states: [{ name: 'mrylnd', value: 'MD' }]},
-      { value: 'CA', label: 'CANADA', states: [{ name: 'alberta', value: 'AB' }]}
+      { value: 'US', label: 'USOFA', states: [{ name: 'mrylnd', value: 'MD' }] },
+      { value: 'CA', label: 'CANADA', states: [{ name: 'alberta', value: 'AB' }] },
     ],
     change: jest.fn(),
-    firstState: 'FirstState'
+    firstState: 'FirstState',
   };
 
   beforeEach(() => {
@@ -32,7 +32,7 @@ describe('Billing Address Form:', () => {
     const stateSpy = jest.spyOn(wrapper.instance(), 'setState');
     wrapper.setProps({ firstName: 'ann', lastName: 'perkins' });
     wrapper.instance().componentDidMount();
-    expect(stateSpy).toHaveBeenCalledWith({ 'showName': false });
+    expect(stateSpy).toHaveBeenCalledWith({ showName: false });
     expect(wrapper).toHaveState('showName', false);
   });
 
@@ -44,12 +44,20 @@ describe('Billing Address Form:', () => {
   describe('on component did update', () => {
     it('should select first state if US is selected', () => {
       wrapper.setProps({ countryValue: 'US' });
-      expect(props.change).toHaveBeenCalledWith(props.formName, 'billingAddress.state', props.firstState);
+      expect(props.change).toHaveBeenCalledWith(
+        props.formName,
+        'billingAddress.state',
+        props.firstState,
+      );
     });
 
     it('should select first state if CA is selected', () => {
       wrapper.setProps({ countryValue: 'CA' });
-      expect(props.change).toHaveBeenCalledWith(props.formName, 'billingAddress.state', props.firstState);
+      expect(props.change).toHaveBeenCalledWith(
+        props.formName,
+        'billingAddress.state',
+        props.firstState,
+      );
     });
 
     it('should deselect state if not US or Canada', () => {

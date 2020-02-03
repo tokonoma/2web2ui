@@ -136,7 +136,11 @@ export default class AppDatePicker extends Component {
   };
 
   handleSubmit = () => {
-    if (this.state.validationError) {
+    const { validate } = this.props;
+
+    const validationError = validate && validate(this.state.selected);
+    if (validationError) {
+      this.setState({ validationError });
       return;
     }
 

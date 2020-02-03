@@ -102,6 +102,7 @@ const FilterSortCollectionRow = ({
   />,
 ];
 
+//TODO See if minDays from /helpers/validation can be used
 const validateDate = ({ from, to }) => {
   const momentFrom = moment(from);
   const momentTo = moment(to);

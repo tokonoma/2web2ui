@@ -21,7 +21,7 @@ const accountBillingSelector = state => state.account.billing;
 const accountBilling = state => state.billing;
 const selectIsAws = selectCondition(isAws);
 const selectIsCustomBilling = selectCondition(isCustomBilling);
-const selectIsSelfServeBilling = selectCondition(isSelfServeBilling);
+export const selectIsSelfServeBilling = selectCondition(isSelfServeBilling);
 const selectIsCcFree1 = selectCondition(onPlan('ccfree1'));
 const selectIsFree1 = selectCondition(onPlan('free1'));
 const selectOnZuoraPlan = selectCondition(onZuoraPlan);

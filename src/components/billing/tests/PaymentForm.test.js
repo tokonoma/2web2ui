@@ -13,7 +13,7 @@ describe('Payment Form: ', () => {
 
   const props = {
     formName: 'form-name',
-    change: jest.fn()
+    change: jest.fn(),
   };
 
   beforeEach(() => {
