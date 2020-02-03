@@ -34,7 +34,13 @@ export class SingleAddressForm extends Component {
 
             <Field
               id="email-address-field"
-              style={styles[this.getClassName('EmailAddressFieldSRV')]}
+              style={
+                !this.props.isStandAloneRVSet && {
+                  height: '3.22rem',
+                  paddingLeft: '1.5em',
+                  fontSize: '0.9em',
+                }
+              }
               name="address"
               component={TextFieldWrapper}
               placeholder={'harry.potter@hogwarts.edu'}
