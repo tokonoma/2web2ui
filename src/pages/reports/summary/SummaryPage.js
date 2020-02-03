@@ -15,8 +15,8 @@ export class SummaryReportPage extends Component {
   state = {
     metricsModal: false,
     eventTime: 'real',
-    scale: 'linear'
-  }
+    scale: 'linear',
+  };
 
   componentDidUpdate(prevProps) {
     if (prevProps.reportOptions !== this.props.reportOptions) {
@@ -27,33 +27,38 @@ export class SummaryReportPage extends Component {
   renderLoading() {
     const { chart } = this.props;
     if (chart.chartLoading) {
-      return <div className={styles.Loading}><Loading /></div>;
+      return (
+        <div className={styles.Loading}>
+          <Loading />
+        </div>
+      );
     }
   }
 
-  handleMetricsApply = (selectedMetrics) => {
+  handleMetricsApply = selectedMetrics => {
     this.setState({ metricsModal: false });
     this.props.refreshReportOptions({ metrics: selectedMetrics });
-  }
+  };
 
   handleMetricsModal = () => {
     this.setState({ metricsModal: !this.state.metricsModal });
-  }
+  };
 
-  handleTimeClick = (time) => {
+  handleTimeClick = time => {
     this.setState({ eventTime: time });
-  }
+  };
 
-  handleScaleClick = (scale) => {
+  handleScaleClick = scale => {
     this.setState({ scale });
-  }
+  };
 
   render() {
-    const { chart, summarySearchOptions, enhancementsEnabled } = this.props;
+    const { chart, summarySearchOptions = {}, enhancementsEnabled } = this.props;
+    const { to } = summarySearchOptions;
     const { scale, eventTime, metricsModal } = this.state;
 
     return (
-      <Page title='Summary Report'>
+      <Page title="Summary Report">
         <ReportOptions
           reportLoading={chart.chartLoading}
           searchOptions={summarySearchOptions}
@@ -61,7 +66,9 @@ export class SummaryReportPage extends Component {
         />
 
         <Panel>
-          <Panel.Section className={classnames(styles.ChartSection, chart.chartLoading && styles.pending)}>
+          <Panel.Section
+            className={classnames(styles.ChartSection, chart.chartLoading && styles.pending)}
+          >
             <ChartHeader
               selectedMetrics={chart.metrics}
               selectedTime={eventTime}
@@ -70,7 +77,7 @@ export class SummaryReportPage extends Component {
               onTimeClick={this.handleTimeClick}
               onMetricsToggle={this.handleMetricsModal}
             />
-            <ChartGroup {...chart} yScale={scale} />
+            <ChartGroup {...chart} to={to} yScale={scale} />
           </Panel.Section>
 
           {this.renderLoading()}
@@ -82,22 +89,23 @@ export class SummaryReportPage extends Component {
           selectedMetrics={chart.metrics}
           open={metricsModal}
           onCancel={this.handleMetricsModal}
-          onSubmit={this.handleMetricsApply} />
+          onSubmit={this.handleMetricsApply}
+        />
       </Page>
     );
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   chart: state.summaryChart,
   reportOptions: state.reportOptions,
   summarySearchOptions: selectSummaryChartSearchOptions(state),
-  enhancementsEnabled: selectReportsEnhancementsEnabled(state)
+  enhancementsEnabled: selectReportsEnhancementsEnabled(state),
 });
 
 const mapDispatchToProps = {
   refreshReportOptions,
-  refreshSummaryReport
+  refreshSummaryReport,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SummaryReportPage);
