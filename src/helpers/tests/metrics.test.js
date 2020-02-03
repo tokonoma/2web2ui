@@ -119,12 +119,12 @@ describe('metrics helpers', () => {
     expect(metricsHelpers.getMomentPrecision(from, to)).toEqual('days');
   });
 
-  it('should return hours as precision type', () => {
-    expect(metricsHelpers.getPrecisionType('1min')).toEqual('hours');
+  it('should return hours as precision type for time <= 2 days', () => {
+    expect(metricsHelpers.getPrecisionType('1min')).toEqual('hour');
   });
 
-  it('should return days as precision type', () => {
-    expect(metricsHelpers.getPrecisionType('day')).toEqual('days');
+  it('should return the same precision if precision type > 2 days', () => {
+    expect(metricsHelpers.getPrecisionType('day')).toEqual('day');
   });
 
   describe('roundBoundaries', () => {
