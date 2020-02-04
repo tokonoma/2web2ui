@@ -30,13 +30,15 @@ exports[`Signals Health Score Gauge Container renders happy path correctly 1`] =
           "barColor": "#2CC995",
           "color": "#2CC995",
           "condition": [Function],
-          "description": <React.Fragment>
+          "description": <span
+            data-id="health-score-above-80-description"
+          >
             A Health score above 80 is considered to be 
             <strong>
               good
             </strong>
             .
-          </React.Fragment>,
+          </span>,
           "icon": [Function],
         }
       }
@@ -56,11 +58,15 @@ exports[`Signals Health Score Gauge Container renders happy path correctly 1`] =
       <p
         className="DescriptionContent"
       >
-        A Health score above 80 is considered to be 
-        <strong>
-          good
-        </strong>
-        .
+        <span
+          data-id="health-score-above-80-description"
+        >
+          A Health score above 80 is considered to be 
+          <strong>
+            good
+          </strong>
+          .
+        </span>
       </p>
     </div>
     <div
@@ -68,12 +74,14 @@ exports[`Signals Health Score Gauge Container renders happy path correctly 1`] =
     >
       <MetricDisplay
         color="#FF594D"
+        data-id="health-score-wow-change"
         direction="down"
         label="WoW Change"
         value="-5%"
       />
       <MetricDisplay
         color="#2CC995"
+        data-id="health-score-dod-change"
         direction="up"
         label="DoD Change"
         value="5%"
