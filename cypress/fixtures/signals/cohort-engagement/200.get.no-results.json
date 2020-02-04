@@ -1,0 +1,19 @@
+{
+  "results": {
+    "total_count": 0,
+    "data": [
+      {
+        "current_c_total": 140753,
+        "current_c_new": 11501,
+        "current_c_14d": 40316,
+        "current_c_90d": 49699,
+        "current_c_365d": 16923,
+        "current_c_uneng": 22314,
+        "current_relative_c_14d": 0.286430839840003,
+        "sid": 102,
+        "WoW": -0.05,
+        "history": []
+      }
+    ]
+  }
+}
