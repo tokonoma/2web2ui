@@ -33,3 +33,7 @@
     }
   }
 }
+
+.ScreenReaderOnly {
+  @include visually-hidden();
+}

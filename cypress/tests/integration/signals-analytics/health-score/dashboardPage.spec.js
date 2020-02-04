@@ -172,7 +172,7 @@ describe('The health score dashboard page', () => {
       cy.wait('@getHealthScore'); // Two requests are made
     });
 
-    it.only('renders each subaccount along with the current health score for that subaccount', () => {
+    it('renders each subaccount along with the current health score for that subaccount', () => {
       function assertTableRow({
         rowIndex,
         subaccount,
@@ -257,6 +257,15 @@ describe('The health score dashboard page', () => {
 
       //   cy.findByText('No Data Available').should('be.visible');
       // });
+
+      it('re-requests data when filtering by breakdown and renders a search field', () => {
+        cy.findByLabelText('Search By').should('not.be.visible');
+
+        cy.findByLabelText('Filter By').select('By Campaign');
+
+        cy.findByText('No Data Available').should('be.visible');
+        cy.findByLabelText('Search By').should('be.visible');
+      });
 
       it('re-requests data when clicking on "Subaccount"', () => {
         cy.findByText('Subaccount').click();
