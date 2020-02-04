@@ -120,7 +120,7 @@
     "@babel/core": "7.1.6",
     "@storybook/addon-docs": "^5.2.6",
     "@storybook/addon-links": "^5.3.11",
-    "@storybook/addons": "^5.2.6",
+    "@storybook/addons": "^5.3.11",
     "@storybook/react": "^5.2.6",
     "@testing-library/cypress": "^5.0.2",
     "@testing-library/jest-dom": "^4.2.4",
