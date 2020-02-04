@@ -102,17 +102,14 @@ export class RecipientValidationPage extends Component {
 
         {selectedTab === 0 && <JobsTableCollection />}
 
-        {selectedTab === 1 && isStandAloneRVSet && !billingLoading && (
-          <ValidateSection credit_card={billing.credit_card} handleValidate={() => {}} />
-        )}
-
-        {selectedTab === 2 && isStandAloneRVSet && (
+        {(selectedTab === 1 || selectedTab === 2) && isStandAloneRVSet && !billingLoading && (
           <ValidateSection
             credit_card={billing.credit_card}
             handleValidate={() => {}}
-            submitButtonName={'Create API Key'}
+            submitButtonName={selectedTab === 2 ? 'Create API Key' : 'Validate'}
           />
         )}
+
         <Modal open={showPriceModal} onClose={() => this.handleModal(false)}>
           {this.renderRVPriceModal()}
         </Modal>
