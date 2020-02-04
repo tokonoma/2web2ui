@@ -132,6 +132,38 @@ const testCases = {
       muted: false,
     },
   },
+  'for unfiltered blacklist alert': {
+    formData: {
+      name: 'foo',
+      metric: 'blacklist',
+      subaccounts: [], // default
+      blacklist_provider: [],
+      blacklist_resource: [],
+      emails,
+      slack: '',
+      webhook: '',
+      muted: false,
+    },
+    apiData: {
+      name: 'foo',
+      metric: 'blacklist',
+      any_subaccount: undefined,
+      subaccounts: [-1],
+      filters: [
+        {
+          filter_type: 'blacklist_provider',
+          filter_values: [],
+        },
+        {
+          filter_type: 'blacklist_resource',
+          filter_values: [],
+        },
+      ],
+      threshold_evaluator: {},
+      channels: { emails: emailAsArray },
+      muted: false,
+    },
+  },
 };
 
 describe('formatFormValues', () => {

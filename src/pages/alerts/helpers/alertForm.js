@@ -75,7 +75,11 @@ const metricToFormSpecMap = {
       FILTERS_FRIENDLY_NAMES,
     ),
     sourceOptions: [],
-    defaultFieldValues: [{ fieldName: 'subaccounts', fieldValue: [] }],
+    defaultFieldValues: [
+      { fieldName: 'blacklist_provider', fieldValue: [] },
+      { fieldName: 'blacklist_resource', fieldValue: [] },
+      { fieldName: 'subaccounts', fieldValue: [] },
+    ],
   },
 };
 

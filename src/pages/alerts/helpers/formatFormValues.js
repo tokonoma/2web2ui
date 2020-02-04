@@ -32,7 +32,7 @@ export default function formatFormValues(values) {
   For multi: Loops through the realtime filters and adds the filters that have values.
   By default, return an empty array.
    */
-  const { filterOptions, filterType, hideEvaluator } = getFormSpec(metric);
+  const { filterOptions, filterType } = getFormSpec(metric);
 
   const getFiltersMap = {
     single: () => (single_filter.filter_type === 'none' ? [] : [single_filter]),
@@ -40,7 +40,8 @@ export default function formatFormValues(values) {
       filterOptions
         .map(
           ({ value: filter_type }) =>
-            values[filter_type].length > 0 && {
+            // blacklist filters must always be present even if empty
+            (values[filter_type].length > 0 || metric === 'blacklist') && {
               filter_type,
               filter_values: values[filter_type],
             },
@@ -71,7 +72,7 @@ export default function formatFormValues(values) {
     subaccounts: any_subaccount ? undefined : subaccounts,
     any_subaccount,
     filters,
-    threshold_evaluator: hideEvaluator ? {} : { operator, source, value },
+    threshold_evaluator: { operator, source, value },
     channels,
   };
 
