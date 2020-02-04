@@ -608,6 +608,7 @@ const routes = [
       not(isHeroku),
       not(isAzure),
       not(isCustomBilling),
+      not(isAws),
     ),
     layout: App,
     title: 'Billing | Change My Plan',
