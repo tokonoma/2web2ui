@@ -1,10 +1,6 @@
 const PAGE_BASE_URL = '/signals/health-score/sid';
 const PAGE_URL = `${PAGE_BASE_URL}/102`;
-
-// Sets the browser date to February 2nd, 2020 to remain in step with fixtures
-function stubBrowserDate() {
-  cy.clock(1580741099000);
-}
+const UNIX_STUBBED_DATE = 1580741099000; // Used to set the browser's date to February 2nd, 2020 to remain in step with fixtures
 
 describe('The health score by subaccount page', () => {
   beforeEach(() => {
@@ -38,7 +34,7 @@ describe('The health score by subaccount page', () => {
   });
 
   it('renders health score weights when weights are available for the selected date', () => {
-    stubBrowserDate();
+    cy.clock(UNIX_STUBBED_DATE);
     cy.visit(PAGE_URL);
 
     cy.get('[data-id="health-score-components"]').within(() => {
@@ -60,7 +56,7 @@ describe('The health score by subaccount page', () => {
   it('renders Recharts chart within the "Health Score", "Spam Trap Monitoring", and "Engagement Recency" panels', () => {
     const rechartsSelector = '.recharts-wrapper';
 
-    stubBrowserDate();
+    cy.clock(UNIX_STUBBED_DATE);
     cy.visit(PAGE_URL);
 
     // Grabbing a class like this isn't ideal as the test is now tied
@@ -81,7 +77,7 @@ describe('The health score by subaccount page', () => {
   });
 
   it('renders the two 2 recommendations to the user based on health score history', () => {
-    stubBrowserDate();
+    cy.clock(UNIX_STUBBED_DATE);
     cy.visit(PAGE_URL);
 
     cy.findByText("You're sending to a high rate of problematic email addresses.").should(
@@ -91,7 +87,7 @@ describe('The health score by subaccount page', () => {
   });
 
   it('renders no recommendations when all contributing weights are positive', () => {
-    stubBrowserDate();
+    cy.clock(UNIX_STUBBED_DATE);
     cy.visit(`${PAGE_BASE_URL}/101`);
 
     cy.findByText('No actions to display at this time.').should('be.visible');
@@ -99,7 +95,7 @@ describe('The health score by subaccount page', () => {
 
   describe('empty states', () => {
     beforeEach(() => {
-      stubBrowserDate();
+      cy.clock(UNIX_STUBBED_DATE);
     });
 
     it('does not render a breakdown of the health score composition when no weights are available in the returned health score history', () => {
@@ -108,7 +104,7 @@ describe('The health score by subaccount page', () => {
         fixture: 'signals/health-score/200.get.no-current-weights.json',
       });
 
-      stubBrowserDate();
+      cy.clock(UNIX_STUBBED_DATE);
       cy.visit(PAGE_URL);
 
       cy.get('[data-id="health-score-components"]').within(() => {

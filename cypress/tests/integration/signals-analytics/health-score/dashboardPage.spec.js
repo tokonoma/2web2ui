@@ -166,10 +166,6 @@ describe('The health score dashboard page', () => {
       cy.wait('@getHealthScore');
     });
 
-    it('renders by default with "Master & All Subaccounts" and "No Breakdown" selected', () => {
-      // TODO: Why isn't the master account rendering?
-    });
-
     it('renders each subaccount along with the current health score for that subaccount', () => {
       cy.get('tbody tr')
         .eq(0)
