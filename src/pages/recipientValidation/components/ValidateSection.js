@@ -37,18 +37,18 @@ function ValidateSection({
     );
   }
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <>
       <CreditCardSection
         creditCard={credit_card}
         handleCardToggle={() => {}}
         formname={FORMNAME}
         countries={billingCountries || []}
       />
-      <Button color="orange" type="submit">
+      <Button color="orange" type="submit" onClick={handleSubmit(onSubmit)}>
         {/* functionality to validate to be added in AC-1196 and AC-1197*/}
         {submitButtonName}
       </Button>
-    </form>
+    </>
   );
 }
 

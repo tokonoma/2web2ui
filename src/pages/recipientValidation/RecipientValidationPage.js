@@ -15,6 +15,10 @@ import { isAccountUiOptionSet } from 'src/helpers/conditions/account';
 import styles from './RecipientValidationPage.module.scss';
 import ValidateSection from './components/ValidateSection';
 import { getBillingInfo } from 'src/actions/account';
+import { reduxForm } from 'redux-form';
+import { FORMS } from 'src/constants';
+
+const FORMNAME = FORMS.RV_ADDPAYMENTFORM;
 
 const tabs = [
   { content: <span className={styles.TabPadding}>List</span>, key: 'list' },
@@ -162,7 +166,13 @@ export class RecipientValidationPage extends Component {
         </Case>
       </ConditionSwitch>
     ) : (
-      this.renderRecipientValidation()
+      <form
+        onSubmit={() => {
+          console.log('submitted');
+        }}
+      >
+        {this.renderRecipientValidation()}
+      </form>
     );
   }
 }
@@ -174,4 +184,9 @@ const mapStateToProps = (state, props) => ({
   billingLoading: state.account.billingLoading,
 });
 
-export default withRouter(connect(mapStateToProps, { getBillingInfo })(RecipientValidationPage));
+// export default withRouter(connect(mapStateToProps, { getBillingInfo })(RecipientValidationPage));
+
+const formOptions = { form: FORMNAME, enableReinitialize: true };
+export default withRouter(
+  connect(mapStateToProps, { getBillingInfo })(reduxForm(formOptions)(RecipientValidationPage)),
+);
