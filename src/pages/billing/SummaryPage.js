@@ -13,7 +13,8 @@ import BillingSummary from './components/BillingSummary';
 import ManuallyBilledBanner from './components/ManuallyBilledBanner';
 import SuspendedForBilling from './components/SuspendedForBilling';
 import { list as getInvoices } from 'src/actions/invoices';
-import { isBillingSubscriptionSelfServe } from 'src/helpers/conditions/account';
+import { isBillingSubscriptionSelfServe, isAws } from 'src/helpers/conditions/account';
+import { any } from 'src/helpers/conditions';
 export class BillingSummaryPage extends Component {
   componentDidMount() {
     const {
@@ -59,7 +60,7 @@ export class BillingSummaryPage extends Component {
       <ManuallyBilledBanner
         account={account}
         onZuoraPlan={billingInfo.onZuoraPlan}
-        condition={defaultCase}
+        condition={any(isAws, () => !isBillingSubscriptionSelfServe(billingInfo))}
         key={'manually-billed-banner'}
       />
     );
@@ -76,9 +77,7 @@ export class BillingSummaryPage extends Component {
         key={'billing-summary'}
       />
     );
-    if (!isBillingSubscriptionSelfServe(billingInfo))
-      return [suspendedBilling, manuallyBilledBanner, billingSummary];
-    return [suspendedBilling, billingSummary];
+    return [suspendedBilling, manuallyBilledBanner, billingSummary];
   };
   render() {
     const { loading } = this.props;

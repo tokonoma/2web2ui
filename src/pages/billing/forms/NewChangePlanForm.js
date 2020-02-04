@@ -10,9 +10,6 @@ import CurrentPlanSection from '../components/CurrentPlanSection';
 import useRouter from 'src/hooks/useRouter';
 import SubmitSection from '../components/SubmitSection';
 import CardSection from '../components/CardSection';
-import { isAws } from 'src/helpers/conditions/account';
-import { not } from 'src/helpers/conditions';
-import AccessControl from 'src/components/auth/AccessControl';
 
 import FeatureChangeSection from '../components/FeatureChangeSection';
 import { FeatureChangeContextProvider } from '../context/FeatureChangeContext';
@@ -27,7 +24,6 @@ import {
   getPromoCodeObject,
 } from 'src/selectors/accountBillingInfo';
 import { changePlanInitialValues } from 'src/selectors/accountBillingForms';
-import { selectCondition } from 'src/selectors/accessConditionState';
 
 import { ApiErrorBanner } from 'src/components';
 import { Loading } from 'src/components/loading/Loading';
@@ -54,7 +50,6 @@ export const ChangePlanForm = ({
   billingUpdate,
   billingCreate,
   showAlert,
-  ...restProps
 }) => {
   const { billingCountries, account, bundles, loading, error } = useChangePlanContext();
 
@@ -99,7 +94,6 @@ export const ChangePlanForm = ({
     }
   }, [applyPromoCode, promo, selectedBundle, verifyPromoCode]);
   const onSubmit = values => {
-    const { isAws } = restProps;
     const newCode = selectedBundleCode;
     const { selectedPromo } = promoCodeObj;
     const billingId = _.get(selectedBundle, 'messaging.billing_id');
@@ -128,10 +122,7 @@ export const ChangePlanForm = ({
       .then(({ discount_id }) => {
         newValues.discountId = discount_id;
         // decides which action to be taken based on
-        // if it's aws account, it already has billing and if you use a saved CC
-        if (isAws) {
-          return updateSubscription({ code: newCode });
-        } else if (account.billing) {
+        if (account.billing) {
           return useSavedCC || isDowngradeToFree
             ? updateSubscription({ bundle: newCode, promoCode: selectedPromo.promoCode })
             : billingUpdate(newValues);
@@ -180,18 +171,16 @@ export const ChangePlanForm = ({
               <FeatureChangeContextProvider selectedBundle={selectedBundle}>
                 <FeatureChangeSection />
                 {!isDowngradeToFree && (
-                  <AccessControl condition={not(isAws)}>
-                    <CardSection
-                      account={account}
-                      countries={billingCountries}
-                      selectedPlan={selectedBundle}
-                      canUpdateBillingInfo={canUpdateBillingInfo}
-                      submitting={submitting}
-                      isNewChangePlanForm={true} //TODO: remove this when removing the OldChangePlanForm
-                      defaultToggleState={!useSavedCC}
-                      handleCardToggle={handleCardToggle}
-                    />
-                  </AccessControl>
+                  <CardSection
+                    account={account}
+                    countries={billingCountries}
+                    selectedPlan={selectedBundle}
+                    canUpdateBillingInfo={canUpdateBillingInfo}
+                    submitting={submitting}
+                    isNewChangePlanForm={true} //TODO: remove this when removing the OldChangePlanForm
+                    defaultToggleState={!useSavedCC}
+                    handleCardToggle={handleCardToggle}
+                  />
                 )}
 
                 <SubmitSection
@@ -217,7 +206,6 @@ const mapStateToProps = (state, props) => {
     initialValues: changePlanInitialValues(state, { planCode, promoCode }),
     canUpdateBillingInfo: canUpdateBillingInfoSelector(state),
     currentPlan: currentPlanSelector(state),
-    isAws: selectCondition(isAws)(state),
     promoCodeObj: getPromoCodeObject(state),
   };
 };
