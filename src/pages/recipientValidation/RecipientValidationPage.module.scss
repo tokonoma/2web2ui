@@ -19,3 +19,27 @@
 .bodyContainer {
   padding: 2rem 3rem;
 }
+
+.TabsWrapper {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #e1e1e6;
+
+  > div {
+    box-shadow: none;
+    height: 50px; // to match preview control bar and tabs
+    border-bottom: none;
+
+    > a {
+      display: inline-flex;
+      align-items: center;
+      height: 100%;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+  }
+}
+
+.LaunchIcon {
+  color: color(blue);
+}

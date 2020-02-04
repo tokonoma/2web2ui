@@ -58,11 +58,9 @@ export const ApiIntegrationDocs = ({ isStandAloneRVSet }) => {
 
   const buttonRow = (
     <div>
-      {!isStandAloneRVSet && (
-        <Button color="orange" component={Link} to="/account/api-keys/create">
-          Create API Key
-        </Button>
-      )}
+      <Button color="orange" component={Link} to="/account/api-keys/create">
+        Create API Key
+      </Button>
       <Button
         className={!isStandAloneRVSet && styles.ApiDocsLink}
         external
@@ -85,7 +83,7 @@ export const ApiIntegrationDocs = ({ isStandAloneRVSet }) => {
             Block fake emails and catch typos with a single API request.
           </p>
           {exampleMethod}
-          {buttonRow}
+          {!isStandAloneRVSet && buttonRow}
         </Grid.Column>
         <Grid.Column xs={12} md={6} lgOffset={1}>
           <div className={styles.CodeSection}>

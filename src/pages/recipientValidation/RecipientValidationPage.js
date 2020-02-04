@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Page, Tabs, Panel, Modal, Button } from '@sparkpost/matchbox';
-import { Close } from '@sparkpost/matchbox-icons';
+import { Close, Launch } from '@sparkpost/matchbox-icons';
 import JobsTableCollection from './components/JobsTableCollection';
 import ListForm from './components/ListForm';
 import SingleAddressForm from './components/SingleAddressForm';
@@ -91,15 +91,50 @@ export class RecipientValidationPage extends Component {
           problems, including syntax errors and non-existent mailboxes, to drive better
           deliverability, cut down on fraud, and capture every opportunity.
         </p>
+        {!isStandAloneRVSet && (
+          <>
+            <Tabs
+              selected={selectedTab}
+              connectBelow={true}
+              tabs={tabs.map(({ content }, idx) => ({
+                content,
+                onClick: () => this.handleTabs(idx),
+              }))}
+            />
 
-        <Tabs
-          selected={selectedTab}
-          connectBelow={true}
-          tabs={tabs.map(({ content }, idx) => ({ content, onClick: () => this.handleTabs(idx) }))}
-        />
+            <Panel>{this.renderTabContent(selectedTab)}</Panel>
+          </>
+        )}
 
-        <Panel>{this.renderTabContent(selectedTab)}</Panel>
+        {isStandAloneRVSet && (
+          <Panel>
+            <div className={styles.TabsWrapper}>
+              <Tabs
+                selected={selectedTab}
+                connectBelow={true}
+                tabs={tabs.map(({ content }, idx) => ({
+                  content,
+                  onClick: () => this.handleTabs(idx),
+                }))}
+              />
 
+              {selectedTab === 2 && (
+                <div className={styles.TagWrapper}>
+                  <Button
+                    flat
+                    style={{ marginTop: '0.2rem' }}
+                    external
+                    to="https://developers.sparkpost.com/api/recipient-validation/"
+                  >
+                    API Docs &nbsp;
+                    <Launch className={styles.LaunchIcon} />
+                  </Button>
+                </div>
+              )}
+            </div>
+            <Panel.Section>{this.renderTabContent(selectedTab)}</Panel.Section>
+          </Panel>
+        )}
         {selectedTab === 0 && <JobsTableCollection />}
 
         {(selectedTab === 1 || selectedTab === 2) && isStandAloneRVSet && !billingLoading && (
