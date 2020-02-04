@@ -1,0 +1,9 @@
+{
+  "results": {
+    "campaigns": ["sparkpost-test"],
+    "domains": [],
+    "ip-pools": [],
+    "templates": [],
+    "sending-ips": []
+  }
+}
