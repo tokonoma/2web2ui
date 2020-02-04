@@ -114,7 +114,7 @@ export class HealthScorePage extends Component {
     return (
       <Grid>
         <Grid.Column sm={12} md={7}>
-          <Panel sectioned>
+          <Panel sectioned data-id="health-score-panel">
             <ChartHeader title="Health Score" tooltipContent={HEALTH_SCORE_INFO} />
             {panelContent || (
               <Fragment>
@@ -208,7 +208,7 @@ export class HealthScorePage extends Component {
           </Panel>
         </Grid.Column>
         <Grid.Column sm={12} md={5} mdOffset={0}>
-          <div className={styles.OffsetCol}>
+          <div className={styles.OffsetCol} data-id="health-score-components">
             <ChartHeader
               title="Health Score Components"
               date={selectedDate}
@@ -261,11 +261,15 @@ export class HealthScorePage extends Component {
         <Grid>
           {facet !== 'mb_provider' && (
             <Grid.Column xs={12} sm={6}>
-              <SpamTrapsPreview />
+              <div data-id="spam-traps-panel">
+                <SpamTrapsPreview />
+              </div>
             </Grid.Column>
           )}
           <Grid.Column xs={12} sm={6}>
-            <EngagementRecencyPreview />
+            <div data-id="engagement-recency-panel">
+              <EngagementRecencyPreview />
+            </div>
           </Grid.Column>
         </Grid>
       </Page>
