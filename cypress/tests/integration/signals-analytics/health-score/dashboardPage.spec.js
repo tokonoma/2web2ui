@@ -1,5 +1,6 @@
 const PAGE_URL = '/signals/health-score';
 const API_URL = '/api/v1/signals/health-score/**/*';
+const UNIX_STUBBED_DATE = 1580741099000; // Used to set the browser's date to February 2nd, 2020 to remain in step with fixtures
 
 describe('The health score dashboard page', () => {
   beforeEach(() => {
@@ -71,6 +72,8 @@ describe('The health score dashboard page', () => {
   // });
 
   describe('health score value', () => {
+    beforeEach(() => cy.clock(UNIX_STUBBED_DATE));
+
     it('renders to the page as a value, rounded to the nearest single digit', () => {
       cy.visit(PAGE_URL);
 
@@ -155,6 +158,8 @@ describe('The health score dashboard page', () => {
 
   describe('the subaccount table', () => {
     beforeEach(() => {
+      cy.clock(UNIX_STUBBED_DATE);
+
       cy.stubRequest({
         url: API_URL,
         fixture: 'signals/health-score/200.get.with-subaccounts.json',
@@ -164,32 +169,76 @@ describe('The health score dashboard page', () => {
       cy.visit(PAGE_URL);
 
       cy.wait('@getHealthScore');
+      cy.wait('@getHealthScore'); // Two requests are made
     });
 
-    it('renders each subaccount along with the current health score for that subaccount', () => {
-      cy.get('tbody tr')
-        .eq(0)
-        .within(() => {
-          cy.findByText('Fake Subaccount 1 (101)').should('be.visible');
-          cy.findByText('10').should('be.visible'); // Current score
-          cy.findByText('15').should('be.visible'); // Average score
-        });
+    it.only('renders each subaccount along with the current health score for that subaccount', () => {
+      function assertTableRow({
+        rowIndex,
+        subaccount,
+        currentScore,
+        currentInjections,
+        WoW,
+        averageScore,
+      }) {
+        cy.get('tbody tr')
+          .eq(rowIndex)
+          .within(() => {
+            cy.get('td')
+              .eq(0)
+              .within(() => cy.findByText(subaccount).should('be.visible'));
+            cy.get('td')
+              .eq(2)
+              .within(() => cy.findByText(currentScore.toString()).should('be.visible'));
+            cy.get('td')
+              .eq(3)
+              .within(() => cy.findByText(currentInjections.toString()).should('be.visible'));
+            cy.get('td')
+              .eq(4)
+              .within(() => cy.findByText(WoW).should('be.visible'));
+            cy.get('td')
+              .eq(5)
+              .within(() => cy.findByText(averageScore.toString()).should('be.visible'));
+          });
+      }
+      // Grabbing the data in each of the cells in the table row. The chart isn't interpretable
+      // by Cypress, which indicates an a11y problem.
 
-      cy.get('tbody tr')
-        .eq(1)
-        .within(() => {
-          cy.findByText('Fake Subaccount 2 (102)').should('be.visible');
-          cy.findByText('20').should('be.visible'); // Current score
-          cy.findByText('25').should('be.visible'); // Average score
-        });
+      assertTableRow({
+        rowIndex: 0,
+        subaccount: 'Master Account',
+        currentScore: 10,
+        currentInjections: 12,
+        WoW: '10%',
+        averageScore: 15,
+      });
 
-      cy.get('tbody tr')
-        .eq(2)
-        .within(() => {
-          cy.findByText('Fake Subaccount 3 (103)').should('be.visible');
-          cy.findByText('30').should('be.visible'); // Current score
-          cy.findByText('35').should('be.visible'); // Average score
-        });
+      assertTableRow({
+        rowIndex: 1,
+        subaccount: 'Fake Subaccount 1 (101)',
+        currentScore: 20,
+        currentInjections: 34,
+        WoW: '20%',
+        averageScore: 25,
+      });
+
+      assertTableRow({
+        rowIndex: 2,
+        subaccount: 'Fake Subaccount 2 (102)',
+        currentScore: 30,
+        currentInjections: 56,
+        WoW: '30%',
+        averageScore: 35,
+      });
+
+      assertTableRow({
+        rowIndex: 3,
+        subaccount: 'Fake Subaccount 3 (103)',
+        currentScore: 40,
+        currentInjections: 78,
+        WoW: '40%',
+        averageScore: 45,
+      });
     });
 
     describe('sorting re-rerequests health score data', () => {
@@ -199,6 +248,15 @@ describe('The health score dashboard page', () => {
           fixture: 'signals/health-score/200.get.no-results.json',
         });
       });
+
+      // it('re-requests data when filtering by "Master Account"', () => {
+      //   cy.findByText('Master & All Subaccounts')
+      //     .closest('button') // This is an a11y bug! The
+      //     .click();
+      //   cy.findByText('Master Account').click();
+
+      //   cy.findByText('No Data Available').should('be.visible');
+      // });
 
       it('re-requests data when clicking on "Subaccount"', () => {
         cy.findByText('Subaccount').click();
