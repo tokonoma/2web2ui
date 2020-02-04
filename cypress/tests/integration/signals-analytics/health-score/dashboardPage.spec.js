@@ -1,7 +1,7 @@
 const PAGE_URL = '/signals/health-score';
 const API_URL = '/api/v1/signals/health-score/**/*';
 
-describe('The health score page', () => {
+describe('The health score dashboard page', () => {
   beforeEach(() => {
     cy.stubAuth();
     cy.login({ isStubbed: true });
