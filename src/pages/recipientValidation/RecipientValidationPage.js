@@ -126,7 +126,7 @@ export class RecipientValidationPage extends Component {
                     external
                     to="https://developers.sparkpost.com/api/recipient-validation/"
                   >
-                    API Docs &nbsp;
+                    API Docs
                     <Launch className={styles.LaunchIcon} />
                   </Button>
                 </div>
