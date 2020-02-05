@@ -125,7 +125,7 @@ describe('The events page', () => {
       });
 
       cy.findByLabelText('Filter by Recipient Email Address')
-        .type('hello@gmail.com')
+        .type('different-recipient@hotmail.com')
         .blur();
 
       cy.wait('@eventsRequest');
