@@ -80,10 +80,40 @@ describe('The events page', () => {
   });
 
   describe('filtering', () => {
-    // TODO: Work on this test once `TR-2133` is merged
-    // it('re-requests events data when changing the filter date', () => {
-    //   cy.visit(PAGE_URL);
-    // });
+    describe('by date', () => {
+      it('re-requests data when filtering by "Broad Date Range"', () => {
+        cy.visit(PAGE_URL);
+
+        cy.queryByText('different-results@hotmail.com').should('not.be.visible');
+
+        cy.stubRequest({
+          url: '/api/v1/events/message*',
+          fixture: 'events/message/200.get.different-results.json',
+          requestAlias: 'eventsRequest',
+        });
+
+        cy.findByLabelText('Broad Date Range').select('Last 24 Hours');
+
+        cy.findByText('different-results@hotmail.com').should('be.visible');
+      });
+
+      it('re-requests data when filtering by "Narrow Date Range"', () => {
+        cy.visit(PAGE_URL);
+
+        cy.queryByText('different-results@hotmail.com').should('not.be.visible');
+
+        cy.stubRequest({
+          url: '/api/v1/events/message*',
+          fixture: 'events/message/200.get.different-results.json',
+          requestAlias: 'eventsRequest',
+        });
+
+        cy.findByLabelText('Narrow Date Range').click();
+        cy.findByText('Apply').click();
+
+        cy.findByText('different-results@hotmail.com').should('be.visible');
+      });
+    });
 
     it('re-requests events data when the user filters by a recipient email address', () => {
       cy.visit(PAGE_URL);
