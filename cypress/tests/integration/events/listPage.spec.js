@@ -130,7 +130,7 @@ describe('The events page', () => {
 
       cy.wait('@eventsRequest');
 
-      cy.findByText('Recipients: hello@gmail.com').should('be.visible');
+      cy.findByText('Recipients: different-recipient@hotmail.com').should('be.visible');
       cy.findByText('Clear All Filters').should('be.visible');
       cy.findByText('different-recipient@hotmail.com').should('be.visible'); // The new results are visible...
       cy.queryByText('fake-recipient@hotmail.com').should('not.be.visible'); // ...and the old results are not!
