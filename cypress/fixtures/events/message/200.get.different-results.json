@@ -12,7 +12,7 @@
       "msg_from": "fake-sender@yahoo.com",
       "recv_method": "esmtp",
       "rcpt_to": "different-recipient@hotmail.com",
-      "transmission_id": "21175596944301160",
+      "transmission_id": "123",
       "campaign_id": "fake-campaign",
       "click_tracking": true,
       "rcpt_meta": {
