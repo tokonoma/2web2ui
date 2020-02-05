@@ -8,7 +8,7 @@ import { uploadList, resetUploadError } from 'src/actions/recipientValidation';
 import { showAlert } from 'src/actions/globalAlert';
 import config from 'src/config';
 import { withRouter } from 'react-router-dom';
-
+import { isAccountUiOptionSet } from 'src/helpers/conditions/account';
 const formName = 'recipientValidationListForm';
 
 export class ListForm extends Component {
@@ -45,21 +45,24 @@ export class ListForm extends Component {
     }
   }
 
+  renderListTabBody = () => {
+    return (
+      <Field
+        component={FileUploadWrapper}
+        name="csv"
+        validate={[maxFileSize(config.maxRecipVerifUploadSizeBytes), fileExtension('csv', 'txt')]}
+        uploading={this.props.uploading}
+        data-id="recipient-list-dropzone"
+      />
+    );
+  };
+
   render() {
+    const { isStandAloneRVSet } = this.props;
     return (
       <Panel.Section>
-        <form>
-          <Field
-            component={FileUploadWrapper}
-            name="csv"
-            validate={[
-              maxFileSize(config.maxRecipVerifUploadSizeBytes),
-              fileExtension('csv', 'txt'),
-            ]}
-            uploading={this.props.uploading}
-            data-id="recipient-list-dropzone"
-          />
-        </form>
+        {!isStandAloneRVSet && <form>{this.renderListTabBody()}</form>}
+        {isStandAloneRVSet && this.renderListTabBody()}
       </Panel.Section>
     );
   }
@@ -74,6 +77,7 @@ const mapStateToProps = state => {
     file: selector(state, 'csv'),
     listError: state.recipientValidation.listError,
     uploading: state.recipientValidation.uploadLoading,
+    isStandAloneRVSet: isAccountUiOptionSet('standalone_rv')(state),
   };
 };
 
