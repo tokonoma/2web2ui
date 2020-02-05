@@ -371,6 +371,40 @@ describe('The events page', () => {
       });
     });
 
+    describe('per page buttons', () => {
+      beforeEach(() => {
+        cy.visit(PAGE_URL);
+
+        cy.stubRequest({
+          url: '/api/v1/events/message*',
+          fixture: 'events/message/200.get.different-results.json',
+        });
+
+        cy.queryByText('different-results@hotmail.com').should('not.be.visible');
+      });
+
+      it('re-requests events data when clicking on "100"', () => {
+        cy.findByText('100').click();
+        cy.findByText('different-results@hotmail.com').should('be.visible');
+      });
+
+      it('re-requests events data when clicking on "50"', () => {
+        cy.findByText('50').click();
+        cy.findByText('different-results@hotmail.com').should('be.visible');
+      });
+
+      it('re-requests events data when clicking on "25"', () => {
+        cy.findByText('50').click(); // The table starts set to "25" so selecting this one requires a change
+        cy.findByText('25').click();
+        cy.findByText('different-results@hotmail.com').should('be.visible');
+      });
+
+      it('re-requests events data when clicking on "10"', () => {
+        cy.findByText('10').click();
+        cy.findByText('different-results@hotmail.com').should('be.visible');
+      });
+    });
+
     it('renders with a "View Details" button that links to the detail page for this event', () => {
       cy.visit(PAGE_URL);
 
