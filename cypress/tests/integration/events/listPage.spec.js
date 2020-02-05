@@ -360,8 +360,6 @@ describe('The events page', () => {
           .closest('button')
           .click();
 
-        cy.findByText('different-results@hotmail.com').should('be.visible');
-
         cy.findByText('Previous')
           .closest('button')
           .click();
