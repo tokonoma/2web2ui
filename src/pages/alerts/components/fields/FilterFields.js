@@ -44,6 +44,8 @@ export class FilterFields extends Component {
       sendingDomainsLoading,
       sendingIps,
       disabled,
+      // note, ComboBoxTypeaheadWrapper needs these values to set defaultSelected
+      initialValues,
     } = this.props;
 
     const formSpec = getFormSpec(metric);
@@ -145,7 +147,7 @@ export class FilterFields extends Component {
             component={ComboBoxTypeaheadWrapper}
             results={filterTypeaheadResults[value]}
             label={label}
-            defaultSelected={this.props[value]}
+            defaultSelected={initialValues[value]}
             {...extraProps[value]}
           />
         ));
@@ -162,20 +164,13 @@ export class FilterFields extends Component {
 const mapStateToProps = state => {
   const selector = formValueSelector(FORM_NAME);
 
-  // note, ComboBoxTypeahead filter fields are not initialized by initialValues and must be passed
-  //   as props here to set defaultSelected
   return {
     blacklists: state.blacklist.blacklists,
-    blacklist_provider: selector(state, 'blacklist_provider'),
-    blacklist_resource: selector(state, 'blacklist_resource'),
     blacklistsPending: state.blacklist.blacklistsPending,
     blacklistMonitors: state.blacklist.monitors,
     blacklistMonitorsPending: state.blacklist.monitorsPending,
     single_filter: selector(state, 'single_filter') || {},
     metric: selector(state, 'metric'),
-    mailbox_provider: selector(state, 'mailbox_provider'),
-    sending_domain: selector(state, 'sending_domain'),
-    sending_ip: selector(state, 'sending_ip'),
     ipPools: getIpPools(state) || [],
     sendingDomains: selectVerifiedDomains(state) || [],
     sendingIps: state.sendingIps.list || [],

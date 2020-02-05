@@ -155,6 +155,22 @@ describe('Alerts Selectors: ', () => {
           },
         },
       },
+      'with blacklists and filters': {
+        apiData: {
+          ...apiData,
+          metric: 'blacklist',
+          filters: [
+            { filter_type: 'blacklist_resource', filter_values: ['any'] },
+            { filter_type: 'blacklist_provider', filter_values: ['a', 'b', 'c'] },
+          ],
+        },
+        formData: {
+          ...formData,
+          metric: 'blacklist',
+          blacklist_resource: [],
+          blacklist_provider: ['a', 'b', 'c'],
+        },
+      },
     };
 
     cases(
