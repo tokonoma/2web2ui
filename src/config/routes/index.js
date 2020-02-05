@@ -33,6 +33,8 @@ import {
   trackingDomains,
   users,
   webhooks,
+  RecipientValidationPageSRV,
+  UploadedListPageSRV,
 } from 'src/pages';
 
 import LogoutPage from 'src/pages/logout/LogoutPage';
@@ -731,10 +733,32 @@ const routes = [
   },
   {
     path: '/recipient-validation/list/:listId',
+    component: UploadedListPageSRV,
+    condition: all(
+      hasGrants('recipient-validation/preview'),
+      isAccountUiOptionSet('standalone_rv'),
+    ), // must manual keep in sync with nav item
+    layout: App,
+    title: 'Validation Status | List | Recipient Validation',
+    supportDocsSearch: 'Recipient Validation',
+  },
+  {
+    path: '/recipient-validation/list/:listId',
     component: UploadedListPage,
     condition: hasGrants('recipient-validation/preview'),
     layout: App,
     title: 'Validation Status | List | Recipient Validation',
+    supportDocsSearch: 'Recipient Validation',
+  },
+  {
+    path: '/recipient-validation/:category',
+    component: RecipientValidationPageSRV,
+    condition: all(
+      hasGrants('recipient-validation/preview'),
+      isAccountUiOptionSet('standalone_rv'),
+    ), // must manual keep in sync with nav item
+    layout: App,
+    title: 'Recipient Validation',
     supportDocsSearch: 'Recipient Validation',
   },
   {

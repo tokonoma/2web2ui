@@ -9,17 +9,18 @@ import { showAlert } from 'src/actions/globalAlert';
 import config from 'src/config';
 import { withRouter } from 'react-router-dom';
 import { isAccountUiOptionSet } from 'src/helpers/conditions/account';
+import { FORMS } from 'src/constants';
 const formName = 'recipientValidationListForm';
 
 export class ListForm extends Component {
   handleUpload = fields => {
-    const { history, reset, showAlert, uploadList } = this.props;
+    const { history, reset, showAlert, uploadList, isStandAloneRVSet } = this.props;
     const form_data = new FormData();
 
     form_data.append('myupload', fields.csv);
 
     // Always reset file on submit
-    reset(formName);
+    reset(!isStandAloneRVSet ? formName : FORMS.RV_ADDPAYMENTFORM);
 
     uploadList(form_data).then(({ list_id }) => {
       showAlert({ type: 'success', message: 'Recipients Uploaded' });
@@ -68,19 +69,22 @@ export class ListForm extends Component {
   }
 }
 
-const WrappedForm = reduxForm({ form: formName })(ListForm);
-
 const mapStateToProps = state => {
-  const selector = formValueSelector(formName);
+  const isStandAloneRVSet = isAccountUiOptionSet('standalone_rv')(state);
 
   return {
-    file: selector(state, 'csv'),
     listError: state.recipientValidation.listError,
     uploading: state.recipientValidation.uploadLoading,
-    isStandAloneRVSet: isAccountUiOptionSet('standalone_rv')(state),
+    isStandAloneRVSet: isStandAloneRVSet,
+    file: formValueSelector(!isStandAloneRVSet ? formName : FORMS.RV_ADDPAYMENTFORM)(state, 'csv'),
   };
 };
 
+const WrappedForm = reduxForm({ form: formName })(ListForm);
 export default withRouter(
   connect(mapStateToProps, { uploadList, showAlert, resetUploadError })(WrappedForm),
+);
+
+export const ListTab = withRouter(
+  connect(mapStateToProps, { uploadList, showAlert, resetUploadError })(ListForm),
 );

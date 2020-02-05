@@ -64,7 +64,6 @@ export class SingleAddressForm extends Component {
                 {buttonContent}
               </Button>
             </div>
-            )}
           </form>
         )}
         {isStandAloneRVSet && this.singleAddressBody()}
@@ -80,5 +79,8 @@ const mapStateToProps = state => {
 };
 
 const WrappedForm = reduxForm({ form: formName })(SingleAddressForm);
-
 export default withRouter(connect(mapStateToProps, { singleAddress })(WrappedForm));
+
+export const SingleAddressTab = withRouter(
+  connect(mapStateToProps, { singleAddress })(SingleAddressForm),
+);

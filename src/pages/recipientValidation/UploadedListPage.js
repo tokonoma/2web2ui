@@ -13,8 +13,12 @@ import ListProgress from './components/ListProgress';
 import UploadedListForm from './components/UploadedListForm';
 import styles from './UploadedListPage.module.scss';
 import { isAccountUiOptionSet } from 'src/helpers/conditions/account';
-
 import ValidateSection from './components/ValidateSection';
+import { FORMS } from 'src/constants';
+import { reduxForm } from 'redux-form';
+import _ from 'lodash';
+
+const FORMNAME = FORMS.RV_ADDPAYMENTFORM;
 
 export class UploadedListPage extends Component {
   componentDidMount() {
@@ -36,6 +40,9 @@ export class UploadedListPage extends Component {
       isStandAloneRVSet,
       billing: { credit_card },
     } = this.props;
+
+    const { valid, pristine, submitting, isRVFormPresent } = this.props;
+    const submitDisabled = pristine || !valid || submitting;
 
     if (!job && jobLoadingStatus === 'fail') {
       return (
@@ -80,7 +87,11 @@ export class UploadedListPage extends Component {
           </Panel.Section>
         </Panel>
         {isStandAloneRVSet && (
-          <ValidateSection credit_card={credit_card} handleValidate={() => {}} />
+          <ValidateSection
+            credit_card={credit_card}
+            formname={FORMNAME}
+            submitDisabled={submitDisabled && isRVFormPresent}
+          />
         )}
       </Page>
     );
@@ -96,9 +107,17 @@ const mapStateToProps = (state, props) => {
     jobLoadingStatus: state.recipientValidation.jobLoadingStatus[listId],
     isStandAloneRVSet: isAccountUiOptionSet('standalone_rv')(state),
     billing: state.account.billing || {},
+    isRVFormPresent: Boolean(state.form[FORMNAME]) && !_.isEmpty(state.form[FORMNAME]),
   };
 };
 
 export default connect(mapStateToProps, { getJobStatus, triggerJob, getBillingInfo })(
   UploadedListPage,
 );
+
+const formOptions = { form: FORMNAME, enableReinitialize: true };
+export const UploadedListPageSRV = connect(mapStateToProps, {
+  getJobStatus,
+  triggerJob,
+  getBillingInfo,
+})(reduxForm(formOptions)(UploadedListPage));

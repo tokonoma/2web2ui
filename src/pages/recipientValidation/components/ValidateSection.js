@@ -2,26 +2,19 @@ import React, { useEffect } from 'react';
 import CreditCardSection from 'src/components/billing/CreditCardSection';
 import { Button } from '@sparkpost/matchbox';
 import { connect } from 'react-redux';
-import { FORMS } from 'src/constants';
-import { reduxForm } from 'redux-form';
 import { updatePaymentInitialValues } from 'src/selectors/accountBillingForms';
 import { selectIsSelfServeBilling } from 'src/selectors/accountBillingInfo';
 import { getBillingCountries } from 'src/actions/billing';
 
-const FORMNAME = FORMS.RV_ADDPAYMENTFORM;
-
 function ValidateSection({
-  handleSubmit,
   credit_card,
-  handleValidate,
   billingCountries,
   getBillingCountries,
   isManuallyBilled,
   submitButtonName = 'Validate',
+  submitDisabled,
+  formname: FORMNAME,
 }) {
-  const onSubmit = () => {
-    handleValidate();
-  };
   useEffect(() => {
     getBillingCountries();
   }, [getBillingCountries]);
@@ -44,7 +37,7 @@ function ValidateSection({
         formname={FORMNAME}
         countries={billingCountries || []}
       />
-      <Button color="orange" type="submit" onClick={handleSubmit(onSubmit)}>
+      <Button size="large" primary submit disabled={submitDisabled}>
         {/* functionality to validate to be added in AC-1196 and AC-1197*/}
         {submitButtonName}
       </Button>
@@ -52,7 +45,6 @@ function ValidateSection({
   );
 }
 
-const formOptions = { form: FORMNAME, enableReinitialize: true };
 const mapStateToProps = state => {
   return {
     initialValues: updatePaymentInitialValues(state),
@@ -61,6 +53,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { getBillingCountries })(
-  reduxForm(formOptions)(ValidateSection),
-);
+export default connect(mapStateToProps, { getBillingCountries })(ValidateSection);

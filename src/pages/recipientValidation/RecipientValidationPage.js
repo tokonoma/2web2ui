@@ -4,8 +4,8 @@ import { withRouter } from 'react-router-dom';
 import { Page, Tabs, Panel, Modal, Button } from '@sparkpost/matchbox';
 import { Close, Launch } from '@sparkpost/matchbox-icons';
 import JobsTableCollection from './components/JobsTableCollection';
-import ListForm from './components/ListForm';
-import SingleAddressForm from './components/SingleAddressForm';
+import ListForm, { ListTab } from './components/ListForm';
+import SingleAddressForm, { SingleAddressTab } from './components/SingleAddressForm';
 import ApiDetails from './components/ApiDetails';
 import { hasAccountOptionEnabled } from 'src/helpers/conditions/account';
 import RVDisabledPage from './components/RVDisabledPage';
@@ -51,6 +51,22 @@ export class RecipientValidationPage extends Component {
         return <SingleAddressForm />;
       case 2:
         return <ApiDetails isStandAloneRVSet={this.props.isStandAloneRVSet} />;
+      default:
+        return null;
+    }
+  };
+
+  renderTabContentSRV = tabId => {
+    const { handleSubmit, reset } = this.props;
+    switch (tabId) {
+      case 0:
+        return <ListTab handleSubmit={handleSubmit} reset={reset} />;
+      case 1:
+        return <SingleAddressTab handleSubmit={handleSubmit} />;
+      case 2:
+        return <ApiDetails handleSubmit={handleSubmit} formname={FORMNAME} />;
+      default:
+        return null;
     }
   };
 
@@ -78,7 +94,8 @@ export class RecipientValidationPage extends Component {
 
   renderRecipientValidation = () => {
     const { selectedTab, showPriceModal } = this.state;
-    const { isStandAloneRVSet, billing, billingLoading } = this.props;
+    const { isStandAloneRVSet, billing, billingLoading, valid, pristine, submitting } = this.props;
+    const submitDisabled = pristine || !valid || submitting;
 
     return (
       <Page
@@ -145,6 +162,8 @@ export class RecipientValidationPage extends Component {
             credit_card={billing.credit_card}
             handleValidate={() => {}}
             submitButtonName={selectedTab === 2 ? 'Create API Key' : 'Validate'}
+            submitDisabled={submitDisabled}
+            formname={FORMNAME}
           />
         )}
 
@@ -184,9 +203,11 @@ const mapStateToProps = (state, props) => ({
   billingLoading: state.account.billingLoading,
 });
 
-// export default withRouter(connect(mapStateToProps, { getBillingInfo })(RecipientValidationPage));
+//UNCOMMENT BEFORE MERGING WITH MASTER
+export default withRouter(connect(mapStateToProps, { getBillingInfo })(RecipientValidationPage));
 
+//COMMENT BOTH BEFORE MERGING WITH MASTER
 const formOptions = { form: FORMNAME, enableReinitialize: true };
-export default withRouter(
+export const RecipientValidationPageSRV = withRouter(
   connect(mapStateToProps, { getBillingInfo })(reduxForm(formOptions)(RecipientValidationPage)),
 );
