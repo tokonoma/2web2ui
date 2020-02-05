@@ -97,6 +97,19 @@ describe('The events page', () => {
         cy.findByText('different-results@hotmail.com').should('be.visible');
       });
 
+      it('updates URL query params with relevant value when filtering by "Broad Date Range"', () => {
+        cy.visit(PAGE_URL);
+
+        cy.findByLabelText('Broad Date Range').select('Last Hour');
+        cy.url().should('include', 'range=hour');
+        cy.findByLabelText('Broad Date Range').select('Last 24 Hours');
+        cy.url().should('include', 'range=day');
+        cy.findByLabelText('Broad Date Range').select('Last 7 Days');
+        cy.url().should('include', 'range=7days');
+        cy.findByLabelText('Broad Date Range').select('Last 10 Days');
+        cy.url().should('include', 'range=10days');
+      });
+
       it('re-requests data when filtering by "Narrow Date Range"', () => {
         cy.visit(PAGE_URL);
 
@@ -133,6 +146,7 @@ describe('The events page', () => {
       cy.findByText('Recipients: different-recipient@hotmail.com').should('be.visible');
       cy.findByText('Clear All Filters').should('be.visible');
       cy.findByText('different-recipient@hotmail.com').should('be.visible'); // The new results are visible...
+      cy.url().should('include', 'recipients=different-recipient%40hotmail.com');
       cy.queryByText('fake-recipient@hotmail.com').should('not.be.visible'); // ...and the old results are not!
     });
 
@@ -185,28 +199,24 @@ describe('The events page', () => {
       cy.stubRequest({
         url: '/api/v1/events/message*',
         fixture: 'events/message/200.get.json',
+        requestAlias: 'getMessageEvents',
       });
 
       cy.findByText('Clear All Filters').click();
+
+      cy.wait('@getMessageEvents');
 
       cy.queryByText('fake-recipient@hotmail.com').should('be.visible');
       cy.findByText('different-recipient@hotmail.com').should('not.be.visible');
     });
 
     describe('the "Advanced Filters" modal', () => {
-      const selectLabel = 'Filter By';
-      const textFieldLabel = 'Filter';
-
       beforeEach(() => {
         cy.visit(PAGE_URL);
         cy.findByText('Add Filters').click();
       });
 
       it('renders documentation about each event type when hovering over a check box label', () => {
-        // NOTE: Rendering of these tooltips is a little unusual as Cypress does not have a .hover()
-        // that actually simulates user behavior. This means using the `mousover` event actually
-        // triggers a technically impossible application state when a real user is in control vs.
-        // simulated events
         cy.findByText('Delay').trigger('mouseover');
 
         cy.findByText('Remote MTA has temporarily rejected a message.').should('be.visible');
@@ -228,6 +238,9 @@ describe('The events page', () => {
       });
 
       it('allows the addition and removal of other filters via the "Add Filter" and "Remove" buttons', () => {
+        const selectLabel = 'Filter By';
+        const textFieldLabel = 'Filter';
+
         cy.findAllByLabelText(selectLabel).should('have.length', 1);
         cy.findAllByLabelText(textFieldLabel).should('have.length', 1);
 
@@ -278,7 +291,9 @@ describe('The events page', () => {
 
         cy.findByText('Advanced Filters').should('not.be.visible');
         cy.findByText('Event: Amp Click').should('be.visible');
+        cy.url().should('include', 'events=amp_click');
         cy.findByText('Event: Out Of Band').should('be.visible');
+        cy.url().should('include', 'events=out_of_band');
         cy.findByText('Recipient Domains: gmail.com').should('be.visible');
         cy.findByText('Subjects: Happy Birthday').should('be.visible');
         cy.findByText('These are different results').should('be.visible'); // The new results are visible...
