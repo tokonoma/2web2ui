@@ -2,6 +2,7 @@ import { createSelector } from 'reselect';
 import qs from 'query-string';
 import _ from 'lodash';
 import { isAccountUiOptionSet } from '../helpers/conditions/account';
+import { isSubaccountUser } from '../helpers/conditions/user';
 import { selectCondition } from 'src/selectors/accessConditionState';
 
 const formatSubaccount = ({ compliance_status = 'active', status = 'active', ...rest }) => {
@@ -14,7 +15,8 @@ const formatSubaccount = ({ compliance_status = 'active', status = 'active', ...
   };
 };
 export const getSubaccounts = state => state.subaccounts.list;
-export const hasSubaccounts = state => state.currentUser.has_subaccounts;
+export const hasSubaccounts = state =>
+  state.currentUser.has_subaccounts && !isSubaccountUser(state);
 export const getSubaccount = state => state.subaccount;
 
 export const selectSubaccounts = createSelector(
