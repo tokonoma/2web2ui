@@ -62,12 +62,16 @@ export class RecipientValidationPage extends Component {
       case 0:
         return <ListTab handleSubmit={handleSubmit} reset={reset} />;
       case 1:
-        return <SingleAddressTab handleSubmit={handleSubmit} />;
+        return <SingleAddressTab />;
       case 2:
-        return <ApiDetails handleSubmit={handleSubmit} formname={FORMNAME} />;
+        return <ApiDetails formname={FORMNAME} />;
       default:
         return null;
     }
+  };
+
+  onSubmit = () => {
+    console.log('submitted');
   };
 
   handleModal = (showPriceModal = false) => this.setState({ showPriceModal });
@@ -185,11 +189,7 @@ export class RecipientValidationPage extends Component {
         </Case>
       </ConditionSwitch>
     ) : (
-      <form
-        onSubmit={() => {
-          console.log('submitted');
-        }}
-      >
+      <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
         {this.renderRecipientValidation()}
       </form>
     );
@@ -203,10 +203,8 @@ const mapStateToProps = (state, props) => ({
   billingLoading: state.account.billingLoading,
 });
 
-//UNCOMMENT BEFORE MERGING WITH MASTER
 export default withRouter(connect(mapStateToProps, { getBillingInfo })(RecipientValidationPage));
 
-//COMMENT BOTH BEFORE MERGING WITH MASTER
 const formOptions = { form: FORMNAME, enableReinitialize: true };
 export const RecipientValidationPageSRV = withRouter(
   connect(mapStateToProps, { getBillingInfo })(reduxForm(formOptions)(RecipientValidationPage)),
