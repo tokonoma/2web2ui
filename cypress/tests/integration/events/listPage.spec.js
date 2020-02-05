@@ -295,6 +295,82 @@ describe('The events page', () => {
   });
 
   describe('the events table', () => {
+    describe('pagination', () => {
+      const CURRENT_PAGE_SELECTOR = '[data-id="pagination-current-page"]';
+
+      beforeEach(() => {
+        cy.visit(PAGE_URL);
+
+        cy.stubRequest({
+          url: '/api/v1/events/message*',
+          fixture: 'events/message/200.get.different-results.json',
+          requestAlias: 'eventsRequest',
+        });
+      });
+
+      it('re-requests events data when clicking the "Next" pagination button while updating the current rendered page', () => {
+        cy.queryByText('different-results@hotmail.com').should('not.be.visible');
+        cy.get(CURRENT_PAGE_SELECTOR).should('contain', '1');
+
+        cy.findByText('Previous')
+          .closest('button')
+          .should('be.disabled');
+
+        cy.findByText('Next')
+          .closest('button') // The content is inside a `<span>` so this ensures the correct parent element is clicked
+          .click();
+
+        cy.findByText('different-results@hotmail.com').should('be.visible');
+        cy.get(CURRENT_PAGE_SELECTOR).should('contain', '2');
+        cy.findByText('Previous')
+          .closest('button')
+          .should('not.be.disabled');
+      });
+
+      it('returns to the previous page of results when clicking the "Previous" pagination button', () => {
+        cy.get(CURRENT_PAGE_SELECTOR).should('contain', '1');
+
+        cy.findByText('Next')
+          .closest('button')
+          .click();
+
+        cy.findByText('different-results@hotmail.com').should('be.visible');
+
+        cy.findByText('Previous')
+          .closest('button')
+          .click();
+
+        cy.queryByText('different-results@hotmail.com').should('not.be.visible');
+        cy.findByText('fake-recipient@hotmail.com').should('be.visible');
+        cy.get(CURRENT_PAGE_SELECTOR).should('contain', '1');
+      });
+
+      it('re-requests all data and returns the user to the first page of results when clicking the "Return to First Page" button', () => {
+        cy.findByText('Next')
+          .closest('button')
+          .click();
+        cy.findByText('Next')
+          .closest('button')
+          .click();
+
+        cy.findByText('different-results@hotmail.com').should('be.visible');
+        cy.get(CURRENT_PAGE_SELECTOR).should('contain', '3');
+
+        cy.stubRequest({
+          url: '/api/v1/events/message*',
+          fixture: 'events/message/200.get.json',
+        });
+
+        cy.findByText('Return to First Page')
+          .closest('button')
+          .click();
+
+        cy.queryByText('different-results@hotmail.com').should('not.be.visible');
+        cy.findByText('fake-recipient@hotmail.com').should('be.visible');
+        cy.get(CURRENT_PAGE_SELECTOR).should('contain', '1');
+      });
+    });
+
     it('renders with a "View Details" button that links to the detail page for this event', () => {
       cy.visit(PAGE_URL);
 
