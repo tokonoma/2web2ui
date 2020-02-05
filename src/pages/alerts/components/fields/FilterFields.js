@@ -44,6 +44,8 @@ export class FilterFields extends Component {
       sendingDomainsLoading,
       sendingIps,
       disabled,
+      // note, ComboBoxTypeaheadWrapper needs these values to set defaultSelected
+      initialValues,
     } = this.props;
 
     const formSpec = getFormSpec(metric);
@@ -53,8 +55,8 @@ export class FilterFields extends Component {
       mailbox_provider: Object.keys(MAILBOX_PROVIDERS),
       sending_domain: sendingDomains.map(({ domain }) => domain),
       sending_ip: sendingIps.map(({ external_ip }) => external_ip),
-      provider: blacklists.map(({ code }) => code),
-      resource: blacklistMonitors.map(({ resource }) => resource),
+      blacklist_provider: blacklists.map(({ code }) => code),
+      blacklist_resource: blacklistMonitors.map(({ resource }) => resource),
     };
 
     const extraProps = {
@@ -87,11 +89,11 @@ export class FilterFields extends Component {
         disabled,
         placeholder: 'Type To Search',
       },
-      provider: {
+      blacklist_provider: {
         disabled: disabled || blacklistsPending,
         placeholder: 'Type To Search',
       },
-      resource: {
+      blacklist_resource: {
         disabled: disabled || blacklistMonitorsPending || blacklistMonitors.length === 0,
         placeholder: 'Type To Search',
       },
@@ -145,7 +147,7 @@ export class FilterFields extends Component {
             component={ComboBoxTypeaheadWrapper}
             results={filterTypeaheadResults[value]}
             label={label}
-            defaultSelected={this.props[value]}
+            defaultSelected={initialValues[value]}
             {...extraProps[value]}
           />
         ));
@@ -169,9 +171,6 @@ const mapStateToProps = state => {
     blacklistMonitorsPending: state.blacklist.monitorsPending,
     single_filter: selector(state, 'single_filter') || {},
     metric: selector(state, 'metric'),
-    mailbox_provider: selector(state, 'mailbox_provider'),
-    sending_domain: selector(state, 'sending_domain'),
-    sending_ip: selector(state, 'sending_ip'),
     ipPools: getIpPools(state) || [],
     sendingDomains: selectVerifiedDomains(state) || [],
     sendingIps: state.sendingIps.list || [],
