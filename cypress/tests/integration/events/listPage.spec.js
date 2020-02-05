@@ -211,9 +211,20 @@ describe('The events page', () => {
 
         cy.findByText('Remote MTA has temporarily rejected a message.').should('be.visible');
 
+        cy.findByText('Delay').trigger('mouseout');
+
+        // This is a Matchbox bug - this should be passing but is not due to a CSS issue.
+        // This has already been addressed, though has not yet been part of a formal release:
+        // https://github.com/SparkPost/matchbox/pull/320
+        // cy.queryByText('Remote MTA has temporarily rejected a message.').should('not.be.visible');
+
         cy.findByText('SMS Status').trigger('mouseover');
 
-        cy.findByText('SMPP/SMS message produced a status log output');
+        cy.findByText('SMPP/SMS message produced a status log output').should('be.visible');
+
+        cy.findByText('SMS Status').trigger('mouseout');
+
+        // cy.queryByText('SMPP/SMS message produced a status log output').should('not.be.visible');
       });
 
       it('allows the addition and removal of other filters via the "Add Filter" and "Remove" buttons', () => {
