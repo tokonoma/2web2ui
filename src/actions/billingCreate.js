@@ -1,4 +1,4 @@
-import { isAws, isCustomBilling } from 'src/helpers/conditions/account';
+import { isCustomBilling } from 'src/helpers/conditions/account';
 import { formatCreateData, formatDataForCors } from 'src/helpers/billing';
 import { fetch as fetchAccount, getBillingInfo } from './account';
 import chainActions from 'src/actions/helpers/chainActions';
@@ -7,18 +7,11 @@ import {
   createZuoraAccount,
   syncBillingSubscription,
   syncSubscription,
-  updateSubscription,
   consumePromoCode,
 } from './billing';
 
 export default function billingCreate(values) {
   return (dispatch, getState) => {
-    // AWS plans don't get created through Zuora, instead update existing
-    // subscription to the selected plan
-    if (isAws(getState())) {
-      return dispatch(updateSubscription({ code: values.planpicker.code }));
-    }
-
     const { corsData, billingData } = formatDataForCors(values);
 
     // action creator wrappers for chaining as callbacks

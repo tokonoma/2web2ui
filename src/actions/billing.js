@@ -21,9 +21,7 @@ export function updateSubscription({ code, bundle = code, promoCode, meta = {} }
             type: 'UPDATE_SUBSCRIPTION',
             meta: {
               method: 'PUT',
-              url: isAws(getState())
-                ? '/v1/account/aws-marketplace/subscription'
-                : '/v1/billing/subscription/bundle',
+              url: '/v1/billing/subscription/bundle',
               data: {
                 promo_code: promoCode,
                 [isAws(getState()) ? 'code' : 'bundle']: bundle,
@@ -38,9 +36,7 @@ export function updateSubscription({ code, bundle = code, promoCode, meta = {} }
             type: 'UPDATE_SUBSCRIPTION',
             meta: {
               method: 'PUT',
-              url: isAws(getState())
-                ? '/v1/account/aws-marketplace/subscription'
-                : '/v1/account/subscription',
+              url: '/v1/account/subscription',
               data: {
                 promo_code: promoCode,
                 code,
