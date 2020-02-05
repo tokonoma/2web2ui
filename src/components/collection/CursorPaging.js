@@ -3,27 +3,39 @@ import { FirstPage } from '@sparkpost/matchbox-icons';
 import React from 'react';
 import { Button, Pager } from '@sparkpost/matchbox';
 
-export const CursorPaging = ({ currentPage, handlePageChange, previousDisabled, nextDisabled, handleFirstPage, perPage, totalCount }) => (
-  //previousDisabled and nextDisabled are boolean values.
-
+export const CursorPaging = ({
+  currentPage,
+  handlePageChange,
+  previousDisabled,
+  nextDisabled,
+  handleFirstPage,
+  perPage,
+  totalCount,
+}) => (
+  // previousDisabled and nextDisabled are boolean values.
   <div className={styles.PageButtons}>
-    <Button className={styles.RewindButton}
+    <Button
+      className={styles.RewindButton}
       disabled={currentPage === 1}
-      key='rewind'
+      key="rewind"
       onClick={handleFirstPage}
     >
-      <FirstPage/>
+      <FirstPage />
     </Button>
     <Pager>
       <Pager.Previous
         onClick={() => handlePageChange(currentPage - 1)}
-        disabled={previousDisabled}/>
-      <Pager.Next
-        onClick={() => handlePageChange(currentPage + 1)}
-        disabled = {nextDisabled}/>
+        disabled={previousDisabled}
+      />
+      <Pager.Next onClick={() => handlePageChange(currentPage + 1)} disabled={nextDisabled} />
     </Pager>
-    <span className={styles.PageDisplay}
-    >Page: <strong className={styles.Bold}>{currentPage}</strong> / {Math.ceil(totalCount / perPage)}</span>
+    <span className={styles.PageDisplay}>
+      Page:{' '}
+      <strong className={styles.Bold} data-id="cursor-paging-current-page">
+        {currentPage}
+      </strong>{' '}
+      / {Math.ceil(totalCount / perPage)}
+    </span>
   </div>
 );
 export default CursorPaging;
