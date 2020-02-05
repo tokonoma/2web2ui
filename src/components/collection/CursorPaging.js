@@ -31,7 +31,7 @@ export const CursorPaging = ({
     </Pager>
     <span className={styles.PageDisplay}>
       Page:{' '}
-      <strong className={styles.Bold} data-id="cursor-paging-current-page">
+      <strong className={styles.Bold} data-id="pagination-current-page">
         {currentPage}
       </strong>{' '}
       / {Math.ceil(totalCount / perPage)}
