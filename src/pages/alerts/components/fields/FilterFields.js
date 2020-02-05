@@ -162,8 +162,12 @@ export class FilterFields extends Component {
 const mapStateToProps = state => {
   const selector = formValueSelector(FORM_NAME);
 
+  // note, ComboBoxTypeahead filter fields are not initialized by initialValues and must be passed
+  //   as props here to set defaultSelected
   return {
     blacklists: state.blacklist.blacklists,
+    blacklist_provider: selector(state, 'blacklist_provider'),
+    blacklist_resource: selector(state, 'blacklist_resource'),
     blacklistsPending: state.blacklist.blacklistsPending,
     blacklistMonitors: state.blacklist.monitors,
     blacklistMonitorsPending: state.blacklist.monitorsPending,
