@@ -14,13 +14,25 @@ describe('Stop Monitoring Modal', () => {
     return render(<StopMonitoringModal {...defaults} {...props} />);
   };
 
-  it('renders the modal correctly', () => {
-    const { queryByText } = subject();
+  it('renders the modal correctly for an ip address', () => {
+    const { queryByText } = subject({ monitorToDelete: '1.2.3.4' });
 
-    expect(queryByText('Stop Monitoring sparkpost.io')).toBeInTheDocument();
+    expect(queryByText('Stop Monitoring 1.2.3.4')).toBeInTheDocument();
     expect(
       queryByText(
         "Removing this IP from your watchlist means you won't get notified of changes, but don't worry you can always add it again later.",
+      ),
+    ).toBeInTheDocument();
+    expect(queryByText('Stop Monitoring')).toBeInTheDocument();
+  });
+
+  it('renders the modal correctly for a sending domain', () => {
+    const { queryByText } = subject({ monitorToDelete: 'test.com' });
+
+    expect(queryByText('Stop Monitoring test.com')).toBeInTheDocument();
+    expect(
+      queryByText(
+        "Removing this domain from your watchlist means you won't get notified of changes, but don't worry you can always add it again later.",
       ),
     ).toBeInTheDocument();
     expect(queryByText('Stop Monitoring')).toBeInTheDocument();
