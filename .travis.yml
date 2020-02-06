@@ -27,8 +27,8 @@ jobs:
       # This could probably be improved by writing a Node script to handle a config,
       # though no need to prematurely optimize at this point.
     - stage: test-and-build
-      name: 'Integration Testing - Accounts, Events, and Navigation'
-      env: SPECS='cypress/tests/integration/accounts/**/*,cypress/tests/integration/events/**/*,cypress/tests/integration/navigation/**/*'
+      name: 'Integration Testing - Accounts, Events, Navigation, and Signals Reports,'
+      env: SPECS='cypress/tests/integration/accounts/**/*,cypress/tests/integration/events/**/*,cypress/tests/integration/navigation/**/*,cypress/tests/integration/reports/**/*'
       script: npm run test-integration-ci
     - stage: test-and-build
       name: 'Integration Testing - Templates, Recipient Validation, and Suppressions'
