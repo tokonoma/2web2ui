@@ -12,6 +12,9 @@ exports[`CursorPaging should correctly render cursor paging when there is only o
     size="default"
   >
     <FirstPage />
+    <ScreenReaderOnly>
+      Return to First Page
+    </ScreenReaderOnly>
   </Button>
   <Pager>
     <Pager.Previous
@@ -26,13 +29,16 @@ exports[`CursorPaging should correctly render cursor paging when there is only o
   <span
     className="PageDisplay"
   >
-    Page: 
+    Page:
+     
     <strong
       className="Bold"
+      data-id="pagination-current-page"
     >
       1
     </strong>
-     / 
+     
+    / 
     1
   </span>
 </div>
@@ -50,6 +56,9 @@ exports[`CursorPaging should render cursor paging 1`] = `
     size="default"
   >
     <FirstPage />
+    <ScreenReaderOnly>
+      Return to First Page
+    </ScreenReaderOnly>
   </Button>
   <Pager>
     <Pager.Previous
@@ -64,13 +73,16 @@ exports[`CursorPaging should render cursor paging 1`] = `
   <span
     className="PageDisplay"
   >
-    Page: 
+    Page:
+     
     <strong
       className="Bold"
+      data-id="pagination-current-page"
     >
       2
     </strong>
-     / 
+     
+    / 
     4
   </span>
 </div>

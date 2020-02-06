@@ -51,9 +51,15 @@ exports[`Component: MessageEventsSearch renders correctly 1`] = `
       <div
         className="RecipientFilter"
       >
+        <label
+          className="ScreenReaderOnlyLabel"
+          htmlFor="email-recipients-filter"
+        >
+          Filter by Recipient Email Address
+        </label>
         <TextField
           error={null}
-          labelHidden={true}
+          id="email-recipients-filter"
           onBlur={[Function]}
           onFocus={[Function]}
           onKeyDown={[Function]}

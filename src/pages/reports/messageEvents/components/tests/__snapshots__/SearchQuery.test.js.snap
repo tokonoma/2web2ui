@@ -13,8 +13,15 @@ exports[`SearchForm should render correctly with existing filters 1`] = `
       <div
         className="Selector"
       >
+        <label
+          className="ScreenReaderOnly"
+          htmlFor="select-a-filter-0"
+        >
+          Filter By
+        </label>
         <Field
           component={[Function]}
+          id="select-a-filter-0"
           name="searchQuery[0].key"
           options={
             Array [
@@ -32,8 +39,15 @@ exports[`SearchForm should render correctly with existing filters 1`] = `
       md={12}
       xs={12}
     >
+      <label
+        className="ScreenReaderOnly"
+        htmlFor="filter-field-0"
+      >
+        Filter
+      </label>
       <Field
         component={[Function]}
+        id="filter-field-0"
         name="searchQuery[0].value"
         placeholder="Insert recipient domains placeholder"
         type="text"
@@ -71,8 +85,15 @@ exports[`SearchForm should render correctly with existing filters 1`] = `
       <div
         className="Selector"
       >
+        <label
+          className="ScreenReaderOnly"
+          htmlFor="select-a-filter-1"
+        >
+          Filter By
+        </label>
         <Field
           component={[Function]}
+          id="select-a-filter-1"
           name="searchQuery[1].key"
           options={
             Array [
@@ -90,8 +111,15 @@ exports[`SearchForm should render correctly with existing filters 1`] = `
       md={12}
       xs={12}
     >
+      <label
+        className="ScreenReaderOnly"
+        htmlFor="filter-field-1"
+      >
+        Filter
+      </label>
       <Field
         component={[Function]}
+        id="filter-field-1"
         name="searchQuery[1].value"
         placeholder="Insert subjects placeholder"
         type="text"
@@ -129,8 +157,15 @@ exports[`SearchForm should render correctly with existing filters 1`] = `
       <div
         className="Selector"
       >
+        <label
+          className="ScreenReaderOnly"
+          htmlFor="select-a-filter-2"
+        >
+          Filter By
+        </label>
         <Field
           component={[Function]}
+          id="select-a-filter-2"
           name="searchQuery[2].key"
           options={
             Array [
@@ -149,8 +184,15 @@ exports[`SearchForm should render correctly with existing filters 1`] = `
       md={12}
       xs={12}
     >
+      <label
+        className="ScreenReaderOnly"
+        htmlFor="filter-field-2"
+      >
+        Filter
+      </label>
       <Field
         component={[Function]}
+        id="filter-field-2"
         name="searchQuery[2].value"
         placeholder="Select Filter Type"
         type="text"
@@ -184,7 +226,8 @@ exports[`SearchForm should render correctly with existing filters 1`] = `
     onClick={[Function]}
     size="default"
   >
-     Add Filter
+     
+    Add Filter
     <AddCircleOutline
       className="Icon"
     />
@@ -201,7 +244,8 @@ exports[`SearchForm should render correctly with no filters 1`] = `
     onClick={[Function]}
     size="default"
   >
-     Add Filter
+     
+    Add Filter
     <AddCircleOutline
       className="Icon"
     />

@@ -9,18 +9,23 @@ import { eventsQuery } from 'src/helpers/validation';
 import { EVENTS_SEARCH_FILTERS } from 'src/constants';
 import _ from 'lodash';
 
-const EVENTS_SELECTOR = [{ disabled: true, value: '', label: 'Select a Filter' },
-  ... getFiltersAsArray(EVENTS_SEARCH_FILTERS)];
+const EVENTS_SELECTOR = [
+  { disabled: true, value: '', label: 'Select a Filter' },
+  ...getFiltersAsArray(EVENTS_SEARCH_FILTERS),
+];
 
-const makeQueryValidator = _.memoize((filter) => () => eventsQuery(filter));
+const makeQueryValidator = _.memoize(filter => () => eventsQuery(filter));
 
 //Returns options array only containing those not selected yet and the currently selected option.
 const getAvailableOptions = (filters, index) => {
-  const used = filters.map((item) => item.key);
-  return EVENTS_SELECTOR.filter((searchParameter) => !used.includes(searchParameter.value) || searchParameter.value === filters[index].key);
+  const used = filters.map(item => item.key);
+  return EVENTS_SELECTOR.filter(
+    searchParameter =>
+      !used.includes(searchParameter.value) || searchParameter.value === filters[index].key,
+  );
 };
 
-const getPlaceholderText = _.memoize((key) => {
+const getPlaceholderText = _.memoize(key => {
   if (!key) {
     return 'Select Filter Type';
   }
@@ -31,43 +36,48 @@ export default ({ fields }) => (
   <Fragment>
     {fields.map((member, index) => (
       <Grid key={index}>
-        <Grid.Column
-          xs={3}
-          md={3}
-          lg={3}
-        >
+        <Grid.Column xs={3} md={3} lg={3}>
           <div className={styles.Selector}>
+            <label htmlFor={`select-a-filter-${index}`} className={styles.ScreenReaderOnly}>
+              Filter By
+            </label>
+
             <Field
+              id={`select-a-filter-${index}`}
               name={`${member}.key`}
               component={SelectWrapper}
               options={getAvailableOptions(fields.getAll(), index)}
             />
           </div>
         </Grid.Column>
-        <Grid.Column
-          xs={12}
-          md={12}
-          lg={7}
-        >
+        <Grid.Column xs={12} md={12} lg={7}>
+          <label htmlFor={`filter-field-${index}`} className={styles.ScreenReaderOnly}>
+            Filter
+          </label>
+
           <Field
+            id={`filter-field-${index}`}
             name={`${member}.value`}
             type="text"
-            placeholder = {getPlaceholderText(fields.get(index).key)}
+            placeholder={getPlaceholderText(fields.get(index).key)}
             component={TextFieldWrapper}
-            validate = {makeQueryValidator(fields.get(index))}
+            validate={makeQueryValidator(fields.get(index))}
           />
         </Grid.Column>
-        <Grid.Column
-          xs={12}
-          md={12}
-          lg={2}
-        >
+        <Grid.Column xs={12} md={12} lg={2}>
           <p>
-            <Button color="red" flat onClick={() => fields.remove(index)}>Remove< HighlightOff className = {styles.Icon}/></Button>
+            <Button color="red" flat onClick={() => fields.remove(index)}>
+              Remove
+              <HighlightOff className={styles.Icon} />
+            </Button>
           </p>
         </Grid.Column>
       </Grid>
     ))}
-    <Button className = {styles.AddButton} color="blue" flat onClick={() => fields.push({})}> Add Filter<AddCircleOutline className = {styles.Icon}/></Button>
-  </Fragment >
+    <Button className={styles.AddButton} color="blue" flat onClick={() => fields.push({})}>
+      {' '}
+      Add Filter
+      <AddCircleOutline className={styles.Icon} />
+    </Button>
+  </Fragment>
 );
