@@ -31,8 +31,8 @@ jobs:
       env: SPECS='cypress/tests/integration/accounts/**/*,cypress/tests/integration/events/**/*,cypress/tests/integration/navigation/**/*,cypress/tests/integration/signals-analytics/**/*'
       script: npm run test-integration-ci
     - stage: test-and-build
-      name: 'Integration Testing - Templates and Recipients'
-      env: SPECS='cypress/tests/integration/templates/**/*,cypress/tests/integration/recipients/**/*'
+      name: 'Integration Testing - Templates, Recipients, and Suppressions'
+      env: SPECS='cypress/tests/integration/templates/**/*,cypress/tests/integration/recipients/**/*,cypress/tests/integration/events/**/*'
       script: npm run test-integration-ci
 
 after_script: greenkeeper-lockfile-upload
