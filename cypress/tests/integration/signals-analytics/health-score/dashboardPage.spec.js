@@ -1,6 +1,6 @@
 const PAGE_URL = '/signals/health-score';
 const API_URL = '/api/v1/signals/health-score/**/*';
-const UNIX_STUBBED_DATE = 1580741099000; // Used to set the browser's date to February 2nd, 2020 to remain in step with fixtures
+const STABLE_UNIX_DATE = 1580741099000; // Used to set the browser's date to February 2nd, 2020 to remain in step with fixtures
 
 describe('The health score dashboard page', () => {
   beforeEach(() => {
@@ -72,7 +72,7 @@ describe('The health score dashboard page', () => {
   // });
 
   describe('health score value', () => {
-    beforeEach(() => cy.clock(UNIX_STUBBED_DATE));
+    beforeEach(() => cy.clock(STABLE_UNIX_DATE));
 
     it('renders to the page as a value, rounded to the nearest single digit', () => {
       cy.visit(PAGE_URL);
@@ -121,7 +121,7 @@ describe('The health score dashboard page', () => {
   });
 
   describe('health score bar chart', () => {
-    it('renders a bar chart that exposes "Health Score", "Injections", and "DoD Change" on hover', () => {});
+    beforeEach(() => cy.clock(STABLE_UNIX_DATE));
 
     it('renders "Total Injections"', () => {
       cy.stubRequest({
@@ -154,11 +154,37 @@ describe('The health score dashboard page', () => {
         cy.findByText('10').should('be.visible');
       });
     });
+
+    it('renders tooltips when clicking on bars within the history chart', () => {
+      const rechartsSelector = '.recharts-wrapper';
+      const barSelector = '.recharts-rectangle';
+
+      cy.visit(PAGE_URL);
+
+      cy.get(rechartsSelector).within(() => {
+        // Using the .eq method `indexFromEnd` param, hence the negative value
+        cy.get(barSelector)
+          .eq(-1)
+          .click(); // Hover also triggers this tooltip, but using click since there is no `cy.hover()`. Triggering a `mouseover` does not properly render the tooltip
+
+        // Visibility check not working due to how positioning is handled relative to cursor
+        // Because of the lack of a true `cy.hover()` a true hover can't quite be replicated
+        cy.findByText('Feb 2 2020').should('exist');
+        cy.findByText('79.9').should('exist');
+
+        cy.get(barSelector)
+          .eq(-2)
+          .click();
+
+        cy.findByText('Feb 1 2020').should('exist');
+        cy.findByText('79.4').should('exist');
+      });
+    });
   });
 
   describe('the subaccount table', () => {
     beforeEach(() => {
-      cy.clock(UNIX_STUBBED_DATE);
+      cy.clock(STABLE_UNIX_DATE);
 
       cy.stubRequest({
         url: API_URL,
