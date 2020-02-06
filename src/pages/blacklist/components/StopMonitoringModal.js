@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Modal, Panel } from '@sparkpost/matchbox';
 import { connect } from 'react-redux';
-
+import { domainRegex } from 'src/helpers/regex';
 import { Loading } from 'src/components';
 import styles from './StopMonitoringModal.module.scss';
 import { deleteMonitor } from 'src/actions/blacklist';
@@ -24,11 +24,16 @@ export const StopMonitoringModal = ({
     });
   };
   const renderContent = () => {
+    if (!monitorToDelete) {
+      return null;
+    }
     return (
       <>
         <p>
-          Removing this IP from your watchlist means you won't get notified of changes, but don't
-          worry you can always add it again later.
+          {`Removing this ${
+            monitorToDelete.match(domainRegex) ? 'domain' : 'IP'
+          } from your watchlist means you won't get notified of changes, but don't
+          worry you can always add it again later.`}
         </p>
         <Button className={styles.Confirm} disabled={isPending} onClick={confirmAction} primary>
           Stop Monitoring
