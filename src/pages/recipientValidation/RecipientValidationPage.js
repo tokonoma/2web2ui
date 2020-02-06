@@ -71,7 +71,19 @@ export class RecipientValidationPage extends Component {
   };
 
   onSubmit = () => {
-    console.log('submitted');
+    // if(!zuoraAccountExists) zuoraAccountExists =(account.billing) // move this check in createZuoraWithRVSubscription
+    // {
+    // below can be labelled as createZuoraWithRVSubscription
+    //    createZuoraAccount();
+    //    addRVbundleToSubscription();
+    // }else {
+    //  if(isRVBundleOnSubscription){  create a selector to check if it exists in current bundle
+    //        validate();
+    //      }else{
+    //  addRVBundleToSubscription();
+    //  validate();
+    // }
+    // }
   };
 
   handleModal = (showPriceModal = false) => this.setState({ showPriceModal });
