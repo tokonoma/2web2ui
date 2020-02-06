@@ -36,12 +36,6 @@ describe('The health score dashboard page', () => {
   //   cy.visit(PAGE_URL);
   // });
 
-  // NOTE: Waiting on `<label>s` made available in the `TR-2133` branch:
-  // https://github.com/SparkPost/2web2ui/pull/1388
-  // it('updates the rendered health score value when changing the date filter', () => {});
-  //
-  // it('re-renders the chart heading based on the date selection', () => {})
-
   it('renders the empty state when insufficient data is returned', () => {
     cy.stubRequest({
       url: API_URL,
@@ -55,7 +49,35 @@ describe('The health score dashboard page', () => {
     cy.findByText('No Data Available').should('be.visible');
   });
 
-  it('renders the WoW change as a percentage', () => {
+  it('updates the rendered results when changing the date filter by a broad date range', () => {
+    cy.visit(PAGE_URL);
+
+    cy.stubRequest({
+      url: API_URL,
+      fixture: 'signals/health-score/200.get.no-results.json',
+    });
+
+    cy.findByLabelText('Broad Date Range').select('Last 7 Days');
+
+    cy.findByText('Current Health Score Not Available').should('be.visible');
+  });
+
+  it('updates the rendered results when changing the narrow date range filter using the date picker', () => {
+    cy.visit(PAGE_URL);
+
+    cy.stubRequest({
+      url: API_URL,
+      fixture: 'signals/health-score/200.get.no-results.json',
+    });
+
+    cy.findByLabelText('Narrow Date Range').click();
+    cy.findByText('Apply').click();
+
+    cy.findByText('Current Health Score Not Available').should('be.visible');
+  });
+
+  it('renders the WoW (Week over Week) change as a percentage', () => {
+    cy.clock(STABLE_UNIX_DATE);
     cy.visit(PAGE_URL);
 
     cy.get('[data-id="health-score-wow-change"]').within(() => {
@@ -63,13 +85,14 @@ describe('The health score dashboard page', () => {
     });
   });
 
-  // How is DoD calculated? Not coming directly from the server, sadly
-  // it('renders the DoD change as a percentage', () => {
-  //   cy.visit(PAGE_URL);
+  it('renders the DoD (Day over Day) change as a percentage', () => {
+    cy.clock(STABLE_UNIX_DATE);
+    cy.visit(PAGE_URL);
 
-  //   cy.get('[data-id="health-score-dod-change"]').within(() => {
-  //   });
-  // });
+    cy.get('[data-id="health-score-dod-change"]').within(() => {
+      cy.findByText('0.6%').should('be.visible');
+    });
+  });
 
   describe('health score value', () => {
     beforeEach(() => cy.clock(STABLE_UNIX_DATE));
@@ -274,15 +297,6 @@ describe('The health score dashboard page', () => {
           fixture: 'signals/health-score/200.get.no-results.json',
         });
       });
-
-      // it('re-requests data when filtering by "Master Account"', () => {
-      //   cy.findByText('Master & All Subaccounts')
-      //     .closest('button') // This is an a11y bug! The
-      //     .click();
-      //   cy.findByText('Master Account').click();
-
-      //   cy.findByText('No Data Available').should('be.visible');
-      // });
 
       it('re-requests data when filtering by breakdown and renders a search field', () => {
         cy.findByLabelText('Search By').should('not.be.visible');
