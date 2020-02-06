@@ -1,27 +1,7 @@
-/// <reference types="Cypress" />
-
-function stubRequest({
-  method = 'GET',
-  statusCode = 200,
-  url,
-  fixture,
-  alias = 'billingPageAlias',
-}) {
-  cy.server();
-
-  cy.fixture(fixture).as(alias);
-  cy.route({
-    method,
-    url,
-    status: statusCode,
-    response: `@${alias}`,
-  }).as(`${alias}Request`);
-}
-
 describe('The billing plan page', () => {
   beforeEach(() => {
     cy.stubAuth();
-    stubRequest({
+    cy.stubRequest({
       url: '/api/v1/account/countries?filter=billing',
       fixture: 'account/countries/200.get.billing-filter.json',
     });
@@ -102,7 +82,7 @@ describe('The billing plan page', () => {
     });
 
     it('renders the first and last name fields when the user account does not have a stored first and last name', () => {
-      stubRequest({
+      cy.stubRequest({
         fixture: 'users/200.get.no-first-or-last-names.json',
         url: `/api/v1/users/${Cypress.env('USERNAME')}`,
       });
@@ -114,7 +94,7 @@ describe('The billing plan page', () => {
     });
 
     it('does not render the first and last name fields when the user account has a stored first and last name', () => {
-      stubRequest({
+      cy.stubRequest({
         fixture: 'users/200.get.json',
         url: `/api/v1/users/${Cypress.env('USERNAME')}`,
       });
@@ -133,11 +113,11 @@ describe('The billing plan page', () => {
 
     describe('the promo code field', () => {
       it('renders an "Invalid promo code" error when no valid promo code is found', () => {
-        stubRequest({
+        cy.stubRequest({
           fixture: 'account/subscription/promo-codes/400.get.json',
           url: '/api/v1/account/subscription/promo-codes/*',
           statusCode: 400,
-          alias: 'invalidPromoCode',
+          requestAlias: 'invalidPromoCodeRequest',
         });
 
         cy.findByLabelText('Promo Code').type('abc');
@@ -149,11 +129,11 @@ describe('The billing plan page', () => {
       });
 
       it('renders a "Resource could not be found" error when no entry is made in the promo code field and the user clicks "Apply"', () => {
-        stubRequest({
+        cy.stubRequest({
           url: '/api/v1/account/subscription/promo-codes/*',
           fixture: 'account/subscription/promo-codes/404.get.json',
           statusCode: 404,
-          alias: 'resourceNotFound',
+          requestAlias: 'resourceNotFoundRequest',
         });
 
         cy.findByText('Apply').click();
@@ -164,7 +144,7 @@ describe('The billing plan page', () => {
       });
 
       it('applies the promo code when the promo code is valid', () => {
-        stubRequest({
+        cy.stubRequest({
           url: '/api/v1/account/subscription/promo-codes/*',
           fixture: 'account/subscription/promo-codes/200.get.json',
         });

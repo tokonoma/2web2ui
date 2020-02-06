@@ -1,0 +1,19 @@
+{
+  "results": [
+  {
+    "external_ip": "35.164.147.103",
+    "hostname": "ec2-35-164-147-103.us-west-2.compute.amazonaws.com",
+    "ip_pool": "hello_pool",
+    "customer_provided": false,
+    "auto_warmup_enabled": true,
+    "auto_warmup_stage": 1
+  },
+  {
+    "external_ip": "35.161.223.77",
+    "hostname": "ec2-35-161-223-77.us-west-2.compute.amazonaws.com",
+    "ip_pool": "hello_pool",
+    "customer_provided": false,
+    "auto_warmup_enabled": false
+  }
+]
+}

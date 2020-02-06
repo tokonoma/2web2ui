@@ -85,7 +85,7 @@ export function getMomentPrecision(from, to = moment()) {
 }
 
 export function getPrecisionType(precision) {
-  return (indexedPrecisions[precision].time <= (60 * 24 * 2)) ? 'hours' : 'days';
+  return (indexedPrecisions[precision].time <= (60 * 24 * 2)) ? 'hour' : precision;
 }
 
 /**

@@ -34,13 +34,28 @@
   text-align: center;
 }
 
+.HeaderSRV {
+  margin: spacing() 0;
+  font-size: rem(20);
+  font-weight: 600;
+  text-align: left;
+}
+
 .Subheader {
   text-align: center;
+}
+.SubheaderSRV {
+  text-align: left;
 }
 
 .Field {
   max-width: 500px;
   margin: 4rem auto 0;
+}
+
+.FieldSRV {
+  max-width: 500px;
+  margin: 1rem 0;
 }
 
 .Submit {

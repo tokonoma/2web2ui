@@ -13,6 +13,8 @@ import ConditionSwitch, { Case, defaultCase } from 'src/components/auth/Conditio
 import RecipientValidationPriceTable from './components/RecipientValidationPriceTable';
 import { isAccountUiOptionSet } from 'src/helpers/conditions/account';
 import styles from './RecipientValidationPage.module.scss';
+import ValidateSection from './components/ValidateSection';
+import { getBillingInfo } from 'src/actions/account';
 
 const tabs = [
   { content: <span className={styles.TabPadding}>List</span>, key: 'list' },
@@ -25,6 +27,10 @@ export class RecipientValidationPage extends Component {
     selectedTab: this.props.tab || 0,
     showPriceModal: false,
   };
+
+  componentDidMount() {
+    this.props.getBillingInfo();
+  }
 
   handleTabs(tabIdx) {
     const { history } = this.props;
@@ -68,6 +74,7 @@ export class RecipientValidationPage extends Component {
 
   renderRecipientValidation = () => {
     const { selectedTab, showPriceModal } = this.state;
+    const { isStandAloneRVSet, billing, billingLoading } = this.props;
 
     return (
       <Page
@@ -95,6 +102,10 @@ export class RecipientValidationPage extends Component {
 
         {selectedTab === 0 && <JobsTableCollection />}
 
+        {selectedTab === 1 && isStandAloneRVSet && !billingLoading && (
+          <ValidateSection credit_card={billing.credit_card} handleValidate={() => {}} />
+        )}
+
         <Modal open={showPriceModal} onClose={() => this.handleModal(false)}>
           {this.renderRVPriceModal()}
         </Modal>
@@ -121,6 +132,8 @@ export class RecipientValidationPage extends Component {
 const mapStateToProps = (state, props) => ({
   tab: tabs.findIndex(({ key }) => key === props.match.params.category) || 0,
   isStandAloneRVSet: isAccountUiOptionSet('standalone_rv')(state),
+  billing: state.account.billing || {},
+  billingLoading: state.account.billingLoading,
 });
 
-export default withRouter(connect(mapStateToProps)(RecipientValidationPage));
+export default withRouter(connect(mapStateToProps, { getBillingInfo })(RecipientValidationPage));

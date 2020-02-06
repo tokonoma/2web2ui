@@ -1,0 +1,7 @@
+{
+  "results": [],
+  "total_count": 0,
+  "links": {
+    "next": "/api/v1/events/message?cursor=MTU4MDQxMzM0ODAwMCw4MjE4OTQ4MDQ3MTc3OTczMA==&from=2020-01-30T18:43:00&to=2020-01-30T19:43:00&per_page=25"
+  }
+}

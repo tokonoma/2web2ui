@@ -182,29 +182,44 @@ export default class AppDatePicker extends Component {
       error,
       left,
       hideManualEntry,
+      id = 'date-picker', // When multiple <DatePicker/> components are present, each one will need a unique `id`. This is a safe default.
     } = this.props;
     const dateFormat = dateFieldFormat || this.DATE_FORMAT;
 
     const rangeSelect = showPresets ? (
-      <Select
-        options={getRelativeDateOptions(relativeDateOptions)}
-        onChange={this.handleSelectRange}
-        value={selectedRange}
-        disabled={disabled}
-      />
+      <>
+        <label className={styles.Label} htmlFor={`range-select-${id}`}>
+          Broad Date Range
+        </label>
+
+        <Select
+          id={`range-select-${id}`}
+          options={getRelativeDateOptions(relativeDateOptions)}
+          onChange={this.handleSelectRange}
+          value={selectedRange}
+          disabled={disabled}
+        />
+      </>
     ) : null;
 
     const dateField = (
-      <TextField
-        onClick={this.showDatePicker}
-        connectLeft={rangeSelect}
-        value={`${format(from, dateFormat)} – ${format(to, dateFormat)}`}
-        readOnly
-        onBlur={this.handleTextUpdate}
-        error={error}
-        disabled={disabled}
-        {...textFieldProps}
-      />
+      <>
+        <label className={styles.Label} htmlFor={`date-field-${id}`}>
+          Narrow Date Range
+        </label>
+
+        <TextField
+          id={`date-field-${id}`}
+          onClick={this.showDatePicker}
+          connectLeft={rangeSelect}
+          value={`${format(from, dateFormat)} – ${format(to, dateFormat)}`}
+          readOnly
+          onBlur={this.handleTextUpdate}
+          error={error}
+          disabled={disabled}
+          {...textFieldProps}
+        />
+      </>
     );
 
     return (

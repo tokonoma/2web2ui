@@ -4,7 +4,7 @@ import { getPrecisionType } from './metrics';
 import { roundToPlaces } from 'src/helpers/units';
 
 function getDayLines(data, precision = 'day') {
-  if (getPrecisionType(precision) !== 'hours') {
+  if (getPrecisionType(precision) !== 'hour') {
     return [];
   }
   const lastIndex = data.length - 1;
@@ -19,35 +19,75 @@ function getDayLines(data, precision = 'day') {
   });
 }
 
-const getTimeTickFormatter = _.memoize((precisionType) => {
-  const tickFormat = (precisionType === 'hours') ? 'h:mma' : 'MMM Do';
-  return (tick) => moment(tick).format(tickFormat);
-});
+const getTimeTickFormatter = _.memoize(precisionType => {
+  const format = tickFormat => tick => moment(tick).format(tickFormat);
+  switch (precisionType) {
+    case 'hour':
+      return format('h:mma');
 
-const getTooltipLabelFormatter = _.memoize((precisionType) => {
-  let labelFormat = 'MMMM Do';
-  if (precisionType === 'hours') {
-    labelFormat = 'MMM Do [at] LT';
+    case 'day':
+    case 'week':
+      return format('MMM Do');
+
+    case 'month':
+      return format('MMM');
+
+    default:
+      return format('MMM Do');
   }
-  return (label) => moment(label).format(labelFormat);
 });
 
-function getLineChartFormatters(precision) {
+const getTooltipLabelFormatter = _.memoize(precisionType => {
+  const format = labelFormat => label => moment(label).format(labelFormat);
+  switch (precisionType) {
+    case 'hour':
+      return format('MMM Do [at] LT');
+
+    case 'day':
+      return format('MMMM Do');
+
+    case 'month':
+      return format('MMMM YYYY');
+
+    default:
+      return format('MMMM Do');
+  }
+});
+
+const getWeekPrecisionFormatter = to => {
+  return label => {
+    const format = momentTime => momentTime.format('MMM Do');
+    const startDate = format(moment(label));
+
+    //If it's the last date, make the end date the to date; else, make the to date the next Saturday
+    if (moment(label).isSame(moment(to).weekday(0), 'day')) {
+      return `${startDate} - ${format(moment(to))}`;
+    }
+
+    return `${startDate} - ${format(moment(label).weekday(6))}`;
+  };
+};
+
+function getLineChartFormatters(precision, to = moment()) {
   const formatters = {};
   const precisionType = getPrecisionType(precision);
 
   formatters.xTickFormatter = getTimeTickFormatter(precisionType);
-  formatters.tooltipLabelFormatter = getTooltipLabelFormatter(precisionType);
+  formatters.tooltipLabelFormatter =
+    precisionType === 'week' //Can't put in case;switch in getToolTipLabelFormatter b/c memoization
+      ? getWeekPrecisionFormatter(to)
+      : getTooltipLabelFormatter(precisionType);
 
   return formatters;
 }
 
-const formatYAxisPercent = _.memoize((v) => `${roundToPlaces(v, v < 1 ? 3 : 1)}%`);
+const formatYAxisPercent = _.memoize(v => `${roundToPlaces(v, v < 1 ? 3 : 1)}%`);
 
 export {
   getDayLines,
   getTimeTickFormatter,
   getTooltipLabelFormatter,
+  getWeekPrecisionFormatter,
   getLineChartFormatters,
-  formatYAxisPercent
+  formatYAxisPercent,
 };

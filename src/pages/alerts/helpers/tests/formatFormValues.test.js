@@ -105,8 +105,8 @@ const testCases = {
       name: 'foo',
       metric: 'blacklist',
       subaccounts: [], // default
-      provider: ['abuseat.org', 'new.spam.dnsbl.sorbs.net'],
-      resource: ['1.2.3.4', 'example.com'],
+      blacklist_provider: ['abuseat.org', 'new.spam.dnsbl.sorbs.net'],
+      blacklist_resource: ['1.2.3.4', 'example.com'],
       emails,
       slack: '',
       webhook: '',
@@ -119,12 +119,44 @@ const testCases = {
       subaccounts: [-1],
       filters: [
         {
-          filter_type: 'provider',
+          filter_type: 'blacklist_provider',
           filter_values: ['abuseat.org', 'new.spam.dnsbl.sorbs.net'],
         },
         {
-          filter_type: 'resource',
+          filter_type: 'blacklist_resource',
           filter_values: ['1.2.3.4', 'example.com'],
+        },
+      ],
+      threshold_evaluator: {},
+      channels: { emails: emailAsArray },
+      muted: false,
+    },
+  },
+  'for unfiltered blacklist alert': {
+    formData: {
+      name: 'foo',
+      metric: 'blacklist',
+      subaccounts: [], // default
+      blacklist_provider: [],
+      blacklist_resource: [],
+      emails,
+      slack: '',
+      webhook: '',
+      muted: false,
+    },
+    apiData: {
+      name: 'foo',
+      metric: 'blacklist',
+      any_subaccount: undefined,
+      subaccounts: [-1],
+      filters: [
+        {
+          filter_type: 'blacklist_provider',
+          filter_values: [],
+        },
+        {
+          filter_type: 'blacklist_resource',
+          filter_values: [],
         },
       ],
       threshold_evaluator: {},
