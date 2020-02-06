@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Downshift from 'downshift';
+import Downshift, {useL} from 'downshift';
 import classnames from 'classnames';
 import debounce from 'lodash/debounce';
 import { METRICS_API_LIMIT, TYPEAHEAD_LIMIT } from '../../../constants';
@@ -86,6 +86,7 @@ export class Typeahead extends Component {
   onTypeahead = ({
     getInputProps,
     getItemProps,
+    getLabelProps,
     isOpen,
     inputValue,
     selectedItem,
@@ -109,7 +110,12 @@ export class Typeahead extends Component {
     const listClasses = classnames(styles.List, isOpen && mappedMatches.length && styles.open);
     return (
       <div className={styles.Typeahead}>
-        <div className={listClasses}><ActionList actions={mappedMatches} maxHeight={300} /></div>
+        <div className={listClasses} data-id='report-filters-dropdown'>
+          <ActionList actions={mappedMatches} maxHeight={300} />
+        </div>
+        <label className={styles.Label} {...getLabelProps()}>
+          Reports Filter Typeahead
+        </label>
         <TextField {...getInputProps({
           placeholder,
           onFocus: clearSelection
