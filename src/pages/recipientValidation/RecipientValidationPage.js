@@ -17,6 +17,9 @@ import ValidateSection from './components/ValidateSection';
 import { getBillingInfo } from 'src/actions/account';
 import { reduxForm } from 'redux-form';
 import { FORMS } from 'src/constants';
+import { isRVonSubscription } from 'src/selectors/accountBillingInfo';
+import { validate } from '@babel/types';
+// import addRVtoSubscription from '../../actions/addRVtoSubscription';
 
 const FORMNAME = FORMS.RV_ADDPAYMENTFORM;
 
@@ -70,20 +73,17 @@ export class RecipientValidationPage extends Component {
     }
   };
 
+  validate = () => {
+    console.log('validated');
+  };
+
   onSubmit = () => {
-    // if(!zuoraAccountExists) zuoraAccountExists =(account.billing) // move this check in createZuoraWithRVSubscription
-    // {
-    // below can be labelled as createZuoraWithRVSubscription
-    //    createZuoraAccount();
-    //    addRVbundleToSubscription();
-    // }else {
-    //  if(isRVBundleOnSubscription){  create a selector to check if it exists in current bundle
-    //        validate();
-    //      }else{
-    //  addRVBundleToSubscription();
-    //  validate();
-    // }
-    // }
+    if (this.props.isRVonSubscription) {
+      validate();
+    } else {
+      console.log('no!');
+      // addRVtoSubscription(values,validate);
+    }
   };
 
   handleModal = (showPriceModal = false) => this.setState({ showPriceModal });
@@ -213,6 +213,7 @@ const mapStateToProps = (state, props) => ({
   isStandAloneRVSet: isAccountUiOptionSet('standalone_rv')(state),
   billing: state.account.billing || {},
   billingLoading: state.account.billingLoading,
+  isRVonSubscription: isRVonSubscription(state),
 });
 
 export default withRouter(connect(mapStateToProps, { getBillingInfo })(RecipientValidationPage));

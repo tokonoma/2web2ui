@@ -253,3 +253,14 @@ export function updateBillingSubscription(data) {
     },
   });
 }
+
+export function addProductToSubscription(data) {
+  return sparkpostApiRequest({
+    type: 'ADD_PRODUCT_TO_SUBSCRIPTION',
+    meta: {
+      method: 'POST',
+      url: '/v1/billing/subscription/control/product',
+      data,
+    },
+  });
+}
