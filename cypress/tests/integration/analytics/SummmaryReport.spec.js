@@ -1,5 +1,3 @@
-/// <reference types="Cypress" />
-
 describe('Summary Report page', () => {
   beforeEach(() => {
     cy.stubAuth();
@@ -32,7 +30,6 @@ describe('Summary Report page', () => {
       fixture: 'metrics/deliverability/campaign/200.get.json',
       requestAlias: 'getDataCampaign',
     });
-
   });
 
   it('Handles changing the date range correctly', () => {
@@ -49,7 +46,7 @@ describe('Summary Report page', () => {
       .format('MMM Do YYYY h:mma');
     cy.url().should('not.include', 'range=7days');
     cy.get('[data-id="report-options"]').within(() => {
-      cy.get('input').should('have.value', getDatePickerText(dayAgo));
+      cy.findByLabelText('Narrow Date Range').should('have.value', getDatePickerText(dayAgo));
       cy.get('select').select('7days');
     });
 
@@ -60,20 +57,19 @@ describe('Summary Report page', () => {
       .format('MMM Do YYYY h:mma');
     cy.url().should('include', 'range=7days');
     cy.get('[data-id="report-options"]').within(() => {
-      cy.get('input').should('have.value', getDatePickerText(sevenDaysAgo));
+      cy.findByLabelText('Narrow Date Range').should('have.value', getDatePickerText(sevenDaysAgo));
     });
   });
 
   it('Handles applying filters correctly', () => {
     cy.visit('/reports/summary');
     cy.get('[data-id="report-options"]').within(() => {
-      cy.findByPlaceholderText('Filter by domain, campaign, etc').type('sparkpost');
+      cy.findAllByLabelText('Reports Filter Typeahead').first().type('sparkpost');
       cy.wait('@getMetricsFilterOptions');
-      const filter = cy.get('a');
-      filter.within(() => {
+      cy.get('[data-id="report-filters-dropdown"]').within(() => {
         cy.findByText('sparkpost-test').should('be.visible');
+        cy.get('a').click({ force: true });
       });
-      filter.click({force: true});
       cy.findByText('Campaign: sparkpost-test').should('be.visible');
     });
   });
@@ -87,6 +83,7 @@ describe('Summary Report page', () => {
 
     cy.findByText('Select up to 5 metrics').should('be.visible');
     cy.findByLabelText('Accepted').uncheck({ force: true });
+    //Not sure why, but this duplicate command is necessary to uncheck properly
     cy.findByLabelText('Accepted').uncheck({ force: true });
     cy.findByLabelText('Injected').check({ force: true });
     cy.findByText('Apply Metrics').click();
@@ -95,6 +92,16 @@ describe('Summary Report page', () => {
       cy.findByText('Accepted').should('not.be.visible');
       cy.findByText('Injected').should('be.visible');
     });
+  });
+
+ it('Share Modal works correctly', () => {
+    cy.visit('/reports/summary');
+    cy.findByText('Share').click();
+    cy.findByText('Share this report').should('be.visible');
+    cy.url().then(url => {
+     const editedUrl = url.replace(/range=.*?&/, 'range=custom&');
+     cy.get('[name="copy-field"]').should('have.value', editedUrl);
+   });
   });
 
   //Breaks in Travis CI
