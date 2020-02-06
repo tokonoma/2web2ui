@@ -94,11 +94,13 @@ describe('Summary Report page', () => {
     });
   });
 
- it('Share Modal works correctly', () => {
+ it('Opens share modal correctly', () => {
     cy.visit('/reports/summary');
     cy.findByText('Share').click();
     cy.findByText('Share this report').should('be.visible');
     cy.url().then(url => {
+      cy.findByLabelText('Pin dates for this link').should('be.checked');
+      //replace the current range with the
      const editedUrl = url.replace(/range=.*?&/, 'range=custom&');
      cy.get('[name="copy-field"]').should('have.value', editedUrl);
    });
