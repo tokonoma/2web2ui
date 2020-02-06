@@ -70,7 +70,7 @@ describe('Page: Recipient Email Verification', () => {
     it('when billingLoading is true ValidateSection is not rendered', () => {
       const instance = subject({ billingLoading: true });
       instance.setState({ selectedTab: 1 });
-      expect(instance.find('ValidateSection')).not.toExist();
+      expect(instance.find('Connect(ReduxForm)')).not.toExist();
     });
 
     it('renders a API Docs button in Panel when API Integration Tab is selected', () => {
