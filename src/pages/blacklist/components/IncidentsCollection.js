@@ -29,16 +29,12 @@ const getRowData = ({
       <span className={styles.DetailsLink}>{resource}</span>
       <span> on </span> <span className={styles.DetailsLink}>{blacklist_name}</span>
     </PageLink>,
-    <div className={styles.Listing}>
-      <DisplayDate timestamp={occurred_at_timestamp} formattedDate={occurred_at_formatted} />
-    </div>,
-    <div className={styles.Listing}>
-      {!resolved_at_formatted ? (
-        <Tag color="yellow">Active</Tag>
-      ) : (
-        <DisplayDate timestamp={resolved_at_timestamp} formattedDate={resolved_at_formatted} />
-      )}
-    </div>,
+    <DisplayDate timestamp={occurred_at_timestamp} formattedDate={occurred_at_formatted} />,
+    !resolved_at_formatted ? (
+      <Tag color="yellow">Active</Tag>
+    ) : (
+      <DisplayDate timestamp={resolved_at_timestamp} formattedDate={resolved_at_formatted} />
+    ),
   ];
 };
 
