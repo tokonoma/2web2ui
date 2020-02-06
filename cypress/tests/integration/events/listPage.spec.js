@@ -364,7 +364,6 @@ describe('The events page', () => {
           .closest('button')
           .click();
 
-        cy.findByText('different-results@hotmail.com').should('not.be.visible');
         cy.findByText('fake-recipient@hotmail.com').should('be.visible');
         cy.get(CURRENT_PAGE_SELECTOR).should('contain', '1');
       });
