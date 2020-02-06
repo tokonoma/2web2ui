@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Page, Tabs, Panel, Modal, Button } from '@sparkpost/matchbox';
-import { Close } from '@sparkpost/matchbox-icons';
+import { Close, Launch } from '@sparkpost/matchbox-icons';
 import JobsTableCollection from './components/JobsTableCollection';
 import ListForm from './components/ListForm';
 import SingleAddressForm from './components/SingleAddressForm';
@@ -46,7 +46,7 @@ export class RecipientValidationPage extends Component {
       case 1:
         return <SingleAddressForm />;
       case 2:
-        return <ApiDetails />;
+        return <ApiDetails isStandAloneRVSet={this.props.isStandAloneRVSet} />;
     }
   };
 
@@ -91,19 +91,57 @@ export class RecipientValidationPage extends Component {
           problems, including syntax errors and non-existent mailboxes, to drive better
           deliverability, cut down on fraud, and capture every opportunity.
         </p>
+        {!isStandAloneRVSet && (
+          <>
+            <Tabs
+              selected={selectedTab}
+              connectBelow={true}
+              tabs={tabs.map(({ content }, idx) => ({
+                content,
+                onClick: () => this.handleTabs(idx),
+              }))}
+            />
 
-        <Tabs
-          selected={selectedTab}
-          connectBelow={true}
-          tabs={tabs.map(({ content }, idx) => ({ content, onClick: () => this.handleTabs(idx) }))}
-        />
+            <Panel>{this.renderTabContent(selectedTab)}</Panel>
+          </>
+        )}
 
-        <Panel>{this.renderTabContent(selectedTab)}</Panel>
+        {isStandAloneRVSet && (
+          <Panel>
+            <div className={styles.TabsWrapper}>
+              <Tabs
+                selected={selectedTab}
+                connectBelow={true}
+                tabs={tabs.map(({ content }, idx) => ({
+                  content,
+                  onClick: () => this.handleTabs(idx),
+                }))}
+              />
 
+              {selectedTab === 2 && (
+                <div className={styles.TagWrapper}>
+                  <Button
+                    flat
+                    external
+                    to="https://developers.sparkpost.com/api/recipient-validation/"
+                  >
+                    API Docs
+                    <Launch className={styles.LaunchIcon} />
+                  </Button>
+                </div>
+              )}
+            </div>
+            <Panel.Section>{this.renderTabContent(selectedTab)}</Panel.Section>
+          </Panel>
+        )}
         {selectedTab === 0 && <JobsTableCollection />}
 
-        {selectedTab === 1 && isStandAloneRVSet && !billingLoading && (
-          <ValidateSection credit_card={billing.credit_card} handleValidate={() => {}} />
+        {(selectedTab === 1 || selectedTab === 2) && isStandAloneRVSet && !billingLoading && (
+          <ValidateSection
+            credit_card={billing.credit_card}
+            handleValidate={() => {}}
+            submitButtonName={selectedTab === 2 ? 'Create API Key' : 'Validate'}
+          />
         )}
 
         <Modal open={showPriceModal} onClose={() => this.handleModal(false)}>

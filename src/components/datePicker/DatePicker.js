@@ -258,7 +258,12 @@ export default class AppDatePicker extends Component {
           />
         )}
 
-        <Button primary onClick={this.handleSubmit} className={styles.Apply}>
+        <Button
+          primary
+          onClick={this.handleSubmit}
+          className={styles.Apply}
+          data-id="date-picker-custom-apply"
+        >
           Apply
         </Button>
         <Button onClick={this.cancelDatePicker}>Cancel</Button>

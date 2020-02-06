@@ -52,7 +52,10 @@ export const selectAlertFormValues = createSelector(
       multi: () => {
         const formFilters = {};
         filters.forEach(filter => {
-          formFilters[filter.filter_type] = filter.filter_values;
+          formFilters[filter.filter_type] =
+            metric === 'blacklist'
+              ? filter.filter_values.filter(value => value !== 'any')
+              : filter.filter_values;
         });
         return formFilters;
       },

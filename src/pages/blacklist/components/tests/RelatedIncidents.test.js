@@ -17,7 +17,7 @@ const mixedIncidents = [
     resource: '2.3.4.5',
     blacklist_name: 'spamhaus.org 2 - sbl',
     occurred_at: '2019-07-23T12:48:00.000Z',
-    status: 'flagged',
+    status: 'active',
   },
 ];
 
@@ -27,7 +27,7 @@ const activeIncidents = [
     resource: '2.3.4.5',
     blacklist_name: 'spamhaus.org 2 - sbl',
     occurred_at: '2019-07-23T12:48:00.000Z',
-    status: 'flagged',
+    status: 'active',
   },
 ];
 

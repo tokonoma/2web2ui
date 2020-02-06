@@ -25,20 +25,16 @@ const getRowData = ({
   resolved_at_formatted,
 }) => {
   return [
-    <div className={styles.Details}>
-      <PageLink to={`/blacklist/incidents/${id}`}>{resource}</PageLink>
-      <div>{blacklist_name}</div>
-    </div>,
-    <div className={styles.Listing}>
-      <DisplayDate timestamp={occurred_at_timestamp} formattedDate={occurred_at_formatted} />
-    </div>,
-    <div className={styles.Listing}>
-      {!resolved_at_formatted ? (
-        <Tag color="yellow">Active</Tag>
-      ) : (
-        <DisplayDate timestamp={resolved_at_timestamp} formattedDate={resolved_at_formatted} />
-      )}
-    </div>,
+    <PageLink to={`/blacklist/incidents/${id}`}>
+      <span className={styles.DetailsLink}>{resource}</span>
+      <span> on </span> <span className={styles.DetailsLink}>{blacklist_name}</span>
+    </PageLink>,
+    <DisplayDate timestamp={occurred_at_timestamp} formattedDate={occurred_at_formatted} />,
+    !resolved_at_formatted ? (
+      <Tag color="yellow">Active</Tag>
+    ) : (
+      <DisplayDate timestamp={resolved_at_timestamp} formattedDate={resolved_at_formatted} />
+    ),
   ];
 };
 
@@ -95,13 +91,13 @@ export const IncidentsCollection = props => {
       pagination={true}
       filterBox={{
         show: true,
-        exampleModifiers: ['resource', 'blacklist_name'],
+        exampleModifiers: ['resource', 'blacklist_name', 'status'],
         initialValue: search,
-        itemToStringKeys: ['resource', 'blacklist_name'],
+        itemToStringKeys: ['resource', 'blacklist_name', 'status'],
         wrapper: props => <div className={styles.FilterBox}>{props}</div>,
         onBlur: value => updateTextField(value),
       }}
-      defaultSortColumn="occurred_at"
+      defaultSortColumn="resolved_at"
       defaultSortDirection="desc"
       saveCsv={false}
       emptyComponent={EmptyComponent}

@@ -33,6 +33,7 @@ const enrichIncident = incident => ({
   resolved_at_timestamp: incident.resolved_at ? Date.parse(incident.resolved_at) : 0,
   resolved_at_formatted: incident.resolved_at ? formatDateTime(incident.resolved_at) : null,
   days_listed: getDaysListed(incident.resolved_at, incident.occurred_at),
+  status: incident.status === 'flagged' ? 'active' : 'resolved',
 });
 
 export const selectIncident = createSelector([getIncident], incident => enrichIncident(incident));
@@ -40,6 +41,20 @@ export const selectIncident = createSelector([getIncident], incident => enrichIn
 export const selectIncidentsList = createSelector([getIncidents], incidents =>
   incidents.map(incident => enrichIncident(incident)),
 );
+
+const sortActiveThenListedDate = (a, b) => {
+  const aIsActive = a.status === 'active';
+  const bIsActive = b.status === 'active';
+  if (aIsActive && bIsActive) {
+    return b.occurred_at_timestamp - a.occurred_at_timestamp;
+  } else if (aIsActive && !bIsActive) {
+    return -1;
+  } else if (!aIsActive && bIsActive) {
+    return 1;
+  } else {
+    return b.resolved_at_timestamp - a.resolved_at_timestamp;
+  }
+};
 
 export const selectRelatedIncidentsForResource = createSelector(
   [getIncidentsForResource, getIncident],
@@ -51,6 +66,7 @@ export const selectRelatedIncidentsForResource = createSelector(
           incident.blacklist_name !== currentIncident.blacklist_name,
       )
       .map(incident => enrichIncident(incident))
+      .sort(sortActiveThenListedDate)
       .slice(0, 3),
 );
 
@@ -63,6 +79,7 @@ export const selectRelatedIncidentsForBlacklist = createSelector(
           incident.id !== currentIncident.id && incident.resource !== currentIncident.resource,
       )
       .map(incident => enrichIncident(incident))
+      .sort(sortActiveThenListedDate)
       .slice(0, 3),
 );
 
