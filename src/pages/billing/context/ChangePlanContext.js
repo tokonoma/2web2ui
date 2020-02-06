@@ -27,7 +27,7 @@ export const ChangePlanProvider = ({
     getBillingInfo();
   }, [getBillingInfo]);
   useEffect(() => {
-    getBundles();
+    getBundles({ type: 'messaging' });
   }, [getBundles]);
   useEffect(() => {
     getPlans();
