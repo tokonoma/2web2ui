@@ -6,7 +6,7 @@ const ToDelete = ({ a, b }) => {
   if (b === 3) {
     x *= 2;
   } else if (b === 1) {
-    x *= 3;
+    x *= 4;
   }
 
   switch (a) {
