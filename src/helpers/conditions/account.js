@@ -14,7 +14,7 @@ export const subscriptionSelfServeIsTrue = ({ account }) =>
   _.get(account, 'subscription.self_serve', false);
 const SELF_SERVE_ACCOUNT_TYPES = ['active', 'inactive', 'none'];
 
-// Does not get the subscription by default as part of access control.
+// Does not get the subscription by default as part of access control. Only admins have access to billing.subscription
 export const isBillingSubscriptionSelfServe = ({ subscription }) =>
   _.includes(SELF_SERVE_ACCOUNT_TYPES, _.get(subscription, 'type'));
 
