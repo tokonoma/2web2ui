@@ -122,7 +122,6 @@ export class RecipientValidationPage extends Component {
                 <div className={styles.TagWrapper}>
                   <Button
                     flat
-                    style={{ marginTop: '0.2rem' }}
                     external
                     to="https://developers.sparkpost.com/api/recipient-validation/"
                   >
