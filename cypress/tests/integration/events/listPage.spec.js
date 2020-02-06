@@ -8,6 +8,7 @@ describe('The events page', () => {
     cy.stubRequest({
       url: '/api/v1/events/message*',
       fixture: 'events/message/200.get.json',
+      requestAlias: 'getMessageEvents',
     });
 
     cy.stubRequest({
@@ -326,6 +327,8 @@ describe('The events page', () => {
 
       beforeEach(() => {
         cy.visit(PAGE_URL);
+
+        cy.wait('@getMessageEvents');
 
         cy.stubRequest({
           url: '/api/v1/events/message*',
