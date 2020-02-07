@@ -71,7 +71,7 @@ describe('The engagement recency page', () => {
   describe('the engagement recency table', () => {
     beforeEach(() => cy.clock(STABLE_UNIX_DATE));
 
-    it.only('renders engagements in the table', () => {
+    it('renders engagements in the table', () => {
       cy.visit(PAGE_URL);
 
       cy.wait('@getEngagementData');
@@ -94,7 +94,8 @@ describe('The engagement recency page', () => {
       cy.get('tbody tr')
         .first()
         .within(() => {
-          cy.findByText('75%').should('be.visible');
+          // Value is calculated by dividing `"c_14d"` by the `"c_total"` for the latest entry in the data - a little tough to figure out!
+          cy.findByText('50%').should('be.visible');
         });
 
       // Second table row
@@ -121,6 +122,33 @@ describe('The engagement recency page', () => {
       cy.get('table').within(() => cy.findByText('Current Ratio').should('be.visible'));
     });
 
-    it('allows alphabetical sorting by "IP Pool", "Current Count", "Current Ratio", "WoW" and "Current Injections"', () => {});
+    describe.only('sorting behavior', () => {
+      beforeEach(() => {
+        cy.visit(PAGE_URL);
+
+        cy.stubRequest({
+          url: '/api/v1/signals/cohort-engagement/**/*',
+          fixture: 'signals/cohort-engagement/200.get.no-results.json',
+        });
+      });
+
+      it('re-requests data when sorting by "Subaccount"', () => {
+        cy.get('table').within(() => cy.findByText('Subaccount').click());
+
+        cy.findByText('No Data Available').should('be.visible');
+      });
+
+      it('re-requests data when sorting by "Current Ratio"', () => {
+        cy.get('table').within(() => cy.findByText('Current Ratio').click());
+
+        cy.findByText('No Data Available').should('be.visible');
+      });
+
+      it('re-requests data when sorting by "Current Injections"', () => {
+        cy.get('table').within(() => cy.findByText('Current Injections').click());
+
+        cy.findByText('No Data Available').should('be.visible');
+      });
+    });
   });
 });
