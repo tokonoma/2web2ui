@@ -7,6 +7,11 @@ describe('The engagement recency page', () => {
     cy.login({ isStubbed: true });
 
     cy.stubRequest({
+      url: '/api/v1/subaccounts',
+      fixture: 'subaccounts/200.get.json',
+    });
+
+    cy.stubRequest({
       url: '/api/v1/signals/cohort-engagement/**/*',
       fixture: 'signals/cohort-engagement/200.get.json',
       requestAlias: 'getEngagementData',
@@ -31,15 +36,15 @@ describe('The engagement recency page', () => {
     cy.findByText('No Data Available').should('be.visible');
   });
 
-  // Bug? Posted message to `#uxfe` to find out
-  // it.only('renders an error when the server returns a bad response', () => {
-  //   cy.stubRequest({
-  //     url: '/api/v1/signals/cohort-engagement/**/*',
-  //     fixture: 'signals/cohort-engagement/400.get.json',
-  //   });
+  // This is a bug according to Jon
+  it('renders an error when the server returns a bad response', () => {
+    cy.stubRequest({
+      url: '/api/v1/signals/cohort-engagement/**/*',
+      fixture: 'signals/cohort-engagement/400.get.json',
+    });
 
-  //   cy.visit(PAGE_URL);
-  // });
+    cy.visit(PAGE_URL);
+  });
 
   it('re-requests data when filtering by "Broad Date Range"', () => {
     cy.visit(PAGE_URL);
