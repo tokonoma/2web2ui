@@ -1,4 +1,5 @@
 const PAGE_URL = '/signals/engagement';
+const STABLE_UNIX_DATE = 1581087062000; // Stable unix timestamp (2/6/2020)
 
 describe('The engagement recency page', () => {
   beforeEach(() => {
@@ -8,6 +9,7 @@ describe('The engagement recency page', () => {
     cy.stubRequest({
       url: '/api/v1/signals/cohort-engagement/**/*',
       fixture: 'signals/cohort-engagement/200.get.json',
+      requestAlias: 'getEngagementData',
     });
   });
 
@@ -18,18 +20,106 @@ describe('The engagement recency page', () => {
     cy.get('main').within(() => cy.findByText('Engagement Recency').should('be.visible')); // Avoids grabbing the same content within the nav
   });
 
-  it('renders an empty state when no data is returned', () => {});
+  it('renders an empty state when no data is returned', () => {
+    cy.stubRequest({
+      url: '/api/v1/signals/cohort-engagement/**/*',
+      fixture: 'signals/cohort-engagement/200.get.no-results.json',
+    });
 
-  it('renders an error when the server returns a bad response', () => {});
+    cy.visit(PAGE_URL);
 
-  it('re-requests data when filtering by "Broad Date Range"', () => {});
+    cy.findByText('No Data Available').should('be.visible');
+  });
 
-  it('re-requests data when filtering by "Narrow Date Range"', () => {});
+  // Bug? Posted message to `#uxfe` to find out
+  // it.only('renders an error when the server returns a bad response', () => {
+  //   cy.stubRequest({
+  //     url: '/api/v1/signals/cohort-engagement/**/*',
+  //     fixture: 'signals/cohort-engagement/400.get.json',
+  //   });
+
+  //   cy.visit(PAGE_URL);
+  // });
+
+  it('re-requests data when filtering by "Broad Date Range"', () => {
+    cy.visit(PAGE_URL);
+
+    cy.stubRequest({
+      url: '/api/v1/signals/cohort-engagement/**/*',
+      fixture: 'signals/cohort-engagement/200.get.no-results.json',
+    });
+
+    cy.findByLabelText('Broad Date Range').select('Last 7 Days');
+
+    cy.findByText('No Data Available').should('be.visible');
+  });
+
+  it('re-requests data when filtering by "Narrow Date Range"', () => {
+    cy.visit(PAGE_URL);
+
+    cy.stubRequest({
+      url: '/api/v1/signals/cohort-engagement/**/*',
+      fixture: 'signals/cohort-engagement/200.get.no-results.json',
+    });
+
+    cy.findByLabelText('Narrow Date Range').click();
+    cy.findByText('Apply').click();
+
+    cy.findByText('No Data Available').should('be.visible');
+  });
 
   describe('the engagement recency table', () => {
-    it('updates the table by engagement count vs. engagement ratio when using the "Count" and "Ratio" buttons', () => {});
+    beforeEach(() => cy.clock(STABLE_UNIX_DATE));
 
-    it('renders engagements in the table', () => {});
+    it.only('renders engagements in the table', () => {
+      cy.visit(PAGE_URL);
+
+      cy.wait('@getEngagementData');
+
+      // First table row
+      cy.findByText('Count').click();
+
+      cy.get('tbody tr')
+        .first()
+        .within(() => {
+          cy.findByText('Master Account').should('be.visible');
+          cy.get('.recharts-wrapper').should('be.visible');
+          cy.findByText('-50%').should('be.visible');
+          cy.findByText('5').should('be.visible');
+          cy.findByText('12').should('be.visible');
+        });
+
+      cy.findByText('Ratio').click();
+
+      cy.get('tbody tr')
+        .first()
+        .within(() => {
+          cy.findByText('75%').should('be.visible');
+        });
+
+      // Second table row
+      cy.findByText('Count').click();
+
+      cy.get('tbody tr')
+        .last()
+        .within(() => {
+          cy.findByText('6257').should('be.visible');
+          cy.findByText('No Data').should('be.visible');
+          cy.findByText('- - -').should('be.visible');
+          cy.findByText('50%').should('be.visible');
+          cy.findByText('34').should('be.visible');
+        });
+    });
+
+    it('updates the table by engagement count vs. engagement ratio when using the "Count" and "Ratio" buttons', () => {
+      cy.visit(PAGE_URL);
+
+      cy.findByText('Count').click();
+      cy.get('table').within(() => cy.findByText('Current Count').should('be.visible'));
+
+      cy.findByText('Ratio').click();
+      cy.get('table').within(() => cy.findByText('Current Ratio').should('be.visible'));
+    });
 
     it('allows alphabetical sorting by "IP Pool", "Current Count", "Current Ratio", "WoW" and "Current Injections"', () => {});
   });
