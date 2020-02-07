@@ -100,7 +100,7 @@ describe('Summary Report page', () => {
     cy.findByText('Share this report').should('be.visible');
     cy.url().then(url => {
       cy.findByLabelText('Pin dates for this link').should('be.checked');
-      //replace the current range with the
+      //replace the current range with the word custom since the dates are pinned
      const editedUrl = url.replace(/range=.*?&/, 'range=custom&');
      cy.get('[name="copy-field"]').should('have.value', editedUrl);
    });
