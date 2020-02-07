@@ -122,7 +122,7 @@ describe('The engagement recency page', () => {
       cy.get('table').within(() => cy.findByText('Current Ratio').should('be.visible'));
     });
 
-    describe.only('sorting behavior', () => {
+    describe('sorting behavior', () => {
       beforeEach(() => {
         cy.visit(PAGE_URL);
 
