@@ -6,9 +6,21 @@ export default function addRVtoSubscription(values) {
   return (dispatch, getState) => {
     const state = getState();
 
-    const rvProduct = { product: 'recipient_validation', plan: state.subscription.code };
-    if (state.account.billing) {
-      return dispatch(chainActions([billingCreate(values), addProductToSubscription(rvProduct)])());
+    const rvProduct = {
+      bundle: 'rv-0519',
+    };
+
+    const addRV = () => {
+      return addProductToSubscription(rvProduct);
+    };
+    const createAccountInZuora = () => {
+      return billingCreate(values);
+    };
+
+    if (!state.account.billing) {
+      return dispatch(chainActions(createAccountInZuora, addRV)());
     }
+
+    return dispatch(addProductToSubscription(rvProduct));
   };
 }

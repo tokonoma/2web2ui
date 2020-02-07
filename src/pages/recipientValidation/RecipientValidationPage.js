@@ -19,7 +19,8 @@ import { reduxForm } from 'redux-form';
 import { FORMS } from 'src/constants';
 import { isRVonSubscription } from 'src/selectors/accountBillingInfo';
 import { validate } from '@babel/types';
-// import addRVtoSubscription from '../../actions/addRVtoSubscription';
+import { prepareCardInfo } from 'src/helpers/billing';
+import addRVtoSubscription from 'src/actions/addRVtoSubscription';
 
 const FORMNAME = FORMS.RV_ADDPAYMENTFORM;
 
@@ -77,12 +78,18 @@ export class RecipientValidationPage extends Component {
     console.log('validated');
   };
 
-  onSubmit = () => {
+  onSubmit = values => {
+    console.log('onSubmit');
+    const cardValues = values.card ? { ...values, card: prepareCardInfo(values.card) } : values;
+
+    const newValues = {
+      ...cardValues,
+    };
     if (this.props.isRVonSubscription) {
       validate();
     } else {
-      console.log('no!');
-      // addRVtoSubscription(values,validate);
+      let action = this.props.addRVtoSubscription(newValues);
+      return action;
     }
   };
 
@@ -220,5 +227,7 @@ export default withRouter(connect(mapStateToProps, { getBillingInfo })(Recipient
 
 const formOptions = { form: FORMNAME, enableReinitialize: true };
 export const RecipientValidationPageSRV = withRouter(
-  connect(mapStateToProps, { getBillingInfo })(reduxForm(formOptions)(RecipientValidationPage)),
+  connect(mapStateToProps, { getBillingInfo, addRVtoSubscription })(
+    reduxForm(formOptions)(RecipientValidationPage),
+  ),
 );

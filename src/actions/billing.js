@@ -258,8 +258,8 @@ export function addProductToSubscription(data) {
   return sparkpostApiRequest({
     type: 'ADD_PRODUCT_TO_SUBSCRIPTION',
     meta: {
-      method: 'POST',
-      url: '/v1/billing/subscription/control/product',
+      method: 'PUT',
+      url: '/v1/billing/subscription/bundle',
       data,
     },
   });
