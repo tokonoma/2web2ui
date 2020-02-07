@@ -88,14 +88,16 @@ describe('The engagement report page', () => {
     });
   });
 
-  it('renders engagement metrics as text', () => {
+  it.only('renders engagement metrics as text', () => {
     cy.visit(PAGE_URL);
 
     cy.get('[data-id="summary-panel"]').within(() => {
-      cy.findByText('150,000'); // `count_sent`
-      cy.findByText('200,000'); // `count_unique_confirmed_opened_approx`
-      cy.findByText('250,000'); // `count_accepted`
-      cy.findByText('325,000'); // `count_unique_clicked_approx`
+      cy.get('[data-id="unique-open-rate"]').should('contain', '> 100%');
+      cy.get('[data-id="unique-click-rate"]').should('contain', '75%');
+      cy.get('[data-id="count-sent"]').should('contain', '325,000'); // `count_sent`
+      cy.get('[data-id="count-accepted"]').should('contain', '200,000'); // `count_accepted`
+      cy.get('[data-id="count-opened"]').should('contain', '250,000'); // `count_unique_confirmed_opened_approx`
+      cy.get('[data-id="count-unique-clicks"]').should('contain', '150,000'); // `count_unique_clicked_approx`
     });
   });
 

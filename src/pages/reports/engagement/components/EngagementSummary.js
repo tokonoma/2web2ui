@@ -42,23 +42,24 @@ export function EngagementSummary({
     <Panel className={styles.EngagementSummary} data-id="summary-panel">
       <Grid>
         <Grid.Column xs={12} md={3} xl={2}>
-          <h1>
+          <h1 data-id="unique-open-rate">
             <Percent value={safeRate(opens, accepted)} />
           </h1>
           <h6>Unique Open Rate</h6>
         </Grid.Column>
         <Grid.Column xs={12} md={3} xl={2}>
-          <h1>
+          <h1 data-id="unique-click-rate">
             <Percent value={safeRate(clicks, accepted)} />
           </h1>
           <h6>Unique Click Rate</h6>
         </Grid.Column>
         <Grid.Column xs={12} md={6} xl={8}>
           <p>
-            Of <strong>{formatFullNumber(sent)}</strong> sent recipients,{' '}
-            <strong>{formatFullNumber(accepted)}</strong> messages were accepted,{' '}
-            <strong>{formatFullNumber(opens)}</strong> were opened and{' '}
-            <strong>{formatFullNumber(clicks)}</strong> were clicked {timeRange}.
+            Of <strong data-id="count-sent">{formatFullNumber(sent)}</strong> sent recipients,{' '}
+            <strong data-id="count-accepted">{formatFullNumber(accepted)}</strong> messages were
+            accepted, <strong data-id="count-opened">{formatFullNumber(opens)}</strong> were opened
+            and <strong data-id="count-unique-clicks">{formatFullNumber(clicks)}</strong> were
+            clicked {timeRange}.
           </p>
         </Grid.Column>
       </Grid>
