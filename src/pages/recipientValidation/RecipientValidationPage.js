@@ -54,7 +54,7 @@ export class RecipientValidationPage extends Component {
       case 1:
         return <SingleAddressForm />;
       case 2:
-        return <ApiDetails isStandAloneRVSet={this.props.isStandAloneRVSet} />;
+        return <ApiDetails />;
       default:
         return null;
     }
@@ -175,7 +175,7 @@ export class RecipientValidationPage extends Component {
                 </div>
               )}
             </div>
-            <Panel.Section>{this.renderTabContent(selectedTab)}</Panel.Section>
+            <Panel.Section>{this.renderTabContentSRV(selectedTab)}</Panel.Section>
           </Panel>
         )}
         {selectedTab === 0 && <JobsTableCollection />}
