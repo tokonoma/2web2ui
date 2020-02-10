@@ -14,6 +14,8 @@ function ValidateSection({
   submitButtonName = 'Validate',
   submitDisabled,
   formname: FORMNAME,
+  handleCardToggle,
+  defaultToggleState,
 }) {
   useEffect(() => {
     getBillingCountries();
@@ -33,9 +35,10 @@ function ValidateSection({
     <>
       <CreditCardSection
         creditCard={credit_card}
-        handleCardToggle={() => {}}
+        handleCardToggle={handleCardToggle}
         formname={FORMNAME}
         countries={billingCountries || []}
+        defaultToggleState={defaultToggleState}
       />
       <Button size="large" primary submit disabled={submitDisabled}>
         {/* functionality to validate to be added in AC-1196 and AC-1197*/}

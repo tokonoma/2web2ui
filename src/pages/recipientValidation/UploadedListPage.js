@@ -16,24 +16,62 @@ import { isAccountUiOptionSet } from 'src/helpers/conditions/account';
 import ValidateSection from './components/ValidateSection';
 import { FORMS } from 'src/constants';
 import { reduxForm } from 'redux-form';
+import { isRVonSubscription } from 'src/selectors/accountBillingInfo';
+import { prepareCardInfo } from 'src/helpers/billing';
+import addRVtoSubscription from 'src/actions/addRVtoSubscription';
 import _ from 'lodash';
 
 const FORMNAME = FORMS.RV_ADDPAYMENTFORM;
 
 export class UploadedListPage extends Component {
+  state = {
+    useSavedCC: Boolean(this.props.billing.credit_card),
+  };
   componentDidMount() {
     const { getJobStatus, listId, getBillingInfo } = this.props;
     getJobStatus(listId);
     getBillingInfo();
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.billing !== prevProps.billing)
+      this.setState({ useSavedCC: Boolean(this.props.billing.credit_card) });
+  }
+
+  handleToggleCC = val => this.setState({ useSavedCC: !val });
+
   handleSubmit = () => {
     const { listId, triggerJob } = this.props;
     triggerJob(listId);
   };
 
-  onSubmit = () => {
-    console.log('somewhere else');
+  onSubmit = values => {
+    if (this.props.isStandAloneRVSet) {
+      const {
+        billing: { plans, subscription },
+        isRVonSubscription,
+      } = this.props;
+      if (this.state.useSavedCC && isRVonSubscription) {
+        this.handleSubmit();
+      } else {
+        const cardValues = values.card ? { ...values, card: prepareCardInfo(values.card) } : values;
+
+        const newValues = {
+          ...cardValues,
+          billingId: subscription
+            ? (_.find(plans, { code: subscription.code }) || {}).billingId
+            : (_.find(plans, { product: 'recipient_validation' }) || {}).billingId,
+        };
+        let action = this.props.addRVtoSubscription(
+          newValues,
+          !this.state.useSavedCC,
+          isRVonSubscription,
+        );
+        return action.then(() => this.handleSubmit());
+      }
+    } else {
+      this.handleSubmit();
+    }
   };
 
   render() {
@@ -91,11 +129,13 @@ export class UploadedListPage extends Component {
               )}
             </Panel.Section>
           </Panel>
-          {isStandAloneRVSet && (
+          {isStandAloneRVSet && job.status === 'queued_for_batch' && (
             <ValidateSection
               credit_card={credit_card}
               formname={FORMNAME}
               submitDisabled={submitDisabled && isRVFormPresent}
+              handleCardToggle={this.handleToggleCC}
+              defaultToggleState={!this.state.useSavedCC}
             />
           )}
         </Page>
@@ -114,6 +154,7 @@ const mapStateToProps = (state, props) => {
     isStandAloneRVSet: isAccountUiOptionSet('standalone_rv')(state),
     billing: state.account.billing || {},
     isRVFormPresent: Boolean(state.form[FORMNAME]) && !_.isEmpty(state.form[FORMNAME]),
+    isRVonSubscription: isRVonSubscription(state),
   };
 };
 
@@ -126,4 +167,5 @@ export const UploadedListPageSRV = connect(mapStateToProps, {
   getJobStatus,
   triggerJob,
   getBillingInfo,
+  addRVtoSubscription,
 })(reduxForm(formOptions)(UploadedListPage));

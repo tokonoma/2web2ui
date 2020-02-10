@@ -732,7 +732,7 @@ const routes = [
     supportDocsSearch: 'Recipient Validation',
   },
   {
-    path: '/recipient-validation/list/:listId',
+    path: '/recipient-validation-srv/list/:listId',
     component: UploadedListPageSRV,
     condition: all(
       hasGrants('recipient-validation/preview'),
@@ -751,7 +751,7 @@ const routes = [
     supportDocsSearch: 'Recipient Validation',
   },
   {
-    path: '/recipient-validation/:category',
+    path: '/recipient-validation-srv/:category',
     component: RecipientValidationPageSRV,
     condition: all(
       hasGrants('recipient-validation/preview'),

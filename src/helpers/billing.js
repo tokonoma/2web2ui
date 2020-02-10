@@ -5,7 +5,7 @@ import Payment from 'payment';
 import qs from 'query-string';
 
 export function formatDataForCors(values) {
-  const { email, planpicker, card, billingAddress, discountId, billingId } = values;
+  const { email, planpicker = {}, card, billingAddress, discountId, billingId } = values;
 
   // For CORS Endpoint + sift
   const corsData = {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Panel } from '@sparkpost/matchbox';
 import { PaymentForm } from './PaymentForm';
 import BillingAddressForm from './BillingAddressForm';
@@ -21,6 +21,10 @@ function CreditCardSection({
     : null;
 
   const [useAnotherCC, setUseAnotherCC] = useState(Boolean(defaultToggleState));
+
+  useEffect(() => {
+    setUseAnotherCC(defaultToggleState);
+  }, [defaultToggleState]);
 
   if (!credit_card || useAnotherCC)
     return (
