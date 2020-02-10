@@ -74,17 +74,56 @@ export class UploadedListPage extends Component {
     }
   };
 
-  render() {
+  renderUploadedListPage = () => {
     const {
       job,
-      jobLoadingStatus,
-      listId,
       isStandAloneRVSet,
       billing: { credit_card },
     } = this.props;
 
     const { valid, pristine, submitting, isRVFormPresent } = this.props;
     const submitDisabled = pristine || !valid || submitting;
+    return (
+      <Page
+        title="Recipient Validation"
+        breadcrumbAction={{ content: 'Back', component: PageLink, to: '/recipient-validation' }}
+      >
+        <Panel>
+          <Panel.Section>
+            <div className={styles.dateHeader}>
+              <strong>{formatDate(job.updatedAt)}</strong>
+              <span> at </span>
+              <strong>{formatTime(job.updatedAt)}</strong>
+            </div>
+          </Panel.Section>
+
+          <Panel.Section>
+            {job.status === 'queued_for_batch' && (
+              <UploadedListForm job={job} onSubmit={this.handleSubmit} />
+            )}
+
+            {job.status === 'error' && <ListError />}
+
+            {job.status !== 'queued_for_batch' && job.status !== 'error' && (
+              <ListProgress job={job} />
+            )}
+          </Panel.Section>
+        </Panel>
+        {isStandAloneRVSet && job.status === 'queued_for_batch' && (
+          <ValidateSection
+            credit_card={credit_card}
+            formname={FORMNAME}
+            submitDisabled={submitDisabled && isRVFormPresent}
+            handleCardToggle={this.handleToggleCC}
+            defaultToggleState={!this.state.useSavedCC}
+          />
+        )}
+      </Page>
+    );
+  };
+
+  render() {
+    const { job, jobLoadingStatus, listId, isStandAloneRVSet } = this.props;
 
     if (!job && jobLoadingStatus === 'fail') {
       return (
@@ -101,46 +140,13 @@ export class UploadedListPage extends Component {
     if (!job) {
       return <Loading />;
     }
-
-    return (
-      <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
-        <Page
-          title="Recipient Validation"
-          breadcrumbAction={{ content: 'Back', component: PageLink, to: '/recipient-validation' }}
-        >
-          <Panel>
-            <Panel.Section>
-              <div className={styles.dateHeader}>
-                <strong>{formatDate(job.updatedAt)}</strong>
-                <span> at </span>
-                <strong>{formatTime(job.updatedAt)}</strong>
-              </div>
-            </Panel.Section>
-
-            <Panel.Section>
-              {job.status === 'queued_for_batch' && (
-                <UploadedListForm job={job} onSubmit={this.handleSubmit} />
-              )}
-
-              {job.status === 'error' && <ListError />}
-
-              {job.status !== 'queued_for_batch' && job.status !== 'error' && (
-                <ListProgress job={job} />
-              )}
-            </Panel.Section>
-          </Panel>
-          {isStandAloneRVSet && job.status === 'queued_for_batch' && (
-            <ValidateSection
-              credit_card={credit_card}
-              formname={FORMNAME}
-              submitDisabled={submitDisabled && isRVFormPresent}
-              handleCardToggle={this.handleToggleCC}
-              defaultToggleState={!this.state.useSavedCC}
-            />
-          )}
-        </Page>
-      </form>
-    );
+    if (isStandAloneRVSet)
+      return (
+        <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
+          {this.renderUploadedListPage()}
+        </form>
+      );
+    return this.renderUploadedListPage();
   }
 }
 
