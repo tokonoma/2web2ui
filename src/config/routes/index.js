@@ -296,7 +296,7 @@ const routes = [
     component: signals.EngagementRecencyPage,
     condition: hasGrants('signals/manage'),
     layout: App,
-    title: 'Engagement Recency | Signals Analytics',
+    title: 'Engagement Details | Engagement Recency | Signals Analytics',
     supportDocSearch: 'signals',
   },
   {
