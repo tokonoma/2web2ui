@@ -14,7 +14,7 @@ export function formatDataForCors(values) {
     state: billingAddress.state,
     country: billingAddress.country,
     zip_code: billingAddress.zip,
-    bin: card.number.slice(0, 6),
+    bin: card.number.replace(/\s/g, '').slice(0, 6),
     last_four: card.number.slice(-4),
     plan_id: planpicker.billingId || billingId,
     address1: null,
