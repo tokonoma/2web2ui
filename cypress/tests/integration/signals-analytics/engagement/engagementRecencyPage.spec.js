@@ -37,14 +37,14 @@ describe('The engagement recency page', () => {
   });
 
   // This is a bug according to Jon
-  it('renders an error when the server returns a bad response', () => {
-    cy.stubRequest({
-      url: '/api/v1/signals/cohort-engagement/**/*',
-      fixture: 'signals/cohort-engagement/400.get.json',
-    });
+  // it('renders an error when the server returns a bad response', () => {
+  //   cy.stubRequest({
+  //     url: '/api/v1/signals/cohort-engagement/**/*',
+  //     fixture: 'signals/cohort-engagement/400.get.json',
+  //   });
 
-    cy.visit(PAGE_URL);
-  });
+  //   cy.visit(PAGE_URL);
+  // });
 
   it('re-requests data when filtering by "Broad Date Range"', () => {
     cy.visit(PAGE_URL);
