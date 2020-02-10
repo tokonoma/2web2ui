@@ -163,6 +163,21 @@ describe('The engagement details page', () => {
           'This lack of engagement will have a negative impact on your reputation with mailbox providers. To reduce this, improve your email content and reevaluate your list acquisition practices.',
         ).should('be.visible');
       });
+
+      it('renders an error when the server returns one', () => {
+        cy.stubRequest({
+          statusCode: 400,
+          url: COHORT_ENGAGEMENT_API_URL,
+          fixture: 'signals/cohort-engagement/400.get.json',
+        });
+
+        cy.visit(PAGE_URL);
+
+        cy.get(cohortsChartSelector).within(() => {
+          cy.findByText('Unable to Load Data').should('be.visible');
+          cy.findByText('This is an error').should('be.visible');
+        });
+      });
     });
 
     describe('the "Engagement Rate" tab', () => {
@@ -227,6 +242,23 @@ describe('The engagement details page', () => {
           'An overall low engagement rate may indicate you emails are being sent to the spam folder. Drill into your Health Score to find the issue.',
         ).should('be.visible');
       });
+
+      it('renders an error when the server returns one', () => {
+        cy.visit(PAGE_URL);
+
+        cy.stubRequest({
+          statusCode: 400,
+          url: '/api/v1/signals/eng-cohort/**/*',
+          fixture: 'signals/eng-cohort/400.get.json',
+        });
+
+        cy.findByText('Engagement Rate').click();
+
+        cy.get(engagementRateChartSelector).within(() => {
+          cy.findByText('Unable to Load Data').should('be.visible');
+          cy.findByText('This is an error').should('be.visible');
+        });
+      });
     });
 
     describe('the "Unsubscribe Rate" tab', () => {
@@ -289,6 +321,23 @@ describe('The engagement details page', () => {
         cy.findByText("Doesn't look like you have any unsubscribe issues. Great job!").should(
           'be.visible',
         );
+      });
+
+      it('renders an error when the server returns one', () => {
+        cy.visit(PAGE_URL);
+
+        cy.stubRequest({
+          statusCode: 400,
+          url: '/api/v1/signals/unsub-cohort/**/*',
+          fixture: 'signals/unsub-cohort/400.get.json',
+        });
+
+        cy.findByText('Unsubscribe Rate').click();
+
+        cy.get(unsubscribeRateChartSelector).within(() => {
+          cy.findByText('Unable to Load Data').should('be.visible');
+          cy.findByText('This is an error').should('be.visible');
+        });
       });
     });
 
