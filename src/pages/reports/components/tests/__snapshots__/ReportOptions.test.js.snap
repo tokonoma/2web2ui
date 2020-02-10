@@ -1,146 +1,173 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Component: Report Options should mount and render correctly 1`] = `
-<Panel>
-  <Panel.Section>
-    <Grid>
-      <Grid.Column
-        md={6}
-        xs={12}
-      >
-        <div
-          className="FieldWrapper"
+<div
+  data-id="report-options"
+>
+  <Panel>
+    <Panel.Section>
+      <Grid>
+        <Grid.Column
+          md={6}
+          xs={12}
         >
-          <AppDatePicker
-            filters={Array []}
-            from={2018-02-15T12:00:00.000Z}
-            onChange={
-              [MockFunction] {
-                "calls": Array [
-                  Array [
-                    Object {},
+          <div
+            className="FieldWrapper"
+          >
+            <AppDatePicker
+              filters={Array []}
+              from={2018-02-15T12:00:00.000Z}
+              onChange={
+                [MockFunction] {
+                  "calls": Array [
+                    Array [
+                      Object {},
+                    ],
                   ],
-                ],
-                "results": undefined,
+                  "results": undefined,
+                }
+              }
+              preventFuture={true}
+              relativeDateOptions={
+                Array [
+                  "hour",
+                  "day",
+                  "7days",
+                  "30days",
+                  "90days",
+                  "custom",
+                ]
+              }
+              relativeRange="day"
+              roundToPrecision={true}
+              to={2018-02-15T12:00:00.000Z}
+            />
+          </div>
+        </Grid.Column>
+        <Grid.Column
+          md={4}
+          xl={5}
+          xs={8}
+        >
+          <Connect(Typeahead)
+            items={Array []}
+            onSelect={[Function]}
+            placeholder="Filter by domain, campaign, etc"
+            reportOptions={
+              Object {
+                "filters": Array [],
+                "from": 2018-02-15T12:00:00.000Z,
+                "relativeRange": "day",
+                "to": 2018-02-15T12:00:00.000Z,
               }
             }
-            preventFuture={true}
-            relativeDateOptions={
-              Array [
-                "hour",
-                "day",
-                "7days",
-                "30days",
-                "90days",
-                "custom",
-              ]
-            }
-            relativeRange="day"
-            roundToPrecision={true}
-            to={2018-02-15T12:00:00.000Z}
+            selected={Array []}
           />
-        </div>
-      </Grid.Column>
-      <Grid.Column
-        md={4}
-        xl={5}
-        xs={8}
-      >
-        <Connect(Typeahead)
-          items={Array []}
-          onSelect={[Function]}
-          placeholder="Filter by domain, campaign, etc"
-          reportOptions={
-            Object {
-              "filters": Array [],
-              "from": 2018-02-15T12:00:00.000Z,
-              "relativeRange": "day",
-              "to": 2018-02-15T12:00:00.000Z,
-            }
-          }
-          selected={Array []}
-        />
-      </Grid.Column>
-      <Grid.Column
-        md={2}
-        xl={1}
-        xs={4}
-      >
-        <withRouter(Connect(ShareModal)) />
-      </Grid.Column>
-    </Grid>
-  </Panel.Section>
-</Panel>
+        </Grid.Column>
+        <Grid.Column
+          md={2}
+          xl={1}
+          xs={4}
+        >
+          <withRouter(Connect(ShareModal)) />
+        </Grid.Column>
+      </Grid>
+    </Panel.Section>
+  </Panel>
+</div>
 `;
 
 exports[`Component: Report Options with active filters should render 1`] = `
-<Panel>
-  <Panel.Section>
-    <Grid>
-      <Grid.Column
-        md={6}
-        xs={12}
-      >
-        <div
-          className="FieldWrapper"
+<div
+  data-id="report-options"
+>
+  <Panel>
+    <Panel.Section>
+      <Grid>
+        <Grid.Column
+          md={6}
+          xs={12}
         >
-          <AppDatePicker
-            filters={
-              Array [
-                Object {
-                  "type": "A",
-                  "value": "aaa",
-                },
-                Object {
-                  "type": "B",
-                  "value": "bbb",
-                },
-                Object {
-                  "type": "C",
-                  "value": "ccc",
-                },
-              ]
-            }
-            from={2018-02-15T12:00:00.000Z}
-            onChange={
-              [MockFunction] {
-                "calls": Array [
-                  Array [
-                    Object {},
+          <div
+            className="FieldWrapper"
+          >
+            <AppDatePicker
+              filters={
+                Array [
+                  Object {
+                    "type": "A",
+                    "value": "aaa",
+                  },
+                  Object {
+                    "type": "B",
+                    "value": "bbb",
+                  },
+                  Object {
+                    "type": "C",
+                    "value": "ccc",
+                  },
+                ]
+              }
+              from={2018-02-15T12:00:00.000Z}
+              onChange={
+                [MockFunction] {
+                  "calls": Array [
+                    Array [
+                      Object {},
+                    ],
                   ],
+                  "results": undefined,
+                }
+              }
+              preventFuture={true}
+              relativeDateOptions={
+                Array [
+                  "hour",
+                  "day",
+                  "7days",
+                  "30days",
+                  "90days",
+                  "custom",
+                ]
+              }
+              relativeRange="day"
+              roundToPrecision={true}
+              to={2018-02-15T12:00:00.000Z}
+            />
+          </div>
+        </Grid.Column>
+        <Grid.Column
+          md={4}
+          xl={5}
+          xs={8}
+        >
+          <Connect(Typeahead)
+            items={Array []}
+            onSelect={[Function]}
+            placeholder="Filter by domain, campaign, etc"
+            reportOptions={
+              Object {
+                "filters": Array [
+                  Object {
+                    "type": "A",
+                    "value": "aaa",
+                  },
+                  Object {
+                    "type": "B",
+                    "value": "bbb",
+                  },
+                  Object {
+                    "type": "C",
+                    "value": "ccc",
+                  },
                 ],
-                "results": undefined,
+                "from": 2018-02-15T12:00:00.000Z,
+                "relativeRange": "day",
+                "to": 2018-02-15T12:00:00.000Z,
               }
             }
-            preventFuture={true}
-            relativeDateOptions={
+            selected={
               Array [
-                "hour",
-                "day",
-                "7days",
-                "30days",
-                "90days",
-                "custom",
-              ]
-            }
-            relativeRange="day"
-            roundToPrecision={true}
-            to={2018-02-15T12:00:00.000Z}
-          />
-        </div>
-      </Grid.Column>
-      <Grid.Column
-        md={4}
-        xl={5}
-        xs={8}
-      >
-        <Connect(Typeahead)
-          items={Array []}
-          onSelect={[Function]}
-          placeholder="Filter by domain, campaign, etc"
-          reportOptions={
-            Object {
-              "filters": Array [
                 Object {
                   "type": "A",
                   "value": "aaa",
@@ -153,70 +180,51 @@ exports[`Component: Report Options with active filters should render 1`] = `
                   "type": "C",
                   "value": "ccc",
                 },
-              ],
-              "from": 2018-02-15T12:00:00.000Z,
-              "relativeRange": "day",
-              "to": 2018-02-15T12:00:00.000Z,
+              ]
             }
-          }
-          selected={
-            Array [
-              Object {
-                "type": "A",
-                "value": "aaa",
-              },
-              Object {
-                "type": "B",
-                "value": "bbb",
-              },
-              Object {
-                "type": "C",
-                "value": "ccc",
-              },
-            ]
-          }
-        />
-      </Grid.Column>
-      <Grid.Column
-        md={2}
-        xl={1}
-        xs={4}
+          />
+        </Grid.Column>
+        <Grid.Column
+          md={2}
+          xl={1}
+          xs={4}
+        >
+          <withRouter(Connect(ShareModal)) />
+        </Grid.Column>
+      </Grid>
+    </Panel.Section>
+    <Panel.Section>
+      <small>
+        Filters:
+      </small>
+      <Tag
+        className="TagWrapper"
+        key="0"
+        onRemove={[Function]}
       >
-        <withRouter(Connect(ShareModal)) />
-      </Grid.Column>
-    </Grid>
-  </Panel.Section>
-  <Panel.Section>
-    <small>
-      Filters:
-    </small>
-    <Tag
-      className="TagWrapper"
-      key="0"
-      onRemove={[Function]}
-    >
-      A
-      : 
-      aaa
-    </Tag>
-    <Tag
-      className="TagWrapper"
-      key="1"
-      onRemove={[Function]}
-    >
-      B
-      : 
-      bbb
-    </Tag>
-    <Tag
-      className="TagWrapper"
-      key="2"
-      onRemove={[Function]}
-    >
-      C
-      : 
-      ccc
-    </Tag>
-  </Panel.Section>
-</Panel>
+        A
+        : 
+        aaa
+      </Tag>
+      <Tag
+        className="TagWrapper"
+        key="1"
+        onRemove={[Function]}
+      >
+        B
+        : 
+        bbb
+      </Tag>
+      <Tag
+        className="TagWrapper"
+        key="2"
+        onRemove={[Function]}
+      >
+        C
+        : 
+        ccc
+      </Tag>
+    </Panel.Section>
+  </Panel>
+</div>
 `;

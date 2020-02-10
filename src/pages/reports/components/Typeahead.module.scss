@@ -24,6 +24,10 @@
   transition: 0.06s ease-out;
 }
 
+.Label {
+  @include visually-hidden();
+}
+
 .open {
   opacity: 1;
   pointer-events: auto;

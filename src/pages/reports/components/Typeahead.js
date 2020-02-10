@@ -15,7 +15,7 @@ function flattenItem({ type, value }) {
   return `${type}:${value}`;
 }
 
-const MatchesLoading = ({ isLoading }) => (isLoading) ? <LoadingSVG size='XSmall' /> : null;
+const MatchesLoading = ({ isLoading }) => (isLoading ? <LoadingSVG size="XSmall" /> : null);
 
 const staticItemTypes = ['Template', 'Subaccount', 'Sending Domain'];
 
@@ -23,7 +23,7 @@ export class Typeahead extends Component {
   state = {
     matches: [],
     calculatingMatches: false,
-    pattern: null
+    pattern: null,
   };
 
   componentWillUnmount() {
@@ -33,14 +33,14 @@ export class Typeahead extends Component {
   /**
    * Returns all matches of the given types that match a pattern.
    */
-    filterItems = (pattern, itemTypes) => {
-      const { items, selected = []} = this.props;
-      const flatSelected = selected.map(flattenItem);
-      const staticItems = itemTypes ? items.filter(({ type }) => itemTypes.includes(type)) : items;
-      return sortMatch(staticItems, pattern, (i) => i.value)
-        .filter(({ type, value }) => !flatSelected.includes(flattenItem({ type, value })))
-        .slice(0,TYPEAHEAD_LIMIT);
-    }
+  filterItems = (pattern, itemTypes) => {
+    const { items, selected = [] } = this.props;
+    const flatSelected = selected.map(flattenItem);
+    const staticItems = itemTypes ? items.filter(({ type }) => itemTypes.includes(type)) : items;
+    return sortMatch(staticItems, pattern, i => i.value)
+      .filter(({ type, value }) => !flatSelected.includes(flattenItem({ type, value })))
+      .slice(0, TYPEAHEAD_LIMIT);
+  };
 
   /**
    * The lookahead/typeahead only activates when there are at least 2 characters.
@@ -50,7 +50,7 @@ export class Typeahead extends Component {
    * appending the results to the existing matches.
    *
    */
-  updateLookAhead = debounce((pattern) => {
+  updateLookAhead = debounce(pattern => {
     if (!pattern || pattern.length < 2) {
       this.setState({ matches: [], calculatingMatches: false, pattern: null });
       return Promise.resolve();
@@ -75,7 +75,7 @@ export class Typeahead extends Component {
   // Pass only item selection events to mask the
   // case where we call Downshift's clearSelection() which triggers
   // onChange(null).
-  handleDownshiftChange = (item) => {
+  handleDownshiftChange = item => {
     // Maps to downshift's onChange function https://github.com/paypal/downshift#onchange
     const { onSelect } = this.props;
     if (item) {
@@ -86,35 +86,40 @@ export class Typeahead extends Component {
   onTypeahead = ({
     getInputProps,
     getItemProps,
+    getLabelProps,
     isOpen,
-    inputValue,
     selectedItem,
     highlightedIndex,
-    clearSelection
+    clearSelection,
   }) => {
-
     const {
-      placeholder // TextField placeholder
+      placeholder, // TextField placeholder
     } = this.props;
 
-    const { matches = []} = this.state;
+    const { matches = [] } = this.state;
 
     const mappedMatches = matches.map((item, index) => ({
       content: <Item value={item.value} helpText={item.type} />,
       ...getItemProps({ item, index }),
       highlighted: highlightedIndex === index,
-      className: classnames(selectedItem === item && styles.selected) // Styles does nothing, was testing className pass through
+      className: classnames(selectedItem === item && styles.selected), // Styles does nothing, was testing className pass through
     }));
 
     const listClasses = classnames(styles.List, isOpen && mappedMatches.length && styles.open);
     return (
       <div className={styles.Typeahead}>
-        <div className={listClasses}><ActionList actions={mappedMatches} maxHeight={300} /></div>
-        <TextField {...getInputProps({
-          placeholder,
-          onFocus: clearSelection
-        })}
-        suffix={<MatchesLoading isLoading={this.state.calculatingMatches}/>}
+        <div className={listClasses} data-id="report-filters-dropdown">
+          <ActionList actions={mappedMatches} maxHeight={300} />
+        </div>
+        <label className={styles.Label} {...getLabelProps()}>
+          Reports Filter Typeahead
+        </label>
+        <TextField
+          {...getInputProps({
+            placeholder,
+            onFocus: clearSelection,
+          })}
+          suffix={<MatchesLoading isLoading={this.state.calculatingMatches} />}
         />
       </div>
     );
@@ -134,7 +139,7 @@ export class Typeahead extends Component {
 }
 
 const mapDispatchToProps = {
-  refreshTypeaheadCache
+  refreshTypeaheadCache,
 };
 
 export default connect(null, mapDispatchToProps)(Typeahead);

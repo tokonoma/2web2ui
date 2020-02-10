@@ -2,16 +2,21 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { Typeahead } from '../Typeahead';
 
-jest.mock('lodash/debounce', () => jest.fn((fn) => {
-  fn.cancel = jest.fn();
-  return fn;
-}));
+jest.mock('lodash/debounce', () =>
+  jest.fn(fn => {
+    fn.cancel = jest.fn();
+    return fn;
+  }),
+);
 
 describe('Component: Typeahead', () => {
   let props;
   let wrapper;
   let downshiftHelpers;
-  const defaultCrossMatches = [{ type: 'Sending Domain', value: 'cross' }, { type: 'Template', value: 'crossing' }];
+  const defaultCrossMatches = [
+    { type: 'Sending Domain', value: 'cross' },
+    { type: 'Template', value: 'crossing' },
+  ];
 
   beforeEach(() => {
     props = {
@@ -19,22 +24,23 @@ describe('Component: Typeahead', () => {
         { type: 'Sending Domain', value: 'cross' },
         { type: 'Campaign', value: 'treasure' },
         { type: 'Recipient Domain', value: 'cross.example.com' },
-        { type: 'Template', value: 'crossing' }
+        { type: 'Template', value: 'crossing' },
       ],
       matches: [],
       onSelect: jest.fn(),
       refreshTypeaheadCache: jest.fn(() => Promise.resolve()),
       placeholder: '',
-      pattern: null
+      pattern: null,
     };
 
     downshiftHelpers = {
       getInputProps: jest.fn(),
       getItemProps: jest.fn(),
+      getLabelProps: jest.fn(),
       isOpen: true,
       selectedItem: null,
       highlightedIndex: 0,
-      clearSelection: jest.fn()
+      clearSelection: jest.fn(),
     };
 
     wrapper = shallow(<Typeahead {...props} />);
@@ -42,7 +48,7 @@ describe('Component: Typeahead', () => {
 
   function renderTypeahead(wrapper, input) {
     const TypeaheadRender = wrapper.instance().onTypeahead;
-    return shallow(<TypeaheadRender {...downshiftHelpers} inputValue = {input} {...props} />);
+    return shallow(<TypeaheadRender {...downshiftHelpers} inputValue={input} {...props} />);
   }
 
   it('should render ok by default', () => {
@@ -73,17 +79,23 @@ describe('Component: Typeahead', () => {
 
   it('should not make any api requests nor have any matches with a pattern <2 characters', () => {
     const input = 'c';
-    return wrapper.instance().updateLookAhead(input).then(() => {
-      expect(props.refreshTypeaheadCache).not.toHaveBeenCalled();
-      expect(renderTypeahead(wrapper, input)).toMatchSnapshot();
-    });
+    return wrapper
+      .instance()
+      .updateLookAhead(input)
+      .then(() => {
+        expect(props.refreshTypeaheadCache).not.toHaveBeenCalled();
+        expect(renderTypeahead(wrapper, input)).toMatchSnapshot();
+      });
   });
 
   it('should show sync and async matches', () => {
     const input = 'cross';
-    return wrapper.instance().updateLookAhead(input).then(() => {
-      expect(renderTypeahead(wrapper, input)).toMatchSnapshot();
-    });
+    return wrapper
+      .instance()
+      .updateLookAhead(input)
+      .then(() => {
+        expect(renderTypeahead(wrapper, input)).toMatchSnapshot();
+      });
   });
 
   it('should not update matches on receiving out-of-date results', () => {
