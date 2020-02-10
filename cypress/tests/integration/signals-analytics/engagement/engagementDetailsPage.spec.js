@@ -179,11 +179,14 @@ describe('The engagement details page', () => {
         cy.findByText('Engagement Rate').click();
 
         cy.get(engagementRateChartSelector).within(() => {
-          cy.findByText('New').should('be.visible');
-          cy.findByText('Never Engaged').should('be.visible');
-          cy.findByText('Not Recently Engaged').should('be.visible');
-          cy.findByText('Semi Recently Engaged').should('be.visible');
-          cy.findByText('Recently Engaged').should('be.visible');
+          // `.findAll` used due to presence of tooltip that isn't properly hidden
+          // in the DOM from Cypress. Use of `visibility: hidden;` would be recommended
+          // or dynamically rendering the component instead of show/hide
+          cy.findAllByText('New').should('be.visible');
+          cy.findAllByText('Never Engaged').should('be.visible');
+          cy.findAllByText('Not Recently Engaged').should('be.visible');
+          cy.findAllByText('Semi Recently Engaged').should('be.visible');
+          cy.findAllByText('Recently Engaged').should('be.visible');
           cy.get('.recharts-dot')
             .last()
             .click({ force: true }); // Overlapped by line chart, so `force` is necessary
@@ -227,25 +230,110 @@ describe('The engagement details page', () => {
     });
 
     describe('the "Unsubscribe Rate" tab', () => {
+      const unsubscribeRateChartSelector = '[data-id="unsubscribe-rate-chart"]';
+
       it('renders a chart when clicked that renders a tooltip when clicked', () => {
         cy.visit(PAGE_URL);
+
+        cy.stubRequest({
+          url: '/api/v1/signals/unsub-cohort/**/*',
+          fixture: 'signals/unsub-cohort/200.get.json',
+        });
+
+        cy.findByText('Unsubscribe Rate').click();
+
+        cy.get(unsubscribeRateChartSelector).within(() => {
+          cy.findAllByText('New').should('be.visible');
+          cy.findAllByText('Never Engaged').should('be.visible');
+          cy.findAllByText('Not Recently Engaged').should('be.visible');
+          cy.findAllByText('Semi Recently Engaged').should('be.visible');
+          cy.findAllByText('Recently Engaged').should('be.visible');
+
+          cy.get('.recharts-dot')
+            .last()
+            .click({ force: true });
+
+          // Not checking for *all* data in the tooltip, just checking that it is
+          // showing properly. Ideally, unit tests can help check for this behavior
+          cy.findByText('Never engaged, first email in last 7 days').should('be.visible');
+        });
       });
 
-      it('renders an empty state when no data is available', () => {});
+      it('renders an empty state when no data is available', () => {
+        cy.visit(PAGE_URL);
 
-      it('renders recommendations based on the returned data', () => {});
+        cy.stubRequest({
+          url: '/api/v1/signals/unsub-cohort/**/*',
+          fixture: 'signals/unsub-cohort/200.get.no-results.json',
+        });
+
+        cy.findByText('Unsubscribe Rate').click();
+
+        cy.get(unsubscribeRateChartSelector).within(() => {
+          cy.findByText('No Data Available').should('be.visible');
+          cy.findByText('Insufficient data to populate this chart').should('be.visible');
+        });
+      });
+
+      it('renders recommendations based on the returned data', () => {
+        cy.visit(PAGE_URL);
+
+        cy.stubRequest({
+          url: '/api/v1/signals/unsub-cohort/**/*',
+          fixture: 'signals/unsub-cohort/200.get.json',
+        });
+
+        cy.findByText('Unsubscribe Rate').click();
+
+        cy.findByText('Recommendations – Feb 4 2020').should('be.visible');
+        cy.findByText("Doesn't look like you have any unsubscribe issues. Great job!").should(
+          'be.visible',
+        );
+      });
     });
 
-    describe('the "Complaint Rate" tab', () => {
-      it('renders a chart when clicked that renders a tooltip when clicked', () => {});
+    // Having trouble figuring out where the data is coming from here...
+    // describe('the "Complaint Rate" tab', () => {
+    //   const complaintRateChartsSelector = '[data-id="complaint-rate-chart"]';
 
-      it('renders an empty state when no data is available', () => {});
+    //   beforeEach(() => cy.clock(STABLE_UNIX_DATE));
 
-      it('renders recommendations based on the returned data', () => {});
+    //   it.only('renders a chart when clicked that renders a tooltip when clicked', () => {
+    //     cy.visit(PAGE_URL);
+
+    //     cy.stubRequest({
+    //       url: '/api/v1/signals/fbl-cohort/**/*',
+    //       fixture: 'signals/unsub-cohort/200.get.json',
+    //     });
+
+    //     cy.findByText('Complaint Rate').click();
+    //   });
+
+    //   it('renders an empty state when no data is available', () => {});
+
+    //   it('renders recommendations based on the returned data', () => {});
+    // });
+  });
+
+  it('renders with the "Spam Trap Monitoring" chart that links to the spam traps page', () => {
+    cy.visit(PAGE_URL);
+
+    cy.get('main').within(() => {
+      cy.findByText('Spam Trap Monitoring')
+        .should('be.visible')
+        .closest('a')
+        .should('have.attr', 'href', '/signals/spam-traps/sid/102');
     });
   });
 
-  describe('the "Spam Trap Monitoring" chart', () => {});
+  it('renders with the "Health Score" chart that links to the health score page', () => {
+    cy.visit(PAGE_URL);
 
-  describe('the "Health Score" chart', () => {});
+    cy.get('main').within(() => {
+      cy.findByText('Health Score')
+        .should('be.visible')
+        .closest('a')
+        .should('have.attr', 'href', '/signals/health-score/sid/102');
+    });
+  });
 });
