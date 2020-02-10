@@ -23,18 +23,14 @@ export default function addRVtoSubscription(values, updateCreditCard = false, is
     };
 
     if (!state.account.billing) {
-      console.log('no billing!');
       return dispatch(chainActions(createAccountInZuora, addRV)());
     }
 
     if (updateCreditCard && !isRVonSubscription) {
-      console.log('updateCC & add RV');
-      // return dispatch(chainActions(updateCC, addRV));
-      return dispatch(chainActions(updateCC)());
+      return dispatch(chainActions(updateCC, addRV)());
     }
 
     if (updateCreditCard && isRVonSubscription) {
-      console.log('updateCC & DONT add RV');
       return dispatch(chainActions(updateCC)());
     }
 
