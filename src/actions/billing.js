@@ -216,12 +216,13 @@ export function getBillingCountries() {
   });
 }
 
-export function getBundles() {
+export function getBundles({ ...params }) {
   return sparkpostApiRequest({
     type: 'GET_BUNDLES',
     meta: {
       method: 'GET',
       url: '/v1/billing/bundles',
+      params,
     },
   });
 }
