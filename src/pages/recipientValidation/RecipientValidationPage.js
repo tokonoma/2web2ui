@@ -18,6 +18,7 @@ import { getBillingInfo } from 'src/actions/account';
 import { reduxForm } from 'redux-form';
 import { FORMS } from 'src/constants';
 import { isRVonSubscription } from 'src/selectors/accountBillingInfo';
+import { rvAddPaymentFormInitialValues } from 'src/selectors/recipientValidation';
 import { prepareCardInfo } from 'src/helpers/billing';
 import addRVtoSubscription from 'src/actions/addRVtoSubscription';
 import _ from 'lodash';
@@ -49,6 +50,7 @@ export class RecipientValidationPage extends Component {
     const { history } = this.props;
     history.replace(`/recipient-validation/${tabs[tabIdx].key}`);
     this.setState({ selectedTab: tabIdx });
+    this.props.reset();
   }
 
   renderTabContent = tabId => {
@@ -245,6 +247,7 @@ const mapStateToProps = (state, props) => ({
   billing: state.account.billing || {},
   billingLoading: state.account.billingLoading,
   isRVonSubscription: isRVonSubscription(state),
+  initialValues: rvAddPaymentFormInitialValues(state),
 });
 
 export default withRouter(connect(mapStateToProps, { getBillingInfo })(RecipientValidationPage));
