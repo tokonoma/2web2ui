@@ -10,6 +10,7 @@ exports[`EngagementSummary renders loading panel 1`] = `
 exports[`EngagementSummary renders metric summary 1`] = `
 <Panel
   className="EngagementSummary"
+  data-id="summary-panel"
 >
   <Grid>
     <Grid.Column
@@ -17,7 +18,9 @@ exports[`EngagementSummary renders metric summary 1`] = `
       xl={2}
       xs={12}
     >
-      <h1>
+      <h1
+        data-id="unique-open-rate"
+      >
         <Percent
           value={0.4248578391551584}
         />
@@ -31,7 +34,9 @@ exports[`EngagementSummary renders metric summary 1`] = `
       xl={2}
       xs={12}
     >
-      <h1>
+      <h1
+        data-id="unique-click-rate"
+      >
         <Percent
           value={0.09991876523151909}
         />
@@ -47,19 +52,28 @@ exports[`EngagementSummary renders metric summary 1`] = `
     >
       <p>
         Of 
-        <strong>
+        <strong
+          data-id="count-sent"
+        >
           123,123
         </strong>
-         sent recipients, 
-        <strong>
+         sent recipients,
+         
+        <strong
+          data-id="count-accepted"
+        >
           123,100
         </strong>
          messages were accepted, 
-        <strong>
+        <strong
+          data-id="count-opened"
+        >
           523
         </strong>
          were opened and 
-        <strong>
+        <strong
+          data-id="count-unique-clicks"
+        >
           123
         </strong>
          were clicked 
@@ -79,6 +93,7 @@ exports[`EngagementSummary renders metric summary 1`] = `
 exports[`EngagementSummary renders metric summary with custom time range 1`] = `
 <Panel
   className="EngagementSummary"
+  data-id="summary-panel"
 >
   <Grid>
     <Grid.Column
@@ -86,7 +101,9 @@ exports[`EngagementSummary renders metric summary with custom time range 1`] = `
       xl={2}
       xs={12}
     >
-      <h1>
+      <h1
+        data-id="unique-open-rate"
+      >
         <Percent
           value={0.4248578391551584}
         />
@@ -100,7 +117,9 @@ exports[`EngagementSummary renders metric summary with custom time range 1`] = `
       xl={2}
       xs={12}
     >
-      <h1>
+      <h1
+        data-id="unique-click-rate"
+      >
         <Percent
           value={0.09991876523151909}
         />
@@ -116,19 +135,28 @@ exports[`EngagementSummary renders metric summary with custom time range 1`] = `
     >
       <p>
         Of 
-        <strong>
+        <strong
+          data-id="count-sent"
+        >
           123,123
         </strong>
-         sent recipients, 
-        <strong>
+         sent recipients,
+         
+        <strong
+          data-id="count-accepted"
+        >
           123,100
         </strong>
          messages were accepted, 
-        <strong>
+        <strong
+          data-id="count-opened"
+        >
           523
         </strong>
          were opened and 
-        <strong>
+        <strong
+          data-id="count-unique-clicks"
+        >
           123
         </strong>
          were clicked 
@@ -137,7 +165,8 @@ exports[`EngagementSummary renders metric summary with custom time range 1`] = `
           <strong>
             Jan 31 2018, 8:00pm
           </strong>
-           to 
+           to
+           
           <strong>
             Feb 1 2018, 8:00pm
           </strong>
