@@ -88,6 +88,7 @@ exports[`Signals Engagement Recency Page renders correctly 1`] = `
         facetId="test.com"
       />
       <Panel
+        data-id="engagement-recency-cohorts-chart"
         sectioned={true}
       >
         <div
@@ -279,6 +280,7 @@ exports[`Signals Engagement Recency Page renders correctly 1`] = `
 
 exports[`Signals Engagement Recency Page renders empty correctly 1`] = `
 <Panel
+  data-id="engagement-recency-cohorts-chart"
   sectioned={true}
 >
   <Callout
@@ -327,6 +329,7 @@ exports[`Signals Engagement Recency Page renders error correctly 1`] = `
         facetId="test.com"
       />
       <Panel
+        data-id="engagement-recency-cohorts-chart"
         sectioned={true}
       >
         <Callout
@@ -366,6 +369,7 @@ exports[`Signals Engagement Recency Page renders error correctly 1`] = `
 
 exports[`Signals Engagement Recency Page renders loading correctly 1`] = `
 <Panel
+  data-id="engagement-recency-cohorts-chart"
   sectioned={true}
 >
   <div
