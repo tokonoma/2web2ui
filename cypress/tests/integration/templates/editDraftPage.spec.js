@@ -72,7 +72,7 @@ describe('The templates edit draft page', () => {
     cy.visit(PAGE_URL);
 
     cy.findByText('Unable to load template').should('be.visible');
-    cy.findByText('Templates').should('be.visible');
+    cy.get('main').within(() => cy.findByText('Templates').should('be.visible')); // To avoid checking for "Templates" in the navigation
     cy.findByText('Stubbed Template 1').should('not.be.visible');
   });
 

@@ -17,6 +17,7 @@ describe('Blacklist Selectors: ', () => {
         resource: 'foo',
         blacklist_name: 'spamhaus-sbl',
         occurred_at: '2019-07-23T12:48:00.000Z',
+        status: 'active',
       },
     ];
 
@@ -28,6 +29,7 @@ describe('Blacklist Selectors: ', () => {
         resolved_at_formatted: null,
         resolved_at_timestamp: 0,
         days_listed: 156,
+        status: 'resolved',
       },
     ];
 

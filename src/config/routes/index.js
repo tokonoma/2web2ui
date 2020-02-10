@@ -229,14 +229,14 @@ const routes = [
     path: '/reports/message-events',
     component: reports.MessageEventsPage,
     layout: App,
-    title: 'Events Search Report',
+    title: 'Events Search | Events',
     supportDocSearch: 'event',
   },
   {
     path: '/reports/message-events/details/:messageId/:eventId?',
     component: reports.EventPage,
     layout: App,
-    title: 'Message History',
+    title: 'Message History | Events',
     supportDocSearch: 'event',
   },
   {

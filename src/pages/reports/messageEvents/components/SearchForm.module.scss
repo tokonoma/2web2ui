@@ -23,7 +23,7 @@
   margin-bottom: spacing();
 }
 
-.Selector{
+.Selector {
   width: 100%;
   @media screen and (max-width: breakpoint(medium)) {
     margin-bottom: 5px;
@@ -35,4 +35,6 @@
   margin-bottom: 1px;
 }
 
-
+.ScreenReaderOnly {
+  @include visually-hidden();
+}

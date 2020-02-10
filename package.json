@@ -11,7 +11,6 @@
     "start": "FORCE_COLOR=true nf start --port 3100",
     "start-app": "REACT_APP_VERSION=local-$USER-$(git rev-parse HEAD) node scripts/start.js",
     "build": "node scripts/build.js",
-    "report": "npm run coveralls || exit 0",
     "analyze": "source-map-explorer build/static/js/main.*",
     "test": "node scripts/test.js --env=jsdom --config=./jest.config.js",
     "test-coverage": "npm test -- --coverage",
@@ -22,11 +21,10 @@
     "test-e2e-ci": "npm run start-app & wait-on http://localhost:3100 && npm run test-e2e-headless",
     "test-integration": "npm run test-cy-env && cypress open --config integrationFolder=cypress/tests/integration",
     "test-integration-headless": "cypress run --config integrationFolder=cypress/tests/integration",
-    "test-integration-ci": "npm run start-app & wait-on http://localhost:3100 && sleep 90 && npm run test-integration-headless --config video=false",
-    "coveralls": "cat ./build-reports/lcov.info | coveralls",
+    "test-integration-ci": "npm run start-app & wait-on http://localhost:3100 && sleep 90 && cypress run --config integrationFolder=cypress/tests/integration,video=false --spec $SPECS",
     "storybook-dev": "start-storybook --port 3101 --config-dir .storybook --docs --quiet",
     "storybook-build": "build-storybook --config-dir .storybook --output-dir .out --docs",
-    "travis": "npm run test-ci && npm run build && (npm run coveralls || exit 0)"
+    "travis": "npm run test-ci && npm run build"
   },
   "husky": {
     "hooks": {
@@ -142,7 +140,6 @@
     "case-sensitive-paths-webpack-plugin": "2.2.0",
     "chalk": "^2.3.1",
     "colors": "^1.4.0",
-    "coveralls": "^3.0.0",
     "css-loader": "^2.1.0",
     "cssnano": "^4.0.3",
     "cypress": "^3.8.0",

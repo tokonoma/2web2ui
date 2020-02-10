@@ -6,6 +6,7 @@ exports[`Component: Typeahead should first show synchronous matches while waitin
 >
   <div
     className="List open"
+    data-id="report-filters-dropdown"
   >
     <ActionList
       actions={
@@ -32,6 +33,11 @@ exports[`Component: Typeahead should first show synchronous matches while waitin
       maxHeight={300}
     />
   </div>
+  <label
+    className="Label"
+  >
+    Reports Filter Typeahead
+  </label>
   <TextField
     resize="both"
     suffix={
@@ -50,6 +56,7 @@ exports[`Component: Typeahead should not make any api requests nor have any matc
 >
   <div
     className="List"
+    data-id="report-filters-dropdown"
   >
     <ActionList
       actions={Array []}
@@ -57,6 +64,11 @@ exports[`Component: Typeahead should not make any api requests nor have any matc
       maxHeight={300}
     />
   </div>
+  <label
+    className="Label"
+  >
+    Reports Filter Typeahead
+  </label>
   <TextField
     resize="both"
     suffix={
@@ -97,6 +109,7 @@ exports[`Component: Typeahead should show sync and async matches 1`] = `
 >
   <div
     className="List open"
+    data-id="report-filters-dropdown"
   >
     <ActionList
       actions={
@@ -131,6 +144,11 @@ exports[`Component: Typeahead should show sync and async matches 1`] = `
       maxHeight={300}
     />
   </div>
+  <label
+    className="Label"
+  >
+    Reports Filter Typeahead
+  </label>
   <TextField
     resize="both"
     suffix={

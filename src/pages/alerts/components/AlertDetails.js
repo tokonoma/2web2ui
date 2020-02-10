@@ -95,7 +95,9 @@ export const AlertDetails = ({ alert, id, subaccountIdToString, hasSubaccounts }
   };
 
   const renderEvaluated = () => {
-    if (_.isEmpty(threshold_evaluator)) {
+    // todo, there is a bug in the API that forces us to define a threshold_evaluator to create a
+    //   blacklist alert, when fixed this condition can be removed
+    if (metric === 'blacklist' || _.isEmpty(threshold_evaluator)) {
       return null;
     }
 

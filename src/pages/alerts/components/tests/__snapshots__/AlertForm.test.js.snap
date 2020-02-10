@@ -104,6 +104,7 @@ exports[`Alert Form Component should render the alert form component correctly 1
             />
             <Connect(FilterFields)
               disabled={false}
+              initialValues={Object {}}
             />
           </div>
           <div

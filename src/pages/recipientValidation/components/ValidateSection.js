@@ -17,6 +17,7 @@ function ValidateSection({
   billingCountries,
   getBillingCountries,
   isManuallyBilled,
+  submitButtonName = 'Validate',
 }) {
   const onSubmit = () => {
     handleValidate();
@@ -45,7 +46,7 @@ function ValidateSection({
       />
       <Button color="orange" type="submit">
         {/* functionality to validate to be added in AC-1196 and AC-1197*/}
-        Validate
+        {submitButtonName}
       </Button>
     </form>
   );

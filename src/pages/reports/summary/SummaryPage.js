@@ -64,26 +64,28 @@ export class SummaryReportPage extends Component {
           searchOptions={summarySearchOptions}
           customReportsEnabled={enhancementsEnabled}
         />
+        <div data-id="summary-chart">
+          <Panel>
+            <Panel.Section
+              className={classnames(styles.ChartSection, chart.chartLoading && styles.pending)}
+            >
+              <ChartHeader
+                selectedMetrics={chart.metrics}
+                selectedTime={eventTime}
+                selectedScale={scale}
+                onScaleClick={this.handleScaleClick}
+                onTimeClick={this.handleTimeClick}
+                onMetricsToggle={this.handleMetricsModal}
+              />
+              <ChartGroup {...chart} to={to} yScale={scale} />
+            </Panel.Section>
 
-        <Panel>
-          <Panel.Section
-            className={classnames(styles.ChartSection, chart.chartLoading && styles.pending)}
-          >
-            <ChartHeader
-              selectedMetrics={chart.metrics}
-              selectedTime={eventTime}
-              selectedScale={scale}
-              onScaleClick={this.handleScaleClick}
-              onTimeClick={this.handleTimeClick}
-              onMetricsToggle={this.handleMetricsModal}
-            />
-            <ChartGroup {...chart} to={to} yScale={scale} />
-          </Panel.Section>
-
-          {this.renderLoading()}
-        </Panel>
-
-        <Table />
+            {this.renderLoading()}
+          </Panel>
+        </div>
+        <div data-id="summary-table">
+          <Table />
+        </div>
 
         <MetricsModal
           selectedMetrics={chart.metrics}

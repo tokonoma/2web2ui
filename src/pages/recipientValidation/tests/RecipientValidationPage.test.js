@@ -5,6 +5,7 @@ import ListForm from '../components/ListForm';
 import SingleAddressForm from '../components/SingleAddressForm';
 import JobsTableCollection from '../components/JobsTableCollection';
 import ApiDetails from '../components/ApiDetails';
+import { Launch } from '@sparkpost/matchbox-icons';
 
 describe('Page: Recipient Email Verification', () => {
   let wrapper;
@@ -69,7 +70,23 @@ describe('Page: Recipient Email Verification', () => {
     it('when billingLoading is true ValidateSection is not rendered', () => {
       const instance = subject({ billingLoading: true });
       instance.setState({ selectedTab: 1 });
-      expect(instance.find('ValidateSection')).not.toExist();
+      expect(instance.find('Connect(ReduxForm)')).not.toExist();
+    });
+
+    it('renders a API Docs button in Panel when API Integration Tab is selected', () => {
+      const instance = subject({ tab: 2 });
+
+      expect(
+        instance
+          .find('Button')
+          .first()
+          .prop('children'),
+      ).toEqual(['API Docs', <Launch className="LaunchIcon" />]);
+    });
+
+    it('renders a ValidateSection', () => {
+      const instance = subject({ tab: 2 });
+      expect(instance.find('Connect(ReduxForm)')).toExist();
     });
   });
 });
