@@ -1,6 +1,5 @@
 const PAGE_URL = '/reports/engagement';
 const DELIVERABILITY_API_URL = '/api/v1/metrics/deliverability**/**';
-const STABLE_UNIX_DATE = 1581087062000; // Stable unix timestamp (2/6/2020)
 
 describe('The engagement report page', () => {
   beforeEach(() => {
@@ -13,8 +12,15 @@ describe('The engagement report page', () => {
     });
 
     cy.stubRequest({
-      url: '/api/v1/metrics/deliverability**/**',
+      url: '/api/v1/metrics/deliverability**/*',
       fixture: 'metrics/deliverability/200.get.json',
+      requestAlias: 'deliverabilityRequest',
+    });
+
+    cy.stubRequest({
+      url: '/api/v1/metrics/deliverability/link-name**/*',
+      fixture: 'metrics/deliverability/link-name/200.get.json',
+      requestAlias: 'deliverabilityLinkNameRequest',
     });
   });
 
@@ -88,7 +94,7 @@ describe('The engagement report page', () => {
     });
   });
 
-  it.only('renders engagement metrics as text', () => {
+  it('renders engagement metrics as text', () => {
     cy.visit(PAGE_URL);
 
     cy.get('[data-id="summary-panel"]').within(() => {
@@ -109,6 +115,174 @@ describe('The engagement report page', () => {
       cy.findByText('200K').should('be.visible'); // `count_unique_confirmed_opened_approx`
       cy.findByText('250K').should('be.visible'); // `count_accepted`
       cy.findByText('325K').should('be.visible'); // `count_unique_clicked_approx`
+    });
+  });
+
+  describe('the click tracking table', () => {
+    function assertTableRow({ rowIndex, row }) {
+      cy.get('tbody tr')
+        .eq(rowIndex)
+        .within(() => {
+          cy.get('td')
+            .eq(0)
+            .should('contain', row.link);
+          cy.get('td')
+            .eq(1)
+            .should('contain', row.uniqueClicks);
+          cy.get('td')
+            .eq(2)
+            .should('contain', row.clicks);
+          cy.get('td')
+            .eq(3)
+            .should('contain', row.percentOfTotal);
+        });
+    }
+
+    function assertDescending() {
+      assertTableRow({
+        rowIndex: 0,
+        row: {
+          link: 'Mock Link 4',
+          uniqueClicks: '40',
+          clicks: '40',
+          percentOfTotal: '40%',
+        },
+      });
+
+      assertTableRow({
+        rowIndex: 1,
+        row: {
+          link: 'Mock Link 3',
+          uniqueClicks: '30',
+          clicks: '30',
+          percentOfTotal: '30%',
+        },
+      });
+
+      assertTableRow({
+        rowIndex: 2,
+        row: {
+          link: 'Mock Link 2',
+          uniqueClicks: '20',
+          clicks: '20',
+          percentOfTotal: '20%',
+        },
+      });
+
+      assertTableRow({
+        rowIndex: 3,
+        row: {
+          link: 'Mock Link 1',
+          uniqueClicks: '10',
+          clicks: '10',
+          percentOfTotal: '10%',
+        },
+      });
+    }
+
+    function assertAscending() {
+      assertTableRow({
+        rowIndex: 0,
+        row: {
+          link: 'Mock Link 1',
+          uniqueClicks: '10',
+          clicks: '10',
+          percentOfTotal: '10%',
+        },
+      });
+
+      assertTableRow({
+        rowIndex: 1,
+        row: {
+          link: 'Mock Link 2',
+          uniqueClicks: '20',
+          clicks: '20',
+          percentOfTotal: '20%',
+        },
+      });
+
+      assertTableRow({
+        rowIndex: 2,
+        row: {
+          link: 'Mock Link 3',
+          uniqueClicks: '30',
+          clicks: '30',
+          percentOfTotal: '30%',
+        },
+      });
+
+      assertTableRow({
+        rowIndex: 3,
+        row: {
+          link: 'Mock Link 4',
+          uniqueClicks: '40',
+          clicks: '40',
+          percentOfTotal: '40%',
+        },
+      });
+    }
+
+    function clickTableHeader({ content }) {
+      cy.get('table thead').within(() => cy.findByText(content).click());
+    }
+
+    beforeEach(() => {
+      cy.visit(PAGE_URL);
+      cy.get('table').scrollIntoView();
+    });
+
+    it('is sorted in descending order of clicks by default', () => {
+      assertDescending();
+    });
+
+    it('renders tooltips when hovering the "Unique Clicks" and "Clicks" table header cells', () => {
+      function triggerTooltipEvent({ cellContent, event }) {
+        cy.get('table').within(() => {
+          cy.findByText(cellContent)
+            .find('svg')
+            .trigger(event);
+        });
+      }
+
+      triggerTooltipEvent({ cellContent: 'Unique Clicks', event: 'mouseover' });
+
+      cy.findByText(
+        'Total number of messages which had at least one link selected one or more times.',
+      ).should('be.visible');
+
+      triggerTooltipEvent({ cellContent: 'Unique Clicks', event: 'mouseout' });
+
+      triggerTooltipEvent({ cellContent: 'Clicks', event: 'mouseover' });
+
+      cy.findByText('Total number of times that links were selected across all messages.').should(
+        'be.visible',
+      );
+
+      triggerTooltipEvent({ cellContent: 'Clicks', event: 'mouseout' });
+    });
+
+    it('sorts alphabetically by "Link"', () => {
+      clickTableHeader({ content: 'Link' });
+      assertAscending();
+      clickTableHeader({ content: 'Link' });
+      assertDescending();
+    });
+
+    it('sorts numerically by "Unique Clicks", "Clicks", and "Percent of Total"', () => {
+      clickTableHeader({ content: 'Unique Clicks' });
+      assertAscending();
+      clickTableHeader({ content: 'Unique Clicks' });
+      assertDescending();
+
+      clickTableHeader({ content: 'Clicks' });
+      assertAscending();
+      clickTableHeader({ content: 'Clicks' });
+      assertDescending();
+
+      clickTableHeader({ content: 'Percent of Total' });
+      assertAscending();
+      clickTableHeader({ content: 'Percent of Total' });
+      assertDescending();
     });
   });
 });
