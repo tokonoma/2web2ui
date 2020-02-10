@@ -63,6 +63,7 @@ describe('Page: Recipient Email Verification', () => {
         getBillingInfo: jest.fn(),
         billing: {},
         isStandAloneRVSet: true,
+        handleSubmit: jest.fn(),
       };
       subject = props => shallow(<RecipientValidationPage {...defaultProps} {...props} />);
     });
@@ -70,7 +71,7 @@ describe('Page: Recipient Email Verification', () => {
     it('when billingLoading is true ValidateSection is not rendered', () => {
       const instance = subject({ billingLoading: true });
       instance.setState({ selectedTab: 1 });
-      expect(instance.find('Connect(ReduxForm)')).not.toExist();
+      expect(instance.find('Connect(ValidateSection)')).not.toExist();
     });
 
     it('renders a API Docs button in Panel when API Integration Tab is selected', () => {
@@ -86,7 +87,7 @@ describe('Page: Recipient Email Verification', () => {
 
     it('renders a ValidateSection', () => {
       const instance = subject({ tab: 2 });
-      expect(instance.find('Connect(ReduxForm)')).toExist();
+      expect(instance.find('Connect(ValidateSection)')).toExist();
     });
   });
 });

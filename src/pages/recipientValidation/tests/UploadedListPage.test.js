@@ -17,6 +17,7 @@ describe('UploadedListPage', () => {
         jobLoadingStatus="success"
         triggerJob={() => {}}
         billing={{}}
+        handleSubmit={() => {}}
         {...props}
       />,
     );
@@ -81,8 +82,18 @@ describe('UploadedListPage', () => {
   });
 
   describe('when standaloneRV flag is set', () => {
-    it('render a ValidateSection', () => {
-      expect(subject({ isStandAloneRVSet: true }).find('Connect(ReduxForm)')).toHaveLength(1);
+    it('render a ValidateSection when job status is queued for batch', () => {
+      expect(
+        subject({
+          isStandAloneRVSet: true,
+          job: {
+            jobId: 'B1C1_D1C1',
+            status: 'queued_for_batch',
+            updatedAt: '1997-11-21T15:55:06Z',
+          },
+          listId: 'B1C1_D1C1',
+        }).find('Connect(ValidateSection)'),
+      ).toHaveLength(1);
     });
   });
 });
