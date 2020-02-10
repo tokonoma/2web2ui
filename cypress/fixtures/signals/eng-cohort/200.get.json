@@ -1,0 +1,115 @@
+{
+  "results": {
+    "total_count": 1,
+    "data": [
+      {
+        "sid": 102,
+        "current_c_total_eng": null,
+        "current_c_new_eng": null,
+        "current_c_14d_eng": null,
+        "current_c_90d_eng": null,
+        "current_c_365d_eng": null,
+        "current_c_uneng_eng": null,
+        "current_p_total_eng": null,
+        "current_p_new_eng": null,
+        "current_p_14d_eng": null,
+        "current_p_90d_eng": null,
+        "current_p_365d_eng": null,
+        "current_p_uneng_eng": null,
+        "WoW": -0.45,
+        "history": [
+          {
+            "c_total_eng": 11975,
+            "c_new_eng": 1083,
+            "c_14d_eng": 5438,
+            "c_90d_eng": 5062,
+            "c_365d_eng": 151,
+            "c_uneng_eng": 241,
+            "p_total_eng": 0.0882597896505723,
+            "p_new_eng": 0.104084574723691,
+            "p_14d_eng": 0.134988209010798,
+            "p_90d_eng": 0.107193528577176,
+            "p_365d_eng": 0.00898274836406901,
+            "p_uneng_eng": 0.0115002863141821,
+            "dt": "2020-02-06"
+          },
+          {
+            "c_total_eng": 5472,
+            "c_new_eng": 485,
+            "c_14d_eng": 2423,
+            "c_90d_eng": 2381,
+            "c_365d_eng": 62,
+            "c_uneng_eng": 121,
+            "p_total_eng": 0.0458556452221133,
+            "p_new_eng": 0.0522629310344828,
+            "p_14d_eng": 0.0686149576643163,
+            "p_90d_eng": 0.0567134316270872,
+            "p_365d_eng": 0.00429154841835675,
+            "p_uneng_eng": 0.00660913261961984,
+            "dt": "2020-02-05"
+          },
+          {
+            "c_total_eng": 5860,
+            "c_new_eng": 507,
+            "c_14d_eng": 2672,
+            "c_90d_eng": 2481,
+            "c_365d_eng": 62,
+            "c_uneng_eng": 138,
+            "p_total_eng": 0.0444097519571363,
+            "p_new_eng": 0.0491279069767442,
+            "p_14d_eng": 0.0686889460154242,
+            "p_90d_eng": 0.0535633325417215,
+            "p_365d_eng": 0.0039367578893898,
+            "p_uneng_eng": 0.00667795789983063,
+            "dt": "2020-02-04"
+          },
+          {
+            "c_total_eng": 49331,
+            "c_new_eng": 4684,
+            "c_14d_eng": 19571,
+            "c_90d_eng": 19763,
+            "c_365d_eng": 1937,
+            "c_uneng_eng": 3376,
+            "p_total_eng": 0.350479208258439,
+            "p_new_eng": 0.407268933136249,
+            "p_14d_eng": 0.485440023811886,
+            "p_90d_eng": 0.39765387633554,
+            "p_365d_eng": 0.114459611180051,
+            "p_uneng_eng": 0.151295151026262,
+            "dt": "2020-02-03"
+          },
+          {
+            "c_total_eng": 41888,
+            "c_new_eng": 4315,
+            "c_14d_eng": 18075,
+            "c_90d_eng": 17937,
+            "c_365d_eng": 526,
+            "c_uneng_eng": 1035,
+            "p_total_eng": 0.312254467114434,
+            "p_new_eng": 0.371758421642113,
+            "p_14d_eng": 0.481345370296397,
+            "p_90d_eng": 0.37928992831617,
+            "p_365d_eng": 0.0324471038183949,
+            "p_uneng_eng": 0.0481686601200726,
+            "dt": "2020-02-02"
+          },
+          {
+            "c_total_eng": 39873,
+            "c_new_eng": 4231,
+            "c_14d_eng": 16893,
+            "c_90d_eng": 17261,
+            "c_365d_eng": 442,
+            "c_uneng_eng": 1046,
+            "p_total_eng": 0.31258231420508,
+            "p_new_eng": 0.367051270929123,
+            "p_14d_eng": 0.471515895832752,
+            "p_90d_eng": 0.382227241524392,
+            "p_365d_eng": 0.0302573932092004,
+            "p_uneng_eng": 0.0511766720485347,
+            "dt": "2020-02-01"
+          }
+        ]
+      }
+    ]
+  }
+}

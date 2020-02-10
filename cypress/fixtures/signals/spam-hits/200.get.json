@@ -3,11 +3,47 @@
     "total_count": 1,
     "data": [
       {
-        "current_trap_hits": 11,
-        "current_relative_trap_hits": 0.000078151087365811,
-        "sid": 102,
-        "WoW": -0.19,
+        "current_trap_hits": 24,
+        "current_relative_trap_hits": 0.000179868246509432,
+        "sid": 6257,
+        "WoW": -0.09,
         "history": [
+          {
+            "injections": 135679,
+            "trap_hits": 16,
+            "relative_trap_hits": 0.000117925397445441,
+            "trap_hits_typo": 16,
+            "trap_hits_parked": 0,
+            "trap_hits_recycled": 0,
+            "perc_trap_hits_typo": 1,
+            "perc_trap_hits_parked": 0,
+            "perc_trap_hits_recycled": 0,
+            "dt": "2020-02-06"
+          },
+          {
+            "injections": 119331,
+            "trap_hits": 16,
+            "relative_trap_hits": 0.000134080833982787,
+            "trap_hits_typo": 16,
+            "trap_hits_parked": 0,
+            "trap_hits_recycled": 0,
+            "perc_trap_hits_typo": 1,
+            "perc_trap_hits_parked": 0,
+            "perc_trap_hits_recycled": 0,
+            "dt": "2020-02-05"
+          },
+          {
+            "injections": 131953,
+            "trap_hits": 15,
+            "relative_trap_hits": 0.000113676839480724,
+            "trap_hits_typo": 15,
+            "trap_hits_parked": 0,
+            "trap_hits_recycled": 0,
+            "perc_trap_hits_typo": 1,
+            "perc_trap_hits_parked": 0,
+            "perc_trap_hits_recycled": 0,
+            "dt": "2020-02-04"
+          },
           {
             "injections": 140753,
             "trap_hits": 11,
@@ -43,6 +79,42 @@
             "perc_trap_hits_parked": 0,
             "perc_trap_hits_recycled": 0,
             "dt": "2020-02-01"
+          },
+          {
+            "injections": 125308,
+            "trap_hits": 22,
+            "relative_trap_hits": 0.000175567401921665,
+            "trap_hits_typo": 22,
+            "trap_hits_parked": 0,
+            "trap_hits_recycled": 0,
+            "perc_trap_hits_typo": 1,
+            "perc_trap_hits_parked": 0,
+            "perc_trap_hits_recycled": 0,
+            "dt": "2020-01-31"
+          },
+          {
+            "injections": 126815,
+            "trap_hits": 19,
+            "relative_trap_hits": 0.000149824547569294,
+            "trap_hits_typo": 19,
+            "trap_hits_parked": 0,
+            "trap_hits_recycled": 0,
+            "perc_trap_hits_typo": 1,
+            "perc_trap_hits_parked": 0,
+            "perc_trap_hits_recycled": 0,
+            "dt": "2020-01-30"
+          },
+          {
+            "injections": 127855,
+            "trap_hits": 19,
+            "relative_trap_hits": 0.00014860584255602,
+            "trap_hits_typo": 19,
+            "trap_hits_parked": 0,
+            "trap_hits_recycled": 0,
+            "perc_trap_hits_typo": 1,
+            "perc_trap_hits_parked": 0,
+            "perc_trap_hits_recycled": 0,
+            "dt": "2020-01-29"
           }
         ]
       }
