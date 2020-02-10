@@ -78,6 +78,7 @@ exports[`Signals Engagement Rate By Cohort Page renders correctly 1`] = `
         facetId="test.com"
       />
       <Panel
+        data-id="engagement-rate-chart"
         sectioned={true}
       >
         <div
@@ -267,6 +268,7 @@ exports[`Signals Engagement Rate By Cohort Page renders correctly 1`] = `
 
 exports[`Signals Engagement Rate By Cohort Page renders empty correctly 1`] = `
 <Panel
+  data-id="engagement-rate-chart"
   sectioned={true}
 >
   <Callout
@@ -305,6 +307,7 @@ exports[`Signals Engagement Rate By Cohort Page renders error correctly 1`] = `
         facetId="test.com"
       />
       <Panel
+        data-id="engagement-rate-chart"
         sectioned={true}
       >
         <Callout
@@ -344,6 +347,7 @@ exports[`Signals Engagement Rate By Cohort Page renders error correctly 1`] = `
 
 exports[`Signals Engagement Rate By Cohort Page renders loading correctly 1`] = `
 <Panel
+  data-id="engagement-rate-chart"
   sectioned={true}
 >
   <div
