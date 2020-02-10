@@ -32,30 +32,37 @@ export class ComplaintsByCohortPage extends Component {
 
     // Returns true with 0 total complaints
     return data.every(({ p_total_fbl }) => !p_total_fbl);
-  }
+  };
 
   getYAxisProps = () => ({
     domain: this.isEmpty() ? [0, 1] : ['auto', 'auto'],
-    tickFormatter: (tick) => `${roundToPlaces(tick * 100, 3)}%`
-  })
+    tickFormatter: tick => `${roundToPlaces(tick * 100, 3)}%`,
+  });
 
   getXAxisProps = () => {
     const { xTicks } = this.props;
     return {
       ticks: xTicks,
-      tickFormatter: (tick) => moment(tick).format('M/D')
+      tickFormatter: tick => moment(tick).format('M/D'),
     };
-  }
+  };
 
-  getTooltipContent = ({ payload = {}}) => {
-    const metrics = _.keys(cohorts).reduce((acc, key) => ([ ...acc, {
-      ...cohorts[key], key,
-      value: payload[`p_${key}_fbl`]
-    }]), []);
+  getTooltipContent = ({ payload = {} }) => {
+    const metrics = _.keys(cohorts).reduce(
+      (acc, key) => [
+        ...acc,
+        {
+          ...cohorts[key],
+          key,
+          value: payload[`p_${key}_fbl`],
+        },
+      ],
+      [],
+    );
 
     return (
       <>
-        {_.orderBy(metrics, 'value', 'desc').map((metric) => (
+        {_.orderBy(metrics, 'value', 'desc').map(metric => (
           <TooltipMetric
             key={metric.key}
             color={metric.fill}
@@ -66,7 +73,7 @@ export class ComplaintsByCohortPage extends Component {
         ))}
       </>
     );
-  }
+  };
 
   renderContent = () => {
     const {
@@ -80,18 +87,20 @@ export class ComplaintsByCohortPage extends Component {
       error,
       selectedDate,
       shouldHighlightSelected,
-      subaccountId
+      subaccountId,
     } = this.props;
     const selectedComplaints = _.find(data, ['date', selectedDate]) || {};
     const selectedEngagementRecency = _.find(dataEngRecency, ['date', selectedDate]) || {};
     let chartPanel;
 
     if (empty) {
-      chartPanel = <Callout title='No Data Available'>Insufficient data to populate this chart</Callout>;
+      chartPanel = (
+        <Callout title="No Data Available">Insufficient data to populate this chart</Callout>
+      );
     }
 
     if (error) {
-      chartPanel = <Callout title='Unable to Load Data'>{error.message}</Callout>;
+      chartPanel = <Callout title="Unable to Load Data">{error.message}</Callout>;
     }
 
     if (loading) {
@@ -106,24 +115,24 @@ export class ComplaintsByCohortPage extends Component {
       <Grid>
         <Grid.Column sm={12} md={7}>
           <Tabs facet={facet} facetId={facetId} subaccountId={subaccountId} />
-          <Panel sectioned>
+          <Panel sectioned data-id="complaint-rate-chart">
             {chartPanel || (
-              <div className='LiftTooltip'>
+              <div className="LiftTooltip">
                 <LineChart
                   height={300}
                   onClick={handleDateSelect}
                   selected={selectedDate}
                   shouldHighlightSelected={shouldHighlightSelected}
                   lines={data}
-                  tooltipWidth='250px'
+                  tooltipWidth="250px"
                   tooltipContent={this.getTooltipContent}
-                  yKeys={_.keys(cohorts).map((key) => ({ key: `p_${key}_fbl`, ...cohorts[key] }))}
+                  yKeys={_.keys(cohorts).map(key => ({ key: `p_${key}_fbl`, ...cohorts[key] }))}
                   yAxisProps={this.getYAxisProps()}
                   xAxisProps={this.getXAxisProps()}
                 />
                 <Legend
                   items={_.values(cohorts)}
-                  tooltipContent={(label) => ENGAGEMENT_RECENCY_COHORTS[label]}
+                  tooltipContent={label => ENGAGEMENT_RECENCY_COHORTS[label]}
                 />
               </div>
             )}
@@ -131,24 +140,35 @@ export class ComplaintsByCohortPage extends Component {
         </Grid.Column>
         <Grid.Column sm={12} md={5} mdOffset={0}>
           <div className={styles.OffsetCol}>
-            {!chartPanel && <ComplaintsByCohortActions complaintsByCohort={selectedComplaints} recencyByCohort={selectedEngagementRecency} date={selectedDate} />}
+            {!chartPanel && (
+              <ComplaintsByCohortActions
+                complaintsByCohort={selectedComplaints}
+                recencyByCohort={selectedEngagementRecency}
+                date={selectedDate}
+              />
+            )}
           </div>
         </Grid.Column>
       </Grid>
     );
-  }
+  };
 
   render() {
     const { facet, facetId, subaccountId } = this.props;
 
     return (
       <Page
-        breadcrumbAction={{ content: 'Back to Engagement Recency Overview', to: '/signals/engagement', component: Link }}
-        title='Complaints by Cohort'
+        breadcrumbAction={{
+          content: 'Back to Engagement Recency Overview',
+          to: '/signals/engagement',
+          component: Link,
+        }}
+        title="Complaints by Cohort"
         facet={facet}
         facetId={facetId}
         subaccountId={subaccountId}
-        primaryArea={<DateFilter left />}>
+        primaryArea={<DateFilter left />}
+      >
         {this.renderContent()}
         <Divider />
         <Grid>
@@ -169,5 +189,5 @@ export class ComplaintsByCohortPage extends Component {
 export default withDetails(
   withDateSelection(ComplaintsByCohortPage),
   { getComplaintsByCohort, getEngagementRecency },
-  selectComplaintsByCohortDetails
+  selectComplaintsByCohortDetails,
 );
