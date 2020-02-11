@@ -179,15 +179,16 @@ describe('The engagement details page', () => {
 
     describe('the "Engagement Rate" tab', () => {
       const engagementRateChartSelector = '[data-id="engagement-rate-chart"]';
-      const engagementRateTabRoute = `/signals/engagement/engagement-rate/sid/${SUBACCOUNT_ID}`;
+      const apiRoute = '/api/v1/signals/eng-cohort/**/*';
+      const tabRoute = `/signals/engagement/engagement-rate/sid/${SUBACCOUNT_ID}`;
 
       it('renders a chart when clicked that renders a tooltip when clicked', () => {
         cy.stubRequest({
-          url: '/api/v1/signals/eng-cohort/**/*',
+          url: apiRoute,
           fixture: 'signals/eng-cohort/200.get.json',
         });
 
-        cy.visit(engagementRateTabRoute);
+        cy.visit(tabRoute);
 
         cy.get(engagementRateChartSelector).within(() => {
           // `.findAll` used due to presence of tooltip that isn't properly hidden
@@ -210,11 +211,11 @@ describe('The engagement details page', () => {
 
       it('renders an empty state when no data is available', () => {
         cy.stubRequest({
-          url: '/api/v1/signals/eng-cohort/**/*',
+          url: apiRoute,
           fixture: 'signals/eng-cohort/200.get.no-results.json',
         });
 
-        cy.visit(engagementRateTabRoute);
+        cy.visit(tabRoute);
 
         cy.get(engagementRateChartSelector).within(() => {
           cy.findByText('No Data Available').should('be.visible');
@@ -224,11 +225,11 @@ describe('The engagement details page', () => {
 
       it('renders recommendations based on the returned data', () => {
         cy.stubRequest({
-          url: '/api/v1/signals/eng-cohort/**/*',
+          url: apiRoute,
           fixture: 'signals/eng-cohort/200.get.json',
         });
 
-        cy.visit(engagementRateTabRoute);
+        cy.visit(tabRoute);
 
         cy.findByText('Recommendations – Feb 4 2020').should('be.visible');
         cy.findByText(
@@ -239,11 +240,11 @@ describe('The engagement details page', () => {
       it('renders an error when the server returns one', () => {
         cy.stubRequest({
           statusCode: 400,
-          url: '/api/v1/signals/eng-cohort/**/*',
+          url: apiRoute,
           fixture: 'signals/eng-cohort/400.get.json',
         });
 
-        cy.visit(engagementRateTabRoute);
+        cy.visit(tabRoute);
 
         cy.get(engagementRateChartSelector).within(() => {
           cy.findByText('Unable to Load Data').should('be.visible');
@@ -254,15 +255,16 @@ describe('The engagement details page', () => {
 
     describe('the "Unsubscribe Rate" tab', () => {
       const unsubscribeRateChartSelector = '[data-id="unsubscribe-rate-chart"]';
-      const unsubscribeRateTabRoute = `/signals/engagement/unsubscribes/sid/${SUBACCOUNT_ID}`;
+      const apiRoute = '/api/v1/signals/unsub-cohort/**/*';
+      const tabRoute = `/signals/engagement/unsubscribes/sid/${SUBACCOUNT_ID}`;
 
       it('renders a chart when clicked that renders a tooltip when clicked', () => {
         cy.stubRequest({
-          url: '/api/v1/signals/unsub-cohort/**/*',
+          url: apiRoute,
           fixture: 'signals/unsub-cohort/200.get.json',
         });
 
-        cy.visit(unsubscribeRateTabRoute);
+        cy.visit(tabRoute);
 
         cy.get(unsubscribeRateChartSelector).within(() => {
           // `.findAll` used due to presence of tooltip that isn't properly hidden
@@ -286,11 +288,11 @@ describe('The engagement details page', () => {
 
       it('renders an empty state when no data is available', () => {
         cy.stubRequest({
-          url: '/api/v1/signals/unsub-cohort/**/*',
+          url: apiRoute,
           fixture: 'signals/unsub-cohort/200.get.no-results.json',
         });
 
-        cy.visit(unsubscribeRateTabRoute);
+        cy.visit(tabRoute);
 
         cy.get(unsubscribeRateChartSelector).within(() => {
           cy.findByText('No Data Available').should('be.visible');
@@ -300,11 +302,11 @@ describe('The engagement details page', () => {
 
       it('renders recommendations based on the returned data', () => {
         cy.stubRequest({
-          url: '/api/v1/signals/unsub-cohort/**/*',
+          url: apiRoute,
           fixture: 'signals/unsub-cohort/200.get.json',
         });
 
-        cy.visit(unsubscribeRateTabRoute);
+        cy.visit(tabRoute);
 
         cy.findByText('Recommendations – Feb 4 2020').should('be.visible');
         cy.findByText("Doesn't look like you have any unsubscribe issues. Great job!").should(
@@ -315,11 +317,11 @@ describe('The engagement details page', () => {
       it('renders an error when the server returns one', () => {
         cy.stubRequest({
           statusCode: 400,
-          url: '/api/v1/signals/unsub-cohort/**/*',
+          url: apiRoute,
           fixture: 'signals/unsub-cohort/400.get.json',
         });
 
-        cy.visit(unsubscribeRateTabRoute);
+        cy.visit(tabRoute);
 
         cy.get(unsubscribeRateChartSelector).within(() => {
           cy.findByText('Unable to Load Data').should('be.visible');
@@ -330,17 +332,18 @@ describe('The engagement details page', () => {
 
     describe('the "Complaint Rate" tab', () => {
       const complaintRateChartsSelector = '[data-id="complaint-rate-chart"]';
-      const complaintRatesTabRoute = `/signals/engagement/complaints/sid/${SUBACCOUNT_ID}`;
+      const apiRoute = '/api/v1/signals/fbl-cohort/**/*';
+      const tabRoute = `/signals/engagement/complaints/sid/${SUBACCOUNT_ID}`;
 
       beforeEach(() => cy.clock(STABLE_UNIX_DATE));
 
       it('renders a chart when clicked that renders a tooltip when clicked', () => {
         cy.stubRequest({
-          url: '/api/v1/signals/fbl-cohort/**/*',
+          url: apiRoute,
           fixture: 'signals/fbl-cohort/200.get.json',
         });
 
-        cy.visit(complaintRatesTabRoute);
+        cy.visit(tabRoute);
 
         cy.get(complaintRateChartsSelector).within(() => {
           // `.findAll` used due to presence of tooltip that isn't properly hidden
@@ -364,11 +367,11 @@ describe('The engagement details page', () => {
 
       it('renders an empty state when no data is available', () => {
         cy.stubRequest({
-          url: '/api/v1/signals/fbl-cohort/**/*',
+          url: apiRoute,
           fixture: 'signals/fbl-cohort/200.get.no-results.json',
         });
 
-        cy.visit(complaintRatesTabRoute);
+        cy.visit(tabRoute);
 
         cy.get(complaintRateChartsSelector).within(() => {
           cy.findByText('No Data Available').should('be.visible');
@@ -378,11 +381,11 @@ describe('The engagement details page', () => {
 
       it('renders recommendations based on the returned data', () => {
         cy.stubRequest({
-          url: '/api/v1/signals/fbl-cohort/**/*',
+          url: apiRoute,
           fixture: 'signals/fbl-cohort/200.get.json',
         });
 
-        cy.visit(complaintRatesTabRoute);
+        cy.visit(tabRoute);
 
         cy.findByText('Recommendations – Feb 4 2020').should('be.visible');
         cy.findByText('Your complaint rates are low across the board. Great job!').should(
@@ -393,11 +396,11 @@ describe('The engagement details page', () => {
       it('renders an error when the server returns one', () => {
         cy.stubRequest({
           statusCode: 400,
-          url: '/api/v1/signals/fbl-cohort/**/*',
+          url: apiRoute,
           fixture: 'signals/fbl-cohort/400.get.json',
         });
 
-        cy.visit(complaintRatesTabRoute);
+        cy.visit(tabRoute);
 
         cy.get(complaintRateChartsSelector).within(() => {
           cy.findByText('Unable to Load Data').should('be.visible');
