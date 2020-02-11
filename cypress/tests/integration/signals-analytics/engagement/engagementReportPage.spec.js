@@ -1,6 +1,12 @@
 const PAGE_URL = '/reports/engagement';
 const DELIVERABILITY_API_URL = '/api/v1/metrics/deliverability**/**';
 
+function waitForInitialRequests() {
+  cy.wait('@subaccountsRequest');
+  cy.wait('@deliverabilityRequest');
+  cy.wait('@deliverabilityLinkNameRequest');
+}
+
 describe('The engagement report page', () => {
   beforeEach(() => {
     cy.stubAuth();
@@ -9,6 +15,7 @@ describe('The engagement report page', () => {
     cy.stubRequest({
       url: '/api/v1/subaccounts',
       fixture: 'subaccounts/200.get.json',
+      requestAlias: 'subaccountsRequest',
     });
 
     cy.stubRequest({
@@ -26,29 +33,17 @@ describe('The engagement report page', () => {
 
   it('has a relevant page title', () => {
     cy.visit(PAGE_URL);
+    waitForInitialRequests();
 
     cy.title().should('include', 'Engagement Report | Signals Analytics');
     cy.findByText('Engagement Report').should('be.visible');
-  });
-
-  it('renders an error message when the server returns a bad response', () => {
-    cy.stubRequest({
-      statusCode: 400,
-      url: '/api/v1/metrics/deliverability**/**',
-      fixture: 'metrics/deliverability/400.get.json',
-    });
-
-    cy.visit(PAGE_URL);
-
-    cy.findAllByText('Something went wrong.').should('have.length', 2);
-    cy.findByText('No engagement to report').should('be.visible');
-    cy.findByText('No clicks to report').should('be.visible');
   });
 
   it('re-requests data when filtering by "Broad Date Range" and updates query params accordingly', () => {
     const broadDateRangeLabel = 'Broad Date Range';
 
     cy.visit(PAGE_URL);
+    waitForInitialRequests();
 
     cy.stubRequest({
       url: DELIVERABILITY_API_URL,
@@ -85,6 +80,7 @@ describe('The engagement report page', () => {
 
   it('renders engagement metrics as text', () => {
     cy.visit(PAGE_URL);
+    waitForInitialRequests();
 
     cy.get('[data-id="summary-panel"]').within(() => {
       cy.get('[data-id="unique-open-rate"]').should('contain', '> 100%');
@@ -98,6 +94,7 @@ describe('The engagement report page', () => {
 
   it('renders "Sent", "Accepted", "Unique Confirmed Opens", and "Unique Clicks" data within a chart', () => {
     cy.visit(PAGE_URL);
+    waitForInitialRequests();
 
     cy.get('.recharts-wrapper').within(() => {
       cy.findByText('150K').should('be.visible'); // `count_sent`
@@ -217,6 +214,7 @@ describe('The engagement report page', () => {
 
     beforeEach(() => {
       cy.visit(PAGE_URL);
+      waitForInitialRequests();
       cy.get('table').scrollIntoView();
     });
 
@@ -273,5 +271,19 @@ describe('The engagement report page', () => {
       clickTableHeader({ content: 'Percent of Total' });
       assertDescending();
     });
+  });
+
+  it('renders an error message when the server returns a bad response', () => {
+    cy.stubRequest({
+      statusCode: 400,
+      url: '/api/v1/metrics/deliverability**/**',
+      fixture: 'metrics/deliverability/400.get.json',
+    });
+
+    cy.visit(PAGE_URL);
+
+    cy.findAllByText('Something went wrong.').should('have.length', 2);
+    cy.findByText('No engagement to report').should('be.visible');
+    cy.findByText('No clicks to report').should('be.visible');
   });
 });
