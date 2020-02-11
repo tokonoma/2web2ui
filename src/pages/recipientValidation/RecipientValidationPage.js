@@ -88,7 +88,7 @@ export class RecipientValidationPage extends Component {
         this.props.history.push(`/recipient-validation/single/${values.address}`);
         break;
       case 2:
-        window.open('https://developers.sparkpost.com/api/recipient-validation/', '_blank');
+        this.props.history.push(`/account/api-keys`);
         break;
       default:
         break;
