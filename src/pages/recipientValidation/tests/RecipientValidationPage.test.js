@@ -19,6 +19,7 @@ describe('Page: Recipient Email Verification', () => {
       },
       getBillingInfo: jest.fn(),
       billing: {},
+      reset: jest.fn(),
     };
 
     wrapper = shallow(<RecipientValidationPage {...props} />);
