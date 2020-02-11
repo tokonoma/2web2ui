@@ -1,4 +1,5 @@
-const PAGE_URL = '/signals/engagement/cohorts/sid/102';
+const SUBACCOUNT_ID = '102';
+const PAGE_URL = `/signals/engagement/cohorts/sid/${SUBACCOUNT_ID}`;
 const SPAM_HITS_API_URL = '/api/v1/signals/spam-hits/**/*';
 const HEALTH_SCORE_API_URL = '/api/v1/signals/health-score/**/*';
 const COHORT_ENGAGEMENT_API_URL = '/api/v1/signals/cohort-engagement/**/*';
@@ -116,10 +117,6 @@ describe('The engagement details page', () => {
       it('renders a chart when clicked that renders a tooltip when clicked', () => {
         cy.visit(PAGE_URL);
 
-        cy.findByText('Engagement Rate').click();
-        cy.findByText('Cohorts').click();
-        cy.url().should('include', '/engagement/cohorts');
-
         cy.get(cohortsChartSelector).within(() => {
           cy.findByText('New').should('be.visible');
           cy.findByText('Never Engaged').should('be.visible');
@@ -184,14 +181,12 @@ describe('The engagement details page', () => {
       const engagementRateChartSelector = '[data-id="engagement-rate-chart"]';
 
       it('renders a chart when clicked that renders a tooltip when clicked', () => {
-        cy.visit(PAGE_URL);
-
         cy.stubRequest({
           url: '/api/v1/signals/eng-cohort/**/*',
           fixture: 'signals/eng-cohort/200.get.json',
         });
 
-        cy.findByText('Engagement Rate').click();
+        cy.visit(`/signals/engagement/engagement-rate/sid/${SUBACCOUNT_ID}`);
 
         cy.get(engagementRateChartSelector).within(() => {
           // `.findAll` used due to presence of tooltip that isn't properly hidden
@@ -213,14 +208,12 @@ describe('The engagement details page', () => {
       });
 
       it('renders an empty state when no data is available', () => {
-        cy.visit(PAGE_URL);
-
         cy.stubRequest({
           url: '/api/v1/signals/eng-cohort/**/*',
           fixture: 'signals/eng-cohort/200.get.no-results.json',
         });
 
-        cy.findByText('Engagement Rate').click();
+        cy.visit(`/signals/engagement/engagement-rate/sid/${SUBACCOUNT_ID}`);
 
         cy.get(engagementRateChartSelector).within(() => {
           cy.findByText('No Data Available').should('be.visible');
@@ -229,14 +222,13 @@ describe('The engagement details page', () => {
       });
 
       it('renders recommendations based on the returned data', () => {
-        cy.visit(PAGE_URL);
-
         cy.stubRequest({
           url: '/api/v1/signals/eng-cohort/**/*',
           fixture: 'signals/eng-cohort/200.get.json',
         });
 
-        cy.findByText('Engagement Rate').click();
+        cy.visit(`/signals/engagement/engagement-rate/sid/${SUBACCOUNT_ID}`);
+
         cy.findByText('Recommendations – Feb 4 2020').should('be.visible');
         cy.findByText(
           'An overall low engagement rate may indicate you emails are being sent to the spam folder. Drill into your Health Score to find the issue.',
@@ -244,15 +236,13 @@ describe('The engagement details page', () => {
       });
 
       it('renders an error when the server returns one', () => {
-        cy.visit(PAGE_URL);
-
         cy.stubRequest({
           statusCode: 400,
           url: '/api/v1/signals/eng-cohort/**/*',
           fixture: 'signals/eng-cohort/400.get.json',
         });
 
-        cy.findByText('Engagement Rate').click();
+        cy.visit(`/signals/engagement/engagement-rate/sid/${SUBACCOUNT_ID}`);
 
         cy.get(engagementRateChartSelector).within(() => {
           cy.findByText('Unable to Load Data').should('be.visible');
@@ -265,14 +255,12 @@ describe('The engagement details page', () => {
       const unsubscribeRateChartSelector = '[data-id="unsubscribe-rate-chart"]';
 
       it('renders a chart when clicked that renders a tooltip when clicked', () => {
-        cy.visit(PAGE_URL);
-
         cy.stubRequest({
           url: '/api/v1/signals/unsub-cohort/**/*',
           fixture: 'signals/unsub-cohort/200.get.json',
         });
 
-        cy.findByText('Unsubscribe Rate').click();
+        cy.visit(`/signals/engagement/unsubscribes/sid/${SUBACCOUNT_ID}`);
 
         cy.get(unsubscribeRateChartSelector).within(() => {
           cy.findAllByText('New').should('be.visible');
@@ -292,14 +280,12 @@ describe('The engagement details page', () => {
       });
 
       it('renders an empty state when no data is available', () => {
-        cy.visit(PAGE_URL);
-
         cy.stubRequest({
           url: '/api/v1/signals/unsub-cohort/**/*',
           fixture: 'signals/unsub-cohort/200.get.no-results.json',
         });
 
-        cy.findByText('Unsubscribe Rate').click();
+        cy.visit(`/signals/engagement/unsubscribes/sid/${SUBACCOUNT_ID}`);
 
         cy.get(unsubscribeRateChartSelector).within(() => {
           cy.findByText('No Data Available').should('be.visible');
@@ -308,14 +294,12 @@ describe('The engagement details page', () => {
       });
 
       it('renders recommendations based on the returned data', () => {
-        cy.visit(PAGE_URL);
-
         cy.stubRequest({
           url: '/api/v1/signals/unsub-cohort/**/*',
           fixture: 'signals/unsub-cohort/200.get.json',
         });
 
-        cy.findByText('Unsubscribe Rate').click();
+        cy.visit(`/signals/engagement/unsubscribes/sid/${SUBACCOUNT_ID}`);
 
         cy.findByText('Recommendations – Feb 4 2020').should('be.visible');
         cy.findByText("Doesn't look like you have any unsubscribe issues. Great job!").should(
@@ -324,15 +308,13 @@ describe('The engagement details page', () => {
       });
 
       it('renders an error when the server returns one', () => {
-        cy.visit(PAGE_URL);
-
         cy.stubRequest({
           statusCode: 400,
           url: '/api/v1/signals/unsub-cohort/**/*',
           fixture: 'signals/unsub-cohort/400.get.json',
         });
 
-        cy.findByText('Unsubscribe Rate').click();
+        cy.visit(`/signals/engagement/unsubscribes/sid/${SUBACCOUNT_ID}`);
 
         cy.get(unsubscribeRateChartSelector).within(() => {
           cy.findByText('Unable to Load Data').should('be.visible');
