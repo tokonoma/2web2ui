@@ -17,6 +17,7 @@ import ValidateSection from './components/ValidateSection';
 import { FORMS } from 'src/constants';
 import { reduxForm } from 'redux-form';
 import { isRVonSubscription } from 'src/selectors/accountBillingInfo';
+import { rvAddPaymentFormInitialValues } from 'src/selectors/recipientValidation';
 import { prepareCardInfo } from 'src/helpers/billing';
 import addRVtoSubscription from 'src/actions/addRVtoSubscription';
 import _ from 'lodash';
@@ -81,7 +82,7 @@ export class UploadedListPage extends Component {
       billing: { credit_card },
     } = this.props;
 
-    const { valid, pristine, submitting, isRVFormPresent } = this.props;
+    const { valid, pristine, submitting } = this.props;
     const submitDisabled = pristine || !valid || submitting;
     return (
       <Page
@@ -113,7 +114,7 @@ export class UploadedListPage extends Component {
           <ValidateSection
             credit_card={credit_card}
             formname={FORMNAME}
-            submitDisabled={submitDisabled && isRVFormPresent}
+            submitDisabled={submitDisabled && !this.state.useSavedCC}
             handleCardToggle={this.handleToggleCC}
             defaultToggleState={!this.state.useSavedCC}
           />
@@ -159,8 +160,8 @@ const mapStateToProps = (state, props) => {
     jobLoadingStatus: state.recipientValidation.jobLoadingStatus[listId],
     isStandAloneRVSet: isAccountUiOptionSet('standalone_rv')(state),
     billing: state.account.billing || {},
-    isRVFormPresent: Boolean(state.form[FORMNAME]) && !_.isEmpty(state.form[FORMNAME]),
     isRVonSubscription: isRVonSubscription(state),
+    initialValues: rvAddPaymentFormInitialValues(state),
   };
 };
 
