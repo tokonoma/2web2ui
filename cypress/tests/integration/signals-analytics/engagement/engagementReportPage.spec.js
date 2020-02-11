@@ -1,5 +1,7 @@
-const PAGE_URL = '/reports/engagement';
+const PAGE_URL =
+  '/reports/engagement?from=2020-01-08T05%3A00%3A00Z&range=30days&to=2020-02-07T14%3A51%3A02Z';
 const DELIVERABILITY_API_URL = '/api/v1/metrics/deliverability**/**';
+const STABLE_UNIX_DATE = 1581087062000; // Stable unix timestamp (2/6/2020)
 
 function waitForInitialRequests() {
   cy.wait('@subaccountsRequest');
@@ -19,7 +21,7 @@ describe('The engagement report page', () => {
     });
 
     cy.stubRequest({
-      url: '/api/v1/metrics/deliverability**/**',
+      url: DELIVERABILITY_API_URL,
       fixture: 'metrics/deliverability/200.get.json',
       requestAlias: 'deliverabilityRequest',
     });
@@ -42,6 +44,7 @@ describe('The engagement report page', () => {
   it('re-requests data when filtering by "Broad Date Range" and updates query params accordingly', () => {
     const broadDateRangeLabel = 'Broad Date Range';
 
+    cy.clock(STABLE_UNIX_DATE);
     cy.visit(PAGE_URL);
     waitForInitialRequests();
 
@@ -79,6 +82,7 @@ describe('The engagement report page', () => {
   });
 
   it('renders engagement metrics as text', () => {
+    cy.clock(STABLE_UNIX_DATE);
     cy.visit(PAGE_URL);
     waitForInitialRequests();
 
@@ -93,6 +97,7 @@ describe('The engagement report page', () => {
   });
 
   it('renders "Sent", "Accepted", "Unique Confirmed Opens", and "Unique Clicks" data within a chart', () => {
+    cy.clock(STABLE_UNIX_DATE);
     cy.visit(PAGE_URL);
     waitForInitialRequests();
 
@@ -213,6 +218,7 @@ describe('The engagement report page', () => {
     }
 
     beforeEach(() => {
+      cy.clock(STABLE_UNIX_DATE);
       cy.visit(PAGE_URL);
       waitForInitialRequests();
       cy.get('table').scrollIntoView();
@@ -274,9 +280,11 @@ describe('The engagement report page', () => {
   });
 
   it('renders an error message when the server returns a bad response', () => {
+    cy.clock(STABLE_UNIX_DATE);
+
     cy.stubRequest({
       statusCode: 400,
-      url: '/api/v1/metrics/deliverability**/**',
+      url: DELIVERABILITY_API_URL,
       fixture: 'metrics/deliverability/400.get.json',
     });
 
