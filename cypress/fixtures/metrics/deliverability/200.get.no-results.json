@@ -1,9 +1,9 @@
 {
   "results": [
     {
-      "count_sent": 1777598,
-      "count_unique_confirmed_opened_approx": 609870,
-      "count_accepted": 1599788
+      "count_sent": 0,
+      "count_unique_confirmed_opened_approx": 0,
+      "count_accepted": 0
     }
   ],
   "links": []
