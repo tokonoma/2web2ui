@@ -4,7 +4,7 @@ const DELIVERABILITY_API_URL = '/api/v1/metrics/deliverability**/**';
 function waitForInitialRequests() {
   cy.wait('@subaccountsRequest');
   cy.wait('@deliverabilityRequest');
-  cy.wait('@deliverabilityLinkNameRequest');
+  cy.wait('@linkNameRequest');
 }
 
 describe('The engagement report page', () => {
@@ -19,15 +19,15 @@ describe('The engagement report page', () => {
     });
 
     cy.stubRequest({
-      url: '/api/v1/metrics/deliverability**/*',
+      url: '/api/v1/metrics/deliverability**/**',
       fixture: 'metrics/deliverability/200.get.json',
       requestAlias: 'deliverabilityRequest',
     });
 
     cy.stubRequest({
-      url: '/api/v1/metrics/deliverability/link-name**/*',
+      url: '/api/v1/metrics/deliverability/link-name**/**',
       fixture: 'metrics/deliverability/link-name/200.get.json',
-      requestAlias: 'deliverabilityLinkNameRequest',
+      requestAlias: 'linkNameRequest',
     });
   });
 
