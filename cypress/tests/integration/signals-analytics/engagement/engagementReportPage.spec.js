@@ -53,6 +53,7 @@ describe('The engagement report page', () => {
     cy.stubRequest({
       url: DELIVERABILITY_API_URL,
       fixture: 'metrics/deliverability/200.get.different-results.json',
+      requestAlias: 'deliverabilityDifferentResults',
     });
 
     cy.findByLabelText(broadDateRangeLabel).select('Last Hour');
@@ -69,6 +70,8 @@ describe('The engagement report page', () => {
 
     cy.findByLabelText(broadDateRangeLabel).select('Last 90 Days');
     cy.url().should('include', 'range=90days');
+
+    cy.wait('@deliverabilityDifferentResults');
 
     cy.get('[data-id="summary-panel"]').within(() => {
       // This may seem like an odd way to check for different data,
