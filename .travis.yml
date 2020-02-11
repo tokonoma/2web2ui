@@ -32,7 +32,7 @@ jobs:
       script: npm run test-integration-ci
     - stage: test-and-build
       name: 'Integration Testing - Templates, Recipient Validation, Suppressions, and Alerts'
-      env: SPECS='cypress/tests/integration/templates/**/*,cypress/tests/integration/recipients/**/*,cypress/tests/integration/alerts/**/*''
+      env: SPECS='cypress/tests/integration/templates/**/*,cypress/tests/integration/recipients/**/*,cypress/tests/integration/alerts/**/*'
       script: npm run test-integration-ci
 
 after_script: greenkeeper-lockfile-upload
