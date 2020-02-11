@@ -87,7 +87,9 @@ export class RecipientValidationPage extends Component {
       case 1:
         this.props.history.push(`/recipient-validation/single/${values.address}`);
         break;
-
+      case 2:
+        window.open('https://developers.sparkpost.com/api/recipient-validation/', '_blank');
+        break;
       default:
         break;
     }
@@ -208,7 +210,9 @@ export class RecipientValidationPage extends Component {
           <ValidateSection
             credit_card={billing.credit_card}
             submitButtonName={selectedTab === 2 ? 'Create API Key' : 'Validate'}
-            submitDisabled={submitDisabled}
+            submitDisabled={
+              selectedTab === 2 ? submitDisabled && !this.state.useSavedCC : submitDisabled
+            }
             formname={FORMNAME}
             handleCardToggle={this.handleToggleCC}
             defaultToggleState={!this.state.useSavedCC}
