@@ -36,7 +36,8 @@ describe('The engagement recency page', () => {
     cy.findByText('No Data Available').should('be.visible');
   });
 
-  // This is a bug according to Jon
+  // This is a bug according to Jon.
+  // Filed a ticket: https://jira.int.messagesystems.com/browse/SA-1213
   // it('renders an error when the server returns a bad response', () => {
   //   cy.stubRequest({
   //     url: '/api/v1/signals/cohort-engagement/**/*',
