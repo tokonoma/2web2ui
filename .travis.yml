@@ -20,12 +20,12 @@ before_script: greenkeeper-lockfile-update
 
 jobs:
   include:
-    - stage: test-and-build
-      name: 'Unit Testing'
-      script: npm run test-ci
-      # Running Cypress tests in parallel by running them in batches to reduce pipeline duration.
-      # This could probably be improved by writing a Node script to handle a config,
-      # though no need to prematurely optimize at this point.
+    # - stage: test-and-build
+    #   name: 'Unit Testing'
+    #   script: npm run test-ci
+    # Running Cypress tests in parallel by running them in batches to reduce pipeline duration.
+    # This could probably be improved by writing a Node script to handle a config,
+    # though no need to prematurely optimize at this point.
     # - stage: test-and-build
     #   name: 'Integration Testing - Accounts, Events, and Navigation'
     #   env: SPECS='cypress/tests/integration/accounts/**/*,cypress/tests/integration/events/**/*,cypress/tests/integration/navigation/**/*'
