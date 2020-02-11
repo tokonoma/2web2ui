@@ -47,10 +47,10 @@ export class RecipientValidationPage extends Component {
       this.setState({ useSavedCC: Boolean(this.props.billing.credit_card) });
   }
   handleTabs(tabIdx) {
-    const { history } = this.props;
+    const { history, isStandAloneRVSet } = this.props;
     history.replace(`/recipient-validation/${tabs[tabIdx].key}`);
     this.setState({ selectedTab: tabIdx });
-    this.props.reset();
+    if (isStandAloneRVSet) this.props.reset();
   }
 
   renderTabContent = tabId => {
