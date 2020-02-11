@@ -265,6 +265,9 @@ describe('The engagement details page', () => {
         cy.visit(unsubscribeRateTabRoute);
 
         cy.get(unsubscribeRateChartSelector).within(() => {
+          // `.findAll` used due to presence of tooltip that isn't properly hidden
+          // in the DOM from Cypress. Use of `visibility: hidden;` would be recommended
+          // or dynamically rendering the component instead of show/hide
           cy.findAllByText('New').should('be.visible');
           cy.findAllByText('Never Engaged').should('be.visible');
           cy.findAllByText('Not Recently Engaged').should('be.visible');
@@ -325,27 +328,83 @@ describe('The engagement details page', () => {
       });
     });
 
-    // Having trouble figuring out where the data is coming from here...
-    // describe('the "Complaint Rate" tab', () => {
-    //   const complaintRateChartsSelector = '[data-id="complaint-rate-chart"]';
+    describe('the "Complaint Rate" tab', () => {
+      const complaintRateChartsSelector = '[data-id="complaint-rate-chart"]';
+      const complaintRatesTabRoute = `/signals/engagement/complaints/sid/${SUBACCOUNT_ID}`;
 
-    //   beforeEach(() => cy.clock(STABLE_UNIX_DATE));
+      beforeEach(() => cy.clock(STABLE_UNIX_DATE));
 
-    //   it.only('renders a chart when clicked that renders a tooltip when clicked', () => {
-    //     cy.visit(PAGE_URL);
+      it('renders a chart when clicked that renders a tooltip when clicked', () => {
+        cy.stubRequest({
+          url: '/api/v1/signals/fbl-cohort/**/*',
+          fixture: 'signals/fbl-cohort/200.get.json',
+        });
 
-    //     cy.stubRequest({
-    //       url: '/api/v1/signals/fbl-cohort/**/*',
-    //       fixture: 'signals/unsub-cohort/200.get.json',
-    //     });
+        cy.visit(complaintRatesTabRoute);
 
-    //     cy.findByText('Complaint Rate').click();
-    //   });
+        cy.get(complaintRateChartsSelector).within(() => {
+          // `.findAll` used due to presence of tooltip that isn't properly hidden
+          // in the DOM from Cypress. Use of `visibility: hidden;` would be recommended
+          // or dynamically rendering the component instead of show/hide
+          cy.findAllByText('New').should('be.visible');
+          cy.findAllByText('Never Engaged').should('be.visible');
+          cy.findAllByText('Not Recently Engaged').should('be.visible');
+          cy.findAllByText('Semi Recently Engaged').should('be.visible');
+          cy.findAllByText('Recently Engaged').should('be.visible');
 
-    //   it('renders an empty state when no data is available', () => {});
+          cy.get('.recharts-dot')
+            .last()
+            .click({ force: true });
 
-    //   it('renders recommendations based on the returned data', () => {});
-    // });
+          // Not checking for *all* data in the tooltip, just checking that it is
+          // showing properly. Ideally, unit tests can help check for this behavior
+          cy.findByText('Never engaged, first email in last 7 days').should('be.visible');
+        });
+      });
+
+      it('renders an empty state when no data is available', () => {
+        cy.stubRequest({
+          url: '/api/v1/signals/fbl-cohort/**/*',
+          fixture: 'signals/fbl-cohort/200.get.no-results.json',
+        });
+
+        cy.visit(complaintRatesTabRoute);
+
+        cy.get(complaintRateChartsSelector).within(() => {
+          cy.findByText('No Data Available').should('be.visible');
+          cy.findByText('Insufficient data to populate this chart').should('be.visible');
+        });
+      });
+
+      it('renders recommendations based on the returned data', () => {
+        cy.stubRequest({
+          url: '/api/v1/signals/fbl-cohort/**/*',
+          fixture: 'signals/fbl-cohort/200.get.json',
+        });
+
+        cy.visit(complaintRatesTabRoute);
+
+        cy.findByText('Recommendations – Feb 4 2020').should('be.visible');
+        cy.findByText('Your complaint rates are low across the board. Great job!').should(
+          'be.visible',
+        );
+      });
+
+      it('renders an error when the server returns one', () => {
+        cy.stubRequest({
+          statusCode: 400,
+          url: '/api/v1/signals/fbl-cohort/**/*',
+          fixture: 'signals/fbl-cohort/400.get.json',
+        });
+
+        cy.visit(complaintRatesTabRoute);
+
+        cy.get(complaintRateChartsSelector).within(() => {
+          cy.findByText('Unable to Load Data').should('be.visible');
+          cy.findByText('This is an error').should('be.visible');
+        });
+      });
+    });
   });
 
   it('renders with the "Spam Trap Monitoring" chart that links to the spam traps page', () => {
