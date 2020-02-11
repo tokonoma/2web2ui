@@ -185,6 +185,8 @@ describe('The events page', () => {
     it('re-requests data when removing an active filter and when clicking "Clear All Filters"', () => {
       cy.visit(PAGE_URL);
 
+      cy.wait('@getMessageEvents');
+
       cy.stubRequest({
         url: '/api/v1/events/message*',
         fixture: 'events/message/200.get.different-results.json',
