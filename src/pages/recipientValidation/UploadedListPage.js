@@ -16,7 +16,7 @@ import { isAccountUiOptionSet } from 'src/helpers/conditions/account';
 import ValidateSection from './components/ValidateSection';
 import { FORMS } from 'src/constants';
 import { reduxForm } from 'redux-form';
-import { isRVonSubscription } from 'src/selectors/accountBillingInfo';
+import { isProductionOnSubscription } from 'src/helpers/billing';
 import { rvAddPaymentFormInitialValues } from 'src/selectors/recipientValidation';
 import { prepareCardInfo } from 'src/helpers/billing';
 import addRVtoSubscription from 'src/actions/addRVtoSubscription';
@@ -160,7 +160,7 @@ const mapStateToProps = (state, props) => {
     jobLoadingStatus: state.recipientValidation.jobLoadingStatus[listId],
     isStandAloneRVSet: isAccountUiOptionSet('standalone_rv')(state),
     billing: state.account.billing || {},
-    isRVonSubscription: isRVonSubscription(state),
+    isRVonSubscription: isProductionOnSubscription(state, 'recipient_validation'),
     initialValues: rvAddPaymentFormInitialValues(state),
   };
 };

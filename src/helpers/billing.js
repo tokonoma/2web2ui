@@ -188,3 +188,7 @@ export function stripImmediatePlanChange(search) {
   const { immediatePlanChange: _immediatePlanChange, ...options } = qs.parse(search);
   return qs.stringify(options);
 }
+
+export function isProductionOnSubscription(state, productName = 'recipient_validation') {
+  return _.find(_.get(state, 'billing.subscription.products') || {}, { product: productName });
+}

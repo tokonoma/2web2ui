@@ -28,9 +28,6 @@ const selectOnZuoraPlan = selectCondition(onZuoraPlan);
 const selectBillingSubscription = state => state.billing.subscription || {};
 const currentFreePlans = ['free500-1018', 'free15K-1018', 'free500-0419', 'free500-SPCEU-0419'];
 const getRecipientValidationUsage = state => _.get(state, 'account.rvUsage.recipient_validation');
-export const isRVonSubscription = state =>
-  _.find(_.get(state, 'billing.subscription.products') || {}, { product: 'recipient_validation' });
-
 export const currentSubscriptionSelector = state => state.account.subscription;
 
 /**

@@ -40,7 +40,7 @@ function ValidateSection({
         countries={billingCountries || []}
         defaultToggleState={defaultToggleState}
       />
-      <Button size="large" primary submit disabled={submitDisabled}>
+      <Button primary submit disabled={submitDisabled}>
         {/* functionality to validate to be added in AC-1196 and AC-1197*/}
         {submitButtonName}
       </Button>
