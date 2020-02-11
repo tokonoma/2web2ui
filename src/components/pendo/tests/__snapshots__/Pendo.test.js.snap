@@ -9,7 +9,7 @@ Array [
       "plan": "1meellion",
       "serviceLevel": "enterprise",
       "status": "active",
-      "statusReason": undefined,
+      "statusReasonCategory": undefined,
       "tenant": "test",
     },
     "visitor": Object {

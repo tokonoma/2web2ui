@@ -18,7 +18,7 @@ export class Pendo extends React.Component {
       username,
       userAccessLevel,
       status,
-      statusReason,
+      statusReasonCategory,
     } = this.props;
     const pendo = window.pendo;
     const { tenantId, release } = config;
@@ -46,7 +46,7 @@ export class Pendo extends React.Component {
         serviceLevel: accountSvcLevel,
         accountCreatedAt,
         status,
-        statusReason,
+        statusReasonCategory,
       },
       visitor: {
         id: `${tenantId}_${accountId}_${username}`,
@@ -67,7 +67,7 @@ const mapStateToProps = state => ({
   accessControlReady: state.accessControlReady,
   accountCreatedAt: state.account.created,
   status: state.account.status,
-  statusReason: state.account.status_reason,
+  statusReasonCategory: state.account.status_reason_category,
   accountId: state.account.customer_id,
   accountPlanCode: currentPlanCodeSelector(state),
   accountSvcLevel: state.account.service_level,
