@@ -25,7 +25,6 @@ export const isSelfServeBilling = any(subscriptionSelfServeIsTrue, isAws);
 export const hasOnlineSupport = ({ account }) => _.get(account, 'support.online', false);
 export const hasUiOption = option => ({ account }) => _.has(account.options, `ui.${option}`);
 export const isAccountUiOptionSet = (option, defaultValue) => ({ account }) => {
-  if (option === 'account_feature_limits') return true; //Added as part of turning on the feature flag, this will be removed soon.
   return Boolean(_.get(account.options, `ui.${option}`, defaultValue));
 };
 export const isSubscriptionPending = ({ account }) => Boolean(account.pending_subscription);

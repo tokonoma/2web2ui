@@ -178,12 +178,12 @@ Array [
   Object {
     "meta": Object {
       "data": Object {
-        "code": "test-code",
+        "bundle": "test-code",
         "promo_code": undefined,
       },
       "method": "PUT",
       "onSuccess": [Function],
-      "url": "/v1/account/subscription",
+      "url": "/v1/billing/subscription/bundle",
     },
     "type": "UPDATE_SUBSCRIPTION",
   },
@@ -195,12 +195,12 @@ Array [
   Object {
     "meta": Object {
       "data": Object {
-        "code": "test-code",
+        "bundle": "test-code",
         "promo_code": undefined,
       },
       "method": "PUT",
       "onSuccess": [MockFunction],
-      "url": "/v1/account/subscription",
+      "url": "/v1/billing/subscription/bundle",
     },
     "type": "UPDATE_SUBSCRIPTION",
   },

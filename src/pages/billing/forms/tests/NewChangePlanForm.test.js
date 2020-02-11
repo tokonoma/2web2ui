@@ -1,5 +1,5 @@
 import React from 'react';
-import { ChangePlanForm } from '../NewChangePlanForm';
+import { ChangePlanForm } from '../ChangePlanForm';
 import { shallow, mount } from 'enzyme';
 import useRouter from 'src/hooks/useRouter';
 import { useChangePlanContext } from '../../context/ChangePlanContext';

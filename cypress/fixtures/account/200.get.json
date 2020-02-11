@@ -39,7 +39,6 @@
           "send_test_email_completed": true,
           "isGuideAtBottom": true
         },
-        "account_feature_limits": true,
         "feature_signals_v2": true,
         "Send Test Email": null,
         "spamTrapHitsByType": true,
