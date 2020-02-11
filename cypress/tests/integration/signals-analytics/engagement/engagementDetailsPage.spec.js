@@ -179,6 +179,7 @@ describe('The engagement details page', () => {
 
     describe('the "Engagement Rate" tab', () => {
       const engagementRateChartSelector = '[data-id="engagement-rate-chart"]';
+      const engagementRateTabRoute = `/signals/engagement/engagement-rate/sid/${SUBACCOUNT_ID}`;
 
       it('renders a chart when clicked that renders a tooltip when clicked', () => {
         cy.stubRequest({
@@ -186,7 +187,7 @@ describe('The engagement details page', () => {
           fixture: 'signals/eng-cohort/200.get.json',
         });
 
-        cy.visit(`/signals/engagement/engagement-rate/sid/${SUBACCOUNT_ID}`);
+        cy.visit(engagementRateTabRoute);
 
         cy.get(engagementRateChartSelector).within(() => {
           // `.findAll` used due to presence of tooltip that isn't properly hidden
@@ -213,7 +214,7 @@ describe('The engagement details page', () => {
           fixture: 'signals/eng-cohort/200.get.no-results.json',
         });
 
-        cy.visit(`/signals/engagement/engagement-rate/sid/${SUBACCOUNT_ID}`);
+        cy.visit(engagementRateTabRoute);
 
         cy.get(engagementRateChartSelector).within(() => {
           cy.findByText('No Data Available').should('be.visible');
@@ -227,7 +228,7 @@ describe('The engagement details page', () => {
           fixture: 'signals/eng-cohort/200.get.json',
         });
 
-        cy.visit(`/signals/engagement/engagement-rate/sid/${SUBACCOUNT_ID}`);
+        cy.visit(engagementRateTabRoute);
 
         cy.findByText('Recommendations – Feb 4 2020').should('be.visible');
         cy.findByText(
@@ -242,7 +243,7 @@ describe('The engagement details page', () => {
           fixture: 'signals/eng-cohort/400.get.json',
         });
 
-        cy.visit(`/signals/engagement/engagement-rate/sid/${SUBACCOUNT_ID}`);
+        cy.visit(engagementRateTabRoute);
 
         cy.get(engagementRateChartSelector).within(() => {
           cy.findByText('Unable to Load Data').should('be.visible');
@@ -253,6 +254,7 @@ describe('The engagement details page', () => {
 
     describe('the "Unsubscribe Rate" tab', () => {
       const unsubscribeRateChartSelector = '[data-id="unsubscribe-rate-chart"]';
+      const unsubscribeRateTabRoute = `/signals/engagement/unsubscribes/sid/${SUBACCOUNT_ID}`;
 
       it('renders a chart when clicked that renders a tooltip when clicked', () => {
         cy.stubRequest({
@@ -260,7 +262,7 @@ describe('The engagement details page', () => {
           fixture: 'signals/unsub-cohort/200.get.json',
         });
 
-        cy.visit(`/signals/engagement/unsubscribes/sid/${SUBACCOUNT_ID}`);
+        cy.visit(unsubscribeRateTabRoute);
 
         cy.get(unsubscribeRateChartSelector).within(() => {
           cy.findAllByText('New').should('be.visible');
@@ -285,7 +287,7 @@ describe('The engagement details page', () => {
           fixture: 'signals/unsub-cohort/200.get.no-results.json',
         });
 
-        cy.visit(`/signals/engagement/unsubscribes/sid/${SUBACCOUNT_ID}`);
+        cy.visit(unsubscribeRateTabRoute);
 
         cy.get(unsubscribeRateChartSelector).within(() => {
           cy.findByText('No Data Available').should('be.visible');
@@ -299,7 +301,7 @@ describe('The engagement details page', () => {
           fixture: 'signals/unsub-cohort/200.get.json',
         });
 
-        cy.visit(`/signals/engagement/unsubscribes/sid/${SUBACCOUNT_ID}`);
+        cy.visit(unsubscribeRateTabRoute);
 
         cy.findByText('Recommendations – Feb 4 2020').should('be.visible');
         cy.findByText("Doesn't look like you have any unsubscribe issues. Great job!").should(
@@ -314,7 +316,7 @@ describe('The engagement details page', () => {
           fixture: 'signals/unsub-cohort/400.get.json',
         });
 
-        cy.visit(`/signals/engagement/unsubscribes/sid/${SUBACCOUNT_ID}`);
+        cy.visit(unsubscribeRateTabRoute);
 
         cy.get(unsubscribeRateChartSelector).within(() => {
           cy.findByText('Unable to Load Data').should('be.visible');
