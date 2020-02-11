@@ -10,7 +10,7 @@ import { getSubscription } from 'src/actions/billing';
 import { isSuspendedForBilling, hasAccountOptionEnabled } from 'src/helpers/conditions/account';
 import { Loading } from 'src/components';
 import BillingSummary from './components/BillingSummary';
-import ManuallyBilledBanner from './components/ManuallyBilledBanner';
+import ManuallyBilledOrAwsBanner from './components/ManuallyBilledOrAwsBanner';
 import SuspendedForBilling from './components/SuspendedForBilling';
 import { list as getInvoices } from 'src/actions/invoices';
 import { isBillingSubscriptionSelfServe, isAws } from 'src/helpers/conditions/account';
@@ -57,7 +57,7 @@ export class BillingSummaryPage extends Component {
       />
     );
     const manuallyBilledBanner = (
-      <ManuallyBilledBanner
+      <ManuallyBilledOrAwsBanner
         account={account}
         onZuoraPlan={billingInfo.onZuoraPlan}
         condition={any(isAws, () => !isBillingSubscriptionSelfServe(billingInfo))}

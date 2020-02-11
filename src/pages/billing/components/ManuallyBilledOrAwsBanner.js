@@ -7,7 +7,7 @@ import SupportTicketLink from 'src/components/supportTicketLink/SupportTicketLin
  * Renders plan information for non-self-serve users
  * @prop account Account state from redux store
  */
-const ManuallyBilledBanner = ({
+const ManuallyBilledOrAwsBanner = ({
   account: {
     subscription: {
       custom,
@@ -61,4 +61,4 @@ const ManuallyBilledBanner = ({
   );
 };
 
-export default ManuallyBilledBanner;
+export default ManuallyBilledOrAwsBanner;
