@@ -1,12 +1,11 @@
-const PAGE_URL =
-  '/reports/engagement?from=2020-01-08T05%3A00%3A00Z&range=30days&to=2020-02-07T14%3A51%3A02Z';
+const PAGE_URL = '/reports/engagement';
 const DELIVERABILITY_API_URL = '/api/v1/metrics/deliverability**/**';
 const STABLE_UNIX_DATE = 1581087062000; // Stable unix timestamp (2/6/2020)
 
 function waitForInitialRequests() {
   cy.wait('@subaccountsRequest');
   cy.wait('@deliverabilityRequest');
-  cy.wait('@linkNameRequest');
+  // cy.wait('@linkNameRequest');
 }
 
 describe('The engagement report page', () => {
@@ -35,7 +34,6 @@ describe('The engagement report page', () => {
 
   it('has a relevant page title', () => {
     cy.visit(PAGE_URL);
-    waitForInitialRequests();
 
     cy.title().should('include', 'Engagement Report | Signals Analytics');
     cy.findByText('Engagement Report').should('be.visible');
