@@ -43,27 +43,13 @@ export const PendingPlanBanner = ({ account, subscription }) => {
   );
 };
 
-/**
- * Premium Addon Plan CTA
- */
-
-const premiumAction = {
-  content: 'Contact Us',
-  to: LINKS.PREMIUM_SUPPORT,
-  external: true,
-};
-
-const awsPremiumAction = {
-  content: 'Request Premium Support',
-  component: Link,
-  to: '/support/aws-premium',
-};
-
-export const PremiumBanner = ({ isAWSAccount }) => (
+export const PremiumBanner = () => (
   <Banner
     title="Premium Addon Plan"
     action={{
-      ...(isAWSAccount ? awsPremiumAction : premiumAction),
+      content: 'Contact Us',
+      to: LINKS.PREMIUM_SUPPORT,
+      external: true,
       onClick: () => conversions.trackAddonRequest(ANALYTICS_PREMIUM_SUPPORT),
     }}
   >

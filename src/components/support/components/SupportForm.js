@@ -8,11 +8,15 @@ import * as supportActions from 'src/actions/support';
 import { PageLink, SelectWrapper, TextFieldWrapper } from 'src/components';
 import FileFieldWrapper from 'src/components/reduxFormWrappers/FileFieldWrapper';
 import config from 'src/config';
-import { hasOnlineSupport } from 'src/helpers/conditions/account';
+import { hasOnlineSupport, isAws } from 'src/helpers/conditions/account';
 import { isHeroku } from 'src/helpers/conditions/user';
 import { getBase64Contents } from 'src/helpers/file';
 import { required, maxFileSize } from 'src/helpers/validation';
-import { notAuthorizedToSubmitSupportTickets, selectSupportIssue, selectSupportIssues } from 'src/selectors/support';
+import {
+  notAuthorizedToSubmitSupportTickets,
+  selectSupportIssue,
+  selectSupportIssues,
+} from 'src/selectors/support';
 import NoIssues from './NoIssues';
 import HerokuMessage from './HerokuMessage';
 
@@ -25,7 +29,7 @@ export class SupportForm extends Component {
 
     if (attachment) {
       const encoded = await getBase64Contents(attachment);
-      ticket = { ...ticket, attachment: { filename: attachment.name, content: encoded }};
+      ticket = { ...ticket, attachment: { filename: attachment.name, content: encoded } };
     }
 
     return this.props.createTicket(ticket);
@@ -39,7 +43,9 @@ export class SupportForm extends Component {
         <h6>Your Ticket Has Been Submitted</h6>
         <p>Ticket #{ticketId}</p>
         <p>Please check your email for updates on your support ticket.</p>
-        <Button primary onClick={onClose}>Continue</Button>
+        <Button primary onClick={onClose}>
+          Continue
+        </Button>
       </div>
     );
   }
@@ -58,45 +64,50 @@ export class SupportForm extends Component {
       onClose,
       pristine,
       selectedIssue,
-      submitting
+      submitting,
     } = this.props;
 
     return (
       <form onSubmit={handleSubmit(this.onSubmit)}>
         <Panel.Section>
           <Field
-            name='issueId'
-            label='I need help with...'
-            helpText={needsOnlineSupport && (
-              <Fragment>
-                Additional technical support is available on paid
-                plans. <PageLink onClick={onClose} to="/account/billing/plan">Upgrade now</PageLink>.
-              </Fragment>
-            )}
+            name="issueId"
+            label="I need help with..."
+            helpText={
+              needsOnlineSupport && (
+                <Fragment>
+                  Additional technical support is available on paid plans.{' '}
+                  <PageLink onClick={onClose} to="/account/billing/plan">
+                    Upgrade now
+                  </PageLink>
+                  .
+                </Fragment>
+              )
+            }
             errorInLabel
             disabled={submitting}
             component={SelectWrapper}
             options={[
               { disabled: true, label: 'Select an option', value: '' },
-              ...issues.map(({ id, label }) => ({ label, value: id }))
+              ...issues.map(({ id, label }) => ({ label, value: id })),
             ]}
             validate={required}
           />
           <Field
-            name='message'
+            name="message"
             label={selectedIssue ? selectedIssue.messageLabel : 'Tell us more about your issue'}
             errorInLabel
             multiline
-            resize='none'
+            resize="none"
             rows={10}
             disabled={submitting}
             component={TextFieldWrapper}
             validate={required}
           />
           <Field
-            type='file'
-            name='attachment'
-            label='Attach a file'
+            type="file"
+            name="attachment"
+            label="Attach a file"
             disabled={submitting}
             component={FileFieldWrapper}
             validate={maxFileSize(config.support.maxAttachmentSizeBytes)}
@@ -112,7 +123,12 @@ export class SupportForm extends Component {
   }
 
   render() {
-    const { notAuthorizedToSubmitSupportTickets, openSupportPanel, submitSucceeded, isHeroku } = this.props;
+    const {
+      notAuthorizedToSubmitSupportTickets,
+      openSupportPanel,
+      submitSucceeded,
+      isHeroku,
+    } = this.props;
 
     if (isHeroku) {
       return <HerokuMessage />;
@@ -132,13 +148,13 @@ export class SupportForm extends Component {
 
 export const formName = 'supportForm';
 const selector = formValueSelector(formName);
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   issues: selectSupportIssues(state),
-  needsOnlineSupport: !hasOnlineSupport(state),
+  needsOnlineSupport: !hasOnlineSupport(state) && !isAws(state), //AWS users can no longer use billing page. Remove on deprecating AWS accounts
   notAuthorizedToSubmitSupportTickets: notAuthorizedToSubmitSupportTickets(state),
   selectedIssue: selectSupportIssue(state, selector(state, 'issueId')),
   ticketId: state.support.ticketId,
-  isHeroku: isHeroku(state)
+  isHeroku: isHeroku(state),
 });
 
 const ReduxSupportForm = reduxForm({ form: formName })(SupportForm);

@@ -8,7 +8,8 @@ exports[`Support Form Component Form should render issue dropdown with help text
   errorInLabel={true}
   helpText={
     <React.Fragment>
-      Additional technical support is available on paid plans. 
+      Additional technical support is available on paid plans.
+       
       <PageLink
         to="/account/billing/plan"
       >

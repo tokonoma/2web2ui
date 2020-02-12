@@ -17,7 +17,7 @@ exports[`Page: BillingSummaryPage should render correctly when not loading 1`] =
       condition={[Function]}
       key="suspended-billing"
     />
-    <ManuallyBilledBanner
+    <ManuallyBilledOrAwsBanner
       account={
         Object {
           "subscription": Object {},

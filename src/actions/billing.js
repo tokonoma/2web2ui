@@ -1,7 +1,7 @@
 import { formatContactData } from 'src/helpers/billing';
 import { fetch as fetchAccount, getBillingInfo } from './account';
 import { list as getSendingIps } from './sendingIps';
-import { isAws, isAccountUiOptionSet } from 'src/helpers/conditions/account';
+import { isAccountUiOptionSet } from 'src/helpers/conditions/account';
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
 import zuoraRequest from 'src/actions/helpers/zuoraRequest';
 
@@ -21,12 +21,10 @@ export function updateSubscription({ code, bundle = code, promoCode, meta = {} }
             type: 'UPDATE_SUBSCRIPTION',
             meta: {
               method: 'PUT',
-              url: isAws(getState())
-                ? '/v1/account/aws-marketplace/subscription'
-                : '/v1/billing/subscription/bundle',
+              url: '/v1/billing/subscription/bundle',
               data: {
                 promo_code: promoCode,
-                [isAws(getState()) ? 'code' : 'bundle']: bundle,
+                bundle,
               },
               ...meta,
               onSuccess: meta.onSuccess ? meta.onSuccess : fetchAccountAction,
@@ -38,9 +36,7 @@ export function updateSubscription({ code, bundle = code, promoCode, meta = {} }
             type: 'UPDATE_SUBSCRIPTION',
             meta: {
               method: 'PUT',
-              url: isAws(getState())
-                ? '/v1/account/aws-marketplace/subscription'
-                : '/v1/account/subscription',
+              url: '/v1/account/subscription',
               data: {
                 promo_code: promoCode,
                 code,

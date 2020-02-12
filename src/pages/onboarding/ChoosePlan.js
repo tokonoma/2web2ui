@@ -9,9 +9,6 @@ import { getBillingCountries, verifyPromoCode, clearPromoCode } from 'src/action
 import billingCreate from 'src/actions/billingCreate';
 import { choosePlanMSTP } from 'src/selectors/onboarding';
 import promoCodeValidate from 'src/pages/billing/helpers/promoCodeValidate';
-import { isAws } from 'src/helpers/conditions/account';
-import { not } from 'src/helpers/conditions';
-import AccessControl from 'src/components/auth/AccessControl';
 import { prepareCardInfo } from 'src/helpers/billing';
 import PromoCodeNew from '../../components/billing/PromoCodeNew';
 import { FORMS } from 'src/constants';
@@ -116,22 +113,20 @@ export class OnboardingPlanPage extends Component {
                 plans={plans}
                 onChange={this.onPlanSelect}
               />
-              <AccessControl condition={not(isAws)}>
-                {!selectedPlan.isFree && (
-                  <Panel.Section>
-                    <PromoCodeNew
-                      key={selectedPromo.promoCode || 'promocode'}
-                      promoCodeObj={promoCodeObj}
-                      handlePromoCode={handlePromoCode}
-                    />
-                  </Panel.Section>
-                )}
-                <CreditCardSection
-                  billing={billing}
-                  submitting={submitting}
-                  isPlanFree={selectedPlan.isFree}
-                />
-              </AccessControl>
+              {!selectedPlan.isFree && (
+                <Panel.Section>
+                  <PromoCodeNew
+                    key={selectedPromo.promoCode || 'promocode'}
+                    promoCodeObj={promoCodeObj}
+                    handlePromoCode={handlePromoCode}
+                  />
+                </Panel.Section>
+              )}
+              <CreditCardSection
+                billing={billing}
+                submitting={submitting}
+                isPlanFree={selectedPlan.isFree}
+              />
               <Panel.Section>
                 <Button
                   disabled={disableSubmit}

@@ -80,7 +80,6 @@ export default class BillingSummary extends Component {
       count={this.props.sendingIps.length}
       plan={this.props.currentPlan}
       onClick={this.handleIpModal}
-      isAWSAccount={this.props.isAWSAccount}
       isTransitioningToSelfServe={isTransitioningToSelfServe}
     />
   );
@@ -110,7 +109,6 @@ export default class BillingSummary extends Component {
       canUpdateBillingInfo,
       canPurchaseIps,
       invoices,
-      isAWSAccount,
       accountAgeInDays,
       hasRecipientValidation,
     } = this.props;
@@ -152,7 +150,7 @@ export default class BillingSummary extends Component {
 
         {invoices.length > 0 && <InvoiceHistory invoices={this.props.invoices} />}
 
-        <PremiumBanner isAWSAccount={isAWSAccount} />
+        <PremiumBanner />
         <EnterpriseBanner />
 
         <Modal open={!!show} onClose={this.handleModal}>
