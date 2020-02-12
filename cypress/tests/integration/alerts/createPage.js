@@ -39,7 +39,9 @@ describe('Alerts Page - Create', () => {
       cy.findByText('Filtered by').should('be.visible');
       cy.findByText('Subaccounts').should('be.visible');
       cy.findByText('Facet').should('be.visible');
-      cy.findByLabelText('Facet').select('mailbox_provider').should('have.value', 'mailbox_provider');
+      cy.findByLabelText('Facet')
+        .select('mailbox_provider')
+        .should('have.value', 'mailbox_provider');
     });
   });
 
@@ -78,7 +80,7 @@ describe('Alerts Page - Create', () => {
     cy.get('[data-id="alert-filters"]').within(() => {
       cy.findByLabelText('Subaccounts').type('subaccount');
       cy.findByText('Master and all subaccounts').click({ force: true });
-      cy.findByLabelText('Subaccounts').should('have.attr', 'readonly')
+      cy.findByLabelText('Subaccounts').should('have.attr', 'readonly');
     });
   });
 
@@ -92,6 +94,89 @@ describe('Alerts Page - Create', () => {
       cy.findByText('Fake Subaccount 1 (101)').click({ force: true });
       cy.findByText('Master and all subaccounts').should('not.be.visible');
       cy.findByText('Master account').should('be.visible');
+    });
+  });
+
+  describe('New Alert Submission', () => {
+    it('should validate that all required fields are present', () => {
+      cy.get('[name="metric"]').select('block_bounce_rate');
+      cy.get('button')
+        .contains('Create Alert')
+        .click();
+
+      cy.findByText('Required').should('be.visible');
+      cy.findByText('At least one notification channel must be not empty').should('be.visible');
+    });
+
+    it('should show error message when alert creation fails', () => {
+      cy.stubRequest({
+        method: 'POST',
+        statusCode: 403,
+        url: '/api/v1/alerts',
+        fixture: 'alerts/400.post.json',
+        requestAlias: 'postNewAlert',
+      });
+
+      cy.get('[name="metric"]').select('block_bounce_rate');
+      cy.get('[name="name"]').type('My Alert');
+      cy.get('[name="emails"]').type('sparkky@sparkpost.io', { force: true });
+      cy.get('button')
+        .contains('Create Alert')
+        .click();
+
+      cy.wait('@postNewAlert');
+      cy.findAllByText('Something went wrong.').should('be.visible');
+    });
+
+    it('handles alert creation successfully and redirect to details afterwards', () => {
+      cy.stubRequest({
+        method: 'POST',
+        url: '/api/v1/alerts',
+        fixture: 'alerts/200.post.json',
+        requestAlias: 'postNewAlert',
+      });
+      cy.stubRequest({
+        url: '/api/v1/alerts/101',
+        fixture: 'alerts/single/200.get.json',
+        requestAlias: 'getNewAlert',
+      });
+
+      cy.stubRequest({
+        url: '/api/v1/alerts/101/incidents',
+        fixture: 'alerts/incidents/200.get.empty.json',
+        requestAlias: 'getAlertIncidents',
+      });
+
+      cy.get('[name="metric"]').select('block_bounce_rate');
+      cy.get('[name="name"]').type('My Alert');
+      cy.get('[name="emails"]').type('sparkky@sparkpost.io', { force: true });
+      cy.get('[data-id="alert-filters"]').within(() => {
+        cy.findByLabelText('Subaccounts').type('subaccount');
+        cy.findByText('Fake Subaccount 1 (101)').click({ force: true });
+        cy.findByLabelText('Mailbox Provider').type('Gmail');
+        cy.findByText('Gmail').click({ force: true });
+        cy.findByText('Apple').click({ force: true });
+      });
+      cy.get('button')
+        .contains('Create Alert')
+        .click();
+
+      cy.wait(['@postNewAlert', '@getNewAlert', '@getAlertIncidents']).then(xhrs => {
+        const [postRequest] = xhrs;
+        const { requestBody } = postRequest;
+        const expectedRequestBody = {
+          name: 'My Alert',
+          metric: 'block_bounce_rate',
+          subaccounts: [101],
+          muted: false,
+          filters: [{ filter_type: 'mailbox_provider', filter_values: ['gmail', 'apple'] }],
+          threshold_evaluator: { operator: 'gt', source: 'raw', value: 20 },
+          channels: { emails: ['sparkky@sparkpost.io'] },
+        };
+        expect(requestBody).to.deep.equal(expectedRequestBody);
+      });
+      cy.url().should('include', '/alerts/details/101');
+      cy.findByText('Alert created').should('be.visible');
     });
   });
 });

@@ -9,7 +9,7 @@
     "threshold_evaluator": { "operator": "lt", "source": "raw", "value": 57.4 },
     "channels": { "slack": { "target": "my slack" } },
     "last_triggered": "2020-01-17T01:37:18.426Z",
-    "id": 13702,
+    "id": 101,
     "last_evaluated": "2020-02-11T01:36:12.513Z"
   }
 }
