@@ -15,9 +15,6 @@ export default function addRVtoSubscription({
       bundle: 'rv-0519',
     };
 
-    const addRV = () => {
-      return updateSubscription(rvProduct);
-    };
     const createAccountInZuora = () => {
       return billingCreate(values);
     };
@@ -27,11 +24,11 @@ export default function addRVtoSubscription({
     };
 
     if (!state.account.billing) {
-      return dispatch(chainActions(createAccountInZuora, addRV)());
+      return dispatch(chainActions(createAccountInZuora, updateSubscription(rvProduct))());
     }
 
     if (updateCreditCard && !isRVonSubscription) {
-      return dispatch(chainActions(updateCC, addRV)());
+      return dispatch(chainActions(updateCC, updateSubscription(rvProduct))());
     }
 
     if (updateCreditCard && isRVonSubscription) {
