@@ -19,6 +19,7 @@ describe('Component: Pendo', () => {
         accountSvcLevel="enterprise"
         username="fredo-mcgurk"
         userAccessLevel="admin"
+        status="active"
         {...props}
       />,
     );
