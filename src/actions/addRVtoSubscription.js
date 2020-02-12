@@ -1,5 +1,5 @@
 import chainActions from 'src/actions/helpers/chainActions';
-import { addProductToSubscription } from './billing';
+import { updateSubscription } from './billing';
 import billingCreate from './billingCreate';
 import billingUpdate from './billingUpdate';
 
@@ -16,7 +16,7 @@ export default function addRVtoSubscription(
     };
 
     const addRV = () => {
-      return addProductToSubscription(rvProduct);
+      return updateSubscription(rvProduct);
     };
     const createAccountInZuora = () => {
       return billingCreate(values);
@@ -38,6 +38,6 @@ export default function addRVtoSubscription(
       return dispatch(chainActions(updateCC)());
     }
 
-    return dispatch(addProductToSubscription(rvProduct));
+    return dispatch(updateSubscription(rvProduct));
   };
 }
