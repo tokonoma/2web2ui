@@ -109,11 +109,11 @@ export class RecipientValidationPage extends Component {
           ? (_.find(plans, { code: subscription.code }) || {}).billingId
           : (_.find(plans, { product: 'recipient_validation' }) || {}).billingId,
       };
-      let action = this.props.addRVtoSubscription(
-        newValues,
-        !this.state.useSavedCC,
-        isRVonSubscription,
-      );
+      let action = this.props.addRVtoSubscription({
+        values: newValues,
+        updateCreditCard: !this.state.useSavedCC,
+        isRVonSubscription: isRVonSubscription,
+      });
       return action.then(() => this.validate(values));
     }
   };

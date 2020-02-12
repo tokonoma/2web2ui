@@ -3,11 +3,11 @@ import { updateSubscription } from './billing';
 import billingCreate from './billingCreate';
 import billingUpdate from './billingUpdate';
 
-export default function addRVtoSubscription(
+export default function addRVtoSubscription({
   values,
   updateCreditCard = false,
   isRVonSubscription = false,
-) {
+}) {
   return (dispatch, getState) => {
     const state = getState();
 
