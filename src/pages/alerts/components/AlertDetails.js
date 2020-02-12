@@ -76,8 +76,11 @@ export const AlertDetails = ({ alert, id, subaccountIdToString, hasSubaccounts }
       undefined
     );
 
+    console.log(filters);
     //Removes filter which contain string 'any'. Currently only appears on blacklist alerts
-    const cleanedFilters = filters.filter(({ filter_values }) => filter_values[0] !== 'any');
+    const cleanedFilters = filters.filter(
+      ({ filter_values }) => !(metric === 'blacklist' && filter_values[0] === 'any'),
+    );
 
     //Only show 'and' if it's not the first filter or if there's a subaccounts filter
     const filtersTags = cleanedFilters.map((filter, i) => (
