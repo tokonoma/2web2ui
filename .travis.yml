@@ -31,7 +31,7 @@ jobs:
       env: SPECS='cypress/tests/integration/accounts/**/*,cypress/tests/integration/events/**/*,cypress/tests/integration/navigation/**/*,cypress/tests/integration/alerts/**/*'
       script: npm run test-integration-ci
     - stage: test-and-build
-      name: 'Integration Testing - Templates, Recipient Validation, and Suppressions'
+      name: 'Integration Testing - Templates, Recipients, and Signals Analytics'
       env: SPEC_BATCH='second'
       script: npm run test-integration-ci
 
