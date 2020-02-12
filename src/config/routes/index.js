@@ -272,7 +272,7 @@ const routes = [
     component: signals.HealthScorePage,
     condition: hasGrants('signals/manage'),
     layout: App,
-    title: 'Health Score | Signals Analytics',
+    title: 'Subaccount | Health Score | Signals Analytics',
     supportDocSearch: 'signals',
   },
   {

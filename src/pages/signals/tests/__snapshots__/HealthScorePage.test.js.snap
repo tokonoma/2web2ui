@@ -64,6 +64,7 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
       sm={12}
     >
       <Panel
+        data-id="health-score-panel"
         sectioned={true}
       >
         <ChartHeader
@@ -348,6 +349,7 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
     >
       <div
         className="OffsetCol"
+        data-id="health-score-components"
       >
         <ChartHeader
           date="2017-01-01"
@@ -417,13 +419,21 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
       sm={6}
       xs={12}
     >
-      <withRouter(Connect(WithDetails(SpamTrapsPreview))) />
+      <div
+        data-id="spam-traps-panel"
+      >
+        <withRouter(Connect(WithDetails(SpamTrapsPreview))) />
+      </div>
     </Grid.Column>
     <Grid.Column
       sm={6}
       xs={12}
     >
-      <withRouter(Connect(WithDetails(EngagementRecencyPreview))) />
+      <div
+        data-id="engagement-recency-panel"
+      >
+        <withRouter(Connect(WithDetails(EngagementRecencyPreview))) />
+      </div>
     </Grid.Column>
   </Grid>
 </SignalsPage>
@@ -431,6 +441,7 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
 
 exports[`Signals Health Score Page renders empty correctly 1`] = `
 <Panel
+  data-id="health-score-panel"
   sectioned={true}
 >
   <ChartHeader
@@ -473,6 +484,7 @@ exports[`Signals Health Score Page renders empty weights 1`] = `
       sm={12}
     >
       <Panel
+        data-id="health-score-panel"
         sectioned={true}
       >
         <ChartHeader
@@ -639,6 +651,7 @@ exports[`Signals Health Score Page renders empty weights 1`] = `
     >
       <div
         className="OffsetCol"
+        data-id="health-score-components"
       >
         <ChartHeader
           date="2017-01-01"
@@ -666,13 +679,21 @@ exports[`Signals Health Score Page renders empty weights 1`] = `
       sm={6}
       xs={12}
     >
-      <withRouter(Connect(WithDetails(SpamTrapsPreview))) />
+      <div
+        data-id="spam-traps-panel"
+      >
+        <withRouter(Connect(WithDetails(SpamTrapsPreview))) />
+      </div>
     </Grid.Column>
     <Grid.Column
       sm={6}
       xs={12}
     >
-      <withRouter(Connect(WithDetails(EngagementRecencyPreview))) />
+      <div
+        data-id="engagement-recency-panel"
+      >
+        <withRouter(Connect(WithDetails(EngagementRecencyPreview))) />
+      </div>
     </Grid.Column>
   </Grid>
 </SignalsPage>
@@ -702,6 +723,7 @@ exports[`Signals Health Score Page renders error correctly 1`] = `
       sm={12}
     >
       <Panel
+        data-id="health-score-panel"
         sectioned={true}
       >
         <ChartHeader
@@ -726,6 +748,7 @@ exports[`Signals Health Score Page renders error correctly 1`] = `
     >
       <div
         className="OffsetCol"
+        data-id="health-score-components"
       >
         <ChartHeader
           date="2017-01-01"
@@ -746,13 +769,21 @@ exports[`Signals Health Score Page renders error correctly 1`] = `
       sm={6}
       xs={12}
     >
-      <withRouter(Connect(WithDetails(SpamTrapsPreview))) />
+      <div
+        data-id="spam-traps-panel"
+      >
+        <withRouter(Connect(WithDetails(SpamTrapsPreview))) />
+      </div>
     </Grid.Column>
     <Grid.Column
       sm={6}
       xs={12}
     >
-      <withRouter(Connect(WithDetails(EngagementRecencyPreview))) />
+      <div
+        data-id="engagement-recency-panel"
+      >
+        <withRouter(Connect(WithDetails(EngagementRecencyPreview))) />
+      </div>
     </Grid.Column>
   </Grid>
 </SignalsPage>
@@ -760,6 +791,7 @@ exports[`Signals Health Score Page renders error correctly 1`] = `
 
 exports[`Signals Health Score Page renders loading correctly 1`] = `
 <Panel
+  data-id="health-score-panel"
   sectioned={true}
 >
   <ChartHeader

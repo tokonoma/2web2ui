@@ -1,3 +1,4 @@
+/* eslint-disable lodash/prop-shorthand */
 import React, { useState, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { getCaretProps, getDoD } from 'src/helpers/signals';
@@ -10,7 +11,10 @@ import Callout from 'src/components/callout';
 import MetricDisplay from '../MetricDisplay/MetricDisplay';
 import { formatNumber, roundToPlaces } from 'src/helpers/units';
 import thresholds from '../../../constants/healthScoreThresholds';
-import { newModelLine, newModelMarginsHealthScore } from 'src/pages/signals/constants/healthScoreV2';
+import {
+  newModelLine,
+  newModelMarginsHealthScore,
+} from 'src/pages/signals/constants/healthScoreV2';
 import { formatDate, getDateTicks } from 'src/helpers/date';
 import moment from 'moment';
 import _ from 'lodash';
@@ -24,10 +28,10 @@ export function HealthScoreChart(props) {
   }
 
   const { history = [], loading, error, filters } = props;
-  const noData = (history) ? !_.some(getHealthScores()) : true;
+  const noData = history ? !_.some(getHealthScores()) : true;
 
   if (loading) {
-    return <PanelLoading minHeight='407px' />;
+    return <PanelLoading minHeight="407px" />;
   }
 
   if (error) {
@@ -35,7 +39,7 @@ export function HealthScoreChart(props) {
       <Panel sectioned>
         <div className={styles.Content}>
           <div className={styles.ErrorMessage}>
-            <Callout title='Unable to Load Data' height='auto' children={error.message} />
+            <Callout title="Unable to Load Data" height="auto" children={error.message} />
           </div>
         </div>
       </Panel>
@@ -43,36 +47,38 @@ export function HealthScoreChart(props) {
   }
 
   function getHealthScores() {
-    return _.map(history, (entry) => entry.health_score);
+    return _.map(history, entry => entry.health_score);
   }
 
   function getXAxisProps() {
     const xTicks = getDateTicks(filters);
     return {
       ticks: xTicks,
-      tickFormatter: (tick) => moment(tick).format('M/D')
+      tickFormatter: tick => moment(tick).format('M/D'),
     };
   }
 
   function getTotalInjectionProps() {
-    const injectionEntries = _.filter(history, (entry) => entry.injections);
-    const injectionTotals = _.map(injectionEntries, (entry) => entry.injections);
+    const injectionEntries = _.filter(history, entry => entry.injections);
+    const injectionTotals = _.map(injectionEntries, entry => entry.injections);
     const sumInjectionTotals = _.sum(injectionTotals);
     return { value: _.isNil(sumInjectionTotals) ? 'n/a' : formatNumber(sumInjectionTotals) };
   }
 
   function getHoverInjectionProps() {
     const currentEntry = _.find(history, ['date', hoveredDate]);
-    const value = (currentEntry) ? currentEntry.injections : null;
+    const value = currentEntry ? currentEntry.injections : null;
     return { value: _.isNil(value) ? 'n/a' : formatNumber(value) };
   }
 
   function getHoverDoDProps() {
-    const previousDay = moment(hoveredDate).subtract(1, 'day').format('YYYY-MM-DD');
+    const previousDay = moment(hoveredDate)
+      .subtract(1, 'day')
+      .format('YYYY-MM-DD');
     const currentEntry = _.find(history, ['date', hoveredDate]);
     const prevEntry = _.find(history, ['date', previousDay]);
-    const currentScore = (currentEntry) ? currentEntry.health_score : null;
-    const prevScore = (prevEntry) ? prevEntry.health_score : null;
+    const currentScore = currentEntry ? currentEntry.health_score : null;
+    const prevScore = prevEntry ? prevEntry.health_score : null;
     const value = getDoD(currentScore, prevScore);
     return { value: _.isNil(value) ? 'n/a' : `${value}%`, ...getCaretProps(value) };
   }
@@ -97,47 +103,58 @@ export function HealthScoreChart(props) {
         <h2 className={styles.Header}>
           {formatDate(filters.from)} – {formatDate(filters.to)}
         </h2>
-        {noData && <div><Callout height='auto'>Health Scores Not Available</Callout></div>}
+        {noData && (
+          <div>
+            <Callout height="auto">Health Scores Not Available</Callout>
+          </div>
+        )}
         {!noData && (
           <Fragment>
             <BarChart
-              margin = {newModelMarginsHealthScore}
+              margin={newModelMarginsHealthScore}
               gap={getGap()}
               onMouseOver={handleDateHover}
               onMouseOut={() => setHovered({})}
               hovered={hoveredDate}
               timeSeries={history}
-              tooltipContent={({ payload = {}}) => (payload.ranking) &&
-                (<TooltipMetric
-                  label='Health Score'
-                  color={thresholds[payload.ranking].color}
-                  value={`${roundToPlaces(payload.health_score, 1)}`}
-                />)
+              tooltipContent={({ payload = {} }) =>
+                payload.ranking && (
+                  <TooltipMetric
+                    label="Health Score"
+                    color={thresholds[payload.ranking].color}
+                    value={`${roundToPlaces(payload.health_score, 1)}`}
+                  />
+                )
               }
               yAxisRefLines={[
                 { y: 80, stroke: thresholds.good.color, strokeWidth: 1 },
-                { y: 55, stroke: thresholds.danger.color, strokeWidth: 1 }
+                { y: 55, stroke: thresholds.danger.color, strokeWidth: 1 },
               ]}
               xAxisRefLines={newModelLine}
-              yKey='health_score'
+              yKey="health_score"
               xAxisProps={getXAxisProps()}
-              yAxisProps={{ ticks: [0,55,80,100]}}
+              yAxisProps={{ ticks: [0, 55, 80, 100] }}
             />
           </Fragment>
         )}
         <div className={styles.Metrics}>
-          <MetricDisplay label='Total Injections' {...getTotalInjectionProps()} />
-          <MetricDisplay label='High' {...getMax()} />
-          <MetricDisplay label='Low' {...getMin()} />
-          {(typeof hoveredDate === 'string') && (<Fragment>
-            <div className={styles.Divider} />
-            <div className={styles.Injections}>
-              <MetricDisplay label='Injections' {...getHoverInjectionProps()} />
-            </div>
-            <div className={styles.DoDChange}>
-              <MetricDisplay label='DoD Change' {...getHoverDoDProps()} />
-            </div>
-          </Fragment>
+          <MetricDisplay
+            data-id="health-score-total-injections"
+            label="Total Injections"
+            {...getTotalInjectionProps()}
+          />
+          <MetricDisplay data-id="health-score-high-value" label="High" {...getMax()} />
+          <MetricDisplay data-id="health-score-low-value" label="Low" {...getMin()} />
+          {typeof hoveredDate === 'string' && (
+            <Fragment>
+              <div className={styles.Divider} />
+              <div className={styles.Injections}>
+                <MetricDisplay label="Injections" {...getHoverInjectionProps()} />
+              </div>
+              <div className={styles.DoDChange}>
+                <MetricDisplay label="DoD Change" {...getHoverDoDProps()} />
+              </div>
+            </Fragment>
           )}
         </div>
       </div>
@@ -145,9 +162,9 @@ export function HealthScoreChart(props) {
   );
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   filters: state.signalOptions,
-  ...selectCurrentHealthScoreDashboard(state)
+  ...selectCurrentHealthScoreDashboard(state),
 });
 
 export default connect(mapStateToProps, {})(HealthScoreChart);

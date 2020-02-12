@@ -16,11 +16,11 @@ function MetricDisplay(props) {
   }
 
   return (
-    <div className={styles.MetricDisplay}>
+    <div className={styles.MetricDisplay} data-id={props['data-id']}>
       <h4 className={styles.Label}>{label}</h4>
       <h5 className={styles.Value}>
         {value}
-        {Icon && <Icon className={styles.Icon} size={35} style={{ color }}/>}
+        {Icon && <Icon className={styles.Icon} size={35} style={{ color }} />}
       </h5>
     </div>
   );
@@ -30,7 +30,7 @@ MetricDisplay.propTypes = {
   label: PropTypes.node.isRequired,
   value: PropTypes.node.isRequired,
   direction: PropTypes.oneOf(['up', 'down']),
-  color: PropTypes.string
+  color: PropTypes.string,
 };
 
 export default MetricDisplay;

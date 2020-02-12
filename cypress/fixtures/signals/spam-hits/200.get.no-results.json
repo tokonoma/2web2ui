@@ -1,0 +1,14 @@
+{
+  "results": {
+    "total_count": 1,
+    "data": [
+      {
+        "current_trap_hits": 11,
+        "current_relative_trap_hits": 0.000078151087365811,
+        "sid": 102,
+        "WoW": -0.19,
+        "history": []
+      }
+    ]
+  }
+}
