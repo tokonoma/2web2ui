@@ -1,6 +1,6 @@
 const cypress = require('cypress');
 const { argv } = require('yargs');
-const batches = require('../../config/cypressBatches');
+const batches = require('../config/cypressBatches');
 
 function runCypress({ specs }) {
   return cypress.run({
