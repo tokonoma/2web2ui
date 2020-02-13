@@ -26,15 +26,18 @@ describe('The health score dashboard page', () => {
     cy.get('main').within(() => cy.findByText('Health Score').should('be.visible'));
   });
 
-  // Found a bug! A 400 response causes the ErrorBoundary to render
-  // it('handles errors', () => {
-  //   cy.stubRequest({
-  //     url: API_URL,
-  //     fixture: 'signals/health-score/400.get.json',
-  //   });
+  it('handles errors', () => {
+    cy.stubRequest({
+      statusCode: 400,
+      url: API_URL,
+      fixture: 'signals/health-score/400.get.json',
+    });
 
-  //   cy.visit(PAGE_URL);
-  // });
+    cy.visit(PAGE_URL);
+
+    cy.findAllByText('Unable to Load Data').should('have.length', 3);
+    cy.findAllByText('This is an error').should('have.length', 3);
+  });
 
   it('renders the empty state when insufficient data is returned', () => {
     cy.stubRequest({
