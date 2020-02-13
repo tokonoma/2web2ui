@@ -75,7 +75,7 @@ describe('The alerts details pages', () => {
       .should('be.checked');
   });
 
-  describe.only('the duplicate and delete buttons', () => {
+  describe('the duplicate and delete buttons', () => {
     beforeEach(() => cy.visit(PAGE_URL));
 
     it('routes to the create page when clicking on "Duplicate"', () => {
@@ -110,14 +110,63 @@ describe('The alerts details pages', () => {
       cy.title().should('not.include', 'Alert Details');
     });
 
-    // TODO: Left off here
-    it('renders an error message when deletion fails', () => {});
+    it('renders an error message when deletion fails', () => {
+      cy.stubRequest({
+        statusCode: 400,
+        method: 'DELETE',
+        url: API_URL,
+        fixture: 'alerts/2/400.delete.json',
+      });
+
+      cy.findByText('Delete').click();
+      cy.get('#modal-portal').within(() => cy.findByText('Delete').click());
+
+      cy.findByText('Something went wrong.').should('be.visible');
+      cy.findByText('View Details').click();
+      cy.findByText('This is an error').should('be.visible');
+    });
   });
 
   describe('the alert incidents table', () => {
-    it('renders the empty state when no results are returned', () => {});
+    it('renders the empty state when no results are returned', () => {
+      cy.stubRequest({
+        url: `${API_URL}/incidents`,
+        fixture: 'alerts/2/incidents/200.get.no-results.json',
+      });
 
-    it('renders "Active" and already-resolved incidents', () => {});
+      cy.visit(PAGE_URL);
+
+      cy.get('table').should('not.be.visible');
+      cy.findByText('No incidents').should('be.visible');
+    });
+
+    it('renders "Active" and already-resolved incidents', () => {
+      cy.visit(PAGE_URL);
+
+      cy.get('tbody tr')
+        .eq(0)
+        .within(() => {
+          cy.findByText('Active').should('be.visible');
+          cy.findByText('Fake Subaccount 3 (103)').should('be.visible');
+          cy.findByText('75').should('be.visible');
+        });
+
+      cy.get('tbody tr')
+        .eq(1)
+        .within(() => {
+          cy.queryByText('Active').should('not.be.visible');
+          cy.findByText('Fake Subaccount 1 (101)').should('be.visible');
+          cy.findByText('25').should('be.visible');
+        });
+
+      cy.get('tbody tr')
+        .eq(2)
+        .within(() => {
+          cy.queryByText('Active').should('not.be.visible');
+          cy.findByText('Fake Subaccount 2 (102)').should('be.visible');
+          cy.findByText('50').should('be.visible');
+        });
+    });
 
     it('is sortable by "Triggered"', () => {});
 
