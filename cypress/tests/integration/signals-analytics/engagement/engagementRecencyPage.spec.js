@@ -111,7 +111,9 @@ describe('The engagement recency page', () => {
   });
 
   describe('the engagement recency table', () => {
-    beforeEach(() => cy.clock(STABLE_UNIX_DATE));
+    beforeEach(() => {
+      cy.clock(STABLE_UNIX_DATE);
+    });
 
     it('renders engagements in the table', () => {
       cy.visit(PAGE_URL);
@@ -171,6 +173,8 @@ describe('The engagement recency page', () => {
 
       beforeEach(() => {
         cy.visit(PAGE_URL);
+
+        cy.wait('@getEngagementData');
 
         cy.stubRequest({
           url: '/api/v1/signals/cohort-engagement/**/*',
