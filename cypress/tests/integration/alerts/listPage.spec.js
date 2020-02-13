@@ -89,13 +89,12 @@ describe('The alerts list page', () => {
   });
 
   describe('the alerts table', () => {
-    function assertTableRow({ rowIndex, name, metric, lastTriggered, isMuted }) {
+    function assertTableRow({ rowIndex, name, metric, isMuted }) {
       cy.get('tbody tr')
         .eq(rowIndex)
         .within(() => {
           cy.findByText(name).should('be.visible');
           cy.findByText(metric).should('be.visible');
-          cy.findByText(lastTriggered).should('be.visible');
           cy.get('[data-id="alert-toggle"]').within(() =>
             cy.get('input[type="checkbox"]').should(isMuted ? 'be.checked' : 'not.be.checked'),
           );
@@ -115,7 +114,6 @@ describe('The alerts list page', () => {
         rowIndex: 0,
         name: 'Alert 2',
         metric: 'Soft Bounce Rate',
-        lastTriggered: 'Jul 10 2019, 6:07pm',
         isMuted: false,
       });
 
@@ -123,7 +121,6 @@ describe('The alerts list page', () => {
         rowIndex: 1,
         name: 'Alert 3',
         metric: 'Block Bounce Rate',
-        lastTriggered: 'Jul 9 2019, 6:07pm',
         isMuted: false,
       });
 
@@ -131,7 +128,6 @@ describe('The alerts list page', () => {
         rowIndex: 2,
         name: 'Alert 1',
         metric: 'Block Bounce Rate',
-        lastTriggered: 'Never Triggered',
         isMuted: true,
       });
 
@@ -139,7 +135,6 @@ describe('The alerts list page', () => {
         rowIndex: 3,
         name: 'Alert 4',
         metric: 'Health Score',
-        lastTriggered: 'Never Triggered',
         isMuted: true,
       });
     });
