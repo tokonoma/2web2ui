@@ -691,7 +691,7 @@ const routes = [
     component: alerts.DetailsPage,
     condition: hasGrants('alerts/manage'),
     layout: App,
-    title: 'View Details',
+    title: 'Alert Details | Alerts',
     supportDocsSearch: 'Alerts',
   },
   {
@@ -699,7 +699,7 @@ const routes = [
     component: alerts.CreatePage,
     condition: hasGrants('alerts/manage'),
     layout: App,
-    title: 'Create Alert',
+    title: 'Create Alert | Alerts',
     supportDocsSearch: 'Alerts',
   },
   {
@@ -707,7 +707,7 @@ const routes = [
     component: alerts.EditPage,
     condition: hasGrants('alerts/manage'),
     layout: App,
-    title: 'Edit Alert',
+    title: 'Edit Alert | Alerts',
     supportDocsSearch: 'Alerts',
   },
   {
