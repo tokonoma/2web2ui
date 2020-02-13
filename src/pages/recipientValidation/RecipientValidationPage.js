@@ -250,13 +250,11 @@ const mapStateToProps = (state, props) => ({
   initialValues: rvAddPaymentFormInitialValues(state),
 });
 
-export default withRouter(
-  connect(mapStateToProps, { getBillingInfo, getBillingSubscription })(RecipientValidationPage),
-);
+export default withRouter(connect(mapStateToProps, { getBillingInfo })(RecipientValidationPage));
 
 const formOptions = { form: FORMNAME, enableReinitialize: true };
 export const RecipientValidationPageSRV = withRouter(
-  connect(mapStateToProps, { getBillingInfo, addRVtoSubscription })(
+  connect(mapStateToProps, { getBillingInfo, addRVtoSubscription, getBillingSubscription })(
     reduxForm(formOptions)(RecipientValidationPage),
   ),
 );

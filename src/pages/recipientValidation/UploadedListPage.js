@@ -29,10 +29,12 @@ export class UploadedListPage extends Component {
     useSavedCC: Boolean(this.props.billing.credit_card),
   };
   componentDidMount() {
-    const { getJobStatus, listId, getBillingInfo } = this.props;
+    const { getJobStatus, listId, getBillingInfo, getBillingSubscription } = this.props;
     getJobStatus(listId);
-    getBillingInfo();
-    if (this.props.isStandAloneRVSet) this.props.getBillingSubscription();
+    if (this.props.isStandAloneRVSet) {
+      getBillingSubscription();
+      getBillingInfo();
+    }
   }
 
   componentDidUpdate(prevProps) {
