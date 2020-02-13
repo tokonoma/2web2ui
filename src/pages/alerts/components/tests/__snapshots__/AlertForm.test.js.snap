@@ -87,6 +87,7 @@ exports[`Alert Form Component should render the alert form component correctly 1
           </div>
           <div
             className="Filters"
+            data-id="alert-filters"
           >
             <label>
               <h5>

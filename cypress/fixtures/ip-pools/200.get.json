@@ -1,0 +1,11 @@
+{
+  "results": [
+    {
+      "id": "myPool",
+      "name": "myPool",
+      "signing_domain": "bounce.uat.sparkspam.com",
+      "ips": [],
+      "customer_provided": false
+    }
+  ]
+}

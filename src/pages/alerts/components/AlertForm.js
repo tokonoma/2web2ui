@@ -146,7 +146,7 @@ export class AlertForm extends Component {
                   </div>
                 )}
                 {formSpec.hasFilters && (
-                  <div className={styles.Filters}>
+                  <div className={styles.Filters} data-id="alert-filters">
                     <label>
                       <h5>
                         Filtered by{' '}
