@@ -142,7 +142,7 @@ describe('Alerts Page - Create', () => {
       });
 
       cy.stubRequest({
-        url: '/api/v1/alerts/101/incidents',
+        url: '/api/v1/alerts/**/incidents',
         fixture: 'alerts/incidents/200.get.empty.json',
         requestAlias: 'getAlertIncidents',
       });

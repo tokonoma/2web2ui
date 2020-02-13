@@ -21,11 +21,12 @@ describe('Alerts Page - Edit', () => {
     });
 
     cy.stubRequest({
-      url: '/api/v1/alerts/1',
+      url: '/api/v1/alerts/101',
       fixture: 'alerts/single/200.get.json',
+      requestAlias: 'getAlert',
     });
 
-    cy.visit('/alerts/edit/1');
+    cy.visit('/alerts/edit/101');
   });
 
   it('Existing alert populates field with correct initial values', () => {
@@ -49,5 +50,46 @@ describe('Alerts Page - Edit', () => {
       cy.findByText('Gmail').should('not.be.visible');
       cy.findByText('Apple').should('not.be.visible');
     });
+  });
+
+  it.only('handles alert update successfully and redirect to details afterwards', () => {
+    cy.stubRequest({
+      method: 'PUT',
+      url: '/api/v1/alerts/**',
+      fixture: 'alerts/single/200.get.json',
+      requestAlias: 'postNewAlert',
+    });
+    cy.stubRequest({
+      url: '/api/v1/alerts/**/incidents',
+      fixture: 'alerts/incidents/200.get.empty.json',
+      requestAlias: 'getAlertIncidents',
+    });
+
+    cy.wait('@getAlert');
+    cy.findByText('Update Alert').should('have.attr', 'disabled');
+    cy.get('[name="emails"]').type('sparkky@sparkpost.io', { force: true });
+    cy.findByText('Update Alert').click();
+
+    cy.wait(['@postNewAlert', '@getAlert', '@getAlertIncidents']).then(xhrs => {
+      const [postRequest, alert] = xhrs;
+      const { requestBody } = postRequest;
+      const {
+        responseBody: { results: originalAlertObj },
+      } = alert;
+      //Update the original alert object with the new notification channel and remove unneeded fields
+      const { last_triggered, any_subaccount, ...expectedRequestBody } = {
+        ...originalAlertObj,
+        channels: {
+          emails: ['sparkky@sparkpost.io'],
+          slack: {
+            target: 'my slack',
+          },
+        },
+      };
+      expect(requestBody).to.deep.equal(expectedRequestBody);
+    });
+
+    cy.url().should('include', '/alerts/details/101');
+    cy.findByText('Alert updated').should('be.visible');
   });
 });
