@@ -1,5 +1,6 @@
 const PAGE_URL = '/alerts';
 const API_URL = '/api/v1/alerts';
+const STABLE_UNIX_DATE = 1581555194000; // Unix timestamp 2/13/20
 
 describe('The alerts list page', () => {
   beforeEach(() => {
@@ -89,11 +90,90 @@ describe('The alerts list page', () => {
   });
 
   describe('the alerts table', () => {
-    it('has alerts in table rows', () => {});
+    function assertTableRow({ rowIndex, name, metric, lastTriggered, isMuted }) {
+      cy.get('tbody tr')
+        .eq(rowIndex)
+        .within(() => {
+          cy.findByText(name).should('be.visible');
+          cy.findByText(metric).should('be.visible');
+          cy.findByText(lastTriggered).should('be.visible');
+          cy.get('[data-id="alert-toggle"]').within(() =>
+            cy.get('input[type="checkbox"]').should(isMuted ? 'be.checked' : 'not.be.checked'),
+          );
+        });
+    }
 
-    it('filters based on user entry', () => {});
+    beforeEach(() => cy.clock(STABLE_UNIX_DATE));
 
-    it('renders a success banner when muting an alert successfully', () => {});
+    it('has alerts in table rows', () => {
+      cy.visit(PAGE_URL);
+
+      assertTableRow({
+        rowIndex: 0,
+        name: 'Alert 2',
+        metric: 'Soft Bounce Rate',
+        lastTriggered: 'Jul 10 2019, 6:07pm',
+        isMuted: false,
+      });
+
+      assertTableRow({
+        rowIndex: 1,
+        name: 'Alert 3',
+        metric: 'Block Bounce Rate',
+        lastTriggered: 'Jul 9 2019, 6:07pm',
+        isMuted: false,
+      });
+
+      assertTableRow({
+        rowIndex: 2,
+        name: 'Alert 1',
+        metric: 'Block Bounce Rate',
+        lastTriggered: 'Never Triggered',
+        isMuted: true,
+      });
+
+      assertTableRow({
+        rowIndex: 3,
+        name: 'Alert 4',
+        metric: 'Health Score',
+        lastTriggered: 'Never Triggered',
+        isMuted: true,
+      });
+    });
+
+    // it('filters based on user entry', () => {
+    //   cy.visit(PAGE_URL);
+
+    //   // filtering isn't working...but only with Cypress?? Not sure why
+    //   cy.findByLabelText('Filter By')
+    //     .clear()
+    //     .type('Alert 1');
+
+    //   cy.wait(300);
+
+    //   cy.queryByText('Alert 2').should('not.be.visible');
+    // });
+
+    // it('renders a success banner when muting an alert successfully', () => {
+    //   cy.visit(PAGE_URL);
+
+    //   cy.stubRequest({
+    //     method: 'PUT',
+    //     url: `${API_URL}/2`,
+    //     fixture: 'alerts/2/200.put.json',
+    //   });
+
+    //   cy.get('tbody tr')
+    //     .first()
+    //     .within(() => {
+    //       cy.get('[data-id="alert-toggle"]')
+    //         .scrollIntoView()
+    //         .find('input')
+    //         .click({ force: true });
+    //     });
+
+    //   cy.findByText('Alert Updated').should('be.visible');
+    // });
 
     it('renders an error banner when muting an alert fails', () => {});
 

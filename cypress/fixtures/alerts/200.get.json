@@ -23,7 +23,7 @@
       "name": "Alert 2",
       "metric": "soft_bounce_rate",
       "muted": false,
-      "last_triggered": "2019-07-09T22:07:52.442Z",
+      "last_triggered": "2019-07-10T22:07:52.442Z",
       "last_evaluated": "2020-02-12T18:37:54.843Z",
       "subaccounts": [0],
       "filters": [{ "filter_type": "sending_ip", "filter_values": ["1.2.3.4"] }],
