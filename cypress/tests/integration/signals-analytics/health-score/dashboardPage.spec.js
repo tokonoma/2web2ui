@@ -298,6 +298,7 @@ describe('The health score dashboard page', () => {
         cy.stubRequest({
           url: API_URL,
           fixture: 'signals/health-score/200.get.no-results.json',
+          requestAlias: 'nextRequest',
         });
       });
 
@@ -305,6 +306,7 @@ describe('The health score dashboard page', () => {
         cy.findByLabelText('Search By').should('not.be.visible');
 
         cy.findByLabelText('Filter By').select('By Campaign');
+        cy.wait('@nextRequest');
 
         cy.findByText('No Data Available').should('be.visible');
         cy.findByLabelText('Search By').should('be.visible');
@@ -312,18 +314,21 @@ describe('The health score dashboard page', () => {
 
       it('re-requests data when clicking on "Subaccount"', () => {
         cy.findByText('Subaccount').click();
+        cy.wait('@nextRequest');
 
         cy.findByText('No Data Available').should('be.visible');
       });
 
       it('re-requests data when clicking on "Current Score"', () => {
         cy.findByText('Current Score').click();
+        cy.wait('@nextRequest');
 
         cy.findByText('No Data Available').should('be.visible');
       });
 
       it('re-requests data when clicking on "Current Injections"', () => {
         cy.findByText('Current Injections').click();
+        cy.wait('@nextRequest');
 
         cy.findByText('No Data Available').should('be.visible');
       });
