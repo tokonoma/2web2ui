@@ -189,6 +189,6 @@ export function stripImmediatePlanChange(search) {
   return qs.stringify(options);
 }
 
-export function isProductionOnSubscription(state, productName = 'recipient_validation') {
+export function isProductOnSubscription(state, productName = 'recipient_validation') {
   return _.find(_.get(state, 'billing.subscription.products') || {}, { product: productName });
 }

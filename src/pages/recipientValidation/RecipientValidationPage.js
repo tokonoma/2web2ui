@@ -17,7 +17,7 @@ import ValidateSection from './components/ValidateSection';
 import { getBillingInfo } from 'src/actions/account';
 import { reduxForm } from 'redux-form';
 import { FORMS } from 'src/constants';
-import { isProductionOnSubscription } from 'src/helpers/billing';
+import { isProductOnSubscription } from 'src/helpers/billing';
 import { rvAddPaymentFormInitialValues } from 'src/selectors/recipientValidation';
 import { prepareCardInfo } from 'src/helpers/billing';
 import addRVtoSubscription from 'src/actions/addRVtoSubscription';
@@ -246,7 +246,7 @@ const mapStateToProps = (state, props) => ({
   account: state.account,
   billing: state.account.billing || {},
   billingLoading: state.account.billingLoading,
-  isRVonSubscription: isProductionOnSubscription(state, 'recipient_validation'),
+  isRVonSubscription: isProductOnSubscription(state, 'recipient_validation'),
   initialValues: rvAddPaymentFormInitialValues(state),
 });
 
