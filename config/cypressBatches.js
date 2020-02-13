@@ -1,6 +1,7 @@
 module.exports = {
   first: [
     'cypress/tests/integration/accounts/**/*',
+    'cypress/tests/integration/alerts/**/*',
     'cypress/tests/integration/events/**/*',
     'cypress/tests/integration/navigation/**/*',
   ],

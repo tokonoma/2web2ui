@@ -1,0 +1,76 @@
+{
+  "results": [
+    {
+      "id": 1,
+      "tenant": "spc",
+      "cid": 123,
+      "any_subaccount": false,
+      "name": "Alert 1",
+      "metric": "block_bounce_rate",
+      "muted": true,
+      "last_triggered": null,
+      "last_evaluated": "2020-02-12T18:37:54.845Z",
+      "subaccounts": [-1],
+      "filters": [{ "filter_type": "mailbox_provider", "filter_values": ["apple"] }],
+      "threshold_evaluator": { "operator": "gt", "source": "raw", "value": 35 },
+      "channels": { "emails": ["myemail@sparkpost.com"] }
+    },
+    {
+      "id": 2,
+      "tenant": "spc",
+      "cid": 123,
+      "any_subaccount": false,
+      "name": "Alert 2",
+      "metric": "soft_bounce_rate",
+      "muted": true,
+      "last_triggered": "2019-07-09T22:07:52.442Z",
+      "last_evaluated": "2020-02-12T18:37:54.843Z",
+      "subaccounts": [0],
+      "filters": [{ "filter_type": "sending_ip", "filter_values": ["1.2.3.4"] }],
+      "threshold_evaluator": { "operator": "gt", "source": "raw", "value": 0.01 },
+      "channels": {
+        "emails": ["myemail@sparkpost.com"],
+        "webhook": { "target": "https://webhook.example.com" },
+        "slack": {
+          "target": "https://hooks.slack.com/services/ABCDEFGHIJKLMNOP"
+        }
+      }
+    },
+    {
+      "id": 3,
+      "tenant": "spc",
+      "cid": 123,
+      "any_subaccount": false,
+      "name": "Alert 3",
+      "metric": "block_bounce_rate",
+      "muted": true,
+      "last_triggered": "2019-07-09T22:07:52.067Z",
+      "last_evaluated": "2020-02-12T18:37:54.845Z",
+      "subaccounts": [0],
+      "filters": [{ "filter_type": "sending_ip", "filter_values": ["1.2.3.4"] }],
+      "threshold_evaluator": { "operator": "gt", "source": "raw", "value": 0.01 },
+      "channels": {
+        "emails": ["myemail@sparkpost.com"],
+        "webhook": { "target": "https://www.webhook.example.com" },
+        "slack": {
+          "target": "https://hooks.slack.com/services/12345"
+        }
+      }
+    },
+    {
+      "id": 4,
+      "tenant": "spc",
+      "cid": 123,
+      "any_subaccount": false,
+      "name": "Alert 4",
+      "metric": "health_score",
+      "muted": true,
+      "last_triggered": null,
+      "last_evaluated": "2019-07-09T07:19:00.310Z",
+      "subaccounts": [-1],
+      "filters": null,
+      "threshold_evaluator": { "operator": "gt", "source": "raw", "value": 30 },
+      "channels": { "emails": ["kefaef@afasfd.com", "afsasf@afssdf.com"] }
+    }
+  ]
+}
