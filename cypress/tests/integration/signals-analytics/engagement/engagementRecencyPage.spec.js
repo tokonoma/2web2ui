@@ -163,31 +163,101 @@ describe('The engagement recency page', () => {
     });
 
     describe('sorting behavior', () => {
+      function clickTableHeaderCell(cellContent) {
+        cy.get('table').within(() => cy.findByText(cellContent).click());
+      }
+
       beforeEach(() => {
         cy.visit(PAGE_URL);
 
         cy.stubRequest({
           url: '/api/v1/signals/cohort-engagement/**/*',
           fixture: 'signals/cohort-engagement/200.get.no-results.json',
+          requestAlias: 'nextCohortRequest',
         });
       });
 
       it('re-requests data when sorting by "Subaccount"', () => {
-        cy.get('table').within(() => cy.findByText('Subaccount').click());
+        clickTableHeaderCell('Subaccount');
+
+        cy.wait('@nextCohortRequest')
+          .its('url')
+          .should('include', 'order=desc');
+
+        cy.findByText('No Data Available').should('be.visible');
+
+        clickTableHeaderCell('Subaccount');
+
+        cy.wait('@nextCohortRequest')
+          .its('url')
+          .should('not.include', 'order=asc')
+          .should('not.include', 'order=desc');
+
+        cy.findByText('No Data Available').should('be.visible');
+
+        clickTableHeaderCell('Subaccount');
+
+        cy.wait('@nextCohortRequest')
+          .its('url')
+          .should('include', 'order=asc');
 
         cy.findByText('No Data Available').should('be.visible');
       });
 
       it('re-requests data when sorting by "Current Ratio"', () => {
-        cy.get('table').within(() => cy.findByText('Current Ratio').click());
+        clickTableHeaderCell('Current Ratio');
+
+        cy.wait('@nextCohortRequest')
+          .its('url')
+          .should('include', 'order_by=perc')
+          .should('include', 'order=asc');
 
         cy.findByText('No Data Available').should('be.visible');
+
+        clickTableHeaderCell('Current Ratio');
+
+        cy.wait('@nextCohortRequest')
+          .its('url')
+          .should('include', 'order_by=perc')
+          .should('include', 'order=desc');
+
+        cy.findByText('No Data Available').should('be.visible');
+
+        clickTableHeaderCell('Current Ratio');
+
+        cy.wait('@nextCohortRequest')
+          .its('url')
+          .should('not.include', 'order_by=perc')
+          .should('not.include', 'order=desc')
+          .should('not.include', 'order=asc');
       });
 
       it('re-requests data when sorting by "Current Injections"', () => {
-        cy.get('table').within(() => cy.findByText('Current Injections').click());
+        clickTableHeaderCell('Current Injections');
+
+        cy.wait('@nextCohortRequest')
+          .its('url')
+          .should('include', 'order_by=c_total')
+          .should('include', 'order=asc');
 
         cy.findByText('No Data Available').should('be.visible');
+
+        clickTableHeaderCell('Current Injections');
+
+        cy.wait('@nextCohortRequest')
+          .its('url')
+          .should('include', 'order_by=c_total')
+          .should('include', 'order=desc');
+
+        cy.findByText('No Data Available').should('be.visible');
+
+        clickTableHeaderCell('Current Injections');
+
+        cy.wait('@nextCohortRequest')
+          .its('url')
+          .should('not.include', 'order_by=c_total')
+          .should('not.include', 'order=desc')
+          .should('not.include', 'order=asc');
       });
     });
   });
