@@ -11,3 +11,5 @@ not currently feasible with the current Cypress feature set.
 - [] Re-introduce failing tests that stem from tooltips that should be invisible when hidden. Will
   be doable once a new version of Matchbox is published:
   https://github.com/SparkPost/matchbox/pull/320
+- [] Once screenshots/videos are retrievable, incorporate tests that check for accurate dates,
+  paired with the `cy.clock()` method
