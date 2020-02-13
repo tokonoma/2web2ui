@@ -121,6 +121,9 @@ Array [
       <Delete
         className="Icon"
       />
+      <ScreenReaderOnly>
+        Delete Alert
+      </ScreenReaderOnly>
     </Button>
   </Tooltip>,
 ]
@@ -170,6 +173,9 @@ Array [
       <Delete
         className="Icon"
       />
+      <ScreenReaderOnly>
+        Delete Alert
+      </ScreenReaderOnly>
     </Button>
   </Tooltip>,
 ]
@@ -219,6 +225,9 @@ Array [
       <Delete
         className="Icon"
       />
+      <ScreenReaderOnly>
+        Delete Alert
+      </ScreenReaderOnly>
     </Button>
   </Tooltip>,
 ]

@@ -14,7 +14,9 @@ exports[`Alert Form Component should render the alert form component correctly 1
         sm={12}
       >
         <Panel.Section>
-          <label>
+          <label
+            htmlFor="name"
+          >
             Alert Name
           </label>
           <Field
