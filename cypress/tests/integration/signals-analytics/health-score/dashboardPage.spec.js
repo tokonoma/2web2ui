@@ -195,14 +195,12 @@ describe('The health score dashboard page', () => {
 
         // Visibility check not working due to how positioning is handled relative to cursor
         // Because of the lack of a true `cy.hover()` a true hover can't quite be replicated
-        cy.findByText('Feb 2 2020').should('exist');
         cy.findByText('79.9').should('exist');
 
         cy.get(barSelector)
           .eq(-2)
           .click();
 
-        cy.findByText('Feb 1 2020').should('exist');
         cy.findByText('79.4').should('exist');
       });
     });
