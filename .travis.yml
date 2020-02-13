@@ -32,7 +32,7 @@ jobs:
       script: npm run test-integration-ci
     - stage: test-and-build
       name: 'Integration Testing - Templates, Recipients, and Signals Analytics'
-      env: SPEC_BATCH='second'
+      env: SPEC_BATCH='Vin Diesel'
       script: npm run test-integration-ci
 
 after_script: greenkeeper-lockfile-upload

@@ -1,11 +1,11 @@
 module.exports = {
-  first: [
+  'Paul Walker': [
     'cypress/tests/integration/accounts/**/*',
     'cypress/tests/integration/alerts/**/*',
     'cypress/tests/integration/events/**/*',
     'cypress/tests/integration/navigation/**/*',
   ],
-  second: [
+  'Vin Diesel': [
     'cypress/tests/integration/recipients/**/*',
     'cypress/tests/integration/signals-analytics/**/*',
     'cypress/tests/integration/templates/**/*',
