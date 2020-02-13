@@ -54,17 +54,19 @@ describe('The engagement recency page', () => {
 
     cy.visit(PAGE_URL);
 
+    cy.wait('@getEngagementData');
+
     cy.clock(STABLE_UNIX_DATE);
 
     cy.stubRequest({
       url: '/api/v1/signals/cohort-engagement/**/*',
       fixture: 'signals/cohort-engagement/200.get.no-results.json',
-      requestAlias: 'getCohortEngagement',
+      requestAlias: 'nextRequest',
     });
 
     cy.findByLabelText('Broad Date Range').select('Last 7 Days');
 
-    cy.wait('@getCohortEngagement')
+    cy.wait('@nextRequest')
       .its('url')
       .should('include', 'from=2020-01-30')
       .should('include', 'to=2020-02-06');
