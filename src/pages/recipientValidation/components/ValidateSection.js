@@ -16,18 +16,27 @@ function ValidateSection({
   formname: FORMNAME,
   handleCardToggle,
   defaultToggleState,
+  isProductOnSubscription,
 }) {
   useEffect(() => {
     getBillingCountries();
   }, [getBillingCountries]);
   if (isManuallyBilled) {
+    if (!isProductOnSubscription)
+      return (
+        <Button
+          external
+          primary
+          to="https://www.sparkpost.com/recipient-validation/#recipient-validation-form"
+        >
+          Contact Sales
+        </Button>
+      );
+
     return (
-      <Button
-        external
-        primary
-        to="https://www.sparkpost.com/recipient-validation/#recipient-validation-form"
-      >
-        Contact Sales
+      <Button primary submit disabled={submitDisabled}>
+        {/* functionality to validate to be added in AC-1196 and AC-1197*/}
+        {submitButtonName}
       </Button>
     );
   }

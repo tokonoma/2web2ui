@@ -137,7 +137,14 @@ export class RecipientValidationPage extends Component {
 
   renderRecipientValidation = () => {
     const { selectedTab, showPriceModal } = this.state;
-    const { isStandAloneRVSet, billing, billingLoading, valid, submitting } = this.props;
+    const {
+      isStandAloneRVSet,
+      billing,
+      billingLoading,
+      valid,
+      submitting,
+      isRVonSubscription,
+    } = this.props;
 
     return (
       <Page
@@ -206,6 +213,7 @@ export class RecipientValidationPage extends Component {
             formname={FORMNAME}
             handleCardToggle={this.handleToggleCC}
             defaultToggleState={!this.state.useSavedCC}
+            isProductOnSubscription={isRVonSubscription}
           />
         )}
 
