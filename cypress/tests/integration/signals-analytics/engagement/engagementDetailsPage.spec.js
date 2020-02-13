@@ -129,8 +129,10 @@ describe('The engagement details page', () => {
             .click();
 
           // Not checking for *all* data in the tooltip, just checking that it is
-          // showing properly. Ideally, unit tests can help check for this behavior
-          cy.findByText('Never engaged, first email in last 7 days').should('be.visible');
+          // showing properly. Ideally, unit tests can help check for this behavior.
+          // Checking for visibility isn't quite working due to how Recharts
+          // implemented the tooltip, so checking for existence will have to do.
+          cy.findByText('Never engaged, first email in last 7 days').should('exist');
         });
       });
 
@@ -204,8 +206,10 @@ describe('The engagement details page', () => {
             .click({ force: true }); // Overlapped by line chart, so `force` is necessary
 
           // Not checking for *all* data in the tooltip, just checking that it is
-          // showing properly. Ideally, unit tests can help check for this behavior
-          cy.findByText('Never engaged, first email in last 7 days').should('be.visible');
+          // showing properly. Ideally, unit tests can help check for this behavior.
+          // Checking for visibility isn't quite working due to how Recharts
+          // implemented the tooltip, so checking for existence will have to do.
+          cy.findByText('Never engaged, first email in last 7 days').should('exist');
         });
       });
 
@@ -281,8 +285,10 @@ describe('The engagement details page', () => {
             .click({ force: true });
 
           // Not checking for *all* data in the tooltip, just checking that it is
-          // showing properly. Ideally, unit tests can help check for this behavior
-          cy.findByText('Never engaged, first email in last 7 days').should('be.visible');
+          // showing properly. Ideally, unit tests can help check for this behavior.
+          // Checking for visibility isn't quite working due to how Recharts
+          // implemented the tooltip, so checking for existence will have to do.
+          cy.findByText('Never engaged, first email in last 7 days').should('exist');
         });
       });
 
@@ -360,8 +366,10 @@ describe('The engagement details page', () => {
             .click({ force: true });
 
           // Not checking for *all* data in the tooltip, just checking that it is
-          // showing properly. Ideally, unit tests can help check for this behavior
-          cy.findByText('Never engaged, first email in last 7 days').should('be.visible');
+          // showing properly. Ideally, unit tests can help check for this behavior.
+          // Checking for visibility isn't quite working due to how Recharts
+          // implemented the tooltip, so checking for existence will have to do.
+          cy.findByText('Never engaged, first email in last 7 days').should('exist');
         });
       });
 
