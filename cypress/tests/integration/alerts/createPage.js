@@ -111,7 +111,7 @@ describe('Alerts Page - Create', () => {
     it('should show error message when alert creation fails', () => {
       cy.stubRequest({
         method: 'POST',
-        statusCode: 403,
+        statusCode: 400,
         url: '/api/v1/alerts',
         fixture: 'alerts/400.post.json',
         requestAlias: 'postNewAlert',

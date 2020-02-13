@@ -52,7 +52,7 @@ describe('Alerts Page - Edit', () => {
     });
   });
 
-  it.only('handles alert update successfully and redirect to details afterwards', () => {
+  it('handles alert update successfully and redirect to details afterwards', () => {
     cy.stubRequest({
       method: 'PUT',
       url: '/api/v1/alerts/**',
