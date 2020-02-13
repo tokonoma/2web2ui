@@ -128,6 +128,16 @@ describe('The alerts details pages', () => {
   });
 
   describe('the alert incidents table', () => {
+    function assertTableRow({ rowIndex, isActive, subaccount, score }) {
+      cy.get('tbody tr')
+        .eq(rowIndex)
+        .within(() => {
+          cy.findByText('Active').should(isActive ? 'be.visible' : 'not.be.visible');
+          cy.findByText(subaccount).should('be.visible');
+          cy.findByText(score.toString()).should('be.visible');
+        });
+    }
+
     it('renders the empty state when no results are returned', () => {
       cy.stubRequest({
         url: `${API_URL}/incidents`,
@@ -143,35 +153,113 @@ describe('The alerts details pages', () => {
     it('renders "Active" and already-resolved incidents', () => {
       cy.visit(PAGE_URL);
 
-      cy.get('tbody tr')
-        .eq(0)
-        .within(() => {
-          cy.findByText('Active').should('be.visible');
-          cy.findByText('Fake Subaccount 3 (103)').should('be.visible');
-          cy.findByText('75').should('be.visible');
-        });
+      assertTableRow({
+        rowIndex: 0,
+        isActive: true,
+        subaccount: 'Fake Subaccount 3 (103)',
+        score: 75,
+      });
 
-      cy.get('tbody tr')
-        .eq(1)
-        .within(() => {
-          cy.queryByText('Active').should('not.be.visible');
-          cy.findByText('Fake Subaccount 1 (101)').should('be.visible');
-          cy.findByText('25').should('be.visible');
-        });
+      assertTableRow({
+        rowIndex: 1,
+        isActive: false,
+        subaccount: 'Fake Subaccount 1 (101)',
+        score: 25,
+      });
 
-      cy.get('tbody tr')
-        .eq(2)
-        .within(() => {
-          cy.queryByText('Active').should('not.be.visible');
-          cy.findByText('Fake Subaccount 2 (102)').should('be.visible');
-          cy.findByText('50').should('be.visible');
-        });
+      assertTableRow({
+        rowIndex: 2,
+        isActive: false,
+        subaccount: 'Fake Subaccount 2 (102)',
+        score: 50,
+      });
     });
 
-    it('is sortable by "Triggered"', () => {});
+    // Using score data to assert against table ordering
+    // Using dates within Travis CI is a little fickle at this point
+    // and some failures occur due to time zone differences
+    it('is sortable by "Triggered"', () => {
+      cy.visit(PAGE_URL);
 
-    it('is sortable by "Resolved"', () => {});
+      cy.findByText('Triggered').click();
 
-    it('it sortable by "Score"', () => {});
+      cy.get('tbody tr')
+        .eq(0)
+        .within(() => cy.findByText('50').should('be.visible'));
+      cy.get('tbody tr')
+        .eq(1)
+        .within(() => cy.findByText('25').should('be.visible'));
+      cy.get('tbody tr')
+        .eq(2)
+        .within(() => cy.findByText('75').should('be.visible'));
+
+      cy.findByText('Triggered').click();
+
+      cy.get('tbody tr')
+        .eq(0)
+        .within(() => cy.findByText('75').should('be.visible'));
+      cy.get('tbody tr')
+        .eq(1)
+        .within(() => cy.findByText('25').should('be.visible'));
+      cy.get('tbody tr')
+        .eq(2)
+        .within(() => cy.findByText('50').should('be.visible'));
+    });
+
+    it('is sortable by "Resolved"', () => {
+      cy.visit(PAGE_URL);
+
+      cy.findByText('Resolved').click();
+
+      cy.get('tbody tr')
+        .eq(0)
+        .within(() => cy.findByText('50').should('be.visible'));
+      cy.get('tbody tr')
+        .eq(1)
+        .within(() => cy.findByText('25').should('be.visible'));
+      cy.get('tbody tr')
+        .eq(2)
+        .within(() => cy.findByText('75').should('be.visible'));
+
+      cy.findByText('Resolved').click();
+
+      cy.get('tbody tr')
+        .eq(0)
+        .within(() => cy.findByText('75').should('be.visible'));
+      cy.get('tbody tr')
+        .eq(1)
+        .within(() => cy.findByText('25').should('be.visible'));
+      cy.get('tbody tr')
+        .eq(2)
+        .within(() => cy.findByText('50').should('be.visible'));
+    });
+
+    it('it sortable by "Score"', () => {
+      cy.visit(PAGE_URL);
+
+      cy.get('table').within(() => cy.findByText('Score').click());
+
+      cy.get('tbody tr')
+        .eq(0)
+        .within(() => cy.findByText('25').should('be.visible'));
+      cy.get('tbody tr')
+        .eq(1)
+        .within(() => cy.findByText('50').should('be.visible'));
+      cy.get('tbody tr')
+        .eq(2)
+        .within(() => cy.findByText('75').should('be.visible'));
+
+      cy.get('table').within(() => cy.findByText('Score').click());
+
+      cy.get('tbody tr')
+        .eq(0)
+        .within(() => cy.findByText('75').should('be.visible'));
+      cy.get('tbody tr')
+        .eq(1)
+        .within(() => cy.findByText('50').should('be.visible'));
+      cy.get('tbody tr')
+        .eq(2)
+        .within(() => cy.findByText('25').should('be.visible'));
+    });
   });
 });
