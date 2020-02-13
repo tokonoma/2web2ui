@@ -103,7 +103,11 @@ describe('The alerts list page', () => {
         });
     }
 
-    beforeEach(() => cy.clock(STABLE_UNIX_DATE));
+    function clickDeleteButton() {
+      cy.findAllByText('Delete Alert')
+        .first()
+        .click({ force: true });
+    }
 
     it('has alerts in table rows', () => {
       cy.visit(PAGE_URL);
@@ -141,42 +145,144 @@ describe('The alerts list page', () => {
       });
     });
 
-    // it('filters based on user entry', () => {
-    //   cy.visit(PAGE_URL);
+    it('filters by "Alert Name" based on user entry', () => {
+      const debounceDelay = 300;
 
-    //   // filtering isn't working...but only with Cypress?? Not sure why
-    //   cy.findByLabelText('Filter By')
-    //     .clear()
-    //     .type('Alert 1');
+      cy.visit(PAGE_URL);
 
-    //   cy.wait(300);
+      cy.findByLabelText('Filter By')
+        .clear()
+        .type('Alert 1');
 
-    //   cy.queryByText('Alert 2').should('not.be.visible');
-    // });
+      cy.wait(debounceDelay); // Debounce time
 
-    // it('renders a success banner when muting an alert successfully', () => {
-    //   cy.visit(PAGE_URL);
+      cy.get('table').within(() => {
+        cy.queryByText('Alert 2').should('not.be.visible');
+        cy.queryByText('Alert 3').should('not.be.visible');
+        cy.queryByText('Alert 4').should('not.be.visible');
+      });
 
-    //   cy.stubRequest({
-    //     method: 'PUT',
-    //     url: `${API_URL}/2`,
-    //     fixture: 'alerts/2/200.put.json',
-    //   });
+      cy.findByLabelText('Filter By').clear();
 
-    //   cy.get('tbody tr')
-    //     .first()
-    //     .within(() => {
-    //       cy.get('[data-id="alert-toggle"]')
-    //         .scrollIntoView()
-    //         .find('input')
-    //         .click({ force: true });
-    //     });
+      cy.wait(debounceDelay); // Debounce time
 
-    //   cy.findByText('Alert Updated').should('be.visible');
-    // });
+      cy.get('table').within(() => {
+        cy.findByText('Alert 1').should('be.visible');
+        cy.findByText('Alert 2').should('be.visible');
+        cy.findByText('Alert 3').should('be.visible');
+        cy.findByText('Alert 4').should('be.visible');
+      });
 
-    it('renders an error banner when muting an alert fails', () => {});
+      cy.findByLabelText('Filter By')
+        .clear()
+        .type('Alert');
 
-    it('opens a delete confirmation modal when clicking the delete button', () => {});
+      cy.wait(debounceDelay); // Debounce time
+
+      cy.get('table').within(() => {
+        cy.findByText('Alert 1').should('be.visible');
+        cy.findByText('Alert 2').should('be.visible');
+        cy.findByText('Alert 3').should('be.visible');
+        cy.findByText('Alert 4').should('be.visible');
+      });
+
+      cy.findByLabelText('Filter By')
+        .clear()
+        .type('1');
+
+      cy.wait(debounceDelay); // Debounce time
+
+      cy.get('table').within(() => {
+        cy.queryByText('Alert 2').should('not.be.visible');
+        cy.queryByText('Alert 3').should('not.be.visible');
+        cy.queryByText('Alert 4').should('not.be.visible');
+      });
+    });
+
+    it('renders a success banner when muting an alert successfully', () => {
+      cy.visit(PAGE_URL);
+
+      cy.stubRequest({
+        method: 'PUT',
+        url: `${API_URL}/2`,
+        fixture: 'alerts/2/200.put.json',
+      });
+
+      cy.get('tbody tr')
+        .first()
+        .within(() => {
+          cy.get('[data-id="alert-toggle"]')
+            .scrollIntoView()
+            .find('input')
+            .click({ force: true });
+        });
+
+      cy.findByText('Alert updated').should('be.visible');
+    });
+
+    it('renders an error banner when muting an alert fails', () => {
+      cy.visit(PAGE_URL);
+
+      cy.stubRequest({
+        method: 'PUT',
+        statusCode: 400,
+        url: `${API_URL}/2`,
+        fixture: 'alerts/2/400.put.json',
+      });
+
+      cy.get('tbody tr')
+        .first()
+        .within(() => {
+          cy.get('[data-id="alert-toggle"]')
+            .scrollIntoView()
+            .find('input')
+            .click({ force: true });
+        });
+
+      cy.findByText('Something went wrong.').should('be.visible');
+      cy.findByText('View Details').click();
+      cy.findByText('This is an error').should('be.visible');
+    });
+
+    it('opens a delete confirmation modal when clicking the delete button', () => {
+      cy.visit(PAGE_URL);
+
+      clickDeleteButton();
+
+      cy.findByText('Are you sure you want to delete this alert?').should('be.visible');
+      cy.get('#modal-portal').within(() => cy.findByText('Cancel').click());
+
+      cy.queryByText('Are you sure you want to delete this alert?').should('not.be.visible');
+
+      clickDeleteButton();
+
+      cy.stubRequest({
+        method: 'DELETE',
+        url: `${API_URL}/2`,
+        fixture: 'alerts/2/200.delete.json',
+      });
+
+      cy.get('#modal-portal').within(() => cy.findByText('Delete').click());
+      cy.findByText('Alert deleted').should('be.visible');
+    });
+
+    it('renders an error when deleting an alert fails', () => {
+      cy.visit(PAGE_URL);
+
+      clickDeleteButton();
+
+      cy.stubRequest({
+        method: 'DELETE',
+        statusCode: 400,
+        url: `${API_URL}/2`,
+        fixture: 'alerts/2/400.delete.json',
+      });
+
+      cy.get('#modal-portal').within(() => cy.findByText('Delete').click());
+
+      cy.findByText('Something went wrong.').should('be.visible');
+      cy.findByText('View Details').click();
+      cy.findByText('This is an error').should('be.visible');
+    });
   });
 });
