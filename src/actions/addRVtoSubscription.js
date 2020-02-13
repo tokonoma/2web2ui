@@ -32,7 +32,7 @@ export default function addRVtoSubscription({
     }
 
     if (updateCreditCard && isRVonSubscription) {
-      return dispatch(chainActions(updateCC)());
+      return dispatch(billingUpdate(values));
     }
 
     return dispatch(updateSubscription(rvProduct));

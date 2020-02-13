@@ -3,25 +3,24 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Page, Tabs, Panel, Modal, Button } from '@sparkpost/matchbox';
 import { Close, Launch } from '@sparkpost/matchbox-icons';
+import { reduxForm } from 'redux-form';
+import _ from 'lodash';
+import { hasAccountOptionEnabled, isAccountUiOptionSet } from 'src/helpers/conditions/account';
+import { prepareCardInfo, isProductOnSubscription } from 'src/helpers/billing';
+import { rvAddPaymentFormInitialValues } from 'src/selectors/recipientValidation';
+import { getBillingInfo } from 'src/actions/account';
+import addRVtoSubscription from 'src/actions/addRVtoSubscription';
+import { getSubscription as getBillingSubscription } from 'src/actions/billing';
 import JobsTableCollection from './components/JobsTableCollection';
 import ListForm, { ListTab } from './components/ListForm';
 import SingleAddressForm, { SingleAddressTab } from './components/SingleAddressForm';
 import ApiDetails from './components/ApiDetails';
-import { hasAccountOptionEnabled } from 'src/helpers/conditions/account';
 import RVDisabledPage from './components/RVDisabledPage';
-import ConditionSwitch, { Case, defaultCase } from 'src/components/auth/ConditionSwitch';
 import RecipientValidationPriceTable from './components/RecipientValidationPriceTable';
-import { isAccountUiOptionSet } from 'src/helpers/conditions/account';
+import ConditionSwitch, { Case, defaultCase } from 'src/components/auth/ConditionSwitch';
 import styles from './RecipientValidationPage.module.scss';
 import ValidateSection from './components/ValidateSection';
-import { getBillingInfo } from 'src/actions/account';
-import { reduxForm } from 'redux-form';
 import { FORMS } from 'src/constants';
-import { isProductOnSubscription } from 'src/helpers/billing';
-import { rvAddPaymentFormInitialValues } from 'src/selectors/recipientValidation';
-import { prepareCardInfo } from 'src/helpers/billing';
-import addRVtoSubscription from 'src/actions/addRVtoSubscription';
-import _ from 'lodash';
 
 const FORMNAME = FORMS.RV_ADDPAYMENTFORM;
 
@@ -40,6 +39,7 @@ export class RecipientValidationPage extends Component {
 
   componentDidMount() {
     this.props.getBillingInfo();
+    if (this.props.isStandAloneRVSet) this.props.getBillingSubscription();
   }
 
   componentDidUpdate(prevProps) {
@@ -246,11 +246,13 @@ const mapStateToProps = (state, props) => ({
   account: state.account,
   billing: state.account.billing || {},
   billingLoading: state.account.billingLoading,
-  isRVonSubscription: isProductOnSubscription(state, 'recipient_validation'),
+  isRVonSubscription: isProductOnSubscription('recipient_validation')(state),
   initialValues: rvAddPaymentFormInitialValues(state),
 });
 
-export default withRouter(connect(mapStateToProps, { getBillingInfo })(RecipientValidationPage));
+export default withRouter(
+  connect(mapStateToProps, { getBillingInfo, getBillingSubscription })(RecipientValidationPage),
+);
 
 const formOptions = { form: FORMNAME, enableReinitialize: true };
 export const RecipientValidationPageSRV = withRouter(

@@ -16,10 +16,10 @@ import { isAccountUiOptionSet } from 'src/helpers/conditions/account';
 import ValidateSection from './components/ValidateSection';
 import { FORMS } from 'src/constants';
 import { reduxForm } from 'redux-form';
-import { isProductOnSubscription } from 'src/helpers/billing';
+import { isProductOnSubscription, prepareCardInfo } from 'src/helpers/billing';
 import { rvAddPaymentFormInitialValues } from 'src/selectors/recipientValidation';
-import { prepareCardInfo } from 'src/helpers/billing';
 import addRVtoSubscription from 'src/actions/addRVtoSubscription';
+import { getSubscription as getBillingSubscription } from 'src/actions/billing';
 import _ from 'lodash';
 
 const FORMNAME = FORMS.RV_ADDPAYMENTFORM;
@@ -32,6 +32,7 @@ export class UploadedListPage extends Component {
     const { getJobStatus, listId, getBillingInfo } = this.props;
     getJobStatus(listId);
     getBillingInfo();
+    if (this.props.isStandAloneRVSet) this.props.getBillingSubscription();
   }
 
   componentDidUpdate(prevProps) {
@@ -160,7 +161,7 @@ const mapStateToProps = (state, props) => {
     jobLoadingStatus: state.recipientValidation.jobLoadingStatus[listId],
     isStandAloneRVSet: isAccountUiOptionSet('standalone_rv')(state),
     billing: state.account.billing || {},
-    isRVonSubscription: isProductOnSubscription(state, 'recipient_validation'),
+    isRVonSubscription: isProductOnSubscription('recipient_validation')(state),
     initialValues: rvAddPaymentFormInitialValues(state),
   };
 };
@@ -175,4 +176,5 @@ export const UploadedListPageSRV = connect(mapStateToProps, {
   triggerJob,
   getBillingInfo,
   addRVtoSubscription,
+  getBillingSubscription,
 })(reduxForm(formOptions)(UploadedListPage));

@@ -8,6 +8,7 @@ describe('UploadedListPage', () => {
       <UploadedListPage
         getJobStatus={() => {}}
         getBillingInfo={() => {}}
+        getBillingSubscription={() => {}}
         listId="A1C1_D1C1"
         job={{
           jobId: 'A1C1_D1C1',

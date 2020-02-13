@@ -65,6 +65,7 @@ describe('Page: Recipient Email Verification', () => {
         billing: {},
         isStandAloneRVSet: true,
         handleSubmit: jest.fn(),
+        getBillingSubscription: jest.fn(),
       };
       subject = props => shallow(<RecipientValidationPage {...defaultProps} {...props} />);
     });
