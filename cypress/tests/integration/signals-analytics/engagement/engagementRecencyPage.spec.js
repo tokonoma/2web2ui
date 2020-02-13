@@ -60,7 +60,11 @@ describe('The engagement recency page', () => {
       requestAlias: 'getCohortEngagement',
     });
 
+    cy.clock(STABLE_UNIX_DATE);
+
     cy.findByLabelText('Broad Date Range').select('Last 7 Days');
+
+    cy.clock(STABLE_UNIX_DATE);
 
     cy.wait('@getCohortEngagement')
       .its('url')
