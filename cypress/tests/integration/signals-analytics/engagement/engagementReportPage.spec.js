@@ -7,9 +7,7 @@ const STABLE_UNIX_DATE = 1581087062000; // Stable unix timestamp (2/6/2020)
 // at this point in time, commenting these out for the time being.
 
 // function waitForInitialRequests() {
-//   cy.wait('@subaccountsRequest');
-//   cy.wait('@deliverabilityRequest');
-//   cy.wait('@linkNameRequest');
+//   cy.wait(['@subaccountsRequest', '@deliverabilityRequest', '@linkNameRequest']);
 // }
 
 describe('The engagement report page', () => {
