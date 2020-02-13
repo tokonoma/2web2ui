@@ -62,82 +62,86 @@ exports[`Page: Alerts List should render happy path 1`] = `
   <h3>
     Recent Incidents
   </h3>
-  <Grid>
-    <Grid.Column
-      key="id-1"
-      lg={3}
-      md={6}
-      xs={12}
-    >
-      <Panel
-        accent={true}
+  <div
+    data-id="recent-incidents"
+  >
+    <Grid>
+      <Grid.Column
+        key="id-1"
+        lg={3}
+        md={6}
+        xs={12}
       >
-        <Panel.Section
-          className="LastTriggeredCard"
+        <Panel
+          accent={true}
         >
-          <Link
-            className="AlertName"
-            replace={false}
-            to="/alerts/details/id-1"
+          <Panel.Section
+            className="LastTriggeredCard"
           >
-            <strong
-              data-id="link-alert-name"
+            <Link
+              className="AlertName"
+              replace={false}
+              to="/alerts/details/id-1"
             >
-              my alert 1
-            </strong>
-          </Link>
-          <Tag>
-            Health Score
-          </Tag>
-        </Panel.Section>
-        <Panel.Section
-          className="Footer"
-        >
-          <DisplayDate
-            formattedDate="Jun 15 2019, 10:48am"
-            timestamp={1560610080000}
-          />
-        </Panel.Section>
-      </Panel>
-    </Grid.Column>
-    <Grid.Column
-      key="id-3"
-      lg={3}
-      md={6}
-      xs={12}
-    >
-      <Panel
-        accent={true}
+              <strong
+                data-id="link-alert-name"
+              >
+                my alert 1
+              </strong>
+            </Link>
+            <Tag>
+              Health Score
+            </Tag>
+          </Panel.Section>
+          <Panel.Section
+            className="Footer"
+          >
+            <DisplayDate
+              formattedDate="Jun 15 2019, 10:48am"
+              timestamp={1560610080000}
+            />
+          </Panel.Section>
+        </Panel>
+      </Grid.Column>
+      <Grid.Column
+        key="id-3"
+        lg={3}
+        md={6}
+        xs={12}
       >
-        <Panel.Section
-          className="LastTriggeredCard"
+        <Panel
+          accent={true}
         >
-          <Link
-            className="AlertName"
-            replace={false}
-            to="/alerts/details/id-3"
+          <Panel.Section
+            className="LastTriggeredCard"
           >
-            <strong
-              data-id="link-alert-name"
+            <Link
+              className="AlertName"
+              replace={false}
+              to="/alerts/details/id-3"
             >
-              my alert 3
-            </strong>
-          </Link>
-          <Tag>
-            Monthly Sending Limit
-          </Tag>
-        </Panel.Section>
-        <Panel.Section
-          className="Footer"
-        >
-          <DisplayDate
-            formattedDate="Jun 5 2019, 10:48am"
-            timestamp={1559746080000}
-          />
-        </Panel.Section>
-      </Panel>
-    </Grid.Column>
-  </Grid>
+              <strong
+                data-id="link-alert-name"
+              >
+                my alert 3
+              </strong>
+            </Link>
+            <Tag>
+              Monthly Sending Limit
+            </Tag>
+          </Panel.Section>
+          <Panel.Section
+            className="Footer"
+          >
+            <DisplayDate
+              formattedDate="Jun 5 2019, 10:48am"
+              timestamp={1559746080000}
+            />
+          </Panel.Section>
+        </Panel>
+      </Grid.Column>
+    </Grid>
+  </div>
   <AlertCollection
     alerts={
       Array [
