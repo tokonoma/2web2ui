@@ -186,26 +186,27 @@ describe('The engagement recency page', () => {
       it('re-requests data when sorting by "Subaccount"', () => {
         clickTableHeaderCell('Subaccount');
 
-        cy.wait('@nextCohortRequest')
-          .its('url')
-          .should('include', 'order=desc');
+        cy.wait('@nextCohortRequest').then(({ url }) => {
+          cy.wrap(url).should('include', 'order=desc');
+        });
 
         cy.findByText('No Data Available').should('be.visible');
 
         clickTableHeaderCell('Subaccount');
 
-        cy.wait('@nextCohortRequest')
-          .its('url')
-          .should('not.include', 'order=asc')
-          .should('not.include', 'order=desc');
+        cy.wait('@nextCohortRequest').then(({ url }) => {
+          cy.wrap(url)
+            .should('not.include', 'order=asc')
+            .should('not.include', 'order=desc');
+        });
 
         cy.findByText('No Data Available').should('be.visible');
 
         clickTableHeaderCell('Subaccount');
 
-        cy.wait('@nextCohortRequest')
-          .its('url')
-          .should('include', 'order=asc');
+        cy.wait('@nextCohortRequest').then(({ url }) => {
+          cy.wrap(url).should('include', 'order=asc');
+        });
 
         cy.findByText('No Data Available').should('be.visible');
       });
@@ -213,57 +214,63 @@ describe('The engagement recency page', () => {
       it('re-requests data when sorting by "Current Ratio"', () => {
         clickTableHeaderCell('Current Ratio');
 
-        cy.wait('@nextCohortRequest')
-          .its('url')
-          .should('include', 'order_by=perc')
-          .should('include', 'order=asc');
+        cy.wait('@nextCohortRequest').then(({ url }) => {
+          cy.wrap(url)
+            .should('include', 'order_by=perc')
+            .should('include', 'order=asc');
+        });
 
         cy.findByText('No Data Available').should('be.visible');
 
         clickTableHeaderCell('Current Ratio');
 
-        cy.wait('@nextCohortRequest')
-          .its('url')
-          .should('include', 'order_by=perc')
-          .should('include', 'order=desc');
+        cy.wait('@nextCohortRequest').then(({ url }) => {
+          cy.wrap(url)
+            .should('include', 'order_by=perc')
+            .should('include', 'order=desc');
+        });
 
         cy.findByText('No Data Available').should('be.visible');
 
         clickTableHeaderCell('Current Ratio');
 
-        cy.wait('@nextCohortRequest')
-          .its('url')
-          .should('not.include', 'order_by=perc')
-          .should('not.include', 'order=desc')
-          .should('not.include', 'order=asc');
+        cy.wait('@nextCohortRequest').then(({ url }) => {
+          cy.wrap(url)
+            .should('not.include', 'order_by=perc')
+            .should('not.include', 'order=desc')
+            .should('not.include', 'order=asc');
+        });
       });
 
       it('re-requests data when sorting by "Current Injections"', () => {
         clickTableHeaderCell('Current Injections');
 
-        cy.wait('@nextCohortRequest')
-          .its('url')
-          .should('include', 'order_by=c_total')
-          .should('include', 'order=asc');
+        cy.wait('@nextCohortRequest').then(({ url }) => {
+          cy.wrap(url)
+            .should('include', 'order_by=c_total')
+            .should('include', 'order=asc');
+        });
 
         cy.findByText('No Data Available').should('be.visible');
 
         clickTableHeaderCell('Current Injections');
 
-        cy.wait('@nextCohortRequest')
-          .its('url')
-          .should('include', 'order_by=c_total')
-          .should('include', 'order=desc');
+        cy.wait('@nextCohortRequest').then(({ url }) => {
+          cy.wrap(url)
+            .should('include', 'order_by=c_total')
+            .should('include', 'order=desc');
+        });
 
         cy.findByText('No Data Available').should('be.visible');
 
         clickTableHeaderCell('Current Injections');
 
-        cy.wait('@nextCohortRequest')
-          .its('url')
-          .should('not.include', 'order_by=c_total')
-          .should('not.include', 'order=desc')
-          .should('not.include', 'order=asc');
+        cy.wait('@nextCohortRequest').then(({ url }) => {
+          cy.wrap(url)
+            .should('not.include', 'order_by=c_total')
+            .should('not.include', 'order=desc')
+            .should('not.include', 'order=asc');
+        });
       });
     });
   });
