@@ -36,16 +36,18 @@ describe('The engagement recency page', () => {
     cy.findByText('No Data Available').should('be.visible');
   });
 
-  // This is a bug according to Jon.
-  // Filed a ticket: https://jira.int.messagesystems.com/browse/SA-1213
-  // it('renders an error when the server returns a bad response', () => {
-  //   cy.stubRequest({
-  //     url: '/api/v1/signals/cohort-engagement/**/*',
-  //     fixture: 'signals/cohort-engagement/400.get.json',
-  //   });
+  it('renders an error when the server returns a bad response', () => {
+    cy.stubRequest({
+      statusCode: 400,
+      url: '/api/v1/signals/cohort-engagement/**/*',
+      fixture: 'signals/cohort-engagement/400.get.json',
+    });
 
-  //   cy.visit(PAGE_URL);
-  // });
+    cy.visit(PAGE_URL);
+
+    cy.findByText('Unable to Load Data').should('be.visible');
+    cy.findByText('This is an error').should('be.visible');
+  });
 
   it('re-requests data when filtering by "Broad Date Range"', () => {
     cy.visit(PAGE_URL);
