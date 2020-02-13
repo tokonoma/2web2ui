@@ -58,7 +58,6 @@ describe('Action Creator: Billing Create', () => {
     };
     getState = () => ({ currentUser });
     dispatch = jest.fn(a => a);
-    accountConditions.isAws = jest.fn(() => false);
     accountConditions.isCustomBilling = jest.fn(() => false);
     billingActions.createZuoraAccount = jest.fn(({ meta }) => meta.onSuccess({}));
     billingActions.syncSubscription = jest.fn(({ meta }) => meta.onSuccess({}));
@@ -86,19 +85,6 @@ describe('Action Creator: Billing Create', () => {
 
     checkBillingCreationSteps();
     expect(billingActions.consumePromoCode).not.toHaveBeenCalled();
-  });
-
-  it('update subscription for AWS users', () => {
-    const state = jest.fn();
-    const values = { planpicker: { code: 'plan-code' } };
-    const thunk = billingCreate(values);
-
-    accountConditions.isAws = jest.fn(() => true);
-    billingActions.updateSubscription = jest.fn();
-
-    thunk(dispatch, () => state);
-    expect(accountConditions.isAws).toHaveBeenCalledWith(state);
-    expect(billingActions.updateSubscription).toHaveBeenCalledWith({ code: 'plan-code' });
   });
 
   it('should consume promo code if available', () => {

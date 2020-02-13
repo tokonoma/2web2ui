@@ -54,7 +54,7 @@ export function HealthScoreDashboard(props) {
         header={
           <Grid>
             <SubaccountFilter />
-            <FacetFilter facets={facets}/>
+            <FacetFilter facets={facets} />
           </Grid>
         }
       />
@@ -62,17 +62,17 @@ export function HealthScoreDashboard(props) {
   );
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   facet: state.signalOptions.facet,
   from: state.signalOptions.from,
   subaccounts: state.subaccounts.list,
   relativeRange: state.signalOptions.relativeRange,
-  to: state.signalOptions.to
+  to: state.signalOptions.to,
 });
 
 const mapDispatchToProps = {
   getCurrentHealthScore,
-  getSubaccounts
+  getSubaccounts,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(HealthScoreDashboard);

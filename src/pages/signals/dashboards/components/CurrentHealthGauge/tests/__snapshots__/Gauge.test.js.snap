@@ -10,6 +10,7 @@ exports[`Signals Health Score Gauge SVG renders correct color 1`] = `
 >
   <div
     className="GaugeSvgContainer"
+    data-id="health-score-gauge"
   >
     <svg
       height={210}
@@ -64,6 +65,7 @@ exports[`Signals Health Score Gauge SVG renders correct color 1`] = `
       <path
         className="Needle"
         d="M78.4 63S51.5 61.2 50 61.2s-2.8 1.3-2.8 2.8c0 1.5 1.3 2.8 2.8 2.8S78.4 63 78.4 63z"
+        data-id="health-score-gauge-needle"
         style={
           Object {
             "transform": "rotate(-205deg)",
@@ -73,6 +75,7 @@ exports[`Signals Health Score Gauge SVG renders correct color 1`] = `
     </svg>
     <h4
       className="Score"
+      data-id="health-score"
       style={
         Object {
           "color": "#color",

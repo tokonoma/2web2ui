@@ -12,38 +12,34 @@ exports[`ChoosePlan page tests should disable submit and plan picker when submit
           plans={Array []}
           selectedPromo={Object {}}
         />
-        <AccessControl
-          condition={[Function]}
-        >
-          <Panel.Section>
-            <PromoCodeNew
-              handlePromoCode={
-                Object {
-                  "applyPromoCode": [Function],
-                  "clearPromoCode": undefined,
-                }
-              }
-              key="promocode"
-              promoCodeObj={
-                Object {
-                  "promoError": undefined,
-                  "promoPending": false,
-                  "selectedPromo": Object {},
-                }
-              }
-            />
-          </Panel.Section>
-          <CreditCardSection
-            billing={
+        <Panel.Section>
+          <PromoCodeNew
+            handlePromoCode={
               Object {
-                "countries": Array [],
+                "applyPromoCode": [Function],
+                "clearPromoCode": undefined,
+              }
+            }
+            key="promocode"
+            promoCodeObj={
+              Object {
+                "promoError": undefined,
                 "promoPending": false,
                 "selectedPromo": Object {},
               }
             }
-            submitting={true}
           />
-        </AccessControl>
+        </Panel.Section>
+        <CreditCardSection
+          billing={
+            Object {
+              "countries": Array [],
+              "promoPending": false,
+              "selectedPromo": Object {},
+            }
+          }
+          submitting={true}
+        />
         <Panel.Section>
           <Button
             disabled={true}
@@ -73,38 +69,34 @@ exports[`ChoosePlan page tests should render correctly 1`] = `
           plans={Array []}
           selectedPromo={Object {}}
         />
-        <AccessControl
-          condition={[Function]}
-        >
-          <Panel.Section>
-            <PromoCodeNew
-              handlePromoCode={
-                Object {
-                  "applyPromoCode": [Function],
-                  "clearPromoCode": undefined,
-                }
-              }
-              key="promocode"
-              promoCodeObj={
-                Object {
-                  "promoError": undefined,
-                  "promoPending": false,
-                  "selectedPromo": Object {},
-                }
-              }
-            />
-          </Panel.Section>
-          <CreditCardSection
-            billing={
+        <Panel.Section>
+          <PromoCodeNew
+            handlePromoCode={
               Object {
-                "countries": Array [],
+                "applyPromoCode": [Function],
+                "clearPromoCode": undefined,
+              }
+            }
+            key="promocode"
+            promoCodeObj={
+              Object {
+                "promoError": undefined,
                 "promoPending": false,
                 "selectedPromo": Object {},
               }
             }
-            submitting={false}
           />
-        </AccessControl>
+        </Panel.Section>
+        <CreditCardSection
+          billing={
+            Object {
+              "countries": Array [],
+              "promoPending": false,
+              "selectedPromo": Object {},
+            }
+          }
+          submitting={false}
+        />
         <Panel.Section>
           <Button
             disabled={false}
@@ -136,21 +128,17 @@ exports[`ChoosePlan page tests should show free bullets when isFree is selected 
           plans={Array []}
           selectedPromo={Object {}}
         />
-        <AccessControl
-          condition={[Function]}
-        >
-          <CreditCardSection
-            billing={
-              Object {
-                "countries": Array [],
-                "promoPending": false,
-                "selectedPromo": Object {},
-              }
+        <CreditCardSection
+          billing={
+            Object {
+              "countries": Array [],
+              "promoPending": false,
+              "selectedPromo": Object {},
             }
-            isPlanFree={true}
-            submitting={false}
-          />
-        </AccessControl>
+          }
+          isPlanFree={true}
+          submitting={false}
+        />
         <Panel.Section>
           <Button
             disabled={false}

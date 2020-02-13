@@ -10,7 +10,12 @@ import DivergingBar from './components/charts/divergingBar/DivergingBar';
 import HealthScoreActions from './components/actionContent/HealthScoreActions';
 import TooltipMetric from 'src/components/charts/TooltipMetric';
 import DateFilter from './components/filters/DateFilter';
-import { HEALTH_SCORE_INFO, HEALTH_SCORE_COMPONENT_INFO, INJECTIONS_INFO, HEALTH_SCORE_COMPONENTS } from './constants/info';
+import {
+  HEALTH_SCORE_INFO,
+  HEALTH_SCORE_COMPONENT_INFO,
+  INJECTIONS_INFO,
+  HEALTH_SCORE_COMPONENTS,
+} from './constants/info';
 import withDetails from './containers/withDetails';
 import withDateSelection from './containers/withDateSelection';
 import { Loading } from 'src/components';
@@ -25,12 +30,16 @@ import SpamTrapsPreview from './components/previews/SpamTrapsPreview';
 import EngagementRecencyPreview from './components/previews/EngagementRecencyPreview';
 import styles from './DetailsPages.module.scss';
 import thresholds from './constants/healthScoreThresholds';
-import { newModelLine, newModelMarginsHealthScore, newModelMarginsOther } from './constants/healthScoreV2';
+import {
+  newModelLine,
+  newModelMarginsHealthScore,
+  newModelMarginsOther,
+} from './constants/healthScoreV2';
 
 export class HealthScorePage extends Component {
   state = {
-    selectedComponent: null
-  }
+    selectedComponent: null,
+  };
 
   componentDidUpdate(prevProps) {
     const { data, selectedDate } = this.props;
@@ -45,34 +54,53 @@ export class HealthScorePage extends Component {
     }
   }
 
-  handleComponentSelect = (node) => {
+  handleComponentSelect = node => {
     this.setState({ selectedComponent: _.get(node, 'payload.weight_type') });
-  }
+  };
 
   getXAxisProps = () => {
     const { xTicks } = this.props;
     return {
       ticks: xTicks,
-      tickFormatter: (tick) => moment(tick).format('M/D')
+      tickFormatter: tick => moment(tick).format('M/D'),
     };
-  }
+  };
 
   renderContent = () => {
-    const { data = [], handleDateSelect, handleDateHover, loading, gap, empty, error, selectedDate, hoveredDate, shouldHighlightSelected, resetDateHover } = this.props;
+    const {
+      data = [],
+      handleDateSelect,
+      handleDateHover,
+      loading,
+      gap,
+      empty,
+      error,
+      selectedDate,
+      hoveredDate,
+      shouldHighlightSelected,
+      resetDateHover,
+    } = this.props;
     const { selectedComponent } = this.state;
 
     const selectedWeights = _.get(_.find(data, ['date', selectedDate]), 'weights', []);
     const selectedWeightsAreEmpty = selectedWeights.every(({ weight }) => weight === null);
-    const dataForSelectedWeight = data.map(({ date, weights }) => ({ date, ..._.find(weights, ['weight_type', selectedComponent]) }));
-    const selectedDataIsZero = dataForSelectedWeight.every(({ weight_value }) => (!weight_value || weight_value <= 0));
+    const dataForSelectedWeight = data.map(({ date, weights }) => ({
+      date,
+      ..._.find(weights, ['weight_type', selectedComponent]),
+    }));
+    const selectedDataIsZero = dataForSelectedWeight.every(
+      ({ weight_value }) => !weight_value || weight_value <= 0,
+    );
     let panelContent;
 
     if (empty) {
-      panelContent = <Callout title='No Data Available'>Insufficient data to populate this chart</Callout>;
+      panelContent = (
+        <Callout title="No Data Available">Insufficient data to populate this chart</Callout>
+      );
     }
 
     if (error) {
-      panelContent = <Callout title='Unable to Load Data'>{error.message}</Callout>;
+      panelContent = <Callout title="Unable to Load Data">{error.message}</Callout>;
     }
 
     if (loading) {
@@ -86,8 +114,8 @@ export class HealthScorePage extends Component {
     return (
       <Grid>
         <Grid.Column sm={12} md={7}>
-          <Panel sectioned>
-            <ChartHeader title='Health Score' tooltipContent={HEALTH_SCORE_INFO} />
+          <Panel sectioned data-id="health-score-panel">
+            <ChartHeader title="Health Score" tooltipContent={HEALTH_SCORE_INFO} />
             {panelContent || (
               <Fragment>
                 <BarChart
@@ -101,28 +129,30 @@ export class HealthScorePage extends Component {
                   selected={selectedDate}
                   hovered={hoveredDate}
                   timeSeries={data}
-                  tooltipContent={({ payload = {}}) => (payload.ranking) &&
-                    (<TooltipMetric
-                      label='Health Score'
-                      color={thresholds[payload.ranking].color}
-                      value={`${roundToPlaces(payload.health_score * 100, 1)}`}
-                    />)
+                  tooltipContent={({ payload = {} }) =>
+                    payload.ranking && (
+                      <TooltipMetric
+                        label="Health Score"
+                        color={thresholds[payload.ranking].color}
+                        value={`${roundToPlaces(payload.health_score * 100, 1)}`}
+                      />
+                    )
                   }
                   yAxisRefLines={[
-                    { y: 0.80, stroke: thresholds.good.color, strokeWidth: 1 },
-                    { y: 0.55, stroke: thresholds.danger.color, strokeWidth: 1 }
+                    { y: 0.8, stroke: thresholds.good.color, strokeWidth: 1 },
+                    { y: 0.55, stroke: thresholds.danger.color, strokeWidth: 1 },
                   ]}
                   xAxisRefLines={newModelLine}
-                  yKey='health_score'
+                  yKey="health_score"
                   yAxisProps={{
-                    ticks: [0,0.55,0.8,1],
-                    tickFormatter: (tick) => parseInt(tick * 100)
+                    ticks: [0, 0.55, 0.8, 1],
+                    tickFormatter: tick => parseInt(tick * 100),
                   }}
                   xAxisProps={this.getXAxisProps()}
                 />
-                <ChartHeader title='Injections' tooltipContent={INJECTIONS_INFO} />
+                <ChartHeader title="Injections" tooltipContent={INJECTIONS_INFO} />
                 <BarChart
-                  margin = {newModelMarginsOther}
+                  margin={newModelMarginsOther}
                   gap={gap}
                   height={190}
                   onClick={handleDateSelect}
@@ -132,20 +162,23 @@ export class HealthScorePage extends Component {
                   shouldHighlightSelected={shouldHighlightSelected}
                   onMouseOut={resetDateHover}
                   timeSeries={data}
-                  tooltipContent={({ payload = {}}) => (
-                    <TooltipMetric label='Injections' value={formatFullNumber(payload.injections)} />
+                  tooltipContent={({ payload = {} }) => (
+                    <TooltipMetric
+                      label="Injections"
+                      value={formatFullNumber(payload.injections)}
+                    />
                   )}
-                  yKey='injections'
+                  yKey="injections"
                   yAxisProps={{
-                    tickFormatter: (tick) => formatNumber(tick)
+                    tickFormatter: tick => formatNumber(tick),
                   }}
                   xAxisProps={this.getXAxisProps()}
                 />
-                {(selectedComponent && !selectedWeightsAreEmpty) && (
+                {selectedComponent && !selectedWeightsAreEmpty && (
                   <Fragment>
                     <ChartHeader title={HEALTH_SCORE_COMPONENTS[selectedComponent].chartTitle} />
                     <BarChart
-                      margin = {newModelMarginsOther}
+                      margin={newModelMarginsOther}
                       gap={gap}
                       height={190}
                       onClick={handleDateSelect}
@@ -155,15 +188,15 @@ export class HealthScorePage extends Component {
                       selected={selectedDate}
                       shouldHighlightSelected={shouldHighlightSelected}
                       timeSeries={dataForSelectedWeight}
-                      tooltipContent={({ payload = {}}) => (
+                      tooltipContent={({ payload = {} }) => (
                         <TooltipMetric
                           label={HEALTH_SCORE_COMPONENTS[selectedComponent].label}
                           value={`${roundToPlaces(payload.weight_value * 100, 4)}%`}
                         />
                       )}
-                      yKey='weight_value'
+                      yKey="weight_value"
                       yAxisProps={{
-                        tickFormatter: (tick) => `${roundToPlaces(tick * 100, 3)}%`
+                        tickFormatter: tick => `${roundToPlaces(tick * 100, 3)}%`,
                       }}
                       yDomain={selectedDataIsZero ? [0, 1] : [0, 'auto']}
                       xAxisProps={this.getXAxisProps()}
@@ -175,25 +208,27 @@ export class HealthScorePage extends Component {
           </Panel>
         </Grid.Column>
         <Grid.Column sm={12} md={5} mdOffset={0}>
-          <div className={styles.OffsetCol}>
+          <div className={styles.OffsetCol} data-id="health-score-components">
             <ChartHeader
-              title='Health Score Components'
+              title="Health Score Components"
               date={selectedDate}
               hideLine
-              padding='1rem 0 1rem'
+              padding="1rem 0 1rem"
               tooltipContent={HEALTH_SCORE_COMPONENT_INFO}
             />
-            {(!loading && selectedWeightsAreEmpty) && (
+            {!loading && selectedWeightsAreEmpty && (
               <Callout>Insufficient data to populate this chart</Callout>
             )}
-            {(!panelContent && !selectedWeightsAreEmpty) && (
+            {!panelContent && !selectedWeightsAreEmpty && (
               <DivergingBar
                 barHeight={280 / (selectedWeights.length || 1)}
                 data={selectedWeights}
-                xKey='weight'
-                yKey='weight_type'
+                xKey="weight"
+                yKey="weight_type"
                 yLabel={({ value }) => _.get(HEALTH_SCORE_COMPONENTS[value], 'label')}
-                tooltipContent={({ payload = {}}) => _.get(HEALTH_SCORE_COMPONENTS[payload.weight_type], 'info')}
+                tooltipContent={({ payload = {} }) =>
+                  _.get(HEALTH_SCORE_COMPONENTS[payload.weight_type], 'info')
+                }
                 onClick={this.handleComponentSelect}
                 selected={selectedComponent}
               />
@@ -203,29 +238,38 @@ export class HealthScorePage extends Component {
         </Grid.Column>
       </Grid>
     );
-  }
+  };
 
   render() {
     const { facet, facetId, subaccountId } = this.props;
 
     return (
       <Page
-        breadcrumbAction={{ content: 'Back to Health Score Overview', to: '/signals/health-score', component: Link }}
-        title='Health Score'
+        breadcrumbAction={{
+          content: 'Back to Health Score Overview',
+          to: '/signals/health-score',
+          component: Link,
+        }}
+        title="Health Score"
         facet={facet}
         facetId={facetId}
         subaccountId={subaccountId}
-        primaryArea={<DateFilter left />}>
+        primaryArea={<DateFilter left />}
+      >
         {this.renderContent()}
         <Divider />
         <Grid>
           {facet !== 'mb_provider' && (
             <Grid.Column xs={12} sm={6}>
-              <SpamTrapsPreview />
+              <div data-id="spam-traps-panel">
+                <SpamTrapsPreview />
+              </div>
             </Grid.Column>
           )}
           <Grid.Column xs={12} sm={6}>
-            <EngagementRecencyPreview />
+            <div data-id="engagement-recency-panel">
+              <EngagementRecencyPreview />
+            </div>
           </Grid.Column>
         </Grid>
       </Page>
@@ -236,5 +280,5 @@ export class HealthScorePage extends Component {
 export default withDetails(
   withDateSelection(HealthScorePage),
   { getHealthScore, getSpamHits },
-  selectHealthScoreDetails
+  selectHealthScoreDetails,
 );

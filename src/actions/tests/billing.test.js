@@ -2,7 +2,7 @@ import { createMockStore } from 'src/__testHelpers__/mockStore';
 import * as billing from '../billing';
 import * as billingHelpers from 'src/helpers/billing';
 import _ from 'lodash';
-import { isAws, isAccountUiOptionSet } from 'src/helpers/conditions/account';
+import { isAccountUiOptionSet } from 'src/helpers/conditions/account';
 
 jest.mock('../helpers/sparkpostApiRequest', () => jest.fn(a => a));
 jest.mock('../helpers/zuoraRequest', () => jest.fn(a => a));
@@ -49,8 +49,7 @@ describe('Action Creator: Billing', () => {
       creditCard: {},
       subscription: {},
     }));
-    billingHelpers.formatUpdateData = jest.fn(values => ({ accountKey }));
-    isAws.mockImplementation(() => false);
+    billingHelpers.formatUpdateData = jest.fn(() => ({ accountKey }));
     isAccountUiOptionSet.mockImplementation(() => () => false);
   });
 
@@ -123,14 +122,6 @@ describe('Action Creator: Billing', () => {
         code: 'test-code',
         meta: { onSuccess: jest.fn() },
       });
-      await thunk(dispatchMock, getStateMock);
-      expect(_.flatten(dispatchMock.mock.calls)).toMatchSnapshot();
-    });
-
-    it('should dispatch an update subscription action for aws marketplace account', async () => {
-      const dispatchMock = jest.fn(a => Promise.resolve(a));
-      isAws.mockImplementation(() => true);
-      const thunk = billing.updateSubscription({ code: 'test-code' });
       await thunk(dispatchMock, getStateMock);
       expect(_.flatten(dispatchMock.mock.calls)).toMatchSnapshot();
     });

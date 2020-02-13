@@ -139,14 +139,17 @@ exports[`Signals Health Score Chart renders happy path correctly 1`] = `
       className="Metrics"
     >
       <MetricDisplay
+        data-id="health-score-total-injections"
         label="Total Injections"
         value="225B"
       />
       <MetricDisplay
+        data-id="health-score-high-value"
         label="High"
         value={96}
       />
       <MetricDisplay
+        data-id="health-score-low-value"
         label="Low"
         value={23}
       />
@@ -157,6 +160,7 @@ exports[`Signals Health Score Chart renders happy path correctly 1`] = `
 
 exports[`Signals Health Score Chart renders metric displays 1`] = `
 <MetricDisplay
+  data-id="health-score-total-injections"
   label="Total Injections"
   value="225B"
 />
@@ -164,6 +168,7 @@ exports[`Signals Health Score Chart renders metric displays 1`] = `
 
 exports[`Signals Health Score Chart renders metric displays 2`] = `
 <MetricDisplay
+  data-id="health-score-high-value"
   label="High"
   value={96}
 />

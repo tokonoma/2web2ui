@@ -1,0 +1,448 @@
+{
+  "results": {
+    "total_count": 5,
+    "data": [
+      {
+        "sid": 0,
+        "current_health_score": "0.1",
+        "current_weights": [],
+        "current_total_injection_count": 12,
+        "WoW": 0.1,
+        "history": [
+          {
+            "dt": "2020-02-01",
+            "health_score": "0.2",
+            "weights": [
+              {
+                "weight_type": "List Quality",
+                "weight": "0.0127970232",
+                "weight_value": "0.0000000000"
+              },
+              {
+                "weight_type": "Hard Bounces",
+                "weight": "0.0048121130",
+                "weight_value": "0.0069756757"
+              },
+              {
+                "weight_type": "Block Bounces",
+                "weight": "0.0008728446",
+                "weight_value": "0.0064862422"
+              },
+              {
+                "weight_type": "Complaints",
+                "weight": "0.0110223284",
+                "weight_value": "0.0011978799"
+              },
+              {
+                "weight_type": "Transient Failures",
+                "weight": "0.0055708103",
+                "weight_value": "0.0000461965"
+              },
+              {
+                "weight_type": "Other bounces",
+                "weight": "0.0055497913",
+                "weight_value": "0.0022561385"
+              },
+              {
+                "weight_type": "eng cohorts: new, 14-day",
+                "weight": "0.0019686683",
+                "weight_value": "0.3834761264"
+              },
+              {
+                "weight_type": "eng cohorts: unengaged",
+                "weight": "0.0023586019",
+                "weight_value": "0.1837660408"
+              },
+              {
+                "weight_type": "Spam Trap Hits",
+                "weight": "0.0002518492",
+                "weight_value": "0.0003583352"
+              },
+              {
+                "weight_type": "Suppression Hits",
+                "weight": "-0.0147155104",
+                "weight_value": "0.2253691352"
+              },
+              {
+                "weight_type": "Historical Engagement",
+                "weight": "0.0330999903",
+                "weight_value": "0.2676826573"
+              },
+              {
+                "weight_type": "Unsubscribes",
+                "weight": "0.0013725357",
+                "weight_value": "0.0000000000"
+              }
+            ]
+          },
+          {
+            "dt": "2020-02-02",
+            "health_score": "0.1",
+            "weights": [
+              {
+                "weight_type": "List Quality",
+                "weight": "0.0127970232",
+                "weight_value": "0.0000000000"
+              },
+              {
+                "weight_type": "Hard Bounces",
+                "weight": "0.0048121130",
+                "weight_value": "0.0069756757"
+              },
+              {
+                "weight_type": "Block Bounces",
+                "weight": "0.0008728446",
+                "weight_value": "0.0064862422"
+              },
+              {
+                "weight_type": "Complaints",
+                "weight": "0.0110223284",
+                "weight_value": "0.0011978799"
+              },
+              {
+                "weight_type": "Transient Failures",
+                "weight": "0.0055708103",
+                "weight_value": "0.0000461965"
+              },
+              {
+                "weight_type": "Other bounces",
+                "weight": "0.0055497913",
+                "weight_value": "0.0022561385"
+              },
+              {
+                "weight_type": "eng cohorts: new, 14-day",
+                "weight": "0.0019686683",
+                "weight_value": "0.3834761264"
+              },
+              {
+                "weight_type": "eng cohorts: unengaged",
+                "weight": "0.0023586019",
+                "weight_value": "0.1837660408"
+              },
+              {
+                "weight_type": "Spam Trap Hits",
+                "weight": "0.0002518492",
+                "weight_value": "0.0003583352"
+              },
+              {
+                "weight_type": "Suppression Hits",
+                "weight": "0.0147155104",
+                "weight_value": "0.2253691352"
+              },
+              {
+                "weight_type": "Historical Engagement",
+                "weight": "0.0330999903",
+                "weight_value": "0.2676826573"
+              },
+              {
+                "weight_type": "Unsubscribes",
+                "weight": "0.0013725357",
+                "weight_value": "0.0000000000"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "sid": 101,
+        "current_health_score": "0.2",
+        "current_weights": [],
+        "current_total_injection_count": 34,
+        "WoW": 0.2,
+        "history": [
+          {
+            "dt": "2020-02-01",
+            "health_score": "0.3",
+            "weights": [
+              {
+                "weight_type": "List Quality",
+                "weight": "0.0127970232",
+                "weight_value": "0.0000000000"
+              },
+              {
+                "weight_type": "Hard Bounces",
+                "weight": "0.0048121130",
+                "weight_value": "0.0069756757"
+              },
+              {
+                "weight_type": "Block Bounces",
+                "weight": "0.0008728446",
+                "weight_value": "0.0064862422"
+              },
+              {
+                "weight_type": "Complaints",
+                "weight": "0.0110223284",
+                "weight_value": "0.0011978799"
+              },
+              {
+                "weight_type": "Transient Failures",
+                "weight": "0.0055708103",
+                "weight_value": "0.0000461965"
+              },
+              {
+                "weight_type": "Other bounces",
+                "weight": "0.0055497913",
+                "weight_value": "0.0022561385"
+              },
+              {
+                "weight_type": "eng cohorts: new, 14-day",
+                "weight": "0.0019686683",
+                "weight_value": "0.3834761264"
+              },
+              {
+                "weight_type": "eng cohorts: unengaged",
+                "weight": "0.0023586019",
+                "weight_value": "0.1837660408"
+              },
+              {
+                "weight_type": "Spam Trap Hits",
+                "weight": "0.0002518492",
+                "weight_value": "0.0003583352"
+              },
+              {
+                "weight_type": "Suppression Hits",
+                "weight": "-0.0147155104",
+                "weight_value": "0.2253691352"
+              },
+              {
+                "weight_type": "Historical Engagement",
+                "weight": "0.0330999903",
+                "weight_value": "0.2676826573"
+              },
+              {
+                "weight_type": "Unsubscribes",
+                "weight": "0.0013725357",
+                "weight_value": "0.0000000000"
+              }
+            ]
+          },
+          {
+            "dt": "2020-02-02",
+            "health_score": "0.2",
+            "weights": [
+              {
+                "weight_type": "List Quality",
+                "weight": "0.0127970232",
+                "weight_value": "0.0000000000"
+              },
+              {
+                "weight_type": "Hard Bounces",
+                "weight": "0.0048121130",
+                "weight_value": "0.0069756757"
+              },
+              {
+                "weight_type": "Block Bounces",
+                "weight": "0.0008728446",
+                "weight_value": "0.0064862422"
+              },
+              {
+                "weight_type": "Complaints",
+                "weight": "0.0110223284",
+                "weight_value": "0.0011978799"
+              },
+              {
+                "weight_type": "Transient Failures",
+                "weight": "0.0055708103",
+                "weight_value": "0.0000461965"
+              },
+              {
+                "weight_type": "Other bounces",
+                "weight": "0.0055497913",
+                "weight_value": "0.0022561385"
+              },
+              {
+                "weight_type": "eng cohorts: new, 14-day",
+                "weight": "0.0019686683",
+                "weight_value": "0.3834761264"
+              },
+              {
+                "weight_type": "eng cohorts: unengaged",
+                "weight": "0.0023586019",
+                "weight_value": "0.1837660408"
+              },
+              {
+                "weight_type": "Spam Trap Hits",
+                "weight": "0.0002518492",
+                "weight_value": "0.0003583352"
+              },
+              {
+                "weight_type": "Suppression Hits",
+                "weight": "0.0147155104",
+                "weight_value": "0.2253691352"
+              },
+              {
+                "weight_type": "Historical Engagement",
+                "weight": "0.0330999903",
+                "weight_value": "0.2676826573"
+              },
+              {
+                "weight_type": "Unsubscribes",
+                "weight": "0.0013725357",
+                "weight_value": "0.0000000000"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "sid": 102,
+        "current_health_score": "0.3",
+        "current_weights": [],
+        "current_total_injection_count": 56,
+        "WoW": 0.3,
+        "history": [
+          {
+            "dt": "2020-02-01",
+            "health_score": "0.4",
+            "weights": [
+              {
+                "weight_type": "List Quality",
+                "weight": "-0.0127970232",
+                "weight_value": "0.0000000000"
+              },
+              {
+                "weight_type": "Hard Bounces",
+                "weight": "0.0048121130",
+                "weight_value": "0.0069756757"
+              },
+              {
+                "weight_type": "Block Bounces",
+                "weight": "0.0008728446",
+                "weight_value": "0.0064862422"
+              },
+              {
+                "weight_type": "Complaints",
+                "weight": "-0.0110223284",
+                "weight_value": "0.0011978799"
+              },
+              {
+                "weight_type": "Transient Failures",
+                "weight": "0.0055708103",
+                "weight_value": "0.0000461965"
+              },
+              {
+                "weight_type": "Other bounces",
+                "weight": "0.0055497913",
+                "weight_value": "0.0022561385"
+              },
+              {
+                "weight_type": "eng cohorts: new, 14-day",
+                "weight": "-0.0019686683",
+                "weight_value": "0.3834761264"
+              },
+              {
+                "weight_type": "eng cohorts: unengaged",
+                "weight": "0.0023586019",
+                "weight_value": "0.1837660408"
+              },
+              {
+                "weight_type": "Spam Trap Hits",
+                "weight": "0.0002518492",
+                "weight_value": "0.0003583352"
+              },
+              {
+                "weight_type": "Suppression Hits",
+                "weight": "-0.0147155104",
+                "weight_value": "0.2253691352"
+              },
+              {
+                "weight_type": "Historical Engagement",
+                "weight": "0.0330999903",
+                "weight_value": "0.2676826573"
+              },
+              {
+                "weight_type": "Unsubscribes",
+                "weight": "0.0013725357",
+                "weight_value": "0.0000000000"
+              }
+            ]
+          },
+          {
+            "dt": "2020-02-02",
+            "health_score": "0.3",
+            "weights": [
+              {
+                "weight_type": "List Quality",
+                "weight": "-0.0127970232",
+                "weight_value": "0.0000000000"
+              },
+              {
+                "weight_type": "Hard Bounces",
+                "weight": "0.0048121130",
+                "weight_value": "0.0069756757"
+              },
+              {
+                "weight_type": "Block Bounces",
+                "weight": "0.0008728446",
+                "weight_value": "0.0064862422"
+              },
+              {
+                "weight_type": "Complaints",
+                "weight": "-0.0110223284",
+                "weight_value": "0.0011978799"
+              },
+              {
+                "weight_type": "Transient Failures",
+                "weight": "0.0055708103",
+                "weight_value": "0.0000461965"
+              },
+              {
+                "weight_type": "Other bounces",
+                "weight": "0.0055497913",
+                "weight_value": "0.0022561385"
+              },
+              {
+                "weight_type": "eng cohorts: new, 14-day",
+                "weight": "-0.0019686683",
+                "weight_value": "0.3834761264"
+              },
+              {
+                "weight_type": "eng cohorts: unengaged",
+                "weight": "0.0023586019",
+                "weight_value": "0.1837660408"
+              },
+              {
+                "weight_type": "Spam Trap Hits",
+                "weight": "0.0002518492",
+                "weight_value": "0.0003583352"
+              },
+              {
+                "weight_type": "Suppression Hits",
+                "weight": "-0.0147155104",
+                "weight_value": "0.2253691352"
+              },
+              {
+                "weight_type": "Historical Engagement",
+                "weight": "0.0330999903",
+                "weight_value": "0.2676826573"
+              },
+              {
+                "weight_type": "Unsubscribes",
+                "weight": "0.0013725357",
+                "weight_value": "0.0000000000"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "sid": 103,
+        "current_health_score": "0.4",
+        "current_total_injection_count": 78,
+        "WoW": 0.4,
+        "history": [
+          {
+            "dt": "2020-02-01",
+            "health_score": "0.5",
+            "weights": []
+          },
+          {
+            "dt": "2020-02-02",
+            "health_score": "0.4",
+            "weights": []
+          }
+        ]
+      }
+    ]
+  }
+}

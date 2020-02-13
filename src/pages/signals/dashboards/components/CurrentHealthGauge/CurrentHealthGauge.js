@@ -19,7 +19,7 @@ export function CurrentHealthGauge(props) {
   const noData = _.isNil(props.current_health_score);
 
   if (props.loading) {
-    return <PanelLoading minHeight='407px' />;
+    return <PanelLoading minHeight="407px" />;
   }
 
   if (props.error) {
@@ -27,7 +27,11 @@ export function CurrentHealthGauge(props) {
       <Panel sectioned>
         <div className={styles.Content}>
           <div className={styles.ErrorMessage}>
-            <Callout title='Unable to Load Data' height='auto' children={_.get(props, 'error.message')} />
+            <Callout
+              title="Unable to Load Data"
+              height="auto"
+              children={_.get(props, 'error.message')}
+            />
           </div>
         </div>
       </Panel>
@@ -49,36 +53,53 @@ export function CurrentHealthGauge(props) {
     return { value: _.isNil(value) ? 'n/a' : `${value}%`, ...getCaretProps(value) };
   }
 
-  const title = _.get(props, 'filters.relativeRange') === 'custom'
-    ? `Health Score for ${formatDate(props.filters.to, FORMATS.DATE)}`
-    : 'Current Health Score';
+  const title =
+    _.get(props, 'filters.relativeRange') === 'custom'
+      ? `Health Score for ${formatDate(props.filters.to, FORMATS.DATE)}`
+      : 'Current Health Score';
 
   return (
     <Panel sectioned>
       <div className={styles.Content}>
         <h2 className={styles.Header}>{title}</h2>
-        {noData && <div><Callout height='auto'>Current Health Score Not Available</Callout></div>}
+        {noData && (
+          <div>
+            <Callout height="auto">Current Health Score Not Available</Callout>
+          </div>
+        )}
         {!noData && (
           <>
             <Gauge score={props.current_health_score} threshold={threshold} />
             <div className={styles.Description}>
-              <DescriptionIcon className={styles.DescriptionIcon} size={25} style={{ fill: threshold.color }} />
+              <DescriptionIcon
+                className={styles.DescriptionIcon}
+                size={25}
+                style={{ fill: threshold.color }}
+              />
               <p className={styles.DescriptionContent}>{threshold.description}</p>
             </div>
           </>
         )}
         <div className={styles.Metrics}>
-          <MetricDisplay label='WoW Change' {...getMetricProps('WoW')} />
-          <MetricDisplay label='DoD Change' {...getMetricProps('current_DoD')} />
+          <MetricDisplay
+            data-id="health-score-wow-change"
+            label="WoW Change"
+            {...getMetricProps('WoW')}
+          />
+          <MetricDisplay
+            data-id="health-score-dod-change"
+            label="DoD Change"
+            {...getMetricProps('current_DoD')}
+          />
         </div>
       </div>
     </Panel>
   );
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   ...selectCurrentHealthScoreDashboard(state),
-  filters: state.signalOptions
+  filters: state.signalOptions,
 });
 
 export default connect(mapStateToProps, {})(CurrentHealthGauge);

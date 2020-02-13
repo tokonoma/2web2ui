@@ -272,7 +272,7 @@ const routes = [
     component: signals.HealthScorePage,
     condition: hasGrants('signals/manage'),
     layout: App,
-    title: 'Health Score | Signals Analytics',
+    title: 'Subaccount | Health Score | Signals Analytics',
     supportDocSearch: 'signals',
   },
   {
@@ -608,6 +608,7 @@ const routes = [
       not(isHeroku),
       not(isAzure),
       not(isCustomBilling),
+      not(isAws),
     ),
     layout: App,
     title: 'Billing | Change My Plan',

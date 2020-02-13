@@ -1,0 +1,13 @@
+{
+  "results": {
+    "total_count": 5,
+    "data": [
+      {
+        "sid": 102,
+        "current_health_score": "0.5",
+        "current_weights": [],
+        "history": []
+      }
+    ]
+  }
+}

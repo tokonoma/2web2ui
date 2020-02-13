@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import ManuallyBilledBanner from '../ManuallyBilledBanner';
+import ManuallyBilledOrAwsBanner from '../ManuallyBilledOrAwsBanner';
 
 const mkCustomSubs = () => ({
   subscription: {
@@ -9,21 +9,20 @@ const mkCustomSubs = () => ({
     period: 'year',
     plan_volume: 10000,
     plan_volume_per_period: 120000,
-    recurring_charge: 100
-  }
+    recurring_charge: 100,
+  },
 });
 
 describe('ManuallyBilledBanner', () => {
-  const subject = ({ account = {}, onZuoraPlan = false }) => (
-    shallow(<ManuallyBilledBanner account={account} onZuoraPlan={onZuoraPlan} />)
-  );
+  const subject = ({ account = {}, onZuoraPlan = false }) =>
+    shallow(<ManuallyBilledOrAwsBanner account={account} onZuoraPlan={onZuoraPlan} />);
 
   it('renders banner', () => {
     const account = {
       subscription: {
         name: 'Test',
-        plan_volume: 15000
-      }
+        plan_volume: 15000,
+      },
     };
 
     expect(subject({ account, onZuoraPlan: true })).toMatchSnapshot();
@@ -36,8 +35,8 @@ describe('ManuallyBilledBanner', () => {
         name: 'Custom',
         plan_volume: 15000,
         plan_volume_per_period: undefined,
-        recurring_charge: 100
-      }
+        recurring_charge: 100,
+      },
     };
 
     expect(subject({ account })).toMatchSnapshot();
@@ -50,8 +49,8 @@ describe('ManuallyBilledBanner', () => {
         name: 'Custom',
         plan_volume: 15000,
         plan_volume_per_period: 180000,
-        recurring_charge: undefined
-      }
+        recurring_charge: undefined,
+      },
     };
 
     expect(subject({ account })).toMatchSnapshot();

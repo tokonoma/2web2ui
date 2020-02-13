@@ -4,7 +4,7 @@
 [![codecov](https://codecov.io/gh/SparkPost/2web2ui/branch/master/graph/badge.svg)](https://codecov.io/gh/SparkPost/2web2ui)
 [![Greenkeeper badge](https://badges.greenkeeper.io/SparkPost/2web2ui.svg)](https://greenkeeper.io/)
 
-A re-build of the SparkPost web app using React and Redux.
+A re-build of the SparkPost web app using React.
 
 ## Installing dependencies
 

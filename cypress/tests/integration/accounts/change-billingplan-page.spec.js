@@ -12,7 +12,7 @@ describe('Billing Page', () => {
     });
 
     cy.stubRequest({
-      url: '/api/v1/billing/bundles',
+      url: '/api/v1/billing/bundles**',
       fixture: 'billing/bundles/200.get.json',
       fixtureAlias: 'bundlesGet',
     });

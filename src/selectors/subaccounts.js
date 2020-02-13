@@ -2,6 +2,7 @@ import { createSelector } from 'reselect';
 import qs from 'query-string';
 import _ from 'lodash';
 import { isAccountUiOptionSet } from '../helpers/conditions/account';
+import { isSubaccountUser } from '../helpers/conditions/user';
 import { selectCondition } from 'src/selectors/accessConditionState';
 
 const formatSubaccount = ({ compliance_status = 'active', status = 'active', ...rest }) => {
@@ -10,30 +11,34 @@ const formatSubaccount = ({ compliance_status = 'active', status = 'active', ...
   return {
     compliance,
     status: compliance ? compliance_status : status,
-    ...rest
+    ...rest,
   };
 };
-export const getSubaccounts = (state) => state.subaccounts.list;
-export const hasSubaccounts = (state) => state.currentUser.has_subaccounts;
-export const getSubaccount = (state) => state.subaccount;
+export const getSubaccounts = state => state.subaccounts.list;
+export const hasSubaccounts = state =>
+  state.currentUser.has_subaccounts && !isSubaccountUser(state);
+export const getSubaccount = state => state.subaccount;
 
 export const selectSubaccounts = createSelector(
   [getSubaccounts, selectCondition(isAccountUiOptionSet('hideTerminatedSubaccounts'))],
   (subaccounts, hideTerminatedSubaccounts) => {
     const visibleSubaccounts = hideTerminatedSubaccounts
-      ? subaccounts.filter(({ status, compliance_status }) => status !== 'terminated' && compliance_status !== 'terminated')
+      ? subaccounts.filter(
+          ({ status, compliance_status }) =>
+            status !== 'terminated' && compliance_status !== 'terminated',
+        )
       : subaccounts;
 
-    return visibleSubaccounts.map((subaccount) => formatSubaccount(subaccount));
-  }
+    return visibleSubaccounts.map(subaccount => formatSubaccount(subaccount));
+  },
 );
 
-
-export const selectSubaccount = ({ subaccounts }) => (formatSubaccount(subaccounts.subaccount));
+export const selectSubaccount = ({ subaccounts }) => formatSubaccount(subaccounts.subaccount);
 
 export const getSubaccountIdFromProps = (state, props) => props.id;
 export const getSubaccountIdFromParams = (state, props) => props.match.params.id;
-export const selectSubaccountIdFromQuery = (state, props) => qs.parse(props.location.search).subaccount;
+export const selectSubaccountIdFromQuery = (state, props) =>
+  qs.parse(props.location.search).subaccount;
 
 /*
  * Selects subaccount object from qp
@@ -41,7 +46,7 @@ export const selectSubaccountIdFromQuery = (state, props) => qs.parse(props.loca
  */
 export const selectSubaccountFromQuery = createSelector(
   [getSubaccounts, selectSubaccountIdFromQuery],
-  (subaccounts, id) => _.find(subaccounts, { id: Number(id) })
+  (subaccounts, id) => _.find(subaccounts, { id: Number(id) }),
 );
 
 export const selectSubaccountIdFromProps = (state, props) => props.subaccountId;
@@ -52,15 +57,15 @@ export const selectSubaccountIdFromProps = (state, props) => props.subaccountId;
 export const getSubaccountId = (state, id) => id;
 export const selectSubaccountFromId = createSelector(
   [getSubaccounts, getSubaccountId],
-  (subaccounts, id) => _.find(subaccounts, { id: Number(id) })
+  (subaccounts, id) => _.find(subaccounts, { id: Number(id) }),
 );
 
-export const getSubaccountsIndexedById = createSelector(
-  [getSubaccounts],
-  (subaccounts) => _.keyBy(subaccounts,
-    (subaccount) => subaccount.id)
+export const getSubaccountsIndexedById = createSelector([getSubaccounts], subaccounts =>
+  _.keyBy(subaccounts, subaccount => subaccount.id),
 );
-export const getSubaccountName = (subaccounts , subaccount_id) => {
-  if (!subaccount_id) { return null; }
-  return subaccounts[subaccount_id] ? subaccounts[subaccount_id].name : null ;
+export const getSubaccountName = (subaccounts, subaccount_id) => {
+  if (!subaccount_id) {
+    return null;
+  }
+  return subaccounts[subaccount_id] ? subaccounts[subaccount_id].name : null;
 };
