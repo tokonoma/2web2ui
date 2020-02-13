@@ -1,6 +1,5 @@
 const PAGE_URL = '/alerts';
 const API_URL = '/api/v1/alerts';
-const STABLE_UNIX_DATE = 1581555194000; // Unix timestamp 2/13/20
 
 describe('The alerts list page', () => {
   beforeEach(() => {
