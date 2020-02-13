@@ -50,14 +50,22 @@ describe('The engagement recency page', () => {
   });
 
   it('re-requests data when filtering by "Broad Date Range"', () => {
+    cy.clock(STABLE_UNIX_DATE);
+
     cy.visit(PAGE_URL);
 
     cy.stubRequest({
       url: '/api/v1/signals/cohort-engagement/**/*',
       fixture: 'signals/cohort-engagement/200.get.no-results.json',
+      requestAlias: 'getCohortEngagement',
     });
 
     cy.findByLabelText('Broad Date Range').select('Last 7 Days');
+
+    cy.wait('@getCohortEngagement')
+      .its('url')
+      .should('include', 'from=2020-01-30')
+      .should('include', 'to=2020-02-06');
 
     cy.findByText('No Data Available').should('be.visible');
   });
@@ -65,13 +73,35 @@ describe('The engagement recency page', () => {
   it('re-requests data when filtering by "Narrow Date Range"', () => {
     cy.visit(PAGE_URL);
 
+    cy.wait('@getEngagementData')
+      .its('url')
+      .as('initialRequestURL');
+
     cy.stubRequest({
       url: '/api/v1/signals/cohort-engagement/**/*',
       fixture: 'signals/cohort-engagement/200.get.no-results.json',
+      requestAlias: 'nextRequest',
     });
 
     cy.findByLabelText('Narrow Date Range').click();
+    cy.findAllByRole('grid') // The datepicker UI uses the `grid` ARIA role
+      .first()
+      .within(() => {
+        cy.findAllByText('1')
+          .first()
+          .click({ force: true });
+        cy.findAllByText('8')
+          .first()
+          .click({ force: true });
+      });
     cy.findByText('Apply').click();
+
+    // See: https://docs.cypress.io/guides/core-concepts/variables-and-aliases.html#Closures
+    cy.get('@initialRequestURL').then(initialValue => {
+      cy.wait('@nextRequest')
+        .its('url')
+        .should('not.equal', initialValue);
+    });
 
     cy.findByText('No Data Available').should('be.visible');
   });
