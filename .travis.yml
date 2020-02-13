@@ -27,12 +27,12 @@ jobs:
       # This could probably be improved by writing a Node script to handle a config,
       # though no need to prematurely optimize at this point.
     - stage: test-and-build
-      name: 'Integration Testing - Accounts, Events, Navigation, and Signals Reports,'
-      env: SPECS='cypress/tests/integration/accounts/**/*,cypress/tests/integration/events/**/*,cypress/tests/integration/navigation/**/*,cypress/tests/integration/reports/**/*'
+      name: 'Integration Testing - Accounts, Events, Navigation, and Alerts'
+      env: SPECS='cypress/tests/integration/accounts/**/*,cypress/tests/integration/events/**/*,cypress/tests/integration/navigation/**/*,cypress/tests/integration/alerts/**/*'
       script: npm run test-integration-ci
     - stage: test-and-build
-      name: 'Integration Testing - Templates, Recipient Validation, Suppressions, and Alerts'
-      env: SPECS='cypress/tests/integration/templates/**/*,cypress/tests/integration/recipients/**/*,cypress/tests/integration/alerts/**/*'
+      name: 'Integration Testing - Recipients, Templates, and Signals Analytics'
+      env: SPECS='cypress/tests/integration/recipients/**/*,cypress/tests/integration/templates/**/*,cypress/tests/integration/signals-analytics/**/*'
       script: npm run test-integration-ci
 
 after_script: greenkeeper-lockfile-upload
