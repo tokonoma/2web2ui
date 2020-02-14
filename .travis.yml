@@ -27,13 +27,8 @@ jobs:
       # This could probably be improved by writing a Node script to handle a config,
       # though no need to prematurely optimize at this point.
     - stage: test-and-build
-<<<<<<< HEAD
       name: 'Integration Testing - Accounts, Events, Navigation, and Alerts'
-      env: SPECS='cypress/tests/integration/accounts/**/*,cypress/tests/integration/events/**/*,cypress/tests/integration/navigation/**/*,cypress/tests/integration/alerts/**/*'
-=======
-      name: 'Integration Testing - Accounts, Alerts, Events, and Navigation'
       env: SPEC_BATCH='Paul Walker'
->>>>>>> FE-858 - Update Travis config description
       script: npm run test-integration-ci
     - stage: test-and-build
       name: 'Integration Testing - Templates, Recipients, and Signals Analytics'
