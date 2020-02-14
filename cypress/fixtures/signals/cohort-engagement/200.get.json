@@ -3,15 +3,68 @@
     "total_count": 1,
     "data": [
       {
-        "current_c_total": 140753,
-        "current_c_new": 11501,
-        "current_c_14d": 40316,
-        "current_c_90d": 49699,
-        "current_c_365d": 16923,
-        "current_c_uneng": 22314,
-        "current_relative_c_14d": 0.286430839840003,
+        "sid": 0,
+        "current_c_total": 12,
+        "current_c_new": 9995,
+        "current_c_14d": 35408,
+        "current_c_90d": 41622,
+        "current_c_365d": 20986,
+        "current_c_uneng": 18759,
+        "current_relative_c_14d": 0.279308984775578,
+        "WoW": -0.5,
+        "history": [
+          {
+            "c_total": 3,
+            "c_new": 3,
+            "c_14d": 0,
+            "c_90d": 0,
+            "c_365d": 0,
+            "c_uneng": 0,
+            "relative_c_14d": 0,
+            "dt": "2020-01-30"
+          },
+          {
+            "c_total": 2,
+            "c_new": 0,
+            "c_14d": 0,
+            "c_90d": 2,
+            "c_365d": 0,
+            "c_uneng": 0,
+            "relative_c_14d": 0,
+            "dt": "2020-02-03"
+          },
+          {
+            "c_total": 3,
+            "c_new": 3,
+            "c_14d": 0,
+            "c_90d": 0,
+            "c_365d": 0,
+            "c_uneng": 0,
+            "relative_c_14d": 0,
+            "dt": "2020-02-05"
+          },
+          {
+            "c_total": 10,
+            "c_new": 71,
+            "c_14d": 5,
+            "c_90d": 10,
+            "c_365d": 0,
+            "c_uneng": 0,
+            "relative_c_14d": 0.75,
+            "dt": "2020-02-06"
+          }
+        ]
+      },
+      {
         "sid": 102,
-        "WoW": -0.05,
+        "current_c_total": 12,
+        "current_c_new": 9995,
+        "current_c_14d": 35408,
+        "current_c_90d": 41622,
+        "current_c_365d": 20986,
+        "current_c_uneng": 18759,
+        "current_relative_c_14d": 0.279308984775578,
+        "WoW": -0.5,
         "history": [
           {
             "c_total": 140753,
@@ -44,16 +97,28 @@
             "dt": "2020-02-01"
           },
           {
-            "c_total": 125308,
-            "c_new": 1202,
-            "c_14d": 38324,
-            "c_90d": 48003,
-            "c_365d": 16488,
-            "c_uneng": 21291,
-            "relative_c_14d": 0.30583841414754,
-            "dt": "2020-01-31"
+            "c_total": 10,
+            "c_new": 71,
+            "c_14d": 5,
+            "c_90d": 10,
+            "c_365d": 0,
+            "c_uneng": 0,
+            "relative_c_14d": 0.75,
+            "dt": "2020-02-06"
           }
         ]
+      },
+      {
+        "sid": 6257,
+        "current_c_total": 34,
+        "current_c_new": 9280,
+        "current_c_14d": 35313,
+        "current_c_90d": 41983,
+        "current_c_365d": 14447,
+        "current_c_uneng": 18308,
+        "current_relative_c_14d": 0.295924780652136,
+        "WoW": 0.5,
+        "history": []
       }
     ]
   }

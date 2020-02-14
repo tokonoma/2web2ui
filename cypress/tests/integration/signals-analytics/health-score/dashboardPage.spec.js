@@ -26,15 +26,18 @@ describe('The health score dashboard page', () => {
     cy.get('main').within(() => cy.findByText('Health Score').should('be.visible'));
   });
 
-  // Found a bug! A 400 response causes the ErrorBoundary to render
-  // it('handles errors', () => {
-  //   cy.stubRequest({
-  //     url: API_URL,
-  //     fixture: 'signals/health-score/400.get.json',
-  //   });
+  it('handles errors', () => {
+    cy.stubRequest({
+      statusCode: 400,
+      url: API_URL,
+      fixture: 'signals/health-score/400.get.json',
+    });
 
-  //   cy.visit(PAGE_URL);
-  // });
+    cy.visit(PAGE_URL);
+
+    cy.findAllByText('Unable to Load Data').should('have.length', 3);
+    cy.findAllByText('This is an error').should('have.length', 3);
+  });
 
   it('renders the empty state when insufficient data is returned', () => {
     cy.stubRequest({
@@ -192,14 +195,12 @@ describe('The health score dashboard page', () => {
 
         // Visibility check not working due to how positioning is handled relative to cursor
         // Because of the lack of a true `cy.hover()` a true hover can't quite be replicated
-        cy.findByText('Feb 2 2020').should('exist');
         cy.findByText('79.9').should('exist');
 
         cy.get(barSelector)
           .eq(-2)
           .click();
 
-        cy.findByText('Feb 1 2020').should('exist');
         cy.findByText('79.4').should('exist');
       });
     });
@@ -295,6 +296,7 @@ describe('The health score dashboard page', () => {
         cy.stubRequest({
           url: API_URL,
           fixture: 'signals/health-score/200.get.no-results.json',
+          requestAlias: 'nextRequest',
         });
       });
 
@@ -302,6 +304,7 @@ describe('The health score dashboard page', () => {
         cy.findByLabelText('Search By').should('not.be.visible');
 
         cy.findByLabelText('Filter By').select('By Campaign');
+        cy.wait('@nextRequest');
 
         cy.findByText('No Data Available').should('be.visible');
         cy.findByLabelText('Search By').should('be.visible');
@@ -309,18 +312,21 @@ describe('The health score dashboard page', () => {
 
       it('re-requests data when clicking on "Subaccount"', () => {
         cy.findByText('Subaccount').click();
+        cy.wait('@nextRequest');
 
         cy.findByText('No Data Available').should('be.visible');
       });
 
       it('re-requests data when clicking on "Current Score"', () => {
         cy.findByText('Current Score').click();
+        cy.wait('@nextRequest');
 
         cy.findByText('No Data Available').should('be.visible');
       });
 
       it('re-requests data when clicking on "Current Injections"', () => {
         cy.findByText('Current Injections').click();
+        cy.wait('@nextRequest');
 
         cy.findByText('No Data Available').should('be.visible');
       });

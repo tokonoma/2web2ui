@@ -1,0 +1,115 @@
+{
+  "results": {
+    "total_count": 1,
+    "data": [
+      {
+        "sid": 102,
+        "current_c_total_unsub": null,
+        "current_c_new_unsub": null,
+        "current_c_14d_unsub": null,
+        "current_c_90d_unsub": null,
+        "current_c_365d_unsub": null,
+        "current_c_uneng_unsub": null,
+        "current_p_total_unsub": null,
+        "current_p_new_unsub": null,
+        "current_p_14d_unsub": null,
+        "current_p_90d_unsub": null,
+        "current_p_365d_unsub": null,
+        "current_p_uneng_unsub": null,
+        "WoW": null,
+        "history": [
+          {
+            "c_total_unsub": 0,
+            "c_new_unsub": 0,
+            "c_14d_unsub": 0,
+            "c_90d_unsub": 0,
+            "c_365d_unsub": 0,
+            "c_uneng_unsub": 0,
+            "p_total_unsub": 0,
+            "p_new_unsub": 0,
+            "p_14d_unsub": 0,
+            "p_90d_unsub": 0,
+            "p_365d_unsub": 0,
+            "p_uneng_unsub": 0,
+            "dt": "2020-02-06"
+          },
+          {
+            "c_total_unsub": 0,
+            "c_new_unsub": 0,
+            "c_14d_unsub": 0,
+            "c_90d_unsub": 0,
+            "c_365d_unsub": 0,
+            "c_uneng_unsub": 0,
+            "p_total_unsub": 0,
+            "p_new_unsub": 0,
+            "p_14d_unsub": 0,
+            "p_90d_unsub": 0,
+            "p_365d_unsub": 0,
+            "p_uneng_unsub": 0,
+            "dt": "2020-02-05"
+          },
+          {
+            "c_total_unsub": 0,
+            "c_new_unsub": 0,
+            "c_14d_unsub": 0,
+            "c_90d_unsub": 0,
+            "c_365d_unsub": 0,
+            "c_uneng_unsub": 0,
+            "p_total_unsub": 0,
+            "p_new_unsub": 0,
+            "p_14d_unsub": 0,
+            "p_90d_unsub": 0,
+            "p_365d_unsub": 0,
+            "p_uneng_unsub": 0,
+            "dt": "2020-02-04"
+          },
+          {
+            "c_total_unsub": 0,
+            "c_new_unsub": 0,
+            "c_14d_unsub": 0,
+            "c_90d_unsub": 0,
+            "c_365d_unsub": 0,
+            "c_uneng_unsub": 0,
+            "p_total_unsub": 0,
+            "p_new_unsub": 0,
+            "p_14d_unsub": 0,
+            "p_90d_unsub": 0,
+            "p_365d_unsub": 0,
+            "p_uneng_unsub": 0,
+            "dt": "2020-02-03"
+          },
+          {
+            "c_total_unsub": 0,
+            "c_new_unsub": 0,
+            "c_14d_unsub": 0,
+            "c_90d_unsub": 0,
+            "c_365d_unsub": 0,
+            "c_uneng_unsub": 0,
+            "p_total_unsub": 0,
+            "p_new_unsub": 0,
+            "p_14d_unsub": 0,
+            "p_90d_unsub": 0,
+            "p_365d_unsub": 0,
+            "p_uneng_unsub": 0,
+            "dt": "2020-02-02"
+          },
+          {
+            "c_total_unsub": 0,
+            "c_new_unsub": 0,
+            "c_14d_unsub": 0,
+            "c_90d_unsub": 0,
+            "c_365d_unsub": 0,
+            "c_uneng_unsub": 0,
+            "p_total_unsub": 0,
+            "p_new_unsub": 0,
+            "p_14d_unsub": 0,
+            "p_90d_unsub": 0,
+            "p_365d_unsub": 0,
+            "p_uneng_unsub": 0,
+            "dt": "2020-02-01"
+          }
+        ]
+      }
+    ]
+  }
+}

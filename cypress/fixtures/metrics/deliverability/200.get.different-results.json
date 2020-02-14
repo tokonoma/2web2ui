@@ -1,0 +1,10 @@
+{
+  "results": [
+    {
+      "count_sent": 123,
+      "count_unique_confirmed_opened_approx": 456,
+      "count_accepted": 789
+    }
+  ],
+  "links": []
+}

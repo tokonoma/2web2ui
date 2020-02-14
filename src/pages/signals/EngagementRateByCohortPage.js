@@ -27,36 +27,42 @@ import cohorts from './constants/cohorts';
 import styles from './DetailsPages.module.scss';
 
 export class EngagementRateByCohortPage extends Component {
-
   isEmpty = () => {
     const { data } = this.props;
 
     // Returns true with 0 total engagement
     return data.every(({ p_total_eng }) => !p_total_eng);
-  }
+  };
 
   getYAxisProps = () => ({
     domain: this.isEmpty() ? [0, 1] : ['auto', 'auto'],
-    tickFormatter: (tick) => `${roundToPlaces(tick * 100, 1)}%`
-  })
+    tickFormatter: tick => `${roundToPlaces(tick * 100, 1)}%`,
+  });
 
   getXAxisProps = () => {
     const { xTicks } = this.props;
     return {
       ticks: xTicks,
-      tickFormatter: (tick) => moment(tick).format('M/D')
+      tickFormatter: tick => moment(tick).format('M/D'),
     };
-  }
+  };
 
-  getTooltipContent = ({ payload = {}}) => {
-    const metrics = _.keys(cohorts).reduce((acc, key) => ([ ...acc, {
-      ...cohorts[key], key,
-      value: payload[`p_${key}_eng`]
-    }]), []);
+  getTooltipContent = ({ payload = {} }) => {
+    const metrics = _.keys(cohorts).reduce(
+      (acc, key) => [
+        ...acc,
+        {
+          ...cohorts[key],
+          key,
+          value: payload[`p_${key}_eng`],
+        },
+      ],
+      [],
+    );
 
     return (
       <>
-        {_.orderBy(metrics, 'value', 'desc').map((metric) => (
+        {_.orderBy(metrics, 'value', 'desc').map(metric => (
           <TooltipMetric
             key={metric.key}
             color={metric.fill}
@@ -67,7 +73,7 @@ export class EngagementRateByCohortPage extends Component {
         ))}
       </>
     );
-  }
+  };
 
   renderContent = () => {
     const {
@@ -81,7 +87,7 @@ export class EngagementRateByCohortPage extends Component {
       error,
       selectedDate,
       shouldHighlightSelected,
-      subaccountId
+      subaccountId,
     } = this.props;
     const selectedEngagementRate = _.find(data, ['date', selectedDate]) || {};
     const selectedEngagementRecency = _.find(dataEngRecency, ['date', selectedDate]) || {};
@@ -89,11 +95,13 @@ export class EngagementRateByCohortPage extends Component {
     let chartPanel;
 
     if (empty) {
-      chartPanel = <Callout title='No Data Available'>Insufficient data to populate this chart</Callout>;
+      chartPanel = (
+        <Callout title="No Data Available">Insufficient data to populate this chart</Callout>
+      );
     }
 
     if (error) {
-      chartPanel = <Callout title='Unable to Load Data'>{error.message}</Callout>;
+      chartPanel = <Callout title="Unable to Load Data">{error.message}</Callout>;
     }
 
     if (loading) {
@@ -108,24 +116,24 @@ export class EngagementRateByCohortPage extends Component {
       <Grid>
         <Grid.Column sm={12} md={7}>
           <Tabs facet={facet} facetId={facetId} subaccountId={subaccountId} />
-          <Panel sectioned>
+          <Panel sectioned data-id="engagement-rate-chart">
             {chartPanel || (
-              <div className='LiftTooltip'>
+              <div className="LiftTooltip">
                 <LineChart
                   height={300}
                   onClick={handleDateSelect}
                   selected={selectedDate}
                   shouldHighlightSelected={shouldHighlightSelected}
                   lines={data}
-                  tooltipWidth='250px'
+                  tooltipWidth="250px"
                   tooltipContent={this.getTooltipContent}
-                  yKeys={_.keys(cohorts).map((key) => ({ key: `p_${key}_eng`, ...cohorts[key] }))}
+                  yKeys={_.keys(cohorts).map(key => ({ key: `p_${key}_eng`, ...cohorts[key] }))}
                   yAxisProps={this.getYAxisProps()}
                   xAxisProps={this.getXAxisProps()}
                 />
                 <Legend
                   items={_.values(cohorts)}
-                  tooltipContent={(label) => ENGAGEMENT_RECENCY_COHORTS[label]}
+                  tooltipContent={label => ENGAGEMENT_RECENCY_COHORTS[label]}
                 />
               </div>
             )}
@@ -133,28 +141,36 @@ export class EngagementRateByCohortPage extends Component {
         </Grid.Column>
         <Grid.Column sm={12} md={5} mdOffset={0}>
           <div className={styles.OffsetCol}>
-            {!chartPanel && <EngagementRateByCohortActions
-              engagementByCohort={selectedEngagementRate}
-              recencyByCohort={selectedEngagementRecency}
-              date={selectedDate}
-              facet={facet}
-              facetId={facetId}/>}
+            {!chartPanel && (
+              <EngagementRateByCohortActions
+                engagementByCohort={selectedEngagementRate}
+                recencyByCohort={selectedEngagementRecency}
+                date={selectedDate}
+                facet={facet}
+                facetId={facetId}
+              />
+            )}
           </div>
         </Grid.Column>
       </Grid>
     );
-  }
+  };
 
   render() {
     const { facet, facetId, subaccountId } = this.props;
     return (
       <Page
-        breadcrumbAction={{ content: 'Back to Engagement Recency Overview', to: '/signals/engagement', component: Link }}
-        title='Engagement Rate by Cohort'
+        breadcrumbAction={{
+          content: 'Back to Engagement Recency Overview',
+          to: '/signals/engagement',
+          component: Link,
+        }}
+        title="Engagement Rate by Cohort"
         facet={facet}
         facetId={facetId}
         subaccountId={subaccountId}
-        primaryArea={<DateFilter left />}>
+        primaryArea={<DateFilter left />}
+      >
         {this.renderContent()}
         <Divider />
         <Grid>
@@ -175,5 +191,5 @@ export class EngagementRateByCohortPage extends Component {
 export default withDetails(
   withDateSelection(EngagementRateByCohortPage),
   { getEngagementRateByCohort, getEngagementRecency },
-  selectEngagementRateByCohortDetails
+  selectEngagementRateByCohortDetails,
 );

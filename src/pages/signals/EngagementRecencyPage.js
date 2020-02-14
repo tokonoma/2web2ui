@@ -28,24 +28,23 @@ import cohorts from './constants/cohorts';
 import styles from './DetailsPages.module.scss';
 
 export class EngagementRecencyPage extends Component {
-
   getYAxisProps = () => ({
-    tickFormatter: (tick) => `${roundToPlaces(tick * 100, 0)}%`,
+    tickFormatter: tick => `${roundToPlaces(tick * 100, 0)}%`,
     domain: [0, 1],
-    ticks: [0, 0.25, 0.5, 0.75, 1.0]
+    ticks: [0, 0.25, 0.5, 0.75, 1.0],
   });
 
   getXAxisProps = () => {
     const { xTicks } = this.props;
     return {
       ticks: xTicks,
-      tickFormatter: (tick) => moment(tick).format('M/D')
+      tickFormatter: tick => moment(tick).format('M/D'),
     };
   };
 
-  getTooltipContent = ({ payload = {}}) => (
+  getTooltipContent = ({ payload = {} }) => (
     <Fragment>
-      {_.keys(cohorts).map((key) => (
+      {_.keys(cohorts).map(key => (
         <TooltipMetric
           key={key}
           color={cohorts[key].fill}
@@ -72,18 +71,20 @@ export class EngagementRecencyPage extends Component {
       hoveredDate,
       handleDateHover,
       resetDateHover,
-      shouldHighlightSelected
+      shouldHighlightSelected,
     } = this.props;
 
     const selectedCohorts = _.find(data, ['date', selectedDate]) || {};
     let chartPanel;
 
     if (empty) {
-      chartPanel = <Callout title='No Data Available'>Insufficient data to populate this chart</Callout>;
+      chartPanel = (
+        <Callout title="No Data Available">Insufficient data to populate this chart</Callout>
+      );
     }
 
     if (error) {
-      chartPanel = <Callout title='Unable to Load Data'>{error.message}</Callout>;
+      chartPanel = <Callout title="Unable to Load Data">{error.message}</Callout>;
     }
 
     if (loading) {
@@ -98,9 +99,9 @@ export class EngagementRecencyPage extends Component {
       <Grid>
         <Grid.Column sm={12} md={7}>
           <Tabs facet={facet} facetId={facetId} subaccountId={subaccountId} />
-          <Panel sectioned>
+          <Panel sectioned data-id="engagement-recency-cohorts-chart">
             {chartPanel || (
-              <div className='LiftTooltip'>
+              <div className="LiftTooltip">
                 <BarChart
                   gap={gap}
                   onMouseOver={handleDateHover}
@@ -111,14 +112,16 @@ export class EngagementRecencyPage extends Component {
                   shouldHighlightSelected={shouldHighlightSelected}
                   timeSeries={data}
                   tooltipContent={this.getTooltipContent}
-                  tooltipWidth='250px'
-                  yKeys={_.keys(cohorts).map((key) => ({ key: `c_${key}`, ...cohorts[key] })).reverse()}
+                  tooltipWidth="250px"
+                  yKeys={_.keys(cohorts)
+                    .map(key => ({ key: `c_${key}`, ...cohorts[key] }))
+                    .reverse()}
                   yAxisProps={this.getYAxisProps()}
                   xAxisProps={this.getXAxisProps()}
                 />
                 <Legend
                   items={_.values(cohorts)}
-                  tooltipContent={(label) => ENGAGEMENT_RECENCY_COHORTS[label]}
+                  tooltipContent={label => ENGAGEMENT_RECENCY_COHORTS[label]}
                 />
               </div>
             )}
@@ -126,7 +129,9 @@ export class EngagementRecencyPage extends Component {
         </Grid.Column>
         <Grid.Column sm={12} md={5} mdOffset={0}>
           <div className={styles.OffsetCol}>
-            {!chartPanel && <EngagementRecencyActions cohorts={selectedCohorts} date={selectedDate} />}
+            {!chartPanel && (
+              <EngagementRecencyActions cohorts={selectedCohorts} date={selectedDate} />
+            )}
           </div>
         </Grid.Column>
       </Grid>
@@ -138,7 +143,11 @@ export class EngagementRecencyPage extends Component {
 
     return (
       <Page
-        breadcrumbAction={{ content: 'Back to Engagement Recency Overview', to: '/signals/engagement', component: Link }}
+        breadcrumbAction={{
+          content: 'Back to Engagement Recency Overview',
+          to: '/signals/engagement',
+          component: Link,
+        }}
         title={
           <>
             Engagement Recency
@@ -148,7 +157,8 @@ export class EngagementRecencyPage extends Component {
         facet={facet}
         facetId={facetId}
         subaccountId={subaccountId}
-        primaryArea={<DateFilter left />}>
+        primaryArea={<DateFilter left />}
+      >
         {this.renderContent()}
         <Divider />
         <Grid>
@@ -169,5 +179,5 @@ export class EngagementRecencyPage extends Component {
 export default withDetails(
   withDateSelection(EngagementRecencyPage),
   { getEngagementRecency },
-  selectEngagementRecencyDetails
+  selectEngagementRecencyDetails,
 );

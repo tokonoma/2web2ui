@@ -68,6 +68,7 @@ exports[`Signals Complaints Page renders correctly 1`] = `
         facetId="test.com"
       />
       <Panel
+        data-id="complaint-rate-chart"
         sectioned={true}
       >
         <div
@@ -255,6 +256,7 @@ exports[`Signals Complaints Page renders correctly 1`] = `
 
 exports[`Signals Complaints Page renders empty correctly 1`] = `
 <Panel
+  data-id="complaint-rate-chart"
   sectioned={true}
 >
   <Callout
@@ -267,6 +269,7 @@ exports[`Signals Complaints Page renders empty correctly 1`] = `
 
 exports[`Signals Complaints Page renders loading correctly 1`] = `
 <Panel
+  data-id="complaint-rate-chart"
   sectioned={true}
 >
   <div

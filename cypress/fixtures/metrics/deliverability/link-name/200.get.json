@@ -1,0 +1,24 @@
+{
+  "results": [
+    {
+      "count_clicked": 10,
+      "count_raw_clicked_approx": 10,
+      "link_name": "Mock Link 1"
+    },
+    {
+      "count_clicked": 20,
+      "count_raw_clicked_approx": 20,
+      "link_name": "Mock Link 2"
+    },
+    {
+      "count_clicked": 30,
+      "count_raw_clicked_approx": 30,
+      "link_name": "Mock Link 3"
+    },
+    {
+      "count_clicked": 40,
+      "count_raw_clicked_approx": 40,
+      "link_name": "Mock Link 4"
+    }
+  ]
+}

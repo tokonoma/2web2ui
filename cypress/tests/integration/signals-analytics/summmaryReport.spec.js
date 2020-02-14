@@ -64,7 +64,9 @@ describe('Summary Report page', () => {
   it('Handles applying filters correctly', () => {
     cy.visit('/reports/summary');
     cy.get('[data-id="report-options"]').within(() => {
-      cy.findAllByLabelText('Reports Filter Typeahead').first().type('sparkpost');
+      cy.findAllByLabelText('Reports Filter Typeahead')
+        .first()
+        .type('sparkpost');
       cy.wait('@getMetricsFilterOptions');
       cy.get('[data-id="report-filters-dropdown"]').within(() => {
         cy.findByText('sparkpost-test').should('be.visible');
@@ -94,16 +96,16 @@ describe('Summary Report page', () => {
     });
   });
 
- it('Opens share modal correctly', () => {
+  it('Opens share modal correctly', () => {
     cy.visit('/reports/summary');
     cy.findByText('Share').click();
     cy.findByText('Share this report').should('be.visible');
     cy.url().then(url => {
       cy.findByLabelText('Pin dates for this link').should('be.checked');
       //replace the current range with the word custom since the dates are pinned
-     const editedUrl = url.replace(/range=.*?&/, 'range=custom&');
-     cy.get('[name="copy-field"]').should('have.value', editedUrl);
-   });
+      const editedUrl = url.replace(/range=.*?&/, 'range=custom&');
+      cy.get('[name="copy-field"]').should('have.value', editedUrl);
+    });
   });
 
   //Breaks in Travis CI
