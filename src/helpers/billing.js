@@ -5,7 +5,7 @@ import Payment from 'payment';
 import qs from 'query-string';
 
 export function formatDataForCors(values) {
-  const { email, planpicker, card, billingAddress, discountId, billingId } = values;
+  const { email, planpicker = {}, card, billingAddress, discountId, billingId } = values;
 
   // For CORS Endpoint + sift
   const corsData = {
@@ -188,3 +188,7 @@ export function stripImmediatePlanChange(search) {
   const { immediatePlanChange: _immediatePlanChange, ...options } = qs.parse(search);
   return qs.stringify(options);
 }
+
+export const isProductOnSubscription = (productName = 'recipient_validation') => state => {
+  return _.find(_.get(state, 'billing.subscription.products') || {}, { product: productName });
+};

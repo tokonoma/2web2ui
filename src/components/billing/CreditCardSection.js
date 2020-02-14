@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Panel } from '@sparkpost/matchbox';
 import { PaymentForm } from './PaymentForm';
 import BillingAddressForm from './BillingAddressForm';
@@ -13,16 +13,13 @@ function CreditCardSection({
   defaultToggleState = false,
 }) {
   const handleUseAnotherCC = () => {
-    setUseAnotherCC(!useAnotherCC);
-    handleCardToggle(!useAnotherCC);
+    handleCardToggle(!Boolean(defaultToggleState));
   };
   const savedPaymentAction = credit_card
     ? [{ content: 'Use Saved Payment Method', onClick: handleUseAnotherCC, color: 'orange' }]
     : null;
 
-  const [useAnotherCC, setUseAnotherCC] = useState(Boolean(defaultToggleState));
-
-  if (!credit_card || useAnotherCC)
+  if (!credit_card || Boolean(defaultToggleState))
     return (
       <Panel title="Add a Credit Card" actions={savedPaymentAction}>
         <Panel.Section>

@@ -3,7 +3,8 @@ import { Grid, Button } from '@sparkpost/matchbox';
 import { Link } from 'react-router-dom';
 import styles from './ApiDetails.module.scss';
 import CodeBlock from './CodeBlock';
-
+import { isAccountUiOptionSet } from 'src/helpers/conditions/account';
+import { connect } from 'react-redux';
 const Tab = () => <span className={styles.tab} />;
 const White = ({ children }) => <span className={styles.white}>{children}</span>;
 
@@ -95,4 +96,8 @@ export const ApiIntegrationDocs = ({ isStandAloneRVSet }) => {
   );
 };
 
-export default ApiIntegrationDocs;
+const mapStateToProps = state => {
+  return { isStandAloneRVSet: isAccountUiOptionSet('standalone_rv')(state) };
+};
+
+export default connect(mapStateToProps, null)(ApiIntegrationDocs);

@@ -2,26 +2,21 @@ import React, { useEffect } from 'react';
 import CreditCardSection from 'src/components/billing/CreditCardSection';
 import { Button } from '@sparkpost/matchbox';
 import { connect } from 'react-redux';
-import { FORMS } from 'src/constants';
-import { reduxForm } from 'redux-form';
 import { updatePaymentInitialValues } from 'src/selectors/accountBillingForms';
 import { selectIsSelfServeBilling } from 'src/selectors/accountBillingInfo';
 import { getBillingCountries } from 'src/actions/billing';
 
-const FORMNAME = FORMS.RV_ADDPAYMENTFORM;
-
 function ValidateSection({
-  handleSubmit,
   credit_card,
-  handleValidate,
   billingCountries,
   getBillingCountries,
   isManuallyBilled,
   submitButtonName = 'Validate',
+  submitDisabled,
+  formname: FORMNAME,
+  handleCardToggle,
+  defaultToggleState,
 }) {
-  const onSubmit = () => {
-    handleValidate();
-  };
   useEffect(() => {
     getBillingCountries();
   }, [getBillingCountries]);
@@ -37,22 +32,22 @@ function ValidateSection({
     );
   }
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <>
       <CreditCardSection
         creditCard={credit_card}
-        handleCardToggle={() => {}}
+        handleCardToggle={handleCardToggle}
         formname={FORMNAME}
         countries={billingCountries || []}
+        defaultToggleState={defaultToggleState}
       />
-      <Button color="orange" type="submit">
+      <Button primary submit disabled={submitDisabled}>
         {/* functionality to validate to be added in AC-1196 and AC-1197*/}
         {submitButtonName}
       </Button>
-    </form>
+    </>
   );
 }
 
-const formOptions = { form: FORMNAME, enableReinitialize: true };
 const mapStateToProps = state => {
   return {
     initialValues: updatePaymentInitialValues(state),
@@ -61,6 +56,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { getBillingCountries })(
-  reduxForm(formOptions)(ValidateSection),
-);
+export default connect(mapStateToProps, { getBillingCountries })(ValidateSection);
