@@ -76,7 +76,7 @@ describe('The templates edit draft page', () => {
     cy.findByText('Stubbed Template 1').should('not.be.visible');
   });
 
-  it.only('does not render an error if the server returns content with null values', () => {
+  it('does not render an error if the server returns content with null values', () => {
     cy.stubRequest({
       url: '/api/v1/templates/stubbed-template-1*',
       fixture: 'templates/stubbed-template-1/200.get.content-null-values.json',
