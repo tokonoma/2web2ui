@@ -65,7 +65,7 @@ describe('The templates edit draft page', () => {
   it('redirects to the list page if the template fails to load', () => {
     cy.stubRequest({
       statusCode: 400,
-      url: '/api/v1/templates/stubbed-template-1*',
+      url: '/api/v1/templates/stubbed-template-1',
       fixture: 'templates/stubbed-template-1/400.get.json',
     });
 
@@ -74,6 +74,20 @@ describe('The templates edit draft page', () => {
     cy.findByText('Unable to load template').should('be.visible');
     cy.get('main').within(() => cy.findByText('Templates').should('be.visible')); // To avoid checking for "Templates" in the navigation
     cy.findByText('Stubbed Template 1').should('not.be.visible');
+  });
+
+  it.only('does not render an error if the server returns content with null values', () => {
+    cy.stubRequest({
+      url: '/api/v1/templates/stubbed-template-1*',
+      fixture: 'templates/stubbed-template-1/200.get.content-null-values.json',
+      requestAlias: 'hello',
+    });
+
+    cy.visit(PAGE_URL);
+
+    cy.wait(300); // The duration of the debounce function that triggers AMP validation
+
+    cy.findByText('Stubbed Template 1 (DRAFT)').should('be.visible');
   });
 
   describe('template settings', () => {
