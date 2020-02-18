@@ -30,7 +30,17 @@ const createTemplateSelector = getter =>
       return;
     }
 
-    return { ...template, options: { ...defaultOptions, ...template.options } };
+    const templateContent = _.isEmpty(template.content)
+      ? undefined
+      : // Remove falsy values from the content object
+        // See: https://stackoverflow.com/questions/30812765/how-to-remove-undefined-and-null-values-from-an-object-using-lodash#answer-31209300
+        { content: _.omitBy(template.content, _.isNil) };
+
+    return {
+      ...template,
+      ...templateContent,
+      options: { ...defaultOptions, ...template.options },
+    };
   });
 
 export const selectDraftTemplateById = createTemplateSelector(getDraftTemplateById);
