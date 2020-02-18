@@ -1,4 +1,4 @@
-describe('Alerts Page - Create', () => {
+describe('Blacklist - Add to Watchlist Page', () => {
   beforeEach(() => {
     cy.stubAuth();
     cy.login({ isStubbed: true });
