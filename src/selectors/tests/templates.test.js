@@ -5,12 +5,13 @@ describe('Templates selectors', () => {
   let store;
   beforeEach(() => {
     store = {
-      account: { // yuck
+      account: {
+        // yuck
         options: {
           click_tracking: true,
           rest_tracking_default: true,
-          transactional_default: false
-        }
+          transactional_default: false,
+        },
       },
       templates: {
         list: [
@@ -18,27 +19,27 @@ describe('Templates selectors', () => {
             name: 'unpublished',
             has_published: false,
             shared_with_subaccounts: false,
-            subaccount_id: 101
+            subaccount_id: 101,
           },
           {
             name: 'publishedSubaccount',
             has_published: true,
             shared_with_subaccounts: false,
-            subaccount_id: 101
+            subaccount_id: 101,
           },
           {
             name: 'publishedMaster',
             has_published: true,
             shared_with_subaccounts: false,
             subaccount_id: 0,
-            published: true
+            published: true,
           },
           {
             name: 'publishedShared',
             has_published: true,
             shared_with_subaccounts: true,
-            subaccount_id: 0
-          }
+            subaccount_id: 0,
+          },
         ],
         testData: { test: 'data' },
         byId: {
@@ -46,13 +47,13 @@ describe('Templates selectors', () => {
             draft: {
               name: 'Ape',
               id: 'ape',
-              published: false
+              published: false,
             },
             published: {
               name: 'Ape',
               id: 'ape',
-              published: true
-            }
+              published: true,
+            },
           },
           lion: {
             draft: {
@@ -62,8 +63,8 @@ describe('Templates selectors', () => {
               options: {
                 click_tracking: false,
                 open_tracking: false,
-                transactional: false
-              }
+                transactional: false,
+              },
             },
             published: {
               id: 'lion',
@@ -72,56 +73,78 @@ describe('Templates selectors', () => {
               options: {
                 click_tracking: false,
                 open_tracking: false,
-                transactional: false
-              }
-            }
-          }
+                transactional: false,
+              },
+            },
+          },
+          bear: {
+            draft: {
+              name: 'Bear',
+              id: 'bear',
+              published: true,
+              content: {
+                text: 'Hello, world',
+                amp_html: null,
+              },
+            },
+            published: {
+              name: 'Bear',
+              id: 'bear',
+              published: true,
+              content: {
+                text: 'Hello, world',
+                amp_html: null,
+              },
+            },
+          },
         },
         contentPreview: {
           draft: {
             ape: {
               html: '<h1>Southeastern Asia</h1>',
-              subject: 'New Location: Come visit me'
-            }
+              subject: 'New Location: Come visit me',
+            },
           },
           published: {
             ape: {
               html: '<h1>Baltimore Zoo</h1>.',
-              subject: 'Come visit me'
-            }
-          }
-        }
+              subject: 'Come visit me',
+            },
+          },
+        },
       },
       sendingDomains: {
         list: [
           {
             domain: 'shared.com',
             shared_with_subaccounts: true,
-            status: { ownership_verified: true, compliance_status: 'valid' }
+            status: { ownership_verified: true, compliance_status: 'valid' },
           },
           {
             domain: 'masterOnly.com',
-            status: { ownership_verified: true, compliance_status: 'valid' }
+            status: { ownership_verified: true, compliance_status: 'valid' },
           },
           {
             domain: 'assignedToSub.com',
             subaccount_id: 101,
-            status: { ownership_verified: true, compliance_status: 'valid' }
+            status: { ownership_verified: true, compliance_status: 'valid' },
           },
           {
             domain: 'notvalid.com',
-            status: { ownership_verified: false, compliance_status: 'valid' }
-          }
-        ]
+            status: { ownership_verified: false, compliance_status: 'valid' },
+          },
+        ],
       },
       currentUser: {
-        has_subaccounts: true
+        has_subaccounts: true,
       },
-      subaccounts: { list: [
-        { name: 'sub 1', id: 101 },
-        { name: 'sub 2', id: 501 }
-      ]},
-      form: { testform: { values: {}}}
+      subaccounts: {
+        list: [
+          { name: 'sub 1', id: 101 },
+          { name: 'sub 2', id: 501 },
+        ],
+      },
+      form: { testform: { values: {} } },
     };
   });
 
@@ -130,7 +153,7 @@ describe('Templates selectors', () => {
       expect(selector.getDraftTemplateById(store, 'ape')).toEqual({
         name: 'Ape',
         id: 'ape',
-        published: false
+        published: false,
       });
     });
 
@@ -144,7 +167,7 @@ describe('Templates selectors', () => {
       expect(selector.getPublishedTemplateById(store, 'ape')).toEqual({
         name: 'Ape',
         id: 'ape',
-        published: true
+        published: true,
       });
     });
 
@@ -161,9 +184,9 @@ describe('Templates selectors', () => {
         options: {
           click_tracking: false,
           open_tracking: false,
-          transactional: false
+          transactional: false,
         },
-        published: false
+        published: false,
       });
     });
 
@@ -174,14 +197,30 @@ describe('Templates selectors', () => {
         options: {
           click_tracking: true,
           open_tracking: true,
-          transactional: false
+          transactional: false,
         },
-        published: false
+        published: false,
       });
     });
 
     it('returns undefined when template is not present', () => {
       expect(selector.selectDraftTemplateById(store, 'unknown')).toBeUndefined();
+    });
+
+    it('does not return keys with falsy values in the content object', () => {
+      expect(selector.selectDraftTemplateById(store, 'bear')).toEqual({
+        id: 'bear',
+        name: 'Bear',
+        options: {
+          click_tracking: true,
+          open_tracking: true,
+          transactional: false,
+        },
+        content: {
+          text: 'Hello, world',
+        },
+        published: true,
+      });
     });
   });
 
@@ -193,9 +232,9 @@ describe('Templates selectors', () => {
         options: {
           click_tracking: false,
           open_tracking: false,
-          transactional: false
+          transactional: false,
         },
-        published: true
+        published: true,
       });
     });
 
@@ -206,32 +245,56 @@ describe('Templates selectors', () => {
         options: {
           click_tracking: true,
           open_tracking: true,
-          transactional: false
+          transactional: false,
         },
-        published: true
+        published: true,
       });
     });
 
     it('returns undefined when template is not present', () => {
       expect(selector.selectPublishedTemplateById(store, 'unknown')).toBeUndefined();
     });
+
+    it('does not return keys with falsy values in the content object', () => {
+      expect(selector.selectPublishedTemplateById(store, 'bear')).toEqual({
+        id: 'bear',
+        name: 'Bear',
+        options: {
+          click_tracking: true,
+          open_tracking: true,
+          transactional: false,
+        },
+        content: {
+          text: 'Hello, world',
+        },
+        published: true,
+      });
+    });
   });
 
-  cases('.selectDraftTemplatePreview', ({ defaultValue, id }) => {
-    expect(selector.selectDraftTemplatePreview(store, id, defaultValue)).toMatchSnapshot();
-  }, {
-    'returns preview of draft template': { id: 'ape' },
-    'returns undefined when unknown': { id: 'unknown' },
-    'returns default value when unknown': { id: 'unknown', defaultValue: {}}
-  });
+  cases(
+    '.selectDraftTemplatePreview',
+    ({ defaultValue, id }) => {
+      expect(selector.selectDraftTemplatePreview(store, id, defaultValue)).toMatchSnapshot();
+    },
+    {
+      'returns preview of draft template': { id: 'ape' },
+      'returns undefined when unknown': { id: 'unknown' },
+      'returns default value when unknown': { id: 'unknown', defaultValue: {} },
+    },
+  );
 
-  cases('.selectPublishedTemplatePreview', ({ defaultValue, id }) => {
-    expect(selector.selectPublishedTemplatePreview(store, id, defaultValue)).toMatchSnapshot();
-  }, {
-    'returns preview of draft template': { id: 'ape' },
-    'returns undefined when unknown': { id: 'unknown' },
-    'returns default value when unknown': { id: 'unknown', defaultValue: {}}
-  });
+  cases(
+    '.selectPublishedTemplatePreview',
+    ({ defaultValue, id }) => {
+      expect(selector.selectPublishedTemplatePreview(store, id, defaultValue)).toMatchSnapshot();
+    },
+    {
+      'returns preview of draft template': { id: 'ape' },
+      'returns undefined when unknown': { id: 'unknown' },
+      'returns default value when unknown': { id: 'unknown', defaultValue: {} },
+    },
+  );
 
   describe('selectAndCloneDraftById', () => {
     it('returns clone of draft with updated name and id', () => {
@@ -241,9 +304,9 @@ describe('Templates selectors', () => {
         options: {
           click_tracking: true,
           open_tracking: true,
-          transactional: false
+          transactional: false,
         },
-        published: false
+        published: false,
       });
     });
 
@@ -276,7 +339,7 @@ describe('Templates selectors', () => {
     });
 
     it('should return default data', () => {
-      expect(selector.selectTemplateTestData({ templates: {}})).toMatchSnapshot();
+      expect(selector.selectTemplateTestData({ templates: {} })).toMatchSnapshot();
     });
   });
 
@@ -313,10 +376,10 @@ describe('Templates selectors', () => {
     it('should return an array of errors', () => {
       const errors = [
         { line: 1, message: 'Oh no!' },
-        { line: 2, message: 'Oh no!' }
+        { line: 2, message: 'Oh no!' },
       ];
 
-      store.templates.contentPreview.error = { response: { data: { errors }}};
+      store.templates.contentPreview.error = { response: { data: { errors } } };
 
       expect(selector.selectPreviewLineErrors(store)).toEqual(errors);
     });
@@ -328,7 +391,10 @@ describe('Templates selectors', () => {
     });
 
     it('returns template(s) with draft version only', () => {
-      store.templates.list = store.templates.list.map((template) => ({ ...template, has_published: false }));
+      store.templates.list = store.templates.list.map(template => ({
+        ...template,
+        has_published: false,
+      }));
       store.templates.list[1].has_draft = true;
       expect(selector.selectTemplatesForListTable(store)).toMatchSnapshot();
     });
@@ -337,21 +403,30 @@ describe('Templates selectors', () => {
       store.templates.list[2].has_draft = true;
       expect(selector.selectTemplatesForListTable(store)).toMatchSnapshot();
     });
-
   });
 
   describe('selectDomainsBySubaccountWithDefault', () => {
     it('returns verified domains when exist', () => {
-      expect(selector.selectDomainsBySubaccountWithDefault(store, {}).map((dom) => dom.domain)).toEqual(['shared.com', 'masterOnly.com']);
+      expect(
+        selector.selectDomainsBySubaccountWithDefault(store, {}).map(dom => dom.domain),
+      ).toEqual(['shared.com', 'masterOnly.com']);
     });
 
     it('returns subaccount verified domains when exist', () => {
       const expectedDomains = ['shared.com', 'assignedToSub.com'];
-      expect(selector.selectDomainsBySubaccountWithDefault(store, { subaccountId: 101 }).map((dom) => dom.domain)).toEqual(expectedDomains);
+      expect(
+        selector
+          .selectDomainsBySubaccountWithDefault(store, { subaccountId: 101 })
+          .map(dom => dom.domain),
+      ).toEqual(expectedDomains);
     });
 
     it('returns sandbox domain when no verified sending domain exists', () => {
-      expect(selector.selectDomainsBySubaccountWithDefault({ ...store, sendingDomains: { list: []}}, {}).map((dom) => dom.domain)).toEqual(['sparkpostbox.com']);
+      expect(
+        selector
+          .selectDomainsBySubaccountWithDefault({ ...store, sendingDomains: { list: [] } }, {})
+          .map(dom => dom.domain),
+      ).toEqual(['sparkpostbox.com']);
     });
   });
 });
