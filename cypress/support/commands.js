@@ -161,3 +161,23 @@ Cypress.Commands.add('assertLink', ({ content, href }) => {
     .closest('a')
     .should('have.attr', 'href', href);
 });
+
+/**
+ * Used to check within the global modal view
+ *
+ * @param {function} assertMethod - The function that has assertions to run within the modal container
+ *
+ */
+Cypress.Commands.add('withinModal', assertMethod => {
+  cy.get('[aria-modal="true"]').within(assertMethod);
+});
+
+/**
+ * Used to check within the global alert view
+ *
+ * @param {function} assertMethod - The function that has assertions to run within the alert container
+ *
+ */
+Cypress.Commands.add('withinAlert', assertMethod => {
+  cy.get('#alert-portal').within(assertMethod);
+});
