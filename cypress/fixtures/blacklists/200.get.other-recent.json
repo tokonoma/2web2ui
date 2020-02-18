@@ -12,7 +12,7 @@
       "id": "9",
       "resource": "127.0.0.2",
       "blacklist_name": "abuseat.org (CBL)",
-      "occurred_at": "2019-11-20T17:14:57.892Z",
+      "occurred_at": "2019-11-21T17:14:57.892Z",
       "resolved_at": null,
       "status": "flagged"
     },

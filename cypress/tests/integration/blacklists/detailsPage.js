@@ -26,28 +26,31 @@ describe('Blacklist Incident Details Page', () => {
     const timestamp = 1580392800000; //01/30/2020 @ 2:00pm (UTC)
     cy.clock(timestamp);
     cy.visit('/blacklist/incidents/7');
+    cy.wait('@singleIncident');
+    cy.wait(['@otherIncidents', '@otherIncidents', '@historicalIncidents']);
+
     cy.findByText('Blacklist Incident | sparkpost.io | abuseat.org (CBL)').should('be.visible');
 
     cy.get('[data-id=incident-details]').within(() => {
       cy.findByText('Dec 25 2019').should('be.visible');
       cy.findByText('Active').should('be.visible');
       cy.findByText('36').should('be.visible');
-      cy.findByText('Listed Nov 20 2019, 12:14pm | Resolved Nov 20 2019, 12:58pm').should(
-        'be.visible',
-      );
+      cy.findByText(
+        /Listed Nov 2[012] 2019, \d*:14[ap]m | Resolved Nov 2[012] 2019, \d*:58[ap]m/,
+      ).should('be.visible');
     });
 
     cy.get('[data-id=related-incidents-blacklist]').within(() => {
       cy.findByText('127.0.0.2').should('be.visible');
-      cy.findByText('Listed Nov 20 2019, 12:14pm').should('be.visible');
+      cy.findByText(/Listed Nov 2[012] 2019, \d*:14[ap]m/).should('be.visible');
       cy.findByText('Active').should('be.visible');
       cy.findByText('123.123.123.1').should('be.visible');
-      cy.findByText('Dec 26 2019, 4:30am').should('be.visible');
+      cy.findByText(/Listed Dec 2[567] 2019, \d*:30[ap]m/).should('be.visible');
     });
 
     cy.get('[data-id=related-incidents-resource]').within(() => {
       cy.findByText('new.spam.dnsbl.sorbs.net').should('be.visible');
-      cy.findByText('Listed Dec 25 2019, 2:30am').should('be.visible');
+      cy.findByText(/Listed Dec 2[567] 2019, \d*:30[ap]m/).should('be.visible');
       cy.findByText('Active').should('be.visible');
     });
   });
@@ -101,11 +104,13 @@ describe('Blacklist Incident Details Page', () => {
       cy.findByText('No Other Recent abuseat.org (CBL) incidents').should('be.visible');
     });
 
-    it('Clicking another incident redirects to that incident\'s detail page', () => {
+    it("Clicking another incident redirects to that incident's detail page", () => {
       cy.visit('/blacklist/incidents/7');
 
       cy.get('[data-id=related-incidents-blacklist]').within(() => {
-        cy.get('a').contains('127.0.0.2').click();
+        cy.get('a')
+          .contains('127.0.0.2')
+          .click();
       });
       cy.url().should('include', '/blacklist/incidents/9');
     });
@@ -122,11 +127,13 @@ describe('Blacklist Incident Details Page', () => {
       cy.findByText('No Other Recent sparkpost.io incidents').should('be.visible');
     });
 
-    it('Clicking another incident redirects to that incident\'s detail page', () => {
+    it("Clicking another incident redirects to that incident's detail page", () => {
       cy.visit('/blacklist/incidents/7');
 
       cy.get('[data-id=related-incidents-resource]').within(() => {
-        cy.get('a').contains('new.spam.dnsbl.sorbs.net').click();
+        cy.get('a')
+          .contains('new.spam.dnsbl.sorbs.net')
+          .click();
       });
       cy.url().should('include', '/blacklist/incidents/8');
     });
