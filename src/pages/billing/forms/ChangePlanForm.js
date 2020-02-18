@@ -187,7 +187,6 @@ export const ChangePlanForm = ({
                       selectedPlan={selectedBundle}
                       canUpdateBillingInfo={canUpdateBillingInfo}
                       submitting={submitting}
-                      isNewChangePlanForm={true} //TODO: remove this when removing the OldChangePlanForm
                       defaultToggleState={!useSavedCC}
                       handleCardToggle={handleCardToggle}
                     />

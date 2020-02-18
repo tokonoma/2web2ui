@@ -6,7 +6,7 @@ import { getSubscription, getBundles, getPlans, getBillingCountries } from 'src/
 import { selectAvailableBundles, selectAccountBilling } from 'src/selectors/accountBillingInfo';
 import { connect } from 'react-redux';
 
-const ChangePlanPageContainer = ({ newChangePlan, ...props }) => (
+const ChangePlanPageContainer = props => (
   <ChangePlanProvider {...props}>
     <ChangePlanPage />
   </ChangePlanProvider>
