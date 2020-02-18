@@ -81,7 +81,7 @@ describe('Templates selectors', () => {
             draft: {
               name: 'Bear',
               id: 'bear',
-              published: false,
+              published: true,
               content: {
                 text: 'Hello, world',
                 amp_html: null,
@@ -208,7 +208,7 @@ describe('Templates selectors', () => {
     });
 
     it('does not return keys with falsy values in the content object', () => {
-      expect(selector.selectDraftTemplate(store, 'bear')).toEqual({
+      expect(selector.selectDraftTemplateById(store, 'bear')).toEqual({
         id: 'bear',
         name: 'Bear',
         options: {
