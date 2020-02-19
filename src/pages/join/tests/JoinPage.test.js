@@ -18,29 +18,37 @@ jest.mock('js-cookie');
 jest.mock('src/config', () => ({
   zuora: {}, //axiosInstance throws without this
   brightback: {}, //axiosInstance throws without this
-  authentication: { //authCookie throws without this
-    app: { cookie: {}},
-    site: { cookie: {}}
+  authentication: {
+    //authCookie throws without this
+    app: { cookie: {} },
+    site: { cookie: {} },
   },
   heroku: {
-    cookieName: 'my-cookie'
+    cookieName: 'my-cookie',
   },
   website: {
-    domain: ''
+    domain: '',
   },
   support: {
-    algolia: {}
+    algolia: {},
   },
-  cookieConsent: { cookie: {}},
+  cookieConsent: { cookie: {} },
   links: {
-    submitTicket: 'https://support.sparkpost.com/customer/portal/emails/new'
+    submitTicket: 'https://support.sparkpost.com/customer/portal/emails/new',
   },
-  salesforceDataParams: ['src', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'],
+  salesforceDataParams: [
+    'src',
+    'utm_source',
+    'utm_medium',
+    'utm_campaign',
+    'utm_content',
+    'utm_term',
+  ],
   attribution: {
     cookieName: 'attribution',
     cookieDuration: 60 * 24 * 30,
-    cookieDomain: '.sparkpost.com'
-  }
+    cookieDomain: '.sparkpost.com',
+  },
 }));
 
 jest.mock('src/helpers/analytics');
@@ -50,19 +58,19 @@ describe('JoinPage', () => {
     props = {
       params: {},
       account: {
-        createError: null
+        createError: null,
       },
       logout: jest.fn(),
       register: jest.fn(() => Promise.resolve({ username })),
       authenticate: jest.fn(() => Promise.resolve()),
       history: {
-        push: jest.fn()
+        push: jest.fn(),
       },
       isAWSsignUp: false,
       location: {
-        pathname: '/join'
+        pathname: '/join',
       },
-      title: 'Sign Up'
+      title: 'Sign Up',
     };
     formValues = {
       first_name: 'foo',
@@ -70,7 +78,7 @@ describe('JoinPage', () => {
       email: 'foo@bar.com',
       tou_accepted: true,
       email_opt_in: false,
-      password: 'foobar'
+      password: 'foobar',
     };
 
     wrapper = shallow(<JoinPage {...props} />);
@@ -88,7 +96,7 @@ describe('JoinPage', () => {
 
     it('renders errors', () => {
       instance.handleSignupFailure = jest.fn().mockReturnValue('Some error occurred');
-      wrapper.setProps({ account: { createError: {}}}); //just to make it truthy
+      wrapper.setProps({ account: { createError: {} } }); //just to make it truthy
       expect(wrapper).toMatchSnapshot();
     });
 
@@ -100,8 +108,18 @@ describe('JoinPage', () => {
 
   describe('registerSubmit', () => {
     beforeEach(() => {
-      const allData = { sfdcid: 'abcd', src: 'Test Source', 'utm_source': 'test file', extra1: 'bar1', extra2: 'bar2' };
-      instance.extractQueryParams = jest.fn().mockReturnValue({ sfdcid: allData.sfdcid, attributionData: _.pick(allData, config.salesforceDataParams), creationParams: allData });
+      const allData = {
+        sfdcid: 'abcd',
+        src: 'Test Source',
+        utm_source: 'test file',
+        extra1: 'bar1',
+        extra2: 'bar2',
+      };
+      instance.extractQueryParams = jest.fn().mockReturnValue({
+        sfdcid: allData.sfdcid,
+        attributionData: _.pick(allData, config.salesforceDataParams),
+        creationParams: allData,
+      });
       instance.trackSignup = jest.fn();
     });
 
@@ -114,11 +132,13 @@ describe('JoinPage', () => {
     it('negates email_opt_in properly', async () => {
       formValues.email_opt_in = true;
       await instance.registerSubmit(formValues);
-      expect(props.register).toHaveBeenCalledWith(expect.objectContaining({
-        salesforce_data: expect.objectContaining({
-          email_opt_out: false
-        })
-      }));
+      expect(props.register).toHaveBeenCalledWith(
+        expect.objectContaining({
+          salesforce_data: expect.objectContaining({
+            email_opt_out: false,
+          }),
+        }),
+      );
     });
 
     it('authenticates after successful register', async () => {
@@ -136,20 +156,28 @@ describe('JoinPage', () => {
       await instance.registerSubmit(formValues);
       expect(props.register).toHaveBeenCalledTimes(1);
       expect(analytics.trackFormSuccess).toHaveBeenCalledWith(constants.ANALYTICS_CREATE_ACCOUNT, {
-        form_type: constants.ANALYTICS_CREATE_ACCOUNT
+        form_type: constants.ANALYTICS_CREATE_ACCOUNT,
       });
     });
 
     it('redirects to correct url upon auth', async () => {
       await instance.registerSubmit(formValues);
-      expect(props.history.push).toHaveBeenCalledWith(AFTER_JOIN_REDIRECT_ROUTE, { plan: undefined });
+      expect(props.history.push).toHaveBeenCalledWith(AFTER_JOIN_REDIRECT_ROUTE, {
+        plan: undefined,
+      });
     });
 
     it('Preserves plan for later onboarding phases', async () => {
       const plan = 'a-man';
-      wrapper.setProps({ params: { plan }});
+      wrapper.setProps({ params: { plan } });
       await instance.registerSubmit(formValues);
       expect(props.history.push).toHaveBeenCalledWith(AFTER_JOIN_REDIRECT_ROUTE, { plan });
+    });
+
+    it('navigtes to the rv page if product set to rv', async () => {
+      wrapper.setProps({ params: { product: 'rv' } });
+      await instance.registerSubmit(formValues);
+      expect(props.history.push).toHaveBeenCalledWith('/onboarding/recipient-validation');
     });
 
     it('does not swallow exceptions', async () => {
@@ -159,7 +187,6 @@ describe('JoinPage', () => {
       await expect(instance.registerSubmit(formValues)).rejects.toThrowError(err);
     });
   });
-
 
   describe('extractQueryParams', () => {
     beforeEach(() => {
@@ -176,9 +203,8 @@ describe('JoinPage', () => {
     });
 
     it('merges data from query params onto stored cookie data', () => {
-      wrapper.setProps({ params: { sfdcid: 'overridden', utm_medium: 'new property' }});
+      wrapper.setProps({ params: { sfdcid: 'overridden', utm_medium: 'new property' } });
       expect(instance.extractQueryParams()).toMatchSnapshot();
     });
-
   });
 });

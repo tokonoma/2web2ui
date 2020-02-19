@@ -717,6 +717,13 @@ const routes = [
     supportDocSearch: 'upgrade account',
   },
   {
+    path: '/onboarding/recipient-validation',
+    component: onboarding.RVBundlePage,
+    condition: all(configFlag('featureFlags.has_signup')),
+    title: 'Recipient Validation | Onboarding',
+    layout: LargeForm,
+  },
+  {
     path: '/recipient-validation',
     redirect: '/recipient-validation/list',
   },
