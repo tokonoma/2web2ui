@@ -241,6 +241,8 @@ describe('The alerts list page', () => {
     it('opens a delete confirmation modal when clicking the delete button', () => {
       cy.visit(PAGE_URL);
 
+      cy.findAllByText('Alert 2').should('have.length', 2);
+
       clickDeleteButton();
 
       cy.findByText('Are you sure you want to delete this alert?').should('be.visible');
@@ -258,6 +260,7 @@ describe('The alerts list page', () => {
 
       cy.get('#modal-portal').within(() => cy.findByText('Delete').click());
       cy.findByText('Alert deleted').should('be.visible');
+      cy.queryByText('Alert 2').should('not.be.visible');
     });
 
     it('renders an error when deleting an alert fails', () => {
