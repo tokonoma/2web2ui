@@ -50,32 +50,30 @@ export class ListPage extends Component {
     }
 
     return (
-      <>
+      <div data-id="recent-incidents">
         <h3>Recent Incidents</h3>
 
-        <div data-id="recent-incidents">
-          <Grid>
-            {recentlyTriggeredAlerts.map(alert => (
-              <Grid.Column xs={12} md={6} lg={3} key={alert.id}>
-                <Panel accent>
-                  <Panel.Section className={styles.LastTriggeredCard}>
-                    <Link className={styles.AlertName} to={`/alerts/details/${alert.id}`}>
-                      <strong data-id="link-alert-name">{alert.name}</strong>
-                    </Link>
-                    <Tag>{METRICS[alert.metric]}</Tag>
-                  </Panel.Section>
-                  <Panel.Section className={styles.Footer}>
-                    <DisplayDate
-                      timestamp={alert.last_triggered_timestamp}
-                      formattedDate={alert.last_triggered_formatted}
-                    />
-                  </Panel.Section>
-                </Panel>
-              </Grid.Column>
-            ))}
-          </Grid>
-        </div>
-      </>
+        <Grid>
+          {recentlyTriggeredAlerts.map(alert => (
+            <Grid.Column xs={12} md={6} lg={3} key={alert.id}>
+              <Panel accent>
+                <Panel.Section className={styles.LastTriggeredCard}>
+                  <Link className={styles.AlertName} to={`/alerts/details/${alert.id}`}>
+                    <strong data-id="link-alert-name">{alert.name}</strong>
+                  </Link>
+                  <Tag>{METRICS[alert.metric]}</Tag>
+                </Panel.Section>
+                <Panel.Section className={styles.Footer}>
+                  <DisplayDate
+                    timestamp={alert.last_triggered_timestamp}
+                    formattedDate={alert.last_triggered_formatted}
+                  />
+                </Panel.Section>
+              </Panel>
+            </Grid.Column>
+          ))}
+        </Grid>
+      </div>
     );
   }
 
