@@ -72,16 +72,6 @@ describe('The alerts details pages', () => {
       cy.findByLabelText('Alert Name').should('have.value', 'This is an alert Copy');
     });
 
-    it('opens a delete confirmation modal when clicking "Delete"', () => {
-      cy.findByText('Delete').click();
-
-      cy.findByText('Are you sure you want to delete this alert?').should('be.visible');
-
-      cy.findByText('Cancel').click();
-
-      cy.queryByText('Are you sure you want to delete this alert?').should('not.be.visible');
-    });
-
     it('renders a success message and re-routes to the list page when an alert is successfully deleted', () => {
       cy.stubRequest({
         method: 'DELETE',
@@ -89,6 +79,11 @@ describe('The alerts details pages', () => {
         fixture: 'alerts/2/200.delete.json',
       });
 
+      // Testing that the cancel button works while we're here...
+      cy.findByText('Delete').click();
+      cy.findByText('Are you sure you want to delete this alert?').should('be.visible');
+      cy.findByText('Cancel').click();
+      cy.queryByText('Are you sure you want to delete this alert?').should('not.be.visible');
       cy.findByText('Delete').click();
       cy.get('#modal-portal').within(() => cy.findByText('Delete').click());
 
