@@ -62,19 +62,6 @@ describe('The alerts details pages', () => {
     cy.findByText('Back to Alerts').should('have.attr', 'href', '/alerts');
   });
 
-  it('renders as muted by default when the server returns a muted alert', () => {
-    cy.stubRequest({
-      url: API_URL,
-      fixture: 'alerts/2/200.get.muted.json',
-    });
-
-    cy.visit(PAGE_URL);
-
-    cy.get('[data-id="alert-toggle"]')
-      .find('input')
-      .should('be.checked');
-  });
-
   describe('the duplicate and delete buttons', () => {
     beforeEach(() => cy.visit(PAGE_URL));
 
