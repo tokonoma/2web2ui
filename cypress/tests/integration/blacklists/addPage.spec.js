@@ -13,7 +13,11 @@ describe('Blacklist - Add to Watchlist Page', () => {
     cy.visit('/blacklist/watchlist/add');
   });
 
-  it('Adding a single resource to monitor', () => {
+  it('has a relevant page title', () => {
+    cy.title().should('include', 'Add to Watch List | Blacklist');
+  });
+
+  it('shows a success message and redirects to watchlist page when adding a single resource', () => {
     cy.findByLabelText('IP or Sending Domain').type('sparkpost.io');
     cy.findByText('Save').click();
     cy.wait('@addNewResource').then(({ requestBody }) => {
@@ -26,7 +30,7 @@ describe('Blacklist - Add to Watchlist Page', () => {
     cy.findByText('Added sparkpost.io to Watchlist').should('be.visible');
   });
 
-  it('Adding multiple resources to monitor', () => {
+  it('shows a success message without redirecting when adding multiple resources', () => {
     cy.findByLabelText('IP or Sending Domain').type('sparkpost.io');
     cy.findByText('Save and Add Another').click();
     cy.wait('@addNewResource').then(({ requestBody }) => {
