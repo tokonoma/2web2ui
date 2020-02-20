@@ -1,9 +1,9 @@
 module.exports = {
   'Paul Walker': [
-    // 'cypress/tests/integration/accounts/**/*',
+    'cypress/tests/integration/accounts/**/*',
     'cypress/tests/integration/alerts/**/*',
-    // 'cypress/tests/integration/events/**/*',
-    // 'cypress/tests/integration/navigation/**/*',
+    'cypress/tests/integration/events/**/*',
+    'cypress/tests/integration/navigation/**/*',
   ],
   'Vin Diesel': [
     'cypress/tests/integration/recipients/**/*',
