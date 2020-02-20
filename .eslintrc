@@ -5,6 +5,7 @@
     "jest": true
   },
   "rules": {
+    "no-console": "error",
     // doesn't work with jest-in-case
     "jest/no-standalone-expect": "off",
 
