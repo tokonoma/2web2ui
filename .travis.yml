@@ -24,16 +24,12 @@ jobs:
       name: 'Unit Testing'
       script: npm run test-ci
       # Running Cypress tests in parallel by running them in batches to reduce pipeline duration.
-      # This could probably be improved by writing a Node script to handle a config,
-      # though no need to prematurely optimize at this point.
     - stage: test-and-build
       name: 'Integration Testing - Accounts, Events, Navigation, and Alerts'
-      env: SPEC_BATCH='Paul Walker'
-      script: npm run test-integration-ci
+      script: npm run test-integration-ci -- --specBatch='Paul Walker'
     - stage: test-and-build
       name: 'Integration Testing - Templates, Recipients, and Signals Analytics'
-      env: SPEC_BATCH='Vin Diesel'
-      script: npm run test-integration-ci
+      script: npm run test-integration-ci -- --specBatch='Vin Diesel'
 
 after_script: greenkeeper-lockfile-upload
 
