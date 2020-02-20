@@ -14,4 +14,6 @@ function runCypress({ specs }) {
 
 const targetSpecs = batches[argv.specBatch];
 
-runCypress({ specs: targetSpecs });
+runCypress({ specs: targetSpecs })
+  .then(results => console.log(results))
+  .catch(err => console.error(err));
