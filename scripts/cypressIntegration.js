@@ -3,6 +3,13 @@ const { argv } = require('yargs');
 const batches = require('../config/cypressBatches');
 
 function runCypress({ specs }) {
+  if (!specs) {
+    console.error(
+      'No matching spec files found. Please pass in a valid value with the `--specBatch` flag',
+    );
+    process.exit(1);
+  }
+
   console.log('Running specs:', specs);
 
   return cypress
