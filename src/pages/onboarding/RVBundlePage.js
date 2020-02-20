@@ -17,7 +17,7 @@ const RVPriceModal = ({ open, onClose }) => (
         <div className={styles.modalTitle}>
           <div className={styles.title}>Pay-As-You-Go Pricing</div>
           <div>
-            <Button onClick={onClose} flat>
+            <Button name="close" onClick={onClose} flat>
               <Close />
             </Button>
           </div>
