@@ -1,12 +1,14 @@
 {
   "baseUrl": "http://127.0.0.1:3100",
   "blacklistHosts": [
+    "api.sparkpost.test",
     "*google-analytics.com",
     "*.storage.googleapis.com",
     "*pendo.io",
     "*siftscience.com",
     "*googletagmanager.com",
-    "*sentry.io"
+    "*sentry.io",
+    "*zuora.com"
   ],
   "viewportWidth": 1280,
   "viewportHeight": 800
