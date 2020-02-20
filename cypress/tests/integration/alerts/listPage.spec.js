@@ -241,7 +241,7 @@ describe('The alerts list page', () => {
     it('opens a delete confirmation modal when clicking the delete button', () => {
       cy.visit(PAGE_URL);
 
-      cy.findAllByText('Alert 2').should('have.length', 2);
+      cy.findAllByText('Alert 2').should('have.length', 2); // Both the recent incident panel, and the table
 
       clickDeleteButton();
 
