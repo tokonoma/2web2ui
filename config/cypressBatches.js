@@ -9,5 +9,6 @@ module.exports = {
     'cypress/tests/integration/recipients/**/*',
     'cypress/tests/integration/signals-analytics/**/*',
     'cypress/tests/integration/templates/**/*',
+    'cypress/tests/integration/blacklists/**/*',
   ],
 };
