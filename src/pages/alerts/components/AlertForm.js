@@ -158,7 +158,7 @@ export class AlertForm extends Component {
                     {!formSpec.hideSubaccountFilter && hasSubaccounts && (
                       <SubaccountField disabled={submitting} />
                     )}
-                    <FilterFields disabled={submitting} initialValues={initialValues} />
+                    <FilterFields disabled={submitting} />
                   </div>
                 )}
                 <div className={styles.Notifications}>
