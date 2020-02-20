@@ -1,15 +1,48 @@
 import React from 'react';
 import { CenteredLogo } from 'src/components';
-import { Panel, UnstyledLink, Button } from '@sparkpost/matchbox';
-import { CheckCircle, Send } from '@sparkpost/matchbox-icons';
+import { Panel, UnstyledLink, Modal, Button } from '@sparkpost/matchbox';
+import { CheckCircle, Send, Close } from '@sparkpost/matchbox-icons';
 import { Link } from 'react-router-dom';
 import { Card } from 'src/components';
 import styles from './RVBundlePage.module.scss';
+import RecipientValidationPriceTable from 'src/pages/recipientValidation/components/RecipientValidationPriceTable';
 
 const PANEL_TITLE =
   "Take a look at what's included in our Recipient Validation Service and then Start Validating.";
 
+const RVPriceModal = ({ open, onClose }) => (
+  <Modal open={open} onClose={onClose}>
+    <Panel className={styles.modalContainer} accent>
+      <Panel.Section>
+        <div className={styles.modalTitle}>
+          <div className={styles.title}>Pay-As-You-Go Pricing</div>
+          <div>
+            <Button onClick={onClose} flat>
+              <Close />
+            </Button>
+          </div>
+        </div>
+      </Panel.Section>
+      <Panel.Section>
+        <div className={styles.text}>
+          We have a monthly pay-as-you-go plan using tiered pricing. The more you validate, the less
+          you pay per message.
+        </div>
+        <RecipientValidationPriceTable
+          cellProps={{
+            style: {
+              padding: '8px 0',
+            },
+          }}
+        />
+      </Panel.Section>
+    </Panel>
+  </Modal>
+);
+
 const RVBundlePage = () => {
+  const [modalOpen, setModalOpen] = React.useState(false);
+
   return (
     <div>
       <CenteredLogo />
@@ -18,7 +51,6 @@ const RVBundlePage = () => {
         Here at SparkPost we do it all! As part of our Recipient Validation service we also provide
         a SparkPost sending account. Make every email count and start verifying.
       </div>
-
       <Panel>
         <Panel.Section>{PANEL_TITLE}</Panel.Section>
         <Panel.Section>
@@ -33,7 +65,9 @@ const RVBundlePage = () => {
                 less you pay per message.
               </div>
               <div className={styles.linkcontainer}>
-                <UnstyledLink className={styles.link}>See Pricing</UnstyledLink>
+                <UnstyledLink onClick={() => setModalOpen(true)} className={styles.link}>
+                  See Pricing
+                </UnstyledLink>
               </div>
             </Card>
 
@@ -61,6 +95,7 @@ const RVBundlePage = () => {
           </div>
         </Panel.Section>
       </Panel>
+      <RVPriceModal open={modalOpen} onClose={() => setModalOpen(false)} />
     </div>
   );
 };
