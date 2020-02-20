@@ -8,6 +8,7 @@ import sortMatch from 'src/helpers/sortMatch';
 export const ComboBoxTypeahead = ({
   disabled,
   error,
+  isExclusiveItem,
   itemToString,
   label,
   maxNumberOfResults,
@@ -16,7 +17,6 @@ export const ComboBoxTypeahead = ({
   placeholder,
   readOnly,
   results,
-  selectedMap,
   value,
 }) => {
   const [inputValue, setInputValue] = useState('');
@@ -36,19 +36,15 @@ export const ComboBoxTypeahead = ({
 
   // Report change to selected items (important for redux-form Fields)
   useEffect(() => {
-    onChange(selectedItems.map(selectedMap));
-  }, [onChange, selectedMap, selectedItems]);
+    onChange(selectedItems);
+  }, [onChange, selectedItems]);
 
   // Update list of menu items when available list of items (results), input value or select items changes
   useEffect(() => {
     updateMenuItems(inputValue);
   }, [updateMenuItems, inputValue, results, selectedItems]);
 
-  // note, not all items are objects
-  const isExclusiveItem = item => typeof item === 'object' && Boolean(item.isExclusiveItem);
-
-  const isSelectedItem = item =>
-    selectedItems.some(selectedItem => selectedMap(selectedItem) === selectedMap(item));
+  const isSelectedItem = item => selectedItems.some(selectedItem => selectedItem === item);
 
   // Must use state reducer to avoid menu automatically closing
   // see, https://github.com/downshift-js/downshift#statechangetypes
@@ -114,9 +110,9 @@ export const ComboBoxTypeahead = ({
       placeholder: hasSelectedItems ? '' : placeholder,
       readOnly: readOnly || isSelectedItemExclusive,
       removeItem: itemToRemove => {
-        const mappedItemToRemove = selectedMap(itemToRemove);
+        const mappedItemToRemove = itemToRemove;
         const nextSelectedItems = selectedItems.filter(
-          selectedItem => selectedMap(selectedItem) !== mappedItemToRemove,
+          selectedItem => selectedItem !== mappedItemToRemove,
         );
         setSelectedItems(nextSelectedItems);
       },
@@ -142,6 +138,7 @@ export const ComboBoxTypeahead = ({
 ComboBoxTypeahead.propTypes = {
   defaultSelected: PropTypes.array,
   disabled: PropTypes.bool,
+  isExclusiveItem: PropTypes.func,
   itemToString: PropTypes.func,
   label: PropTypes.string,
   maxNumberOfResults: PropTypes.number,
@@ -150,14 +147,13 @@ ComboBoxTypeahead.propTypes = {
   placeholder: PropTypes.string,
   readOnly: PropTypes.bool,
   results: PropTypes.array,
-  selectedMap: PropTypes.func,
 };
 
 ComboBoxTypeahead.defaultProps = {
   defaultSelected: [],
+  isExclusiveItem: () => false,
   itemToString: item => item,
   maxNumberOfResults: 100,
   placeholder: '',
   results: [],
-  selectedMap: item => item,
 };

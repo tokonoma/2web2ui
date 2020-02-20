@@ -74,10 +74,9 @@ describe('ComboBoxTypeahead', () => {
 
   it('renders filtered menu items without exclusive items', () => {
     const wrapper = subject({
-      value: [{ content: 'B' }],
-      itemToString: item => item.content,
-      results: [{ content: 'A', isExclusiveItem: true }, { content: 'B' }, { content: 'C' }],
-      selectedMap: item => item.content,
+      value: ['B'],
+      results: ['A', 'B', 'C'],
+      isExclusiveItem: item => item === 'A',
     });
 
     expect(wrapper.find('ComboBoxMenu').prop('items')).toHaveLength(1);
@@ -97,8 +96,8 @@ describe('ComboBoxTypeahead', () => {
 
   it('closes menu when exclusive item is selected', () => {
     const wrapper = subject({
-      itemToString: item => item.content,
-      results: [{ content: 'My Example', isExclusiveItem: true }],
+      results: ['My Example'],
+      isExclusiveItem: item => item === 'My Example',
     });
     selectMenuItem(wrapper, 0);
     expect(wrapper.find('ComboBoxMenu')).toHaveProp('isOpen', false);
@@ -137,8 +136,8 @@ describe('ComboBoxTypeahead', () => {
 
   it('enabled read only mode for text field when an exclusive item is selected', () => {
     const wrapper = subject({
-      itemToString: item => item.content,
-      results: [{ content: 'My Example', isExclusiveItem: true }],
+      results: ['My Example'],
+      isExclusiveItem: item => item === 'My Example',
     });
     selectMenuItem(wrapper, 0);
     expect(wrapper.find('ComboBoxTextField')).toHaveProp('readOnly', true);
