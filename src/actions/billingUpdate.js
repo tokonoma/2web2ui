@@ -19,15 +19,25 @@ export default function billingUpdate(values) {
   return dispatch => {
     // action creator wrappers for chaining as callbacks
     const corsUpdateBilling = ({ meta }) => cors({ context: 'update-billing', meta });
-    const maybeUpdateSubscription = ({ meta }) =>
-      values.planpicker || values.bundle
-        ? updateSubscription({
-            bundle: values.bundle,
-            code: values.planpicker.code,
-            promoCode: values.promoCode,
-            meta,
-          })
-        : meta.onSuccess({ meta }); // bypass
+    const maybeUpdateSubscription = ({ meta }) => {
+      if (values.planpicker) {
+        return updateSubscription({
+          code: values.planpicker.code,
+          promoCode: values.promoCode,
+          meta,
+        });
+      }
+
+      if (values.bundle) {
+        return updateSubscription({
+          bundle: values.bundle,
+          promoCode: values.promoCode,
+          meta,
+        });
+      }
+
+      return meta.onSuccess({ meta }); // bypass
+    };
     const updateZuoraCC = ({ meta, results: { accountKey, token, signature } }) =>
       updateCreditCard({
         data: formatUpdateData({ ...values, accountKey }),
