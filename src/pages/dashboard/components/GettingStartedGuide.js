@@ -2,7 +2,6 @@ import React, { useState, createContext, useContext } from 'react';
 import { Panel } from '@sparkpost/matchbox';
 import { ArrowDownward } from '@sparkpost/matchbox-icons';
 import { GUIDE_IDS } from '../constants';
-import FeaturesStep from './FeaturesStep';
 import SendingStep from './SendingStep';
 import ShowMeSparkpostStep from './ShowMeSparkpostStep';
 import LetsCodeStep from './LetsCodeStep';
@@ -57,7 +56,10 @@ export const GettingStartedGuide = ({
           },
         ];
   //stepName could be Features,Sending,Show Me Sparkpost, Let's Code
-  const [stepName, setStepName] = useState(active_step || 'Features');
+  const [stepName, setStepName] = useState(
+    //FIXME: Check in case the active step was set to features and step was already removed
+    active_step === 'Features' || !active_step ? 'Sending' : active_step,
+  );
   const setAndStoreStepName = active_step => {
     setOnboardingAccountOption({ active_step: active_step });
     setStepName(active_step);
@@ -95,8 +97,6 @@ export const GettingStartedGuide = ({
   };
 
   const step = {
-    Features: <FeaturesStep />,
-
     Sending: <SendingStep />,
 
     'Show Me SparkPost': <ShowMeSparkpostStep />,

@@ -7,10 +7,9 @@ export const GUIDE_IDS = {
 };
 
 export const BREADCRUMB_ITEMS = {
-  Features: ['Features'],
-  Sending: ['Features', 'Sending'],
-  'Show Me SparkPost': ['Features', 'Sending', 'Show Me SparkPost'],
-  "Let's Code": ['Features', 'Sending', "Let's Code"],
+  Sending: ['Sending'],
+  'Show Me SparkPost': ['Sending', 'Show Me SparkPost'],
+  "Let's Code": ['Sending', "Let's Code"],
 };
 export const SENDING_STEP_LIST = {
   'Show Me SparkPost': {
