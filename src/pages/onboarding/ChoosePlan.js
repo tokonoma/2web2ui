@@ -28,7 +28,7 @@ export class OnboardingPlanPage extends Component {
     // if we can't get plans or countries form is useless
     // they can pick plan later from billing
     if (!prevProps.hasError && hasError) {
-      history.push(NEXT_STEP, { fromOnboarding: true });
+      history.push(NEXT_STEP);
     }
   }
 
@@ -42,7 +42,7 @@ export class OnboardingPlanPage extends Component {
 
     // no billing updates needed since they are still on free plan
     if (newValues.planpicker.isFree) {
-      history.push(NEXT_STEP, { fromOnboarding: true });
+      history.push(NEXT_STEP);
       return;
     }
 
@@ -63,7 +63,7 @@ export class OnboardingPlanPage extends Component {
         newValues.discountId = discount_id;
         return billingCreate(newValues);
       })
-      .then(() => history.push(NEXT_STEP, { fromOnboarding: true }))
+      .then(() => history.push(NEXT_STEP))
       .then(() => showAlert({ type: 'success', message: 'Added your plan' }));
   };
 
