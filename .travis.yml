@@ -28,11 +28,11 @@ jobs:
       # though no need to prematurely optimize at this point.
     - stage: test-and-build
       name: 'Integration Testing - Accounts, Events, Navigation, and Alerts'
-      env: SPECS='cypress/tests/integration/accounts/**/*,cypress/tests/integration/events/**/*,cypress/tests/integration/navigation/**/*,cypress/tests/integration/alerts/**/*'
+      env: SPEC_BATCH='Paul Walker'
       script: npm run test-integration-ci
     - stage: test-and-build
-      name: 'Integration Testing - Recipients, Templates, and Signals Analytics'
-      env: SPECS='cypress/tests/integration/recipients/**/*,cypress/tests/integration/templates/**/*,cypress/tests/integration/signals-analytics/**/*'
+      name: 'Integration Testing - Templates, Recipients, and Signals Analytics'
+      env: SPEC_BATCH='Vin Diesel'
       script: npm run test-integration-ci
 
 after_script: greenkeeper-lockfile-upload

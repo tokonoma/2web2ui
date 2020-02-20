@@ -117,7 +117,7 @@ export class AlertForm extends Component {
           <Grid>
             <Grid.Column sm={12} md={11} lg={9}>
               <Panel.Section>
-                <label>Alert Name</label>
+                <label htmlFor="name">Alert Name</label>
                 <Field
                   name="name"
                   component={TextFieldWrapper}

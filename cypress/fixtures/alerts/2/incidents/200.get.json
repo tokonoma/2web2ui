@@ -1,0 +1,25 @@
+{
+  "results": [
+    {
+      "triggered_value": "25",
+      "first_fired": "2020-01-22T08:00:12.246Z",
+      "last_fired": "2020-01-22T08:00:12.246Z",
+      "status": "Resolved",
+      "filters": { "subaccount_id": 101 }
+    },
+    {
+      "triggered_value": "50",
+      "first_fired": "2020-01-21T07:48:21.871Z",
+      "last_fired": "2020-01-21T07:48:21.871Z",
+      "status": "Resolved",
+      "filters": { "subaccount_id": 102 }
+    },
+    {
+      "triggered_value": "75",
+      "first_fired": "2020-02-13T07:49:42.283Z",
+      "last_fired": "2020-02-13T07:49:42.283Z",
+      "status": "Open",
+      "filters": { "subaccount_id": 103 }
+    }
+  ]
+}

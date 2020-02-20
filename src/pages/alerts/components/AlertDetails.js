@@ -191,7 +191,7 @@ export const AlertDetails = ({ alert, id, subaccountIdToString, hasSubaccounts }
     });
 
   return (
-    <Panel>
+    <Panel data-id="alert-details-panel">
       <Panel.Section>
         <h3 className={styles.Title}>Alert Details</h3>
         <Button component={Link} to={`/alerts/edit/${id}`} className={styles.Button} primary>
