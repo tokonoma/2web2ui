@@ -2,7 +2,8 @@ const SINGLE_RESULT_URL = '/api/v1/recipient-validation/single/**';
 
 describe('The recipient validation single result page', () => {
   beforeEach(() => {
-    cy.stubAuth();
+    cy.stubAuth('free-0819', 'admin', options);
+
     cy.login({ isStubbed: true });
   });
 

@@ -82,7 +82,7 @@ export class RecipientValidationPage extends Component {
     }
   };
 
-  validate = values => {
+  redirectToNextStep = values => {
     switch (this.state.selectedTab) {
       case 1:
         this.props.history.push(`/recipient-validation/single/${values.address}`);
@@ -101,7 +101,7 @@ export class RecipientValidationPage extends Component {
       isRVonSubscription,
     } = this.props;
     if (this.state.useSavedCC && isRVonSubscription) {
-      this.validate(values);
+      this.redirectToNextStep(values);
     } else {
       const cardValues = values.card ? { ...values, card: prepareCardInfo(values.card) } : values;
 
@@ -116,7 +116,7 @@ export class RecipientValidationPage extends Component {
         updateCreditCard: !this.state.useSavedCC,
         isRVonSubscription: isRVonSubscription,
       });
-      return action.then(() => this.validate(values));
+      return action.then(() => this.redirectToNextStep(values));
     }
   };
 
@@ -144,8 +144,7 @@ export class RecipientValidationPage extends Component {
 
   renderRecipientValidation = () => {
     const { selectedTab, showPriceModal } = this.state;
-    const { isStandAloneRVSet, billing, billingLoading, valid, pristine, submitting } = this.props;
-    const submitDisabled = pristine || !valid || submitting;
+    const { isStandAloneRVSet, billing, billingLoading, valid, submitting } = this.props;
 
     return (
       <Page
@@ -210,9 +209,7 @@ export class RecipientValidationPage extends Component {
           <ValidateSection
             credit_card={billing.credit_card}
             submitButtonName={selectedTab === 2 ? 'Create API Key' : 'Validate'}
-            submitDisabled={
-              selectedTab === 2 ? submitDisabled && !this.state.useSavedCC : submitDisabled
-            }
+            submitDisabled={!valid || submitting}
             formname={FORMNAME}
             handleCardToggle={this.handleToggleCC}
             defaultToggleState={!this.state.useSavedCC}
