@@ -11,14 +11,10 @@ function runCypress({ specs }) {
       },
       spec: specs ? specs.join(',') : undefined,
     })
-    .then(results => {
-      console.log('then!');
-      console.log(results);
+    .then(() => {
       process.exit(0);
     })
-    .catch(err => {
-      console.log('catch!');
-      console.error(err);
+    .catch(() => {
       process.exit(1);
     });
 }
