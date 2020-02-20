@@ -3,6 +3,8 @@ const { argv } = require('yargs');
 const batches = require('../config/cypressBatches');
 
 function runCypress({ specs }) {
+  console.log('Running specs:', specs);
+
   return cypress
     .run({
       config: {
