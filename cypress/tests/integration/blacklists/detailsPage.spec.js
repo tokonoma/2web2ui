@@ -31,7 +31,7 @@ describe('Blacklist Incident Details Page', () => {
   });
 
 
-  it('Loads blacklist Incident', () => {
+  it('loads and renders the blacklist incident correctly', () => {
     const timestamp = 1580392800000; //01/30/2020 @ 2:00pm (UTC)
     cy.clock(timestamp);
     cy.visit(PAGE_URL);
@@ -65,7 +65,7 @@ describe('Blacklist Incident Details Page', () => {
     });
   });
 
-  it('Shows error component when there is an error', () => {
+  it('shows error component when there is an error', () => {
     cy.stubRequest({
       statusCode: 400,
       url: `${BLACKLIST_BASE_API_URL}/incidents/**`,
@@ -81,7 +81,7 @@ describe('Blacklist Incident Details Page', () => {
   });
 
   describe('Incident Details', () => {
-    it('Displays alternative text when there are no historical incidents', () => {
+    it('displays alternative text when there are no historical incidents', () => {
       cy.stubRequest({
         url: `${BLACKLIST_BASE_API_URL}/sparkpost.io/incidents**`,
         fixture: '/200.get.no-results.json',
@@ -94,7 +94,7 @@ describe('Blacklist Incident Details Page', () => {
       );
     });
 
-    it('Clicking "View Engagement" deep links to filtered summary report page', () => {
+    it('deep links to filtered summary report page upon clicking "View Engagement" ', () => {
       cy.visit(PAGE_URL);
       cy.findByText('View Engagement').click();
 
@@ -107,7 +107,7 @@ describe('Blacklist Incident Details Page', () => {
   });
 
   describe('Related Incidents (blacklist)', () => {
-    it('Displays alternative text when there are no other recent incidents', () => {
+    it('displays alternative text when there are no other recent incidents', () => {
       cy.stubRequest({
         url: `${BLACKLIST_BASE_API_URL}/incidents?blacklists=**`,
         fixture: '/200.get.no-results.json',
@@ -118,7 +118,7 @@ describe('Blacklist Incident Details Page', () => {
       cy.findByText('No Other Recent abuseat.org (CBL) incidents').should('be.visible');
     });
 
-    it("Clicking another incident redirects to that incident's detail page", () => {
+    it("redirects to that incident's detail page when clicking another incident", () => {
       cy.visit(PAGE_URL);
 
       cy.get('[data-id=related-incidents-blacklist]').within(() => {
@@ -131,7 +131,7 @@ describe('Blacklist Incident Details Page', () => {
   });
 
   describe('Related Incidents (resource)', () => {
-    it('Displays alternative text when there are no other recent incidents', () => {
+    it('displays alternative text when there are no other recent incidents', () => {
       cy.stubRequest({
         url: `${BLACKLIST_BASE_API_URL}/incidents?resources=**`,
         fixture: '/200.get.no-results.json',
@@ -142,7 +142,7 @@ describe('Blacklist Incident Details Page', () => {
       cy.findByText('No Other Recent sparkpost.io incidents').should('be.visible');
     });
 
-    it("Clicking another incident redirects to that incident's detail page", () => {
+    it("redirects to that incident's detail page when clicking another incident", () => {
       cy.visit(PAGE_URL);
 
       cy.get('[data-id=related-incidents-resource]').within(() => {
