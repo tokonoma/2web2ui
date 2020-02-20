@@ -28,8 +28,7 @@ jobs:
     # though no need to prematurely optimize at this point.
     - stage: test-and-build
       name: 'Integration Testing - Accounts, Events, Navigation, and Alerts'
-      env: SPEC_BATCH='Paul Walker'
-      script: npm run test-integration-ci
+      script: npm run test-integration-ci -- --specBatch='Paul Walker'
     # - stage: test-and-build
     #   name: 'Integration Testing - Templates, Recipients, and Signals Analytics'
     #   env: SPEC_BATCH='Vin Diesel'
