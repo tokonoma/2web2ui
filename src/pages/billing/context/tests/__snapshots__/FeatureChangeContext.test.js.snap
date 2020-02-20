@@ -4,19 +4,14 @@ exports[`FeatureChangeContext should render acknowledgement for a change in auth
 Object {
   "features": Array [
     Object {
-      "action": <Button
-        onClick={[Function]}
-        size="default"
-      >
-        Got it
-      </Button>,
+      "action": undefined,
       "description": "Your new plan no longer allows for single sign-on and account-wide requirement of two-factor authentication.",
       "key": "auth",
       "label": "Authentication and Security",
-      "value": undefined,
+      "value": true,
     },
   ],
-  "isReady": false,
+  "isReady": true,
   "loading": false,
 }
 `;
@@ -25,12 +20,7 @@ exports[`FeatureChangeContext should render acknowledgement for a change in dedi
 Object {
   "features": Array [
     Object {
-      "action": <Button
-        onClick={[Function]}
-        size="default"
-      >
-        Got it
-      </Button>,
+      "action": undefined,
       "description": <div>
         <span>
           Your new plan doesn't include dedicated IPs. 
@@ -39,10 +29,10 @@ Object {
       </div>,
       "key": "dedicated_ip",
       "label": "Dedicated IPs",
-      "value": undefined,
+      "value": true,
     },
   ],
-  "isReady": false,
+  "isReady": true,
   "loading": false,
 }
 `;
