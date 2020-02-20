@@ -13,6 +13,12 @@
       "volume": 1
     },
     {
+      "billing_id": "123123123",
+      "plan": "rv-0519",
+      "product": "recipient_validation",
+      "price": 0
+    },
+    {
       "plan": "subaccounts-premier",
       "product": "subaccounts",
       "price": 0

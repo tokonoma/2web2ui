@@ -35,11 +35,22 @@ describe('The recipient validation API integration page', () => {
 
   it('renders integration instructions and add credit card form with disabled submit button', () => {
     cy.findByText('Integrate Now').should('be.visible');
+    cy.findByText('/api/v1/recipient-validation/single/{address}').should('be.visible');
+    cy.findByText('API Docs').should(
+      'have.attr',
+      'href',
+      'https://developers.sparkpost.com/api/recipient-validation/',
+    );
     cy.findByText('Add a Credit Card').should('be.visible');
     cy.findByText('Create API Key').should('be.disabled');
   });
 
   it('adds credit card', () => {
+    cy.stubRequest({
+      url: '/api/v1/billing/plans',
+      fixture: 'billing/plans/200.get.json',
+    });
+
     cy.stubRequest({
       method: 'POST',
       url: '/api/v1/billing/cors-data?context=create-account',
@@ -73,6 +84,6 @@ describe('The recipient validation API integration page', () => {
     cy.findByLabelText('Zip Code').type('12345');
     cy.findByText('Create API Key').click();
 
-    cy.title().should('include', 'API Keys');
+    cy.title().should('include', 'New API Key');
   });
 });

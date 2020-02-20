@@ -82,42 +82,35 @@ export class RecipientValidationPage extends Component {
     }
   };
 
-  redirectToNextStep = values => {
+  redirectToNextStep = formValues => {
     switch (this.state.selectedTab) {
       case 1:
-        this.props.history.push(`/recipient-validation/single/${values.address}`);
+        this.props.history.push(`/recipient-validation/single/${formValues.address}`);
         break;
       case 2:
-        this.props.history.push(`/account/api-keys`);
+        this.props.history.push(`/account/api-keys/create`);
         break;
       default:
         break;
     }
   };
 
-  onSubmit = values => {
-    const {
-      billing: { plans, subscription },
-      isRVonSubscription,
-    } = this.props;
-    if (this.state.useSavedCC && isRVonSubscription) {
-      this.redirectToNextStep(values);
-    } else {
-      const cardValues = values.card ? { ...values, card: prepareCardInfo(values.card) } : values;
+  onSubmit = formValues => {
+    const { addRVtoSubscription, isRVonSubscription } = this.props;
 
-      const newValues = {
-        ...cardValues,
-        billingId: subscription
-          ? (_.find(plans, { code: subscription.code }) || {}).billingId
-          : (_.find(plans, { product: 'recipient_validation' }) || {}).billingId,
-      };
-      let action = this.props.addRVtoSubscription({
-        values: newValues,
-        updateCreditCard: !this.state.useSavedCC,
-        isRVonSubscription: isRVonSubscription,
-      });
-      return action.then(() => this.redirectToNextStep(values));
+    if (this.state.useSavedCC && isRVonSubscription) {
+      return this.redirectToNextStep(formValues);
     }
+
+    const values = formValues.card
+      ? { ...formValues, card: prepareCardInfo(formValues.card) }
+      : formValues;
+
+    addRVtoSubscription({
+      values,
+      updateCreditCard: !this.state.useSavedCC,
+      isRVonSubscription: isRVonSubscription,
+    }).then(() => this.redirectToNextStep(values));
   };
 
   handleModal = (showPriceModal = false) => this.setState({ showPriceModal });

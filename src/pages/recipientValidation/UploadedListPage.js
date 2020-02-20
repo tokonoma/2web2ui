@@ -49,33 +49,24 @@ export class UploadedListPage extends Component {
     triggerJob(listId);
   };
 
-  onSubmit = values => {
-    if (this.props.isStandAloneRVSet) {
-      const {
-        billing: { plans, subscription },
-        isRVonSubscription,
-      } = this.props;
-      if (this.state.useSavedCC && isRVonSubscription) {
-        this.handleSubmit();
-      } else {
-        const cardValues = values.card ? { ...values, card: prepareCardInfo(values.card) } : values;
+  onSubmit = formValues => {
+    const { addRVtoSubscription, isRVonSubscription, isStandAloneRVSet } = this.props;
+    const { useSavedCC } = this.state;
 
-        const newValues = {
-          ...cardValues,
-          billingId: subscription
-            ? (_.find(plans, { code: subscription.code }) || {}).billingId
-            : (_.find(plans, { product: 'recipient_validation' }) || {}).billingId,
-        };
-        let action = this.props.addRVtoSubscription({
-          values: newValues,
-          updateCreditCard: !this.state.useSavedCC,
-          isRVonSubscription: isRVonSubscription,
-        });
-        return action.then(() => this.handleSubmit());
-      }
-    } else {
+    if (!isStandAloneRVSet || (useSavedCC && isRVonSubscription)) {
       this.handleSubmit();
+      return;
     }
+
+    const values = formValues.card
+      ? { ...formValues, card: prepareCardInfo(formValues.card) }
+      : formValues;
+
+    return addRVtoSubscription({
+      values,
+      updateCreditCard: !useSavedCC,
+      isRVonSubscription: isRVonSubscription,
+    }).then(() => this.handleSubmit());
   };
 
   renderUploadedListPage = () => {
