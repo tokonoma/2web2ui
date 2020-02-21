@@ -1,0 +1,12 @@
+{
+	"results": [
+		{
+			"id": "44",
+			"resource": "127.0.0.2",
+			"blacklist_name": "blacklist.lashback.com",
+			"occurred_at": "2019-11-20T17:14:58.933Z",
+			"resolved_at": "2019-11-20T17:58:19.270Z",
+			"status": "resolved"
+		}
+	]
+}
