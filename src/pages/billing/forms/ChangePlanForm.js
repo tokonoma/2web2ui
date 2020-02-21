@@ -1,37 +1,32 @@
 /* eslint max-lines: ["error", 250] */
 import React, { useEffect, useState, useCallback, useMemo } from 'react';
-import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { reduxForm } from 'redux-form';
 import qs from 'query-string';
 import _ from 'lodash';
-import PlanSelectSection, { SelectedPlan } from '../components/PlanSelect';
-import CurrentPlanSection from '../components/CurrentPlanSection';
-import useRouter from 'src/hooks/useRouter';
-import SubmitSection from '../components/SubmitSection';
-import CardSection from '../components/CardSection';
-
-import FeatureChangeSection from '../components/FeatureChangeSection';
-import { FeatureChangeContextProvider } from '../context/FeatureChangeContext';
 import { verifyPromoCode, clearPromoCode, updateSubscription } from 'src/actions/billing';
 import billingCreate from 'src/actions/billingCreate';
 import billingUpdate from 'src/actions/billingUpdate';
 import { showAlert } from 'src/actions/globalAlert';
-//Selectors
+import ApiErrorBanner from 'src/components/apiErrorBanner';
+import Loading from 'src/components/loading';
+import { prepareCardInfo } from 'src/helpers/billing';
+import useRouter from 'src/hooks/useRouter';
 import {
   currentPlanSelector,
   canUpdateBillingInfoSelector,
   getPromoCodeObject,
 } from 'src/selectors/accountBillingInfo';
 import { changePlanInitialValues } from 'src/selectors/accountBillingForms';
-
-import { ApiErrorBanner } from 'src/components';
-import { Loading } from 'src/components/loading/Loading';
-import styles from './ChangePlanForm.module.scss';
+import CardSection from '../components/CardSection';
+import CurrentPlanSection from '../components/CurrentPlanSection';
+import FeatureChangeSection from '../components/FeatureChangeSection';
+import PlanSelectSection, { SelectedPlan } from '../components/PlanSelect';
+import SubmitSection from '../components/SubmitSection';
 import { useChangePlanContext } from '../context/ChangePlanContext';
-import { prepareCardInfo } from 'src/helpers/billing';
-
-const FORMNAME = 'changePlan';
+import { FeatureChangeContextProvider } from '../context/FeatureChangeContext';
+import styles from './ChangePlanForm.module.scss';
 
 export const ChangePlanForm = ({
   location,
@@ -52,14 +47,13 @@ export const ChangePlanForm = ({
   showAlert,
 }) => {
   const { billingCountries, account, bundles, loading, error } = useChangePlanContext();
-
   const { requestParams: { code, promo } = {}, updateRoute } = useRouter();
-
   const [selectedBundleCode, selectBundle] = useState(code);
   const bundlesByCode = useMemo(() => _.keyBy(bundles, 'bundle'), [bundles]);
   const selectedBundle = bundlesByCode[selectedBundleCode];
   const isDowngradeToFree = _.get(selectedBundle, 'messaging.price') <= 0;
-
+  const [useSavedCC, setUseSavedCC] = useState(null);
+  const handleCardToggle = () => setUseSavedCC(!useSavedCC);
   const onSelect = bundle => {
     if (!bundle) {
       clearPromoCode();
@@ -68,8 +62,6 @@ export const ChangePlanForm = ({
     selectBundle(bundle);
   };
 
-  const [useSavedCC, setUseSavedCC] = useState(null);
-  const handleCardToggle = () => setUseSavedCC(!useSavedCC);
   useEffect(() => {
     if (canUpdateBillingInfo && useSavedCC === null) {
       setUseSavedCC(true);
@@ -93,6 +85,7 @@ export const ChangePlanForm = ({
       applyPromoCode(promo);
     }
   }, [applyPromoCode, promo, selectedBundle, verifyPromoCode]);
+
   const onSubmit = values => {
     const newCode = selectedBundleCode;
     const { selectedPromo } = promoCodeObj;
@@ -177,7 +170,6 @@ export const ChangePlanForm = ({
                     selectedPlan={selectedBundle}
                     canUpdateBillingInfo={canUpdateBillingInfo}
                     submitting={submitting}
-                    isNewChangePlanForm={true} //TODO: remove this when removing the OldChangePlanForm
                     defaultToggleState={!useSavedCC}
                     handleCardToggle={handleCardToggle}
                   />
@@ -202,17 +194,13 @@ export const ChangePlanForm = ({
 
 const mapStateToProps = (state, props) => {
   const { code: planCode, promo: promoCode } = qs.parse(props.location.search);
+
   return {
     initialValues: changePlanInitialValues(state, { planCode, promoCode }),
     canUpdateBillingInfo: canUpdateBillingInfoSelector(state),
     currentPlan: currentPlanSelector(state),
     promoCodeObj: getPromoCodeObject(state),
   };
-};
-
-const formOptions = {
-  form: FORMNAME,
-  enableReinitialize: true,
 };
 
 export default withRouter(
@@ -223,5 +211,10 @@ export default withRouter(
     billingUpdate,
     billingCreate,
     showAlert,
-  })(reduxForm(formOptions)(ChangePlanForm)),
+  })(
+    reduxForm({
+      form: 'changePlan',
+      enableReinitialize: true,
+    })(ChangePlanForm),
+  ),
 );

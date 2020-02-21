@@ -1,0 +1,30 @@
+{
+  "results": {
+    "bill_cycle_day": 20,
+    "pending_downgrades": [],
+    "products": [
+      {
+        "plan": "free500-0419",
+        "product": "messaging"
+      },
+      {
+        "plan": "subaccounts-free",
+        "product": "subaccounts",
+        "limit": 5000
+      },
+      {
+        "plan": "sso",
+        "product": "sso"
+      },
+      {
+        "plan": "tfa-required",
+        "product": "tfa_required"
+      },
+      {
+        "plan": "online-support-free",
+        "product": "online_support"
+      }
+    ],
+    "type": "active"
+  }
+}

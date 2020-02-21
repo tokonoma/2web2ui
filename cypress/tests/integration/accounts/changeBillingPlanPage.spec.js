@@ -46,6 +46,7 @@ describe('Billing Page', () => {
     cy.visit('/account/billing/plan');
     cy.get('[data-id=select-plan-free500-0419]').click();
   };
+
   //downgrading, starter  => free plan
   it('on changing plan renders section with changes to features', () => {
     selectAFreePlan();
@@ -89,5 +90,23 @@ describe('Billing Page', () => {
       .last()
       .click();
     cy.findAllByText('Change Plan').should('be.visible');
+  });
+
+  it.only('upgrade free account to starter with query parameter', () => {
+    cy.stubRequest({
+      url: '/api/v1/account',
+      fixture: 'account/200.get.test-plan.json',
+    });
+    cy.stubRequest({
+      url: '/api/v1/billing/subscription',
+      fixture: 'billing/subscription/200.get.test-plan.json',
+    });
+    cy.visit('/account/billing/plan?code=50K-starter-0519');
+
+    // auto select new plan
+    cy.findByText('Your New Plan').should('be.visible');
+    cy.findByText('50,000').should('be.visible');
+
+    // todo, should finish upgrade
   });
 });
