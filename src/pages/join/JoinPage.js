@@ -16,11 +16,16 @@ import { authenticate } from 'src/actions/auth';
 import { loadScript } from 'src/helpers/loadScript';
 import * as analytics from 'src/helpers/analytics';
 import { register } from 'src/actions/account';
-import { AFTER_JOIN_REDIRECT_ROUTE, LINKS, AWS_COOKIE_NAME, ANALYTICS_CREATE_ACCOUNT } from 'src/constants';
+import {
+  AFTER_JOIN_REDIRECT_ROUTE,
+  LINKS,
+  AWS_COOKIE_NAME,
+  ANALYTICS_CREATE_ACCOUNT,
+} from 'src/constants';
 
 export class JoinPage extends Component {
   state = {
-    formData: {}
+    formData: {},
   };
 
   extractQueryParams = () => {
@@ -32,13 +37,17 @@ export class JoinPage extends Component {
     return {
       sfdcid: allData.sfdcid,
       attributionData: _.pick(allData, config.salesforceDataParams),
-      creationParams: allData
+      creationParams: allData,
     };
-  }
+  };
 
-  registerSubmit = (values) => {
+  registerSubmit = values => {
     this.setState({ formData: values });
-    const { params: { plan }, register, authenticate } = this.props;
+    const {
+      params: { plan, product },
+      register,
+      authenticate,
+    } = this.props;
     const { sfdcid, attributionData, creationParams } = this.extractQueryParams();
 
     const accountFields = _.omit(values, 'email_opt_in');
@@ -46,16 +55,23 @@ export class JoinPage extends Component {
       ...accountFields,
       sfdcid,
       salesforce_data: { ...attributionData, email_opt_out: !values.email_opt_in },
-      creation_params: creationParams
+      creation_params: creationParams,
     };
 
     return register(signupData)
-      .then((accountData) => {
+      .then(accountData => {
         analytics.setVariable('username', accountData.username);
-        analytics.trackFormSuccess(ANALYTICS_CREATE_ACCOUNT, { form_type: ANALYTICS_CREATE_ACCOUNT });
+        analytics.trackFormSuccess(ANALYTICS_CREATE_ACCOUNT, {
+          form_type: ANALYTICS_CREATE_ACCOUNT,
+        });
         return authenticate(accountData.username, values.password);
       })
-      .then(() => this.props.history.push(AFTER_JOIN_REDIRECT_ROUTE, { plan }));
+      .then(() => {
+        if (product === 'rv') {
+          return this.props.history.push('/onboarding/recipient-validation');
+        }
+        return this.props.history.push(AFTER_JOIN_REDIRECT_ROUTE, { plan });
+      });
   };
 
   render() {
@@ -66,20 +82,22 @@ export class JoinPage extends Component {
       <div>
         {loadScript({ url: LINKS.RECAPTCHA_LIB_URL })}
         <CenteredLogo showAwsLogo={this.props.isAWSsignUp} />
-
         <Panel accent title={this.props.title}>
-          {
-            createError &&
-              <Panel.Section>
-                <Error error={<JoinError errors={createError} data={formData} />} />
-              </Panel.Section>
-          }
+          {createError && (
+            <Panel.Section>
+              <Error error={<JoinError errors={createError} data={formData} />} />
+            </Panel.Section>
+          )}
           <Panel.Section>
             <JoinForm onSubmit={this.registerSubmit} />
           </Panel.Section>
         </Panel>
         <Panel.Footer
-          left={<small>Already have an account? <PageLink to="/auth">Log In</PageLink>.</small>}
+          left={
+            <small>
+              Already have an account? <PageLink to="/auth">Log In</PageLink>.
+            </small>
+          }
           right={<JoinLink location={this.props.location} />}
         />
       </div>
@@ -92,7 +110,7 @@ function mapStateToProps(state, props) {
     account: state.account,
     params: qs.parse(props.location.search),
     isAWSsignUp: !!cookie.get(AWS_COOKIE_NAME),
-    title: inSPCEU() ? 'Sign Up For SparkPost EU' : 'Sign Up'
+    title: inSPCEU() ? 'Sign Up For SparkPost EU' : 'Sign Up',
   };
 }
 

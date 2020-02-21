@@ -31,7 +31,7 @@ exports[`creditCardSection should render correctly when selectedPlan is Free 1`]
       Access to all of our powerful API features.
     </li>
     <li>
-      30 days of free technical support to get you up and running.
+      Free technical support to get you up and running.
     </li>
   </ul>
 </Panel.Section>
