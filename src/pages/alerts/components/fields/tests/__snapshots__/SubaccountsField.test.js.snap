@@ -3,34 +3,19 @@
 exports[`Subaccount Field renders combo box field 1`] = `
 <Field
   component={[Function]}
-  defaultSelected={Array []}
   disabled={false}
+  isExclusiveItem={[Function]}
   itemToString={[Function]}
   label="Subaccounts"
   name="subaccounts"
   placeholder="Type To Search"
   results={
     Array [
-      Object {
-        "id": -1,
-        "isExclusiveItem": true,
-        "name": "Master and all subaccounts",
-      },
-      Object {
-        "id": -2,
-        "isExclusiveItem": true,
-        "name": "Any subaccount",
-      },
-      Object {
-        "id": 0,
-        "name": "Master account",
-      },
-      Object {
-        "id": 1,
-        "name": "My Subacount",
-      },
+      -1,
+      -2,
+      0,
+      1,
     ]
   }
-  selectedMap={[Function]}
 />
 `;

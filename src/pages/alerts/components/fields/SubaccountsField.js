@@ -9,7 +9,7 @@ const isExclusiveItem = item => {
   return item < 0;
 };
 
-const SubaccountsField = props => {
+export const SubaccountsField = props => {
   const { listSubaccounts, disabled, subaccounts } = props;
 
   useEffect(() => {
