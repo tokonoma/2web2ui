@@ -106,7 +106,7 @@ export class RecipientValidationPage extends Component {
       ? { ...formValues, card: prepareCardInfo(formValues.card) }
       : formValues;
 
-    addRVtoSubscription({
+    return addRVtoSubscription({
       values,
       updateCreditCard: !this.state.useSavedCC,
       isRVonSubscription: isRVonSubscription,
