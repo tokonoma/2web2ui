@@ -8,28 +8,22 @@ import zuoraRequest from 'src/actions/helpers/zuoraRequest';
  * Updates plan
  * @param {string} code
  */
-export function updateSubscription({ code, bundle = code, promoCode, meta = {} }) {
-  const getBillingAction = () => getBillingInfo();
-  const fetchAccountAction = () =>
-    fetchAccount({ include: 'usage', meta: { onSuccess: getBillingAction } });
-
-  return dispatch =>
-    dispatch(
-      sparkpostApiRequest({
-        type: 'UPDATE_SUBSCRIPTION',
-        meta: {
-          method: 'PUT',
-          url: '/v1/billing/subscription/bundle',
-          data: {
-            promo_code: promoCode,
-            bundle: bundle,
-          },
-          ...meta,
-          onSuccess: meta.onSuccess ? meta.onSuccess : fetchAccountAction,
-        },
-      }),
-    );
-}
+export const updateSubscription = ({ bundle, promoCode, meta = {} }) =>
+  sparkpostApiRequest({
+    type: 'UPDATE_SUBSCRIPTION',
+    meta: {
+      method: 'PUT',
+      url: '/v1/billing/subscription/bundle',
+      data: {
+        promo_code: promoCode,
+        bundle: bundle,
+      },
+      ...meta,
+      onSuccess: meta.onSuccess
+        ? meta.onSuccess
+        : () => fetchAccount({ include: 'usage', meta: { onSuccess: getBillingInfo } }),
+    },
+  });
 
 export function syncSubscription({ meta = {} } = {}) {
   return sparkpostApiRequest({

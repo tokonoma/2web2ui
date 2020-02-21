@@ -8,13 +8,13 @@ const plans = [
   {
     isFree: false,
     code: 'no-free-as-in-gold',
-    volume: 15000
+    volume: 15000,
   },
   {
     isFree: true,
     code: 'so-very-free',
-    volume: 100000
-  }
+    volume: 100000,
+  },
 ];
 
 jest.mock('src/helpers/conversionTracking');
@@ -30,10 +30,10 @@ describe('Component: ImmediateChangePlanPage', () => {
       history: { push: jest.fn() },
       location: {
         pathname: '/account/billing/plan/change',
-        search: 'immediatePlanChange=so-very-free&pass=through'
+        search: 'immediatePlanChange=so-very-free&pass=through',
       },
       updateSubscription: jest.fn(() => Promise.resolve()),
-      showAlert: jest.fn()
+      showAlert: jest.fn(),
     };
     wrapper = shallow(<ImmediateChangePlanPage {...props} />);
   });
@@ -43,7 +43,7 @@ describe('Component: ImmediateChangePlanPage', () => {
     wrapper = shallow(<ImmediateChangePlanPage {...props} />);
     await wrapper;
 
-    expect(props.updateSubscription).toHaveBeenCalledWith({ code: 'so-very-free' });
+    expect(props.updateSubscription).toHaveBeenCalledWith({ bundle: 'so-very-free' });
   });
 
   it('should not change plan without immediatePlanChange', async () => {
@@ -53,7 +53,7 @@ describe('Component: ImmediateChangePlanPage', () => {
   it('should redirect to billing without immediatePlanChange', () => {
     expect(props.history.push).toHaveBeenCalledWith({
       pathname: '/account/billing',
-      search: 'pass=through'
+      search: 'pass=through',
     });
   });
 
@@ -81,12 +81,20 @@ describe('Component: ImmediateChangePlanPage', () => {
     props.updateSubscription.mockRejectedValue(new Error(errMsg));
     wrapper = shallow(<ImmediateChangePlanPage {...props} />);
     await wrapper;
-    expect(wrapper.find('ApiErrorBanner').first().prop('errorDetails')).toEqual(errMsg);
+    expect(
+      wrapper
+        .find('ApiErrorBanner')
+        .first()
+        .prop('errorDetails'),
+    ).toEqual(errMsg);
   });
 
   it('should allow retries after failure', () => {
-    wrapper.setState({ loading: LOAD_STATE.FAILURE, error: { message: 'boom' }});
-    const reloadFn = wrapper.find('ApiErrorBanner').first().prop('reload');
+    wrapper.setState({ loading: LOAD_STATE.FAILURE, error: { message: 'boom' } });
+    const reloadFn = wrapper
+      .find('ApiErrorBanner')
+      .first()
+      .prop('reload');
     reloadFn();
     expect(props.updateSubscription).toHaveBeenCalled();
   });

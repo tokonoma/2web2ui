@@ -88,7 +88,7 @@ describe('Action Creator: Billing Update', () => {
     );
     expect(billingActions.updateSubscription).toHaveBeenCalledWith(
       expect.objectContaining({
-        code: 'plan-code',
+        bundle: 'plan-code',
       }),
     );
     expect(billingActions.syncSubscription).toHaveBeenCalled();

@@ -20,15 +20,16 @@ export default function billingUpdate(values) {
   return dispatch => {
     // action creator wrappers for chaining as callbacks
     const corsUpdateBilling = ({ meta }) => cors({ context: 'update-billing', meta });
-    const maybeUpdateSubscription = ({ meta }) =>
-      values.planpicker || values.bundle
-        ? updateSubscription({
-            bundle: values.bundle,
-            code: _.get(values, 'planpicker.code'),
-            promoCode: values.promoCode,
-            meta,
-          })
-        : meta.onSuccess({ meta }); // bypass
+    const maybeUpdateSubscription = ({ meta }) => {
+      // values.planpicker could be an object or plan code, so we have to be defensive
+      const bundle = values.bundle || _.get(values, 'planpicker.code');
+
+      if (bundle) {
+        return updateSubscription({ bundle, promoCode: values.promoCode, meta });
+      }
+
+      return meta.onSuccess({ meta });
+    };
     const updateZuoraCC = ({ meta, results: { accountKey, token, signature } }) =>
       updateCreditCard({
         data: formatUpdateData({ ...values, accountKey }),

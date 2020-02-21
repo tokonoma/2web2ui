@@ -130,7 +130,7 @@ export const ChangePlanForm = ({
         // decides which action to be taken based on
         // if it's aws account, it already has billing and if you use a saved CC
         if (isAws) {
-          return updateSubscription({ code: newCode });
+          return updateSubscription({ bundle: newCode });
         } else if (account.billing) {
           return useSavedCC || isDowngradeToFree
             ? updateSubscription({ bundle: newCode, promoCode: selectedPromo.promoCode })

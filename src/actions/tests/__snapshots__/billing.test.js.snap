@@ -174,35 +174,31 @@ Array [
 `;
 
 exports[`Action Creator: Billing updateSubscription should dispatch an update subscription action and fetch account 1`] = `
-Array [
-  Object {
-    "meta": Object {
-      "data": Object {
-        "bundle": "test-code",
-        "promo_code": undefined,
-      },
-      "method": "PUT",
-      "onSuccess": [Function],
-      "url": "/v1/billing/subscription/bundle",
+Object {
+  "meta": Object {
+    "data": Object {
+      "bundle": "test-code",
+      "promo_code": undefined,
     },
-    "type": "UPDATE_SUBSCRIPTION",
+    "method": "PUT",
+    "onSuccess": [Function],
+    "url": "/v1/billing/subscription/bundle",
   },
-]
+  "type": "UPDATE_SUBSCRIPTION",
+}
 `;
 
 exports[`Action Creator: Billing updateSubscription should dispatch an update subscription action with provided onSuccess action 1`] = `
-Array [
-  Object {
-    "meta": Object {
-      "data": Object {
-        "bundle": "test-code",
-        "promo_code": undefined,
-      },
-      "method": "PUT",
-      "onSuccess": [MockFunction],
-      "url": "/v1/billing/subscription/bundle",
+Object {
+  "meta": Object {
+    "data": Object {
+      "bundle": "test-code",
+      "promo_code": undefined,
     },
-    "type": "UPDATE_SUBSCRIPTION",
+    "method": "PUT",
+    "onSuccess": [MockFunction],
+    "url": "/v1/billing/subscription/bundle",
   },
-]
+  "type": "UPDATE_SUBSCRIPTION",
+}
 `;
