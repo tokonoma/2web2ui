@@ -719,7 +719,7 @@ const routes = [
   {
     path: '/onboarding/recipient-validation',
     component: onboarding.RVBundlePage,
-    condition: all(configFlag('featureFlags.has_signup')),
+    condition: configFlag('featureFlags.has_signup'),
     title: 'Recipient Validation | Onboarding',
     layout: LargeForm,
   },

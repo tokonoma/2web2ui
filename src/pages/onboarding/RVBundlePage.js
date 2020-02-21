@@ -7,9 +7,6 @@ import { Card } from 'src/components';
 import styles from './RVBundlePage.module.scss';
 import RecipientValidationPriceTable from 'src/pages/recipientValidation/components/RecipientValidationPriceTable';
 
-const PANEL_TITLE =
-  "Take a look at what's included in our Recipient Validation Service and then Start Validating.";
-
 const RVPriceModal = ({ open, onClose }) => (
   <Modal open={open} onClose={onClose}>
     <Panel className={styles.modalContainer} accent>
@@ -46,40 +43,40 @@ const RVBundlePage = () => {
   return (
     <div>
       <CenteredLogo />
-      <div className={styles.header}>You're Almost There...</div>
-      <div className={styles.subheader}>
+      <h1 className={styles.header}>You're Almost There...</h1>
+      <p className={styles.subheader}>
         Here at SparkPost we do it all! As part of our Recipient Validation service we also provide
         a SparkPost sending account. Make every email count and start verifying.
-      </div>
+      </p>
       <Panel>
-        <Panel.Section>{PANEL_TITLE}</Panel.Section>
+        <Panel.Section>
+          Take a look at what's included in our Recipient Validation service and then start
+          validating.
+        </Panel.Section>
         <Panel.Section>
           <div className={styles.grid}>
             <Card>
               <h2>
                 <CheckCircle className={styles.icon} />
-                <span>&nbsp;Recipient Validation</span>
+                <span>Recipient Validation</span>
               </h2>
-              <div className={styles.text}>
+              <p>
                 With our monthly pay-as-you-go plan using tiered pricing, the more you validate, the
                 less you pay per message.
-              </div>
-              <div className={styles.linkcontainer}>
+              </p>
+              <p>
                 <UnstyledLink onClick={() => setModalOpen(true)} className={styles.link}>
                   See Pricing
                 </UnstyledLink>
-              </div>
+              </p>
             </Card>
-
             <Card>
               <h2>
                 <Send className={`${styles.icon} ${styles.send}`} />
-                <span>&nbsp;Email Messaging</span>
+                <span>Email Messaging</span>
               </h2>
-              <div className={styles.text}>
-                <span>
-                  A full featured FREE test account is standard with all SparkPost accounts:
-                </span>
+              <div>
+                <p>A full featured FREE test account is standard with all SparkPost accounts:</p>
                 <ul>
                   <li>500 emails/month included for testing.</li>
                   <li>Access to all our powerful API features.</li>
