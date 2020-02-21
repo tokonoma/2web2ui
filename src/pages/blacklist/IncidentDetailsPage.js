@@ -89,7 +89,7 @@ export const IncidentDetailsPage = ({
         return <Empty message={`No Other Recent ${blacklist_name} incidents`} />;
       }
       return (
-        <Panel>
+        <Panel data-id="related-incidents-blacklist">
           <RelatedIncidents
             incident={{ ...incident, id }}
             incidents={incidentsForBlacklist}
@@ -108,7 +108,7 @@ export const IncidentDetailsPage = ({
         return <Empty message={`No Other Recent ${resource} incidents`} />;
       }
       return (
-        <Panel>
+        <Panel data-id="related-incidents-resource">
           <RelatedIncidents
             incident={{ ...incident, id }}
             incidents={incidentsForResource}
@@ -123,7 +123,7 @@ export const IncidentDetailsPage = ({
         {historicalIncidentsPending ? (
           <PanelLoading minHeight={'150px'} />
         ) : (
-          <Panel sectioned>
+          <Panel sectioned data-id="incident-details">
             <IncidentDetails
               resourceName={resource}
               blacklistName={blacklist_name}
