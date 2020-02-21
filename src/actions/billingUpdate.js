@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { fetch as fetchAccount, getBillingInfo } from './account';
 import { formatUpdateData } from 'src/helpers/billing';
 import chainActions from 'src/actions/helpers/chainActions';
@@ -23,7 +24,7 @@ export default function billingUpdate(values) {
       values.planpicker || values.bundle
         ? updateSubscription({
             bundle: values.bundle,
-            code: values.planpicker.code,
+            code: _.get(values, 'planpicker.code'),
             promoCode: values.promoCode,
             meta,
           })
