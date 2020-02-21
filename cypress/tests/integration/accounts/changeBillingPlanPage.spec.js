@@ -92,7 +92,7 @@ describe('Billing Page', () => {
     cy.findAllByText('Change Plan').should('be.visible');
   });
 
-  it.only('upgrade free account to starter with query parameter', () => {
+  it('upgrade free account to starter with query parameter', () => {
     cy.stubRequest({
       url: '/api/v1/account',
       fixture: 'account/200.get.test-plan.json',
