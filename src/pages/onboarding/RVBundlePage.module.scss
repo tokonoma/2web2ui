@@ -37,3 +37,27 @@
 .buttonRow {
   margin-top: spacing();
 }
+
+.modalContainer {
+  max-width: 600px;
+  margin: 0 auto;
+
+  .text {
+    font-size: 0.9em;
+    line-height: 1.15em;
+    margin-bottom: rem(20);
+  }
+}
+
+.modalTitle {
+  display: flex;
+  div:first-child {
+    flex: 1 0 0;
+  }
+
+  .title {
+    line-height: 1.5em;
+    font-size: rem(18);
+    font-weight: 500;
+  }
+}
