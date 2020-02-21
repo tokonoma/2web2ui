@@ -2,8 +2,7 @@ const SINGLE_RESULT_URL = '/api/v1/recipient-validation/single/**';
 
 describe('The recipient validation single result page', () => {
   beforeEach(() => {
-    cy.stubAuth('free-0819', 'admin', options);
-
+    cy.stubAuth();
     cy.login({ isStubbed: true });
   });
 
@@ -137,7 +136,7 @@ describe('The recipient validation single result page', () => {
     cy.findByText('Validation limit exceeded').should('be.visible');
 
     cy.findAllByText('View Details')
-      .last()
+      .first()
       .click();
 
     cy.findByText('Submit a ticket')
