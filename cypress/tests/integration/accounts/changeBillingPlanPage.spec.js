@@ -6,6 +6,11 @@ describe('Billing Page', () => {
     cy.login({ isStubbed: true });
 
     cy.stubRequest({
+      url: '/api/v1/account/countries?filter=billing',
+      fixture: 'account/countries/200.get.billing-filter.json',
+    });
+
+    cy.stubRequest({
       url: '/api/v1/billing',
       fixture: 'billing/200.get.json',
       fixtureAlias: 'billingGet',
