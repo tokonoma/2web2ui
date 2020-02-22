@@ -73,7 +73,7 @@
     "bowser": "2.1.2",
     "classnames": "^2.2.5",
     "color": "^3.0.0",
-    "copy-to-clipboard": "^3.0.8",
+    "copy-to-clipboard": "^3.3.0",
     "date-fns": "^1.28.5",
     "downshift": "^3.2.10",
     "email-addresses": "^3.0.1",
