@@ -152,7 +152,7 @@
     "eslint-config-react-app": "^5.0.2",
     "eslint-plugin-flowtype": "^3.13.0",
     "eslint-plugin-import": "^2.18.2",
-    "eslint-plugin-jest": "^23.0.4",
+    "eslint-plugin-jest": "^23.8.0",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-lodash": "^6.0.0",
     "eslint-plugin-prettier": "^3.1.1",
