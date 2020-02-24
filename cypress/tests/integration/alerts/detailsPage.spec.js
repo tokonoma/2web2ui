@@ -84,10 +84,11 @@ describe('The alerts details pages', () => {
       cy.findByText('Are you sure you want to delete this alert?').should('be.visible');
       cy.findByText('Cancel').click();
       cy.queryByText('Are you sure you want to delete this alert?').should('not.be.visible');
-      // Grabbing delete button outside of the modal - this is technically a bug as
-      // the Modal needs to not be encounterable by Cypress or screen readers at this point
+
       cy.get('main').within(() => cy.findByText('Delete').click());
-      cy.get('#modal-portal').within(() => cy.findByText('Delete').click());
+      cy.withinModalPortal(() => {
+        cy.findByText('Delete').click();
+      });
 
       cy.findByText('Alert: This is an alert Deleted').should('be.visible');
       cy.url().should('include', '/alerts');
@@ -103,7 +104,9 @@ describe('The alerts details pages', () => {
       });
 
       cy.findByText('Delete').click();
-      cy.get('#modal-portal').within(() => cy.findByText('Delete').click());
+      cy.withinModalPortal(() => {
+        cy.findByText('Delete').click();
+      });
 
       cy.findByText('Something went wrong.').should('be.visible');
       cy.findByText('View Details').click();

@@ -9,10 +9,10 @@ describe('The blacklist watchlist page', () => {
   it('shows title and info', () => {
     cy.stubRequest({
       url: 'api/v1/blacklist-monitors',
-      fixture: 'blacklists/incident/200-watchlist.get.json',
+      fixture: 'blacklists/incident/200.get.watchlist.json',
     });
 
-    cy.visit(`${PAGE_BASE_URL}`);
+    cy.visit(PAGE_BASE_URL);
 
     cy.findByText(
       'Below are your watched IP addresses and domains. Select any one below to learn more or make updates.',
@@ -24,13 +24,13 @@ describe('The blacklist watchlist page', () => {
   it('sorts the table', () => {
     cy.stubRequest({
       url: 'api/v1/blacklist-monitors',
-      fixture: 'blacklists/incident/200-watchlist.get.json',
+      fixture: 'blacklists/incident/200.get.watchlist.json',
     });
 
-    cy.visit(`${PAGE_BASE_URL}`);
+    cy.visit(PAGE_BASE_URL);
 
     cy.findByLabelText('Sort Select').select('Date Listed');
-    cy.get('tbody > tr').then(val => {
+    cy.get('tbody tr').then(val => {
       cy.findByText('12.12.12.', { container: val[0] }).should('be.visible');
       cy.findByText('anydomain.io', { container: val[1] }).should('be.visible');
       cy.findByText('buyadomain.io', { container: val[2] }).should('be.visible');
@@ -40,7 +40,7 @@ describe('The blacklist watchlist page', () => {
     });
 
     cy.findByLabelText('Sort Select').select('Date Added');
-    cy.get('tbody > tr').then(val => {
+    cy.get('tbody tr').then(val => {
       cy.findByText('2.2.8', { container: val[0] }).should('be.visible');
       cy.findByText('buyadomain.io', { container: val[1] }).should('be.visible');
       cy.findByText('anydomain.io', { container: val[2] }).should('be.visible');
@@ -50,7 +50,7 @@ describe('The blacklist watchlist page', () => {
     });
 
     cy.findByLabelText('Sort Select').select('Resource Name');
-    cy.get('tbody > tr').then(val => {
+    cy.get('tbody tr').then(val => {
       cy.findByText('buyadomain.io', { container: val[0] }).should('be.visible');
       cy.findByText('anydomain.io', { container: val[1] }).should('be.visible');
       cy.findByText('2.2.8', { container: val[2] }).should('be.visible');
@@ -60,7 +60,7 @@ describe('The blacklist watchlist page', () => {
     });
 
     cy.findByLabelText('Sort Select').select('Current Listings');
-    cy.get('tbody > tr').then(val => {
+    cy.get('tbody tr').then(val => {
       cy.findByText('127.0.0.2', { container: val[0] }).should('be.visible');
       cy.findByText('2.2.8', { container: val[1] }).should('be.visible');
       cy.findByText('12.12.12.', { container: val[2] }).should('be.visible');
@@ -70,7 +70,7 @@ describe('The blacklist watchlist page', () => {
     });
 
     cy.findByLabelText('Sort Select').select('Historic Listings');
-    cy.get('tbody > tr').then(val => {
+    cy.get('tbody tr').then(val => {
       cy.findByText('127.0.0.2', { container: val[0] }).should('be.visible');
       cy.findByText('1.2.3.4', { container: val[1] }).should('be.visible');
       cy.findByText('2.2.8', { container: val[2] }).should('be.visible');
@@ -83,20 +83,20 @@ describe('The blacklist watchlist page', () => {
   it('filters the result list down', () => {
     cy.stubRequest({
       url: 'api/v1/blacklist-monitors',
-      fixture: 'blacklists/incident/200-watchlist.get.json',
+      fixture: 'blacklists/incident/200.get.watchlist.json',
     });
 
-    cy.visit(`${PAGE_BASE_URL}`);
+    cy.visit(PAGE_BASE_URL);
 
-    cy.get('tbody > tr').should('have.length', 6);
+    cy.get('tbody tr').should('have.length', 6);
     cy.findByLabelText('Filter By').type('2.2.8');
-    cy.get('tbody > tr').should('have.length', 1);
+    cy.get('tbody tr').should('have.length', 1);
   });
 
   it('stops monitoring', () => {
     cy.stubRequest({
       url: 'api/v1/blacklist-monitors',
-      fixture: 'blacklists/incident/200-watchlist.get.json',
+      fixture: 'blacklists/incident/200.get.watchlist.json',
     });
     cy.stubRequest({
       method: 'DELETE',
@@ -105,9 +105,9 @@ describe('The blacklist watchlist page', () => {
       fixture: 'blacklists/incident/204.delete.json',
     });
 
-    cy.visit(`${PAGE_BASE_URL}`);
+    cy.visit(PAGE_BASE_URL);
 
-    cy.get('tbody > tr').then(val => {
+    cy.get('tbody tr').then(val => {
       cy.findByText('Stop Monitoring', { container: val[0] }).click();
 
       cy.findByText('Stop Monitoring 12.12.12.').should('be.visible');
@@ -115,18 +115,18 @@ describe('The blacklist watchlist page', () => {
         "Removing this IP from your watchlist means you won't get notified of changes, but don't worry you can always add it again later.",
       ).should('be.visible');
 
-      cy.withinModal(modalContainer => {
-        cy.findByText('Stop Monitoring', { container: modalContainer }).click();
+      cy.withinModal(() => {
+        cy.findByText('Stop Monitoring').click();
       });
     });
 
-    cy.withinAlert(alertContainer => {
+    cy.withinSnackbar(alertContainer => {
       cy.findByText('Stopped Monitoring 12.12.12..', { container: alertContainer }).should(
         'be.visible',
       );
     });
 
-    cy.get('tbody > tr').then(val => {
+    cy.get('tbody tr').then(val => {
       cy.findByText('1.2.3.4', { container: val[0] }).should('be.visible');
     });
   });
@@ -134,20 +134,23 @@ describe('The blacklist watchlist page', () => {
   it('links to the blacklist/incidents?search= page', () => {
     cy.stubRequest({
       url: 'api/v1/blacklist-monitors',
-      fixture: 'blacklists/incident/200-watchlist.get.json',
+      fixture: 'blacklists/incident/200.get.watchlist.json',
     });
 
     cy.stubRequest({
       method: 'GET',
       url: 'api/v1/blacklist-monitors',
-      fixture: 'blacklists/incident/200-search.get.json',
+      fixture: 'blacklists/incident/200.get.search.json',
     });
 
-    cy.visit(`${PAGE_BASE_URL}`);
+    cy.visit(PAGE_BASE_URL);
 
-    cy.get('tbody > tr').then(val => {
-      cy.findByText('2.2.8', { container: val[0] }).click();
-      cy.url().should('include', 'blacklist/incidents?search=2.2.8');
+    cy.get('tbody tr').then(val => {
+      cy.findByText('2.2.8', { container: val[0] }).should(
+        'have.attr',
+        'href',
+        '/blacklist/incidents?search=2.2.8',
+      );
     });
   });
 });

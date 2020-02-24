@@ -106,7 +106,7 @@ describe('The recipients suppressions list page', () => {
 
       cy.findByText(DELETE_MODAL_CONTENT).should('be.visible');
 
-      cy.get('#modal-portal').within(() => {
+      cy.withinModalPortal(() => {
         cy.findByText('Cancel').click();
       });
 
@@ -115,7 +115,7 @@ describe('The recipients suppressions list page', () => {
       // Testing deletion within the modal
       cy.get('table').within(() => cy.findByText('Delete').click());
 
-      cy.get('#modal-portal').within(() => {
+      cy.withinModalPortal(() => {
         cy.findByText('Delete').click();
       });
 
@@ -135,7 +135,7 @@ describe('The recipients suppressions list page', () => {
       cy.visit(PAGE_URL);
 
       cy.get('table').within(() => cy.findByText('Delete').click());
-      cy.get('#modal-portal').within(() => {
+      cy.withinModalPortal(() => {
         cy.findByText('Delete').click();
       });
 
@@ -167,7 +167,7 @@ describe('The recipients suppressions list page', () => {
           .click(),
       );
 
-      cy.get('#modal-portal').within(() => cy.findByText('Delete').click());
+      cy.withinModalPortal(() => cy.findByText('Delete').click());
 
       cy.get('table').within(() => cy.findAllByText('Delete').should('be.disabled'));
 
@@ -181,7 +181,7 @@ describe('The recipients suppressions list page', () => {
 
       cy.findByText('View Details').click();
 
-      cy.get('#modal-portal').within(() => {
+      cy.withinModalPortal(() => {
         cy.findByText('Suppression Details').should('be.visible');
 
         cy.findByText('fake-email@gmail.com').should('be.visible');
