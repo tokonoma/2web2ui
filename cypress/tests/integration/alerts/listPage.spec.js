@@ -246,7 +246,7 @@ describe('The alerts list page', () => {
       clickDeleteButton();
 
       cy.findByText('Are you sure you want to delete this alert?').should('be.visible');
-      cy.get('#modal-portal').within(() => cy.findByText('Cancel').click());
+      cy.withinModal(() => cy.findByText('Cancel').click());
 
       cy.queryByText('Are you sure you want to delete this alert?').should('not.be.visible');
 
@@ -258,7 +258,7 @@ describe('The alerts list page', () => {
         fixture: 'alerts/2/200.delete.json',
       });
 
-      cy.get('#modal-portal').within(() => cy.findByText('Delete').click());
+      cy.withinModal(() => cy.findByText('Delete').click());
       cy.findByText('Alert deleted').should('be.visible');
       cy.queryByText('Alert 2').should('not.be.visible');
     });
@@ -275,7 +275,7 @@ describe('The alerts list page', () => {
         fixture: 'alerts/2/400.delete.json',
       });
 
-      cy.get('#modal-portal').within(() => cy.findByText('Delete').click());
+      cy.withinModal(() => cy.findByText('Delete').click());
 
       cy.findByText('Something went wrong.').should('be.visible');
       cy.findByText('View Details').click();

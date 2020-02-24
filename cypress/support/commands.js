@@ -178,6 +178,6 @@ Cypress.Commands.add('withinModal', assertMethod => {
  * @param {function} assertMethod - The function that has assertions to run within the alert container
  *
  */
-Cypress.Commands.add('withinAlert', assertMethod => {
+Cypress.Commands.add('withinSnackbar', assertMethod => {
   cy.get('#alert-portal').within(assertMethod);
 });
