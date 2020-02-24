@@ -118,6 +118,89 @@ describe('Billing Page', () => {
     cy.findByText('Change Plan').should('have.attr', 'href', '/account/billing/plan');
   });
 
+  describe('the billing panel', () => {
+    it("renders with the user's current active credit card", () => {
+      cy.visit(PAGE_URL);
+
+      cy.get('[data-id="billing-panel"]').within(() => {
+        cy.findByText('Visa ···· 1111').should('be.visible');
+        cy.findByText('Expires 9/2099').should('be.visible');
+      });
+    });
+
+    it('renders with the current billing contact', () => {
+      cy.visit(PAGE_URL);
+
+      cy.get('[data-id="billing-panel"').within(() => {
+        cy.findByText('Test User').should('be.visible');
+        cy.findByText('test.user@sparkpost.com').should('be.visible');
+      });
+    });
+
+    describe.only('the update payment information form', () => {
+      beforeEach(() => {
+        cy.stubRequest({
+          url: '/api/v1/account/countries*',
+          fixture: 'account/countries/200.get.billing-filter.json',
+        });
+
+        cy.visit(PAGE_URL);
+        cy.findByText('Update Payment Information').click();
+      });
+
+      it('closes the modal when clicking "Cancel"', () => {
+        cy.findByLabelText('Credit Card Number').should('be.visible');
+
+        cy.findByText('Cancel').click();
+
+        cy.queryByLabelText('Credit Card Number').should('not.be.visible');
+      });
+
+      it('renders "Required" validation errors when skipping the "Credit Card Number", "Cardholder Name", "Expiration Date", "Security Code", and "Zip Code" fields', () => {
+        cy.get('#modal-portal').within(() => {
+          cy.findAllByText('Update Payment Information')
+            .last()
+            .click();
+
+          cy.findAllByText('Required').should('have.length', 5);
+        });
+      });
+
+      it('renders a success message when successfully updating payment information', () => {
+        cy.findByLabelText('Credit Card Number').type('4111 1111 1111 1111');
+        cy.findByLabelText('Cardholder Name').type('Hello World');
+        cy.findByLabelText('Expiration Date').type('0123');
+        cy.findByLabelText('Security Code').type('123');
+        cy.findByLabelText('State').select('Maryland');
+        cy.findByLabelText('Zip Code').type('21046');
+
+        cy.stubRequest({
+          method: 'POST',
+          url: '/api/v1/billing/cors-data*',
+          fixture: 'billing/cors-data/200.post.json',
+        });
+
+        cy.get('#modal-portal').within(() => {
+          cy.findAllByText('Update Payment Information')
+            .last()
+            .click();
+        });
+      });
+
+      it('renders an error when the server returns an error when updating payment information', () => {});
+    });
+
+    describe('the update billing contact form', () => {
+      it('closes the modal when clicking "Cancel"', () => {});
+
+      it('renders "Required" validation errors when skipping any of the form fields', () => {});
+
+      it('renders a success message when successfully updating the billing contact', () => {});
+
+      it('renders an error message when the server returns an error', () => {});
+    });
+  });
+
   describe('the invoice history table', () => {
     function assertTableRow({ rowIndex, date, amount, invoice }) {
       cy.get('tbody tr')
@@ -171,6 +254,18 @@ describe('Billing Page', () => {
         url: '/api/v1/account/invoices',
         fixture: '200.get.no-results',
         fixtureAlias: 'invoicesGet',
+      });
+
+      cy.visit(PAGE_URL);
+
+      cy.queryByText('Invoice History').should('not.be.visible');
+    });
+
+    it('does not render the "Invoice History" table when the server returns an error', () => {
+      cy.stubRequest({
+        status: 400,
+        url: '/api/v1/account/invoices',
+        fixture: '400.get.json',
       });
 
       cy.visit(PAGE_URL);
