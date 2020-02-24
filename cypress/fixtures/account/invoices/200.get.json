@@ -1,144 +1,25 @@
 {
-  "results" : [
-  {
-    "id": "2c92c0856f317f58016f321be7660e23",
-    "amount": 261.38,
-    "balance": 261.38,
-    "invoice_date": "2019-12-23",
-    "invoice_number": "INV00007797"
-  },
-  {
-    "id": "2c92c0856f1da887016f2cf3eeaa1922",
-    "amount": 261.64,
-    "balance": 261.64,
-    "invoice_date": "2019-12-22",
-    "invoice_number": "INV00007795"
-  },
-  {
-    "id": "2c92c0856f1da887016f27cd91fe79f7",
-    "amount": 261.41,
-    "balance": 261.41,
-    "invoice_date": "2019-12-21",
-    "invoice_number": "INV00007793"
-  },
-  {
-    "id": "2c92c0856f1da887016f22a733d9423b",
-    "amount": 262.4,
-    "balance": 262.4,
-    "invoice_date": "2019-12-20",
-    "invoice_number": "INV00007788"
-  },
-  {
-    "id": "2c92c0866f190950016f1d80eaac72ee",
-    "amount": 261.87,
-    "balance": 261.87,
-    "invoice_date": "2019-12-19",
-    "invoice_number": "INV00007779"
-  },
-  {
-    "id": "2c92c0856f13ccee016f185aa61b76e5",
-    "amount": 262.2,
-    "balance": 262.2,
-    "invoice_date": "2019-12-18",
-    "invoice_number": "INV00007770"
-  },
-  {
-    "id": "2c92c0856f12bbb5016f1334284d1926",
-    "amount": 261.67,
-    "balance": 261.67,
-    "invoice_date": "2019-12-17",
-    "invoice_number": "INV00007757"
-  },
-  {
-    "id": "2c92c0866eff07de016f0e0ddb355397",
-    "amount": 261.52,
-    "balance": 261.52,
-    "invoice_date": "2019-12-16",
-    "invoice_number": "INV00007749"
-  },
-  {
-    "id": "2c92c0866eff07de016f08e767cc09bc",
-    "amount": 261.55,
-    "balance": 261.55,
-    "invoice_date": "2019-12-15",
-    "invoice_number": "INV00007747"
-  },
-  {
-    "id": "2c92c0866eff07de016f03c1211c662a",
-    "amount": 261.39,
-    "balance": 261.39,
-    "invoice_date": "2019-12-14",
-    "invoice_number": "INV00007745"
-  },
-  {
-    "id": "2c92c0866efe74c3016efe9abfb904ca",
-    "amount": 262.19,
-    "balance": 262.19,
-    "invoice_date": "2019-12-13",
-    "invoice_number": "INV00007739"
-  },
-  {
-    "id": "2c92c0856ef94c43016ef97467481742",
-    "amount": 261.45,
-    "balance": 261.45,
-    "invoice_date": "2019-12-12",
-    "invoice_number": "INV00007737"
-  },
-  {
-    "id": "2c92c0866ed66c3f016ef44e07f453a3",
-    "amount": 262.11,
-    "balance": 262.11,
-    "invoice_date": "2019-12-11",
-    "invoice_number": "INV00007728"
-  },
-  {
-    "id": "2c92c0866ed66c3f016eef27997d35d6",
-    "amount": 262.36,
-    "balance": 262.36,
-    "invoice_date": "2019-12-10",
-    "invoice_number": "INV00007724"
-  },
-  {
-    "id": "2c92c0856ed66195016eea013fab4503",
-    "amount": 261.85,
-    "balance": 261.85,
-    "invoice_date": "2019-12-09",
-    "invoice_number": "INV00007702"
-  },
-  {
-    "id": "2c92c0856ed66195016ee4dae5eb1845",
-    "amount": 261.87,
-    "balance": 261.87,
-    "invoice_date": "2019-12-08",
-    "invoice_number": "INV00007700"
-  },
-  {
-    "id": "2c92c0866ed66c3f016edfb47f8766b7",
-    "amount": 261.96,
-    "balance": 261.96,
-    "invoice_date": "2019-12-07",
-    "invoice_number": "INV00007699"
-  },
-  {
-    "id": "2c92c0866ed66c3f016eda8e354d1744",
-    "amount": 211.89,
-    "balance": 211.89,
-    "invoice_date": "2019-12-06",
-    "invoice_number": "INV00007680"
-  },
-  {
-    "id": "2c92c0856ed49731016ed567c80b1857",
-    "amount": 144,
-    "balance": 144,
-    "invoice_date": "2019-12-05",
-    "invoice_number": "INV00007671"
-  },
-  {
-    "id": "2c92c0866ec96572016ed0417ca1067a",
-    "amount": 143.96,
-    "balance": 143.96,
-    "invoice_date": "2019-12-04",
-    "invoice_number": "INV00007670"
-  }
-]
+  "results": [
+    {
+      "id": "abc",
+      "amount": 123,
+      "balance": 0,
+      "invoice_date": "2020-01-03",
+      "invoice_number": "INV123"
+    },
+    {
+      "id": "def",
+      "amount": 456,
+      "balance": 0,
+      "invoice_date": "2020-01-02",
+      "invoice_number": "INV456"
+    },
+    {
+      "id": "hij",
+      "amount": 789,
+      "balance": 0,
+      "invoice_date": "2020-01-01",
+      "invoice_number": "INV789"
+    }
+  ]
 }
