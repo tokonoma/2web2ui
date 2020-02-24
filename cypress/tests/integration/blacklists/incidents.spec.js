@@ -1,3 +1,5 @@
+import moment from 'moment';
+const utcFormatMatcher = /\d+-\d+-\d+T/g;
 const PAGE_BASE_URL = '/blacklist/incidents';
 
 describe('The blacklist incidents page', () => {
@@ -98,25 +100,25 @@ describe('The blacklist incidents page', () => {
     });
     cy.visit(PAGE_BASE_URL);
 
-    const todaysDate = Cypress.moment()
+    const todaysDate = moment()
       .toISOString()
-      .match(/\d+-\d+-\d+T/g)[0];
-    const lastTwentyFour = Cypress.moment()
+      .match(utcFormatMatcher)[0];
+    const lastTwentyFour = moment()
       .subtract(1, 'days')
       .toISOString()
-      .match(/\d+-\d+-\d+T/g)[0];
-    const seven = Cypress.moment()
+      .match(utcFormatMatcher)[0];
+    const seven = moment()
       .subtract(7, 'days')
       .toISOString()
-      .match(/\d+-\d+-\d+T/g)[0];
-    const thirty = Cypress.moment()
+      .match(utcFormatMatcher)[0];
+    const thirty = moment()
       .subtract(30, 'days')
       .toISOString()
-      .match(/\d+-\d+-\d+T/g)[0];
-    const ninety = Cypress.moment()
+      .match(utcFormatMatcher)[0];
+    const ninety = moment()
       .subtract(90, 'days')
       .toISOString()
-      .match(/\d+-\d+-\d+T/g)[0];
+      .match(utcFormatMatcher)[0];
 
     cy.wait('@getIncidents').then(({ url }) => {
       cy.wrap(url).should('include', '/blacklist-monitors/incidents?from=' + thirty);

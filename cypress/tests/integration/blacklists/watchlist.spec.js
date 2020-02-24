@@ -115,8 +115,8 @@ describe('The blacklist watchlist page', () => {
         "Removing this IP from your watchlist means you won't get notified of changes, but don't worry you can always add it again later.",
       ).should('be.visible');
 
-      cy.withinModal(modalContainer => {
-        cy.findByText('Stop Monitoring', { container: modalContainer }).click();
+      cy.withinModal(() => {
+        cy.findByText('Stop Monitoring').click();
       });
     });
 
