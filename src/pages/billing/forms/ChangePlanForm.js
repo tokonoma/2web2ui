@@ -1,4 +1,3 @@
-/* eslint max-lines: ["error", 250] */
 import React, { useEffect, useState, useCallback, useMemo } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
