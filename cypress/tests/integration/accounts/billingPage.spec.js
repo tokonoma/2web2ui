@@ -63,6 +63,8 @@ describe('Billing Page', () => {
   it("renders with the user's currently selected plan", () => {});
 
   describe("rendering different plans based on the user's subscription", () => {
+    // TODO: Flesh these bad boys out!!
+
     it('renders with the free plan', () => {
       cy.stubRequest({
         url: '/api/v1/billing/subscription',
@@ -439,5 +441,27 @@ describe('Billing Page', () => {
 
       cy.findByText('Downloaded invoice: INV123').should('be.visible');
     });
+  });
+
+  it('renders with a "Premium Addon Plan" banner with a "Contact Us" link', () => {
+    cy.visit(PAGE_URL);
+
+    cy.findByText('Premium Addon Plan')
+      .scrollIntoView()
+      .should('be.visible');
+    cy.findAllByText('Contact Us')
+      .first()
+      .should('have.attr', 'href', 'https://www.sparkpost.com/contact-premium');
+  });
+
+  it('renders with an "Enterprise" banner with a "Contact Us" link', () => {
+    cy.visit(PAGE_URL);
+
+    cy.findByText('Enterprise')
+      .scrollIntoView()
+      .should('be.visible');
+    cy.findAllByText('Contact Us')
+      .last()
+      .should('have.attr', 'href', 'https://www.sparkpost.com/contact-enterprise');
   });
 });
