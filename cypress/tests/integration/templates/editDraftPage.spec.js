@@ -170,7 +170,7 @@ describe('The templates edit draft page', () => {
 
         cy.findByText('Save and Publish').click();
 
-        cy. withinModal(() => {
+        cy.withinModal(() => {
           cy.findByText('Are you sure you want to publish your template?').should('be.visible');
           cy.findByText('Save and Publish').should('be.visible');
           cy.findByText('Cancel').should('be.visible');
@@ -193,7 +193,7 @@ describe('The templates edit draft page', () => {
 
         cy.findByText('Save and Publish').click();
 
-        cy. withinModal(() => {
+        cy.withinModal(() => {
           cy.findAllByText('Save and Publish').click();
         });
 
@@ -220,7 +220,7 @@ describe('The templates edit draft page', () => {
 
       //   cy.findByText('Save and Publish').click();
 
-      //   cy. withinModal(() => {
+      //   cy.withinModal(() => {
       //     cy.findAllByText('Save and Publish').click();
       //   });
 
