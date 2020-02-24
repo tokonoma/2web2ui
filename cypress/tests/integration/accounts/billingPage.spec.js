@@ -1,4 +1,4 @@
-/// <reference types="Cypress" />
+const PAGE_URL = '/account/billing';
 
 describe('Billing Page', () => {
   beforeEach(() => {
@@ -46,6 +46,27 @@ describe('Billing Page', () => {
       fixture: 'billing/plans/200.get.json',
       fixtureAlias: 'billingPlansGet',
     });
+
+    cy.stubRequest({
+      url: '/api/v1/billing/subscription',
+      fixture: 'billing/subscription/200.get.json',
+      fixtureAlias: 'billingSubscriptionGet',
+    });
+  });
+
+  it('renders with a relevant page title', () => {
+    cy.visit(PAGE_URL);
+
+    cy.title().should('include', 'Billing');
+  });
+
+  it("renders with the user's currently selected plan", () => {
+    cy.visit(PAGE_URL);
+
+    cy.findByText('50,000 emails for $20 per month').should('be.visible');
+    cy.findByText('$1.00 per thousand extra emails').should('be.visible');
+
+    // TODO: Check for other plan types
   });
 
   it('displays a pending plan change banner whenever a plan is downgraded', () => {
@@ -54,28 +75,32 @@ describe('Billing Page', () => {
       fixture: 'account/200.get.include-pending-subscription.json',
       fixtureAlias: 'accountPendingDowngradeGet',
     });
+
     cy.stubRequest({
       url: '/api/v1/billing/subscription',
       fixture: 'billing/subscription/200.get.include-pending-downgrades.json',
       fixtureAlias: 'subscriptionPendingDowngradeGet',
     });
-    cy.visit('/account/billing');
+
+    cy.visit(PAGE_URL);
+
     cy.findByText('Pending Plan Change').should('be.visible');
   });
 
-  it('redirects to Change My Plan page when Change Plan button is clicked', () => {
+  it('renders with a link to the change plan page', () => {
     cy.stubRequest({
       url: '/api/v1/account',
       fixture: 'account/200.get.json',
       fixtureAlias: 'accountGet',
     });
+
     cy.stubRequest({
       url: '/api/v1/billing/subscription',
       fixture: 'billing/subscription/200.get.json',
       fixtureAlias: 'subscriptionGet',
     });
-    cy.visit('/account/billing');
-    cy.contains('Change Plan').click();
-    cy.title().should('include', 'Change My Plan');
+
+    cy.visit(PAGE_URL);
+    cy.findByText('Change Plan').should('have.attr', 'href', '/account/billing/plan');
   });
 });
