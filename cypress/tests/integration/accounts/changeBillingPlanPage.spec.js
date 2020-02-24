@@ -102,6 +102,12 @@ describe('Billing Page', () => {
       url: '/api/v1/account',
       fixture: 'account/200.get.test-plan.json',
     });
+    //since this a free account, so should not have a credit card usually
+    cy.stubRequest({
+      url: '/api/v1/billing',
+      fixture: 'billing/200.get.has-no-credit-card.json',
+      fixtureAlias: 'billingGet',
+    });
     cy.stubRequest({
       url: '/api/v1/billing/subscription',
       fixture: 'billing/subscription/200.get.test-plan.json',
@@ -111,7 +117,40 @@ describe('Billing Page', () => {
     // auto select new plan
     cy.findByText('Your New Plan').should('be.visible');
     cy.findByText('50,000').should('be.visible');
-
     // todo, should finish upgrade
+    cy.findAllByText('Got it')
+      .last()
+      .click();
+    cy.findAllByLabelText('Credit Card Number').type('4000 0000 0000 0000');
+    cy.findByLabelText('Cardholder Name').type('Test Account');
+    cy.findByLabelText('Expiration Date').type('03/33');
+    cy.findByLabelText('Security Code').type('123');
+    cy.findByLabelText('Country').select('United States');
+    cy.findByLabelText('State').select('Maryland');
+    cy.findByLabelText('Zip Code').type('12345');
+
+    cy.stubRequest({
+      method: 'POST',
+      url: '/api/v1/billing/cors-data?context=create-account',
+      fixture: 'billing/cors-data/200.post.json',
+    });
+    cy.stubRequest({
+      method: 'POST',
+      url: '/v1/accounts',
+      fixture: 'zuora/accounts/200.post.json',
+    });
+    cy.stubRequest({
+      method: 'POST',
+      url: '/api/v1/account/subscription/check',
+      fixture: 'account/subscription/check/200.post.json',
+    });
+    cy.stubRequest({
+      method: 'POST',
+      url: '/api/v1/billing/subscription/check',
+      fixture: 'billing/subscription/check/200.post.json',
+    });
+
+    cy.findAllByText('Change Plan').click();
+    cy.url().should('equal', Cypress.config().baseUrl + '/account/billing');
   });
 });
