@@ -46,7 +46,6 @@
           "isGuideAtBottom": true
         },
         "recipientValidationV2": false,
-        "account_feature_limits": true,
         "recipient_validation": false,
         "feature_signals_v2": true,
         "Send Test Email": null,

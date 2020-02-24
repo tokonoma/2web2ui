@@ -51,6 +51,7 @@
   },
   "extends": [
     "react-app",
+    "plugin:cypress/recommended",
     "plugin:lodash/canonical",
     "plugin:jest/recommended",
     "plugin:prettier/recommended",
