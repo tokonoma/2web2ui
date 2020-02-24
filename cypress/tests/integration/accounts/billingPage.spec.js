@@ -137,7 +137,16 @@ describe('Billing Page', () => {
       });
     });
 
-    describe.only('the update payment information form', () => {
+    describe('the update payment information form', () => {
+      function fillOutForm() {
+        cy.findByLabelText('Credit Card Number').type('4111 1111 1111 1111');
+        cy.findByLabelText('Cardholder Name').type('Hello World');
+        cy.findByLabelText('Expiration Date').type('0123');
+        cy.findByLabelText('Security Code').type('123');
+        cy.findByLabelText('State').select('Maryland');
+        cy.findByLabelText('Zip Code').type('21046');
+      }
+
       beforeEach(() => {
         cy.stubRequest({
           url: '/api/v1/account/countries*',
@@ -167,12 +176,7 @@ describe('Billing Page', () => {
       });
 
       it('renders a success message when successfully updating payment information', () => {
-        cy.findByLabelText('Credit Card Number').type('4111 1111 1111 1111');
-        cy.findByLabelText('Cardholder Name').type('Hello World');
-        cy.findByLabelText('Expiration Date').type('0123');
-        cy.findByLabelText('Security Code').type('123');
-        cy.findByLabelText('State').select('Maryland');
-        cy.findByLabelText('Zip Code').type('21046');
+        fillOutForm();
 
         cy.stubRequest({
           method: 'POST',
@@ -180,24 +184,164 @@ describe('Billing Page', () => {
           fixture: 'billing/cors-data/200.post.json',
         });
 
+        cy.stubRequest({
+          method: 'POST',
+          url: '/v1/payment-methods/credit-cards',
+          fixture: 'zuora/payment-method/credit-cards/200.post.json',
+        });
+
+        cy.stubRequest({
+          method: 'POST',
+          url: '/api/v1/account/subscription/check',
+          fixture: 'account/subscription/check/200.post.json',
+        });
+
+        cy.stubRequest({
+          method: 'POST',
+          url: '/api/v1/billing/subscription/check',
+          fixture: 'billing/subscription/check/200.post.json',
+        });
+
+        cy.stubRequest({
+          method: 'POST',
+          url: '/api/v1/account/billing/collect',
+          fixture: 'account/billing/collect/200.post.json',
+        });
+
         cy.get('#modal-portal').within(() => {
           cy.findAllByText('Update Payment Information')
             .last()
             .click();
         });
+
+        cy.findByText('Payment Information Updated').should('be.visible');
+        cy.queryByLabelText('Credit Card Number').should('not.be.visible'); // The modal should now be closed
       });
 
-      it('renders an error when the server returns an error when updating payment information', () => {});
+      it('renders an error when the server returns an error when updating payment information', () => {
+        cy.stubRequest({
+          method: 'POST',
+          statusCode: 400,
+          url: '/api/v1/billing/cors-data*',
+          fixture: 'billing/cors-data/400.post.json',
+        });
+
+        fillOutForm();
+
+        cy.get('#modal-portal').within(() => {
+          cy.findAllByText('Update Payment Information')
+            .last()
+            .click();
+        });
+
+        cy.findByText('Something went wrong.').should('be.visible');
+        cy.findByText('View Details').click();
+        cy.findByText('This is an error').should('be.visible');
+      });
     });
 
     describe('the update billing contact form', () => {
-      it('closes the modal when clicking "Cancel"', () => {});
+      beforeEach(() => {
+        cy.stubRequest({
+          url: '/api/v1/account/countries*',
+          fixture: 'account/countries/200.get.billing-filter.json',
+        });
 
-      it('renders "Required" validation errors when skipping any of the form fields', () => {});
+        cy.visit(PAGE_URL);
+        cy.findByText('Update Billing Contact').click();
+      });
 
-      it('renders a success message when successfully updating the billing contact', () => {});
+      it('closes the modal when clicking "Cancel"', () => {
+        cy.findByLabelText('First Name').should('be.visible');
 
-      it('renders an error message when the server returns an error', () => {});
+        cy.get('#modal-portal').within(() => {
+          cy.findByText('Cancel').click();
+        });
+
+        cy.queryByLabelText('First Name').should('not.be.visible');
+      });
+
+      it('renders each field with the current billing contact information', () => {
+        cy.findByLabelText('First Name').should('have.value', 'Test');
+        cy.findByLabelText('Last Name').should('have.value', 'User');
+        cy.findByLabelText('Email').should('have.value', 'test.user@sparkpost.com');
+        cy.findByLabelText('Zip Code').should('have.value', '20740');
+      });
+
+      it('renders "Required" validation errors when skipping any of the form fields', () => {
+        cy.findByLabelText('First Name').clear();
+        cy.findByLabelText('Last Name').clear();
+        cy.findByLabelText('Email').clear();
+        cy.findByLabelText('Zip Code').clear();
+
+        cy.get('#modal-portal').within(() => {
+          cy.findAllByText('Update Billing Contact')
+            .last()
+            .click();
+
+          cy.findAllByText('Required').should('have.length', 4);
+        });
+      });
+
+      it('renders a success message when successfully updating the billing contact', () => {
+        cy.findByLabelText('First Name')
+          .clear()
+          .type('Hello');
+        cy.findByLabelText('Last Name')
+          .clear()
+          .type('World');
+        cy.findByLabelText('Email')
+          .clear()
+          .type('hello.world@sparkpost.com');
+        cy.findByLabelText('Country').select('United States');
+        cy.findByLabelText('State').select('North Carolina');
+        cy.findByLabelText('Zip Code')
+          .clear()
+          .type('123456');
+
+        cy.stubRequest({
+          method: 'PUT',
+          url: '/api/v1/account/billing',
+          fixture: 'billing/200.put.json',
+          requestAlias: 'billingUpdate',
+        });
+
+        cy.get('#modal-portal').within(() => {
+          cy.findAllByText('Update Billing Contact')
+            .last()
+            .click();
+        });
+
+        cy.wait('@billingUpdate').then(({ request }) => {
+          cy.wrap(request.body).should('have.property', 'country_code', 'US');
+          cy.wrap(request.body).should('have.property', 'email', 'hello.world@sparkpost.com');
+          cy.wrap(request.body).should('have.property', 'first_name', 'Hello');
+          cy.wrap(request.body).should('have.property', 'last_name', 'World');
+          cy.wrap(request.body).should('have.property', 'state', 'NC');
+          cy.wrap(request.body).should('have.property', 'zip_code', '123456');
+        });
+        cy.findByText('Billing Contact Updated').should('be.visible');
+        cy.findByLabelText('First Name').should('not.be.visible'); // The modal is closed'
+      });
+
+      it('renders an error message when the server returns an error', () => {
+        cy.stubRequest({
+          method: 'PUT',
+          statusCode: 400,
+          url: '/api/v1/account/billing',
+          fixture: '400.json',
+        });
+
+        cy.get('#modal-portal').within(() => {
+          cy.findAllByText('Update Billing Contact')
+            .last()
+            .click();
+        });
+
+        cy.findByText('Something went wrong.').should('be.visible');
+        cy.findByText('View Details').click();
+        cy.findByText('This is an error').should('be.visible');
+      });
     });
   });
 
@@ -265,7 +409,7 @@ describe('Billing Page', () => {
       cy.stubRequest({
         status: 400,
         url: '/api/v1/account/invoices',
-        fixture: '400.get.json',
+        fixture: '400.json',
       });
 
       cy.visit(PAGE_URL);
@@ -279,7 +423,7 @@ describe('Billing Page', () => {
       cy.findByText('Invoice History').scrollIntoView();
 
       // File download assertion not currently supported, but should be
-      // in a future release: https://github.com/cypress-io/cypress/issues/949
+      // in a future Cypress release: https://github.com/cypress-io/cypress/issues/949
       // In the meantime, just checking the request goes through.
 
       cy.stubRequest({
