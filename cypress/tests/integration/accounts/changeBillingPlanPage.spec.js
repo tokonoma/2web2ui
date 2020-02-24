@@ -117,11 +117,10 @@ describe('Billing Page', () => {
     // auto select new plan
     cy.findByText('Your New Plan').should('be.visible');
     cy.findByText('50,000').should('be.visible');
-    // todo, should finish upgrade
     cy.findAllByText('Got it')
       .last()
       .click();
-    cy.findAllByLabelText('Credit Card Number').type('4000 0000 0000 0000');
+    cy.findByLabelText('Credit Card Number').type('4000 0000 0000 0000');
     cy.findByLabelText('Cardholder Name').type('Test Account');
     cy.findByLabelText('Expiration Date').type('03/33');
     cy.findByLabelText('Security Code').type('123');
@@ -151,6 +150,7 @@ describe('Billing Page', () => {
     });
 
     cy.findAllByText('Change Plan').click();
+    cy.findAllByText('Subscription Updated').should('be.visible');
     cy.url().should('equal', Cypress.config().baseUrl + '/account/billing');
   });
 });
