@@ -145,11 +145,12 @@ describe('The blacklist watchlist page', () => {
 
     cy.visit(PAGE_BASE_URL);
 
-    // just check href
     cy.get('tbody tr').then(val => {
-      // container needed?
-      cy.findByText('2.2.8', { container: val[0] }).click();
-      cy.url().should('include', 'blacklist/incidents?search=2.2.8');
+      cy.findByText('2.2.8', { container: val[0] }).should(
+        'have.attr',
+        'href',
+        '/blacklist/incidents?search=2.2.8',
+      );
     });
   });
 });
