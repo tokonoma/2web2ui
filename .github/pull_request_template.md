@@ -8,6 +8,8 @@ Note: Give your PR a short title. Something like "_TICKET NUMBER: feature descri
 ### How To Test
  - Describe any special dev environment setup required.
      > Anything outside basic hamurai-managed stuff counts as "special".
+ - Describe any special accounts that need to be tested.
+     > Include any specific user roles and necessary feature flags.
 
 ### To Do
 - [ ] Any outstanding tasks go here
