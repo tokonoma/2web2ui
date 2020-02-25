@@ -156,7 +156,7 @@ Cypress.Commands.add(
  *
  */
 Cypress.Commands.add('assertLink', ({ content, href }) => {
-  cy.queryByText(content)
+  cy.findByText(content)
     .should('be.visible')
     .closest('a')
     .should('have.attr', 'href', href);
