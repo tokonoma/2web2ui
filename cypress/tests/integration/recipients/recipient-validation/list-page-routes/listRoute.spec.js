@@ -161,6 +161,6 @@ describe('The recipient validation /list route', () => {
 
     cy.visit(ROUTE_URL);
 
-    cy.findByText('Something went wrong.');
+    cy.findAllByText('Something went wrong.');
   });
 });
