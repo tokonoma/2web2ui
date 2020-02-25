@@ -8,6 +8,7 @@ import _ from 'lodash';
 import { hasAccountOptionEnabled, isAccountUiOptionSet } from 'src/helpers/conditions/account';
 import { prepareCardInfo, isProductOnSubscription } from 'src/helpers/billing';
 import { rvAddPaymentFormInitialValues } from 'src/selectors/recipientValidation';
+import { selectIsSelfServeBilling } from 'src/selectors/accountBillingInfo';
 import { getBillingInfo } from 'src/actions/account';
 import addRVtoSubscription from 'src/actions/addRVtoSubscription';
 import { getSubscription as getBillingSubscription } from 'src/actions/billing';
@@ -96,9 +97,9 @@ export class RecipientValidationPage extends Component {
   };
 
   onSubmit = formValues => {
-    const { addRVtoSubscription, isRVonSubscription } = this.props;
+    const { addRVtoSubscription, isRVonSubscription, isManuallyBilled } = this.props;
 
-    if (this.state.useSavedCC && isRVonSubscription) {
+    if ((this.state.useSavedCC && isRVonSubscription) || (isRVonSubscription && isManuallyBilled)) {
       return this.redirectToNextStep(formValues);
     }
 
@@ -250,6 +251,7 @@ const mapStateToProps = (state, props) => ({
   billingLoading: state.account.billingLoading,
   isRVonSubscription: isProductOnSubscription('recipient_validation')(state),
   initialValues: rvAddPaymentFormInitialValues(state),
+  isManuallyBilled: !selectIsSelfServeBilling(state),
 });
 
 export default withRouter(connect(mapStateToProps, { getBillingInfo })(RecipientValidationPage));
