@@ -73,7 +73,7 @@ describe('UploadedListPage', () => {
     });
 
     it('calls triggerJob when form is submitted', () => {
-      const triggerJob = jest.fn(a => Promise.resolve(a));
+      const triggerJob = jest.fn();
       const wrapper = queuedSubject({ triggerJob });
 
       wrapper.find('Connect(UploadedListForm)').simulate('submit');

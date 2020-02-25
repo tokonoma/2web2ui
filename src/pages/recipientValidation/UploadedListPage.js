@@ -47,9 +47,7 @@ export class UploadedListPage extends Component {
 
   handleSubmit = () => {
     const { listId, triggerJob } = this.props;
-    triggerJob(listId)
-      .then(() => this.setState({ submitStatus: 'done' }))
-      .catch(() => this.setState({ submitStatus: 'error' }));
+    triggerJob(listId);
   };
 
   onSubmit = formValues => {
@@ -70,9 +68,7 @@ export class UploadedListPage extends Component {
       values,
       updateCreditCard: !useSavedCC,
       isRVonSubscription: isRVonSubscription,
-    })
-      .then(() => this.handleSubmit())
-      .catch(() => this.setState({ submitStatus: 'error' }));
+    }).then(() => this.handleSubmit());
   };
 
   renderUploadedListPage = () => {
@@ -84,7 +80,6 @@ export class UploadedListPage extends Component {
       valid,
       submitting,
     } = this.props;
-    if (this.state.submitStatus === 'pending') return <Loading />;
     return (
       <Page
         title="Recipient Validation"
