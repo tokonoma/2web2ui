@@ -10,6 +10,8 @@ export const SSO_AUTH_ROUTE = '/auth/sso';
 export const COOKIE_DOMAIN = '.sparkpost.com';
 
 export const FORMATS = {
+  DISPLAY_DATE: 'MMM D YYYY, h:mma',
+
   DATE: 'MMM Do',
   LONG_DATE: 'MMM Do YYYY',
   SHORT_DATE: 'YYYY-MM-DD',
