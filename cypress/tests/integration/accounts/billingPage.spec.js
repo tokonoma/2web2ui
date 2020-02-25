@@ -85,6 +85,14 @@ describe('Billing Page', () => {
     it('renders the premier plan', () => {});
   });
 
+  it('opens a modal when clicking "How was this calculated?" breaking down Recipient Validation costs', () => {
+    cy.visit(PAGE_URL);
+
+    cy.findByText('How was this calculated?').click();
+
+    cy.findAllByText('How was this calculated?').should('have.length', 2); // The content appears both in the modal triggering element and inside the modal
+  });
+
   it('displays a pending plan change banner whenever a plan is downgraded', () => {
     cy.stubRequest({
       url: '/api/v1/account',
@@ -104,20 +112,8 @@ describe('Billing Page', () => {
   });
 
   it('renders with a link to the change plan page', () => {
-    cy.stubRequest({
-      url: '/api/v1/account',
-      fixture: 'account/200.get.json',
-      fixtureAlias: 'accountGet',
-    });
-
-    cy.stubRequest({
-      url: '/api/v1/billing/subscription',
-      fixture: 'billing/subscription/200.get.json',
-      fixtureAlias: 'subscriptionGet',
-    });
-
     cy.visit(PAGE_URL);
-    cy.findByText('Change Plan').should('have.attr', 'href', '/account/billing/plan');
+    cy.assertLink({ content: 'Change Plan', href: '/account/billing/plan' });
   });
 
   describe('the billing panel', () => {
