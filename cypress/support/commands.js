@@ -163,23 +163,13 @@ Cypress.Commands.add('assertLink', ({ content, href }) => {
 });
 
 /**
- * Used to check within the global modal view [aria-modal="true"]
+ * Used to interact and assert within a modal dialog
  *
- * @param {function} assertMethod - The function that has assertions to run within the modal container
+ * @param {function} assertMethod - The callback function that runs inside the modal
  *
  */
 Cypress.Commands.add('withinModal', assertMethod => {
-  cy.get('[aria-modal="true"]').within(assertMethod);
-});
-
-/**
- * Used to check within the global modal view #modal-portal
- *
- * @param {function} assertMethod - The function that has assertions to run within the modal container
- *
- */
-Cypress.Commands.add('withinModalPortal', assertMethod => {
-  cy.get('#modal-portal').within(assertMethod);
+  cy.get('[role="dialog"]:visible').within(assertMethod);
 });
 
 /**
