@@ -56,10 +56,12 @@ export const GettingStartedGuide = ({
           },
         ];
   //stepName could be Features,Sending,Show Me Sparkpost, Let's Code
+  const currentSteps = ['Sending', "Let's Code", 'Show Me SparkPost'];
+  const defaultStep = 'Sending';
   const [stepName, setStepName] = useState(
-    //FIXME: Check in case the active step was set to features and step was already removed
-    active_step === 'Features' || !active_step ? 'Sending' : active_step,
+    currentSteps.includes(active_step) ? active_step : defaultStep,
   );
+
   const setAndStoreStepName = active_step => {
     setOnboardingAccountOption({ active_step: active_step });
     setStepName(active_step);
