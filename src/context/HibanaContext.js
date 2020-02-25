@@ -38,6 +38,10 @@ function HibanaProvider({ children }) {
   );
 }
 
+function HibanaConsumer({ children }) {
+  return <HibanaStateContext.Consumer>{children}</HibanaStateContext.Consumer>;
+}
+
 function useHibanaState() {
   const context = useContext(HibanaStateContext);
 
@@ -55,4 +59,4 @@ function useHibanaDispatch() {
   return context;
 }
 
-export { HibanaProvider, useHibana };
+export { HibanaProvider, HibanaConsumer, useHibana };
