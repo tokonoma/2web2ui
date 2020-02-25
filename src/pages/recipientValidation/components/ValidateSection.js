@@ -21,9 +21,18 @@ function ValidateSection({
   useEffect(() => {
     getBillingCountries();
   }, [getBillingCountries]);
-  if (isManuallyBilled) {
-    if (!isProductOnSubscription)
-      return (
+  return (
+    <>
+      {!isManuallyBilled && (
+        <CreditCardSection
+          creditCard={credit_card}
+          handleCardToggle={handleCardToggle}
+          formname={FORMNAME}
+          countries={billingCountries || []}
+          defaultToggleState={defaultToggleState}
+        />
+      )}
+      {isManuallyBilled && !isProductOnSubscription ? (
         <Button
           external
           primary
@@ -31,28 +40,11 @@ function ValidateSection({
         >
           Contact Sales
         </Button>
-      );
-
-    return (
-      <Button primary submit disabled={submitDisabled}>
-        {/* functionality to validate to be added in AC-1196 and AC-1197*/}
-        {submitButtonName}
-      </Button>
-    );
-  }
-  return (
-    <>
-      <CreditCardSection
-        creditCard={credit_card}
-        handleCardToggle={handleCardToggle}
-        formname={FORMNAME}
-        countries={billingCountries || []}
-        defaultToggleState={defaultToggleState}
-      />
-      <Button primary submit disabled={submitDisabled}>
-        {/* functionality to validate to be added in AC-1196 and AC-1197*/}
-        {submitButtonName}
-      </Button>
+      ) : (
+        <Button primary submit disabled={submitDisabled}>
+          {submitButtonName}
+        </Button>
+      )}
     </>
   );
 }
