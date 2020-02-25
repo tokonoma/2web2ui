@@ -4,6 +4,10 @@ describe('The recipient validation /list route', () => {
   beforeEach(() => {
     cy.stubAuth();
     cy.login({ isStubbed: true });
+    cy.stubRequest({
+      url: '/api/v1/billing',
+      fixture: 'billing/200.get.json',
+    });
   });
 
   it('renders a relevant heading', () => {
@@ -161,6 +165,6 @@ describe('The recipient validation /list route', () => {
 
     cy.visit(ROUTE_URL);
 
-    cy.findByText('Something went wrong.');
+    cy.findAllByText('Something went wrong.');
   });
 });
