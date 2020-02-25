@@ -120,10 +120,12 @@ describe('The alerts details pages', () => {
     function assertTableRow({ rowIndex, isActive, subaccount, score }) {
       cy.get('tbody tr')
         .eq(rowIndex)
-        .within(() => {
-          cy.findByText('Active').should(isActive ? 'be.visible' : 'not.be.visible');
-          cy.findByText(subaccount).should('be.visible');
-          cy.findByText(score.toString()).should('be.visible');
+        .within(el => {
+          cy.findByText('Active', { container: el }).should(
+            isActive ? 'be.visible' : 'not.be.visible',
+          );
+          cy.findByText(subaccount, { container: el }).should('be.visible');
+          cy.findByText(score.toString(), { container: el }).should('be.visible');
         });
     }
 
