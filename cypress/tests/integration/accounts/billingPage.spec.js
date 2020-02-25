@@ -1,4 +1,6 @@
 const PAGE_URL = '/account/billing';
+const ACCOUNT_API_BASE_URL = '/api/v1/account';
+const BILLING_API_BASE_URL = '/api/v1/billing';
 
 describe('Billing Page', () => {
   beforeEach(() => {
@@ -6,13 +8,13 @@ describe('Billing Page', () => {
     cy.login({ isStubbed: true });
 
     cy.stubRequest({
-      url: '/api/v1/billing',
+      url: BILLING_API_BASE_URL,
       fixture: 'billing/200.get.json',
       fixtureAlias: 'billingGet',
     });
 
     cy.stubRequest({
-      url: '/api/v1/account/plans',
+      url: `${ACCOUNT_API_BASE_URL}/plans`,
       fixture: 'account/plans/200.get.json',
       fixtureAlias: 'plansGet',
     });
@@ -24,7 +26,7 @@ describe('Billing Page', () => {
     });
 
     cy.stubRequest({
-      url: '/api/v1/account/invoices',
+      url: `${ACCOUNT_API_BASE_URL}/invoices`,
       fixture: 'account/invoices/200.get.json',
       fixtureAlias: 'invoicesGet',
     });
@@ -36,19 +38,19 @@ describe('Billing Page', () => {
     });
 
     cy.stubRequest({
-      url: '/api/v1/billing/bundles',
+      url: `${BILLING_API_BASE_URL}/bundles`,
       fixture: 'billing/bundles/200.get.json',
       fixtureAlias: 'bundlesGet',
     });
 
     cy.stubRequest({
-      url: '/api/v1/billing/plans',
+      url: `${BILLING_API_BASE_URL}/plans`,
       fixture: 'billing/plans/200.get.json',
       fixtureAlias: 'billingPlansGet',
     });
 
     cy.stubRequest({
-      url: '/api/v1/billing/subscription',
+      url: `${BILLING_API_BASE_URL}/subscription`,
       fixture: 'billing/subscription/200.get.json',
       fixtureAlias: 'billingSubscriptionGet',
     });
@@ -60,7 +62,12 @@ describe('Billing Page', () => {
     cy.title().should('include', 'Billing');
   });
 
-  it("renders with the user's currently selected plan", () => {});
+  it("renders with the user's currently selected plan", () => {
+    cy.visit(PAGE_URL);
+
+    cy.findByText('50,000 emails for $20 per month').should('be.visible');
+    cy.findByText('$1.00 per thousand extra emails').should('be.visible');
+  });
 
   it('opens a modal when clicking "How was this calculated?" breaking down Recipient Validation costs', () => {
     cy.visit(PAGE_URL);
@@ -72,13 +79,13 @@ describe('Billing Page', () => {
 
   it('displays a pending plan change banner whenever a plan is downgraded', () => {
     cy.stubRequest({
-      url: '/api/v1/account',
+      url: `${ACCOUNT_API_BASE_URL}`,
       fixture: 'account/200.get.include-pending-subscription.json',
       fixtureAlias: 'accountPendingDowngradeGet',
     });
 
     cy.stubRequest({
-      url: '/api/v1/billing/subscription',
+      url: `${BILLING_API_BASE_URL}/subscription`,
       fixture: 'billing/subscription/200.get.include-pending-downgrades.json',
       fixtureAlias: 'subscriptionPendingDowngradeGet',
     });
@@ -102,7 +109,7 @@ describe('Billing Page', () => {
 
   describe('the dedicated IPs modal', () => {
     const ipPoolsApiUrl = '/api/v1/ip-pools';
-    const dedicatedIpsApiUrl = '/api/v1/account/add-ons/dedicated_ips';
+    const dedicatedIpsApiUrl = `${ACCOUNT_API_BASE_URL}/add-ons/dedicated_ips`;
 
     function assignToNewIpPool() {
       cy.findByLabelText(/Quantity */i).type('1'); // Helps avoid encountering the 'Required' error message
@@ -225,7 +232,7 @@ describe('Billing Page', () => {
 
       beforeEach(() => {
         cy.stubRequest({
-          url: '/api/v1/account/countries*',
+          url: `${ACCOUNT_API_BASE_URL}/countries*`,
           fixture: 'account/countries/200.get.billing-filter.json',
         });
 
@@ -256,7 +263,7 @@ describe('Billing Page', () => {
 
         cy.stubRequest({
           method: 'POST',
-          url: '/api/v1/billing/cors-data*',
+          url: `${BILLING_API_BASE_URL}/cors-data*`,
           fixture: 'billing/cors-data/200.post.json',
         });
 
@@ -268,19 +275,19 @@ describe('Billing Page', () => {
 
         cy.stubRequest({
           method: 'POST',
-          url: '/api/v1/account/subscription/check',
+          url: `${ACCOUNT_API_BASE_URL}/subscription/check`,
           fixture: 'account/subscription/check/200.post.json',
         });
 
         cy.stubRequest({
           method: 'POST',
-          url: '/api/v1/billing/subscription/check',
+          url: `${BILLING_API_BASE_URL}/subscription/check`,
           fixture: 'billing/subscription/check/200.post.json',
         });
 
         cy.stubRequest({
           method: 'POST',
-          url: '/api/v1/account/billing/collect',
+          url: `${ACCOUNT_API_BASE_URL}/billing/collect`,
           fixture: 'account/billing/collect/200.post.json',
         });
 
@@ -298,7 +305,7 @@ describe('Billing Page', () => {
         cy.stubRequest({
           method: 'POST',
           statusCode: 400,
-          url: '/api/v1/billing/cors-data*',
+          url: `${BILLING_API_BASE_URL}/cors-data*`,
           fixture: 'billing/cors-data/400.post.json',
         });
 
@@ -319,7 +326,7 @@ describe('Billing Page', () => {
     describe('the update billing contact form', () => {
       beforeEach(() => {
         cy.stubRequest({
-          url: '/api/v1/account/countries*',
+          url: `${ACCOUNT_API_BASE_URL}/countries*`,
           fixture: 'account/countries/200.get.billing-filter.json',
         });
 
@@ -377,7 +384,7 @@ describe('Billing Page', () => {
 
         cy.stubRequest({
           method: 'PUT',
-          url: '/api/v1/account/billing',
+          url: `${ACCOUNT_API_BASE_URL}/billing`,
           fixture: 'billing/200.put.json',
           requestAlias: 'billingUpdate',
         });
@@ -404,7 +411,7 @@ describe('Billing Page', () => {
         cy.stubRequest({
           method: 'PUT',
           statusCode: 400,
-          url: '/api/v1/account/billing',
+          url: `${ACCOUNT_API_BASE_URL}/billing`,
           fixture: '400.json',
         });
 
@@ -471,7 +478,7 @@ describe('Billing Page', () => {
 
     it('does not render the "Invoice History" table when no results are returned', () => {
       cy.stubRequest({
-        url: '/api/v1/account/invoices',
+        url: `${ACCOUNT_API_BASE_URL}/invoices`,
         fixture: '200.get.no-results',
         fixtureAlias: 'invoicesGet',
       });
@@ -484,7 +491,7 @@ describe('Billing Page', () => {
     it('does not render the "Invoice History" table when the server returns an error', () => {
       cy.stubRequest({
         status: 400,
-        url: '/api/v1/account/invoices',
+        url: `${ACCOUNT_API_BASE_URL}/invoices`,
         fixture: '400.json',
       });
 
@@ -503,7 +510,7 @@ describe('Billing Page', () => {
       // In the meantime, just checking the request goes through.
 
       cy.stubRequest({
-        url: '/api/v1/account/invoices/abc',
+        url: `${ACCOUNT_API_BASE_URL}/invoices/abc`,
         fixture: 'account/invoices/abc/200.get.pdf',
       });
 
