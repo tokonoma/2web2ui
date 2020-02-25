@@ -58,7 +58,6 @@ describe('Billing Page', () => {
     cy.visit(PAGE_URL);
 
     cy.title().should('include', 'Billing');
-    cy.get('main').within(() => cy.findByText('Billing').should('be.visible'));
   });
 
   it("renders with the user's currently selected plan", () => {});
