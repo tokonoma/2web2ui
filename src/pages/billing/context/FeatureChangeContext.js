@@ -97,18 +97,15 @@ export const FeatureChangeProvider = ({
   //Evaluates condition and generates action if condition exists
   const featuresWithActions = useMemo(
     () =>
-      _.map(actions, ({ action, condition, ...rest }, key) => ({
-        ...rest,
+      _.map(actions, (action, key) => ({
+        ...action,
         key,
-        value: condition !== undefined ? condition : true,
-        action,
       })),
     [actions],
   );
 
   //Checks if all provided conditions are good
   const value = {
-    isReady: _.every(featuresWithActions, 'value'),
     features: featuresWithActions,
     loading,
   };
