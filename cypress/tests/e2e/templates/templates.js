@@ -143,7 +143,7 @@ describe('Templates', () => {
 
     it('published the template', () => {
       cy.findByText('Save and Publish').click();
-      cy. withinModal(() => cy.findByText('Save and Publish').click());
+      cy.withinModal(() => cy.findByText('Save and Publish').click());
 
       cy.wait(['@templatesPut', '@templatesGet']);
 
