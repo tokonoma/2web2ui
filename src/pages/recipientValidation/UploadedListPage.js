@@ -22,7 +22,7 @@ import addRVtoSubscription from 'src/actions/addRVtoSubscription';
 import { getSubscription as getBillingSubscription } from 'src/actions/billing';
 import _ from 'lodash';
 
-const FORMNAME = FORMS.RV_ADDPAYMENTFORM;
+const FORMNAME = FORMS.RV_ADDPAYMENTFORM_UPLOADLISTPAGE;
 
 export class UploadedListPage extends Component {
   state = {
