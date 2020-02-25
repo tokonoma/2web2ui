@@ -21,18 +21,6 @@ export const FeatureChangeProvider = ({
     getSubscription();
   }, [getSubscription]);
 
-  // TODO: Used to recheck subscription on refocusing tab. Doesn't matter now since there's no products that can be checked
-  // //Rechecks conditions on re-entering tab. Only initializes once
-  // const checkConditions = useCallback(() => {
-  //   getSubscription();
-  // }, [getSubscription]);
-  // useEffect(() => {
-  //   window.addEventListener('focus', checkConditions);
-  //   return () => {
-  //     window.removeEventListener('focus', checkConditions);
-  //   };
-  // }, [checkConditions]);
-
   //Keys the selected plan by product to make for easier comparison
   const selectedPlansByProduct = useMemo(() => {
     const { products } = selectedBundle;
