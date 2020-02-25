@@ -27,7 +27,6 @@ const FORMNAME = FORMS.RV_ADDPAYMENTFORM_UPLOADLISTPAGE;
 export class UploadedListPage extends Component {
   state = {
     useSavedCC: Boolean(this.props.billing.credit_card),
-    submitStatus: 'idle',
   };
   componentDidMount() {
     const { getJobStatus, listId, getBillingInfo, getBillingSubscription } = this.props;
@@ -51,7 +50,6 @@ export class UploadedListPage extends Component {
   };
 
   onSubmit = formValues => {
-    this.setState({ submitStatus: 'pending' });
     const { addRVtoSubscription, isRVonSubscription, isStandAloneRVSet } = this.props;
     const { useSavedCC } = this.state;
 
