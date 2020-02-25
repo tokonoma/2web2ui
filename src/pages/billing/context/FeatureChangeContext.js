@@ -83,7 +83,7 @@ export const FeatureChangeProvider = ({
   useMemo(calculateDifferences, [subscription]);
 
   //Evaluates condition and generates action if condition exists
-  const featuresWithActions = useMemo(
+  const mappedFeatures = useMemo(
     () =>
       _.map(actions, (action, key) => ({
         ...action,
@@ -94,7 +94,7 @@ export const FeatureChangeProvider = ({
 
   //Checks if all provided conditions are good
   const value = {
-    features: featuresWithActions,
+    features: mappedFeatures,
     loading,
   };
 
