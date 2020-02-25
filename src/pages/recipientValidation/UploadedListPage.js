@@ -27,6 +27,7 @@ const FORMNAME = FORMS.RV_ADDPAYMENTFORM_UPLOADLISTPAGE;
 export class UploadedListPage extends Component {
   state = {
     useSavedCC: Boolean(this.props.billing.credit_card),
+    submitStatus: 'idle',
   };
   componentDidMount() {
     const { getJobStatus, listId, getBillingInfo, getBillingSubscription } = this.props;
@@ -46,10 +47,13 @@ export class UploadedListPage extends Component {
 
   handleSubmit = () => {
     const { listId, triggerJob } = this.props;
-    triggerJob(listId);
+    triggerJob(listId)
+      .then(() => this.setState({ submitStatus: 'done' }))
+      .catch(() => this.setState({ submitStatus: 'error' }));
   };
 
   onSubmit = formValues => {
+    this.setState({ submitStatus: 'pending' });
     const { addRVtoSubscription, isRVonSubscription, isStandAloneRVSet } = this.props;
     const { useSavedCC } = this.state;
 
@@ -66,7 +70,9 @@ export class UploadedListPage extends Component {
       values,
       updateCreditCard: !useSavedCC,
       isRVonSubscription: isRVonSubscription,
-    }).then(() => this.handleSubmit());
+    })
+      .then(() => this.handleSubmit())
+      .catch(() => this.setState({ submitStatus: 'error' }));
   };
 
   renderUploadedListPage = () => {
@@ -78,6 +84,7 @@ export class UploadedListPage extends Component {
       valid,
       submitting,
     } = this.props;
+    if (this.state.submitStatus === 'pending') return <Loading />;
     return (
       <Page
         title="Recipient Validation"
