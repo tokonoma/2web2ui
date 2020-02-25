@@ -7,7 +7,11 @@ import { getBillingInfo } from 'src/actions/account';
 import Loading from 'src/components/loading';
 import PageLink from 'src/components/pageLink/PageLink';
 import { RedirectAndAlert } from 'src/components/globalAlert';
-import { selectRecipientValidationJobById } from 'src/selectors/recipientValidation';
+import {
+  selectRecipientValidationJobById,
+  rvAddPaymentFormInitialValues,
+} from 'src/selectors/recipientValidation';
+import { selectIsSelfServeBilling } from 'src/selectors/accountBillingInfo';
 import ListError from './components/ListError';
 import ListProgress from './components/ListProgress';
 import UploadedListForm from './components/UploadedListForm';
@@ -17,7 +21,6 @@ import ValidateSection from './components/ValidateSection';
 import { FORMS } from 'src/constants';
 import { reduxForm } from 'redux-form';
 import { isProductOnSubscription, prepareCardInfo } from 'src/helpers/billing';
-import { rvAddPaymentFormInitialValues } from 'src/selectors/recipientValidation';
 import addRVtoSubscription from 'src/actions/addRVtoSubscription';
 import { getSubscription as getBillingSubscription } from 'src/actions/billing';
 import _ from 'lodash';
@@ -50,10 +53,19 @@ export class UploadedListPage extends Component {
   };
 
   onSubmit = formValues => {
-    const { addRVtoSubscription, isRVonSubscription, isStandAloneRVSet } = this.props;
+    const {
+      addRVtoSubscription,
+      isRVonSubscription,
+      isStandAloneRVSet,
+      isManuallyBilled,
+    } = this.props;
     const { useSavedCC } = this.state;
 
-    if (!isStandAloneRVSet || (useSavedCC && isRVonSubscription)) {
+    if (
+      !isStandAloneRVSet ||
+      (useSavedCC && isRVonSubscription) ||
+      (isRVonSubscription && isManuallyBilled)
+    ) {
       this.handleSubmit();
       return;
     }
@@ -77,7 +89,9 @@ export class UploadedListPage extends Component {
       billingLoading,
       valid,
       submitting,
+      isRVonSubscription,
     } = this.props;
+
     return (
       <Page
         title="Recipient Validation"
@@ -111,6 +125,7 @@ export class UploadedListPage extends Component {
             submitDisabled={!valid || submitting}
             handleCardToggle={this.handleToggleCC}
             defaultToggleState={!this.state.useSavedCC}
+            isProductOnSubscription={isRVonSubscription}
           />
         )}
       </Page>
@@ -157,6 +172,7 @@ const mapStateToProps = (state, props) => {
     billingLoading: state.account.billingLoading,
     isRVonSubscription: isProductOnSubscription('recipient_validation')(state),
     initialValues: rvAddPaymentFormInitialValues(state),
+    isManuallyBilled: !selectIsSelfServeBilling(state),
   };
 };
 
