@@ -58,32 +58,10 @@ describe('Billing Page', () => {
     cy.visit(PAGE_URL);
 
     cy.title().should('include', 'Billing');
+    cy.get('main').within(() => cy.findByText('Billing').should('be.visible'));
   });
 
   it("renders with the user's currently selected plan", () => {});
-
-  describe("rendering different plans based on the user's subscription", () => {
-    // TODO: Flesh these bad boys out!!
-
-    it('renders with the free plan', () => {
-      cy.stubRequest({
-        url: '/api/v1/billing/subscription',
-        fixture: 'billing/subscription/200.get.premier-plan.json',
-        fixtureAlias: 'billingSubscriptionGet',
-      });
-
-      cy.visit(PAGE_URL);
-    });
-
-    it('renders with the 50k/month plan', () => {
-      cy.visit(PAGE_URL);
-
-      cy.findByText('50,000 emails for $20 per month').should('be.visible');
-      cy.findByText('$1.00 per thousand extra emails').should('be.visible');
-    });
-
-    it('renders the premier plan', () => {});
-  });
 
   it('opens a modal when clicking "How was this calculated?" breaking down Recipient Validation costs', () => {
     cy.visit(PAGE_URL);
@@ -114,6 +92,107 @@ describe('Billing Page', () => {
   it('renders with a link to the change plan page', () => {
     cy.visit(PAGE_URL);
     cy.assertLink({ content: 'Change Plan', href: '/account/billing/plan' });
+  });
+
+  it('renders with the dedicated IPs section if the user is transitioning to self serve (they have no credit card on file and the default subscription)', () => {
+    cy.visit(PAGE_URL);
+
+    cy.findByText('Dedicated IPs').should('be.visible');
+    cy.assertLink({ content: 'Manage Your IPs', href: '/account/ip-pools' });
+  });
+
+  describe('the dedicated IPs modal', () => {
+    const ipPoolsApiUrl = '/api/v1/ip-pools';
+    const dedicatedIpsApiUrl = '/api/v1/account/add-ons/dedicated_ips';
+
+    function assignToNewIpPool() {
+      cy.findByLabelText(/Quantity */i).type('1'); // Helps avoid encountering the 'Required' error message
+      cy.findByLabelText('Name your new IP Pool *').type('My IP Pool');
+      cy.findAllByText('Add Dedicated IPs')
+        .last()
+        .click();
+    }
+
+    function assignToExistingIpPool() {
+      cy.findByLabelText(/Quantity */i).type('1'); // Helps avoid encountering the 'Required' error message
+      cy.findByLabelText('Assign to an existing IP Pool').check({ force: true }); // `force` required to handle Matchbox design issue
+      cy.findByLabelText('Choose an IP Pool *').select('myPool');
+      cy.findAllByText('Add Dedicated IPs')
+        .last()
+        .click();
+    }
+
+    beforeEach(() => {
+      cy.visit(PAGE_URL);
+
+      cy.stubRequest({
+        url: ipPoolsApiUrl,
+        fixture: 'ip-pools/200.get.json',
+      });
+
+      cy.stubRequest({
+        method: 'POST',
+        url: ipPoolsApiUrl,
+        fixture: 'ip-pools/200.post.json',
+      });
+
+      cy.stubRequest({
+        method: 'POST',
+        url: dedicatedIpsApiUrl,
+        fixture: 'account/add-ons/dedicated_ips/200.post.json',
+      });
+
+      // Start by opening the modal!
+      cy.findByText('Add Dedicated IPs').click();
+    });
+
+    it('renders "Required" validation messages when the "Quantity" and "Name your new IP Pool" fields are skipped', () => {
+      cy.findAllByText('Add Dedicated IPs')
+        .last()
+        .click();
+
+      cy.findAllByText('Required').should('have.length', 2);
+    });
+
+    it('successfully assigns a dedicated IP to a new IP pool', () => {
+      assignToNewIpPool();
+
+      cy.findByText('Successfully added 1 dedicated IPs!');
+    });
+
+    it('renders errors when the IP pools API returns an error', () => {
+      cy.stubRequest({
+        statusCode: 400,
+        method: 'POST',
+        url: ipPoolsApiUrl,
+        fixture: '400.json',
+      });
+
+      assignToNewIpPool();
+
+      cy.findByText('Unable to create your new IP Pool').should('be.visible');
+      cy.findByText('Something went wrong.').should('be.visible');
+    });
+
+    it('renders errors when the dedicated IPs API returns an error', () => {
+      cy.stubRequest({
+        statusCode: 400,
+        method: 'POST',
+        url: dedicatedIpsApiUrl,
+        fixture: '400.json',
+      });
+
+      assignToNewIpPool();
+
+      cy.findByText('Unable to complete your request at this time').should('be.visible');
+      cy.findByText('Something went wrong.').should('be.visible');
+    });
+
+    it('successfully assigns a dedicated IP to an existing IP pool', () => {
+      assignToExistingIpPool();
+
+      cy.findByText('Successfully added 1 dedicated IPs!').should('be.visible');
+    });
   });
 
   describe('the billing panel', () => {
