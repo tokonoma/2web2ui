@@ -18,6 +18,8 @@ describe('Blacklist - Add to Watchlist Page', () => {
   });
 
   it('successfully adds a single resource and redirects to watchlist page', () => {
+    cy.findByText('Save').should('be.disabled');
+    cy.findByText('Save and Add Another').should('be.disabled');
     cy.findByLabelText('IP or Sending Domain').type('sparkpost.io');
     cy.findByText('Save').click();
     cy.wait('@addNewResource').then(({ requestBody }) => {

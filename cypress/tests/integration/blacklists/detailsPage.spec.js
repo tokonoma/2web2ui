@@ -30,7 +30,6 @@ describe('Blacklist Incident Details Page', () => {
     cy.title().should('include', 'Incident Details | Blacklist');
   });
 
-
   it('loads and renders the blacklist incident correctly', () => {
     const timestamp = 1580392800000; //01/30/2020 @ 2:00pm (UTC)
     cy.clock(timestamp);
@@ -75,7 +74,9 @@ describe('Blacklist Incident Details Page', () => {
 
     cy.visit(PAGE_URL);
     cy.findByText('An error occurred').should('be.visible');
-    cy.findByText('Sorry, we seem to have had some trouble loading your blacklist incidents.').should('be.visible');
+    cy.findByText(
+      'Sorry, we seem to have had some trouble loading your blacklist incidents.',
+    ).should('be.visible');
     cy.findByText('Show Error Details').click();
     cy.findByText('Hey look, an error').should('be.visible');
   });

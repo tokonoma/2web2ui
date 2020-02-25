@@ -14,11 +14,13 @@ describe('The alerts details pages', () => {
     cy.stubRequest({
       url: `${API_URL}/incidents`,
       fixture: 'alerts/2/incidents/200.get.json',
+      requestAlias: 'getIncidents',
     });
 
     cy.stubRequest({
       url: '/api/v1/subaccounts',
       fixture: 'subaccounts/200.get.json',
+      requestAlias: 'getSubaccounts',
     });
   });
 
@@ -84,10 +86,11 @@ describe('The alerts details pages', () => {
       cy.findByText('Are you sure you want to delete this alert?').should('be.visible');
       cy.findByText('Cancel').click();
       cy.queryByText('Are you sure you want to delete this alert?').should('not.be.visible');
-      // Grabbing delete button outside of the modal - this is technically a bug as
-      // the Modal needs to not be encounterable by Cypress or screen readers at this point
+
       cy.get('main').within(() => cy.findByText('Delete').click());
-      cy.get('#modal-portal').within(() => cy.findByText('Delete').click());
+      cy.withinModal(() => {
+        cy.findByText('Delete').click();
+      });
 
       cy.findByText('Alert: This is an alert Deleted').should('be.visible');
       cy.url().should('include', '/alerts');
@@ -103,7 +106,9 @@ describe('The alerts details pages', () => {
       });
 
       cy.findByText('Delete').click();
-      cy.get('#modal-portal').within(() => cy.findByText('Delete').click());
+      cy.withinModal(() => {
+        cy.findByText('Delete').click();
+      });
 
       cy.findByText('Something went wrong.').should('be.visible');
       cy.findByText('View Details').click();
@@ -115,10 +120,12 @@ describe('The alerts details pages', () => {
     function assertTableRow({ rowIndex, isActive, subaccount, score }) {
       cy.get('tbody tr')
         .eq(rowIndex)
-        .within(() => {
-          cy.findByText('Active').should(isActive ? 'be.visible' : 'not.be.visible');
-          cy.findByText(subaccount).should('be.visible');
-          cy.findByText(score.toString()).should('be.visible');
+        .within(el => {
+          cy.findByText('Active', { container: el }).should(
+            isActive ? 'be.visible' : 'not.be.visible',
+          );
+          cy.findByText(subaccount, { container: el }).should('be.visible');
+          cy.findByText(score.toString(), { container: el }).should('be.visible');
         });
     }
 
@@ -136,6 +143,8 @@ describe('The alerts details pages', () => {
 
     it('renders "Active" and already-resolved incidents', () => {
       cy.visit(PAGE_URL);
+
+      cy.wait(['@getIncidents', '@getSubaccounts']);
 
       assertTableRow({
         rowIndex: 0,
