@@ -14,11 +14,13 @@ describe('The alerts details pages', () => {
     cy.stubRequest({
       url: `${API_URL}/incidents`,
       fixture: 'alerts/2/incidents/200.get.json',
+      requestAlias: 'getIncidents',
     });
 
     cy.stubRequest({
       url: '/api/v1/subaccounts',
       fixture: 'subaccounts/200.get.json',
+      requestAlias: 'getSubaccounts',
     });
   });
 
@@ -139,6 +141,8 @@ describe('The alerts details pages', () => {
 
     it('renders "Active" and already-resolved incidents', () => {
       cy.visit(PAGE_URL);
+
+      cy.wait(['@getIncidents', '@getSubaccounts']);
 
       assertTableRow({
         rowIndex: 0,
