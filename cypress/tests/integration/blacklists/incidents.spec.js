@@ -1,13 +1,13 @@
 import moment from 'moment';
-import { FORMATS } from '../../../../src/constants/index.js';
 const utcFormatMatcher = /\d+-\d+-\d+T/g;
 const PAGE_BASE_URL = '/blacklist/incidents';
+const dateFormat = 'MMM D YYYY, h:mma';
 
 let nov = moment('2019-11-20T17:14:57.899Z');
-let novTime = nov.format(FORMATS.DISPLAY_DATE);
+let novTime = nov.format(dateFormat);
 
 let sep = moment('2019-09-09T00:00:00.000Z');
-let sepTime = sep.format(FORMATS.DISPLAY_DATE);
+let sepTime = sep.format(dateFormat);
 
 describe('The blacklist incidents page', () => {
   beforeEach(() => {
