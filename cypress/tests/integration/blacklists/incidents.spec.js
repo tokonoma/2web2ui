@@ -1,6 +1,13 @@
 import moment from 'moment';
+import { FORMATS } from '../../../../src/constants/index.js';
 const utcFormatMatcher = /\d+-\d+-\d+T/g;
 const PAGE_BASE_URL = '/blacklist/incidents';
+
+let nov = moment('2019-11-20T17:14:57.899Z');
+let novTime = nov.format(FORMATS.DISPLAY_DATE);
+
+let sep = moment('2019-09-09T00:00:00.000Z');
+let sepTime = sep.format(FORMATS.DISPLAY_DATE);
 
 describe('The blacklist incidents page', () => {
   beforeEach(() => {
@@ -54,7 +61,7 @@ describe('The blacklist incidents page', () => {
     cy.get('tbody > tr').within(el => {
       cy.findByText('2.2.8', { container: el }).should('be.visible');
       cy.findByText('new.spam.dnsbl.sorbs.net', { container: el }).should('be.visible');
-      cy.findByText('Sep 8 2019, 7:00pm', { container: el }).should('be.visible');
+      cy.findByText(sepTime, { container: el }).should('be.visible');
       cy.findByText('Active', { container: el }).should('be.visible');
     });
   });
@@ -80,7 +87,7 @@ describe('The blacklist incidents page', () => {
     cy.get('tbody > tr').within(el => {
       cy.findByText('2.2.8', { container: el }).should('be.visible');
       cy.findByText('new.spam.dnsbl.sorbs.net', { container: el }).should('be.visible');
-      cy.findByText('Sep 8 2019, 7:00pm', { container: el }).should('be.visible');
+      cy.findByText(sepTime, { container: el }).should('be.visible');
       cy.findByText('Active', { container: el }).should('be.visible');
     });
   });
@@ -168,14 +175,14 @@ describe('The blacklist incidents page', () => {
     cy.get('tbody > tr:first-child').then(el => {
       cy.findAllByText('127.0.0.2', { container: el }).should('be.visible');
       cy.findAllByText('blacklist.lashback.com', { container: el }).should('be.visible');
-      cy.findAllByText('Nov 20 2019, 11:14am', { container: el }).should('be.visible');
+      cy.findAllByText(novTime, { container: el }).should('be.visible');
       cy.findAllByText('Active', { container: el }).should('be.visible');
     });
 
     cy.get('tbody > tr:last-child').then(el => {
       cy.findAllByText('2.2.8', { container: el }).should('be.visible');
       cy.findAllByText('new.spam.dnsbl.sorbs.net', { container: el }).should('be.visible');
-      cy.findAllByText('Sep 8 2019, 7:00pm', { container: el }).should('be.visible');
+      cy.findAllByText(sepTime, { container: el }).should('be.visible');
       cy.findAllByText('Active', { container: el }).should('be.visible');
     });
 
@@ -184,14 +191,14 @@ describe('The blacklist incidents page', () => {
     cy.get('tbody > tr:last-child').then(el => {
       cy.findAllByText('127.0.0.2', { container: el }).should('be.visible');
       cy.findAllByText('blacklist.lashback.com', { container: el }).should('be.visible');
-      cy.findAllByText('Nov 20 2019, 11:14am', { container: el }).should('be.visible');
+      cy.findAllByText(novTime, { container: el }).should('be.visible');
       cy.findAllByText('Active', { container: el }).should('be.visible');
     });
 
     cy.get('tbody > tr:first-child').then(el => {
       cy.findAllByText('2.2.8', { container: el }).should('be.visible');
       cy.findAllByText('new.spam.dnsbl.sorbs.net', { container: el }).should('be.visible');
-      cy.findAllByText('Sep 8 2019, 7:00pm', { container: el }).should('be.visible');
+      cy.findAllByText(sepTime, { container: el }).should('be.visible');
       cy.findAllByText('Active', { container: el }).should('be.visible');
     });
 
@@ -200,14 +207,15 @@ describe('The blacklist incidents page', () => {
     cy.get('tbody > tr:first-child').then(el => {
       cy.findAllByText('127.0.0.2', { container: el }).should('be.visible');
       cy.findAllByText('blacklist.lashback.com', { container: el }).should('be.visible');
-      cy.findAllByText('Nov 20 2019, 11:14am', { container: el }).should('be.visible');
+      cy.findAllByText(novTime, { container: el }).should('be.visible');
       cy.findAllByText('Active', { container: el }).should('be.visible');
     });
 
     cy.get('tbody > tr:last-child').then(el => {
       cy.findAllByText('2.2.8', { container: el }).should('be.visible');
       cy.findAllByText('new.spam.dnsbl.sorbs.net', { container: el }).should('be.visible');
-      cy.findAllByText('Sep 8 2019, 7:00pm', { container: el }).should('be.visible');
+
+      cy.findAllByText(sepTime, { container: el }).should('be.visible');
       cy.findAllByText('Active', { container: el }).should('be.visible');
     });
 
@@ -216,14 +224,16 @@ describe('The blacklist incidents page', () => {
     cy.get('tbody > tr:first-child').then(el => {
       cy.findAllByText('127.0.0.2', { container: el }).should('be.visible');
       cy.findAllByText('blacklist.lashback.com', { container: el }).should('be.visible');
-      cy.findAllByText('Nov 20 2019, 11:14am', { container: el }).should('be.visible');
+
+      cy.findAllByText(novTime, { container: el }).should('be.visible');
       cy.findAllByText('Active', { container: el }).should('be.visible');
     });
 
     cy.get('tbody > tr:last-child').then(el => {
       cy.findAllByText('2.2.8', { container: el }).should('be.visible');
       cy.findAllByText('new.spam.dnsbl.sorbs.net', { container: el }).should('be.visible');
-      cy.findAllByText('Sep 8 2019, 7:00pm', { container: el }).should('be.visible');
+
+      cy.findAllByText(sepTime, { container: el }).should('be.visible');
       cy.findAllByText('Active', { container: el }).should('be.visible');
     });
   });
