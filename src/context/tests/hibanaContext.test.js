@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { HibanaProvider, useHibana } from '../hibanaContext';
+import { HibanaProvider, useHibana } from '../HibanaContext';
 
 const MyComponent = () => {
   const [state, dispatch] = useHibana();
