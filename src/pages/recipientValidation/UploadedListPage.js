@@ -74,10 +74,10 @@ export class UploadedListPage extends Component {
       job,
       isStandAloneRVSet,
       billing: { credit_card },
+      billingLoading,
+      valid,
+      submitting,
     } = this.props;
-
-    const { valid, pristine, submitting } = this.props;
-    const submitDisabled = pristine || !valid || submitting;
     return (
       <Page
         title="Recipient Validation"
@@ -104,11 +104,11 @@ export class UploadedListPage extends Component {
             )}
           </Panel.Section>
         </Panel>
-        {isStandAloneRVSet && job.status === 'queued_for_batch' && (
+        {isStandAloneRVSet && job.status === 'queued_for_batch' && !billingLoading && (
           <ValidateSection
             credit_card={credit_card}
             formname={FORMNAME}
-            submitDisabled={submitDisabled && !this.state.useSavedCC}
+            submitDisabled={!valid || submitting}
             handleCardToggle={this.handleToggleCC}
             defaultToggleState={!this.state.useSavedCC}
           />
@@ -154,6 +154,7 @@ const mapStateToProps = (state, props) => {
     jobLoadingStatus: state.recipientValidation.jobLoadingStatus[listId],
     isStandAloneRVSet: isAccountUiOptionSet('standalone_rv')(state),
     billing: state.account.billing || {},
+    billingLoading: state.account.billingLoading,
     isRVonSubscription: isProductOnSubscription('recipient_validation')(state),
     initialValues: rvAddPaymentFormInitialValues(state),
   };
