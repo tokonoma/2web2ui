@@ -537,6 +537,13 @@ const routes = [
     supportDocSearch: 'account settings',
   },
   {
+    path: '/account/data-privacy',
+    component: AccountSettingsPage,
+    condition: all(hasGrants('users/manage'), isAccountUiOptionSet('data_privacy')), //TODO: Remove account UI option
+    layout: App,
+    title: 'Data and Privacy',
+  },
+  {
     path: '/account/cancel',
     component: ImmediateCancelAccountPage,
     condition: all(hasGrants('account/manage'), not(isEnterprise), not(isHeroku), not(isAzure)),
