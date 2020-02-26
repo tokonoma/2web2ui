@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Field } from 'redux-form';
 import ComboBoxTypeaheadWrapper from 'src/components/reduxFormWrappers/ComboBoxTypeaheadWrapper';
@@ -16,29 +16,22 @@ export const SubaccountsField = props => {
     listSubaccounts();
   }, [listSubaccounts]);
 
-  const subaccountItems = useMemo(() => {
-    return [
-      { id: -1, name: 'Master and all subaccounts' },
-      { id: -2, name: 'Any subaccount' },
-      { id: 0, name: 'Master account' },
-      ...subaccounts,
-    ];
-  }, [subaccounts]);
+  const subaccountItems = [
+    { id: -1, name: 'Master and all subaccounts' },
+    { id: -2, name: 'Any subaccount' },
+    { id: 0, name: 'Master account' },
+    ...subaccounts,
+  ];
 
-  const subaccountToString = useCallback(
-    subaccountId => {
-      if (subaccountId === undefined) {
-        return '';
-      }
-      const subaccount = subaccountItems.find(({ id }) => id === subaccountId) || {};
-      return subaccountId > 0 ? `${subaccount.name} (${subaccount.id})` : subaccount.name;
-    },
-    [subaccountItems],
-  );
+  const subaccountToString = subaccountId => {
+    if (subaccountId === undefined) {
+      return '';
+    }
+    const subaccount = subaccountItems.find(({ id }) => id === subaccountId) || {};
+    return subaccountId > 0 ? `${subaccount.name} (${subaccount.id})` : subaccount.name;
+  };
 
-  const subAccountOptions = useMemo(() => {
-    return subaccountItems.map(({ id }) => id);
-  }, [subaccountItems]);
+  const subAccountOptions = subaccountItems.map(({ id }) => id);
 
   return (
     <Field
