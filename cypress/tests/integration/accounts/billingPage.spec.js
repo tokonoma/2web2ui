@@ -77,7 +77,7 @@ describe('Billing Page', () => {
     cy.findAllByText('How was this calculated?').should('have.length', 2); // The content appears both in the modal triggering element and inside the modal
   });
 
-  it('displays a pending plan change banner whenever a plan is downgraded', () => {
+  it('displays a pending plan change banner whenever a plan is downgraded and no longer displays the "Change Plan" link', () => {
     cy.stubRequest({
       url: `${ACCOUNT_API_BASE_URL}`,
       fixture: 'account/200.get.include-pending-subscription.json',
@@ -93,18 +93,79 @@ describe('Billing Page', () => {
     cy.visit(PAGE_URL);
 
     cy.findByText('Pending Plan Change').should('be.visible');
+    cy.queryByText('Change Plan').should('not.be.visible');
   });
 
   it('renders with a link to the change plan page', () => {
     cy.visit(PAGE_URL);
+
     cy.assertLink({ content: 'Change Plan', href: '/account/billing/plan' });
   });
 
-  it('renders with the dedicated IPs section if the user is transitioning to self serve (they have no credit card on file and the default subscription)', () => {
+  it('renders with the dedicated IPs section if the user is able to purchase IPs', () => {
     cy.visit(PAGE_URL);
 
     cy.findByText('Dedicated IPs').should('be.visible');
     cy.assertLink({ content: 'Manage Your IPs', href: '/account/ip-pools' });
+  });
+
+  it('does not render the dedicated IPs section if the user is unable to purchase IPs', () => {
+    cy.stubRequest({
+      url: ACCOUNT_API_BASE_URL,
+      fixture: 'account/200.get.cannot-purchase-ips.json',
+    });
+
+    cy.visit(PAGE_URL);
+
+    cy.queryByText('Dedicated IPs').should('not.be.visible');
+  });
+
+  it('renders the manually billed transition banner when the user\'s subscription type is not "active", "inactive", or "none"', () => {
+    cy.stubRequest({
+      url: `${BILLING_API_BASE_URL}/subscription`,
+      fixture: 'billing/subscription/200.get.transitioning-to-self-serve.json',
+    });
+
+    cy.visit(PAGE_URL);
+
+    cy.findByText('Your current 100K Premier plan includes 50,000 emails per month').should(
+      'be.visible',
+    );
+    cy.findByText('Enable automatic billing to self-manage your plan and add-ons.').should(
+      'be.visible',
+    );
+    cy.assertLink({
+      content: 'Enable Automatic Billing',
+      href: '/account/billing/enable-automatic',
+    });
+  });
+
+  it('renders the suspended account banner when the user\'s account type is "suspended" along with the update payment information form', () => {
+    cy.stubRequest({
+      url: ACCOUNT_API_BASE_URL,
+      fixture: 'account/200.get.suspended.json',
+    });
+
+    cy.stubRequest({
+      url: '/api/v1/account/countries*',
+      fixture: 'account/countries/200.get.billing-filter.json',
+    });
+
+    cy.visit(PAGE_URL);
+
+    cy.findByText('Your account is currently suspended due to a billing problem.').should(
+      'be.visible',
+    );
+    cy.assertLink({ content: 'visit the billing page', href: '/account/billing' });
+    cy.findAllByText('Update Payment Information').should('be.visible');
+    cy.findByText('Plan Overview').should('not.be.visible');
+    cy.findByLabelText('Credit Card Number').should('be.visible');
+    cy.findByLabelText('Cardholder Name').should('be.visible');
+    cy.findByLabelText('Expiration Date').should('be.visible');
+    cy.findByLabelText('Security Code').should('be.visible');
+    cy.findByLabelText('Country').should('be.visible');
+    cy.findByLabelText('State').should('be.visible');
+    cy.findByLabelText('Zip Code').should('be.visible');
   });
 
   describe('the dedicated IPs modal', () => {
