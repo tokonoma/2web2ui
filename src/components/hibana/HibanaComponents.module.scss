@@ -8,7 +8,7 @@
   width: 100%;
   border-top: 2px solid color(gray, 7);
   background-color: #fff;
-  padding: spacing();
+  padding: spacing() 1.5rem; // 1.5 rem value aligns with padding on the <Page/> component
   z-index: 500;
   justify-content: center;
 }
@@ -16,11 +16,10 @@
 .HibanaControlsSubsection {
   display: grid;
   grid-gap: spacing();
-  grid-template-columns: auto 20%;
+  grid-template-columns: 6fr auto;
   align-items: center;
 }
 
 .HibanaDescription {
   margin: 0;
-  text-align: right;
 }

@@ -16,7 +16,7 @@ export default function HibanaDescription() {
 
   return (
     <p className={styles.HibanaDescription}>
-      We&rsquo;ve been working hard redesigning the SparkPost app for a better experience
+      We&rsquo;ve been working hard redesigning the SparkPost app for a better&nbsp;experience
     </p>
   );
 }
