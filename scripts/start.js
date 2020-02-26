@@ -1,5 +1,4 @@
-'use strict';
-
+/* eslint-disable no-console */
 // Do this as the first thing so that any code reading it knows the right env.
 process.env.BABEL_ENV = 'development';
 process.env.NODE_ENV = 'development';
@@ -18,7 +17,7 @@ const fs = require('fs');
 const chalk = require('chalk');
 const webpack = require('webpack');
 const WebpackDevServer = require('webpack-dev-server');
-const { exec } = require('child_process');
+const copyMatchboxStyles = require('./copyMatchboxStyles');
 const clearConsole = require('react-dev-utils/clearConsole');
 const checkRequiredFiles = require('react-dev-utils/checkRequiredFiles');
 const {
@@ -34,6 +33,9 @@ const createDevServerConfig = require('../config/webpackDevServer.config');
 
 const useYarn = fs.existsSync(paths.yarnLockFile);
 const isInteractive = process.stdout.isTTY;
+
+// TODO: Once the default theme is removed/replaced with Hibana, this can be removed
+copyMatchboxStyles();
 
 // Warn and crash if required files are missing
 if (!checkRequiredFiles([paths.appHtml, paths.appIndexJs])) {

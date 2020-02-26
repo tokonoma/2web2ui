@@ -1,5 +1,4 @@
-'use strict';
-
+/* eslint-disable no-console */
 // Do this as the first thing so that any code reading it knows the right env.
 process.env.BABEL_ENV = 'production';
 process.env.NODE_ENV = 'production';
@@ -21,6 +20,7 @@ const webpack = require('webpack');
 const bfj = require('bfj');
 const configFactory = require('../config/webpack.config');
 const paths = require('../config/paths');
+const copyMatchboxStyles = require('./copyMatchboxStyles');
 const checkRequiredFiles = require('react-dev-utils/checkRequiredFiles');
 const formatWebpackMessages = require('react-dev-utils/formatWebpackMessages');
 const printHostingInstructions = require('react-dev-utils/printHostingInstructions');
@@ -62,6 +62,10 @@ checkBrowsers(paths.appPath, isInteractive)
     // Remove all content but keep the directory so that
     // if you're in it, you don't end up in Trash
     fs.emptyDirSync(paths.appBuild);
+
+    // TODO: Once the default theme is removed/replaced with Hibana, this can be removed
+    copyMatchboxStyles();
+
     // Merge with the public folder
     copyPublicFolder();
 
