@@ -49,9 +49,6 @@ describe('Billing Page', () => {
   //downgrading, starter  => free plan
   it('on changing plan renders section with changes to features', () => {
     selectAFreePlan();
-    cy.findAllByText('Got it')
-      .first()
-      .click();
     cy.findAllByText('Changes to Features').should('exist');
   });
 
@@ -64,7 +61,6 @@ describe('Billing Page', () => {
           .contains('Change Plan')
           .should('be.visible');
       }
-      cy.findAllByText('Change Plan').should('not.be.visible');
     });
   });
 
@@ -82,12 +78,6 @@ describe('Billing Page', () => {
     });
     cy.visit('/account/billing/plan');
     cy.get('[data-id=select-plan-50K-starter-0519]').click();
-    cy.findAllByText('Got it')
-      .first()
-      .click();
-    cy.findAllByText('Got it')
-      .last()
-      .click();
     cy.findAllByText('Change Plan').should('be.visible');
   });
 });
