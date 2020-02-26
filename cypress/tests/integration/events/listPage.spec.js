@@ -244,21 +244,30 @@ describe('The events page', () => {
         const selectLabel = 'Filter By';
         const textFieldLabel = 'Filter';
 
-        cy.findAllByLabelText(selectLabel).should('have.length', 1);
-        cy.findAllByLabelText(textFieldLabel).should('have.length', 1);
+        cy.findAllByLabelText(selectLabel).should('have.length', 4);
+        cy.findAllByLabelText(textFieldLabel).should('have.length', 4);
 
         cy.findByText('Add Filter').click();
 
-        cy.findAllByLabelText(selectLabel).should('have.length', 2);
-        cy.findAllByLabelText(textFieldLabel).should('have.length', 2);
+        cy.findAllByLabelText(selectLabel).should('have.length', 5);
+        cy.findAllByLabelText(textFieldLabel).should('have.length', 5);
 
         cy.findAllByText('Remove')
           .first()
           .click();
 
-        cy.findAllByLabelText(selectLabel).should('have.length', 1);
-        cy.findAllByLabelText(textFieldLabel).should('have.length', 1);
+        cy.findAllByLabelText(selectLabel).should('have.length', 4);
+        cy.findAllByLabelText(textFieldLabel).should('have.length', 4);
 
+        cy.findAllByText('Remove')
+          .first()
+          .click();
+        cy.findAllByText('Remove')
+          .first()
+          .click();
+        cy.findAllByText('Remove')
+          .first()
+          .click();
         cy.findByText('Remove').click();
 
         cy.findByLabelText(selectLabel).should('not.be.visible');
@@ -269,6 +278,17 @@ describe('The events page', () => {
         cy.findByText('Cancel').click();
 
         cy.findByText('Advanced Filters').should('not.be.visible');
+      });
+
+      it('does not add in default filters if there are alreday filters', () => {
+        const selectLabel = 'Filter By';
+        const textFieldLabel = 'Filter';
+
+        cy.visit(`${PAGE_URL}?subjects=test`);
+        cy.findByText('Add Filters').click();
+
+        cy.findAllByLabelText(selectLabel).should('have.length', 2);
+        cy.findAllByLabelText(textFieldLabel).should('have.length', 2);
       });
 
       it('closes the modal and applies filters when clicking "Apply Filters" by re-requesting events data', () => {

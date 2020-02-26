@@ -55,8 +55,12 @@ const cases = {
     bad: ['test.id', 'NOT_!@#$%^&*()_VALID', 'test id', ':doge:'],
   },
   eventsQuery: {
-    good: [[{ key: 'reason', value: 'fo*o' }], [{ key: 'campaigns', value: 'foo, bar' }]],
-    bad: [[{ key: 'reason' }], [{ value: 'foo' }]],
+    good: [
+      [{ key: 'reason', value: 'fo*o' }],
+      [{ key: 'campaigns', value: 'foo, bar' }],
+      [{ key: 'reason' }],
+    ],
+    bad: [[{ value: 'foo' }]],
     multiArg: true,
   },
   abTestDefaultTemplate: {
