@@ -27,7 +27,7 @@
     opacity: 1;
     pointer-events: auto;
     transform: translate(0, 0);
-    transition: 0.2s cubic-bezier(.1,1,.4,1);
+    transition: 0.2s cubic-bezier(0.1, 1, 0.4, 1);
   }
 }
 
@@ -49,7 +49,8 @@
 .Wrapper {
   overflow-y: auto;
   height: 100vh;
-  padding-top: rem(56);
+  padding-top: rem(56); // Space needed to clear header
+  padding-bottom: rem(76); // Additional space needed to clear Hibana toggling UI
   box-shadow: none;
 
   &.bannerOpen {
