@@ -31,7 +31,7 @@ describe('Hibana theme togging and UI', () => {
   it('does not render the Hibana UI when the user\'s account lacks the "hibana" UI flag entirely', () => {
     cy.stubRequest({
       url: API_URL,
-      fixture: 'account/200.get.no-hibana-flag.json',
+      fixture: 'account/200.get.no-ui-options.json',
     });
     cy.visit(PAGE_URL);
 
