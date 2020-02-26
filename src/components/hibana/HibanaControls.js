@@ -6,7 +6,11 @@ import styles from './HibanaComponents.module.scss';
 
 function HibanaControls({ children, hasThemeControls }) {
   if (hasThemeControls) {
-    return <div className={styles.HibanaControls}>{children}</div>;
+    return (
+      <div data-id="hibana-controls" className={styles.HibanaControls}>
+        {children}
+      </div>
+    );
   }
 
   return null;
