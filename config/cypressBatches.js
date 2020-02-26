@@ -5,6 +5,7 @@ module.exports = {
     'cypress/tests/integration/events/**/*',
     'cypress/tests/integration/navigation/**/*',
     'cypress/tests/integration/blacklists/**/*',
+    'cypress/tests/integration/hibana/**/*',
   ],
   'Vin Diesel': [
     'cypress/tests/integration/recipients/**/*',
