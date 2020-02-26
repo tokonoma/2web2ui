@@ -8,7 +8,7 @@ function HibanaControls({ children, hasThemeControls }) {
   if (hasThemeControls) {
     return (
       <div data-id="hibana-controls" className={styles.HibanaControls}>
-        {children}
+        <div className={styles.HibanaControlsSubsection}>{children}</div>
       </div>
     );
   }

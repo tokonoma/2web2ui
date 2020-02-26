@@ -38,11 +38,11 @@ describe('Hibana theme togging and UI', () => {
     cy.get('[data-id="hibana-controls"]').should('not.be.visible');
   });
 
-  it('Enables and disables Hibana when clicking "Enable Hibana" and "Disable Hibana" buttons', () => {
+  it('Enables and disables Hibana when clicking "Take a Look" and "That’s fine, take me back" buttons', () => {
     cy.visit(PAGE_URL);
 
-    cy.findByText('Enable Hibana').click();
-    cy.findByText('Disable Hibana').click();
-    cy.findByText('Enable Hibana').should('be.visible');
+    cy.findByText('Take a Look').click();
+    cy.findByText('That’s fine, take me back').click();
+    cy.findByText('Take a Look').should('be.visible');
   });
 });

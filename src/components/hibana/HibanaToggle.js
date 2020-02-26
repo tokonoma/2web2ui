@@ -9,14 +9,14 @@ export default function HibanaToggle() {
   if (isHibanaEnabled) {
     return (
       <button className={styles.HibanaToggle} onClick={() => dispatch({ type: 'DISABLE' })}>
-        Disable Hibana
+        That&rsquo;s fine, take me back
       </button>
     );
   }
 
   return (
     <button className={styles.HibanaToggle} onClick={() => dispatch({ type: 'ENABLE' })}>
-      Enable Hibana
+      Take a Look
     </button>
   );
 }

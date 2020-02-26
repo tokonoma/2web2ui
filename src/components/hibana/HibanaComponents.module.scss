@@ -2,6 +2,25 @@
 
 .HibanaControls {
   position: fixed;
-  bottom: spacing();
-  right: spacing();
+  bottom: 0;
+  right: 0;
+  display: flex;
+  width: 100%;
+  border-top: 2px solid color(gray, 7);
+  background-color: #fff;
+  padding: spacing();
+  z-index: 500;
+  justify-content: center;
+}
+
+.HibanaControlsSubsection {
+  display: grid;
+  grid-gap: spacing();
+  grid-template-columns: auto 20%;
+  align-items: center;
+}
+
+.HibanaDescription {
+  margin: 0;
+  text-align: right;
 }
