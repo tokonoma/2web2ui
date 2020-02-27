@@ -1,37 +1,41 @@
 @import '~@sparkpost/matchbox/src/styles/config.scss';
 
-.HibanaControls {
+$static-spacing: 18px;
+$static-line-height: 24px;
+$static-font-size: 18px;
+$static-button-size: 40px;
+
+.HibanaControls.HibanaControls {
+  width: 100%;
   position: fixed;
   bottom: 0;
   right: 0;
+  z-index: 500;
   display: flex;
-  width: 100%;
+  justify-content: center;
+  padding: $static-spacing spacing('large'); // Pixel value used to prevent jumpiness as root font size value changes between default and Hibana themes
   border-top: 2px solid color(gray, 7);
   background-color: #fff;
-  padding: spacing() 18px; // Pixel value used to prevent jumpiness as root font size value changes between default and Hibana themes
-  z-index: 500;
-  justify-content: center;
+  line-height: $static-line-height;
+
+  * {
+    // Pixel values used to prevent jumpiness as root font size value changes between default and Hibana themes
+    line-height: $static-line-height;
+    font-size: $static-font-size;
+  }
 }
 
 .HibanaControlsSubsection {
   display: grid;
-  grid-gap: spacing();
+  grid-gap: $static-spacing;
   grid-template-columns: 6fr auto;
   align-items: center;
 }
 
-.HibanaToggle.HibanaToggle, // CSS specificity problem with Matchbox. I started a thread in #project-hibana: https://msys.slack.com/archives/CT73SK5NX/p1582815747000500
-.HibanaDescriptionParagraph {
-  // Pixel values used to prevent jumpiness as root font size value changes between default and Hibana themes
-  line-height: 24px;
-  font-size: 18px;
-}
-
 .HibanaToggle.HibanaToggle {
-  height: 40px;
+  height: $static-button-size;
 }
 
 .HibanaDescriptionParagraph {
-  align-self: center;
   margin: 0;
 }
