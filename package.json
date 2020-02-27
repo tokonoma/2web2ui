@@ -68,6 +68,7 @@
   "dependencies": {
     "@sparkpost/boomerang": "^1.0.6",
     "@sparkpost/matchbox": "^3.8.0",
+    "@sparkpost/matchbox-hibana": "npm:@sparkpost/matchbox@^4.0.0-hibana.3",
     "@sparkpost/matchbox-icons": "^1.2.1",
     "axios": "^0.18.0",
     "bowser": "2.1.2",
@@ -78,7 +79,6 @@
     "downshift": "^3.2.10",
     "email-addresses": "^3.0.1",
     "history": "^4.6.1",
-    "jquery2": "npm:jquery@^2.2.4",
     "js-cookie": "^2.1.4",
     "localforage": "^1.5.3",
     "lodash": "^4.17.11",
