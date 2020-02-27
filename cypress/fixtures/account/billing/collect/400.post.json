@@ -1,0 +1,7 @@
+{
+  "errors": [
+    {
+      "message": "Payment collection failed: ${ERROR_MESSAGE}"
+    }
+  ]
+}

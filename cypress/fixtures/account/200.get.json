@@ -12,8 +12,8 @@
     "tfa_required": false,
     "updated": "2019-12-10T21:00:45.997Z",
     "subscription": {
-      "code": "50K-starter-0519",
-      "name": "50K Starter",
+      "code": "100K-premier-0519",
+      "name": "100K Premier",
       "plan_volume": 50000,
       "period": "month",
       "recurring_charge": 20,

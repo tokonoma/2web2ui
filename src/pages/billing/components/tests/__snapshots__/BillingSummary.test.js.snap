@@ -81,6 +81,7 @@ exports[`Component: Billing Summary should render correctly for a paid plan 1`] 
     />
   </Panel>
   <Panel
+    data-id="billing-panel"
     title="Billing"
   >
     <Panel.Section
@@ -278,6 +279,7 @@ exports[`Component: Billing Summary should render correctly if you can't buy IPs
     </Panel.Section>
   </Panel>
   <Panel
+    data-id="billing-panel"
     title="Billing"
   >
     <Panel.Section
@@ -397,6 +399,7 @@ exports[`Component: Billing Summary should render correctly if you can't change 
     />
   </Panel>
   <Panel
+    data-id="billing-panel"
     title="Billing"
   >
     <Panel.Section
@@ -614,6 +617,7 @@ exports[`Component: Billing Summary should render with IP modal open 1`] = `
     />
   </Panel>
   <Panel
+    data-id="billing-panel"
     title="Billing"
   >
     <Panel.Section
@@ -746,6 +750,7 @@ exports[`Component: Billing Summary should render with the billing contact modal
     />
   </Panel>
   <Panel
+    data-id="billing-panel"
     title="Billing"
   >
     <Panel.Section
@@ -878,6 +883,7 @@ exports[`Component: Billing Summary should render with the payment info modal op
     />
   </Panel>
   <Panel
+    data-id="billing-panel"
     title="Billing"
   >
     <Panel.Section
@@ -1010,6 +1016,7 @@ exports[`Component: Billing Summary should show the invoice history if there are
     />
   </Panel>
   <Panel
+    data-id="billing-panel"
     title="Billing"
   >
     <Panel.Section
