@@ -8,7 +8,7 @@
   width: 100%;
   border-top: 2px solid color(gray, 7);
   background-color: #fff;
-  padding: spacing() 1.5rem; // 1.5 rem value aligns with padding on the <Page/> component
+  padding: spacing() 18px; // Pixel value used to prevent jumpiness as root font size value changes between default and Hibana themes
   z-index: 500;
   justify-content: center;
 }
@@ -20,6 +20,18 @@
   align-items: center;
 }
 
-.HibanaDescription {
+.HibanaToggle.HibanaToggle, // CSS specificity problem with Matchbox. I started a thread in #project-hibana: https://msys.slack.com/archives/CT73SK5NX/p1582815747000500
+.HibanaDescriptionParagraph {
+  // Pixel values used to prevent jumpiness as root font size value changes between default and Hibana themes
+  line-height: 24px;
+  font-size: 18px;
+}
+
+.HibanaToggle.HibanaToggle {
+  height: 40px;
+}
+
+.HibanaDescriptionParagraph {
+  align-self: center;
   margin: 0;
 }

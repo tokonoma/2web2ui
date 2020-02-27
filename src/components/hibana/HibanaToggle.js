@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button } from 'hibana';
 import { useHibana } from 'src/context/HibanaContext';
 import styles from './HibanaComponents.module.scss';
 
@@ -8,15 +9,23 @@ export default function HibanaToggle() {
 
   if (isHibanaEnabled) {
     return (
-      <button className={styles.HibanaToggle} onClick={() => dispatch({ type: 'DISABLE' })}>
+      <Button
+        color="blue"
+        className={styles.HibanaToggle}
+        onClick={() => dispatch({ type: 'DISABLE' })}
+      >
         That&rsquo;s fine, take me back
-      </button>
+      </Button>
     );
   }
 
   return (
-    <button className={styles.HibanaToggle} onClick={() => dispatch({ type: 'ENABLE' })}>
+    <Button
+      color="blue"
+      className={styles.HibanaToggle}
+      onClick={() => dispatch({ type: 'ENABLE' })}
+    >
       Take a Look
-    </button>
+    </Button>
   );
 }
