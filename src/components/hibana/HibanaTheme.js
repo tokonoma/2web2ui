@@ -14,6 +14,7 @@ export default function HibanaTheme({ children }) {
           rel="stylesheet"
           type="text/css"
           href={isHibanaEnabled ? '/static/styles-hibana.css' : '/static/styles-default.css'}
+          data-id="theme-global-styles"
         />,
         document.head,
       )}
