@@ -111,7 +111,7 @@
     "reselect": "^4.0.0",
     "source-map-explorer": "^1.6.0",
     "use-debounce": "^3.0.1",
-    "uuid": "^3.2.1",
+    "uuid": "^7.0.1",
     "validator": "^10.2.0"
   },
   "devDependencies": {
