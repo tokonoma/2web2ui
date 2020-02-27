@@ -3,6 +3,7 @@
 exports[`ComboBoxTypeaheadWrapper renders Combobox typeahead 1`] = `
 <ComboBoxTypeahead
   defaultSelected={Array []}
+  isExclusiveItem={[Function]}
   itemToString={[Function]}
   label="Options"
   maxNumberOfResults={100}
@@ -19,7 +20,6 @@ exports[`ComboBoxTypeaheadWrapper renders Combobox typeahead 1`] = `
       },
     ]
   }
-  selectedMap={[Function]}
   value={
     Array [
       "option-one",
