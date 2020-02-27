@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import Form from './Form';
 import findRouteByPath from 'src/helpers/findRouteByPath';
 import { Helmet } from 'react-helmet';
-import { HibanaControls, HibanaToggle, HibanaDescription } from 'src/components/hibana';
+import { HibanaBanner, HibanaToggle, HibanaDescription } from 'src/components/hibana';
 
 /**
  * Returns layout component from routes config
@@ -22,10 +22,10 @@ export const Layout = ({ children, location }) => {
 
       {children}
 
-      <HibanaControls>
+      <HibanaBanner>
         <HibanaDescription />
         <HibanaToggle />
-      </HibanaControls>
+      </HibanaBanner>
     </LayoutComponent>
   );
 };

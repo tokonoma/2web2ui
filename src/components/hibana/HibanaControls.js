@@ -4,11 +4,11 @@ import { isAccountUiOptionSet } from 'src/helpers/conditions/account';
 import { selectCondition } from 'src/selectors/accessConditionState';
 import styles from './HibanaComponents.module.scss';
 
-function HibanaControls({ children, hasThemeControls }) {
+function HibanaBanner({ children, hasThemeControls }) {
   if (hasThemeControls) {
     return (
-      <div data-id="hibana-controls" className={styles.HibanaControls}>
-        <div className={styles.HibanaControlsSubsection}>{children}</div>
+      <div data-id="hibana-controls" className={styles.HibanaBanner}>
+        <div className={styles.HibanaBannerSubsection}>{children}</div>
       </div>
     );
   }
@@ -22,4 +22,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, {})(HibanaControls);
+export default connect(mapStateToProps, {})(HibanaBanner);
