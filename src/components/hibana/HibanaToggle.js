@@ -7,25 +7,13 @@ export default function HibanaToggle() {
   const [state, dispatch] = useHibana();
   const { isHibanaEnabled } = state;
 
-  if (isHibanaEnabled) {
-    return (
-      <Button
-        color="blue"
-        className={styles.HibanaToggle}
-        onClick={() => dispatch({ type: 'DISABLE' })}
-      >
-        That&rsquo;s fine, take me back
-      </Button>
-    );
-  }
-
   return (
     <Button
       color="blue"
       className={styles.HibanaToggle}
-      onClick={() => dispatch({ type: 'ENABLE' })}
+      onClick={() => dispatch({ type: isHibanaEnabled ? 'DISABLE' : 'ENABLE' })}
     >
-      Take a Look
+      {isHibanaEnabled ? <>Take a Look</> : <>That&rsquo;s fine, take me back</>}
     </Button>
   );
 }
