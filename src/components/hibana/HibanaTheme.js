@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { ThemeProvider } from 'hibana';
+import { ThemeProvider } from '@sparkpost/matchbox-hibana';
 import { useHibana } from 'src/context/HibanaContext';
 
 export default function HibanaTheme({ children }) {
