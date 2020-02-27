@@ -13,7 +13,7 @@ function copyMatchboxStyles() {
       process.exit(1);
     });
 
-  fs.copy('node_modules/hibana/styles.css', 'public/static/styles-hibana.css')
+  fs.copy('node_modules/@sparkpost/matchbox-hibana/styles.css', 'public/static/styles-hibana.css')
     .then(() => {
       console.log(`🔥  Hibana Matchbox styles copied`.green);
     })
