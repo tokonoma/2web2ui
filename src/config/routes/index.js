@@ -731,7 +731,7 @@ const routes = [
   {
     path: '/recipient-validation/single/:email',
     component: SingleResultPage,
-    condition: hasGrants('recipient-validation/preview'), //recipient-validation/manage grant needs to be added here before standalone rv goes out
+    condition: hasGrants('recipient-validation/manage'),
     layout: App,
     title: 'Results | Recipient Validation',
     supportDocsSearch: 'Recipient Validation',
