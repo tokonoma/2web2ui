@@ -13,7 +13,7 @@ export default function HibanaToggle() {
       className={styles.HibanaToggle}
       onClick={() => dispatch({ type: isHibanaEnabled ? 'DISABLE' : 'ENABLE' })}
     >
-      {isHibanaEnabled ? <>Take a Look</> : <>That&rsquo;s fine, take me back</>}
+      {isHibanaEnabled ? <>That&rsquo;s fine, take me back</> : <>Take a Look</>}
     </Button>
   );
 }
