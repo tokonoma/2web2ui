@@ -116,7 +116,7 @@
   },
   "devDependencies": {
     "@babel/core": "7.1.6",
-    "@storybook/addon-docs": "^5.2.6",
+    "@storybook/addon-docs": "^5.3.14",
     "@storybook/addon-links": "^5.2.6",
     "@storybook/addons": "^5.2.6",
     "@storybook/react": "^5.2.6",
