@@ -3,6 +3,6 @@
     "bill_cycle_day": 5,
     "pending_downgrades": [],
     "products": [],
-    "type": "blocked"
+    "type": "manual"
   }
 }

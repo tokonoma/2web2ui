@@ -123,7 +123,7 @@ describe('Billing Page', () => {
   it('renders the manually billed transition banner when the user\'s subscription type is not "active", "inactive", or "none"', () => {
     cy.stubRequest({
       url: `${BILLING_API_BASE_URL}/subscription`,
-      fixture: 'billing/subscription/200.get.transitioning-to-self-serve.json',
+      fixture: 'billing/subscription/200.get.manually-billed.json',
     });
 
     cy.visit(PAGE_URL);
