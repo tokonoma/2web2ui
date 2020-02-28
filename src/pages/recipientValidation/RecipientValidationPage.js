@@ -149,7 +149,7 @@ export class RecipientValidationPage extends Component {
       submitting,
       isRVonSubscription,
     } = this.props;
-    if (this.props.addRVtoSubscriptionloading === true) return <Loading />;
+    if (this.props.addRVtoSubscriptionloading) return <Loading />;
     return (
       <Page
         title="Recipient Validation"
