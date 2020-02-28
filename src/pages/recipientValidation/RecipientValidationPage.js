@@ -261,7 +261,7 @@ const mapStateToProps = (state, props) => ({
   isManuallyBilled: !selectIsSelfServeBilling(state),
   addRVtoSubscriptionloading: state.addRVtoSubscription.addRVtoSubscriptionloading,
   addRVFormValues: state.addRVtoSubscription.formValues,
-  addRVtoSubscriptionerror: state.addRVtoSubscription.error,
+  addRVtoSubscriptionerror: state.addRVtoSubscription.addRVtoSubscriptionerror,
 });
 
 export default withRouter(connect(mapStateToProps, { getBillingInfo })(RecipientValidationPage));

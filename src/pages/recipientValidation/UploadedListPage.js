@@ -87,9 +87,10 @@ export class UploadedListPage extends Component {
       submitting,
       isRVonSubscription,
       addRVtoSubscriptionloading,
+      addRVtoSubscriptionerror,
     } = this.props;
 
-    if (addRVtoSubscriptionloading) return <Loading />;
+    if (addRVtoSubscriptionloading && !addRVtoSubscriptionerror) return <Loading />;
     return (
       <Page
         title="Recipient Validation"
@@ -172,6 +173,7 @@ const mapStateToProps = (state, props) => {
     initialValues: rvAddPaymentFormInitialValues(state),
     isManuallyBilled: !selectIsSelfServeBilling(state),
     addRVtoSubscriptionloading: state.addRVtoSubscription.addRVtoSubscriptionloading,
+    addRVtoSubscriptionerror: state.addRVtoSubscription.addRVtoSubscriptionerror,
   };
 };
 

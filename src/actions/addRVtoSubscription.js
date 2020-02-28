@@ -13,11 +13,9 @@ export default function addRVtoSubscription({
 
     const refreshGrants = () => {
       // when adding recipient validation bundle, grants need to be refreshed
-      return dispatch(
-        getGrants({ role: state.currentUser.access_level }).catch(() =>
-          dispatch({ type: 'ADD_RV_TO_SUBSCRIPTION_ERROR' }),
-        ),
-      ).then(() => dispatch({ type: 'ADD_RV_TO_SUBSCRIPTION_SUCCESS', formValues: values }));
+      return dispatch(getGrants({ role: state.currentUser.access_level })).then(() =>
+        dispatch({ type: 'ADD_RV_TO_SUBSCRIPTION_SUCCESS', formValues: values }),
+      );
     };
 
     dispatch({ type: 'ADD_RV_TO_SUBSCRIPTION_PENDING' });
