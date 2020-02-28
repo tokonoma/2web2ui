@@ -1,5 +1,3 @@
-/// <reference types="Cypress" />
-
 describe('Billing Page', () => {
   beforeEach(() => {
     cy.stubAuth();
@@ -132,24 +130,31 @@ describe('Billing Page', () => {
       method: 'POST',
       url: '/api/v1/billing/cors-data?context=create-account',
       fixture: 'billing/cors-data/200.post.json',
+      requestAlias: 'corsPost',
     });
     cy.stubRequest({
       method: 'POST',
       url: '/v1/accounts',
       fixture: 'zuora/accounts/200.post.json',
+      requestAlias: 'zuoraPost',
     });
     cy.stubRequest({
       method: 'POST',
       url: '/api/v1/account/subscription/check',
       fixture: 'account/subscription/check/200.post.json',
+      requestAlias: 'accountSubPost',
     });
     cy.stubRequest({
       method: 'POST',
       url: '/api/v1/billing/subscription/check',
       fixture: 'billing/subscription/check/200.post.json',
+      requestAlias: 'billingSubPost',
     });
 
     cy.findAllByText('Change Plan').click();
+
+    cy.wait(['@corsPost', '@zuoraPost', '@accountSubPost', '@billingSubPost']);
+
     cy.findAllByText('Subscription Updated').should('be.visible');
     cy.url().should('equal', Cypress.config().baseUrl + '/account/billing');
   });

@@ -1,4 +1,4 @@
-# SparkPost App!
+# SparkPost App
 
 [![Build Status](https://travis-ci.org/SparkPost/2web2ui.svg?branch=master)](https://travis-ci.org/SparkPost/2web2ui)
 [![codecov](https://codecov.io/gh/SparkPost/2web2ui/branch/master/graph/badge.svg)](https://codecov.io/gh/SparkPost/2web2ui)
