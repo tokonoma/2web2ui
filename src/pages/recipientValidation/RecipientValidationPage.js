@@ -47,10 +47,7 @@ export class RecipientValidationPage extends Component {
   componentDidUpdate(prevProps) {
     if (this.props.billing !== prevProps.billing)
       this.setState({ useSavedCC: Boolean(this.props.billing.credit_card) });
-    if (
-      this.props.addRVtoSubscriptionloading === false &&
-      prevProps.addRVtoSubscriptionloading === true
-    )
+    if (!this.props.addRVtoSubscriptionloading && prevProps.addRVtoSubscriptionloading)
       this.redirectToNextStep(this.props.addRVFormValues);
   }
   handleTabs(tabIdx) {
@@ -105,7 +102,7 @@ export class RecipientValidationPage extends Component {
   onSubmit = formValues => {
     const { addRVtoSubscription, isRVonSubscription, isManuallyBilled } = this.props;
 
-    if ((this.state.useSavedCC && isRVonSubscription) || (isRVonSubscription && isManuallyBilled)) {
+    if (isRVonSubscription && (this.state.useSavedCC || isManuallyBilled)) {
       return this.redirectToNextStep(formValues);
     }
 

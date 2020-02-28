@@ -61,11 +61,7 @@ export class UploadedListPage extends Component {
     } = this.props;
     const { useSavedCC } = this.state;
 
-    if (
-      !isStandAloneRVSet ||
-      (useSavedCC && isRVonSubscription) ||
-      (isRVonSubscription && isManuallyBilled)
-    ) {
+    if (!isStandAloneRVSet || (isRVonSubscription && (this.state.useSavedCC || isManuallyBilled))) {
       this.handleSubmit();
       return;
     }
