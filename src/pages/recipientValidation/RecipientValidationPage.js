@@ -47,7 +47,11 @@ export class RecipientValidationPage extends Component {
   componentDidUpdate(prevProps) {
     if (this.props.billing !== prevProps.billing)
       this.setState({ useSavedCC: Boolean(this.props.billing.credit_card) });
-    if (!this.props.addRVtoSubscriptionloading && prevProps.addRVtoSubscriptionloading)
+    if (
+      !this.props.addRVtoSubscriptionloading &&
+      prevProps.addRVtoSubscriptionloading &&
+      !this.props.addRVtoSubscriptionerror
+    )
       this.redirectToNextStep(this.props.addRVFormValues);
   }
   handleTabs(tabIdx) {
@@ -257,6 +261,7 @@ const mapStateToProps = (state, props) => ({
   isManuallyBilled: !selectIsSelfServeBilling(state),
   addRVtoSubscriptionloading: state.addRVtoSubscription.addRVtoSubscriptionloading,
   addRVFormValues: state.addRVtoSubscription.formValues,
+  addRVtoSubscriptionerror: state.addRVtoSubscription.error,
 });
 
 export default withRouter(connect(mapStateToProps, { getBillingInfo })(RecipientValidationPage));
