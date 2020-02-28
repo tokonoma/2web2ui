@@ -13,8 +13,12 @@ export default function addRVtoSubscription({
 
     const refreshGrants = () => {
       // when adding recipient validation bundle, grants need to be refreshed
-      return dispatch(getGrants({ role: state.currentUser.access_level }));
+      return dispatch(getGrants({ role: state.currentUser.access_level })).then(() =>
+        dispatch({ type: 'ADD_RV_TO_SUBSCRIPTION_SUCCESS', formValues: values }),
+      );
     };
+
+    dispatch({ type: 'ADD_RV_TO_SUBSCRIPTION_PENDING' });
 
     // creating standalone recipient validation account with credit card
     if (!state.account.billing) {
@@ -34,7 +38,9 @@ export default function addRVtoSubscription({
     // only updating credit card
     // note, billing/subscription/bundle will error if bundle already exists
     if (updateCreditCard && isRVonSubscription) {
-      return dispatch(billingUpdate(values));
+      return dispatch(billingUpdate(values)).then(() =>
+        dispatch({ type: 'ADD_RV_TO_SUBSCRIPTION_SUCCESS', formValues: values }),
+      );
     }
 
     // using credit card on file and adding recipient validation bundle

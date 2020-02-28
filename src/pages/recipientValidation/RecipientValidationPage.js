@@ -12,6 +12,7 @@ import { selectIsSelfServeBilling } from 'src/selectors/accountBillingInfo';
 import { getBillingInfo } from 'src/actions/account';
 import addRVtoSubscription from 'src/actions/addRVtoSubscription';
 import { getSubscription as getBillingSubscription } from 'src/actions/billing';
+import { Loading } from 'src/components/loading/Loading';
 import JobsTableCollection from './components/JobsTableCollection';
 import ListForm, { ListTab } from './components/ListForm';
 import SingleAddressForm, { SingleAddressTab } from './components/SingleAddressForm';
@@ -22,7 +23,6 @@ import ConditionSwitch, { Case, defaultCase } from 'src/components/auth/Conditio
 import styles from './RecipientValidationPage.module.scss';
 import ValidateSection from './components/ValidateSection';
 import { FORMS } from 'src/constants';
-
 const FORMNAME = FORMS.RV_ADDPAYMENTFORM;
 
 const tabs = [
@@ -36,6 +36,8 @@ export class RecipientValidationPage extends Component {
     selectedTab: this.props.tab || 0,
     showPriceModal: false,
     useSavedCC: Boolean(this.props.billing.credit_card),
+    formValues: {},
+    submitStatus: 'idle',
   };
 
   componentDidMount() {
@@ -97,6 +99,7 @@ export class RecipientValidationPage extends Component {
   };
 
   onSubmit = formValues => {
+    this.setState({ submitStatus: 'submitting' });
     const { addRVtoSubscription, isRVonSubscription, isManuallyBilled } = this.props;
 
     if ((this.state.useSavedCC && isRVonSubscription) || (isRVonSubscription && isManuallyBilled)) {
@@ -111,7 +114,7 @@ export class RecipientValidationPage extends Component {
       values,
       updateCreditCard: !this.state.useSavedCC,
       isRVonSubscription: isRVonSubscription,
-    }).then(() => this.redirectToNextStep(values));
+    });
   };
 
   handleModal = (showPriceModal = false) => this.setState({ showPriceModal });
@@ -146,6 +149,11 @@ export class RecipientValidationPage extends Component {
       submitting,
       isRVonSubscription,
     } = this.props;
+
+    if (this.props.addRVtoSubscriptionloading === true) return <Loading />;
+
+    if (this.props.addRVtoSubscriptionloading === false && this.state.submitStatus === 'submitting')
+      this.redirectToNextStep(this.props.addRVFormValues);
 
     return (
       <Page
@@ -252,6 +260,8 @@ const mapStateToProps = (state, props) => ({
   isRVonSubscription: isProductOnSubscription('recipient_validation')(state),
   initialValues: rvAddPaymentFormInitialValues(state),
   isManuallyBilled: !selectIsSelfServeBilling(state),
+  addRVtoSubscriptionloading: state.addRVtoSubscription.addRVtoSubscriptionloading,
+  addRVFormValues: state.addRVtoSubscription.formValues,
 });
 
 export default withRouter(connect(mapStateToProps, { getBillingInfo })(RecipientValidationPage));
