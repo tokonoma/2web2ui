@@ -1,4 +1,4 @@
-# SparkPost App
+# SparkPost App!
 
 [![Build Status](https://travis-ci.org/SparkPost/2web2ui.svg?branch=master)](https://travis-ci.org/SparkPost/2web2ui)
 [![codecov](https://codecov.io/gh/SparkPost/2web2ui/branch/master/graph/badge.svg)](https://codecov.io/gh/SparkPost/2web2ui)
@@ -14,7 +14,7 @@ This project uses `npm6`, so upgrade if you haven't.
 npm install npm@6 -g
 ```
 
-Then `npm install` to install deps. 
+Then `npm install` to install deps.
 
 ## Local development
 
