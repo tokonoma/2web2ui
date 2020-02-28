@@ -18,10 +18,6 @@ exports[`Page: Dashboard tests should correctly render page when user is not ver
     accountAgeInDays={15}
     ageRangeStart={16}
   />
-  <SuppressionBanner
-    accountAgeInWeeks={0}
-    hasSuppressions={true}
-  />
   <GettingStartedGuide
     account={
       Object {
@@ -34,16 +30,13 @@ exports[`Page: Dashboard tests should correctly render page when user is not ver
     }
     accountAgeInDays={15}
     accountAgeInWeeks={0}
-    canGetSupressions={true}
     canManageKeys={true}
     canManageSendingDomains={true}
-    checkSuppression={[MockFunction]}
     currentUser={
       Object {
         "email_verfied": false,
       }
     }
-    hasSuppressions={true}
     isMessageOnboardingSet={false}
     listApiKeys={[MockFunction]}
     listSendingDomains={[MockFunction]}
@@ -73,10 +66,6 @@ exports[`Page: Dashboard tests should display upgrade CTA when account is free a
     accountAgeInDays={15}
     ageRangeStart={16}
   />
-  <SuppressionBanner
-    accountAgeInWeeks={0}
-    hasSuppressions={true}
-  />
   <GettingStartedGuide
     account={
       Object {
@@ -88,72 +77,13 @@ exports[`Page: Dashboard tests should display upgrade CTA when account is free a
     }
     accountAgeInDays={15}
     accountAgeInWeeks={0}
-    canGetSupressions={true}
     canManageKeys={true}
     canManageSendingDomains={true}
-    checkSuppression={[MockFunction]}
     currentUser={
       Object {
         "email_verified": true,
       }
     }
-    hasSuppressions={true}
-    isMessageOnboardingSet={false}
-    listApiKeys={[MockFunction]}
-    listSendingDomains={[MockFunction]}
-    moveGuideAtBottom={[MockFunction]}
-    onboarding={Object {}}
-    updateAccount={[MockFunction]}
-    verifyingEmail={false}
-  />
-  <Connect(UsageReport) />
-</Page>
-`;
-
-exports[`Page: Dashboard tests should render import suppression list when 0 suppressions and new account 1`] = `
-<Page
-  empty={Object {}}
-  title="Dashboard"
->
-  <FreePlanWarningBanner
-    account={
-      Object {
-        "created": 2018-05-15T12:00:00.000Z,
-        "status": "active",
-        "subscription": Object {
-          "code": "paid",
-        },
-      }
-    }
-    accountAgeInDays={15}
-    ageRangeStart={16}
-  />
-  <SuppressionBanner
-    accountAgeInWeeks={40}
-    hasSuppressions={false}
-  />
-  <GettingStartedGuide
-    account={
-      Object {
-        "created": 2018-05-15T12:00:00.000Z,
-        "status": "active",
-        "subscription": Object {
-          "code": "paid",
-        },
-      }
-    }
-    accountAgeInDays={15}
-    accountAgeInWeeks={40}
-    canGetSupressions={true}
-    canManageKeys={true}
-    canManageSendingDomains={true}
-    checkSuppression={[MockFunction]}
-    currentUser={
-      Object {
-        "email_verified": true,
-      }
-    }
-    hasSuppressions={false}
     isMessageOnboardingSet={false}
     listApiKeys={[MockFunction]}
     listSendingDomains={[MockFunction]}
@@ -184,10 +114,6 @@ exports[`Page: Dashboard tests should render page correctly with defaults 1`] = 
     accountAgeInDays={15}
     ageRangeStart={16}
   />
-  <SuppressionBanner
-    accountAgeInWeeks={0}
-    hasSuppressions={true}
-  />
   <GettingStartedGuide
     account={
       Object {
@@ -200,16 +126,13 @@ exports[`Page: Dashboard tests should render page correctly with defaults 1`] = 
     }
     accountAgeInDays={15}
     accountAgeInWeeks={0}
-    canGetSupressions={true}
     canManageKeys={true}
     canManageSendingDomains={true}
-    checkSuppression={[MockFunction]}
     currentUser={
       Object {
         "email_verified": true,
       }
     }
-    hasSuppressions={true}
     isMessageOnboardingSet={false}
     listApiKeys={[MockFunction]}
     listSendingDomains={[MockFunction]}

@@ -10,7 +10,6 @@ describe('Page: Dashboard tests', () => {
     currentUser: {
       email_verified: true,
     },
-    checkSuppression: jest.fn(() => []),
     listSendingDomains: jest.fn(() => []),
     listApiKeys: jest.fn(() => []),
     account: {
@@ -20,7 +19,6 @@ describe('Page: Dashboard tests', () => {
       status: 'active',
       created: mockDate,
     },
-    hasSuppressions: true,
     accountAgeInWeeks: 0,
     verifyingEmail: false,
     accountAgeInDays: 15,
@@ -28,7 +26,6 @@ describe('Page: Dashboard tests', () => {
     onboarding: {},
     updateAccount: jest.fn(),
     moveGuideAtBottom: jest.fn(),
-    canGetSupressions: true,
     canManageKeys: true,
     canManageSendingDomains: true,
   };
@@ -46,11 +43,6 @@ describe('Page: Dashboard tests', () => {
 
   it('should correctly render page when user is not verified', () => {
     wrapper.setProps({ currentUser: { email_verfied: false } });
-    expect(wrapper).toMatchSnapshot();
-  });
-
-  it('should render import suppression list when 0 suppressions and new account', () => {
-    wrapper.setProps({ hasSuppressions: false, accountAgeInWeeks: 40 });
     expect(wrapper).toMatchSnapshot();
   });
 

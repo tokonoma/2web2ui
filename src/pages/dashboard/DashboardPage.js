@@ -12,26 +12,17 @@ import { isAdmin } from 'src/helpers/conditions/user';
 
 /* actions */
 import { setAccountOption } from 'src/actions/account';
-import SuppressionBanner from './components/SuppressionBanner';
 
 export function DashboardPage(props) {
   const {
     accountAgeInDays,
     currentUser,
     account,
-    checkSuppression,
     listApiKeys,
     listSendingDomains,
-    canGetSupressions,
     canManageKeys,
     canManageSendingDomains,
   } = props;
-
-  useEffect(() => {
-    if (canGetSupressions) {
-      checkSuppression();
-    }
-  }, [checkSuppression, canGetSupressions]);
 
   useEffect(() => {
     if (canManageKeys) {
@@ -54,22 +45,14 @@ export function DashboardPage(props) {
         invite_collaborator_completed,
         view_developer_docs_completed,
       } = {},
-      accountAgeInWeeks,
-      hasSuppressions,
       hasSendingDomains,
       hasApiKeysForSending,
-      canGetSupressions,
       canManageKeys,
       canManageSendingDomains,
     } = props;
     const usageReport = <UsageReport />;
     const gettingStartedGuide =
-      canGetSupressions && canManageKeys && canManageSendingDomains ? (
-        <GettingStartedGuide {...props} />
-      ) : null;
-    const suppresionBanner = (
-      <SuppressionBanner accountAgeInWeeks={accountAgeInWeeks} hasSuppressions={hasSuppressions} />
-    );
+      canManageKeys && canManageSendingDomains ? <GettingStartedGuide {...props} /> : null;
     const areAllGuidesCompleted =
       send_test_email_completed &&
       explore_analytics_completed &&
@@ -82,14 +65,12 @@ export function DashboardPage(props) {
       return (
         <>
           {usageReport}
-          {suppresionBanner}
           {gettingStartedGuide}
         </>
       );
     }
     return (
       <>
-        {suppresionBanner}
         {gettingStartedGuide}
         {usageReport}
       </>
@@ -116,7 +97,6 @@ const mapStateToProps = state => ({
   onboarding: getAccountUiOptionValue('onboarding')(state),
   canManageKeys: hasGrants('api_keys/manage')(state),
   canManageSendingDomains: hasGrants('sending_domains/manage')(state),
-  canGetSupressions: hasGrants('suppression_lists/manage')(state),
   isAdmin: isAdmin(state),
 });
 
