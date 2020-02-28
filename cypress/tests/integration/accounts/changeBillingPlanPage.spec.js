@@ -99,18 +99,24 @@ describe('Billing Page', () => {
     cy.stubRequest({
       url: '/api/v1/account',
       fixture: 'account/200.get.test-plan.json',
+      requestAlias: 'accountGet',
     });
     //since this a free account, so should not have a credit card usually
     cy.stubRequest({
       url: '/api/v1/billing',
       fixture: 'billing/200.get.has-no-credit-card.json',
-      fixtureAlias: 'billingGet',
+      requestAlias: 'billingGet',
     });
+
     cy.stubRequest({
       url: '/api/v1/billing/subscription',
       fixture: 'billing/subscription/200.get.test-plan.json',
+      requestAlias: 'subGet',
     });
+
     cy.visit('/account/billing/plan?code=50K-starter-0519');
+
+    cy.wait(['@accountGet', '@billingGet', '@subGet']);
 
     // auto select new plan
     cy.findByText('Your New Plan').should('be.visible');
@@ -130,30 +136,24 @@ describe('Billing Page', () => {
       method: 'POST',
       url: '/api/v1/billing/cors-data?context=create-account',
       fixture: 'billing/cors-data/200.post.json',
-      requestAlias: 'corsPost',
     });
     cy.stubRequest({
       method: 'POST',
       url: '/v1/accounts',
       fixture: 'zuora/accounts/200.post.json',
-      requestAlias: 'zuoraPost',
     });
     cy.stubRequest({
       method: 'POST',
       url: '/api/v1/account/subscription/check',
       fixture: 'account/subscription/check/200.post.json',
-      requestAlias: 'accountSubPost',
     });
     cy.stubRequest({
       method: 'POST',
       url: '/api/v1/billing/subscription/check',
       fixture: 'billing/subscription/check/200.post.json',
-      requestAlias: 'billingSubPost',
     });
 
     cy.findAllByText('Change Plan').click();
-
-    cy.wait(['@corsPost', '@zuoraPost', '@accountSubPost', '@billingSubPost']);
 
     cy.findAllByText('Subscription Updated').should('be.visible');
     cy.url().should('equal', Cypress.config().baseUrl + '/account/billing');
