@@ -3,6 +3,7 @@ import { AuthenticationGate, SuspensionAlerts } from 'src/components/auth';
 import { CookieConsent, GlobalAlertWrapper, BoomerangBanner, SiftScience } from 'src/components';
 import VisualWebsiteOptimizer from './components/vwo/VisualWebsiteOptimizer';
 import Poll from 'src/context/Poll';
+import { HibanaProvider } from 'src/context/HibanaContext';
 import Support from 'src/components/support/Support';
 import GoogleTagManager from 'src/components/googleTagManager/GoogleTagManager';
 import Pendo from 'src/components/pendo/Pendo';
@@ -21,27 +22,29 @@ const reloadApp = () => {
 
 const App = ({ RouterComponent = BrowserRouter }) => (
   <ErrorBoundary onCtaClick={reloadApp} ctaLabel="Reload Page">
-    <Poll>
-      <RouterComponent>
-        <div>
-          {config.siftScience && <SiftScience config={config.siftScience} />}
-          <BoomerangBanner />
-          {config.gtmId && <GoogleTagManager id={config.gtmId} />}
-          <Pendo />
-          <VisualWebsiteOptimizer />
-          <AuthenticationGate />
-          <SuspensionAlerts />
-          <CookieConsent />
-          <GlobalBanner>
-            <Layout>
-              <AppRoutes />
-            </Layout>
-          </GlobalBanner>
-          <Support />
-          <GlobalAlertWrapper />
-        </div>
-      </RouterComponent>
-    </Poll>
+    <HibanaProvider>
+      <Poll>
+        <RouterComponent>
+          <div>
+            {config.siftScience && <SiftScience config={config.siftScience} />}
+            <BoomerangBanner />
+            {config.gtmId && <GoogleTagManager id={config.gtmId} />}
+            <Pendo />
+            <VisualWebsiteOptimizer />
+            <AuthenticationGate />
+            <SuspensionAlerts />
+            <CookieConsent />
+            <GlobalBanner>
+              <Layout>
+                <AppRoutes />
+              </Layout>
+            </GlobalBanner>
+            <Support />
+            <GlobalAlertWrapper />
+          </div>
+        </RouterComponent>
+      </Poll>
+    </HibanaProvider>
   </ErrorBoundary>
 );
 

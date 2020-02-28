@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import Form from './Form';
 import findRouteByPath from 'src/helpers/findRouteByPath';
 import { Helmet } from 'react-helmet';
+import { HibanaControls, HibanaToggle } from 'src/components/hibana';
 
 /**
  * Returns layout component from routes config
@@ -13,8 +14,17 @@ export const Layout = ({ children, location }) => {
 
   return (
     <LayoutComponent>
-      {route.title && <Helmet><title>{route.title} | SparkPost</title></Helmet>}
+      {route.title && (
+        <Helmet>
+          <title>{route.title} | SparkPost</title>
+        </Helmet>
+      )}
+
       {children}
+
+      <HibanaControls>
+        <HibanaToggle />
+      </HibanaControls>
     </LayoutComponent>
   );
 };
