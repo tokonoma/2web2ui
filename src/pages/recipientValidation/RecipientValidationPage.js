@@ -37,7 +37,6 @@ export class RecipientValidationPage extends Component {
     showPriceModal: false,
     useSavedCC: Boolean(this.props.billing.credit_card),
     formValues: {},
-    submitStatus: 'idle',
   };
 
   componentDidMount() {
@@ -48,6 +47,11 @@ export class RecipientValidationPage extends Component {
   componentDidUpdate(prevProps) {
     if (this.props.billing !== prevProps.billing)
       this.setState({ useSavedCC: Boolean(this.props.billing.credit_card) });
+    if (
+      this.props.addRVtoSubscriptionloading === false &&
+      prevProps.addRVtoSubscriptionloading === true
+    )
+      this.redirectToNextStep(this.props.addRVFormValues);
   }
   handleTabs(tabIdx) {
     const { history, isStandAloneRVSet } = this.props;
@@ -99,7 +103,6 @@ export class RecipientValidationPage extends Component {
   };
 
   onSubmit = formValues => {
-    this.setState({ submitStatus: 'submitting' });
     const { addRVtoSubscription, isRVonSubscription, isManuallyBilled } = this.props;
 
     if ((this.state.useSavedCC && isRVonSubscription) || (isRVonSubscription && isManuallyBilled)) {
@@ -149,12 +152,7 @@ export class RecipientValidationPage extends Component {
       submitting,
       isRVonSubscription,
     } = this.props;
-
     if (this.props.addRVtoSubscriptionloading === true) return <Loading />;
-
-    if (this.props.addRVtoSubscriptionloading === false && this.state.submitStatus === 'submitting')
-      this.redirectToNextStep(this.props.addRVFormValues);
-
     return (
       <Page
         title="Recipient Validation"
