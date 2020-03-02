@@ -49,8 +49,7 @@
 .Wrapper {
   overflow-y: auto;
   height: 100vh;
-  padding-top: rem(56); // Space needed to clear header
-  padding-bottom: rem(76); // Additional space needed to clear Hibana toggling UI
+  padding-top: rem(56);
   box-shadow: none;
 
   &.bannerOpen {
@@ -64,6 +63,7 @@
   padding: 0;
   min-height: 100%;
   padding-top: spacing(larger);
+  padding-bottom: spacing(larger) * 3;
 }
 
 .Overlay {
