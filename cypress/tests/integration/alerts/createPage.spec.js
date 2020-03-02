@@ -176,6 +176,8 @@ describe('Alerts Page - Create', () => {
           channels: { emails: ['sparkky@sparkpost.io'] },
         };
 
+        // TODO: Remove these logs if test is no longer showing flakiness
+        cy.log('Keeping these logs in here due to test flakiness!');
         cy.log(requestBody);
         cy.log(expectedRequestBody);
 
