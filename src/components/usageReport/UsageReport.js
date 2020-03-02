@@ -4,8 +4,8 @@ import { formatDateTime, formatDate } from 'src/helpers/date';
 import classnames from 'classnames';
 import { fetch as getAccount } from 'src/actions/account';
 import PanelLoading from 'src/components/panelLoading/PanelLoading';
-
-import { Panel, ProgressBar } from '@sparkpost/matchbox';
+import { ProgressBar } from 'src/components/matchboxWrapper';
+import { Panel } from '@sparkpost/matchbox';
 import styles from './UsageReport.module.scss';
 import { LINKS } from 'src/constants';
 import SendMoreCTA from './SendMoreCTA';
@@ -15,8 +15,8 @@ const actions = [
     content: 'What counts towards usage?',
     to: LINKS.DAILY_USAGE,
     external: true,
-    color: 'orange'
-  }
+    color: 'orange',
+  },
 ];
 
 const getPercent = (used, limit) => Math.floor((used / limit) * 100);
@@ -53,36 +53,38 @@ export class UsageReport extends Component {
     const hasMonthlyLimit = usage.month.limit > 0;
 
     return (
-      <Panel title='Your Usage Report' actions={actions}>
+      <Panel title="Your Usage Report" actions={actions}>
         <Panel.Section>
           <ProgressLabel
-            title='Today'
+            title="Today"
             secondaryTitle={`Since ${formatDateTime(usage.day.start)}`}
           />
           {hasDailyLimit && (
-            <ProgressBar completed={getPercent(usage.day.used, usage.day.limit)} />
+            <ProgressBar completed={getPercent(usage.day.used, usage.day.limit)} mb={10} />
           )}
-          <DisplayNumber label='Used' content={usage.day.used.toLocaleString()} orange />
+          <DisplayNumber label="Used" content={usage.day.used.toLocaleString()} orange />
           {hasDailyLimit && (
-            <DisplayNumber label='Daily Limit' content={usage.day.limit.toLocaleString()} />
+            <DisplayNumber label="Daily Limit" content={usage.day.limit.toLocaleString()} />
           )}
           <SendMoreCTA hasSendingLimits={hasDailyLimit || hasMonthlyLimit} />
         </Panel.Section>
         <Panel.Section>
           <ProgressLabel
-            title='This Month'
-            secondaryTitle={`Billing cycle: ${formatDate(usage.month.start)} - ${formatDate(usage.month.end)}`}
+            title="This Month"
+            secondaryTitle={`Billing cycle: ${formatDate(usage.month.start)} - ${formatDate(
+              usage.month.end,
+            )}`}
           />
           {hasMonthlyLimit && (
-            <ProgressBar completed={getPercent(usage.month.used, usage.month.limit)} />
+            <ProgressBar completed={getPercent(usage.month.used, usage.month.limit)} mb={10} />
           )}
-          <DisplayNumber label='Used' content={usage.month.used.toLocaleString()} orange />
-          <DisplayNumber label='Included' content={subscription.plan_volume.toLocaleString()} />
+          <DisplayNumber label="Used" content={usage.month.used.toLocaleString()} orange />
+          <DisplayNumber label="Included" content={subscription.plan_volume.toLocaleString()} />
           {overage > 0 && (
-            <DisplayNumber label='Extra Emails Used' content={overage.toLocaleString()} />
+            <DisplayNumber label="Extra Emails Used" content={overage.toLocaleString()} />
           )}
           {hasMonthlyLimit && (
-            <DisplayNumber label='Monthly limit' content={usage.month.limit.toLocaleString()} />
+            <DisplayNumber label="Monthly limit" content={usage.month.limit.toLocaleString()} />
           )}
         </Panel.Section>
       </Panel>
@@ -90,5 +92,5 @@ export class UsageReport extends Component {
   }
 }
 
-const mapStateToProps = ({ account: { usage, subscription }}) => ({ usage, subscription });
+const mapStateToProps = ({ account: { usage, subscription } }) => ({ usage, subscription });
 export default connect(mapStateToProps, { getAccount })(UsageReport);
