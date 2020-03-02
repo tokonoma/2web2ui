@@ -15,9 +15,12 @@ export const Layout = ({ children, location }) => {
   return (
     <LayoutComponent>
       {route.title && (
-        <Helmet>
-          <title>{route.title} | SparkPost</title>
-        </Helmet>
+        <>
+          {/* `defer` solves issue with <title> not updating when a new tab is opened: https://github.com/nfl/react-helmet/issues/315 */}
+          <Helmet defer={false}>
+            <title>{route.title} | SparkPost</title>
+          </Helmet>
+        </>
       )}
 
       {children}
