@@ -158,8 +158,6 @@ describe('Alerts Page - Create', () => {
         cy.findByText('Apple').click({ force: true });
       });
 
-      cy.log('testing cy.log()');
-
       cy.get('button')
         .contains('Create Alert')
         .click();
@@ -177,9 +175,6 @@ describe('Alerts Page - Create', () => {
           threshold_evaluator: { operator: 'gt', source: 'raw', value: 20 },
           channels: { emails: ['sparkky@sparkpost.io'] },
         };
-
-        cy.log(requestBody);
-        cy.log(expectedRequestBody);
 
         cy.wrap(requestBody).should('deep.equal', expectedRequestBody);
       });
