@@ -12,10 +12,10 @@ const CardSection = ({
   handleCardToggle,
   defaultToggleState,
 }) => {
-  const { isReady, loading } = useFeatureChangeContext();
+  const { loading } = useFeatureChangeContext();
   const { billing } = account;
 
-  if (!isReady || loading) {
+  if (loading) {
     return null;
   }
   if (selectedPlan.isFree) {
