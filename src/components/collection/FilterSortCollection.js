@@ -75,6 +75,9 @@ const FilterSortCollection = ({
                   {filterBox}
                 </Grid.Column>
                 <Grid.Column xs={12} md={3}>
+                  <label className={styles.Label} htmlFor="sortSelect">
+                    Sort Select
+                  </label>
                   <Select
                     id="sortSelect"
                     defaultValue={defaultSortColumn}

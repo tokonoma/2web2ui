@@ -44,8 +44,6 @@ export class FilterFields extends Component {
       sendingDomainsLoading,
       sendingIps,
       disabled,
-      // note, ComboBoxTypeaheadWrapper needs these values to set defaultSelected
-      initialValues,
     } = this.props;
 
     const formSpec = getFormSpec(metric);
@@ -118,7 +116,6 @@ export class FilterFields extends Component {
               component={ComboBoxTypeaheadWrapper}
               results={filterTypeaheadResults[single_filter.filter_type] || []}
               key={single_filter.filter_type}
-              defaultSelected={single_filter.filter_values}
               {...extraProps[single_filter.filter_type]}
             />
           </div>
@@ -147,7 +144,6 @@ export class FilterFields extends Component {
             component={ComboBoxTypeaheadWrapper}
             results={filterTypeaheadResults[value]}
             label={label}
-            defaultSelected={initialValues[value]}
             {...extraProps[value]}
           />
         ));

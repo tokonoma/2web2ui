@@ -7,26 +7,27 @@ import { ComboBoxTypeahead } from '../ComboBoxTypeahead';
 jest.mock('use-debounce');
 
 describe('ComboBoxTypeahead', () => {
-  const subject = (props = {}) => mount(
-    <ComboBoxTypeahead
-      defaultSelected={[]}
-      onChange={() => {}}
-      results={[
-        'apple',
-        'banana',
-        'blue ',
-        'cauliflower',
-        'grape',
-        'grapefruit',
-        'orange',
-        'pineapple'
-      ]}
-      {...props}
-    />
-  );
+  const subject = (props = {}) =>
+    mount(
+      <ComboBoxTypeahead
+        value={[]}
+        onChange={() => {}}
+        results={[
+          'apple',
+          'banana',
+          'blue ',
+          'cauliflower',
+          'grape',
+          'grapefruit',
+          'orange',
+          'pineapple',
+        ]}
+        {...props}
+      />,
+    );
 
   const changeInputValue = (wrapper, nextValue) => {
-    const fakeEvent = { target: { value: nextValue }};
+    const fakeEvent = { target: { value: nextValue } };
 
     act(() => {
       // simulate a input value change
@@ -51,7 +52,7 @@ describe('ComboBoxTypeahead', () => {
 
   beforeEach(() => {
     // need to memoize with useCallback
-    useDebouncedCallback.mockImplementation((fn) => [useCallback(fn, [])]);
+    useDebouncedCallback.mockImplementation(fn => [useCallback(fn, [])]);
   });
 
   it('renders max number of menu items', () => {
@@ -66,21 +67,16 @@ describe('ComboBoxTypeahead', () => {
   });
 
   it('renders filtered menu items without selected items', () => {
-    const wrapper = subject({ defaultSelected: ['grape']});
+    const wrapper = subject({ value: ['grape'] });
     changeInputValue(wrapper, 'grape');
     expect(wrapper.find('ComboBoxMenu').prop('items')).toHaveLength(1);
   });
 
   it('renders filtered menu items without exclusive items', () => {
     const wrapper = subject({
-      defaultSelected: [{ content: 'B' }],
-      itemToString: (item) => item.content,
-      results: [
-        { content: 'A', isExclusiveItem: true },
-        { content: 'B' },
-        { content: 'C' }
-      ],
-      selectedMap: (item) => item.content
+      value: ['B'],
+      results: ['A', 'B', 'C'],
+      isExclusiveItem: item => item === 'A',
     });
 
     expect(wrapper.find('ComboBoxMenu').prop('items')).toHaveLength(1);
@@ -100,8 +96,8 @@ describe('ComboBoxTypeahead', () => {
 
   it('closes menu when exclusive item is selected', () => {
     const wrapper = subject({
-      itemToString: (item) => item.content,
-      results: [{ content: 'My Example', isExclusiveItem: true }]
+      results: ['My Example'],
+      isExclusiveItem: item => item === 'My Example',
     });
     selectMenuItem(wrapper, 0);
     expect(wrapper.find('ComboBoxMenu')).toHaveProp('isOpen', false);
@@ -140,8 +136,8 @@ describe('ComboBoxTypeahead', () => {
 
   it('enabled read only mode for text field when an exclusive item is selected', () => {
     const wrapper = subject({
-      itemToString: (item) => item.content,
-      results: [{ content: 'My Example', isExclusiveItem: true }]
+      results: ['My Example'],
+      isExclusiveItem: item => item === 'My Example',
     });
     selectMenuItem(wrapper, 0);
     expect(wrapper.find('ComboBoxTextField')).toHaveProp('readOnly', true);
@@ -153,7 +149,7 @@ describe('ComboBoxTypeahead', () => {
   });
 
   it('does not render placeholder message when items have been selected', () => {
-    const wrapper = subject({ defaultSelected: ['apple'], placeholder: 'Do something!' });
+    const wrapper = subject({ value: ['apple'], placeholder: 'Do something!' });
     expect(wrapper.find('ComboBoxTextField')).toHaveProp('placeholder', '');
   });
 
@@ -161,7 +157,7 @@ describe('ComboBoxTypeahead', () => {
     const wrapper = subject();
     const selectedItems = ['apple', 'banana'];
 
-    wrapper.setProps({ defaultSelected: selectedItems });
+    wrapper.setProps({ value: selectedItems });
     wrapper.update();
 
     expect(wrapper.find('ComboBoxTextField')).toHaveProp('selectedItems', selectedItems);
@@ -169,7 +165,7 @@ describe('ComboBoxTypeahead', () => {
 
   it('calls onChange on mount', () => {
     const onChange = jest.fn();
-    subject({ defaultSelected: ['pineapple'], onChange });
+    subject({ value: ['pineapple'], onChange });
     expect(onChange).toHaveBeenCalledWith(['pineapple']);
   });
 
@@ -184,7 +180,7 @@ describe('ComboBoxTypeahead', () => {
 
   it('calls onChange when selected item is removed', () => {
     const onChange = jest.fn();
-    const wrapper = subject({ defaultSelected: ['apple', 'pineapple'], onChange });
+    const wrapper = subject({ value: ['apple', 'pineapple'], onChange });
 
     act(() => {
       wrapper.find('ComboBoxTextField').prop('removeItem')('pineapple');

@@ -18,6 +18,12 @@ export const ChangePlanProvider = ({
   ...value
 }) => {
   useEffect(() => {
+    getBundles({ type: 'messaging' });
+  }, [getBundles]);
+  useEffect(() => {
+    getPlans();
+  }, [getPlans]);
+  useEffect(() => {
     getBillingCountries();
   }, [getBillingCountries]);
   useEffect(() => {
@@ -26,12 +32,6 @@ export const ChangePlanProvider = ({
   useEffect(() => {
     getBillingInfo();
   }, [getBillingInfo]);
-  useEffect(() => {
-    getBundles({ type: 'messaging' });
-  }, [getBundles]);
-  useEffect(() => {
-    getPlans();
-  }, [getPlans]);
 
   const plansByKey = useMemo(() => _.keyBy(plans, 'plan'), [plans]);
 

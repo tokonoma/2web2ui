@@ -3,6 +3,7 @@
 exports[`AlertToggle Component should render initial state 1`] = `
 <div
   className="Wrapper"
+  data-id="alert-toggle"
 >
   <Toggle
     checked={false}

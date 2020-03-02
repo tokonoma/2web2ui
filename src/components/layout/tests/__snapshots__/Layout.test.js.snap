@@ -14,6 +14,9 @@ exports[`Component: Layout should render a regular route with a specified layout
   <h1>
     My layout children
   </h1>
+  <Connect(HibanaControls)>
+    <HibanaToggle />
+  </Connect(HibanaControls)>
 </App>
 `;
 
@@ -31,6 +34,9 @@ exports[`Component: Layout should render a route that does not specify a layout 
   <h1>
     My layout children
   </h1>
+  <Connect(HibanaControls)>
+    <HibanaToggle />
+  </Connect(HibanaControls)>
 </Form>
 `;
 
@@ -39,5 +45,8 @@ exports[`Component: Layout should render a route that does not specify a title 1
   <h1>
     My layout children
   </h1>
+  <Connect(HibanaControls)>
+    <HibanaToggle />
+  </Connect(HibanaControls)>
 </App>
 `;

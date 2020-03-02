@@ -136,7 +136,7 @@ describe('The recipient validation single result page', () => {
     cy.findByText('Validation limit exceeded').should('be.visible');
 
     cy.findAllByText('View Details')
-      .last()
+      .first()
       .click();
 
     cy.findByText('Submit a ticket')

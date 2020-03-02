@@ -156,8 +156,28 @@ Cypress.Commands.add(
  *
  */
 Cypress.Commands.add('assertLink', ({ content, href }) => {
-  cy.queryByText(content)
+  cy.findByText(content)
     .should('be.visible')
     .closest('a')
     .should('have.attr', 'href', href);
+});
+
+/**
+ * Used to interact and assert within a modal dialog
+ *
+ * @param {function} assertMethod - The callback function that runs inside the modal
+ *
+ */
+Cypress.Commands.add('withinModal', assertMethod => {
+  cy.get('[role="dialog"]:visible').within(assertMethod);
+});
+
+/**
+ * Used to check within the global alert view
+ *
+ * @param {function} assertMethod - The function that has assertions to run within the alert container
+ *
+ */
+Cypress.Commands.add('withinSnackbar', assertMethod => {
+  cy.get('#alert-portal').within(assertMethod);
 });

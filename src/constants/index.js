@@ -96,6 +96,7 @@ export const FORMS = {
   EDIT_USER: 'userEditForm',
   EVENTS_SEARCH: 'eventsSearchForm',
   RV_ADDPAYMENTFORM: 'rvAddPaymentForm',
+  RV_ADDPAYMENTFORM_UPLOADLISTPAGE: 'rvAddPaymentFormUploadListPage',
 };
 
 //These filters are the searchable filters in the 'more filters' modal on the Events Search page

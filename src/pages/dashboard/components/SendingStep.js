@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React from 'react';
 import GuideBreadCrumbs from './GuideBreadCrumbs';
 import { Panel } from '@sparkpost/matchbox';
 import styles from './SendingStep.module.scss';
@@ -9,23 +9,10 @@ import { Button, Grid } from '@sparkpost/matchbox';
 import { SENDING_STEP_LIST } from '../constants';
 
 export default function SendingStep() {
-  const { stepName } = useGuideContext();
-  const guideHeadingRef = useRef(null);
-  useEffect(() => {
-    if (guideHeadingRef.current) {
-      guideHeadingRef.current.focus();
-    }
-  }, [stepName]);
   return (
     <Panel.Section>
       <GuideBreadCrumbs />
-      <p
-        className={styles.SendingStepHeading}
-        role="heading"
-        aria-level="4"
-        ref={guideHeadingRef}
-        tabIndex={-1}
-      >
+      <p className={styles.SendingStepHeading} role="heading" aria-level="4" tabIndex={-1}>
         Where Would You Like to Begin?
       </p>
       <SendingStepList />

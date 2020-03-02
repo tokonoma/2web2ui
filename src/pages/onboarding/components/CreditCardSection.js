@@ -12,7 +12,7 @@ const CreditCardSection = ({ billing, submitting, isPlanFree }) => {
         <ul>
           <li>Limited sending volume for testing.</li>
           <li>Access to all of our powerful API features.</li>
-          <li>30 days of free technical support to get you up and running.</li>
+          <li>Free technical support to get you up and running.</li>
         </ul>
       </Panel.Section>
     );

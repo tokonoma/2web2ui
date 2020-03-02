@@ -11,8 +11,8 @@ import { METRICS } from './constants/formConstants';
 
 export class ListPage extends Component {
   state = {
-    alertToDelete: {}
-  }
+    alertToDelete: {},
+  };
 
   componentDidMount() {
     this.props.listAlerts();
@@ -20,13 +20,13 @@ export class ListPage extends Component {
 
   openDeleteModal = ({ id, name } = {}) => {
     this.setState({
-      alertToDelete: { id, name }
+      alertToDelete: { id, name },
     });
   };
 
   closeDeleteModal = () => {
     this.setState({
-      alertToDelete: {}
+      alertToDelete: {},
     });
   };
 
@@ -37,57 +37,56 @@ export class ListPage extends Component {
       this.props.showAlert({ type: 'success', message: 'Alert deleted' });
       this.closeDeleteModal();
     });
-  }
+  };
 
   renderCollection() {
-    return (
-      <AlertCollection
-        alerts={this.props.alerts}
-        handleDelete={this.openDeleteModal}
-      />
-    );
+    return <AlertCollection alerts={this.props.alerts} handleDelete={this.openDeleteModal} />;
   }
 
   renderRecentlyTriggered() {
-
     const { recentlyTriggeredAlerts } = this.props;
     if (recentlyTriggeredAlerts.length === 0) {
       return;
     }
 
     return (
-      <>
+      <div data-id="recent-incidents">
         <h3>Recent Incidents</h3>
+
         <Grid>
-          {recentlyTriggeredAlerts.map((alert) => (
-            <Grid.Column
-              xs={12}
-              md={6}
-              lg={3}
-              key = {alert.id}>
+          {recentlyTriggeredAlerts.map(alert => (
+            <Grid.Column xs={12} md={6} lg={3} key={alert.id}>
               <Panel accent>
                 <Panel.Section className={styles.LastTriggeredCard}>
-                  <Link className={styles.AlertName} to={`/alerts/details/${alert.id}`}><strong data-id="link-alert-name">{alert.name}</strong></Link>
+                  <Link className={styles.AlertName} to={`/alerts/details/${alert.id}`}>
+                    <strong data-id="link-alert-name">{alert.name}</strong>
+                  </Link>
                   <Tag>{METRICS[alert.metric]}</Tag>
                 </Panel.Section>
-                <Panel.Section className = {styles.Footer}>
-                  <DisplayDate timestamp={alert.last_triggered_timestamp} formattedDate={alert.last_triggered_formatted} />
+                <Panel.Section className={styles.Footer}>
+                  <DisplayDate
+                    timestamp={alert.last_triggered_timestamp}
+                    formattedDate={alert.last_triggered_formatted}
+                  />
                 </Panel.Section>
               </Panel>
-            </Grid.Column>))}
+            </Grid.Column>
+          ))}
         </Grid>
-        </>);
+      </div>
+    );
   }
 
   renderPage() {
     return (
       <>
         <p className={styles.Description}>
-          Use alerts to be notified when important changes occur in your Health Score, bounce rates, and email usage.
+          Use alerts to be notified when important changes occur in your Health Score, bounce rates,
+          and email usage.
         </p>
         {this.renderRecentlyTriggered()}
         {this.renderCollection()}
-        </>
+      </>
     );
   }
   renderError() {
@@ -112,20 +111,25 @@ export class ListPage extends Component {
 
     return (
       <Page
-        title='Alerts'
+        title="Alerts"
         primaryAction={{ content: 'Create an Alert', to: '/alerts/create', component: Link }}
         empty={{
           show: !error && alerts.length === 0,
           image: Templates,
           title: 'Create an Alert',
-          content: <p>Manage notifications that alert you of performance problems.</p>
+          content: <p>Manage notifications that alert you of performance problems.</p>,
         }}
       >
         {error ? this.renderError() : this.renderPage()}
         <DeleteModal
           open={isDeleteModalOpen}
-          title='Are you sure you want to delete this alert?'
-          content={<p>The alert "<strong>{alertToDelete.name}</strong>" will be permanently removed. This cannot be undone.</p>}
+          title="Are you sure you want to delete this alert?"
+          content={
+            <p>
+              The alert "<strong>{alertToDelete.name}</strong>" will be permanently removed. This
+              cannot be undone.
+            </p>
+          }
           onDelete={this.handleDelete}
           onCancel={this.closeDeleteModal}
           isPending={deletePending}

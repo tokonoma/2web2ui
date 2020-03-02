@@ -22,7 +22,6 @@ describe('Filter Fields Component', () => {
     listSendingIps: jest.fn(),
     change: jest.fn(),
     myFilter: ['random value'],
-    initialValues: {},
   };
 
   const subject = options => shallow(<FilterFields {...props} {...options} />);
@@ -100,9 +99,6 @@ describe('Filter Fields Component', () => {
           { resource: 'example.com' },
           { resource: 'test.example.com' },
         ],
-        initialValues: {
-          blacklist_provider: ['a', 'b', 'c'],
-        },
       });
 
     it('displays only blacklist codes', () => {
@@ -120,15 +116,6 @@ describe('Filter Fields Component', () => {
         '1.2.3.4',
         'example.com',
         'test.example.com',
-      ]);
-    });
-
-    it('initializes blacklist filters', () => {
-      const wrapper = blackListFilters();
-      expect(wrapper.find({ name: 'blacklist_provider' })).toHaveProp('defaultSelected', [
-        'a',
-        'b',
-        'c',
       ]);
     });
 

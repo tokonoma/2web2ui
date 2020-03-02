@@ -117,7 +117,7 @@ export class AlertForm extends Component {
           <Grid>
             <Grid.Column sm={12} md={11} lg={9}>
               <Panel.Section>
-                <label>Alert Name</label>
+                <label htmlFor="name">Alert Name</label>
                 <Field
                   name="name"
                   component={TextFieldWrapper}
@@ -158,7 +158,7 @@ export class AlertForm extends Component {
                     {!formSpec.hideSubaccountFilter && hasSubaccounts && (
                       <SubaccountField disabled={submitting} />
                     )}
-                    <FilterFields disabled={submitting} initialValues={initialValues} />
+                    <FilterFields disabled={submitting} />
                   </div>
                 )}
                 <div className={styles.Notifications}>

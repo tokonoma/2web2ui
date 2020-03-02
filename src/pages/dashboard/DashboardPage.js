@@ -5,7 +5,6 @@ import { UsageReport } from 'src/components';
 import { GettingStartedGuide } from './components/GettingStartedGuide';
 import VerifyEmailBanner from 'src/components/verifyEmailBanner/VerifyEmailBanner';
 import { FreePlanWarningBanner } from 'src/pages/billing/components/Banners';
-import SignupModal from './components/SignupModal';
 import { hasGrants } from 'src/helpers/conditions';
 /* helpers */
 import { getAccountUiOptionValue } from 'src/helpers/conditions/account';
@@ -104,7 +103,6 @@ export function DashboardPage(props) {
       {currentUser.email_verified === false && (
         <VerifyEmailBanner verifying={currentUser.verifyingEmail} />
       )}
-      <SignupModal />
       <FreePlanWarningBanner
         account={account}
         accountAgeInDays={accountAgeInDays}

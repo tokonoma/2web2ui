@@ -151,11 +151,11 @@ describe('The billing plan page', () => {
 
         cy.findByLabelText('Promo Code').type('abc');
         cy.findByText('Apply').click();
-        cy.findByText('$10.00').should('be.visible'); // Half of the starting value of $20.00 - determined by the fixture `discount_percentage` value
+        cy.findByText('$37.50').should('be.visible'); // Half of the starting value of $75.00 - determined by the fixture `discount_percentage` value
         cy.findByLabelText('Promo Code').should('be.disabled');
         cy.queryByText('Apply').should('not.be.visible');
         cy.queryByText('Remove').click();
-        cy.findByText('$10.00').should('not.be.visible'); // Half of the starting value of $20.00 - determined by the fixture `discount_percentage` value
+        cy.findByText('$37.50').should('not.be.visible'); // Half of the starting value of $75.00 - determined by the fixture `discount_percentage` value
       });
     });
   });

@@ -6,9 +6,9 @@ import { useDebouncedCallback } from 'use-debounce';
 import sortMatch from 'src/helpers/sortMatch';
 
 export const ComboBoxTypeahead = ({
-  defaultSelected,
   disabled,
   error,
+  isExclusiveItem,
   itemToString,
   label,
   maxNumberOfResults,
@@ -17,13 +17,13 @@ export const ComboBoxTypeahead = ({
   placeholder,
   readOnly,
   results,
-  selectedMap
+  value,
 }) => {
   const [inputValue, setInputValue] = useState('');
   const [menuItems, setMenuItems] = useState([]);
-  const [selectedItems, setSelectedItems] = useState(defaultSelected);
-  const [updateMenuItems] = useDebouncedCallback((value) => {
-    const items = value ? sortMatch(results, value, itemToString) : results;
+  const [selectedItems, setSelectedItems] = useState(value);
+  const [updateMenuItems] = useDebouncedCallback(input => {
+    const items = input ? sortMatch(results, input, itemToString) : results;
     const nextMenuItems = items.slice(0, maxNumberOfResults);
     setMenuItems(nextMenuItems);
   }, 300);
@@ -31,27 +31,20 @@ export const ComboBoxTypeahead = ({
   // Updated list of selected menu items when combo box is being controlled
   // note, state must be initialized with defaultSelected to avoid a runaway effect
   useEffect(() => {
-    setSelectedItems(defaultSelected);
-  }, [setSelectedItems, defaultSelected]);
+    setSelectedItems(value);
+  }, [setSelectedItems, value]);
 
   // Report change to selected items (important for redux-form Fields)
   useEffect(() => {
-    onChange(selectedItems.map(selectedMap));
-  }, [onChange, selectedMap, selectedItems]);
+    onChange(selectedItems);
+  }, [onChange, selectedItems]);
 
   // Update list of menu items when available list of items (results), input value or select items changes
   useEffect(() => {
     updateMenuItems(inputValue);
   }, [updateMenuItems, inputValue, results, selectedItems]);
 
-  // note, not all items are objects
-  const isExclusiveItem = (item) => (
-    typeof item === 'object' && Boolean(item.isExclusiveItem)
-  );
-
-  const isSelectedItem = (item) => (
-    selectedItems.some((selectedItem) => selectedMap(selectedItem) === selectedMap(item))
-  );
+  const isSelectedItem = item => selectedItems.some(selectedItem => selectedItem === item);
 
   // Must use state reducer to avoid menu automatically closing
   // see, https://github.com/downshift-js/downshift#statechangetypes
@@ -66,7 +59,7 @@ export const ComboBoxTypeahead = ({
           ...changes,
           inputValue: '', // unset input value, now that it has been saved in selected items
           isOpen: true, // leave menu open
-          selectedItem: null
+          selectedItem: null,
         };
       }
       case Downshift.stateChangeTypes.changeInput:
@@ -84,20 +77,25 @@ export const ComboBoxTypeahead = ({
     highlightedIndex,
     inputValue,
     isOpen,
-    openMenu
+    openMenu,
   }) => {
     const hasSelectedItems = Boolean(selectedItems.length);
     const isSelectedItemExclusive = isExclusiveItem(selectedItems[0]);
     const items = menuItems
-      .filter((item) => (
-        !isSelectedItemExclusive && !isSelectedItem(item) && !(hasSelectedItems && isExclusiveItem(item))
-      ))
-      .map((item, index) => getItemProps({
-        content: itemToString(item),
-        highlighted: highlightedIndex === index,
-        index,
-        item
-      }));
+      .filter(
+        item =>
+          !isSelectedItemExclusive &&
+          !isSelectedItem(item) &&
+          !(hasSelectedItems && isExclusiveItem(item)),
+      )
+      .map((item, index) =>
+        getItemProps({
+          content: itemToString(item),
+          highlighted: highlightedIndex === index,
+          index,
+          item,
+        }),
+      );
     const isMenuOpen = isOpen && Boolean(items.length);
 
     const inputProps = getInputProps({
@@ -106,18 +104,20 @@ export const ComboBoxTypeahead = ({
       id: name,
       itemToString,
       label,
-      onFocus: () => { openMenu(); },
+      onFocus: () => {
+        openMenu();
+      },
       placeholder: hasSelectedItems ? '' : placeholder,
       readOnly: readOnly || isSelectedItemExclusive,
-      removeItem: (itemToRemove) => {
-        const mappedItemToRemove = selectedMap(itemToRemove);
-        const nextSelectedItems = selectedItems.filter((selectedItem) => (
-          selectedMap(selectedItem) !== mappedItemToRemove)
+      removeItem: itemToRemove => {
+        const mappedItemToRemove = itemToRemove;
+        const nextSelectedItems = selectedItems.filter(
+          selectedItem => selectedItem !== mappedItemToRemove,
         );
         setSelectedItems(nextSelectedItems);
       },
       selectedItems,
-      value: inputValue || ''
+      value: inputValue || '',
     });
 
     return (
@@ -129,11 +129,7 @@ export const ComboBoxTypeahead = ({
   };
 
   return (
-    <Downshift
-      defaultHighlightedIndex={0}
-      itemToString={itemToString}
-      stateReducer={stateReducer}
-    >
+    <Downshift defaultHighlightedIndex={0} itemToString={itemToString} stateReducer={stateReducer}>
       {typeaheadfn}
     </Downshift>
   );
@@ -142,6 +138,7 @@ export const ComboBoxTypeahead = ({
 ComboBoxTypeahead.propTypes = {
   defaultSelected: PropTypes.array,
   disabled: PropTypes.bool,
+  isExclusiveItem: PropTypes.func,
   itemToString: PropTypes.func,
   label: PropTypes.string,
   maxNumberOfResults: PropTypes.number,
@@ -150,14 +147,13 @@ ComboBoxTypeahead.propTypes = {
   placeholder: PropTypes.string,
   readOnly: PropTypes.bool,
   results: PropTypes.array,
-  selectedMap: PropTypes.func
 };
 
 ComboBoxTypeahead.defaultProps = {
   defaultSelected: [],
-  itemToString: (item) => item,
+  isExclusiveItem: () => false,
+  itemToString: item => item,
   maxNumberOfResults: 100,
   placeholder: '',
   results: [],
-  selectedMap: (item) => item
 };

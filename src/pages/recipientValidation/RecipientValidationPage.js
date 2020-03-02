@@ -8,9 +8,11 @@ import _ from 'lodash';
 import { hasAccountOptionEnabled, isAccountUiOptionSet } from 'src/helpers/conditions/account';
 import { prepareCardInfo, isProductOnSubscription } from 'src/helpers/billing';
 import { rvAddPaymentFormInitialValues } from 'src/selectors/recipientValidation';
+import { selectIsSelfServeBilling } from 'src/selectors/accountBillingInfo';
 import { getBillingInfo } from 'src/actions/account';
 import addRVtoSubscription from 'src/actions/addRVtoSubscription';
 import { getSubscription as getBillingSubscription } from 'src/actions/billing';
+import { Loading } from 'src/components/loading/Loading';
 import JobsTableCollection from './components/JobsTableCollection';
 import ListForm, { ListTab } from './components/ListForm';
 import SingleAddressForm, { SingleAddressTab } from './components/SingleAddressForm';
@@ -21,7 +23,6 @@ import ConditionSwitch, { Case, defaultCase } from 'src/components/auth/Conditio
 import styles from './RecipientValidationPage.module.scss';
 import ValidateSection from './components/ValidateSection';
 import { FORMS } from 'src/constants';
-
 const FORMNAME = FORMS.RV_ADDPAYMENTFORM;
 
 const tabs = [
@@ -35,6 +36,7 @@ export class RecipientValidationPage extends Component {
     selectedTab: this.props.tab || 0,
     showPriceModal: false,
     useSavedCC: Boolean(this.props.billing.credit_card),
+    formValues: {},
   };
 
   componentDidMount() {
@@ -45,6 +47,12 @@ export class RecipientValidationPage extends Component {
   componentDidUpdate(prevProps) {
     if (this.props.billing !== prevProps.billing)
       this.setState({ useSavedCC: Boolean(this.props.billing.credit_card) });
+    if (
+      !this.props.addRVtoSubscriptionloading &&
+      prevProps.addRVtoSubscriptionloading &&
+      !this.props.addRVtoSubscriptionerror
+    )
+      this.redirectToNextStep(this.props.addRVFormValues);
   }
   handleTabs(tabIdx) {
     const { history, isStandAloneRVSet } = this.props;
@@ -82,40 +90,35 @@ export class RecipientValidationPage extends Component {
     }
   };
 
-  validate = values => {
+  redirectToNextStep = formValues => {
     switch (this.state.selectedTab) {
       case 1:
-        this.props.history.push(`/recipient-validation/single/${values.address}`);
+        this.props.history.push(`/recipient-validation/single/${formValues.address}`);
         break;
-
+      case 2:
+        this.props.history.push(`/account/api-keys/create`);
+        break;
       default:
         break;
     }
   };
 
-  onSubmit = values => {
-    const {
-      billing: { plans, subscription },
-      isRVonSubscription,
-    } = this.props;
-    if (this.state.useSavedCC && isRVonSubscription) {
-      this.validate(values);
-    } else {
-      const cardValues = values.card ? { ...values, card: prepareCardInfo(values.card) } : values;
+  onSubmit = formValues => {
+    const { addRVtoSubscription, isRVonSubscription, isManuallyBilled } = this.props;
 
-      const newValues = {
-        ...cardValues,
-        billingId: subscription
-          ? (_.find(plans, { code: subscription.code }) || {}).billingId
-          : (_.find(plans, { product: 'recipient_validation' }) || {}).billingId,
-      };
-      let action = this.props.addRVtoSubscription({
-        values: newValues,
-        updateCreditCard: !this.state.useSavedCC,
-        isRVonSubscription: isRVonSubscription,
-      });
-      return action.then(() => this.validate(values));
+    if (isRVonSubscription && (this.state.useSavedCC || isManuallyBilled)) {
+      return this.redirectToNextStep(formValues);
     }
+
+    const values = formValues.card
+      ? { ...formValues, card: prepareCardInfo(formValues.card) }
+      : formValues;
+
+    return addRVtoSubscription({
+      values,
+      updateCreditCard: !this.state.useSavedCC,
+      isRVonSubscription: isRVonSubscription,
+    });
   };
 
   handleModal = (showPriceModal = false) => this.setState({ showPriceModal });
@@ -142,9 +145,15 @@ export class RecipientValidationPage extends Component {
 
   renderRecipientValidation = () => {
     const { selectedTab, showPriceModal } = this.state;
-    const { isStandAloneRVSet, billing, billingLoading, valid, pristine, submitting } = this.props;
-    const submitDisabled = pristine || !valid || submitting;
-
+    const {
+      isStandAloneRVSet,
+      billing,
+      billingLoading,
+      valid,
+      submitting,
+      isRVonSubscription,
+    } = this.props;
+    if (this.props.addRVtoSubscriptionloading) return <Loading />;
     return (
       <Page
         title="Recipient Validation"
@@ -208,10 +217,11 @@ export class RecipientValidationPage extends Component {
           <ValidateSection
             credit_card={billing.credit_card}
             submitButtonName={selectedTab === 2 ? 'Create API Key' : 'Validate'}
-            submitDisabled={submitDisabled}
+            submitDisabled={!valid || submitting}
             formname={FORMNAME}
             handleCardToggle={this.handleToggleCC}
             defaultToggleState={!this.state.useSavedCC}
+            isProductOnSubscription={isRVonSubscription}
           />
         )}
 
@@ -248,6 +258,10 @@ const mapStateToProps = (state, props) => ({
   billingLoading: state.account.billingLoading,
   isRVonSubscription: isProductOnSubscription('recipient_validation')(state),
   initialValues: rvAddPaymentFormInitialValues(state),
+  isManuallyBilled: !selectIsSelfServeBilling(state),
+  addRVtoSubscriptionloading: state.addRVtoSubscription.addRVtoSubscriptionloading,
+  addRVFormValues: state.addRVtoSubscription.formValues,
+  addRVtoSubscriptionerror: state.addRVtoSubscription.addRVtoSubscriptionerror,
 });
 
 export default withRouter(connect(mapStateToProps, { getBillingInfo })(RecipientValidationPage));

@@ -1,0 +1,18 @@
+{
+  "results": {
+    "bill_cycle_day": 19,
+    "pending_downgrades": [],
+    "products": [
+      {
+        "plan": "free500-0419",
+        "product": "messaging"
+      },
+      {
+        "plan": "rv-0519",
+        "product": "recipient_validation",
+        "daily_limit": 50000
+      }
+    ],
+    "type": "active"
+  }
+}

@@ -45,9 +45,7 @@ describe('ChoosePlan page tests', () => {
 
   it('should redirect to next step when api calls fail', () => {
     wrapper.setProps({ hasError: true });
-    expect(instance.props.history.push).toHaveBeenCalledWith('/dashboard', {
-      fromOnboarding: true,
-    });
+    expect(instance.props.history.push).toHaveBeenCalledWith('/dashboard');
   });
 
   it('should show free bullets when isFree is selected', () => {
@@ -84,9 +82,7 @@ describe('ChoosePlan page tests', () => {
 
     it('should go to next page if plan is free, no-op', async () => {
       await instance.onSubmit({ planpicker: { isFree: true } });
-      expect(instance.props.history.push).toHaveBeenCalledWith('/dashboard', {
-        fromOnboarding: true,
-      });
+      expect(instance.props.history.push).toHaveBeenCalledWith('/dashboard');
       expect(instance.props.billingCreate).not.toHaveBeenCalled();
     });
 
@@ -94,9 +90,7 @@ describe('ChoosePlan page tests', () => {
       const values = { planpicker: { isFree: false }, key: 'value', card: 'card info' };
       await instance.onSubmit(values);
       expect(instance.props.billingCreate).toHaveBeenCalledWith(values);
-      expect(instance.props.history.push).toHaveBeenCalledWith('/dashboard', {
-        fromOnboarding: true,
-      });
+      expect(instance.props.history.push).toHaveBeenCalledWith('/dashboard');
       expect(instance.props.showAlert).toHaveBeenCalledWith({
         type: 'success',
         message: 'Added your plan',
@@ -123,9 +117,7 @@ describe('ChoosePlan page tests', () => {
         ...values,
         discountId: 'test-discount',
       });
-      expect(instance.props.history.push).toHaveBeenCalledWith('/dashboard', {
-        fromOnboarding: true,
-      });
+      expect(instance.props.history.push).toHaveBeenCalledWith('/dashboard');
       expect(instance.props.showAlert).toHaveBeenCalledWith({
         type: 'success',
         message: 'Added your plan',

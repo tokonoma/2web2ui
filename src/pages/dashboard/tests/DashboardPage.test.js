@@ -62,7 +62,6 @@ describe('Page: Dashboard tests', () => {
   it('should render the new guide when message_onboarding flag is set', () => {
     wrapper.setProps({ isMessageOnboardingSet: true });
     expect(wrapper.find('GettingStartedGuide')).toExist();
-    expect(wrapper.find('SignupModal')).toExist();
   });
 
   it('should move the guide to bottom or top based on isGuideAtBottom', () => {

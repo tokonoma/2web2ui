@@ -15,13 +15,13 @@ const BILLING_ROUTE = '/account/billing';
 export const LOAD_STATE = {
   PENDING: 1,
   SUCCESS: 2,
-  FAILURE: 3
+  FAILURE: 3,
 };
 
 export class ImmediateChangePlanPage extends Component {
   state = {
-    loading: LOAD_STATE.PENDING
-  }
+    loading: LOAD_STATE.PENDING,
+  };
 
   componentDidMount() {
     const { immediatePlanChange } = this.props;
@@ -37,37 +37,43 @@ export class ImmediateChangePlanPage extends Component {
     const { history, location } = this.props;
     history.push({
       pathname: BILLING_ROUTE,
-      search: stripImmediatePlanChange(location.search)
+      search: stripImmediatePlanChange(location.search),
     });
   }
 
   handleImmediatePlanChange = () => {
     const { immediatePlanChange: newCode, updateSubscription } = this.props;
     this.setState({ loading: LOAD_STATE.PENDING });
-    return updateSubscription({ code: newCode })
-      .then(() => {
+    return updateSubscription({ bundle: newCode }).then(
+      () => {
         conversions.trackDowngradeToFree(newCode);
         this.setState({ loading: LOAD_STATE.SUCCESS });
-      }, (error) => {
+      },
+      error => {
         this.setState({ loading: LOAD_STATE.FAILURE, error });
-      });
-  }
+      },
+    );
+  };
 
   renderSuccess() {
-    return <div className={styles.MessageInnards}>
-      <h1>Your subscription has been updated.</h1>
-      <PageLink to={BILLING_ROUTE}>Back to Billing</PageLink>
-    </div>;
+    return (
+      <div className={styles.MessageInnards}>
+        <h1>Your subscription has been updated.</h1>
+        <PageLink to={BILLING_ROUTE}>Back to Billing</PageLink>
+      </div>
+    );
   }
 
   renderError() {
-    return <div className={styles.ErrorBanner}>
-      <ApiErrorBanner
-        errorDetails={this.state.error.message}
-        message='Sorry, we had some trouble updating your subscription.'
-        reload={this.handleImmediatePlanChange}
-      />
-    </div>;
+    return (
+      <div className={styles.ErrorBanner}>
+        <ApiErrorBanner
+          errorDetails={this.state.error.message}
+          message="Sorry, we had some trouble updating your subscription."
+          reload={this.handleImmediatePlanChange}
+        />
+      </div>
+    );
   }
 
   render() {
@@ -77,10 +83,12 @@ export class ImmediateChangePlanPage extends Component {
       return <Loading />;
     }
 
-    return <div className={styles.MessageBlock}>
-      {loading === LOAD_STATE.FAILURE && this.renderError()}
-      {loading === LOAD_STATE.SUCCESS && this.renderSuccess()}
-    </div>;
+    return (
+      <div className={styles.MessageBlock}>
+        {loading === LOAD_STATE.FAILURE && this.renderError()}
+        {loading === LOAD_STATE.SUCCESS && this.renderSuccess()}
+      </div>
+    );
   }
 }
 
@@ -91,7 +99,7 @@ const mapStateToProps = (state, props) => {
 
 const mapDispatchToProps = {
   updateSubscription,
-  showAlert
+  showAlert,
 };
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ImmediateChangePlanPage));

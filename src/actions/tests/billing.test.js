@@ -110,20 +110,13 @@ describe('Action Creator: Billing', () => {
 
   describe('updateSubscription', () => {
     it('should dispatch an update subscription action and fetch account', async () => {
-      const dispatchMock = jest.fn(a => Promise.resolve(a));
-      const thunk = billing.updateSubscription({ code: 'test-code' });
-      await thunk(dispatchMock, getStateMock);
-      expect(_.flatten(dispatchMock.mock.calls)).toMatchSnapshot();
+      expect(billing.updateSubscription({ bundle: 'test-code' })).toMatchSnapshot();
     });
 
     it('should dispatch an update subscription action with provided onSuccess action', async () => {
-      const dispatchMock = jest.fn(a => Promise.resolve(a));
-      const thunk = billing.updateSubscription({
-        code: 'test-code',
-        meta: { onSuccess: jest.fn() },
-      });
-      await thunk(dispatchMock, getStateMock);
-      expect(_.flatten(dispatchMock.mock.calls)).toMatchSnapshot();
+      expect(
+        billing.updateSubscription({ bundle: 'test-code', meta: { onSuccess: jest.fn() } }),
+      ).toMatchSnapshot();
     });
   });
 

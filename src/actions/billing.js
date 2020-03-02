@@ -1,7 +1,6 @@
 import { formatContactData } from 'src/helpers/billing';
 import { fetch as fetchAccount, getBillingInfo } from './account';
 import { list as getSendingIps } from './sendingIps';
-import { isAccountUiOptionSet } from 'src/helpers/conditions/account';
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
 import zuoraRequest from 'src/actions/helpers/zuoraRequest';
 
@@ -9,44 +8,22 @@ import zuoraRequest from 'src/actions/helpers/zuoraRequest';
  * Updates plan
  * @param {string} code
  */
-export function updateSubscription({ code, bundle = code, promoCode, meta = {} }) {
-  const getBillingAction = () => getBillingInfo();
-  const fetchAccountAction = () =>
-    fetchAccount({ include: 'usage', meta: { onSuccess: getBillingAction } });
-
-  return (dispatch, getState) =>
-    isAccountUiOptionSet('account_feature_limits')(getState()) //TODO: Remove this + first action
-      ? dispatch(
-          sparkpostApiRequest({
-            type: 'UPDATE_SUBSCRIPTION',
-            meta: {
-              method: 'PUT',
-              url: '/v1/billing/subscription/bundle',
-              data: {
-                promo_code: promoCode,
-                bundle,
-              },
-              ...meta,
-              onSuccess: meta.onSuccess ? meta.onSuccess : fetchAccountAction,
-            },
-          }),
-        )
-      : dispatch(
-          sparkpostApiRequest({
-            type: 'UPDATE_SUBSCRIPTION',
-            meta: {
-              method: 'PUT',
-              url: '/v1/account/subscription',
-              data: {
-                promo_code: promoCode,
-                code,
-              },
-              ...meta,
-              onSuccess: meta.onSuccess ? meta.onSuccess : fetchAccountAction,
-            },
-          }),
-        );
-}
+export const updateSubscription = ({ bundle, promoCode, meta = {} }) =>
+  sparkpostApiRequest({
+    type: 'UPDATE_SUBSCRIPTION',
+    meta: {
+      method: 'PUT',
+      url: '/v1/billing/subscription/bundle',
+      data: {
+        promo_code: promoCode,
+        bundle: bundle,
+      },
+      ...meta,
+      onSuccess: meta.onSuccess
+        ? meta.onSuccess
+        : () => fetchAccount({ include: 'usage', meta: { onSuccess: getBillingInfo } }),
+    },
+  });
 
 export function syncSubscription({ meta = {} } = {}) {
   return sparkpostApiRequest({

@@ -43,7 +43,7 @@ export default class BillingSummary extends Component {
     const { account } = this.props;
     const { billing } = account;
     return (
-      <Panel title="Billing">
+      <Panel title="Billing" data-id="billing-panel">
         <Panel.Section
           actions={[
             {

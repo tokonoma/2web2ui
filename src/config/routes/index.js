@@ -40,6 +40,7 @@ import LogoutPage from 'src/pages/logout/LogoutPage';
 import onboarding from 'src/pages/onboarding';
 import { default as emailVerification } from 'src/components/emailVerification/EmailVerification';
 import SecretBillingPlanOrBillingSummaryPage from '../SecretBillingPlanOrBillingSummaryPage';
+import DataPrivacyPage from 'src/pages/dataPrivacy/DataPrivacyPage';
 
 import { all, hasGrants, not } from 'src/helpers/conditions';
 import {
@@ -537,6 +538,13 @@ const routes = [
     supportDocSearch: 'account settings',
   },
   {
+    path: '/account/data-privacy',
+    component: DataPrivacyPage,
+    condition: all(hasGrants('users/manage'), isAccountUiOptionSet('data_privacy')), //TODO: Remove account UI option
+    layout: App,
+    title: 'Data and Privacy',
+  },
+  {
     path: '/account/cancel',
     component: ImmediateCancelAccountPage,
     condition: all(hasGrants('account/manage'), not(isEnterprise), not(isHeroku), not(isAzure)),
@@ -691,7 +699,7 @@ const routes = [
     component: alerts.DetailsPage,
     condition: hasGrants('alerts/manage'),
     layout: App,
-    title: 'View Details',
+    title: 'Alert Details | Alerts',
     supportDocsSearch: 'Alerts',
   },
   {
@@ -699,7 +707,7 @@ const routes = [
     component: alerts.CreatePage,
     condition: hasGrants('alerts/manage'),
     layout: App,
-    title: 'Create Alert',
+    title: 'Create Alert | Alerts',
     supportDocsSearch: 'Alerts',
   },
   {
@@ -707,7 +715,7 @@ const routes = [
     component: alerts.EditPage,
     condition: hasGrants('alerts/manage'),
     layout: App,
-    title: 'Edit Alert',
+    title: 'Edit Alert | Alerts',
     supportDocsSearch: 'Alerts',
   },
   {
@@ -716,6 +724,13 @@ const routes = [
     condition: configFlag('featureFlags.has_signup'),
     title: 'Choose Your Plan | Onboarding',
     supportDocSearch: 'upgrade account',
+  },
+  {
+    path: '/onboarding/recipient-validation',
+    component: onboarding.RVBundlePage,
+    condition: configFlag('featureFlags.has_signup'),
+    title: 'Recipient Validation | Onboarding',
+    layout: LargeForm,
   },
   {
     path: '/recipient-validation',

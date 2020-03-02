@@ -23,7 +23,7 @@ export default [
     component: blacklist.WatchlistAddPage,
     condition: hasAccountOptionEnabled('blacklist_monitors'),
     layout: App,
-    title: 'Add to Watch List',
+    title: 'Add to Watch List | Blacklist',
     supportDocSearch: 'blacklist',
   },
   {
@@ -31,7 +31,7 @@ export default [
     component: blacklist.IncidentDetailsPage,
     condition: hasAccountOptionEnabled('blacklist_monitors'),
     layout: App,
-    title: 'Blacklisting Incident',
+    title: 'Incident Details | Blacklist',
     supportDocSearch: 'blacklist',
   },
 ];

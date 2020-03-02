@@ -14,7 +14,7 @@ This project uses `npm6`, so upgrade if you haven't.
 npm install npm@6 -g
 ```
 
-Then `npm install` to install deps.
+Then `npm install` to install deps. 
 
 ## Local development
 
