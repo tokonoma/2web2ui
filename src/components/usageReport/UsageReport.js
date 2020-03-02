@@ -60,7 +60,7 @@ export class UsageReport extends Component {
             secondaryTitle={`Since ${formatDateTime(usage.day.start)}`}
           />
           {hasDailyLimit && (
-            <ProgressBar completed={getPercent(usage.day.used, usage.day.limit)} mb={10} />
+            <ProgressBar completed={getPercent(usage.day.used, usage.day.limit)} my={10} />
           )}
           <DisplayNumber label="Used" content={usage.day.used.toLocaleString()} orange />
           {hasDailyLimit && (
@@ -76,7 +76,7 @@ export class UsageReport extends Component {
             )}`}
           />
           {hasMonthlyLimit && (
-            <ProgressBar completed={getPercent(usage.month.used, usage.month.limit)} mb={10} />
+            <ProgressBar completed={getPercent(usage.month.used, usage.month.limit)} my={10} />
           )}
           <DisplayNumber label="Used" content={usage.month.used.toLocaleString()} orange />
           <DisplayNumber label="Included" content={subscription.plan_volume.toLocaleString()} />

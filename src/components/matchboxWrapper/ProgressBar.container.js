@@ -7,12 +7,13 @@ import _ from 'lodash';
 export default function ProgressBar(props) {
   const [state, _dispatch] = useHibana();
   const { isHibanaEnabled } = state;
-  const hibanaProps = {
-    size: null,
+  const preHibanaProps = {
+    completed: null,
+    color: null,
   };
 
   if (isHibanaEnabled) {
     return <HibanaProgressBar {...props} />;
   }
-  return <PreHibanaProgressBar {..._.pick(props, _.keys(hibanaProps))} />;
+  return <PreHibanaProgressBar {..._.pick(props, _.keys(preHibanaProps))} />;
 }
