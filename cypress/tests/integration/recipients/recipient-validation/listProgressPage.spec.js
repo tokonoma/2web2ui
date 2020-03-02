@@ -229,6 +229,11 @@ describe('The recipient validation list progress page', () => {
         url: '/api/v1/billing',
         fixture: 'billing/200.get.json',
       });
+      cy.stubRequest({
+        url: '/api/v1/billing/subscription',
+        fixture: 'billing/subscription/200.get.json',
+        fixtureAlias: 'subscriptionPremierGet',
+      });
       cy.fixture('recipient-validation/list/200.get.usage-limit-exceeded.json').as('RVFixture');
       cy.route({
         url: '/api/v1/recipient-validation/job/fake-list',
