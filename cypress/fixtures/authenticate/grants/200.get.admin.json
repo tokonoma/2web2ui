@@ -103,6 +103,9 @@
       "key": "recipient-validation/preview"
     },
     {
+      "key": "recipient-validation/manage"
+    },
+    {
       "key": "signals/manage"
     },
     {

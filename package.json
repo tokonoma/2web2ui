@@ -16,6 +16,7 @@
     "test-coverage": "npm test -- --coverage",
     "test-ci": "CI=true npm test -- --coverage --colors",
     "test-cy-env": "node ./scripts/generateCypressEnv",
+    "test-cy-run": "cypress run --config integrationFolder=cypress/tests/integration",
     "test-e2e": "npm run test-cy-env && cypress open --config integrationFolder=cypress/tests/e2e",
     "test-e2e-headless": "cypress run --config integrationFolder=cypress/tests/e2e",
     "test-e2e-ci": "npm run start-app & wait-on http://localhost:3100 && npm run test-e2e-headless",

@@ -129,7 +129,6 @@ describe('The recipient validation /list route', () => {
       cy.get('[data-id="recipient-list-address-count"]').should('contain', '2');
       cy.findByText('$0.02').should('be.visible');
       cy.findByText('Validate').should('be.visible');
-      cy.findByText('No, thanks').should('be.visible');
     });
   });
 
