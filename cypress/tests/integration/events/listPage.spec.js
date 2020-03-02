@@ -1,6 +1,18 @@
 const PAGE_URL = '/reports/message-events';
 
 describe('The events page', () => {
+  // Removes the first 3 filters (which are there by default).
+  const removePresetFilters = () => {
+    cy.findAllByText('Remove')
+      .first()
+      .click();
+    cy.findAllByText('Remove')
+      .first()
+      .click();
+    cy.findAllByText('Remove')
+      .first()
+      .click();
+  };
   beforeEach(() => {
     cy.stubAuth();
     cy.login({ isStubbed: true });
@@ -244,21 +256,22 @@ describe('The events page', () => {
         const selectLabel = 'Filter By';
         const textFieldLabel = 'Filter';
 
-        cy.findAllByLabelText(selectLabel).should('have.length', 1);
-        cy.findAllByLabelText(textFieldLabel).should('have.length', 1);
+        cy.findAllByLabelText(selectLabel).should('have.length', 4);
+        cy.findAllByLabelText(textFieldLabel).should('have.length', 4);
 
         cy.findByText('Add Filter').click();
 
-        cy.findAllByLabelText(selectLabel).should('have.length', 2);
-        cy.findAllByLabelText(textFieldLabel).should('have.length', 2);
+        cy.findAllByLabelText(selectLabel).should('have.length', 5);
+        cy.findAllByLabelText(textFieldLabel).should('have.length', 5);
 
         cy.findAllByText('Remove')
           .first()
           .click();
 
-        cy.findAllByLabelText(selectLabel).should('have.length', 1);
-        cy.findAllByLabelText(textFieldLabel).should('have.length', 1);
+        cy.findAllByLabelText(selectLabel).should('have.length', 4);
+        cy.findAllByLabelText(textFieldLabel).should('have.length', 4);
 
+        removePresetFilters();
         cy.findByText('Remove').click();
 
         cy.findByLabelText(selectLabel).should('not.be.visible');
@@ -271,10 +284,22 @@ describe('The events page', () => {
         cy.findByText('Advanced Filters').should('not.be.visible');
       });
 
+      it('does not add in default filters if there are alreday filters', () => {
+        const selectLabel = 'Filter By';
+        const textFieldLabel = 'Filter';
+
+        cy.visit(`${PAGE_URL}?subjects=test`);
+        cy.findByText('Add Filters').click();
+
+        cy.findAllByLabelText(selectLabel).should('have.length', 2);
+        cy.findAllByLabelText(textFieldLabel).should('have.length', 2);
+      });
+
       it('closes the modal and applies filters when clicking "Apply Filters" by re-requesting events data', () => {
         // `force` shouldn't be necessary, but due to component markup it is - Hibana component redesign may make this unnecessary
         cy.findByLabelText('AMP Click').check({ force: true });
         cy.findByLabelText('Out of Band').check({ force: true });
+        removePresetFilters();
         cy.findByLabelText('Filter By').select('Recipient Domains');
         cy.findByLabelText('Filter').type('gmail.com');
         cy.findByText('Add Filter').click();
@@ -306,6 +331,7 @@ describe('The events page', () => {
       it('removes all filters when clicking "Clear All Filters"', () => {
         cy.findByLabelText('AMP Click').check({ force: true });
         cy.findByLabelText('Out of Band').check({ force: true });
+        removePresetFilters();
         cy.findByLabelText('Filter By').select('Recipient Domains');
         cy.findByLabelText('Filter').type('gmail.com');
         cy.findByText('Apply Filters').click();

@@ -24,7 +24,5 @@ describe('calculateNewCost', () => {
   it('should new cost difference', () => {
     expect(calculateNewCost(12333, 123)).toEqual('$0.74');
     expect(calculateNewCost(0, 123)).toEqual('$1.23');
-
   });
 });
-

@@ -9,7 +9,7 @@ import _ from 'lodash';
 
 export class AdvancedFiltersModal extends Component {
   state = {
-    modalOpen: false
+    modalOpen: false,
   };
 
   componentDidMount() {
@@ -20,16 +20,16 @@ export class AdvancedFiltersModal extends Component {
     this.setState({ modalOpen: !this.state.modalOpen });
   };
 
-  handleApply = (values) => {
+  handleApply = values => {
     const { searchQuery, ...events } = values;
-    const filteredSearchQuery = searchQuery.filter((filter) => !_.isEmpty(filter));
+    const filteredSearchQuery = searchQuery.filter(({ value }) => Boolean(value));
     const filters = getFiltersFromSearchQueries(filteredSearchQuery);
-    const enabledEventsArray = Object.keys(events).filter((key) => Boolean(events[key]));
+    const enabledEventsArray = Object.keys(events).filter(key => Boolean(events[key]));
     this.props.updateMessageEventsSearchOptions({ events: enabledEventsArray, ...filters });
     this.toggleModal();
   };
 
-  handleKeyDown = (e) => {
+  handleKeyDown = e => {
     const { modalOpen } = this.state;
     if (!modalOpen) {
       return;
@@ -43,12 +43,14 @@ export class AdvancedFiltersModal extends Component {
       <Fragment>
         <Button onClick={this.toggleModal}>Add Filters</Button>
         <Modal open={modalOpen} onClose={this.toggleModal}>
-          <WindowEvent event='keydown' handler={this.handleKeyDown} />
-          <SearchForm handleApply = {this.handleApply} handleCancel = {this.toggleModal} />
+          <WindowEvent event="keydown" handler={this.handleKeyDown} />
+          <SearchForm handleApply={this.handleApply} handleCancel={this.toggleModal} />
         </Modal>
       </Fragment>
     );
   }
 }
 
-export default connect(null, { updateMessageEventsSearchOptions, getDocumentation })(AdvancedFiltersModal);
+export default connect(null, { updateMessageEventsSearchOptions, getDocumentation })(
+  AdvancedFiltersModal,
+);
