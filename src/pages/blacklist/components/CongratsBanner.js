@@ -1,5 +1,5 @@
 import React from 'react';
-import { Banner } from '@sparkpost/matchbox';
+import { Banner } from 'src/components/matchboxWrapper';
 
 const CongratsBanner = ({
   onDismiss,

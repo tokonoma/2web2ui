@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { Banner, Button } from '@sparkpost/matchbox';
-
+import { Button } from '@sparkpost/matchbox';
+import { Banner } from 'src/components/matchboxWrapper';
 const methodToText = {
   GET: 'loading',
   PUT: 'updating',
   DELETE: 'deleting',
-  POST: 'creating'
+  POST: 'creating',
 };
 
 const craftMessage = (method, resource) => {
@@ -19,7 +19,7 @@ const craftMessage = (method, resource) => {
 
 export default class ApiErrorBanner extends Component {
   state = {
-    showErrorDetails: false
+    showErrorDetails: false,
   };
 
   render() {
@@ -29,7 +29,7 @@ export default class ApiErrorBanner extends Component {
       reload = false,
       title = 'An error occurred',
       status = 'warning',
-      error = { payload: {}, meta: {}}
+      error = { payload: {}, meta: {} },
     } = this.props;
 
     const { showErrorDetails } = this.state;
@@ -41,14 +41,25 @@ export default class ApiErrorBanner extends Component {
       <Banner status={status} title={title}>
         <p>{message || craftMessage(meta.method, resource)}</p>
 
-        {reload && <Button outline={true} onClick={() => reload()} style={{ marginRight: '10px' }}>
-          Try Again
-        </Button>}
-        {showDetailsButton && <Button outline={true} onClick={() => this.setState({ showErrorDetails: !showErrorDetails })}>
-          {buttonText}
-        </Button>}
+        {reload && (
+          <Button outline={true} onClick={() => reload()} style={{ marginRight: '10px' }}>
+            Try Again
+          </Button>
+        )}
+        {showDetailsButton && (
+          <Button
+            outline={true}
+            onClick={() => this.setState({ showErrorDetails: !showErrorDetails })}
+          >
+            {buttonText}
+          </Button>
+        )}
 
-        {showErrorDetails && <p style={{ marginTop: '20px' }}><strong>Details:</strong> {errorDetails || payload.message}</p>}
+        {showErrorDetails && (
+          <p style={{ marginTop: '20px' }}>
+            <strong>Details:</strong> {errorDetails || payload.message}
+          </p>
+        )}
       </Banner>
     );
   }
