@@ -53,6 +53,10 @@ const config = configFactory('production');
 // browserslist defaults.
 const { checkBrowsers } = require('react-dev-utils/browsersHelper');
 checkBrowsers(paths.appPath, isInteractive)
+  .then(() =>
+    // TODO: Once the default theme is removed/replaced with Hibana, this can be removed
+    copyMatchboxStyles(),
+  )
   .then(() => {
     // First, read the current file sizes in build directory.
     // This lets us display how much they changed later.
@@ -62,9 +66,6 @@ checkBrowsers(paths.appPath, isInteractive)
     // Remove all content but keep the directory so that
     // if you're in it, you don't end up in Trash
     fs.emptyDirSync(paths.appBuild);
-
-    // TODO: Once the default theme is removed/replaced with Hibana, this can be removed
-    copyMatchboxStyles();
 
     // Merge with the public folder
     copyPublicFolder();
