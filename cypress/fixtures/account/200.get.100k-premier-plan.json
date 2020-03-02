@@ -4,7 +4,7 @@
     "company_name": "cfs test",
     "country_code": "US",
     "created": "2014-12-30T17:43:18.954Z",
-    "customer_id": 107,
+    "customer_id": 123,
     "service_level": "standard",
     "status": "active",
     "status_reason_category": "200.02",
@@ -14,9 +14,9 @@
     "subscription": {
       "code": "100K-premier-0519",
       "name": "100K Premier",
-      "plan_volume": 50000,
+      "plan_volume": 100000,
       "period": "month",
-      "recurring_charge": 20,
+      "recurring_charge": 75,
       "overage": 0.85,
       "self_serve": true,
       "type": "default"
