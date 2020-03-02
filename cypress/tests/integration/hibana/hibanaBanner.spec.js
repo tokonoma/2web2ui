@@ -1,7 +1,7 @@
 const PAGE_URL = '/';
 const API_URL = '/api/v1/account*';
 
-describe('Hibana theme togging and UI', () => {
+describe('Hibana theme toggling UI', () => {
   beforeEach(() => {
     cy.stubAuth();
     cy.login({ isStubbed: true });
@@ -38,11 +38,23 @@ describe('Hibana theme togging and UI', () => {
     cy.get('[data-id="hibana-controls"]').should('not.be.visible');
   });
 
-  it('Enables and disables Hibana when clicking "Enable Hibana" and "Disable Hibana" buttons', () => {
+  it('Enables and disables Hibana when clicking "Take a Look" and "That’s fine, take me back" buttons', () => {
+    const disabledDescription =
+      'We’ve been working hard redesigning the SparkPost app for a better experience';
+    const disabledButtonContent = 'Take a Look';
+    const stylesSelector = 'link[data-id="theme-global-styles"]';
+
     cy.visit(PAGE_URL);
 
-    cy.findByText('Enable Hibana').click();
-    cy.findByText('Disable Hibana').click();
-    cy.findByText('Enable Hibana').should('be.visible');
+    cy.findByText(disabledDescription).should('be.visible');
+    cy.findByText(disabledButtonContent).click();
+    cy.findByText('Going back means you won’t get to experience the all new SparkPost app!').should(
+      'be.visible',
+    );
+    cy.get(stylesSelector).should('have.attr', 'href', '/static/styles-hibana.css');
+    cy.findByText('That’s fine, take me back').click();
+    cy.findByText(disabledDescription).should('be.visible');
+    cy.findByText(disabledButtonContent).should('be.visible');
+    cy.get(stylesSelector).should('have.attr', 'href', '/static/styles-default.css');
   });
 });

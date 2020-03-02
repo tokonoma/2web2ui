@@ -1,7 +1,43 @@
 @import '~@sparkpost/matchbox/src/styles/config.scss';
 
-.HibanaControls {
+$static-spacing: 18px;
+$static-line-height: 24px;
+$static-font-size: 18px;
+$static-button-size: 40px;
+
+.HibanaBanner.HibanaBanner {
+  width: 100%;
   position: fixed;
-  bottom: spacing();
-  right: spacing();
+  bottom: 0;
+  right: 0;
+  z-index: 500;
+  display: flex;
+  justify-content: center;
+  padding: $static-spacing spacing('large'); // Pixel value used to prevent jumpiness as root font size value changes between default and Hibana themes
+  border-top: 2px solid color(gray, 7);
+  background-color: #fff;
+  line-height: $static-line-height;
+
+  * {
+    // Pixel values used to prevent jumpiness as root font size value changes between default and Hibana themes
+    line-height: $static-line-height;
+    font-size: $static-font-size;
+  }
+}
+
+.HibanaBannerSubsection {
+  display: grid;
+  grid-gap: $static-spacing;
+  grid-template-columns: 6fr auto;
+  align-items: center;
+}
+
+.HibanaToggle.HibanaToggle {
+  height: $static-button-size;
+}
+
+.HibanaDescriptionParagraph {
+  font-weight: 500;
+  color: #39444d;
+  margin: 0;
 }

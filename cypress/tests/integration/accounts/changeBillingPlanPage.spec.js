@@ -1,5 +1,3 @@
-/// <reference types="Cypress" />
-
 describe('Billing Page', () => {
   beforeEach(() => {
     cy.stubAuth();
@@ -101,18 +99,24 @@ describe('Billing Page', () => {
     cy.stubRequest({
       url: '/api/v1/account',
       fixture: 'account/200.get.test-plan.json',
+      requestAlias: 'accountGet',
     });
     //since this a free account, so should not have a credit card usually
     cy.stubRequest({
       url: '/api/v1/billing',
       fixture: 'billing/200.get.has-no-credit-card.json',
-      fixtureAlias: 'billingGet',
+      requestAlias: 'billingGet',
     });
+
     cy.stubRequest({
       url: '/api/v1/billing/subscription',
       fixture: 'billing/subscription/200.get.test-plan.json',
+      requestAlias: 'subGet',
     });
+
     cy.visit('/account/billing/plan?code=50K-starter-0519');
+
+    cy.wait(['@accountGet', '@billingGet', '@subGet']);
 
     // auto select new plan
     cy.findByText('Your New Plan').should('be.visible');
@@ -150,6 +154,7 @@ describe('Billing Page', () => {
     });
 
     cy.findAllByText('Change Plan').click();
+
     cy.findAllByText('Subscription Updated').should('be.visible');
     cy.url().should('equal', Cypress.config().baseUrl + '/account/billing');
   });
