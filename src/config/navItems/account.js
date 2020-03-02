@@ -28,27 +28,32 @@ export default [
   {
     label: 'Account Settings',
     to: '/account/settings',
-    section: 1
+    section: 1,
   },
   {
     label: 'Profile',
     to: '/account/profile',
-    section: 1
+    section: 1,
   },
   {
     label: 'Billing',
     to: '/account/billing',
-    section: 1
+    section: 1,
   },
   {
     label: 'Manage Users',
     to: '/account/users',
-    section: 1
+    section: 1,
+  },
+  {
+    label: 'Data and Privacy',
+    to: '/account/data-privacy',
+    section: 1,
   },
   {
     label: 'Get Help',
     section: 2,
-    action: openSupportPanel
+    action: openSupportPanel,
   },
   {
     label: 'API Docs',
@@ -56,13 +61,13 @@ export default [
     to: LINKS.API_DOCS,
     icon: OpenInNew,
     section: 2,
-    condition: not(isHeroku)
+    condition: not(isHeroku),
   },
   {
     label: 'Log Out',
     to: '/logout',
     icon: ExitToApp,
     section: 3,
-    condition: not(isHeroku)
-  }
+    condition: not(isHeroku),
+  },
 ];
