@@ -23,79 +23,79 @@ describe('Alerts Page - Create', () => {
     cy.visit('/alerts/create');
   });
 
-  it('Monthly Sending Limit metric has limit value and no filters', () => {
-    cy.get('[name="metric"]').select('monthly_sending_limit');
-    cy.findByText('Percent Used').should('be.visible');
-    cy.findByLabelText('Percent Used').should('have.value', '80');
-    cy.findByText('Filtered by').should('not.be.visible');
-  });
+  // it('Monthly Sending Limit metric has limit value and no filters', () => {
+  //   cy.get('[name="metric"]').select('monthly_sending_limit');
+  //   cy.findByText('Percent Used').should('be.visible');
+  //   cy.findByLabelText('Percent Used').should('have.value', '80');
+  //   cy.findByText('Filtered by').should('not.be.visible');
+  // });
 
-  it('Health Score metric has evaluator, comparison, subaccount filter, & single facet filter', () => {
-    cy.get('[name="metric"]').select('health_score');
-    cy.findByText('Evaluated').should('be.visible');
-    cy.findByText('Comparison').should('be.visible');
-    cy.findByLabelText('Score').should('have.value', '80');
-    cy.get('[data-id="alert-filters"]').within(() => {
-      cy.findByText('Filtered by').should('be.visible');
-      cy.findByText('Subaccounts').should('be.visible');
-      cy.findByText('Facet').should('be.visible');
-      cy.findByLabelText('Facet')
-        .select('mailbox_provider')
-        .should('have.value', 'mailbox_provider');
-    });
-  });
+  // it('Health Score metric has evaluator, comparison, subaccount filter, & single facet filter', () => {
+  //   cy.get('[name="metric"]').select('health_score');
+  //   cy.findByText('Evaluated').should('be.visible');
+  //   cy.findByText('Comparison').should('be.visible');
+  //   cy.findByLabelText('Score').should('have.value', '80');
+  //   cy.get('[data-id="alert-filters"]').within(() => {
+  //     cy.findByText('Filtered by').should('be.visible');
+  //     cy.findByText('Subaccounts').should('be.visible');
+  //     cy.findByText('Facet').should('be.visible');
+  //     cy.findByLabelText('Facet')
+  //       .select('mailbox_provider')
+  //       .should('have.value', 'mailbox_provider');
+  //   });
+  // });
 
-  it('Bounce Rate metric has subaccount filter, & multiple filters', () => {
-    cy.get('[name="metric"]').select('block_bounce_rate');
-    cy.findByLabelText('Bounce Percentage Above').should('have.value', '20');
+  // it('Bounce Rate metric has subaccount filter, & multiple filters', () => {
+  //   cy.get('[name="metric"]').select('block_bounce_rate');
+  //   cy.findByLabelText('Bounce Percentage Above').should('have.value', '20');
 
-    cy.get('[data-id="alert-filters"]').within(() => {
-      cy.findByText('Filtered by').should('be.visible');
-      cy.findByText('Subaccounts').should('be.visible');
-      cy.findByText('Sending IP').should('be.visible');
-      cy.findByText('Mailbox Provider').should('be.visible');
-      cy.findByText('Sending Domain').should('be.visible');
-    });
-  });
+  //   cy.get('[data-id="alert-filters"]').within(() => {
+  //     cy.findByText('Filtered by').should('be.visible');
+  //     cy.findByText('Subaccounts').should('be.visible');
+  //     cy.findByText('Sending IP').should('be.visible');
+  //     cy.findByText('Mailbox Provider').should('be.visible');
+  //     cy.findByText('Sending Domain').should('be.visible');
+  //   });
+  // });
 
-  it('Injection count metric has evaluated value, & no filters', () => {
-    cy.get('[name="metric"]').select('injection_count');
-    cy.findByLabelText('Falls Below').should('have.value', '100000');
-    cy.findByText('Filtered by').should('not.be.visible');
-  });
+  // it('Injection count metric has evaluated value, & no filters', () => {
+  //   cy.get('[name="metric"]').select('injection_count');
+  //   cy.findByLabelText('Falls Below').should('have.value', '100000');
+  //   cy.findByText('Filtered by').should('not.be.visible');
+  // });
 
-  it('Blacklist metric has filters by blacklist and domains/IP', () => {
-    cy.get('[name="metric"]').select('blacklist');
+  // it('Blacklist metric has filters by blacklist and domains/IP', () => {
+  //   cy.get('[name="metric"]').select('blacklist');
 
-    cy.get('[data-id="alert-filters"]').within(() => {
-      cy.findByText('Filtered by').should('be.visible');
-      cy.findByText('Blacklists').should('be.visible');
-      cy.findByText('Domains or IPs').should('be.visible');
-    });
-  });
+  //   cy.get('[data-id="alert-filters"]').within(() => {
+  //     cy.findByText('Filtered by').should('be.visible');
+  //     cy.findByText('Blacklists').should('be.visible');
+  //     cy.findByText('Domains or IPs').should('be.visible');
+  //   });
+  // });
 
-  it('Subaccount Filters stops accepting more subaccounts when master & all or any subaccount is selected', () => {
-    cy.get('[name="metric"]').select('block_bounce_rate');
+  // it('Subaccount Filters stops accepting more subaccounts when master & all or any subaccount is selected', () => {
+  //   cy.get('[name="metric"]').select('block_bounce_rate');
 
-    cy.get('[data-id="alert-filters"]').within(() => {
-      cy.findByLabelText('Subaccounts').type('subaccount');
-      cy.findByText('Master and all subaccounts').click({ force: true });
-      cy.findByLabelText('Subaccounts').should('have.attr', 'readonly');
-    });
-  });
+  //   cy.get('[data-id="alert-filters"]').within(() => {
+  //     cy.findByLabelText('Subaccounts').type('subaccount');
+  //     cy.findByText('Master and all subaccounts').click({ force: true });
+  //     cy.findByLabelText('Subaccounts').should('have.attr', 'readonly');
+  //   });
+  // });
 
-  it('Subaccount Filters stops accepting master & all or any subaccount when another subaccount is selected', () => {
-    cy.get('[name="metric"]').select('block_bounce_rate');
+  // it('Subaccount Filters stops accepting master & all or any subaccount when another subaccount is selected', () => {
+  //   cy.get('[name="metric"]').select('block_bounce_rate');
 
-    cy.get('[data-id="alert-filters"]').within(() => {
-      cy.findByLabelText('Subaccounts').type('subaccount');
-      cy.findByText('Master and all subaccounts').should('be.visible');
+  //   cy.get('[data-id="alert-filters"]').within(() => {
+  //     cy.findByLabelText('Subaccounts').type('subaccount');
+  //     cy.findByText('Master and all subaccounts').should('be.visible');
 
-      cy.findByText('Fake Subaccount 1 (101)').click({ force: true });
-      cy.findByText('Master and all subaccounts').should('not.be.visible');
-      cy.findByText('Master account').should('be.visible');
-    });
-  });
+  //     cy.findByText('Fake Subaccount 1 (101)').click({ force: true });
+  //     cy.findByText('Master and all subaccounts').should('not.be.visible');
+  //     cy.findByText('Master account').should('be.visible');
+  //   });
+  // });
 
   describe('New Alert Submission', () => {
     it('should validate that all required fields are present', () => {
@@ -157,6 +157,9 @@ describe('Alerts Page - Create', () => {
         cy.findByText('Gmail').click({ force: true });
         cy.findByText('Apple').click({ force: true });
       });
+
+      cy.log('testing cy.log()');
+
       cy.get('button')
         .contains('Create Alert')
         .click();
@@ -164,6 +167,7 @@ describe('Alerts Page - Create', () => {
       cy.wait(['@postNewAlert', '@getNewAlert', '@getAlertIncidents']).then(xhrs => {
         const [postRequest] = xhrs;
         const { requestBody } = postRequest;
+
         const expectedRequestBody = {
           name: 'My Alert',
           metric: 'block_bounce_rate',
@@ -173,7 +177,11 @@ describe('Alerts Page - Create', () => {
           threshold_evaluator: { operator: 'gt', source: 'raw', value: 20 },
           channels: { emails: ['sparkky@sparkpost.io'] },
         };
-        expect(requestBody).to.deep.equal(expectedRequestBody);
+
+        cy.log(requestBody);
+        cy.log(expectedRequestBody);
+
+        cy.wrap(requestBody).should('eq', expectedRequestBody);
       });
       cy.url().should('include', '/alerts/details/101');
       cy.findByText('Alert created').should('be.visible');
