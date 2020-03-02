@@ -69,8 +69,10 @@ describe('Summary Report page', () => {
         .type('sparkpost');
       cy.wait('@getMetricsFilterOptions');
       cy.get('[data-id="report-filters-dropdown"]').within(() => {
-        cy.findByText('sparkpost-test').should('be.visible');
-        cy.get('a').click({ force: true });
+        cy.findByText('sparkpost-test')
+          .should('be.visible')
+          .closest('a')
+          .click({ force: true });
       });
       cy.findByText('Campaign: sparkpost-test').should('be.visible');
     });
