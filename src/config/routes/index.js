@@ -40,6 +40,7 @@ import LogoutPage from 'src/pages/logout/LogoutPage';
 import onboarding from 'src/pages/onboarding';
 import { default as emailVerification } from 'src/components/emailVerification/EmailVerification';
 import SecretBillingPlanOrBillingSummaryPage from '../SecretBillingPlanOrBillingSummaryPage';
+import DataPrivacyPage from 'src/pages/dataPrivacy/DataPrivacyPage';
 
 import { all, hasGrants, not } from 'src/helpers/conditions';
 import {
@@ -535,6 +536,13 @@ const routes = [
     layout: App,
     title: 'Account settings',
     supportDocSearch: 'account settings',
+  },
+  {
+    path: '/account/data-privacy',
+    component: DataPrivacyPage,
+    condition: all(hasGrants('users/manage'), isAccountUiOptionSet('data_privacy')), //TODO: Remove account UI option
+    layout: App,
+    title: 'Data and Privacy',
   },
   {
     path: '/account/cancel',

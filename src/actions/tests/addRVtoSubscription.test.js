@@ -13,7 +13,7 @@ describe('Action Creator: Add RV to subcription', () => {
   let dispatch;
 
   beforeEach(() => {
-    dispatch = jest.fn(a => a);
+    dispatch = jest.fn(a => Promise.resolve(a));
   });
 
   it('create zuora account and add rv bundle to subscription', async () => {
