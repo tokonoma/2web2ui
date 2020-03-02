@@ -181,7 +181,7 @@ describe('Alerts Page - Create', () => {
         cy.log(requestBody);
         cy.log(expectedRequestBody);
 
-        cy.wrap(requestBody).should('eq', expectedRequestBody);
+        cy.wrap(requestBody).should('deep.equal', expectedRequestBody);
       });
       cy.url().should('include', '/alerts/details/101');
       cy.findByText('Alert created').should('be.visible');
