@@ -58,18 +58,6 @@ describe('Billing Page', () => {
     cy.findAllByText('Changes to Features').should('exist');
   });
 
-  //downgrading, starter  => free plan
-  it('Change plan button is displayed only when all the "features have been updated" ', () => {
-    selectAFreePlan();
-    cy.get('body').then($body => {
-      if ($body.text().includes('features have been updated')) {
-        cy.get('a[type=button]')
-          .contains('Change Plan')
-          .should('be.visible');
-      }
-    });
-  });
-
   //downgrading, premier => starter plan
   it('redirects to billing page', () => {
     cy.stubRequest({
