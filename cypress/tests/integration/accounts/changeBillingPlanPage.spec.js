@@ -107,9 +107,6 @@ describe('Billing Page', () => {
     // auto select new plan
     cy.findByText('Your New Plan').should('be.visible');
     cy.findByText('50,000').should('be.visible');
-    cy.findAllByText('Got it')
-      .last()
-      .click();
     cy.findByLabelText('Credit Card Number').type('4000 0000 0000 0000');
     cy.findByLabelText('Cardholder Name').type('Test Account');
     cy.findByLabelText('Expiration Date').type('03/33');
