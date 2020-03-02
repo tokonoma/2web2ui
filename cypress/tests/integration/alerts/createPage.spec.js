@@ -176,6 +176,9 @@ describe('Alerts Page - Create', () => {
           channels: { emails: ['sparkky@sparkpost.io'] },
         };
 
+        cy.log(requestBody);
+        cy.log(expectedRequestBody);
+
         cy.wrap(requestBody).should('deep.equal', expectedRequestBody);
       });
       cy.url().should('include', '/alerts/details/101');
