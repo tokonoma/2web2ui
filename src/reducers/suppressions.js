@@ -3,32 +3,20 @@ import checkEqualityForKeys from 'src/helpers/checkEqualityForKeys';
 
 const initialState = {
   list: null,
-  hasSuppressions: null,
   listLoading: false,
   createError: null,
   search: {
     dateOptions: {},
     types: [],
-    sources: []
-  }
+    sources: [],
+  },
 };
 
 export default (state = initialState, action) => {
   const { meta } = action;
 
   switch (action.type) {
-
-    case 'CHECK_SUPPRESSIONS_PENDING':
-      return { ...state, listError: null };
-
-    case 'CHECK_SUPPRESSIONS_SUCCESS':
-      return { ...state, hasSuppression: Boolean((action.payload || []).length) };
-
-    case 'CHECK_SUPPRESSIONS_FAIL':
-      return { ...state, listError: action.payload };
-
-
-      // Fetch list
+    // Fetch list
 
     case 'GET_SUPPRESSIONS_PENDING':
       return { ...state, listLoading: true, listError: null };
@@ -39,9 +27,7 @@ export default (state = initialState, action) => {
     case 'GET_SUPPRESSIONS_FAIL':
       return { ...state, listError: action.payload, listLoading: false };
 
-
-
-      // Recipients search
+    // Recipients search
 
     case 'SEARCH_SUPPRESSIONS_RECIPIENT_PENDING':
       return { ...state, listLoading: true };
@@ -50,32 +36,35 @@ export default (state = initialState, action) => {
       return { ...state, listLoading: false, list: action.payload };
 
     case 'SEARCH_SUPPRESSIONS_RECIPIENT_FAIL': {
-      const { response = {}} = action.payload;
+      const { response = {} } = action.payload;
       if (response.status === 404) {
-        return { ...state, listLoading: false, list: []};
+        return { ...state, listLoading: false, list: [] };
       } else {
         return { ...state, listLoading: false, list: [], listError: action.payload };
       }
     }
 
-
     // Refresh date range for suppression search
 
     case 'REFRESH_SUPPRESSION_SEARCH_DATE_OPTIONS': {
-      const dateOptions = { ...state.search.dateOptions, ...action.payload, ...getRelativeDates(action.payload.relativeRange, { roundToPrecision: false }) };
-      return { ...state, search: { ...state.search, dateOptions }};
+      const dateOptions = {
+        ...state.search.dateOptions,
+        ...action.payload,
+        ...getRelativeDates(action.payload.relativeRange, { roundToPrecision: false }),
+      };
+      return { ...state, search: { ...state.search, dateOptions } };
     }
-
 
     // Type and source search
 
     case 'UPDATE_SUPPRESSION_SEARCH_OPTIONS': {
-      if (checkEqualityForKeys({ a: state.search, b: action.payload, keys: ['sources', 'types']})) {
+      if (
+        checkEqualityForKeys({ a: state.search, b: action.payload, keys: ['sources', 'types'] })
+      ) {
         return state;
       }
-      return { ...state, search: { ...state.search, ...action.payload }};
+      return { ...state, search: { ...state.search, ...action.payload } };
     }
-
 
     // Delete suppression
 
@@ -83,16 +72,23 @@ export default (state = initialState, action) => {
       return { ...state, deleting: true };
 
     case 'DELETE_SUPPRESSION_SUCCESS':
-      return { ...state, deleting: false, list: state.list.filter((s) => !(s.recipient === meta.suppression.recipient &&
-        s.type === meta.suppression.type &&
-        s.subaccount_id === meta.suppression.subaccount_id))
+      return {
+        ...state,
+        deleting: false,
+        list: state.list.filter(
+          s =>
+            !(
+              s.recipient === meta.suppression.recipient &&
+              s.type === meta.suppression.type &&
+              s.subaccount_id === meta.suppression.subaccount_id
+            ),
+        ),
       };
 
     case 'DELETE_SUPPRESSION_FAIL':
       return { ...state, deleting: false, deleteError: action.payload };
 
-
-      // Reset results
+    // Reset results
 
     case 'RESET_SUPPRESSIONS_RESULTS':
       return { ...state, list: null };
@@ -102,8 +98,7 @@ export default (state = initialState, action) => {
     case 'CREATE_OR_UPDATE_SUPPRESSIONS_SUCCESS':
       return { ...state, persistError: null };
 
-
-      // Parse suppression upload file
+    // Parse suppression upload file
 
     case 'PARSE_SUPPRESSIONS_FILE_FAIL':
       return { ...state, parseError: action.payload };
@@ -112,7 +107,6 @@ export default (state = initialState, action) => {
 
     case 'RESET_SUPPRESSION_ERRORS':
       return { ...state, parseError: null, persistError: null };
-
 
     default:
       return state;

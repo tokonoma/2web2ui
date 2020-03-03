@@ -45,8 +45,6 @@ export const LINKS = {
     'https://www.sparkpost.com/docs/tech-resources/enabling-multiple-custom-tracking-domains',
   SENDING_REQS: 'https://www.sparkpost.com/docs/getting-started/requirements-for-sending-domains',
   SENDING_SETUP: 'https://www.sparkpost.com/docs/getting-started/setting-up-domains/',
-  SUPPRESSION_MIGRATION:
-    'https://www.sparkpost.com/docs/getting-started/getting-started-sparkpost/#important-coming-from-other-email-services',
   TFA_BACKUP_CODES: 'https://support.sparkpost.com/customer/portal/articles/1948449',
   IP_WARM_UP: 'https://support.sparkpost.com/customer/portal/articles/1972209-ip-warm-up-overview',
   DAILY_USAGE: 'https://www.sparkpost.com/docs/getting-started/what-counts-daily-monthly-usage',

@@ -8,44 +8,33 @@ import setSubaccountHeader from 'src/actions/helpers/setSubaccountHeader';
 
 const { apiDateFormat } = config;
 
-export function checkSuppression() { //used in DashBoardPage to check if account has suppression
-  const params = { sources: 'Manually Added', limit: 1 };
-
-  return (dispatch, getState) => dispatch(
-    sparkpostApiRequest({
-      type: 'CHECK_SUPPRESSIONS',
-      meta: {
-        method: 'GET',
-        url: '/v1/suppression-list',
-        params
-      }
-    })
-  );
-}
-
 export function searchRecipient({ email, subaccountId } = {}) {
   return sparkpostApiRequest({
     type: 'SEARCH_SUPPRESSIONS_RECIPIENT',
     meta: {
       method: 'GET',
       url: `/v1/suppression-list/${encodeURIComponent(email)}`,
-      headers: setSubaccountHeader(subaccountId)
-    }
+      headers: setSubaccountHeader(subaccountId),
+    },
   });
 }
 
 export function searchSuppressions(options) {
-  const { dateOptions, types = [], sources = []} = options;
+  const { dateOptions, types = [], sources = [] } = options;
   const { from, to } = dateOptions;
 
   const params = {};
 
   if (from) {
-    params.from = moment(from).utc().format(apiDateFormat);
+    params.from = moment(from)
+      .utc()
+      .format(apiDateFormat);
   }
 
   if (to) {
-    params.to = moment(to).utc().format(apiDateFormat);
+    params.to = moment(to)
+      .utc()
+      .format(apiDateFormat);
   }
 
   if (!_.isEmpty(types)) {
@@ -61,8 +50,8 @@ export function searchSuppressions(options) {
     meta: {
       method: 'GET',
       url: '/v1/suppression-list',
-      params
-    }
+      params,
+    },
   });
 }
 
@@ -76,8 +65,8 @@ export function deleteSuppression(suppression) {
       url: `/v1/suppression-list/${encodeURIComponent(recipient)}`,
       headers: setSubaccountHeader(subaccountId),
       data: { type },
-      suppression
-    }
+      suppression,
+    },
   });
 }
 
@@ -86,23 +75,33 @@ const LIKE_TRUE = new RegExp('true', 'i');
 
 // SEE: https://developers.sparkpost.com/api/suppression-list.html#suppression-list-bulk-insert-update-put
 export function createOrUpdateSuppressions(recipients, subaccount) {
-  const sanitizedRecipients = recipients.map(({
-    description, email, non_transactional, recipient, transactional, type
-  }) => {
-    // Convert deprecated type fields
-    if (!type && LIKE_TRUE.test(transactional)) { type = 'transactional'; }
-    if (!type && LIKE_TRUE.test(non_transactional)) { type = 'non_transactional'; }
+  const sanitizedRecipients = recipients.map(
+    ({ description, email, non_transactional, recipient, transactional, type }) => {
+      // Convert deprecated type fields
+      if (!type && LIKE_TRUE.test(transactional)) {
+        type = 'transactional';
+      }
+      if (!type && LIKE_TRUE.test(non_transactional)) {
+        type = 'non_transactional';
+      }
 
-    // Format type value to provide a better user experience
-    if (type && LIKE_NON.test(type)) { type = 'non_transactional'; }
-    if (type && !LIKE_NON.test(type)) { type = 'transactional'; }
+      // Format type value to provide a better user experience
+      if (type && LIKE_NON.test(type)) {
+        type = 'non_transactional';
+      }
+      if (type && !LIKE_NON.test(type)) {
+        type = 'transactional';
+      }
 
-    // Convert deprecated recipient fields
-    if (email && !recipient) { recipient = email; }
+      // Convert deprecated recipient fields
+      if (email && !recipient) {
+        recipient = email;
+      }
 
-    // Trim whitespace from recipient email (FAD-5095)
-    return { description, recipient: _.trim(recipient), type };
-  });
+      // Trim whitespace from recipient email (FAD-5095)
+      return { description, recipient: _.trim(recipient), type };
+    },
+  );
 
   return sparkpostApiRequest({
     type: 'CREATE_OR_UPDATE_SUPPRESSIONS',
@@ -111,10 +110,10 @@ export function createOrUpdateSuppressions(recipients, subaccount) {
       url: '/v1/suppression-list',
       headers: setSubaccountHeader(subaccount),
       data: {
-        recipients: sanitizedRecipients
+        recipients: sanitizedRecipients,
       },
-      showErrorAlert: false
-    }
+      showErrorAlert: false,
+    },
   });
 }
 
@@ -126,14 +125,14 @@ export function parseSuppressionsFile(file) {
       validate: [
         hasData,
         hasField('recipient', 'email'),
-        hasField('type', 'non_transactional', 'transactional')
-      ]
-    }
+        hasField('type', 'non_transactional', 'transactional'),
+      ],
+    },
   });
 }
 
 export function uploadSuppressions(file, subaccount) {
-  return async (dispatch) => {
+  return async dispatch => {
     const recipients = await dispatch(parseSuppressionsFile(file));
     return dispatch(createOrUpdateSuppressions(recipients, subaccount));
   };
@@ -141,7 +140,7 @@ export function uploadSuppressions(file, subaccount) {
 
 export function resetErrors() {
   return {
-    type: 'RESET_SUPPRESSION_ERRORS'
+    type: 'RESET_SUPPRESSION_ERRORS',
   };
 }
 
@@ -159,13 +158,13 @@ export function resetErrors() {
 export function refreshSuppressionDateRange(dateOptions) {
   return {
     type: 'REFRESH_SUPPRESSION_SEARCH_DATE_OPTIONS',
-    payload: dateOptions
+    payload: dateOptions,
   };
 }
 
 export function updateSuppressionSearchOptions(options) {
   return {
     type: 'UPDATE_SUPPRESSION_SEARCH_OPTIONS',
-    payload: options
+    payload: options,
   };
 }
