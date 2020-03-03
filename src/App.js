@@ -11,6 +11,7 @@ import ErrorBoundary from 'src/components/errorBoundaries/ErrorBoundary';
 import AppRoutes from 'src/components/appRoutes';
 import { HibanaProvider } from 'src/context/HibanaContext';
 import { HibanaTheme } from 'src/components/hibana';
+import { HibanaBanner, HibanaToggle, HibanaDescription } from 'src/components/hibana';
 import GlobalBanner from 'src/context/GlobalBanner';
 
 import config from 'src/config';
@@ -43,6 +44,11 @@ const App = ({ RouterComponent = BrowserRouter }) => (
               </GlobalBanner>
               <Support />
               <GlobalAlertWrapper />
+
+              <HibanaBanner>
+                <HibanaDescription />
+                <HibanaToggle />
+              </HibanaBanner>
             </div>
           </RouterComponent>
         </Poll>
