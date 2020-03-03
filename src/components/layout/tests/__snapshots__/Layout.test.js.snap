@@ -3,7 +3,7 @@
 exports[`Component: Layout should render a regular route with a specified layout and title 1`] = `
 <App>
   <HelmetWrapper
-    defer={true}
+    defer={false}
     encodeSpecialCharacters={true}
   >
     <title>
@@ -24,7 +24,7 @@ exports[`Component: Layout should render a regular route with a specified layout
 exports[`Component: Layout should render a route that does not specify a layout 1`] = `
 <Form>
   <HelmetWrapper
-    defer={true}
+    defer={false}
     encodeSpecialCharacters={true}
   >
     <title>

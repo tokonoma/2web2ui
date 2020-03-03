@@ -157,6 +157,7 @@ describe('Alerts Page - Create', () => {
         cy.findByText('Gmail').click({ force: true });
         cy.findByText('Apple').click({ force: true });
       });
+
       cy.get('button')
         .contains('Create Alert')
         .click();
@@ -164,6 +165,7 @@ describe('Alerts Page - Create', () => {
       cy.wait(['@postNewAlert', '@getNewAlert', '@getAlertIncidents']).then(xhrs => {
         const [postRequest] = xhrs;
         const { requestBody } = postRequest;
+
         const expectedRequestBody = {
           name: 'My Alert',
           metric: 'block_bounce_rate',
@@ -173,7 +175,8 @@ describe('Alerts Page - Create', () => {
           threshold_evaluator: { operator: 'gt', source: 'raw', value: 20 },
           channels: { emails: ['sparkky@sparkpost.io'] },
         };
-        expect(requestBody).to.deep.equal(expectedRequestBody);
+
+        cy.wrap(JSON.stringify(requestBody)).should('equal', JSON.stringify(expectedRequestBody));
       });
       cy.url().should('include', '/alerts/details/101');
       cy.findByText('Alert created').should('be.visible');

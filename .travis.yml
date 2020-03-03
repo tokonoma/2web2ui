@@ -23,7 +23,7 @@ jobs:
     - stage: test-and-build
       name: 'Unit Testing'
       script: npm run test-ci
-      # Running Cypress tests in parallel by running them in batches to reduce pipeline duration.
+    # Running Cypress tests in parallel by running them in batches to reduce pipeline duration.
     - stage: test-and-build
       name: 'Integration Testing - Accounts, Events, Navigation, Hibana, Alerts, and Blacklists'
       script: npm run test-integration-ci -- --specBatch='Paul Walker'
