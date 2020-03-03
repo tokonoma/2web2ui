@@ -12,7 +12,7 @@ describe('ProgressBar', () => {
       context,
     );
   };
-  it('should only pass pre-hibana when hibana is not enabled', () => {
+  it('should only pass pre-hibana props when hibana is not enabled', () => {
     const props = { completed: 50, color: 'orange', size: 'normal', my: 50 };
     const instance = subject(<ProgressBar {...props} />, { isHibanaEnabled: false });
     expect(
