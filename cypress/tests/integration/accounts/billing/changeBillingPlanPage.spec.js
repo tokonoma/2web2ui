@@ -458,18 +458,6 @@ describe('Change Billing Plan Page', () => {
     cy.findAllByText('Your features have been updated').should('exist');
   });
 
-  it('Change plan button is displayed only when all the "features have been updated" ', () => {
-    selectAFreePlan();
-    cy.get('body').then($body => {
-      if ($body.text().includes('features have been updated')) {
-        cy.get('a[type=button]')
-          .contains('Change Plan')
-          .should('be.visible');
-      }
-      cy.queryAllByText('Change Plan').should('not.be.visible');
-    });
-  });
-
   it('shows the compare features modal', () => {
     cy.stubRequest({
       url: '/api/v1/account',
