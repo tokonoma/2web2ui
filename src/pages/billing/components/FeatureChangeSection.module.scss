@@ -3,11 +3,11 @@
 
 .Feature {
   display: flex;
-  margin: 1rem;
+  margin: 1rem 0;
 
   .description {
     margin-right: 2rem;
-    font-size: .9em;
+    font-size: 0.9em;
   }
 
   & > :first-child {
@@ -33,12 +33,12 @@
   height: rem(30);
   width: rem(30);
   margin-right: spacing();
-  
+
   &.success {
     color: status-color(success);
   }
 
-  &.danger{
+  &.danger {
     color: status-color(error);
   }
 }

@@ -53,23 +53,7 @@ describe('Billing Page', () => {
   //downgrading, starter  => free plan
   it('on changing plan renders section with changes to features', () => {
     selectAFreePlan();
-    cy.findAllByText('Got it')
-      .first()
-      .click();
     cy.findAllByText('Changes to Features').should('exist');
-  });
-
-  //downgrading, starter  => free plan
-  it('Change plan button is displayed only when all the "features have been updated" ', () => {
-    selectAFreePlan();
-    cy.get('body').then($body => {
-      if ($body.text().includes('features have been updated')) {
-        cy.get('a[type=button]')
-          .contains('Change Plan')
-          .should('be.visible');
-      }
-      cy.findAllByText('Change Plan').should('not.be.visible');
-    });
   });
 
   //downgrading, premier => starter plan
@@ -86,12 +70,6 @@ describe('Billing Page', () => {
     });
     cy.visit('/account/billing/plan');
     cy.get('[data-id=select-plan-50K-starter-0519]').click();
-    cy.findAllByText('Got it')
-      .first()
-      .click();
-    cy.findAllByText('Got it')
-      .last()
-      .click();
     cy.findAllByText('Change Plan').should('be.visible');
   });
 
@@ -121,9 +99,6 @@ describe('Billing Page', () => {
     // auto select new plan
     cy.findByText('Your New Plan').should('be.visible');
     cy.findByText('50,000').should('be.visible');
-    cy.findAllByText('Got it')
-      .last()
-      .click();
     cy.findByLabelText('Credit Card Number').type('4000 0000 0000 0000');
     cy.findByLabelText('Cardholder Name').type('Test Account');
     cy.findByLabelText('Expiration Date').type('03/33');

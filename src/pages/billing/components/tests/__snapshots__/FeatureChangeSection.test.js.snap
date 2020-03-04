@@ -1,34 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Feature Change Section should render 1`] = `
-<Panel
-  accent="green"
-  title="Changes to Features"
->
-  <Panel.Section
-    name="feature-change-status"
-  >
-    <div
-      className="FeatureListStatus"
-    >
-      <CheckCircle
-        className="FeatureListIcon success"
-      />
-      <div
-        name="status-description"
-      >
-        <strong>
-          Your features have been updated
-        </strong>
-        <span>
-          , please continue with your plan change.
-        </span>
-      </div>
-    </div>
-  </Panel.Section>
-</Panel>
-`;
-
 exports[`Feature Change Section should render features 1`] = `
 <Panel
   accent="green"

@@ -5,8 +5,8 @@ import { Button } from '@sparkpost/matchbox';
 import { useFeatureChangeContext } from '../context/FeatureChangeContext';
 
 const SubmitSection = ({ brightbackCondition, loading }) => {
-  const { isReady, loading: featureSectionLoading } = useFeatureChangeContext();
-  if (!isReady || featureSectionLoading) {
+  const { loading: featureSectionLoading } = useFeatureChangeContext();
+  if (featureSectionLoading) {
     return null;
   }
 
@@ -19,7 +19,7 @@ const SubmitSection = ({ brightbackCondition, loading }) => {
           type={enabled ? 'button' : 'submit'}
           to={enabled ? to : null}
           disabled={loading}
-          color='orange'
+          color="orange"
         >
           Change Plan
         </Button>

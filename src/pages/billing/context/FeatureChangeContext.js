@@ -1,7 +1,6 @@
-import React, { createContext, useState, useContext, useEffect, useMemo, useCallback } from 'react';
+import React, { createContext, useState, useContext, useEffect, useMemo } from 'react';
 import _ from 'lodash';
 import { connect } from 'react-redux';
-import { Button } from '@sparkpost/matchbox';
 
 import { getSubscription } from 'src/actions/billing';
 import { selectPlansByKey } from 'src/selectors/accountBillingInfo';
@@ -18,26 +17,9 @@ export const FeatureChangeProvider = ({
   getSubscription,
 }) => {
   const [actions, updateActions] = useState({});
-  //State to keep track of features that can't directly be addressed, and are acknowledged by user
-  const [confirmations, setConfirm] = useState({});
-  const onConfirm = key => {
-    setConfirm({ ...confirmations, [key]: true });
-  };
-
   useEffect(() => {
     getSubscription();
   }, [getSubscription]);
-
-  //Rechecks conditions on re-entering tab. Only initializes once
-  const checkConditions = useCallback(() => {
-    getSubscription();
-  }, [getSubscription]);
-  useEffect(() => {
-    window.addEventListener('focus', checkConditions);
-    return () => {
-      window.removeEventListener('focus', checkConditions);
-    };
-  }, [checkConditions]);
 
   //Keys the selected plan by product to make for easier comparison
   const selectedPlansByProduct = useMemo(() => {
@@ -101,22 +83,18 @@ export const FeatureChangeProvider = ({
   useMemo(calculateDifferences, [subscription]);
 
   //Evaluates condition and generates action if condition exists
-  const featuresWithActions = useMemo(
+  const mappedFeatures = useMemo(
     () =>
-      _.map(actions, ({ action, condition, ...rest }, key) => ({
-        ...rest,
+      _.map(actions, (action, key) => ({
+        ...action,
         key,
-        value: condition !== undefined ? condition : confirmations[key],
-        action:
-          condition !== undefined ? action : <Button onClick={() => onConfirm(key)}>Got it</Button>,
       })),
-    [actions, confirmations, onConfirm],
+    [actions],
   );
 
   //Checks if all provided conditions are good
   const value = {
-    isReady: _.every(featuresWithActions, 'value'),
-    features: featuresWithActions,
+    features: mappedFeatures,
     loading,
   };
 
