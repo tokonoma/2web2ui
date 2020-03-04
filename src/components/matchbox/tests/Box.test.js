@@ -18,9 +18,9 @@ describe('Box matchbox component wrapper', () => {
 
   it('renders Hibana component correctly when hibana is enabled', () => {
     useHibana.mockImplementationOnce(() => [{ isHibanaEnabled: true }]);
-    const { queryByText, queryByTestId } = subject();
+    const { queryByText } = subject();
     Object.keys(props).forEach(key => {
-      expect(queryByTestId(mockDataId)).toHaveAttribute(key, props[key]);
+      expect(queryByText('Children...')).toHaveAttribute(key, props[key]);
     });
     expect(queryByText('Children...')).toBeInTheDocument();
   });
