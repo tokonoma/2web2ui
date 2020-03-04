@@ -4,7 +4,7 @@ import { formatDateTime, formatDate } from 'src/helpers/date';
 import classnames from 'classnames';
 import { fetch as getAccount } from 'src/actions/account';
 import PanelLoading from 'src/components/panelLoading/PanelLoading';
-import { ProgressBar } from 'src/components/matchboxWrapper';
+import { ProgressBar } from 'src/components/matchbox';
 import { Panel } from '@sparkpost/matchbox';
 import styles from './UsageReport.module.scss';
 import { LINKS } from 'src/constants';
