@@ -40,6 +40,41 @@ describe('Change Billing Plan Page', () => {
     });
   });
 
+  const mockCommonHttpCalls = () => {
+    cy.stubRequest({
+      method: 'POST',
+      url: '/api/v1/billing/cors-data?context=create-account',
+      fixture: 'billing/cors-data/200.post.json',
+    });
+    cy.stubRequest({
+      method: 'POST',
+      url: '/v1/accounts',
+      fixture: 'zuora/accounts/200.post.json',
+    });
+    cy.stubRequest({
+      method: 'POST',
+      url: '/api/v1/account/subscription/check',
+      fixture: 'account/subscription/check/200.post.json',
+    });
+    cy.stubRequest({
+      method: 'POST',
+      url: '/api/v1/billing/subscription/check',
+      fixture: 'billing/subscription/check/200.post.json',
+    });
+    cy.stubRequest({
+      url: '/api/v1/sending-ips',
+      fixture: 'blank.json',
+    });
+    cy.stubRequest({
+      url: '/api/v1/account/invoices',
+      fixture: 'blank.json',
+    });
+    cy.stubRequest({
+      url: '/api/v1/usage',
+      fixture: 'blank.json',
+    });
+  };
+
   const fillOutCreditCardForm = () => {
     cy.findByLabelText('Credit Card Number').type('4000 0000 0000 0000');
     cy.findByLabelText('Cardholder Name').type('Test Account');
@@ -80,7 +115,6 @@ describe('Change Billing Plan Page', () => {
     cy.visit('/account/billing/plan');
     cy.get('[data-id=select-plan-50K-starter-0519]').click();
 
-    cy.findAllByText('Got it').click();
     cy.findByText('Your features have been updated').should('be.visible');
 
     cy.findByText('Change Plan').click();
@@ -100,38 +134,7 @@ describe('Change Billing Plan Page', () => {
     cy.findByLabelText('Zip Code').type('12345');
     cy.queryAllByText('Required').should('not.be.visible');
 
-    cy.stubRequest({
-      method: 'POST',
-      url: '/api/v1/billing/cors-data?context=create-account',
-      fixture: 'billing/cors-data/200.post.json',
-    });
-    cy.stubRequest({
-      method: 'POST',
-      url: '/v1/accounts',
-      fixture: 'zuora/accounts/200.post.json',
-    });
-    cy.stubRequest({
-      method: 'POST',
-      url: '/api/v1/account/subscription/check',
-      fixture: 'account/subscription/check/200.post.json',
-    });
-    cy.stubRequest({
-      method: 'POST',
-      url: '/api/v1/billing/subscription/check',
-      fixture: 'billing/subscription/check/200.post.json',
-    });
-    cy.stubRequest({
-      url: '/api/v1/sending-ips',
-      fixture: 'blank.json',
-    });
-    cy.stubRequest({
-      url: '/api/v1/account/invoices',
-      fixture: 'blank.json',
-    });
-    cy.stubRequest({
-      url: '/api/v1/usage',
-      fixture: 'blank.json',
-    });
+    mockCommonHttpCalls();
 
     // Then server returns the new plan info that was saved...
     cy.stubRequest({
@@ -173,42 +176,9 @@ describe('Change Billing Plan Page', () => {
 
     cy.get('[data-id=select-plan-100K-starter-0519]').click();
 
-    cy.findAllByText('Got it').click();
-
     fillOutCreditCardForm();
 
-    cy.stubRequest({
-      method: 'POST',
-      url: '/api/v1/billing/cors-data?context=create-account',
-      fixture: 'billing/cors-data/200.post.json',
-    });
-    cy.stubRequest({
-      method: 'POST',
-      url: '/v1/accounts',
-      fixture: 'zuora/accounts/200.post.json',
-    });
-    cy.stubRequest({
-      method: 'POST',
-      url: '/api/v1/account/subscription/check',
-      fixture: 'account/subscription/check/200.post.json',
-    });
-    cy.stubRequest({
-      method: 'POST',
-      url: '/api/v1/billing/subscription/check',
-      fixture: 'billing/subscription/check/200.post.json',
-    });
-    cy.stubRequest({
-      url: '/api/v1/sending-ips',
-      fixture: 'blank.json',
-    });
-    cy.stubRequest({
-      url: '/api/v1/account/invoices',
-      fixture: 'blank.json',
-    });
-    cy.stubRequest({
-      url: '/api/v1/usage',
-      fixture: 'blank.json',
-    });
+    mockCommonHttpCalls();
 
     // Then server returns the new plan info that was saved...
     cy.stubRequest({
@@ -223,7 +193,7 @@ describe('Change Billing Plan Page', () => {
     cy.findByText('Plan Overview').should('be.visible');
     cy.findByText('Your Plan').should('be.visible');
     cy.findByText('100,000 emails for $30 per month').should('be.visible');
-    cy.url().should('equal', Cypress.config().baseUrl + '/account/billing');
+    cy.url().should('equal', `${Cypress.config().baseUrl}/account/billing`);
   });
 
   it('Upgrades free account to starter 50K with query parameter', () => {
@@ -247,43 +217,11 @@ describe('Change Billing Plan Page', () => {
     cy.findByText('Your New Plan').should('be.visible');
     cy.findByText('50,000').should('be.visible');
 
-    cy.findByText('Got it').click();
     cy.findByText('Your features have been updated').should('be.visible');
 
     fillOutCreditCardForm();
 
-    cy.stubRequest({
-      method: 'POST',
-      url: '/api/v1/billing/cors-data?context=create-account',
-      fixture: 'billing/cors-data/200.post.json',
-    });
-    cy.stubRequest({
-      method: 'POST',
-      url: '/v1/accounts',
-      fixture: 'zuora/accounts/200.post.json',
-    });
-    cy.stubRequest({
-      method: 'POST',
-      url: '/api/v1/account/subscription/check',
-      fixture: 'account/subscription/check/200.post.json',
-    });
-    cy.stubRequest({
-      method: 'POST',
-      url: '/api/v1/billing/subscription/check',
-      fixture: 'billing/subscription/check/200.post.json',
-    });
-    cy.stubRequest({
-      url: '/api/v1/sending-ips',
-      fixture: 'blank.json',
-    });
-    cy.stubRequest({
-      url: '/api/v1/account/invoices',
-      fixture: 'blank.json',
-    });
-    cy.stubRequest({
-      url: '/api/v1/usage',
-      fixture: 'blank.json',
-    });
+    mockCommonHttpCalls();
 
     // Then server returns the new plan info that was saved...
     cy.stubRequest({
@@ -298,7 +236,7 @@ describe('Change Billing Plan Page', () => {
     cy.findByText('Plan Overview').should('be.visible');
     cy.findByText('Your Plan').should('be.visible');
     cy.findByText('50,000 emails for $20 per month').should('be.visible');
-    cy.url().should('equal', Cypress.config().baseUrl + '/account/billing');
+    cy.url().should('equal', `${Cypress.config().baseUrl}/account/billing`);
   });
 
   it('Upgrades free account to starter 100K with query parameter', () => {
@@ -325,45 +263,13 @@ describe('Change Billing Plan Page', () => {
       url: '/api/v1/account',
       fixture: 'account/200.get.100k-premier-plan.json',
     });
-    cy.stubRequest({
-      method: 'POST',
-      url: '/api/v1/billing/cors-data?context=create-account',
-      fixture: 'billing/cors-data/200.post.json',
-    });
-    cy.stubRequest({
-      method: 'POST',
-      url: '/v1/accounts',
-      fixture: 'zuora/accounts/200.post.json',
-    });
-    cy.stubRequest({
-      method: 'POST',
-      url: '/api/v1/account/subscription/check',
-      fixture: 'account/subscription/check/200.post.json',
-    });
-    cy.stubRequest({
-      method: 'POST',
-      url: '/api/v1/billing/subscription/check',
-      fixture: 'billing/subscription/check/200.post.json',
-    });
-    cy.stubRequest({
-      url: '/api/v1/sending-ips',
-      fixture: 'blank.json',
-    });
-    cy.stubRequest({
-      url: '/api/v1/account/invoices',
-      fixture: 'blank.json',
-    });
-    cy.stubRequest({
-      url: '/api/v1/usage',
-      fixture: 'blank.json',
-    });
+    mockCommonHttpCalls();
     // Then server returns the new plan info that was saved...
     cy.stubRequest({
       url: '/api/v1/account',
       fixture: 'account/200.get.100k-starter-plan.json',
     });
 
-    cy.findAllByText('Got it').click();
     cy.findByText('Your features have been updated').should('be.visible');
 
     fillOutCreditCardForm();
@@ -375,7 +281,7 @@ describe('Change Billing Plan Page', () => {
     cy.findByText('Plan Overview').should('be.visible');
     cy.findByText('Your Plan').should('be.visible');
     cy.findByText('100,000 emails for $30 per month').should('be.visible');
-    cy.url().should('equal', Cypress.config().baseUrl + '/account/billing');
+    cy.url().should('equal', `${Cypress.config().baseUrl}/account/billing`);
   });
 
   it('Upgrades free account to premier 100K', () => {
@@ -400,42 +306,10 @@ describe('Change Billing Plan Page', () => {
     cy.findAllByText('emails/month').should('be.visible');
     cy.findAllByText('$75').should('be.visible');
     cy.get('[data-id=select-plan-100K-premier-0519]').click();
-    cy.findByText('Your features have been updated').should('be.visible');
 
     fillOutCreditCardForm();
 
-    cy.stubRequest({
-      method: 'POST',
-      url: '/api/v1/billing/cors-data?context=create-account',
-      fixture: 'billing/cors-data/200.post.json',
-    });
-    cy.stubRequest({
-      method: 'POST',
-      url: '/v1/accounts',
-      fixture: 'zuora/accounts/200.post.json',
-    });
-    cy.stubRequest({
-      method: 'POST',
-      url: '/api/v1/account/subscription/check',
-      fixture: 'account/subscription/check/200.post.json',
-    });
-    cy.stubRequest({
-      method: 'POST',
-      url: '/api/v1/billing/subscription/check',
-      fixture: 'billing/subscription/check/200.post.json',
-    });
-    cy.stubRequest({
-      url: '/api/v1/sending-ips',
-      fixture: 'blank.json',
-    });
-    cy.stubRequest({
-      url: '/api/v1/account/invoices',
-      fixture: 'blank.json',
-    });
-    cy.stubRequest({
-      url: '/api/v1/usage',
-      fixture: 'blank.json',
-    });
+    mockCommonHttpCalls();
 
     // Then server returns the new plan info that was saved...
     cy.stubRequest({
@@ -450,7 +324,7 @@ describe('Change Billing Plan Page', () => {
     cy.findByText('Plan Overview').should('be.visible');
     cy.findByText('Your Plan').should('be.visible');
     cy.findByText('100,000 emails for $75 per month').should('be.visible');
-    cy.url().should('equal', Cypress.config().baseUrl + '/account/billing');
+    cy.url().should('equal', `${Cypress.config().baseUrl}/account/billing`);
   });
 
   it('Upgrades free account to premier 250K', () => {
@@ -476,41 +350,9 @@ describe('Change Billing Plan Page', () => {
     cy.findAllByText('$170').should('be.visible');
 
     cy.get('[data-id=select-plan-250K-premier-0519]').click();
-    cy.findByText('Your features have been updated').should('be.visible');
-    fillOutCreditCardForm();
 
-    cy.stubRequest({
-      method: 'POST',
-      url: '/api/v1/billing/cors-data?context=create-account',
-      fixture: 'billing/cors-data/200.post.json',
-    });
-    cy.stubRequest({
-      method: 'POST',
-      url: '/v1/accounts',
-      fixture: 'zuora/accounts/200.post.json',
-    });
-    cy.stubRequest({
-      method: 'POST',
-      url: '/api/v1/account/subscription/check',
-      fixture: 'account/subscription/check/200.post.json',
-    });
-    cy.stubRequest({
-      method: 'POST',
-      url: '/api/v1/billing/subscription/check',
-      fixture: 'billing/subscription/check/200.post.json',
-    });
-    cy.stubRequest({
-      url: '/api/v1/sending-ips',
-      fixture: 'blank.json',
-    });
-    cy.stubRequest({
-      url: '/api/v1/account/invoices',
-      fixture: 'blank.json',
-    });
-    cy.stubRequest({
-      url: '/api/v1/usage',
-      fixture: 'blank.json',
-    });
+    fillOutCreditCardForm();
+    mockCommonHttpCalls();
 
     // Then server returns the new plan info that was saved...
     cy.stubRequest({
@@ -525,7 +367,7 @@ describe('Change Billing Plan Page', () => {
     cy.findByText('Plan Overview').should('be.visible');
     cy.findByText('Your Plan').should('be.visible');
     cy.findByText('250,000 emails for $170 per month').should('be.visible');
-    cy.url().should('equal', Cypress.config().baseUrl + '/account/billing');
+    cy.url().should('equal', `${Cypress.config().baseUrl}/account/billing`);
   });
 
   it('Upgrades free account to premier 500K', () => {
@@ -552,42 +394,8 @@ describe('Change Billing Plan Page', () => {
 
     cy.get('[data-id=select-plan-500K-premier-0519]').click();
 
-    cy.findByText('Your features have been updated').should('be.visible');
-
     fillOutCreditCardForm();
-
-    cy.stubRequest({
-      method: 'POST',
-      url: '/api/v1/billing/cors-data?context=create-account',
-      fixture: 'billing/cors-data/200.post.json',
-    });
-    cy.stubRequest({
-      method: 'POST',
-      url: '/v1/accounts',
-      fixture: 'zuora/accounts/200.post.json',
-    });
-    cy.stubRequest({
-      method: 'POST',
-      url: '/api/v1/account/subscription/check',
-      fixture: 'account/subscription/check/200.post.json',
-    });
-    cy.stubRequest({
-      method: 'POST',
-      url: '/api/v1/billing/subscription/check',
-      fixture: 'billing/subscription/check/200.post.json',
-    });
-    cy.stubRequest({
-      url: '/api/v1/sending-ips',
-      fixture: 'blank.json',
-    });
-    cy.stubRequest({
-      url: '/api/v1/account/invoices',
-      fixture: 'blank.json',
-    });
-    cy.stubRequest({
-      url: '/api/v1/usage',
-      fixture: 'blank.json',
-    });
+    mockCommonHttpCalls();
 
     // Then server returns the new plan info that was saved...
     cy.stubRequest({
@@ -602,7 +410,7 @@ describe('Change Billing Plan Page', () => {
     cy.findByText('Plan Overview').should('be.visible');
     cy.findByText('Your Plan').should('be.visible');
     cy.findByText('500,000 emails for $290 per month').should('be.visible');
-    cy.url().should('equal', Cypress.config().baseUrl + '/account/billing');
+    cy.url().should('equal', `${Cypress.config().baseUrl}/account/billing`);
   });
 
   it('Upgrades free account to premier 1M', () => {
@@ -624,42 +432,9 @@ describe('Change Billing Plan Page', () => {
     cy.visit('/account/billing/plan');
 
     cy.get('[data-id=select-plan-1M-premier-0519]').click();
-    cy.findByText('Your features have been updated').should('be.visible');
 
     fillOutCreditCardForm();
-
-    cy.stubRequest({
-      method: 'POST',
-      url: '/api/v1/billing/cors-data?context=create-account',
-      fixture: 'billing/cors-data/200.post.json',
-    });
-    cy.stubRequest({
-      method: 'POST',
-      url: '/v1/accounts',
-      fixture: 'zuora/accounts/200.post.json',
-    });
-    cy.stubRequest({
-      method: 'POST',
-      url: '/api/v1/account/subscription/check',
-      fixture: 'account/subscription/check/200.post.json',
-    });
-    cy.stubRequest({
-      method: 'POST',
-      url: '/api/v1/billing/subscription/check',
-      fixture: 'billing/subscription/check/200.post.json',
-    });
-    cy.stubRequest({
-      url: '/api/v1/sending-ips',
-      fixture: 'blank.json',
-    });
-    cy.stubRequest({
-      url: '/api/v1/account/invoices',
-      fixture: 'blank.json',
-    });
-    cy.stubRequest({
-      url: '/api/v1/usage',
-      fixture: 'blank.json',
-    });
+    mockCommonHttpCalls();
 
     // Then server returns the new plan info that was saved...
     cy.stubRequest({
@@ -674,15 +449,13 @@ describe('Change Billing Plan Page', () => {
     cy.findByText('Plan Overview').should('be.visible');
     cy.findByText('Your Plan').should('be.visible');
     cy.findByText('1,000,000 emails for $525 per month').should('be.visible');
-    cy.url().should('equal', Cypress.config().baseUrl + '/account/billing');
+    cy.url().should('equal', `${Cypress.config().baseUrl}/account/billing`);
   });
 
   it('on changing plan renders section with changes to features', () => {
     selectAFreePlan();
-    cy.findAllByText('Got it')
-      .first()
-      .click();
     cy.findAllByText('Changes to Features').should('exist');
+    cy.findAllByText('Your features have been updated').should('exist');
   });
 
   it('Change plan button is displayed only when all the "features have been updated" ', () => {
@@ -795,38 +568,7 @@ describe('Change Billing Plan Page', () => {
 
     fillOutCreditCardForm();
 
-    cy.stubRequest({
-      method: 'POST',
-      url: '/api/v1/billing/cors-data?context=create-account',
-      fixture: 'billing/cors-data/200.post.json',
-    });
-    cy.stubRequest({
-      method: 'POST',
-      url: '/v1/accounts',
-      fixture: 'zuora/accounts/200.post.json',
-    });
-    cy.stubRequest({
-      method: 'POST',
-      url: '/api/v1/account/subscription/check',
-      fixture: 'account/subscription/check/200.post.json',
-    });
-    cy.stubRequest({
-      method: 'POST',
-      url: '/api/v1/billing/subscription/check',
-      fixture: 'billing/subscription/check/200.post.json',
-    });
-    cy.stubRequest({
-      url: '/api/v1/sending-ips',
-      fixture: 'blank.json',
-    });
-    cy.stubRequest({
-      url: '/api/v1/account/invoices',
-      fixture: 'blank.json',
-    });
-    cy.stubRequest({
-      url: '/api/v1/usage',
-      fixture: 'blank.json',
-    });
+    mockCommonHttpCalls();
 
     cy.findAllByText('Change Plan').click();
 
@@ -834,7 +576,7 @@ describe('Change Billing Plan Page', () => {
       cy.findByText('Subscription Updated').should('be.visible');
     });
 
-    cy.url().should('equal', Cypress.config().baseUrl + '/account/billing');
+    cy.url().should('equal', `${Cypress.config().baseUrl}/account/billing`);
   });
 
   it('Retains credit card information between plan changes', () => {
@@ -857,16 +599,18 @@ describe('Change Billing Plan Page', () => {
     cy.visit('/account/billing/plan');
     cy.get('[data-id=select-plan-50K-starter-0519]').click();
 
-    cy.findAllByText('Got it').click();
     cy.findByText('Your features have been updated').should('be.visible');
+    cy.findByText('Authentication and Security').should('be.visible');
+    cy.findByText(
+      'Your new plan no longer allows for single sign-on and account-wide requirement of two-factor authentication.',
+    ).should('be.visible');
 
     fillOutCreditCardForm();
 
     cy.findByText('Change').click();
     cy.get('[data-id=select-plan-100K-starter-0519]').click();
 
-    cy.findAllByText('Got it').click();
-
+    // the CC info is still there! Woot!
     cy.findByLabelText('Credit Card Number').should('have.value', '4000 0000 0000 0000');
     cy.findByLabelText('Cardholder Name').should('have.value', 'Test Account');
     cy.findByLabelText('Expiration Date').should('have.value', '03 / 33');
