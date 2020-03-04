@@ -27,6 +27,7 @@ jobs:
     - stage: test-and-build
       name: 'Integration Testing - Accounts, Events, Navigation, Hibana, Alerts, and Blacklists'
       script: npm run test-integration-ci -- --specBatch='Paul Walker'
+
     # - stage: test-and-build
     #   name: 'Integration Testing - Templates, Recipients, and Signals Analytics'
     #   script: npm run test-integration-ci -- --specBatch='Vin Diesel'
