@@ -1,6 +1,6 @@
 import React from 'react';
 import { Banner as PreHibanaBanner } from '@sparkpost/matchbox';
-import { Banner as HibanaBanner } from '@sparkpost/matchbox';
+import { Banner as HibanaBanner } from '@sparkpost/matchbox-hibana';
 import { useHibana } from 'src/context/HibanaContext';
 import _ from 'lodash';
 
