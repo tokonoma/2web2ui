@@ -49,7 +49,9 @@ import { ProgressBar } from 'src/components/matchbox';
 function MyComponent() {
   return (
     <div>
-      <ProgressBar mb="100" />
+      <h1>My Component!</h1>
+
+      <ProgressBar mt="100" />
     </div>
   );
 }
