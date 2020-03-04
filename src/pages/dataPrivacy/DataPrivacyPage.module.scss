@@ -1,0 +1,18 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.LeadText {
+  max-width: 60%;
+  margin-bottom: 2rem;
+  font-size: font-size(300);
+  line-height: line-height(300);
+}
+
+.Header {
+  margin: spacing(large) 0;
+  font-weight: 600;
+}
+
+.LaunchIcon {
+  margin-left: spacing(small);
+  color: color(blue);
+}
