@@ -1,6 +1,6 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import Box from '../Box.container';
+import Box from '../Box';
 
 describe('Box matchbox component wrapper', () => {
   const subject = ({ ...props }) => {
