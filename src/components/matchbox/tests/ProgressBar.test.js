@@ -1,5 +1,5 @@
 import React from 'react';
-import ProgressBar from '../ProgressBar.container.js';
+import ProgressBar from '../ProgressBar.js';
 import { mount } from 'enzyme';
 import { render } from '@testing-library/react';
 import { useHibana } from 'src/context/HibanaContext';
