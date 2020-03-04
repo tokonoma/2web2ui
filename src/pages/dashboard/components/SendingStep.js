@@ -20,7 +20,7 @@ export default function SendingStep() {
   );
 }
 
-export const SendingStepListItem = ({ setAndStoreStepName, name, content }) => (
+export const SendingStepListItem = ({ setAndStoreStepName, name, label = name, content }) => (
   <Grid.Column xs={12} md={6} key={name}>
     <Card textAlign="center">
       <CardContent>
@@ -33,7 +33,7 @@ export const SendingStepListItem = ({ setAndStoreStepName, name, content }) => (
             onClick={() => setAndStoreStepName(name)}
             className={styles.SendingStepButtons}
           >
-            {name}
+            {label}
           </Button>
         </ButtonWrapper>
       </CardActions>
@@ -52,6 +52,7 @@ export const SendingStepList = () => {
       <SendingStepListItem
         setAndStoreStepName={setAndStoreStepName}
         {...SENDING_STEP_LIST["Let's Code"]}
+        label={window.onboardingStartSendingTest && 'Start Sending'}
       />
     </Grid>
   );
