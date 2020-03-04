@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
-import { Page, Tabs, Panel, Button } from '@sparkpost/matchbox';
-import { Launch } from '@sparkpost/matchbox-icons';
+import { Page, Tabs, Panel } from '@sparkpost/matchbox';
 import styles from './DataPrivacyPage.module.scss';
+import ApiDetailsTab from './components/ApiDetailsTab';
 const tabs = [
   { content: 'Single Recipient', key: 'single-recipient' },
   { content: 'Multiple Recipients', key: 'multiple-recipients' },
   { content: 'API Integration', key: 'api' },
 ];
-const DataPrivacy = props => {
+export const DataPrivacyPage = props => {
   const [tabIndex, setTabIndex] = useState(
     tabs.findIndex(x => x.key === props.match.params.category) || 0,
   );
@@ -23,25 +23,7 @@ const DataPrivacy = props => {
   const renderTabs = tabIdx => {
     switch (tabIdx) {
       case 2:
-        return (
-          <Panel.Section>
-            <div className={styles.Header}>Integrate Now</div>
-            <p>
-              {'Information on how to use this API key. '}
-              <a
-                href="https://developers.sparkpost.com/api/data-privacy"
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                {'Link to documentation'}
-                <Launch className={styles.LaunchIcon} />
-              </a>
-            </p>
-            <Button color="orange" onClick={() => props.history.push(`/account/api-keys/create`)}>
-              {'Generate key'}
-            </Button>
-          </Panel.Section>
-        );
+        return <ApiDetailsTab history={props.history} />;
 
       default:
         return <Panel.Section></Panel.Section>;
@@ -68,4 +50,4 @@ const DataPrivacy = props => {
   );
 };
 
-export default withRouter(DataPrivacy);
+export default withRouter(DataPrivacyPage);
