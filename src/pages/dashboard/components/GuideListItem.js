@@ -5,7 +5,7 @@ import styles from './GuideListItem.module.scss';
 export const GuideListItem = ({
   itemCompleted,
   children,
-  action: { name, onClick, to, external },
+  action: { name, key = name, onClick, to, external },
 }) => (
   <div className={styles.GuideListItemContainer}>
     <div className={styles.CheckBoxContainer}>
@@ -21,11 +21,11 @@ export const GuideListItem = ({
         onClick={onClick}
         color={(!itemCompleted && 'orange') || null}
         outline={itemCompleted}
-        data-id={name}
+        data-id={key}
         to={to}
         external={external}
       >
-        {name === "Let's Code" && window.onboardingStartSendingTest ? 'Start Sending' : name}
+        {name}
       </Button>
     </div>
   </div>
