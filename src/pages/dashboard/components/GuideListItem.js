@@ -25,8 +25,7 @@ export const GuideListItem = ({
         to={to}
         external={external}
       >
-        {' '}
-        {name}{' '}
+        {name === "Let's Code" && window.onboardingStartSendingTest ? 'Start Sending' : name}
       </Button>
     </div>
   </div>
