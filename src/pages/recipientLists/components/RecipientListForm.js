@@ -5,7 +5,7 @@ import { Field, SubmissionError, reduxForm } from 'redux-form';
 import _ from 'lodash';
 
 import { Panel, Button, Error } from '@sparkpost/matchbox';
-import { Banner } from 'src/components/matchboxWrapper';
+import { Banner } from 'src/components/matchbox';
 import { DownloadLink, TextFieldWrapper } from 'src/components';
 import { required, maxLength } from 'src/helpers/validation';
 

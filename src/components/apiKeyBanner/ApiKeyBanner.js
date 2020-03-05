@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import copy from 'copy-to-clipboard';
-import { Banner } from 'src/components/matchboxWrapper';
+import { Banner } from 'src/components/matchbox';
 import { hideNewApiKey } from 'src/actions/api-keys';
 
 export class ApiKeySuccessBanner extends Component {

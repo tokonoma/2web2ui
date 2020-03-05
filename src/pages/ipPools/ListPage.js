@@ -5,7 +5,7 @@ import { listPools } from 'src/actions/ipPools';
 import { getOrderedIpPools, shouldShowIpPurchaseCTA } from 'src/selectors/ipPools';
 import { Loading, TableCollection, ApiErrorBanner } from 'src/components';
 import { Page, Button } from '@sparkpost/matchbox';
-import { Banner } from 'src/components/matchboxWrapper';
+import { Banner } from 'src/components/matchbox';
 import { OpenInNew } from '@sparkpost/matchbox-icons';
 import { LINKS } from 'src/constants';
 import { openSupportTicketForm } from 'src/actions/support';

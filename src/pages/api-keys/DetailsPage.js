@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Page, Panel } from '@sparkpost/matchbox';
-import { Banner } from 'src/components/matchboxWrapper';
+import { Banner } from 'src/components/matchbox';
 import _ from 'lodash';
 
 import { listApiKeys, getApiKey, listGrants } from 'src/actions/api-keys';

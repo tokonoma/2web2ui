@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { Banner } from 'src/components/matchboxWrapper';
+import { Banner } from 'src/components/matchbox';
 import { showAlert } from 'src/actions/globalAlert';
 import { verifyEmail } from 'src/actions/currentUser';
 

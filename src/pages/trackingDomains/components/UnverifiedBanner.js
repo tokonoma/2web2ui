@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from '@sparkpost/matchbox';
-import { Banner } from 'src/components/matchboxWrapper';
+import { Banner } from 'src/components/matchbox';
 import { LINKS } from 'src/constants';
 
 const UnverifiedBanner = ({ unverifiedDomains, cname }) => {

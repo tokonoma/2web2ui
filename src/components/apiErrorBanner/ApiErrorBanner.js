@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button } from '@sparkpost/matchbox';
-import { Banner } from 'src/components/matchboxWrapper';
+import { Banner } from 'src/components/matchbox';
 const methodToText = {
   GET: 'loading',
   PUT: 'updating',

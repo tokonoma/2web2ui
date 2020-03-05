@@ -1,5 +1,5 @@
 import React from 'react';
-import { Banner } from 'src/components/matchboxWrapper';
+import { Banner } from 'src/components/matchbox';
 import { LINKS } from 'src/constants';
 
 const UnverifiedWarningBanner = () => {

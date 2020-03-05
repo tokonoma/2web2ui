@@ -1,6 +1,6 @@
 import React from 'react';
 import { format } from 'date-fns';
-import { Banner } from 'src/components/matchboxWrapper';
+import { Banner } from 'src/components/matchbox';
 import { Link } from 'react-router-dom';
 import { LINKS } from 'src/constants';
 import { pluralString } from 'src/helpers/string';

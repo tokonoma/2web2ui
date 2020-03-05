@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { update } from 'src/actions/sendingDomains';
 
 import { Panel, Tooltip } from '@sparkpost/matchbox';
-import { Banner } from 'src/components/matchboxWrapper';
+import { Banner } from 'src/components/matchbox';
 import { Help } from '@sparkpost/matchbox-icons';
 import ToggleBlock from 'src/components/toggleBlock/ToggleBlock';
 import { SendingDomainSection } from './SendingDomainSection';
