@@ -50,6 +50,21 @@ exports[`Top should render correctly on desktop 1`] = `
   <div
     className="RightSideWrapper"
   >
+    <AccessControl
+      condition={[Function]}
+    >
+      <Link
+        className="UpgradePlanLink"
+        replace={false}
+        to="/account/billing/plan"
+      >
+        <div
+          className="UpgradePlan"
+        >
+          Upgrade Plan
+        </div>
+      </Link>
+    </AccessControl>
     <IconButton
       className="SupportButton"
       data-id="nav-button-help"

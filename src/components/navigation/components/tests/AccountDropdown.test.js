@@ -16,24 +16,29 @@ describe('AccountDropdown', () => {
       accountNavItems: [
         {
           label: 'link',
-          to: 'link'
+          to: 'link',
         },
         {
           label: 'link2',
           to: 'link2',
           external: true,
-          icon: MockIcon
+          icon: MockIcon,
         },
         {
           label: 'link3',
-          action: jest.fn(() => link3Action)
+          action: jest.fn(() => link3Action),
         },
         {
           label: 'link4',
           to: 'link',
-          labs: true
-        }
-      ]
+          labs: true,
+        },
+        {
+          label: 'link4',
+          to: 'link',
+          secondaryLabel: 'label1',
+        },
+      ],
     };
 
     wrapper = shallow(<AccountDropdown {...props} />);
@@ -58,7 +63,10 @@ describe('AccountDropdown', () => {
   });
 
   it('should dispatch nav item action on click', () => {
-    const link3 = wrapper.instance().getItems().find((item) => item.label === 'link3');
+    const link3 = wrapper
+      .instance()
+      .getItems()
+      .find(item => item.label === 'link3');
     link3.onClick();
 
     expect(props.accountNavItems[2].action).toHaveBeenCalled();
@@ -87,7 +95,10 @@ describe('AccountDropdown', () => {
     });
 
     it('should toggle dropdown on click', () => {
-      consumer.children().find('[data-id="nav-button-accounts"]').simulate('click');
+      consumer
+        .children()
+        .find('[data-id="nav-button-accounts"]')
+        .simulate('click');
       expect(wrapper).toHaveState({ open: true });
     });
   });
