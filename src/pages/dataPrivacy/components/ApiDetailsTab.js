@@ -1,7 +1,7 @@
 import React from 'react';
 import { Panel, Button } from '@sparkpost/matchbox';
 import styles from './ApiDetailsTab.module.scss';
-import ExternalLink from '../../../components/externalLink/ExternalLink';
+import ExternalLink from 'src/components/externalLink/ExternalLink';
 
 const ApiDetailsTab = ({ history }) => (
   <Panel.Section>
