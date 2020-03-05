@@ -2,8 +2,8 @@ import { OpenInNew, ExitToApp } from '@sparkpost/matchbox-icons';
 import { LINKS } from 'src/constants';
 import { openSupportPanel } from 'src/actions/support';
 import { isHeroku } from 'src/helpers/conditions/user';
-import not from 'src/helpers/conditions/not';
-
+import { all, hasGrants, not } from 'src/helpers/conditions';
+import { isAccountUiOptionSet } from 'src/helpers/conditions/account';
 /***
  * These values are pulled in through the accountNavItems selector, which will map
  * each "to" value here to a corresponding route in "config/routes.js", if
@@ -49,6 +49,7 @@ export default [
     label: 'Data and Privacy',
     to: '/account/data-privacy',
     section: 1,
+    condition: all(hasGrants('users/manage'), isAccountUiOptionSet('data_privacy')),
   },
   {
     label: 'Get Help',
