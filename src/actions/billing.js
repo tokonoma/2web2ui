@@ -70,7 +70,7 @@ export function updateBillingContact(data) {
     type: 'UPDATE_BILLING_CONTACT',
     meta: {
       method: 'PUT',
-      url: '/v1/billing/collect',
+      url: '/v1/account/billing',
       data: formatContactData(data),
     },
   });
