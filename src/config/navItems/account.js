@@ -3,7 +3,8 @@ import { LINKS } from 'src/constants';
 import { openSupportPanel } from 'src/actions/support';
 import { isHeroku } from 'src/helpers/conditions/user';
 import { all, hasGrants, not } from 'src/helpers/conditions';
-import { isAccountUiOptionSet } from 'src/helpers/conditions/account';
+import { isAccountUiOptionSet, onPlan } from 'src/helpers/conditions/account';
+
 /***
  * These values are pulled in through the accountNavItems selector, which will map
  * each "to" value here to a corresponding route in "config/routes.js", if
@@ -39,6 +40,14 @@ export default [
     label: 'Billing',
     to: '/account/billing',
     section: 1,
+    condition: onPlan('free500-0419'),
+    secondaryLabel: 'Upgrade',
+  },
+  {
+    label: 'Billing',
+    to: '/account/billing',
+    section: 1,
+    condition: not(onPlan('free500-0419')),
   },
   {
     label: 'Manage Users',

@@ -8,6 +8,9 @@ import { openSupportPanel } from 'src/actions/support';
 import AccountDropdown from './AccountDropdown';
 import styles from './Top.module.scss';
 import { DEFAULT_REDIRECT_ROUTE } from 'src/constants';
+import { AccessControl } from 'src/components/auth';
+
+import { onPlan } from 'src/helpers/conditions/account';
 
 export class Top extends Component {
   renderMobile = () => (
@@ -39,6 +42,11 @@ export class Top extends Component {
       </Link>
 
       <div className={styles.RightSideWrapper}>
+        <AccessControl condition={onPlan('free500-0419')}>
+          <Link to="/account/billing/plan" className={styles.UpgradePlanLink}>
+            <div className={styles.UpgradePlan}>Upgrade Plan</div>
+          </Link>
+        </AccessControl>
         <IconButton
           title="Opens a dialog"
           onClick={this.openSupportPanel}
