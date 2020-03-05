@@ -44,8 +44,9 @@ export class AccountDropdown extends Component {
     const { accountNavItems, dispatch } = this.props;
     const items = accountNavItems.map(
       ({ action, label, external, icon: Icon, labs, to, secondaryLabel, ...rest }) => {
-        const markup = (
+        const content = (
           <>
+            {label}
             {Icon && (
               <div className={styles.FloatIcon}>
                 <Icon size={15} />
@@ -62,12 +63,6 @@ export class AccountDropdown extends Component {
               </div>
             )}
           </>
-        );
-
-        const content = (
-          <Fragment>
-            {label} {markup}
-          </Fragment>
         );
 
         const listItem = { content, label, external, to, ...rest };
