@@ -27,8 +27,8 @@ exports[`UsageReport Component should render with overages 1`] = `
       title="Today"
     />
     <ProgressBar
-      color="orange"
       completed={50}
+      my={10}
     />
     <DisplayNumber
       content="1,000"
@@ -49,8 +49,8 @@ exports[`UsageReport Component should render with overages 1`] = `
       title="This Month"
     />
     <ProgressBar
-      color="orange"
       completed={22}
+      my={10}
     />
     <DisplayNumber
       content="11,000"
@@ -93,8 +93,8 @@ exports[`UsageReport Component should render with regular usage 1`] = `
       title="Today"
     />
     <ProgressBar
-      color="orange"
       completed={50}
+      my={10}
     />
     <DisplayNumber
       content="1,000"
@@ -115,8 +115,8 @@ exports[`UsageReport Component should render with regular usage 1`] = `
       title="This Month"
     />
     <ProgressBar
-      color="orange"
       completed={2}
+      my={10}
     />
     <DisplayNumber
       content="1,000"
