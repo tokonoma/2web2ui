@@ -14,7 +14,11 @@ import { onPlan } from 'src/helpers/conditions/account';
 
 export class Top extends Component {
   renderMobile = () => (
-    <div className={styles.Top} onClick={this.props.open ? this.props.toggleMobileNav : undefined}>
+    <div
+      className={styles.Top}
+      data-id="top-nav"
+      onClick={this.props.open ? this.props.toggleMobileNav : undefined}
+    >
       <IconButton
         onClick={!this.props.open ? this.props.toggleMobileNav : undefined}
         className={styles.Menu}
@@ -36,7 +40,7 @@ export class Top extends Component {
   );
 
   renderDesktop = () => (
-    <div className={styles.Top}>
+    <div className={styles.Top} data-id="top-nav">
       <Link to={DEFAULT_REDIRECT_ROUTE} className={styles.Logo} data-id="nav-link-logo">
         <SparkPost.Logo type="halfWhite" />
       </Link>
