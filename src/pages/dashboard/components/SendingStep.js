@@ -52,7 +52,7 @@ export const SendingStepList = () => {
       <SendingStepListItem
         setAndStoreStepName={setAndStoreStepName}
         {...SENDING_STEP_LIST["Let's Code"]}
-        label={window.onboardingStartSendingTest && 'Start Sending'}
+        label={window.onboardingStartSendingTest ? 'Start Sending' : "Let's Code"}
       />
     </Grid>
   );
