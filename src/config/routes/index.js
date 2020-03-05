@@ -539,6 +539,10 @@ const routes = [
   },
   {
     path: '/account/data-privacy',
+    redirect: '/account/data-privacy/single-recipient',
+  },
+  {
+    path: '/account/data-privacy/:category',
     component: DataPrivacyPage,
     condition: all(hasGrants('users/manage'), isAccountUiOptionSet('data_privacy')), //TODO: Remove account UI option
     layout: App,
