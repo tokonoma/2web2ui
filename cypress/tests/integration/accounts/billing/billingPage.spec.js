@@ -348,8 +348,8 @@ describe('Billing Page', () => {
 
         cy.stubRequest({
           method: 'POST',
-          url: `${ACCOUNT_API_BASE_URL}/billing/collect`,
-          fixture: 'account/billing/collect/200.post.json',
+          url: `${BILLING_API_BASE_URL}/collect`,
+          fixture: 'billing/collect/200.post.json',
         });
 
         cy.get('#modal-portal').within(() => {
