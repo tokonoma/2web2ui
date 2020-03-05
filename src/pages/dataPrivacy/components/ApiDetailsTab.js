@@ -1,21 +1,19 @@
 import React from 'react';
 import { Panel, Button } from '@sparkpost/matchbox';
-import { Launch } from '@sparkpost/matchbox-icons';
 import styles from './ApiDetailsTab.module.scss';
+import ExternalLink from '../../../components/externalLink/ExternalLink';
 
 const ApiDetailsTab = ({ history }) => (
   <Panel.Section>
     <div className={styles.Header}>Integrate Now</div>
     <p>
-      {'Information on how to use this API key. '}
-      <a
+      {'Information on how to use this API key.'}
+      <ExternalLink
         href="https://developers.sparkpost.com/api/data-privacy"
-        rel="noopener noreferrer"
-        target="_blank"
+        className={styles.LaunchIcon}
       >
         {'Link to documentation'}
-        <Launch className={styles.LaunchIcon} />
-      </a>
+      </ExternalLink>
     </p>
     <Button color="orange" onClick={() => history.push(`/account/api-keys/create`)}>
       {'Generate key'}
