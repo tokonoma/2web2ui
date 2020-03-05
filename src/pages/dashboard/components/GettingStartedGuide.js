@@ -24,6 +24,7 @@ export const GettingStartedGuide = ({
     explore_analytics_completed,
     invite_collaborator_completed,
     view_developer_docs_completed,
+    check_events_completed,
   } = onboarding;
 
   const areAllGuidesCompleted =
@@ -31,6 +32,7 @@ export const GettingStartedGuide = ({
     explore_analytics_completed &&
     invite_collaborator_completed &&
     view_developer_docs_completed &&
+    check_events_completed &&
     hasSendingDomains &&
     hasApiKeysForSending;
 
@@ -78,7 +80,13 @@ export const GettingStartedGuide = ({
           window.pendo.onGuideAdvanced(1);
         }
         history.push(`/reports/summary`);
-
+        break;
+      case 'Check Out Events':
+        setOnboardingAccountOption({ check_events_completed: true });
+        if (window.pendo.showGuideById(GUIDE_IDS.CHECKOUT_EVENTS)) {
+          window.pendo.onGuideAdvanced(1);
+        }
+        history.push(`/reports/message-events`);
         break;
       case 'Invite a Collaborator':
         setOnboardingAccountOption({ invite_collaborator_completed: true });
@@ -112,6 +120,7 @@ export const GettingStartedGuide = ({
     send_test_email_completed: send_test_email_completed,
     explore_analytics_completed: explore_analytics_completed,
     invite_collaborator_completed: invite_collaborator_completed,
+    check_events_completed: check_events_completed,
     hasSendingDomains: hasSendingDomains,
     hasApiKeysForSending: hasApiKeysForSending,
     view_developer_docs_completed: view_developer_docs_completed,
