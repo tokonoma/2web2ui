@@ -35,12 +35,6 @@ describe('ProgressBar', () => {
         .find('ProgressBar')
         .last()
         .props(),
-    ).not.toHaveProperty('size');
-    expect(
-      instance
-        .find('ProgressBar')
-        .last()
-        .props(),
     ).not.toHaveProperty('my');
   });
   it('should only render hibana component when hibana is enabled', () => {

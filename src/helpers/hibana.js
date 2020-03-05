@@ -1,15 +1,15 @@
 import { omit } from '@styled-system/props';
 
-const PROPS_TO_PASS_THROUGH = ['color', 'size'];
-
-export const omitSystemProps = props => {
+export const omitSystemProps = (props, whitelistedProps = []) => {
   const newProps = omit(props);
 
-  PROPS_TO_PASS_THROUGH.forEach(prop => {
-    if (props[prop] !== undefined) {
-      newProps[prop] = props[prop];
-    }
-  });
+  if (whitelistedProps.length) {
+    [...whitelistedProps].forEach(prop => {
+      if (props[prop] !== undefined) {
+        newProps[prop] = props[prop];
+      }
+    });
+  }
 
   return newProps;
 };

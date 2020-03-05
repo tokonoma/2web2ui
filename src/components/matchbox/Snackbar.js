@@ -9,7 +9,7 @@ export default function Snackbar(props) {
   const { isHibanaEnabled } = state;
 
   if (!isHibanaEnabled) {
-    return <HibanaSnackbar {...omitSystemProps(props)} />;
+    return <OGSnackbar {...omitSystemProps(props, ['maxWidth'])} />;
   }
-  return <OGSnackbar {...props} />;
+  return <HibanaSnackbar {...props} />;
 }

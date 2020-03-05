@@ -19,7 +19,7 @@ describe('hibana utils', () => {
       color: 'red',
     };
 
-    expect(omitSystemProps(props)).toEqual({ className: 'test', color: 'red' });
+    expect(omitSystemProps(props, ['color'])).toEqual({ className: 'test', color: 'red' });
   });
 
   // This might not actually be a thing that happens, but wanted to prove that it's not
@@ -32,7 +32,7 @@ describe('hibana utils', () => {
       color: null,
     };
 
-    expect(omitSystemProps(props)).toEqual({ className: 'test', color: null });
+    expect(omitSystemProps(props, ['color'])).toEqual({ className: 'test', color: null });
   });
 
   it('removes styled system props including whitelisted ones that are undefined', () => {
@@ -43,6 +43,6 @@ describe('hibana utils', () => {
       color: undefined,
     };
 
-    expect(omitSystemProps(props)).toEqual({ className: 'test' });
+    expect(omitSystemProps(props, ['color'])).toEqual({ className: 'test' });
   });
 });

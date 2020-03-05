@@ -2,6 +2,7 @@
 
 exports[`Snackbar Matchbox component wrapper only renders passed in children when hibana is not enabled 1`] = `
 <Snackbar
+  maxWidth={380}
   onDismiss={[Function]}
   status="success"
 >
@@ -11,7 +12,6 @@ exports[`Snackbar Matchbox component wrapper only renders passed in children whe
 
 exports[`Snackbar Matchbox component wrapper renders the Hibana version of the Snackbar component correctly when hibana is enabled 1`] = `
 <Snackbar
-  maxWidth={380}
   mb={0}
   onDismiss={[Function]}
   pt={5}

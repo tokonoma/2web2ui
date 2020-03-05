@@ -18,6 +18,35 @@ describe('Snackbar Matchbox component wrapper', () => {
     return shallow(<Snackbar {...props} {...defaultProps}></Snackbar>);
   };
 
+  it('should not pass hibana props when it is not enabled', () => {
+    useHibana.mockImplementationOnce(() => [{ isHibanaEnabled: false }]);
+    const instance = subject({ status: 'success', maxWidth: 500, size: 'normal', my: 50 });
+    expect(
+      instance
+        .find('Snackbar')
+        .last()
+        .props(),
+    ).toHaveProperty('status');
+    expect(
+      instance
+        .find('Snackbar')
+        .last()
+        .props(),
+    ).toHaveProperty('maxWidth');
+    expect(
+      instance
+        .find('Snackbar')
+        .last()
+        .props(),
+    ).not.toHaveProperty('size');
+    expect(
+      instance
+        .find('Snackbar')
+        .last()
+        .props(),
+    ).not.toHaveProperty('my');
+  });
+
   it('renders the Hibana version of the Snackbar component correctly when hibana is enabled', () => {
     useHibana.mockImplementationOnce(() => [{ isHibanaEnabled: true }]);
 
