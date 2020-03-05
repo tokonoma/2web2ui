@@ -2,7 +2,7 @@
   "results": {
     "list_id": "fake-list",
     "complete": false,
-    "customer_id": 107,
+    "customer_id": 123,
     "ttl": 1580919971,
     "upload_timestamp": 1578327971,
     "batch_status": "queued_for_batch",
