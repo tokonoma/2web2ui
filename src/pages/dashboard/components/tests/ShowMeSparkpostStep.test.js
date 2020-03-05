@@ -38,6 +38,10 @@ describe('ShowMeSparkpostStep', () => {
     expect(queryAllByText('Explore Analytics')[0]).toBeInTheDocument();
     expect(true).toBeTruthy();
   });
+  it('should render Checklist with title Check Out Events', () => {
+    const { queryAllByText } = subject_rtl(render);
+    expect(queryAllByText('Check Out Events')[0]).toBeInTheDocument();
+  });
   it('should render Checklist with title Invite a Collaborator', () => {
     const { queryByText } = subject_rtl(render);
     expect(queryByText('Invite a Collaborator')).toBeInTheDocument();

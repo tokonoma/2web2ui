@@ -42,7 +42,6 @@ export const GettingStartedGuide = ({
     }
   };
 
-  //TODO: set isGuideAtBottom to true if all the CheckLists are completed.
   const actions =
     isGuideAtBottom || areAllGuidesCompleted
       ? null
