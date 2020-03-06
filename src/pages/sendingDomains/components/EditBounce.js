@@ -42,7 +42,7 @@ export class EditBounce extends Component {
     }
 
     return (
-      <Banner status="warning">
+      <Banner status="warning" my={10}>
         We strongly recommend using a subdomain such as <strong>bounces.{id}</strong> for bounce
         domains. <Link to={'/account/sending-domains/create'}>Create a new domain now.</Link>
       </Banner>

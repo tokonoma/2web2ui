@@ -33,7 +33,7 @@ export class ApiKeysDetailsPage extends Component {
     const { apiKey } = this.props;
 
     return (
-      <Banner status="info" title="This API Key is read-only">
+      <Banner status="info" title="This API Key is read-only" my={10}>
         <p>This API Key is only editable by the owner: {apiKey.username}.</p>
       </Banner>
     );
@@ -41,7 +41,7 @@ export class ApiKeysDetailsPage extends Component {
 
   renderNotFound() {
     return (
-      <Banner status="warning" title="Not found">
+      <Banner status="warning" title="Not found" my={10}>
         <p>API Key was not found.</p>
       </Banner>
     );
