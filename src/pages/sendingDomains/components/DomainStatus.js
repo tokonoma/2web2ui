@@ -20,7 +20,7 @@ export const DomainStatus = ({ domain, hasAutoVerifyEnabled, onShareDomainChange
       </SendingDomainSection.Left>
       <SendingDomainSection.Right>
         {hasAutoVerifyEnabled && status === 'verified' && (
-          <Banner title="Auto-Verify is Enabled" status="info">
+          <Banner title="Auto-Verify is Enabled" status="info" my={10}>
             As a trusted partner, your domains are automatically verified and ready for immediate
             use pending our compliance check and your domain setup.
           </Banner>

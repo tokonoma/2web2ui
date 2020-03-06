@@ -70,7 +70,7 @@ export default class BackupCodesModal extends Component {
           <form onSubmit={e => e.preventDefault()}>
             <Panel.Section>
               {!generatedCodes && hasCodes && (
-                <Banner status="warning">
+                <Banner status="warning" my={10}>
                   Clicking Generate will overwrite your existing {activeCount} active backup codes.
                 </Banner>
               )}

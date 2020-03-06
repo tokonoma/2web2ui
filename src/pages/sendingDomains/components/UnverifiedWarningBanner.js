@@ -14,6 +14,7 @@ const UnverifiedWarningBanner = () => {
       status="warning"
       title="Unverified sending domains will be removed two weeks after creation."
       action={action}
+      my={10}
     >
       <p>All domains will also need a clear web presence to pass verification.</p>
     </Banner>
