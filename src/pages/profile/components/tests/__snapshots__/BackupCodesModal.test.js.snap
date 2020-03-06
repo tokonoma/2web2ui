@@ -25,9 +25,10 @@ exports[`Component: BackupCodesModal should change button text to Generating... 
             aria-label="phone in toilet emojis"
             role="img"
           >
-            📱  ➡︎🚽
+            📱 ➡︎🚽
           </span>
-           , etc).
+           
+          , etc).
         </p>
         <Grid>
           <Grid.Column
@@ -96,9 +97,10 @@ exports[`Component: BackupCodesModal should render correctly 1`] = `
             aria-label="phone in toilet emojis"
             role="img"
           >
-            📱  ➡︎🚽
+            📱 ➡︎🚽
           </span>
-           , etc).
+           
+          , etc).
         </p>
         <Grid>
           <Grid.Column
@@ -160,9 +162,10 @@ exports[`Component: BackupCodesModal should show new codes when they exist 1`] =
             aria-label="phone in toilet emojis"
             role="img"
           >
-            📱  ➡︎🚽
+            📱 ➡︎🚽
           </span>
-           , etc).
+           
+          , etc).
         </p>
         <Grid>
           <Grid.Column
@@ -223,9 +226,10 @@ exports[`Component: BackupCodesModal should show password error when exists 1`] 
             aria-label="phone in toilet emojis"
             role="img"
           >
-            📱  ➡︎🚽
+            📱 ➡︎🚽
           </span>
-           , etc).
+           
+          , etc).
         </p>
         <Grid>
           <Grid.Column

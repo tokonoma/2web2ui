@@ -10,7 +10,8 @@ exports[`Component: UnverifiedBanner should render correctly with 1 unverified d
     <strong>
       add a CNAME record
     </strong>
-     with the value of 
+     
+    with the value of 
     <strong>
       spgo.io
     </strong>
@@ -37,7 +38,8 @@ exports[`Component: UnverifiedBanner should render correctly with more than 1 un
     <strong>
       add a CNAME record
     </strong>
-     with the value of 
+     
+    with the value of 
     <strong>
       spgo.io
     </strong>

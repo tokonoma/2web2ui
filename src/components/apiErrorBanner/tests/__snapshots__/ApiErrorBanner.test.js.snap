@@ -2,6 +2,7 @@
 
 exports[`ApiErrorBanner Component should render when error prop is passed 1`] = `
 <Banner
+  my={10}
   status="warning"
   title="An error occurred"
 >
@@ -20,6 +21,7 @@ exports[`ApiErrorBanner Component should render when error prop is passed 1`] = 
 
 exports[`ApiErrorBanner Component should render with details 1`] = `
 <Banner
+  my={10}
   status="info"
   title="You Have Another Mission"
 >
@@ -38,6 +40,7 @@ exports[`ApiErrorBanner Component should render with details 1`] = `
 
 exports[`ApiErrorBanner Component should render with details 2`] = `
 <Banner
+  my={10}
   status="info"
   title="You Have Another Mission"
 >
@@ -69,6 +72,7 @@ exports[`ApiErrorBanner Component should render with details 2`] = `
 
 exports[`ApiErrorBanner Component should render with no props 1`] = `
 <Banner
+  my={10}
   status="warning"
   title="An error occurred"
 >
@@ -80,6 +84,7 @@ exports[`ApiErrorBanner Component should render with no props 1`] = `
 
 exports[`ApiErrorBanner Component should render with props 1`] = `
 <Banner
+  my={10}
   status="info"
   title="You Have Another Mission"
 >
@@ -91,6 +96,7 @@ exports[`ApiErrorBanner Component should render with props 1`] = `
 
 exports[`ApiErrorBanner Component should render with reload 1`] = `
 <Banner
+  my={10}
   status="info"
   title="You Have Another Mission"
 >
