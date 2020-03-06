@@ -84,6 +84,7 @@ exports[`RecipientListForm defaults to create mode 1`] = `
 exports[`RecipientListForm renders CSV errors 1`] = `
 <div>
   <Banner
+    my={10}
     status="danger"
     title="CSV Format Errors"
   >

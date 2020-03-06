@@ -9,6 +9,7 @@ exports[`Component: Unverified Domain Warning Banner renders correctly 1`] = `
       "to": "https://www.sparkpost.com/docs/getting-started/requirements-for-sending-domains",
     }
   }
+  my={10}
   status="warning"
   title="Unverified sending domains will be removed two weeks after creation."
 >
