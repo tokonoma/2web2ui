@@ -18,47 +18,18 @@ describe('Snackbar Matchbox component wrapper', () => {
     return shallow(<Snackbar {...props} {...defaultProps}></Snackbar>);
   };
 
-  it('should not pass hibana props when it is not enabled', () => {
-    useHibana.mockImplementationOnce(() => [{ isHibanaEnabled: false }]);
-    const instance = subject({ status: 'success', maxWidth: 500, size: 'normal', my: 50 });
-    expect(
-      instance
-        .find('Snackbar')
-        .last()
-        .props(),
-    ).toHaveProperty('status');
-    expect(
-      instance
-        .find('Snackbar')
-        .last()
-        .props(),
-    ).toHaveProperty('maxWidth');
-    expect(
-      instance
-        .find('Snackbar')
-        .last()
-        .props(),
-    ).not.toHaveProperty('size');
-    expect(
-      instance
-        .find('Snackbar')
-        .last()
-        .props(),
-    ).not.toHaveProperty('my');
-  });
-
-  it('renders the Hibana version of the Snackbar component correctly when hibana is enabled', () => {
+  it('renders the Snackbar component correctly when hibana is enabled', () => {
     useHibana.mockImplementationOnce(() => [{ isHibanaEnabled: true }]);
 
-    const wrapper = subject({ mb: 0, pt: 5 });
+    const wrapper = subject({ status: 'success', maxWidth: 500, size: 'normal', my: 50 });
 
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('only renders passed in children when hibana is not enabled', () => {
+  it('renders the Snackbar component correctly when hibana is not enabled', () => {
     useHibana.mockImplementationOnce(() => [{ isHibanaEnabled: false }]);
 
-    const wrapper = subject({ mb: 0, pt: 5 });
+    const wrapper = subject({ status: 'success', maxWidth: 500, size: 'normal', my: 50 });
 
     expect(wrapper).toMatchSnapshot();
   });

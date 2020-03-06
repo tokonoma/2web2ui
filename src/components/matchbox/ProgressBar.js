@@ -1,5 +1,4 @@
 import React from 'react';
-import _ from 'lodash';
 import { ProgressBar as OGProgressBar } from '@sparkpost/matchbox';
 import { ProgressBar as HibanaProgressBar } from '@sparkpost/matchbox-hibana';
 import { useHibana } from 'src/context/HibanaContext';

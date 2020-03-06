@@ -29,33 +29,3 @@ exports[`ConsentBar should render correctly 1`] = `
   </div>
 </div>
 `;
-
-exports[`ConsentBar should render correctly in hibana 1`] = `
-<div
-  className="CookieConsent"
->
-  <div
-    className="ConsentBar"
-  >
-    <Snackbar
-      maxWidth={700}
-      onDismiss={[MockFunction]}
-      status="default"
-    >
-      <span>
-        We use cookies to optimize your experience, analyze traffic, and personalize content. To learn more, please visit our
-      </span>
-       
-      <UnstyledLink
-        external={true}
-        to="https://www.sparkpost.com/policies/privacy/"
-      >
-        Cookie Policy
-      </UnstyledLink>
-      <span>
-        . By using our site without disabling cookies, you consent to our use of them.
-      </span>
-    </Snackbar>
-  </div>
-</div>
-`;
