@@ -13,6 +13,7 @@ exports[`Component: BackupCodesModal should change button text to Generating... 
     >
       <Panel.Section>
         <Banner
+          my={10}
           status="warning"
         >
           Clicking Generate will overwrite your existing 
@@ -85,6 +86,7 @@ exports[`Component: BackupCodesModal should render correctly 1`] = `
     >
       <Panel.Section>
         <Banner
+          my={10}
           status="warning"
         >
           Clicking Generate will overwrite your existing 
@@ -214,6 +216,7 @@ exports[`Component: BackupCodesModal should show password error when exists 1`] 
     >
       <Panel.Section>
         <Banner
+          my={10}
           status="warning"
         >
           Clicking Generate will overwrite your existing 
