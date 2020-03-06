@@ -135,16 +135,16 @@ exports[`Inbox Placement Typeahead Matches snapshot test with default filters av
           value=""
         >
           <fieldset
-            className="Lt_Bp"
+            className="Lx_Bp"
           >
             <Connect
               right={null}
             >
               <div
-                className="Lj_Ll"
+                className="Ln_Lp"
               >
                 <div
-                  className="Lj_Ln"
+                  className="Ln_Lr"
                 >
                   <input
                     aria-activedescendant={null}
@@ -152,7 +152,7 @@ exports[`Inbox Placement Typeahead Matches snapshot test with default filters av
                     aria-controls={null}
                     aria-labelledby="downshift-0-label"
                     autoComplete="off"
-                    className="Lt_Av"
+                    className="Lx_Av"
                     data-lpignore={true}
                     id="inbox-placement-typeahead"
                     name="inbox-placement-typeahead"
