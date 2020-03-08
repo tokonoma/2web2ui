@@ -209,7 +209,7 @@
     "webpack-manifest-plugin": "2.0.4",
     "whatwg-fetch": "^3.0.0",
     "workbox-webpack-plugin": "3.6.3",
-    "yargs": "^15.1.0"
+    "yargs": "^15.3.0"
   },
   "browserslist": {
     "production": [
