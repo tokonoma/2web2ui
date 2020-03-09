@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Snackbar Matchbox component wrapper renders the Snackbar component correctly when hibana is enabled 1`] = `
+<Snackbar
+  maxWidth={500}
+  my={50}
+  onDismiss={[Function]}
+  size="normal"
+  status="success"
+>
+  This is a message
+</Snackbar>
+`;
+
+exports[`Snackbar Matchbox component wrapper renders the Snackbar component correctly when hibana is not enabled 1`] = `
+<Snackbar
+  maxWidth={500}
+  onDismiss={[Function]}
+  status="success"
+>
+  This is a message
+</Snackbar>
+`;

@@ -17,25 +17,25 @@ import React from 'react';
 import { ProgressBar as OGProgressBar } from '@sparkpost/matchbox';
 import { ProgressBar as HibanaProgressBar } from '@sparkpost/matchbox-hibana';
 import { useHibana } from 'src/context/HibanaContext';
-import { omit } from './omit'; // WIP: This is conceptual at this point in time.
+import { omitSystemProps } from 'src/helpers/hibana';
 
 export default function ProgressBar(props) {
   const [state] = useHibana();
   const { isHibanaEnabled } = state;
 
   if (!isHibanaEnabled) {
-    return <OGProgressBar {...omit(props)} />;
+    return <OGProgressBar {...omitSystemProps(props, ['color', 'size'])} />;
   }
 
   return <HibanaProgressBar {...props}>
 }
 ```
 
-The custom `omit` function is used to prevent certain props from rendering to the DOM
+The custom `omitSystemProps` function is used to prevent certain props from rendering to the DOM
 unintentionally, first removing styled system props via the `@styled-system/props` package
 ([See the repo on GitHub](https://github.com/styled-system/styled-system/tree/master/packages/props)).
-For props that need to be passed and would also be ommitted by this package, props continue to be
-passed as expected.
+Pass a whitelist of OGComponent props that overlap with styled-system props so that they are not
+unintentionally removed by the omit. ie. `['color', 'maxWidth']`
 
 ## Using the Component
 
