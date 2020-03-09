@@ -8,11 +8,11 @@ export default function HibanaTheme({ children }) {
 
   useEffect(() => {
     if (isHibanaEnabled) {
-      document.body.classList.remove('og-theme');
-      document.body.classList.add('hibana-theme');
+      document.querySelector('html').classList.remove('og-theme');
+      document.querySelector('html').classList.add('hibana-theme');
     } else {
-      document.body.classList.add('og-theme');
-      document.body.classList.remove('hibana-theme');
+      document.querySelector('html').classList.add('og-theme');
+      document.querySelector('html').classList.remove('hibana-theme');
     }
   }, [isHibanaEnabled]);
 
