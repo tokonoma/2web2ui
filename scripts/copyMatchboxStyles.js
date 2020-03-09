@@ -1,0 +1,19 @@
+const fs = require('fs-extra');
+// eslint-disable-next-line no-unused-vars
+const colors = require('colors');
+
+/* eslint-disable no-console */
+const copyMatchboxStyles = () =>
+  Promise.all([
+    fs
+      .copy('node_modules/@sparkpost/matchbox-hibana/styles.css', 'public/static/styles-hibana.css')
+      .then(() => {
+        console.log(`🔥  Hibana Matchbox styles copied`.green);
+      })
+      .catch(err => {
+        console.error(`😟 Copying Hibana Matchbox styles failed: ${err}`.red);
+        process.exit(1);
+      }),
+  ]);
+
+module.exports = copyMatchboxStyles;

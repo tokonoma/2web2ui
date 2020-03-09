@@ -20,6 +20,7 @@ const webpack = require('webpack');
 const bfj = require('bfj');
 const configFactory = require('../config/webpack.config');
 const paths = require('../config/paths');
+const copyMatchboxStyles = require('./copyMatchboxStyles');
 const checkRequiredFiles = require('react-dev-utils/checkRequiredFiles');
 const formatWebpackMessages = require('react-dev-utils/formatWebpackMessages');
 const printHostingInstructions = require('react-dev-utils/printHostingInstructions');
@@ -52,6 +53,10 @@ const config = configFactory('production');
 // browserslist defaults.
 const { checkBrowsers } = require('react-dev-utils/browsersHelper');
 checkBrowsers(paths.appPath, isInteractive)
+  .then(() =>
+    // TODO: Once the default theme is removed/replaced with Hibana, this can be removed
+    copyMatchboxStyles(),
+  )
   .then(() => {
     // First, read the current file sizes in build directory.
     // This lets us display how much they changed later.
