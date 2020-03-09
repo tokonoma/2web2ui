@@ -2,7 +2,8 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import { Field, Form } from 'redux-form';
 // Components
-import { Panel, Grid, Button, Expandable, Error } from '@sparkpost/matchbox';
+import { Panel, Grid, Button, Error } from '@sparkpost/matchbox';
+import { Expandable } from 'src/components/matchbox';
 import { TextFieldWrapper, SelectWrapper } from 'src/components';
 import FilterFields from './fields/FilterFields';
 import EvaluatorFields from './fields/EvaluatorFields';
@@ -50,6 +51,7 @@ export class AlertForm extends Component {
         id={channel}
         subtitle={NOTIFICATION_CHANNEL_DATA[channel].subtitle}
         key={channel}
+        my={10}
       >
         <Field
           name={channel}
