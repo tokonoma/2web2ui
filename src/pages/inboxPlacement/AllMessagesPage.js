@@ -3,10 +3,15 @@ import { connect } from 'react-redux';
 import { Grid, Page, Panel } from '@sparkpost/matchbox';
 
 import { Loading } from 'src/components';
-import { getInboxPlacementByProvider, getInboxPlacementByRegion, getInboxPlacementBySendingIp, getAllInboxPlacementMessages, resetState } from 'src/actions/inboxPlacement';
+import {
+  getInboxPlacementByProvider,
+  getInboxPlacementByRegion,
+  getInboxPlacementBySendingIp,
+  getAllInboxPlacementMessages,
+  resetState,
+} from 'src/actions/inboxPlacement';
 import { RedirectAndAlert } from 'src/components/globalAlert';
 import PageLink from 'src/components/pageLink';
-import StopTest from './components/StopTest';
 import AllMessagesCollection from './components/AllMessagesCollection';
 import InfoBlock from './components/InfoBlock';
 import styles from './AllMessagesPage.module.scss';
@@ -21,7 +26,6 @@ export const AllMessagesPage = ({
   filterName,
   messages,
   loading,
-  status,
   sent,
   placement,
   authentication,
@@ -31,15 +35,13 @@ export const AllMessagesPage = ({
   getInboxPlacementBySendingIp,
   getAllInboxPlacementMessages,
   resetState,
-  StopTestComponent = StopTest,
-  AllMessagesCollectionComponent = AllMessagesCollection
+  AllMessagesCollectionComponent = AllMessagesCollection,
 }) => {
-
   const loadMessages = useCallback(() => {
     const filterTypeToQueryParamMap = {
       [PLACEMENT_FILTER_TYPES.MAILBOX_PROVIDER]: 'mailbox_providers',
       [PLACEMENT_FILTER_TYPES.REGION]: 'regions',
-      [PLACEMENT_FILTER_TYPES.SENDING_IP]: 'sending_ips'
+      [PLACEMENT_FILTER_TYPES.SENDING_IP]: 'sending_ips',
     };
     const filters = { [filterTypeToQueryParamMap[filterType]]: filterName };
 
@@ -56,33 +58,44 @@ export const AllMessagesPage = ({
       default:
     }
     getAllInboxPlacementMessages(id, filters);
-  }, [filterName, filterType, getAllInboxPlacementMessages, getInboxPlacementByProvider, getInboxPlacementByRegion, getInboxPlacementBySendingIp, id]);
+  }, [
+    filterName,
+    filterType,
+    getAllInboxPlacementMessages,
+    getInboxPlacementByProvider,
+    getInboxPlacementByRegion,
+    getInboxPlacementBySendingIp,
+    id,
+  ]);
 
   useEffect(() => {
     loadMessages();
-    return (() => resetState());
+    return () => resetState();
   }, [id, loadMessages, resetState]);
 
   if (loading) {
-    return <Loading/>;
+    return <Loading />;
   }
 
   if (error) {
-    return <RedirectAndAlert
-      to={`/inbox-placement/details/${id}`}
-      alert={{ type: 'error', message: error.message }}/>;
+    return (
+      <RedirectAndAlert
+        to={`/inbox-placement/details/${id}`}
+        alert={{ type: 'error', message: error.message }}
+      />
+    );
   }
 
   const deliverabilityStyleProps = {
     columnProps: { md: 3 },
     valueClassName: styles.DeliverabilityValue,
-    labelClassName: styles.DeliverabilityHeader
+    labelClassName: styles.DeliverabilityHeader,
   };
 
   const authenticationStyleProps = {
     columnProps: { md: 4 },
     valueClassName: styles.AuthenticationValue,
-    labelClassName: styles.AuthenticationHeader
+    labelClassName: styles.AuthenticationHeader,
   };
 
   return (
@@ -90,31 +103,54 @@ export const AllMessagesPage = ({
       breadcrumbAction={{
         component: PageLink,
         content: 'Inbox Placement Results',
-        to: `/inbox-placement/details/${id}`
+        to: `/inbox-placement/details/${id}`,
       }}
-      title='Inbox Placement'
+      title="Inbox Placement"
       subtitle={formatFilterName(filterType, filterName)}
-      primaryArea={<StopTestComponent status={status} id={id} reload={loadMessages} />}
     >
       <Panel title="Diagnostics">
         <Grid>
           <Grid.Column lg={7} md={12}>
-            <div className={styles.Divider} >
+            <div className={styles.Divider}>
               <h5 className={styles.Title}>Deliverability</h5>
               <Grid className={styles.Panel}>
-                <InfoBlock value={sent} label='Sent' {...deliverabilityStyleProps}/>
-                <InfoBlock value={(placement.inbox_pct || 0) * sent} label='Inbox' {...deliverabilityStyleProps}/>
-                <InfoBlock value={(placement.spam_pct || 0) * sent} label='Spam' {...deliverabilityStyleProps}/>
-                <InfoBlock value={(placement.missing_pct || 0) * sent} label='Missing' {...deliverabilityStyleProps}/>
+                <InfoBlock value={sent} label="Sent" {...deliverabilityStyleProps} />
+                <InfoBlock
+                  value={(placement.inbox_pct || 0) * sent}
+                  label="Inbox"
+                  {...deliverabilityStyleProps}
+                />
+                <InfoBlock
+                  value={(placement.spam_pct || 0) * sent}
+                  label="Spam"
+                  {...deliverabilityStyleProps}
+                />
+                <InfoBlock
+                  value={(placement.missing_pct || 0) * sent}
+                  label="Missing"
+                  {...deliverabilityStyleProps}
+                />
               </Grid>
             </div>
           </Grid.Column>
           <Grid.Column lg={5} md={12}>
             <h5 className={styles.Title}>Authentication</h5>
             <Grid className={styles.Panel}>
-              <InfoBlock value={formatPercent((authentication.spf_pct || 0) * 100)} label='SPF' {...authenticationStyleProps}/>
-              <InfoBlock value={formatPercent((authentication.dkim_pct || 0) * 100)} label='DKIM' {...authenticationStyleProps}/>
-              <InfoBlock value={formatPercent((authentication.dmarc_pct || 0) * 100)} label='DMARC' {...authenticationStyleProps}/>
+              <InfoBlock
+                value={formatPercent((authentication.spf_pct || 0) * 100)}
+                label="SPF"
+                {...authenticationStyleProps}
+              />
+              <InfoBlock
+                value={formatPercent((authentication.dkim_pct || 0) * 100)}
+                label="DKIM"
+                {...authenticationStyleProps}
+              />
+              <InfoBlock
+                value={formatPercent((authentication.dmarc_pct || 0) * 100)}
+                label="DMARC"
+                {...authenticationStyleProps}
+              />
             </Grid>
           </Grid.Column>
         </Grid>
@@ -126,14 +162,10 @@ export const AllMessagesPage = ({
   );
 };
 
-
 function mapStateToProps(state, props) {
   const { id, filterType, filterName } = props.match.params;
-  const {
-    status,
-    seedlist_count = 0,
-    placement = {},
-    authentication = {}} = selectSinglePlacementResult(state, props) || {};
+  const { status, seedlist_count = 0, placement = {}, authentication = {} } =
+    selectSinglePlacementResult(state, props) || {};
 
   return {
     id,
@@ -143,11 +175,16 @@ function mapStateToProps(state, props) {
     sent: seedlist_count,
     placement,
     authentication,
-    stopTestLoading: state.inboxPlacement.stopTestPending,
     messages: state.inboxPlacement.allMessages,
     loading: state.inboxPlacement.getAllMessagesPending,
-    error: state.inboxPlacement.getAllMessagesError || state.inboxPlacement.getByProviderError
+    error: state.inboxPlacement.getAllMessagesError || state.inboxPlacement.getByProviderError,
   };
 }
 
-export default connect(mapStateToProps, { getInboxPlacementByProvider, getInboxPlacementByRegion, getInboxPlacementBySendingIp, getAllInboxPlacementMessages, resetState })(AllMessagesPage);
+export default connect(mapStateToProps, {
+  getInboxPlacementByProvider,
+  getInboxPlacementByRegion,
+  getInboxPlacementBySendingIp,
+  getAllInboxPlacementMessages,
+  resetState,
+})(AllMessagesPage);

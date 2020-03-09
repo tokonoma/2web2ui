@@ -1,12 +1,9 @@
 import { mount, shallow } from 'enzyme';
 import React from 'react';
 import { AllMessagesPage } from '../AllMessagesPage';
-import { StopTest } from '../components/StopTest';
 import { AllMessagesCollection } from '../components/AllMessagesCollection';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { PLACEMENT_FILTER_TYPES } from '../constants/types';
-
-
 
 describe('Page: All Inbox Placement Messages Test', () => {
   const subject = ({ ...props }) => {
@@ -23,18 +20,18 @@ describe('Page: All Inbox Placement Messages Test', () => {
       placement: {
         inbox_pct: 1,
         missing_pct: 0,
-        spam_pct: 0
+        spam_pct: 0,
       },
       authentication: {
         spf_pct: 1,
         dkim_pct: 1,
-        dmarc_pct: 1
+        dmarc_pct: 1,
       },
       error: false,
       history: {
-        replace: jest.fn()
+        replace: jest.fn(),
       },
-      messages: []
+      messages: [],
     };
 
     return shallow(<AllMessagesPage {...defaults} {...props} />);
@@ -45,38 +42,41 @@ describe('Page: All Inbox Placement Messages Test', () => {
   });
 
   describe('useEffect hook', () => {
-
     const getAllInboxPlacementMessages = jest.fn().mockReturnValue({});
     const getInboxPlacementByProvider = jest.fn().mockReturnValue({});
     const getInboxPlacementByRegion = jest.fn().mockReturnValue({});
     const getInboxPlacementBySendingIp = jest.fn().mockReturnValue({});
     const resetState = jest.fn().mockReturnValue({});
-    const subjectMounted = ({ ...props }) => mount(
-      <Router>
-        <AllMessagesPage
-          filterType={PLACEMENT_FILTER_TYPES.MAILBOX_PROVIDER}
-          filterName={'gmail.com'}
-          status={'completed'}
-          messages={[]}
-          sent={100}
-          placement={{}}
-          authentication={{}}
-          getAllInboxPlacementMessages={getAllInboxPlacementMessages}
-          getInboxPlacementByProvider={getInboxPlacementByProvider}
-          getInboxPlacementByRegion={getInboxPlacementByRegion}
-          getInboxPlacementBySendingIp={getInboxPlacementBySendingIp}
-          resetState={resetState}
-          id={101}
-          history={{ replace: jest.fn() }}
-          error={null}
-          StopTestComponent={StopTest}
-          AllMessagesCollectionComponent={AllMessagesCollection}
-          {...props}/>
-      </Router>);
+    const subjectMounted = ({ ...props }) =>
+      mount(
+        <Router>
+          <AllMessagesPage
+            filterType={PLACEMENT_FILTER_TYPES.MAILBOX_PROVIDER}
+            filterName={'gmail.com'}
+            status={'completed'}
+            messages={[]}
+            sent={100}
+            placement={{}}
+            authentication={{}}
+            getAllInboxPlacementMessages={getAllInboxPlacementMessages}
+            getInboxPlacementByProvider={getInboxPlacementByProvider}
+            getInboxPlacementByRegion={getInboxPlacementByRegion}
+            getInboxPlacementBySendingIp={getInboxPlacementBySendingIp}
+            resetState={resetState}
+            id={101}
+            history={{ replace: jest.fn() }}
+            error={null}
+            AllMessagesCollectionComponent={AllMessagesCollection}
+            {...props}
+          />
+        </Router>,
+      );
 
     it('calls getInboxPlacementTest & getInboxPlacementByMailboxProvider on load for mailbox-providers', () => {
       subjectMounted();
-      expect(getAllInboxPlacementMessages).toHaveBeenCalledWith(101, { mailbox_providers: 'gmail.com' });
+      expect(getAllInboxPlacementMessages).toHaveBeenCalledWith(101, {
+        mailbox_providers: 'gmail.com',
+      });
       expect(getInboxPlacementByProvider).toHaveBeenCalled();
     });
 
@@ -109,8 +109,8 @@ describe('Page: All Inbox Placement Messages Test', () => {
     const wrapper = subject();
     wrapper.setProps({
       error: {
-        message: 'You dun goofed'
-      }
+        message: 'You dun goofed',
+      },
     });
     expect(wrapper.find('RedirectAndAlert')).toMatchSnapshot();
     expect(wrapper.find('Page')).not.toExist();

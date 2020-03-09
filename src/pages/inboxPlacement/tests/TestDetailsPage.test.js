@@ -1,7 +1,6 @@
 import { mount, shallow } from 'enzyme';
 import React from 'react';
 import { TestDetailsPage } from '../TestDetailsPage';
-import { StopTest } from '../components/StopTest';
 
 describe('Page: Single Inbox Placement Test', () => {
   const subject = ({ ...props }) => {
@@ -46,7 +45,6 @@ describe('Page: Single Inbox Placement Test', () => {
         id={101}
         tabIndex={1} //not working nicely with tabIndex=0; TestDetails component
         history={{ replace: jest.fn() }}
-        StopTestComponent={StopTest}
       />,
     );
 
@@ -100,7 +98,6 @@ describe('Page: Single Inbox Placement Test', () => {
         getInboxPlacementByRegion={jest.fn()}
         getInboxPlacementBySendingIp={jest.fn()}
         getInboxPlacementTestContent={jest.fn()}
-        StopTestComponent={StopTest}
       />,
     );
     wrapper

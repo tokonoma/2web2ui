@@ -18,7 +18,6 @@ import TestDetails from './components/TestDetails';
 import TestContent from './components/TestContent';
 import useTabs from 'src/hooks/useTabs';
 import { RedirectAndAlert } from 'src/components/globalAlert';
-import StopTest from './components/StopTest';
 
 export const TestDetailsPage = props => {
   const {
@@ -37,7 +36,6 @@ export const TestDetailsPage = props => {
     getInboxPlacementByRegion,
     getInboxPlacementBySendingIp,
     getInboxPlacementTestContent,
-    StopTestComponent = StopTest, //This is for unit test purposes
   } = props;
 
   const [selectedTabIndex, tabs] = useTabs(TABS, tabIndex);
@@ -100,9 +98,6 @@ export const TestDetailsPage = props => {
       }}
       title="Inbox Placement"
       subtitle="Results"
-      primaryArea={
-        <StopTestComponent status={(details || {}).status} id={id} reload={loadTestData} />
-      }
     >
       <Tabs selected={selectedTabIndex} connectBelow={true} tabs={tabs} />
       {renderTabContent(selectedTabIndex)}

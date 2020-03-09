@@ -21,12 +21,6 @@ exports[`Page: Single Inbox Placement Test renders page correctly with defaults 
     }
   }
   empty={Object {}}
-  primaryArea={
-    <Connect(StopTest)
-      id={0}
-      reload={[Function]}
-    />
-  }
   subtitle="Results"
   title="Inbox Placement"
 >
