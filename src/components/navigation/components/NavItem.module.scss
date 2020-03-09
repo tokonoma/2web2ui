@@ -10,14 +10,14 @@
     margin-left: rem(56);
   }
 
-
-  > :last-child{
+  > :last-child {
     border-bottom: 1px solid color(gray, 8);
     padding-bottom: rem(13);
   }
 }
 
-.Link, .Link:visited {
+.Link,
+.Link:visited {
   position: relative;
   display: flex;
   padding: rem(9) rem(18);
@@ -140,5 +140,11 @@
 
   * {
     font-size: font-size(200);
+  }
+}
+
+:global(.hibana-theme) {
+  .Link {
+    color: pink;
   }
 }

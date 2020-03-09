@@ -1,5 +1,4 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React, { useEffect } from 'react';
 import { ThemeProvider } from '@sparkpost/matchbox-hibana';
 import { useHibana } from 'src/context/HibanaContext';
 
@@ -7,19 +6,15 @@ export default function HibanaTheme({ children }) {
   const [state] = useHibana();
   const { isHibanaEnabled } = state;
 
-  return (
-    <>
-      {ReactDOM.createPortal(
-        <link
-          rel="stylesheet"
-          type="text/css"
-          href={isHibanaEnabled ? '/static/styles-hibana.css' : '/static/styles-default.css'}
-          data-id="theme-global-styles"
-        />,
-        document.head,
-      )}
+  useEffect(() => {
+    if (isHibanaEnabled) {
+      document.body.classList.remove('og-theme');
+      document.body.classList.add('hibana-theme');
+    } else {
+      document.body.classList.add('og-theme');
+      document.body.classList.remove('hibana-theme');
+    }
+  }, [isHibanaEnabled]);
 
-      <ThemeProvider>{children}</ThemeProvider>
-    </>
-  );
+  return <ThemeProvider>{children}</ThemeProvider>;
 }
