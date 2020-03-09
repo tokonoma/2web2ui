@@ -9,15 +9,16 @@ export default function HibanaTheme({ children }) {
 
   return (
     <>
-      {ReactDOM.createPortal(
-        <link
-          rel="stylesheet"
-          type="text/css"
-          href={isHibanaEnabled ? '/static/styles-hibana.css' : '/static/styles-default.css'}
-          data-id="theme-global-styles"
-        />,
-        document.head,
-      )}
+      {isHibanaEnabled &&
+        ReactDOM.createPortal(
+          <link
+            rel="stylesheet"
+            type="text/css"
+            href="/static/styles-hibana.css"
+            data-id="theme-global-styles"
+          />,
+          document.head,
+        )}
 
       <ThemeProvider>{children}</ThemeProvider>
     </>
