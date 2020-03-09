@@ -177,7 +177,7 @@ Array [
       "method": "post",
       "params": undefined,
       "responseType": "json",
-      "url": "/v1/account/billing/collect",
+      "url": "/v1/billing/collect",
     },
   ],
   Array [

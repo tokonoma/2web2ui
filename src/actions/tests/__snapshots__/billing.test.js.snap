@@ -52,7 +52,7 @@ Array [
     "meta": Object {
       "method": "POST",
       "onSuccess": [MockFunction],
-      "url": "/v1/account/billing/collect",
+      "url": "/v1/billing/collect",
     },
     "type": "COLLECT_PAYMENTS",
   },
