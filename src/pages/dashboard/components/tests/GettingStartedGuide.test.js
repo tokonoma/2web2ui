@@ -71,6 +71,15 @@ describe('GettingStartedGuide', () => {
     expect(window.pendo.onGuideAdvanced).toHaveBeenCalledWith(1);
   });
 
+  it('should navigate to events page when Check Out Events button is clicked', () => {
+    const { getAllByText } = subject({ onboarding: { active_step: 'Show Me SparkPost' } });
+    userEvent.click(getAllByText('Check Out Events')[1]);
+
+    expect(defaultProps.history.push).toHaveBeenCalledWith(`/reports/message-events`);
+    expect(window.pendo.showGuideById).toHaveBeenCalledWith(GUIDE_IDS.CHECKOUT_EVENTS);
+    expect(window.pendo.onGuideAdvanced).toHaveBeenCalledWith(1);
+  });
+
   it('should navigate to users page when Invite a Collaborator is clicked', () => {
     const { queryByText } = subject({ onboarding: { active_step: 'Show Me SparkPost' } });
     userEvent.click(queryByText('Invite a Collaborator'));
