@@ -2,6 +2,10 @@
 @import '~@sparkpost/matchbox/styles.scss'; // Global Compiled
 @import '~@sparkpost/matchbox/src/styles/config.scss';
 
+.hibana-theme {
+  @import '~@sparkpost/matchbox-hibana/styles.scss';
+}
+
 // All components use REMs for sizing
 // Adjusting the root font size here will scale the UI proportionally
 
