@@ -92,7 +92,7 @@ describe('Mobile Navigation', () => {
     cy.wait('@stubbedAccountRequest'); // ...the request is made twice! So wait again for the second
   }
 
-  describe.only('navigation behavior', () => {
+  describe('navigation behavior', () => {
     beforeEach(() => {
       cy.viewport(500, 1000);
       cy.stubAuth();
