@@ -16,7 +16,6 @@ cypress.env.json
 /build
 
 # generated files
-/public/static/styles-default.css
 /public/static/styles-hibana.css
 
 # misc
