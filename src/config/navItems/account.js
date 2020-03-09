@@ -2,7 +2,7 @@ import { OpenInNew, ExitToApp } from '@sparkpost/matchbox-icons';
 import { LINKS } from 'src/constants';
 import { openSupportPanel } from 'src/actions/support';
 import { isHeroku } from 'src/helpers/conditions/user';
-import { all, hasGrants, not } from 'src/helpers/conditions';
+import { all, hasGrants, not, any } from 'src/helpers/conditions';
 import { isAccountUiOptionSet, onPlan } from 'src/helpers/conditions/account';
 
 /***
@@ -40,14 +40,14 @@ export default [
     label: 'Billing',
     to: '/account/billing',
     section: 1,
-    condition: onPlan('free500-0419'),
+    condition: any(onPlan('free500-0419'), onPlan('free500-SPCEU-0419')), //on free plan
     secondaryLabel: 'Upgrade',
   },
   {
     label: 'Billing',
     to: '/account/billing',
     section: 1,
-    condition: not(onPlan('free500-0419')),
+    condition: not(any(onPlan('free500-0419'), onPlan('free500-SPCEU-0419'))), //not on free plan
   },
   {
     label: 'Manage Users',
