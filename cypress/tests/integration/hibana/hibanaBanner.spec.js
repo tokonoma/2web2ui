@@ -47,6 +47,7 @@ describe('Hibana theme toggling UI', () => {
     cy.visit(PAGE_URL);
 
     cy.findByText(disabledDescription).should('be.visible');
+    cy.get(stylesSelector).should('not.exist');
     cy.findByText(disabledButtonContent).click();
     cy.findByText('Going back means you won’t get to experience the all new SparkPost app!').should(
       'be.visible',
@@ -55,6 +56,6 @@ describe('Hibana theme toggling UI', () => {
     cy.findByText('That’s fine, take me back').click();
     cy.findByText(disabledDescription).should('be.visible');
     cy.findByText(disabledButtonContent).should('be.visible');
-    cy.get(stylesSelector).should('have.attr', 'href', '/static/styles-default.css');
+    cy.get(stylesSelector).should('not.exist');
   });
 });
