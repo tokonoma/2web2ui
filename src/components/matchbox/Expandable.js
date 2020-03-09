@@ -7,7 +7,7 @@ import _ from 'lodash';
 export default function Expandable(props) {
   const [state] = useHibana();
   const { isHibanaEnabled } = state;
-  const preHibanaProps = ['icon', 'title', 'id', 'subtitle', 'key', 'children'];
+  const preHibanaProps = ['icon', 'title', 'id', 'subtitle', 'children'];
 
   if (isHibanaEnabled) {
     return <HibanaExpandable {...props} />;
