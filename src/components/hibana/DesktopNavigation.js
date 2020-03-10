@@ -6,7 +6,20 @@ import { Inline } from 'src/components/matchbox';
 import { SparkPost } from 'src/components';
 import styles from './DesktopNavigation.module.scss';
 
-export default function DesktopNavigation() {
+export default function DesktopNavigation({ navItems, location }) {
+  const isActive = navItem => {
+    if (
+      location.pathname.includes('/reports/message-events') &&
+      navItem.label === 'Signals Analytics'
+    ) {
+      return false;
+    }
+
+    if (location.pathname.includes(navItem.to)) {
+      return true;
+    }
+  };
+
   return (
     <div className={styles.DesktopNavigation}>
       <div className={styles.SubWrapper}>
@@ -25,27 +38,20 @@ export default function DesktopNavigation() {
               <h2>Main Navigation</h2>
             </ScreenReaderOnly>
 
-            {/* using ARIA roles instead of list elements to avoid style overrides */}
             <Inline>
-              <NavLink variant="primary" to="/summary">
-                Signals Analytics
-              </NavLink>
-
-              <NavLink variant="primary" to="/summary">
-                Events
-              </NavLink>
-
-              <NavLink variant="primary" to="/summary">
-                Content
-              </NavLink>
-
-              <NavLink variant="primary" to="/summary">
-                Recipients
-              </NavLink>
-
-              <NavLink variant="primary" to="/summary">
-                Configuration
-              </NavLink>
+              {navItems.map((item, index) => {
+                // TODO: This can be cleaned up post OG theme removal - by updating the navItems config
+                return (
+                  <NavLink
+                    variant="primary"
+                    to={item.to}
+                    key={`nav-item-${index}`}
+                    isActive={isActive(item)}
+                  >
+                    {item.label}
+                  </NavLink>
+                );
+              })}
             </Inline>
           </nav>
 
@@ -55,51 +61,35 @@ export default function DesktopNavigation() {
         </div>
       </div>
 
-      <nav className={styles.SecondaryNav}>
-        <div className={styles.SubWrapper}>
-          <ScreenReaderOnly>
-            <h3>Category Navigation</h3>
-          </ScreenReaderOnly>
+      {navItems.map(item => {
+        if (isActive(item) && item.children) {
+          return (
+            <nav className={styles.SecondaryNav}>
+              <div className={styles.SubWrapper}>
+                {/* Visually hidden headings to help guide screen reader users */}
+                <ScreenReaderOnly>
+                  <h3>Category Navigation</h3>
+                </ScreenReaderOnly>
 
-          <Inline>
-            <NavLink variant="secondary" to="/">
-              Summary
-            </NavLink>
-
-            <NavLink variant="secondary" to="/">
-              Bounce
-            </NavLink>
-
-            <NavLink variant="secondary" to="/">
-              Rejections
-            </NavLink>
-
-            <NavLink variant="secondary" to="/">
-              Accepted
-            </NavLink>
-
-            <NavLink variant="secondary" to="/">
-              Delayed
-            </NavLink>
-
-            <NavLink variant="secondary" to="/">
-              Health Score
-            </NavLink>
-
-            <NavLink variant="secondary" to="/">
-              Spam Traps
-            </NavLink>
-
-            <NavLink variant="secondary" to="/">
-              Engagement Recency
-            </NavLink>
-
-            <NavLink variant="secondary" to="/">
-              Engagement
-            </NavLink>
-          </Inline>
-        </div>
-      </nav>
+                <Inline>
+                  {item.children.map((childItem, index) => {
+                    return (
+                      <NavLink
+                        variant="secondary"
+                        to={childItem.to}
+                        key={`subnav-item-${index}`}
+                        isActive={location.pathname.includes(childItem.to)}
+                      >
+                        {childItem.label}
+                      </NavLink>
+                    );
+                  })}
+                </Inline>
+              </div>
+            </nav>
+          );
+        }
+      })}
     </div>
   );
 }
@@ -110,11 +100,7 @@ function NavLink(props) {
   return (
     <Link
       to={to}
-      className={classNames(
-        styles.NavLink,
-        styles[variant],
-        isActive ? styles.NavLinkActive : null,
-      )}
+      className={classNames(styles.NavLink, styles[variant], isActive ? styles.isActive : null)}
     >
       {children}
     </Link>

@@ -70,7 +70,7 @@ export default [
   },
   {
     label: 'Content',
-    to: '/',
+    to: '/templates',
     icon: Code,
     tag: 'new',
     children: [
@@ -91,7 +91,7 @@ export default [
   },
   {
     label: 'Recipients',
-    to: '/lists',
+    to: hasGrants('recipient-validation/preview'),
     icon: People,
     children: [
       {
