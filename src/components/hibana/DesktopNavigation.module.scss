@@ -5,6 +5,35 @@
   padding: spacing(400);
 }
 
+.SubWrapper {
+  max-width: 60rem;
+  margin: 0 auto;
+  position: relative; // allows absolute positioning within
+}
+
+// Some specificity issues with links
+.SkipLink.SkipLink.SkipLink {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  text-decoration: none;
+  background-color: rgba(color(blue, 800), 1);
+  padding: spacing(100) spacing(200);
+  font-size: font-size(200);
+  color: #fff;
+  transform: scale(0.95);
+  transform-origin: top;
+  transition: opacity motion-duration(fast) motion-ease(in-out),
+    transform motion-duration(fast) motion-ease(in-out);
+
+  &:focus {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 .Logo {
-  width: 500px;
+  width: 175px;
+  max-height: 50px;
 }

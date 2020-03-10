@@ -21,7 +21,11 @@ export const App = ({ children, bannerOpen }) => {
       <div className={cx(styles.wrapper, styles.app)}>
         {isHibanaEnabled ? <HibanaNavigation className={styles.header} /> : <Navigation />}
 
-        <main role="main" className={cx(styles.content, bannerOpen && styles.bannerOpen)}>
+        <main
+          role="main"
+          id="main-content"
+          className={cx(styles.content, bannerOpen && styles.bannerOpen)}
+        >
           <div className={styles.container}>{children}</div>
         </main>
         <ScrollToTop />
