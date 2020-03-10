@@ -1,0 +1,10 @@
+@import '~@sparkpost/design-tokens-hibana/tokens';
+
+.MobileNavigation {
+  display: block;
+
+  // Prevents a 1 pixel "dead zone" between the mobile and desktop nav
+  @media (min-width: media-query(md)) {
+    display: none;
+  }
+}

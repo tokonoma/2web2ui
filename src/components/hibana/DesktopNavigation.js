@@ -8,7 +8,7 @@ import styles from './DesktopNavigation.module.scss';
 
 export default function DesktopNavigation() {
   return (
-    <div className={styles.Base}>
+    <div className={styles.DesktopNavigation}>
       <div className={styles.SubWrapper}>
         <SkipLink />
 
