@@ -2,8 +2,15 @@
 
 .wrapper {
   flex-direction: column;
+  background-color: color(white);
 }
 
 .content.content {
   padding: spacing(400);
+}
+
+.container {
+  .app & {
+    max-width: media-query(lg);
+  }
 }

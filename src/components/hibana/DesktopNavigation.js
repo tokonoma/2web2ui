@@ -12,54 +12,94 @@ export default function DesktopNavigation() {
       <div className={styles.SubWrapper}>
         <SkipLink />
 
-        <div className={styles.LogoWrapper}>
-          <Link to="/dashboard">
-            <SparkPost.Logo className={styles.Logo} />
-          </Link>
-        </div>
+        <div className={styles.PrimaryNavLayout}>
+          <div className={styles.LogoWrapper}>
+            <Link to="/dashboard">
+              <SparkPost.Logo className={styles.Logo} />
+            </Link>
+          </div>
 
-        <nav className={styles.PrimaryNav}>
-          {/* Visually hidden headings to help guide screen reader users */}
-          <ScreenReaderOnly>
-            <h2>Main Navigation</h2>
-          </ScreenReaderOnly>
+          <nav className={styles.PrimaryNav}>
+            {/* Visually hidden headings to help guide screen reader users */}
+            <ScreenReaderOnly>
+              <h2>Main Navigation</h2>
+            </ScreenReaderOnly>
 
-          {/* using ARIA roles instead of list elements to avoid style overrides */}
-          <Inline>
-            <NavLink variant="primary" to="/summary">
-              Signals Analytics
-            </NavLink>
+            {/* using ARIA roles instead of list elements to avoid style overrides */}
+            <Inline>
+              <NavLink variant="primary" to="/summary">
+                Signals Analytics
+              </NavLink>
 
-            <NavLink variant="primary" to="/summary">
-              Events
-            </NavLink>
+              <NavLink variant="primary" to="/summary">
+                Events
+              </NavLink>
 
-            <NavLink variant="primary" to="/summary">
-              Content
-            </NavLink>
+              <NavLink variant="primary" to="/summary">
+                Content
+              </NavLink>
 
-            <NavLink variant="primary" to="/summary">
-              Recipients
-            </NavLink>
+              <NavLink variant="primary" to="/summary">
+                Recipients
+              </NavLink>
 
-            <NavLink variant="primary" to="/summary">
-              Configuration
-            </NavLink>
-          </Inline>
-        </nav>
+              <NavLink variant="primary" to="/summary">
+                Configuration
+              </NavLink>
+            </Inline>
+          </nav>
 
-        <div className={styles.AccountDropdownWrapper}>
-          <button className={styles.AccountDropdownButton}>SP</button>
+          <div className={styles.AccountDropdownWrapper}>
+            <button className={styles.AccountDropdownButton}>SP</button>
+          </div>
         </div>
       </div>
 
-      <div className={styles.SubWrapper}>
-        <nav>
+      <nav className={styles.SecondaryNav}>
+        <div className={styles.SubWrapper}>
           <ScreenReaderOnly>
             <h3>Category Navigation</h3>
           </ScreenReaderOnly>
-        </nav>
-      </div>
+
+          <Inline>
+            <NavLink variant="secondary" to="/">
+              Summary
+            </NavLink>
+
+            <NavLink variant="secondary" to="/">
+              Bounce
+            </NavLink>
+
+            <NavLink variant="secondary" to="/">
+              Rejections
+            </NavLink>
+
+            <NavLink variant="secondary" to="/">
+              Accepted
+            </NavLink>
+
+            <NavLink variant="secondary" to="/">
+              Delayed
+            </NavLink>
+
+            <NavLink variant="secondary" to="/">
+              Health Score
+            </NavLink>
+
+            <NavLink variant="secondary" to="/">
+              Spam Traps
+            </NavLink>
+
+            <NavLink variant="secondary" to="/">
+              Engagement Recency
+            </NavLink>
+
+            <NavLink variant="secondary" to="/">
+              Engagement
+            </NavLink>
+          </Inline>
+        </div>
+      </nav>
     </div>
   );
 }

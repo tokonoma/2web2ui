@@ -2,14 +2,21 @@
 @import 'src/styles/resets';
 
 .Base {
-  background-color: #fff;
+  background-color: color(white);
+}
+
+.PrimaryNavLayout,
+.SecondaryNav {
   padding: spacing(400);
 }
 
 .SubWrapper {
-  max-width: 60rem;
+  max-width: media-query(lg);
   margin: 0 auto;
   position: relative; // allows absolute positioning within
+}
+
+.PrimaryNavLayout {
   display: grid;
   grid-template-columns: 175px auto auto;
   grid-gap: spacing(600);
@@ -25,7 +32,7 @@
   background-color: rgba(color(blue, 800), 1);
   padding: spacing(100) spacing(200);
   font-size: font-size(200);
-  color: #fff;
+  color: color(white);
   transform: scale(0.95);
   z-index: -1;
   transition: opacity motion-duration(fast) motion-ease(in-out),
@@ -51,23 +58,35 @@
   align-self: center;
 }
 
-.NavLink {
-  display: flex;
+// Some specificity issues with visited links
+.NavLink.NavLink {
+  display: inline-flex;
   font-size: font-size(300);
   padding: spacing(200) spacing(400);
   border-radius: border-radius(pill);
+  outline-offset: -3px; // helps ensure focus outline is visible
   text-decoration: none;
+  transition: color motion-duration(fast) motion-ease(in-out),
+    background-color motion-duration(fast) motion-ease(in-out);
 }
 
-.primary {
+.primary.primary {
   color: color(gray, 800);
-  outline-offset: -3px; // helps ensure focus outline is visible
-  transition: background-color motion-duration(fast) motion-ease(in-out);
 
-  &:focus,
-  &:hover {
+  &:hover,
+  &:focus {
     color: color(gray, 800);
     background-color: color(gray, 300);
+  }
+}
+
+.secondary.secondary {
+  color: color(white);
+
+  &:hover,
+  &:focus {
+    color: color(white);
+    background-color: color(gray, 700);
   }
 }
 
@@ -90,5 +109,11 @@
   height: spacing(700);
   border-radius: border-radius(circle);
   background-color: color(brand, orange);
-  color: #fff;
+  color: color(white);
+}
+
+.SecondaryNav {
+  padding-top: spacing(700);
+  padding-bottom: spacing(300);
+  background-color: color(gray, 900);
 }
