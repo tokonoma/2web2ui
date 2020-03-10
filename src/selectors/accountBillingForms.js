@@ -1,23 +1,31 @@
 import _ from 'lodash';
 import { createSelector } from 'reselect';
-import { currentPlanSelector, selectAvailablePlans, selectVisiblePlans } from './accountBillingInfo';
+import {
+  currentBundleSelector,
+  selectVisibleBundles,
+  selectAvailableBundles,
+} from './accountBillingInfo';
 
-export const getCountries = (state) => _.get(state, 'billing.countries');
-export const getFirstCountry = (state) => _.get(state, 'billing.countries[0].value');
+export const getCountries = state => _.get(state, 'billing.countries');
+export const getFirstCountry = state => _.get(state, 'billing.countries[0].value');
 export const getCountry = (state, country) => country;
 
 export const getFirstStateForCountry = createSelector(
   [getCountries, getCountry],
-  (countries, country) => _.get(_.find(countries, ({ value }) => value === country), 'states[0].value')
+  (countries, country) =>
+    _.get(
+      _.find(countries, ({ value }) => value === country),
+      'states[0].value',
+    ),
 );
 
 /**
  * Selects initial values for all the forms on account/billing/plan
  */
 export function changePlanInitialValues(state, { planCode, promoCode } = {}) {
-  const overridePlan = _.find(selectAvailablePlans(state), { code: planCode }); // typically from query string
-  const currentPlan = currentPlanSelector(state);
-  const firstVisiblePlan = _.first(selectVisiblePlans(state));
+  const overridePlan = _.find(selectAvailableBundles(state), { bundle: planCode }); // typically from query string
+  const currentPlan = currentBundleSelector(state);
+  const firstVisiblePlan = _.head(selectVisibleBundles(state));
   const firstCountry = getFirstCountry(state);
   const firstState = getFirstStateForCountry(state, firstCountry);
 
@@ -28,9 +36,9 @@ export function changePlanInitialValues(state, { planCode, promoCode } = {}) {
       firstName: state.currentUser.first_name,
       lastName: state.currentUser.last_name,
       country: firstCountry,
-      state: firstState
+      state: firstState,
     },
-    promoCode
+    promoCode,
   };
 }
 
@@ -46,8 +54,8 @@ export function updatePaymentInitialValues(state) {
       firstName: state.currentUser.first_name,
       lastName: state.currentUser.last_name,
       country: firstCountry,
-      state: firstState
-    }
+      state: firstState,
+    },
   };
 }
 
@@ -55,7 +63,7 @@ export function updatePaymentInitialValues(state) {
  * Selects initial values for the update contact form on the summary page
  */
 export function updateContactInitialValues(state) {
-  const { billing = {}} = state.account;
+  const { billing = {} } = state.account;
   return {
     billingContact: {
       email: billing.email,
@@ -63,7 +71,7 @@ export function updateContactInitialValues(state) {
       lastName: billing.last_name,
       country: billing.country_code,
       state: billing.state,
-      zip: billing.zip_code
-    }
+      zip: billing.zip_code,
+    },
   };
 }

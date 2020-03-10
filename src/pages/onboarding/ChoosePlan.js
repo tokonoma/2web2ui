@@ -1,11 +1,16 @@
-import React, { Component } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { Panel, Grid, Button } from '@sparkpost/matchbox';
 import { showAlert } from 'src/actions/globalAlert';
 import { CenteredLogo, Loading, PlanPicker } from 'src/components';
-import { getPlans } from 'src/actions/account';
-import { getBillingCountries, verifyPromoCode, clearPromoCode } from 'src/actions/billing';
+import {
+  getBillingCountries,
+  verifyPromoCode,
+  clearPromoCode,
+  getPlans,
+  getBundles,
+} from 'src/actions/billing';
 import billingCreate from 'src/actions/billingCreate';
 import { choosePlanMSTP } from 'src/selectors/onboarding';
 import promoCodeValidate from 'src/pages/billing/helpers/promoCodeValidate';
@@ -13,41 +18,64 @@ import { prepareCardInfo } from 'src/helpers/billing';
 import PromoCodeNew from '../../components/billing/PromoCodeNew';
 import { FORMS } from 'src/constants';
 import CreditCardSection from './components/CreditCardSection';
+import _ from 'lodash';
 
 const NEXT_STEP = '/dashboard';
 
-export class OnboardingPlanPage extends Component {
-  componentDidMount() {
-    this.props.getPlans();
-    this.props.getBillingCountries();
-  }
+export function OnboardingPlanPage({
+  getPlans,
+  getBundles,
+  getBillingCountries,
+  billingCreate,
+  showAlert,
+  history,
+  billing,
+  verifyPromoCode,
+  currentPlan,
+  loading,
+  submitting,
+  selectedPlan = {},
+  handleSubmit,
+  hasError,
+  bundles,
+}) {
+  useEffect(() => {
+    getPlans();
+  }, [getPlans]);
 
-  componentDidUpdate(prevProps) {
-    const { hasError, history } = this.props;
+  useEffect(() => {
+    getBundles();
+  }, [getBundles]);
 
+  useEffect(() => {
+    getBillingCountries();
+  }, [getBillingCountries]);
+
+  useEffect(() => {
     // if we can't get plans or countries form is useless
     // they can pick plan later from billing
-    if (!prevProps.hasError && hasError) {
+    if (hasError) {
       history.push(NEXT_STEP);
     }
-  }
+  }, [hasError, history]);
 
-  onSubmit = values => {
-    const { billingCreate, showAlert, history, billing, verifyPromoCode } = this.props;
+  const isPlanFree = useMemo(() => Boolean(!_.get(selectedPlan, 'messaging.price', true)), [
+    selectedPlan,
+  ]);
+
+  const onSubmit = values => {
     const selectedPromo = billing.selectedPromo;
     const newValues =
-      values.card && !values.planpicker.isFree
-        ? { ...values, card: prepareCardInfo(values.card) }
-        : values;
+      values.card && !isPlanFree ? { ...values, card: prepareCardInfo(values.card) } : values;
 
     // no billing updates needed since they are still on free plan
-    if (newValues.planpicker.isFree) {
+    if (isPlanFree) {
       history.push(NEXT_STEP);
       return;
     }
 
     let action = Promise.resolve({});
-    if (selectedPromo.promoCode && !values.planpicker.isFree) {
+    if (selectedPromo.promoCode && !isPlanFree) {
       const { promoCode } = selectedPromo;
       newValues.promoCode = promoCode;
       action = verifyPromoCode({
@@ -67,83 +95,76 @@ export class OnboardingPlanPage extends Component {
       .then(() => showAlert({ type: 'success', message: 'Added your plan' }));
   };
 
-  applyPromoCode = promoCode => {
-    const { verifyPromoCode } = this.props;
+  const applyPromoCode = promoCode => {
     verifyPromoCode({
       promoCode,
-      billingId: this.props.selectedPlan.billingId,
+      billingId: selectedPlan.billingId,
       meta: { promoCode, showErrorAlert: false },
     });
   };
 
-  onPlanSelect = e => {
-    const { currentPlan, clearPromoCode } = this.props;
+  const onPlanSelect = e => {
     if (currentPlan !== e.code) {
       clearPromoCode();
     }
   };
-  render() {
-    const { loading, plans, submitting, selectedPlan = {}, billing, clearPromoCode } = this.props;
-    const { selectedPromo = {}, promoError, promoPending } = billing;
-    const promoCodeObj = {
-      selectedPromo: selectedPromo,
-      promoError: promoError,
-      promoPending: promoPending,
-    };
-    const handlePromoCode = {
-      applyPromoCode: this.applyPromoCode,
-      clearPromoCode: clearPromoCode,
-    };
-    if (loading) {
-      return <Loading />;
-    }
-    const disableSubmit = submitting || promoPending;
 
-    const buttonText = submitting ? 'Updating Subscription...' : 'Get Started';
+  const { selectedPromo = {}, promoError, promoPending } = billing;
+  const promoCodeObj = {
+    selectedPromo: selectedPromo,
+    promoError: promoError,
+    promoPending: promoPending,
+  };
+  const handlePromoCode = {
+    applyPromoCode,
+    clearPromoCode,
+  };
 
-    return (
-      <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
-        <CenteredLogo />
-        <Grid>
-          <Grid.Column>
-            <Panel>
-              <PlanPicker
-                selectedPromo={selectedPromo}
-                disabled={disableSubmit}
-                plans={plans}
-                onChange={this.onPlanSelect}
-              />
-              {!selectedPlan.isFree && (
-                <Panel.Section>
-                  <PromoCodeNew
-                    key={selectedPromo.promoCode || 'promocode'}
-                    promoCodeObj={promoCodeObj}
-                    handlePromoCode={handlePromoCode}
-                  />
-                </Panel.Section>
-              )}
-              <CreditCardSection
-                billing={billing}
-                submitting={submitting}
-                isPlanFree={selectedPlan.isFree}
-              />
-              <Panel.Section>
-                <Button
-                  disabled={disableSubmit}
-                  primary={true}
-                  type="submit"
-                  size="large"
-                  fullWidth={true}
-                >
-                  {buttonText}
-                </Button>
-              </Panel.Section>
-            </Panel>
-          </Grid.Column>
-        </Grid>
-      </form>
-    );
+  if (loading || !bundles.length) {
+    return <Loading />;
   }
+  const disableSubmit = submitting || promoPending;
+
+  const buttonText = submitting ? 'Updating Subscription...' : 'Get Started';
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <CenteredLogo />
+      <Grid>
+        <Grid.Column>
+          <Panel>
+            <PlanPicker
+              selectedPromo={selectedPromo}
+              disabled={disableSubmit}
+              bundles={bundles}
+              onChange={onPlanSelect}
+            />
+            {!isPlanFree && (
+              <Panel.Section>
+                <PromoCodeNew
+                  key={selectedPromo.promoCode || 'promocode'}
+                  promoCodeObj={promoCodeObj}
+                  handlePromoCode={handlePromoCode}
+                />
+              </Panel.Section>
+            )}
+            <CreditCardSection billing={billing} submitting={submitting} isPlanFree={isPlanFree} />
+            <Panel.Section>
+              <Button
+                disabled={disableSubmit}
+                primary={true}
+                type="submit"
+                size="large"
+                fullWidth={true}
+              >
+                {buttonText}
+              </Button>
+            </Panel.Section>
+          </Panel>
+        </Grid.Column>
+      </Grid>
+    </form>
+  );
 }
 
 const formOptions = {
@@ -161,4 +182,5 @@ export default connect(choosePlanMSTP(FORMS.JOIN_PLAN), {
   getBillingCountries,
   verifyPromoCode,
   clearPromoCode,
+  getBundles,
 })(reduxForm(formOptions)(OnboardingPlanPage));

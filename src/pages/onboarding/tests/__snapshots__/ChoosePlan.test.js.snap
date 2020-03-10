@@ -57,62 +57,7 @@ exports[`ChoosePlan page tests should disable submit and plan picker when submit
 </form>
 `;
 
-exports[`ChoosePlan page tests should render correctly 1`] = `
-<form>
-  <CenteredLogo />
-  <Grid>
-    <Grid.Column>
-      <Panel>
-        <_default
-          disabled={false}
-          onChange={[Function]}
-          plans={Array []}
-          selectedPromo={Object {}}
-        />
-        <Panel.Section>
-          <PromoCodeNew
-            handlePromoCode={
-              Object {
-                "applyPromoCode": [Function],
-                "clearPromoCode": undefined,
-              }
-            }
-            key="promocode"
-            promoCodeObj={
-              Object {
-                "promoError": undefined,
-                "promoPending": false,
-                "selectedPromo": Object {},
-              }
-            }
-          />
-        </Panel.Section>
-        <CreditCardSection
-          billing={
-            Object {
-              "countries": Array [],
-              "promoPending": false,
-              "selectedPromo": Object {},
-            }
-          }
-          submitting={false}
-        />
-        <Panel.Section>
-          <Button
-            disabled={false}
-            fullWidth={true}
-            primary={true}
-            size="large"
-            type="submit"
-          >
-            Get Started
-          </Button>
-        </Panel.Section>
-      </Panel>
-    </Grid.Column>
-  </Grid>
-</form>
-`;
+exports[`ChoosePlan page tests should render correctly 1`] = `undefined`;
 
 exports[`ChoosePlan page tests should render loading component 1`] = `<Loading />`;
 

@@ -8,36 +8,48 @@ describe('Plan Picker: ', () => {
   let props;
 
   beforeEach(() => {
-    const plansByTier = {
-      'default': [{
-        code: '1',
-        includesIp: true,
-        monthly: 100,
-        name: 'One',
-        overage: 0.1,
-        volume: 1
-      }],
-      'test': [{
-        code: '2',
-        includesIp: false,
-        monthly: 0,
-        name: 'Two',
-        overage: 0.2,
-        volume: 2,
-        isFree: true
-      }],
-      'starter': [{
-        code: '3',
-        monthly: 300,
-        name: 'Three',
-        overage: 0.3,
-        volume: 3
-      }]
-    };
-
     props = {
       input: { onChange: jest.fn() },
-      plansByTier
+      bundles: [
+        {
+          bundle: 'free500-0419',
+          status: 'public',
+          tier: 'test',
+          type: 'messaging',
+          products: [
+            {
+              product: 'messaging',
+              plan: 'free500-0419',
+            },
+          ],
+          messaging: {
+            plan: 'free500-0419',
+            product: 'messaging',
+            price: 0,
+            volume: 500,
+          },
+        },
+        {
+          bundle: '2.5M-0817',
+          status: 'secret',
+          tier: 'premier',
+          type: 'messaging',
+          products: [
+            {
+              product: 'messaging',
+              plan: '2.5M-0817',
+            },
+          ],
+          messaging: {
+            billing_id: '2c92c0f85d7d53d6015d80ed8f2b0ce5',
+            plan: '2.5M-0817',
+            product: 'messaging',
+            price: 899,
+            overage: 0.4,
+            volume: 2500000,
+          },
+        },
+      ],
     };
 
     wrapper = shallow(<PlanPicker {...props} />);
@@ -48,44 +60,30 @@ describe('Plan Picker: ', () => {
   });
 
   it('renders correctly with an initial value', () => {
-    const selected = {
-      code: '4',
-      monthly: 400,
-      name: 'Four',
-      overage: 0.4,
-      volume: 4
-    };
-    const selectedProps = { ...props, input: { ...props.input, value: selected }};
+    const selected = props.bundles[1];
+    const selectedProps = { ...props, input: { ...props.input, value: selected } };
     const wrapper = shallow(<PlanPicker {...selectedProps} />);
     expect(wrapper).toMatchSnapshot();
   });
 
-
   describe('Render Function', () => {
-
-    const subject = (subProps) => shallow(<PlanPickerComponent {...props} {...subProps}/>);
+    const subject = subProps => shallow(<PlanPickerComponent {...props} {...subProps} />);
 
     const renderFn = (wrapper, props = {}) => {
       const Component = wrapper.prop('children');
 
       return shallow(
         <Component
-          getInputProps={jest.fn((props) => props)}
-          getItemProps={jest.fn((props) => props)}
-          getToggleButtonProps={jest.fn((props) => props)}
+          getInputProps={jest.fn(props => props)}
+          getItemProps={jest.fn(props => props)}
+          getToggleButtonProps={jest.fn(props => props)}
           {...props}
-        />
+        />,
       );
     };
 
     it('renders', () => {
-      const selected = {
-        code: '4',
-        monthly: 400,
-        name: 'Four',
-        overage: 0.4,
-        volume: 4
-      };
+      const selected = props.bundles[1];
 
       const wrapper = subject();
       expect(renderFn(wrapper, { selectedItem: selected })).toMatchSnapshot();
@@ -102,12 +100,10 @@ describe('Plan Picker: ', () => {
         monthly: 400,
         name: 'Four',
         overage: 0.4,
-        volume: 4
+        volume: 4,
       };
-      const wrapper = subject({ plansByTier: {}});
+      const wrapper = subject({ bundles: [] });
       expect(renderFn(wrapper, { selectedItem: selected })).toBeEmptyRender();
     });
   });
-
-
 });

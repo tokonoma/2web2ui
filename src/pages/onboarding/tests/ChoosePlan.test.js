@@ -13,6 +13,7 @@ describe('ChoosePlan page tests', () => {
   const props = {
     hasError: false,
     getPlans: jest.fn(),
+    getBundles: jest.fn(),
     getBillingCountries: jest.fn(),
     billingCreate: jest.fn(() => Promise.resolve()),
     handleSubmit: jest.fn(),
@@ -24,6 +25,7 @@ describe('ChoosePlan page tests', () => {
     loading: false,
     billing: { countries: [], selectedPromo: {}, promoPending: false },
     plans: [],
+    bundles: [],
     submitting: false,
   };
 
