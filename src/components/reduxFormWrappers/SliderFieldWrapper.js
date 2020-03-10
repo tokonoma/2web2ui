@@ -1,5 +1,6 @@
 import React from 'react';
-import { Label, Slider, TextField } from '@sparkpost/matchbox';
+import { Slider, TextField } from '@sparkpost/matchbox';
+import { Label } from 'src/components/matchbox';
 import { clamp } from 'src/helpers/math';
 import { roundToPlaces } from 'src/helpers/units';
 import styles from './SliderFieldWrapper.module.scss';

@@ -1,9 +1,15 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import CollectionFilterBox from '../FilterBox';
+import { HibanaProvider } from 'src/context/HibanaContext';
 
 describe('CollectionFilterBox', () => {
-  const subject = (props = {}) => render(<CollectionFilterBox {...props} />);
+  const subject = (props = {}) =>
+    render(
+      <HibanaProvider>
+        <CollectionFilterBox {...props} />
+      </HibanaProvider>,
+    );
 
   it('sets initial value', () => {
     const { queryByDisplayValue } = subject({ initialValue: 'testing' });

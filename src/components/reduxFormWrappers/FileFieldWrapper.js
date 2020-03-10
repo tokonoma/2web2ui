@@ -1,7 +1,8 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
 import Dropzone from 'react-dropzone';
-import { Error, Label } from '@sparkpost/matchbox';
+import { Error } from '@sparkpost/matchbox';
+import { Label } from 'src/components/matchbox';
 import { FileUpload } from '@sparkpost/matchbox-icons';
 import { shrinkToFit } from 'src/helpers/string';
 import styles from './FileFieldWrapper.module.scss';
@@ -11,25 +12,37 @@ import styles from './FileFieldWrapper.module.scss';
 export default class FileFieldWrapper extends Component {
   handleCancel = () => {
     this.props.input.onBlur(); // run validation
-  }
+  };
 
   // Always set value to dropped file even if rejected for validate functions to set error
   handleDrop = (acceptedFiles, rejectedFiles) => {
     const files = [...acceptedFiles, ...rejectedFiles];
     this.props.input.onChange(files[0]);
     this.props.input.onBlur(); // run validation
-  }
+  };
 
   handleOpen = () => {
     this.dropzoneRef.open();
-  }
+  };
 
-  setDropzoneRef = (ref) => {
+  setDropzoneRef = ref => {
     this.dropzoneRef = ref;
-  }
+  };
 
   render() {
-    const { disabled, fileType, fileTypes = [], helpText, input, label, meta, required, style = {}, labelHidden, placeholder = 'Drag a file here, or click to browse' } = this.props;
+    const {
+      disabled,
+      fileType,
+      fileTypes = [],
+      helpText,
+      input,
+      label,
+      meta,
+      required,
+      style = {},
+      labelHidden,
+      placeholder = 'Drag a file here, or click to browse',
+    } = this.props;
     const filename = _.get(input, 'value.name');
     let acceptedTypes = fileType ? `.${fileType}` : '';
     if (fileTypes.length) {
@@ -39,8 +52,14 @@ export default class FileFieldWrapper extends Component {
     return (
       <fieldset className={styles.Field}>
         <Label id={input.id}>
-          {!labelHidden && label}{!labelHidden && required && ' *'}
-          {(meta.touched && meta.error) ? <span>{' '}<Error error={meta.error} wrapper='span' /></span> : null}
+          {!labelHidden && label}
+          {!labelHidden && required && ' *'}
+          {meta.touched && meta.error ? (
+            <span>
+              {' '}
+              <Error error={meta.error} wrapper="span" />
+            </span>
+          ) : null}
         </Label>
         <div className={styles.InputWrapper}>
           <Dropzone
@@ -57,9 +76,14 @@ export default class FileFieldWrapper extends Component {
             onFileDialogCancel={this.handleCancel}
             ref={this.setDropzoneRef}
           >
-            {(filename && !meta.error)
-              ? <span>{shrinkToFit(filename, 50)}</span>
-              : <span className={styles.Placeholder}><FileUpload /><span>{placeholder}</span></span>}
+            {filename && !meta.error ? (
+              <span>{shrinkToFit(filename, 50)}</span>
+            ) : (
+              <span className={styles.Placeholder}>
+                <FileUpload />
+                <span>{placeholder}</span>
+              </span>
+            )}
           </Dropzone>
         </div>
         {helpText ? <div className={styles.Help}>{helpText}</div> : null}
