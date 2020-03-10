@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 import { ScreenReaderOnly } from '@sparkpost/matchbox';
+import { Inline } from 'src/components/matchbox';
 import { SparkPost } from 'src/components';
 import styles from './DesktopNavigation.module.scss';
 
@@ -11,23 +12,45 @@ export default function DesktopNavigation() {
       <div className={styles.SubWrapper}>
         <SkipLink />
 
-        <div>
-          <SparkPost.Logo className={styles.Logo} />
+        <div className={styles.LogoWrapper}>
+          <Link to="/dashboard">
+            <SparkPost.Logo className={styles.Logo} />
+          </Link>
         </div>
 
-        <nav>
+        <nav className={styles.PrimaryNav}>
           {/* Visually hidden headings to help guide screen reader users */}
           <ScreenReaderOnly>
             <h2>Main Navigation</h2>
           </ScreenReaderOnly>
 
           {/* using ARIA roles instead of list elements to avoid style overrides */}
-          <div role="list">
-            <div role="listitem">
-              <NavLink to="/summary">Signals Analytics</NavLink>
-            </div>
-          </div>
+          <Inline>
+            <NavLink variant="primary" to="/summary">
+              Signals Analytics
+            </NavLink>
+
+            <NavLink variant="primary" to="/summary">
+              Events
+            </NavLink>
+
+            <NavLink variant="primary" to="/summary">
+              Content
+            </NavLink>
+
+            <NavLink variant="primary" to="/summary">
+              Recipients
+            </NavLink>
+
+            <NavLink variant="primary" to="/summary">
+              Configuration
+            </NavLink>
+          </Inline>
         </nav>
+
+        <div className={styles.AccountDropdownWrapper}>
+          <button className={styles.AccountDropdownButton}>SP</button>
+        </div>
       </div>
 
       <div className={styles.SubWrapper}>
@@ -47,7 +70,11 @@ function NavLink(props) {
   return (
     <Link
       to={to}
-      className={classNames(styles.NavLink, styles[variant], isActive ? styles.isActive : null)}
+      className={classNames(
+        styles.NavLink,
+        styles[variant],
+        isActive ? styles.NavLinkActive : null,
+      )}
     >
       {children}
     </Link>

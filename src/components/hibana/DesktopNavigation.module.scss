@@ -1,4 +1,5 @@
 @import '~@sparkpost/design-tokens-hibana/tokens';
+@import 'src/styles/resets';
 
 .Base {
   background-color: #fff;
@@ -9,6 +10,9 @@
   max-width: 60rem;
   margin: 0 auto;
   position: relative; // allows absolute positioning within
+  display: grid;
+  grid-template-columns: 175px auto auto;
+  grid-gap: spacing(600);
 }
 
 // Some specificity issues with links
@@ -23,17 +27,68 @@
   font-size: font-size(200);
   color: #fff;
   transform: scale(0.95);
-  transform-origin: top;
+  z-index: -1;
   transition: opacity motion-duration(fast) motion-ease(in-out),
     transform motion-duration(fast) motion-ease(in-out);
 
   &:focus {
     opacity: 1;
     transform: scale(1);
+    z-index: 1;
   }
+}
+
+.LogoWrapper {
+  align-self: center;
 }
 
 .Logo {
   width: 175px;
   max-height: 50px;
+}
+
+.PrimaryNav {
+  align-self: center;
+}
+
+.NavLink {
+  display: flex;
+  font-size: font-size(300);
+  padding: spacing(200) spacing(400);
+  border-radius: border-radius(pill);
+  text-decoration: none;
+}
+
+.primary {
+  color: color(gray, 800);
+  outline-offset: -3px; // helps ensure focus outline is visible
+  transition: background-color motion-duration(fast) motion-ease(in-out);
+
+  &:focus,
+  &:hover {
+    color: color(gray, 800);
+    background-color: color(gray, 300);
+  }
+}
+
+.NavLinkActive {
+  color: color(gray, 800);
+  background-color: color(gray, 300);
+}
+
+.AccountDropdownWrapper {
+  align-self: center;
+  justify-self: end;
+}
+
+.AccountDropdownButton {
+  @include button-reset();
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: spacing(700);
+  height: spacing(700);
+  border-radius: border-radius(circle);
+  background-color: color(brand, orange);
+  color: #fff;
 }
