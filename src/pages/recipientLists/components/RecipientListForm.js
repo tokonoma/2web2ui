@@ -49,7 +49,7 @@ export class RecipientListForm extends Component {
   renderCsvErrors() {
     const { error } = this.props;
     return (
-      <Banner status="danger" title="CSV Format Errors" my={10}>
+      <Banner status="danger" title="CSV Format Errors" my="300">
         {error.map((err, idx) => (
           <Error key={idx} error={err} />
         ))}

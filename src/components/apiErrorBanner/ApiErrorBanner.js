@@ -38,7 +38,7 @@ export default class ApiErrorBanner extends Component {
     const showDetailsButton = errorDetails || payload.message;
 
     return (
-      <Banner status={status} title={title} my={10}>
+      <Banner status={status} title={title} my="300">
         <p>{message || craftMessage(meta.method, resource)}</p>
 
         {reload && (

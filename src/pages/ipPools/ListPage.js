@@ -89,7 +89,7 @@ export class IpPoolsList extends Component {
 }
 
 export const IPWarmupReminderBanner = () => (
-  <Banner status="warning" title={'New dedicated IP addresses need to be warmed up'} my={10}>
+  <Banner status="warning" title={'New dedicated IP addresses need to be warmed up'} my="300">
     <div>
       <p>
         In order to establish a positive sending reputation, warm up new dedicated IP addresses by

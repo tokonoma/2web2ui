@@ -16,7 +16,7 @@ const UnverifiedBanner = ({ unverifiedDomains, cname }) => {
       : 'You have an unverified tracking domain';
 
   return (
-    <Banner status="warning" title={title} my={10}>
+    <Banner status="warning" title={title} my="300">
       <p>
         To verify a tracking domain, edit its DNS settings to <strong>add a CNAME record</strong>{' '}
         with the value of <strong>{cname}</strong>.

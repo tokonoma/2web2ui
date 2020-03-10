@@ -28,7 +28,7 @@ export class CreatePage extends Component {
             Component: Link,
           }}
         />
-        <Banner status="info" title="Verification required" my={10}>
+        <Banner status="info" title="Verification required" my="300">
           <p>
             Tracking domains need to be verified via DNS. You'll need to{' '}
             <strong>add a CNAME record</strong> with the value of <strong>{cname}</strong> to this

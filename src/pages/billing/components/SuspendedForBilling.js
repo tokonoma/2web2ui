@@ -11,7 +11,7 @@ export default function SuspendedForBilling({ account }) {
       <Banner
         status="danger"
         title="Your account has been suspended due to a billing problem"
-        my={10}
+        my="300"
       >
         <p>
           We sent an email notification to your current billing contact email address {email}. To

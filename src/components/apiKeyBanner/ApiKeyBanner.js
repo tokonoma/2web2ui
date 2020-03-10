@@ -21,7 +21,7 @@ export class ApiKeySuccessBanner extends Component {
     };
 
     return (
-      <Banner action={action} title={title} status={status} onDismiss={hideNewApiKey} my={10}>
+      <Banner action={action} title={title} status={status} onDismiss={hideNewApiKey} my="300">
         <p>Make sure to copy your API key now. You won't be able to see it again!</p>
         <strong>{newKey}</strong>
       </Banner>
