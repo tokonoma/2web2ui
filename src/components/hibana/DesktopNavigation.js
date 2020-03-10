@@ -29,7 +29,7 @@ export default function DesktopNavigation({ navItems, location }) {
   };
 
   return (
-    <div className={styles.DesktopNavigation}>
+    <div className={styles.DesktopNavigation} data-id="desktop-navigation">
       <div className={styles.SubWrapper}>
         <SkipLink />
 
@@ -77,7 +77,7 @@ export default function DesktopNavigation({ navItems, location }) {
       {navItems.map(item => {
         if (isActive(item) && item.children) {
           return (
-            <nav className={styles.SecondaryNav} key="secondary-nav">
+            <nav className={styles.SecondaryNav} key="secondary-nav" data-id="secondary-navigation">
               <div className={styles.SubWrapper}>
                 {/* Visually hidden headings to help guide screen reader users */}
                 <ScreenReaderOnly>
