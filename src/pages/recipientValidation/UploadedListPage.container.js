@@ -1,16 +1,7 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import UploadedListPage, { UploadedListPageSRV } from './UploadedListPage';
-import { isAccountUiOptionSet } from 'src/helpers/conditions/account';
+import { UploadedListPageSRV } from './UploadedListPage';
 import { withRouter } from 'react-router-dom';
 
-const UploadedListPageContainer = props =>
-  props.isStandAloneRVSet ? <UploadedListPageSRV {...props} /> : <UploadedListPage {...props} />;
+const UploadedListPageContainer = props => <UploadedListPageSRV {...props} />;
 
-const mapStateToProps = state => {
-  return {
-    isStandAloneRVSet: isAccountUiOptionSet('standalone_rv')(state),
-  };
-};
-
-export default withRouter(connect(mapStateToProps, null)(UploadedListPageContainer));
+export default withRouter(UploadedListPageContainer);

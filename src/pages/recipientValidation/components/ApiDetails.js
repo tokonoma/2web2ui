@@ -1,14 +1,11 @@
 import React from 'react';
-import { Grid, Button } from '@sparkpost/matchbox';
-import { Link } from 'react-router-dom';
+import { Grid } from '@sparkpost/matchbox';
 import styles from './ApiDetails.module.scss';
 import CodeBlock from './CodeBlock';
-import { isAccountUiOptionSet } from 'src/helpers/conditions/account';
-import { connect } from 'react-redux';
 const Tab = () => <span className={styles.tab} />;
 const White = ({ children }) => <span className={styles.white}>{children}</span>;
 
-export const ApiIntegrationDocs = ({ isStandAloneRVSet }) => {
+export const ApiIntegrationDocs = () => {
   const codeBlock = (
     <small className={styles.blue}>
       {'{'}
@@ -57,21 +54,6 @@ export const ApiIntegrationDocs = ({ isStandAloneRVSet }) => {
     </div>
   );
 
-  const buttonRow = (
-    <div>
-      <Button color="orange" component={Link} to="/account/api-keys/create">
-        Create API Key
-      </Button>
-      <Button
-        className={!isStandAloneRVSet && styles.ApiDocsLink}
-        external
-        to="https://developers.sparkpost.com/api/recipient-validation/"
-      >
-        API Docs
-      </Button>
-    </div>
-  );
-
   return (
     <div className={styles.Container}>
       <Grid>
@@ -84,7 +66,6 @@ export const ApiIntegrationDocs = ({ isStandAloneRVSet }) => {
             Block fake emails and catch typos with a single API request.
           </p>
           {exampleMethod}
-          {!isStandAloneRVSet && buttonRow}
         </Grid.Column>
         <Grid.Column xs={12} md={6} lgOffset={1}>
           <div className={styles.CodeSection}>
@@ -96,8 +77,4 @@ export const ApiIntegrationDocs = ({ isStandAloneRVSet }) => {
   );
 };
 
-const mapStateToProps = state => {
-  return { isStandAloneRVSet: isAccountUiOptionSet('standalone_rv')(state) };
-};
-
-export default connect(mapStateToProps, null)(ApiIntegrationDocs);
+export default ApiIntegrationDocs;
