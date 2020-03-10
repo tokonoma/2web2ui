@@ -18,7 +18,7 @@ export class UploadedListForm extends React.Component {
     this.props.getUsage();
   }
 
-  handleModal = isModalOpen => () => {
+  handleModal = isModalOpen => {
     this.setState({ isModalOpen });
   };
 
@@ -52,7 +52,7 @@ export class UploadedListForm extends React.Component {
             ) : (
               <>
                 <div className={styles.Cost}>{calculateNewCost(currentUsage, addressCount)}</div>
-                <UnstyledLink onClick={this.handleModal(true)}>
+                <UnstyledLink onClick={() => this.handleModal(true)}>
                   How was this calculated?
                 </UnstyledLink>
               </>
@@ -60,7 +60,7 @@ export class UploadedListForm extends React.Component {
           </Grid.Column>
         </Grid>
 
-        {<RVPriceModal open={this.state.isModalOpen} handleOpen={this.handleModal} />}
+        {<RVPriceModal isOpen={this.state.isModalOpen} handleOpen={this.handleModal} />}
       </div>
     );
   }
