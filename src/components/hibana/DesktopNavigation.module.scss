@@ -52,6 +52,7 @@
 .Logo {
   width: 175px;
   max-height: 50px;
+  transform: translateY(-#{spacing(100)}); // Bumps up logo so top of flame moves in to padding
 }
 
 .PrimaryNav {
@@ -113,7 +114,7 @@
 }
 
 .SecondaryNav {
-  padding-top: spacing(700);
+  padding-top: spacing(300);
   padding-bottom: spacing(300);
   background-color: color(gray, 900);
 }

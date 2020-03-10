@@ -49,9 +49,9 @@ export default function DesktopNavigation() {
             </Inline>
           </nav>
 
-          <div className={styles.AccountDropdownWrapper}>
+          <AccountDropdown>
             <button className={styles.AccountDropdownButton}>SP</button>
-          </div>
+          </AccountDropdown>
         </div>
       </div>
 
@@ -127,4 +127,8 @@ function SkipLink() {
       Skip to Main Content
     </a>
   );
+}
+
+function AccountDropdown({ children }) {
+  return <div className={styles.AccountDropdownWrapper}>{children}</div>;
 }
