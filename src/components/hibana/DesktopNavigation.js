@@ -15,6 +15,14 @@ export default function DesktopNavigation({ navItems, location }) {
       return false;
     }
 
+    if (navItem.children) {
+      const hasActiveChild = navItem.children.some(child => {
+        return location.pathname === child.to;
+      });
+
+      return hasActiveChild;
+    }
+
     if (location.pathname.includes(navItem.to)) {
       return true;
     }
@@ -55,8 +63,13 @@ export default function DesktopNavigation({ navItems, location }) {
             </Inline>
           </nav>
 
+          {/* TODO: Implement in FE-924 */}
           <AccountDropdown>
-            <button className={styles.AccountDropdownButton}>SP</button>
+            <button className={styles.AccountDropdownButton}>
+              <span aria-hidden="true">SP</span>
+
+              <ScreenReaderOnly>Account Menu</ScreenReaderOnly>
+            </button>
           </AccountDropdown>
         </div>
       </div>
@@ -64,7 +77,7 @@ export default function DesktopNavigation({ navItems, location }) {
       {navItems.map(item => {
         if (isActive(item) && item.children) {
           return (
-            <nav className={styles.SecondaryNav}>
+            <nav className={styles.SecondaryNav} key="secondary-nav">
               <div className={styles.SubWrapper}>
                 {/* Visually hidden headings to help guide screen reader users */}
                 <ScreenReaderOnly>
