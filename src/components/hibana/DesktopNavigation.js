@@ -128,6 +128,8 @@ function NavLink(props) {
   );
 }
 
+// Allows keyboard-only users to skip the navigation
+// See: https://webaim.org/techniques/skipnav/
 function SkipLink() {
   return (
     <a href="#main-content" className={styles.SkipLink}>
