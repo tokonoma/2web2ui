@@ -91,7 +91,7 @@ export default [
   },
   {
     label: 'Recipients',
-    to: hasGrants('recipient-validation/preview'),
+    to: '/recipient-validation/list', // TODO: How can this be handled using grants?
     icon: People,
     children: [
       {
