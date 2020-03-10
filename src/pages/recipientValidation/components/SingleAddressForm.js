@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { Field, reduxForm } from 'redux-form';
+import { Field } from 'redux-form';
 import { Panel } from '@sparkpost/matchbox';
 import { Label } from 'src/components/matchbox';
 import { TextFieldWrapper } from 'src/components';
@@ -11,7 +11,6 @@ import styles from './SingleAddressForm.module.scss';
 
 import classNames from 'classnames';
 
-const formName = 'singleAddressForm';
 export class SingleAddressForm extends Component {
   singleAddressForm = values =>
     this.props.history.push(`/recipient-validation/single/${values.address}`);
@@ -44,8 +43,5 @@ export class SingleAddressForm extends Component {
     return <Panel.Section>{this.singleAddressBody()}</Panel.Section>;
   }
 }
-
-const WrappedForm = reduxForm({ form: formName })(SingleAddressForm);
-export default withRouter(connect(null, { singleAddress })(WrappedForm));
 
 export const SingleAddressTab = withRouter(connect(null, { singleAddress })(SingleAddressForm));

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Field, reduxForm, formValueSelector } from 'redux-form';
+import { Field, formValueSelector } from 'redux-form';
 import { Panel } from '@sparkpost/matchbox';
 import { maxFileSize, fileExtension } from 'src/helpers/validation';
 import FileUploadWrapper from './FileUploadWrapper';
@@ -9,7 +9,6 @@ import { showAlert } from 'src/actions/globalAlert';
 import config from 'src/config';
 import { withRouter } from 'react-router-dom';
 import { FORMS } from 'src/constants';
-const formName = 'recipientValidationListForm';
 
 export class ListForm extends Component {
   handleUpload = fields => {
@@ -69,11 +68,6 @@ const mapStateToProps = state => {
     file: formValueSelector(FORMS.RV_ADDPAYMENTFORM)(state, 'csv'),
   };
 };
-
-const WrappedForm = reduxForm({ form: formName })(ListForm);
-export default withRouter(
-  connect(mapStateToProps, { uploadList, showAlert, resetUploadError })(WrappedForm),
-);
 
 export const ListTab = withRouter(
   connect(mapStateToProps, { uploadList, showAlert, resetUploadError })(ListForm),
