@@ -22,6 +22,7 @@ import { reduxForm } from 'redux-form';
 import { isProductOnSubscription, prepareCardInfo } from 'src/helpers/billing';
 import addRVtoSubscription from 'src/actions/addRVtoSubscription';
 import { getSubscription as getBillingSubscription } from 'src/actions/billing';
+import { withRouter } from 'react-router-dom';
 import _ from 'lodash';
 
 const FORMNAME = FORMS.RV_ADDPAYMENTFORM_UPLOADLISTPAGE;
@@ -69,9 +70,11 @@ export class UploadedListPage extends Component {
     }).then(() => this.handleSubmit());
   };
 
-  renderUploadedListPage = () => {
+  render() {
     const {
       job,
+      jobLoadingStatus,
+      listId,
       billing: { credit_card },
       billingLoading,
       valid,
@@ -80,50 +83,6 @@ export class UploadedListPage extends Component {
       addRVtoSubscriptionloading,
       addRVtoSubscriptionerror,
     } = this.props;
-
-    if (addRVtoSubscriptionloading && !addRVtoSubscriptionerror) return <Loading />;
-    return (
-      <Page
-        title="Recipient Validation"
-        breadcrumbAction={{ content: 'Back', component: PageLink, to: '/recipient-validation' }}
-      >
-        <Panel>
-          <Panel.Section>
-            <div className={styles.dateHeader}>
-              <strong>{formatDate(job.updatedAt)}</strong>
-              <span> at </span>
-              <strong>{formatTime(job.updatedAt)}</strong>
-            </div>
-          </Panel.Section>
-
-          <Panel.Section>
-            {job.status === 'queued_for_batch' && (
-              <UploadedListForm job={job} onSubmit={this.handleSubmit} />
-            )}
-
-            {job.status === 'error' && <ListError />}
-
-            {job.status !== 'queued_for_batch' && job.status !== 'error' && (
-              <ListProgress job={job} />
-            )}
-          </Panel.Section>
-        </Panel>
-        {job.status === 'queued_for_batch' && !billingLoading && (
-          <ValidateSection
-            credit_card={credit_card}
-            formname={FORMNAME}
-            submitDisabled={!valid || submitting}
-            handleCardToggle={this.handleToggleCC}
-            defaultToggleState={!this.state.useSavedCC}
-            isProductOnSubscription={isRVonSubscription}
-          />
-        )}
-      </Page>
-    );
-  };
-
-  render() {
-    const { job, jobLoadingStatus, listId } = this.props;
 
     if (!job && jobLoadingStatus === 'fail') {
       return (
@@ -140,8 +99,49 @@ export class UploadedListPage extends Component {
     if (!job) {
       return <Loading />;
     }
+
+    if (addRVtoSubscriptionloading && !addRVtoSubscriptionerror) return <Loading />;
+
     return (
-      <form onSubmit={this.props.handleSubmit(this.onSubmit)}>{this.renderUploadedListPage()}</form>
+      <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
+        {' '}
+        <Page
+          title="Recipient Validation"
+          breadcrumbAction={{ content: 'Back', component: PageLink, to: '/recipient-validation' }}
+        >
+          <Panel>
+            <Panel.Section>
+              <div className={styles.dateHeader}>
+                <strong>{formatDate(job.updatedAt)}</strong>
+                <span> at </span>
+                <strong>{formatTime(job.updatedAt)}</strong>
+              </div>
+            </Panel.Section>
+
+            <Panel.Section>
+              {job.status === 'queued_for_batch' && (
+                <UploadedListForm job={job} onSubmit={this.handleSubmit} />
+              )}
+
+              {job.status === 'error' && <ListError />}
+
+              {job.status !== 'queued_for_batch' && job.status !== 'error' && (
+                <ListProgress job={job} />
+              )}
+            </Panel.Section>
+          </Panel>
+          {job.status === 'queued_for_batch' && !billingLoading && (
+            <ValidateSection
+              credit_card={credit_card}
+              formname={FORMNAME}
+              submitDisabled={!valid || submitting}
+              handleCardToggle={this.handleToggleCC}
+              defaultToggleState={!this.state.useSavedCC}
+              isProductOnSubscription={isRVonSubscription}
+            />
+          )}
+        </Page>
+      </form>
     );
   }
 }
@@ -164,10 +164,12 @@ const mapStateToProps = (state, props) => {
 };
 
 const formOptions = { form: FORMNAME, enableReinitialize: true };
-export const UploadedListPageSRV = connect(mapStateToProps, {
-  getJobStatus,
-  triggerJob,
-  getBillingInfo,
-  addRVtoSubscription,
-  getBillingSubscription,
-})(reduxForm(formOptions)(UploadedListPage));
+export default withRouter(
+  connect(mapStateToProps, {
+    getJobStatus,
+    triggerJob,
+    getBillingInfo,
+    addRVtoSubscription,
+    getBillingSubscription,
+  })(reduxForm(formOptions)(UploadedListPage)),
+);

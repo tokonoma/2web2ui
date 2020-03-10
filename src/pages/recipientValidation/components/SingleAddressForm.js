@@ -18,11 +18,11 @@ export class SingleAddressForm extends Component {
   singleAddressBody = () => {
     return (
       <>
-        <div className={classNames(styles.HeaderSRV)}>Validate a Single Address</div>
-        <p className={classNames(styles.SubheaderSRV)}>
+        <div className={classNames(styles.Header)}>Validate a Single Address</div>
+        <p className={classNames(styles.Subheader)}>
           Enter the email address below you would like to validate.
         </p>
-        <div className={classNames(styles.FieldSRV)}>
+        <div className={classNames(styles.Field)}>
           <Label className={styles.FieldLabel} id="email-address-field">
             Email Address
           </Label>

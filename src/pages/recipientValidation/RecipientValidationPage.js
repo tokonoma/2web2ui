@@ -60,7 +60,7 @@ export class RecipientValidationPage extends Component {
 
   handleToggleCC = val => this.setState({ useSavedCC: !val });
 
-  renderTabContentSRV = tabId => {
+  renderTabContent = tabId => {
     const { handleSubmit, reset } = this.props;
     switch (tabId) {
       case 0:
@@ -126,78 +126,67 @@ export class RecipientValidationPage extends Component {
       </div>
     </Panel>
   );
-
-  renderRecipientValidation = () => {
+  render() {
     const { selectedTab, showPriceModal } = this.state;
     const { billing, billingLoading, valid, submitting, isRVonSubscription } = this.props;
     if (this.props.addRVtoSubscriptionloading) return <Loading />;
     return (
-      <Page
-        title="Recipient Validation"
-        primaryArea={
-          <Button size="large" onClick={() => this.handleModal(true)}>
-            See Pricing
-          </Button>
-        }
-      >
-        <p className={styles.LeadText}>
-          Recipient Validation is an easy, efficient way to verify that email addresses are valid
-          before you send. We run each address through a series of checks to catch many common
-          problems, including syntax errors and non-existent mailboxes, to drive better
-          deliverability, cut down on fraud, and capture every opportunity.
-        </p>
-
-        <Panel>
-          <div className={styles.TabsWrapper}>
-            <Tabs
-              selected={selectedTab}
-              connectBelow={true}
-              tabs={tabs.map(({ content }, idx) => ({
-                content,
-                onClick: () => this.handleTabs(idx),
-              }))}
-            />
-
-            {selectedTab === 2 && (
-              <div className={styles.TagWrapper}>
-                <Button
-                  flat
-                  external
-                  to="https://developers.sparkpost.com/api/recipient-validation/"
-                >
-                  API Docs
-                  <Launch className={styles.LaunchIcon} />
-                </Button>
-              </div>
-            )}
-          </div>
-          <Panel.Section>{this.renderTabContentSRV(selectedTab)}</Panel.Section>
-        </Panel>
-
-        {selectedTab === 0 && <JobsTableCollection />}
-        {(selectedTab === 1 || selectedTab === 2) && !billingLoading && (
-          <ValidateSection
-            credit_card={billing.credit_card}
-            submitButtonName={selectedTab === 2 ? 'Create API Key' : 'Validate'}
-            submitDisabled={!valid || submitting}
-            formname={FORMNAME}
-            handleCardToggle={this.handleToggleCC}
-            defaultToggleState={!this.state.useSavedCC}
-            isProductOnSubscription={isRVonSubscription}
-          />
-        )}
-
-        <Modal open={showPriceModal} onClose={() => this.handleModal(false)}>
-          {this.renderRVPriceModal()}
-        </Modal>
-      </Page>
-    );
-  };
-
-  render() {
-    return (
       <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
-        {this.renderRecipientValidation()}
+        <Page
+          title="Recipient Validation"
+          primaryArea={
+            <Button size="large" onClick={() => this.handleModal(true)}>
+              See Pricing
+            </Button>
+          }
+        >
+          <p className={styles.LeadText}>
+            Recipient Validation is an easy, efficient way to verify that email addresses are valid
+            before you send. We run each address through a series of checks to catch many common
+            problems, including syntax errors and non-existent mailboxes, to drive better
+            deliverability, cut down on fraud, and capture every opportunity.
+          </p>
+          <Panel>
+            <div className={styles.TabsWrapper}>
+              <Tabs
+                selected={selectedTab}
+                connectBelow={true}
+                tabs={tabs.map(({ content }, idx) => ({
+                  content,
+                  onClick: () => this.handleTabs(idx),
+                }))}
+              />
+              {selectedTab === 2 && (
+                <div className={styles.TagWrapper}>
+                  <Button
+                    flat
+                    external
+                    to="https://developers.sparkpost.com/api/recipient-validation/"
+                  >
+                    API Docs
+                    <Launch className={styles.LaunchIcon} />
+                  </Button>
+                </div>
+              )}
+            </div>
+            <Panel.Section>{this.renderTabContent(selectedTab)}</Panel.Section>
+          </Panel>
+          {selectedTab === 0 && <JobsTableCollection />}
+          {(selectedTab === 1 || selectedTab === 2) && !billingLoading && (
+            <ValidateSection
+              credit_card={billing.credit_card}
+              submitButtonName={selectedTab === 2 ? 'Create API Key' : 'Validate'}
+              submitDisabled={!valid || submitting}
+              formname={FORMNAME}
+              handleCardToggle={this.handleToggleCC}
+              defaultToggleState={!this.state.useSavedCC}
+              isProductOnSubscription={isRVonSubscription}
+            />
+          )}
+          <Modal open={showPriceModal} onClose={() => this.handleModal(false)}>
+            {this.renderRVPriceModal()}
+          </Modal>
+        </Page>
       </form>
     );
   }
@@ -217,7 +206,7 @@ const mapStateToProps = (state, props) => ({
 });
 
 const formOptions = { form: FORMNAME, enableReinitialize: true };
-export const RecipientValidationPageSRV = withRouter(
+export default withRouter(
   connect(mapStateToProps, { getBillingInfo, addRVtoSubscription, getBillingSubscription })(
     reduxForm(formOptions)(RecipientValidationPage),
   ),
