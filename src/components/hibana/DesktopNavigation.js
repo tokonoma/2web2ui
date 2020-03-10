@@ -30,47 +30,49 @@ export default function DesktopNavigation({ navItems, location }) {
 
   return (
     <div className={styles.DesktopNavigation} data-id="desktop-navigation">
-      <div className={styles.SubWrapper}>
-        <SkipLink />
+      <div className={styles.Wrapper}>
+        <div className={styles.SubWrapper}>
+          <SkipLink />
 
-        <div className={styles.PrimaryNavLayout}>
-          <div className={styles.LogoWrapper}>
-            <Link to="/dashboard">
-              <SparkPost.Logo className={styles.Logo} />
-            </Link>
+          <div className={styles.PrimaryNavLayout}>
+            <div className={styles.LogoWrapper}>
+              <Link to="/dashboard">
+                <SparkPost.Logo className={styles.Logo} />
+              </Link>
+            </div>
+
+            <nav className={styles.PrimaryNav}>
+              {/* Visually hidden headings to help guide screen reader users */}
+              <ScreenReaderOnly>
+                <h2>Main Navigation</h2>
+              </ScreenReaderOnly>
+
+              <Inline>
+                {navItems.map((item, index) => {
+                  // TODO: This can be cleaned up post OG theme removal - by updating the navItems config
+                  return (
+                    <NavLink
+                      variant="primary"
+                      to={item.to}
+                      key={`nav-item-${index}`}
+                      isActive={isActive(item)}
+                    >
+                      {item.label}
+                    </NavLink>
+                  );
+                })}
+              </Inline>
+            </nav>
+
+            {/* TODO: Implement in FE-924 */}
+            <AccountDropdown>
+              <button className={styles.AccountDropdownButton}>
+                <span aria-hidden="true">SP</span>
+
+                <ScreenReaderOnly>Account Menu</ScreenReaderOnly>
+              </button>
+            </AccountDropdown>
           </div>
-
-          <nav className={styles.PrimaryNav}>
-            {/* Visually hidden headings to help guide screen reader users */}
-            <ScreenReaderOnly>
-              <h2>Main Navigation</h2>
-            </ScreenReaderOnly>
-
-            <Inline>
-              {navItems.map((item, index) => {
-                // TODO: This can be cleaned up post OG theme removal - by updating the navItems config
-                return (
-                  <NavLink
-                    variant="primary"
-                    to={item.to}
-                    key={`nav-item-${index}`}
-                    isActive={isActive(item)}
-                  >
-                    {item.label}
-                  </NavLink>
-                );
-              })}
-            </Inline>
-          </nav>
-
-          {/* TODO: Implement in FE-924 */}
-          <AccountDropdown>
-            <button className={styles.AccountDropdownButton}>
-              <span aria-hidden="true">SP</span>
-
-              <ScreenReaderOnly>Account Menu</ScreenReaderOnly>
-            </button>
-          </AccountDropdown>
         </div>
       </div>
 
@@ -78,26 +80,28 @@ export default function DesktopNavigation({ navItems, location }) {
         if (isActive(item) && item.children) {
           return (
             <nav className={styles.SecondaryNav} key="secondary-nav" data-id="secondary-navigation">
-              <div className={styles.SubWrapper}>
-                {/* Visually hidden headings to help guide screen reader users */}
-                <ScreenReaderOnly>
-                  <h3>Category Navigation</h3>
-                </ScreenReaderOnly>
+              <div className={styles.Wrapper}>
+                <div className={styles.SubWrapper}>
+                  {/* Visually hidden headings to help guide screen reader users */}
+                  <ScreenReaderOnly>
+                    <h3>Category Navigation</h3>
+                  </ScreenReaderOnly>
 
-                <Inline>
-                  {item.children.map((childItem, index) => {
-                    return (
-                      <NavLink
-                        variant="secondary"
-                        to={childItem.to}
-                        key={`subnav-item-${index}`}
-                        isActive={location.pathname.includes(childItem.to)}
-                      >
-                        {childItem.label}
-                      </NavLink>
-                    );
-                  })}
-                </Inline>
+                  <Inline>
+                    {item.children.map((childItem, index) => {
+                      return (
+                        <NavLink
+                          variant="secondary"
+                          to={childItem.to}
+                          key={`subnav-item-${index}`}
+                          isActive={location.pathname.includes(childItem.to)}
+                        >
+                          {childItem.label}
+                        </NavLink>
+                      );
+                    })}
+                  </Inline>
+                </div>
               </div>
             </nav>
           );

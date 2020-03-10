@@ -10,9 +10,8 @@
   }
 }
 
-.PrimaryNavLayout,
-.SecondaryNav {
-  padding: spacing(400);
+.Wrapper {
+  padding: spacing(200) spacing(400);
 }
 
 .SubWrapper {
@@ -25,6 +24,8 @@
   display: grid;
   grid-template-columns: 175px auto auto;
   grid-gap: spacing(600);
+  padding-top: spacing(400);
+  padding-bottom: spacing(400);
 }
 
 // Some specificity issues with links
