@@ -12,7 +12,7 @@ exports[`renders ready only mode correctly 1`] = `
   empty={Object {}}
 >
   <Banner
-    my={10}
+    my="300"
     status="info"
     title="This API Key is read-only"
   >
@@ -52,7 +52,7 @@ exports[`should render not found pane when api key can not be found 1`] = `
 >
   <Panel>
     <Banner
-      my={10}
+      my="300"
       status="warning"
       title="Not found"
     >

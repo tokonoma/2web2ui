@@ -205,7 +205,7 @@ Array [
 
 exports[`IP Pools List Page should render the IP warm-up banner correctly 1`] = `
 <Banner
-  my={10}
+  my="300"
   status="warning"
   title="New dedicated IP addresses need to be warmed up"
 >

@@ -8,7 +8,7 @@ exports[`Component: Verify Email Banner should show default email banner 1`] = `
       "onClick": [Function],
     }
   }
-  my={10}
+  my="300"
   status="info"
   title="Verify your email address"
 >
@@ -26,7 +26,7 @@ exports[`Component: Verify Email Banner should show sending sending content 1`] 
       "disabled": true,
     }
   }
-  my={10}
+  my="300"
   status="info"
   title="Verify your email address"
 >
