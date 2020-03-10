@@ -5,7 +5,7 @@ import { isUserUiOptionSet } from 'src/helpers/conditions/user';
 export const inboxPlacementApiRequest = ({ type, meta }) => {
   return (dispatch, getState) => {
     const { url } = meta;
-    const newUrl = isUserUiOptionSet('inbox_placement_v2_api')(getState())
+    const newUrl = isUserUiOptionSet('use_inbox_placement_ea')(getState())
       ? url.replace('/inbox-placement', '/inbox-placement-ea')
       : url;
     return dispatch(

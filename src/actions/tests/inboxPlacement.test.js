@@ -166,4 +166,20 @@ describe('Action Creator: Inbox Placement', () => {
       },
     });
   });
+
+  it('makes request using inbox-placement-ea route when ui option is set', () => {
+    isUserUiOptionSet.mockImplementation(() => () => true);
+    const thunk = inboxPlacement.getInboxPlacementMessage(1, 101);
+    thunk(dispatch, jest.fn);
+    expect(dispatch).toHaveBeenCalledWith({
+      type: 'GET_INBOX_PLACEMENT_MESSAGE',
+      meta: {
+        method: 'GET',
+        url: '/v1/inbox-placement-ea/1/messages/101',
+        context: {
+          messageId: 101,
+        },
+      },
+    });
+  });
 });
