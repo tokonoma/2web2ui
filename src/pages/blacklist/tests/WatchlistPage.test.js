@@ -3,6 +3,7 @@ import { fireEvent, render } from '@testing-library/react';
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 
+import { HibanaProvider } from 'src/context/HibanaContext';
 import { WatchlistPage } from '../WatchlistPage';
 
 jest.mock('../components/StopMonitoringModal', () => () => 'My Delete Modal');
@@ -31,8 +32,11 @@ describe('WatchlistPage', () => {
     };
     return render(
       <MemoryRouter>
-        <WatchlistPage {...defaults} {...props} />
+        <HibanaProvider>
+          <WatchlistPage {...defaults} {...props} />
+        </HibanaProvider>
       </MemoryRouter>,
+      { isHibanaEnabled: false },
     );
   };
 
@@ -44,7 +48,9 @@ describe('WatchlistPage', () => {
       listMonitors: mockListMonitors,
       hasBlacklisted: true,
     };
-    return shallow(<WatchlistPage {...defaults} {...props} />);
+    return shallow(<WatchlistPage {...defaults} {...props} />, {
+      wrappingComponent: HibanaProvider,
+    });
   };
 
   it('renders loading component when loading data', () => {

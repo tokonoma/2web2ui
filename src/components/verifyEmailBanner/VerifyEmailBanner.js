@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { Banner } from '@sparkpost/matchbox';
+import { Banner } from 'src/components/matchbox';
 import { showAlert } from 'src/actions/globalAlert';
 import { verifyEmail } from 'src/actions/currentUser';
 
@@ -28,7 +28,7 @@ export class VerifyEmailBanner extends Component {
     }
 
     return (
-      <Banner action={action} status="info" title="Verify your email address">
+      <Banner action={action} status="info" title="Verify your email address" my="300">
         <p>Please click the link in the email we sent you to verify your email address.</p>
       </Banner>
     );

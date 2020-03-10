@@ -4,7 +4,8 @@ import { Field, SubmissionError, reduxForm } from 'redux-form';
 
 import _ from 'lodash';
 
-import { Panel, Banner, Button, Error } from '@sparkpost/matchbox';
+import { Panel, Button, Error } from '@sparkpost/matchbox';
+import { Banner } from 'src/components/matchbox';
 import { DownloadLink, TextFieldWrapper } from 'src/components';
 import { required, maxLength } from 'src/helpers/validation';
 
@@ -48,7 +49,7 @@ export class RecipientListForm extends Component {
   renderCsvErrors() {
     const { error } = this.props;
     return (
-      <Banner status="danger" title="CSV Format Errors">
+      <Banner status="danger" title="CSV Format Errors" my="300">
         {error.map((err, idx) => (
           <Error key={idx} error={err} />
         ))}

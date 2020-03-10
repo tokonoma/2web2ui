@@ -1,5 +1,5 @@
 import React from 'react';
-import { Banner } from '@sparkpost/matchbox';
+import { Banner } from 'src/components/matchbox';
 
 const CongratsBanner = ({
   onDismiss,
@@ -8,7 +8,7 @@ const CongratsBanner = ({
 }) => {
   return (
     <div data-id="congrats-banner">
-      <Banner title={title} status="success" onDismiss={onDismiss}>
+      <Banner title={title} status="success" onDismiss={onDismiss} my="300">
         {content}
       </Banner>
     </div>

@@ -3,6 +3,7 @@ import { render, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { EditIpPage } from '../EditIpPage';
+import { HibanaProvider } from 'src/context/HibanaContext';
 jest.mock('../components/IpForm');
 
 // Mocking IP form implementation - testing Redux Form components
@@ -33,7 +34,9 @@ describe('IP Edit Page', () => {
     // Router needed to use <Link/> component inside
     return render(
       <Router>
-        <EditIpPage {...mergedProps} />
+        <HibanaProvider>
+          <EditIpPage {...mergedProps} />
+        </HibanaProvider>
       </Router>,
     );
   };
