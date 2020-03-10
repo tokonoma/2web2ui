@@ -139,7 +139,7 @@ exports[`Component: EditBounce renders not ready correctly 1`] = `
   </Left>
   <Right>
     <Banner
-      my={10}
+      my="300"
       status="warning"
     >
       We strongly recommend using a subdomain such as 
@@ -180,7 +180,7 @@ exports[`Component: EditBounce renders ready correctly 1`] = `
   <Left />
   <Right>
     <Banner
-      my={10}
+      my="300"
       status="warning"
     >
       We strongly recommend using a subdomain such as 
