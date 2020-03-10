@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { Page, Tabs, Panel, Modal, Button } from '@sparkpost/matchbox';
-import { Close, Launch } from '@sparkpost/matchbox-icons';
+import { Page, Tabs, Panel, Button } from '@sparkpost/matchbox';
+import { Launch } from '@sparkpost/matchbox-icons';
 import { reduxForm } from 'redux-form';
 import _ from 'lodash';
 import { prepareCardInfo, isProductOnSubscription } from 'src/helpers/billing';
@@ -16,10 +16,10 @@ import JobsTableCollection from './components/JobsTableCollection';
 import { ListTab } from './components/ListForm';
 import { SingleAddressTab } from './components/SingleAddressForm';
 import ApiDetails from './components/ApiDetails';
-import RecipientValidationPriceTable from './components/RecipientValidationPriceTable';
 import styles from './RecipientValidationPage.module.scss';
 import ValidateSection from './components/ValidateSection';
 import { FORMS } from 'src/constants';
+import RVPriceModal from './components/RVPriceModal';
 const FORMNAME = FORMS.RV_ADDPAYMENTFORM;
 
 const tabs = [
@@ -107,27 +107,8 @@ export class RecipientValidationPage extends Component {
 
   handleModal = (showPriceModal = false) => this.setState({ showPriceModal });
 
-  renderRVPriceModal = () => (
-    <Panel className={styles.modalContainer} accent>
-      <div style={{ float: 'right' }}>
-        <Button onClick={() => this.handleModal(false)} flat>
-          <Close />
-        </Button>
-      </div>
-      <div className={styles.bodyContainer}>
-        <h3>How was this calculated?</h3>
-        <RecipientValidationPriceTable
-          cellProps={{
-            style: {
-              padding: '8px 0',
-            },
-          }}
-        />
-      </div>
-    </Panel>
-  );
   render() {
-    const { selectedTab, showPriceModal } = this.state;
+    const { selectedTab } = this.state;
     const { billing, billingLoading, valid, submitting, isRVonSubscription } = this.props;
     if (this.props.addRVtoSubscriptionloading) return <Loading />;
     return (
@@ -183,9 +164,7 @@ export class RecipientValidationPage extends Component {
               isProductOnSubscription={isRVonSubscription}
             />
           )}
-          <Modal open={showPriceModal} onClose={() => this.handleModal(false)}>
-            {this.renderRVPriceModal()}
-          </Modal>
+          <RVPriceModal isOpen={this.state.showPriceModal} handleOpen={this.handleModal} />
         </Page>
       </form>
     );

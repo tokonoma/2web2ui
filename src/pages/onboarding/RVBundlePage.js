@@ -3,9 +3,8 @@ import { CenteredLogo } from 'src/components';
 import { Panel, UnstyledLink, Modal, Button } from '@sparkpost/matchbox';
 import { CheckCircle, Send, Close } from '@sparkpost/matchbox-icons';
 import { Link } from 'react-router-dom';
-import { Card } from 'src/components';
+import { Card, RecipientValidationPriceTable } from 'src/components';
 import styles from './RVBundlePage.module.scss';
-import RecipientValidationPriceTable from 'src/pages/recipientValidation/components/RecipientValidationPriceTable';
 
 const RVPriceModal = ({ open, onClose }) => (
   <Modal open={open} onClose={onClose}>

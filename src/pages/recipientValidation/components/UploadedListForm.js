@@ -1,14 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Button, Grid, UnstyledLink, Modal, Panel } from '@sparkpost/matchbox';
-import { Close } from '@sparkpost/matchbox-icons';
+import { Grid, UnstyledLink } from '@sparkpost/matchbox';
 import { getUsage } from 'src/actions/account';
 import { LoadingSVG } from 'src/components/loading/Loading';
 import { selectMonthlyRecipientValidationUsage } from 'src/selectors/accountBillingInfo';
 import { calculateNewCost } from 'src/pages/billing/helpers/totalRecipientValidationCost';
-import RecipientValidationPriceTable from './RecipientValidationPriceTable';
 import styles from './UploadedListForm.module.scss';
 import { formatFullNumber } from 'src/helpers/units';
+import RVPriceModal from './RVPriceModal';
 
 export class UploadedListForm extends React.Component {
   state = {
@@ -26,24 +25,6 @@ export class UploadedListForm extends React.Component {
   render() {
     const { currentUsage, job, loading } = this.props;
     const { addressCount, filename } = job;
-
-    const renderRVPriceModal = () => (
-      <Panel className={styles.modalContainer} accent>
-        <div style={{ float: 'right' }}>
-          <Button onClick={this.handleModal(false)} flat>
-            <Close />
-          </Button>
-        </div>
-        <div className={styles.bodyContainer}>
-          <h3>How was this calculated?</h3>
-          <RecipientValidationPriceTable
-            cellProps={{
-              className: styles.rvModalCell,
-            }}
-          />
-        </div>
-      </Panel>
-    );
 
     return (
       <div className={styles.formContainer}>
@@ -79,9 +60,7 @@ export class UploadedListForm extends React.Component {
           </Grid.Column>
         </Grid>
 
-        <Modal open={this.state.isModalOpen} onClose={this.handleModal(false)}>
-          {renderRVPriceModal()}
-        </Modal>
+        {<RVPriceModal open={this.state.isModalOpen} handleOpen={this.handleModal} />}
       </div>
     );
   }
