@@ -116,10 +116,10 @@ exports[`Alert Form Component should render the alert form component correctly 1
                Notify Me
             </label>
             <Expandable
-              defaultOpen={false}
               icon={<EmailIcon />}
               id="emails"
               key="emails"
+              my="300"
               subtitle="Receive notifications through email. One address per line. Up to 10 addresses."
               title="Emails"
             >
@@ -139,10 +139,10 @@ exports[`Alert Form Component should render the alert form component correctly 1
               />
             </Expandable>
             <Expandable
-              defaultOpen={false}
               icon={<SlackIcon />}
               id="slack"
               key="slack"
+              my="300"
               subtitle={
                 <React.Fragment>
                   Integrate this alert with Slack. 
@@ -164,10 +164,10 @@ exports[`Alert Form Component should render the alert form component correctly 1
               />
             </Expandable>
             <Expandable
-              defaultOpen={false}
               icon={<WebhookIcon />}
               id="webhook"
               key="webhook"
+              my="300"
               subtitle={
                 <React.Fragment>
                   Create a webhook for this alert. 
