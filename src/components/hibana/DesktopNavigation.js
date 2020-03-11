@@ -41,10 +41,10 @@ export default function DesktopNavigation({ navItems, location }) {
             </Link>
           </div>
 
-          <nav className={styles.PrimaryNav}>
+          <nav className={styles.PrimaryNav} aria-labelledby="primary-nav-heading">
             {/* Visually hidden headings to help guide screen reader users */}
             <ScreenReaderOnly>
-              <h2>Main Navigation</h2>
+              <h2 id="primary-nav-heading">Main Navigation</h2>
             </ScreenReaderOnly>
 
             <Inline>
@@ -77,11 +77,16 @@ export default function DesktopNavigation({ navItems, location }) {
       {navItems.map(item => {
         if (isActive(item) && item.children) {
           return (
-            <nav className={styles.SecondaryNav} key="secondary-nav" data-id="secondary-navigation">
+            <nav
+              className={styles.SecondaryNav}
+              key="secondary-nav"
+              aria-labelledby="secondary-nav-heading"
+              data-id="secondary-navigation"
+            >
               <NavWrapper>
                 {/* Visually hidden headings to help guide screen reader users */}
                 <ScreenReaderOnly>
-                  <h3>Category Navigation</h3>
+                  <h3 id="secondary-nav-heading">Category Navigation</h3>
                 </ScreenReaderOnly>
 
                 <Inline>
