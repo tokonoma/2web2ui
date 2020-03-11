@@ -51,7 +51,7 @@ export class AlertForm extends Component {
         id={channel}
         subtitle={NOTIFICATION_CHANNEL_DATA[channel].subtitle}
         key={channel}
-        my={10}
+        my="300"
       >
         <Field
           name={channel}
