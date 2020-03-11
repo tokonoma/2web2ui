@@ -23,6 +23,7 @@ export const App = ({ children, bannerOpen }) => {
 
         <main
           role="main"
+          tabIndex="-1"
           id="main-content"
           className={cx(styles.content, bannerOpen && styles.bannerOpen)}
         >
