@@ -85,3 +85,15 @@
 .SupportIcon {
   fill: currentColor;
 }
+
+.UpgradePlanLink {
+  padding-right: spacing(larger);
+  margin-top: rem(2);
+}
+
+.UpgradePlan {
+  color: color(orange, light);
+  &:hover {
+    color: color(orange, dark);
+  }
+}

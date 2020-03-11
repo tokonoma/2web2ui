@@ -28,4 +28,10 @@
 .FloatIcon {
   float: right;
   margin-top: -0.1em;
+  padding-right: spacing(small);
+}
+
+.SecondaryLabel {
+  font-size: font-size(200);
+  color: color(blue, dark);
 }

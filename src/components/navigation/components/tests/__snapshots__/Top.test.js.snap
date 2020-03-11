@@ -3,6 +3,7 @@
 exports[`Top should render close icon when open 1`] = `
 <div
   className="Top"
+  data-id="top-nav"
   onClick={[MockFunction]}
 >
   <IconButton
@@ -36,6 +37,7 @@ exports[`Top should render close icon when open 1`] = `
 exports[`Top should render correctly on desktop 1`] = `
 <div
   className="Top"
+  data-id="top-nav"
 >
   <Link
     className="Logo"
@@ -50,6 +52,21 @@ exports[`Top should render correctly on desktop 1`] = `
   <div
     className="RightSideWrapper"
   >
+    <AccessControl
+      condition={[Function]}
+    >
+      <Link
+        className="UpgradePlanLink"
+        replace={false}
+        to="/account/billing/plan"
+      >
+        <div
+          className="UpgradePlan"
+        >
+          Upgrade Plan
+        </div>
+      </Link>
+    </AccessControl>
     <IconButton
       className="SupportButton"
       data-id="nav-button-help"
@@ -70,6 +87,7 @@ exports[`Top should render correctly on desktop 1`] = `
 exports[`Top should render correctly on mobile 1`] = `
 <div
   className="Top"
+  data-id="top-nav"
 >
   <IconButton
     aria-expanded="false"
