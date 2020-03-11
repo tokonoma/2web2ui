@@ -1,11 +1,11 @@
 import * as inboxPlacement from '../inboxPlacement';
 import { isUserUiOptionSet } from 'src/helpers/conditions/user';
-jest.mock('src/helpers/conditions/user');
-isUserUiOptionSet.mockImplementation(() => () => false);
+jest.mock('src/helpers/conditions/user', () => ({ isUserUiOptionSet: jest.fn(() => () => false) }));
 jest.mock('src/actions/helpers/sparkpostApiRequest', () => jest.fn(a => a));
-const dispatch = jest.fn(a => a);
 
 describe('Action Creator: Inbox Placement', () => {
+  const dispatch = jest.fn(a => a);
+
   it('it makes request to seed', () => {
     const thunk = inboxPlacement.getSeedList();
     thunk(dispatch, jest.fn);
@@ -168,7 +168,7 @@ describe('Action Creator: Inbox Placement', () => {
   });
 
   it('makes request using inbox-placement-ea route when ui option is set', () => {
-    isUserUiOptionSet.mockImplementation(() => () => true);
+    isUserUiOptionSet.mockImplementationOnce(() => () => true);
     const thunk = inboxPlacement.getInboxPlacementMessage(1, 101);
     thunk(dispatch, jest.fn);
     expect(dispatch).toHaveBeenCalledWith({
