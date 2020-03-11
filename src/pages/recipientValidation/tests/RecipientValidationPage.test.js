@@ -1,95 +1,76 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 import { RecipientValidationPage } from '../RecipientValidationPage';
-import ListForm from '../components/ListForm';
-import SingleAddressForm from '../components/SingleAddressForm';
-import JobsTableCollection from '../components/JobsTableCollection';
-import ApiDetails from '../components/ApiDetails';
 import { Launch } from '@sparkpost/matchbox-icons';
 
 describe('Page: Recipient Email Verification', () => {
   let wrapper;
-  let instance;
-  let props;
+  let defaultProps;
 
-  beforeEach(() => {
-    props = {
-      history: {
-        replace: jest.fn(),
-      },
-      getBillingInfo: jest.fn(),
-      billing: {},
-      reset: jest.fn(),
-    };
+  defaultProps = {
+    history: {
+      replace: jest.fn(),
+    },
+    getBillingInfo: jest.fn(),
+    getBillingSubscription: jest.fn(),
+    billing: {},
+    reset: jest.fn(),
+    handleSubmit: jest.fn(),
+  };
 
-    wrapper = shallow(<RecipientValidationPage {...props} />);
-    instance = wrapper.instance();
-  });
+  const subject = props => shallow(<RecipientValidationPage {...defaultProps} {...props} />);
 
   it('should render Recipient Validation page correctly', () => {
-    expect(wrapper.find(ListForm)).toExist();
-    expect(wrapper.find(JobsTableCollection)).toExist();
+    wrapper = subject();
+    expect(wrapper.find('withRouter(Connect(ListForm))')).toExist();
+    expect(wrapper.find('Connect(withJobs(JobsTableCollection))')).toExist();
   });
 
   it('renders single email verification tab correctly when selected', () => {
+    wrapper = subject();
     wrapper.setState({ selectedTab: 1 });
-    expect(wrapper.find(SingleAddressForm)).toExist();
+    expect(wrapper.find('withRouter(Connect(SingleAddressForm))')).toExist();
   });
 
   it('renders Api tab correctly when selected', () => {
+    wrapper = subject();
     wrapper.setState({ selectedTab: 2 });
-    expect(wrapper.find(ApiDetails)).toExist();
+    expect(wrapper.find('ApiIntegrationDocs')).toExist();
   });
 
-  it('getBillingInfo is called when Recipient Validation Page mounts', () => {
+  it('getBillingInfo and getBillingSubscription is called when Recipient Validation Page mounts', () => {
+    wrapper = subject().instance();
     wrapper.setState({ selectedTab: 1 });
-    expect(props.getBillingInfo).toHaveBeenCalled();
+    expect(defaultProps.getBillingInfo).toHaveBeenCalled();
+    expect(defaultProps.getBillingSubscription).toHaveBeenCalled();
   });
 
-  describe('handleTabs', () => {
-    it('changes selected tab correctly', () => {
-      expect(wrapper.state().selectedTab).toEqual(0);
-      instance.handleTabs(1);
-      expect(wrapper.state().selectedTab).toEqual(1);
-    });
+  it('when billingLoading is true ValidateSection is not rendered', () => {
+    const instance = subject({ billingLoading: true });
+    instance.setState({ selectedTab: 1 });
+    expect(instance.find('Connect(ValidateSection)')).not.toExist();
   });
 
-  describe('when isStandAloneRVSet is true', () => {
-    let subject, defaultProps;
-    beforeEach(() => {
-      defaultProps = {
-        history: {
-          replace: jest.fn(),
-        },
-        getBillingInfo: jest.fn(),
-        billing: {},
-        isStandAloneRVSet: true,
-        handleSubmit: jest.fn(),
-        getBillingSubscription: jest.fn(),
-      };
-      subject = props => shallow(<RecipientValidationPage {...defaultProps} {...props} />);
-    });
+  it('renders a API Docs button in Panel when API Integration Tab is selected', () => {
+    const instance = subject({ tab: 2 });
 
-    it('when billingLoading is true ValidateSection is not rendered', () => {
-      const instance = subject({ billingLoading: true });
-      instance.setState({ selectedTab: 1 });
-      expect(instance.find('Connect(ValidateSection)')).not.toExist();
-    });
+    expect(
+      instance
+        .find('Button')
+        .first()
+        .prop('children'),
+    ).toEqual(['API Docs', <Launch className="LaunchIcon" />]);
+  });
 
-    it('renders a API Docs button in Panel when API Integration Tab is selected', () => {
-      const instance = subject({ tab: 2 });
+  it('renders a ValidateSection', () => {
+    const instance = subject({ tab: 2 });
+    expect(instance.find('Connect(ValidateSection)')).toExist();
+  });
 
-      expect(
-        instance
-          .find('Button')
-          .first()
-          .prop('children'),
-      ).toEqual(['API Docs', <Launch className="LaunchIcon" />]);
-    });
-
-    it('renders a ValidateSection', () => {
-      const instance = subject({ tab: 2 });
-      expect(instance.find('Connect(ValidateSection)')).toExist();
-    });
+  it('changes selected tab correctly', () => {
+    wrapper = subject();
+    expect(wrapper.state().selectedTab).toEqual(0);
+    wrapper.instance().handleTabs(1);
+    expect(wrapper.state().selectedTab).toEqual(1);
   });
 });

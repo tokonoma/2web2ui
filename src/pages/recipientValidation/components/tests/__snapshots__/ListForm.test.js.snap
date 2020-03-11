@@ -2,18 +2,16 @@
 
 exports[`ListForm renders correctly 1`] = `
 <Panel.Section>
-  <form>
-    <Field
-      component={[Function]}
-      data-id="recipient-list-dropzone"
-      name="csv"
-      validate={
-        Array [
-          [Function],
-          [Function],
-        ]
-      }
-    />
-  </form>
+  <Field
+    component={[Function]}
+    data-id="recipient-list-dropzone"
+    name="csv"
+    validate={
+      Array [
+        [Function],
+        [Function],
+      ]
+    }
+  />
 </Panel.Section>
 `;
