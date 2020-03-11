@@ -4,6 +4,7 @@ import { act } from 'react-dom/test-utils';
 import FilterSortCollection from '../FilterSortCollection';
 import { Table } from '@sparkpost/matchbox';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { HibanaProvider } from 'src/context/HibanaContext';
 
 describe('FilterSortCollection Component', () => {
   const fruits = ['apple', 'banana', 'cherry'];
@@ -49,7 +50,12 @@ describe('FilterSortCollection Component', () => {
   };
 
   describe('renders', () => {
-    const subject = (props = {}) => shallow(<FilterSortCollection {...props} />);
+    const subject = (props = {}) =>
+      shallow(
+        <HibanaProvider>
+          <FilterSortCollection {...props} />
+        </HibanaProvider>,
+      );
 
     it('renders without props', () => {
       expect(subject()).toMatchSnapshot();
@@ -70,9 +76,11 @@ describe('FilterSortCollection Component', () => {
   describe('sorts', () => {
     const subject = (props = {}) =>
       mount(
-        <Router>
-          <FilterSortCollection {...props} />
-        </Router>,
+        <HibanaProvider>
+          <Router>
+            <FilterSortCollection {...props} />
+          </Router>
+        </HibanaProvider>,
       );
 
     it('sorts default sort column (fruits) values in default descending order', () => {
