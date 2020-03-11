@@ -38,13 +38,14 @@ export function OnboardingPlanPage({
   handleSubmit,
   hasError,
   bundles,
+  clearPromoCode,
 }) {
   useEffect(() => {
     getPlans();
   }, [getPlans]);
 
   useEffect(() => {
-    getBundles();
+    getBundles({ type: 'messaging' });
   }, [getBundles]);
 
   useEffect(() => {

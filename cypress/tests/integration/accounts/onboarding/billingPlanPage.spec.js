@@ -5,6 +5,18 @@ describe('The billing plan page', () => {
       url: '/api/v1/account/countries?filter=billing',
       fixture: 'account/countries/200.get.billing-filter.json',
     });
+    cy.stubRequest({
+      url: '/api/v1/billing/bundles**',
+      fixture: 'billing/bundles/200.get.json',
+      fixtureAlias: 'bundlesGet',
+    });
+
+    cy.stubRequest({
+      url: '/api/v1/billing/plans',
+      fixture: 'billing/plans/200.get.json',
+      fixtureAlias: 'billingPlansGet',
+    });
+
     cy.login({ isStubbed: true });
     cy.visit('/onboarding/plan');
   });
@@ -137,8 +149,6 @@ describe('The billing plan page', () => {
         });
 
         cy.findByText('Apply').click();
-
-        cy.wait('@resourceNotFoundRequest');
 
         cy.queryByText('Resource could not be found');
       });

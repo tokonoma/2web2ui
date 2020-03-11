@@ -25,7 +25,12 @@ describe('ChoosePlan page tests', () => {
     loading: false,
     billing: { countries: [], selectedPromo: {}, promoPending: false },
     plans: [],
-    bundles: [],
+    bundles: [
+      {
+        bundle: 'bundle',
+        messaging: { price: 0 },
+      },
+    ],
     submitting: false,
   };
 
@@ -37,10 +42,10 @@ describe('ChoosePlan page tests', () => {
 
   it('should render correctly', () => {
     expect(wrapper).toMatchSnapshot();
-    expect(instance.props.history.push).not.toHaveBeenCalled();
+    expect(props.history.push).not.toHaveBeenCalled();
   });
 
-  it('should render loading component', () => {
+  it('should render component', () => {
     wrapper.setProps({ loading: true });
     expect(wrapper).toMatchSnapshot();
   });
@@ -108,19 +113,20 @@ describe('ChoosePlan page tests', () => {
       };
       wrapper.setProps({
         billing: { ...props.billing, selectedPromo: { promoCode: 'test-promo-code' } },
+        handleSubmit: jest.fn(fn => fn(values)),
       });
-      await instance.onSubmit(values);
+      await wrapper.simulate('form', 'submit');
       expect(props.verifyPromoCode).toHaveBeenCalledWith({
         promoCode: 'test-promo-code',
         billingId: 'test-id',
         meta: { promoCode: 'test-promo-code', showErrorAlert: false },
       });
-      expect(instance.props.billingCreate).toHaveBeenCalledWith({
+      expect(props.billingCreate).toHaveBeenCalledWith({
         ...values,
         discountId: 'test-discount',
       });
-      expect(instance.props.history.push).toHaveBeenCalledWith('/dashboard');
-      expect(instance.props.showAlert).toHaveBeenCalledWith({
+      expect(props.history.push).toHaveBeenCalledWith('/dashboard');
+      expect(props.showAlert).toHaveBeenCalledWith({
         type: 'success',
         message: 'Added your plan',
       });

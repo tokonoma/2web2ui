@@ -7,9 +7,18 @@ exports[`ChoosePlan page tests should disable submit and plan picker when submit
     <Grid.Column>
       <Panel>
         <_default
+          bundles={
+            Array [
+              Object {
+                "bundle": "bundle",
+                "messaging": Object {
+                  "price": 0,
+                },
+              },
+            ]
+          }
           disabled={true}
           onChange={[Function]}
-          plans={Array []}
           selectedPromo={Object {}}
         />
         <Panel.Section>
@@ -17,7 +26,7 @@ exports[`ChoosePlan page tests should disable submit and plan picker when submit
             handlePromoCode={
               Object {
                 "applyPromoCode": [Function],
-                "clearPromoCode": undefined,
+                "clearPromoCode": [Function],
               }
             }
             key="promocode"
@@ -38,6 +47,7 @@ exports[`ChoosePlan page tests should disable submit and plan picker when submit
               "selectedPromo": Object {},
             }
           }
+          isPlanFree={false}
           submitting={true}
         />
         <Panel.Section>
@@ -57,22 +67,47 @@ exports[`ChoosePlan page tests should disable submit and plan picker when submit
 </form>
 `;
 
-exports[`ChoosePlan page tests should render correctly 1`] = `undefined`;
+exports[`ChoosePlan page tests should render component 1`] = `<Loading />`;
 
-exports[`ChoosePlan page tests should render loading component 1`] = `<Loading />`;
-
-exports[`ChoosePlan page tests should show free bullets when isFree is selected 1`] = `
+exports[`ChoosePlan page tests should render correctly 1`] = `
 <form>
   <CenteredLogo />
   <Grid>
     <Grid.Column>
       <Panel>
         <_default
+          bundles={
+            Array [
+              Object {
+                "bundle": "bundle",
+                "messaging": Object {
+                  "price": 0,
+                },
+              },
+            ]
+          }
           disabled={false}
           onChange={[Function]}
-          plans={Array []}
           selectedPromo={Object {}}
         />
+        <Panel.Section>
+          <PromoCodeNew
+            handlePromoCode={
+              Object {
+                "applyPromoCode": [Function],
+                "clearPromoCode": [Function],
+              }
+            }
+            key="promocode"
+            promoCodeObj={
+              Object {
+                "promoError": undefined,
+                "promoPending": false,
+                "selectedPromo": Object {},
+              }
+            }
+          />
+        </Panel.Section>
         <CreditCardSection
           billing={
             Object {
@@ -81,7 +116,74 @@ exports[`ChoosePlan page tests should show free bullets when isFree is selected 
               "selectedPromo": Object {},
             }
           }
-          isPlanFree={true}
+          isPlanFree={false}
+          submitting={false}
+        />
+        <Panel.Section>
+          <Button
+            disabled={false}
+            fullWidth={true}
+            primary={true}
+            size="large"
+            type="submit"
+          >
+            Get Started
+          </Button>
+        </Panel.Section>
+      </Panel>
+    </Grid.Column>
+  </Grid>
+</form>
+`;
+
+exports[`ChoosePlan page tests should show free bullets when isFree is selected 1`] = `
+<form>
+  <CenteredLogo />
+  <Grid>
+    <Grid.Column>
+      <Panel>
+        <_default
+          bundles={
+            Array [
+              Object {
+                "bundle": "bundle",
+                "messaging": Object {
+                  "price": 0,
+                },
+              },
+            ]
+          }
+          disabled={false}
+          onChange={[Function]}
+          selectedPromo={Object {}}
+        />
+        <Panel.Section>
+          <PromoCodeNew
+            handlePromoCode={
+              Object {
+                "applyPromoCode": [Function],
+                "clearPromoCode": [Function],
+              }
+            }
+            key="promocode"
+            promoCodeObj={
+              Object {
+                "promoError": undefined,
+                "promoPending": false,
+                "selectedPromo": Object {},
+              }
+            }
+          />
+        </Panel.Section>
+        <CreditCardSection
+          billing={
+            Object {
+              "countries": Array [],
+              "promoPending": false,
+              "selectedPromo": Object {},
+            }
+          }
+          isPlanFree={false}
           submitting={false}
         />
         <Panel.Section>
