@@ -1,13 +1,13 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import { UploadedListForm } from '../UploadedListForm';
 
 describe('UploadedListForm', () => {
-  const subject = (props = {}) =>
-    shallow(
+  const subject = (props = {}, method = shallow) =>
+    method(
       <UploadedListForm
         currentUsage={12345}
-        getUsage={() => {}}
+        getUsage={jest.fn()}
         job={{
           filename: 'big-test.csv',
           addressCount: 123,
@@ -23,7 +23,7 @@ describe('UploadedListForm', () => {
 
   it('should call getUsage on mount', () => {
     const getUsage = jest.fn();
-    subject({ getUsage });
+    subject({ getUsage }, mount);
     expect(getUsage).toHaveBeenCalled();
   });
 
