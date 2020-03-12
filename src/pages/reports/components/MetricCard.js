@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Panel, Tooltip } from '@sparkpost/matchbox';
+import { Tooltip } from '@sparkpost/matchbox';
+import { Panel } from 'src/components/matchbox';
 import { InfoOutline } from '@sparkpost/matchbox-icons';
 
 import styles from './MetricCard.module.scss';

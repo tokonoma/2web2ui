@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Grid, Panel } from '@sparkpost/matchbox';
+import { Grid } from '@sparkpost/matchbox';
 
+import { Panel } from 'src/components/matchbox'
 import { PanelLoading } from 'src/components';
 import { Percent } from 'src/components/formatters';
 import { formatDateTime, relativeDateOptionsIndexed } from 'src/helpers/date';

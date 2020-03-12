@@ -10,7 +10,8 @@ import {
   addFilters,
 } from 'src/actions/messageEvents';
 import { selectMessageEventsSearchOptions } from 'src/selectors/messageEvents';
-import { Panel, TextField } from '@sparkpost/matchbox';
+import { TextField } from '@sparkpost/matchbox';
+import { Panel } from 'src/components/matchbox';
 import AdvancedFiltersModal from './AdvancedFiltersModal';
 import ActiveFilters from './ActiveFilters';
 import ShareModal from '../../components/ShareModal';

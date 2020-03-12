@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
-import { Panel, Tooltip } from '@sparkpost/matchbox';
+import { Tooltip } from '@sparkpost/matchbox';
+import { Panel } from 'src/components/matchbox';
 import { LabelledValue, CopyField } from 'src/components';
 
 import _ from 'lodash';

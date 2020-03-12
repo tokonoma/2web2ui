@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { list as getSubaccounts } from 'src/actions/subaccounts';
-import { Panel, Grid } from '@sparkpost/matchbox';
+import { Grid } from '@sparkpost/matchbox';
+import { Panel } from 'src/components/matchbox';;
 import Page from '../components/SignalsPage';
 import SpamTrapOverview from '../containers/SpamTrapOverviewContainer';
 import FacetFilter from '../components/filters/FacetFilter';

@@ -10,9 +10,9 @@ import {
 } from 'src/actions/reportOptions';
 import ShareModal from './ShareModal';
 import { parseSearch } from 'src/helpers/reports';
-import { Grid, Panel } from '@sparkpost/matchbox';
+import { Grid } from '@sparkpost/matchbox';
 import Typeahead from './Typeahead';
-import { Tag } from 'src/components/matchbox';
+import { Panel, Tag } from 'src/components/matchbox';
 import DatePicker from 'src/components/datePicker/DatePicker';
 import typeaheadCacheSelector from 'src/selectors/reportFilterTypeaheadCache';
 import CustomReports from './CustomReports';

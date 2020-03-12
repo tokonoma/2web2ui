@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { update } from 'src/actions/sendingDomains';
 
-import { Panel, Tooltip } from '@sparkpost/matchbox';
+import { Tooltip } from '@sparkpost/matchbox';
+import { Panel } from 'src/components/matchbox';
 import { Banner } from 'src/components/matchbox';
 import { Help } from '@sparkpost/matchbox-icons';
 import ToggleBlock from 'src/components/toggleBlock/ToggleBlock';
