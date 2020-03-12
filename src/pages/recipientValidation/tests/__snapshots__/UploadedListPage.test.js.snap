@@ -81,7 +81,7 @@ exports[`UploadedListPage renders with list progress 1`] = `
         </div>
       </Panel.Section>
       <Panel.Section>
-        <Connect(WithContext(ListProgress))
+        <Component
           job={
             Object {
               "jobId": "A1C1_D1C1",

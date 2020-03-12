@@ -1,10 +1,19 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import { UploadedListPage } from '../UploadedListPage';
-
+jest.mock('src/components/pageLink/PageLink', () => {
+  return () => {
+    return [];
+  };
+});
+jest.mock('src/pages/recipientValidation/components/ListProgress', () => {
+  return () => {
+    return [];
+  };
+});
 describe('UploadedListPage', () => {
-  const subject = (props = {}) =>
-    shallow(
+  const subject = (props = {}, method = shallow) =>
+    method(
       <UploadedListPage
         getJobStatus={() => {}}
         getBillingInfo={() => {}}
@@ -29,7 +38,7 @@ describe('UploadedListPage', () => {
 
   it('calls getJobStatus on mount', () => {
     const getJobStatus = jest.fn();
-    subject({ getJobStatus });
+    subject({ getJobStatus }, mount);
     expect(getJobStatus).toHaveBeenCalledWith('A1C1_D1C1');
   });
 

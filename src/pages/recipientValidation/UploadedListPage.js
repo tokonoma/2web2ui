@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Page, Panel } from '@sparkpost/matchbox';
 import { connect } from 'react-redux';
 import { formatDate, formatTime } from 'src/helpers/date';
@@ -27,35 +27,51 @@ import _ from 'lodash';
 
 const FORMNAME = FORMS.RV_ADDPAYMENTFORM_UPLOADLISTPAGE;
 
-export class UploadedListPage extends Component {
-  state = {
-    useSavedCC: Boolean(this.props.billing.credit_card),
-  };
-  componentDidMount() {
-    const { getJobStatus, listId, getBillingInfo, getBillingSubscription } = this.props;
+export function UploadedListPage(props) {
+  const {
+    getJobStatus,
+    listId,
+    getBillingInfo,
+    getBillingSubscription,
+    billing,
+    job,
+    jobLoadingStatus,
+    billing: { credit_card },
+    billingLoading,
+    valid,
+    submitting,
+    isRVonSubscription,
+    addRVtoSubscriptionloading,
+    addRVtoSubscriptionerror,
+    triggerJob,
+  } = props;
+
+  const [useSavedCC, setUseSavedCC] = useState(Boolean(billing.credit_card));
+
+  useEffect(() => {
     getJobStatus(listId);
+  }, [getJobStatus, listId]);
+  useEffect(() => {
     getBillingSubscription();
+  }, [getBillingSubscription]);
+  useEffect(() => {
     getBillingInfo();
-  }
+  }, [getBillingInfo]);
+  useEffect(() => {
+    setUseSavedCC(Boolean(billing.credit_card));
+  }, [billing]);
 
-  componentDidUpdate(prevProps) {
-    if (this.props.billing !== prevProps.billing)
-      this.setState({ useSavedCC: Boolean(this.props.billing.credit_card) });
-  }
+  const handleToggleCC = val => setUseSavedCC(!val);
 
-  handleToggleCC = val => this.setState({ useSavedCC: !val });
-
-  handleSubmit = () => {
-    const { listId, triggerJob } = this.props;
+  const handleSubmit = () => {
     triggerJob(listId);
   };
 
-  onSubmit = formValues => {
-    const { addRVtoSubscription, isRVonSubscription, isManuallyBilled } = this.props;
-    const { useSavedCC } = this.state;
+  const onSubmit = formValues => {
+    const { addRVtoSubscription, isRVonSubscription, isManuallyBilled } = props;
 
-    if (isRVonSubscription && (this.state.useSavedCC || isManuallyBilled)) {
-      this.handleSubmit();
+    if (isRVonSubscription && (useSavedCC || isManuallyBilled)) {
+      handleSubmit();
       return;
     }
 
@@ -67,83 +83,68 @@ export class UploadedListPage extends Component {
       values,
       updateCreditCard: !useSavedCC,
       isRVonSubscription: isRVonSubscription,
-    }).then(() => this.handleSubmit());
+    }).then(() => handleSubmit());
   };
 
-  render() {
-    const {
-      job,
-      jobLoadingStatus,
-      listId,
-      billing: { credit_card },
-      billingLoading,
-      valid,
-      submitting,
-      isRVonSubscription,
-      addRVtoSubscriptionloading,
-      addRVtoSubscriptionerror,
-    } = this.props;
-
-    if (!job && jobLoadingStatus === 'fail') {
-      return (
-        <RedirectAndAlert
-          alert={{
-            message: `Unable to find list ${listId}`,
-            type: 'error',
-          }}
-          to="/recipient-validation"
-        />
-      );
-    }
-
-    if (!job) {
-      return <Loading />;
-    }
-
-    if (addRVtoSubscriptionloading && !addRVtoSubscriptionerror) return <Loading />;
-
+  if (!job && jobLoadingStatus === 'fail') {
     return (
-      <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
-        {' '}
-        <Page
-          title="Recipient Validation"
-          breadcrumbAction={{ content: 'Back', component: PageLink, to: '/recipient-validation' }}
-        >
-          <Panel>
-            <Panel.Section>
-              <div className={styles.dateHeader}>
-                <strong>{formatDate(job.updatedAt)}</strong>
-                <span> at </span>
-                <strong>{formatTime(job.updatedAt)}</strong>
-              </div>
-            </Panel.Section>
-
-            <Panel.Section>
-              {job.status === 'queued_for_batch' && (
-                <UploadedListForm job={job} onSubmit={this.handleSubmit} />
-              )}
-
-              {job.status === 'error' && <ListError />}
-
-              {job.status !== 'queued_for_batch' && job.status !== 'error' && (
-                <ListProgress job={job} />
-              )}
-            </Panel.Section>
-          </Panel>
-          {job.status === 'queued_for_batch' && !billingLoading && (
-            <ValidateSection
-              credit_card={credit_card}
-              formname={FORMNAME}
-              submitDisabled={!valid || submitting}
-              handleCardToggle={this.handleToggleCC}
-              defaultToggleState={!this.state.useSavedCC}
-              isProductOnSubscription={isRVonSubscription}
-            />
-          )}
-        </Page>
-      </form>
+      <RedirectAndAlert
+        alert={{
+          message: `Unable to find list ${listId}`,
+          type: 'error',
+        }}
+        to="/recipient-validation"
+      />
     );
   }
+
+  if (!job) {
+    return <Loading />;
+  }
+
+  if (addRVtoSubscriptionloading && !addRVtoSubscriptionerror) return <Loading />;
+
+  return (
+    <form onSubmit={props.handleSubmit(onSubmit)}>
+      {' '}
+      <Page
+        title="Recipient Validation"
+        breadcrumbAction={{ content: 'Back', component: PageLink, to: '/recipient-validation' }}
+      >
+        <Panel>
+          <Panel.Section>
+            <div className={styles.dateHeader}>
+              <strong>{formatDate(job.updatedAt)}</strong>
+              <span> at </span>
+              <strong>{formatTime(job.updatedAt)}</strong>
+            </div>
+          </Panel.Section>
+
+          <Panel.Section>
+            {job.status === 'queued_for_batch' && (
+              <UploadedListForm job={job} onSubmit={handleSubmit} />
+            )}
+
+            {job.status === 'error' && <ListError />}
+
+            {job.status !== 'queued_for_batch' && job.status !== 'error' && (
+              <ListProgress job={job} />
+            )}
+          </Panel.Section>
+        </Panel>
+        {job.status === 'queued_for_batch' && !billingLoading && (
+          <ValidateSection
+            credit_card={credit_card}
+            formname={FORMNAME}
+            submitDisabled={!valid || submitting}
+            handleCardToggle={handleToggleCC}
+            defaultToggleState={!useSavedCC}
+            isProductOnSubscription={isRVonSubscription}
+          />
+        )}
+      </Page>
+    </form>
+  );
 }
 
 const mapStateToProps = (state, props) => {
