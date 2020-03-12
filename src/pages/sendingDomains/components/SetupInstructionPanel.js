@@ -1,5 +1,5 @@
 import React from 'react';
-import { Panel } from '@sparkpost/matchbox';
+import { Panel } from 'src/components/matchbox'
 import { VerifiedIcon, ErrorIcon } from './Icons';
 import styles from './SetupInstructionPanel.module.scss';
 

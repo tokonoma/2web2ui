@@ -1,5 +1,5 @@
 import React from 'react';
-import { Panel } from '@sparkpost/matchbox';
+import { Panel } from 'src/components/matchbox'
 import GuideBreadCrumbs from './GuideBreadCrumbs';
 import { Card, CardTitle, CardContent, CardActions } from 'src/components';
 import { Send } from '@sparkpost/matchbox-icons';

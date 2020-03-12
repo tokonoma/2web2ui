@@ -1,7 +1,7 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 import SettingsView from '../SettingsView';
-import { Panel } from '@sparkpost/matchbox';
+import { Panel } from 'src/components/matchbox'
 
 describe('Settings View Component', () => {
   let wrapper;

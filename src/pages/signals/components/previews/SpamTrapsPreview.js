@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { getSpamHits } from 'src/actions/signals';
 import { selectSpamHitsDetails } from 'src/selectors/signals';
-import { Panel } from '@sparkpost/matchbox';
+import { Panel } from 'src/components/matchbox'
 import { PanelLoading, PageLink } from 'src/components';
 import Callout from 'src/components/callout';
 import { SPAM_TRAP_INFO } from '../../constants/info';

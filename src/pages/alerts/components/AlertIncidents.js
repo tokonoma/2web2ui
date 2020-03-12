@@ -1,7 +1,7 @@
 import React from 'react';
-import { Panel, Table } from '@sparkpost/matchbox';
+import { Table } from '@sparkpost/matchbox';
 import { TableCollection, Empty } from 'src/components';
-import { Tag } from 'src/components/matchbox';
+import { Panel, Tag } from 'src/components/matchbox';
 import { FORMATS } from 'src/constants';
 import { formatDateTime } from 'src/helpers/date';
 import { METRICS, FILTERS_FRIENDLY_NAMES, SOURCE_FRIENDLY_NAMES } from '../constants/formConstants';

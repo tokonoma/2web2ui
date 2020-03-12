@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
-import { Panel } from '@sparkpost/matchbox';
+import { Panel } from 'src/components/matchbox';
 import { RadioGroup, SubaccountTypeaheadWrapper } from 'src/components';
 import ToggleBlock from 'src/components/toggleBlock/ToggleBlock';
 import { required } from 'src/helpers/validation';

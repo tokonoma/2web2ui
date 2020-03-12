@@ -1,7 +1,7 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 import { StatusPanel } from '../StatusPanel';
-import { Panel } from '@sparkpost/matchbox';
+import { Panel } from 'src/components/matchbox';
 
 describe('Status Panel Component', () => {
   let wrapper;

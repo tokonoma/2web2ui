@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { Panel } from '@sparkpost/matchbox';
+import { Panel } from 'src/components/matchbox';
 import { LabelledValue } from 'src/components';
 import { formatDateTime } from 'src/helpers/date';
 

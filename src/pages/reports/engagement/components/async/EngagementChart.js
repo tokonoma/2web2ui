@@ -1,6 +1,6 @@
 import React from 'react';
 import { Bar, BarChart, CartesianGrid, LabelList, ReferenceArea, ResponsiveContainer, XAxis, YAxis } from 'recharts';
-import { Panel } from '@sparkpost/matchbox';
+import { Panel } from 'src/components/matchbox'
 
 import { Empty, PanelLoading } from 'src/components';
 import { formatNumber, formatPercent } from 'src/helpers/units';

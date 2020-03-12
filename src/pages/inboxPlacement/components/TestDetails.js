@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import { format } from 'date-fns';
-import { Grid, Panel, TextField, Label, ScreenReaderOnly } from '@sparkpost/matchbox';
-import { Select } from 'src/components/matchbox';
+import { Grid, TextField, Label, ScreenReaderOnly } from '@sparkpost/matchbox';
+import { Panel, Select } from 'src/components/matchbox';
 import _ from 'lodash';
 
 import FolderPlacementBarChart from './FolderPlacementBarChart';

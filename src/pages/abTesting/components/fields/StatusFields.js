@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { Field } from 'redux-form';
-import { Panel } from '@sparkpost/matchbox';
+import { Panel } from 'src/components/matchbox';
 import { AccessTime } from '@sparkpost/matchbox-icons';
 import { TextFieldWrapper, DatePickerWrapper } from 'src/components/reduxFormWrappers';
 import { required, maxLength, minLength, abTestDuration, startTimeBeforeEndTime } from 'src/helpers/validation';

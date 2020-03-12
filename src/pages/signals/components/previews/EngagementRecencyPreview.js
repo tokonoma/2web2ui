@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { getEngagementRecency } from 'src/actions/signals';
 import { selectEngagementRecencyDetails } from 'src/selectors/signals';
-import { Panel } from '@sparkpost/matchbox';
+import { Panel } from 'src/components/matchbox'
 import { PanelLoading, PageLink } from 'src/components';
 import Callout from 'src/components/callout';
 import { ENGAGEMENT_RECENCY_INFO } from '../../constants/info';

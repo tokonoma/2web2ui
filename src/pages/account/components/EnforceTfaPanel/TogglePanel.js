@@ -1,5 +1,6 @@
 import React from 'react';
-import { Grid, Panel, Toggle } from '@sparkpost/matchbox';
+import { Grid, Toggle } from '@sparkpost/matchbox';
+import { Panel } from 'src/components/matchbox';
 import LabelledValue from 'src/components/labelledValue/LabelledValue';
 
 export const TogglePanel = ({ readOnly, tfaRequired, toggleTfaRequired }) => {

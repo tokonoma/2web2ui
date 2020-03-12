@@ -2,8 +2,7 @@ import _ from 'lodash';
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Field, formValueSelector, reduxForm } from 'redux-form';
-import { Panel } from '@sparkpost/matchbox';
-import { Button } from 'src/components/matchbox';
+import { Button, Panel } from 'src/components/matchbox';
 
 import * as supportActions from 'src/actions/support';
 import { PageLink, SelectWrapper, TextFieldWrapper } from 'src/components';

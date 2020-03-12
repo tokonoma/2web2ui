@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Panel } from '@sparkpost/matchbox';
+import { Panel } from 'src/components/matchbox';
 import { Loading } from 'src/components/loading/Loading';
 import styles from './PanelLoading.module.scss';
 

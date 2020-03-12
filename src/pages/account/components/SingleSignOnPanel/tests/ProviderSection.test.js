@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import ProviderForm from '../ProviderForm';
 import { ProviderSection } from '../ProviderSection';
-import { Panel } from '@sparkpost/matchbox';
+import { Panel } from 'src/components/matchbox';
 
 describe('ProviderSection', () => {
   function subject(props) {

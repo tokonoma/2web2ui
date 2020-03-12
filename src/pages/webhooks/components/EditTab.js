@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { getWebhook, getEventDocs, updateWebhook } from 'src/actions/webhooks';
 import { showAlert } from 'src/actions/globalAlert';
-import { Panel } from '@sparkpost/matchbox';
+import { Panel } from 'src/components/matchbox'
 import { PanelLoading } from 'src/components';
 import WebhookForm from './WebhookForm';
 import resolveAuthUpdates from '../helpers/resolveAuthUpdates';

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { Panel } from '@sparkpost/matchbox';
+import { Panel } from 'src/components/matchbox'
 import PanelLoading from 'src/components/panelLoading/PanelLoading';
 
 import { getSubaccount, editSubaccount } from 'src/actions/subaccounts';

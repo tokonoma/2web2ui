@@ -3,7 +3,7 @@ import React, { useState, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { getCaretProps, getDoD } from 'src/helpers/signals';
 import { selectCurrentHealthScoreDashboard } from 'src/selectors/signals';
-import { Panel } from '@sparkpost/matchbox';
+import { Panel } from 'src/components/matchbox'
 import BarChart from '../../../components/charts/barchart/BarChart';
 import TooltipMetric from 'src/components/charts/TooltipMetric';
 import { PanelLoading } from 'src/components';

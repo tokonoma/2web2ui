@@ -1,5 +1,6 @@
 import React from 'react';
-import { Modal, Table, Panel } from '@sparkpost/matchbox';
+import { Modal, Table } from '@sparkpost/matchbox';
+import { Panel } from 'src/components/matchbox';
 import { FEATURE_COMPARISON, PLANS } from './../constants';
 import _ from 'lodash';
 import styles from './FeatureComparisonModal.module.scss';

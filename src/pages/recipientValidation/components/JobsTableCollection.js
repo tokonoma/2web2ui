@@ -1,5 +1,5 @@
 import React from 'react';
-import { Panel } from '@sparkpost/matchbox';
+import { Panel } from 'src/components/matchbox'
 import TableCollection from 'src/components/collection/TableCollection';
 import { formatDateTime } from 'src/helpers/date';
 import withJobs from '../containers/withJobs';

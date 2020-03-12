@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { reduxForm, Field, formValueSelector } from 'redux-form';
-import { Panel, UnstyledLink, Grid } from '@sparkpost/matchbox';
-import { Button } from 'src/components/matchbox';
+import { UnstyledLink, Grid } from '@sparkpost/matchbox';
+import { Button, Panel } from 'src/components/matchbox';
 import { TextFieldWrapper } from 'src/components';
 import {
   TemplateTypeaheadWrapper,

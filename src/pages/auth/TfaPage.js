@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Panel } from '@sparkpost/matchbox';
+import { Panel } from 'src/components/matchbox'
 import { CenteredLogo } from 'src/components';
 import TfaForm from './components/TfaForm';
 import RedirectBeforeLogin from './components/RedirectBeforeLogin';

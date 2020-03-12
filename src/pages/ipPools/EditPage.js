@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { Page, Panel, UnstyledLink } from '@sparkpost/matchbox';
+import { Page, UnstyledLink } from '@sparkpost/matchbox';
+import { Panel } from 'src/components/matchbox';
 import { ApiErrorBanner, DeleteModal, Loading } from 'src/components';
 import PoolForm from './components/PoolForm';
 import IpList from './components/IpList';

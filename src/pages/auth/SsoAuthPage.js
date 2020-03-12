@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import qs from 'query-string';
-import { Panel } from '@sparkpost/matchbox';
+import { Panel } from 'src/components/matchbox';
 import { ssoCheck } from 'src/actions/auth';
 import { PageLink, CenteredLogo } from 'src/components';
 

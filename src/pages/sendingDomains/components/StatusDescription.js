@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 
-import { Panel } from '@sparkpost/matchbox';
+import { Panel } from 'src/components/matchbox'
 
 import { Subaccount } from 'src/components';
 import { LabelledValue, ReadyFor, StatusTooltipHeader } from 'src/components';
