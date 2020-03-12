@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { reduxForm, Field } from 'redux-form';
-import { Panel } from '@sparkpost/matchbox';
-import { Button } from 'src/components/matchbox';
+import { Button, Panel } from 'src/components/matchbox';
 import { TextFieldWrapper } from 'src/components';
 import { required, domain } from 'src/helpers/validation';
 import { SubaccountTypeaheadWrapper } from 'src/components/reduxFormWrappers';

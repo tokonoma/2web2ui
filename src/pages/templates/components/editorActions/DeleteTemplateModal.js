@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Modal, Panel } from '@sparkpost/matchbox';
-import { Button } from 'src/components/matchbox';
+import { Modal } from '@sparkpost/matchbox';
+import { Button, Panel } from 'src/components/matchbox';
 import ButtonWrapper from 'src/components/buttonWrapper';
 import PanelLoading from 'src/components/panelLoading';
 import { RedirectAndAlert } from 'src/components/globalAlert';

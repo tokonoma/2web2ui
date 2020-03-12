@@ -1,7 +1,7 @@
 /* eslint max-lines: ["error", 200] */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Panel, Grid } from '@sparkpost/matchbox';
+import { Grid } from '@sparkpost/matchbox';
 import { Refresh } from '@sparkpost/matchbox-icons';
 import {
   listTrackingDomains,
@@ -10,7 +10,7 @@ import {
   verifyTrackingDomain,
 } from 'src/actions/trackingDomains';
 import { Subaccount } from 'src/components';
-import { Button, Tag } from 'src/components/matchbox';
+import { Button, Panel, Tag } from 'src/components/matchbox';
 import { DeleteModal, ConfirmationModal } from 'src/components/modals';
 import { DomainStatusTag } from 'src/components/tags';
 import styles from './TrackingDomainRow.module.scss';

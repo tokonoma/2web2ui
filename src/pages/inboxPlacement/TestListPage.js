@@ -1,7 +1,8 @@
 import React, { useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
-import { Page, Panel, Table, Tooltip } from '@sparkpost/matchbox';
+import { Page, Table, Tooltip } from '@sparkpost/matchbox';
+import { Panel } from 'src/components/matchbox';
 import { Schedule } from '@sparkpost/matchbox-icons';
 import { ApiErrorBanner, Loading, PageLink } from 'src/components';
 import formatScheduleLine from './helpers/formatScheduleLine';
