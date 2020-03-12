@@ -1,5 +1,5 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 import SliderFieldWrapper from '../SliderFieldWrapper';
 import { HibanaProvider } from 'src/context/HibanaContext';
 
@@ -50,7 +50,7 @@ describe('SliderFieldWrapper', () => {
   });
 
   it('rerenders when value is updated', () => {
-    const wrapper = subject({ input: { value: 45 } });
+    const wrapper = shallow(<SliderFieldWrapper input={{ value: 45 }} />);
 
     expect(wrapper.find('Slider')).toHaveValue(45);
     expect(wrapper.find('TextField')).toHaveValue(45);
