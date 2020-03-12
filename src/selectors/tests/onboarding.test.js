@@ -2,29 +2,28 @@ import { choosePlanMSTP } from '../onboarding';
 import { changePlanInitialValues } from 'src/selectors/accountBillingForms';
 
 jest.mock('redux-form', () => ({
-  formValueSelector: () => () => 'selected-plan-redux-form-value'
+  formValueSelector: () => () => 'selected-plan-redux-form-value',
 }));
 
 jest.mock('src/selectors/accountBillingForms', () => ({
-  changePlanInitialValues: jest.fn(() => 'change-plan-initial-values')
+  changePlanInitialValues: jest.fn(() => 'change-plan-initial-values'),
 }));
 
 jest.mock('src/selectors/accountBillingInfo', () => ({
-  selectTieredVisiblePlans: jest.fn(() => ({ 'default': []}))
+  selectAvailableBundles: jest.fn(() => []),
 }));
 
 describe('choosePlanMSTP', () => {
-
   let state;
   let props;
 
   beforeEach(() => {
     state = {
       account: {},
-      billing: {}
+      billing: {},
     };
     props = {
-      location: {}
+      location: {},
     };
   });
 
@@ -50,10 +49,9 @@ describe('choosePlanMSTP', () => {
 
   it('should pass on a plan code from location state', () => {
     props.location.state = {
-      plan: 'passed-plan'
+      plan: 'passed-plan',
     };
     choosePlanMSTP()(state, props);
     expect(changePlanInitialValues).toHaveBeenCalledWith(state, { planCode: 'passed-plan' });
   });
-
 });

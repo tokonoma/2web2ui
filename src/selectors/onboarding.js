@@ -1,6 +1,6 @@
 import { formValueSelector } from 'redux-form';
 import { createStructuredSelector } from 'reselect';
-import { selectTieredVisiblePlans, selectAvailableBundles } from 'src/selectors/accountBillingInfo';
+import { selectAvailableBundles } from 'src/selectors/accountBillingInfo';
 import { changePlanInitialValues } from 'src/selectors/accountBillingForms';
 
 const getChoosePlanInitialValues = (state, props) => {
@@ -22,7 +22,6 @@ export const choosePlanMSTP = formName =>
       ),
     bundlesLoading: state => state.billing.bundlesLoading,
     billing: state => state.billing,
-    plans: state => selectTieredVisiblePlans(state),
     bundles: state => selectAvailableBundles(state),
     initialValues: getChoosePlanInitialValues,
     selectedPlan: state => formValueSelector(formName)(state, 'planpicker'),
