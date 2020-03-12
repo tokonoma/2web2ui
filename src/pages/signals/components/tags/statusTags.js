@@ -8,7 +8,7 @@ const friendlyErrorTypeMap = {
   system: 'System error',
   decompress: 'Decompression error',
   duplicate_batch: 'Duplicate batch',
-  empty_batch: 'Empty batch'
+  empty_batch: 'Empty batch',
 };
 const Status = ({ status, error }) => {
   const isError = status !== 'success';

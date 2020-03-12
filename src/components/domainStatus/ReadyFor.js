@@ -12,23 +12,23 @@ const ReadyFor = ({ bounce, dkim, sending, bounceDefault, subaccount }) => {
   }
 
   if (bounce) {
-    bounceMarkup = bounceDefault
-      ? <Tag color='orange'>Bounce ({subaccount ? 'Subaccount ' : '' }Default)</Tag>
-      : <Tag>Bounce</Tag>;
+    bounceMarkup = bounceDefault ? (
+      <Tag color="orange">{`Bounce (${subaccount ? 'Subaccount ' : ''}Default`})</Tag>
+    ) : (
+      <Tag>Bounce</Tag>
+    );
   }
 
-  const sendingMarkup = sending
-    ? <Tag>Sending</Tag>
-    : null;
+  const sendingMarkup = sending ? <Tag>Sending</Tag> : null;
 
-  const dkimMarkup = dkim
-    ? <Tag>DKIM Signing</Tag>
-    : null;
+  const dkimMarkup = dkim ? <Tag>DKIM Signing</Tag> : null;
 
   return (
     <span className={styles.ReadyFor}>
       <small>Ready For:</small>
-      {sendingMarkup}{bounceMarkup}{dkimMarkup}
+      {sendingMarkup}
+      {bounceMarkup}
+      {dkimMarkup}
     </span>
   );
 };
@@ -37,7 +37,7 @@ ReadyFor.propTypes = {
   bounce: PropTypes.bool,
   sending: PropTypes.bool,
   dkim: PropTypes.bool,
-  bounceDefault: PropTypes.bool
+  bounceDefault: PropTypes.bool,
 };
 
 export default ReadyFor;

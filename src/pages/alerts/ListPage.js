@@ -126,8 +126,9 @@ export class ListPage extends Component {
           title="Are you sure you want to delete this alert?"
           content={
             <p>
-              The alert "<strong>{alertToDelete.name}</strong>" will be permanently removed. This
-              cannot be undone.
+              {'The alert "'}
+              <strong>{alertToDelete.name}</strong>
+              {'" will be permanently removed. This cannot be undone.'}
             </p>
           }
           onDelete={this.handleDelete}

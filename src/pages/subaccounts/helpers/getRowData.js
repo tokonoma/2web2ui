@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 const statusTagColors = {
   active: null,
   suspended: 'yellow',
-  terminated: 'red'
+  terminated: 'red',
 };
 
 /*
@@ -15,7 +15,7 @@ const statusTagColors = {
 const getRowData = ({ status, id, name }) => [
   <Link to={`/account/subaccounts/${id}`}>{name}</Link>,
   <p>{id}</p>,
-  <Tag color={statusTagColors[status]}>{snakeToFriendly(status)}</Tag>
+  <Tag color={statusTagColors[status]}>{snakeToFriendly(status)}</Tag>,
 ];
 
 export default getRowData;
