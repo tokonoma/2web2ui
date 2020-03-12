@@ -1,6 +1,6 @@
 import React from 'react';
 import { RadioButtonUnchecked, CheckCircleOutline } from '@sparkpost/matchbox-icons';
-import { Button } from '@sparkpost/matchbox';
+import { Button } from 'src/components/matchbox';
 import styles from './GuideListItem.module.scss';
 export const GuideListItem = ({
   itemCompleted,

@@ -1,5 +1,6 @@
 import React from 'react';
-import { Panel, Button } from '@sparkpost/matchbox';
+import { Panel } from '@sparkpost/matchbox';
+import { Button } from 'src/components/matchbox';
 import config from 'src/config';
 import { getPlanPrice } from 'src/helpers/billing';
 import PlanPrice from 'src/components/billing/PlanPrice';

@@ -1,6 +1,6 @@
 import React from 'react';
 import classnames from 'classnames';
-import { Button } from '@sparkpost/matchbox';
+import { Button } from 'src/components/matchbox';
 import styles from './SummaryTable.module.scss';
 
 const SIZES = [10, 25, 50, 100];

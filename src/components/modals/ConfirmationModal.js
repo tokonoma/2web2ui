@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Panel, Button } from '@sparkpost/matchbox';
+import { Panel } from '@sparkpost/matchbox';
+import { Button } from 'src/components/matchbox';
 import Modal from './Modal';
 import styles from './ConfirmationModal.module.scss';
 import { Loading } from 'src/components/loading/Loading';

@@ -6,7 +6,8 @@ import { TextFieldWrapper } from 'src/components';
 import { Error } from 'src/components/matchbox';
 import { verifyAndLogin } from 'src/actions/tfa';
 
-import { Button, UnstyledLink } from '@sparkpost/matchbox';
+import { UnstyledLink } from '@sparkpost/matchbox';
+import { Button } from 'src/components/matchbox';
 import { LINKS } from 'src/constants';
 import styles from './TfaForm.module.scss';
 

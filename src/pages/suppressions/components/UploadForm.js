@@ -2,7 +2,8 @@ import React, { Component, Fragment } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
-import { Button, Panel } from '@sparkpost/matchbox';
+import { Panel } from '@sparkpost/matchbox';
+import { Button } from 'src/components/matchbox';
 
 import { showAlert } from 'src/actions/globalAlert';
 import { uploadSuppressions } from 'src/actions/suppressions';

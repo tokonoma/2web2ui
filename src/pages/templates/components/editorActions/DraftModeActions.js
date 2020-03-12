@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Button, Popover, ScreenReaderOnly } from '@sparkpost/matchbox';
+import {  Popover, ScreenReaderOnly } from '@sparkpost/matchbox';
+import { Button } from 'src/components/matchbox';
 import { ArrowDropDown } from '@sparkpost/matchbox-icons';
 import SaveAndPublish from './SaveAndPublish';
 import SaveAndPublishConfirmationModal from './SaveAndPublishConfirmationModal';

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
-import { Button } from '@sparkpost/matchbox';
+import { Button } from 'src/components/matchbox';
 import { required } from 'src/helpers/validation';
 
 import { TextFieldWrapper } from 'src/components';

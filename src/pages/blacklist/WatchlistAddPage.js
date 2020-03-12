@@ -2,7 +2,8 @@ import React, { useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { Page, Panel, TextField, Button } from '@sparkpost/matchbox';
+import { Page, Panel, TextField } from '@sparkpost/matchbox';
+import { Button } from 'src/components/matchbox';
 
 import { showAlert } from 'src/actions/globalAlert';
 import { watchlistAdd } from 'src/actions/blacklist';

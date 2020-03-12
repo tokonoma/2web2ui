@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import Modal from 'src/components/modals/Modal';
 import styles from './TfaModals.module.scss';
-import { Panel, Button, TextField, Grid } from '@sparkpost/matchbox';
+import { Panel,  TextField, Grid } from '@sparkpost/matchbox';
+import { Button } from 'src/components/matchbox';
 
 export default class DisableTfaModal extends Component {
 

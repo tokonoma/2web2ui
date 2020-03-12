@@ -1,6 +1,7 @@
 import React from 'react';
 import { Field } from 'redux-form';
-import { Panel, Button } from '@sparkpost/matchbox';
+import { Panel } from '@sparkpost/matchbox';
+import { Button } from 'src/components/matchbox';
 import PageLink from 'src/components/pageLink/PageLink';
 import LabelledValue from 'src/components/labelledValue/LabelledValue';
 import { CheckboxWrapper } from 'src/components/reduxFormWrappers';

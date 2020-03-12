@@ -1,7 +1,8 @@
 /* eslint-disable max-lines */
 import React from 'react';
 import { Field } from 'redux-form';
-import { Button, Panel } from '@sparkpost/matchbox';
+import { Panel } from '@sparkpost/matchbox';
+import { Button } from 'src/components/matchbox';
 import ToggleBlock from 'src/components/toggleBlock/ToggleBlock';
 import SubaccountSection from 'src/components/subaccountSection';
 import { TextFieldWrapper } from 'src/components';

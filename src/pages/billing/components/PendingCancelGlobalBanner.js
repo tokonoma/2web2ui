@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { formatDate } from 'src/helpers/date';
-import { Button } from '@sparkpost/matchbox';
+import { Button } from 'src/components/matchbox';
 import { Close, AccessTime } from '@sparkpost/matchbox-icons';
 import styles from './PendingCancelGlobalBanner.module.scss';
 import { fetch as fetchAccount, renewAccount } from 'src/actions/account';

@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Panel, Button, TextField, Grid } from '@sparkpost/matchbox';
+import { Panel,  TextField, Grid } from '@sparkpost/matchbox';
+import { Button } from 'src/components/matchbox';
 import { VpnKey } from '@sparkpost/matchbox-icons';
 import { QRCode } from 'react-qr-svg';
 import PanelLoading from 'src/components/panelLoading/PanelLoading';

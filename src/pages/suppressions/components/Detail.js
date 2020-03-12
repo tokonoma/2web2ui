@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
-import { Panel, Button } from '@sparkpost/matchbox';
+import { Panel } from '@sparkpost/matchbox';
+import { Button } from 'src/components/matchbox';
 import { Modal, LabelledValue, CopyField, LongTextContainer } from 'src/components';
 import { formatDateTime } from 'src/helpers/date';
 import { formatSubaccountDisplay } from '../helpers';

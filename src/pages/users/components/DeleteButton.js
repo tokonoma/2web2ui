@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from '@sparkpost/matchbox';
+import { Button } from 'src/components/matchbox';
 
 function noop() {}
 

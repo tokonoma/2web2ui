@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from '@sparkpost/matchbox';
+import { Button } from 'src/components/matchbox';
 import FocusContainer from 'src/components/focusContainer';
 import ExternalLink from 'src/components/externalLink';
 import styles from './ListError.module.scss';

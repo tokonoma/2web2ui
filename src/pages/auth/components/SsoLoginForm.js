@@ -5,8 +5,8 @@ import { TextFieldWrapper } from 'src/components';
 import { FORMS } from 'src/constants';
 import { required } from 'src/helpers/validation';
 import { trimWhitespaces } from 'src/helpers/string';
-import { Button } from '@sparkpost/matchbox';
 import { Error } from 'src/components/matchbox';
+import { Button } from 'src/components/matchbox';
 
 export class SsoLoginForm extends React.Component {
   render() {

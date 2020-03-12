@@ -1,4 +1,5 @@
 export { default as Banner } from './Banner';
+export { default as Button } from './Button';
 export { default as Box } from './Box';
 export { default as Error } from './Error';
 export { default as Expandable } from './Expandable';

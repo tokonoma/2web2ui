@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { Page, Tabs, Panel, Button } from '@sparkpost/matchbox';
+import { Page, Tabs, Panel } from '@sparkpost/matchbox';
 import { Launch } from '@sparkpost/matchbox-icons';
+import { Button } from 'src/components/matchbox';
 import { reduxForm } from 'redux-form';
 import _ from 'lodash';
 import { prepareCardInfo, isProductOnSubscription } from 'src/helpers/billing';

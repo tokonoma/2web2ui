@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import copy from 'copy-to-clipboard';
 
-import { TextField, Button, Tooltip } from '@sparkpost/matchbox';
+import { TextField,  Tooltip } from '@sparkpost/matchbox';
+import { Button } from 'src/components/matchbox';
 import { ContentCopy } from '@sparkpost/matchbox-icons';
 
 /**

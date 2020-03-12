@@ -1,7 +1,8 @@
 /* eslint max-lines: ["error", 200] */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Panel, Grid, Button } from '@sparkpost/matchbox';
+import { Panel, Grid } from '@sparkpost/matchbox';
+import { Button } from 'src/components/matchbox';
 import { Refresh } from '@sparkpost/matchbox-icons';
 import {
   listTrackingDomains,

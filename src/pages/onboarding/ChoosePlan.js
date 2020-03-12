@@ -1,7 +1,8 @@
 import React, { useEffect, useMemo } from 'react';
 import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
-import { Panel, Grid, Button } from '@sparkpost/matchbox';
+import { Panel, Grid } from '@sparkpost/matchbox';
+import { Button } from 'src/components/matchbox';
 import { showAlert } from 'src/actions/globalAlert';
 import { CenteredLogo, Loading, PlanPicker } from 'src/components';
 import {

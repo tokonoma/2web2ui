@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom';
 import { reduxForm } from 'redux-form';
 import { createTicket } from 'src/actions/support';
 import { showAlert } from 'src/actions/globalAlert';
-import { Page, Panel, Button } from '@sparkpost/matchbox';
+import { Page, Panel } from '@sparkpost/matchbox';
+import { Button } from 'src/components/matchbox';
 import PremiumSupportFields from './components/PremiumSupportFields';
 import { generateMessage } from './helpers/formHelpers';
 
