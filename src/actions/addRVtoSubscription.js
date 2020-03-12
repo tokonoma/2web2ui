@@ -52,3 +52,9 @@ export default function addRVtoSubscription({
       .catch(() => dispatch({ type: 'ADD_RV_TO_SUBSCRIPTION_ERROR' }));
   };
 }
+
+export function resetAddRVtoSubscription() {
+  return dispatch => {
+    dispatch({ type: 'RESET_ADD_RV_TO_SUBSCRIPTION' });
+  };
+}

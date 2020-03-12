@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Page, Tabs, Panel, Button } from '@sparkpost/matchbox';
@@ -9,7 +9,7 @@ import { prepareCardInfo, isProductOnSubscription } from 'src/helpers/billing';
 import { rvAddPaymentFormInitialValues } from 'src/selectors/recipientValidation';
 import { selectIsSelfServeBilling } from 'src/selectors/accountBillingInfo';
 import { getBillingInfo } from 'src/actions/account';
-import addRVtoSubscription from 'src/actions/addRVtoSubscription';
+import addRVtoSubscription, { resetAddRVtoSubscription } from 'src/actions/addRVtoSubscription';
 import { getSubscription as getBillingSubscription } from 'src/actions/billing';
 import { Loading } from 'src/components/loading/Loading';
 import JobsTableCollection from './components/JobsTableCollection';
@@ -28,40 +28,74 @@ const tabs = [
   { content: 'API Integration', key: 'api' },
 ];
 
-export class RecipientValidationPage extends Component {
-  state = {
-    selectedTab: this.props.tab || 0,
-    showPriceModal: false,
-    useSavedCC: Boolean(this.props.billing.credit_card),
-    formValues: {},
+export function RecipientValidationPage(props) {
+  const {
+    getBillingInfo,
+    getBillingSubscription,
+    billing,
+    addRVtoSubscriptionloading,
+    addRVtoSubscriptionsuccess,
+    addRVtoSubscriptionerror,
+    billingLoading,
+    valid,
+    submitting,
+    isRVonSubscription,
+    addRVFormValues,
+  } = props;
+  const [useSavedCC, setUseSavedCC] = useState(Boolean(props.billing.credit_card));
+  const [selectedTab, setSelectedTab] = useState(props.tab || 0);
+  const [showPriceModal, setShowPriceModal] = useState(false);
+  const redirectToNextStep = useCallback(
+    formValues => {
+      switch (selectedTab) {
+        case 1:
+          props.history.push(`/recipient-validation/single/${formValues.address}`);
+          break;
+        case 2:
+          props.history.push(`/account/api-keys/create`);
+          break;
+        default:
+          break;
+      }
+    },
+    [selectedTab, props.history],
+  );
+
+  useEffect(() => {
+    getBillingInfo();
+  }, [getBillingInfo]);
+  useEffect(() => {
+    getBillingSubscription();
+  }, [getBillingSubscription]);
+  useEffect(() => {
+    setUseSavedCC(Boolean(props.billing.credit_card));
+  }, [billing, props.billing.credit_card]);
+
+  useEffect(() => {
+    if (!addRVtoSubscriptionloading && addRVtoSubscriptionsuccess && !addRVtoSubscriptionerror)
+      redirectToNextStep(addRVFormValues);
+  }, [
+    addRVFormValues,
+    addRVtoSubscriptionerror,
+    addRVtoSubscriptionloading,
+    addRVtoSubscriptionsuccess,
+    redirectToNextStep,
+  ]);
+  useEffect(() => {
+    resetAddRVtoSubscription();
+  }, []);
+
+  const handleTabs = tabIdx => {
+    const { history } = props;
+    history.replace(`/recipient-validation/${tabs[tabIdx].key}`);
+    setSelectedTab(tabIdx);
+    props.reset();
   };
 
-  componentDidMount() {
-    this.props.getBillingInfo();
-    this.props.getBillingSubscription();
-  }
+  const handleToggleCC = val => setUseSavedCC(!val);
 
-  componentDidUpdate(prevProps) {
-    if (this.props.billing !== prevProps.billing)
-      this.setState({ useSavedCC: Boolean(this.props.billing.credit_card) });
-    if (
-      !this.props.addRVtoSubscriptionloading &&
-      prevProps.addRVtoSubscriptionloading &&
-      !this.props.addRVtoSubscriptionerror
-    )
-      this.redirectToNextStep(this.props.addRVFormValues);
-  }
-  handleTabs(tabIdx) {
-    const { history } = this.props;
-    history.replace(`/recipient-validation/${tabs[tabIdx].key}`);
-    this.setState({ selectedTab: tabIdx });
-    this.props.reset();
-  }
-
-  handleToggleCC = val => this.setState({ useSavedCC: !val });
-
-  renderTabContent = tabId => {
-    const { handleSubmit, reset } = this.props;
+  const renderTabContent = tabId => {
+    const { handleSubmit, reset } = props;
     switch (tabId) {
       case 0:
         return <ListTab handleSubmit={handleSubmit} reset={reset} />;
@@ -74,24 +108,11 @@ export class RecipientValidationPage extends Component {
     }
   };
 
-  redirectToNextStep = formValues => {
-    switch (this.state.selectedTab) {
-      case 1:
-        this.props.history.push(`/recipient-validation/single/${formValues.address}`);
-        break;
-      case 2:
-        this.props.history.push(`/account/api-keys/create`);
-        break;
-      default:
-        break;
-    }
-  };
+  const onSubmit = formValues => {
+    const { addRVtoSubscription, isRVonSubscription, isManuallyBilled } = props;
 
-  onSubmit = formValues => {
-    const { addRVtoSubscription, isRVonSubscription, isManuallyBilled } = this.props;
-
-    if (isRVonSubscription && (this.state.useSavedCC || isManuallyBilled)) {
-      return this.redirectToNextStep(formValues);
+    if (isRVonSubscription && (useSavedCC || isManuallyBilled)) {
+      return redirectToNextStep(formValues);
     }
 
     const values = formValues.card
@@ -100,75 +121,71 @@ export class RecipientValidationPage extends Component {
 
     return addRVtoSubscription({
       values,
-      updateCreditCard: !this.state.useSavedCC,
+      updateCreditCard: !useSavedCC,
       isRVonSubscription: isRVonSubscription,
     });
   };
 
-  handleModal = (showPriceModal = false) => this.setState({ showPriceModal });
+  const handleModal = (showPriceModal = false) => setShowPriceModal(showPriceModal);
 
-  render() {
-    const { selectedTab } = this.state;
-    const { billing, billingLoading, valid, submitting, isRVonSubscription } = this.props;
-    if (this.props.addRVtoSubscriptionloading) return <Loading />;
-    return (
-      <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
-        <Page
-          title="Recipient Validation"
-          primaryArea={
-            <Button size="large" onClick={() => this.handleModal(true)}>
-              See Pricing
-            </Button>
-          }
-        >
-          <p className={styles.LeadText}>
-            Recipient Validation is an easy, efficient way to verify that email addresses are valid
-            before you send. We run each address through a series of checks to catch many common
-            problems, including syntax errors and non-existent mailboxes, to drive better
-            deliverability, cut down on fraud, and capture every opportunity.
-          </p>
-          <Panel>
-            <div className={styles.TabsWrapper}>
-              <Tabs
-                selected={selectedTab}
-                connectBelow={true}
-                tabs={tabs.map(({ content }, idx) => ({
-                  content,
-                  onClick: () => this.handleTabs(idx),
-                }))}
-              />
-              {selectedTab === 2 && (
-                <div className={styles.TagWrapper}>
-                  <Button
-                    flat
-                    external
-                    to="https://developers.sparkpost.com/api/recipient-validation/"
-                  >
-                    API Docs
-                    <Launch className={styles.LaunchIcon} />
-                  </Button>
-                </div>
-              )}
-            </div>
-            <Panel.Section>{this.renderTabContent(selectedTab)}</Panel.Section>
-          </Panel>
-          {selectedTab === 0 && <JobsTableCollection />}
-          {(selectedTab === 1 || selectedTab === 2) && !billingLoading && (
-            <ValidateSection
-              credit_card={billing.credit_card}
-              submitButtonName={selectedTab === 2 ? 'Create API Key' : 'Validate'}
-              submitDisabled={!valid || submitting}
-              formname={FORMNAME}
-              handleCardToggle={this.handleToggleCC}
-              defaultToggleState={!this.state.useSavedCC}
-              isProductOnSubscription={isRVonSubscription}
+  if (props.addRVtoSubscriptionloading) return <Loading />;
+  return (
+    <form onSubmit={props.handleSubmit(onSubmit)}>
+      <Page
+        title="Recipient Validation"
+        primaryArea={
+          <Button size="large" onClick={() => handleModal(true)}>
+            See Pricing
+          </Button>
+        }
+      >
+        <p className={styles.LeadText}>
+          Recipient Validation is an easy, efficient way to verify that email addresses are valid
+          before you send. We run each address through a series of checks to catch many common
+          problems, including syntax errors and non-existent mailboxes, to drive better
+          deliverability, cut down on fraud, and capture every opportunity.
+        </p>
+        <Panel>
+          <div className={styles.TabsWrapper}>
+            <Tabs
+              selected={selectedTab}
+              connectBelow={true}
+              tabs={tabs.map(({ content }, idx) => ({
+                content,
+                onClick: () => handleTabs(idx),
+              }))}
             />
-          )}
-          <RVPriceModal isOpen={this.state.showPriceModal} handleOpen={this.handleModal} />
-        </Page>
-      </form>
-    );
-  }
+            {selectedTab === 2 && (
+              <div className={styles.TagWrapper}>
+                <Button
+                  flat
+                  external
+                  to="https://developers.sparkpost.com/api/recipient-validation/"
+                >
+                  API Docs
+                  <Launch className={styles.LaunchIcon} />
+                </Button>
+              </div>
+            )}
+          </div>
+          <Panel.Section>{renderTabContent(selectedTab)}</Panel.Section>
+        </Panel>
+        {selectedTab === 0 && <JobsTableCollection />}
+        {(selectedTab === 1 || selectedTab === 2) && !billingLoading && (
+          <ValidateSection
+            credit_card={billing.credit_card}
+            submitButtonName={selectedTab === 2 ? 'Create API Key' : 'Validate'}
+            submitDisabled={!valid || submitting}
+            formname={FORMNAME}
+            handleCardToggle={handleToggleCC}
+            defaultToggleState={!useSavedCC}
+            isProductOnSubscription={isRVonSubscription}
+          />
+        )}
+        <RVPriceModal isOpen={showPriceModal} handleOpen={handleModal} />
+      </Page>
+    </form>
+  );
 }
 
 const mapStateToProps = (state, props) => ({
@@ -182,11 +199,15 @@ const mapStateToProps = (state, props) => ({
   addRVtoSubscriptionloading: state.addRVtoSubscription.addRVtoSubscriptionloading,
   addRVFormValues: state.addRVtoSubscription.formValues,
   addRVtoSubscriptionerror: state.addRVtoSubscription.addRVtoSubscriptionerror,
+  addRVtoSubscriptionsuccess: state.addRVtoSubscription.addRVtoSubscriptionsuccess,
 });
 
 const formOptions = { form: FORMNAME, enableReinitialize: true };
 export default withRouter(
-  connect(mapStateToProps, { getBillingInfo, addRVtoSubscription, getBillingSubscription })(
-    reduxForm(formOptions)(RecipientValidationPage),
-  ),
+  connect(mapStateToProps, {
+    getBillingInfo,
+    addRVtoSubscription,
+    resetAddRVtoSubscription,
+    getBillingSubscription,
+  })(reduxForm(formOptions)(RecipientValidationPage)),
 );
