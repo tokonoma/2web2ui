@@ -41,6 +41,25 @@ const ExploreAnalyticsItem = () => {
   );
 };
 
+const ViewEventsItem = () => {
+  const { check_events_completed, handleAction } = useGuideContext();
+
+  return (
+    <GuideListItem
+      action={{
+        name: 'Check Out Events',
+        onClick: () => handleAction('Check Out Events'),
+      }}
+      itemCompleted={check_events_completed}
+    >
+      <GuideListItemTitle>Check Out Events</GuideListItemTitle>
+      <GuideListItemDescription>
+        Learn how SparkPost can provide analytics to make the most of your sending strategy.
+      </GuideListItemDescription>
+    </GuideListItem>
+  );
+};
+
 const InviteCollaboratorItem = () => {
   const {
     invite_collaborator_completed,
@@ -86,6 +105,9 @@ export default function ShowMeSparkpostStep() {
       </Panel.Section>
       <Panel.Section>
         <ExploreAnalyticsItem />
+      </Panel.Section>
+      <Panel.Section>
+        <ViewEventsItem />
       </Panel.Section>
       <Panel.Section>
         <InviteCollaboratorItem />

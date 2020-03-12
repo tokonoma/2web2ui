@@ -6,16 +6,6 @@ const colors = require('colors');
 const copyMatchboxStyles = () =>
   Promise.all([
     fs
-      .copy('node_modules/@sparkpost/matchbox/styles.css', 'public/static/styles-default.css')
-
-      .then(() => {
-        console.log(`✅  Default Matchbox styles copied`.green);
-      })
-      .catch(err => {
-        console.error(`😟 Copying default Matchbox styles failed: ${err}`.red);
-        process.exit(1);
-      }),
-    fs
       .copy('node_modules/@sparkpost/matchbox-hibana/styles.css', 'public/static/styles-hibana.css')
       .then(() => {
         console.log(`🔥  Hibana Matchbox styles copied`.green);

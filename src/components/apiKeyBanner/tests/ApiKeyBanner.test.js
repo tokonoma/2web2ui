@@ -1,13 +1,15 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
 import { ApiKeySuccessBanner } from '../ApiKeyBanner';
+import { useHibana } from 'src/context/HibanaContext';
+jest.mock('src/context/HibanaContext');
 jest.mock('copy-to-clipboard');
-
+useHibana.mockImplementation(() => [{ isHibanaEnabled: false }]);
 describe('ApiKeyBanner Component', () => {
   const props = {
     title: 'congrats on your new key',
     hideNewApiKey: jest.fn(),
-    newKey: 'nuevo-llave'
+    newKey: 'nuevo-llave',
   };
 
   let wrapper;
@@ -37,5 +39,4 @@ describe('ApiKeyBanner Component', () => {
     wrapper.find('button').simulate('click');
     expect(wrapper.state('copied')).toEqual(true);
   });
-
 });

@@ -55,7 +55,7 @@ export function collectPayments({ meta = {} }) {
     type: 'COLLECT_PAYMENTS',
     meta: {
       method: 'POST',
-      url: '/v1/account/billing/collect',
+      url: '/v1/billing/collect',
       ...meta,
     },
   });

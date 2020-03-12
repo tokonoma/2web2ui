@@ -1,6 +1,6 @@
 import React from 'react';
 import { format } from 'date-fns';
-import { Banner } from '@sparkpost/matchbox';
+import { Banner } from 'src/components/matchbox';
 import { Link } from 'react-router-dom';
 import { LINKS } from 'src/constants';
 import { pluralString } from 'src/helpers/string';
@@ -23,7 +23,7 @@ export const PendingPlanBanner = ({ account, subscription }) => {
 
   if (pendingDowngrades.length > 0) {
     return (
-      <Banner status="info" title="Pending Plan Change">
+      <Banner status="info" title="Pending Plan Change" my="300">
         <p>
           You're scheduled for a pending downgrade and can't update your plan until that switch
           happens.
@@ -33,7 +33,7 @@ export const PendingPlanBanner = ({ account, subscription }) => {
   }
 
   return (
-    <Banner status="info" title="Pending Plan Change">
+    <Banner status="info" title="Pending Plan Change" my="300">
       <p>
         You're scheduled to switch to the {account.pending_subscription.name} plan on{' '}
         {dateFormat(account.pending_subscription.effective_date)}, and can't update your plan until
@@ -52,6 +52,7 @@ export const PremiumBanner = () => (
       external: true,
       onClick: () => conversions.trackAddonRequest(ANALYTICS_PREMIUM_SUPPORT),
     }}
+    my="300"
   >
     <p>
       Full-service account advocacy with a dedicated Customer Success Manager. Including proactive
@@ -81,6 +82,7 @@ export const EnterpriseBanner = () => (
       external: true,
       onClick: () => conversions.trackAddonRequest(ANALYTICS_ENTERPRISE_SUPPORT),
     }}
+    my="300"
   >
     <p>
       Enterprise-grade financial guarantees with 99.9% uptime{' '}
@@ -118,7 +120,7 @@ export const FreePlanWarningBanner = ({
   const daysLeft = Math.floor(ageRangeEnd - accountAgeInDays) + 1;
 
   return (
-    <Banner status="warning" title="Free Plan Downgrade">
+    <Banner status="warning" title="Free Plan Downgrade" my="300">
       <p>
         Your plan will automatically downgrade to 500 emails/month in{' '}
         {pluralString(daysLeft, 'day')}. <Link to="/account/billing/plan">Upgrade your plan</Link>{' '}

@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom';
 import { listPools } from 'src/actions/ipPools';
 import { getOrderedIpPools, shouldShowIpPurchaseCTA } from 'src/selectors/ipPools';
 import { Loading, TableCollection, ApiErrorBanner } from 'src/components';
-import { Page, Button, Banner } from '@sparkpost/matchbox';
+import { Page, Button } from '@sparkpost/matchbox';
+import { Banner } from 'src/components/matchbox';
 import { OpenInNew } from '@sparkpost/matchbox-icons';
 import { LINKS } from 'src/constants';
 import { openSupportTicketForm } from 'src/actions/support';
@@ -88,7 +89,7 @@ export class IpPoolsList extends Component {
 }
 
 export const IPWarmupReminderBanner = () => (
-  <Banner status="warning" title={'New dedicated IP addresses need to be warmed up'}>
+  <Banner status="warning" title={'New dedicated IP addresses need to be warmed up'} my="300">
     <div>
       <p>
         In order to establish a positive sending reputation, warm up new dedicated IP addresses by

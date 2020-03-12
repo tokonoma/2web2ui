@@ -65,7 +65,6 @@ exports[`AccountDropdown should render correctly 1`] = `
           "component": [Function],
           "content": <React.Fragment>
             link
-             
           </React.Fragment>,
           "external": undefined,
           "label": "link",
@@ -89,7 +88,6 @@ exports[`AccountDropdown should render correctly 1`] = `
         Object {
           "content": <React.Fragment>
             link3
-             
           </React.Fragment>,
           "external": undefined,
           "label": "link3",
@@ -100,7 +98,6 @@ exports[`AccountDropdown should render correctly 1`] = `
           "component": [Function],
           "content": <React.Fragment>
             link4
-             
             <div
               className="FloatIcon"
             >
@@ -109,6 +106,24 @@ exports[`AccountDropdown should render correctly 1`] = `
               >
                 LABS
               </Tag>
+            </div>
+          </React.Fragment>,
+          "external": undefined,
+          "label": "link4",
+          "to": "link",
+        },
+        Object {
+          "component": [Function],
+          "content": <React.Fragment>
+            link4
+            <div
+              className="FloatIcon"
+            >
+              <div
+                className="SecondaryLabel"
+              >
+                label1
+              </div>
             </div>
           </React.Fragment>,
           "external": undefined,
