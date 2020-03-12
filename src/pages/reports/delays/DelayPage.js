@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import _ from 'lodash';
 import { refreshDelayReport } from 'src/actions/delayReport';
 import { selectReportSearchOptions } from 'src/selectors/reportSearchOptions';
-import { Page, Panel } from '@sparkpost/matchbox';
+import { Page } from '@sparkpost/matchbox';
+import { Panel } from 'src/components/matchbox';
 import ReportOptions from 'src/pages/reports/components/ReportOptions';
 import PanelLoading from 'src/components/panelLoading/PanelLoading';
 import MetricsSummary from '../components/MetricsSummary';
@@ -11,7 +12,6 @@ import DelaysDataTable from './components/DelaysDataTable';
 import { safeRate } from 'src/helpers/math';
 
 export class DelayPage extends Component {
-
   componentDidUpdate(prevProps) {
     if (prevProps.reportOptions !== this.props.reportOptions) {
       this.props.refreshDelayReport(this.props.reportOptions);
@@ -33,7 +33,7 @@ export class DelayPage extends Component {
     const { count_delayed, count_delayed_first, count_accepted } = aggregates;
 
     if (aggregatesLoading) {
-      return <PanelLoading minHeight='115px' />;
+      return <PanelLoading minHeight="115px" />;
     }
 
     if (_.isEmpty(aggregates)) {
@@ -43,10 +43,12 @@ export class DelayPage extends Component {
     return (
       <MetricsSummary
         rateValue={safeRate(count_delayed_first, count_accepted)}
-        rateTitle='Delayed Rate'
+        rateTitle="Delayed Rate"
         secondaryMessage={`There were ${count_delayed.toLocaleString()} total delays in this time period. (Note: messages may be delayed multiple times)`}
       >
-        <strong>{count_delayed_first.toLocaleString()}</strong> of <strong>{count_accepted.toLocaleString()}</strong> accepted messages were delayed on first attempt
+        <strong>{count_delayed_first.toLocaleString()}</strong> of{' '}
+        <strong>{count_accepted.toLocaleString()}</strong> accepted messages were delayed on first
+        attempt
       </MetricsSummary>
     );
   }
@@ -55,10 +57,10 @@ export class DelayPage extends Component {
     const { loading, delaySearchOptions } = this.props;
 
     return (
-      <Page title='Delay Report'>
+      <Page title="Delay Report">
         <ReportOptions reportLoading={loading} searchOptions={delaySearchOptions} />
         {this.renderTopLevelMetrics()}
-        <Panel title='Delayed Messages' className='ReasonsTable'>
+        <Panel title="Delayed Messages" className="ReasonsTable">
           {this.renderDataTable()}
         </Panel>
       </Page>
@@ -66,7 +68,7 @@ export class DelayPage extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   const { aggregates } = state.delayReport;
   return {
     loading: state.delayReport.aggregatesLoading || state.delayReport.reasonsLoading,
@@ -75,12 +77,12 @@ const mapStateToProps = (state) => {
     aggregates,
     aggregatesLoading: state.delayReport.aggregatesLoading,
     reportOptions: state.reportOptions,
-    delaySearchOptions: selectReportSearchOptions(state)
+    delaySearchOptions: selectReportSearchOptions(state),
   };
 };
 
 const mapDispatchToProps = {
-  refreshDelayReport
+  refreshDelayReport,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(DelayPage);

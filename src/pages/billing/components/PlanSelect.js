@@ -1,7 +1,6 @@
 import React, { useMemo } from 'react';
-import { Panel } from '@sparkpost/matchbox';
-import { Button } from 'src/components/matchbox';
 import { Check, ViewModule } from '@sparkpost/matchbox-icons';
+import { Button, Panel } from 'src/components/matchbox';
 import { PLAN_TIERS } from 'src/constants';
 import PlanPrice from 'src/components/billing/PlanPrice';
 import FeatureComparisonModal from './FeatureComparisonModal';

@@ -1,5 +1,6 @@
 import React from 'react';
-import { Panel, UnstyledLink } from '@sparkpost/matchbox';
+import { UnstyledLink } from '@sparkpost/matchbox';
+import { Panel } from 'src/components/matchbox';
 import GuideBreadCrumbs from './GuideBreadCrumbs';
 import { GuideListItem, GuideListItemTitle, GuideListItemDescription } from './GuideListItem';
 import { useGuideContext } from './GettingStartedGuide';

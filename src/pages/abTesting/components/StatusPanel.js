@@ -2,25 +2,36 @@ import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
-import { selectLatestVersionNumberFromParams, selectIdAndVersionFromParams } from 'src/selectors/abTesting';
+import {
+  selectLatestVersionNumberFromParams,
+  selectIdAndVersionFromParams,
+} from 'src/selectors/abTesting';
 import { LabelledValue, Subaccount } from 'src/components';
-import { ActionList, Popover, Panel } from '@sparkpost/matchbox';
+import { ActionList, Popover } from '@sparkpost/matchbox';
+import { Panel } from 'src/components/matchbox';
 import { ExpandMore } from '@sparkpost/matchbox-icons';
 import StatusTag from './StatusTag';
 
 import _ from 'lodash';
 
 const VersionSelector = ({ current, latest, id, subaccountId }) => {
-  const actions = _.times(latest, (i) => ({
+  const actions = _.times(latest, i => ({
     content: `View Version ${i + 1}`,
     to: `/ab-testing/${id}/${i + 1}${setSubaccountQuery(subaccountId)}`,
     component: Link,
-    visible: i + 1 !== current
+    visible: i + 1 !== current,
   })).reverse();
 
   return (
-    <Popover left trigger={<Fragment>Version <span>{current}</span> <ExpandMore/></Fragment>}>
-      <ActionList actions={actions}/>
+    <Popover
+      left
+      trigger={
+        <Fragment>
+          Version <span>{current}</span> <ExpandMore />
+        </Fragment>
+      }
+    >
+      <ActionList actions={actions} />
     </Popover>
   );
 };
@@ -29,17 +40,28 @@ export const StatusPanel = ({ test, version, id, subaccountId, latest, subaccoun
   let panelActions = null;
 
   if (latest > 1) {
-    panelActions = [{ content: <VersionSelector current={version} id={id} latest={latest} subaccountId={subaccountId} />, color: 'orange' }];
+    panelActions = [
+      {
+        content: (
+          <VersionSelector current={version} id={id} latest={latest} subaccountId={subaccountId} />
+        ),
+        color: 'orange',
+      },
+    ];
   }
 
   return (
     <Panel>
       <Panel.Section actions={panelActions}>
-        <LabelledValue label='Status'>
+        <LabelledValue label="Status">
           <StatusTag status={test.status} />
         </LabelledValue>
-        <LabelledValue label='Test ID' value={id} />
-        {!!subaccountId && <LabelledValue label='Subaccount'><Subaccount id={subaccountId} name={subaccountName}/></LabelledValue>}
+        <LabelledValue label="Test ID" value={id} />
+        {!!subaccountId && (
+          <LabelledValue label="Subaccount">
+            <Subaccount id={subaccountId} name={subaccountName} />
+          </LabelledValue>
+        )}
       </Panel.Section>
     </Panel>
   );
@@ -49,6 +71,6 @@ StatusPanel.displayName = 'StatusPanel';
 
 const mapStateToProps = (state, props) => ({
   latest: selectLatestVersionNumberFromParams(state, props),
-  ...selectIdAndVersionFromParams(state, props)
+  ...selectIdAndVersionFromParams(state, props),
 });
 export default withRouter(connect(mapStateToProps, {})(StatusPanel));
