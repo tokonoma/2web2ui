@@ -4,6 +4,9 @@ import { Panel as HibanaPanel } from '@sparkpost/matchbox-hibana';
 import { useHibana } from 'src/context/HibanaContext';
 import { omitSystemProps } from 'src/helpers/hibana';
 
+HibanaPanel.displayName = 'HibanaPanel';
+OGPanel.displayName = 'OGPanel';
+
 const Panel = props => {
   const [state] = useHibana();
   const { isHibanaEnabled } = state;
