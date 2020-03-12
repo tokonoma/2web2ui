@@ -117,19 +117,6 @@ describe('Action Creator: Inbox Placement', () => {
     });
   });
 
-  it('makes request to stop inbox placement test', () => {
-    const thunk = inboxPlacement.stopInboxPlacementTest(1);
-    thunk(dispatch, jest.fn);
-    expect(dispatch).toHaveBeenCalledWith({
-      type: 'STOP_INBOX_PLACEMENT_TEST',
-      meta: {
-        method: 'PUT',
-        url: '/v1/inbox-placement/1',
-        data: { status: 'stopped' },
-      },
-    });
-  });
-
   it('makes request to get all messages with filter', () => {
     const thunk = inboxPlacement.getAllInboxPlacementMessages(1, {
       'mailbox-provider': 'sparkpost.com',

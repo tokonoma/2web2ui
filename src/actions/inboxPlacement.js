@@ -96,17 +96,6 @@ export const getInboxPlacementData = (id, type, action) =>
     },
   });
 
-export function stopInboxPlacementTest(id) {
-  return inboxPlacementApiRequest({
-    type: 'STOP_INBOX_PLACEMENT_TEST',
-    meta: {
-      method: 'PUT',
-      url: `/v1/inbox-placement/${id}`,
-      data: { status: 'stopped' },
-    },
-  });
-}
-
 export function getInboxPlacementTestContent(id) {
   return inboxPlacementApiRequest({
     type: 'GET_INBOX_PLACEMENT_TEST_CONTENT',
