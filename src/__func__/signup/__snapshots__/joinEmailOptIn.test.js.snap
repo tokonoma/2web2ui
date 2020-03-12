@@ -126,7 +126,9 @@ Array [
         "Authorization": "mock-access-token",
       },
       "method": "get",
-      "params": Object {},
+      "params": Object {
+        "type": "messaging",
+      },
       "responseType": "json",
       "url": "/v1/billing/bundles",
     },

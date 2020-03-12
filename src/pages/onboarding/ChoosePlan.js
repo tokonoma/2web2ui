@@ -31,6 +31,7 @@ export function OnboardingPlanPage({
   history,
   billing,
   verifyPromoCode,
+  clearPromoCode,
   currentPlan,
   loading,
   submitting,
@@ -38,7 +39,6 @@ export function OnboardingPlanPage({
   handleSubmit,
   hasError,
   bundles,
-  clearPromoCode,
 }) {
   useEffect(() => {
     getPlans();
@@ -99,7 +99,7 @@ export function OnboardingPlanPage({
   const applyPromoCode = promoCode => {
     verifyPromoCode({
       promoCode,
-      billingId: selectedPlan.billingId,
+      billingId: selectedPlan.messaging.billing_id,
       meta: { promoCode, showErrorAlert: false },
     });
   };

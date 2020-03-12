@@ -32,6 +32,7 @@ describe('ChoosePlan page tests', () => {
       },
     ],
     submitting: false,
+    clearPromoCode: jest.fn(),
   };
 
   beforeEach(() => {
