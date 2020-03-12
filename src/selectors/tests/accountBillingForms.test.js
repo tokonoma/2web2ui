@@ -39,7 +39,7 @@ describe('Selector: Account billing form', () => {
         messaging: { price: 20 },
       },
     ]);
-    billingInfo.selectVisiblePlans = jest.fn(() => [
+    billingInfo.selectAvailableBundles = jest.fn(() => [
       {
         billingId: 'inf',
         bundle: 'im not free',
@@ -67,7 +67,7 @@ describe('Selector: Account billing form', () => {
 
   describe('changePlanInitialValues when NOT self serve', () => {
     beforeEach(() => {
-      billingInfo.currentPlanSelector = jest.fn();
+      billingInfo.currentBundleSelector = jest.fn();
     });
 
     it('should return change plan values: with a billing id', () => {
@@ -76,7 +76,7 @@ describe('Selector: Account billing form', () => {
     });
 
     it('should return change plan values: without billing id', () => {
-      billingInfo.currentPlanSelector.mockReturnValue({ code: 'abc' });
+      billingInfo.currentBundleSelector.mockReturnValue({ bundle: 'abc' });
       expect(changePlanInitialValues(store)).toMatchSnapshot();
     });
 
@@ -89,7 +89,7 @@ describe('Selector: Account billing form', () => {
     it('should find and return secret plan', () => {
       expect(changePlanInitialValues(store, { planCode: 'im a secret' })).toEqual(
         expect.objectContaining({
-          planpicker: { billingId: 'ias', code: 'im a secret', isFree: false, status: 'secret' },
+          planpicker: expect.objectContaining({ bundle: 'im a secret' }),
         }),
       );
     });
