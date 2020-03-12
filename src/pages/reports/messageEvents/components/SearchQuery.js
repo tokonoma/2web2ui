@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
-import { Button, Grid } from '@sparkpost/matchbox';
+import {  Grid } from '@sparkpost/matchbox';
+import { Button } from 'src/components/matchbox';
 import { AddCircleOutline, HighlightOff } from '@sparkpost/matchbox-icons';
 import styles from './SearchForm.module.scss';
 import { Field } from 'redux-form';

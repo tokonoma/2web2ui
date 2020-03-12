@@ -1,5 +1,6 @@
 import { Component } from 'react';
-import { Page, Panel, Button } from '@sparkpost/matchbox';
+import { Page, Panel } from '@sparkpost/matchbox';
+import { Button } from 'src/components/matchbox';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from './RVDisabledPage.module.scss';

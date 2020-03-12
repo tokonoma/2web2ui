@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { Button } from '@sparkpost/matchbox';
+import { Button } from 'src/components/matchbox';
 
 import { PageLink } from 'src/components';
 import styles from './MonitorsCollection.module.scss';

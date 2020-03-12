@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Button, Grid, UnstyledLink, Modal, Panel } from '@sparkpost/matchbox';
+import {  Grid, UnstyledLink, Modal, Panel } from '@sparkpost/matchbox';
+import { Button } from 'src/components/matchbox';
 import { Close } from '@sparkpost/matchbox-icons';
 import { Link } from 'react-router-dom';
 import { getUsage } from 'src/actions/account';

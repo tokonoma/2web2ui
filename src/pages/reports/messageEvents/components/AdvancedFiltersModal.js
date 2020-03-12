@@ -1,7 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { updateMessageEventsSearchOptions, getDocumentation } from 'src/actions/messageEvents';
-import { WindowEvent, Modal, Button } from '@sparkpost/matchbox';
+import { WindowEvent, Modal } from '@sparkpost/matchbox';
+import { Button } from 'src/components/matchbox';
 import { onEscape } from 'src/helpers/keyEvents';
 import { getFiltersFromSearchQueries } from '../helpers/transformData.js';
 import SearchForm from './SearchForm';

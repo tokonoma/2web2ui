@@ -1,7 +1,8 @@
 /* eslint max-lines: ["error", 200] */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Panel, Grid, Button, Tag } from '@sparkpost/matchbox';
+import { Panel, Grid,  Tag } from '@sparkpost/matchbox';
+import { Button } from 'src/components/matchbox';
 import { Refresh } from '@sparkpost/matchbox-icons';
 import { listTrackingDomains, updateTrackingDomain, deleteTrackingDomain, verifyTrackingDomain } from 'src/actions/trackingDomains';
 import { Subaccount } from 'src/components';

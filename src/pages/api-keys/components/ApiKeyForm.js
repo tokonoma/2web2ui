@@ -3,7 +3,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
-import { Button, Panel } from '@sparkpost/matchbox';
+import { Panel } from '@sparkpost/matchbox';
+import { Button } from 'src/components/matchbox';
 
 import {
   RadioGroup,

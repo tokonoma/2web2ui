@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-import { Button } from '@sparkpost/matchbox';
+import { Button } from 'src/components/matchbox';
 
 import { getDetailsPath } from 'src/helpers/messageEvents';
 import styles from './ViewDetailsButton.module.scss';

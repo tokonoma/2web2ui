@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import CreditCardSection from 'src/components/billing/CreditCardSection';
-import { Button } from '@sparkpost/matchbox';
+import { Button } from 'src/components/matchbox';
 import { connect } from 'react-redux';
 import { updatePaymentInitialValues } from 'src/selectors/accountBillingForms';
 import { selectIsSelfServeBilling } from 'src/selectors/accountBillingInfo';

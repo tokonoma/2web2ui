@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { Page, Tabs, Panel, Modal, Button } from '@sparkpost/matchbox';
+import { Page, Tabs, Panel, Modal } from '@sparkpost/matchbox';
+import { Button } from 'src/components/matchbox';
 import { Close, Launch } from '@sparkpost/matchbox-icons';
 import { reduxForm } from 'redux-form';
 import _ from 'lodash';

@@ -1,4 +1,4 @@
-import { Button } from '@sparkpost/matchbox';
+import { Button } from 'src/components/matchbox';
 import classnames from 'classnames';
 import styles from './Pagination.module.scss';
 import React from 'react';

@@ -3,7 +3,7 @@ import BackupCodesList from './BackupCodesList';
 import DownloadCodes from './DownloadCodes';
 import CopyCodes from './CopyCodes'; //todo use CopyToClipboard component
 import PrintCodes from './PrintCodes';
-import { Button } from '@sparkpost/matchbox';
+import { Button } from 'src/components/matchbox';
 
 const BackupCodes = ({ codes }) => (
   <div>

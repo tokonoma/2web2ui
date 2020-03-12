@@ -1,5 +1,6 @@
 import React from 'react';
-import { Panel, Button } from '@sparkpost/matchbox';
+import { Panel } from '@sparkpost/matchbox';
+import { Button } from 'src/components/matchbox';
 import styles from './ApiDetailsTab.module.scss';
 import ExternalLink from 'src/components/externalLink/ExternalLink';
 

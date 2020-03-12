@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Button, Grid } from '@sparkpost/matchbox';
+import {  Grid } from '@sparkpost/matchbox';
+import { Button } from 'src/components/matchbox';
 import Legend from './Legend';
 
 import styles from './ChartHeader.module.scss';

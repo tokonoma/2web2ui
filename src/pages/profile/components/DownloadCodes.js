@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from '@sparkpost/matchbox';
+import { Button } from 'src/components/matchbox';
 import { FileDownload } from '@sparkpost/matchbox-icons';
 
 export const downloadCodes = (codes) => {

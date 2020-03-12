@@ -5,7 +5,8 @@ import { required } from 'src/helpers/validation';
 import { TextFieldWrapper } from 'src/components';
 import { verifyAndLogin } from 'src/actions/tfa';
 
-import { Button, Error, UnstyledLink } from '@sparkpost/matchbox';
+import {  Error, UnstyledLink } from '@sparkpost/matchbox';
+import { Button } from 'src/components/matchbox';
 import { LINKS } from 'src/constants';
 import styles from './TfaForm.module.scss';
 

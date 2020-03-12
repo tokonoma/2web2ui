@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import React from 'react';
-import { Button, Panel, Tag } from '@sparkpost/matchbox';
+import { Panel, Tag } from '@sparkpost/matchbox';
+import { Button } from 'src/components/matchbox';
 import {
   METRICS,
   FILTERS_FRIENDLY_NAMES,

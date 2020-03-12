@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Subaccount } from 'src/components';
-import { Button } from '@sparkpost/matchbox';
+import { Button } from 'src/components/matchbox';
 import { PanelLoading, TableCollection, Empty, DeleteModal } from 'src/components';
 import { deleteSuppression } from 'src/actions/suppressions';
 import { showAlert } from 'src/actions/globalAlert';

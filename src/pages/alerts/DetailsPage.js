@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Page, Button } from '@sparkpost/matchbox';
+import { Page } from '@sparkpost/matchbox';
+import { Button } from 'src/components/matchbox';
 import { Delete, ContentCopy } from '@sparkpost/matchbox-icons';
 import { DeleteModal, Loading } from 'src/components';
 import withAlert from './containers/DetailsPage.container';

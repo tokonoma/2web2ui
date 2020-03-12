@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { TextField, Button } from '@sparkpost/matchbox';
+import { TextField } from '@sparkpost/matchbox';
+import { Button } from 'src/components/matchbox';
 import { LoadingSVG } from 'src/components';
 import _ from 'lodash';
 

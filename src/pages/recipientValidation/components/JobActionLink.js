@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from '@sparkpost/matchbox';
+import { Button } from 'src/components/matchbox';
 import { Cached, FileDownload, PlaylistAddCheck } from '@sparkpost/matchbox-icons';
 import DownloadLink from 'src/components/downloadLink/DownloadLink';
 import PageLink from 'src/components/pageLink/PageLink';

@@ -3,7 +3,8 @@ import { Field, reduxForm } from 'redux-form';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { Panel, Button } from '@sparkpost/matchbox';
+import { Panel } from '@sparkpost/matchbox';
+import { Button } from 'src/components/matchbox';
 import { showAlert } from 'src/actions/globalAlert';
 import { SendingDomainSection } from './SendingDomainSection';
 import { update as updateSendingDomain } from 'src/actions/sendingDomains';

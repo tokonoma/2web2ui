@@ -3,7 +3,8 @@ import React, { Component, Fragment } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Field, reset, reduxForm } from 'redux-form';
-import { Button, Panel, Checkbox } from '@sparkpost/matchbox';
+import { Panel, Checkbox } from '@sparkpost/matchbox';
+import { Button } from 'src/components/matchbox';
 import { TextFieldWrapper, CheckboxWrapper } from 'src/components';
 
 import { showAlert } from 'src/actions/globalAlert';

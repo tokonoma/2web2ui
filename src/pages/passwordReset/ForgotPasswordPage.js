@@ -5,7 +5,8 @@ import { showAlert } from 'src/actions/globalAlert';
 import { required } from 'src/helpers/validation';
 import { reduxForm, Field } from 'redux-form';
 import { CenteredLogo, PageLink, TextFieldWrapper } from 'src/components';
-import { Panel, Button } from '@sparkpost/matchbox';
+import { Panel } from '@sparkpost/matchbox';
+import { Button } from 'src/components/matchbox';
 import { AUTH_ROUTE } from 'src/constants';
 import { trimWhitespaces } from 'src/helpers/string';
 

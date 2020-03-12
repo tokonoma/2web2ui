@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Button, Tooltip } from '@sparkpost/matchbox';
+import { Tooltip } from '@sparkpost/matchbox';
+import { Button } from 'src/components/matchbox';
 import { ContentCopy } from '@sparkpost/matchbox-icons';
 import copy from 'copy-to-clipboard';
 

@@ -1,5 +1,6 @@
 import React from 'react';
-import { Grid, Button } from '@sparkpost/matchbox';
+import { Grid } from '@sparkpost/matchbox';
+import { Button } from 'src/components/matchbox';
 import { Link } from 'react-router-dom';
 import styles from './ApiDetails.module.scss';
 import CodeBlock from './CodeBlock';

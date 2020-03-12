@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import { Field, FieldArray } from 'redux-form';
-import { Panel, Grid, Button } from '@sparkpost/matchbox';
+import { Panel, Grid } from '@sparkpost/matchbox';
+import { Button } from 'src/components/matchbox';
 import { Add } from '@sparkpost/matchbox-icons';
 import { TextFieldWrapper } from 'src/components/reduxFormWrappers';
 import { TemplateTypeaheadWrapper } from 'src/components/reduxFormWrappers';

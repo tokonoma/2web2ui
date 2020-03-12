@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
 
 // Components
-import { UnstyledLink, Button, Popover, ActionList } from '@sparkpost/matchbox';
+import { UnstyledLink,  Popover, ActionList } from '@sparkpost/matchbox';
+import { Button } from 'src/components/matchbox';
 import { TableCollection } from 'src/components';
 import { MoreHoriz } from '@sparkpost/matchbox-icons';
 import StatusTag from './StatusTag';

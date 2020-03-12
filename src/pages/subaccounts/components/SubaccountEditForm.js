@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { reduxForm, formValueSelector } from 'redux-form';
 
-import { Button, Panel } from '@sparkpost/matchbox';
+import { Panel } from '@sparkpost/matchbox';
+import { Button } from 'src/components/matchbox';
 import { getIpPools } from 'src/selectors/ipPools';
 import { selectFirstIpPoolId } from 'src/selectors/ipPools';
 import { NameField, StatusSelect } from './formFields';
