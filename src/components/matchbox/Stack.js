@@ -2,7 +2,9 @@ import React from 'react';
 import { Stack as HibanaStack } from '@sparkpost/matchbox-hibana';
 import { useHibana } from 'src/context/HibanaContext';
 
-export default function Box(props) {
+HibanaStack.displayName = 'HibanaStack';
+
+export default function Stack(props) {
   const [state] = useHibana();
   const { isHibanaEnabled } = state;
 
