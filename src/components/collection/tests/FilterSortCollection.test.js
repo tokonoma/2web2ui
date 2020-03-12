@@ -50,12 +50,7 @@ describe('FilterSortCollection Component', () => {
   };
 
   describe('renders', () => {
-    const subject = (props = {}) =>
-      shallow(
-        <HibanaProvider>
-          <FilterSortCollection {...props} />
-        </HibanaProvider>,
-      );
+    const subject = (props = {}) => shallow(<FilterSortCollection {...props} />);
 
     it('renders without props', () => {
       expect(subject()).toMatchSnapshot();
