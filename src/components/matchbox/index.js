@@ -5,3 +5,4 @@ export { default as Inline } from './Inline';
 export { default as ProgressBar } from './ProgressBar';
 export { default as Snackbar } from './Snackbar';
 export { default as Stack } from './Stack';
+export { default as Tag } from './Tag';
