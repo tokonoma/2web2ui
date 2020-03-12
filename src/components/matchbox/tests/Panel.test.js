@@ -4,7 +4,7 @@ import { shallow } from 'enzyme';
 import { useHibana } from 'src/context/HibanaContext';
 jest.mock('src/context/HibanaContext');
 
-describe('Snackbar Matchbox component wrapper', () => {
+describe('Panel Matchbox component wrapper', () => {
   const defaultProps = {
     accent: true,
   };
@@ -16,7 +16,7 @@ describe('Snackbar Matchbox component wrapper', () => {
     return shallow(<Panel {...mergedProps}>Children...</Panel>);
   };
 
-  it('renders the Snackbar component correctly when hibana is enabled', () => {
+  it('renders the Hibana Panel component correctly when hibana is enabled', () => {
     useHibana.mockImplementationOnce(() => [{ isHibanaEnabled: true }]);
 
     const wrapper = subject();
@@ -29,7 +29,7 @@ describe('Snackbar Matchbox component wrapper', () => {
     expect(wrapper).toHaveTextContent('Children...');
   });
 
-  it('renders the Snackbar component correctly when hibana is not enabled', () => {
+  it('renders the OG Panel component correctly when hibana is not enabled', () => {
     useHibana.mockImplementationOnce(() => [{ isHibanaEnabled: false }]);
 
     const wrapper = subject();
