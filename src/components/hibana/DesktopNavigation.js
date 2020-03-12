@@ -44,7 +44,7 @@ export default function DesktopNavigation({ navItems, location }) {
           <nav className={styles.PrimaryNav} aria-labelledby="primary-nav-heading">
             {/* Visually hidden headings to help guide screen reader users */}
             <ScreenReaderOnly>
-              <h2 id="primary-nav-heading">Main Navigation</h2>
+              <h2 id="primary-nav-heading">Main</h2>
             </ScreenReaderOnly>
 
             <Inline>
@@ -86,7 +86,7 @@ export default function DesktopNavigation({ navItems, location }) {
               <NavWrapper>
                 {/* Visually hidden headings to help guide screen reader users */}
                 <ScreenReaderOnly>
-                  <h3 id="secondary-nav-heading">Category Navigation</h3>
+                  <h3 id="secondary-nav-heading">Secondary</h3>
                 </ScreenReaderOnly>
 
                 <Inline>
