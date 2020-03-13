@@ -183,6 +183,8 @@ const routes = [
   {
     path: '/reports',
     redirect: '/reports/summary',
+    category: 'Signals Analytics',
+    subcategory: 'Summary',
   },
   {
     path: '/reports/summary',
@@ -190,6 +192,8 @@ const routes = [
     layout: App,
     title: 'Summary Report | Signals Analytics',
     supportDocSearch: 'reporting',
+    category: 'Signals Analytics',
+    subcategory: 'Summary',
   },
   {
     path: '/reports/bounce',

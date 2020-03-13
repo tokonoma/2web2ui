@@ -4,30 +4,13 @@ import classNames from 'classnames';
 import { ScreenReaderOnly } from '@sparkpost/matchbox';
 import { Inline } from 'src/components/matchbox';
 import { SparkPost } from 'src/components';
+import findRouteByPath from 'src/helpers/findRouteByPath';
 import styles from './DesktopNavigation.module.scss';
 
 export default function DesktopNavigation({ navItems, location }) {
-  // TODO: This can be cleaned up post OG theme removal - by updating the navItems config
-  const isActive = navItem => {
-    if (
-      location.pathname.includes('/reports/message-events') &&
-      navItem.label === 'Signals Analytics'
-    ) {
-      return false;
-    }
+  const { category, subcategory } = findRouteByPath(location.pathname);
 
-    if (navItem.children) {
-      const hasActiveChild = navItem.children.some(child => {
-        return location.pathname === child.to;
-      });
-
-      return hasActiveChild;
-    }
-
-    if (location.pathname.includes(navItem.to)) {
-      return true;
-    }
-  };
+  const isCategoryActive = navItem => category === navItem.label;
 
   return (
     <div className={styles.DesktopNavigation} data-id="desktop-navigation">
@@ -54,7 +37,7 @@ export default function DesktopNavigation({ navItems, location }) {
                     variant="primary"
                     to={item.to}
                     key={`nav-item-${index}`}
-                    isActive={isActive(item)}
+                    isActive={isCategoryActive(item)}
                   >
                     {item.label}
                   </NavLink>
@@ -75,7 +58,7 @@ export default function DesktopNavigation({ navItems, location }) {
       </NavWrapper>
 
       {navItems.map(item => {
-        if (isActive(item) && item.children) {
+        if (isCategoryActive(item) && item.children) {
           return (
             <nav
               className={styles.SecondaryNav}
@@ -96,7 +79,7 @@ export default function DesktopNavigation({ navItems, location }) {
                         variant="secondary"
                         to={childItem.to}
                         key={`subnav-item-${index}`}
-                        isActive={location.pathname.includes(childItem.to)}
+                        isActive={subcategory === childItem.label}
                       >
                         {childItem.label}
                       </NavLink>
