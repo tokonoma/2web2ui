@@ -9,7 +9,8 @@ import {
   isSameDate,
 } from 'src/helpers/date';
 import { roundBoundaries } from 'src/helpers/metrics';
-import { Button, TextField, Select, Popover, WindowEvent, Error } from '@sparkpost/matchbox';
+import { Button, TextField, Popover, WindowEvent, Error } from '@sparkpost/matchbox';
+import { Select } from 'src/components/matchbox';
 import DateSelector from 'src/components/dateSelector/DateSelector';
 import ManualEntryForm from './ManualEntryForm';
 import { FORMATS } from 'src/constants';
