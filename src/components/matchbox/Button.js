@@ -4,12 +4,19 @@ import { Button as HibanaButton } from '@sparkpost/matchbox-hibana';
 import { useHibana } from 'src/context/HibanaContext';
 import { omitSystemProps } from 'src/helpers/hibana';
 
-export default function Button(props) {
+let isHibanaEnabled;
+
+function Button(props) {
   const [state] = useHibana();
-  const { isHibanaEnabled } = state;
+  isHibanaEnabled = state.isHibanaEnabled;
 
   if (!isHibanaEnabled) {
-    return <OGButton {...omitSystemProps(props)} />;
+    return <OGButton {...omitSystemProps(props, ['color'])} />;
   }
+
   return <HibanaButton {...props} />;
 }
+
+Button.Group = isHibanaEnabled ? HibanaButton.Group : OGButton.Group;
+
+export default Button;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from '@sparkpost/matchbox-hibana';
+import { Button } from 'src/components/matchbox';
 import { useHibana } from 'src/context/HibanaContext';
 import styles from './HibanaComponents.module.scss';
 
@@ -11,6 +11,7 @@ export default function HibanaToggle() {
     if (window.pendo && window.pendo.track) {
       window.pendo.track(`Hibana Toggle - ${isHibanaEnabled ? 'Off' : 'On'}`);
     }
+
     dispatch({ type: isHibanaEnabled ? 'DISABLE' : 'ENABLE' });
   };
 
