@@ -11,6 +11,7 @@ function Navigation({ className, navItems, location }) {
   // Filter out nav items not needed in Hibana design
   // TODO: Remove and reconfigure the `navItems` config file when Hibana becomes the default
   const primaryNavItems = navItems.filter(item => {
+    // 'Configuration' and 'Alerts' will be in the account dropdown, not the main nav
     if (item.label !== 'Dashboard' && item.label !== 'Configuration' && item.label !== 'Alerts') {
       return item;
     }

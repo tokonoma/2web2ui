@@ -9,6 +9,7 @@ export default [
     condition: hasAccountOptionEnabled('blacklist_monitors'),
     title: 'Blacklist Incidents',
     supportDocSearch: 'blacklist',
+    category: 'Blacklist',
   },
   {
     path: '/blacklist/watchlist',
@@ -17,6 +18,7 @@ export default [
     condition: hasAccountOptionEnabled('blacklist_monitors'),
     title: 'Watched Monitors',
     supportDocSearch: 'blacklist',
+    category: 'Blacklist',
   },
   {
     path: '/blacklist/watchlist/add',
@@ -25,6 +27,7 @@ export default [
     layout: App,
     title: 'Add to Watch List | Blacklist',
     supportDocSearch: 'blacklist',
+    category: 'Blacklist',
   },
   {
     path: '/blacklist/incidents/:id',
@@ -33,5 +36,6 @@ export default [
     layout: App,
     title: 'Incident Details | Blacklist',
     supportDocSearch: 'blacklist',
+    category: 'Blacklist',
   },
 ];

@@ -9,7 +9,8 @@ export default [
     layout: App,
     condition: hasGrants('inbox-placement/manage'),
     title: 'Inbox Placement Tests',
-    supportDocSearch: 'inbox placement'
+    supportDocSearch: 'inbox placement',
+    category: 'Inbox Placement',
   },
   {
     path: '/inbox-placement/details/:id/:tab?',
@@ -17,7 +18,8 @@ export default [
     layout: App,
     condition: hasGrants('inbox-placement/manage'),
     title: 'Inbox Placement',
-    supportDocSearch: 'inbox placement'
+    supportDocSearch: 'inbox placement',
+    category: 'Inbox Placement',
   },
   {
     path: '/inbox-placement/details/:id/:filterType/:filterName',
@@ -25,7 +27,8 @@ export default [
     layout: App,
     condition: hasGrants('inbox-placement/manage'),
     title: 'Inbox Placement',
-    supportDocSearch: 'inbox placement'
+    supportDocSearch: 'inbox placement',
+    category: 'Inbox Placement',
   },
   {
     path: '/inbox-placement',
@@ -33,5 +36,7 @@ export default [
     layout: App,
     condition: hasGrants('inbox-placement/manage'),
     title: 'Inbox Placement Tests',
-    supportDocSearch: 'inbox placement'
-  }];
+    supportDocSearch: 'inbox placement',
+    category: 'Inbox Placement',
+  },
+];

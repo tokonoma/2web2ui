@@ -201,6 +201,8 @@ const routes = [
     layout: App,
     title: 'Bounce Report | Signals Analytics',
     supportDocSearch: 'bounce',
+    category: 'Signals Analytics',
+    subcategory: 'Bounce',
   },
   {
     path: '/reports/rejections',
@@ -208,6 +210,8 @@ const routes = [
     layout: App,
     title: 'Rejections Report | Signals Analytics',
     supportDocSearch: 'reject',
+    category: 'Signals Analytics',
+    subcategory: 'Rejections',
   },
   {
     path: '/reports/accepted',
@@ -215,6 +219,8 @@ const routes = [
     layout: App,
     title: 'Accepted Report | Signals Analytics',
     supportDocSearch: 'accept',
+    category: 'Signals Analytics',
+    subcategory: 'Accepted',
   },
   {
     path: '/reports/delayed',
@@ -222,6 +228,8 @@ const routes = [
     layout: App,
     title: 'Delay Report | Signals Analytics',
     supportDocSearch: 'delay',
+    category: 'Signals Analytics',
+    subcategory: 'Delayed',
   },
   {
     path: '/reports/engagement',
@@ -229,6 +237,8 @@ const routes = [
     layout: App,
     title: 'Engagement Report | Signals Analytics',
     supportDocSearch: 'engagement',
+    category: 'Signals Analytics',
+    subcategory: 'Engagement',
   },
   {
     path: '/reports/message-events',
@@ -236,6 +246,7 @@ const routes = [
     layout: App,
     title: 'Events Search | Events',
     supportDocSearch: 'event',
+    category: 'Events',
   },
   {
     path: '/reports/message-events/details/:messageId/:eventId?',
@@ -243,10 +254,13 @@ const routes = [
     layout: App,
     title: 'Message History | Events',
     supportDocSearch: 'event',
+    category: 'Events',
   },
   {
     path: '/signals',
     redirect: '/signals/health-score',
+    category: 'Signals Analytics',
+    subcategory: 'Health Score',
   },
   {
     path: '/signals/health-score',
@@ -255,6 +269,8 @@ const routes = [
     layout: App,
     title: 'Health Score | Signals Analytics',
     supportDocSearch: 'signals',
+    category: 'Signals Analytics',
+    subcategory: 'Health Score',
   },
   {
     path: '/signals/spam-traps',
@@ -263,6 +279,8 @@ const routes = [
     layout: App,
     title: 'Spam Trap Monitoring | Signals Analytics',
     supportDocSearch: 'signals',
+    category: 'Signals Analytics',
+    subcategory: 'Spam Traps',
   },
   {
     path: '/signals/engagement',
@@ -271,6 +289,8 @@ const routes = [
     layout: App,
     title: 'Engagement Recency | Signals Analytics',
     supportDocSearch: 'signals',
+    category: 'Signals Analytics',
+    subcategory: 'Engagement Recency',
   },
   {
     path: '/signals/health-score/:facet/:facetId',
@@ -279,6 +299,8 @@ const routes = [
     layout: App,
     title: 'Subaccount | Health Score | Signals Analytics',
     supportDocSearch: 'signals',
+    category: 'Signals Analytics',
+    subcategory: 'Health Score',
   },
   {
     path: '/signals/health-scoreV3/:facet/:facetId',
@@ -287,6 +309,8 @@ const routes = [
     layout: App,
     title: 'Health Score | Signals Analytics',
     supportDocSearch: 'signals',
+    category: 'Signals Analytics',
+    subcategory: 'Health Score',
   },
   {
     path: '/signals/spam-traps/:facet/:facetId',
@@ -295,6 +319,8 @@ const routes = [
     layout: App,
     title: 'Spam Trap Monitoring | Signals Analytics',
     supportDocSearch: 'signals',
+    category: 'Signals Analytics',
+    subcategory: 'Spam Traps',
   },
   {
     path: '/signals/engagement/cohorts/:facet/:facetId',
@@ -303,6 +329,8 @@ const routes = [
     layout: App,
     title: 'Engagement Details | Engagement Recency | Signals Analytics',
     supportDocSearch: 'signals',
+    category: 'Signals Analytics',
+    subcategory: 'Engagement Recency',
   },
   {
     path: '/signals/engagement/engagement-rate/:facet/:facetId',
@@ -311,6 +339,8 @@ const routes = [
     layout: App,
     title: 'Engagement Rate | Signals Analytics',
     supportDocSearch: 'signals',
+    category: 'Signals Analytics',
+    subcategory: 'Engagement Recency',
   },
   {
     path: '/signals/engagement/unsubscribes/:facet/:facetId',
@@ -319,6 +349,8 @@ const routes = [
     layout: App,
     title: 'Signals',
     supportDocSearch: 'signals',
+    category: 'Signals Analytics',
+    subcategory: 'Engagement Recency',
   },
   {
     path: '/signals/engagement/complaints/:facet/:facetId',
@@ -327,6 +359,8 @@ const routes = [
     layout: App,
     title: 'Signals',
     supportDocSearch: 'signals',
+    category: 'Signals Analytics',
+    subcategory: 'Engagement Recency',
   },
   {
     path: '/signals/integration',
@@ -335,16 +369,19 @@ const routes = [
     layout: App,
     title: 'Signals | Integration',
     supportDocSearch: 'signals',
+    category: 'Configuration',
   },
   {
     path: '/account/security',
     redirect: '/account/profile',
+    category: 'Account',
   },
   {
     path: '/account/email-verification/:token',
     component: emailVerification,
     title: 'Verify Your Email',
     supportDocSearch: 'verification',
+    category: 'Account',
   },
   {
     path: '/account/subaccounts',
@@ -353,6 +390,7 @@ const routes = [
     layout: App,
     title: 'Subaccounts',
     supportDocSearch: 'subaccout',
+    category: 'Account',
   },
   {
     path: '/account/subaccounts/create',
@@ -361,6 +399,7 @@ const routes = [
     layout: App,
     title: 'New Subaccount',
     supportDocSearch: 'subaccout',
+    category: 'Account',
   },
   {
     path: '/account/subaccounts/:id',
@@ -370,6 +409,7 @@ const routes = [
     title: 'Subaccount Details',
     exact: false,
     supportDocSearch: 'subaccout',
+    category: 'Account',
   },
   {
     path: '/account/users',
@@ -378,6 +418,7 @@ const routes = [
     layout: App,
     title: 'Users',
     supportDocSearch: 'user',
+    category: 'Account',
   },
   {
     path: '/account/users/create',
@@ -386,6 +427,7 @@ const routes = [
     layout: App,
     title: 'Invite User',
     supportDocSearch: 'user',
+    category: 'Account',
   },
   {
     path: '/account/users/edit/:id',
@@ -394,6 +436,7 @@ const routes = [
     layout: App,
     title: 'Edit User',
     supportDocSearch: 'user',
+    category: 'Account',
   },
   {
     path: '/snippets',
@@ -402,6 +445,8 @@ const routes = [
     layout: App,
     title: 'Snippets',
     supportDocSearch: 'snippet',
+    category: 'Content',
+    subcategory: 'Snippets',
   },
   {
     path: '/snippets/create',
@@ -410,6 +455,8 @@ const routes = [
     layout: App,
     title: 'New Snippet',
     supportDocSearch: 'snippet',
+    category: 'Content',
+    subcategory: 'Snippets',
   },
   {
     path: '/snippets/edit/:id',
@@ -418,6 +465,8 @@ const routes = [
     layout: App,
     title: 'Edit Snippet',
     supportDocSearch: 'snippet',
+    category: 'Content',
+    subcategory: 'Snippets',
   },
 
   {
@@ -427,6 +476,8 @@ const routes = [
     layout: App,
     title: 'Recipient Lists',
     supportDocSearch: 'recipient list',
+    category: 'Recipients',
+    subcategory: 'Recipient Lists',
   },
   {
     path: '/lists/recipient-lists/create',
@@ -435,6 +486,8 @@ const routes = [
     layout: App,
     title: 'New Recipient List',
     supportDocSearch: 'recipient list',
+    category: 'Recipients',
+    subcategory: 'Recipient Lists',
   },
   {
     path: '/lists/recipient-lists/edit/:id',
@@ -443,6 +496,8 @@ const routes = [
     layout: App,
     title: 'Edit Recipient List',
     supportDocSearch: 'recipient list',
+    category: 'Recipients',
+    subcategory: 'Recipient Lists',
   },
   {
     path: '/lists/suppressions',
@@ -451,6 +506,8 @@ const routes = [
     layout: App,
     title: 'Suppressions',
     supportDocSearch: 'suppression list',
+    category: 'Recipients',
+    subcategory: 'Suppressions',
   },
   {
     path: '/lists/suppressions/create',
@@ -459,6 +516,8 @@ const routes = [
     layout: App,
     title: 'New Suppression',
     supportDocSearch: 'suppression list',
+    category: 'Recipients',
+    subcategory: 'Suppressions',
   },
   {
     path: '/webhooks',
@@ -467,6 +526,8 @@ const routes = [
     layout: App,
     title: 'Webhooks',
     supportDocSearch: 'webhook',
+    category: 'Configuration',
+    subcategory: 'Webhooks',
   },
   {
     path: '/webhooks/create',
@@ -475,6 +536,8 @@ const routes = [
     layout: App,
     title: 'New Webhook',
     supportDocSearch: 'webhook',
+    category: 'Configuration',
+    subcategory: 'Webhooks',
   },
   {
     path: '/webhooks/details/:id',
@@ -484,6 +547,8 @@ const routes = [
     title: 'Webhook Details',
     exact: false,
     supportDocSearch: 'webhook',
+    category: 'Configuration',
+    subcategory: 'Webhooks',
   },
   {
     path: '/account/api-keys',
@@ -492,6 +557,8 @@ const routes = [
     layout: App,
     title: 'API Keys',
     supportDocSearch: 'api key',
+    category: 'Configuration',
+    subcategory: 'API Keys',
   },
   {
     path: '/account/api-keys/create',
@@ -500,6 +567,8 @@ const routes = [
     layout: App,
     title: 'New API Key',
     supportDocSearch: 'api key',
+    category: 'Configuration',
+    subcategory: 'API Keys',
   },
   {
     path: '/account/api-keys/edit/:id',
@@ -508,6 +577,8 @@ const routes = [
     layout: App,
     title: 'Edit API Key',
     supportDocSearch: 'api key',
+    category: 'Configuration',
+    subcategory: 'API Keys',
   },
   {
     path: '/account/api-keys/view/:id',
@@ -516,6 +587,8 @@ const routes = [
     layout: App,
     title: 'View API Key',
     supportDocSearch: 'api key',
+    category: 'Configuration',
+    subcategory: 'API Keys',
   },
   {
     path: '/account/tracking-domains',
@@ -524,6 +597,8 @@ const routes = [
     layout: App,
     title: 'Tracking Domains',
     supportDocSearch: 'tracking domain',
+    category: 'Configuration',
+    subcategory: 'Tracking Domains',
   },
   {
     path: '/account/tracking-domains/create',
@@ -532,6 +607,8 @@ const routes = [
     layout: App,
     title: 'New Tracking Domain',
     supportDocSearch: 'tracking domain',
+    category: 'Configuration',
+    subcategory: 'Tracking Domains',
   },
   {
     path: '/account/settings',
@@ -540,10 +617,12 @@ const routes = [
     layout: App,
     title: 'Account settings',
     supportDocSearch: 'account settings',
+    category: 'Account',
   },
   {
     path: '/account/data-privacy',
     redirect: '/account/data-privacy/single-recipient',
+    category: 'Account',
   },
   {
     path: '/account/data-privacy/:category',
@@ -551,6 +630,7 @@ const routes = [
     condition: all(hasGrants('users/manage'), isAccountUiOptionSet('data_privacy')), //TODO: Remove account UI option
     layout: App,
     title: 'Data and Privacy',
+    category: 'Account',
   },
   {
     path: '/account/cancel',
@@ -558,6 +638,7 @@ const routes = [
     condition: all(hasGrants('account/manage'), not(isEnterprise), not(isHeroku), not(isAzure)),
     layout: App,
     title: 'Account | Cancellation In Progress',
+    category: 'Account',
   },
   {
     path: '/account/profile',
@@ -566,6 +647,7 @@ const routes = [
     layout: App,
     title: 'My Profile',
     supportDocSearch: 'account profile',
+    category: 'Account',
   },
   {
     path: '/account/sending-domains',
@@ -574,6 +656,8 @@ const routes = [
     layout: App,
     title: 'Sending Domains',
     supportDocSearch: 'sending domain',
+    category: 'Account',
+    subcategory: 'Sending Domains',
   },
   {
     path: '/account/sending-domains/create',
@@ -582,6 +666,8 @@ const routes = [
     layout: App,
     title: 'New Sending Domain',
     supportDocSearch: 'sending domain',
+    category: 'Account',
+    subcategory: 'Sending Domains',
   },
   {
     path: '/account/sending-domains/edit/:id',
@@ -598,6 +684,7 @@ const routes = [
     layout: App,
     title: 'SMTP Settings',
     supportDocSearch: 'smtp',
+    category: 'Account',
   },
   {
     path: '/account/billing',
@@ -606,6 +693,7 @@ const routes = [
     layout: App,
     title: 'Billing',
     supportDocSearch: 'billing',
+    category: 'Account',
   },
   {
     path: '/account/billing/enable-automatic',
@@ -614,6 +702,7 @@ const routes = [
     layout: App,
     title: 'Billing | Enable Automatic Billing',
     supportDocSearch: 'upgrade account',
+    category: 'Account',
   },
   {
     path: '/account/billing/plan',
@@ -629,6 +718,7 @@ const routes = [
     layout: App,
     title: 'Billing | Change My Plan',
     supportDocSearch: 'upgrade account',
+    category: 'Account',
   },
   {
     path: '/account/billing/plan/change',
@@ -637,6 +727,7 @@ const routes = [
     layout: App,
     title: 'Billing | Plan Change In Progress',
     supportDocSearch: 'upgrade account',
+    category: 'Account',
   },
   {
     path: '/account/ip-pools',
@@ -645,6 +736,8 @@ const routes = [
     layout: App,
     title: 'IP Pools',
     supportDocSearch: 'ip pool',
+    category: 'Account',
+    subcategory: 'IP Pools',
   },
   {
     path: '/account/ip-pools/create',
@@ -653,6 +746,8 @@ const routes = [
     layout: App,
     title: 'New IP Pool',
     supportDocSearch: 'ip pool',
+    category: 'Account',
+    subcategory: 'IP Pools',
   },
   {
     path: '/account/ip-pools/edit/:poolId',
@@ -661,6 +756,8 @@ const routes = [
     layout: App,
     title: 'Edit IP Pool',
     supportDocSearch: 'ip pool',
+    category: 'Account',
+    subcategory: 'IP Pools',
   },
   {
     path: '/account/ip-pools/edit/:poolId/:ip',
@@ -669,6 +766,8 @@ const routes = [
     layout: App,
     title: 'Edit IP',
     supportDocSearch: 'ip pool',
+    category: 'Account',
+    subcategory: 'IP Pools',
   },
   {
     path: '/ab-testing',
@@ -677,6 +776,8 @@ const routes = [
     layout: App,
     title: 'A/B Testing',
     supportDocsSearch: 'A/B test',
+    category: 'Content',
+    subcategory: 'A/B Testing',
   },
   {
     path: '/ab-testing/create',
@@ -685,6 +786,8 @@ const routes = [
     layout: App,
     title: 'Create A/B Test',
     supportDocsSearch: 'A/B test',
+    category: 'Content',
+    subcategory: 'A/B Testing',
   },
   {
     path: '/ab-testing/:id/:version',
@@ -693,6 +796,8 @@ const routes = [
     layout: App,
     title: 'A/B Testing',
     supportDocsSearch: 'A/B test',
+    category: 'Content',
+    subcategory: 'A/B Testing',
   },
   {
     path: '/alerts',
@@ -701,6 +806,7 @@ const routes = [
     layout: App,
     title: 'Alerts',
     supportDocsSearch: 'Alerts',
+    category: 'Alerts',
   },
   {
     path: '/alerts/details/:id',
@@ -709,6 +815,7 @@ const routes = [
     layout: App,
     title: 'Alert Details | Alerts',
     supportDocsSearch: 'Alerts',
+    category: 'Alerts',
   },
   {
     path: '/alerts/create/:id?',
@@ -717,6 +824,7 @@ const routes = [
     layout: App,
     title: 'Create Alert | Alerts',
     supportDocsSearch: 'Alerts',
+    category: 'Alerts',
   },
   {
     path: '/alerts/edit/:id',
@@ -725,6 +833,7 @@ const routes = [
     layout: App,
     title: 'Edit Alert | Alerts',
     supportDocsSearch: 'Alerts',
+    category: 'Alerts',
   },
   {
     path: '/onboarding/plan',
@@ -743,6 +852,8 @@ const routes = [
   {
     path: '/recipient-validation',
     redirect: '/recipient-validation/list',
+    category: 'Recipients',
+    subcategory: 'Recipient Validation',
   },
   {
     path: '/recipient-validation/single/:email',
@@ -751,6 +862,8 @@ const routes = [
     layout: App,
     title: 'Results | Recipient Validation',
     supportDocsSearch: 'Recipient Validation',
+    category: 'Recipients',
+    subcategory: 'Recipient Validation',
   },
   {
     path: '/recipient-validation/list/:listId',
@@ -759,6 +872,8 @@ const routes = [
     layout: App,
     title: 'Validation Status | List | Recipient Validation',
     supportDocsSearch: 'Recipient Validation',
+    category: 'Recipients',
+    subcategory: 'Recipient Validation',
   },
   {
     path: '/recipient-validation/:category',
@@ -767,6 +882,8 @@ const routes = [
     layout: App,
     title: 'Recipient Validation',
     supportDocsSearch: 'Recipient Validation',
+    category: 'Recipients',
+    subcategory: 'Recipient Validation',
   },
   {
     path: '/support/aws-premium',
@@ -775,6 +892,7 @@ const routes = [
     title: 'Support | Request Premium Support',
     layout: App,
     supportDocSearch: 'upgrade plan',
+    category: 'Account',
   },
   {
     path: '/logout',
