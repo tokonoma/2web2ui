@@ -96,6 +96,20 @@ describe('the Hibana navigation', () => {
       });
     });
 
+    it('renders the subnav links when subsections within the "Recipient Validation" page are a', () => {
+      cy.get(desktopNavSelector).within(() => {
+        cy.findByText('Recipients').click();
+      });
+
+      cy.findByText('Single Address').click();
+
+      cy.get(secondaryNavSelector).within(() => {
+        cy.assertLink({ content: 'Recipient Validation', href: '/recipient-validation/list' });
+        cy.assertLink({ content: 'Recipient Lists', href: '/lists/recipient-lists' });
+        cy.assertLink({ content: 'Suppressions', href: '/lists/suppressions' });
+      });
+    });
+
     it('does not render the subnav when "Inbox Placement" is active', () => {
       cy.get(desktopNavSelector).within(() => {
         cy.findByText('Inbox Placement').click();
