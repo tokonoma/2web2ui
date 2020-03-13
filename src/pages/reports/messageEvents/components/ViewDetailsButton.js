@@ -10,14 +10,15 @@ export class ViewDetailsButton extends Component {
   render() {
     const { message_id, event_id } = this.props;
 
-
     const to = {
-      pathname: getDetailsPath(message_id, event_id)
+      pathname: getDetailsPath(message_id, event_id),
     };
 
     return (
       <div className={styles.AlignRight}>
-        <Button Component={Link} to={to} size='small'>View Details</Button>
+        <Button Component={Link} to={to} size="small">
+          View Details
+        </Button>
       </div>
     );
   }

@@ -4,22 +4,28 @@ import styles from './Pagination.module.scss';
 import React from 'react';
 import { DEFAULT_PER_PAGE_BUTTONS } from 'src/constants';
 
-
-const PerPageButtons = ({ perPage, perPageButtons = DEFAULT_PER_PAGE_BUTTONS, onPerPageChange, totalCount }) => {
-
+const PerPageButtons = ({
+  perPage,
+  perPageButtons = DEFAULT_PER_PAGE_BUTTONS,
+  onPerPageChange,
+  totalCount,
+}) => {
   if (totalCount <= Math.min(...perPageButtons)) {
     return null;
   }
 
   return (
-    <Button.Group><span className={styles.PerPageText}>Per Page</span>
-      {perPageButtons.map((buttonAmount) => (
+    <Button.Group>
+      <span className={styles.PerPageText}>Per Page</span>
+      {perPageButtons.map(buttonAmount => (
         <Button
           className={classnames(perPage === buttonAmount && styles.Selected)}
           key={buttonAmount}
           name="collection-per-page-button"
           onClick={() => onPerPageChange(buttonAmount)}
-        >{buttonAmount}</Button>
+        >
+          {buttonAmount}
+        </Button>
       ))}
     </Button.Group>
   );
