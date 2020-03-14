@@ -91,9 +91,7 @@ export default [
   },
   {
     label: 'Recipients',
-    to: hasGrants('recipient-validation/preview')()
-      ? '/recipient-validation/list'
-      : '/lists/recipient-lists', // TODO: How can this be handled using grants?
+    to: '', // This value is dynamically generated in the navigation UI depending on the user's access to RV
     icon: People,
     children: [
       {

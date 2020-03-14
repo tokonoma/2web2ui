@@ -3,10 +3,7 @@ describe('the Hibana navigation', () => {
   const secondaryNavSelector = '[data-id="secondary-navigation"]';
   const mobileNavSelector = '[data-id="mobile-navigation"]';
 
-  beforeEach(() => {
-    cy.stubAuth();
-    cy.login({ isStubbed: true });
-
+  function commonBeforeSteps() {
     cy.stubRequest({
       url: '/api/v1/account*',
       fixture: 'account/200.get.has-hibana-theme-controls.json',
@@ -15,20 +12,28 @@ describe('the Hibana navigation', () => {
     cy.visit('/');
 
     cy.findByText('Take a Look').click();
+  }
+
+  beforeEach(() => {
+    cy.stubAuth();
+    cy.login({ isStubbed: true });
   });
 
   describe('desktop navigation', () => {
     beforeEach(() => {
       cy.viewport(960, 1024);
-      cy.get(desktopNavSelector).scrollIntoView();
     });
 
     it('does not render the mobile navigation at 960px viewport width and above', () => {
+      commonBeforeSteps();
+
       cy.get(mobileNavSelector).should('not.be.visible');
       cy.get(desktopNavSelector).should('be.visible');
     });
 
     it('renders all primary nav items when on the dashboard', () => {
+      commonBeforeSteps();
+
       cy.get(desktopNavSelector).within(() => {
         cy.assertLink({ content: 'Signals Analytics', href: '/reports' });
         cy.assertLink({ content: 'Events', href: '/reports/message-events' });
@@ -40,6 +45,8 @@ describe('the Hibana navigation', () => {
     });
 
     it('routes to the summary page and renders relevant subnav links when "Signals Analytics" is active', () => {
+      commonBeforeSteps();
+
       cy.get(desktopNavSelector).within(() => {
         cy.findByText('Signals Analytics').click();
       });
@@ -59,6 +66,8 @@ describe('the Hibana navigation', () => {
     });
 
     it('does not render the subnav when "Events" is active', () => {
+      commonBeforeSteps();
+
       cy.get(desktopNavSelector).within(() => {
         cy.findByText('Events').click();
       });
@@ -69,6 +78,8 @@ describe('the Hibana navigation', () => {
     });
 
     it('routes to the templates page and renders relevant subnav links when "Content" is active', () => {
+      commonBeforeSteps();
+
       cy.get(desktopNavSelector).within(() => {
         cy.findByText('Content').click();
       });
@@ -83,6 +94,8 @@ describe('the Hibana navigation', () => {
     });
 
     it('routes to the recipient validation page and renders relevant subnav links when "Recipients" is active', () => {
+      commonBeforeSteps();
+
       cy.get(desktopNavSelector).within(() => {
         cy.findByText('Recipients').click();
       });
@@ -96,7 +109,25 @@ describe('the Hibana navigation', () => {
       });
     });
 
-    it('renders the subnav links when subsections within the "Recipient Validation" page are a', () => {
+    it('routes to the recipient list page when the user does not have Recipient Validation grants when navigating using the "Recipients" nav item', () => {
+      cy.stubRequest({
+        url: '/api/v1/authenticate/grants*',
+        fixture: 'authenticate/grants/200.get.templates.json',
+      });
+
+      commonBeforeSteps();
+
+      cy.get(desktopNavSelector).within(() => {
+        cy.findByText('Recipients').click();
+      });
+
+      cy.url().should('not.include', '/recipient-validation/list');
+      cy.url().should('include', '/lists/recipient-lists');
+    });
+
+    it('renders the subnav links when subsections within the "Recipient Validation" category when a subroute is visited', () => {
+      commonBeforeSteps();
+
       cy.get(desktopNavSelector).within(() => {
         cy.findByText('Recipients').click();
       });
@@ -111,6 +142,8 @@ describe('the Hibana navigation', () => {
     });
 
     it('does not render the subnav when "Inbox Placement" is active', () => {
+      commonBeforeSteps();
+
       cy.get(desktopNavSelector).within(() => {
         cy.findByText('Inbox Placement').click();
       });
@@ -121,6 +154,8 @@ describe('the Hibana navigation', () => {
     });
 
     it('does not render the subnav when "Blacklist" is active', () => {
+      commonBeforeSteps();
+
       cy.get(desktopNavSelector).within(() => {
         cy.findByText('Blacklist').click();
       });
@@ -138,6 +173,8 @@ describe('the Hibana navigation', () => {
     });
 
     it('does not render the desktop navigation below the 960px viewport width', () => {
+      commonBeforeSteps();
+
       cy.get(desktopNavSelector).should('not.be.visible');
       cy.get(mobileNavSelector).should('be.visible');
     });
