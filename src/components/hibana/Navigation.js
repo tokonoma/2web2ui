@@ -29,7 +29,7 @@ function Navigation(props) {
         return item;
       }
     })
-    .filter(Boolean);
+    .filter(Boolean); // Removes undefined entries
 
   return (
     <header className={className}>
