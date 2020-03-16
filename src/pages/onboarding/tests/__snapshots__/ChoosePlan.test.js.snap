@@ -67,8 +67,6 @@ exports[`ChoosePlan page tests should disable submit and plan picker when submit
 </form>
 `;
 
-exports[`ChoosePlan page tests should render component 1`] = `<Loading />`;
-
 exports[`ChoosePlan page tests should render correctly 1`] = `
 <form>
   <CenteredLogo />
