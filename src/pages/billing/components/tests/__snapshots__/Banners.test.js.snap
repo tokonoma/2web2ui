@@ -10,7 +10,7 @@ exports[`Billing Banners:  Enterprise banner renders 1`] = `
       "to": "https://www.sparkpost.com/contact-enterprise",
     }
   }
-  status="default"
+  my="300"
   title="Enterprise"
 >
   <p>
@@ -42,6 +42,7 @@ exports[`Billing Banners:  Enterprise banner renders 1`] = `
 
 exports[`Billing Banners:  Free Plan Downgrade warning banner renders 1`] = `
 <Banner
+  my="300"
   status="warning"
   title="Free Plan Downgrade"
 >
@@ -64,6 +65,7 @@ exports[`Billing Banners:  Free Plan Downgrade warning banner renders 1`] = `
 
 exports[`Billing Banners:  Free Plan Downgrade warning banner renders correct text on last day of plan 1`] = `
 <Banner
+  my="300"
   status="warning"
   title="Free Plan Downgrade"
 >
@@ -96,6 +98,7 @@ exports[`Billing Banners:  Free Plan Downgrade warning banner should not render 
 
 exports[`Billing Banners:  PendingPlanBanner should render with pending_subscription 1`] = `
 <Banner
+  my="300"
   status="info"
   title="Pending Plan Change"
 >
@@ -119,7 +122,7 @@ exports[`Billing Banners:  Premium banner renders 1`] = `
       "to": "https://www.sparkpost.com/contact-premium",
     }
   }
-  status="default"
+  my="300"
   title="Premium Addon Plan"
 >
   <p>

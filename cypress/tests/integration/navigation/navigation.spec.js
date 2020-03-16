@@ -724,5 +724,28 @@ describe('Mobile Navigation', () => {
 
       cy.queryByText('Inbox Placement').should('not.be.visible');
     });
+
+    it('renders the "Upgrade Plan" link and Upgrade tag when the users is on the free plan', () => {
+      cy.stubRequest({
+        url: '/api/v1/account*',
+        fixture: 'account/200.get.test-plan.json',
+      });
+
+      cy.visit(PAGE_URL);
+
+      cy.get('[data-id="top-nav"]').within(() => {
+        cy.assertLink({
+          content: 'Upgrade Plan',
+          href: '/account/billing/plan',
+        });
+      });
+
+      openAccountMenu();
+
+      cy.get(accountDropdownListSelector).within(() => {
+        cy.queryByText('Billing').should('be.visible');
+        cy.queryByText('Upgrade').should('be.visible');
+      });
+    });
   });
 });

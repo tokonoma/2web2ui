@@ -5,7 +5,6 @@ export const initialState = {
   testsPending: true,
   tests: [],
   trends: [],
-  stopTestPending: false,
   placementsByProvider: [],
   placementsByRegion: [],
   placementsBySendingIp: [],
@@ -56,13 +55,6 @@ export default (state = initialState, { type, payload, meta }) => {
     }
     case 'GET_INBOX_PLACEMENT_TRENDS_FILTER_VALUES_FAIL':
       return { ...state, getTrendsFilterValuesPending: false, getTrendsFilterValuesError: payload };
-
-    case 'STOP_INBOX_PLACEMENT_TEST_PENDING':
-      return { ...state, stopTestPending: true, stopTestError: null };
-    case 'STOP_INBOX_PLACEMENT_TEST_SUCCESS':
-      return { ...state, stopTestPending: false, stopTestError: null };
-    case 'STOP_INBOX_PLACEMENT_TEST_FAIL':
-      return { ...state, stopTestPending: false, stopTestError: payload };
 
     case 'GET_INBOX_PLACEMENT_TESTS_BY_MAILBOX_PROVIDER_PENDING':
       return { ...state, getByProviderPending: true, getByProviderError: null };

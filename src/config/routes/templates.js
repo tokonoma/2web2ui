@@ -3,6 +3,11 @@ import { hasGrants } from '../../helpers/conditions';
 import App from '../../components/layout/App';
 import Fullscreen from 'src/components/layout/Fullscreen';
 
+const navCategories = {
+  category: 'Content',
+  subcategory: 'Templates',
+};
+
 const templatesRoutes = [
   {
     path: '/templates',
@@ -10,7 +15,8 @@ const templatesRoutes = [
     condition: hasGrants('templates/view'),
     layout: App,
     title: 'Templates',
-    supportDocSearch: 'template'
+    supportDocSearch: 'template',
+    ...navCategories,
   },
   {
     path: '/templates/create',
@@ -18,7 +24,8 @@ const templatesRoutes = [
     condition: hasGrants('templates/modify'),
     layout: App,
     title: 'Create New Template',
-    supportDocSearch: 'template'
+    supportDocSearch: 'template',
+    ...navCategories,
   },
   {
     path: '/templates/edit/:id/:version?/:navKey?',
@@ -26,8 +33,9 @@ const templatesRoutes = [
     condition: hasGrants('templates/view'),
     layout: Fullscreen,
     title: 'Edit Template',
-    supportDocSearch: 'template'
-  }
+    supportDocSearch: 'template',
+    ...navCategories,
+  },
 ];
 
 export default templatesRoutes;

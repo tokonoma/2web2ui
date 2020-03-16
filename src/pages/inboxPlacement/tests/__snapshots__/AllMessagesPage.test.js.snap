@@ -22,12 +22,6 @@ exports[`Page: All Inbox Placement Messages Test renders page correctly with def
     }
   }
   empty={Object {}}
-  primaryArea={
-    <Connect(StopTest)
-      id={0}
-      reload={[Function]}
-    />
-  }
   subtitle="gmail"
   title="Inbox Placement"
 >

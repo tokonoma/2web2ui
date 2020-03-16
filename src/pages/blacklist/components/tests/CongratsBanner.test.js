@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { render } from '@testing-library/react';
 import CongratsBanner from '../CongratsBanner';
-
+import { HibanaProvider } from 'src/context/HibanaContext';
 describe('Blacklist Component: CongratsBanner', () => {
   const mockDismiss = jest.fn();
   const subject = ({ ...props }) => {
@@ -10,7 +10,9 @@ describe('Blacklist Component: CongratsBanner', () => {
 
     return render(
       <Router>
-        <CongratsBanner {...defaults} {...props} />
+        <HibanaProvider>
+          <CongratsBanner {...defaults} {...props} />
+        </HibanaProvider>
       </Router>,
     );
   };
