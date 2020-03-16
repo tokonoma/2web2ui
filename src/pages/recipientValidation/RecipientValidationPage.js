@@ -41,24 +41,28 @@ export function RecipientValidationPage(props) {
     submitting,
     isRVonSubscription,
     addRVFormValues,
+    tab,
+    history,
+    reset,
+    handleSubmit,
   } = props;
-  const [useSavedCC, setUseSavedCC] = useState(Boolean(props.billing.credit_card));
-  const [selectedTab, setSelectedTab] = useState(props.tab || 0);
+  const [useSavedCC, setUseSavedCC] = useState(Boolean(billing.credit_card));
+  const [selectedTab, setSelectedTab] = useState(tab || 0);
   const [showPriceModal, setShowPriceModal] = useState(false);
   const redirectToNextStep = useCallback(
     formValues => {
       switch (selectedTab) {
         case 1:
-          props.history.push(`/recipient-validation/single/${formValues.address}`);
+          history.push(`/recipient-validation/single/${formValues.address}`);
           break;
         case 2:
-          props.history.push(`/account/api-keys/create`);
+          history.push(`/account/api-keys/create`);
           break;
         default:
           break;
       }
     },
-    [selectedTab, props.history],
+    [selectedTab, history],
   );
 
   useEffect(() => {
@@ -68,8 +72,8 @@ export function RecipientValidationPage(props) {
     getBillingSubscription();
   }, [getBillingSubscription]);
   useEffect(() => {
-    setUseSavedCC(Boolean(props.billing.credit_card));
-  }, [billing, props.billing.credit_card]);
+    setUseSavedCC(Boolean(billing.credit_card));
+  }, [billing, billing.credit_card]);
 
   useEffect(() => {
     if (!addRVtoSubscriptionloading && addRVtoSubscriptionsuccess && !addRVtoSubscriptionerror)
@@ -86,16 +90,14 @@ export function RecipientValidationPage(props) {
   }, []);
 
   const handleTabs = tabIdx => {
-    const { history } = props;
     history.replace(`/recipient-validation/${tabs[tabIdx].key}`);
     setSelectedTab(tabIdx);
-    props.reset();
+    reset();
   };
 
   const handleToggleCC = val => setUseSavedCC(!val);
 
   const renderTabContent = tabId => {
-    const { handleSubmit, reset } = props;
     switch (tabId) {
       case 0:
         return <ListTab handleSubmit={handleSubmit} reset={reset} />;
@@ -128,9 +130,9 @@ export function RecipientValidationPage(props) {
 
   const handleModal = (showPriceModal = false) => setShowPriceModal(showPriceModal);
 
-  if (props.addRVtoSubscriptionloading) return <Loading />;
+  if (addRVtoSubscriptionloading) return <Loading />;
   return (
-    <form onSubmit={props.handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <Page
         title="Recipient Validation"
         primaryArea={
