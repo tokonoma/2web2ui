@@ -164,6 +164,28 @@ describe('the Hibana navigation', () => {
 
       cy.get(secondaryNavSelector).should('not.be.visible');
     });
+
+    it("renders the pending cancellation banner when the user's account is pending cancellation", () => {
+      cy.stubAuth();
+
+      cy.stubRequest({
+        url: '/api/v1/account*',
+        fixture: 'account/200.get.pending-cancellation.json',
+      });
+
+      cy.login({ isStubbed: true });
+      cy.visit('/account/settings'); // Re-routing to this page successfully renders the banner
+      cy.findByText('Take a Look').click();
+
+      cy.stubRequest({
+        method: 'DELETE',
+        url: '/api/v1/account/cancellation-request',
+        fixture: 'account/cancellation-request/200.delete.json',
+      });
+
+      cy.findByText("Don't Cancel").click();
+      cy.findByText('Your account will not be cancelled.').should('be.visible');
+    });
   });
 
   describe('mobile navigation', () => {
