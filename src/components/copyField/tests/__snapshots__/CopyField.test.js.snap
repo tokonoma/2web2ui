@@ -21,7 +21,6 @@ exports[`CopyField Component should handle copy click 1`] = `
   <Button
     name="copy-field-button"
     onClick={[Function]}
-    size="default"
   >
     <ContentCopy
       size={14}
@@ -54,7 +53,6 @@ exports[`CopyField Component should pass rest of attrs to TextField 1`] = `
       <Button
         name="copy-field-button"
         onClick={[Function]}
-        size="default"
       >
         <ContentCopy
           size={14}
@@ -96,7 +94,6 @@ exports[`CopyField Component should render - no props 1`] = `
       <Button
         name="copy-field-button"
         onClick={[Function]}
-        size="default"
       >
         <ContentCopy
           size={14}

@@ -71,7 +71,6 @@ exports[`A/B Test Create Form Component should render correctly 1`] = `
     <Button
       disabled={true}
       primary={true}
-      size="default"
       submit={true}
     >
       Continue
@@ -161,7 +160,6 @@ exports[`A/B Test Create Form Component should render when no available template
     <Button
       disabled={true}
       primary={true}
-      size="default"
       submit={true}
     >
       Continue

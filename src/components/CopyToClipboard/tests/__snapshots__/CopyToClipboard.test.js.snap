@@ -20,7 +20,6 @@ exports[`CopyToClipboard Component renders with default props 1`] = `
   <Button
     name="copy-field-button"
     onClick={[Function]}
-    size="default"
   >
     <ContentCopy
       size={14}

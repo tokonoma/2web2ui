@@ -6,7 +6,6 @@ exports[`Component: ShareModal should render correctly when open 1`] = `
     fullWidth={true}
     id="shareModalButton"
     onClick={[Function]}
-    size="default"
   >
     Share
   </Button>
@@ -42,7 +41,6 @@ exports[`Component: ShareModal should render correctly when open 1`] = `
         <Button
           onClick={[Function]}
           primary={true}
-          size="default"
         >
           Done
         </Button>
@@ -58,7 +56,6 @@ exports[`Component: ShareModal should render with a valid relative range 1`] = `
     fullWidth={true}
     id="shareModalButton"
     onClick={[Function]}
-    size="default"
   >
     Share
   </Button>
@@ -90,7 +87,6 @@ exports[`Component: ShareModal should render with a valid relative range 1`] = `
         <Button
           onClick={[Function]}
           primary={true}
-          size="default"
         >
           Done
         </Button>

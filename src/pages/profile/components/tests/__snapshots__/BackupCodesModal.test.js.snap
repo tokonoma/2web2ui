@@ -54,7 +54,6 @@ exports[`Component: BackupCodesModal should change button text to Generating... 
             disabled={true}
             onClick={[MockFunction]}
             primary={true}
-            size="default"
             type="submit"
           >
             Generating...
@@ -62,7 +61,6 @@ exports[`Component: BackupCodesModal should change button text to Generating... 
           <Button
             className="Cancel"
             onClick={[MockFunction]}
-            size="default"
           >
             Cancel
           </Button>
@@ -127,7 +125,6 @@ exports[`Component: BackupCodesModal should render correctly 1`] = `
             disabled={false}
             onClick={[Function]}
             primary={true}
-            size="default"
             type="submit"
           >
             Generate
@@ -135,7 +132,6 @@ exports[`Component: BackupCodesModal should render correctly 1`] = `
           <Button
             className="Cancel"
             onClick={[MockFunction]}
-            size="default"
           >
             Cancel
           </Button>
@@ -192,7 +188,6 @@ exports[`Component: BackupCodesModal should show new codes when they exist 1`] =
           <Button
             onClick={[MockFunction]}
             primary={true}
-            size="default"
           >
             Close
           </Button>
@@ -257,7 +252,6 @@ exports[`Component: BackupCodesModal should show password error when exists 1`] 
             disabled={false}
             onClick={[MockFunction]}
             primary={true}
-            size="default"
             type="submit"
           >
             Generate
@@ -265,7 +259,6 @@ exports[`Component: BackupCodesModal should show password error when exists 1`] 
           <Button
             className="Cancel"
             onClick={[MockFunction]}
-            size="default"
           >
             Cancel
           </Button>

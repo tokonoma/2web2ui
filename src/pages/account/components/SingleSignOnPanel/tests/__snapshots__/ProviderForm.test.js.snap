@@ -58,7 +58,6 @@ exports[`ProviderForm disables fields and buttons when submitting 1`] = `
       <Button
         disabled={true}
         primary={true}
-        size="default"
         type="submit"
       >
         Provision SSO
@@ -66,7 +65,6 @@ exports[`ProviderForm disables fields and buttons when submitting 1`] = `
       <Button
         className="cancel"
         onClick={[Function]}
-        size="default"
       >
         Cancel
       </Button>
@@ -131,7 +129,6 @@ exports[`ProviderForm renders form 1`] = `
     <Panel.Section>
       <Button
         primary={true}
-        size="default"
         type="submit"
       >
         Provision SSO
@@ -139,7 +136,6 @@ exports[`ProviderForm renders form 1`] = `
       <Button
         className="cancel"
         onClick={[Function]}
-        size="default"
       >
         Cancel
       </Button>

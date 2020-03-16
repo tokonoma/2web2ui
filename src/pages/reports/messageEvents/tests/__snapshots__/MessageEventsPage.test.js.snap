@@ -156,7 +156,6 @@ exports[`Page: Message Events tests should render page correctly 1`] = `
       <Button
         disabled={false}
         onClick={[Function]}
-        size="default"
       >
         Save as CSV
       </Button>

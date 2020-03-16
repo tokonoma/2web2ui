@@ -15,7 +15,6 @@ exports[`PerPageControl renders group of buttons 1`] = `
       flat={true}
       key="10"
       onClick={[Function]}
-      size="default"
     >
       10
     </Button>
@@ -24,7 +23,6 @@ exports[`PerPageControl renders group of buttons 1`] = `
       flat={true}
       key="25"
       onClick={[Function]}
-      size="default"
     >
       25
     </Button>
@@ -33,7 +31,6 @@ exports[`PerPageControl renders group of buttons 1`] = `
       flat={true}
       key="50"
       onClick={[Function]}
-      size="default"
     >
       50
     </Button>
@@ -42,7 +39,6 @@ exports[`PerPageControl renders group of buttons 1`] = `
       flat={true}
       key="100"
       onClick={[Function]}
-      size="default"
     >
       100
     </Button>

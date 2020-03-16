@@ -39,7 +39,6 @@ exports[`renders correctly 1`] = `
       data-id="button-log-in"
       disabled={false}
       primary={true}
-      size="default"
       submit={true}
     >
       Log In
@@ -87,7 +86,6 @@ exports[`renders correctly when logging in 1`] = `
       data-id="button-log-in"
       disabled={true}
       primary={true}
-      size="default"
       submit={true}
     >
       Logging In
@@ -146,7 +144,6 @@ exports[`renders errors 1`] = `
       data-id="button-log-in"
       disabled={false}
       primary={true}
-      size="default"
       submit={true}
     >
       Log In

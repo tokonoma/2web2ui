@@ -6,7 +6,6 @@ exports[`PublishedModeActions renders published actions 1`] = `
     className="Actions"
     data-id="button-edit-draft"
     role="button"
-    size="default"
     to="/templates/edit/a-random-id-123/draft/content?subaccount=some-subaccount-id"
   >
     <strong>
@@ -27,7 +26,6 @@ exports[`PublishedModeActions renders published actions 1`] = `
           aria-expanded="false"
           data-id="popover-trigger-editor-actions"
           onClick={[Function]}
-          size="default"
         >
           <ArrowDropDown />
           <ScreenReaderOnly>

@@ -19,7 +19,6 @@ exports[`Form Container: Update Contact should render 1`] = `
     <Panel.Section>
       <Button
         primary={true}
-        size="default"
         type="submit"
       >
         Update Payment Information
@@ -27,7 +26,6 @@ exports[`Form Container: Update Contact should render 1`] = `
       <Button
         className="Cancel"
         onClick={[MockFunction]}
-        size="default"
       >
         Cancel
       </Button>

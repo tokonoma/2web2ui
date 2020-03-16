@@ -112,7 +112,6 @@ exports[`Confirmation:  should render correctly for an upgrade effectively immed
 <Button
   fullWidth={true}
   primary={true}
-  size="default"
   to={null}
   type="submit"
 >
@@ -206,7 +205,6 @@ exports[`Confirmation:  should render correctly with a downgrade 2`] = `
   destructive={true}
   fullWidth={true}
   primary={false}
-  size="default"
   to={null}
   type="submit"
 >
@@ -284,7 +282,6 @@ exports[`Confirmation:  should render correctly with a downgrade to free 2`] = `
   destructive={true}
   fullWidth={true}
   primary={false}
-  size="default"
   to="redirect"
   type="button"
 >
@@ -297,7 +294,6 @@ exports[`Confirmation:  should render correctly with an old free to free plan ch
   destructive={true}
   fullWidth={true}
   primary={false}
-  size="default"
   to="redirect"
   type="button"
 >
@@ -375,7 +371,6 @@ exports[`Confirmation:  should render correctly with an upgrade 2`] = `
 <Button
   fullWidth={true}
   primary={true}
-  size="default"
   to={null}
   type="submit"
 >
@@ -502,7 +497,6 @@ exports[`Confirmation:  should render with nothing selected 2`] = `
   destructive={false}
   fullWidth={true}
   primary={true}
-  size="default"
   to={null}
   type="submit"
 >

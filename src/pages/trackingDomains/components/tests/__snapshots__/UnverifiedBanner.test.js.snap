@@ -21,7 +21,6 @@ exports[`Component: UnverifiedBanner should render correctly with 1 unverified d
   <Button
     external={true}
     outline={true}
-    size="default"
     to="https://www.sparkpost.com/docs/tech-resources/enabling-multiple-custom-tracking-domains"
   >
     Learn more
@@ -50,7 +49,6 @@ exports[`Component: UnverifiedBanner should render correctly with more than 1 un
   <Button
     external={true}
     outline={true}
-    size="default"
     to="https://www.sparkpost.com/docs/tech-resources/enabling-multiple-custom-tracking-domains"
   >
     Learn more
