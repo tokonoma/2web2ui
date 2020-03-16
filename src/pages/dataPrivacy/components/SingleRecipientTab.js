@@ -19,9 +19,10 @@ const requestTypes = [
   },
 ];
 
-export function SingleRecipientTab() {
+export function SingleRecipientTab(props) {
+  const onSubmit = () => {};
   return (
-    <form handleSubmit={() => {}}>
+    <form onSubmit={props.handleSubmit(onSubmit)}>
       <div style={{ padding: '1rem', paddingBottom: 0, paddingTop: '2rem' }}>
         <Field
           component={RadioGroup}
@@ -44,9 +45,11 @@ export function SingleRecipientTab() {
       </div>
       <SubaccountSection newTemplate={true} disabled={false} />
       <div style={{ padding: '1rem' }}>
-        <Button color="orange">Submit Request</Button>
+        <Button color="orange" type="submit">
+          Submit Request
+        </Button>
         <div style={{ marginLeft: '1rem', display: 'inline' }}>
-          <Button>Cancel</Button>
+          <Button onClick={props.reset}>Cancel</Button>
         </div>
       </div>
     </form>
