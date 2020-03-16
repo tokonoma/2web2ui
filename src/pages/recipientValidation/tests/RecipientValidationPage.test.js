@@ -27,6 +27,7 @@ describe('Page: Recipient Email Verification', () => {
     },
     getBillingInfo: jest.fn(),
     getBillingSubscription: jest.fn(),
+    resetAddRVtoSubscription: jest.fn(),
     reset: jest.fn(),
     handleSubmit: jest.fn(),
   };
