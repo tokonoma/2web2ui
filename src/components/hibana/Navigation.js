@@ -7,9 +7,10 @@ import { selectNavItems } from 'src/selectors/navItems';
 import { hasGrants } from 'src/helpers/conditions';
 import withContext from 'src/context/withContext';
 import { BannerContext } from 'src/context/GlobalBanner';
+import PendingCancelGlobalBanner from 'src/pages/billing/components/PendingCancelGlobalBanner';
 
 function Navigation(props) {
-  const { className, navItems, location, hasRVGrant } = props;
+  const { className, navItems, location, hasRVGrant, bannerOpen } = props;
 
   // Filter out nav items not needed in Hibana design
   // TODO: Remove and reconfigure the `navItems` config file when Hibana becomes the default
@@ -32,11 +33,15 @@ function Navigation(props) {
     .filter(Boolean); // Removes undefined entries
 
   return (
-    <header className={className}>
-      <DesktopNavigation navItems={primaryNavItems} location={location} />
+    <>
+      <header className={className}>
+        <DesktopNavigation navItems={primaryNavItems} location={location} />
 
-      <MobileNavigation navItems={navItems} location={location} />
-    </header>
+        <MobileNavigation navItems={navItems} location={location} />
+      </header>
+
+      {bannerOpen && <PendingCancelGlobalBanner style={{ position: 'sticky', top: 0 }} />}
+    </>
   );
 }
 
