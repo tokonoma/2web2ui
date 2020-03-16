@@ -1,8 +1,7 @@
 import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
 import { render } from '@testing-library/react';
 import MonitorssCollection from '../MonitorsCollection';
-import { HibanaProvider } from 'src/context/HibanaContext';
+import TestApp from 'src/helpers/TestApp';
 
 describe('Blacklist Component: MonitorsCollection', () => {
   const monitors = [
@@ -19,11 +18,9 @@ describe('Blacklist Component: MonitorsCollection', () => {
     const defaults = { monitors };
 
     return render(
-      <HibanaProvider>
-        <Router>
-          <MonitorssCollection {...defaults} {...props} />
-        </Router>
-      </HibanaProvider>,
+      <TestApp>
+        <MonitorssCollection {...defaults} {...props} />
+      </TestApp>,
     );
   };
 

@@ -1,8 +1,7 @@
 import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
 import { render, fireEvent } from '@testing-library/react';
 import IncidentsCollection from '../IncidentsCollection';
-import { HibanaProvider } from 'src/context/HibanaContext';
+import TestApp from 'src/helpers/TestApp';
 
 describe('Blacklist Component: IncidentsCollection', () => {
   const now = new Date('2019-12-18T04:20:00-04:00');
@@ -26,11 +25,9 @@ describe('Blacklist Component: IncidentsCollection', () => {
     const defaults = { incidents, dateOptions, updateDateRange };
 
     return render(
-      <HibanaProvider>
-        <Router>
-          <IncidentsCollection {...defaults} {...props} />
-        </Router>
-      </HibanaProvider>,
+      <TestApp>
+        <IncidentsCollection {...defaults} {...props} />
+      </TestApp>,
     );
   };
 

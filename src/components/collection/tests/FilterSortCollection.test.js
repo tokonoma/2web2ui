@@ -3,8 +3,7 @@ import React from 'react';
 import { act } from 'react-dom/test-utils';
 import FilterSortCollection from '../FilterSortCollection';
 import { Table } from '@sparkpost/matchbox';
-import { BrowserRouter as Router } from 'react-router-dom';
-import { HibanaProvider } from 'src/context/HibanaContext';
+import TestApp from 'src/helpers/TestApp';
 
 describe('FilterSortCollection Component', () => {
   const fruits = ['apple', 'banana', 'cherry'];
@@ -71,11 +70,9 @@ describe('FilterSortCollection Component', () => {
   describe('sorts', () => {
     const subject = (props = {}) =>
       mount(
-        <HibanaProvider>
-          <Router>
-            <FilterSortCollection {...props} />
-          </Router>
-        </HibanaProvider>,
+        <TestApp>
+          <FilterSortCollection {...props} />
+        </TestApp>,
       );
 
     it('sorts default sort column (fruits) values in default descending order', () => {

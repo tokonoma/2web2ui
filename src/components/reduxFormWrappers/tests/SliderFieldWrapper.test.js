@@ -1,19 +1,19 @@
 import React from 'react';
 import { mount, shallow } from 'enzyme';
 import SliderFieldWrapper from '../SliderFieldWrapper';
-import { HibanaProvider } from 'src/context/HibanaContext';
+import TestApp from 'src/helpers/TestApp';
 
 describe('SliderFieldWrapper', () => {
   const subject = ({ input, ...props } = {}) =>
     mount(
-      <HibanaProvider>
+      <TestApp>
         <SliderFieldWrapper
           id="testSlider"
           input={{ onChange: () => {}, ...input }}
           label="Test Slider"
           {...props}
         />
-      </HibanaProvider>,
+      </TestApp>,
     );
 
   it('renders with a label', () => {

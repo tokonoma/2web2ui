@@ -1,9 +1,8 @@
 import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
 import { shallow, mount } from 'enzyme';
 import useEditorContext from '../../hooks/useEditorContext';
 import InsertSnippetModal from '../InsertSnippetModal';
-import { HibanaProvider } from 'src/context/HibanaContext';
+import TestApp from 'src/helpers/TestApp';
 
 jest.mock('../../hooks/useEditorContext');
 jest.mock('copy-to-clipboard');
@@ -28,11 +27,9 @@ describe('InsertSnippetModal', () => {
     }
 
     return mount(
-      <Router>
-        <HibanaProvider>
-          <InsertSnippetModal {...mergedProps} />
-        </HibanaProvider>
-      </Router>,
+      <TestApp>
+        <InsertSnippetModal {...mergedProps} />
+      </TestApp>,
     );
   };
 
