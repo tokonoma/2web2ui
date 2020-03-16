@@ -4,7 +4,7 @@ import { Select as HibanaSelect } from '@sparkpost/matchbox-hibana';
 import { useHibana } from 'src/context/HibanaContext';
 import { omitSystemProps } from 'src/helpers/hibana';
 
-export default function ProgressBar(props) {
+export default function Select(props) {
   const [state] = useHibana();
   const { isHibanaEnabled } = state;
 
