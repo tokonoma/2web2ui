@@ -36,6 +36,7 @@ export function RecipientValidationPage(props) {
     addRVtoSubscriptionloading,
     addRVtoSubscriptionsuccess,
     addRVtoSubscriptionerror,
+    resetAddRVtoSubscription,
     billingLoading,
     valid,
     submitting,
@@ -87,7 +88,7 @@ export function RecipientValidationPage(props) {
   ]);
   useEffect(() => {
     resetAddRVtoSubscription();
-  }, []);
+  }, [resetAddRVtoSubscription]);
 
   const handleTabs = tabIdx => {
     history.replace(`/recipient-validation/${tabs[tabIdx].key}`);
