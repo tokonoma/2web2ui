@@ -1,8 +1,8 @@
 import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
 import { shallow, mount } from 'enzyme';
 import useEditorContext from '../../hooks/useEditorContext';
 import InsertSnippetModal from '../InsertSnippetModal';
+import TestApp from 'src/__testHelpers__/TestApp';
 
 jest.mock('../../hooks/useEditorContext');
 jest.mock('copy-to-clipboard');
@@ -14,33 +14,33 @@ describe('InsertSnippetModal', () => {
       getSnippets: jest.fn(() => Promise.resolve()),
       areSnippetsLoading: false,
       snippets: undefined,
-      ...editorState
+      ...editorState,
     });
     const mergedProps = {
       open: true,
       onClose: jest.fn(),
-      ...props
+      ...props,
     };
 
     if (isShallow) {
-      return shallow(<InsertSnippetModal {...mergedProps}/>);
+      return shallow(<InsertSnippetModal {...mergedProps} />);
     }
 
     return mount(
-      <Router>
-        <InsertSnippetModal {...mergedProps}/>
-      </Router>
+      <TestApp>
+        <InsertSnippetModal {...mergedProps} />
+      </TestApp>,
     );
   };
 
   it('renders the "PanelLoading" while retrieving snippets is true', () => {
-    const wrapper = subject({ editorState: { areSnippetsLoading: true }});
+    const wrapper = subject({ editorState: { areSnippetsLoading: true } });
 
     expect(wrapper.find('PanelLoading')).toExist();
   });
 
   it('renders the "Find a Snippet", "Snippet Code" and "Copy Code"', () => {
-    const wrapper = subject({ editorState: { snippets: []}});
+    const wrapper = subject({ editorState: { snippets: [] } });
 
     expect(wrapper).toHaveTextContent('Find a Snippet');
     expect(wrapper).toHaveTextContent('Snippet Code');
@@ -48,7 +48,7 @@ describe('InsertSnippetModal', () => {
   });
 
   it('renders the "Typeahead" with help text when no snippets are returned', () => {
-    const wrapper = subject({ editorState: { snippets: []}, isShallow: false });
+    const wrapper = subject({ editorState: { snippets: [] }, isShallow: false });
 
     expect(wrapper).toHaveTextContent('You have not created a snippet.');
     expect(wrapper).toHaveTextContent('Create your first snippet');
@@ -64,17 +64,17 @@ describe('InsertSnippetModal', () => {
             created_at: '2019-10-08T19:45:22.288Z',
             id: 'this-is-a-fake-snippet-1',
             name: 'Fake Snippet 1',
-            shared_with_subaccounts: false
+            shared_with_subaccounts: false,
           },
           {
             created_at: '2019-03-20T11:57:43.544Z',
             id: 'this-is-a-fake-snippet-2',
             name: 'Fake Snippet 2',
-            shared_with_subaccounts: true
-          }
-        ]
+            shared_with_subaccounts: true,
+          },
+        ],
       },
-      isShallow: false
+      isShallow: false,
     });
 
     expect(wrapper).not.toHaveTextContent('You have not created a snippet.');
@@ -87,16 +87,16 @@ describe('InsertSnippetModal', () => {
         created_at: '2019-10-08T19:45:22.288Z',
         id: 'this-is-a-fake-snippet-1',
         name: 'Fake Snippet 1',
-        shared_with_subaccounts: false
+        shared_with_subaccounts: false,
       },
       {
         created_at: '2019-03-20T11:57:43.544Z',
         id: 'this-is-a-fake-snippet-2',
         name: 'Fake Snippet 2',
-        shared_with_subaccounts: true
-      }
+        shared_with_subaccounts: true,
+      },
     ];
-    const wrapper = subject({ editorState: { snippets: mySnippets }});
+    const wrapper = subject({ editorState: { snippets: mySnippets } });
 
     expect(wrapper.find('Typeahead').props().results).toEqual(mySnippets);
   });
@@ -106,12 +106,12 @@ describe('InsertSnippetModal', () => {
       created_at: '2019-03-20T11:57:43.544Z',
       id: 'this-is-a-fake-snippet-2',
       name: 'Fake Snippet 2',
-      shared_with_subaccounts: true
+      shared_with_subaccounts: true,
     };
     const wrapper = subject({
       editorState: {
-        snippets: [mySnippet]
-      }
+        snippets: [mySnippet],
+      },
     });
 
     expect(wrapper.find('CopyField').props().value).toEqual('{{ render_snippet( "example-id" ) }}');
@@ -133,11 +133,11 @@ describe('InsertSnippetModal', () => {
     const wrapper = subject({
       editorState: {
         snippets: [],
-        showAlert: mockShowAlert
+        showAlert: mockShowAlert,
       },
       props: {
-        onClose: mockOnClose
-      }
+        onClose: mockOnClose,
+      },
     });
 
     wrapper.find('form').simulate('submit');
@@ -145,7 +145,7 @@ describe('InsertSnippetModal', () => {
     expect(mockOnClose).toHaveBeenCalled();
     expect(mockShowAlert).toHaveBeenCalledWith({
       type: 'success',
-      message: 'Snippet copied'
+      message: 'Snippet copied',
     });
   });
 
@@ -156,11 +156,11 @@ describe('InsertSnippetModal', () => {
     const wrapper = subject({
       editorState: {
         snippets: [],
-        showAlert: mockShowAlert
+        showAlert: mockShowAlert,
       },
       props: {
-        onClose: mockOnClose
-      }
+        onClose: mockOnClose,
+      },
     });
 
     wrapper.find('Button').simulate('click');
@@ -168,7 +168,7 @@ describe('InsertSnippetModal', () => {
     expect(mockOnClose).toHaveBeenCalled();
     expect(mockShowAlert).toHaveBeenCalledWith({
       type: 'success',
-      message: 'Snippet copied'
+      message: 'Snippet copied',
     });
   });
 });

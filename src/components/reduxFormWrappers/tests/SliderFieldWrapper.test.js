@@ -1,16 +1,19 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 import SliderFieldWrapper from '../SliderFieldWrapper';
+import TestApp from 'src/__testHelpers__/TestApp';
 
 describe('SliderFieldWrapper', () => {
   const subject = ({ input, ...props } = {}) =>
     mount(
-      <SliderFieldWrapper
-        id="testSlider"
-        input={{ onChange: () => {}, ...input }}
-        label="Test Slider"
-        {...props}
-      />,
+      <TestApp>
+        <SliderFieldWrapper
+          id="testSlider"
+          input={{ onChange: () => {}, ...input }}
+          label="Test Slider"
+          {...props}
+        />
+      </TestApp>,
     );
 
   it('renders with a label', () => {
@@ -47,7 +50,7 @@ describe('SliderFieldWrapper', () => {
   });
 
   it('rerenders when value is updated', () => {
-    const wrapper = subject({ input: { value: 45 } });
+    const wrapper = shallow(<SliderFieldWrapper input={{ value: 45 }} />);
 
     expect(wrapper.find('Slider')).toHaveValue(45);
     expect(wrapper.find('TextField')).toHaveValue(45);

@@ -1,11 +1,7 @@
 /* eslint-disable */
 import React, { useState, useEffect } from 'react';
-import {
-  Modal,
-  Panel,
-  Label,
-  Button
-} from '@sparkpost/matchbox';
+import { Button, Modal, Panel } from '@sparkpost/matchbox';
+import { Label } from 'src/components/matchbox';
 import copy from 'copy-to-clipboard';
 import PageLink from 'src/components/pageLink';
 import { Typeahead, TypeaheadItem } from 'src/components/typeahead/Typeahead';
@@ -15,30 +11,21 @@ import CopyField from 'src/components/copyField';
 import { slugToFriendly } from 'src/helpers/string';
 import useEditorContext from '../hooks/useEditorContext';
 
-const ModalWrapper = (props) => {
-  const {open, onClose, children} = props;
+const ModalWrapper = props => {
+  const { open, onClose, children } = props;
 
   return (
-    <Modal
-      open={open}
-      onClose={onClose}
-      showCloseButton={true}
-    >
+    <Modal open={open} onClose={onClose} showCloseButton={true}>
       {children}
     </Modal>
   );
-}
+};
 
-const InsertSnippetModal = (props) => {
+const InsertSnippetModal = props => {
   const { open, onClose } = props;
   const modalProps = { open, onClose };
-  const {
-    getSnippets,
-    snippets,
-    areSnippetsLoading,
-    showAlert
-  } = useEditorContext();
-  const renderSnippetCode = (snippetId) => `{{ render_snippet( "${snippetId || 'example-id'}" ) }}`
+  const { getSnippets, snippets, areSnippetsLoading, showAlert } = useEditorContext();
+  const renderSnippetCode = snippetId => `{{ render_snippet( "${snippetId || 'example-id'}" ) }}`;
   const [snippetId, setSnippetId] = useState(undefined);
   const [copyFieldValue, setCopyFieldValue] = useState(renderSnippetCode());
 
@@ -55,7 +42,7 @@ const InsertSnippetModal = (props) => {
     setCopyFieldValue(renderSnippetCode(snippetId));
   }, [snippetId]);
 
-  const handleTypeaheadChange = (snippet) => {
+  const handleTypeaheadChange = snippet => {
     const snippetId = !snippet ? undefined : snippet.id;
 
     setSnippetId(snippetId);
@@ -65,7 +52,7 @@ const InsertSnippetModal = (props) => {
     copy(copyFieldValue);
     showAlert({
       type: 'success',
-      message: 'Snippet copied'
+      message: 'Snippet copied',
     });
     onClose();
   };
@@ -73,16 +60,20 @@ const InsertSnippetModal = (props) => {
   if (areSnippetsLoading) {
     return (
       <ModalWrapper {...modalProps}>
-        <PanelLoading accent/>
+        <PanelLoading accent />
       </ModalWrapper>
-    )
+    );
   }
 
   return (
     <ModalWrapper {...modalProps}>
       <Panel title="Add a snippet" accent sectioned>
         <form onSubmit={handleSubmit}>
-          <p>Snippets are a great way to manage sections like headers or footers that are used across multiple templates. Simply edit your snippet, and that change will populate across all your templates.</p>
+          <p>
+            Snippets are a great way to manage sections like headers or footers that are used across
+            multiple templates. Simply edit your snippet, and that change will populate across all
+            your templates.
+          </p>
 
           <Typeahead
             label="Find a Snippet"
@@ -91,12 +82,15 @@ const InsertSnippetModal = (props) => {
               snippets.length === 0 ? (
                 <span>
                   You have not created a snippet.
-
                   <PageLink to="/snippets/create">Create your first snippet</PageLink>
                 </span>
-              ) : ''
+              ) : (
+                ''
+              )
             }
-            itemToString={(snippet) => snippet ? `${snippet.name || slugToFriendly(snippet.id)} (${snippet.id})` : ''}
+            itemToString={snippet =>
+              snippet ? `${snippet.name || slugToFriendly(snippet.id)} (${snippet.id})` : ''
+            }
             name="snippetTypeahead"
             onChange={handleTypeaheadChange}
             placeholder={snippets.length === 0 ? '' : 'Type to search...'}
@@ -109,10 +103,7 @@ const InsertSnippetModal = (props) => {
 
           <Label id="snippet-copy-field">Snippet Code</Label>
 
-          <CopyField
-            id="snippet-copy-field"
-            value={copyFieldValue}
-          />
+          <CopyField id="snippet-copy-field" value={copyFieldValue} />
 
           <ButtonWrapper>
             <Button color="orange" onClick={handleSubmit}>
