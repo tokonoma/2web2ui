@@ -1,0 +1,128 @@
+@import '~@sparkpost/design-tokens-hibana/tokens';
+@import 'src/styles/resets';
+
+.DesktopNavigation {
+  background-color: color(white);
+  display: none;
+
+  @media (min-width: media-query(md)) {
+    display: block;
+  }
+}
+
+.Wrapper {
+  padding: spacing(200) spacing(400);
+}
+
+.SubWrapper {
+  max-width: media-query(lg);
+  margin: 0 auto;
+  position: relative; // allows absolute positioning within
+}
+
+.PrimaryNavLayout {
+  display: grid;
+  grid-template-columns: 175px auto auto;
+  grid-gap: spacing(600);
+  padding-top: spacing(400);
+  padding-bottom: spacing(400);
+}
+
+// Some specificity issues with links
+.SkipLink.SkipLink.SkipLink {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  text-decoration: none;
+  background-color: rgba(color(blue, 800), 1);
+  padding: spacing(100) spacing(200);
+  font-size: font-size(200);
+  color: color(white);
+  transform: scale(0.95);
+  z-index: -1;
+  transition: opacity motion-duration(fast) motion-ease(in-out),
+    transform motion-duration(fast) motion-ease(in-out);
+
+  &:focus {
+    opacity: 1;
+    transform: scale(1);
+    z-index: 1;
+  }
+}
+
+.LogoWrapper {
+  align-self: center;
+}
+
+.Logo {
+  width: 175px;
+  max-height: 50px;
+  transform: translateY(-#{spacing(100)}); // Bumps up logo so top of flame moves in to padding
+}
+
+.PrimaryNav {
+  align-self: center;
+}
+
+// Some specificity issues with visited links
+.NavLink.NavLink {
+  display: inline-flex;
+  font-size: font-size(300);
+  padding: spacing(200) spacing(400);
+  border-radius: border-radius(pill);
+  outline-offset: -3px; // helps ensure focus outline is visible
+  text-decoration: none;
+  transition: color motion-duration(fast) motion-ease(in-out),
+    background-color motion-duration(fast) motion-ease(in-out);
+
+  &.primary.primary {
+    color: color(gray, 800);
+
+    &:hover,
+    &:focus,
+    &.isActive {
+      color: color(gray, 800);
+      background-color: color(gray, 300);
+    }
+  }
+
+  &.secondary.secondary {
+    color: color(white);
+
+    &:hover,
+    &:focus,
+    &.isActive {
+      color: color(white);
+      background-color: color(gray, 700);
+    }
+  }
+}
+
+.NavLinkActive {
+  color: color(gray, 800);
+  background-color: color(gray, 300);
+}
+
+.AccountDropdownWrapper {
+  align-self: center;
+  justify-self: end;
+}
+
+.AccountDropdownButton {
+  @include button-reset();
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: spacing(700);
+  height: spacing(700);
+  border-radius: border-radius(circle);
+  background-color: color(brand, orange);
+  color: color(white);
+}
+
+.SecondaryNav {
+  padding-top: spacing(200);
+  padding-bottom: spacing(200);
+  background-color: color(gray, 900);
+}

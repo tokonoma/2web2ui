@@ -8,7 +8,10 @@
         "hibana": {
           "hasThemeControls": true
         }
-      }
+      },
+      "blacklist_monitors": true,
+      "recipient_validation": true,
+      "inbox_placement": true
     }
   }
 }
