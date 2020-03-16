@@ -13,7 +13,6 @@ exports[`SubaccountFilter Component renders open popover with options 1`] = `
         className="Button"
         fullWidth={true}
         onClick={[Function]}
-        size="default"
       >
         <span
           className="ButtonLabel"
@@ -138,7 +137,6 @@ exports[`SubaccountFilter Component renders with subaccount 1`] = `
             className="Button"
             fullWidth={true}
             onClick={[Function]}
-            size="default"
           >
             <span
               className="ButtonLabel"

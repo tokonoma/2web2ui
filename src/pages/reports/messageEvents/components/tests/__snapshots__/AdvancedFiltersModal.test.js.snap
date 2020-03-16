@@ -4,7 +4,6 @@ exports[`Component: AdvancedFiltersModal should render initially and sync to sta
 <Fragment>
   <Button
     onClick={[Function]}
-    size="default"
   >
     Add Filters
   </Button>

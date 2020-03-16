@@ -29,7 +29,6 @@ exports[`CreatePage renders correctly 1`] = `
       className="NextButton"
       disabled={true}
       primary={true}
-      size="default"
       type="submit"
     >
       Next

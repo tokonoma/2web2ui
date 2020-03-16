@@ -41,7 +41,6 @@ exports[`VerifyEmail component should disable the send button while sending 1`] 
               disabled={true}
               onClick={[Function]}
               plain={true}
-              size="default"
             >
               Sending Email...
             </Button>
@@ -70,7 +69,6 @@ exports[`VerifyEmail component should disable the send button while sending 1`] 
               disabled={true}
               onClick={[Function]}
               plain={true}
-              size="default"
             >
               Sending Email...
             </Button>
@@ -134,7 +132,6 @@ exports[`VerifyEmail component should error if custom mailbox field is invalid 1
               color="orange"
               onClick={[Function]}
               plain={true}
-              size="default"
             >
               Send Email
             </Button>
@@ -186,7 +183,6 @@ exports[`VerifyEmail component should render success message 1`] = `
               color="orange"
               onClick={[Function]}
               plain={true}
-              size="default"
             >
               Send Email
             </Button>
@@ -214,7 +210,6 @@ exports[`VerifyEmail component should render success message 1`] = `
               color="orange"
               onClick={[Function]}
               plain={true}
-              size="default"
             >
               Send Email
             </Button>
@@ -277,7 +272,6 @@ exports[`VerifyEmail component should render with mailbox verification 1`] = `
               color="orange"
               onClick={[Function]}
               plain={true}
-              size="default"
             >
               Send Email
             </Button>
@@ -329,7 +323,6 @@ exports[`VerifyEmail component should render with postmaster and abuse email ver
               color="orange"
               onClick={[Function]}
               plain={true}
-              size="default"
             >
               Send Email
             </Button>
@@ -357,7 +350,6 @@ exports[`VerifyEmail component should render with postmaster and abuse email ver
               color="orange"
               onClick={[Function]}
               plain={true}
-              size="default"
             >
               Send Email
             </Button>
@@ -409,7 +401,6 @@ exports[`VerifyEmail component should send abuse-at email 1`] = `
               color="orange"
               onClick={[Function]}
               plain={true}
-              size="default"
             >
               Send Email
             </Button>
@@ -437,7 +428,6 @@ exports[`VerifyEmail component should send abuse-at email 1`] = `
               color="orange"
               onClick={[Function]}
               plain={true}
-              size="default"
             >
               Send Email
             </Button>
@@ -500,7 +490,6 @@ exports[`VerifyEmail component should send custom mailbox email 1`] = `
               color="orange"
               onClick={[Function]}
               plain={true}
-              size="default"
             >
               Send Email
             </Button>
@@ -552,7 +541,6 @@ exports[`VerifyEmail component should send postmaster-at email 1`] = `
               color="orange"
               onClick={[Function]}
               plain={true}
-              size="default"
             >
               Send Email
             </Button>
@@ -580,7 +568,6 @@ exports[`VerifyEmail component should send postmaster-at email 1`] = `
               color="orange"
               onClick={[Function]}
               plain={true}
-              size="default"
             >
               Send Email
             </Button>

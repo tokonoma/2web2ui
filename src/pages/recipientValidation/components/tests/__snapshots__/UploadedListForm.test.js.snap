@@ -65,7 +65,6 @@ exports[`UploadedListForm should render correctly 1`] = `
       className="ActionButton"
       color="orange"
       onClick={[Function]}
-      size="default"
     >
       Validate
     </Button>
@@ -73,7 +72,6 @@ exports[`UploadedListForm should render correctly 1`] = `
       className="ActionButton"
       component={[Function]}
       outline={true}
-      size="default"
       to="/recipient-validation"
     >
       No, thanks
@@ -97,7 +95,6 @@ exports[`UploadedListForm should render correctly 1`] = `
         <Button
           flat={true}
           onClick={[Function]}
-          size="default"
         >
           <Close />
         </Button>

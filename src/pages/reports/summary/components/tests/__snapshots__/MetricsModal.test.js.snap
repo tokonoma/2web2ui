@@ -139,14 +139,12 @@ exports[`Component: Summary Chart Metrics Modal should disable checkboxes when m
         disabled={false}
         onClick={[Function]}
         primary={true}
-        size="default"
       >
         Apply Metrics
       </Button>
       <Button
         className="Cancel"
         onClick={[MockFunction]}
-        size="default"
       >
         Cancel
       </Button>
@@ -294,14 +292,12 @@ exports[`Component: Summary Chart Metrics Modal should render 1`] = `
         disabled={true}
         onClick={[Function]}
         primary={true}
-        size="default"
       >
         Apply Metrics
       </Button>
       <Button
         className="Cancel"
         onClick={[MockFunction]}
-        size="default"
       >
         Cancel
       </Button>
@@ -449,14 +445,12 @@ exports[`Component: Summary Chart Metrics Modal should select metrics 1`] = `
         disabled={false}
         onClick={[Function]}
         primary={true}
-        size="default"
       >
         Apply Metrics
       </Button>
       <Button
         className="Cancel"
         onClick={[MockFunction]}
-        size="default"
       >
         Cancel
       </Button>

@@ -69,7 +69,6 @@ exports[`RecipientListForm defaults to create mode 1`] = `
         <Button
           disabled={true}
           primary={true}
-          size="default"
           submit={true}
         >
           Create
@@ -164,7 +163,6 @@ exports[`RecipientListForm renders CSV errors 1`] = `
         <Button
           disabled={true}
           primary={true}
-          size="default"
           submit={true}
         >
           Create
@@ -245,7 +243,6 @@ exports[`RecipientListForm renders correctly in create mode 1`] = `
         <Button
           disabled={true}
           primary={true}
-          size="default"
           submit={true}
         >
           Create
@@ -310,7 +307,6 @@ exports[`RecipientListForm renders correctly in edit mode 1`] = `
         <Button
           disabled={true}
           primary={true}
-          size="default"
           submit={true}
         >
           Update
@@ -395,7 +391,6 @@ exports[`RecipientListForm should disable form elements on submit 1`] = `
         <Button
           disabled={true}
           primary={true}
-          size="default"
           submit={true}
         >
           Create

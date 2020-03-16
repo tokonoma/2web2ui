@@ -104,7 +104,6 @@ exports[`JoinForm render disables form when loading 1`] = `
     disabled={true}
     onClick={[Function]}
     primary={true}
-    size="default"
   >
     Loading
   </Button>
@@ -231,7 +230,6 @@ exports[`JoinForm render disables form when recaptcha is not loaded 1`] = `
     disabled={true}
     onClick={[Function]}
     primary={true}
-    size="default"
   >
     Create Account
   </Button>
@@ -358,7 +356,6 @@ exports[`JoinForm render enables form correctly 1`] = `
     disabled={false}
     onClick={[Function]}
     primary={true}
-    size="default"
   >
     Create Account
   </Button>

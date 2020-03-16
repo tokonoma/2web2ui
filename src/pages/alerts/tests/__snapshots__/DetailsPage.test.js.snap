@@ -15,7 +15,6 @@ exports[`Page: Alert Details should render Alert Details Page 1`] = `
       <Button
         component={[Function]}
         flat={true}
-        size="default"
         to="/alerts/create/alert-id"
       >
         <ContentCopy
@@ -26,7 +25,6 @@ exports[`Page: Alert Details should render Alert Details Page 1`] = `
       <Button
         flat={true}
         onClick={[Function]}
-        size="default"
       >
         <Delete
           className="Icon"

@@ -83,7 +83,6 @@ exports[`Component: EnableTfaForm should show form after loading 1`] = `
       disabled={false}
       onClick={[Function]}
       primary={true}
-      size="default"
       type="submit"
     >
       Enable 2FA
@@ -92,7 +91,6 @@ exports[`Component: EnableTfaForm should show form after loading 1`] = `
       className="Cancel"
       disabled={false}
       onClick={[MockFunction]}
-      size="default"
     >
       Cancel
     </Button>

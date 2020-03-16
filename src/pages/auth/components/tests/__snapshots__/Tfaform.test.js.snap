@@ -28,7 +28,6 @@ exports[`renders correctly 1`] = `
     />
     <Button
       primary={true}
-      size="default"
       submit={true}
     >
       Log In
@@ -66,7 +65,6 @@ exports[`renders correctly verifying tfa 1`] = `
     <Button
       disabled={true}
       primary={true}
-      size="default"
       submit={true}
     >
       Logging In

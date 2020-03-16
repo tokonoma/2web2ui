@@ -42,7 +42,6 @@ exports[`ApiDetails tab should render page correctly 1`] = `
         <Button
           color="orange"
           component={[Function]}
-          size="default"
           to="/account/api-keys/create"
         >
           Create API Key
@@ -50,7 +49,6 @@ exports[`ApiDetails tab should render page correctly 1`] = `
         <Button
           className="ApiDocsLink"
           external={true}
-          size="default"
           to="https://developers.sparkpost.com/api/recipient-validation/"
         >
           API Docs

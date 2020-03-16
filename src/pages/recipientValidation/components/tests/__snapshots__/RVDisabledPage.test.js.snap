@@ -29,7 +29,6 @@ exports[`Recipient Validation Disabled Page should render 1`] = `
   <Button
     onClick={[Function]}
     primary={true}
-    size="default"
   >
     Enable Recipient Validation
   </Button>

@@ -69,7 +69,6 @@ exports[`renders correctly - new and no subaccounts 1`] = `
   <Panel.Section>
     <Button
       primary={true}
-      size="default"
       submit={true}
     >
       Create API Key
@@ -210,7 +209,6 @@ exports[`renders correctly - update and subaccounts 1`] = `
   <Panel.Section>
     <Button
       primary={true}
-      size="default"
       submit={true}
     >
       Update API Key
@@ -289,7 +287,6 @@ exports[`submits correctly 1`] = `
     <Button
       disabled={true}
       primary={true}
-      size="default"
       submit={true}
     >
       Loading...

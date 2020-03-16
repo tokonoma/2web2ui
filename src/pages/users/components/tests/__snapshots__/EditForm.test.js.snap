@@ -27,7 +27,6 @@ exports[`Component: EditForm should render 1`] = `
     <Panel.Section>
       <Button
         primary={true}
-        size="default"
         submit={true}
       >
         Update user

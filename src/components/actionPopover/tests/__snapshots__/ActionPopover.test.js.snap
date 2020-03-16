@@ -15,7 +15,6 @@ exports[`ActionPopover Component should render with actions 1`] = `
     trigger={
       <Button
         flat={true}
-        size="default"
       >
         <MoreHoriz
           size={20}
@@ -57,7 +56,6 @@ exports[`ActionPopover Component should render with no props 1`] = `
     trigger={
       <Button
         flat={true}
-        size="default"
       >
         <MoreHoriz
           size={20}

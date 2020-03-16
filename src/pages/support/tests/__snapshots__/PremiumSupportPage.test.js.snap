@@ -23,7 +23,6 @@ exports[`PremiumSupportPage default state 1`] = `
       <Button
         color="orange"
         disabled={false}
-        size="default"
         submit={true}
       >
         Submit Request
@@ -47,7 +46,6 @@ exports[`PremiumSupportPage renders submitting state correctly 1`] = `
 <Button
   color="orange"
   disabled={true}
-  size="default"
   submit={true}
 >
   Submitting...

@@ -50,7 +50,6 @@ exports[`AddForm tests should disable fields when submitting 1`] = `
       <Button
         disabled={true}
         primary={true}
-        size="default"
         type="submit"
       >
         Add / Update
@@ -110,7 +109,6 @@ exports[`AddForm tests should make form submitable when dirty and not submitting
       <Button
         disabled={false}
         primary={true}
-        size="default"
         type="submit"
       >
         Add / Update
@@ -170,7 +168,6 @@ exports[`AddForm tests should render add form 1`] = `
       <Button
         disabled={true}
         primary={true}
-        size="default"
         type="submit"
       >
         Add / Update

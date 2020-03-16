@@ -4,7 +4,6 @@ exports[`Page: User Create Page should disable submit when pristine 1`] = `
 <Button
   disabled={true}
   primary={true}
-  size="default"
   submit={true}
 >
   Add User
@@ -51,7 +50,6 @@ exports[`Page: User Create Page should render correctly by default 1`] = `
         <Button
           disabled={false}
           primary={true}
-          size="default"
           submit={true}
         >
           Add User
@@ -66,7 +64,6 @@ exports[`Page: User Create Page should update submit button when submitting 1`] 
 <Button
   disabled={true}
   primary={true}
-  size="default"
   submit={true}
 >
   Loading

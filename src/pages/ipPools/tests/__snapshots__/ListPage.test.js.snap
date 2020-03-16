@@ -216,7 +216,6 @@ exports[`IP Pools List Page should render the IP warm-up banner correctly 1`] = 
     <Button
       external={true}
       outline={true}
-      size="default"
       to="https://support.sparkpost.com/customer/portal/articles/1972209-ip-warm-up-overview"
     >
       Read our IP Warm-up Overview

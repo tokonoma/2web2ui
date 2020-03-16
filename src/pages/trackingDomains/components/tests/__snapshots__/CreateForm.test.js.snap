@@ -29,7 +29,6 @@ exports[`Component: Tracking Domains Create Form should render correctly when su
       <Button
         disabled={false}
         primary={true}
-        size="default"
         submit={true}
       >
         Add Tracking Domain
@@ -68,7 +67,6 @@ exports[`Component: Tracking Domains Create Form should render correctly when su
       <Button
         disabled={true}
         primary={true}
-        size="default"
         submit={true}
       >
         Submitting...

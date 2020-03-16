@@ -19,7 +19,6 @@ exports[`Component: NameForm should render correctly 1`] = `
     validate={[Function]}
   />
   <Button
-    size="default"
     submit={true}
   >
     Update Profile
@@ -47,7 +46,6 @@ exports[`Component: NameForm should render correctly when updating 1`] = `
   />
   <Button
     disabled={true}
-    size="default"
     submit={true}
   >
     Updating Profile

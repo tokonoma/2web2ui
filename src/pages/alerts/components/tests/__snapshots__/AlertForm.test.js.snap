@@ -193,7 +193,6 @@ exports[`Alert Form Component should render the alert form component correctly 1
             className="SubmitButton"
             disabled={true}
             primary={true}
-            size="default"
             submit={true}
           >
             Create Alert

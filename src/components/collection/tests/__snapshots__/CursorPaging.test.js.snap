@@ -9,7 +9,6 @@ exports[`CursorPaging should correctly render cursor paging when there is only o
     disabled={true}
     key="rewind"
     onClick={[MockFunction]}
-    size="default"
   >
     <FirstPage />
     <ScreenReaderOnly>
@@ -53,7 +52,6 @@ exports[`CursorPaging should render cursor paging 1`] = `
     disabled={false}
     key="rewind"
     onClick={[MockFunction]}
-    size="default"
   >
     <FirstPage />
     <ScreenReaderOnly>

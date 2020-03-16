@@ -15,14 +15,12 @@ exports[`Component: ConfirmationModal should disable confirmation button 1`] = `
         name="confirmation-modal-confirm-button"
         onClick={[MockFunction]}
         primary={true}
-        size="default"
       >
         Confirm
       </Button>
       <Button
         className="Cancel"
         onClick={[MockFunction]}
-        size="default"
       >
         Cancel
       </Button>
@@ -45,14 +43,12 @@ exports[`Component: ConfirmationModal should render correctly with basic props 1
         name="confirmation-modal-confirm-button"
         onClick={[MockFunction]}
         primary={true}
-        size="default"
       >
         Confirm
       </Button>
       <Button
         className="Cancel"
         onClick={[MockFunction]}
-        size="default"
       >
         Cancel
       </Button>
@@ -80,14 +76,12 @@ exports[`Component: ConfirmationModal should render correctly with open, content
         name="confirmation-modal-confirm-button"
         onClick={[MockFunction]}
         primary={true}
-        size="default"
       >
         DESTROY
       </Button>
       <Button
         className="Cancel"
         onClick={[MockFunction]}
-        size="default"
       >
         Cancel
       </Button>

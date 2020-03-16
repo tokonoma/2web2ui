@@ -42,7 +42,6 @@ exports[`UploadForm tests should disable fields when submitting 1`] = `
       <Button
         disabled={true}
         primary={true}
-        size="default"
         type="submit"
       >
         Upload
@@ -94,7 +93,6 @@ exports[`UploadForm tests should render upload form 1`] = `
       <Button
         disabled={false}
         primary={true}
-        size="default"
         type="submit"
       >
         Upload

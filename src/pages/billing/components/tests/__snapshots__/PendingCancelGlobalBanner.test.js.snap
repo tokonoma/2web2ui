@@ -19,7 +19,6 @@ exports[`PendingCancelGlobalBanner should render 1`] = `
       className="RenewButton"
       flat={true}
       onClick={[Function]}
-      size="default"
     >
       Don't Cancel
     </Button>
@@ -31,7 +30,6 @@ exports[`PendingCancelGlobalBanner should render 1`] = `
       className="Close"
       flat={true}
       onClick={[Function]}
-      size="default"
     >
       <Close />
     </Button>

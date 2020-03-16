@@ -116,7 +116,6 @@ Array [
     <Button
       flat={true}
       onClick={[Function]}
-      size="default"
     >
       <Delete
         className="Icon"
@@ -168,7 +167,6 @@ Array [
     <Button
       flat={true}
       onClick={[Function]}
-      size="default"
     >
       <Delete
         className="Icon"
@@ -220,7 +218,6 @@ Array [
     <Button
       flat={true}
       onClick={[Function]}
-      size="default"
     >
       <Delete
         className="Icon"

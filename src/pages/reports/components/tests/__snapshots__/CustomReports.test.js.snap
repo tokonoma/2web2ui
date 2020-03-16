@@ -23,7 +23,6 @@ exports[`Component: CustomReports should render 1`] = `
       disabled={true}
       flat={true}
       onClick={[Function]}
-      size="default"
     >
       <Save
         className="SaveIcon"

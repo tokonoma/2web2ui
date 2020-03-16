@@ -24,7 +24,6 @@ exports[`DraftModeActions renders draft actions 1`] = `
           aria-expanded="false"
           data-id="popover-actions-trigger"
           onClick={[Function]}
-          size="default"
         >
           <ArrowDropDown />
           <ScreenReaderOnly>
