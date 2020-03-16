@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount, shallow } from 'enzyme';
 import SliderFieldWrapper from '../SliderFieldWrapper';
-import TestApp from 'src/helpers/TestApp';
+import TestApp from 'src/__testHelpers__/TestApp';
 
 describe('SliderFieldWrapper', () => {
   const subject = ({ input, ...props } = {}) =>

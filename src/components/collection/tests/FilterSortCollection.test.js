@@ -3,7 +3,7 @@ import React from 'react';
 import { act } from 'react-dom/test-utils';
 import FilterSortCollection from '../FilterSortCollection';
 import { Table } from '@sparkpost/matchbox';
-import TestApp from 'src/helpers/TestApp';
+import TestApp from 'src/__testHelpers__/TestApp';
 
 describe('FilterSortCollection Component', () => {
   const fruits = ['apple', 'banana', 'cherry'];

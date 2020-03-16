@@ -9,7 +9,7 @@ export default function Label(props) {
   const { isHibanaEnabled } = state;
 
   if (!isHibanaEnabled) {
-    return <OGLabel {...omitSystemProps(props, [])} />;
+    return <OGLabel {...omitSystemProps(props)} />;
   }
   return <HibanaLabel {...props} />;
 }

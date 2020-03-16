@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import CollectionFilterBox from '../FilterBox';
-import TestApp from 'src/helpers/TestApp';
+import TestApp from 'src/__testHelpers__/TestApp';
 
 describe('CollectionFilterBox', () => {
   const subject = (props = {}) =>

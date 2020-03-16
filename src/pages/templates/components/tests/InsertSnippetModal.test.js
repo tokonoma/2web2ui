@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow, mount } from 'enzyme';
 import useEditorContext from '../../hooks/useEditorContext';
 import InsertSnippetModal from '../InsertSnippetModal';
-import TestApp from 'src/helpers/TestApp';
+import TestApp from 'src/__testHelpers__/TestApp';
 
 jest.mock('../../hooks/useEditorContext');
 jest.mock('copy-to-clipboard');
