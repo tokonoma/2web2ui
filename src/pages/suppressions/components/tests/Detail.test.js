@@ -3,6 +3,7 @@ import React from 'react';
 import * as dateHelpers from 'src/helpers/date';
 import Detail from '../Detail';
 
+jest.mock('src/context/HibanaContext');
 jest.mock('src/helpers/date');
 
 let props;
@@ -17,8 +18,8 @@ beforeEach(() => {
       recipient: 'foo@bar.com',
       description: '',
       updated: '2018-01-16T04:14:18.661Z',
-      created: '2018-01-16T04:14:18.661Z'
-    }
+      created: '2018-01-16T04:14:18.661Z',
+    },
   };
 
   wrapper = shallow(<Detail {...props} />);
@@ -44,4 +45,3 @@ describe('Detail', () => {
     expect(wrapper).toMatchSnapshot();
   });
 });
-
