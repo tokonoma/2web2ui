@@ -16,7 +16,7 @@ const requestTypes = [
     label: 'Right to be forgotten',
   },
   {
-    value: 'oo-third-party',
+    value: 'opt-out',
     label: 'Opt-out of third-party use',
   },
 ];
@@ -25,17 +25,21 @@ export function SingleRecipientTab(props) {
   const onSubmit = values => {
     switch (values.requestType) {
       case 'rtbf':
-        props.submitRTBFRequest({
-          recipients: [values.address],
-          request_date: new Date().toISOString(),
-        });
+        props
+          .submitRTBFRequest({
+            recipients: [values.address],
+            request_date: new Date().toISOString(),
+          })
+          .then(() => props.reset());
         break;
-
+      case 'opt-out':
       default:
-        props.submitOptOutRequest({
-          recipients: [values.address],
-          request_date: new Date().toISOString(),
-        });
+        props
+          .submitOptOutRequest({
+            recipients: [values.address],
+            request_date: new Date().toISOString(),
+          })
+          .then(() => props.reset());
         break;
     }
   };
