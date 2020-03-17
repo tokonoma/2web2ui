@@ -3,7 +3,7 @@ import { act } from 'react-dom/test-utils';
 import { mount } from 'enzyme';
 import useRouter from 'src/hooks/useRouter';
 import IntegrationPage from '../IntegrationPage';
-import Provider from 'src/providers';
+import Providers from 'src/providers';
 
 jest.mock('src/hooks/useRouter');
 
@@ -23,7 +23,7 @@ describe('IntegrationPage', () => {
     });
 
     return mount(
-      <Provider>
+      <Providers>
         <IntegrationPage
           getIngestBatchEvents={() => {}}
           eventsByPage={[]}
@@ -31,7 +31,7 @@ describe('IntegrationPage', () => {
           totalCount={0}
           {...props}
         />
-      </Provider>,
+      </Providers>,
     );
   };
 

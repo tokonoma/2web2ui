@@ -4,7 +4,7 @@ import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { GettingStartedGuide } from '../GettingStartedGuide';
 import { GUIDE_IDS } from '../../constants';
-import Provider from 'src/providers';
+import Providers from 'src/providers';
 
 describe('GettingStartedGuide', () => {
   window.pendo = {
@@ -25,9 +25,9 @@ describe('GettingStartedGuide', () => {
 
   const subject = (props, renderFn = render) =>
     renderFn(
-      <Provider>
+      <Providers>
         <GettingStartedGuide {...defaultProps} {...props} />
-      </Provider>,
+      </Providers>,
     );
 
   it('should render correctly when guide is at bottom or when guide is at top', () => {

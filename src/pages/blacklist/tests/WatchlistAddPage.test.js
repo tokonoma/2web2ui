@@ -1,7 +1,7 @@
 import { render, fireEvent } from '@testing-library/react';
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
-import Provider from 'src/providers';
+import Providers from 'src/providers';
 
 import { WatchlistAddPage } from '../WatchlistAddPage';
 
@@ -22,11 +22,11 @@ describe('WatchlistAddPage', () => {
       submitError: undefined,
     };
     return render(
-      <Provider>
+      <Providers>
         <MemoryRouter>
           <WatchlistAddPage {...defaults} {...props} />
         </MemoryRouter>
-      </Provider>,
+      </Providers>,
     );
   };
 

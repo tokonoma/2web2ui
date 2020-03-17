@@ -1,6 +1,6 @@
 import React from 'react';
 import { fireEvent, render } from '@testing-library/react';
-import Provider from 'src/providers';
+import Providers from 'src/providers';
 
 import { StopMonitoringModal } from '../StopMonitoringModal';
 
@@ -13,9 +13,9 @@ describe('Stop Monitoring Modal', () => {
     const defaults = { closeModal, monitorToDelete, deleteMonitor, showAlert };
 
     return render(
-      <Provider>
+      <Providers>
         <StopMonitoringModal {...defaults} {...props} />
-      </Provider>,
+      </Providers>,
     );
   };
 
