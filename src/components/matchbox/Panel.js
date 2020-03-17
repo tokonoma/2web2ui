@@ -30,7 +30,7 @@ const Footer = props => {
   const [state] = useHibana();
   const { isHibanaEnabled } = state;
   if (!isHibanaEnabled) {
-    return <OGPanel.Footer {...omitSystemProps(props)} />;
+    return <OGPanel.Footer {...omitSystemProps(props, ['left', 'right'])} />;
   }
   return <HibanaPanel.Footer {...props} />;
 };
