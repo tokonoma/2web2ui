@@ -79,19 +79,9 @@ class AlertCollection extends Component {
         filterBox={filterBoxConfig}
         defaultSortColumn="last_triggered_timestamp"
         defaultSortDirection="desc"
+        title={'All alerts'}
       >
-        {({ filterBox, collection, pagination }) => (
-          <>
-            <Panel>
-              <Panel.Section>
-                <h3>All Alerts</h3>
-              </Panel.Section>
-              {filterBox}
-              {collection}
-            </Panel>
-            {pagination}
-          </>
-        )}
+        {props => <NewCollectionBody {...props} />}
       </TableCollection>
     );
   }

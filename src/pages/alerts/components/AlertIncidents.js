@@ -88,11 +88,11 @@ const AlertIncidents = ({ incidents = [], alert, subaccountIdToString }) => {
   };
 
   const TableWrapper = props => <Table>{props.children}</Table>;
-
+  const title = 'Alert Incidents';
   return (
-    <Panel title="Alert Incidents">
+    <>
       {incidents.length <= 0 ? (
-        <Empty message="No incidents" />
+        <Empty title={title} message="No incidents" />
       ) : (
         <TableCollection
           wrapperComponent={TableWrapper}
@@ -102,9 +102,12 @@ const AlertIncidents = ({ incidents = [], alert, subaccountIdToString }) => {
           pagination
           defaultSortColumn="first_fired"
           defaultSortDirection="desc"
-        />
+          title={title}
+        >
+          {props => <NewCollectionBody {...props} />}
+        </TableCollection>
       )}
-    </Panel>
+    </>
   );
 };
 

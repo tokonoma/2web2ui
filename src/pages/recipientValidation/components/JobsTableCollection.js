@@ -1,6 +1,6 @@
 import React from 'react';
-import { Panel } from 'src/components/matchbox'
-import TableCollection from 'src/components/collection/TableCollection';
+import { Table } from '@sparkpost/matchbox';
+import { TableCollection, NewCollectionBody } from 'src/components/collection';
 import { formatDateTime } from 'src/helpers/date';
 import withJobs from '../containers/withJobs';
 import JobFileName from './JobFileName';
@@ -50,6 +50,10 @@ export const JobsTableCollection = ({ jobs }) => {
     },
   ];
 
+  const TableWrapper = props => (
+        <Table>{props.children}</Table>
+  );
+
   const renderRow = columns => props =>
     columns.map(({ dataCellComponent: DataCellComponent }) => <DataCellComponent {...props} />);
 
@@ -62,17 +66,9 @@ export const JobsTableCollection = ({ jobs }) => {
       rows={jobs}
       pagination
       title="Recent Validations"
+      wrapperComponent={TableWrapper}
     >
-      {({ collection, filterBox, heading, pagination }) => (
-        <>
-          <Panel>
-            <Panel.Section>{heading}</Panel.Section>
-            {filterBox}
-            {collection}
-          </Panel>
-          {pagination}
-        </>
-      )}
+      {props => <NewCollectionBody {...props} />}
     </TableCollection>
   );
 };

@@ -4,7 +4,6 @@ import _ from 'lodash';
 import { refreshDelayReport } from 'src/actions/delayReport';
 import { selectReportSearchOptions } from 'src/selectors/reportSearchOptions';
 import { Page } from '@sparkpost/matchbox';
-import { Panel } from 'src/components/matchbox';
 import ReportOptions from 'src/pages/reports/components/ReportOptions';
 import PanelLoading from 'src/components/panelLoading/PanelLoading';
 import MetricsSummary from '../components/MetricsSummary';
@@ -25,7 +24,7 @@ export class DelayPage extends Component {
       return <PanelLoading />;
     }
 
-    return <DelaysDataTable totalAccepted={totalAccepted} rows={reasons} />;
+    return <DelaysDataTable title='Delayed Messages' totalAccepted={totalAccepted} rows={reasons} />;
   }
 
   renderTopLevelMetrics() {
@@ -60,9 +59,7 @@ export class DelayPage extends Component {
       <Page title="Delay Report">
         <ReportOptions reportLoading={loading} searchOptions={delaySearchOptions} />
         {this.renderTopLevelMetrics()}
-        <Panel title="Delayed Messages" className="ReasonsTable">
-          {this.renderDataTable()}
-        </Panel>
+        {this.renderDataTable()}
       </Page>
     );
   }
