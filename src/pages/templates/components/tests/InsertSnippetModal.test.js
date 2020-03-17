@@ -1,8 +1,9 @@
 import React from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
+import Providers from 'src/providers';
 import { shallow, mount } from 'enzyme';
 import useEditorContext from '../../hooks/useEditorContext';
 import InsertSnippetModal from '../InsertSnippetModal';
-import TestApp from 'src/__testHelpers__/TestApp';
 
 jest.mock('../../hooks/useEditorContext');
 jest.mock('copy-to-clipboard');
@@ -27,9 +28,11 @@ describe('InsertSnippetModal', () => {
     }
 
     return mount(
-      <TestApp>
-        <InsertSnippetModal {...mergedProps} />
-      </TestApp>,
+      <Providers>
+        <Router>
+          <InsertSnippetModal {...mergedProps} />
+        </Router>
+      </Providers>,
     );
   };
 

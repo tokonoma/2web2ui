@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
+import Providers from 'src/providers';
 import { render } from '@testing-library/react';
 import { SingleResult } from '../SingleResult';
 
@@ -25,9 +26,11 @@ describe('SingleResult', () => {
     const mergedProps = Object.assign(defaultProps, props);
 
     return render(
-      <Router>
-        <SingleResult {...mergedProps} />
-      </Router>,
+      <Providers>
+        <Router>
+          <SingleResult {...mergedProps} />
+        </Router>
+      </Providers>,
     );
   };
 

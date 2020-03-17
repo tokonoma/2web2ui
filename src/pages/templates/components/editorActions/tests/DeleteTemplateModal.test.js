@@ -1,9 +1,9 @@
 import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
 import DeleteTemplateModal from '../DeleteTemplateModal';
 import globalAlert from 'src/reducers/globalAlert';
 import renderWithRedux from 'src/__testHelpers__/renderWithRedux';
+import Providers from 'src/providers';
 jest.mock('src/components/globalAlert'); // Mocks `RedirectAndAlert` component
 
 describe('DeleteTemplateModal', () => {
@@ -17,7 +17,7 @@ describe('DeleteTemplateModal', () => {
       reducer: globalAlert,
       initialState,
       component: (
-        <Router>
+        <Providers>
           <DeleteTemplateModal
             open={true}
             template={{
@@ -27,7 +27,7 @@ describe('DeleteTemplateModal', () => {
             isLoading={false}
             {...props}
           />
-        </Router>
+        </Providers>
       ),
     });
   };

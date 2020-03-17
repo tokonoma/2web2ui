@@ -3,7 +3,8 @@ import React from 'react';
 import { act } from 'react-dom/test-utils';
 import FilterSortCollection from '../FilterSortCollection';
 import { Table } from '@sparkpost/matchbox';
-import TestApp from 'src/__testHelpers__/TestApp';
+import { BrowserRouter as Router } from 'react-router-dom';
+import Providers from 'src/providers';
 
 describe('FilterSortCollection Component', () => {
   const fruits = ['apple', 'banana', 'cherry'];
@@ -70,9 +71,11 @@ describe('FilterSortCollection Component', () => {
   describe('sorts', () => {
     const subject = (props = {}) =>
       mount(
-        <TestApp>
-          <FilterSortCollection {...props} />
-        </TestApp>,
+        <Providers>
+          <Router>
+            <FilterSortCollection {...props} />
+          </Router>
+        </Providers>,
       );
 
     it('sorts default sort column (fruits) values in default descending order', () => {
