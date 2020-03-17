@@ -85,7 +85,8 @@ describe('Component: AllMessagesCollection', () => {
         .find('Collection')
         .find('TableBody')
         .findWhere(n => n.name() === 'RowComponent' && n.prop('id') === id);
-      row.find('Button').simulate('click');
+      let button = row.find('Button').find('button');
+      button.simulate('click');
     };
 
     it('dispatches the getMessage action when the open link is clicked', () => {
