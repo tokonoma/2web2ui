@@ -3,6 +3,7 @@ import { shallow } from 'enzyme';
 import { render } from '@testing-library/react';
 import ShowMeSparkpostStep from '../ShowMeSparkpostStep';
 import { GuideContext } from '../GettingStartedGuide';
+import Provider from 'src/providers';
 
 describe('ShowMeSparkpostStep', () => {
   const subject_enzyme = (func = shallow) => func(<ShowMeSparkpostStep />);
@@ -21,9 +22,11 @@ describe('ShowMeSparkpostStep', () => {
     };
 
     return func(
-      <GuideContext.Provider value={values}>
-        <ShowMeSparkpostStep />
-      </GuideContext.Provider>,
+      <Provider>
+        <GuideContext.Provider value={values}>
+          <ShowMeSparkpostStep />
+        </GuideContext.Provider>
+      </Provider>,
     );
   };
   it('should render breadcrumbs', () => {

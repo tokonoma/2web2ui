@@ -3,6 +3,7 @@ import { render, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import useEditorContext from '../../hooks/useEditorContext';
 import SendTestEmailButton from '../SendTestEmailButton';
+import Provider from 'src/providers';
 
 jest.mock('../../hooks/useEditorContext');
 
@@ -27,7 +28,11 @@ describe('SendTestEmailButton', () => {
       ...editorState,
     });
 
-    return render(<SendTestEmailButton {...props} />);
+    return render(
+      <Provider>
+        <SendTestEmailButton {...props} />
+      </Provider>,
+    );
   };
 
   it('opens the modal in the loading state and saves the draft when the "Send a Test" button is clicked', () => {

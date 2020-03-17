@@ -3,6 +3,7 @@ import { shallow } from 'enzyme';
 import { render } from '@testing-library/react';
 import LetsCodeStep from '../LetsCodeStep';
 import { GuideContext } from '../GettingStartedGuide';
+import Provider from 'src/providers';
 
 describe('LetsCodeStep', () => {
   const subject_enzyme = (func = shallow) => func(<LetsCodeStep />);
@@ -21,9 +22,11 @@ describe('LetsCodeStep', () => {
     };
 
     return func(
-      <GuideContext.Provider value={values}>
-        <LetsCodeStep />
-      </GuideContext.Provider>,
+      <Provider>
+        <GuideContext.Provider value={values}>
+          <LetsCodeStep />
+        </GuideContext.Provider>
+      </Provider>,
     );
   };
   it('should render breadcrumbs', () => {

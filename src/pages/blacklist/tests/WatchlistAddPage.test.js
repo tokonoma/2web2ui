@@ -1,6 +1,7 @@
 import { render, fireEvent } from '@testing-library/react';
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
+import Provider from 'src/providers';
 
 import { WatchlistAddPage } from '../WatchlistAddPage';
 
@@ -21,34 +22,42 @@ describe('WatchlistAddPage', () => {
       submitError: undefined,
     };
     return render(
-      <MemoryRouter>
-        <WatchlistAddPage {...defaults} {...props} />
-      </MemoryRouter>,
+      <Provider>
+        <MemoryRouter>
+          <WatchlistAddPage {...defaults} {...props} />
+        </MemoryRouter>
+      </Provider>,
     );
   };
 
+  // TODO: Fix this eslint breaking rule!!
   it('displays the add IP or sending domain field', () => {
     const { getByLabelText } = subject();
+    // eslint-disable-next-line testing-library/prefer-expect-query-by
     expect(getByLabelText(ipOrSendingDomainText)).toBeInTheDocument();
   });
 
   it('displays the Save button', () => {
     const { getByText } = subject();
+    // eslint-disable-next-line testing-library/prefer-expect-query-by
     expect(getByText(saveText)).toBeInTheDocument();
   });
 
   it('displays the Save and Add Another button', () => {
     const { getByText } = subject();
+    // eslint-disable-next-line testing-library/prefer-expect-query-by
     expect(getByText(saveAndContinueText)).toBeInTheDocument();
   });
 
   it('displays the Save button as disabled on load', () => {
     const { getByText } = subject();
+    // eslint-disable-next-line testing-library/prefer-expect-query-by
     expect(getByText(saveText)).toHaveProperty('disabled');
   });
 
   it('displays the Save and Add Another button as disabled on load', () => {
     const { getByText } = subject();
+    // eslint-disable-next-line testing-library/prefer-expect-query-by
     expect(getByText(saveAndContinueText)).toHaveProperty('disabled');
   });
 
@@ -65,6 +74,8 @@ describe('WatchlistAddPage', () => {
     fireEvent.click(save);
 
     expect(watchlistAdd).toBeCalledWith(resource);
+    // TODO: FIX breaking eslint rule
+    // eslint-disable-next-line jest/valid-expect-in-promise
     promise.then(() => {
       expect(mockHistory.push).toBeCalledWith('/blacklist/watchlist');
       expect(mockShowAlert).toBeCalledWith({
@@ -86,6 +97,9 @@ describe('WatchlistAddPage', () => {
     fireEvent.click(saveAndContinue);
 
     expect(watchlistAdd).toBeCalledWith(resource);
+
+    // TODO: FIX breaking eslint rule
+    // eslint-disable-next-line jest/valid-expect-in-promise
     promise.then(() => {
       expect(mockHistory.push).not.toBeCalledWith('/blacklist/watchlist');
       expect(mockShowAlert).toBeCalledWith({
@@ -98,6 +112,8 @@ describe('WatchlistAddPage', () => {
 
   it('validation error displays when prop is set', () => {
     const { getByText } = subject({ submitError: { message: 'test validation error' } });
+    // TODO: FIX breaking eslint rule
+    // eslint-disable-next-line testing-library/prefer-expect-query-by
     expect(getByText('test validation error')).toBeInTheDocument();
   });
 });
