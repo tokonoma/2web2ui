@@ -1,24 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Component: App Layout should render correctly 1`] = `
-<WindowSize>
-  <div
-    className="wrapper app"
+<ContextProvider
+  value={
+    Object {
+      "isHibanaEnabled": false,
+    }
+  }
+>
+  <ContextProvider
+    value={[Function]}
   >
-    <withRouter(Connect(WithContext(Navigation))) />
-    <main
-      className="content"
-      role="main"
-    >
-      <div
-        className="container"
-      >
-        <h1>
-          My cool af children
-        </h1>
-      </div>
-    </main>
-    <ScrollToTop />
-  </div>
-</WindowSize>
+    <App>
+      <h1>
+        My cool af children
+      </h1>
+    </App>
+  </ContextProvider>
+</ContextProvider>
 `;
