@@ -27,7 +27,7 @@ Object {
   },
   "email": "ann@perkins.com",
   "planpicker": Object {
-    "code": "abc",
+    "bundle": "abc",
   },
   "promoCode": undefined,
 }

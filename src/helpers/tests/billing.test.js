@@ -5,11 +5,10 @@ import {
   formatDataForCors,
   getPlanPrice,
   prepareCardInfo,
-  stripImmediatePlanChange
+  stripImmediatePlanChange,
 } from '../billing';
 
 describe('Billing Helpers', () => {
-
   describe('formatDataForCors', () => {
     const card = {
       number: '4123512361237123',
@@ -17,23 +16,21 @@ describe('Billing Helpers', () => {
       type: 'CardType',
       expMonth: 4,
       expYear: 2050,
-      securityCode: 123
+      securityCode: 123,
     };
     const billingAddress = {
       state: 'MD',
       country: 'US',
       zip: '21234',
       firstName: 'Person',
-      lastName: 'Head'
+      lastName: 'Head',
     };
-    const planpicker = {
-      billingId: 'testBillingId135'
-    };
+
     const values = {
+      billingId: 'testBillingId135',
       email: 'someemail@example.com',
-      planpicker,
       card,
-      billingAddress
+      billingAddress,
     };
 
     it('should return the correctly formatted values', () => {
@@ -48,9 +45,16 @@ describe('Billing Helpers', () => {
     const countries = [
       { code: 'GG', name: 'gg' },
       { code: 'CA', name: 'Canada' },
-      { code: 'US', name: 'USOFA', states: [{ code: 'MD', name: 'maryland' }, { code: 'NY', name: 'new york' }]},
+      {
+        code: 'US',
+        name: 'USOFA',
+        states: [
+          { code: 'MD', name: 'maryland' },
+          { code: 'NY', name: 'new york' },
+        ],
+      },
       { code: 'GB', name: 'United Kingdom' },
-      { code: 'EZ', name: 'ez' }
+      { code: 'EZ', name: 'ez' },
     ];
 
     it('should reorder and format countries for select options', () => {
@@ -64,7 +68,7 @@ describe('Billing Helpers', () => {
       { type: 'mastercard' },
       { type: 'amex' },
       { type: 'discover' },
-      { type: 'bUtNoTtHiSoNe' }
+      { type: 'bUtNoTtHiSoNe' },
     ];
 
     it('should format card type strings', () => {
@@ -75,12 +79,12 @@ describe('Billing Helpers', () => {
   describe('getPlanPrice', () => {
     const monthly = {
       monthly: 50,
-      volume: 500
+      volume: 500,
     };
 
     const hourly = {
       hourly: 0.25,
-      volume: 600
+      volume: 600,
     };
 
     it('returns price info correctly for monthly plan', () => {
@@ -107,16 +111,18 @@ describe('Billing Helpers', () => {
         contractEffectiveDate: '01/01/1970',
         creditCard: Symbol('credit-card'),
         crmId: 123,
-        name: 'Super Test'
+        name: 'Super Test',
       };
 
       expect(formatCreateData(data)).toMatchSnapshot();
-    })
+    });
   });
 
   describe('stripImmediatePlanChange', () => {
     it('returns search options without immediatePlanChange', () => {
-      expect(stripImmediatePlanChange('immediatePlanChange=free-0817&pass=through')).toEqual('pass=through');
+      expect(stripImmediatePlanChange('immediatePlanChange=free-0817&pass=through')).toEqual(
+        'pass=through',
+      );
     });
   });
 });

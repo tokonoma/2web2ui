@@ -7,9 +7,18 @@ exports[`ChoosePlan page tests should disable submit and plan picker when submit
     <Grid.Column>
       <Panel>
         <_default
+          bundles={
+            Array [
+              Object {
+                "bundle": "bundle",
+                "messaging": Object {
+                  "price": 0,
+                },
+              },
+            ]
+          }
           disabled={true}
           onChange={[Function]}
-          plans={Array []}
           selectedPromo={Object {}}
         />
         <Panel.Section>
@@ -17,7 +26,7 @@ exports[`ChoosePlan page tests should disable submit and plan picker when submit
             handlePromoCode={
               Object {
                 "applyPromoCode": [Function],
-                "clearPromoCode": undefined,
+                "clearPromoCode": [MockFunction],
               }
             }
             key="promocode"
@@ -38,6 +47,7 @@ exports[`ChoosePlan page tests should disable submit and plan picker when submit
               "selectedPromo": Object {},
             }
           }
+          isPlanFree={false}
           submitting={true}
         />
         <Panel.Section>
@@ -64,9 +74,18 @@ exports[`ChoosePlan page tests should render correctly 1`] = `
     <Grid.Column>
       <Panel>
         <_default
+          bundles={
+            Array [
+              Object {
+                "bundle": "bundle",
+                "messaging": Object {
+                  "price": 0,
+                },
+              },
+            ]
+          }
           disabled={false}
           onChange={[Function]}
-          plans={Array []}
           selectedPromo={Object {}}
         />
         <Panel.Section>
@@ -74,7 +93,7 @@ exports[`ChoosePlan page tests should render correctly 1`] = `
             handlePromoCode={
               Object {
                 "applyPromoCode": [Function],
-                "clearPromoCode": undefined,
+                "clearPromoCode": [MockFunction],
               }
             }
             key="promocode"
@@ -95,6 +114,7 @@ exports[`ChoosePlan page tests should render correctly 1`] = `
               "selectedPromo": Object {},
             }
           }
+          isPlanFree={false}
           submitting={false}
         />
         <Panel.Section>
@@ -114,8 +134,6 @@ exports[`ChoosePlan page tests should render correctly 1`] = `
 </form>
 `;
 
-exports[`ChoosePlan page tests should render loading component 1`] = `<Loading />`;
-
 exports[`ChoosePlan page tests should show free bullets when isFree is selected 1`] = `
 <form>
   <CenteredLogo />
@@ -123,11 +141,38 @@ exports[`ChoosePlan page tests should show free bullets when isFree is selected 
     <Grid.Column>
       <Panel>
         <_default
+          bundles={
+            Array [
+              Object {
+                "bundle": "bundle",
+                "messaging": Object {
+                  "price": 0,
+                },
+              },
+            ]
+          }
           disabled={false}
           onChange={[Function]}
-          plans={Array []}
           selectedPromo={Object {}}
         />
+        <Panel.Section>
+          <PromoCodeNew
+            handlePromoCode={
+              Object {
+                "applyPromoCode": [Function],
+                "clearPromoCode": [MockFunction],
+              }
+            }
+            key="promocode"
+            promoCodeObj={
+              Object {
+                "promoError": undefined,
+                "promoPending": false,
+                "selectedPromo": Object {},
+              }
+            }
+          />
+        </Panel.Section>
         <CreditCardSection
           billing={
             Object {
@@ -136,7 +181,7 @@ exports[`ChoosePlan page tests should show free bullets when isFree is selected 
               "selectedPromo": Object {},
             }
           }
-          isPlanFree={true}
+          isPlanFree={false}
           submitting={false}
         />
         <Panel.Section>

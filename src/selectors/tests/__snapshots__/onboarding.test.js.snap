@@ -3,12 +3,10 @@
 exports[`choosePlanMSTP should return mapped prop values 1`] = `
 Object {
   "billing": Object {},
+  "bundles": Array [],
   "hasError": false,
   "initialValues": "change-plan-initial-values",
   "loading": false,
-  "plans": Object {
-    "default": Array [],
-  },
   "selectedPlan": "selected-plan-redux-form-value",
 }
 `;
