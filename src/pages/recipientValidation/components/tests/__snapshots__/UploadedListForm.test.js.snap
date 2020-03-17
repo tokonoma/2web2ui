@@ -58,65 +58,9 @@ exports[`UploadedListForm should render correctly 1`] = `
       </UnstyledLink>
     </Grid.Column>
   </Grid>
-  <div
-    className="ButtonRow"
-  >
-    <Button
-      className="ActionButton"
-      color="orange"
-      onClick={[Function]}
-      size="default"
-    >
-      Validate
-    </Button>
-    <Button
-      className="ActionButton"
-      component={[Function]}
-      outline={true}
-      size="default"
-      to="/recipient-validation"
-    >
-      No, thanks
-    </Button>
-  </div>
-  <Modal
-    onClose={[Function]}
-    open={false}
-  >
-    <Panel
-      accent={true}
-      className="modalContainer"
-    >
-      <div
-        style={
-          Object {
-            "float": "right",
-          }
-        }
-      >
-        <Button
-          flat={true}
-          onClick={[Function]}
-          size="default"
-        >
-          <Close />
-        </Button>
-      </div>
-      <div
-        className="bodyContainer"
-      >
-        <h3>
-          How was this calculated?
-        </h3>
-        <RecipientValidationPriceTable
-          cellProps={
-            Object {
-              "className": "rvModalCell",
-            }
-          }
-        />
-      </div>
-    </Panel>
-  </Modal>
+  <RVPriceModal
+    handleOpen={[Function]}
+    isOpen={false}
+  />
 </div>
 `;

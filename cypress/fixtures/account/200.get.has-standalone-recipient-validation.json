@@ -22,7 +22,6 @@
     },
     "options": {
       "ui": {
-        "standalone_rv": true
       }
     },
     "support": { "phone": false, "online": true },

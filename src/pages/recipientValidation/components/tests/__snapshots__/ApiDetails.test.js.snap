@@ -38,24 +38,6 @@ exports[`ApiDetails tab should render page correctly 1`] = `
           </code>
         </small>
       </div>
-      <div>
-        <Button
-          color="orange"
-          component={[Function]}
-          size="default"
-          to="/account/api-keys/create"
-        >
-          Create API Key
-        </Button>
-        <Button
-          className="ApiDocsLink"
-          external={true}
-          size="default"
-          to="https://developers.sparkpost.com/api/recipient-validation/"
-        >
-          API Docs
-        </Button>
-      </div>
     </Grid.Column>
     <Grid.Column
       lgOffset={1}

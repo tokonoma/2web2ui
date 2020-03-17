@@ -32,6 +32,7 @@ export { default as ButtonWrapper } from './buttonWrapper';
 export { default as IconButton } from './iconButton';
 export { default as MultiEmailField } from './multiEmailField';
 export { default as Abbreviation } from './abbreviation';
+export { default as RecipientValidationPriceTable } from './recipientValidation/RecipientValidationPriceTable';
 
 export * from './breadcrumbs';
 export * from './collection';

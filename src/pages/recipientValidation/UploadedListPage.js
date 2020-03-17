@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Page, Panel } from '@sparkpost/matchbox';
 import { connect } from 'react-redux';
 import { formatDate, formatTime } from 'src/helpers/date';
@@ -16,53 +16,62 @@ import ListError from './components/ListError';
 import ListProgress from './components/ListProgress';
 import UploadedListForm from './components/UploadedListForm';
 import styles from './UploadedListPage.module.scss';
-import { isAccountUiOptionSet } from 'src/helpers/conditions/account';
 import ValidateSection from './components/ValidateSection';
 import { FORMS } from 'src/constants';
 import { reduxForm } from 'redux-form';
 import { isProductOnSubscription, prepareCardInfo } from 'src/helpers/billing';
 import addRVtoSubscription from 'src/actions/addRVtoSubscription';
 import { getSubscription as getBillingSubscription } from 'src/actions/billing';
+import { withRouter } from 'react-router-dom';
 import _ from 'lodash';
 
 const FORMNAME = FORMS.RV_ADDPAYMENTFORM_UPLOADLISTPAGE;
 
-export class UploadedListPage extends Component {
-  state = {
-    useSavedCC: Boolean(this.props.billing.credit_card),
-  };
-  componentDidMount() {
-    const { getJobStatus, listId, getBillingInfo, getBillingSubscription } = this.props;
+export function UploadedListPage(props) {
+  const {
+    getJobStatus,
+    listId,
+    getBillingInfo,
+    getBillingSubscription,
+    billing,
+    job,
+    jobLoadingStatus,
+    billing: { credit_card },
+    billingLoading,
+    valid,
+    submitting,
+    isRVonSubscription,
+    addRVtoSubscriptionloading,
+    addRVtoSubscriptionerror,
+    triggerJob,
+  } = props;
+
+  const [useSavedCC, setUseSavedCC] = useState(Boolean(billing.credit_card));
+
+  useEffect(() => {
     getJobStatus(listId);
-    if (this.props.isStandAloneRVSet) {
-      getBillingSubscription();
-      getBillingInfo();
-    }
-  }
+  }, [getJobStatus, listId]);
+  useEffect(() => {
+    getBillingSubscription();
+  }, [getBillingSubscription]);
+  useEffect(() => {
+    getBillingInfo();
+  }, [getBillingInfo]);
+  useEffect(() => {
+    setUseSavedCC(Boolean(billing.credit_card));
+  }, [billing]);
 
-  componentDidUpdate(prevProps) {
-    if (this.props.billing !== prevProps.billing)
-      this.setState({ useSavedCC: Boolean(this.props.billing.credit_card) });
-  }
+  const handleToggleCC = val => setUseSavedCC(!val);
 
-  handleToggleCC = val => this.setState({ useSavedCC: !val });
-
-  handleSubmit = () => {
-    const { listId, triggerJob } = this.props;
+  const handleSubmit = () => {
     triggerJob(listId);
   };
 
-  onSubmit = formValues => {
-    const {
-      addRVtoSubscription,
-      isRVonSubscription,
-      isStandAloneRVSet,
-      isManuallyBilled,
-    } = this.props;
-    const { useSavedCC } = this.state;
+  const onSubmit = formValues => {
+    const { addRVtoSubscription, isRVonSubscription, isManuallyBilled } = props;
 
-    if (!isStandAloneRVSet || (isRVonSubscription && (this.state.useSavedCC || isManuallyBilled))) {
-      this.handleSubmit();
+    if (isRVonSubscription && (useSavedCC || isManuallyBilled)) {
+      handleSubmit();
       return;
     }
 
@@ -74,24 +83,30 @@ export class UploadedListPage extends Component {
       values,
       updateCreditCard: !useSavedCC,
       isRVonSubscription: isRVonSubscription,
-    }).then(() => this.handleSubmit());
+    }).then(() => handleSubmit());
   };
 
-  renderUploadedListPage = () => {
-    const {
-      job,
-      isStandAloneRVSet,
-      billing: { credit_card },
-      billingLoading,
-      valid,
-      submitting,
-      isRVonSubscription,
-      addRVtoSubscriptionloading,
-      addRVtoSubscriptionerror,
-    } = this.props;
-
-    if (addRVtoSubscriptionloading && !addRVtoSubscriptionerror) return <Loading />;
+  if (!job && jobLoadingStatus === 'fail') {
     return (
+      <RedirectAndAlert
+        alert={{
+          message: `Unable to find list ${listId}`,
+          type: 'error',
+        }}
+        to="/recipient-validation"
+      />
+    );
+  }
+
+  if (jobLoadingStatus === 'pending') {
+    return <Loading />;
+  }
+
+  if (addRVtoSubscriptionloading && !addRVtoSubscriptionerror) return <Loading />;
+
+  return (
+    <form onSubmit={props.handleSubmit(onSubmit)}>
+      {' '}
       <Page
         title="Recipient Validation"
         breadcrumbAction={{ content: 'Back', component: PageLink, to: '/recipient-validation' }}
@@ -107,7 +122,7 @@ export class UploadedListPage extends Component {
 
           <Panel.Section>
             {job.status === 'queued_for_batch' && (
-              <UploadedListForm job={job} onSubmit={this.handleSubmit} />
+              <UploadedListForm job={job} onSubmit={handleSubmit} />
             )}
 
             {job.status === 'error' && <ListError />}
@@ -117,46 +132,19 @@ export class UploadedListPage extends Component {
             )}
           </Panel.Section>
         </Panel>
-        {isStandAloneRVSet && job.status === 'queued_for_batch' && !billingLoading && (
+        {job.status === 'queued_for_batch' && !billingLoading && (
           <ValidateSection
             credit_card={credit_card}
             formname={FORMNAME}
             submitDisabled={!valid || submitting}
-            handleCardToggle={this.handleToggleCC}
-            defaultToggleState={!this.state.useSavedCC}
+            handleCardToggle={handleToggleCC}
+            defaultToggleState={!useSavedCC}
             isProductOnSubscription={isRVonSubscription}
           />
         )}
       </Page>
-    );
-  };
-
-  render() {
-    const { job, jobLoadingStatus, listId, isStandAloneRVSet } = this.props;
-
-    if (!job && jobLoadingStatus === 'fail') {
-      return (
-        <RedirectAndAlert
-          alert={{
-            message: `Unable to find list ${listId}`,
-            type: 'error',
-          }}
-          to="/recipient-validation"
-        />
-      );
-    }
-
-    if (!job) {
-      return <Loading />;
-    }
-    if (isStandAloneRVSet)
-      return (
-        <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
-          {this.renderUploadedListPage()}
-        </form>
-      );
-    return this.renderUploadedListPage();
-  }
+    </form>
+  );
 }
 
 const mapStateToProps = (state, props) => {
@@ -165,8 +153,7 @@ const mapStateToProps = (state, props) => {
   return {
     listId,
     job: selectRecipientValidationJobById(state, listId),
-    jobLoadingStatus: state.recipientValidation.jobLoadingStatus[listId],
-    isStandAloneRVSet: isAccountUiOptionSet('standalone_rv')(state),
+    jobLoadingStatus: state.recipientValidation.jobLoadingStatus[listId] || 'pending',
     billing: state.account.billing || {},
     billingLoading: state.account.billingLoading,
     isRVonSubscription: isProductOnSubscription('recipient_validation')(state),
@@ -177,15 +164,13 @@ const mapStateToProps = (state, props) => {
   };
 };
 
-export default connect(mapStateToProps, { getJobStatus, triggerJob, getBillingInfo })(
-  UploadedListPage,
-);
-
 const formOptions = { form: FORMNAME, enableReinitialize: true };
-export const UploadedListPageSRV = connect(mapStateToProps, {
-  getJobStatus,
-  triggerJob,
-  getBillingInfo,
-  addRVtoSubscription,
-  getBillingSubscription,
-})(reduxForm(formOptions)(UploadedListPage));
+export default withRouter(
+  connect(mapStateToProps, {
+    getJobStatus,
+    triggerJob,
+    getBillingInfo,
+    addRVtoSubscription,
+    getBillingSubscription,
+  })(reduxForm(formOptions)(UploadedListPage)),
+);
