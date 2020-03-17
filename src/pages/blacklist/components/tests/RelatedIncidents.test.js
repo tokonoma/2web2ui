@@ -1,6 +1,6 @@
 import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
 import { render } from '@testing-library/react';
+import TestApp from 'src/__testHelpers__/TestApp';
 import RelatedIncidents from '../RelatedIncidents';
 
 const mixedIncidents = [
@@ -36,9 +36,9 @@ describe('Blacklist Component: RelatedIncidents', () => {
     const defaults = { incidents: [], header: '', type: 'blacklist' };
 
     return render(
-      <Router>
+      <TestApp>
         <RelatedIncidents {...defaults} {...props} />
-      </Router>,
+      </TestApp>,
     );
   };
 
