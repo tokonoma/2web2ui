@@ -27,9 +27,9 @@ const Group = props => {
 };
 
 Button.Group = Group;
-OGButton.displayName = 'HibanaButton';
-HibanaButton.displayName = 'OGButton';
 
+OGButton.displayName = 'Button';
+HibanaButton.displayName = 'Button';
 Button.displayName = 'Button';
 Group.displayName = 'Button.Group';
 

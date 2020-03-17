@@ -2,7 +2,7 @@ import React from 'react';
 import { mount } from 'enzyme';
 import { MemoryRouter } from 'react-router-dom';
 import axios from 'axios';
-import { Provider } from 'react-redux';
+import Providers from 'src/providers';
 
 import configureStore from 'src/store';
 
@@ -52,9 +52,9 @@ export default async function mountRoute(
   const Router = ({ children }) => <MemoryRouter initialEntries={[route]}>{children}</MemoryRouter>;
 
   const wrapper = mount(
-    <Provider store={store}>
+    <Providers store={store}>
       <App RouterComponent={Router} />
-    </Provider>,
+    </Providers>,
   );
 
   await asyncFlush();
