@@ -1,6 +1,6 @@
 import React from 'react';
 import { Warning, CheckCircle } from '@sparkpost/matchbox-icons';
-import { Tag } from '@sparkpost/matchbox';
+import { Tag } from 'src/components/matchbox';
 import styles from './statusTags.module.scss';
 
 const friendlyErrorTypeMap = {

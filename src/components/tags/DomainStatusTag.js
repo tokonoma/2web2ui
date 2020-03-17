@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Tag, Tooltip } from '@sparkpost/matchbox';
+import { Tooltip } from '@sparkpost/matchbox';
 import { ErrorOutline, Schedule } from '@sparkpost/matchbox-icons';
+import { Tag } from 'src/components/matchbox';
 
 const DomainStatusTag = ({ status, className }) => {
   const size = 15;

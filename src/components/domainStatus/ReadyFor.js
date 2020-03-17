@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Tag } from '@sparkpost/matchbox';
+import { Tag } from 'src/components/matchbox';
 
 import styles from './ReadyFor.module.scss';
 

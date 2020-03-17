@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
-import { Tag } from '@sparkpost/matchbox';
 import { Error, CheckCircle, Cached, CloudUpload } from '@sparkpost/matchbox-icons';
+import { Tag } from 'src/components/matchbox';
 import styles from './JobStatusTag.module.scss';
 
 const statusProps = {

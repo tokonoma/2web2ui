@@ -1,7 +1,7 @@
 import React from 'react';
-import { snakeToFriendly } from 'src/helpers/string';
-import { Tag } from '@sparkpost/matchbox';
 import { Link } from 'react-router-dom';
+import { snakeToFriendly } from 'src/helpers/string';
+import { Tag } from 'src/components/matchbox';
 
 const statusTagColors = {
   active: null,
