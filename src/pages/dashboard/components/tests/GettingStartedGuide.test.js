@@ -6,29 +6,24 @@ import { GettingStartedGuide } from '../GettingStartedGuide';
 import { GUIDE_IDS } from '../../constants';
 import Providers from 'src/providers';
 
-describe('GettingStartedGuide', () => {
-  window.pendo = {
-    showGuideById: jest.fn(() => true),
-    onGuideAdvanced: jest.fn(),
-  };
+const defaultProps = {
+  onboarding: { isGuideAtBottom: false },
+  history: {
+    push: jest.fn(),
+  },
+  listApiKeys: jest.fn(),
+  setAccountOption: jest.fn(),
+  listSendingDomains: jest.fn(),
+  isAdmin: true,
+};
 
-  const defaultProps = {
-    onboarding: { isGuideAtBottom: false },
-    history: {
-      push: jest.fn(),
-    },
-    listApiKeys: jest.fn(),
-    setAccountOption: jest.fn(),
-    listSendingDomains: jest.fn(),
-    isAdmin: true,
-  };
+describe('GettingStartedGuide shallow', () => {
+  beforeEach(() => {
+    jest.mock('src/context/HibanaContext');
+  });
 
   const subject = (props, renderFn = render) =>
-    renderFn(
-      <Providers>
-        <GettingStartedGuide {...defaultProps} {...props} />
-      </Providers>,
-    );
+    renderFn(<GettingStartedGuide {...defaultProps} {...props} />);
 
   it('should render correctly when guide is at bottom or when guide is at top', () => {
     expect(
@@ -43,6 +38,32 @@ describe('GettingStartedGuide', () => {
     ).not.toBe(null);
   });
 
+  it('should render ShowMeSparkpostStep when on step "Show Me SparkPost" ', () => {
+    jest.mock('src/context/HibanaContext');
+    const instance = subject({ onboarding: { active_step: 'Show Me SparkPost' } }, shallow);
+    expect(instance.find('ShowMeSparkpostStep')).toHaveLength(1);
+  });
+
+  it("should render LetsCodeStep when on step Let's Code ", () => {
+    jest.mock('src/context/HibanaContext');
+    const instance = subject({ onboarding: { active_step: "Let's Code" } }, shallow);
+    expect(instance.find('LetsCodeStep')).toHaveLength(1);
+  });
+});
+
+describe('GettingStartedGuide full', () => {
+  window.pendo = {
+    showGuideById: jest.fn(() => true),
+    onGuideAdvanced: jest.fn(),
+  };
+
+  const subject = (props, renderFn = render) =>
+    renderFn(
+      <Providers>
+        <GettingStartedGuide {...defaultProps} {...props} />
+      </Providers>,
+    );
+
   it('should render the corresponding step when breadcrumb is clicked', () => {
     const { queryByText } = subject({ onboarding: { active_step: 'Show Me SparkPost' } });
     userEvent.click(queryByText('Sending'));
@@ -52,11 +73,6 @@ describe('GettingStartedGuide', () => {
   it('should render the BreadCrumbItem as active corresponding to the Step', () => {
     const { queryByText } = subject({ onboarding: { active_step: 'Show Me SparkPost' } });
     expect(queryByText('Show Me SparkPost')).toBeInTheDocument();
-  });
-
-  it('should render ShowMeSparkpostStep when on step "Show Me SparkPost" ', () => {
-    const instance = subject({ onboarding: { active_step: 'Show Me SparkPost' } }, shallow);
-    expect(instance.find('ShowMeSparkpostStep')).toHaveLength(1);
   });
 
   it('should navigate to templates page when Send a Test Email button is clicked', () => {
@@ -92,11 +108,6 @@ describe('GettingStartedGuide', () => {
     expect(defaultProps.setAccountOption).toHaveBeenCalledWith('onboarding', {
       invite_collaborator_completed: true,
     });
-  });
-
-  it("should render LetsCodeStep when on step Let's Code ", () => {
-    const instance = subject({ onboarding: { active_step: "Let's Code" } }, shallow);
-    expect(instance.find('LetsCodeStep')).toHaveLength(1);
   });
 
   it('should have an external link to developer docs', () => {
