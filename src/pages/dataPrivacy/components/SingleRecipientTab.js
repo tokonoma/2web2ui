@@ -21,14 +21,32 @@ const requestTypes = [
   },
 ];
 
+const subaccountItems = {
+  shared: { id: -1, name: 'Master and all subaccounts' },
+  subaccount: { id: -2, name: 'Subaccount' },
+  master: { id: 0, name: 'Master account' },
+};
+
+const createOptions = [
+  { label: 'Master Account', value: 'master' },
+  { label: 'Master and All Subaccounts', value: 'shared' },
+  { label: 'Select a Subaccount', value: 'subaccount' },
+];
+
 export function SingleRecipientTab(props) {
   const onSubmit = values => {
+    const subaccountId = !Boolean(values.assignTo)
+      ? null
+      : subaccountItems[values.assignTo].id === -2
+      ? values.subaccount.id
+      : subaccountItems[values.assignTo]['id'];
     switch (values.requestType) {
       case 'rtbf':
         props
           .submitRTBFRequest({
             recipients: [values.address],
             request_date: new Date().toISOString(),
+            subaccountId: subaccountId,
           })
           .then(() => props.reset());
         break;
@@ -38,6 +56,7 @@ export function SingleRecipientTab(props) {
           .submitOptOutRequest({
             recipients: [values.address],
             request_date: new Date().toISOString(),
+            subaccountId: subaccountId,
           })
           .then(() => props.reset());
         break;
@@ -66,7 +85,12 @@ export function SingleRecipientTab(props) {
           normalize={(value = '') => value.trim()}
         />
       </div>
-      <SubaccountSection newTemplate={true} disabled={false} validate={[required]} />
+      <SubaccountSection
+        newTemplate={true}
+        disabled={false}
+        validate={[required]}
+        createOptions={createOptions}
+      />
       <div style={{ padding: '1rem' }}>
         <Button color="orange" type="submit">
           Submit Request
