@@ -74,6 +74,7 @@ export function OnboardingPlanPage({
       history.push(NEXT_STEP);
       return;
     }
+    const billingId = values.planpicker.messaging.billing_id;
 
     let action = Promise.resolve({});
     if (selectedPromo.promoCode && !isPlanFree) {
@@ -81,7 +82,7 @@ export function OnboardingPlanPage({
       newValues.promoCode = promoCode;
       action = verifyPromoCode({
         promoCode,
-        billingId: values.planpicker.billingId,
+        billingId,
         meta: { promoCode, showErrorAlert: false },
       });
     }
@@ -90,7 +91,7 @@ export function OnboardingPlanPage({
     return action
       .then(({ discount_id }) => {
         newValues.discountId = discount_id;
-        return billingCreate(newValues);
+        return billingCreate({ ...newValues, billingId });
       })
       .then(() => history.push(NEXT_STEP))
       .then(() => showAlert({ type: 'success', message: 'Added your plan' }));
