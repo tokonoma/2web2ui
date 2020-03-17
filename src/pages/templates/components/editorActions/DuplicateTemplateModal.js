@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import {
   Modal,
-  Panel,
   TextField,
   Button
 } from '@sparkpost/matchbox';
+import { Panel } from 'src/components/matchbox';
 import ButtonWrapper from 'src/components/buttonWrapper';
 import PanelLoading from 'src/components/panelLoading';
 
