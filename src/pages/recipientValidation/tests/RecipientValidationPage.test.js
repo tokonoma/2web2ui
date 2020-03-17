@@ -63,7 +63,7 @@ describe('Page: Recipient Email Verification', () => {
 
   it('when billingLoading is true ValidateSection is not rendered', () => {
     const instance = subject({ billingLoading: true, tab: 1 });
-    expect(instance.find('Connect(ValidateSection)')).not.toExist();
+    expect(instance.find('ValidateSection')).not.toExist();
   });
 
   it('renders a API Docs button in Panel when API Integration Tab is selected', () => {

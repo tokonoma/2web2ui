@@ -98,7 +98,7 @@ export function UploadedListPage(props) {
     );
   }
 
-  if (!job) {
+  if (jobLoadingStatus === 'pending') {
     return <Loading />;
   }
 
@@ -153,7 +153,7 @@ const mapStateToProps = (state, props) => {
   return {
     listId,
     job: selectRecipientValidationJobById(state, listId),
-    jobLoadingStatus: state.recipientValidation.jobLoadingStatus[listId],
+    jobLoadingStatus: state.recipientValidation.jobLoadingStatus[listId] || 'pending',
     billing: state.account.billing || {},
     billingLoading: state.account.billingLoading,
     isRVonSubscription: isProductOnSubscription('recipient_validation')(state),
