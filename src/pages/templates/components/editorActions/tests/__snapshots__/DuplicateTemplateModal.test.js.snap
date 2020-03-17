@@ -5,7 +5,7 @@ exports[`DuplicateTemplateModal renders with default props and some data from th
   onClose={[MockFunction]}
   open={false}
 >
-  <Panel
+  <OGPanel
     accent={true}
     sectioned={true}
     title="Duplicate Template"
@@ -46,6 +46,6 @@ exports[`DuplicateTemplateModal renders with default props and some data from th
         </Button>
       </ButtonWrapper>
     </form>
-  </Panel>
+  </OGPanel>
 </ModalWrapper>
 `;

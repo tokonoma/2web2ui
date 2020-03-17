@@ -6,37 +6,40 @@ exports[`MetricCard Component:  should render correctly with all props 1`] = `
 >
   <Panel
     className="Panel"
+    p="500"
     primary={true}
   >
-    <h1
-      className="Value"
-    >
-      Card Value
-    </h1>
-    <h6
-      className="Label"
-    >
-      Card Label
-       
-      <Tooltip
-        bottom={true}
-        content="Tooltip Content"
-        dark={true}
-        forcePosition={false}
-        horizontalOffset="-1.1rem"
-        preferredDirection={
-          Object {
-            "bottom": true,
-            "left": false,
-            "right": true,
-            "top": false,
-          }
-        }
-        right={true}
+    <Panel.Section>
+      <h1
+        className="Value"
       >
-        <InfoOutline />
-      </Tooltip>
-    </h6>
+        Card Value
+      </h1>
+      <h6
+        className="Label"
+      >
+        Card Label
+         
+        <Tooltip
+          bottom={true}
+          content="Tooltip Content"
+          dark={true}
+          forcePosition={false}
+          horizontalOffset="-1.1rem"
+          preferredDirection={
+            Object {
+              "bottom": true,
+              "left": false,
+              "right": true,
+              "top": false,
+            }
+          }
+          right={true}
+        >
+          <InfoOutline />
+        </Tooltip>
+      </h6>
+    </Panel.Section>
   </Panel>
 </div>
 `;
@@ -47,19 +50,22 @@ exports[`MetricCard Component:  should render without tooltip 1`] = `
 >
   <Panel
     className="Panel"
+    p="500"
     primary={true}
   >
-    <h1
-      className="Value"
-    >
-      Card Value
-    </h1>
-    <h6
-      className="Label"
-    >
-      Card Label
-       
-    </h6>
+    <Panel.Section>
+      <h1
+        className="Value"
+      >
+        Card Value
+      </h1>
+      <h6
+        className="Label"
+      >
+        Card Label
+         
+      </h6>
+    </Panel.Section>
   </Panel>
 </div>
 `;
