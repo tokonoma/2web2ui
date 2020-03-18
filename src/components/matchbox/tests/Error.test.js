@@ -4,9 +4,6 @@ import { useHibana } from 'src/context/HibanaContext';
 import Error from '../Error';
 
 jest.mock('src/context/HibanaContext');
-// jest.mock('@sparkpost/matchbox-hibana', () => ({
-//   Error: props => <div data-id="hibana-inline" {...props} />,
-// }));
 
 describe('Error Matchbox component wrapper', () => {
   const subject = props => {
