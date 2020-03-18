@@ -30,7 +30,7 @@ describe('The single recipient data-privacy page', () => {
       method: 'POST',
       statusCode: 400,
       url: '/api/v1/data-privacy/rtbf-request',
-      fixture: 'data-privacy/200.post.json',
+      fixture: 'data-privacy/400.post.json',
     });
     cy.get('[value="rtbf"]').check({ force: true });
     cy.findByLabelText('Email Address').type('myfakeusername@sparkpost.com');
