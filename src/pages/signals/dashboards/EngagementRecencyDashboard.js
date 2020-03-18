@@ -21,21 +21,19 @@ export class EngagementRecencyDashboard extends Component {
     const { subaccounts } = this.props;
 
     return (
-      <Page
-        title={
-          <>
-            Engagement Recency
-            <InfoTooltip content={ENGAGEMENT_RECENCY_INFO} />
-          </>
-        }
-      >
+      <Page title={
+        <>
+          Engagement Recency
+          <InfoTooltip content={ENGAGEMENT_RECENCY_INFO} />
+        </>
+      }>
         <Panel sectioned>
           <Grid>
             <Grid.Column lg={4}>
               <DateFilter />
             </Grid.Column>
             <SubaccountFilter />
-            <FacetFilter facets={facets} />
+            <FacetFilter facets={facets}/>
           </Grid>
         </Panel>
         <EngagementRecencyOverview defaults={{ perPage: 25 }} subaccounts={subaccounts} hideTitle />
@@ -45,11 +43,11 @@ export class EngagementRecencyDashboard extends Component {
 }
 
 const mapStateToProps = (state, props) => ({
-  subaccounts: state.subaccounts.list,
+  subaccounts: state.subaccounts.list
 });
 
 const mapDispatchToProps = {
-  getSubaccounts,
+  getSubaccounts
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(EngagementRecencyDashboard);

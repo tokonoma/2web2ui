@@ -20,7 +20,7 @@ import { selectDomainsBySubaccountWithDefault } from 'src/selectors/templates';
 
 export class CreateForm extends Component {
   // Fills in ID based on Name
-  handleIdFill = e => {
+  handleIdFill = (e) => {
     const { autofill, formName } = this.props;
     autofill(formName, 'id', slugify(e.target.value));
   };
@@ -54,32 +54,32 @@ export class CreateForm extends Component {
         <Grid.Column xs={12} lg={7}>
           <Panel.Section>
             <Field
-              name="name"
+              name='name'
               component={TextFieldWrapper}
-              label="Template Name"
+              label='Template Name'
               onChange={this.handleIdFill}
               validate={required}
             />
 
             <Field
-              name="id"
+              name='id'
               component={TextFieldWrapper}
-              label="Template ID"
-              helpText={"A Unique ID for your template, we'll fill this in for you."}
+              label='Template ID'
+              helpText={'A Unique ID for your template, we\'ll fill this in for you.'}
               validate={[required, slug]}
             />
             <Field
-              name="content.subject"
+              name='content.subject'
               component={TextFieldWrapper}
-              label="Subject"
+              label='Subject'
               validate={required}
             />
 
             <Field
-              name="content.from.email"
+              name='content.from.email'
               component={FromEmailWrapper}
-              placeholder="example@email.com"
-              label="From Email"
+              placeholder='example@email.com'
+              label='From Email'
               validate={[required, emailOrSubstitution]}
               domains={domains}
               helpText={this.fromEmailHelpText()}
@@ -87,16 +87,18 @@ export class CreateForm extends Component {
           </Panel.Section>
         </Grid.Column>
         <Grid.Column xs={12} lg={5}>
-          {canViewSubaccountSection && <SubaccountSection newTemplate={true} />}
+          {canViewSubaccountSection && <SubaccountSection newTemplate={true}/>}
         </Grid.Column>
+
       </Grid>
     );
   }
 }
 
 CreateForm.defaultProps = {
-  domains: [],
+  domains: []
 };
+
 
 const mapStateToProps = (state, props) => {
   const selector = formValueSelector(props.formName);
@@ -106,10 +108,11 @@ const mapStateToProps = (state, props) => {
     fromEmail: selector(state, 'content.from.email'),
     domainsLoading: state.sendingDomains.listLoading,
     hasSubaccounts: hasSubaccounts(state),
-    canViewSubaccount: selectCondition(not(isSubaccountUser))(state),
+    canViewSubaccount: selectCondition(not(isSubaccountUser))(state)
   };
 };
 
 const connectedForm = connect(mapStateToProps, { autofill })(CreateForm);
 connectedForm.displayName = 'TemplateCreateForm';
 export default connectedForm;
+
