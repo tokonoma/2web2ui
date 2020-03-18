@@ -5,7 +5,11 @@ import { useHibana } from 'src/context/HibanaContext';
 import { omitSystemProps } from 'src/helpers/hibana';
 
 HibanaPanel.displayName = 'HibanaPanel';
+HibanaPanel.Section.displayName = 'HibanaPanelSection';
+HibanaPanel.Footer.displayName = 'HibanaPanelFooter';
 OGPanel.displayName = 'OGPanel';
+OGPanel.Section.displayName = 'OGPanelSection';
+OGPanel.Footer.displayName = 'OGPanelFooter';
 
 const Panel = props => {
   const [state] = useHibana();
