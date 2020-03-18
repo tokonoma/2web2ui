@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
-import { Panel } from '@sparkpost/matchbox';
 import { RadioGroup, SubaccountTypeaheadWrapper } from 'src/components';
 import ToggleBlock from 'src/components/toggleBlock/ToggleBlock';
 import { required } from 'src/helpers/validation';
@@ -89,7 +88,7 @@ export default class SubaccountSection extends Component {
   render() {
     const { newTemplate } = this.props;
 
-    return <Panel.Section>{newTemplate ? this.renderCreate() : this.renderEdit()}</Panel.Section>;
+    return <>{newTemplate ? this.renderCreate() : this.renderEdit()}</>;
   }
 }
 

@@ -24,17 +24,11 @@ export default class CreatePage extends React.Component {
     this.props.clearSnippet(); // loaded for duplicate
   }
 
-  fillIdField = (event) => {
+  fillIdField = event => {
     this.props.change('id', slugify(event.target.value));
-  }
+  };
 
-  submitSnippet = ({
-    assignTo,
-    content: { html, text, amp_html } = {},
-    id,
-    name,
-    subaccount
-  }) => {
+  submitSnippet = ({ assignTo, content: { html, text, amp_html } = {}, id, name, subaccount }) => {
     // must handle when subaccount is set to null by SubaccountSection
     const subaccountId = subaccount ? subaccount.id : undefined;
     const { createSnippet, history } = this.props;
@@ -46,11 +40,11 @@ export default class CreatePage extends React.Component {
       sharedWithSubaccounts: assignTo === 'shared',
       subaccountId,
       text,
-      amp_html
+      amp_html,
     }).then(() => {
       history.push(`/snippets/edit/${id}${setSubaccountQuery(subaccountId)}`);
     });
-  }
+  };
 
   render() {
     const { snippetToDuplicate, handleSubmit, hasSubaccounts, loading, submitting } = this.props;
@@ -66,7 +60,7 @@ export default class CreatePage extends React.Component {
         primaryAction={{
           Component: Button,
           content: 'Create Snippet',
-          onClick: handleSubmit(this.submitSnippet)
+          onClick: handleSubmit(this.submitSnippet),
         }}
       >
         <Form onSubmit={this.submitSnippet}>
@@ -91,7 +85,11 @@ export default class CreatePage extends React.Component {
                     validate={[required, slug, maxLength(64)]}
                   />
                 </Panel.Section>
-                {hasSubaccounts && <SubaccountSection newTemplate={true} disabled={submitting} />}
+                {hasSubaccounts && (
+                  <Panel.Section>
+                    <SubaccountSection newTemplate={true} disabled={submitting} />
+                  </Panel.Section>
+                )}
               </Panel>
             </Grid.Column>
             <Grid.Column xs={12} lg={8}>

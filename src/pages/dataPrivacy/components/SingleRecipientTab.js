@@ -7,8 +7,9 @@ import SubaccountSection from 'src/components/subaccountSection';
 import { TextFieldWrapper } from 'src/components';
 import { Label } from 'src/components/matchbox';
 import { required, email, maxLength } from 'src/helpers/validation';
-import { Button } from '@sparkpost/matchbox';
+import { Button, Panel } from '@sparkpost/matchbox';
 import { submitRTBFRequest, submitOptOutRequest } from 'src/actions/dataPrivacy';
+import ButtonWrapper from 'src/components/buttonWrapper';
 
 const requestTypes = [
   {
@@ -37,7 +38,7 @@ export function SingleRecipientTab(props) {
   const onSubmit = values => {
     const subaccountId = !Boolean(values.assignTo)
       ? null
-      : subaccountItems[values.assignTo].id === -2
+      : values.assignTo === 'subaccount'
       ? values.subaccount.id
       : subaccountItems[values.assignTo]['id'];
     switch (values.requestType) {
@@ -63,43 +64,46 @@ export function SingleRecipientTab(props) {
     }
   };
   return (
-    <form onSubmit={props.handleSubmit(onSubmit)}>
-      <div style={{ padding: '1rem', paddingBottom: 0, paddingTop: '2rem' }}>
-        <Field
-          component={RadioGroup}
-          name="requestType"
-          title="Select Compliance Type"
-          options={requestTypes}
-          disabled={false}
-          validate={[required]}
-        />
-        <Label id="email-address-field">Email Address</Label>
+    <Panel.Section>
+      <form onSubmit={props.handleSubmit(onSubmit)}>
+        <div style={{ marginTop: '1rem' }}>
+          <Field
+            component={RadioGroup}
+            name="requestType"
+            title="Select Compliance Type"
+            options={requestTypes}
+            disabled={false}
+            validate={[required]}
+          />
+          <Label id="email-address-field">Email Address</Label>
 
-        <Field
-          id="email-address-field"
-          name="address"
-          style={{ width: '60%' }}
-          component={TextFieldWrapper}
-          placeholder={'email@example.com'}
-          validate={[required, email, maxLength(254)]}
-          normalize={(value = '') => value.trim()}
-        />
-      </div>
-      <SubaccountSection
-        newTemplate={true}
-        disabled={false}
-        validate={[required]}
-        createOptions={createOptions}
-      />
-      <div style={{ padding: '1rem' }}>
-        <Button color="orange" type="submit">
-          Submit Request
-        </Button>
-        <div style={{ marginLeft: '1rem', display: 'inline' }}>
-          <Button onClick={props.reset}>Cancel</Button>
+          <Field
+            id="email-address-field"
+            name="address"
+            style={{ width: '60%' }}
+            component={TextFieldWrapper}
+            placeholder={'email@example.com'}
+            validate={[required, email, maxLength(254)]}
+            normalize={(value = '') => value.trim()}
+          />
+          <SubaccountSection
+            newTemplate={true}
+            disabled={false}
+            validate={[required]}
+            createOptions={createOptions}
+          />
         </div>
-      </div>
-    </form>
+
+        <ButtonWrapper>
+          <Button color="orange" type="submit">
+            Submit Request
+          </Button>
+          <div style={{ marginLeft: '1rem', display: 'inline' }}>
+            <Button onClick={props.reset}>Cancel</Button>
+          </div>
+        </ButtonWrapper>
+      </form>
+    </Panel.Section>
   );
 }
 const formOptions = {
