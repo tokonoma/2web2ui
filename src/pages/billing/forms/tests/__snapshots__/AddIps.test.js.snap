@@ -101,7 +101,8 @@ exports[`AddIps renders correctly with default props 1`] = `
           <span>
             You can add up to 
             4
-             total dedicated IPs to your plan for 
+             total dedicated IPs to your plan for
+             
             <DedicatedIpCost
               plan={Object {}}
               quantity="1"
@@ -184,7 +185,8 @@ exports[`AddIps renders free ip elements when included in plan 1`] = `
           <span>
             You can add up to 
             4
-             total dedicated IPs to your plan for 
+             total dedicated IPs to your plan for
+             
             <DedicatedIpCost
               plan={
                 Object {

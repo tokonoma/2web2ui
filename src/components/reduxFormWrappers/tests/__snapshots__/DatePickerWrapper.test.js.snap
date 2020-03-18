@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`DatePickerWrapper renders correctly 1`] = `
-<AppDatePicker
+<DatePicker
   from={2018-01-01T12:00:00.000Z}
   meta={Object {}}
   name="example"

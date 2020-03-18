@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Field, reduxForm, SubmissionError } from 'redux-form';
-import { Button, Error, Panel } from '@sparkpost/matchbox';
+import { Button, Panel } from '@sparkpost/matchbox';
+import { Error } from 'src/components/matchbox';
 import { addDedicatedIps } from 'src/actions/billing';
 import { showAlert } from 'src/actions/globalAlert';
 import { createPool } from 'src/actions/ipPools';
@@ -25,7 +26,9 @@ export class AddIps extends Component {
     let response;
 
     // Exit early with provided IP pool ID
-    if (action !== 'new') { return id; }
+    if (action !== 'new') {
+      return id;
+    }
 
     try {
       response = await this.props.createPool({ name });
@@ -35,13 +38,13 @@ export class AddIps extends Component {
       // field-level error
       throw new SubmissionError({
         ipPool: {
-          name: 'Unable to create your new IP Pool'
-        }
+          name: 'Unable to create your new IP Pool',
+        },
       });
     }
 
     return response.id;
-  }
+  };
 
   onSubmit = async ({ ipPool, quantity }) => {
     const ip_pool = await this.getOrCreateIpPool(ipPool);
@@ -55,7 +58,7 @@ export class AddIps extends Component {
 
       // form-level error
       throw new SubmissionError({
-        _error: 'Unable to complete your request at this time'
+        _error: 'Unable to complete your request at this time',
       });
     }
 
@@ -63,11 +66,11 @@ export class AddIps extends Component {
 
     this.props.showAlert({
       message: `Successfully added ${quantity} dedicated IPs!`,
-      type: 'success'
+      type: 'success',
     });
 
     this.props.onClose();
-  }
+  };
 
   render() {
     const { currentPlan, error, handleSubmit, onClose, submitting } = this.props;
@@ -77,35 +80,63 @@ export class AddIps extends Component {
     // This form should not be rendered if the account has no remaining IP addresses
     const isDisabled = submitting || remainingCount === 0;
 
-    const action = { content: 'Manage Your IPs', to: '/account/ip-pools', Component: Link, color: 'orange' };
+    const action = {
+      content: 'Manage Your IPs',
+      to: '/account/ip-pools',
+      Component: Link,
+      color: 'orange',
+    };
 
     return (
       <form onSubmit={handleSubmit(this.onSubmit)} noValidate>
-        <Panel title='Add Dedicated IPs' actions={[action]}>
+        <Panel title="Add Dedicated IPs" actions={[action]}>
           <Panel.Section>
-            <p>{'Dedicated IPs give you better control over your sending reputation. '}
-              {currentPlan.includesIp && <span><strong>{'Your plan includes one free dedicated IP address. '}</strong></span>}
+            <p>
+              {'Dedicated IPs give you better control over your sending reputation. '}
+              {currentPlan.includesIp && (
+                <span>
+                  <strong>{'Your plan includes one free dedicated IP address. '}</strong>
+                </span>
+              )}
             </p>
 
             <Field
               component={TextFieldWrapper}
               disabled={isDisabled}
-              label='Quantity'
-              name='quantity'
-              min='1' max={remainingCount}
+              label="Quantity"
+              name="quantity"
+              min="1"
+              max={remainingCount}
               required={true}
-              type='number'
+              type="number"
               validate={[required, integer, minNumber(1), maxNumber(remainingCount)]}
               errorInLabel
               autoFocus={true}
-              helpText={(remainingCount === 0) ? <span>You cannot currently add any more IPs</span> : <span>You can add up to {maxPerAccount} total dedicated IPs to your plan for <DedicatedIpCost plan={currentPlan} quantity='1' /> each.</span>}
+              helpText={
+                remainingCount === 0 ? (
+                  <span>You cannot currently add any more IPs</span>
+                ) : (
+                  <span>
+                    You can add up to {maxPerAccount} total dedicated IPs to your plan for{' '}
+                    <DedicatedIpCost plan={currentPlan} quantity="1" /> each.
+                  </span>
+                )
+              }
             />
             <IpPoolSelect disabled={isDisabled} formName={FORM_NAME} />
           </Panel.Section>
           <Panel.Section>
-            <Button type='submit' primary disabled={isDisabled}>Add Dedicated IPs</Button>
-            <Button onClick={onClose} className={styles.Cancel}>Cancel</Button>
-            {error && <div className={styles.ErrorWrapper}><Error error={error} /></div>}
+            <Button type="submit" primary disabled={isDisabled}>
+              Add Dedicated IPs
+            </Button>
+            <Button onClick={onClose} className={styles.Cancel}>
+              Cancel
+            </Button>
+            {error && (
+              <div className={styles.ErrorWrapper}>
+                <Error error={error} />
+              </div>
+            )}
           </Panel.Section>
         </Panel>
       </form>
@@ -113,15 +144,15 @@ export class AddIps extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   account: state.account,
   currentPlan: currentPlanSelector(state),
   sendingIps: state.sendingIps.list,
   initialValues: {
     ipPool: {
-      action: 'new'
-    }
-  }
+      action: 'new',
+    },
+  },
 });
 
 const mapDispatchtoProps = { addDedicatedIps, createPool, showAlert };

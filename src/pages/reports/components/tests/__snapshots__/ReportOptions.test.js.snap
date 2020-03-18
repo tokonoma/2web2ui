@@ -14,7 +14,7 @@ exports[`Component: Report Options should mount and render correctly 1`] = `
           <div
             className="FieldWrapper"
           >
-            <AppDatePicker
+            <DatePicker
               filters={Array []}
               from={2018-02-15T12:00:00.000Z}
               onChange={
@@ -91,7 +91,7 @@ exports[`Component: Report Options with active filters should render 1`] = `
           <div
             className="FieldWrapper"
           >
-            <AppDatePicker
+            <DatePicker
               filters={
                 Array [
                   Object {

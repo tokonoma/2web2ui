@@ -1,8 +1,7 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
 import Dropzone from 'react-dropzone';
-import { Error } from '@sparkpost/matchbox';
-import { Label } from 'src/components/matchbox';
+import { Error, Label } from 'src/components/matchbox';
 import { FileUpload } from '@sparkpost/matchbox-icons';
 import { shrinkToFit } from 'src/helpers/string';
 import styles from './FileFieldWrapper.module.scss';

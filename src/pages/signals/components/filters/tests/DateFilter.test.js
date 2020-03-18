@@ -26,7 +26,7 @@ describe('DateFilter', () => {
   it('renders datepicker', () => {
     expect(
       subject()
-        .find('AppDatePicker')
+        .find('DatePicker')
         .props(),
     ).toMatchSnapshot();
   });
@@ -39,7 +39,7 @@ describe('DateFilter', () => {
       moment('2017-12-31T05:59:59.999Z'),
     );
 
-    wrapper.find('AppDatePicker').prop('onChange')(options);
+    wrapper.find('DatePicker').prop('onChange')(options);
     expect(props.changeSignalOptions).toHaveBeenCalledWith({
       ...options,
       from: from.toDate(),
@@ -55,7 +55,7 @@ describe('DateFilter', () => {
       to: new Date('2015-01-09T05:00:00Z'),
     };
 
-    wrapper.find('AppDatePicker').prop('onChange')(options);
+    wrapper.find('DatePicker').prop('onChange')(options);
     expect(props.changeSignalOptions).toHaveBeenCalledWith(options);
   });
 });

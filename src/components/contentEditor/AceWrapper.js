@@ -6,7 +6,7 @@ import 'brace/mode/json';
 import 'brace/theme/tomorrow';
 import 'brace/ext/searchbox';
 
-import { Error } from '@sparkpost/matchbox';
+import { Error } from 'src/components/matchbox';
 import styles from './AceWrapper.module.scss';
 
 const AceWrapper = ({
@@ -14,7 +14,7 @@ const AceWrapper = ({
   mode,
   readOnly,
   syntaxValidation,
-  meta: { error, active, submitFailed }
+  meta: { error, active, submitFailed },
 }) => (
   <div>
     {submitFailed && !active && error && (
@@ -31,10 +31,10 @@ const AceWrapper = ({
       onBlur={() => input.onBlur(input.value)}
       onFocus={() => input.onFocus(input.value)}
       readOnly={readOnly}
-      theme='tomorrow'
-      className='TemplateEditor'
-      height='900px'
-      width='auto'
+      theme="tomorrow"
+      className="TemplateEditor"
+      height="900px"
+      width="auto"
       tabSize={2}
       fontSize={12}
       cursorStart={1}
@@ -42,7 +42,7 @@ const AceWrapper = ({
       showPrintMargin={false}
       setOptions={{
         useWorker: syntaxValidation,
-        displayIndentGuides: false
+        displayIndentGuides: false,
       }}
       editorProps={{ $blockScrolling: Infinity }}
     />

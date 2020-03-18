@@ -6,7 +6,8 @@ import cookie from 'js-cookie';
 import _ from 'lodash';
 
 import { CenteredLogo, PageLink } from 'src/components';
-import { Panel, Error } from '@sparkpost/matchbox';
+import { Panel } from '@sparkpost/matchbox';
+import { Error } from 'src/components/matchbox';
 import JoinForm from './components/JoinForm';
 import JoinError from './components/JoinError';
 import JoinLink from './components/JoinLink';

@@ -9,7 +9,7 @@ exports[`Component: MessageEventsSearch renders correctly 1`] = `
       <div
         className="DateFilter"
       >
-        <AppDatePicker
+        <DatePicker
           dateFieldFormat="MMM Do h:mma"
           datePickerProps={
             Object {
