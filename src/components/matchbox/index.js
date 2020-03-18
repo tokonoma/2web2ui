@@ -3,6 +3,7 @@ export { default as Box } from './Box';
 export { default as Expandable } from './Expandable';
 export { default as Inline } from './Inline';
 export { default as Label } from './Label';
+export { default as Pager } from './Pager';
 export { default as ProgressBar } from './ProgressBar';
 export { default as Slider } from './Slider';
 export { default as Snackbar } from './Snackbar';
