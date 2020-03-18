@@ -1,5 +1,5 @@
 import React from 'react';
-import { Tag } from '@sparkpost/matchbox';
+import { Tag } from 'src/components/matchbox';
 import { snakeToFriendly } from 'src/helpers/string';
 
 const StatusTag = ({ status }) => {

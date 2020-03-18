@@ -1,6 +1,6 @@
 import React from 'react';
 import { Warning, CheckCircle } from '@sparkpost/matchbox-icons';
-import { Tag } from '@sparkpost/matchbox';
+import { Tag } from 'src/components/matchbox';
 import styles from './statusTags.module.scss';
 
 const friendlyErrorTypeMap = {
@@ -8,7 +8,7 @@ const friendlyErrorTypeMap = {
   system: 'System error',
   decompress: 'Decompression error',
   duplicate_batch: 'Duplicate batch',
-  empty_batch: 'Empty batch'
+  empty_batch: 'Empty batch',
 };
 const Status = ({ status, error }) => {
   const isError = status !== 'success';

@@ -3,9 +3,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import fp from 'lodash/fp';
-import { Page, Tag } from '@sparkpost/matchbox';
+import { Page } from '@sparkpost/matchbox';
 import TimeAgo from 'react-timeago';
 import { Users } from 'src/components/images';
+import { Tag } from 'src/components/matchbox';
 import PageLink from 'src/components/pageLink/PageLink';
 import { hasUiOption } from 'src/helpers/conditions/account';
 import { list as listSubaccounts } from 'src/actions/subaccounts';
@@ -78,7 +79,7 @@ export class ListPage extends Component {
     const data = [
       <User name={user.name} email={user.email} username={user.username} />,
       user.roleLabel,
-      user.tfa_enabled ? <Tag color={'blue'}>Enabled</Tag> : <Tag>Disabled</Tag>,
+      user.tfa_enabled ? <Tag color="blue">Enabled</Tag> : <Tag>Disabled</Tag>,
       user.last_login ? <TimeAgo date={user.last_login} live={false} /> : 'Never',
       <Actions
         username={user.username}

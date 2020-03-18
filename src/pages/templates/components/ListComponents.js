@@ -1,19 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import {
-  Button,
-  Tag,
-  Tooltip,
-  ScreenReaderOnly
-} from '@sparkpost/matchbox';
-import {
-  CheckCircle,
-  Delete,
-  Edit,
-  ContentCopy
-} from '@sparkpost/matchbox-icons';
+import { Button, Tooltip, ScreenReaderOnly } from '@sparkpost/matchbox';
+import { CheckCircle, Delete, Edit, ContentCopy } from '@sparkpost/matchbox-icons';
 import { formatDateTime } from 'src/helpers/date';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
+import { Tag } from 'src/components/matchbox';
 import styles from './ListComponents.module.scss';
 
 import { routeNamespace } from '../constants/routes';
@@ -25,7 +16,10 @@ export const Name = ({ list_name: name, id, subaccount_id, ...rowData }) => {
     <>
       <p className={styles.Name}>
         <Link
-          to={`/${routeNamespace}/edit/${id}/${version}/content${setSubaccountQuery(subaccount_id)}`}>
+          to={`/${routeNamespace}/edit/${id}/${version}/content${setSubaccountQuery(
+            subaccount_id,
+          )}`}
+        >
           <strong>{name}</strong>
         </Link>
       </p>
@@ -33,9 +27,9 @@ export const Name = ({ list_name: name, id, subaccount_id, ...rowData }) => {
   );
 };
 
-export const Status = (rowData) => {
+export const Status = rowData => {
   const { list_status } = rowData;
-  const PublishedIcon = <CheckCircle className={styles.PublishedIconColor}/>;
+  const PublishedIcon = <CheckCircle className={styles.PublishedIconColor} />;
 
   if (list_status === 'published') {
     return (
@@ -47,7 +41,7 @@ export const Status = (rowData) => {
 
   if (list_status === 'published_with_draft') {
     return (
-      <Tooltip dark content='Contains unpublished changes'>
+      <Tooltip dark content="Contains unpublished changes">
         <Tag className={styles.PublishedWithChanges}>
           {PublishedIcon}&nbsp;<span>Published</span>
         </Tag>
@@ -57,36 +51,28 @@ export const Status = (rowData) => {
 
   return (
     <Tag>
-      <Edit/>&nbsp;<span>Draft</span>
+      <Edit />
+      &nbsp;<span>Draft</span>
     </Tag>
   );
 };
 
 export const DeleteAction = ({ onClick, ...props }) => (
-  <Button
-    {...props}
-    className={styles.Action}
-    flat
-    onClick={() => onClick(props)}
-  >
-    <Delete size={16}/>
+  <Button {...props} className={styles.Action} flat onClick={() => onClick(props)}>
+    <Delete size={16} />
 
     <ScreenReaderOnly>Delete Template</ScreenReaderOnly>
   </Button>
 );
 
 export const DuplicateAction = ({ onClick, ...props }) => (
-  <Button
-    {...props}
-    className={styles.Action}
-    flat
-    onClick={() => onClick(props)}
-  >
-    <ContentCopy size={16}/>
+  <Button {...props} className={styles.Action} flat onClick={() => onClick(props)}>
+    <ContentCopy size={16} />
 
     <ScreenReaderOnly>Duplicate Template</ScreenReaderOnly>
   </Button>
 );
 
-export const LastUpdated = ({ last_update_time }) => <p
-  className={styles.LastUpdated}>{formatDateTime(last_update_time)}</p>;
+export const LastUpdated = ({ last_update_time }) => (
+  <p className={styles.LastUpdated}>{formatDateTime(last_update_time)}</p>
+);

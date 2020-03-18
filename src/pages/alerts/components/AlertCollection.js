@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Button, Table, Tag, Panel, Tooltip, ScreenReaderOnly } from '@sparkpost/matchbox';
+import { Button, Table, Panel, Tooltip, ScreenReaderOnly } from '@sparkpost/matchbox';
 import { TableCollection, PageLink, DisplayDate } from 'src/components';
+import { Tag } from 'src/components/matchbox';
 import AlertToggle from './AlertToggle';
 import { Delete } from '@sparkpost/matchbox-icons';
 import { METRICS } from '../constants/formConstants';

@@ -1,7 +1,8 @@
 import React from 'react';
-import { Table, Tag } from '@sparkpost/matchbox';
+import { Table } from '@sparkpost/matchbox';
 import { AccessTime } from '@sparkpost/matchbox-icons';
 import { PageLink } from 'src/components';
+import { Tag } from 'src/components/matchbox';
 import styles from './RelatedIncidents.module.scss';
 
 export default ({ incidents = [], header = '', type = '' }) => (

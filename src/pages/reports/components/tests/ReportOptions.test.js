@@ -1,15 +1,14 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { ReportOptions } from '../ReportOptions';
-import { Tag } from '@sparkpost/matchbox';
 import Typeahead from '../Typeahead';
+import { Tag } from 'src/components/matchbox';
 import * as reportHelpers from 'src/helpers/reports';
 
 jest.mock('src/helpers/date');
 jest.mock('src/helpers/reports');
 
 describe('Component: Report Options', () => {
-
   let wrapper;
   let testProps;
   let filters;
@@ -31,18 +30,18 @@ describe('Component: Report Options', () => {
         from: testDate,
         to: testDate,
         relativeRange: 'day',
-        filters
+        filters,
       },
       location: {
         search: '?some=test',
-        pathname: 'my-pathname'
+        pathname: 'my-pathname',
       },
       history: {
-        replace: jest.fn()
+        replace: jest.fn(),
       },
       initTypeaheadCache: jest.fn(),
       refreshReportOptions: jest.fn(),
-      refreshTypeaheadCache: jest.fn()
+      refreshTypeaheadCache: jest.fn(),
     };
     wrapper = shallow(<ReportOptions {...testProps} />);
   });
@@ -56,7 +55,6 @@ describe('Component: Report Options', () => {
   });
 
   describe('with active filters', () => {
-
     beforeEach(() => {
       wrapper.setProps({
         reportOptions: {
@@ -64,9 +62,9 @@ describe('Component: Report Options', () => {
           filters: [
             { type: 'A', value: 'aaa' },
             { type: 'B', value: 'bbb' },
-            { type: 'C', value: 'ccc' }
-          ]
-        }
+            { type: 'C', value: 'ccc' },
+          ],
+        },
       });
     });
 
@@ -81,7 +79,6 @@ describe('Component: Report Options', () => {
       tags.first().simulate('remove');
       expect(testProps.removeFilter).toHaveBeenCalledWith(0);
     });
-
   });
 
   it('should select a typeahead item', () => {

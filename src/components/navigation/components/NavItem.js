@@ -1,7 +1,7 @@
 import React from 'react';
 import classnames from 'classnames';
 import { Link } from 'react-router-dom';
-import { Tag } from '@sparkpost/matchbox';
+import { Tag } from 'src/components/matchbox';
 import styles from './NavItem.module.scss';
 
 const TAGS = {

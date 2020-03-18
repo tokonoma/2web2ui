@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Grid, Page, Panel, Tag } from '@sparkpost/matchbox';
+import { Grid, Page, Panel } from '@sparkpost/matchbox';
 import { ApiErrorBanner, DeleteModal, Loading, DisplayDate } from 'src/components';
+import { Tag } from 'src/components/matchbox';
 import { Templates } from 'src/components/images';
 import AlertCollection from './components/AlertCollection';
 import withAlertsList from './containers/ListPage.container';
@@ -126,8 +127,9 @@ export class ListPage extends Component {
           title="Are you sure you want to delete this alert?"
           content={
             <p>
-              The alert "<strong>{alertToDelete.name}</strong>" will be permanently removed. This
-              cannot be undone.
+              {'The alert "'}
+              <strong>{alertToDelete.name}</strong>
+              {'" will be permanently removed. This cannot be undone.'}
             </p>
           }
           onDelete={this.handleDelete}

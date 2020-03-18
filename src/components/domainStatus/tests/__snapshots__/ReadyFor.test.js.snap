@@ -10,8 +10,8 @@ exports[`Component: Ready For should render bounce as default ready 1`] = `
   <Tag
     color="orange"
   >
-    Bounce (
-    Default)
+    Bounce (Default
+    )
   </Tag>
 </span>
 `;
@@ -26,9 +26,8 @@ exports[`Component: Ready For should render bounce as subaccount default ready 1
   <Tag
     color="orange"
   >
-    Bounce (
-    Subaccount 
-    Default)
+    Bounce (Subaccount Default
+    )
   </Tag>
 </span>
 `;
