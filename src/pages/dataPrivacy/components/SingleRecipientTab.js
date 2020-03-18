@@ -1,15 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
-import { RadioGroup } from 'src/components';
+import { RadioGroup, TextFieldWrapper } from 'src/components';
 import { Field } from 'redux-form';
 import SubaccountSection from 'src/components/subaccountSection';
-import { TextFieldWrapper } from 'src/components';
 import { Label } from 'src/components/matchbox';
 import { required, email, maxLength } from 'src/helpers/validation';
 import { Button, Panel } from '@sparkpost/matchbox';
 import { submitRTBFRequest, submitOptOutRequest } from 'src/actions/dataPrivacy';
 import ButtonWrapper from 'src/components/buttonWrapper';
+import styles from './SingleRecipientTab.module.scss';
 
 const requestTypes = [
   {
@@ -23,9 +23,9 @@ const requestTypes = [
 ];
 
 const subaccountItems = {
-  shared: { id: null, name: 'Master and all subaccounts' },
-  subaccount: { id: -2, name: 'Subaccount' },
-  master: { id: 0, name: 'Master account' },
+  shared: null,
+  subaccount: -2,
+  master: 0,
 };
 
 const createOptions = [
@@ -40,7 +40,7 @@ export function SingleRecipientTab(props) {
       ? null
       : values.assignTo === 'subaccount'
       ? values.subaccount.id
-      : subaccountItems[values.assignTo]['id'];
+      : subaccountItems[values.assignTo];
     switch (values.requestType) {
       case 'rtbf':
         props
@@ -65,8 +65,8 @@ export function SingleRecipientTab(props) {
   };
   return (
     <Panel.Section>
-      <form onSubmit={props.handleSubmit(onSubmit)}>
-        <div style={{ marginTop: '1rem' }}>
+      <div className={styles.FormContainer}>
+        <form onSubmit={props.handleSubmit(onSubmit)}>
           <Field
             component={RadioGroup}
             name="requestType"
@@ -92,17 +92,17 @@ export function SingleRecipientTab(props) {
             validate={[required]}
             createOptions={createOptions}
           />
-        </div>
 
-        <ButtonWrapper>
-          <Button color="orange" type="submit">
-            Submit Request
-          </Button>
-          <div style={{ marginLeft: '1rem', display: 'inline' }}>
-            <Button onClick={props.reset}>Cancel</Button>
-          </div>
-        </ButtonWrapper>
-      </form>
+          <ButtonWrapper>
+            <Button color="orange" type="submit">
+              Submit Request
+            </Button>
+            <div className={styles.CancelButtonContainer}>
+              <Button onClick={props.reset}>Cancel</Button>
+            </div>
+          </ButtonWrapper>
+        </form>
+      </div>
     </Panel.Section>
   );
 }
