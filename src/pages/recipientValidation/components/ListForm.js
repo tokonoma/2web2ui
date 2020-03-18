@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, formValueSelector } from 'redux-form';
-import { Panel } from 'src/components/matchbox'
+import { Panel } from 'src/components/matchbox';
 import { maxFileSize, fileExtension } from 'src/helpers/validation';
 import FileUploadWrapper from './FileUploadWrapper';
 import { uploadList, resetUploadError } from 'src/actions/recipientValidation';

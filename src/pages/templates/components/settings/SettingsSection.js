@@ -1,5 +1,5 @@
 import React from 'react';
-import { Panel } from 'src/components/matchbox'
+import { Panel } from 'src/components/matchbox';
 import SettingsForm from './SettingsForm.Container';
 import styles from './SettingsSection.module.scss';
 

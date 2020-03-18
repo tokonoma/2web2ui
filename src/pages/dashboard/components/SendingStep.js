@@ -1,6 +1,6 @@
 import React from 'react';
 import GuideBreadCrumbs from './GuideBreadCrumbs';
-import { Panel } from 'src/components/matchbox'
+import { Panel } from 'src/components/matchbox';
 import styles from './SendingStep.module.scss';
 import { useGuideContext } from './GettingStartedGuide';
 import { Card, CardContent, CardActions } from 'src/components';

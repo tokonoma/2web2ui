@@ -1,7 +1,7 @@
 /* eslint-disable max-lines */
 import _ from 'lodash';
 import React from 'react';
-import { Panel } from 'src/components/matchbox'
+import { Panel } from 'src/components/matchbox';
 import SummaryTable, { Column } from 'src/components/summaryTable';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
 import { DEFAULT_VIEW } from '../constants/summaryTables';

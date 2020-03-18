@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { selectHealthScoreDetails } from 'src/selectors/signals';
 import { getHealthScore, getSpamHits } from 'src/actions/signals';
-import { Panel } from 'src/components/matchbox'
+import { Panel } from 'src/components/matchbox';
 import { PanelLoading, PageLink } from 'src/components';
 import Callout from 'src/components/callout';
 import { HEALTH_SCORE_INFO } from '../../constants/info';

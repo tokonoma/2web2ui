@@ -9,7 +9,7 @@ import { hasSubaccounts } from 'src/selectors/subaccounts';
 
 import ApiKeyForm from './components/ApiKeyForm';
 import { Page } from '@sparkpost/matchbox';
-import { Panel } from 'src/components/matchbox'
+import { Panel } from 'src/components/matchbox';
 import { Loading } from 'src/components';
 
 const breadcrumbAction = {
