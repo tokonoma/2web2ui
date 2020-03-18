@@ -1,12 +1,17 @@
 import React, { useState } from 'react';
-import { Select } from '@sparkpost/matchbox';
+import { Select } from 'src/components/matchbox';
 import LabelledValue from 'src/components/labelledValue/LabelledValue';
 import LineBreak from 'src/components/lineBreak';
 import getConfig from 'src/helpers/getConfig';
 import SetupInstructionPanel from './SetupInstructionPanel';
 
 const BounceSetupInstructionPanel = ({
-  domain: { id, status, subaccount_id }, hasAutoVerifyEnabled, isByoipAccount, loading, showAlert, verify
+  domain: { id, status, subaccount_id },
+  hasAutoVerifyEnabled,
+  isByoipAccount,
+  loading,
+  showAlert,
+  verify,
 }) => {
   const initVerificationType = isByoipAccount && status.mx_status === 'valid' ? 'MX' : 'CNAME';
   const [verificationType, setVerificationType] = useState(initVerificationType);
@@ -15,22 +20,20 @@ const BounceSetupInstructionPanel = ({
   const handleVerification = () => {
     const type = verificationType.toLowerCase();
 
-    return (
-      verify({ id, subaccount: subaccount_id, type }).then((result) => {
-        if (result[`${type}_status`] === 'valid') {
-          showAlert({
-            type: 'success',
-            message: `You have successfully verified ${verificationType} record of ${id}`
-          });
-        } else {
-          showAlert({
-            type: 'error',
-            message: `Unable to verify ${verificationType} record of ${id}`,
-            details: result.dns[`${type}_error`]
-          });
-        }
-      })
-    );
+    return verify({ id, subaccount: subaccount_id, type }).then(result => {
+      if (result[`${type}_status`] === 'valid') {
+        showAlert({
+          type: 'success',
+          message: `You have successfully verified ${verificationType} record of ${id}`,
+        });
+      } else {
+        showAlert({
+          type: 'error',
+          message: `Unable to verify ${verificationType} record of ${id}`,
+          details: result.dns[`${type}_error`],
+        });
+      }
+    });
   };
 
   return (
@@ -47,7 +50,9 @@ const BounceSetupInstructionPanel = ({
           <Select
             name="select-bounce-verification-type"
             options={['CNAME', 'MX']}
-            onChange={(event) => { setVerificationType(event.currentTarget.value); }}
+            onChange={event => {
+              setVerificationType(event.currentTarget.value);
+            }}
             value={verificationType}
           />
         </LabelledValue>

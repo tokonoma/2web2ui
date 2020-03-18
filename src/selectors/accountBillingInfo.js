@@ -118,6 +118,9 @@ export const selectTieredVisiblePlans = createSelector([selectVisiblePlans], pla
 export const selectAvailableBundles = createSelector(
   [bundleSelector, bundlePlanSelector, selectIsSelfServeBilling],
   (bundles, plans, isSelfServeBilling) => {
+    if (!plans.length) {
+      return []; //Waits for data to be ready to join
+    }
     const availableBundles = bundles;
     if (!isSelfServeBilling) {
       _.remove(availableBundles, ({ isFree = false }) => isFree);
@@ -130,6 +133,11 @@ export const selectAvailableBundles = createSelector(
     });
     return bundlesWithPlans;
   },
+);
+
+export const currentBundleSelector = createSelector(
+  [currentPlanCodeSelector, selectAvailableBundles],
+  (currentPlanCode, bundles) => _.find(bundles, { bundle: currentPlanCode }) || {},
 );
 
 export const selectVisibleBundles = createSelector(

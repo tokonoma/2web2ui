@@ -9,11 +9,12 @@ exports[`Plan Picker:  Render Function renders 1`] = `
     onClick={[Function]}
     plan={
       Object {
-        "code": "4",
-        "monthly": 400,
-        "name": "Four",
+        "billing_id": "2c92c0f85d7d53d6015d80ed8f2b0ce5",
         "overage": 0.4,
-        "volume": 4,
+        "plan": "2.5M-0817",
+        "price": 899,
+        "product": "messaging",
+        "volume": 2500000,
       }
     }
   >
@@ -28,16 +29,22 @@ exports[`Plan Picker:  Render Function renders 1`] = `
   <div
     className="PlanContainer"
   >
+    <div
+      className="DropdownLabel"
+    >
+      Premier
+    </div>
     <Plan
       className="TriggerPlan"
       onClick={[Function]}
       plan={
         Object {
-          "code": "4",
-          "monthly": 400,
-          "name": "Four",
+          "billing_id": "2c92c0f85d7d53d6015d80ed8f2b0ce5",
           "overage": 0.4,
-          "volume": 4,
+          "plan": "2.5M-0817",
+          "price": 899,
+          "product": "messaging",
+          "volume": 2500000,
         }
       }
       planPriceProps={
@@ -53,31 +60,6 @@ exports[`Plan Picker:  Render Function renders 1`] = `
     <div
       className="List"
     >
-      <Plan
-        className="DropdownPlan"
-        index={0}
-        item={
-          Object {
-            "code": "1",
-            "includesIp": true,
-            "monthly": 100,
-            "name": "One",
-            "overage": 0.1,
-            "volume": 1,
-          }
-        }
-        key="0"
-        plan={
-          Object {
-            "code": "1",
-            "includesIp": true,
-            "monthly": 100,
-            "name": "One",
-            "overage": 0.1,
-            "volume": 1,
-          }
-        }
-      />
       <div
         className="DropdownLabel"
         key="label_test"
@@ -87,58 +69,34 @@ exports[`Plan Picker:  Render Function renders 1`] = `
       </div>
       <Plan
         className="DropdownPlan"
-        index={1}
+        index={0}
         item={
           Object {
-            "code": "2",
-            "includesIp": false,
-            "isFree": true,
-            "monthly": 0,
-            "name": "Two",
-            "overage": 0.2,
-            "volume": 2,
+            "bundle": "free500-0419",
+            "messaging": Object {
+              "plan": "free500-0419",
+              "price": 0,
+              "product": "messaging",
+              "volume": 500,
+            },
+            "products": Array [
+              Object {
+                "plan": "free500-0419",
+                "product": "messaging",
+              },
+            ],
+            "status": "public",
+            "tier": "test",
+            "type": "messaging",
           }
         }
-        key="1"
+        key="0"
         plan={
           Object {
-            "code": "2",
-            "includesIp": false,
-            "isFree": true,
-            "monthly": 0,
-            "name": "Two",
-            "overage": 0.2,
-            "volume": 2,
-          }
-        }
-      />
-      <div
-        className="DropdownLabel"
-        key="label_starter"
-      >
-        Starter
-        :
-      </div>
-      <Plan
-        className="DropdownPlan"
-        index={2}
-        item={
-          Object {
-            "code": "3",
-            "monthly": 300,
-            "name": "Three",
-            "overage": 0.3,
-            "volume": 3,
-          }
-        }
-        key="2"
-        plan={
-          Object {
-            "code": "3",
-            "monthly": 300,
-            "name": "Three",
-            "overage": 0.3,
-            "volume": 3,
+            "plan": "free500-0419",
+            "price": 0,
+            "product": "messaging",
+            "volume": 500,
           }
         }
       />
@@ -148,7 +106,8 @@ exports[`Plan Picker:  Render Function renders 1`] = `
     className="TierPlansInfo"
   >
     <span>
-      Interested in learning more about our Starter and Premier plans? Check out our 
+      Interested in learning more about our Starter and Premier plans? Check out our
+       
     </span>
     <ExternalLink
       to="https://www.sparkpost.com/docs/faq/difference-between-starter-and-premier"
@@ -161,6 +120,48 @@ exports[`Plan Picker:  Render Function renders 1`] = `
 
 exports[`Plan Picker:  renders correctly 1`] = `
 <Field
+  bundles={
+    Array [
+      Object {
+        "bundle": "free500-0419",
+        "messaging": Object {
+          "plan": "free500-0419",
+          "price": 0,
+          "product": "messaging",
+          "volume": 500,
+        },
+        "products": Array [
+          Object {
+            "plan": "free500-0419",
+            "product": "messaging",
+          },
+        ],
+        "status": "public",
+        "tier": "test",
+        "type": "messaging",
+      },
+      Object {
+        "bundle": "2.5M-0817",
+        "messaging": Object {
+          "billing_id": "2c92c0f85d7d53d6015d80ed8f2b0ce5",
+          "overage": 0.4,
+          "plan": "2.5M-0817",
+          "price": 899,
+          "product": "messaging",
+          "volume": 2500000,
+        },
+        "products": Array [
+          Object {
+            "plan": "2.5M-0817",
+            "product": "messaging",
+          },
+        ],
+        "status": "secret",
+        "tier": "premier",
+        "type": "messaging",
+      },
+    ]
+  }
   component={[Function]}
   input={
     Object {
@@ -168,92 +169,79 @@ exports[`Plan Picker:  renders correctly 1`] = `
     }
   }
   name="planpicker"
-  plansByTier={
-    Object {
-      "default": Array [
-        Object {
-          "code": "1",
-          "includesIp": true,
-          "monthly": 100,
-          "name": "One",
-          "overage": 0.1,
-          "volume": 1,
-        },
-      ],
-      "starter": Array [
-        Object {
-          "code": "3",
-          "monthly": 300,
-          "name": "Three",
-          "overage": 0.3,
-          "volume": 3,
-        },
-      ],
-      "test": Array [
-        Object {
-          "code": "2",
-          "includesIp": false,
-          "isFree": true,
-          "monthly": 0,
-          "name": "Two",
-          "overage": 0.2,
-          "volume": 2,
-        },
-      ],
-    }
-  }
 />
 `;
 
 exports[`Plan Picker:  renders correctly with an initial value 1`] = `
 <Field
+  bundles={
+    Array [
+      Object {
+        "bundle": "free500-0419",
+        "messaging": Object {
+          "plan": "free500-0419",
+          "price": 0,
+          "product": "messaging",
+          "volume": 500,
+        },
+        "products": Array [
+          Object {
+            "plan": "free500-0419",
+            "product": "messaging",
+          },
+        ],
+        "status": "public",
+        "tier": "test",
+        "type": "messaging",
+      },
+      Object {
+        "bundle": "2.5M-0817",
+        "messaging": Object {
+          "billing_id": "2c92c0f85d7d53d6015d80ed8f2b0ce5",
+          "overage": 0.4,
+          "plan": "2.5M-0817",
+          "price": 899,
+          "product": "messaging",
+          "volume": 2500000,
+        },
+        "products": Array [
+          Object {
+            "plan": "2.5M-0817",
+            "product": "messaging",
+          },
+        ],
+        "status": "secret",
+        "tier": "premier",
+        "type": "messaging",
+      },
+    ]
+  }
   component={[Function]}
   input={
     Object {
       "onChange": [MockFunction],
       "value": Object {
-        "code": "4",
-        "monthly": 400,
-        "name": "Four",
-        "overage": 0.4,
-        "volume": 4,
+        "bundle": "2.5M-0817",
+        "messaging": Object {
+          "billing_id": "2c92c0f85d7d53d6015d80ed8f2b0ce5",
+          "overage": 0.4,
+          "plan": "2.5M-0817",
+          "price": 899,
+          "product": "messaging",
+          "volume": 2500000,
+        },
+        "products": Array [
+          Object {
+            "plan": "2.5M-0817",
+            "product": "messaging",
+          },
+        ],
+        "status": "secret",
+        "tier": "premier",
+        "type": "messaging",
       },
     }
   }
   name="planpicker"
-  plansByTier={
-    Object {
-      "default": Array [
-        Object {
-          "code": "1",
-          "includesIp": true,
-          "monthly": 100,
-          "name": "One",
-          "overage": 0.1,
-          "volume": 1,
-        },
-      ],
-      "starter": Array [
-        Object {
-          "code": "3",
-          "monthly": 300,
-          "name": "Three",
-          "overage": 0.3,
-          "volume": 3,
-        },
-      ],
-      "test": Array [
-        Object {
-          "code": "2",
-          "includesIp": false,
-          "isFree": true,
-          "monthly": 0,
-          "name": "Two",
-          "overage": 0.2,
-          "volume": 2,
-        },
-      ],
-    }
-  }
 />
 `;

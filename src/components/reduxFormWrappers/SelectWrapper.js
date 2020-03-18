@@ -1,5 +1,5 @@
 import React from 'react';
-import { Select } from '@sparkpost/matchbox';
+import { Select } from 'src/components/matchbox';
 
 export default function SelectWrapper({ input, meta, ...rest }) {
   const { active, error, touched } = meta;

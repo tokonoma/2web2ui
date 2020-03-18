@@ -4,7 +4,7 @@ const initialState = {
   plansError: null,
   countriesError: null,
   selectedPromo: {},
-  promoPending: false
+  promoPending: false,
 };
 
 export default (state = initialState, action) => {
@@ -25,14 +25,18 @@ export default (state = initialState, action) => {
       return {
         ...state,
         countriesLoading: false,
-        countries: formatCountries(action.payload)
+        countries: formatCountries(action.payload),
       };
 
     case 'GET_COUNTRIES_BILLING_FAIL':
       return { ...state, countriesLoading: false, countriesError: action.payload };
 
     case 'VERIFY_PROMO_CODE_SUCCESS':
-      return { ...state, promoPending: false, selectedPromo: { promoCode: action.meta.promoCode, ...action.payload }};
+      return {
+        ...state,
+        promoPending: false,
+        selectedPromo: { promoCode: action.meta.promoCode, ...action.payload },
+      };
 
     case 'VERIFY_PROMO_CODE_FAIL':
       return { ...state, promoPending: false, promoError: action.payload };
@@ -41,7 +45,7 @@ export default (state = initialState, action) => {
       return { ...state, promoPending: true, promoError: undefined };
 
     case 'REMOVE_ACTIVE_PROMO':
-      return { ...state, promoPending: false, promoError: undefined, selectedPromo: {}};
+      return { ...state, promoPending: false, promoError: undefined, selectedPromo: {} };
 
     case 'GET_BUNDLES_PENDING':
       return { ...state, bundlesLoading: true, bundlesError: null };
@@ -53,13 +57,13 @@ export default (state = initialState, action) => {
       return { ...state, bundlesLoading: false, bundlesError: action.payload };
 
     case 'GET_NEW_PLANS_PENDING':
-      return { ...state, bundlesLoading: true, bundlesError: null };
+      return { ...state, bundlePlansLoading: true, bundlesError: null };
 
     case 'GET_NEW_PLANS_SUCCESS':
-      return { ...state, bundlesLoading: false, bundlePlans: action.payload };
+      return { ...state, bundlePlansLoading: false, bundlePlans: action.payload };
 
     case 'GET_NEW_PLANS_FAIL':
-      return { ...state, bundlesLoading: false, bundlesError: action.payload };
+      return { ...state, bundlePlansLoading: false, bundlesError: action.payload };
 
     case 'GET_SUBSCRIPTION_PENDING':
       return { ...state, loading: true, Error: null };

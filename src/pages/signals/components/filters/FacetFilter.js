@@ -1,6 +1,7 @@
 import React from 'react';
 import classnames from 'classnames';
-import { Grid, Select, TextField } from '@sparkpost/matchbox';
+import { Grid, TextField } from '@sparkpost/matchbox';
+import { Select } from 'src/components/matchbox';
 import { Search } from '@sparkpost/matchbox-icons';
 import { onEnter } from 'src/helpers/keyEvents';
 import withSignalOptions from '../../containers/withSignalOptions';

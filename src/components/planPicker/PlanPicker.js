@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useMemo, useRef } from 'react';
 import Downshift from 'downshift';
 import { Field } from 'redux-form';
 import cx from 'classnames';
@@ -14,49 +14,68 @@ const TIERS = [
   { key: 'default' },
   { key: 'test', label: PLAN_TIERS.test },
   { key: 'starter', label: PLAN_TIERS.starter },
-  { key: 'premier', label: PLAN_TIERS.premier }
+  { key: 'premier', label: PLAN_TIERS.premier },
 ];
 
 /**
  * This component will register the a redux-form field named 'planpicker'
  * Entire selected plan object is stored in state
  */
-export class PlanPicker extends Component {
-  handleOpen = () => {
-    this.input.focus();
-  }
+export function PlanPicker({ bundles, input, disabled, selectedPromo }) {
+  const inputRef = useRef(null);
 
-  planFn = ({
+  const handleOpen = () => {
+    inputRef.current.focus();
+  };
+
+  const bundlesByTiers = useMemo(
+    () =>
+      _.groupBy(
+        bundles.filter(x => x.status !== 'secret'),
+        'tier',
+      ),
+    [bundles],
+  );
+
+  const planFn = ({
     getInputProps,
     getToggleButtonProps,
     getItemProps,
     isOpen,
     selectedItem,
-    highlightedIndex
+    highlightedIndex,
   }) => {
-    const { plansByTier, input, disabled, selectedPromo } = this.props;
-
-    if (!selectedItem || _.isEmpty(plansByTier)) {
+    if (!selectedItem || _.isEmpty(bundlesByTiers)) {
       return null;
     }
 
     let index = 0;
     const items = [];
 
-    TIERS.forEach((tier) => {
-      const tierPlans = plansByTier[tier.key];
+    TIERS.forEach(tier => {
+      const tierPlans = bundlesByTiers[tier.key];
       if (tierPlans) {
         if (tier.label) {
-          items.push(<div key={`label_${tier.key}`} className={cx(styles.DropdownLabel)}>{tier.label}:</div>);
+          items.push(
+            <div key={`label_${tier.key}`} className={cx(styles.DropdownLabel)}>
+              {tier.label}:
+            </div>,
+          );
         }
 
-        plansByTier[tier.key].forEach((item) => {
+        bundlesByTiers[tier.key].forEach(item => {
           const classes = cx(
             styles.DropdownPlan,
-            selectedItem.code === item.code && styles.selected,
-            highlightedIndex === index && styles.highlighted
+            selectedItem.bundle === item.bundle && styles.selected,
+            highlightedIndex === index && styles.highlighted,
           );
-          items.push(<Plan key={index} className={classes} {...getItemProps({ item, index, plan: item })} />);
+          items.push(
+            <Plan
+              key={index}
+              className={classes}
+              {...getItemProps({ item, index, plan: item.messaging })}
+            />,
+          );
           index++;
         });
       }
@@ -66,14 +85,15 @@ export class PlanPicker extends Component {
     const triggerClasses = cx(
       styles.TriggerPlan,
       disabled && styles.disabled,
-      isOpen && styles.triggerOpen
+      isOpen && styles.triggerOpen,
     );
+
     const triggerProps = getToggleButtonProps({
-      plan: selectedItem,
-      onClick: this.handleOpen
+      plan: selectedItem.messaging,
+      onClick: handleOpen,
     });
     const planPriceProps = {
-      selectedPromo
+      selectedPromo,
     };
 
     return (
@@ -83,16 +103,18 @@ export class PlanPicker extends Component {
           <ExpandMore size={24} className={styles.Chevron} />
         </div>
         <div className={cx(styles.PlanContainer)}>
-          {PLAN_TIERS[selectedItem.tier] && <div className={cx(styles.DropdownLabel)}>{PLAN_TIERS[selectedItem.tier]}</div>}
-          <Plan {...triggerProps} className={triggerClasses} planPriceProps={planPriceProps}/>
-          <input {...getInputProps()} ref={(input) => this.input = input} className={styles.Input} readOnly />
+          {PLAN_TIERS[selectedItem.tier] && (
+            <div className={cx(styles.DropdownLabel)}>{PLAN_TIERS[selectedItem.tier]}</div>
+          )}
+          <Plan {...triggerProps} className={triggerClasses} planPriceProps={planPriceProps} />
+          <input {...getInputProps()} ref={inputRef} className={styles.Input} readOnly />
           <div className={listClasses}>{items}</div>
         </div>
         <div className={cx(styles.TierPlansInfo)}>
-          <span>Interested in learning more about our Starter and Premier plans? Check out our </span>
-          <ExternalLink
-            to='https://www.sparkpost.com/docs/faq/difference-between-starter-and-premier'
-          >
+          <span>
+            Interested in learning more about our Starter and Premier plans? Check out our{' '}
+          </span>
+          <ExternalLink to="https://www.sparkpost.com/docs/faq/difference-between-starter-and-premier">
             Knowledge Base
           </ExternalLink>
         </div>
@@ -100,20 +122,21 @@ export class PlanPicker extends Component {
     );
   };
 
+  const { onChange, value } = input;
 
-  render() {
-    const { plansByTier, input } = this.props;
-    const { onChange, value } = input;
-
-    return (
-      <Downshift
-        onChange={onChange}
-        itemToString={(item) => (item ? item.code : '')} // prevents the downshift console warning
-        initialSelectedItem={(value && value.code) ? value : (plansByTier.default && plansByTier.default[0])} >
-        {this.planFn}
-      </Downshift>
-    );
-  }
+  return (
+    <Downshift
+      onChange={onChange}
+      itemToString={item => (item ? item.code : '')} // prevents the downshift console warning
+      initialSelectedItem={
+        value && value.bundle ? value : bundlesByTiers.default && bundlesByTiers.default[0]
+      }
+    >
+      {planFn}
+    </Downshift>
+  );
 }
 
-export default ({ plans = {}, ...rest }) => <Field component={PlanPicker} name='planpicker' plansByTier={plans} {...rest} />;
+export default ({ bundles = [], ...rest }) => (
+  <Field component={PlanPicker} name="planpicker" bundles={bundles} {...rest} />
+);

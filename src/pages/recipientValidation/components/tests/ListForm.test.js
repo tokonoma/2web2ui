@@ -39,7 +39,7 @@ describe('ListForm', () => {
 
     expect(csvUpload).toBeInstanceOf(FormData);
     expect(csvUpload.get('myupload')).toEqual(formValuesWithCsv.csv);
-    expect(props.reset).toHaveBeenCalledWith('recipientValidationListForm');
+    expect(props.reset).toHaveBeenCalledWith('rvAddPaymentForm');
     expect(props.showAlert).toHaveBeenCalledWith({
       type: 'success',
       message: 'Recipients Uploaded',

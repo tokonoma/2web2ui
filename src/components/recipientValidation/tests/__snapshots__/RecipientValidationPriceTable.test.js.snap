@@ -24,7 +24,8 @@ exports[`RecipientValidationTable should render correctly 1`] = `
         <strong>
           0
         </strong>
-         to 
+         
+        to 
         <strong>
           5,000
         </strong>
@@ -45,7 +46,8 @@ exports[`RecipientValidationTable should render correctly 1`] = `
         <strong>
           5,000
         </strong>
-         to 
+         
+        to 
         <strong>
           10,000
         </strong>
@@ -66,7 +68,8 @@ exports[`RecipientValidationTable should render correctly 1`] = `
         <strong>
           10,000
         </strong>
-         to 
+         
+        to 
         <strong>
           50,000
         </strong>
@@ -87,7 +90,8 @@ exports[`RecipientValidationTable should render correctly 1`] = `
         <strong>
           50,000
         </strong>
-         to 
+         
+        to 
         <strong>
           100,000
         </strong>
@@ -108,7 +112,8 @@ exports[`RecipientValidationTable should render correctly 1`] = `
         <strong>
           100,000
         </strong>
-         to 
+         
+        to 
         <strong>
           250,000
         </strong>
@@ -129,7 +134,8 @@ exports[`RecipientValidationTable should render correctly 1`] = `
         <strong>
           250,000
         </strong>
-         to 
+         
+        to 
         <strong>
           750,000
         </strong>
@@ -150,7 +156,8 @@ exports[`RecipientValidationTable should render correctly 1`] = `
         <strong>
           750,000
         </strong>
-         to 
+         
+        to 
         <strong>
           1,000,000
         </strong>

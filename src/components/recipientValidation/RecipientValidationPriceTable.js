@@ -15,19 +15,26 @@ export const RecipientValidationPriceTable = ({ cellProps, col1Props, col2Props 
           <strong>Cost</strong>
         </Table.Cell>
       </Table.Row>
-      {RECIPIENT_VALIDATION_TIERS.map((row) =>
+      {RECIPIENT_VALIDATION_TIERS.map(row => (
         <Table.Row key={`row-${row.volumeMin}-${row.volumeMax}`}>
           <Table.Cell {...cellProps} {...col1Props}>
             <strong>{formatFullNumber(row.volumeMin)}</strong>
-            {row.volumeMax < Infinity //Last row with volumeMax of Infinity has different wording
-              ? <> to <strong>{formatFullNumber(row.volumeMax)}</strong></>
-              : <>+</>}
+            {row.volumeMax < Infinity ? ( //Last row with volumeMax of Infinity has different wording
+              <>
+                {' '}
+                to <strong>{formatFullNumber(row.volumeMax)}</strong>
+              </>
+            ) : (
+              <>+</>
+            )}
           </Table.Cell>
           <Table.Cell {...cellProps} {...col2Props}>
-            <span><strong>{row.displayedCost}</strong> per email address</span>
+            <span>
+              <strong>{row.displayedCost}</strong> per email address
+            </span>
           </Table.Cell>
         </Table.Row>
-      )}
+      ))}
     </tbody>
   </Table>
 );
