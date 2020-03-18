@@ -22,7 +22,7 @@ const requestTypes = [
 ];
 
 const subaccountItems = {
-  shared: { id: -1, name: 'Master and all subaccounts' },
+  shared: { id: null, name: 'Master and all subaccounts' },
   subaccount: { id: -2, name: 'Subaccount' },
   master: { id: 0, name: 'Master account' },
 };
