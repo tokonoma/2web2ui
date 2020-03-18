@@ -67,7 +67,6 @@ exports[`SearchForm should render correctly with existing filters 1`] = `
             color="red"
             flat={true}
             onClick={[Function]}
-            size="default"
           >
             Remove
             <HighlightOff
@@ -80,11 +79,13 @@ exports[`SearchForm should render correctly with existing filters 1`] = `
     <Grid
       key="1"
     >
-      <p>
-        <Button
-          color="red"
-          flat={true}
-          onClick={[Function]}
+      <Grid.Column
+        lg={3}
+        md={3}
+        xs={3}
+      >
+        <div
+          className="Selector"
         >
           <label
             className="ScreenReaderOnly"
@@ -137,7 +138,6 @@ exports[`SearchForm should render correctly with existing filters 1`] = `
             color="red"
             flat={true}
             onClick={[Function]}
-            size="default"
           >
             Remove
             <HighlightOff
@@ -150,11 +150,13 @@ exports[`SearchForm should render correctly with existing filters 1`] = `
     <Grid
       key="2"
     >
-      <p>
-        <Button
-          color="red"
-          flat={true}
-          onClick={[Function]}
+      <Grid.Column
+        lg={3}
+        md={3}
+        xs={3}
+      >
+        <div
+          className="Selector"
         >
           <label
             className="ScreenReaderOnly"
@@ -203,36 +205,21 @@ exports[`SearchForm should render correctly with existing filters 1`] = `
         md={12}
         xs={12}
       >
-        Filter
-      </label>
-      <Field
-        component={[Function]}
-        id="filter-field-2"
-        name="searchQuery[2].value"
-        placeholder="Select Filter Type"
-        type="text"
-        validate={[Function]}
-      />
-    </Grid.Column>
-    <Grid.Column
-      lg={2}
-      md={12}
-      xs={12}
-    >
-      <p>
-        <Button
-          color="red"
-          flat={true}
-          onClick={[Function]}
-        >
-          Remove
-          <HighlightOff
-            className="Icon"
-          />
-        </Button>
-      </p>
-    </Grid.Column>
-  </Grid>
+        <p>
+          <Button
+            color="red"
+            flat={true}
+            onClick={[Function]}
+          >
+            Remove
+            <HighlightOff
+              className="Icon"
+            />
+          </Button>
+        </p>
+      </Grid.Column>
+    </Grid>
+  </Stack>
   <Button
     className="AddButton"
     color="blue"
