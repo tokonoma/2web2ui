@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from 'src/components/matchbox';
+import { Button } from '@sparkpost/matchbox-hibana';
 import { useHibana } from 'src/context/HibanaContext';
 import styles from './HibanaComponents.module.scss';
 
