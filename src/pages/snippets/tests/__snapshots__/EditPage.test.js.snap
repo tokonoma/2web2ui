@@ -84,10 +84,13 @@ exports[`EditPage renders disabled form when submitting 1`] = `
               name="id"
             />
           </Panel.Section>
-          <SubaccountSection
-            disabled={true}
-            newTemplate={false}
-          />
+          <Panel.Section>
+             
+            <SubaccountSection
+              disabled={true}
+              newTemplate={false}
+            />
+          </Panel.Section>
         </Panel>
         <Panel
           sectioned={true}
@@ -165,10 +168,13 @@ exports[`EditPage renders disabled form when user does not have authorization to
               name="id"
             />
           </Panel.Section>
-          <SubaccountSection
-            disabled={true}
-            newTemplate={false}
-          />
+          <Panel.Section>
+             
+            <SubaccountSection
+              disabled={true}
+              newTemplate={false}
+            />
+          </Panel.Section>
         </Panel>
         <Panel
           sectioned={true}
@@ -266,9 +272,12 @@ exports[`EditPage renders edit form 1`] = `
               name="id"
             />
           </Panel.Section>
-          <SubaccountSection
-            newTemplate={false}
-          />
+          <Panel.Section>
+             
+            <SubaccountSection
+              newTemplate={false}
+            />
+          </Panel.Section>
         </Panel>
         <Panel
           sectioned={true}
