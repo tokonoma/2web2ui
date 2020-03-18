@@ -14,7 +14,7 @@ function Navigation(props) {
 
   // Filter out nav items not needed in Hibana design
   // TODO: Remove and reconfigure the `navItems` config file when Hibana becomes the default
-  const primaryNavItems = navItems
+  const desktopNavItems = navItems
     .map(item => {
       // 'Configuration' and 'Alerts' will be in the account dropdown, not the main nav
       if (item.label !== 'Dashboard' && item.label !== 'Configuration' && item.label !== 'Alerts') {
@@ -32,12 +32,16 @@ function Navigation(props) {
     })
     .filter(Boolean); // Removes undefined entries
 
+  const mobileNavItems = navItems.filter(
+    item => item.label !== 'Dashboard' && item.label !== 'Alerts',
+  );
+
   return (
     <>
       <header className={className}>
-        <DesktopNavigation navItems={primaryNavItems} location={location} />
+        <DesktopNavigation navItems={desktopNavItems} location={location} />
 
-        <MobileNavigation navItems={navItems} location={location} />
+        <MobileNavigation navItems={mobileNavItems} location={location} />
       </header>
 
       {bannerOpen && <PendingCancelGlobalBanner style={{ position: 'sticky', top: 0 }} />}

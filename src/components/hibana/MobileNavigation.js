@@ -1,11 +1,242 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
+import { Link } from 'react-router-dom';
+import classNames from 'classnames';
+import { Transition } from 'react-transition-group';
+import FocusLock from 'react-focus-lock';
+import { ScreenReaderOnly, WindowEvent } from '@sparkpost/matchbox';
+import { ChevronRight } from '@sparkpost/matchbox-icons';
+import { tokens } from '@sparkpost/design-tokens-hibana';
+import SparkPost from 'src/components/sparkPost/SparkPost';
 import styles from './MobileNavigation.module.scss';
 
-export default function MobileNavigation() {
+const Menu = {
+  Wrapper,
+  ToggleButton,
+  Item,
+  ChildItem,
+  ExpandableButton,
+  ExpandableContent,
+};
+
+export default function MobileNavigation({ navItems }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const handleToggle = () => setIsOpen(!isOpen);
+
   return (
     <div className={styles.MobileNavigation} data-id="mobile-navigation">
-      {/* markup is entirely placeholder for FE-923 */}
-      <p>Mobile Navigation</p>
+      {/* Prevents scrolling behind the navigation UI when opened */}
+      {isOpen
+        ? document.body.setAttribute('style', 'overflow-y: hidden')
+        : document.body.setAttribute('style', 'overflow-y: initial')}
+
+      {/* Keyboard focus is trapped within the element when opened */}
+      {/* See: https://css-tricks.com/a-css-approach-to-trap-focus-inside-of-an-element/ for more info on tab traps! */}
+      <FocusLock disabled={!isOpen}>
+        <div className={styles.Header}>
+          <Link to="/dashboard" onClick={() => setIsOpen(false)}>
+            {/* SVG label hidden from screen readers in favor of simpler ScreenReaderOnly content */}
+            <SparkPost.Icon className={styles.Logo} aria-hidden="true" />
+
+            <ScreenReaderOnly>SparkPost</ScreenReaderOnly>
+          </Link>
+
+          <Menu.ToggleButton onClick={handleToggle} isOpen={isOpen} />
+        </div>
+
+        <Menu.Wrapper onOverlayClick={handleToggle} isOpen={isOpen}>
+          {navItems.map(item => {
+            const isExpandable = Boolean(item.children && item.children.length);
+            const uniqueID = `mobile-nav-${item.label.toLowerCase().replace(/\s/g, '')}`;
+
+            if (isExpandable) {
+              return (
+                <Menu.Item
+                  onClick={() => setIsOpen(false)}
+                  variant="primary"
+                  id={uniqueID}
+                  key={uniqueID}
+                >
+                  <Menu.ExpandableButton>{item.label}</Menu.ExpandableButton>
+
+                  <Menu.ExpandableContent>
+                    {item.children.map((childItem, childIndex) => {
+                      return (
+                        <Menu.ChildItem
+                          onClick={handleToggle}
+                          to={childItem.to}
+                          key={`mobile-nav-child-item-${childIndex}`}
+                        >
+                          {childItem.label}
+                        </Menu.ChildItem>
+                      );
+                    })}
+                  </Menu.ExpandableContent>
+                </Menu.Item>
+              );
+            }
+
+            return (
+              <Menu.Item variant="primary" onClick={handleToggle} to={item.to} key={uniqueID}>
+                {item.label}
+              </Menu.Item>
+            );
+          })}
+
+          <div className={styles.Footer}>
+            {/* TODO: Populate these as part of FE-924 */}
+            <Menu.Item variant="secondary" to="/templates">
+              Placeholder
+            </Menu.Item>
+          </div>
+        </Menu.Wrapper>
+      </FocusLock>
+    </div>
+  );
+}
+
+function Wrapper(props) {
+  const { children, onOverlayClick, isOpen } = props;
+  const { motionDuration_medium } = tokens;
+  const menuEl = useRef(null);
+  const motionDurationMS = Number(motionDuration_medium.replace(/\D/g, '')) * 100;
+
+  return (
+    <Transition in={isOpen} timeout={motionDurationMS} onEntered={() => menuEl.current.focus()}>
+      {state => (
+        <div className={classNames(styles.MenuWrapper, styles[state])}>
+          <nav
+            ref={menuEl}
+            tabIndex="-1"
+            aria-labelledby="mobile-primary-nav-heading"
+            className={classNames(styles.Menu, styles[state])}
+            id="mobile-navigation-menu"
+          >
+            <ScreenReaderOnly>
+              <h2 id="mobile-primary-nav-heading">Main</h2>
+            </ScreenReaderOnly>
+
+            {/* wrapping <div> helps with :first-child styles */}
+            <div>{children}</div>
+          </nav>
+
+          <div
+            onClick={onOverlayClick}
+            className={classNames(styles.Overlay, styles[state])}
+            role="presentation"
+          ></div>
+        </div>
+      )}
+    </Transition>
+  );
+}
+
+function Item(props) {
+  const { children, id, to, variant, onClick } = props;
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  if (to) {
+    return (
+      <Link onClick={onClick} className={classNames(styles.MenuItem, styles[variant])} to={to}>
+        <div className={styles.MenuItemContent}>{children}</div>
+      </Link>
+    );
+  }
+
+  return (
+    <>
+      {React.Children.map(children, child => {
+        if (child.type.name === 'ExpandableButton') {
+          return React.cloneElement(child, {
+            id,
+            isExpanded,
+            variant,
+            onClick: () => setIsExpanded(!isExpanded),
+          });
+        }
+
+        if (child.type.name === 'ExpandableContent') {
+          return React.cloneElement(child, { id, isExpanded });
+        }
+      })}
+    </>
+  );
+}
+
+function ChildItem({ children, to, onClick }) {
+  return (
+    <Link onClick={onClick} className={styles.ChildItem} to={to}>
+      <div className={styles.MenuItemContent}>{children}</div>
+    </Link>
+  );
+}
+
+function ToggleButton(props) {
+  const { onClick, isOpen } = props;
+  const buttonEl = useRef(null);
+
+  const handleKeydown = e => {
+    if (e.key === 'Escape') {
+      onClick();
+      buttonEl.current.focus();
+    }
+  };
+
+  return (
+    <>
+      {isOpen && <WindowEvent event="keydown" handler={handleKeydown} />}
+
+      <button
+        className={styles.ToggleButton}
+        onClick={onClick}
+        aria-expanded={isOpen ? 'true' : 'false'}
+        aria-controls="mobile-navigation-menu"
+        ref={buttonEl}
+      >
+        <div className={classNames(styles.Hamburger, isOpen && styles.showClose)}>
+          <span />
+        </div>
+        <ScreenReaderOnly>Menu</ScreenReaderOnly>
+      </button>
+    </>
+  );
+}
+
+function ExpandableButton(props) {
+  const { onClick, id, children, isExpanded, variant } = props;
+
+  return (
+    <button
+      className={classNames(
+        styles.MenuItem,
+        styles.ExpandableButton,
+        styles[variant],
+        isExpanded && styles.isExpanded,
+      )}
+      onClick={onClick}
+      aria-expanded={isExpanded ? 'true' : 'false'}
+      aria-controls={`${id}-mobile-menu-expandable-content`}
+    >
+      <div className={styles.MenuItemContent}>
+        {children}
+
+        <ChevronRight
+          className={classNames(styles.ExpandableIcon, isExpanded && styles.isExpanded)}
+        />
+      </div>
+    </button>
+  );
+}
+
+function ExpandableContent(props) {
+  const { id, children, isExpanded } = props;
+
+  return (
+    <div
+      className={styles.ExpandableContent}
+      id={`${id}-mobile-menu-expandable-content`}
+      style={{ display: isExpanded ? 'block' : 'none' }}
+    >
+      {children}
     </div>
   );
 }

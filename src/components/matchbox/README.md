@@ -64,3 +64,23 @@ function MyComponent() {
 
 In this scenario, the `mb` prop will be passed to the component only when the Hibana theme is
 enabled. When disabled, the new [Styled System](https://styled-system.com/) props are not passed.
+
+## Conditionally Styling Components
+
+Some components will need conditional CSS depending on whether the user is using the default or the
+Hibana theme. Enter the `useHibanaOverride()` hook!
+
+```js
+import OGStyles from './MyComponent.module.scss';
+import hibanaStyles from './MyComponentHibana.module.scss';
+
+function MyComponent() {
+  const styles = useHibanaOverride(OGStyles, hibanaStyles);
+
+  return <button className={styles.MyComponent}>Click Me</button>;
+}
+```
+
+When Hibana is enabled, the two CSS modules are merged in to one, with Hibana styles merging with
+the old styles. If both stylesheets use the same classname, for example, styles provided by the
+Hibana CSS module will override styles in the default theme module.

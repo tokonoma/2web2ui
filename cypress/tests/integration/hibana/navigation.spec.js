@@ -189,18 +189,118 @@ describe('the Hibana navigation', () => {
   });
 
   describe('mobile navigation', () => {
+    function toggleMobileMenu() {
+      // `force` required as element is exposed only to screen readers
+      cy.get(mobileNavSelector).within(() => cy.findByText('Menu').click({ force: true }));
+    }
+
     beforeEach(() => {
       cy.viewport(959, 1024);
-      cy.get(mobileNavSelector).scrollIntoView();
     });
 
     it('does not render the desktop navigation below the 960px viewport width', () => {
       commonBeforeSteps();
 
       cy.get(desktopNavSelector).should('not.be.visible');
-      cy.get(mobileNavSelector).should('be.visible');
+
+      // Can't just check for mobile nav visiblity - effective height is 0px due to use of `react-focus-lock`
+      cy.get(mobileNavSelector).within(() =>
+        cy
+          .findByText('Menu')
+          .closest('button')
+          .should('be.visible'),
+      );
     });
 
-    // TODO: Mobile navigation tests will be fleshed out in FE-922
+    it('renders default nav items and child items', () => {
+      commonBeforeSteps();
+      toggleMobileMenu();
+
+      cy.get(mobileNavSelector).within(() => {
+        cy.findByText('Signals Analytics').click();
+        cy.assertLink({ content: 'Summary', href: '/reports/summary' });
+        cy.assertLink({ content: 'Bounce', href: '/reports/bounce' });
+        cy.assertLink({ content: 'Rejections', href: '/reports/rejections' });
+        cy.assertLink({ content: 'Accepted', href: '/reports/accepted' });
+        cy.assertLink({ content: 'Delayed', href: '/reports/delayed' });
+        cy.assertLink({ content: 'Health Score', href: '/signals/health-score' });
+        cy.assertLink({ content: 'Spam Traps', href: '/signals/spam-traps' });
+        cy.assertLink({ content: 'Engagement Recency', href: '/signals/engagement' });
+        cy.assertLink({ content: 'Engagement', href: '/reports/engagement' });
+        cy.findByText('Signals Analytics').click();
+
+        cy.assertLink({ content: 'Events', href: '/reports/message-events' });
+
+        cy.findByText('Content').click();
+        cy.assertLink({ content: 'Templates', href: '/templates' });
+        cy.assertLink({ content: 'A/B Testing', href: '/ab-testing' });
+        cy.assertLink({ content: 'Snippets', href: '/snippets' });
+        cy.findByText('Content').click();
+
+        cy.findByText('Recipients').click();
+        cy.assertLink({ content: 'Recipient Validation', href: '/recipient-validation/list' });
+        cy.assertLink({ content: 'Recipient Lists', href: '/lists/recipient-lists' });
+        cy.assertLink({ content: 'Suppressions', href: '/lists/suppressions' });
+        cy.findByText('Recipients').click();
+
+        cy.assertLink({ content: 'Inbox Placement', href: '/inbox-placement' });
+        cy.assertLink({ content: 'Blacklist', href: '/blacklist/incidents' });
+
+        cy.findByText('Configuration').click();
+        cy.assertLink({ content: 'Webhooks', href: '/webhooks' });
+        cy.assertLink({ content: 'IP Pools', href: '/account/ip-pools' });
+        cy.assertLink({ content: 'API Keys', href: '/account/api-keys' });
+        cy.assertLink({ content: 'SMTP Settings', href: '/account/smtp' });
+        cy.assertLink({ content: 'Sending Domains', href: '/account/sending-domains' });
+        cy.assertLink({ content: 'Tracking Domains', href: '/account/tracking-domains' });
+        cy.assertLink({ content: 'Subaccounts', href: '/account/subaccounts' });
+        cy.findByText('Configuration').click();
+      });
+    });
+
+    it('moves focus to the menu when opened', () => {
+      commonBeforeSteps();
+      toggleMobileMenu();
+
+      // Grabs the `<nav>` element associated with a label via `aria-labelledby`
+      cy.get(mobileNavSelector).within(() => cy.findByLabelText('Main').should('have.focus'));
+    });
+
+    it('closes when hitting the escape key', () => {
+      commonBeforeSteps();
+      toggleMobileMenu();
+
+      cy.get('body').type('{esc}');
+
+      cy.get(mobileNavSelector).within(() => {
+        cy.findByLabelText('Main').should('not.be.visible');
+        cy.findByText('Menu')
+          .closest('button')
+          .should('have.focus');
+      });
+    });
+
+    it('implements a tab trap when opened', () => {
+      commonBeforeSteps();
+      toggleMobileMenu();
+
+      cy.get(mobileNavSelector).within(() => {
+        cy.findByText('Signals Analytics')
+          .closest('button')
+          .focus()
+          .tab();
+        cy.focused().tab();
+        cy.focused().tab();
+        cy.focused().tab();
+        cy.focused().tab();
+        cy.focused().tab();
+        cy.focused().tab();
+        cy.focused().tab();
+        cy.focused().tab();
+        cy.findByText('Menu')
+          .closest('button')
+          .should('have.focus');
+      });
+    });
   });
 });

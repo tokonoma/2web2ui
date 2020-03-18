@@ -33,12 +33,12 @@ const Logo = ({ type, className, ...rest }) => (
   </svg>
 );
 
-const Icon = ({ type, ...rest }) => (
+const Icon = ({ type, className, ...rest }) => (
   <svg
     {...rest}
     role="img"
     aria-labelledby="sparkpost-logo-mark-title"
-    className={classnames(styles.Icon, type && styles[type])}
+    className={classnames(className, styles.Icon, type && styles[type])}
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 127.5 260"
   >
