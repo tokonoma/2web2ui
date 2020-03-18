@@ -5,7 +5,8 @@ import { TextFieldWrapper } from 'src/components';
 import { FORMS } from 'src/constants';
 import { required } from 'src/helpers/validation';
 import { trimWhitespaces } from 'src/helpers/string';
-import { Button, Error } from '@sparkpost/matchbox';
+import { Button } from '@sparkpost/matchbox';
+import { Error } from 'src/components/matchbox';
 
 export class SsoLoginForm extends React.Component {
   render() {
@@ -13,7 +14,11 @@ export class SsoLoginForm extends React.Component {
 
     return (
       <React.Fragment>
-        {loginError && <Error error={`${loginError}. Please contact login.issues@sparkpost.com for assistance.`} />}
+        {loginError && (
+          <Error
+            error={`${loginError}. Please contact login.issues@sparkpost.com for assistance.`}
+          />
+        )}
         <form onSubmit={handleSubmit}>
           <Field
             autoFocus
@@ -37,8 +42,8 @@ export class SsoLoginForm extends React.Component {
 
 const mapStateToProps = ({ auth }) => ({
   initialValues: {
-    username: auth.username
-  }
+    username: auth.username,
+  },
 });
 
 export default connect(mapStateToProps)(reduxForm({ form: FORMS.SSO })(SsoLoginForm));

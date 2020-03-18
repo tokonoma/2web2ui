@@ -9,15 +9,15 @@ import {
   isSameDate,
 } from 'src/helpers/date';
 import { roundBoundaries } from 'src/helpers/metrics';
-import { Button, TextField, Popover, WindowEvent, Error } from '@sparkpost/matchbox';
-import { Select } from 'src/components/matchbox';
+import { Button, TextField, Popover, WindowEvent } from '@sparkpost/matchbox';
+import { Error, Select } from 'src/components/matchbox';
 import DateSelector from 'src/components/dateSelector/DateSelector';
 import ManualEntryForm from './ManualEntryForm';
 import { FORMATS } from 'src/constants';
 import styles from './DatePicker.module.scss';
 import PropTypes from 'prop-types';
 
-export default class AppDatePicker extends Component {
+export default class DatePicker extends Component {
   DATE_FORMAT = FORMATS.LONG_DATETIME;
   state = {
     showDatePicker: false,
@@ -279,7 +279,7 @@ export default class AppDatePicker extends Component {
   }
 }
 
-AppDatePicker.propTypes = {
+DatePicker.propTypes = {
   now: PropTypes.instanceOf(Date),
   from: PropTypes.instanceOf(Date),
   to: PropTypes.instanceOf(Date),
@@ -294,7 +294,7 @@ AppDatePicker.propTypes = {
   hideManualEntry: PropTypes.bool,
 };
 
-AppDatePicker.defaultProps = {
+DatePicker.defaultProps = {
   roundToPrecision: false,
   preventFuture: true,
 };

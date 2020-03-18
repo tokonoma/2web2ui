@@ -64,7 +64,8 @@ exports[`renders correctly 1`] = `
   <p
     className="Help"
   >
-    Format your list with single addresses on individual lines, or 
+    Format your list with single addresses on individual lines, or
+     
     <strong>
       <DownloadLink
         href="example-recipient-validation-list.csv"
@@ -72,7 +73,9 @@ exports[`renders correctly 1`] = `
         download
       </DownloadLink>
     </strong>
-     our csv template. Please note, only the most recent list is only 
+     
+    our csv template. Please note, only the most recent list is only
+     
     <strong>
       kept for 10 days
     </strong>
