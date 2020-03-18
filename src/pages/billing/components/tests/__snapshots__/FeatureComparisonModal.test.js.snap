@@ -78,7 +78,7 @@ exports[`FeatureComparisonModal:  HeaderRow: should render correctly 1`] = `
   <Table.Cell
     className="FeatureCell"
   >
-      
+     
   </Table.Cell>
   <Table.Cell
     className="FeatureComparisonCell PlanName"
