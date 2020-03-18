@@ -2,6 +2,7 @@ import React from 'react';
 import { mount, shallow } from 'enzyme';
 import SliderFieldWrapper from '../SliderFieldWrapper';
 import TestApp from 'src/__testHelpers__/TestApp';
+import { Slider } from 'src/components/matchbox';
 
 describe('SliderFieldWrapper', () => {
   const subject = ({ input, ...props } = {}) =>
@@ -23,7 +24,7 @@ describe('SliderFieldWrapper', () => {
   it('renders disabled slider and text field', () => {
     const wrapper = subject({ disabled: true });
 
-    expect(wrapper.find('Slider')).toHaveProp('disabled', true);
+    expect(wrapper.find(Slider)).toHaveProp('disabled', true);
     expect(wrapper.find('TextField')).toHaveProp('disabled', true);
   });
 
@@ -44,21 +45,20 @@ describe('SliderFieldWrapper', () => {
 
     wrapper.find('TextField').prop('onChange')({ target: { value: invalidValue } });
     wrapper.update(); // because simulate didn't work
-
-    expect(wrapper.find('Slider')).toHaveValue(undefined);
+    expect(wrapper.find(Slider)).toHaveValue(undefined);
     expect(wrapper.find('TextField')).toHaveValue(invalidValue);
   });
 
   it('rerenders when value is updated', () => {
     const wrapper = shallow(<SliderFieldWrapper input={{ value: 45 }} />);
 
-    expect(wrapper.find('Slider')).toHaveValue(45);
+    expect(wrapper.find(Slider)).toHaveValue(45);
     expect(wrapper.find('TextField')).toHaveValue(45);
 
     wrapper.setProps({ input: { value: 79 }, onChange: jest.fn() });
     wrapper.update();
 
-    expect(wrapper.find('Slider')).toHaveValue(79);
+    expect(wrapper.find(Slider)).toHaveValue(79);
     expect(wrapper.find('TextField')).toHaveValue(79);
   });
 });
