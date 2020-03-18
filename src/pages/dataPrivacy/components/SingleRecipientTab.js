@@ -41,6 +41,7 @@ export function SingleRecipientTab(props) {
       : values.assignTo === 'subaccount'
       ? values.subaccount.id
       : subaccountItems[values.assignTo];
+    const include_subaccounts = values.assignTo === 'shared';
     switch (values.requestType) {
       case 'rtbf':
         props
@@ -48,6 +49,7 @@ export function SingleRecipientTab(props) {
             recipients: [values.address],
             request_date: new Date().toISOString(),
             subaccountId: subaccountId,
+            include_subaccounts: include_subaccounts,
           })
           .then(() => props.reset());
         break;
@@ -58,6 +60,7 @@ export function SingleRecipientTab(props) {
             recipients: [values.address],
             request_date: new Date().toISOString(),
             subaccountId: subaccountId,
+            include_subaccounts: include_subaccounts,
           })
           .then(() => props.reset());
         break;
