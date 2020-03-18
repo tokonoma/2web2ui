@@ -1,7 +1,8 @@
 import _ from 'lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Pagination, Table } from '@sparkpost/matchbox';
+import { Pagination } from '@sparkpost/matchbox';
+import { Table } from 'src/components/matchbox';
 import Body from './Body';
 import Column from './Column';
 import Head from './Head';
@@ -15,8 +16,8 @@ class SummaryTable extends React.Component {
   static defaultProps = {
     // refer to reducer for other default prop values
     data: [],
-    onChange: () => {}
-  }
+    onChange: () => {},
+  };
 
   static propTypes = {
     children: PropTypes.arrayOf(Column).isRequired,
@@ -28,12 +29,12 @@ class SummaryTable extends React.Component {
     onChange: PropTypes.func,
     order: PropTypes.shape({
       ascending: PropTypes.bool.isRequired,
-      dataKey: PropTypes.string.isRequired
+      dataKey: PropTypes.string.isRequired,
     }),
     perPage: PropTypes.number.isRequired,
     tableName: PropTypes.string.isRequired,
-    totalCount: PropTypes.number.isRequired
-  }
+    totalCount: PropTypes.number.isRequired,
+  };
 
   componentDidMount() {
     const pageProps = pickPageProps(this.props);
@@ -49,7 +50,7 @@ class SummaryTable extends React.Component {
     }
   }
 
-  handlePagination = (pageIndex) => {
+  handlePagination = pageIndex => {
     const { changeSummaryTable, currentPage, tableName } = this.props;
     const nextPage = pageIndex + 1;
 
@@ -58,21 +59,29 @@ class SummaryTable extends React.Component {
     if (currentPage !== nextPage) {
       changeSummaryTable(tableName, { currentPage: nextPage });
     }
-  }
+  };
 
-  handlePerPageChange = (perPage) => {
+  handlePerPageChange = perPage => {
     const { changeSummaryTable, tableName } = this.props;
     changeSummaryTable(tableName, { currentPage: 1, perPage });
-  }
+  };
 
-  handleSort = (order) => {
+  handleSort = order => {
     const { changeSummaryTable, tableName } = this.props;
     changeSummaryTable(tableName, { currentPage: 1, order });
-  }
+  };
 
   render() {
     const {
-      children, currentPage, data, empty, error, loading, order, perPage, totalCount
+      children,
+      currentPage,
+      data,
+      empty,
+      error,
+      loading,
+      order,
+      perPage,
+      totalCount,
     } = this.props;
     const columnProps = getColumnProps(children);
     const pages = Math.ceil(totalCount / perPage);

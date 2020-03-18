@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table } from '@sparkpost/matchbox';
+import { Table } from 'src/components/matchbox';
 import { TableCollection, Empty } from 'src/components';
 import { NewCollectionBody } from 'src/components/collection';
 import { Tag } from 'src/components/matchbox';

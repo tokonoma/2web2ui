@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table } from '@sparkpost/matchbox';
+import { Table } from 'src/components/matchbox';
 import { RECIPIENT_VALIDATION_TIERS } from 'src/constants';
 import { formatFullNumber } from 'src/helpers/units';
 import styles from './RecipientValidationPriceTable.module.scss';

@@ -1,6 +1,6 @@
 import React from 'react';
 import classnames from 'classnames';
-import { Table } from '@sparkpost/matchbox';
+import { Table } from 'src/components/matchbox';
 import Callout from 'src/components/callout';
 import Loading from 'src/components/loading'; // todo, move to src/components
 import Billboard from './Billboard';
@@ -42,7 +42,7 @@ const Body = ({ columns, data, empty, error, loading, perPage }) => {
               className={classnames(styles.Cell, {
                 [styles.DataCell]: !Component,
                 [styles.CenterAlign]: align === 'center',
-                [styles.RightAlign]: align === 'right'
+                [styles.RightAlign]: align === 'right',
               })}
               key={`cell-${dataKey}`}
             >

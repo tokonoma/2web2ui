@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table } from '@sparkpost/matchbox';
+import { Table } from 'src/components/matchbox';
 import { AccessTime } from '@sparkpost/matchbox-icons';
 import { PageLink } from 'src/components';
 import { Tag } from 'src/components/matchbox';
