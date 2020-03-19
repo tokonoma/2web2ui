@@ -1,22 +1,31 @@
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
+import { isUserUiOptionSet } from 'src/helpers/conditions/user';
 
 export function fetch({ type = 'FETCH_METRICS', path, params = {}, context }) {
-  const meta = {
-    method: 'GET',
-    url: `/v1/metrics/${path}`,
-    params: {
-      ...params,
-    },
+  return (dispatch, getState) => {
+    const useRollup = Boolean(isUserUiOptionSet('use-metrics-rollup')(getState()));
+    const meta = {
+      method: 'GET',
+      url: `/v1/metrics/${path}`,
+      params: {
+        ...params,
+      },
+    };
+
+    if (context) {
+      meta.context = context;
+    }
+    if (useRollup) {
+      meta.headers = { 'X-Msys-Metrics-Rollup': true };
+    }
+
+    return dispatch(
+      sparkpostApiRequest({
+        type,
+        meta,
+      }),
+    );
   };
-
-  if (context) {
-    meta.context = context;
-  }
-
-  return sparkpostApiRequest({
-    type,
-    meta,
-  });
 }
 
 export function fetchMetricsDomains(params = {}) {
