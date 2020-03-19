@@ -3,7 +3,6 @@ import React from 'react';
 import * as dateHelpers from 'src/helpers/date';
 import Detail from '../Detail';
 
-jest.mock('src/context/HibanaContext');
 jest.mock('src/helpers/date');
 
 let props;

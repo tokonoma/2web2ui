@@ -4,8 +4,6 @@ import _ from 'lodash';
 import { shallow } from 'enzyme';
 import Papa from 'papaparse';
 
-jest.mock('src/context/HibanaContext');
-
 jest.mock('papaparse');
 
 Date.now = jest.fn(() => 1512509841582);
