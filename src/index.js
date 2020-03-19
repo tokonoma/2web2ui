@@ -3,7 +3,7 @@ import { render } from 'react-dom';
 
 import { unregister } from './helpers/registerServiceWorker';
 
-import Providers from './providers';
+import Providers from './Providers';
 
 import './critical.scss';
 import './index.scss';

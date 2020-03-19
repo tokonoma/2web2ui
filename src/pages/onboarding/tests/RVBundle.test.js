@@ -3,7 +3,7 @@ import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import RVBundlePage from '../RVBundlePage';
 import { BrowserRouter as Router } from 'react-router-dom';
-import Providers from 'src/providers';
+import Providers from 'src/Providers';
 
 describe('RVBundlePage', () => {
   const subject = () =>

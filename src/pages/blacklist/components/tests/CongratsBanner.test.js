@@ -1,5 +1,5 @@
 import React from 'react';
-import Providers from 'src/providers';
+import Providers from 'src/Providers';
 import { render } from '@testing-library/react';
 import CongratsBanner from '../CongratsBanner';
 

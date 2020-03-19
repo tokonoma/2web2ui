@@ -3,7 +3,7 @@ import { act } from 'react-dom/test-utils';
 import { mount } from 'enzyme';
 import useRouter from 'src/hooks/useRouter';
 import IntegrationPage from '../IntegrationPage';
-import Providers from 'src/providers';
+import Providers from 'src/Providers';
 
 jest.mock('src/hooks/useRouter');
 

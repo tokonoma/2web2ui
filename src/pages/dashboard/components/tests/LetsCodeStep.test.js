@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 import { render } from '@testing-library/react';
 import LetsCodeStep from '../LetsCodeStep';
 import { GuideContext } from '../GettingStartedGuide';
-import Providers from 'src/providers';
+import Providers from 'src/Providers';
 
 describe('LetsCodeStep', () => {
   const subject_enzyme = (func = shallow) => func(<LetsCodeStep />);

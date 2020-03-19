@@ -3,7 +3,7 @@ import React from 'react';
 import { AllMessagesPage } from '../AllMessagesPage';
 import { AllMessagesCollection } from '../components/AllMessagesCollection';
 import { BrowserRouter as Router } from 'react-router-dom';
-import Providers from 'src/providers';
+import Providers from 'src/Providers';
 import { PLACEMENT_FILTER_TYPES } from '../constants/types';
 
 describe('Page: All Inbox Placement Messages Test', () => {

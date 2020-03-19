@@ -1,7 +1,6 @@
 import React from 'react';
 import { Grid } from '@sparkpost/matchbox';
-import { Tag } from 'src/components/matchbox';
-import { Button } from 'src/components/matchbox';
+import { Tag, Button } from 'src/components/matchbox';
 import { formatDate } from 'src/helpers/date';
 import { domainRegex } from 'src/helpers/regex';
 import cx from 'classnames';

@@ -2,7 +2,7 @@ import React from 'react';
 import { mount } from 'enzyme';
 import { MemoryRouter } from 'react-router-dom';
 import axios from 'axios';
-import Providers from 'src/providers';
+import Providers from 'src/Providers';
 
 import configureStore from 'src/store';
 

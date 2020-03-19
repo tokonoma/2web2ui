@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
-import Providers from 'src/providers';
+import Providers from 'src/Providers';
 import { FilterNone } from '@sparkpost/matchbox-icons/matchbox-icons';
 
 import NavGroup from '../NavGroup';

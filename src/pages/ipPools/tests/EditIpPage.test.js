@@ -2,7 +2,7 @@ import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { BrowserRouter as Router } from 'react-router-dom';
-import Providers from 'src/providers';
+import Providers from 'src/Providers';
 import { EditIpPage } from '../EditIpPage';
 jest.mock('../components/IpForm');
 

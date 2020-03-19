@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 import { render } from '@testing-library/react';
 import ShowMeSparkpostStep from '../ShowMeSparkpostStep';
 import { GuideContext } from '../GettingStartedGuide';
-import Providers from 'src/providers';
+import Providers from 'src/Providers';
 
 describe('ShowMeSparkpostStep', () => {
   const subject_enzyme = (func = shallow) => func(<ShowMeSparkpostStep />);

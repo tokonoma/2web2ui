@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { shallow, mount } from 'enzyme';
 import cases from 'jest-in-case';
-import Providers from 'src/providers';
+import Providers from 'src/Providers';
 import { AllMessagesCollection, passFail } from '../AllMessagesCollection';
 
 describe('Component: AllMessagesCollection', () => {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { fireEvent, render } from '@testing-library/react';
-import Providers from 'src/providers';
+import Providers from 'src/Providers';
 
 import { StopMonitoringModal } from '../StopMonitoringModal';
 

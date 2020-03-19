@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 import DeleteTemplateModal from '../DeleteTemplateModal';
 import globalAlert from 'src/reducers/globalAlert';
 import renderWithRedux from 'src/__testHelpers__/renderWithRedux';
-import Providers from 'src/providers';
+import Providers from 'src/Providers';
 jest.mock('src/components/globalAlert'); // Mocks `RedirectAndAlert` component
 
 describe('DeleteTemplateModal', () => {

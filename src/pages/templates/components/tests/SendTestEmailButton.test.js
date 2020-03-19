@@ -3,7 +3,7 @@ import { render, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import useEditorContext from '../../hooks/useEditorContext';
 import SendTestEmailButton from '../SendTestEmailButton';
-import Providers from 'src/providers';
+import Providers from 'src/Providers';
 
 jest.mock('../../hooks/useEditorContext');
 

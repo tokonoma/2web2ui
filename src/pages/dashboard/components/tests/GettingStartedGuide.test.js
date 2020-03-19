@@ -4,7 +4,7 @@ import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { GettingStartedGuide } from '../GettingStartedGuide';
 import { GUIDE_IDS } from '../../constants';
-import Providers from 'src/providers';
+import Providers from 'src/Providers';
 
 const defaultProps = {
   onboarding: { isGuideAtBottom: false },

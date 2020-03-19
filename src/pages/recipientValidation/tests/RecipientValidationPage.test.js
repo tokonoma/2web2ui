@@ -3,7 +3,7 @@ import React from 'react';
 import { RecipientValidationPage } from '../RecipientValidationPage';
 import { Launch } from '@sparkpost/matchbox-icons';
 import { MemoryRouter } from 'react-router-dom';
-import Providers from 'src/providers';
+import Providers from 'src/Providers';
 
 jest.mock('src/pages/recipientValidation/components/ValidateSection', () => {
   return function ValidateSection() {
