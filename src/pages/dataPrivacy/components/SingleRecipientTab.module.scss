@@ -8,3 +8,7 @@
   margin-left: 1rem;
   display: inline;
 }
+
+.ScreenReaderOnly {
+  @include visually-hidden();
+}

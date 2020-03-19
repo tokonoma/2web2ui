@@ -4,7 +4,6 @@ import { reduxForm } from 'redux-form';
 import { RadioGroup, TextFieldWrapper } from 'src/components';
 import { Field } from 'redux-form';
 import SubaccountSection from 'src/components/subaccountSection';
-import { Label } from 'src/components/matchbox';
 import { required, email, maxLength } from 'src/helpers/validation';
 import { Button, Panel } from '@sparkpost/matchbox';
 import { submitRTBFRequest, submitOptOutRequest } from 'src/actions/dataPrivacy';
@@ -46,7 +45,7 @@ export function SingleRecipientTab(props) {
       case 'rtbf':
         props
           .submitRTBFRequest({
-            recipients: [values.address],
+            recipients: [values.email],
             subaccountId: subaccountId,
             include_subaccounts: include_subaccounts,
           })
@@ -56,7 +55,7 @@ export function SingleRecipientTab(props) {
       default:
         props
           .submitOptOutRequest({
-            recipients: [values.address],
+            recipients: [values.email],
             subaccountId: subaccountId,
             include_subaccounts: include_subaccounts,
           })
@@ -76,14 +75,16 @@ export function SingleRecipientTab(props) {
             disabled={props.dataPrivacyRequestPending}
             validate={[required]}
           />
-          <Label id="email-address-field">Email Address</Label>
+          <label htmlFor="email" className={styles.ScreenReaderOnly}>
+            Recipient Email Address
+          </label>
 
           <Field
-            id="email-address-field"
-            name="address"
+            name="email"
             style={{ width: '60%' }}
             component={TextFieldWrapper}
             placeholder={'email@example.com'}
+            label={'Recipient Email Address'}
             disabled={props.dataPrivacyRequestPending}
             validate={[required, email, maxLength(254)]}
             normalize={(value = '') => value.trim()}
