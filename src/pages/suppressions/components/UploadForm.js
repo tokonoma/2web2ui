@@ -14,19 +14,17 @@ import config from 'src/config';
 import { fileExtension, maxFileSize, nonEmptyFile, required } from 'src/helpers/validation';
 import exampleSuppressionsListPath from './example-suppressions-list.csv';
 
-
 export class UploadForm extends Component {
   handleSubmit = ({ subaccount, suppressionsFile }) => {
-    this.props.uploadSuppressions(suppressionsFile, subaccount)
-      .then(this.handleSubmitSuccess);
-  }
+    this.props.uploadSuppressions(suppressionsFile, subaccount).then(this.handleSubmitSuccess);
+  };
 
   handleSubmitSuccess = () => {
     const { history, showAlert } = this.props;
 
     showAlert({ message: 'Successfully updated your suppression list', type: 'success' });
     history.push('/lists/suppressions');
-  }
+  };
 
   render() {
     const { handleSubmit: reduxFormSubmit, submitting, pristine } = this.props;
@@ -42,9 +40,9 @@ export class UploadForm extends Component {
               fileType="csv"
               helpText={
                 <span>
-                  You can download
-                  an <DownloadLink href={exampleSuppressionsListPath}>example file here</DownloadLink> to
-                  use when formatting your list of suppressions for upload.
+                  You can download an{' '}
+                  <DownloadLink href={exampleSuppressionsListPath}>example file here</DownloadLink>{' '}
+                  to use when formatting your list of suppressions for upload.
                 </span>
               }
               required
@@ -52,7 +50,7 @@ export class UploadForm extends Component {
                 required,
                 fileExtension('csv'),
                 maxFileSize(config.maxUploadSizeBytes),
-                nonEmptyFile
+                nonEmptyFile,
               ]}
             />
             <Field
@@ -63,19 +61,24 @@ export class UploadForm extends Component {
             />
           </Panel.Section>
           <Panel.Section>
-            <Button primary disabled={pristine || submitting} type="submit">Upload</Button>
+            <Button primary disabled={pristine || submitting} type="submit">
+              Upload
+            </Button>
           </Panel.Section>
         </form>
       </Fragment>
     );
-
   }
 }
 
 const FORM_NAME = 'uploadSuppressions';
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   persistError: state.suppressions.persistError,
-  parseError: state.suppressions.parseError
+  parseError: state.suppressions.parseError,
 });
 
-export default withRouter(connect(mapStateToProps, { showAlert, uploadSuppressions })(reduxForm({ form: FORM_NAME })(UploadForm)));
+export default withRouter(
+  connect(mapStateToProps, { showAlert, uploadSuppressions })(
+    reduxForm({ form: FORM_NAME })(UploadForm),
+  ),
+);

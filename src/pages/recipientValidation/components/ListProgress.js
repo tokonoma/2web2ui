@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {  UnstyledLink } from '@sparkpost/matchbox';
+import { UnstyledLink } from '@sparkpost/matchbox';
 import { Button } from 'src/components/matchbox';
 import { getJobStatus } from 'src/actions/recipientValidation';
 import FocusContainer from 'src/components/focusContainer';

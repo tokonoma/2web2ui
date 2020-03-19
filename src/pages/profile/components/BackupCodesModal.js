@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Modal from 'src/components/modals/Modal';
 import BackupCodesView from './BackupCodesView';
-import { Panel, TextField,  Grid } from '@sparkpost/matchbox';
+import { Panel, TextField, Grid } from '@sparkpost/matchbox';
 import { Button } from 'src/components/matchbox';
 import { Banner } from 'src/components/matchbox';
 import styles from './TfaModals.module.scss';

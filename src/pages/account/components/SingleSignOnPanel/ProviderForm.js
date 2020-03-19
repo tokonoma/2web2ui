@@ -5,7 +5,7 @@ import { Panel } from '@sparkpost/matchbox';
 import { Button } from 'src/components/matchbox';
 import {
   provisionAccountSingleSignOn,
-  reprovisionAccountSingleSignOn
+  reprovisionAccountSingleSignOn,
 } from 'src/actions/accountSingleSignOn';
 import { showAlert } from 'src/actions/globalAlert';
 import CopyField from 'src/components/copyField/CopyField';
@@ -25,15 +25,14 @@ export class ProviderForm extends React.Component {
       provider,
       provisionAccountSingleSignOn,
       reprovisionAccountSingleSignOn,
-      showAlert
+      showAlert,
     } = this.props;
     const samlContents = await getBase64Contents(samlFile);
     const action = provider ? reprovisionAccountSingleSignOn : provisionAccountSingleSignOn;
 
-    return action(samlContents)
-      .then(() => {
-        showAlert({ type: 'success', message: 'Successfully provisioned SAML' });
-      });
+    return action(samlContents).then(() => {
+      showAlert({ type: 'success', message: 'Successfully provisioned SAML' });
+    });
   };
 
   componentDidUpdate(prevProps) {
@@ -62,9 +61,7 @@ export class ProviderForm extends React.Component {
           </Panel.Section>
           <Panel.Section className={styles.step}>
             <h6>Step 2: Upload your Security Assertion Markup Language (SAML)</h6>
-            <p>
-              This is a configuration file that can be downloaded from your IdP.
-            </p>
+            <p>This is a configuration file that can be downloaded from your IdP.</p>
             <div>
               <Field
                 component={FileFieldWrapper}
@@ -76,13 +73,21 @@ export class ProviderForm extends React.Component {
                 `}
                 name="samlFile"
                 type="file"
-                validate={[required, fileExtension('xml'), maxFileSize(config.apiRequestBodyMaxSizeBytes)]}
+                validate={[
+                  required,
+                  fileExtension('xml'),
+                  maxFileSize(config.apiRequestBodyMaxSizeBytes),
+                ]}
               />
             </div>
           </Panel.Section>
           <Panel.Section>
-            <Button primary disabled={submitting} type="submit">Provision SSO</Button>
-            <Button className={styles.cancel} onClick={this.cancel}>Cancel</Button>
+            <Button primary disabled={submitting} type="submit">
+              Provision SSO
+            </Button>
+            <Button className={styles.cancel} onClick={this.cancel}>
+              Cancel
+            </Button>
           </Panel.Section>
         </Panel>
       </Form>
@@ -90,16 +95,15 @@ export class ProviderForm extends React.Component {
   }
 }
 
-
 const mapDispatchToProps = {
   provisionAccountSingleSignOn,
   reprovisionAccountSingleSignOn,
-  showAlert
+  showAlert,
 };
 
 const mapStateToProps = ({ accountSingleSignOn }) => accountSingleSignOn;
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(reduxForm({ form: 'provisionAccountSignleSignOn' })(ProviderForm));

@@ -11,11 +11,12 @@ function ReportRow(props) {
           className={styles.DeleteButton}
           disabled={props.deleting}
           flat
-          size='small'
-          onClick={(e) => {
+          size="small"
+          onClick={e => {
             e.stopPropagation();
             props.onDelete(props.name);
-          }}>
+          }}
+        >
           Delete
         </Button>
       </div>

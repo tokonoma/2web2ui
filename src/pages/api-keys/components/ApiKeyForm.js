@@ -9,14 +9,14 @@ import { Button } from 'src/components/matchbox';
 import {
   RadioGroup,
   TextFieldWrapper,
-  SubaccountTypeaheadWrapper
+  SubaccountTypeaheadWrapper,
 } from 'src/components/reduxFormWrappers';
 import {
   getGrants,
   getSubaccountGrants,
   getIsNew,
   getInitialGrantsRadio,
-  getInitialValues
+  getInitialValues,
 } from 'src/selectors/api-keys';
 import { selectSubaccountFromQuery } from 'src/selectors/subaccounts';
 import validIpList from '../helpers/validIpList';
@@ -33,22 +33,29 @@ export class ApiKeyForm extends Component {
   onSubmit = ({ grants = {}, grantsRadio, label, subaccount, validIps = '' }) => {
     const availableGrantKeys = Object.keys(this.availableGrants);
     // extracts all checked grants and returns array of all checked ['grant1', 'grant2']
-    const checkedGrantKeys = _.reduce(grants, (result, checked, key) => checked ? [...result, key] : result, []);
+    const checkedGrantKeys = _.reduce(
+      grants,
+      (result, checked, key) => (checked ? [...result, key] : result),
+      [],
+    );
 
     return this.props.onSubmit({
       label,
-      grants: grantsRadio === 'select' ? _.intersection(availableGrantKeys, checkedGrantKeys) : availableGrantKeys,
+      grants:
+        grantsRadio === 'select'
+          ? _.intersection(availableGrantKeys, checkedGrantKeys)
+          : availableGrantKeys,
       subaccount,
-      validIps: _.trim(validIps) !== '' ? validIps.split(',').map(_.trim) : undefined
+      validIps: _.trim(validIps) !== '' ? validIps.split(',').map(_.trim) : undefined,
     });
-  }
+  };
 
   getGrantOptions() {
     const { isReadOnly } = this.props;
 
     return [
       { value: 'all', label: 'All', disabled: isReadOnly },
-      { value: 'select', label: 'Select', disabled: isReadOnly }
+      { value: 'select', label: 'Select', disabled: isReadOnly },
     ];
   }
 
@@ -60,44 +67,52 @@ export class ApiKeyForm extends Component {
       <form onSubmit={handleSubmit(this.onSubmit)}>
         <Panel.Section>
           <Field
-            name='label'
+            name="label"
             component={TextFieldWrapper}
             validate={required}
-            label='API Key Name'
+            label="API Key Name"
             disabled={isReadOnly}
           />
           <Field
-            name='subaccount'
-            helpText={isReadOnly ? '' : 'This assignment is permanent. Leave blank to assign to master account.'}
+            name="subaccount"
+            helpText={
+              isReadOnly
+                ? ''
+                : 'This assignment is permanent. Leave blank to assign to master account.'
+            }
             component={SubaccountTypeaheadWrapper}
             disabled={!isNew}
           />
         </Panel.Section>
         <Panel.Section>
           <Field
-            name='grantsRadio'
+            name="grantsRadio"
             component={RadioGroup}
-            title='API Permissions'
+            title="API Permissions"
             options={this.getGrantOptions()}
           />
-          <GrantsCheckboxes grants={this.availableGrants} show={showGrants} disabled={isReadOnly}/>
+          <GrantsCheckboxes grants={this.availableGrants} show={showGrants} disabled={isReadOnly} />
           <Field
-            name='validIps'
+            name="validIps"
             component={TextFieldWrapper}
-            label='Allowed IPs'
-            helpText={isReadOnly ? '' : 'Leaving the field blank will allow access by valid API keys from any IP address.'}
+            label="Allowed IPs"
+            helpText={
+              isReadOnly
+                ? ''
+                : 'Leaving the field blank will allow access by valid API keys from any IP address.'
+            }
             placeholder={isReadOnly ? '' : '10.20.30.40, 10.20.30.0/24'}
             validate={validIpList}
             disabled={isReadOnly}
           />
         </Panel.Section>
-        {!isReadOnly &&
+        {!isReadOnly && (
           <Panel.Section>
             <Button submit primary disabled={submitting || pristine}>
               {submitting ? 'Loading...' : submitText}
             </Button>
           </Panel.Section>
-        }
+        )}
       </form>
     );
   }
@@ -113,12 +128,12 @@ const mapStateToProps = (state, props) => ({
   initialValues: {
     grantsRadio: getInitialGrantsRadio(state, props),
     subaccount: selectSubaccountFromQuery(state, props),
-    ...getInitialValues(state, props)
-  }
+    ...getInitialValues(state, props),
+  },
 });
 
 const formOptions = {
   form: formName,
-  enableReinitialize: true
+  enableReinitialize: true,
 };
 export default withRouter(connect(mapStateToProps, {})(reduxForm(formOptions)(ApiKeyForm)));

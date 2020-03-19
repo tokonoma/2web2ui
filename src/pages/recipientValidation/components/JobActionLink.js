@@ -19,20 +19,14 @@ const JobActionLink = ({ jobId, fileHref, status }) => {
         size="small"
       >
         <span>Review</span>&nbsp;
-        <PlaylistAddCheck/>
+        <PlaylistAddCheck />
       </Button>
     );
   }
 
   if (status === 'success') {
     return (
-      <DownloadLink
-        component={Button}
-        to={fileHref}
-        flat
-        color="orange"
-        size="small"
-      >
+      <DownloadLink component={Button} to={fileHref} flat color="orange" size="small">
         <span>Download</span>&nbsp;
         <FileDownload />
       </DownloadLink>

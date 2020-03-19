@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {  Popover, ScreenReaderOnly } from '@sparkpost/matchbox';
+import { Popover, ScreenReaderOnly } from '@sparkpost/matchbox';
 import { Button } from 'src/components/matchbox';
 import { ArrowDropDown, FileEdit } from '@sparkpost/matchbox-icons';
 import PageLink from 'src/components/pageLink';
@@ -23,9 +23,11 @@ const PublishedModeActions = () => {
     isPublishedMode,
     testData,
     isCreatePending,
-    isDeletePending
+    isDeletePending,
   } = useEditorContext();
-  const editDraftTo = `/${routeNamespace}/edit/${template.id}/draft/content${setSubaccountQuery(template.subaccount_id)}`;
+  const editDraftTo = `/${routeNamespace}/edit/${template.id}/draft/content${setSubaccountQuery(
+    template.subaccount_id,
+  )}`;
 
   // State
   const [isPopoverOpen, setPopoverOpen] = useState(false);
@@ -50,12 +52,7 @@ const PublishedModeActions = () => {
 
   return (
     <Button.Group>
-      <Button
-        to={editDraftTo}
-        className={styles.Actions}
-        role="button"
-        data-id="button-edit-draft"
-      >
+      <Button to={editDraftTo} className={styles.Actions} role="button" data-id="button-edit-draft">
         <strong>Edit Draft</strong>
       </Button>
 
@@ -70,7 +67,7 @@ const PublishedModeActions = () => {
               aria-expanded={isPopoverOpen ? 'true' : 'false'}
               data-id="popover-trigger-editor-actions"
             >
-              <ArrowDropDown/>
+              <ArrowDropDown />
 
               <ScreenReaderOnly>Open Menu</ScreenReaderOnly>
             </Button>
@@ -78,28 +75,18 @@ const PublishedModeActions = () => {
         >
           <div className={styles.ActionsBody}>
             <div className={styles.ActionItem}>
-              <PageLink
-                to={editDraftTo}
-                data-id="action-edit-draft"
-                role="button"
-              >
-                <FileEdit/>
+              <PageLink to={editDraftTo} data-id="action-edit-draft" role="button">
+                <FileEdit />
 
                 <span>Edit Draft</span>
               </PageLink>
             </div>
 
-            <hr className={styles.Divider}/>
+            <hr className={styles.Divider} />
 
-            <DuplicateTemplate
-              className={styles.ActionItem}
-              onClick={handleDuplicateDraftClick}
-            />
+            <DuplicateTemplate className={styles.ActionItem} onClick={handleDuplicateDraftClick} />
 
-            <DeleteTemplate
-              className={styles.ActionItem}
-              onClick={handleDeleteTemplateClick}
-            />
+            <DeleteTemplate className={styles.ActionItem} onClick={handleDeleteTemplateClick} />
           </div>
         </Popover>
 

@@ -5,27 +5,37 @@ import { Button } from 'src/components/matchbox';
 import { Add } from '@sparkpost/matchbox-icons';
 import { TextFieldWrapper } from 'src/components/reduxFormWrappers';
 import { TemplateTypeaheadWrapper } from 'src/components/reduxFormWrappers';
-import { required, integer, minNumber, maxNumber, abTestDistribution } from 'src/helpers/validation';
+import {
+  required,
+  integer,
+  minNumber,
+  maxNumber,
+  abTestDistribution,
+} from 'src/helpers/validation';
 
 import styles from './VariantsFields.module.scss';
 
 export const PercentField = ({ namespace, ...props }) => (
   <Field
     name={`${namespace}.percent`}
-    label='Percent of total'
-    type='number'
-    suffix='%'
+    label="Percent of total"
+    type="number"
+    suffix="%"
     validate={[required, minNumber(1), maxNumber(100), abTestDistribution]}
-    component={TextFieldWrapper} {...props} />
+    component={TextFieldWrapper}
+    {...props}
+  />
 );
 
 export const SampleSizeField = ({ namespace, ...props }) => (
   <Field
     name={`${namespace}.sample_size`}
-    label='Number of Recipients'
-    type='number'
+    label="Number of Recipients"
+    type="number"
     validate={[required, integer, minNumber(1)]}
-    component={TextFieldWrapper} {...props} />
+    component={TextFieldWrapper}
+    {...props}
+  />
 );
 
 /*
@@ -34,11 +44,18 @@ export const SampleSizeField = ({ namespace, ...props }) => (
 export const RenderVariants = ({ fields, formValues, disabled, subaccountId }) => (
   <Panel>
     {fields.map((variant, i) => {
-      const CountField = formValues.audience_selection === 'sample_size' ? SampleSizeField : PercentField;
+      const CountField =
+        formValues.audience_selection === 'sample_size' ? SampleSizeField : PercentField;
       return (
         <Panel.Section key={i}>
           <div className={styles.RemoveWrapper}>
-            <Button flat color='orange' size='small' onClick={() => fields.remove(i)} disabled={fields.length === 1}>
+            <Button
+              flat
+              color="orange"
+              size="small"
+              onClick={() => fields.remove(i)}
+              disabled={fields.length === 1}
+            >
               Remove Variant
             </Button>
           </div>
@@ -48,23 +65,22 @@ export const RenderVariants = ({ fields, formValues, disabled, subaccountId }) =
               <Field
                 name={`${variant}.template_object`}
                 component={TemplateTypeaheadWrapper}
-                label='Select a published template'
-                placeholder='Type to search'
+                label="Select a published template"
+                placeholder="Type to search"
                 validate={required}
                 disabled={disabled}
                 subaccountId={subaccountId}
               />
             </Grid.Column>
             <Grid.Column>
-              <CountField namespace={variant} disabled={disabled}/>
+              <CountField namespace={variant} disabled={disabled} />
             </Grid.Column>
           </Grid>
         </Panel.Section>
       );
-    })
-    }
+    })}
     <Panel.Section>
-      <Button flat color='orange' onClick={() => fields.push()} disabled={fields.length >= 20}>
+      <Button flat color="orange" onClick={() => fields.push()} disabled={fields.length >= 20}>
         <Add /> Add Another Variant
       </Button>
     </Panel.Section>
@@ -72,7 +88,8 @@ export const RenderVariants = ({ fields, formValues, disabled, subaccountId }) =
 );
 
 const VariantsFields = ({ disabled, formValues, subaccountId }) => {
-  const CountField = formValues.audience_selection === 'sample_size' ? SampleSizeField : PercentField;
+  const CountField =
+    formValues.audience_selection === 'sample_size' ? SampleSizeField : PercentField;
   return (
     <Fragment>
       <Panel sectioned>
@@ -80,22 +97,22 @@ const VariantsFields = ({ disabled, formValues, subaccountId }) => {
         <Grid>
           <Grid.Column>
             <Field
-              name='default_template.template_object'
+              name="default_template.template_object"
               component={TemplateTypeaheadWrapper}
-              label='Select a published template'
-              placeholder='Type to search'
+              label="Select a published template"
+              placeholder="Type to search"
               validate={required}
               disabled={disabled}
               subaccountId={subaccountId}
             />
           </Grid.Column>
           <Grid.Column>
-            <CountField namespace='default_template' disabled={disabled}/>
+            <CountField namespace="default_template" disabled={disabled} />
           </Grid.Column>
         </Grid>
       </Panel>
       <FieldArray
-        name='variants'
+        name="variants"
         component={RenderVariants}
         formValues={formValues}
         disabled={disabled}
@@ -109,7 +126,7 @@ const VariantsFields = ({ disabled, formValues, subaccountId }) => {
 };
 
 VariantsFields.defaultProps = {
-  formValues: {}
+  formValues: {},
 };
 
 export default VariantsFields;

@@ -1,5 +1,5 @@
 import React from 'react';
-import {  Modal, Panel } from '@sparkpost/matchbox';
+import { Modal, Panel } from '@sparkpost/matchbox';
 import { Button } from 'src/components/matchbox';
 import { connect } from 'react-redux';
 import { domainRegex } from 'src/helpers/regex';

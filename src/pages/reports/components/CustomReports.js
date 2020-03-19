@@ -17,7 +17,16 @@ import styles from './CustomReports.module.scss';
 const REPORT_LIMIT = 10;
 
 export function CustomReports(props) {
-  const { addFilters, deleteReport, clearFilters, searchOptions, loading, refreshReportOptions, reports, saveReport } = props;
+  const {
+    addFilters,
+    deleteReport,
+    clearFilters,
+    searchOptions,
+    loading,
+    refreshReportOptions,
+    reports,
+    saveReport,
+  } = props;
 
   const [name, setName] = React.useState('');
 
@@ -39,12 +48,12 @@ export function CustomReports(props) {
 
     saveReport({
       name: name.trim(),
-      url: qs.stringify(toSave)
+      url: qs.stringify(toSave),
     });
   }
 
   function handleLoad(report) {
-    const { options, filters = []} = parseSearch(report.url);
+    const { options, filters = [] } = parseSearch(report.url);
     clearFilters();
     addFilters(filters);
     refreshReportOptions(options);
@@ -60,16 +69,16 @@ export function CustomReports(props) {
       <div className={styles.Wrap}>
         <div className={styles.NameWrapper}>
           <TextField
-            label='Report Name'
+            label="Report Name"
             labelHidden
-            placeholder='Untitled Report'
+            placeholder="Untitled Report"
             onChange={handleNameChange}
             value={name}
           />
         </div>
 
         {!isLimited || (canOverwrite && isLimited) ? (
-          <Button disabled={saveDisabled} onClick={handleSave} flat color='orange'>
+          <Button disabled={saveDisabled} onClick={handleSave} flat color="orange">
             <Save className={styles.SaveIcon} />
             {loading ? 'Saving...' : 'Save'}
           </Button>
@@ -87,15 +96,14 @@ export function CustomReports(props) {
             onDelete={deleteReport}
           />
         </div>
-
       </div>
     </Panel.Section>
   );
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   reports: selectCustomReports(state),
-  loading: state.currentUser.userOptionsPending
+  loading: state.currentUser.userOptionsPending,
 });
 
 const mapDispatchToProps = {
@@ -103,7 +111,7 @@ const mapDispatchToProps = {
   clearFilters,
   refreshReportOptions,
   saveReport,
-  deleteReport
+  deleteReport,
 };
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CustomReports));

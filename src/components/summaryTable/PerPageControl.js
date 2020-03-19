@@ -14,7 +14,7 @@ const PerPageControl = ({ onChange, perPage, totalCount }) => {
     <div className={styles.PerPageGroup}>
       <Button.Group>
         <span className={styles.PerPageLabel}>Per Page</span>
-        {SIZES.map((size) => (
+        {SIZES.map(size => (
           <Button
             flat
             className={classnames(perPage === size && styles.Selected)}

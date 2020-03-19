@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {  Grid } from '@sparkpost/matchbox';
+import { Grid } from '@sparkpost/matchbox';
 import { Button } from 'src/components/matchbox';
 import Legend from './Legend';
 
@@ -8,15 +8,27 @@ import styles from './ChartHeader.module.scss';
 export default class ChartHeader extends Component {
   renderScaleButton(scale, label) {
     const { onScaleClick, selectedScale } = this.props;
-    return <Button size='small' primary={scale === selectedScale} onClick={() => onScaleClick(scale)}>{ label }</Button>;
+    return (
+      <Button size="small" primary={scale === selectedScale} onClick={() => onScaleClick(scale)}>
+        {label}
+      </Button>
+    );
   }
 
   renderTimeMode() {
     const { selectedTime, onTimeClick } = this.props;
     return (
       <Button.Group className={styles.ButtonSpacer}>
-        <Button primary={selectedTime === 'real'} onClick={() => onTimeClick('real')} size='small'>Real Time</Button>
-        <Button primary={selectedTime === 'injection'} onClick={() => onTimeClick('injection')} size='small'>Injection Time</Button>
+        <Button primary={selectedTime === 'real'} onClick={() => onTimeClick('real')} size="small">
+          Real Time
+        </Button>
+        <Button
+          primary={selectedTime === 'injection'}
+          onClick={() => onTimeClick('injection')}
+          size="small"
+        >
+          Injection Time
+        </Button>
       </Button.Group>
     );
   }
@@ -27,11 +39,13 @@ export default class ChartHeader extends Component {
     return (
       <Grid className={styles.ChartHeader}>
         <Grid.Column xs={12} md={5} lg={5}>
-          <Legend metrics={selectedMetrics}/>
+          <Legend metrics={selectedMetrics} />
         </Grid.Column>
         <Grid.Column xs={12} md={7} lg={7}>
           <div className={styles.Controls}>
-            <Button size='small' onClick={onMetricsToggle}>Select Metrics</Button>
+            <Button size="small" onClick={onMetricsToggle}>
+              Select Metrics
+            </Button>
             {/* {this.renderTimeMode()} */}
             {/*<Button.Group className={styles.ButtonSpacer}>*/}
             {/*{this.renderScaleButton('linear', 'Linear')}*/}

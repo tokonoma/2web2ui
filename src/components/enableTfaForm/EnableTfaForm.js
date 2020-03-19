@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Panel,  TextField, Grid } from '@sparkpost/matchbox';
+import { Panel, TextField, Grid } from '@sparkpost/matchbox';
 import { Button } from 'src/components/matchbox';
 import { VpnKey } from '@sparkpost/matchbox-icons';
 import { QRCode } from 'react-qr-svg';
@@ -13,7 +13,7 @@ import { usernameSelector } from 'src/selectors/currentUser';
 
 export class EnableTfaForm extends React.Component {
   state = {
-    code: ''
+    code: '',
   };
 
   componentDidMount() {
@@ -41,11 +41,11 @@ export class EnableTfaForm extends React.Component {
   renderForm() {
     const { onClose, secret, username, togglePending, toggleError } = this.props;
     const qrData = `otpauth://totp/${username}?secret=${encodeURIComponent(
-      secret
+      secret,
     )}&issuer=SparkPost`;
 
     return (
-      <form onSubmit={(e) => e.preventDefault()}>
+      <form onSubmit={e => e.preventDefault()}>
         <Panel.Section>
           <Grid>
             <Grid.Column xs={12} md={7}>
@@ -119,17 +119,14 @@ export class EnableTfaForm extends React.Component {
 
 EnableTfaForm.propTypes = EnableTfaFormPropTypes;
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   ...state.tfa,
   username: state.currentUser.email || usernameSelector(state),
-  enabled: state.tfa.enabled === true
+  enabled: state.tfa.enabled === true,
 });
 
-export default connect(
-  mapStateToProps,
-  {
-    getTfaSecret,
-    toggleTfa,
-    showAlert
-  }
-)(EnableTfaForm);
+export default connect(mapStateToProps, {
+  getTfaSecret,
+  toggleTfa,
+  showAlert,
+})(EnableTfaForm);

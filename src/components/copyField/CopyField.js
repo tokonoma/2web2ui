@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import copy from 'copy-to-clipboard';
 
-import { TextField,  Tooltip } from '@sparkpost/matchbox';
+import { TextField, Tooltip } from '@sparkpost/matchbox';
 import { Button } from 'src/components/matchbox';
 import { ContentCopy } from '@sparkpost/matchbox-icons';
 
@@ -11,25 +11,25 @@ import { ContentCopy } from '@sparkpost/matchbox-icons';
  */
 class CopyField extends Component {
   static defaultProps = {
-    hideCopy: false
-  }
+    hideCopy: false,
+  };
 
   state = {
-    copied: false
-  }
+    copied: false,
+  };
 
-  timeout = null
+  timeout = null;
 
-  handleFieldFocus = (e) => {
+  handleFieldFocus = e => {
     e.target.select();
-  }
+  };
 
   handleCopy = () => {
     copy(this.props.value);
     this.setState({ copied: true });
     clearTimeout(this.timeout);
     this.timeout = setTimeout(() => this.setState({ copied: false }), 3000);
-  }
+  };
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.value !== this.props.object) {
@@ -45,9 +45,9 @@ class CopyField extends Component {
 
     if (!hideCopy) {
       connectRight = (
-        <Tooltip dark content='Copied to clipboard!' disabled={!copied}>
+        <Tooltip dark content="Copied to clipboard!" disabled={!copied}>
           <Button name="copy-field-button" onClick={this.handleCopy}>
-            <ContentCopy size={14}/> Copy
+            <ContentCopy size={14} /> Copy
           </Button>
         </Tooltip>
       );
@@ -70,7 +70,7 @@ class CopyField extends Component {
 CopyField.propTypes = {
   id: PropTypes.string,
   value: PropTypes.string,
-  hideCopy: PropTypes.bool
+  hideCopy: PropTypes.bool,
 };
 
 export default CopyField;

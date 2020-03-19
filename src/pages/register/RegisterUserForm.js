@@ -4,7 +4,7 @@ import { reduxForm, Field } from 'redux-form';
 
 import { LINKS } from 'src/constants';
 import { TextFieldWrapper } from 'src/components/reduxFormWrappers';
-import {  UnstyledLink } from '@sparkpost/matchbox';
+import { UnstyledLink } from '@sparkpost/matchbox';
 import { Button } from 'src/components/matchbox';
 import { required, minLength } from 'src/helpers/validation';
 

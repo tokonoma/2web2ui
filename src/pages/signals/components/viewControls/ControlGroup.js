@@ -7,8 +7,8 @@ import styles from './ControlGroup.module.scss';
 
 class ControlGroup extends Component {
   state = {
-    selected: ''
-  }
+    selected: '',
+  };
 
   componentDidMount() {
     const { initialSelected } = this.props;
@@ -18,7 +18,7 @@ class ControlGroup extends Component {
     }
   }
 
-  handleChange = (selected) => {
+  handleChange = selected => {
     const { onChange } = this.props;
 
     this.setState({ selected });
@@ -26,35 +26,31 @@ class ControlGroup extends Component {
     if (onChange) {
       onChange(selected);
     }
-  }
+  };
 
   renderButtons = () => {
     const { options } = this.props;
     const { selected } = this.state;
 
-    return _.keys(options).map((key) => {
+    return _.keys(options).map(key => {
       const classes = classnames(styles.Button, selected === key && styles.Selected);
       return (
-        <Button key={key} onClick={() => this.handleChange(key)} className={classes} size='small'>
+        <Button key={key} onClick={() => this.handleChange(key)} className={classes} size="small">
           {options[key]}
         </Button>
       );
     });
-  }
+  };
 
   render() {
-    return (
-      <Button.Group className={styles.Group}>
-        {this.renderButtons()}
-      </Button.Group>
-    );
+    return <Button.Group className={styles.Group}>{this.renderButtons()}</Button.Group>;
   }
 }
 
 ControlGroup.propTypes = {
   options: PropTypes.object.isRequired,
   initialSelected: PropTypes.string,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
 };
 
 export default ControlGroup;

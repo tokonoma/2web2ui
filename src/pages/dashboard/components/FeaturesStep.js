@@ -5,7 +5,7 @@ import { Card, CardTitle, CardContent, CardActions } from 'src/components';
 import { Send } from '@sparkpost/matchbox-icons';
 import styles from './FeaturesStep.module.scss';
 import ButtonWrapper from 'src/components/buttonWrapper';
-import {  Grid } from '@sparkpost/matchbox';
+import { Grid } from '@sparkpost/matchbox';
 import { Button } from 'src/components/matchbox';
 import { useGuideContext } from './GettingStartedGuide';
 

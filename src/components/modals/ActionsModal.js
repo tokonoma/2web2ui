@@ -14,7 +14,7 @@ const ActionsModal = ({
   isOpen,
   isPending,
   onCancel,
-  title
+  title,
 }) => (
   <Modal open={isOpen} onClose={onCancel}>
     <Panel title={title}>
@@ -24,9 +24,7 @@ const ActionsModal = ({
         </Panel.Section>
       ) : (
         <>
-          <Panel.Section>
-            {content}
-          </Panel.Section>
+          <Panel.Section>{content}</Panel.Section>
           <Panel.Section>
             <div className={styles.Buttons}>
               <div>
@@ -43,11 +41,7 @@ const ActionsModal = ({
                 ))}
               </div>
               {!hideCancelButton && (
-                <Button
-                  disabled={isPending}
-                  name="action-cancel-modal-button"
-                  onClick={onCancel}
-                >
+                <Button disabled={isPending} name="action-cancel-modal-button" onClick={onCancel}>
                   Cancel
                 </Button>
               )}
@@ -63,8 +57,8 @@ ActionsModal.propTypes = {
   actions: PropTypes.arrayOf(
     PropTypes.shape({
       content: PropTypes.node.isRequired,
-      onClick: PropTypes.func.isRequired
-    })
+      onClick: PropTypes.func.isRequired,
+    }),
   ).isRequired,
   content: PropTypes.node.isRequired,
   hideCancelButton: PropTypes.bool,
@@ -72,7 +66,7 @@ ActionsModal.propTypes = {
   isOpen: PropTypes.bool,
   isPending: PropTypes.bool,
   onCancel: PropTypes.func,
-  title: PropTypes.string
+  title: PropTypes.string,
 };
 
 export default ActionsModal;

@@ -6,7 +6,7 @@ import Recaptcha from 'react-recaptcha';
 import config from 'src/config';
 import { FORMS, LINKS } from 'src/constants';
 import { TextFieldWrapper, CheckboxWrapper } from 'src/components/reduxFormWrappers';
-import {  UnstyledLink, Grid, Checkbox } from '@sparkpost/matchbox';
+import { UnstyledLink, Grid, Checkbox } from '@sparkpost/matchbox';
 import { Button } from 'src/components/matchbox';
 import { required, minLength, email, endsWithWhitespace } from 'src/helpers/validation';
 import styles from './JoinForm.module.scss';

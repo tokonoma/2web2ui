@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import { withRouter } from 'react-router-dom';
-import {  Grid, Panel } from '@sparkpost/matchbox';
+import { Grid, Panel } from '@sparkpost/matchbox';
 import { Button } from 'src/components/matchbox';
 import { getBillingCountries, updateBillingSubscription } from 'src/actions/billing';
 import billingUpdate from 'src/actions/billingUpdate';

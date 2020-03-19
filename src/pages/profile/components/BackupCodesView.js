@@ -7,7 +7,9 @@ import { Button } from 'src/components/matchbox';
 
 const BackupCodes = ({ codes }) => (
   <div>
-    <p><strong>Your shiny new backup codes:</strong></p>
+    <p>
+      <strong>Your shiny new backup codes:</strong>
+    </p>
     <Button.Group>
       <BackupCodesList codes={codes} />
       <DownloadCodes codes={codes} />

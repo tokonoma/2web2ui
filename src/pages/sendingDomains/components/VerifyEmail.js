@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Modal } from 'src/components';
-import { Panel,  TextField, Grid } from '@sparkpost/matchbox';
+import { Panel, TextField, Grid } from '@sparkpost/matchbox';
 import { Button } from 'src/components/matchbox';
 import { selectHasAnyoneAtDomainVerificationEnabled } from 'src/selectors/account';
 
@@ -14,14 +14,14 @@ import * as sendingDomainsActions from 'src/actions/sendingDomains';
 
 export class VerifyEmail extends Component {
   state = {
-    localPart: ''
-  }
+    localPart: '',
+  };
 
   verifyWithAbuse = () => {
     const { id, subaccount, verifyAbuse } = this.props;
 
     return verifyAbuse({ id, subaccount }).then(this.onVerifySuccess(`abuse@${id}`));
-  }
+  };
 
   verifyWithCustom = () => {
     const { id, subaccount, verifyMailbox } = this.props;
@@ -32,19 +32,20 @@ export class VerifyEmail extends Component {
       return this.setState({ error });
     }
 
-    return verifyMailbox({ id, mailbox: localPart, subaccount })
-      .then(this.onVerifySuccess(`${localPart}@${id}`));
-  }
+    return verifyMailbox({ id, mailbox: localPart, subaccount }).then(
+      this.onVerifySuccess(`${localPart}@${id}`),
+    );
+  };
 
   verifyWithPostmaster = () => {
     const { id, subaccount, verifyPostmaster } = this.props;
 
     return verifyPostmaster({ id, subaccount }).then(this.onVerifySuccess(`postmaster@${id}`));
-  }
+  };
 
-  onVerifySuccess = (email) => () => {
+  onVerifySuccess = email => () => {
     this.props.showAlert({ type: 'success', message: `Email sent to ${email}` });
-  }
+  };
 
   renderAllowAnyoneAt = () => {
     const { id } = this.props;
@@ -52,7 +53,10 @@ export class VerifyEmail extends Component {
 
     return (
       <Panel.Section>
-        <p>Start sending email from this domain by sending a verification email to any mailbox on your domain using the form below.</p>
+        <p>
+          Start sending email from this domain by sending a verification email to any mailbox on
+          your domain using the form below.
+        </p>
         <Grid>
           <Grid.Column xs={6}>
             <div>
@@ -67,63 +71,72 @@ export class VerifyEmail extends Component {
             </div>
           </Grid.Column>
           <Grid.Column xs={6}>
-            <div className={styles.ButtonColumn}>{this.renderVerifyButton(this.verifyWithCustom)}</div>
+            <div className={styles.ButtonColumn}>
+              {this.renderVerifyButton(this.verifyWithCustom)}
+            </div>
           </Grid.Column>
         </Grid>
       </Panel.Section>
     );
-  }
+  };
 
-  onChange = (event) => {
+  onChange = event => {
     this.setState({
-      localPart: event.currentTarget.value
+      localPart: event.currentTarget.value,
     });
-  }
+  };
 
   onBlur = ({ currentTarget }) => {
     this.setState({ error: required(currentTarget.value) });
-  }
+  };
 
   renderAllowMailboxVerification = () => {
     const { id } = this.props;
 
     return (
       <Panel.Section>
-        <p>Start sending email from this domain by sending a verification email to one of the addresses below.</p>
+        <p>
+          Start sending email from this domain by sending a verification email to one of the
+          addresses below.
+        </p>
         <Grid>
           <Grid.Column xs={6}>
-            <p><strong>{`postmaster@${id}`}</strong></p>
+            <p>
+              <strong>{`postmaster@${id}`}</strong>
+            </p>
           </Grid.Column>
           <Grid.Column xs={6}>
-            <div className={styles.ButtonColumn}> {this.renderVerifyButton(this.verifyWithPostmaster)} </div>
+            <div className={styles.ButtonColumn}>
+              {' '}
+              {this.renderVerifyButton(this.verifyWithPostmaster)}{' '}
+            </div>
           </Grid.Column>
         </Grid>
         <Grid>
           <Grid.Column xs={6}>
-            <p><strong>{`abuse@${id}`}</strong></p>
+            <p>
+              <strong>{`abuse@${id}`}</strong>
+            </p>
           </Grid.Column>
           <Grid.Column xs={6}>
-            <div className={styles.ButtonColumn}>{this.renderVerifyButton(this.verifyWithAbuse)}</div>
+            <div className={styles.ButtonColumn}>
+              {this.renderVerifyButton(this.verifyWithAbuse)}
+            </div>
           </Grid.Column>
         </Grid>
       </Panel.Section>
     );
-  }
+  };
 
-  renderVerifyButton = (eventHandler) => {
+  renderVerifyButton = eventHandler => {
     const { submitting } = this.props;
 
     return (
-      <Button
-        plain
-        disabled={submitting}
-        onClick={eventHandler}
-        color='orange'
-      >
+      <Button plain disabled={submitting} onClick={eventHandler} color="orange">
         {submitting ? 'Sending Email...' : 'Send Email'}
       </Button>
     );
-  }
+  };
 
   render() {
     const { open, onCancel, hasAnyoneAtEnabled } = this.props;
@@ -133,7 +146,11 @@ export class VerifyEmail extends Component {
 
     return (
       <Modal open={open} onClose={onCancel}>
-        <Panel title='Verify through Email' accent actions={[{ content: 'Close', onClick: onCancel, color: 'orange' }]}>
+        <Panel
+          title="Verify through Email"
+          accent
+          actions={[{ content: 'Close', onClick: onCancel, color: 'orange' }]}
+        >
           {renderVerification}
         </Panel>
       </Modal>
@@ -141,9 +158,9 @@ export class VerifyEmail extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   submitting: state.sendingDomains.verifyEmailLoading,
-  hasAnyoneAtEnabled: selectHasAnyoneAtDomainVerificationEnabled(state)
+  hasAnyoneAtEnabled: selectHasAnyoneAtDomainVerificationEnabled(state),
 });
 
 export default connect(mapStateToProps, { ...sendingDomainsActions, showAlert })(VerifyEmail);

@@ -3,26 +3,18 @@ import { UnstyledLink } from '@sparkpost/matchbox';
 import { Button } from 'src/components/matchbox';
 import { CheckCircleOutline } from '@sparkpost/matchbox-icons';
 
-const SaveAndPublish = (props) => {
-  const {
-    onClick,
-    className,
-    children
-  } = props;
+const SaveAndPublish = props => {
+  const { onClick, className, children } = props;
 
   return (
     <div className={className}>
-      {children &&
-        <Button
-          onClick={onClick}
-          title="Opens a dialog"
-          data-id="action-save-and-publish"
-        >
+      {children && (
+        <Button onClick={onClick} title="Opens a dialog" data-id="action-save-and-publish">
           {children}
         </Button>
-      }
+      )}
 
-      {!children &&
+      {!children && (
         <UnstyledLink
           onClick={onClick}
           role="button"
@@ -30,11 +22,11 @@ const SaveAndPublish = (props) => {
           title="Opens a dialog"
           data-id="action-save-and-publish"
         >
-          <CheckCircleOutline/>
+          <CheckCircleOutline />
 
           <span>Save and Publish</span>
         </UnstyledLink>
-      }
+      )}
     </div>
   );
 };

@@ -5,9 +5,13 @@ function noop() {}
 
 export default function DeleteButton({ disabled = false, name = null, onClick = noop }) {
   // Display nothing when disabled
-  if (disabled) { return null; }
+  if (disabled) {
+    return null;
+  }
 
-  const handleClick = (event) => { onClick(name); };
+  const handleClick = () => {
+    onClick(name);
+  };
 
   return (
     <Button destructive size="small" name={name} onClick={handleClick}>

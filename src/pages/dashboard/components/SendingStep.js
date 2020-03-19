@@ -5,7 +5,7 @@ import styles from './SendingStep.module.scss';
 import { useGuideContext } from './GettingStartedGuide';
 import { Card, CardContent, CardActions } from 'src/components';
 import ButtonWrapper from 'src/components/buttonWrapper';
-import {  Grid } from '@sparkpost/matchbox';
+import { Grid } from '@sparkpost/matchbox';
 import { Button } from 'src/components/matchbox';
 import { SENDING_STEP_LIST } from '../constants';
 
