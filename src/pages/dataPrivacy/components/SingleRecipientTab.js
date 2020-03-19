@@ -47,7 +47,6 @@ export function SingleRecipientTab(props) {
         props
           .submitRTBFRequest({
             recipients: [values.address],
-            request_date: new Date().toISOString(),
             subaccountId: subaccountId,
             include_subaccounts: include_subaccounts,
           })
@@ -58,7 +57,6 @@ export function SingleRecipientTab(props) {
         props
           .submitOptOutRequest({
             recipients: [values.address],
-            request_date: new Date().toISOString(),
             subaccountId: subaccountId,
             include_subaccounts: include_subaccounts,
           })
@@ -116,9 +114,7 @@ const formOptions = {
 };
 const mapStateToProps = state => {
   return {
-    dataPrivacyRequestSuccess: state.dataPrivacy.dataPrivacyRequestSuccess,
     dataPrivacyRequestPending: state.dataPrivacy.dataPrivacyRequestPending,
-    dataPrivacyRequestError: state.dataPrivacy.dataPrivacyRequestError,
   };
 };
 export default connect(mapStateToProps, { submitRTBFRequest, submitOptOutRequest })(
