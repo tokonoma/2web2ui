@@ -1,6 +1,6 @@
 import React from 'react';
-import { ScreenReaderOnly, TextField } from '@sparkpost/matchbox';
-import { Label, Panel } from 'src/components/matchbox';
+import { ScreenReaderOnly } from '@sparkpost/matchbox';
+import { Label, Panel, TextField } from 'src/components/matchbox';
 import { Search } from '@sparkpost/matchbox-icons';
 import { getRandomExampleSearch } from './helpers/exampleSearch';
 import styles from './FilterBox.module.scss';

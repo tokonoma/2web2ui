@@ -66,8 +66,6 @@ exports[`CopyField Component should pass rest of attrs to TextField 1`] = `
   onFocus={[Function]}
   readOnly={true}
   required={true}
-  resize="both"
-  type="text"
 />
 `;
 
@@ -105,7 +103,5 @@ exports[`CopyField Component should render - no props 1`] = `
   name="copy-field"
   onFocus={[Function]}
   readOnly={true}
-  resize="both"
-  type="text"
 />
 `;

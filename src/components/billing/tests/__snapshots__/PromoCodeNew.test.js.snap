@@ -17,8 +17,6 @@ exports[`promoCode should render correctly 1`] = `
   label="Promo Code"
   name="promo"
   onChange={[Function]}
-  resize="both"
   suffix={null}
-  type="text"
 />
 `;

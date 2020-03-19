@@ -41,7 +41,6 @@ exports[`Component: BackupCodesModal should change button text to Generating... 
               onChange={[MockFunction]}
               placeholder="Password"
               required={true}
-              resize="both"
               type="password"
               value=""
             />
@@ -112,7 +111,6 @@ exports[`Component: BackupCodesModal should render correctly 1`] = `
               onChange={[Function]}
               placeholder="Password"
               required={true}
-              resize="both"
               type="password"
               value=""
             />
@@ -239,7 +237,6 @@ exports[`Component: BackupCodesModal should show password error when exists 1`] 
               onChange={[MockFunction]}
               placeholder="Password"
               required={true}
-              resize="both"
               type="password"
               value=""
             />

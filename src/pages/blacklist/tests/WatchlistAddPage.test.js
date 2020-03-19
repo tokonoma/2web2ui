@@ -64,8 +64,7 @@ describe('WatchlistAddPage', () => {
     fireEvent.click(save);
 
     expect(watchlistAdd).toBeCalledWith(resource);
-    // eslint-disable-next-line jest/valid-expect-in-promise
-    promise.then(() => {
+    return promise.then(() => {
       expect(mockHistory.push).toBeCalledWith('/blacklist/watchlist');
       expect(mockShowAlert).toBeCalledWith({
         type: 'success',
@@ -86,9 +85,7 @@ describe('WatchlistAddPage', () => {
     fireEvent.click(saveAndContinue);
 
     expect(watchlistAdd).toBeCalledWith(resource);
-
-    // eslint-disable-next-line jest/valid-expect-in-promise
-    promise.then(() => {
+    return promise.then(() => {
       expect(mockHistory.push).not.toBeCalledWith('/blacklist/watchlist');
       expect(mockShowAlert).toBeCalledWith({
         type: 'success',

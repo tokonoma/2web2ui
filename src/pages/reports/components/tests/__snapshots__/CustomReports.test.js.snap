@@ -13,8 +13,6 @@ exports[`Component: CustomReports should render 1`] = `
         labelHidden={true}
         onChange={[Function]}
         placeholder="Untitled Report"
-        resize="both"
-        type="text"
         value=""
       />
     </div>

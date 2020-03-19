@@ -1,12 +1,15 @@
 import { shallow } from 'enzyme';
 import React from 'react';
+import { useHibana } from 'src/context/HibanaContext';
 import { TemplateTypeahead } from '../TemplateTypeahead';
 
 const results = [
   { id: 'tmpl-1', name: 'Template 1' },
   { id: 'tmpl-2', name: 'Template 2' },
-  { id: 'tmpl-3', name: 'Template 3' }
+  { id: 'tmpl-3', name: 'Template 3' },
 ];
+
+jest.mock('src/context/HibanaContext');
 
 describe('Template Typeahead', () => {
   let wrapper;
@@ -15,7 +18,7 @@ describe('Template Typeahead', () => {
     const props = {
       onChange: jest.fn(),
       listTemplates: jest.fn(),
-      results: []
+      results: [],
     };
 
     wrapper = shallow(<TemplateTypeahead {...props} />);
@@ -26,6 +29,7 @@ describe('Template Typeahead', () => {
   });
 
   it('should render if account has no templates', () => {
+    useHibana.mockImplementationOnce(() => [{ isHibanaEnabled: false }]);
     wrapper.setProps({ hasTemplates: false });
     expect(wrapper.html()).not.toEqual(null);
   });
@@ -36,22 +40,31 @@ describe('Template Typeahead', () => {
 
   it('should not get templates if list already exists', () => {
     jest.clearAllMocks();
-    wrapper.setProps({ results: ['1', '2']});
+    wrapper.setProps({ results: ['1', '2'] });
     wrapper.instance().componentDidMount();
     expect(wrapper.instance().props.listTemplates).not.toHaveBeenCalled();
   });
 
   it('should render itemToString correctly', () => {
     wrapper.setProps({ hasTemplates: true });
-    const noItem = wrapper.find('Typeahead').props().itemToString();
-    const item = wrapper.find('Typeahead').props().itemToString({ id: 'tmpl-10101' });
+    const noItem = wrapper
+      .find('Typeahead')
+      .props()
+      .itemToString();
+    const item = wrapper
+      .find('Typeahead')
+      .props()
+      .itemToString({ id: 'tmpl-10101' });
     expect(noItem).toEqual('');
     expect(item).toEqual('tmpl-10101');
   });
 
   it('should renderItem correctly', () => {
     wrapper.setProps({ hasTemplates: true });
-    const item = wrapper.find('Typeahead').props().renderItem({ id: 'tmpl-10101' });
+    const item = wrapper
+      .find('Typeahead')
+      .props()
+      .renderItem({ id: 'tmpl-10101' });
     expect(item).toMatchSnapshot();
   });
 

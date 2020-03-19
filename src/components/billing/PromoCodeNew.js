@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { TextField } from '@sparkpost/matchbox';
-import { Button } from 'src/components/matchbox';
 import { LoadingSVG } from 'src/components';
+import { Button, TextField } from 'src/components/matchbox';
 import _ from 'lodash';
 
 const PromoCodeNew = ({ promoCodeObj, handlePromoCode }) => {
@@ -27,6 +26,7 @@ const PromoCodeNew = ({ promoCodeObj, handlePromoCode }) => {
   const renderLoading = condition => (condition ? <LoadingSVG size="XSmall" /> : null);
   const isDisabled = () => promoPending || _.has(selectedPromo, 'promoCode');
   const displayErrorMessage = () => (promoError ? promoError.message : '');
+
   return (
     <TextField
       id="promo-code"

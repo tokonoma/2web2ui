@@ -2,8 +2,6 @@
 
 exports[`FromEmailInput renders text field 1`] = `
 <TextField
-  resize="both"
-  type="text"
   value="test@example.com"
 />
 `;
@@ -11,16 +9,12 @@ exports[`FromEmailInput renders text field 1`] = `
 exports[`FromEmailInput renders text field with an error when not open 1`] = `
 <TextField
   error="Oh no!"
-  resize="both"
-  type="text"
   value="test@example.com"
 />
 `;
 
 exports[`FromEmailInput renders text field without an error when open 1`] = `
 <TextField
-  resize="both"
-  type="text"
   value="test@example.com"
 />
 `;

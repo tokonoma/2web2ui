@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react';
-import { Grid, TextField } from '@sparkpost/matchbox';
-import { Panel, Select } from 'src/components/matchbox';
+import { Grid } from '@sparkpost/matchbox';
 import PropTypes from 'prop-types';
+import { Panel, Select, TextField } from 'src/components/matchbox';
 import { onEnter } from 'src/helpers/keyEvents';
 import { stringToArray } from 'src/helpers/string';
 import { batchStatusOptions } from '../constants/integration';

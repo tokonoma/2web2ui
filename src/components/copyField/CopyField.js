@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import copy from 'copy-to-clipboard';
-
-import { TextField, Tooltip } from '@sparkpost/matchbox';
-import { Button } from 'src/components/matchbox';
+import { Tooltip } from '@sparkpost/matchbox';
 import { ContentCopy } from '@sparkpost/matchbox-icons';
+import { Button, TextField } from 'src/components/matchbox';
 
 /**
  * Reusable TextField with a copy button for strings

@@ -10,12 +10,11 @@ import {
   addFilters,
 } from 'src/actions/messageEvents';
 import { selectMessageEventsSearchOptions } from 'src/selectors/messageEvents';
-import { TextField } from '@sparkpost/matchbox';
-import { Panel } from 'src/components/matchbox';
 import AdvancedFiltersModal from './AdvancedFiltersModal';
 import ActiveFilters from './ActiveFilters';
 import ShareModal from '../../components/ShareModal';
 import DatePicker from 'src/components/datePicker/DatePicker';
+import { Panel, TextField } from 'src/components/matchbox';
 import { recipientEmail as recipientEmailValidator } from 'src/helpers/validation';
 import { parseSearch } from 'src/helpers/messageEvents';
 import { stringToArray } from 'src/helpers/string';

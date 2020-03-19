@@ -129,9 +129,7 @@ exports[`Component: TestDetails renders correctly 1`] = `
           id="textfield-placement-search"
           onChange={[Function]}
           placeholder="Mailbox Provider or Region"
-          resize="both"
           suffix={<Search />}
-          type="text"
         />
       </div>
     </div>

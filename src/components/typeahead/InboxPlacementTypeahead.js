@@ -67,7 +67,7 @@ export const InboxPlacementTypeahead = ({
       itemToString={item => (item ? item.value : '')}
       placeholder="Filter by Domain, IP, Mailbox Provider and Region"
       errorInLabel={false}
-      disabled={trendsFilterValuesloading || trendsFilterValuesError}
+      disabled={Boolean(trendsFilterValuesloading || trendsFilterValuesError)}
       error={trendsFilterValuesError}
       name="inbox-placement-typeahead"
       results={results}
