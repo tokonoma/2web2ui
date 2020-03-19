@@ -13,7 +13,7 @@ describe('Page: Single Recipient Tab', () => {
   it('renders correctly', () => {
     const wrapper = subject();
     expect(wrapper.find({ component: RadioGroup, name: 'requestType' })).toExist();
-    expect(wrapper.find({ component: TextFieldWrapper, name: 'address' })).toExist();
+    expect(wrapper.find({ component: TextFieldWrapper, name: 'email' })).toExist();
     expect(wrapper.find('SubaccountSection')).toExist();
   });
 });

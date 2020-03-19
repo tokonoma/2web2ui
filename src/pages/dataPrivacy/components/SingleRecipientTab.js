@@ -75,10 +75,6 @@ export function SingleRecipientTab(props) {
             disabled={props.dataPrivacyRequestPending}
             validate={[required]}
           />
-          <label htmlFor="email" className={styles.ScreenReaderOnly}>
-            Recipient Email Address
-          </label>
-
           <Field
             name="email"
             style={{ width: '60%' }}
