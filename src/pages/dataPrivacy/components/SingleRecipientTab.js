@@ -75,7 +75,7 @@ export function SingleRecipientTab(props) {
             name="requestType"
             title="Select Compliance Type"
             options={requestTypes}
-            disabled={false}
+            disabled={props.dataPrivacyRequestPending}
             validate={[required]}
           />
           <Label id="email-address-field">Email Address</Label>
@@ -86,18 +86,19 @@ export function SingleRecipientTab(props) {
             style={{ width: '60%' }}
             component={TextFieldWrapper}
             placeholder={'email@example.com'}
+            disabled={props.dataPrivacyRequestPending}
             validate={[required, email, maxLength(254)]}
             normalize={(value = '') => value.trim()}
           />
           <SubaccountSection
             newTemplate={true}
-            disabled={false}
+            disabled={props.dataPrivacyRequestPending}
             validate={[required]}
             createOptions={createOptions}
           />
 
           <ButtonWrapper>
-            <Button color="orange" type="submit">
+            <Button color="orange" type="submit" disabled={props.dataPrivacyRequestPending}>
               Submit Request
             </Button>
             <div className={styles.CancelButtonContainer}>
@@ -113,6 +114,13 @@ const formOptions = {
   form: 'DATA_PRIVACY_SINGLE_RECIPIENT',
   enableReinitialize: true,
 };
-export default connect(null, { submitRTBFRequest, submitOptOutRequest })(
+const mapStateToProps = state => {
+  return {
+    dataPrivacyRequestSuccess: state.dataPrivacy.dataPrivacyRequestSuccess,
+    dataPrivacyRequestPending: state.dataPrivacy.dataPrivacyRequestPending,
+    dataPrivacyRequestError: state.dataPrivacy.dataPrivacyRequestError,
+  };
+};
+export default connect(mapStateToProps, { submitRTBFRequest, submitOptOutRequest })(
   reduxForm(formOptions)(SingleRecipientTab),
 );
