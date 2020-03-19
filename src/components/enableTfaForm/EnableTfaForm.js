@@ -83,6 +83,7 @@ export class EnableTfaForm extends React.Component {
                 Generate a code from your newly-activated 2FA app to confirm that you're all set up.
               </p>
               <TextField
+                id="tfa-setup-passcode"
                 required={true}
                 data-lpignore={true}
                 label="Passcode"

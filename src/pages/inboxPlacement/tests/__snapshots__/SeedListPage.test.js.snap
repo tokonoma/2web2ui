@@ -83,6 +83,7 @@ exports[`Page: SeedList tests renders page correctly with defaults 1`] = `
         </p>
       </div>
       <TextField
+        id="seed-list"
         multiline={true}
         readOnly={true}
         resize="vertical"
@@ -118,6 +119,7 @@ exports[`Page: SeedList tests renders page correctly with defaults 1`] = `
 
 exports[`Page: SeedList tests renders page with seeds 1`] = `
 <TextField
+  id="seed-list"
   multiline={true}
   readOnly={true}
   resize="vertical"

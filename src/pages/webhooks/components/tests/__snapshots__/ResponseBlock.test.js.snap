@@ -7,6 +7,7 @@ exports[`Webhooks ResponseBlock Component should render correctly with a respons
   </p>
   <code>
     <TextField
+      id="webhook-test-response"
       multiline={true}
       readOnly={true}
       resize="vertical"

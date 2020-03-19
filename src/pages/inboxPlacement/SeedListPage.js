@@ -54,7 +54,14 @@ export class SeedListPage extends React.Component {
               <UnstyledLink to="/inbox-placement">Inbox Placement</UnstyledLink> to see the results.
             </p>
           </div>
-          <TextField multiline value={seeds.join('\n')} resize="vertical" rows={10} readOnly />
+          <TextField
+            id="seed-list"
+            multiline
+            value={seeds.join('\n')}
+            resize="vertical"
+            rows={10}
+            readOnly
+          />
           <div>
             <span className={styles.CopyButton}>
               <CopyToClipboard primary value={seeds.join(',')} label="Copy List" />

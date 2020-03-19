@@ -6,6 +6,7 @@ const FromEmailWrapper = ({ input, meta, ...rest }) => {
 
   return (
     <FromEmail
+      id={input.name}
       {...input}
       error={!active && touched && error ? error : undefined}
       {...rest}

@@ -47,6 +47,7 @@ const IntegrationPageFilter = ({ disabled, initialValues = {}, onChange }) => {
         </Grid.Column>
         <Grid.Column xs={12} md={8}>
           <TextField
+            id="signals-integration-batch-id-filter"
             labelHidden
             name="batchIds"
             placeholder="Filter by batch ID"

@@ -87,6 +87,7 @@ export default class BackupCodesModal extends Component {
                 <Grid.Column xs={12} md={6}>
                   {!generatedCodes && (
                     <TextField
+                      id="tfa-backup-codes-generate-password"
                       required
                       type="password"
                       onChange={this.handleInputChange}

@@ -2,6 +2,7 @@
 
 exports[`Algolia Search component should render text field with user entered search text 1`] = `
 <TextField
+  id="algolia-search-term"
   onChange={[Function]}
   placeholder="Have a question?  Ask or enter a search term here."
   value="example search"
@@ -10,6 +11,7 @@ exports[`Algolia Search component should render text field with user entered sea
 
 exports[`Algolia Search component should render with empty text field 1`] = `
 <TextField
+  id="algolia-search-term"
   onChange={[Function]}
   placeholder="Have a question?  Ask or enter a search term here."
   value=""

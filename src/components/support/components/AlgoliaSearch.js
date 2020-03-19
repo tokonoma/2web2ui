@@ -38,6 +38,7 @@ export class AlgoliaSearch extends Component {
   render() {
     return (
       <TextField
+        id="algolia-search-term"
         onChange={this.handleChange}
         placeholder="Have a question?  Ask or enter a search term here."
         value={this.state.searchText}

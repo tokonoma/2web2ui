@@ -68,6 +68,7 @@ export function CustomReports(props) {
       <div className={styles.Wrap}>
         <div className={styles.NameWrapper}>
           <TextField
+            id="custom-report-name"
             label="Report Name"
             labelHidden
             placeholder="Untitled Report"

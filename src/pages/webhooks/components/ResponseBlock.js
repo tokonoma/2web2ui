@@ -13,6 +13,7 @@ const ResponseBlock = ({ testSent, testResponse }) => {
       <p>The server responded like this:</p>
       <code>
         <TextField
+          id="webhook-test-response"
           multiline
           readOnly
           value={JSON.stringify(testResponse, null, '  ')}

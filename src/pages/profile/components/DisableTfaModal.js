@@ -47,6 +47,7 @@ export default class DisableTfaModal extends Component {
               <Grid>
                 <Grid.Column xs={12} md={6}>
                   <TextField
+                    id="tfa-disable-password"
                     type="password"
                     error={this.state.showErrors && toggleError ? 'Incorrect password' : ''}
                     placeholder="Enter your password"

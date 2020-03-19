@@ -116,6 +116,7 @@ export class Typeahead extends Component {
           Reports Filter Typeahead
         </label>
         <TextField
+          id="report-options-typeahead"
           {...getInputProps({
             placeholder,
             onFocus: clearSelection,

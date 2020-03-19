@@ -72,7 +72,7 @@ export const IncidentsCollection = props => {
   const EmptyComponent = () => {
     const textFieldComponent = (
       <div className={styles.FilterBox}>
-        <TextField disabled suffix={<Search />} />
+        <TextField disabled id="disabled-blacklist-search" suffix={<Search />} />
       </div>
     );
     return (
