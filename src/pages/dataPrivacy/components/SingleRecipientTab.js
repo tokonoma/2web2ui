@@ -100,8 +100,8 @@ export function SingleRecipientTab(props) {
             <Button color="orange" type="submit" disabled={props.dataPrivacyRequestPending}>
               Submit Request
             </Button>
-            <div className={styles.CancelButtonContainer}>
-              <Button onClick={props.reset}>Cancel</Button>
+            <div className={styles.ClearButtonContainer}>
+              <Button onClick={props.reset}>Clear</Button>
             </div>
           </ButtonWrapper>
         </form>
