@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { tokens } from '@sparkpost/design-tokens-hibana';
 import { Grid } from '@sparkpost/matchbox';
-
-import { Panel } from 'src/components/matchbox';
+import { Box, Panel } from 'src/components/matchbox';
 import { PanelLoading } from 'src/components';
 import { Percent } from 'src/components/formatters';
 import { formatDateTime, relativeDateOptionsIndexed } from 'src/helpers/date';
@@ -41,29 +41,31 @@ export function EngagementSummary({
 
   return (
     <Panel className={styles.EngagementSummary} data-id="summary-panel">
-      <Grid>
-        <Grid.Column xs={12} md={3} xl={2}>
-          <h1 data-id="unique-open-rate">
-            <Percent value={safeRate(opens, accepted)} />
-          </h1>
-          <h6>Unique Open Rate</h6>
-        </Grid.Column>
-        <Grid.Column xs={12} md={3} xl={2}>
-          <h1 data-id="unique-click-rate">
-            <Percent value={safeRate(clicks, accepted)} />
-          </h1>
-          <h6>Unique Click Rate</h6>
-        </Grid.Column>
-        <Grid.Column xs={12} md={6} xl={8}>
-          <p>
-            Of <strong data-id="count-sent">{formatFullNumber(sent)}</strong> sent recipients,{' '}
-            <strong data-id="count-accepted">{formatFullNumber(accepted)}</strong> messages were
-            accepted, <strong data-id="count-opened">{formatFullNumber(opens)}</strong> were opened
-            and <strong data-id="count-unique-clicks">{formatFullNumber(clicks)}</strong> were
-            clicked {timeRange}.
-          </p>
-        </Grid.Column>
-      </Grid>
+      <Box padding={tokens.spacing_500}>
+        <Grid>
+          <Grid.Column xs={12} md={3} xl={2}>
+            <h1 data-id="unique-open-rate">
+              <Percent value={safeRate(opens, accepted)} />
+            </h1>
+            <h6>Unique Open Rate</h6>
+          </Grid.Column>
+          <Grid.Column xs={12} md={3} xl={2}>
+            <h1 data-id="unique-click-rate">
+              <Percent value={safeRate(clicks, accepted)} />
+            </h1>
+            <h6>Unique Click Rate</h6>
+          </Grid.Column>
+          <Grid.Column xs={12} md={6} xl={8}>
+            <p>
+              Of <strong data-id="count-sent">{formatFullNumber(sent)}</strong> sent recipients,{' '}
+              <strong data-id="count-accepted">{formatFullNumber(accepted)}</strong> messages were
+              accepted, <strong data-id="count-opened">{formatFullNumber(opens)}</strong> were
+              opened and <strong data-id="count-unique-clicks">{formatFullNumber(clicks)}</strong>{' '}
+              were clicked {timeRange}.
+            </p>
+          </Grid.Column>
+        </Grid>
+      </Box>
     </Panel>
   );
 }
