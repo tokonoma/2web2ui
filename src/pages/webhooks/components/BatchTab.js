@@ -5,8 +5,7 @@ import _ from 'lodash';
 import { getBatches } from 'src/actions/webhooks';
 import PanelLoading from 'src/components/panelLoading/PanelLoading';
 
-import { Panel } from '@sparkpost/matchbox';
-import { Button } from 'src/components/matchbox';
+import { Button, Panel } from 'src/components/matchbox';
 import { TableCollection, Empty } from 'src/components';
 import { selectWebhookBatches } from 'src/selectors/webhooks';
 

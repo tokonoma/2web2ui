@@ -1,5 +1,5 @@
 import React from 'react';
-import { Panel } from '@sparkpost/matchbox';
+import { Panel } from 'src/components/matchbox';
 import SummaryTable, { Column } from 'src/components/summaryTable';
 
 const data = [

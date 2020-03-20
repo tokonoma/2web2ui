@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Panel, Grid } from '@sparkpost/matchbox';
+import { Grid } from '@sparkpost/matchbox';
+import { Panel } from 'src/components/matchbox';
 import { Percent } from 'src/components';
 import { formatDateTime, relativeDateOptionsIndexed } from 'src/helpers/date';
 
@@ -22,23 +23,25 @@ export class MetricsSummary extends Component {
     const { children, rateValue, rateTitle, secondaryMessage } = this.props;
 
     return (
-      <Panel className={styles.Panel}>
-        <Grid>
-          <Grid.Column xs={12} md={3} xl={2}>
-            <div className={styles.panelvertical}>
-              <h1 className={styles.RateValue}><Percent value={rateValue} /></h1>
-              <h6 className={styles.RateTitle}>{rateTitle}</h6>
-            </div>
-          </Grid.Column>
-          <Grid.Column>
-            <div className={styles.panelvertical}>
-              <p className={styles.Description}>
-                {children}{this.renderDate()}.
-              </p>
-              {secondaryMessage && <p className={styles.Secondary}>{secondaryMessage}</p>}
-            </div>
-          </Grid.Column>
-        </Grid>
+      <Panel className={styles.Panel} p={'500'}>
+        <Panel.Section>
+          <Grid>
+            <Grid.Column xs={12} md={3} xl={2}>
+              <div className={styles.panelvertical}>
+                <h1 className={styles.RateValue}><Percent value={rateValue} /></h1>
+                <h6 className={styles.RateTitle}>{rateTitle}</h6>
+              </div>
+            </Grid.Column>
+            <Grid.Column>
+              <div className={styles.panelvertical}>
+                <p className={styles.Description}>
+                  {children}{this.renderDate()}.
+                </p>
+                {secondaryMessage && <p className={styles.Secondary}>{secondaryMessage}</p>}
+              </div>
+            </Grid.Column>
+          </Grid>
+        </Panel.Section>
       </Panel>
     );
   }

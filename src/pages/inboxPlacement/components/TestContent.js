@@ -1,5 +1,6 @@
 import React from 'react';
-import { Panel, CodeBlock, Tabs, Grid } from '@sparkpost/matchbox';
+import {CodeBlock, Tabs, Grid } from '@sparkpost/matchbox';
+import { Panel } from 'src/components/matchbox';
 import useTabs from 'src/hooks/useTabs';
 import { formatBytes } from 'src/helpers/units';
 import InfoBlock from './InfoBlock';

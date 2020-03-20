@@ -1,8 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetch as fetchAccount, renewAccount } from 'src/actions/account';
-import { Panel } from '@sparkpost/matchbox';
-import { Button } from 'src/components/matchbox';
+import { Button, Panel } from 'src/components/matchbox';
 import { showAlert } from 'src/actions/globalAlert';
 import config from 'src/config';
 import Brightback from 'src/components/brightback/Brightback';

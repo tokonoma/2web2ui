@@ -1,7 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Panel } from '@sparkpost/matchbox';
+import { Panel } from 'src/components/matchbox';
 import EnableTfaForm from 'src/components/enableTfaForm/EnableTfaForm';
 import RedirectAfterLogin from './components/RedirectAfterLogin';
 import { login } from 'src/actions/auth';

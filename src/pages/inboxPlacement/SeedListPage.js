@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Page, Panel, TextField, UnstyledLink } from '@sparkpost/matchbox';
+import { Page, TextField, UnstyledLink } from '@sparkpost/matchbox';
+import { Panel } from 'src/components/matchbox';
 import { FileDownload } from '@sparkpost/matchbox-icons/matchbox-icons';
 
 import { getSeedList } from 'src/actions/inboxPlacement';

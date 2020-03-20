@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Page, Panel } from '@sparkpost/matchbox';
+import { Page } from '@sparkpost/matchbox';
+import { Panel } from 'src/components/matchbox';
 import SmtpDetails from 'src/components/smtpDetails/SmtpDetails';
 import DefaultTrackingForm from './components/TrackingToggle';
 import { update as updateAccount } from 'src/actions/account';

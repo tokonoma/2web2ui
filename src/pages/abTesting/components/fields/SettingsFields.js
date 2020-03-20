@@ -1,6 +1,6 @@
 import React from 'react';
 import { Field } from 'redux-form';
-import { Panel } from '@sparkpost/matchbox';
+import { Panel } from 'src/components/matchbox';
 import { TextFieldWrapper, RadioGroup } from 'src/components/reduxFormWrappers';
 import { numberBetween, integer, minNumber } from 'src/helpers/validation';
 

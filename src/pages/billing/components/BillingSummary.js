@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Panel, UnstyledLink } from '@sparkpost/matchbox';
+import { UnstyledLink } from '@sparkpost/matchbox';
+import { Panel } from 'src/components/matchbox';
 import { Modal, LabelledValue } from 'src/components';
 import {
   PremiumBanner,

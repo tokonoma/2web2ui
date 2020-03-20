@@ -1,7 +1,8 @@
 import React, { useEffect, useCallback } from 'react';
 import { connect } from 'react-redux';
-import { Grid, Page, Panel } from '@sparkpost/matchbox';
+import { Grid, Page } from '@sparkpost/matchbox';
 
+import { Panel } from 'src/components/matchbox';
 import { Loading } from 'src/components';
 import {
   getInboxPlacementByProvider,

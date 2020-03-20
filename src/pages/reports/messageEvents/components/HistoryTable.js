@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import { TableCollection } from 'src/components';
-import { Panel } from '@sparkpost/matchbox';
+import { Panel } from 'src/components/matchbox';
 import { Header, Row, TableWrapper } from './TableElements';
 
 import _ from 'lodash';

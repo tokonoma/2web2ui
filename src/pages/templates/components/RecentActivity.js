@@ -1,6 +1,6 @@
 import React from 'react';
 import _ from 'lodash';
-import { Panel } from '@sparkpost/matchbox';
+import { Panel } from 'src/components/matchbox';
 import { FileEdit, CheckCircle } from '@sparkpost/matchbox-icons';
 import { formatDate } from 'src/helpers/date';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';

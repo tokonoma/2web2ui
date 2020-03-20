@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
-import { Grid, Panel } from '@sparkpost/matchbox';
+import { Grid } from '@sparkpost/matchbox';
+import { Panel } from 'src/components/matchbox';
 import { Loading, PieChart } from 'src/components';
 import { generateColors } from 'src/helpers/color';
 import styles from './AcceptedChart.module.scss';

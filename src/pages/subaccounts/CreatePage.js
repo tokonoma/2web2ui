@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
-import { Page, Panel } from '@sparkpost/matchbox';
+import { Page } from '@sparkpost/matchbox';
+import { Panel } from 'src/components/matchbox';
 import { Loading } from 'src/components';
 
 import SubaccountCreateForm from './components/SubaccountCreateForm';

@@ -4,7 +4,8 @@ import { Link, withRouter } from 'react-router-dom';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
 import { selectLatestVersionNumberFromParams, selectIdAndVersionFromParams } from 'src/selectors/abTesting';
 import { LabelledValue, Subaccount } from 'src/components';
-import { ActionList, Popover, Panel } from '@sparkpost/matchbox';
+import { ActionList, Popover } from '@sparkpost/matchbox';
+import { Panel } from 'src/components/matchbox';
 import { ExpandMore } from '@sparkpost/matchbox-icons';
 import StatusTag from './StatusTag';
 

@@ -1,7 +1,6 @@
 import React from 'react';
 
-import { Panel } from '@sparkpost/matchbox';
-
+import { Panel } from 'src/components/matchbox';
 import ToggleBlock from 'src/components/toggleBlock/ToggleBlock';
 
 const ShareWithSubaccounts = ({ domain, onChange }) => {

@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React, { useState, useEffect } from 'react';
-import { Modal, Panel } from '@sparkpost/matchbox';
-import { Button, Label } from 'src/components/matchbox';
+import { Modal } from '@sparkpost/matchbox';
+import { Button, Label, Panel } from 'src/components/matchbox';
 import copy from 'copy-to-clipboard';
 import PageLink from 'src/components/pageLink';
 import { Typeahead, TypeaheadItem } from 'src/components/typeahead/Typeahead';

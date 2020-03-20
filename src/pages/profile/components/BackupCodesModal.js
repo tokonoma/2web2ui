@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import Modal from 'src/components/modals/Modal';
 import BackupCodesView from './BackupCodesView';
-import { Panel, TextField, Grid } from '@sparkpost/matchbox';
-import { Button, Banner } from 'src/components/matchbox';
+import { TextField, Grid } from '@sparkpost/matchbox';
+import { Button, Banner, Panel } from 'src/components/matchbox';
 import styles from './TfaModals.module.scss';
 const initialState = {
   password: '',

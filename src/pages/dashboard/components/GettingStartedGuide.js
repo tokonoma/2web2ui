@@ -1,5 +1,5 @@
 import React, { useState, createContext, useContext } from 'react';
-import { Panel } from '@sparkpost/matchbox';
+import { Panel } from 'src/components/matchbox';
 import { ArrowDownward } from '@sparkpost/matchbox-icons';
 import { GUIDE_IDS } from '../constants';
 import SendingStep from './SendingStep';

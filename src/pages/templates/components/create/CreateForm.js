@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { autofill, Field, formValueSelector } from 'redux-form';
 import { connect } from 'react-redux';
 // Components
-import { Grid, Panel } from '@sparkpost/matchbox';
+import { Grid } from '@sparkpost/matchbox';
+import { Panel } from 'src/components/matchbox';
 import SubaccountSection from 'src/components/subaccountSection';
 import { TextFieldWrapper } from 'src/components';
 import FromEmailWrapper from '../FromEmailWrapper';

@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { authenticate } from 'src/actions/auth';
 import { PageLink, CenteredLogo } from 'src/components';
-import { Panel } from '@sparkpost/matchbox';
+import { Panel } from 'src/components/matchbox';
 import qs from 'query-string';
 
 import config from 'src/config';

@@ -9,7 +9,7 @@ import { hasSubaccounts } from 'src/selectors/subaccounts';
 import { TableCollection, TableHeader, Unit, Loading } from 'src/components';
 import GroupByOption from './GroupByOption';
 import { Empty } from 'src/components';
-import { Panel } from '@sparkpost/matchbox';
+import { Panel } from 'src/components/matchbox';
 import { GROUP_CONFIG } from './tableConfig';
 import AddFilterLink from '../../components/AddFilterLink';
 import _ from 'lodash';

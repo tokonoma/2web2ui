@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Panel } from '@sparkpost/matchbox';
+import { Panel } from 'src/components/matchbox';
 import { PanelLoading, LabelledValue } from 'src/components';
 import * as tfaActions from 'src/actions/tfa';
 import BackupCodesModal from './BackupCodesModal';

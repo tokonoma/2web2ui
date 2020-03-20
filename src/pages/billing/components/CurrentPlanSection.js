@@ -1,5 +1,5 @@
 import React from 'react';
-import { Panel } from '@sparkpost/matchbox';
+import { Panel } from 'src/components/matchbox';
 import PlanPrice from 'src/components/billing/PlanPrice';
 import styles from './CurrentPlanSection.module.scss';
 import { PLAN_TIERS } from 'src/constants';

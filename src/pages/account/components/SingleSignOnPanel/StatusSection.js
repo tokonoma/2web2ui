@@ -1,5 +1,5 @@
 import React from 'react';
-import { Panel } from '@sparkpost/matchbox';
+import { Panel } from 'src/components/matchbox';
 import { ArrowForward } from '@sparkpost/matchbox-icons';
 import { ConfirmationModal } from 'src/components/modals';
 import LabelledValue from 'src/components/labelledValue/LabelledValue';

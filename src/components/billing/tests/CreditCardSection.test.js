@@ -1,6 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import { shallow } from 'enzyme';
+import TestApp from 'src/__testHelpers__/TestApp';
 import CreditCardSection from '../CreditCardSection';
 
 describe('CreditCardSection', () => {
@@ -14,16 +15,19 @@ describe('CreditCardSection', () => {
     },
   };
 
-  const subject = (method = shallow, props) =>
-    method(<CreditCardSection {...defaultProps} {...props} />);
-
   it('should render credit card Summary when credit_card is present', () => {
-    const instance = subject(render);
+    const instance = render(
+      <TestApp>
+        <CreditCardSection {...defaultProps} />
+      </TestApp>,
+    );
+
     expect(instance.queryByText('Pay With Saved Payment Method')).toBeInTheDocument();
     expect(instance.queryByText('Expires 04/2022')).toBeInTheDocument();
   });
+
   it('should render credit card form when credit_card is not present', () => {
-    const instance = subject(shallow, { creditCard: null });
+    const instance = shallow(<CreditCardSection {...defaultProps} creditCard={null} />);
     expect(instance.find('PaymentForm')).toHaveLength(1);
     expect(instance.find('Connect(BillingAddressForm)')).toHaveLength(1);
   });

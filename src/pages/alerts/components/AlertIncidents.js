@@ -1,6 +1,7 @@
 import React from 'react';
-import { Panel, Table } from '@sparkpost/matchbox';
+import { Table } from '@sparkpost/matchbox';
 import { TableCollection, Empty } from 'src/components';
+import { NewCollectionBody } from 'src/components/collection';
 import { Tag } from 'src/components/matchbox';
 import { FORMATS } from 'src/constants';
 import { formatDateTime } from 'src/helpers/date';
@@ -88,11 +89,11 @@ const AlertIncidents = ({ incidents = [], alert, subaccountIdToString }) => {
   };
 
   const TableWrapper = props => <Table>{props.children}</Table>;
-
+  const title = 'Alert Incidents';
   return (
-    <Panel title="Alert Incidents">
+    <>
       {incidents.length <= 0 ? (
-        <Empty message="No incidents" />
+        <Empty title={title} message="No incidents" />
       ) : (
         <TableCollection
           wrapperComponent={TableWrapper}
@@ -102,9 +103,12 @@ const AlertIncidents = ({ incidents = [], alert, subaccountIdToString }) => {
           pagination
           defaultSortColumn="first_fired"
           defaultSortDirection="desc"
-        />
+          title={title}
+        >
+          {props => <NewCollectionBody {...props} />}
+        </TableCollection>
       )}
-    </Panel>
+    </>
   );
 };
 

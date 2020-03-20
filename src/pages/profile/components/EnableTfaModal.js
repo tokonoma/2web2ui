@@ -1,6 +1,6 @@
 import React from 'react';
 import Modal from 'src/components/modals/Modal';
-import { Panel } from '@sparkpost/matchbox';
+import { Panel } from 'src/components/matchbox';
 import EnableTfaForm from 'src/components/enableTfaForm/EnableTfaForm';
 import EnableTfaModalPropTypes from './EnableTfaModal.propTypes';
 

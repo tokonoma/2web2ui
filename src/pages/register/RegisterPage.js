@@ -5,7 +5,7 @@ import qs from 'query-string';
 import ErrorTracker from 'src/helpers/errorTracker';
 
 import { CenteredLogo, PageLink } from 'src/components';
-import { Panel } from '@sparkpost/matchbox';
+import { Panel } from 'src/components/matchbox';
 import PanelLoading from 'src/components/panelLoading/PanelLoading';
 import RegisterUserForm from './RegisterUserForm';
 

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Table, Panel, Tooltip, ScreenReaderOnly } from '@sparkpost/matchbox';
+import { Table, Tooltip, ScreenReaderOnly } from '@sparkpost/matchbox';
 import { TableCollection, PageLink, DisplayDate } from 'src/components';
+import { NewCollectionBody } from 'src/components/collection';
 import { Button, Tag } from 'src/components/matchbox';
 import AlertToggle from './AlertToggle';
 import { Delete } from '@sparkpost/matchbox-icons';
@@ -79,19 +80,9 @@ class AlertCollection extends Component {
         filterBox={filterBoxConfig}
         defaultSortColumn="last_triggered_timestamp"
         defaultSortDirection="desc"
+        title={'All alerts'}
       >
-        {({ filterBox, collection, pagination }) => (
-          <>
-            <Panel>
-              <Panel.Section>
-                <h3>All Alerts</h3>
-              </Panel.Section>
-              {filterBox}
-              {collection}
-            </Panel>
-            {pagination}
-          </>
-        )}
+        {props => <NewCollectionBody {...props} />}
       </TableCollection>
     );
   }

@@ -8,7 +8,8 @@ import { getFormLoading } from 'src/selectors/api-keys';
 import { hasSubaccounts } from 'src/selectors/subaccounts';
 
 import ApiKeyForm from './components/ApiKeyForm';
-import { Page, Panel } from '@sparkpost/matchbox';
+import { Page } from '@sparkpost/matchbox';
+import { Panel } from 'src/components/matchbox';
 import { Loading } from 'src/components';
 
 const breadcrumbAction = {

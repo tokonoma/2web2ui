@@ -1,26 +1,25 @@
 import { shallow, mount } from 'enzyme';
 import React from 'react';
-
+import TestApp from 'src/__testHelpers__/TestApp';
 import TestContent from '../TestContent';
-
 
 describe('Component: TestContent', () => {
   const mockDetails = {
     subject: 'foo',
     message_size: 2580,
-    from_address: 'foo@bar.com'
+    from_address: 'foo@bar.com',
   };
   const mockContent = {
     raw_message: 'The Raw message',
     html: '<div>Cool HTML!</div>',
     text: 'Cool Text!',
     amp: 'Cool AMP!',
-    headers: 'Some: Headers'
+    headers: 'Some: Headers',
   };
 
   const props = {
     details: mockDetails,
-    content: mockContent
+    content: mockContent,
   };
 
   it('renders page correctly with defaults', () => {
@@ -29,10 +28,16 @@ describe('Component: TestContent', () => {
   });
 
   it('changes tabs correctly', () => {
-    const wrapper = mount(<TestContent {...props} />);
+    const wrapper = mount(
+      <TestApp>
+        <TestContent {...props} />
+      </TestApp>,
+    );
     expect(wrapper.find('Tabs').prop('selected')).toEqual(0);
-    wrapper.find('Tab').last().simulate('click');
+    wrapper
+      .find('Tab')
+      .last()
+      .simulate('click');
     expect(wrapper.find('Tabs').prop('selected')).toEqual(4);
   });
 });
-

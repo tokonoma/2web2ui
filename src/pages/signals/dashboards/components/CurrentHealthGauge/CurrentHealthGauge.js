@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { getCaretProps } from 'src/helpers/signals';
 import { selectCurrentHealthScoreDashboard } from 'src/selectors/signals';
-import { Panel } from '@sparkpost/matchbox';
+import { Panel } from 'src/components/matchbox';
 import { PanelLoading } from 'src/components';
 import Callout from 'src/components/callout';
 import { formatDate } from 'src/helpers/date';

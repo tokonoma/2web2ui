@@ -1,7 +1,8 @@
 import React, { useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
-import { Page, Panel, Table, Tooltip } from '@sparkpost/matchbox';
+import { Page, Table, Tooltip } from '@sparkpost/matchbox';
+import { Panel } from 'src/components/matchbox';
 import { Schedule } from '@sparkpost/matchbox-icons';
 import { ApiErrorBanner, Loading, PageLink } from 'src/components';
 import formatScheduleLine from './helpers/formatScheduleLine';
@@ -181,7 +182,7 @@ export const TestListPage = ({ tests, error, loading, listTests }) => {
           An Inbox Placement Test can tell you if you are actually landing in the recipients inbox.
           We can provide insight into what mailbox providers are doing with your email.
         </p>
-        <Panel title={'Inbox Placement Trends'}>
+        <Panel title={'Inbox Placement Trends'} className={styles.JoinBottom} mb={'0'}>
           <Panel.Section>
             <TrendsFilters
               filters={filters}
@@ -191,8 +192,9 @@ export const TestListPage = ({ tests, error, loading, listTests }) => {
           </Panel.Section>
 
           <TrendsChart filters={filters} />
-          {renderCollection()}
+          <Panel.Section />
         </Panel>
+          {renderCollection()}
       </>
     ),
     [filters, renderCollection, updateFilters],

@@ -71,6 +71,7 @@ exports[`TestCollection Component should render 1`] = `
       },
     ]
   }
+  title="All alerts"
   wrapperComponent={[Function]}
 >
   <Component />

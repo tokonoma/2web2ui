@@ -1,5 +1,5 @@
 import React from 'react';
-import { Panel } from '@sparkpost/matchbox';
+import { Panel } from 'src/components/matchbox';
 import PanelLoading from 'src/components/panelLoading/PanelLoading';
 import { ConfirmationModal } from 'src/components/modals';
 import TogglePanel from './TogglePanel';

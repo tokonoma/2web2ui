@@ -1,5 +1,6 @@
 import React from 'react';
-import { Panel, Grid } from '@sparkpost/matchbox';
+import { Grid } from '@sparkpost/matchbox';
+import { Panel } from 'src/components/matchbox';
 import { Close } from '@sparkpost/matchbox-icons';
 import { formatCurrency, formatFullNumber } from 'src/helpers/units';
 import styles from './RecipientValidationModal.module.scss';

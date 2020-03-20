@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Page, Panel } from '@sparkpost/matchbox';
+import { Page } from '@sparkpost/matchbox';
+import { Panel } from 'src/components/matchbox';
 import _ from 'lodash';
 import { ApiErrorBanner, Loading } from 'src/components';
 import PanelLoading from 'src/components/panelLoading';

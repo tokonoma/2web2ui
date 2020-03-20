@@ -4,8 +4,7 @@ import { reduxForm, formValueSelector, Field } from 'redux-form';
 import { selectInitialSubaccountValue, getSelectedEvents } from 'src/selectors/webhooks';
 import { hasSubaccounts } from 'src/selectors/subaccounts';
 import { withRouter } from 'react-router-dom';
-import { Panel } from '@sparkpost/matchbox';
-import { Button } from 'src/components/matchbox';
+import { Button, Panel } from 'src/components/matchbox';
 import CheckboxWrapper from 'src/components/reduxFormWrappers/CheckboxWrapper';
 import { selectWebhookEventListing } from 'src/selectors/eventListing';
 import {

@@ -1,5 +1,6 @@
 import React from 'react';
-import { TextField, Panel } from '@sparkpost/matchbox';
+import { TextField } from '@sparkpost/matchbox';
+import { Panel } from 'src/components/matchbox';
 
 const ResponseBlock = ({ testSent, testResponse }) => {
   const success = testResponse && testResponse.status <= 299;

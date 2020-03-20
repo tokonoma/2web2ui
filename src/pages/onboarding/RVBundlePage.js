@@ -1,7 +1,7 @@
 import React from 'react';
 import { CenteredLogo } from 'src/components';
-import { Panel, UnstyledLink, Modal } from '@sparkpost/matchbox';
-import { Button } from 'src/components/matchbox';
+import { UnstyledLink, Modal } from '@sparkpost/matchbox';
+import { Button, Panel } from 'src/components/matchbox';
 import { CheckCircle, Send, Close } from '@sparkpost/matchbox-icons';
 import { Link } from 'react-router-dom';
 import { Card, RecipientValidationPriceTable } from 'src/components';

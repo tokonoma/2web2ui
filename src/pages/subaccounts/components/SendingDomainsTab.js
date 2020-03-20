@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
-import { Panel } from '@sparkpost/matchbox';
-import { Button } from 'src/components/matchbox';
+import { Button, Panel } from 'src/components/matchbox';
 import { TableCollection, DomainStatusCell, StatusTooltipHeader } from 'src/components';
 import { selectSendingDomainsForSubaccount } from 'src/selectors/sendingDomains';
 import PanelLoading from 'src/components/panelLoading/PanelLoading';

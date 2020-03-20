@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Page, Panel } from '@sparkpost/matchbox';
+import { Page } from '@sparkpost/matchbox';
+import { Panel } from 'src/components/matchbox';
 import LabelledValue from 'src/components/labelledValue/LabelledValue';
 import CancellationPanel from './components/CancellationPanel';
 import SingleSignOnPanel from './components/SingleSignOnPanel';

@@ -1,7 +1,6 @@
 import React, { Fragment, Component } from 'react';
 import { connect } from 'react-redux';
-import { Panel } from '@sparkpost/matchbox';
-import { Button } from 'src/components/matchbox';
+import { Button, Panel } from 'src/components/matchbox';
 import { TableCollection } from 'src/components';
 import { formatDate } from 'src/helpers/date';
 import { get as getInvoice } from 'src/actions/invoices';

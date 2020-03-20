@@ -3,8 +3,7 @@ import { connect } from 'react-redux';
 import { getEventSamples, testWebhook } from 'src/actions/webhooks';
 import { showAlert } from 'src/actions/globalAlert';
 
-import { Panel } from '@sparkpost/matchbox';
-import { Button } from 'src/components/matchbox';
+import { Button, Panel } from 'src/components/matchbox';
 import { PanelLoading } from 'src/components';
 import ResponseBlock from './ResponseBlock';
 import RequestBlock from './RequestBlock';

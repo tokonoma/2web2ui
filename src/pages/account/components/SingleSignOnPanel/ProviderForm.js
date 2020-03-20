@@ -1,8 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Field, Form, reduxForm } from 'redux-form';
-import { Panel } from '@sparkpost/matchbox';
-import { Button } from 'src/components/matchbox';
+import { Button, Panel } from 'src/components/matchbox';
 import {
   provisionAccountSingleSignOn,
   reprovisionAccountSingleSignOn,

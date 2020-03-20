@@ -1,5 +1,5 @@
 import React from 'react';
-import { Panel } from '@sparkpost/matchbox';
+import { Panel } from 'src/components/matchbox';
 import { CheckCircle } from '@sparkpost/matchbox-icons';
 
 import { Loading } from 'src/components/loading/Loading';

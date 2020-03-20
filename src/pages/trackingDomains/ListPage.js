@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Page, Panel } from '@sparkpost/matchbox';
+import { Page } from '@sparkpost/matchbox';
+import { Panel } from 'src/components/matchbox';
 import { Loading, ApiErrorBanner, Collection } from 'src/components';
 import { Generic } from 'src/components/images';
 import { listTrackingDomains } from 'src/actions/trackingDomains';

@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react';
-import { Grid, Panel, TextField } from '@sparkpost/matchbox';
-import { Select } from 'src/components/matchbox';
+import { Grid, TextField } from '@sparkpost/matchbox';
+import { Panel, Select } from 'src/components/matchbox';
 import PropTypes from 'prop-types';
 import { onEnter } from 'src/helpers/keyEvents';
 import { stringToArray } from 'src/helpers/string';

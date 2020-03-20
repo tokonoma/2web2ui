@@ -1,6 +1,6 @@
 import React from 'react';
 import { InstantSearch, Hits } from 'react-instantsearch/dom';
-import { Panel } from '@sparkpost/matchbox';
+import { Panel } from 'src/components/matchbox';
 
 import AlgoliaResults from './AlgoliaResults';
 import AlgoliaSearch from './AlgoliaSearch';

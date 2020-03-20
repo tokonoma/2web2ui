@@ -1,13 +1,12 @@
 import _ from 'lodash';
 import React from 'react';
-import { Panel } from '@sparkpost/matchbox';
 import {
   METRICS,
   FILTERS_FRIENDLY_NAMES,
   SOURCE_FRIENDLY_NAMES,
   OPERATOR_FRIENDLY_NAMES,
 } from '../constants/formConstants';
-import { Button, Tag } from 'src/components/matchbox';
+import { Button, Panel, Tag } from 'src/components/matchbox';
 import LabelledValue from 'src/components/labelledValue/LabelledValue';
 import { MAILBOX_PROVIDERS } from 'src/constants';
 import styles from './AlertDetails.module.scss';

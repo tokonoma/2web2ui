@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Panel } from '@sparkpost/matchbox';
+import { Panel } from 'src/components/matchbox';
 import { Banner } from 'src/components/matchbox';
 import { resolveStatus, resolveReadyFor } from 'src/helpers/domains';
 

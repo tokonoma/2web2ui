@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 // Components
-import { Page, Panel } from '@sparkpost/matchbox';
-import { Button } from 'src/components/matchbox';
+import { Page } from '@sparkpost/matchbox';
+import { Button, Panel } from 'src/components/matchbox';
 import { Loading } from 'src/components';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
 import styles from './CreatePage.module.scss';

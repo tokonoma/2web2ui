@@ -1,6 +1,7 @@
 import React from 'react';
 import { Field } from 'redux-form';
-import { Panel, Tabs } from '@sparkpost/matchbox';
+import { Tabs } from '@sparkpost/matchbox';
+import { Panel } from 'src/components/matchbox';
 import { json } from 'src/helpers/validation';
 import AceWrapper from './AceWrapper';
 

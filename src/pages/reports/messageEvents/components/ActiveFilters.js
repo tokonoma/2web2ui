@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Panel } from '@sparkpost/matchbox';
 import {
   getMessageEvents,
   removeFilter,
@@ -9,7 +8,7 @@ import {
 import { removeEmptyFilters, getFiltersAsArray } from '../helpers/transformData.js';
 import { snakeToFriendly } from 'src/helpers/string';
 import { ALL_EVENTS_FILTERS } from 'src/constants';
-import { Tag } from 'src/components/matchbox';
+import { Panel, Tag } from 'src/components/matchbox';
 import _ from 'lodash';
 import styles from './ActiveFilters.module.scss';
 

@@ -6,8 +6,7 @@ import { updateBillingContact, getBillingCountries } from 'src/actions/billing';
 import { showAlert } from 'src/actions/globalAlert';
 import { updateContactInitialValues } from 'src/selectors/accountBillingForms';
 
-import { Panel } from '@sparkpost/matchbox';
-import { Button } from 'src/components/matchbox';
+import { Button, Panel } from 'src/components/matchbox';
 import BillingContactForm from './fields/BillingContactForm';
 
 import styles from './Forms.module.scss';

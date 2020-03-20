@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Panel, Toggle } from '@sparkpost/matchbox';
+import { Toggle } from '@sparkpost/matchbox';
+import { Panel } from 'src/components/matchbox';
 import LabelledValue from 'src/components/labelledValue/LabelledValue';
 import { isAccountUiOptionSet } from 'src/helpers/conditions/account';
 import { selectCondition } from 'src/selectors/accessConditionState';

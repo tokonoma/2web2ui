@@ -1,5 +1,5 @@
 import React from 'react';
-import { Panel } from '@sparkpost/matchbox';
+import { Panel } from 'src/components/matchbox';
 import { TableCollection } from 'src/components/collection';
 import Loading from 'src/components/loading';
 import { columns } from '../constants/integration';
