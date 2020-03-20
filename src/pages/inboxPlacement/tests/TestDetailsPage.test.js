@@ -1,5 +1,6 @@
 import { mount, shallow } from 'enzyme';
 import React from 'react';
+import TestApp from 'src/__testHelpers__/TestApp';
 import { TestDetailsPage } from '../TestDetailsPage';
 
 describe('Page: Single Inbox Placement Test', () => {
@@ -34,18 +35,20 @@ describe('Page: Single Inbox Placement Test', () => {
     const getInboxPlacementTestContent = jest.fn().mockReturnValue({});
 
     mount(
-      <TestDetailsPage
-        details={{}}
-        content={{}}
-        getInboxPlacementTest={getInboxPlacementTest}
-        getInboxPlacementByProvider={getInboxPlacementByProvider}
-        getInboxPlacementByRegion={getInboxPlacementByRegion}
-        getInboxPlacementBySendingIp={getInboxPlacementBySendingIp}
-        getInboxPlacementTestContent={getInboxPlacementTestContent}
-        id={101}
-        tabIndex={1} //not working nicely with tabIndex=0; TestDetails component
-        history={{ replace: jest.fn() }}
-      />,
+      <TestApp>
+        <TestDetailsPage
+          details={{}}
+          content={{}}
+          getInboxPlacementTest={getInboxPlacementTest}
+          getInboxPlacementByProvider={getInboxPlacementByProvider}
+          getInboxPlacementByRegion={getInboxPlacementByRegion}
+          getInboxPlacementBySendingIp={getInboxPlacementBySendingIp}
+          getInboxPlacementTestContent={getInboxPlacementTestContent}
+          id={101}
+          tabIndex={1} //not working nicely with tabIndex=0; TestDetails component
+          history={{ replace: jest.fn() }}
+        />
+      </TestApp>,
     );
 
     expect(getInboxPlacementTest).toHaveBeenCalled();
@@ -88,17 +91,19 @@ describe('Page: Single Inbox Placement Test', () => {
   it('updates URL when tabs change', () => {
     const mockHistory = { replace: jest.fn() };
     const wrapper = mount(
-      <TestDetailsPage
-        tabIndex={1}
-        details={{}}
-        content={{}}
-        history={mockHistory}
-        getInboxPlacementTest={jest.fn()}
-        getInboxPlacementByProvider={jest.fn()}
-        getInboxPlacementByRegion={jest.fn()}
-        getInboxPlacementBySendingIp={jest.fn()}
-        getInboxPlacementTestContent={jest.fn()}
-      />,
+      <TestApp>
+        <TestDetailsPage
+          tabIndex={1}
+          details={{}}
+          content={{}}
+          history={mockHistory}
+          getInboxPlacementTest={jest.fn()}
+          getInboxPlacementByProvider={jest.fn()}
+          getInboxPlacementByRegion={jest.fn()}
+          getInboxPlacementBySendingIp={jest.fn()}
+          getInboxPlacementTestContent={jest.fn()}
+        />
+      </TestApp>,
     );
     wrapper
       .find('Tab')
