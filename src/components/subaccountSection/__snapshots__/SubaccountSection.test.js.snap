@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Templates SubaccountSection on create should render radio group 1`] = `
-<Panel.Section>
+<Fragment>
   <div>
     <Field
       component={[Function]}
@@ -25,7 +25,7 @@ exports[`Templates SubaccountSection on create should render radio group 1`] = `
       title="Subaccount Assignment"
     />
   </div>
-</Panel.Section>
+</Fragment>
 `;
 
 exports[`Templates SubaccountSection on create should render subaccount typeahead 1`] = `
@@ -38,7 +38,7 @@ exports[`Templates SubaccountSection on create should render subaccount typeahea
 `;
 
 exports[`Templates SubaccountSection on edit should render a disabled subaccount field 1`] = `
-<Panel.Section>
+<Fragment>
   <Field
     component={[Function]}
     disabled={true}
@@ -46,11 +46,11 @@ exports[`Templates SubaccountSection on edit should render a disabled subaccount
     label="Subaccount"
     name="subaccount"
   />
-</Panel.Section>
+</Fragment>
 `;
 
 exports[`Templates SubaccountSection on edit should render toggle block if not assigned to subaccount 1`] = `
-<Panel.Section>
+<Fragment>
   <Field
     component={[Function]}
     label="Share with all subaccounts"
@@ -58,5 +58,5 @@ exports[`Templates SubaccountSection on edit should render toggle block if not a
     parse={[Function]}
     type="checkbox"
   />
-</Panel.Section>
+</Fragment>
 `;

@@ -5,7 +5,6 @@ exports[`Template List Components DeleteAction should render correctly 1`] = `
   className="Action"
   flat={true}
   onClick={[Function]}
-  size="default"
 >
   <Delete
     size={16}
@@ -21,7 +20,6 @@ exports[`Template List Components DuplicateAction should render correctly 1`] = 
   className="Action"
   flat={true}
   onClick={[Function]}
-  size="default"
 >
   <ContentCopy
     size={16}

@@ -127,7 +127,9 @@ export default class EditPage extends React.Component {
                   />
                 </Panel.Section>
                 {canViewSubaccountSection && (
-                  <SubaccountSection newTemplate={false} disabled={disabled} />
+                  <Panel.Section>
+                    <SubaccountSection newTemplate={false} disabled={disabled} />
+                  </Panel.Section>
                 )}
               </Panel>
               <Panel sectioned>

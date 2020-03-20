@@ -86,7 +86,11 @@ export default class CreatePage extends React.Component {
                     validate={[required, slug, maxLength(64)]}
                   />
                 </Panel.Section>
-                {hasSubaccounts && <SubaccountSection newTemplate={true} disabled={submitting} />}
+                {hasSubaccounts && (
+                  <Panel.Section>
+                    <SubaccountSection newTemplate={true} disabled={submitting} />
+                  </Panel.Section>
+                )}
               </Panel>
             </Grid.Column>
             <Grid.Column xs={12} lg={8}>
