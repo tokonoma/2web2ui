@@ -1,6 +1,7 @@
 import { shallow, mount } from 'enzyme';
 import React from 'react';
 import config from 'src/config';
+import TestApp from 'src/__testHelpers__/TestApp';
 
 import { SetupSending } from '../SetupSending';
 
@@ -17,23 +18,26 @@ describe('Component: SetupSending', () => {
 
     status = {
       ownership_verified: false,
-      dkim_status: null
+      dkim_status: null,
     };
     props = {
       domain: {
         id: 'xyz.com',
         subaccount_id: 999,
         dkimHostname: 'scph0118._domainkey.xyz.com',
-        dkimValue: 'v=DKIM1; k=rsa; h=sha256; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC7J/mQAVP9pynvD79opV/GD495pJWTWmHaEMymBO55y52gu2D23/CHbLys0KXszTAPOVS9x3HdRByeE1jIx41sZkWwDzxcyZH2NP5Mw3zNQWO4CqSGqrVPuukjIy5N3jmZnJ/V3IOkKnC3A+j76iIG42cVOgzoekbM3ZXSfwag+wIDAQAB',
-        status
+        dkimValue:
+          'v=DKIM1; k=rsa; h=sha256; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC7J/mQAVP9pynvD79opV/GD495pJWTWmHaEMymBO55y52gu2D23/CHbLys0KXszTAPOVS9x3HdRByeE1jIx41sZkWwDzxcyZH2NP5Mw3zNQWO4CqSGqrVPuukjIy5N3jmZnJ/V3IOkKnC3A+j76iIG42cVOgzoekbM3ZXSfwag+wIDAQAB',
+        status,
       },
       verifyDkimLoading: false,
-      verifyDkim: jest.fn(() => Promise.resolve({ ownership_verified: true, dkim_status: 'valid' })),
-      showAlert: jest.fn()
+      verifyDkim: jest.fn(() =>
+        Promise.resolve({ ownership_verified: true, dkim_status: 'valid' }),
+      ),
+      showAlert: jest.fn(),
     };
 
     config.featureFlags.allow_mailbox_verification = true;
-    wrapper = shallow(<SetupSending {...props}/>);
+    wrapper = shallow(<SetupSending {...props} />);
   });
 
   it('renders correctly for unverified DKIM and invalid ownership with mailbox verification enabled', () => {
@@ -41,14 +45,14 @@ describe('Component: SetupSending', () => {
   });
 
   it('renders correctly when ownership and DKIM are verified', () => {
-    const testProps = props.domain.status = { dkim_status: 'valid', ownership_verified: true };
+    const testProps = (props.domain.status = { dkim_status: 'valid', ownership_verified: true });
     wrapper.setProps(testProps);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('renders correctly for unverified DKIM and invalid ownership with mailbox verification disabled', () => {
     config.featureFlags.allow_mailbox_verification = false;
-    const wrapper = shallow(<SetupSending {...props}/>);
+    const wrapper = shallow(<SetupSending {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -64,19 +68,23 @@ describe('Component: SetupSending', () => {
   });
 
   it('should call verifyDkim on click', () => {
-    const wrapper = mount(<SetupSending {...props}/>);
+    const wrapper = mount(
+      <TestApp>
+        <SetupSending {...props} />
+      </TestApp>,
+    );
     wrapper.find('button#verify-dkim').simulate('click');
     expect(props.verifyDkim).toHaveBeenCalledTimes(1);
   });
 
   it('should open verify with email modal', () => {
-    const wrapper = shallow(<SetupSending {...props}/>);
+    const wrapper = shallow(<SetupSending {...props} />);
     wrapper.find('#verify-with-email').simulate('click');
     expect(wrapper.state('open')).toEqual(true);
   });
 
   it('should close verify by email modal', () => {
-    const wrapper = shallow(<SetupSending {...props}/>);
+    const wrapper = shallow(<SetupSending {...props} />);
     wrapper.setState({ open: true }); // open modal
     wrapper.find('Connect(VerifyEmail)').simulate('cancel');
     expect(wrapper.state('open')).toEqual(false);
@@ -94,16 +102,24 @@ describe('Component: SetupSending', () => {
       expect(props.verifyDkim).toHaveBeenCalledTimes(1);
       expect(props.verifyDkim).toHaveBeenCalledWith({ id: 'xyz.com', subaccount: 999 });
       expect(props.showAlert).toHaveBeenCalledTimes(1);
-      expect(props.showAlert).toHaveBeenCalledWith({ type: 'success', message: 'You have successfully verified DKIM record of xyz.com' });
+      expect(props.showAlert).toHaveBeenCalledWith({
+        type: 'success',
+        message: 'You have successfully verified DKIM record of xyz.com',
+      });
     });
 
     it('alerts error when verification req is successful but verification is failed', async () => {
-      props.verifyDkim.mockReturnValue(Promise.resolve({ dkim_status: 'invalid', dns: { dkim_error: 'nope!' }}));
+      props.verifyDkim.mockReturnValue(
+        Promise.resolve({ dkim_status: 'invalid', dns: { dkim_error: 'nope!' } }),
+      );
       await instance.verifyDomain();
       expect(props.verifyDkim).toHaveBeenCalledTimes(1);
       expect(props.verifyDkim).toHaveBeenCalledWith({ id: 'xyz.com', subaccount: 999 });
       expect(props.showAlert).toHaveBeenCalledTimes(1);
-      expect(props.showAlert).toHaveBeenCalledWith({ type: 'error', message: 'Unable to verify DKIM record of xyz.com. nope!' });
+      expect(props.showAlert).toHaveBeenCalledWith({
+        type: 'error',
+        message: 'Unable to verify DKIM record of xyz.com. nope!',
+      });
     });
   });
 });
