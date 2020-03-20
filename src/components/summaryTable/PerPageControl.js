@@ -1,6 +1,6 @@
 import React from 'react';
 import classnames from 'classnames';
-import { Button } from '@sparkpost/matchbox';
+import { Button } from 'src/components/matchbox';
 import styles from './SummaryTable.module.scss';
 
 const SIZES = [10, 25, 50, 100];
@@ -14,7 +14,7 @@ const PerPageControl = ({ onChange, perPage, totalCount }) => {
     <div className={styles.PerPageGroup}>
       <Button.Group>
         <span className={styles.PerPageLabel}>Per Page</span>
-        {SIZES.map((size) => (
+        {SIZES.map(size => (
           <Button
             flat
             className={classnames(perPage === size && styles.Selected)}

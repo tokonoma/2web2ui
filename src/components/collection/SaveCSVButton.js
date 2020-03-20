@@ -1,4 +1,4 @@
-import { Button } from '@sparkpost/matchbox';
+import { Button } from 'src/components/matchbox';
 import React from 'react';
 import { formatToCsv } from 'src/helpers/downloading';
 
@@ -10,7 +10,11 @@ const SaveCSVButton = ({ data, saveCsv, caption = 'Save As CSV', filename, ...pr
     return null;
   }
 
-  return <Button download={download} to={formatToCsv({ data, returnBlob: false })} {...props}>{caption}</Button>;
+  return (
+    <Button download={download} to={formatToCsv({ data, returnBlob: false })} {...props}>
+      {caption}
+    </Button>
+  );
 };
 
 export default SaveCSVButton;

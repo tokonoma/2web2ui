@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import copy from 'copy-to-clipboard';
 
-import { Button, Tooltip } from '@sparkpost/matchbox';
+import { Tooltip } from '@sparkpost/matchbox';
+import { Button } from 'src/components/matchbox';
 import { ContentCopy } from '@sparkpost/matchbox-icons';
 
 /**
@@ -10,7 +11,7 @@ import { ContentCopy } from '@sparkpost/matchbox-icons';
  */
 class CopyToClipboard extends Component {
   state = {
-    copied: false
+    copied: false,
   };
 
   timeout = null;
@@ -38,7 +39,7 @@ class CopyToClipboard extends Component {
     return (
       <Tooltip dark content={content}>
         <Button primary={primary} name="copy-field-button" onClick={this.handleCopy}>
-          <ContentCopy size={14}/> {label}
+          <ContentCopy size={14} /> {label}
         </Button>
       </Tooltip>
     );
@@ -47,7 +48,7 @@ class CopyToClipboard extends Component {
 
 CopyToClipboard.propTypes = {
   value: PropTypes.string,
-  label: PropTypes.string
+  label: PropTypes.string,
 };
 
 export default CopyToClipboard;

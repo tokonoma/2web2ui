@@ -10,13 +10,15 @@ exports[`UploadForm tests should disable fields when submitting 1`] = `
         fileType="csv"
         helpText={
           <span>
-            You can download an 
+            You can download an
+             
             <DownloadLink
               href="example-suppressions-list.csv"
             >
               example file here
             </DownloadLink>
-             to use when formatting your list of suppressions for upload.
+             
+            to use when formatting your list of suppressions for upload.
           </span>
         }
         label="CSV File of Suppressions"
@@ -42,7 +44,6 @@ exports[`UploadForm tests should disable fields when submitting 1`] = `
       <Button
         disabled={true}
         primary={true}
-        size="default"
         type="submit"
       >
         Upload
@@ -62,13 +63,15 @@ exports[`UploadForm tests should render upload form 1`] = `
         fileType="csv"
         helpText={
           <span>
-            You can download an 
+            You can download an
+             
             <DownloadLink
               href="example-suppressions-list.csv"
             >
               example file here
             </DownloadLink>
-             to use when formatting your list of suppressions for upload.
+             
+            to use when formatting your list of suppressions for upload.
           </span>
         }
         label="CSV File of Suppressions"
@@ -94,7 +97,6 @@ exports[`UploadForm tests should render upload form 1`] = `
       <Button
         disabled={false}
         primary={true}
-        size="default"
         type="submit"
       >
         Upload

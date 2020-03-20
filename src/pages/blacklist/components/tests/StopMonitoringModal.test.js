@@ -1,5 +1,6 @@
 import React from 'react';
 import { fireEvent, render } from '@testing-library/react';
+import TestApp from 'src/__testHelpers__/TestApp';
 
 import { StopMonitoringModal } from '../StopMonitoringModal';
 
@@ -11,7 +12,11 @@ describe('Stop Monitoring Modal', () => {
   const subject = ({ ...props }) => {
     const defaults = { closeModal, monitorToDelete, deleteMonitor, showAlert };
 
-    return render(<StopMonitoringModal {...defaults} {...props} />);
+    return render(
+      <TestApp>
+        <StopMonitoringModal {...defaults} {...props} />
+      </TestApp>,
+    );
   };
 
   it('renders the modal correctly for an ip address', () => {

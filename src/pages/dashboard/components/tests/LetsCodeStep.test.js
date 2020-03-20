@@ -1,6 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { render } from '@testing-library/react';
+import TestApp from 'src/__testHelpers__/TestApp';
 import LetsCodeStep from '../LetsCodeStep';
 import { GuideContext } from '../GettingStartedGuide';
 
@@ -21,9 +22,11 @@ describe('LetsCodeStep', () => {
     };
 
     return func(
-      <GuideContext.Provider value={values}>
-        <LetsCodeStep />
-      </GuideContext.Provider>,
+      <TestApp>
+        <GuideContext.Provider value={values}>
+          <LetsCodeStep />
+        </GuideContext.Provider>
+      </TestApp>,
     );
   };
   it('should render breadcrumbs', () => {

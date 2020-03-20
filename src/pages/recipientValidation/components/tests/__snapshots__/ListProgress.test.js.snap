@@ -52,7 +52,6 @@ exports[`ListProgress renders status and progress bar 1`] = `
   <Button
     color="orange"
     component={[Function]}
-    size="default"
     to="/recipient-validation"
   >
     Validate Another

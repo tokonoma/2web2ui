@@ -1,7 +1,6 @@
 import { render, fireEvent } from '@testing-library/react';
 import React from 'react';
-import { MemoryRouter } from 'react-router-dom';
-
+import TestApp from 'src/__testHelpers__/TestApp';
 import { WatchlistAddPage } from '../WatchlistAddPage';
 
 const ipOrSendingDomainText = 'IP or Sending Domain';
@@ -21,35 +20,35 @@ describe('WatchlistAddPage', () => {
       submitError: undefined,
     };
     return render(
-      <MemoryRouter>
+      <TestApp>
         <WatchlistAddPage {...defaults} {...props} />
-      </MemoryRouter>,
+      </TestApp>,
     );
   };
 
   it('displays the add IP or sending domain field', () => {
-    const { getByLabelText } = subject();
-    expect(getByLabelText(ipOrSendingDomainText)).toBeInTheDocument();
+    const { queryByLabelText } = subject();
+    expect(queryByLabelText(ipOrSendingDomainText)).toBeInTheDocument();
   });
 
   it('displays the Save button', () => {
-    const { getByText } = subject();
-    expect(getByText(saveText)).toBeInTheDocument();
+    const { queryByText } = subject();
+    expect(queryByText(saveText)).toBeInTheDocument();
   });
 
   it('displays the Save and Add Another button', () => {
-    const { getByText } = subject();
-    expect(getByText(saveAndContinueText)).toBeInTheDocument();
+    const { queryByText } = subject();
+    expect(queryByText(saveAndContinueText)).toBeInTheDocument();
   });
 
   it('displays the Save button as disabled on load', () => {
-    const { getByText } = subject();
-    expect(getByText(saveText)).toHaveProperty('disabled');
+    const { queryByText } = subject();
+    expect(queryByText(saveText)).toHaveProperty('disabled');
   });
 
   it('displays the Save and Add Another button as disabled on load', () => {
-    const { getByText } = subject();
-    expect(getByText(saveAndContinueText)).toHaveProperty('disabled');
+    const { queryByText } = subject();
+    expect(queryByText(saveAndContinueText)).toHaveProperty('disabled');
   });
 
   it('submits the resource and redirects on save', () => {
@@ -65,6 +64,7 @@ describe('WatchlistAddPage', () => {
     fireEvent.click(save);
 
     expect(watchlistAdd).toBeCalledWith(resource);
+    // eslint-disable-next-line jest/valid-expect-in-promise
     promise.then(() => {
       expect(mockHistory.push).toBeCalledWith('/blacklist/watchlist');
       expect(mockShowAlert).toBeCalledWith({
@@ -86,6 +86,8 @@ describe('WatchlistAddPage', () => {
     fireEvent.click(saveAndContinue);
 
     expect(watchlistAdd).toBeCalledWith(resource);
+
+    // eslint-disable-next-line jest/valid-expect-in-promise
     promise.then(() => {
       expect(mockHistory.push).not.toBeCalledWith('/blacklist/watchlist');
       expect(mockShowAlert).toBeCalledWith({
@@ -97,7 +99,7 @@ describe('WatchlistAddPage', () => {
   });
 
   it('validation error displays when prop is set', () => {
-    const { getByText } = subject({ submitError: { message: 'test validation error' } });
-    expect(getByText('test validation error')).toBeInTheDocument();
+    const { queryByText } = subject({ submitError: { message: 'test validation error' } });
+    expect(queryByText('test validation error')).toBeInTheDocument();
   });
 });

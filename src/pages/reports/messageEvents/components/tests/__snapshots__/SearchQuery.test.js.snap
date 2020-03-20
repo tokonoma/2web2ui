@@ -67,7 +67,6 @@ exports[`SearchForm should render correctly with existing filters 1`] = `
             color="red"
             flat={true}
             onClick={[Function]}
-            size="default"
           >
             Remove
             <HighlightOff
@@ -139,7 +138,6 @@ exports[`SearchForm should render correctly with existing filters 1`] = `
             color="red"
             flat={true}
             onClick={[Function]}
-            size="default"
           >
             Remove
             <HighlightOff
@@ -212,7 +210,6 @@ exports[`SearchForm should render correctly with existing filters 1`] = `
             color="red"
             flat={true}
             onClick={[Function]}
-            size="default"
           >
             Remove
             <HighlightOff
@@ -228,7 +225,6 @@ exports[`SearchForm should render correctly with existing filters 1`] = `
     color="blue"
     flat={true}
     onClick={[Function]}
-    size="default"
   >
      
     Add Filter
@@ -249,7 +245,6 @@ exports[`SearchForm should render correctly with no filters 1`] = `
     color="blue"
     flat={true}
     onClick={[Function]}
-    size="default"
   >
      
     Add Filter

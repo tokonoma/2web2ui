@@ -131,7 +131,6 @@ exports[`SettingsForm renders without subaccounts 1`] = `
       <Button
         disabled={true}
         primary={true}
-        size="default"
         type="submit"
       >
         Update Settings

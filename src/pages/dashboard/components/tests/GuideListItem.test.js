@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { GuideListItem } from '../GuideListItem';
-import { Button } from '@sparkpost/matchbox';
+import { Button } from 'src/components/matchbox';
 
 describe('GuideListItem', () => {
   const defaultProps = {

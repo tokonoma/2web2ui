@@ -6,7 +6,8 @@ import { updateBillingContact, getBillingCountries } from 'src/actions/billing';
 import { showAlert } from 'src/actions/globalAlert';
 import { updateContactInitialValues } from 'src/selectors/accountBillingForms';
 
-import { Panel, Button } from '@sparkpost/matchbox';
+import { Panel } from '@sparkpost/matchbox';
+import { Button } from 'src/components/matchbox';
 import BillingContactForm from './fields/BillingContactForm';
 
 import styles from './Forms.module.scss';
@@ -18,28 +19,33 @@ export class UpdateContactForm extends Component {
     this.props.getBillingCountries();
   }
 
-  onSubmit = (values) => {
+  onSubmit = values => {
     const { updateBillingContact, showAlert } = this.props;
     return updateBillingContact(values).then(() => {
       showAlert({ type: 'success', message: 'Billing Contact Updated' });
     });
-  }
+  };
 
   render() {
     const { onCancel, handleSubmit, submitting } = this.props;
 
     return (
       <form onSubmit={handleSubmit(this.onSubmit)}>
-        <Panel title='Update Billing Contact'>
+        <Panel title="Update Billing Contact">
           <Panel.Section>
             <BillingContactForm
               formName={FORMNAME}
               disabled={submitting}
-              countries={this.props.billing.countries} />
+              countries={this.props.billing.countries}
+            />
           </Panel.Section>
           <Panel.Section>
-            <Button type='submit' primary disabled={submitting}>Update Billing Contact</Button>
-            <Button onClick={onCancel} className={styles.Cancel}>Cancel</Button>
+            <Button type="submit" primary disabled={submitting}>
+              Update Billing Contact
+            </Button>
+            <Button onClick={onCancel} className={styles.Cancel}>
+              Cancel
+            </Button>
           </Panel.Section>
         </Panel>
       </form>
@@ -47,11 +53,14 @@ export class UpdateContactForm extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   billing: state.billing,
-  initialValues: updateContactInitialValues(state)
+  initialValues: updateContactInitialValues(state),
 });
 
 const mapDispatchtoProps = { getBillingCountries, updateBillingContact, showAlert };
 const formOptions = { form: FORMNAME, enableReinitialize: true };
-export default connect(mapStateToProps, mapDispatchtoProps)(reduxForm(formOptions)(UpdateContactForm));
+export default connect(
+  mapStateToProps,
+  mapDispatchtoProps,
+)(reduxForm(formOptions)(UpdateContactForm));

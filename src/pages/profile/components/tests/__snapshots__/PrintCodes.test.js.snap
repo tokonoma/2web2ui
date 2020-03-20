@@ -3,7 +3,6 @@
 exports[`PrintCodes Component should render 1`] = `
 <Button
   onClick={[Function]}
-  size="default"
 >
   Print
 </Button>

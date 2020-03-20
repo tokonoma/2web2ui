@@ -21,7 +21,7 @@
 }
 
 .Header {
-  background-color: #FAFAFA;
+  background-color: #fafafa;
   border: 1px solid color(grey, 8);
   border-left: none;
   font-weight: 500;
@@ -39,23 +39,25 @@
 }
 
 @mixin buttonOverrides {
-  button, button:active, button:focus {
+  button,
+  button:active,
+  button:focus {
     border-right: 1px solid color(gray, 7);
     border-left: 1px solid color(gray, 7);
-    background: #F2F2F2;
+    background: #f2f2f2;
   }
 }
 
 .PaginationWrapper {
   display: flex;
   align-items: baseline;
-  background: #FAFAFA;
+  background: #fafafa;
   border-top: none;
-  border-radius: 0  0 border-radius(large) border-radius(large);
+  border-radius: 0 0 border-radius(large) border-radius(large);
 }
 
 .Pagination {
-  margin: 0;
+  margin: 0 !important;
   @include buttonOverrides;
 
   // Previous button

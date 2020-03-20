@@ -60,7 +60,6 @@ exports[`Detail renders correctly (hides) on initial loading 1`] = `
     >
       <Button
         onClick={[MockFunction]}
-        size="default"
       >
         Close
       </Button>
@@ -129,7 +128,6 @@ exports[`Detail renders correctly (shows loading) when deleting 1`] = `
     >
       <Button
         onClick={[MockFunction]}
-        size="default"
       >
         Close
       </Button>
@@ -198,7 +196,6 @@ exports[`Detail renders correctly (shows) when open is true  1`] = `
     >
       <Button
         onClick={[MockFunction]}
-        size="default"
       >
         Close
       </Button>

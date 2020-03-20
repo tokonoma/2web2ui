@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Button, Popover, ScreenReaderOnly } from '@sparkpost/matchbox';
+import { Popover, ScreenReaderOnly } from '@sparkpost/matchbox';
+import { Button } from 'src/components/matchbox';
 import { ArrowDropDown } from '@sparkpost/matchbox-icons';
 import SaveAndPublish from './SaveAndPublish';
 import SaveAndPublishConfirmationModal from './SaveAndPublishConfirmationModal';
@@ -23,7 +24,7 @@ const DraftModeActions = () => {
     isPublishedMode,
     testData,
     isCreatePending,
-    isDeletePending
+    isDeletePending,
   } = useEditorContext();
 
   // State
@@ -56,10 +57,7 @@ const DraftModeActions = () => {
 
   return (
     <Button.Group>
-      <SaveAndPublish
-        onClick={handleSaveAndPublishClick}
-        className={styles.Actions}
-      >
+      <SaveAndPublish onClick={handleSaveAndPublishClick} className={styles.Actions}>
         <strong>Save and Publish</strong>
       </SaveAndPublish>
 
@@ -74,36 +72,24 @@ const DraftModeActions = () => {
               aria-expanded={isPopoverOpen ? 'true' : 'false'}
               data-id="popover-actions-trigger"
             >
-              <ArrowDropDown/>
+              <ArrowDropDown />
 
               <ScreenReaderOnly>Open Menu</ScreenReaderOnly>
             </Button>
           }
         >
           <div className={styles.ActionsBody}>
-            <SaveAndPublish
-              className={styles.ActionItem}
-              onClick={handleSaveAndPublishClick}
-            />
+            <SaveAndPublish className={styles.ActionItem} onClick={handleSaveAndPublishClick} />
 
-            <SaveDraft
-              className={styles.ActionItem}
-              onClick={() => setPopoverOpen(false)}
-            />
+            <SaveDraft className={styles.ActionItem} onClick={() => setPopoverOpen(false)} />
 
-            <hr className={styles.Divider}/>
+            <hr className={styles.Divider} />
 
-            {hasPublished && <ViewPublished className={styles.ActionItem}/>}
+            {hasPublished && <ViewPublished className={styles.ActionItem} />}
 
-            <DuplicateTemplate
-              className={styles.ActionItem}
-              onClick={handleDuplicateDraftClick}
-            />
+            <DuplicateTemplate className={styles.ActionItem} onClick={handleDuplicateDraftClick} />
 
-            <DeleteTemplate
-              className={styles.ActionItem}
-              onClick={handleDeleteTemplateClick}
-            />
+            <DeleteTemplate className={styles.ActionItem} onClick={handleDeleteTemplateClick} />
           </div>
         </Popover>
 

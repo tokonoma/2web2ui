@@ -11,6 +11,7 @@ export default function HibanaToggle() {
     if (window.pendo && window.pendo.track) {
       window.pendo.track(`Hibana Toggle - ${isHibanaEnabled ? 'Off' : 'On'}`);
     }
+
     dispatch({ type: isHibanaEnabled ? 'DISABLE' : 'ENABLE' });
   };
 

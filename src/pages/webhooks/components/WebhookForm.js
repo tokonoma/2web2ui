@@ -4,10 +4,19 @@ import { reduxForm, formValueSelector, Field } from 'redux-form';
 import { selectInitialSubaccountValue, getSelectedEvents } from 'src/selectors/webhooks';
 import { hasSubaccounts } from 'src/selectors/subaccounts';
 import { withRouter } from 'react-router-dom';
-import { Button, Panel } from '@sparkpost/matchbox';
+import { Panel } from '@sparkpost/matchbox';
+import { Button } from 'src/components/matchbox';
 import CheckboxWrapper from 'src/components/reduxFormWrappers/CheckboxWrapper';
 import { selectWebhookEventListing } from 'src/selectors/eventListing';
-import { NameField, TargetField, EventsRadioGroup, AuthDropDown, BasicAuthFields, OAuth2Fields, ActiveField } from './Fields';
+import {
+  NameField,
+  TargetField,
+  EventsRadioGroup,
+  AuthDropDown,
+  BasicAuthFields,
+  OAuth2Fields,
+  ActiveField,
+} from './Fields';
 import SubaccountSection from './SubaccountSection';
 import formatEditValues from '../helpers/formatEditValues';
 import styles from './WebhookForm.module.scss';
@@ -46,7 +55,6 @@ export function AuthFields({ authType, disabled }) {
 }
 
 export class WebhookForm extends Component {
-
   render() {
     const {
       handleSubmit,
@@ -56,9 +64,13 @@ export class WebhookForm extends Component {
       newWebhook,
       hasSubaccounts,
       pristine,
-      submitting
+      submitting,
     } = this.props;
-    const submitText = submitting ? 'Submitting...' : (newWebhook ? 'Create Webhook' : 'Update Webhook');
+    const submitText = submitting
+      ? 'Submitting...'
+      : newWebhook
+      ? 'Create Webhook'
+      : 'Update Webhook';
 
     return (
       <form onSubmit={handleSubmit}>
@@ -66,7 +78,11 @@ export class WebhookForm extends Component {
           <NameField disabled={submitting} />
           <TargetField disabled={submitting} />
         </Panel.Section>
-        {hasSubaccounts ? <Panel.Section><SubaccountSection newWebhook={newWebhook} formName={formName} disabled={submitting}/></Panel.Section> : null}
+        {hasSubaccounts ? (
+          <Panel.Section>
+            <SubaccountSection newWebhook={newWebhook} formName={formName} disabled={submitting} />
+          </Panel.Section>
+        ) : null}
         <Panel.Section>
           <EventsRadioGroup disabled={submitting} />
           <EventCheckBoxes show={showEvents} events={eventListing} disabled={submitting} />
@@ -75,9 +91,15 @@ export class WebhookForm extends Component {
           <AuthDropDown disabled={submitting} />
           <AuthFields authType={auth} disabled={submitting} />
         </Panel.Section>
-        {newWebhook ? null : <Panel.Section><ActiveField disabled={submitting} /></Panel.Section>}
+        {newWebhook ? null : (
+          <Panel.Section>
+            <ActiveField disabled={submitting} />
+          </Panel.Section>
+        )}
         <Panel.Section>
-          <Button submit primary disabled={pristine || submitting}>{submitText}</Button>
+          <Button submit primary disabled={pristine || submitting}>
+            {submitText}
+          </Button>
         </Panel.Section>
       </form>
     );
@@ -99,14 +121,14 @@ const mapStateToProps = (state, props) => {
       eventsRadio: props.allChecked || props.newWebhook ? 'all' : 'select',
       subaccount: !props.newWebhook ? selectInitialSubaccountValue(state, props) : null,
       ...webhookValues,
-      events: props.newWebhook ? {} : getSelectedEvents(state)
-    }
+      events: props.newWebhook ? {} : getSelectedEvents(state),
+    },
   };
 };
 
 const formOptions = {
   form: formName,
-  enableReinitialize: true
+  enableReinitialize: true,
 };
 
 export default withRouter(connect(mapStateToProps, {})(reduxForm(formOptions)(WebhookForm)));

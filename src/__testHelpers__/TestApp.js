@@ -1,11 +1,12 @@
 import React from 'react';
 import { MemoryRouter as Router } from 'react-router-dom';
-import { HibanaProvider } from 'src/context/HibanaContext';
+import Providers from 'src/Providers';
+import store from 'src/store';
 
-const TestApp = ({ history, children }) => (
-  <HibanaProvider>
+const TestApp = ({ children, history }) => (
+  <Providers store={store()}>
     <Router history={history}>{children}</Router>
-  </HibanaProvider>
+  </Providers>
 );
 
 export default TestApp;

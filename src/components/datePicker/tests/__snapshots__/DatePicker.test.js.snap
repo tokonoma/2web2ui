@@ -154,13 +154,11 @@ exports[`Component: DatePicker should render ok by default 1`] = `
     data-id="date-picker-custom-apply"
     onClick={[Function]}
     primary={true}
-    size="default"
   >
     Apply
   </Button>
   <Button
     onClick={[Function]}
-    size="default"
   >
     Cancel
   </Button>

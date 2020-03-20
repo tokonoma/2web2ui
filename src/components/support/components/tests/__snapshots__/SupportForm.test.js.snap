@@ -53,7 +53,6 @@ exports[`Support Form Component Form should render successfully created ticket m
   </p>
   <Button
     primary={true}
-    size="default"
   >
     Continue
   </Button>
@@ -104,7 +103,6 @@ exports[`Support Form Component Form should render support form 1`] = `
   <Panel.Section>
     <Button
       primary={true}
-      size="default"
       submit={true}
     >
       Submit Ticket
@@ -159,7 +157,6 @@ exports[`Support Form Component Form should render with selected issue message l
   <Panel.Section>
     <Button
       primary={true}
-      size="default"
       submit={true}
     >
       Submit Ticket

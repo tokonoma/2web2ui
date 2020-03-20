@@ -1,6 +1,7 @@
 /* eslint-disable max-lines */
 import React, { useState } from 'react';
-import { Button, Panel, Modal, TextField } from '@sparkpost/matchbox';
+import { Panel, Modal, TextField } from '@sparkpost/matchbox';
+import { Button } from 'src/components/matchbox';
 import PanelLoading from 'src/components/panelLoading';
 import ButtonWrapper from 'src/components/buttonWrapper';
 import MultiEmailField, { useMultiEmailField } from 'src/components/multiEmailField';

@@ -4,18 +4,20 @@ import { Link } from 'react-router-dom';
 import { reduxForm } from 'redux-form';
 import { createTicket } from 'src/actions/support';
 import { showAlert } from 'src/actions/globalAlert';
-import { Page, Panel, Button } from '@sparkpost/matchbox';
+import { Page, Panel } from '@sparkpost/matchbox';
+import { Button } from 'src/components/matchbox';
 import PremiumSupportFields from './components/PremiumSupportFields';
 import { generateMessage } from './helpers/formHelpers';
 
 export class PremiumSupportPage extends Component {
-  handleTicketCreate = (values) => this.props.createTicket({
-    message: generateMessage(values),
-    issueType: 'Vetting',
-    subject: 'AWS Premium Vetting'
-  })
+  handleTicketCreate = values =>
+    this.props.createTicket({
+      message: generateMessage(values),
+      issueType: 'Vetting',
+      subject: 'AWS Premium Vetting',
+    });
 
-  componentDidUpdate (prevProps) {
+  componentDidUpdate(prevProps) {
     const { submitSucceeded, showAlert, history, ticketId, createError } = this.props;
 
     if (!prevProps.submitSucceeded && submitSucceeded && !createError) {
@@ -23,20 +25,22 @@ export class PremiumSupportPage extends Component {
       return showAlert({
         type: 'success',
         message: `Request Submitted - Ticket # ${ticketId}`,
-        autoDismiss: false
+        autoDismiss: false,
       });
     }
   }
 
-  render () {
+  render() {
     const { handleSubmit, submitting } = this.props;
 
     return (
-      <Page breadcrumbAction={{ component: Link, to: '/account/billing', content: 'Back to billing' }}>
-        <Panel title='Request Premium Support' sectioned accent>
+      <Page
+        breadcrumbAction={{ component: Link, to: '/account/billing', content: 'Back to billing' }}
+      >
+        <Panel title="Request Premium Support" sectioned accent>
           <form onSubmit={handleSubmit(this.handleTicketCreate)}>
             <PremiumSupportFields />
-            <Button submit color='orange' disabled={submitting}>
+            <Button submit color="orange" disabled={submitting}>
               {submitting ? 'Submitting...' : 'Submit Request'}
             </Button>
           </form>
@@ -47,9 +51,11 @@ export class PremiumSupportPage extends Component {
 }
 
 const formName = 'AwsPremiumSupportForm';
-const mapStateToProps = (state, props) => ({
+const mapStateToProps = state => ({
   ticketId: state.support.ticketId,
-  createError: state.support.createError
+  createError: state.support.createError,
 });
 const formOptions = { form: formName };
-export default connect(mapStateToProps, { createTicket, showAlert })(reduxForm(formOptions)(PremiumSupportPage));
+export default connect(mapStateToProps, { createTicket, showAlert })(
+  reduxForm(formOptions)(PremiumSupportPage),
+);

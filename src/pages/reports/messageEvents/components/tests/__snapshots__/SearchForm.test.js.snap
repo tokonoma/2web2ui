@@ -22,7 +22,6 @@ exports[`SearchForm should render correctly 1`] = `
     <Panel.Section>
       <Button
         primary={true}
-        size="default"
         submit={true}
       >
         Apply Filters
@@ -30,7 +29,6 @@ exports[`SearchForm should render correctly 1`] = `
       <Button
         className="Cancel"
         onClick={[MockFunction]}
-        size="default"
       >
         Cancel
       </Button>

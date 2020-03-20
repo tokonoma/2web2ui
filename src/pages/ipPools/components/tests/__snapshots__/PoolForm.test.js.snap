@@ -49,7 +49,6 @@ exports[`PoolForm should render form 1`] = `
       <Button
         disabled={true}
         primary={true}
-        size="default"
         submit={true}
       >
         Update IP Pool

@@ -1,7 +1,7 @@
 import React from 'react';
 import Brightback from 'src/components/brightback/Brightback';
 import config from 'src/config';
-import { Button } from '@sparkpost/matchbox';
+import { Button } from 'src/components/matchbox';
 import { useFeatureChangeContext } from '../context/FeatureChangeContext';
 
 const SubmitSection = ({ brightbackCondition, loading }) => {

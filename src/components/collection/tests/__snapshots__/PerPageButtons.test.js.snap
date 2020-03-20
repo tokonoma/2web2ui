@@ -12,7 +12,6 @@ exports[`Per Page Buttons should correctly render perPageButtons 1`] = `
     key="10"
     name="collection-per-page-button"
     onClick={[Function]}
-    size="default"
   >
     10
   </Button>
@@ -21,7 +20,6 @@ exports[`Per Page Buttons should correctly render perPageButtons 1`] = `
     key="25"
     name="collection-per-page-button"
     onClick={[Function]}
-    size="default"
   >
     25
   </Button>
@@ -30,7 +28,6 @@ exports[`Per Page Buttons should correctly render perPageButtons 1`] = `
     key="50"
     name="collection-per-page-button"
     onClick={[Function]}
-    size="default"
   >
     50
   </Button>
@@ -39,7 +36,6 @@ exports[`Per Page Buttons should correctly render perPageButtons 1`] = `
     key="100"
     name="collection-per-page-button"
     onClick={[Function]}
-    size="default"
   >
     100
   </Button>

@@ -3,11 +3,13 @@ import BackupCodesList from './BackupCodesList';
 import DownloadCodes from './DownloadCodes';
 import CopyCodes from './CopyCodes'; //todo use CopyToClipboard component
 import PrintCodes from './PrintCodes';
-import { Button } from '@sparkpost/matchbox';
+import { Button } from 'src/components/matchbox';
 
 const BackupCodes = ({ codes }) => (
   <div>
-    <p><strong>Your shiny new backup codes:</strong></p>
+    <p>
+      <strong>Your shiny new backup codes:</strong>
+    </p>
     <Button.Group>
       <BackupCodesList codes={codes} />
       <DownloadCodes codes={codes} />

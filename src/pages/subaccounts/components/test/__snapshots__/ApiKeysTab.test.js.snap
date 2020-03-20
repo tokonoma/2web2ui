@@ -16,7 +16,6 @@ exports[`ApiKeysTab empty 1`] = `
       Component={[Function]}
       color="orange"
       plain={true}
-      size="default"
       to="/account/api-keys"
     >
       Manage API Keys

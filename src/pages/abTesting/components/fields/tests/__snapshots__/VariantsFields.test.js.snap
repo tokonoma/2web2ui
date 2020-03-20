@@ -49,7 +49,6 @@ exports[`Variants Fields Component Field Array should render 1 field with disabl
       disabled={false}
       flat={true}
       onClick={[Function]}
-      size="default"
     >
       <Add />
        Add Another Variant
@@ -148,7 +147,6 @@ exports[`Variants Fields Component Field Array should render 20 fields with disa
       disabled={true}
       flat={true}
       onClick={[Function]}
-      size="default"
     >
       <Add />
        Add Another Variant
@@ -247,7 +245,6 @@ exports[`Variants Fields Component Field Array should render fields correctly wi
       disabled={false}
       flat={true}
       onClick={[Function]}
-      size="default"
     >
       <Add />
        Add Another Variant
@@ -346,7 +343,6 @@ exports[`Variants Fields Component Field Array should render fields correctly wi
       disabled={false}
       flat={true}
       onClick={[Function]}
-      size="default"
     >
       <Add />
        Add Another Variant

@@ -1,6 +1,7 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import TestApp from 'src/__testHelpers__/TestApp';
 import useEditorContext from '../../hooks/useEditorContext';
 import SendTestEmailButton from '../SendTestEmailButton';
 
@@ -27,7 +28,11 @@ describe('SendTestEmailButton', () => {
       ...editorState,
     });
 
-    return render(<SendTestEmailButton {...props} />);
+    return render(
+      <TestApp>
+        <SendTestEmailButton {...props} />
+      </TestApp>,
+    );
   };
 
   it('opens the modal in the loading state and saves the draft when the "Send a Test" button is clicked', () => {

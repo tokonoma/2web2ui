@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from '@sparkpost/matchbox';
+import { Button } from 'src/components/matchbox';
 import styles from './CustomReportRow.module.scss';
 
 function ReportRow(props) {
@@ -11,11 +11,12 @@ function ReportRow(props) {
           className={styles.DeleteButton}
           disabled={props.deleting}
           flat
-          size='small'
-          onClick={(e) => {
+          size="small"
+          onClick={e => {
             e.stopPropagation();
             props.onDelete(props.name);
-          }}>
+          }}
+        >
           Delete
         </Button>
       </div>

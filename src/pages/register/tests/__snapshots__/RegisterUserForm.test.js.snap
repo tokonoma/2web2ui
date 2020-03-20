@@ -43,7 +43,6 @@ exports[`render 1`] = `
   <Button
     disabled={false}
     primary={true}
-    size="default"
     submit={true}
   >
     Confirm
@@ -94,7 +93,6 @@ exports[`submitting 1`] = `
   <Button
     disabled={true}
     primary={true}
-    size="default"
     submit={true}
   >
     Loading

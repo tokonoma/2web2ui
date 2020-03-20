@@ -42,7 +42,6 @@ exports[`Component: AssignTrackingDomain form should have button disabled when f
         <Button
           disabled={true}
           primary={true}
-          size="default"
           submit={true}
         >
           Update Tracking Domain
@@ -95,7 +94,6 @@ exports[`Component: AssignTrackingDomain form should have button disabled when s
         <Button
           disabled={true}
           primary={true}
-          size="default"
           submit={true}
         >
           Updating...
@@ -148,7 +146,6 @@ exports[`Component: AssignTrackingDomain form should render form with initial va
         <Button
           disabled={false}
           primary={true}
-          size="default"
           submit={true}
         >
           Update Tracking Domain

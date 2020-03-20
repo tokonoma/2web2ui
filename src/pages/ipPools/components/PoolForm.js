@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { withRouter } from 'react-router-dom';
-import { Button, Panel } from '@sparkpost/matchbox';
+import { Panel } from '@sparkpost/matchbox';
+import { Button } from 'src/components/matchbox';
 import { SendingDomainTypeaheadWrapper, TextFieldWrapper } from 'src/components';
 import AccessControl from 'src/components/auth/AccessControl';
 import { required } from 'src/helpers/validation';
@@ -19,56 +20,63 @@ export class PoolForm extends Component {
   getOverflowPoolOptions = () => {
     const { pools, pool } = this.props;
 
-    const overflowPools = (pools.map((currentPool) => {
-      if (currentPool.auto_warmup_overflow_pool || currentPool.id === pool.id) {
-        return null;
-      }
+    const overflowPools = pools
+      .map(currentPool => {
+        if (currentPool.auto_warmup_overflow_pool || currentPool.id === pool.id) {
+          return null;
+        }
 
-      return {
-        label: `${currentPool.name} (${currentPool.id})`,
-        value: currentPool.id
-      };
-    })).filter(Boolean); // See: https://stackoverflow.com/a/32906951
+        return {
+          label: `${currentPool.name} (${currentPool.id})`,
+          value: currentPool.id,
+        };
+      })
+      .filter(Boolean); // See: https://stackoverflow.com/a/32906951
 
     // If the pool has available IPs with auto warmup enabled,
     // *and* the user is in SPC or SPCEU,
     // render the 'Shared Pool' option in the `<select/>`
-    const hasPoolsWithAutoWarmup = pools.some(({ ips }) => ips.some((ip) => ip.auto_warmup_enabled));
+    const hasPoolsWithAutoWarmup = pools.some(({ ips }) => ips.some(ip => ip.auto_warmup_enabled));
 
     if (hasPoolsWithAutoWarmup && (inSPC() || inSPCEU())) {
       overflowPools.unshift({
         label: 'Shared Pool',
-        value: 'shared pool'
+        value: 'shared pool',
       });
     }
 
     overflowPools.unshift({ label: 'None', value: '' });
 
     return overflowPools;
-  }
+  };
 
   render() {
     const { isNew, pool, handleSubmit, canEditOverflowPool, submitting, pristine } = this.props;
     const submitText = isNew ? 'Create IP Pool' : 'Update IP Pool';
     const editingDefault = !isNew && isDefaultPool(pool.id);
-    const helpText = editingDefault ? 'You cannot change the default IP pool\'s name' : '';
+    const helpText = editingDefault ? "You cannot change the default IP pool's name" : '';
 
     return (
       <Panel>
         <form onSubmit={handleSubmit}>
           <Panel.Section>
             <Field
-              name='name'
+              name="name"
               component={TextFieldWrapper}
               validate={required}
-              label='Pool Name'
-              placeholder='My IP Pool'
+              label="Pool Name"
+              placeholder="My IP Pool"
               disabled={editingDefault || submitting}
               helpText={helpText}
             />
 
-            {!editingDefault &&
-              <AccessControl condition={any(hasAccountOptionEnabled('allow_default_signing_domains_for_ip_pools'), configFlag('featureFlags.allow_default_signing_domains_for_ip_pools'))}>
+            {!editingDefault && (
+              <AccessControl
+                condition={any(
+                  hasAccountOptionEnabled('allow_default_signing_domains_for_ip_pools'),
+                  configFlag('featureFlags.allow_default_signing_domains_for_ip_pools'),
+                )}
+              >
                 <Field
                   name="signing_domain"
                   component={SendingDomainTypeaheadWrapper}
@@ -76,18 +84,18 @@ export class PoolForm extends Component {
                   disabled={submitting}
                 />
               </AccessControl>
-            }
+            )}
 
-            {!editingDefault &&
+            {!editingDefault && (
               <Field
-                name='auto_warmup_overflow_pool'
-                label='Overflow Pool'
+                name="auto_warmup_overflow_pool"
+                label="Overflow Pool"
                 component={SelectWrapper}
                 options={this.getOverflowPoolOptions()}
-                helpText='With automatic IP Warmup enabled, selected pool will be used when volume threshold for this pool has been reached.'
+                helpText="With automatic IP Warmup enabled, selected pool will be used when volume threshold for this pool has been reached."
                 disabled={submitting || (!isNew && !canEditOverflowPool)}
               />
-            }
+            )}
           </Panel.Section>
           <Panel.Section>
             <Button submit primary disabled={submitting || pristine}>
@@ -102,7 +110,7 @@ export class PoolForm extends Component {
 
 PoolForm.defaultProps = {
   pool: {},
-  pools: []
+  pools: [],
 };
 
 const mapStateToProps = (state, props) => {
@@ -112,14 +120,14 @@ const mapStateToProps = (state, props) => {
     pools: getIpPools(state, props),
     canEditOverflowPool: canEditOverflowPool(state, props),
     initialValues: {
-      ...pool
-    }
+      ...pool,
+    },
   };
 };
 
 const formOptions = {
   form: 'poolForm',
-  enableReinitialize: true
+  enableReinitialize: true,
 };
 
 const PoolReduxForm = reduxForm(formOptions)(PoolForm);

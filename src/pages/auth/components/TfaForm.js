@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 import { Field, reduxForm, SubmissionError } from 'redux-form';
 import { required } from 'src/helpers/validation';
 import { TextFieldWrapper } from 'src/components';
-import { Error } from 'src/components/matchbox';
+import { Button, Error } from 'src/components/matchbox';
 import { verifyAndLogin } from 'src/actions/tfa';
 
-import { Button, UnstyledLink } from '@sparkpost/matchbox';
+import { UnstyledLink } from '@sparkpost/matchbox';
 import { LINKS } from 'src/constants';
 import styles from './TfaForm.module.scss';
 

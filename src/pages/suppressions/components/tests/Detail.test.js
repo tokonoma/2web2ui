@@ -17,8 +17,8 @@ beforeEach(() => {
       recipient: 'foo@bar.com',
       description: '',
       updated: '2018-01-16T04:14:18.661Z',
-      created: '2018-01-16T04:14:18.661Z'
-    }
+      created: '2018-01-16T04:14:18.661Z',
+    },
   };
 
   wrapper = shallow(<Detail {...props} />);
@@ -44,4 +44,3 @@ describe('Detail', () => {
     expect(wrapper).toMatchSnapshot();
   });
 });
-

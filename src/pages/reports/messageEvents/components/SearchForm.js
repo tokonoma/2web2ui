@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Button, Panel } from '@sparkpost/matchbox';
+import { Panel } from '@sparkpost/matchbox';
+import { Button } from 'src/components/matchbox';
 import { FieldArray, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import styles from './SearchForm.module.scss';

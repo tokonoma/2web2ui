@@ -1,9 +1,9 @@
 import React from 'react';
 import { act } from 'react-dom/test-utils';
 import { mount } from 'enzyme';
+import TestApp from 'src/__testHelpers__/TestApp';
 import useRouter from 'src/hooks/useRouter';
 import IntegrationPage from '../IntegrationPage';
-import TestApp from 'src/__testHelpers__/TestApp';
 
 jest.mock('src/hooks/useRouter');
 

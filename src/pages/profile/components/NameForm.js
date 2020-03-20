@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
-import { Button } from '@sparkpost/matchbox';
+import { Button } from 'src/components/matchbox';
 import { required } from 'src/helpers/validation';
 
 import { TextFieldWrapper } from 'src/components';
@@ -14,22 +14,22 @@ export class NameForm extends Component {
       <form onSubmit={handleSubmit}>
         <Field
           // for redux-form
-          name='firstName'
+          name="firstName"
           component={TextFieldWrapper}
           // for the matchbox component
-          id='firstName'
-          label='First Name'
+          id="firstName"
+          label="First Name"
           validate={required}
-          autoComplete='given-name'
+          autoComplete="given-name"
         />
 
         <Field
-          name='lastName'
-          id='lastName'
-          label='Last Name'
+          name="lastName"
+          id="lastName"
+          label="Last Name"
           component={TextFieldWrapper}
           validate={required}
-          autoComplete='family-name'
+          autoComplete="family-name"
         />
 
         <Button submit disabled={submitting || pristine}>
@@ -40,16 +40,16 @@ export class NameForm extends Component {
   }
 }
 
-const mapStateToProps = ({ form, currentUser }) => ({
+const mapStateToProps = ({ currentUser }) => ({
   initialValues: {
     firstName: currentUser.first_name,
-    lastName: currentUser.last_name
-  }
+    lastName: currentUser.last_name,
+  },
 });
 
 const formOptions = {
   form: 'profileName',
-  enableReinitialize: true // required to update initial values from redux state
+  enableReinitialize: true, // required to update initial values from redux state
 };
 
 // breaks if you do reduxForm first

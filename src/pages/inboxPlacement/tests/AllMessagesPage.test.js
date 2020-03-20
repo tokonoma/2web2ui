@@ -1,8 +1,8 @@
 import { mount, shallow } from 'enzyme';
 import React from 'react';
+import TestApp from 'src/__testHelpers__/TestApp';
 import { AllMessagesPage } from '../AllMessagesPage';
 import { AllMessagesCollection } from '../components/AllMessagesCollection';
-import { BrowserRouter as Router } from 'react-router-dom';
 import { PLACEMENT_FILTER_TYPES } from '../constants/types';
 
 describe('Page: All Inbox Placement Messages Test', () => {
@@ -49,7 +49,7 @@ describe('Page: All Inbox Placement Messages Test', () => {
     const resetState = jest.fn().mockReturnValue({});
     const subjectMounted = ({ ...props }) =>
       mount(
-        <Router>
+        <TestApp>
           <AllMessagesPage
             filterType={PLACEMENT_FILTER_TYPES.MAILBOX_PROVIDER}
             filterName={'gmail.com'}
@@ -69,7 +69,7 @@ describe('Page: All Inbox Placement Messages Test', () => {
             AllMessagesCollectionComponent={AllMessagesCollection}
             {...props}
           />
-        </Router>,
+        </TestApp>,
       );
 
     it('calls getInboxPlacementTest & getInboxPlacementByMailboxProvider on load for mailbox-providers', () => {

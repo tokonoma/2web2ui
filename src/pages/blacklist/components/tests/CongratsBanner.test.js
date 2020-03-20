@@ -1,19 +1,17 @@
 import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
 import { render } from '@testing-library/react';
+import TestApp from 'src/__testHelpers__/TestApp';
 import CongratsBanner from '../CongratsBanner';
-import { HibanaProvider } from 'src/context/HibanaContext';
+
 describe('Blacklist Component: CongratsBanner', () => {
   const mockDismiss = jest.fn();
   const subject = ({ ...props }) => {
     const defaults = { mockDismiss };
 
     return render(
-      <Router>
-        <HibanaProvider>
-          <CongratsBanner {...defaults} {...props} />
-        </HibanaProvider>
-      </Router>,
+      <TestApp>
+        <CongratsBanner {...defaults} {...props} />
+      </TestApp>,
     );
   };
 

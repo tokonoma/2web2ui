@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import MonitorssCollection from '../MonitorsCollection';
 import TestApp from 'src/__testHelpers__/TestApp';
+import MonitorssCollection from '../MonitorsCollection';
 
 describe('Blacklist Component: MonitorsCollection', () => {
   const monitors = [

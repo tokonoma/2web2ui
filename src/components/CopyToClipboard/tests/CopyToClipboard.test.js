@@ -12,12 +12,14 @@ describe('CopyToClipboard Component', () => {
 
   it('renders with default props', () => {
     const wrapper = subject();
+    const instance = wrapper.instance();
     expect(wrapper).toMatchSnapshot();
-    expect(wrapper.instance().timeout).toEqual(null);
+    expect(instance.timeout).toEqual(null);
   });
 
   it('renders with provided label', () => {
-    expect(subject({ label: 'Click Me!' }).find('Button').dive().text()).toEqual('<ContentCopy /> Click Me!');
+    const wrapper = subject({ label: 'Click Me!' });
+    expect(wrapper).toHaveTextContent('Click Me!');
   });
 
   it('should handle copy click', () => {
@@ -30,5 +32,4 @@ describe('CopyToClipboard Component', () => {
     expect(window.clearTimeout).toHaveBeenCalled();
     expect(wrapper.instance().timeout).not.toEqual(null);
   });
-
 });

@@ -1,24 +1,32 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { Provider } from 'react-redux';
-import config from './config';
+
 import { unregister } from './helpers/registerServiceWorker';
-import ErrorTracker from './helpers/errorTracker';
+
 import configureStore from './store';
+
+import config from './config';
+import ErrorTracker from './helpers/errorTracker';
+
+import Providers from './Providers';
 
 import './critical.scss';
 import './index.scss';
+
 import App from './App';
 
-const store = configureStore();
+const defaultStore = configureStore();
+
 const renderApp = () => {
   render(
-    <Provider store={store}><App /></Provider>,
-    document.getElementById('root')
+    <Providers store={defaultStore}>
+      <App />
+    </Providers>,
+    document.getElementById('root'),
   );
 };
 
-ErrorTracker.install(config, store);
+ErrorTracker.install(config, defaultStore);
 unregister(); // Our bundle is currently too big to be added to SW cache, causing problems on every deploy
 renderApp();
 window.SPARKPOST_LOADED = true; // Indicates the app bundle has loaded successfully

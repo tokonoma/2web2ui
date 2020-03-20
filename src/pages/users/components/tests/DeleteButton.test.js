@@ -1,16 +1,15 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import { Button } from '@sparkpost/matchbox';
+import { Button } from 'src/components/matchbox';
 import DeleteButton from '../DeleteButton';
 
 describe('Component: User Page DeleteButton', () => {
-
   let props;
   let wrapper;
 
   beforeEach(() => {
     props = {
-      name: 'delete-button-name'
+      name: 'delete-button-name',
     };
     wrapper = shallow(<DeleteButton {...props} />);
   });
@@ -31,5 +30,4 @@ describe('Component: User Page DeleteButton', () => {
     wrapper.find(Button).simulate('click', e);
     expect(onClick).toHaveBeenCalledWith('delete-button-name');
   });
-
 });

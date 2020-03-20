@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Panel, Button, Checkbox, Tooltip, WindowEvent } from '@sparkpost/matchbox';
+import { Panel, Checkbox, Tooltip, WindowEvent } from '@sparkpost/matchbox';
+import { Button } from 'src/components/matchbox';
 import { Modal } from 'src/components';
 import { list } from 'src/config/metrics';
 import _ from 'lodash';
@@ -22,17 +23,17 @@ export default class MetricsModal extends Component {
       const isActive = _.some(selectedMetrics, { key });
       this.setState({ [key]: isActive });
     });
-  }
+  };
 
-  handleCheckbox = (key) => {
+  handleCheckbox = key => {
     this.setState({ [key]: !this.state[key] });
-  }
+  };
 
   handleApply = () => {
     this.props.onSubmit(this.getSelectedMetrics());
-  }
+  };
 
-  handleKeyDown = (e) => {
+  handleKeyDown = e => {
     const { open } = this.props;
 
     if (!open) {
@@ -42,15 +43,15 @@ export default class MetricsModal extends Component {
     if (e.key === 'Enter') {
       this.handleApply();
     }
-  }
+  };
 
-  getSelectedMetrics = () => _.keys(this.state).filter((key) => !!this.state[key])
+  getSelectedMetrics = () => _.keys(this.state).filter(key => !!this.state[key]);
 
   renderMetrics() {
     const selectedCount = this.getSelectedMetrics().length;
     const MAX = this.props.maxMetrics || MAX_METRICS;
 
-    return METRICS_LIST.map((metric) => {
+    return METRICS_LIST.map(metric => {
       if (metric.inSummary) {
         const checked = this.state[metric.key];
         return (
@@ -61,7 +62,8 @@ export default class MetricsModal extends Component {
                 disabled={selectedCount >= MAX && !checked}
                 onChange={() => this.handleCheckbox(metric.key)}
                 checked={checked}
-                label={metric.label} />
+                label={metric.label}
+              />
             </Tooltip>
           </div>
         );
@@ -75,15 +77,24 @@ export default class MetricsModal extends Component {
 
     return (
       <Modal open={open} onClose={onCancel}>
-        <WindowEvent event='keydown' handler={this.handleKeyDown} />
+        <WindowEvent event="keydown" handler={this.handleKeyDown} />
         <Panel>
           <Panel.Section>
             <h5>Select up to 5 metrics</h5>
-            <div>{ this.renderMetrics() }</div>
+            <div>{this.renderMetrics()}</div>
           </Panel.Section>
           <Panel.Section>
-            <Button onClick={this.handleApply} primary className={styles.Apply} disabled={!selectedCount}>Apply Metrics</Button>
-            <Button onClick={onCancel} className={styles.Cancel}>Cancel</Button>
+            <Button
+              onClick={this.handleApply}
+              primary
+              className={styles.Apply}
+              disabled={!selectedCount}
+            >
+              Apply Metrics
+            </Button>
+            <Button onClick={onCancel} className={styles.Cancel}>
+              Cancel
+            </Button>
           </Panel.Section>
         </Panel>
       </Modal>

@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import { Field, reduxForm } from 'redux-form';
-import { Page, Panel, Button } from '@sparkpost/matchbox';
+import { Page, Panel } from '@sparkpost/matchbox';
+import { Button } from 'src/components/matchbox';
 import { TextFieldWrapper } from 'src/components';
 import { required, email } from 'src/helpers/validation';
 import { inviteUser } from 'src/actions/users';
@@ -16,37 +17,27 @@ import RoleRadioGroup from './components/RoleRadioGroup';
 const breadcrumbAction = {
   content: 'Users',
   Component: Link,
-  to: '/account/users'
+  to: '/account/users',
 };
 
 export class CreatePage extends Component {
-  handleSubmit = (values) => {
-    const {
-      inviteUser,
-      showAlert,
-      history
-    } = this.props;
+  handleSubmit = values => {
+    const { inviteUser, showAlert, history } = this.props;
     const { email, access, useSubaccount, subaccount } = values;
 
     const access_level = useSubaccount ? ROLES.SUBACCOUNT_REPORTING : access;
 
-    return inviteUser(email, access_level, subaccount)
-      .then(() => {
-        showAlert({
-          type: 'success',
-          message: `Invitation sent to ${email}`
-        });
-        history.push('/account/users');
+    return inviteUser(email, access_level, subaccount).then(() => {
+      showAlert({
+        type: 'success',
+        message: `Invitation sent to ${email}`,
       });
+      history.push('/account/users');
+    });
   };
 
   render() {
-    const {
-      submitting,
-      pristine,
-      handleSubmit,
-      isSubaccountReportingLive
-    } = this.props;
+    const { submitting, pristine, handleSubmit, isSubaccountReportingLive } = this.props;
 
     return (
       <Page title="Invite User" breadcrumbAction={breadcrumbAction}>
@@ -77,17 +68,15 @@ export class CreatePage extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   initialValues: {
-    access: ROLES.ADMIN // Sadly redux-form does not reflect a select's initial value
+    access: ROLES.ADMIN, // Sadly redux-form does not reflect a select's initial value
   },
-  isSubaccountReportingLive: hasUiOption('subaccount_reporting')(state)
+  isSubaccountReportingLive: hasUiOption('subaccount_reporting')(state),
 });
 
 const mapDispatchToProps = { inviteUser, showAlert };
 
 const ReduxCreatePage = reduxForm({ form: FORMS.INVITE_USER })(CreatePage);
 
-export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(ReduxCreatePage)
-);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ReduxCreatePage));

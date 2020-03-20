@@ -12,7 +12,6 @@ exports[`ApiErrorBanner Component should render when error prop is passed 1`] = 
   <Button
     onClick={[Function]}
     outline={true}
-    size="default"
   >
     Show Error Details
   </Button>
@@ -31,7 +30,6 @@ exports[`ApiErrorBanner Component should render with details 1`] = `
   <Button
     onClick={[Function]}
     outline={true}
-    size="default"
   >
     Show Error Details
   </Button>
@@ -50,7 +48,6 @@ exports[`ApiErrorBanner Component should render with details 2`] = `
   <Button
     onClick={[Function]}
     outline={true}
-    size="default"
   >
     Hide Error Details
   </Button>
@@ -106,7 +103,6 @@ exports[`ApiErrorBanner Component should render with reload 1`] = `
   <Button
     onClick={[Function]}
     outline={true}
-    size="default"
     style={
       Object {
         "marginRight": "10px",

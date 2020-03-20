@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
-import { Panel, Button } from '@sparkpost/matchbox';
+import { Panel } from '@sparkpost/matchbox';
+import { Button } from 'src/components/matchbox';
 import { TableCollection, DomainStatusCell, StatusTooltipHeader } from 'src/components';
 import { selectSendingDomainsForSubaccount } from 'src/selectors/sendingDomains';
 import PanelLoading from 'src/components/panelLoading/PanelLoading';
 
 const columns = [
   { label: 'Domain', width: '30%', sortKey: 'domain' },
-  { label: <StatusTooltipHeader />, width: '40%' }
+  { label: <StatusTooltipHeader />, width: '40%' },
 ];
 
-export const getRowData = (row) => [
+export const getRowData = row => [
   <Link to={`/account/sending-domains/edit/${row.domain}`}>{row.domain}</Link>,
-  <DomainStatusCell domain={row} />
+  <DomainStatusCell domain={row} />,
 ];
 
 export class SendingDomainsTab extends Component {
@@ -37,8 +38,13 @@ export class SendingDomainsTab extends Component {
   renderEmpty() {
     return (
       <Panel.Section style={{ textAlign: 'center' }}>
-        <p>This subaccount has no sending domains assigned to it. You can assign an existing one, or create a new one.</p>
-        <Button plain color='orange' Component={Link} to='/account/sending-domains'>Manage Sending Domains</Button>
+        <p>
+          This subaccount has no sending domains assigned to it. You can assign an existing one, or
+          create a new one.
+        </p>
+        <Button plain color="orange" Component={Link} to="/account/sending-domains">
+          Manage Sending Domains
+        </Button>
       </Panel.Section>
     );
   }
@@ -52,20 +58,13 @@ export class SendingDomainsTab extends Component {
 
     const showEmpty = this.props.domains.length === 0;
 
-    return (
-      <Panel>
-        {showEmpty
-          ? this.renderEmpty()
-          : this.renderCollection()
-        }
-      </Panel>
-    );
+    return <Panel>{showEmpty ? this.renderEmpty() : this.renderCollection()}</Panel>;
   }
 }
 
 const mapStateToProps = (state, props) => ({
   loading: state.sendingDomains.listLoading,
-  domains: selectSendingDomainsForSubaccount(state, props)
+  domains: selectSendingDomainsForSubaccount(state, props),
 });
 
 export default withRouter(connect(mapStateToProps)(SendingDomainsTab));

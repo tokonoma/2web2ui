@@ -104,7 +104,6 @@ exports[`Webhooks Form Component should render correctly 1`] = `
     <Button
       disabled={true}
       primary={true}
-      size="default"
       submit={true}
     >
       Update Webhook

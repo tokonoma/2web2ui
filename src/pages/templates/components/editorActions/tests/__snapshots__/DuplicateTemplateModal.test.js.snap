@@ -39,7 +39,6 @@ exports[`DuplicateTemplateModal renders with default props and some data from th
         <Button
           color="orange"
           data-id="button-duplicate"
-          size="default"
           submit={true}
         >
           Duplicate

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Page } from '@sparkpost/matchbox';
+import { Page } from '@sparkpost/matchbox';
+import { Button } from 'src/components/matchbox';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
