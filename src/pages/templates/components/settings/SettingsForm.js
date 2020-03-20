@@ -102,7 +102,9 @@ export default class SettingsForm extends React.Component {
             />
           </Panel.Section>
           {canViewSubaccountSection && (
-            <SubaccountSection newTemplate={false} disabled={submitting || isPublishedMode} />
+            <Panel.Section>
+              <SubaccountSection newTemplate={false} disabled={submitting || isPublishedMode} />
+            </Panel.Section>
           )}
           <Panel.Section>
             <Field

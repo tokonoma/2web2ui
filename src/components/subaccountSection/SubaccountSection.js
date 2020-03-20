@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
-import { Panel } from '@sparkpost/matchbox';
 import { RadioGroup, SubaccountTypeaheadWrapper } from 'src/components';
 import ToggleBlock from 'src/components/toggleBlock/ToggleBlock';
 import { required } from 'src/helpers/validation';
@@ -9,7 +8,7 @@ import { required } from 'src/helpers/validation';
 const createOptions = [
   { label: 'Assign to Master Account', value: 'master' },
   { label: 'Share with all Subaccounts', value: 'shared' },
-  { label: 'Assign to Subaccount', value: 'subaccount' }
+  { label: 'Assign to Subaccount', value: 'subaccount' },
 ];
 
 /**
@@ -36,17 +35,24 @@ export default class SubaccountSection extends Component {
   renderCreate() {
     const { assignTo } = this.props;
 
-    const typeahead = assignTo === 'subaccount'
-      ? <Field name='subaccount' component={SubaccountTypeaheadWrapper} validate={required} helpText='This assignment is permanent.'/>
-      : null;
+    const typeahead =
+      assignTo === 'subaccount' ? (
+        <Field
+          name="subaccount"
+          component={SubaccountTypeaheadWrapper}
+          validate={required}
+          helpText="This assignment is permanent."
+        />
+      ) : null;
 
     return (
       <div>
         <Field
           component={RadioGroup}
-          name='assignTo'
-          title='Subaccount Assignment'
-          options={createOptions} />
+          name="assignTo"
+          title="Subaccount Assignment"
+          options={this.props.createOptions ? this.props.createOptions : createOptions}
+        />
         {typeahead}
       </div>
     );
@@ -59,37 +65,35 @@ export default class SubaccountSection extends Component {
       return (
         <Field
           component={SubaccountTypeaheadWrapper}
-          name='subaccount'
-          label='Subaccount'
-          helpText='This assignment is permanent.'
-          disabled />
+          name="subaccount"
+          label="Subaccount"
+          helpText="This assignment is permanent."
+          disabled
+        />
       );
     }
 
     return (
       <Field
         component={ToggleBlock}
-        type='checkbox'
-        parse={(value) => !!value} // Prevents unchecked value from equaling ""
-        name='shared_with_subaccounts'
-        label='Share with all subaccounts'
-        disabled={disabled} />
+        type="checkbox"
+        parse={value => !!value} // Prevents unchecked value from equaling ""
+        name="shared_with_subaccounts"
+        label="Share with all subaccounts"
+        disabled={disabled}
+      />
     );
   }
 
   render() {
     const { newTemplate } = this.props;
 
-    return (
-      <Panel.Section>
-        {newTemplate ? this.renderCreate() : this.renderEdit()}
-      </Panel.Section>
-    );
+    return <>{newTemplate ? this.renderCreate() : this.renderEdit()}</>;
   }
 }
 
 SubaccountSection.propTypes = {
   newTemplate: PropTypes.bool,
   assignTo: PropTypes.oneOf(['master', 'shared', 'subaccount', null]),
-  change: PropTypes.func
+  change: PropTypes.func,
 };

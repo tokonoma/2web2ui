@@ -1,0 +1,14 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.FormContainer {
+  margin-top: 1rem;
+}
+
+.ClearButtonContainer {
+  margin-left: 1rem;
+  display: inline;
+}
+
+.ScreenReaderOnly {
+  @include visually-hidden();
+}
