@@ -1,6 +1,8 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
+import TestApp from 'src/__testHelpers__/TestApp';
 import { UploadedListPage } from '../UploadedListPage';
+
 jest.mock('src/components/pageLink/PageLink', () => {
   return () => {
     return [];
@@ -11,9 +13,10 @@ jest.mock('src/pages/recipientValidation/components/ListProgress', () => {
     return [];
   };
 });
+
 describe('UploadedListPage', () => {
-  const subject = (props = {}, method = shallow) =>
-    method(
+  const subject = (props = {}, method = shallow) => {
+    let component = (
       <UploadedListPage
         getJobStatus={() => {}}
         getBillingInfo={() => {}}
@@ -29,8 +32,15 @@ describe('UploadedListPage', () => {
         billing={{}}
         handleSubmit={() => {}}
         {...props}
-      />,
+      />
     );
+
+    if (method === mount) {
+      return mount(<TestApp>{component}</TestApp>);
+    }
+
+    return method(component);
+  };
 
   it('renders with list progress', () => {
     expect(subject()).toMatchSnapshot();
