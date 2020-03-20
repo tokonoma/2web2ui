@@ -5,7 +5,9 @@ Array [
   Array [
     Object {
       "data": Object {
-        "creation_params": Object {},
+        "creation_params": Object {
+          "email_opt_in": false,
+        },
         "email": "test-username@example.com",
         "first_name": "Firsty",
         "last_name": "Ferret",
