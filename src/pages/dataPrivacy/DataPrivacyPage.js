@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
-import { Page, Tabs } from '@sparkpost/matchbox';
-import { Panel } from 'src/components/matchbox';
+import { Page } from '@sparkpost/matchbox';
+import { Panel, Tabs } from 'src/components/matchbox';
 import styles from './DataPrivacyPage.module.scss';
 import ApiDetailsTab from './components/ApiDetailsTab';
 import SingleRecipientTab from './components/SingleRecipientTab';

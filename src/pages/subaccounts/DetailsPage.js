@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link, withRouter, Route, Switch } from 'react-router-dom';
-import { Page, Tabs } from '@sparkpost/matchbox';
-
+import { Page } from '@sparkpost/matchbox';
+import { Tabs } from 'src/components/matchbox';
 import { clearSubaccount, getSubaccount } from 'src/actions/subaccounts';
 import { ApiKeySuccessBanner } from 'src/components';
 import { selectSubaccount } from 'src/selectors/subaccounts';
@@ -19,26 +19,25 @@ import SendingDomainsTab from './components/SendingDomainsTab';
 const breadcrumbAction = {
   content: 'Subaccounts',
   Component: Link,
-  to: '/account/subaccounts'
+  to: '/account/subaccounts',
 };
 
-
-const buildTabs = (id) => [
+const buildTabs = id => [
   {
     content: 'Details',
     Component: Link,
-    to: `/account/subaccounts/${id}`
+    to: `/account/subaccounts/${id}`,
   },
   {
     content: 'API Keys',
     Component: Link,
-    to: `/account/subaccounts/${id}/api-keys`
+    to: `/account/subaccounts/${id}/api-keys`,
   },
   {
     content: 'Sending Domains',
     Component: Link,
-    to: `/account/subaccounts/${id}/sending-domains`
-  }
+    to: `/account/subaccounts/${id}/sending-domains`,
+  },
 ];
 
 export class DetailsPage extends Component {
@@ -78,9 +77,21 @@ export class DetailsPage extends Component {
         {newKey && <ApiKeySuccessBanner title="Don't Forget Your API Key" />}
         <Tabs selected={selectedTab} tabs={tabs} />
         <Switch>
-          <Route exact path="/account/subaccounts/:id" render={() => <EditTab subaccount={subaccount} />} />
-          <Route exact path="/account/subaccounts/:id/api-keys" render={() => <ApiKeysTab id={subaccount.id} />} />
-          <Route exact path="/account/subaccounts/:id/sending-domains" render={() => <SendingDomainsTab id={subaccount.id} />} />
+          <Route
+            exact
+            path="/account/subaccounts/:id"
+            render={() => <EditTab subaccount={subaccount} />}
+          />
+          <Route
+            exact
+            path="/account/subaccounts/:id/api-keys"
+            render={() => <ApiKeysTab id={subaccount.id} />}
+          />
+          <Route
+            exact
+            path="/account/subaccounts/:id/sending-domains"
+            render={() => <SendingDomainsTab id={subaccount.id} />}
+          />
         </Switch>
       </Page>
     );
@@ -92,7 +103,7 @@ const mapStateToProps = (state, props) => ({
   id: props.match.params.id,
   loading: state.subaccounts.getLoading,
   subaccount: selectSubaccount(state),
-  newKey: state.apiKeys.newKey
+  newKey: state.apiKeys.newKey,
 });
 
 const mapDispatchToProps = {
@@ -101,7 +112,7 @@ const mapDispatchToProps = {
   hideNewApiKey,
   listApiKeys,
   listDomains,
-  listPools
+  listPools,
 };
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(DetailsPage));

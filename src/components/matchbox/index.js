@@ -15,3 +15,4 @@ export { default as Stack } from './Stack';
 export { default as Tag } from './Tag';
 export { default as TextField } from './TextField';
 export { default as ThemeProvider } from './ThemeProvider';
+export { default as Tabs } from './Tabs';
