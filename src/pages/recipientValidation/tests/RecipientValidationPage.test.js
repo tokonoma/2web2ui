@@ -1,9 +1,8 @@
 import { shallow, mount } from 'enzyme';
 import React from 'react';
+import TestApp from 'src/__testHelpers__/TestApp';
 import { RecipientValidationPage } from '../RecipientValidationPage';
 import { Launch } from '@sparkpost/matchbox-icons';
-import { MemoryRouter } from 'react-router-dom';
-import Providers from 'src/Providers';
 
 jest.mock('src/pages/recipientValidation/components/ValidateSection', () => {
   return function ValidateSection() {
@@ -82,11 +81,9 @@ describe('Page: Recipient Email Verification (shallow)', () => {
 describe('Page: Recipient Email Verification (full)', () => {
   const subject_mount = props =>
     mount(
-      <Providers>
-        <MemoryRouter>
-          <RecipientValidationPage {...defaultProps} {...props} />
-        </MemoryRouter>
-      </Providers>,
+      <TestApp>
+        <RecipientValidationPage {...defaultProps} {...props} />
+      </TestApp>,
     );
 
   it('getBillingInfo and getBillingSubscription is called when Recipient Validation Page mounts', () => {

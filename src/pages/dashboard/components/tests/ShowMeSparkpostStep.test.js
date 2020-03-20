@@ -1,9 +1,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { render } from '@testing-library/react';
+import TestApp from 'src/__testHelpers__/TestApp';
 import ShowMeSparkpostStep from '../ShowMeSparkpostStep';
 import { GuideContext } from '../GettingStartedGuide';
-import Providers from 'src/Providers';
 
 describe('ShowMeSparkpostStep', () => {
   const subject_enzyme = (func = shallow) => func(<ShowMeSparkpostStep />);
@@ -22,11 +22,11 @@ describe('ShowMeSparkpostStep', () => {
     };
 
     return func(
-      <Providers>
+      <TestApp>
         <GuideContext.Provider value={values}>
           <ShowMeSparkpostStep />
         </GuideContext.Provider>
-      </Providers>,
+      </TestApp>,
     );
   };
   it('should render breadcrumbs', () => {

@@ -1,7 +1,6 @@
 import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
-import Providers from 'src/Providers';
 import { render, fireEvent } from '@testing-library/react';
+import TestApp from 'src/__testHelpers__/TestApp';
 import IncidentsCollection from '../IncidentsCollection';
 
 describe('Blacklist Component: IncidentsCollection', () => {
@@ -26,11 +25,9 @@ describe('Blacklist Component: IncidentsCollection', () => {
     const defaults = { incidents, dateOptions, updateDateRange };
 
     return render(
-      <Providers>
-        <Router>
-          <IncidentsCollection {...defaults} {...props} />
-        </Router>
-      </Providers>,
+      <TestApp>
+        <IncidentsCollection {...defaults} {...props} />
+      </TestApp>,
     );
   };
 

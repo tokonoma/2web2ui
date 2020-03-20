@@ -1,7 +1,6 @@
 import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
-import Providers from 'src/Providers';
 import { render } from '@testing-library/react';
+import TestApp from 'src/__testHelpers__/TestApp';
 import IncidentDetails from '../IncidentDetails';
 
 describe('Blacklist Component: RelatedIncidents', () => {
@@ -16,11 +15,9 @@ describe('Blacklist Component: RelatedIncidents', () => {
     };
 
     return render(
-      <Providers>
-        <Router>
-          <IncidentDetails {...defaults} {...props} />
-        </Router>
-      </Providers>,
+      <TestApp>
+        <IncidentDetails {...defaults} {...props} />
+      </TestApp>,
     );
   };
 

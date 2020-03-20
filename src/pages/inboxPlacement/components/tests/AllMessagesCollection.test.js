@@ -1,8 +1,7 @@
 import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
 import { shallow, mount } from 'enzyme';
 import cases from 'jest-in-case';
-import Providers from 'src/Providers';
+import TestApp from 'src/__testHelpers__/TestApp';
 import { AllMessagesCollection, passFail } from '../AllMessagesCollection';
 
 describe('Component: AllMessagesCollection', () => {
@@ -64,20 +63,18 @@ describe('Component: AllMessagesCollection', () => {
   describe('message headers', () => {
     const mountSubject = () =>
       mount(
-        <Providers>
-          <Router>
-            <AllMessagesCollection
-              {...defaultProps}
-              data={[{ id: 0 }, { id: 1 }]}
-              messagesById={{
-                0: {
-                  headers: 'foo',
-                  status: 'loaded',
-                },
-              }}
-            />
-          </Router>
-        </Providers>,
+        <TestApp>
+          <AllMessagesCollection
+            {...defaultProps}
+            data={[{ id: 0 }, { id: 1 }]}
+            messagesById={{
+              0: {
+                headers: 'foo',
+                status: 'loaded',
+              },
+            }}
+          />
+        </TestApp>,
       );
 
     const click = (id, wrapper) => {

@@ -1,9 +1,9 @@
 import React from 'react';
 import { act } from 'react-dom/test-utils';
 import { mount } from 'enzyme';
+import TestApp from 'src/__testHelpers__/TestApp';
 import useRouter from 'src/hooks/useRouter';
 import IntegrationPage from '../IntegrationPage';
-import Providers from 'src/Providers';
 
 jest.mock('src/hooks/useRouter');
 
@@ -23,7 +23,7 @@ describe('IntegrationPage', () => {
     });
 
     return mount(
-      <Providers>
+      <TestApp>
         <IntegrationPage
           getIngestBatchEvents={() => {}}
           eventsByPage={[]}
@@ -31,7 +31,7 @@ describe('IntegrationPage', () => {
           totalCount={0}
           {...props}
         />
-      </Providers>,
+      </TestApp>,
     );
   };
 

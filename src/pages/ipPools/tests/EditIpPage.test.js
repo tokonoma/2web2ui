@@ -1,8 +1,7 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { BrowserRouter as Router } from 'react-router-dom';
-import Providers from 'src/Providers';
+import TestApp from 'src/__testHelpers__/TestApp';
 import { EditIpPage } from '../EditIpPage';
 jest.mock('../components/IpForm');
 
@@ -33,11 +32,9 @@ describe('IP Edit Page', () => {
 
     // Router needed to use <Link/> component inside
     return render(
-      <Providers>
-        <Router>
-          <EditIpPage {...mergedProps} />
-        </Router>
-      </Providers>,
+      <TestApp>
+        <EditIpPage {...mergedProps} />
+      </TestApp>,
     );
   };
 
