@@ -20,7 +20,7 @@ const Group = props => {
   const { isHibanaEnabled } = state;
 
   if (!isHibanaEnabled) {
-    return <OGButton.Group {...omitSystemProps(props, [])} />;
+    return <OGButton.Group {...omitSystemProps(props)} />;
   }
 
   return <HibanaButton.Group {...props} />;
@@ -28,9 +28,7 @@ const Group = props => {
 
 Button.Group = Group;
 
-OGButton.displayName = 'Button';
-HibanaButton.displayName = 'Button';
-Button.displayName = 'Button';
-Group.displayName = 'Button.Group';
+HibanaButton.displayName = 'HibanaButton';
+HibanaButton.Group = 'HibanaButton.Group';
 
 export default Button;
