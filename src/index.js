@@ -8,12 +8,12 @@ import configureStore from './store';
 import config from './config';
 import ErrorTracker from './helpers/errorTracker';
 
-import Providers from './Providers';
-
+// note, these must be imported before App and Providers
 import './critical.scss';
 import './index.scss';
 
 import App from './App';
+import Providers from './Providers';
 
 const defaultStore = configureStore();
 
