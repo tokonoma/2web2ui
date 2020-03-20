@@ -56,7 +56,7 @@ export class JoinPage extends Component {
       ...accountFields,
       sfdcid,
       salesforce_data: { ...attributionData, email_opt_out: !values.email_opt_in },
-      creation_params: creationParams,
+      creation_params: { ...creationParams, email_opt_out: !values.email_opt_in },
     };
 
     return register(signupData)

@@ -41,6 +41,7 @@ Array [
   Array [
     Object {
       "creation_params": Object {
+        "email_opt_out": true,
         "extra1": "bar1",
         "extra2": "bar2",
         "sfdcid": "abcd",
