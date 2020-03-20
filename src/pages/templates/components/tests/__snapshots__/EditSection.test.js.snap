@@ -57,7 +57,6 @@ exports[`EditSection renders tabs and section 1`] = `
           data-id="popover-trigger-more"
           flat={true}
           onClick={[Function]}
-          size="default"
         >
           <MoreHoriz />
           <ScreenReaderOnly>
