@@ -1,12 +1,9 @@
 import { mount } from 'enzyme';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import TestApp from 'src/__testHelpers__/TestApp';
 import { IncidentDetailsPage } from '../IncidentDetailsPage';
 import RelatedIncidents from '../components/RelatedIncidents';
 import IncidentDetails from '../components/IncidentDetails';
-
-jest.mock('react-router-dom');
-Link.mockImplementation(() => 'breadcrumb link');
 
 jest.mock('../components/IncidentDetails');
 IncidentDetails.mockImplementation(() => <div className="mock-incident-details"></div>);
@@ -70,7 +67,11 @@ describe('IncidentDetailsPage', () => {
       listIncidentsForBlacklist: mockListIncidentsForBlacklist,
       listHistoricalResolvedIncidents: mockListHistoricalResolvedIncidents,
     };
-    return mount(<IncidentDetailsPage {...defaults} {...props} />);
+    return mount(
+      <TestApp>
+        <IncidentDetailsPage {...defaults} {...props} />
+      </TestApp>,
+    );
   };
 
   it('fetches incident, similar incidents for resource and blacklist, and historical incidents on mount', async () => {
