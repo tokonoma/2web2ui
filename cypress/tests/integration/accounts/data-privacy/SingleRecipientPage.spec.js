@@ -20,7 +20,7 @@ describe('The single recipient data-privacy page', () => {
       fixture: 'data-privacy/200.post.json',
     });
     cy.get('[value="rtbf"]').check({ force: true });
-    cy.findByLabelText('Email Address').type('myfakeusername@sparkpost.com');
+    cy.findByLabelText('Recipient Email Address').type('myfakeusername@sparkpost.com');
     cy.findByText('Submit Request').click();
     cy.findAllByText('Request Saved').should('be.visible');
   });
@@ -33,7 +33,7 @@ describe('The single recipient data-privacy page', () => {
       fixture: 'data-privacy/400.post.json',
     });
     cy.get('[value="rtbf"]').check({ force: true });
-    cy.findByLabelText('Email Address').type('myfakeusername@sparkpost.com');
+    cy.findByLabelText('Recipient Email Address').type('myfakeusername@sparkpost.com');
     cy.findByText('Submit Request').click();
     cy.findAllByText('Something went wrong.').should('be.visible');
   });
