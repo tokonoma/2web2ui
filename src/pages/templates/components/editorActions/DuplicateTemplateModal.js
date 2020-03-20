@@ -1,33 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import {
-  Modal,
-  Panel,
-  TextField,
-  Button
-} from '@sparkpost/matchbox';
+import { Modal, Panel, TextField } from '@sparkpost/matchbox';
+import { Button } from 'src/components/matchbox';
 import ButtonWrapper from 'src/components/buttonWrapper';
 import PanelLoading from 'src/components/panelLoading';
 
-const ModalWrapper = (props) => {
-  const {
-    open,
-    onClose,
-    children
-  } = props;
+const ModalWrapper = props => {
+  const { open, onClose, children } = props;
 
   return (
-    <Modal
-      open={open}
-      onClose={onClose}
-      showCloseButton={true}
-    >
+    <Modal open={open} onClose={onClose} showCloseButton={true}>
       {children}
     </Modal>
   );
 };
 
-const DuplicateTemplateModal = (props) => {
+const DuplicateTemplateModal = props => {
   const {
     open,
     onClose,
@@ -37,11 +25,11 @@ const DuplicateTemplateModal = (props) => {
     createTemplate,
     successCallback,
     showAlert,
-    isLoading
+    isLoading,
   } = props;
   const modalProps = { open, onClose };
-  const initialDraftName = (template && template.name) ? `${template.name} (COPY)` : '';
-  const initialDraftId = (template && template.id) ? `${template.id}-copy` : '';
+  const initialDraftName = template && template.name ? `${template.name} (COPY)` : '';
+  const initialDraftId = template && template.id ? `${template.id}-copy` : '';
 
   // State
   const [draftName, setDraftName] = useState(initialDraftName);
@@ -54,7 +42,7 @@ const DuplicateTemplateModal = (props) => {
     setDraftId(initialDraftId);
   }, [initialDraftName, initialDraftId, template]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
 
     if (draftName.length === 0) {
@@ -73,29 +61,28 @@ const DuplicateTemplateModal = (props) => {
         sharedWithSubaccounts: template.shared_with_subaccounts,
         content: contentToDuplicate,
         parsedTestData: testDataToDuplicate,
-        options: template.options
-      })
-        .then(() => {
-          if (successCallback) {
-            successCallback();
-          } else {
-            showAlert({
-              type: 'success',
-              message: 'Template duplicated.'
-            });
+        options: template.options,
+      }).then(() => {
+        if (successCallback) {
+          successCallback();
+        } else {
+          showAlert({
+            type: 'success',
+            message: 'Template duplicated.',
+          });
 
-            onClose();
-          }
-        });
+          onClose();
+        }
+      });
     }
   };
 
-  const handleNameChange = (e) => {
+  const handleNameChange = e => {
     setNameError(false);
     setDraftName(e.target.value);
   };
 
-  const handleIdChange = (e) => {
+  const handleIdChange = e => {
     setIdError(false);
     setDraftId(e.target.value);
   };
@@ -103,19 +90,15 @@ const DuplicateTemplateModal = (props) => {
   if (isLoading) {
     return (
       <ModalWrapper {...modalProps}>
-        <PanelLoading accent minHeight='330px'/>
+        <PanelLoading accent minHeight="330px" />
       </ModalWrapper>
     );
   }
 
   return (
     <ModalWrapper {...modalProps}>
-      <Panel
-        accent
-        title="Duplicate Template"
-        sectioned
-      >
-        <form onSubmit={(e) => handleSubmit(e)}>
+      <Panel accent title="Duplicate Template" sectioned>
+        <form onSubmit={e => handleSubmit(e)}>
           <TextField
             id="template-name"
             name="templateName"
@@ -139,11 +122,7 @@ const DuplicateTemplateModal = (props) => {
           />
 
           <ButtonWrapper>
-            <Button
-              color="orange"
-              submit
-              data-id="button-duplicate"
-            >
+            <Button color="orange" submit data-id="button-duplicate">
               Duplicate
             </Button>
           </ButtonWrapper>
@@ -158,7 +137,7 @@ DuplicateTemplateModal.propTypes = {
   onClose: PropTypes.func.isRequired,
   template: PropTypes.object,
   createTemplate: PropTypes.func,
-  successCallback: PropTypes.func
+  successCallback: PropTypes.func,
 };
 
 export default DuplicateTemplateModal;
