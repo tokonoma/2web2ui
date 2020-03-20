@@ -1,7 +1,6 @@
 import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
-import Providers from 'src/Providers';
 import { shallow, mount } from 'enzyme';
+import TestApp from 'src/__testHelpers__/TestApp';
 import useEditorContext from '../../hooks/useEditorContext';
 import InsertSnippetModal from '../InsertSnippetModal';
 
@@ -28,11 +27,9 @@ describe('InsertSnippetModal', () => {
     }
 
     return mount(
-      <Providers>
-        <Router>
-          <InsertSnippetModal {...mergedProps} />
-        </Router>
-      </Providers>,
+      <TestApp>
+        <InsertSnippetModal {...mergedProps} />
+      </TestApp>,
     );
   };
 

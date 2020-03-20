@@ -1,9 +1,9 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import TestApp from 'src/__testHelpers__/TestApp';
 import useEditorContext from '../../hooks/useEditorContext';
 import SendTestEmailButton from '../SendTestEmailButton';
-import Providers from 'src/Providers';
 
 jest.mock('../../hooks/useEditorContext');
 
@@ -29,9 +29,9 @@ describe('SendTestEmailButton', () => {
     });
 
     return render(
-      <Providers>
+      <TestApp>
         <SendTestEmailButton {...props} />
-      </Providers>,
+      </TestApp>,
     );
   };
 

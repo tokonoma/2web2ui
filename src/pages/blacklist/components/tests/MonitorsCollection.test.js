@@ -1,7 +1,6 @@
 import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
-import Providers from 'src/Providers';
 import { render } from '@testing-library/react';
+import TestApp from 'src/__testHelpers__/TestApp';
 import MonitorssCollection from '../MonitorsCollection';
 
 describe('Blacklist Component: MonitorsCollection', () => {
@@ -19,11 +18,9 @@ describe('Blacklist Component: MonitorsCollection', () => {
     const defaults = { monitors };
 
     return render(
-      <Providers>
-        <Router>
-          <MonitorssCollection {...defaults} {...props} />
-        </Router>
-      </Providers>,
+      <TestApp>
+        <MonitorssCollection {...defaults} {...props} />
+      </TestApp>,
     );
   };
 

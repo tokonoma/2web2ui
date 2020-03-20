@@ -1,9 +1,8 @@
 import { mount, shallow } from 'enzyme';
 import React from 'react';
+import TestApp from 'src/__testHelpers__/TestApp';
 import { AllMessagesPage } from '../AllMessagesPage';
 import { AllMessagesCollection } from '../components/AllMessagesCollection';
-import { BrowserRouter as Router } from 'react-router-dom';
-import Providers from 'src/Providers';
 import { PLACEMENT_FILTER_TYPES } from '../constants/types';
 
 describe('Page: All Inbox Placement Messages Test', () => {
@@ -50,29 +49,27 @@ describe('Page: All Inbox Placement Messages Test', () => {
     const resetState = jest.fn().mockReturnValue({});
     const subjectMounted = ({ ...props }) =>
       mount(
-        <Providers>
-          <Router>
-            <AllMessagesPage
-              filterType={PLACEMENT_FILTER_TYPES.MAILBOX_PROVIDER}
-              filterName={'gmail.com'}
-              status={'completed'}
-              messages={[]}
-              sent={100}
-              placement={{}}
-              authentication={{}}
-              getAllInboxPlacementMessages={getAllInboxPlacementMessages}
-              getInboxPlacementByProvider={getInboxPlacementByProvider}
-              getInboxPlacementByRegion={getInboxPlacementByRegion}
-              getInboxPlacementBySendingIp={getInboxPlacementBySendingIp}
-              resetState={resetState}
-              id={101}
-              history={{ replace: jest.fn() }}
-              error={null}
-              AllMessagesCollectionComponent={AllMessagesCollection}
-              {...props}
-            />
-          </Router>
-        </Providers>,
+        <TestApp>
+          <AllMessagesPage
+            filterType={PLACEMENT_FILTER_TYPES.MAILBOX_PROVIDER}
+            filterName={'gmail.com'}
+            status={'completed'}
+            messages={[]}
+            sent={100}
+            placement={{}}
+            authentication={{}}
+            getAllInboxPlacementMessages={getAllInboxPlacementMessages}
+            getInboxPlacementByProvider={getInboxPlacementByProvider}
+            getInboxPlacementByRegion={getInboxPlacementByRegion}
+            getInboxPlacementBySendingIp={getInboxPlacementBySendingIp}
+            resetState={resetState}
+            id={101}
+            history={{ replace: jest.fn() }}
+            error={null}
+            AllMessagesCollectionComponent={AllMessagesCollection}
+            {...props}
+          />
+        </TestApp>,
       );
 
     it('calls getInboxPlacementTest & getInboxPlacementByMailboxProvider on load for mailbox-providers', () => {

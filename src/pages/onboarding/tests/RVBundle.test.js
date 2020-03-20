@@ -1,18 +1,15 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import TestApp from 'src/__testHelpers__/TestApp';
 import RVBundlePage from '../RVBundlePage';
-import { BrowserRouter as Router } from 'react-router-dom';
-import Providers from 'src/Providers';
 
 describe('RVBundlePage', () => {
   const subject = () =>
     render(
-      <Providers>
-        <Router>
-          <RVBundlePage />
-        </Router>
-      </Providers>,
+      <TestApp>
+        <RVBundlePage />
+      </TestApp>,
     );
 
   it('should render the modal on clicking "See Pricing"', () => {

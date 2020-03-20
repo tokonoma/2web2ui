@@ -2,9 +2,9 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import TestApp from 'src/__testHelpers__/TestApp';
 import { GettingStartedGuide } from '../GettingStartedGuide';
 import { GUIDE_IDS } from '../../constants';
-import Providers from 'src/Providers';
 
 const defaultProps = {
   onboarding: { isGuideAtBottom: false },
@@ -59,9 +59,9 @@ describe('GettingStartedGuide full', () => {
 
   const subject = (props, renderFn = render) =>
     renderFn(
-      <Providers>
+      <TestApp>
         <GettingStartedGuide {...defaultProps} {...props} />
-      </Providers>,
+      </TestApp>,
     );
 
   it('should render the corresponding step when breadcrumb is clicked', () => {

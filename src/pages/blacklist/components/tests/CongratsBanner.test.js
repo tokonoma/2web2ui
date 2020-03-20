@@ -1,6 +1,6 @@
 import React from 'react';
-import Providers from 'src/Providers';
 import { render } from '@testing-library/react';
+import TestApp from 'src/__testHelpers__/TestApp';
 import CongratsBanner from '../CongratsBanner';
 
 describe('Blacklist Component: CongratsBanner', () => {
@@ -9,9 +9,9 @@ describe('Blacklist Component: CongratsBanner', () => {
     const defaults = { mockDismiss };
 
     return render(
-      <Providers>
+      <TestApp>
         <CongratsBanner {...defaults} {...props} />
-      </Providers>,
+      </TestApp>,
     );
   };
 

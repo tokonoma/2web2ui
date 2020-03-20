@@ -1,11 +1,9 @@
 import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
-import Providers from 'src/Providers';
+import { mount, shallow } from 'enzyme';
+import TestApp from 'src/__testHelpers__/TestApp';
 import { FilterNone } from '@sparkpost/matchbox-icons/matchbox-icons';
-
-import NavGroup from '../NavGroup';
-import { mount, shallow } from 'enzyme/build/index';
 import styles from '../NavItem.module.scss';
+import NavGroup from '../NavGroup';
 
 describe('NavGroup tests', () => {
   let wrapper;
@@ -55,11 +53,9 @@ describe('NavGroup tests', () => {
 
   it('should be open if any children has matching path', () => {
     wrapper = mount(
-      <Providers>
-        <Router>
-          <NavGroup {...props} location={{ pathname: '/child2' }} />
-        </Router>
-      </Providers>,
+      <TestApp>
+        <NavGroup {...props} location={{ pathname: '/child2' }} />
+      </TestApp>,
     );
     wrapper.update();
     expect(

@@ -1,6 +1,5 @@
 import React from 'react';
-import { Button } from 'src/components/matchbox';
-import { Banner } from 'src/components/matchbox';
+import { Banner, Button } from 'src/components/matchbox';
 import { LINKS } from 'src/constants';
 
 const UnverifiedBanner = ({ unverifiedDomains, cname }) => {

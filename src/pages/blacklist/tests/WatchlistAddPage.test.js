@@ -1,8 +1,6 @@
 import { render, fireEvent } from '@testing-library/react';
 import React from 'react';
-import { MemoryRouter } from 'react-router-dom';
-import Providers from 'src/Providers';
-
+import TestApp from 'src/__testHelpers__/TestApp';
 import { WatchlistAddPage } from '../WatchlistAddPage';
 
 const ipOrSendingDomainText = 'IP or Sending Domain';
@@ -22,11 +20,9 @@ describe('WatchlistAddPage', () => {
       submitError: undefined,
     };
     return render(
-      <Providers>
-        <MemoryRouter>
-          <WatchlistAddPage {...defaults} {...props} />
-        </MemoryRouter>
-      </Providers>,
+      <TestApp>
+        <WatchlistAddPage {...defaults} {...props} />
+      </TestApp>,
     );
   };
 

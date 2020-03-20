@@ -1,9 +1,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { render } from '@testing-library/react';
+import TestApp from 'src/__testHelpers__/TestApp';
 import LetsCodeStep from '../LetsCodeStep';
 import { GuideContext } from '../GettingStartedGuide';
-import Providers from 'src/Providers';
 
 describe('LetsCodeStep', () => {
   const subject_enzyme = (func = shallow) => func(<LetsCodeStep />);
@@ -22,11 +22,11 @@ describe('LetsCodeStep', () => {
     };
 
     return func(
-      <Providers>
+      <TestApp>
         <GuideContext.Provider value={values}>
           <LetsCodeStep />
         </GuideContext.Provider>
-      </Providers>,
+      </TestApp>,
     );
   };
   it('should render breadcrumbs', () => {
