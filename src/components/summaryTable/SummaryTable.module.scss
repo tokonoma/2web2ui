@@ -9,7 +9,7 @@
 .Cell {
   border: 1px solid color(grey, 8);
   border-left: none;
-  padding: 0 !important;
+  padding: 0;
 
   &:last-child {
     border-right: none;
@@ -17,7 +17,7 @@
 }
 
 .DataCell {
-  padding: spacing(small) spacing() !important;
+  padding: spacing(small) spacing();
 }
 
 .Header {
@@ -25,7 +25,7 @@
   border: 1px solid color(grey, 8);
   border-left: none;
   font-weight: 500;
-  padding: spacing(small) spacing() !important;
+  padding: spacing(small) spacing();
   font-size: font-size(400);
   white-space: nowrap;
 
