@@ -16,7 +16,7 @@ jest.mock('src/pages/recipientValidation/components/ListProgress', () => {
 
 describe('UploadedListPage', () => {
   const subject = (props = {}, method = shallow) => {
-    let component = (
+    const component = (
       <UploadedListPage
         getJobStatus={() => {}}
         getBillingInfo={() => {}}
