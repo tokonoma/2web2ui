@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import _ from 'lodash';
 import { Table } from '@sparkpost/matchbox';
 
-import { TableCollection, Empty, LongTextContainer, NewCollectionBody } from 'src/components';
+import { TableCollection, Empty, LongTextContainer } from 'src/components';
+import { NewCollectionBody } from 'src/components/collection';
 import { Percent } from 'src/components/formatters';
 import { safeRate } from 'src/helpers/math';
 import AddFilterLink from '../../components/AddFilterLink';
