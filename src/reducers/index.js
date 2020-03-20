@@ -16,6 +16,7 @@ import blacklist from './blacklist';
 import brightback from './brightback';
 import cookieConsent from './cookieConsent';
 import delayReport from './delayReport';
+import dataPrivacy from './dataPrivacy';
 import engagementReport from './engagementReport';
 import rejectionReport from './rejectionReport';
 import currentUser from './currentUser';
@@ -65,6 +66,7 @@ const appReducer = combineReducers({
   brightback,
   cookieConsent,
   currentUser,
+  dataPrivacy,
   delayReport,
   engagementReport,
   globalAlert,

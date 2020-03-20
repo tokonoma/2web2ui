@@ -24,12 +24,12 @@ export default class EditPage extends React.Component {
 
   secondaryActions = [
     {
-      Component: (props) => (
+      Component: props => (
         <DeleteSnippetLink {...props} id={this.props.id} subaccountId={this.props.subaccountId} />
       ),
       content: 'Delete',
       to: '/', // needed to render Component
-      visible: () => this.props.canModify
+      visible: () => this.props.canModify,
     },
     {
       Component: PageLink,
@@ -38,19 +38,19 @@ export default class EditPage extends React.Component {
         pathname: '/snippets/create',
         state: {
           id: this.props.id,
-          subaccountId: this.props.subaccountId
-        }
+          subaccountId: this.props.subaccountId,
+        },
       },
-      visible: () => this.props.canModify
-    }
-  ]
+      visible: () => this.props.canModify,
+    },
+  ];
 
   submitSnippet = ({
     content: { html, text, amp_html } = {},
     id,
     name,
     subaccount,
-    shared_with_subaccounts: sharedWithSubaccounts
+    shared_with_subaccounts: sharedWithSubaccounts,
   }) => {
     // must handle when subaccount is set to null by SubaccountSection
     const subaccountId = subaccount ? subaccount.id : undefined;
@@ -63,9 +63,9 @@ export default class EditPage extends React.Component {
       sharedWithSubaccounts,
       subaccountId,
       text,
-      amp_html
+      amp_html,
     }).then(() => showAlert({ type: 'success', message: 'Snippet saved' }));
-  }
+  };
 
   render() {
     const {
@@ -76,7 +76,7 @@ export default class EditPage extends React.Component {
       canViewSubaccount,
       id,
       loading,
-      submitting
+      submitting,
     } = this.props;
     const disabled = !canModify || submitting;
     const canViewSubaccountSection = hasSubaccounts && canViewSubaccount;
@@ -101,11 +101,9 @@ export default class EditPage extends React.Component {
           Component: Button,
           content: 'Save Snippet',
           disabled,
-          onClick: handleSubmit(this.submitSnippet)
+          onClick: handleSubmit(this.submitSnippet),
         }}
-        secondaryActions={
-          this.secondaryActions.filter(({ visible = () => true }) => visible())
-        }
+        secondaryActions={this.secondaryActions.filter(({ visible = () => true }) => visible())}
       >
         <Form onSubmit={this.submitSnippet}>
           <Grid>
@@ -128,7 +126,9 @@ export default class EditPage extends React.Component {
                   />
                 </Panel.Section>
                 {canViewSubaccountSection && (
-                  <SubaccountSection newTemplate={false} disabled={disabled} />
+                  <Panel.Section>
+                    <SubaccountSection newTemplate={false} disabled={disabled} />
+                  </Panel.Section>
                 )}
               </Panel>
               <Panel sectioned>
