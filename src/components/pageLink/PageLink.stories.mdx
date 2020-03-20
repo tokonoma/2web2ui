@@ -1,6 +1,5 @@
 import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
 import { BrowserRouter as Router } from 'react-router-dom';
-import Providers from 'src/Providers';
 import PageLink from './PageLink';
 
 <Meta title="Links|PageLink" component={PageLink}/>
@@ -18,11 +17,9 @@ The `<PageLink/>` is a simple wrapper for the `<UnstyledLink/>` component. Using
 ### Default
 
 <Preview>
-  <Providers>
-    <Router>
-      <PageLink to="https://sparkpost.com">SparkPost.com</PageLink>
-    </Router>
-  </Providers>
+  <Router>
+    <PageLink to="https://sparkpost.com">SparkPost.com</PageLink>
+  </Router>
 </Preview>
 
 ## Usage
