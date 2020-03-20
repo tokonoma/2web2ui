@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Grid } from '@sparkpost/matchbox';
 import { VpnKey } from '@sparkpost/matchbox-icons';
 import { QRCode } from 'react-qr-svg';
-import { Button, Panel TextField } from 'src/components/matchbox';
+import { Button, Panel, TextField } from 'src/components/matchbox';
 import PanelLoading from 'src/components/panelLoading/PanelLoading';
 import styles from './EnableTfaForm.module.scss';
 import { getTfaSecret, toggleTfa } from 'src/actions/tfa';
