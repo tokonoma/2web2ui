@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { EmailIcon, SlackIcon, WebhookIcon } from 'src/components/icons';
+import { UnstyledLink } from 'src/components/matchbox';
 import { emails, ifStringPresent, maxItems, noDuplicateItems } from 'src/helpers/validation';
-import { UnstyledLink } from '@sparkpost/matchbox';
 export const FORM_NAME = 'alertForm';
 
 export const METRICS = {

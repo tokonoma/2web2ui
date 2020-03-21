@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { UnstyledLink } from '@sparkpost/matchbox';
-import { Panel } from 'src/components/matchbox';
-import { Modal, LabelledValue } from 'src/components';
+import { Modal, LabelledValue, PageLink } from 'src/components';
+import { Panel, UnstyledLink } from 'src/components/matchbox';
 import {
   PremiumBanner,
   EnterpriseBanner,
@@ -128,7 +126,7 @@ export default class BillingSummary extends Component {
       changePlanActions.push({
         content: changePlanLabel,
         to: '/account/billing/plan',
-        Component: Link,
+        Component: PageLink,
         color: 'orange',
       });
     }

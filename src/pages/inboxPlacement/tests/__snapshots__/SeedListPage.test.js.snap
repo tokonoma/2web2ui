@@ -74,11 +74,11 @@ exports[`Page: SeedList tests renders page correctly with defaults 1`] = `
         <p>
           Send the email and jump back to
            
-          <UnstyledLink
+          <PageLink
             to="/inbox-placement"
           >
             Inbox Placement
-          </UnstyledLink>
+          </PageLink>
            to see the results.
         </p>
       </div>

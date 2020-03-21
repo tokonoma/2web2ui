@@ -1,7 +1,6 @@
 import React from 'react';
-import { UnstyledLink } from '@sparkpost/matchbox';
-
 import { PageLink } from 'src/components';
+import { UnstyledLink } from 'src/components/matchbox';
 import ConditionSwitch, { Case, defaultCase } from 'src/components/auth/ConditionSwitch';
 import { AccessControl } from 'src/components/auth';
 import { isAdmin } from 'src/helpers/conditions/user';

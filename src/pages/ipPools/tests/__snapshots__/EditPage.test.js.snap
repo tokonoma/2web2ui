@@ -109,12 +109,11 @@ exports[`IP Pools Edit Page render tests should render the edit page correctly 1
         </span>
         Add dedicated IPs to this pool by moving them from their current pool
         , or by 
-        <UnstyledLink
-          component={[Function]}
+        <PageLink
           to="/account/billing"
         >
           purchasing new IPs
-        </UnstyledLink>
+        </PageLink>
         .
       </p>
     </Panel.Section>

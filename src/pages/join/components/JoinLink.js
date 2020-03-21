@@ -1,6 +1,5 @@
 import React from 'react';
-import { UnstyledLink } from '@sparkpost/matchbox';
-
+import { UnstyledLink } from 'src/components/matchbox';
 import config from 'src/config';
 import { CROSS_LINK_MAP } from 'src/constants';
 

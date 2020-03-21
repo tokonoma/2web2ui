@@ -1,10 +1,8 @@
 import React from 'react';
-import { CenteredLogo } from 'src/components';
-import { UnstyledLink, Modal } from '@sparkpost/matchbox';
-import { Button, Panel } from 'src/components/matchbox';
+import { Modal } from '@sparkpost/matchbox';
 import { CheckCircle, Send, Close } from '@sparkpost/matchbox-icons';
-import { Link } from 'react-router-dom';
-import { Card, RecipientValidationPriceTable } from 'src/components';
+import { Card, CenteredLogo, PageLink, RecipientValidationPriceTable } from 'src/components';
+import { Button, Panel, UnstyledLink } from 'src/components/matchbox';
 import styles from './RVBundlePage.module.scss';
 
 const RVPriceModal = ({ open, onClose }) => (
@@ -86,7 +84,7 @@ const RVBundlePage = () => {
             </Card>
           </div>
           <div className={styles.buttonRow}>
-            <Button color="orange" to="/recipient-validation" component={Link}>
+            <Button color="orange" to="/recipient-validation" component={PageLink}>
               Start Validating
             </Button>
           </div>

@@ -1,10 +1,11 @@
 /* eslint-disable no-restricted-syntax */
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { ScreenReaderOnly, Page, Grid, UnstyledLink } from '@sparkpost/matchbox';
-import { Button, Panel } from 'src/components/matchbox';
+import { ScreenReaderOnly, Page, Grid } from '@sparkpost/matchbox';
+import { PageLink } from 'src/components';
+import { Button, Panel, UnstyledLink } from 'src/components/matchbox';
 import styles from './SingleResult.module.scss';
-import { withRouter, Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import CodeBlock from './components/CodeBlock';
 import {
   ROLE_TOOLTIP,
@@ -16,6 +17,7 @@ import {
 import { singleAddress } from 'src/actions/recipientValidation';
 import { showAlert } from 'src/actions/globalAlert';
 import Loading from 'src/components/loading';
+import SupportTicketLink from 'src/components/supportTicketLink/SupportTicketLink';
 import Tooltip from './components/Tooltip';
 
 const SINGLE_RV_LINK = '/recipient-validation/single';
@@ -34,9 +36,7 @@ export function SingleResult(props) {
         message: isUsageError ? 'Validation limit exceeded' : message,
         details: isUsageError ? (
           <>
-            <UnstyledLink to="?supportTicket=true&supportIssue=general_issue">
-              Submit a ticket
-            </UnstyledLink>
+            <SupportTicketLink issueId="general_issue">Submit a ticket</SupportTicketLink>
             &nbsp;to request an increase.
           </>
         ) : (
@@ -60,7 +60,7 @@ export function SingleResult(props) {
     <Page
       title="Recipient Validation"
       subtitle="Results"
-      breadcrumbAction={{ content: 'Back', to: SINGLE_RV_LINK, component: Link }}
+      breadcrumbAction={{ content: 'Back', to: SINGLE_RV_LINK, component: PageLink }}
     >
       <Panel>
         <Grid>
@@ -74,7 +74,7 @@ export function SingleResult(props) {
 
               <ResultList data={singleResults} />
 
-              <Button component={Link} color="orange" to={SINGLE_RV_LINK}>
+              <Button component={PageLink} color="orange" to={SINGLE_RV_LINK}>
                 Validate Another
               </Button>
             </div>

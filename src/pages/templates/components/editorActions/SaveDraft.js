@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import { FileEdit } from '@sparkpost/matchbox-icons';
+import { UnstyledLink } from 'src/components/matchbox';
 import useEditorContext from '../../hooks/useEditorContext';
-import { UnstyledLink } from '@sparkpost/matchbox';
 
 const SaveDraft = props => {
   const { className, onClick } = props;

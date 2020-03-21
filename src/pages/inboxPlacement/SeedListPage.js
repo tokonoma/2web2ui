@@ -1,12 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Page, UnstyledLink } from '@sparkpost/matchbox';
+import { Page } from '@sparkpost/matchbox';
 import { FileDownload } from '@sparkpost/matchbox-icons/matchbox-icons';
 
 import { getSeedList } from 'src/actions/inboxPlacement';
 import { selectReferenceSeed } from 'src/selectors/inboxPlacement';
 import { showAlert } from 'src/actions/globalAlert';
-import { ApiErrorBanner, CopyToClipboard, Loading } from 'src/components';
+import { ApiErrorBanner, CopyToClipboard, Loading, PageLink } from 'src/components';
 import SaveCSVButton from 'src/components/collection/SaveCSVButton';
 import { Panel, TextField } from 'src/components/matchbox';
 
@@ -51,7 +51,7 @@ export class SeedListPage extends React.Component {
             </p>
             <p>
               Send the email and jump back to{' '}
-              <UnstyledLink to="/inbox-placement">Inbox Placement</UnstyledLink> to see the results.
+              <PageLink to="/inbox-placement">Inbox Placement</PageLink> to see the results.
             </p>
           </div>
           <TextField

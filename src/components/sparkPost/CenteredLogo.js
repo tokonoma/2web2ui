@@ -1,6 +1,6 @@
 import React from 'react';
 import SparkPost from './SparkPost';
-import { UnstyledLink } from '@sparkpost/matchbox';
+import { UnstyledLink } from 'src/components/matchbox';
 import { LINKS } from 'src/constants';
 import styles from './CenteredLogo.module.scss';
 import PartnerLogos from './partners/PartnerLogos';
@@ -11,9 +11,7 @@ const CenteredLogo = ({ showAwsLogo }) => (
       <SparkPost.Logo />
     </UnstyledLink>
 
-    {showAwsLogo &&
-      <PartnerLogos.AwsMP height={37} width={222}/>
-    }
+    {showAwsLogo && <PartnerLogos.AwsMP height={37} width={222} />}
   </div>
 );
 

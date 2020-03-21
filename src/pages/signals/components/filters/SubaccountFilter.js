@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Grid, Popover, UnstyledLink, WindowEvent } from '@sparkpost/matchbox';
-import { Button } from 'src/components/matchbox';
+import { Grid, Popover, WindowEvent } from '@sparkpost/matchbox';
+import { Button, UnstyledLink } from 'src/components/matchbox';
 import { ArrowDropDown, ChevronLeft } from '@sparkpost/matchbox-icons';
 import SubaccountTypeahead from 'src/components/typeahead/SubaccountTypeahead';
 import { hasSubaccounts } from 'src/selectors/subaccounts';

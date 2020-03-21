@@ -1,11 +1,10 @@
 import React, { Component, Fragment } from 'react';
-import { Link } from 'react-router-dom';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
 
 // Components
-import { UnstyledLink, Popover, ActionList } from '@sparkpost/matchbox';
+import { Popover, ActionList } from '@sparkpost/matchbox';
 import { Button } from 'src/components/matchbox';
-import { TableCollection } from 'src/components';
+import { PageLink, TableCollection } from 'src/components';
 import { MoreHoriz } from '@sparkpost/matchbox-icons';
 import StatusTag from './StatusTag';
 import { formatDateTime } from 'src/helpers/date';
@@ -48,14 +47,14 @@ export class TestCollection extends Component {
       {
         content: 'Edit Test',
         to: this.getDetailsLink({ id, version, subaccount_id }),
-        component: Link,
+        component: PageLink,
         visible: status === 'scheduled' || status === 'draft',
         section: 1,
       },
       {
         content: 'View Test',
         to: this.getDetailsLink({ id, version, subaccount_id }),
-        component: Link,
+        component: PageLink,
         visible: status === 'running' || status === 'cancelled' || status === 'completed',
         section: 1,
       },
@@ -68,7 +67,7 @@ export class TestCollection extends Component {
             rescheduling: true,
           },
         },
-        component: Link,
+        component: PageLink,
         visible: status === 'completed' || status === 'cancelled',
         section: 1,
       },
@@ -97,9 +96,7 @@ export class TestCollection extends Component {
       <Fragment>
         <p className={styles.Name}>
           <strong>
-            <UnstyledLink to={this.getDetailsLink({ id, version, subaccount_id })} component={Link}>
-              {name}
-            </UnstyledLink>
+            <PageLink to={this.getDetailsLink({ id, version, subaccount_id })}>{name}</PageLink>
           </strong>
         </p>
         <p className={styles.Id}>ID: {id}</p>

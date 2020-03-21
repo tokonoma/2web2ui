@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { UnstyledLink } from '@sparkpost/matchbox';
 import { Delete } from '@sparkpost/matchbox-icons';
+import { UnstyledLink } from 'src/components/matchbox';
 
-const DeleteTemplate = (props) => {
+const DeleteTemplate = props => {
   const { className, onClick } = props;
 
   return (
@@ -14,7 +14,7 @@ const DeleteTemplate = (props) => {
         to="javascript:void(0);"
         data-id="action-delete"
       >
-        <Delete/>
+        <Delete />
 
         <span>Delete</span>
       </UnstyledLink>
@@ -24,7 +24,7 @@ const DeleteTemplate = (props) => {
 
 DeleteTemplate.propTypes = {
   onClick: PropTypes.func.isRequired,
-  className: PropTypes.string
+  className: PropTypes.string,
 };
 
 export default DeleteTemplate;

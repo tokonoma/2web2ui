@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { Page, UnstyledLink } from '@sparkpost/matchbox';
-import { Banner } from 'src/components/matchbox';
+import { Page } from '@sparkpost/matchbox';
+import { PageLink } from 'src/components';
+import { Banner, UnstyledLink } from 'src/components/matchbox';
 import CreateForm from './components/CreateForm';
 import { createTrackingDomain } from 'src/actions/trackingDomains';
 import { selectTrackingDomainCname } from 'src/selectors/account';
@@ -25,7 +25,7 @@ export class CreatePage extends Component {
           breadcrumbAction={{
             content: 'Back to Tracking Domains',
             to: '/account/tracking-domains',
-            Component: Link,
+            Component: PageLink,
           }}
         />
         <Banner status="info" title="Verification required" my="300">

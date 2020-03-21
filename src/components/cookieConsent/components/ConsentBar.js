@@ -1,6 +1,5 @@
 import React from 'react';
-import { UnstyledLink } from '@sparkpost/matchbox';
-import { Snackbar } from 'src/components/matchbox';
+import { Snackbar, UnstyledLink } from 'src/components/matchbox';
 import styles from '../CookieConsent.module.scss';
 
 export const ConsentBar = ({ onDismiss }) => (
