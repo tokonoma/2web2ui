@@ -11,7 +11,8 @@ Array [
         Your account is currently suspended.
       </div>
       <div>
-        For any questions or to request reactivation, please 
+        For any questions or to request reactivation, please
+         
         <UnstyledLink
           onClick={[Function]}
         >
@@ -36,7 +37,8 @@ Array [
         Your account is currently suspended due to a billing problem.
       </div>
       <div>
-        To make a payment and reactivate your account, 
+        To make a payment and reactivate your account,
+         
         <PageLink
           to="/account/billing"
         >

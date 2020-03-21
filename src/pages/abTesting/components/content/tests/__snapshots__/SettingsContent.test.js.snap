@@ -6,7 +6,8 @@ exports[`Settings Content Component should render when test is in draft mode 1`]
 <div>
   <p>
     <span>
-      You may continue to adjust these settings and template variants while this test is in 
+      You may continue to adjust these settings and template variants while this test is in
+       
     </span>
     draft
     <span>
@@ -29,7 +30,8 @@ exports[`Settings Content Component should render when test is in scheduled mode
 <div>
   <p>
     <span>
-      You may continue to adjust these settings and template variants while this test is in 
+      You may continue to adjust these settings and template variants while this test is in
+       
     </span>
     scheduled
     <span>

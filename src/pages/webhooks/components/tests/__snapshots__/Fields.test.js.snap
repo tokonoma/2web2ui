@@ -16,7 +16,8 @@ exports[`should render AuthDropDown 1`] = `
   disabled={false}
   helpText={
     <span>
-      Select "None" if your target URL has no authentication scheme. 
+      Select "None" if your target URL has no authentication scheme.
+       
       <UnstyledLink
         external={true}
         to="https://support.sparkpost.com/customer/portal/articles/2112385"
