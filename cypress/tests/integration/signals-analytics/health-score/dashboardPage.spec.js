@@ -219,7 +219,6 @@ describe('The health score dashboard page', () => {
       cy.visit(PAGE_URL);
 
       cy.wait('@getHealthScore');
-      cy.wait('@getHealthScore'); // Two requests are made
     });
 
     it('renders each subaccount along with the current health score for that subaccount', () => {
