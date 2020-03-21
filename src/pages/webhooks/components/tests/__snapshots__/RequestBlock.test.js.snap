@@ -9,11 +9,11 @@ exports[`Webhooks RequestBlock Component should render correctly 1`] = `
   </p>
   <code>
     <TextField
+      id="webhook-test-request"
       multiline={true}
       readOnly={true}
       resize="vertical"
       rows={6}
-      type="text"
       value="value"
     />
   </code>

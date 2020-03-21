@@ -72,7 +72,8 @@ exports[`Page: SeedList tests renders page correctly with defaults 1`] = `
           . If you don't, you may run into issues if your have more than one test running with the same subject line.
         </p>
         <p>
-          Send the email and jump back to 
+          Send the email and jump back to
+           
           <UnstyledLink
             to="/inbox-placement"
           >
@@ -82,11 +83,11 @@ exports[`Page: SeedList tests renders page correctly with defaults 1`] = `
         </p>
       </div>
       <TextField
+        id="seed-list"
         multiline={true}
         readOnly={true}
         resize="vertical"
         rows={10}
-        type="text"
         value=""
       />
       <div>
@@ -118,11 +119,11 @@ exports[`Page: SeedList tests renders page correctly with defaults 1`] = `
 
 exports[`Page: SeedList tests renders page with seeds 1`] = `
 <TextField
+  id="seed-list"
   multiline={true}
   readOnly={true}
   resize="vertical"
   rows={10}
-  type="text"
   value="seed1@gmail.com
 seed2@yahoo.com
 ref1@seed.sparkpost.com"

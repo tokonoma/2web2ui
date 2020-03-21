@@ -9,12 +9,11 @@ exports[`Component: CustomReports should render 1`] = `
       className="NameWrapper"
     >
       <TextField
+        id="custom-report-name"
         label="Report Name"
         labelHidden={true}
         onChange={[Function]}
         placeholder="Untitled Report"
-        resize="both"
-        type="text"
         value=""
       />
     </div>

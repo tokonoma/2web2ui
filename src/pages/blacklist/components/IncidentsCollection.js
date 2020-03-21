@@ -1,10 +1,10 @@
 import React from 'react';
-import { Table, Grid, TextField } from '@sparkpost/matchbox';
+import { Table, Grid } from '@sparkpost/matchbox';
 import { Search } from '@sparkpost/matchbox-icons';
 
 import { FORMATS } from 'src/constants';
 import { TableCollection, PageLink, DisplayDate } from 'src/components';
-import { Panel, Tag } from 'src/components/matchbox';
+import { Panel, Tag, TextField } from 'src/components/matchbox';
 import styles from './IncidentsCollection.module.scss';
 import DatePicker from 'src/components/datePicker/DatePicker';
 
@@ -72,7 +72,7 @@ export const IncidentsCollection = props => {
   const EmptyComponent = () => {
     const textFieldComponent = (
       <div className={styles.FilterBox}>
-        <TextField disabled suffix={<Search />} />
+        <TextField disabled id="disabled-blacklist-search" suffix={<Search />} />
       </div>
     );
     return (

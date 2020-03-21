@@ -2,11 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { addFilters, clearFilters, refreshReportOptions } from 'src/actions/reportOptions';
 import { selectCustomReports } from 'src/selectors/customReports';
-import { TextField } from '@sparkpost/matchbox';
-import { Button, Panel } from 'src/components/matchbox';
 import { Save } from '@sparkpost/matchbox-icons';
 import { saveReport, deleteReport } from 'src/actions/customReports';
 import { withRouter } from 'react-router-dom';
+import { Button, Panel, TextField } from 'src/components/matchbox';
 import CustomReportsList from './CustomReportsList';
 import { parseSearch } from 'src/helpers/reports';
 import qs from 'query-string';
@@ -69,6 +68,7 @@ export function CustomReports(props) {
       <div className={styles.Wrap}>
         <div className={styles.NameWrapper}>
           <TextField
+            id="custom-report-name"
             label="Report Name"
             labelHidden
             placeholder="Untitled Report"

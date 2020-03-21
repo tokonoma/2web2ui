@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 import _ from 'lodash';
-import { Grid, TextField } from '@sparkpost/matchbox';
+import { Grid } from '@sparkpost/matchbox';
 import { ArrowForward } from '@sparkpost/matchbox-icons';
+import { TextField } from 'src/components/matchbox';
 import { formatInputDate, formatInputTime, parseDatetime } from 'src/helpers/date';
 import { getValidDateRange, getPrecision, getMomentPrecision } from 'src/helpers/metrics';
 import styles from './ManualEntryForm.module.scss';
@@ -17,8 +18,8 @@ export default class ManualEntryForm extends Component {
     toDate: '',
     toTime: '',
     fromDate: '',
-    fromTime: ''
-  }
+    fromTime: '',
+  };
 
   componentDidMount() {
     const { to, from } = this.props;
@@ -34,28 +35,28 @@ export default class ManualEntryForm extends Component {
       toDate: formatInputDate(to),
       toTime: formatInputTime(to),
       fromDate: formatInputDate(from),
-      fromTime: formatInputTime(from)
+      fromTime: formatInputTime(from),
     });
   }
 
-  handleFieldChange = (e) => {
+  handleFieldChange = e => {
     this.setState({ [e.target.id]: e.target.value });
     this.debounceChanges();
-  }
+  };
 
   debounceChanges = _.debounce(() => {
     this.validate();
   }, this.DEBOUNCE);
 
-  handleEnter = (e) => {
+  handleEnter = e => {
     if (e.key === 'Enter') {
       this.validate(e, true);
     }
   };
 
-  handleBlur = (e) => {
+  handleBlur = e => {
     this.validate(e, true);
-  }
+  };
 
   validate = (e, shouldReset) => {
     const from = parseDatetime(this.state.fromDate, this.state.fromTime);
@@ -64,7 +65,13 @@ export default class ManualEntryForm extends Component {
     const { now, roundToPrecision, preventFuture } = this.props;
 
     try {
-      const { to: roundedTo, from: roundedFrom } = getValidDateRange({ from, to, now, roundToPrecision, preventFuture });
+      const { to: roundedTo, from: roundedFrom } = getValidDateRange({
+        from,
+        to,
+        now,
+        roundToPrecision,
+        preventFuture,
+      });
       return this.props.selectDates({ to: roundedTo.toDate(), from: roundedFrom.toDate() }, () => {
         if (e && e.key === 'Enter') {
           this.props.onEnter(e);
@@ -75,7 +82,7 @@ export default class ManualEntryForm extends Component {
         this.syncPropsToState(this.props); // Resets fields if dates are not valid
       }
     }
-  }
+  };
 
   render() {
     const { toDate, toTime, fromDate, fromTime } = this.state;
@@ -91,57 +98,78 @@ export default class ManualEntryForm extends Component {
       try {
         // allow for prop-level override of "now" (DI, etc.)
         const { now = moment() } = this.props;
-        const { from: validatedFrom, to: validatedTo } = getValidDateRange({ from, to, now, roundToPrecision });
+        const { from: validatedFrom, to: validatedTo } = getValidDateRange({
+          from,
+          to,
+          now,
+          roundToPrecision,
+        });
         precisionLabelValue = getPrecision(validatedFrom, validatedTo);
         momentPrecision = getMomentPrecision(validatedFrom, validatedTo);
       } catch (e) {
         precisionLabelValue = '';
       }
 
-      precisionLabel = <div className={styles.PrecisionLabel}>Precision: {_.startCase(_.words(precisionLabelValue).join(' '))}</div>;
+      precisionLabel = (
+        <div className={styles.PrecisionLabel}>
+          Precision: {_.startCase(_.words(precisionLabelValue).join(' '))}
+        </div>
+      );
     }
 
     return (
       <form onKeyDown={this.handleEnter} className={styles.DateFields}>
-        <Grid middle='xs'>
-          <Grid.Column >
+        <Grid middle="xs">
+          <Grid.Column>
             <TextField
               id="fromDate"
-              label='From Date' labelHidden placeholder={DATE_PLACEHOLDER}
+              label="From Date"
+              labelHidden
+              placeholder={DATE_PLACEHOLDER}
               onChange={this.handleFieldChange}
               onBlur={this.handleBlur}
-              value={fromDate} />
+              value={fromDate}
+            />
           </Grid.Column>
-          <Grid.Column >
+          <Grid.Column>
             <TextField
               id="fromTime"
-              label='From Time' labelHidden placeholder={TIME_PLACEHOLDER}
+              label="From Time"
+              labelHidden
+              placeholder={TIME_PLACEHOLDER}
               onChange={this.handleFieldChange}
               onBlur={this.handleBlur}
               value={fromTime}
-              disabled={momentPrecision === 'days'} />
+              disabled={momentPrecision === 'days'}
+            />
           </Grid.Column>
           <Grid.Column xs={1}>
             <div className={styles.ArrowWrapper}>
               <ArrowForward />
             </div>
           </Grid.Column>
-          <Grid.Column >
+          <Grid.Column>
             <TextField
               id="toDate"
-              label='To Date' labelHidden placeholder={DATE_PLACEHOLDER}
+              label="To Date"
+              labelHidden
+              placeholder={DATE_PLACEHOLDER}
               onChange={this.handleFieldChange}
               onBlur={this.handleBlur}
-              value={toDate} />
+              value={toDate}
+            />
           </Grid.Column>
-          <Grid.Column >
+          <Grid.Column>
             <TextField
               id="toTime"
-              label='To Time' labelHidden placeholder={TIME_PLACEHOLDER}
+              label="To Time"
+              labelHidden
+              placeholder={TIME_PLACEHOLDER}
               onChange={this.handleFieldChange}
               onBlur={this.handleBlur}
               value={toTime}
-              disabled={momentPrecision === 'days'} />
+              disabled={momentPrecision === 'days'}
+            />
           </Grid.Column>
         </Grid>
         {precisionLabel}

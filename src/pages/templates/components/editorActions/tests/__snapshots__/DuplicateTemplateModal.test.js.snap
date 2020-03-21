@@ -20,8 +20,6 @@ exports[`DuplicateTemplateModal renders with default props and some data from th
         name="templateName"
         onChange={[Function]}
         required={true}
-        resize="both"
-        type="text"
         value=""
       />
       <TextField
@@ -31,8 +29,6 @@ exports[`DuplicateTemplateModal renders with default props and some data from th
         name="templateId"
         onChange={[Function]}
         required={true}
-        resize="both"
-        type="text"
         value=""
       />
       <ButtonWrapper>

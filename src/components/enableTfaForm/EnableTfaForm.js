@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { TextField, Grid } from '@sparkpost/matchbox';
-import { Button, Panel } from 'src/components/matchbox';
+import { Grid } from '@sparkpost/matchbox';
 import { VpnKey } from '@sparkpost/matchbox-icons';
 import { QRCode } from 'react-qr-svg';
+import { Button, Panel, TextField } from 'src/components/matchbox';
 import PanelLoading from 'src/components/panelLoading/PanelLoading';
 import styles from './EnableTfaForm.module.scss';
 import { getTfaSecret, toggleTfa } from 'src/actions/tfa';
@@ -83,6 +83,7 @@ export class EnableTfaForm extends React.Component {
                 Generate a code from your newly-activated 2FA app to confirm that you're all set up.
               </p>
               <TextField
+                id="tfa-setup-passcode"
                 required={true}
                 data-lpignore={true}
                 label="Passcode"

@@ -1,6 +1,7 @@
 import { mount } from 'enzyme';
 import moment from 'moment';
 import React from 'react';
+import TestApp from 'src/__testHelpers__/TestApp';
 import { InboxPlacementTypeahead } from '../InboxPlacementTypeahead';
 
 const results = {
@@ -29,15 +30,24 @@ describe('Inbox Placement Typeahead', () => {
       },
     };
 
-    return mount(<InboxPlacementTypeahead {...defaultProps} {...props} />);
+    return mount(
+      <TestApp>
+        <InboxPlacementTypeahead {...defaultProps} {...props} />
+      </TestApp>,
+    );
   };
 
-  it('Matches snapshot test with default filters available', () => {
-    const wrapper = subject();
-    expect(wrapper).toMatchSnapshot();
+  it('disabled when error', () => {
+    const wrapper = subject({ trendsFilterValuesError: 'Oh no' });
+    expect(wrapper.find('Typeahead')).toHaveProp({ disabled: true, error: 'Oh no' });
   });
 
-  it('Fetches default filter options on load', () => {
+  it('disabled when loading', () => {
+    const wrapper = subject({ trendsFilterValuesloading: true });
+    expect(wrapper.find('Typeahead')).toHaveProp('disabled', true);
+  });
+
+  it('fetches default filter options on load', () => {
     const getInboxPlacementTrendsFilterValues = jest.fn();
     const wrapper = subject({ getInboxPlacementTrendsFilterValues });
     wrapper.update();

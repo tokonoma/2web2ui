@@ -4,8 +4,9 @@ import classnames from 'classnames';
 import debounce from 'lodash/debounce';
 import { METRICS_API_LIMIT, TYPEAHEAD_LIMIT } from '../../../constants';
 import { refreshTypeaheadCache } from 'src/actions/reportOptions';
+import { TextField } from 'src/components/matchbox';
 import sortMatch from 'src/helpers/sortMatch';
-import { TextField, ActionList } from '@sparkpost/matchbox';
+import { ActionList } from '@sparkpost/matchbox';
 import Item from './TypeaheadItem';
 import styles from './Typeahead.module.scss';
 import { connect } from 'react-redux';
@@ -115,6 +116,7 @@ export class Typeahead extends Component {
           Reports Filter Typeahead
         </label>
         <TextField
+          id="report-options-typeahead"
           {...getInputProps({
             placeholder,
             onFocus: clearSelection,

@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextField } from '@sparkpost/matchbox';
+import { TextField } from 'src/components/matchbox';
 
 // Wrapped matchbox components for use with react-redux Field components
 export default function TextFieldWrapper({ input, meta, ...rest }) {

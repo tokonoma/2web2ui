@@ -26,9 +26,9 @@ exports[`DisableTfaModal tests should render correctly 1`] = `
           >
             <TextField
               error=""
+              id="tfa-disable-password"
               onChange={[Function]}
               placeholder="Enter your password"
-              resize="both"
               type="password"
               value=""
             />
@@ -83,9 +83,9 @@ exports[`DisableTfaModal tests should show disabling as button text when toggleP
           >
             <TextField
               error=""
+              id="tfa-disable-password"
               onChange={[MockFunction]}
               placeholder="Enter your password"
-              resize="both"
               type="password"
               value=""
             />
@@ -140,9 +140,9 @@ exports[`DisableTfaModal tests should show error on TextField when toggleError a
           >
             <TextField
               error="Incorrect password"
+              id="tfa-disable-password"
               onChange={[MockFunction]}
               placeholder="Enter your password"
-              resize="both"
               type="password"
               value=""
             />

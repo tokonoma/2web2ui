@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import Modal from 'src/components/modals/Modal';
 import BackupCodesView from './BackupCodesView';
-import { TextField, Grid } from '@sparkpost/matchbox';
-import { Button, Banner, Panel } from 'src/components/matchbox';
+import { Grid } from '@sparkpost/matchbox';
+import { Banner, Button, Panel, TextField } from 'src/components/matchbox';
 import styles from './TfaModals.module.scss';
+
 const initialState = {
   password: '',
   showErrors: false,
@@ -86,6 +87,7 @@ export default class BackupCodesModal extends Component {
                 <Grid.Column xs={12} md={6}>
                   {!generatedCodes && (
                     <TextField
+                      id="tfa-backup-codes-generate-password"
                       required
                       type="password"
                       onChange={this.handleInputChange}

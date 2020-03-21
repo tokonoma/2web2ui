@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import Modal from 'src/components/modals/Modal';
 import styles from './TfaModals.module.scss';
-import { TextField, Grid } from '@sparkpost/matchbox';
-import { Button, Panel } from 'src/components/matchbox';
+import { Grid } from '@sparkpost/matchbox';
+import { Button, Panel, TextField } from 'src/components/matchbox';
 
 export default class DisableTfaModal extends Component {
   state = {
@@ -47,6 +47,7 @@ export default class DisableTfaModal extends Component {
               <Grid>
                 <Grid.Column xs={12} md={6}>
                   <TextField
+                    id="tfa-disable-password"
                     type="password"
                     error={this.state.showErrors && toggleError ? 'Incorrect password' : ''}
                     placeholder="Enter your password"

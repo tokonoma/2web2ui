@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Page, TextField, UnstyledLink } from '@sparkpost/matchbox';
-import { Panel } from 'src/components/matchbox';
+import { Page, UnstyledLink } from '@sparkpost/matchbox';
 import { FileDownload } from '@sparkpost/matchbox-icons/matchbox-icons';
 
 import { getSeedList } from 'src/actions/inboxPlacement';
@@ -9,6 +8,7 @@ import { selectReferenceSeed } from 'src/selectors/inboxPlacement';
 import { showAlert } from 'src/actions/globalAlert';
 import { ApiErrorBanner, CopyToClipboard, Loading } from 'src/components';
 import SaveCSVButton from 'src/components/collection/SaveCSVButton';
+import { Panel, TextField } from 'src/components/matchbox';
 
 import styles from './SeedList.module.scss';
 
@@ -20,63 +20,84 @@ export class SeedListPage extends React.Component {
   renderError = () => {
     const { error, getSeedList } = this.props;
 
-    return <ApiErrorBanner
-      message={'Sorry, we seem to have had some trouble loading seedlist.'}
-      errorDetails={error.message}
-      reload={getSeedList}
-    />;
+    return (
+      <ApiErrorBanner
+        message={'Sorry, we seem to have had some trouble loading seedlist.'}
+        errorDetails={error.message}
+        reload={getSeedList}
+      />
+    );
   };
 
   renderContents = () => {
     const { seeds, referenceSeed } = this.props;
-    const csvData = seeds.map((address) => ({ 'Seed Address': address }));
+    const csvData = seeds.map(address => ({ 'Seed Address': address }));
 
-    return (<>
-      <Panel.Section>
-        <div>
-          <p className={styles.Directions}>To run an Inbox Placement test, first add the following email addresses to
-            your list.
-            Make sure that the reference email address <strong>{referenceSeed}</strong> is the first one in your list.
-          </p>
-          <hr className={styles.hr}/>
-          <p className={styles.Directions}>
-            Next, set up your campaign. Make sure you are sending to the full list of seed email addresses.
-            For best results, set the <code>`X-SP-Inbox-Placement`</code> header with a unique value such
-            as <code>"my-first-test"</code>.
-            If you don't, you may run into issues if your have more than one test running with the same
-            subject line.
-          </p>
-          <p>
-            Send the email and jump back to <UnstyledLink to="/inbox-placement">Inbox
-            Placement</UnstyledLink> to see the results.
-          </p>
-        </div>
-        <TextField multiline value={seeds.join('\n')} resize="vertical" rows={10} readOnly/>
-        <div>
-          <span className={styles.CopyButton}>
-            <CopyToClipboard primary value={seeds.join(',')} label='Copy List'/>
-          </span>
-          <SaveCSVButton data={csvData} saveCsv={true} caption={<span><FileDownload/>Download CSV</span>} filename={'sparkpost-seedlist.csv'}/>
-        </div>
-      </Panel.Section>
-    </>);
+    return (
+      <>
+        <Panel.Section>
+          <div>
+            <p className={styles.Directions}>
+              To run an Inbox Placement test, first add the following email addresses to your list.
+              Make sure that the reference email address <strong>{referenceSeed}</strong> is the
+              first one in your list.
+            </p>
+            <hr className={styles.hr} />
+            <p className={styles.Directions}>
+              Next, set up your campaign. Make sure you are sending to the full list of seed email
+              addresses. For best results, set the <code>`X-SP-Inbox-Placement`</code> header with a
+              unique value such as <code>"my-first-test"</code>. If you don't, you may run into
+              issues if your have more than one test running with the same subject line.
+            </p>
+            <p>
+              Send the email and jump back to{' '}
+              <UnstyledLink to="/inbox-placement">Inbox Placement</UnstyledLink> to see the results.
+            </p>
+          </div>
+          <TextField
+            id="seed-list"
+            multiline
+            value={seeds.join('\n')}
+            resize="vertical"
+            rows={10}
+            readOnly
+          />
+          <div>
+            <span className={styles.CopyButton}>
+              <CopyToClipboard primary value={seeds.join(',')} label="Copy List" />
+            </span>
+            <SaveCSVButton
+              data={csvData}
+              saveCsv={true}
+              caption={
+                <span>
+                  <FileDownload />
+                  Download CSV
+                </span>
+              }
+              filename={'sparkpost-seedlist.csv'}
+            />
+          </div>
+        </Panel.Section>
+      </>
+    );
   };
 
   render() {
     const { pending, error } = this.props;
 
     if (pending) {
-      return <Loading/>;
+      return <Loading />;
     }
 
     return (
       <Page
         breadcrumbAction={{
           content: 'Inbox Placement Tests',
-          onClick: () => this.props.history.push('/inbox-placement')
+          onClick: () => this.props.history.push('/inbox-placement'),
         }}
-        title='Inbox Placement'
-        subtitle='Start a Test'
+        title="Inbox Placement"
+        subtitle="Start a Test"
       >
         <Panel>
           <Panel.Section>
@@ -89,12 +110,10 @@ export class SeedListPage extends React.Component {
   }
 }
 
-const mapStateToProps = (state, props) => ({
+const mapStateToProps = state => ({
   seeds: state.inboxPlacement.seeds,
   pending: state.inboxPlacement.seedsPending,
   error: state.inboxPlacement.seedsError,
-  referenceSeed: selectReferenceSeed(state)
+  referenceSeed: selectReferenceSeed(state),
 });
 export default connect(mapStateToProps, { getSeedList, showAlert })(SeedListPage);
-
-

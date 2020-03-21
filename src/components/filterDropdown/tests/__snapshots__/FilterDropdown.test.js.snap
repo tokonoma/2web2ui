@@ -18,9 +18,7 @@ exports[`Component: FilterDropdown renders correctly 1`] = `
           id="filter-dropdown-my-filter-dropdown"
           prefix={null}
           readOnly={true}
-          resize="both"
           suffix={<ArrowDropDown />}
-          type="text"
           value="Status"
         />
       </React.Fragment>
@@ -100,9 +98,7 @@ exports[`Component: FilterDropdown renders selected correctly 1`] = `
           id="filter-dropdown-my-filter-dropdown"
           prefix="(1)"
           readOnly={true}
-          resize="both"
           suffix={<ArrowDropDown />}
-          type="text"
           value="Status"
         />
       </React.Fragment>

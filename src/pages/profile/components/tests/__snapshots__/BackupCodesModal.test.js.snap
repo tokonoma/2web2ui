@@ -38,10 +38,10 @@ exports[`Component: BackupCodesModal should change button text to Generating... 
           >
             <TextField
               error=""
+              id="tfa-backup-codes-generate-password"
               onChange={[MockFunction]}
               placeholder="Password"
               required={true}
-              resize="both"
               type="password"
               value=""
             />
@@ -109,10 +109,10 @@ exports[`Component: BackupCodesModal should render correctly 1`] = `
           >
             <TextField
               error=""
+              id="tfa-backup-codes-generate-password"
               onChange={[Function]}
               placeholder="Password"
               required={true}
-              resize="both"
               type="password"
               value=""
             />
@@ -236,10 +236,10 @@ exports[`Component: BackupCodesModal should show password error when exists 1`] 
           >
             <TextField
               error="Incorrect Password"
+              id="tfa-backup-codes-generate-password"
               onChange={[MockFunction]}
               placeholder="Password"
               required={true}
-              resize="both"
               type="password"
               value=""
             />

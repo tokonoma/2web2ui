@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react';
-import { Grid, TextField } from '@sparkpost/matchbox';
-import { Panel, Select } from 'src/components/matchbox';
+import { Grid } from '@sparkpost/matchbox';
 import PropTypes from 'prop-types';
+import { Panel, Select, TextField } from 'src/components/matchbox';
 import { onEnter } from 'src/helpers/keyEvents';
 import { stringToArray } from 'src/helpers/string';
 import { batchStatusOptions } from '../constants/integration';
@@ -47,6 +47,7 @@ const IntegrationPageFilter = ({ disabled, initialValues = {}, onChange }) => {
         </Grid.Column>
         <Grid.Column xs={12} md={8}>
           <TextField
+            id="signals-integration-batch-id-filter"
             labelHidden
             name="batchIds"
             placeholder="Filter by batch ID"

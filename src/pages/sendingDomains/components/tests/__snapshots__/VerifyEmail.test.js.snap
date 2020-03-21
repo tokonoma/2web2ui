@@ -116,8 +116,6 @@ exports[`VerifyEmail component should error if custom mailbox field is invalid 1
               id="localPart"
               onBlur={[Function]}
               onChange={[Function]}
-              resize="both"
-              type="text"
               value=""
             />
           </div>
@@ -256,8 +254,6 @@ exports[`VerifyEmail component should render with mailbox verification 1`] = `
               id="localPart"
               onBlur={[Function]}
               onChange={[Function]}
-              resize="both"
-              type="text"
               value=""
             />
           </div>
@@ -474,8 +470,6 @@ exports[`VerifyEmail component should send custom mailbox email 1`] = `
               id="localPart"
               onBlur={[Function]}
               onChange={[Function]}
-              resize="both"
-              type="text"
               value="krombopulos.michael"
             />
           </div>

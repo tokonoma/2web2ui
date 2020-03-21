@@ -64,8 +64,6 @@ exports[`Component: MessageEventsSearch renders correctly 1`] = `
           onFocus={[Function]}
           onKeyDown={[Function]}
           placeholder="Filter by recipient email address"
-          resize="both"
-          type="text"
         />
       </div>
       <div>

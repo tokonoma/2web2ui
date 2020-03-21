@@ -64,8 +64,6 @@ exports[`Typeahead render function renders list of matches 1`] = `
     name="subaccount"
     placeholder="None"
     readOnly={false}
-    resize="both"
-    type="text"
   />
 </div>
 `;

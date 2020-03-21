@@ -67,12 +67,11 @@ exports[`Component: EnableTfaForm should show form after loading 1`] = `
         <TextField
           data-lpignore={true}
           error=""
+          id="tfa-setup-passcode"
           label="Passcode"
           onChange={[Function]}
           placeholder="Enter a generated 2FA passcode"
           required={true}
-          resize="both"
-          type="text"
           value=""
         />
       </Grid.Column>

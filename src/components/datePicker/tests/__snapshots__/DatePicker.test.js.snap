@@ -37,8 +37,6 @@ exports[`Component: DatePicker handleFormDates should use a date field format if
     onBlur={[MockFunction]}
     onClick={[MockFunction]}
     readOnly={true}
-    resize="both"
-    type="text"
     value="YYYY-MM h – YYYY-MM h"
   />
 </React.Fragment>
@@ -59,8 +57,6 @@ exports[`Component: DatePicker should not render range select if showPresets is 
     onBlur={[MockFunction]}
     onClick={[MockFunction]}
     readOnly={true}
-    resize="both"
-    type="text"
     value="MMM Do YYYY h:mma – MMM Do YYYY h:mma"
   />
 </React.Fragment>
@@ -110,8 +106,6 @@ exports[`Component: DatePicker should render ok by default 1`] = `
         onBlur={[Function]}
         onClick={[Function]}
         readOnly={true}
-        resize="both"
-        type="text"
         value="MMM Do YYYY h:mma – MMM Do YYYY h:mma"
       />
     </React.Fragment>
