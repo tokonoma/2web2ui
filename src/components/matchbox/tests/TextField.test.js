@@ -7,7 +7,10 @@ jest.mock('src/context/HibanaContext');
 
 describe('TextField Matchbox component wrapper', () => {
   const subject = props => {
-    const defaults = { padding: '600' };
+    const defaults = {
+      id: 'test-id',
+      padding: '600',
+    };
 
     return shallow(
       <TextField {...defaults} {...props}>

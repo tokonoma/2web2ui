@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Modal from 'src/components/modals/Modal';
 import BackupCodesView from './BackupCodesView';
 import { Grid } from '@sparkpost/matchbox';
-import { Banner, Panel, TextField } from 'src/components/matchbox';
+import { Banner, Button, Panel, TextField } from 'src/components/matchbox';
 import styles from './TfaModals.module.scss';
 
 const initialState = {
