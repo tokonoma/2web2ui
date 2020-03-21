@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from 'src/components/matchbox';
 import { Cached, FileDownload, PlaylistAddCheck } from '@sparkpost/matchbox-icons';
-import DownloadLink from 'src/components/downloadLink/DownloadLink';
+import { DownloadLink } from 'src/components/links';
 import PageLink from 'src/components/pageLink/PageLink';
 
 const JobActionLink = ({ jobId, fileHref, status }) => {

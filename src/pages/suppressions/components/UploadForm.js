@@ -6,7 +6,7 @@ import { Button, Panel } from 'src/components/matchbox';
 
 import { showAlert } from 'src/actions/globalAlert';
 import { uploadSuppressions } from 'src/actions/suppressions';
-import DownloadLink from 'src/components/downloadLink/DownloadLink';
+import { DownloadLink } from 'src/components/links';
 import FileFieldWrapper from 'src/components/reduxFormWrappers/FileFieldWrapper';
 import SubaccountTypeaheadWrapper from 'src/components/reduxFormWrappers/SubaccountTypeaheadWrapper';
 import config from 'src/config';
