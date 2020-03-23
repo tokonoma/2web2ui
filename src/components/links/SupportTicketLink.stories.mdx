@@ -1,0 +1,31 @@
+import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
+import { SupportTicketLink } from './SupportTicketLink';
+
+<Meta title="Links|SupportTicketLink" component={SupportTicketLink} />
+
+# SupportTicketLink
+
+Use the `<SupportTicketLink/>` component to render a link that opens the support ticket modal.
+
+## Examples
+
+### Default
+
+<Preview>
+  <SupportTicketLink issueId="general_billing">
+    Is there a problem with your billing?
+  </SupportTicketLink>
+</Preview>
+
+## Usage
+
+```js
+import React from 'react';
+import { SupportTicketLink } from 'src/components/links';
+
+const MyComponent = () => (
+  <SupportTicketLink issueId="general_billing">
+    Is there a problem with your billing?
+  </SupportTicketLink>
+);
+```
