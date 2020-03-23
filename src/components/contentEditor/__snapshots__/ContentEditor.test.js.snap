@@ -5,8 +5,6 @@ exports[`ContentEditor should render 1`] = `
   className="EditorSection"
 >
   <Tabs
-    color="orange"
-    connectBelow={true}
     selected={0}
     tabs={
       Array [
@@ -54,8 +52,6 @@ exports[`ContentEditor should render without test data tab 1`] = `
   className="EditorSection"
 >
   <Tabs
-    color="orange"
-    connectBelow={true}
     selected={0}
     tabs={
       Array [

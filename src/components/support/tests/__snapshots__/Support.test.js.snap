@@ -7,7 +7,6 @@ exports[`Support renders search panel by default 1`] = `
   showCloseButton={true}
 >
   <Tabs
-    color="orange"
     connectBelow={true}
     selected={0}
     tabs={
@@ -42,7 +41,6 @@ exports[`Support renders search panel with current page search term 1`] = `
   showCloseButton={true}
 >
   <Tabs
-    color="orange"
     connectBelow={true}
     selected={0}
     tabs={
@@ -93,7 +91,6 @@ exports[`Support renders support contact panel 1`] = `
   showCloseButton={true}
 >
   <Tabs
-    color="orange"
     connectBelow={true}
     selected={2}
     tabs={
@@ -139,7 +136,6 @@ exports[`Support renders support form 1`] = `
   showCloseButton={true}
 >
   <Tabs
-    color="orange"
     connectBelow={true}
     selected={1}
     tabs={

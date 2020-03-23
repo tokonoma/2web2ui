@@ -25,8 +25,6 @@ exports[`DetailsPage should render api keys tab 1`] = `
   title="Bob Evans, the restaurant. (123)"
 >
   <Tabs
-    color="orange"
-    connectBelow={true}
     selected={1}
     tabs={
       Array [
@@ -81,8 +79,6 @@ exports[`DetailsPage should render edit tab 1`] = `
   title="Bob Evans, the restaurant. (123)"
 >
   <Tabs
-    color="orange"
-    connectBelow={true}
     selected={0}
     tabs={
       Array [
@@ -139,8 +135,6 @@ exports[`DetailsPage should select sending domains tab 1`] = `
   title="Bob Evans, the restaurant. (123)"
 >
   <Tabs
-    color="orange"
-    connectBelow={true}
     selected={2}
     tabs={
       Array [
@@ -198,8 +192,6 @@ exports[`DetailsPage should show api key banner with new api key 1`] = `
     title="Don't Forget Your API Key"
   />
   <Tabs
-    color="orange"
-    connectBelow={true}
     selected={0}
     tabs={
       Array [

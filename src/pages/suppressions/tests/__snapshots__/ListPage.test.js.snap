@@ -13,7 +13,6 @@ exports[`ListPage renders correctly 1`] = `
   title="Suppressions"
 >
   <Tabs
-    color="orange"
     connectBelow={true}
     selected={0}
     tabs={
@@ -53,7 +52,6 @@ exports[`ListPage renders correctly with subaccounts 1`] = `
   title="Suppressions"
 >
   <Tabs
-    color="orange"
     connectBelow={true}
     selected={0}
     tabs={
@@ -94,7 +92,6 @@ exports[`ListPage renders filter by email tab correctly when selected 1`] = `
   title="Suppressions"
 >
   <Tabs
-    color="orange"
     connectBelow={true}
     selected={1}
     tabs={

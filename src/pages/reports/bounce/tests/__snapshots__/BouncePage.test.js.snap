@@ -14,8 +14,6 @@ exports[`BouncePage:  should display loading panel on top level metrics when agg
     minHeight="115px"
   />
   <Tabs
-    color="orange"
-    connectBelow={true}
     selected={0}
     tabs={
       Array [
@@ -131,15 +129,14 @@ exports[`BouncePage:  should render 1`] = `
     <strong>
       1
     </strong>
-     of 
+     of
+     
     <strong>
       10
     </strong>
      sent messages bounced
   </Connect(MetricsSummary)>
   <Tabs
-    color="orange"
-    connectBelow={true}
     selected={0}
     tabs={
       Array [
@@ -242,8 +239,6 @@ exports[`BouncePage:  should render correctly with no bounces 1`] = `
     searchOptions={Object {}}
   />
   <Tabs
-    color="orange"
-    connectBelow={true}
     selected={0}
     tabs={
       Array [
@@ -413,15 +408,14 @@ exports[`BouncePage:  should show empty reasons table when there are no admin re
     <strong>
       1
     </strong>
-     of 
+     of
+     
     <strong>
       10
     </strong>
      sent messages bounced
   </Connect(MetricsSummary)>
   <Tabs
-    color="orange"
-    connectBelow={true}
     selected={1}
     tabs={
       Array [
@@ -474,15 +468,14 @@ exports[`BouncePage:  should show empty reasons table when there are no reasons 
     <strong>
       1
     </strong>
-     of 
+     of
+     
     <strong>
       10
     </strong>
      sent messages bounced
   </Connect(MetricsSummary)>
   <Tabs
-    color="orange"
-    connectBelow={true}
     selected={0}
     tabs={
       Array [
@@ -535,15 +528,14 @@ exports[`BouncePage:  should show loading panel when table is loading 1`] = `
     <strong>
       1
     </strong>
-     of 
+     of
+     
     <strong>
       10
     </strong>
      sent messages bounced
   </Connect(MetricsSummary)>
   <Tabs
-    color="orange"
-    connectBelow={true}
     selected={0}
     tabs={
       Array [

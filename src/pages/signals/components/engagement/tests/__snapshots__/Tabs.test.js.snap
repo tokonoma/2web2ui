@@ -2,7 +2,6 @@
 
 exports[`Engagement Tabs Component renders correctly 1`] = `
 <Tabs
-  color="orange"
   connectBelow={true}
   fitted={true}
   onSelect={[Function]}

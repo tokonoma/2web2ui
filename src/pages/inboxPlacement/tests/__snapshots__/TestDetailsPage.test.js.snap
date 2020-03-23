@@ -25,7 +25,6 @@ exports[`Page: Single Inbox Placement Test renders page correctly with defaults 
   title="Inbox Placement"
 >
   <Tabs
-    color="orange"
     connectBelow={true}
     selected={0}
     tabs={
