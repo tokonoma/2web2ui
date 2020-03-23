@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Panel } from 'src/components/matchbox';
+import { ExternalLink } from 'src/components/links';
 import styles from './ApiDetailsTab.module.scss';
-import ExternalLink from 'src/components/externalLink/ExternalLink';
 
 const ApiDetailsTab = ({ history }) => (
   <Panel.Section>
