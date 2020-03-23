@@ -11,12 +11,11 @@ exports[`Status Content Component should render cancelled-specific help content 
     <span>
       You can read about the different A/B Test states 
     </span>
-    <UnstyledLink
-      external={true}
+    <ExternalLink
       to="https://www.sparkpost.com/docs/tech-resources/a-b-testing-sparkpost/#ab-testing-states"
     >
       here
-    </UnstyledLink>
+    </ExternalLink>
     .
   </p>
 </div>
@@ -57,12 +56,11 @@ exports[`Status Content Component should render draft-specific help content when
     <span>
       You can read about the different A/B Test states 
     </span>
-    <UnstyledLink
-      external={true}
+    <ExternalLink
       to="https://www.sparkpost.com/docs/tech-resources/a-b-testing-sparkpost/#ab-testing-states"
     >
       here
-    </UnstyledLink>
+    </ExternalLink>
     .
   </p>
 </div>
@@ -74,12 +72,11 @@ exports[`Status Content Component should render nothing when a test is malformed
     <span>
       You can read about the different A/B Test states 
     </span>
-    <UnstyledLink
-      external={true}
+    <ExternalLink
       to="https://www.sparkpost.com/docs/tech-resources/a-b-testing-sparkpost/#ab-testing-states"
     >
       here
-    </UnstyledLink>
+    </ExternalLink>
     .
   </p>
 </div>
@@ -96,12 +93,11 @@ exports[`Status Content Component should render rescheduling-specific help conte
     <span>
       You can read about the different A/B Test states 
     </span>
-    <UnstyledLink
-      external={true}
+    <ExternalLink
       to="https://www.sparkpost.com/docs/tech-resources/a-b-testing-sparkpost/#ab-testing-states"
     >
       here
-    </UnstyledLink>
+    </ExternalLink>
     .
   </p>
 </div>
@@ -118,12 +114,11 @@ exports[`Status Content Component should render rescheduling-specific help conte
     <span>
       You can read about the different A/B Test states 
     </span>
-    <UnstyledLink
-      external={true}
+    <ExternalLink
       to="https://www.sparkpost.com/docs/tech-resources/a-b-testing-sparkpost/#ab-testing-states"
     >
       here
-    </UnstyledLink>
+    </ExternalLink>
     .
   </p>
 </div>
@@ -148,12 +143,11 @@ exports[`Status Content Component should render running-specific help content wh
     <span>
       You can read about the different A/B Test states 
     </span>
-    <UnstyledLink
-      external={true}
+    <ExternalLink
       to="https://www.sparkpost.com/docs/tech-resources/a-b-testing-sparkpost/#ab-testing-states"
     >
       here
-    </UnstyledLink>
+    </ExternalLink>
     .
   </p>
 </div>
@@ -170,12 +164,11 @@ exports[`Status Content Component should render scheduled-specific help content 
     <span>
       You can read about the different A/B Test states 
     </span>
-    <UnstyledLink
-      external={true}
+    <ExternalLink
       to="https://www.sparkpost.com/docs/tech-resources/a-b-testing-sparkpost/#ab-testing-states"
     >
       here
-    </UnstyledLink>
+    </ExternalLink>
     .
   </p>
 </div>

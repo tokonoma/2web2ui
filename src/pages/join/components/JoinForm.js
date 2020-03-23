@@ -7,7 +7,8 @@ import config from 'src/config';
 import { FORMS, LINKS } from 'src/constants';
 import { TextFieldWrapper, CheckboxWrapper } from 'src/components/reduxFormWrappers';
 import { Grid, Checkbox } from '@sparkpost/matchbox';
-import { Button, UnstyledLink } from 'src/components/matchbox';
+import { ExternalLink } from 'src/components/links';
+import { Button } from 'src/components/matchbox';
 import { required, minLength, email, endsWithWhitespace } from 'src/helpers/validation';
 import styles from './JoinForm.module.scss';
 const { recaptcha } = config;
@@ -133,10 +134,7 @@ export class JoinForm extends Component {
             validate={required}
             label={
               <span>
-                I agree to SparkPost's{' '}
-                <UnstyledLink to={LINKS.TOU} external>
-                  Terms of Use
-                </UnstyledLink>
+                I agree to SparkPost's <ExternalLink to={LINKS.TOU}>Terms of Use</ExternalLink>
               </span>
             }
           />

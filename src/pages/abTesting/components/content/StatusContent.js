@@ -1,5 +1,5 @@
 import React from 'react';
-import { UnstyledLink } from 'src/components/matchbox';
+import { ExternalLink } from 'src/components/links';
 
 const StatusContent = ({ test, rescheduling }) => (
   <div>
@@ -61,12 +61,9 @@ const StatusContent = ({ test, rescheduling }) => (
     {(test.status !== 'completed' || rescheduling) && (
       <p>
         <span>You can read about the different A/B Test states </span>
-        <UnstyledLink
-          external
-          to="https://www.sparkpost.com/docs/tech-resources/a-b-testing-sparkpost/#ab-testing-states"
-        >
+        <ExternalLink to="https://www.sparkpost.com/docs/tech-resources/a-b-testing-sparkpost/#ab-testing-states">
           here
-        </UnstyledLink>
+        </ExternalLink>
         .
       </p>
     )}

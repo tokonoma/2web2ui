@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Page } from '@sparkpost/matchbox';
 import { PageLink } from 'src/components';
-import { Banner, UnstyledLink } from 'src/components/matchbox';
+import { ExternalLink } from 'src/components/links';
+import { Banner } from 'src/components/matchbox';
 import CreateForm from './components/CreateForm';
 import { createTrackingDomain } from 'src/actions/trackingDomains';
 import { selectTrackingDomainCname } from 'src/selectors/account';
@@ -33,9 +34,9 @@ export class CreatePage extends Component {
             Tracking domains need to be verified via DNS. You'll need to{' '}
             <strong>add a CNAME record</strong> with the value of <strong>{cname}</strong> to this
             domain's DNS settings before it can be used or set as the default.{' '}
-            <UnstyledLink to={LINKS.DOMAIN_VERIFICATION} external>
+            <ExternalLink to={LINKS.DOMAIN_VERIFICATION}>
               Learn more about editing your DNS settings.
-            </UnstyledLink>
+            </ExternalLink>
           </p>
         </Banner>
         <CreateForm onSubmit={this.onSubmit} />

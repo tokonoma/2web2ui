@@ -1,5 +1,6 @@
 import React from 'react';
-import { Snackbar, UnstyledLink } from 'src/components/matchbox';
+import { Snackbar } from 'src/components/matchbox';
+import { ExternalLink } from 'src/components/links';
 import styles from '../CookieConsent.module.scss';
 
 export const ConsentBar = ({ onDismiss }) => (
@@ -10,9 +11,7 @@ export const ConsentBar = ({ onDismiss }) => (
           We use cookies to optimize your experience, analyze traffic, and personalize content. To
           learn more, please visit our
         </span>{' '}
-        <UnstyledLink external to={'https://www.sparkpost.com/policies/privacy/'}>
-          Cookie Policy
-        </UnstyledLink>
+        <ExternalLink to="https://www.sparkpost.com/policies/privacy/">Cookie Policy</ExternalLink>
         <span>. By using our site without disabling cookies, you consent to our use of them.</span>
       </Snackbar>
     </div>

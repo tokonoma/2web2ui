@@ -4,7 +4,8 @@ import { reduxForm, Field } from 'redux-form';
 
 import { LINKS } from 'src/constants';
 import { TextFieldWrapper } from 'src/components/reduxFormWrappers';
-import { Button, UnstyledLink } from 'src/components/matchbox';
+import { ExternalLink } from 'src/components/links';
+import { Button } from 'src/components/matchbox';
 import { required, minLength } from 'src/helpers/validation';
 
 export class RegisterUserForm extends Component {
@@ -35,9 +36,7 @@ export class RegisterUserForm extends Component {
         <p>
           <small>
             By joining, you agree to SparkPost's{' '}
-            <UnstyledLink to={LINKS.TOU} external>
-              Terms of Use
-            </UnstyledLink>
+            <ExternalLink to={LINKS.TOU}>Terms of Use</ExternalLink>
           </small>
         </p>
         <Button primary submit disabled={submitting}>

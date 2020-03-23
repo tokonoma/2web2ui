@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { UnstyledLink } from 'src/components/matchbox';
+import { ExternalLink } from 'src/components/links';
 
 const SettingsContent = ({ test }) => (
   <div>
@@ -14,12 +14,9 @@ const SettingsContent = ({ test }) => (
         </p>
 
         <p>
-          <UnstyledLink
-            external
-            to="https://www.sparkpost.com/docs/tech-resources/a-b-testing-sparkpost/"
-          >
+          <ExternalLink to="https://www.sparkpost.com/docs/tech-resources/a-b-testing-sparkpost/">
             Learn more about configuring AB tests
-          </UnstyledLink>
+          </ExternalLink>
           .
         </p>
       </Fragment>

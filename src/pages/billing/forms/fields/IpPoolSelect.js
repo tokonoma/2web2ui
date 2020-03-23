@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Field, formValueSelector } from 'redux-form';
 import { listPools } from 'src/actions/ipPools';
 import { RadioGroup, SelectWrapper, TextFieldWrapper } from 'src/components';
-import { UnstyledLink } from 'src/components/matchbox';
+import { ExternalLink } from 'src/components/links';
 import { required } from 'src/helpers/validation';
 import { getOrderedIpPools } from 'src/selectors/ipPools';
 import { LINKS } from 'src/constants';
@@ -36,10 +36,7 @@ const ActionSelect = ({ disabled, ipPools, loading }) => {
 const WarmUpHelpText = () => (
   <span>
     New dedicated IP addresses need to be warmed up by gradually sending more emails. Read our{' '}
-    <UnstyledLink to={LINKS.IP_WARM_UP} external>
-      IP Warm-up Overview
-    </UnstyledLink>{' '}
-    for more information.
+    <ExternalLink to={LINKS.IP_WARM_UP}>IP Warm-up Overview</ExternalLink> for more information.
   </span>
 );
 

@@ -3,7 +3,8 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { ScreenReaderOnly, Page, Grid } from '@sparkpost/matchbox';
 import { PageLink } from 'src/components';
-import { Button, Panel, UnstyledLink } from 'src/components/matchbox';
+import { ExternalLink } from 'src/components/links';
+import { Button, Panel } from 'src/components/matchbox';
 import styles from './SingleResult.module.scss';
 import { withRouter } from 'react-router-dom';
 import CodeBlock from './components/CodeBlock';
@@ -89,13 +90,12 @@ export function SingleResult(props) {
                   <WhiteText>
                     The following raw API results outline the reasons for your email's validation
                     status. Learn how to&nbsp;
-                    <UnstyledLink
-                      external
-                      to="https://developers.sparkpost.com/api/recipient-validation/"
+                    <ExternalLink
                       className={styles.ApiDescriptionLink}
+                      to="https://developers.sparkpost.com/api/recipient-validation/"
                     >
                       integrate with Recipient Validation
-                    </UnstyledLink>
+                    </ExternalLink>
                     &nbsp;in your product.
                   </WhiteText>
                 </p>

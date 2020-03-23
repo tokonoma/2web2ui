@@ -1,7 +1,7 @@
 import React from 'react';
 import { Field } from 'redux-form';
 import { TextFieldWrapper, SelectWrapper, RadioGroup, CheckboxWrapper } from 'src/components';
-import { UnstyledLink } from 'src/components/matchbox';
+import { ExternalLink } from 'src/components/links';
 import { required, maxLength, url } from 'src/helpers/validation';
 
 const BasicAuthFields = ({ disabled }) => (
@@ -107,9 +107,9 @@ const AuthDropDown = ({ disabled }) => (
     helpText={
       <span>
         Select "None" if your target URL has no authentication scheme.{' '}
-        <UnstyledLink external to="https://support.sparkpost.com/customer/portal/articles/2112385">
+        <ExternalLink to="https://support.sparkpost.com/customer/portal/articles/2112385">
           More information
-        </UnstyledLink>
+        </ExternalLink>
         .
       </span>
     }

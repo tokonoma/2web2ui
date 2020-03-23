@@ -32,12 +32,11 @@ exports[`render 1`] = `
     <small>
       By joining, you agree to SparkPost's
        
-      <UnstyledLink
-        external={true}
+      <ExternalLink
         to="https://www.sparkpost.com/policies/tou"
       >
         Terms of Use
-      </UnstyledLink>
+      </ExternalLink>
     </small>
   </p>
   <Button
@@ -82,12 +81,11 @@ exports[`submitting 1`] = `
     <small>
       By joining, you agree to SparkPost's
        
-      <UnstyledLink
-        external={true}
+      <ExternalLink
         to="https://www.sparkpost.com/policies/tou"
       >
         Terms of Use
-      </UnstyledLink>
+      </ExternalLink>
     </small>
   </p>
   <Button

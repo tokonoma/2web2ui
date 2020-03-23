@@ -1,8 +1,8 @@
 import React from 'react';
 import { PageLink } from 'src/components';
-import { UnstyledLink } from 'src/components/matchbox';
 import ConditionSwitch, { Case, defaultCase } from 'src/components/auth/ConditionSwitch';
 import { AccessControl } from 'src/components/auth';
+import { ExternalLink } from 'src/components/links';
 import { isAdmin } from 'src/helpers/conditions/user';
 import { onPlanWithStatus } from 'src/helpers/conditions/account';
 import { LINKS } from 'src/constants';
@@ -25,9 +25,9 @@ export const SendMoreCTA = ({ hasSendingLimits }) => (
         />
       </ConditionSwitch>{' '}
       {hasSendingLimits && (
-        <UnstyledLink to={LINKS.DAILY_MONTHLY_QUOTA_LIMIT_DOC} external>
+        <ExternalLink to={LINKS.DAILY_MONTHLY_QUOTA_LIMIT_DOC}>
           Learn more about these limits.
-        </UnstyledLink>
+        </ExternalLink>
       )}
     </p>
   </AccessControl>
