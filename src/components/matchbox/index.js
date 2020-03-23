@@ -13,5 +13,6 @@ export { default as Snackbar } from './Snackbar';
 export { default as Select } from './Select';
 export { default as Stack } from './Stack';
 export { default as Tag } from './Tag';
+export { default as Text } from './Text';
 export { default as TextField } from './TextField';
 export { default as ThemeProvider } from './ThemeProvider';
