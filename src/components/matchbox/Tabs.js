@@ -9,7 +9,7 @@ export default function Tabs(props) {
   const { isHibanaEnabled } = state;
 
   if (!isHibanaEnabled) {
-    return <OGTabs {...omitSystemProps(props)} />;
+    return <OGTabs {...omitSystemProps(props, ['color'])} />;
   }
   return <HibanaTabs {...props} />;
 }
