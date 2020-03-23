@@ -77,14 +77,14 @@ export class Support extends Component {
 
     return (
       <Modal open={showSupportPanel} onClose={closeSupportPanel} showCloseButton={true}>
-        {visibleTabs.length > 1 && (
-          <Tabs
-            connectBelow={true}
-            selected={visibleTabs.findIndex(tab => tab.view === currentSupportView)}
-            tabs={visibleTabs.map(({ content, onClick }) => ({ content, onClick }))}
-          />
-        )}
         <Panel className={styles.Support}>
+          {visibleTabs.length > 1 && (
+            <Tabs
+              connectBelow={true}
+              selected={visibleTabs.findIndex(tab => tab.view === currentSupportView)}
+              tabs={visibleTabs.map(({ content, onClick }) => ({ content, onClick }))}
+            />
+          )}
           {currentSupportView === 'docs' && <SearchPanel defaultSearchText={supportDocSearch} />}
           {currentSupportView === 'ticket' && <SupportForm onClose={closeSupportPanel} />}
           {currentSupportView === 'contact' && (
