@@ -1,5 +1,6 @@
 import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
-import { DownloadLink } from 'src/components/links';
+import exampleFilePath from './example-file.csv';
+import DownloadLink from './DownloadLink';
 
 <Meta title="Links|DownloadLink" component={DownloadLink} />
 
@@ -16,16 +17,17 @@ Use the `<DownloadLink/>` component when the user needs to download a file.
 ### Default
 
 <Preview>
-  <DownloadLink href="my-fake-file.json">Download Fake JSON File</DownloadLink>
+  <DownloadLink href={exampleFilePath}>Download Fake JSON File</DownloadLink>
 </Preview>
 
 ## Usage
 
 ```js
 import React from 'react';
+import exampleFilePath from './example-file.csv';
 import { DownloadLink } from 'src/components/links';
 
 const MyComponent = () => (
-  <DownloadLink href="my-fake-file.json">Download Fake JSON File</DownloadLink/>
+  <DownloadLink href={exampleFilePath}>Download Fake JSON File</DownloadLink/>
 )
 ```
