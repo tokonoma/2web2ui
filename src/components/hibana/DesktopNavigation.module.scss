@@ -104,23 +104,6 @@
   background-color: color(gray, 300);
 }
 
-.AccountDropdownWrapper {
-  align-self: center;
-  justify-self: end;
-}
-
-.AccountDropdownButton {
-  @include button-reset();
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: spacing(700);
-  height: spacing(700);
-  border-radius: border-radius(circle);
-  background-color: color(brand, orange);
-  color: color(white);
-}
-
 .SecondaryNav {
   padding-top: spacing(200);
   padding-bottom: spacing(200);

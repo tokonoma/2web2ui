@@ -84,10 +84,12 @@ $header-height: spacing(800);
   background: transparent;
   transform: rotate(45deg);
   width: 100%; // resets width to full
+  background-color: color(gray, 900);
 
   // resets width to full
   &:before,
   &:after {
+    background-color: color(gray, 900);
     width: 100%;
     top: 0px;
   }
@@ -128,6 +130,20 @@ $header-height: spacing(800);
     visibility: visible;
     transform: translateX(0);
   }
+}
+
+.MenuMeta {
+  background-color: color(white);
+  color: color(purple, 700);
+  padding: spacing(400);
+}
+
+.MenuUserInfo {
+  font-weight: font-weight(medium);
+}
+
+.MenuUserSupplemental {
+  text-transform: capitalize;
 }
 
 .Overlay,
@@ -239,4 +255,5 @@ $header-height: spacing(800);
 
 .Footer {
   padding: spacing(400) 0;
+  margin-bottom: spacing(800); // Needed to help prevent content from overflowing the window
 }

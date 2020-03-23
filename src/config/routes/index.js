@@ -656,7 +656,7 @@ const routes = [
     layout: App,
     title: 'Sending Domains',
     supportDocSearch: 'sending domain',
-    category: 'Account',
+    category: 'Configuration',
     subcategory: 'Sending Domains',
   },
   {
@@ -666,7 +666,7 @@ const routes = [
     layout: App,
     title: 'New Sending Domain',
     supportDocSearch: 'sending domain',
-    category: 'Account',
+    category: 'Configuration',
     subcategory: 'Sending Domains',
   },
   {
@@ -676,6 +676,8 @@ const routes = [
     layout: App,
     title: 'Edit Sending Domain',
     supportDocSearch: 'sending domain',
+    category: 'Configuration',
+    subcategory: 'Sending Domains',
   },
   {
     path: '/account/smtp',
@@ -684,7 +686,8 @@ const routes = [
     layout: App,
     title: 'SMTP Settings',
     supportDocSearch: 'smtp',
-    category: 'Account',
+    category: 'Configuration',
+    subcategory: 'SMTP Settings',
   },
   {
     path: '/account/billing',
@@ -736,7 +739,7 @@ const routes = [
     layout: App,
     title: 'IP Pools',
     supportDocSearch: 'ip pool',
-    category: 'Account',
+    category: 'Configuration',
     subcategory: 'IP Pools',
   },
   {
@@ -746,7 +749,7 @@ const routes = [
     layout: App,
     title: 'New IP Pool',
     supportDocSearch: 'ip pool',
-    category: 'Account',
+    category: 'Configuration',
     subcategory: 'IP Pools',
   },
   {
@@ -756,7 +759,7 @@ const routes = [
     layout: App,
     title: 'Edit IP Pool',
     supportDocSearch: 'ip pool',
-    category: 'Account',
+    category: 'Configuration',
     subcategory: 'IP Pools',
   },
   {
@@ -766,7 +769,7 @@ const routes = [
     layout: App,
     title: 'Edit IP',
     supportDocSearch: 'ip pool',
-    category: 'Account',
+    category: 'Configuration',
     subcategory: 'IP Pools',
   },
   {

@@ -5,9 +5,11 @@ import { ScreenReaderOnly } from '@sparkpost/matchbox';
 import { Inline } from 'src/components/matchbox';
 import { SparkPost } from 'src/components';
 import findRouteByPath from 'src/helpers/findRouteByPath';
+import AccountPopover from './AccountPopover';
 import styles from './DesktopNavigation.module.scss';
 
-export default function DesktopNavigation({ navItems, location }) {
+export default function DesktopNavigation(props) {
+  const { navItems, location } = props;
   const { category, subcategory } = findRouteByPath(location.pathname);
 
   const isCategoryActive = navItem => category === navItem.label;
@@ -46,14 +48,7 @@ export default function DesktopNavigation({ navItems, location }) {
             </Inline>
           </nav>
 
-          {/* TODO: Implement in FE-924 */}
-          <AccountDropdown>
-            <button className={styles.AccountDropdownButton}>
-              <span aria-hidden="true">SP</span>
-
-              <ScreenReaderOnly>Account Menu</ScreenReaderOnly>
-            </button>
-          </AccountDropdown>
+          <AccountPopover />
         </div>
       </NavWrapper>
 
@@ -90,6 +85,8 @@ export default function DesktopNavigation({ navItems, location }) {
             </nav>
           );
         }
+
+        return null;
       })}
     </div>
   );
@@ -124,8 +121,4 @@ function SkipLink() {
       Skip to Main Content
     </a>
   );
-}
-
-function AccountDropdown({ children }) {
-  return <div className={styles.AccountDropdownWrapper}>{children}</div>;
 }

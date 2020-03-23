@@ -130,6 +130,7 @@ describe('Alerts Page - Create', () => {
 
     // 🥐 This test times out frequently and breaks our build
     // see, https://travis-ci.org/github/SparkPost/2web2ui/jobs/664865807
+    /* eslint-disable jest/no-disabled-tests */
     it.skip('handles alert creation successfully and redirect to details afterwards', () => {
       cy.stubRequest({
         method: 'POST',
@@ -183,5 +184,6 @@ describe('Alerts Page - Create', () => {
       cy.url().should('include', '/alerts/details/101');
       cy.findByText('Alert created').should('be.visible');
     });
+    /* eslint-enable jest/no-disabled-tests */
   });
 });

@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 import { Transition } from 'react-transition-group';
@@ -6,6 +7,7 @@ import FocusLock from 'react-focus-lock';
 import { ScreenReaderOnly, WindowEvent } from '@sparkpost/matchbox';
 import { ChevronRight } from '@sparkpost/matchbox-icons';
 import { tokens } from '@sparkpost/design-tokens-hibana';
+import { selectHibanaAccountNavItems } from 'src/selectors/navItems';
 import SparkPost from 'src/components/sparkPost/SparkPost';
 import styles from './MobileNavigation.module.scss';
 
@@ -18,9 +20,18 @@ const Menu = {
   ExpandableContent,
 };
 
-export default function MobileNavigation({ navItems }) {
+function MobileNavigation(props) {
+  const { navItems, accountItems, currentUser, dispatch } = props;
   const [isOpen, setIsOpen] = useState(false);
   const handleToggle = () => setIsOpen(!isOpen);
+
+  const handleAccountItemClick = accountItem => {
+    if (accountItem.action) {
+      dispatch(accountItem.action());
+    }
+
+    handleToggle();
+  };
 
   return (
     <div className={styles.MobileNavigation} data-id="mobile-navigation">
@@ -44,6 +55,20 @@ export default function MobileNavigation({ navItems }) {
         </div>
 
         <Menu.Wrapper onOverlayClick={handleToggle} isOpen={isOpen}>
+          {currentUser && (
+            <div className={styles.MenuMeta}>
+              {(currentUser.email || currentUser.customer) && (
+                <div className={styles.MenuUserInfo}>
+                  {currentUser.email ? currentUser.email : currentUser.customer}
+                </div>
+              )}
+
+              {currentUser.access_level && (
+                <div className={styles.MenuUserSupplemental}>{currentUser.access_level}</div>
+              )}
+            </div>
+          )}
+
           {navItems.map(item => {
             const isExpandable = Boolean(item.children && item.children.length);
             const uniqueID = `mobile-nav-${item.label.toLowerCase().replace(/\s/g, '')}`;
@@ -83,10 +108,19 @@ export default function MobileNavigation({ navItems }) {
           })}
 
           <div className={styles.Footer}>
-            {/* TODO: Populate these as part of FE-924 */}
-            <Menu.Item variant="secondary" to="/templates">
-              Placeholder
-            </Menu.Item>
+            {accountItems.map((item, index) => {
+              return (
+                <Menu.Item
+                  onClick={() => handleAccountItemClick(item)}
+                  variant="secondary"
+                  to={item.to}
+                  action={item.action}
+                  key={`mobile-account-item-${index}`}
+                >
+                  {item.label}
+                </Menu.Item>
+              );
+            })}
           </div>
         </Menu.Wrapper>
       </FocusLock>
@@ -131,14 +165,24 @@ function Wrapper(props) {
 }
 
 function Item(props) {
-  const { children, id, to, variant, onClick } = props;
+  const { children, id, to, variant, onClick, action } = props;
   const [isExpanded, setIsExpanded] = useState(false);
+  const itemClassNames = classNames(styles.MenuItem, styles[variant]);
+  const contentClassNames = styles.MenuItemContent;
 
   if (to) {
     return (
-      <Link onClick={onClick} className={classNames(styles.MenuItem, styles[variant])} to={to}>
-        <div className={styles.MenuItemContent}>{children}</div>
+      <Link onClick={onClick} className={itemClassNames} to={to}>
+        <div className={contentClassNames}>{children}</div>
       </Link>
+    );
+  }
+
+  if (action) {
+    return (
+      <button onClick={onClick} className={itemClassNames}>
+        <div className={contentClassNames}>{children}</div>
+      </button>
     );
   }
 
@@ -240,3 +284,10 @@ function ExpandableContent(props) {
     </div>
   );
 }
+
+const mapStateToProps = state => ({
+  currentUser: state.currentUser,
+  accountItems: selectHibanaAccountNavItems(state),
+});
+
+export default connect(mapStateToProps)(MobileNavigation);

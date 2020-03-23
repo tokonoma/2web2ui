@@ -1,5 +1,6 @@
 const initialState = {
   grants: [],
+  loading: false,
   verifyingEmail: null,
   emailError: null,
   verifyingToken: null,
@@ -7,14 +8,16 @@ const initialState = {
   storingCookieConsent: null,
   consentFailed: null,
   options: {},
-  userOptionsPending: false
+  userOptionsPending: false,
 };
 
 export default (state = initialState, { type, payload, meta }) => {
   switch (type) {
-    case 'GET_CURRENT_USER_SUCCESS':
+    case 'GET_CURRENT_USER_PENDING':
+      return { ...state, loading: true };
 
-      return { ...state, ...payload, cookie_consent: !!payload.cookie_consent };
+    case 'GET_CURRENT_USER_SUCCESS':
+      return { ...state, ...payload, loading: false, cookie_consent: !!payload.cookie_consent };
 
     case 'GET_GRANTS_SUCCESS':
       return { ...state, grants: payload };
@@ -56,23 +59,28 @@ export default (state = initialState, { type, payload, meta }) => {
       return { ...state, userOptionsPending: false };
 
     case 'UPDATE_USER_UI_OPTIONS_SUCCESS':
-      return { ...state, options: {
-        ...state.options,
-        ui: {
-          ...state.options.ui,
-          ...meta.data.options.ui
-        }
-      }, userOptionsPending: false };
+      return {
+        ...state,
+        options: {
+          ...state.options,
+          ui: {
+            ...state.options.ui,
+            ...meta.data.options.ui,
+          },
+        },
+        userOptionsPending: false,
+      };
 
     case 'MARK_ALL_NOTIFICATIONS_AS_READ': {
       return {
         ...state,
         options: {
-          ...state.options, ui: {
+          ...state.options,
+          ui: {
             ...state.options.ui,
-            notificationsLastSeenDate: payload
-          }
-        }
+            notificationsLastSeenDate: payload,
+          },
+        },
       };
     }
 
