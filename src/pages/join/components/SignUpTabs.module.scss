@@ -1,0 +1,20 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.Tabs {
+  margin-bottom: spacing();
+
+  > div {
+    text-align: center;
+    height: 80px;
+    padding: 0;
+
+    > a {
+      display: inline-grid;
+      align-items: center;
+      height: 100%;
+      width: 50%;
+      margin: 0;
+      font-size: 1em;
+    }
+  }
+}

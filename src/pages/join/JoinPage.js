@@ -9,7 +9,7 @@ import { CenteredLogo, PageLink } from 'src/components';
 import { Error, Panel } from 'src/components/matchbox';
 import JoinForm from './components/JoinForm';
 import JoinError from './components/JoinError';
-import JoinLink from './components/JoinLink';
+import SignUpTabs from './components/SignUpTabs';
 import config from 'src/config';
 import { inSPCEU } from 'src/config/tenant';
 import { authenticate } from 'src/actions/auth';
@@ -21,7 +21,11 @@ import {
   LINKS,
   AWS_COOKIE_NAME,
   ANALYTICS_CREATE_ACCOUNT,
+  CROSS_LINK_MAP,
 } from 'src/constants';
+import styles from './JoinPage.module.scss';
+
+const brand = CROSS_LINK_MAP[config.crossLinkTenant];
 
 export class JoinPage extends Component {
   state = {
@@ -82,13 +86,19 @@ export class JoinPage extends Component {
       <div>
         {loadScript({ url: LINKS.RECAPTCHA_LIB_URL })}
         <CenteredLogo showAwsLogo={this.props.isAWSsignUp} />
-        <Panel accent title={this.props.title}>
+        <Panel accent={!brand}>
+          {brand && (
+            <SignUpTabs brand={brand} isSPCEU={this.props.isSPCEU} location={this.props.location} />
+          )}
           {createError && (
             <Panel.Section>
               <Error error={<JoinError errors={createError} data={formData} />} />
             </Panel.Section>
           )}
           <Panel.Section>
+            <h3 className={styles.header}>{`Sign Up for SparkPost${
+              this.props.isSPCEU ? ' EU' : ''
+            }`}</h3>
             <JoinForm onSubmit={this.registerSubmit} />
           </Panel.Section>
         </Panel>
@@ -98,7 +108,6 @@ export class JoinPage extends Component {
               Already have an account? <PageLink to="/auth">Log In</PageLink>.
             </small>
           }
-          right={<JoinLink location={this.props.location} />}
         />
       </div>
     );
@@ -110,7 +119,7 @@ function mapStateToProps(state, props) {
     account: state.account,
     params: qs.parse(props.location.search),
     isAWSsignUp: !!cookie.get(AWS_COOKIE_NAME),
-    title: inSPCEU() ? 'Sign Up For SparkPost EU' : 'Sign Up',
+    isSPCEU: inSPCEU(),
   };
 }
 

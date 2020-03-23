@@ -15,7 +15,7 @@ describe('The sign up page', () => {
 
   it('has the title "Sign Up"', () => {
     cy.title().should('include', 'Sign Up');
-    cy.findByText('Sign Up').should('be.visible');
+    cy.findByText('Sign Up for SparkPost').should('be.visible');
   });
 
   it('renders the "Create Account" button enabled when all fields are filled out', () => {
