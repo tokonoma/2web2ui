@@ -13,3 +13,6 @@ export default function Tabs(props) {
   }
   return <HibanaTabs {...props} />;
 }
+
+OGTabs.displayName = 'OGTabs';
+HibanaTabs.displayName = 'HibanaTabs';
