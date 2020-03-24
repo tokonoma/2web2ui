@@ -1,8 +1,8 @@
 import React, { useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
-import { Page, Table, Tooltip } from '@sparkpost/matchbox';
-import { Panel } from 'src/components/matchbox';
+import { Page, Tooltip } from '@sparkpost/matchbox';
+import { Panel, Table } from 'src/components/matchbox';
 import { Schedule } from '@sparkpost/matchbox-icons';
 import { ApiErrorBanner, Loading, PageLink } from 'src/components';
 import formatScheduleLine from './helpers/formatScheduleLine';
@@ -194,7 +194,7 @@ export const TestListPage = ({ tests, error, loading, listTests }) => {
           <TrendsChart filters={filters} />
           <Panel.Section />
         </Panel>
-          {renderCollection()}
+        {renderCollection()}
       </>
     ),
     [filters, renderCollection, updateFilters],

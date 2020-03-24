@@ -1,6 +1,6 @@
 import React from 'react';
 import classnames from 'classnames';
-import { Table } from '@sparkpost/matchbox';
+import { Table } from 'src/components/matchbox';
 import HeaderLabel from './HeaderLabel';
 import styles from './SummaryTable.module.scss';
 
@@ -11,7 +11,7 @@ const Head = ({ columns, onSort, order }) => (
         <Table.HeaderCell
           className={classnames(styles.Header, {
             [styles.CenterAlign]: align === 'center',
-            [styles.RightAlign]: align === 'right'
+            [styles.RightAlign]: align === 'right',
           })}
           key={`header-${dataKey}`}
           width={width}

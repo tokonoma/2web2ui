@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table } from '@sparkpost/matchbox';
+import { Table } from 'src/components/matchbox';
 import styles from './SummaryTable.module.scss';
 
 const Billboard = ({ children, colSpan }) => (
