@@ -38,7 +38,7 @@ export function HeaderCell(props) {
   const { isHibanaEnabled } = state;
 
   if (!isHibanaEnabled) {
-    return <OGTable.HeaderCell {...omitSystemProps(props)} />;
+    return <OGTable.HeaderCell {...omitSystemProps(props, ['width'])} />;
   }
   return <HibanaTable.HeaderCell {...props} />;
 }
