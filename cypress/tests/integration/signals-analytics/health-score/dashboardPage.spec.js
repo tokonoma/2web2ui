@@ -181,7 +181,7 @@ describe('The health score dashboard page', () => {
       });
     });
 
-    it('renders tooltips when clicking on bars within the history chart', () => {
+    it.skip('renders tooltips when clicking on bars within the history chart', () => {
       const rechartsSelector = '.recharts-wrapper';
       const barSelector = '.recharts-rectangle';
 
