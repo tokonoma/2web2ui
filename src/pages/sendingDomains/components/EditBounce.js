@@ -1,11 +1,11 @@
 import React, { Component, Fragment } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
-import { Tooltip } from '@sparkpost/matchbox';
-import { Help } from '@sparkpost/matchbox-icons';
 import { update } from 'src/actions/sendingDomains';
+
+import { Help } from '@sparkpost/matchbox-icons';
 import { PageLink } from 'src/components/links';
-import { Banner, Panel } from 'src/components/matchbox';
+import { Banner, Panel, Tooltip } from 'src/components/matchbox';
 import ToggleBlock from 'src/components/toggleBlock/ToggleBlock';
 import { SendingDomainSection } from './SendingDomainSection';
 import { resolveReadyFor } from 'src/helpers/domains';

@@ -1,6 +1,6 @@
 import React from 'react';
 import { InfoOutline } from '@sparkpost/matchbox-icons';
-import { Tooltip } from '@sparkpost/matchbox';
+import { Tooltip } from 'src/components/matchbox';
 import styles from './Tooltip.module.scss';
 
 const InfoTooltip = ({ content }) => (

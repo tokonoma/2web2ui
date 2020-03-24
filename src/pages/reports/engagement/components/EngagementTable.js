@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import React from 'react';
-import { Tooltip } from '@sparkpost/matchbox';
+import { Tooltip } from 'src/components/matchbox';
 import { InfoOutline } from '@sparkpost/matchbox-icons';
 
 import { Empty, PanelLoading, TableCollection } from 'src/components';
@@ -13,7 +13,7 @@ const COLUMNS = [
     key: 'link_name',
     label: 'Link',
     sortKey: 'link_name',
-    width: '40%'
+    width: '40%',
   },
   {
     key: 'count_raw_clicked_approx',
@@ -26,7 +26,7 @@ const COLUMNS = [
       </span>
     ),
     sortKey: 'count_raw_clicked_approx',
-    width: '20%'
+    width: '20%',
   },
   {
     key: 'count_clicked',
@@ -39,21 +39,21 @@ const COLUMNS = [
       </span>
     ),
     sortKey: 'count_clicked',
-    width: '20%'
+    width: '20%',
   },
   {
     key: 'percentage_clicked',
     label: 'Percent of Total',
     sortKey: 'percentage_clicked',
-    width: '20%'
-  }
+    width: '20%',
+  },
 ];
 
-const DataRow = (row) => [
+const DataRow = row => [
   row.link_name,
   formatNumber(row.count_raw_clicked_approx),
   formatNumber(row.count_clicked),
-  formatPercent(row.percentage_clicked)
+  formatPercent(row.percentage_clicked),
 ];
 
 export default function EngagementTable({ data, loading }) {
@@ -70,9 +70,9 @@ export default function EngagementTable({ data, loading }) {
   const totalClicks = _.sumBy(data, 'count_clicked');
 
   // Must include percentage in data for sorting
-  const dataWithPercentage = data.map((row) => ({
+  const dataWithPercentage = data.map(row => ({
     ...row,
-    percentage_clicked: safeRate(row.count_clicked, totalClicks)
+    percentage_clicked: safeRate(row.count_clicked, totalClicks),
   }));
 
   return (
