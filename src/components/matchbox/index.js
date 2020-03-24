@@ -23,3 +23,4 @@ export { default as TextField } from './TextField';
 export { default as ThemeProvider } from './ThemeProvider';
 export { default as UnstyledLink } from './UnstyledLink';
 export { default as WindowEvent } from './WindowEvent';
+export { default as Tooltip } from './Tooltip';

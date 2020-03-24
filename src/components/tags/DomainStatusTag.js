@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Tooltip } from '@sparkpost/matchbox';
+import { Tooltip } from 'src/components/matchbox';
 import { ErrorOutline, Schedule } from '@sparkpost/matchbox-icons';
 import { Tag } from 'src/components/matchbox';
 

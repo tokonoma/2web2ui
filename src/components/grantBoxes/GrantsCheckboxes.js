@@ -2,15 +2,15 @@ import classnames from 'classnames/bind';
 import React from 'react';
 import _ from 'lodash';
 import { Field } from 'redux-form';
-import { Grid, Tooltip } from '@sparkpost/matchbox';
-
+import { Grid } from '@sparkpost/matchbox';
+import { Tooltip } from 'src/components/matchbox';
 import { CheckboxWrapper } from 'src/components/reduxFormWrappers';
 import styles from './GrantsCheckboxes.module.scss';
 
 const cx = classnames.bind(styles);
 
 const GrantsCheckboxes = ({ grants, show, disabled }) => {
-  const grantFields = _.map(grants, (grant) => (
+  const grantFields = _.map(grants, grant => (
     <div className={styles.Grant} key={grant.key}>
       <Tooltip dark content={grant.description}>
         <Field
@@ -23,7 +23,6 @@ const GrantsCheckboxes = ({ grants, show, disabled }) => {
       </Tooltip>
     </div>
   ));
-
 
   const grantFieldChunks = _.chunk(grantFields, Math.ceil(_.size(grants) / 3));
 
