@@ -1,5 +1,4 @@
 import React, { useEffect, useCallback } from 'react';
-import { Link } from 'react-router-dom';
 import moment from 'moment';
 import { Page, Table, Tooltip } from '@sparkpost/matchbox';
 import { Panel } from 'src/components/matchbox';
@@ -233,7 +232,7 @@ export const TestListPage = ({ tests, error, loading, listTests }) => {
       primaryAction={{
         content: 'Start a Test',
         to: '/inbox-placement/seedlist',
-        component: Link,
+        component: PageLink,
       }}
     >
       {error ? renderError() : renderPage()}

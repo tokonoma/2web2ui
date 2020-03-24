@@ -1,19 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 
 import { Page } from '@sparkpost/matchbox';
 import { ApiErrorBanner, Loading } from 'src/components';
+import { PageLink } from 'src/components/links';
 import PoolForm from './components/PoolForm';
 
 import { showAlert } from 'src/actions/globalAlert';
 import { createPool, listPools } from 'src/actions/ipPools';
 
-
 const breadcrumbAction = {
   content: 'IP Pools',
-  Component: Link,
-  to: '/account/ip-pools'
+  Component: PageLink,
+  to: '/account/ip-pools',
 };
 
 export class CreatePage extends Component {
@@ -25,13 +24,13 @@ export class CreatePage extends Component {
     this.loadDependentData();
   }
 
-  createPool = (values) => {
+  createPool = values => {
     const { createPool, showAlert, history } = this.props;
 
     return createPool(values).then(() => {
       showAlert({
         type: 'success',
-        message: `Created IP pool ${values.name}.`
+        message: `Created IP pool ${values.name}.`,
       });
       history.push('/account/ip-pools');
     });
@@ -39,11 +38,13 @@ export class CreatePage extends Component {
 
   renderError() {
     const { listError } = this.props;
-    return <ApiErrorBanner
-      errorDetails={listError.message}
-      message="Sorry, we seem to have had some trouble loading your IP pool."
-      reload={this.loadDependentData}
-    />;
+    return (
+      <ApiErrorBanner
+        errorDetails={listError.message}
+        message="Sorry, we seem to have had some trouble loading your IP pool."
+        reload={this.loadDependentData}
+      />
+    );
   }
 
   render() {
@@ -65,13 +66,13 @@ export class CreatePage extends Component {
   }
 }
 
-const mapStateToProps = (state, props) => ({
+const mapStateToProps = state => ({
   listError: state.ipPools.listError,
-  loading: state.ipPools.listLoading
+  loading: state.ipPools.listLoading,
 });
 
 export default connect(mapStateToProps, {
   createPool,
   listPools,
-  showAlert
+  showAlert,
 })(CreatePage);

@@ -1,7 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 import { ScreenReaderOnly } from '@sparkpost/matchbox';
+import { PageLink } from 'src/components/links';
 import { Inline } from 'src/components/matchbox';
 import { SparkPost } from 'src/components';
 import findRouteByPath from 'src/helpers/findRouteByPath';
@@ -19,9 +19,9 @@ export default function DesktopNavigation({ navItems, location }) {
 
         <div className={styles.PrimaryNavLayout}>
           <div className={styles.LogoWrapper}>
-            <Link to="/dashboard">
+            <PageLink to="/dashboard">
               <SparkPost.Logo className={styles.Logo} />
-            </Link>
+            </PageLink>
           </div>
 
           <nav className={styles.PrimaryNav} aria-labelledby="primary-nav-heading">
@@ -107,12 +107,12 @@ function NavLink(props) {
   const { variant, children, to, isActive } = props;
 
   return (
-    <Link
+    <PageLink
       to={to}
       className={classNames(styles.NavLink, styles[variant], isActive ? styles.isActive : null)}
     >
       {children}
-    </Link>
+    </PageLink>
   );
 }
 

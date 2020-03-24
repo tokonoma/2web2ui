@@ -1,9 +1,9 @@
 import React, { useState, useCallback } from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Page } from '@sparkpost/matchbox';
 import { showAlert } from 'src/actions/globalAlert';
 import { watchlistAdd } from 'src/actions/blacklist';
+import { PageLink } from 'src/components/links';
 import { Button, Panel, TextField } from 'src/components/matchbox';
 
 import styles from './WatchlistAddPage.module.scss';
@@ -68,7 +68,7 @@ export const WatchlistAddPage = ({
       breadcrumbAction={{
         content: 'Watchlist',
         to: '/blacklist/watchlist',
-        component: Link,
+        component: PageLink,
       }}
     >
       <Panel sectioned>

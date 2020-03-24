@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { Page } from '@sparkpost/matchbox';
-import { Panel } from 'src/components/matchbox';
-import { Banner } from 'src/components/matchbox';
+import { PageLink } from 'src/components/links';
+import { Banner, Panel } from 'src/components/matchbox';
 import _ from 'lodash';
 
 import { listApiKeys, getApiKey, listGrants } from 'src/actions/api-keys';
@@ -16,7 +15,7 @@ import ApiKeyForm from './components/ApiKeyForm';
 
 const breadcrumbAction = {
   content: 'API Keys',
-  Component: Link,
+  Component: PageLink,
   to: '/account/api-keys',
 };
 

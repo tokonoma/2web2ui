@@ -1,9 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { Page } from '@sparkpost/matchbox';
+import { PageLink } from 'src/components/links';
 import { Panel } from 'src/components/matchbox';
-import { deleteApiKey, getApiKey, updateApiKey, listGrants, listSubaccountGrants } from 'src/actions/api-keys';
+import {
+  deleteApiKey,
+  getApiKey,
+  updateApiKey,
+  listGrants,
+  listSubaccountGrants,
+} from 'src/actions/api-keys';
 import { showAlert } from 'src/actions/globalAlert';
 
 import { hasSubaccounts } from 'src/selectors/subaccounts';
@@ -15,17 +22,17 @@ import ApiKeyForm from './components/ApiKeyForm';
 
 const breadcrumbAction = {
   content: 'API Keys',
-  Component: Link,
-  to: '/account/api-keys'
+  Component: PageLink,
+  to: '/account/api-keys',
 };
 
 export class ApiKeyEditPage extends Component {
   static defaultProps = {
-    apiKey: {}
+    apiKey: {},
   };
 
   state = {
-    showDeleteModal: false
+    showDeleteModal: false,
   };
 
   componentDidMount() {
@@ -51,13 +58,15 @@ export class ApiKeyEditPage extends Component {
     this.setState({ showDeleteModal: !this.state.showDeleteModal });
   };
 
-  onSubmit = (values) => {
+  onSubmit = values => {
     const { id, showAlert, updateApiKey } = this.props;
 
-    return updateApiKey({ id, ...values }).then(() => showAlert({
-      type: 'success',
-      message: 'API key updated'
-    }));
+    return updateApiKey({ id, ...values }).then(() =>
+      showAlert({
+        type: 'success',
+        message: 'API key updated',
+      }),
+    );
   };
 
   render() {
@@ -68,21 +77,24 @@ export class ApiKeyEditPage extends Component {
     }
 
     if (error) {
-      return <Redirect to='/account/api-keys' />;
+      return <Redirect to="/account/api-keys" />;
     }
 
     return (
       <Page
         title={apiKey.label}
         breadcrumbAction={breadcrumbAction}
-        secondaryActions={[{ content: 'Delete', onClick: this.onToggleDelete }]}>
+        secondaryActions={[{ content: 'Delete', onClick: this.onToggleDelete }]}
+      >
         <Panel>
           <ApiKeyForm apiKey={apiKey} onSubmit={this.onSubmit} readOnly={false} />
         </Panel>
         <DeleteModal
           open={this.state.showDeleteModal}
           title="Are you sure you want to delete this key?"
-          content={<p>The key will be immediately and permanently removed. This cannot be undone.</p>}
+          content={
+            <p>The key will be immediately and permanently removed. This cannot be undone.</p>
+          }
           onCancel={this.onToggleDelete}
           onDelete={this.handleDelete}
         />
@@ -101,8 +113,15 @@ const mapStateToProps = (state, props) => {
     grants,
     hasSubaccounts: hasSubaccounts(state),
     loading: getFormLoading(state) || state.apiKeys.keyLoading,
-    subaccount: selectSubaccountIdFromQuery(state, props)
+    subaccount: selectSubaccountIdFromQuery(state, props),
   };
 };
 
-export default connect(mapStateToProps, { getApiKey, updateApiKey, listGrants, listSubaccountGrants, deleteApiKey, showAlert })(ApiKeyEditPage);
+export default connect(mapStateToProps, {
+  getApiKey,
+  updateApiKey,
+  listGrants,
+  listSubaccountGrants,
+  deleteApiKey,
+  showAlert,
+})(ApiKeyEditPage);

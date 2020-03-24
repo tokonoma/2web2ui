@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { list as listDomains } from 'src/actions/sendingDomains';
 import { list as listSubaccounts } from 'src/actions/subaccounts';
 
@@ -106,7 +105,7 @@ export class ListPage extends Component {
 
     const primaryAction = {
       content: 'Add a Domain',
-      Component: Link,
+      Component: PageLink,
       to: '/account/sending-domains/create',
     };
 

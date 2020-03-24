@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 
 // Actions
 import { listAbTests, deleteAbTest, cancelAbTest } from 'src/actions/abTesting';
@@ -10,15 +9,15 @@ import { showAlert } from 'src/actions/globalAlert';
 import { Page } from '@sparkpost/matchbox';
 import { Loading, ApiErrorBanner, DeleteModal, ConfirmationModal } from 'src/components';
 import { Setup } from 'src/components/images';
+import { PageLink } from 'src/components/links';
 import TestCollection from './components/TestCollection';
 
 export class ListPage extends Component {
-
   state = {
     showDeleteModal: false,
     showCancelModal: false,
     testToDelete: {},
-    testToCancel: {}
+    testToCancel: {},
   };
 
   componentDidMount() {
@@ -28,7 +27,7 @@ export class ListPage extends Component {
   toggleDelete = (id, subaccount_id) => {
     this.setState({
       showDeleteModal: !this.state.showDeleteModal,
-      testToDelete: { id, subaccountId: subaccount_id }
+      testToDelete: { id, subaccountId: subaccount_id },
     });
   };
 
@@ -44,7 +43,7 @@ export class ListPage extends Component {
   toggleCancel = (id, subaccount_id) => {
     this.setState({
       showCancelModal: !this.state.showCancelModal,
-      testToCancel: { id, subaccountId: subaccount_id }
+      testToCancel: { id, subaccountId: subaccount_id },
     });
   };
 
@@ -88,45 +87,62 @@ export class ListPage extends Component {
 
     return (
       <Page
-        title='A/B Testing'
-        primaryAction={{ content: 'Create a New A/B Test', to: '/ab-testing/create', component: Link }}
+        title="A/B Testing"
+        primaryAction={{
+          content: 'Create a New A/B Test',
+          to: '/ab-testing/create',
+          component: PageLink,
+        }}
         empty={{
           show: !error && abTests.length === 0,
           image: Setup,
           title: 'Create an A/B test',
-          content: <p>Create and run A/B tests to boost your engagement.</p>
-        }}>
+          content: <p>Create and run A/B tests to boost your engagement.</p>,
+        }}
+      >
         {error ? this.renderError() : this.renderCollection()}
         <DeleteModal
           open={this.state.showDeleteModal}
-          title='Are you sure you want to delete this test?'
-          content={<p>The test and all associated versions will be immediately and permanently removed. This cannot be undone.</p>}
+          title="Are you sure you want to delete this test?"
+          content={
+            <p>
+              The test and all associated versions will be immediately and permanently removed. This
+              cannot be undone.
+            </p>
+          }
           onDelete={this.handleDelete}
           onCancel={this.toggleDelete}
           isPending={deletePending}
         />
         <ConfirmationModal
           open={this.state.showCancelModal}
-          title='Are you sure you want to cancel this test?'
-          content={<p>The test will be cancelled and all further messages will be delivered to the default template.</p>}
+          title="Are you sure you want to cancel this test?"
+          content={
+            <p>
+              The test will be cancelled and all further messages will be delivered to the default
+              template.
+            </p>
+          }
           onConfirm={this.handleCancel}
           onCancel={this.toggleCancel}
           isPending={cancelPending}
-          confirmVerb='OK'
+          confirmVerb="OK"
         />
       </Page>
     );
   }
 }
 
-function mapStateToProps({ abTesting, ...state }) {
+function mapStateToProps({ abTesting }) {
   return {
     abTests: abTesting.list,
     loading: abTesting.listLoading,
     deletePending: abTesting.deletePending,
     cancelPending: abTesting.cancelPending,
-    error: abTesting.listError
+    error: abTesting.listError,
   };
 }
 
-export default connect(mapStateToProps, { listAbTests, deleteAbTest, cancelAbTest, showAlert })(ListPage);
+export default connect(mapStateToProps, { listAbTests, deleteAbTest, cancelAbTest, showAlert })(
+  ListPage,
+);

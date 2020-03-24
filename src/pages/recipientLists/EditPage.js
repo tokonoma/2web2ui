@@ -1,24 +1,25 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 import { Page } from '@sparkpost/matchbox';
 
 import {
   getRecipientList,
   updateRecipientList,
-  deleteRecipientList
+  deleteRecipientList,
 } from 'src/actions/recipientLists';
 
 import { showAlert } from 'src/actions/globalAlert';
 import { Loading, DeleteModal } from 'src/components';
+import { PageLink } from 'src/components/links';
 
 import RecipientListForm from './components/RecipientListForm';
 
 export class EditPage extends Component {
   state = {
-    showDelete: false
+    showDelete: false,
   };
 
   toggleDelete = () => this.setState({ showDelete: !this.state.showDelete });
@@ -26,8 +27,8 @@ export class EditPage extends Component {
   secondaryActions = [
     {
       content: 'Delete',
-      onClick: this.toggleDelete
-    }
+      onClick: this.toggleDelete,
+    },
   ];
 
   deleteRecipientList = () => {
@@ -36,19 +37,19 @@ export class EditPage extends Component {
     return deleteRecipientList(current.id).then(() => {
       showAlert({
         type: 'success',
-        message: 'Deleted recipient list'
+        message: 'Deleted recipient list',
       });
       history.push('/lists/recipient-lists');
     });
   };
 
-  updateRecipientList = (values) => {
+  updateRecipientList = values => {
     const { updateRecipientList, showAlert, history } = this.props;
 
     return updateRecipientList(values).then(() => {
       showAlert({
         type: 'success',
-        message: 'Updated recipient list'
+        message: 'Updated recipient list',
       });
       history.push('/lists/recipient-lists');
     });
@@ -56,12 +57,14 @@ export class EditPage extends Component {
 
   componentDidMount() {
     const {
-      match: { params: { id }},
+      match: {
+        params: { id },
+      },
       getRecipientList,
-      history
+      history,
     } = this.props;
 
-    return getRecipientList(id).catch((err) => {
+    return getRecipientList(id).catch(() => {
       history.push('/lists/recipient-lists');
     });
   }
@@ -73,39 +76,46 @@ export class EditPage extends Component {
       return <Loading />;
     }
 
-    return <Page
-      title='Update Recipient List'
-      secondaryActions={this.secondaryActions}
-      breadcrumbAction={{
-        content: 'Recipient Lists',
-        Component: Link,
-        to: '/lists/recipient-lists' }}>
+    return (
+      <Page
+        title="Update Recipient List"
+        secondaryActions={this.secondaryActions}
+        breadcrumbAction={{
+          content: 'Recipient Lists',
+          Component: PageLink,
+          to: '/lists/recipient-lists',
+        }}
+      >
+        <RecipientListForm editMode={true} onSubmit={this.updateRecipientList} />
 
-      <RecipientListForm editMode={true} onSubmit={this.updateRecipientList} />
-
-      <DeleteModal
-        open={this.state.showDelete}
-        title='Are you sure you want to delete this recipient list?'
-        content={<p>The recipient list will be immediately and permanently removed. This cannot be undone.</p>}
-        onCancel={this.toggleDelete}
-        onDelete={this.deleteRecipientList}
-      />
-    </Page>;
+        <DeleteModal
+          open={this.state.showDelete}
+          title="Are you sure you want to delete this recipient list?"
+          content={
+            <p>
+              The recipient list will be immediately and permanently removed. This cannot be undone.
+            </p>
+          }
+          onCancel={this.toggleDelete}
+          onDelete={this.deleteRecipientList}
+        />
+      </Page>
+    );
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   current: state.recipientLists.current,
   loading: state.recipientLists.currentLoading,
   list: state.recipientLists.list,
-  error: state.recipientLists.error
+  error: state.recipientLists.error,
 });
 
 const mapDispatchToProps = {
   getRecipientList,
   updateRecipientList,
   deleteRecipientList,
-  showAlert
+  showAlert,
 };
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(EditPage));

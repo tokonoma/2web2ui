@@ -51,12 +51,11 @@ exports[`Billing Banners:  Free Plan Downgrade warning banner renders 1`] = `
      
     15 days
     . 
-    <Link
-      replace={false}
+    <PageLink
       to="/account/billing/plan"
     >
       Upgrade your plan
-    </Link>
+    </PageLink>
      
     to keep or increase your sending limits.
   </p>
@@ -74,12 +73,11 @@ exports[`Billing Banners:  Free Plan Downgrade warning banner renders correct te
      
     1 day
     . 
-    <Link
-      replace={false}
+    <PageLink
       to="/account/billing/plan"
     >
       Upgrade your plan
-    </Link>
+    </PageLink>
      
     to keep or increase your sending limits.
   </p>

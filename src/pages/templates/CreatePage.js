@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 // Components
 import { Page } from '@sparkpost/matchbox';
 import { Button, Panel } from 'src/components/matchbox';
 import { Loading } from 'src/components';
+import { PageLink } from 'src/components/links';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
 import styles from './CreatePage.module.scss';
 import CreateForm from './components/create/CreateForm';
@@ -50,7 +50,7 @@ export default class CreatePage extends Component {
 
     const backAction = {
       content: 'Templates',
-      Component: Link,
+      Component: PageLink,
       to: `/${routeNamespace}`,
     };
 

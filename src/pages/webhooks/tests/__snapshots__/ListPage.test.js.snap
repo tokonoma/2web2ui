@@ -28,12 +28,11 @@ Array [
 exports[`Page: Webhook List should render correctly with subaccounts 2`] = `
 Array [
   Array [
-    <Link
-      replace={false}
+    <PageLink
       to="/webhooks/details/id?subaccount=0"
     >
       my webby hook
-    </Link>,
+    </PageLink>,
     "go here",
     "Feb 8 2018, 10:20am",
     "Jan 8 2018, 10:20am",
@@ -46,12 +45,11 @@ Array [
     />,
   ],
   Array [
-    <Link
-      replace={false}
+    <PageLink
       to="/webhooks/details/id-2?subaccount=101"
     >
       my webby hooki 2
-    </Link>,
+    </PageLink>,
     "go there",
     "Feb 8 2018, 10:20am",
     null,
@@ -64,12 +62,11 @@ Array [
     />,
   ],
   Array [
-    <Link
-      replace={false}
+    <PageLink
       to="/webhooks/details/id-3"
     >
       my webby hooki 3
-    </Link>,
+    </PageLink>,
     "go nowhere",
     null,
     "Jan 8 2018, 10:20am",
@@ -98,7 +95,7 @@ exports[`Page: Webhook List should render error when it fails 1`] = `
   }
   primaryAction={
     Object {
-      "Component": [Function],
+      "component": [Function],
       "content": "Create Webhook",
       "to": "/webhooks/create",
     }
@@ -134,7 +131,7 @@ exports[`Page: Webhook List should render happy path 1`] = `
   }
   primaryAction={
     Object {
-      "Component": [Function],
+      "component": [Function],
       "content": "Create Webhook",
       "to": "/webhooks/create",
     }
@@ -213,12 +210,11 @@ exports[`Page: Webhook List should render loading component when loading data 1`
 
 exports[`Page: Webhook List should render row data properly 1`] = `
 Array [
-  <Link
-    replace={false}
+  <PageLink
     to="/webhooks/details/id?subaccount=0"
   >
     my webby hook
-  </Link>,
+  </PageLink>,
   "go here",
   "Feb 8 2018, 10:20am",
   "Jan 8 2018, 10:20am",

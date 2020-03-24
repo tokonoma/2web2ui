@@ -78,9 +78,8 @@ exports[`Page: Alerts List should render happy path 1`] = `
           <Panel.Section
             className="LastTriggeredCard"
           >
-            <Link
+            <PageLink
               className="AlertName"
-              replace={false}
               to="/alerts/details/id-1"
             >
               <strong
@@ -88,7 +87,7 @@ exports[`Page: Alerts List should render happy path 1`] = `
               >
                 my alert 1
               </strong>
-            </Link>
+            </PageLink>
             <Tag>
               Health Score
             </Tag>
@@ -115,9 +114,8 @@ exports[`Page: Alerts List should render happy path 1`] = `
           <Panel.Section
             className="LastTriggeredCard"
           >
-            <Link
+            <PageLink
               className="AlertName"
-              replace={false}
               to="/alerts/details/id-3"
             >
               <strong
@@ -125,7 +123,7 @@ exports[`Page: Alerts List should render happy path 1`] = `
               >
                 my alert 3
               </strong>
-            </Link>
+            </PageLink>
             <Tag>
               Monthly Sending Limit
             </Tag>

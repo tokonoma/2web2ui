@@ -192,12 +192,11 @@ exports[`IP Pools List Page should render loading component when loading data 1`
 
 exports[`IP Pools List Page should render row properly 1`] = `
 Array [
-  <Link
-    replace={false}
+  <PageLink
     to="/account/ip-pools/edit/my-pool"
   >
     My Pool
-  </Link>,
+  </PageLink>,
   "my-pool",
   "3",
 ]

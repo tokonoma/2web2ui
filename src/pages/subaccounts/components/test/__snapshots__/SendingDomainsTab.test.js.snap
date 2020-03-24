@@ -2,12 +2,11 @@
 
 exports[`SendingDomainsTab getRowData 1`] = `
 Array [
-  <Link
-    replace={false}
+  <PageLink
     to="/account/sending-domains/edit/foo.com"
   >
     foo.com
-  </Link>,
+  </PageLink>,
   <DomainStatusCell
     domain={
       Object {
@@ -72,8 +71,8 @@ exports[`SendingDomainsTab should show empty message when 0 domains exist 1`] = 
       This subaccount has no sending domains assigned to it. You can assign an existing one, or create a new one.
     </p>
     <Button
-      Component={[Function]}
       color="orange"
+      component={[Function]}
       plain={true}
       to="/account/sending-domains"
     >

@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { Field, reduxForm } from 'redux-form';
 import { Page } from '@sparkpost/matchbox';
+import { PageLink } from 'src/components/links';
 import { Button, Panel } from 'src/components/matchbox';
 import { TextFieldWrapper } from 'src/components';
 import { required, email } from 'src/helpers/validation';
@@ -16,7 +17,7 @@ import RoleRadioGroup from './components/RoleRadioGroup';
 
 const breadcrumbAction = {
   content: 'Users',
-  Component: Link,
+  Component: PageLink,
   to: '/account/users',
 };
 

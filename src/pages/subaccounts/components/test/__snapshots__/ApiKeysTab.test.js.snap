@@ -89,12 +89,11 @@ exports[`ApiKeysTab normal props 1`] = `
 
 exports[`getRowData 1`] = `
 Array [
-  <Link
-    replace={false}
+  <PageLink
     to="/account/api-keys/edit/12313"
   >
     test
-  </Link>,
+  </PageLink>,
   <code>
     cdwa
     ••••••••

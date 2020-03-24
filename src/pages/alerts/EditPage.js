@@ -1,24 +1,23 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { Page } from '@sparkpost/matchbox';
 import withEditPage from './containers/EditPage.container';
 import AlertForm from './components/AlertForm';
 import formatFormValues from './helpers/formatFormValues';
 import { Loading } from 'src/components';
+import { PageLink } from 'src/components/links';
 import RedirectAndAlert from 'src/components/globalAlert/RedirectAndAlert';
 
 export class EditPage extends Component {
-
   componentDidMount() {
     const { getAlert, id } = this.props;
     getAlert({ id });
   }
 
-  handleUpdate = (values) => {
+  handleUpdate = values => {
     const { updateAlert, showUIAlert, history, id } = this.props;
     return updateAlert({
       id,
-      data: formatFormValues(values)
+      data: formatFormValues(values),
     }).then(() => {
       showUIAlert({ type: 'success', message: 'Alert updated' });
       history.push(`/alerts/details/${id}`);
@@ -29,7 +28,7 @@ export class EditPage extends Component {
     const { loading, getError, getLoading, id } = this.props;
 
     if (getLoading) {
-      return <Loading/>;
+      return <Loading />;
     }
 
     if (getError) {
@@ -43,13 +42,14 @@ export class EditPage extends Component {
 
     return (
       <Page
-        title='Edit Alert'
-        breadcrumbAction={{ content: 'Back to Alert', to: `/alerts/details/${id}`, component: Link }}>
-        <AlertForm
-          submitting={loading}
-          onSubmit={this.handleUpdate}
-          isNewAlert={false}
-        />
+        title="Edit Alert"
+        breadcrumbAction={{
+          content: 'Back to Alert',
+          to: `/alerts/details/${id}`,
+          component: PageLink,
+        }}
+      >
+        <AlertForm submitting={loading} onSubmit={this.handleUpdate} isNewAlert={false} />
       </Page>
     );
   }

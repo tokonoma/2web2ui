@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Page } from '@sparkpost/matchbox';
-import { Button } from 'src/components/matchbox';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { Page } from '@sparkpost/matchbox';
+import { PageLink } from 'src/components/links';
+import { Button } from 'src/components/matchbox';
 
 import { ApiErrorBanner, Loading } from 'src/components';
 import { selectBlacklistedCount } from 'src/selectors/blacklist';
@@ -63,13 +63,13 @@ export const WatchlistPage = props => {
       breadcrumbAction={{
         content: 'Blacklisting Incidents',
         to: '/blacklist/incidents',
-        component: Link,
+        component: PageLink,
       }}
       primaryArea={
         <>
           <Button
             primary
-            component={Link}
+            component={PageLink}
             to={`/blacklist/watchlist/add`}
             className={styles.Buttons}
           >

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { Page } from '@sparkpost/matchbox';
+import { PageLink } from 'src/components/links';
 import DeleteModal from 'src/components/modals/DeleteModal';
 import ConfirmationModal from 'src/components/modals/ConfirmationModal';
 import { Loading } from 'src/components/loading/Loading';
@@ -10,14 +11,14 @@ import { ROLES } from 'src/constants';
 
 const breadcrumbAction = {
   content: 'Users',
-  Component: Link,
-  to: '/account/users'
+  Component: PageLink,
+  to: '/account/users',
 };
 
 export class EditPage extends Component {
   state = {
     showDelete: false,
-    showDisableTfa: false
+    showDisableTfa: false,
   };
 
   toggleDelete = () => this.setState({ showDelete: !this.state.showDelete });
@@ -42,7 +43,7 @@ export class EditPage extends Component {
     return updateUser(username, {
       access_level: user.access,
       is_sso: user.is_sso,
-      tfa_enabled: false
+      tfa_enabled: false,
     }).then(this.toggleTfaModal);
   };
 
@@ -60,7 +61,8 @@ export class EditPage extends Component {
   componentDidUpdate() {
     const { user, subaccount, getSubaccount } = this.props;
     if (
-      user && user.access === ROLES.SUBACCOUNT_REPORTING &&
+      user &&
+      user.access === ROLES.SUBACCOUNT_REPORTING &&
       (!subaccount || subaccount.id !== user.subaccount_id)
     ) {
       getSubaccount(user.subaccount_id);
@@ -78,7 +80,7 @@ export class EditPage extends Component {
       submitting,
       updatePending,
       user,
-      users
+      users,
     } = this.props;
 
     if (loading) {
@@ -103,14 +105,14 @@ export class EditPage extends Component {
     if (!user.isCurrentUser) {
       secondaryActions.push({
         content: 'Delete',
-        onClick: this.toggleDelete
+        onClick: this.toggleDelete,
       });
     }
 
     if (user.tfa_enabled && !user.isCurrentUser) {
       secondaryActions.push({
         content: 'Disable Two-Factor Authentication',
-        onClick: this.toggleTfaModal
+        onClick: this.toggleTfaModal,
       });
     }
 

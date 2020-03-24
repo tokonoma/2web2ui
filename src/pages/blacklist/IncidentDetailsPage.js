@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
-import { Page, Grid } from '@sparkpost/matchbox';
-import { Panel } from 'src/components/matchbox';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { Page, Grid } from '@sparkpost/matchbox';
+import { PageLink } from 'src/components/links';
+import { Panel } from 'src/components/matchbox';
 
 import { ApiErrorBanner, Loading, Empty, PanelLoading } from 'src/components';
 import {
@@ -154,7 +154,7 @@ export const IncidentDetailsPage = ({
       breadcrumbAction={{
         content: 'Blacklist Incidents',
         to: '/blacklist/incidents',
-        component: Link,
+        component: PageLink,
       }}
     >
       {renderContent()}
