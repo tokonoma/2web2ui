@@ -4,7 +4,8 @@ import moment from 'moment';
 import { Page, Table, Tooltip } from '@sparkpost/matchbox';
 import { Panel } from 'src/components/matchbox';
 import { Schedule } from '@sparkpost/matchbox-icons';
-import { ApiErrorBanner, Loading, PageLink } from 'src/components';
+import { ApiErrorBanner, Loading } from 'src/components';
+import { PageLink } from 'src/components/links';
 import formatScheduleLine from './helpers/formatScheduleLine';
 import getStatusProps from './helpers/getStatusProps';
 import formatPercentage from './helpers/formatPercentage';
@@ -194,7 +195,7 @@ export const TestListPage = ({ tests, error, loading, listTests }) => {
           <TrendsChart filters={filters} />
           <Panel.Section />
         </Panel>
-          {renderCollection()}
+        {renderCollection()}
       </>
     ),
     [filters, renderCollection, updateFilters],

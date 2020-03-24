@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { formatDate } from 'src/helpers/date';
-import { PageLink } from 'src/components';
-import { ExternalLink } from 'src/components/links';
 import { Warning, CheckCircleOutline } from '@sparkpost/matchbox-icons';
+import { formatDate } from 'src/helpers/date';
+import { ExternalLink, PageLink } from 'src/components/links';
 import Callout from 'src/components/callout';
 import styles from './Actions.module.scss';
 

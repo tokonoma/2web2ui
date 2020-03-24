@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import qs from 'query-string';
-import { ApiErrorBanner, Loading, PageLink } from 'src/components';
 import * as conversions from 'src/helpers/conversionTracking';
 import { updateSubscription } from 'src/actions/billing';
 import { showAlert } from 'src/actions/globalAlert';
+import { ApiErrorBanner, Loading } from 'src/components';
+import { PageLink } from 'src/components/links';
 import { stripImmediatePlanChange } from 'src/helpers/billing';
 
 import styles from './ImmediateChangePlanPage.module.scss';

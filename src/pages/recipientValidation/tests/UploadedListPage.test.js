@@ -3,11 +3,6 @@ import { shallow, mount } from 'enzyme';
 import TestApp from 'src/__testHelpers__/TestApp';
 import { UploadedListPage } from '../UploadedListPage';
 
-jest.mock('src/components/pageLink/PageLink', () => {
-  return () => {
-    return [];
-  };
-});
 jest.mock('src/pages/recipientValidation/components/ListProgress', () => {
   return () => {
     return [];

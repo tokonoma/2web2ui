@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Page } from '@sparkpost/matchbox';
 import { Panel } from 'src/components/matchbox';
-import { ApiErrorBanner, DeleteModal, Loading, PageLink } from 'src/components';
+import { ApiErrorBanner, DeleteModal, Loading } from 'src/components';
 import PoolForm from './components/PoolForm';
 import IpList from './components/IpList';
 
@@ -17,7 +17,7 @@ import isDefaultPool from './helpers/defaultPool';
 import { not } from 'src/helpers/conditions';
 import { selectCondition } from 'src/selectors/accessConditionState';
 import { isSelfServeBilling } from 'src/helpers/conditions/account';
-import { SupportTicketLink } from 'src/components/links';
+import { PageLink, SupportTicketLink } from 'src/components/links';
 import { openSupportTicketForm } from 'src/actions/support';
 
 const breadcrumbAction = {

@@ -1,7 +1,6 @@
 import React, { useCallback } from 'react';
+import { PageLink } from 'src/components/links';
 import { Button } from 'src/components/matchbox';
-
-import { PageLink } from 'src/components';
 import styles from './MonitorsCollection.module.scss';
 import FilterSortCollection from 'src/components/collection/FilterSortCollection';
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { ScreenReaderOnly } from '@sparkpost/matchbox';
 import { ChevronLeft } from '@sparkpost/matchbox-icons';
 import propTypes from 'prop-types';
-import PageLink from 'src/components/pageLink';
+import { PageLink } from 'src/components/links';
 import SparkPost from 'src/components/sparkPost/SparkPost';
 import styles from './FullPage.module.scss';
 

@@ -6,8 +6,9 @@ import { FileDownload } from '@sparkpost/matchbox-icons/matchbox-icons';
 import { getSeedList } from 'src/actions/inboxPlacement';
 import { selectReferenceSeed } from 'src/selectors/inboxPlacement';
 import { showAlert } from 'src/actions/globalAlert';
-import { ApiErrorBanner, CopyToClipboard, Loading, PageLink } from 'src/components';
+import { ApiErrorBanner, CopyToClipboard, Loading } from 'src/components';
 import SaveCSVButton from 'src/components/collection/SaveCSVButton';
+import { PageLink } from 'src/components/links';
 import { Panel, TextField } from 'src/components/matchbox';
 
 import styles from './SeedList.module.scss';

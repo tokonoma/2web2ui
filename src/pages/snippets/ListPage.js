@@ -2,8 +2,8 @@ import React from 'react';
 import { Page } from '@sparkpost/matchbox';
 import ApiErrorBanner from 'src/components/apiErrorBanner';
 import { Templates } from 'src/components/images';
+import { PageLink } from 'src/components/links';
 import Loading from 'src/components/loading';
-import PageLink from 'src/components/pageLink';
 import SnippetCollection from './components/SnippetCollection';
 import { ROLES } from 'src/constants';
 export default class ListPage extends React.Component {
@@ -47,16 +47,16 @@ export default class ListPage extends React.Component {
     return (
       <Page
         title="Snippets"
-        primaryAction={(
+        primaryAction={
           canCreate
             ? { Component: PageLink, content: 'Create Snippet', to: '/snippets/create' }
             : undefined
-        )}
+        }
         empty={{
           show: !error && snippets.length === 0,
           image: Templates,
           title: 'Manage your template snippets',
-          content: <p>Build, import, edit, and reuse snippets.</p>
+          content: <p>Build, import, edit, and reuse snippets.</p>,
         }}
       >
         {error ? this.renderError() : this.renderCollection()}

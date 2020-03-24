@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Modal } from '@sparkpost/matchbox';
 import { Button, Label, Panel } from 'src/components/matchbox';
 import copy from 'copy-to-clipboard';
-import PageLink from 'src/components/pageLink';
+import { PageLink } from 'src/components/links';
 import { Typeahead, TypeaheadItem } from 'src/components/typeahead/Typeahead';
 import ButtonWrapper from 'src/components/buttonWrapper';
 import PanelLoading from 'src/components/panelLoading';

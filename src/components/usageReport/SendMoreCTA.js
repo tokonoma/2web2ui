@@ -1,8 +1,7 @@
 import React from 'react';
-import { PageLink } from 'src/components';
 import ConditionSwitch, { Case, defaultCase } from 'src/components/auth/ConditionSwitch';
 import { AccessControl } from 'src/components/auth';
-import { ExternalLink } from 'src/components/links';
+import { ExternalLink, PageLink } from 'src/components/links';
 import { isAdmin } from 'src/helpers/conditions/user';
 import { onPlanWithStatus } from 'src/helpers/conditions/account';
 import { LINKS } from 'src/constants';

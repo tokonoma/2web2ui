@@ -3,9 +3,9 @@ import { Table } from '@sparkpost/matchbox';
 import cx from 'classnames';
 import _ from 'lodash';
 import { TableCollection } from 'src/components/collection';
+import { PageLink } from 'src/components/links';
 import { formatPercent } from 'src/helpers/units';
 import styles from './PlacementBreakdown.module.scss';
-import PageLink from 'src/components/pageLink/PageLink';
 import { PLACEMENT_FILTER_TYPES } from '../constants/types';
 import formatFilterName, { formatRegion } from '../helpers/formatFilterName.js';
 

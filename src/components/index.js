@@ -25,7 +25,6 @@ export { default as SiftScience } from './siftScience/SiftScience';
 export { default as StatusTooltipHeader } from './domainStatus/StatusTooltipHeader';
 export { default as DomainStatusCell } from './domainStatus/DomainStatusCell';
 export { default as CookieConsent } from './cookieConsent/CookieConsent';
-export { default as PageLink } from './pageLink/PageLink';
 export { default as Subaccount } from './labels/Subaccount';
 export { default as ButtonWrapper } from './buttonWrapper';
 export { default as IconButton } from './iconButton';

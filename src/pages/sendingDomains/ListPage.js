@@ -7,11 +7,16 @@ import { list as listSubaccounts } from 'src/actions/subaccounts';
 import { hasSubaccounts } from 'src/selectors/subaccounts';
 import { hasUnverifiedDomains, selectDomains } from 'src/selectors/sendingDomains';
 import {
-  Loading, TableCollection, Subaccount, DomainStatusCell, StatusTooltipHeader, ApiErrorBanner,
-  PageLink
+  Loading,
+  TableCollection,
+  Subaccount,
+  DomainStatusCell,
+  StatusTooltipHeader,
+  ApiErrorBanner,
 } from 'src/components';
 import { Page } from '@sparkpost/matchbox';
 import { Setup } from 'src/components/images';
+import { PageLink } from 'src/components/links';
 import UnverifiedWarningBanner from './components/UnverifiedWarningBanner';
 import VerifyToken from './components/VerifyToken';
 import { LINKS } from 'src/constants';
@@ -29,35 +34,40 @@ export class ListPage extends Component {
 
     const columns = [
       { label: 'Domain', width: '30%', sortKey: 'domain' },
-      { label: <StatusTooltipHeader />, width: '40%' }
+      { label: <StatusTooltipHeader />, width: '40%' },
     ];
 
     if (hasSubaccounts) {
-      columns.push({ label: 'Subaccount', width: '20%', sortKey: (sd) => [sd.subaccount_id, sd.shared_with_subaccounts]});
+      columns.push({
+        label: 'Subaccount',
+        width: '20%',
+        sortKey: sd => [sd.subaccount_id, sd.shared_with_subaccounts],
+      });
     }
 
     return columns;
-  }
+  };
 
-  getRowData = (row) => {
+  getRowData = row => {
     const { hasSubaccounts } = this.props;
     const { domain, shared_with_subaccounts, subaccount_id, subaccount_name } = row;
 
     const rowData = [
       <PageLink to={`/account/sending-domains/edit/${domain}`}>{domain}</PageLink>,
-      <DomainStatusCell domain={row} />
+      <DomainStatusCell domain={row} />,
     ];
 
     if (hasSubaccounts) {
-      const subaccountCol = subaccount_id || shared_with_subaccounts
-        ? <Subaccount all={shared_with_subaccounts} id={subaccount_id} name={subaccount_name}/>
-        : null;
+      const subaccountCol =
+        subaccount_id || shared_with_subaccounts ? (
+          <Subaccount all={shared_with_subaccounts} id={subaccount_id} name={subaccount_name} />
+        ) : null;
 
       rowData.push(subaccountCol);
     }
 
     return rowData;
-  }
+  };
 
   renderCollection() {
     return (
@@ -70,9 +80,9 @@ export class ListPage extends Component {
           show: true,
           itemToStringKeys: ['domain'],
           keyMap: { default: 'is_default_bounce_domain' },
-          exampleModifiers: ['domain', 'subaccount_id', 'default']
+          exampleModifiers: ['domain', 'subaccount_id', 'default'],
         }}
-        defaultSortColumn='domain'
+        defaultSortColumn="domain"
       />
     );
   }
@@ -97,12 +107,12 @@ export class ListPage extends Component {
     const primaryAction = {
       content: 'Add a Domain',
       Component: Link,
-      to: '/account/sending-domains/create'
+      to: '/account/sending-domains/create',
     };
 
     return (
       <Page
-        title='Sending Domains'
+        title="Sending Domains"
         primaryAction={primaryAction}
         empty={{
           show: domains.length === 0,
@@ -112,9 +122,10 @@ export class ListPage extends Component {
           secondaryAction: {
             content: 'Learn more',
             to: LINKS.SENDING_SETUP,
-            external: true
-          }
-        }}>
+            external: true,
+          },
+        }}
+      >
         <VerifyToken />
         {hasUnverifiedDomains && <UnverifiedWarningBanner />}
         {listError ? this.renderError() : this.renderCollection()}
@@ -123,13 +134,13 @@ export class ListPage extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   domains: selectDomains(state),
   listError: state.sendingDomains.listError,
   hasSubaccounts: hasSubaccounts(state),
   hasUnverifiedDomains: hasUnverifiedDomains(state),
   listLoading: state.sendingDomains.listLoading,
-  subaccounts: state.subaccounts.list
+  subaccounts: state.subaccounts.list,
 });
 
 export default connect(mapStateToProps, { listDomains, listSubaccounts })(ListPage);

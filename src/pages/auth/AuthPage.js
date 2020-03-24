@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { authenticate } from 'src/actions/auth';
-import { PageLink, CenteredLogo } from 'src/components';
+import { CenteredLogo } from 'src/components';
+import { PageLink } from 'src/components/links';
 import { Panel } from 'src/components/matchbox';
 import qs from 'query-string';
 
@@ -12,7 +13,6 @@ import RedirectAfterLogin from './components/RedirectAfterLogin';
 import { TFA_ROUTE, ENABLE_TFA_AUTH_ROUTE, SSO_AUTH_ROUTE } from 'src/constants';
 
 export class AuthPage extends React.Component {
-
   componentDidMount() {
     const { username, access_token, authenticate } = this.props;
     // username required as we don't have context for who's token
@@ -23,7 +23,7 @@ export class AuthPage extends React.Component {
 
   loginSubmit = ({ username, password, rememberMe }) => {
     this.props.authenticate(username, password, rememberMe);
-  }
+  };
 
   render() {
     const { loggedIn, tfaEnabled, tfaRequired } = this.props;
@@ -42,16 +42,31 @@ export class AuthPage extends React.Component {
       return <RedirectBeforeLogin to={ENABLE_TFA_AUTH_ROUTE} />;
     }
 
-    return <React.Fragment>
-      <CenteredLogo />
-      <Panel sectioned accent title='Log In'>
-        <LoginForm onSubmit={this.loginSubmit} />
-      </Panel>
-      <Panel.Footer
-        left={hasSignup && <div><small>Don't have an account? <PageLink to="/join">Sign up</PageLink>.</small><br /></div>}
-        right={<small><PageLink to={SSO_AUTH_ROUTE}>Single Sign-On</PageLink></small>}
-      />
-    </React.Fragment>;
+    return (
+      <React.Fragment>
+        <CenteredLogo />
+        <Panel sectioned accent title="Log In">
+          <LoginForm onSubmit={this.loginSubmit} />
+        </Panel>
+        <Panel.Footer
+          left={
+            hasSignup && (
+              <div>
+                <small>
+                  Don't have an account? <PageLink to="/join">Sign up</PageLink>.
+                </small>
+                <br />
+              </div>
+            )
+          }
+          right={
+            <small>
+              <PageLink to={SSO_AUTH_ROUTE}>Single Sign-On</PageLink>
+            </small>
+          }
+        />
+      </React.Fragment>
+    );
   }
 }
 
@@ -63,7 +78,7 @@ const mapStateToProps = ({ auth, tfa }, { location }) => {
     tfaEnabled: tfa.enabled,
     tfaRequired: tfa.required,
     access_token,
-    username
+    username,
   };
 };
 

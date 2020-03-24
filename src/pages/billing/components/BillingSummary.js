@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Modal, LabelledValue, PageLink } from 'src/components';
+import { Modal, LabelledValue } from 'src/components';
+import { PageLink } from 'src/components/links';
 import { Panel, UnstyledLink } from 'src/components/matchbox';
 import {
   PremiumBanner,

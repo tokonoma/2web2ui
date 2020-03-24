@@ -2,8 +2,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { ScreenReaderOnly, Page, Grid } from '@sparkpost/matchbox';
-import { PageLink } from 'src/components';
-import { ExternalLink } from 'src/components/links';
+import { ExternalLink, PageLink, SupportTicketLink } from 'src/components/links';
 import { Button, Panel } from 'src/components/matchbox';
 import styles from './SingleResult.module.scss';
 import { withRouter } from 'react-router-dom';
@@ -17,7 +16,6 @@ import {
 } from './constants';
 import { singleAddress } from 'src/actions/recipientValidation';
 import { showAlert } from 'src/actions/globalAlert';
-import { SupportTicketLink } from 'src/components/links';
 import Loading from 'src/components/loading';
 import Tooltip from './components/Tooltip';
 

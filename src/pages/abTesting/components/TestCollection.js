@@ -3,8 +3,9 @@ import { setSubaccountQuery } from 'src/helpers/subaccounts';
 
 // Components
 import { Popover, ActionList } from '@sparkpost/matchbox';
+import { PageLink } from 'src/components/links';
 import { Button } from 'src/components/matchbox';
-import { PageLink, TableCollection } from 'src/components';
+import { TableCollection } from 'src/components';
 import { MoreHoriz } from '@sparkpost/matchbox-icons';
 import StatusTag from './StatusTag';
 import { formatDateTime } from 'src/helpers/date';

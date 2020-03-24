@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { showAlert } from 'src/actions/globalAlert';
 import { openSupportTicketForm } from 'src/actions/support';
-import { PageLink } from 'src/components';
+import { PageLink } from 'src/components/links';
 import { UnstyledLink } from 'src/components/matchbox';
 import { hasStatus, isSuspendedForBilling } from 'src/helpers/conditions/account';
 

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Popover, ScreenReaderOnly } from '@sparkpost/matchbox';
 import { Button } from 'src/components/matchbox';
 import { ArrowDropDown, FileEdit } from '@sparkpost/matchbox-icons';
-import PageLink from 'src/components/pageLink';
+import { PageLink } from 'src/components/links';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
 import { routeNamespace } from '../../constants/routes';
 import styles from './Actions.module.scss';

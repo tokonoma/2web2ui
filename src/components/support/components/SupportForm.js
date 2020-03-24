@@ -2,10 +2,11 @@ import _ from 'lodash';
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Field, formValueSelector, reduxForm } from 'redux-form';
+import { PageLink } from 'src/components/links';
 import { Button, Panel } from 'src/components/matchbox';
 
 import * as supportActions from 'src/actions/support';
-import { PageLink, SelectWrapper, TextFieldWrapper } from 'src/components';
+import { SelectWrapper, TextFieldWrapper } from 'src/components';
 import FileFieldWrapper from 'src/components/reduxFormWrappers/FileFieldWrapper';
 import config from 'src/config';
 import { hasOnlineSupport, isAws } from 'src/helpers/conditions/account';

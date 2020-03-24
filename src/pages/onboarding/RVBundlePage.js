@@ -1,7 +1,8 @@
 import React from 'react';
 import { Modal } from '@sparkpost/matchbox';
 import { CheckCircle, Send, Close } from '@sparkpost/matchbox-icons';
-import { Card, CenteredLogo, PageLink, RecipientValidationPriceTable } from 'src/components';
+import { Card, CenteredLogo, RecipientValidationPriceTable } from 'src/components';
+import { PageLink } from 'src/components/links';
 import { Button, Panel, UnstyledLink } from 'src/components/matchbox';
 import styles from './RVBundlePage.module.scss';
 

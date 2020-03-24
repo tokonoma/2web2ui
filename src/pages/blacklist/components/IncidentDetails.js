@@ -1,12 +1,13 @@
 import React from 'react';
+import cx from 'classnames';
+import moment from 'moment';
 import { Grid } from '@sparkpost/matchbox';
+import { PageLink } from 'src/components/links';
 import { Tag, Button } from 'src/components/matchbox';
 import { formatDate } from 'src/helpers/date';
 import { domainRegex } from 'src/helpers/regex';
-import cx from 'classnames';
-import moment from 'moment';
-import { PageLink } from 'src/components';
 import styles from './IncidentDetails.module.scss';
+
 export default ({
   resourceName,
   blacklistName,
