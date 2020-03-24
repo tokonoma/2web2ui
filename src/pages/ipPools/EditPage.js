@@ -17,7 +17,7 @@ import isDefaultPool from './helpers/defaultPool';
 import { not } from 'src/helpers/conditions';
 import { selectCondition } from 'src/selectors/accessConditionState';
 import { isSelfServeBilling } from 'src/helpers/conditions/account';
-import SupportTicketLink from 'src/components/supportTicketLink/SupportTicketLink';
+import { SupportTicketLink } from 'src/components/links';
 import { openSupportTicketForm } from 'src/actions/support';
 
 const breadcrumbAction = {

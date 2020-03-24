@@ -17,8 +17,8 @@ import {
 } from './constants';
 import { singleAddress } from 'src/actions/recipientValidation';
 import { showAlert } from 'src/actions/globalAlert';
+import { SupportTicketLink } from 'src/components/links';
 import Loading from 'src/components/loading';
-import SupportTicketLink from 'src/components/supportTicketLink/SupportTicketLink';
 import Tooltip from './components/Tooltip';
 
 const SINGLE_RV_LINK = '/recipient-validation/single';
