@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table } from '@sparkpost/matchbox';
+import { Table } from 'src/components/matchbox';
 import { TableCollection, NewCollectionBody } from 'src/components/collection';
 import { formatDateTime } from 'src/helpers/date';
 import withJobs from '../containers/withJobs';
@@ -50,9 +50,7 @@ export const JobsTableCollection = ({ jobs }) => {
     },
   ];
 
-  const TableWrapper = props => (
-        <Table>{props.children}</Table>
-  );
+  const TableWrapper = props => <Table>{props.children}</Table>;
 
   const renderRow = columns => props =>
     columns.map(({ dataCellComponent: DataCellComponent }) => <DataCellComponent {...props} />);

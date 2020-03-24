@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
-import { Table } from '@sparkpost/matchbox';
+import { Table } from 'src/components/matchbox';
 
 import { TableCollection, Empty, LongTextContainer } from 'src/components';
 import { NewCollectionBody } from 'src/components/collection';
