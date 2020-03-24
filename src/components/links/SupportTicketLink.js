@@ -9,7 +9,7 @@ export const SupportTicketLink = ({
   children,
   issueId, // see, src/config/supportIssues for a complete list
   message,
-  openSupportTicketForm = () => {},
+  openSupportTicketForm,
   to: _to, // ignore
   ...props
 }) => (
