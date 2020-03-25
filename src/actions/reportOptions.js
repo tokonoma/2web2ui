@@ -1,15 +1,16 @@
+import moment from 'moment';
 import {
   fetchMetricsDomains,
   fetchMetricsCampaigns,
   fetchMetricsSendingIps,
   fetchMetricsIpPools,
-  fetchMetricsTemplates
+  fetchMetricsTemplates,
 } from './metrics';
 
 import { list as listSubaccounts } from './subaccounts';
 import { list as listSendingDomains } from './sendingDomains';
 import { getRelativeDates } from 'src/helpers/date';
-import { getQueryFromOptions } from 'src/helpers/metrics';
+import { getQueryFromOptions, getPrecision } from 'src/helpers/metrics';
 import { isSameDate } from 'src/helpers/date';
 import _ from 'lodash';
 
@@ -19,7 +20,7 @@ const metricLists = [
   fetchMetricsCampaigns,
   fetchMetricsSendingIps,
   fetchMetricsIpPools,
-  fetchMetricsTemplates
+  fetchMetricsTemplates,
 ];
 
 /**
@@ -61,46 +62,49 @@ export function refreshTypeaheadCache(options) {
     if (isSameDate(cachedFrom, currentFrom) && isSameDate(cachedTo, currentTo) && cache[match]) {
       dispatch({
         type: 'UPDATE_METRICS_FROM_CACHE',
-        payload: cache[match]
+        payload: cache[match],
       });
       return Promise.resolve();
     }
-    const requests = metricLists.map((list) => dispatch(list(params)));
-    return Promise.all(requests).then((arrayOfMetrics) => {
+    const requests = metricLists.map(list => dispatch(list(params)));
+    return Promise.all(requests).then(arrayOfMetrics => {
       // Flattens the array from array of metrics objects to an object with each metric as a key
-      const metricsList = _.reduce(arrayOfMetrics, (accumulator, metric) => _.assign(accumulator, metric), {});
+      const metricsList = _.reduce(
+        arrayOfMetrics,
+        (accumulator, metric) => _.assign(accumulator, metric),
+        {},
+      );
       const payload = {
         from: currentFrom,
         to: currentTo,
-        itemToCache: { [match]: metricsList }
+        itemToCache: { [match]: metricsList },
       };
 
       dispatch({
         type: 'UPDATE_TYPEAHEAD_METRICS_CACHE',
-        payload
+        payload,
       });
     });
-
   };
 }
 
 export function addFilters(payload) {
   return {
     type: 'ADD_FILTERS',
-    payload
+    payload,
   };
 }
 
 export function removeFilter(payload) {
   return {
     type: 'REMOVE_FILTER',
-    payload
+    payload,
   };
 }
 
 export function clearFilters() {
   return {
-    type: 'CLEAR_FILTERS'
+    type: 'CLEAR_FILTERS',
   };
 }
 
@@ -120,14 +124,20 @@ export function refreshReportOptions(update) {
     const { reportOptions } = getState();
     update = { ...reportOptions, ...update };
 
-    // calculate relative dates if range is not "custom"
-    if (update.relativeRange && update.relativeRange !== 'custom') {
-      update = { ...update, ...getRelativeDates(update.relativeRange) };
+    if (update.relativeRange) {
+      if (update.relativeRange !== 'custom') {
+        const { from, to } = getRelativeDates(update.relativeRange);
+        const precision = getPrecision(from, moment(to));
+        update = { ...update, from, to, precision };
+      } else {
+        const precision = getPrecision(update.from, moment(update.to));
+        update = { ...update, precision };
+      }
     }
 
     return dispatch({
       type: 'REFRESH_REPORT_OPTIONS',
-      payload: update
+      payload: update,
     });
   };
 }
