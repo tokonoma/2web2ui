@@ -9,7 +9,7 @@ export default function Tooltip(props) {
   const { isHibanaEnabled } = state;
 
   if (!isHibanaEnabled) {
-    return <OGTooltip {...omitSystemProps(props, ['color'])} />;
+    return <OGTooltip {...omitSystemProps(props, ['color', 'width'])} />;
   }
   return <HibanaTooltip {...props} />;
 }
