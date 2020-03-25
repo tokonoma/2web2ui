@@ -11,40 +11,44 @@ describe('Reducer: Report Options', () => {
       from: time(),
       relativeRange: 'day',
       to: time({ day: 2 }),
-      metrics: []
+      metrics: [],
     };
   });
-  cases('General cases', (action) => {
-    expect(reportOptionsReducer(testState, action)).toMatchSnapshot();
-  }, {
-    'add a filter': {
-      payload: [{ type: 'Example Domain', value: 'sparkpost.com' }],
-      type: 'ADD_FILTERS'
+  cases(
+    'General cases',
+    action => {
+      expect(reportOptionsReducer(testState, action)).toMatchSnapshot();
     },
-    'add multiple filters': {
-      payload: [
-        { type: 'Example Domain', value: 'sparkpost.com' },
-        { type: 'Example Domain', value: 'another.sparkpost.com' }
-      ],
-      type: 'ADD_FILTERS'
-    },
-    'set report options': {
-      payload: {
-        from: time({ year: 2018, month: 1, day: 1 }),
-        relativeRange: 'day',
-        to: time({ year: 2018, month: 1, day: 2 }),
-        metrics: [1, 2, 3]
+    {
+      'add a filter': {
+        payload: [{ type: 'Example Domain', value: 'sparkpost.com' }],
+        type: 'ADD_FILTERS',
       },
-      type: 'REFRESH_REPORT_OPTIONS'
-    }
-  });
+      'add multiple filters': {
+        payload: [
+          { type: 'Example Domain', value: 'sparkpost.com' },
+          { type: 'Example Domain', value: 'another.sparkpost.com' },
+        ],
+        type: 'ADD_FILTERS',
+      },
+      'set report options': {
+        payload: {
+          from: time({ year: 2018, month: 1, day: 1 }),
+          relativeRange: 'day',
+          to: time({ year: 2018, month: 1, day: 2 }),
+          metrics: [1, 2, 3],
+          timezone: 'America/New_York',
+          precision: 'hour',
+        },
+        type: 'REFRESH_REPORT_OPTIONS',
+      },
+    },
+  );
 
   it('should dedupe and preserve the state reference if a duplicate filter is added', () => {
     const action = {
       type: 'ADD_FILTERS',
-      payload: [
-        { type: 'Duplicate Domain', value: 'sparkpost.com' }
-      ]
+      payload: [{ type: 'Duplicate Domain', value: 'sparkpost.com' }],
     };
 
     const modified = reportOptionsReducer(testState, action);
@@ -55,5 +59,4 @@ describe('Reducer: Report Options', () => {
     expect(modified.filters).toHaveLength(1);
     expect(unmodified).toBe(modified);
   });
-
 });
