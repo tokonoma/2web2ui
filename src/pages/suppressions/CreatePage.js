@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Page, Tabs } from '@sparkpost/matchbox';
-import { Panel } from 'src/components/matchbox';
-
+import { Page } from '@sparkpost/matchbox';
+import { Panel, Tabs } from 'src/components/matchbox';
 import AddForm from './components/AddForm';
 import UploadForm from './components/UploadForm';
 import { ErrorBanner } from './components/ErrorBanner';
@@ -11,16 +10,16 @@ import { resetErrors } from 'src/actions/suppressions';
 
 const tabs = [
   {
-    content: 'Single Recipient'
+    content: 'Single Recipient',
   },
   {
-    content: 'Bulk Upload'
-  }
+    content: 'Bulk Upload',
+  },
 ];
 
 export class CreatePage extends Component {
   state = {
-    selectedTab: 0
+    selectedTab: 0,
   };
 
   handleTabs(idx) {
@@ -38,27 +37,22 @@ export class CreatePage extends Component {
         breadcrumbAction={{ content: 'Suppressions', Component: Link, to: '/lists/suppressions' }}
       >
         {(parseError || persistError) && (
-          <ErrorBanner
-            parseError={parseError}
-            persistError={persistError}
-          />
+          <ErrorBanner parseError={parseError} persistError={persistError} />
         )}
         <Tabs
           selected={selectedTab}
           connectBelow={true}
           tabs={tabs.map(({ content }, idx) => ({ content, onClick: () => this.handleTabs(idx) }))}
         />
-        <Panel>
-          {selectedTab === 1 ? <UploadForm /> : <AddForm />}
-        </Panel>
+        <Panel>{selectedTab === 1 ? <UploadForm /> : <AddForm />}</Panel>
       </Page>
     );
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   persistError: state.suppressions.persistError,
-  parseError: state.suppressions.parseError
+  parseError: state.suppressions.parseError,
 });
 
 export default connect(mapStateToProps, { resetErrors })(CreatePage);

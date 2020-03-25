@@ -1,7 +1,7 @@
 import React, { useEffect, useCallback } from 'react';
 import { connect } from 'react-redux';
-import { Page, Tabs } from '@sparkpost/matchbox';
-
+import { Page } from '@sparkpost/matchbox';
+import { Tabs } from 'src/components/matchbox';
 import { Loading } from 'src/components';
 import {
   getInboxPlacementTest,

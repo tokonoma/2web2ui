@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Page, Tabs } from '@sparkpost/matchbox';
-import { Panel } from 'src/components/matchbox';
+import { Page } from '@sparkpost/matchbox';
+import { Panel, Tabs } from 'src/components/matchbox';
 import { searchRecipient } from 'src/actions/suppressions';
 import { list as listSubaccounts } from 'src/actions/subaccounts';
 import { hasSubaccounts } from 'src/selectors/subaccounts';
@@ -13,16 +13,16 @@ import { selectSuppresionsList } from 'src/selectors/suppressions';
 
 const tabs = [
   {
-    content: 'Filters'
+    content: 'Filters',
   },
   {
-    content: 'Find by Email'
-  }
+    content: 'Find by Email',
+  },
 ];
 
 export class ListPage extends Component {
   state = {
-    selectedTab: 0
+    selectedTab: 0,
   };
 
   handleTabs(tabIdx) {
@@ -42,11 +42,11 @@ export class ListPage extends Component {
 
     return (
       <Page
-        title='Suppressions'
+        title="Suppressions"
         primaryAction={{
           Component: Link,
           content: 'Add Suppressions',
-          to: '/lists/suppressions/create'
+          to: '/lists/suppressions/create',
         }}
       >
         <Tabs
@@ -57,26 +57,33 @@ export class ListPage extends Component {
 
         <Panel>
           <Panel.Section>
-            {selectedTab === 1
-              ? <EmailSearch onSubmit={searchRecipient} hasSubaccounts={hasSubaccounts} />
-              : <SuppressionSearch />
-            }
+            {selectedTab === 1 ? (
+              <EmailSearch onSubmit={searchRecipient} hasSubaccounts={hasSubaccounts} />
+            ) : (
+              <SuppressionSearch />
+            )}
           </Panel.Section>
         </Panel>
-        <Results results={list} loading={loading} deleting={deleting} subaccounts={subaccounts} hasSubaccounts={hasSubaccounts}/>
+        <Results
+          results={list}
+          loading={loading}
+          deleting={deleting}
+          subaccounts={subaccounts}
+          hasSubaccounts={hasSubaccounts}
+        />
       </Page>
     );
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   const { listLoading, deleting } = state.suppressions;
   return {
     loading: listLoading,
     list: selectSuppresionsList(state),
     hasSubaccounts: hasSubaccounts(state),
     subaccounts: state.subaccounts.list,
-    deleting
+    deleting,
   };
 };
 

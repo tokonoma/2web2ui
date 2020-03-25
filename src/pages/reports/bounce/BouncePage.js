@@ -6,7 +6,8 @@ import { refreshBounceReport } from 'src/actions/bounceReport';
 import { TableCollection, Empty, LongTextContainer } from 'src/components';
 import { Percent } from 'src/components/formatters';
 import PanelLoading from 'src/components/panelLoading/PanelLoading';
-import { Page, Tabs } from '@sparkpost/matchbox';
+import { Page } from '@sparkpost/matchbox';
+import { Tabs } from 'src/components/matchbox';
 import ReportOptions from '../components/ReportOptions';
 import BounceChart from './components/BounceChart';
 import MetricsSummary from '../components/MetricsSummary';
@@ -18,12 +19,12 @@ const columns = [
   { label: 'Domain', sortKey: 'domain' },
   { label: 'Category', sortKey: 'bounce_category_name' },
   { label: 'Classification', sortKey: 'classification_id' },
-  { label: 'Count (%)', sortKey: 'count_bounce' }
+  { label: 'Count (%)', sortKey: 'count_bounce' },
 ];
 
 export class BouncePage extends Component {
   state = {
-    tab: 0
+    tab: 0,
   };
 
   componentDidUpdate(prevProps) {
@@ -32,9 +33,16 @@ export class BouncePage extends Component {
     }
   }
 
-  getRowData = (item) => {
-    const { aggregates = {}} = this.props;
-    const { reason, domain, bounce_category_name, bounce_class_name, count_bounce, count_admin_bounce } = item;
+  getRowData = item => {
+    const { aggregates = {} } = this.props;
+    const {
+      reason,
+      domain,
+      bounce_category_name,
+      bounce_class_name,
+      count_bounce,
+      count_admin_bounce,
+    } = item;
     // calculate the rate of admin bounces against all bounces
     let numerator = count_bounce;
     let denominator = aggregates.countBounce;
@@ -46,38 +54,50 @@ export class BouncePage extends Component {
 
     return [
       <LongTextContainer text={reason} />,
-      <AddFilterLink newFilter={{ type: 'Recipient Domain', value: domain }} reportType={'bounce'} content={domain}/>,
+      <AddFilterLink
+        newFilter={{ type: 'Recipient Domain', value: domain }}
+        reportType={'bounce'}
+        content={domain}
+      />,
       bounce_category_name,
       bounce_class_name,
-      <span>{numerator} <small>(<Percent value={safeRate(numerator, denominator)} />)</small></span>
+      <span>
+        {numerator}{' '}
+        <small>
+          (<Percent value={safeRate(numerator, denominator)} />)
+        </small>
+      </span>,
     ];
   };
 
   renderChart() {
     const { chartLoading, aggregates, categories, types, adminCategories } = this.props;
 
-
     if (!chartLoading) {
-      if (_.isEmpty(aggregates) ||
+      if (
+        _.isEmpty(aggregates) ||
         (!aggregates.countAdminBounce && this.state.tab === 1) ||
-        (!aggregates.countBounce && this.state.tab === 0)) {
-        return <Empty message='No bounces to report'/>;
+        (!aggregates.countBounce && this.state.tab === 0)
+      ) {
+        return <Empty message="No bounces to report" />;
       }
     }
 
-    return <BounceChart
-      loading={chartLoading}
-      aggregates={aggregates}
-      categories={categories}
-      types={types}
-      admin = {adminCategories}
-      tab = {this.state.tab}
-    />;
+    return (
+      <BounceChart
+        loading={chartLoading}
+        aggregates={aggregates}
+        categories={categories}
+        types={types}
+        admin={adminCategories}
+        tab={this.state.tab}
+      />
+    );
   }
 
   renderCollection() {
     const { tableLoading } = this.props;
-    const reasons = (this.state.tab === 1) ? this.props.adminReasons : this.props.reasons;
+    const reasons = this.state.tab === 1 ? this.props.adminReasons : this.props.reasons;
 
     if (tableLoading) {
       return <PanelLoading />;
@@ -87,24 +107,26 @@ export class BouncePage extends Component {
       return <Empty message={'No bounce reasons to report'} />;
     }
 
-    return <TableCollection
-      columns={columns}
-      rows={reasons}
-      getRowData={this.getRowData}
-      defaultSortColumn='count_bounce'
-      defaultSortDirection='desc'
-      pagination
-      filterBox={{
-        show: true,
-        keyMap: {
-          category: 'bounce_category_name',
-          classification: 'bounce_class_name'
-        },
-        itemToStringKeys: ['bounce_category_name', 'bounce_class_name', 'domain', 'reason'],
-        exampleModifiers: ['domain', 'category', 'classification'],
-        matchThreshold: 5
-      }}
-    />;
+    return (
+      <TableCollection
+        columns={columns}
+        rows={reasons}
+        getRowData={this.getRowData}
+        defaultSortColumn="count_bounce"
+        defaultSortDirection="desc"
+        pagination
+        filterBox={{
+          show: true,
+          keyMap: {
+            category: 'bounce_category_name',
+            classification: 'bounce_class_name',
+          },
+          itemToStringKeys: ['bounce_category_name', 'bounce_class_name', 'domain', 'reason'],
+          exampleModifiers: ['domain', 'category', 'classification'],
+          matchThreshold: 5,
+        }}
+      />
+    );
   }
 
   renderTopLevelMetrics() {
@@ -112,13 +134,15 @@ export class BouncePage extends Component {
     const { countBounce, countSent, countAdminBounce } = aggregates;
 
     // TODO Add support doc link - <UnstyledLink to={LINKS.ADMIN_BOUNCE} external>Learn more</UnstyledLink>.
-    const adminBounceText = countAdminBounce
-      ? <Fragment>{countAdminBounce.toLocaleString()} messages were categorized as Admin Bounces.</Fragment>
-      : null;
+    const adminBounceText = countAdminBounce ? (
+      <Fragment>
+        {countAdminBounce.toLocaleString()} messages were categorized as Admin Bounces.
+      </Fragment>
+    ) : null;
 
     // Aggregates aren't ready until chart refreshes
     if (chartLoading) {
-      return <PanelLoading minHeight='115px' />;
+      return <PanelLoading minHeight="115px" />;
     }
 
     if (_.isEmpty(aggregates)) {
@@ -128,33 +152,40 @@ export class BouncePage extends Component {
     return (
       <MetricsSummary
         rateValue={safeRate(countBounce, countSent)}
-        rateTitle='Bounce Rate'
+        rateTitle="Bounce Rate"
         secondaryMessage={adminBounceText}
       >
-        <strong>{countBounce.toLocaleString()}</strong> of <strong>{countSent.toLocaleString()}</strong> sent messages bounced
+        <strong>{countBounce.toLocaleString()}</strong> of{' '}
+        <strong>{countSent.toLocaleString()}</strong> sent messages bounced
       </MetricsSummary>
     );
   }
 
   renderTabs() {
     return (
-      <Tabs tabs={[{ content: 'Bounces', onClick: () => this.handleTab(0) }, { content: 'Admin Bounces', onClick: () => this.handleTab(1) }]} selected={this.state.tab} />
+      <Tabs
+        tabs={[
+          { content: 'Bounces', onClick: () => this.handleTab(0) },
+          { content: 'Admin Bounces', onClick: () => this.handleTab(1) },
+        ]}
+        selected={this.state.tab}
+      />
     );
   }
 
-  handleTab = (index) => {
+  handleTab = index => {
     this.setState({ tab: index });
   };
 
   render() {
     const { chartLoading, bounceSearchOptions } = this.props;
     return (
-      <Page title='Bounce Report'>
+      <Page title="Bounce Report">
         <ReportOptions reportLoading={chartLoading} searchOptions={bounceSearchOptions} />
         {this.renderTopLevelMetrics()}
         {this.renderTabs()}
         {this.renderChart()}
-        <hr/>
+        <hr />
         {this.renderCollection()}
       </Page>
     );
@@ -162,7 +193,7 @@ export class BouncePage extends Component {
 }
 
 const mapDispatchToProps = {
-  refreshBounceReport
+  refreshBounceReport,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(BouncePage);
