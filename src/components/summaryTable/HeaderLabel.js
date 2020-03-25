@@ -4,12 +4,13 @@ import SortLabel from 'src/components/collection/SortLabel'; // need to share
 class HeaderLabel extends React.Component {
   handleSort = () => {
     this.props.onSort(this.nextOrder);
-  }
+  };
 
   get nextOrder() {
     const { dataKey, order } = this.props;
 
-    if (!order || order.dataKey !== dataKey) { // no order or order by new field
+    if (!order || order.dataKey !== dataKey) {
+      // no order or order by new field
       return { ascending: true, dataKey };
     }
 
@@ -32,13 +33,7 @@ class HeaderLabel extends React.Component {
       direction = order.ascending ? 'asc' : 'desc';
     }
 
-    return (
-      <SortLabel
-        direction={direction}
-        label={label}
-        onClick={this.handleSort}
-      />
-    );
+    return <SortLabel direction={direction} label={label} onClick={this.handleSort} />;
   }
 }
 

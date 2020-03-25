@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table } from '@sparkpost/matchbox';
+import { Table } from 'src/components/matchbox';
 import { shallow } from 'enzyme';
 
 import TableCollection from '../TableCollection';
@@ -15,7 +15,9 @@ describe('TableCollection Component', () => {
     headerComponent = (
       <thead>
         <Table.Row>
-          {columns.map((title) => <Table.HeaderCell key={title}>{title}</Table.HeaderCell>)}
+          {columns.map(title => (
+            <Table.HeaderCell key={title}>{title}</Table.HeaderCell>
+          ))}
         </Table.Row>
       </thead>
     );
@@ -26,7 +28,7 @@ describe('TableCollection Component', () => {
       getRowData: () => {},
       extraProp: 'plsPassDown',
       rows: [],
-      title: 'Example Table'
+      title: 'Example Table',
     };
   });
 
@@ -37,7 +39,7 @@ describe('TableCollection Component', () => {
     });
 
     it('renders with props', () => {
-      const wrapper = shallow(<TableCollection {...props}/>);
+      const wrapper = shallow(<TableCollection {...props} />);
       expect(wrapper).toMatchSnapshot();
     });
   });
@@ -46,11 +48,11 @@ describe('TableCollection Component', () => {
     let wrapper;
 
     beforeEach(() => {
-      wrapper = shallow(<TableCollection {...props}/>);
+      wrapper = shallow(<TableCollection {...props} />);
     });
 
     it('uses default if defaultSortColumn and defaultSortDirection are not passed', () => {
-      wrapper = shallow(<TableCollection {...props}/>);
+      wrapper = shallow(<TableCollection {...props} />);
       expect(wrapper.state().sortColumn).toEqual(null);
       expect(wrapper.state().sortDirection).toEqual('asc');
     });
@@ -58,14 +60,14 @@ describe('TableCollection Component', () => {
     it('sets state with defaultSortColumn when passed', () => {
       expect(wrapper.state().sortColumn).toEqual(null);
       props.defaultSortColumn = 'col1';
-      wrapper = shallow(<TableCollection {...props}/>);
+      wrapper = shallow(<TableCollection {...props} />);
       expect(wrapper.state().sortColumn).toEqual('col1');
     });
 
     it('sets default with sortDirection when passed', () => {
       expect(wrapper.state().sortDirection).toEqual('asc');
       props.defaultSortDirection = 'desc';
-      wrapper = shallow(<TableCollection {...props}/>);
+      wrapper = shallow(<TableCollection {...props} />);
       expect(wrapper.state().sortDirection).toEqual('desc');
     });
   });
@@ -74,7 +76,7 @@ describe('TableCollection Component', () => {
     let wrapper;
 
     beforeEach(() => {
-      wrapper = shallow(<TableCollection {...props}/>);
+      wrapper = shallow(<TableCollection {...props} />);
     });
 
     it('updates state correctly', () => {

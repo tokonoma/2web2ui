@@ -2,7 +2,7 @@ import { shallow, mount } from 'enzyme';
 import React from 'react';
 import { act } from 'react-dom/test-utils';
 import FilterSortCollection from '../FilterSortCollection';
-import { Table } from '@sparkpost/matchbox';
+import { Table } from 'src/components/matchbox';
 import TestApp from 'src/__testHelpers__/TestApp';
 
 describe('FilterSortCollection Component', () => {

@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
-
-import { CodeBlock, ScreenReaderOnly, Table } from '@sparkpost/matchbox';
-import { Button } from 'src/components/matchbox';
+import { CodeBlock, ScreenReaderOnly } from '@sparkpost/matchbox';
+import { Button, Table } from 'src/components/matchbox';
 import { TableCollection } from 'src/components/collection';
 import styles from './AllMessagesCollection.module.scss';
 import startCase from 'lodash/startCase';

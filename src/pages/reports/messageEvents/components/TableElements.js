@@ -2,7 +2,7 @@ import React from 'react';
 import cx from 'classnames';
 import { snakeToFriendly } from 'src/helpers/string';
 
-import { Table } from '@sparkpost/matchbox';
+import { Table } from 'src/components/matchbox';
 import DisplayDate from 'src/components/displayDate/DisplayDate';
 
 import styles from './HistoryTable.module.scss';
@@ -10,11 +10,11 @@ import styles from './HistoryTable.module.scss';
 const Header = () => (
   <thead>
     <Table.Row>
-      <th width='2px'/>
-      <Table.HeaderCell className={styles.HeaderCell} width='35%'>
+      <th width="2px" />
+      <Table.HeaderCell className={styles.HeaderCell} width="35%">
         Time
       </Table.HeaderCell>
-      <Table.HeaderCell className={styles.HeaderCell} width='auto'>
+      <Table.HeaderCell className={styles.HeaderCell} width="auto">
         Event
       </Table.HeaderCell>
     </Table.Row>
@@ -23,7 +23,7 @@ const Header = () => (
 
 const Row = ({ onClick, selected, type, timestamp, formattedDate }) => (
   <Table.Row onClick={onClick} className={cx(styles.Row, selected && styles.selected)}>
-    <td className={styles.Bar}/>
+    <td className={styles.Bar} />
     <Table.Cell>
       <DisplayDate timestamp={timestamp} formattedDate={formattedDate} />
     </Table.Cell>
@@ -33,8 +33,4 @@ const Row = ({ onClick, selected, type, timestamp, formattedDate }) => (
 
 const TableWrapper = ({ children }) => <Table>{children}</Table>;
 
-export {
-  Header,
-  TableWrapper,
-  Row
-};
+export { Header, TableWrapper, Row };
