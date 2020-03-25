@@ -11,24 +11,18 @@
   line-height: line-height(300);
 }
 
-.TabsWrapper {
+.SecondaryActions {
   display: flex;
-  justify-content: space-between;
-  border-bottom: 1px solid #e1e1e6;
+  align-items: center;
+  height: 100%;
+  margin-right: spacing();
+  position: absolute;
+  right: 0;
+  top: 0;
+}
 
-  > div {
-    box-shadow: none;
-    height: 50px; // to match preview control bar and tabs
-    border-bottom: none;
-
-    > a {
-      display: inline-flex;
-      align-items: center;
-      height: 100%;
-      padding-top: 0;
-      padding-bottom: 0;
-    }
-  }
+.TabsWrapper {
+  position: relative;
 }
 
 .LaunchIcon {

@@ -160,7 +160,7 @@ export function RecipientValidationPage(props) {
               }))}
             />
             {selectedTab === 2 && (
-              <div className={styles.TagWrapper}>
+              <div className={styles.SecondaryActions}>
                 <Button
                   flat
                   external
