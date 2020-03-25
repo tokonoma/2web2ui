@@ -23,6 +23,9 @@
 
 .TabsWrapper {
   position: relative;
+  > div {
+    box-shadow: none;
+  }
 }
 
 .LaunchIcon {
