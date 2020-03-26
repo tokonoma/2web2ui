@@ -4,9 +4,9 @@ import { connect } from 'react-redux';
 import _ from 'lodash';
 import { Field, change, formValueSelector } from 'redux-form';
 
-import { Popover, ActionList } from '@sparkpost/matchbox';
+import { Popover } from '@sparkpost/matchbox';
 import { ArrowDropDown } from '@sparkpost/matchbox-icons';
-import { TextField } from 'src/components/matchbox';
+import { ActionList, TextField } from 'src/components/matchbox';
 
 import styles from './FilterDropdown.module.scss';
 

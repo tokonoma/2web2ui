@@ -2,8 +2,7 @@ import classnames from 'classnames/bind';
 import Downshift from 'downshift';
 import debounce from 'lodash/debounce';
 import React, { Component } from 'react';
-import { ActionList } from '@sparkpost/matchbox';
-import { Button, TextField } from 'src/components/matchbox';
+import { ActionList, Button, TextField } from 'src/components/matchbox';
 
 import sortMatch from 'src/helpers/sortMatch';
 import styles from './Typeahead.module.scss';
