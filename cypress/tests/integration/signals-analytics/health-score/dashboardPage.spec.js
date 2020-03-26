@@ -221,7 +221,7 @@ describe('The health score dashboard page', () => {
       cy.wait('@getHealthScore');
     });
 
-    it('renders each subaccount along with the current health score for that subaccount', () => {
+    it.skip('renders each subaccount along with the current health score for that subaccount', () => {
       function assertTableRow({
         rowIndex,
         subaccount,
