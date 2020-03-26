@@ -1,4 +1,5 @@
-import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
+import { Meta, Preview, Props } from '@storybook/addon-docs/blocks';
+import { Button } from 'src/components/matchbox';
 import { SupportTicketLink } from './SupportTicketLink';
 
 <Meta title="Links|SupportTicketLink" component={SupportTicketLink} />
@@ -17,6 +18,19 @@ Use the `<SupportTicketLink/>` component to render a link that opens the support
 
 <Preview>
   <SupportTicketLink issueId="general_billing" openSupportTicketForm={console.log}>
+    Is there a problem with your billing?
+  </SupportTicketLink>
+</Preview>
+
+### As Button
+
+<Preview>
+  <SupportTicketLink
+    as={Button}
+    issueId="general_billing"
+    openSupportTicketForm={console.log}
+    primary
+  >
     Is there a problem with your billing?
   </SupportTicketLink>
 </Preview>

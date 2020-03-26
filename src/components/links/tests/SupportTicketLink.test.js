@@ -1,5 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import { Button } from 'src/components/matchbox';
 import { SupportTicketLink } from '../SupportTicketLink';
 
 describe('SupportTicketLink', () => {
@@ -11,7 +12,7 @@ describe('SupportTicketLink', () => {
     );
 
   it('renders a link', () => {
-    expect(subject()).toHaveTextContent('Help!');
+    expect(subject()).toHaveDisplayName('UnstyledLink');
   });
 
   it('ignores to prop', () => {
@@ -36,5 +37,9 @@ describe('SupportTicketLink', () => {
       issueId: 'my_issue',
       message: 'Help me!',
     });
+  });
+
+  it('renders a button', () => {
+    expect(subject({ as: Button })).toHaveDisplayName('Button');
   });
 });
