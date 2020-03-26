@@ -17,8 +17,7 @@ exports[`UploadForm tests should disable fields when submitting 1`] = `
             >
               example file here
             </DownloadLink>
-             
-            to use when formatting your list of suppressions for upload.
+             to use when formatting your list of suppressions for upload.
           </span>
         }
         label="CSV File of Suppressions"
@@ -70,8 +69,7 @@ exports[`UploadForm tests should render upload form 1`] = `
             >
               example file here
             </DownloadLink>
-             
-            to use when formatting your list of suppressions for upload.
+             to use when formatting your list of suppressions for upload.
           </span>
         }
         label="CSV File of Suppressions"

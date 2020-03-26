@@ -42,9 +42,9 @@ export class SendingDomainsTab extends Component {
           This subaccount has no sending domains assigned to it. You can assign an existing one, or
           create a new one.
         </p>
-        <Button plain color="orange" component={PageLink} to="/account/sending-domains">
+        <PageLink as={Button} plain color="orange" to="/account/sending-domains">
           Manage Sending Domains
-        </Button>
+        </PageLink>
       </Panel.Section>
     );
   }

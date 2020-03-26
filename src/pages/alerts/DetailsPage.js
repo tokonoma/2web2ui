@@ -75,10 +75,10 @@ export class DetailsPage extends Component {
         breadcrumbAction={{ content: 'Back to Alerts', to: '/alerts', component: PageLink }}
         primaryArea={
           <>
-            <Button flat component={PageLink} to={`/alerts/create/${id}`}>
+            <PageLink as={Button} flat to={`/alerts/create/${id}`}>
               <ContentCopy className={styles.Icon} />
               Duplicate
-            </Button>
+            </PageLink>
             <Button flat onClick={this.openDeleteModal}>
               <Delete className={styles.Icon} />
               Delete

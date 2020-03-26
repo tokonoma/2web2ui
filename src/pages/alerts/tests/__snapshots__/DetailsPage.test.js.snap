@@ -12,8 +12,8 @@ exports[`Page: Alert Details should render Alert Details Page 1`] = `
   empty={Object {}}
   primaryArea={
     <React.Fragment>
-      <Button
-        component={[Function]}
+      <PageLink
+        as={[Function]}
         flat={true}
         to="/alerts/create/alert-id"
       >
@@ -21,7 +21,7 @@ exports[`Page: Alert Details should render Alert Details Page 1`] = `
           className="Icon"
         />
         Duplicate
-      </Button>
+      </PageLink>
       <Button
         flat={true}
         onClick={[Function]}

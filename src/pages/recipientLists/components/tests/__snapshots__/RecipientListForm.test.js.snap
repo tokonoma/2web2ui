@@ -52,8 +52,7 @@ exports[`RecipientListForm defaults to create mode 1`] = `
               >
                 CSV template here
               </DownloadLink>
-               
-              to use when formatting your recipient list for upload.
+               to use when formatting your recipient list for upload.
             </span>
           }
           label="Upload a CSV file of recipients"
@@ -146,8 +145,7 @@ exports[`RecipientListForm renders CSV errors 1`] = `
               >
                 CSV template here
               </DownloadLink>
-               
-              to use when formatting your recipient list for upload.
+               to use when formatting your recipient list for upload.
             </span>
           }
           label="Upload a CSV file of recipients"
@@ -226,8 +224,7 @@ exports[`RecipientListForm renders correctly in create mode 1`] = `
               >
                 CSV template here
               </DownloadLink>
-               
-              to use when formatting your recipient list for upload.
+               to use when formatting your recipient list for upload.
             </span>
           }
           label="Upload a CSV file of recipients"
@@ -294,8 +291,7 @@ exports[`RecipientListForm renders correctly in edit mode 1`] = `
               >
                 CSV template here
               </DownloadLink>
-               
-              to use when formatting your recipient list for upload.
+               to use when formatting your recipient list for upload.
             </span>
           }
           label="Optional: Upload a CSV file of recipients to replace the existing recipients in this list"
@@ -374,8 +370,7 @@ exports[`RecipientListForm should disable form elements on submit 1`] = `
               >
                 CSV template here
               </DownloadLink>
-               
-              to use when formatting your recipient list for upload.
+               to use when formatting your recipient list for upload.
             </span>
           }
           label="Upload a CSV file of recipients"

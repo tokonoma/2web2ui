@@ -70,14 +70,14 @@ exports[`SendingDomainsTab should show empty message when 0 domains exist 1`] = 
     <p>
       This subaccount has no sending domains assigned to it. You can assign an existing one, or create a new one.
     </p>
-    <Button
+    <PageLink
+      as={[Function]}
       color="orange"
-      component={[Function]}
       plain={true}
       to="/account/sending-domains"
     >
       Manage Sending Domains
-    </Button>
+    </PageLink>
   </Panel.Section>
 </Panel>
 `;

@@ -63,9 +63,8 @@ describe('Page: Alert Details', () => {
       .find('Page')
       .dive()
       .find('Button')
-      .at(1)
       .simulate('click');
-    expect(wrapper.find('DeleteModal').prop('open')).toEqual(true);
+    expect(wrapper.find('DeleteModal')).toHaveProp('open', true);
   });
 
   it('should handle delete', async () => {

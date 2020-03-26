@@ -97,9 +97,9 @@ export const ListProgress = ({
           </div>
         )}
       </div>
-      <Button color="orange" component={PageLink} to="/recipient-validation">
+      <PageLink as={Button} color="orange" to="/recipient-validation">
         Validate Another
-      </Button>
+      </PageLink>
     </FocusContainer>
   );
 };

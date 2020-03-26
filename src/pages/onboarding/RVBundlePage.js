@@ -85,9 +85,9 @@ const RVBundlePage = () => {
             </Card>
           </div>
           <div className={styles.buttonRow}>
-            <Button color="orange" to="/recipient-validation" component={PageLink}>
+            <PageLink as={Button} color="orange" to="/recipient-validation">
               Start Validating
-            </Button>
+            </PageLink>
           </div>
         </Panel.Section>
       </Panel>

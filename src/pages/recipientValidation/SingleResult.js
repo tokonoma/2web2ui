@@ -73,9 +73,9 @@ export function SingleResult(props) {
 
               <ResultList data={singleResults} />
 
-              <Button component={PageLink} color="orange" to={SINGLE_RV_LINK}>
+              <PageLink as={Button} color="orange" to={SINGLE_RV_LINK}>
                 Validate Another
-              </Button>
+              </PageLink>
             </div>
           </Grid.Column>
 

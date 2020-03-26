@@ -67,14 +67,9 @@ export const WatchlistPage = props => {
       }}
       primaryArea={
         <>
-          <Button
-            primary
-            component={PageLink}
-            to={`/blacklist/watchlist/add`}
-            className={styles.Buttons}
-          >
+          <PageLink as={Button} primary to={`/blacklist/watchlist/add`} className={styles.Buttons}>
             Add IP or Sending Domain
-          </Button>
+          </PageLink>
         </>
       }
     >

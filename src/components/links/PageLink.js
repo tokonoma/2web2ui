@@ -1,16 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { UnstyledLink } from 'src/components/matchbox';
+import { Button, UnstyledLink } from 'src/components/matchbox';
 
 // Link to a page in our application
-const PageLink = ({ children, ...props }) => (
-  <UnstyledLink {...props} component={Link}>
+const PageLink = ({ as: Component = UnstyledLink, children, ...props }) => (
+  <Component {...props} component={Link}>
     {children}
-  </UnstyledLink>
+  </Component>
 );
 
 PageLink.propTypes = {
+  as: PropTypes.oneOf([Button, UnstyledLink]),
   children: PropTypes.node.isRequired,
   to: PropTypes.oneOfType([
     PropTypes.string,

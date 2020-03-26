@@ -108,9 +108,9 @@ export function HealthScorePageV3(props) {
       facetId={facetId}
       subaccountId={subaccountId}
       primaryArea={
-        <Button primary component={PageLink} to="/alerts/create">
+        <PageLink as={Button} primary to="/alerts/create">
           Create Alert
-        </Button>
+        </PageLink>
       }
     >
       <Panel>

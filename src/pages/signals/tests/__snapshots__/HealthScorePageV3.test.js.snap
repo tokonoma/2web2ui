@@ -12,13 +12,13 @@ exports[`Signals Health Score Page V3 renders correctly when receiving data 1`] 
   facet="sending-domain"
   facetId="test.com"
   primaryArea={
-    <Button
-      component={[Function]}
+    <PageLink
+      as={[Function]}
       primary={true}
       to="/alerts/create"
     >
       Create Alert
-    </Button>
+    </PageLink>
   }
   title="Health Score"
 >

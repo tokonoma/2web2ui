@@ -10,8 +10,8 @@ const JobActionLink = ({ jobId, fileHref, status }) => {
 
   if (status === 'queued_for_batch') {
     return (
-      <Button
-        component={PageLink}
+      <PageLink
+        as={Button}
         to={`/recipient-validation/list/${jobId}`}
         flat
         color="orange"
@@ -19,7 +19,7 @@ const JobActionLink = ({ jobId, fileHref, status }) => {
       >
         <span>Review</span>&nbsp;
         <PlaylistAddCheck />
-      </Button>
+      </PageLink>
     );
   }
 
@@ -33,8 +33,8 @@ const JobActionLink = ({ jobId, fileHref, status }) => {
   }
 
   return (
-    <Button
-      component={PageLink}
+    <PageLink
+      as={Button}
       to={`/recipient-validation/list/${jobId}`}
       flat
       color="orange"
@@ -42,7 +42,7 @@ const JobActionLink = ({ jobId, fileHref, status }) => {
     >
       <span>See Progress</span>&nbsp;
       <Cached />
-    </Button>
+    </PageLink>
   );
 };
 

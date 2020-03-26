@@ -77,7 +77,8 @@ export class SupportForm extends Component {
             helpText={
               needsOnlineSupport && (
                 <Fragment>
-                  Additional technical support is available on paid plans.{' '}
+                  Additional technical support is available on paid plans. Additional technical
+                  support is available on paid plans.{' '}
                   <PageLink onClick={onClose} to="/account/billing/plan">
                     Upgrade now
                   </PageLink>
