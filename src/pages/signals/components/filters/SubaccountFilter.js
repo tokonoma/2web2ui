@@ -1,14 +1,14 @@
 import React from 'react';
+import classnames from 'classnames';
 import { connect } from 'react-redux';
-import { Grid, Popover, WindowEvent } from '@sparkpost/matchbox';
-import { Button, UnstyledLink } from 'src/components/matchbox';
+import { Grid, Popover } from '@sparkpost/matchbox';
 import { ArrowDropDown, ChevronLeft } from '@sparkpost/matchbox-icons';
 import SubaccountTypeahead from 'src/components/typeahead/SubaccountTypeahead';
+import { Button, UnstyledLink, WindowEvent } from 'src/components/matchbox';
 import { hasSubaccounts } from 'src/selectors/subaccounts';
 import withSignalOptions from '../../containers/withSignalOptions';
 import SubaccountOption from './SubaccountOption';
 import { onEscape } from 'src/helpers/keyEvents';
-import classnames from 'classnames';
 import styles from './SubaccountFilter.module.scss';
 
 const OPTIONS = [
