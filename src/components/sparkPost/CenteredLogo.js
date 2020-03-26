@@ -7,6 +7,7 @@ import PartnerLogos from './partners/PartnerLogos';
 
 const CenteredLogo = ({ showAwsLogo }) => (
   <div className={styles.CenteredLogo}>
+    {/* note, doesn't look good if ExternalLink was used because of the icon next to the logo */}
     <UnstyledLink to={LINKS.SP_HOME_PAGE} title="SparkPost">
       <SparkPost.Logo />
     </UnstyledLink>
