@@ -1,9 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { showAlert } from 'src/actions/globalAlert';
-import { openSupportTicketForm } from 'src/actions/support';
-import { PageLink } from 'src/components/links';
-import { UnstyledLink } from 'src/components/matchbox';
+import { PageLink, SupportTicketLink } from 'src/components/links';
 import { hasStatus, isSuspendedForBilling } from 'src/helpers/conditions/account';
 
 /**
@@ -12,10 +10,6 @@ import { hasStatus, isSuspendedForBilling } from 'src/helpers/conditions/account
  * - Account suspended for billing
  */
 export class SuspensionAlerts extends Component {
-  openTicket = () => {
-    this.props.openSupportTicketForm({ issueId: 'account_suspension' });
-  };
-
   getMessage() {
     return this.props.isSuspendedForBilling ? (
       <Fragment>
@@ -30,7 +24,7 @@ export class SuspensionAlerts extends Component {
         <div>Your account is currently suspended.</div>
         <div>
           For any questions or to request reactivation, please{' '}
-          <UnstyledLink onClick={this.openTicket}>submit a ticket</UnstyledLink>.
+          <SupportTicketLink issueId="account_suspension">submit a ticket</SupportTicketLink>.
         </div>
       </Fragment>
     );
@@ -59,4 +53,4 @@ const mapStateToProps = state => ({
   isSuspended: hasStatus('suspended')(state),
   isSuspendedForBilling: isSuspendedForBilling(state),
 });
-export default connect(mapStateToProps, { showAlert, openSupportTicketForm })(SuspensionAlerts);
+export default connect(mapStateToProps, { showAlert })(SuspensionAlerts);

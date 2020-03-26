@@ -13,11 +13,11 @@ Array [
       <div>
         For any questions or to request reactivation, please
          
-        <UnstyledLink
-          onClick={[Function]}
+        <Connect(SupportTicketLink)
+          issueId="account_suspension"
         >
           submit a ticket
-        </UnstyledLink>
+        </Connect(SupportTicketLink)>
         .
       </div>
     </React.Fragment>,
