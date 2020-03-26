@@ -1,5 +1,6 @@
 import { Button } from 'src/components/matchbox';
 import React from 'react';
+import { DownloadLink } from 'src/components/links';
 import { formatToCsv } from 'src/helpers/downloading';
 
 const SaveCSVButton = ({ data, saveCsv, caption = 'Save As CSV', filename, ...props }) => {
@@ -11,9 +12,14 @@ const SaveCSVButton = ({ data, saveCsv, caption = 'Save As CSV', filename, ...pr
   }
 
   return (
-    <Button download={download} to={formatToCsv({ data, returnBlob: false })} {...props}>
+    <DownloadLink
+      as={Button}
+      download={download}
+      to={formatToCsv({ data, returnBlob: false })}
+      {...props}
+    >
       {caption}
-    </Button>
+    </DownloadLink>
   );
 };
 

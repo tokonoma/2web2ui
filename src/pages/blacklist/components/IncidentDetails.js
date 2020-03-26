@@ -73,14 +73,15 @@ export default ({
         </div>
       </Grid.Column>
       <Grid.Column xs={12}>
-        <Button
+        <PageLink
+          as={Button}
           size="small"
           color="orange"
           className={styles.EngagementButton}
           to={`/reports/summary?from=${engagementSummaryFrom}&to=${engagementSummaryTo}&range=custom&filters=${engagementSummaryResource}:${resourceName}`}
         >
           View Engagement
-        </Button>
+        </PageLink>
       </Grid.Column>
     </Grid>
   );
