@@ -9,6 +9,7 @@ export { default as Pager } from './Pager';
 export { default as Panel } from './Panel';
 export { default as Portal } from './Portal';
 export { default as ProgressBar } from './ProgressBar';
+export { default as ScreenReaderOnly } from './ScreenReaderOnly';
 export { default as Slider } from './Slider';
 export { default as Snackbar } from './Snackbar';
 export { default as Select } from './Select';

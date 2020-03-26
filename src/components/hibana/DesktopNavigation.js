@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
-import { ScreenReaderOnly } from '@sparkpost/matchbox';
 import { Inline } from 'src/components/matchbox';
 import { SparkPost } from 'src/components';
+import { ScreenReaderOnly } from 'src/components/matchbox';
 import findRouteByPath from 'src/helpers/findRouteByPath';
 import AccountPopover from './AccountPopover';
 import styles from './DesktopNavigation.module.scss';
@@ -28,7 +28,7 @@ export default function DesktopNavigation(props) {
 
           <nav className={styles.PrimaryNav} aria-labelledby="primary-nav-heading">
             {/* Visually hidden headings to help guide screen reader users */}
-            <ScreenReaderOnly>
+            <ScreenReaderOnly as="div">
               <h2 id="primary-nav-heading">Main</h2>
             </ScreenReaderOnly>
 
@@ -63,7 +63,7 @@ export default function DesktopNavigation(props) {
             >
               <NavWrapper>
                 {/* Visually hidden headings to help guide screen reader users */}
-                <ScreenReaderOnly>
+                <ScreenReaderOnly as="div">
                   <h3 id="secondary-nav-heading">Secondary</h3>
                 </ScreenReaderOnly>
 

@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ScreenReaderOnly } from '@sparkpost/matchbox';
+import { ScreenReaderOnly } from 'src/components/matchbox';
 import styles from './SavedIndicator.module.scss';
 
-const SavedIndicator = (props) => {
+const SavedIndicator = props => {
   const { hasSaved } = props;
 
   return (
@@ -11,9 +11,7 @@ const SavedIndicator = (props) => {
       <ScreenReaderOnly>Template </ScreenReaderOnly>
 
       {hasSaved ? (
-        <span className={styles.SavedIndicatorContent}>
-          Saved
-        </span>
+        <span className={styles.SavedIndicatorContent}>Saved</span>
       ) : (
         <span className={styles.SavedIndicatorContent}>
           <ScreenReaderOnly>has </ScreenReaderOnly>
@@ -26,7 +24,7 @@ const SavedIndicator = (props) => {
 };
 
 SavedIndicator.propTypes = {
-  hasSaved: PropTypes.bool
+  hasSaved: PropTypes.bool,
 };
 
 export default SavedIndicator;

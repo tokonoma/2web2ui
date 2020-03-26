@@ -1,8 +1,7 @@
 import styles from './CursorPaging.module.scss';
-import { ScreenReaderOnly } from '@sparkpost/matchbox';
 import { FirstPage } from '@sparkpost/matchbox-icons';
 import React from 'react';
-import { Pager, Button } from 'src/components/matchbox';
+import { Pager, Button, ScreenReaderOnly } from 'src/components/matchbox';
 
 export const CursorPaging = ({
   currentPage,

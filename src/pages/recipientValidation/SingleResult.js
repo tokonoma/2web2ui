@@ -1,8 +1,8 @@
 /* eslint-disable no-restricted-syntax */
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { ScreenReaderOnly, Page, Grid, UnstyledLink } from '@sparkpost/matchbox';
-import { Button, Panel } from 'src/components/matchbox';
+import { Page, Grid, UnstyledLink } from '@sparkpost/matchbox';
+import { Button, Panel, ScreenReaderOnly } from 'src/components/matchbox';
 import styles from './SingleResult.module.scss';
 import { withRouter, Link } from 'react-router-dom';
 import CodeBlock from './components/CodeBlock';

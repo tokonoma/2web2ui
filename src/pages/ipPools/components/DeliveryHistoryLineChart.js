@@ -9,10 +9,10 @@ import {
   ResponsiveContainer,
   CartesianGrid,
 } from 'recharts';
-import { ScreenReaderOnly } from '@sparkpost/matchbox';
 import { formatDate } from 'src/helpers/date';
 import { getLineChartFormatters } from 'src/helpers/chart';
 import { formatNumber } from 'src/helpers/units';
+import { ScreenReaderOnly } from 'src/components/matchbox';
 import styles from './DeliveryHistoryLineChart.module.scss';
 
 const DeliveryHistoryLineChart = ({ data }) => {
