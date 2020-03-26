@@ -199,7 +199,7 @@ describe('metrics helpers', () => {
     cases(
       'should round from and to values',
       ({ from, to, expectedValue }) => {
-        const { from: resFrom, to: resTo } = metricsHelpers.roundBoundaries(from, to);
+        const { from: resFrom, to: resTo } = metricsHelpers.roundBoundaries({ from, to });
 
         expect(resFrom.toISOString()).toEqual(expectedValue.from);
         expect(resTo.toISOString()).toEqual(expectedValue.to);
@@ -209,7 +209,11 @@ describe('metrics helpers', () => {
 
     it('should not round to when in future', () => {
       const now = moment('2016-12-19T10:02');
-      const { from, to } = metricsHelpers.roundBoundaries(moment('2016-02-18T10:59'), now, now);
+      const { from, to } = metricsHelpers.roundBoundaries({
+        from: moment('2016-02-18T10:59'),
+        to: now,
+        now: now,
+      });
 
       expect(from.toISOString()).toEqual(moment('2016-02-18T00:00').toISOString());
       expect(to.toISOString()).toEqual(now.toISOString());
