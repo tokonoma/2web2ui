@@ -1,5 +1,5 @@
 import React from 'react';
-import { UnstyledLink } from 'src/components/matchbox';
+import { PageLink } from 'src/components/links';
 
 export default function JoinError({ errors, data }) {
   let status;
@@ -24,7 +24,7 @@ export default function JoinError({ errors, data }) {
     return (
       <span>
         It looks like you already have a SparkPost account using {data.email}.&nbsp;
-        <UnstyledLink to="/auth">Sign in</UnstyledLink>
+        <PageLink to="/auth">Sign in</PageLink>
       </span>
     );
   } else if (status === 403 && message.match(/^forbidden/i)) {
