@@ -1,4 +1,5 @@
 import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
+import { Button } from 'src/components/matchbox';
 import ExternalLink from './ExternalLink';
 
 <Meta title="Links|ExternalLink" component={ExternalLink} />
@@ -17,6 +18,14 @@ Use the `<ExternalLink/>` component to render a link that directs to a new page 
 
 <Preview>
   <ExternalLink to="https://developers.sparkpost.com">
+    SparkPost Developer Documentation
+  </ExternalLink>
+</Preview>
+
+### As Button
+
+<Preview>
+  <ExternalLink as={Button} to="https://developers.sparkpost.com" primary>
     SparkPost Developer Documentation
   </ExternalLink>
 </Preview>
