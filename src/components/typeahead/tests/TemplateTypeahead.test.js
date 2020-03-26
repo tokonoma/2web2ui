@@ -1,7 +1,7 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import { useHibana } from 'src/context/HibanaContext';
 import { TemplateTypeahead } from '../TemplateTypeahead';
+import TestApp from 'src/__testHelpers__/TestApp';
 
 const results = [
   { id: 'tmpl-1', name: 'Template 1' },
@@ -9,18 +9,15 @@ const results = [
   { id: 'tmpl-3', name: 'Template 3' },
 ];
 
-jest.mock('src/context/HibanaContext');
-
 describe('Template Typeahead', () => {
   let wrapper;
+  const props = {
+    onChange: jest.fn(),
+    listTemplates: jest.fn(),
+    results: [],
+  };
 
   beforeEach(() => {
-    const props = {
-      onChange: jest.fn(),
-      listTemplates: jest.fn(),
-      results: [],
-    };
-
     wrapper = shallow(<TemplateTypeahead {...props} />);
   });
 
@@ -29,7 +26,11 @@ describe('Template Typeahead', () => {
   });
 
   it('should render if account has no templates', () => {
-    useHibana.mockImplementationOnce(() => [{ isHibanaEnabled: false }]);
+    wrapper = shallow(
+      <TestApp>
+        <TemplateTypeahead {...props} />
+      </TestApp>,
+    );
     wrapper.setProps({ hasTemplates: false });
     expect(wrapper.html()).not.toEqual(null);
   });
