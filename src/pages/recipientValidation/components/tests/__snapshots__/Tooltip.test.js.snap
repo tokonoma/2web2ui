@@ -2,7 +2,6 @@
 
 exports[`renders tooltip correctly renders correctly icon 1`] = `
 <Tooltip
-  bottom={true}
   color={true}
   content={
     <div
@@ -12,17 +11,7 @@ exports[`renders tooltip correctly renders correctly icon 1`] = `
     </div>
   }
   dark={true}
-  forcePosition={false}
   horizontalOffset="-.8rem"
-  preferredDirection={
-    Object {
-      "bottom": true,
-      "left": false,
-      "right": true,
-      "top": false,
-    }
-  }
-  right={true}
 >
   <InfoOutline
     className="TooltipIcon"

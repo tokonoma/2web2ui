@@ -72,20 +72,8 @@ exports[`Legend Component renders correctly with tooltip content 1`] = `
 
 exports[`Legend Component renders correctly with tooltip content 2`] = `
 <Tooltip
-  bottom={true}
   content="label 1"
   dark={true}
-  forcePosition={false}
-  horizontalOffset="0px"
-  preferredDirection={
-    Object {
-      "bottom": true,
-      "left": false,
-      "right": true,
-      "top": false,
-    }
-  }
-  right={true}
 >
   <div
     className="Item"
@@ -109,20 +97,8 @@ exports[`Legend Component renders correctly with tooltip content 2`] = `
 
 exports[`Legend Component renders correctly with tooltip content 3`] = `
 <Tooltip
-  bottom={true}
   content="label 2"
   dark={true}
-  forcePosition={false}
-  horizontalOffset="0px"
-  preferredDirection={
-    Object {
-      "bottom": true,
-      "left": false,
-      "right": true,
-      "top": false,
-    }
-  }
-  right={true}
 >
   <div
     className="Item"
