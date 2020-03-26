@@ -4,7 +4,12 @@ import { Button, UnstyledLink } from 'src/components/matchbox';
 
 // Link to download a static file
 // SEE: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#attr-download
-const DownloadLink = ({ as: Component = UnstyledLink, children, ...props }) => (
+const DownloadLink = ({
+  as: Component = UnstyledLink,
+  children,
+  component: _component, // ignore
+  ...props
+}) => (
   <Component {...props} download referrerPolicy="origin">
     {children}
   </Component>
