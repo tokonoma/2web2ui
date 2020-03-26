@@ -16,6 +16,7 @@ import ManualEntryForm from './ManualEntryForm';
 import { FORMATS } from 'src/constants';
 import styles from './DatePicker.module.scss';
 import PropTypes from 'prop-types';
+import { TimezoneTypeahead } from '../typeahead/TimezoneTypeahead';
 
 export default class DatePicker extends Component {
   DATE_FORMAT = FORMATS.LONG_DATETIME;
@@ -132,6 +133,12 @@ export default class DatePicker extends Component {
     }
   };
 
+  handleTimezoneChange = item => {
+    if (item) {
+      this.props.onChange({ timezone: item.value });
+    }
+  };
+
   handleFormDates = ({ from, to }, callback) => {
     this.setState({ selected: { from, to } }, () => callback());
   };
@@ -177,6 +184,7 @@ export default class DatePicker extends Component {
       datePickerProps = {},
       textFieldProps = {},
       dateFieldFormat,
+      timezone,
       roundToPrecision,
       preventFuture,
       showPresets = true,
@@ -185,6 +193,7 @@ export default class DatePicker extends Component {
       hideManualEntry,
       id = 'date-picker', // When multiple <DatePicker/> components are present, each one will need a unique `id`. This is a safe default.
     } = this.props;
+
     const dateFormat = dateFieldFormat || this.DATE_FORMAT;
 
     const rangeSelect = showPresets ? (
@@ -258,7 +267,7 @@ export default class DatePicker extends Component {
             preventFuture={preventFuture}
           />
         )}
-
+        <TimezoneTypeahead onChange={this.handleTimezoneChange} timezone={timezone} />
         <Button
           primary
           onClick={this.handleSubmit}
