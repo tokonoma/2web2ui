@@ -5,6 +5,7 @@ import { Panel, Tabs } from 'src/components/matchbox';
 import styles from './DataPrivacyPage.module.scss';
 import ApiDetailsTab from './components/ApiDetailsTab';
 import SingleRecipientTab from './components/SingleRecipientTab';
+import MultipleRecipientsTab from './components/MultipleRecipientsTab';
 const tabs = [
   { content: 'Single Recipient', key: 'single-recipient' },
   { content: 'Multiple Recipients', key: 'multiple-recipients' },
@@ -26,6 +27,8 @@ export const DataPrivacyPage = props => {
     switch (tabIdx) {
       case 0:
         return <SingleRecipientTab />;
+      case 1:
+        return <MultipleRecipientsTab />;
       case 2:
         return <ApiDetailsTab history={props.history} />;
 
