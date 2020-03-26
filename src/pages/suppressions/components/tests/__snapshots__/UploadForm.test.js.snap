@@ -13,7 +13,7 @@ exports[`UploadForm tests should disable fields when submitting 1`] = `
             You can download an
              
             <DownloadLink
-              href="example-suppressions-list.csv"
+              to="example-suppressions-list.csv"
             >
               example file here
             </DownloadLink>
@@ -66,7 +66,7 @@ exports[`UploadForm tests should render upload form 1`] = `
             You can download an
              
             <DownloadLink
-              href="example-suppressions-list.csv"
+              to="example-suppressions-list.csv"
             >
               example file here
             </DownloadLink>

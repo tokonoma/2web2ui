@@ -78,7 +78,8 @@ exports[`Smtp component: Smtp Details should render page correctly with defaults
       <strong>
         Send via SMTP
       </strong>
-       permissions.  
+       permissions.
+       
       <PageLink
         to="/account/api-keys"
       >

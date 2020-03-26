@@ -1,21 +1,31 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-
+import { Button } from 'src/components/matchbox';
 import DownloadLink from '../DownloadLink';
 
 describe('DownloadLink', () => {
-  it('renders a downloadable link', () => {
-    const wrapper = shallow(<DownloadLink href="/path/to/click.me">Click Me</DownloadLink>);
-    expect(wrapper).toMatchSnapshot();
-  });
-
-  it('renders with a custom component', () => {
-    const TestComponent = ({ children, ...props }) => <span {...props}>{children}</span>;
-    const wrapper = shallow(
-      <DownloadLink component={TestComponent} href="/path/to/click.me" pass="through">
-        Click Me 2
+  const subject = props =>
+    shallow(
+      <DownloadLink to="/download/data.csv" {...props}>
+        Download Me!
       </DownloadLink>,
     );
-    expect(wrapper).toMatchSnapshot();
+
+  it('renders a link', () => {
+    const wrapper = subject();
+    expect(wrapper).toHaveDisplayName('UnstyledLink');
+    expect(wrapper).toHaveTextContent('Download Me!');
+  });
+
+  it('sets download props', () => {
+    const wrapper = subject();
+    expect(wrapper).toHaveProp('download');
+    expect(wrapper).toHaveProp('referrerPolicy');
+  });
+
+  it('renders a button', () => {
+    const wrapper = subject({ as: Button });
+    expect(wrapper).toHaveDisplayName('Button');
+    expect(wrapper).toHaveTextContent('Download Me!');
   });
 });

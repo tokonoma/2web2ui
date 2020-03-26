@@ -11,7 +11,8 @@ exports[`Variants View Component: Engagement Component: should render clicks cor
         content={
           <span>
             10
-             clicks of 
+             clicks of
+             
             100
              accepted
           </span>
@@ -56,7 +57,8 @@ exports[`Variants View Component: Engagement Component: should render opens corr
         content={
           <span>
             0
-             opens of 
+             opens of
+             
             100
              accepted
           </span>

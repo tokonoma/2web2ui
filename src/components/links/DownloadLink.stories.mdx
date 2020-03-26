@@ -1,4 +1,5 @@
-import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
+import { Meta, Preview, Props } from '@storybook/addon-docs/blocks';
+import { Button } from '@sparkpost/matchbox';
 import exampleFilePath from './example-file.csv';
 import DownloadLink from './DownloadLink';
 
@@ -17,7 +18,15 @@ Use the `<DownloadLink/>` component when the user needs to download a file.
 ### Default
 
 <Preview>
-  <DownloadLink href={exampleFilePath}>Download Fake JSON File</DownloadLink>
+  <DownloadLink to={exampleFilePath}>Download Me!</DownloadLink>
+</Preview>
+
+### As Button
+
+<Preview>
+  <DownloadLink as={Button} to={exampleFilePath} primary>
+    Download Me!
+  </DownloadLink>
 </Preview>
 
 ## Usage
@@ -27,7 +36,5 @@ import React from 'react';
 import exampleFilePath from './example-file.csv';
 import { DownloadLink } from 'src/components/links';
 
-const MyComponent = () => (
-  <DownloadLink href={exampleFilePath}>Download Fake JSON File</DownloadLink/>
-)
+const MyComponent = () => <DownloadLink to={exampleFilePath}>Download Me!</DownloadLink>;
 ```

@@ -48,7 +48,7 @@ exports[`RecipientListForm defaults to create mode 1`] = `
               You can download a
                
               <DownloadLink
-                href="example-recipient-list.csv"
+                to="example-recipient-list.csv"
               >
                 CSV template here
               </DownloadLink>
@@ -142,7 +142,7 @@ exports[`RecipientListForm renders CSV errors 1`] = `
               You can download a
                
               <DownloadLink
-                href="example-recipient-list.csv"
+                to="example-recipient-list.csv"
               >
                 CSV template here
               </DownloadLink>
@@ -222,7 +222,7 @@ exports[`RecipientListForm renders correctly in create mode 1`] = `
               You can download a
                
               <DownloadLink
-                href="example-recipient-list.csv"
+                to="example-recipient-list.csv"
               >
                 CSV template here
               </DownloadLink>
@@ -290,7 +290,7 @@ exports[`RecipientListForm renders correctly in edit mode 1`] = `
               You can download a
                
               <DownloadLink
-                href="example-recipient-list.csv"
+                to="example-recipient-list.csv"
               >
                 CSV template here
               </DownloadLink>
@@ -370,7 +370,7 @@ exports[`RecipientListForm should disable form elements on submit 1`] = `
               You can download a
                
               <DownloadLink
-                href="example-recipient-list.csv"
+                to="example-recipient-list.csv"
               >
                 CSV template here
               </DownloadLink>

@@ -68,7 +68,7 @@ exports[`renders correctly 1`] = `
      
     <strong>
       <DownloadLink
-        href="example-recipient-validation-list.csv"
+        to="example-recipient-validation-list.csv"
       >
         download
       </DownloadLink>

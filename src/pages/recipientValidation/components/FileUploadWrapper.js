@@ -78,7 +78,7 @@ export default class FileUploadWrapper extends Component {
         <p className={styles.Help}>
           Format your list with single addresses on individual lines, or{' '}
           <strong>
-            <DownloadLink href={exampleRecipientValidationListPath}>download</DownloadLink>
+            <DownloadLink to={exampleRecipientValidationListPath}>download</DownloadLink>
           </strong>{' '}
           our csv template. Please note, only the most recent list is only{' '}
           <strong>kept for 10 days</strong>, so be sure to download your validated list right away!

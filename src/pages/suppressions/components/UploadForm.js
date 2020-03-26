@@ -40,8 +40,8 @@ export class UploadForm extends Component {
               helpText={
                 <span>
                   You can download an{' '}
-                  <DownloadLink href={exampleSuppressionsListPath}>example file here</DownloadLink>{' '}
-                  to use when formatting your list of suppressions for upload.
+                  <DownloadLink to={exampleSuppressionsListPath}>example file here</DownloadLink> to
+                  use when formatting your list of suppressions for upload.
                 </span>
               }
               required

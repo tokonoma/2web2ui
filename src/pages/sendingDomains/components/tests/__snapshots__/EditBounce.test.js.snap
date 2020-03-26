@@ -147,7 +147,8 @@ exports[`Component: EditBounce renders not ready correctly 1`] = `
         bounces.
         xyz.com
       </strong>
-       for bounce domains. 
+       for bounce domains.
+       
       <PageLink
         to="/account/sending-domains/create"
       >
@@ -187,7 +188,8 @@ exports[`Component: EditBounce renders ready correctly 1`] = `
         bounces.
         xyz.com
       </strong>
-       for bounce domains. 
+       for bounce domains.
+       
       <PageLink
         to="/account/sending-domains/create"
       >
