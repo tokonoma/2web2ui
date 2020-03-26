@@ -2,7 +2,6 @@
 
 exports[`Page: A/B Test View Mode should render cancelled status correctly 1`] = `
 <Page
-  empty={Object {}}
   primaryAction={
     Object {
       "component": [Function],
@@ -179,7 +178,6 @@ exports[`Page: A/B Test View Mode should render cancelled status correctly 1`] =
 
 exports[`Page: A/B Test View Mode should render completed status correctly 1`] = `
 <Page
-  empty={Object {}}
   primaryAction={
     Object {
       "component": [Function],
@@ -356,7 +354,6 @@ exports[`Page: A/B Test View Mode should render completed status correctly 1`] =
 
 exports[`Page: A/B Test View Mode should render running status correctly 1`] = `
 <Page
-  empty={Object {}}
   primaryAction={null}
   secondaryActions={
     Array [

@@ -1,12 +1,18 @@
 /* eslint-disable max-lines */
 import React, { Component } from 'react';
-import { Page } from '@sparkpost/matchbox';
+import { Page } from 'src/components/matchbox';
 import { ApiErrorBanner, Loading, TableCollection } from 'src/components';
 import { Templates } from 'src/components/images';
 import PageLink from 'src/components/pageLink';
 import { resolveTemplateStatus } from 'src/helpers/templates';
 import RecentActivity from './components/RecentActivity';
-import { DeleteAction, DuplicateAction, LastUpdated, Name, Status } from './components/ListComponents';
+import {
+  DeleteAction,
+  DuplicateAction,
+  LastUpdated,
+  Name,
+  Status,
+} from './components/ListComponents';
 import DuplicateTemplateModal from './components/editorActions/DuplicateTemplateModal';
 import DeleteTemplateModal from './components/editorActions/DeleteTemplateModal';
 import { routeNamespace } from './constants/routes';
@@ -18,44 +24,42 @@ export default class ListPage extends Component {
     showDuplicateModal: false,
     templateToDelete: null,
     templateToDuplicate: null,
-    testDataToDuplicate: null
+    testDataToDuplicate: null,
   };
 
   componentDidMount() {
     this.props.listTemplates();
   }
 
-  toggleDeleteModal = (template) => {
+  toggleDeleteModal = template => {
     this.setState({
       showDeleteModal: !this.state.showDeleteModal,
-      templateToDelete: template
+      templateToDelete: template,
     });
   };
 
-  toggleDuplicateModal = (template) => {
+  toggleDuplicateModal = template => {
     const { getDraft, getPublished, getTestData } = this.props;
     const isPublished = template.published;
 
     this.setState({ showDuplicateModal: true });
 
     if (isPublished) {
-      return getPublished(template.id, template.subaccount_id)
-        .then((res) => {
-          this.setState({
-            templateToDuplicate: res,
-            testDataToDuplicate: getTestData({ id: res.id, mode: 'published' })
-          });
-        });
-    }
-
-    return getDraft(template.id, template.subaccount_id)
-      .then((res) => {
+      return getPublished(template.id, template.subaccount_id).then(res => {
         this.setState({
           templateToDuplicate: res,
-          testDataToDuplicate: getTestData({ id: res.id, mode: 'draft' })
+          testDataToDuplicate: getTestData({ id: res.id, mode: 'published' }),
         });
       });
-  }
+    }
+
+    return getDraft(template.id, template.subaccount_id).then(res => {
+      this.setState({
+        templateToDuplicate: res,
+        testDataToDuplicate: getTestData({ id: res.id, mode: 'draft' }),
+      });
+    });
+  };
 
   handleDuplicateSuccess = () => {
     const { showAlert, listTemplates } = this.props;
@@ -65,7 +69,7 @@ export default class ListPage extends Component {
 
     showAlert({
       type: 'success',
-      message: `Template ${template.name} duplicated`
+      message: `Template ${template.name} duplicated`,
     });
 
     return listTemplates();
@@ -79,7 +83,7 @@ export default class ListPage extends Component {
 
     showAlert({
       type: 'success',
-      message: `Template ${template.name} deleted`
+      message: `Template ${template.name} deleted`,
     });
 
     return listTemplates();
@@ -93,34 +97,34 @@ export default class ListPage extends Component {
         component: Name,
         header: {
           label: 'Template Name',
-          sortKey: 'list_name'
+          sortKey: 'list_name',
         },
         visible: true,
-        key: 'list_name'
+        key: 'list_name',
       },
       {
         component: Status,
         header: {
           label: 'Status',
-          sortKey: (template) => [
+          sortKey: template => [
             resolveTemplateStatus(template).publishedWithChanges,
-            template.published
-          ]
+            template.published,
+          ],
         },
         visible: true,
-        key: 'status'
+        key: 'status',
       },
       {
         component: LastUpdated,
         header: {
           label: 'Last Updated',
-          sortKey: 'last_update_time'
+          sortKey: 'last_update_time',
         },
         visible: true,
-        key: 'lastupdated'
+        key: 'lastupdated',
       },
       {
-        component: (template) => (
+        component: template => (
           <span className={styles.Actions}>
             <DuplicateAction
               onClick={() => this.toggleDuplicateModal(template)}
@@ -134,17 +138,18 @@ export default class ListPage extends Component {
           </span>
         ),
         header: {
-          width: 20
+          width: 20,
         },
         visible: canModify,
-        key: 'actions'
-      }
+        key: 'actions',
+      },
     ];
 
-    return columns.filter((col) => col.visible);
-  }
+    return columns.filter(col => col.visible);
+  };
 
-  renderRow = (columns) => (props) => columns.map(({ component: Component, onClick }) => <Component onClick={onClick} {...props} />);
+  renderRow = columns => props =>
+    columns.map(({ component: Component, onClick }) => <Component onClick={onClick} {...props} />);
 
   render() {
     const {
@@ -156,28 +161,28 @@ export default class ListPage extends Component {
       isDeletePending,
       isCreatePending,
       isDraftPending,
-      isPublishedPending
+      isPublishedPending,
     } = this.props;
 
     if (loading) {
-      return <Loading/>;
+      return <Loading />;
     }
 
     const columns = this.getColumns();
 
     return (
       <Page
-        primaryAction={(
+        primaryAction={
           canModify
             ? { Component: PageLink, content: 'Create New', to: `${routeNamespace}/create` }
             : undefined
-        )}
-        title='Templates'
+        }
+        title="Templates"
         empty={{
           show: !error && templates.length === 0,
           image: Templates,
           title: 'Manage your email templates',
-          content: <p>Build, test, preview and send your transmissions.</p>
+          content: <p>Build, test, preview and send your transmissions.</p>,
         }}
       >
         {error ? (
@@ -204,7 +209,7 @@ export default class ListPage extends Component {
               filterBox={{
                 show: true,
                 exampleModifiers: ['id', 'name'],
-                itemToStringKeys: ['name', 'id', 'subaccount_id']
+                itemToStringKeys: ['name', 'id', 'subaccount_id'],
               }}
               defaultSortColumn="last_update_time"
               defaultSortDirection="desc"
@@ -227,9 +232,13 @@ export default class ListPage extends Component {
               template={this.state.templateToDuplicate}
               successCallback={this.handleDuplicateSuccess}
               showAlert={this.props.showAlert}
-              contentToDuplicate={this.state.templateToDuplicate && this.state.templateToDuplicate.content}
+              contentToDuplicate={
+                this.state.templateToDuplicate && this.state.templateToDuplicate.content
+              }
               testDataToDuplicate={this.state.testDataToDuplicate}
-              isPublishedMode={this.state.templateToDuplicate && this.state.templateToDuplicate.published}
+              isPublishedMode={
+                this.state.templateToDuplicate && this.state.templateToDuplicate.published
+              }
               isLoading={isDraftPending || isPublishedPending || isCreatePending}
             />
           </>

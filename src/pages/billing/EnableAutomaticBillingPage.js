@@ -1,5 +1,5 @@
 import React from 'react';
-import { Page } from '@sparkpost/matchbox';
+import { Page } from 'src/components/matchbox';
 import PageLink from 'src/components/pageLink/PageLink';
 import EnableAutomaticBillingForm from './forms/EnableAutomaticBillingForm';
 

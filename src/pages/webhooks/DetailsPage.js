@@ -9,8 +9,7 @@ import { selectSubaccountIdFromQuery } from 'src/selectors/subaccounts';
 
 // Components
 import { Loading, DeleteModal } from 'src/components';
-import { Page } from '@sparkpost/matchbox';
-import { Tabs } from 'src/components/matchbox';
+import { Page, Tabs } from 'src/components/matchbox';
 import TestTab from './components/TestTab';
 import EditTab from './components/EditTab';
 import BatchTab from './components/BatchTab';

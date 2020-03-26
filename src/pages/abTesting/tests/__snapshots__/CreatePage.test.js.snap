@@ -9,7 +9,6 @@ exports[`A/B Test Create Page should render the list page correctly 1`] = `
       "to": "/ab-testing",
     }
   }
-  empty={Object {}}
 >
   <Panel
     actions={
@@ -40,7 +39,6 @@ exports[`A/B Test Create Page should show loading component when data is loading
       "to": "/ab-testing",
     }
   }
-  empty={Object {}}
 >
   <Panel
     actions={

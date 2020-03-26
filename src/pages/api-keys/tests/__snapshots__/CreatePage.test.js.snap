@@ -9,7 +9,6 @@ exports[`renders correctly with no subaccounts 1`] = `
       "to": "/account/api-keys",
     }
   }
-  empty={Object {}}
   title="Create API Key"
 >
   <Panel>

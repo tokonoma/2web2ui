@@ -10,7 +10,6 @@ Object {
 
 exports[`Page: A/B Test Edit Mode should render draft status correctly 1`] = `
 <Page
-  empty={Object {}}
   primaryAction={
     Object {
       "content": "Finalize and Schedule Test",
@@ -126,7 +125,6 @@ exports[`Page: A/B Test Edit Mode should render draft status correctly 1`] = `
 
 exports[`Page: A/B Test Edit Mode should render scheduled status correctly 1`] = `
 <Page
-  empty={Object {}}
   primaryAction={
     Object {
       "content": "Update Test",

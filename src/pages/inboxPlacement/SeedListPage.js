@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Page, UnstyledLink } from '@sparkpost/matchbox';
+import { UnstyledLink } from '@sparkpost/matchbox';
 import { FileDownload } from '@sparkpost/matchbox-icons/matchbox-icons';
 
 import { getSeedList } from 'src/actions/inboxPlacement';
@@ -8,7 +8,7 @@ import { selectReferenceSeed } from 'src/selectors/inboxPlacement';
 import { showAlert } from 'src/actions/globalAlert';
 import { ApiErrorBanner, CopyToClipboard, Loading } from 'src/components';
 import SaveCSVButton from 'src/components/collection/SaveCSVButton';
-import { Panel, TextField } from 'src/components/matchbox';
+import { Page, Panel, TextField } from 'src/components/matchbox';
 
 import styles from './SeedList.module.scss';
 

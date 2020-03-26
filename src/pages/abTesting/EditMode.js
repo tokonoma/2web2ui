@@ -6,12 +6,18 @@ import { withRouter } from 'react-router-dom';
 import { list as listSubaccounts } from 'src/actions/subaccounts';
 
 import { showAlert } from 'src/actions/globalAlert';
-import { updateDraft, getAbTest, updateAbTest, scheduleAbTest, rescheduleAbTest } from 'src/actions/abTesting';
+import {
+  updateDraft,
+  getAbTest,
+  updateAbTest,
+  scheduleAbTest,
+  rescheduleAbTest,
+} from 'src/actions/abTesting';
 import { listTemplates } from 'src/actions/templates';
 import { selectEditInitialValues } from 'src/selectors/abTesting';
 import { formatFormValues } from 'src/helpers/abTesting';
 
-import { Page } from '@sparkpost/matchbox';
+import { Page } from 'src/components/matchbox';
 import { Save } from '@sparkpost/matchbox-icons';
 import Section from './components/Section';
 import StatusPanel from './components/StatusPanel';
@@ -22,7 +28,6 @@ import { setSubaccountQuery } from 'src/helpers/subaccounts';
 const FORM_NAME = 'abTestEdit';
 
 export class EditMode extends Component {
-
   componentDidMount() {
     // Get templates here for the typeaheads
     // Ensures the list is always up to date
@@ -32,7 +37,7 @@ export class EditMode extends Component {
     }
   }
 
-  handleSaveAsDraft = (values) => {
+  handleSaveAsDraft = values => {
     const { updateDraft, showAlert, subaccountId, getAbTest } = this.props;
     const { id, version } = this.props.test;
 
@@ -40,9 +45,9 @@ export class EditMode extends Component {
       getAbTest({ id, subaccountId, version });
       showAlert({ type: 'success', message: 'A/B Test Draft Updated' });
     });
-  }
+  };
 
-  handleSchedule = (values) => {
+  handleSchedule = values => {
     const { scheduleAbTest, showAlert, subaccountId, getAbTest } = this.props;
     const { id, version } = this.props.test;
 
@@ -50,9 +55,9 @@ export class EditMode extends Component {
       getAbTest({ id, subaccountId, version });
       showAlert({ type: 'success', message: 'A/B Test Draft Scheduled' });
     });
-  }
+  };
 
-  handleUpdateScheduled = (values) => {
+  handleUpdateScheduled = values => {
     const { updateAbTest, showAlert, subaccountId, getAbTest } = this.props;
     const { id, version } = this.props.test;
 
@@ -60,9 +65,9 @@ export class EditMode extends Component {
       getAbTest({ id, subaccountId, version });
       showAlert({ type: 'success', message: 'A/B Test Updated' });
     });
-  }
+  };
 
-  handleReschedule = (values) => {
+  handleReschedule = values => {
     const { id, version } = this.props.test;
     const { subaccountId, rescheduleAbTest, history, showAlert } = this.props;
 
@@ -70,7 +75,7 @@ export class EditMode extends Component {
       showAlert({ type: 'success', message: 'A/B Test Rescheduled' });
       history.push(`/ab-testing/${id}/${version + 1}${setSubaccountQuery(subaccountId)}`);
     });
-  }
+  };
 
   getPrimaryAction = () => {
     const { handleSubmit, test, rescheduling, rescheduleLoading } = this.props;
@@ -79,57 +84,69 @@ export class EditMode extends Component {
       return {
         content: 'Finalize and Reschedule Test',
         onClick: handleSubmit(this.handleReschedule),
-        disabled: rescheduleLoading
+        disabled: rescheduleLoading,
       };
     }
 
     if (test.status === 'draft') {
       return {
         content: 'Finalize and Schedule Test',
-        onClick: handleSubmit(this.handleSchedule)
+        onClick: handleSubmit(this.handleSchedule),
       };
     }
 
     return {
       content: 'Update Test',
-      onClick: handleSubmit(this.handleUpdateScheduled)
+      onClick: handleSubmit(this.handleUpdateScheduled),
     };
-  }
+  };
 
   getSecondaryActions = () => {
     const { test, deleteAction, cancelAction, handleSubmit } = this.props;
     return [
       {
-        content: <span><Save/> Save as Draft</span>,
+        content: (
+          <span>
+            <Save /> Save as Draft
+          </span>
+        ),
         visible: test.status === 'draft',
-        onClick: handleSubmit(this.handleSaveAsDraft)
+        onClick: handleSubmit(this.handleSaveAsDraft),
       },
       cancelAction,
-      deleteAction
+      deleteAction,
     ];
-  }
+  };
 
   render() {
-    const { breadcrumbAction, test, rescheduling, formValues, submitting, subaccountName, subaccountId } = this.props;
+    const {
+      breadcrumbAction,
+      test,
+      rescheduling,
+      formValues,
+      submitting,
+      subaccountName,
+      subaccountId,
+    } = this.props;
 
     return (
       <Page
         title={test.name}
         breadcrumbAction={breadcrumbAction}
         primaryAction={this.getPrimaryAction()}
-        secondaryActions={this.getSecondaryActions()}>
-
-        <Section title='Basic Information'>
+        secondaryActions={this.getSecondaryActions()}
+      >
+        <Section title="Basic Information">
           <Section.Left>
             <StatusContent test={test} rescheduling={rescheduling} />
           </Section.Left>
           <Section.Right>
-            <StatusPanel test={test} subaccountId={subaccountId} subaccountName={subaccountName}/>
+            <StatusPanel test={test} subaccountId={subaccountId} subaccountName={subaccountName} />
             <StatusFields disabled={submitting} />
           </Section.Right>
         </Section>
 
-        <Section title='Settings'>
+        <Section title="Settings">
           <Section.Left>
             <SettingsContent test={test} />
           </Section.Left>
@@ -138,12 +155,16 @@ export class EditMode extends Component {
           </Section.Right>
         </Section>
 
-        <Section title='Variants'>
+        <Section title="Variants">
           <Section.Left>
             <VariantsContent />
           </Section.Left>
           <Section.Right>
-            <VariantsFields formValues={formValues} disabled={submitting} subaccountId={subaccountId} />
+            <VariantsFields
+              formValues={formValues}
+              disabled={submitting}
+              subaccountId={subaccountId}
+            />
           </Section.Right>
         </Section>
       </Page>
@@ -152,26 +173,37 @@ export class EditMode extends Component {
 }
 
 EditMode.defaultProps = {
-  formValues: {}
+  formValues: {},
 };
 
 EditMode.propTypes = {
   test: PropTypes.shape({
     // Completed and cancelled are only allowed here during the reschedule phase
-    status: PropTypes.oneOf(['draft', 'scheduled', 'cancelled', 'completed'])
-  })
+    status: PropTypes.oneOf(['draft', 'scheduled', 'cancelled', 'completed']),
+  }),
 };
 
 const mapStateToProps = (state, props) => ({
   formValues: getFormValues(FORM_NAME)(state),
   initialValues: selectEditInitialValues(state, props),
   subaccounts: state.subaccounts.list,
-  rescheduleLoading: state.abTesting.rescheduleLoading
+  rescheduleLoading: state.abTesting.rescheduleLoading,
 });
 
 const formOptions = {
   form: FORM_NAME,
-  enableReinitialize: true
+  enableReinitialize: true,
 };
 
-export default withRouter(connect(mapStateToProps, { listSubaccounts, listTemplates, updateDraft, getAbTest, updateAbTest, scheduleAbTest, rescheduleAbTest, showAlert })(reduxForm(formOptions)(EditMode)));
+export default withRouter(
+  connect(mapStateToProps, {
+    listSubaccounts,
+    listTemplates,
+    updateDraft,
+    getAbTest,
+    updateAbTest,
+    scheduleAbTest,
+    rescheduleAbTest,
+    showAlert,
+  })(reduxForm(formOptions)(EditMode)),
+);

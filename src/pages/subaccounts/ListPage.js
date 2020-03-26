@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-
-import { Page } from '@sparkpost/matchbox';
+import { Page } from 'src/components/matchbox';
 import { Users } from 'src/components/images';
 import { Loading, TableCollection, ApiErrorBanner } from 'src/components';
 import { list as listSubaccounts } from 'src/actions/subaccounts';
@@ -15,13 +14,13 @@ import { LINKS } from 'src/constants';
 const columns = [
   { label: 'Name', width: '40%', sortKey: 'name' },
   { label: 'ID', width: '20%', sortKey: 'id' },
-  { label: 'Status', width: '20%', sortKey: 'status' }
+  { label: 'Status', width: '20%', sortKey: 'status' },
 ];
 
 const primaryAction = {
   content: 'Create Subaccount',
   Component: Link,
-  to: '/account/subaccounts/create'
+  to: '/account/subaccounts/create',
 };
 
 export class ListPage extends Component {
@@ -43,10 +42,10 @@ export class ListPage extends Component {
         filterBox={{
           show: true,
           exampleModifiers: ['name', 'id', 'status'],
-          itemToStringKeys: ['name', 'id']
+          itemToStringKeys: ['name', 'id'],
         }}
-        defaultSortColumn='id'
-        defaultSortDirection='desc'
+        defaultSortColumn="id"
+        defaultSortDirection="desc"
       />
     );
   }
@@ -70,7 +69,7 @@ export class ListPage extends Component {
 
     return (
       <Page
-        title='Subaccounts'
+        title="Subaccounts"
         primaryAction={primaryAction}
         empty={{
           show: subaccounts.length === 0,
@@ -80,19 +79,20 @@ export class ListPage extends Component {
           secondaryAction: {
             content: 'Learn more',
             to: LINKS.SUBACCOUNTS_API,
-            external: true
-          }
-        }}>
+            external: true,
+          },
+        }}
+      >
         {error ? this.renderError() : this.renderCollection()}
       </Page>
     );
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   subaccounts: selectSubaccounts(state),
   loading: state.subaccounts.listLoading,
-  error: state.subaccounts.listError
+  error: state.subaccounts.listError,
 });
 
 export default connect(mapStateToProps, { listSubaccounts })(ListPage);

@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
-import { Page } from '@sparkpost/matchbox';
-import { Panel } from 'src/components/matchbox';
+import { Page, Panel } from 'src/components/matchbox';
 import { Loading } from 'src/components';
 
 import SubaccountCreateForm from './components/SubaccountCreateForm';
@@ -15,7 +14,7 @@ import { showAlert } from 'src/actions/globalAlert';
 const breadcrumbAction = {
   content: 'Subaccounts',
   Component: Link,
-  to: '/account/subaccounts'
+  to: '/account/subaccounts',
 };
 
 export class CreatePage extends Component {
@@ -24,7 +23,7 @@ export class CreatePage extends Component {
     this.props.listPools();
   }
 
-  onSubmit = (values) => {
+  onSubmit = values => {
     const { createSubaccount, history, showAlert } = this.props;
 
     return createSubaccount(values).then(({ subaccount_id }) => {
@@ -42,17 +41,19 @@ export class CreatePage extends Component {
       <div>
         <Page title="Create Subaccount" breadcrumbAction={breadcrumbAction} />
         <Panel>
-          <SubaccountCreateForm onSubmit={this.onSubmit}/>
+          <SubaccountCreateForm onSubmit={this.onSubmit} />
         </Panel>
       </div>
     );
   }
 }
 
-const mapStateToProps = (state, props) => ({
-  loading: state.apiKeys.subaccountGrantsLoading || state.ipPools.listLoading
+const mapStateToProps = state => ({
+  loading: state.apiKeys.subaccountGrantsLoading || state.ipPools.listLoading,
 });
 
 export default withRouter(
-  connect(mapStateToProps, { listSubaccountGrants, listPools, createSubaccount, showAlert })(CreatePage)
+  connect(mapStateToProps, { listSubaccountGrants, listPools, createSubaccount, showAlert })(
+    CreatePage,
+  ),
 );

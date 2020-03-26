@@ -2,7 +2,6 @@
 
 exports[`Page: Dashboard tests should correctly render page when user is not verified 1`] = `
 <Page
-  empty={Object {}}
   title="Dashboard"
 >
   <FreePlanWarningBanner
@@ -51,7 +50,6 @@ exports[`Page: Dashboard tests should correctly render page when user is not ver
 
 exports[`Page: Dashboard tests should display upgrade CTA when account is free and active 1`] = `
 <Page
-  empty={Object {}}
   title="Dashboard"
 >
   <FreePlanWarningBanner
@@ -98,7 +96,6 @@ exports[`Page: Dashboard tests should display upgrade CTA when account is free a
 
 exports[`Page: Dashboard tests should render page correctly with defaults 1`] = `
 <Page
-  empty={Object {}}
   title="Dashboard"
 >
   <FreePlanWarningBanner

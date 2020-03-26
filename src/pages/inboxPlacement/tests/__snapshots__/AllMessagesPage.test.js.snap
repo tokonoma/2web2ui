@@ -21,7 +21,6 @@ exports[`Page: All Inbox Placement Messages Test renders page correctly with def
       "to": "/inbox-placement/details/0",
     }
   }
-  empty={Object {}}
   subtitle="gmail"
   title="Inbox Placement"
 >

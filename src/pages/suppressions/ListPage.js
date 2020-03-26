@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Page } from '@sparkpost/matchbox';
-import { Panel, Tabs } from 'src/components/matchbox';
+import { Page, Panel, Tabs } from 'src/components/matchbox';
 import { searchRecipient } from 'src/actions/suppressions';
 import { list as listSubaccounts } from 'src/actions/subaccounts';
 import { hasSubaccounts } from 'src/selectors/subaccounts';

@@ -21,7 +21,6 @@ exports[`Sending Domains Edit Page should renders correctly 1`] = `
       "to": "/account/sending-domains",
     }
   }
-  empty={Object {}}
   secondaryActions={
     Array [
       Object {
@@ -166,7 +165,6 @@ exports[`Sending Domains Edit Page should show a delete modal 1`] = `
       "to": "/account/sending-domains",
     }
   }
-  empty={Object {}}
   secondaryActions={
     Array [
       Object {

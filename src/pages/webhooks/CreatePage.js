@@ -5,8 +5,7 @@ import _ from 'lodash';
 import { createWebhook, getEventDocs } from 'src/actions/webhooks';
 import { showAlert } from 'src/actions/globalAlert';
 import { Loading } from 'src/components';
-import { Page } from '@sparkpost/matchbox';
-import { Panel } from 'src/components/matchbox';
+import { Page, Panel } from 'src/components/matchbox';
 import WebhookForm from './components/WebhookForm';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
 import { selectWebhookEventListing } from 'src/selectors/eventListing';
@@ -20,16 +19,16 @@ export class WebhooksCreate extends Component {
     Makes a webhook object from form values and calls the createWebhook action
     with it. Invoked in the form's onSubmit func
   */
-  create = (values) => {
+  create = values => {
     const { createWebhook, showAlert, eventListing } = this.props;
     const { name, target, subaccount, eventsRadio, auth, assignTo } = values;
     const webhook = { name, target };
 
     if (eventsRadio === 'select') {
-      webhook.events = Object.keys(values.events).filter((key) => values.events[key]);
+      webhook.events = Object.keys(values.events).filter(key => values.events[key]);
     } else {
       // all events
-      webhook.events = eventListing.map((event) => event.key);
+      webhook.events = eventListing.map(event => event.key);
     }
 
     // builds the webhooks auth details from the form values
@@ -38,7 +37,7 @@ export class WebhooksCreate extends Component {
         webhook.auth_type = 'basic';
         webhook.auth_credentials = {
           username: values.basicUser,
-          password: values.basicPass
+          password: values.basicPass,
         };
         break;
       case 'oauth2':
@@ -47,11 +46,12 @@ export class WebhooksCreate extends Component {
           url: values.tokenURL,
           body: {
             client_id: values.clientId,
-            client_secret: values.clientSecret
-          }
+            client_secret: values.clientSecret,
+          },
         };
         break;
-      default: // none
+      default:
+        // none
         break;
     }
 
@@ -67,9 +67,10 @@ export class WebhooksCreate extends Component {
       subaccountId = subaccount.id;
     }
 
-    return createWebhook({ webhook, subaccount: subaccountId })
-      .then(() => showAlert({ type: 'success', message: 'Webhook created' }));
-  }
+    return createWebhook({ webhook, subaccount: subaccountId }).then(() =>
+      showAlert({ type: 'success', message: 'Webhook created' }),
+    );
+  };
 
   componentDidUpdate(prevProps) {
     const { webhook, history } = this.props;
@@ -88,19 +89,24 @@ export class WebhooksCreate extends Component {
     }
 
     return (
-      <Page title='Create Webhook' breadcrumbAction={{ content: 'Webhooks', Component: Link, to: '/webhooks' }} >
+      <Page
+        title="Create Webhook"
+        breadcrumbAction={{ content: 'Webhooks', Component: Link, to: '/webhooks' }}
+      >
         <Panel>
-          <WebhookForm newWebhook={true} onSubmit={this.create}/>
+          <WebhookForm newWebhook={true} onSubmit={this.create} />
         </Panel>
       </Page>
     );
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   webhook: state.webhooks.webhook,
   eventsLoading: state.webhooks.docsLoading,
-  eventListing: selectWebhookEventListing(state)
+  eventListing: selectWebhookEventListing(state),
 });
 
-export default withRouter(connect(mapStateToProps, { createWebhook, getEventDocs, showAlert })(WebhooksCreate));
+export default withRouter(
+  connect(mapStateToProps, { createWebhook, getEventDocs, showAlert })(WebhooksCreate),
+);

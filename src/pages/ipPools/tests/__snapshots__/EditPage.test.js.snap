@@ -9,7 +9,6 @@ exports[`IP Pools Edit Page render tests should not show purchase action if show
       "to": "/account/ip-pools",
     }
   }
-  empty={Object {}}
   secondaryActions={
     Array [
       Object {
@@ -72,7 +71,6 @@ exports[`IP Pools Edit Page render tests should render the edit page correctly 1
       "to": "/account/ip-pools",
     }
   }
-  empty={Object {}}
   secondaryActions={
     Array [
       Object {
@@ -108,7 +106,7 @@ exports[`IP Pools Edit Page render tests should render the edit page correctly 1
           There are no IPs in this pool. 
         </span>
         Add dedicated IPs to this pool by moving them from their current pool
-        , or by 
+        , or by 
         <UnstyledLink
           component={[Function]}
           to="/account/billing"

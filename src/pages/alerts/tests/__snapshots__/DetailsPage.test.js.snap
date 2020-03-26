@@ -9,7 +9,6 @@ exports[`Page: Alert Details should render Alert Details Page 1`] = `
       "to": "/alerts",
     }
   }
-  empty={Object {}}
   primaryArea={
     <React.Fragment>
       <Button

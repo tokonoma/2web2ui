@@ -20,7 +20,6 @@ exports[`Page: Single Inbox Placement Test renders page correctly with defaults 
       "onClick": [Function],
     }
   }
-  empty={Object {}}
   subtitle="Results"
   title="Inbox Placement"
 >

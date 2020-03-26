@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Page } from '@sparkpost/matchbox';
+import { Page } from 'src/components/matchbox';
 import { refreshEngagementReport } from 'src/actions/engagementReport';
 import { selectReportSearchOptions } from 'src/selectors/reportSearchOptions';
 import ReportOptions from 'src/pages/reports/components/ReportOptions';
@@ -19,7 +19,7 @@ export class EngagementPage extends Component {
     const { loading, aggregateMetrics, linkMetrics, engagementSearchOptions } = this.props;
 
     return (
-      <Page title='Engagement Report'>
+      <Page title="Engagement Report">
         <ReportOptions reportLoading={loading} searchOptions={engagementSearchOptions} />
         <EngagementSummary
           accepted={aggregateMetrics.data.count_accepted}
@@ -41,12 +41,12 @@ export class EngagementPage extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   loading: state.engagementReport.loading,
   aggregateMetrics: state.engagementReport.aggregateMetrics,
   linkMetrics: state.engagementReport.linkMetrics,
   reportOptions: state.reportOptions,
-  engagementSearchOptions: selectReportSearchOptions(state)
+  engagementSearchOptions: selectReportSearchOptions(state),
 });
 const mapDispatchToProps = { refreshEngagementReport };
 
