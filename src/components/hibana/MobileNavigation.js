@@ -4,11 +4,10 @@ import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 import { Transition } from 'react-transition-group';
 import FocusLock from 'react-focus-lock';
-import { WindowEvent } from '@sparkpost/matchbox';
 import { ChevronRight } from '@sparkpost/matchbox-icons';
 import { tokens } from '@sparkpost/design-tokens-hibana';
+import { ScreenReaderOnly, WindowEvent } from 'src/components/matchbox';
 import { selectHibanaAccountNavItems } from 'src/selectors/navItems';
-import { ScreenReaderOnly } from 'src/components/matchbox';
 import SparkPost from 'src/components/sparkPost/SparkPost';
 import styles from './MobileNavigation.module.scss';
 
