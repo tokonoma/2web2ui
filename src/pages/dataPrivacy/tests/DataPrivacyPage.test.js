@@ -9,6 +9,7 @@ describe('Page: Recipient Email Verification', () => {
     history: {
       replace: jest.fn(),
     },
+    resetDataPrivacy: jest.fn(),
   };
 
   const subject = props => {
