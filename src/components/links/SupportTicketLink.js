@@ -8,6 +8,7 @@ import { Button, UnstyledLink } from 'src/components/matchbox';
 export const SupportTicketLink = ({
   as: Component = UnstyledLink,
   children,
+  component: _component, // ignore
   issueId, // see, src/config/supportIssues for a complete list
   message,
   openSupportTicketForm,
